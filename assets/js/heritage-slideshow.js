@@ -43,6 +43,11 @@
     const TRANS = [['fade', 'Fondu'], ['slide', 'Glissement'], ['black', 'Fondu au noir'], ['none', 'Coupe nette']];
     const newShow = () => ({aspect: '16:9', theme: 'classique', music: null, musicVol: .5, slides: []});
     const newSlide = (type, o = {}) => ({id: sid(), type, dur: type === 'map' ? 10 : type === 'title' ? 5 : 6, trans: 'fade', kb: ['in', 'out', 'left', 'right'][seq % 4], text: '', textPos: 'bottom', ...o});
+    /** une diapositive venue d'un autre outil : {media_id, filename, title} sans « type » (📤 images → diaporama) devient une photo légendée */
+    const presetSlide = x => { if (['photo', 'title', 'map'].includes(x.type)) return {id: x.id || sid(), ...x};
+        if (typeof x.filename === 'string' && x.filename) return newSlide('photo', {media_id: Number(x.media_id || x.mediaId || x.id) || 0, filename: x.filename, text: String(x.text ?? x.title ?? '').slice(0, 400)});
+        if (x.title || x.text) return newSlide('title', {title: String(x.title || ''), sub: String(x.text || '')});
+        return null; };
     const fontOf = (show, T) => (show.font ? `'${String(show.font).replace(/['"\\]/g, '')}', ${T.font}` : T.font);
 
     /* ═════════ Styles propres (injectés : la barre du haut commune, les sections, le récit) ═════════ */
@@ -460,7 +465,7 @@
         injectCss();
         let id = 0, name = 'Mon diaporama', show = newShow();
         if (ctx.id) { try { const r = await api('slideshow', {id: ctx.id}); if (r.show?.mode === 'keynote') return ext.openKeynote ? ext.openKeynote({...ctx, preload: r}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); id = r.id; name = r.name; show = {...newShow(), ...(r.show || {})}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); } catch (e) { return toast(e.message, 'error'); } }
-        if (ctx.preset?.show) { show = {...newShow(), ...ctx.preset.show}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); name = ctx.preset.name || name; }
+        if (ctx.preset?.show) { show = {...newShow(), ...ctx.preset.show}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(presetSlide).filter(Boolean).map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); name = ctx.preset.name || name; }
         let cur = 0, dirty = !!ctx.preset, t = 0, playing = false, raf = 0, t0 = 0, p0 = 0, recording = null, hist = [], hi = -1, histT = 0;
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-ss-dlg';
         const ui = UI(), extra = `<span class="h-ss-extra" data-tbg="ss-top" data-tbg-label="Barre du haut (format, style, musique)">
@@ -472,7 +477,7 @@
             : `<header class="h-ss-top"><span class="h-ss-logo">🎞️</span><input class="h-ss-name" data-ss-name value="${esc(name)}" maxlength="200">${extra}<span class="spacer"></span><span data-ui-status></span><button type="button" class="button small secondary" data-ss-cmd="export">⤓ Exporter ▾</button><button type="button" class="button small" data-ss-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ss-cmd="close">×</button></header>`;
         dlg.innerHTML = `<div class="h-ss">${top}
             <div class="h-ss-main">
-                <nav class="h-ss-rail" data-ss-rail aria-label="Outils"><button type="button" data-ss-cmd="addphotos" title="Ajouter des photos" aria-label="Ajouter des photos">🖼️</button><button type="button" data-ss-cmd="addtitle" title="Ajouter un titre" aria-label="Ajouter un titre">🔤</button><button type="button" data-ss-cmd="addmap" title="Ajouter une carte (trajet)" aria-label="Ajouter une carte">🗺️</button><button type="button" data-ss-cmd="story" title="✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne" aria-label="Récit d’une vie">✨</button><button type="button" data-ss-cmd="play" title="Lire / pause" aria-label="Lire" data-shortcut="Espace">▶</button><button type="button" data-ss-cmd="watch" title="Regarder en plein écran (Échap pour revenir)" aria-label="Regarder">📺</button></nav>
+                <nav class="h-ss-rail" data-ss-rail aria-label="Outils"><button type="button" data-ss-cmd="addphotos" title="Ajouter des photos" aria-label="Ajouter des photos">🖼️</button><button type="button" data-ss-cmd="addtitle" title="Ajouter un titre" aria-label="Ajouter un titre">🔤</button><button type="button" data-ss-cmd="addmap" title="Ajouter une carte (trajet)" aria-label="Ajouter une carte">🗺️</button><button type="button" data-ss-cmd="story" title="✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne" aria-label="Récit d’une vie">✨</button><button type="button" data-ss-cmd="play" title="Lire / pause" aria-label="Lire" data-shortcut="Espace">▶</button><button type="button" data-ss-cmd="watch" title="Regarder en plein écran (Échap pour revenir)" aria-label="Regarder">📺</button><button type="button" data-ss-cmd="sendto" title="${esc(i18n('📤 Envoyer vers… (le Montage vidéo, ton site)'))}" aria-label="${esc(i18n('Envoyer vers…'))}">📤</button></nav>
                 <aside class="h-ss-list"><div class="h-ss-add" data-tbg="ss-add" data-tbg-label="Ajouter (à gauche)"><button type="button" data-ss-cmd="addphotos">＋ Photos</button><button type="button" data-ss-cmd="addtitle">＋ Titre</button><button type="button" data-ss-cmd="addmap">＋ Carte (trajet)</button><button type="button" class="is-story" data-ss-cmd="story" title="Un diaporama tout fait à partir de la fiche d’une personne">✨ Récit d’une vie</button></div><ol data-ss-slides></ol></aside>
                 <section class="h-ss-center"><div class="h-ss-stage" data-ss-stage><canvas data-ss-canvas></canvas></div>
                     <div class="h-ss-transport"><span class="h-ss-tgrp" data-tbg="ss-transport" data-tbg-label="Lecture"><button type="button" class="button small" data-ss-cmd="play" data-shortcut="Espace">▶ Lire</button><button type="button" class="button small secondary" data-ss-cmd="watch" title="Regarder en plein écran (Échap pour revenir)">📺 Regarder</button></span><input type="range" data-ss-seek min="0" max="1000" value="0" aria-label="Avancer dans le diaporama" data-ui-done="other-scale"><output data-ss-time>0:00 / 0:00</output></div></section>
@@ -513,7 +518,7 @@
         }
         function paintProps() {
             const s = show.slides[cur], box = $('[data-ss-props]'), th = THEMES[show.theme] || THEMES.classique;
-            const doc = sec('doc', '🎞️ Tout le diaporama', `${F('Police des textes', `<button type="button" class="button small secondary h-ss-fontbtn" data-ss-cmd="font" style="font-family:${esc(fontOf(show, th))}">${esc(show.font || i18n('Police du style ({name})', {name: i18n(th.label)}))} ▾</button>`, 'La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…).')}${show.font ? '<button type="button" class="link-button" data-ss-cmd="fontreset">↺ Revenir à la police du style</button>' : ''}${F('Musique de fond', '<span class="h-ss-music" data-ss-music></span>')}<p class="muted">${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())}</p><button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En faire une présentation…</button>`, true);
+            const doc = sec('doc', '🎞️ Tout le diaporama', `${F('Police des textes', `<button type="button" class="button small secondary h-ss-fontbtn" data-ss-cmd="font" style="font-family:${esc(fontOf(show, th))}">${esc(show.font || i18n('Police du style ({name})', {name: i18n(th.label)}))} ▾</button>`, 'La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…).')}${show.font ? '<button type="button" class="link-button" data-ss-cmd="fontreset">↺ Revenir à la police du style</button>' : ''}${F('Musique de fond', '<span class="h-ss-music" data-ss-music></span>')}<p class="muted">${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())}</p><button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En faire une présentation…</button><button type="button" class="button small secondary" data-ss-cmd="sendto" title="${esc(i18n('Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site'))}">${esc(i18n('📤 Envoyer vers…'))}</button>`, true);
             if (!s) { box.innerHTML = `<p class="muted">Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix.</p>${doc}`; paintMusic(); return; }
             const h = [`<h4>${ICON[s.type]} Diapositive ${cur + 1}</h4>`];
             // Couleur
@@ -683,6 +688,23 @@
                 }});
         }
         ui.onPrintKey?.(dlg, () => printShow()); // L1 : ⌘P
+        /* ─── 📤 Envoyer vers… : le diaporama en vidéo (WebM), rangé dans les médias (comme « 💾 Dans les médias »), puis le Montage ou le site ─── */
+        const sendOpts = (r, title) => (r && ext.sendTo ? {action: {label: i18n('📤 Envoyer vers…'), run: () => ext.sendTo('video', {media: {id: Number(r.media_id), filename: r.filename, title}}, {title, exclude: ['slideshow', 'keynote']})}} : {});
+        let sending = false;
+        async function sendTo(anchor) {
+            if (sending) return;
+            if (!ext.sendTo) return toast(i18n('« Envoyer vers… » n’est pas chargé.'), 'error');
+            if (!show.slides.length) return toast('Le diaporama est vide : ajoute une diapositive d’abord.', 'error');
+            if (playing) play();
+            if (!await A().confirmBox(i18n('Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement.', {time: fmt(eng.total())}), {title: i18n('📤 Envoyer le diaporama'), okLabel: i18n('Fabriquer la vidéo'), danger: false})) return;
+            sending = true; const n = curName(), here = t;
+            try {
+                const {blob, total} = await recordVideo(); progress(i18n('Rangement de la vidéo dans les médias…'));
+                const r = await toMedia(blob, `${safeName(n)}.webm`, 'video', n, {duration: total}); progress(''); drawAt(here);
+                return ext.sendTo('video', {media: {id: Number(r.media_id), filename: r.filename, title: n}}, {anchor, title: n, exclude: ['slideshow', 'keynote']});
+            } catch (e) { progress(''); toast(e.message || String(e), 'error'); }
+            finally { sending = false; }
+        }
         async function exportDialog() {
             if (!show.slides.length) return toast('Le diaporama est vide : ajoute une diapositive d’abord.', 'error');
             if (playing) play();
@@ -692,7 +714,7 @@
             await ui.openExportDialog({title: n, defaultName: n, quality: false, saveCopy: true, info: `${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())} · ${show.aspect}`,
                 preview: () => canvas.toDataURL('image/jpeg', .8),
                 formats: [
-                    {id: 'video', label: '🎬 Vidéo', hint: 'WebM, avec le son', ext: 'webm', run: async o => { const {blob, total} = await recordVideo(); download(blob, o.filename); if (o.saveCopy) await toMedia(blob, o.filename, 'video', n, {duration: total}); drawAt(here); toast(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.'); }},
+                    {id: 'video', label: '🎬 Vidéo', hint: 'WebM, avec le son', ext: 'webm', run: async o => { const {blob, total} = await recordVideo(); download(blob, o.filename); const u = o.saveCopy ? await toMedia(blob, o.filename, 'video', n, {duration: total}) : null; drawAt(here); toast(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.', '', sendOpts(u, n)); }},
                     {id: 'png', hint: 'cette diapositive', run: imgRun('png')},
                     {id: 'jpg', hint: 'cette diapositive', run: imgRun('jpg')},
                     {id: 'pdf', hint: 'une diapositive par page (« Enregistrer en PDF »)', ext: '', run: pagesRun},
@@ -727,6 +749,7 @@
             if (k === 'addtitle') { show.slides.splice(cur + 1, 0, newSlide('title', {title: 'Titre', sub: ''})); cur = Math.min(cur + 1, show.slides.length - 1); touch(); return rebuild(); }
             if (k === 'addmap') { show.slides.splice(cur + 1, 0, newSlide('map', {title: 'Le trajet', route: [], mapBg: 'offline'})); cur = Math.min(cur + 1, show.slides.length - 1); touch(); return rebuild(); }
             if (k === 'story') return story();
+            if (k === 'sendto') return sendTo(c);
             if (k === 'tokeynote') { if (!ext.keynoteFromSlideshow) return toast('L’éditeur de présentation n’est pas chargé.', 'error'); if (playing) play(); return ext.keynoteFromSlideshow(show, curName(), {onSaved: ctx.onSaved, onClose: ctx.onClose}); }
             if (k === 'font') { if (!ui.openFontPicker) return; const f = await ui.openFontPicker({value: show.font || '', sample: show.slides.find(x => x.type === 'title')?.title || name}); if (f) { show.font = String(f).slice(0, 100); touch(); await rebuild(); } return; }
             if (k === 'fontreset') { delete show.font; touch(); return rebuild(); }

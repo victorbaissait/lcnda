@@ -651,7 +651,7 @@
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
             const linked = z.e > z.s;
             bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : `<span class="muted">${i18n('pas encore reliée au texte')}</span>`}
-                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><select data-tx-zkind title="${esc(i18n('Ce qu’est cette zone : « ⛔ À ne pas lire » est sautée par la lecture automatique et les exports ; les autres donnent l’ordre de lecture et la sorte de bloc (ALTO, PAGE)'))}">${(TXX()?.KINDS || []).map(([v, ic, l]) => `<option value="${v}"${(z.kind || '') === v ? ' selected' : ''}>${ic} ${esc(i18n(l))}</option>`).join('')}</select><input data-tx-znote placeholder="${esc(i18n('Note (mot illisible, signature…)'))}" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="${esc(i18n('Couleur'))}"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button><button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
+                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><select data-tx-zkind title="${esc(i18n('Ce qu’est cette zone : « ⛔ À ne pas lire » est sautée par la lecture automatique et les exports ; les autres donnent l’ordre de lecture et la sorte de bloc (ALTO, PAGE)'))}">${(TXX()?.KINDS || []).map(([v, ic, l]) => `<option value="${v}"${(z.kind || '') === v ? ' selected' : ''}>${ic} ${esc(i18n(l))}</option>`).join('')}</select><input data-tx-znote placeholder="${esc(i18n('Note (mot illisible, signature…)'))}" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="${esc(i18n('Couleur'))}"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button>${z.kind === 'sign' && ext.openSeals ? `<button type="button" class="button small secondary" data-tx-zsign title="${esc(i18n('Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net'))}">✍️ ${i18n('Détourer la signature')}</button>` : ''}<button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
                 <small class="muted h-tx-zkeys" title="${esc(i18n('Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille'))}">↔ ${i18n('glisser · poignées · flèches · Maj + flèches · ⌘Z')}</small>`;
         }
         /* ─── ⌘Z / ⇧⌘Z pour les zones (le texte garde l'annulation de la case) ─── */
@@ -1685,6 +1685,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             const ch = e.target.closest('[data-tx-char]'); if (ch) { const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar; area.setRangeText(c, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
             if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast(i18n('Choisis d’abord un passage dans le texte.'), 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
             if (e.target.closest('[data-tx-zdel]')) return deleteZone();
+            if (e.target.closest('[data-tx-zsign]')) return signZone();
             const pt = e.target.closest('[data-tx-ptab]'); if (pt) return showPtab(pt.dataset.txPtab);
             const stp = e.target.closest('[data-tx-step]'); if (stp) return showStep(stp.dataset.txStep);
             if (e.target.closest('[data-tx-stepnext]')) { const ks = STEPS.map(s => s[0]), i = ks.indexOf(flowView || flowCur); return showStep(ks[Math.min(ks.length - 1, i + 1)]); }
@@ -1727,6 +1728,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
                 const nm = $('[data-tx="title"]').value || 'transcription';
                 return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${i18n('Mots : {n}', {n: area.value.trim().split(/\s+/).filter(Boolean).length})}${t.filename ? ` · ${i18n('avec l’image de l’acte')}` : ''}`, formats: [
                     {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText({ln: o.checks?.ln !== false, people: !!o.checks?.people})], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    ...(window.LCNDA_TEXT?.toDocx ? [{id: 'docx', label: '📝 Word', hint: i18n('le texte mis en page, à ouvrir dans Word ou LibreOffice (.docx)'), ext: 'docx', run: async o => { try { dl(await docxBlob({people: o.checks?.people !== false}), o.filename); } catch (e) { toast(e.message || String(e), 'error'); } }}] : []),
                     {id: 'pdf', hint: i18n('image + texte (« Enregistrer en PDF »)'), ext: '', run: async () => printIt()},
                     {id: 'print', hint: 'image + texte', run: async () => printIt()},
                     {id: 'tei', label: '🗂 TEI', hint: i18n('XML des chercheurs et des archives (lignes, zones, personnes)'), ext: 'xml', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([teiXml()], {type: 'application/xml;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
@@ -1734,7 +1736,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
                         {id: 'pagexml', label: '📄 PAGE', hint: i18n('XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs'), ext: 'xml', run: async o => { const F = TXX().page(xmlPages()); if (F.length === 1) return dl(new Blob([F[0].xml], {type: 'application/xml;charset=utf-8'}), o.filename);
                             const Z = window.LCNDA_SHEET?.zipStore; if (Z) return dl(Z(F.map(f => ({name: f.name, data: f.xml}))), o.filename.replace(/\.xml$/i, '') + '.zip'); for (const f of F) dl(new Blob([f.xml], {type: 'application/xml;charset=utf-8'}), f.name); }}] : []),
                     ],
-                    checks: [{id: 'ln', label: i18n('Numéros de ligne'), checked: true, show: id => id === 'file'}, {id: 'people', label: i18n('Personnes et rôles'), checked: true, show: id => id === 'file'}]});
+                    checks: [{id: 'ln', label: i18n('Numéros de ligne'), checked: true, show: id => id === 'file'}, {id: 'people', label: i18n('Personnes et rôles'), checked: true, show: id => id === 'file' || id === 'docx'}]});
             }
         });
         dlg.addEventListener('input', e => {
@@ -1744,7 +1746,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             if (e.target.matches('[data-tx-znote]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { z.note = e.target.value.slice(0, 300); touch(); } }
             if (e.target.matches('[data-tx-zcolor]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { if (!e.target.dataset.snapped) { snap(); e.target.dataset.snapped = '1'; } z.c = e.target.value; touch(); paintZoneRects(); paintMirror(); } }
         });
-        dlg.addEventListener('change', e => { if (e.target.matches('[data-tx-zkind]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { snap(); if (e.target.value) z.kind = e.target.value; else delete z.kind; touch(); paintZoneRects(); } return; }
+        dlg.addEventListener('change', e => { if (e.target.matches('[data-tx-zkind]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { snap(); if (e.target.value) z.kind = e.target.value; else delete z.kind; touch(); paintZoneRects(); paintZoneBar(); $('[data-tx-zkind]')?.focus(); } return; }
             if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); if (GB()) { fillGabarit(); paintPeople(); } } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); paintProg(); }
             if (e.target.matches('[data-tx-lang]')) { try { localStorage.setItem(TX_LANG_KEY, e.target.value); } catch (_) {} if (found.length) paintPeople(); } }); // la langue : retenue, et les mots connus suivent
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
@@ -1843,8 +1845,67 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         HX?.reset();
         dlg.addEventListener('click', e => { const hb = e.target.closest('[data-tx-hist]'); if (hb) undoZones(hb.dataset.txHist === 'redo'); });
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
+        /* ═════ 🔗 Liens avec les autres outils (maquette docs/design/outils-liens.html) : 📤 Envoyer vers…, 📝 Traitement de texte,
+           🎚️ Retouche, ✍️ Signatures et sceaux, Word (.docx) ═════ */
+        const actTitle = () => ($('[data-tx="title"]').value || t.title || '').trim() || i18n('Transcription');
+        /** l'image affichée (la page choisie d'un acte en plusieurs pages) → {id, filename, title} ; null sans image rangée */
+        const curMedia = () => { const p = PAGES[pageIx]; if (p && p.media_id && p.filename) return {id: Number(p.media_id), filename: p.filename, title: p.title || actTitle()};
+            return t.media_id && t.filename ? {id: Number(t.media_id), filename: t.filename, title: actTitle()} : null; };
+        /** le texte en paragraphes (une ligne vide = un nouveau paragraphe, un retour à la ligne = <br>) */
+        const textHtml = () => String(namedText() || '').replace(/\r/g, '').split(/\n{2,}/).filter(p => p.trim()).map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('') || '<p></p>';
+        const metaLine = () => [kindNow() && kindNow() !== 'apreciser' ? kindLabel(kindNow()) : '', $('[data-tx="date_text"]').value.trim(), $('[data-tx="place"]').value.trim()].filter(Boolean).join(' · ');
+        /** les personnes de l'acte (gardées, sinon repérées), avec les dates, lieux et métiers trouvés dans la même phrase */
+        function peopleRows() {
+            const src = findText(), det = detect(src), sentOf = pos => { const L = src.slice(0, pos), a = Math.max(L.lastIndexOf('.'), L.lastIndexOf(';'), L.lastIndexOf('\n')) + 1, r = src.slice(pos).search(/[.;\n]/); return [a, r < 0 ? src.length : pos + r]; };
+            const kept = (t.data.people || []).filter(p => p.name), list = kept.length ? kept.map(p => ({label: p.name, role: p.role || '', s: p.s, e: p.e, linked: !!p.person_id})) : det.filter(f => f.type === 'person').map(f => ({label: f.label, role: f.role || '', s: f.s, e: f.e, linked: false}));
+            const near = (p, type) => { const [a, b] = sentOf(Number(p.s) || 0); return [...new Set(det.filter(f => f.type === type && f.s >= a && f.e <= b).map(f => f.label))].join(', '); };
+            const rows = list.map(p => [p.label, p.role ? i18n(p.role) : '', near(p, 'job'), near(p, 'date'), near(p, 'place'), p.linked ? i18n('Oui') : '']);
+            return [[i18n('Nom'), i18n('Rôle'), i18n('Métier'), i18n('Dates'), i18n('Lieux'), i18n('Reliée à une fiche')], ...rows];
+        }
+        const sendOpts = title => ({anchor: $('[data-ui-menu="Fichier"]') || dlg, title, exclude: ['atelier']});
+        function sendImageTo() { const m = curMedia(); if (!m) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error'); return ext.sendTo('image', {media: m}, sendOpts(m.title)); }
+        function sendTextTo() { if (!area.value.trim()) return toast(i18n('Le texte est vide : écris ou lis d’abord l’acte.'), 'error'); return ext.sendTo('text', {html: textHtml(), name: actTitle()}, sendOpts(actTitle())); }
+        function sendPeopleTo() { const rows = peopleRows(); if (rows.length < 2) return toast(i18n('Aucune personne repérée dans le texte pour l’instant.'), 'error'); return ext.sendTo('rows', {rows, name: i18n('Personnes — {t}', {t: actTitle()})}, sendOpts(actTitle())); }
+        function sendMenu() {
+            if (!ext.sendTo) return toast(i18n('L’envoi vers les autres outils n’est pas chargé.'), 'error');
+            UI.menuAt?.($('[data-ui-menu="Fichier"]') || dlg, [{icon: '🖼️', label: i18n('L’image de l’acte'), disabled: !curMedia(), run: sendImageTo}, {icon: '📝', label: i18n('Le texte de la transcription'), disabled: !area.value.trim(), run: sendTextTo},
+                {icon: '👥', label: i18n('Les personnes repérées (tableau)'), run: sendPeopleTo}], {title: i18n('Envoyer vers…')});
+        }
+        /** 📝 comme « Documents » (data-ong-wp) : un nouveau document du traitement de texte avec le titre et le texte */
+        function toTextDoc() {
+            if (!ext.openTextDoc) return toast(i18n('Le traitement de texte n’est pas chargé.'), 'error');
+            const meta = metaLine(), html = `<h1>${esc(actTitle())}</h1>${meta ? `<p><i>${esc(meta)}</i></p>` : ''}${textHtml()}`, name = i18n('Transcription — {t}', {t: actTitle()});
+            const data = ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(html) : null;
+            return ext.openTextDoc(data ? {data, name} : {name});
+        }
+        function retouchImage() { const m = curMedia(); if (!m) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error'); return ext.retouchMedia?.(m); }
+        /** ✍️ la zone « signature » découpée dans l'image de l'acte (avec une petite marge), en PNG data: → Signatures et sceaux */
+        async function signZone(z = t.data.zones.find(q => q.id === selZone)) {
+            if (!z || !ext.openSeals) return null;
+            let im; try { im = await loadSrcImg(); } catch (e) { return toast(e.message, 'error'); }
+            const W = im.naturalWidth, H = im.naturalHeight, kx = imgW ? W / imgW : 1, ky = imgH ? H / imgH : 1, pad = Math.round(Math.max(z.w * kx, z.h * ky) * .04);
+            const x = clamp(Math.round(z.x * kx) - pad, 0, W - 1), y = clamp(Math.round(z.y * ky) - pad, 0, H - 1), w = clamp(Math.round(z.w * kx) + 2 * pad, 1, W - x), h = clamp(Math.round(z.h * ky) + 2 * pad, 1, H - y);
+            const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(im, x, y, w, h, 0, 0, w, h);
+            const src = c.toDataURL('image/png'), title = z.note?.trim() || i18n('Signature — {t}', {t: actTitle()});
+            ext.openSeals(null, {src, title}); return {src, w, h};
+        }
+        /** Word (.docx) : le moteur du traitement de texte (app-texte-formats.js, LCNDA_TEXT.toDocx), sans passer par l'éditeur */
+        async function docxBlob({people = true} = {}) {
+            const X = window.LCNDA_TEXT; if (!X?.toDocx || !X.newDoc) throw new Error(i18n('L’export Word n’est pas chargé.'));
+            const doc = X.newDoc({title: actTitle()}), P = (txt, o) => X.para([X.run(txt)], o), lines = s => { const out = []; String(s).split('\n').forEach((l, i) => { if (i) out.push({br: true}); out.push(X.run(l)); }); return X.para(out); };
+            const meta = metaLine(), src = $('[data-tx="source"]')?.value.trim() || t.source || '', blocks = [P(actTitle(), {st: 'title'})];
+            if (meta) blocks.push(P(meta, {st: 'subtitle'}));
+            if (src) blocks.push(P(`${i18n('Source')} : ${src}`));
+            String(namedText() || '').replace(/\r/g, '').split(/\n{2,}/).filter(p => p.trim()).forEach(p => blocks.push(lines(p)));
+            const pp = people ? (t.data.people || []).filter(p => p.name) : [];
+            if (pp.length) { blocks.push(P(i18n('Personnes'), {st: 'h2'})); pp.forEach(p => blocks.push(P(`${p.name}${p.role ? ` — ${i18n(p.role)}` : ''}`))); }
+            doc.sections = [{page: null, blocks}];
+            return X.toDocx(doc);
+        }
+        const fichierLinks = () => [ext.sendTo ? {icon: '📤', label: i18n('Envoyer vers…'), run: sendMenu} : null, ext.openTextDoc ? {icon: '📝', label: i18n('Dans le traitement de texte'), run: toTextDoc} : null,
+            ext.retouchMedia ? {icon: '🎚️', label: i18n('Éclaircir / restaurer l’image'), disabled: !curMedia(), run: retouchImage} : null].filter(Boolean);
         UI.editorMenus?.($('[data-tx-menus]'), {
-            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, {icon: '⚖️', label: `${i18n('Comparer les lectures')}…`, run: () => openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
+            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', ...(fichierLinks().length ? [...fichierLinks(), '-'] : []), {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, {icon: '⚖️', label: `${i18n('Comparer les lectures')}…`, run: () => openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
             Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🔍', label: `${i18n('Chercher et remplacer')}…`, shortcut: '⌘F', run: () => openFind(true)}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}],
             // K1 : les lectures, Repérer et « Ajouter à la généalogie » sont des outils (plus dans Édition) ; un symbole = une action (K11)
             Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: i18n('Loupe'), shortcut: 'L', run: cmdOf('loupe')}, '-',
@@ -1860,7 +1921,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             $('.h-tx').appendChild(txBar); paintTxBar();
         }
         if (!t.filename && !ctx.id) setTimeout(pickImage, 50);
-        return {get t() { return t; }, detect: runDetect, save};
+        return {get t() { return t; }, detect: runDetect, save, links: {curMedia, textHtml, peopleRows, sendImageTo, sendTextTo, sendPeopleTo, toTextDoc, retouchImage, signZone, docxBlob, selectZone: id => { selZone = id; drawZones(); }}};
     }
 
     /* ═════════ Dans la visionneuse : un seul texte par document, partagé avec l'Atelier de transcription ═════════ */

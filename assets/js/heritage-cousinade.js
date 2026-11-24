@@ -245,7 +245,8 @@
                 {icon: '✓', label: i18n('Inviter les {n} affichées', {n: plural(shown.length, 'personne')}), run: () => setField(shown.map(g => g.id), 'invited', 1, i18n(shown.length > 1 ? '{n} invitées.' : '{n} invitée.', {n: plural(shown.length, 'personne')}))},
                 {icon: '○', label: 'Ne plus inviter les personnes affichées', run: () => setField(shown.map(g => g.id), 'invited', 0, i18n(shown.length > 1 ? '{n} retirées des invitations.' : '{n} retirée des invitations.', {n: plural(shown.length, 'personne')}))},
                 '-', {icon: '↻', label: 'Chercher les nouveaux descendants', run: rescan}]); return; }
-            if (e.target.closest('[data-cous-export]')) { UI().menuAt(e.target.closest('[data-cous-export]'), [{icon: '⤓', label: 'Tableau des invités (CSV)…', run: () => exportCsv(d)}, {icon: '🖨', label: 'Imprimer la liste des invités…', run: () => printGuests(d)}]); }
+            if (e.target.closest('[data-cous-export]')) { const at = e.target.closest('[data-cous-export]'); UI().menuAt(at, [{icon: '⤓', label: 'Tableau des invités (CSV)…', run: () => exportCsv(d)}, {icon: '🖨', label: 'Imprimer la liste des invités…', run: () => printGuests(d)},
+                ...(ext.openRowsInSheet || ext.sendTo ? ['-', {icon: '🧾', label: 'Ouvrir dans le Tableur…', run: () => exportCsv(d, {to: 'sheet', anchor: at})}] : []), ...(ext.sendTo ? [{icon: '📤', label: 'Envoyer le tableau vers…', run: () => exportCsv(d, {to: 'send', anchor: at})}] : [])]); }
         });
     }
     const guestMenu = g => [{icon: '✎', label: 'Modifier', run: () => editGuest(g)}, ...(g.person_id ? [{icon: '↗', label: 'Ouvrir la fiche', run: () => { A().state.currentPersonId = g.person_id; A().setModule('personnes'); }}] : []),
@@ -339,10 +340,12 @@
     }
 
     /** ⤓ le tableau des invités : les coordonnées des vivants seulement si on coche la case */
-    function exportCsv(d) {
+    /** to : '' (fichier CSV), 'sheet' (🧾 ouvrir dans le Tableur) ou 'send' (📤 le menu « Envoyer vers… ») */
+    function exportCsv(d, {to = '', anchor = null} = {}) {
         const S = window.LCNDA_SHEET;
-        ext.openDialog({eyebrow: '🎉 COUSINADE', title: '⤓ Exporter le tableau des invités', submitLabel: '⤓ Exporter en CSV',
-            body: `<p>Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse.</p>
+        ext.openDialog({eyebrow: '🎉 COUSINADE', title: to === 'sheet' ? '🧾 Ouvrir les invités dans le Tableur' : to === 'send' ? '📤 Envoyer le tableau des invités' : '⤓ Exporter le tableau des invités',
+            submitLabel: to === 'sheet' ? '🧾 Ouvrir dans le Tableur' : to === 'send' ? '📤 Envoyer vers…' : '⤓ Exporter en CSV',
+            body: `<p>${to ? i18n('Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse.') : i18n('Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse.')}</p>
                 ${UI().checkHtml('Avec les adresses, courriels et téléphones', {checked: false, attrs: 'name="contacts"', sub: '🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent.'})}
                 ${UI().checkHtml('Seulement les invités cochés', {checked: true, attrs: 'name="only"'})}`,
             onSubmit: form => {
@@ -351,6 +354,10 @@
                 const fs = C().foyers(d.guests, {all: true}), foyerName = id => fs.find(f => f.members.some(m => m.id === id))?.name || '';
                 const rows = bySort(d, d.guests.filter(g => !only || g.invited), 'branch').map(g => [g.first_name, g.last_name, branchOf(d, g.branch_id)?.name || '', g.kin_ancestor, g.kin_ref === 'self' ? 'personne de référence' : g.kin_ref, foyerName(g.id),
                     ...(withC ? [g.address, g.postal_code, g.city, g.country, g.email, g.phone] : []), g.invited ? 'oui' : 'non', answerOf(g.answer)[1], g.people_count ?? '', g.diet, g.note, g.table_no ?? '']);
+                if (to) { const name = i18n('Invités — {nm}', {nm: d.title}), table = [head, ...rows];
+                    if (to === 'sheet' && ext.openRowsInSheet) ext.openRowsInSheet({name, rows: table});
+                    else if (ext.sendTo) ext.sendTo('rows', {rows: table, name}, {anchor, title: name, ...(to === 'sheet' ? {to: 'sheet'} : {})});
+                    return; }
                 const csv = S?.toCSV ? S.toCSV([head, ...rows], {sep: ';'}) : [head, ...rows].map(r => r.map(c => (A().csvCell ? A().csvCell(c) : `"${String(c ?? '').replace(/"/g, '""')}"`)).join(';')).join('\r\n');
                 const blob = new Blob(['﻿' + csv], {type: 'text/csv;charset=utf-8'}), a = document.createElement('a');
                 a.href = URL.createObjectURL(blob); a.download = `${(A().safeExportFilename ? A().safeExportFilename(d.title, 'cousinade') : 'cousinade')}-invites.csv`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
@@ -605,10 +612,12 @@
     }
     function dayAlbum(sb, d) {
         const ro = kiosk(), album = d.options?.album || [];
-        sb.innerHTML = `<div class="cous-daybar"><p class="muted">${i18n('{n} de la cousinade', {n: esc(plural(album.length, 'photo'))})}</p>${ro ? '' : '<button type="button" class="button" data-cous-aadd>＋ Ajouter des photos…</button>'}</div>
+        sb.innerHTML = `<div class="cous-daybar"><p class="muted">${i18n('{n} de la cousinade', {n: esc(plural(album.length, 'photo'))})}</p>${ro ? '' : `<span class="cous-daybar-btns">${album.length && ext.sendTo ? `<button type="button" class="button secondary" data-cous-asend title="${esc(i18n('Toutes les photos de l’album : un diaporama, un film, un traitement par lot…'))}">📤 ${esc(i18n('Envoyer vers…'))}</button> ` : ''}<button type="button" class="button" data-cous-aadd>＋ Ajouter des photos…</button></span>`}</div>
             ${album.length ? `<div class="cous-album">${album.map(m => `<figure class="cous-photo"><button type="button" class="cous-photo-open" data-cous-aopen="${m.id}" title="${esc(m.title)}"><img src="media/${encodeURIComponent(m.filename)}" alt="${esc(m.title)}" loading="lazy"></button>${ro ? '' : `<button type="button" class="icon-button small cous-photo-x" data-cous-adel="${m.id}" title="Retirer de l’album" aria-label="Retirer de l’album">×</button>`}<figcaption>${esc(m.title)}</figcaption></figure>`).join('')}</div>`
                 : A().emptyState({icon: '📸', text: 'L’album est vide', hint: 'Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias.', action: ro ? null : {label: '＋ Ajouter des photos', attrs: 'data-cous-aadd'}})}`;
         sb.addEventListener('click', async e => {
+            const snd = e.target.closest('[data-cous-asend]');
+            if (snd) return ext.sendTo?.('images', {medias: album.map(m => ({id: Number(m.id), filename: m.filename, title: m.title || ''}))}, {anchor: snd, title: i18n('Album — {nm}', {nm: d.title})});
             if (e.target.closest('[data-cous-aadd]')) {
                 const pick = await P().openMediaPicker?.({types: ['image'], multiple: true, eyebrow: '🎉 COUSINADE', title: 'Les photos de la cousinade', okLabel: 'Ajouter à l’album'});
                 const items = (Array.isArray(pick) ? pick : pick ? [pick] : []).filter(m => m && m.id);
@@ -686,5 +695,13 @@
         rename: (id, name) => post({op: 'save', id, title: name}),
         remove: id => post({op: 'delete', id}), createLabel: '＋ Nouvelle cousinade'});
 
-    ext.cousinade = {open: openList, create: openProjectDialog, buildTree, badgePages, letterOf, reload};
+    /** les cousinades (pour d'autres outils : le publipostage des faire-part) : [{id, title}] */
+    const listProjects = async () => ((await get('list')).items || []).map(r => ({id: Number(r.id), title: r.title || ''}));
+    /** les foyers invités d'une cousinade, avec les valeurs de l'invitation : [{key, name, prenoms, address: [lignes], values: {foyer, prenoms, titre…}}] */
+    async function households(id, {all = false} = {}) {
+        const d = await get('get', {id}), br = branchesOf(d);
+        return {title: d.title || '', ancestor_name: d.ancestor_name || '', date_text: d.date_text || '', place_text: d.place_text || '',
+            items: C().foyers(d.guests, {all}).map(f => ({key: f.key, name: f.name, prenoms: C().firstNames(f.members), address: f.address, person_ids: f.members.map(g => g.person_id).filter(Boolean), values: C().foyerValues(f, d, br)}))};
+    }
+    ext.cousinade = {open: openList, create: openProjectDialog, buildTree, badgePages, letterOf, reload, list: listProjects, households};
 })();

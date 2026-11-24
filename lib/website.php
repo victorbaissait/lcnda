@@ -39,7 +39,13 @@ const SITE_IMAGE_DATA = '#^data:image/(png|jpeg|gif|webp|svg\+xml|x-icon|vnd\.mi
 const SITE_IMG_MAX = 1600;
 const SITE_REDACTED = '[nom retiré]';
 const SITE_BLOCK_KINDS = ['menu', 'person', 'tree', 'timeline', 'map', 'chart', 'photos', 'place', 'diagram'];
-const SITE_FROZEN_MAX = 3500000;  // une carte figée (image) ou un diagramme figé (SVG)
+const SITE_FROZEN_MAX = 3500000;
+/** 🎬 🎧 Les vidéos et les sons du site (blocs « Vidéo », « Son ») : copiés tels quels (pas réencodés) dans medias/ */
+const SITE_AV_EXT = ['mp4' => 'video/mp4', 'm4v' => 'video/mp4', 'webm' => 'video/webm', 'ogv' => 'video/ogg', 'mov' => 'video/quicktime',
+    'mp3' => 'audio/mpeg', 'm4a' => 'audio/mp4', 'aac' => 'audio/aac', 'wav' => 'audio/wav', 'ogg' => 'audio/ogg', 'oga' => 'audio/ogg', 'opus' => 'audio/ogg', 'flac' => 'audio/flac'];
+const SITE_AV_MAX = 90000000;       // un fichier (les hébergeurs gratuits refusent souvent plus de 100 Mo)
+const SITE_AV_TOTAL = 300000000;    // toutes les vidéos et tous les sons d'un site
+const SITE_AV_INLINE_MAX = 12000000; // dans une page seule (.html, tout dedans) : au-delà, la vidéo n'y est pas  // une carte figée (image) ou un diagramme figé (SVG)
 /** 🗺 Fonds qu'on peut aussi montrer en « carte interactive » dans le site publié : leurs conditions permettent qu'un site
  *  les affiche avec leur mention (OpenStreetMap, OpenTopoMap, OpenHistoricalMap ; CARTO demande maintenant une clé). Les autres fonds (Esri, IGN,
  *  bibliothèques…) restent en image figée ; leur carte interactive passe au fond OpenStreetMap. */
@@ -279,13 +285,13 @@ function website_check(mixed $data): array
     }
     // 📁 les fichiers en plus : chemin sûr, sorte d'après l'extension, contenu nettoyé comme la feuille, le script ou une page
     $files = []; $paths = []; $total = 0;
-    $taken = ['css/style.css' => 1, 'js/script.js' => 1, 'js/carte-lcnda.js' => 1, 'lisez-moi.txt' => 1, 'lisez-moi.html' => 1];
+    $taken = ['css/style.css' => 1, 'js/script.js' => 1, 'js/carte-lcnda.js' => 1, 'js/diaporama-lcnda.js' => 1, 'lisez-moi.txt' => 1, 'lisez-moi.html' => 1];
     foreach ($pages as $i => $p) { $taken[website_page_file($p, $i)] = 1; $taken[($i === 0 ? 'index' : $p['slug']) . '.' . ($p['ext'] === 'php' ? 'html' : 'php')] = 1; }
     $rawFiles = is_array($data['files'] ?? null) ? array_values($data['files']) : [];
     if (count($rawFiles) > SITE_FILES_MAX) { throw new LcndaBadInput('Un site a au plus ' . SITE_FILES_MAX . ' fichiers en plus.'); }
     foreach ($rawFiles as $f) {
         $path = is_array($f) ? website_file_path($f['path'] ?? null) : null;
-        if ($path === null || isset($taken[$path]) || isset($paths[$path]) || str_starts_with($path, 'images/')) { $removed++; continue; } // chemin dangereux, réservé ou en double
+        if ($path === null || isset($taken[$path]) || isset($paths[$path]) || str_starts_with($path, 'images/') || str_starts_with($path, 'medias/')) { $removed++; continue; } // chemin dangereux, réservé ou en double
         $content = is_string($f['content'] ?? null) ? $f['content'] : '';
         if (strlen($content) > SITE_FILE_MAX) { throw new LcndaBadInput('Le fichier « ' . $path . ' » est trop lourd (1 Mo au plus).'); }
         $total += strlen($content);
@@ -848,6 +854,19 @@ function website_blocks_css(): string
 .lc-lieu ul{columns:2;padding-left:1.1em}.lc-lieu-tete{font-weight:700}
 .lc-menu-list{list-style:none;display:flex;flex-wrap:wrap;gap:.3em 1.2em;margin:0;padding:0}
 .lc-menu-list a{text-decoration:none;color:inherit;font-weight:600}.lc-menu-list a[aria-current]{text-decoration:underline;text-underline-offset:.3em}
+/* Vidéo, son, dessin, document, diaporama */
+.lc-video,.lc-son,.lc-dessin{margin:0}.lc-video video{display:block;width:100%;max-width:960px;height:auto;border-radius:var(--lc-arrondi,8px);background:#111}
+.lc-son audio{display:block;width:100%;max-width:640px}.lc-video figcaption,.lc-son figcaption,.lc-dessin figcaption,.lc-diapo figcaption{font-size:.9em;color:#6b625b;margin-top:.4em}
+.lc-transcription{margin-top:.8em;max-width:46em}.lc-transcription summary{cursor:pointer;font-weight:700}.lc-transcription p{margin:.4em 0}
+.lc-dessin svg{display:block;max-width:100%;height:auto}
+.lc-document{max-width:46em}.lc-document img{max-width:100%;height:auto}.lc-document table{border-collapse:collapse}.lc-document td,.lc-document th{border:1px solid rgba(0,0,0,.2);padding:.3em .5em}
+.lc-diaporama{position:relative;max-width:960px}
+.lc-diapo-piste{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:var(--lc-arrondi,8px);-webkit-overflow-scrolling:touch}
+.lc-diapo{flex:0 0 100%;scroll-snap-align:center;margin:0}.lc-diapo img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;background:#1d1a17}
+.lc-diapo-nav{position:absolute;top:calc(50% - 1.6em);width:2.4em;height:2.4em;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:1.2em;cursor:pointer}
+.lc-diapo-nav:hover,.lc-diapo-nav:focus-visible{background:rgba(0,0,0,.8)}.lc-diapo-prec{left:.5em}.lc-diapo-suiv{right:.5em}
+.lc-diapo-num{display:block;text-align:center;font-size:.85em;color:#6b625b;margin-top:.3em}
+@media (prefers-reduced-motion:reduce){.lc-diapo-piste{scroll-behavior:auto}}
 @media (max-width:640px){.lc-fiche{flex-direction:column}.lc-map-list,.lc-lieu ul{columns:1}.lc-tree{grid-template-columns:repeat(var(--lc-gens,3),minmax(140px,1fr))}}
 CSS;
 }
@@ -982,7 +1001,7 @@ function website_csp(string $mode): string
 {
     return $mode === 'export'
         ? "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto: https:"
-        : "default-src 'none'; img-src data: https:; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src data: https://fonts.gstatic.com; script-src 'unsafe-inline'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'";
+        : "default-src 'none'; img-src data: https:; media-src data: https:; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src data: https://fonts.gstatic.com; script-src 'unsafe-inline'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'";
 }
 
 /** Le document HTML complet d'une page. $css / $js : le texte (inline) ou null (fichiers css/style.css et js/script.js). */
@@ -990,6 +1009,18 @@ function website_csp(string $mode): string
 function website_live_map_js(): string
 {
     return (string) @file_get_contents(APP_ROOT . '/assets/js/site-carte-vive.js');
+}
+
+/** Le petit script du bloc « Diaporama » (boutons ‹ › ; sans lui, on fait glisser les images) */
+function website_slider_js(): string
+{
+    return (string) @file_get_contents(APP_ROOT . '/assets/js/heritage-site-web-diaporama.js');
+}
+
+/** Une page qui a un diaporama (bloc 🎞️) */
+function website_has_slider(string $html): bool
+{
+    return (bool) preg_match('#\sclass\s*=\s*["\'][^"\']*\blc-diaporama\b#i', $html);
 }
 
 /** $extra : les fichiers css et js en plus de cette page (['css' => [chemin => texte], 'js' => […]]), liés après style.css et
@@ -1013,8 +1044,8 @@ function website_document(array $site, int $idx, string $body, ?string $css, ?st
         . '<meta http-equiv="Content-Security-Policy" content="' . htmlspecialchars(website_csp($mode), ENT_COMPAT) . "\">\n<meta name=\"referrer\" content=\"strict-origin-when-cross-origin\">\n"
         . '<title>' . website_e($title) . "</title>\n" . ($desc !== '' ? '<meta name="description" content="' . website_e($desc) . "\">\n" : '') . '<meta name="generator" content="LCNDA — Mon site web">' . "\n"
         . ($css === null ? "<link rel=\"stylesheet\" href=\"css/style.css\">\n" : '<style>' . str_ireplace('</style', '<\/style', $css) . "</style>\n") . $xc . "</head>\n<body>\n" . $body . "\n";
-    if ($js === null) { $h .= ($live ? "<script src=\"js/carte-lcnda.js\" defer></script>\n" : '') . (trim($site['js']) !== '' ? "<script src=\"js/script.js\" defer></script>\n" : ''); }
-    else { if ($live) { $h .= '<script>' . website_js_clean(website_live_map_js()) . "</script>\n"; } if (trim($js) !== '') { $h .= '<script>' . website_js_clean($js) . "</script>\n"; } }
+    if ($js === null) { $h .= ($live ? "<script src=\"js/carte-lcnda.js\" defer></script>\n" : '') . (!empty($extra['slider']) ? "<script src=\"js/diaporama-lcnda.js\" defer></script>\n" : '') . (trim($site['js']) !== '' ? "<script src=\"js/script.js\" defer></script>\n" : ''); }
+    else { if ($live) { $h .= '<script>' . website_js_clean(website_live_map_js()) . "</script>\n"; } if (!empty($extra['slider'])) { $h .= '<script>' . website_js_clean(website_slider_js()) . "</script>\n"; } if (trim($js) !== '') { $h .= '<script>' . website_js_clean($js) . "</script>\n"; } }
     return $h . $xj . "</body>\n</html>\n";
 }
 
@@ -1094,14 +1125,29 @@ function website_readme(array $site, array $files, bool $live): array
 /** Tout le site : fichiers à mettre dans le .zip (chemin → octets) et le résumé ; rien n'est écrit sur le disque. */
 function website_build(PDO $pdo, array $site, string $mode = 'export'): array
 {
-    $files = []; $assets = []; $k = 0; $sum = ['pages' => 0, 'images' => 0, 'refused' => 0, 'names' => 0, 'missing' => 0, 'bytes' => 0, 'refused_titles' => []];
-    $img = static function (string $file) use ($pdo, &$assets, &$k, &$files, &$sum, $mode): string {
+    $files = []; $assets = []; $k = 0; $sum = ['pages' => 0, 'images' => 0, 'refused' => 0, 'names' => 0, 'missing' => 0, 'bytes' => 0, 'refused_titles' => [], 'av' => 0, 'av_big' => 0];
+    $avBytes = 0;
+    $img = static function (string $file) use ($pdo, &$assets, &$k, &$files, &$sum, &$avBytes, $mode): string {
         $file = ltrim(str_replace('\\', '/', $file), '/');
         if (isset($assets[$file])) { return $assets[$file]; }
         $m = website_media_by_file($pdo, $file);
         if (!$m) { $sum['missing']++; return $assets[$file] = ''; } // un fichier qui n'est pas un média de la base : il ne part pas
         if (!website_media_ok($pdo, (int) $m['id'])) { $sum['refused']++; if (count($sum['refused_titles']) < 8) { $sum['refused_titles'][] = (string) ($m['title'] ?: 'image'); } return $assets[$file] = ''; }
         $path = website_media_path((string) $m['filename']);
+        // 🎬 🎧 une vidéo ou un son : le fichier tel quel, dans medias/ (pas réencodé)
+        $ext = strtolower(pathinfo((string) $m['filename'], PATHINFO_EXTENSION));
+        if (isset(SITE_AV_EXT[$ext])) {
+            if (!$path) { $sum['missing']++; return $assets[$file] = ''; }
+            $size = (int) @filesize($path);
+            if ($size > SITE_AV_MAX || $avBytes + $size > SITE_AV_TOTAL || ($mode === 'inline' && $size > SITE_AV_INLINE_MAX)) { $sum['av_big']++; return $assets[$file] = ''; }
+            $avBytes += $size; $k++; $sum['av']++;
+            if ($mode === 'check') { return $assets[$file] = "medias/m{$k}.{$ext}"; }
+            $bytes = (string) @file_get_contents($path);
+            if ($bytes === '') { $sum['av']--; $sum['missing']++; return $assets[$file] = ''; }
+            if ($mode === 'inline') { return $assets[$file] = 'data:' . SITE_AV_EXT[$ext] . ';base64,' . base64_encode($bytes); }
+            $name = "medias/m{$k}.{$ext}"; $files[$name] = $bytes; $sum['bytes'] += strlen($bytes);
+            return $assets[$file] = $name;
+        }
         if ($mode === 'check') { if (!$path) { $sum['missing']++; return $assets[$file] = ''; } $k++; $sum['images']++; return $assets[$file] = "images/m{$k}.jpg"; } // le résumé : sans refaire les images
         $bytes = $path ? website_image_bytes($path) : null;
         if (!$bytes) { $sum['missing']++; return $assets[$file] = ''; }
@@ -1153,7 +1199,7 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
     $sum['files'] = count($extra);
     foreach ($pages as $i => $body) {
         $slug = $site['pages'][$i]['slug'];
-        $x = [];
+        $x = ['slider' => website_has_slider($body)];
         foreach (['css', 'js'] as $kind) { foreach (website_page_assets($site, $slug, $kind) as $f) { $x[$kind][$f['path']] = $extra[$f['path']]; } }
         if ($mode === 'inline' && $imgs) { $body = website_inline_images($body, $imgs); }
         $files[website_page_file($site['pages'][$i], $i)] = $mode === 'inline' ? website_document($site, $i, $body, $cssRed, $js, 'preview', isset($livePages[$i]), $x) : website_document($site, $i, $body, null, null, 'export', isset($livePages[$i]), $x);
@@ -1161,7 +1207,8 @@ function website_build(PDO $pdo, array $site, string $mode = 'export'): array
     // les liens vers une page qui n'existe plus (supprimée) : comptés pour le dire avant l'export
     $sum['broken'] = 0;
     foreach ($site['pages'] as $p) { if (preg_match_all('#\shref\s*=\s*["\']([a-z0-9\-]+\.(?:html|php))(?:[?\#][^"\']*)?["\']#i', website_page_links($site, (string) $p['html']), $mm)) { foreach ($mm[1] as $f) { if (!isset($files[strtolower($f)]) && !isset($extra[strtolower($f)])) { $sum['broken']++; } } } }
-    if ($livePages && $mode !== 'inline') { $files['js/carte-lcnda.js'] = website_live_map_js(); } // la carte interactive : notre petit script, pas de bibliothèque
+    if ($livePages && $mode !== 'inline') { $files['js/carte-lcnda.js'] = website_live_map_js(); }
+    if ($mode !== 'inline' && array_filter($pages, 'website_has_slider')) { $files['js/diaporama-lcnda.js'] = website_slider_js(); } // 🎞️ le diaporama : ses boutons ‹ › // la carte interactive : notre petit script, pas de bibliothèque
     if ($mode !== 'inline') {
         $files['css/style.css'] = $cssRed;
         if (trim($js) !== '') { $files['js/script.js'] = $js; }

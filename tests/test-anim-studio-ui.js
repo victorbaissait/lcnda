@@ -208,8 +208,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
         await t('📤 une image du vectoriel ou de la retouche : envoyée vers un nouveau film (scène photo) et vers un nouveau montage (Vidéo 1), rangée dans les médias', async () => {
             const mkBlob = () => p.evaluate(async () => { const c = document.createElement('canvas'); c.width = 320; c.height = 200; const g = c.getContext('2d'); g.fillStyle = '#2a5fa8'; g.fillRect(0, 0, 320, 200); window.__bl = await new Promise(r => c.toBlob(r, 'image/png')); });
-            assert.match(require('fs').readFileSync(require('path').join(__dirname, '../assets/js/heritage-vector.js'), 'utf8'), /\['tosend', '📤 Envoyer vers le Montage vidéo ou le Studio d’animation…'\]/);
-            assert.match(require('fs').readFileSync(require('path').join(__dirname, '../assets/js/heritage-studio.js'), 'utf8'), /\['send', '📤 Envoyer vers le Montage vidéo ou le Studio d’animation…'\]/);
+            assert.match(require('fs').readFileSync(require('path').join(__dirname, '../assets/js/heritage-vector.js'), 'utf8'), /\['tosend', '📤 Envoyer vers…'\]/); // outils-liens : le menu commun « 📤 Envoyer vers… » (heritage-envoyer.js)
+            assert.match(require('fs').readFileSync(require('path').join(__dirname, '../assets/js/heritage-studio.js'), 'utf8'), /\['send', '📤 Envoyer vers…'\]/); // outils-liens : le menu commun « 📤 Envoyer vers… » (heritage-envoyer.js)
             await mkBlob(); await p.evaluate(() => window.LCNDA_EXT.sendImage(window.__bl, {title: 'Carte de Malvialle', to: 'anim-new'}));
             await p.waitForSelector('.an-dlg [data-an-sc="0"]', {timeout: 20000});
             const sc = await p.evaluate(() => window.LCNDA_EXT.__anim.P.data.scenes.map(s => [s.type, s.media?.filename ? 'ok' : '', s.name]));

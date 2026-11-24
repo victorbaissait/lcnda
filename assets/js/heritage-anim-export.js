@@ -154,6 +154,7 @@
                 const start = t0 + p * d; out.push({start, end: Math.min(t0 + d, start + (Number(c.dur) || 3.5)), text: c.text});
             });
             if (s.type === 'image' && s.text) out.push({start: t0, end: t0 + d, text: s.text});
+            if (s.type === 'house' && s.labels !== false && st.plans?.length && !(s.captions || []).length) st.plans.forEach((e, i, l) => out.push({start: t0 + i / l.length * d, end: t0 + (i + 1) / l.length * d, text: R.epochLabel(e)})); // 🏠 l'époque de chaque plan
             t0 += d;
         }
         return out;

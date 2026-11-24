@@ -90,9 +90,12 @@
         if (!MODES.some(m => m[0] === st.mode)) st.mode = 'side';
         const U = UI(), inline = !!opts.inline;
         root.classList.add('h-pc');
-        const top = U.editorTopbar ? U.editorTopbar({icon: place ? '🏘' : '🔍', name: st.title || (place ? i18n('Hier et aujourd’hui') : i18n('Comparer deux photos')), nameAttrs: `data-pc-name placeholder="${esc(i18n('Nom de la comparaison'))}"`, undo: false, status: st.id ? 'saved' : '',
-            buttons: {save: {attrs: 'data-pc-cmd="save"', title: i18n('Enregistrer la comparaison (reliée aux deux photos et aux personnes)')}, full: inline ? null : (ext.fullButton ? {html: '⛶', attrs: 'data-full-toggle="photocmp"', title: 'Plein écran'} : null), close: inline ? null : {attrs: 'data-pc-cmd="close"', title: 'Fermer'}}})
-            : `<header class="ui-topbar"><span>🔍</span><input class="ui-topbar-name" data-pc-name value="${esc(st.title)}"><span class="ui-topbar-spacer"></span><span data-ui-status></span><button type="button" class="button small" data-pc-cmd="save">💾 Enregistrer</button>${inline ? '' : '<button type="button" class="icon-button" data-pc-cmd="close">×</button>'}</header>`;
+        // 📤 Envoyer vers… et 🎚️ Retoucher (outils-liens) ; ⤓ Exporter ▾ : l'image affichée, ou une page à imprimer
+        const outBtns = `<button type="button" class="button small secondary" data-pc-cmd="send" title="${esc(i18n('Envoyer l’image affichée ou le compte rendu vers un autre outil'))}">📤 ${esc(i18n('Envoyer vers…'))}</button>`
+            + `<button type="button" class="button small secondary" data-pc-cmd="retouch" title="${esc(i18n('Ouvrir la photo A ou B dans la Retouche des photos'))}">🎚️ ${esc(i18n('Retoucher'))}</button>`;
+        const top = U.editorTopbar ? U.editorTopbar({icon: place ? '🏘' : '🔍', name: st.title || (place ? i18n('Hier et aujourd’hui') : i18n('Comparer deux photos')), nameAttrs: `data-pc-name placeholder="${esc(i18n('Nom de la comparaison'))}"`, undo: false, status: st.id ? 'saved' : '', extra: outBtns,
+            buttons: {export: {attrs: 'data-pc-cmd="export"', label: `⤓ ${i18n('Exporter')} ▾`, title: i18n('Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes')}, save: {attrs: 'data-pc-cmd="save"', title: i18n('Enregistrer la comparaison (reliée aux deux photos et aux personnes)')}, full: inline ? null : (ext.fullButton ? {html: '⛶', attrs: 'data-full-toggle="photocmp"', title: 'Plein écran'} : null), close: inline ? null : {attrs: 'data-pc-cmd="close"', title: 'Fermer'}}})
+            : `<header class="ui-topbar"><span>🔍</span><input class="ui-topbar-name" data-pc-name value="${esc(st.title)}">${outBtns}<span class="ui-topbar-spacer"></span><span data-ui-status></span><button type="button" class="button small secondary" data-pc-cmd="export">⤓ ${esc(i18n('Exporter'))} ▾</button><button type="button" class="button small" data-pc-cmd="save">💾 Enregistrer</button>${inline ? '' : '<button type="button" class="icon-button" data-pc-cmd="close">×</button>'}</header>`;
         const sec = (title, key, body, open = true) => (U.panelSection ? U.panelSection({title, key, open, body}) : `<details open><summary>${esc(title)}</summary><div>${body}</div></details>`);
         root.innerHTML = `${top}
             <div class="h-pc-main">
@@ -128,7 +131,8 @@
                     ${sec('Notes', 'pc-notes', `<textarea data-pc-notes rows="5" placeholder="Ce que tu remarques : forme du nez, des oreilles, implantation des cheveux, grain de beauté, âge supposé…">${esc(st.notes)}</textarea>`)}
                 </aside>
             </div>`;
-        const $ = s => root.querySelector(s), canvas = $('[data-pc-canvas]'), stage = $('[data-pc-stage]'), ctx = canvas.getContext('2d');
+        const $ = s => root.querySelector(s), canvas = $('[data-pc-canvas]'), stage = $('[data-pc-stage]');
+        let ctx = canvas.getContext('2d'), exporting = false; // exporting : on dessine l'image à exporter (sans repères ni poignée)
         const ac = new AbortController(), sig = {signal: ac.signal};
         const status = s => { const el = root.querySelector('[data-ui-status]'); if (el && U.savedStatus) U.savedStatus(el, s); };
         const touch = () => { st.dirty = true; status('dirty'); };
@@ -216,7 +220,7 @@
             return document.documentElement.dataset.theme === 'dark'; };
         function drawImg(i, S) { if (!S.img) return; ctx.save(); ctx.setTransform(new DOMMatrix().scale(dpr).multiply(fullM(i, S))); ctx.filter = filter(); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(S.img, 0, 0); ctx.restore(); }
         function drawEyes(i, S, color) {
-            if (!S.img || !S.eyes) return; const m = fullM(i, S), iw = S.img.naturalWidth, ih = S.img.naturalHeight;
+            if (!S.img || !S.eyes || exporting) return; const m = fullM(i, S), iw = S.img.naturalWidth, ih = S.img.naturalHeight;
             ctx.save(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.strokeStyle = color; ctx.lineWidth = 2;
             S.eyes.forEach(([x, y]) => { const p = m.transformPoint(new DOMPoint(x * iw, y * ih)); ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, Math.PI * 2); ctx.moveTo(p.x - 11, p.y); ctx.lineTo(p.x + 11, p.y); ctx.moveTo(p.x, p.y - 11); ctx.lineTo(p.x, p.y + 11); ctx.stroke(); });
             ctx.restore();
@@ -224,11 +228,11 @@
         function draw() {
             if (!W) return;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
-            ctx.fillStyle = dark() ? '#15171b' : '#e9eaee'; ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = exporting ? '#ffffff' : dark() ? '#15171b' : '#e9eaee'; ctx.fillRect(0, 0, W, H);
             const R = rects(), both = st.a.img && st.b.img;
             const empty = $('[data-pc-empty]');
-            if (!st.a.item && !st.b.item) { empty.hidden = false; empty.innerHTML = A().emptyState ? A().emptyState({icon: '🔍', text: 'Choisis les deux photos à comparer', hint: 'Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes…', action: {label: '🖼 Choisir la photo A', attrs: 'data-pc-pick-a'}}) : ''; return; }
-            empty.hidden = true;
+            if (!st.a.item && !st.b.item && !exporting) { empty.hidden = false; empty.innerHTML = A().emptyState ? A().emptyState({icon: '🔍', text: 'Choisis les deux photos à comparer', hint: 'Deux portraits : la même personne à deux âges, deux personnes qu’on croit parentes…', action: {label: '🖼 Choisir la photo A', attrs: 'data-pc-pick-a'}}) : ''; return; }
+            if (!exporting) empty.hidden = true;
             if (st.mode === 'side' || !both) {
                 [st.a, st.b].forEach((S, i) => {
                     const r = st.mode === 'side' ? R[i] : R[0]; if (st.mode !== 'side' && !S.img) return;
@@ -243,11 +247,12 @@
             } else {
                 const x = R[0].x + R[0].w * st.mix / 100;
                 drawImg(0, st.b); ctx.save(); ctx.beginPath(); ctx.rect(0, 0, x, H); ctx.clip(); drawImg(0, st.a); ctx.restore();
-                ctx.save(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = '#fff'; ctx.fillRect(x - 1.5, 0, 3, H); ctx.beginPath(); ctx.arc(x, H / 2, 14, 0, Math.PI * 2); ctx.fill();
-                ctx.fillStyle = '#1f6feb'; ctx.font = '700 13px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('⇹', x, H / 2 + 5);
+                ctx.save(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = '#fff'; ctx.fillRect(x - 1.5, 0, 3, H);
+                if (!exporting) { ctx.beginPath(); ctx.arc(x, H / 2, 14, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = '#1f6feb'; ctx.font = '700 13px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('⇹', x, H / 2 + 5); }
+                ctx.textAlign = 'center'; ctx.font = '700 13px system-ui, sans-serif';
                 ctx.fillStyle = 'rgba(0,0,0,.6)'; ctx.fillRect(8, 8, 26, 22); ctx.fillRect(W - 34, 8, 26, 22); ctx.fillStyle = '#fff'; ctx.fillText('A', 21, 24); ctx.fillText('B', W - 21, 24); ctx.restore();
             }
-            if (canAlign() && !place) { ctx.save(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.strokeStyle = 'rgba(31,111,235,.55)'; ctx.setLineDash([6, 6]); const v = viewOf(0), r = R[0], y = r.y + r.h / 2 + v.ty + (r.h * 0.42 - r.h / 2) * v.s; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); ctx.restore(); }
+            if (canAlign() && !place && !exporting) { ctx.save(); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.strokeStyle = 'rgba(31,111,235,.55)'; ctx.setLineDash([6, 6]); const v = viewOf(0), r = R[0], y = r.y + r.h / 2 + v.ty + (r.h * 0.42 - r.h / 2) * v.s; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); ctx.restore(); }
         }
 
         /* ─── souris, molette, clavier ─── */
@@ -293,6 +298,9 @@
             else if (b.hasAttribute('data-pc-score-run')) autoEyes();
             else if (b.hasAttribute('data-pc-adj-reset')) { Object.assign(st, {adjX: 0, adjY: 0, adjK: 100, adjR: 0}); adjF.forEach(f => { if (f) { f.input.value = f.input.dataset.pcR === 'adjK' ? 100 : 0; f.input.dispatchEvent(new Event('input', {bubbles: true})); } }); touch(); draw(); }
             else if (b.dataset.pcCmd === 'save') save();
+            else if (b.dataset.pcCmd === 'export') exportMenu(b);
+            else if (b.dataset.pcCmd === 'send') sendMenu(b);
+            else if (b.dataset.pcCmd === 'retouch') retouchMenu(b);
             else if (b.dataset.pcCmd === 'close') opts.onRequestClose?.();
         }, sig);
         root.addEventListener('change', e => {
@@ -402,6 +410,64 @@
             finally { st.saving = false; }
         }
 
+        /* ─── ⤓ Exporter, 🖨 Imprimer, 📤 Envoyer vers…, 🎚️ Retoucher ─── */
+        const nameOf = () => st.title || (place ? i18n('Hier et aujourd’hui') : i18n('Comparer deux photos'));
+        const titleOf = S => S.item?.title || String(S.item?.filename || '').replace(/\.[a-z0-9]+$/i, '') || '';
+        const bothReady = () => { if (st.a.img && st.b.img) return true; toast('Choisis d’abord les deux photos.', 'error'); return false; };
+        /** l'image affichée (côte à côte, fondu à la position du curseur, ou rideau), en plus grand que l'écran, sans les repères */
+        function composeCanvas(maxSide = 2400) {
+            const k = clamp(maxSide / Math.max(W, H, 1), 1, 4), c = document.createElement('canvas'); c.width = Math.round(W * k); c.height = Math.round(H * k);
+            const keep = [ctx, dpr]; ctx = c.getContext('2d'); dpr = k; exporting = true;
+            try { draw(); } finally { [ctx, dpr] = keep; exporting = false; draw(); }
+            return c;
+        }
+        const toBlob = (c, type = 'image/png', q = 0.92) => new Promise((ok, ko) => c.toBlob(b => (b ? ok(b) : ko(new Error(i18n('Image trop grande pour le navigateur.')))), type, q));
+        const saveAs = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
+        function exportImage() {
+            if (!bothReady()) return;
+            const title = nameOf();
+            if (ext.rtExportImage) return ext.rtExportImage({title, render: async () => composeCanvas()}); // la fenêtre d'export de la Retouche (PNG, JPG, WebP, TIFF, imprimer)
+            if (!U.openExportDialog) return toast('La fenêtre d’export n’est pas encore prête.', 'error');
+            const run = type => async o => { const c = composeCanvas(); if (type === 'image/jpeg') { const w = document.createElement('canvas'); w.width = c.width; w.height = c.height; const g = w.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, w.width, w.height); g.drawImage(c, 0, 0); saveAs(await toBlob(w, type, 0.93), o.filename); } else saveAs(await toBlob(c, type), o.filename); };
+            return U.openExportDialog({title, defaultName: title, quality: false, preview: async () => composeCanvas(400).toDataURL('image/jpeg', 0.85), formats: [{id: 'jpg', run: run('image/jpeg')}, {id: 'png', run: run('image/png')}]});
+        }
+        /** une photo en image (avec le noir et blanc, le contraste, la luminosité choisis) pour l'impression */
+        const photoUrl = S => { const im = S.img, k = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement('canvas'); c.width = Math.max(1, Math.round(im.naturalWidth * k)); c.height = Math.max(1, Math.round(im.naturalHeight * k)); const g = c.getContext('2d'); g.filter = filter(); g.drawImage(im, 0, 0, c.width, c.height); return c.toDataURL('image/jpeg', 0.9); };
+        const notesHtml = () => esc(st.notes.trim()).replace(/\n/g, '<br>');
+        const verdictLine = () => (st.verdict ? `${st.verdict.score} % — ${i18n(st.verdict.text)}` : '');
+        function printReport() {
+            if (!bothReady()) return;
+            const title = nameOf(), ua = photoUrl(st.a), ub = photoUrl(st.b), v = verdictLine(), lab = place ? [i18n('A — l’image ancienne'), i18n('B — la photo d’aujourd’hui')] : [i18n('Photo A'), i18n('Photo B')];
+            const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>@page{margin:12mm}body{font:12pt/1.45 Georgia,serif;color:#222;margin:0}h1{font-size:18pt;margin:0 0 10px}.pair{display:flex;gap:6mm;align-items:flex-start}figure{flex:1;margin:0;text-align:center}figure img{max-width:100%;max-height:120mm;object-fit:contain}figcaption{font-size:10pt;margin-top:4px}.v{margin:10px 0;padding:6px 10px;border-left:4px solid #1f6feb;background:#f3f6fb}h2{font-size:13pt;margin:12px 0 4px}</style></head><body>
+                <h1>${esc(title)}</h1><div class="pair"><figure><img alt="" src="${ua}"><figcaption><b>${esc(lab[0])}</b> — ${esc(titleOf(st.a))}</figcaption></figure><figure><img alt="" src="${ub}"><figcaption><b>${esc(lab[1])}</b> — ${esc(titleOf(st.b))}</figcaption></figure></div>
+                ${v ? `<p class="v"><b>${esc(i18n('Ressemblance'))} :</b> ${esc(v)}</p>` : ''}${st.notes.trim() ? `<h2>${esc(i18n('Notes'))}</h2><p>${notesHtml()}</p>` : ''}</body></html>`;
+            if (U.openPrintDialog) return U.openPrintDialog({title, key: 'photocmp', photos: false, margin: 12, html});
+            const f = document.createElement('iframe'); f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(f);
+            const d = f.contentDocument; d.open(); d.write(html); d.close(); setTimeout(() => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (_) {} setTimeout(() => f.remove(), 1500); }, 400);
+        }
+        /** le compte rendu en texte : les deux photos (titres), la ressemblance, les notes */
+        const reportHtml = () => { const v = verdictLine(), lab = place ? [i18n('A — l’image ancienne'), i18n('B — la photo d’aujourd’hui')] : [i18n('Photo A'), i18n('Photo B')];
+            return `<h1>${esc(nameOf())}</h1><p><b>${esc(lab[0])} :</b> ${esc(titleOf(st.a))}</p><p><b>${esc(lab[1])} :</b> ${esc(titleOf(st.b))}</p>${v ? `<p><b>${esc(i18n('Ressemblance'))} :</b> ${esc(v)}</p>` : ''}${st.notes.trim() ? `<h2>${esc(i18n('Notes'))}</h2><p>${notesHtml()}</p>` : ''}`; };
+        const menu = (anchor, items, title) => (U.menuAt ? U.menuAt(anchor, items, {title}) : items.find(x => x && x.run)?.run());
+        function exportMenu(anchor) {
+            menu(anchor, [{icon: '⤓', label: i18n('Exporter l’image (ce qui est affiché)…'), run: exportImage}, {icon: '🖨', label: i18n('Imprimer (les deux photos, la ressemblance, les notes)…'), run: printReport}], i18n('Exporter'));
+        }
+        function sendMenu(anchor) {
+            if (!ext.sendTo) return toast(i18n('L’envoi vers les autres outils n’est pas chargé.'), 'error');
+            if (!bothReady()) return;
+            const title = nameOf();
+            menu(anchor, [{icon: '🖼', label: i18n('L’image affichée'), run: async () => { try { ext.sendTo('image', {blob: await toBlob(composeCanvas(), 'image/png')}, {anchor, title, exclude: ['compare']}); } catch (e) { toast(e.message, 'error'); } }},
+                {icon: '📝', label: i18n('Le compte rendu (photos, ressemblance, notes)'), run: () => ext.sendTo('text', {html: reportHtml(), name: title}, {anchor, title, exclude: ['compare']})}], i18n('Envoyer vers…'));
+        }
+        function retouchMenu(anchor) {
+            if (!ext.retouchMedia) return toast(i18n('La Retouche des photos n’est pas chargée.'), 'error');
+            const media = S => ({id: Number(S.item.id), filename: S.item.filename, title: S.item.title || ''});
+            const sides = [['a', st.a], ['b', st.b]].filter(([, S]) => S.item?.filename);
+            if (!sides.length) return toast('Choisis d’abord les deux photos.', 'error');
+            if (sides.length === 1) return ext.retouchMedia(media(sides[0][1]));
+            menu(anchor, sides.map(([k, S]) => ({icon: '🎚️', label: i18n('Photo {side} — {name}', {side: k.toUpperCase(), name: titleOf(S)}), run: () => ext.retouchMedia(media(S))})), i18n('Retoucher quelle photo ?'));
+        }
+
         function syncUi() {
             root.querySelectorAll('[data-pc-mode]').forEach(b => { const on = b.dataset.pcMode === st.mode; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
             const both = st.a.img && st.b.img;
@@ -428,7 +494,7 @@
             opts.onReady?.(api_);
         })();
         const api_ = {
-            root, state: st, save, draw, isDirty: () => st.dirty,
+            root, state: st, save, draw, isDirty: () => st.dirty, composeCanvas, reportHtml, exportImage, printReport,
             destroy: () => { ac.abort(); ro.disconnect(); mq.removeEventListener?.('change', onScheme); },
         };
         return api_;

@@ -136,7 +136,24 @@
         notes.push(blob.size <= maxKb * 1024 ? i18n('image réduite à {width} × {height} px pour tenir dans {x} Ko', {width: cur.width, height: cur.height, x: maxKb.toLocaleString('fr-FR')}) : `⚠️ ${i18n('{x} : plus lourd que {x2} Ko', {x: B().sizeText(blob.size), x2: maxKb.toLocaleString('fr-FR')})}`);
         return blob;
     }
-    /** le canvas d'une image après les retouches de la chaîne (rogner, redimensionner, noir et blanc, filigrane), dans l'ordre */
+    /* ═════ 🎚️ Une action de la Retouche (ext.retouchActions, donné par la Retouche des photos) ═════ */
+    let rtList = null; // [{id, name}] : les actions enregistrées dans la Retouche
+    async function loadRetouchActions() {
+        const R = ext.retouchActions; if (!R?.list) { rtList = null; return rtList; }
+        try { const l = await R.list(); rtList = (Array.isArray(l) ? l : []).map(a => (a && typeof a === 'object' ? {id: String(a.id ?? a.key ?? a.name ?? ''), name: String(a.name ?? a.label ?? a.title ?? a.id ?? '')} : {id: String(a), name: String(a)})).filter(a => a.id); }
+        catch (_) { rtList = []; }
+        return rtList;
+    }
+    async function opRetouch(src, p) {
+        const R = ext.retouchActions; if (!R?.apply) throw new Error(i18n('La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire.', {name: p.name || p.action}));
+        if (!p.action) return src;
+        const inBlob = await toBlob(src, 'image/png');
+        const out = await R.apply(inBlob, p.action);
+        if (!out) throw new Error(i18n('L’action « {name} » de la Retouche n’a rien rendu.', {name: p.name || p.action}));
+        if (out instanceof HTMLCanvasElement) return out;
+        const bm = await createImageBitmap(out instanceof Blob ? out : new Blob([out])); const c = canvas(bm.width, bm.height); c.getContext('2d').drawImage(bm, 0, 0); bm.close?.(); return c;
+    }
+    /** le canvas d'une image après les retouches de la chaîne (rogner, redimensionner, noir et blanc, action de la Retouche, filigrane), dans l'ordre */
     async function imageCanvas(blob, chain) {
         const bm = await createImageBitmap(blob, {imageOrientation: 'from-image'});
         let c = canvas(bm.width, bm.height); c.getContext('2d').drawImage(bm, 0, 0); bm.close?.();
@@ -146,6 +163,7 @@
             else if (card.type === 'resize') c = opResize(c, card.p);
             else if (card.type === 'gray') c = opGray(c, card.p);
             else if (card.type === 'watermark') c = opWatermark(c, card.p);
+            else if (card.type === 'retouch') c = await opRetouch(c, card.p);
         }
         return c;
     }
@@ -236,6 +254,10 @@
             case 'tags': return `<span class="pk-lab">${i18n('Étiquettes à ajouter')}</span>${P().pickerField({name: '', hiddenName: false, kind: 'label', multiple: true, value: p.labels, inline: true})}
                 <span class="pk-lab">${i18n('Relier à une personne')}</span>${P().pickerField({name: '', hiddenName: false, kind: 'person', value: p.person ? {id: p.person, title: p.personName || i18n('Fiche n° {person}', {person: p.person})} : null, inline: true})}
                 <p class="h-lot-hint">${i18n('Seulement pour ce qui va dans la base (nouvelle version ou copie), pas pour un ZIP.')}</p>`;
+            case 'retouch': return !ext.retouchActions ? `<p class="h-lot-hint">${esc(i18n('La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire.'))}</p>`
+                : rtList && !rtList.length ? `<p class="h-lot-hint">${esc(i18n('Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une.'))}</p>`
+                : `<label class="h-lot-wide">${esc(i18n('L’action'))}<select data-k="action"><option value="">${esc(i18n('Choisir une action…'))}</option>${opt([...(rtList || []).map(a => [a.id, a.name]), ...(p.action && !(rtList || []).some(a => a.id === p.action) ? [[p.action, p.name || p.action]] : [])], p.action)}</select></label>
+                <p class="h-lot-hint">${esc(i18n('Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot.'))}</p>`;
             case 'pdf': return `<label class="h-lot-wide">${i18n('Nom du PDF')}<input type="text" data-k="name" value="${esc(p.name)}" maxlength="80"></label><label>Pages<select data-k="page">${opt([['a4', i18n('A4 (l’image centrée)')], ['image', i18n('À la taille de chaque image')]], p.page)}</select></label>
                 ${num('margin', p.margin, 'mm', {label: 'Marge', max: 40})}${check('keep', p.keep, i18n('Garder aussi chaque image à part'))}`;
         }
@@ -255,7 +277,7 @@
         if (!B()) { toast(i18n('Le moteur des traitements par lot n’est pas chargé : recharge la page.'), 'error'); return null; }
         let recipe = B().cleanRecipe(o.recipe || (() => { try { return JSON.parse(ls(LAST_KEY, 'null')); } catch (_) { return null; } })() || {out: 'zip', cards: [{type: 'rename'}]});
         if (!recipe.cards.length && !o.recipe) recipe.cards.push(B().newCard('rename'));
-        let files = [], planNow = null, running = false, stop = false, timer = 0, dragId = '';
+        let files = [], planNow = null, running = false, stop = false, timer = 0, dragId = '', outMedia = [];
         const remember = () => lsSet(LAST_KEY, JSON.stringify(recipe));
         const dlg = document.createElement('dialog');
         dlg.className = 'modal modal-xl h-lot';
@@ -277,7 +299,7 @@
                         <label class="checkbox-line"><input type="radio" name="h-lot-out" value="zip"> ⤓ ${i18n('Un ZIP à télécharger')} <small>${i18n('rien ne change dans la base')}</small></label></fieldset>
                     <div data-lot-plan aria-live="polite"></div></section>
             </div>
-            <div class="modal-actions"><span class="h-lot-status" data-lot-status aria-live="polite"></span><span class="spacer"></span><button type="button" class="button secondary" data-lot-cancel>${i18n('Annuler')}</button><button type="button" class="button" data-lot-run data-shortcut="⌘↩">▶ Lancer</button></div>`;
+            <div class="modal-actions"><span class="h-lot-status" data-lot-status aria-live="polite"></span><span class="spacer"></span>${ext.sendTo ? `<button type="button" class="button secondary" data-lot-send hidden title="${esc(i18n('Les images rangées dans les médias par ce lot : un diaporama, un montage…'))}">📤 ${esc(i18n('Envoyer vers…'))}</button>` : ''}<button type="button" class="button secondary" data-lot-cancel>${i18n('Annuler')}</button><button type="button" class="button" data-lot-run data-shortcut="⌘↩">▶ Lancer</button></div>`;
         document.body.appendChild(dlg);
         const $ = s => dlg.querySelector(s);
         const U = UI();
@@ -340,6 +362,7 @@
             const c = cardOf(el); if (!c) return;
             const raw = {...c.p};
             el.querySelectorAll('[data-k]').forEach(i => { raw[i.dataset.k] = i.type === 'checkbox' ? i.checked : i.value; });
+            if (c.type === 'retouch') raw.name = (rtList || []).find(a => a.id === raw.action)?.name || (raw.action === c.p.action ? c.p.name : '');
             c.p = B().cleanParams(c.type, raw);
             el.querySelector('[data-sum]').textContent = B().summary(c);
             showFields(el); remember(); schedule();
@@ -385,6 +408,7 @@
             box.innerHTML = `<div class="h-lot-prog"><progress max="${total}" value="0" data-lot-bar></progress><div data-lot-now>${U.spinner(i18n('On commence…'))}</div></div><ol class="h-lot-plan h-lot-done" data-lot-done></ol>`;
             const bar = $('[data-lot-bar]'), now = $('[data-lot-now]'), done = $('[data-lot-done]');
             const zip = [], pages = [], tg = [...recipe.cards].reverse().find(c => c.on && c.type === 'tags');
+            outMedia = []; const sendB = $('[data-lot-send]'); if (sendB) sendB.hidden = true;
             let token = '', ok = 0, bad = 0, k = 0;
             const line = (name, okk, txt) => done.insertAdjacentHTML('beforeend', `<li class="h-lot-prow"><span class="h-lot-pmain"><span class="h-lot-pname">${okk ? '✓' : '⛔'} ${esc(name)}</span>${txt ? `<small class="${okk ? 'h-lot-ok' : 'h-lot-notes'}">${esc(txt)}</small>` : ''}</span></li>`);
             const sendItem = async (fields, blob, fname) => {
@@ -411,6 +435,7 @@
                         if (r.mode === 'zip') { zip.push({name: r.after.name, data: new Uint8Array(await blob.arrayBuffer()), store: ['image', 'audio'].includes(r.kind) || /^(docx|odt|xlsx|ods|pdf)$/.test(r.after.ext)}); line(`${r.before.name} → ${r.after.name}`, true, [blob ? B().sizeText(blob.size) : '', ...notes].filter(Boolean).join(' · ')); }
                         else {
                             const res = await sendItem({mode: r.mode, media_id: it.base ? it.id : 0, name: r.after.name, title: r.title || (r.mode === 'new' ? r.after.base : ''), ...tagFields()}, blob, r.after.name);
+                            if (r.kind === 'image' && Number(res?.media_id) > 0) outMedia.push({id: Number(res.media_id), filename: res.filename || it.filename || '', title: res.title || it.title || r.after.base});
                             if (it.base && ['version', 'meta'].includes(r.mode)) { // la suite part de la nouvelle version (et de son titre)
                                 if (r.mode === 'version') it.filename = res.filename;
                                 it.title = res.title || it.title; it.name = `${B().safeName(it.title)}.${B().extOf(it.filename) || r.after.ext}`;
@@ -447,6 +472,7 @@
                 if (ok) o.onDone?.();
             } else if (recipe.out === 'zip' && ok) toast(`⚙️ ${i18n('{what} · ⤓ ZIP téléchargé.', {what})}`, 'success');
             dlg.dataset.lotDone = String(ok); dlg.dataset.lotBad = String(bad); dlg.dataset.lotToken = token;
+            if (sendB) sendB.hidden = !outMedia.length;
             // les fichiers de la base ont changé de version : l'aperçu repart de là
             for (const f of files.filter(x => x.base)) { f.ready = false; }
             await Promise.all(files.filter(x => x.base).map(analyse)); drawFiles();
@@ -462,6 +488,7 @@
             if (b.matches('[data-lot-close]')) return close();
             if (b.matches('[data-lot-cancel]')) return close();
             if (b.matches('[data-lot-run]')) return runAll();
+            if (b.matches('[data-lot-send]')) return outMedia.length && ext.sendTo?.('images', {medias: outMedia.slice()}, {anchor: b, title: i18n('Traitement par lot'), exclude: ['batch']});
             if (b.matches('[data-lot-clear]')) { const keep = files; files = []; drawFiles(); schedule(); A().undoToast(i18n(keep.length > 1 ? '{files} retirés du lot' : '{files} retiré du lot', {files: plural(keep.length, 'fichier'), n: keep.length}), {undo: () => { files = keep; drawFiles(); schedule(); }}); return; }
             if (b.matches('[data-lot-rm]')) return removeFile(b.dataset.lotRm);
             if (b.matches('[data-lot-media]')) {
@@ -470,7 +497,7 @@
                 return;
             }
             if (b.matches('[data-lot-add]')) {
-                const items = B().ORDER.map(t => ({icon: B().ACTIONS[t].icon, label: B().ACTIONS[t].label, help: B().ACTIONS[t].help, run: () => addCard(t)}));
+                const items = B().ORDER.filter(t => t !== 'retouch' || ext.retouchActions).map(t => ({icon: B().ACTIONS[t].icon, label: B().ACTIONS[t].label, help: B().ACTIONS[t].help, run: () => addCard(t)}));
                 return U.menuAt(b, items, {title: i18n('Ajouter une action')});
             }
             const card = b.closest('.h-lot-card'); if (!card) return;
@@ -517,12 +544,19 @@
         dlg.showModal();
         canAvif().then(() => { if (dlg.isConnected) { drawCards(); schedule(); } });
         if (o.media?.length) addFiles(o.media.map(fromMedia));
+        // ext.openBatch({items: [ids des médias]}) : ces médias de la base, déjà dans le lot (Médias, Envoyer vers…)
+        const itemIds = [...new Set((Array.isArray(o.items) ? o.items : []).map(x => Number(typeof x === 'object' && x ? x.id : x)).filter(x => x > 0))].slice(0, 500);
+        if (itemIds.length) (async () => { const got = []; for (let i = 0; i < itemIds.length; i += 100) { try { const r = await api('picker_search', {kind: 'media', ids: itemIds.slice(i, i + 100).join(','), limit: 100}); (r.groups || []).forEach(g => (g.items || []).forEach(m => got.push(m))); } catch (err) { toast(err.message, 'error'); } }
+            const byId = new Map(got.map(m => [Number(m.id), m])), list = itemIds.map(id => byId.get(id)).filter(Boolean);
+            if (list.length < itemIds.length) toast(i18n('{x} introuvable dans les médias.', {x: plural(itemIds.length - list.length, 'média')}), 'error');
+            if (list.length && dlg.isConnected) await addFiles(list.map(fromMedia)); })();
+        if (ext.retouchActions) loadRetouchActions().then(() => { if (dlg.isConnected && recipe.cards.some(c => c.type === 'retouch')) drawCards(); });
         if (o.files?.length) addFiles([...o.files].map(fromFile));
-        dlg._lot = {get files() { return files; }, get recipe() { return recipe; }, plan: () => planNow, addFiles: list => addFiles(list.map(x => (x instanceof File ? fromFile(x) : fromMedia(x)))), run: runAll};
+        dlg._lot = {get files() { return files; }, get recipe() { return recipe; }, get outMedia() { return outMedia; }, plan: () => planNow, addFiles: list => addFiles(list.map(x => (x instanceof File ? fromFile(x) : fromMedia(x)))), run: runAll};
         return dlg;
     }
     ext.openBatch = openBatch;
-    ext.batchInternals = {runImage, runDoc, runSheet, imageCanvas, encodeCanvas, opCrop, opResize, opGray, opWatermark, canAvif, userRecipes, USER_KEY};
+    ext.batchInternals = {runImage, runDoc, runSheet, imageCanvas, encodeCanvas, opCrop, opResize, opGray, opWatermark, opRetouch, loadRetouchActions, canAvif, userRecipes, USER_KEY};
 
     /* ═════ Dans 🛠️ Outils de modification : les recettes gardées ═════ */
     ext.editToolsExtra = ext.editToolsExtra || [];

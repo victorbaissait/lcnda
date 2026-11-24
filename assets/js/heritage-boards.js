@@ -1327,6 +1327,7 @@
                 opacity: () => numField('opacity', 'Opacité', 5, 100, 1, Math.round((one?.opacity ?? 1) * 100), '%', 5, 100),
                 actions: () => `<div class="h-bd-actions">
                     ${['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'media', 'timeline'].includes(t) || (t === 'map' && one.mapSrc) ? '<button type="button" class="button small" data-bd-act="open">↗ Ouvrir</button>' : ''}
+                    ${one && t === 'media' && kindOfMedia(media[one.media_id]) === 'image' && media[one.media_id]?.filename ? `${ext.retouchMedia && !boardLocked ? `<button type="button" class="button small secondary" data-bd-act="retouch" title="${esc(i18n('Ouvrir cette image dans la Retouche des photos'))}">🎚️ ${esc(i18n('Retoucher'))}</button>` : ''}${ext.sendTo ? `<button type="button" class="button small secondary" data-bd-act="sendimg" title="${esc(i18n('Envoyer cette image vers un autre outil'))}">📤 ${esc(i18n('Envoyer vers…'))}</button>` : ''}` : ''}
                     <button type="button" class="button small secondary" data-bd-act="duplicate" data-shortcut="⌘D">Dupliquer</button>
                     <button type="button" class="button small secondary" data-bd-act="lock" data-shortcut="⌘L">${esc(i18n(l.every(i => i.locked) ? '🔓 Déverrouiller' : '🔒 Verrouiller'))}</button>
                     ${l.length > 1 ? '<button type="button" class="button small secondary" data-bd-act="group" data-shortcut="⌘G">⧉ Grouper</button>' : ''}${l.some(i => i.group) ? '<button type="button" class="button small secondary" data-bd-act="ungroup" data-shortcut="⇧⌘G">Dégrouper</button>' : ''}
@@ -1358,7 +1359,12 @@
             if (e.target.closest('[data-bd-shapefrom]')) { const one = selItems()[0]; if (!one) return; KIT().openComposer?.({base: one.shape, onSave: k => applyShape(k)}); return; }
             const tb = e.target.closest('[data-bd-tbl]'); if (tb) { const it = selItems()[0]; if (it?.type !== 'table') return; if (tb.dataset.bdTbl === 'csv') return tableCsv(it); if (tb.dataset.bdTbl === 'sheet') return tableSheet(it); tableOp(it, tb.dataset.bdTbl); return; }
             const cf = e.target.closest('[data-bd-cellfill]'); if (cf && cellSel && !ro()) { const it = byId(cellSel.id); if (!it) return; it.cfill = {...(it.cfill || {})}; const k = cellSel.r + ':' + cellSel.c; setCellFill(it, cf.dataset.bdCellfill); return; }
-            const a = e.target.closest('[data-bd-act]'); if (a) { if (a.dataset.bdAct === 'open') return openItem(selItems()[0]); actions[a.dataset.bdAct]?.(); }
+            const a = e.target.closest('[data-bd-act]'); if (a) { if (a.dataset.bdAct === 'open') return openItem(selItems()[0]);
+                if (a.dataset.bdAct === 'retouch' || a.dataset.bdAct === 'sendimg') { const it = selItems()[0], m = it && media[it.media_id]; if (!m) return;
+                    const mm = {id: Number(m.id || it.media_id), filename: m.filename, title: m.title || it.text || ''};
+                    if (a.dataset.bdAct === 'retouch') return ext.retouchMedia?.(mm);
+                    return ext.sendTo?.('image', {media: mm}, {anchor: a, title: mm.title}); }
+                actions[a.dataset.bdAct]?.(); }
             inspectorMore(e);
         });
         inspector.addEventListener('input', e => {
@@ -1791,10 +1797,17 @@
                 info: onlySel ? A().plural(sel.size, 'élément choisi', 'éléments choisis') : A().plural(items.length, 'élément'),
                 preview: () => thumbnail(360, 240, 0, 'image/png', onlySel), formats});
         }
+        // 📤 le tableau entier en image (PNG) → le menu commun « Envoyer vers… » (rangée d'abord dans les médias)
+        async function sendBoardImage(anchor) {
+            try { const url = await boardImage('image/png', 150, false), blob = await (await fetch(url)).blob();
+                return await ext.sendTo('image', {blob}, {anchor, title: fileBase()}); }
+            catch (e) { toast(e.message || String(e), 'error'); return null; }
+        }
         // ⤓ Exporter ▾ : un seul menu (tout le tableau, la sélection, en faire un modèle)
         async function exportMenu(btn) {
-            popMenu(btn, [['all', i18n('⤓ Exporter le tableau… (PDF, image, impression, fichier)')], ['sel', i18n('⤓ Exporter la sélection en image…'), !sel.size], '-', ['tpl', i18n('⭐ En faire un modèle (pour les nouveaux tableaux)')]], k => {
+            popMenu(btn, [['all', i18n('⤓ Exporter le tableau… (PDF, image, impression, fichier)')], ['sel', i18n('⤓ Exporter la sélection en image…'), !sel.size], ...(ext.sendTo ? ['-', ['send', i18n('📤 Envoyer le tableau en image vers…')]] : []), '-', ['tpl', i18n('⭐ En faire un modèle (pour les nouveaux tableaux)')]], k => {
                 if (k === 'tpl') return saveTemplate();
+                if (k === 'send') return sendBoardImage(btn);
                 openExport(k === 'sel');
             });
         }

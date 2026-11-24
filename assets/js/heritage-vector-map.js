@@ -226,7 +226,21 @@
         open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
         create: again => newMapDoc(again),
         rename: (id, name) => A().api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
-        remove: id => A().api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Nouvelle carte'});
+        remove: id => A().api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Nouvelle carte',
+        // 🎞 une carte enregistrée → une scène du Studio d'animation où le curseur du temps avance tout seul
+        get extra() { return ext.openAnimStudio ? `<button type="button" class="button secondary" data-et-x="anim" title="${esc(i18n('Le curseur du temps joue tout seul : les objets apparaissent à leur date'))}">🎞 ${esc(i18n('Animer dans le Studio'))}</button>` : ''; },
+        onExtra: async key => { if (key === 'anim') return animPickMap(); }});
+    /** 🎞 choisir une carte enregistrée, puis l'ouvrir en scène « 🗺️ Carte » dans le Studio d'animation */
+    async function animPickMap() {
+        if (!ext.openAnimStudio) return toast(i18n('Le Studio d’animation n’est pas chargé.'), 'error');
+        const list = ((await A().api('vector_docs')).docs || []).filter(d => d.kind === 'map');
+        if (!list.length) return toast(i18n('Aucune carte enregistrée : commence par « ＋ Nouvelle carte ».'), 'error');
+        if (list.length === 1) return ext.openAnimStudio({id: 0, vectormap: {docId: list[0].id, name: list[0].name}});
+        ext.openDialog({eyebrow: '🎞 ' + i18n('Studio d’animation'), title: i18n('Quelle carte animer ?'), submitLabel: i18n('Animer dans le Studio'),
+            body: `<p class="muted">${esc(i18n('Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière.'))}</p><div class="form-grid"><label class="span-2">${esc(i18n('Carte'))}<select name="map">${list.map(d => `<option value="${d.id}">${esc(d.name)}</option>`).join('')}</select></label></div>`,
+            onSubmit: f => { const d = list.find(x => x.id === Number(f.querySelector('[name=map]').value)); if (d) setTimeout(() => ext.openAnimStudio({id: 0, vectormap: {docId: d.id, name: d.name}}), 0); return true; }});
+    }
+    ext.animMapPick = animPickMap;
 
     /* contexte de dessin : le document (style, année, légende) ; posé par l'éditeur avant de dessiner */
     const ctx = {doc: null, editor: false};
@@ -487,6 +501,7 @@
                 <h4>⏳ Curseur du temps</h4><p class="muted vx-mhelp">Donne à un objet ses années (onglet Propriétés) : en choisissant une année, ne reste que ce qui existait alors.</p>
                 <div class="vx-row"><label class="ui-toggle"><input type="checkbox" data-vm="yon" ${m.year ? 'checked' : ''}><i></i>Montrer l’année</label><b data-vm-yshow>${m.year || ''}</b></div>
                 <input type="range" data-vm="year" min="${y0}" max="${y1}" value="${m.year || y1}" ${m.year ? '' : 'disabled'} style="width:100%">
+                ${ext.openAnimStudio ? `<div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="anim" title="${esc(i18n('Un film où le curseur du temps avance tout seul, de la première année à la dernière'))}">🎞 ${esc(i18n('Animer dans le Studio'))}</button></div>` : ''}
                 <h4>📍 Généalogie</h4><div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="places" title="${m.geo ? 'Les lieux et adresses de ta base qui tombent sur ce plan' : 'Il faut d’abord un fond de carte (situer le plan)'}">📍 Lieux de la base</button><button type="button" class="button small secondary" data-vm-cmd="links" title="Les objets reliés à une personne ou à un lieu">🔗 Objets reliés</button></div>
                 <h4>📏 Échelle</h4>${m.geo ? `<p class="muted vx-mhelp">${i18n('Plan situé : {place} — il couvre {size} (1 px ≈ {m} m). Les lieux de ta base se posent à leur vraie place (📍).', {place: `<span data-i18n-off>${esc(m.geo.name || '')}</span>`, size: `<b>${fmtM(metersPerPx() * d.w)} × ${fmtM(metersPerPx() * d.h)}</b>`, m: String(+metersPerPx().toFixed(2)).replace('.', ',')})}</p>` : `<p class="muted vx-mhelp">${i18n('Pour une carte juste et pas déformée, commence par {b} (plus bas) : l’échelle se règle toute seule. Sinon, dis combien vaut un pixel :', {b: `<b>${i18n('🗺️ Fond de carte d’un lieu')}</b>`})}</p><label>${i18n('1 pixel = … mètres')}<input type="number" data-vm="scale" min="0.001" step="0.1" value="${esc(m.scale || 1)}"></label>`}
                 <label class="ui-toggle"><input type="checkbox" data-vm="kmgrid" ${m.kmgrid ? 'checked' : ''}><i></i>Grille d’échelle (carreaux de 100 m, 1 km… ; ne s’imprime pas)</label><p class="muted vx-mhelp">Choisis un objet du plan : sa longueur ou sa surface réelles s’affichent dans Propriétés.</p>` : '<p class="muted">Le mode Plan ajoute des outils de carte : routes qui se raccordent, rivières, forêts, bâtiments, symboles (église, moulin, château…), noms qui suivent les rues, échelle, rose des vents, légende automatique, styles d’époque (état-major, cadastre napoléonien, Cassini…).</p>'}
@@ -678,6 +693,7 @@
                 const c = el.closest('[data-vm-cmd]'); if (c) { const k = c.dataset.vmCmd;
                     if (k === 'paletteCfg') return openPaletteEditor(() => ed.paint()), true;
                     if (k === 'newItem') { editCustom(null, {selection: ed.selObjs?.() || []}).then(id => { if (id) ed.paint(); }); return true; }
+                    if (k === 'anim') { animate(); return true; }
                     if (k === 'layers') makeLayers(); if (k === 'basemap') basemapDialog(); if (k === 'refimg') refImageDialog(); if (k === 'places') placesDialog(); if (k === 'links') linksDialog();
                     if (k === 'refmove') { ed.setTool('mref'); toast('Glisse l’image de référence pour la caler (Échap ou V pour finir).'); }
                     if (k === 'reffit') { const d = ed.doc(); if (d.ref) { Object.assign(d.ref, {x: 0, y: 0, w: d.w, h: d.h, k: 1}); ed.commit('Image ajustée'); } }
@@ -712,6 +728,14 @@
                 if (e.type === 'change' || el.type === 'checkbox' || el.tagName === 'SELECT') ed.commit('Plan : réglage'); else ed.redraw();
                 return true; }
             return false;
+        }
+        /** 🎞 cette carte dans le Studio d'animation : une copie (telle qu'elle est maintenant, même pas encore enregistrée) */
+        function animate() {
+            if (!ext.openAnimStudio) return toast(i18n('Le Studio d’animation n’est pas chargé.'), 'error');
+            const d = JSON.parse(JSON.stringify(ed.doc())); if (d.ref && !d.ref.print) delete d.ref; // l'image à décalquer ne sert pas au film
+            if (d.map) delete d.map.year; // le Studio choisit l'année, image par image
+            if (JSON.stringify(d).length > 1500000) return toast(i18n('Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ».'), 'error');
+            ext.openAnimStudio({id: 0, vectormap: {doc: d, name: ed.name() || i18n('Ma carte')}});
         }
         function restyleAll() { const walk = arr => (arr || []).forEach(o => { if (o.type === 'text' && o.map?.k) styleLabel(o); if (o.children) walk(o.children); }); walk(ed.doc().objs); }
         /** un nouvel objet de plan, selon ce qui est choisi dans la palette */

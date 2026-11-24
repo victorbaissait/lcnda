@@ -1585,6 +1585,29 @@
     ext.rtEmbedMeta = rtEmbedMeta; ext.rtResample = rtResample; ext.rtCanvasSize = rtCanvasSize;
     const canvasBlob = (c, type = 'image/jpeg', q = 0.92) => new Promise((ok, ko) => c.toBlob(b => (b ? ok(b) : ko(new Error('Image trop grande pour le navigateur.'))), type, q));
     const saveBlobAs = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
+    /** 🗂 TIFF de base, sans compression (lisible partout) : RVB, ou RVBA si l'image a de la transparence → ArrayBuffer */
+    function rtTiff(c, dpi = 300) {
+        const W = c.width, H = c.height, px = c.getContext('2d', {willReadFrequently: true}).getImageData(0, 0, W, H).data;
+        let alpha = false; for (let i = 3; i < px.length; i += 4) if (px[i] !== 255) { alpha = true; break; }
+        const spp = alpha ? 4 : 3, len = W * H * spp;
+        const tags = [[256, 4, 1, W], [257, 4, 1, H], [258, 3, spp, 0], [259, 3, 1, 1], [262, 3, 1, 2], [273, 4, 1, 0], [274, 3, 1, 1], [277, 3, 1, spp], [278, 4, 1, H], [279, 4, 1, len], [282, 5, 1, 0], [283, 5, 1, 0], [284, 3, 1, 1], [296, 3, 1, 2]];
+        if (alpha) tags.push([338, 3, 1, 2]); // ExtraSamples : transparence non prémultipliée
+        const bpsOff = 8 + 2 + tags.length * 12 + 4, xOff = bpsOff + spp * 2, yOff = xOff + 8, dataOff = yOff + 8;
+        const buf = new ArrayBuffer(dataOff + len), v = new DataView(buf), u8 = new Uint8Array(buf);
+        v.setUint8(0, 0x49); v.setUint8(1, 0x49); v.setUint16(2, 42, true); v.setUint32(4, 8, true); v.setUint16(8, tags.length, true);
+        const late = {258: bpsOff, 273: dataOff, 282: xOff, 283: yOff};
+        tags.forEach(([tag, type, count, val], i) => {
+            const o = 10 + i * 12; v.setUint16(o, tag, true); v.setUint16(o + 2, type, true); v.setUint32(o + 4, count, true);
+            if (tag in late) v.setUint32(o + 8, late[tag], true); else if (type === 3) v.setUint16(o + 8, val, true); else v.setUint32(o + 8, val, true);
+        });
+        v.setUint32(10 + tags.length * 12, 0, true); // pas d'autre page
+        for (let k = 0; k < spp; k++) v.setUint16(bpsOff + k * 2, 8, true);
+        [xOff, yOff].forEach(o => { v.setUint32(o, dpi, true); v.setUint32(o + 4, 1, true); });
+        if (alpha) u8.set(px, dataOff);
+        else for (let i = 0, j = dataOff; i < px.length; i += 4, j += 3) { u8[j] = px[i]; u8[j + 1] = px[i + 1]; u8[j + 2] = px[i + 2]; }
+        return buf;
+    }
+    ext.rtTiff = rtTiff;
     /** 🖨 Imprimer une image (une page, centrée) sans quitter l'outil */
     const printBlob = (blob, title = 'Image') => new Promise(res => {
         if (window.LCNDA_UI?.openPrintDialog) { const u = URL.createObjectURL(blob); setTimeout(() => URL.revokeObjectURL(u), 600000); window.LCNDA_UI.openPrintDialog({title, key: 'image', photos: false, margin: 10, html: `<!doctype html><title>${esc(title)}</title><style>html,body{margin:0}img{display:block;max-width:100%;max-height:96vh;margin:auto}</style><img alt="" src="${u}">`}); res(); return; } // L1 : la fenêtre « Imprimer » commune ; sinon, le secours ci-dessous
@@ -1595,7 +1618,7 @@
     });
     /** Une copie de l'image dans les médias, rattachée aux mêmes fiches que le média de départ (ou seule, sans média de départ) */
     async function rtUploadCopy(blob, {mediaId = 0, title = 'Image'} = {}) {
-        const fd = new FormData(), ext0 = blob.type === 'image/png' ? 'png' : 'jpg'; fd.append('file', blob, 'export.' + ext0); fd.append('title', String(title).slice(0, 300)); fd.append('csrf', A().state.csrf);
+        const fd = new FormData(), ext0 = blob.type === 'image/png' ? 'png' : blob.type === 'image/webp' ? 'webp' : 'jpg'; fd.append('file', blob, 'export.' + ext0); fd.append('title', String(title).slice(0, 300)); fd.append('csrf', A().state.csrf);
         if (mediaId) { fd.append('media_id', mediaId); fd.append('mode', 'copy'); fd.append('show', '0'); } else fd.append('kind', 'image');
         const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
         if (!r.ok || j.error) throw new Error(j.error || 'Copie impossible.');
@@ -1613,12 +1636,21 @@
             let c = await full();
             if (o.format === 'print' || type === 'image/jpeg') { const w = document.createElement('canvas'); w.width = c.width; w.height = c.height; const g = w.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, w.width, w.height); g.drawImage(c, 0, 0); c = w; } // le JPG n'a pas de transparence : fond blanc
             if (o.format === 'print') return printBlob(await canvasBlob(c, 'image/jpeg', 0.95), title);
-            let blob = await canvasBlob(c, type, 0.93); if (meta) blob = await rtEmbedMeta(blob, await meta()); saveBlobAs(blob, o.filename);
-            if (o.saveCopy) { await rtUploadCopy(blob, {mediaId, title: copyTitle || title}); toast('Image téléchargée ; une copie est rangée dans les médias.'); }
+            let blob;
+            if (type === 'image/tiff') blob = new Blob([rtTiff(c)], {type: 'image/tiff'}); // 🗂 TIFF sans compression (archives)
+            else {
+                blob = await canvasBlob(c, type, 0.93);
+                if (type === 'image/webp' && blob.type !== 'image/webp') throw new Error(i18n('Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG.'));
+                if (meta && type !== 'image/webp') blob = await rtEmbedMeta(blob, await meta());
+            }
+            saveBlobAs(blob, o.filename);
+            if (o.saveCopy) { await rtUploadCopy(type === 'image/tiff' ? await canvasBlob(c, 'image/png') : blob, {mediaId, title: copyTitle || title}); toast('Image téléchargée ; une copie est rangée dans les médias.'); } // les médias ne gardent pas le TIFF : une copie en PNG
         };
         return UI.openExportDialog({title, defaultName: title, quality: false, saveCopy: !!mediaId, copyChecked: !!mediaId, info: '',
             preview: async () => { const c = await full(), k = Math.min(1, 360 / Math.max(c.width, c.height)), t = document.createElement('canvas'); t.width = Math.max(1, Math.round(c.width * k)); t.height = Math.max(1, Math.round(c.height * k)); t.getContext('2d').drawImage(c, 0, 0, t.width, t.height); return t.toDataURL('image/jpeg', 0.85); },
-            formats: [{id: png ? 'png' : 'jpg', run: run(png ? 'image/png' : 'image/jpeg')}, {id: png ? 'jpg' : 'png', run: run(png ? 'image/jpeg' : 'image/png')}, {id: 'print', run: run('print')}]});
+            formats: [{id: png ? 'png' : 'jpg', run: run(png ? 'image/png' : 'image/jpeg')}, {id: png ? 'jpg' : 'png', run: run(png ? 'image/jpeg' : 'image/png')},
+                {id: 'webp', label: i18n('🌐 WebP'), hint: i18n('léger, pour le web'), ext: 'webp', run: run('image/webp')}, {id: 'tiff', label: i18n('🗂 TIFF'), hint: i18n('sans perte, pour archiver'), ext: 'tif', run: run('image/tiff')},
+                {id: 'print', run: run('print')}]});
     };
     /** ⤓ Exporter l'avant / après : la fenêtre d'export unique, avec la disposition, la position du rideau et la légende dans l'aperçu */
     ext.rtBeforeAfterExport = ({title = 'Photo', getBefore, getAfter, mediaId = 0, pos = 0.5, vertical = true, layout = ''} = {}) => {
@@ -1869,6 +1901,31 @@
         ['colorize', '🌈 Coloriser une photo en noir et blanc', 'Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée.', '<button type="button" class="button small" data-rt-cmd="colorize:auto">🎨 Coloriser tout seul</button><button type="button" class="button small secondary" data-rt-cmd="colorize:paint">🖌 Coloriser au pinceau</button><div class="h-rt-palette">' + RT_PALETTE.map(([c, l]) => `<button type="button" data-rt-cmd="restore:color:${c}" style="background:${c}" title="${l}"></button>`).join('') + '</div>'],
         ['save', '✅ Comparer et enregistrer', 'Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste.', '<button type="button" class="button small" data-rt-cmd="save:show">💾 Enregistrer et afficher</button><button type="button" class="button small secondary" data-rt-cmd="proj:save">Garder le travail pour plus tard</button>'],
     ];
+    /* ⚡ Actions de la retouche (réglages gardés sous un nom) : lues ici, rejouées sur une image entière — aussi par les Traitements par lot (ext.retouchActions) */
+    const RT_ACT_KEY = 'genealogie-retouch-actions';
+    const rtActList = () => { try { const v = JSON.parse(localStorage.getItem(RT_ACT_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
+    const rtActId = (a, i) => String(a?.id || `act-${a?.at || i}`);
+    /** une action sur une image entière (en pleine taille) → un canevas */
+    const rtActRender = (im, a) => {
+        const W = im.naturalWidth || im.width, H = im.naturalHeight || im.height, mk = () => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
+        const adj0 = () => { const d = rtDefault(); delete d.crop; delete d.persp; return d; };
+        const c = mk(), g = c.getContext('2d', {willReadFrequently: true}); g.drawImage(im, 0, 0);
+        const d = g.getImageData(0, 0, W, H); g.putImageData(rtApply(d, d, {...rtDefault(), ...a.st}), 0, 0);
+        for (const x of a.adj || []) { const id = g.getImageData(0, 0, W, H), o = new ImageData(W, H); rtApply(id, o, {...adj0(), ...x.st}); const t = mk(); t.getContext('2d').putImageData(o, 0, 0); g.globalAlpha = x.opacity ?? 1; g.drawImage(t, 0, 0); g.globalAlpha = 1; }
+        return c;
+    };
+    ext.retouchActions = {
+        /** [{id, name}] : les actions enregistrées dans la Retouche (Fichier → ⚡ Actions) */
+        list: () => rtActList().map((a, i) => ({id: rtActId(a, i), name: String(a.name || i18n('Action'))})),
+        /** rejoue l'action sur une image (Blob) → Promise<Blob> (PNG ou WebP gardés, sinon JPG) */
+        apply: async (blob, id) => {
+            const all = rtActList(), a = all.find((x, i) => rtActId(x, i) === String(id)); if (!a) throw new Error(i18n('Cette action de retouche n’existe plus.'));
+            const url = URL.createObjectURL(blob), im = new Image();
+            try { im.src = url; await im.decode(); } catch (_) { throw new Error(i18n('Impossible d’ouvrir cette image.')); } finally { setTimeout(() => URL.revokeObjectURL(url), 1000); }
+            const type = /png|webp/.test(blob.type) ? blob.type : 'image/jpeg';
+            return canvasBlob(rtActRender(im, a), type, 0.93);
+        },
+    };
     async function openRetouch(source = '', project = null, {advanced = false, tab = '', restoreAll = false, idphoto = false} = {}) {
         // la retouche simple (celle de la 0.5.0) si c'est la dernière choisie ; un projet s'ouvre toujours ici
         let mode0 = ''; try { mode0 = localStorage.getItem('genealogie-retouch-mode') || ''; } catch (_) {}
@@ -1899,7 +1956,7 @@
         const VTOOLS = [['move', '➤', 'Déplacer un élément d’un calque (V)', 'v'], ['marquee', '⬚', 'Sélection rectangle (M)', 'm'], ['ellipsesel', '◯', 'Sélection ellipse (⇧M)', ''], ['lasso', '➰', 'Lasso : entourer à main levée (L)', 'l'], ['polysel', '✒︎', 'Plume : sélection point par point (P) — double-clic ou Entrée pour fermer', 'p'], ['wand', '🪄', 'Sélection automatique (baguette magique) (W)', 'w'], ['crop', '⌗', 'Recadrer et redresser (C)', 'c'],
             ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['repair', '🪡', 'Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours', 'r'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['eraser', '🧽', 'Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu)', 'e'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['gradient', '▦', 'Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque', 'g'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main, ou barre d’espace (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
         const MENUS = [
-            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['versions', '🕘 Versions…'], ['-'], ['info', 'ℹ️ Informations…'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['send', '📤 Envoyer vers le Montage vidéo ou le Studio d’animation…'], ['psd:export', '🗂 Exporter en PSD (avec les calques)…'], ['psd:import', '🗂 Importer les calques d’un PSD…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
+            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['versions', '🕘 Versions…'], ['-'], ['info', 'ℹ️ Informations…'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['send', '📤 Envoyer vers…'], ['psd:export', '🗂 Exporter en PSD (avec les calques)…'], ['psd:import', '🗂 Importer les calques d’un PSD…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['hs:photo', '🎨 Teinte/Saturation…'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'], ['imgsize', '📏 Taille de l’image…'], ['canvassize', '⬚ Taille de la zone de travail…'],
                 ['>', '🔄 Rotation de l’image', [['rot:cw', '↻ 90° horaire'], ['rot:ccw', '↺ 90° antihoraire'], ['rot:180', '180°'], ['rot:angle', 'Angle…'], ['rot:level', '📐 Redresser l’horizon (tracer une ligne)…'], ['flip:h', '⇆ Symétrie horizontale de l’image'], ['flip:v', '⇅ Symétrie verticale de l’image']]], ['-'],
@@ -1915,7 +1972,7 @@
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch h-rt2'; dlg.dataset.ownClose = '1'; // il demande lui-même avant de fermer
         // E1 : icône · nom tapable · menus · ↶ ↷ · … · ✓ Enregistré · ⚙️ Personnaliser · ⤓ Exporter ▾ · 💾 Enregistrer · ⛶ · ×
         const sec = (title, key, body, open = true) => window.LCNDA_UI?.panelSection ? window.LCNDA_UI.panelSection({title, key, open, body}) : `<details ${open ? 'open' : ''}><summary>${esc(title)}</summary>${body}</details>`;
-        dlg.innerHTML = `<div class="h-rt-head h-rt-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name" data-rt-name value="${esc(project?.name || item.title || item.filename || 'Photo')}" maxlength="160" aria-label="Nom du projet de retouche" title="Le nom du projet de retouche (tape pour le changer)"><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${esc(i18n(l, {ctx: 'menu'}) !== l ? i18n(l, {ctx: 'menu'}) : tr(l))}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : k === '>' ? `<div class="h-rt-sub"><button type="button" class="h-rt-subh"><span>${esc(tr(t))}</span><kbd>▸</kbd></button><div class="h-rt-menulist h-rt-sublist">${sc.map(([k2, t2]) => `<button type="button" data-rt-cmd="${k2}"><span>${esc(tr(t2))}</span></button>`).join('')}</div></div>` : `<button type="button" data-rt-cmd="${k}"><span>${esc(tr(t))}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="ui-topbar-hist h-rt-hist-btns"><button type="button" class="icon-button small" data-rt-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rt-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span><button type="button" class="button small secondary" data-rt-cmd="simple" title="Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons">⚡ Rapide</button><span class="spacer"></span><span class="ui-status" data-ui-status data-rt-status></span>${ext.tbButton('retouch')}<details class="h-rt-menu h-rt-exportmenu"><summary title="Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rt-cmd="export:image"><span>🖼 L’image retouchée (PNG, JPG, imprimer)…</span></button><button type="button" data-rt-cmd="export:ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details><button type="button" class="button small" data-rt-projsave data-ui-cmd="save" title="Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer" title="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="h-rt-head h-rt-topbar"><span class="ui-topbar-icon" aria-hidden="true">🎚️</span><input class="ui-topbar-name" data-rt-name value="${esc(project?.name || item.title || item.filename || 'Photo')}" maxlength="160" aria-label="Nom du projet de retouche" title="Le nom du projet de retouche (tape pour le changer)"><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${esc(i18n(l, {ctx: 'menu'}) !== l ? i18n(l, {ctx: 'menu'}) : tr(l))}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : k === '>' ? `<div class="h-rt-sub"><button type="button" class="h-rt-subh"><span>${esc(tr(t))}</span><kbd>▸</kbd></button><div class="h-rt-menulist h-rt-sublist">${sc.map(([k2, t2]) => `<button type="button" data-rt-cmd="${k2}"><span>${esc(tr(t2))}</span></button>`).join('')}</div></div>` : `<button type="button" data-rt-cmd="${k}"><span>${esc(tr(t))}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="ui-topbar-hist h-rt-hist-btns"><button type="button" class="icon-button small" data-rt-undo disabled title="Annuler (⌘Z)" data-shortcut="⌘Z">↶</button><button type="button" class="icon-button small" data-rt-redo disabled title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z">↷</button></span><button type="button" class="button small secondary" data-rt-cmd="simple" title="Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons">⚡ Rapide</button><span class="spacer"></span><span class="ui-status" data-ui-status data-rt-status></span>${ext.tbButton('retouch')}<details class="h-rt-menu h-rt-exportmenu"><summary title="${esc(i18n('Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après'))}">⤓ Exporter ▾</summary><div class="h-rt-menulist"><button type="button" data-rt-cmd="export:image"><span>${esc(i18n('🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)…'))}</span></button><button type="button" data-rt-cmd="export:ba"><span>◧ Avant / après (côte à côte ou rideau)…</span></button></div></details><button type="button" class="button small" data-rt-projsave data-ui-cmd="save" title="Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer" title="Fermer">×</button></div>
             <div class="h-rt-bar" data-tbg="rt-bar" data-tbg-label="Barre du haut (groupes)">
                 <span class="h-rt-modes" role="toolbar" data-tb="modes" data-tb-label="Les outils" data-tbg="rt-modes" data-tbg-label="Outils">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(tr(l))}" data-shortcut="${esc((VTOOLS.find(v => v[0] === k)?.[3] || '').toUpperCase())}">${i} ${esc(tr(l))}</button>`).join('')}</span>
             </div>
@@ -3430,8 +3487,7 @@
         dlg.addEventListener('change', e => { if (!e.target.matches('[data-rt-fxadd]')) return; const k = e.target.value, n = adjNode(); e.target.value = ''; if (!k || !n) return; n.st.filters = n.st.filters || {}; const ch = n.st.filters.chain = n.st.filters.chain || []; ch.push({t: k, ...fxDefaults(k)}); syncControls(); fxDialog(k, {node: n.id, i: ch.length - 1, added: true}); }); // « Annuler » l'enlève
         /* ⚡ Actions : les réglages de la photo (niveaux, courbe, filtres, colorisation…) et ses calques de réglage sans masque,
            gardés sous un nom, pour les remettre ici ou les appliquer d'un coup à plusieurs photos (une nouvelle version de chacune). */
-        const ACT_KEY = 'genealogie-retouch-actions';
-        const actList = () => { try { const v = JSON.parse(localStorage.getItem(ACT_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
+        const ACT_KEY = RT_ACT_KEY, actList = rtActList;
         const actSave = l => { try { localStorage.setItem(ACT_KEY, JSON.stringify(l)); return true; } catch (_) { toast('Plus de place pour les actions : supprimes-en une.', 'error'); return false; } };
         const actOf = () => { const s0 = rtClone({...st}); ['strokes', 'crop', 'persp', '_persp0'].forEach(k => delete s0[k]);
             const adj = []; layers.forEach(n => { if (typeOf(n) === 'adjust' && n.visible && !n.mask && !n.clip) adj.push({name: n.name, opacity: n.opacity ?? 1, st: rtClone(n.st)}); });
@@ -3446,12 +3502,7 @@
         };
         const actApplyHere = a => { Object.assign(st, rtDefault(), rtClone(a.st), {strokes: st.strokes, crop: st.crop, persp: st.persp}); (a.adj || []).forEach(x => { const n = newAdjust(x.name); n.opacity = x.opacity; n.st = {...adjDefault(), ...rtClone(x.st)}; }); refreshLayers(); syncControls(); commit(i18n('Action « {name} »', {name: a.name})); };
         /** une action sur une image entière (en pleine taille) */
-        const actRender = (im, a) => {
-            const W = im.naturalWidth, H = im.naturalHeight, c = blank(W, H), g = c.getContext('2d', {willReadFrequently: true}); g.drawImage(im, 0, 0);
-            const d = g.getImageData(0, 0, W, H); g.putImageData(rtApply(d, d, {...rtDefault(), ...a.st}), 0, 0);
-            for (const x of a.adj || []) { const id = g.getImageData(0, 0, W, H), o = new ImageData(W, H); rtApply(id, o, {...adjDefault(), ...x.st}); const t = blank(W, H); t.getContext('2d').putImageData(o, 0, 0); g.globalAlpha = x.opacity ?? 1; g.drawImage(t, 0, 0); g.globalAlpha = 1; }
-            return c;
-        };
+        const actRender = rtActRender;
         function actionsDialog() {
             const d2 = document.createElement('dialog'); d2.className = 'modal h-modal h-modal-wide h-rt-actions';
             const draw2 = () => { const list = actList();
@@ -3843,7 +3894,7 @@
             if (k === 'repair:detect') return creasePanel();
             if (k === 'imgsize') return imageSizeDialog();
             if (k === 'canvassize') return canvasSizeDialog();
-            if (k === 'send') { if (!ext.sendImage) return; try { const c = await renderFull(), bl = await canvasBlob(c, 'image/png'); ext.sendImage(bl, {title: (typeof docTitle === 'function' ? docTitle() : '') || 'Image retouchée', anchor: dlg.querySelector('[data-rt-menus], .rt-menus, nav')}); } catch (e) { toast(e.message, 'error'); } return; }
+            if (k === 'send') { if (!ext.sendImage) return; try { const c = await renderFull(), bl = await canvasBlob(c, 'image/png'); ext.sendImage(bl, {title: (typeof docTitle === 'function' ? docTitle() : '') || i18n('Image retouchée'), anchor: dlg.querySelector('.h-rt-menubar, nav'), exclude: ['retouch']}); } catch (e) { toast(e.message, 'error'); } return; }
             if (k === 'info') return infoDialog();
             if (k === 'versions') return openVersionsWin();
             if (k === 'idphoto') return openIdPhoto();
@@ -4407,6 +4458,15 @@
     ext.retouchDrawOp = rtDrawOp; // pour les essais
     document.addEventListener('click', e => { if (e.target.closest('#retouch-media')) openRetouch(); });
     ext.openRetouch = openRetouch;
+    /** 🎚️ Ouvrir la Retouche sur une photo des médias {id, filename, title} (depuis un autre outil, « 📤 Envoyer vers… ») ;
+     *  la visionneuse retrouve ensuite ce qu'elle montrait. opts : {advanced, tab} comme openRetouch. */
+    ext.retouchMedia = async (media, opts = {}) => {
+        const id = Number(media?.id || media?.media_id || media?.mediaId || 0), filename = String(media?.filename || '');
+        if (!id || !filename) return toast(i18n('Choisis une photo à retoucher.'), 'error');
+        const st = A().state, keep = [st.lightboxMedia, st.lightboxIndex];
+        st.lightboxMedia = [{id, filename, thumbnail: media.thumbnail || filename, title: media.title || '', media_type: 'image'}]; st.lightboxIndex = 0;
+        try { return await openRetouch('', null, opts); } finally { [st.lightboxMedia, st.lightboxIndex] = keep; }
+    };
 
     /** Listes → Médias → « 🎚️ Retoucher » : une photo de l'app (les plus récentes, ou filtrées) ou une photo importée, puis la Retouche */
     /** ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias ; done(média) l'ouvre */

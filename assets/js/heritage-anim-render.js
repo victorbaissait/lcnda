@@ -11,6 +11,9 @@
  *   pyramid    — la pyramide des âges de ceux qui vivaient chaque année ;
  *   line       — la courbe qui se dessine (naissances, décès, mariages, vivants, âge au décès) ;
  *   tree       — l'arbre (éventail) qui pousse, génération après génération.
+ *   vectormap  — une carte du Dessin vectoriel (heritage-vector-map.js) : le curseur du temps joue d'une année à l'autre, les objets
+ *                apparaissent à leur date (une image par état de la carte, gardée) ; docId (relue) ou doc (une copie) ;
+ *   house      — une maison par époques (heritage-house.js, ext.houseEpochPlans) : le plan de chaque époque tour à tour, en fondu, l'année en légende.
  *   ext.animRender = {FORMATS, sizeOf, scenesAt, totalDur, yearAt, camAt, prepare, drawFrame, autoCaptions, raceData, pyramidData, lineData, fanData, easing}
  * Essais : tests/test-anim-studio.js (calculs, dans Node) et tests/test-anim-studio-ui.js (navigateur).
  */
@@ -181,7 +184,7 @@
 
     /* ═════ préparer une scène (données, images, fond de carte) — gardé tant que ses réglages ne changent pas ═════ */
     const cache = new Map();
-    const NOPREP = new Set(['captions', 'name', 'dur', 'trans', 'transDur', 'hiddenAuto', 'title', 'showTitle', 'overlays', 'ease']);
+    const NOPREP = new Set(['captions', 'name', 'dur', 'trans', 'transDur', 'hiddenAuto', 'title', 'showTitle', 'overlays', 'ease', 'doc', 'fade', 'labels']); // doc : la copie d'une carte (docRev change avec elle)
     /** ce qui oblige à refaire la préparation (pas le nom, la durée, les légendes à soi… ni ce que la préparation a trouvé : _from, _to) */
     const sig = s => JSON.stringify(Object.fromEntries(Object.entries(s).filter(([k]) => !NOPREP.has(k) && !k.startsWith('_'))));
     /** une image ; au bout de ms sans réponse (pas de réseau, site lent) : null, le dessin continue sans elle */
@@ -204,6 +207,8 @@
             const st = {type: scene.type, W, H};
             if (scene.type === 'image') st.img = await mediaImg(scene.media);
             if (scene.type === 'diagram') await prepDiagram(scene, st);
+            if (scene.type === 'vectormap') await prepVectorMap(scene, st, onStep);
+            if (scene.type === 'house') await prepHouse(scene, st, onStep);
             if (['migrations', 'race', 'pyramid', 'line', 'tree'].includes(scene.type)) { onStep?.(T('Lecture de la base…')); st.D = await loadPeople(); }
             if (scene.type === 'migrations') await prepMigrations(scene, st, W, H, onStep);
             if (scene.type === 'race') { st.R = raceData(st.D, scene); fillRange(scene, st.R); }
@@ -244,6 +249,112 @@
         })();
         st.rasters.set(key, pr); if (st.rasters.size > 80) st.rasters.delete(st.rasters.keys().next().value);
         return pr;
+    }
+
+    /* ── 🗺️ carte vectorielle (heritage-vector-map.js) : le curseur du temps joue de A à B ; une image par « état » de la carte (gardée) ── */
+    const inlineCache = new Map();
+    /** les images « media/… » d'un SVG, mises dedans (un SVG chargé comme image ne va rien chercher dehors) */
+    async function inlineSvg(svg) {
+        const refs = [...new Set([...String(svg).matchAll(/href="(media\/[^"]+)"/g)].map(m => m[1]))];
+        for (const r of refs) {
+            if (!inlineCache.has(r)) inlineCache.set(r, (async () => { try { const b = await (await fetch(r.replace(/&amp;/g, '&'))).blob(); return await new Promise(ok => { const fr = new FileReader(); fr.onload = () => ok(String(fr.result)); fr.onerror = () => ok(''); fr.readAsDataURL(b); }); } catch (_) { return ''; } })());
+            const d = await inlineCache.get(r); if (/^data:image\//.test(d)) svg = svg.split(`href="${r}"`).join(`href="${d}"`);
+        }
+        return svg;
+    }
+    /** un SVG (texte) → {img, w, h} à la bonne taille : environ 2 fois la largeur du film, pour que la caméra reste nette */
+    async function svgRaster(svg, W, bg = '') {
+        if (!/xmlns=/.test(svg)) svg = svg.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+        const [w, h] = svgSize(svg), k = Math.max(.05, Math.min(6, (W * 2) / w, 4096 / Math.max(w, h)));
+        svg = svg.replace(/<svg([^>]*?)\swidth="[^"]*"/, '<svg$1').replace(/<svg([^>]*?)\sheight="[^"]*"/, '<svg$1').replace('<svg', `<svg width="${Math.round(w * k)}" height="${Math.round(h * k)}"`);
+        const img = await loadImg('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(await inlineSvg(svg))); if (!img) return null;
+        let out = img; if (bg) { out = makeCanvas(Math.round(w * k), Math.round(h * k)); const g2 = out.getContext('2d'); g2.fillStyle = bg; g2.fillRect(0, 0, out.width, out.height); g2.drawImage(img, 0, 0, out.width, out.height); }
+        return {img: out, w: Math.round(w * k), h: Math.round(h * k)};
+    }
+    /** les années d'une carte : celles où quelque chose apparaît (yf) ou disparaît (yt + 1) */
+    function mapYears(doc) {
+        const ys = new Set(), walk = arr => (arr || []).forEach(o => { if (!o) return; const f = Number(o.map?.yf ?? o.yf), t = Number(o.map?.yt ?? o.yt); if (f) ys.add(Math.round(f)); if (t) ys.add(Math.round(t) + 1); if (o.children) walk(o.children); });
+        walk(doc?.objs); return [...ys].sort((a, b) => a - b);
+    }
+    async function prepVectorMap(scene, st, onStep) {
+        st.ok = false; const V = ext.vectorInternals;
+        if (!V?.docSvg) { st.err = T('Le dessin vectoriel n’est pas chargé.'); return; }
+        let doc = scene.doc || null;
+        if (scene.docId) { onStep?.(T('Lecture de la carte…')); try { doc = (await A().api('vector_doc', {id: scene.docId})).doc; } catch (_) { doc = scene.doc || null; } }
+        if (!doc || !Array.isArray(doc.objs)) { st.err = T('Carte introuvable'); return; }
+        st.doc = doc; st.changes = mapYears(doc); st.ok = true; st.rasters = new Map();
+        if (st.changes.length) { scene._from = st.changes[0]; scene._to = Math.max(st.changes[0] + 1, st.changes[st.changes.length - 1]); }
+    }
+    /** l'état de la carte à l'année y : la dernière année de changement atteinte (null : avant tout, tout ce qui n'a pas de date de début) */
+    const mapKey = (st, y) => { if (!Number.isFinite(y)) return 'all'; let k = null; for (const c of st.changes) if (c <= y + 1e-9) k = c; return k === null ? (st.changes[0] || 1) - 1 : k; };
+    async function mapRaster(scene, st, key) {
+        if (st.rasters.has(key)) return st.rasters.get(key);
+        const pr = (async () => {
+            const d = st.doc, year = key === 'all' ? null : (Number(key) || -1); // l'année 0 n'existe pas (et « 0 » voudrait dire « toutes »)
+            return svgRaster(ext.vectorInternals.docSvg({...d, map: {...(d.map || {}), year}}), st.W, d.bg && d.bg !== 'transparent' ? '' : '#ffffff');
+        })();
+        st.rasters.set(key, pr); if (st.rasters.size > 80) st.rasters.delete(st.rasters.keys().next().value);
+        return pr;
+    }
+    async function drawVectorMap(g, s, st, p, year, W, H, proj) {
+        g.fillStyle = s.bg || '#ffffff'; g.fillRect(0, 0, W, H);
+        if (!st.ok) { text(g, st.err || T('Carte introuvable'), W / 2, H / 2, {size: H * .04, align: 'center', color: '#333', font: fontOf(proj)}); return; }
+        const pad = Math.round(Math.min(W, H) * .03), top = s.title && s.showTitle !== false ? H * .11 : pad;
+        const put = async (key, alpha) => {
+            const r = await mapRaster(s, st, key); if (!r) return;
+            const k = Math.min((W - pad * 2) / r.w, (H - top - pad) / r.h), w = r.w * k, h = r.h * k, x = (W - w) / 2, yy = top + (H - top - pad - h) / 2;
+            const c = camAt(s.cam, p), [sx, sy, sw, sh] = camRect(c, r.w, r.h);
+            g.globalAlpha = alpha; g.drawImage(r.img, sx, sy, sw, sh, x, yy, w, h); g.globalAlpha = 1;
+        };
+        const key = mapKey(st, year); await put(key, 1);
+        // en douceur : ce qui arrive (ou s'en va) à la prochaine année de changement se montre peu à peu, pendant environ 0,7 s du film
+        if (s.smooth !== false && Number.isFinite(year)) {
+            const next = st.changes.find(c => c > year + 1e-9), R = range(s), perSec = Math.abs((num(R.to) - num(R.from)) || 1) / durOf(s), win = Math.max(.05, perSec * .7);
+            if (next !== undefined && next - year < win) await put(next, easing.smooth(clamp(1 - (next - year) / win, 0, 1)));
+        }
+    }
+
+    /* ── 🏠 maison par époques (heritage-house.js : ext.houseEpochPlans) : le plan de chaque époque tour à tour, en fondu, l'année en légende ── */
+    const epochYear = e => { const m = String(e?.date || '').match(/-?\d{3,4}/); return m ? Number(m[0]) : NaN; };
+    async function prepHouse(scene, st, onStep) {
+        st.ok = false;
+        if (!ext.houseEpochPlans) { st.err = T('La maison n’est pas chargée.'); return; }
+        if (!scene.houseId) { st.err = T('Choisis une maison.'); return; }
+        onStep?.(T('Lecture de la maison…'));
+        let plans = []; try { plans = await ext.houseEpochPlans(scene.houseId, {level: Number(scene.level) || 0}); } catch (e) { st.err = e.message || T('Maison introuvable'); return; }
+        plans = (plans || []).filter(x => x && x.svg);
+        if (!plans.length) { st.err = T('Le plan de cette maison est vide.'); return; }
+        // un même cadre pour toutes les époques : la maison ne saute pas d'une époque à l'autre
+        const boxes = plans.map(x => { const m = String(x.svg).match(/viewBox="([-\d.]+) ([-\d.]+) ([\d.]+) ([\d.]+)"/); return m ? m.slice(1).map(Number) : null; }).filter(Boolean);
+        if (boxes.length) {
+            const x0 = Math.min(...boxes.map(b => b[0])), y0 = Math.min(...boxes.map(b => b[1])), x1 = Math.max(...boxes.map(b => b[0] + b[2])), y1 = Math.max(...boxes.map(b => b[1] + b[3]));
+            plans = plans.map(x => ({...x, svg: String(x.svg).replace(/viewBox="[^"]*"/, `viewBox="${x0} ${y0} ${x1 - x0} ${y1 - y0}"`).replace(/<svg([^>]*?)\swidth="[^"]*"\s+height="[^"]*"/, `<svg$1 width="${Math.round(x1 - x0)}" height="${Math.round(y1 - y0)}"`)}));
+        }
+        st.plans = plans.map(x => ({...x, year: epochYear(x)})); st.ok = true; st.rasters = new Map();
+    }
+    async function houseRaster(st, i) {
+        if (!st.rasters.has(i)) st.rasters.set(i, svgRaster(st.plans[i].svg, st.W, '#ffffff'));
+        return st.rasters.get(i);
+    }
+    const epochLabel = e => [e.date, e.label].filter(Boolean).join(' · ');
+    /** l'époque montrée à l'avancement p : {i, k (0..1 : le fondu vers la suivante)} */
+    function houseAt(s, st, p) {
+        const n = st.plans?.length || 0; if (!n) return {i: 0, k: 0};
+        const x = clamp(p, 0, .99999) * n, i = Math.floor(x), local = x - i, fade = clamp(Number(s.fade ?? .3), 0, .9);
+        return {i, k: i < n - 1 && fade > 0 && local > 1 - fade ? easing.smooth((local - (1 - fade)) / fade) : 0};
+    }
+    async function drawHouse(g, s, st, p, W, H, proj) {
+        g.fillStyle = s.bg || '#ffffff'; g.fillRect(0, 0, W, H);
+        if (!st.ok) { text(g, st.err || T('Maison introuvable'), W / 2, H / 2, {size: H * .04, align: 'center', color: '#333', font: fontOf(proj)}); return {}; }
+        const pad = Math.round(Math.min(W, H) * .04), top = s.title && s.showTitle !== false ? H * .11 : pad, bottom = s.labels !== false ? H * .1 : pad;
+        const put = async (i, alpha) => {
+            const r = await houseRaster(st, i); if (!r) return;
+            const k = Math.min((W - pad * 2) / r.w, (H - top - bottom) / r.h), w = r.w * k, h = r.h * k;
+            g.globalAlpha = alpha; g.drawImage(r.img, (W - w) / 2, top + (H - top - bottom - h) / 2, w, h); g.globalAlpha = 1;
+        };
+        const {i, k} = houseAt(s, st, p); await put(i, 1); if (k > .001) await put(i + 1, k);
+        const e = st.plans[k > .5 ? i + 1 : i];
+        return {year: e.year, cap: s.labels !== false ? epochLabel(e) : ''};
     }
 
     /* ── migrations : le fond de carte une fois, en grand (la caméra y découpe) ── */
@@ -361,11 +472,13 @@
     }
     async function drawScene(g, proj, s, p, W, H, local) {
         const st = await prepare(s, W, H), R = range(s), font = fontOf(proj), ov = {...(proj.overlays || {}), ...(s.overlays || {})};
-        const year = ['diagram', 'migrations', 'race', 'pyramid', 'line', 'borders'].includes(s.type) ? yearAt(R, p, st.warp) : NaN;
-        let legend = [];
+        let year = ['diagram', 'migrations', 'race', 'pyramid', 'line', 'borders', 'vectormap'].includes(s.type) ? yearAt(R, p, st.warp) : NaN;
+        let legend = [], epochCap = '';
         if (s.type === 'title') drawTitle(g, s, p, W, H, font);
         else if (s.type === 'image') drawImage(g, s, st, p, W, H);
         else if (s.type === 'diagram') await drawDiagram(g, s, st, p, year, W, H, proj);
+        else if (s.type === 'vectormap') await drawVectorMap(g, s, st, p, year, W, H, proj);
+        else if (s.type === 'house') { const r = await drawHouse(g, s, st, p, W, H, proj); year = Number.isFinite(r.year) ? r.year : NaN; epochCap = r.cap || ''; }
         else if (s.type === 'migrations') legend = drawMigrations(g, s, st, p, year, W, H, font);
         else if (s.type === 'race') legend = drawRace(g, s, st, year, W, H, font, proj);
         else if (s.type === 'pyramid') drawPyramid(g, s, st, year, W, H, font, proj);
@@ -396,6 +509,7 @@
         const cur = caps.map(c => { const start = Number.isFinite(c.year) && Number.isFinite(year) ? null : Number(c.t) || 0; return {c, start}; })
             .find(({c, start}) => { if (start === null) { const yd = (Number(c.dur) || 3.5) / durOf(s) * ((R.to - R.from) || 1); return year >= c.year && year < c.year + yd; } const d = (Number(c.dur) || 3.5) / durOf(s); return p >= start && p < start + d; });
         if (cur && ov.caption !== 'off') drawCaption(g, cur.c.text, W, H, font, ov);
+        else if (epochCap && ov.caption !== 'off') drawCaption(g, epochCap, W, H, font, ov); // 🏠 l'époque montrée (sa date, son nom)
         return {year};
     }
     const lum = hex => { const m = /^#([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return 1; const n = parseInt(m[1], 16); return ((n >> 16) * .299 + ((n >> 8) & 255) * .587 + (n & 255) * .114) / 255; };
@@ -558,6 +672,6 @@
         });
     }
 
-    ext.animRender = {FORMATS, sizeOf, scenesAt, totalDur, durOf, yearAt, makeWarp, camAt, camRect, prepare, drawFrame, autoCaptions, raceData, pyramidData, lineData, fanData, easing, loadPeople, indexPeople, PALETTE, FONT, range, clearCache: (all = true) => { cache.clear(); if (all) { people = null; bgCache.clear(); tileCache.clear(); } }};
+    ext.animRender = {mapYears, houseAt, epochLabel, epochYear, FORMATS, sizeOf, scenesAt, totalDur, durOf, yearAt, makeWarp, camAt, camRect, prepare, drawFrame, autoCaptions, raceData, pyramidData, lineData, fanData, easing, loadPeople, indexPeople, PALETTE, FONT, range, clearCache: (all = true) => { cache.clear(); if (all) { people = null; bgCache.clear(); tileCache.clear(); } }};
     if (typeof module === 'object' && module.exports) module.exports = ext.animRender;
 })();

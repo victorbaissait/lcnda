@@ -303,7 +303,7 @@
     const toDataUrl = async url => { if (url.startsWith('data:')) return url; if (dataUrlCache.has(url)) return dataUrlCache.get(url);
         const p = fetch(url).then(r => r.ok ? r.blob() : null).then(b => b ? new Promise(res => { const fr = new FileReader(); fr.onload = () => res(String(fr.result)); fr.onerror = () => res(''); fr.readAsDataURL(b); }) : '').catch(() => '');
         dataUrlCache.set(url, p); if (dataUrlCache.size > 300) dataUrlCache.delete(dataUrlCache.keys().next().value); return p; };
-    async function slideCanvas(show, s, scale = 1, at = 'end') {
+    async function slideCanvas(show, s, scale = 1, at = 'end', {clear = false} = {}) { // clear : fond transparent (un objet seul, pour le PowerPoint)
         const [W, H] = dims(show), host = document.createElement('div'); host.innerHTML = renderBuilt(show, s, 'raster', at);
         const el = host.firstElementChild;
         await Promise.all([...el.querySelectorAll('img')].map(async im => { const u = im.getAttribute('src'); const d = u ? await toDataUrl(u) : ''; if (d) im.setAttribute('src', d); else im.remove(); }));
@@ -312,7 +312,7 @@
         const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
         await img.decode().catch(() => new Promise(r => { img.onload = r; img.onerror = r; }));
         const c = document.createElement('canvas'); c.width = Math.round(W * scale); c.height = Math.round(H * scale);
-        const g = c.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, c.width, c.height); try { g.drawImage(img, 0, 0, c.width, c.height); } catch (_) {}
+        const g = c.getContext('2d'); if (!clear) { g.fillStyle = '#000'; g.fillRect(0, 0, c.width, c.height); } try { g.drawImage(img, 0, 0, c.width, c.height); } catch (_) {}
         return c;
     }
 
@@ -635,7 +635,7 @@
         let cur = 0, sel = new Set(), editing = null, dirty = !!ctx.dirty, zoom = 'fit', K = .5, tab = 'format', hist = [], hi = -1, navFocus = false, snap = prefs().snap !== false, savedRange = null, escUsed = false, closed = false;
         const collapsed = new Set(), docAc = new AbortController(); // les écoutes sur la page s'arrêtent à la fermeture
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal kn-dlg';
-        const fileMenu = [['import', '⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)…'], ['-'], ['exp_pdf', '🖨 PDF / imprimer (une diapositive par page)'], ['exp_pdfnotes', '🖨 PDF avec les notes de l’orateur'], ['exp_png', '🖼️ Cette diapositive en PNG'], ['exp_pngall', '🗂️ Toutes les diapositives en PNG (.zip)'], ['exp_video', '⏺ Vidéo (WebM)'], ['exp_json', '⤓ Fichier de la présentation (.json)']].map(([k, l]) => (l ? [k, i18n(l)] : [k]));
+        const fileMenu = [['import', '⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)…'], ['-'], ['exp_pdf', '🖨 PDF / imprimer (une diapositive par page)'], ['exp_pdfnotes', '🖨 PDF avec les notes de l’orateur'], ['exp_png', '🖼️ Cette diapositive en PNG'], ['exp_pngall', '🗂️ Toutes les diapositives en PNG (.zip)'], ['exp_video', '⏺ Vidéo (WebM)'], ['exp_pptx', '📊 PowerPoint (.pptx)'], ['exp_json', '⤓ Fichier de la présentation (.json)'], ['-'], ['sendto', '📤 Envoyer vers…']].map(([k, l]) => (l ? [k, i18n(l)] : [k]));
         dlg.innerHTML = `<div class="kn">
             <header class="kn-top"><span class="kn-logo">🎤</span><input class="kn-name" data-kn-name value="${esc(name)}" maxlength="200" aria-label="${esc(i18n('Nom de la présentation'))}">
                 <span class="kn-grp" data-tbg="kn-hist" data-tbg-label="${esc(i18n('Annuler / rétablir'))}"><button type="button" class="kn-tb" data-kn-cmd="undo" title="${esc(i18n('Annuler (⌘Z)'))}" data-tb-label="${esc(i18n('↶ Annuler (⌘Z)'))}" data-shortcut="⌘Z"><b>↶</b><span class="kn-tbl">${esc(i18n('Annuler'))}</span></button><button type="button" class="kn-tb" data-kn-cmd="redo" title="${esc(i18n('Rétablir (⇧⌘Z)'))}" data-tb-label="${esc(i18n('↷ Rétablir (⇧⌘Z)'))}" data-shortcut="⇧⌘Z"><b>↷</b><span class="kn-tbl">${esc(i18n('Rétablir'))}</span></button></span>
@@ -654,7 +654,7 @@
                     ${tbtn('data-kn-cmd="group"', '⊞', 'Grouper', 'Grouper (⌘G) — ⇧⌘G pour dissocier')}${tbtn('data-kn-cmd="ungroup"', '⊟', 'Dissocier', 'Dissocier (⇧⌘G)')}${tbtn('data-kn-cmd="lock"', '🔒', 'Verrouiller', 'Verrouiller / déverrouiller (⌘L)')}${tbtn('data-kn-cmd="connect"', '↔', 'Relier', 'Relier deux objets par un trait qui les suit (choisis-en deux)')}${tbtn('data-kn-cmd="merge"', '⊕', 'Fusionner', 'Fusionner deux formes : union, soustraction, intersection')}${tbtn('data-kn-cmd="master"', '🗂', 'Masque', 'Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque')}
                 </span>
                 <span class="kn-grp" data-tbg="kn-play" data-tbg-label="${esc(i18n('Lecture'))}">${tbtn('data-kn-cmd="play"', '▶', 'Lire', 'Lire en plein écran depuis le début (⌥⌘↩)')}${tbtn('data-kn-cmd="playhere"', '⏵', 'D’ici', 'Lire depuis cette diapositive (⌘↩)')}${tbtn('data-kn-cmd="presenter"', '🎤', 'Présentateur', 'Plein écran + fenêtre du présentateur (notes, suivante, chronomètre)')}</span>
-                <span class="kn-grp" data-tbg="kn-file" data-tbg-label="${esc(i18n('Fichier'))}">${tbtn('data-kn-cmd="import"', '⤒', 'Importer', 'PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON')}${tbtn('data-kn-cmd="story"', '✨', 'Récit', 'Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne')}</span>
+                <span class="kn-grp" data-tbg="kn-file" data-tbg-label="${esc(i18n('Fichier'))}">${tbtn('data-kn-cmd="import"', '⤒', 'Importer', 'PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON')}${tbtn('data-kn-cmd="story"', '✨', 'Récit', 'Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne')}${tbtn('data-kn-cmd="sendto"', '📤', 'Envoyer', 'Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site')}</span>
                 <span class="kn-spacer"></span><span class="kn-state" data-kn-state data-ui-status></span>
                 ${ext.tbButton ? ext.tbButton('keynote') : ''}<button type="button" class="button small secondary" data-kn-cmd="export" title="${esc(i18n('PDF, impression, images, vidéo, fichier de la présentation'))}">${esc(i18n('⤓ Exporter ▾'))}</button><button type="button" class="button small" data-kn-cmd="save" data-shortcut="⌘S" title="${esc(i18n('Enregistrer'))}">${esc(i18n('💾 Enregistrer'))}</button>${ext.fullButton ? ext.fullButton('keynote') : ''}<button type="button" class="icon-button" data-kn-cmd="close" aria-label="${esc(i18n('Fermer'))}">×</button></header>
             <div class="kn-main">
@@ -1192,6 +1192,7 @@
                     {id: 'png', hint: i18n('cette diapositive'), run: o => exportPng(show, n, [cur], {...o, direct: true})},
                     {id: 'zip', label: i18n('🗂 Toutes en PNG'), hint: i18n('un fichier .zip'), ext: 'zip', run: o => exportPng(show, n, null, {...o, direct: true, saveCopy: false})},
                     {id: 'video', label: i18n('🎬 Vidéo'), hint: i18n('WebM, avec la musique'), ext: 'webm', run: o => exportVideo(show, n, status, {...o, direct: true, alive: () => dlg.isConnected})},
+                    {id: 'pptx', label: i18n('📊 PowerPoint'), hint: i18n('.pptx : textes, images, formes, tableaux'), ext: 'pptx', copy: false, run: o => exportPptx(show, n, {...o, direct: true, status})},
                     {id: 'print', hint: i18n('aperçu, pages, notes'), run: async () => { exportPrint(show, n, false, cur); }},
                     {id: 'file', hint: i18n('pour la rouvrir ou la partager'), ext: 'json', run: async o => download(new Blob([JSON.stringify({type: 'lcnda-presentation', version: 1, name: n, show: forSave()}, null, 1)], {type: 'application/json'}), o.filename)},
                 ]});
@@ -1210,6 +1211,22 @@
                 toast(`✨ ${i18n('{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama.', {n: A().plural(list.length, 'diapositive ajoutée', 'diapositives ajoutées')})}`);
             } catch (e) { status(''); toast(e.message, 'error'); }
         }
+        /* ─── 📤 Envoyer vers… : la présentation devient une vidéo, rangée dans les médias, puis continue dans le Montage ou sur le site ─── */
+        let sending = false;
+        async function sendVideo() {
+            if (sending) return; if (editing) stopEdit();
+            if (!ext.sendTo) return toast(i18n('« Envoyer vers… » n’est pas chargé.'), 'error');
+            const list = show.slides.filter(s => !s.skip), total = list.reduce((a, s) => a + clamp(num(s.dur, 5), 1, 600), 0);
+            if (!list.length) return toast(i18n('Aucune diapositive.'), 'error');
+            if (!await A().confirmBox(i18n('La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement.', {time: fmt(total)}), {title: i18n('📤 Envoyer la présentation'), okLabel: i18n('Fabriquer la vidéo'), danger: false})) return;
+            sending = true;
+            try {
+                const blob = await exportVideo(show, ctl.name, status, {direct: true, returnBlob: true, alive: () => dlg.isConnected}); if (!blob) return;
+                status(i18n('Rangement de la vidéo dans les médias…')); const title = ctl.name || i18n('Présentation'), u = await uploadBlob(blob, `${safeName(title)}.webm`, 'video', title); status('');
+                return ext.sendTo('video', {media: {id: Number(u.media_id), filename: u.filename, title}}, {anchor: $('[data-kn-cmd="sendto"]'), title, exclude: ['keynote', 'slideshow']});
+            } catch (e) { status(''); toast(e.message || String(e), 'error'); }
+            finally { sending = false; }
+        }
         async function runCmd(k) {
             if (k.startsWith('align:')) return align(k.slice(6));
             if (k.startsWith('order:')) return order(k.slice(6));
@@ -1222,6 +1239,8 @@
                 case 'exp_png': return exportPng(show, ctl.name, [cur]); case 'exp_pngall': return exportPng(show, ctl.name, null);
                 case 'exp_json': return download(new Blob([JSON.stringify({type: 'lcnda-presentation', version: 1, name: ctl.name, show: forSave()}, null, 1)], {type: 'application/json'}), `${safeName(ctl.name)}.json`);
                 case 'exp_video': return exportVideo(show, ctl.name, status, {alive: () => dlg.isConnected});
+                case 'exp_pptx': if (editing) stopEdit(); return exportPptx(show, ctl.name, {status});
+                case 'sendto': return sendVideo();
                 case 'export': return exportDialog();
                 case 'story': return storyHere();
                 case 'newslide': return addSlide();
@@ -1663,6 +1682,9 @@
         return {slides, notes: [i18n('PDF : {n} ; le texte et les dessins du PDF ne sont pas lus.', {n: A().plural(slides.length, 'image reprise', 'images reprises')})]};
     }
     /* ─── Markdown, texte : « # » = une diapositive, « - » = une puce, « --- » sépare, « > » une citation ─── */
+    /** des lignes {t: 'p' | 'ul' | 'ol', h: html, lvl} → le HTML d'une zone de texte (listes imbriquées) */
+    const listItemsHtml = items => { let h = ''; const stack = [], closeTo = d => { while (stack.length > d) h += `</${stack.pop()}>`; };
+        items.forEach(it => { if (it.t === 'p') { closeTo(0); h += `<div>${it.h || '<br>'}</div>`; return; } const d = Math.min(stack.length + 1, (it.lvl || 0) + 1); closeTo(d); if (stack.length === d && stack[d - 1] !== it.t) closeTo(d - 1); while (stack.length < d) { h += `<${it.t}>`; stack.push(it.t); } h += `<li>${it.h}</li>`; }); closeTo(0); return h; };
     function importText(txt, show, md = true) {
         const [W, H] = dims(show), th = themeOf(show), lines = String(txt || '').replace(/\r\n?/g, '\n').split('\n').slice(0, 20000), list = [];
         let cur = null, fence = false, pendingNew = false;
@@ -1686,8 +1708,7 @@
                 if (l.trim()) cur.body.push({t: 'p', h: inline(l.trim())});
             });
         } else String(txt || '').replace(/\r\n?/g, '\n').split(/\n\s*\n/).map(b => b.trim()).filter(Boolean).slice(0, 400).forEach(b => { const ls = b.split('\n'); start(ls[0].replace(/^#+\s*/, '')); ls.slice(1).forEach(x => { const li = x.match(/^\s*[-*•]\s+(.*)$/); cur.body.push(li ? {t: 'ul', h: inline(li[1]), lvl: 0} : {t: 'p', h: inline(x)}); }); });
-        const bodyHtml = items => { let h = ''; const stack = [], closeTo = d => { while (stack.length > d) h += `</${stack.pop()}>`; };
-            items.forEach(it => { if (it.t === 'p') { closeTo(0); h += `<div>${it.h || '<br>'}</div>`; return; } const d = Math.min(stack.length + 1, (it.lvl || 0) + 1); closeTo(d); if (stack.length === d && stack[d - 1] !== it.t) closeTo(d - 1); while (stack.length < d) { h += `<${it.t}>`; stack.push(it.t); } h += `<li>${it.h}</li>`; }); closeTo(0); return h; };
+        const bodyHtml = listItemsHtml;
         return list.filter(c => !empty(c) || c.notes.length).slice(0, 500).map((c, i) => {
             const quoteOnly = c.quote.length && !c.body.length, layout = quoteOnly ? 'quote' : c.body.length ? 'title-content' : i === 0 ? 'title' : 'section';
             const s = newSlide(show, layout), T = s.objs.find(o => ['title', 'quote'].includes(o.role)), Sb = s.objs.find(o => o.role === 'sub'), Bd = s.objs.find(o => o.role === 'body');
@@ -1834,11 +1855,208 @@
             mr.stop(); mus?.pause(); await done; ac.close().catch(() => {}); status('');
             if (stopped) { toast(i18n('Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement.')); return; }
             const blob = new Blob(chunks, {type: 'video/webm'}); if (!blob.size) { if (o.direct) throw new Error(i18n('la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur')); return toast(i18n('La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur.'), 'error'); }
-            if (o.direct) { download(blob, o.filename || `${safeName(name)}.webm`); if (o.saveCopy) await uploadBlob(blob, o.filename || 'presentation.webm', 'video', name || i18n('Présentation')); toast(i18n(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.')); return; }
-            if (await A().confirmBox(i18n('Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger.'), {title: i18n('Vidéo prête'), okLabel: i18n('Ajouter aux Médias'), cancelLabel: i18n('Télécharger seulement'), danger: false})) { const u = await uploadBlob(blob, 'presentation.webm', 'video', name || i18n('Présentation')); toast(i18n(u ? 'Vidéo ajoutée aux Médias.' : 'Envoi impossible.')); }
+            if (o.returnBlob) return blob; // 📤 Envoyer vers… : la vidéo va dans les médias puis dans un autre outil
+            const vt = name || i18n('Présentation');
+            if (o.direct) { download(blob, o.filename || `${safeName(name)}.webm`); const u = o.saveCopy ? await uploadBlob(blob, o.filename || 'presentation.webm', 'video', vt) : null; toast(i18n(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.'), '', sendVideoOpts(u, vt)); return; }
+            if (await A().confirmBox(i18n('Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger.'), {title: i18n('Vidéo prête'), okLabel: i18n('Ajouter aux Médias'), cancelLabel: i18n('Télécharger seulement'), danger: false})) { const u = await uploadBlob(blob, 'presentation.webm', 'video', vt); toast(i18n(u ? 'Vidéo ajoutée aux Médias.' : 'Envoi impossible.'), '', sendVideoOpts(u, vt)); }
             else download(blob, `${safeName(name)}.webm`);
         } catch (e) { status(''); if (o.direct) throw e; toast(i18n('Vidéo impossible : {error}', {error: e.message}), 'error'); }
     }
+
+    /* ═════════ Exporter en PowerPoint (.pptx) : un vrai fichier OOXML (zip) — textes, images, formes, tableaux, fonds ═════════
+     * Ce qui n'a pas d'équivalent simple (graphique, fiche de la généalogie, liaison, forme fusionnée, vidéo) part en image. */
+    const EMU = 6350; // 1 point de la présentation = 6350 EMU : 1920 points = 13,33 pouces, la largeur d'une diapositive PowerPoint 16:9
+    const NS_A = 'http://schemas.openxmlformats.org/drawingml/2006/main', NS_R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships', NS_P = 'http://schemas.openxmlformats.org/presentationml/2006/main';
+    const NS3 = `xmlns:a="${NS_A}" xmlns:r="${NS_R}" xmlns:p="${NS_P}"`, XML_HEAD = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n';
+    const REL = t => `http://schemas.openxmlformats.org/officeDocument/2006/relationships/${t}`;
+    const xe = v => String(v ?? '').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f￾￿]/g, '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+    const emu = v => Math.round(num(v) * EMU);
+    /** #rgb, #rrggbb, #rrggbbaa, rgb(…) → <a:srgbClr> (op : l'opacité de l'objet en plus) */
+    function pClr(c, op = 1) {
+        let h = String(c || '').trim(), a = 1; const m = h.match(/^rgba?\(\s*(\d+)[ ,]+(\d+)[ ,]+(\d+)(?:[ ,/]+([\d.]+))?\s*\)$/i);
+        if (m) { h = '#' + [m[1], m[2], m[3]].map(x => clamp(Number(x), 0, 255).toString(16).padStart(2, '0')).join(''); if (m[4] != null) a = clamp(Number(m[4]), 0, 1); }
+        if (!hexOk(h)) h = '#000000'; h = h.slice(1); if (h.length <= 4) h = h.replace(/./g, x => x + x);
+        if (h.length === 8) { a *= parseInt(h.slice(6), 16) / 255; h = h.slice(0, 6); }
+        a *= clamp(num(op, 1), 0, 1);
+        return a < .999 ? `<a:srgbClr val="${h.slice(0, 6).toUpperCase()}"><a:alpha val="${Math.round(a * 100000)}"/></a:srgbClr>` : `<a:srgbClr val="${h.slice(0, 6).toUpperCase()}"/>`;
+    }
+    const pFill = (c, op) => `<a:solidFill>${pClr(c, op)}</a:solidFill>`;
+    const firstFont = css => (String(css || '').split(',')[0] || '').replace(/["']/g, '').trim();
+    const GENERIC_FONT = {serif: 'Times New Roman', 'sans-serif': 'Arial', monospace: 'Courier New', cursive: 'Comic Sans MS', fantasy: 'Impact', 'system-ui': 'Arial'};
+    const pFont = css => { const f = firstFont(css); return GENERIC_FONT[f] || f; };
+    const xfrm = (o, tag = 'a:xfrm') => `<${tag}${num(o.rot) ? ` rot="${Math.round(num(o.rot) * 60000)}"` : ''}${o.flipH ? ' flipH="1"' : ''}${o.flipV ? ' flipV="1"' : ''}><a:off x="${emu(o.x)}" y="${emu(o.y)}"/><a:ext cx="${Math.max(1, emu(o.w))}" cy="${Math.max(1, emu(o.h))}"/></${tag}>`;
+    const P_SHAPES = {rect: 'rect', rounded: 'roundRect', ellipse: 'ellipse', triangle: 'triangle', rtriangle: 'rtTriangle', diamond: 'diamond', pentagon: 'pentagon', hexagon: 'hexagon', octagon: 'octagon', star: 'star5', arrow: 'rightArrow', darrow: 'leftRightArrow', chevron: 'chevron', callout: 'wedgeRoundRectCallout', heart: 'heart', cross: 'plus', line: 'line', arrowline: 'line'};
+    const P_MASKS = {rounded: 'roundRect', circle: 'ellipse', arch: 'round2SameRect', hex: 'hexagon', diamond: 'diamond', triangle: 'triangle', star: 'star5'};
+    const P_ALIGN = {left: 'l', center: 'ctr', right: 'r', justify: 'just'}, P_ANCHOR = {top: 't', middle: 'ctr', bottom: 'b'};
+    /** le texte riche d'une zone → des paragraphes [{runs: [{t, b, i, u, s, color, size, font, br}], list: {t, lvl}}] */
+    function htmlParas(html) {
+        const root = document.createElement('div'); root.innerHTML = cleanHtml(html); const paras = []; let cur = null;
+        const open = list => { cur = {runs: [], list}; paras.push(cur); };
+        const styleOf = (n, st) => { const s2 = {...st}, tg = n.tagName, cs = n.style || {};
+            if (tg === 'B' || tg === 'STRONG' || /^(bold|[6-9]00)$/.test(cs.fontWeight || '')) s2.b = true; if (tg === 'I' || tg === 'EM' || cs.fontStyle === 'italic') s2.i = true;
+            if (tg === 'U' || /underline/.test(cs.textDecoration || cs.textDecorationLine || '')) s2.u = true; if (tg === 'S' || tg === 'STRIKE' || /line-through/.test(cs.textDecoration || cs.textDecorationLine || '')) s2.s = true;
+            if (tg === 'SUP') s2.base = 30000; if (tg === 'SUB') s2.base = -25000;
+            if (cs.color) s2.color = cs.color; const fs = String(cs.fontSize || '').match(/^([\d.]+)px$/); if (fs) s2.size = Number(fs[1]); if (cs.fontFamily) s2.font = cs.fontFamily; return s2; };
+        const walk = (node, st, list) => [...node.childNodes].forEach(n => {
+            if (n.nodeType === 3) { const t = n.textContent.replace(/[\r\n\t]+/g, ' '); if (!t) return; if (!cur) open(list); cur.runs.push({t, ...st}); return; }
+            if (n.nodeType !== 1) return; const tg = n.tagName;
+            if (tg === 'BR') { if (!cur) open(list); cur.runs.push({br: true}); return; }
+            const s2 = styleOf(n, st);
+            if (tg === 'UL' || tg === 'OL') { cur = null; walk(n, s2, {t: tg.toLowerCase(), lvl: list ? Math.min(8, list.lvl + 1) : 0}); cur = null; return; }
+            if (tg === 'DIV' || tg === 'P' || tg === 'LI') { cur = null; walk(n, s2, tg === 'LI' ? list : null); cur = null; return; } // une ligne : un paragraphe (ouvert au premier texte)
+            walk(n, s2, list);
+        });
+        walk(root, {}, null);
+        paras.forEach(p => { while (p.runs.length && p.runs.at(-1).br) p.runs.pop(); }); // le <br> final d'une ligne vide n'ajoute pas de ligne
+        return paras.length ? paras : [{runs: [], list: null}];
+    }
+    function pRun(r, base) {
+        if (r.br) return '<a:br/>';
+        const sz = clamp(Math.round(num(r.size, base.size) * .5 * 100), 100, 400000), font = pFont(r.font || base.font);
+        return `<a:r><a:rPr lang="fr-FR" sz="${sz}"${r.b || base.b ? ' b="1"' : ''}${r.i || base.i ? ' i="1"' : ''}${r.u ? ' u="sng"' : ''}${r.s ? ' strike="sngStrike"' : ''}${r.base ? ` baseline="${r.base}"` : ''} dirty="0">${pFill(r.color || base.color)}${font ? `<a:latin typeface="${xe(font)}"/><a:cs typeface="${xe(font)}"/>` : ''}</a:rPr><a:t>${xe(r.t)}</a:t></a:r>`;
+    }
+    /** des paragraphes → <a:p>… ; base : {size, color, font, b, i, align, lh} */
+    function pParas(paras, base) {
+        const sz = clamp(Math.round(num(base.size, 40) * 50), 100, 400000), lh = num(base.lh, 1.2), algn = P_ALIGN[base.align] || 'l';
+        return paras.map(p => { const L = p.list, lv = L ? L.lvl : 0, ind = Math.round(num(base.size, 40) * EMU * 1.1);
+            const bu = !L ? '<a:buNone/>' : L.t === 'ol' ? '<a:buFont typeface="+mj-lt"/><a:buAutoNum type="arabicPeriod"/>' : `<a:buFont typeface="Arial"/><a:buChar char="${lv % 2 ? '–' : '•'}"/>`;
+            return `<a:p><a:pPr algn="${algn}"${L ? ` marL="${ind * (lv + 1)}" indent="${-ind}"${lv ? ` lvl="${Math.min(8, lv)}"` : ''}` : ' marL="0" indent="0"'}><a:lnSpc><a:spcPct val="${Math.round(clamp(lh / 1.2, .5, 5) * 100000)}"/></a:lnSpc>${bu}</a:pPr>${p.runs.map(r => pRun(r, base)).join('')}<a:endParaRPr lang="fr-FR" sz="${sz}" dirty="0"/></a:p>`; }).join('');
+    }
+    const txBody = (paras, base, o, tag = 'p:txBody') => { const pad = emu(num(o.pad, 8));
+        return `<${tag}><a:bodyPr wrap="square" lIns="${pad}" tIns="${pad}" rIns="${pad}" bIns="${pad}" anchor="${P_ANCHOR[o.valign] || 't'}" rtlCol="0"><a:noAutofit/></a:bodyPr><a:lstStyle/>${pParas(paras, base)}</${tag}>`; };
+    const textBase = (o, th) => { const title = ['title', 'number'].includes(o.role);
+        return {size: num(o.size, 40), color: col(o.color, o.acc ? th.accent : th.fg), font: fontCss(o.font) || (title ? th.tf : th.bf), b: num(o.weight, title ? th.tw : 400) >= 600, i: !!o.italic, align: ALIGNS.includes(o.align) ? o.align : 'left', lh: num(o.lh, 1.2)}; };
+    const lnXml = (w, c, op, {dash = '', head = false, tail = false} = {}) => `<a:ln w="${Math.max(1, Math.round(w * EMU))}">${pFill(c, op)}${dash ? `<a:prstDash val="${dash === 'dot' ? 'sysDot' : 'dash'}"/>` : ''}${head ? '<a:headEnd type="triangle"/>' : ''}${tail ? '<a:tailEnd type="triangle"/>' : ''}</a:ln>`;
+    /** une image (média, data:) → {bytes, ext, w, h} en PNG ou JPEG (ce que PowerPoint lit partout) ; null si illisible */
+    async function pptImage(src) {
+        try {
+            const r = await fetch(src); if (!r.ok) return null; let blob = await r.blob();
+            const bm = await createImageBitmap(blob), w = bm.width, h = bm.height; let ext2 = blob.type === 'image/png' ? 'png' : blob.type === 'image/jpeg' ? 'jpeg' : '';
+            if (!ext2) { const c = document.createElement('canvas'); c.width = w; c.height = h; c.getContext('2d').drawImage(bm, 0, 0); blob = await new Promise(res => c.toBlob(res, 'image/png')); if (!blob) return null; ext2 = 'png'; }
+            bm.close?.(); return {bytes: new Uint8Array(await blob.arrayBuffer()), ext: ext2, w, h};
+        } catch (_) { return null; }
+    }
+    const canvasPng = c => new Promise(res => c.toBlob(b => res(b), 'image/png')).then(async b => (b ? new Uint8Array(await b.arrayBuffer()) : null));
+    /** la présentation → un Blob .pptx ; o.status(texte) pour suivre */
+    async function buildPptx(show, name, o = {}) {
+        const [W, H] = dims(show), th = themeOf(show), enc = new TextEncoder(), files = [], media = [], mediaBySrc = new Map(), list = show.slides;
+        if (!list.length) throw new Error(i18n('aucune diapositive'));
+        const addMedia = (bytes, ext2, key = '') => { if (key && mediaBySrc.has(key)) return mediaBySrc.get(key); const path = `media/image${media.length + 1}.${ext2}`; media.push({path, bytes}); if (key) mediaBySrc.set(key, path); return path; };
+        const imgCache = new Map(), loadImg = src => { if (!imgCache.has(src)) imgCache.set(src, pptImage(src)); return imgCache.get(src); };
+        const slideXml = [];
+        for (const [si, s] of list.entries()) {
+            o.status?.(i18n('PowerPoint : diapositive {n} / {total}', {n: String(si + 1), total: String(list.length)}));
+            const rels = [['rId1', REL('slideLayout'), '../slideLayouts/slideLayout1.xml']], relOf = path => { const f = rels.find(r => r[2] === `../${path}`); if (f) return f[0]; const id = `rId${rels.length + 1}`; rels.push([id, REL('image'), `../${path}`]); return id; };
+            let sid = 1; const parts = [], nm = (t, i) => `<p:cNvPr id="${++sid}" name="${xe(`${t} ${i}`)}"/>`;
+            // le fond
+            const b = s.bg && s.bg.type && s.bg.type !== 'theme' ? s.bg : th.bg, c1 = col(b.c1, '#ffffff'), c2 = col(b.c2, c1);
+            let bg = '';
+            if (b.type === 'image' && srcOf(b)) { const im = await loadImg(srcOf(b)); if (im) { const rid = relOf(addMedia(im.bytes, im.ext, srcOf(b))); bg = `<a:blipFill dpi="0" rotWithShape="1"><a:blip r:embed="${rid}"/><a:srcRect/><a:stretch><a:fillRect/></a:stretch></a:blipFill>`; if (num(b.dim)) parts.push(`<p:sp><p:nvSpPr>${nm('Voile', 0)}<p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${emu(W)}" cy="${emu(H)}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom>${pFill('#000000', clamp(num(b.dim), 0, 90) / 100)}<a:ln><a:noFill/></a:ln></p:spPr></p:sp>`); } }
+            if (!bg && b.type === 'gradient') bg = `<a:gradFill rotWithShape="1"><a:gsLst><a:gs pos="0">${pClr(c1)}</a:gs><a:gs pos="100000">${pClr(c2)}</a:gs></a:gsLst><a:lin ang="${Math.round((((num(b.angle, 135) - 90) % 360) + 360) % 360 * 60000)}" scaled="0"/></a:gradFill>`;
+            if (!bg && b.type === 'radial') bg = `<a:gradFill rotWithShape="1"><a:gsLst><a:gs pos="0">${pClr(c1)}</a:gs><a:gs pos="100000">${pClr(c2)}</a:gs></a:gsLst><a:path path="circle"><a:fillToRect l="50000" t="40000" r="50000" b="60000"/></a:path></a:gradFill>`;
+            if (!bg) bg = pFill(b.type === 'image' ? col(b.c1, '#000000') : c1);
+            // les objets : ceux du masque d'abord, puis ceux de la diapositive (sans ceux cachés)
+            const n = si + 1, fillN = h => String(h || '').replace(/\{n\}/g, String(n)).replace(/\{total\}/g, String(list.length));
+            const master = (show.master?.objs || []).filter(() => !s.noMaster).map(x => (x.t === 'text' ? {...x, html: fillN(x.html)} : x.t === 'shape' ? {...x, text: fillN(x.text)} : x));
+            const objs = [...master, ...(s.objs || [])].filter(x => !x.hide);
+            for (const [oi, ob] of objs.entries()) {
+                const op = clamp(num(ob.op, 1), 0, 1);
+                if (ob.t === 'text') {
+                    const base = textBase(ob, th), sp = ob.fill ? pFill(col(ob.fill), op) : '<a:noFill/>', ln = ob.stroke ? lnXml(num(ob.sw, 2), col(ob.stroke), op) : '<a:ln><a:noFill/></a:ln>';
+                    parts.push(`<p:sp><p:nvSpPr>${nm('Texte', oi + 1)}<p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr>${xfrm(ob)}<a:prstGeom prst="${num(ob.radius) ? 'roundRect' : 'rect'}"><a:avLst/></a:prstGeom>${sp}${ln}</p:spPr>${txBody(htmlParas(ob.html), base, ob)}</p:sp>`);
+                    continue;
+                }
+                if (ob.t === 'shape' && P_SHAPES[ob.kind || 'rect']) {
+                    const k = ob.kind || 'rect', line = k === 'line' || k === 'arrowline', fillC = col(ob.fill, th.accent);
+                    const strokeC = line ? col(ob.stroke, fillC) : ob.stroke ? col(ob.stroke, fillC) : '', sw = line ? num(ob.sw, 6) : ob.stroke ? num(ob.sw, 3) : 0, ar = k === 'arrowline' ? (ob.arrow || 'end') : (ob.arrow || 'none');
+                    const geo = line ? {...ob, y: num(ob.y) + num(ob.h) / 2, h: 0} : ob; // une ligne : le trait horizontal au milieu du cadre
+                    const fill = line || ob.nofill ? '<a:noFill/>' : pFill(fillC, op), ln = strokeC && sw ? lnXml(sw, strokeC, op, {dash: ob.dash, head: line && /start|both/.test(ar), tail: line && /end|both/.test(ar)}) : '<a:ln><a:noFill/></a:ln>';
+                    const tx = ob.text ? txBody([{runs: [{t: String(ob.text)}], list: null}], {...textBase({...ob, align: ob.align || 'center'}, th), color: col(ob.color, ob.nofill ? th.fg : inkOn(fillC))}, {...ob, valign: 'middle'}) : '';
+                    const xf = `<a:xfrm${num(ob.rot) ? ` rot="${Math.round(num(ob.rot) * 60000)}"` : ''}${ob.flipH ? ' flipH="1"' : ''}${ob.flipV ? ' flipV="1"' : ''}><a:off x="${emu(geo.x)}" y="${emu(geo.y)}"/><a:ext cx="${Math.max(1, emu(geo.w))}" cy="${line ? 0 : Math.max(1, emu(geo.h))}"/></a:xfrm>`;
+                    parts.push(line ? `<p:cxnSp><p:nvCxnSpPr>${nm('Ligne', oi + 1)}<p:cNvCxnSpPr/><p:nvPr/></p:nvCxnSpPr><p:spPr>${xf}<a:prstGeom prst="line"><a:avLst/></a:prstGeom>${ln}</p:spPr></p:cxnSp>`
+                        : `<p:sp><p:nvSpPr>${nm('Forme', oi + 1)}<p:cNvSpPr/><p:nvPr/></p:nvSpPr><p:spPr>${xf}<a:prstGeom prst="${P_SHAPES[k]}"><a:avLst/></a:prstGeom>${fill}${ln}</p:spPr>${tx || txBody([{runs: [], list: null}], textBase(ob, th), {...ob, valign: 'middle'})}</p:sp>`);
+                    continue;
+                }
+                if (ob.t === 'image' && srcOf(ob)) {
+                    const src = srcOf(ob), im = await loadImg(src); if (!im) continue;
+                    const rid = relOf(addMedia(im.bytes, im.ext, src)), fit = ['cover', 'contain', 'fill'].includes(ob.fit) ? ob.fit : 'cover', px = clamp(num(ob.px, 50), 0, 100) / 100, py = clamp(num(ob.py, 50), 0, 100) / 100, z = clamp(num(ob.zoom, 1), 1, 8);
+                    let box = ob, crop = '<a:srcRect/>';
+                    if (fit === 'contain') { const k0 = Math.min(ob.w / im.w, ob.h / im.h), dw = im.w * k0, dh = im.h * k0; box = {...ob, x: num(ob.x) + (ob.w - dw) * px, y: num(ob.y) + (ob.h - dh) * py, w: dw, h: dh}; }
+                    else if (fit === 'cover' || z > 1) { const k0 = (fit === 'cover' ? Math.max(ob.w / im.w, ob.h / im.h) : 1) * z, fw = fit === 'cover' ? Math.min(1, ob.w / (im.w * k0)) : 1 / z, fh = fit === 'cover' ? Math.min(1, ob.h / (im.h * k0)) : 1 / z;
+                        const l = px * (1 - fw), t = py * (1 - fh), P = v => Math.round(v * 100000); crop = `<a:srcRect l="${P(l)}" t="${P(t)}" r="${P(1 - fw - l)}" b="${P(1 - fh - t)}"/>`; }
+                    const geom = P_MASKS[ob.mask] || 'rect', ln = ob.border ? lnXml(num(ob.bw, 6), col(ob.border), op) : '';
+                    parts.push(`<p:pic><p:nvPicPr>${nm('Image', oi + 1).replace('/>', ` descr="${xe(ob.name || '')}"/>`)}<p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="${rid}">${op < 1 ? `<a:alphaModFix amt="${Math.round(op * 100000)}"/>` : ''}</a:blip>${crop}<a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr>${xfrm(box)}<a:prstGeom prst="${geom}"><a:avLst/></a:prstGeom>${ln}</p:spPr></p:pic>`);
+                    continue;
+                }
+                if (ob.t === 'table') {
+                    const rows = (Array.isArray(ob.rows) && ob.rows.length ? ob.rows : [['']]).slice(0, 200), nc = Math.max(1, ...rows.map(r => (Array.isArray(r) ? r : []).length)), cw = Math.max(1, Math.floor(emu(ob.w) / nc)), rh = Math.max(1, Math.floor(emu(ob.h) / rows.length));
+                    const base = textBase({...ob, size: num(ob.size, 26)}, th), bd = col(ob.stroke, '#9a9a9a'), bw = num(ob.sw, 1), headFill = col(ob.headFill, th.accent), edge = side => `<a:${side} w="${Math.max(1, Math.round(bw * EMU))}">${pFill(bd)}</a:${side}>`;
+                    const cell = (v, i) => { const head = ob.head && i === 0, fillC = head ? headFill : ob.fill ? col(ob.fill) : i % 2 ? '#7f7f7f1a' : '';
+                        const paras = String(v ?? '').split('\n').map(t => ({runs: t ? [{t, b: head}] : [], list: null}));
+                        return `<a:tc>${txBody(paras, {...base, color: head ? col(ob.headColor, inkOn(headFill)) : base.color, b: head || base.b}, {pad: 4, valign: 'middle'}, 'a:txBody')}<a:tcPr anchor="ctr">${edge('lnL')}${edge('lnR')}${edge('lnT')}${edge('lnB')}${fillC ? pFill(fillC) : '<a:noFill/>'}</a:tcPr></a:tc>`; };
+                    parts.push(`<p:graphicFrame><p:nvGraphicFramePr>${nm('Tableau', oi + 1)}<p:cNvGraphicFramePr><a:graphicFrameLocks noGrp="1"/></p:cNvGraphicFramePr><p:nvPr/></p:nvGraphicFramePr>${xfrm({...ob, rot: 0, flipH: false, flipV: false}, 'p:xfrm')}<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table"><a:tbl><a:tblPr firstRow="${ob.head ? 1 : 0}" bandRow="1"/><a:tblGrid>${Array.from({length: nc}, () => `<a:gridCol w="${cw}"/>`).join('')}</a:tblGrid>${rows.map((r, i) => `<a:tr h="${rh}">${Array.from({length: nc}, (_, j) => cell((Array.isArray(r) ? r : [])[j], i)).join('')}</a:tr>`).join('')}</a:tbl></a:graphicData></a:graphic></p:graphicFrame>`);
+                    continue;
+                }
+                if (ob.t === 'audio') continue; // un son n'a pas d'image
+                // le reste (graphique, généalogie, liaison, forme fusionnée, vidéo) : une image de l'objet seul, fond transparent
+                const link = ob.t === 'link', only = {...s, noMaster: true, bg: {type: 'color', c1: '#00000000'}, builds: [], objs: (s.objs || []).map(x => (x.id === ob.id ? {...x, rot: 0, hide: false} : {...x, hide: true}))};
+                if (master.includes(ob)) only.objs.push({...ob, rot: 0});
+                const cv = await slideCanvas(show, only, 1, 'end', {clear: true}); let box = link ? {x: 0, y: 0, w: W, h: H} : ob, png = null;
+                if (link) png = await canvasPng(cv);
+                else { const x0 = clamp(Math.floor(ob.x), 0, W), y0 = clamp(Math.floor(ob.y), 0, H), x1 = clamp(Math.ceil(ob.x + ob.w), 0, W), y1 = clamp(Math.ceil(ob.y + ob.h), 0, H); if (x1 - x0 < 1 || y1 - y0 < 1) continue;
+                    const c2c = document.createElement('canvas'); c2c.width = x1 - x0; c2c.height = y1 - y0; c2c.getContext('2d').drawImage(cv, x0, y0, c2c.width, c2c.height, 0, 0, c2c.width, c2c.height); png = await canvasPng(c2c); box = {...ob, x: x0, y: y0, w: x1 - x0, h: y1 - y0}; }
+                if (!png) continue;
+                const rid = relOf(addMedia(png, 'png'));
+                parts.push(`<p:pic><p:nvPicPr>${nm(TYPE_LABEL[ob.t] || 'Image', oi + 1)}<p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="${rid}"/><a:srcRect/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr>${xfrm(box)}<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>`);
+            }
+            const tr = s.trans || {}, trEl = {fade: '<p:fade/>', dissolve: '<p:dissolve/>', black: '<p:fade thruBlk="1"/>', push: `<p:push dir="${tr.dir === 'r' ? 'r' : tr.dir === 't' ? 'u' : tr.dir === 'b' ? 'd' : 'l'}"/>`, wipe: '<p:wipe/>', zoom: '<p:zoom/>', movein: '<p:cover/>', reveal: '<p:pull/>'}[tr.type] || (tr.type && tr.type !== 'none' ? '<p:fade/>' : '');
+            const trans = trEl || s.auto ? `<p:transition spd="${num(tr.dur, .8) < .6 ? 'fast' : num(tr.dur, .8) > 1.2 ? 'slow' : 'med'}"${s.auto ? ` advTm="${Math.round(clamp(num(s.dur, 5), .3, 600) * 1000)}"` : ''}>${trEl}</p:transition>` : '';
+            slideXml.push({xml: `${XML_HEAD}<p:sld ${NS3}${s.skip ? ' show="0"' : ''}><p:cSld><p:bg><p:bgPr>${bg}<a:effectLst/></p:bgPr></p:bg><p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>${parts.join('')}</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr>${trans}</p:sld>`,
+                rels: `${XML_HEAD}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${rels.map(([id, ty, tg]) => `<Relationship Id="${id}" Type="${ty}" Target="${xe(tg)}"/>`).join('')}</Relationships>`});
+        }
+        o.status?.(i18n('PowerPoint : assemblage du fichier…'));
+        const cx = emu(W), cy = emu(H), tf = pFont(th.tf) || 'Arial', bf = pFont(th.bf) || 'Arial', hex6 = c => pClr(c).match(/val="([0-9A-F]{6})"/)[1];
+        const relsXml = list2 => `${XML_HEAD}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${list2.map(([id, ty, tg]) => `<Relationship Id="${id}" Type="${ty}" Target="${tg}"/>`).join('')}</Relationships>`;
+        const emptyTree = '<p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr></p:spTree>';
+        const fillStyle = '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill>', lnStyle = w => `<a:ln w="${w}" cap="flat" cmpd="sng" algn="ctr"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/><a:miter lim="800000"/></a:ln>`;
+        const theme = `${XML_HEAD}<a:theme xmlns:a="${NS_A}" name="LCNDA"><a:themeElements><a:clrScheme name="LCNDA"><a:dk1><a:srgbClr val="${th.dark ? '000000' : hex6(th.fg)}"/></a:dk1><a:lt1><a:srgbClr val="FFFFFF"/></a:lt1><a:dk2><a:srgbClr val="1F1F1F"/></a:dk2><a:lt2><a:srgbClr val="EEECE1"/></a:lt2>`
+            + `<a:accent1><a:srgbClr val="${hex6(th.accent)}"/></a:accent1><a:accent2><a:srgbClr val="ED7D31"/></a:accent2><a:accent3><a:srgbClr val="A5A5A5"/></a:accent3><a:accent4><a:srgbClr val="FFC000"/></a:accent4><a:accent5><a:srgbClr val="5B9BD5"/></a:accent5><a:accent6><a:srgbClr val="70AD47"/></a:accent6><a:hlink><a:srgbClr val="0563C1"/></a:hlink><a:folHlink><a:srgbClr val="954F72"/></a:folHlink></a:clrScheme>`
+            + `<a:fontScheme name="LCNDA"><a:majorFont><a:latin typeface="${xe(tf)}"/><a:ea typeface=""/><a:cs typeface=""/></a:majorFont><a:minorFont><a:latin typeface="${xe(bf)}"/><a:ea typeface=""/><a:cs typeface=""/></a:minorFont></a:fontScheme>`
+            + `<a:fmtScheme name="LCNDA"><a:fillStyleLst>${fillStyle}${fillStyle}${fillStyle}</a:fillStyleLst><a:lnStyleLst>${lnStyle(6350)}${lnStyle(12700)}${lnStyle(19050)}</a:lnStyleLst><a:effectStyleLst><a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle></a:effectStyleLst><a:bgFillStyleLst>${fillStyle}${fillStyle}${fillStyle}</a:bgFillStyleLst></a:fmtScheme></a:themeElements><a:objectDefaults/><a:extraClrSchemeLst/></a:theme>`;
+        const master = `${XML_HEAD}<p:sldMaster ${NS3}><p:cSld><p:bg><p:bgRef idx="1001"><a:schemeClr val="bg1"/></p:bgRef></p:bg>${emptyTree}</p:cSld><p:clrMap bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" accent6="accent6" hlink="hlink" folHlink="folHlink"/><p:sldLayoutIdLst><p:sldLayoutId id="2147483649" r:id="rId1"/></p:sldLayoutIdLst><p:txStyles><p:titleStyle><a:lvl1pPr><a:defRPr sz="4400"><a:latin typeface="+mj-lt"/></a:defRPr></a:lvl1pPr></p:titleStyle><p:bodyStyle><a:lvl1pPr><a:defRPr sz="2800"><a:latin typeface="+mn-lt"/></a:defRPr></a:lvl1pPr></p:bodyStyle><p:otherStyle><a:lvl1pPr><a:defRPr sz="1800"/></a:lvl1pPr></p:otherStyle></p:txStyles></p:sldMaster>`;
+        const layout = `${XML_HEAD}<p:sldLayout ${NS3} type="blank" preserve="1"><p:cSld name="${xe(i18n('Vide'))}">${emptyTree}</p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sldLayout>`;
+        const pres = `${XML_HEAD}<p:presentation ${NS3} saveSubsetFonts="1"><p:sldMasterIdLst><p:sldMasterId id="2147483648" r:id="rId1"/></p:sldMasterIdLst><p:sldIdLst>${slideXml.map((x, i) => `<p:sldId id="${256 + i}" r:id="rId${10 + i}"/>`).join('')}</p:sldIdLst><p:sldSz cx="${cx}" cy="${cy}"/><p:notesSz cx="6858000" cy="9144000"/><p:defaultTextStyle><a:lvl1pPr><a:defRPr lang="fr-FR"/></a:lvl1pPr></p:defaultTextStyle></p:presentation>`;
+        const presRels = relsXml([['rId1', REL('slideMaster'), 'slideMasters/slideMaster1.xml'], ['rId2', REL('theme'), 'theme/theme1.xml'], ['rId3', REL('presProps'), 'presProps.xml'], ['rId4', REL('viewProps'), 'viewProps.xml'], ['rId5', REL('tableStyles'), 'tableStyles.xml'], ...slideXml.map((x, i) => [`rId${10 + i}`, REL('slide'), `slides/slide${i + 1}.xml`])]);
+        const CT = 'application/vnd.openxmlformats-officedocument.presentationml';
+        const types = `${XML_HEAD}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Default Extension="jpeg" ContentType="image/jpeg"/>`
+            + `<Override PartName="/ppt/presentation.xml" ContentType="${CT}.presentation.main+xml"/><Override PartName="/ppt/slideMasters/slideMaster1.xml" ContentType="${CT}.slideMaster+xml"/><Override PartName="/ppt/slideLayouts/slideLayout1.xml" ContentType="${CT}.slideLayout+xml"/><Override PartName="/ppt/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/>`
+            + `<Override PartName="/ppt/presProps.xml" ContentType="${CT}.presProps+xml"/><Override PartName="/ppt/viewProps.xml" ContentType="${CT}.viewProps+xml"/><Override PartName="/ppt/tableStyles.xml" ContentType="${CT}.tableStyles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>`
+            + `${slideXml.map((x, i) => `<Override PartName="/ppt/slides/slide${i + 1}.xml" ContentType="${CT}.slide+xml"/>`).join('')}</Types>`;
+        const now = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+        const core = `${XML_HEAD}<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>${xe(name || i18n('Présentation'))}</dc:title><dc:creator>LCNDA</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">${now}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${now}</dcterms:modified></cp:coreProperties>`;
+        const app = `${XML_HEAD}<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>LCNDA</Application><Slides>${slideXml.length}</Slides></Properties>`;
+        const T2 = (n2, x) => files.push({name: n2, data: enc.encode(x)});
+        T2('[Content_Types].xml', types);
+        T2('_rels/.rels', relsXml([['rId1', REL('officeDocument'), 'ppt/presentation.xml'], ['rId2', 'http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties', 'docProps/core.xml'], ['rId3', REL('extended-properties'), 'docProps/app.xml']]));
+        T2('docProps/core.xml', core); T2('docProps/app.xml', app);
+        T2('ppt/presentation.xml', pres); T2('ppt/_rels/presentation.xml.rels', presRels);
+        T2('ppt/presProps.xml', `${XML_HEAD}<p:presentationPr ${NS3}/>`);
+        T2('ppt/viewProps.xml', `${XML_HEAD}<p:viewPr ${NS3}><p:gridSpacing cx="76200" cy="76200"/></p:viewPr>`);
+        T2('ppt/tableStyles.xml', `${XML_HEAD}<a:tblStyleLst xmlns:a="${NS_A}" def="{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}"/>`);
+        T2('ppt/theme/theme1.xml', theme);
+        T2('ppt/slideMasters/slideMaster1.xml', master); T2('ppt/slideMasters/_rels/slideMaster1.xml.rels', relsXml([['rId1', REL('slideLayout'), '../slideLayouts/slideLayout1.xml'], ['rId2', REL('theme'), '../theme/theme1.xml']]));
+        T2('ppt/slideLayouts/slideLayout1.xml', layout); T2('ppt/slideLayouts/_rels/slideLayout1.xml.rels', relsXml([['rId1', REL('slideMaster'), '../slideMasters/slideMaster1.xml']]));
+        slideXml.forEach((x, i) => { T2(`ppt/slides/slide${i + 1}.xml`, x.xml); T2(`ppt/slides/_rels/slide${i + 1}.xml.rels`, x.rels); });
+        media.forEach(m => files.push({name: `ppt/${m.path}`, data: m.bytes}));
+        const PPTX = 'application/vnd.openxmlformats-officedocument.presentationml.presentation', SH = window.LCNDA_SHEET;
+        return SH?.makeZip ? SH.makeZip(files, PPTX) : zipStore(files);
+    }
+    async function exportPptx(show, name, o = {}) {
+        try { const blob = await buildPptx(show, name, o); o.status?.(''); download(blob, o.filename || `${safeName(name)}.pptx`); if (!o.direct) toast(i18n('Fichier PowerPoint téléchargé.')); return blob; }
+        catch (e) { o.status?.(''); if (o.direct) throw e; toast(i18n('PowerPoint impossible : {error}', {error: e.message}), 'error'); return null; }
+    }
+    /** 📤 la vidéo rangée dans les médias : le bouton « Envoyer vers… » du message (Montage, site) */
+    const sendVideoOpts = (u, title) => (u && ext.sendTo ? {action: {label: i18n('📤 Envoyer vers…'), run: () => ext.sendTo('video', {media: {id: Number(u.media_id), filename: u.filename, title}}, {title, exclude: ['keynote', 'slideshow']})}} : {});
 
     /* ═════════ Commencer : choisir un thème et un format ; importer ═════════ */
     function newPresentation(ctx = {}) {
@@ -1876,18 +2094,106 @@
     };
 
     // les boutons et les commandes de départ (pour Réglages → Montage, retouche… et les raccourcis, avant même la première ouverture)
-    const KN_DEFAULT_DEFS = {"groups":[{"key":"kn-hist","label":"Annuler / rétablir","items":[["kn-cmd=undo","↶ Annuler (⌘Z)"],["kn-cmd=redo","↷ Rétablir (⇧⌘Z)"]]},{"key":"kn-insert","label":"Insérer (barre du haut)","items":[["kn-ins=text","T Une zone de texte"],["kn-dd=shape","◆ Formes"],["kn-ins=image","🖼️ Une photo des médias ou de l’ordinateur"],["kn-ins=table","▦ Un tableau"],["kn-ins=chart","📊 Un graphique (colonnes, camembert, courbe…)"],["kn-dd=person","👤 Généalogie (fiche, portrait, arbre, frise)"],["kn-ins=media","🎬 Une vidéo ou un son des médias"]]},{"key":"kn-arrange","label":"Disposer (barre du haut)","items":[["kn-dd=align","⇤⇥ Aligner et répartir"],["kn-dd=order","⧉ Ordre (devant, derrière)"],["kn-cmd=group","⊞ Grouper (⌘G) — ⇧⌘G pour dissocier"],["kn-cmd=ungroup","⊟ Dissocier (⇧⌘G)"],["kn-cmd=lock","🔒 Verrouiller / déverrouiller (⌘L)"]]},{"key":"kn-play","label":"Lecture","items":[["kn-cmd=play","▶ Lire en plein écran depuis le début (⌥⌘↩)"],["kn-cmd=playhere","⏵ Lire depuis cette diapositive (⌘↩)"],["kn-cmd=presenter","🎤 Plein écran + fenêtre du présentateur (notes, suivante, chronomètre)"]]},{"key":"kn-file","label":"Fichier","items":[["kn-cmd=import","⤒ PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON"],["kn-dd=export","⤓ Exporter (PDF, PNG, vidéo, fichier)"]]},{"key":"kn-navbar","label":"Diapositives (au-dessus de la liste)","items":[["kn-cmd=newslide","＋ Diapositive▾"],["kn-cmd=dupslide","⧉ Dupliquer la diapositive (pour un déplacement magique)"],["kn-cmd=skipslide","👁 Sauter / ne plus sauter à la lecture"],["kn-cmd=section","§ Commencer une section (un groupe de diapositives) ici"],["kn-cmd=delslide","🗑 Supprimer la diapositive"]]},{"key":"kn-status","label":"Barre du bas","items":[["kn-cmd=prevslide","‹ Diapositive précédente (Page précédente)"],["kn-idx=","1 / 1"],["kn-cmd=nextslide","› Diapositive suivante (Page suivante)"],["kn-zoomw=","Zoom Ajuster25 %50 %75 %100 %150 %200 %"],["kn-snapw=","Aimanter"],["kn-cmd=notes","📝 Notes"],["kn-pos=","(sans nom)"]]},{"key":"kn-tabs","label":"Onglets de l’inspecteur (à droite)","items":[["kn-tab=format","🖌 Format"],["kn-tab=anim","✨ Animer"],["kn-tab=slide","🖼 Diapo"],["kn-tab=objs","🗂 Objets"],["kn-tab=doc","⚙️ Document"]]},{"key":"kn-format","label":"Inspecteur : sections de « Format »","items":[["kn-isec=geom","Position et taille"],["kn-isec=arrange","Disposition"],["kn-isec=text","Texte"],["kn-isec=fill","Remplissage et bordure"],["kn-isec=image","Image"],["kn-isec=shape","Forme"],["kn-isec=table","Tableau"],["kn-isec=chart","Graphique"],["kn-isec=person","Généalogie"],["kn-isec=media","Vidéo / son"],["kn-isec=effects","Ombre et opacité"]]},{"key":"kn-anim","label":"Inspecteur : sections de « Animer »","items":[["kn-asec=trans","Transition"],["kn-asec=obj","Animations de l’objet choisi"],["kn-asec=order","Ordre des animations"]]},{"key":"kn-slide","label":"Inspecteur : sections de « Diapositive »","items":[["kn-ssec=layout","Disposition"],["kn-ssec=bg","Fond"],["kn-ssec=play","Lecture"],["kn-ssec=section","Section"],["kn-ssec=notes","Notes de l’orateur"]]},{"key":"kn-objs","label":"Inspecteur : « Objets »","items":[["kn-osec=list","Objets de la diapositive"]]},{"key":"kn-doc","label":"Inspecteur : sections de « Document »","items":[["kn-dsec=theme","Thème"],["kn-dsec=colors","Couleurs et polices"],["kn-dsec=format","Format"],["kn-dsec=sound","Musique"],["kn-dsec=loop","Lecture"]]}]}, KN_DEFAULT_CMDS = [["data-kn-cmd=undo","Annuler","Annuler / rétablir",""],["data-kn-cmd=redo","Rétablir","Annuler / rétablir",""],["data-kn-ins=text","Texte","Insérer (barre du haut)",""],["data-kn-ins=shape:rect","Rectangle","Insérer (barre du haut)",""],["data-kn-ins=shape:rounded","Rectangle arrondi","Insérer (barre du haut)",""],["data-kn-ins=shape:ellipse","Ellipse","Insérer (barre du haut)",""],["data-kn-ins=shape:triangle","Triangle","Insérer (barre du haut)",""],["data-kn-ins=shape:rtriangle","Triangle rectangle","Insérer (barre du haut)",""],["data-kn-ins=shape:diamond","Losange","Insérer (barre du haut)",""],["data-kn-ins=shape:pentagon","Pentagone","Insérer (barre du haut)",""],["data-kn-ins=shape:hexagon","Hexagone","Insérer (barre du haut)",""],["data-kn-ins=shape:octagon","Octogone","Insérer (barre du haut)",""],["data-kn-ins=shape:star","Étoile","Insérer (barre du haut)",""],["data-kn-ins=shape:arrow","Flèche","Insérer (barre du haut)",""],["data-kn-ins=shape:darrow","Double flèche","Insérer (barre du haut)",""],["data-kn-ins=shape:chevron","Chevron","Insérer (barre du haut)",""],["data-kn-ins=shape:callout","Bulle","Insérer (barre du haut)",""],["data-kn-ins=shape:heart","Cœur","Insérer (barre du haut)",""],["data-kn-ins=shape:cross","Croix","Insérer (barre du haut)",""],["data-kn-ins=shape:line","Ligne","Insérer (barre du haut)",""],["data-kn-ins=shape:arrowline","Ligne fléchée","Insérer (barre du haut)",""],["data-kn-ins=image","Image","Insérer (barre du haut)",""],["data-kn-ins=table","Tableau","Insérer (barre du haut)",""],["data-kn-ins=chart","Graphique","Insérer (barre du haut)",""],["data-kn-ins=person:card","🪪 Fiche d’une personne","Insérer (barre du haut)",""],["data-kn-ins=person:photo","🖼️ Portrait d’une personne","Insérer (barre du haut)",""],["data-kn-ins=person:tree","🌳 Petit arbre (parents, couple, enfants)","Insérer (barre du haut)",""],["data-kn-ins=person:timeline","🗓️ Frise de sa vie","Insérer (barre du haut)",""],["data-kn-ins=media","Vidéo / son","Insérer (barre du haut)",""],["data-kn-cmd=align:left","⇤ À gauche","Disposer (barre du haut)",""],["data-kn-cmd=align:hcenter","↔ Au centre","Disposer (barre du haut)",""],["data-kn-cmd=align:right","⇥ À droite","Disposer (barre du haut)",""],["data-kn-cmd=align:top","⤒ En haut","Disposer (barre du haut)",""],["data-kn-cmd=align:vcenter","↕ Au milieu","Disposer (barre du haut)",""],["data-kn-cmd=align:bottom","⤓ En bas","Disposer (barre du haut)",""],["data-kn-cmd=align:dist-h","⟷ Répartir horizontalement","Disposer (barre du haut)",""],["data-kn-cmd=align:dist-v","⟷ Répartir verticalement","Disposer (barre du haut)",""],["data-kn-cmd=order:front","Tout devant","Disposer (barre du haut)",""],["data-kn-cmd=order:forward","Avancer","Disposer (barre du haut)",""],["data-kn-cmd=order:backward","Reculer","Disposer (barre du haut)",""],["data-kn-cmd=order:back","Tout derrière","Disposer (barre du haut)",""],["data-kn-cmd=group","Grouper","Disposer (barre du haut)",""],["data-kn-cmd=ungroup","Dissocier","Disposer (barre du haut)",""],["data-kn-cmd=lock","Verrouiller","Disposer (barre du haut)",""],["data-kn-cmd=play","Lire","Lecture",""],["data-kn-cmd=playhere","D’ici","Lecture",""],["data-kn-cmd=presenter","Présentateur","Lecture",""],["data-kn-cmd=import","Importer","Fichier",""],["data-kn-cmd=exp_pdf","🖨 PDF / imprimer (une diapositive par page)","Fichier",""],["data-kn-cmd=exp_pdfnotes","🖨 PDF avec les notes de l’orateur","Fichier",""],["data-kn-cmd=exp_png","🖼️ Cette diapositive en PNG","Fichier",""],["data-kn-cmd=exp_pngall","🗂️ Toutes les diapositives en PNG (.zip)","Fichier",""],["data-kn-cmd=exp_video","⏺ Vidéo","Fichier",""],["data-kn-cmd=exp_json","⤓ Fichier de la présentation (.json)","Fichier",""],["data-kn-cmd=save","💾 Enregistrer","Autres boutons",""],["data-kn-cmd=close","×","Autres boutons",""],["data-kn-cmd=newslide","＋ Diapositive","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=dupslide","Dupliquer la diapositive (pour un déplacement magique)","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=skipslide","Sauter / ne plus sauter à la lecture","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=section","Commencer une section (un groupe de diapositives) ici","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=delslide","Supprimer la diapositive","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=prevslide","Diapositive précédente (Page précédente)","Barre du bas",""],["data-kn-cmd=nextslide","Diapositive suivante (Page suivante)","Barre du bas",""],["data-kn-cmd=notes","📝 Notes","Barre du bas",""],["data-kn-tab=format","🖌","Onglets de l’inspecteur (à droite)",""],["data-kn-tab=anim","✨","Onglets de l’inspecteur (à droite)",""],["data-kn-tab=slide","🖼","Onglets de l’inspecteur (à droite)",""],["data-kn-tab=objs","🗂","Onglets de l’inspecteur (à droite)",""],["data-kn-tab=doc","⚙️","Onglets de l’inspecteur (à droite)",""],["data-kn-cmd=duplicate","Dupliquer","Inspecteur : sections de « Format »",""],["data-kn-cmd=delete","Supprimer (⌫)","Inspecteur : sections de « Format »",""]];
+    const KN_DEFAULT_DEFS = {"groups":[{"key":"kn-hist","label":"Annuler / rétablir","items":[["kn-cmd=undo","↶ Annuler (⌘Z)"],["kn-cmd=redo","↷ Rétablir (⇧⌘Z)"]]},{"key":"kn-insert","label":"Insérer (barre du haut)","items":[["kn-ins=text","T Une zone de texte"],["kn-dd=shape","◆ Formes"],["kn-ins=image","🖼️ Une photo des médias ou de l’ordinateur"],["kn-ins=table","▦ Un tableau"],["kn-ins=chart","📊 Un graphique (colonnes, camembert, courbe…)"],["kn-dd=person","👤 Généalogie (fiche, portrait, arbre, frise)"],["kn-ins=media","🎬 Une vidéo ou un son des médias"]]},{"key":"kn-arrange","label":"Disposer (barre du haut)","items":[["kn-dd=align","⇤⇥ Aligner et répartir"],["kn-dd=order","⧉ Ordre (devant, derrière)"],["kn-cmd=group","⊞ Grouper (⌘G) — ⇧⌘G pour dissocier"],["kn-cmd=ungroup","⊟ Dissocier (⇧⌘G)"],["kn-cmd=lock","🔒 Verrouiller / déverrouiller (⌘L)"]]},{"key":"kn-play","label":"Lecture","items":[["kn-cmd=play","▶ Lire en plein écran depuis le début (⌥⌘↩)"],["kn-cmd=playhere","⏵ Lire depuis cette diapositive (⌘↩)"],["kn-cmd=presenter","🎤 Plein écran + fenêtre du présentateur (notes, suivante, chronomètre)"]]},{"key":"kn-file","label":"Fichier","items":[["kn-cmd=import","⤒ PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON"],["kn-dd=export","⤓ Exporter (PDF, PNG, vidéo, fichier)"],["kn-cmd=sendto","📤 Envoyer vers… (la vidéo)"]]},{"key":"kn-navbar","label":"Diapositives (au-dessus de la liste)","items":[["kn-cmd=newslide","＋ Diapositive▾"],["kn-cmd=dupslide","⧉ Dupliquer la diapositive (pour un déplacement magique)"],["kn-cmd=skipslide","👁 Sauter / ne plus sauter à la lecture"],["kn-cmd=section","§ Commencer une section (un groupe de diapositives) ici"],["kn-cmd=delslide","🗑 Supprimer la diapositive"]]},{"key":"kn-status","label":"Barre du bas","items":[["kn-cmd=prevslide","‹ Diapositive précédente (Page précédente)"],["kn-idx=","1 / 1"],["kn-cmd=nextslide","› Diapositive suivante (Page suivante)"],["kn-zoomw=","Zoom Ajuster25 %50 %75 %100 %150 %200 %"],["kn-snapw=","Aimanter"],["kn-cmd=notes","📝 Notes"],["kn-pos=","(sans nom)"]]},{"key":"kn-tabs","label":"Onglets de l’inspecteur (à droite)","items":[["kn-tab=format","🖌 Format"],["kn-tab=anim","✨ Animer"],["kn-tab=slide","🖼 Diapo"],["kn-tab=objs","🗂 Objets"],["kn-tab=doc","⚙️ Document"]]},{"key":"kn-format","label":"Inspecteur : sections de « Format »","items":[["kn-isec=geom","Position et taille"],["kn-isec=arrange","Disposition"],["kn-isec=text","Texte"],["kn-isec=fill","Remplissage et bordure"],["kn-isec=image","Image"],["kn-isec=shape","Forme"],["kn-isec=table","Tableau"],["kn-isec=chart","Graphique"],["kn-isec=person","Généalogie"],["kn-isec=media","Vidéo / son"],["kn-isec=effects","Ombre et opacité"]]},{"key":"kn-anim","label":"Inspecteur : sections de « Animer »","items":[["kn-asec=trans","Transition"],["kn-asec=obj","Animations de l’objet choisi"],["kn-asec=order","Ordre des animations"]]},{"key":"kn-slide","label":"Inspecteur : sections de « Diapositive »","items":[["kn-ssec=layout","Disposition"],["kn-ssec=bg","Fond"],["kn-ssec=play","Lecture"],["kn-ssec=section","Section"],["kn-ssec=notes","Notes de l’orateur"]]},{"key":"kn-objs","label":"Inspecteur : « Objets »","items":[["kn-osec=list","Objets de la diapositive"]]},{"key":"kn-doc","label":"Inspecteur : sections de « Document »","items":[["kn-dsec=theme","Thème"],["kn-dsec=colors","Couleurs et polices"],["kn-dsec=format","Format"],["kn-dsec=sound","Musique"],["kn-dsec=loop","Lecture"]]}]}, KN_DEFAULT_CMDS = [["data-kn-cmd=undo","Annuler","Annuler / rétablir",""],["data-kn-cmd=redo","Rétablir","Annuler / rétablir",""],["data-kn-ins=text","Texte","Insérer (barre du haut)",""],["data-kn-ins=shape:rect","Rectangle","Insérer (barre du haut)",""],["data-kn-ins=shape:rounded","Rectangle arrondi","Insérer (barre du haut)",""],["data-kn-ins=shape:ellipse","Ellipse","Insérer (barre du haut)",""],["data-kn-ins=shape:triangle","Triangle","Insérer (barre du haut)",""],["data-kn-ins=shape:rtriangle","Triangle rectangle","Insérer (barre du haut)",""],["data-kn-ins=shape:diamond","Losange","Insérer (barre du haut)",""],["data-kn-ins=shape:pentagon","Pentagone","Insérer (barre du haut)",""],["data-kn-ins=shape:hexagon","Hexagone","Insérer (barre du haut)",""],["data-kn-ins=shape:octagon","Octogone","Insérer (barre du haut)",""],["data-kn-ins=shape:star","Étoile","Insérer (barre du haut)",""],["data-kn-ins=shape:arrow","Flèche","Insérer (barre du haut)",""],["data-kn-ins=shape:darrow","Double flèche","Insérer (barre du haut)",""],["data-kn-ins=shape:chevron","Chevron","Insérer (barre du haut)",""],["data-kn-ins=shape:callout","Bulle","Insérer (barre du haut)",""],["data-kn-ins=shape:heart","Cœur","Insérer (barre du haut)",""],["data-kn-ins=shape:cross","Croix","Insérer (barre du haut)",""],["data-kn-ins=shape:line","Ligne","Insérer (barre du haut)",""],["data-kn-ins=shape:arrowline","Ligne fléchée","Insérer (barre du haut)",""],["data-kn-ins=image","Image","Insérer (barre du haut)",""],["data-kn-ins=table","Tableau","Insérer (barre du haut)",""],["data-kn-ins=chart","Graphique","Insérer (barre du haut)",""],["data-kn-ins=person:card","🪪 Fiche d’une personne","Insérer (barre du haut)",""],["data-kn-ins=person:photo","🖼️ Portrait d’une personne","Insérer (barre du haut)",""],["data-kn-ins=person:tree","🌳 Petit arbre (parents, couple, enfants)","Insérer (barre du haut)",""],["data-kn-ins=person:timeline","🗓️ Frise de sa vie","Insérer (barre du haut)",""],["data-kn-ins=media","Vidéo / son","Insérer (barre du haut)",""],["data-kn-cmd=align:left","⇤ À gauche","Disposer (barre du haut)",""],["data-kn-cmd=align:hcenter","↔ Au centre","Disposer (barre du haut)",""],["data-kn-cmd=align:right","⇥ À droite","Disposer (barre du haut)",""],["data-kn-cmd=align:top","⤒ En haut","Disposer (barre du haut)",""],["data-kn-cmd=align:vcenter","↕ Au milieu","Disposer (barre du haut)",""],["data-kn-cmd=align:bottom","⤓ En bas","Disposer (barre du haut)",""],["data-kn-cmd=align:dist-h","⟷ Répartir horizontalement","Disposer (barre du haut)",""],["data-kn-cmd=align:dist-v","⟷ Répartir verticalement","Disposer (barre du haut)",""],["data-kn-cmd=order:front","Tout devant","Disposer (barre du haut)",""],["data-kn-cmd=order:forward","Avancer","Disposer (barre du haut)",""],["data-kn-cmd=order:backward","Reculer","Disposer (barre du haut)",""],["data-kn-cmd=order:back","Tout derrière","Disposer (barre du haut)",""],["data-kn-cmd=group","Grouper","Disposer (barre du haut)",""],["data-kn-cmd=ungroup","Dissocier","Disposer (barre du haut)",""],["data-kn-cmd=lock","Verrouiller","Disposer (barre du haut)",""],["data-kn-cmd=play","Lire","Lecture",""],["data-kn-cmd=playhere","D’ici","Lecture",""],["data-kn-cmd=presenter","Présentateur","Lecture",""],["data-kn-cmd=import","Importer","Fichier",""],["data-kn-cmd=exp_pdf","🖨 PDF / imprimer (une diapositive par page)","Fichier",""],["data-kn-cmd=exp_pdfnotes","🖨 PDF avec les notes de l’orateur","Fichier",""],["data-kn-cmd=exp_png","🖼️ Cette diapositive en PNG","Fichier",""],["data-kn-cmd=exp_pngall","🗂️ Toutes les diapositives en PNG (.zip)","Fichier",""],["data-kn-cmd=exp_video","⏺ Vidéo","Fichier",""],["data-kn-cmd=exp_json","⤓ Fichier de la présentation (.json)","Fichier",""],["data-kn-cmd=exp_pptx","📊 PowerPoint (.pptx)","Fichier",""],["data-kn-cmd=sendto","📤 Envoyer vers…","Fichier",""],["data-kn-cmd=save","💾 Enregistrer","Autres boutons",""],["data-kn-cmd=close","×","Autres boutons",""],["data-kn-cmd=newslide","＋ Diapositive","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=dupslide","Dupliquer la diapositive (pour un déplacement magique)","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=skipslide","Sauter / ne plus sauter à la lecture","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=section","Commencer une section (un groupe de diapositives) ici","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=delslide","Supprimer la diapositive","Diapositives (au-dessus de la liste)",""],["data-kn-cmd=prevslide","Diapositive précédente (Page précédente)","Barre du bas",""],["data-kn-cmd=nextslide","Diapositive suivante (Page suivante)","Barre du bas",""],["data-kn-cmd=notes","📝 Notes","Barre du bas",""],["data-kn-tab=format","🖌","Onglets de l’inspecteur (à droite)",""],["data-kn-tab=anim","✨","Onglets de l’inspecteur (à droite)",""],["data-kn-tab=slide","🖼","Onglets de l’inspecteur (à droite)",""],["data-kn-tab=objs","🗂","Onglets de l’inspecteur (à droite)",""],["data-kn-tab=doc","⚙️","Onglets de l’inspecteur (à droite)",""],["data-kn-cmd=duplicate","Dupliquer","Inspecteur : sections de « Format »",""],["data-kn-cmd=delete","Supprimer (⌫)","Inspecteur : sections de « Format »",""]];
     setTimeout(() => { try { const defs = JSON.parse(localStorage.getItem('genealogie-toolbar-defs') || '{}') || {}; if (!defs.keynote) { defs.keynote = KN_DEFAULT_DEFS; localStorage.setItem('genealogie-toolbar-defs', JSON.stringify(defs)); }
         const cm = JSON.parse(localStorage.getItem('genealogie-editor-cmds') || '{}') || {}; if (!cm.keynote) { cm.keynote = KN_DEFAULT_CMDS; localStorage.setItem('genealogie-editor-cmds', JSON.stringify(cm)); } } catch (_) {} }, 0);
     ext.openKeynote = openEditor;
-    /** 🎯 « Préparer pour… → Une présentation » (Tableur) : une présentation neuve, une diapositive avec ce tableau ou ce graphique */
-    ext.keynoteWithObject = (o, name = 'Ma présentation') => { const show = newShowFrom(), [W, H] = dims(show), s = newSlide(show, 'blank'), w = Math.round(W * .8), h = Math.round(H * (o.t === 'chart' ? .7 : .6));
-        const rows = o.t === 'table' ? (o.rows || [['']]).slice(0, 40).map(r => (r || []).slice(0, 16).map(v => String(v ?? '').slice(0, 600))) : null;
-        s.objs = [...(s.objs || []), {id: uid(), t: o.t === 'chart' ? 'chart' : 'table', x: Math.round((W - w) / 2), y: Math.round((H - h) / 2), w, h, ...(rows ? {rows, head: o.head !== false, size: Math.round(H * .028)} : {spec: o.spec})}];
-        show.slides = [s]; return openEditor({show, dirty: true, name: String(name).slice(0, 200)}); };
+    /** 🎯 Une présentation neuve, une diapositive vide avec un objet : tableau ou graphique (Tableur, « Préparer pour… »),
+     *  image des médias {t: 'image', media: {id, filename, title}} (centrée, sans la déformer), texte {t: 'text', html} (📤 Envoyer vers…) */
+    async function keynoteWithObject(o = {}, name = 'Ma présentation') {
+        const show = newShowFrom(), [W, H] = dims(show), s = newSlide(show, 'blank');
+        if (o.t === 'image') {
+            const m = o.media || {}; if (!fileOk(m.filename)) { toast(i18n('Cette image n’est pas dans les médias.'), 'error'); return null; }
+            const [iw, ih] = await imgSize(mediaUrl(m.filename)), k = Math.min(W * .86 / iw, H * .86 / ih), w = Math.round(iw * k), h = Math.round(ih * k);
+            s.objs.push({id: uid(), t: 'image', filename: m.filename, media_id: Number(m.id) || 0, name: String(m.title || '').slice(0, 200), fit: 'contain', x: Math.round((W - w) / 2), y: Math.round((H - h) / 2), w, h});
+            name = name || m.title;
+        } else if (o.t === 'text') {
+            s.objs.push({id: uid(), t: 'text', role: 'body', x: Math.round(W * .08), y: Math.round(H * .08), w: Math.round(W * .84), h: Math.round(H * .84), size: Math.round(H * .04), html: cleanHtml(o.html || '')});
+        } else {
+            const w = Math.round(W * .8), h = Math.round(H * (o.t === 'chart' ? .7 : .6));
+            const rows = o.t === 'table' ? (o.rows || [['']]).slice(0, 40).map(r => (r || []).slice(0, 16).map(v => String(v ?? '').slice(0, 600))) : null;
+            s.objs.push({id: uid(), t: o.t === 'chart' ? 'chart' : 'table', x: Math.round((W - w) / 2), y: Math.round((H - h) / 2), w, h, ...(rows ? {rows, head: o.head !== false, size: Math.round(H * .028)} : {spec: o.spec})});
+        }
+        show.slides = [s]; return openEditor({show, dirty: true, name: String(name || i18n('Ma présentation')).slice(0, 200)});
+    }
+    /** 📝 → 🎤 un texte (HTML simple : Traitement de texte, transcription…) → des diapositives : le premier titre (h1 ou <title>) fait la
+     *  diapositive de titre ; chaque h1 / h2 ouvre une diapositive ; paragraphes et listes dessous = le texte (puces) ;
+     *  les images des médias (<img src="media/…">) vont sur leur diapositive ; un texte trop long continue sur « (suite) ». */
+    const FT_MAX_ITEMS = 8, FT_MAX_CHARS = 650;
+    function slidesFromText(html, show) {
+        const [W, H] = dims(show), doc = new DOMParser().parseFromString(String(html || '').slice(0, 2e6), 'text/html'), secs = [];
+        let cur = null; const start = (title, lvl) => { cur = {title, lvl, items: [], imgs: []}; secs.push(cur); };
+        const imgOf = el => { const src = el.getAttribute('src') || '', m = src.match(/^(?:\.\/)?media\/([^?#]+)$/); if (!m) return null; let f = ''; try { f = decodeURIComponent(m[1]); } catch (_) { return null; } return fileOk(f) ? {filename: f, media_id: Number(el.getAttribute('data-media-id')) || 0, title: el.getAttribute('alt') || ''} : null; };
+        const inl = el => { const c = el.cloneNode(true); c.querySelectorAll('img, ul, ol').forEach(x => x.remove()); return cleanHtml(c.innerHTML).replace(/<\/?(div|p)[^>]*>/g, ' ').trim(); };
+        const textLen = h => h.replace(/<[^>]*>/g, '').length;
+        const push = it => { if (!cur) start('', 0); cur.items.push(it); };
+        const imgs = el => el.querySelectorAll('img').forEach(im => { const m = imgOf(im); if (m) { if (!cur) start('', 0); cur.imgs.push(m); } });
+        const list = (el, lvl) => [...el.children].filter(li => li.tagName === 'LI').forEach(li => { const h = inl(li); if (h) push({t: el.tagName.toLowerCase(), h, lvl}); imgs(li); [...li.children].filter(x => /^(UL|OL)$/.test(x.tagName)).forEach(x => list(x, Math.min(3, lvl + 1))); });
+        const walk = node => [...node.children].forEach(el => {
+            const tg = el.tagName;
+            if (/^H[1-6]$/.test(tg)) { const lv = Number(tg[1]), t = el.textContent.replace(/\s+/g, ' ').trim(); if (lv <= 2) { if (t || !cur) start(t, lv); } else if (t) push({t: 'p', h: `<b>${esc(t)}</b>`}); return; }
+            if (tg === 'UL' || tg === 'OL') return list(el, 0);
+            if (tg === 'IMG') { const m = imgOf(el); if (m) { if (!cur) start('', 0); cur.imgs.push(m); } return; }
+            if (tg === 'TABLE') { [...el.querySelectorAll('tr')].slice(0, 30).forEach(tr => { const h = [...tr.children].map(c => esc(c.textContent.replace(/\s+/g, ' ').trim())).filter(Boolean).join(' · '); if (h) push({t: 'ul', h, lvl: 0}); }); return; }
+            if (tg === 'BLOCKQUOTE') { const h = inl(el); if (h) push({t: 'p', h: `<i>« ${h} »</i>`}); imgs(el); return; }
+            if (/^(P|PRE|ADDRESS|FIGCAPTION|CAPTION|DT|DD)$/.test(tg)) { const h = inl(el); if (h) push({t: 'p', h}); imgs(el); return; }
+            if (/^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT|HEAD)$/.test(tg)) return;
+            if (el.children.length) return walk(el); // div, section, figure… : on regarde dedans
+            const h = inl(el); if (h) push({t: 'p', h});
+        });
+        walk(doc.body);
+        const docTitle = (doc.title || '').trim();
+        if (docTitle && !(secs[0]?.lvl === 1 && secs[0].title)) secs.unshift({title: docTitle, lvl: 1, items: [], imgs: []});
+        const ti = secs.findIndex(c => c.lvl === 1 && c.title); // le titre après un petit texte d'introduction : il passe devant
+        if (ti > 0 && secs.slice(0, ti).every(c => !c.title)) secs.unshift(...secs.splice(ti, 1));
+        const out = [];
+        const fill = (s, role, html) => { const o = s.objs.find(x => x.role === role); if (o) o.html = html; return o; };
+        const bodyPage = (title, items, img, suite) => {
+            const s = newSlide(show, img ? (items.length ? 'title-content' : 'title-photo') : items.length || !title ? 'title-content' : 'section'), T = title ? `<div>${esc(title)}${suite ? ` ${esc(i18n('(suite)'))}` : ''}</div>` : '';
+            if (!fill(s, 'title', T) || !T) s.objs = s.objs.filter(o => o.role !== 'title');
+            const Bd = s.objs.find(o => o.role === 'body');
+            if (Bd) { Bd.html = cleanHtml(listItemsHtml(items)); const n = items.length; if (n > 6) Bd.size = Math.max(14, Math.round(Bd.size * Math.max(.6, 6 / n))); if (!T) { Bd.y = Math.round(H * .08); Bd.h = Math.round(H * .84); } }
+            if (img) { let I = s.objs.find(o => o.t === 'image');
+                if (!I) { I = {id: uid(), t: 'image', role: 'photo', x: 0, y: 0, w: 0, h: 0}; s.objs.push(I); }
+                if (items.length && Bd) { Bd.w = Math.round(W * .5); I.x = Math.round(W * .6); I.y = Bd.y; I.w = Math.round(W * .34); I.h = Bd.h; }
+                else if (!T) { I.x = Math.round(W * .06); I.y = Math.round(H * .06); I.w = Math.round(W * .88); I.h = Math.round(H * .88); }
+                Object.assign(I, {filename: img.filename, media_id: img.media_id, name: img.title, fit: 'contain'}); }
+            s.objs = s.objs.filter(o => o.t !== 'text' || o.html || o.role === 'title');
+            return s;
+        };
+        secs.forEach((c, k) => {
+            if (!c.title && !c.items.length && !c.imgs.length) return;
+            const items = c.items.slice();
+            if (k === 0 && c.lvl === 1 && c.title) { // la diapositive de titre : le titre, et le premier paragraphe court en sous-titre
+                const s = newSlide(show, 'title'); fill(s, 'title', `<div>${esc(c.title)}</div>`);
+                const sub = items[0]?.t === 'p' && textLen(items[0].h) <= 160 ? items.shift() : null; fill(s, 'sub', sub ? `<div>${sub.h}</div>` : '');
+                s.objs = s.objs.filter(o => o.t !== 'text' || o.html || o.role === 'title');
+                if (c.imgs[0] && !items.length) { const I = {id: uid(), t: 'image', role: 'photo', x: Math.round(W * .35), y: Math.round(H * .72), w: Math.round(W * .3), h: Math.round(H * .24), filename: c.imgs[0].filename, media_id: c.imgs[0].media_id, name: c.imgs[0].title, fit: 'contain'}; s.objs.push(I); c.imgs.shift(); }
+                out.push(s); if (!items.length && !c.imgs.length) return;
+            }
+            // le texte coupé en morceaux (au plus FT_MAX_ITEMS lignes, FT_MAX_CHARS lettres), une image par morceau ; les images en trop : une diapositive chacune
+            const chunks = []; let ch = [], len = 0;
+            items.forEach(it => { const l = textLen(it.h); if (ch.length && (ch.length >= FT_MAX_ITEMS || len + l > FT_MAX_CHARS)) { chunks.push(ch); ch = []; len = 0; } ch.push(it); len += l; });
+            if (ch.length) chunks.push(ch);
+            if (!chunks.length) chunks.push([]);
+            const imgsLeft = c.imgs.slice();
+            chunks.forEach((part, i) => out.push(bodyPage(c.title, part, imgsLeft.shift() || null, i > 0)));
+            imgsLeft.forEach(im => out.push(bodyPage(c.title, [], im, true)));
+        });
+        return out.slice(0, 500);
+    }
+    function keynoteFromText(html, name = '') {
+        const show = newShowFrom(), slides = slidesFromText(html, show);
+        if (!slides.length) { toast(i18n('Ce texte est vide : rien à mettre en diapositives.'), 'error'); return null; }
+        show.slides = slides;
+        const first = slides[0].objs.find(o => o.role === 'title'), nm = String(name || (first ? htmlToText(first.html) : '') || i18n('Ma présentation')).slice(0, 200);
+        return openEditor({show, dirty: true, name: nm});
+    }
+    ext.keynoteWithObject = keynoteWithObject;
+    ext.keynoteFromText = keynoteFromText;
     ext.newPresentation = newPresentation;
     ext.importPresentation = importNew;
     ext.playPresentation = openPlayer;
     ext.keynoteFromSlideshow = (src, name, ctx = {}) => { const show = newShowFrom(); show.slides = fromDiaporama(src || {}, show); if (src?.music?.filename) { show.music = src.music; show.musicVol = num(src.musicVol, .5); } return openEditor({...ctx, show, dirty: true, name: i18n('{name} (présentation)', {name: name || i18n('Diaporama')})}); };
-    ext.keynoteInternals = {renderSlide, renderBuilt, cleanHtml, importText, importJson, unzip, zipStore, crc32, chartSpec, slideCanvas, normalize, THEMES, LAYOUTS, TRANS, FX, scaleSlides};
+    ext.keynoteInternals = {renderSlide, renderBuilt, cleanHtml, importText, importJson, importPptx, unzip, zipStore, crc32, chartSpec, slideCanvas, normalize, THEMES, LAYOUTS, TRANS, FX, scaleSlides, buildPptx, slidesFromText, htmlParas, newShowFrom};
 })();

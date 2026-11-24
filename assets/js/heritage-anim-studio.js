@@ -3,7 +3,8 @@
  * (la scène choisie, ou le film : musique, voix, textes, police), la ligne de temps en bas (le film entier ; et pour la scène : temps,
  * caméra ◆, légendes, images). Chaque changement : ↶ Annuler / ↷ Rétablir, enregistrement tout seul. Export : heritage-anim-export.js.
  * Ouvrir : Listes → 🛠️ Outils de modification → 🎞 Studio d'animation ; « 🎞 Animer » sous un diagramme daté ; le 🎬 Film de la famille.
- *   ext.openAnimStudio({id, diagram: {spec, name}, template: 'migrations' | 'grandfilm' | …})
+ *   ext.openAnimStudio({id, diagram: {spec, name}, template: 'migrations' | 'grandfilm' | …, image: {id, filename, title}, audio: {id, filename, title},
+ *                       vectormap: {docId, doc, name} (🗺️ une carte : le curseur du temps), house: {id, name, level} (🏠 une maison par époques)})
  * Serveur : lib/anim_studio.php. Essai : tests/test-anim-studio-ui.js.
  */
 (() => {
@@ -40,6 +41,8 @@
         line: {icon: '📈', label: 'La courbe qui se dessine', make: d => ({dur: 15, title: T('Les naissances dans la famille'), what: 'births', per: 'year', cumulative: false, color: '#2a6a9a', fill: true, bg: '#ffffff', ease: 'linear'})},
         borders: {icon: '🏛', label: 'Les frontières qui changent', make: d => ({dur: 30, title: T('La France et ses frontières, 1760-1925'), from: 1760, to: 1925, view: 'napoleon', color: '#2a5fa8', sea: '#dfe8ee', land: '#f1eee6', events: true, ease: 'linear'})},
         tree: {icon: '🌳', label: 'L’arbre qui pousse', make: d => ({dur: 15, title: T('Nos ancêtres, génération après génération'), root: 0, gens: 7, colorBy: 'branch', color: '#c9b48a', names: true, bg: '#ffffff'})},
+        vectormap: {icon: '🗺️', label: 'Carte', make: d => ({dur: 20, docId: 0, docName: '', title: '', showTitle: true, smooth: true, cam: {mode: 'fit', keys: []}, bg: '#ffffff', ease: 'linear'})},
+        house: {icon: '🏠', label: 'Maison par époques', make: d => ({dur: 12, houseId: 0, houseName: '', level: 0, floors: [], title: '', showTitle: true, fade: .3, labels: true, bg: '#ffffff'})},
     };
     function newScene(type, extra = {}) {
         const d = defs();
@@ -58,19 +61,44 @@
     };
 
     /* ═════ ouvrir le Studio ═════ */
-    async function open({id = 0, diagram = null, template = '', onClose = null, toMontage = null, image = null} = {}) {
+    async function open({id = 0, diagram = null, template = '', onClose = null, toMontage = null, image = null, audio = null, vectormap = null, house = null} = {}) {
         if (!RN() || !EX()) return A().toast(T('Le Studio d’animation n’est pas encore chargé : réessaie dans un instant.'), 'error');
         let P = {id: 0, title: T('Mon film'), data: newProject()};
         if (id) { try { const r = await A().api('anim_project', {id}); P = {id: r.project.id, title: r.project.title, data: {...newProject(), ...(r.project.data || {})}}; } catch (e) { return A().toast(e.message, 'error'); } }
         else if (diagram?.spec) { P.title = diagram.name || T('Mon diagramme animé'); P.data.scenes = [newScene('diagram', {spec: diagram.spec, name: diagram.name || T('Diagramme'), title: diagram.name || ''})]; }
         else if (template && TEMPLATES[template]) { P.data.scenes = TEMPLATES[template](); P.title = P.data.scenes.find(s => s.title)?.title || P.title; }
         else if (image?.filename) { P.title = image.title || T('Mon film'); P.data.scenes = []; }
-        else P.data.scenes = [newScene('title', {title: T('Mon film')})];
+        else if (vectormap && (vectormap.docId || vectormap.doc)) { P.title = vectormap.name || T('Ma carte animée'); P.data.scenes = []; }
+        else if (house?.id) { P.title = house.name || T('La maison au fil du temps'); P.data.scenes = []; }
+        else P.data.scenes = [newScene('title', {title: audio?.title || T('Mon film')})];
+        if (audio?.filename && !id) P.title = audio.title || P.title;
         // 📤 une image envoyée par le vectoriel ou la retouche (heritage-envoyer.js) : une scène « photo » à la fin, zoom doux
-        if (image?.filename) { P.data.scenes.push(newScene('image', {media: {id: image.id, filename: image.filename, title: image.title}, name: image.title || T('Photo')})); P.dirtyFromSend = true; }
+        if (image?.filename) { P.data.scenes.push(newScene('image', {media: {id: image.id, filename: image.filename, title: image.title}, name: image.title || T('Photo')})); P.dirtyFromSend = 'scene'; }
+        // 🗺️ une carte du Dessin vectoriel : une scène « carte » dont le curseur du temps avance tout seul
+        if (vectormap && (vectormap.docId || vectormap.doc)) { P.data.scenes.push(mapScene(vectormap)); P.dirtyFromSend = 'scene'; }
+        // 🏠 une maison et ses époques : une scène « maison par époques »
+        if (house?.id) { P.data.scenes.push(await houseScene(house)); P.dirtyFromSend = 'scene'; }
+        // 🎧 un son envoyé par le Studio son (heritage-envoyer.js) : la voix du film, dès le début (« 🎵 En faire la musique » dans l'onglet Film)
+        if (audio?.filename) { P.data.voices = [...(P.data.voices || []), {media: {id: Number(audio.id), filename: audio.filename, title: audio.title || ''}, at: 0, vol: 1, len: Math.round((await audioLen(audio)) * 10) / 10}]; P.dirtyFromSend = P.dirtyFromSend || 'audio'; }
         studio(P, onClose, toMontage);
     }
     ext.openAnimStudio = open;
+    /** la durée d'un son des médias (secondes ; 5 si on ne sait pas) */
+    function audioLen(m) {
+        return new Promise(res => { try { const a = new Audio(); let done = false; const end = v => { if (!done) { done = true; res(v); } }; a.preload = 'metadata'; a.onloadedmetadata = () => end(Number.isFinite(a.duration) && a.duration > 0 ? a.duration : 5); a.onerror = () => end(5); setTimeout(() => end(5), 4000); a.src = `media/${encodeURIComponent(m.filename)}`; } catch (_) { res(5); } });
+    }
+    /** une scène « 🗺️ Carte » : docId (la carte enregistrée, relue à chaque ouverture) ou doc (une copie, pour une carte pas encore enregistrée) */
+    function mapScene({docId = 0, doc = null, name = ''} = {}) {
+        const extra = {docId: Number(docId) || 0, docName: String(name || ''), name: name || T('Carte'), title: name || ''};
+        if (!extra.docId && doc) { extra.doc = doc; extra.docRev = uid(); }
+        return newScene('vectormap', extra);
+    }
+    /** une scène « 🏠 Maison par époques » : 3 secondes par époque ; les étages pour le choix */
+    async function houseScene({id, name = '', level = 0} = {}) {
+        let floors = [], n = 0;
+        try { const r = await A().api('house', {id}); name = name || r.name || ''; const h = r.house || {}; floors = (h.floors || []).map(f => [Number(f.level) || 0, String(f.name || '')]).sort((a, b) => a[0] - b[0]); n = (h.versions || []).length; } catch (_) {}
+        return newScene('house', {houseId: Number(id), houseName: name, name: name || T('Maison par époques'), title: name || '', level: Number(level) || 0, floors, dur: Math.max(4, Math.min(120, (n || 1) * 3))});
+    }
 
     /* ═════ l'écran ═════ */
     function studio(P, onClose, toMontage = null) { // toMontage(media) : ouvert depuis le 🎬 Montage vidéo, le film y retourne
@@ -173,6 +201,8 @@
             const extra = {};
             if (type === 'image') { const m = await pickImage(); if (!m) return; extra.media = m; extra.name = m.title || T('Photo'); }
             if (type === 'diagram') { const d = await pickDiagram(); if (!d) return; Object.assign(extra, d); }
+            if (type === 'vectormap') { const m = await pickMap(); if (!m) return; D().scenes.splice(sel + 1, 0, mapScene(m)); sel = Math.min(sel + 1, D().scenes.length - 1); t = sceneStart(sel) + .01; tab = 'scene'; changed({pane: true}); return; }
+            if (type === 'house') { const h = await pickHouse(); if (!h) return; D().scenes.splice(sel + 1, 0, await houseScene(h)); sel = Math.min(sel + 1, D().scenes.length - 1); t = sceneStart(sel) + .01; tab = 'scene'; changed({pane: true}); return; }
             D().scenes.splice(sel + 1, 0, newScene(type, extra)); sel = Math.min(sel + 1, D().scenes.length - 1); t = sceneStart(sel) + .01; tab = 'scene'; changed({pane: true});
         }
         async function pickImage() {
@@ -182,6 +212,34 @@
         async function pickAudio() {
             const P2 = window.LCNDA_MEDIA_PICKER || window.LCNDA_PICKER; if (!P2?.openMediaPicker) { A().toast(T('La fenêtre des médias n’est pas chargée.'), 'error'); return null; }
             const it = await P2.openMediaPicker({types: ['audio']}); return it && it.filename ? {id: Number(it.id), filename: it.filename, title: it.title || ''} : null;
+        }
+        /** une liste à choisir (cartes, maisons) : [{id, name, sub}] → l'élément choisi, ou null */
+        function pickFrom(list, {title, help = '', search = ''}) {
+            return new Promise(res => {
+                const dg = document.createElement('dialog'); dg.className = 'modal an-pick';
+                dg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">🎞 ${esc(T('Studio d’animation'))}</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-x aria-label="${esc(T('Fermer'))}">×</button></div>
+                    ${help ? `<p class="muted">${esc(help)}</p>` : ''}<input type="search" data-q placeholder="${esc(search)}" aria-label="${esc(search)}"><div class="an-pick-list" data-l></div></form>`;
+                document.body.appendChild(dg); dg.showModal();
+                const paint = q => { dg.querySelector('[data-l]').innerHTML = list.filter(d => !q || String(d.name).toLowerCase().includes(q.toLowerCase())).map(d => `<button type="button" class="an-pick-it" data-id="${d.id}"><b>${esc(d.name)}</b><small class="muted">${esc(d.sub || '')}</small></button>`).join(''); };
+                paint('');
+                const done = v => { dg.close(); dg.remove(); res(v); };
+                dg.querySelector('[data-q]').addEventListener('input', e => paint(e.target.value));
+                dg.querySelector('[data-x]').addEventListener('click', () => done(null));
+                dg.addEventListener('cancel', () => done(null));
+                dg.querySelector('[data-l]').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) done(list.find(x => String(x.id) === b.dataset.id) || null); });
+            });
+        }
+        async function pickMap() {
+            let list = []; try { list = ((await A().api('vector_docs')).docs || []).filter(d => d.kind === 'map'); } catch (e) { A().toast(e.message, 'error'); return null; }
+            if (!list.length) { A().toast(T('Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte.'), 'error'); return null; }
+            const d = await pickFrom(list.map(x => ({id: x.id, name: x.name, sub: T('{n} objets', {n: String(x.objects ?? '')})})), {title: T('Choisir une carte'), help: T('Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date.'), search: T('Chercher une carte…')});
+            return d ? {docId: d.id, name: d.name} : null;
+        }
+        async function pickHouse() {
+            let list = []; try { list = (await A().api('houses')).items || []; } catch (e) { A().toast(e.message, 'error'); return null; }
+            if (!list.length) { A().toast(T('Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison.'), 'error'); return null; }
+            const d = await pickFrom(list.map(h => ({id: h.id, name: h.name, sub: T('{n} époques', {n: String((h.links?.versions || []).length)})})), {title: T('Choisir une maison'), help: T('Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu.'), search: T('Chercher une maison…')});
+            return d ? {id: d.id, name: d.name} : null;
         }
         async function pickDiagram() {
             let list = []; try { list = (await A().api('diagrams')).diagrams || []; } catch (e) { A().toast(e.message, 'error'); return null; }
@@ -236,6 +294,8 @@
                 pyramid: [...titled, ...timeF, ['Tranches d’âge (années)', NUM('step', 1, 20)], ['Âge maximum', NUM('maxAge', 50, 120)], ['Couleur des hommes', COL('colors.m')], ['Couleur des femmes', COL('colors.f')], ['Échelle fixe (toute la durée)', TOG('fixedScale')], ['Fond', COL('bg')]],
                 line: [...titled, ...timeF, ['Quoi', SEL('what', [['births', 'Les naissances'], ['deaths', 'Les décès'], ['marriages', 'Les mariages'], ['alive', 'Les vivants'], ['agedeath', 'L’âge moyen au décès']])], ['Par', SEL('per', [['year', 'Année'], ['decade', 'Décennie']])], ['En cumulé', TOG('cumulative')], ['Couleur', COL('color')], ['Remplir sous la courbe', TOG('fill', true)], ['Fond', COL('bg')]],
                 borders: [...titled, ...timeF, ['Cadrage', SEL('view', [['france', 'La France'], ['napoleon', 'La France et ses voisins'], ['europe', 'L’Europe de l’Ouest']])], ['Couleur de la France', COL('color')], ['Couleur des autres pays', COL('land')], ['Couleur de la mer', COL('sea')], ['Les dates qui comptent', TOG('events', true)]],
+                vectormap: [...titled, ...timeF, ['Apparition des objets', SEL('smooth', [[true, 'En douceur (fondu)'], [false, 'D’un coup']])], ['Caméra', SEL('cam.mode', [['fit', 'Toute la carte'], ['keys', 'Points de caméra ◆'], ['kenburns', 'Avance doucement']])], ['Fond', COL('bg')]],
+                house: [...titled, ...(s.floors?.length > 1 ? [['Étage', SEL('level', s.floors.map(([l, n]) => [l, n || String(l)]))]] : []), ['Fondu d’une époque à l’autre (0 à 0,9)', NUM('fade', 0, .9, .05)], ['L’année et le nom de l’époque en légende', TOG('labels', true)], ['Fond', COL('bg')]],
                 tree: [...titled, ['Personne de départ (n° de fiche, vide : celle de la base)', NUM('root', 0, 1e9)], ['Générations', NUM('gens', 2, 10)], ['Couleurs', SEL('colorBy', [['branch', 'Côté du père / de la mère'], ['gen', 'Par génération'], ['one', 'Une seule']])], ['Couleur (une seule)', COL('color')], ['Noms', TOG('names', true)], ['Fond', COL('bg')]],
             };
             return [...common, ...(by[s.type] || [])];
@@ -262,7 +322,7 @@
                 pane.innerHTML = `<h4>🎵 ${esc(T('Musique'))}</h4>${mus?.media ? `<p class="an-media">🎵 ${esc(mus.media.title || mus.media.filename)} <button type="button" class="link-button" data-an="musdel">${esc(T('Retirer'))}</button></p>
                         ${[['Volume (0 à 1,5)', NUM('music.vol', 0, 1.5, .05)], ['Fondu au début (s)', NUM('music.fadeIn', 0, 30, .5)], ['Fondu à la fin (s)', NUM('music.fadeOut', 0, 30, .5)], ['Commencer la musique à (s)', NUM('music.start', 0, 3600, 1)], ['En boucle si elle est trop courte', TOG('music.loop', true)], ['Plus bas quand une voix parle', TOG('music.duck', true)], ['Volume sous la voix (0 à 1)', NUM('music.duckLevel', 0, 1, .05)]].map(x => fieldHtml(D(), x)).join('')}`
                     : `<p class="muted">${esc(T('Une musique à toi (un son des médias, ou importé de l’ordinateur).'))}</p>`}${ro ? '' : `<button type="button" class="button small secondary" data-an="mus">🎵 ${esc(mus?.media ? T('Changer la musique…') : T('Choisir une musique…'))}</button>`}
-                    <h4>🎙 ${esc(T('Voix'))}</h4>${vs.map((v, i) => `<div class="an-voice"><span>🎙 ${esc(v.media?.title || T('Voix {n}', {n: String(i + 1)}))} · ${esc(fmtT(v.at || 0))}</span><label>${esc(T('Volume'))}<input type="number" min="0" max="2" step=".1" value="${esc(v.vol ?? 1)}" data-an-vvol="${i}" ${ro ? 'readonly' : ''}></label>${ro ? '' : `<button type="button" class="link-button" data-an-vdel="${i}">${esc(T('Retirer'))}</button>`}</div>`).join('') || `<p class="muted">${esc(T('Enregistre ta voix en regardant le film : la musique baisse quand tu parles.'))}</p>`}
+                    <h4>🎙 ${esc(T('Voix'))}</h4>${vs.map((v, i) => `<div class="an-voice"><span>🎙 ${esc(v.media?.title || T('Voix {n}', {n: String(i + 1)}))} · ${esc(fmtT(v.at || 0))}</span><label>${esc(T('Volume'))}<input type="number" min="0" max="2" step=".1" value="${esc(v.vol ?? 1)}" data-an-vvol="${i}" ${ro ? 'readonly' : ''}></label>${ro ? '' : `<button type="button" class="link-button" data-an-vmus="${i}" title="${esc(T('Ce son passe en musique de fond, pour tout le film'))}">🎵 ${esc(T('En faire la musique'))}</button><button type="button" class="link-button" data-an-vdel="${i}">${esc(T('Retirer'))}</button>`}</div>`).join('') || `<p class="muted">${esc(T('Enregistre ta voix en regardant le film : la musique baisse quand tu parles.'))}</p>`}
                     ${ro ? '' : `<div class="an-row"><button type="button" class="button small secondary" data-an="rec">🎙 ${esc(T('Enregistrer ma voix d’ici'))}</button><button type="button" class="button small secondary" data-an="voicepick">＋ ${esc(T('Un son des médias'))}</button></div>`}
                     <h4>🔤 ${esc(T('Textes et apparence'))}</h4>${filmFields().map(x => fieldHtml(D(), x)).join('')}
                     <h4>⚙️ ${esc(T('Réglages par défaut'))}</h4><p class="muted">${esc(T('Les nouveaux films et les nouvelles scènes partent de ces réglages.'))}</p><button type="button" class="button small secondary" data-an="defaults">${esc(T('Réglages par défaut des nouveaux films…'))}</button>`;
@@ -270,10 +330,12 @@
             }
             if (!s) { pane.innerHTML = `<p class="muted">${esc(T('Ajoute une scène : « ＋ Scène ».'))}</p>`; return; }
             const mediaRow = s.type === 'image' ? `<p class="an-media">🖼 ${esc(s.media?.title || s.media?.filename || T('Aucune photo'))} ${ro ? '' : `<button type="button" class="link-button" data-an="imgpick">${esc(T('Changer…'))}</button>`}</p>` : '';
+            const mapRow = s.type === 'vectormap' ? `<p class="an-media">🗺️ ${esc(s.docName || s.name || '')}${!s.docId && s.doc ? ` <small class="muted">${esc(T('(une copie de la carte)'))}</small>` : ''} ${ro ? '' : `<button type="button" class="link-button" data-an="mappick">${esc(T('Changer…'))}</button>`}</p>` : '';
+            const houseRow = s.type === 'house' ? `<p class="an-media">🏠 ${esc(s.houseName || s.name || '')} ${ro ? '' : `<button type="button" class="link-button" data-an="housepick">${esc(T('Changer…'))}</button>`}${s.houseId && ext.openHouse ? ` <button type="button" class="link-button" data-an="houseopen">${esc(T('Ouvrir la maison'))}</button>` : ''}</p>` : '';
             const diaRow = s.type === 'diagram' ? `<p class="an-media">📊 ${esc(s.title || s.name || '')} ${ro ? '' : `<button type="button" class="link-button" data-an="diapick">${esc(T('Changer…'))}</button>`}</p>` : '';
             const colorRows = (s.type === 'migrations' && (s.colorBy || 'surname') !== 'one') || s.type === 'race' ? `<h4>🎨 ${esc(T('Couleurs'))}</h4><div class="an-colors" data-an-colors></div>` : '';
-            pane.innerHTML = `<h4>${TYPES[s.type]?.icon || ''} ${esc(T(TYPES[s.type]?.label || ''))}</h4>${mediaRow}${diaRow}${fieldsFor(s).map(x => fieldHtml(s, x)).join('')}${colorRows}
-                ${['migrations', 'diagram', 'image'].includes(s.type) ? `<h4>📷 ${esc(T('Caméra'))}</h4><p class="muted">${esc(T('« Points de caméra ◆ » : sur l’aperçu, glisse pour déplacer, molette pour zoomer, puis « 📷 Garder ce cadrage ici ». Entre deux points, la caméra glisse.'))}</p>` : ''}`;
+            pane.innerHTML = `<h4>${TYPES[s.type]?.icon || ''} ${esc(T(TYPES[s.type]?.label || ''))}</h4>${mediaRow}${diaRow}${mapRow}${houseRow}${fieldsFor(s).map(x => fieldHtml(s, x)).join('')}${colorRows}
+                ${['migrations', 'diagram', 'image', 'vectormap'].includes(s.type) ? `<h4>📷 ${esc(T('Caméra'))}</h4><p class="muted">${esc(T('« Points de caméra ◆ » : sur l’aperçu, glisse pour déplacer, molette pour zoomer, puis « 📷 Garder ce cadrage ici ». Entre deux points, la caméra glisse.'))}</p>` : ''}`;
             if (colorRows) paintColors();
         }
         async function paintColors() {
@@ -303,7 +365,7 @@
                 const pics = (s.pics || []).map((pc, i) => `<span class="an-blk g" style="left:${(Number(pc.t) || 0) * 100}%;width:${Math.max(4, (Number(pc.dur) || 3) / RN().durOf(s) * 100)}%" data-an-pic="${i}" title="${esc(T('Glisser : changer le moment · clic : réglages'))}">🖼 ${esc(pc.media?.title || '')}</span>`).join('');
                 scene = `<div class="an-tl-head"><b>${TYPES[s.type]?.icon || ''} ${esc(s.name || '')}</b><span class="an-ticks">${ticks.map(x => `<span>${esc(String(x))}</span>`).join('')}</span></div>
                     ${dated ? `<div class="an-trk-row"><b>📅 ${esc(T('Temps'))}</b><div class="an-trk"><span class="an-blk" style="left:0;width:100%">${esc(String(rg.from))} → ${esc(String(rg.to))}${s.slow !== false && s.type === 'migrations' ? ` · ${esc(T('ralenti là où il se passe beaucoup'))}` : ''}</span><span class="an-head" data-an-shead></span></div></div>` : ''}
-                    ${['migrations', 'diagram'].includes(s.type) ? `<div class="an-trk-row"><b>📷 ${esc(T('Caméra'))}</b><div class="an-trk" data-an-keys>${keys}<span class="an-head" data-an-shead></span></div>${ro ? '' : `<button type="button" class="link-button" data-an="camkey">📷 ${esc(T('Garder ce cadrage ici'))}</button>`}</div>` : ''}
+                    ${['migrations', 'diagram', 'vectormap'].includes(s.type) ? `<div class="an-trk-row"><b>📷 ${esc(T('Caméra'))}</b><div class="an-trk" data-an-keys>${keys}<span class="an-head" data-an-shead></span></div>${ro ? '' : `<button type="button" class="link-button" data-an="camkey">📷 ${esc(T('Garder ce cadrage ici'))}</button>`}</div>` : ''}
                     <div class="an-trk-row"><b>💬 ${esc(T('Légendes'))}</b><div class="an-trk" data-an-caps>${autos.join('')}${caps.join('')}<span class="an-head" data-an-shead></span></div>${ro ? '' : `<button type="button" class="link-button" data-an="capadd">＋ ${esc(T('Légende ici'))}</button>`}</div>
                     ${s.type !== 'title' ? `<div class="an-trk-row"><b>🖼 ${esc(T('Images'))}</b><div class="an-trk" data-an-pics>${pics}<span class="an-head" data-an-shead></span></div>${ro ? '' : `<button type="button" class="link-button" data-an="picadd">＋ ${esc(T('Image ici'))}</button>`}</div>` : ''}`;
             }
@@ -377,6 +439,12 @@
             const sc = e.target.closest('[data-an-sc]'), mvb = e.target.closest('[data-an-mv]'), scm = e.target.closest('[data-an-scm]'), tb = e.target.closest('[data-an-tab]'), fm = e.target.closest('[data-an-fmtv]');
             if (mvb) { const [i, dir] = mvb.dataset.anMv.split('|').map(Number), j = i + dir; if (j < 0 || j >= D().scenes.length) return; const L = D().scenes; [L[i], L[j]] = [L[j], L[i]]; sel = j; changed(); return; }
             if (scm) { sceneMenu(scm, Number(scm.dataset.anScm)); return; }
+            const vdel = e.target.closest('[data-an-vdel]'), vmus = e.target.closest('[data-an-vmus]');
+            if (vdel && !ro) { const i = Number(vdel.dataset.anVdel), old = D().voices.splice(i, 1)[0]; if (!old) return; changed({pane: true}); A().undoToast?.(T('Voix retirée.'), {undo: () => { D().voices.splice(i, 0, old); changed({pane: true}); }}); return; }
+            if (vmus && !ro) { // 🎵 une voix (un son envoyé, par exemple) devient la musique du film ; l'ancienne musique revient avec ↶ Annuler
+                const i = Number(vmus.dataset.anVmus), v = D().voices[i]; if (!v) return; const oldMus = D().music, oldV = D().voices.slice();
+                D().music = {vol: .7, fadeIn: 2, fadeOut: 3, loop: true, duck: true, duckLevel: .3, start: 0, ...(oldMus || {}), media: v.media}; D().voices.splice(i, 1); changed({pane: true});
+                A().undoToast?.(T('Le son est maintenant la musique du film.'), {undo: () => { D().music = oldMus; D().voices = oldV; changed({pane: true}); }}); return; }
             if (sc && !b) { goScene(Number(sc.dataset.anSc)); return; }
             if (tb) { tab = tb.dataset.anTab; paintPane(); return; }
             if (fm && !ro) { D().format = fm.dataset.anFmtv; RN().clearCache(); changed({pane: false}); paintFmt(); return; }
@@ -393,6 +461,9 @@
                 case 'export': return exportDialog();
                 case 'more': return moreMenu(b);
                 case 'imgpick': { const m = await pickImage(); if (m) { s.media = m; changed({pane: true}); } return; }
+                case 'mappick': { const m = await pickMap(); if (m) { s.docId = m.docId; s.docName = m.name; delete s.doc; delete s.docRev; RN().clearCache(false); changed({pane: true}); } return; }
+                case 'housepick': { const h = await pickHouse(); if (h) { const n = await houseScene(h); Object.assign(s, {houseId: n.houseId, houseName: n.houseName, floors: n.floors, level: n.level}); RN().clearCache(false); changed({pane: true}); } return; }
+                case 'houseopen': return ext.openHouse?.({id: s.houseId, onClose: () => { RN().clearCache(false); draw(); }});
                 case 'diapick': { const x = await pickDiagram(); if (x) { Object.assign(s, x); RN().clearCache(); changed({pane: true}); } return; }
                 case 'camkey': { const c = liveCam || RN().camAt(s.cam, pOfScene()); s.cam = {...(s.cam || {}), mode: 'keys'}; s.cam.keys = (s.cam.keys || []).filter(k => Math.abs(k.t - pOfScene()) > .01); s.cam.keys.push({t: Math.round(pOfScene() * 1000) / 1000, x: c.x, y: c.y, z: c.z}); liveCam = null; changed(); return; }
                 case 'camreset': liveCam = null; draw(); paintPlayhead(); return;
@@ -516,8 +587,11 @@
         }
         const download = (blob, name) => { const a = Object.assign(document.createElement('a'), {href: URL.createObjectURL(blob), download: name}); document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000); };
 
-        if (ro) status(null); else status(P.id ? 'saved' : 'dirty');
-        if (!P.id && !ro) { dirty = true; save(); }
+        // 📤 ce qu'un autre outil a envoyé : la scène ajoutée est choisie ; le son ouvre l'onglet Film ; tout est enregistré tout de suite
+        if (P.dirtyFromSend === 'scene' && D().scenes.length) { sel = D().scenes.length - 1; t = sceneStart(sel) + .01; }
+        if (P.dirtyFromSend === 'audio') { tab = 'film'; A().toast(T('Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond.')); }
+        if (ro) status(null); else status(P.id && !P.dirtyFromSend ? 'saved' : 'dirty');
+        if ((!P.id || P.dirtyFromSend) && !ro) { dirty = true; save(); }
         paintAll();
         ext.__anim = {P, draw, get t() { return t; }, set t(v) { t = v; }, save, changed, sel: () => sel}; // pour les essais
     }

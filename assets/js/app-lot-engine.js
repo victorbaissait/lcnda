@@ -59,6 +59,7 @@
         resize: {icon: '↔', label: 'Redimensionner', kinds: IMG, help: i18n('Plus grand côté, largeur, hauteur, cadre ou pourcentage.'), def: {by: 'long', long: 1600, w: 1600, h: 1200, pct: 50, keep: true, noUp: true}},
         crop: {icon: '✂️', label: 'Rogner, pivoter, miroir', kinds: IMG, help: i18n('Couper les bords, recadrer au format voulu (centré), tourner d’un quart de tour, retourner.'), def: {margin: 0, ratio: '', rotate: 0, flipH: false, flipV: false}},
         gray: {icon: '◐', label: i18n('Noir et blanc'), kinds: IMG, help: i18n('Gris ou sépia.'), def: {mode: 'gray'}},
+        retouch: {icon: '🎚️', label: i18n('Une action de la Retouche'), kinds: IMG, help: i18n('Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image.'), def: {action: '', name: ''}},
         watermark: {icon: '💧', label: 'Filigrane', kinds: IMG, help: i18n('Un texte posé dans un coin, au milieu ou répété.'), def: {text: '© Ma famille', pos: 'br', size: 4, opacity: 60, color: '#ffffff'}},
         format: {icon: '🔁', label: i18n('Changer de format'), kinds: ['image', 'doc', 'sheet', 'audio'], help: i18n('Images, documents, classeurs et sons : chacun vers un format de sa sorte.'), def: {image: 'jpg', doc: 'docx', sheet: 'xlsx', audio: 'mp3'}},
         quality: {icon: '🗜', label: i18n('Qualité et poids'), kinds: IMG, help: i18n('Qualité JPG / WebP / AVIF et un poids à ne pas dépasser.'), def: {q: 85, maxKb: 0}},
@@ -66,7 +67,7 @@
         tags: {icon: '🏷', label: i18n('Étiquettes et personne'), kinds: ['image', 'doc', 'sheet', 'pdf', 'audio', 'video'], base: true, help: i18n('Ajouter des étiquettes, relier à une personne (dans la base seulement).'), def: {labels: [], person: 0, personName: ''}},
         pdf: {icon: '📄', label: i18n('Assembler en un PDF'), kinds: IMG, help: i18n('Toutes les images dans un seul PDF, une page par image.'), def: {name: 'Scans', page: 'a4', margin: 10, keep: false}},
     };
-    const ORDER = ['rename', 'resize', 'crop', 'gray', 'watermark', 'format', 'quality', 'strip', 'tags', 'pdf'];
+    const ORDER = ['rename', 'resize', 'crop', 'gray', 'retouch', 'watermark', 'format', 'quality', 'strip', 'tags', 'pdf'];
     const RATIOS = [['', i18n('Ne pas recadrer')], ['1:1', i18n('Carré 1:1')], ['4:3', '4:3'], ['3:2', '3:2'], ['16:9', '16:9'], ['3:4', '3:4 (portrait)'], ['2:3', '2:3 (portrait)'], ['9:16', '9:16 (portrait)']];
     const POSITIONS = [['br', i18n('En bas à droite')], ['bl', i18n('En bas à gauche')], ['tr', i18n('En haut à droite')], ['tl', i18n('En haut à gauche')], ['c', i18n('Au milieu')], ['tile', i18n('Répété en biais')]];
     const TOKENS = [['{texte}', 'Texte'], ['{n}', '001'], ['{nom}', i18n('Nom d’origine')], ['{titre}', 'Titre'], ['{date}', i18n('Date du jour')], ['{annee}', i18n('Année')], ['{personne}', i18n('Personne')], ['{lieu}', i18n('Lieu')]];
@@ -80,6 +81,7 @@
                 pct: clamp(p.pct, 1, 400, 50), keep: bool(p.keep, true), noUp: bool(p.noUp, true)};
             case 'crop': return {margin: clamp(p.margin, 0, 40, 0), ratio: oneOf(p.ratio, RATIOS.map(r => r[0]), ''), rotate: oneOf(Number(p.rotate) || 0, [0, 90, 180, 270], 0), flipH: bool(p.flipH), flipV: bool(p.flipV)};
             case 'gray': return {mode: oneOf(p.mode, ['gray', 'sepia'], 'gray')};
+            case 'retouch': return {action: str(p.action, 80), name: str(p.name, 120)};
             case 'watermark': return {text: str(p.text ?? d.text, 120), pos: oneOf(p.pos, POSITIONS.map(x => x[0]), 'br'), size: clamp(p.size, 1, 30, 4), opacity: clamp(p.opacity, 5, 100, 60), color: /^#[0-9a-f]{6}$/i.test(p.color || '') ? p.color.toLowerCase() : '#ffffff'};
             case 'format': return Object.fromEntries(Object.keys(FORMATS).map(k => [k, oneOf(p[k], FORMATS[k].map(f => f[0]), d[k])]));
             case 'quality': return {q: Math.round(clamp(p.q, 10, 100, 85)), maxKb: Math.round(clamp(p.maxKb, 0, 50000, 0))};
@@ -181,7 +183,7 @@
     function plan(items, recipe, opts = {}) {
         const R = cleanRecipe(recipe), chain = R.cards, out = opts.out || R.out, warnings = [];
         const rn = last(chain, 'rename'), fmtC = last(chain, 'format'), q = last(chain, 'quality'), st = last(chain, 'strip'), tg = last(chain, 'tags'), pdfC = last(chain, 'pdf');
-        const pixel = chain.filter(c => c.on && ['crop', 'resize', 'gray', 'watermark'].includes(c.type));
+        const pixel = chain.filter(c => c.on && ['crop', 'resize', 'gray', 'retouch', 'watermark'].includes(c.type));
         const pdfOnly = pdfC && !pdfC.p.keep;
         const rows = items.map((it, i) => {
             const kind = it.kind || kindOf(it.name, it.mime), ext0 = normExt(extOf(it.name)), notes = [], ops = [];
@@ -196,6 +198,7 @@
                     if (c.type === 'crop') { did = !!(c.p.rotate || c.p.flipH || c.p.flipV || c.p.margin || c.p.ratio); if (w && h) { const b = cropBox(w, h, c.p); did = !!(c.p.rotate || c.p.flipH || c.p.flipV) || b.w !== w || b.h !== h; w = b.outW; h = b.outH; } }
                     if (c.type === 'resize' && w && h) { const s = fitSize(w, h, c.p); did = s.w !== w || s.h !== h; w = s.w; h = s.h; }
                     if (c.type === 'watermark') did = !!String(c.p.text || '').trim();
+                    if (c.type === 'retouch') did = !!String(c.p.action || '').trim();
                     if (did) { ops.push(c.type); px++; } else notes.push(i18n('{x} : rien à changer', {x: ACTIONS[c.type].label}));
                 }
                 if (fmtC && fmtC.p.image !== 'keep') { ext = fmtC.p.image; ops.push('format'); }
@@ -308,6 +311,7 @@
             case 'resize': return p.by === 'pct' ? `${String(p.pct).replace('.', ',')} %` : p.by === 'long' ? i18n('plus grand côté {long} px', {long: p.long}) : p.by === 'width' ? `largeur ${p.w} px` : p.by === 'height' ? `hauteur ${p.h} px` : `${p.w} × ${p.h} px`;
             case 'crop': return [p.margin ? `bords ${p.margin} %` : '', p.ratio ? `format ${p.ratio}` : '', p.rotate ? `${p.rotate}°` : '', p.flipH ? 'miroir' : '', p.flipV ? i18n('tête en bas') : ''].filter(Boolean).join(' · ') || i18n('rien à faire');
             case 'gray': return p.mode === 'sepia' ? i18n('sépia') : 'gris';
+            case 'retouch': return p.action ? `« ${p.name || p.action} »` : i18n('aucune action choisie');
             case 'watermark': return `« ${p.text || ''} »`;
             case 'format': return Object.entries(p).filter(([, v]) => v !== 'keep').map(([k, v]) => `${KIND_LABEL[k]} → ${v.toUpperCase()}`).join(' · ') || i18n('rien ne change');
             case 'quality': return `${p.q} %${p.maxKb ? ` · ${p.maxKb.toLocaleString('fr-FR')} ${i18n('Ko au plus')}` : ''}`;
