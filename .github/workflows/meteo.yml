@@ -106,4 +106,5 @@ jobs:
 
       - name: Pas encore fini
         if: steps.build.outcome != 'success'
-        run: echo "::notice::La fabrication n'est pas finie (6 h au plus par machine). Relance « Données météo » : elle reprendra où elle s'est arrêtée."
+        run: |
+          echo "::notice::La fabrication n'est pas finie (6 h au plus par machine). Relance « Données météo », elle reprendra où elle s'est arrêtée."
