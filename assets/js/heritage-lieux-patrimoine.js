@@ -102,6 +102,7 @@
     /** remplit un élément avec les parties allumées (rien du tout s'il n'y a rien à dire) ; place = {id?, insee?, name?, lat?, lon?} */
     async function placeInto(host, place, opts = {}) {
         if (!host) return null;
+        if (opts.fresh) memo.delete(`${Number(place?.id) || 0}|${String(place?.insee || '')}`);
         const s = settings(), parts = (opts.parts || ['dico', 'lieuxdits', 'patrimoine']).filter(k => opts.force || s[k]);
         if (!parts.length) { host.innerHTML = ''; return null; }
         const d = await placeData(place);
@@ -144,7 +145,7 @@
             const anchor = village.querySelector('.cplus-place') || village.querySelector('.h-village-grid') || village.querySelector('[data-vsec="stats"]');
             const box = '<div class="lp-place" data-lp-host></div>';
             if (anchor) anchor.insertAdjacentHTML('afterend', box); else village.insertAdjacentHTML('beforeend', box);
-            placeInto(village.querySelector('[data-lp-host]'), place);
+            placeInto(village.querySelector('[data-lp-host]'), place, {fresh: true});
             return;
         }
         const mono = ws.querySelector('.place-monograph-sections:not([data-lp])');
@@ -156,7 +157,7 @@
             const anchor = mono.querySelector('.place-monograph-postcards');
             const box = '<div class="lp-place" data-lp-host></div>';
             if (anchor) anchor.insertAdjacentHTML('beforebegin', box); else mono.insertAdjacentHTML('beforeend', box);
-            placeInto(mono.querySelector('[data-lp-host]'), place);
+            placeInto(mono.querySelector('[data-lp-host]'), place, {fresh: true});
         }
     }
     function redrawPlaces() { memo.clear(); document.querySelectorAll('[data-lp-host]').forEach(h => { if (h.__lpPlace) placeInto(h, h.__lpPlace); }); }

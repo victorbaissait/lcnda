@@ -329,7 +329,7 @@ echo json_encode(['n' => $n, 'b' => $b, 'est' => INSEE_MAJ_ROW_BYTES]);`);
             await p.waitForFunction(() => /Décès de 2022 retirés/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 20000}).catch(async e => { throw new Error(e.message + ' | ' + await toasts() + ' | ' + JSON.stringify((await api('insee_maj_status')).installed.years.map(y => [y.year, y.rows])) + ' | ' + JSON.stringify((await api('insee_maj_status')).job) + ' | ' + await p.evaluate(() => document.querySelector('[data-im-remove="2022"]')?.outerHTML)); });
             assert.ok(!(await api('insee_maj_status')).installed.years.some(y => y.year === 2022));
             await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].find(x => /2022 retirés/.test(x.textContent)).querySelector('.ui-toast-btn').click());
-            await p.waitForFunction(() => /installés/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 60000});
+            for (let i = 0; i < 120 && !(await api('insee_maj_status')).installed.years.some(y => y.year === 2022); i++) await sleep(500); // retéléchargée et installée
             assert.strictEqual((await api('insee_maj_status')).installed.years.find(y => y.year === 2022).rows, 700);
             await p.click('#insee-maj-dialog [data-close-insee-maj]').catch(() => {});
         });

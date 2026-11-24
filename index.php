@@ -80,6 +80,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=4">
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
+    <link rel="stylesheet" href="assets/css/ciel-heure.css?v=1">
     <link rel="stylesheet" href="assets/css/bases-officielles.css?v=1">
     <link rel="stylesheet" href="assets/css/prenoms-pays.css?v=1">
     <link rel="stylesheet" href="assets/css/place-photos.css?v=1">
@@ -1376,7 +1377,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-creer.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-lieux.js?v=6" defer></script>
 <script src="assets/js/heritage-tresors-outils.js?v=4" defer></script>
-<script src="assets/js/heritage-tresors-ciel.js?v=7" defer></script>
+<script src="assets/js/heritage-tresors-ciel.js?v=8" defer></script>
 <script src="assets/js/heritage-tresors-merveilles.js?v=8" defer></script>
 <script src="assets/js/heritage-tresors-histoires.js?v=7" defer></script>
 <script src="assets/js/heritage-tresors-ateliers.js?v=13" defer></script>
@@ -1607,6 +1608,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-elections.js?v=1" defer></script>
 <script src="assets/js/heritage-gov.js?v=1" defer></script>
 <script src="assets/js/heritage-bases-officielles.js?v=1" defer></script>
+<script src="assets/js/heritage-ciel-heure.js?v=1" defer></script>
 <script src="assets/js/heritage-histoire.js?v=1" defer></script>
 <script src="assets/js/heritage-monde-contexte.js?v=1" defer></script>
 <script src="assets/js/heritage-prix-europe.js?v=1" defer></script>

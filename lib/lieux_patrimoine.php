@@ -105,7 +105,7 @@ function lp_user_deps(PDO $pdo): array
         }
     } catch (Throwable) {}
     arsort($n);
-    return array_keys($n);
+    return array_map('strval', array_keys($n));
 }
 
 /* ═════════════════════════ 📜 DicoTopo (livré avec l'app) ═════════════════════════ */
@@ -150,7 +150,7 @@ function lp_dico_commune(string $insee, string $dep): array
 {
     $idx = lp_dico_index();
     $info = $idx['deps'][$dep] ?? null;
-    $base = ['covered' => (bool) $info, 'dep' => $dep, 'dep_label' => $info['label'] ?? (lp_dep_names()[$dep] ?? $dep), 'bibl' => $info['bibl'] ?? null, 'covered_deps' => array_keys($idx['deps'])];
+    $base = ['covered' => (bool) $info, 'dep' => $dep, 'dep_label' => $info['label'] ?? (lp_dep_names()[$dep] ?? $dep), 'bibl' => $info['bibl'] ?? null, 'covered_deps' => array_map('strval', array_keys($idx['deps']))];
     if (!$info || $insee === '') { return $base + ['found' => false]; }
     $d = lp_dico($dep);
     if (!$d) { return $base + ['found' => false]; }
@@ -205,7 +205,7 @@ function lp_place_commune(PDO $pdo, array $pl): array
         $s = $pdo->prepare('SELECT insee_code, name FROM commune_contours WHERE name=? COLLATE NOCASE LIMIT 20'); $s->execute([trim(explode(',', (string) ($pl['name'] ?? ''))[0])]);
         foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) { $hits[(string) $r['insee_code']] = true; }
     } catch (Throwable) {}
-    foreach ($dep !== '' ? [$dep] : array_keys(lp_dico_index()['deps']) as $d) {
+    foreach ($dep !== '' ? [$dep] : array_map('strval', array_keys(lp_dico_index()['deps'])) as $d) {
         if ($p = lp_pdo("lieuxdits-$d")) { $s = $p->prepare('SELECT insee FROM communes WHERE cle=?'); $s->execute([$key]); foreach ($s->fetchAll(PDO::FETCH_COLUMN) as $c) { $hits[(string) $c] = true; } }
         if ($dep !== '' && ($dd = lp_dico($d))) { foreach ($dd['c'] as $insee => $c) { if (lp_fold((string) $c[0]) === $key) { $hits[(string) $insee] = true; } } }
     }
@@ -315,7 +315,7 @@ function lp_status_data(PDO $pdo): array
     }
     foreach (glob(lp_dir() . '/*.sqlite.removed') ?: [] as $f) { $removed[] = basename($f, '.sqlite.removed'); }
     $idx = lp_dico_index(); $dsize = 0;
-    foreach (array_keys($idx['deps']) as $d) { $dsize += (int) @filesize(lp_dico_dir() . "/DT$d.json.gz"); }
+    foreach (array_map('strval', array_keys($idx['deps'])) as $d) { $dsize += (int) @filesize(lp_dico_dir() . "/DT$d.json.gz"); }
     return ['packs' => (object) $packs, 'removed' => $removed, 'wanted' => lp_user_deps($pdo), 'dep_names' => lp_dep_names(), 'pack_dir' => lp_dir(),
         'dicotopo' => ['deps' => (object) array_map(static fn($v) => ['label' => $v['label'] ?? '', 'places' => (int) ($v['places'] ?? 0), 'old' => (int) ($v['old'] ?? 0), 'size' => (int) ($v['size'] ?? 0)], $idx['deps']), 'size' => $dsize, 'built' => (string) ($idx['built'] ?? '')]];
 }

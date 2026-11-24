@@ -97,6 +97,42 @@
    "old": 35002,
    "places": 16596,
    "size": 728923
+  },
+  "18": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Cher",
+    "bibl": "Boyer (Hippolyte) et Latouche (Robert), Dictionnaire topographique du département du Cher, Paris, 1926.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k65611244"
+   },
+   "communes": 296,
+   "label": "Cher",
+   "old": 18566,
+   "places": 15716,
+   "size": 528198
+  },
+  "21": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Côte-d’Or",
+    "bibl": "Roserot (Alphonse), Dictionnaire topographique du département de la Côte-d’Or, Paris, 1924.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k1100941"
+   },
+   "communes": 716,
+   "label": "Côte-d'Or",
+   "old": 22557,
+   "places": 7560,
+   "size": 540069
+  },
+  "22": {
+   "bibl": {
+    "abbr": "Dictionnaire des communes des Côtes-d’Armor",
+    "bibl": "Saint-Jouan (Régis de), Dictionnaire des communes : éléments d'histoire et d'archéologie, Saint-Brieuc, 1990.",
+    "gallica": ""
+   },
+   "communes": 373,
+   "label": "Côtes-d'Armor",
+   "old": 1535,
+   "places": 409,
+   "size": 35731
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

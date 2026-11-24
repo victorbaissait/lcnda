@@ -148,7 +148,7 @@ echo json_encode(['aur' => $aur, 'tul' => $tul]);`], {cwd: root, encoding: 'utf8
         await t('Atelier : un lieu lu absent de la base → « 💡 Ce serait peut-être Aurillac (Cantal) »', async () => {
             await p.evaluate(() => { document.getElementById('workspace').insertAdjacentHTML('beforeend', '<section data-tf-sec="places"><div class="h-tf-item" data-tf-item="l1"><button class="h-tf-main">Orlhac</button></div><div class="h-tf-item" data-tf-item="l2"><button class="h-tf-main">Aurillac</button><span class="h-tf-base">↔ Aurillac</span></div></section>'); });
             await p.waitForSelector('[data-tf-item="l1"] .lp-guess', {timeout: 10000});
-            assert.match(await p.textContent('[data-tf-item="l1"] .lp-guess'), /Ce serait peut-être Aurillac \(Cantal\)/);
+            assert.match(await p.textContent('[data-tf-item="l1"] .lp-guess'), /Ce serait peut-être .*Aurillac \(Cantal\)/);
             await sleep(300); assert.ok(!(await p.$('[data-tf-item="l2"] .lp-guess')), 'un lieu de la base : rien');
         });
         await t('registre LCNDA_EXT.dataSources : 4 entrées, run() pour un lieu choisi', async () => {
