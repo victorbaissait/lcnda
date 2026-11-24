@@ -748,16 +748,11 @@ header('X-Content-Type-Options: nosniff');
         <strong style="font-size:.95em;display:block;margin:.3rem 0 .4rem">Palette des barres et des colonnes</strong>
         <div style="display:flex;align-items:center;gap:10px;background:var(--blue-soft);border-radius:6px;padding:.65rem .9rem;margin:.25rem 0 1.25rem">
             <span style="font-size:1.2em">🎨</span>
-            <p style="margin:0;font-size:.83em;color:var(--muted);line-height:1.45">40 couleurs utilisées <strong>en séquence</strong> pour colorer les barres et colonnes. Le cycle recommence automatiquement au-delà du 40ème élément.</p>
+            <p style="margin:0;font-size:.83em;color:var(--muted);line-height:1.45"><span id="stats-colors-count">100</span> couleurs utilisées <strong>en séquence</strong> pour colorer les barres et colonnes. Le cycle recommence au-delà de la dernière ; ajoute-en si tu as plus d’éléments.</p>
         </div>
+        <div style="display:flex;gap:8px;margin:-.5rem 0 .9rem"><button type="button" class="button small secondary" data-stats-more>＋ 10 couleurs</button><button type="button" class="button small secondary" data-stats-less>− 10 couleurs</button></div>
 
-        <div id="stats-colors-swatches" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px 12px;margin-bottom:1.5rem">
-            <?php for($i=0;$i<40;$i++): ?>
-            <label style="display:flex;align-items:center;gap:5px;font-size:.8em">
-                <span style="width:18px;text-align:right;color:var(--muted);flex-shrink:0"><?= $i+1 ?></span>
-                <input type="color" name="color_<?= $i ?>" value="#0066cc" style="width:38px;height:30px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer;flex-shrink:0">
-            </label>
-            <?php endfor; ?>
+        <div id="stats-colors-swatches" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:8px 12px;margin-bottom:1.5rem">
         </div>
 
         <hr style="border:none;border-top:1px solid var(--line-color);margin:1.5rem 0 1.25rem">
@@ -1186,7 +1181,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=574" defer></script>
+<script src="assets/js/app.js?v=575" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=6" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>

@@ -299,6 +299,23 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-grid')), null);
             await setDesigns(page, null);
         });
+        await t('📊 palette des statistiques : 100 couleurs, « ＋ 10 couleurs » (enregistré, retrouvé), « − 10 » avec ↶ Annuler, « Remettre comme au départ »', async () => {
+            await page.evaluate(() => localStorage.removeItem('genealogie-stats-colors'));
+            await page.evaluate(() => window.LCNDA_APP.openStatsColorsDialog()); await page.waitForSelector('#stats-colors-dialog[open] #stats-colors-swatches input[name="color_99"]');
+            const n = () => page.$$eval('#stats-colors-swatches input[type=color]', l => l.length);
+            assert.equal(await n(), 100); assert.equal(await page.textContent('#stats-colors-count'), '100');
+            const all = await page.$$eval('#stats-colors-swatches input[type=color]', l => l.map(x => x.value)); assert.equal(new Set(all).size, 100, 'toutes différentes');
+            await page.click('[data-stats-more]'); await page.click('[data-stats-more]'); assert.equal(await n(), 120);
+            await page.click('#stats-colors-dialog button[type="submit"]');
+            assert.equal(JSON.parse(await page.evaluate(() => localStorage.getItem('genealogie-stats-colors'))).length, 120);
+            assert.equal(await page.evaluate(() => window.LCNDA_APP.getStatsColors().length), 120);
+            await page.evaluate(() => window.LCNDA_APP.openStatsColorsDialog()); await page.waitForSelector('#stats-colors-dialog[open] input[name="color_119"]');
+            await page.click('[data-stats-less]'); assert.equal(await n(), 110);
+            await page.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /couleurs retirées/.test(x.textContent)).querySelector('button').click()); await new Promise(r => setTimeout(r, 300));
+            assert.equal(await n(), 120, '↶ Annuler');
+            await page.click('#stats-colors-reset'); assert.equal(await n(), 100);
+            await page.evaluate(() => { document.querySelector('#stats-colors-dialog').close(); localStorage.removeItem('genealogie-stats-colors'); });
+        });
         await t('A5 : 14 cases au choix (dont parchemin, médaillon, écusson, timbre, polaroïd, musée, pastel par génération, nuit) ; le pastel colore par génération', async () => {
             await page.evaluate(() => window.LCNDA_APP.openStatsColorsDialog());
             await page.waitForSelector('#stats-colors-dialog[open] #tree-cards-panel [data-tc-v="parchemin"]');
