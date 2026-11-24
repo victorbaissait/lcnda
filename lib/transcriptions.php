@@ -29,6 +29,9 @@ function act_transcriptions_ensure(PDO $pdo): void
     $pdo->exec("CREATE TABLE IF NOT EXISTS act_transcription_versions (id INTEGER PRIMARY KEY AUTOINCREMENT, act_id INTEGER NOT NULL, label TEXT NOT NULL DEFAULT '', body TEXT NOT NULL DEFAULT '',
         data_json TEXT NOT NULL DEFAULT '{}', auto INTEGER NOT NULL DEFAULT 1, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_act_transcription_versions_act ON act_transcription_versions(act_id)');
+    // ⚖️ une lecture gardée (écriture à la main, lecture approfondie, OCR, fusion) : d'où elle vient (« htr:modèle », « deep:modèle », « ocr », « merge ») ; jamais effacée toute seule
+    $cols = array_column($pdo->query('PRAGMA table_info(act_transcription_versions)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+    if (!in_array('source', $cols, true)) { try { $pdo->exec("ALTER TABLE act_transcription_versions ADD COLUMN source TEXT NOT NULL DEFAULT ''"); } catch (Throwable $_) {} } // base en lecture seule : rien
     $done = true;
 }
 
@@ -45,9 +48,9 @@ function act_version_data(PDO $pdo, $data): array
 function act_transcription_versions(PDO $pdo, int $actId): array
 {
     act_transcriptions_ensure($pdo);
-    $s = $pdo->prepare('SELECT id, label, auto, created_at, body FROM act_transcription_versions WHERE act_id=? ORDER BY id DESC'); $s->execute([$actId]);
+    $s = $pdo->prepare('SELECT id, label, auto, created_at, body, source FROM act_transcription_versions WHERE act_id=? ORDER BY id DESC'); $s->execute([$actId]);
     return array_map(static function ($r) { $b = (string) $r['body'];
-        return ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'auto' => (int) $r['auto'], 'created_at' => $r['created_at'], 'words' => count(preg_split('/\s+/u', trim($b), -1, PREG_SPLIT_NO_EMPTY)), 'lines' => count(array_filter(explode("\n", $b), static fn($l) => trim($l) !== ''))]; }, $s->fetchAll());
+        return ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'auto' => (int) $r['auto'], 'source' => (string) $r['source'], 'created_at' => $r['created_at'], 'words' => count(preg_split('/\s+/u', trim($b), -1, PREG_SPLIT_NO_EMPTY)), 'lines' => count(array_filter(explode("\n", $b), static fn($l) => trim($l) !== ''))]; }, $s->fetchAll());
 }
 
 function act_transcription_version(PDO $pdo, int $id): array
@@ -55,7 +58,7 @@ function act_transcription_version(PDO $pdo, int $id): array
     act_transcriptions_ensure($pdo);
     $s = $pdo->prepare('SELECT * FROM act_transcription_versions WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
     if (!$r) { throw new RuntimeException('Version introuvable.'); }
-    return ['id' => (int) $r['id'], 'act_id' => (int) $r['act_id'], 'label' => (string) $r['label'], 'auto' => (int) $r['auto'], 'created_at' => $r['created_at'], 'body' => (string) $r['body'], 'data' => json_decode((string) $r['data_json'], true) ?: new stdClass()];
+    return ['id' => (int) $r['id'], 'act_id' => (int) $r['act_id'], 'label' => (string) $r['label'], 'auto' => (int) $r['auto'], 'source' => (string) ($r['source'] ?? ''), 'created_at' => $r['created_at'], 'body' => (string) $r['body'], 'data' => json_decode((string) $r['data_json'], true) ?: new stdClass()];
 }
 
 /** une version : ↺ « avant le retour », « ＋ Enregistrer la version actuelle », ou avant un gros changement (auto) ; restore_id + created_at : ↶ Annuler d'une suppression */
@@ -71,8 +74,9 @@ function save_act_transcription_version(PDO $pdo, array $data): array
     $id = safe_int($data['restore_id'] ?? 0); $at = (string) ($data['created_at'] ?? '');
     $at = preg_match('/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(:\d{2})?$/', $at) ? str_replace('T', ' ', $at) : null;
     if ($id > 0) { $u = $pdo->prepare('SELECT 1 FROM act_transcription_versions WHERE id=?'); $u->execute([$id]); if ($u->fetchColumn()) { $id = 0; } }
-    $pdo->prepare('INSERT INTO act_transcription_versions(id, act_id, label, body, data_json, auto, created_at) VALUES(?,?,?,?,?,?,COALESCE(?,CURRENT_TIMESTAMP))')
-        ->execute([$id > 0 ? $id : null, $actId, $label, $body, $json, empty($data['auto']) ? 0 : 1, $id > 0 ? $at : null]);
+    $source = mb_substr(preg_replace('/[^\p{L}\p{N}:._\- \/]+/u', '', (string) ($data['source'] ?? '')), 0, 120);
+    $pdo->prepare('INSERT INTO act_transcription_versions(id, act_id, label, body, data_json, auto, created_at, source) VALUES(?,?,?,?,?,?,COALESCE(?,CURRENT_TIMESTAMP),?)')
+        ->execute([$id > 0 ? $id : null, $actId, $label, $body, $json, empty($data['auto']) || $source !== '' ? 0 : 1, $id > 0 ? $at : null, $source]); // une lecture n'est jamais une version automatique (elle reste)
     $vid = (int) $pdo->lastInsertId();
     $pdo->prepare('DELETE FROM act_transcription_versions WHERE act_id=? AND auto=1 AND id NOT IN (SELECT id FROM act_transcription_versions WHERE act_id=? AND auto=1 ORDER BY id DESC LIMIT ' . ACT_VERSIONS_AUTO_MAX . ')')->execute([$actId, $actId]);
     return ['id' => $vid, 'label' => $label];
@@ -96,7 +100,7 @@ function delete_act_transcription_version(PDO $pdo, array $data): array
 function restore_act_transcription_version(PDO $pdo, array $data): array
 {
     $v = is_array($data['version'] ?? null) ? $data['version'] : [];
-    return save_act_transcription_version($pdo, ['act_id' => $v['act_id'] ?? 0, 'label' => $v['label'] ?? '', 'body' => $v['body'] ?? '', 'data' => $v['data'] ?? [], 'auto' => !empty($v['auto']), 'restore_id' => $v['id'] ?? 0, 'created_at' => $v['created_at'] ?? null]);
+    return save_act_transcription_version($pdo, ['act_id' => $v['act_id'] ?? 0, 'label' => $v['label'] ?? '', 'body' => $v['body'] ?? '', 'data' => $v['data'] ?? [], 'auto' => !empty($v['auto']), 'source' => (string) ($v['source'] ?? ''), 'restore_id' => $v['id'] ?? 0, 'created_at' => $v['created_at'] ?? null]);
 }
 
 function rename_act_transcription_version(PDO $pdo, array $data): array

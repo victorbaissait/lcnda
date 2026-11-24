@@ -157,7 +157,7 @@
             if (b.matches('[data-txa-readall]')) { const m = pick(); dlg.close(); o.all.run(m); return; }
             if (b.matches('[data-txa-read]')) {
                 let img; try { img = await o.getImage(); } catch (err) { return toast(err.message, 'error'); }
-                try { const r = await post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img}); job = {id: r.result.id, state: 'running'}; b.disabled = true; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(j => { b.disabled = false; compare(j.text); }); } catch (err) { toast(err.message, 'error'); }
+                try { const r = await post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img}); job = {id: r.result.id, state: 'running'}; b.disabled = true; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(j => { b.disabled = false; o.onReading?.(j.text, pick()); compare(j.text); }); } catch (err) { toast(err.message, 'error'); }
                 return;
             }
             if (b.matches('[data-txa-dedup]')) { const ta = box.querySelector('[data-txa-t="deep"]'); dedupBefore = ta.value; ta.value = dedup(ta.value); paintRepeats(); return; }

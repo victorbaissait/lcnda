@@ -912,6 +912,20 @@
                 saveNow: async () => { const name = await A().askText({title: `🕘 ${i18n('Nouvelle version')}`, message: i18n('Un nom pour cette version (facultatif) :'), value: '', okLabel: i18n('Enregistrer')}); if (name === null) return;
                     await post('save_act_transcription_version', {act_id: t.id, label: String(name || '').trim().slice(0, 120), body: area.value, data: dataOf(), auto: 0}); }});
         }
+        /* ─── ⚖️ chaque lecture gardée (✍ main, 🔬 IA, 🔎 OCR) pour les comparer et prendre le meilleur (heritage-transcribe-compare.js) ─── */
+        async function keepReading(text, source, model = '') {
+            const C = ext.txCompare; if (!C || !C.keepOn() || !String(text || '').trim()) return;
+            if (!t.id) { try { await save(); } catch (_) {} if (!t.id) return; }
+            const page = PAGES.length > 1 ? pageName(PAGES[pageIx], pageIx) : '';
+            post('save_act_transcription_version', {act_id: t.id, label: C.labelOf(source, model, page), body: String(text).trim(), data: {zones: [], people: []}, auto: 0, source: `${source}:${String(model || '').slice(0, 80)}`}).catch(() => {});
+        }
+        async function openCompare() {
+            if (!ext.txCompare) return toast(i18n('La comparaison des lectures n’est pas chargée.'), 'error');
+            if (!t.id) { await save(); if (!t.id) return; }
+            ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post,
+                apply: (txt, label) => { versionBefore(label); const was = snapText(), to = {...was, body: txt + (txt.endsWith('\n') ? '' : '\n')}; putText(to); status(i18n('Texte fusionné (à relire)'));
+                    A().undoToast?.(i18n('Lectures fusionnées dans le texte.'), {undo: () => putText(was), redo: () => putText(to)}); }});
+        }
         /* ─── ⌨️ les touches de l'Atelier (⌘/ ou ?) ─── */
         function showKeys() {
             const K = A().keys, kk = s => (K?.html ? K.html(s) : `<kbd>${esc(s)}</kbd>`);
@@ -1139,8 +1153,9 @@
                 const T = await A().loadOcrEngine(); status(i18n('Lecture de l’image…'));
                 const r = await T.recognize(await filteredCanvas(), lang);
                 const dd = r?.data || {}, lines = (dd.lines?.length ? dd.lines : (dd.blocks || []).flatMap(bl => (bl.paragraphs || []).flatMap(pg => pg.lines || []))).filter(l => (l.text || '').trim() && l.bbox);
-                if (!lines.length) { const plain = String(dd.text || '').trim(); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
+                if (!lines.length) { const plain = String(dd.text || '').trim(); if (plain) keepReading(plain, 'ocr', lang); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
                     appendRead(plain); before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); return; }
+                keepReading(lines.map(l => l.text.replace(/\s+$/, '')).join('\n'), 'ocr', lang); // ⚖️
                 let text = area.value; if (text.trim()) text += '\n\n'; const start = text.length;
                 const made = [];
                 lines.forEach(l => { const s = text.length, line = l.text.replace(/\s+$/, ''); text += line + '\n'; const b = l.bbox; made.push({id: zid(), x: b.x0, y: b.y0, w: b.x1 - b.x0, h: b.y1 - b.y0, s, e: s + line.length, note: '', c: '', src: 'ocr'}); });
@@ -1220,6 +1235,7 @@
                     if (then) { htrBusy(false); return then(true); }
                     try { localStorage.setItem(HTR_MODEL_KEY, j.model_file || pick); } catch (_) {}
                     if (!(j.lines || []).length) { setTimeout(() => readNext(true), 60); } if (!(j.lines || []).length) return toast(i18n('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.'), 'error');
+                    keepReading((j.lines || []).map(l => l.text || '').join('\n'), 'htr', j.model_file || pick); // ⚖️ la lecture gardée, même si elle n'est pas mise dans le texte
                     htrReview(j.lines, box, j.model_file || pick, installed);
                 };
                 htrJob.timer = setTimeout(poll, 700);
@@ -1354,7 +1370,7 @@
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
             const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
             const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: () => areaB64(b, {max: 2200}),
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: () => areaB64(b, {max: 2200}), onReading: (txt, model) => keepReading(txt, 'deep', model), // ⚖️ chaque lecture de chaque modèle gardée
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
                 existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
                 onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
@@ -1400,6 +1416,7 @@
             R.busy = false; R.job = 0;
             if (R.stop || !dlg.isConnected) return deepAllEnd(true);
             if (err) { toast(err, 'error'); return deepAllEnd(true); }
+            if (txt.trim()) keepReading(txt, 'deep', R.model); // ⚖️
             if (txt.trim()) { const put = appendRead(txt.trim() + '\n'); before = area.value; t.body = area.value; touch(); paintMirror();
                 if (LG()?.linkOn()) await linkLines({s: put.s, e: put.e, box: b || null, src: 'deep'}); // ▤ une zone par ligne, sur l'image de cette page
                 if (fixOn()) runFix({quiet: true}); } // 🪄
@@ -1788,7 +1805,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         dlg.addEventListener('click', e => { const hb = e.target.closest('[data-tx-hist]'); if (hb) undoZones(hb.dataset.txHist === 'redo'); });
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
         UI.editorMenus?.($('[data-tx-menus]'), {
-            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
+            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, {icon: '⚖️', label: `${i18n('Comparer les lectures')}…`, run: () => openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
             Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🔍', label: `${i18n('Chercher et remplacer')}…`, shortcut: '⌘F', run: () => openFind(true)}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}],
             // K1 : les lectures, Repérer et « Ajouter à la généalogie » sont des outils (plus dans Édition) ; un symbole = une action (K11)
             Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: i18n('Loupe'), shortcut: 'L', run: cmdOf('loupe')}, '-',
