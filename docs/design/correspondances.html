@@ -1,5 +1,5 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Correspondances et cartes postales</title>
+<title>Correspondances, cartes postales et sortes</title>
 <style>
 :root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8;--parch:#e8d6ae;--parch-ink:#4a3218;--stage:#3a3d44}
 @media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b;--parch:#c9b48a;--parch-ink:#2e1f0e;--stage:#0d0f12}}
@@ -141,9 +141,9 @@ table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--pape
 @media (max-width:700px){.sugg{grid-template-columns:1fr}}
 </style></head>
 <body><div class="wrap">
-<h1>✉️ Correspondances et 🏞 cartes postales dans Documents — maquette</h1>
+<h1>✉️ Correspondances, 🏞 cartes postales et 🏷 sortes de documents — maquette</h1>
 <p class="sub">Les lettres, cartes postales, télégrammes qui se répondent, rangés comme un recueil : un « fil » par échange, lu dans l’ordre, avec qui écrit à qui, les réponses, les trous, la carte des envois. Rien n’est codé : coche ce que tu veux, je fais ensuite.</p>
-<div class="toc"><a href="#p1"><b>1</b>Ce qui existe</a><a href="#p2"><b>2</b>Où, dans Documents</a><a href="#p3"><b>3</b>Le fil d’une correspondance</a><a href="#p4"><b>4</b>Les cartes postales</a><a href="#p5"><b>5</b>Relier les réponses</a><a href="#p6"><b>6</b>Réglages et exports</a><a href="#p7"><b>7</b>Ce que tu décides</a></div>
+<div class="toc"><a href="#p1"><b>1</b>Ce qui existe</a><a href="#p2"><b>2</b>Où, dans Documents</a><a href="#p3"><b>3</b>Le fil d’une correspondance</a><a href="#p4"><b>4</b>Les cartes postales</a><a href="#p5"><b>5</b>Relier les réponses</a><a href="#p45"><b>4 bis</b>Les autres sortes</a><a href="#p6"><b>6</b>Réglages et exports</a><a href="#p7"><b>7</b>Ce que tu décides</a></div>
 
 <div class="part" id="p1">Partie 1</div><h2>Ce qui existe déjà (regardé dans le code)</h2>
 <table><thead><tr><th>Quoi</th><th>Où</th><th>Limite</th></tr></thead><tbody>
@@ -157,8 +157,8 @@ table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--pape
 <div class="part" id="p2">Partie 2</div><h2>Où le mettre dans Documents (il y a déjà 4 cases)</h2>
 <div class="grid3">
 <div class="case"><div class="head"><span class="tag"><span class="num-b">A</span>conseillé</span><span class="badge ok">recommandé</span></div><h3>6 façons de ranger, en 3 × 2</h3>
-<div class="seg" style="display:grid;grid-template-columns:repeat(3,1fr)"><span>A → Z</span><span>👤 Personnes</span><span>📚 Recueils</span><span>📁 Dossiers</span><span class="on">✉️ Lettres</span><span>🏞 Cartes</span></div>
-<p class="why">Les mots raccourcis tiennent dans la colonne. « ✉️ Lettres » range les documents par correspondance (fil), « 🏞 Cartes » montre les cartes postales seules. Chaque case se cache (⋯ → Façons de ranger), retenu.</p></div>
+<div class="seg" style="display:grid;grid-template-columns:repeat(3,1fr)"><span>A → Z</span><span>👤 Personnes</span><span>📚 Recueils</span><span>📁 Dossiers</span><span class="on">✉️ Lettres</span><span>🏷 Sortes</span></div>
+<p class="why">Les mots raccourcis tiennent dans la colonne. « ✉️ Lettres » range par correspondance (fil) ; « 🏷 Sortes » range par sorte de document (cartes postales, photos de famille, faire-part, presse, militaire…, partie 4 bis), chacune avec sa vue. Chaque case se cache (⋯ → Façons de ranger), retenu.</p></div>
 <div class="case"><div class="head"><span class="tag"><span class="num-b">B</span></span></div><h3>« 📚 Recueils » devient « 📚 Ensembles »</h3>
 <div class="seg"><span>A → Z</span><span>👤</span><span class="on">📚 Ensembles</span><span>📁</span></div><div class="row" style="margin-top:8px"><span class="pill blue">Recueils</span><span class="pill">Correspondances</span><span class="pill">Cartes postales</span></div>
 <p class="why">Garde 4 cases ; un petit sélecteur dessous. Moins visible, un clic de plus.</p></div>
@@ -193,6 +193,29 @@ table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--pape
 <div class="case"><h3>Une carte</h3><p class="why">La fiche d’aujourd’hui (recto/verso, cachet, timbre, écrite par / à) + : la <b>correspondance</b> dont elle fait partie, « ↩ répond à », la <b>date du cachet</b> lue sur l’image (proposée), et <b>« Hier / aujourd’hui »</b> : la même vue sur une carte actuelle (angle de vue déjà noté).</p></div>
 </div>
 
+
+<div class="part" id="p45">Partie 4 bis</div><h2>Les autres sortes de documents à mettre à part</h2>
+<p class="sub">Plutôt qu’une case par sorte (il y en aurait trop), une seule case <b>« 🏷 Sortes »</b> : la colonne range les documents par sorte, et chaque sorte importante a <b>sa vue à droite</b>, pensée pour elle. Les sortes sans vue spéciale gardent les vignettes. On choisit les sortes montrées et leur ordre (glisser), on peut en créer.</p>
+<div class="scrollx"><table><thead><tr><th>Sorte</th><th>Ce qu’elle a de spécial (sa vue à droite)</th><th>Déjà dans l’app</th><th></th></tr></thead><tbody>
+<tr><td>🏞 Cartes postales</td><td>Recto ⇄ verso, éditeurs et séries (numéros manquants), lieu montré, hier / aujourd’hui (partie 4)</td><td>fiche de la carte</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>✉️ Lettres, télégrammes</td><td>Le fil de la correspondance (partie 3)</td><td>sorte « correspondance »</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>📷 Photos de famille</td><td>Albums par décennie, visages reconnus (personnes sur la photo), « qui est-ce ? » pour les inconnus, photos de groupe (mariage, communion)</td><td>visages, doublons</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>📜 Actes d’état civil et paroissiaux</td><td>Par sorte (naissance, mariage, décès…), par lieu et année, transcrits ou non, reliés aux événements des fiches</td><td>sortes d’actes, Atelier</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>🕊 Faire-part, souvenirs mortuaires, images pieuses</td><td>Une frise des naissances, mariages et décès annoncés ; la personne et la date lues sur le document</td><td>—</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>🎖 Papiers militaires (registres matricules, livrets, citations, médailles)</td><td>Par soldat : ses pièces dans l’ordre, son parcours sur la carte (régiments, blessures)</td><td>bloc militaire, fiches matricules</td><td><span class="badge ok">conseillé</span></td></tr>
+<tr><td>📰 Presse (coupures de journaux)</td><td>Par journal et date, le titre, le lien vers la source en ligne (Gallica, Retronews)</td><td>—</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🖋 Actes notariés (contrats de mariage, testaments, inventaires, ventes)</td><td>Par notaire et étude, par sorte d’acte, la cote, les parties (personnes)</td><td>sorte « actes notariés »</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🪪 Papiers d’identité et de vie (livrets de famille, passeports, cartes, permis)</td><td>Par personne : sa « vie en papiers », une frise</td><td>—</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🎓 École et travail (diplômes, bulletins, certificats, contrats, fiches de paie)</td><td>Par personne et année ; les métiers repérés</td><td>métiers</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🗺 Cartes, plans, cadastre</td><td>Sur la carte : posés à leur place (calage), comparés avec aujourd’hui</td><td>cadastre, cartes anciennes</td><td><span class="badge blue">utile</span></td></tr>
+<tr><td>🏠 Biens et maison (actes de propriété, plans, factures)</td><td>Par maison : reliés au plan de la maison</td><td>plan de la maison</td><td><span class="badge">plus tard</span></td></tr>
+<tr><td>🎙 Sons et vidéos (témoignages, films de famille)</td><td>Le lecteur, la transcription minutée, les personnes qui parlent</td><td>montage, témoignages</td><td><span class="badge">plus tard</span></td></tr>
+<tr><td>🍽 Souvenirs (menus de noce, invitations, recettes, dessins)</td><td>Par fête et par personne</td><td>recettes</td><td><span class="badge">plus tard</span></td></tr>
+<tr><td>📦 Autres</td><td>Les vignettes, comme aujourd’hui ; « ＋ Nouvelle sorte » (nom, émoji, couleur)</td><td>—</td><td></td></tr>
+</tbody></table></div>
+<div class="case" style="margin-top:18px"><h3>La colonne en mode « 🏷 Sortes »</h3>
+<div class="mini">▾ 📷 Photos de famille <b>312</b> · ▸ 📜 Actes <b>204</b> · ▸ 🏞 Cartes postales <b>41</b> · ▸ ✉️ Lettres <b>38</b> · ▸ 🎖 Militaire <b>22</b> · ▸ 🕊 Faire-part <b>17</b> · ▸ 📰 Presse <b>9</b> · ▸ 📦 Autres <b>164</b></div>
+<p class="why">La sorte vient de ce qui est déjà noté (sorte du média, sorte d’acte, correspondance, fiche de carte postale) ; sinon elle est <b>devinée</b> d’après le titre et proposée (« Faire-part de décès de… » → 🕊), jamais imposée : « ✓ C’est ça » ou « Changer ». Un document peut avoir une seule sorte.</p></div>
 <div class="part" id="p5">Partie 5</div><h2>Relier les réponses</h2>
 <div class="grid3">
 <div class="case"><h3>À la main</h3><p class="why">« ↩ Répond à… » (plusieurs pièces possibles), « ➕ Ajouter à une correspondance », glisser une pièce dans le fil.</p></div>
@@ -211,9 +234,10 @@ table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--pape
 
 <div class="part" id="p7">Partie 7</div><h2>Ce que tu décides</h2>
 <table><tbody>
-<tr><td><span class="cb on"></span></td><td>Où : <b>A</b> (6 façons de ranger, 3 × 2) — sinon dis B ou C</td></tr>
+<tr><td><span class="cb on"></span></td><td>Où : <b>A</b> (6 façons de ranger, 3 × 2 : A → Z, Personnes, Recueils, Dossiers, Lettres, Sortes) — sinon dis B ou C</td></tr>
 <tr><td><span class="cb on"></span></td><td>Le fil d’une correspondance, avec ses onglets (fil, lire, carte, frise, personnes, état, résumé)</td></tr>
 <tr><td><span class="cb on"></span></td><td>Les cartes postales dans Documents (collection, éditeurs et séries, hier / aujourd’hui)</td></tr>
+<tr><td><span class="cb on"></span></td><td>« 🏷 Sortes » : les sortes marquées « conseillé » avec leur vue (photos de famille, actes, faire-part, militaire), les « utiles » ensuite</td></tr>
 <tr><td><span class="cb on"></span></td><td>« Répond à » multiple, propositions de l’app, pièces manquantes</td></tr>
 <tr><td><span class="cb on"></span></td><td>Exports : livre PDF, traitement de texte, tableur, film</td></tr>
 </tbody></table>
