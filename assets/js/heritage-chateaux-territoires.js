@@ -297,7 +297,7 @@
         host.querySelector('[data-cht-radius]').addEventListener('change', e => { const r = Number(e.target.value) || 10; save({radius: r}); castlesInto(host, place, {radius: r}); });
         return true;
     }
-    document.addEventListener('click', e => { const l = e.target.closest?.('[data-cht-list]'); if (l) { e.preventDefault(); const st = S(); st.listType = 'data:' + l.dataset.chtList; ext.openDataList ? ext.openDataList(l.dataset.chtList) : A().setModule?.('listes'); } });
+    document.addEventListener('click', e => { const l = e.target.closest?.('[data-cht-list]'); if (l) { e.preventDefault(); const id = l.dataset.chtList; if (ext.dataListsEngine?.open) ext.dataListsEngine.open(id); else { const st = S(); st.listType = 'data_' + id; A().setModule?.('listes'); } } });
 
     /* ─────────── 👑 Territoires d'autrefois (lieu) ─────────── */
     function terrLine(r, year) {

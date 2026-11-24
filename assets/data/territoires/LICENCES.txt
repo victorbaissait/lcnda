@@ -1,0 +1,18 @@
+Territoires d'autrefois et châteaux d'Europe (LCNDA) — sources et licences
+Refait par scripts/chateaux-territoires/build-chateaux.py et build-territoires.py.
+
+1. assets/data/chateaux/*.json.gz et territoires/territoires-europe.json.gz
+   Wikidata (https://www.wikidata.org/) — données sous CC0 1.0 (domaine public).
+
+2. territoires/territoires-contours.json.gz
+   Contours Wikimedia Commons, pages « Data:*.map » (https://commons.wikimedia.org/wiki/Help:Map_Data).
+   Chaque contour garde son fichier et sa licence (CC0-1.0, CC-BY-4.0, ODbL-1.0…) dans le champ « licence ».
+   Les contours ODbL viennent d'OpenStreetMap : © contributeurs OpenStreetMap, ODbL 1.0.
+
+3. territoires/territoires-cartes.json.gz
+   historical-basemaps — André Ourednik et contributeurs, https://github.com/aourednik/historical-basemaps
+   Licence GNU GPL v3.0 (https://www.gnu.org/licenses/gpl-3.0.html), compatible avec l'AGPL-3.0 de l'app (GPLv3 §13).
+   Transformation : cartes de l'an 1 à 1815 seulement, découpées sur l'Europe (34–72° N, 25° O–50° E),
+   simplifiées (Douglas-Peucker ≈ 3 km), coordonnées arrondies à 0,005°. Le source complet est le dépôt cité
+   (révision indiquée dans le champ « rev » du fichier) et le script scripts/chateaux-territoires/build-territoires.py.
+   « Work in progress : verify the maps by comparison to other sources » (avertissement des auteurs).
