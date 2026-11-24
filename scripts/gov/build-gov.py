@@ -40,6 +40,10 @@ API = 'https://gov.genealogy.net/api/'
 TYPES_URL = 'https://gov.genealogy.net/types.owl'
 LICENCE_URL = 'https://wiki.genealogy.net/index.php?title=GOV/Webservice&action=raw'
 LICENCE_PAGE = 'https://wiki.genealogy.net/GOV/Webservice'
+# section « Lizenz » de cette page, lue dans un navigateur le 24/11/2026 (le site répond aux programmes par une page anti-robots)
+LICENCE_CONFIRMEE = ('Das GOV darf unter den Bedingungen der Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4.0 '
+                     'International (CC BY-SA 4.0) Lizenz verwendet werden.')
+LICENCE_CONFIRMEE_LE = '2026-11-24'
 UA = 'LCNDA-gov-pack/1.0 (genealogy desktop app; one-off build)'
 HEADER_MAGIC = b'LCGOV1\n'
 HEADER_SIZE = 4096
@@ -115,9 +119,17 @@ def licence_check(work, skip):
     try:
         raw = http_get(LICENCE_URL, timeout=60, tries=2).decode('utf-8', 'replace')
     except Exception as e:
-        sys.exit(f'Licence illisible ({LICENCE_PAGE} : {e}). Rien n’est fabriqué : il faut savoir si la redistribution est permise.')
+        raw, err = '', e
     m = re.search(r'==+\s*Lizenz\s*==+(.*?)(?:\n==[^=]|\Z)', raw, re.S | re.I)
-    text = (m.group(1) if m else raw).strip()
+    if not m:
+        # le GenWiki montre parfois une page anti-robots au lieu de son texte : on ne la contourne pas ; on reprend alors la
+        # section « Lizenz » lue à la main dans un navigateur (voir LICENCE_CONFIRMEE)
+        print(f'   ⚠️ page de licence illisible par programme ({LICENCE_PAGE}) : texte lu à la main le {LICENCE_CONFIRMEE_LE} utilisé', flush=True)
+        text = LICENCE_CONFIRMEE
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(text)
+        return {'licence': 'CC BY-SA 4.0', 'licence_text': text, 'licence_checked': LICENCE_CONFIRMEE_LE + ' (lue à la main)'}
+    text = m.group(1).strip()
     if not re.search(r'by[-_ ]?sa|Weitergabe unter gleichen Bedingungen|ShareAlike', text, re.I):
         sys.exit('La page de licence de GOV ne dit plus « CC BY-SA » : rien n’est fabriqué. Texte lu :\n' + text[:2000])
     ver = re.search(r'by[-_ ]?sa[/ ]*(\d\.\d)', text, re.I)
