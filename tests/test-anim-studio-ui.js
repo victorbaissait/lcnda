@@ -157,6 +157,25 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const time = await p.$eval('.an-dlg [data-an-time]', e => e.textContent); assert.match(time, /1750|1780|1810/);
             await p.click('.an-dlg [data-an="close"]'); await sleep(300);
         });
+        await t('🎬 avec le Montage vidéo, sans doublon : pas de scène « Photo » ici ; « Ajouter au montage » range le film dans les médias et le rend au montage', async () => {
+            const cap = await p.evaluate(() => window.LCNDA_EXT.animExport.capabilities(320, 180));
+            await p.evaluate(() => { window.__toMontage = null; window.LCNDA_EXT.openAnimStudio({template: 'line', toMontage: m => { window.__toMontage = m; }}); });
+            await p.waitForSelector('.an-dlg [data-an-sc="0"]');
+            await p.click('.an-dlg [data-an="add"]');
+            const items = await p.$$eval('.ui-actmenu [role=menuitem]', l => l.map(x => x.textContent.trim()));
+            assert.ok(!items.some(x => /^🖼\s*Photo$/.test(x)), 'pas de scène Photo : ' + items.join(' | ')); assert.ok(items.some(x => /Montage vidéo/.test(x)));
+            await p.keyboard.press('Escape');
+            await p.evaluate(() => { const s = window.LCNDA_EXT.__anim.P.data.scenes[0]; s.dur = 1; window.LCNDA_EXT.__anim.P.data.quality = 240; });
+            await p.click('.an-dlg [data-an="export"]'); await p.waitForSelector('.an-exp [data-montage]');
+            if (!(cap.webcodecs && (cap.vp9 || cap.vp8 || cap.avc)) && !cap.recorder) { console.log('  (vidéo impossible dans ce navigateur : sauté)'); return; }
+            await p.click('.an-exp [data-fmt] [data-v="webm"]'); await p.selectOption('.an-exp [data-q]', '720');
+            await p.click('.an-exp [data-montage]');
+            await p.waitForFunction(() => window.__toMontage, null, {timeout: 60000});
+            const m = await p.evaluate(() => window.__toMontage); assert.ok(m.id > 0 && /\.(webm|mp4)$/.test(m.filename), JSON.stringify(m)); assert.equal(m.media_type, 'video');
+            assert.ok(!(await p.$('.an-dlg')), 'le Studio s’est refermé');
+            const src = require('fs').readFileSync(require('path').join(__dirname, '../assets/js/heritage-studio-av.js'), 'utf8');
+            assert.match(src, /\['anim', '🎞 Une carte ou un graphique animé \(Studio d’animation\)…'\]/); assert.match(src, /k === 'anim'\) return ext\.openAnimStudio\(\{toMontage/);
+        });
         await t('Outils de modification : le Studio y est, avec ses projets et les modèles', async () => {
             const tool = await p.evaluate(() => window.LCNDA_EXT.editToolsExtra.find(x => x.key === 'anim'));
             assert.ok(tool);

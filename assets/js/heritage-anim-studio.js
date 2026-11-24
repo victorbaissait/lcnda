@@ -57,19 +57,19 @@
     };
 
     /* ═════ ouvrir le Studio ═════ */
-    async function open({id = 0, diagram = null, template = '', onClose = null} = {}) {
+    async function open({id = 0, diagram = null, template = '', onClose = null, toMontage = null} = {}) {
         if (!RN() || !EX()) return A().toast(T('Le Studio d’animation n’est pas encore chargé : réessaie dans un instant.'), 'error');
         let P = {id: 0, title: T('Mon film'), data: newProject()};
         if (id) { try { const r = await A().api('anim_project', {id}); P = {id: r.project.id, title: r.project.title, data: {...newProject(), ...(r.project.data || {})}}; } catch (e) { return A().toast(e.message, 'error'); } }
         else if (diagram?.spec) { P.title = diagram.name || T('Mon diagramme animé'); P.data.scenes = [newScene('diagram', {spec: diagram.spec, name: diagram.name || T('Diagramme'), title: diagram.name || ''})]; }
         else if (template && TEMPLATES[template]) { P.data.scenes = TEMPLATES[template](); P.title = P.data.scenes.find(s => s.title)?.title || P.title; }
         else P.data.scenes = [newScene('title', {title: T('Mon film')})];
-        studio(P, onClose);
+        studio(P, onClose, toMontage);
     }
     ext.openAnimStudio = open;
 
     /* ═════ l'écran ═════ */
-    function studio(P, onClose) {
+    function studio(P, onClose, toMontage = null) { // toMontage(media) : ouvert depuis le 🎬 Montage vidéo, le film y retourne
         const ro = kiosk(), D = () => P.data;
         let sel = 0, t = 0, playing = false, raf = 0, hist = [], hpos = -1, dirty = false, saveT = 0, tab = 'scene', liveCam = null, drawing = false, again = false, lastPrevW = 0;
         const dlg = document.createElement('dialog'); dlg.className = 'modal an-dlg'; dlg.dataset.ownClose = '1';
@@ -159,7 +159,9 @@
                 || `<p class="muted">${esc(T('Aucune scène : « ＋ Scène ».'))}</p>`;
         }
         function addMenu(btn) {
-            const items = Object.entries(TYPES).map(([k, v]) => ({icon: v.icon, label: T(v.label), run: () => addScene(k)}));
+            // les photos et les vidéos se montent dans le 🎬 Montage vidéo (pas de doublon) : ici, ce qui s'anime à partir de la base
+            const items = Object.entries(TYPES).filter(([k]) => k !== 'image').map(([k, v]) => ({icon: v.icon, label: T(v.label), run: () => addScene(k)}));
+            if (ext.openAvEditor) items.push('-', {icon: '🎬', label: T('Photos et vidéos : dans le Montage vidéo (⤓ Exporter → Continuer dans le Montage)'), run: () => exportDialog()});
             items.push('-', {icon: '🎬', label: T('Modèle : le grand film de la famille'), run: () => { const list = TEMPLATES.grandfilm(); D().scenes.splice(sel + 1, 0, ...list); sel = sel + 1; changed({pane: true}); }});
             UI().menuAt?.(btn, items, {title: T('Ajouter une scène')});
         }
@@ -467,7 +469,7 @@
                 <label>${esc(T('Images par seconde'))} <select data-fps>${[24, 30, 60].map(k => `<option value="${k}" ${Number(D().fps || 30) === k ? 'selected' : ''}>${k}</option>`).join('')}</select></label></p>
                 <p class="an-row"><label class="ui-toggle"><input type="checkbox" data-srt ${d.srt ? 'checked' : ''}><i></i>${esc(T('Sous-titres à part (.srt)'))}</label><label class="ui-toggle"><input type="checkbox" data-media ${d.toMedia ? 'checked' : ''}><i></i>${esc(T('Ranger aussi dans les médias'))}</label></p>
                 <p class="muted" data-how></p><div class="h-progress" data-bar hidden><span></span></div><p class="muted" data-st></p></div>
-                <div class="modal-actions"><button type="button" class="button secondary" data-stop hidden>■ ${esc(T('Arrêter'))}</button><button type="button" class="button" data-go>⤓ ${esc(T('Fabriquer'))}</button></div></form>`;
+                <div class="modal-actions"><button type="button" class="button secondary" data-stop hidden>■ ${esc(T('Arrêter'))}</button>${(toMontage || ext.openAvEditor) && !ro ? `<button type="button" class="button ${toMontage ? '' : 'secondary'}" data-montage title="${esc(T('La vidéo est rangée dans les médias puis ouverte dans le Montage vidéo : tu y ajoutes tes photos, tes vidéos, des titres, et tu coupes.'))}">🎬 ${esc(toMontage ? T('Ajouter au montage') : T('Continuer dans le Montage vidéo'))}</button>` : ''}<button type="button" class="button" data-go>⤓ ${esc(T('Fabriquer'))}</button></div></form>`;
             document.body.appendChild(dg); dg.showModal();
             let fmt = d.exportFormat, ctrl = null;
             const how = () => { dg.querySelector('[data-how]').textContent = fastTxt(fmt) + (fmt === 'gif' ? T(' GIF : sans son, 640 pixels de large, 10 images par seconde.') : ''); };
@@ -476,6 +478,19 @@
             dg.querySelector('[data-x]').addEventListener('click', done); dg.addEventListener('cancel', e => { e.preventDefault(); done(); });
             dg.querySelector('[data-fmt]').addEventListener('click', e => { const b = e.target.closest('[data-v]'); if (!b) return; fmt = b.dataset.v; dg.querySelectorAll('[data-fmt] [data-v]').forEach(x => x.classList.toggle('is-active', x === b)); how(); });
             dg.querySelector('[data-stop]').addEventListener('click', () => ctrl?.abort());
+            /* 🎬 la suite dans le Montage vidéo : le film fabriqué (MP4, sinon WebM) devient une vidéo des médias, ouverte dans le montage */
+            dg.querySelector('[data-montage]')?.addEventListener('click', async () => {
+                const q = Number(dg.querySelector('[data-q]').value), fps = Number(dg.querySelector('[data-fps]').value), [W, H] = RN().sizeOf(D().format, q), bar = dg.querySelector('[data-bar]'), st = dg.querySelector('[data-st]');
+                bar.hidden = false; dg.querySelectorAll('[data-go], [data-montage]').forEach(b => { b.disabled = true; }); dg.querySelector('[data-stop]').hidden = false; ctrl = new AbortController();
+                try {
+                    const vf = fmt === 'webm' ? 'webm' : 'mp4', out = await EX().makeVideo(D(), {format: vf, W, H, fps, onProgress: (k, m) => { bar.firstElementChild.style.width = Math.round(k * 100) + '%'; st.textContent = m || ''; }, signal: ctrl.signal});
+                    st.textContent = T('Rangement dans les médias…');
+                    const it = await window.LCNDA_MEDIA_PICKER.importMediaFile(new File([out.blob], `${P.title}.${out.ext}`, {type: out.blob.type}), ['video']);
+                    ctrl = null; done(); await close();
+                    const media = {...it, id: Number(it.id), media_type: 'video'};
+                    if (toMontage) await toMontage(media); else ext.openAvEditor(media);
+                } catch (e) { st.textContent = e.name === 'AbortError' ? T('Arrêté.') : T('Pas réussi : {e}', {e: e.message}); dg.querySelectorAll('[data-go], [data-montage]').forEach(b => { b.disabled = false; }); dg.querySelector('[data-stop]').hidden = true; ctrl = null; }
+            });
             dg.querySelector('[data-go]').addEventListener('click', async () => {
                 const q = Number(dg.querySelector('[data-q]').value), fps = Number(dg.querySelector('[data-fps]').value), srtOn = dg.querySelector('[data-srt]').checked, toMedia = dg.querySelector('[data-media]').checked;
                 if (!ro) { D().quality = q; D().fps = fps; changed({list: false, tl: false, redraw: false}); }
@@ -504,7 +519,7 @@
 
     /* ═════ dans Listes → 🛠️ Outils de modification ═════ */
     ext.editToolsExtra = ext.editToolsExtra || [];
-    ext.editToolsExtra.push({key: 'anim', icon: '🎞', label: 'Studio d’animation', what: 'film',
+    ext.editToolsExtra.push({key: 'anim', icon: '🎞', label: 'Studio d’animation (cartes et graphiques qui bougent)', what: 'film',
         load: async () => ((await A().api('anim_projects')).projects || []).map(p => ({id: p.id, name: p.title, date: p.updated_at, thumb: '<span class="h-et-ico">🎞</span>', info: [T('{n} scènes', {n: String(p.scenes)}), fmtT(p.seconds), p.format].join(' · ')})),
         open: (id, again) => open({id, onClose: again}), create: again => open({onClose: again}),
         rename: (id, name) => A().api('rename_anim_project', {}, {method: 'POST', body: {id, title: name}}),
