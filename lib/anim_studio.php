@@ -120,6 +120,7 @@ function restore_anim_project(PDO $pdo, array $data): array
  *  people : [{id, f (prénom), l (nom), g (m/f/u), by, dy (années), bp, dp (lieu id), fa, mo (parents)}]
  *  places : {id: [nom, lat, lon]}
  *  events : [[person_id, année, sorte, lieu id]] — les événements datés et placés (naissance, baptême, mariage, résidence, décès…)
+ *  couples : [[personne, personne, année, lieu id]] — les mariages ; bt, dt : les dates écrites (« vers 1750 ») ; occ : le premier métier
  */
 function anim_people(PDO $pdo): array
 {
@@ -131,21 +132,27 @@ function anim_people(PDO $pdo): array
     $isD = static fn($s) => in_array($s, ['death', 'deat', 'deces', 'décès', 'burial', 'buri', 'inhumation', 'sepulture'], true);
     $people = [];
     foreach ($pdo->query("SELECT p.id, p.first_name, p.last_name, p.gender FROM persons p WHERE p.kind<>'animal'$hide") as $p) {
-        $people[(int) $p['id']] = ['id' => (int) $p['id'], 'f' => (string) $p['first_name'], 'l' => (string) $p['last_name'], 'g' => $p['gender'] === 'male' ? 'm' : ($p['gender'] === 'female' ? 'f' : 'u'), 'by' => null, 'dy' => null, 'bp' => null, 'dp' => null, 'fa' => null, 'mo' => null];
+        $people[(int) $p['id']] = ['id' => (int) $p['id'], 'f' => (string) $p['first_name'], 'l' => (string) $p['last_name'], 'g' => $p['gender'] === 'male' ? 'm' : ($p['gender'] === 'female' ? 'f' : 'u'), 'by' => null, 'dy' => null, 'bp' => null, 'dp' => null, 'fa' => null, 'mo' => null, 'bt' => '', 'dt' => '', 'occ' => ''];
     }
     $events = []; $placeIds = [];
-    $q = $pdo->query("SELECT e.person_id, e.family_id, e.event_type_id, e.year, e.place_id FROM events e WHERE e.year IS NOT NULL AND e.year > 0 ORDER BY e.year, e.id");
+    // le métier : le premier événement « profession » (son titre ou sa description)
+    foreach ($pdo->query("SELECT e.person_id, COALESCE(NULLIF(TRIM(e.title),''), NULLIF(TRIM(e.description),''), '') AS o, t.slug FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.slug IN ('occupation','profession','metier','métier') ORDER BY COALESCE(e.year, 9999), e.id") as $r) {
+        $pid = (int) $r['person_id']; if (isset($people[$pid]) && $people[$pid]['occ'] === '' && $r['o'] !== '') { $people[$pid]['occ'] = mb_substr((string) $r['o'], 0, 80); }
+    }
+    $q = $pdo->query("SELECT e.person_id, e.family_id, e.event_type_id, e.year, e.place_id, e.date_text FROM events e WHERE e.year IS NOT NULL AND e.year > 0 ORDER BY e.year, e.id");
+    $couples = [];
     $partners = [];
     foreach ($pdo->query('SELECT id, partner1_id, partner2_id FROM families') as $f) { $partners[(int) $f['id']] = array_values(array_filter([(int) $f['partner1_id'], (int) $f['partner2_id']])); }
     foreach ($q as $e) {
         $slug = $types[(int) $e['event_type_id']] ?? 'event';
         $year = (int) $e['year']; $pl = $e['place_id'] !== null ? (int) $e['place_id'] : null;
         $who = $e['person_id'] !== null ? [(int) $e['person_id']] : ($partners[(int) $e['family_id']] ?? []);
+        if ($e['family_id'] !== null && preg_match('/^(marr|mari)/', $slug) && count($who) === 2 && isset($people[$who[0]], $people[$who[1]])) { $couples[] = [$who[0], $who[1], $year, $pl]; } // les couples mariés (cordes, distances)
         foreach ($who as $pid) {
             if (!isset($people[$pid])) { continue; }
             $real = in_array($slug, ['birth', 'birt', 'naissance', 'death', 'deat', 'deces', 'décès'], true); // la vraie naissance (le vrai décès) passe avant le baptême (l'inhumation)
-            if ($isB($slug) && ($people[$pid]['by'] === null || ($real && empty($people[$pid]['_b'])))) { $people[$pid]['by'] = $year; $people[$pid]['_b'] = $real; if ($pl) { $people[$pid]['bp'] = $pl; } }
-            if ($isD($slug) && ($people[$pid]['dy'] === null || ($real && empty($people[$pid]['_d'])))) { $people[$pid]['dy'] = $year; $people[$pid]['_d'] = $real; if ($pl) { $people[$pid]['dp'] = $pl; } }
+            if ($isB($slug) && ($people[$pid]['by'] === null || ($real && empty($people[$pid]['_b'])))) { $people[$pid]['by'] = $year; $people[$pid]['_b'] = $real; $people[$pid]['bt'] = mb_substr((string) $e['date_text'], 0, 60); if ($pl) { $people[$pid]['bp'] = $pl; } }
+            if ($isD($slug) && ($people[$pid]['dy'] === null || ($real && empty($people[$pid]['_d'])))) { $people[$pid]['dy'] = $year; $people[$pid]['_d'] = $real; $people[$pid]['dt'] = mb_substr((string) $e['date_text'], 0, 60); if ($pl) { $people[$pid]['dp'] = $pl; } }
             if ($pl) { $events[] = [$pid, $year, $slug, $pl]; $placeIds[$pl] = true; }
         }
     }
@@ -173,5 +180,5 @@ function anim_people(PDO $pdo): array
     $root = 0;
     try { $root = (int) ($pdo->query('SELECT id FROM persons WHERE is_start=1' . ($kiosk ? ' AND COALESCE(is_private,0)=0' : '') . ' ORDER BY id LIMIT 1')->fetchColumn() ?: 0); } catch (Throwable $_) {}
     $people = array_map(static function ($p) { unset($p['_b'], $p['_d']); return $p; }, $people);
-    return ['people' => array_values($people), 'places' => (object) $places, 'events' => $events, 'root' => $root];
+    return ['people' => array_values($people), 'places' => (object) $places, 'events' => $events, 'couples' => $couples, 'root' => $root];
 }

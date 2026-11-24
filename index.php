@@ -1436,6 +1436,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-cartes-plus2.js?v=6" defer></script><!-- 🗺️ vague 2 : métiers, lignées, aire de vie, parrains, crises -->
 <script src="assets/js/heritage-diagram-graphique.js?v=12" defer></script>
 <script src="assets/js/heritage-diagram-nouveaux.js?v=6" defer></script>
+<script src="assets/js/heritage-diagram-manquants.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-lot-c.js?v=2" defer></script>
 <script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>
 <script src="assets/js/heritage-diagram-plus.js?v=4" defer></script>
