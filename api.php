@@ -1020,6 +1020,7 @@ function site_defaults_allowed_keys(): array
     return [
         'genealogie-meteo', // 🌦 Météo d’autrefois
         'genealogie-elections', // 🗳 Élections d’autrefois
+        'genealogie-gov', // 🏰 Lieux anciens GOV
         'genealogie-menu-names',
         'genealogie-menu-icons',
         'genealogie-lightbox-sections',

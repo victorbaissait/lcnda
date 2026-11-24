@@ -1604,6 +1604,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-dates-feter.js?v=3" defer></script>
 <script src="assets/js/heritage-meteo.js?v=11" defer></script>
 <script src="assets/js/heritage-elections.js?v=1" defer></script>
+<script src="assets/js/heritage-gov.js?v=1" defer></script>
 <script src="assets/js/heritage-histoire.js?v=1" defer></script>
 <script src="assets/js/heritage-monde-contexte.js?v=1" defer></script>
 <script src="assets/js/heritage-prix-europe.js?v=1" defer></script>

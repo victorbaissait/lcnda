@@ -828,14 +828,14 @@ function insee_maj_remove_year(PDO $pdo, array $data): array
     $deleted = 0;
     $names = $pdo->prepare('SELECT filename FROM insee_deces_imports WHERE id=?');
     foreach ($inst['ids'] as $id) {
-        while (microtime(true) < $deadline) {
+        while (true) { // au moins un lot à chaque appel
             $del = $pdo->prepare('DELETE FROM insee_deces WHERE id IN (SELECT id FROM insee_deces WHERE source_import_id=? LIMIT 20000)'); $del->execute([$id]);
             $n = $del->rowCount();
             if (!$n) { $names->execute([$id]); $leg = $pdo->prepare('DELETE FROM insee_deces WHERE id IN (SELECT id FROM insee_deces WHERE source_file=? AND source_import_id IS NULL LIMIT 20000)'); $leg->execute([(string) $names->fetchColumn()]); $n = $leg->rowCount(); }
             $deleted += $n;
             if (!$n) { $pdo->prepare('DELETE FROM insee_deces_imports WHERE id=?')->execute([$id]); break; }
+            if (microtime(true) >= $deadline) { return ['ok' => true, 'completed' => false, 'deleted_rows' => $deleted]; }
         }
-        if (microtime(true) >= $deadline) { return ['ok' => true, 'completed' => false, 'deleted_rows' => $deleted]; }
     }
     if ($year > 0) { // retirée exprès : les mises à jour ne la remettent pas
         $removed = array_map('intval', (array) (insee_maj_kv_get($pdo, 'removed') ?? []));

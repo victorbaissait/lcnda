@@ -1,0 +1,103 @@
+# 🏘️ Lieux-dits (IGN) et ⛪ Patrimoine (Mérimée, Palissy) : fabrication des packs par département, déposés dans la version
+# « lieux-patrimoine-donnees » du dépôt.
+#
+# L'app n'embarque ni lieux-dits ni monuments : Réglages → 🏘️ Lieux-dits et patrimoine → « ⤓ Installer » télécharge les packs
+# des départements choisis depuis cette version (lib/lieux_patrimoine.php), les vérifie (empreinte sha256) puis les range.
+# (Les 📜 anciens noms DicoTopo, eux, sont livrés avec l'app : assets/data/dicotopo/, fabriqués par build-dicotopo.py ; le choix
+# « dicotopo » ci-dessous les refait et les donne en pièce jointe du travail, à recopier dans l'app.)
+#
+# Lancer : onglet « Actions » → « Lieux-dits et patrimoine » → « Run workflow » (le menu « quoi », et les départements :
+# vide = tous). Chaque pack fait 0,1 à 3 Mo ; lieux-patrimoine-manifest.json dit la taille et l'empreinte de chacun.
+
+name: Lieux-dits et patrimoine
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'Ce qu’il faut fabriquer'
+        type: choice
+        options: [tout, lieuxdits, patrimoine, dicotopo]
+        default: tout
+      deps:
+        description: 'Départements, séparés par des espaces (vide = tous), ex. « 15 19 87 »'
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lieux-patrimoine-donnees
+  cancel-in-progress: false
+
+jobs:
+  packs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reprendre les téléchargements déjà faits
+        uses: actions/cache/restore@v4
+        with:
+          path: lieux-patrimoine-sortie/telechargements
+          key: lieux-patrimoine-${{ github.run_id }}
+          restore-keys: lieux-patrimoine-
+
+      - name: Fabriquer
+        env:
+          QUOI: ${{ inputs.quoi }}
+          DEPS: ${{ inputs.deps }}
+        run: |
+          set -e
+          args=""
+          for d in $DEPS; do case "$d" in [0-9][0-9]|2[AB]|97[0-9]) args="$args --dep $d";; *) echo "département refusé : $d"; exit 1;; esac; done
+          if [ "$QUOI" = dicotopo ]; then
+            python3 scripts/lieux-patrimoine/build-dicotopo.py $args --cache lieux-patrimoine-sortie/telechargements/dicotopo
+          else
+            python3 scripts/lieux-patrimoine/build-packs.py "$QUOI" $args --dossier lieux-patrimoine-sortie
+          fi
+
+      - name: Garder les téléchargements pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: lieux-patrimoine-sortie/telechargements
+          key: lieux-patrimoine-${{ github.run_id }}
+
+      - name: Les anciens noms (DicoTopo) en pièce jointe
+        if: inputs.quoi == 'dicotopo'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dicotopo
+          path: assets/data/dicotopo
+
+      - name: Déposer les packs dans la version « lieux-patrimoine-donnees »
+        if: inputs.quoi != 'dicotopo'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          cd lieux-patrimoine-sortie
+          ls lp-*.lclieux >/dev/null
+          gh release view lieux-patrimoine-donnees --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create lieux-patrimoine-donnees --repo "$GITHUB_REPOSITORY" --title "Lieux-dits et patrimoine" --prerelease \
+              --notes "Les packs par département (lieux-dits IGN BD TOPO, monuments Mérimée et objets Palissy), téléchargés par l'app (Réglages → 🏘️ Lieux-dits et patrimoine → ⤓ Installer). Licences : voir « À propos des données » dans l'app."
+          # le manifeste en ligne garde les packs qui ne sont pas refaits cette fois
+          gh release download lieux-patrimoine-donnees --repo "$GITHUB_REPOSITORY" --pattern lieux-patrimoine-manifest.json --dir ancien 2>/dev/null || true
+          python3 - <<'PY'
+          import json, os
+          new = json.load(open('lieux-patrimoine-manifest.json'))
+          old = json.load(open('ancien/lieux-patrimoine-manifest.json')) if os.path.exists('ancien/lieux-patrimoine-manifest.json') else {'packs': {}}
+          old.setdefault('packs', {}).update(new['packs'])
+          old['version'] = new['version']
+          json.dump(old, open('lieux-patrimoine-manifest.json', 'w'), indent=1, sort_keys=True)
+          print(len(old['packs']), 'packs dans le manifeste')
+          PY
+          gh release upload lieux-patrimoine-donnees --repo "$GITHUB_REPOSITORY" --clobber lp-*.lclieux
+          gh release upload lieux-patrimoine-donnees --repo "$GITHUB_REPOSITORY" --clobber lieux-patrimoine-manifest.json

@@ -1,0 +1,47 @@
+{
+ "api": "https://dicotopo.cths.fr/api/1.0/search",
+ "built": "2026-11-24",
+ "deps": {
+  "01": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Ain",
+    "bibl": "Philipon (Édouard), Dictionnaire topographique du département de l’Ain, Paris, 1911.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k367437"
+   },
+   "communes": 426,
+   "label": "Ain",
+   "old": 15183,
+   "places": 11281,
+   "size": 504452
+  },
+  "02": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Aisne",
+    "bibl": "Matton (Auguste), Dictionnaire topographique du département de l’Aisne, Paris, 1871.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39289w"
+   },
+   "communes": 816,
+   "label": "Aisne",
+   "old": 12732,
+   "places": 6435,
+   "size": 357950
+  },
+  "05": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique des Hautes-Alpes",
+    "bibl": "Roman (Joseph), Dictionnaire topographique du département des Hautes-Alpes, Paris, 1884.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k392903"
+   },
+   "communes": 180,
+   "label": "Hautes-Alpes",
+   "old": 6121,
+   "places": 9661,
+   "size": 240417
+  }
+ },
+ "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",
+ "licence_url": "https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf",
+ "mention": "DicoTopo — Dictionnaire topographique de la France, Comité des travaux historiques et scientifiques (CTHS), Archives nationales (Centre d’onomastique), École nationale des chartes",
+ "source": "DicoTopo — Dictionnaire topographique de la France",
+ "url": "https://dicotopo.cths.fr"
+}

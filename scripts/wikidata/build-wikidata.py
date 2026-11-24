@@ -371,11 +371,11 @@ def step_oldnames(w):
 
 
 def step_songs(w):
-    q = '''SELECT ?s (SAMPLE(?lfr) AS ?fr) (SAMPLE(?len) AS ?en) (SAMPLE(?lmul) AS ?mul) (MIN(?d) AS ?d) (SAMPLE(?sl) AS ?sl)
+    q = '''SELECT ?s (SAMPLE(?lfr) AS ?fr) (SAMPLE(?len) AS ?en) (SAMPLE(?lmul) AS ?mul) (MIN(?pd) AS ?d) (SAMPLE(?sl0) AS ?sl)
       (SAMPLE(?pfr) AS ?pfr) (SAMPLE(?pen) AS ?pen) (GROUP_CONCAT(DISTINCT STRAFTER(STR(?c), "entity/"); separator=",") AS ?cs)
       (GROUP_CONCAT(DISTINCT STRAFTER(STR(?lang), "entity/"); separator=",") AS ?langs) (SAMPLE(?frw) AS ?frw) (SAMPLE(?enw) AS ?enw) WHERE {
       VALUES ?cls { wd:Q7366 wd:Q134556 }
-      ?s wdt:P31 ?cls ; wdt:P577 ?d ; wikibase:sitelinks ?sl . FILTER(?sl >= 2)
+      ?s wdt:P31 ?cls ; wdt:P577 ?pd ; wikibase:sitelinks ?sl0 . FILTER(?sl0 >= 2)
       ?s wdt:P175 ?perf .
       OPTIONAL { ?perf rdfs:label ?pfr . FILTER(LANG(?pfr) = "fr") }
       OPTIONAL { ?perf rdfs:label ?pen . FILTER(LANG(?pen) = "en") }
