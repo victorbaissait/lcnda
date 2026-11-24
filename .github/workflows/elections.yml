@@ -1,0 +1,80 @@
+# 🗳 Fabrication des données des Élections d'autrefois, déposées dans la version « elections-donnees » du dépôt.
+#
+# L'app n'embarque aucune donnée électorale : Réglages → 🗳 Élections d'autrefois → « ⤓ Installer » télécharge le pack
+# depuis cette version (lib/elections.php), le vérifie (taille, empreinte sha256, base lisible) puis le range.
+#
+# Lancer : pousser une étiquette « elections-1 » (le chiffre ne sert qu'à relancer), ou onglet « Actions » →
+# « Données électorales » → « Run workflow ».
+# Sources : Cagé et Piketty, « Une histoire du conflit politique » (unehistoireduconflitpolitique.fr, téléchargement libre
+# en citant la source) ; Wikidata (CC0) pour les députés. Hôtes : unehistoireduconflitpolitique.fr,
+# conflit-politique-data.ams3.cdn.digitaloceanspaces.com, query.wikidata.org.
+# elections-rapport.json (colonnes lues dans chaque fichier, groupes non reconnus) est joint à la version : à relire.
+
+name: Données électorales
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['elections-*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: elections-donnees
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reprendre les téléchargements déjà faits
+        uses: actions/cache/restore@v4
+        with:
+          path: elections-sortie/cache
+          key: elections-${{ github.run_id }}
+          restore-keys: elections-
+
+      - name: Fabriquer
+        run: python3 scripts/elections/build-elections.py --dossier elections-sortie
+
+      - name: Garder les téléchargements pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: elections-sortie/cache
+          key: elections-${{ github.run_id }}
+
+      - name: Déposer le pack dans la version « elections-donnees »
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          f=elections-sortie/elections.sqlite
+          test -s "$f"
+          mkdir -p envoi && cd envoi
+          split -b 1900M -d -a 3 "../$f" "elections.sqlite."
+          size=$(stat -c %s "../$f"); sum=$(sha256sum "../$f" | cut -d' ' -f1)
+          gh release view elections-donnees --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create elections-donnees --repo "$GITHUB_REPOSITORY" --title "Données des Élections d'autrefois" --prerelease \
+              --notes "Résultats électoraux par commune (législatives 1848–2022, présidentielles), téléchargés par l'app (Réglages → 🗳 Élections d'autrefois → ⤓ Installer). Source : Julia Cagé et Thomas Piketty (2023), Une histoire du conflit politique. Élections et inégalités sociales en France, 1789-2022, Paris, Le Seuil ; données unehistoireduconflitpolitique.fr (téléchargement libre, en citant la source). Députés : Wikidata (CC0)."
+          for a in $(gh release view elections-donnees --repo "$GITHUB_REPOSITORY" --json assets --jq ".assets[].name" | grep -E "^elections\.sqlite\.[0-9]{3}$" || true); do
+            gh release delete-asset elections-donnees "$a" --repo "$GITHUB_REPOSITORY" --yes
+          done
+          python3 - "$size" "$sum" <<'PY'
+          import json, os, sys, datetime
+          size, sha = int(sys.argv[1]), sys.argv[2]
+          parts = sorted(p for p in os.listdir('.') if p.split('.')[-1].isdigit())
+          m = {'version': datetime.date.today().strftime('%Y-%m'), 'packs': {'elections': {'size': size, 'sha256': sha, 'built': datetime.date.today().isoformat(), 'parts': [{'name': p, 'size': os.path.getsize(p)} for p in parts]}}}
+          json.dump(m, open('elections-manifest.json', 'w'), indent=1)
+          PY
+          cp ../elections-sortie/elections-rapport.json .
+          gh release upload elections-donnees --repo "$GITHUB_REPOSITORY" --clobber $(ls | grep -E '\.[0-9]{3}$') elections-manifest.json elections-rapport.json
+          cat elections-manifest.json
