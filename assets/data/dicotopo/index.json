@@ -133,6 +133,18 @@
    "old": 1535,
    "places": 409,
    "size": 35731
+  },
+  "23": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Creuse",
+    "bibl": "Hemmer (Henri), Dictionnaire topographique du département de la Creuse, dactyl., archives départementales de la Creuse.",
+    "gallica": ""
+   },
+   "communes": 263,
+   "label": "Creuse",
+   "old": 42273,
+   "places": 23704,
+   "size": 1024111
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",
