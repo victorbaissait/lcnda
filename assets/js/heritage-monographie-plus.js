@@ -148,8 +148,14 @@
         });
     }
 
-    async function renderOne(sec) {
-        if (!sec || sec.dataset.mpState !== 'wait') return;
+    /** dessine une partie une seule fois ; une partie déjà en route renvoie la même promesse (renderAll attend aussi celles-là) */
+    function renderOne(sec) {
+        if (!sec) return Promise.resolve();
+        if (sec.__mpP) return sec.__mpP;
+        if (sec.dataset.mpState !== 'wait') return Promise.resolve();
+        return (sec.__mpP = renderNow(sec));
+    }
+    async function renderNow(sec) {
         const s = registered().find(x => x.id === sec.dataset.mp); if (!s || !cur) return;
         sec.dataset.mpState = 'run';
         const body = sec.querySelector('.mp-body'), src = sec.querySelector('.mp-src'), count = sec.querySelector(':scope > header strong');
@@ -175,7 +181,7 @@
     /** tout dessiner tout de suite (impression, export) */
     async function renderAll() {
         if (!cur?.box) return;
-        await Promise.all([...cur.box.querySelectorAll(':scope > .mp-sec[data-mp-state="wait"]')].filter(s => !s.hidden).map(renderOne));
+        await Promise.all([...cur.box.querySelectorAll(':scope > .mp-sec:is([data-mp-state="wait"], [data-mp-state="run"])')].filter(s => !s.hidden).map(renderOne));
     }
 
     function mount({place, cfg, data}) {
@@ -227,12 +233,16 @@
                 ${top || ro ? '' : `<span class="mp-moves"><button type="button" class="icon-button small" data-mp-move="-1" aria-label="${esc(T('Monter'))}" title="${esc(T('Monter'))}">↑</button><button type="button" class="icon-button small" data-mp-move="1" aria-label="${esc(T('Descendre'))}" title="${esc(T('Descendre'))}">↓</button></span>`}</li>`; };
         const topIds = TOP.map(x => x[0]);
         const focusK = document.activeElement?.closest?.('.mp-panel li')?.dataset.k, focusWhat = document.activeElement?.dataset?.mpMove ?? (document.activeElement?.matches?.('[data-mp-show]') ? 'show' : '');
-        div.innerHTML = `<div class="mp-panel-head"><strong>⚙︎ ${esc(T('Personnaliser la monographie'))}</strong><span class="spacer"></span><button type="button" class="icon-button" data-mp-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">✕</button></div>
+        const html = `<div class="mp-panel-head"><strong>⚙︎ ${esc(T('Personnaliser la monographie'))}</strong><span class="spacer"></span><button type="button" class="icon-button" data-mp-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">✕</button></div>
             ${ro ? `<p class="muted">${esc(T('Cet écran a sa propre organisation : elle se change dans son onglet (crayon de l’onglet).'))}</p>` : `<p class="muted">${esc(T('Glisse ⠿ (ou ↑ ↓) pour choisir l’ordre, décoche pour masquer. Une partie vide pour cette commune est passée toute seule.'))}</p>
             <label class="checkbox-line mp-local"><input type="checkbox" data-mp-local ${from === 'place' ? 'checked' : ''}> ${esc(T('Seulement pour cette commune ({c})', {c: name || T('celle-ci')}))}</label>`}
             <h4>${esc(T('En haut de la page'))}</h4><ul class="mp-list mp-top">${topIds.map(k => li(k, true)).join('')}</ul>
             <h4>${esc(T('Les parties, dans l’ordre'))}</h4><ol class="mp-list" data-mp-order>${order.filter(k => !topIds.includes(k) && here.has(k)).map(k => li(k, false)).join('')}</ol>
             ${ro ? '' : `<p><button type="button" class="button small secondary" data-mp-reset>↶ ${esc(T('Réinitialiser'))}</button> <small class="muted">${esc(from === 'place' ? T('remet cette commune comme les autres') : T('remet l’ordre et les parties de départ'))}</small></p>`}`;
+        // rien n'a changé (une partie de plus s'est dessinée, la page s'est rangée) : la liste reste telle quelle — sinon
+        // chaque fin de dessin remplacerait les boutons sous le doigt (clic perdu, focus perdu) quand il y a beaucoup de parties
+        if (html === div.__mpHtml) return;
+        div.__mpHtml = html; div.innerHTML = html;
         if (focusK) { const l = div.querySelector(`li[data-k="${CSS.escape(focusK)}"]`); (focusWhat === 'show' ? l?.querySelector('[data-mp-show]') : l?.querySelector(`[data-mp-move="${focusWhat}"]`) || l?.querySelector('[data-mp-show]'))?.focus(); }
     }
 

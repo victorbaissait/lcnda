@@ -70,12 +70,12 @@ const life = (p, places, events = [], jobs = [], text = '') => ({ok: true, perso
 
     await t('🏥 « mort à l’Hôtel-Dieu » : l’hôtel-Dieu de sa ville ; enfant trouvé : les hospices près de sa naissance', async () => {
         const I = rows('institutions');
-        const hd = I.find(i => i.kinds.includes('hoteldieu') && i.country === 'France' && i.from !== null && /h[ôo]tel-dieu/i.test(i.n));
+        const hd = I.find(i => i.country === 'France' && i.from !== null && (i.to === null || i.to > i.from + 1) && /^h[ôo]tel-dieu/i.test(i.n) && i.kinds.some(k => ['hoteldieu', 'hopital', 'hospice'].includes(k)));
         assert.ok(hd, 'un hôtel-Dieu daté en France');
-        const y = Math.max(hd.from + 10, 1700);
+        const y = hd.from + 1, wanted = hd;
         const L = life({birth: y - 60, death: y}, [{name: 'X', lat: hd.lat + 0.004, lon: hd.lon}], [{tag: 'DEAT', year: y, lat: hd.lat + 0.004, lon: hd.lon, place: 'X', address: 'Hôtel-Dieu'}]);
         const r = H.institutionsForLife(I, L);
-        assert.ok(r.acts.length, 'trouvé'); assert.ok(r.acts[0].i.kinds.some(k => ['hoteldieu', 'hopital', 'hospice'].includes(k))); assert.ok(r.acts[0].km < 15);
+        assert.ok(r.acts.length, 'trouvé'); assert.strictEqual(r.acts[0].i.q, wanted.q, `${r.acts[0].i.n} au lieu de ${wanted.n}`); assert.strictEqual(r.acts[0].named, true); assert.ok(r.acts[0].i.kinds.some(k => ['hoteldieu', 'hopital', 'hospice'].includes(k))); assert.ok(r.acts[0].km < 15);
         assert.deepStrictEqual(H.institutionsForLife(I, life({birth: 1800, death: 1850}, [], [{tag: 'DEAT', year: 1850, lat: hd.lat, lon: hd.lon, address: 'rue Neuve'}])).acts, [], 'une adresse ordinaire : rien');
         const F = H.institutionsForLife(I, life({birth: y, death: y + 50}, [], [{tag: 'BIRT', year: y, lat: hd.lat, lon: hd.lon, place: 'X'}], [], 'enfant trouvé, né de père et mère inconnus'));
         assert.ok(F.foundling && F.foundling.list.length, 'les hospices pour un enfant trouvé');

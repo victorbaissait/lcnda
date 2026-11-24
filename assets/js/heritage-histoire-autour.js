@@ -138,7 +138,7 @@
         if (FOUNDLING.test(txt)) {
             const b = (life.events || []).find(e => TAGW[e.tag] === 'birth' && num(e.lat) !== null);
             if (b) {
-                const near = institutionsNear(list, b.lat, b.lon, 25, {kinds: ['enfants', 'hospice', 'hoteldieu', 'orphelinat'], year: num(b.year)});
+                const near = institutionsNear(list, b.lat, b.lon, 25, {kinds: ['enfants', 'hospice', 'hoteldieu', 'orphelinat', 'hopital'], year: num(b.year)});
                 if (near.length) foundling = {event: b, list: near.slice(0, 5)};
             }
         }

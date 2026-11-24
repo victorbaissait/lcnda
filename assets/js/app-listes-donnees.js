@@ -454,7 +454,7 @@
             <h1>${esc((cur.d.icon || '') + ' ' + title)}</h1><p>${esc([sum, countText()].filter(Boolean).join(' · '))}${cur.d.source ? `<br>${esc(T('Source :'))} ${esc(cur.d.source)}` : ''}</p>
             <table><thead><tr>${t[0].map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${t.slice(1).map(r => `<tr>${r.map(v => `<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></body></html>`;
         if (UI().openPrintDialog) return UI().openPrintDialog({title, html: doc, photos: false});
-        const w = window.open('', '_blank'); if (!w) return toast(T('Fenêtre bloquée par le navigateur.'), 'error'); w.document.write(doc); w.document.close(); w.focus(); w.print();
+        toast(T('L’impression n’est pas chargée.'), 'error');
     }
     async function saveSearch() {
         const st = cur.st, d = cur.d;
