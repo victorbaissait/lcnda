@@ -228,16 +228,15 @@ def build_armoiries(C, Q2I):
 FOOD_ROOTS = {'Q2095', 'Q746549', 'Q10943', 'Q8195619', 'Q13266', 'Q11002', 'Q3314483', 'Q1778821', 'Q5283295', 'Q2920963'}
 NOT_FOOD = {'Q40050', 'Q282', 'Q154', 'Q56139', 'Q11004'}  # boissons, vin, alcool… (« le plat » : on garde ce qui se mange)
 
-def is_food(types):
-    seen, front = set(), set(types)
-    for _ in range(7):
-        if front & NOT_FOOD and not (front & FOOD_ROOTS): return False
-        if front & FOOD_ROOTS: return True
-        front -= seen; seen |= front
-        if not front: return False
-        E = wm.entities(sorted(front), props='claims', languages='fr')
-        front = {p for q in front for p in wm.ids(E.get(q), 'P279')}
-    return False
+def food_types(types):
+    """les classes qui sont de la nourriture (sous-classes, à toute profondeur, de nourriture, plat, fromage…) : SPARQL"""
+    import hashlib
+    types = sorted(types, key=lambda x: int(x[1:])); ok = set()
+    for i in range(0, len(types), 800):
+        part = types[i:i + 800]
+        q = ('SELECT DISTINCT ?t WHERE { VALUES ?t { ' + ' '.join('wd:' + x for x in part) + ' } VALUES ?r { ' + ' '.join('wd:' + x for x in sorted(FOOD_ROOTS)) + ' } ?t wdt:P279* ?r . }')
+        ok |= {qid(r['t']) for r in wm.sparql(q, 'food-' + hashlib.sha1(' '.join(part).encode()).hexdigest()[:16])}
+    return ok - NOT_FOOD
 
 def build_plats(C, Q2I):
     dl = rows('dish_loc'); dc = rows('dish_cuisine')
@@ -247,7 +246,8 @@ def build_plats(C, Q2I):
         if re.match(r'^(\d[\dAB]|97\d)$', code): reg2dep.setdefault(qid(r['reg']), set()).add(code)
     types = {}
     for r in dl: types.setdefault(qid(r['d']), set()).add(qid(r['t']))
-    food = {d for d, t in types.items() if is_food(t)}
+    ft = food_types({x for t in types.values() for x in t if re.match(r'^Q\d+$', x)})
+    food = {d for d, t in types.items() if t & ft}
     cand = {}
     for r in dl:
         d = qid(r['d'])
