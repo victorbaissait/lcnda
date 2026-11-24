@@ -340,6 +340,7 @@
         if (A().state.module !== 'tresors') { pending = key; return A().setModule('tresors'); }
         if (push && location.hash !== `#tresors/${key}`) history.pushState(null, '', `#tresors/${key}`);
         lsPut(RECENT_KEY, [key, ...recents().filter(k => k !== key)].slice(0, 6)); // 🕘 récents
+        query = ''; // la recherche est vidée en quittant l'accueil
         // K5 : un seul en-tête pour toutes les pages des Trésors — « ← Tous les trésors » (et la liste qui va avec) au-dessus,
         // sur-titre « Trésors · la famille du trésor », l'icône à part du nom, une phrase d'aide ; les boutons à droite (T.actions)
         const fam = i18n(GROUPS.find(g => g[0] === f.group)?.[1].replace(/^\S+\s/, '') || '');

@@ -1160,6 +1160,164 @@
         clearTimeout(timer);
         timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (n.isConnected) scan(n); }); }, 30);
     }).observe(document.documentElement, {childList: true, subtree: true});
+    /* ═════ 🕘 Historique unifié « ↶ » ═════
+     * Chaque message « ↶ Annuler » de l'app s'inscrit dans l'historique de la séance (libellé, heure, fait / annulé) :
+     *  - A().undoToast(…) est enveloppé ici (même API, même valeur rendue) : ses undo / redo sont gardés ;
+     *  - les messages faits à l'intérieur d'app.js (undoDelete, deleteWithUndo, undoLocalChange…) sont repérés à leur arrivée
+     *    (.toast.undo) : leur bouton « ↶ Annuler », puis le « ↷ Rétablir » qui suit, servent de poignées.
+     * UI.openUndoHistory() ouvre la fenêtre « 🕘 Historique » (raccourci ⌘⌥Z / Ctrl+Alt+Z ; « 🕘 » dans chaque message ↶ ;
+     * « historique » dans la recherche rapide ⌘K). Annuler une ligne annule d'abord les plus récentes, dans l'ordre ;
+     * Rétablir une ligne rétablit d'abord les plus anciennes encore annulées juste avant elle.
+     * UI.undoHistory() → copie de la liste (pour les essais) ; l'événement « lcnda:undo-history » part à chaque changement. */
+    const HIST_MAX = 80;
+    const hist = [];
+    let histSeq = 0, histDlg = null, rearm = null, expectRedo = null;
+    const histText = el => (el?.querySelector?.('.ui-toast-text')?.textContent || '').trim();
+    const histLabel = t => String(t || '').replace(/^\s*[^\p{L}\p{N}\s«"'(]+\s*/u, '').trim() || String(t || '').trim();
+    function histChanged() { if (histDlg?.open) paintHist(); try { document.dispatchEvent(new CustomEvent('lcnda:undo-history', {detail: {count: hist.length}})); } catch (_) {} }
+    function histAdd(label, extra = {}) {
+        const e = {id: ++histSeq, label: histLabel(label), at: new Date(), state: 'done', undo: null, redo: null, undoBtn: null, redoBtn: null, kind: 'fn', ...extra};
+        hist.push(e); while (hist.length > HIST_MAX) hist.shift();
+        histChanged(); return e;
+    }
+    const recent = (r, ms = 5000) => r && Date.now() - r.t < ms;
+    function wrapUndoToast() {
+        const app = window.LCNDA_APP; if (!app || typeof app.undoToast !== 'function' || app.undoToast._hist) return;
+        const orig = app.undoToast;
+        const wrapped = function (message, o = {}) {
+            if (!o || typeof o.undo !== 'function') return orig.call(this, message, o);
+            const e = histAdd(String(message ?? ''), {icon: o.icon || ''});
+            e.undo = async () => { const r = await o.undo(); e.state = 'undone'; histChanged(); return r; };
+            e.redo = typeof o.redo === 'function' ? async () => { rearm = {e, t: Date.now()}; const r = await o.redo(); e.state = 'done'; histChanged(); return r; } : null;
+            const item = orig.call(this, message, {...o, undo: e.undo, redo: e.redo});
+            if (item && item.dataset) { item.dataset.histId = String(e.id); decorateToast(item); }
+            return item;
+        };
+        wrapped._hist = true; wrapped._orig = orig;
+        app.undoToast = wrapped;
+    }
+    /* le petit « 🕘 » d'un message ↶ (icône en CSS : le texte du message ne change pas) */
+    function decorateToast(item) {
+        if (!item || item.querySelector('.ui-toast-hist')) return;
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'ui-toast-hist';
+        b.title = i18n('🕘 Historique des actions'); b.setAttribute('aria-label', i18n('🕘 Historique des actions'));
+        b.addEventListener('click', ev => { ev.stopPropagation(); UI.openUndoHistory(); });
+        (item.querySelector('.ui-toast-acts') || item).appendChild(b);
+    }
+    function watchToast(el) {
+        if (!el?.classList?.contains('toast') || el.dataset.histSeen) return;
+        el.dataset.histSeen = '1';
+        const btn = el.querySelector('.ui-toast-btn'), text = histText(el);
+        if (el.classList.contains('undo')) {
+            decorateToast(el);
+            if (el.dataset.histId) return; // déjà inscrit (A().undoToast)
+            if (recent(rearm) && text.includes(rearm.e.label.slice(0, 40))) { // le même message revenu après « ↷ Rétablir »
+                const e = rearm.e; rearm = null; el.dataset.histId = String(e.id);
+                if (e.kind === 'dom') { e.undoBtn = btn; hookUndoBtn(e, btn); }
+                e.state = 'done'; histChanged(); return;
+            }
+            if (!btn) return;
+            const e = histAdd(text, {kind: 'dom'}); el.dataset.histId = String(e.id);
+            e.undoBtn = btn; hookUndoBtn(e, btn);
+            return;
+        }
+        // « ↶ Annulé : … » avec « ↷ Rétablir » : la poignée pour rétablir une ligne repérée
+        if (btn && recent(expectRedo) && /↷/.test(btn.textContent || '')) {
+            const e = expectRedo.e; expectRedo = null; e.redoBtn = btn;
+            btn.addEventListener('click', () => { rearm = {e, t: Date.now()}; e.state = 'done'; e.redoBtn = null; histChanged(); }, {capture: true});
+        }
+    }
+    function hookUndoBtn(e, btn) {
+        if (!btn || btn._histHooked) return; btn._histHooked = true;
+        btn.addEventListener('click', () => { if (btn.disabled) return; expectRedo = {e, t: Date.now()}; e.state = 'undone'; e.undoBtn = null; histChanged(); }, {capture: true});
+    }
+    new MutationObserver(list => list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1 && n.classList?.contains('toast')) watchToast(n); })))
+        .observe(document.documentElement, {childList: true, subtree: true});
+    const canUndo = e => e.state === 'done' && (e.kind === 'fn' ? !!e.undo : !!(e.undoBtn && !e.undoBtn.disabled));
+    const canRedo = e => e.state === 'undone' && (e.kind === 'fn' ? !!e.redo : !!(e.redoBtn && !e.redoBtn.disabled));
+    const closeToastOf = e => document.querySelectorAll(`.toast[data-hist-id="${e.id}"]`).forEach(t => t.close?.());
+    async function undoOne(e) {
+        if (!canUndo(e)) throw new Error(i18n('« {what} » ne peut plus être annulé d’ici.', {what: e.label}));
+        e.busy = true; paintHist();
+        try {
+            closeToastOf(e);
+            if (e.kind === 'fn') await e.undo();
+            else { expectRedo = {e, t: Date.now()}; const b = e.undoBtn; e.state = 'undone'; e.undoBtn = null; b.click(); await new Promise(r => setTimeout(r, 350)); }
+        } finally { e.busy = false; histChanged(); }
+    }
+    async function redoOne(e) {
+        if (!canRedo(e)) throw new Error(i18n('« {what} » ne peut pas être rétabli d’ici.', {what: e.label}));
+        e.busy = true; paintHist();
+        try {
+            if (e.kind === 'fn') { await e.redo(); setTimeout(() => closeToastOf(e), 0); }
+            else { rearm = {e, t: Date.now()}; const b = e.redoBtn; e.redoBtn = null; e.state = 'done'; b.click(); await new Promise(r => setTimeout(r, 350)); }
+        } finally { e.busy = false; histChanged(); }
+    }
+    /** ↶ jusqu'à cette ligne : les plus récentes encore faites d'abord, puis elle */
+    async function undoUpTo(id) {
+        const i = hist.findIndex(x => x.id === id); if (i < 0) return;
+        const todo = hist.slice(i).filter(x => x.state === 'done').reverse();
+        let n = 0;
+        for (const e of todo) { try { await undoOne(e); n++; } catch (err) { toast(i18n('Impossible d’annuler : {err}', {err: err.message || err}), 'error'); break; } }
+        if (n) toast(n > 1 ? i18n('↶ {n} actions annulées', {n}) : i18n('↶ Annulé : « {what} »', {what: hist[i].label}));
+    }
+    /** ↷ jusqu'à cette ligne : les annulées juste avant elle d'abord (de la plus ancienne à elle) */
+    async function redoUpTo(id) {
+        const i = hist.findIndex(x => x.id === id); if (i < 0) return;
+        let k = i; while (k > 0 && hist[k - 1].state === 'undone') k--;
+        const todo = hist.slice(k, i + 1).filter(x => x.state === 'undone');
+        let n = 0;
+        for (const e of todo) { try { await redoOne(e); n++; } catch (err) { toast(i18n('Impossible de rétablir : {err}', {err: err.message || err}), 'error'); break; } }
+        if (n) toast(n > 1 ? i18n('↷ {n} actions rétablies', {n}) : i18n('↷ Rétabli : « {what} »', {what: hist[i].label}));
+    }
+    const hhmm = d => `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+    function paintHist() {
+        const box = histDlg?.querySelector('[data-hist-list]'); if (!box) return;
+        if (!hist.length) { box.innerHTML = `<p class="muted ui-hist-empty">${esc(i18n('Rien à annuler pour l’instant : les actions qui proposent « ↶ Annuler » arrivent ici, la plus récente en haut.'))}</p>`; return; }
+        box.innerHTML = `<ol class="ui-hist-list">${hist.slice().reverse().map(e => {
+            const newer = hist.filter(x => x.id > e.id && x.state === 'done').length;
+            const btn = e.busy ? `<span class="ui-hist-busy">${esc(i18n('…'))}</span>`
+                : e.state === 'done' ? `<button type="button" class="button small secondary" data-hist-undo="${e.id}"${canUndo(e) ? '' : ' disabled'} title="${esc(newer ? i18n('Annule aussi les {n} actions plus récentes, dans l’ordre', {n: newer}) : i18n('Annuler cette action'))}">${esc(newer ? i18n('↶ Annuler jusqu’ici') : i18n('↶ Annuler'))}</button>`
+                : `<button type="button" class="button small secondary" data-hist-redo="${e.id}"${canRedo(e) ? '' : ' disabled'}>${esc(i18n('↷ Rétablir'))}</button>`;
+            return `<li class="ui-hist-row${e.state === 'undone' ? ' is-undone' : ''}" data-hist-row="${e.id}"><time class="ui-hist-time" datetime="${esc(e.at.toISOString())}">${esc(hhmm(e.at))}</time>`
+                + `<span class="ui-hist-label">${esc(e.label)}</span><span class="ui-hist-state ui-badge is-${e.state === 'done' ? 'green' : 'grey'}">${esc(e.state === 'done' ? i18n('Fait') : i18n('Annulé'))}</span>${btn}</li>`;
+        }).join('')}</ol>`;
+    }
+    UI.undoHistory = () => hist.map(e => ({id: e.id, label: e.label, at: e.at, state: e.state, canUndo: canUndo(e), canRedo: canRedo(e)}));
+    UI.undoHistoryUndo = undoUpTo; UI.undoHistoryRedo = redoUpTo;
+    UI.openUndoHistory = () => {
+        if (histDlg?.open) { paintHist(); return histDlg; }
+        histDlg?.remove();
+        const dlg = histDlg = document.createElement('dialog'); dlg.className = 'modal ui-hist'; dlg.dataset.undoHistory = '';
+        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${esc(i18n('Cette séance'))}</span><h2>🕘 ${esc(i18n('Historique des actions'))}</h2></div><button type="button" class="icon-button" data-hist-x aria-label="${esc(i18n('Fermer'))}">×</button></div>
+            <p class="muted ui-hist-help">${esc(i18n('Les dernières actions qui peuvent s’annuler, dans toute l’app. Annuler une ligne annule d’abord celles qui sont venues après.'))} <kbd>${/Mac|iPhone|iPad/.test(navigator.platform || '') ? '⌘⌥Z' : 'Ctrl+Alt+Z'}</kbd></p>
+            <div class="ui-hist-body" data-hist-list></div>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-hist-x>${esc(i18n('Fermer'))}</button></div></form>`;
+        document.body.appendChild(dlg);
+        dlg.addEventListener('click', async ev => {
+            if (ev.target === dlg || ev.target.closest('[data-hist-x]')) { dlg.close(); return; }
+            const u = ev.target.closest('[data-hist-undo]'), r = ev.target.closest('[data-hist-redo]');
+            if (u && !u.disabled) { ev.preventDefault(); await undoUpTo(Number(u.dataset.histUndo)); }
+            else if (r && !r.disabled) { ev.preventDefault(); await redoUpTo(Number(r.dataset.histRedo)); }
+        });
+        dlg.addEventListener('close', () => { dlg.remove(); if (histDlg === dlg) histDlg = null; });
+        paintHist();
+        try { dlg.showModal(); } catch (_) { dlg.setAttribute('open', ''); }
+        return dlg;
+    };
+    document.addEventListener('keydown', ev => {
+        if (!(ev.metaKey || ev.ctrlKey) || !ev.altKey || ev.shiftKey || ev.code !== 'KeyZ') return;
+        ev.preventDefault(); if (histDlg?.open) histDlg.close(); else UI.openUndoHistory();
+    }, true);
+    (() => { // ⌘K : « historique », « annuler »
+        const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
+        const provider = q => (/^(histo|annul|defai|undo)/.test(fold(q).trim()) ? [{label: i18n('🕘 Historique des actions'), hint: i18n('Les dernières actions à annuler ou rétablir'), go: () => UI.openUndoHistory()}] : []);
+        ext.quickSearchProviders = ext.quickSearchProviders || [];
+        ext.quickSearchProviders.push(provider);
+    })();
+    wrapUndoToast();
+    document.addEventListener('DOMContentLoaded', wrapUndoToast);
+    addEventListener('load', wrapUndoToast);
     const attach = () => { const app = window.LCNDA_APP; if (app && app.ui !== UI) app.ui = UI; if (app && !app.viewToggle) app.viewToggle = UI.viewToggle; if (app && !app.listBar) app.listBar = UI.listBar; };
     attach();
     document.addEventListener('DOMContentLoaded', () => { attach(); scan(document); });

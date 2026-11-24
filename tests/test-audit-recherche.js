@@ -213,6 +213,22 @@ echo json_encode(compact('gp', 'gm', 'f1', 'f2', 'm1', 'm2', 'c1', 'c2', 'c3', '
             await p.waitForSelector('#workspace .page-header.ui-ph [data-rp-export]');
             assert.ok(await p.$('#workspace [data-rp-bar]'));
             assert.ok((await p.$$('#workspace [data-rp-pick]')).length >= 5);
+            // R4 aussi sur les lieux avec joker
+            await p.click('#research-form [data-rk-pick="place_name"]');
+            await p.fill('#research-form [name=place_name_q]', 'Tul*');
+            await p.click('#research-form button[type=submit]');
+            await p.waitForSelector('#workspace .page-header.ui-ph [data-rp-print]', {state: 'attached'});
+            // … et sur les dates
+            await p.click('#research-form [data-rk-pick="dates"]');
+            await p.selectOption('#research-form [name=date_mode]', 'range');
+            await p.fill('#research-form [name=year_from]', '1890'); await p.fill('#research-form [name=year_to]', '1910');
+            await p.click('#research-form button[type=submit]');
+            await p.waitForSelector('#workspace .page-header.ui-ph [data-rp-export]', {state: 'attached'});
+            assert.match(await p.textContent('#workspace'), /Paul MAZAUD/);
+            await p.click('#research-form [data-rk-pick="text"]');
+            await p.fill('#research-form [name=text_q]', 'MAZAUD');
+            await p.click('#research-form button[type=submit]');
+            await p.waitForSelector('#workspace [data-rp-bar]');
         });
         await t('🕘 dernières recherches : gardée, rappelée d’un clic', async () => {
             await p.waitForSelector('#research-form [data-rp-history] [data-rp-hist]', {state: 'attached'});

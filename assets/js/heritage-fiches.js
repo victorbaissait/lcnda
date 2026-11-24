@@ -3,6 +3,10 @@
  * blocs rangés sur une grille : texte (mise en forme simple), images et documents, personnes, frise de dates, citation,
  * liens, intertitre, et ce que l'app sait montrer : un écran (carte, arbre, liste, Mes listes, fiche d'une personne,
  * village…) ou un widget / un graphique à soi. Serveur : lib/topic_sheets.php.
+ * Audit des onglets (§13) : colonne = la barre commune (🔍 dans le contenu des fiches, extrait trouvé) ; en-têtes UI.pageHeader ;
+ * ↩ « Cité dans » en bas de la fiche, et « 📒 Fiches qui la citent » sur la fiche d'une personne ; 🕘 Versions (L3) ;
+ * bloc 🤖 « Les personnes de la base qui… » ; ⤓ Exporter (Markdown, page web) ; suppression d'une fiche ou d'un modèle
+ * tout de suite avec « ↶ Annuler » ; mode consultation : rien à modifier ; « Chercher dans cette page » (R13).
  */
 (() => {
     'use strict';
@@ -13,6 +17,9 @@
     const api = (...a) => A().api(...a);
     const toast = (...a) => A().toast(...a);
     const S = () => A().state;
+    const kiosk = () => document.body.classList.contains('is-kiosk'); // R6 : mode consultation, rien à modifier
+    const UIx = () => window.LCNDA_UI || {};
+    const foldT = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const isCurrent = token => token === S().workspaceToken && S().module === 'fiches';
     const uid = () => 'b_' + Date.now().toString(36) + Math.floor(Math.random() * 46656).toString(36);
@@ -29,6 +36,7 @@
         ['diagram', '🏛️', 'Diagramme', 'Un de « Mes diagrammes » : hémicycle, frise d’un groupe, camembert…'],
         ['widget', '📊', 'Widget ou graphique à soi', 'Ceux de l’Éditeur de widgets / de graphiques'],
         ['photomap', '📸', 'Carte de photos', 'Une de tes cartes de photos (ou toutes), avec sa période'], // heritage-photomaps.js
+        ['auto', '🤖', 'Les personnes de la base qui…', 'Tenu à jour tout seul : un métier, un lieu, une période'], // lib/topic_sheets.php (topic_auto_people)
     ];
     const kindOf = t => KINDS.find(k => k[0] === t) || KINDS[0];
     const WIDTHS = [['12', 'toute la largeur'], ['6', '½'], ['4', '⅓'], ['3', '¼'], ['8', '⅔'], ['9', '¾']];
@@ -75,18 +83,29 @@
     /* ─── Colonne de gauche ─── */
     ext.fiches = {};
     ext.fiches.sidebar = (content, footer) => {
+        // R2 : la barre commune (🔍 Chercher, Trier) ; la recherche lit aussi le contenu des fiches (textes, citations, dates, liens)
+        content.innerHTML = `<div class="h-fi-side"><div data-fi-bar></div><div data-fi-rows></div></div>`;
+        const UI = UIx(), rowsBox = content.querySelector('[data-fi-rows]');
+        let q = filter, sort = 'az';
+        const snippet = (txt, w) => { const f = foldT(txt), i = f.indexOf(w); if (i < 0) return ''; const a = Math.max(0, i - 30); return `${a ? '…' : ''}${txt.slice(a, i + w.length + 50).replace(/\s+/g, ' ')}…`; };
         const draw = () => {
-            const q = filter.toLowerCase();
-            const rows = sheets.filter(s => !q || `${s.title} ${s.subtitle}`.toLowerCase().includes(q));
-            content.innerHTML = `<div class="h-fi-side"><input type="search" data-fi-q placeholder="Chercher une fiche…" value="${esc(filter)}">
-                <button type="button" class="h-fi-sitem ${!S().ficheId ? 'is-active' : ''}" data-fi-open="0"><span>📚</span><strong>Toutes les fiches</strong><small>${sheets.length}</small></button>
-                ${rows.map(s => `<button type="button" class="h-fi-sitem ${Number(S().ficheId) === s.id ? 'is-active' : ''}" data-fi-open="${s.id}"><span>${esc(s.icon || '📒')}</span><strong>${esc(s.title)}</strong><small>${s.blocks}</small></button>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucune fiche.</span></p>'}</div>`;
-            content.querySelector('[data-fi-q]').addEventListener('input', e => { filter = e.target.value; const pos = e.target.selectionStart; draw(); const i = content.querySelector('[data-fi-q]'); i.focus(); i.setSelectionRange(pos, pos); });
+            const words = foldT(q).split(/\s+/).filter(Boolean);
+            let rows = sheets.map(x => ({x, hay: foldT(`${x.title} ${x.subtitle || ''}`), body: foldT(x.text || '')})).filter(r => words.every(w => r.hay.includes(w) || r.body.includes(w)));
+            rows = UI.sortItems ? UI.sortItems(rows.map(r => ({...r, title: r.x.title, updated_at: r.x.updated_at})), sort, {name: r => r.title, date: r => r.updated_at}) : rows;
+            bar?.setCount?.(`${A().plural(rows.length, 'fiche')}${rows.length !== sheets.length ? ` sur ${sheets.length}` : ''}`);
+            rowsBox.innerHTML = `<button type="button" class="h-fi-sitem ${!S().ficheId ? 'is-active' : ''}" data-fi-open="0"><span>📚</span><strong>${esc(i18n('Toutes les fiches'))}</strong><small>${sheets.length}</small></button>
+                ${rows.map(({x, hay}) => { const inText = words.length && !words.every(w => hay.includes(w)), sn = inText ? snippet(x.text || '', words.find(w => !hay.includes(w)) || words[0]) : '';
+                    return `<button type="button" class="h-fi-sitem ${Number(S().ficheId) === x.id ? 'is-active' : ''}" data-fi-open="${x.id}"><span>${esc(x.icon || '📒')}</span><strong>${esc(x.title)}</strong><small>${x.blocks}</small>${sn ? `<em class="h-fi-snip" data-fi-snip>${esc(sn)}</em>` : ''}</button>`; }).join('')
+                || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">${esc(q.trim() ? i18n('Aucune fiche pour « {nm} »', {nm: q.trim()}) : i18n('Aucune fiche.'))}</span></p>`}`;
         };
+        const bar = UI.listBar ? UI.listBar({key: 'fiches:colonne', search: {placeholder: i18n('Chercher dans les fiches… (titre, texte, citations)')}, sort: {options: [['az', 'A → Z'], ['za', 'Z → A'], ['recent', 'Les plus récentes'], ['old', 'Les plus anciennes']], value: 'az'},
+            onChange: b => { q = b.q || ''; filter = q; sort = b.sort || 'az'; draw(); }}) : null;
+        if (bar) { content.querySelector('[data-fi-bar]').appendChild(bar); q = bar.state?.q || q; sort = bar.state?.sort || sort; }
+        else { content.querySelector('[data-fi-bar]').innerHTML = `<input type="search" data-fi-q placeholder="${esc(i18n('Chercher dans les fiches…'))}" value="${esc(filter)}">`; content.querySelector('[data-fi-q]').addEventListener('input', e => { q = filter = e.target.value; draw(); }); }
         draw();
         content.addEventListener('click', e => { const b = e.target.closest('[data-fi-open]'); if (!b) return; S().ficheId = Number(b.dataset.fiOpen) || 0; editing = false; A().setModule('fiches'); });
-        footer.innerHTML = '<button type="button" class="button small" data-fi-new>＋ Nouvelle fiche</button>';
-        footer.querySelector('[data-fi-new]').addEventListener('click', newSheet);
+        footer.innerHTML = kiosk() ? '' : `<button type="button" class="button small" data-fi-new>${esc(i18n('＋ Nouvelle fiche'))}</button>`;
+        footer.querySelector('[data-fi-new]')?.addEventListener('click', newSheet);
         if (!sheets.length) loadList().then(() => { if (S().module === 'fiches') draw(); });
     };
 
@@ -102,11 +121,12 @@
         A().renderSidebar?.();
     };
     function renderIndex(token, tpls = []) {
+        const ph = UIx().pageHeader ? UIx().pageHeader({icon: '📒', title: i18n('Mes fiches'), help: esc(i18n('Une fiche par sujet : l’histoire d’un pays à une époque, un lieu, un métier, une guerre, une coutume… Tu y mets ce que tu veux : du texte, des images et des documents, des personnes de la base, une frise de dates, des citations, des liens, et tout ce que l’app sait montrer (carte, arbre, listes, Mes listes, widgets et graphiques à toi).')),
+            primary: kiosk() ? '' : `<button type="button" class="button" data-fi-new>${esc(i18n('＋ Nouvelle fiche'))}</button>`}) : '';
         A().$('#workspace').innerHTML = `<section class="page h-fi">
-            <header class="page-header"><div><span class="eyebrow">FICHES</span><h2>📒 Mes fiches</h2><p>Une fiche par sujet : l’histoire d’un pays à une époque, un lieu, un métier, une guerre, une coutume… Tu y mets ce que tu veux : du texte, des images et des documents, des personnes de la base, une frise de dates, des citations, des liens, et tout ce que l’app sait montrer (carte, arbre, listes, Mes listes, widgets et graphiques à toi).</p></div>
-                <div class="page-actions"><button type="button" class="button" data-fi-new>＋ Nouvelle fiche</button></div></header>
-            ${sheets.length ? `<div class="h-fi-cards">${sheets.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}">${s.cover ? `<span class="h-fi-cover">${A().mediaThumbHtml(s.cover)}</span>` : `<span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span>`}<strong>${esc(s.icon || '')} ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks} bloc${s.blocks > 1 ? 's' : ''}</small></button>`).join('')}</div>` : A().emptyState({icon: '📒', text: 'Aucune fiche pour l’instant', hint: 'Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet.', action: {label: '＋ Nouvelle fiche', attrs: 'data-fi-new'}})}
-            ${tpls.length ? `<h3 class="h-fi-modhead">⭐ Mes modèles <small class="muted">— des fiches toutes prêtes à remplir, proposées dans « Nouvelle fiche »</small></h3><div class="h-fi-cards is-models">${tpls.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}"><span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span><strong>⭐ ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks.length} bloc${s.blocks.length > 1 ? 's' : ''}</small></button>`).join('')}</div>` : ''}
+            ${ph}
+            ${sheets.length ? `<div class="h-fi-cards">${sheets.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}">${s.cover ? `<span class="h-fi-cover">${A().mediaThumbHtml(s.cover)}</span>` : `<span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span>`}<strong>${esc(s.icon || '')} ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks} bloc${s.blocks > 1 ? 's' : ''}</small></button>`).join('')}</div>` : A().emptyState({icon: '📒', text: 'Aucune fiche pour l’instant', hint: 'Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet.', action: kiosk() ? null : {label: '＋ Nouvelle fiche', attrs: 'data-fi-new'}})}
+            ${tpls.length && !kiosk() ? `<h3 class="h-fi-modhead">⭐ Mes modèles <small class="muted">— des fiches toutes prêtes à remplir, proposées dans « Nouvelle fiche »</small></h3><div class="h-fi-cards is-models">${tpls.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}"><span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span><strong>⭐ ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks.length} bloc${s.blocks.length > 1 ? 's' : ''}</small></button>`).join('')}</div>` : ''}
         </section>`;
         const ws = A().$('#workspace');
         ws.querySelectorAll('[data-fi-new]').forEach(b => b.addEventListener('click', newSheet));
@@ -138,8 +158,13 @@
                     e.preventDefault(); e.stopPropagation();
                     const id = Number(b.dataset.fiTpledit || b.dataset.fiTpldel), t = mine.find(x => x.id === id);
                     if (b.dataset.fiTpledit) { d.close(); S().ficheId = id; editing = true; return A().setModule('fiches'); }
-                    if (!await A().confirmBox(i18n('Supprimer le modèle « {nm} » ? (les fiches déjà créées avec lui ne changent pas)', {nm: t?.title}), {title: 'Supprimer le modèle', okLabel: 'Supprimer le modèle'})) return;
-                    try { await post('delete_topic_sheet', {id}); mine = mine.filter(x => x.id !== id); const wasMine = d.querySelector('input[name="tpl"]:checked')?.value === 'u' + id; d.querySelector('[data-fi-mine]').innerHTML = mineHtml(); if (wasMine) d.querySelector('input[name="tpl"]').checked = true; toast('Modèle supprimé.'); } catch (err) { toast(err.message, 'error'); }
+                    // R7 : supprimé tout de suite, « ↶ Annuler » le remet (même numéro, lib/topic_sheets.php : topic_undelete)
+                    try {
+                        await post('delete_topic_sheet', {id}); const pos = mine.findIndex(x => x.id === id); mine = mine.filter(x => x.id !== id);
+                        const paint = () => { if (!d.isConnected) return; const wasMine = d.querySelector('input[name="tpl"]:checked')?.value === 'u' + id; d.querySelector('[data-fi-mine]').innerHTML = mineHtml(); if (wasMine || !d.querySelector('input[name="tpl"]:checked')) d.querySelector('input[name="tpl"]').checked = true; };
+                        paint();
+                        A().undoToast?.(i18n('Modèle « {nm} » supprimé', {nm: t?.title || ''}), {undo: async () => { await post('save_topic_sheet', {undelete: id}); if (t && !mine.some(x => x.id === id)) mine.splice(Math.max(0, pos), 0, t); paint(); }, redo: async () => { await post('delete_topic_sheet', {id}); mine = mine.filter(x => x.id !== id); paint(); }});
+                    } catch (err) { toast(err.message, 'error'); }
                 });
             },
             onSubmit: async form => {

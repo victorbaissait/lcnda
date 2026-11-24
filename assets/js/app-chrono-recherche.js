@@ -74,24 +74,24 @@
     function body() {
         const run = clock.running(), kn = clock.known(), week = clock.scopes(7), others = clock.others();
         const cur = run ? run.scope : (kn[0] || GENERAL());
-        return `<div class="rc-box${run ? ' is-on' : ''}" data-rc-box>
-            <div class="rc-top"><span class="rc-clock" data-rc-clock aria-live="off">${hms(run ? (Date.now() - run.start) / 1000 : 0)}</span>
-                ${ro() ? '' : `<label class="rc-scope"><span>${esc(i18n('Sur quoi ?'))}</span><input data-rc-scope list="rc-scopes" value="${esc(cur)}" maxlength="80" ${run ? 'disabled' : ''}><datalist id="rc-scopes">${kn.map(s => `<option value="${esc(s)}">`).join('')}</datalist></label>
-                <button type="button" class="button small${run ? ' secondary' : ''}" data-rc-do="${run ? 'stop' : 'start'}">${esc(run ? i18n('⏹ Arrêter') : i18n('▶ Démarrer'))}</button>`}</div>
-            <p class="rc-sum"><span>${esc(i18n('Aujourd’hui'))} <b data-rc-today>${esc(short(clock.today()))}</b></span><span>${esc(i18n('7 derniers jours'))} <b data-rc-week>${esc(short(clock.since(7)))}</b></span></p>
-            ${week.length ? `<ul class="rc-list">${week.slice(0, 6).map(([s, n]) => `<li><span>${esc(s)}</span><b>${esc(short(n))}</b></li>`).join('')}</ul>` : `<p class="muted">${esc(i18n('Démarre le chronomètre quand tu te mets à chercher : le temps passé est rangé par jour et par sujet.'))}</p>`}
-            ${others.length ? `<p class="rc-others muted">${others.map(o => `${esc(o.label)}${o.on ? ' ⏱' : ''} : ${esc(i18n('{t} aujourd’hui', {t: short(o.today)}))}`).join(' · ')}</p>` : ''}
+        return `<div class="rcl-box${run ? ' is-on' : ''}" data-rcl-box>
+            <div class="rcl-top"><span class="rcl-clock" data-rcl-clock aria-live="off">${hms(run ? (Date.now() - run.start) / 1000 : 0)}</span>
+                ${ro() ? '' : `<label class="rcl-scope"><span>${esc(i18n('Sur quoi ?'))}</span><input data-rcl-scope list="rcl-scopes" value="${esc(cur)}" maxlength="80" ${run ? 'disabled' : ''}><datalist id="rcl-scopes">${kn.map(s => `<option value="${esc(s)}">`).join('')}</datalist></label>
+                <button type="button" class="button small${run ? ' secondary' : ''}" data-rcl-do="${run ? 'stop' : 'start'}">${esc(run ? i18n('⏹ Arrêter') : i18n('▶ Démarrer'))}</button>`}</div>
+            <p class="rcl-sum"><span>${esc(i18n('Aujourd’hui'))} <b data-rcl-today>${esc(short(clock.today()))}</b></span><span>${esc(i18n('7 derniers jours'))} <b data-rcl-week>${esc(short(clock.since(7)))}</b></span></p>
+            ${week.length ? `<ul class="rcl-list">${week.slice(0, 6).map(([s, n]) => `<li><span>${esc(s)}</span><b>${esc(short(n))}</b></li>`).join('')}</ul>` : `<p class="muted">${esc(i18n('Démarre le chronomètre quand tu te mets à chercher : le temps passé est rangé par jour et par sujet.'))}</p>`}
+            ${others.length ? `<p class="rcl-others muted">${others.map(o => `${esc(o.label)}${o.on ? ' ⏱' : ''} : ${esc(i18n('{t} aujourd’hui', {t: short(o.today)}))}`).join(' · ')}</p>` : ''}
         </div>`;
     }
-    function paint() { document.querySelectorAll('[data-rc-host]').forEach(h => { h.innerHTML = body(); }); }
+    function paint() { document.querySelectorAll('[data-rcl-host]').forEach(h => { h.innerHTML = body(); }); }
     setInterval(() => {
         const run = clock.running(); if (!run) return;
-        document.querySelectorAll('[data-rc-clock]').forEach(el => { el.textContent = hms((Date.now() - run.start) / 1000); });
+        document.querySelectorAll('[data-rcl-clock]').forEach(el => { el.textContent = hms((Date.now() - run.start) / 1000); });
     }, 1000);
     document.addEventListener('click', e => {
-        const b = e.target.closest?.('[data-rc-do]'); if (!b) return;
+        const b = e.target.closest?.('[data-rcl-do]'); if (!b) return;
         e.preventDefault();
-        if (b.dataset.rcDo === 'start') { const inp = b.closest('[data-rc-box]')?.querySelector('[data-rc-scope]'); clock.start(inp?.value); A()?.toast?.(i18n('⏱ C’est parti : « {s} ».', {s: clock.running()?.scope || ''})); }
+        if (b.dataset.rclDo === 'start') { const inp = b.closest('[data-rcl-box]')?.querySelector('[data-rcl-scope]'); clock.start(inp?.value); A()?.toast?.(i18n('⏱ C’est parti : « {s} ».', {s: clock.running()?.scope || ''})); }
         else { const run = clock.running(), sec = clock.stop(); if (run) A()?.toast?.(i18n('⏱ {t} rangées dans « {s} ».', {t: short(sec), s: run.scope})); }
     });
     // une autre fenêtre de l'app a démarré ou arrêté le chronomètre
@@ -100,5 +100,5 @@
     /* ── le widget du tableau de bord ── */
     try { const a0 = A(); if (a0?.defaultDashboardBlocks && !a0.defaultDashboardBlocks.some(x => x[0] === 'research_time')) { a0.defaultDashboardBlocks.push(['research_time', '⏱ Temps de recherche']); if (a0.defaultDashboardBlockSpans) a0.defaultDashboardBlockSpans.research_time = '6'; if (a0.dashboardWidgetInfo) a0.dashboardWidgetInfo.research_time = 'Un chronomètre de séance : démarre-le quand tu cherches, le temps est rangé par jour et par sujet (une branche, une enquête). Montre aussi le temps des Successions et de l’Atelier.'; } } catch (_) {}
     ext.dashboard = ext.dashboard || {};
-    ext.dashboard.research_time = {load: () => Promise.resolve(null), render: (index, widget, span) => A().card(index, i18n('⏱ Temps de recherche'), '', `<div data-rc-host>${body()}</div>`, span)};
+    ext.dashboard.research_time = {load: () => Promise.resolve(null), render: (index, widget, span) => A().card(index, i18n('⏱ Temps de recherche'), '', `<div data-rcl-host>${body()}</div>`, span)};
 })();

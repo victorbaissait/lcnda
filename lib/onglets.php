@@ -7,7 +7,8 @@ declare(strict_types=1);
  * heritage-onglets-catalogue.js. Rien de nouveau dans la base : les documents sont les médias (table media), le catalogue
  * est celui des Artistes (table items, lib/art_engine.php).
  *
- * Lecture seule. Une seule route :
+ * Lecture (GET action=onglets) et quelques écritures (POST action=onglets_write, onglets_api_post : ✎ modifier sur place,
+ * personnes reliées, ✉️ pièces manquantes). Routes de lecture :
  *   GET api.php?action=onglets&op=documents          → {documents: [...], total, readonly}   (une ligne courte par média)
  *   GET api.php?action=onglets&op=document&id=12     → {document: {...}, readonly}           (la fiche complète)
  *   GET api.php?action=onglets&op=artists            → {artists: [...], readonly}            (qui a un catalogue)
@@ -86,6 +87,10 @@ function onglets_media_places(PDO $pdo): array
         LEFT JOIN events e ON ml.entity_type='event' AND e.id=ml.entity_id LEFT JOIN places pe ON pe.id=e.place_id
         LEFT JOIN census_records cr ON ml.entity_type='census' AND cr.id=ml.entity_id LEFT JOIN places pc ON pc.id=cr.place_id
         WHERE COALESCE(pe.name, pc.name, '')<>'' ORDER BY ml.position, ml.id";
+    // le lieu choisi pour le média lui-même (« ✎ Modifier » de l'onglet Documents, import de photos) passe d'abord
+    if (onglets_has_col($pdo, 'media', 'place_id')) {
+        try { foreach ($pdo->query('SELECT m.id AS media_id, p.name AS place FROM media m JOIN places p ON p.id=m.place_id')->fetchAll(PDO::FETCH_ASSOC) as $r) { $out[(int) $r['media_id']] = (string) $r['place']; } } catch (Throwable $e) {}
+    }
     try { foreach ($pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC) as $r) { $out[(int) $r['media_id']] ??= (string) $r['place']; } } catch (Throwable $e) {}
     return $out;
 }
@@ -196,9 +201,11 @@ function onglets_documents(PDO $pdo): array
     }, $rows);
     // 📚 les recueils où est chaque document (chercher et filtrer par recueil, « 📚 Recueils » dans la colonne)
     $rx = function_exists('recueil_doc_index') ? recueil_doc_index($pdo) : ['recueils' => [], 'of' => []];
-    foreach ($docs as &$d) { $d['recueils'] = $rx['of'][$d['id']] ?? []; }
+    $labels = onglets_media_labels($pdo); // 🏷 les étiquettes de chaque document (pastilles et « Filtrer ▾ → Étiquette »)
+    foreach ($docs as &$d) { $d['recueils'] = $rx['of'][$d['id']] ?? []; $d['labels'] = $labels[$d['id']] ?? []; }
     unset($d);
-    return ['documents' => $docs, 'total' => count($docs), 'more' => $more, 'readonly' => onglets_kiosk(), 'recueils' => $rx['recueils']];
+    return ['documents' => $docs, 'total' => count($docs), 'more' => $more, 'readonly' => onglets_kiosk(), 'recueils' => $rx['recueils'],
+        'missing' => onglets_missing_list($pdo)];
 }
 
 /** la fiche complète d'un document (à droite) */
@@ -257,6 +264,9 @@ function onglets_document(PDO $pdo, int $id): array
         LEFT JOIN census_records cr ON ml.entity_type='census' AND cr.id=ml.entity_id LEFT JOIN places pc ON pc.id=cr.place_id
         WHERE ml.media_id=? AND COALESCE(pe.name, pc.name, '')<>'' LIMIT 20");
     try { $pl->execute([$id]); $places = array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => (string) $r['name']], $pl->fetchAll(PDO::FETCH_ASSOC)); } catch (Throwable $e) {}
+    if ((int) ($m['place_id'] ?? 0) > 0) { // le lieu du média lui-même d'abord
+        try { $pp = $pdo->prepare('SELECT id, name FROM places WHERE id=?'); $pp->execute([(int) $m['place_id']]); if ($r = $pp->fetch(PDO::FETCH_ASSOC)) { $places = array_values(array_filter($places, static fn($x) => $x['id'] !== (int) $r['id'])); array_unshift($places, ['id' => (int) $r['id'], 'name' => (string) $r['name']]); } } catch (Throwable $e) {}
+    }
     $service = '';
     if (onglets_has_col($pdo, 'media', 'archive_service_id') && (int) ($m['archive_service_id'] ?? 0) > 0) {
         try { $a = $pdo->prepare('SELECT name FROM archive_services WHERE id=?'); $a->execute([(int) $m['archive_service_id']]); $service = (string) ($a->fetchColumn() ?: ''); } catch (Throwable $e) {}
@@ -268,7 +278,7 @@ function onglets_document(PDO $pdo, int $id): array
         'corr' => $str('correspondence_type', 60), 'correspondent' => $str('correspondent_name', 200), 'transcription' => mb_substr((string) ($m['transcription'] ?? ''), 0, 60000),
         'series' => $str('archive_series', 200), 'service' => mb_substr($service, 0, 200), 'created_at' => $str('created_at', 40), 'is_person_photo' => (int) ($m['is_person_photo'] ?? 0),
         'duration' => isset($m['duration_seconds']) && $m['duration_seconds'] !== null ? (float) $m['duration_seconds'] : null,
-        'people' => $people, 'links' => $links, 'places' => $places, 'acts' => $acts];
+        'people' => $people, 'links' => $links, 'places' => $places, 'acts' => $acts, 'place_id' => (int) ($m['place_id'] ?? 0)];
     return ['document' => $doc, 'readonly' => onglets_kiosk()];
 }
 
@@ -300,10 +310,155 @@ function onglets_artists(PDO $pdo): array
     return ['artists' => $out, 'readonly' => onglets_kiosk()];
 }
 
+/** 🏷 les étiquettes posées sur les médias : [media_id => [{id, name, color}]] */
+function onglets_media_labels(PDO $pdo): array
+{
+    $out = [];
+    try {
+        foreach ($pdo->query("SELECT ll.entity_id AS mid, l.id, l.name, COALESCE(l.color,'') AS color FROM label_links ll JOIN labels l ON l.id=ll.label_id WHERE ll.entity_type='media' ORDER BY l.name COLLATE NOCASE LIMIT 100000") as $r) {
+            $out[(int) $r['mid']][] = ['id' => (int) $r['id'], 'name' => mb_substr((string) $r['name'], 0, 80), 'color' => preg_match('/^#[0-9a-f]{6}$/i', (string) $r['color']) ? (string) $r['color'] : ''];
+        }
+    } catch (Throwable $e) {}
+    return $out;
+}
+
+/* ─── ✉️ Pièces manquantes d'une correspondance (« ✉️ Noter une pièce manquante » dans le fil des Lettres) ───
+ * Une pièce qu'on sait perdue ou pas encore retrouvée (« la lettre de mai 1916 dont parle la suivante ») : une ligne
+ * à sa place dans le fil, sans fichier. Table créée à la demande (doc_missing_pieces) ; une pièce retirée est gardée
+ * (deleted_at) pour « ↶ Annuler ». */
+function onglets_missing_ensure(PDO $pdo): void
+{
+    static $done = false; if ($done) { return; }
+    $pdo->exec("CREATE TABLE IF NOT EXISTS doc_missing_pieces (id INTEGER PRIMARY KEY AUTOINCREMENT, exchange_key TEXT NOT NULL DEFAULT '',
+        after_media_id INTEGER NOT NULL DEFAULT 0, date_text TEXT NOT NULL DEFAULT '', title TEXT NOT NULL DEFAULT '', note TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, deleted_at TEXT)");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_doc_missing_key ON doc_missing_pieces(exchange_key)');
+    $done = true;
+}
+function onglets_missing_list(PDO $pdo): array
+{
+    try {
+        onglets_missing_ensure($pdo);
+        return array_map(static fn($r) => ['id' => (int) $r['id'], 'key' => (string) $r['exchange_key'], 'after' => (int) $r['after_media_id'], 'date_text' => (string) $r['date_text'],
+            'title' => (string) $r['title'], 'note' => (string) $r['note'], 'created_at' => (string) $r['created_at']],
+            $pdo->query('SELECT * FROM doc_missing_pieces WHERE deleted_at IS NULL ORDER BY id LIMIT 5000')->fetchAll(PDO::FETCH_ASSOC));
+    } catch (Throwable $e) { return []; }
+}
+
+/** 📚 la citation toute prête d'un document (cote, fonds, folio, lien), dans les 4 styles de lib/citation_styles.php */
+function onglets_citation(PDO $pdo, int $id, array $g = []): array
+{
+    if (!function_exists('cite_format')) { require_once __DIR__ . '/citation_styles.php'; }
+    $sealed = function_exists('sealed_media_sql') ? sealed_media_sql($pdo) : '';
+    $s = $pdo->prepare("SELECT * FROM media m WHERE m.id=?{$sealed}"); $s->execute([$id]);
+    $m = $s->fetch(PDO::FETCH_ASSOC);
+    if (!$m) { throw new LcndaBadInput('Document introuvable : il n’existe pas, ou plus.'); }
+    $service = null;
+    if (onglets_has_col($pdo, 'media', 'archive_service_id') && (int) ($m['archive_service_id'] ?? 0) > 0) {
+        try { $a = $pdo->prepare('SELECT * FROM archive_services WHERE id=?'); $a->execute([(int) $m['archive_service_id']]); $service = $a->fetch(PDO::FETCH_ASSOC) ?: null; } catch (Throwable $e) {}
+    }
+    $url = (string) ($m['document_url'] ?? '');
+    if (!preg_match('~^https?://~i', $url)) { $url = ''; }
+    $title = trim((string) ($m['document_title'] ?? '')) ?: trim((string) ($m['title'] ?? '')) ?: 'Document';
+    $src = ['id' => $id, 'title' => $title, 'source_type' => trim((string) ($m['document_reference'] ?? '')) !== '' || $service ? 'archive' : 'other', 'author' => '', 'agency' => '',
+        'publication' => '', 'archive_cote' => (string) ($m['document_reference'] ?? ''), 'archive_series' => (string) ($m['archive_series'] ?? ''), 'url' => $url,
+        '_service' => $service ? ['name' => (string) ($service['name'] ?? ''), 'short_name' => (string) ($service['short_name'] ?? ''), 'city' => (string) ($service['city'] ?? '')] : null];
+    $c = ['view_url' => $url];
+    $folio = mb_substr(trim(safe_text($g['folio'] ?? '')), 0, 60);
+    if ($folio === '' && trim((string) ($m['document_pages'] ?? '')) !== '') { $folio = mb_substr(trim((string) $m['document_pages']), 0, 60); }
+    if ($folio !== '') { $c['view'] = $folio; }
+    $parts = cite_parts($src, $c, ['act_date' => (string) ($m['date_text'] ?? ''), 'what' => $title]);
+    return ['id' => $id, 'styles' => cite_format($parts), 'names' => CITE_STYLES];
+}
+
+/* ─── ✎ Les écritures de l'onglet Documents (POST api.php?action=onglets_write, {op, …}) ───
+ *  doc_save     {media_id, title?, date_text?, document_reference?, place_id?} → {before, after}   (✎ Modifier sur place)
+ *  doc_people   {media_id, add: [ids], remove: [ids]} → {added, removed}                           (personnes reliées ; ↶ = l'inverse)
+ *  missing_add  {key, after, date_text, title, note} → {id} ; missing_delete / missing_restore {id}  (✉️ pièce manquante)
+ * Hors mode consultation seulement (kiosk_guard l'a déjà refusé avant ; vérifié encore ici). */
+function onglets_api_post(PDO $pdo, array $d): array
+{
+    if (onglets_kiosk()) { throw new RuntimeException('Mode consultation : rien ne peut être modifié.'); }
+    $op = (string) ($d['op'] ?? '');
+    $mediaRow = static function (int $id) use ($pdo): array {
+        $s = $pdo->prepare('SELECT * FROM media WHERE id=?'); $s->execute([$id]); $m = $s->fetch(PDO::FETCH_ASSOC);
+        if (!$m) { throw new LcndaBadInput('Document introuvable.'); }
+        return $m;
+    };
+    switch ($op) {
+        case 'doc_save': {
+            $id = safe_int($d['media_id'] ?? 0); $m = $mediaRow($id);
+            $set = []; $vals = [];
+            foreach (['title' => 500, 'date_text' => 500, 'document_reference' => 500] as $k => $max) {
+                if (array_key_exists($k, $d)) { $set[] = "$k=?"; $vals[] = mb_substr(trim(safe_text((string) $d[$k])), 0, $max); }
+            }
+            $before = ['title' => (string) $m['title'], 'date_text' => (string) $m['date_text'], 'document_reference' => (string) $m['document_reference']];
+            if (onglets_has_col($pdo, 'media', 'place_id')) {
+                $before['place_id'] = (int) ($m['place_id'] ?? 0);
+                if (array_key_exists('place_id', $d)) {
+                    $pid = safe_int($d['place_id'] ?? 0);
+                    if ($pid) { $c = $pdo->prepare('SELECT 1 FROM places WHERE id=?'); $c->execute([$pid]); if (!$c->fetchColumn()) { throw new LcndaBadInput('Lieu introuvable.'); } }
+                    $set[] = 'place_id=?'; $vals[] = $pid ?: null;
+                }
+            }
+            if (!$set) { return ['before' => $before, 'after' => $before, 'unchanged' => true]; }
+            $vals[] = $id;
+            $pdo->prepare('UPDATE media SET ' . implode(',', $set) . ' WHERE id=?')->execute($vals);
+            $after = $mediaRow($id);
+            log_change($pdo, 'media', $id, 'update', 'Document modifié dans l’onglet Documents : « ' . mb_substr((string) ($after['title'] ?: '#' . $id), 0, 120) . ' »', $m, $after);
+            return ['before' => $before, 'after' => ['title' => (string) $after['title'], 'date_text' => (string) $after['date_text'], 'document_reference' => (string) $after['document_reference'], 'place_id' => (int) ($after['place_id'] ?? 0)]];
+        }
+        case 'doc_people': {
+            $id = safe_int($d['media_id'] ?? 0); $mediaRow($id);
+            $ids = static fn($v) => array_values(array_unique(array_filter(array_map('safe_int', array_slice(is_array($v) ? $v : [], 0, 500)))));
+            $add = $ids($d['add'] ?? []); $rem = $ids($d['remove'] ?? []);
+            $added = []; $removed = [];
+            $has = $pdo->prepare("SELECT 1 FROM media_links WHERE media_id=? AND entity_type='person' AND entity_id=?");
+            $exists = $pdo->prepare('SELECT 1 FROM persons WHERE id=?');
+            foreach ($add as $pid) {
+                $exists->execute([$pid]); if (!$exists->fetchColumn()) { continue; }
+                $has->execute([$id, $pid]); if ($has->fetchColumn()) { continue; }
+                $pos = $pdo->prepare("SELECT COALESCE(MAX(position),0)+1 FROM media_links WHERE entity_type='person' AND entity_id=?"); $pos->execute([$pid]);
+                $pdo->prepare("INSERT INTO media_links(media_id, entity_type, entity_id, position) VALUES(?, 'person', ?, ?)")->execute([$id, $pid, (float) $pos->fetchColumn()]);
+                $added[] = $pid;
+            }
+            foreach ($rem as $pid) {
+                $del = $pdo->prepare("DELETE FROM media_links WHERE media_id=? AND entity_type='person' AND entity_id=?"); $del->execute([$id, $pid]);
+                if ($del->rowCount()) { $removed[] = $pid; }
+            }
+            if ($added || $removed) { log_change($pdo, 'media', $id, 'link-media', 'Personnes reliées au document : +' . count($added) . ' / −' . count($removed)); }
+            return ['added' => $added, 'removed' => $removed];
+        }
+        case 'missing_add': {
+            onglets_missing_ensure($pdo);
+            $key = mb_substr(trim(safe_text((string) ($d['key'] ?? ''))), 0, 400);
+            if ($key === '') { throw new LcndaBadInput('Correspondance inconnue.'); }
+            $title = mb_substr(trim(safe_text((string) ($d['title'] ?? ''))), 0, 200);
+            $date = mb_substr(trim(safe_text((string) ($d['date_text'] ?? ''))), 0, 80);
+            if ($title === '' && $date === '') { throw new LcndaBadInput('Écris au moins une date ou quelques mots sur la pièce manquante.'); }
+            $pdo->prepare('INSERT INTO doc_missing_pieces(exchange_key, after_media_id, date_text, title, note) VALUES(?,?,?,?,?)')
+                ->execute([$key, safe_int($d['after'] ?? 0), $date, $title, mb_substr(trim(safe_text((string) ($d['note'] ?? ''))), 0, 2000)]);
+            $nid = (int) $pdo->lastInsertId();
+            log_change($pdo, 'meta', 0, 'create', 'Pièce manquante notée dans une correspondance : ' . ($title ?: $date));
+            return ['id' => $nid];
+        }
+        case 'missing_delete': case 'missing_restore': {
+            onglets_missing_ensure($pdo);
+            $id = safe_int($d['id'] ?? 0);
+            $s = $pdo->prepare('UPDATE doc_missing_pieces SET deleted_at=' . ($op === 'missing_delete' ? 'CURRENT_TIMESTAMP' : 'NULL') . ' WHERE id=?'); $s->execute([$id]);
+            if (!$s->rowCount()) { throw new LcndaBadInput('Pièce manquante introuvable.'); }
+            return ['ok' => true];
+        }
+    }
+    throw new RuntimeException('Demande inconnue.');
+}
+
 function onglets_api_get(PDO $pdo, array $g): array
 {
     return match (scalar_text($g['op'] ?? '', 'op')) {
         'documents' => onglets_documents($pdo),
+        'citation' => onglets_citation($pdo, safe_int($g['id'] ?? 0), $g),
+        'missing' => ['missing' => onglets_missing_list($pdo)],
         'document' => onglets_document($pdo, safe_int($g['id'] ?? 0)),
         'artists' => onglets_artists($pdo),
         'place_point' => onglets_place_point($pdo, safe_int($g['id'] ?? 0)),

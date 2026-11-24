@@ -115,6 +115,17 @@
         });
         page?.querySelector('[data-rp-print]')?.addEventListener('click', () => { const t = getTable(); UI().openPrintDialog({title: t.title, html: tableDoc(t.title, t.head, t.rows), photos: false}); });
     }
+    /** Exporter / Imprimer ce que la page montre : le tableau (sans les cases à cocher), sinon une ligne par fiche */
+    function bindDomExport(page, title) {
+        bindExportPrint(page, () => {
+            const table = page?.querySelector('table.data-table');
+            if (table) {
+                const cells = tr => [...tr.children].filter(c => !c.classList.contains('rp-pick-cell')).map(c => c.textContent.replace(/\s+/g, ' ').trim());
+                return {title, head: cells(table.tHead?.rows[0] || table.rows[0]), rows: [...(table.tBodies[0]?.rows || [])].filter(r => !r.hidden).map(cells)};
+            }
+            return {title, head: [title], rows: [...(page?.querySelectorAll('.date-result, article') || [])].map(a => [a.textContent.replace(/\s+/g, ' ').trim()])};
+        });
+    }
     const PEOPLE_HEAD = () => [i18n('Personne'), i18n('Naissance'), i18n('Décès')];
     const personRow = p => [personName(p), yr(p.birth_date, p.birth_year), yr(p.death_date, p.death_year)];
     /**
@@ -319,7 +330,7 @@
     /** les sortes ajoutées : [clé, nom] (rangées par app-recherche.js) et leur page */
     EXT.researchPlusKinds = [['replace', '🔁 Chercher et remplacer'], ['kinship', '🧬 Lien de parenté'], ['compare', '📊 Comparer deux recherches'], ['sources', '🧾 Sources et citations']];
     EXT.researchPlus = {replace: renderReplace, kinship: renderKinship, compare: renderCompare, sources: renderSources};
-    EXT.researchBar = {attach: attachBar, headActions, bindExportPrint, csvDownload, tableDoc, pickCell};
+    EXT.researchBar = {attach: attachBar, headActions, bindExportPrint, bindDomExport, csvDownload, tableDoc, pickCell};
     EXT.researchHistory = history;
     EXT.roUndoable = undoable;
     if (S()?.module === 'recherche' && S()?.bootstrap) { try { A().renderSidebar(); } catch (_) {} }

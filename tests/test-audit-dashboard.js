@@ -130,13 +130,13 @@ echo json_encode($ids + ['fam' => $fam, 'label' => $lab, 'md' => $md]);`], {cwd:
             await p.click('[data-lg-more="1"]'); await p.click('.ui-actmenu .ui-actmenu-i:has-text("Supprimer")'); await p.waitForFunction(() => !document.querySelector('[data-lg-row="1"]'));
             assert.ok(await undoLast(/Objectif supprimé/)); await p.waitForSelector('[data-lg-row="1"]', {timeout: 8000});
             // ⏱ démarrer, arrêter : le temps est rangé par jour et par sujet
-            await p.fill('[data-rc-scope]', 'Branche MAZAUD'); await p.click('[data-rc-do="start"]');
+            await p.fill('[data-rcl-scope]', 'Branche MAZAUD'); await p.click('[data-rcl-do="start"]');
             assert.strictEqual(await p.evaluate(() => window.LCNDA_EXT.researchClock.running().scope), 'Branche MAZAUD');
             await p.evaluate(() => { const v = JSON.parse(localStorage.getItem('genealogie-research-clock')); v.run.start -= 125000; localStorage.setItem('genealogie-research-clock', JSON.stringify(v)); });
-            await p.click('[data-rc-do="stop"]');
+            await p.click('[data-rcl-do="stop"]');
             const tot = await p.evaluate(() => [window.LCNDA_EXT.researchClock.total('Branche MAZAUD'), window.LCNDA_EXT.researchClock.today(), window.LCNDA_EXT.researchClock.running()]);
             assert.ok(tot[0] >= 125 && tot[0] < 140, String(tot[0])); assert.ok(tot[1] >= 125); assert.strictEqual(tot[2], null);
-            assert.match(await p.textContent('[data-rc-host] .rc-list'), /Branche MAZAUD/);
+            assert.match(await p.textContent('[data-rcl-host] .rcl-list'), /Branche MAZAUD/);
             // les chronomètres des Successions et de l'Atelier sont lus (sans y toucher)
             const others = await p.evaluate(() => { const now = Date.now(); localStorage.setItem('lcnda-succ-chrono', JSON.stringify({title: 'Succession DURAND', number: 'S-1', start: 0, segs: [{from: now - 600000, to: now - 300000}]})); localStorage.setItem('genealogie-atelier-timers', JSON.stringify({w1: {kind: 'chrono', total: 120000, today: 60000, day: new Date(now).toISOString().slice(0, 10).replace(/^(.*)$/, () => { const d = new Date(now); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }), start: 0}})); return window.LCNDA_EXT.researchClock.others(); });
             assert.deepStrictEqual(others.map(o => [o.key, o.total]), [['succ', 300], ['atelier', 120]]);
@@ -159,7 +159,7 @@ echo json_encode($ids + ['fam' => $fam, 'label' => $lab, 'md' => $md]);`], {cwd:
 
         await t('🔎 Filtre de la page (branche) : chiffres clés et listes ne montrent que la branche ; ✕ Tout montrer', async () => {
             await setWidgets(['stats', 'favorites']);
-            await p.click('.dashboard-page .ui-ph-more summary'); await p.click('.ui-ph-menu [data-dash-filter]');
+            await p.click('.dashboard-page .ui-ph-more summary'); await p.click('.ui-actmenu .ui-actmenu-i:has-text("Filtrer cette page")');
             await p.waitForSelector('dialog.dash-filter-dialog[open] select[name=branch] option[value="MAZAUD"]', {state: 'attached'});
             await p.selectOption('dialog.dash-filter-dialog select[name=branch]', 'MAZAUD'); await p.click('dialog.dash-filter-dialog [data-dash-filter-ok]');
             await p.waitForSelector('[data-dash-filterbar]');
@@ -189,7 +189,7 @@ echo json_encode($ids + ['fam' => $fam, 'label' => $lab, 'md' => $md]);`], {cwd:
             await p.waitForSelector('.dash-pages [data-dash-page="pg_bb"]');
             await p.keyboard.press(']'); await p.waitForFunction(() => document.querySelector('.dash-pages [data-dash-page="pg_bb"]')?.classList.contains('is-active'));
             await p.keyboard.press('['); await p.waitForFunction(() => document.querySelector('.dash-pages [data-dash-page="pg_aa"]')?.classList.contains('is-active'));
-            await p.click('.dashboard-page .ui-ph-more summary'); await p.click('.ui-ph-menu [data-dash-reorder]');
+            await p.click('.dashboard-page .ui-ph-more summary'); await p.click('.ui-actmenu .ui-actmenu-i:has-text("Réordonner les widgets")');
             await p.waitForSelector('dialog.dashboard-reorder-dialog [data-page-row="pg_bb"] [data-page-del]');
             await p.click('dialog.dashboard-reorder-dialog [data-page-row="pg_bb"] [data-page-del]');
             assert.ok(!(await p.$('dialog.dashboard-reorder-dialog [data-page-row="pg_bb"]')), 'partie tout de suite, sans question');
@@ -222,7 +222,7 @@ echo json_encode($ids + ['fam' => $fam, 'label' => $lab, 'md' => $md]);`], {cwd:
             await p.evaluate(async () => { document.body.classList.remove('is-kiosk'); await window.LCNDA_APP.renderDashboard(); });
         });
 
-        await t('390 px : rien ne déborde (tableau de bord, trésors)', async () => {
+        await t('390 px : rien ne déborde (tableau de bord)', async () => {
             await setWidgets(['stats', 'db_growth', 'long_goals', 'next_action', 'research_time']);
             await p.setViewportSize({width: 390, height: 800}); await sleep(600);
             const over = await p.evaluate(() => { const ws = document.querySelector('#workspace'); return [ws.scrollWidth - ws.clientWidth, document.documentElement.scrollWidth - 390]; });
@@ -234,7 +234,7 @@ echo json_encode($ids + ['fam' => $fam, 'label' => $lab, 'md' => $md]);`], {cwd:
         await p.evaluate(() => { localStorage.setItem('genealogie-menu-tresors', '1'); window.LCNDA_APP.applyMenuOrder(); });
         await t('Trésors : 🔍 chercher un trésor, ⭐ favoris, 🕘 récents, ⋯ et clic droit', async () => {
             await p.evaluate(() => window.LCNDA_APP.setModule('tresors')); await p.waitForSelector('[data-tr-hub] [data-tr-search]');
-            await p.fill('[data-tr-search]', 'jour la'); await sleep(200);
+            await p.fill('[data-tr-search]', 'ce jour-la'); await sleep(200);
             const shown = await p.$$eval('[data-tr-cell]:not([hidden])', l => l.map(x => x.dataset.trCell));
             assert.deepStrictEqual(shown, ['ce-jour-la']); assert.match(await p.textContent('[data-tr-count]'), /1 trésor/);
             await p.fill('[data-tr-search]', 'zzzz'); await sleep(200); assert.strictEqual(await p.$eval('[data-tr-none]', x => x.hidden), false, 'rien trouvé');
@@ -272,7 +272,7 @@ echo json_encode($ids + ['fam' => $fam, 'label' => $lab, 'md' => $md]);`], {cwd:
             await p.fill('[data-qpn-form] [name=to]', 'Tante Lucie DURAND');
             const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[data-qpn-form] [type=submit]')]);
             assert.match(dl.suggestedFilename(), /\.html$/);
-            await p.waitForSelector('[data-qpn-row]'); assert.match(await p.textContent('[data-qpn-row]'), /Tante Lucie DURAND.*À faire/s);
+            await p.waitForSelector('[data-qpn-row]'); assert.match(await p.textContent('[data-qpn-row]'), /À faire.*Tante Lucie DURAND/s);
             await p.click('[data-qpn-sent]'); await p.waitForFunction(() => /En cours/.test(document.querySelector('[data-qpn-row]')?.textContent || ''));
             await p.click('[data-qpn-more]'); await p.click('.ui-actmenu .ui-actmenu-i:has-text("Supprimer")');
             await p.waitForFunction(() => !document.querySelector('[data-qpn-row]'));

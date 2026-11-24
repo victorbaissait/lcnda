@@ -529,7 +529,7 @@
     /* ── 🖨 Imprimer / PDF (L1 UI.openPrintDialog) et ⤓ Exporter ── */
     function dashSheetHtml(){
         const grid=$('#workspace .dashboard-grid');if(!grid)return '';
-        const c=grid.cloneNode(true);c.querySelectorAll('.dashboard-widget-tools, .dashboard-widget-back, button, select, input, .card-head .button, [data-rc-host] .rc-scope').forEach(x=>x.remove());
+        const c=grid.cloneNode(true);c.querySelectorAll('.dashboard-widget-tools, .dashboard-widget-back, button, select, input, .card-head .button, [data-rcl-host] .rcl-scope').forEach(x=>x.remove());
         return c.innerHTML;
     }
     function dashTitle(){const ownTab=currentCustomTab();return ownTab?(ownTab.name||i18n('Mon onglet')):`${i18n('Tableau de bord')} — ${currentDashboardPage().name||i18n('Vue d’ensemble')}`;}
@@ -544,7 +544,7 @@
         toast(i18n('L’impression n’est pas encore prête : réessaie dans un instant.'),'error');
     }
     function dashDownload(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000);}
-    const fileBase=()=>dashTitle().replace(/[\\/:*?"<>|]+/g,'-').replace(/\s+/g,' ').trim()||'tableau-de-bord';
+    const fileBase=()=>dashTitle().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'tableau-de-bord';
     /** les chiffres de la page en tableau (CSV) : une ligne par nombre affiché */
     function dashCsv(){
         const rows=[[i18n('Widget'),i18n('Libellé'),i18n('Valeur')]];

@@ -30,14 +30,14 @@
 .na-acts { grid-column: 1 / -1; display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
 
 /* ── ⏱ Temps de recherche ── */
-.rc-top { display: flex; flex-wrap: wrap; align-items: end; gap: .6rem; }
-.rc-clock { font-variant-numeric: tabular-nums; font-size: 2rem; font-weight: 700; min-width: 4.5ch; }
-.rc-box.is-on .rc-clock { color: var(--accent, #0066cc); }
-.rc-scope { display: grid; gap: 2px; flex: 1 1 160px; font-size: .85rem; }
-.rc-sum { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin: .6rem 0 .3rem; }
-.rc-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
-.rc-list li { display: flex; justify-content: space-between; gap: .8rem; border-bottom: 1px dashed var(--line-color, #e3e5ea); padding: 2px 0; }
-.rc-others { margin: .5rem 0 0; font-size: .88rem; }
+.rcl-top { display: flex; flex-wrap: wrap; align-items: end; gap: .6rem; }
+.rcl-clock { font-variant-numeric: tabular-nums; font-size: 2rem; font-weight: 700; min-width: 4.5ch; }
+.rcl-box.is-on .rcl-clock { color: var(--accent, #0066cc); }
+.rcl-scope { display: grid; gap: 2px; flex: 1 1 160px; font-size: .85rem; }
+.rcl-sum { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; margin: .6rem 0 .3rem; }
+.rcl-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+.rcl-list li { display: flex; justify-content: space-between; gap: .8rem; border-bottom: 1px dashed var(--line-color, #e3e5ea); padding: 2px 0; }
+.rcl-others { margin: .5rem 0 0; font-size: .88rem; }
 
 /* ── ✨ Trésors : chercher, favoris, récents, ⋯ ── */
 .h-tr-find { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; max-width: 560px; }
@@ -81,7 +81,7 @@ body.is-kiosk [data-dash-filter], body.is-kiosk [data-dash-add], body.is-kiosk [
     .dashboard-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
     .na-form { grid-template-columns: 1fr; }
     .lg-add input, .lg-add select { flex: 1 1 100%; }
-    .rc-clock { font-size: 1.6rem; }
+    .rcl-clock { font-size: 1.6rem; }
     .h-tr-grid { grid-template-columns: 1fr; }
     .h-tr-find { max-width: none; }
     .h-tr-cj { padding: 12px; }

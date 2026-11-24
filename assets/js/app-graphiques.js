@@ -500,7 +500,7 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         const layout=$('#workspace .graph-layout'),stage=$('#workspace .tree-stage'),layer=$('#workspace .tree-zoom-layer');
         $('#workspace .gp-minimap')?.remove();
         if(!layout||!stage||!layer)return;
-        const box=document.createElement('div');box.className='gp-minimap';box.dataset.gpMinimap='';
+        const box=document.createElement('div');box.className='gp-minimap';box.dataset.gpMinimap='';box.style.cssText='position:absolute;right:14px;bottom:14px;z-index:8';
         box.innerHTML=`<canvas aria-label="${escapeHtml(i18n('Vue d’ensemble : glisse le cadre pour te déplacer'))}" role="img"></canvas><button type="button" class="gp-mm-toggle" title="${escapeHtml(i18n('Vue d’ensemble'))}" aria-label="${escapeHtml(i18n('Vue d’ensemble'))}">🗺</button>`;
         layout.appendChild(box);
         const cv=box.querySelector('canvas'),ctx=cv.getContext('2d');let rects=null,sizeKey='',k=1;
@@ -597,7 +597,7 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         const U=window.LCNDA_UI,src=gpPosterSource();
         if(!src){gpToast(i18n('Affiche d’abord un arbre.'),'error');return;}
         if(!U?.openPrintDialog||!U.printSheets){gpToast(i18n('L’impression en feuilles n’est pas disponible ici.'),'error');return;}
-        U.openPrintDialog({title:i18n('Grand arbre à assembler'),icon:'🧩',key:'gp-poster',paper:'A4',orientation:'portrait',photos:false,
+        U.openPrintDialog({title:i18n('Grand arbre à assembler'),icon:'🧩',key:'gp-poster',paper:'A4',papers:['A4','A3'],orientation:'portrait',photos:false,
             info:i18n('L’arbre est découpé en feuilles qui se recouvrent un peu : coupe, pose sur la voisine en faisant coïncider les croix, colle.'),
             options:[{key:'cols',type:'number',label:i18n('Feuilles en largeur'),value:3,min:1,max:12,step:1},{key:'overlap',type:'number',label:i18n('Recouvrement'),unit:'mm',value:10,min:0,max:30,step:1},{key:'map',label:i18n('Plan d’assemblage en première page'),checked:true},{key:'marks',label:i18n('Repères de collage (✂, pointillés, croix)'),checked:true}],
             html:choix=>gpPosterDoc(choix,src)});
@@ -684,12 +684,19 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
     const gpBoot=()=>{
         const ws=$('#workspace');if(!ws)return;
         new MutationObserver(()=>{if(state.module==='graphiques')queueMicrotask(gpDecorate);}).observe(ws,{childList:true});
-        ws.addEventListener('contextmenu',e=>{
-            if(state.module!=='graphiques'||e.defaultPrevented)return;
-            const card=e.target.closest('[data-tree-person]');if(!card||!card.closest('.graph-layout'))return;
-            window.LCNDA_UI?.contextMenu?.(e,gpCardMenu(card));
-        });
     };
+    /* 🖱 clic droit d'une case : nos entrées d'abord ; si 🛡 heritage-preuve.js ouvre aussi son menu (dossier de preuve, solidité du lien),
+       ses entrées viennent à la suite dans le même menu (un seul menu, K14) */
+    window.addEventListener('contextmenu',e=>{
+        const UI=window.LCNDA_UI;
+        if(state.module!=='graphiques'||e.shiftKey||!UI?.contextMenu)return;
+        const card=e.target.closest?.('#workspace .graph-layout [data-tree-person]');if(!card||card.matches('[data-tree-add-parent]'))return;
+        e.preventDefault();
+        const mine=gpCardMenu(card),orig=UI.contextMenu,at={clientX:e.clientX,clientY:e.clientY,preventDefault(){}};
+        let used=false;
+        UI.contextMenu=(ev,items,o)=>{UI.contextMenu=orig;used=true;const more=(items||[]).filter(it=>!(it&&it!=='-'&&/^Ouvrir la fiche$/.test(String(it.label||''))));return orig(ev,[...mine,...(more.length?['-',...more]:[])],o);};
+        setTimeout(()=>{if(!used){UI.contextMenu=orig;orig(at,mine,{title:(card.querySelector('strong')?.textContent||'').trim()});}},0);
+    },true);
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',gpBoot);else gpBoot();
     /* ⌨ ⌘+ ⌘− zoomer, ⌘0 taille réelle, ↑ ↓ une génération de plus ou de moins, ⌘P imprimer (seulement dans Graphiques, hors champ et hors fenêtre) */
     window.addEventListener('keydown',e=>{

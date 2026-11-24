@@ -793,7 +793,8 @@
         if(token!==state.workspaceToken||state.module!=='recherche')return;
         const rows=data.places||[];
         const table=`<div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="lieu"><thead><tr><th><button data-sort-column="0">Lieu</button></th><th><button data-sort-column="1">Subdivision</button></th><th><button data-sort-column="2">Pays</button></th><th><button data-sort-column="3">Coordonnées</button></th><th><button data-sort-column="4">Présence dans la base</button></th></tr></thead><tbody>${rows.map(place=>`<tr><td data-sort-value="${escapeHtml((place.name||'').toLowerCase())}"><strong>${escapeHtml(place.name||'Lieu sans nom')}</strong><small class="cell-muted">${escapeHtml(place.label||'')}</small></td><td data-sort-value="${escapeHtml([place.subdivision,place.county,place.state].filter(Boolean).join(' ').toLowerCase())}">${escapeHtml([place.subdivision,place.county,place.state].filter(Boolean).join(' · ')||'—')}</td><td data-sort-value="${escapeHtml(place.country||'')}">${escapeHtml(place.country||'—')}</td><td data-sort-value="${place.latitude||''}">${place.latitude&&place.longitude?`${Number(place.latitude).toFixed(5)}, ${Number(place.longitude).toFixed(5)}`:'—'}</td><td data-sort-value="${Number(place.event_count||0)+Number(place.census_count||0)}">${i18n('{ev} évt · {rec} rec.',{ev:Number(place.event_count||0),rec:Number(place.census_count||0)})}</td></tr>`).join('')}</tbody></table></div>`;
-        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Lieux · joker')}`,title:q,help:`${plural(rows.length,'lieu trouvé','lieux trouvés')}${state.placeNameSearch?.country?` · ${i18n('pays : {country}',{country:escapeHtml(state.placeNameSearch.country)})}`:''}${state.placeNameSearch?.division?` · ${i18n('division : {division}',{division:escapeHtml(state.placeNameSearch.division)})}`:''}.`})}${rows.length?table:empty('Aucun lieu ne correspond à cette recherche.',{icon:'📍'})}</section>`;
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Lieux · joker')}`,title:q,help:`${plural(rows.length,'lieu trouvé','lieux trouvés')}${state.placeNameSearch?.country?` · ${i18n('pays : {country}',{country:escapeHtml(state.placeNameSearch.country)})}`:''}${state.placeNameSearch?.division?` · ${i18n('division : {division}',{division:escapeHtml(state.placeNameSearch.division)})}`:''}.`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${rows.length?table:empty('Aucun lieu ne correspond à cette recherche.',{icon:'📍'})}</section>`;
+        window.LCNDA_EXT?.researchBar?.bindDomExport($('#workspace .page'),i18n('Lieux « {q} »',{q}));
         bindTableLinks();
     }
 
@@ -809,12 +810,13 @@
         if(hasCriteria){
             const data=await api('insee_search',{nom:is.nom||'',prenom:is.prenom||'',sexe:is.sexe||'',date_naissance:is.dateNaissance||'',date_deces:is.dateDeces||'',birth_year_from:is.birthYearFrom||'',birth_year_to:is.birthYearTo||'',death_year_from:is.deathYearFrom||'',death_year_to:is.deathYearTo||'',commune_naissance:is.communeNaissance||'',commune_deces:is.communeDeces||'',departement:is.departement||'',region:is.region||'',limit:100,offset:0});
             if(token!==state.workspaceToken||state.module!=='recherche')return;
-            resultsHtml=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Décès INSEE')}`,title:i18n('Décès INSEE'),help:`<b class="ui-ph-count">${plural(Number(data.total||0),'résultat')}</b> · ${plural(data.rows.length,'affiché')}${data.has_more?' · '+i18n('affine ta recherche pour réduire la liste'):''}.`})}${inseeResultsTableHtml(data.rows)}</section>`;
+            resultsHtml=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Décès INSEE')}`,title:i18n('Décès INSEE'),help:`<b class="ui-ph-count">${plural(Number(data.total||0),'résultat')}</b> · ${plural(data.rows.length,'affiché')}${data.has_more?' · '+i18n('affine ta recherche pour réduire la liste'):''}.`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${inseeResultsTableHtml(data.rows)}</section>`;
         }else{
             resultsHtml=`<section class="search-empty">${emptyState({icon:'🔍',text:'Renseigne au moins un critère',hint:'Combine prénom, nom, sexe, dates, communes, département ou région pour lancer la recherche dans le fichier des personnes décédées.'})}</section>`;
         }
         $('#workspace').innerHTML=`${inseeStatsBarHtml(stats)}${resultsHtml}`;
         bindTableLinks();
+        if(hasCriteria)window.LCNDA_EXT?.researchBar?.bindDomExport($$('#workspace .page').pop(),i18n('Décès INSEE'));
         bindInseeStatsBar();
     }
 
@@ -1045,7 +1047,8 @@
         const rows=data.media||[];
         state.currentListRows=rows;
         const results=state.researchDisplay==='list'?transcriptionSearchTableHtml(rows):`<div class="date-results">${rows.length?rows.map(transcriptionSearchCardHtml).join(''):empty('Aucune transcription ne contient ce texte.',{icon:'📝'})}</div>`;
-        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Transcriptions · OCR, HTR et saisie manuelle')}`,titleHtml:`« ${escapeHtml(q)} »`,help:`${plural(rows.length,'média trouvé','médias trouvés')}. ${i18n('Un clic ouvre le média et sa transcription.')}`})}${results}</section>`;
+        $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Transcriptions · OCR, HTR et saisie manuelle')}`,titleHtml:`« ${escapeHtml(q)} »`,help:`${plural(rows.length,'média trouvé','médias trouvés')}. ${i18n('Un clic ouvre le média et sa transcription.')}`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${results}</section>`;
+        window.LCNDA_EXT?.researchBar?.bindDomExport($('#workspace .page'),i18n('Transcriptions « {q} »',{q}));
         bindTableLinks();
     }
 

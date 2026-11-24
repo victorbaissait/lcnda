@@ -136,7 +136,7 @@
     ext.adn = {
         sidebar(content, footer) {
             const cur = S().adnTab || 'home', G = sg(), signal = A().sidebarSignal?.();
-            if (G) { G.render(content, signal); content.addEventListener('click', e => { const b = e.target.closest('[data-side-value]'); if (b) go(b.dataset.sideValue); }, signal ? {signal} : undefined); }
+            if (G) { G.render(content, signal); content.querySelectorAll('[data-side-value]').forEach(b => { b.dataset.dnaGo = b.dataset.sideValue; }); } // un clic : le même « data-dna-go » qu'avant (écouté sur le document)
             else content.innerHTML = `<div class="side-menu">${visibleSections().map(([k, ic, l], i) => `<button class="side-menu-item ${cur === k ? 'is-active' : ''}" data-dna-go="${k}"><span class="side-number">${String(i + 1).padStart(2, '0')}</span>${ic} ${esc(l)}</button>`).join('')}</div>`;
             footer.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px">${kiosk() ? '' : `<button class="button small" data-dna-go="kits">${i18n('＋ Nouveau test')}</button><button class="button small secondary" data-dna-go="matches">${i18n('＋ Correspondances')}</button>`}${G ? `<button class="button small secondary" type="button" data-dna-reorder title="${esc(i18n('En groupes ou en une seule liste, l’ordre, ce qui s’affiche'))}">${i18n('Réordonner')}</button>` : ''}</div>`;
             footer.querySelector('[data-dna-reorder]')?.addEventListener('click', () => G.openDialog());

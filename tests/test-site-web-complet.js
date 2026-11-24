@@ -112,6 +112,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         const wait = ms => page.waitForTimeout(ms);
         const api = (action, body, get = false) => page.evaluate(async ({ action, body, get }) => { try { const r = get ? await window.LCNDA_APP.api(action, body || {}) : await window.LCNDA_APP.api(action, {}, { method: 'POST', body }); return { ok: true, r }; } catch (e) { return { ok: false, e: e.message }; } }, { action, body, get });
         const dgId = (await api('save_diagram', { name: 'Âges au décès', kind: 'columns', spec: { kind: 'columns', o: { title: 'Âges' } } })).r.result.id;
+        await api('save_textdoc', { name: 'Lettre de Jean', data: { sections: [{ html: '<p>Bonjour de Tulle.</p>' }] } }); // pour le bloc 📝 Document
         // 🗺 « Une de mes cartes » : une vraie carte sur mesure (Carte → Mes cartes), pour que le bloc ait quelque chose à mettre en image
         const cm = await api('cartes_perso_write', { op: 'save', name: 'Les naissances', def: { time: { mode: 'cumul' }, layers: [{ id: 'nais', kind: 'births', name: 'Naissances' }] } });
         const cmId = cm.ok && (cm.r.result ?? cm.r).map?.id; assert.ok(cmId, 'carte sur mesure créée : ' + JSON.stringify(cm));
@@ -197,6 +198,10 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 await pick('footer'); // posé après l'élément choisi
                 if (key === 'diagram') { await page.click('.sw-dlg [data-ui-menu="Insertion"]'); await page.locator('.ui-actmenu .ui-actmenu-i', { hasText: label }).first().click(); await page.click('dialog[open] [data-dg-way="pick"]'); }
                 else await menu('Insertion', label);
+                // les blocs qui demandent quelque chose (🎧 ce qu'on entend, ✒️ un SVG collé, 📝 quel document)
+                if (key === 'audio') { await page.waitForSelector('dialog[open] textarea'); await page.fill('dialog[open] textarea', 'Bonjour.'); await page.click('dialog[open] [type=submit]'); }
+                if (key === 'drawing') { await page.click('dialog[open] [data-lc-way="paste"]'); await page.waitForSelector('dialog[open] textarea'); await page.fill('dialog[open] textarea', '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>'); await page.click('dialog[open] [type=submit]'); }
+                if (key === 'document') { await page.waitForSelector('dialog[open] [name="lc-pick"]'); await page.click('dialog[open] [type=submit]'); }
                 await until(() => count('[data-lc-name], [data-lc-block]'), n => n > n0, 4000);
                 must(await count('[data-lc-name], [data-lc-block]') > n0, 'rien de posé');
                 if (g === 'genea') { await until(() => frame().evaluate(() => document.body.textContent), t => !/⏳/.test(t), 15000); must(!/⏳|Bloc inconnu|impossible/.test(await frame().evaluate(() => document.body.textContent)), 'bloc pas rempli'); }

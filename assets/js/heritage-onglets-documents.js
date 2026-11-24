@@ -14,6 +14,14 @@
  *    glisser, « ＋ 📁 Dossier », ✎ / 🗑 au survol, « 📁 Ranger » depuis la fiche, chaque rangement se défait (↶ Annuler) ;
  *  - réglages de la liste retenus (barre H10 : lcnda-listbar:onglets:documents ; mode et fiche ouverte : genealogie-documents-tab) ;
  *  - mode consultation 🔒 : on lit, on ouvre les dossiers, rien d'autre (la visionneuse s'ouvre en lecture seule).
+ *  Audit des onglets (docs/design/audit-onglets.html, §4) :
+ *  - « ✎ Modifier » : titre, date, lieu, cote et personnes modifiés sur place (POST onglets_write, lib/onglets.php ; ↶ Annuler) ;
+ *    la visionneuse reste dans « ⋯ » (« 🖼 Ouvrir dans la visionneuse ») ;
+ *  - rangements « 📍 Lieux » et « 🕰 Années » (commune, décennie) ; 🏷 pastilles d'étiquettes et « Filtrer ▾ → Étiquette » ;
+ *  - 🔍 l'image zoomable (molette, glisser) et le texte transcrit côte à côte, défilement lié ;
+ *  - ☑ « Cocher » dans la colonne : la barre commune (LCNDA_EXT.selectionBar) → 📁 Ranger, 🏷 Étiqueter, 👤 Relier, ⤓ ZIP, 🗑 Supprimer ;
+ *  - 📋 Copier la citation (style au choix, retenu) ; 👯 « peut-être un doublon de… » (empreintes d'images) ; 🗑 Supprimer + ↶ Annuler ;
+ *  - ✉️ « Noter une pièce manquante » dans le fil d'une correspondance (table doc_missing_pieces, ↶ Annuler).
  */
 (() => {
     'use strict';
@@ -72,6 +80,7 @@
 
     /* ─── les données ─── */
     let recFull = null, recFullLoading = null; // 📚 la liste complète des recueils (couverture, % transcrit…), pour les vignettes de droite
+    let missing = []; // ✉️ les pièces manquantes notées dans les fils (lib/onglets.php, doc_missing_pieces)
     let recs = [], centers = new Map(), docs = null, loading = null, failed = '', cur = 0, shown = STEP, bar = null, cache = new Map();
     {   // « #documents/12 » : la fiche n° 12 (lien, ← → du navigateur)
         const m = location.hash.match(/^#documents\/(\d{1,12})\b/);
@@ -81,7 +90,7 @@
     async function load(force = false) {
         if (docs && !force && !stale) return docs;
         if (force || stale) recFull = null;
-        if (!loading) { stale = false; loading = A().api('onglets', {op: 'documents'}).then(r => { recs = r.recueils || []; docs = (r.documents || []).map(d => ({...d, sort: sortOf(d)})); failed = ''; return docs; })
+        if (!loading) { stale = false; loading = A().api('onglets', {op: 'documents'}).then(r => { recs = r.recueils || []; missing = r.missing || []; docs = (r.documents || []).map(d => ({...d, sort: sortOf(d)})); failed = ''; fillLabelOpts(); return docs; })
             .catch(e => { failed = e.message || 'Les documents n’ont pas pu se charger.'; docs = null; return []; }).finally(() => { loading = null; }); }
         return loading;
     }
@@ -91,8 +100,12 @@
     const recNames = d => (d.recueils || []).map(x => recOf(x.id)?.title || '').filter(Boolean);
 
     /* ─── filtrer, trier ─── */
+    const LABEL_OPTS = []; // 🏷 les étiquettes des documents (remplie au chargement : la barre lit cette liste à chaque ouverture de « Filtrer ▾ »)
+    const labelsOf = d => d.labels || [];
+    function fillLabelOpts() { const m = new Map(); (docs || []).forEach(d => labelsOf(d).forEach(l => { const x = m.get(l.id) || {l, n: 0}; x.n++; m.set(l.id, x); })); LABEL_OPTS.splice(0, LABEL_OPTS.length, ...[...m.values()].sort((a, b) => fold(a.l.name).localeCompare(fold(b.l.name), 'fr')).map(x => [String(x.l.id), `🏷 ${x.l.name}`, `🏷 ${x.l.name}`, x.n])); }
     const filters = () => [
         {id: 'sort', label: 'Sorte', type: 'check', options: SORTS.map(([k, i, l]) => [k, `${i} ${l}${l.endsWith('o') ? 's' : 's'}`])},
+        {id: 'label', label: 'Étiquette', type: 'check', options: LABEL_OPTS},
         {id: 'tr', label: 'Transcription', type: 'radio', options: [['', 'Tous'], ['tr', '✅ Déjà transcrits'], ['notr', '📝 Pas encore transcrits']], dflt: ''},
         {id: 'from', group: 'Année', label: 'À partir de', type: 'text', placeholder: 'ex. 1900', chipPrefix: 'Depuis'},
         {id: 'to', group: 'Année', label: 'Jusqu’à', type: 'text', placeholder: 'ex. 1920', chipPrefix: 'Jusqu’à'},
@@ -131,8 +144,9 @@
         const y1 = Number(String(f.from || '').match(/\d{3,4}/)?.[0]) || 0, y2 = Number(String(f.to || '').match(/\d{3,4}/)?.[0]) || 0;
         const pid = f.person && typeof f.person === 'object' ? Number(f.person.id) : 0, pname = !pid && f.person ? fold(String(f.person).replace(/^txt:/, '')) : '';
         let list = (docs || []).filter(d => {
-            if (words.length) { const hay = fold([d.title, d.cote, d.date_text, d.place, d.series, ...(d.people || []).map(p => p.name), ...recNames(d), ...(d.geo || []).map(g => g.name), ...kindsOf(d).map(k => AKINDS.find(x => x[0] === k)?.[1] || '')].join(' ')); if (!words.every(w => hay.includes(w))) return false; }
+            if (words.length) { const hay = fold([d.title, d.cote, d.date_text, d.place, d.series, ...(d.people || []).map(p => p.name), ...recNames(d), ...(d.geo || []).map(g => g.name), ...kindsOf(d).map(k => AKINDS.find(x => x[0] === k)?.[1] || ''), ...labelsOf(d).map(l => l.name)].join(' ')); if (!words.every(w => hay.includes(w))) return false; }
             if (Array.isArray(f.sort) && f.sort.length && !f.sort.includes(d.sort)) return false;
+            if (Array.isArray(f.label) && f.label.length && !labelsOf(d).some(l => f.label.includes(String(l.id)))) return false;
             if (f.tr === 'tr' && !d.has_tr) return false;
             if (f.tr === 'notr' && d.has_tr) return false;
             if ((y1 || y2) && (!d.year || (y1 && d.year < y1) || (y2 && d.year > y2))) return false;
@@ -155,12 +169,22 @@
     }
 
     /* ─── la colonne de gauche ─── */
-    const rowHtml = (d, letter = letterOf(d.title)) => `<button type="button" class="side-menu-item ong-row ong-docrow${d.id === cur ? ' is-active' : ''}" data-ong-doc="${d.id}" data-letter="${esc(letter)}">
-        <span class="ong-thumb">${thumbOf(d)}</span><span class="ong-txt"><strong>${esc(d.title)}</strong>${subLines(d, {cote: bar?.state?.sort === 'cote'})}</span></button>`;
+    /** 🏷 les pastilles d'étiquettes (2 au plus, « +N ») */
+    const labelChips = d => { const ls = labelsOf(d); if (!ls.length) return ''; return `<span class="ong-labels">${ls.slice(0, 2).map(l => `<span class="ong-label" style="${l.color ? `--ong-lc:${esc(l.color)}` : ''}" title="${esc(T('Étiquette : {x}', {x: l.name}))}">🏷 ${esc(l.name)}</span>`).join('')}${ls.length > 2 ? `<span class="ong-label is-more">+${ls.length - 2}</span>` : ''}</span>`; };
+    const rowBtn = (d, letter) => `<button type="button" class="side-menu-item ong-row ong-docrow${d.id === cur ? ' is-active' : ''}" data-ong-doc="${d.id}" data-letter="${esc(letter)}">
+        <span class="ong-thumb">${thumbOf(d)}</span><span class="ong-txt"><strong>${esc(d.title)}</strong>${subLines(d, {cote: bar?.state?.sort === 'cote'})}${labelChips(d)}</span></button>`;
+    // ☑ en mode « Cocher », chaque ligne est dans une boîte (la case de la barre commune se pose à côté du bouton, pas dedans)
+    const rowHtml = (d, letter = letterOf(d.title)) => (selOn() ? `<div class="ong-selrow" data-ong-sel="${d.id}">${rowBtn(d, letter)}</div>` : rowBtn(d, letter));
     /* les façons de ranger (maquette correspondances.html, partie 2) : A = 6 cases en 3 × 2 (conseillé) ; B = 4 cases, « 📚 Ensembles »
        et dessous un petit choix Recueils / Lettres / Sortes. Le choix A ou B : ⋯ → « Façons de ranger » (retenu). */
-    const MODES = [['az', 'A → Z'], ['people', '👤 Personnes'], ['recueils', '📚 Recueils'], ['folders', '📁 Dossiers'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes']];
-    const SETS = [['recueils', '📚 Recueils'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes']];
+    const MODES = [['az', 'A → Z'], ['people', '👤 Personnes'], ['recueils', '📚 Recueils'], ['folders', '📁 Dossiers'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes'], ['places', '📍 Lieux'], ['years', '🕰 Années']];
+    const SETS = [['recueils', '📚 Recueils'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes'], ['places', '📍 Lieux'], ['years', '🕰 Années']];
+    /* 📍 Par lieu (la commune de l'acte) et 🕰 Par année (la décennie) : des groupes repliables, comme les sortes */
+    const placeOf = d => String(d.place || (d.geo || [])[0]?.name || '').split(',')[0].trim();
+    const decadeOf = d => (d.year ? Math.floor(d.year / 10) * 10 : null);
+    // ☑ « Cocher » : des cases dans la colonne et la barre d'actions commune (app-selection.js)
+    let selMode = false, sel = null;
+    const selOn = () => selMode && !kiosk() && modeOf() !== 'folders';
     const layout = () => (readPref().layout === 'B' ? 'B' : 'A');
     const modeOf = () => (MODES.some(m => m[0] === readPref().mode) ? readPref().mode : 'az');
     const isSet = m => SETS.some(x => x[0] === m);
@@ -193,9 +217,15 @@
     }
     function rowMenu(id, e) { // K14 : UI.contextMenu = le menu de l'app à l'endroit de la souris
         const d = byId(id); if (!d || !UI().contextMenu) return;
+        // R11 : Ouvrir · Modifier · 📁 Ranger · 🏷 Étiquette · ⤓ Exporter · — · 🗑 Supprimer (le même ordre que le « ⋯ » de la fiche)
         const items = [{icon: '↗', label: 'Ouvrir', run: () => select(id)}];
-        if (!kiosk() && d.filename) items.push({icon: '✎', label: 'Modifier', run: async () => { await select(id); document.querySelector('#workspace [data-ong-edit]')?.click(); }});
+        if (!kiosk()) items.push({icon: '✎', label: 'Modifier', run: async () => { await select(id); document.querySelector('#workspace [data-ong-edit]')?.click(); }});
+        if (!kiosk() && SF()?.openRange) items.push({icon: '📁', label: T('Ranger'), run: () => SF().openRange('document', String(id), d.title)});
+        const la = !kiosk() && ext.selectionBar?.labelAction ? ext.selectionBar.labelAction('media', {after: reloadAll}) : null;
+        if (la) items.push({icon: '🏷', label: T('Étiquette'), run: () => la.run([String(id)])});
         if (d.filename) items.push({icon: '⤓', label: 'Télécharger', run: () => { const a = Object.assign(document.createElement('a'), {href: `media/${encodeURIComponent(d.filename)}`, download: d.filename}); document.body.appendChild(a); a.click(); a.remove(); }});
+        items.push({icon: '📋', label: T('Copier la citation'), run: () => copyCitation(d)});
+        if (!kiosk()) items.push('-', {icon: '🗑', label: T('Supprimer'), danger: true, run: () => deleteMany([id])});
         const pp = peopleOf(d).slice(0, 8);
         if (pp.length) items.push('-', ...pp.map(p => ({icon: '👤', label: p.name, run: () => A().openPersonById?.(p.id)})));
         UI().contextMenu(e, items, {title: `« ${d.title.slice(0, 50)} »`});
@@ -204,9 +234,10 @@
         const mode = modeOf();
         content.innerHTML = `<div class="ong-side" data-ong-side="documents" data-no-reorder>
             <div class="ong-modebar"><div class="ong-modes">${modeBarHtml(mode)}</div>
+            ${kiosk() ? '' : `<button type="button" class="icon-button small ong-selbtn${selMode ? ' is-active' : ''}" data-ong-selmode aria-pressed="${selMode}" aria-label="${esc(T('☑ Cocher plusieurs documents'))}" title="${esc(T('☑ Cocher plusieurs documents'))}">☑</button>`}
             <button type="button" class="icon-button small ong-opts" data-ong-under aria-label="Sous le titre" title="Sous le titre">⋯</button></div>
             <div class="ong-bar" data-ong-bar></div>
-            <div class="ong-letters" data-ong-letters ${mode === 'folders' ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div></div>`;
+            <div class="ong-letters" data-ong-letters ${['folders', 'places', 'years'].includes(mode) ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div></div>`;
         // 📚 dans le pied de la colonne (fixe, il ne cache aucun document), sous le nombre : la liste des recueils à droite
         footer.innerHTML = `<span data-ong-count></span><button type="button" class="button secondary ong-allrec" data-ong-allrec title="${esc(T('Les recueils en vignettes, à droite, sans quitter Documents'))}">📚 ${esc(T('Voir la liste des recueils'))}<small class="ong-allrec-n" data-ong-allrec-n>${docs ? esc(plural(recs.length, 'recueil')) : ''}</small></button>`;
         // d'une autre façon de ranger : la colonne passe en « 📚 Recueils », la liste des recueils s'ouvre à droite
@@ -221,6 +252,8 @@
             const xh = e.target.closest('[data-ong-ex]'); if (xh) { showEx(xh.dataset.ongEx); return; } // ✉️ le fil de cette correspondance à droite
             const sh = e.target.closest('[data-ong-sorth]'); if (sh) { showSort(sh.dataset.ongSorth); return; } // 🏷 les documents de cette sorte à droite
             const o = e.target.closest('[data-ong-under]'); if (o) { underMenu(o); return; }
+            const sm = e.target.closest('[data-ong-selmode]'); if (sm) { selMode = !selMode; if (!selMode) { sel?.clear(); sel?.destroy(); sel = null; } A().renderSidebar(); return; }
+            const gf = e.target.closest('[data-ong-gfold]'); if (gf) { toggleKey(gf.dataset.ongGkey, gf.dataset.ongGfold); return; }
             const l = e.target.closest('[data-ong-letter]'); if (l && !l.disabled) { jumpTo(l.dataset.ongLetter); return; }
             const fo = e.target.closest('[data-ong-fold]'); if (fo) { toggleFold(Number(fo.dataset.ongFold)); return; }
             const fx = e.target.closest('[data-ong-exfold]'); if (fx) { toggleKey('exFold', fx.dataset.ongExfold); return; }
@@ -270,6 +303,18 @@
             });
             return out;
         }
+        if (mode === 'places' || mode === 'years') { // 📍 une commune après l'autre (A → Z) · 🕰 une décennie après l'autre ; « Sans lieu » / « Sans date » à la fin
+            const fk = mode === 'places' ? 'placeFold' : 'yearFold', folded = foldedKeys(fk), by = new Map();
+            list.forEach(d => { const k = mode === 'places' ? (placeOf(d) || '') : String(decadeOf(d) ?? ''); if (!by.has(k)) by.set(k, []); by.get(k).push(d); });
+            const keys = [...by.keys()].sort((a, b) => (a === '') - (b === '') || (mode === 'years' ? Number(a) - Number(b) : fold(a).localeCompare(fold(b), 'fr')));
+            keys.forEach(k => {
+                const ds = by.get(k), shut = folded.includes(k);
+                const label = mode === 'places' ? (k ? `📍 ${k}` : T('Sans lieu')) : (k ? `🕰 ${k}–${Number(k) + 9}` : T('Sans date'));
+                out.push({gh: {key: k, fk, label, n: ds.length}, shut});
+                if (!shut) ds.slice().sort((a, b) => (a.year || 99999) - (b.year || 99999) || fold(a.title).localeCompare(fold(b.title), 'fr')).forEach(d => out.push({d, letter: '#'}));
+            });
+            return out;
+        }
         if (mode === 'recueils') { // 📚 chaque recueil, ses documents dans l'ordre des pages ; « Dans aucun recueil » à la fin
             const keep = new Set(list.map(d => d.id)), none = list.filter(d => !(d.recueils || []).length);
             const folded = foldedRecs(); // ▸ / ▾ : un recueil, ou « Dans aucun recueil » (0), replié ou ouvert (retenu)
@@ -315,6 +360,7 @@
         const rn = document.querySelector('#sidebar-footer [data-ong-allrec-n]'); if (rn) rn.textContent = plural(recs.length, 'recueil'); // « 0 recueil » s'il n'y en a pas
         if (count) { const fd = SF()?.read('document')?.folders?.length || 0; count.textContent = `${plural(docs.length, 'document')}${mode === 'folders' ? ` · ${plural(fd, 'dossier')}` : active ? ` · ${plural(active, 'filtre')}` : ''}`; }
         const letters = document.querySelector('#sidebar-content [data-ong-letters]');
+        if (letters && (mode === 'places' || mode === 'years')) letters.hidden = true;
         if (!docs.length) { box.innerHTML = A().empty ? A().empty('Aucun document pour l’instant : les photos, actes et lettres ajoutés aux fiches arrivent ici.', {icon: '📄'}) : ''; if (letters) letters.innerHTML = ''; return; }
         if (mode === 'folders') {
             const keep = new Set(list.map(d => String(d.id)));
@@ -323,7 +369,7 @@
             return;
         }
         const all = entries(list, mode, st);
-        if (letters) {
+        if (letters && mode !== 'places' && mode !== 'years') {
             const have = new Set(all.filter(e => e.lh).map(e => e.lh));
             letters.hidden = !have.size;
             letters.innerHTML = LETTERS.map(L => `<button type="button" data-ong-letter="${L}" ${have.has(L) ? '' : 'disabled'} aria-label="${esc(T('Aller à la lettre {x}', {x: L}))}">${L}</button>`).join('');
@@ -342,11 +388,116 @@
             else if (e.gap) html += `<div class="ong-gap" role="note">⚠ ${esc(T('rien entre {a} et {b} ({n} mois)', {a: e.gap.from, b: e.gap.to, n: String(e.gap.months)}))}</div>`;
             else if (e.sh) { const [k, ic, l] = CO().sortMeta(e.sh), fold = `<button type="button" class="ong-fold" data-ong-sortfold="${esc(k)}" aria-expanded="${!e.shut}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
                 html += `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-sorth="${esc(k)}" title="${esc(T('Voir ces documents à droite'))}"><span>${ic} ${esc(T(l))}</span><small>${e.n}</small></button></div>`; }
+            else if (e.gh) { const g = e.gh, fold = `<button type="button" class="ong-fold" data-ong-gfold="${esc(g.key)}" data-ong-gkey="${g.fk}" aria-expanded="${!e.shut}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
+                html += `<div class="ong-ph ong-rhrow ong-grow">${fold}<button type="button" class="ong-rh" data-ong-gfold="${esc(g.key)}" data-ong-gkey="${g.fk}"><span>${esc(g.label)}</span><small>${g.n}</small></button></div>`; }
             else if (e.ph) html += `<div class="ong-ph" data-ong-ph="${e.ph.p ? e.ph.p.id : 0}"><span>${e.ph.p ? `👤 ${esc(e.ph.p.name)}` : esc(T('Sans personne'))}</span><small>${e.ph.docs.length}</small></div>`;
             else { html += e.num ? rowHtml(e.d, e.letter).replace('<strong>', `<strong><span class="ong-pnum">${esc(T('p. {n}', {n: String(e.num)}))}</span> `) : rowHtml(e.d, e.letter); rows++; }
         }
         queueMicrotask(() => pick.on && paintPick());
-        box.innerHTML = `<div class="side-menu ong-menu">${html}</div>${total > shown ? `<button type="button" class="ui-more" data-ong-more>Voir les ${Math.min(STEP, total - shown)} suivants ↓</button>` : ''}`;
+        box.innerHTML = `<div class="side-menu ong-menu${selOn() ? ' is-selecting' : ''}">${html}</div>${total > shown ? `<button type="button" class="ui-more" data-ong-more>Voir les ${Math.min(STEP, total - shown)} suivants ↓</button>` : ''}`;
+        mountSel(box);
+    }
+
+    /* ─── ☑ Cocher plusieurs documents : la barre de sélection commune (app-selection.js) ─── */
+    const write = async body => { const r = await A().api('onglets_write', {}, {method: 'POST', body}); return r?.result ?? r ?? {}; };
+    async function reloadAll() { cache.clear(); await load(true); if (A().state?.module !== 'documents') return; paintList(); paintWorkspaceList(); if (cur && document.querySelector(`#workspace [data-ong-id="${cur}"]`)) showDoc(cur); }
+    function mountSel(box) {
+        if (!selOn() || !ext.selectionBar) { if (sel && !selOn()) { sel.destroy(); sel = null; } return; }
+        if (sel && sel.host === box && sel.el.isConnected) { sel.refresh(); return; }
+        sel?.destroy();
+        sel = ext.selectionBar({host: box, rowSelector: '[data-ong-sel]', idOf: el => el.dataset.ongSel, key: 'documents:col', what: [T('document coché'), T('documents cochés')], actions: selActions()});
+        sel?.el.classList.add('ong-selbar');
+    }
+    const docsOf = ids => ids.map(byId).filter(Boolean);
+    function selActions() {
+        const SB = ext.selectionBar || {};
+        return [
+            {id: 'range', icon: '📁', label: T('Ranger'), help: T('Ranger les documents cochés dans un dossier de la colonne'), edit: true, run: ids => rangeMany(ids)},
+            SB.labelAction ? {...SB.labelAction('media', {after: reloadAll}), label: T('Étiqueter')} : null,
+            {id: 'link', icon: '👤', label: T('Relier à une personne'), help: T('Relier les documents cochés à une fiche'), edit: true, run: ids => linkMany(ids)},
+            {id: 'zip', icon: '⤓', label: T('Exporter en ZIP'), help: T('Les fichiers des documents cochés, avec une liste (CSV), dans un fichier .zip'), run: ids => zipMany(ids)},
+            {id: 'delete', icon: '🗑', label: T('Supprimer'), help: T('Supprime les documents cochés ; « ↶ Annuler » les remet'), edit: true, danger: true, run: (ids, s2) => deleteMany(ids, s2)},
+        ].filter(Boolean);
+    }
+    function rangeMany(ids) {
+        const S = SF(); if (!S) return A().toast(T('Les dossiers ne sont pas encore chargés : réessaie dans un instant.'), 'error');
+        const data = S.read('document'), list = data.folders || [];
+        if (!list.length) return A().toast(T('Aucun dossier pour l’instant : « 📁 Dossiers » dans la colonne, puis « ＋ 📁 Dossier ».'), 'error');
+        const depth = f => { let n = 0, x = f; while (x?.parent) { n++; x = list.find(y => y.id === x.parent); } return n; };
+        ext.openDialog?.({eyebrow: T('RANGER'), title: T('📁 Ranger {n}', {n: plural(ids.length, 'document')}), submitLabel: T('Ranger'),
+            body: `<div class="form-grid one-column"><label>${esc(T('Dossier'))}<select name="folder"><option value="">${esc(T('Sans dossier'))}</option>${list.map(f => `<option value="${esc(f.id)}">${'  '.repeat(depth(f))}📁 ${esc(f.name)}</option>`).join('')}</select></label></div>`,
+            onSubmit: form => {
+                const target = String(new FormData(form).get('folder') || ''), name = list.find(f => f.id === target)?.name || '';
+                const run = () => { const d = S.read('document'); ids.forEach(id => { if (target) d.of[String(id)] = target; else delete d.of[String(id)]; }); S.write('document', d); };
+                const msg = target ? T('{n} rangés dans « {f} »', {n: plural(ids.length, 'document'), f: name}) : T('{n} sortis des dossiers', {n: plural(ids.length, 'document')});
+                if (A().undoLocalChange) A().undoLocalChange(msg, [S.KEY], run, () => A().renderSidebar?.()); else run();
+                A().renderSidebar?.();
+            }});
+    }
+    async function linkMany(ids) {
+        const P = window.LCNDA_PICKER; if (!P?.openPicker) return A().toast(T('Le menu de choix n’est pas encore chargé.'), 'error');
+        const p = await P.openPicker({kind: 'person', title: T('Relier {n} à…', {n: plural(ids.length, 'document')})});
+        if (!p?.id) return;
+        const done = [];
+        for (const id of ids) { const r = await write({op: 'doc_people', media_id: Number(id), add: [Number(p.id)]}); if ((r.added || []).length) done.push(Number(id)); }
+        await reloadAll();
+        A().undoToast?.(T('{n} reliés à {who}', {n: plural(done.length, 'document'), who: p.title || ''}), {
+            undo: async () => { for (const id of done) await write({op: 'doc_people', media_id: id, remove: [Number(p.id)]}); await reloadAll(); },
+            redo: async () => { for (const id of done) await write({op: 'doc_people', media_id: id, add: [Number(p.id)]}); await reloadAll(); }});
+    }
+    async function deleteMany(ids, s2) {
+        const list = docsOf(ids); if (!list.length) return;
+        const gone = [];
+        for (const d of list) { try { await A().api('delete_media', {}, {method: 'POST', body: {media_id: d.id}}); gone.push(d); } catch (e) { A().toast(e.message, 'error'); break; } }
+        s2?.clear?.(); if (gone.some(d => d.id === cur)) { cur = 0; writePref({cur: 0}); }
+        await reloadAll(); if (!cur) render();
+        if (!gone.length) return;
+        A().undoToast?.(gone.length > 1 ? T('{n} supprimés', {n: plural(gone.length, 'document')}) : T('Document « {t} » supprimé', {t: gone[0].title}), {
+            undo: async () => { for (const d of gone.slice().reverse()) await A().api('restore_last_delete', {}, {method: 'POST', body: {entity_type: 'media', entity_id: d.id}}); await reloadAll(); },
+            redo: async () => { for (const d of gone) await A().api('delete_media', {}, {method: 'POST', body: {media_id: d.id}}); await reloadAll(); }});
+    }
+    /* ⤓ un .zip « rangé » (sans compression : les images le sont déjà) : les fichiers + documents.csv */
+    const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+    const crc32 = u8 => { let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+    function zipBlob(files) { // [{name, data: Uint8Array}]
+        const enc = new TextEncoder(), parts = [], dir = []; let off = 0;
+        const d = new Date(), tm = ((d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1)) & 0xFFFF, dt = (((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate()) & 0xFFFF;
+        files.forEach(f => {
+            const name = enc.encode(f.name), crc = crc32(f.data), h = new DataView(new ArrayBuffer(30));
+            [[0, 0x04034b50, 4], [4, 20, 2], [6, 0x0800, 2], [8, 0, 2], [10, tm, 2], [12, dt, 2], [14, crc, 4], [18, f.data.length, 4], [22, f.data.length, 4], [26, name.length, 2], [28, 0, 2]].forEach(([o, v, n]) => (n === 4 ? h.setUint32(o, v, true) : h.setUint16(o, v, true)));
+            parts.push(new Uint8Array(h.buffer), name, f.data);
+            const c = new DataView(new ArrayBuffer(46));
+            [[0, 0x02014b50, 4], [4, 20, 2], [6, 20, 2], [8, 0x0800, 2], [10, 0, 2], [12, tm, 2], [14, dt, 2], [16, crc, 4], [20, f.data.length, 4], [24, f.data.length, 4], [28, name.length, 2], [30, 0, 2], [32, 0, 2], [34, 0, 2], [36, 0, 2], [38, 0, 4], [42, off, 4]].forEach(([o, v, n]) => (n === 4 ? c.setUint32(o, v, true) : c.setUint16(o, v, true)));
+            dir.push(new Uint8Array(c.buffer), name);
+            off += 30 + name.length + f.data.length;
+        });
+        const size = dir.reduce((a, x) => a + x.length, 0), e = new DataView(new ArrayBuffer(22));
+        [[0, 0x06054b50, 4], [8, files.length, 2], [10, files.length, 2], [12, size, 4], [16, off, 4]].forEach(([o, v, n]) => (n === 4 ? e.setUint32(o, v, true) : e.setUint16(o, v, true)));
+        return new Blob([...parts, ...dir, new Uint8Array(e.buffer)], {type: 'application/zip'});
+    }
+    ext.ongletsZip = zipBlob; // (aussi pour les essais)
+    async function zipMany(ids) {
+        const list = docsOf(ids); if (!list.length) return;
+        A().toast(T('Préparation du ZIP ({n})…', {n: plural(list.length, 'document')}));
+        const files = [], used = new Set(), rows = [[T('Titre'), T('Date'), T('Lieu'), T('Cote'), T('Personnes'), T('Fichier')]];
+        const safe = t => (A().safeExportFilename ? A().safeExportFilename(t, 'document') : String(t || 'document').replace(/[^a-z0-9]+/gi, '-'));
+        for (const d of list) {
+            let fname = '';
+            if (d.filename) {
+                try {
+                    const r = await fetch(`media/${encodeURIComponent(d.filename)}`); if (!r.ok) throw new Error(String(r.status));
+                    const ext2 = (d.filename.match(/\.[a-z0-9]{1,5}$/i) || [''])[0].toLowerCase();
+                    let base = safe(d.title).slice(0, 60) || 'document', n = 2; fname = base + ext2; while (used.has(fname)) fname = `${base}-${n++}${ext2}`; used.add(fname);
+                    files.push({name: fname, data: new Uint8Array(await r.arrayBuffer())});
+                } catch (_) { fname = ''; }
+            }
+            rows.push([d.title, d.date_text, d.place, d.cote, peopleOf(d).map(p => p.name).join(', '), fname || T('(fichier absent)')]);
+        }
+        const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+        files.push({name: 'documents.csv', data: new TextEncoder().encode('﻿' + rows.map(r => r.map(cell).join(';')).join('\r\n'))});
+        const a = document.createElement('a'); a.href = URL.createObjectURL(zipBlob(files)); a.download = `documents-${new Date().toISOString().slice(0, 10)}.zip`;
+        document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+        A().toast(T('{n} dans le ZIP.', {n: plural(files.length - 1, 'fichier')}), 'success');
     }
 
     /* ─── à droite : la liste en vignettes (rien de choisi) ou la fiche ─── */
@@ -474,8 +625,35 @@
         const rows = x.pieces.map(d => { const r = reply.get(d.id), to = r ? ids.get(r.to) : null, g = gapAfter.get(d.id);
             return `<li class="ong-piece"><button type="button" class="ong-piece-main" data-ong-doc="${d.id}" data-ong-card="${d.id}"><span class="ong-thumb">${thumbOf(d)}</span><span class="ong-txt"><strong>${esc(d.title)}</strong>
                 <small>${esc([d.date_text || T('Sans date'), d.corr, d.place].filter(Boolean).join(' · '))}</small>${to ? `<small class="ong-reply">↩ ${esc(T('répond à « {t} »', {t: to.title}))}${r.days != null ? ' · ' + esc(T('délai : {n} jours', {n: String(r.days)})) : ''}</small>` : ''}</span>
-                ${bdg(d.has_tr ? T('transcrite') : T('à transcrire'), d.has_tr ? 'green' : 'grey')}</button></li>${g ? `<li class="ong-gap" role="note">⚠ ${esc(T('{n} mois sans pièce ({a} → {b}) : perdues ?', {n: String(g.months), a: g.from, b: g.to}))}</li>` : ''}`; }).join('');
-        return head + `<ol class="ong-fil">${rows}</ol>`;
+                ${bdg(d.has_tr ? T('transcrite') : T('à transcrire'), d.has_tr ? 'green' : 'grey')}</button></li>${missOf(d.id).map(missHtml).join('')}${g ? `<li class="ong-gap" role="note">⚠ ${esc(T('{n} mois sans pièce ({a} → {b}) : perdues ?', {n: String(g.months), a: g.from, b: g.to}))}</li>` : ''}`; }).join('');
+        const lost = missing.filter(m => m.key === x.key && !ids.has(m.after)); // notée « au début » (ou la pièce d'après a disparu)
+        return head + `<ol class="ong-fil">${lost.map(missHtml).join('')}${rows}</ol>`;
+        function missOf(id) { return missing.filter(m => m.key === x.key && m.after === id); }
+    }
+    /* ✉️ une pièce manquante dans le fil : sans fichier, à sa place ; 🗑 la retire (↶ Annuler) */
+    const missHtml = m => `<li class="ong-piece ong-missing" data-ong-missing="${m.id}"><span class="ong-piece-main is-missing"><span class="ong-thumb"><span class="ong-ico" aria-hidden="true">✉️</span></span><span class="ong-txt"><strong>${esc(m.title || T('Pièce manquante'))}</strong>
+        <small>${esc([m.date_text || T('Sans date'), m.note].filter(Boolean).join(' · '))}</small></span>${bdg(T('manquante'), 'yellow')}</span>${kiosk() ? '' : `<button type="button" class="icon-button small" data-ong-missdel="${m.id}" aria-label="${esc(T('Retirer cette pièce manquante'))}" title="${esc(T('Retirer cette pièce manquante'))}">🗑</button>`}</li>`;
+    function addMissing(x) {
+        if (kiosk()) return;
+        const pieces = x.pieces.map(d => byId(d.id) || d);
+        ext.openDialog?.({eyebrow: T('CORRESPONDANCE'), title: T('✉️ Noter une pièce manquante'), submitLabel: T('Noter'),
+            body: `<p class="muted">${esc(T('Une lettre dont parle une autre, ou un trou dans le fil : elle prend sa place dans le fil, sans fichier, jusqu’à ce que tu la retrouves.'))}</p>
+                <div class="form-grid"><label>${esc(T('Date (même approximative)'))}<input name="date_text" maxlength="80" placeholder="${esc(T('ex. mai 1916'))}"></label>
+                <label>${esc(T('Ce que c’était'))}<input name="title" maxlength="200" placeholder="${esc(T('ex. Lettre de Marie à Jean'))}"></label>
+                <label class="span-2">${esc(T('Placée après'))}<select name="after"><option value="0">${esc(T('— au début du fil —'))}</option>${pieces.map((d, i) => `<option value="${d.id}" ${i === pieces.length - 1 ? 'selected' : ''}>${esc([d.date_text || T('Sans date'), d.title].join(' · '))}</option>`).join('')}</select></label>
+                <label class="span-2">${esc(T('Note'))} <small>(${esc(T('facultatif'))})</small><input name="note" maxlength="2000" placeholder="${esc(T('ex. citée dans la lettre du 3 juin'))}"></label></div>`,
+            onSubmit: async form => {
+                const f = Object.fromEntries(new FormData(form));
+                const r = await write({op: 'missing_add', key: x.key, after: Number(f.after) || 0, date_text: f.date_text || '', title: f.title || '', note: f.note || ''});
+                await reloadAll();
+                A().undoToast?.(T('Pièce manquante notée'), {undo: async () => { await write({op: 'missing_delete', id: r.id}); await reloadAll(); }, redo: async () => { await write({op: 'missing_restore', id: r.id}); await reloadAll(); }});
+            }});
+    }
+    async function removeMissing(id) {
+        const m = missing.find(x => x.id === id);
+        try { await write({op: 'missing_delete', id}); } catch (e) { return A().toast(e.message, 'error'); }
+        await reloadAll();
+        A().undoToast?.(T('Pièce manquante « {t} » retirée', {t: m?.title || m?.date_text || ''}), {undo: async () => { await write({op: 'missing_restore', id}); await reloadAll(); }, redo: async () => { await write({op: 'missing_delete', id}); await reloadAll(); }});
     }
     function paintExWs(box, list, key) {
         const x = CO().exchanges(list, {gapMonths: gapMonths()}).find(e => e.key === key);
@@ -484,9 +662,11 @@
         const v = EX_VIEWS.some(e => e[0] === readPref().exView) ? readPref().exView : 'fil';
         const seg = `<div class="ong-wsview segmented" role="tablist">${EX_VIEWS.map(([k, l]) => `<button type="button" class="${v === k ? 'is-active' : ''}" data-ong-exview="${k}" aria-pressed="${v === k}">${esc(T(l))}</button>`).join('')}</div>`;
         const docsOf = x.pieces.map(d => byId(d.id) || d);
-        box.innerHTML = `${back}<strong>✉️ ${esc(x.title || T('Correspondant inconnu'))}</strong><small class="muted">${esc(yrs(x))} · ${esc(plural(x.pieces.length, 'pièce', 'pièces'))}</small></div>${seg}`
+        box.innerHTML = `${back}<strong>✉️ ${esc(x.title || T('Correspondant inconnu'))}</strong><small class="muted">${esc(yrs(x))} · ${esc(plural(x.pieces.length, 'pièce', 'pièces'))}</small>${kiosk() ? '' : `<span class="spacer"></span><button type="button" class="button small secondary" data-ong-missadd>${esc(T('✉️ Noter une pièce manquante'))}</button>`}</div>${seg}`
             + (v === 'map' ? docsMapHtml(docsOf) : v === 'time' ? docsTimeHtml(docsOf) : exFilHtml(x));
         if (v === 'map') bindDocsMap(box, docsOf);
+        box.querySelector('[data-ong-missadd]')?.addEventListener('click', () => addMissing(x));
+        box.querySelectorAll('[data-ong-missdel]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); removeMissing(Number(b.dataset.ongMissdel)); }));
     }
     /* 🏞 la collection de cartes postales (🏷 Sortes → Cartes postales) : vignettes recto ⇄ verso, par éditeur (numéros manquants), par lieu, vierges */
     let pcData = null, pcLoading = null;
@@ -624,7 +804,10 @@
         const path = folderPath(id), when = UI().when || (x => esc(x));
         const readDate = d.date_text && UI().readDate ? UI().readDate(d.date_text) : null;
         const help = [kindWord({...d, sort}), d.date_text, d.places?.[0]?.name, d.pages && `${d.pages} p.`].filter(Boolean).join(' · ');
-        const more = [...(!ro && isImg && ext.recueilDocs ? [`<button type="button" data-ong-recadd>${esc(T('📚 Ajouter à un recueil…'))}</button>`] : []), '<button type="button" data-ong-dl>⤓ Télécharger</button>', '<button type="button" data-ong-print>🖨 Imprimer</button>', `<button type="button" data-ong-view>↗ Ouvrir le média</button>`];
+        // R11 : le même ordre que le clic droit d'une ligne (Ouvrir · Modifier · Ranger · Étiquette · Exporter · — · Supprimer)
+        const more = [`<button type="button" data-ong-view>↗ ${esc(T('Ouvrir le média'))}</button>`, ...(!ro && d.filename ? [`<button type="button" data-ong-edit-viewer>🖼 ${esc(T('Ouvrir dans la visionneuse'))}</button>`] : []),
+            ...(!ro && isImg && ext.recueilDocs ? [`<button type="button" data-ong-recadd>${esc(T('📚 Ajouter à un recueil…'))}</button>`] : []), `<button type="button" data-ong-cite>📋 ${esc(T('Copier la citation'))}</button>`,
+            '<button type="button" data-ong-dl>⤓ Télécharger</button>', '<button type="button" data-ong-print>🖨 Imprimer</button>', ...(!ro ? [`<button type="button" class="danger" data-ong-del>🗑 ${esc(T('Supprimer'))}</button>`] : [])];
         const field = (k, v, raw = false) => v ? `<dt>${esc(k)}</dt><dd>${raw ? v : esc(v)}</dd>` : '';
         const ppl = d.people || [];
         ws.innerHTML = `<section class="page ong-page ong-docpage" data-ong-page="document" data-ong-id="${id}">
@@ -632,10 +815,12 @@
                 primary: ro ? '' : '<button type="button" class="button" data-ong-edit>✎ Modifier</button>',
                 actions: ro ? [] : [isImg && ext.openActTranscriber ? `<button type="button" class="button secondary" data-ong-tx title="${esc(T('Ouvrir l’outil de transcription complet sur cette image'))}">${esc(T('📜 Atelier de transcription'))}</button>` : '', SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
             <button type="button" class="button small secondary ong-back" data-ong-back>← Liste</button>
+            <div class="ong-dup" data-ong-dup hidden></div>
             <div class="ong-doc">
                 <figure class="ong-view">${isImg ? `<button type="button" class="ong-big" data-ong-view title="Voir en grand"><img src="${src}" alt="" data-ong-img></button>` : `<button type="button" class="ong-big is-file" data-ong-view><span aria-hidden="true">${icon}</span><small>${esc(d.filename || 'Pas de fichier')}</small></button>`}
-                    <figcaption data-ong-size>${isImg ? '' : esc(kindWord({...d, sort}))}</figcaption></figure>
-                <div class="card ong-fields"><h3>Description</h3><dl>
+                    <figcaption data-ong-size>${isImg ? '' : esc(kindWord({...d, sort}))}</figcaption>
+                    ${isImg ? `<button type="button" class="button small secondary ong-sbs-btn" data-ong-sbs-open aria-pressed="${!!readPref().sbs}">🔍 ${esc(T('Zoom et texte côte à côte'))}</button>` : ''}</figure>
+                <div class="card ong-fields" data-ong-fields><h3>Description</h3>${labelsOf(lite).length ? `<p class="ong-labels-line">${labelsOf(lite).map(l => `<span class="ong-label" style="${l.color ? `--ong-lc:${esc(l.color)}` : ''}">🏷 ${esc(l.name)}</span>`).join(' ')}</p>` : ''}<dl>
                     ${field('Sorte', UI().badge ? UI().badge(kindWord({...d, sort}), 'grey') : kindWord({...d, sort}), true)}
                     ${field(T('Cote', {ctx: 'archives'}), d.cote)}
                     ${d.date_text ? `<dt>Date</dt><dd>${esc(d.date_text)}${readDate?.ok ? `<small class="ong-ok">✓ Compris : ${esc(readDate.label)}${readDate.extra ? ` ${esc(readDate.extra)}` : ''}</small>` : ''}</dd>` : ''}
@@ -648,6 +833,7 @@
                     ${field('Fichier', d.filename)}
                 </dl>${!d.cote && !d.date_text && !ro ? `<p class="ong-hint">${A().empty ? A().empty('Pas encore de date ni de cote : « ✎ Modifier » pour les écrire.', {icon: '✎'}) : ''}</p>` : ''}</div>
             </div>
+            ${isImg ? `<section class="card ong-sec ong-sbs" data-ong-sbs ${readPref().sbs ? '' : 'hidden'}>${sbsHtml(d, src)}</section>` : ''}
             <section class="card ong-sec ong-recsec" data-ong-recueil hidden></section>
             <section class="card ong-sec ong-pagessec" data-ong-pages hidden></section>
             <section class="card ong-sec ong-linkssec" data-ong-links hidden></section>
@@ -666,7 +852,120 @@
         if (lk && ext.docLinks) ext.docLinks.mount(lk, id, {ro, onOpen: did => { if (Number(did) !== Number(id)) select(Number(did)); }});
         const img = ws.querySelector('[data-ong-img]');
         if (img) { const put = () => { const cap = ws.querySelector('[data-ong-size]'); if (cap && img.naturalWidth) cap.textContent = `${img.naturalWidth} × ${img.naturalHeight} px · ${printFit(img.naturalWidth, img.naturalHeight)}`; }; if (img.complete) put(); else img.addEventListener('load', put, {once: true}); }
+        const sb = ws.querySelector('[data-ong-sbs]'); if (sb) bindSbs(sb);
+        if (isImg) findDuplicates(d, ws.querySelector('[data-ong-dup]'));
     }
+    /* 🔍 l'image zoomable (molette, + / −, glisser) et le texte transcrit à côté ; le texte qui défile fait défiler l'image */
+    function sbsText(d) {
+        const acts = (d.acts || []).filter(a => String(a.body || '').trim());
+        return acts.length ? acts.map(a => String(a.body)).join('\n\n') : String(d.transcription || '');
+    }
+    function sbsHtml(d, src) {
+        const tx = sbsText(d);
+        return `<div class="ong-sh"><h3>🔍 ${esc(T('Image et transcription côte à côte'))}</h3><span class="spacer"></span>
+            <span class="ong-zoombar"><button type="button" class="icon-button small" data-ong-zoom="-1" aria-label="${esc(T('Zoom arrière'))}" title="${esc(T('Zoom arrière'))}">−</button><output data-ong-zoomval>100 %</output><button type="button" class="icon-button small" data-ong-zoom="1" aria-label="${esc(T('Zoom avant'))}" title="${esc(T('Zoom avant'))}">＋</button><button type="button" class="button small secondary" data-ong-zoom="0">${esc(T('Taille d’origine'))}</button>
+            <label class="checkbox-line ong-linkscroll"><input type="checkbox" data-ong-linkscroll ${readPref().linkScroll === false ? '' : 'checked'}> ${esc(T('Défilement lié'))}</label></span></div>
+            <div class="ong-sbs-grid"><div class="ong-zoombox" data-ong-zoombox tabindex="0" aria-label="${esc(T('Image : molette pour zoomer, glisser pour se déplacer'))}"><img src="${src}" alt="" draggable="false" data-ong-zoomimg></div>
+            <div class="ong-sbs-text" data-ong-sbstext>${tx.trim() ? trText(tx) : `<p class="muted">${esc(T('Pas encore de transcription : « 📜 Atelier de transcription » pour l’écrire.'))}</p>`}</div></div>`;
+    }
+    function bindSbs(sec) {
+        const box = sec.querySelector('[data-ong-zoombox]'), img = sec.querySelector('[data-ong-zoomimg]'), text = sec.querySelector('[data-ong-sbstext]'), out = sec.querySelector('[data-ong-zoomval]');
+        if (!box || !img) return;
+        const z = {k: 1, x: 0, y: 0};
+        const paint = () => { img.style.transform = `translate(${z.x}px, ${z.y}px) scale(${z.k})`; if (out) out.textContent = `${Math.round(z.k * 100)} %`; sec.dataset.zoom = String(z.k); };
+        const clampPan = () => { const w = box.clientWidth, h = box.clientHeight, iw = img.clientWidth * z.k, ih = img.clientHeight * z.k; z.x = Math.min(0, Math.max(w - iw, z.x)); z.y = Math.min(0, Math.max(Math.min(0, h - ih), z.y)); if (iw <= w) z.x = (w - iw) / 2; };
+        const zoomAt = (f, cx = box.clientWidth / 2, cy = box.clientHeight / 2) => { const k = Math.min(8, Math.max(1, z.k * f)); z.x = cx - (cx - z.x) * (k / z.k); z.y = cy - (cy - z.y) * (k / z.k); z.k = k; clampPan(); paint(); };
+        box.addEventListener('wheel', e => { e.preventDefault(); const r = box.getBoundingClientRect(); zoomAt(e.deltaY < 0 ? 1.2 : 1 / 1.2, e.clientX - r.left, e.clientY - r.top); }, {passive: false});
+        let drag = null;
+        box.addEventListener('pointerdown', e => { drag = {x: e.clientX - z.x, y: e.clientY - z.y}; box.setPointerCapture?.(e.pointerId); box.classList.add('is-dragging'); });
+        box.addEventListener('pointermove', e => { if (!drag) return; z.x = e.clientX - drag.x; z.y = e.clientY - drag.y; clampPan(); paint(); });
+        const stop = () => { drag = null; box.classList.remove('is-dragging'); };
+        box.addEventListener('pointerup', stop); box.addEventListener('pointercancel', stop);
+        box.addEventListener('keydown', e => { if (e.key === '+' || e.key === '=') zoomAt(1.2); else if (e.key === '-') zoomAt(1 / 1.2); else if (e.key === '0') { z.k = 1; z.x = 0; z.y = 0; clampPan(); paint(); } });
+        sec.querySelectorAll('[data-ong-zoom]').forEach(b => b.addEventListener('click', () => { const v = Number(b.dataset.ongZoom); if (!v) { z.k = 1; z.x = 0; z.y = 0; clampPan(); paint(); } else zoomAt(v > 0 ? 1.25 : 0.8); }));
+        const link = sec.querySelector('[data-ong-linkscroll]');
+        link?.addEventListener('change', () => writePref({linkScroll: link.checked}));
+        // défilement lié : la part du texte déjà lue = la part de l'image (de haut en bas) montrée
+        text?.addEventListener('scroll', () => {
+            if (!link?.checked) return;
+            const p = text.scrollHeight > text.clientHeight ? text.scrollTop / (text.scrollHeight - text.clientHeight) : 0;
+            const ih = img.clientHeight * z.k, h = box.clientHeight; if (ih <= h) return;
+            z.y = -p * (ih - h); clampPan(); paint();
+        });
+        sec._zoom = z; // pour les essais
+        if (img.complete) { clampPan(); paint(); } else img.addEventListener('load', () => { clampPan(); paint(); }, {once: true});
+    }
+    /* 👯 « peut-être un doublon de… » : les empreintes des images (heritage-images-similaires.js, app-image-prints.js) */
+    async function findDuplicates(d, host) {
+        const P = window.LCNDA_IMGPRINT, ip = ext.imagePrints; if (!host || !P?.search || !ip?.load) return;
+        try {
+            const all = await ip.load(); const items = all?.items || [], me = items.find(x => Number(x.id) === Number(d.id));
+            if (!me || !host.isConnected) return;
+            const res = (await P.search(me, items, {sens: 0.6, min: 60, exclude: d.id})).filter(r => ['identique', 'proche', 'recadree'].includes(r.kind)).slice(0, 3);
+            if (!res.length || !host.isConnected || cur !== d.id) return;
+            const label = r => ({identique: T('identique'), proche: T('très proche'), recadree: T('recadrée')}[r.kind] || '');
+            host.hidden = false;
+            host.innerHTML = `<span class="ong-dup-ico" aria-hidden="true">👯</span><span>${esc(T('Peut-être un doublon de :'))}</span> ${res.map(r => { const o = byId(r.item.id); return `<button type="button" class="ong-dup-link" data-ong-doc="${Number(r.item.id)}" title="${esc(T('Ouvrir ce document'))}">« ${esc(o?.title || r.item.title || `#${r.item.id}`)} » <small>${esc(label(r))} · ${r.score} %</small></button>`; }).join(' ')}
+                ${ext.openImageDuplicates ? `<button type="button" class="button small secondary" data-ong-dupopen>${esc(T('👯 Voir les doublons'))}</button>` : ''}`;
+            host.querySelector('[data-ong-dupopen]')?.addEventListener('click', () => ext.openImageDuplicates());
+        } catch (_) { /* pas d'empreintes : rien à dire */ }
+    }
+    ext.ongletsDocs = {findDuplicates: (d, host) => findDuplicates(d, host)};
+    /* ✎ Modifier sur place : titre, date, lieu, cote, personnes (menu de choix) ; « ↶ Annuler » remet tout comme avant */
+    function editInline(d) {
+        const box = document.querySelector('#workspace [data-ong-fields]'); if (!box || kiosk()) return;
+        const PK = window.LCNDA_PICKER;
+        const place = (d.places || [])[0];
+        box.classList.add('is-editing');
+        box.innerHTML = `<h3>✎ ${esc(T('Modifier le document'))}</h3><form class="ong-inline" data-ong-inline novalidate><div class="form-grid">
+            <label class="span-2">${esc(T('Titre'))}<input name="title" maxlength="500" value="${esc(d.document_title && !d.title ? d.document_title : d.title)}" required></label>
+            <label>${esc(T('Date'))}<input name="date_text" maxlength="500" value="${esc(d.date_text || '')}" data-ui-date placeholder="${esc(T('ex. 12 mars 1903, vers 1900'))}"></label>
+            <label>${esc(T('Cote', {ctx: 'archives'}))}<input name="document_reference" maxlength="500" value="${esc(d.cote || '')}" placeholder="${esc(T('ex. 3 E 12/45'))}"></label>
+            <div class="span-2" data-ong-pfield><span class="pk-lab">${esc(T('Lieu'))}</span>${PK ? PK.pickerField({name: 'place_id', kind: 'place', value: place ? {id: place.id, title: place.name} : null, allowCreate: false, placeholder: T('Ville, village, paroisse…')}) : ''}</div>
+            <div class="span-2" data-ong-ppl><span class="pk-lab">${esc(T('Personnes reliées'))}</span>${PK ? PK.pickerField({name: 'people', kind: 'person', multiple: true, allowCreate: false, value: (d.people || []).filter(p => !p.found).map(p => ({id: p.id, title: p.name}))}) : ''}</div></div>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-ong-inline-cancel>${esc(T('Annuler'))}</button><button type="submit" class="button" data-ong-inline-save>${esc(T('Enregistrer'))}</button></div></form>`;
+        const form = box.querySelector('form');
+        form.querySelector('[name="title"]').focus();
+        form.querySelector('[data-ong-inline-cancel]').addEventListener('click', () => showDoc(d.id));
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const f = Object.fromEntries(new FormData(form)), title = String(f.title || '').trim();
+            if (!title) { A().toast(T('Donne un titre au document.'), 'error'); return; }
+            const pVal = PK ? PK.pickerValue(form.querySelector('[data-ong-pfield] .pk')) : null, pid = Number(pVal) || 0;
+            const nextPeople = PK ? (PK.pickerValue(form.querySelector('[data-ong-ppl] .pk')) || []).map(Number).filter(Boolean) : null;
+            const prevPeople = (d.people || []).filter(p => !p.found).map(p => Number(p.id));
+            const add = nextPeople ? nextPeople.filter(x => !prevPeople.includes(x)) : [], remove = nextPeople ? prevPeople.filter(x => !nextPeople.includes(x)) : [];
+            const body = {op: 'doc_save', media_id: d.id, title, date_text: String(f.date_text || '').trim(), document_reference: String(f.document_reference || '').trim()};
+            if (PK) body.place_id = pid;
+            form.querySelector('[data-ong-inline-save]').disabled = true;
+            try {
+                const r = await write(body);
+                if (add.length || remove.length) await write({op: 'doc_people', media_id: d.id, add, remove});
+                const again = async () => { cache.delete(d.id); await reloadAll(); };
+                await again();
+                A().undoToast?.(T('Document « {t} » modifié', {t: title}), {
+                    undo: async () => { await write({op: 'doc_save', media_id: d.id, ...r.before}); if (add.length || remove.length) await write({op: 'doc_people', media_id: d.id, add: remove, remove: add}); await again(); },
+                    redo: async () => { await write(body); if (add.length || remove.length) await write({op: 'doc_people', media_id: d.id, add, remove}); await again(); }});
+            } catch (err) { A().toast(err.message, 'error'); form.querySelector('[data-ong-inline-save]').disabled = false; }
+        });
+    }
+    /* 📋 la citation toute prête (lib/citation_styles.php), au style choisi (retenu dans genealogie-documents-tab) */
+    const CITE_STYLES = [['fr', 'Classique (à la française)'], ['ee', 'Evidence Explained'], ['chicago', 'Chicago'], ['forum', 'Généanet / forum']];
+    async function copyCitation(d) {
+        let r; try { r = await A().api('onglets', {op: 'citation', id: d.id}); } catch (e) { return A().toast(e.message, 'error'); }
+        const st = CITE_STYLES.some(x => x[0] === readPref().citeStyle) ? readPref().citeStyle : 'fr';
+        const textOf = k => r.styles?.[k]?.note || r.styles?.[k]?.biblio || '';
+        ext.openDialog?.({eyebrow: T('CITER'), title: T('📋 Copier la citation'), submitLabel: T('📋 Copier'),
+            body: `<div class="form-grid one-column"><fieldset class="ong-citestyles"><legend>${esc(T('Style'))}</legend>${CITE_STYLES.map(([k, l]) => `<label class="checkbox-line"><input type="radio" name="style" value="${k}" ${k === st ? 'checked' : ''}> ${esc(T(l))}</label>`).join('')}</fieldset>
+                <label>${esc(T('La citation'))}<textarea name="text" rows="4" data-ong-citetext>${esc(textOf(st))}</textarea></label></div>`,
+            onOpen: dlg => dlg.addEventListener('change', e => { if (e.target.name === 'style') { dlg.querySelector('[data-ong-citetext]').value = textOf(e.target.value); writePref({citeStyle: e.target.value}); } }),
+            onSubmit: async form => {
+                const f = Object.fromEntries(new FormData(form)); writePref({citeStyle: f.style});
+                try { await navigator.clipboard.writeText(String(f.text || '')); A().toast(T('Citation copiée.'), 'success'); }
+                catch (_) { A().toast(T('Le presse-papiers est fermé : sélectionne le texte et copie-le (⌘C).'), 'error'); }
+            }});
+    }
+    ext.ongletsCite = copyCitation;
     function printFit(w, h) { const L = Math.max(w, h), S = Math.min(w, h); for (const [f, l, s] of [['A4', 3508, 2480], ['A5', 2480, 1748], ['A6', 1748, 1240]]) if (L >= l && S >= s) return `assez grande pour imprimer en ${f}`; return 'petite : écran seulement'; }
 
     /* ─── les boutons de la page ─── */
@@ -674,6 +973,7 @@
     document.addEventListener('click', async e => {
         const page = e.target.closest?.('#workspace [data-ong-page]'); if (!page || A().state?.module !== 'documents') return;
         const b = e.target.closest('button, a'); if (!b) return;
+        if (b.matches('[data-ong-missadd], [data-ong-missdel], [data-ong-zoom], [data-ong-dupopen], [data-ong-inline-cancel], [data-ong-inline-save]') || b.closest('.pk, .sel-bar')) return; // leurs propres écouteurs
         if (b.matches('[data-ong-pick]')) { pick.on = !pick.on; if (!pick.on) pick.ids = []; if (modeOf() === 'recueils' && !wsRec()) paintWorkspaceList(); paintPick(); return; }
         if (b.matches('[data-ong-pick-close]')) { pick.on = false; pick.ids = []; if (modeOf() === 'recueils' && !wsRec()) paintWorkspaceList(); paintPick(); return; }
         if (b.matches('[data-ong-pick-none]')) { pick.ids = []; paintPick(); return; }
@@ -715,7 +1015,12 @@
             let pages = []; try { pages = ((await ext.mediaPages?.get(d.id)) || {}).pages || []; } catch (_) { pages = []; }
             const list = pages.length > 1 ? pages.map(p => (Number(p.media_id) === Number(d.id) ? asMedia(d) : {id: Number(p.media_id), title: p.title, filename: p.filename, thumbnail: p.thumbnail, media_type: p.media_type, date_text: p.date_text, document_reference: p.document_reference, transcription: p.transcription, description: p.description})) : [asMedia(d)];
             A().openLightbox(list, Math.max(0, list.findIndex(m => Number(m.id) === Number(d.id))), true); return; }
-        if (b.matches('[data-ong-edit]')) {
+        if (b.matches('[data-ong-edit]')) { if (kiosk()) return; return editInline(d); } // ✎ sur place (la visionneuse : « ⋯ → 🖼 Ouvrir dans la visionneuse »)
+        if (b.matches('[data-ong-cite]')) { b.closest('details')?.removeAttribute('open'); return copyCitation(d); }
+        if (b.matches('[data-ong-sbs-open]')) { const sec = page.querySelector('[data-ong-sbs]'); if (!sec) return; sec.hidden = !sec.hidden; writePref({sbs: !sec.hidden}); b.setAttribute('aria-pressed', String(!sec.hidden)); if (!sec.hidden) { bindSbs(sec); sec.scrollIntoView({block: 'nearest'}); } return; }
+        if (b.matches('[data-ong-del]')) { b.closest('details')?.removeAttribute('open'); if (kiosk()) return; return deleteMany([d.id]); } // R7 : tout de suite, « ↶ Annuler »
+        if (b.matches('[data-ong-edit-viewer]')) {
+            b.closest('details')?.removeAttribute('open');
             if (!d.filename) return A().toast('Ce document n’a pas de fichier : modifie-le depuis la fiche à laquelle il est rattaché.', 'error');
             A().openLightbox([asMedia(d)], 0, kiosk());
             const lb = document.getElementById('lightbox');
