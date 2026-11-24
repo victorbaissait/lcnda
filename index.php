@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=275">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=276">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -1546,12 +1546,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-house-dxf.js?v=2" defer></script>
 <script src="assets/js/heritage-house.js?v=46" defer></script>
 <script src="assets/js/heritage-house3d.js?v=19" defer></script>
-<script src="assets/js/heritage-house-lib.js?v=13" defer></script>
+<script src="assets/js/heritage-house-lib.js?v=14" defer></script>
 <script src="assets/js/heritage-house-more.js?v=2" defer></script>
 <script src="assets/js/heritage-house-pics.js?v=2" defer></script>
 <script src="assets/js/heritage-house-metiers.js?v=1" defer></script>
 <script src="assets/js/heritage-house-cultes.js?v=1" defer></script>
 <script src="assets/js/heritage-house-equip.js?v=1" defer></script>
+<script src="assets/js/heritage-house-objets.js?v=1" defer></script>
 <script src="assets/js/heritage-dna.js?v=23" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=11" defer></script>
 <script src="assets/js/museum-viewer.js?v=10" defer></script>

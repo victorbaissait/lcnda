@@ -4003,6 +4003,7 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-hs-c2 input[type=checkbox]{width:20px;height:20px;flex:0 0 20px;margin:0}.h-hs-mkg .h-hs-c2 input[type=color]{flex:1 1 auto;width:auto;height:42px;padding:4px}.h-hs-mkg>.h-hs-mkpick{grid-column:span 3}
 .h-hs-mkprev [data-prev3d] img{display:block;margin:6px auto 0;border-radius:6px;background:linear-gradient(#eef2f6,#dfe6ec)}.h-hs-mkpick{display:flex;align-items:flex-end}
 .h-hs-libbar .h-hs-oldf{flex:1 1 100%;font-size:12.5px;margin:2px 0 0}
+.h-hs-libbar .h-hs-style{flex:1 1 100%;font-size:12.5px;min-height:30px;max-width:100%}
 @media (max-width:640px){.h-hs-vers select{max-width:150px}.h-hs-verbadge.is-big{font-size:18px}.h-hs-pblock{grid-template-columns:1fr}}
 .kn-fontpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:4px;max-height:46vh;overflow:auto;margin:8px 0;padding:2px}.kn-fontitem{text-align:left;padding:8px 10px;border:1px solid var(--line-color,#ccc);background:var(--card-bg,#fff);color:var(--ink);font-size:17px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kn-fontitem:hover{border-color:var(--blue)}.kn-fontitem.is-on{outline:2px solid var(--blue);outline-offset:-2px}
 .kn-fontprev{font-size:24px;margin:6px 0 10px;min-height:1.4em}

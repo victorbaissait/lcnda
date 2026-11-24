@@ -203,11 +203,18 @@
         if (typeof v === 'object') { const n = vars && vars.n != null ? Number(vars.n) : 1; return v[category(n)] || v.other || v.one || null; }
         return null;
     }
+    /* des noms faits de deux morceaux (« Armoire Louis XV » = « Armoire » + « Louis XV ») : chaque morceau traduit, joints par « · »
+       (compose({'Armoire Louis XV': ['Armoire', 'Louis XV']}) ; le plan de maison s'en sert pour ses meubles de style) */
+    const composed = Object.create(null);
+    function compose(map) { Object.entries(map || {}).forEach(([k, v]) => { if (Array.isArray(v) && v.length === 2) composed[k] = v; }); }
     function lookup(text, ctx) {
         if (lang === 'fr') return null;
         if (ctx) { const v = dict[`${ctx}|${text}`]; if (v != null) return v; }
         const v = dict[text];
-        return v == null ? null : v;
+        if (v != null) return v;
+        const c = composed[text]; if (!c) return null;
+        const a = dict[c[0]], b = dict[c[1]];
+        return a == null && b == null ? null : `${typeof a === 'string' ? a : c[0]} · ${typeof b === 'string' ? b : c[1]}`;
     }
     /** t('texte français', {vars, ctx}) : le texte dans la langue choisie, sinon le français */
     function t(text, vars) {
@@ -452,7 +459,7 @@
         LANGS, CODES, KEY, COOKIE, AI_NOTE, VERSION,
         get lang() { return lang; }, getLang: () => lang, storedLang, locale, intlLocale, info,
         t, has, plural, frPlural, category, fmtNumber, fmtDate, fmtTime,
-        setLang, provide, load, translateText, translate: walk, revert,
+        setLang, provide, load, translateText, translate: walk, revert, compose,
         banner, setBannerClosed, bannerClosed, report, selectHtml,
         _dict: () => dict,
     };

@@ -505,13 +505,21 @@
     const licTitle = m => [m.name, m.ext?.toUpperCase(), m.license && i18n('Licence : {x}', {x: m.license}), m.author && i18n('Auteur : {x}', {x: m.author}), m.source && i18n('Source : {x}', {x: m.source})].filter(Boolean).join(' — ');
     const modelTile = m => `<div class="h-hs-tile"><button type="button" data-hs-mine="${m.id}" title="${esc(licTitle(m))}">${m.thumb ? `<img src="${esc(m.thumb)}" alt="">` : '<span class="h-hs-ico">🧊</span>'}<small>${esc(m.name)}</small>${m.license ? `<i class="h-hs-lic">${esc(/cc0|domaine public|public domain/i.test(m.license) ? 'CC0' : 'licence')}</i>` : ''}</button><button type="button" class="h-hs-tedit" data-hs-libcmd="editmodel" data-id="${m.id}" title="Renommer, ranger, voir la licence, supprimer">✎</button></div>`;
     const OLD_PREF = 'genealogie-house-oldonly', oldOnly = () => { try { return localStorage.getItem(OLD_PREF) === '1'; } catch (_) { return false; } };
+    /* 🎨 les meubles de style (heritage-house-objets.js) : tous (par défaut), aucun, ou un seul style (« Louis XV », « scandinave »…) */
+    const STYLE_PREF = 'genealogie-house-style', styleOf = () => { try { return localStorage.getItem(STYLE_PREF) || ''; } catch (_) { return ''; } };
+    document.addEventListener('change', e => { if (!e.target.matches?.('[data-hs-style]')) return; try { localStorage.setItem(STYLE_PREF, e.target.value); } catch (_) {} repaintLib(); });
+    function styleSelect(cur) {
+        const S = ext.houseObjets?.STYLES; if (!S) return '';
+        const grp = [['P', 'Époques'], ['I', 'D’ailleurs'], ['R', 'Régions'], ['M', 'Modernes']];
+        return `<select data-hs-style class="h-hs-style" aria-label="${esc(i18n('Meubles de style'))}" title="${esc(i18n('Meubles de style'))}"><option value="">${esc(i18n('🎨 Tous les styles'))}</option><option value="none" ${cur === 'none' ? 'selected' : ''}>${esc(i18n('Sans les meubles de style'))}</option>${grp.map(([k, l]) => `<optgroup label="${esc(i18n(l))}">${(S[k] || []).map(([n]) => `<option value="${esc(n)}" ${cur === n ? 'selected' : ''}>${esc(i18n(n))}</option>`).join('')}</optgroup>`).join('')}</select>`;
+    }
     document.addEventListener('change', e => { if (!e.target.matches?.('[data-hs-oldonly]')) return; try { localStorage.setItem(OLD_PREF, e.target.checked ? '1' : '0'); } catch (_) {} repaintLib(); });
     const libTile = (l, sym2d) => { const o = l[9] || {}; const b = `<button type="button" data-hs-lib="${esc(l[0])}" title="${esc(trName(l))} — ${l[3]} × ${l[4]} × ${l[5]} cm${o.period ? ` · ${esc(o.period)}` : ''}${isOld(l) ? ` · ${i18n('🕰 ancien')}` : ''}">${tileSvg(l, sym2d)}<small>${esc(trName(l))}</small></button>`; return o.custom ? `<div class="h-hs-tile">${b}<button type="button" class="h-hs-tedit" data-hs-libcmd="editobj" data-id="${o.id}" title="Modifier ou supprimer cet objet">✎</button></div>` : `<div class="h-hs-tile">${b}</div>`; };
     let lastSetCat = null; // pour ouvrir la catégorie d'un objet qu'on vient de créer
     function pane({cat, q, mine, sym2d, setCat}) {
         extend(); models = mine || []; lastSetCat = setCat || null;
         if (!customLoaded) loadCustom().then(repaintLib);
-        const p = prefs(), cats = visibleCats(p), oo = oldOnly(), keep = l => !oo || isOld(l); if (!cats.includes(cat)) { cat = cats[0]; setCat?.(cat); }
+        const p = prefs(), cats = visibleCats(p), oo = oldOnly(), sty = styleOf(), keep = l => (!oo || isOld(l)) && (!sty || (sty === 'none' ? !l[9]?.style : l[9]?.style === sty)); if (!cats.includes(cat)) { cat = cats[0]; setCat?.(cat); }
         const words = norm(q).split(/\s+/).filter(Boolean), hit = s => words.every(w => norm(s).includes(w));
         let body;
         if (words.length) {
@@ -524,10 +532,10 @@
             body = `<div class="h-hs-lib">${own.map(l => libTile(l, sym2d)).join('')}${oo ? '' : models.map(modelTile).join('')}</div>${own.length || models.length ? '' : '<p class="muted">Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut).</p>'}`;
         } else {
             const list = orderedItems(cat, p).filter(l => !p.hidden.includes(l[0]) && keep(l)), ms = oo ? [] : models.filter(m => m.cat === cat);
-            body = `<div class="h-hs-lib">${list.map(l => libTile(l, sym2d)).join('')}${ms.map(modelTile).join('')}</div>${list.length || ms.length ? '' : `<p class="muted">${oo ? 'Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »).' : 'Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer).'}</p>`}`;
+            body = `<div class="h-hs-lib">${list.map(l => libTile(l, sym2d)).join('')}${ms.map(modelTile).join('')}</div>${list.length || ms.length ? '' : `<p class="muted">${sty && sty !== 'none' ? i18n('Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ».', {s: i18n(sty)}) : oo ? 'Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »).' : 'Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer).'}</p>`}`;
         }
         return `<input type="search" data-hs-libq placeholder="Chercher… lit, lampe, piano, vache, salon…" aria-label="Chercher un objet" value="${esc(q)}">
-            <div class="h-hs-libbar"><button type="button" class="button small" data-hs-libcmd="create" title="Un objet à toi : nom, taille, couleur, forme, image">＋ Créer un objet</button><button type="button" class="button small secondary" data-hs-libcmd="online" title="Des modèles 3D libres de droit (CC0) à télécharger">📦 Bibliothèque en ligne</button><button type="button" class="button small secondary" data-hs-libcmd="arrange" title="Montrer, cacher, ranger les catégories et les objets">⚙️ Ranger</button><label class="ui-toggle h-hs-oldf" title="Ne montrer que le mobilier et les objets d’autrefois"><input type="checkbox" data-hs-oldonly ${oo ? 'checked' : ''}><i></i>🕰 Ancien seulement</label></div>
+            <div class="h-hs-libbar"><button type="button" class="button small" data-hs-libcmd="create" title="Un objet à toi : nom, taille, couleur, forme, image">＋ Créer un objet</button><button type="button" class="button small secondary" data-hs-libcmd="online" title="Des modèles 3D libres de droit (CC0) à télécharger">📦 Bibliothèque en ligne</button><button type="button" class="button small secondary" data-hs-libcmd="arrange" title="Montrer, cacher, ranger les catégories et les objets">⚙️ Ranger</button><label class="ui-toggle h-hs-oldf" title="Ne montrer que le mobilier et les objets d’autrefois"><input type="checkbox" data-hs-oldonly ${oo ? 'checked' : ''}><i></i>🕰 Ancien seulement</label>${styleSelect(sty)}</div>
             <div class="h-hs-cats">${cats.map(c => `<button type="button" class="${c === cat && !words.length ? 'is-on' : ''}" data-hs-cat="${esc(c)}">${esc(i18n(c))}</button>`).join('')}</div>${body}
             <p class="muted h-hs-help">Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner).</p>`;
     }
