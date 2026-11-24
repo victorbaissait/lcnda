@@ -22,7 +22,8 @@
     // les colonnes : [clé, titre, montrée au départ]
     const COLS = [['cote', 'Cote', true], ['dates', 'Dates', true], ['pages', 'Pages', true], ['numerise', 'Photographié', true], ['transcrit', 'Transcrit · relu', true], ['online', 'En ligne', true],
         ['comm', 'Communicable', true], ['reste', 'Reste', true], ['series', 'Série', false], ['support', 'Support', false], ['state', 'État matériel', false], ['language', 'Langue', false], ['reuse', 'Réutilisation', false], ['numbering', 'Numérotation', false]];
-    const colsOn = () => { const p = pref().cols; return Array.isArray(p) ? COLS.filter(c => p.includes(c[0])).map(c => c[0]) : COLS.filter(c => c[2]).map(c => c[0]); };
+    const archivesProfile = () => ext.recueilSens?.opt('profil') === 'archives'; // 🏛 profil « Centre d'archives » : plus de colonnes au départ
+    const colsOn = () => { const p = pref().cols; return Array.isArray(p) ? COLS.filter(c => p.includes(c[0])).map(c => c[0]) : COLS.filter(c => c[2] || (archivesProfile() && ['support', 'state', 'language', 'reuse'].includes(c[0]))).map(c => c[0]); };
     const colTitle = k => (k === 'cote' ? T('Cote', {ctx: 'archives'}) : T(COLS.find(c => c[0] === k)[1]));
     const SHOW = [['', 'Tout'], ['todo', 'Reste à transcrire'], ['review', 'Reste à relire'], ['absent', 'Avec des pages absentes'], ['offline', 'Pas en ligne'], ['locked', 'Non communicables']];
     const LABELS = {support: {papier: 'Papier', parchemin: 'Parchemin', microfilm: 'Microfilm', numerique: 'Numérique', autre: 'Autre'}, material_state: {bon: 'Bon', abime: 'Abîmé', fragile: 'Fragile (ne pas manipuler)', a_restaurer: 'À restaurer', restaure: 'Restauré'},
@@ -139,7 +140,7 @@
         ext.openDialog({eyebrow: T('🏛 VUE DES FONDS'), title: T('Les colonnes'), submitLabel: T('Enregistrer'),
             body: `<p class="muted">${esc(T('Coche les colonnes à montrer (le recueil est toujours là).'))}</p><div class="rf-colpick">${COLS.map(([k]) => `<label class="re-check"><input type="checkbox" name="c" value="${k}" ${on.has(k) ? 'checked' : ''}> ${esc(colTitle(k))}</label>`).join('')}</div>
                 <p><button type="button" class="link-button" data-rf-reset>↺ ${esc(T('Remettre comme au départ'))}</button></p>`,
-            onOpen: d => d.querySelector('[data-rf-reset]').addEventListener('click', () => d.querySelectorAll('[name=c]').forEach(c => { c.checked = !!COLS.find(x => x[0] === c.value)?.[2]; })),
+            onOpen: d => d.querySelector('[data-rf-reset]').addEventListener('click', () => d.querySelectorAll('[name=c]').forEach(c => { c.checked = !!COLS.find(x => x[0] === c.value)?.[2] || (archivesProfile() && ['support', 'state', 'language', 'reuse'].includes(c.value)); })),
             onSubmit: async form => { setPref({cols: [...form.querySelectorAll('[name=c]:checked')].map(c => c.value)}); after(); return true; }});
     }
     function csv(rows) {
@@ -167,7 +168,7 @@
         if (e.target.closest?.('[data-rf-fonds-go]')) { e.preventDefault(); setMode('fonds'); const A2 = A(); A2.state.hRecueil = {id: 0}; A2.state.listType = 'recueils'; A2.setModule('listes'); }
     });
     const MODE_KEY = 'genealogie-recueils-vue';
-    const mode = () => { try { return localStorage.getItem(MODE_KEY) === 'fonds' ? 'fonds' : 'list'; } catch (_) { return 'list'; } };
+    const mode = () => { try { const v = localStorage.getItem(MODE_KEY); return v ? (v === 'fonds' ? 'fonds' : 'list') : (ext.recueilSens?.opt('profil') === 'archives' ? 'fonds' : 'list'); } catch (_) { return 'list'; } }; // pas encore choisi : selon le profil
     const setMode = m => { try { localStorage.setItem(MODE_KEY, m === 'fonds' ? 'fonds' : 'list'); } catch (_) {} };
     ext.recueilFonds = {paint, mode, setMode, nums, reste};
 })();

@@ -51,6 +51,7 @@ require_once __DIR__ . '/doc_links.php'; // 🔗 documents liés (deux documents
 require_once __DIR__ . '/recueil_etat.php'; // 🗂 état des pages d'un recueil (migration 106)
 require_once __DIR__ . '/recueil_toc.php'; // 📑 sommaire d'un recueil (migration 107)
 require_once __DIR__ . '/recueil_fiche.php'; // 🏛 fiche d'identité d'un recueil (migration 108)
+require_once __DIR__ . '/recueil_sens.php'; // 💡 ce qu'on trouve dans un recueil
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
 require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille
 require_once __DIR__ . '/house_library.php'; // 🏠 Plan de maison : objets créés, bibliothèque en ligne libre de droit, packs ZIP

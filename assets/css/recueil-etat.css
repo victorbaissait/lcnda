@@ -159,3 +159,13 @@
 @media print { .rf-tools, .rf-mode, .rs-tw { display: none !important; } }
 :root[data-theme="dark"] .rf-table tr.rf-grp td { background: #262a31; }
 .rf-table td.rf-col-cote, .rf-table td.rf-col-dates { white-space: nowrap; }
+
+/* 💡 Ce qu'on y trouve (heritage-recueil-sens.js) */
+.rsn-hist { display: flex; align-items: flex-end; gap: 2px; height: 90px; border-bottom: 2px solid #111; margin: 6px 0 2px; }
+.rsn-hist i { flex: 1; min-width: 2px; display: flex; flex-direction: column-reverse; background: #c9ced8; }
+.rsn-hist i b { display: block; width: 100%; }
+.rsn-hist i.is-gap { height: 100%; background: repeating-linear-gradient(135deg, #c62828 0 3px, transparent 3px 6px); opacity: .5; }
+.rsn-hx { display: flex; justify-content: space-between; font-size: 11px; color: #666; margin-bottom: 6px; }
+.rsn-note { font-size: 12px; margin: 4px 0 0; }
+.rsn-hist + .rsn-hx + .re-msg, .rsn-hist + .rsn-hx + .re-msg + .re-msg { margin-bottom: 6px; }
+.rf-opts { display: grid; gap: 4px; margin-top: 10px; }

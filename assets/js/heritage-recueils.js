@@ -87,7 +87,7 @@
         ws.innerHTML = `<section class="page collection-page h-rc">
             <header class="page-header"><div><span class="eyebrow">LISTES · MÉDIAS</span><h2>📚 Recueils</h2>
                 <p>Un recueil rassemble des pages photographiées dans l’ordre : un registre, une liste de prisonniers, un cahier, un album. Tu peux y transcrire chaque page, garder plusieurs campagnes de photos (celles d’il y a dix ans et les nouvelles) et choisir, page par page, la meilleure image.</p></div>
-                <div class="page-actions">${ext.recueilFonds && all.length ? `<span class="segmented rf-mode" role="radiogroup" aria-label="${esc(i18n('Façon de montrer les recueils'))}">${[['list', '📚 ' + i18n('Recueils')], ['fonds', '🏛 ' + i18n('Par fonds')]].map(([k, l]) => `<button type="button" role="radio" aria-checked="${ext.recueilFonds.mode() === k}" class="${ext.recueilFonds.mode() === k ? 'is-active' : ''}" data-rc-mode="${k}">${esc(l)}</button>`).join('')}</span>` : ''}<button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>＋ Nouveau recueil</button></div></header>
+                <div class="page-actions">${ext.recueilFonds && all.length ? `<span class="segmented rf-mode" role="radiogroup" aria-label="${esc(i18n('Façon de montrer les recueils'))}">${[['list', '📚 ' + i18n('Recueils')], ['fonds', '🏛 ' + i18n('Par fonds')]].map(([k, l]) => `<button type="button" role="radio" aria-checked="${ext.recueilFonds.mode() === k}" class="${ext.recueilFonds.mode() === k ? 'is-active' : ''}" data-rc-mode="${k}">${esc(l)}</button>`).join('')}</span>` : ''}${ext.recueilSens ? `<button type="button" class="icon-button" data-rc-settings title="${esc(i18n('Réglages des recueils'))}" aria-label="${esc(i18n('Réglages des recueils'))}">⚙️</button>` : ''}<button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>＋ Nouveau recueil</button></div></header>
             ${all.length || s.q ? '<div data-rc-bar></div>' : ''}${rows.length && view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: r.title, open: `data-open-recueil="${r.id}"`, lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '), `${plural(r.pages, 'page', 'pages')} · ${pctOf(r)} % transcrit`], when: r.updated_at, whenLabel: 'Modifié'}))) : rows.length ? UI.cardsHtml(rows.map(r => { const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0; // K9 : la vignette unique
                 return {thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: `${r.icon || '📚'} ${r.title}`, open: `data-open-recueil="${r.id}"`,
                     lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ') || 'Sans cote', `${plural(r.pages, 'page', 'pages')} · ${plural(r.versions, 'version', 'versions')}${r.links ? ` · 🔗 ${r.links}` : ''}`],
@@ -96,6 +96,7 @@
         </section>`;
         const sec = ws.querySelector('.h-rc');
         // 🏛 « Par fonds » (heritage-recueil-fonds.js) : la vue des fonds à la place des vignettes ; la recherche de la barre s'applique
+        sec.querySelector('[data-rc-settings]')?.addEventListener('click', () => ext.recueilSens.settings(() => ext.lists.recueils(++S().workspaceToken))); // ⚙️ profil, options
         sec.querySelectorAll('[data-rc-mode]').forEach(b => b.addEventListener('click', () => { ext.recueilFonds.setMode(b.dataset.rcMode); ext.lists.recueils(++S().workspaceToken); }));
         if (ext.recueilFonds && all.length && ext.recueilFonds.mode() === 'fonds') {
             sec.querySelectorAll(':scope > .ui-rows, :scope > .ui-cards, :scope > .empty-box, :scope > .ui-empty').forEach(x => x.remove());
@@ -759,9 +760,13 @@
         ...(ext.recueilEtat ? {etat: ['🗂', 'État des pages', 'Une case par page, une couleur par état'], todo: ['📋', 'Reste à faire', 'Ce qui reste, dans l’ordre conseillé']} : {}),
         ...(ext.recueilSommaire ? {chapters: ['📑', 'Sommaire', 'Chapitres et sous-chapitres, avec leur avancement']} : {}),
         ...(ext.recueilFiche ? {where: ['🏛', 'Où il est', 'Service d’archives, fonds, cote, liens, citation'], access: ['🔐', 'Qui peut le voir', 'Communicabilité, réutilisation, support, état']} : {}),
+        ...(ext.recueilSens ? {found: ['💡', 'Ce qu’on y trouve', 'Actes par année, noms, métiers, lieux, remarques à vérifier']} : {}),
     };
-    const DEFAULT_SUMMARY = ['cover', 'figures', 'etat', 'todo', 'chapters', 'where', 'access', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing'].map(type => ({type, on: true, n: type === 'toc' ? 20 : type === 'mosaic' ? 24 : 12, wide: ['description', 'toc', 'mosaic', 'versions', 'etat', 'todo', 'chapters'].includes(type)}));
-    const summaryBlocks = () => { const b = D.recueil.summary?.blocks; return Array.isArray(b) && b.length ? b : DEFAULT_SUMMARY; };
+    // le résumé d'un nouveau recueil : profil « Ma généalogie » ou « Centre d'archives » (« ⚙️ Réglages des recueils », heritage-recueil-sens.js)
+    const SUMMARY_ORDER = {genealogie: ['cover', 'figures', 'etat', 'todo', 'chapters', 'found', 'where', 'access', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing'],
+        archives: ['where', 'access', 'etat', 'todo', 'chapters', 'found', 'cover', 'figures', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing']};
+    const defaultSummary = () => SUMMARY_ORDER[ext.recueilSens?.opt('profil') === 'archives' ? 'archives' : 'genealogie'].filter(type => BLOCKS[type]).map(type => ({type, on: true, n: type === 'toc' ? 20 : type === 'mosaic' ? 24 : 12, wide: ['description', 'toc', 'mosaic', 'versions', 'etat', 'todo', 'chapters', 'found'].includes(type)}));
+    const summaryBlocks = () => { const b = D.recueil.summary?.blocks; return Array.isArray(b) && b.length ? b : defaultSummary(); };
     function blockHtml(b) {
         const [icon, label] = BLOCKS[b.type] || ['•', ''], title = b.title || label, pages = D.pages, imgs = D.images;
         const done = pages.filter(p => p.transcription.trim());
@@ -786,6 +791,7 @@
             case 'etat': case 'todo': inner = ext.recueilEtat ? ext.recueilEtat.block(b.type, b, etatCtx()) : ''; break;
             case 'chapters': inner = `<div data-rs-host="${b.n || 30}"></div>`; break; // rempli après (heritage-recueil-sommaire.js)
             case 'where': case 'access': inner = ext.recueilFiche ? ext.recueilFiche.block(b.type, etatCtx()) : ''; break;
+            case 'found': inner = '<div data-rsn-host></div>'; break; // rempli après (heritage-recueil-sens.js)
             case 'note': inner = b.text ? `<p>${nl(b.text)}</p>` : '<p class="muted">Note vide : « Personnaliser » pour l’écrire.</p>'; break;
         }
         return `<section class="maintenance-panel h-rc-block ${b.wide ? 'is-wide' : ''}"><h3>${icon} ${esc(title)}</h3>${inner}</section>`;
@@ -801,6 +807,7 @@
         bindEntityOpen(body);
         ext.recueilEtat?.bindBlocks(body, etatCtx()); // 📋 reste à faire
         ext.recueilFiche?.bindBlocks(body, etatCtx()); // 🏛 citer, le service, le mode consultation
+        body.querySelectorAll('[data-rsn-host]').forEach(el => { el.innerHTML = ext.recueilSens?.block(etatCtx(), el) || ''; }); // 💡 ce qu'on y trouve
         body.querySelectorAll('[data-rs-host]').forEach(el => { el.innerHTML = ext.recueilSommaire?.block({n: Number(el.dataset.rsHost)}, etatCtx(), el) || ''; }); // 📑 sommaire
         A().bindTableLinks?.();
     }
@@ -826,7 +833,7 @@
                     if (e.target.closest('[data-sb-del]')) { blocks.splice(i, 1); draw(); } });
                 box.addEventListener('change', e => { if (e.target.dataset.sbF === 'on') e.target.closest('[data-sb]').classList.toggle('is-hidden', !e.target.checked); });
                 dl.querySelector('[data-sb-note]').addEventListener('click', () => { read(); blocks.push({type: 'note', on: true, n: 12, wide: true, title: '', text: ''}); draw(); box.lastElementChild?.querySelector('textarea')?.focus(); });
-                dl.querySelector('[data-sb-reset]').addEventListener('click', () => { blocks = JSON.parse(JSON.stringify(DEFAULT_SUMMARY)); Object.keys(BLOCKS).forEach(type => { if (type !== 'note' && !blocks.some(b => b.type === type)) blocks.push({type, on: false, n: 12, wide: false}); }); draw(); });
+                dl.querySelector('[data-sb-reset]').addEventListener('click', () => { blocks = JSON.parse(JSON.stringify(defaultSummary())); Object.keys(BLOCKS).forEach(type => { if (type !== 'note' && !blocks.some(b => b.type === type)) blocks.push({type, on: false, n: 12, wide: false}); }); draw(); });
                 dl._read = read;
             },
             onSubmit: async form => { form.closest('dialog')._read(); await run('save_recueil', {...D.recueil, summary: {blocks}}, 'Résumé enregistré.'); },

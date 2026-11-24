@@ -60,7 +60,7 @@
         return `<div class="re-kpis">${box(`${c.photos}${exp ? ` / ${exp}` : ''}`, esc(isLiasse(D) ? (exp ? T('pièces photographiées sur les {n} attendues', {n: String(exp)}) : T('pièces photographiées')) : (exp ? T('pages photographiées sur les {n} attendues', {n: String(exp)}) : T('pages photographiées'))))}
             ${box(c.done + c.checked, esc(T('🟢 finies ou 🔵 relues')), 'ok')}${box(c.doing, esc(T('🟡 en cours')), 'cours')}${box(c.todo, esc(T('⚪ pas encore transcrites')))}${box(c.absent, esc(T('⛔ absentes')) + (c.blank ? ` · ${esc(plural(c.blank, 'blanche', 'blanches'))}` : ''), c.absent ? 'abs' : '')}</div>
             <div class="re-stack" role="img" aria-label="${esc(T('{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes', {a: c.done, b: c.checked, c: c.doing, d: c.todo, e: c.absent}))}">${seg('done', c.done)}${seg('checked', c.checked)}${seg('doing', c.doing)}${seg('todo', c.todo)}${seg('abs', c.absent + c.blank)}</div>
-            ${live && c.review + c.doubt ? `<p class="re-rel muted">${esc(T('Fiabilité :'))} ${c.review ? `<span class="re-pill q">👁 ${esc(plural(c.review, 'page à relire', 'pages à relire'))}</span>` : ''} ${c.doubt ? `<span class="re-pill q">❓ ${esc(plural(c.doubt, 'page avec des mots peu sûrs', 'pages avec des mots peu sûrs'))}</span>` : ''}</p>` : ''}`;
+            ${live && c.review + c.doubt && ext.recueilSens?.opt('fiabilite') !== false ? `<p class="re-rel muted">${esc(T('Fiabilité :'))} ${c.review ? `<span class="re-pill q">👁 ${esc(plural(c.review, 'page à relire', 'pages à relire'))}</span>` : ''} ${c.doubt ? `<span class="re-pill q">❓ ${esc(plural(c.doubt, 'page avec des mots peu sûrs', 'pages avec des mots peu sûrs'))}</span>` : ''}</p>` : ''}`;
     }
     const legendHtml = () => `<div class="re-leg">${[['s-fin', '🟢 ' + T('Finie')], ['s-relue', '🔵 ' + T('Relue')], ['s-cours', '🟡 ' + T('En cours')], ['s-todo', '⚪ ' + T('À faire')], ['s-abs', '⛔ ' + T('Absente')], ['s-pasligne', '🌐 ' + T('Pas en ligne')], ['s-blank', '▫ ' + T('Blanche')]].map(([c, l]) => `<span><i class="${c}"></i>${esc(l)}</span>`).join('')}</div>`;
 
@@ -118,7 +118,7 @@
         return null;
     }
     function holes(D) {
-        if (isLiasse(D)) return [];
+        if (isLiasse(D) || ext.recueilSens?.opt('trous') === false) return []; // réglage « Me signaler les trous de numérotation »
         const out = [], ok = okRead(D.recueil.id), P = D.pages;
         let prev = null;
         P.forEach(p => {
@@ -286,7 +286,7 @@
                 ${ro ? '' : `<span class="re-row"><button type="button" class="button small secondary" data-re-pabs>✎ ${esc(T('Changer'))}</button><button type="button" class="button small secondary" data-re-pback>✓ ${esc(T('Plus absente'))}</button></span>`}</p>` : `
             <div class="re-prow"><span class="re-k">${esc(T('État du texte'))}</span><span class="segmented re-seg" role="radiogroup" aria-label="${esc(T('État du texte'))}">${Object.entries(STATES).map(([k, [ic, l]]) => `<button type="button" role="radio" aria-checked="${p.state === k}" class="${p.state === k ? 'is-active' : ''}" data-re-pstate="${k}" ${ro ? 'disabled' : ''}>${ic} ${esc(T(l))}</button>`).join('')}</span></div>
             <p class="re-sub muted">${p.state_set ? `${esc(T('Choisi à la main'))} · <button type="button" class="link-button" data-re-pauto>↺ ${esc(T('Revenir à l’état calculé ({s})', {s: T(STATES[p.state_auto][1])}))}</button>` : p.act ? esc(T('Calculé par l’Atelier (acte n° {n})', {n: String(p.act.id)})) : esc(T('Calculé : texte écrit = en cours'))}</p>
-            <div class="re-prow"><span class="re-k">${esc(T('Fiabilité de la lecture'))}</span><span>${r ? `<span class="re-pill ${r[2]}">${r[0]} ${esc(T(r[1]))}</span>` : `<span class="muted">${esc(T('rien d’écrit'))}</span>`} ${p.act ? `<small class="muted">${esc(T('{r} lignes relues sur {n}', {r: String(p.act.reviewed), n: String(p.act.lines)}))}</small>` : ''}${p.doubt ? ` <small class="muted">· ${esc(plural(p.doubt, 'mot peu sûr', 'mots peu sûrs'))}</small>` : ''}</span></div>
+            <div class="re-prow" ${ext.recueilSens?.opt('fiabilite') === false ? 'hidden' : ''}><span class="re-k">${esc(T('Fiabilité de la lecture'))}</span><span>${r ? `<span class="re-pill ${r[2]}">${r[0]} ${esc(T(r[1]))}</span>` : `<span class="muted">${esc(T('rien d’écrit'))}</span>`} ${p.act ? `<small class="muted">${esc(T('{r} lignes relues sur {n}', {r: String(p.act.reviewed), n: String(p.act.lines)}))}</small>` : ''}${p.doubt ? ` <small class="muted">· ${esc(plural(p.doubt, 'mot peu sûr', 'mots peu sûrs'))}</small>` : ''}</span></div>
             <div class="re-prow"><label class="re-k" for="re-legi-${p.id}">${esc(T('Lisibilité'))}</label><select id="re-legi-${p.id}" data-re-plegi ${ro ? 'disabled' : ''}>${LEGI.map(([k, l]) => `<option value="${k}" ${p.legibility === k ? 'selected' : ''}>${esc(T(l))}</option>`).join('')}</select>
 </div>
             <div class="re-prow"><span class="re-k"></span><label class="re-check"><input type="checkbox" data-re-predo ${p.redo ? 'checked' : ''} ${ro ? 'disabled' : ''}> 📷 ${esc(T('Photo à refaire'))}</label></div>

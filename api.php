@@ -553,6 +553,7 @@ try {
         'recueils_for' => json_response(['recueils' => recueils_for_entity($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))]),
         'addr_map' => json_response(addr_map_data($pdo, $_GET)),
         'recueil_media_targets' => json_response(recueil_media_targets($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))),
+        'recueil_sens' => json_response(recueil_sens_data($pdo, $_GET)),
         'recueils_fonds' => json_response(recueils_fonds_data($pdo)),
         'archive_service_recueils' => json_response(archive_service_recueils($pdo, safe_int($_GET['id'] ?? 0))),
         'recueil_toc' => json_response(recueil_toc_list($pdo, safe_int($_GET['id'] ?? 0))),
