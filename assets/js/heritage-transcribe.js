@@ -20,7 +20,7 @@
     let deepRun = null; // 📑 « 🔬 Lecture approfondie » sur toutes les pages : la lecture en cours (elle suit l'Atelier d'un acte à l'autre, un texte par page)
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
 
-    const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', i18n('Naissance')], ['mariage', i18n('Mariage')], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', i18n('Recensement')], ['militaire', i18n('Registre militaire')], ['lettre', i18n('Lettre')], ['autre', i18n('Autre')]];
+    const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', i18n('Naissance')], ['mariage', i18n('Mariage')], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['notoriete', i18n('Acte de notoriété')], ['recensement', i18n('Recensement')], ['militaire', i18n('Registre militaire')], ['lettre', i18n('Lettre')], ['autre', i18n('Autre')]];
     const COLORS = ['#f6c343', '#7cc4f0', '#9be08f', '#f59ab0', '#c3a6f2', '#f7a35c', '#6fd6c8', '#e6e15a'];
     // des modèles d'acte, pour ne pas partir d'une page blanche
     let fixAfterSwitch = false; // 📑 un texte par page : la barre des corrections suit sur l'acte de l'autre page
@@ -780,7 +780,9 @@
             const rfT = perCombo && lastRichAll ? lastRichAll : lastRich;
             const tf = ext.txTrouve && rfT && (found.length || rfT.people.length) ? '<div data-tx-trouve></div>' : ''; // 🧭 le bloc riche (heritage-transcribe-trouve.js)
             const cta = ex && ex.people.length && ext.txActe ? `<div class="h-txa-cta"><span><b>${{mariage: '💍', bapteme: '💧', naissance: '👶', deces: '✝', sepulture: '⚱'}[ex.kind] || '📜'} ${esc(i18n('Ce que l’app a trouvé dans l’acte'))}</b> <small class="muted">${esc(A().plural ? A().plural(ex.people.length, 'personne') : ex.people.length)}${ex.date ? ' · ' + esc(ex.date.label) : ''}${ex.place ? ' · ' + esc(ex.place) : ''}</small></span><button type="button" class="button small" data-tx-cmd="found">✓ ${i18n('Ajouter à la généalogie')}…</button></div>` : '';
-            box.innerHTML = cta + kept + (tf || groups) + words || `<p class="muted h-tx-hint">${i18n('« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.')}</p>`;
+            const gb = GB(), gabTabs = gb ? `<div class="ui-tabs h-gab-tabs" role="tablist" aria-label="${esc(i18n('Ce que l’app a trouvé'))}">${[['found', `🧾 ${i18n('Ce que l’app a trouvé')}`], ['gab', `🧩 ${i18n('Gabarit')}`]].map(([k, l]) => `<button type="button" role="tab" class="ui-tab${gabTab === k ? ' is-active' : ''}" aria-selected="${gabTab === k}" data-gab-tab="${k}">${esc(l)}</button>`).join('')}</div>` : '';
+            if (gb && gabTab === 'gab') { box.innerHTML = gabTabs + '<div class="h-gab" data-gab-box></div>'; paintGabarit(); flowSoon(60); return; }
+            box.innerHTML = gabTabs + ((cta + kept + (tf || groups) + words) || `<p class="muted h-tx-hint">${i18n('« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.')}</p>`);
             if (tf) ext.txTrouve.mount($('[data-tx-trouve]'), {text: rfT === lastRichAll ? blankMarks(perCombo.text) : area.value, rf: rfT, kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
                 filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, people: t.data.people, keep: (f, pid) => keepAt(f, pid, rfT === lastRichAll), pageRef: rfT === lastRichAll ? perRef : pageForm === 'one' && PAGES.length > 1 ? pageRef : null,
                 gotoOf: rfT === lastRichAll ? (a, b) => { const r = perRef(a); return r ? `p${r.seg}:${r.at}:${r.at + (b - a)}` : `${a}:${b}`; } : null,
@@ -990,7 +992,34 @@
             // 📑 un texte par page : « Ce que l'app a trouvé » lit aussi les actes des autres pages (une carte par personne sur tout le document)
             perCombo = makeCombo(); lastRichAll = null; 
             if (perCombo) { try { lastRichAll = window.LCNDA_TXACTE?.richFind?.(blankMarks(perCombo.text), {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; } catch (_) { lastRichAll = null; } }
+            fillGabarit(src);
             paintMirror(); paintPeople(); status(i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}));
+        }
+        /* ─── 🧩 le gabarit (heritage-transcribe-gabarit.js) : les cases de la sorte d'acte, remplies par Repérer, jamais une case ✓ ou écrite écrasée ─── */
+        const GB = () => (ext.txGabarit && ext.txGabarit.mode() === 'gabarit' ? ext.txGabarit : null);
+        let gabTab = 'found';
+        const kindNow = () => $('[data-tx="kind"]').value;
+        function fillGabarit(src) {
+            const g = GB(); if (!g || !g.has(kindNow())) return;
+            const next = g.fill(t.data.gabarit, kindNow(), lastExtract, src ?? findText());
+            if (JSON.stringify(next) !== JSON.stringify(t.data.gabarit || null)) { t.data.gabarit = next; touch(); }
+        }
+        const gabWhere = s0 => { const r = pageRef(s0); return r ? i18n('page {n}, l. {line}', {n: r.n, line: r.line}) : i18n('l. {n}', {n: area.value.slice(0, s0).split('\n').length}); };
+        function paintGabarit() { const box = $('[data-gab-box]'); if (box) GB()?.render(box, {gab: t.data.gabarit, kind: kindNow(), guess: lastExtract?.kind, where: gabWhere}); }
+        function gabCount() { const g = GB(), el = $('[data-gab-count]'); if (!g || !el || !g.G[kindNow()]) return; const F = g.G[kindNow()], f = t.data.gabarit?.fields || {};
+            el.textContent = i18n('Cases remplies : {a}/{b} · vérifiées : {c}', {a: F.filter(([k]) => f[k]?.v).length, b: F.length, c: F.filter(([k]) => f[k]?.ok).length}); }
+        function gabField(k) { const g = t.data.gabarit = (t.data.gabarit && t.data.gabarit.kind === kindNow()) ? t.data.gabarit : {kind: kindNow(), fields: {}}; g.fields = g.fields || {}; return g; }
+        /** le texte à trous d'avant (« Coller le texte à trous » dans le menu ⋯, ou le réglage « Modèle d'acte : texte à trous ») */
+        async function pasteTemplate() { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast(i18n('Pas de modèle pour ce genre d’acte.'), 'error'); const sgT = multiPages() ? PG.segments(area.value)[segIx()] : null; if ((sgT ? area.value.slice(sgT.s, sgT.e) : area.value).trim() && !await A().confirmBox(i18n('Le texte déjà écrit est gardé.'), {title: i18n('Ajouter le modèle à la fin du texte ?'), okLabel: i18n('Ajouter le modèle')})) return; if (multiPages()) { const sg = PG.segments(area.value)[segIx()]; if (sg) { snap(); spliceText(sg.e, sg.e, (area.value.slice(sg.s, sg.e).trim() ? '\n\n' : '') + tp); area.dispatchEvent(new Event('input')); return; } } // 📑 dans la page affichée
+                area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
+        function gabMenu(at) {
+            const g = GB() || ext.txGabarit, m = g.mode(), set = v => { g.setMode(v); paintPeople(); };
+            UI.menuAt?.(at, [
+                {icon: m === 'gabarit' ? '✓' : '', label: i18n('🧩 Gabarit à cases (conseillé)'), run: () => set('gabarit')},
+                {icon: m === 'texte' ? '✓' : '', label: i18n('Texte à trous (comme avant)'), run: () => set('texte')},
+                '-', {icon: '🧭', label: i18n('Remplir à nouveau'), run: () => runDetect()},
+                {icon: '📝', label: i18n('Coller le texte à trous'), run: () => pasteTemplate()},
+            ], {title: i18n('Modèle d’acte')});
         }
         /** garder une personne de « Ce que l'app a trouvé » ; sur toutes les pages (un texte par page) : une mention sur la page affichée */
         function keepAt(f, pid, all) {
@@ -1007,8 +1036,23 @@
                 onOpen: dg => { const q = dg.querySelector('.pk-search:not([hidden]) .pk-input'); if (!q) return; q.value = p.name; setTimeout(() => { q.focus(); q.dispatchEvent(new Event('input', {bubbles: true})); }, 30); }, // les fiches du nom lu s’affichent tout de suite
                 onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) return window.LCNDA_UI.fail(f.elements.tx_pick, i18n('Choisis une fiche.')); p.person_id = chosen; touch(); paintPeople(); }});
         }
+        $('[data-tx-found]').addEventListener('input', e => {
+            const k = e.target.dataset?.gabField; if (!k) return; const g = gabField(), f = g.fields[k] = g.fields[k] || {v: '', s: -1, e: -1};
+            f.v = e.target.value.slice(0, 300); f.own = !!f.v; f.ok = false; if (!f.v) delete g.fields[k];
+            e.target.className = `h-gab-v ${!f.v ? 'is-empty' : 'is-own'}`; touch(); gabCount();
+        });
+        $('[data-tx-found]').addEventListener('keydown', e => {
+            const k = e.target.dataset?.gabField; if (!k || e.key !== 'Enter') return; e.preventDefault(); e.stopPropagation();
+            const g = gabField(), f = g.fields[k]; if (f?.v) { snap(); f.ok = true; touch(); }
+            paintGabarit(); const all = [...dlg.querySelectorAll('[data-gab-field]')], i = all.findIndex(x => x.dataset.gabField === k); (all[i + 1] || all[i])?.focus();
+        });
         $('[data-tx-found]').addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
+            // 🧩 le gabarit : onglets, ✓ vérifié, la sorte devinée, le menu ⋯
+            if (d.gabTab) { gabTab = d.gabTab; if (gabTab === 'gab') { fillGabarit(); } paintPeople(); return; }
+            if (d.gabOk) { const g = gabField(); const f = g.fields[d.gabOk]; if (!f?.v) return; snap(); f.ok = true; touch(); paintGabarit(); $(`[data-gab-field="${d.gabOk}"]`)?.focus(); return; }
+            if (d.gabKind) { const sel = $('[data-tx="kind"]'); if (sel && [...sel.options].some(o => o.value === d.gabKind)) { sel.value = d.gabKind; sel.dispatchEvent(new Event('change', {bubbles: true})); } return; }
+            if ('gabMenu' in d) return gabMenu(b);
             if (d.txLookword) return ext.readingAid?.open({q: d.txLookword, lang: aideLang($('[data-tx-lang]').value)});
             if (d.txGoto && d.txGoto[0] === 'p') { const [i, s, en] = d.txGoto.slice(1).split(':').map(Number); if (i !== pageIx) return void goPage(i, {goto: {s, e: en}}); return gotoRange(s, en); } // 📑 un texte par page : l'acte de l'autre page
             if (d.txGoto) { const [s, en] = d.txGoto.split(':').map(Number); return gotoRange(s, en); }
@@ -1507,8 +1551,9 @@
             if (k === 'lines') return linkLines({manual: true});
             if (k === 'found') return openFound();
             if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast(i18n('L’aide à la lecture n’est pas chargée.'), 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
-            if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast(i18n('Pas de modèle pour ce genre d’acte.'), 'error'); const sgT = multiPages() ? PG.segments(area.value)[segIx()] : null; if ((sgT ? area.value.slice(sgT.s, sgT.e) : area.value).trim() && !await A().confirmBox(i18n('Le texte déjà écrit est gardé.'), {title: i18n('Ajouter le modèle à la fin du texte ?'), okLabel: i18n('Ajouter le modèle')})) return; if (multiPages()) { const sg = PG.segments(area.value)[segIx()]; if (sg) { snap(); spliceText(sg.e, sg.e, (area.value.slice(sg.s, sg.e).trim() ? '\n\n' : '') + tp); area.dispatchEvent(new Event('input')); return; } } // 📑 dans la page affichée
-                area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
+            if (k === 'template' && GB() && GB().has(kindNow())) { gabTab = 'gab'; showStep('find'); fillGabarit(); paintPeople(); return; }
+            if (k === 'template' && GB() && kindNow() === 'apreciser') { gabTab = 'gab'; showStep('find'); paintPeople(); return; }
+            if (k === 'template') return pasteTemplate();
             if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText()], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
             if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast(i18n('Texte copié.'))).catch(() => toast(i18n('Copie impossible ici.'), 'error')); return; }
             if (k === 'print') return printIt();
@@ -1528,7 +1573,7 @@
             if (e.target.matches('[data-tx-znote]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { z.note = e.target.value.slice(0, 300); touch(); } }
             if (e.target.matches('[data-tx-zcolor]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { if (!e.target.dataset.snapped) { snap(); e.target.dataset.snapped = '1'; } z.c = e.target.value; touch(); paintZoneRects(); paintMirror(); } }
         });
-        dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); paintProg(); }
+        dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); if (GB()) { fillGabarit(); paintPeople(); } } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); paintProg(); }
             if (e.target.matches('[data-tx-lang]')) { try { localStorage.setItem(TX_LANG_KEY, e.target.value); } catch (_) {} if (found.length) paintPeople(); } }); // la langue : retenue, et les mots connus suivent
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
         const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };

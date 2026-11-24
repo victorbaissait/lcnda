@@ -330,3 +330,18 @@
 /* 📑 la lecture approfondie de toutes les pages : la barre « page 2 sur 4 » et ■ Arrêter */
 .h-tx-deepall{display:flex;align-items:center;gap:10px;padding:4px 10px;font-size:12.5px;border-bottom:1px solid var(--line,#e3e5ea)}
 .h-tx-deepall .h-txa-bar{flex:1;min-width:60px;margin:0}
+/* 🧩 le gabarit (heritage-transcribe-gabarit.js) : vert = rempli par Repérer, gras = vérifié ✓, pointillés = à remplir */
+.h-gab-tabs{margin:0 0 8px}
+.h-gab{display:grid;gap:8px;min-width:0}
+.h-gab-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.h-gab-head .spacer{flex:1}
+.h-gab-fields{display:grid;grid-template-columns:minmax(90px,auto) minmax(0,1fr) auto;gap:6px 8px;align-items:center;font-size:13px}
+.h-gab-k{color:var(--muted,#5b6170)}
+.h-gab-v{min-width:0;width:100%;padding:4px 8px;border:1.5px solid var(--line,#c9ced8);background:var(--panel,#fff);color:inherit;font:inherit}
+.h-gab-v.is-empty{border-style:dashed}
+.h-gab-v.is-auto{border-color:#1a7f37;background:color-mix(in srgb,#1a7f37 10%,transparent)}
+.h-gab-v.is-ok{font-weight:700;border-color:currentColor}
+.h-gab-a{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-size:12px}
+.h-gab-ok{color:#1a7f37;font-weight:800}
+.h-gab-hint,.h-gab-empty p{font-size:12px;margin:0}
+@media (max-width:520px){.h-gab-fields{grid-template-columns:minmax(0,1fr) auto}.h-gab-k{grid-column:1 / -1;margin-top:4px}}

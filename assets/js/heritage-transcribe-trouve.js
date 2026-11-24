@@ -33,7 +33,7 @@
 
     const FIELD = {age: 'Âge', birth: 'Naissance estimée', job: 'Métier', origin: 'Origine', birthplace: 'Lieu de naissance', residence: 'Domicile', link: 'Lien', role: 'Rôle', status: 'État'};
     const ROLE = {epoux: 'Époux', epouse: 'Épouse', pere: 'Père', mere: 'Mère', sujet: 'Enfant', defunt: 'Défunt', conjoint: 'Conjoint', temoin: 'Témoin', parrain: 'Parrain', marraine: 'Marraine', declarant: 'Déclarant', parent: 'Parent', autre: 'Autre personne'};
-    const KIND_LABEL = {mariage: 'Mariage', bapteme: 'Baptême', naissance: 'Naissance', deces: 'Décès', sepulture: 'Sépulture', notarial: 'Acte notarié', militaire: 'Registre militaire', recensement: 'Recensement', lettre: 'Lettre', autre: 'Autre'};
+    const KIND_LABEL = {mariage: 'Mariage', bapteme: 'Baptême', naissance: 'Naissance', deces: 'Décès', sepulture: 'Sépulture', notarial: 'Acte notarié', notoriete: 'Acte de notoriété', militaire: 'Registre militaire', recensement: 'Recensement', lettre: 'Lettre', autre: 'Autre'};
     const PLACE_KIND = {pays: 'pays', region: 'région', ville: 'ville', lieu: 'lieu'};
     const EVENT_ICON = {bataille: '⚔️', prisonniers: '⛓', delivrance: '🕊', service: '🎖', unite: '🎖', conscrit: '🎖', malheur: '⚠️', retour: '🏠'};
 

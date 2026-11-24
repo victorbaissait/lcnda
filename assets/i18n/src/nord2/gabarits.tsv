@@ -1,0 +1,34 @@
+fr ¦ sk ¦ nb
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Vyber druh záznamu (hore): každý druh má svoje polia. ¦ Velg dokumenttype (øverst): hver type har sine egne felt.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Vyzerá to na: {x}. Použiť túto šablónu? ¦ Det ser ut som: {x}. Bruke denne malen?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Vyplnené polia: {a}/{b} · overené: {c} ¦ Utfylte felt: {a}/{b} · kontrollert: {c}
+Gabarit ¦ Šablóna ¦ Mal
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Zelené: vyplnené funkciou „🧭 Nájsť“, na overenie · Enter: ✓ overené · kliknutie na „r. 3“ ukáže miesto v texte. ¦ Grønt: fylt ut av «🧭 Finn», skal kontrolleres · Enter: ✓ kontrollert · et klikk på «l. 3» viser stedet.
+Date du baptême ¦ Dátum krstu ¦ Dåpsdato
+Père, métier ¦ Otec, povolanie ¦ Far, yrke
+Officier de l’état civil ¦ Matrikár ¦ Folkeregisterfører
+Parents de l’époux ¦ Rodičia ženícha ¦ Brudgommens foreldre
+Parents de l’épouse ¦ Rodičia nevesty ¦ Brudens foreldre
+Contrat de mariage ¦ Manželská zmluva ¦ Ektepakt
+Publications ¦ Ohlášky ¦ Lysing
+Décédé le ¦ Zomrel dňa ¦ Død den
+Déclarants ¦ Oznamovatelia ¦ Anmeldere
+Date d’inhumation ¦ Dátum pohrebu ¦ Begravelsesdato
+Parties ¦ Strany ¦ Parter
+Juge ou notaire ¦ Sudca alebo notár ¦ Dommer eller notarius
+Personne concernée ¦ Dotknutá osoba ¦ Berørt person
+Ce qui est attesté ¦ Čo sa dosvedčuje ¦ Det som bekreftes
+Rue ou maison ¦ Ulica alebo dom ¦ Gate eller hus
+Ménage ¦ Domácnosť ¦ Husstand
+Matricule ¦ Matričné číslo ¦ Stamrullenummer
+Classe ¦ Ročník ¦ Årsklasse
+Régiment ¦ Pluk ¦ Regiment
+Campagnes ¦ Ťaženia ¦ Felttog
+Blessures ¦ Zranenia ¦ Sår
+page {n}, l. {line} ¦ strana {n}, r. {line} ¦ side {n}, l. {line}
+l. {n} ¦ r. {n} ¦ l. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Šablóna s poliami (odporúčané) ¦ 🧩 Mal med felt (anbefalt)
+Texte à trous (comme avant) ¦ Text s medzerami (ako predtým) ¦ Tekst med hull (som før)
+Remplir à nouveau ¦ Vyplniť znova ¦ Fyll ut på nytt
+Coller le texte à trous ¦ Vložiť text s medzerami ¦ Lim inn teksten med hull

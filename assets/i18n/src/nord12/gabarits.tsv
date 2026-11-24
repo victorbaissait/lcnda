@@ -1,0 +1,34 @@
+fr ¦ ru ¦ uk
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Выбери вид акта (вверху): у каждого вида свои поля. ¦ Обери вид акта (угорі): кожен вид має свої поля.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Похоже на: {x}. Использовать этот шаблон? ¦ Схоже на: {x}. Використати цей шаблон?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Заполнено полей: {a}/{b} · проверено: {c} ¦ Заповнено полів: {a}/{b} · перевірено: {c}
+Gabarit ¦ Шаблон ¦ Шаблон
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Зелёное: заполнено «🧭 Найти», нужно проверить · Enter: ✓ проверено · щелчок по «стр. 3» показывает место в тексте. ¦ Зелене: заповнено «🧭 Знайти», треба перевірити · Enter: ✓ перевірено · клік на «р. 3» показує місце в тексті.
+Date du baptême ¦ Дата крещения ¦ Дата хрещення
+Père, métier ¦ Отец, занятие ¦ Батько, заняття
+Officier de l’état civil ¦ Чиновник записи актов ¦ Реєстратор актів
+Parents de l’époux ¦ Родители жениха ¦ Батьки нареченого
+Parents de l’épouse ¦ Родители невесты ¦ Батьки нареченої
+Contrat de mariage ¦ Брачный договор ¦ Шлюбний договір
+Publications ¦ Оглашения ¦ Оголошення
+Décédé le ¦ Умер ¦ Помер
+Déclarants ¦ Заявители ¦ Заявники
+Date d’inhumation ¦ Дата погребения ¦ Дата поховання
+Parties ¦ Стороны ¦ Сторони
+Juge ou notaire ¦ Судья или нотариус ¦ Суддя або нотаріус
+Personne concernée ¦ Лицо, о котором идёт речь ¦ Особа, про яку йдеться
+Ce qui est attesté ¦ Что удостоверяется ¦ Що засвідчується
+Rue ou maison ¦ Улица или дом ¦ Вулиця або будинок
+Ménage ¦ Домохозяйство ¦ Домогосподарство
+Matricule ¦ Учётный номер ¦ Обліковий номер
+Classe ¦ Призывной год ¦ Призовний рік
+Régiment ¦ Полк ¦ Полк
+Campagnes ¦ Походы ¦ Походи
+Blessures ¦ Ранения ¦ Поранення
+page {n}, l. {line} ¦ стр. {n}, строка {line} ¦ с. {n}, р. {line}
+l. {n} ¦ стр. {n} ¦ р. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Шаблон с полями (рекомендуется) ¦ 🧩 Шаблон з полями (рекомендовано)
+Texte à trous (comme avant) ¦ Текст с пропусками (как раньше) ¦ Текст із пропусками (як раніше)
+Remplir à nouveau ¦ Заполнить заново ¦ Заповнити знову
+Coller le texte à trous ¦ Вставить текст с пропусками ¦ Вставити текст із пропусками

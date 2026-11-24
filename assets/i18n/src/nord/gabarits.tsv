@@ -1,0 +1,34 @@
+fr ¦ cs ¦ sv ¦ da
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Vyber druh záznamu (nahoře): každý druh má svá pole. ¦ Välj typ av handling (överst): varje typ har sina egna rutor. ¦ Vælg dokumenttypen (øverst): hver type har sine egne felter.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Vypadá to na: {x}. Použít tuto šablonu? ¦ Det ser ut som: {x}. Använda den här mallen? ¦ Det ligner: {x}. Bruge denne skabelon?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Vyplněná pole: {a}/{b} · ověřená: {c} ¦ Ifyllda rutor: {a}/{b} · kontrollerade: {c} ¦ Udfyldte felter: {a}/{b} · kontrolleret: {c}
+Gabarit ¦ Šablona ¦ Mall ¦ Skabelon
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Zelené: vyplněno funkcí „🧭 Najít“, k ověření · Enter: ✓ ověřeno · kliknutí na „ř. 3“ ukáže místo v textu. ¦ Grönt: ifyllt av ”🧭 Hitta”, ska kontrolleras · Enter: ✓ kontrollerat · ett klick på ”r. 3” visar stället. ¦ Grønt: udfyldt af »🧭 Find«, skal kontrolleres · Enter: ✓ kontrolleret · et klik på »l. 3« viser stedet.
+Date du baptême ¦ Datum křtu ¦ Dopdatum ¦ Dåbsdato
+Père, métier ¦ Otec, povolání ¦ Far, yrke ¦ Far, erhverv
+Officier de l’état civil ¦ Matrikář ¦ Registerförare ¦ Personregisterfører
+Parents de l’époux ¦ Rodiče ženicha ¦ Brudgummens föräldrar ¦ Brudgommens forældre
+Parents de l’épouse ¦ Rodiče nevěsty ¦ Brudens föräldrar ¦ Brudens forældre
+Contrat de mariage ¦ Manželská smlouva ¦ Äktenskapsförord ¦ Ægtepagt
+Publications ¦ Ohlášky ¦ Lysning ¦ Lysning
+Décédé le ¦ Zemřel dne ¦ Död den ¦ Død den
+Déclarants ¦ Oznamovatelé ¦ Anmälare ¦ Anmeldere
+Date d’inhumation ¦ Datum pohřbu ¦ Begravningsdatum ¦ Begravelsesdato
+Parties ¦ Strany ¦ Parter ¦ Parter
+Juge ou notaire ¦ Soudce nebo notář ¦ Domare eller notarie ¦ Dommer eller notar
+Personne concernée ¦ Dotčená osoba ¦ Berörd person ¦ Berørt person
+Ce qui est attesté ¦ Co se dosvědčuje ¦ Det som intygas ¦ Det, der bevidnes
+Rue ou maison ¦ Ulice nebo dům ¦ Gata eller hus ¦ Gade eller hus
+Ménage ¦ Domácnost ¦ Hushåll ¦ Husstand
+Matricule ¦ Matriční číslo ¦ Stamrullenummer ¦ Stamrullenummer
+Classe ¦ Ročník ¦ Årsklass ¦ Årgang
+Régiment ¦ Pluk ¦ Regemente ¦ Regiment
+Campagnes ¦ Tažení ¦ Fälttåg ¦ Felttog
+Blessures ¦ Zranění ¦ Sår ¦ Sår
+page {n}, l. {line} ¦ strana {n}, ř. {line} ¦ sida {n}, r. {line} ¦ side {n}, l. {line}
+l. {n} ¦ ř. {n} ¦ r. {n} ¦ l. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Šablona s poli (doporučeno) ¦ 🧩 Mall med rutor (rekommenderas) ¦ 🧩 Skabelon med felter (anbefalet)
+Texte à trous (comme avant) ¦ Text s mezerami (jako dřív) ¦ Lucktext (som förut) ¦ Tekst med huller (som før)
+Remplir à nouveau ¦ Vyplnit znovu ¦ Fyll i igen ¦ Udfyld igen
+Coller le texte à trous ¦ Vložit text s mezerami ¦ Klistra in lucktexten ¦ Indsæt teksten med huller

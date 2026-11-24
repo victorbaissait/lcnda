@@ -1,0 +1,34 @@
+fr ¦ lb
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Wiel d’Aart vum Akt (uewen): all Aart huet hir eege Felder.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Gesäit aus wéi: {x}. Dës Schabloun benotzen?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Ausgefëllte Felder: {a}/{b} · iwwerpréift: {c}
+Gabarit ¦ Schabloun
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Gréng: vun „🧭 Erkennen“ ausgefëllt, nach ze iwwerpréiwen · Enter: ✓ iwwerpréift · e Klick op „Z. 3“ weist d’Plaz.
+Date du baptême ¦ Datum vun der Daf
+Père, métier ¦ Papp, Beruff
+Officier de l’état civil ¦ Zivilstandsbeamten
+Parents de l’époux ¦ Elteren vum Bräitchemann
+Parents de l’épouse ¦ Elteren vun der Braut
+Contrat de mariage ¦ Hochzäitskontrakt
+Publications ¦ Opgebot
+Décédé le ¦ Gestuerwen den
+Déclarants ¦ Deklaranten
+Date d’inhumation ¦ Datum vun der Begriefnes
+Parties ¦ Parteien
+Juge ou notaire ¦ Riichter oder Notaire
+Personne concernée ¦ Betraffe Persoun
+Ce qui est attesté ¦ Wat bezeit gëtt
+Rue ou maison ¦ Strooss oder Haus
+Ménage ¦ Stot
+Matricule ¦ Matrikelnummer
+Classe ¦ Joergang
+Régiment ¦ Regiment
+Campagnes ¦ Feldzich
+Blessures ¦ Blessuren
+page {n}, l. {line} ¦ Säit {n}, Z. {line}
+l. {n} ¦ Z. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Schabloun mat Felder (recommandéiert)
+Texte à trous (comme avant) ¦ Lückentext (wéi virdrun)
+Remplir à nouveau ¦ Nach eng Kéier ausfëllen
+Coller le texte à trous ¦ De Lückentext afügen

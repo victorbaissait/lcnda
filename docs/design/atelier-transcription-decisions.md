@@ -72,3 +72,8 @@ Chaque gros outil : maquette d'abord.
     - ✅ FAIT le 22 novembre : « ✨ Lire ▾ » montre « Lignes déjà écrites — Page 1 : 39 · Page 2 : 0 ».
     - ✅ FAIT le 22 novembre : choix « Seulement les pages pas encore lues » (lecture rapide, imprimé, approfondie) ; si toutes ont du texte : « Toutes les pages ont déjà du texte. »
     - ✅ CORRIGÉ le 22 novembre (vraie cause, dans l'app) : quand la visionneuse passait de « lecture seule » à « modifiable », un 2e contrôleur se branchait sur le même bloc des pages, et l'ancien y redessinait les pages de l'image d'avant (ex. 4 pages sous une image qui en a 2). Chaque nouveau montage a maintenant son propre bloc. Aussi dans l'essai : « Ajouter à une fiche, page 2 » attend la bulle de cet ajout (celle d'avant pouvait avoir disparu). 6 passages sur 6 réussis, 3 en même temps.
+
+## 3b · Gabarits d'actes (choix « tout A », 22 novembre)
+- ✅ Étape 1 FAITE : onglet « 🧩 Gabarit » à côté de « Ce que l'app a trouvé », 9 gabarits (dont la nouvelle sorte « Acte de notoriété »), remplis par Repérer sans écraser une case ✓ ou écrite, lien vers le passage (« l. 3 », « page 2, l. 3 »), gardé avec l'acte (vérifié côté serveur), réglage « Modèle d'acte » (menu ⋯), sorte devinée en « À préciser », FAQ (31 langues). Au passage : « a été baptisé Jean, … fils de Pierre » — le prénom seul de l'enfant est reconnu (avant, le père passait pour l'enfant).
+- Étape 2 : « ✓ Ajouter à la généalogie » depuis les cases, avec aperçu.
+- Étape 3 : « ＋ Ajouter une case », « 🧩 Mes gabarits », export (tableau à l'impression, ⤓ Tableur par sorte).

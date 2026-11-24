@@ -15,7 +15,7 @@ declare(strict_types=1);
  * (titre puis texte), et chacun se modifie dans l'Atelier. Les textes d'avant qui différaient : gardés l'un sous l'autre
  * (migration 102, act_doc_text_merge_all).
  */
-const TRANSCRIPTION_KINDS = ['apreciser', 'naissance', 'bapteme', 'mariage', 'deces', 'sepulture', 'notarial', 'recensement', 'militaire', 'lettre', 'autre'];
+const TRANSCRIPTION_KINDS = ['apreciser', 'naissance', 'bapteme', 'mariage', 'deces', 'sepulture', 'notarial', 'notoriete', 'recensement', 'militaire', 'lettre', 'autre'];
 
 function act_transcriptions_ensure(PDO $pdo): void
 {
@@ -240,6 +240,17 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     $pageViews = [];
     foreach (array_slice(is_array($data['pageViews'] ?? null) ? $data['pageViews'] : [], 0, 200, true) as $mid => $pv) { if (safe_int($mid) > 0 && is_array($pv)) { $pageViews[(string) safe_int($mid)] = $cleanOne($pv); } }
     $status = in_array($data['status'] ?? '', ['todo', 'doing', 'checked', 'done'], true) ? $data['status'] : '';
+    // 🧩 le gabarit (heritage-transcribe-gabarit.js) : la sorte d'acte et ses cases {v, s, e, ok, own} — du texte borné, 40 cases au plus
+    $gabarit = null; $gb = is_array($data['gabarit'] ?? null) ? $data['gabarit'] : null;
+    if ($gb && in_array($gb['kind'] ?? '', TRANSCRIPTION_KINDS, true)) {
+        $gf = [];
+        foreach (array_slice(is_array($gb['fields'] ?? null) ? $gb['fields'] : [], 0, 40, true) as $k => $f) {
+            if (!is_string($k) || !preg_match('/^[a-z_]{1,24}$/', $k) || !is_array($f)) { continue; }
+            $v = mb_substr(safe_text(is_scalar($f['v'] ?? '') ? (string) ($f['v'] ?? '') : ''), 0, 300); if ($v === '') { continue; }
+            $gf[$k] = ['v' => $v, 's' => max(-1, (int) ($f['s'] ?? -1)), 'e' => max(-1, (int) ($f['e'] ?? -1))] + (!empty($f['ok']) ? ['ok' => true] : []) + (!empty($f['own']) ? ['own' => true] : []);
+        }
+        $gabarit = ['kind' => $gb['kind'], 'fields' => (object) $gf];
+    }
     // 📜 le texte lu autour de l'acte sur une capture d'écran (« Saint-Amand-Montrond, 1807-1809, N, M, D », « 139 / 268 ») : pour la source
     $frame = mb_substr(safe_text(is_string($data['frame_text'] ?? null) ? $data['frame_text'] : ''), 0, 600);
     // 🌐 la traduction gardée avec la transcription (« Traduire », lib/plus_famille.php) : du texte, borné
@@ -248,7 +259,7 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     $reviewed = array_values(array_unique(array_filter(array_slice(is_array($data['reviewed'] ?? null) ? $data['reviewed'] : [], -5000), static fn($k) => is_string($k) && preg_match('/^[0-9a-z]{1,10}$/', $k))));
     // 📑 un acte en plusieurs pages, un seul texte coupé par « — page 2 — » : les médias des morceaux du texte, dans l'ordre du texte
     $pages = array_values(array_unique(array_filter(array_map('safe_int', array_slice(is_array($data['pages'] ?? null) ? $data['pages'] : [], 0, 200)), static fn($v) => $v > 0)));
-    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($pageViews ? ['pageViews' => $pageViews] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($pageViews ? ['pageViews' => $pageViews] : []) + ($gabarit ? ['gabarit' => $gabarit] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
 }
 
 function save_act_transcription(PDO $pdo, array $data): array

@@ -1,0 +1,34 @@
+fr ¦ en ¦ es ¦ de ¦ it ¦ pt ¦ pl ¦ nl
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Choose the kind of record (at the top): each kind has its own boxes. ¦ Elige el tipo de acta (arriba): cada tipo tiene sus casillas. ¦ Wähle die Art der Urkunde (oben): Jede Art hat ihre eigenen Felder. ¦ Scegli il tipo di atto (in alto): ogni tipo ha le sue caselle. ¦ Escolhe o tipo de ato (em cima): cada tipo tem as suas casas. ¦ Wybierz rodzaj aktu (u góry): każdy rodzaj ma swoje pola. ¦ Kies het soort akte (bovenaan): elk soort heeft zijn eigen vakjes.
+On dirait : {x}. Utiliser ce gabarit ? ¦ It looks like: {x}. Use this template? ¦ Parece: {x}. ¿Usar esta plantilla? ¦ Sieht aus wie: {x}. Diese Vorlage verwenden? ¦ Sembra: {x}. Usare questo modello? ¦ Parece: {x}. Usar este modelo? ¦ Wygląda na: {x}. Użyć tego szablonu? ¦ Lijkt op: {x}. Dit sjabloon gebruiken?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Boxes filled: {a}/{b} · checked: {c} ¦ Casillas rellenas: {a}/{b} · verificadas: {c} ¦ Ausgefüllte Felder: {a}/{b} · geprüft: {c} ¦ Caselle compilate: {a}/{b} · verificate: {c} ¦ Casas preenchidas: {a}/{b} · verificadas: {c} ¦ Wypełnione pola: {a}/{b} · sprawdzone: {c} ¦ Ingevulde vakjes: {a}/{b} · gecontroleerd: {c}
+Gabarit ¦ Template ¦ Plantilla ¦ Vorlage ¦ Modello ¦ Modelo ¦ Szablon ¦ Sjabloon
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Green: filled in by “🧭 Spot”, to be checked · Enter: ✓ checked · a click on “l. 3” shows the passage. ¦ Verde: rellenado por «🧭 Detectar», por verificar · Intro: ✓ verificado · un clic en «l. 3» muestra el pasaje. ¦ Grün: von „🧭 Erkennen“ ausgefüllt, zu prüfen · Eingabe: ✓ geprüft · ein Klick auf „Z. 3“ zeigt die Stelle. ¦ Verde: compilato da «🧭 Individua», da verificare · Invio: ✓ verificato · un clic su «r. 3» mostra il passaggio. ¦ Verde: preenchido por «🧭 Detetar», a verificar · Enter: ✓ verificado · um clique em «l. 3» mostra a passagem. ¦ Zielone: wypełnione przez „🧭 Wyszukaj”, do sprawdzenia · Enter: ✓ sprawdzone · kliknięcie „w. 3” pokazuje fragment. ¦ Groen: ingevuld door ‘🧭 Herkennen’, nog te controleren · Enter: ✓ gecontroleerd · een klik op ‘r. 3’ toont de passage.
+Date du baptême ¦ Date of baptism ¦ Fecha del bautismo ¦ Taufdatum ¦ Data del battesimo ¦ Data do batismo ¦ Data chrztu ¦ Datum van de doop
+Père, métier ¦ Father, occupation ¦ Padre, oficio ¦ Vater, Beruf ¦ Padre, mestiere ¦ Pai, profissão ¦ Ojciec, zawód ¦ Vader, beroep
+Officier de l’état civil ¦ Registrar ¦ Oficial del registro civil ¦ Standesbeamter ¦ Ufficiale di stato civile ¦ Oficial do registo civil ¦ Urzędnik stanu cywilnego ¦ Ambtenaar van de burgerlijke stand
+Parents de l’époux ¦ Groom’s parents ¦ Padres del novio ¦ Eltern des Bräutigams ¦ Genitori dello sposo ¦ Pais do noivo ¦ Rodzice pana młodego ¦ Ouders van de bruidegom
+Parents de l’épouse ¦ Bride’s parents ¦ Padres de la novia ¦ Eltern der Braut ¦ Genitori della sposa ¦ Pais da noiva ¦ Rodzice panny młodej ¦ Ouders van de bruid
+Contrat de mariage ¦ Marriage contract ¦ Capitulaciones matrimoniales ¦ Ehevertrag ¦ Contratto di matrimonio ¦ Convenção antenupcial ¦ Intercyza ¦ Huwelijkscontract
+Publications ¦ Banns ¦ Proclamas ¦ Aufgebote ¦ Pubblicazioni ¦ Proclamas ¦ Zapowiedzi ¦ Afkondigingen
+Décédé le ¦ Died on ¦ Fallecido el ¦ Gestorben am ¦ Morto il ¦ Falecido em ¦ Zmarł dnia ¦ Overleden op
+Déclarants ¦ Informants ¦ Declarantes ¦ Anzeigende ¦ Dichiaranti ¦ Declarantes ¦ Zgłaszający ¦ Aangevers
+Date d’inhumation ¦ Date of burial ¦ Fecha de inhumación ¦ Beerdigungsdatum ¦ Data di sepoltura ¦ Data do enterro ¦ Data pochówku ¦ Datum van begrafenis
+Parties ¦ Parties ¦ Partes ¦ Parteien ¦ Parti ¦ Partes ¦ Strony ¦ Partijen
+Juge ou notaire ¦ Judge or notary ¦ Juez o notario ¦ Richter oder Notar ¦ Giudice o notaio ¦ Juiz ou notário ¦ Sędzia lub notariusz ¦ Rechter of notaris
+Personne concernée ¦ Person concerned ¦ Persona interesada ¦ Betroffene Person ¦ Persona interessata ¦ Pessoa em causa ¦ Osoba, której dotyczy ¦ Betrokken persoon
+Ce qui est attesté ¦ What is attested ¦ Lo que se certifica ¦ Was bezeugt wird ¦ Ciò che è attestato ¦ O que é atestado ¦ Co poświadczono ¦ Wat wordt verklaard
+Rue ou maison ¦ Street or house ¦ Calle o casa ¦ Straße oder Haus ¦ Via o casa ¦ Rua ou casa ¦ Ulica lub dom ¦ Straat of huis
+Ménage ¦ Household ¦ Hogar ¦ Haushalt ¦ Nucleo familiare ¦ Agregado ¦ Gospodarstwo domowe ¦ Huishouden
+Matricule ¦ Service number ¦ Matrícula ¦ Stammrollennummer ¦ Matricola ¦ Número de matrícula ¦ Numer ewidencyjny ¦ Stamboeknummer
+Classe ¦ Class ¦ Quinta ¦ Jahrgang ¦ Classe ¦ Classe ¦ Rocznik ¦ Lichting
+Régiment ¦ Regiment ¦ Regimiento ¦ Regiment ¦ Reggimento ¦ Regimento ¦ Pułk ¦ Regiment
+Campagnes ¦ Campaigns ¦ Campañas ¦ Feldzüge ¦ Campagne ¦ Campanhas ¦ Kampanie ¦ Veldtochten
+Blessures ¦ Wounds ¦ Heridas ¦ Verwundungen ¦ Ferite ¦ Ferimentos ¦ Rany ¦ Verwondingen
+page {n}, l. {line} ¦ page {n}, l. {line} ¦ página {n}, l. {line} ¦ Seite {n}, Z. {line} ¦ pagina {n}, r. {line} ¦ página {n}, l. {line} ¦ strona {n}, w. {line} ¦ pagina {n}, r. {line}
+l. {n} ¦ l. {n} ¦ l. {n} ¦ Z. {n} ¦ r. {n} ¦ l. {n} ¦ w. {n} ¦ r. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Template with boxes (recommended) ¦ 🧩 Plantilla con casillas (recomendado) ¦ 🧩 Vorlage mit Feldern (empfohlen) ¦ 🧩 Modello a caselle (consigliato) ¦ 🧩 Modelo com casas (recomendado) ¦ 🧩 Szablon z polami (zalecane) ¦ 🧩 Sjabloon met vakjes (aanbevolen)
+Texte à trous (comme avant) ¦ Fill-in-the-blanks text (as before) ¦ Texto con huecos (como antes) ¦ Lückentext (wie bisher) ¦ Testo con spazi vuoti (come prima) ¦ Texto com espaços (como antes) ¦ Tekst z lukami (jak wcześniej) ¦ Invultekst (zoals vroeger)
+Remplir à nouveau ¦ Fill in again ¦ Rellenar de nuevo ¦ Erneut ausfüllen ¦ Compila di nuovo ¦ Preencher de novo ¦ Wypełnij ponownie ¦ Opnieuw invullen
+Coller le texte à trous ¦ Paste the fill-in-the-blanks text ¦ Pegar el texto con huecos ¦ Lückentext einfügen ¦ Incolla il testo con spazi vuoti ¦ Colar o texto com espaços ¦ Wklej tekst z lukami ¦ Invultekst plakken

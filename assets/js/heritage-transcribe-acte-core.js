@@ -106,6 +106,13 @@
         const place = String(opt.place || '').trim() || commune || (places[0]?.label || '');
         // les noms : ceux de « 🧭 Repérer », sans les lieux ni les mots du maire
         const mentions = found.filter(f => f.type === 'person' && !places.some(p => f.s < p.e && p.s < f.e)).filter(f => f.label.split(/\s+/).length >= 2 || /^[A-ZÀ-Ý]{2,}/.test(f.label.split(/\s+/).pop()));
+        // baptême : « a été baptisé Jean, né d'hier, fils de Pierre MAZAUD » — le prénom seul de l'enfant n'est pas un nom repéré ;
+        // sans lui, le père passait pour l'enfant. On l'ajoute à sa place dans le texte (il devient l'enfant, Pierre son père).
+        if (kind === 'bapteme' || kind === 'naissance') {
+            const bm = /\bbaptis[ée]e?s?\s+(?:sous (?:le|les) (?:nom|prénom)s? de\s+)?([A-ZÀ-Ý][a-zà-ÿ]+(?:[- ][A-ZÀ-Ý][a-zà-ÿ]+)*)/u.exec(src);
+            if (bm) { const s0 = bm.index + bm[0].length - bm[1].length, e0 = s0 + bm[1].length;
+                if (!mentions.some(m => m.s < e0 && s0 < m.e) && !places.some(p => p.s < e0 && s0 < p.e)) { mentions.push({type: 'person', label: bm[1], s: s0, e: e0}); mentions.sort((x, y) => x.s - y.s); } }
+        }
         // naissance : « auquel il a donné le prénom de Jean » (le prénom seul)
         const people = [], byName = new Map(); let seq = 0;
         const add = p => { p.key = `p${++seq}`; people.push(p); if (!byName.has(norm(p.name))) byName.set(norm(p.name), p); return p; };

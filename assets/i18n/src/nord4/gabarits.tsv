@@ -1,0 +1,34 @@
+fr ¦ fi ¦ hu
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Valitse asiakirjan laji (ylhäältä): jokaisella lajilla on omat kenttänsä. ¦ Válaszd ki az okirat fajtáját (fent): minden fajtának saját mezői vannak.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Näyttää tältä: {x}. Käytetäänkö tätä mallia? ¦ Úgy tűnik: {x}. Ezt a sablont használod?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Täytetyt kentät: {a}/{b} · tarkistettu: {c} ¦ Kitöltött mezők: {a}/{b} · ellenőrizve: {c}
+Gabarit ¦ Malli ¦ Sablon
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Vihreä: ”🧭 Tunnista” täytti, tarkistettava · Enter: ✓ tarkistettu · napsautus kohtaan ”r. 3” näyttää kohdan. ¦ Zöld: a „🧭 Felismerés” töltötte ki, ellenőrizendő · Enter: ✓ ellenőrizve · a „3. s.” gombra kattintva látszik a szöveghely.
+Date du baptême ¦ Kastepäivä ¦ A keresztelés dátuma
+Père, métier ¦ Isä, ammatti ¦ Apa, foglalkozás
+Officier de l’état civil ¦ Väestökirjanpitäjä ¦ Anyakönyvvezető
+Parents de l’époux ¦ Sulhasen vanhemmat ¦ A vőlegény szülei
+Parents de l’épouse ¦ Morsiamen vanhemmat ¦ A menyasszony szülei
+Contrat de mariage ¦ Avioehto ¦ Házassági szerződés
+Publications ¦ Kuulutukset ¦ Kihirdetések
+Décédé le ¦ Kuollut ¦ Elhunyt
+Déclarants ¦ Ilmoittajat ¦ Bejelentők
+Date d’inhumation ¦ Hautauspäivä ¦ A temetés dátuma
+Parties ¦ Osapuolet ¦ Felek
+Juge ou notaire ¦ Tuomari tai notaari ¦ Bíró vagy közjegyző
+Personne concernée ¦ Asianomainen henkilö ¦ Érintett személy
+Ce qui est attesté ¦ Mitä todistetaan ¦ Amit tanúsítanak
+Rue ou maison ¦ Katu tai talo ¦ Utca vagy ház
+Ménage ¦ Kotitalous ¦ Háztartás
+Matricule ¦ Kantakirjanumero ¦ Törzskönyvi szám
+Classe ¦ Ikäluokka ¦ Korosztály
+Régiment ¦ Rykmentti ¦ Ezred
+Campagnes ¦ Sotaretket ¦ Hadjáratok
+Blessures ¦ Haavoittumiset ¦ Sebesülések
+page {n}, l. {line} ¦ sivu {n}, r. {line} ¦ {n}. oldal, {line}. s.
+l. {n} ¦ r. {n} ¦ {n}. s.
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Kenttämalli (suositeltu) ¦ 🧩 Mezős sablon (ajánlott)
+Texte à trous (comme avant) ¦ Aukkoteksti (kuten ennen) ¦ Kitöltendő szöveg (mint korábban)
+Remplir à nouveau ¦ Täytä uudelleen ¦ Kitöltés újra
+Coller le texte à trous ¦ Liitä aukkoteksti ¦ Kitöltendő szöveg beillesztése

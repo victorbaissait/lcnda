@@ -1,0 +1,34 @@
+fr ¦ is
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Veldu tegund skjals (efst): hver tegund hefur sína eigin reiti.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Þetta virðist vera: {x}. Nota þetta sniðmát?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Útfylltir reitir: {a}/{b} · yfirfarnir: {c}
+Gabarit ¦ Sniðmát
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Grænt: fyllt út af „🧭 Greina“, á eftir að yfirfara · Enter: ✓ yfirfarið · smellur á „l. 3“ sýnir staðinn.
+Date du baptême ¦ Skírnardagur
+Père, métier ¦ Faðir, starf
+Officier de l’état civil ¦ Skráningarfulltrúi
+Parents de l’époux ¦ Foreldrar brúðgumans
+Parents de l’épouse ¦ Foreldrar brúðarinnar
+Contrat de mariage ¦ Kaupmáli
+Publications ¦ Lýsingar
+Décédé le ¦ Lést
+Déclarants ¦ Tilkynnendur
+Date d’inhumation ¦ Greftrunardagur
+Parties ¦ Aðilar
+Juge ou notaire ¦ Dómari eða lögbókandi
+Personne concernée ¦ Viðkomandi
+Ce qui est attesté ¦ Það sem vottað er
+Rue ou maison ¦ Gata eða hús
+Ménage ¦ Heimili
+Matricule ¦ Skráningarnúmer
+Classe ¦ Árgangur
+Régiment ¦ Herdeild
+Campagnes ¦ Herferðir
+Blessures ¦ Sár
+page {n}, l. {line} ¦ síða {n}, l. {line}
+l. {n} ¦ l. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Sniðmát með reitum (mælt með)
+Texte à trous (comme avant) ¦ Eyðufylltur texti (eins og áður)
+Remplir à nouveau ¦ Fylla út aftur
+Coller le texte à trous ¦ Líma inn eyðufyllta textann

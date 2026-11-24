@@ -1,0 +1,34 @@
+fr ¦ lt ¦ lv ¦ et
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Pasirink dokumento rūšį (viršuje): kiekviena rūšis turi savo laukelius. ¦ Izvēlies dokumenta veidu (augšā): katram veidam ir savi lauki. ¦ Vali dokumendi liik (üleval): igal liigil on oma lahtrid.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Panašu į: {x}. Naudoti šį šabloną? ¦ Izskatās pēc: {x}. Izmantot šo veidni? ¦ Paistab olevat: {x}. Kas kasutada seda malli?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Užpildyti laukeliai: {a}/{b} · patikrinti: {c} ¦ Aizpildītie lauki: {a}/{b} · pārbaudīti: {c} ¦ Täidetud lahtrid: {a}/{b} · kontrollitud: {c}
+Gabarit ¦ Šablonas ¦ Veidne ¦ Mall
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Žalia: užpildė „🧭 Atpažinti“, reikia patikrinti · Enter: ✓ patikrinta · spustelėjus „3 eil.“ parodoma vieta. ¦ Zaļš: aizpildīja “🧭 Atrast”, jāpārbauda · Enter: ✓ pārbaudīts · klikšķis uz “3. r.” parāda vietu. ¦ Roheline: täitis „🧭 Leia“, kontrollida · Enter: ✓ kontrollitud · klõps „r. 3“ peal näitab kohta.
+Date du baptême ¦ Krikšto data ¦ Kristību datums ¦ Ristimise kuupäev
+Père, métier ¦ Tėvas, profesija ¦ Tēvs, nodarbošanās ¦ Isa, amet
+Officier de l’état civil ¦ Civilinės metrikacijos pareigūnas ¦ Dzimtsarakstu amatpersona ¦ Perekonnaseisuametnik
+Parents de l’époux ¦ Jaunikio tėvai ¦ Līgavaiņa vecāki ¦ Peigmehe vanemad
+Parents de l’épouse ¦ Nuotakos tėvai ¦ Līgavas vecāki ¦ Pruudi vanemad
+Contrat de mariage ¦ Vedybų sutartis ¦ Laulības līgums ¦ Abieluleping
+Publications ¦ Užsakai ¦ Uzsaukumi ¦ Kuulutused
+Décédé le ¦ Mirė ¦ Miris ¦ Surnud
+Déclarants ¦ Pareiškėjai ¦ Paziņotāji ¦ Teatajad
+Date d’inhumation ¦ Laidojimo data ¦ Apbedīšanas datums ¦ Matmise kuupäev
+Parties ¦ Šalys ¦ Puses ¦ Pooled
+Juge ou notaire ¦ Teisėjas ar notaras ¦ Tiesnesis vai notārs ¦ Kohtunik või notar
+Personne concernée ¦ Susijęs asmuo ¦ Attiecīgā persona ¦ Asjaomane isik
+Ce qui est attesté ¦ Kas patvirtinama ¦ Kas tiek apliecināts ¦ Mida tõendatakse
+Rue ou maison ¦ Gatvė ar namas ¦ Iela vai māja ¦ Tänav või maja
+Ménage ¦ Namų ūkis ¦ Mājsaimniecība ¦ Leibkond
+Matricule ¦ Registracijos numeris ¦ Reģistra numurs ¦ Registrinumber
+Classe ¦ Šaukimo metai ¦ Iesaukuma gads ¦ Aastakäik
+Régiment ¦ Pulkas ¦ Pulks ¦ Polk
+Campagnes ¦ Žygiai ¦ Karagājieni ¦ Sõjakäigud
+Blessures ¦ Sužeidimai ¦ Ievainojumi ¦ Haavad
+page {n}, l. {line} ¦ {n} psl., {line} eil. ¦ {n}. lpp., {line}. r. ¦ lk {n}, r. {line}
+l. {n} ¦ {n} eil. ¦ {n}. r. ¦ r. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Šablonas su laukeliais (rekomenduojama) ¦ 🧩 Veidne ar laukiem (ieteicams) ¦ 🧩 Lahtritega mall (soovitatav)
+Texte à trous (comme avant) ¦ Tekstas su tarpais (kaip anksčiau) ¦ Teksts ar tukšumiem (kā agrāk) ¦ Lünktekst (nagu varem)
+Remplir à nouveau ¦ Užpildyti iš naujo ¦ Aizpildīt vēlreiz ¦ Täida uuesti
+Coller le texte à trous ¦ Įklijuoti tekstą su tarpais ¦ Ielīmēt tekstu ar tukšumiem ¦ Kleebi lünktekst

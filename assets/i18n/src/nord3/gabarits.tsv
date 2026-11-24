@@ -1,0 +1,34 @@
+fr ¦ ro
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Alege felul actului (sus): fiecare fel are căsuțele lui.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Pare: {x}. Folosești acest șablon?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Căsuțe completate: {a}/{b} · verificate: {c}
+Gabarit ¦ Șablon
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Verde: completat de „🧭 Găsește”, de verificat · Enter: ✓ verificat · un clic pe „r. 3” arată pasajul.
+Date du baptême ¦ Data botezului
+Père, métier ¦ Tată, meserie
+Officier de l’état civil ¦ Ofițer de stare civilă
+Parents de l’époux ¦ Părinții mirelui
+Parents de l’épouse ¦ Părinții miresei
+Contrat de mariage ¦ Contract de căsătorie
+Publications ¦ Publicații
+Décédé le ¦ Decedat la
+Déclarants ¦ Declaranți
+Date d’inhumation ¦ Data înmormântării
+Parties ¦ Părți
+Juge ou notaire ¦ Judecător sau notar
+Personne concernée ¦ Persoana în cauză
+Ce qui est attesté ¦ Ce se atestă
+Rue ou maison ¦ Stradă sau casă
+Ménage ¦ Gospodărie
+Matricule ¦ Număr matricol
+Classe ¦ Contingent
+Régiment ¦ Regiment
+Campagnes ¦ Campanii
+Blessures ¦ Răni
+page {n}, l. {line} ¦ pagina {n}, r. {line}
+l. {n} ¦ r. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Șablon cu căsuțe (recomandat)
+Texte à trous (comme avant) ¦ Text cu goluri (ca înainte)
+Remplir à nouveau ¦ Completează din nou
+Coller le texte à trous ¦ Lipește textul cu goluri

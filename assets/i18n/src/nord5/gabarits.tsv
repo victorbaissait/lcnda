@@ -1,0 +1,34 @@
+fr ¦ hr ¦ sl
+# 🧩 Atelier de transcription, vague 3 (3b) : les gabarits d’actes (heritage-transcribe-gabarit.js)
+Choisis la sorte d’acte (en haut) : chaque sorte a ses cases. ¦ Odaberi vrstu isprave (gore): svaka vrsta ima svoja polja. ¦ Izberi vrsto listine (zgoraj): vsaka vrsta ima svoja polja.
+On dirait : {x}. Utiliser ce gabarit ? ¦ Izgleda kao: {x}. Upotrijebiti ovaj predložak? ¦ Videti je: {x}. Uporabiš to predlogo?
+Cases remplies : {a}/{b} · vérifiées : {c} ¦ Popunjena polja: {a}/{b} · provjerena: {c} ¦ Izpolnjena polja: {a}/{b} · preverjena: {c}
+Gabarit ¦ Predložak ¦ Predloga
+Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage. ¦ Zeleno: popunio „🧭 Pronađi“, za provjeru · Enter: ✓ provjereno · klik na „r. 3“ pokazuje odlomak. ¦ Zeleno: izpolnil »🧭 Poišči«, za preverjanje · Enter: ✓ preverjeno · klik na »v. 3« pokaže odlomek.
+Date du baptême ¦ Datum krštenja ¦ Datum krsta
+Père, métier ¦ Otac, zanimanje ¦ Oče, poklic
+Officier de l’état civil ¦ Matičar ¦ Matičar
+Parents de l’époux ¦ Roditelji mladoženje ¦ Starša ženina
+Parents de l’épouse ¦ Roditelji mladenke ¦ Starša neveste
+Contrat de mariage ¦ Bračni ugovor ¦ Ženitna pogodba
+Publications ¦ Navještaji ¦ Oklici
+Décédé le ¦ Umro ¦ Umrl
+Déclarants ¦ Prijavitelji ¦ Prijavitelji
+Date d’inhumation ¦ Datum pokopa ¦ Datum pokopa
+Parties ¦ Stranke ¦ Stranke
+Juge ou notaire ¦ Sudac ili javni bilježnik ¦ Sodnik ali notar
+Personne concernée ¦ Osoba o kojoj je riječ ¦ Zadevna oseba
+Ce qui est attesté ¦ Što se potvrđuje ¦ Kaj se potrjuje
+Rue ou maison ¦ Ulica ili kuća ¦ Ulica ali hiša
+Ménage ¦ Kućanstvo ¦ Gospodinjstvo
+Matricule ¦ Matični broj ¦ Matična številka
+Classe ¦ Godište ¦ Letnik
+Régiment ¦ Pukovnija ¦ Polk
+Campagnes ¦ Pohodi ¦ Pohodi
+Blessures ¦ Rane ¦ Rane
+page {n}, l. {line} ¦ stranica {n}, r. {line} ¦ stran {n}, v. {line}
+l. {n} ¦ r. {n} ¦ v. {n}
+🧩 Gabarit à cases (conseillé) ¦ 🧩 Predložak s poljima (preporučeno) ¦ 🧩 Predloga s polji (priporočeno)
+Texte à trous (comme avant) ¦ Tekst s prazninama (kao prije) ¦ Besedilo z vrzelmi (kot prej)
+Remplir à nouveau ¦ Ponovno popuni ¦ Ponovno izpolni
+Coller le texte à trous ¦ Zalijepi tekst s prazninama ¦ Prilepi besedilo z vrzelmi
