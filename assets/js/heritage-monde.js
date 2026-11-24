@@ -64,6 +64,7 @@
         const list = cur === 'local' ? local : cur ? d.events.filter(e => e.cat === cur) : d.events;
         const btn = (k, l, n) => `<button type="button" class="${cur === k ? 'is-active' : ''}" data-world-cat="${k}">${l} (${n})</button>`;
         host.innerHTML = `<p class="h-world-lead">De ${d.span[0]} à ${d.span[1]} : ${A().plural(d.events.length, 'événement')} pendant la vie de ${esc(d.person.first)}${local.length ? `, dont ${A().plural(local.length, 'événement')} de l’histoire locale` : ''}.</p>
+            <div data-mv-person="${pid}" data-mv-first="${esc(d.person.first)}"></div>
             ${frise(d, list)}
             <div class="h-world-bar"><div class="ui-filters" role="toolbar" aria-label="Sortes d’événements">${btn('', 'Tout', d.events.length)}${local.length ? btn('local', '📍 Histoire locale', local.length) : ''}${Object.entries(counts).map(([k, n]) => btn(k, `${catOf(k).icon} ${catOf(k).label}`, n)).join('')}</div>
                 <label class="ui-toggle"><input type="checkbox" data-world-level ${st.level >= 2 ? 'checked' : ''}><i></i>Plus de détails</label></div>

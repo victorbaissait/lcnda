@@ -681,6 +681,8 @@ try {
         'biography_day_events' => json_response(['events' => bio_day_events($pdo, safe_int($_GET['id'] ?? 0))]), // ⏳ les dates proposées
         'world_around' => json_response(world_around($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 🌍 lib/monde_autour.php
         'world_events' => json_response(world_events_list($pdo, $_GET)),
+        'grands_mouvements' => json_response(mouvements_list($pdo, $_GET)), // 🌍 lib/mouvements.php
+        'person_movements' => json_response(['moves' => mouvements_person($pdo, safe_int($_GET['id'] ?? 0))]),
         'old_trade' => json_response(trade_sheet($pdo, $_GET)), // 🛠️ lib/metiers_anciens.php
         'old_trades' => json_response(trades_list($pdo, $_GET)),
         'metiers_arbre' => (static function () use ($pdo) { require_once __DIR__ . '/lib/metiers_carte.php'; json_response(metiers_arbre_data($pdo, $_GET)); })(), // 🧬 Arbre des métiers (lib/metiers_carte.php)
@@ -10066,6 +10068,9 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_biography' => bio_save($pdo,$data),
             'save_history_event' => world_save_event($pdo,$data),
             'delete_history_event' => world_delete_event($pdo,$data),
+            'movement_mark' => mouvements_mark($pdo,$data),
+            'save_own_movement' => mouvements_save_own($pdo,$data),
+            'delete_own_movement' => mouvements_delete_own($pdo,$data),
             'save_old_trade' => trade_save($pdo,$data),
             'save_periodical' => save_periodical($pdo,$data),
             'save_diagram' => save_diagram($pdo,$data),

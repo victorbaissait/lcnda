@@ -101,6 +101,7 @@ require_once __DIR__ . '/heritage_links.php'; // question en français, langues,
 require_once __DIR__ . '/heritage_more.php';
 require_once __DIR__ . '/biographie.php';     // 📖 biographie écrite par l'app (fiche, livres, Fiches, présentations)
 require_once __DIR__ . '/monde_autour.php';   // 🌍 le monde autour : grands événements et histoire locale
+require_once __DIR__ . '/mouvements.php';     // 🌍 ta famille dans les grands mouvements de population
 require_once __DIR__ . '/sante.php';          // 🩺 santé de la famille (privée : cachée au départ, jamais exportée)
 require_once __DIR__ . '/cousinade.php';      // 🎉 organiser une cousinade (descendants vivants, invités, badges, plan de table)
 require_once __DIR__ . '/successoral.php';    // ⚖️ généalogiste successoral : dossiers de succession (jamais exportés)
