@@ -9,12 +9,16 @@ Mode d'emploi pas à pas, en français simple : docs/METEO.md. En bref :
     python3 scripts/meteo/build-meteo.py europe        # le pack Europe (≈ 2 Go, une nuit ou plus)
     python3 scripts/meteo/build-meteo.py tout          # les trois
     python3 scripts/meteo/build-meteo.py altitudes     # seulement la grille des altitudes (≈ 2–3 Mo, rangée dans le socle ; faite aussi avec « socle »)
+    python3 scripts/meteo/build-meteo.py monde-asie    # un pack du monde (GHCN-Daily, NOAA) : monde-amerique-nord, monde-amerique-sud,
+                                                       # monde-afrique, monde-asie, monde-oceanie, monde-europe (hors pack Europe) ;
+                                                       # « monde » : les six (plusieurs heures chacun)
 
 Options utiles :
     --dossier meteo-sortie     où tout est rangé (téléchargements, travail, fichiers finis) — par défaut ./meteo-sortie
     --sans-era5 / --sans-20cr  sans les réanalyses (pas besoin de compte Copernicus ni de netCDF4)
     --sans-altitudes           sans la grille des altitudes (Copernicus DEM GLO-90) ; --altitudes-europe : aussi celle de l'Europe (pack Europe)
     --stations 300             combien de stations dans le socle
+    --stations-monde 500       combien de stations au plus dans un pack du monde
     --hors-ligne DOSSIER       ne télécharge rien : lit les fichiers déjà posés dans DOSSIER (essais, tests)
     --meteolux-csv FICHIER     le fichier de MeteoLux (Findel) téléchargé à la main, si l'adresse automatique ne marche plus
     --depuis 1836 / --jusqu-a 2025   les années à fabriquer
@@ -1218,6 +1222,233 @@ def europe_sources(net, work, years, a):
     return done
 
 
+# ═══════════════════════ Les packs du monde (GHCN-Daily, NOAA) : un pack par continent ═══════════════════════
+# Une station GHCN = un fichier by_station/<ID>.csv.gz (toutes les années, tous les éléments). On prend les plus longues séries
+# de TMAX, bien réparties (pas deux stations trop proches), en laissant de côté ce qui est déjà dans les autres packs :
+#   - France, Belgique, Suisse, Luxembourg (socle et pack complet : toutes les stations), Allemagne et Pays-Bas (pack Europe :
+#     DWD et KNMI, presque toutes les longues séries) ;
+#   - les stations GHCN déjà prises par le pack Europe (Italie, Portugal, Slovaquie : do_ghcn, même choix refait ici).
+# L'app saute aussi, à la lecture, une station d'un pack du monde à moins de 3 km d'une station d'un autre pack (lib/meteo.php).
+# Code FIPS de GHCN (2 premières lettres de l'identifiant) → (pays ISO, continent) ; « - » : pas pris.
+GHCN_FIPS = {
+    'AC': ('AG', 'amerique-nord'), 'AE': ('AE', 'asie'), 'AF': ('AF', 'asie'), 'AG': ('DZ', 'afrique'), 'AJ': ('AZ', 'asie'), 'AL': ('AL', 'europe'),
+    'AM': ('AM', 'asie'), 'AO': ('AO', 'afrique'), 'AQ': ('AS', 'oceanie'), 'AR': ('AR', 'amerique-sud'), 'AS': ('AU', 'oceanie'), 'AU': ('AT', 'europe'),
+    'AY': ('AQ', '-'), 'BA': ('BH', 'asie'), 'BB': ('BB', 'amerique-nord'), 'BC': ('BW', 'afrique'), 'BD': ('BM', 'amerique-nord'), 'BE': ('BE', '-'),
+    'BF': ('BS', 'amerique-nord'), 'BG': ('BD', 'asie'), 'BH': ('BZ', 'amerique-nord'), 'BK': ('BA', 'europe'), 'BL': ('BO', 'amerique-sud'), 'BM': ('MM', 'asie'),
+    'BN': ('BJ', 'afrique'), 'BO': ('BY', 'europe'), 'BP': ('SB', 'oceanie'), 'BR': ('BR', 'amerique-sud'), 'BU': ('BG', 'europe'), 'BX': ('BN', 'asie'),
+    'BY': ('BI', 'afrique'), 'CA': ('CA', 'amerique-nord'), 'CB': ('KH', 'asie'), 'CD': ('TD', 'afrique'), 'CE': ('LK', 'asie'), 'CF': ('CG', 'afrique'),
+    'CG': ('CD', 'afrique'), 'CH': ('CN', 'asie'), 'CI': ('CL', 'amerique-sud'), 'CJ': ('KY', 'amerique-nord'), 'CK': ('CC', 'oceanie'), 'CM': ('CM', 'afrique'),
+    'CO': ('CO', 'amerique-sud'), 'CQ': ('MP', 'oceanie'), 'CS': ('CR', 'amerique-nord'), 'CT': ('CF', 'afrique'), 'CU': ('CU', 'amerique-nord'), 'CV': ('CV', 'afrique'),
+    'CW': ('CK', 'oceanie'), 'CY': ('CY', 'europe'), 'DA': ('DK', 'europe'), 'DO': ('DM', 'amerique-nord'), 'DR': ('DO', 'amerique-nord'), 'EC': ('EC', 'amerique-sud'),
+    'EG': ('EG', 'afrique'), 'EI': ('IE', 'europe'), 'EK': ('GQ', 'afrique'), 'EN': ('EE', 'europe'), 'ER': ('ER', 'afrique'), 'ES': ('SV', 'amerique-nord'),
+    'ET': ('ET', 'afrique'), 'EU': ('TF', 'afrique'), 'EZ': ('CZ', 'europe'), 'FG': ('GF', 'amerique-sud'), 'FI': ('FI', 'europe'), 'FJ': ('FJ', 'oceanie'),
+    'FK': ('FK', 'amerique-sud'), 'FM': ('FM', 'oceanie'), 'FP': ('PF', 'oceanie'), 'FR': ('FR', '-'), 'FS': ('TF', '-'), 'GA': ('GM', 'afrique'),
+    'GB': ('GA', 'afrique'), 'GG': ('GE', 'asie'), 'GH': ('GH', 'afrique'), 'GI': ('GI', 'europe'), 'GL': ('GL', 'amerique-nord'), 'GM': ('DE', '-'),
+    'GP': ('GP', 'amerique-nord'), 'GQ': ('GU', 'oceanie'), 'GR': ('GR', 'europe'), 'GT': ('GT', 'amerique-nord'), 'GV': ('GN', 'afrique'), 'GY': ('GY', 'amerique-sud'),
+    'HO': ('HN', 'amerique-nord'), 'HR': ('HR', 'europe'), 'HU': ('HU', 'europe'), 'IC': ('IS', 'europe'), 'ID': ('ID', 'asie'), 'IN': ('IN', 'asie'),
+    'IO': ('IO', 'asie'), 'IR': ('IR', 'asie'), 'IS': ('IL', 'asie'), 'IT': ('IT', 'europe'), 'IV': ('CI', 'afrique'), 'IZ': ('IQ', 'asie'),
+    'JA': ('JP', 'asie'), 'JM': ('JM', 'amerique-nord'), 'JN': ('SJ', 'europe'), 'JO': ('JO', 'asie'), 'JQ': ('UM', 'oceanie'), 'JU': ('TF', 'afrique'),
+    'KE': ('KE', 'afrique'), 'KG': ('KG', 'asie'), 'KN': ('KP', 'asie'), 'KR': ('KI', 'oceanie'), 'KS': ('KR', 'asie'), 'KT': ('CX', 'oceanie'),
+    'KU': ('KW', 'asie'), 'KZ': ('KZ', 'asie'), 'LA': ('LA', 'asie'), 'LE': ('LB', 'asie'), 'LG': ('LV', 'europe'), 'LH': ('LT', 'europe'),
+    'LI': ('LR', 'afrique'), 'LO': ('SK', 'europe'), 'LQ': ('UM', 'oceanie'), 'LT': ('LS', 'afrique'), 'LU': ('LU', '-'), 'LY': ('LY', 'afrique'),
+    'MA': ('MG', 'afrique'), 'MB': ('MQ', 'amerique-nord'), 'MC': ('MO', 'asie'), 'MD': ('MD', 'europe'), 'MF': ('YT', 'afrique'), 'MG': ('MN', 'asie'),
+    'MI': ('MW', 'afrique'), 'MJ': ('ME', 'europe'), 'MK': ('MK', 'europe'), 'ML': ('ML', 'afrique'), 'MO': ('MA', 'afrique'), 'MP': ('MU', 'afrique'),
+    'MQ': ('UM', 'oceanie'), 'MR': ('MR', 'afrique'), 'MT': ('MT', 'europe'), 'MU': ('OM', 'asie'), 'MV': ('MV', 'asie'), 'MX': ('MX', 'amerique-nord'),
+    'MY': ('MY', 'asie'), 'MZ': ('MZ', 'afrique'), 'NC': ('NC', 'oceanie'), 'NE': ('NU', 'oceanie'), 'NF': ('NF', 'oceanie'), 'NG': ('NE', 'afrique'),
+    'NH': ('VU', 'oceanie'), 'NI': ('NG', 'afrique'), 'NL': ('NL', '-'), 'NN': ('SX', 'amerique-nord'), 'NO': ('NO', 'europe'), 'NP': ('NP', 'asie'),
+    'NS': ('SR', 'amerique-sud'), 'NU': ('NI', 'amerique-nord'), 'NZ': ('NZ', 'oceanie'), 'PA': ('PY', 'amerique-sud'), 'PC': ('PN', 'oceanie'), 'PE': ('PE', 'amerique-sud'),
+    'PK': ('PK', 'asie'), 'PL': ('PL', 'europe'), 'PM': ('PA', 'amerique-nord'), 'PO': ('PT', 'europe'), 'PP': ('PG', 'oceanie'), 'PS': ('PW', 'oceanie'),
+    'PU': ('GW', 'afrique'), 'QA': ('QA', 'asie'), 'RE': ('RE', 'afrique'), 'RI': ('RS', 'europe'), 'RM': ('MH', 'oceanie'), 'RO': ('RO', 'europe'),
+    'RP': ('PH', 'asie'), 'RQ': ('PR', 'amerique-nord'), 'RS': ('RU', 'europe'), 'RW': ('RW', 'afrique'), 'SA': ('SA', 'asie'), 'SB': ('PM', 'amerique-nord'),
+    'SE': ('SC', 'afrique'), 'SF': ('ZA', 'afrique'), 'SG': ('SN', 'afrique'), 'SH': ('SH', 'afrique'), 'SI': ('SI', 'europe'), 'SL': ('SL', 'afrique'),
+    'SN': ('SG', 'asie'), 'SP': ('ES', 'europe'), 'ST': ('LC', 'amerique-nord'), 'SU': ('SD', 'afrique'), 'SV': ('SJ', 'europe'), 'SW': ('SE', 'europe'),
+    'SX': ('GS', 'amerique-sud'), 'SY': ('SY', 'asie'), 'SZ': ('CH', '-'), 'TD': ('TT', 'amerique-nord'), 'TE': ('TF', 'afrique'), 'TH': ('TH', 'asie'),
+    'TI': ('TJ', 'asie'), 'TL': ('TK', 'oceanie'), 'TN': ('TO', 'oceanie'), 'TO': ('TG', 'afrique'), 'TS': ('TN', 'afrique'), 'TU': ('TR', 'asie'),
+    'TV': ('TV', 'oceanie'), 'TX': ('TM', 'asie'), 'TZ': ('TZ', 'afrique'), 'UC': ('CW', 'amerique-nord'), 'UG': ('UG', 'afrique'), 'UK': ('GB', 'europe'),
+    'UP': ('UA', 'europe'), 'US': ('US', 'amerique-nord'), 'UV': ('BF', 'afrique'), 'UY': ('UY', 'amerique-sud'), 'UZ': ('UZ', 'asie'), 'VE': ('VE', 'amerique-sud'),
+    'VM': ('VN', 'asie'), 'VQ': ('VI', 'amerique-nord'), 'WA': ('NA', 'afrique'), 'WF': ('WF', 'oceanie'), 'WI': ('EH', 'afrique'), 'WQ': ('UM', 'oceanie'),
+    'WZ': ('SZ', 'afrique'), 'ZA': ('ZM', 'afrique'), 'ZI': ('ZW', 'afrique'),
+}
+WORLD_URAL_LON = 60.0  # Russie : à l'ouest de l'Oural → Europe, à l'est → Asie
+# région → (titre, combien de stations au plus, distance minimale entre deux stations en km, années de TMAX au moins)
+# (la taille d'un pack : ≈ 1,2 Ko par station et par année ; voir la ligne de chaque pack dans heritage-meteo.js)
+WORLD_REGIONS = {
+    'amerique-nord': ('Amérique du Nord', 2500, 45.0, 30),
+    'amerique-sud': ('Amérique du Sud', 800, 35.0, 15),
+    'afrique': ('Afrique', 800, 35.0, 15),
+    'asie': ('Asie', 1800, 40.0, 20),
+    'oceanie': ('Océanie', 1000, 35.0, 20),
+    'europe': ('Europe (hors pack Europe)', 1200, 30.0, 20),
+}
+WORLD_KINDS = ['monde-' + r for r in WORLD_REGIONS]
+# éléments GHCN → colonnes ; WT** (phénomènes du jour) → bits de WW
+GHCN_WT_BITS = {'WT01': F.WW_FOG, 'WT02': F.WW_FOG, 'WT21': F.WW_FOG, 'WT22': F.WW_FOG, 'WT03': F.WW_STORM, 'WT04': F.WW_HAIL, 'WT05': F.WW_HAIL,
+                'WT18': F.WW_SNOW, 'WT06': F.WW_ICE, 'WT15': F.WW_ICE, 'WT17': F.WW_ICE, 'WT13': F.WW_MIST}
+
+
+def ghcn_region(sid, lon):
+    """la région d'une station GHCN (None : pas dans les packs du monde)"""
+    iso, reg = GHCN_FIPS.get(sid[:2], ('', '-'))
+    if sid[:2] == 'RS':
+        reg = 'europe' if lon < WORLD_URAL_LON else 'asie'
+    return None if reg == '-' else reg
+
+
+def parse_ghcn_world(text):
+    """comme parse_ghcn, avec en plus : la neige tombée (SNOW) quand la hauteur au sol (SNWD) manque, les nuages (ACMH),
+    et les phénomènes (WT** : brouillard, orage, grêle, neige, verglas, brume)"""
+    days = {}
+    fresh = {}
+    for r in csv.reader(io.StringIO(text)):
+        if len(r) < 4 or not re.match(r'^\d{8}$', r[1]) or (len(r) > 5 and r[5].strip()):
+            continue
+        el = r[2]
+        try:
+            v = int(r[3])
+        except ValueError:
+            continue
+        d = int(r[1])
+        k = {'TMAX': 'TX', 'TMIN': 'TN', 'PRCP': 'RR', 'SNWD': 'SN', 'TSUN': 'SS', 'WSFG': 'FX', 'ACMH': 'NN'}.get(el)
+        if k:
+            if k in ('TX', 'TN') and not -900 <= v <= 650:  # au-delà de −90 °C / +65 °C : une erreur de saisie
+                continue
+            days.setdefault(d, {})[k] = v // 10 if k == 'SN' else v
+        elif el == 'SNOW':
+            fresh[d] = v
+            if v > 0:
+                x = days.setdefault(d, {})
+                x['WW'] = (x.get('WW') or 0) | F.WW_SNOW
+        elif el in GHCN_WT_BITS and v:
+            x = days.setdefault(d, {})
+            x['WW'] = (x.get('WW') or 0) | GHCN_WT_BITS[el]
+    for d, v in fresh.items():  # neige tombée en mm → cm, seulement quand la hauteur au sol n'est pas donnée
+        x = days.setdefault(d, {})
+        if x.get('SN') is None:
+            x['SN'] = v // 10
+    return days
+
+
+def europe_ghcn_ids(metas, inv):
+    """les stations GHCN que le pack Europe prend déjà (même choix que do_ghcn, hors essai)"""
+    out = set()
+    for fips, (iso, howmany) in GHCN_COUNTRIES.items():
+        ids = sorted([i for i in metas if i.startswith(fips) and i in inv], key=lambda i: inv[i], reverse=True)[:howmany]
+        out.update(ids)
+    return out
+
+
+def ghcn_world_candidates(stations_text, inventory_text, region, min_years):
+    """les stations d'une région → [(ID, pays ISO, lat, lon, années de TMAX, première année)], plus longue série d'abord"""
+    span, first = {}, {}
+    for l in inventory_text.splitlines():
+        p = l.split()
+        if len(p) >= 6 and p[3] == 'TMAX':
+            span[p[0]] = int(p[5]) - int(p[4]) + 1
+            first[p[0]] = int(p[4])
+    eu = europe_ghcn_ids(parse_ghcn_stations(stations_text, {k: v[0] for k, v in GHCN_COUNTRIES.items()}), span)
+    rows, metas = [], {}
+    for l in stations_text.splitlines():
+        sid = l[0:11].strip()
+        if sid not in span or span[sid] < min_years or sid in eu:
+            continue
+        try:
+            lat, lon = float(l[12:20]), float(l[21:30])
+        except ValueError:
+            continue
+        if ghcn_region(sid, lon) != region:
+            continue
+        iso = GHCN_FIPS[sid[:2]][0]
+        metas[sid] = {'code': sid, 'lat': lat, 'lon': lon, 'alt': (None if num(l[31:37]) in (None, -999.9) else num(l[31:37])), 'nom': l[41:71].strip().title(), 'pays': iso}
+        rows.append((sid, iso, lat, lon, span[sid], first[sid]))
+    rows.sort(key=lambda r: (-(r[4] + max(0, 1900 - r[5]) * 0.5), r[0]))
+    return rows, metas
+
+
+def select_spread(rows, n, min_km):
+    """les n meilleures (rows déjà rangées, meilleure d'abord), sans deux stations à moins de min_km ; la distance baisse
+    (× 0,7) tant qu'il en manque. Recherche des voisines par cases de 1° (rapide même pour 20 000 stations)."""
+    picked, taken = [], set()
+    cells = {}
+
+    def near(lat, lon, d):
+        dl = int(d / 111.0) + 1
+        dlo = int(d / max(5.0, 111.0 * math.cos(math.radians(lat)))) + 1
+        ci, cj = int(math.floor(lat)), int(math.floor(lon))
+        for i in range(ci - dl, ci + dl + 1):
+            for j in range(cj - dlo, cj + dlo + 1):
+                for (a, b) in cells.get((i, ((j + 180) % 360) - 180), ()):
+                    if haversine(lat, lon, a, b) < d:
+                        return True
+        return False
+    d = min_km
+    while len(picked) < n and d >= 3:
+        for r in rows:
+            if len(picked) >= n:
+                break
+            if r[0] in taken or near(r[2], r[3], d):
+                continue
+            picked.append(r)
+            taken.add(r[0])
+            cells.setdefault((int(math.floor(r[2])), int(math.floor(r[3]))), []).append((r[2], r[3]))
+        d *= 0.7
+    return [r[0] for r in picked]
+
+
+def do_world(net, work, region, years, n=None, test=False):
+    """les stations GHCN d'une région : choisies, téléchargées une à une (reprise), lues, puis le fichier est effacé
+    (il n'en reste que les blocs : le dossier de travail reste petit, même pour 2 500 stations)"""
+    title, howmany, min_km, min_years = WORLD_REGIONS[region]
+    step = 'monde-' + region
+    st_text = open_text(net.get(GHCN_BASE + 'ghcnd-stations.txt', 'ghcnd-stations.txt', 'GHCN (stations)'))
+    inv_text = open_text(net.get(GHCN_BASE + 'ghcnd-inventory.txt', 'ghcnd-inventory.txt', 'GHCN (inventaire)'))
+    rows, metas = ghcn_world_candidates(st_text, inv_text, region, 1 if test else min_years)
+    ids = select_spread(rows, 3 if test else (n or howmany), min_km)
+    say(f'   {title} : {plural(len(rows), "station")} avec ≥ {min_years} ans de températures, {len(ids)} choisies')
+    got = 0
+    for k, sid in enumerate(ids):
+        if work.done('ghcn-' + sid):
+            got += 1
+            continue
+        p = net.get(f'{GHCN_BASE}by_station/{sid}.csv.gz', f'ghcn-{sid}.csv.gz', f'GHCN {metas[sid]["nom"]}', missing_ok=True)
+        if p:
+            if work.add_daily('ghcn', metas[sid], parse_ghcn_world(open_text(p)), years):
+                got += 1
+            work.db.commit()
+            if not net.offline:
+                os.remove(p)
+        work.mark('ghcn-' + sid)
+        if (k + 1) % 100 == 0:
+            say(f'   … {k + 1} / {len(ids)}')
+    say(f'   • GHCN-Daily ({title}) : {plural(got, "station")}')
+    work.mark(step)
+    return ids
+
+
+def build_world(net, out, region, years, a):
+    """meteo-monde-<région>.sqlite puis meteo-pack-monde-<région>.lcmeteo"""
+    kind = 'monde-' + region
+    title = WORLD_REGIONS[region][0]
+    work = Work(os.path.join(out, 'travail', f'stations-{kind}.sqlite'))
+    ids = do_world(net, work, region, years, a.stations_monde, a.test)
+    work.compute_scores()
+    # seulement les stations qui ont au moins un an de températures en tout (l'inventaire promet parfois plus qu'il n'y a)
+    want = set(ids)
+    keep = [sid for sid, code in work.db.execute('SELECT s.id, s.code FROM stations s JOIN score c ON c.station_id=s.id WHERE c.good >= 365 ORDER BY s.id') if code in want]
+    path = os.path.join(out, f'meteo-{kind}.sqlite')
+    if os.path.exists(path):
+        os.remove(path)
+    db = F.open_db(path, kind, title)
+    pays = sorted({r[0] for r in work.db.execute(f'SELECT DISTINCT pays FROM stations WHERE id IN ({",".join(str(i) for i in keep) or "0"})')})
+    F.set_meta(db, countries=kind.upper(), station_countries=','.join(pays), region=region)
+    F.add_sources(db, ['ghcn'], a.until)
+    db.execute("UPDATE sources SET contenu=?, annees=? WHERE id='ghcn'", (f'Les plus longues séries de stations ({title}), chaque jour : températures, pluie, neige', '≈ 1760 → aujourd’hui'))
+    copy_stations(work.db, db, keep)
+    write_normals(db, 'station', 'daily', 'station_id')
+    db.close()
+    say(f'   {plural(len(keep), "station")} dans le pack, {len(pays)} pays')
+    finish(path, out, kind)
+
+
 # ═══════════════════════ Les réanalyses (facultatives) ═══════════════════════
 def need_netcdf(what):
     try:
@@ -1702,7 +1933,7 @@ def finish(path, out_dir, kind, wrap=True):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description='Fabrique les données de la « Météo d’autrefois » de LCNDA (voir docs/METEO.md).')
-    ap.add_argument('quoi', nargs='?', default='socle', choices=['socle', 'complet', 'europe', 'altitudes', 'tout'])
+    ap.add_argument('quoi', nargs='?', default='socle', choices=['socle', 'complet', 'europe', 'altitudes', 'tout', 'monde'] + WORLD_KINDS)
     ap.add_argument('--test', action='store_true', help='essai rapide : le Gers (32), une année, quelques stations')
     ap.add_argument('--dossier', default='meteo-sortie')
     ap.add_argument('--hors-ligne', dest='offline')
@@ -1711,7 +1942,7 @@ def main(argv=None):
     ap.add_argument('--sans-altitudes', action='store_true', help='sans la grille des altitudes (Copernicus DEM)')
     ap.add_argument('--altitudes-europe', action='store_true', help='aussi la grille des altitudes de toute l’Europe dans le pack Europe (long : ≈ 2 600 carrés à lire)')
     ap.add_argument('--stations', type=int, default=300)
-    ap.add_argument('--depuis', type=int, default=1836)
+    ap.add_argument('--depuis', type=int, default=None, help='première année (1836 ; 1750 pour les packs du monde)')
     ap.add_argument('--jusqu-a', dest='until', type=int, default=datetime.date.today().year)
     ap.add_argument('--departements', default='')
     ap.add_argument('--meteolux-csv')
@@ -1720,7 +1951,11 @@ def main(argv=None):
     ap.add_argument('--aemet-cle', default='', help='la clé AEMET OpenData (sinon la variable AEMET_API_KEY)')
     ap.add_argument('--ceda-jeton', default='', help='le jeton CEDA pour MIDAS-Open (sinon la variable CEDA_TOKEN)')
     ap.add_argument('--dmi-cle', default='', help='la clé DMI si elle est demandée (sinon la variable DMI_API_KEY)')
+    ap.add_argument('--stations-monde', type=int, default=0, help='combien de stations au plus dans un pack du monde (sinon : le nombre prévu pour la région)')
     a = ap.parse_args(argv)
+    world = WORLD_KINDS if a.quoi == 'monde' else [a.quoi] if a.quoi in WORLD_KINDS else []
+    if a.depuis is None:
+        a.depuis = 1750 if world else 1836
     if a.test:
         a.departements = a.departements or '32'
         a.depuis = max(a.depuis, a.until - 1)
@@ -1730,11 +1965,14 @@ def main(argv=None):
     os.makedirs(os.path.join(out, 'travail'), exist_ok=True)
     years = (a.depuis, a.until)
     deps = [d.strip() for d in a.departements.split(',') if d.strip()] or DEPARTEMENTS
-    kinds = ['socle', 'complet', 'europe'] if a.quoi == 'tout' else [a.quoi]
+    kinds = ['socle', 'complet', 'europe'] if a.quoi == 'tout' else world if world else [a.quoi]
     t0 = time.time()
     try:
         say(f'🌦 Météo d’autrefois — fabrication : {", ".join(kinds)}{" (essai)" if a.test else ""}\n   dossier : {out}')
-        work = Work(os.path.join(out, 'travail', 'stations.sqlite'))
+        for k in world:
+            say(f'Pack du monde : {WORLD_REGIONS[k[6:]][0]} (GHCN-Daily, NOAA)')
+            build_world(net, out, k[6:], years, a)
+        work = Work(os.path.join(out, 'travail', 'stations.sqlite')) if not world else None
         if {'socle', 'complet'} & set(kinds):
             say('1. Les stations (France, Suisse, Belgique, Luxembourg)')
             do_meteofrance(net, work, deps, years, hourly='complet' in kinds)

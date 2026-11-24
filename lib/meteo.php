@@ -21,7 +21,14 @@ declare(strict_types=1);
 
 const METEO_COLS = [1 => 'TN', 2 => 'TX', 3 => 'T', 4 => 'RR', 5 => 'SN', 6 => 'FX', 7 => 'NN', 8 => 'SS', 9 => 'WW', 10 => 'Z'];
 require_once __DIR__ . '/meteo_dl.php'; // ⤓ installer un pack en un bouton (version « meteo-donnees » du dépôt)
-const METEO_KINDS = ['complet' => 3, 'europe' => 2, 'socle' => 1]; // ordre de préférence quand une station est dans deux fichiers
+const METEO_KINDS = ['complet' => 3, 'europe' => 2, 'socle' => 1, // ordre de préférence quand une station est dans deux fichiers
+    // les packs du monde (GHCN-Daily, NOAA ; scripts/meteo/build-meteo.py monde-<région>) : un par continent, après les autres
+    'monde-europe' => 0, 'monde-amerique-nord' => 0, 'monde-amerique-sud' => 0, 'monde-afrique' => 0, 'monde-asie' => 0, 'monde-oceanie' => 0];
+/** hors d'Europe, les stations sont rares : sans station à moins de 40 km ni carreau de réanalyse, celle d'un pack du monde
+ *  jusqu'à 150 km (« Station à N km », la pluie devient « il a plu dans la région ») ; une station d'un pack du monde à moins
+ *  de 3 km d'une station d'un autre pack est la même : sautée */
+const METEO_WORLD_KM = 150.0;
+const METEO_WORLD_SAME_KM = 3.0;
 const METEO_MEASURED_KM = 15.0;
 const METEO_STATION_KM = 40.0;
 const METEO_MAX_ALT = 150.0;

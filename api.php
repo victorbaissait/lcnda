@@ -489,6 +489,8 @@ try {
         catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     }
     if ($isWrite && (str_starts_with((string) $action, 'elections_dl_') || str_starts_with((string) $action, 'elections_pack_'))) { require_once __DIR__ . '/lib/elections.php'; try { json_response(elections_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🗳 Élections d'autrefois : installer / retirer le pack (lib/elections.php)
+    // 🏘 Histoire du lieu : installer / retirer le pack, tables de frdata.org (fichiers à part : lib/histoire.php)
+    if ($isWrite && preg_match('/^hist_(dl|pack|fhmd)_/', (string) $action)) { require_once __DIR__ . '/lib/histoire.php'; try { json_response(hist_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } }
     if ($isWrite && str_starts_with((string) $action, 'lieux_')) { require_once __DIR__ . '/lib/lieux_a_placer.php'; } // 📍 Lieux à placer (écritures dans handle_write)
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
@@ -776,6 +778,7 @@ try {
         'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
         'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today', 'meteo_place', 'meteo_altitude', 'meteo_dl_info', 'meteo_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
         'elections_status', 'elections_person', 'elections_dl_info', 'elections_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/elections.php'; try { json_response(elections_api_get($pdo, (string) $action, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗳 Élections d'autrefois (lib/elections.php)
+        'hist_status', 'hist_about', 'hist_person', 'hist_place', 'hist_fhmd_status', 'hist_dl_info', 'hist_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/histoire.php'; try { json_response(hist_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏘 Histoire du lieu (lib/histoire.php) : pack à part, lecture seule
         'frontieres_status' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_status($pdo)); })(), // 🏛 Frontières anciennes : installé ? tailles, empreintes
         'frontieres_remote' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_front_remote()); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏛 adresses et tailles annoncées
         'frontieres_communes' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_communes($_GET)); })(), // 🏛 communes disparues d'un cadre de la carte

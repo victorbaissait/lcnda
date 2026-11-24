@@ -1,0 +1,835 @@
+fr ¦ is
+Le texte est vide : écris ou lis d’abord l’acte. ¦ Textinn er tómur: skrifaðu eða lestu skjalið fyrst.
+Aucune personne repérée dans le texte pour l’instant. ¦ Engir einstaklingar fundnir í textanum enn.
+Personnes — {t} ¦ Einstaklingar — {t}
+L’envoi vers les autres outils n’est pas chargé. ¦ Sending í önnur verkfæri er ekki hlaðin.
+L’image de l’acte ¦ Mynd skjalsins
+Le texte de la transcription ¦ Texti uppskriftarinnar
+Les personnes repérées (tableau) ¦ Einstaklingar sem fundust (tafla)
+Envoyer vers… ¦ Senda í…
+Transcription — {t} ¦ Uppskrift — {t}
+Signature — {t} ¦ Undirskrift — {t}
+L’export Word n’est pas chargé. ¦ Word-útflutningur er ekki hlaðinn.
+Éclaircir / restaurer l’image ¦ Lýsa / lagfæra myndina
+le texte mis en page, à ouvrir dans Word ou LibreOffice (.docx) ¦ umbrotinn textinn, til að opna í Word eða LibreOffice (.docx)
+Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net ¦ Opna þessa undirskrift í „Undirskriftir og innsigli“: pappírinn hverfur, blekið verður skýr lína
+Détourer la signature ¦ Klippa út undirskriftina
++ {n} autres : zoome pour les voir. ¦ + {n} í viðbót: þysjaðu inn til að sjá þá.
+1 case repérée ¦ 1 reitur merktur
+1 lieu pas sur la carte ¦ 1 staður ekki á kortinu
+Affiche d’abord un arbre. ¦ Sýndu fyrst tré.
+Ajouter la mère ¦ Bæta við móður
+Ajouter le père ¦ Bæta við föður
+Ajouter l’autre parent ¦ Bæta við hinu foreldrinu
+Aller à un lieu… ¦ Fara á stað…
+Ancêtres (Sosa) ¦ Forfeður (Sosa)
+Ancêtres (Sosa) sur {n} générations ¦ Forfeður (Sosa) í {n} kynslóðir
+Ascendants de {nm} ¦ Forfeður {nm}
+Au zoom faible, les points proches deviennent une pastille avec leur nombre ¦ Við lítinn aðdrátt verða nálægir punktar að merki með fjölda sínum
+Aucune carte à exporter. ¦ Ekkert kort til að flytja út.
+Aucune donnée. ¦ Engin gögn.
+Aucune naissance d’ancêtre n’a de lieu placé sur la carte. ¦ Enginn fæðingarstaður forföður er settur á kortið.
+Branche : {x} ¦ Grein: {x}
+CARTE · {x} ¦ KORT · {x}
+Centre de gravité (G1 = la personne de départ) ¦ Þyngdarmiðja (G1 = upphafseinstaklingurinn)
+Centrer la carte sur un lieu et ouvrir sa bulle ¦ Miðja kortið á stað og opna blöðruna hans
+Chargement du graphique… ¦ Hleð grafi…
+Choisis d’abord la personne de départ (Sosa 1). ¦ Veldu fyrst upphafseinstaklinginn (Sosa 1).
+Colorer les cases : une étiquette, une branche, ou les fiches sans source ¦ Lita reitina: merki, grein eða spjöld án heimildar
+Dans cette zone ¦ Á þessu svæði
+Dans la fenêtre d’impression, choisis « Enregistrer en PDF ». ¦ Í prentglugganum skaltu velja „Vista sem PDF“.
+De {a} à {b} ¦ Frá {a} til {b}
+Depuis {a} ¦ Frá {a}
+Famille de {nm} ¦ Fjölskylda {nm}
+Feuilles en largeur ¦ Blöð á breidd
+GRAPHIQUES ¦ GRÖF
+Grand arbre à assembler ¦ Stórt tré til að setja saman
+Génération {g} : {n}{y} ¦ Kynslóð {g}: {n}{y}
+Image impossible avec ce fond de carte : choisis PDF. ¦ Mynd ekki möguleg með þessu grunnkorti: veldu PDF.
+Imprime à 100 % (sans « ajuster à la page »). ¦ Prentaðu í 100 % (án „aðlaga að síðu“).
+Imprimer ce graphique (⌘P) ¦ Prenta þetta graf (⌘P)
+Imprimer la carte affichée (⌘P) ¦ Prenta kortið sem sést (⌘P)
+Imprimer l’arbre en grand, sur plusieurs feuilles A4 ou A3 à assembler ¦ Prenta tréð stórt, á mörg A4- eða A3-blöð til að setja saman
+Inhumations ¦ Greftranir
+Jusqu’à {b} ¦ Til {b}
+La liste des événements visibles, qui suit la carte ¦ Listinn yfir sýnilega atburði, sem fylgir kortinu
+La photo de la fiche dans chaque case ¦ Mynd spjaldsins í hverjum reit
+Latitude ¦ Breiddargráða
+Les chiffres : {t} ¦ Tölurnar: {t}
+Les couleurs des sortes d’événements et la période ¦ Litir atburðategunda og tímabilið
+Les {n} premiers. ¦ Fyrstu {n}.
+Longitude ¦ Lengdargráða
+L’arbre est découpé en feuilles qui se recouvrent un peu : coupe, pose sur la voisine en faisant coïncider les croix, colle. ¦ Trénu er skipt í blöð sem skarast aðeins: klipptu, leggðu á næsta blað þannig að krossarnir passi saman, límdu.
+L’impression en feuilles n’est pas disponible ici. ¦ Prentun á mörg blöð er ekki í boði hér.
+Masquer cette branche ¦ Fela þessa grein
+Montrer cette branche ¦ Sýna þessa grein
+Même échelle des deux côtés (le plus grand = {m}). ¦ Sami kvarði báðum megin (stærst = {m}).
+Nom : {x} ¦ Nafn: {x}
+PNG, JPG, PDF ou CSV de la carte affichée ¦ PNG, JPG, PDF eða CSV af kortinu sem sést
+Plan d’assemblage ¦ Samsetningarteikning
+Plan d’assemblage en première page ¦ Samsetningarteikning á fyrstu síðu
+Pose les feuilles dans l’ordre du plan : A1 en haut à gauche. ¦ Leggðu blöðin í röð teikningarinnar: A1 efst til vinstri.
+Pose-la sur sa voisine jusqu’au pointillé, en faisant coïncider les croix ⊕, puis colle. ¦ Leggðu það á næsta blað að punktalínunni, þannig að krossarnir ⊕ passi saman, og límdu svo.
+Période : {a} – {b} ¦ Tímabil: {a} – {b}
+Recentrer l’arbre ici ¦ Miðja tréð hér
+Recouvrement ¦ Skörun
+Repères de collage (✂, pointillés, croix) ¦ Límmerki (✂, punktalínur, krossar)
+Rien dans le cadre : déplace la carte ou dézoome. ¦ Ekkert í rammanum: færðu kortið eða þysjaðu út.
+Rien à imprimer. ¦ Ekkert til að prenta.
+Sans source (en rouge) ¦ Án heimildar (rautt)
+Sosa et côtés : depuis la personne de départ. ¦ Sosa og hliðar: frá upphafseinstaklingnum.
+Sur chaque feuille qui n’est pas dans la première colonne ou la première rangée, coupe la marge blanche le long du trait ✂. ¦ Á hverju blaði sem er ekki í fyrsta dálki eða fyrstu röð skaltu klippa hvítu spássíuna eftir línunni ✂.
+Un point par génération d’ancêtres (la moyenne des lieux de naissance), reliés par une flèche ¦ Einn punktur fyrir hverja kynslóð forfeðra (meðaltal fæðingarstaða), tengdir með ör
+Une personne… ¦ Einstaklingur…
+Voir tous les points (⌘0) ¦ Sjá alla punkta (⌘0)
+Vue d’ensemble : glisse le cadre pour te déplacer ¦ Yfirlit: dragðu rammann til að færa þig
+au-dessus : {x} ¦ fyrir ofan: {x}
+deux périodes ¦ tvö tímabil
+elle seule ¦ hún eingöngu
+les hommes et les femmes ¦ karlar og konur
+les événements visibles ¦ sýnilegu atburðirnir
+rangée {r}, colonne {c} ¦ röð {r}, dálkur {c}
+ses ascendants ¦ forfeður hennar/hans
+{e} sans position : clique pour placer leurs lieux ¦ {e} án staðsetningar: smelltu til að setja staðina þeirra
+{e} · {p} ¦ {e} · {p}
+{n} cases repérées ¦ {n} reitir merktir
+{n} feuilles : {c} en largeur, {r} en hauteur. Affiche finie : {w} × {h} cm. ¦ {n} blöð: {c} á breidd, {r} á hæð. Fullbúið veggspjald: {w} × {h} cm.
+{n} lieux pas sur la carte ¦ {n} staðir ekki á kortinu
+{n} événements ¦ {n} atburðir
+{n} événements dans {p} lieux : clique pour zoomer ¦ {n} atburðir á {p} stöðum: smelltu til að þysja
+{what} de {nm} (créer la fiche ou relier une fiche) ¦ {what} {nm} (búa til spjaldið eða tengja spjald)
+{x} se pose ici ¦ {x} fer hingað
+© contributeurs OpenStreetMap ¦ © OpenStreetMap-þátttakendur
+« {x} » n’a pas encore de position sur la carte. ¦ „{x}“ hefur enga staðsetningu á kortinu enn.
+Âge {a} – {b} ¦ Aldur {a} – {b}
+Étiquette : {x} ¦ Merki: {x}
+à gauche : {x} ¦ til vinstri: {x}
+↔ Comparer ¦ ↔ Bera saman
+↔ Comparer deux statistiques ¦ ↔ Bera saman tvær tölfræðir
+⤓ CSV ¦ ⤓ CSV
+⧉ Copier ¦ ⧉ Afrita
+👁 Montrer les branches masquées ({n}) ¦ 👁 Sýna faldar greinar ({n})
+📊 CSV ¦ 📊 CSV
+🖼 Portraits ¦ 🖼 Andlitsmyndir
+🧩 Grand format à assembler ¦ 🧩 Stórt snið til að setja saman
+🧮 Voir les chiffres ¦ 🧮 Sjá tölurnar
+🧷 Repères ¦ 🧷 Merki
+moins d’un an ¦ innan við ár
+Âge à cet événement ¦ Aldur við þennan atburð
+Ajoute des dates aux événements des fiches, ou montre d’autres sortes d’événements. ¦ Bættu dagsetningum við atburði spjaldanna, eða sýndu aðrar tegundir atburða.
+Voir plus d’années ¦ Sjá fleiri ár
+Agrandir une période ¦ Stækka tímabil
+⌘ ou Ctrl + molette : agrandir là où est la souris. ¦ ⌘ eða Ctrl + skrunhjól: stækka þar sem músin er.
+1 génération ¦ 1 kynslóð
+Partir de ¦ Byrja frá
+Barres de vie ¦ Lífsstikur
+Âge à chaque événement ¦ Aldur við hvern atburð
+Anomalies en rouge ¦ Frávik í rauðu
+Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ». ¦ Engin sýn enn: stilltu tímalínuna, svo „💾 Vista sýnina“.
+Le monde autour… ¦ Heimurinn í kring…
+Chercher dans la frise… (nom, lieu, année) ¦ Leita á tímalínunni… (nafn, staður, ár)
+Chronologie de {x} ¦ Tímalína {x}
+Vue « {name} » affichée. ¦ Sýnin „{name}“ birt.
+Vue « {name} » supprimée ¦ Sýninni „{name}“ eytt
+Partir de cette personne ¦ Byrja frá þessum einstaklingi
+Comparer avec la personne de départ ¦ Bera saman við upphafseinstaklinginn
+Copier la ligne ¦ Afrita línuna
+Supprimer l’événement ¦ Eyða atburðinum
+Événement supprimé ¦ Atburði eytt
+La frise n’a pas pu se charger. ¦ Ekki tókst að hlaða tímalínunni.
+Choisis un lieu dans la colonne de gauche. ¦ Veldu stað í vinstri dálkinum.
+Tout ce qui s’y est passé : naissances, mariages, décès, domiciles… familles comprises. ¦ Allt sem gerðist þar: fæðingar, hjónabönd, andlát, búsetur… fjölskyldur meðtaldar.
+PERSONNE {l} ¦ EINSTAKLINGUR {l}
+{n} frises parallèles ¦ {n} samhliða tímalínur
+{a} événements sur {b} ¦ {a} atburðir af {b}
+Tout ce qui s’est passé à {x}, familles comprises. ¦ Allt sem gerðist í {x}, fjölskyldur meðtaldar.
+Événements connus autour de {x}, classés sans modifier la formulation originale des dates. ¦ Þekktir atburðir í kringum {x}, raðaðir án þess að breyta upprunalegu orðalagi dagsetninganna.
+Exporter la frise (⌘E) ¦ Flytja tímalínuna út (⌘E)
+Imprimer la frise (⌘P) ¦ Prenta tímalínuna (⌘P)
+Enregistrer la vue ¦ Vista sýnina
+Rien à exporter. ¦ Ekkert til að flytja út.
+Ce navigateur ne sait pas faire une image de la frise : choisis PDF. ¦ Þessi vafri getur ekki gert mynd af tímalínunni: veldu PDF.
+Image impossible : la frise est trop grande. ¦ Mynd ekki möguleg: tímalínan er of stór.
+tableur ¦ töflureiknir
+👶 Naissances et baptêmes ¦ 👶 Fæðingar og skírnir
+💍 Mariages et unions ¦ 💍 Hjónabönd og sambúð
+✝️ Décès et sépultures ¦ ✝️ Andlát og greftranir
+🔨 Métiers ¦ 🔨 Starfsgreinar
+🏠 Domiciles et départs ¦ 🏠 Búsetur og brottfarir
+🎖 Militaire ¦ 🎖 Herþjónusta
+📋 Recensements ¦ 📋 Manntöl
+📌 Autres ¦ 📌 Annað
+Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ». ¦ Engin sýn enn: veldu spjöldin, svo „💾 Vista sýnina“.
+Choisir {x} ¦ Velja {x}
+Inverser A et B ¦ Víxla A og B
+L’acte transcrit ¦ Uppskrifaða skjalið
+Choisir un acte… ¦ Velja skjal…
+Aucun acte transcrit pour l’instant. ¦ Ekkert uppskrifað skjal enn.
+Personne {l} ¦ Einstaklingur {l}
+Retirer cette fiche de la comparaison ¦ Taka þetta spjald úr samanburðinum
+Ajouter une fiche ({l}) ¦ Bæta við spjaldi ({l})
+Les actes viennent de Listes → Transcriptions d’actes. ¦ Skjölin koma úr Listar → Uppskriftir skjala.
+naissance : {a} / {b} ¦ fæðing: {a} / {b}
+décès : {a} / {b} ¦ andlát: {a} / {b}
+Parents en commun ¦ Sameiginlegir foreldrar
+Chargement de la comparaison… ¦ Hleð samanburði…
+Exporter la comparaison (⌘E) ¦ Flytja samanburðinn út (⌘E)
+Imprimer la comparaison (⌘P) ¦ Prenta samanburðinn (⌘P)
+Garder une seule fiche : choisis la valeur de A ou de B ligne à ligne ¦ Halda einu spjaldi: veldu gildi A eða B línu fyrir línu
+Fusionner… ¦ Sameina…
+Comparer des fiches ¦ Bera saman spjöld
+Pour décider si deux fiches sont des doublons, des homonymes ou deux branches distinctes. ¦ Til að ákveða hvort tvö spjöld séu tvítekningar, alnafnar eða tvær aðskildar greinar.
+Sans doute la même personne ¦ Líklega sami einstaklingur
+Peut-être la même personne ¦ Hugsanlega sami einstaklingur
+Sans doute deux personnes différentes ¦ Líklega tveir ólíkir einstaklingar
+rien à comparer ¦ ekkert til að bera saman
+Sexes différents ¦ Ólík kyn
+Une aide pour décider, pas une preuve : regarde aussi les sources. ¦ Hjálp við að ákveða, ekki sönnun: skoðaðu líka heimildirnar.
+Choisis cette personne dans la colonne de gauche. ¦ Veldu þennan einstakling í vinstri dálkinum.
+Ressemblance avec A : {n} % ¦ Líkindi við A: {n} %
+Naissance en face de naissance, décès en face de décès ; les lignes différentes sont marquées. ¦ Fæðing á móti fæðingu, andlát á móti andláti; ólíkar línur eru merktar.
+Parents : {x} ¦ Foreldrar: {x}
+Conjoints : {x} ¦ Makar: {x}
+Enfants : {x} ¦ Börn: {x}
+Fusionner ces deux fiches ¦ Sameina þessi tvö spjöld
+Pour chaque ligne, choisis la valeur à garder. Les sources, médias, notes, liens de famille des deux fiches sont tous gardés. ¦ Fyrir hverja línu skaltu velja gildið sem á að halda. Heimildir, miðlar, athugasemdir og fjölskyldutengsl beggja spjalda eru öll geymd.
+Fiche gardée : ¦ Spjald sem er haldið:
+Rien à choisir : les deux fiches ne se contredisent pas. ¦ Ekkert að velja: spjöldin tvö stangast ekki á.
+{n} événement(s) présent(s) sur une seule fiche : gardé(s) tel(s) quel(s). ¦ {n} atburðir aðeins á öðru spjaldinu: haldið eins og þeir eru.
+Fusionner les deux fiches ? ¦ Sameina spjöldin tvö?
+« {b} » sera fusionnée dans « {a} » : tout ce qui la concerne passe sur « {a} », puis elle disparaît. Une fusion ne peut pas être annulée. ¦ „{b}“ verður sameinað í „{a}“: allt sem því tengist færist á „{a}“, síðan hverfur það. Ekki er hægt að afturkalla sameiningu.
+🔀 Fusionner ¦ 🔀 Sameina
+Fusion faite, mais une valeur n’a pas pu être reprise : {err} ¦ Sameining tókst, en ekki var hægt að flytja eitt gildi: {err}
+Fiches fusionnées : {n} événement(s) en double retiré(s) ¦ Spjöld sameinuð: {n} tvíteknir atburðir fjarlægðir
+événements en double remis ¦ tvíteknir atburðir settir aftur
+Fiches fusionnées. ¦ Spjöld sameinuð.
+Comparer avec un acte ¦ Bera saman við skjal
+Cet acte parle-t-il de cette personne ? Les noms, années et lieux de la fiche sont cherchés dans le texte. ¦ Fjallar þetta skjal um þennan einstakling? Leitað er að nöfnum, árum og stöðum spjaldsins í textanum.
+Concordance {n} % ¦ Samsvörun {n} %
+Cet acte parle sans doute de cette personne ¦ Þetta skjal fjallar líklega um þennan einstakling
+Cet acte parle peut-être de cette personne ¦ Þetta skjal fjallar hugsanlega um þennan einstakling
+Peu d’indices dans cet acte ¦ Fáar vísbendingar í þessu skjali
+Texte vide. ¦ Tómur texti.
+Choisis un acte transcrit dans la colonne de gauche. ¦ Veldu uppskrifað skjal í vinstri dálkinum.
+Année de l’acte dans sa vie ¦ Ár skjalsins í lífi hennar/hans
+acte de {y}, fiche {a}–{b} ¦ skjal frá {y}, spjald {a}–{b}
+acte sans année ¦ skjal án árs
+Même année qu’un événement ¦ Sama ár og atburður
+Choisis un média à gauche pour {x}. ¦ Veldu miðil til vinstri fyrir {x}.
+Place du rideau ¦ Staða tjaldsins
+Image retirée de la comparaison ¦ Mynd tekin úr samanburðinum
+Image A ¦ Mynd A
+Image B ¦ Mynd B
+{a} et un acte ¦ {a} og skjal
+Comparaison de deux images ¦ Samanburður tveggja mynda
+Comparaison avec un acte ¦ Samanburður við skjal
+Comparaison : {x} ¦ Samanburður: {x}
+Ressemblance A–B ¦ Líkindi A–B
+, une carte ¦ , kort
+12/05/1882, vers 1880… ¦ 12/05/1882, um 1880…
+7 derniers jours ¦ Síðustu 7 dagar
+Ajoute la date de mariage de {a} et {b}. ¦ Bættu við giftingardegi {a} og {b}.
+Ajoute la naissance de {a}. ¦ Bættu við fæðingu {a}.
+Aucun objectif pour l’instant ¦ Ekkert markmið enn
+Aucun trésor ne correspond ¦ Enginn fjársjóður passar
+Bilan du {date} ¦ Samantekt {date}
+Cacher ce trésor ¦ Fela þennan fjársjóð
+Ce jour-là, le {day} ¦ Þennan dag, {day}
+Ce qui est arrivé à la famille ce jour du calendrier : naissances, mariages, décès… en une carte à partager. ¦ Það sem gerðist í fjölskyldunni á þessum degi ársins: fæðingar, hjónabönd, andlát… á einu korti til að deila.
+Cette page montre seulement : <b>{what}</b> ¦ Þessi síða sýnir aðeins: <b>{what}</b>
+Chasse supprimée. ¦ Leit eytt.
+Chercher un trésor ¦ Leita að fjársjóði
+Chercher un trésor… ¦ Leita að fjársjóði…
+Choisis au moins une question. ¦ Veldu að minnsta kosti eina spurningu.
+Choisis d’abord quoi montrer. ¦ Veldu fyrst hvað á að sýna.
+Choisis un widget dans la colonne de gauche (+). ¦ Veldu græju í vinstri dálkinum (+).
+Combien ¦ Hversu margir
+Copier vers… ¦ Afrita í…
+Croissance ¦ Vöxtur
+Croissance de la base mois par mois ¦ Vöxtur gagnagrunnsins mánuð fyrir mánuð
+Croissance indisponible. ¦ Vöxtur ekki tiltækur.
+Dans la fenêtre, « ⤓ PDF » ¦ Í glugganum, „⤓ PDF“
+Date butoir ¦ Lokadagur
+De cujus (ses ancêtres et descendants) ¦ De cujus (forfeður hennar/hans og afkomendur)
+Des objectifs au long cours (« 8 générations complètes d’ici décembre », « 100 actes transcrits ») avec une barre de progression calculée sur la base et une date butoir. ¦ Langtímamarkmið („8 heilar kynslóðir fyrir desember“, „100 uppskrifuð skjöl“) með framvindustiku reiknaðri úr gagnagrunninum og lokadegi.
+Des questions sur un ancêtre envoyées en un fichier à un proche ; ses réponses reviennent dans les fiches. ¦ Spurningar um forföður sendar í einni skrá til ættingja; svör hans koma aftur inn á spjöldin.
+Dossier (enquête) ¦ Mappa (athugun)
+Démarre le chronomètre quand tu te mets à chercher : le temps passé est rangé par jour et par sujet. ¦ Ræstu skeiðklukkuna þegar þú byrjar að leita: tímanum er raðað eftir degi og efni.
+En plein écran : le portrait, chaque étape avec sa date et son lieu, les photos, la carte. Espace = pause, flèches = avant / après, Échap = fin. ¦ Á öllum skjánum: andlitsmyndin, hvert skref með dagsetningu og stað, myndirnar, kortið. Bil = hlé, örvar = fram / aftur, Esc = lok.
+Entretien supprimé (le son reste dans les médias). ¦ Viðtali eytt (hljóðið verður áfram í miðlum).
+Essaie le lendemain, ou complète les dates exactes des actes. ¦ Reyndu daginn eftir, eða fylltu inn nákvæmar dagsetningar skjalanna.
+Essaie un autre mot : « lettre », « carte », « jeu »… ¦ Prófaðu annað orð: „bréf“, „kort“, „leikur“…
+Et toi, que sais-tu encore de {name} ? ¦ En þú, hvað veistu meira um {name}?
+Ex. : 8 générations complètes d’ici décembre, 100 actes transcrits. ¦ T.d.: 8 heilar kynslóðir fyrir desember, 100 uppskrifuð skjöl.
+Exporter ce widget (PDF) ¦ Flytja þessa græju út (PDF)
+Favori ¦ Eftirlæti
+Filtre retiré : toute la base. ¦ Sía fjarlægð: allur gagnagrunnurinn.
+Général ¦ Almennt
+Ils ont {n}, mais pas encore de mariage noté. ¦ Þau eiga {n}, en ekkert hjónaband skráð enn.
+Image de la carte (PNG) ¦ Mynd af kortinu (PNG)
+La courbe mois par mois des fiches, événements, sources et médias ajoutés, d’après le journal des modifications. ¦ Ferillinn mánuð fyrir mánuð yfir spjöld, atburði, heimildir og miðla sem bætt var við, samkvæmt breytingaskránni.
+La vie de ¦ Líf
+Le jour ¦ Dagurinn
+Lendemain › ¦ Næsti dagur ›
+Les questionnaires n’ont pas pu être lus. ¦ Ekki tókst að lesa spurningalistana.
+Lettre supprimée. ¦ Bréfi eytt.
+L’import des réponses n’est pas encore prêt. ¦ Innflutningur svara er ekki tilbúinn enn.
+L’impression n’est pas encore prête : réessaie dans un instant. ¦ Prentun er ekki tilbúin enn: reyndu aftur eftir smástund.
+Mes questionnaires ¦ Spurningalistarnir mínir
+Mettre dans une autre page du tableau de bord… ¦ Setja á aðra síðu stjórnborðsins…
+Mettre en favori ¦ Setja í eftirlæti
+Ni naissance ni baptême sur sa fiche. ¦ Hvorki fæðing né skírn á spjaldinu.
+Objectif ¦ Markmið
+Objectif ajouté. ¦ Markmiði bætt við.
+Objectif en pause. ¦ Markmið í hléi.
+Objectif repris. ¦ Markmið hafið aftur.
+Objectif supprimé. ¦ Markmiði eytt.
+PDF (bilan imprimable) ¦ PDF (prentanleg samantekt)
+Page enregistrée. ¦ Síða vistuð.
+Page filtrée : {what}. ¦ Síuð síða: {what}.
+Page web (.html) ¦ Vefsíða (.html)
+Page « {name} » supprimée, avec {widgets}. ¦ Síðunni „{name}“ eytt, ásamt {widgets}.
+Page « {name} » supprimée. ¦ Síðunni „{name}“ eytt.
+Pas assez d’éléments pour un diaporama. ¦ Ekki nógu margir hlutir fyrir myndasýningu.
+Pas encore de mariage noté pour ce couple. ¦ Ekkert hjónaband skráð enn fyrir þetta par.
+Passeport supprimé. ¦ Vegabréfi eytt.
+Passer › ¦ Sleppa ›
+Pour qui (le proche qui répond) ¦ Fyrir hvern (ættinginn sem svarar)
+Prépare-en un ci-dessus : il part en un seul fichier, les réponses reviennent dans les fiches. ¦ Útbúðu einn hér fyrir ofan: hann fer í einni skrá, svörin koma aftur inn á spjöldin.
+Quelle page ? ¦ Hvaða síða?
+Questionnaire aux anciens ¦ Spurningalisti til eldri ættingja
+Questionnaire noté comme envoyé. ¦ Spurningalisti merktur sem sendur.
+Retirer des favoris ¦ Fjarlægja úr eftirlætum
+Rien de noté ce jour-là dans la famille ¦ Ekkert skráð þennan dag í fjölskyldunni
+Rien d’urgent : tout ce que je sais vérifier est rempli. ¦ Ekkert áríðandi: allt sem ég kann að athuga er útfyllt.
+Secondes par image ¦ Sekúndur á mynd
+Succession ¦ Dánarbú
+Sur combien de mois ? ¦ Yfir hve marga mánuði?
+Sur quel ancêtre ? ¦ Um hvaða forföður?
+Sur quoi ? ¦ Um hvað?
+Tableau des chiffres (.csv) ¦ Tafla með tölunum (.csv)
+Tableau enregistré. ¦ Tafla vistuð.
+Tante Lucie ¦ Lúsía frænka
+Te souviens-tu de sa maison ? ¦ Manstu eftir húsinu hennar/hans?
+Tes souvenirs de famille ¦ Fjölskylduminningar þínar
+Tous les widgets de la page ne montrent que les fiches choisies (les chiffres clés aussi). ¦ Allar græjur síðunnar sýna aðeins valin spjöld (lykiltölurnar líka).
+Tulle ¦ Tulle
+Un bilan imprimable de la page (A4, ⤓ PDF) ¦ Prentanleg samantekt síðunnar (A4, ⤓ PDF)
+Un chronomètre de séance : démarre-le quand tu cherches, le temps est rangé par jour et par sujet (une branche, une enquête). Montre aussi le temps des Successions et de l’Atelier. ¦ Skeiðklukka fyrir lotu: ræstu hana þegar þú leitar, tímanum er raðað eftir degi og efni (grein, athugun). Sýnir líka tímann í Dánarbúum og Smiðjunni.
+Un nombre plus grand que zéro. ¦ Tala stærri en núll.
+Un seul fichier à envoyer par e-mail ; il le remplit chez lui et te renvoie ses réponses. ¦ Ein skrá til að senda í tölvupósti; hann fyllir hana út heima og sendir þér svörin.
+Une personne, et le diaporama est prêt : son portrait, chaque étape avec sa date et son lieu, ses photos, la carte de sa vie, une musique douce. ¦ Einn einstaklingur, og myndasýningin er tilbúin: andlitsmynd, hvert skref með dagsetningu og stað, myndir, kort af lífinu, ljúf tónlist.
+Une seule chose concrète à faire, remplie dans le widget : la date de mariage d’un couple, la naissance d’un ancêtre… puis ✓. ¦ Aðeins eitt áþreifanlegt verk, fyllt út í græjunni: giftingardagur pars, fæðing forföður… svo ✓.
+Une vie en diaporama ¦ Líf í myndasýningu
+Widget ¦ Græja
+Widget copié vers « {name} ». ¦ Græja afrituð í „{name}“.
+Widget dupliqué. ¦ Græja tvöfölduð.
+Widget « {name} » supprimé. ¦ Græjunni „{name}“ eytt.
+actes transcrits ¦ uppskrifuð skjöl
+ajoutés sur {n} mois ¦ bætt við á {n} mánuðum
+ancêtres Sosa ¦ Sosa-forfeður
+ce mois-ci : +{p} fiches, +{e} événements ¦ í þessum mánuði: +{p} spjöld, +{e} atburðir
+ce qui est ajouté chaque mois ¦ það sem bætist við í hverjum mánuði
+date dépassée ¦ dagsetning liðin
+d’ici le {date} ¦ fyrir {date}
+générations complètes ¦ heilar kynslóðir
+le total, mois après mois ¦ heildin, mánuð eftir mánuð
+sources ¦ heimildir
+trésor ¦ fjársjóður
+{n} images : {e} étapes, {ph} photos{map}. ¦ {n} myndir: {e} skref, {ph} ljósmyndir{map}.
+{n} questions ¦ {n} spurningar
+{n} réponses ¦ {n} svör
+{t} aujourd’hui ¦ {t} í dag
+{v} sur {t} {what} ¦ {v} af {t} {what}
+{what} : {who} ¦ {what}: {who}
+{who} a été baptisé ¦ {who} var skírður
+{who} a été baptisée ¦ {who} var skírð
+{who} a été inhumé ¦ {who} var jarðsettur
+{who} a été inhumée ¦ {who} var jarðsett
+{who} est mort ¦ {who} lést
+{who} est morte ¦ {who} lést
+{who} est né ¦ {who} fæddist
+{who} est née ¦ {who} fæddist
+{who} se sont mariés ¦ {who} gengu í hjónaband
+« {title} » caché (⚙️ Réglages pour le remontrer). ¦ „{title}“ falið (⚙️ Stillingar til að sýna aftur).
+« {title} » retiré des favoris. ¦ „{title}“ fjarlægt úr eftirlætum.
+« {title} » supprimé. ¦ „{title}“ eytt.
+À ouvrir ou envoyer tel quel ¦ Til að opna eða senda eins og það er
+Écris la date (même approximative). ¦ Skrifaðu dagsetninguna (jafnvel áætlaða).
+Écris le nom du proche. ¦ Skrifaðu nafn ættingjans.
+à {n} ans ¦ {n} ára
+‹ Veille ¦ ‹ Dagurinn áður
+↕ Réordonner les widgets ¦ ↕ Endurraða græjunum
+⏱ C’est parti : « {s} ». ¦ ⏱ Af stað: „{s}“.
+⏱ Temps de recherche ¦ ⏱ Leitartími
+⏱ {t} rangées dans « {s} ». ¦ ⏱ {t} sett í „{s}“.
+▶ Démarrer ¦ ▶ Ræsa
+✉ Envoyé ¦ ✉ Sent
+✓ Mariage ajouté. ¦ ✓ Hjónabandi bætt við.
+✓ Naissance ajoutée. ¦ ✓ Fæðingu bætt við.
+✕ Tout montrer ¦ ✕ Sýna allt
+⭐ Favoris ¦ ⭐ Eftirlæti
+⭐ « {title} » dans les favoris. ¦ ⭐ „{title}“ í eftirlætum.
+＋ Ajouter un widget ¦ ＋ Bæta við græju
+＋ Objectif ¦ ＋ Markmið
+🎞 Lancer le diaporama ¦ 🎞 Hefja myndasýninguna
+🎯 Mes objectifs ¦ 🎯 Markmiðin mín
+📈 Croissance de la base ¦ 📈 Vöxtur gagnagrunnsins
+📌 « {block} » de {name} mis dans le tableau de bord, page « {page} ». ¦ 📌 „{block}“ {name} sett á stjórnborðið, síða „{page}“.
+📚 Atelier ¦ 📚 Smiðja
+📮 Préparer et télécharger ¦ 📮 Útbúa og sækja
+🔎 Filtrer cette page ¦ 🔎 Sía þessa síðu
+🔎 Filtrer cette page… ¦ 🔎 Sía þessa síðu…
+🕘 Récents ¦ 🕘 Nýlegt
+🧭 Prochaine action ¦ 🧭 Næsta skref
+(inconnus : {list}) ¦ (óþekkt: {list})
+AVANCEMENT ¦ FRAMVINDA
+Acte de naissance ou de baptême ¦ Fæðingar- eða skírnarvottorð
+Affichage des pistes ¦ Birting vísbendinga
+Ajouter en note sur la fiche ¦ Bæta við sem athugasemd á spjaldið
+Années parcourues ¦ Ár sem farið var yfir
+Années parcourues : de ¦ Ár sem farið var yfir: frá
+Argument de preuve ¦ Sönnunarrök
+Arrêter le chronomètre ¦ Stöðva skeiðklukkuna
+Aucun groupe. ¦ Enginn hópur.
+Aucun test. ¦ Ekkert próf.
+Aucune piste dans cette enquête. ¦ Engin vísbending í þessari athugun.
+Aucune piste. ¦ Engin vísbending.
+Battue « {title} » supprimée ¦ Leitinni „{title}“ eytt
+CONCLUSION ¦ NIÐURSTAÐA
+Ce que l’enquête a établi ¦ Það sem athugunin hefur staðfest
+Ce qui est reconstitué ¦ Það sem hefur verið endurgert
+Chargement de la battue… ¦ Hleð leitinni…
+Chargement de l’enquête… ¦ Hleð athuguninni…
+Chargement des battues… ¦ Hleð leitum…
+Chargement des enquêtes… ¦ Hleð athugunum…
+Chercher dans cette page… ¦ Leita á þessari síðu…
+Chercher une rubrique… ¦ Leita að kafla…
+Choisis la personne cherchée. ¦ Veldu einstaklinginn sem leitað er að.
+Chronologie des pistes ¦ Tímaröð vísbendinga
+Clic sur un morceau : changer son grand-parent ou le retirer. ¦ Smelltu á bút: breyta afa/ömmu hans eða fjarlægja hann.
+Coller des correspondances partagées ¦ Líma inn deildar samsvaranir
+Commune de départ ¦ Upphafssveitarfélag
+Communes terminées ¦ Sveitarfélög lokið
+Comprendre et régler ¦ Skilja og stilla
+Conclue le {d} ¦ Lokið {d}
+Conclure l’enquête ¦ Ljúka athuguninni
+Conclusion : {title} ¦ Niðurstaða: {title}
+Conclusion ajoutée sur la fiche de {name} ¦ Niðurstöðu bætt á spjald {name}
+Conclusion enregistrée ¦ Niðurstaða vistuð
+Contrat de mariage chez le notaire ¦ Kaupmáli hjá lögbókanda
+Correspondance supprimée ¦ Samsvörun eytt
+Correspondance « {name} » supprimée ¦ Samsvöruninni „{name}“ eytt
+Correspondances ADN ¦ DNA-samsvaranir
+Correspondances introuvables. ¦ Samsvaranir finnast ekki.
+Correspondances montrées ¦ Samsvaranir sem sýndar eru
+Correspondances partagées ¦ Deildar samsvaranir
+Corrigé pour l’endogamie ¦ Leiðrétt fyrir skyldleikagiftingum
+Couleurs de la carte ¦ Litir kortsins
+Crée un phasage, puis ajoute les frères et sœurs testés. ¦ Búðu til fösun, bættu svo við prófuðum systkinum.
+Créer l’enquête ¦ Búa til athugunina
+Créée le ¦ Búið til
+Dans quelle unité {name} a-t-il servi, où, et que lui est-il arrivé ? ¦ Í hvaða herdeild þjónaði {name}, hvar, og hvað kom fyrir hann?
+Date de relance invalide. ¦ Ógild dagsetning áminningar.
+Depuis un modèle… ¦ Úr sniðmáti…
+Donne au moins la cote ou le fonds parcouru. ¦ Gefðu að minnsta kosti upp málsetninguna eða skjalaheildina sem farið var yfir.
+Donner à : {gp} ¦ Gefa: {gp}
+Dossier de recherche sur ¦ Rannsóknarmappa um
+Dossier « {name} » supprimé ¦ Möppunni „{name}“ eytt
+Dupliquer l’enquête ¦ Tvöfalda athugunina
+Déjà parcouru : ¦ Þegar farið yfir:
+D’après l’enquête « {title} ». ¦ Samkvæmt athuguninni „{title}“.
+ENQUÊTE ¦ ATHUGUN
+En cours : a répondu ¦ Í gangi: svaraði
+En cours : arbre échangé ¦ Í gangi: tré skipst á
+En cours : contacté ¦ Í gangi: haft samband
+En pause : pas de réponse ¦ Í hléi: ekkert svar
+Enquête dupliquée ¦ Athugun tvöfölduð
+Enquête supprimée ¦ Athugun eytt
+Enquête sur {name} ¦ Athugun á {name}
+Enquête vide ¦ Tóm athugun
+Enquête « {title} » créée ¦ Athugunin „{title}“ búin til
+Enquête « {title} » supprimée ¦ Athuguninni „{title}“ eytt
+Enregistrer la conclusion ¦ Vista niðurstöðuna
+Ex. AD de la Corrèze, registres paroissiaux de Naves ¦ T.d. AD de la Corrèze, sóknarbækur Naves
+Ex. Jean DURAND est le fils de Pierre DURAND et de Marie LACOMBE. ¦ T.d. Jean DURAND er sonur Pierre DURAND og Marie LACOMBE.
+Exploré avec doute ¦ Kannað með efa
+Exporter le rapport… ¦ Flytja skýrsluna út…
+Exporter ses segments pour DNA Painter ¦ Flytja út búta hennar/hans fyrir DNA Painter
+Fonds ou archives ¦ Skjalaheild eða skjalasafn
+Force de l’endogamie ¦ Styrkur skyldleikagiftinga
+Frères et sœurs testés ¦ Prófuð systkini
+Glisse une piste ici ¦ Dragðu vísbendingu hingað
+Groupe « {name} » supprimé ¦ Hópnum „{name}“ eytt
+Il en faut au moins trois pour un phasage fiable. ¦ Að minnsta kosti þrjú þarf fyrir áreiðanlega fösun.
+Impasse ¦ Blindgata
+Imprimer le rapport ¦ Prenta skýrsluna
+La fin doit être après le début. ¦ Lokin verða að vera á eftir upphafinu.
+Lancer le chronomètre : le temps passé sur cette enquête ¦ Ræsa skeiðklukkuna: tíminn sem fer í þessa athugun
+Le départ de {name} ¦ Brottför {name}
+Le parcours militaire de {name} ¦ Herþjónustuferill {name}
+Les parents de {name} ¦ Foreldrar {name}
+Lignées et origines ¦ Ættleggir og uppruni
+Livret militaire, lettres, photos de famille ¦ Herþjónustubók, bréf, fjölskyldumyndir
+L’enquête de ce dossier n’existe plus. ¦ Athugun þessarar möppu er ekki lengur til.
+L’enquête de cette recherche n’existe plus. ¦ Athugun þessarar leitar er ekki lengur til.
+L’enquête est terminée. Mettre la conclusion sur la fiche de {name} ? ¦ Athuguninni er lokið. Setja niðurstöðuna á spjald {name}?
+Mes données ¦ Gögnin mín
+Mettre dans « {col} » ¦ Setja í „{col}“
+Mettre l’enquête dans « Terminées » ¦ Setja athugunina í „Lokið“
+Modifier la recherche sans résultat ¦ Breyta árangurslausu leitinni
+Morceau attribué ¦ Bútur úthlutaður
+Morceau changé ¦ Bútur breyttur
+Morceau retiré ¦ Bútur fjarlægður
+Média retiré de la piste ¦ Miðill fjarlægður úr vísbendingunni
+Média retiré de l’enquête ¦ Miðill fjarlægður úr athuguninni
+Mémoire des hommes : morts pour la France, journaux des unités ¦ Mémoire des hommes: fallnir fyrir Frakkland, dagbækur herdeilda
+MémorialGenWeb : monuments aux morts ¦ MémorialGenWeb: minnisvarðar um fallna
+Naturalisation dans le pays d’arrivée ¦ Ríkisborgararéttur í komulandinu
+Note ici chaque registre parcouru sans rien trouver : l’app te prévient avant de le refaire. ¦ Skráðu hér hverja bók sem farið var yfir án þess að finna neitt: forritið varar þig við áður en þú gerir það aftur.
+Nouveau phasage ¦ Ný fösun
+Nouvelle enquête depuis un modèle ¦ Ný athugun úr sniðmáti
+Nouvelle enquête depuis un modèle… ¦ Ný athugun úr sniðmáti…
+Parcouru le ¦ Farið yfir
+Partagé entre frères et sœurs ¦ Deilt milli systkina
+Partagées ¦ Deilt
+Pas de relance ¦ Engin áminning
+Pas encore de conclusion : quand tu as la réponse, écris-la avec l’argument qui la prouve et les sources retenues. ¦ Engin niðurstaða enn: þegar þú hefur svarið, skrifaðu það með rökunum sem sanna það og heimildunum sem valdar voru.
+Pas encore de conclusion. ¦ Engin niðurstaða enn.
+Personne cherchée ¦ Einstaklingur sem leitað er að
+Phasage ¦ Fösun
+Phasage introuvable. ¦ Fösun finnst ekki.
+Phasage visuel ¦ Sjónræn fösun
+Phasage « {name} » supprimé ¦ Fösuninni „{name}“ eytt
+Piste « {title} » : {col} ¦ Vísbending „{title}“: {col}
+Plus de relance pour « {name} » ¦ Engin frekari áminning fyrir „{name}“
+Point de recombinaison ajouté ¦ Endurröðunarpunkti bætt við
+Presse locale et courriers de la famille restée au pays ¦ Staðarblöð og bréf frá fjölskyldunni sem varð eftir heima
+Quand et par où {name} est-il parti, et où s’est-il installé ? ¦ Hvenær og hvaða leið fór {name}, og hvar settist hann að?
+Question, chronologie des pistes, pièces, conclusion : à envoyer à un cousin ou à une association. ¦ Spurning, tímaröð vísbendinga, gögn, niðurstaða: til að senda frænda eða félagi.
+Qui sont le père et la mère de {name} ? Où et quand se sont-ils mariés ? ¦ Hverjir eru faðir og móðir {name}? Hvar og hvenær gengu þau í hjónaband?
+RIEN TROUVÉ ¦ EKKERT FANNST
+Rapport : {t} ¦ Skýrsla: {t}
+Rapport fait le {d} ¦ Skýrsla gerð {d}
+Recensements : le foyer et ses voisins ¦ Manntöl: heimilið og nágrannarnir
+Recensements du pays d’arrivée ¦ Manntöl komulandsins
+Recherche commune par commune : les registres parcourus, ville par ville. ¦ Leit sveitarfélag fyrir sveitarfélag: bækurnar sem farið var yfir, bæ eftir bæ.
+Recherche introuvable. ¦ Leit finnst ekki.
+Recherche sans résultat ¦ Leit án árangurs
+Recherche sans résultat notée. ¦ Leit án árangurs skráð.
+Recherche sans résultat supprimée ¦ Leit án árangurs eytt
+Recherches sans résultat ¦ Leitir án árangurs
+Registres des consulats ¦ Skrár ræðismannsskrifstofa
+Registres parcourus ¦ Bækur sem farið var yfir
+Regrouper et placer ¦ Flokka og staðsetja
+Relance de « {name} » le {d} ¦ Áminning til „{name}“ {d}
+Relancer dans {n} jours ¦ Minna á eftir {n} daga
+Relancer {name} (ADN) ¦ Minna {name} á (DNA)
+Remettre le temps à zéro ¦ Núllstilla tímann
+Retirer ce morceau ¦ Fjarlægja þennan bút
+Retrouver un soldat ¦ Finna hermann
+Rien de prérempli ¦ Ekkert fyllt út fyrir fram
+Rien à relancer : sur une correspondance « Contactée », « 🔔 Relancer dans 30 jours ». ¦ Ekkert að minna á: á samsvörun sem er „Haft samband“, „🔔 Minna á eftir 30 daga“.
+Rubriques de l’ADN ¦ DNA-kaflar
+Segment supprimé ¦ Bút eytt
+Sources retenues ¦ Heimildir sem valdar voru
+Sépultures de guerre et nécropoles ¦ Stríðsgrafir og grafreitir
+Tables décennales autour de la naissance ¦ Tíu ára skrár í kringum fæðinguna
+Temps remis à zéro ¦ Tími núllstilltur
+Terminé : placé dans l’arbre ✓ ¦ Lokið: sett í tréð ✓
+Test « {name} » supprimé ¦ Prófinu „{name}“ eytt
+Tests entièrement endogames ¦ Próf alfarið með skyldleikagiftingum
+Trouver les parents de… ¦ Finna foreldra…
+Un point de recombinaison à la position « De » ¦ Endurröðunarpunktur á staðsetningunni „Frá“
+Une question à résoudre : ses pistes, ses pièces, sa conclusion. ¦ Spurning til að leysa: vísbendingar hennar, gögn, niðurstaða.
+Voir ses correspondances ¦ Sjá samsvaranir hennar/hans
+années non notées ¦ ár ekki skráð
+aussi : {list} ¦ líka: {list}
+la page affichée ¦ síðan sem sést
+ouverte le {d} ¦ opnuð {d}
+paire notée ¦ par skráð
+paires notées ¦ pör skráð
+partagé : {a}–{b} Mb, {cm} cM ¦ deilt: {a}–{b} Mb, {cm} cM
+un fichier .html à envoyer ¦ .html-skrá til að senda
+{cote} ({years}) le {d}, enquête « {title} » ¦ {cote} ({years}) {d}, athugun „{title}“
+{m} min ¦ {m} mín
+{n} ajoutées ¦ {n} bætt við
+{n} commencées ¦ {n} hafnar
+{n} correspondances supprimées ¦ {n} samsvörunum eytt
+{n} entre {lo} et {hi} cM ; {pairs} ¦ {n} á milli {lo} og {hi} cM; {pairs}
+{n} pistes préparées ¦ {n} vísbendingar undirbúnar
+{n} sur {all} ¦ {n} af {all}
+{n}/{all} ({pct} %) ¦ {n}/{all} ({pct} %)
+{n}/{all} registres parcourus ¦ {n}/{all} bækur farnar yfir
+{raw} cM comptés comme {cm} cM ¦ {raw} cM talin sem {cm} cM
+« Enregistrer en PDF » dans la fenêtre d’impression ¦ „Vista sem PDF“ í prentglugganum
+« Trouver les parents de… », « Retrouver un soldat », « Émigré » : questions et pistes préparées ¦ „Finna foreldra…“, „Finna hermann“, „Útflytjandi“: spurningar og vísbendingar undirbúnar
+« {a} » et « {b} » ne se correspondent plus ¦ „{a}“ og „{b}“ samsvara ekki lengur
+« {a} » et « {b} » se correspondent ¦ „{a}“ og „{b}“ samsvara
+« {name} » a répondu ¦ „{name}“ hefur svarað
+À explorer → En cours → Explorée → Impasse : glisse les pistes d’une colonne à l’autre ¦ Til könnunar → Í gangi → Kannað → Blindgata: dragðu vísbendingar á milli dálka
+À faire : contacter ¦ Að gera: hafa samband
+Écris la conclusion. ¦ Skrifaðu niðurstöðuna.
+Émigré : retrouver le départ et l’arrivée ¦ Útflytjandi: finna brottför og komu
+État de la commune ¦ Staða sveitarfélagsins
+Événement retiré de la piste ¦ Atburður fjarlægður úr vísbendingunni
+à relancer depuis le {d} ¦ á að minna á síðan {d}
+⏱ Chronomètre lancé. ¦ ⏱ Skeiðklukka ræst.
+⏱ Temps gardé : {t}. ¦ ⏱ Tími geymdur: {t}.
+✂ Point de recombinaison ¦ ✂ Endurröðunarpunktur
+✅ Conclue ¦ ✅ Lokið
+✅ Conclure l’enquête ¦ ✅ Ljúka athuguninni
+✎ Modifier la conclusion ¦ ✎ Breyta niðurstöðunni
+✓ A répondu ¦ ✓ Hefur svarað
+⤒ Coller une liste ¦ ⤒ Líma inn lista
+＋ Attribuer ¦ ＋ Úthluta
+＋ Frère ou sœur ¦ ＋ Bróðir eða systir
+＋ Nouveau phasage ¦ ＋ Ný fösun
+＋ Recherche sans résultat ¦ ＋ Leit án árangurs
+🌐 Page web ¦ 🌐 Vefsíða
+💾 Fichier ¦ 💾 Skrá
+📈 Branche endogame (cM × {f}) ¦ 📈 Grein með skyldleikagiftingum (cM × {f})
+📈 Branche endogame : {raw} cM comptés comme {cm} cM. ¦ 📈 Grein með skyldleikagiftingum: {raw} cM talin sem {cm} cM.
+📈 Endogamie ¦ 📈 Skyldleikagiftingar
+📊 Tableur ¦ 📊 Töflureiknir
+🔔 Relancer le ¦ 🔔 Minna á þann
+🔔 « Relancer dans… » propose ¦ 🔔 „Minna á eftir…“ býður
+🔔 À relancer ¦ 🔔 Á að minna á
+🗂 Ranger en groupes… ¦ 🗂 Raða í hópa…
+🗑 Supprimer ce phasage ¦ 🗑 Eyða þessari fösun
+(pourquoi c’est sûr : les sources qui s’accordent, les contradictions levées) ¦ (af hverju þetta er öruggt: heimildirnar sem ber saman, mótsagnirnar sem leystar voru)
+A répondu (plus de relance) ¦ Hefur svarað (engin frekari áminning)
+Acte de décès (âge, parents, témoins) ¦ Dánarvottorð (aldur, foreldrar, vitni)
+Acte de mariage (il nomme les parents) ¦ Hjúskaparvottorð (það nefnir foreldrana)
+Aucune correspondance dans cette fourchette : importe tes correspondances (👥 Correspondances). ¦ Engin samsvörun á þessu bili: flyttu inn samsvaranirnar þínar (👥 Samsvaranir).
+Avec trois frères et sœurs testés (ou plus) : attribue chaque morceau de chromosome à l’un des quatre grands-parents, chromosome par chromosome. Les comparaisons entre frères et sœurs (segments partagés) aident à placer les points de recombinaison. ¦ Með þremur prófuðum systkinum (eða fleiri): úthlutaðu hverjum bút litnings til eins af fjórum öfum og ömmum, litning fyrir litning. Samanburður milli systkina (deildir bútar) hjálpar til við að staðsetja endurröðunarpunktana.
+Branches endogames (groupes) ¦ Greinar með skyldleikagiftingum (hópar)
+CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice)
+Chercher une battue… (nom, commune, cible) ¦ Leita að leit… (nafn, sveitarfélag, markmið)
+Chercher une enquête… (personne, acte, lieu) ¦ Leita að athugun… (einstaklingur, skjal, staður)
+Dans une branche endogame (village fermé, île, communauté), on partage plus d’ADN qu’attendu : les cM de ces correspondances sont corrigés avant d’estimer la relation. ¦ Í grein með skyldleikagiftingum (lokað þorp, eyja, samfélag) deilir fólk meira DNA en búist er við: cM þessara samsvarana eru leiðrétt áður en skyldleikinn er metinn.
+Donne la position (De). ¦ Gefðu upp staðsetninguna (Frá).
+Ex. 3 E 145/2 ¦ T.d. 3 E 145/2
+Exporter (CSV) ¦ Flytja út (CSV)
+Exporter les annotations (CSV) ¦ Flytja út athugasemdirnar (CSV)
+Fiche matricule (registres matricules des archives départementales) ¦ Herskráningarspjald (herskráningarbækur héraðsskjalasafna)
+Forte (île, communauté très fermée) ¦ Mikil (eyja, mjög lokað samfélag)
+Journal des marches et opérations (JMO) de son régiment ¦ Dagbók ferða og aðgerða (JMO) herdeildar hans
+Listes de passagers (port de départ, port d’arrivée) ¦ Farþegalistar (brottfararhöfn, komuhöfn)
+Légère (quelques mariages entre cousins) ¦ Lítil (nokkur hjónabönd milli frændsystkina)
+Moyenne (village ou vallée assez fermés) ¦ Miðlungs (frekar lokað þorp eða dalur)
+Nom du phasage (ex. « Fratrie DURAND ») ¦ Heiti fösunar (t.d. „Systkinin DURAND“)
+Passeports et registres de départ (archives départementales, série M) ¦ Vegabréf og brottfararskrár (héraðsskjalasöfn, flokkur M)
+Phasage visuel (frères et sœurs) ¦ Sjónræn fösun (systkini)
+Reconstitué (tous) ¦ Endurgert (allt)
+cM corrigés (endogamie) ¦ Leiðrétt cM (skyldleikagiftingar)
+la page affichée (« Enregistrer en PDF ») ¦ síðan sem sést („Vista sem PDF“)
+pat. ¦ föðurl.
+mat. ¦ móðurl.
+à (Mb) ¦ til (Mb)
+jours ¦ dagar
+Toutes les battues ¦ Allar leitir
+prioritaire ¦ forgangur
+Code ¦ Kóði
+Fiche de {name} ¦ Spjald {name}
+tout l’ADN (JSON) ¦ allt DNA (JSON)
+Aucune paire « Nom A ; Nom B ». ¦ Ekkert par „Nafn A ; Nafn B“.
+Une paire par ligne : « Nom A ; Nom B » (ou une tabulation, une virgule). Les noms tels que sur le site du test. ¦ Eitt par á línu: „Nafn A ; Nafn B“ (eða dálkhlé, komma). Nöfnin eins og á vef prófsins.
+Qui correspond avec qui : la base des regroupements (Leeds, grappes). Une case pleine, A et B se correspondent. Clique une case pour l’ajouter ou la retirer ; ou colle la liste « en commun » donnée par la société. ¦ Hver samsvarar hverjum: grunnurinn fyrir flokkun (Leeds, klasar). Fullur reitur, A og B samsvara. Smelltu á reit til að bæta honum við eða fjarlægja hann; eða límdu inn „sameiginlega“ listann frá fyrirtækinu.
+rubriques ¦ kaflar
+＋ Correspondances ¦ ＋ Samsvaranir
+ligne cochée ¦ lína merkt
+lignes cochées ¦ línur merktar
+✕ Décocher ¦ ✕ Afmerkja
+Cocher cette ligne ¦ Merkja þessa línu
+Étiqueter ¦ Merkja með merki
+Poser une étiquette sur toutes les lignes cochées ¦ Setja merki á allar merktar línur
+ÉTIQUETER ¦ MERKJA
+Une étiquette pour {n} ¦ Merki fyrir {n}
+Étiquette existante ¦ Fyrirliggjandi merki
+— Une nouvelle — ¦ — Nýtt —
+Ou une nouvelle étiquette ¦ Eða nýtt merki
+ex. À vérifier aux archives ¦ t.d. Á að athuga í skjalasafni
+Étiquette posée sur {n} ¦ Merki sett á {n}
+({n} verrouillées laissées de côté) ¦ ({n} læst skilin eftir)
+Ajouter à Mes listes ¦ Bæta við Mínir listar
+Ajouter les fiches cochées à une de « Mes listes » ¦ Bæta merktum spjöldum á einn af „Mínum listum“
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Listes → Mes listes. ¦ Enginn af „Mínum listum“ inniheldur einstaklinga: búðu til einn í Listar → Mínir listar.
+MES LISTES ¦ MÍNIR LISTAR
+Ajouter {n} à une liste ¦ Bæta {n} á lista
+{n} ajoutées à « {list} » ¦ {n} bætt við „{list}“
+Plus rien ne pourra changer sur ces fiches tant qu’elles sont verrouillées ¦ Ekkert verður hægt að breyta á þessum spjöldum á meðan þau eru læst
+Ces fiches pourront de nouveau être modifiées ¦ Hægt verður að breyta þessum spjöldum aftur
+{n} verrouillées ¦ {n} læst
+{n} déverrouillées ¦ {n} aflæst
+Les lignes cochées dans un fichier CSV (tableur) ¦ Merktu línurnar í CSV-skrá (töflureiknir)
+{n} exportées. ¦ {n} flutt út.
+Supprime les fiches cochées ; « ↶ Annuler » les remet ¦ Eyðir merktum spjöldum; „↶ Afturkalla“ setur þau aftur
+Supprime les lignes cochées ; « ↶ Annuler » les remet ¦ Eyðir merktum línum; „↶ Afturkalla“ setur þær aftur
+{n} laissées de côté : {why} ¦ {n} skilin eftir: {why}
+{n} supprimées ¦ {n} eytt
+{n} supprimés ¦ {n} eytt
+Plus d’actions pour « {name} » ¦ Fleiri aðgerðir fyrir „{name}“
+Copie impossible : choisis le texte et copie-le à la main. ¦ Afritun ekki möguleg: veldu textann og afritaðu hann handvirkt.
+Toutes les sources de ta généalogie : où elles sont gardées, combien de fois elles sont citées, sur quelles fiches. Ouvre une source pour son modèle de citation, ses doublons et « Où est-elle citée ? ». ¦ Allar heimildir ættfræðinnar þinnar: hvar þær eru geymdar, hversu oft er vitnað í þær, á hvaða spjöldum. Opnaðu heimild til að sjá tilvísunarsnið hennar, tvítekningar og „Hvar er vitnað í hana?“.
+＋ Nouvelle source ¦ ＋ Ný heimild
+Chercher une source… (titre, auteur, dépôt, cote) ¦ Leita að heimild… (titill, höfundur, varðveislustaður, málsetning)
+Doublons possibles ({n}) ¦ Mögulegar tvítekningar ({n})
+Doublons possibles ¦ Mögulegar tvítekningar
+Jamais citées ({n}) ¦ Aldrei vitnað í ({n})
+Jamais citées ¦ Aldrei vitnað í
+Sans modèle de citation ¦ Án tilvísunarsniðs
+Sans modèle ¦ Án sniðs
+Tous les dépôts ¦ Allir varðveislustaðir
+Z → A ¦ Ö → A
+Les moins citées ¦ Minnst vitnað í
+{n} sur {t} ¦ {n} af {t}
+Les sources s’ajoutent depuis une fiche (bloc Sources) ou ici avec « ＋ Nouvelle source ». ¦ Heimildum er bætt við frá spjaldi (Heimildir-hluti) eða hér með „＋ Ný heimild“.
+Aucune source ne correspond ¦ Engin heimild passar
+Citations ¦ Tilvísanir
+Même titre ou même lien qu’une autre source ¦ Sami titill eða sami tengill og önnur heimild
+doublon ? ¦ tvítekning?
+source cochée ¦ heimild merkt
+sources cochées ¦ heimildir merktar
+Garder une seule des sources cochées : les citations des autres passent dans celle-là ¦ Halda aðeins einni af merktu heimildunum: tilvísanir hinna færast í hana
+Supprime les sources cochées et leurs citations ; « ↶ Annuler » les remet ¦ Eyðir merktum heimildum og tilvísunum þeirra; „↶ Afturkalla“ setur þær aftur
+FUSIONNER DES SOURCES ¦ SAMEINA HEIMILDIR
+Garder une seule source ¦ Halda einni heimild
+⇄ Fusionner ¦ ⇄ Sameina
+Les citations, étiquettes, médias et notes des autres passent dans la source gardée ; ses cases vides sont complétées. « ↶ Annuler » remet tout comme avant. ¦ Tilvísanir, merki, miðlar og athugasemdir hinna færast í heimildina sem haldið er; tómir reitir hennar eru fylltir út. „↶ Afturkalla“ setur allt eins og það var.
+{n} fusionnées dans une seule ¦ {n} sameinaðar í eina
+Fusionner avec ses doublons ¦ Sameina við tvítekningar sínar
+{n} sources se ressemblent ¦ {n} heimildir eru líkar
+Copier la citation ¦ Afrita tilvísunina
+Le style classique, à la française ¦ Klassíski franski stíllinn
+Exporter (RIS, BibTeX) ¦ Flytja út (RIS, BibTeX)
+« ↶ Annuler » la remet ¦ „↶ Afturkalla“ setur hana aftur
+Entrée de la liste des sources ¦ Færsla í heimildaskrá
+Première note ¦ Fyrsta neðanmálsgrein
+Note suivante ¦ Næsta neðanmálsgrein
+Choisis un modèle : la citation s’écrit toute seule, à la manière d’Evidence Explained. ¦ Veldu snið: tilvísunin skrifast sjálfkrafa, að hætti Evidence Explained.
+Toutes les sources ¦ Allar heimildir
+{c} · {p} ¦ {c} · {p}
+Dépôt (service d’archives) ¦ Varðveislustaður (skjalasafn)
+— Aucun — ¦ — Enginn —
+Dépôt écrit à la main ¦ Varðveislustaður skrifaður handvirkt
+Publication ¦ Útgáfa
+Modèle de citation ¦ Tilvísunarsnið
+— Pas de modèle — ¦ — Ekkert snið —
+La citation, prête à coller ¦ Tilvísunin, tilbúin til að líma
+Autres styles (classique, Chicago, forum…) ¦ Aðrir stílar (klassískur, Chicago, spjallborð…)
+Où est-elle citée ? ¦ Hvar er vitnað í hana?
+Citée nulle part pour l’instant. ¦ Hvergi vitnað í hana enn.
+Médias rattachés ¦ Tengdir miðlar
+Fusionner dans celle-ci ¦ Sameina í þessa
+💍 Familles et couples ¦ 💍 Fjölskyldur og pör
+Chaque couple : le mariage (date, lieu), les enfants, une séparation, les sources. ¦ Hvert par: hjónabandið (dagsetning, staður), börnin, skilnaður, heimildirnar.
+Chercher un couple… (nom, lieu, année) ¦ Leita að pari… (nafn, staður, ár)
+Sans date de mariage ¦ Án giftingardags
+Avec des enfants ¦ Með börn
+Sans enfant connu ¦ Án þekktra barna
+Séparés, divorcés ¦ Aðskilin, fráskilin
+Mariage : les plus anciens ¦ Hjónaband: elstu
+Mariage : les plus récents ¦ Hjónaband: nýjustu
+Le plus d’enfants ¦ Flest börn
+Aucun couple ne correspond ¦ Ekkert par passar
+Aucun couple pour l’instant ¦ Ekkert par enn
+Un couple se crée sur une fiche, en ajoutant un conjoint. ¦ Par verður til á spjaldi, með því að bæta við maka.
+Ouvrir la fiche de {name} ¦ Opna spjald {name}
+🔤 Noms de famille ¦ 🔤 Ættarnöfn
+Chaque nom de famille : combien de personnes le portent, à quelle époque, où, ses autres orthographes. Un clic : les personnes de ce nom. ¦ Hvert ættarnafn: hversu margir bera það, á hvaða tíma, hvar, aðrar stafsetningar þess. Einn smellur: einstaklingar með þetta nafn.
+Chercher un nom… (ex. Mazaud, Tulle) ¦ Leita að nafni… (t.d. Mazaud, Tulle)
+Portés par au moins 2 personnes ¦ Borin af að minnsta kosti 2 einstaklingum
+Avec des variantes ¦ Með afbrigðum
+Les plus portés ¦ Algengust
+Aucun nom de famille pour l’instant ¦ Ekkert ættarnafn enn
+Porteurs ¦ Berar
+Variantes ¦ Afbrigði
+Tous les noms ¦ Öll nöfn
+Personne ne porte ce nom ¦ Enginn ber þetta nafn
+fiche cochée ¦ spjald merkt
+fiches cochées ¦ spjöld merkt
+Toutes les notes écrites sur les fiches, les événements, les couples et les sources. La recherche lit tout le texte. ¦ Allar athugasemdir sem skrifaðar eru á spjöld, atburði, pör og heimildir. Leitin les allan textann.
+Chercher dans les notes… (ex. moulin, Tulle, 1870) ¦ Leita í athugasemdum… (t.d. mylla, Tulle, 1870)
+Rattachées à ¦ Tengt við
+Aucune note ne contient ces mots ¦ Engin athugasemd inniheldur þessi orð
+Essaie un autre mot, ou une partie du mot. ¦ Prófaðu annað orð, eða hluta orðs.
+Les notes s’écrivent sur les fiches, les événements et les sources. ¦ Athugasemdir eru skrifaðar á spjöld, atburði og heimildir.
+Voir plus ¦ Sjá meira
+note cochée ¦ athugasemd merkt
+notes cochées ¦ athugasemdir merktar
+notes ¦ athugasemdir
+« ↶ Annuler » les remet ¦ „↶ Afturkalla“ setur þær aftur
+NOTE ¦ ATHUGASEMD
+SOURCES ¦ HEIMILDIR
+Nouvelle source ¦ Ný heimild
+ex. État civil de Tulle, naissances 1823 ¦ t.d. Þjóðskrá Tulle, fæðingar 1823
+ex. Archives de la Corrèze ¦ t.d. Skjalasafn Corrèze
+Source ajoutée ¦ Heimild bætt við
+Enregistrer ces filtres sous un nom, ou rappeler des filtres enregistrés ¦ Vista þessar síur undir nafni, eða kalla fram vistaðar síur
+{n} filtre(s) ¦ {n} sía/síur
+La recherche, les filtres et le tri de maintenant, sous un nom ¦ Leitin, síurnar og röðunin núna, undir nafni
+Choisis d’abord une recherche ou un filtre ¦ Veldu fyrst leit eða síu
+Un nom pour retrouver cette liste filtrée d’un clic. ¦ Nafn til að finna þennan síaða lista aftur með einum smelli.
+ex. Les Mazaud nés à Tulle ¦ t.d. Mazaud-fólkið fætt í Tulle
+Filtres gardés sous « {name} ». ¦ Síur geymdar undir „{name}“.
+Oublier « {name} » ¦ Gleyma „{name}“
+Filtres « {name} » oubliés ¦ Síunum „{name}“ gleymt
+Filtres enregistrés ¦ Vistaðar síur
+événement coché ¦ atburður merktur
+événements cochés ¦ atburðir merktir
+Double-clic pour corriger ¦ Tvísmelltu til að leiðrétta
+Corriger la date ¦ Leiðrétta dagsetninguna
+Ou double-clic sur la case ¦ Eða tvísmelltu á reitinn
+Nouvelle valeur ¦ Nýtt gildi
+Corrigé : « {v} » ¦ Leiðrétt: „{v}“
+✓ Terminée le {date} ¦ ✓ Lokið {date}
+À faire (date passée) ¦ Að gera (dagsetning liðin)
+À faire ({n}) ¦ Að gera ({n})
+✓ Terminées ({n}) ¦ ✓ Lokið ({n})
+✓ Terminées ¦ ✓ Lokið
+Date passée, pas faites ({n}) ¦ Dagsetning liðin, ekki gert ({n})
+Date passée ¦ Dagsetning liðin
+Cote retirée de la visite. ¦ Málsetning fjarlægð úr heimsókninni.
+Donne un titre à la source. ¦ Gefðu heimildinni titil.
+Adresse internet invalide (elle doit commencer par https://). ¦ Ógilt vefslóð (hún verður að byrja á https://).
+Source à garder introuvable. ¦ Heimildin sem á að halda finnst ekki.
+Choisis au moins une autre source à fusionner. ¦ Veldu að minnsta kosti eina aðra heimild til að sameina.
+Choisis une étiquette ou écris son nom. ¦ Veldu merki eða skrifaðu nafn þess.
+Cette liste ne contient pas des personnes. ¦ Þessi listi inniheldur ekki einstaklinga.
+Cette case ne se modifie pas ici. ¦ Þessum reit er ekki breytt hér.
+La feuille de mission n’existe plus. ¦ Verkefnablaðið er ekki lengur til.
+Acte d’état civil ¦ Þjóðskrárskjal
+Registre (ex. Naissances) ¦ Bók (t.d. Fæðingar)
+Année(s) ¦ Ár
+N° de l’acte ¦ Nr. skjals
+Qui (personne de l’acte) ¦ Hver (einstaklingur skjalsins)
+Lien de la vue ¦ Tengill myndarinnar
+Paroisse ¦ Sókn
+Registre (ex. Baptêmes, mariages, sépultures) ¦ Bók (t.d. Skírnir, hjónabönd, greftranir)
+Quartier, rue ¦ Hverfi, gata
+Page ou folio ¦ Síða eða blað
+Foyer de ¦ Heimili
+Résidence du notaire ¦ Aðsetur lögbókanda
+Nature de l’acte ¦ Tegund skjals
+Bureau de recrutement ¦ Skráningarskrifstofa
+N° matricule ¦ Herskráningarnr.
+Soldat ¦ Hermaður
+Livre, revue ¦ Bók, tímarit
+Page(s) ¦ Síða/síður
+Page internet, base en ligne ¦ Vefsíða, gagnagrunnur á netinu
+Auteur ou organisme ¦ Höfundur eða stofnun
+Titre de la page ¦ Titill síðunnar
+Site n° {n} ¦ Staður nr. {n}
+Sans site ¦ Án staðar
+revus l’année suivante ({b} sur {n}) ¦ sáust aftur árið eftir ({b} af {n})
+Cohorte ¦ Árgangur
+Site ¦ Staður
+Revus l’année suivante ¦ Sáust aftur árið eftir
+Pas encore assez d’années d’observations pour calculer les retours. ¦ Ekki nógu mörg athugunarár enn til að reikna endurkomur.
+cohorte ¦ árgangur
+délai : {n} ¦ frestur: {n}
+jamais vu ¦ aldrei séð
+Délais par espèce ¦ Frestir eftir tegund
+Tous ont été revus à temps. ¦ Allir hafa sést aftur í tæka tíð.
+🔔 Délais par espèce ¦ 🔔 Frestir eftir tegund
