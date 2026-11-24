@@ -378,6 +378,30 @@ function elections_person(PDO $pdo, int $id): array
         'citation' => (string) ($m['citation'] ?? ''), 'fixture' => !empty($m['fixture']), 'proposals' => elections_proposals($pdo, $e, $p, $birth, $death, array_values(array_unique(array_column($where, 1))), $list)];
 }
 
+/** GET elections_place&id=&from=&to= → 📜 Monographie de commune : comment on votait dans cette commune (toutes les élections du pack, ou ces années) */
+function elections_place(PDO $pdo, int $id, int $from = 0, int $to = 0): array
+{
+    $e = elections_pdo();
+    if (!$e) { return ['installed' => false]; }
+    $s = $pdo->prepare('SELECT * FROM places WHERE id=?'); $s->execute([$id]); $pl = $s->fetch(PDO::FETCH_ASSOC);
+    if (!$pl) { throw new RuntimeException(i18n_t('Lieu introuvable.')); }
+    $code = elections_place_insee($pdo, $e, $pl);
+    $list = [];
+    if ($code) {
+        $n = $e->prepare('SELECT name, dep FROM communes WHERE code=?'); $n->execute([$code]); $c = $n->fetch() ?: ['name' => (string) $pl['name'], 'dep' => ''];
+        foreach ($e->query('SELECT * FROM elections ORDER BY year, code, tour')->fetchAll() as $el) {
+            $y = (int) $el['year'];
+            if (($from && $y < $from) || ($to && $y > $to)) { continue; }
+            $res = elections_result($e, $el, $code);
+            if (!$res || !$res['groups']) { continue; }
+            $list[] = ['id' => (int) $el['id'], 'code' => (string) $el['code'], 'type' => (string) $el['type'], 'tour' => (int) $el['tour'], 'year' => $y, 'date' => (string) $el['date'], 'label' => (string) $el['label'],
+                'commune' => ['code' => $code, 'name' => (string) $c['name'], 'dep' => (string) $c['dep']], 'age' => null, 'could_vote' => true] + $res;
+        }
+    }
+    $m = $e->query('SELECT key, value FROM meta')->fetchAll(PDO::FETCH_KEY_PAIR);
+    return ['installed' => true, 'insee' => $code, 'elections' => $list, 'citation' => (string) ($m['citation'] ?? ''), 'fixture' => !empty($m['fixture'])];
+}
+
 /** profil « Homme / femme politique » (ou élu local) : les mandats de député trouvés dans Wikidata sous son nom, et les
  *  présidentielles où un candidat porte son nom — à ajouter au profil « À vérifier », sauf ce qui y est déjà */
 function elections_proposals(PDO $pdo, PDO $e, array $p, ?int $birth, ?int $death, array $communes, array $list): array
@@ -437,6 +461,7 @@ function elections_api_get(PDO $pdo, string $action, array $q): array
     return match ($action) {
         'elections_status' => elections_status(),
         'elections_person' => elections_person($pdo, safe_int($q['id'] ?? 0)),
+        'elections_place' => elections_place($pdo, safe_int($q['id'] ?? 0), safe_int($q['from'] ?? 0), safe_int($q['to'] ?? 0)),
         'elections_dl_info' => (static function () { try { return elections_dl_info(); } catch (RuntimeException $e) { return ['version' => '', 'pack' => null, 'offline' => true, 'error' => $e->getMessage()]; } })(),
         'elections_dl_resume' => elections_dl_resume((string) ($q['id'] ?? '')),
         default => throw new RuntimeException('Action inconnue.'),

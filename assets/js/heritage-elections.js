@@ -203,5 +203,5 @@
             });
         }
     };
-    ext.elections = {settings, isOn, register, openSettings, run: dlRun, state: DL};
+    ext.elections = {settings, isOn, register, openSettings, run: dlRun, state: DL, rowHtml};
 })();

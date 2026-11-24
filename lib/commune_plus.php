@@ -291,15 +291,22 @@ function cplus_images(PDO $pdo, array $q): array
             $hs = cplus_commons('commons_history_subcats.json', ['action' => 'query', 'list' => 'categorymembers', 'cmtitle' => $hist, 'cmtype' => 'subcat', 'cmlimit' => 200]);
             foreach ($hs['query']['categorymembers'] ?? [] as $m) { $t = (string) ($m['title'] ?? ''); if (preg_match(CPLUS_OLD_CAT, $t) && !in_array($t, $cats, true)) { $cats[] = $t; } }
         }
-        $cats = array_slice(array_values(array_unique($cats)), 0, 12);
-        // incategory:"A|B|C" (un « ou » entre les catégories ; espaces → _)
-        $inc = implode('|', array_map(static fn($t) => str_replace([' ', '"', '|'], ['_', '', ''], (string) preg_replace('/^Category:/', '', $t)), $cats));
-        $j = cplus_commons('commons_files.json', ['action' => 'query', 'generator' => 'search', 'gsrnamespace' => 6, 'gsrsearch' => 'filetype:bitmap incategory:"' . $inc . '"', 'gsrlimit' => 100,
-            'prop' => 'imageinfo', 'iiprop' => 'url|extmetadata', 'iiurlwidth' => 360,
-            'iiextmetadatafilter' => 'DateTimeOriginal|DateTime|Artist|Credit|LicenseShortName|LicenseUrl|UsageTerms|ImageDescription|ObjectName|Categories|AttributionRequired|Copyrighted']);
-        $items = [];
+        // d'abord les cartes postales, puis l'histoire, puis le reste ; la catégorie de la commune en dernier (surtout des photos d'aujourd'hui)
+        $rank = static fn($t) => preg_match('/post\s*cards?|cartes?\s+postales?/i', $t) ? 0 : (preg_match('/history|histoire/i', $t) ? 1 : ($t === 'Category:' . $cat ? 3 : 2));
+        $cats = array_values(array_unique($cats));
+        usort($cats, static fn($a, $b) => $rank($a) <=> $rank($b));
+        $cats = array_slice($cats, 0, 4);
+        // une demande par catégorie (generator=categorymembers : pas le moteur de recherche, souvent « trop occupé »)
+        $pages = [];
+        foreach ($cats as $i => $ct) {
+            $jj = cplus_commons('commons_files_' . $i . '.json', ['action' => 'query', 'generator' => 'categorymembers', 'gcmtitle' => $ct, 'gcmtype' => 'file', 'gcmlimit' => 100,
+                'prop' => 'imageinfo', 'iiprop' => 'url|extmetadata|mime', 'iiurlwidth' => 360,
+                'iiextmetadatafilter' => 'DateTimeOriginal|DateTime|Artist|Credit|LicenseShortName|LicenseUrl|UsageTerms|ImageDescription|ObjectName|Categories']);
+            foreach ($jj['query']['pages'] ?? [] as $pg) { $pages[(string) ($pg['title'] ?? '')] = $pg; }
+        }
+        $j = ['query' => ['pages' => array_values($pages)]];
         foreach ($j['query']['pages'] ?? [] as $pg) {
-            $ii = $pg['imageinfo'][0] ?? null; if (!$ii) { continue; }
+            $ii = $pg['imageinfo'][0] ?? null; if (!$ii || !preg_match('#^image/(jpeg|png|webp|gif|tiff)$#', (string) ($ii['mime'] ?? 'image/jpeg'))) { continue; }
             $md = $ii['extmetadata'] ?? [];
             $v = static fn($k) => (string) ($md[$k]['value'] ?? '');
             $catsOf = (string) $v('Categories');

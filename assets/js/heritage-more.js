@@ -1189,6 +1189,7 @@
         ['addrmap', '🗺️ Plan du recensement (maisons, année par année)', 'full'], ['memo', '🗒️ Bloc-notes', 'half'], ['families', '🏠 Les familles qui y ont vécu', 'full'], ['decades', '📜 Actes par décennie', 'full'], ['notes', '📝 Notes et photos', 'full'],
         ['recueils', '📚 Recueils', 'full'], ['popchart', '📈 Évolution du nombre d’habitants', 'full'], ['postcards', '🏞 Cartes postales', 'full'], ['placeimgs', '🖼 Images du lieu', 'full'], ['parcels', '🗺 Parcelles du cadastre', 'full']];
     ext.villageSections = () => VILLAGE_SECTIONS;
+    ext.villageParts = {mapHtml: (v, bg = 'standard', zoom = 12) => villageMapHtml(v, bg, zoom), decadesHtml, populationChart}; // 📜 réutilisés par la monographie (heritage-monographie-plus.js)
     ext.villageWidths = () => VILLAGE_WIDTHS;
     function villageLayout() {
         let saved = {};
