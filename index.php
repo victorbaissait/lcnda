@@ -1304,7 +1304,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueil-table.js?v=10" defer></script>
 <script src="assets/js/heritage-recueil-sens.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-plus.js?v=1" defer></script>
-<script src="assets/js/heritage-recueil-etat.js?v=6" defer></script>
+<script src="assets/js/heritage-recueil-verif.js?v=1" defer></script>
+<script src="assets/js/heritage-recueil-etat.js?v=7" defer></script>
 <script src="assets/js/heritage-recueil-sommaire.js?v=3" defer></script>
 <script src="assets/js/heritage-recueil-index.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-fiche.js?v=2" defer></script>
