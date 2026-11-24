@@ -1035,6 +1035,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-tile-hidden-cats',
         'genealogie-tile-hidden',
         'genealogie-tile-custom-cats',
+        'genealogie-tile-user', // 🗺 mes fonds de carte à moi (heritage-fonds-carte.js)
         'genealogie-person-blocks',
         'genealogie-dashboard-widget-catalog-order',
         'genealogie-dashboard-widget-catalog-hidden',
