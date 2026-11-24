@@ -84,8 +84,25 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             // par pays et régions : la France à +1 ou +2, le Québec et New York pareils, la Californie 3 h plus tôt, l'Inde à +5 h 30
             const off = await p.evaluate(() => { const H = window.LCNDA_EXT.horloges, t = Date.UTC(2026, 0, 15, 12); return {fr: H.offsetOf(H.tzOf('FR', 2, 47), t), gf: H.tzOf('FR', -53, 4), re: H.tzOf('FR', 55.5, -21), ny: H.tzOf('US', -74, 41), la: H.tzOf('US', -118, 34), ak: H.tzOf('US', -150, 61), qc: H.tzOf('CA', -71, 47), ru: H.tzOf('RU', 37, 55), vl: H.tzOf('RU', 132, 43), in: H.offsetOf(H.tzOf('IN', 78, 22), t)}; });
             assert.deepStrictEqual(off, {fr: 60, gf: 'America/Cayenne', re: 'Indian/Reunion', ny: 'America/New_York', la: 'America/Los_Angeles', ak: 'America/Anchorage', qc: 'America/Toronto', ru: 'Europe/Moscow', vl: 'Asia/Vladivostok', in: 330});
-            assert.ok(await p.evaluate(() => document.querySelectorAll('.hz-map.is-real [data-hz-off]').length > 150 && document.querySelectorAll('.hz-legend span').length > 15), 'les pays coloriés, la légende');
+            assert.ok(await p.evaluate(() => document.querySelectorAll('.hz-map.is-real [data-hz-off]').length > 150 && document.querySelectorAll('.hz-legend [data-hz-leg]').length > 15), 'les pays coloriés, la légende');
             assert.ok(await p.evaluate(() => new Set([...document.querySelectorAll('.hz-map [clip-path]')].map(x => x.getAttribute('data-hz-off'))).size >= 4), 'les États-Unis, le Canada, la Russie en plusieurs fuseaux');
+            // 🎨 les couleurs : un jeu tout prêt, un fuseau à la main (clic sur la légende), ↺, ↶ Annuler
+            const fillOf = o => p.evaluate(o => document.querySelector(`.hz-map [data-hz-off="${o}"]`)?.style.fill, o);
+            const f0 = await fillOf(60);
+            await p.click('.hz-page [data-hz-colors]'); await p.waitForSelector('.hz-colors [data-hzc-pal="pastel"]');
+            assert.strictEqual(await p.$$eval('.hz-colors [data-hzc-pal]', l => l.length), 9, '9 jeux tout prêts');
+            await p.click('.hz-colors [data-hzc-pal="atlas"]'); await p.waitForSelector('.hz-colors [data-hzc-atlas]');
+            await p.evaluate(() => { const i = document.querySelector('.hz-colors [data-hzc-off="60"]'); i.value = '#123456'; i.dispatchEvent(new Event('input', {bubbles: true})); i.dispatchEvent(new Event('change', {bubbles: true})); });
+            await p.waitForSelector('.hz-colors [data-hzc-reset="60"]');
+            await p.click('.hz-colors [data-hzc-ok]'); await p.waitForSelector('.hz-map.is-real');
+            assert.strictEqual(await fillOf(60), 'rgb(18, 52, 86)', 'Paris (+1) à sa couleur');
+            const P1 = JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-horloges-couleurs'))); assert.strictEqual(P1.palette, 'atlas'); assert.strictEqual(P1.custom['60'], '#123456');
+            assert.notStrictEqual(await fillOf(120), await fillOf(180), 'deux tons qui alternent');
+            await p.click('.hz-page [data-hz-leg="60"]'); await p.waitForSelector('.hz-colors [data-hzc-reset="60"]'); await p.click('.hz-colors [data-hzc-reset="60"]'); await p.click('.hz-colors [data-hzc-ok]'); await p.waitForSelector('.hz-map.is-real');
+            assert.notStrictEqual(await fillOf(60), 'rgb(18, 52, 86)', '↺ : la couleur du jeu');
+            await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /Couleurs des fuseaux/.test(x.textContent)).querySelector('button').click()); await sleep(500);
+            assert.strictEqual(await fillOf(60), 'rgb(18, 52, 86)', '↶ Annuler');
+            await p.evaluate(() => localStorage.removeItem('genealogie-horloges-couleurs')); void f0;
             await p.click('.hz-page [data-hz-mapmode="bands"]'); await p.waitForSelector('.hz-map.is-bands .hz-bl');
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-horloges-carte')), '"bands"');
             await p.click('.hz-page [data-hz-mapmode="real"]'); await p.waitForSelector('.hz-map.is-real');

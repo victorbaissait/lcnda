@@ -199,8 +199,58 @@
             default: return COUNTRY_TZ[iso] || '';
         }
     }
-    const OFF_COLORS = ['#3b4cc0', '#4461c8', '#4f77d0', '#5a8cd6', '#68a0da', '#78b2dc', '#8ac2dc', '#9dcfd8', '#b1d9d0', '#c4e0c5', '#d6e5b6', '#e6e7a5', '#f3e494', '#f8d983', '#f9ca73', '#f6b866', '#f0a35b', '#e88d52', '#de764a', '#d15f44', '#c2483e', '#b13339', '#9e2134', '#88122e', '#710a28', '#5a0622', '#43031c'];
-    const offColor = min => OFF_COLORS[Math.max(0, Math.min(OFF_COLORS.length - 1, Math.round(min / 60) + 12))];
+    /* 🎨 les couleurs des fuseaux : un jeu tout prêt, et chaque fuseau changeable à la main (genealogie-horloges-couleurs) */
+    const hsl = (h, sa, l) => { sa /= 100; l /= 100; const a = sa * Math.min(l, 1 - l), f = n => { const k = (n + h / 30) % 12; return Math.round(255 * (l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)))).toString(16).padStart(2, '0'); }; return `#${f(0)}${f(8)}${f(4)}`; };
+    const lerpHex = (a, b, k) => '#' + [0, 2, 4].map(i => Math.round(parseInt(a.slice(1 + i, 3 + i), 16) * (1 - k) + parseInt(b.slice(1 + i, 3 + i), 16) * k).toString(16).padStart(2, '0')).join('');
+    const ramp = stops => x => { const t = Math.max(0, Math.min(1, x)) * (stops.length - 1), i = Math.min(stops.length - 2, Math.floor(t)); return lerpHex(stops[i], stops[i + 1], t - i); };
+    /** chaque jeu : une fonction (rang du fuseau de 0 = UTC−12 à 1 = UTC+14) → couleur ; « alterne » : deux couleurs, une heure sur deux */
+    const PALETTES = [
+        ['chaud', 'Du froid au chaud', ramp(['#3b4cc0', '#8ac2dc', '#e6e7a5', '#f0a35b', '#b13339', '#43031c'])],
+        ['arcenciel', 'Arc-en-ciel', x => hsl(280 * (1 - x), 70, 58)],
+        ['pastel', 'Pastel', x => hsl(360 * x, 60, 82)],
+        ['terres', 'Terres et ocres', ramp(['#5b4636', '#8c6d46', '#c49a5a', '#e3c58a', '#a7b77a', '#5f7f4f'])],
+        ['ocean', 'Océan', ramp(['#e8f4f8', '#9fd3e3', '#4aa3c4', '#1f6f9a', '#0b3c63'])],
+        ['vif', 'Couleurs vives', x => hsl((x * 26 * 47) % 360, 78, 52)],
+        ['atlas', 'Atlas d’école (deux tons)', null],
+        ['gris', 'Gris', ramp(['#f2f2f2', '#8c8c8c', '#262626'])],
+        ['sepia', 'Sépia', ramp(['#f3e6cc', '#c9a774', '#7a5a33', '#3b2a14'])],
+    ];
+    const COLOR_KEY = 'genealogie-horloges-couleurs';
+    const colorPrefs = () => { const v = ls.get(COLOR_KEY, {}); return {palette: PALETTES.some(p => p[0] === v.palette) ? v.palette : 'chaud', custom: v.custom && typeof v.custom === 'object' ? v.custom : {}, atlas: Array.isArray(v.atlas) ? v.atlas : ['#f6e3b4', '#cfe3c1']}; };
+    function paletteColor(pal, min, P = colorPrefs()) {
+        const x = (min / 60 + 12) / 26;
+        if (pal === 'atlas') return (((Math.floor(min / 60) % 2) + 2) % 2 ? P.atlas[1] : P.atlas[0]);
+        const f = (PALETTES.find(p => p[0] === pal) || PALETTES[0])[2]; return f(x);
+    }
+    /** la couleur d'un fuseau (en minutes depuis UTC) : la sienne si on l'a choisie, sinon celle du jeu */
+    const offColor = (min, P = colorPrefs()) => P.custom[String(min)] || paletteColor(P.palette, min, P);
+    const fmtOffset = o => `UTC${o >= 0 ? '+' : '−'}${Math.floor(Math.abs(o) / 60)}${Math.abs(o) % 60 ? ':' + pad(Math.abs(o) % 60) : ''}`;
+    /** la fenêtre « 🎨 Couleurs des fuseaux » : un jeu tout prêt, puis chaque fuseau (ceux de la carte d'abord) */
+    function colorsDialog(used, onDone) {
+        const before = ls.get(COLOR_KEY, {}); let P = colorPrefs();
+        const all = [...new Set([...used, ...Array.from({length: 27}, (_, i) => (i - 12) * 60)])].sort((a, b) => a - b);
+        const dg = document.createElement('dialog'); dg.className = 'modal hz-colors'; document.body.appendChild(dg);
+        const paint = () => { dg.querySelector('[data-hzc-body]').innerHTML = `
+            <h3>${esc(T('Jeux de couleurs tout prêts'))}</h3><div class="hz-pals">${PALETTES.map(([k, l]) => `<button type="button" class="hz-pal${P.palette === k ? ' is-on' : ''}" data-hzc-pal="${k}" aria-pressed="${P.palette === k}"><span class="hz-pal-sw">${Array.from({length: 14}, (_, i) => `<i style="background:${paletteColor(k, (k === 'atlas' ? i - 6 : i * 2 - 12) * 60, P)}"></i>`).join('')}</span>${esc(T(l))}</button>`).join('')}</div>
+            ${P.palette === 'atlas' ? `<p class="hz-atlas">${esc(T('Les deux tons :'))} <input type="color" data-hzc-atlas="0" value="${P.atlas[0]}"> <input type="color" data-hzc-atlas="1" value="${P.atlas[1]}"></p>` : ''}
+            <h3>${esc(T('Chaque fuseau'))} <small class="muted">${esc(T('(en gras : ceux de la carte ; ↺ revient au jeu)'))}</small></h3>
+            <div class="hz-offs">${all.map(o => `<label class="hz-off${used.includes(o) ? ' is-used' : ''}${P.custom[String(o)] ? ' is-own' : ''}"><input type="color" value="${offColor(o, P)}" data-hzc-off="${o}"><span>${esc(fmtOffset(o))}</span>${P.custom[String(o)] ? `<button type="button" class="icon-button small" data-hzc-reset="${o}" title="${esc(T('Revenir à la couleur du jeu'))}" aria-label="${esc(T('Revenir à la couleur du jeu'))}">↺</button>` : ''}</label>`).join('')}</div>`; };
+        dg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">🕰 ${esc(T('Heures du monde'))}</span><h2>🎨 ${esc(T('Couleurs des fuseaux'))}</h2></div><button type="button" class="icon-button" data-hzc-x aria-label="${esc(T('Fermer'))}">×</button></div>
+            <div data-hzc-body></div>
+            <div class="modal-actions"><button type="button" class="button secondary" data-hzc-all>↺ ${esc(T('Tout remettre comme au départ'))}</button><span class="spacer"></span><button type="button" class="button secondary" data-hzc-x>${esc(T('Annuler'))}</button><button type="button" class="button" data-hzc-ok>${esc(T('Enregistrer'))}</button></div></form>`;
+        dg.showModal(); paint();
+        const close = () => { dg.close(); dg.parentNode?.removeChild(dg); };
+        dg.addEventListener('input', e => { const o = e.target.dataset.hzcOff, a = e.target.dataset.hzcAtlas; if (o !== undefined) { P.custom[o] = e.target.value; e.target.closest('.hz-off').classList.add('is-own'); } if (a !== undefined) { P.atlas[Number(a)] = e.target.value; } });
+        dg.addEventListener('change', e => { if (e.target.dataset.hzcOff !== undefined || e.target.dataset.hzcAtlas !== undefined) paint(); });
+        dg.addEventListener('click', e => {
+            if (e.target.closest('[data-hzc-x]')) return close();
+            const pl = e.target.closest('[data-hzc-pal]'); if (pl) { P.palette = pl.dataset.hzcPal; return paint(); }
+            const rs = e.target.closest('[data-hzc-reset]'); if (rs) { e.preventDefault(); delete P.custom[rs.dataset.hzcReset]; return paint(); }
+            if (e.target.closest('[data-hzc-all]')) { P = {palette: 'chaud', custom: {}, atlas: ['#f6e3b4', '#cfe3c1']}; return paint(); }
+            if (e.target.closest('[data-hzc-ok]')) { ls.set(COLOR_KEY, P); close(); onDone?.(); A().undoToast?.(T('Couleurs des fuseaux enregistrées.'), {undo: () => { ls.set(COLOR_KEY, before); onDone?.(); }}); }
+        });
+        return dg;
+    }
 
     /* ── 🗺 la carte des fuseaux : par pays et régions (l'heure légale, été compris) ou en bandes de 15°, la nuit en grisé, les villes ── */
     const MAPMODE_KEY = 'genealogie-horloges-carte';
@@ -208,7 +258,7 @@
         const W = 960, H = 470, X = lon => (lon + 180) / 360 * W, Y = lat => (90 - lat) / 180 * H;
         // un contour qui passe la ligne de changement de date (-180 ↔ 180) : on lève le crayon au lieu de traverser toute la carte
         const ring = r => { let s = '', jumped = false; for (let i = 0; i < r.length; i += 2) { const jump = i && Math.abs(r[i] - r[i - 2]) > 180; if (jump) jumped = true; s += (i && !jump ? 'L' : 'M') + X(r[i]).toFixed(1) + ' ' + Y(r[i + 1]).toFixed(1); } return jumped ? s : s + 'Z'; };
-        let land = '', used = new Map(), clipDefs = '', clipSeq = 0;
+        let land = '', used = new Map(), clipDefs = '', clipSeq = 0; const CP = colorPrefs();
         try {
             const G = await ext.diagramCartes?.load('monde-50m');
             land = (G?.zones || []).map(z => {
@@ -227,7 +277,7 @@
                         if (!groups.has(tz)) groups.set(tz, []); groups.get(tz).push({clip: id, d: dd}); });
                 });
                 return [...groups].map(([tz, ds]) => { const off = tz && SET(tz) ? offsetOf(tz, t) : null; if (off !== null) used.set(off, (used.get(off) || 0) + 1);
-                    const fill = off === null ? '#e6e3da' : offColor(off), title = `<title>${esc(z.name)}${tz ? ` — ${esc(tz)} (UTC${off >= 0 ? '+' : '−'}${Math.floor(Math.abs(off) / 60)}${Math.abs(off) % 60 ? ':' + pad(Math.abs(off) % 60) : ''})` : ''}</title>`;
+                    const fill = off === null ? '#e6e3da' : offColor(off, CP), title = `<title>${esc(z.name)}${tz ? ` — ${esc(tz)} (UTC${off >= 0 ? '+' : '−'}${Math.floor(Math.abs(off) / 60)}${Math.abs(off) % 60 ? ':' + pad(Math.abs(off) % 60) : ''})` : ''}</title>`;
                     const plain = ds.filter(x => typeof x === 'string').join(''), clipped = ds.filter(x => typeof x !== 'string');
                     return (plain ? `<path d="${plain}" style="fill:${fill}" data-hz-off="${off ?? ''}">${title}</path>` : '') + clipped.map(cd => `<path d="${cd.d}" style="fill:${fill}" data-hz-off="${off ?? ''}" clip-path="url(#${cd.clip})">${title}</path>`).join(''); }).join('');
             }).join('');
@@ -237,7 +287,7 @@
         let night = ''; for (let lon = -180; lon < 180; lon += 2) { let y0 = null; for (let lat = 88; lat >= -90; lat -= 2) { const n = sunUp(lat, lon + 1, t) === false; if (n && y0 === null) y0 = lat; if ((!n || lat === -90) && y0 !== null) { night += `M${X(lon).toFixed(1)} ${Y(y0).toFixed(1)}h${(W / 180 + .8).toFixed(1)}V${Y(n ? lat - 2 : lat).toFixed(1)}h-${(W / 180 + .8).toFixed(1)}Z`; y0 = null; } } }
         const dots = cities.filter(c => Number.isFinite(c.lat)).map(c => { const p = partsAt(c.tz, t); return `<g class="hz-dot"><circle cx="${X(c.lon).toFixed(1)}" cy="${Y(c.lat).toFixed(1)}" r="4"/><text x="${(X(c.lon) + (X(c.lon) > W - 150 ? -6 : 6)).toFixed(1)}" y="${(Y(c.lat) + 4).toFixed(1)}" text-anchor="${X(c.lon) > W - 150 ? 'end' : 'start'}">${esc(c.name)} ${pad(p.h)}:${pad(p.mi)}</text></g>`; }).join('');
         const fmtOff = o => `${o >= 0 ? '+' : '−'}${Math.floor(Math.abs(o) / 60)}${Math.abs(o) % 60 ? ':' + pad(Math.abs(o) % 60) : ''}`;
-        const legend = mode === 'real' ? `<div class="hz-legend">${[...used.keys()].sort((a, b) => a - b).map(o => `<span><i style="background:${offColor(o)}"></i>UTC${fmtOff(o)}</span>`).join('')}</div>` : '';
+        const legend = mode === 'real' ? `<div class="hz-legend">${[...used.keys()].sort((a, b) => a - b).map(o => `<button type="button" class="hz-leg" data-hz-leg="${o}" title="${esc(T('Changer sa couleur'))}"><i style="background:${offColor(o, CP)}"></i>UTC${fmtOff(o)}</button>`).join('')}<button type="button" class="button small secondary" data-hz-colors data-hz-used="${[...used.keys()].join(',')}">🎨 ${esc(T('Couleurs des fuseaux'))}</button></div>` : '';
         const seg = `<div class="segmented hz-mapmode">${[['real', T('Par pays et régions (heure légale)')], ['bands', T('Fuseaux théoriques (bandes de 15°)')]].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-hz-mapmode="${k}" aria-pressed="${mode === k}">${esc(l)}</button>`).join('')}</div>`;
         return `${seg}<svg viewBox="0 0 ${W} ${H}" class="hz-map is-${mode}" role="img" aria-label="${esc(T('Carte des fuseaux horaires'))}"><defs>${clips}</defs><rect width="${W}" height="${H}" class="hz-sea"/>${bands}<g class="hz-land">${land}</g><path class="hz-night" d="${night}"/>${dots}</svg>${legend}
             <p class="muted hz-note">${esc(mode === 'real' ? T('Chaque pays à son heure légale d’aujourd’hui (heure d’été comprise) ; les grands pays sont découpés par régions, de façon approchée. Survole un pays pour son fuseau.') : T('Les bandes montrent les fuseaux théoriques (15° chacun) ; l’heure réelle de chaque pays peut en différer (heure légale, heure d’été).'))}</p>`;
@@ -300,6 +350,7 @@
         ws.querySelector('.hz-page').addEventListener('click', e => {
             const v = e.target.closest('[data-hz-view]'); if (v) { ls.set(VIEW_KEY, v.dataset.hzView); return again(); }
             const mm = e.target.closest('[data-hz-mapmode]'); if (mm) { ls.set(MAPMODE_KEY, mm.dataset.hzMapmode); return again(); }
+            const cl = e.target.closest('[data-hz-colors],[data-hz-leg]'); if (cl) { const used = [...ws.querySelectorAll('[data-hz-leg]')].map(b => Number(b.dataset.hzLeg)); const dg = colorsDialog(used, again); if (cl.dataset.hzLeg !== undefined) dg.querySelector(`[data-hzc-off="${cl.dataset.hzLeg}"]`)?.focus(); return; }
             if (e.target.closest('[data-hz-add]')) return addDialog(again);
             if (e.target.closest('[data-hz-style-open]')) return styleDialog(null, again);
             const th = e.target.closest('.hz-cmp thead th'); if (th && /^\d+$/.test(th.textContent)) { cmpHour = Number(th.textContent); return again(); }
@@ -387,7 +438,7 @@
         return true;
     };
     if (!reg()) document.addEventListener('DOMContentLoaded', reg);
-    ext.horloges = {...api, mine, styleOf, clocksHtml, mapHtml, compareHtml, addDialog, styleDialog, render, HERE};
+    ext.horloges = {...api, PALETTES, colorPrefs, offColor, colorsDialog, mine, styleOf, clocksHtml, mapHtml, compareHtml, addDialog, styleDialog, render, HERE};
     if (!document.getElementById('hz-css')) { const s = document.createElement('style'); s.id = 'hz-css'; s.textContent = `
 .hz-views{margin:0 0 14px}.hz-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
 .hz-item{border:2px solid var(--ink,#111);background:var(--surface,#fff);padding:10px;display:grid;gap:6px}.hz-item-act{display:flex;gap:4px;justify-content:flex-end}
@@ -401,7 +452,9 @@
 .hz-cmp .hz-day{background:#e2f0cb}.hz-cmp .hz-mid{background:#fff1d6}.hz-cmp .hz-nite{background:#d9dde6;color:#555}.hz-cmp .is-on{outline:2px solid var(--accent,#055dff);outline-offset:-2px;font-weight:800}
 .hz-body{overflow-x:auto}.hz-map{width:100%;height:auto;display:block;border:2px solid var(--ink,#111)}.hz-sea{fill:#dfe8ee}.hz-b1{fill:rgba(5,93,255,.05)}.hz-b2{fill:rgba(5,93,255,.11)}.hz-bl{font:10px system-ui;fill:#335;text-anchor:middle}
 .hz-land path{fill:#f1eee6;stroke:#b9b2a2;stroke-width:.4}.hz-map.is-real .hz-land path{stroke:#ffffff;stroke-width:.35}.hz-mapmode{margin:0 0 8px}
-.hz-legend{display:flex;flex-wrap:wrap;gap:4px 10px;margin:6px 0 0;font-size:12px}.hz-legend span{display:inline-flex;align-items:center;gap:4px}.hz-legend i{width:14px;height:10px;display:inline-block;border:1px solid rgba(0,0,0,.2)}.hz-night{fill:rgba(20,25,45,.32)}.hz-dot circle{fill:#c0392b;stroke:#fff;stroke-width:1.5}.hz-dot text{font:600 11px system-ui;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:3px}
+.hz-legend{display:flex;flex-wrap:wrap;gap:4px 10px;margin:6px 0 0;font-size:12px;align-items:center}.hz-leg{display:inline-flex;align-items:center;gap:4px;border:0;background:none;padding:2px;cursor:pointer;font:inherit;color:inherit;min-height:0}.hz-leg:hover{outline:1.5px solid var(--accent,#055dff)}
+.hz-colors{width:min(900px,96vw)}.hz-pals{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}.hz-pal{display:grid;gap:4px;text-align:left;border:2px solid var(--line,#c9ced8);background:var(--surface,#fff);padding:6px 8px;cursor:pointer;font:600 13px system-ui}.hz-pal.is-on{border-color:var(--accent,#055dff);box-shadow:inset 0 0 0 1px var(--accent,#055dff)}
+.hz-pal-sw{display:flex;height:14px}.hz-pal-sw i{flex:1}.hz-offs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.hz-off{display:flex;align-items:center;gap:6px;font-size:13px;border:1px solid var(--line,#e4e6ea);padding:3px 6px}.hz-off.is-used{font-weight:800}.hz-off.is-own{border-color:var(--accent,#055dff)}.hz-off input{width:34px;height:24px;padding:0}.hz-atlas{display:flex;gap:8px;align-items:center}.hz-legend i{width:14px;height:10px;display:inline-block;border:1px solid rgba(0,0,0,.2)}.hz-night{fill:rgba(20,25,45,.32)}.hz-dot circle{fill:#c0392b;stroke:#fff;stroke-width:1.5}.hz-dot text{font:600 11px system-ui;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:3px}
 .hz-note{font-size:12.5px;margin:6px 0 0}
 .hz-add{width:min(620px,96vw)}.hz-add [data-hz-q]{width:100%}.hz-res{list-style:none;padding:0;margin:8px 0;max-height:46vh;overflow:auto}.hz-pick{display:block;width:100%;text-align:left;padding:6px 8px;border:0;border-bottom:1px solid var(--line,#e4e6ea);background:none;cursor:pointer}.hz-pick:hover{background:var(--surface-2,#f4f5f7)}
 .hz-style{width:min(980px,96vw)}.hz-sgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.hz-sform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px}.hz-sform label{display:grid;gap:3px;font-size:13px}.hz-sform .ui-toggle{display:flex}
