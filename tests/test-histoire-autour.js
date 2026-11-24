@@ -132,7 +132,7 @@ $t = fn($tag) => (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag=
 $ins = $pdo->prepare("INSERT INTO events(scope,person_id,event_type_id,date_text,year,sort_date,place_id,address,description) VALUES('person',?,?,?,?,?,?,?,?)");
 $ins->execute([1,$t('BIRT'),'1862',1862,'1862',1,'','']); $ins->execute([1,$t('DEAT'),'1930',1930,'1930',3,'','']);
 $ins->execute([2,$t('BIRT'),'1880',1880,'1880',2,'','']); $ins->execute([2,$t('DEAT'),'1902',1902,'1902',2,'','']);
-$ins->execute([3,$t('BIRT'),'1890',1890,'1890',4,'','']); $ins->execute([3,$t('DEAT'),'1960',1960,'1960',4,'rue de la Barrière','']);
+$ins->execute([3,$t('BIRT'),'1820',1820,'1820',4,'','']); $ins->execute([3,$t('DEAT'),'1850',1850,'1850',4,'rue de la Barrière','']);
 $pdo->prepare("INSERT INTO notes(entity_type,entity_id,title,body) VALUES('person',1,'Souvenirs','<p>Il racontait la guerre de 1870.</p>')")->execute();
 echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
     if (seed.status !== 0 || !/"ok"/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
@@ -165,7 +165,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('[data-ha-person="1"] .ha-row', {timeout: 30000});
             const txt = await p.textContent('[data-ha-person="1"]');
             assert.match(txt, /(Le|En) [^,]+, bataille [^.]+ à \d+(,\d)? km de Gorze\. Il avait \d+ ans\./); assert.match(txt, /Source : Wikidata/);
-            assert.match(txt, /16 août 1870 : bataille de Mars-la-Tour, à 10,9 km de Gorze \(Pierre a 8 ans\)/);
+            assert.match(txt, /16 août 1870 : bataille de Mars-la-Tour, à 11 km de Gorze \(Pierre a 8 ans\)/);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-ha-person="1"]').closest('section.card').hidden), false);
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-ha-person="3"]', {state: 'attached', timeout: 20000}); await sleep(2500);

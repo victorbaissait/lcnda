@@ -198,7 +198,7 @@
     /** les noms de navires écrits dans un texte : après « à bord du », « embarqué sur », « frégate », ou entre guillemets */
     function shipCandidates(text) {
         const t = fold(text).replace(/[’]/g, "'"), out = new Set();
-        const add = s => { const k = shipKey(s.split(/[,.;:()\n]| (?:en|le \d|du \d|de \d|a |au |pour |puis |depuis |comme |ou |et )/)[0]); if (k.length >= 3) { out.add(k); const w = k.split(' '); for (let n = Math.min(4, w.length); n >= 1; n--) out.add(w.slice(0, n).join(' ')); } };
+        const add = s0 => { const s = String(s0).replace(/^(?:(?:du|des|de la|de l'|de|d'|a bord (?:du|de la|de l'|de|des))\s*)+/, ''); const k = shipKey(s.split(/[,.;:()\n]| (?:en|le \d|du \d|de \d|a |au |pour |puis |depuis |comme |ou |et )/)[0]); if (k.length >= 3) { out.add(k); const w = k.split(' '); for (let n = Math.min(4, w.length); n >= 1; n--) out.add(w.slice(0, n).join(' ')); } };
         const reA = new RegExp(`(?:a bord (?:du|de la|de l'|de|des)|embarque\\w* (?:sur|a bord)(?: le| la| l')?|servi\\w* sur(?: le| la| l')?|${SHIPWORD})\\s+(?:(?:le|la|l')\\s*)?["«]?\\s*([a-z0-9][a-z0-9' -]{2,40})`, 'g');
         let m; while ((m = reA.exec(t))) add(m[1]);
         const reQ = /[«"“]\s*([^»"”]{3,40})\s*[»"”]/g; while ((m = reQ.exec(t))) add(m[1]);

@@ -80,6 +80,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=4">
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
+    <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">
     <link rel="stylesheet" href="assets/css/listes-donnees.css?v=1">
     <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
     <link rel="stylesheet" href="assets/css/lieux-patrimoine.css?v=1">
@@ -1626,6 +1627,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-commune-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-lieux-patrimoine.js?v=1" defer></script>
 <script src="assets/js/heritage-metiers-rivieres.js?v=1" defer></script>
+<script src="assets/js/heritage-histoire-autour.js?v=1" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
