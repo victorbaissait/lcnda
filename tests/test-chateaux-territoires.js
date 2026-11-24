@@ -149,7 +149,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('[data-ct-layer]', {timeout: 30000});
             await p.fill('[data-ct-myear]', '1700'); await p.dispatchEvent('[data-ct-myear]', 'change');
             await p.check('[data-ct-layer]');
-            await p.waitForFunction(() => document.querySelectorAll('#ct-layer path.ct-snap').length > 5, null, {timeout: 30000});
+            await p.waitForFunction(() => document.querySelectorAll('#ct-layer path.ct-snap').length > 5, null, {timeout: 30000}).catch(async e => { console.log(await p.evaluate(() => JSON.stringify({s: localStorage.getItem('genealogie-chateaux-territoires'), svg: document.querySelector('#ct-layer svg')?.innerHTML.slice(0, 300), mode: window.LCNDA_APP.state.mapMode, dm: typeof window.LCNDA_APP.drawMap, chk: document.querySelector('[data-ct-layer]').checked}))); throw e; });
             assert.match(await p.textContent('#ct-layer .ct-cap'), /carte de 1700.*GPL-3\.0/);
             assert.ok(await p.$$eval('#ct-layer text', n => n.some(x => /France/.test(x.textContent))));
             const s = JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-chateaux-territoires'))); assert.strictEqual(s.layer, true); assert.strictEqual(s.year, 1700);

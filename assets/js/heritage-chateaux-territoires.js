@@ -388,7 +388,7 @@
             if (!res.any) return;
             const li = lis[i];
             if (!r.then && r.year < CSHAPES_FROM) {
-                const m = li.querySelector(':scope > span.muted:last-child, :scope > .muted');
+                const m = [...li.querySelectorAll(':scope > span.muted')].pop(); // « trop tôt : … » (le premier .muted est « (Naissance, 1702) »)
                 const html = `${esc(T('à cette date, ce lieu était dans :'))} <span class="mc-then">${terrLine({...res, seats: []}, r.year)}</span>`;
                 if (m) m.outerHTML = html; else li.insertAdjacentHTML('beforeend', ' → ' + html);
             } else if (res.drawn.length) li.insertAdjacentHTML('beforeend', ` <small class="ct-in">👑 ${terrLine({snap: null, drawn: res.drawn, seats: []}, r.year)}</small>`);

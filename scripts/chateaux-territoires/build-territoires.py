@@ -33,12 +33,12 @@ EUROPE_COUNTRIES = {'Q142', 'Q183', 'Q38', 'Q29', 'Q145', 'Q27', 'Q45', 'Q31', '
                     'Q224', 'Q225', 'Q403', 'Q236', 'Q221', 'Q222', 'Q41', 'Q219', 'Q218', 'Q217', 'Q212', 'Q184', 'Q37', 'Q211', 'Q191', 'Q33',
                     'Q34', 'Q20', 'Q35', 'Q189', 'Q233', 'Q347', 'Q235', 'Q238', 'Q228', 'Q237', 'Q1246'}
 # racine de classe (avec ses sous-classes) → sorte
-ROOTS = [
-    ('Q417175', 'royaume'), ('Q1250464', 'royaume'), ('Q165116', 'grand-duche'), ('Q154547', 'duche'), ('Q57979411', 'duche'),
-    ('Q208500', 'principaute'), ('Q20521456', 'electorat'), ('Q463742', 'eveche'), ('Q1366274', 'eveche'), ('Q3403564', 'eveche'),
-    ('Q27492289', 'marche'), ('Q7695', 'marche'), ('Q20856058', 'landgraviat'), ('Q2991489', 'palatinat'), ('Q353344', 'comte'),
-    ('Q17143371', 'comte'), ('Q58001476', 'comte'), ('Q3556994', 'vicomte'), ('Q57318', 'ville-libre'), ('Q13218276', 'ville-libre'),
-    ('Q708751', 'abbaye'), ('Q196068', 'seigneurie'), ('Q1550557', 'seigneurie'), ('Q58683981', 'seigneurie'),
+ROOTS = [  # l'ordre compte : un élément de plusieurs classes prend la première (un évêché est aussi une « principauté »)
+    ('Q463742', 'eveche'), ('Q1366274', 'eveche'), ('Q3403564', 'eveche'), ('Q20521456', 'electorat'), ('Q57318', 'ville-libre'),
+    ('Q708751', 'abbaye'), ('Q165116', 'grand-duche'), ('Q417175', 'royaume'), ('Q1250464', 'royaume'),
+    ('Q154547', 'duche'), ('Q57979411', 'duche'), ('Q20856058', 'landgraviat'), ('Q2991489', 'palatinat'), ('Q27492289', 'marche'),
+    ('Q7695', 'marche'), ('Q208500', 'principaute'), ('Q353344', 'comte'), ('Q17143371', 'comte'), ('Q58001476', 'comte'),
+    ('Q3556994', 'vicomte'), ('Q196068', 'seigneurie'), ('Q1550557', 'seigneurie'), ('Q58683981', 'seigneurie'),
     ('Q209495', 'province'), ('Q26830017', 'etat'), ('Q3024240', 'etat'),
 ]
 RANK = [k for _, k in ROOTS]
@@ -59,13 +59,14 @@ def roots_items(cache):
 
 def details(ids, cache):
     vals = ' '.join('wd:' + i for i in ids)
-    q = f"""SELECT ?x (SAMPLE(?fr) AS ?nfr) (SAMPLE(?en) AS ?nen) (SAMPLE(?de) AS ?nde) (MIN(?inc) AS ?i) (MAX(?dis) AS ?d)
+    q = f"""SELECT ?x (SAMPLE(?fr) AS ?nfr) (SAMPLE(?en) AS ?nen) (SAMPLE(?de) AS ?nde) (SAMPLE(?an) AS ?nany) (MIN(?inc) AS ?i) (MAX(?dis) AS ?d)
       (SAMPLE(?co) AS ?c) (SAMPLE(?capco) AS ?cc) (SAMPLE(?arms) AS ?a) (SAMPLE(?shape) AS ?sh) (SAMPLE(?wfr) AS ?wf) (SAMPLE(?wen) AS ?we)
       (GROUP_CONCAT(DISTINCT ?cont; separator=" ") AS ?ct) (GROUP_CONCAT(DISTINCT ?ctry; separator=" ") AS ?cy)
       (GROUP_CONCAT(DISTINCT ?pred; separator=" ") AS ?pr) (GROUP_CONCAT(DISTINCT ?succ; separator=" ") AS ?su) WHERE {{
       VALUES ?x {{ {vals} }}
       OPTIONAL {{ ?x rdfs:label ?fr FILTER(lang(?fr)="fr") }} OPTIONAL {{ ?x rdfs:label ?en FILTER(lang(?en)="en") }}
       OPTIONAL {{ ?x rdfs:label ?de FILTER(lang(?de)="de") }}
+      OPTIONAL {{ ?x rdfs:label ?an FILTER(lang(?an) IN ("es","it","nl","pl","cs","ca","pt","hu","sv","da")) }}
       OPTIONAL {{ ?x wdt:P571 ?inc }} OPTIONAL {{ ?x wdt:P576 ?dis }} OPTIONAL {{ ?x wdt:P625 ?co }}
       OPTIONAL {{ ?x wdt:P36/wdt:P625 ?capco }} OPTIONAL {{ ?x wdt:P94 ?arms }} OPTIONAL {{ ?x wdt:P3896 ?shape }}
       OPTIONAL {{ ?x wdt:P30 ?cont }} OPTIONAL {{ ?x wdt:P17 ?ctry }}
@@ -208,7 +209,7 @@ def build_items(cache, shapes_out):
     items, shapes = [], []
     shape_ix = {}
     for x, b in keep.items():
-        it = {'q': x, 'k': kinds[x], 'n': wd.val(b, 'nfr') or wd.val(b, 'nen') or wd.val(b, 'nde') or x}
+        it = {'q': x, 'k': kinds[x], 'n': wd.val(b, 'nfr') or wd.val(b, 'nen') or wd.val(b, 'nde') or wd.val(b, 'nany') or x}
         if wd.val(b, 'nfr') and wd.val(b, 'nde') and wd.val(b, 'nde') != it['n']:
             it['nd'] = wd.val(b, 'nde')
         y0, y1 = wd.year(wd.val(b, 'i')), wd.year(wd.val(b, 'd'))
@@ -276,6 +277,8 @@ def build_items(cache, shapes_out):
                         print('  contour écarté', name, repr(lic), flush=True)
             if shape_ix.get(name) is not None:
                 it['sh'] = shape_ix[name]
+        if it['n'] == x:   # sans nom en français, anglais ni allemand : laissé de côté
+            continue
         items.append(it)
     items.sort(key=lambda i: (i.get('y0') if i.get('y0') is not None else 9999, i['q']))
     # les liens (prédécesseurs, successeurs) vers des éléments absents : gardés (lien Wikidata), mais on note le nom quand on l'a
