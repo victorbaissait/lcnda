@@ -932,6 +932,7 @@
             if (!ext.txCompare) return toast(i18n('La comparaison des lectures n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }
             ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post,
+                images: PAGES.length > 1 ? PAGES.map((p, i) => ({src: `media/${encodeURIComponent(p.filename)}`, label: pageName(p, i)})) : t.filename ? [{src: origSrc()}] : [], // 🖼 l'image de l'acte à côté des lectures
                 apply: (txt, label) => { versionBefore(label); const was = snapText(), to = {...was, body: txt + (txt.endsWith('\n') ? '' : '\n')}; putText(to); status(i18n('Texte fusionné (à relire)'));
                     A().undoToast?.(i18n('Lectures fusionnées dans le texte.'), {undo: () => putText(was), redo: () => putText(to)}); }});
         }

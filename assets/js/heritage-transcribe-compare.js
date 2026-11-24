@@ -94,7 +94,9 @@
 
     /* ═════ la fenêtre ═════
      * ctx = {actId, title, current() → texte à l'écran, apply(texte, label) (le met dans l'acte, ↶), api, post} */
+    const IMG_KEY = 'genealogie-tx-comparer-image', imgOn = () => { try { return localStorage.getItem(IMG_KEY) !== '0'; } catch (_) { return true; } };
     async function open(ctx) {
+        const imgs = (ctx.images || []).filter(m => m && m.src);
         let list = [];
         try { list = ((await ctx.api('act_transcription_versions', {act_id: ctx.actId})).items || []); } catch (e) { return A().toast(e.message, 'error'); }
         const readings = [{id: 0, label: T('📝 Le texte à l’écran'), source: 'now'}, ...list.filter(v => v.source), ...list.filter(v => !v.source && !v.auto), ...list.filter(v => !v.source && v.auto).slice(0, 10)];
@@ -108,11 +110,26 @@
                 <label class="ui-toggle h-txc-keep"><input type="checkbox" data-txc-keepon ${keepOn() ? 'checked' : ''}><i></i>${esc(T('Garder chaque nouvelle lecture (écriture à la main, IA, OCR)'))}</label></aside>
             <section class="h-txc-main"><div class="h-txc-tools"><span class="segmented" role="radiogroup"><button type="button" data-txc-mode="word">${esc(T('Mot par mot'))}</button><button type="button" data-txc-mode="line">${esc(T('Ligne par ligne'))}</button></span>
                 <button type="button" class="button small secondary" data-txc-maj title="${esc(T('Partout : ce que le plus de lectures disent'))}">🗳 ${esc(T('La majorité'))}</button><button type="button" class="button small secondary" data-txc-ref>↺ ${esc(T('Tout comme la référence'))}</button>
-                <label class="ui-toggle"><input type="checkbox" data-txc-loose ${loose ? 'checked' : ''}><i></i>${esc(T('Ignorer majuscules, accents et ponctuation'))}</label><span class="h-txc-count" data-txc-count></span></div>
-                <div class="h-txc-out" data-txc-out></div></section></div>
+                <label class="ui-toggle"><input type="checkbox" data-txc-loose ${loose ? 'checked' : ''}><i></i>${esc(T('Ignorer majuscules, accents et ponctuation'))}</label>${imgs.length ? `<label class="ui-toggle"><input type="checkbox" data-txc-imgon ${imgOn() ? 'checked' : ''}><i></i>🖼 ${esc(T('L’image à côté'))}</label>` : ''}<span class="h-txc-count" data-txc-count></span></div>
+                <div class="h-txc-split"><div class="h-txc-out" data-txc-out></div>${imgs.length ? `<div class="h-txc-img" data-txc-img ${imgOn() ? '' : 'hidden'}>
+                    <div class="h-txc-imgbar">${imgs.length > 1 ? imgs.map((m, i) => `<button type="button" class="button small ${i ? 'secondary' : ''}" data-txc-ipage="${i}">${esc(m.label || String(i + 1))}</button>`).join('') : ''}<span class="spacer"></span><button type="button" class="icon-button small" data-txc-z="-1" aria-label="${esc(T('Zoom arrière'))}">−</button><button type="button" class="icon-button small" data-txc-z="0" title="${esc(T('Ajuster à la fenêtre'))}" aria-label="${esc(T('Ajuster à la fenêtre'))}">⤢</button><button type="button" class="icon-button small" data-txc-z="1" aria-label="${esc(T('Zoom avant'))}">＋</button></div>
+                    <div class="h-txc-stage" data-txc-stage title="${esc(T('Molette : zoom · glisser : déplacer'))}"><img data-txc-pic alt="" draggable="false"></div></div>` : ''}</div></section></div>
             <div class="modal-actions"><button type="button" class="button secondary" data-txc-save>💾 ${esc(T('Garder la fusion comme lecture'))}</button><span class="spacer"></span><button type="button" class="button secondary" data-txc-x>${esc(T('Fermer'))}</button><button type="button" class="button" data-txc-apply>✓ ${esc(T('Mettre dans le texte'))}</button></div>`;
         document.body.appendChild(dlg); dlg.showModal();
         const $ = s => dlg.querySelector(s);
+        /* 🖼 l'image de l'acte à côté : molette = zoom, glisser = déplacer ; une page par onglet */
+        const V = {k: 1, x: 0, y: 0, fit: 1}, pic = $('[data-txc-pic]'), stage = $('[data-txc-stage]');
+        const place = () => { if (pic) pic.style.transform = `translate(${V.x}px, ${V.y}px) scale(${V.k})`; };
+        const fitImg = () => { if (!pic?.naturalWidth || !stage) return; V.fit = Math.min(stage.clientWidth / pic.naturalWidth, stage.clientHeight / pic.naturalHeight) || 1; V.k = V.fit; V.x = (stage.clientWidth - pic.naturalWidth * V.k) / 2; V.y = 0; place(); };
+        const zoomAt = (f, cx, cy) => { const k = Math.max(V.fit * .5, Math.min(V.k * f, 8)); V.x = cx - (cx - V.x) * k / V.k; V.y = cy - (cy - V.y) * k / V.k; V.k = k; place(); };
+        const showPage = i => { if (!pic) return; pic.onload = fitImg; pic.src = imgs[i].src; dlg.querySelectorAll('[data-txc-ipage]').forEach(b => b.classList.toggle('secondary', Number(b.dataset.txcIpage) !== i)); };
+        if (pic) {
+            showPage(0);
+            stage.addEventListener('wheel', e => { e.preventDefault(); const r = stage.getBoundingClientRect(); zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - r.left, e.clientY - r.top); }, {passive: false});
+            stage.addEventListener('pointerdown', e => { const sx = e.clientX - V.x, sy = e.clientY - V.y; stage.setPointerCapture(e.pointerId); stage.classList.add('is-drag');
+                const mv = ev => { V.x = ev.clientX - sx; V.y = ev.clientY - sy; place(); }, up = () => { stage.classList.remove('is-drag'); stage.removeEventListener('pointermove', mv); stage.removeEventListener('pointerup', up); };
+                stage.addEventListener('pointermove', mv); stage.addEventListener('pointerup', up); });
+        }
         const colorOf = id => COLORS[chosen.indexOf(id) % COLORS.length];
         const nameOf = id => readings.find(r => r.id === id)?.label || '';
         function paintList() {
@@ -146,6 +163,8 @@
         dlg.addEventListener('click', async e => {
             if (e.target.closest('[data-txc-x]')) { dlg.close(); dlg.parentNode?.removeChild(dlg); return; }
             const d = e.target.closest('[data-txc-d]'); if (d) return variantMenu(d, Number(d.dataset.txcD));
+            const ip = e.target.closest('[data-txc-ipage]'); if (ip) return showPage(Number(ip.dataset.txcIpage));
+            const zb = e.target.closest('[data-txc-z]'); if (zb) { const f = Number(zb.dataset.txcZ); if (!f) return fitImg(); return zoomAt(f > 0 ? 1.3 : 1 / 1.3, stage.clientWidth / 2, stage.clientHeight / 2); }
             const md = e.target.closest('[data-txc-mode]'); if (md) { mode = md.dataset.txcMode; return compute(); }
             if (e.target.closest('[data-txc-maj]')) { if (mode === 'word') majority(parts, base, loose); else rows.forEach(r => { const cnt = new Map(); r.variants.forEach((v, k) => { const kk = key(v, loose).trim(); cnt.set(kk, [...(cnt.get(kk) || []), k]); }); let best = null; cnt.forEach(ks => { if (!best || ks.length > best.length || (ks.length === best.length && ks.includes(base))) best = ks; }); r.pick = best.includes(base) ? base : best[0]; }); return paint(); }
             if (e.target.closest('[data-txc-ref]')) { parts.forEach(p => { p.pick = base; delete p.custom; }); rows.forEach(r => { r.pick = base; }); return paint(); }
@@ -158,9 +177,11 @@
             if (bs) { base = chosen.indexOf(Number(bs.dataset.txcBase)); compute(); }
             if (ln) { const [i, k] = ln.dataset.txcLine.split('|').map(Number); rows[i].pick = k; paint(); }
             if (e.target.closest('[data-txc-loose]')) { loose = e.target.checked; compute(); }
+            if (e.target.closest('[data-txc-imgon]')) { try { localStorage.setItem(IMG_KEY, e.target.checked ? '1' : '0'); } catch (_) {} $('[data-txc-img]').hidden = !e.target.checked; dlg.querySelector('.h-txc-split').classList.toggle('has-img', e.target.checked); if (e.target.checked) requestAnimationFrame(fitImg); }
             if (e.target.closest('[data-txc-keepon]')) { try { localStorage.setItem(KEEP_KEY, e.target.checked ? '1' : '0'); } catch (_) {} }
         });
         dlg.addEventListener('cancel', e => { e.preventDefault(); dlg.close(); dlg.parentNode?.removeChild(dlg); });
+        dlg.querySelector('.h-txc-split').classList.toggle('has-img', !!imgs.length && imgOn());
         paintList(); await compute();
         return dlg;
     }
@@ -177,6 +198,10 @@
 .h-txc-base{font-size:12px;color:var(--muted,#555);display:flex;gap:4px;align-items:center;margin-left:26px}
 .h-txc-keep{margin-top:10px;font-size:12.5px}
 .h-txc-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}.h-txc-count{font-size:12.5px;color:var(--muted,#555)}
+.h-txc-split{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}.h-txc-split.has-img{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.h-txc-img{display:grid;grid-template-rows:auto 1fr;gap:6px;min-width:0}.h-txc-img[hidden]{display:none}.h-txc-imgbar{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.h-txc-stage{position:relative;overflow:hidden;height:60vh;border:1.5px solid var(--line,#c9ced8);background:#2b2b2b;cursor:grab;touch-action:none}.h-txc-stage.is-drag{cursor:grabbing}
+.h-txc-stage img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none}
 .h-txc-out{max-height:60vh;overflow:auto;border:1.5px solid var(--line,#c9ced8);padding:12px;background:var(--surface,#fff)}
 .h-txc-text{font-family:Georgia,"Times New Roman",serif;font-size:16px;line-height:2}
 .h-txc-d{font:inherit;border:0;border-bottom:3px solid var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);padding:0 3px;cursor:pointer;color:inherit;min-height:0}
@@ -187,6 +212,6 @@
 .h-txc-lines tr.is-diff{background:rgba(212,168,0,.06)}
 .h-txc-lv{display:flex;gap:6px;align-items:flex-start;padding:3px 6px;border-left:4px solid var(--c);margin:2px 0;cursor:pointer}.h-txc-lv.is-on{background:color-mix(in srgb,var(--c) 12%,transparent)}
 .h-txc-lv mark{background:color-mix(in srgb,var(--c) 30%,transparent);color:inherit}
-@media (max-width:860px){.h-txc-body{grid-template-columns:1fr}}
+@media (max-width:860px){.h-txc-body,.h-txc-split.has-img{grid-template-columns:1fr}.h-txc-stage{height:40vh}}
 `; document.head.appendChild(st); }
 })();

@@ -114,6 +114,19 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             const st = await p.evaluate(() => ({on: [...document.querySelectorAll('.h-txc [data-txc-pick]:checked')].length, diffs: document.querySelectorAll('.h-txc [data-txc-d]').length, count: document.querySelector('.h-txc [data-txc-count]').textContent}));
             assert.strictEqual(st.on, 3, 'l’écran + 2 lectures'); assert.strictEqual(st.diffs, 5); assert.match(st.count, /5 passages/);
         });
+        await t('🖼 l’image de l’acte à côté des lectures : zoom (molette, ＋ −, ajuster), glisser ; se cache (retenu)', async () => {
+            await p.waitForFunction(() => document.querySelector('.h-txc [data-txc-pic]')?.naturalWidth > 0, null, {timeout: 10000});
+            assert.ok(await p.evaluate(() => document.querySelector('.h-txc .h-txc-split').classList.contains('has-img')));
+            const tf = () => p.evaluate(() => document.querySelector('.h-txc [data-txc-pic]').style.transform);
+            const t0 = await tf(); await p.click('.h-txc [data-txc-z="1"]'); const t1 = await tf(); assert.notEqual(t0, t1, '＋ zoome');
+            await p.click('.h-txc [data-txc-z="0"]'); assert.equal(await tf(), t0, '⤢ ajuste');
+            const box = await p.$eval('.h-txc [data-txc-stage]', e => { const r = e.getBoundingClientRect(); return {x: r.x + r.width / 2, y: r.y + r.height / 2}; });
+            await p.mouse.move(box.x, box.y); await p.mouse.wheel(0, -300); await sleep(100); assert.notEqual(await tf(), t0, 'molette');
+            await p.click('.h-txc [data-txc-imgon]', {force: true}).catch(async () => { await p.evaluate(() => document.querySelector('.h-txc [data-txc-imgon]').click()); });
+            assert.equal(await p.evaluate(() => document.querySelector('.h-txc [data-txc-img]').hidden), true);
+            assert.equal(await p.evaluate(() => localStorage.getItem('genealogie-tx-comparer-image')), '0');
+            await p.evaluate(() => document.querySelector('.h-txc [data-txc-imgon]').click()); assert.equal(await p.evaluate(() => document.querySelector('.h-txc [data-txc-img]').hidden), false);
+        });
         await t('choisir une variante d’un clic ; la majorité ; ligne par ligne', async () => {
             await p.evaluate(() => document.querySelectorAll('.h-txc [data-txc-d]')[4].click()); await p.waitForSelector('.ui-actmenu');
             await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Baillet/.test(b.textContent)).click()); await sleep(150);
@@ -130,7 +143,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             const b = await body(); assert.match(b, /par devant nous/); assert.match(b, /Gaspard Baillet/);
             await sleep(300);
             const v = (await api('act_transcription_versions', {act_id: 1})).items; assert.ok(v.some(x => /Fusion des lectures/.test(x.label)), 'le texte d’avant gardé');
-            await p.evaluate(() => [...[...document.querySelectorAll('.ui-toast')].at(-1).querySelectorAll('button')].find(x => /Annuler/.test(x.textContent)).click()); await sleep(200);
+            await p.evaluate(() => [...[...document.querySelectorAll('.ui-toast')].filter(x => /Lectures fusionnées/.test(x.textContent)).at(-1).querySelectorAll('button')].find(x => /Annuler/.test(x.textContent)).click()); await sleep(200);
             assert.strictEqual((await body()).trim(), HTR);
         });
         await t('« Garder la fusion comme lecture » ; le réglage « garder chaque lecture » (coché au départ)', async () => {
