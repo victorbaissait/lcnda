@@ -232,7 +232,8 @@ def read_pop(path, base):
         raw = h.read()
     t = raw.decode('utf-8-sig', errors='replace')
     first = t.split('\n', 1)[0]
-    delim = ';' if first.count(';') >= first.count(',') else ','
+    # le séparateur le plus fréquent de la ligne d'en-tête (les exports POP de 2026 utilisent « | »)
+    delim = max([';', ',', '|', '\t'], key=first.count)
     csv.field_size_limit(10 ** 8)
     r = csv.reader(io.StringIO(t), delimiter=delim)
     header = next(r)
