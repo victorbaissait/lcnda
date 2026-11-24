@@ -1,0 +1,36 @@
+fr ¦ ro
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ dintre care {l}: p. {x}
+Sorte de page ¦ Tip de pagină
+Langue : ¦ Limbă:
+Langue de ces pages… ¦ Limba acestor pagini…
+Sorte : {x} ¦ Tip: {x}
+Langue de {n} pages ¦ Limba a {n} pagini
+Langue de la page ¦ Limba paginii
+Langue (vide : comme le recueil) ¦ Limbă (gol: ca a culegerii)
+ex. Latin ¦ ex. Latină
+Langue : {l} ¦ Limbă: {l}
+Langue : comme le recueil ¦ Limbă: ca a culegerii
+comme le recueil : {l} ¦ ca a culegerii: {l}
+pas dite ¦ nespecificată
+Le texte de cette page semble en latin. ¦ Textul acestei pagini pare să fie în latină.
+Noter « Latin » ¦ Notează „Latină”
+Tables et index ¦ Tabele și indexuri
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Un tabel decenal, un index la sfârșitul registrului? Marchează pagina „📇 Tabel sau index” (fila 🗂 Stare sau pe pagină), apoi fă-i „📊 Tabelul paginii”: un rând pentru fiecare intrare, o coloană pentru trimitere (f° 12, p. 3). Intrările ajung aici, cu un link spre fiecare pagină indicată.
+{r} : page absente ¦ {r}: pagină absentă
+pas de page « {r} » ¦ nicio pagină „{r}”
+sans renvoi ¦ fără trimitere
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ Trimiteri găsite: {a} · spre pagini absente: {b} · negăsite: {c}
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ „{p}” este un tabel, dar tabelul său e gol: deschide pagina → „📊 Tabelul paginii” (un rând pentru fiecare intrare, o coloană pentru trimitere).
+Ouvrir la page ¦ Deschide pagina
+Chercher dans les tables… ¦ Caută în tabele…
+Chercher dans les tables ¦ Caută în tabele
+Toutes les entrées ¦ Toate intrările
+Renvois trouvés ¦ Trimiteri găsite
+Vers des pages absentes ¦ Spre pagini absente
+Introuvables ¦ Negăsite
+dans {p} ¦ în {p}
+… et {n} autres : affine la recherche. ¦ … și încă {n}: restrânge căutarea.
+Page ordinaire ¦ Pagină obișnuită
+📇 Table ou index ¦ 📇 Tabel sau index
+Page de garde ¦ Foaie de gardă

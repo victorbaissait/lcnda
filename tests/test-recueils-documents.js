@@ -102,7 +102,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
         const shown = () => p.evaluate(() => [...document.querySelectorAll('#sidebar-content .ong-list [data-ong-doc]')].map(b => Number(b.dataset.ongDoc)));
         const withFilters = async (f, q = '') => { await p.evaluate(([ff, qq]) => { localStorage.setItem('lcnda-listbar:onglets:documents', JSON.stringify({q: qq, f: ff, sort: 'az'})); window.LCNDA_APP.renderSidebar(); }, [f, q]); await p.waitForSelector('#sidebar-content .ong-list'); await sleep(300); return shown(); };
-        await t('📚 Recueils dans la colonne : chaque recueil (un clic l’ouvre), ses documents dans l’ordre des pages, puis « Dans aucun recueil »', async () => {
+        await t('📚 Recueils dans la colonne : chaque recueil (un clic le montre à droite), ses documents dans l’ordre des pages, puis « Dans aucun recueil »', async () => {
             await p.click('#sidebar-content [data-ong-mode="recueils"]'); await p.waitForSelector('#sidebar-content [data-ong-rec]');
             const r = await p.evaluate(() => ({h: [...document.querySelectorAll('#sidebar-content .ong-ph')].map(x => x.textContent.replace(/\s+/g, ' ').trim()),
                 rows: [...document.querySelectorAll('#sidebar-content .ong-list [data-ong-doc]')].map(b => b.querySelector('strong').textContent)}));
@@ -123,6 +123,31 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const item = p.locator('.ui-actmenu [role=menuitem]').filter({hasText: 'Montrer « Dans aucun recueil »'}).first();
             await item.click(); await sleep(200);
             assert.equal(await rows(), 8, '« ⋯ » le montre de nouveau');
+        });
+        await t('📚 Recueils, à droite : les recueils en vignettes (comme Listes → Recueils), un clic → ses documents dans l’ordre des pages', async () => {
+            await p.waitForSelector('#workspace [data-ong-reccard]', {timeout: 15000});
+            if (process.env.SHOT) { await sleep(800); await p.screenshot({path: process.env.SHOT + '-1.png'}); }
+            const cards = await p.evaluate(() => [...document.querySelectorAll('#workspace [data-ong-reccard]')].map(c => c.textContent.replace(/\s+/g, ' ')));
+            assert.equal(cards.length, 2, 'le recueil, puis « Dans aucun recueil » : ' + JSON.stringify(cards));
+            assert.match(cards[0], /Registre de Sancoins/); assert.match(cards[0], /4 documents/); assert.match(cards[0], /% transcrit/);
+            assert.match(cards[1], /Dans aucun recueil/); assert.match(cards[1], /4 documents/);
+            await p.click(`#workspace [data-ong-reccard="${rid}"] .ui-card-open`);
+            await p.waitForSelector('#workspace [data-ong-recbar]');
+            if (process.env.SHOT) await p.screenshot({path: process.env.SHOT + '-2.png'});
+            const names = await p.evaluate(() => [...document.querySelectorAll('#workspace [data-ong-card] .ui-card-name')].map(x => x.textContent.trim()));
+            assert.deepEqual(names, ['p. 1 · Acte B', 'p. 2 · Acte A', 'p. 3 · Contrat, page 1', 'p. 4 · Contrat, page 2']);
+            assert.match(await p.textContent('#workspace [data-ong-recbar]'), /Registre de Sancoins[\s\S]*4 documents/);
+            await p.click('#workspace [data-ong-recbar] [data-ong-wsrec=""]');
+            await p.waitForSelector('#workspace [data-ong-reccard="none"]');
+            await p.click('#workspace [data-ong-reccard="none"] .ui-card-open');
+            await p.waitForSelector('#workspace [data-ong-recbar]');
+            assert.deepEqual((await p.evaluate(() => [...document.querySelectorAll('#workspace [data-ong-card]')].map(c => Number(c.dataset.ongCard)))).sort(), [3, 4, 5, 6]);
+            await p.click(`#sidebar-content [data-ong-rec="${rid}"]`); // la colonne : le titre du recueil le montre à droite
+            await p.waitForFunction(() => /Registre de Sancoins/.test(document.querySelector('#workspace [data-ong-recbar]')?.textContent || ''));
+            await p.click('#workspace [data-ong-recbar] [data-ong-recopen]');
+            await p.waitForFunction(() => window.LCNDA_APP.state.module === 'listes' && /Registre de Sancoins/.test(document.querySelector('#workspace')?.textContent || ''), null, {timeout: 15000});
+            await p.evaluate(() => window.LCNDA_APP.setModule('documents')); await p.waitForSelector('#sidebar-content [data-ong-mode]');
+            await p.click('#workspace [data-ong-recbar] [data-ong-wsrec=""]').catch(() => {});
         });
         await t('chercher par recueil : son nom dans « Chercher… », et le filtre « Recueil »', async () => {
             await p.click('#sidebar-content [data-ong-mode="az"]');

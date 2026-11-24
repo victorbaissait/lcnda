@@ -71,6 +71,7 @@
     const personKey = p => `${fold(p.last || p.name)} ${fold(p.first)}`;
 
     /* ─── les données ─── */
+    let recFull = null, recFullLoading = null; // 📚 la liste complète des recueils (couverture, % transcrit…), pour les vignettes de droite
     let recs = [], centers = new Map(), docs = null, loading = null, failed = '', cur = 0, shown = STEP, bar = null, cache = new Map();
     {   // « #documents/12 » : la fiche n° 12 (lien, ← → du navigateur)
         const m = location.hash.match(/^#documents\/(\d{1,12})\b/);
@@ -79,6 +80,7 @@
     let stale = false; // un média ajouté ou changé ailleurs (lcnda:media-changed) : la liste et le cache sont à relire
     async function load(force = false) {
         if (docs && !force && !stale) return docs;
+        if (force || stale) recFull = null;
         if (!loading) { stale = false; loading = A().api('onglets', {op: 'documents'}).then(r => { recs = r.recueils || []; docs = (r.documents || []).map(d => ({...d, sort: sortOf(d)})); failed = ''; return docs; })
             .catch(e => { failed = e.message || 'Les documents n’ont pas pu se charger.'; docs = null; return []; }).finally(() => { loading = null; }); }
         return loading;
@@ -161,7 +163,7 @@
     const foldedRecs = () => (Array.isArray(readPref().recFold) ? readPref().recFold.map(Number) : []);
     function toggleFold(id) {
         const f = foldedRecs(), i = f.indexOf(id); if (i >= 0) f.splice(i, 1); else f.push(id);
-        writePref({recFold: f}); paintList();
+        writePref({recFold: f}); paintList(); if (id === 0) paintWorkspaceList();
         document.querySelector(`#sidebar-content [data-ong-fold="${id}"].ong-fold`)?.focus({preventScroll: true});
     }
     function underMenu(btn) {
@@ -197,7 +199,7 @@
             const o = e.target.closest('[data-ong-under]'); if (o) { underMenu(o); return; }
             const l = e.target.closest('[data-ong-letter]'); if (l && !l.disabled) { jumpTo(l.dataset.ongLetter); return; }
             const fo = e.target.closest('[data-ong-fold]'); if (fo) { toggleFold(Number(fo.dataset.ongFold)); return; }
-            const rh = e.target.closest('[data-ong-rec]'); if (rh) { ext.openRecueil?.(Number(rh.dataset.ongRec)); return; }
+            const rh = e.target.closest('[data-ong-rec]'); if (rh) { showRec(rh.dataset.ongRec); return; } // 📚 ses documents à droite (« ↗ Ouvrir le recueil » y est)
             const r = e.target.closest('[data-ong-doc]'); if (r) { if (pick.on && !cur) { togglePick(Number(r.dataset.ongDoc)); return; } select(Number(r.dataset.ongDoc)); return; }
             const more = e.target.closest('[data-ong-more]'); if (more) { shown += STEP; paintList(); }
         }, {signal});
@@ -287,7 +289,7 @@
             if (e.d && rows >= shown) break;
             if (e.lh) html += `<div class="section-label ong-lh" data-ong-lh="${esc(e.lh)}">${esc(e.lh)}</div>`;
             else if (e.rh !== undefined) { const fid = e.rh ? e.rh.id : 0, fold = `<button type="button" class="ong-fold" data-ong-fold="${fid}" aria-expanded="${!e.shut}" title="${esc(e.shut ? T('Montrer') : T('Masquer'))}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
-                html += e.rh ? `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-rec="${e.rh.id}" title="${esc(T('📚 Ouvrir le recueil'))}"><span>${esc(e.rh.icon || '📚')} ${esc(e.rh.title)}</span><small>${e.n}</small></button></div>`
+                html += e.rh ? `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-rec="${e.rh.id}" title="${esc(T('Voir ses documents à droite'))}"><span>${esc(e.rh.icon || '📚')} ${esc(e.rh.title)}</span><small>${e.n}</small></button></div>`
                     : `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-fold="0"><span>${esc(T('Dans aucun recueil'))}</span><small>${e.n}</small></button></div>`; }
             else if (e.ph) html += `<div class="ong-ph" data-ong-ph="${e.ph.p ? e.ph.p.id : 0}"><span>${e.ph.p ? `👤 ${esc(e.ph.p.name)}` : esc(T('Sans personne'))}</span><small>${e.ph.docs.length}</small></div>`;
             else { html += e.num ? rowHtml(e.d, e.letter).replace('<strong>', `<strong><span class="ong-pnum">${esc(T('p. {n}', {n: String(e.num)}))}</span> `) : rowHtml(e.d, e.letter); rows++; }
@@ -322,14 +324,54 @@
             ${n ? `<button type="button" class="button small secondary" data-ong-pick-none>${esc(T('Tout enlever'))}</button>` : ''}
             <button type="button" class="icon-button small" data-ong-pick-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">×</button>`;
     }
-    async function afterRecueil() { cache.clear(); await load(true); if (A().state?.module !== 'documents') return; paintList(); paintWorkspaceList(); if (cur && document.querySelector(`#workspace [data-ong-id="${cur}"]`)) showDoc(cur); }
+    async function afterRecueil() { cache.clear(); recFull = null; await load(true); if (A().state?.module !== 'documents') return; paintList(); paintWorkspaceList(); if (cur && document.querySelector(`#workspace [data-ong-id="${cur}"]`)) showDoc(cur); }
+    /* 📚 à droite, en mode « 📚 Recueils » : les recueils en vignettes (les mêmes que Listes → 📚 Recueils), avec le nombre de documents de chacun ;
+       un clic → ses documents, dans l'ordre des pages (« ← Tous les recueils », « ↗ Ouvrir le recueil »). « Dans aucun recueil » : la dernière vignette. */
+    const wsRec = () => (modeOf() === 'recueils' ? String(readPref().wsRec ?? '') : '');
+    function loadRecFull() {
+        if (recFull || recFullLoading) return recFullLoading;
+        recFullLoading = A().api('recueils', {q: ''}).then(r => { recFull = r.recueils || []; }).catch(() => { recFull = []; }).finally(() => { recFullLoading = null; if (A().state?.module === 'documents') paintWorkspaceList(); });
+        return recFullLoading;
+    }
+    /** les documents montrés à droite : ceux du recueil choisi (ordre des pages), sinon la liste filtrée */
+    function wsDocs(list = filtered()) {
+        const w = wsRec(); if (!w) return list;
+        if (w === 'none') return list.filter(d => !(d.recueils || []).length);
+        const id = Number(w);
+        return list.filter(d => (d.recueils || []).some(x => x.id === id)).map(d => ({d, num: d.recueils.find(x => x.id === id).num})).sort((a, b) => a.num - b.num).map(x => Object.assign(x.d, {_num: x.num}));
+    }
+    function showRec(v) {
+        writePref({wsRec: String(v)}); wsShown = 24;
+        if (cur) { cur = 0; writePref({cur: 0}); history.pushState(null, '', '#documents'); document.querySelectorAll('#sidebar-content [data-ong-doc].is-active').forEach(x => x.classList.remove('is-active')); render(); }
+        else { paintWorkspaceList(); document.querySelector('#workspace [data-ong-page]')?.scrollIntoView({block: 'start'}); }
+    }
+    function recCardsHtml(list) {
+        if (!recFull) { loadRecFull(); return UI().skeleton ? UI().skeleton(4) : `<div class="loading-block">${esc(T('Chargement…'))}</div>`; }
+        const st = bar?.state || {}, narrowed = !!(st.q || Object.values(st.filters || {}).some(v => (Array.isArray(v) ? v.length : !!v)));
+        const cnt = new Map(); let none = 0;
+        list.forEach(d => { const rr = d.recueils || []; if (!rr.length) none++; new Set(rr.map(x => x.id)).forEach(id => cnt.set(id, (cnt.get(id) || 0) + 1)); });
+        const cover = r => (r.cover ? `<img src="media/${esc(encodeURIComponent(r.cover.thumbnail || r.cover.filename))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`);
+        const items = recFull.filter(r => !narrowed || cnt.get(r.id)).map(r => { const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0, n = cnt.get(r.id) || 0;
+            return {thumb: cover(r), name: `${r.icon || '📚'} ${r.title}`, open: `data-ong-wsrec="${r.id}"`, openLabel: T('Voir ses documents'), attrs: `data-ong-reccard="${r.id}"`,
+                lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ') || T('Sans cote'), `${plural(n, 'document', 'documents')} · ${plural(r.pages, 'page', 'pages')}`],
+                badges: [{text: T('{n} % transcrit', {n: String(pct)}), kind: pct >= 100 ? 'green' : pct ? 'blue' : 'grey'}, r.loose ? {text: plural(r.loose, 'photo à ranger', 'photos à ranger'), kind: 'yellow'} : null].filter(Boolean),
+                when: r.updated_at, whenLabel: 'Modifié', menu: [`<button type="button" data-ong-recopen="${r.id}">📚 ${esc(T('Ouvrir le recueil'))}</button>`]}; });
+        if (none && !foldedRecs().includes(0)) items.push({thumb: '<span class="ui-card-ico">🗂️</span>', name: T('Dans aucun recueil'), open: `data-ong-wsrec="none"`, openLabel: T('Voir ces documents'), attrs: 'data-ong-reccard="none"', lines: [plural(none, 'document', 'documents'), T('Ni rangés ni classés dans un recueil')]});
+        if (!items.length) return A().emptyState({icon: '📚', text: T('Aucun recueil pour l’instant'), hint: T('« ☑ Choisir plusieurs », puis « 📚 Faire un recueil » : les documents choisis deviennent ses pages, dans l’ordre des clics.')});
+        return UI().cardsHtml(items);
+    }
     function paintWorkspaceList() {
         const box = document.querySelector('#workspace [data-ong-cards]'); if (!box || cur) return;
-        const list = filtered();
+        const all = filtered();
         if (!(docs || []).length) { box.innerHTML = A().emptyState({icon: '📄', text: 'Aucun document pour l’instant', hint: 'Les photos, actes, lettres et papiers ajoutés aux fiches (ou importés) arrivent ici, sans rien ressaisir.', action: kiosk() ? null : {label: '⤒ Importer des documents', attrs: 'data-empty-click="[data-ong-import]"'}}); return; }
-        if (!list.length) { box.innerHTML = A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre dans la colonne de gauche.'}); return; }
-        box.innerHTML = UI().cardsHtml ? UI().cardsHtml(list.slice(0, wsShown).map(d => ({thumb: thumbOf(d), name: d.title, open: `data-ong-doc="${d.id}"`, attrs: `data-ong-card="${d.id}"`, lines: cardLines(d),
-            badges: [{text: sortMeta(d.sort)[2], kind: 'grey'}, ...(d.has_tr ? [{text: 'Transcrit', kind: 'green'}] : [])], when: d.created_at, whenLabel: 'Ajouté'}))) : '';
+        if (modeOf() === 'recueils' && !wsRec() && !pick.on) { box.innerHTML = recCardsHtml(all); return; }
+        const w = wsRec(), rec = w && w !== 'none' ? (recOf(w) || {id: Number(w), title: '', icon: '📚'}) : null, list = wsDocs(all);
+        const head = w ? `<div class="ong-recbar" data-ong-recbar><button type="button" class="button small secondary" data-ong-wsrec="">← ${esc(T('Tous les recueils'))}</button>
+            <strong>${rec ? `${esc(rec.icon || '📚')} ${esc(rec.title || T('Recueil'))}` : `🗂️ ${esc(T('Dans aucun recueil'))}`}</strong><small class="muted">${esc(plural(list.length, 'document', 'documents'))}${rec ? ` · ${esc(T('dans l’ordre des pages'))}` : ''}</small>
+            <span class="spacer"></span>${rec ? `<button type="button" class="button small secondary" data-ong-recopen="${rec.id}">↗ ${esc(T('Ouvrir le recueil'))}</button>` : ''}</div>` : '';
+        if (!list.length) { box.innerHTML = head + A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre dans la colonne de gauche.'}); return; }
+        box.innerHTML = head + (UI().cardsHtml ? UI().cardsHtml(list.slice(0, wsShown).map(d => ({thumb: thumbOf(d), name: rec && d._num ? `${T('p. {n}', {n: String(d._num)})} · ${d.title}` : d.title, open: `data-ong-doc="${d.id}"`, attrs: `data-ong-card="${d.id}"`, lines: cardLines(d),
+            badges: [{text: sortMeta(d.sort)[2], kind: 'grey'}, ...(d.has_tr ? [{text: 'Transcrit', kind: 'green'}] : [])], when: d.created_at, whenLabel: 'Ajouté'}))) : '');
         if (list.length > wsShown && UI().moreButton) box.appendChild(UI().moreButton({remaining: list.length - wsShown, step: 24, onClick: () => { wsShown += 24; paintWorkspaceList(); }}));
         paintPick();
     }
@@ -461,10 +503,10 @@
     document.addEventListener('click', async e => {
         const page = e.target.closest?.('#workspace [data-ong-page]'); if (!page || A().state?.module !== 'documents') return;
         const b = e.target.closest('button, a'); if (!b) return;
-        if (b.matches('[data-ong-pick]')) { pick.on = !pick.on; if (!pick.on) pick.ids = []; paintPick(); return; }
-        if (b.matches('[data-ong-pick-close]')) { pick.on = false; pick.ids = []; paintPick(); return; }
+        if (b.matches('[data-ong-pick]')) { pick.on = !pick.on; if (!pick.on) pick.ids = []; if (modeOf() === 'recueils' && !wsRec()) paintWorkspaceList(); paintPick(); return; }
+        if (b.matches('[data-ong-pick-close]')) { pick.on = false; pick.ids = []; if (modeOf() === 'recueils' && !wsRec()) paintWorkspaceList(); paintPick(); return; }
         if (b.matches('[data-ong-pick-none]')) { pick.ids = []; paintPick(); return; }
-        if (b.matches('[data-ong-pick-all]')) { filtered().slice(0, wsShown).forEach(x => { if (!pick.ids.includes(x.id)) pick.ids.push(x.id); }); paintPick(); return; }
+        if (b.matches('[data-ong-pick-all]')) { wsDocs().slice(0, wsShown).forEach(x => { if (!pick.ids.includes(x.id)) pick.ids.push(x.id); }); paintPick(); return; }
         if (b.matches('[data-ong-pick-make], [data-ong-pick-add]')) {
             if (!ext.recueilDocs) return A().toast(T('Les recueils ne sont pas encore chargés : réessaie dans un instant.'), 'error');
             const chosen = pick.ids.map(byId).filter(Boolean);
@@ -472,6 +514,8 @@
             if (b.matches('[data-ong-pick-make]')) ext.recueilDocs.create(chosen, {onDone: done}); else ext.recueilDocs.addTo(chosen, {onDone: done});
             return;
         }
+        if (b.matches('[data-ong-wsrec]')) { showRec(b.dataset.ongWsrec); return; }
+        if (b.matches('[data-ong-recopen]')) { b.closest('details')?.removeAttribute('open'); ext.openRecueil?.(Number(b.dataset.ongRecopen)); return; }
         if (pick.on && !cur && b.matches('[data-ong-doc]')) { e.preventDefault(); togglePick(Number(b.dataset.ongDoc)); return; }
         let d = cache.get(cur);
         // la page affichée peut venir d'avant un vidage du cache (ouverture de l'app, média changé ailleurs) : on relit le document au lieu de ne rien faire

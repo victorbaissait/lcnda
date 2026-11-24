@@ -1,0 +1,36 @@
+fr ¦ tr
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ bunların {l} olanları: s. {x}
+Sorte de page ¦ Sayfa türü
+Langue : ¦ Dil:
+Langue de ces pages… ¦ Bu sayfaların dili…
+Sorte : {x} ¦ Tür: {x}
+Langue de {n} pages ¦ {n} sayfanın dili
+Langue de la page ¦ Sayfanın dili
+Langue (vide : comme le recueil) ¦ Dil (boş: derlemeyle aynı)
+ex. Latin ¦ ör. Latince
+Langue : {l} ¦ Dil: {l}
+Langue : comme le recueil ¦ Dil: derlemeyle aynı
+comme le recueil : {l} ¦ derlemeyle aynı: {l}
+pas dite ¦ belirtilmedi
+Le texte de cette page semble en latin. ¦ Bu sayfanın metni Latince gibi görünüyor.
+Noter « Latin » ¦ “Latince” olarak not et
+Tables et index ¦ Fihristler ve dizinler
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ On yıllık bir fihrist, defterin sonunda bir dizin mi? Sayfayı “📇 Fihrist veya dizin” olarak işaretle (🗂 Durum sekmesi veya sayfada), sonra “📊 Sayfanın tablosu” bölümünü doldur: her girdi için bir satır, gönderme için bir sütun (f° 12, s. 3). Girdiler buraya gelir, gösterilen her sayfaya bir bağlantıyla.
+{r} : page absente ¦ {r}: eksik sayfa
+pas de page « {r} » ¦ “{r}” sayfası yok
+sans renvoi ¦ göndermesiz
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ {a} gönderme bulundu · {b} eksik sayfalara · {c} bulunamadı
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ “{p}” bir fihrist, ama tablosu boş: sayfayı aç → “📊 Sayfanın tablosu” (her girdi için bir satır, gönderme için bir sütun).
+Ouvrir la page ¦ Sayfayı aç
+Chercher dans les tables… ¦ Fihristlerde ara…
+Chercher dans les tables ¦ Fihristlerde ara
+Toutes les entrées ¦ Tüm girdiler
+Renvois trouvés ¦ Bulunan göndermeler
+Vers des pages absentes ¦ Eksik sayfalara
+Introuvables ¦ Bulunamadı
+dans {p} ¦ {p} içinde
+… et {n} autres : affine la recherche. ¦ … ve {n} tane daha: aramayı daralt.
+Page ordinaire ¦ Sıradan sayfa
+📇 Table ou index ¦ 📇 Fihrist veya dizin
+Page de garde ¦ Koruma yaprağı

@@ -1,0 +1,36 @@
+fr ¦ lt ¦ lv ¦ et
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ iš jų {l}: p. {x} ¦ no tām {l}: {x}. lpp. ¦ neist {l}: lk {x}
+Sorte de page ¦ Puslapio rūšis ¦ Lapas veids ¦ Lehekülje liik
+Langue : ¦ Kalba: ¦ Valoda: ¦ Keel:
+Langue de ces pages… ¦ Šių puslapių kalba… ¦ Šo lapu valoda… ¦ Nende lehekülgede keel…
+Sorte : {x} ¦ Rūšis: {x} ¦ Veids: {x} ¦ Liik: {x}
+Langue de {n} pages ¦ {n} puslapių kalba ¦ {n} lapu valoda ¦ {n} lehekülje keel
+Langue de la page ¦ Puslapio kalba ¦ Lapas valoda ¦ Lehekülje keel
+Langue (vide : comme le recueil) ¦ Kalba (tuščia: kaip rinkinio) ¦ Valoda (tukšs: kā krājumam) ¦ Keel (tühi: nagu kogumikul)
+ex. Latin ¦ pvz., Lotynų ¦ piem., Latīņu ¦ nt Ladina
+Langue : {l} ¦ Kalba: {l} ¦ Valoda: {l} ¦ Keel: {l}
+Langue : comme le recueil ¦ Kalba: kaip rinkinio ¦ Valoda: kā krājumam ¦ Keel: nagu kogumikul
+comme le recueil : {l} ¦ kaip rinkinio: {l} ¦ kā krājumam: {l} ¦ nagu kogumikul: {l}
+pas dite ¦ nenurodyta ¦ nav norādīta ¦ määramata
+Le texte de cette page semble en latin. ¦ Šio puslapio tekstas atrodo lotyniškas. ¦ Šīs lapas teksts izskatās latīniski. ¦ Selle lehekülje tekst paistab olevat ladina keeles.
+Noter « Latin » ¦ Pažymėti „Lotynų“ ¦ Atzīmēt „Latīņu“ ¦ Märgi „Ladina“
+Tables et index ¦ Rodyklės ir indeksai ¦ Rādītāji un indeksi ¦ Registrid ja indeksid
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Dešimtmečio rodyklė, indeksas knygos gale? Pažymėk puslapį kaip „📇 Rodyklė ar indeksas“ (skirtuke 🗂 Būsena arba puslapyje), tada sudaryk jo „📊 Puslapio lentelė“: viena eilutė kiekvienam įrašui, vienas stulpelis nuorodai (f° 12, p. 3). Įrašai atsiranda čia, su saitu į kiekvieną nurodytą puslapį. ¦ Desmitgades rādītājs, indekss grāmatas beigās? Atzīmē lapu kā „📇 Rādītājs vai indekss“ (cilnē 🗂 Stāvoklis vai lapā), tad izveido tās „📊 Lapas tabula“: viena rinda katram ierakstam, viena kolonna norādei (f° 12, 3. lpp.). Ieraksti nonāk šeit, ar saiti uz katru minēto lapu. ¦ Kümneaastaregister, indeks raamatu lõpus? Märgi lehekülg „📇 Register või indeks“ (vahekaardil 🗂 Olek või leheküljel), siis tee selle „📊 Lehekülje tabel“: üks rida kirje kohta, üks veerg viite jaoks (f° 12, lk 3). Kirjed jõuavad siia, lingiga igale nimetatud leheküljele.
+{r} : page absente ¦ {r}: trūkstamas puslapis ¦ {r}: trūkstoša lapa ¦ {r}: puuduv lehekülg
+pas de page « {r} » ¦ nėra puslapio „{r}“ ¦ nav lapas „{r}“ ¦ lehekülge „{r}“ pole
+sans renvoi ¦ be nuorodos ¦ bez norādes ¦ viiteta
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ Rastos nuorodos: {a} · į trūkstamus puslapius: {b} · nerandamos: {c} ¦ Atrastas norādes: {a} · uz trūkstošām lapām: {b} · neatrodamas: {c} ¦ Leitud viiteid: {a} · puuduvatele lehekülgedele: {b} · ei leitud: {c}
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ „{p}“ yra rodyklė, bet jos lentelė tuščia: atidaryk puslapį → „📊 Puslapio lentelė“ (viena eilutė kiekvienam įrašui, vienas stulpelis nuorodai). ¦ „{p}“ ir rādītājs, bet tā tabula ir tukša: atver lapu → „📊 Lapas tabula“ (viena rinda katram ierakstam, viena kolonna norādei). ¦ „{p}“ on register, aga selle tabel on tühi: ava lehekülg → „📊 Lehekülje tabel“ (üks rida kirje kohta, üks veerg viite jaoks).
+Ouvrir la page ¦ Atidaryti puslapį ¦ Atvērt lapu ¦ Ava lehekülg
+Chercher dans les tables… ¦ Ieškoti rodyklėse… ¦ Meklēt rādītājos… ¦ Otsi registritest…
+Chercher dans les tables ¦ Ieškoti rodyklėse ¦ Meklēt rādītājos ¦ Otsi registritest
+Toutes les entrées ¦ Visi įrašai ¦ Visi ieraksti ¦ Kõik kirjed
+Renvois trouvés ¦ Rastos nuorodos ¦ Atrastās norādes ¦ Leitud viited
+Vers des pages absentes ¦ Į trūkstamus puslapius ¦ Uz trūkstošām lapām ¦ Puuduvatele lehekülgedele
+Introuvables ¦ Nerandamos ¦ Neatrodamas ¦ Ei leitud
+dans {p} ¦ iš {p} ¦ no {p} ¦ kohas {p}
+… et {n} autres : affine la recherche. ¦ … ir dar {n}: patikslink paiešką. ¦ … un vēl {n}: precizē meklēšanu. ¦ … ja veel {n}: täpsusta otsingut.
+Page ordinaire ¦ Įprastas puslapis ¦ Parasta lapa ¦ Tavaline lehekülg
+📇 Table ou index ¦ 📇 Rodyklė ar indeksas ¦ 📇 Rādītājs vai indekss ¦ 📇 Register või indeks
+Page de garde ¦ Priešlapis ¦ Priekšlapa ¦ Eeslehekülg

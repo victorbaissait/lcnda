@@ -1,0 +1,36 @@
+fr ¦ hr ¦ sl
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ od toga {l}: str. {x} ¦ od tega {l}: str. {x}
+Sorte de page ¦ Vrsta stranice ¦ Vrsta strani
+Langue : ¦ Jezik: ¦ Jezik:
+Langue de ces pages… ¦ Jezik ovih stranica… ¦ Jezik teh strani…
+Sorte : {x} ¦ Vrsta: {x} ¦ Vrsta: {x}
+Langue de {n} pages ¦ Jezik {n} stranica ¦ Jezik {n} strani
+Langue de la page ¦ Jezik stranice ¦ Jezik strani
+Langue (vide : comme le recueil) ¦ Jezik (prazno: kao zbirka) ¦ Jezik (prazno: kot zbirka)
+ex. Latin ¦ npr. Latinski ¦ npr. Latinščina
+Langue : {l} ¦ Jezik: {l} ¦ Jezik: {l}
+Langue : comme le recueil ¦ Jezik: kao zbirka ¦ Jezik: kot zbirka
+comme le recueil : {l} ¦ kao zbirka: {l} ¦ kot zbirka: {l}
+pas dite ¦ nije navedeno ¦ ni navedeno
+Le texte de cette page semble en latin. ¦ Tekst ove stranice izgleda kao latinski. ¦ Besedilo te strani je videti latinsko.
+Noter « Latin » ¦ Zabilježi „Latinski” ¦ Zapiši »Latinščina«
+Tables et index ¦ Kazala i indeksi ¦ Kazala in indeksi
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Desetogodišnje kazalo, indeks na kraju knjige? Označi stranicu kao „📇 Kazalo ili indeks” (kartica 🗂 Stanje ili na stranici), pa napravi njezinu „📊 Tablica stranice”: jedan redak po unosu, jedan stupac za uputnicu (f° 12, str. 3). Unosi stižu ovamo, s poveznicom na svaku navedenu stranicu. ¦ Desetletno kazalo, indeks na koncu knjige? Označi stran kot »📇 Kazalo ali indeks« (zavihek 🗂 Stanje ali na strani), nato naredi njeno »📊 Tabela strani«: ena vrstica na vnos, en stolpec za sklic (f° 12, str. 3). Vnosi pridejo sem, s povezavo na vsako navedeno stran.
+{r} : page absente ¦ {r}: stranica nedostaje ¦ {r}: manjkajoča stran
+pas de page « {r} » ¦ nema stranice „{r}” ¦ ni strani »{r}«
+sans renvoi ¦ bez uputnice ¦ brez sklica
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ Pronađene uputnice: {a} · na stranice koje nedostaju: {b} · nepronađene: {c} ¦ Najdeni sklici: {a} · na manjkajoče strani: {b} · neizsledljivi: {c}
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ „{p}” je kazalo, ali mu je tablica prazna: otvori stranicu → „📊 Tablica stranice” (jedan redak po unosu, jedan stupac za uputnicu). ¦ »{p}« je kazalo, a njegova tabela je prazna: odpri stran → »📊 Tabela strani« (ena vrstica na vnos, en stolpec za sklic).
+Ouvrir la page ¦ Otvori stranicu ¦ Odpri stran
+Chercher dans les tables… ¦ Traži u kazalima… ¦ Išči v kazalih…
+Chercher dans les tables ¦ Traži u kazalima ¦ Išči v kazalih
+Toutes les entrées ¦ Svi unosi ¦ Vsi vnosi
+Renvois trouvés ¦ Pronađene uputnice ¦ Najdeni sklici
+Vers des pages absentes ¦ Na stranice koje nedostaju ¦ Na manjkajoče strani
+Introuvables ¦ Nepronađene ¦ Neizsledljivi
+dans {p} ¦ u {p} ¦ v {p}
+… et {n} autres : affine la recherche. ¦ … i još {n}: suzi pretragu. ¦ … in še {n}: zoži iskanje.
+Page ordinaire ¦ Obična stranica ¦ Navadna stran
+📇 Table ou index ¦ 📇 Kazalo ili indeks ¦ 📇 Kazalo ali indeks
+Page de garde ¦ Predlist ¦ Predlist

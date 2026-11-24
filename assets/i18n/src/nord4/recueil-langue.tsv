@@ -1,0 +1,36 @@
+fr ¦ fi ¦ hu
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ joista {l}: s. {x} ¦ ebből {l}: {x}. o.
+Sorte de page ¦ Sivun laji ¦ Oldaltípus
+Langue : ¦ Kieli: ¦ Nyelv:
+Langue de ces pages… ¦ Näiden sivujen kieli… ¦ Ezeknek az oldalaknak a nyelve…
+Sorte : {x} ¦ Laji: {x} ¦ Típus: {x}
+Langue de {n} pages ¦ {n} sivun kieli ¦ {n} oldal nyelve
+Langue de la page ¦ Sivun kieli ¦ Az oldal nyelve
+Langue (vide : comme le recueil) ¦ Kieli (tyhjä: sama kuin kokoelmassa) ¦ Nyelv (üres: mint a gyűjteményé)
+ex. Latin ¦ esim. Latina ¦ pl. Latin
+Langue : {l} ¦ Kieli: {l} ¦ Nyelv: {l}
+Langue : comme le recueil ¦ Kieli: sama kuin kokoelmassa ¦ Nyelv: mint a gyűjteményé
+comme le recueil : {l} ¦ sama kuin kokoelmassa: {l} ¦ mint a gyűjteményé: {l}
+pas dite ¦ ei kerrottu ¦ nincs megadva
+Le texte de cette page semble en latin. ¦ Tämän sivun teksti näyttää latinalta. ¦ Ennek az oldalnak a szövege latinnak tűnik.
+Noter « Latin » ¦ Merkitse ”Latina” ¦ „Latin” feljegyzése
+Tables et index ¦ Luettelot ja hakemistot ¦ Mutatók és indexek
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Kymmenvuotisluettelo, hakemisto kirjan lopussa? Merkitse sivu ”📇 Luettelo tai hakemisto” (🗂 Tila-välilehdellä tai sivulla) ja tee sitten sen ”📊 Sivun taulukko”: yksi rivi merkintää kohden, yksi sarake viittaukselle (f° 12, s. 3). Merkinnät tulevat tänne, ja jokaiseen mainittuun sivuun on linkki. ¦ Tízéves mutató, index az anyakönyv végén? Jelöld meg az oldalt „📇 Mutató vagy index”-ként (🗂 Állapot fül vagy az oldalon), majd készítsd el „📊 Az oldal táblázata” részét: bejegyzésenként egy sor, egy oszlop a hivatkozásnak (f° 12, 3. o.). A bejegyzések ide kerülnek, minden megnevezett oldalra mutató linkkel.
+{r} : page absente ¦ {r}: puuttuva sivu ¦ {r}: hiányzó oldal
+pas de page « {r} » ¦ ei sivua ”{r}” ¦ nincs „{r}” oldal
+sans renvoi ¦ ei viittausta ¦ hivatkozás nélkül
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ Viittauksia löytyi: {a} · puuttuviin sivuihin: {b} · ei löydy: {c} ¦ {a} hivatkozás megtalálva · {b} hiányzó oldalakra · {c} nem található
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ ”{p}” on luettelo, mutta sen taulukko on tyhjä: avaa sivu → ”📊 Sivun taulukko” (yksi rivi merkintää kohden, yksi sarake viittaukselle). ¦ „{p}” mutató, de a táblázata üres: nyisd meg az oldalt → „📊 Az oldal táblázata” (bejegyzésenként egy sor, egy oszlop a hivatkozásnak).
+Ouvrir la page ¦ Avaa sivu ¦ Az oldal megnyitása
+Chercher dans les tables… ¦ Hae luetteloista… ¦ Keresés a mutatókban…
+Chercher dans les tables ¦ Hae luetteloista ¦ Keresés a mutatókban
+Toutes les entrées ¦ Kaikki merkinnät ¦ Minden bejegyzés
+Renvois trouvés ¦ Löytyneet viittaukset ¦ Megtalált hivatkozások
+Vers des pages absentes ¦ Puuttuviin sivuihin ¦ Hiányzó oldalakra
+Introuvables ¦ Ei löydy ¦ Nem található
+dans {p} ¦ kohteessa {p} ¦ itt: {p}
+… et {n} autres : affine la recherche. ¦ … ja {n} muuta: tarkenna hakua. ¦ … és még {n}: szűkítsd a keresést.
+Page ordinaire ¦ Tavallinen sivu ¦ Közönséges oldal
+📇 Table ou index ¦ 📇 Luettelo tai hakemisto ¦ 📇 Mutató vagy index
+Page de garde ¦ Esilehti ¦ Előzéklap

@@ -1,0 +1,36 @@
+fr ¦ cs ¦ sv ¦ da
+# 🔤 La langue de chaque page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js)
+dont {l} : p. {x} ¦ z toho {l}: s. {x} ¦ varav {l}: s. {x} ¦ heraf {l}: s. {x}
+Sorte de page ¦ Druh stránky ¦ Typ av sida ¦ Sidetype
+Langue : ¦ Jazyk: ¦ Språk: ¦ Sprog:
+Langue de ces pages… ¦ Jazyk těchto stránek… ¦ Språk för dessa sidor… ¦ Sprog for disse sider…
+Sorte : {x} ¦ Druh: {x} ¦ Typ: {x} ¦ Type: {x}
+Langue de {n} pages ¦ Jazyk {n} stránek ¦ Språk för {n} sidor ¦ Sprog for {n} sider
+Langue de la page ¦ Jazyk stránky ¦ Sidans språk ¦ Sidens sprog
+Langue (vide : comme le recueil) ¦ Jazyk (prázdné: jako sborník) ¦ Språk (tomt: samma som samlingen) ¦ Sprog (tomt: som samlingen)
+ex. Latin ¦ např. Latina ¦ t.ex. Latin ¦ f.eks. Latin
+Langue : {l} ¦ Jazyk: {l} ¦ Språk: {l} ¦ Sprog: {l}
+Langue : comme le recueil ¦ Jazyk: jako sborník ¦ Språk: samma som samlingen ¦ Sprog: som samlingen
+comme le recueil : {l} ¦ jako sborník: {l} ¦ samma som samlingen: {l} ¦ som samlingen: {l}
+pas dite ¦ neuvedeno ¦ inte angivet ¦ ikke angivet
+Le texte de cette page semble en latin. ¦ Text této stránky vypadá latinsky. ¦ Texten på den här sidan ser ut att vara latin. ¦ Teksten på denne side ser ud til at være latin.
+Noter « Latin » ¦ Zapsat „Latina“ ¦ Ange ”Latin” ¦ Angiv »Latin«
+Tables et index ¦ Rejstříky a indexy ¦ Register och index ¦ Registre og indekser
+Une table décennale, un index en fin de registre ? Marque la page « 📇 Table ou index » (onglet 🗂 État ou sur la page), puis fais son « 📊 Tableau de la page » : une ligne par entrée, une colonne pour le renvoi (f° 12, p. 3). Elles arrivent ici, avec un lien vers chaque page annoncée. ¦ Desetiletý rejstřík, index na konci matriky? Označ stránku jako „📇 Rejstřík nebo index“ (karta 🗂 Stav nebo na stránce) a pak vytvoř její „📊 Tabulka strany“: jeden řádek na položku, jeden sloupec pro odkaz (f° 12, s. 3). Položky se objeví tady, s odkazem na každou uvedenou stránku. ¦ En tioårsförteckning, ett register i slutet av boken? Markera sidan som ”📇 Register eller index” (fliken 🗂 Status eller på sidan) och gör sedan dess ”📊 Sidans tabell”: en rad per post, en kolumn för hänvisningen (f° 12, s. 3). Posterna hamnar här, med en länk till varje angiven sida. ¦ Et tiårsregister, et indeks bagerst i bogen? Markér siden som »📇 Register eller indeks« (fanen 🗂 Status eller på siden), og lav så dens »📊 Sidens tabel«: én række pr. post, én kolonne til henvisningen (f° 12, s. 3). Posterne havner her, med et link til hver angivet side.
+{r} : page absente ¦ {r}: chybějící stránka ¦ {r}: saknad sida ¦ {r}: manglende side
+pas de page « {r} » ¦ žádná stránka „{r}“ ¦ ingen sida ”{r}” ¦ ingen side »{r}«
+sans renvoi ¦ bez odkazu ¦ utan hänvisning ¦ uden henvisning
+{a} renvois trouvés · {b} vers des pages absentes · {c} introuvables ¦ Nalezené odkazy: {a} · na chybějící stránky: {b} · nenalezené: {c} ¦ {a} hänvisningar hittade · {b} till saknade sidor · {c} går inte att hitta ¦ {a} henvisninger fundet · {b} til manglende sider · {c} kan ikke findes
+« {p} » est une table, mais son tableau est vide : ouvre la page → « 📊 Tableau de la page » (une ligne par entrée, une colonne pour le renvoi). ¦ „{p}“ je rejstřík, ale jeho tabulka je prázdná: otevři stránku → „📊 Tabulka strany“ (jeden řádek na položku, jeden sloupec pro odkaz). ¦ ”{p}” är ett register, men dess tabell är tom: öppna sidan → ”📊 Sidans tabell” (en rad per post, en kolumn för hänvisningen). ¦ »{p}« er et register, men dets tabel er tom: åbn siden → »📊 Sidens tabel« (én række pr. post, én kolonne til henvisningen).
+Ouvrir la page ¦ Otevřít stránku ¦ Öppna sidan ¦ Åbn siden
+Chercher dans les tables… ¦ Hledat v rejstřících… ¦ Sök i registren… ¦ Søg i registrene…
+Chercher dans les tables ¦ Hledat v rejstřících ¦ Sök i registren ¦ Søg i registrene
+Toutes les entrées ¦ Všechny položky ¦ Alla poster ¦ Alle poster
+Renvois trouvés ¦ Nalezené odkazy ¦ Hittade hänvisningar ¦ Fundne henvisninger
+Vers des pages absentes ¦ Na chybějící stránky ¦ Till saknade sidor ¦ Til manglende sider
+Introuvables ¦ Nenalezené ¦ Går inte att hitta ¦ Kan ikke findes
+dans {p} ¦ v {p} ¦ i {p} ¦ i {p}
+… et {n} autres : affine la recherche. ¦ … a dalších {n}: zpřesni hledání. ¦ … och {n} till: förfina sökningen. ¦ … og {n} mere: indsnævr søgningen.
+Page ordinaire ¦ Běžná stránka ¦ Vanlig sida ¦ Almindelig side
+📇 Table ou index ¦ 📇 Rejstřík nebo index ¦ 📇 Register eller index ¦ 📇 Register eller indeks
+Page de garde ¦ Předsádka ¦ Försättsblad ¦ Forsatsblad

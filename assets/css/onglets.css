@@ -195,3 +195,7 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 .ong-rhrow .ong-rh span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ong-fold { flex: none; width: 24px; height: 24px; border: 1.5px solid var(--line, #ccd); background: var(--surface, #fff); color: inherit; font: inherit; line-height: 1; cursor: pointer; padding: 0; }
 .ong-fold:hover, .ong-fold:focus-visible { border-color: var(--ink, #111); }
+/* 📚 à droite, un recueil choisi : « ← Tous les recueils · 📚 titre · N documents · ↗ Ouvrir le recueil » */
+.ong-recbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; padding: 8px 10px; border: 2px solid var(--ink, #111); background: var(--surface, #fff); }
+.ong-recbar strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+.ong-recbar .spacer { flex: 1; }
