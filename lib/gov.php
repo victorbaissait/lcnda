@@ -71,7 +71,8 @@ function gov_fold(string $s): string
     static $map = null;
     if ($map === null) { $map = json_decode((string) (gov_meta()['fold_map'] ?? '{}'), true) ?: []; $map += ['ß' => 'ss', 'ł' => 'l', 'đ' => 'd', 'ø' => 'o', 'æ' => 'ae', 'œ' => 'oe']; }
     $s = strtr(mb_strtolower($s, 'UTF-8'), $map);
-    if (class_exists('Normalizer')) { $d = Normalizer::normalize($s, Normalizer::FORM_D); if (is_string($d)) { $s = (string) preg_replace('/\p{Mn}+/u', '', $d); } }
+    // une lettre latine accentuée absente des noms du pack : sans son accent, comme le ferait build-gov.py
+    if (class_exists('Normalizer')) { $s = (string) preg_replace_callback('/\p{Latin}/u', static function ($m) { if (strlen($m[0]) === 1) { return $m[0]; } $d = (string) preg_replace('/\p{Mn}+/u', '', (string) Normalizer::normalize($m[0], Normalizer::FORM_KD)); return preg_match('/^[\x00-\x7F]+$/', $d) ? $d : $m[0]; }, $s); }
     return trim((string) preg_replace('/[^\p{L}\p{N}]+/u', ' ', $s));
 }
 
@@ -429,8 +430,8 @@ function gov_place_add(PDO $pdo, array $data): array
 function gov_place_add_undo(PDO $pdo, array $data): array
 {
     $pid = (int) ($data['place_id'] ?? 0);
-    $s = $pdo->prepare('SELECT (SELECT count(*) FROM events WHERE place_id=?) + (SELECT count(*) FROM gov_place_links WHERE place_id=?)'); $s->execute([$pid, $pid]);
-    $used = (int) $pdo->query('SELECT count(*) FROM events WHERE place_id=' . $pid)->fetchColumn();
+    $s = $pdo->prepare('SELECT count(*) FROM events WHERE place_id=?'); $s->execute([$pid]);
+    $used = (int) $s->fetchColumn();
     if ($used > 0) { throw new RuntimeException(i18n_t('Ce lieu sert déjà dans des événements : il reste dans ta base.')); }
     $pdo->prepare('DELETE FROM gov_place_links WHERE place_id=?')->execute([$pid]);
     $pdo->prepare('DELETE FROM places WHERE id=?')->execute([$pid]);

@@ -614,16 +614,18 @@ STD_UNIT = {'Kilogram': 'kg', 'Litre': 'L', 'Unit': 'pièce'}
 # les mesures d'origine qui sont des multiples exacts des mesures standard (pour retrouver l'argent d'une unité de monnaie)
 METRIC = {('Kilogram', 'Kilogram'): 1, ('Litre', 'Litre'): 1, ('Unit', 'Unit'): 1, ('Hectolitre', 'Litre'): 100, ('CentoKilo', 'Kilogram'): 100,
           ('Metric Tonne', 'Kilogram'): 1000, ('CentoUnits', 'Unit'): 100}
-# monnaies de compte : nom de la source → nom français (au singulier, au pluriel)
+# monnaies de compte : nom de la source → (nom français au singulier, au pluriel, première année où la monnaie existait)
+# (pas les unités mises après coup sur des prix anciens : « Alsace Franc » de Hanauer, « Swedish Kronor » avant 1873…)
 MONEY = {
-    'Paris Livra': ('livre tournois', 'livres tournois'), 'Tours Livre': ('livre tournois', 'livres tournois'), 'French Franc': ('franc', 'francs'),
-    'Belgian Franc': ('franc belge', 'francs belges'), 'Dutch Guilder': ('florin', 'florins'), 'English Pence': ('penny', 'pence'),
-    'Krakow Gold': ('złoty (« florin » polonais)', 'złotys'), 'Swedish Kronor': ('couronne', 'couronnes'), 'Danish Skilling': ('skilling', 'skillings'),
-    'Vienna kreuzer': ('kreuzer', 'kreuzers'), 'Leipzig pfennig': ('pfennig', 'pfennigs'), 'Frankfurt pfennig': ('pfennig', 'pfennigs'),
-    'Augsburg Dinar': ('pfennig (denier)', 'pfennigs'), 'Munich denar': ('pfennig (denier)', 'pfennigs'), 'Portugal Reis': ('réal', 'réis'),
-    'Lira Milanesi': ('lire de Milan', 'lires de Milan'), 'Milanesi Soldi': ('sou de Milan', 'sous de Milan'), 'Naples Carlini': ('carlin', 'carlins'),
-    'Sueldo de Cataluna': ('sou de Catalogne', 'sous de Catalogne'), 'Brabant groat': ('gros de Brabant', 'gros de Brabant'),
-    'Flemish Groat': ('gros de Flandre', 'gros de Flandre'), 'Flemish Grote': ('gros de Flandre', 'gros de Flandre'), 'Alsace Franc': ('franc', 'francs'),
+    'Paris Livra': ('livre tournois', 'livres tournois', 0), 'Tours Livre': ('livre tournois', 'livres tournois', 0),
+    'French Franc': ('franc', 'francs', 1795), 'Belgian Franc': ('franc belge', 'francs belges', 1832), 'Dutch Guilder': ('florin', 'florins', 0),
+    'English Pence': ('penny', 'pence', 0), 'Krakow Gold': ('złoty', 'złotys', 0), 'Swedish Kronor': ('couronne', 'couronnes', 1873),
+    'Danish Skilling': ('skilling', 'skillings', 0), 'Vienna kreuzer': ('kreuzer', 'kreuzers', 0), 'Leipzig pfennig': ('pfennig', 'pfennigs', 0),
+    'Frankfurt pfennig': ('pfennig', 'pfennigs', 0), 'Augsburg Dinar': ('pfennig', 'pfennigs', 0), 'Munich denar': ('pfennig', 'pfennigs', 0),
+    'Portugal Reis': ('réal', 'réis', 0), 'Lira Milanesi': ('lire de Milan', 'lires de Milan', 0), 'Milanesi Soldi': ('sou de Milan', 'sous de Milan', 0),
+    'Naples Carlini': ('carlin', 'carlins', 0), 'Sueldo de Cataluna': ('sou de Catalogne', 'sous de Catalogne', 0),
+    'Brabant groat': ('gros de Brabant', 'gros de Brabant', 0), 'Flemish Groat': ('gros de Flandre', 'gros de Flandre', 0),
+    'Flemish Grote': ('gros de Flandre', 'gros de Flandre', 0),
 }
 
 
@@ -642,7 +644,12 @@ def build_prix(cache, out_dir):
         with zipfile.ZipFile(z) as zz:
             for n in zz.namelist():
                 if n.endswith('.csv'):
-                    rows.extend(csv.DictReader(io.StringIO(zz.read(n).decode('utf-8-sig', errors='replace'))))
+                    b = zz.read(n)
+                    try:
+                        txt = b.decode('utf-8-sig')
+                    except UnicodeDecodeError:  # quelques fichiers sont en Windows-1252
+                        txt = b.decode('cp1252', errors='replace')
+                    rows.extend(csv.DictReader(io.StringIO(txt)))
     prices, money, srcs = {}, {}, {}
     for r in rows:
         mk, gd = r.get('Market'), r.get('Commodity')
@@ -663,7 +670,7 @@ def build_prix(cache, out_dir):
             o = float(r['Original Value'])
         except (TypeError, ValueError):
             o = 0
-        if cur in MONEY and f and o > 0:
+        if cur in MONEY and f and o > 0 and y >= MONEY[cur][2]:
             money.setdefault(mk, {}).setdefault(cur, {}).setdefault(y, []).append(s * f / o)
     med = lambda v: sorted(v)[len(v) // 2]  # noqa: E731
     cities = {}

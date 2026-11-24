@@ -1476,7 +1476,7 @@ def build_world(net, out, region, years, a):
     write_normals(db, 'station', 'daily', 'station_id')
     db.close()
     say(f'   {plural(len(keep), "station")} dans le pack, {len(pays)} pays')
-    finish(path, out, kind)
+    finish(path, out, kind, page_size=16384)
 
 
 # ═══════════════════════ Les réanalyses (facultatives) ═══════════════════════
@@ -1948,10 +1948,12 @@ def copy_stations(src, dst, ids, hourly=False):
     dst.commit()
 
 
-def finish(path, out_dir, kind, wrap=True):
+def finish(path, out_dir, kind, wrap=True, page_size=None):
     db = sqlite3.connect(path)
     F.set_meta(db, built=datetime.date.today().isoformat())
     db.commit()
+    if page_size:  # des pages plus grandes : les blocs (≈ 700 octets) se rangent sans place perdue (pack du monde ≈ 2,4 fois plus petit)
+        db.execute(f'PRAGMA page_size={int(page_size)}')
     db.execute('VACUUM')
     db.close()
     say(f'   ✓ {os.path.basename(path)} : {size_text(os.path.getsize(path))}')

@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    if (window.LCNDA_EXT?.ouChercher?.plus) return; // déjà chargé
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI || {};
     const M = () => window.LCNDA_OUC_MONDE;

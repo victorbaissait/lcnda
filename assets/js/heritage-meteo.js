@@ -438,12 +438,12 @@
         ['complet', 'Pack complet', 'Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go'],
         ['europe', 'Pack Europe', 'Stations d’Allemagne, des Pays-Bas, du Danemark, du Royaume-Uni, d’Espagne, de Pologne, de Tchéquie, d’Italie, du Portugal et de Slovaquie + reconstitution 20CR (1836–1939) et ERA5 sur toute l’Europe · ≈ 1,5 à 3,5 Go'],
         // les packs du monde (NOAA GHCN-Daily) : un par continent, les plus longues séries bien réparties, chaque jour (températures, pluie, neige)
-        ['monde-amerique-nord', 'Amérique du Nord', '≈ 2 500 stations (États-Unis, Canada, Mexique, Amérique centrale, Caraïbes, Groenland) · __SZ_NA__'],
-        ['monde-amerique-sud', 'Amérique du Sud', '≈ 400 stations · __SZ_SA__'],
-        ['monde-afrique', 'Afrique', '≈ 600 stations · __SZ_AF__'],
-        ['monde-asie', 'Asie', '≈ 1 800 stations (avec la Russie à l’est de l’Oural, la Turquie et le Caucase) · __SZ_AS__'],
-        ['monde-oceanie', 'Océanie', '≈ 1 000 stations (Australie, Nouvelle-Zélande, îles du Pacifique) · __SZ_OC__'],
-        ['monde-europe', 'Europe (hors pack Europe)', '≈ 1 200 stations des pays que le pack Europe n’a pas (Autriche, Scandinavie, Europe de l’Est, Russie jusqu’à l’Oural…) · __SZ_EU__']];
+        ['monde-amerique-nord', 'Amérique du Nord', '≈ 2 500 stations (États-Unis, Canada, Mexique, Amérique centrale, Caraïbes, Groenland) · ≈ 300 Mo'],
+        ['monde-amerique-sud', 'Amérique du Sud', '≈ 400 stations · ≈ 15 Mo'],
+        ['monde-afrique', 'Afrique', '≈ 600 stations · ≈ 25 Mo'],
+        ['monde-asie', 'Asie', '≈ 1 800 stations (avec la Russie à l’est de l’Oural, la Turquie et le Caucase) · ≈ 100 Mo'],
+        ['monde-oceanie', 'Océanie', '≈ 1 000 stations (Australie, Nouvelle-Zélande, îles du Pacifique) · ≈ 50 Mo'],
+        ['monde-europe', 'Europe (hors pack Europe)', '≈ 1 200 stations des pays que le pack Europe n’a pas (Autriche, Scandinavie, Europe de l’Est, Russie jusqu’à l’Oural…) · ≈ 80 Mo']];
     const isWorld = k => String(k).startsWith('monde-');
     const packName = k => (PACKS.find(p => p[0] === k) || [k, 'Pack'])[1];
     ext.maintenance = ext.maintenance || {};
