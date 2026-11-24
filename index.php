@@ -1563,9 +1563,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-house-cultes.js?v=1" defer></script>
 <script src="assets/js/heritage-house-equip.js?v=1" defer></script>
 <script src="assets/js/heritage-house-objets.js?v=1" defer></script>
-<script src="assets/js/heritage-anim-render.js?v=1" defer></script>
+<script src="assets/js/heritage-frontieres.js?v=2" defer></script>
+<script src="assets/js/heritage-anim-render.js?v=2" defer></script>
 <script src="assets/js/heritage-anim-export.js?v=1" defer></script>
-<script src="assets/js/heritage-anim-studio.js?v=2" defer></script>
+<script src="assets/js/heritage-anim-studio.js?v=3" defer></script>
 <script src="assets/js/heritage-dna.js?v=23" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=11" defer></script>
 <script src="assets/js/museum-viewer.js?v=10" defer></script>

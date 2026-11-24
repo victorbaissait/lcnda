@@ -38,6 +38,7 @@
         race: {icon: '🏁', label: 'Course des noms et prénoms', make: d => ({dur: 25, title: T('Les noms de la famille, décennie après décennie'), what: 'surname', mode: 'decade', window: 20, top: 10, colors: {}, fixedScale: false, bg: '#ffffff', ease: 'linear'})},
         pyramid: {icon: '👥', label: 'La pyramide qui vit', make: d => ({dur: 20, title: T('Qui vivait, année après année'), step: 5, maxAge: 100, colors: {m: '#2a6a9a', f: '#c0392b'}, fixedScale: true, bg: '#ffffff', ease: 'linear'})},
         line: {icon: '📈', label: 'La courbe qui se dessine', make: d => ({dur: 15, title: T('Les naissances dans la famille'), what: 'births', per: 'year', cumulative: false, color: '#2a6a9a', fill: true, bg: '#ffffff', ease: 'linear'})},
+        borders: {icon: '🏛', label: 'Les frontières qui changent', make: d => ({dur: 30, title: T('La France et ses frontières, 1760-1925'), from: 1760, to: 1925, view: 'napoleon', color: '#2a5fa8', sea: '#dfe8ee', land: '#f1eee6', events: true, ease: 'linear'})},
         tree: {icon: '🌳', label: 'L’arbre qui pousse', make: d => ({dur: 15, title: T('Nos ancêtres, génération après génération'), root: 0, gens: 7, colorBy: 'branch', color: '#c9b48a', names: true, bg: '#ffffff'})},
     };
     function newScene(type, extra = {}) {
@@ -51,7 +52,7 @@
     }
     const TEMPLATES = {
         migrations: () => [newScene('title', {title: T('La famille au fil des siècles'), dur: 4}), newScene('migrations')],
-        race: () => [newScene('race')], pyramid: () => [newScene('pyramid')], line: () => [newScene('line')], tree: () => [newScene('tree')],
+        race: () => [newScene('race')], pyramid: () => [newScene('pyramid')], line: () => [newScene('line')], tree: () => [newScene('tree')], borders: () => [newScene('borders')],
         life: () => [newScene('migrations', {who: 'desc', title: T('Une vie en 60 secondes'), dur: 60})],
         grandfilm: () => [newScene('title', {title: T('Le grand film de la famille'), subtitle: '', dur: 5}), newScene('migrations'), newScene('race', {trans: 'black'}), newScene('pyramid'), newScene('tree'), newScene('title', {title: T('Fin'), subtitle: T('Sources : les actes et les archives de la famille'), dur: 5, trans: 'black'})],
     };
@@ -231,6 +232,7 @@
                 race: [...titled, ...timeF, ['Quoi', SEL('what', [['surname', 'Les noms de famille'], ['first', 'Les prénoms'], ['firstm', 'Les prénoms des garçons'], ['firstf', 'Les prénoms des filles'], ['place', 'Les lieux de naissance']])], ['Compter', SEL('mode', [['decade', 'Les naissances des dernières années'], ['cumulative', 'Toutes les naissances jusque-là'], ['alive', 'Ceux qui vivent']])], ['Sur combien d’années', NUM('window', 1, 100)], ['Nombre de barres', NUM('top', 3, 30)], ['Échelle fixe (toute la durée)', TOG('fixedScale')], ['Fond', COL('bg')]],
                 pyramid: [...titled, ...timeF, ['Tranches d’âge (années)', NUM('step', 1, 20)], ['Âge maximum', NUM('maxAge', 50, 120)], ['Couleur des hommes', COL('colors.m')], ['Couleur des femmes', COL('colors.f')], ['Échelle fixe (toute la durée)', TOG('fixedScale')], ['Fond', COL('bg')]],
                 line: [...titled, ...timeF, ['Quoi', SEL('what', [['births', 'Les naissances'], ['deaths', 'Les décès'], ['marriages', 'Les mariages'], ['alive', 'Les vivants'], ['agedeath', 'L’âge moyen au décès']])], ['Par', SEL('per', [['year', 'Année'], ['decade', 'Décennie']])], ['En cumulé', TOG('cumulative')], ['Couleur', COL('color')], ['Remplir sous la courbe', TOG('fill', true)], ['Fond', COL('bg')]],
+                borders: [...titled, ...timeF, ['Cadrage', SEL('view', [['france', 'La France'], ['napoleon', 'La France et ses voisins'], ['europe', 'L’Europe de l’Ouest']])], ['Couleur de la France', COL('color')], ['Couleur des autres pays', COL('land')], ['Couleur de la mer', COL('sea')], ['Les dates qui comptent', TOG('events', true)]],
                 tree: [...titled, ['Personne de départ (n° de fiche, vide : celle de la base)', NUM('root', 0, 1e9)], ['Générations', NUM('gens', 2, 10)], ['Couleurs', SEL('colorBy', [['branch', 'Côté du père / de la mère'], ['gen', 'Par génération'], ['one', 'Une seule']])], ['Couleur (une seule)', COL('color')], ['Noms', TOG('names', true)], ['Fond', COL('bg')]],
             };
             return [...common, ...(by[s.type] || [])];
@@ -525,6 +527,6 @@
         rename: (id, name) => A().api('rename_anim_project', {}, {method: 'POST', body: {id, title: name}}),
         remove: async id => { const r = await A().api('delete_anim_project', {}, {method: 'POST', body: {id}}), row = (r.result || r).row; return {undo: () => A().api('restore_anim_project', {}, {method: 'POST', body: {row}})}; },
         createLabel: '＋ Nouveau film',
-        get extra() { return ['migrations', 'grandfilm', 'race', 'pyramid', 'line', 'tree'].map(k => `<button type="button" class="button secondary" data-an-tpl="${k}">${esc({migrations: '🧭 ' + T('Migrations de la famille'), grandfilm: '🎬 ' + T('Le grand film de la famille'), race: '🏁 ' + T('Course des noms'), pyramid: '👥 ' + T('Pyramide qui vit'), line: '📈 ' + T('Courbe qui se dessine'), tree: '🌳 ' + T('Arbre qui pousse')}[k])}</button>`).join(''); }});
+        get extra() { return ['migrations', 'grandfilm', 'race', 'pyramid', 'line', 'tree', 'borders'].map(k => `<button type="button" class="button secondary" data-an-tpl="${k}">${esc({migrations: '🧭 ' + T('Migrations de la famille'), grandfilm: '🎬 ' + T('Le grand film de la famille'), race: '🏁 ' + T('Course des noms'), pyramid: '👥 ' + T('Pyramide qui vit'), line: '📈 ' + T('Courbe qui se dessine'), tree: '🌳 ' + T('Arbre qui pousse'), borders: '🏛 ' + T('Frontières qui changent')}[k])}</button>`).join(''); }});
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-an-tpl]'); if (b) { e.preventDefault(); open({template: b.dataset.anTpl}); } });
 })();

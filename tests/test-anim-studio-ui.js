@@ -189,6 +189,23 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok((await post('save_anim_project', {title: 'Non', data: {}})).error, 'écriture refusée');
             fs.unlinkSync(path.join(tmp, 'consultation.json'));
         });
+        await t('🏛 « Frontières qui changent » : 1810, Bruxelles et Strasbourg sont français ; 1880, ni l’un ni l’autre ; 1925, Strasbourg l’est', async () => {
+            const r = await p.evaluate(async () => {
+                const F = window.LCNDA_EXT.frontieres, geo = await F.ready(), W = 800, H = 600, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+                const [w0, s0, e0, n0] = F.VIEWS.napoleon, my = lat => Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360)) * 180 / Math.PI, k = Math.min(W / (e0 - w0), H / (my(n0) - my(s0))), ox = (W - (e0 - w0) * k) / 2, oy = (H - (my(n0) - my(s0)) * k) / 2;
+                const at = (lon, lat) => { const d = g.getImageData(Math.round(ox + (lon - w0) * k), Math.round(oy + (my(n0) - my(lat)) * k), 1, 1).data; return d[2] > 120 && d[0] < 120; }; // bleu = la France
+                const out = {};
+                for (const y of [1810, 1880, 1925]) { F.draw(g, y, W, H, {geo, view: 'napoleon', color: '#2a5fa8', labels: false}); out[y] = {bxl: at(4.35, 50.85), sxb: at(7.75, 48.58), paris: at(2.35, 48.85), rome: at(12.5, 41.9)}; }
+                return out;
+            });
+            assert.deepEqual(r[1810], {bxl: true, sxb: true, paris: true, rome: true});
+            assert.deepEqual(r[1880], {bxl: false, sxb: false, paris: true, rome: false});
+            assert.deepEqual(r[1925], {bxl: false, sxb: true, paris: true, rome: false});
+            await p.evaluate(() => window.LCNDA_EXT.openAnimStudio({template: 'borders'})); await p.waitForSelector('.an-dlg [data-an-sc="0"]');
+            assert.equal(await p.evaluate(() => window.LCNDA_EXT.__anim.P.data.scenes[0].type), 'borders');
+            await sleep(1500); await p.keyboard.press('Escape'); await sleep(300);
+            if (await p.$('.an-dlg')) await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.close(); d.parentNode?.removeChild(d); }));
+        });
         await t('aucune erreur JavaScript', async () => { assert.deepEqual(errs, []); });
     } finally { await browser.close(); proc.kill(); }
     console.log(fails ? `${fails} essai(s) en échec` : 'Le Studio d’animation marche.');

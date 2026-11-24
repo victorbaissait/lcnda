@@ -210,6 +210,7 @@
             if (scene.type === 'pyramid') { st.P = pyramidData(st.D, scene); fillRange(scene, st.P); }
             if (scene.type === 'line') { st.L = lineData(st.D, scene); fillRange(scene, st.L); }
             if (scene.type === 'tree') st.F = fanData(st.D, scene.root, scene.gens);
+            if (scene.type === 'borders') { onStep?.(T('Lecture des frontières…')); try { st.geo = await ext.frontieres?.ready(); } catch (_) { st.geo = null; } scene._from = 1760; scene._to = 1925; }
             st.pics = new Map(); for (const pc of scene.pics || []) st.pics.set(mid(pc.media), await mediaImg(pc.media));
             return st;
         })();
@@ -360,7 +361,7 @@
     }
     async function drawScene(g, proj, s, p, W, H, local) {
         const st = await prepare(s, W, H), R = range(s), font = fontOf(proj), ov = {...(proj.overlays || {}), ...(s.overlays || {})};
-        const year = ['diagram', 'migrations', 'race', 'pyramid', 'line'].includes(s.type) ? yearAt(R, p, st.warp) : NaN;
+        const year = ['diagram', 'migrations', 'race', 'pyramid', 'line', 'borders'].includes(s.type) ? yearAt(R, p, st.warp) : NaN;
         let legend = [];
         if (s.type === 'title') drawTitle(g, s, p, W, H, font);
         else if (s.type === 'image') drawImage(g, s, st, p, W, H);
@@ -370,6 +371,7 @@
         else if (s.type === 'pyramid') drawPyramid(g, s, st, year, W, H, font, proj);
         else if (s.type === 'line') drawLine(g, s, st, year, W, H, font, proj);
         else if (s.type === 'tree') drawTree(g, s, st, p, W, H, font, proj);
+        else if (s.type === 'borders') { if (st.geo && ext.frontieres) ext.frontieres.draw(g, Number.isFinite(year) ? year : num(R.from), W, H, {geo: st.geo, view: s.view, color: s.color, sea: s.sea, land: s.land, year: false, labels: s.events !== false}); }
         // les images posées sur la ligne de temps
         for (const pc of s.pics || []) {
             const t0 = Number(pc.t) || 0, d = Math.max(.5, Number(pc.dur) || 3) / durOf(s); if (p < t0 || p > t0 + d) continue;
