@@ -1,0 +1,77 @@
+# 🏘 Fabrication du pack « Histoire du lieu », déposé dans la version « histoire-donnees » du dépôt.
+#
+# L'app n'embarque pas ces données : Réglages → 🏘 Histoire du lieu → « ⤓ Installer » télécharge le pack depuis cette version
+# (lib/histoire.php), le vérifie (empreinte sha256) puis le range. Le pack fait ≈ 18 Mo (un seul morceau).
+#
+# Lancer : onglet « Actions » → « Données de l'histoire du lieu » → « Run workflow », ou pousser une étiquette « histoire-1 »
+# (le chiffre ne sert qu'à relancer). Sources et licences : table « sources » du pack, et scripts/histoire/build-histoire.py.
+# La mortalité des enfants (frdata.org) n'est PAS dans le pack : ses auteurs demandent de ne pas la redistribuer ;
+# l'app la télécharge chez eux, pour les départements de la base.
+
+name: Données de l'histoire du lieu
+
+on:
+  workflow_dispatch:
+    inputs:
+      bdhi:
+        description: 'Avec les inondations historiques (BDHI, archive de 390 Mo)'
+        type: boolean
+        default: true
+  push:
+    tags: ['histoire-*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: histoire-donnees
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Bibliothèques (openpyxl pour les fichiers Excel, pg_restore pour la BDHI)
+        run: |
+          pip install openpyxl
+          sudo apt-get update -q && sudo apt-get install -y -q postgresql-client
+
+      - name: Fabriquer
+        run: |
+          opt=""
+          if [ "${{ inputs.bdhi }}" = "false" ]; then opt="--sans-bdhi"; fi
+          python3 scripts/histoire/build-histoire.py --dossier histoire-sortie $opt
+          test -s histoire-sortie/histoire-locale.lchist
+
+      - name: Déposer le pack dans la version « histoire-donnees »
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          f=histoire-sortie/histoire-locale.lchist
+          mkdir -p envoi && cd envoi
+          split -b 1900M -d -a 3 "../$f" "$(basename "$f")."
+          size=$(stat -c %s "../$f"); sum=$(sha256sum "../$f" | cut -d' ' -f1)
+          gh release view histoire-donnees --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create histoire-donnees --repo "$GITHUB_REPOSITORY" --title "Données de l'histoire du lieu" --prerelease \
+              --notes "Le pack « Histoire du lieu », téléchargé par l'app (Réglages → 🏘 Histoire du lieu → ⤓ Installer). Sources et licences : « À propos des données » dans l'app (Insee, Wikidata, Un siècle de gares, Daux et al. 2012, EPICA, Géorisques GASPAR et BDHI)."
+          for a in $(gh release view histoire-donnees --repo "$GITHUB_REPOSITORY" --json assets --jq ".assets[].name" | grep -E '^histoire-locale\.lchist\.[0-9]{3}$' || true); do
+            gh release delete-asset histoire-donnees "$a" --repo "$GITHUB_REPOSITORY" --yes
+          done
+          python3 - "$size" "$sum" <<'PY'
+          import json, os, sys, datetime
+          size, sha = int(sys.argv[1]), sys.argv[2]
+          parts = sorted(p for p in os.listdir('.') if p.split('.')[-1].isdigit())
+          m = {'version': datetime.date.today().strftime('%Y-%m'), 'packs': {'histoire': {'size': size, 'sha256': sha, 'built': datetime.date.today().isoformat(),
+               'parts': [{'name': p, 'size': os.path.getsize(p)} for p in parts]}}}
+          json.dump(m, open('histoire-manifest.json', 'w'), indent=1)
+          PY
+          gh release upload histoire-donnees --repo "$GITHUB_REPOSITORY" --clobber $(ls | grep -E '\.[0-9]{3}$') histoire-manifest.json
+          cat histoire-manifest.json

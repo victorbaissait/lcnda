@@ -79,6 +79,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=3">
+    <link rel="stylesheet" href="assets/css/histoire.css?v=1">
     <link rel="stylesheet" href="assets/css/place-photos.css?v=1">
     <link rel="stylesheet" href="assets/css/journee.css?v=1">
     <link rel="stylesheet" href="assets/css/suivi.css?v=4">
@@ -1597,6 +1598,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-dates-feter.js?v=3" defer></script>
 <script src="assets/js/heritage-meteo.js?v=10" defer></script>
 <script src="assets/js/heritage-elections.js?v=1" defer></script>
+<script src="assets/js/heritage-histoire.js?v=1" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>
 <script src="assets/js/heritage-suivi-audit.js?v=1" defer></script>

@@ -122,9 +122,11 @@
             by, dy, estimated, birthKnown: !!birth, deathKnown: !!death, birthPlace, birthDept, birthCountry: (birthIsCountry ? WORD_TO_CODE.get(fold(String(birth.place).split(',')[0])) : '') || canonCountry(birth?.country) || canonCountry(birth?.place) || (birthDept ? 'fr' : ''),
             countries, depts: [...depts.values()], places, tags: new Set(events.map(e => e.tag).filter(Boolean)),
             profiles: new Set(Array.isArray(raw.profiles) ? raw.profiles : []), missing: new Set(Array.isArray(raw.missing) ? raw.missing : []),
-            searched: raw.searched && typeof raw.searched === 'object' ? raw.searched : {}, sosa: Number(p.sosa) || 0, living: p.living || '', private: !!p.private};
+            searched: raw.searched && typeof raw.searched === 'object' ? raw.searched : {}, sosa: Number(p.sosa) || 0, living: p.living || '', private: !!p.private,
+            // décès inconnu : il a pu vivre jusqu'à 100 ans (né en 1890, mort peut-être en 1985 : le fichier INSEE n'est pas écarté)
+            dyMax: death ? dy : p.living === 'living' ? NOW : by ? Math.min(NOW, Math.max(dy, by + 100)) : 0};
     }
-    const alive = (ctx, a, b) => ctx.by && ctx.dy ? ctx.dy >= a && ctx.by <= b : null; // null : on ne sait pas
+    const alive = (ctx, a, b) => ctx.by && ctx.dy ? Math.max(ctx.dy, ctx.dyMax || 0) >= a && ctx.by <= b : null; // null : on ne sait pas
     const ne = ctx => (ctx.female ? 'Née' : 'Né');
     const il = ctx => (ctx.female ? 'elle' : 'il');
     /** les articles des 101 départements (même table que lib/research_gaps.php gaps_departments) : « du Cher », « des Landes »… */

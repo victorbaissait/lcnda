@@ -97,6 +97,7 @@
 # 🌦 Météo d'autrefois : socle et packs fabriqués par scripts/meteo/build-meteo.py (plusieurs centaines de Mo), et sa sortie
 /data-meteo/
 /meteo-sortie/
+/histoire-sortie/
 *.lcmeteo
 /node_modules/
 /vendor/php

@@ -851,8 +851,8 @@
             }
         }
         const viewImportsButton=(stats.imports_count>0)?`<button type="button" class="button small secondary" id="insee-view-imports">Voir les imports</button>`:'';
-        const importButton=`<button type="button" class="button small" id="insee-open-remote">Fichiers de l’INSEE${state.inseeRemote?.new_count?` <span class="h-new-badge">${state.inseeRemote.new_count} nouveau${state.inseeRemote.new_count>1?'x':''}</span>`:''}</button><button type="button" class="button small secondary" id="insee-open-import">Importer un fichier</button>`;
-        return `<section class="page" style="padding-bottom:.5rem">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Décès INSEE')}`,title:i18n('Base locale des décès'),help:`<b class="ui-ph-count">${i18n('{who} dans la base',{who:plural(count,'personne')})}</b> · ${upToDate}`,actions:document.body.classList.contains('is-kiosk')?[]:[importButton,viewImportsButton]})}</section>`;
+        const importButton=`<button type="button" class="button small" id="insee-open-remote">${i18n('⤓ Installer et mettre à jour')}${IM.status?.online?.updates?.length?` <span class="h-new-badge">${i18n('nouveau')}</span>`:''}</button><button type="button" class="button small secondary" id="insee-open-import">Importer un fichier</button>`;
+        return `<section class="page" style="padding-bottom:.5rem">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Décès INSEE')}`,title:i18n('Base locale des décès'),help:`<b class="ui-ph-count">${i18n('{who} dans la base',{who:plural(count,'personne')})}</b> · ${upToDate}`,actions:document.body.classList.contains('is-kiosk')?[]:[importButton,viewImportsButton]})}<div class="im-box" data-im-box style="margin-top:.4rem"></div></section>`;
     }
 
     function inseeImportPanelHtml(){
@@ -932,39 +932,308 @@
         $('#insee-view-imports')?.addEventListener('click',()=>openInseeImportsDialog());
         $('#insee-open-import')?.addEventListener('click',()=>openInseeImportDialog());
         $('#insee-open-remote')?.addEventListener('click',()=>openInseeRemoteDialog());
+        imPaint();
+        if(!IM.status||!IM.running)imLoad().catch(()=>{}); // ce qui est installé : lu dans la base, même hors ligne
     }
-    async function openInseeRemoteDialog(){
-        let dialog=$('#insee-remote-dialog');
-        if(!dialog){
-            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-remote-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE · DATA.GOUV.FR</span><h2>Fichiers publiés par l’INSEE</h2></div><button class="modal-close" type="button" data-close-insee-remote aria-label="Fermer">×</button></div><div class="modal-body" id="insee-remote-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-remote>Fermer</button></div></dialog>`);
-            dialog=$('#insee-remote-dialog');
-            $$('[data-close-insee-remote]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
-            dialog.addEventListener('close',()=>{if(state.module==='recherche'&&state.researchKind==='insee')renderInseeSearch();});
+
+    /* ═════ ⤓ Décès INSEE : tout installer en UN bouton, en arrière-plan, et les mises à jour (lib/insee_remote.php, insee_maj_*)
+     * Le serveur avance par petits pas (insee_maj_step, ~8 s chacun) : télécharger un morceau, ranger quelques milliers de lignes,
+     * retirer les mois remplacés par le fichier de l'année. Ici : la boucle qui le rappelle (pause, reprise même après avoir
+     * fermé l'app), la barre d'avancée (fichiers, Mo, temps restant), l'avis « 🆕 Nouveau fichier des décès » et les réglages
+     * (genealogie-insee-auto-maj : vérifier chaque jour, oui par défaut ; genealogie-insee-auto : mettre à jour tout seul, non par défaut).
+     * En mode consultation : on montre, on n'écrit rien. */
+    const IM_AUTO_CHECK='genealogie-insee-auto-maj',IM_AUTO_DL='genealogie-insee-auto',IM_CHECKED='lcnda-insee-checked',IM_TOLD='lcnda-insee-told';
+    const IM={status:null,running:false,stop:false,samples:[],waitUntil:0,offline:false};
+    const imKiosk=()=>document.body.classList.contains('is-kiosk');
+    const imGet=(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:v;}catch(_){return d;}};
+    const imSet=(k,v)=>{try{localStorage.setItem(k,v);}catch(_){}};
+    const imAutoCheck=()=>imGet(IM_AUTO_CHECK,'1')!=='0';
+    const imAutoDl=()=>imGet(IM_AUTO_DL,'0')==='1';
+    const imSleep=ms=>new Promise(ok=>setTimeout(ok,ms));
+    const imSize=n=>{n=Number(n)||0;return n>=1073741824?i18n('{n} Go',{n:(n/1073741824).toLocaleString('fr-FR',{maximumFractionDigits:1})}):i18n('{n} Mo',{n:Math.max(1,Math.round(n/1048576)).toLocaleString('fr-FR')});};
+    const imDuration=s=>s<100?i18n('moins de 2 minutes'):s<3600?i18n('{n} minutes',{n:Math.round(s/60)}):i18n('{h} h {m} min',{h:Math.floor(s/3600),m:String(Math.round(s%3600/60)).padStart(2,'0')});
+    const IM_MONTHS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    // « Décès de juin 2026 » → « juin 2026 » ; « Décès de 2025 » → « l’année 2025 complète »
+    const imShort=label=>{const m=String(label||'').match(/^Décès (?:de |du )?(.*)$/);const x=m?m[1]:String(label||'');return /^\d{4}$/.test(x)?i18n('l’année {y} complète',{y:x}):x;};
+    async function imLoad(check=false){
+        const s=await api('insee_maj_status',check?{check:1}:{});
+        if(IM.running&&IM.status?.job&&s.job)s.job=IM.status.job.work_done>s.job.work_done?IM.status.job:s.job;
+        IM.status=s;
+        if(check&&s.online&&!s.online_error)imSet(IM_CHECKED,new Date().toISOString().slice(0,10));
+        imPaint();
+        if($('#insee-maj-dialog')?.open)imDetailPaint();
+        return s;
+    }
+    // le temps qui reste : d'après l'avancée des 2 dernières minutes
+    function imSample(job){
+        const now=Date.now();IM.samples.push([now,Number(job.work_done)||0]);
+        IM.samples=IM.samples.filter(([t])=>now-t<120000);
+    }
+    function imLeft(job){
+        const a=IM.samples[0],b=IM.samples[IM.samples.length-1];
+        if(!a||!b||b[0]-a[0]<8000||b[1]<=a[1])return '';
+        const rate=(b[1]-a[1])/((b[0]-a[0])/1000);
+        return imDuration(Math.max(0,(Number(job.work_total)-Number(job.work_done))/rate));
+    }
+    /** la boucle : rappelle le serveur tant qu'il reste du travail (une seule à la fois) */
+    async function imRun(){
+        if(IM.running||imKiosk())return;
+        IM.running=true;IM.stop=false;IM.samples=[];imPaint();
+        let finished=null;
+        try{
+            while(!IM.stop){
+                if(navigator.onLine===false){IM.offline=true;imPaint();await new Promise(ok=>{const go=()=>{window.removeEventListener('online',go);ok();};window.addEventListener('online',go);setTimeout(go,60000);});IM.offline=false;continue;}
+                let r;
+                try{r=await api('insee_maj_step',{},{method:'POST',body:{}});}
+                catch(error){if(error.status===423)break;IM.lastError=error.message;imPaint();await imSleep(5000);continue;} // l'app redémarre, réseau local coupé… on réessaie
+                IM.lastError='';
+                if(IM.status)IM.status.job=r.job;
+                if(r.finished){finished=r.finished;break;}
+                if(!r.job||r.job.status!=='running')break;
+                imSample(r.job);imPaint();
+                if(r.busy){await imSleep(3000);continue;} // une autre fenêtre de l'app s'en occupe
+                if(r.wait){IM.waitUntil=Date.now()+r.wait*1000;imPaint();const until=IM.waitUntil;while(!IM.stop&&Date.now()<until)await imSleep(500);IM.waitUntil=0;}
+            }
+        }finally{
+            IM.running=false;IM.waitUntil=0;IM.offline=false;
+            await imLoad().catch(()=>{});
         }
-        const body=$('#insee-remote-body');
-        if(!dialog.open)dialog.showModal();
-        body.innerHTML='<div class="loading-block">Lecture de la liste sur data.gouv.fr…</div>';
-        let data;
-        try{data=state.inseeRemote=await api('insee_remote_files');try{localStorage.setItem('lcnda-insee-checked',new Date().toISOString().slice(0,10));}catch(_){}}
-        catch(error){body.innerHTML=`<p class="h-offsite-sentence is-warn">${escapeHtml(error.message)}</p>`;return;}
-        const files=data.files||[],todo=files.filter(f=>f.new);
-        const status=f=>f.imported?`<span class="collection-kind">${f.imported_at?(window.LCNDA_UI?.when?.(f.imported_at,{label:'importé'})||'importé'):'importé'}</span>`:f.superseded?'<span class="muted">compris dans le fichier de l’année</span>':f.new?'<span class="h-new-badge">nouveau</span>':'<span class="muted">pas importé</span>';
-        body.innerHTML=`<p>L’INSEE publie un fichier par année (depuis 1970), puis un par mois pour l’année en cours. Quand le fichier de l’année sort, il remplace ceux des mois : l’app retire alors les mois déjà importés pour éviter les doublons. Les fichiers sont gros (60 à 150 Mo par année) : l’import peut prendre quelques minutes.</p>
-            <div class="page-actions">${todo.length?`<button type="button" class="button" data-insee-remote-new>${i18n('Importer les nouveaux ({n})',{n:todo.length})}</button>`:'<span class="muted">Pas de nouveau fichier depuis ton dernier import.</span>'}</div>
-            <label class="ui-toggle"><input type="checkbox" data-insee-auto ${inseeAuto()?'checked':''}><i></i>Vérifier chaque jour à l’ouverture de l’app et importer tout seul les nouveaux fichiers</label>
-            <p id="insee-remote-progress" class="muted" aria-live="polite"></p>
-            <div class="data-table-wrap"><table class="data-table"><thead><tr><th>Période</th><th>Fichier</th><th>Publié le</th><th>État</th><th></th></tr></thead><tbody>${files.map((f,i)=>`<tr class="${f.new?'is-new':''}"><td><strong>${escapeHtml(f.label)}</strong></td><td><small>${escapeHtml(f.name)}${f.size?` · ${inseeSize(f.size)}`:''}</small></td><td>${escapeHtml(f.published?new Date(f.published).toLocaleDateString('fr-FR'):'')}</td><td>${status(f)}</td><td>${f.imported||f.superseded?'':`<button type="button" class="button small secondary" data-insee-remote-one="${i}">Télécharger et importer</button>`}</td></tr>`).join('')}</tbody></table></div>
-            <p class="muted">Source : <a href="${escapeHtml(safeUrl(data.source))}" target="_blank" rel="noopener noreferrer">Fichier des personnes décédées, INSEE, sur data.gouv.fr ↗</a></p>`;
-        const progress=$('#insee-remote-progress',body);
-        const run=async list=>{
-            $$('button',body).forEach(b=>{if(b.dataset.inseeRemoteOne!==undefined||b.dataset.inseeRemoteNew!==undefined)b.disabled=true;});
-            const n=await inseeImportRemote(list,text=>{progress.textContent=text;});
-            toast(plural(n,'décès importé','décès importés')+'.');
-            if(dialog.open)openInseeRemoteDialog();
+        if(finished)imFinished(finished);
+    }
+    function imFinished(f){
+        const labels=(f.labels||[]).map(imShort);
+        const what=f.kind==='updates'&&labels.length?i18n('Décès INSEE à jour : {list} ({who}).',{list:labels.slice(0,3).join(', ')+(labels.length>3?'…':''),who:plural(Number(f.rows||0),'personne ajoutée','personnes ajoutées')})
+            :i18n('Décès INSEE installés : {files}, {who}.',{files:plural(Number(f.files||0),'fichier'),who:plural(Number(f.rows||0),'personne ajoutée','personnes ajoutées')});
+        toast(what,'success',{duration:10000});
+        if(state.module==='recherche'&&state.researchKind==='insee'&&!$('#insee-maj-dialog')?.open)renderInseeSearch();
+    }
+    async function imStart(years,{keys=null,quiet=false}={}){
+        if(imKiosk())return;
+        try{
+            const r=await api('insee_maj_start',{},{method:'POST',body:{years,...(keys?{keys}:{})}});
+            if(r.nothing){if(!quiet)toast(i18n('Rien à installer : tout est déjà là.'),'success');await imLoad().catch(()=>{});return;}
+            if(IM.status)IM.status.job=r.job;
+            if(!quiet)toast(i18n('Installation des décès INSEE lancée : {files}. Tu peux continuer à travailler, ça se fait en arrière-plan.',{files:plural(Number(r.job?.total||0),'fichier')}));
+            imRun();
+        }catch(error){toast(error.message,'error',{duration:15000});}
+    }
+    async function imPause(){IM.stop=true;try{const r=await api('insee_maj_pause',{},{method:'POST',body:{}});if(IM.status)IM.status.job=r.job;}catch(error){toast(error.message,'error');}imPaint();}
+    async function imResume(){try{const r=await api('insee_maj_resume',{},{method:'POST',body:{}});if(IM.status)IM.status.job=r.job;imRun();}catch(error){toast(error.message,'error');}}
+    async function imCancel(){
+        if(!await confirmBox(i18n('Le fichier en cours de téléchargement est jeté. Les années déjà installées restent.'),{title:i18n('Abandonner l’installation ?'),okLabel:i18n('Abandonner'),cancelLabel:i18n('Continuer')}))return;
+        IM.stop=true;
+        try{let done=false,guard=0;while(!done&&guard++<500){const r=await api('insee_maj_cancel',{},{method:'POST',body:{}});done=!!r.completed;if(!done)await imSleep(r.busy?1500:50);}toast(i18n('Installation abandonnée.'));}
+        catch(error){toast(error.message,'error');}
+        await imLoad().catch(()=>{});
+    }
+    async function imCheckNow(){
+        const btns=$$('[data-im-check]');btns.forEach(b=>{b.disabled=true;b.textContent=i18n('Vérification…');});
+        try{const s=await imLoad(true);if(s.online_error)toast(s.online_error,'error');else toast(s.online?.updates?.length?i18n('🆕 {n} sur data.gouv.fr.',{n:plural(s.online.updates.length,'nouveau fichier','nouveaux fichiers')}):i18n('Pas de nouveau fichier des décès pour l’instant.'));}
+        catch(error){toast(error.message,'error');}
+        finally{imPaint();}
+    }
+    function imUpdatesText(ups){
+        const l=ups.map(u=>imShort(u.label));
+        return ups.length===1?i18n('🆕 Nouveau fichier des décès : {what}',{what:l[0]}):i18n('🆕 Nouveaux fichiers des décès : {what}',{what:l.slice(0,3).join(', ')+(l.length>3?'…':'')});
+    }
+    // années installées → « 1970 – 1999, 2003, 2024 – juin 2026 »
+    function imRanges(years){
+        const full=years.filter(y=>y.year>0);if(!full.length)return '';
+        const out=[];let a=null,b=null;
+        const label=y=>y.full||!y.months.length?String(y.year):`${IM_MONTHS[Math.max(...y.months)-1]} ${y.year}`;
+        full.forEach(y=>{if(a&&y.year===b.year+1&&b.full){b=y;}else{if(a)out.push(a===b?label(a):`${a.year} – ${label(b)}`);a=b=y;}});
+        out.push(a===b?label(a):`${a.year} – ${label(b)}`);
+        return out.join(', ');
+    }
+    function imJobHtml(job){
+        const ro=imKiosk();
+        const pct=job.work_total?Math.min(100,Math.floor(job.work_done/job.work_total*100)):0;
+        const cur=job.current;
+        const phase=!cur?'':cur.phase==='download'?i18n('téléchargement'):cur.phase==='import'?i18n('rangement dans la base'):i18n('retrait des mois remplacés par l’année');
+        const left=imLeft(job);
+        let line2=`${i18n('Fichier {i} sur {n}',{i:Math.min(job.total,job.done+1),n:job.total})}${cur?` · <b>${escapeHtml(cur.label)}</b> (${escapeHtml(phase)})`:''}`;
+        let line3=`${i18n('{a} sur {b} téléchargés',{a:imSize(job.bytes_done),b:imSize(job.bytes_total)})}${left&&IM.running?` · ${i18n('encore environ {t}',{t:left})}`:''}`;
+        let state='';
+        if(job.status==='paused')state=`<p class="muted">⏸ ${i18n('En pause. Tu peux reprendre quand tu veux, même après avoir fermé l’app.')}</p>`;
+        else if(job.status==='error')state=`<p class="h-offsite-sentence is-warn">⚠️ ${escapeHtml(job.error||i18n('L’installation s’est arrêtée.'))}</p>`;
+        else if(IM.offline)state=`<p class="muted">📴 ${i18n('Pas de connexion à Internet : ça reprendra tout seul dès qu’elle revient.')}</p>`;
+        else if(IM.waitUntil)state=`<p class="muted">📴 ${escapeHtml(job.error||i18n('Connexion coupée'))} ${i18n('(dans {n} s)',{n:Math.max(1,Math.round((IM.waitUntil-Date.now())/1000))})}</p>`;
+        else if(job.status==='running'&&!IM.running)state=`<p class="muted">${i18n('En attente : rouvre cette page ou clique sur « Reprendre ».')}</p>`;
+        const btns=ro?'':job.status==='running'&&IM.running?`<button type="button" class="button small secondary" data-im-pause>⏸ ${i18n('Pause')}</button>`
+            :`<button type="button" class="button small" data-im-resume>▶ ${job.status==='error'?i18n('Réessayer'):i18n('Reprendre')}</button><button type="button" class="button small secondary" data-im-cancel>✕ ${i18n('Abandonner')}</button>`;
+        return `<div class="im-job" data-im-job><p style="margin:.2rem 0"><b>⤓ ${i18n('Installation des décès INSEE')}</b> — ${pct} %</p><progress max="100" value="${pct}" style="width:100%;height:14px" aria-label="${escapeHtml(i18n('Avancée de l’installation'))}"></progress><p class="muted" style="margin:.3rem 0">${line2}<br>${line3}</p>${state}<div class="page-actions">${btns}</div></div>`;
+    }
+    /** le cadre « Décès INSEE » : en cours / nouveau / tout installer / ce qui est là */
+    function imBoxHtml(){
+        const s=IM.status;
+        if(!s)return `<p class="muted">${i18n('Lecture de ce qui est installé…')}</p>`;
+        const ro=imKiosk(),inst=s.installed||{years:[],rows:0},on=s.online,job=s.job&&['running','paused','error'].includes(s.job.status)?s.job:null;
+        const parts=[];
+        if(job)parts.push(imJobHtml(job));
+        const ups=on?.updates||[];
+        if(!job&&ups.length)parts.push(`<p class="im-new" data-im-new style="margin:.3rem 0"><b>${escapeHtml(imUpdatesText(ups))}</b>${ro?'':` <button type="button" class="button small" data-im-update>⤓ ${i18n('Mettre à jour')}</button>`} <small class="muted">${imSize(ups.reduce((n,u)=>n+Number(u.size||0),0))}</small></p>`);
+        if(!job&&!ro){
+            const missing=on?Number(on.missing||0):null,size=on?Number(on.missing_size||0):0;
+            if(missing===null||missing>0){
+                const need=on?size/Number(s.line_bytes||200)*Number(s.row_bytes||330):0;
+                const hint=on?i18n('{dl} à télécharger, environ {disk} sur le disque',{dl:imSize(size),disk:imSize(need)}):i18n('environ 6 Go à télécharger');
+                const shouldShowAll=!ups.length||inst.rows===0;
+                if(shouldShowAll)parts.push(`<div class="page-actions" style="align-items:center"><button type="button" class="button" data-im-all>⤓ ${i18n('Tout installer (1970 → aujourd’hui)')}</button><button type="button" class="button secondary" data-im-years>${i18n('Seulement certaines années…')}</button><small class="muted">${escapeHtml(hint)}${inst.rows&&on?` · ${escapeHtml(plural(missing,'fichier manque','fichiers manquent'))}`:''}</small></div>`);
+            }else if(inst.rows>0&&!ups.length){
+                parts.push(`<p class="muted" style="margin:.3rem 0">✓ ${i18n('Tout est installé et à jour.')}</p>`);
+            }
+        }
+        if(inst.rows>0){
+            const ranges=imRanges(inst.years);
+            const when=inst.last_update?(window.LCNDA_UI?.when?.(inst.last_update,{label:'mis à jour'})||escapeHtml(inst.last_update)):'';
+            parts.push(`<p class="muted" style="margin:.3rem 0">${i18n('Installé : {who}',{who:`<b>${escapeHtml(plural(inst.rows,'personne'))}</b>`})}${ranges?` · ${escapeHtml(ranges)}`:''} · ${i18n('environ {s} sur le disque',{s:imSize(inst.bytes)})}${when?` · ${when}`:''}</p>`);
+        }
+        const checked=on?.checked_at?(window.LCNDA_UI?.when?.(on.checked_at,{label:'vérifié'})||escapeHtml(on.checked_at)):i18n('jamais vérifié');
+        parts.push(`<p class="muted" style="margin:.3rem 0;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span>data.gouv.fr : ${checked}${s.online_error?` · <span style="color:var(--red)">${escapeHtml(s.online_error)}</span>`:''}</span><button type="button" class="button small secondary" data-im-check>↻ ${i18n('Vérifier maintenant')}</button><button type="button" class="button small secondary" data-im-detail>${i18n('Détail par année et réglages…')}</button></p>`);
+        return parts.join('');
+    }
+    // la petite pastille en bas de l'écran, quand on n'est pas sur la page des décès
+    function imChipHtml(job){
+        const pct=job.work_total?Math.min(100,Math.floor(job.work_done/job.work_total*100)):0;
+        const txt=job.status==='paused'?i18n('Décès INSEE : en pause ({p} %)',{p:pct}):job.status==='error'?i18n('Décès INSEE : arrêté'):i18n('Décès INSEE : {p} % ({i}/{n})',{p:pct,i:job.done,n:job.total});
+        return `<button type="button" data-im-chip-open style="all:unset;cursor:pointer;display:flex;gap:.5rem;align-items:center">⤓ <span>${escapeHtml(txt)}</span><progress max="100" value="${pct}" style="width:90px;height:8px"></progress></button>${job.status==='running'&&IM.running?`<button type="button" class="button small secondary" data-im-pause title="${escapeHtml(i18n('Pause'))}">⏸</button>`:job.status!=='running'||!IM.running?`<button type="button" class="button small" data-im-resume title="${escapeHtml(i18n('Reprendre'))}">▶</button>`:''}`;
+    }
+    function imPaint(){
+        const boxes=$$('[data-im-box]');
+        boxes.forEach(b=>{b.innerHTML=imBoxHtml();});
+        const job=IM.status?.job&&['running','paused','error'].includes(IM.status.job.status)?IM.status.job:null;
+        let chip=$('#im-chip');
+        const visible=boxes.some(b=>b.offsetParent!==null);
+        if(job&&!visible&&!imKiosk()){
+            if(!chip){document.body.insertAdjacentHTML('beforeend','<div id="im-chip" role="status" style="position:fixed;left:12px;bottom:12px;z-index:60;background:var(--panel,#fff);border:1px solid var(--line,#ccc);border-radius:10px;padding:.35rem .6rem;box-shadow:0 2px 10px rgba(0,0,0,.15);display:flex;gap:.5rem;align-items:center;font-size:.85rem"></div>');chip=$('#im-chip');}
+            chip.innerHTML=imChipHtml(job);
+        }else chip?.remove();
+    }
+    // un seul écouteur pour tous les boutons (cadre de la page, fenêtre de détail, pastille)
+    document.addEventListener('click',e=>{
+        const t=e.target.closest('[data-im-all],[data-im-years],[data-im-update],[data-im-pause],[data-im-resume],[data-im-cancel],[data-im-check],[data-im-detail],[data-im-chip-open],[data-im-remove],[data-im-one]');
+        if(!t)return;
+        if(t.matches('[data-im-all]'))return imStartAll(t);
+        if(t.matches('[data-im-years]'))return openInseeYearsDialog();
+        if(t.matches('[data-im-update]'))return imStart('updates');
+        if(t.matches('[data-im-pause]'))return imPause();
+        if(t.matches('[data-im-resume]'))return imResume();
+        if(t.matches('[data-im-cancel]'))return imCancel();
+        if(t.matches('[data-im-check]'))return imCheckNow();
+        if(t.matches('[data-im-detail]'))return openInseeRemoteDialog();
+        if(t.matches('[data-im-remove]'))return imRemoveYear(Number(t.dataset.imRemove));
+        if(t.matches('[data-im-one]'))return imStart([Number(t.dataset.imYear)],{keys:[t.dataset.imOne]});
+        if(t.matches('[data-im-chip-open]')){state.researchKind='insee';persistUiState();window.LCNDA_APP.setModule?.('recherche');}
+    });
+    async function imStartAll(btn){
+        let s=IM.status;
+        if(!s?.online){btn.disabled=true;try{s=await imLoad(true);}catch(error){toast(error.message,'error');return;}finally{btn.disabled=false;}}
+        if(!s.online){toast(s.online_error||i18n('Pas de connexion à data.gouv.fr : réessaie plus tard.'),'error');return;}
+        const size=Number(s.online.missing_size||0),need=size/Number(s.line_bytes||200)*Number(s.row_bytes||330);
+        if(s.free_bytes!=null&&need>s.free_bytes){toast(i18n('Pas assez de place sur le disque : il faut environ {need}, il reste {free}. Choisis « Seulement certaines années… ».',{need:imSize(need),free:imSize(s.free_bytes)}),'error',{duration:15000});return;}
+        if(!await confirmBox(i18n('{n} à télécharger ({dl}), environ {disk} sur le disque. Ça prend du temps (souvent plus d’une heure) mais ça se fait en arrière-plan : tu peux continuer à travailler, mettre en pause, et même fermer l’app — ça reprendra où ça s’était arrêté.',{n:plural(Number(s.online.missing||0),'fichier'),dl:imSize(size),disk:imSize(need)}),{title:i18n('Installer tous les décès depuis 1970 ?'),okLabel:i18n('⤓ Tout installer'),danger:false}))return;
+        imStart('all');
+    }
+    // « Seulement certaines années… » : une case par année, la place qu'il faut
+    async function openInseeYearsDialog(){
+        let s=IM.status;
+        if(!s?.online){try{s=await imLoad(true);}catch(error){toast(error.message,'error');return;}}
+        if(!s.online){toast(s.online_error||i18n('Pas de connexion à data.gouv.fr : réessaie plus tard.'),'error');return;}
+        let dialog=$('#insee-years-dialog');
+        if(!dialog){
+            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-years-dialog"><div class="modal-head"><div><span class="eyebrow">${i18n('DÉCÈS INSEE')}</span><h2>${i18n('Choisir les années à installer')}</h2></div><button class="modal-close" type="button" data-close-iy aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div><div class="modal-body" id="insee-years-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close-iy>${i18n('Annuler')}</button><button class="button" type="button" data-iy-go>⤓ ${i18n('Installer ces années')}</button></div></dialog>`);
+            dialog=$('#insee-years-dialog');
+            $$('[data-close-iy]',dialog).forEach(b=>b.addEventListener('click',()=>dialog.close()));
+        }
+        const inst=new Map((s.installed.years||[]).map(y=>[y.year,y]));
+        const years=s.online.years||[];
+        const body=$('#insee-years-body');
+        body.innerHTML=`<p>${i18n('Coche les années dont tu as besoin. Chaque année pèse environ 100 à 140 Mo à télécharger et un peu plus sur le disque.')}</p>
+            <div class="page-actions"><button type="button" class="button small secondary" data-iy-pick="all">${i18n('Tout cocher')}</button><button type="button" class="button small secondary" data-iy-pick="none">${i18n('Tout décocher')}</button><button type="button" class="button small secondary" data-iy-pick="10">${i18n('Les 10 dernières années')}</button></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.3rem .8rem;margin:.6rem 0">${years.map(y=>{const i=inst.get(y.year);const done=i&&(i.full||(!y.complete&&!y.todo));return `<label style="display:flex;gap:.4rem;align-items:center"><input type="checkbox" data-iy-year="${y.year}" data-size="${y.todo_size}" ${done?'checked disabled':''}><b>${y.year}</b> <small class="muted">${done?'✓ '+i18n('installée'):imSize(y.todo_size)+(y.complete?'':' · '+i18n('{n} mois',{n:y.months.length}))}</small></label>`;}).join('')}</div>
+            <p data-iy-sum aria-live="polite"></p>`;
+        const sum=()=>{
+            const picked=$$('[data-iy-year]:checked:not(:disabled)',body);
+            const size=picked.reduce((n,c)=>n+Number(c.dataset.size||0),0),need=size/Number(s.line_bytes||200)*Number(s.row_bytes||330);
+            const over=s.free_bytes!=null&&need>s.free_bytes;
+            $('[data-iy-sum]',body).innerHTML=`${i18n('{n} : {dl} à télécharger, environ {disk} sur le disque.',{n:plural(picked.length,'année'),dl:imSize(size),disk:imSize(need)})}${s.free_bytes!=null?` <span style="${over?'color:var(--red);font-weight:600':''}">${i18n('Il reste {free} sur le disque.',{free:imSize(s.free_bytes)})}</span>`:''}`;
+            $('[data-iy-go]',dialog).disabled=!picked.length||over;
         };
-        $('[data-insee-remote-new]',body)?.addEventListener('click',()=>run(todo));
-        $$('[data-insee-remote-one]',body).forEach(b=>b.addEventListener('click',()=>run([files[Number(b.dataset.inseeRemoteOne)]])));
-        $('[data-insee-auto]',body).addEventListener('change',e=>{try{localStorage.setItem('genealogie-insee-auto',e.target.checked?'1':'0');}catch(_){}toast(e.target.checked?'Les nouveaux fichiers seront importés tout seuls.':'Import automatique arrêté : l’app te préviendra seulement.');});
+        body.onchange=sum;
+        body.onclick=e=>{const p=e.target.closest('[data-iy-pick]');if(!p)return;const boxes=$$('[data-iy-year]:not(:disabled)',body);const last=Math.max(...years.map(y=>y.year));boxes.forEach(c=>{c.checked=p.dataset.iyPick==='all'||(p.dataset.iyPick==='10'&&Number(c.dataset.iyYear)>last-10);});sum();};
+        $('[data-iy-go]',dialog).onclick=()=>{const ys=$$('[data-iy-year]:checked:not(:disabled)',body).map(c=>Number(c.dataset.iyYear));if(!ys.length)return;dialog.close();imStart(ys);};
+        sum();
+        if(!dialog.open)dialog.showModal();
+    }
+    // 🗑 Retirer une année : beaucoup de lignes, rien à garder de côté → on demande avant ; « ↶ Annuler » la retélécharge
+    async function imRemoveYear(year){
+        const y=(IM.status?.installed?.years||[]).find(x=>x.year===year);if(!y)return;
+        if(IM.status?.job?.status==='running'){toast(i18n('Une installation est en cours : mets-la en pause avant de retirer une année.'),'error');return;}
+        const title=year?i18n('Retirer les décès de {y} ?',{y:year}):i18n('Retirer les fichiers importés à la main ?');
+        if(!await confirmBox(i18n('{who} seront retirées de l’index des décès (environ {s} libérés). Ta généalogie n’est pas touchée. Pour les remettre, il faudra les retélécharger.',{who:plural(y.rows,'fiche'),s:imSize(y.bytes)}),{title,okLabel:i18n('🗑 Retirer')}))return;
+        let removed=0;
+        try{
+            let done=false,guard=0;
+            while(!done&&guard++<5000){const r=await api('insee_maj_remove_year',{},{method:'POST',body:{year}});removed+=Number(r.deleted_rows||0);done=!!r.completed;const b=$(`[data-im-remove="${year}"]`);if(b){b.disabled=true;b.textContent=i18n('Retrait… {n}',{n:removed.toLocaleString('fr-FR')});}}
+        }catch(error){toast(error.message,'error');await imLoad().catch(()=>{});return;}
+        await imLoad().catch(()=>{});
+        toast(year?i18n('Décès de {y} retirés ({who}).',{y:year,who:plural(removed,'fiche')}):i18n('Fichiers importés à la main retirés ({who}).',{who:plural(removed,'fiche')}),'',year?{duration:12000,action:{label:i18n('↶ Annuler (retélécharger)'),run:()=>imStart([year])}}:{});
+    }
+    /** Fenêtre « Décès INSEE : installer et mettre à jour » : le cadre, le détail par année, les réglages, fichier par fichier */
+    async function openInseeRemoteDialog(){
+        let dialog=$('#insee-maj-dialog');
+        if(!dialog){
+            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-maj-dialog"><div class="modal-head"><div><span class="eyebrow">${i18n('DÉCÈS INSEE · DATA.GOUV.FR')}</span><h2>${i18n('Installer et mettre à jour les décès')}</h2></div><button class="modal-close" type="button" data-close-insee-maj aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div><div class="modal-body" id="insee-maj-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-maj>${i18n('Fermer')}</button></div></dialog>`);
+            dialog=$('#insee-maj-dialog');
+            $$('[data-close-insee-maj]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
+            dialog.addEventListener('close',()=>{imPaint();if(state.module==='recherche'&&state.researchKind==='insee')renderInseeSearch();});
+            dialog.addEventListener('change',e=>{
+                const t=e.target;
+                if(t.matches('[data-im-set-check]')){imSet(IM_AUTO_CHECK,t.checked?'1':'0');toast(t.checked?i18n('L’app regardera une fois par jour s’il y a un nouveau fichier.'):i18n('L’app ne regardera plus toute seule : utilise « Vérifier maintenant ».'));}
+                if(t.matches('[data-im-set-auto]')){imSet(IM_AUTO_DL,t.checked?'1':'0');toast(t.checked?i18n('Les nouveaux fichiers seront installés tout seuls, en arrière-plan.'):i18n('Mise à jour automatique arrêtée : l’app te préviendra seulement.'));}
+            });
+        }
+        if(!dialog.open)dialog.showModal();
+        $('#insee-maj-body').innerHTML='<div data-im-box></div><div id="insee-maj-detail"></div>';
+        imPaint();
+        if(!IM.running)await imLoad().catch(error=>{$('#insee-maj-detail').innerHTML=`<p class="h-offsite-sentence is-warn">${escapeHtml(error.message)}</p>`;});
+        imDetailPaint();
+    }
+    function imDetailPaint(){
+        const host=$('#insee-maj-detail');const s=IM.status;if(!host||!s)return;
+        const ro=imKiosk(),years=[...(s.installed.years||[])].sort((a,b)=>b.year-a.year);
+        const content=y=>y.year===0?i18n('fichiers importés à la main'):y.full?i18n('année complète'):y.months.length?(y.months.length===1?IM_MONTHS[y.months[0]-1]:`${IM_MONTHS[Math.min(...y.months)-1]} → ${IM_MONTHS[Math.max(...y.months)-1]}`)+` (${plural(y.months.length,'mois','mois')})`+(y.quarters.length?` + ${plural(y.quarters.length,'trimestre')}`:''):y.quarters.length?plural(y.quarters.length,'trimestre'):'—';
+        const table=years.length?`<div class="data-table-wrap"><table class="data-table"><thead><tr><th>${i18n('Année')}</th><th>${i18n('Contenu')}</th><th>${i18n('Personnes')}</th><th>${i18n('Sur le disque')}</th><th>${i18n('Installé le')}</th><th></th></tr></thead><tbody>${years.map(y=>`<tr><td><strong>${y.year||'—'}</strong></td><td>${escapeHtml(content(y))}</td><td>${Number(y.rows).toLocaleString('fr-FR')}</td><td>${imSize(y.bytes)}</td><td>${y.imported_at?(window.LCNDA_UI?.when?.(y.imported_at)||escapeHtml(y.imported_at)):''}</td><td>${ro?'':`<button type="button" class="button small danger-soft" data-im-remove="${y.year}">🗑 ${i18n('Retirer')}</button>`}</td></tr>`).join('')}</tbody></table></div>`:`<p class="muted">${i18n('Rien d’installé pour l’instant.')}</p>`;
+        const settings=ro?'':`<h3 style="margin-top:1rem">${i18n('Mises à jour')}</h3><p class="muted">${i18n('L’INSEE publie un fichier chaque mois (pour l’année en cours), puis le fichier de l’année entière en janvier ou février. Quand il sort, il remplace les mois : l’app retire les mois tout seule, sans doublons.')}</p>
+            <label class="ui-toggle"><input type="checkbox" data-im-set-check ${imAutoCheck()?'checked':''}><i></i>${i18n('Regarder une fois par jour, à l’ouverture de l’app, s’il y a un nouveau fichier (si Internet est là)')}</label>
+            <label class="ui-toggle"><input type="checkbox" data-im-set-auto ${imAutoDl()?'checked':''}><i></i>${i18n('Mettre à jour tout seul (télécharger et installer les nouveaux fichiers en arrière-plan)')}</label>`;
+        const files=s.online?.files||[];
+        const instY=new Map((s.installed.years||[]).map(y=>[y.year,y]));
+        const isIn=f=>{const y=instY.get(f.year);return !!y&&(y.full||(f.month&&y.months.includes(f.month))||(f.quarter&&y.quarters.includes(f.quarter))||(!f.month&&!f.quarter&&false));};
+        const fileRows=[...files].sort((a,b)=>b.order-a.order).map(f=>`<tr><td>${escapeHtml(f.label)}</td><td><small>${escapeHtml(f.name)} · ${imSize(f.size)}</small></td><td>${escapeHtml(f.published?new Date(f.published).toLocaleDateString('fr-FR'):'')}</td><td>${isIn(f)?`<span class="collection-kind">${i18n('installé')}</span>`:ro?'':`<button type="button" class="button small secondary" data-im-one="${escapeHtml(f.key)}" data-im-year="${f.year}">⤓ ${i18n('Installer celui-ci')}</button>`}</td></tr>`).join('');
+        const wasOpen=!!$('details[open]',host);
+        host.innerHTML=`<h3 style="margin-top:1rem">${i18n('Ce qui est installé')}</h3>${table}${settings}
+            ${files.length?`<details style="margin-top:1rem" ${wasOpen?'open':''}><summary>${i18n('Fichier par fichier (pour les curieux)')}</summary><p class="muted">${i18n('Un fichier de mois ou de trimestre déjà compris dans le fichier de l’année n’est pas proposé par « Tout installer ».')}</p><div class="data-table-wrap"><table class="data-table"><thead><tr><th>${i18n('Période')}</th><th>${i18n('Fichier')}</th><th>${i18n('Publié le')}</th><th></th></tr></thead><tbody>${fileRows}</tbody></table></div></details>`:''}
+            <p class="muted">${i18n('Source :')} <a href="${escapeHtml(safeUrl(s.source))}" target="_blank" rel="noopener noreferrer">${i18n('Fichier des personnes décédées, INSEE, sur data.gouv.fr ↗')}</a></p>`;
+    }
+    /** À l'ouverture de l'app (app.js, 8 s après le démarrage) : reprendre une installation coupée ; une fois par jour, regarder data.gouv.fr */
+    async function inseeStartup(){
+        if(imKiosk())return; // consultation : rien n'est écrit, rien n'est lancé
+        let s;
+        try{s=await imLoad();}catch(_){return;}
+        if(s.job?.status==='running'){toast(i18n('Décès INSEE : l’installation reprend où elle s’était arrêtée.'));imRun();return;}
+        if(s.job)return; // en pause ou arrêtée : la pastille le montre, rien ne part tout seul
+        if(!imAutoCheck()||navigator.onLine===false||!Number(s.installed?.rows))return;
+        const today=new Date().toISOString().slice(0,10);
+        if(imGet(IM_CHECKED,'')===today)return;
+        try{s=await imLoad(true);}catch(_){return;}
+        const ups=s.online?.updates||[];
+        if(!ups.length)return;
+        if(imAutoDl()){toast(i18n('Décès INSEE : mise à jour en arrière-plan ({what}).',{what:ups.map(u=>imShort(u.label)).slice(0,3).join(', ')}));imStart('updates',{quiet:true});return;}
+        let told=[];try{told=JSON.parse(imGet(IM_TOLD,'[]'))||[];}catch(_){}
+        if(ups.every(u=>told.includes(u.key)))return;
+        imSet(IM_TOLD,JSON.stringify([...told,...ups.map(u=>u.key)].slice(-60)));
+        toast(imUpdatesText(ups),'',{duration:30000,action:{label:i18n('⤓ Mettre à jour'),run:()=>imStart('updates')}});
     }
 
     // Fenêtre listant précisément chaque fichier déjà importé (nom, date, lignes lues/insérées,
@@ -1120,6 +1389,6 @@
     }
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
-    Object.assign(window.LCNDA_PARTS, {renderResearch, renderResearchSidebar});
+    Object.assign(window.LCNDA_PARTS, {renderResearch, renderResearchSidebar, inseeStartup});
     if (state.module === 'recherche' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();

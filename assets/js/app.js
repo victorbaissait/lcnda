@@ -2049,7 +2049,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             if(initialRoute.maintenanceTab)state.maintenanceTab=initialRoute.maintenanceTab;
             await setModule((urlPersonId ? 'personnes' : (initialRoute.module || 'dashboard')), false);
             if(!urlPersonId)updateBrowserRoute(moduleHash(state.module),false,state.module);
-            setTimeout(checkInseeRemote,8000); // nouveaux fichiers des décès INSEE (une fois par jour)
+            setTimeout(()=>{const f=appPart('inseeStartup');if(f)f();else checkInseeRemote();},8000); // décès INSEE : reprendre une installation, nouveaux fichiers (une fois par jour ; app-recherche.js)
         } catch (error) {
             $('#workspace').innerHTML = errorState(error.message);
             toast(error.message, 'error');

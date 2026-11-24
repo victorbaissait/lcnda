@@ -147,7 +147,7 @@
     };
     ['ma', 'tn', 'sn', 'vn', 'nc', 'gf', 're', 'gp', 'mq', 'mg'].forEach(c => { GUIDES[c] = {url: GUIDES.dz.url, items: [GUIDES.dz.items[0]]}; });
     const ACCESS = {online: ['🌐', 'En ligne'], onsite: ['🏛', 'Sur place'], both: ['🌐🏛', 'En ligne et sur place']};
-    const periodText = (a, b) => (a ? `${a}–${b || T('aujourd’hui')}` : '');
+    const periodText = (a, b) => (a ? (a === b ? String(a) : `${a}–${b || T('aujourd’hui')}`) : '');
 
     /** les guides des pays de sa vie : les registres qui croisent sa vie d'abord (et pour qui ils comptent) */
     function guide(ctx) {

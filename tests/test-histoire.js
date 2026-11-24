@@ -91,6 +91,9 @@ foreach ([[3,1902,'1902-02-01',1903,'1903-06-01'],[4,1904,'1904-04-01',null,null
 }
 $ins->execute(['person',7,null,$t('BIRT'),'1740',1740,'1740',4]);
 $ins->execute(['person',7,null,$t('DEAT'),'1800',1800,'1800',4]);
+$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status) VALUES(8,'Odette','MAZAUD','female','deceased')");
+$ins->execute(['person',8,null,$t('BIRT'),'1940',1940,'1940',1]);
+$ins->execute(['person',8,null,$t('DEAT'),'1990',1990,'1990',1]);
 echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
     if (seed.status !== 0 || !/"ok"/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
     const port = await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
@@ -159,6 +162,14 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(txt, /Pas de recensement de Nice à moins de 10 ans de 1740 ni de 1800 : les chiffres de l’Insee commencent en 1876\./);
             assert.match(txt, /Séisme du 5 mars 1799 \(COTE D'AZUR \(NICE\)\) : épicentre à Nice,/);
             assert.match(txt, /Le train n’arrive à Cagnes-sur-Mer \(11 km de Nice\) qu’en 1863, après la mort de Léonard\./);
+        });
+        await t('inondations : BDHI (commune ou département) et arrêtés CatNat depuis 1982, de son vivant', async () => {
+            const d = await api('hist_person', {id: 8});
+            assert.ok(d.floods.bdhi.some(x => x.year === 1960 && /octobre 1960/.test(x.title)), JSON.stringify(d.floods.bdhi));
+            assert.deepStrictEqual(d.floods.catnat.slice(0, 2).map(x => [x.date, x.kind]), [['1982-11-06', 'ICB'], ['1988-06-16', 'ICB']]);
+            await openPerson(8);
+            const txt = (await blockText(8)).replace(/\s+/g, ' ');
+            assert.match(txt, /1960 : [^.]*octobre 1960/); assert.match(txt, /Source : Géorisques, base historique des inondations \(BDHI\)/); assert.match(txt, /catastrophes naturelles reconnue\(s\) depuis 1982/);
         });
         await t('Réglages : tables de frdata.org pour les départements de la base, puis la comparaison sur la fiche (et 🗑 ↶)', async () => {
             await p.evaluate(() => window.LCNDA_EXT.histoire.openSettings());
