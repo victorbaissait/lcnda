@@ -64,6 +64,10 @@ CH_STAC_COLLECTION = 'https://data.geo.admin.ch/api/stac/v1/collections/ch.meteo
 IRM_WFS = 'https://opendata.meteo.be/service/aws/ows'
 IRM_STATIONS = IRM_WFS + '?service=WFS&version=2.0.0&request=GetFeature&typenames=aws:aws_station&outputFormat=csv'
 IRM_DAILY = IRM_WFS + '?service=WFS&version=2.0.0&request=GetFeature&typenames=aws:aws_1day&outputFormat=csv&count={count}&startIndex={start}'
+# le serveur (GeoServer) refuse (HTTP 400) une page « startIndex » sans ordre fixe : on demande l'ordre (sortBy), sinon une année à la fois
+IRM_DAILY_SORTED = IRM_DAILY + '&sortBy={sort}'
+IRM_DAILY_YEAR = IRM_WFS + '?service=WFS&version=2.0.0&request=GetFeature&typenames=aws:aws_1day&outputFormat=csv&CQL_FILTER={cql}'
+IRM_FIRST_YEAR = 1995
 # MeteoLux : Luxembourg-Findel (data.public.lu, CC0)
 LU_DATASET_API = 'https://data.public.lu/api/1/datasets/climatological-daily-data-luxembourg-findel/'
 LU_FINDEL = ('Luxembourg – Findel', 49.6266, 6.2045, 376.0)
@@ -153,7 +157,7 @@ class Net:
     def path(self, name):
         return os.path.join(self.offline or self.cache, name)
 
-    def get(self, url, name, what='', binary=True, missing_ok=False, headers=None):
+    def get(self, url, name, what='', binary=True, missing_ok=False, headers=None, fail_fast=()):
         """télécharge une fois (reprise d'un fichier .part) → chemin du fichier gardé ; missing_ok : None si la source n'a pas ce fichier"""
         dest = self.path(name)
         if os.path.exists(dest) and os.path.getsize(dest) > 0:
@@ -182,6 +186,8 @@ class Net:
                 if missing_ok and e.code in (403, 404):
                     open(dest + '.absent', 'w').close()
                     return None
+                if e.code in fail_fast:  # une demande refusée telle quelle : inutile de réessayer la même
+                    raise Stop(f'{what or name} : demande refusée (erreur {e.code}).\n  Adresse : {url}')
                 if e.code in (404, 410):
                     raise Stop(f'{what or name} : l’adresse n’existe plus (erreur {e.code}).\n  Adresse : {url}\n'
                                '  La source a peut-être déménagé : corrige l’adresse en haut de build-meteo.py (constantes en MAJUSCULES).')
@@ -891,16 +897,12 @@ def do_meteoswiss(net, work, years, only=None):
     work.mark('ch')
 
 
-def do_irm(net, work, years, test=False):
-    if work.done('be'):
-        return
-    st_text = open_text(net.get(IRM_STATIONS, 'irm-aws_station.csv', 'IRM (stations)'))
-    texts = []
-    start, count = 0, 20000
+def irm_pages(net, url_for, prefix, count, test=False):
+    """les pages d'une demande WFS (startIndex) → textes CSV ; Stop si le serveur refuse la première"""
+    texts, start = [], 0
     while True:
-        name = f'irm-aws_1day-{start}.csv'
         try:
-            p = net.get(IRM_DAILY.format(count=count, start=start), name, 'IRM (relevés quotidiens)')
+            p = net.get(url_for(count, start), f'{prefix}-{start}.csv', 'IRM (relevés quotidiens)', fail_fast=(400,))
         except Stop:
             if net.offline and start:
                 break
@@ -910,6 +912,34 @@ def do_irm(net, work, years, test=False):
         if test or t.count('\n') < count:
             break
         start += count
+    return texts
+
+
+def do_irm(net, work, years, test=False):
+    """IRM / KMI : les relevés quotidiens par pages triées (sortBy) ; si le serveur refuse, une année à la fois (CQL_FILTER)"""
+    if work.done('be'):
+        return
+    st_text = open_text(net.get(IRM_STATIONS, 'irm-aws_station.csv', 'IRM (stations)'))
+    texts, errors = None, []
+    tries = [('irm-aws_1day', lambda c, s0: IRM_DAILY.format(count=c, start=s0)),  # l'ancienne demande (fichiers déjà gardés, essais hors ligne)
+             ('irm-aws_1day-tri', lambda c, s0: IRM_DAILY_SORTED.format(count=c, start=s0, sort=urllib.parse.quote('code ASC,timestamp ASC'))),
+             ('irm-aws_1day-tri-ts', lambda c, s0: IRM_DAILY_SORTED.format(count=c, start=s0, sort=urllib.parse.quote('timestamp ASC')))]
+    for prefix, url_for in tries:
+        try:
+            texts = irm_pages(net, url_for, prefix, 10000, test)
+            break
+        except Stop as e:
+            errors.append(str(e).splitlines()[0])
+            if net.offline:
+                raise
+    if texts is None:  # dernier essai : une année à la fois, sans pages (≈ 30 stations × 366 jours)
+        texts = []
+        for y in range(max(IRM_FIRST_YEAR, years[0]), years[1] + 1):
+            cql = urllib.parse.quote(f"timestamp >= '{y}-01-01T00:00:00Z' AND timestamp < '{y + 1}-01-01T00:00:00Z'")
+            try:
+                texts.append(open_text(net.get(IRM_DAILY_YEAR.format(cql=cql), f'irm-aws_1day-{y}.csv', f'IRM (relevés {y})', fail_fast=(400,))))
+            except Stop as e:
+                raise Stop('IRM : le serveur refuse toutes les demandes des relevés quotidiens.\n  ' + '\n  '.join(errors + [str(e).splitlines()[0]]))
     data = {}
     for t in texts:
         for code, st in parse_irm(st_text, t).items():
@@ -1980,9 +2010,13 @@ def main(argv=None):
                 try:
                     fn(*args)
                 except Stop as e:
-                    if not a.offline:
+                    if a.offline:
+                        say(f'   (hors ligne : {fn.__name__[3:]} ignoré — {str(e).splitlines()[0]})')
+                    elif fn in (do_irm, do_meteolux):  # sources facultatives : le pack se fabrique sans elles (relancer plus tard pour les ajouter)
+                        say(f'   ⚠️ {fn.__name__[3:]} sauté : {str(e).splitlines()[0]}\n      Le pack se fabrique sans lui ; relance plus tard pour l’ajouter (le reste ne sera pas refait).')
+                        print(f'::warning::{fn.__name__[3:]} sauté : {str(e).splitlines()[0]}', flush=True)
+                    else:
                         raise
-                    say(f'   (hors ligne : {fn.__name__[3:]} ignoré — {str(e).splitlines()[0]})')
             work.compute_scores()
         if 'europe' in kinds:
             say('1b. Les stations d’Europe (DWD, KNMI, DMI, MIDAS-Open, AEMET, IMGW, ČHMÚ, GHCN)')
@@ -1998,7 +2032,8 @@ def main(argv=None):
                 os.remove(path)
             db = F.open_db(path, 'socle', 'Socle')
             F.set_meta(db, countries='FR,BE,CH,LU')
-            F.add_sources(db, ['meteofrance', 'meteoswiss', 'irm', 'meteolux'], a.until)
+            got = {r[0] for r in work.db.execute(f'SELECT DISTINCT source FROM stations WHERE id IN ({",".join(str(i) for i in chosen) or "0"})')}
+            F.add_sources(db, [x for x in ['meteofrance', 'meteoswiss', 'irm', 'meteolux'] if x in got], a.until)
             copy_stations(work.db, db, chosen)
             write_normals(db, 'station', 'daily', 'station_id')
             boxes = list(COUNTRY_BOXES.values())
@@ -2045,7 +2080,8 @@ def main(argv=None):
                 os.remove(path)
             db = F.open_db(path, 'complet', 'Pack complet')
             F.set_meta(db, countries='FR,BE,CH,LU')
-            F.add_sources(db, ['meteofrance', 'meteoswiss', 'irm', 'meteolux'], a.until)
+            got = {r[0] for r in work.db.execute("SELECT DISTINCT source FROM stations WHERE pays IN ('FR','BE','CH','LU')")}
+            F.add_sources(db, [x for x in ['meteofrance', 'meteoswiss', 'irm', 'meteolux'] if x in got], a.until)
             ids = [r[0] for r in work.db.execute("SELECT id FROM stations WHERE pays IN ('FR','BE','CH','LU')")]
             copy_stations(work.db, db, ids, hourly=True)
             write_normals(db, 'station', 'daily', 'station_id')

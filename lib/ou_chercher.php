@@ -212,6 +212,7 @@ function ouc_person_context(PDO $pdo, int $pid): array
         'events' => $events, 'profiles' => array_keys($prof), 'missing' => $missing,
         'parents' => ['father' => $father, 'mother' => $mother], 'partners' => $partners, 'children' => $children,
         'searched' => $searched, 'journal' => $journal, 'leads' => $leads,
+        'oa_kin' => (static function () use ($pdo, $pid) { try { return ouc_oa_person($pdo, $pid)['kin'] ?: (object) []; } catch (Throwable $_) { return (object) []; } })(), // 🇳🇱🇧🇪 « dans le même acte » d'Open Archives
         'wall' => $wall ? ['manual' => (int) $wall['manual'] === 1, 'status' => (string) $wall['status'], 'note' => (string) $wall['note'], 'updated_at' => (string) $wall['updated_at']] : null,
     ];
 }

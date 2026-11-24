@@ -154,20 +154,10 @@
         } catch (e) { st.err = e.message || String(e); }
         st.loading = false; repaint(body);
     }
-    async function loadKin(body) { // les proches pour « dans le même acte » : lus sans rien envoyer au site (la recherche n'est pas faite)
+    /** les proches pour « dans le même acte » : donnés par la fiche (GET ou_chercher_person, oa_kin), rien n'est envoyé au site */
+    function loadKin(body) {
         const view = BODY.get(body); if (!view) return; const st = stateOf(view);
-        if (st.kin) return;
-        const raw = view.data?.raw; st.kin = {};
-        const det = view.data?.detail;
-        try {
-            const fam = (det?.families || det?.unions || [])[0];
-            const sp = fam?.partner || fam?.spouse; if (sp) st.kin.spouse = [String(sp.first_name || '').split(/\s+/)[0], sp.last_name].filter(Boolean).join(' ');
-            const par = det?.parents || {};
-            const fa = par.father || par[0], mo = par.mother || par[1];
-            if (fa?.last_name) st.kin.father = [String(fa.first_name || '').split(/\s+/)[0], fa.last_name].filter(Boolean).join(' ');
-            if (mo?.last_name) st.kin.mother = [String(mo.first_name || '').split(/\s+/)[0], mo.last_name].filter(Boolean).join(' ');
-        } catch (_) {}
-        if (!raw) return;
+        if (!st.kin) { const k = view.data?.raw?.oa_kin; st.kin = k && typeof k === 'object' && !Array.isArray(k) ? k : {}; }
     }
     async function toggleRec(body, key) {
         const view = BODY.get(body); const st = stateOf(view);

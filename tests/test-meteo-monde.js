@@ -78,6 +78,40 @@ print(json.dumps({'spread': B.select_spread(rows, 2, 50), 'all': B.select_spread
             assert.deepStrictEqual(v.ru, ['europe', 'asie']); assert.deepStrictEqual(v.skip, [null, null, null]); assert.strictEqual(v.us, 'amerique-nord');
         });
 
+        await t('fabricant (socle) : IRM refuse les pages sans ordre (HTTP 400) → pages triées (sortBy), sinon une année à la fois ; tout refusé → arrêt clair (le socle le saute)', async () => {
+            const f = path.join(tmp, 'irmcheck.py');
+            fs.writeFileSync(f, String.raw`import importlib.util, json, sys, os, tempfile, urllib.parse
+spec = importlib.util.spec_from_file_location('B', sys.argv[1]); B = importlib.util.module_from_spec(spec); spec.loader.exec_module(B)
+mode = sys.argv[2]
+ST = 'FID,code,name,altitude,the_geom\naws_station.1,6447,UCCLE,101,POINT (50.79 4.35)\n'
+def day(d, tx): return f'aws_1day.x,6447,{d}T00:00:00Z,{tx - 8},{tx},1.2,10,60\n'
+HEAD = 'FID,code,timestamp,temp_min,temp_max,precip_quantity,wind_gusts_speed,sun_duration\n'
+class FakeNet:
+    offline = None
+    def __init__(self, d): self.d, self.urls = d, []
+    def get(self, url, name, what='', fail_fast=(), **k):
+        self.urls.append(url)
+        p = os.path.join(self.d, name)
+        if 'aws_station' in url: open(p, 'w').write(ST); return p
+        if mode == 'tri' and 'sortBy' in url and 'startIndex=0' in url: open(p, 'w').write(HEAD + day('2020-01-02', 50)); return p
+        if mode == 'annee' and 'CQL_FILTER' in url:
+            y = urllib.parse.unquote(url).split("timestamp >= '")[1][:4]; open(p, 'w').write(HEAD + day(f'{y}-03-01', 70)); return p
+        raise B.Stop(f'{what} : demande refusée (erreur 400).')
+with tempfile.TemporaryDirectory() as d:
+    w = B.Work(os.path.join(d, 'w.sqlite')); n = FakeNet(d)
+    try:
+        B.do_irm(n, w, (2019, 2021)); err = ''
+    except B.Stop as e: err = str(e).splitlines()[0]
+    print(json.dumps({'err': err, 'years': [r[0] for r in w.db.execute('SELECT annee FROM daily ORDER BY annee')], 'sorted': any('sortBy' in u for u in n.urls), 'done': w.done('be')}))
+`);
+            const run = m => { const r = spawnSync('python3', [f, path.join(root, 'scripts/meteo/build-meteo.py'), m], {encoding: 'utf8'}); assert.strictEqual(r.status, 0, r.stderr); return JSON.parse(r.stdout.trim().split('\n').pop()); };
+            assert.deepStrictEqual(run('tri'), {err: '', years: [2020], sorted: true, done: true});
+            assert.deepStrictEqual(run('annee'), {err: '', years: [2019, 2020, 2021], sorted: true, done: true});
+            const none = run('rien'); assert.match(none.err, /IRM : le serveur refuse/); assert.strictEqual(none.done, false, 'à refaire la prochaine fois');
+            const src = fs.readFileSync(path.join(root, 'scripts/meteo/build-meteo.py'), 'utf8');
+            assert.match(src, /elif fn in \(do_irm, do_meteolux\):/, 'IRM et MeteoLux : un avertissement, pas un arrêt');
+        });
+
         // ── 1. le serveur : six packs en ligne, installés, et la météo d'un lieu du monde ──
         const mk = spawnSync('python3', [path.join(root, 'scripts/meteo/make-fixture.py'), fx], {encoding: 'utf8'});  // le socle d'essai (Gers, Genève…)
         if (mk.status !== 0) throw new Error(mk.stderr || mk.stdout);
