@@ -142,3 +142,20 @@ span.ong-cov.is-empty, .ong-ico { font-size: 20px; }
 /* ═════ fin du mode sombre automatique ═════ */
 button.ong-uname { background: none; color: inherit; font: inherit; cursor: pointer; }
 button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; border-color: var(--accent, #2b5ff0); }
+/* 🔗 documents liés (heritage-liens.js) : page du document, visionneuse, enquête */
+.dl-h { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.dl-h h3 { margin: 0; font-size: 1rem; }
+.dl-h .spacer, .dl-head .spacer { flex: 1; }
+.dl-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.dl-item { border-top: 1px dashed var(--line-color, #ddd); padding-top: 8px; }
+.dl-head { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.dl-why { color: var(--muted); }
+.dl-common { margin: 4px 0 0 24px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: .9em; }
+.dl-chip { display: inline-block; border: 1px solid var(--line-color, #ccc); border-radius: 999px; padding: 1px 8px; background: var(--soft-bg, rgba(0,0,0,.03)); }
+.dl-chip.is-special { border-color: var(--accent, #2b5ff0); }
+.dl-learn { margin: 6px 0 0 24px; font-size: .9em; }
+.dl-learn summary { cursor: pointer; }
+.dl-learn ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.dl-quote { color: var(--muted); font-style: italic; }
+.dl-empty { margin: 6px 0 0; font-size: .92em; }
+.lb-links { margin-top: 10px; }

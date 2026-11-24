@@ -506,6 +506,7 @@ try {
         'image_pick' => json_response(['media' => heritage_image_pick($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 100), (string) ($_GET['filter'] ?? ''))]),
         'act_transcriptions_media' => json_response(['items' => act_transcriptions_for_media($pdo, safe_int($_GET['media_id'] ?? 0)), 'text' => (static function () use ($pdo) { $s = $pdo->prepare('SELECT COALESCE(transcription,\'\') FROM media m WHERE m.id=?' . (function_exists('sealed_media_sql') ? sealed_media_sql($pdo) : '')); $s->execute([safe_int($_GET['media_id'] ?? 0)]); return (string) $s->fetchColumn(); })()]), // 📄 le texte du document (un seul)
         'media_pages' => json_response(media_pages_of($pdo, safe_int($_GET['media_id'] ?? 0))),
+        'doc_links' => json_response(doc_links_of($pdo, safe_int($_GET['media_id'] ?? 0))), // 🔗 documents liés
         'act_page_owner' => json_response(['id' => act_page_owner($pdo, safe_int($_GET['media_id'] ?? 0))]), // 📑 l'acte « un seul texte » dont l'image est une page // 📑 les pages d'un document (lib/media_pages.php)
         'heritage_media_search' => json_response(['media' => heritage_media_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'voyages' => json_response(['voyages' => voyages_data($pdo, safe_int($_GET['person_id'] ?? 0))]),
@@ -10126,6 +10127,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_act_transcription_version' => delete_act_transcription_version($pdo,$data),
             'restore_act_transcription_version' => restore_act_transcription_version($pdo,$data),
             'rename_act_transcription_version' => rename_act_transcription_version($pdo,$data),
+            'doc_link_save' => doc_link_save($pdo,$data), // 🔗 lier deux documents (ou changer la raison)
+            'doc_link_delete' => doc_link_delete($pdo,$data), // 🔗 retirer un lien (↶ Annuler : doc_link_save avec ce qui est renvoyé)
             'media_pages_save' => media_pages_save($pdo,$data), // 📑 relier, nommer, ranger, retirer des pages d'un document (et ↶ Annuler)
             'act_link_person' => act_link_person($pdo,$data), // 👤 « Relier » un nom relevé dans l'Atelier (fiche → 📜 Actes et transcriptions)
             'act_match_people' => act_transcription_match_people($pdo, is_array($data['names'] ?? null) ? $data['names'] : []),
@@ -13303,6 +13306,7 @@ function delete_media(PDO $pdo,array $data): array
     $pdo->prepare('UPDATE persons SET portrait_media_id=NULL,updated_at=CURRENT_TIMESTAMP WHERE portrait_media_id=?')->execute([$mediaId]);
     $pdo->prepare('DELETE FROM media_tags WHERE media_id=?')->execute([$mediaId]); // zones identifiées : gardées dans la copie ci-dessus
     $pdo->prepare('DELETE FROM media_links WHERE media_id=?')->execute([$mediaId]);
+    doc_links_forget($pdo, $mediaId); // 🔗 ses liens avec d'autres documents
     $pdo->prepare("DELETE FROM label_links WHERE entity_type='media' AND entity_id=?")->execute([$mediaId]);
     $pdo->prepare('DELETE FROM media WHERE id=?')->execute([$mediaId]);
     log_change($pdo,'media',$mediaId,'delete','Suppression du média « '.($before['title']?:$before['filename']?:'#'.$mediaId).' » de la base locale',$snapshot,null);

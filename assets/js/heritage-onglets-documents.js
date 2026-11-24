@@ -352,6 +352,7 @@
                 </dl>${!d.cote && !d.date_text && !ro ? `<p class="ong-hint">${A().empty ? A().empty('Pas encore de date ni de cote : « ✎ Modifier » pour les écrire.', {icon: '✎'}) : ''}</p>` : ''}</div>
             </div>
             <section class="card ong-sec ong-pagessec" data-ong-pages hidden></section>
+            <section class="card ong-sec ong-linkssec" data-ong-links hidden></section>
             ${d.description ? `<section class="card ong-sec"><h3>Notes</h3><p class="ong-pre">${esc(d.description)}</p></section>` : ''}
             ${trHtml(d, isImg, ro)}
             <section class="card ong-sec"><h3>${esc(T('Personnes reliées'))} · ${ppl.length}</h3>${ppl.length ? `<div class="ong-people">${ppl.map(personChip).join('')}</div>` : (A().empty ? A().empty('Aucune personne reliée à ce document.', {icon: '👤'}) : '')}${unlinked(d)}</section>
@@ -361,6 +362,8 @@
         // 📑 les autres pages du même document (recto / verso, page 1…N, annexe : heritage-pages.js), montrées ensemble ; ＋ Relier une autre page…
         const pg = ws.querySelector('[data-ong-pages]');
         if (pg && ext.mediaPages) ext.mediaPages.mount(pg, id, {ro, onOpen: pid => { if (Number(pid) !== Number(id)) select(Number(pid)); }});
+        const lk = ws.querySelector('[data-ong-links]'); // 🔗 documents liés (heritage-liens.js) : un clic ouvre l'autre document ici
+        if (lk && ext.docLinks) ext.docLinks.mount(lk, id, {ro, onOpen: did => { if (Number(did) !== Number(id)) select(Number(did)); }});
         const img = ws.querySelector('[data-ong-img]');
         if (img) { const put = () => { const cap = ws.querySelector('[data-ong-size]'); if (cap && img.naturalWidth) cap.textContent = `${img.naturalWidth} × ${img.naturalHeight} px · ${printFit(img.naturalWidth, img.naturalHeight)}`; }; if (img.complete) put(); else img.addEventListener('load', put, {once: true}); }
     }

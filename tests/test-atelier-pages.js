@@ -639,7 +639,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             const r = php(String.raw`require 'lib/bootstrap.php'; $pdo = db(); $before = $pdo->query('SELECT media_id,set_id,position,label FROM media_pages ORDER BY media_id')->fetchAll(PDO::FETCH_ASSOC);
                 schema_v104($pdo); schema_v104($pdo); $after = $pdo->query('SELECT media_id,set_id,position,label FROM media_pages ORDER BY media_id')->fetchAll(PDO::FETCH_ASSOC);
                 echo json_encode(['same' => $before === $after, 'n' => count($after), 'v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn(), 'want' => SCHEMA_VERSION]);`);
-            const j = JSON.parse(r.stdout || '{}'); assert.equal(j.same, true, r.stderr); assert.equal(j.n, 6); assert.equal(j.want, 104); assert.equal(j.v, 104);
+            const j = JSON.parse(r.stdout || '{}'); assert.equal(j.same, true, r.stderr); assert.equal(j.n, 6); assert.ok(j.want >= 104, 'au moins la 104'); assert.equal(j.v, j.want, 'la base à jour');
         });
         await t('aucune erreur JavaScript', async () => { assert.deepEqual(errs, []); });
     } finally {

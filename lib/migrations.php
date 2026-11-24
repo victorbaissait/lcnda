@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 104;
+const SCHEMA_VERSION = 105;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -133,6 +133,7 @@ function migration_steps(): array
         102 => 'schema_v102',
         103 => 'schema_v103',
         104 => 'schema_v104',
+        105 => 'schema_v105',
     ];
 }
 
@@ -2823,4 +2824,11 @@ function schema_v104(PDO $pdo): void
 {
     if (!function_exists('media_pages_install')) { require_once __DIR__ . '/media_pages.php'; }
     media_pages_install($pdo);
+}
+
+/** 🔗 documents liés (lib/doc_links.php) : la table doc_links */
+function schema_v105(PDO $pdo): void
+{
+    if (!function_exists('doc_links_install')) { require_once __DIR__ . '/doc_links.php'; }
+    doc_links_install($pdo);
 }
