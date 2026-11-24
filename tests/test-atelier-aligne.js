@@ -102,8 +102,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
                     const grab = async checks => { let blob = ''; const oc = URL.createObjectURL; URL.createObjectURL = b => { blob = b; return oc.call(URL, b); }; await ex.formats.find(f => f.id === 'file').run({filename: 'x.txt', checks}); URL.createObjectURL = oc; return blob.text(); };
                     const on = await grab({ln: true, people: true}), off = await grab({ln: false, people: false});
                     await ex.formats.find(f => f.id === 'print').run({});
-                    return {checks: ex.checks.map(c => [c.id, c.checked]), on, off, prOpt: pr.options.find(o => o.key === 'ln')?.checked, html: await pr.html({lay: 'text', ln: true, people: false})};
+                    let tb = null; const oc2 = URL.createObjectURL; URL.createObjectURL = b => { tb = b; return oc2.call(URL, b); }; await ex.formats.find(f => f.id === 'tei').run({filename: 'x.xml'}); URL.createObjectURL = oc2;
+                    const doc = new DOMParser().parseFromString(await tb.text(), 'application/xml'), NS = 'http://www.tei-c.org/ns/1.0', q = n => [...doc.getElementsByTagNameNS(NS, n)];
+                    const tei = {err: !!doc.getElementsByTagName('parsererror').length, surf: q('surface').length, lb: q('lb').map(l => l.getAttribute('n')), pers: q('person').map(x => [x.getAttribute('role'), x.textContent, x.getAttribute('corresp')])};
+                    return {tei, checks: ex.checks.map(c => [c.id, c.checked]), on, off, prOpt: pr.options.find(o => o.key === 'ln')?.checked, html: await pr.html({lay: 'text', ln: true, people: false})};
                 } finally { UI.openPrintDialog = keep.pr; UI.openExportDialog = keep.ex; } });
+            assert.equal(r.tei.err, false); assert.equal(r.tei.surf, 1); assert.deepEqual(r.tei.lb, ['1', '2', '3', '4']);
+            assert.deepEqual(r.tei.pers, [['sujet', 'Jean MAZAUD', 'lcnda:person/1'], ['parent', 'Pierre MAZAUD', null]], 'les personnes, leur rôle, la fiche reliée');
             assert.deepEqual(r.checks, [['ln', true], ['people', true]]);
             assert.match(r.on, /^1  L’an mil sept cent/); assert.match(r.on, /\n4  de Pierre MAZAUD/); assert.match(r.on, /\nPersonnes\n- Jean MAZAUD — sujet\n- Pierre MAZAUD — parent/);
             assert.equal(r.off, BODY, 'sans les cases : le texte tel quel');

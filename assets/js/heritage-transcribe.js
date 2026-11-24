@@ -1550,6 +1550,59 @@
             const pp = o.people ? peopleText() : ''; return pp ? `${body}\n\n${i18n('Personnes')}\n${pp}\n` : body; };
         /** les cases remplies du gabarit, dans l'ordre : [[nom, valeur]] (impression, PDF) */
         const gabRows = () => { const g = GB(), gb = t.data.gabarit; if (!g || !gb || gb.kind !== kindNow()) return []; return g.fieldsOf(kindNow(), gb).filter(([k]) => gb.fields?.[k]?.v).map(([k, l]) => [l, gb.fields[k].v + (gb.fields[k].ok ? ' ✓' : '')]); };
+        /**
+         * 3e · TEI (P5) : le format XML des chercheurs et des archives. En-tête (titre, sorte, date, lieu, source), une « surface » par page
+         * avec son image et ses zones (coordonnées en pixels de l'image), le texte avec un <pb/> par page et un <lb n="…"/> par ligne (relié à
+         * sa zone par @facs quand une zone couvre la ligne), les personnes et leur rôle (<listPerson>), les cases du 🧩 gabarit (<interpGrp>).
+         */
+        function teiXml() {
+            const zid = z => 'z_' + String(z.id).replace(/[^A-Za-z0-9_.-]/g, '_'); // un identifiant XML commence par une lettre
+            const x = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'}[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
+            const title = $('[data-tx="title"]').value || 'Transcription', kind = KINDS.find(k => k[0] === kindNow())?.[1] || '';
+            const pages = multiPages() ? pageParts() : [{i: -1, name: '', text: area.value, file: t.filename}];
+            const pageId = q => `p${q.i >= 0 ? q.i + 1 : 1}`, pidOf = q => (q.i >= 0 ? Number(PAGES[q.i].media_id) : Number(t.media_id));
+            const zonesOf = q => t.data.zones.filter(z => (q.i < 0 ? true : Number(z.p || t.media_id) === pidOf(q)) && z.w > 0 && z.h > 0);
+            const surf = pages.map(q => `      <surface xml:id="${pageId(q)}"${q.name ? ` n="${x(q.name)}"` : ''}>\n        <graphic url="${x(q.file ? 'media/' + q.file : '')}"/>\n${zonesOf(q).map(z => `        <zone xml:id="${zid(z)}" ulx="${Math.round(z.x)}" uly="${Math.round(z.y)}" lrx="${Math.round(z.x + z.w)}" lry="${Math.round(z.y + z.h)}"/>`).join('\n')}${zonesOf(q).length ? '\n' : ''}      </surface>`).join('\n');
+            // le texte : chaque ligne et la zone qui la couvre (positions dans le texte de l'Atelier)
+            let at = 0; const body = pages.map(q => {
+                const start = multiPages() ? area.value.indexOf(q.text, at) : 0; if (start >= 0) at = start + q.text.length;
+                let pos = Math.max(0, start); const ls = q.text.split('\n').map((l, k) => { const s0 = pos; pos += l.length + 1; const z = zonesOf(q).find(zz => zz.e > zz.s && zz.s < s0 + l.length && s0 < zz.e);
+                    return `        <lb n="${k + 1}"${z ? ` facs="#${zid(z)}"` : ''}/>${x(l)}`; });
+                return `        <pb n="${x(q.name || '1')}" facs="#${pageId(q)}"/>\n${ls.join('\n')}`; }).join('\n');
+            const ppl = (t.data.people || []).filter(p => p.name).map((p, k) => `          <person xml:id="pers${k + 1}"${p.role ? ` role="${x(p.role)}"` : ''}${p.person_id ? ` corresp="lcnda:person/${Number(p.person_id)}"` : ''}><persName>${x(p.name)}</persName></person>`).join('\n');
+            const gb = gabRows();
+            return `<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt><title>${x(title)}</title></titleStmt>
+      <publicationStmt><p>${x(i18n('Transcription faite avec LCNDA (Le Carnet numérique des ancêtres).'))}</p></publicationStmt>
+      <sourceDesc><msDesc><msIdentifier><idno>${x($('[data-tx="source"]').value)}</idno></msIdentifier>${kind ? `<msContents><p>${x(kind)}</p></msContents>` : ''}<history><origin>${$('[data-tx="date_text"]').value ? `<origDate>${x($('[data-tx="date_text"]').value)}</origDate>` : ''}${$('[data-tx="place"]').value ? `<origPlace>${x($('[data-tx="place"]').value)}</origPlace>` : ''}</origin></history></msDesc></sourceDesc>
+    </fileDesc>${ppl ? `
+    <profileDesc>
+      <particDesc>
+        <listPerson>
+${ppl}
+        </listPerson>
+      </particDesc>
+    </profileDesc>` : ''}
+  </teiHeader>
+  <facsimile>
+${surf}
+  </facsimile>
+  <text>
+    <body>
+      <ab>
+${body}
+      </ab>${gb.length ? `
+      <interpGrp type="gabarit">
+${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
+      </interpGrp>` : ''}
+    </body>
+  </text>
+</TEI>
+`;
+        }
         /** le texte à l'impression : tel quel, ou une liste numérotée (les numéros dans la marge, comme dans l'Atelier) */
         const preOf = (text, ln) => (ln ? `<ol class="ln">${String(text).split('\n').map(l => `<li>${esc(l) || '&#8203;'}</li>`).join('')}</ol>` : `<pre>${esc(text)}</pre>`);
         async function printIt() {
@@ -1624,7 +1677,8 @@
                 return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${i18n('Mots : {n}', {n: area.value.trim().split(/\s+/).filter(Boolean).length})}${t.filename ? ` · ${i18n('avec l’image de l’acte')}` : ''}`, formats: [
                     {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText({ln: o.checks?.ln !== false, people: !!o.checks?.people})], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
                     {id: 'pdf', hint: i18n('image + texte (« Enregistrer en PDF »)'), ext: '', run: async () => printIt()},
-                    {id: 'print', hint: 'image + texte', run: async () => printIt()}],
+                    {id: 'print', hint: 'image + texte', run: async () => printIt()},
+                    {id: 'tei', label: '🗂 TEI', hint: i18n('XML des chercheurs et des archives (lignes, zones, personnes)'), ext: 'xml', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([teiXml()], {type: 'application/xml;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }}],
                     checks: [{id: 'ln', label: i18n('Numéros de ligne'), checked: true, show: id => id === 'file'}, {id: 'people', label: i18n('Personnes et rôles'), checked: true, show: id => id === 'file'}]});
             }
         });

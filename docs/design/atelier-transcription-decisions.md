@@ -86,3 +86,6 @@ La page du document et la visionneuse montrent le texte de l'Atelier avec les m�
 
 ## 3d · Export avec numéros de ligne — ✅ FAIT le 24 novembre
 « ⤓ Exporter » → 📝 Texte : cases « Numéros de ligne » et « Personnes et rôles » (cochées au départ, conseillé) ; plusieurs pages : numéros par page, sous le nom de la page. 🖨 Imprimer / PDF : case « Numéros de ligne » (cochée). FAQ « Comment citer une ligne d'un acte ? » (3c + 3d, 31 langues). Essai : tests/test-atelier-aligne.js.
+
+## 3e · Export TEI — ✅ FAIT le 24 novembre (vague 3 terminée)
+« ⤓ Exporter » → « 🗂 TEI » (.xml, TEI P5) : en-tête (titre, sorte, date, lieu, source), une surface par page (image, zones en pixels), le texte avec un <pb/> par page et un <lb n/> par ligne relié à sa zone (@facs), les personnes et leur rôle (<listPerson>, @corresp vers la fiche reliée), les cases du gabarit (<interpGrp>). FAQ (31 langues). Essais : test-atelier-pages.js (4 pages, zones), test-atelier-aligne.js (une page, personnes).

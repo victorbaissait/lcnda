@@ -594,6 +594,25 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await p.evaluate(k => { const e = document.querySelector('dialog.h-tx-dlg [data-tx="kind"]'); e.value = k; e.dispatchEvent(new Event('change', {bubbles: true})); }, k0);
             await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-modele'));
         });
+        await t('🗂 export TEI : XML bien formé, une surface par page (image, zones), un <pb/> par page, chaque ligne reliée à sa zone', async () => {
+            const r = await p.evaluate(async () => { const UI = window.LCNDA_UI, keep = UI.openExportDialog; let ex = null; UI.openExportDialog = o => { ex = o; };
+                try { const d = document.querySelector('dialog.h-tx-dlg'); [...d.querySelectorAll('[data-tx-menus] button')].find(b => b.textContent.trim() === 'Fichier').click(); await new Promise(x => setTimeout(x, 200));
+                    [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Exporter/.test(b.textContent)).click(); await new Promise(x => setTimeout(x, 200));
+                    let blob = null; const oc = URL.createObjectURL; URL.createObjectURL = b => { blob = b; return oc.call(URL, b); };
+                    const f = ex.formats.find(q => q.id === 'tei'); await f.run({filename: 'x.xml'}); URL.createObjectURL = oc;
+                    const xml = await blob.text(), doc = new DOMParser().parseFromString(xml, 'application/xml'), NS = 'http://www.tei-c.org/ns/1.0', q = n => [...doc.getElementsByTagNameNS(NS, n)];
+                    const zoneIds = new Set(q('zone').map(z => z.getAttribute('xml:id'))), g = document.querySelector('dialog.h-tx-dlg').txApi.get();
+                    return {ext: f.ext, err: !!doc.getElementsByTagName('parsererror').length, root: doc.documentElement.namespaceURI, title: q('title')[0]?.textContent,
+                        surfaces: q('surface').map(x => x.querySelector('graphic')?.getAttribute('url')), zones: zoneIds.size, dataZones: g.data.zones.filter(z => z.w > 0 && z.h > 0).length,
+                        pbs: q('pb').length, lbs: q('lb').length, facs: q('lb').map(l => l.getAttribute('facs')).filter(Boolean), facsOk: q('lb').map(l => l.getAttribute('facs')).filter(Boolean).every(f => zoneIds.has(f.slice(1))),
+                        lines: g.body.split(/\n— page \d —\n/).map(x => x.replace(/^\n+|\n+$/g, '').split('\n').length).reduce((a, b) => a + b, 0)}; // les lignes vides autour d'un repère de page ne sont pas des lignes de l'acte
+                } finally { UI.openExportDialog = keep; } });
+            assert.equal(r.ext, 'xml'); assert.equal(r.err, false, 'XML bien formé'); assert.equal(r.root, 'http://www.tei-c.org/ns/1.0'); assert.ok(r.title);
+            assert.deepEqual(r.surfaces, ['media/page1.png', 'media/page2.png', 'media/page3.png', 'media/page4.png']);
+            assert.equal(r.zones, r.dataZones, 'toutes les zones'); assert.equal(r.pbs, 4);
+            assert.equal(r.lbs, r.lines, 'une ligne <lb/> par ligne du texte (sans les repères de page)');
+            assert.ok(r.facs.length >= 4 && r.facsOk, 'des lignes reliées à leur zone, toutes vers une zone qui existe : ' + r.facs.length);
+        });
         await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout, rien n’est ajouté', async () => {
             ollama.delay = 700; const b0 = (await tx()).body, c0 = ollama.chats;
             await deepAll();
