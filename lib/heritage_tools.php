@@ -41,6 +41,70 @@ function sealed_media_sql(PDO $pdo, string $col = 'm.id'): string
 
 function kiosk_path(): string { return DATA_DIR . '/consultation.json'; }
 
+/* ─── 🔒 Événements confidentiels (events.is_private, migration 111) ─── */
+
+/** Ce qui sort de l'app pour d'autres (exports, partage, site, livre, rapport, musée, synchronisation) : sans les événements confidentiels. */
+const PRIVATE_EVENT_EXPORT_ACTIONS = ['export_gedcom', 'export_json', 'export_plus', 'export_csv', 'export_csv_global', 'export_family_book',
+    'export_research_report', 'sync_export', 'museum_export', 'export_my_list', 'compl_export', 'family_share_preview', 'family_share_export',
+    'website_preview', 'website_export', 'website_export_check', 'website_render', 'website_map_points', 'website_publish'];
+
+/** La requête doit-elle se faire sans les événements confidentiels ? Les exports pour d'autres toujours ; tout ce qui se lit en consultation. */
+function private_events_hidden_for(string $action, bool $isWrite): bool
+{
+    if (in_array($action, PRIVATE_EVENT_EXPORT_ACTIONS, true)) { return true; }
+    return !$isWrite && function_exists('kiosk_state') && !empty(kiosk_state()['on']);
+}
+
+/**
+ * Le temps d'une requête : des vues temporaires du même nom (events, event_witnesses, notes, media_links, source_links, media,
+ * sources) cachent les événements confidentiels et ce qui leur est joint (sources, notes, médias, témoins). SQLite lit l'objet
+ * temporaire avant la vraie table (comme le filtre ⚖️ succ_shadow_filter) : chaque export, le site, le partage et les écrans
+ * de consultation passent par là sans rien changer à leurs requêtes. Un média ou une source qui n'est joint qu'à un événement
+ * confidentiel disparaît aussi ; joint aussi ailleurs, il reste. Rien n'est écrit dans la base.
+ */
+function private_events_shadow(PDO $pdo): bool
+{
+    try {
+        $cols = array_column($pdo->query('PRAGMA main.table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+        if (!in_array('is_private', $cols, true)) { return false; }
+        if (!$pdo->query('SELECT 1 FROM main.events WHERE is_private=1 LIMIT 1')->fetchColumn()) { return false; } // aucun : rien à cacher
+        $temp = array_flip($pdo->query("SELECT name FROM temp.sqlite_master WHERE type IN ('table','view')")->fetchAll(PDO::FETCH_COLUMN));
+        $has = static function (string $t) use ($pdo): bool { return (bool) $pdo->query("SELECT 1 FROM main.sqlite_master WHERE type='table' AND name=" . $pdo->quote($t))->fetchColumn(); };
+        $priv = '(SELECT id FROM main.events WHERE is_private=1)';
+        $notPriv = "NOT (entity_type='event' AND entity_id IN $priv)";
+        $views = [
+            'events' => 'SELECT * FROM main.events WHERE COALESCE(is_private,0)=0',
+            'event_witnesses' => "SELECT * FROM main.event_witnesses WHERE event_id NOT IN $priv",
+            'notes' => "SELECT * FROM main.notes WHERE $notPriv",
+            'media_links' => "SELECT * FROM main.media_links WHERE $notPriv",
+            'source_links' => "SELECT * FROM main.source_links WHERE $notPriv",
+            'media' => "SELECT * FROM main.media WHERE id NOT IN (SELECT media_id FROM main.media_links WHERE entity_type='event' AND entity_id IN $priv)"
+                . " OR id IN (SELECT media_id FROM main.media_links WHERE $notPriv) OR id IN (SELECT portrait_media_id FROM main.persons WHERE portrait_media_id IS NOT NULL)",
+            'sources' => "SELECT * FROM main.sources WHERE id NOT IN (SELECT source_record_id FROM main.source_links WHERE entity_type='event' AND entity_id IN $priv)"
+                . " OR id IN (SELECT source_record_id FROM main.source_links WHERE $notPriv)",
+        ];
+        foreach ($views as $t => $sql) {
+            if (!$has($t)) { continue; }
+            if (isset($temp[$t])) {
+                // ⚖️ déjà une copie filtrée (succ_shadow_filter) : on en retire ce qui est confidentiel
+                $where = match ($t) {
+                    'events' => "COALESCE(is_private,0)=1",
+                    'event_witnesses' => "event_id IN $priv",
+                    'media', 'sources' => '0',
+                    default => "entity_type='event' AND entity_id IN $priv",
+                };
+                $pdo->exec("DELETE FROM temp.$t WHERE $where");
+                continue;
+            }
+            $pdo->exec("CREATE TEMP VIEW $t AS $sql");
+        }
+        return true;
+    } catch (Throwable $e) {
+        error_log('LCNDA : événements confidentiels non masqués : ' . $e->getMessage());
+        return false;
+    }
+}
+
 function kiosk_state(): array
 {
     // 🖧 un appareil invité (lib/reseau_local.php) : lecture seule, avec les mêmes règles que le mode consultation (kiosk_blocks)
