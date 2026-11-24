@@ -1,0 +1,281 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Présentation lisible par les IA</title><style>
+        :root { --presentation-ink:#080808; --presentation-blue:#0066cc; --presentation-paper:#fbfbfb; --presentation-muted:#515151; }
+        * { box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--presentation-ink); }
+        a { color:inherit; text-decoration:none; }
+        .eyebrow { display:inline-block; color:var(--presentation-blue); font-size:12px; font-weight:900; letter-spacing:.14em; }
+        .button { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:42px; padding:11px 15px; border:2px solid var(--presentation-ink); background:var(--presentation-blue); color:#fff; box-shadow:4px 4px 0 rgba(5,93,255,.25); font-weight:700; line-height:1.2; text-align:center; transition:.15s ease; }
+        .button:hover { transform:translate(3px,3px); box-shadow:1px 1px 0 var(--presentation-ink); }
+        .button.secondary { background:#fff; color:var(--presentation-ink); }
+        .button > span[aria-hidden] { font-size:16px; }
+        .presentation-body { min-width:320px; overflow-x:hidden; background-color:var(--presentation-paper); background-image:linear-gradient(rgba(0,102,204,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,204,.035) 1px,transparent 1px); background-size:28px 28px; }
+
+        /* ─── En-tête : texte à gauche, tableau des notes à droite (centré verticalement) ─── */
+        .presentation-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,540px); gap:clamp(32px,6vw,96px); max-width:1450px; min-height:640px; margin:0 auto; padding:clamp(40px,6vw,80px) clamp(24px,7vw,108px); align-items:center; }
+        .presentation-hero-copy { position:relative; min-width:0; }
+        .presentation-acronym { margin:17px 0 -14px; color:var(--presentation-blue); font-weight:900; font-size:clamp(64px,11vw,160px); line-height:.8; letter-spacing:-.09em; opacity:.14; user-select:none; }
+        .presentation-hero h1 { position:relative; max-width:750px; margin:0; font-size:clamp(45px,6.5vw,92px); line-height:.9; letter-spacing:-.075em; }
+        .presentation-lead { position:relative; max-width:600px; margin:30px 0 0; font-size:clamp(17px,1.7vw,24px); line-height:1.35; font-weight:600; }
+        .presentation-actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
+        .presentation-hero-board { position:relative; width:100%; min-height:410px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); overflow:hidden; }
+        .presentation-hero-board::before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(90deg,transparent 0 50px,rgba(0,102,204,.07) 50px 51px),repeating-linear-gradient(0deg,transparent 0 50px,rgba(0,102,204,.07) 50px 51px); }
+        .presentation-note { position:absolute; z-index:2; display:grid; gap:8px; width:58%; padding:18px 19px; border:2px solid var(--presentation-ink); box-shadow:6px 6px 0 rgba(8,8,8,.14); transform:rotate(-3deg); }
+        .presentation-note span { color:var(--presentation-blue); font-size:11px; font-weight:900; letter-spacing:.1em; }
+        .presentation-note strong { font-size:19px; }
+        .presentation-note small { font-size:12px; line-height:1.3; font-weight:700; }
+        .note-blue { top:37px; left:25px; background:#dbeaff; }
+        .note-white { top:152px; right:20px; background:#fff; transform:rotate(4deg); }
+        .note-black { bottom:34px; left:64px; background:#111; color:#fff; transform:rotate(-1.5deg); }
+        .note-black span { color:#fff; }
+        .presentation-thread { position:absolute; z-index:1; height:2px; background:var(--presentation-blue); transform-origin:left center; }
+        .thread-one { width:67%; top:118px; left:44%; transform:rotate(37deg); }
+        .thread-two { width:57%; top:294px; left:5%; transform:rotate(-18deg); }
+
+        /* ─── Sections ─── */
+        .presentation-section { position:relative; max-width:1450px; margin:0 auto; padding:clamp(70px,9vw,120px) clamp(24px,7vw,108px); }
+        .presentation-section::before { content:""; position:absolute; top:0; left:50%; width:100vw; border-top:2px solid var(--presentation-ink); transform:translateX(-50%); }
+        .presentation-section-head { max-width:760px; }
+        .presentation-section h2 { margin:13px 0 0; font-size:clamp(34px,4.7vw,64px); line-height:.96; letter-spacing:-.065em; }
+        .presentation-section-head > p { margin:22px 0 0; color:var(--presentation-muted); font-size:18px; line-height:1.5; font-weight:600; }
+
+        /* ─── Téléchargements ─── */
+        .presentation-downloads { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:44px; align-items:start; }
+        .presentation-os { display:grid; gap:14px; padding:24px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
+        .presentation-os h3 { margin:0; font-size:28px; letter-spacing:-.04em; }
+        .presentation-os-req { margin:-6px 0 0; color:var(--presentation-muted); font-size:14px; font-weight:700; line-height:1.4; }
+        .presentation-os-group { display:grid; gap:10px; padding-top:14px; border-top:1px solid #d7d7d7; }
+        .presentation-os-group > strong { font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+        .presentation-os .button { width:100%; justify-content:space-between; text-align:left; }
+        .presentation-os .button small { display:block; font-size:12px; font-weight:600; opacity:.85; }
+        .presentation-os-help { margin:0; color:var(--presentation-muted); font-size:13px; line-height:1.45; font-weight:600; }
+        .presentation-os-help code, .presentation-callout code { padding:1px 4px; border:1px solid #b8d5f5; background:#eaf2ff; color:#111; font-size:.92em; word-break:break-all; }
+        .presentation-os-source { grid-template-columns:minmax(0,1fr) minmax(260px,420px); align-items:center; gap:24px; margin-top:18px; }
+        .presentation-os-source .presentation-os-group { padding-top:0; border-top:0; }
+        .presentation-os-source .presentation-os-help { margin-top:10px; }
+        @media (max-width:760px) { .presentation-os-source { grid-template-columns:1fr; } }
+        /* ─── Nouveautés de la version (bloc qui s'ouvre et se ferme) ─── */
+        .presentation-changes { margin-top:18px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
+        .presentation-changes summary { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 24px; cursor:pointer; list-style:none; font-size:20px; font-weight:800; letter-spacing:-.02em; }
+        .presentation-changes summary::-webkit-details-marker { display:none; }
+        .presentation-changes summary::after { content:"+"; flex:none; display:grid; place-items:center; width:32px; height:32px; border:2px solid var(--presentation-ink); font-size:20px; line-height:1; }
+        .presentation-changes[open] summary::after { content:"−"; }
+        .presentation-changes summary small { display:block; margin-top:3px; color:var(--presentation-muted); font-size:13px; font-weight:700; letter-spacing:0; }
+        .presentation-changes-body { padding:4px 24px 22px; border-top:1px solid #d7d7d7; font-size:15px; line-height:1.55; }
+        .presentation-changes-body h4 { margin:18px 0 6px; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--presentation-blue); }
+        .presentation-changes-body ul { margin:0; padding-left:20px; }
+        .presentation-changes-body li { margin:4px 0; }
+        .presentation-changes-body p { margin:0; }
+        .presentation-changes-old { margin-top:12px; }
+        .presentation-version { margin-top:14px; border:1px solid #d7d7d7; }
+        .presentation-version summary { padding:12px 16px; font-size:16px; cursor:pointer; list-style:none; font-weight:800; }
+        .presentation-version summary::-webkit-details-marker { display:none; }
+        .presentation-version summary::after { content:"+"; float:right; font-weight:800; }
+        .presentation-version[open] summary::after { content:"−"; }
+        .presentation-version summary small { display:block; color:var(--presentation-muted); font-size:13px; font-weight:700; }
+        .presentation-version-body { padding:0 16px 14px; }
+        .presentation-callout { display:grid; grid-template-columns:200px 1fr; gap:18px; margin-top:22px; padding:19px 22px; border:2px solid var(--presentation-ink); background:#fff5d6; box-shadow:5px 5px 0 rgba(8,8,8,.14); font-size:14px; line-height:1.5; }
+        .presentation-callout p { margin:0; }
+        .presentation-callout p + p { margin-top:8px; }
+        .presentation-callout a { color:var(--presentation-blue); font-weight:800; text-decoration:underline; text-underline-offset:3px; }
+
+        /* ─── Découvrir (texte de présentation) ─── */
+        .presentation-intro { max-width:980px; margin:30px 0 0; font-size:clamp(19px,2vw,26px); line-height:1.38; font-weight:600; }
+        .presentation-intro strong { color:var(--presentation-blue); }
+        .presentation-about-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:48px; }
+        .presentation-about { padding:24px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
+        .presentation-about.about-intro { grid-column:1 / -1; }
+        .presentation-about h3 { margin:0 0 12px; font-size:24px; line-height:1.05; letter-spacing:-.04em; }
+        .presentation-about p { margin:0; color:#3f3f3f; font-weight:600; line-height:1.5; }
+        .presentation-about p + p, .presentation-about p + ul, .presentation-about ul + p { margin-top:10px; }
+        .presentation-about ul { margin:0; padding:0; list-style:none; font-weight:600; line-height:1.45; color:#3f3f3f; }
+        .presentation-about li { padding:7px 0; border-top:1px solid #d7d7d7; }
+        .presentation-about li::before { content:"→"; color:var(--presentation-blue); margin-right:7px; font-weight:900; }
+        .presentation-strengths { display:flex; flex-wrap:wrap; gap:0; margin-top:28px; border:2px solid var(--presentation-ink); background:#111; color:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); }
+        .presentation-strengths div { flex:1 1 220px; padding:20px 22px; border-right:1px solid #333; border-bottom:1px solid #333; }
+        .presentation-strengths strong { display:block; color:#7fb6ff; font-size:15px; letter-spacing:-.01em; }
+        .presentation-strengths span { display:block; margin-top:6px; color:#d9d9d9; font-size:14px; font-weight:600; line-height:1.4; }
+        .presentation-beta-note { margin:22px 0 0; color:var(--presentation-muted); font-size:14px; font-weight:700; line-height:1.5; }
+        @media (max-width:760px) { .presentation-about-grid { grid-template-columns:1fr; } }
+
+        /* ─── Fonctionnalités ─── */
+        .presentation-feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:48px; }
+        .presentation-feature { min-height:265px; padding:24px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
+        .presentation-feature.feature-blue { background:#dbeaff; }
+        .presentation-feature.feature-dark { background:#111; color:#fff; }
+        .presentation-feature h3 { margin:28px 0 10px; font-size:25px; line-height:1; letter-spacing:-.04em; }
+        .presentation-feature p { margin:0; color:#4f4f4f; font-weight:600; line-height:1.45; }
+        .presentation-feature.feature-dark p { color:#d9d9d9; }
+        .feature-index { display:block; color:var(--presentation-blue); font-weight:900; font-size:13px; letter-spacing:.12em; }
+        .presentation-feature.feature-dark .feature-index { color:#7fb6ff; }
+        .presentation-feature ul { margin:22px 0 0; padding:0; list-style:none; font-size:13px; font-weight:800; }
+        .presentation-feature li { padding:8px 0; border-top:1px solid #d7d7d7; }
+        .presentation-feature li::before { content:"→"; color:var(--presentation-blue); margin-right:7px; }
+
+        /* ─── Aperçu (carrousel sans défilement automatique) ─── */
+        .presentation-carousel { position:relative; margin-top:44px; }
+        .presentation-carousel-track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; border:2px solid var(--presentation-ink); background:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); }
+        .presentation-carousel-track::-webkit-scrollbar { display:none; }
+        .presentation-carousel-track:focus-visible { outline:3px solid var(--presentation-blue); outline-offset:4px; }
+        .presentation-slide { flex:0 0 100%; margin:0; scroll-snap-align:start; }
+        .presentation-slide img { display:block; width:100%; height:auto; aspect-ratio:3456 / 2234; object-fit:cover; background:#f1f1f1; }
+        .presentation-slide figcaption { display:flex; gap:12px; align-items:baseline; padding:14px 18px; border-top:2px solid var(--presentation-ink); font-weight:800; }
+        .presentation-slide figcaption span { color:var(--presentation-blue); font-size:12px; font-weight:900; letter-spacing:.12em; }
+        .presentation-carousel-controls { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:22px; }
+        .presentation-carousel-controls .button { min-width:52px; font-size:20px; }
+        .presentation-carousel-controls .button:disabled { opacity:.35; cursor:default; transform:none; box-shadow:4px 4px 0 rgba(5,93,255,.25); }
+        .presentation-carousel-dots { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+        .presentation-carousel-dots button { width:13px; height:13px; padding:0; border:2px solid var(--presentation-ink); background:#fff; cursor:pointer; }
+        .presentation-carousel-dots button[aria-current="true"] { background:var(--presentation-blue); }
+
+        /* ─── FAQ ─── */
+        /* Cadre de la FAQ, dans la page */
+        .presentation-faq-box { margin-top:44px; padding:clamp(22px,3.5vw,44px); border:2px solid var(--presentation-ink); background:#fff; box-shadow:10px 10px 0 rgba(5,93,255,.21); }
+        .presentation-faq-box > h3 { margin:0 0 18px; font-size:clamp(22px,2.6vw,30px); letter-spacing:-.03em; }
+        .presentation-faq-hint { margin:12px 0 0; color:var(--presentation-muted); font-size:16px; font-weight:600; }
+        .presentation-faq-search { display:block; width:100%; max-width:760px; margin-top:0; padding:14px 16px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:4px 4px 0 rgba(5,93,255,.25); font:600 16px Arial,Helvetica,sans-serif; color:var(--presentation-ink); }
+        .presentation-faq-search:focus-visible { outline:3px solid var(--presentation-blue); outline-offset:3px; }
+        .presentation-faq-cat { margin-top:28px; }
+        .presentation-faq-cat h3 { margin:0 0 8px; padding-bottom:8px; border-bottom:1px solid #d7d7d7; font-size:20px; letter-spacing:-.02em; }
+        .presentation-faq-cat h3 small { margin-left:8px; color:var(--presentation-blue); font-size:12px; font-weight:900; letter-spacing:.1em; }
+        .presentation-faq-item { border-bottom:1px solid #e3e3e3; background:#fff; }
+        .presentation-faq-item summary { display:flex; align-items:baseline; gap:10px; padding:12px 0; cursor:pointer; list-style:none; font-size:17px; font-weight:800; line-height:1.3; }
+        .presentation-faq-item summary:hover { color:var(--presentation-blue); }
+        .presentation-faq-item summary::-webkit-details-marker { display:none; }
+        .presentation-faq-item summary::before { content:"▶"; display:inline-block; flex:none; font-size:12px; transition:transform .15s ease; }
+        .presentation-faq-item[open] summary::before { transform:rotate(90deg); }
+        .presentation-faq-item p { max-width:900px; margin:0; padding:0 0 16px 22px; color:#3f3f3f; font-weight:600; line-height:1.55; }
+        .presentation-faq-empty { margin-top:30px; color:var(--presentation-muted); font-weight:700; }
+
+        .presentation-footer { display:flex; justify-content:space-between; gap:20px; padding:21px clamp(24px,4vw,64px); border-top:2px solid var(--presentation-ink); background:#fff; font-size:11px; letter-spacing:.08em; font-weight:900; }
+        .presentation-footer a { color:var(--presentation-blue); }
+
+        @media (max-width:1100px) { .presentation-downloads { grid-template-columns:1fr 1fr; } .presentation-os-linux { grid-column:1 / -1; } .presentation-os-linux .presentation-os-groups { display:grid; grid-template-columns:1fr 1fr; gap:14px; } }
+        @media (max-width:900px) { .presentation-hero { grid-template-columns:1fr; min-height:0; } .presentation-hero-board { max-width:590px; } .presentation-feature-grid { grid-template-columns:repeat(2,1fr); } }
+        @media (max-width:640px) { .presentation-downloads, .presentation-os-linux .presentation-os-groups { grid-template-columns:1fr; } .presentation-os-linux { grid-column:auto; } .presentation-callout { grid-template-columns:1fr; gap:7px; } }
+        @media (max-width:580px) { .presentation-lead { font-size:17px; } .presentation-hero-board { min-height:340px; } .presentation-note { width:68%; padding:13px; } .presentation-note strong { font-size:15px; } .note-white { top:132px; } .note-black { left:35px; } .presentation-feature-grid { grid-template-columns:1fr; } .presentation-feature { min-height:0; } .presentation-footer { flex-direction:column; } }
+        /* ─── Choix de la langue (FR · EN) et bandeau « aussi en anglais » ─── */
+        .presentation-hero { position:relative; }
+        .presentation-lang { position:absolute; top:clamp(12px,2vw,24px); right:clamp(24px,7vw,108px); z-index:3; font-size:12px; font-weight:900; letter-spacing:.14em; color:var(--presentation-muted); }
+        .presentation-lang a { color:var(--presentation-blue); text-decoration:underline; text-underline-offset:3px; }
+        .presentation-lang strong { color:var(--presentation-ink); }
+        .presentation-lang-banner { display:flex; align-items:center; justify-content:center; gap:14px; padding:10px clamp(24px,4vw,64px); border-bottom:2px solid var(--presentation-ink); background:#dbeaff; font-size:14px; font-weight:700; }
+        .presentation-lang-banner[hidden] { display:none; }
+        .presentation-lang-banner a { color:var(--presentation-blue); text-decoration:underline; text-underline-offset:3px; }
+        .presentation-lang-banner button { flex:none; display:grid; place-items:center; width:28px; height:28px; padding:0; border:2px solid var(--presentation-ink); background:#fff; color:var(--presentation-ink); font:900 16px/1 Arial,Helvetica,sans-serif; cursor:pointer; }
+    </style><style>
+.prop-box{margin-top:24px;padding:clamp(18px,2.6vw,30px);border:2px solid var(--presentation-ink);background:#fff;box-shadow:6px 6px 0 rgba(5,93,255,.21)}
+.prop-box h3{margin:0 0 12px;font-size:20px;letter-spacing:-.02em}
+.prop-t{width:100%;border-collapse:collapse;font-size:15px;font-weight:600}.prop-t th{text-align:left;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--presentation-muted);border-bottom:2px solid var(--presentation-ink);padding:8px}.prop-t td{border-bottom:1px solid #e3e3e3;padding:9px 8px;vertical-align:top}
+.prop-facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:6px 0 18px}.prop-facts div{border:1px solid #d7d7d7;padding:10px 12px}.prop-facts dt{font-size:12px;font-weight:900;letter-spacing:.1em;color:var(--presentation-blue);text-transform:uppercase}.prop-facts dd{margin:4px 0 0;font-weight:700}.prop-facts a{color:var(--presentation-blue);text-decoration:underline}
+.prop-ul{margin:0 0 12px;padding-left:20px;font-weight:600;line-height:1.6}.prop-mini,.mini-more{color:var(--presentation-muted);font-size:14px;font-weight:600}
+.prop-toc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}.prop-toc a{border:1.5px solid var(--presentation-ink);padding:5px 10px;font-weight:800;font-size:14px;background:#fff}.prop-toc small{color:var(--presentation-blue)}
+.prop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:0 24px}
+pre{white-space:pre-wrap;word-break:break-word;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;background:#f4f5f7;border:1px solid #d7d7d7;padding:12px;margin:0;max-height:420px;overflow:auto}
+</style></head><body class="presentation-body"><main>
+<section class="presentation-section"><header class="presentation-section-head"><span class="eyebrow">PROPOSITION</span><h2>La page de présentation, lisible par les IA.</h2>
+<p>Même design, même FAQ, mêmes boutons. Ce qui change est surtout <b>invisible</b> : la page dit les choses dans son HTML (au lieu de les fabriquer en JavaScript), et le contenu des versions est plus complet.</p></header>
+<div class="prop-box"><h3>Le problème aujourd’hui</h3>
+<table class="prop-t"><thead><tr><th>Ce qu’on voit</th><th>Ce qu’une IA ou un moteur de recherche lit</th><th>Proposé</th></tr></thead><tbody>
+<tr><td>La FAQ (931 questions)</td><td><b>Rien</b> : la page charge faq-data.js (570 Ko) et l’écrit en JavaScript ; sans JavaScript, la boîte est vide.</td><td>PHP écrit les questions dans la page (mêmes classes, même style) ; le JavaScript ne fait plus que la recherche.</td></tr>
+<tr><td>La version, sa date, sa taille, les systèmes</td><td>Du texte éparpillé, sans date de sortie.</td><td>Une fiche par version : date, taille, systèmes, langues, empreintes, liens.</td></tr>
+<tr><td>Ce qu’est l’app</td><td>À deviner.</td><td>Données structurées (schema.org) : application gratuite, version, systèmes, licence, téléchargements.</td></tr>
+<tr><td>—</td><td>Aucun fichier pour les IA.</td><td><code>llms.txt</code> (le résumé du site) et <code>llms-full.txt</code> (toute la FAQ en texte), <code>robots.txt</code>, <code>sitemap.xml</code>.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="presentation-section" id="versions"><header class="presentation-section-head"><span class="eyebrow">APERÇU 1 — LES VERSIONS</span><h2>Chaque version, sa fiche.</h2><p>Le même bloc « Nouveautés » qui s’ouvre et se ferme ; dedans, d’abord l’essentiel en un coup d’œil, puis le détail d’aujourd’hui.</p></header>
+<details class="presentation-changes" open id="v0-10-0"><summary><span>Nouveautés de la version 0.10.0<small>Sortie le 22 novembre 2026 · Atelier de transcription, lecture des actes par une IA sur votre ordinateur, documents en plusieurs pages…</small></span></summary>
+<div class="presentation-changes-body">
+<dl class="prop-facts"><div><dt>Sortie</dt><dd><time datetime="2026-11-22">22 novembre 2026</time></dd></div><div><dt>Systèmes</dt><dd>macOS 11+ (Apple Silicon, Intel), Windows 10/11, Linux (x64, ARM)</dd></div><div><dt>Taille</dt><dd>550 à 600 Mo</dd></div><div><dt>Langues</dt><dd>32</dd></div><div><dt>Mise à jour de la base</dt><dd>Toute seule, copie de sécurité avant</dd></div><div><dt>Vérifier</dt><dd><a href="#">SHA256SUMS.txt</a> · <a href="#">notes complètes</a></dd></div></dl>
+<h4>En bref</h4><ul class="prop-ul"><li>📜 L’Atelier de transcription : un seul texte par document, partout.</li><li>🔍 Les actes lus par une IA <b>sur votre ordinateur</b> (rien ne part sur Internet).</li><li>📑 Les documents en plusieurs pages (recto, verso, annexes).</li><li>📱 Les photos du téléphone par le wifi ; 🖧 plusieurs ordinateurs.</li><li>⚡ Jusqu’à 500 000 personnes.</li></ul>
+<h4>Pour qui ?</h4><p>Tous ; surtout ceux qui transcrivent des actes et ceux qui ont de très grosses bases.</p>
+<h4>À savoir avant de mettre à jour</h4><p>Faites une sauvegarde (Réglages → Sauvegarde) : une base ouverte par la 0.10.0 ne se rouvre pas dans une version plus ancienne. La lecture par l’IA demande Ollama et assez de mémoire (Réglages → IA le vérifie).</p>
+<h4>Le détail</h4><p class="prop-mini">… les paragraphes d’aujourd’hui (📜 Atelier, 🔍 Lecture approfondie, 🪄 Corrections…), sans changement.</p>
+</div></details>
+<details class="presentation-changes presentation-changes-old" open><summary><span>Nouveautés des anciennes versions<small>Chacune avec sa date et son « en bref »</small></span></summary><div class="presentation-changes-body">
+<details class="presentation-version" id="v0-9-2"><summary>Version 0.9.2 <small>Sortie le 13 novembre 2026 · L’app en 32 langues, premier lancement guidé, archives en ligne réunies…</small></summary><div class="presentation-version-body"><ul class="prop-ul"><li>🌐 32 langues</li><li>🧭 Premier lancement guidé, base d’exemple</li><li>🔍 132 sites d’archives dans une seule fenêtre</li></ul></div></details>
+<details class="presentation-version" id="v0-9-1"><summary>Version 0.9.1 <small>Date · en bref</small></summary></details></div></details>
+<div class="prop-box"><h3>Et en plus, sous les versions</h3><table class="prop-t"><tbody><tr><td><b>Tableau des versions</b></td><td>Une ligne par version : numéro, date, l’essentiel en une phrase, lien vers sa fiche (#v0-10-0). Lisible d’un coup par une personne et par une IA.</td></tr><tr><td><b>Lien direct</b></td><td>Chaque version a son ancre : « …php#v0-9-2 » s’ouvre dépliée.</td></tr><tr><td><b>Le même texte partout</b></td><td>La fiche vient de <code>release-notes/vX.md</code> (déjà utilisé pour GitHub) : un seul endroit à écrire.</td></tr></tbody></table></div>
+</section>
+
+<section class="presentation-section" id="faq"><header class="presentation-section-head"><span class="eyebrow">APERÇU 2 — LA FAQ</span><h2>Questions fréquentes.</h2><p>Exactement la même boîte, la même recherche ; mais les 931 questions sont dans le HTML.</p></header>
+<div class="presentation-faq-box"><h3>Questions fréquentes</h3><input class="presentation-faq-search" type="search" placeholder="🔎 Pose ta question : comment faire un livre de famille en PDF ?" aria-label="Rechercher dans la FAQ"><p class="presentation-faq-hint">931 questions, par thème.</p>
+<nav class="prop-toc" aria-label="Thèmes de la FAQ"><a href="#faq-0">Fiches <small>97</small></a><a href="#faq-1">Graphiques et statistiques <small>359</small></a><a href="#faq-2">Recherche <small>71</small></a><a href="#faq-3">Lieux et cartes <small>83</small></a><a href="#faq-4">Documents <small>138</small></a><a href="#faq-5">Sauvegarde et partage <small>107</small></a><a href="#faq-6">Import et export <small>76</small></a></nav>
+<div class="presentation-faq-cat" id="faq-0"><h3>Fiches<small>97 QUESTIONS</small></h3><details class="presentation-faq-item" id="q-0-0"><summary>Que veut dire la note « 🛡 Fiabilité » d’une fiche ?</summary><p>Une note sur 100 : la fiabilité de chaque fait (une date « vers… » compte comme estimée), la part des faits qui ont une source, et la 🛡 solidité du lien avec chaque parent. Le bloc « 🛡 Fiabilité » de la fiche donne ses raisons et comment gagner des points. Sous 50 (Réglages → ⚙️ Seuils du contrôle), la fiche est « à revoir avant publication » : filtre et colonne dans Listes → Personnes, widget « 🛡 Fiches les moins fiables ».</p></details><details class="presentation-faq-item" id="q-0-1"><summary>Comment noter les maladies et les causes de décès connues dans la famille (🩺 Santé de la famille) ?</summary><p>C’est caché au départ, parce que c’est privé : Réglages → Données → « 🩺 Santé de la famille » → « Montrer ». Sur la fiche, le bloc « 🩺 Santé » (rangé comme les autres blocs) : « ＋ Ajouter » une maladie, un handicap, une cause de décès ou une épidémie traversée, avec sa date (comme dans un acte), sa source, une note et « À vérifier ». La cause écrite sur l’acte de décès y apparaît toute seule, et les épidémies de son vivant (« 🌍 Le monde autour ») se notent d’un clic. Toute la famille : Listes → « 🩺 Santé de la famille ». C’est de la mémoire familiale : l’app ne donne aucun conseil et ne calcule aucun risque.</p></details><details class="presentation-faq-item" id="q-0-2"><summary>Comment voir une maladie dans les branches de la famille ?</summary><p>Listes → « 🩺 Santé de la famille » → onglet « 🌳 Par branches » (ou le bouton « 🌳 Par branches » du bloc 🩺 de la fiche) : choisis la personne du centre et la maladie avec le menu de choix. L’éventail des ancêtres colore ceux chez qui elle est notée ; « Les quatre côtés » range ces personnes du côté de chaque grand-parent. Seulement des nombres de personnes, jamais un pourcentage.</p></details><p class="mini-more">… et les autres questions du thème, toutes écrites dans la page.</p></div><div class="presentation-faq-cat" id="faq-1"><h3>Graphiques et statistiques<small>359 QUESTIONS</small></h3><details class="presentation-faq-item" id="q-1-0"><summary>Comment animer une carte ou un graphique à travers le temps (Studio d’animation) ?</summary><p>Outils de modification → « 🎞 Studio d’animation », ou « 🎞 Animer » sous un diagramme daté. Un film est fait de scènes (titre, diagramme, migrations de la famille, course des noms, pyramide qui vit, courbe qui se dessine, arbre qui pousse, frontières qui changent) posées sur une ligne de temps : la caméra, les légendes, la musique et ta voix se règlent scène par scène. « ⤓ Exporter » fabrique une vidéo (WebM ou MP4), un GIF, des images ou des sous-titres ; « 🎬 Continuer dans le Montage vidéo » envoie le film au montage.</p></details><details class="presentation-faq-item" id="q-1-1"><summary>Comment montrer les frontières de la France qui changent au fil du temps ?</summary><p>Studio d’animation → modèle « 🏛 Frontières qui changent » (ou « ＋ Scène » → « Les frontières qui changent ») : la France de 1760 à aujourd’hui, année par année (Lorraine, Corse, Révolution et Empire, 1815, Savoie et Nice en 1860, Alsace-Moselle de 1871 à 1918), avec les dates qui comptent. Réglages : cadrage, couleurs, années. Ce sont des frontières approchées, dessinées d’après les limites d’aujourd’hui.</p></details><details class="presentation-faq-item" id="q-1-2"><summary>L’app peut-elle me proposer le bon diagramme (« Je veux représenter… ») ?</summary><p>Oui : dans « Nouveau diagramme », écris ce que tu veux montrer (« les prénoms les plus donnés », « d’où venaient les gens »…) puis « Proposer ». L’app propose trois diagrammes faits avec ta base, le plus adapté en premier ; « Faire ce diagramme » l’ouvre dans l’éditeur.</p></details><p class="mini-more">… et les autres questions du thème, toutes écrites dans la page.</p></div><div class="presentation-faq-cat" id="faq-2"><h3>Recherche<small>71 QUESTIONS</small></h3><details class="presentation-faq-item" id="q-2-0"><summary>Comment suivre la loi de l’époque, les droits et les héritiers d’une succession ?</summary><p>Dans un dossier de succession, onglet « ⚖️ Droit et parts » : la loi de l’époque du décès (avant ou après 2002, 1972…), la filiation, les successions en cascade (un héritier mort après le défunt), le régime matrimonial, le testament et les donations (réserve, quotité disponible), une estimation des droits et des délais, et un défunt lié à l’étranger. Les montants ne sont jamais gardés. L’onglet « 🗂 Suivi des héritiers » range chaque héritier par étape, avec ses sources et sa prochaine relance.</p></details><details class="presentation-faq-item" id="q-2-1"><summary>Comment ouvrir un dossier de succession pas à pas ?</summary><p>Successions → « 🧭 Pas à pas » : 1. la personne décédée (le dossier s’ouvre, « ↶ Annuler » le supprime), 2. la famille trouvée, 3. les doutes (vivant au décès ou non, un clic), 4. les héritiers et leurs parts.</p></details><details class="presentation-faq-item" id="q-2-2"><summary>Comment comparer mon calcul avec l’acte de notoriété du notaire ?</summary><p>Onglet « ⚖️ Droit et parts » → « 📄 Comparer avec l’acte de notoriété » : colle la liste des héritiers de l’acte (un par ligne, avec sa part : « 1/4 », « 25 % », « la moitié »). L’app dit pour chacun « pareil », « différent » ou « pas dans l’acte », et montre ceux de l’acte qu’elle n’a pas trouvés.</p></details><p class="mini-more">… et les autres questions du thème, toutes écrites dans la page.</p></div></div>
+<div class="prop-box"><h3>Ce qui change dans le code (rien à l’écran)</h3><ul class="prop-ul"><li>PHP lit la FAQ (le même fichier que l’app) et écrit chaque thème et chaque question en <code>&lt;details&gt;</code> ; chaque question a son ancre (<code>#q-3-12</code>).</li><li>Un sommaire des thèmes (liens), en haut de la boîte.</li><li>La recherche JavaScript reste, elle cache et montre les questions déjà là.</li><li>Les accents, guillemets et émojis restent du vrai texte (pas d’images).</li></ul></div>
+</section>
+
+<section class="presentation-section"><header class="presentation-section-head"><span class="eyebrow">APERÇU 3 — POUR LES IA</span><h2>Ce que la page dit d’elle-même.</h2><p>Invisible pour les visiteurs ; lu par les moteurs de recherche et les assistants IA.</p></header>
+<div class="prop-grid"><div class="prop-box"><h3>Dans la page : l’application (schema.org)</h3><pre>&lt;script type=&quot;application/ld+json&quot;&gt;
+{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;SoftwareApplication&quot;,
+  &quot;name&quot;: &quot;LCNDA — Le Carnet numérique des ancêtres&quot;,
+  &quot;applicationCategory&quot;: &quot;Généalogie&quot;,
+  &quot;operatingSystem&quot;: &quot;macOS, Windows, Linux&quot;,
+  &quot;softwareVersion&quot;: &quot;0.10.0&quot;,
+  &quot;datePublished&quot;: &quot;2026-11-22&quot;,
+  &quot;license&quot;: &quot;https://www.gnu.org/licenses/agpl-3.0.html&quot;,
+  &quot;isAccessibleForFree&quot;: true,
+  &quot;offers&quot;: {
+    &quot;@type&quot;: &quot;Offer&quot;,
+    &quot;price&quot;: &quot;0&quot;,
+    &quot;priceCurrency&quot;: &quot;EUR&quot;
+  },
+  &quot;inLanguage&quot;: [
+    &quot;fr&quot;,
+    &quot;en&quot;,
+    &quot;es&quot;,
+    &quot;de&quot;,
+    &quot;it&quot;,
+    &quot;pt&quot;,
+    &quot;pl&quot;,
+    &quot;nl&quot;,
+    &quot;…&quot;
+  ],
+  &quot;downloadUrl&quot;: [
+    &quot;download/LCNDA-0.10.0-mac-arm64.dmg&quot;,
+    &quot;download/LCNDA-0.10.0-windows-x64.exe&quot;,
+    &quot;download/LCNDA-0.10.0-linux-x86_64.AppImage&quot;
+  ],
+  &quot;releaseNotes&quot;: &quot;carnet-numerique-des-ancetres.php#v0-10-0&quot;,
+  &quot;description&quot;: &quot;Application locale (rien sur Internet) pour organiser, documenter et transmettre une généalogie : fiches, sources, arbres, cartes, transcription des actes, successions.&quot;
+}
+&lt;/script&gt;</pre></div>
+<div class="prop-box"><h3>Dans la page : la FAQ (schema.org)</h3><pre>{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;FAQPage&quot;,
+  &quot;mainEntity&quot;: [
+    {
+      &quot;@type&quot;: &quot;Question&quot;,
+      &quot;name&quot;: &quot;Que veut dire la note « 🛡 Fiabilité » d’une fiche ?&quot;,
+      &quot;acceptedAnswer&quot;: {
+        &quot;@type&quot;: &quot;Answer&quot;,
+        &quot;text&quot;: &quot;Une note sur 100 : la fiabilité de chaque fait (une date « vers… » compte comme estimée), la part des faits qui ont une source, et la 🛡 solidité du lien avec ch…&quot;
+      }
+    },
+    &quot;… une entrée par question …&quot;
+  ]
+}</pre><p class="prop-mini">Fabriqué par PHP depuis la même FAQ ; les réponses en texte simple.</p></div>
+<div class="prop-box"><h3>À la racine : llms.txt</h3><pre># LCNDA — Le Carnet numérique des ancêtres
+
+&gt; Application de généalogie gratuite (AGPL-3.0) qui fonctionne sur l&#x27;ordinateur, sans compte ni nuage :
+&gt; fiches, sources, arbres, cartes, transcription des actes (aussi par une IA locale), successions. 32 langues.
+
+## L&#x27;essentiel
+- [Présentation et téléchargement](carnet-numerique-des-ancetres.php) : version 0.10.0 du 22/11/2026, macOS, Windows, Linux
+- [Nouveautés de chaque version](carnet-numerique-des-ancetres.php#versions)
+- [FAQ complète, en texte](llms-full.txt) : 931 questions et réponses, par thème
+
+## Optionnel
+- [Code source](https://github.com/victorbaissait/lcnda)
+- [English version](carnet-numerique-des-ancetres-en.php)</pre><p class="prop-mini"><code>llms-full.txt</code> : toute la FAQ en texte (« ## Thème », « ### Question », réponse), fabriqué par <code>scripts/build-faq-data.js</code> en même temps que faq-data.js.</p></div>
+<div class="prop-box"><h3>À la racine : robots.txt et sitemap.xml</h3><pre>User-agent: *
+Allow: /
+Sitemap: https://…/sitemap.xml
+
+# sitemap.xml : la page FR, la page EN (hreflang),
+# llms.txt, llms-full.txt</pre></div></div>
+<div class="prop-box"><h3>Ce que tu décides</h3><table class="prop-t"><tbody><tr><td>☑</td><td>La FAQ écrite dans la page (PHP), sommaire des thèmes, une ancre par question</td></tr><tr><td>☑</td><td>Une fiche par version (date, systèmes, taille, en bref, pour qui, à savoir), tableau des versions, ancres</td></tr><tr><td>☑</td><td>schema.org (application + FAQ), llms.txt, llms-full.txt, robots.txt, sitemap.xml</td></tr><tr><td>☑</td><td>Pareil sur la page anglaise</td></tr></tbody></table><p class="prop-mini">Réponds « vas-y » ou dis ce qu’il faut changer.</p></div>
+</section></main></body></html>
