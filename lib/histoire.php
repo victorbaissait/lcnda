@@ -600,7 +600,8 @@ function hist_fhmd_get(string $name): string
         if (!is_file($f)) { throw new RuntimeException(i18n_t('Table introuvable chez frdata.org.')); }
         return (string) file_get_contents($f);
     }
-    return hist_http_get(HIST_FHMD_BASE . $name, null, 2 * 1024 * 1024, 'frdata.org');
+    // frdata.org nomme ses fichiers sans le zéro de tête : « 1M.txt » pour l'Ain (« 01M.txt » n'existe pas)
+    return hist_http_get(HIST_FHMD_BASE . ltrim(substr($name, 0, 2), '0') . substr($name, 2), null, 2 * 1024 * 1024, 'frdata.org');
 }
 
 /** une table 5×5 de frdata.org → [période => q5] (5q0 = 1 − l5 / l0, colonnes « Year;Age;…;lx ») */
@@ -673,7 +674,7 @@ function hist_http_get(string $url, ?array $range, int $max, string $what): stri
         unset($ch);
         if ($too) { throw new RuntimeException(i18n_t('Réponse trop grosse du serveur {what}.', ['what' => $what])); }
         if (in_array($code, [301, 302, 303, 307, 308], true) && $loc !== '') { $url = link_absolute_url($url, $loc); continue; }
-        if ($code === 404) { throw new RuntimeException(i18n_t('Pas encore en ligne sur {what} : réessaie plus tard.', ['what' => $what])); }
+        if ($code === 404) { throw new RuntimeException($what === 'frdata.org' ? i18n_t('frdata.org n’a pas de table pour ce département.') : i18n_t('Pas encore en ligne sur {what} : réessaie plus tard.', ['what' => $what])); }
         if ($code < 200 || $code >= 300) { throw new RuntimeException($err !== '' ? i18n_t('Pas de connexion à {what} : {err}', ['what' => $what, 'err' => $err]) : i18n_t('{what} répond {code}.', ['what' => $what, 'code' => (string) $code])); }
         return $body;
     }
