@@ -52,8 +52,23 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Bibliothèques (20CR)
-        run: pip install netCDF4
+      - name: Bibliothèques (20CR, ERA5)
+        run: pip install netCDF4 cdsapi
+
+      # ERA5 (Copernicus, 1940 → aujourd'hui) seulement si la clé est dans les secrets du dépôt (Settings → Secrets → Actions →
+      # CDSAPI_KEY) ; sans elle : --sans-era5. La clé n'est jamais écrite dans le journal.
+      - name: Clé Copernicus (ERA5)
+        id: era5
+        env:
+          CDSAPI_KEY: ${{ secrets.CDSAPI_KEY }}
+        run: |
+          if [ -n "$CDSAPI_KEY" ] && case "${{ steps.q.outputs.quoi }}" in monde-*) false;; *) true;; esac; then
+            umask 077
+            printf 'url: https://cds.climate.copernicus.eu/api\nkey: %s\n' "$CDSAPI_KEY" > "$HOME/.cdsapirc"
+            echo "opt=" >> "$GITHUB_OUTPUT"; echo "ERA5 : clé trouvée"
+          else
+            echo "opt=--sans-era5" >> "$GITHUB_OUTPUT"; echo "ERA5 : pas de clé (ou pack du monde) → sans ERA5"
+          fi
 
       - name: Reprendre le travail déjà fait
         uses: actions/cache/restore@v4
@@ -66,7 +81,7 @@ jobs:
         id: build
         run: |
           set +e
-          timeout 19200 python3 scripts/meteo/build-meteo.py "${{ steps.q.outputs.quoi }}" --sans-era5 --dossier meteo-sortie
+          timeout 19200 python3 scripts/meteo/build-meteo.py "${{ steps.q.outputs.quoi }}" ${{ steps.era5.outputs.opt }} --dossier meteo-sortie
           rc=$?
           if [ $rc -eq 0 ]; then echo "fini=oui" >> "$GITHUB_OUTPUT"; exit 0; fi
           if [ $rc -eq 124 ]; then echo "fini=non" >> "$GITHUB_OUTPUT"; exit 0; fi
