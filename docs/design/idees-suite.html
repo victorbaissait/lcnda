@@ -1,0 +1,197 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Idées pour la suite</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8;--parch:#e8d6ae;--parch-ink:#4a3218;--stage:#3a3d44}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b;--parch:#c9b48a;--parch-ink:#2e1f0e;--stage:#0d0f12}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green);background:var(--green-bg)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.vio{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wide{grid-column:1 / -1}
+.grid>*,.grid3>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0;font-size:12px}
+.meta span{border:1.5px solid var(--line2);padding:2px 7px;background:var(--grey-bg)}
+.meta .p1{border-color:var(--red);color:var(--red);background:var(--red-bg);font-weight:800}
+.meta .p2{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg);font-weight:800}
+.meta .p3{border-color:#8a8f99;color:var(--muted);font-weight:800}
+.why{font-size:13px;margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.input{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;background:var(--paper);min-height:28px;display:inline-flex;align-items:center;color:var(--ink)}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:4px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.tg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px}.tg i{width:30px;height:17px;border-radius:9px;background:var(--blue);position:relative;flex:none}.tg i:after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.tg.off i{background:var(--line2)}.tg.off i:after{right:auto;left:2px}
+.scrollx{overflow-x:auto;max-width:100%}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.scrollx>table{min-width:720px}
+/* gabarit */
+.fld{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:6px 8px;font-size:12.5px;align-items:center}
+.fld .k{color:var(--muted)}
+.fld .v{border:1.5px solid var(--line2);padding:3px 7px;background:var(--paper);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld .v.empty{color:var(--soft);font-style:italic;border-style:dashed}
+.fld .v.got{border-color:var(--green);background:var(--green-bg)}
+/* documents liés */
+.doc{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--shadow);padding:12px 14px;min-width:0}
+.doc h3{margin:0 0 6px;font-size:16px}
+.blk{border-top:1.5px solid var(--line2);padding-top:8px;margin-top:10px}
+.blk h4{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lk{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line2);font-size:13px}
+.common{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.learn{font-size:13px;margin:4px 0;padding:6px 8px;background:var(--blue-bg);border-left:3px solid var(--blue)}
+.toc{list-style:none;margin:0;padding:0;font-size:13px}
+.toc li{display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px dashed var(--line2)}
+.toc li.sub{padding-left:22px}
+.toc .rng{color:var(--muted);font-variant-numeric:tabular-nums;min-width:86px}
+.strip{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.strip span{width:26px;height:34px;border:1.5px solid var(--line2);background:var(--grey-bg);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px}
+.strip span.c1{background:var(--blue-bg);border-color:var(--blue)}.strip span.c2{background:var(--green-bg);border-color:var(--green)}.strip span.c3{background:var(--yel-bg);border-color:var(--yel)}
+.dq{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 16px;margin:14px 0;max-width:1000px}
+.dq h3{margin:0 0 8px;font-size:16px}
+.opt{border-left:4px solid var(--line2);padding:6px 10px;margin:6px 0;font-size:13px}
+.opt.rec{border-left-color:var(--blue);background:var(--blue-bg)}
+.opt b{display:block}
+@media (max-width:820px){.grid{grid-template-columns:1fr}body{padding:16px}}
+
+/* registres : état des pages */
+.pmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:3px;margin:8px 0}
+.pmap span{height:38px;border:1.5px solid var(--line2);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px;background:var(--grey-bg);color:var(--muted);position:relative}
+.pmap .s-fin{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.pmap .s-relue{background:#e3eeff;border-color:var(--blue);color:var(--blue-ink)}
+.pmap .s-cours{background:var(--yel-bg);border-color:var(--yel);color:var(--yel-ink)}
+.pmap .s-todo{background:var(--paper)}
+.pmap .s-abs{background:repeating-linear-gradient(135deg,var(--red-bg) 0 4px,var(--paper) 4px 8px);border-color:var(--red);border-style:dashed;color:var(--red)}
+.pmap .s-pasligne{background:repeating-linear-gradient(135deg,var(--vio-bg) 0 4px,var(--paper) 4px 8px);border-color:var(--vio);border-style:dashed;color:var(--vio)}
+.pmap .s-blank{background:var(--paper);border-style:dotted;color:var(--soft)}
+.pmap .s-cur{outline:3px solid var(--ink);outline-offset:1px}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;margin:6px 0}
+.leg i{display:inline-block;width:14px;height:14px;border:1.5px solid var(--line2);vertical-align:-3px;margin-right:4px}
+.stack{display:flex;height:16px;border:2px solid var(--ink);margin:6px 0;overflow:hidden}
+.stack b{display:block;height:100%}
+.stack .a{background:var(--green)}.stack .b{background:var(--blue)}.stack .c{background:var(--yel)}.stack .d{background:var(--line2)}.stack .e{background:repeating-linear-gradient(135deg,var(--red) 0 3px,var(--red-bg) 3px 6px)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0}
+.kpi div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px}
+.kpi b{display:block;font-size:22px;line-height:1.1}.kpi small{color:var(--muted);font-size:12px}
+.todo{list-style:none;margin:0;padding:0;font-size:13px}
+.todo li{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--line2)}
+.todo li b{min-width:28px;text-align:right}
+.tree{list-style:none;margin:0;padding:0;font-size:13px}
+.tree li{padding:0}
+.tree .ln{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:6px;align-items:center;padding:5px 0;border-bottom:1px dashed var(--line2)}
+.tree ul{list-style:none;margin:0;padding:0 0 0 22px}
+.tree .tw{font:700 12px system-ui;color:var(--muted);text-align:center;border:1.5px solid var(--line2);height:20px;line-height:17px}
+.tree .rng{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px;margin-right:6px}
+.tree .el{color:var(--muted);font-style:italic}
+.minibar{display:inline-flex;width:70px;height:8px;border:1.5px solid var(--ink);vertical-align:middle;overflow:hidden}.minibar b{display:block;height:100%}
+.ft td:has(.minibar){white-space:nowrap}.ft td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.ft tr.grp td{background:var(--grey-bg);font-weight:800;border-bottom:2px solid var(--ink)}
+.ft tr.fonds td{font-weight:700}
+.idf{display:grid;grid-template-columns:170px minmax(0,1fr);gap:6px 10px;font-size:13px}
+.idf .k{color:var(--muted)}
+.hist{display:flex;align-items:flex-end;gap:2px;height:70px;border-bottom:2px solid var(--ink);margin:6px 0 2px}
+.hist i{flex:1;background:var(--blue);min-height:2px}.hist i.gap{background:repeating-linear-gradient(135deg,var(--red) 0 3px,transparent 3px 6px);height:100%!important;opacity:.6}
+.hx{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.chk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;font-size:12.5px}
+@media (max-width:820px){.grid,.grid3{grid-template-columns:minmax(0,1fr)}.idf{grid-template-columns:minmax(0,1fr)}.chk{grid-template-columns:minmax(0,1fr)}body{padding:14px}}
+
+.idea{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;box-shadow:4px 4px 0 var(--shadow);margin:0 0 10px}
+.idea h4{margin:0 0 4px;font-size:15px}.idea p{margin:4px 0;font-size:13.5px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.pr{font:700 10.5px system-ui;padding:2px 6px;border:1.5px solid;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.pr.a{color:var(--green);background:var(--green-bg)}.pr.b{color:var(--blue-ink);background:var(--blue-bg)}.pr.c{color:var(--muted);background:var(--grey-bg)}
+table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--paper)}table.t td,table.t th{border:1px solid var(--line2);padding:5px 7px;text-align:left;vertical-align:top}table.t th{background:var(--grey-bg)}
+.ask{border:2px solid var(--ink);background:var(--paper);padding:12px;box-shadow:6px 6px 0 var(--shadow);max-width:900px}
+.ask .in{border:2px solid var(--blue);padding:9px 12px;font-size:15px;margin-bottom:10px}
+.sugg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sugg>div{border:2px solid var(--line2);padding:8px}.sugg>div.on{border-color:var(--blue)}
+.sugg .pv{height:70px;display:flex;align-items:flex-end;gap:3px;margin-bottom:6px;background:var(--grey-bg);padding:6px}.sugg .pv b{flex:1;background:var(--blue)}
+.boxes{display:flex;flex-wrap:wrap;gap:12px}.bx{width:150px;font-size:12px;text-align:center}
+.bx .c{height:74px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-bottom:4px;padding:4px;color:#111}
+@media (max-width:700px){.sugg{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<h1>💡 Idées pour la suite — diagrammes, successoral, transcription, recueils et documents</h1>
+<p class="sub">Propositions (rien n’est fait). Chaque idée a une priorité : <span class="pr a">à faire d’abord</span> <span class="pr b">ensuite</span> <span class="pr c">plus tard</span>. Tout a été comparé avec ce qui existe déjà dans l’app.</p>
+<div class="toc"><a href="#d1"><b>1</b>Diagrammes manquants</a><a href="#d2"><b>2</b>« Je veux représenter… »</a><a href="#d3"><b>3</b>Successoral</a><a href="#d4"><b>4</b>Transcription</a><a href="#d5"><b>5</b>Recueils et documents</a><a href="#d6"><b>6</b>Frontières anciennes</a><a href="#d7"><b>7</b>Cases des arbres</a><a href="#d8"><b>8</b>Fonds de carte</a></div>
+
+<div class="part" id="d1">Partie 1</div><h2>Les 60 diagrammes du « Data Viz Catalogue » : 42 existent, 10 en partie, 8 manquent</h2>
+<p class="sub">Comparé avec la liste de ta capture. Il existe déjà notamment : arcs, aires, barres, boîte à moustaches, carte mentale, bulles, cartes à symboles, calendrier, chandeliers, accord, choroplèthe, bulles groupées, flux, Gantt, chaleur, histogramme, Marimekko, réseau, rose de Nightingale, coordonnées parallèles, pictogrammes, pyramide, radar, barres en cercle, Sankey, spirale, courants, soleil, frise, arbres, carte proportionnelle, Venn, violon, nuage de mots. Voici ce qui manque ou n’existe qu’en partie, avec l’usage en généalogie :</p>
+<table class="t"><tr><th>Diagramme</th><th>Aujourd’hui</th><th>Pour quoi faire</th><th>Priorité</th></tr>
+<tr><td><b>Ensembles parallèles</b></td><td>NON</td><td>origine → métier → lieu de décès en bandes : « qui devient quoi, et où »</td><td><span class="pr a">d’abord</span></td></tr><tr><td><b>Barres d’erreur / dates incertaines</b></td><td>PARTIEL</td><td>les dates « vers 1750 », « avant 1802 » dessinées avec leur marge (barre ou trait flou) sur les frises et les courbes</td><td><span class="pr a">d’abord</span></td></tr><tr><td><b>Barres de durée (span)</b></td><td>PARTIEL</td><td>une barre par vie (naissance → décès), triée, avec la durée : il y a « Haltères », il manque la vraie frise des vies</td><td><span class="pr a">d’abord</span></td></tr><tr><td><b>Densité</b></td><td>PARTIEL</td><td>la courbe lissée des âges au décès, des âges au mariage, à part (aujourd’hui dans Vagues et Violon seulement)</td><td><span class="pr b">ensuite</span></td></tr><tr><td><b>Tige et feuilles</b></td><td>NON</td><td>les âges au décès écrits en tige et feuilles : amusant, très lisible pour un relevé de registre</td><td><span class="pr b">ensuite</span></td></tr><tr><td><b>Bâtons (tally)</b></td><td>NON</td><td>compter à la main en barrant (|||| ) : le relevé d’un registre page par page</td><td><span class="pr b">ensuite</span></td></tr><tr><td><b>Cordes sans rubans</b></td><td>NON</td><td>les liens entre familles (mariages entre noms) en simples traits : plus clair que l’accord quand il y a beaucoup de noms</td><td><span class="pr b">ensuite</span></td></tr><tr><td><b>Points (unités)</b></td><td>PARTIEL</td><td>un point = une personne, coloré (sexe, âge), groupés par décennie</td><td><span class="pr b">ensuite</span></td></tr><tr><td><b>Aire proportionnelle</b></td><td>PARTIEL</td><td>des carrés dont la surface dit le nombre (naissances par commune)</td><td><span class="pr c">plus tard</span></td></tr><tr><td><b>Colonnes en cercle</b></td><td>PARTIEL</td><td>les 12 mois ou les 24 heures en colonnes autour d’un cercle (naissances par mois)</td><td><span class="pr c">plus tard</span></td></tr><tr><td><b>Aire empilée (vraie)</b></td><td>PARTIEL</td><td>comme les courants empilés, mais posée sur une ligne droite</td><td><span class="pr c">plus tard</span></td></tr><tr><td><b>Schéma pas à pas (flow chart)</b></td><td>PARTIEL</td><td>un schéma fait à partir d’une liste écrite (« si… alors… ») : démarches, chemin d’une recherche</td><td><span class="pr c">plus tard</span></td></tr><tr><td><b>Image annotée</b></td><td>NON</td><td>une photo (maison, tombe, acte) avec des flèches et des légendes numérotées</td><td><span class="pr b">ensuite</span></td></tr><tr><td><b>Emploi du temps</b></td><td>NON</td><td>une semaine type, l’horaire d’une ferme ou d’une usine d’autrefois</td><td><span class="pr c">plus tard</span></td></tr><tr><td><b>Kagi, Point et figure, Ouverture-haut-bas-clôture</b></td><td>NON</td><td>des graphiques de bourse : peu utiles en généalogie, je ne les propose pas</td><td><span class="pr c">plus tard</span></td></tr></table>
+
+<div class="part" id="d2">Partie 2</div><h2>« 💬 Je veux représenter… » : demander un diagramme en français</h2>
+<p class="sub">Dans Diagrammes, une case où l’on écrit sa question. L’app comprend les mots (sans intelligence artificielle par défaut : une liste de mots et de sujets ; avec l’IA si elle est réglée) et propose 3 diagrammes, avec un aperçu fait sur tes données et la raison du choix.</p>
+<div class="ask"><div class="in">💬 Je veux voir d’où viennent les gens qui se sont mariés à Sancoins entre 1800 et 1850</div>
+<p class="mini">Compris : <span class="badge blue">mariages</span> <span class="badge blue">lieu : Sancoins</span> <span class="badge blue">1800 → 1850</span> <span class="badge blue">d’où viennent → lieu de naissance</span> — <a>changer</a></p>
+<div class="sugg"><div class="on"><div class="pv" style="background:linear-gradient(135deg,#c9d8b0,#9fbf8f)"></div><b>🧭 Carte des flux</b><br><small>les lieux de naissance reliés à Sancoins : idéal pour « d’où viennent »</small><br><span class="btn small blue">Faire ce diagramme</span></div>
+<div><div class="pv"><b style="height:90%"></b><b style="height:60%"></b><b style="height:40%"></b><b style="height:25%"></b></div><b>📊 Barres</b><br><small>les communes classées, la plus fréquente en haut</small><br><span class="btn small">Faire</span></div>
+<div><div class="pv" style="background:radial-gradient(circle,#c9d6f5,#eef4ff)"></div><b>🎯 Distances</b><br><small>à quelle distance se mariait-on : 0-5 km, 5-20 km…</small><br><span class="btn small">Faire</span></div></div>
+<p class="mini">Exemples proposés sous la case : « l’âge au décès selon le siècle », « les prénoms les plus donnés dans ma famille », « qui a eu le plus d’enfants », « les métiers de père en fils ».</p></div>
+
+<div class="part" id="d3">Partie 3</div><h2>⚖️ Généalogie successorale : plus complet, plus fluide</h2>
+<p class="sub">Aujourd’hui (regardé dans le code) : les 4 ordres d’héritiers, le conjoint, la représentation, la fente, l’adoption, des hypothèses (jusqu’à 16), parts exactes, arbre de dévolution, pièces, courriers, factures, tout avec ↶ Annuler. Ce qui manque :</p>
+<div class="ideas"><div class="idea"><h4>⚖️ La loi de l’époque du décès<span class="pr a">à faire d’abord</span></h4><p>Aujourd’hui : la loi actuelle pour tous, avec un simple avertissement avant 2002. Proposé : choisir « la loi au jour du décès » — avant 2002 (conjoint en usufruit, sans réserve), avant 1972 (enfants « naturels » à part réduite), avant 1891… Les parts changent, l’app explique pourquoi.</p></div><div class="idea"><h4>📜 Testament et donations<span class="pr a">à faire d’abord</span></h4><p>Aujourd’hui hors du calcul. Proposé : la réserve et la quotité disponible, la donation entre époux (¼ en pleine propriété + ¾ en usufruit, tout en usufruit, quotité disponible), un legs, le rapport des donations ; l’app montre les deux tableaux : « sans testament » et « avec ».</p></div><div class="idea"><h4>🔗 Successions en cascade<span class="pr a">à faire d’abord</span></h4><p>Un héritier mort après le défunt sans avoir réglé : sa part passe à ses propres héritiers. Le calcul enchaîne les successions (souvent le cas dans les vieux dossiers) et montre l’arbre en cascade.</p></div><div class="idea"><h4>💍 Le régime matrimonial<span class="pr b">ensuite</span></h4><p>Communauté : la moitié des biens communs revient d’abord au conjoint, puis on partage. Une case « régime » (communauté légale, séparation, universelle avec attribution) et le calcul avant/après.</p></div><div class="idea"><h4>🏠 Droits du conjoint et droit de retour<span class="pr b">ensuite</span></h4><p>Droit au logement (temporaire 1 an, viager), droit de retour des parents (738-2) et des frères et sœurs (757-3) sur les biens donnés : des cases à cocher, l’effet sur les parts.</p></div><div class="idea"><h4>💶 Estimation des droits de succession<span class="pr b">ensuite</span></h4><p>Par héritier : abattement selon le lien (enfant, frère ou sœur, neveu, autre), barème, total ; les délais (déclaration dans les 6 mois) avec un compte à rebours dans le dossier. Écrit « estimation, à vérifier par le notaire ».</p></div><div class="idea"><h4>🗂 Le suivi des héritiers en colonnes<span class="pr a">à faire d’abord</span></h4><p>Un tableau par étapes, en glisser-déposer : à trouver → trouvé → contacté → contrat signé → pièces reçues. Chaque carte : la personne, la part, la prochaine chose à faire, la date de relance.</p></div><div class="idea"><h4>🔎 Les sources pour retrouver chaque héritier<span class="pr b">ensuite</span></h4><p>Une liste par héritier : état civil, fichier des décès de l’INSEE, annuaires, réseaux, registres matricules ; ce qui a été cherché, quand, et le résultat (pour ne jamais chercher deux fois).</p></div><div class="idea"><h4>🧭 Nouveau dossier pas à pas<span class="pr a">à faire d’abord</span></h4><p>Un assistant en 5 étapes (le défunt, la date, la famille trouvée, les doutes, les héritiers) au lieu de tous les onglets d’un coup ; les hypothèses côte à côte (A et B) en deux colonnes.</p></div><div class="idea"><h4>🌍 Un défunt qui vivait à l’étranger<span class="pr c">plus tard</span></h4><p>Le règlement européen (loi de la dernière résidence habituelle) : un avertissement clair et le pays retenu, sans calculer la loi étrangère.</p></div><div class="idea"><h4>📤 Les pièces pour le notaire<span class="pr b">ensuite</span></h4><p>Le tableau de dévolution en document modifiable (texte), le dossier complet en un seul fichier (actes, arbre, tableau), et l’import d’un acte de notoriété pour comparer avec le calcul.</p></div><div class="idea"><h4>🧹 Petit ménage du code<span class="pr a">à faire d’abord</span></h4><p>Une condition toujours vraie dans le calcul de la 2ᵉ classe (le résultat est juste, mais le code trompe) ; la recherche des ascendants limitée à 6 générations : la passer à 12.</p></div></div>
+
+<div class="part" id="d4">Partie 4</div><h2>📜 L’outil de transcription</h2>
+<div class="ideas"><div class="idea"><h4>✂️ Zones à exclure, zones à lire<span class="pr a">à faire d’abord</span></h4><p>Ta question. Une zone « ⛔ à ne pas lire » (marge, tampon, dos de page qui transparaît) et des zones typées : texte, marge, signature, tableau, titre. L’ordre de lecture des zones se règle (1, 2, 3…). La lecture automatique, l’OCR et la lecture approfondie suivent ces zones.</p></div><div class="idea"><h4>📚 L’Atelier dans les recueils<span class="pr a">à faire d’abord</span></h4><p>Aujourd’hui une page de recueil se transcrit dans une simple case de texte. Proposé : « 📜 Transcrire dans l’Atelier » sur chaque page (zones, lecture automatique, aide), et « tout le recueil d’un coup » (une page après l’autre, en tâche de fond).</p></div><div class="idea"><h4>↔️ Ligne d’image ↔ ligne de texte<span class="pr a">à faire d’abord</span></h4><p>Clic sur une ligne du texte : elle s’éclaire sur l’image, et l’inverse. On voit tout de suite ce qui n’a pas été lu.</p></div><div class="idea"><h4>🔤 Abréviations et vieux mots<span class="pr b">ensuite</span></h4><p>Un dictionnaire des abréviations (« led. » = ledit, « pnt » = présent…) qui propose la forme longue, et un alphabet ancien (s long, et, -us…) en aide sur le côté.</p></div><div class="idea"><h4>🇻🇦 Les actes en latin<span class="pr b">ensuite</span></h4><p>Les formules latines des baptêmes, mariages et sépultures reconnues et traduites à côté (« baptizavi » = j’ai baptisé…), les prénoms latins ramenés au français (Joannes → Jean).</p></div><div class="idea"><h4>👥 Double saisie<span class="pr c">plus tard</span></h4><p>Deux personnes transcrivent la même page ; l’app montre les différences mot à mot pour choisir.</p></div><div class="idea"><h4>🗓 Dates et calendrier républicain<span class="pr b">ensuite</span></h4><p>Une date trouvée dans le texte (« le 12 pluviôse an III ») est reconnue et convertie à côté, avec le jour de la semaine.</p></div><div class="idea"><h4>⤓ Exports savants<span class="pr c">plus tard</span></h4><p>TEI, ALTO et PAGE (les formats des archives et des chercheurs), en plus du texte et du tableau.</p></div></div>
+
+<div class="part" id="d5">Partie 5</div><h2>📚 Recueils et 📄 documents</h2>
+<div class="ideas"><div class="idea"><h4>🖼 Améliorer toutes les photos d’un recueil<span class="pr a">à faire d’abord</span></h4><p>D’un coup : redresser, recadrer, contraste, noir et blanc ; l’original est gardé (↶ Annuler).</p></div><div class="idea"><h4>🔁 Pages en double, pages blanches<span class="pr a">à faire d’abord</span></h4><p>L’app repère les photos presque identiques et les pages vides, et propose de les ranger.</p></div><div class="idea"><h4>🌐 Faire le recueil depuis le site des archives<span class="pr b">ensuite</span></h4><p>Avec l’adresse des vues (déjà notée avec {n}) : la liste des pages se fait toute seule, chaque page garde son lien vers la vue en ligne, même sans photo.</p></div><div class="idea"><h4>🔍 Deux versions côte à côte<span class="pr b">ensuite</span></h4><p>La même page dans deux campagnes de photos, avec une loupe qui suit sur les deux.</p></div><div class="idea"><h4>🔗 Les noms lus → les fiches<span class="pr a">à faire d’abord</span></h4><p>Les noms trouvés dans les transcriptions et les tableaux de pages sont comparés aux fiches : « 3 personnes de ta base sont peut-être dans cette page » → lier en un clic.</p></div><div class="idea"><h4>📄 Documents : doublons et tri<span class="pr a">à faire d’abord</span></h4><p>Les documents en double (même image) signalés ; un tri proposé par sorte (acte, photo, lettre) d’après le texte lu ; changer plusieurs documents d’un coup (date, lieu, cote).</p></div><div class="idea"><h4>🗺 Documents sur une carte et une frise<span class="pr b">ensuite</span></h4><p>Les documents liés à des lieux sur la carte, et sur une frise des années : on voit où et quand on a des papiers, et les trous.</p></div><div class="idea"><h4>📑 Citer et partager<span class="pr c">plus tard</span></h4><p>Une citation prête à copier pour chaque document (archives, cote, vue), et une page à partager pour un recueil fini.</p></div></div>
+
+<div class="part" id="d6">Partie 6</div><h2>🏰 Frontières anciennes : quoi ajouter pour la France et l’Europe</h2>
+<p class="sub">Aujourd’hui : provinces vers 1789 et départements de 1790 (approximés), communes depuis 1943.</p>
+<div class="ideas"><div class="idea"><h4>🇫🇷 France d’Ancien Régime<span class="pr a">à faire d’abord</span></h4><p>En plus des provinces : les <b>généralités</b> (intendances), les <b>diocèses</b> d’avant 1790 (très utiles pour les registres paroissiaux), les bailliages et sénéchaussées, les parlements, les pays de gabelle.</p></div><div class="idea"><h4>🇫🇷 La Révolution et après<span class="pr a">à faire d’abord</span></h4><p>Les <b>districts</b> (1790-1795), les cantons, les arrondissements ; les départements annexés (Belgique, rive gauche du Rhin, Piémont, Pays-Bas : 1795-1814) ; Savoie et Nice avant 1860 ; l’<b>Alsace-Moselle allemande</b> (1871-1918) ; le Comtat Venaissin avant 1791 ; la Corse avant 1768.</p></div><div class="idea"><h4>🇪🇺 L’Europe à des dates clés<span class="pr b">ensuite</span></h4><p>1789 (Saint-Empire), 1815 (Congrès de Vienne), 1871, 1914, 1923, 1938, 1945, 1989 : les pays et leurs grandes provinces (Prusse, Autriche-Hongrie, États italiens avant 1861, Pologne partagée). Sources libres : « historical-basemaps » (CC BY) et CShapes (frontières 1886-2019).</p></div><div class="idea"><h4>🕰 La frontière qui suit l’année<span class="pr b">ensuite</span></h4><p>Sur les cartes animées (Studio) et le curseur des années : les frontières changent avec l’année montrée.</p></div></div>
+
+<div class="part" id="d7">Partie 7</div><h2>🌳 Cases des arbres : plus de designs (il y en a 4)</h2>
+<p class="sub">Aujourd’hui : Blanches, Couleurs homme/femme, Avec photo, Mini. Propositions (chacune avec les réglages déjà là : couleurs, coins, police) :</p>
+<div class="boxes">
+<div class="bx"><div class="c" style="background:#f3e6c8;border:2px solid #8a6a3a;border-radius:2px;font-family:Georgia"><b>Jean MAZAUD</b><small>1853 – 1921</small></div>📜 Parchemin</div>
+<div class="bx"><div class="c" style="border:2px solid #111;border-radius:40px;background:#fff"><span style="width:26px;height:26px;border-radius:50%;background:#c9b48a;display:block"></span><b>Jean</b></div>🖼 Médaillon ovale</div>
+<div class="bx"><div class="c" style="background:#fff;border:2px solid #2a3a5a;clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%)"><b>MAZAUD</b><small>Jean</small></div>🛡 Écusson</div>
+<div class="bx"><div class="c" style="background:#fff;border:1px solid #999;box-shadow:3px 3px 0 #ccc;border-top:8px solid #c0392b"><b>Jean MAZAUD</b><small>porteur d’eau</small></div>✉️ Carte postale</div>
+<div class="bx"><div class="c" style="background:#fff;border:3px dotted #c0392b"><b>Jean</b><small>1853</small></div>📮 Timbre-poste</div>
+<div class="bx"><div class="c" style="background:#fff;padding:4px 4px 16px;box-shadow:0 2px 6px #0003"><span style="width:100%;height:40px;background:#c9b48a;display:block"></span><small>Jean, 1853</small></div>📷 Polaroïd</div>
+<div class="bx"><div class="c" style="background:#111;color:#fff"><b>Jean MAZAUD</b><small style="color:#aaa">n° 8 · 1853–1921</small></div>🏛 Étiquette de musée</div>
+<div class="bx"><div class="c" style="background:linear-gradient(#dfe8f7,#fff);border-left:6px solid #2a6a9a"><b>Jean</b><small>Génération 4</small></div>🎨 Pastel par génération</div>
+<div class="bx"><div class="c" style="border-bottom:2px solid #111;background:transparent"><b>Jean MAZAUD</b><small>1853–1921</small></div>✏️ Trait seul</div>
+<div class="bx"><div class="c" style="background:#fff;border:2px solid #111"><b>🔨 Jean</b><small>forgeron</small></div>🔨 Icône du métier</div>
+</div>
+<p class="mini">Et des options pour toutes : le numéro Sosa en pastille, la bordure de la couleur de la branche, l’âge au décès en petit, une ombre, un fond « papier ».</p>
+
+<div class="part" id="d8">Partie 8</div><h2>🗺 Fonds de carte gratuits sans clé à ajouter</h2>
+<p class="sub">Il y a déjà : OpenStreetMap, Esri, OpenTopoMap, CyclOSM, Wikimedia, OpenHistoricalMap, IGN Cassini et État-major, NLS, Flandre, swisstopo, USGS, NASA, IGN España. Ce qui manque (conditions d’usage à vérifier une par une avant d’ajouter) :</p>
+<table class="t"><tr><th>Fond</th><th>Pourquoi</th></tr><tr><td><b>CARTO Positron, Voyager, Dark Matter</b></td><td>Fonds très clairs ou sombres, parfaits sous les points et les flux (gratuits avec mention, limite d’usage raisonnable).</td></tr><tr><td><b>OpenFreeMap</b></td><td>Fond vectoriel libre, sans clé ni limite annoncée.</td></tr><tr><td><b>OSM France et OSM Humanitaire</b></td><td>Variantes du dessin OpenStreetMap (noms en français, style « humanitaire » très lisible).</td></tr><tr><td><b>IGN Géoplateforme (data.geopf.fr)</b></td><td>Plan IGN, photos aériennes actuelles et <b>anciennes (1950-1965)</b>, cadastre, cartes topographiques — sans clé pour ces couches.</td></tr><tr><td><b>BRGM</b></td><td>La carte géologique (WMS sans clé) : utile pour comprendre les métiers (carrières, ardoisières, mines).</td></tr><tr><td><b>Fonds nationaux d’Europe</b></td><td>basemap.at (Autriche), basemap.de (Allemagne), PDOK (Pays-Bas), Kartverket (Norvège), géoportails belge, luxembourgeois, polonais, tchèque : sans clé, à vérifier un par un.</td></tr><tr><td><b>Calques par-dessus</b></td><td>OpenRailwayMap (les gares et lignes : les migrations des cheminots), OpenSeaMap (ports), chemins de randonnée.</td></tr><tr><td><b>Sentinel-2 sans nuages (EOX)</b></td><td>Une vue satellite de toute l’Europe (licence non commerciale pour certaines années : à vérifier).</td></tr></table>
+<p class="sub" style="margin-top:12px">Et un réglage « ＋ Ajouter un fond de carte (adresse des tuiles) » pour en mettre un à soi.</p>
+
+<div class="part">Et le film, les cartes animées</div><p class="sub">Voir la maquette à part : <b>🎞 Studio d’animation</b> (docs/design/studio-animation.html) — c’est la réponse à « mieux personnaliser le film de la famille et les cartes ».</p>
+</div></body></html>

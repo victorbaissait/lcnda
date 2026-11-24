@@ -126,3 +126,12 @@ Ordre : A état des pages + absentes + numérotation ; B sommaire (= chapitres, 
 - « Voir ses documents » → les documents du recueil, dans l'ordre des pages (« p. 3 · … »), sous une barre « ← Tous les recueils · ↗ Ouvrir le recueil ».
 - Dans la colonne, un clic sur le titre d'un recueil fait la même chose (avant : il ouvrait le recueil ; « ↗ Ouvrir le recueil » est dans la barre et dans ⋯).
 - Les filtres et la recherche s'appliquent : seuls les recueils qui ont des documents trouvés restent.
+
+## Maison : 4× plus d'objets
+- heritage-house-objets.js (fichier fabriqué) : meubles de style (52 sortes × les styles qui leur vont : époques, d'ailleurs, régions, modernes) et ~630 objets un par un ; chacun reprend le dessin et la 3D d'un objet existant (son modèle).
+- Le nom d'un meuble de style se traduit en deux morceaux (LCNDA_I18N.compose : « Armoire » + « Louis XV » → « Wardrobe · Louis XV »).
+- Catalogue : menu « 🎨 Tous les styles » (réglage genealogie-house-style : tous par défaut, « Sans les meubles de style », ou un style).
+
+## Maquettes en attente de validation
+- docs/design/studio-animation.html : 🎞 Studio d'animation (scènes, aperçu, ligne de temps : temps, caméra, légendes, images, musique, voix ; modèles ; export image par image).
+- docs/design/idees-suite.html : diagrammes manquants (Data Viz Catalogue : 42 oui, 10 en partie, 8 non), « Je veux représenter… », successoral, transcription, recueils et documents, frontières anciennes, cases des arbres, fonds de carte.
