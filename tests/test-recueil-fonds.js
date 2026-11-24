@@ -59,7 +59,7 @@ echo json_encode(['ok' => 1, 'a' => $a, 'b' => $b, 'c' => $c, 'd' => $d, 's1' =>
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.recueilFonds && window.LCNDA_APP?.state?.csrf, null, {timeout: 30000});
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
         const open = () => p.evaluate(() => { const A = window.LCNDA_APP; A.state.hRecueil = {id: 0}; A.state.listType = 'recueils'; A.setModule('listes'); });
-        const rows = () => p.evaluate(() => [...document.querySelectorAll('.rf-table tbody tr')].map(tr => (tr.classList.contains('rf-grp') ? 'G ' : tr.classList.contains('rf-fonds') ? 'F ' : '- ') + tr.querySelector('td').textContent.replace(/\s+/g, ' ').replace(/[▾▸]/g, '').trim().split(' · ')[0]));
+        const rows = () => p.evaluate(() => [...document.querySelectorAll('.rf-table tbody tr')].map(tr => (tr.classList.contains('rf-sep') ? '' : tr.classList.contains('rf-grp') ? 'G ' : tr.classList.contains('rf-fonds') ? 'F ' : '- ') + tr.querySelector('td').textContent.replace(/\s+/g, ' ').replace(/[▾▸]/g, '').trim().split(' · ')[0]).filter(Boolean)); // (les espaces entre services : rien)
 
         await t('côté serveur : chaque recueil avec son service, son fonds, son avancement, ses lacunes, sa communicabilité', async () => {
             const r = (await api('recueils_fonds')).recueils, by = id => r.find(x => x.id === id);

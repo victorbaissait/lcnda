@@ -42,7 +42,7 @@
         const n = nums(r), bits = [];
         if (n.e.todo) bits.push(T('{n} à transcrire', {n: String(n.e.todo)}));
         if (n.toRead) bits.push(T('{n} à relire', {n: String(n.toRead)}));
-        if (n.e.absent) bits.push(T('{n} absentes', {n: String(n.e.absent)}));
+        if (n.e.absent) bits.push(plural(n.e.absent, 'page absente', 'pages absentes'));
         if (n.exp > n.photos + n.e.absent + n.e.blank) bits.push(T('{n} à photographier', {n: String(n.exp - n.photos - n.e.absent - n.e.blank)}));
         return bits.join(' · ');
     }
@@ -109,8 +109,9 @@
         const foldBtn = key => `<button type="button" class="rs-tw" data-rf-fold="${esc(key)}" aria-expanded="${!shut.has(key)}" aria-label="${esc(shut.has(key) ? T('Ouvrir') : T('Fermer'))}">${shut.has(key) ? '▸' : '▾'}</button>`;
         const span = cols.length + 1;
         let body = '';
-        sorted.forEach(g => {
+        sorted.forEach((g, gi) => {
             const list = [...g.fonds.values()].flatMap(f => f.rows);
+            if (gi) body += `<tr class="rf-sep" aria-hidden="true"><td colspan="${span}"></td></tr>`; // un vrai espace entre deux services d'archives
             body += `<tr class="rf-grp"><td colspan="${span}">${foldBtn(g.key)} 🏛 ${g.id ? `<button type="button" class="link-button" data-rf-svc="${g.id}">${esc(g.name)}</button>` : esc(g.name)} <small class="muted">· ${groupLine(list)}</small></td></tr>`;
             if (shut.has(g.key)) return;
             [...g.fonds.values()].sort((a, b) => a.name.localeCompare(b.name, 'fr')).forEach(f => {

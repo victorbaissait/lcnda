@@ -187,3 +187,10 @@
 /* 📑 autant de niveaux qu'on veut : le retrait grandit, sans jamais pousser la ligne hors de l'écran */
 .rs-li { padding-left: min(calc(var(--lv, 0) * 22px), 45%); }
 .rs-level { flex-wrap: wrap; }
+/* 🏛 vue des fonds : deux services d'archives bien séparés (un espace, un trait épais, une bande marquée) ; le fonds plus discret dessous */
+.rf-table tr.rf-sep td { height: 30px; padding: 0; border: 0; background: var(--bg, #f4f5f7); }
+.rf-table tr.rf-grp td { background: #dfe3ea; border-top: 4px solid #111; border-bottom: 2px solid #111; font-size: 14.5px; padding-top: 10px; padding-bottom: 10px; box-shadow: inset 6px 0 0 #055dff; }
+.rf-table tr.rf-fonds td { background: #f6f7f9; border-bottom: 1px solid #c9ced8; box-shadow: inset 6px 0 0 #9db8f0; }
+:root[data-theme="dark"] .rf-table tr.rf-grp td { background: #2c3139; border-top-color: #eceef2; border-bottom-color: #eceef2; }
+:root[data-theme="dark"] .rf-table tr.rf-fonds td { background: #22262c; }
+:root[data-theme="dark"] .rf-table tr.rf-sep td { background: #121417; }
