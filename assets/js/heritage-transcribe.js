@@ -1370,7 +1370,7 @@
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
             const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
             const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: () => areaB64(b, {max: 2200}), onReading: (txt, model) => keepReading(txt, 'deep', model), // ⚖️ chaque lecture de chaque modèle gardée
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: () => areaB64(b, {max: 2200}), onReading: (txt, model) => keepReading(txt, 'deep', model), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
                 existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
                 onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
