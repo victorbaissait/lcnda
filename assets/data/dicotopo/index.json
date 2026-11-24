@@ -193,6 +193,78 @@
    "old": 8107,
    "places": 7270,
    "size": 268305
+  },
+  "29": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Finistère",
+    "bibl": "Deshayes (Albert), Dictionnaire topographique du Finistère avec la liste exhaustive de toutes les communes, lieux-dits et écarts dans leurs formes officielles et anciennes, Spézet, 2003 ; 2e version inédite, 2021.",
+    "gallica": ""
+   },
+   "communes": 283,
+   "label": "Finistère",
+   "old": 66601,
+   "places": 34976,
+   "size": 1271928
+  },
+  "30": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Gard",
+    "bibl": "Germer-Durand (Eugène), Dictionnaire topographique du département du Gard, Paris, 1868.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39295t"
+   },
+   "communes": 359,
+   "label": "Gard",
+   "old": 9162,
+   "places": 7412,
+   "size": 299809
+  },
+  "34": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Hérault",
+    "bibl": "Thomas (Eugène), Dictionnaire topographique du département de l’Hérault, Paris, 1865.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110096s"
+   },
+   "communes": 338,
+   "label": "Hérault",
+   "old": 4876,
+   "places": 6482,
+   "size": 211785
+  },
+  "36": {
+   "bibl": {
+    "abbr": "Dictionnaire historique de l’Indre",
+    "bibl": "Hubert (Eugène), Dictionnaire historique, géographique et statistique de l’Indre, Châteauroux/Paris, 1889 ; réimpr., Paris, 1985.",
+    "gallica": ""
+   },
+   "communes": 250,
+   "label": "Indre",
+   "old": 1591,
+   "places": 8419,
+   "size": 156372
+  },
+  "41": {
+   "bibl": {
+    "abbr": "Noms des communes de Loir-et-Cher",
+    "bibl": "Villette (Guy), « L’origine des noms des communes de Loir-et-Cher », dans Hommage à Guy Villette. Quelques études toponymiques et historiques, éd. Marianne Mulon et Gérard Taverdet, s.l., 1992, p. 135-196.",
+    "gallica": ""
+   },
+   "communes": 290,
+   "label": "Loir-et-Cher",
+   "old": 1351,
+   "places": 324,
+   "size": 25317
+  },
+  "42": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Loire",
+    "bibl": "Dufour (Jean-Édouard), Dictionnaire topographique du Forez et des paroisses du Lyonnais et du Beaujolais formant le département de la Loire, Mâcon, 1946.",
+    "gallica": ""
+   },
+   "communes": 330,
+   "label": "Loire",
+   "old": 29396,
+   "places": 12613,
+   "size": 763692
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

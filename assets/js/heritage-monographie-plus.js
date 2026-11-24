@@ -213,8 +213,9 @@
         drawPanel(); bindPanel(div);
         div.querySelector('input, button')?.focus();
     }
+    let dragging = false; // pendant un glisser, la liste n'est pas redessinée (une partie qui finit de se dessiner attendra)
     function drawPanel() {
-        const div = cur.panel; if (!div) return;
+        const div = cur.panel; if (!div || dragging) return;
         const {from, layout} = source(cur.place), ids = allIds(), {order, hidden} = effective(layout, ids);
         const parts = present(), here = new Map(parts.map(p => [p.id, p.el]));
         const ro = from === 'screen', name = cur.place?.name || cur.data?.place?.name || '';
@@ -229,7 +230,7 @@
             ${ro ? `<p class="muted">${esc(T('Cet écran a sa propre organisation : elle se change dans son onglet (crayon de l’onglet).'))}</p>` : `<p class="muted">${esc(T('Glisse ⠿ (ou ↑ ↓) pour choisir l’ordre, décoche pour masquer. Une partie vide pour cette commune est passée toute seule.'))}</p>
             <label class="checkbox-line mp-local"><input type="checkbox" data-mp-local ${from === 'place' ? 'checked' : ''}> ${esc(T('Seulement pour cette commune ({c})', {c: name || T('celle-ci')}))}</label>`}
             <h4>${esc(T('En haut de la page'))}</h4><ul class="mp-list mp-top">${topIds.map(k => li(k, true)).join('')}</ul>
-            <h4>${esc(T('Les parties, dans l’ordre'))}</h4><ol class="mp-list" data-mp-order>${order.filter(k => !topIds.includes(k)).map(k => li(k, false)).join('')}</ol>
+            <h4>${esc(T('Les parties, dans l’ordre'))}</h4><ol class="mp-list" data-mp-order>${order.filter(k => !topIds.includes(k) && here.has(k)).map(k => li(k, false)).join('')}</ol>
             ${ro ? '' : `<p><button type="button" class="button small secondary" data-mp-reset>↶ ${esc(T('Réinitialiser'))}</button> <small class="muted">${esc(from === 'place' ? T('remet cette commune comme les autres') : T('remet l’ordre et les parties de départ'))}</small></p>`}`;
         if (focusK) { const l = div.querySelector(`li[data-k="${CSS.escape(focusK)}"]`); (focusWhat === 'show' ? l?.querySelector('[data-mp-show]') : l?.querySelector(`[data-mp-move="${focusWhat}"]`) || l?.querySelector('[data-mp-show]'))?.focus(); }
     }
@@ -251,15 +252,23 @@
             if (A().undoToast) A().undoToast(message, {undo: () => put(b), redo: () => put(after)}); else A().toast?.(message);
         }, 900);
     }
-    function orderNow() { return [...cur.panel.querySelectorAll('[data-mp-order] li')].map(li => li.dataset.k); }
+    /** l'ordre complet : les parties de la liste dans leur nouvel ordre, les autres (absentes de cette commune) gardent leur place */
+    function orderNow() {
+        const listed = [...cur.panel.querySelectorAll('[data-mp-order] li')].map(li => li.dataset.k), set = new Set(listed);
+        const full = effective(source(cur.place).layout, allIds()).order.filter(k => !TOP.some(x => x[0] === k));
+        let i = 0; return full.map(k => (set.has(k) ? listed[i++] : k));
+    }
     function bindPanel(div) {
         div.addEventListener('click', e => {
             if (e.target.closest('[data-mp-close]')) { openPanel(true); document.querySelector('[data-mp-custom]')?.focus(); return; }
             const mv = e.target.closest('[data-mp-move]');
             if (mv) {
-                const k = mv.closest('li').dataset.k, o = orderNow(), i = o.indexOf(k), j = i + Number(mv.dataset.mpMove);
-                if (j < 0 || j >= o.length) return;
-                [o[i], o[j]] = [o[j], o[i]];
+                // ↑ ↓ passent par-dessus les parties vides ici : le déplacement se voit dans la page
+                const li = mv.closest('li'), up = mv.dataset.mpMove === '-1', step = el => (up ? el.previousElementSibling : el.nextElementSibling);
+                let to = step(li); while (to && to.classList.contains('is-none') && step(to)) to = step(to);
+                if (!to) return;
+                if (mv.dataset.mpMove === '-1') li.parentElement.insertBefore(li, to); else li.parentElement.insertBefore(to, li);
+                const o = orderNow();
                 change(l => { l.order = [...TOP.map(x => x[0]), ...o]; });
                 return;
             }
@@ -288,14 +297,14 @@
         });
         // glisser-déposer
         let drag = null;
-        div.addEventListener('dragstart', e => { const li = e.target.closest?.('[data-mp-order] li'); if (!li) return; drag = li; li.classList.add('is-drag'); try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', li.dataset.k); } catch (_) {} });
+        div.addEventListener('dragstart', e => { const li = e.target.closest?.('[data-mp-order] li'); if (!li) return; drag = li; li.classList.add('is-drag'); dragging = true; try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', li.dataset.k); } catch (_) {} });
         div.addEventListener('dragover', e => {
             const li = e.target.closest?.('[data-mp-order] li'); if (!drag || !li || li === drag) return;
             e.preventDefault();
             const r = li.getBoundingClientRect(); li.parentElement.insertBefore(drag, e.clientY > r.top + r.height / 2 ? li.nextElementSibling : li);
         });
         div.addEventListener('drop', e => { if (drag) e.preventDefault(); });
-        div.addEventListener('dragend', () => { if (!drag) return; drag.classList.remove('is-drag'); drag = null; const o = orderNow(); change(l => { l.order = [...TOP.map(x => x[0]), ...o]; }); });
+        div.addEventListener('dragend', () => { dragging = false; if (!drag) return; drag.classList.remove('is-drag'); drag = null; const o = orderNow(); change(l => { l.order = [...TOP.map(x => x[0]), ...o]; }); });
     }
     document.addEventListener('click', e => {
         if (e.target.closest?.('[data-mp-custom]')) { e.preventDefault(); openPanel(true); return; }
@@ -344,9 +353,10 @@
         const table = ps.length > 1 ? `<details class="mp-more"><summary>${esc(T('▸ plus : par demi-siècle'))}</summary><table class="data-table mp-table"><thead><tr><th>${esc(T('Période'))}</th>${types.map(t => `<th>${esc(T(t.label))}</th>`).join('')}</tr></thead>
             <tbody>${ps.map(p => `<tr><td>${p}–${p + 49}</td>${types.map(t => `<td>${cell(t, p) || '·'}</td>`).join('')}</tr>`).join('')}</tbody></table></details>` : '';
         ctx.count(v.people_count);
-        host.innerHTML = `<p>${T('{n} de ta famille ont vécu ici{span} : {b} naissances ou baptêmes, {m} mariages, {d} décès.', {n: `<b>${esc(A().plural ? A().plural(v.people_count, T('personne'), T('personnes')) : v.people_count)}</b>`,
-            span: fy ? ' ' + T('de {a} à {b}', {a: fy.from, b: fy.to}) : '', b: nf(v.acts.baptemes), m: nf(v.acts.mariages), d: nf(v.acts.deces)})}</p>
-            ${first ? `<p class="muted">${esc(T('Premier acte connu : {t}, {d}', {t: first.type_label || T('acte'), d: first.date_text || first.year}))}${first.person_id ? ` — <button type="button" class="link-button" data-mp-person="${Number(first.person_id)}">${esc(first.person_name)}</button>` : ''}</p>` : ''}
+        const pl = (n, a, b) => esc(A().plural ? A().plural(n, T(a), T(b)) : `${n} ${T(b)}`);
+        host.innerHTML = `<p>${T('{n} de ta famille ont vécu ici{span} : {acts}.', {n: `<b>${pl(v.people_count, 'personne', 'personnes')}</b>`,
+            span: fy ? ' ' + T('de {a} à {b}', {a: String(fy.from), b: String(fy.to)}) : '', acts: [pl(v.acts.baptemes, 'naissance ou baptême', 'naissances ou baptêmes'), pl(v.acts.mariages, 'mariage', 'mariages'), pl(v.acts.deces, 'décès', 'décès')].join(', ')})}</p>
+            ${first ? `<p class="muted">${esc(T('Premier acte connu : {t}, {d}', {t: first.type_label || T('acte'), d: first.date_text || String(first.year)}))}${first.person_id ? ` — <button type="button" class="link-button" data-mp-person="${Number(first.person_id)}">${esc(first.person_name)}</button>` : ''}</p>` : ''}
             ${table}<p class="h-links"><button type="button" class="link-button" data-mp-village>${esc(T('🏘️ Ouvrir la fiche du village'))}</button></p>`;
         ctx.source(MINE);
         return true;
@@ -401,7 +411,7 @@
         const stat = y => { const s = known.find(k => y >= k.from && y <= (k.to || k.from)); if (!s?.iso) return ''; const st = M.statsAt(C, s.iso, y); return st.length ? `<li>${esc(T('{enPays} en {y} : {liste}.', {enPays: (x => x.charAt(0).toUpperCase() + x.slice(1))(M.inCountry(C.c[String(s.iso)]?.n || s.label)), y: String(y), liste: st.map(x => x.text).join(' · ')}))}</li>` : ''; };
         const stats = fy ? [...new Set([Math.max(fy.from, M.FIRST_EUROPE), Math.min(fy.to, M.LAST)])].filter(y => y >= M.FIRST_EUROPE && y <= M.LAST).map(stat).join('') : '';
         const one = known.length === 1 && known[0].from === M.FIRST_EUROPE;
-        host.innerHTML = `<p>${one ? esc(T('Depuis {a}, ce lieu a toujours été dans le même pays : {p}.', {a: known[0].from, p: known[0].label})) : esc(T('Ce lieu a changé de pays {n} fois depuis {a}.', {n: known.length - 1, a: known[0].from}))}</p>
+        host.innerHTML = `<p>${one ? esc(T('Depuis {a}, ce lieu a toujours été dans le même pays : {p}.', {a: String(known[0].from), p: known[0].label})) : esc(T('Ce lieu a changé de pays {n} fois depuis {a}.', {n: known.length - 1, a: String(known[0].from)}))}</p>
             ${one ? '' : `<details class="mp-more" open><summary>${esc(T('▸ plus'))}</summary><ul class="mc-rows">${lines}</ul></details>`}${stats ? `<ul class="mc-stats">${stats}</ul>` : ''}`;
         ctx.source(T('Frontières : {a}', {a: B.raw?.attr || 'CShapes (ETH Zürich)'}) + (stats ? ' · Clio-Infra, Maddison Project' : ''));
         return true;
@@ -454,7 +464,7 @@
         const safe = u => (A().safeUrl ? A().safeUrl(u) : u) || '#';
         host.innerHTML = `${links.length ? `<p>${esc(T('Les registres de {c} se consultent en ligne ici :', {c: v.name}))}</p><ul>${links.slice(0, 3).map(l => `<li><a href="${esc(safe(l.url))}" target="_blank" rel="noopener noreferrer">${esc(l.label)} ↗</a>${l.note ? ` <small class="muted">${esc(l.note)}</small>` : ''}</li>`).join('')}</ul>
             ${links.length > 3 ? `<details class="mp-more"><summary>${esc(T('▸ plus ({n})', {n: links.length - 3}))}</summary><ul>${links.slice(3).map(l => `<li><a href="${esc(safe(l.url))}" target="_blank" rel="noopener noreferrer">${esc(l.label)} ↗</a>${l.note ? ` <small class="muted">${esc(l.note)}</small>` : ''}</li>`).join('')}</ul></details>` : ''}` : ''}
-            ${parish.length ? `<p>${parish.map(x => `${T('Avant la Révolution, dépendait de la paroisse de {name}', {name: `<b>${esc(x.parish)}</b>`})}${x.until ? ' ' + esc(T('jusqu’en {y}', {y: x.until})) : ''}`).join(' ; ')}.</p>` : ''}
+            ${parish.length ? `<p>${parish.map(x => `${T('Avant la Révolution, dépendait de la paroisse de {name}', {name: `<b>${esc(x.parish)}</b>`})}${x.until ? ' ' + esc(T('jusqu’en {y}', {y: String(x.until)})) : ''}`).join(' ; ')}.</p>` : ''}
             ${ext.ouChercher?.openPerson ? `<p class="h-links"><button type="button" class="link-button" data-mp-ouc>${esc(T('🌍 Où chercher ? (toutes les pistes)'))}</button></p>` : ''}`;
         ctx.source(T('Archives départementales et sites de registres (liste de l’app) · tes paroisses'));
         return true;

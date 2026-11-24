@@ -43,7 +43,11 @@
     const wait = t => (UI().spinner ? UI().spinner(t) : `<p class="muted">${esc(t)}</p>`);
     const emptyLine = (text, icon = 'ℹ️') => (A().emptyState ? A().emptyState({text, icon, size: 'small'}) : `<p class="muted">${esc(text)}</p>`);
     /** rien à montrer : le bloc s'efface (pas de bloc vide) — la carte de fiche, ou la partie de la page du lieu */
-    function vanish(host) { const box = host?.closest?.('section.card[data-pblock], .cplus-panel'); if (box) box.remove(); else if (host) host.innerHTML = ''; }
+    function vanish(host) {
+        const box = host?.closest?.('section.card[data-pblock], .cplus-panel, .cplus-inpanel'), wrap = box?.closest?.('.cplus-place');
+        if (box) box.remove(); else if (host) host.innerHTML = '';
+        if (wrap && !wrap.children.length) wrap.remove();
+    }
     const more = (inner, n) => `<details class="cplus-more"><summary>${esc(n ? T('▸ plus ({n})', {n}) : T('▸ plus'))}</summary>${inner}</details>`;
     function failHtml(r, what) {
         if (r?.offline) return `<p class="cplus-off">📴 ${esc(T('Pas de connexion à Internet : {what} s’afficheront quand tu seras connecté.', {what}))}</p>`;
@@ -241,9 +245,9 @@
 
     /* ═════════ la fiche d'un village et la monographie de commune ═════════ */
     function section(id, title, sub) { return `<section class="maintenance-panel cplus-panel" data-cplus-part="${id}"><h3>${esc(title)}${sub ? ` <small class="muted">${esc(sub)}</small>` : ''}</h3><div data-cplus-body></div></section>`; }
-    function partsHtml() {
+    function partsHtml({church = true} = {}) {
         const s = settings(), out = [];
-        if (s.church) out.push(section('church', T('⛪ L’église et son saint patron'), ''));
+        if (s.church && church) out.push(section('church', T('⛪ L’église et son saint patron'), ''));
         if (s.cemeteries) out.push(section('cemeteries', T('🪦 Cimetières autour du village'), T('à moins de 5 km')));
         if (s.images) out.push(section('images', T('🖼️ Images anciennes de la commune'), T('les plus anciennes d’abord')));
         return out.length ? `<div class="cplus-place">${out.join('')}</div>` : '';
@@ -263,7 +267,11 @@
             const name = pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim();
             const place = {id: Number(pli?.dataset.pliPlace) || 0, name, lat: pli?.dataset.pliLat !== '' ? Number(pli?.dataset.pliLat) : null, lon: pli?.dataset.pliLon !== '' ? Number(pli?.dataset.pliLon) : null,
                 insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || village.querySelector('[data-cad-insee]')?.dataset.cadInsee || ''};
-            const html = partsHtml(); if (!html || !name) return;
+            if (!name) return;
+            // ⛪ dans le panneau « Église et paroisse » de la fiche, là où l'on regarde déjà
+            const churchPanel = village.querySelector('[data-vsec="church"]');
+            if (churchPanel && on('church')) { churchPanel.insertAdjacentHTML('beforeend', `<div class="cplus-inpanel" data-cplus-church-in><h4>${esc(T('D’après Wikidata'))}</h4><div data-cplus-body></div></div>`); churchInto(churchPanel.querySelector('[data-cplus-church-in] [data-cplus-body]'), place); }
+            const html = partsHtml({church: !churchPanel}); if (!html) return;
             const anchor = village.querySelector('.h-village-grid') || village.querySelector('[data-vsec="stats"]');
             if (anchor) anchor.insertAdjacentHTML('afterend', html); else village.insertAdjacentHTML('beforeend', html);
             fillParts(village.querySelector('.cplus-place'), place, village.querySelector('.h-village-map'));

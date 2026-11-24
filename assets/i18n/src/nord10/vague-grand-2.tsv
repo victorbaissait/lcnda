@@ -1,0 +1,835 @@
+fr ¦ sq ¦ mt
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Pas sa ditësh pa lajme një kafshë është «me vonesë»? E kuqe në dyfishin e afatit. ¦ Wara kemm-il jum mingħajr aħbarijiet annimal ikun “tard”? Aħmar meta jgħaddi d-doppju taż-żmien.
+Espèce inconnue ¦ Lloj i panjohur ¦ Speċi mhux magħrufa
+Délais par espèce changés ¦ Afatet sipas llojit u ndryshuan ¦ Żminijiet skont l-ispeċi mibdula
+Animal (nom, bague…) ¦ Kafsha (emri, unaza…) ¦ Annimal (isem, ċurkett…)
+ou bague lue ¦ ose unaza e lexuar ¦ jew ċurkett moqri
+Bague lue ¦ Unaza e lexuar ¦ Ċurkett moqri
+nb ¦ nr. ¦ nru
+Nombre vus ¦ Numri i parë ¦ Numru li dehru
+Le menu de choix n’est pas encore chargé. ¦ Menuja e zgjedhjes nuk është ngarkuar ende. ¦ Il-menu tal-għażla għadu ma tellax.
+⚡ Saisie d’une séance ¦ ⚡ Regjistrim i një seance ¦ ⚡ Daħħal sessjoni
+Tout enregistrer ¦ Ruaj gjithçka ¦ Issejvja kollox
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Vendi, data dhe vëzhguesi vetëm një herë; pastaj një rresht për çdo kafshë të parë (ose për çdo unazë të lexuar, nëse nuk e di ende kush është). ¦ Il-post, id-data u l-osservatur darba biss; imbagħad linja għal kull annimal li rajt (jew għal kull ċurkett moqri, jekk għadek ma tafx min hu).
+Site de suivi ¦ Vend monitorimi ¦ Sit tal-monitoraġġ
+Observateur ¦ Vëzhguesi ¦ Osservatur
+Nb ¦ Nr. ¦ Nru
+Dis quand a eu lieu la séance. ¦ Thuaj kur u bë seanca. ¦ Għid meta saret is-sessjoni.
+Choisis un site ou un lieu pour la séance. ¦ Zgjidh një vend monitorimi ose një vend për seancën. ¦ Agħżel sit jew post għas-sessjoni.
+Ajoute au moins un animal vu. ¦ Shto të paktën një kafshë të parë. ¦ Żid mill-inqas annimal wieħed li rajt.
+Séance enregistrée : {n} ¦ Seanca u ruajt: {n} ¦ Sessjoni ssejvjata: {n}
+🖨 Fiche de terrain ¦ 🖨 Fletë terreni ¦ 🖨 Skeda tal-qasam
+Aperçu et impression ¦ Pamje paraprake dhe printim ¦ Previżjoni u stampar
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Kafshët e pritura në një vend (ato që janë parë aty më parë), me unazat dhe shenjat e tyre, dhe kuti për t’u shënuar: për një dalje pa kompjuter. ¦ L-annimali mistennija f’sit (dawk li diġà dehru hemm), biċ-ċrieket u l-marki tagħhom, u kaxxi biex timmarka: għal ħarġa mingħajr kompjuter.
+Tous les animaux suivis ¦ Të gjitha kafshët e ndjekura ¦ L-annimali kollha segwiti
+Tous les sites ¦ Të gjitha vendet ¦ Is-siti kollha
+Aucun animal déjà vu sur ce site. ¦ Asnjë kafshë e parë më parë në këtë vend. ¦ L-ebda annimal ma deher qabel f’dan is-sit.
+Fiche de terrain — {s} ¦ Fletë terreni — {s} ¦ Skeda tal-qasam — {s}
+Fiche de terrain ¦ Fletë terreni ¦ Skeda tal-qasam
+Date de la dernière observation ¦ Data e vëzhgimit të fundit ¦ Data tal-aħħar osservazzjoni
+Une colonne pour les notes ¦ Një kolonë për shënimet ¦ Kolonna għan-noti
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Data: ____________  Vëzhguesi: ____________________  Moti: ____________ ¦ Data: ____________  Osservatur: ____________________  Temp: ____________
+SUCCESSIONS ¦ TRASHËGIMI ¦ SUĊĊESSJONIJIET
+Qui s’en charge ? ¦ Kush merret me të? ¦ Min qed jieħu ħsiebu?
+ex. Claire LACOMBE (vide : personne) ¦ p.sh. Claire LACOMBE (bosh: askush) ¦ eż. Claire LACOMBE (vojt: ħadd)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Jam unë (për filtrin «Dosjet e mia») ¦ Jien (għall-filtru “Il-fajls tiegħi”)
+Sur cet ordinateur, « moi » = {name}. ¦ Në këtë kompjuter, «unë» = {name}. ¦ F’dan il-kompjuter, “jien” = {name}.
+Confié à {who} ¦ I besuar te {who} ¦ Fdat lil {who}
+Plus personne n’en est chargé ¦ Askush nuk merret më me të ¦ Ħadd m’għadu jieħu ħsiebu
+Chargé du dossier : ¦ Përgjegjës i dosjes: ¦ Responsabbli mill-fajl:
+👥 Confier le dossier… ¦ 👥 Beso dosjen… ¦ 👥 Afda l-fajl…
+👥 Chargé du dossier n° {n} ¦ 👥 Përgjegjës i dosjes nr. {n} ¦ 👥 Responsabbli mill-fajl nru {n}
+à confier ¦ për t’u besuar ¦ biex jiġi fdat
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Kush merret me këtë afat? ¦ 👥 Min qed jieħu ħsieb din l-iskadenza?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Konflikt i mundshëm interesi: {n} tashmë në një dosje tjetër të hapur. Kontrollo para se të nënshkruash një kontratë. ¦ 🛡 Kunflitt ta’ interess possibbli: {n} diġà f’fajl ieħor miftuħ. Iċċekkja qabel ma tiffirma kuntratt.
+dossier n° {n} ¦ dosja nr. {n} ¦ fajl nru {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ Nuk ka imazh të këtij dokumenti në bazë: lidh aktin e skanuar me ngjarjen, pastaj provo përsëri. ¦ M’hemm l-ebda immaġni ta’ dan id-dokument fid-database: orbot l-att skennjat mal-avveniment, imbagħad erġa’ pprova.
+La lecture automatique n’a pas marché : {err} ¦ Leximi automatik nuk funksionoi: {err} ¦ Il-qari awtomatiku ma ħadimx: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Asnjë tekst nuk u lexua në këtë imazh (shkrim dore? provo Punishten e transkriptimit). ¦ L-ebda test ma nqara f’din l-immaġni (kitba bl-idejn? ipprova l-Laboratorju tat-traskrizzjoni).
+rien de trouvé ¦ asgjë nuk u gjet ¦ ma nstab xejn
+PIÈCE ¦ DOKUMENT ¦ DOKUMENT
+🔎 Lecture automatique — à vérifier ¦ 🔎 Lexim automatik — për t’u kontrolluar ¦ 🔎 Qari awtomatiku — irid jiġi ċċekkjat
+✍️ Noter au journal ¦ ✍️ Shëno në ditar ¦ ✍️ Ikteb fil-ġurnal
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Ajo që makina mendoi se lexoi te «{t}». Hiq shenjën nga ajo që është gabim: asgjë nuk ndryshohet te kartelat. ¦ Dak li l-magna ħasbet li qrat fuq “{t}”. Neħħi l-marka minn dak li hu żbaljat: xejn ma jinbidel fl-iskedi.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Lexim automatik i dokumentit «{p}» (për t’u kontrolluar) — {line} ¦ Qari awtomatiku tad-dokument “{p}” (irid jiġi ċċekkjat) — {line}
+Noté au journal du dossier. ¦ U shënua në ditarin e dosjes. ¦ Inkiteb fil-ġurnal tal-fajl.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Lexo tekstin e aktit të skanuar dhe propozo emra, data dhe vende ¦ Aqra t-test tal-att skennjat u ipproponi ismijiet, dati u postijiet
+🔎 Lire la pièce ¦ 🔎 Lexo dokumentin ¦ 🔎 Aqra d-dokument
+demandée ¦ e kërkuar ¦ mitlub
+à obtenir ¦ për t’u marrë ¦ biex jinkiseb
+Tableau généalogique de dévolution ¦ Tabela gjenealogjike e trashëgimisë ¦ Tabella ġenealoġika tad-devoluzzjoni
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ PROJEKT — për t’u kontrolluar dhe plotësuar nga noteri. Llogaritje orientuese sipas kartelave të bazës. ¦ ABBOZZ — għandu jiġi ċċekkjat u kkompletat min-nutar. Kalkolu indikattiv magħmul skont l-iskedi tad-database.
+Pièces (renvois) ¦ Dokumente (referenca) ¦ Dokumenti (referenzi)
+conjoint survivant ¦ bashkëshorti i mbijetuar ¦ konjuġi superstiti
+Aucun héritier calculé pour l’instant. ¦ Asnjë trashëgimtar i llogaritur ende. ¦ L-ebda werriet ma ġie kkalkulat s’issa.
+Les pièces ¦ Dokumentet ¦ Id-dokumenti
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Hartuar më {d}. Dokument pune: nuk zëvendëson as aktin e notorietetit, as certifikatën e trashëgimisë. ¦ Magħmul fil-{d}. Dokument ta’ ħidma: ma jissostitwix l-att ta’ notorjetà u lanqas iċ-ċertifikat tal-wirt.
+Projet de tableau de dévolution ¦ Projekt i tabelës së trashëgimisë ¦ Abbozz tat-tabella tad-devoluzzjoni
+🖨 Imprimer le tableau ¦ 🖨 Printo tabelën ¦ 🖨 Ipprintja t-tabella
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Për t’iu bashkëngjitur aktit të notorietetit: çdo trashëgimtar, lidhja e tij, pjesa e tij dhe dokumentet që e provojnë (P1, P2…). ¦ Biex jingħaqad mal-att ta’ notorjetà: kull werriet, ir-rabta tiegħu, is-sehem tiegħu, u d-dokumenti li jippruvawh (P1, P2…).
+Tableau de dévolution — {n} ¦ Tabela e trashëgimisë — {n} ¦ Tabella tad-devoluzzjoni — {n}
+Tableau de dévolution ¦ Tabela e trashëgimisë ¦ Tabella tad-devoluzzjoni
+Tableau de dévolution {n} ¦ Tabela e trashëgimisë {n} ¦ Tabella tad-devoluzzjoni {n}
+12 juin 1890 ¦ 12 qershor 1890 ¦ 12 ta’ Ġunju 1890
+2000 et après ¦ 2000 e më pas ¦ 2000 u wara
+7 mai 1925 ¦ 7 maj 1925 ¦ 7 ta’ Mejju 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Asnjë rrugë e njohur farefisnie me personin e nisjes. ¦ L-ebda triq ta’ qrabá magħrufa mal-persuna tal-bidu.
+Aucun lien de parenté connu. ¦ Asnjë lidhje e njohur farefisnie. ¦ L-ebda rabta ta’ qrabá magħrufa.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Nuk u gjet asnjë lidhje farefisnie me {nm} (personi i nisjes). ¦ Ma nstabet l-ebda rabta ta’ qrabá ma’ {nm} (persuna tal-bidu).
+Aucune différence : la fiche est comme avant cette modification. ¦ Asnjë ndryshim: kartela është si para këtij modifikimi. ¦ L-ebda differenza: l-iskeda hija kif kienet qabel din il-bidla.
+Aucune union enregistrée pour cette fiche. ¦ Asnjë bashkim i regjistruar për këtë kartelë. ¦ L-ebda unjoni rreġistrata għal din l-iskeda.
+Avant cette modification ¦ Para këtij modifikimi ¦ Qabel din il-bidla
+Caché en mode consultation, dans les exports, les partages et le site. ¦ I fshehur në mënyrën e leximit, në eksportime, në ndarje dhe në sajt. ¦ Moħbi fil-modalità ta’ qari, fl-esportazzjonijiet, fil-qsim u fis-sit.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Ky element nuk ekziston më: përdor «Rikthe» nëse është fshirë. ¦ Dan l-element m’għadux jeżisti: uża “Irrestawra” jekk tħassar.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Kjo kartelë ka {n} {what}: mbaj të saktën, tjetra bëhet një «version tjetër» i këtij fakti. ¦ Din l-iskeda għandha {n} {what}: żomm it-tajba, l-oħra ssir “verżjoni oħra” ta’ dan il-fatt.
+Chargement de la fiche familiale… ¦ Duke ngarkuar kartelën e familjes… ¦ Qed titla’ l-iskeda tal-familja…
+Chargement des pesées… ¦ Duke ngarkuar peshimet… ¦ Qed jitilgħu l-użini…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Zgjidh «⤓ PDF» për të ruajtur skedarin. ¦ Agħżel “⤓ PDF” biex tissejvja l-fajl.
+Confidentialité et recherche ¦ Privatësia dhe kërkimi ¦ Privatezza u tfittxija
+Courbe de poids ¦ Kurba e peshës ¦ Kurva tal-piż
+Créer la famille ¦ Krijo familjen ¦ Oħloq il-familja
+C’est la personne de départ (de cujus). ¦ Ky është personi i nisjes (de cujus). ¦ Din hija l-persuna tal-bidu (de cujus).
+C’est la personne de départ. ¦ Ky është personi i nisjes. ¦ Din hija l-persuna tal-bidu.
+Date du média moins date de naissance ¦ Data e medias minus datën e lindjes ¦ Data tal-midja nieqes id-data tat-twelid
+Dernière modification ¦ Modifikimi i fundit ¦ L-aħħar bidla
+Dernières fiches créées ¦ Kartelat e krijuara së fundi ¦ L-aħħar skedi maħluqa
+En vie et décédés ¦ Të gjallë dhe të vdekur ¦ Ħajjin u mejtin
+Exporter la fiche ¦ Eksporto kartelën ¦ Esporta l-iskeda
+Exporter la fiche (JSON) ¦ Eksporto kartelën (JSON) ¦ Esporta l-iskeda (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Eksportime të shpejta të kësaj kartele: 🖨 Printo hap pamjen paraprake të aplikacionit (formati, drejtimi, PDF), me rendin, madhësinë dhe dukshmërinë e blloqeve të kësaj kartele. Ngjarjet 🔒 konfidenciale nuk eksportohen kurrë. ¦ Esportazzjonijiet rapidi ta’ din l-iskeda: 🖨 Ipprintja tiftaħ il-previżjoni tal-app (format, orjentazzjoni, PDF), bl-ordni, id-daqs u l-viżibbiltà tal-blokki ta’ din l-iskeda. L-avvenimenti 🔒 kunfidenzjali qatt ma jiġu esportati.
+FICHE FAMILIALE ¦ KARTELA E FAMILJES ¦ SKEDA TAL-FAMILJA
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Familja u ruajt: {n} kartelë(a) u krijua(n). ¦ Familja ssejvjata: {n} skeda/i maħluqa.
+Famille enregistrée. ¦ Familja u ruajt. ¦ Familja ssejvjata.
+Fiche en JSON ¦ Kartelë në JSON ¦ Skeda f’JSON
+Fiche familiale ¦ Kartela e familjes ¦ Skeda tal-familja
+Fiche familiale de {nm} ¦ Kartela e familjes së {nm} ¦ Skeda tal-familja ta’ {nm}
+Fiche familiale… ¦ Kartela e familjes… ¦ Skeda tal-familja…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ U mbajt: versioni tjetër është shënuar te «Data alternative». ¦ Miżmum: il-verżjoni l-oħra hija mniżżla f’“Data alternattiva”.
+Genre inconnu ¦ Gjini e panjohur ¦ Sess mhux magħruf
+Hors Sosa ¦ Jashtë Sosa ¦ Barra s-Sosa
+Imprimer la fiche ¦ Printo kartelën ¦ Ipprintja l-iskeda
+Indique au moins le père ou la mère. ¦ Shëno të paktën babanë ose nënën. ¦ Indika mill-inqas il-missier jew l-omm.
+Inhumation ¦ Varrimi ¦ Difna
+Les deux branches ¦ Të dyja degët ¦ Iż-żewġ friegħi
+Lien retiré : {nm} ¦ Lidhja u hoq: {nm} ¦ Rabta mneħħija: {nm}
+Naissance (les plus anciens d’abord) ¦ Lindja (më të vjetrit së pari) ¦ Twelid (l-eqdem l-ewwel)
+Naissance (les plus récents d’abord) ¦ Lindja (më të rinjtë së pari) ¦ Twelid (l-iżgħar l-ewwel)
+Naissance inconnue ¦ Lindja e panjohur ¦ Twelid mhux magħruf
+Note de recherche ¦ Shënim kërkimi ¦ Nota ta’ riċerka
+Ouvre d’abord une fiche. ¦ Hap së pari një kartelë. ¦ Iftaħ skeda l-ewwel.
+PDF (aperçu d’impression) ¦ PDF (pamje paraprake e printimit) ¦ PDF (previżjoni tal-istampar)
+Pas de fiche d’animal liée. ¦ Asnjë kartelë kafshe e lidhur. ¦ L-ebda skeda ta’ annimal marbuta.
+Pas de mariage enregistré. ¦ Asnjë martesë e regjistruar. ¦ L-ebda żwieġ irreġistrat.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Ende asnjë peshim: shto një peshë te 🩺 Shëndeti. ¦ Għad m’hemm l-ebda użin: żid piż f’🩺 Saħħa.
+Personnaliser l’export… ¦ Përshtat eksportimin… ¦ Personalizza l-esportazzjoni…
+Prénom NOM, ou choisis une fiche ¦ Emri MBIEMRI, ose zgjidh një kartelë ¦ Isem KUNJOM, jew agħżel skeda
+Père, mère, mariage et enfants en une seule saisie ¦ Babai, nëna, martesa dhe fëmijët në një regjistrim të vetëm ¦ Missier, omm, żwieġ u wlied f’daħla waħda
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Babai, nëna, martesa dhe fëmijët në një regjistrim të vetëm. Për çdo emër: zgjidh një kartelë ekzistuese, ose shkruaj «Emri MBIEMRI» për të krijuar një të re. ¦ Missier, omm, żwieġ u wlied f’daħla waħda. Għal kull isem: agħżel skeda eżistenti, jew ikteb “Isem KUNJOM” biex toħloq waħda.
+Recherche du chemin… ¦ Duke kërkuar rrugën… ¦ Qed tfittex it-triq…
+Remis : {f} ¦ U rivendos: {f} ¦ Imqiegħed lura: {f}
+Rien à exporter dans cet écran. ¦ Asgjë për të eksportuar në këtë ekran. ¦ Xejn x’tesporta f’dan l-iskrin.
+SAISIE RAPIDE ¦ REGJISTRIM I SHPEJTË ¦ DAĦLA RAPIDA
+Sans aucune source ¦ Pa asnjë burim ¦ Mingħajr l-ebda sors
+Sans parents ¦ Pa prindër ¦ Mingħajr ġenituri
+Sans parents connus ¦ Pa prindër të njohur ¦ Mingħajr ġenituri magħrufa
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Nën çdo emër: lidhja e tij e farefisnisë me personin e nisjes. ¦ Taħt kull isem: ir-rabta ta’ qrabá tiegħu mal-persuna tal-bidu.
+TON LIEN ¦ LIDHJA JOTE ¦ IR-RABTA TIEGĦEK
+Tableau (CSV) ¦ Tabelë (CSV) ¦ Tabella (CSV)
+Ton lien avec cette personne ¦ Lidhja jote me këtë person ¦ Ir-rabta tiegħek ma’ din il-persuna
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Lidhja jote me këtë person (nga {nm}) — kliko për të parë rrugën. ¦ Ir-rabta tiegħek ma’ din il-persuna (minn {nm}) — ikklikkja biex tara t-triq.
+Tous les genres ¦ Të gjitha gjinitë ¦ Is-sessi kollha
+Un enfant sans nom de famille prend celui du père. ¦ Një fëmijë pa mbiemër merr atë të babait. ¦ Tifel mingħajr kunjom jieħu dak tal-missier.
+Voir la note de recherche ¦ Shiko shënimin e kërkimit ¦ Ara n-nota ta’ riċerka
+conjoint de ¦ bashkëshorti i ¦ konjuġi ta’
+enfant de ¦ fëmija i ¦ wild ta’
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ p.sh. për t’u kontrolluar: shenja 3 E 125, gjurmë: regjistri i famullisë fqinje ¦ eż. biex tiċċekkja: referenza 3 E 125, ħjiel: reġistru tal-parroċċa ġirien
+inconnu(e) ¦ i/e panjohur ¦ mhux magħruf/a
+par {nm} ¦ nga {nm} ¦ minn {nm}
+parent de ¦ prindi i ¦ ġenitur ta’
+{a}–{b} ¦ {a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} ishte rreth {age} ¦ {nm} kellu madwar {age}
+{nm} avait moins d’un an ¦ {nm} ishte më pak se një vjeç ¦ {nm} kellu inqas minn sena
+{nm} avait {age} ¦ {nm} ishte {age} ¦ {nm} kellu {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ {n} peshim(e) · i fundit: {w} më {d} ¦ {n} użin/i · l-aħħar: {w} fil-{d}
+{n} {what} ¦ {n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ {n} hap(a) nga personi i nisjes. ¦ {n} pass/i mill-persuna tal-bidu.
+{s} depuis la première ¦ {s} që nga e para ¦ {s} mill-ewwel waħda
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Ngjarje konfidenciale: e fshehur në lexim, në eksportime, në ndarje dhe në sajt. ¦ Avveniment kunfidenzjali: moħbi fil-qari, fl-esportazzjonijiet, fil-qsim u fis-sit.
+à {x} ¦ në {x} ¦ f’{x}
+↩ Remettre ¦ ↩ Rivendos ¦ ↩ Poġġi lura
+⇆ Comparer avec maintenant ¦ ⇆ Krahaso me tani ¦ ⇆ Qabbel ma’ issa
+⚡ ＋ Famille ¦ ⚡ ＋ Familje ¦ ⚡ ＋ Familja
+✓ Garder celle-ci ¦ ✓ Mbaj këtë ¦ ✓ Żomm din
+✓ Remis ¦ ✓ U rivendos ¦ ✓ Imqiegħed lura
+＋ Un enfant de plus ¦ ＋ Edhe një fëmijë ¦ ＋ Tifel ieħor
+👪 Fiche familiale ¦ 👪 Kartela e familjes ¦ 👪 Skeda tal-familja
+📈 Animal : poids et croissance ¦ 📈 Kafsha: pesha dhe rritja ¦ 📈 Annimal: piż u tkabbir
+📝 Avec une note de recherche ¦ 📝 Me një shënim kërkimi ¦ 📝 B’nota ta’ riċerka
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Shënim kërkimi (për t’u kontrolluar, shenja, gjurmë) ¦ 📝 Nota ta’ riċerka (biex tiċċekkja, referenza, ħjiel)
+📝 Note de recherche : {x} ¦ 📝 Shënim kërkimi: {x} ¦ 📝 Nota ta’ riċerka: {x}
+🔒 confidentiel ¦ 🔒 konfidenciale ¦ 🔒 kunfidenzjali
+🔒 Événement confidentiel ¦ 🔒 Ngjarje konfidenciale ¦ 🔒 Avveniment kunfidenzjali
+🧭 Aucun lien connu ¦ 🧭 Asnjë lidhje e njohur ¦ 🧭 L-ebda rabta magħrufa
+🧭 Personne de départ ¦ 🧭 Personi i nisjes ¦ 🧭 Persuna tal-bidu
+🧭 Ton lien ¦ 🧭 Lidhja jote ¦ 🧭 Ir-rabta tiegħek
+🧭 Ton lien avec cette personne ¦ 🧭 Lidhja jote me këtë person ¦ 🧭 Ir-rabta tiegħek ma’ din il-persuna
+🧭 personne de départ ¦ 🧭 personi i nisjes ¦ 🧭 persuna tal-bidu
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ E re… në skedën e hapur (një person te Personat) ¦ Ġdid… fit-tab miftuħa (persuna f’Persuni)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Zhbëj modifikimin e fundit të një kartele (jashtë një kutie teksti, menjëherë, me «↷ Ribëj») ¦ Erġa’ lura mill-aħħar bidla ta’ skeda (barra minn kaxxa tat-test, minnufih, b’“↷ Erġa’ agħmel”)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Eksporto atë që tregon skeda e hapur (⤓ Eksporto) ¦ Esporta dak li turi t-tab miftuħa (⤓ Esporta)
+Chercher dans la colonne de gauche ¦ Kërko në kolonën e majtë ¦ Fittex fil-kolonna tax-xellug
+Aucune personne ne correspond à ces filtres. ¦ Asnjë person nuk përputhet me këto filtra. ¦ L-ebda persuna ma taqbel ma’ dawn il-filtri.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Hiq një filtër (Filtro ▾) ose ndrysho renditjen. ¦ Neħħi filtru (Iffiltra ▾) jew ibdel l-ordni.
+Peau ¦ Lëkura ¦ Ġilda
+Origine / mention ¦ Origjina / shënim ¦ Oriġini / nota
+Mention conjoint ¦ Shënim për bashkëshortin ¦ Nota tal-konjuġi
+Mention enfants ¦ Shënim për fëmijët ¦ Nota tat-tfal
+Date alternative ¦ Data alternative ¦ Data alternattiva
+Lieu (n°) ¦ Vendi (nr.) ¦ Post (nru)
+Type (n°) ¦ Lloji (nr.) ¦ Tip (nru)
+Confidentiel ¦ Konfidenciale ¦ Kunfidenzjali
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: «{a}» ({na}) · B: «{b}» ({nb}) → {n} person(a) {op}. ¦ A: “{a}” ({na}) · B: “{b}” ({nb}) → {n} persuna/i {op}.
+Acte à commander supprimé ¦ Akti për t’u porositur u fshi ¦ Att li jrid jiġi ordnat imħassar
+Ajouter à une liste ¦ Shto në një listë ¦ Żid ma’ lista
+Apparence (thème, couleurs, police) ¦ Pamja (tema, ngjyrat, shkronjat) ¦ Dehra (tema, kuluri, tipa)
+Aucune citation ne contient ce texte. ¦ Asnjë citim nuk e përmban këtë tekst. ¦ L-ebda kwotazzjoni ma fiha dan it-test.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Asnjë nga «Listat e mia» nuk përmban persona: krijo një te Cilësimet → Redaktuesi i listave. ¦ L-ebda waħda minn “Il-listi tiegħi” ma fiha persuni: oħloq waħda f’Issettjar → Editur tal-listi.
+Aucune ligne ne contient « {find} ». ¦ Asnjë rresht nuk përmban «{find}». ¦ L-ebda linja ma fiha “{find}”.
+Aucune source ne contient ce texte. ¦ Asnjë burim nuk e përmban këtë tekst. ¦ L-ebda sors ma fih dan it-test.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Ajo që është në një kërkim të ruajtur dhe jo në tjetrin (p.sh. Sosa të lindur në Corrèze pa akt pagëzimi): për të gjetur boshllëqet. ¦ Dak li hemm f’tiftixa ssejvjata u mhux fl-oħra (eż. is-Sosa mwielda f’Corrèze mingħajr att tal-magħmudija): biex issib il-vojt.
+Changer cette ligne ¦ Ndrysho këtë rresht ¦ Ibdel din il-linja
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Kërko dhe zëvendëso: ku të kërkosh, shkronjat e mëdha, fjalë e plotë ¦ Fittex u ibdel: fejn tfittex, ittri kbar, kelma sħiħa
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Kërko një fjalë në titullin, autorin dhe tekstin e burimeve, si dhe në faqen dhe shënimin e çdo citimi. ¦ Fittex kelma fit-titlu, l-awtur u t-test tas-sorsi, u fil-paġna u n-nota ta’ kull kwotazzjoni.
+Choisis deux lieux différents. ¦ Zgjidh dy vende të ndryshme. ¦ Agħżel żewġ postijiet differenti.
+Choisis deux recherches enregistrées. ¦ Zgjidh dy kërkime të ruajtura. ¦ Agħżel żewġ tfittxijiet issejvjati.
+Choisis les deux lieux. ¦ Zgjidh të dy vendet. ¦ Agħżel iż-żewġ postijiet.
+Choisis ou écris une étiquette. ¦ Zgjidh ose shkruaj një etiketë. ¦ Agħżel jew ikteb tikketta.
+Choisis où chercher. ¦ Zgjidh ku të kërkosh. ¦ Agħżel fejn tfittex.
+Citée ¦ E cituar ¦ Ikkwotata
+Cocher {name} ¦ Shëno {name} ¦ Immarka {name}
+Comparer deux recherches ¦ Krahaso dy kërkime ¦ Qabbel żewġ tfittxijiet
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Korrigjo një gabim kudo njëherësh («cultivatr» → «cultivateur»). Fillimisht sheh çdo rresht që do të ndryshonte; hiq shenjën nga ata që do të mbash. «↶ Zhbëj» i kthen të gjitha si më parë. ¦ Ikkoreġi żball kullimkien f’daqqa (“cultivatr” → “cultivateur”). L-ewwel tara kull linja li tinbidel; neħħi l-marka minn dawk li trid iżżomm. “↶ Erġa’ lura” jerġa’ jpoġġi kollox kif kien.
+Dernières recherches vidées ¦ Kërkimet e fundit u boshatisën ¦ L-aħħar tfittxijiet imbattla
+Descriptions des événements ¦ Përshkrimet e ngjarjeve ¦ Deskrizzjonijiet tal-avvenimenti
+Définition supprimée ¦ Përkufizimi u fshi ¦ Definizzjoni mħassra
+Dépouillement supprimé ¦ Zbërthimi u fshi ¦ Indiċi tar-reġistri mħassar
+Essaie un autre lien ou moins de critères. ¦ Provo një lidhje tjetër ose më pak kritere. ¦ Ipprova rabta oħra jew inqas kriterji.
+Ex : Poilu, À vérifier… ¦ P.sh.: Poilu, Për t’u kontrolluar… ¦ Eż.: Poilu, Biex tiċċekkja…
+Ex : cultivateur (vide = effacer) ¦ P.sh.: cultivateur (bosh = fshi) ¦ Eż.: cultivateur (vojt = ħassar)
+Ex : cultivatr ¦ P.sh.: cultivatr ¦ Eż.: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ P.sh.: regjistri i famullisë, fleta 12, Tulle… ¦ Eż.: reġistru parrokkjali, folio 12, Tulle…
+Extrait ¦ Fragment ¦ Silta
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Bëji te «Kërkim me shumë kritere», pastaj «Ruaj». ¦ Agħmilhom f’“Tiftix b’diversi kriterji”, imbagħad “Issejvja”.
+Graphiques et tableau de bord ¦ Grafikët dhe paneli ¦ Grafiċi u pannell
+Il faut au moins deux recherches enregistrées. ¦ Duhen të paktën dy kërkime të ruajtura. ¦ Jeħtieġu mill-inqas żewġ tfittxijiet issejvjati.
+Lacune supprimée ¦ Boshllëku u fshi ¦ Vojt imħassar
+Les recherches enregistrées ne sont pas disponibles. ¦ Kërkimet e ruajtura nuk janë të disponueshme. ¦ It-tfittxijiet issejvjati mhumiex disponibbli.
+Lien de parenté inconnu. ¦ Lidhje farefisnie e panjohur. ¦ Rabta ta’ qrabá mhux magħrufa.
+Ligne de transcription supprimée ¦ Rreshti i transkriptimit u fshi ¦ Linja tat-traskrizzjoni mħassra
+Mot entier seulement ¦ Vetëm fjalë e plotë ¦ Kelma sħiħa biss
+Neveux et nièces ¦ Nipërit dhe mbesat ¦ Neputijiet
+Nom de table invalide. ¦ Emër tabele i pavlefshëm. ¦ Isem tat-tabella invalidu.
+Noms de lieux ¦ Emrat e vendeve ¦ Ismijiet tal-postijiet
+Nouvelle étiquette… ¦ Etiketë e re… ¦ Tikketta ġdida…
+Nés en ou après ¦ Të lindur në ose pas ¦ Imwielda fi jew wara
+Nés en ou avant ¦ Të lindur në ose para ¦ Imwielda fi jew qabel
+Oncles et tantes ¦ Xhaxhallarët, dajat dhe hallat, tezet ¦ Zijiet
+Onglets ajoutés au menu ¦ Skedat e shtuara në menu ¦ Tabs miżjuda mal-menu
+Onglets cachés du menu ¦ Skedat e fshehura nga menuja ¦ Tabs moħbija mill-menu
+Ordre des types de recherche ¦ Renditja e llojeve të kërkimit ¦ Ordni tat-tipi ta’ tfittxija
+Ordre du menu ¦ Renditja e menusë ¦ Ordni tal-menu
+Ouvrir la recherche multicritère ¦ Hap kërkimin me shumë kritere ¦ Iftaħ it-tiftix b’diversi kriterji
+Où chercher ¦ Ku të kërkosh ¦ Fejn tfittex
+Personne relevée retirée ¦ Personi i regjistruar u hoq ¦ Persuna rreġistrata mneħħija
+Puis le lien de parenté cherché. ¦ Pastaj lidhja e farefisnisë që kërkohet. ¦ Imbagħad ir-rabta ta’ qrabá li qed tfittex.
+Rangement des pages des Réglages ¦ Rregullimi i faqeve të Cilësimeve ¦ Organizzazzjoni tal-paġni tal-Issettjar
+Recherche A ¦ Kërkimi A ¦ Tfittxija A
+Recherche B ¦ Kërkimi B ¦ Tfittxija B
+Recherche dans les sources… ¦ Duke kërkuar në burime… ¦ Qed tfittex fis-sorsi…
+Recherche dans l’arbre… ¦ Duke kërkuar në pemë… ¦ Qed tfittex fis-siġra…
+Recherche des lignes à changer… ¦ Duke kërkuar rreshtat për t’u ndryshuar… ¦ Qed jitfittxew il-linji biex jinbidlu…
+Recherche par lien de parenté ¦ Kërkim sipas lidhjes së farefisnisë ¦ Tfittxija skont ir-rabta ta’ qrabá
+Respecter les majuscules ¦ Respekto shkronjat e mëdha ¦ Irrispetta l-ittri kbar
+Rien de coché : les actions portent sur les {t} résultats ¦ Asgjë e shënuar: veprimet zbatohen për {t} rezultatet ¦ Xejn immarkat: l-azzjonijiet japplikaw għall-{t} riżultat
+Règle introuvable. ¦ Rregulli nuk u gjet. ¦ Ir-regola ma nstabitx.
+Règle supprimée ¦ Rregulli u fshi ¦ Regola mħassra
+Résultats de la recherche ¦ Rezultatet e kërkimit ¦ Riżultati tat-tfittxija
+Sections ouvertes ou fermées ¦ Seksione të hapura ose të mbyllura ¦ Taqsimiet miftuħa jew magħluqa
+Seulement les décédés ¦ Vetëm të vdekurit ¦ Il-mejtin biss
+Seulement les vivants ¦ Vetëm të gjallët ¦ Il-ħajjin biss
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Shfaqen vetëm {n} rreshtat e parë; «Zëvendëso» ndryshon rreshtat e shënuar. ¦ Jintwerew biss l-ewwel {n} linji; “Ibdel” jibdel il-linji mmarkati.
+Sources et citations ¦ Burime dhe citime ¦ Sorsi u kwotazzjonijiet
+Suppression impossible ici. ¦ Fshirja nuk është e mundur këtu. ¦ Ma tistax tħassar hawn.
+Tape au moins deux lettres. ¦ Shkruaj të paktën dy shkronja. ¦ Ikteb mill-inqas żewġ ittri.
+Tape le texte à chercher. ¦ Shkruaj tekstin për të kërkuar. ¦ Ikteb it-test li trid tfittex.
+Texte à chercher ¦ Teksti për t’u kërkuar ¦ Test biex tfittex
+Texte à chercher trop long. ¦ Teksti për t’u kërkuar është shumë i gjatë. ¦ It-test li tfittex twil wisq.
+Tous les ancêtres ¦ Të gjithë paraardhësit ¦ L-antenati kollha
+Tous les descendants ¦ Të gjithë pasardhësit ¦ Id-dixxendenti kollha
+Trouvé dans ¦ U gjet në ¦ Instab f’
+Type d’événement supprimé ¦ Lloji i ngjarjes u fshi ¦ Tip ta’ avveniment imħassar
+Types de recherche cachés ¦ Llojet e fshehura të kërkimit ¦ Tipi ta’ tfittxija moħbija
+Vider la liste ¦ Boshatis listën ¦ Battal il-lista
+Vivant(e) ¦ I/e gjallë ¦ Ħaj/Ħajja
+Vivants et décédés ¦ Të gjallë dhe të vdekur ¦ Ħajjin u mejtin
+dans A et dans B ¦ në A dhe në B ¦ f’A u f’B
+dans A mais pas dans B ¦ në A por jo në B ¦ f’A imma mhux f’B
+dans A ou dans B ¦ në A ose në B ¦ f’A jew f’B
+dans une seule des deux ¦ vetëm në njërin prej të dyve ¦ f’waħda biss mit-tnejn
+{n} cochée(s) sur {t} ¦ {n} të shënuara nga {t} ¦ {n} immarkati minn {t}
+{n} ligne(s) cochée(s) sur {t} ¦ {n} rresht(a) të shënuar nga {t} ¦ {n} linja/i mmarkati minn {t}
+{rel} de {name} : {n} personne(s). ¦ {rel} të {name}: {n} person(a). ¦ {rel} ta’ {name}: {n} persuna/i.
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ «Të gjithë kushërinjtë e parë të…», «pasardhësit e gjallë të… të lindur pas 1900»: zgjidh një person dhe një lidhje. ¦ “Il-kuġini ġermani kollha ta’…”, “id-dixxendenti ħajjin ta’… imwielda wara l-1900”: agħżel persuna u rabta.
+Étiqueter {n} personne(s) ¦ Etiketo {n} person(a) ¦ Ittikkettja {n} persuna/i
+⟳ Recharger la page ¦ ⟳ Ringarko faqen ¦ ⟳ Erġa’ tella’ l-paġna
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 «{label}» u vendos te {n} person(a) ¦ 🏷 “{label}” tpoġġiet fuq {n} persuna/i
+🏷 Étiqueter ¦ 🏷 Etiketo ¦ 🏷 Ittikkettja
+📊 Comparer deux recherches ¦ 📊 Krahaso dy kërkime ¦ 📊 Qabbel żewġ tfittxijiet
+📋 Ajouter à Mes listes ¦ 📋 Shto te Listat e mia ¦ 📋 Żid mal-Listi tiegħi
+📋 {n} personne(s) ajoutée(s) à « {list} » ¦ 📋 {n} person(a) u shtua(n) te «{list}» ¦ 📋 {n} persuna/i miżjuda ma’ “{list}”
+📚 Sources ({n}) ¦ 📚 Burime ({n}) ¦ 📚 Sorsi ({n})
+🔁 Chercher et remplacer ¦ 🔁 Kërko dhe zëvendëso ¦ 🔁 Fittex u ibdel
+🔁 Remplacer ¦ 🔁 Zëvendëso ¦ 🔁 Ibdel
+🔁 Remplacer ({n}) ¦ 🔁 Zëvendëso ({n}) ¦ 🔁 Ibdel ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 {n} zëvendësim(e) u bënë ¦ 🔁 {n} sostituzzjoni/jiet saru
+🔎 Ce que j’ai changé ¦ 🔎 Çfarë kam ndryshuar ¦ 🔎 Dak li biddilt
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 {n} rresht(a) nga një kartelë e kyçur: nuk do të ndryshojnë. ¦ 🔒 {n} linja/i minn skeda msakkra: mhux se jinbidlu.
+🔖 Citations ({n}) ¦ 🔖 Citime ({n}) ¦ 🔖 Kwotazzjonijiet ({n})
+🕘 Dernières recherches ¦ 🕘 Kërkimet e fundit ¦ 🕘 L-aħħar tfittxijiet
+🗄 Santé de la base ¦ 🗄 Shëndeti i bazës ¦ 🗄 Saħħa tad-database
+🧬 Lien de parenté ¦ 🧬 Lidhja e farefisnisë ¦ 🧬 Rabta ta’ qrabá
+🧾 Sources et citations ¦ 🧾 Burime dhe citime ¦ 🧾 Sorsi u kwotazzjonijiet
+Lieux « {q} » ¦ Vendet «{q}» ¦ Postijiet “{q}”
+Transcriptions « {q} » ¦ Transkriptimet «{q}» ¦ Traskrizzjonijiet “{q}”
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Eksportimi i pamundur: ngjarjet konfidenciale nuk mund të hiqeshin. Provo përsëri pas pak. ¦ Ma tistax tesporta: l-avvenimenti kunfidenzjali ma setgħux jitneħħew. Erġa’ pprova fi ftit.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Ngjarjet konfidenciale nuk mund të fshiheshin: provo përsëri pas pak. ¦ L-avvenimenti kunfidenzjali ma setgħux jinħbew: erġa’ pprova fi ftit.
+, ni les fiches et événements confidentiels. ¦ , as kartelat dhe ngjarjet konfidenciale. ¦ , u lanqas l-iskedi u l-avvenimenti kunfidenzjali.
+🔒  ¦ 🔒  ¦ 🔒 
+📤 Envoyer vers… ¦ 📤 Dërgo te… ¦ 📤 Ibgħat lil…
+Dans une nouvelle présentation ¦ Në një paraqitje të re ¦ F’preżentazzjoni ġdida
+Dans un nouveau diaporama ¦ Në një diaporamë të re ¦ F’slideshow ġdid
+Dans un livre de la Mise en page… ¦ Në një libër të Faqosjes… ¦ Fi ktieb tat-Tqassim…
+Dans un nouveau document (Traitement de texte) ¦ Në një dokument të ri (Përpunues teksti) ¦ F’dokument ġdid (Proċessur tal-kliem)
+Dans le Tableur ¦ Në Fletën llogaritëse ¦ Fil-Folja elettronika
+Sur une page de mon site… ¦ Në një faqe të sajtit tim… ¦ Fuq paġna tas-sit tiegħi…
+Dans la Retouche des photos ¦ Te Retushimi i fotove ¦ Fl-Irtokk tar-ritratti
+Comparer avec une autre photo ¦ Krahaso me një foto tjetër ¦ Qabbel ma’ ritratt ieħor
+Dans l’Atelier de transcription ¦ Te Punishtja e transkriptimit ¦ Fil-Laboratorju tat-traskrizzjoni
+Dans le Dessin vectoriel ¦ Te Vizatimi vektorial ¦ Fit-Tpinġija vettorjali
+Dans les Traitements par lot ¦ Te Përpunimet në grup ¦ Fil-Proċessar f’lottijiet
+Envoyer les images vers… ¦ Dërgo imazhet te… ¦ Ibgħat l-immaġnijiet lil…
+Envoyer le texte vers… ¦ Dërgo tekstin te… ¦ Ibgħat it-test lil…
+Envoyer le tableau vers… ¦ Dërgo tabelën te… ¦ Ibgħat it-tabella lil…
+Envoyer le son vers… ¦ Dërgo zërin te… ¦ Ibgħat il-ħoss lil…
+Envoyer la vidéo vers… ¦ Dërgo videon te… ¦ Ibgħat il-vidjo lil…
+Envoyer le dessin vers… ¦ Dërgo vizatimin te… ¦ Ibgħat it-tpinġija lil…
+Rangement du son dans les médias… ¦ Zëri po vendoset te mediat… ¦ Il-ħoss qed jitqiegħed fil-midja…
+Rangement de la vidéo dans les médias… ¦ Videoja po vendoset te mediat… ¦ Il-vidjo qed jitqiegħed fil-midja…
+Rien à envoyer. ¦ Asgjë për të dërguar. ¦ Xejn x’tibgħat.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Asnjë mjet nuk mund ta marrë këtë tani për tani. ¦ L-ebda għodda ma tista’ tirċievi dan għalissa.
+En image (montage, studio, présentation, document…) ¦ Si imazh (montazh, studio, paraqitje, dokument…) ¦ Bħala immaġni (immuntar, studjo, preżentazzjoni, dokument…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Si vizatim, i qartë në çdo madhësi (libër, sajt…) ¦ Bħala tpinġija, ċara f’kull daqs (ktieb, sit…)
+＋ Nouvelle crise ¦ ＋ Krizë e re ¦ ＋ Kriżi ġdida
+Modifier cette crise ¦ Ndrysho këtë krizë ¦ Ibdel din il-kriżi
+Supprimer cette crise ¦ Fshi këtë krizë ¦ Ħassar din il-kriżi
+Nouvelle crise ¦ Krizë e re ¦ Kriżi ġdida
+Modifier la crise ¦ Ndrysho krizën ¦ Ibdel il-kriżi
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ EPIDEMI, LUFTËRA, DIMRA TË TMERRSHËM ¦ EPIDEMIJI, GWERREK, XTIEWI TERRIBBLI
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Krizat e mëdha të historisë së Francës pranë vdekjeve në familjen tënde: për të kuptuar një valë vdekjesh (kolera e 1832, Dimri i Madh i 1709, gripi spanjoll…). Shto tëndat: një epidemi në fshat, një zjarr, një përmbytje… ¦ Il-kriżijiet il-kbar tal-istorja ta’ Franza ħdejn l-imwiet fil-familja tiegħek: biex tifhem mewġa ta’ mwiet (kolera tal-1832, ix-Xitwa l-Kbira tal-1709, l-influwenza Spanjola…). Żid tiegħek: epidemija fir-raħal, nirien, għargħar…
+▦ Vignettes ¦ ▦ Miniatura ¦ ▦ Minjaturi
+🏷 Par éditeur ¦ 🏷 Sipas botuesit ¦ 🏷 Skont il-pubblikatur
+📍 Par lieu ¦ 📍 Sipas vendit ¦ 📍 Skont il-post
+✉️ Écrites / vierges ¦ ✉️ Të shkruara / të pashkruara ¦ ✉️ Miktuba / vojta
+Survole pour voir le verso ¦ Kalo sipër për të parë anën e pasme ¦ Għaddi minn fuqha biex tara n-naħa ta’ wara
+Aucune fiche de carte postale pour l’instant ¦ Ende asnjë kartelë kartoline ¦ Għad m’hemm l-ebda skeda ta’ kartolina
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Listat → 🏞 Kartolina: jepi çdo karte botuesin, numrin, vendin, anën e përparme dhe të pasme. ¦ Listi → 🏞 Kartolini: agħti lil kull kartolina l-pubblikatur, in-numru, il-post, in-naħa ta’ quddiem u ta’ wara tagħha.
+Éditeur inconnu ¦ Botues i panjohur ¦ Pubblikatur mhux magħruf
+Écrites ou envoyées ¦ Të shkruara ose të dërguara ¦ Miktuba jew mibgħuta
+Vierges (jamais envoyées) ¦ Të pashkruara (nuk janë dërguar kurrë) ¦ Vojta (qatt ma ntbagħtu)
+Il manque les n° {n} ¦ Mungojnë nr. {n} ¦ Jonqsu n-numri {n}
+Il manque le n° {n} ¦ Mungon nr. {n} ¦ Jonqos in-numru {n}
+cartes ¦ karta ¦ kartolini
+Marge de « vers » ¦ Marzhi i «rreth» ¦ Marġni ta’ “madwar”
+Portée de « avant » / « après » ¦ Shtrirja e «para» / «pas» ¦ Firxa ta’ “qabel” / “wara”
+Longueur d’une vie sans fin connue ¦ Gjatësia e një jete pa fund të njohur ¦ Tul ta’ ħajja mingħajr tmiem magħruf
+Ouvrir dans le Tableur… ¦ Hap në Fletën llogaritëse… ¦ Iftaħ fil-Folja elettronika…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Hap të ftuarit në Fletën llogaritëse ¦ 🧾 Iftaħ il-mistednin fil-Folja elettronika
+📤 Envoyer le tableau des invités ¦ 📤 Dërgo tabelën e të ftuarve ¦ 📤 Ibgħat it-tabella tal-mistednin
+🧾 Ouvrir dans le Tableur ¦ 🧾 Hap në Fletën llogaritëse ¦ 🧾 Iftaħ fil-Folja elettronika
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Tabela e të ftuarve, me degën e tyre, lidhjen e farefisnisë dhe përgjigjen e tyre. ¦ It-tabella tal-mistednin, bil-fergħa tagħhom, ir-rabta ta’ qrabá u t-tweġiba tagħhom.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Të gjitha fotot e albumit: një diaporamë, një film, një përpunim në grup… ¦ Ir-ritratti kollha tal-album: slideshow, film, proċessar f’lott…
+Album — {nm} ¦ Album — {nm} ¦ Album — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Pasardhësit (nga lart poshtë, një ngjyrë për çdo degë) ¦ Dixxendenti (minn fuq għal isfel, kulur għal kull fergħa)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Pasardhësit kanë nevojë për mjetin Takime kushërinjsh, i cili nuk është ngarkuar. ¦ Id-dixxendenti jeħtieġu l-għodda Laqgħat tal-familja, li mhix mtellgħa.
+Aucune descendance pour cette personne. ¦ Asnjë pasardhës për këtë person. ¦ L-ebda dixxendent għal din il-persuna.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Asnjë fëmijë i njohur për këtë person: asnjë pasardhës për të vizatuar. ¦ L-ebda tifel magħruf għal din il-persuna: l-ebda dixxendenza x’tpinġi.
+La descendance de {nm} ¦ Pasardhësit e {nm} ¦ Id-dixxendenti ta’ {nm}
+la famille ¦ familja ¦ il-familja
+L’arbre (en fond) ¦ Pema (në sfond) ¦ Is-siġra (fl-isfond)
+📰 En faire un faire-part ¦ 📰 Bëje një lajmërim ¦ 📰 Agħmel minnu partiċipazzjoni
+Créer le faire-part ¦ Krijo lajmërimin ¦ Oħloq il-partiċipazzjoni
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Pema vendoset në sfond, pas teksteve të lajmërimit. Pastaj gjithçka hapet në vizatimin vektorial për ta retushuar. ¦ Is-siġra titqiegħed fl-isfond, wara t-testi tal-partiċipazzjoni. Imbagħad kollox jinfetaħ fit-tpinġija vettorjali biex tirtokkah.
+L’arbre derrière le texte ¦ Pema pas tekstit ¦ Is-siġra wara t-test
+Très pâle ¦ Shumë e zbehtë ¦ Ċar ħafna
+Pâle ¦ E zbehtë ¦ Ċar
+Bien visible ¦ Mirë e dukshme ¦ Jidher sew
+Fabrication du faire-part… ¦ Duke bërë lajmërimin… ¦ Il-partiċipazzjoni qed issir…
+Personne à dessiner dans l’arbre. ¦ Personi për t’u vizatuar në pemë. ¦ Persuna biex titpinġa fis-siġra.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Pema në sfond të një lajmërimi për takim kushërinjsh ose dasmë ¦ Is-siġra fl-isfond ta’ partiċipazzjoni għal-laqgħa tal-familja jew tieġ
+En faire un faire-part ¦ Bëje një lajmërim ¦ Agħmel minnu partiċipazzjoni
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Të njëjtat cilësime, një lajmërim për çdo person (një listë, një etiketë) ose çdo familje të një takimi kushërinjsh, të gjitha në një PDF të vetëm ¦ L-istess issettjar, partiċipazzjoni għal kull persuna (lista, tikketta) jew għal kull familja ta’ laqgħa tal-familja, kollha f’PDF wieħed
+Un faire-part par personne / par foyer… ¦ Një lajmërim për person / për familje… ¦ Partiċipazzjoni għal kull persuna / familja…
+📬 Un faire-part par personne / par foyer ¦ 📬 Një lajmërim për person / për familje ¦ 📬 Partiċipazzjoni għal kull persuna / familja
+📄 Fabriquer le PDF ¦ 📄 Krijo PDF-në ¦ 📄 Oħloq il-PDF
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Lajmërimi ashtu siç e ke rregulluar, një herë për çdo person ose çdo familje. Të gjitha lajmërimet vendosen në një PDF të vetëm, gati për printim. ¦ Il-partiċipazzjoni kif issettjajtha, darba għal kull persuna jew kull familja. Il-partiċipazzjonijiet kollha jitqiegħdu f’PDF wieħed, lest għall-istampar.
+Une liste de personnes ¦ Një listë personash ¦ Lista ta’ persuni
+Les personnes d’une étiquette ¦ Personat e një etikete ¦ Il-persuni ta’ tikketta
+Les foyers d’une cousinade ¦ Familjet e një takimi kushërinjsh ¦ Il-familji ta’ laqgħa tal-familja
+La cousinade (les foyers invités) ¦ Takimi i kushërinjve (familjet e ftuara) ¦ Il-laqgħa tal-familja (il-familji mistiedna)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ Në fushat e lajmërimit, këto fjalë zëvendësohen për secilin: ¦ Fil-kaxxi tal-partiċipazzjoni, dawn il-kliem jinbidlu għal kulħadd:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (takim kushërinjsh: edhe {titre}, {date}, {lieu}, {ancetre}…) ¦ (laqgħa tal-familja: ukoll {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Emri i personit (ose i familjes) në krye të çdo lajmërimi ¦ L-isem tal-persuna (jew tal-familja) fuq kull partiċipazzjoni
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Plotëso edhe nga kartela e secilit (emra, data, vende) ¦ Imla wkoll mill-iskeda ta’ kulħadd (ismijiet, dati, postijiet)
+L’enveloppe de chacun porte son adresse. ¦ Zarfi i secilit mban adresën e tij. ¦ L-envelopp ta’ kulħadd fih l-indirizz tiegħu.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ Asnjë familje e ftuar në këtë takim kushërinjsh: shëno fillimisht të ftuarit. ¦ L-ebda familja mistiedna f’din il-laqgħa tal-familja: immarka l-mistednin l-ewwel.
+Fabrication de {n} faire-part… ¦ Duke bërë {n} lajmërim(e)… ¦ Qed isiru {n} partiċipazzjoni/jiet…
+{i} sur {n}… ¦ {i} nga {n}… ¦ {i} minn {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ {n} lajmërim(e) në një PDF të vetëm ({p} faqe). ¦ {n} partiċipazzjoni/jiet f’PDF wieħed ({p} paġni).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Vizatimi vektorial nuk është ngarkuar: PDF-ja nuk mund të krijohet. ¦ It-tpinġija vettorjali mhix mtellgħa: il-PDF ma jistax isir.
+Une action de la Retouche ¦ Një veprim i Retushimit ¦ Azzjoni tal-Irtokk
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Një veprim i ruajtur te Retushimi i fotove (Skedari → Veprime), në çdo imazh. ¦ Azzjoni ssejvjata fl-Irtokk tar-ritratti (Fajl → Azzjonijiet), fuq kull immaġni.
+aucune action choisie ¦ asnjë veprim i zgjedhur ¦ l-ebda azzjoni magħżula
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Retushimi i fotove nuk është ngarkuar: veprimi «{name}» nuk mund të bëhet. ¦ L-Irtokk tar-ritratti mhux mtella’: l-azzjoni “{name}” ma tistax issir.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Veprimi «{name}» i Retushimit nuk dha asgjë. ¦ L-azzjoni “{name}” tal-Irtokk ma tat xejn.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Retushimi i fotove nuk është ngarkuar: ky hap nuk do të mund të bëhet. ¦ L-Irtokk tar-ritratti mhux mtella’: dan il-pass ma jkunx jista’ jsir.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ Asnjë veprim i ruajtur te Retushimi. Hap një foto te Retushimi, pastaj Skedari → Veprime për të ruajtur një. ¦ L-ebda azzjoni ssejvjata fl-Irtokk. Iftaħ ritratt fl-Irtokk, imbagħad Fajl → Azzjonijiet biex tissejvja waħda.
+L’action ¦ Veprimi ¦ L-azzjoni
+Choisir une action… ¦ Zgjidh një veprim… ¦ Agħżel azzjoni…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Një veprim i ruajtur te Retushimi i fotove, i bërë në çdo imazh të grupit. ¦ Azzjoni ssejvjata fl-Irtokk tar-ritratti, magħmula fuq kull immaġni tal-lott.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Imazhet e vendosura te mediat nga ky grup: një diaporamë, një montazh… ¦ L-immaġnijiet li dan il-lott qiegħed fil-midja: slideshow, immuntar…
+Traitement par lot ¦ Përpunim në grup ¦ Proċessar f’lott
+{x} introuvable dans les médias. ¦ {x} nuk u gjet te mediat. ¦ {x} ma nstabx fil-midja.
+Ouvrir cette image dans la Retouche des photos ¦ Hap këtë imazh te Retushimi i fotove ¦ Iftaħ din l-immaġni fl-Irtokk tar-ritratti
+Retoucher ¦ Retusho ¦ Irtokka
+Envoyer cette image vers un autre outil ¦ Dërgo këtë imazh te një mjet tjetër ¦ Ibgħat din l-immaġni lil għodda oħra
+📤 Envoyer le tableau en image vers… ¦ 📤 Dërgo tabelën si imazh te… ¦ 📤 Ibgħat it-tabella bħala immaġni lil…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Vizatimi shkon te një mjet tjetër: një libër i Faqosjes, një faqe e sajtit tim, Vizatimi vektorial… ¦ It-tpinġija tmur f’għodda oħra: ktieb tat-Tqassim, paġna tas-sit tiegħi, it-Tpinġija vettorjali…
+Créer et envoyer vers… ¦ Krijo dhe dërgo te… ¦ Oħloq u ibgħat lil…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Vendos një vizatim vektorial (pemë, hartë, stemë…)… ¦ ✒️ Poġġi tpinġija vettorjali (siġra, mappa, arma…)…
+Dessin vectoriel placé ¦ Vizatimi vektorial u vendos ¦ Tpinġija vettorjali mqiegħda
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ «{name}» u vendos: kur ndryshohet te Vizatimi vektorial, përditësohet këtu («↻ Përditëso»). ¦ ✒️ “{name}” tqiegħdet: jekk tinbidel fit-Tpinġija vettorjali, tiġi aġġornata hawn (“↻ Aġġorna”).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Vizatim vektorial <b>i lidhur</b>{state}: kur ndryshohet te Vizatimi vektorial, rivizatohet këtu («Përditëso»). ¦ ✒️ Tpinġija vettorjali <b>marbuta</b>{state}: jekk tinbidel fit-Tpinġija vettorjali, terġa’ titpinġa hawn (“Aġġorna”).
+✎ Modifier le dessin ¦ ✎ Ndrysho vizatimin ¦ ✎ Ibdel it-tpinġija
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Vizatimi mbetet siç është dhe nuk ndjek më Vizatimin vektorial ¦ It-tpinġija tibqa’ kif inhi u ma ssegwix aktar lit-Tpinġija vettorjali
+Dessin détaché ¦ Vizatimi u shkëput ¦ Tpinġija skonnettjata
+Le Dessin vectoriel n’est pas chargé. ¦ Vizatimi vektorial nuk është ngarkuar. ¦ It-Tpinġija vettorjali mhix mtellgħa.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Asnjë vizatim vektorial: bëj një te Listat → Mjetet e ndryshimit (Vizatim vektorial, Pemë dekorative, Hartë…). ¦ L-ebda tpinġija vettorjali: agħmel waħda f’Listi → Għodod tal-editjar (Tpinġija vettorjali, Siġra dekorattiva, Mappa…).
+PLACER ¦ VENDOS ¦ POĠĠI
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Një vizatim vektorial (pemë, hartë, stemë…) ¦ ✒️ Tpinġija vettorjali (siġra, mappa, arma…)
+Placer ce dessin ¦ Vendos këtë vizatim ¦ Poġġi din it-tpinġija
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Vizatimi mbetet i lidhur: kur ndryshohet te Vizatimi vektorial, përditësohet në libër («↻ Përditëso»). Mbetet i qartë në çdo madhësi. ¦ It-tpinġija tibqa’ marbuta: jekk tinbidel fit-Tpinġija vettorjali, tiġi aġġornata fil-ktieb (“↻ Aġġorna”). Tibqa’ ċara f’kull daqs.
+Choisis un dessin. ¦ Zgjidh një vizatim. ¦ Agħżel tpinġija.
+Le dessin n’a pas pu être lu. ¦ Vizatimi nuk mund të lexohej. ¦ It-tpinġija ma setgħetx tinqara.
+📐 Mettre dans un livre ¦ 📐 Vendos në një libër ¦ 📐 Poġġi fi ktieb
+Mettre dans le livre ¦ Vendos në libër ¦ Poġġi fil-ktieb
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Vizatimi vendoset te Media (si imazh), pastaj në një faqe të vetën, brenda kufijve. ¦ It-tpinġija titqiegħed fil-Midja (bħala immaġni), imbagħad fuq paġna għaliha, fil-marġini.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Imazhi vendoset në një faqe të vetën, brenda kufijve. Mbetet i lidhur me foton te Media. ¦ L-immaġni titqiegħed fuq paġna għaliha, fil-marġini. Tibqa’ marbuta mar-ritratt fil-Midja.
+Rangement du dessin dans les médias… ¦ Vizatimi po vendoset te mediat… ¦ It-tpinġija qed titqiegħed fil-midja…
+Mon livre ¦ Libri im ¦ Il-ktieb tiegħi
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Imazhi u shtua në një faqe të re në fund të librit: kontrollo, pastaj ruaj. ¦ Immaġni miżjuda fuq paġna ġdida fl-aħħar tal-ktieb: iċċekkja, imbagħad issejvja.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Libër i ri me imazhin: kontrollo, pastaj ruaj librin. ¦ Ktieb ġdid bl-immaġni: iċċekkja, imbagħad issejvja l-ktieb.
+📱 Livre numérique (.epub) ¦ 📱 Libër elektronik (.epub) ¦ 📱 Ktieb diġitali (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ lexues elektronikë: Kobo, Librat, Calibre… ¦ qarrejja diġitali: Kobo, Kotba, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Faqosja nuk është ngarkuar: ePub-i nuk mund të bëhet. ¦ It-Tqassim mhux mtella’: l-ePub ma jistax isir.
+« Envoyer vers… » n’est pas chargé. ¦ «Dërgo te…» nuk është ngarkuar. ¦ “Ibgħat lil…” mhux mtella’.
+Retoucher cette image ¦ Retusho këtë imazh ¦ Irtokka din l-immaġni
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Ky imazh nuk është te Media: nuk mund të retushohet. ¦ Din l-immaġni mhix fil-Midja: ma tistax tiġi rtokkata.
+Image retouchée mise à jour dans le texte. ¦ Imazhi i retushuar u përditësua në tekst. ¦ L-immaġni rtokkata ġiet aġġornata fit-test.
+Un document (Traitement de texte) ¦ Një dokument (Përpunues teksti) ¦ Dokument (Proċessur tal-kliem)
+le tableau dans un texte ¦ tabela në një tekst ¦ it-tabella f’test
+📝 Créer le document ¦ 📝 Krijo dokumentin ¦ 📝 Oħloq id-dokument
+Image du graphique (PNG) : {kind} ¦ Imazhi i grafikut (PNG): {kind} ¦ Immaġni tal-grafika (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Grafiku nuk mund të vizatohej. ¦ Il-grafika ma setgħetx titpinġa.
+Image du graphique enregistrée : {name} ¦ Imazhi i grafikut u ruajt: {name} ¦ Immaġni tal-grafika ssejvjata: {name}
+La feuille est vide : rien à envoyer. ¦ Fleta është bosh: asgjë për të dërguar. ¦ Il-folja vojta: xejn x’tibgħat.
+⤓ Image du graphique (PNG) ¦ ⤓ Imazhi i grafikut (PNG) ¦ ⤓ Immaġni tal-grafika (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} në montazh, njëri pas tjetrit. ¦ {what} fl-immuntar, wieħed wara l-ieħor.
+image ajoutée ¦ imazh i shtuar ¦ immaġni miżjuda
+images ajoutées ¦ imazhe të shtuara ¦ immaġnijiet miżjuda
+sous-titre ajouté ¦ titra e shtuar ¦ sottotitlu miżjud
+sous-titres ajoutés ¦ titra të shtuara ¦ sottotitli miżjuda
+Le fabricant de GIF n’est pas chargé. ¦ Krijuesi i GIF-eve nuk është ngarkuar. ¦ Il-magna tal-GIF mhix mtellgħa.
+🎞 GIF animé ¦ 🎞 GIF i animuar ¦ 🎞 GIF animat
+sans son, petit, tourne en boucle ¦ pa zë, i vogël, përsëritet pa fund ¦ bla ħoss, żgħir, idur f’ċiklu
+GIF… {n} % ¦ GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Videoja fillimisht krijohet (filmi luhet i tëri, lëre dritaren hapur), pastaj vendoset te mediat. ¦ Il-vidjo l-ewwel isir (il-film jerġa’ jindaqq kollu, ħalli t-tieqa miftuħa), imbagħad jitqiegħed fil-midja.
+Fabriquer la vidéo pour l’envoyer ? ¦ Të krijohet videoja për ta dërguar? ¦ Tagħmel il-vidjo biex tibagħtu?
+Fabriquer et envoyer ¦ Krijo dhe dërgo ¦ Agħmel u ibgħat
+ENVOYER ¦ DËRGO ¦ IBGĦAT
+Fabrication de la vidéo… ¦ Duke krijuar videon… ¦ Il-vidjo qed isir…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Videoja nuk mund të vendosej te mediat. ¦ Il-vidjo ma setax jitqiegħed fil-midja.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Zëri i përfunduar vendoset te mediat (një kopje), pastaj dërgohet. ¦ Il-ħoss lest jitqiegħed fil-midja (kopja), imbagħad jintbagħat.
+Envoyer le son ? ¦ Të dërgohet zëri? ¦ Tibgħat il-ħoss?
+Ranger et envoyer ¦ Ruaj dhe dërgo ¦ Poġġi u ibgħat
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Ende asnjë transkriptim: «⏱ Fut orën» (⌘T), pastaj shkruaj atë që thuhet. ¦ Għad m’hemm l-ebda traskrizzjoni: “⏱ Daħħal il-ħin” (⌘T), imbagħad ikteb dak li jingħad.
+Transcription — {name} ¦ Transkriptim — {name} ¦ Traskrizzjoni — {name}
+ (avec la transcription en sous-titres) ¦  (me transkriptimin si titra) ¦  (bit-traskrizzjoni bħala sottotitli)
+La transcription (texte) ¦ Transkriptimi (tekst) ¦ It-traskrizzjoni (test)
+Pas encore de transcription. ¦ Ende asnjë transkriptim. ¦ Għad m’hemm l-ebda traskrizzjoni.
+Agnès Bernauer ¦ Agnes Bernauer ¦ Agnes Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 kolona në formë shkalle dhe një rezervë me 7 grumbuj. Letra e parë e vendosur në një themel jep vlerën e nisjes për të katërt; zbritet duke alternuar të kuqen dhe të zezën, Mbreti kalon mbi Asin. Stiva vendos një letër në çdo grumbull të rezervës; një kolonë bosh merr letrën menjëherë nën vlerën e nisjes. ¦ 7 kolonni f’forma ta’ taraġ u riżerva ta’ 7 munzelli. L-ewwel karta mqiegħda fuq fondazzjoni tagħti l-valur tal-bidu tal-erbgħa; tibni ’l isfel billi talterna aħmar u iswed, is-Sultan jgħaddi fuq l-Ass. Il-mazz ipoġġi karta fuq kull munzell tar-riżerva; kolonna vojta tieħu l-karta eżatt taħt il-valur tal-bidu.
+Thumb and Pouch ¦ Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike ku zbritet mbi çdo ngjyrë letre përveç së vetës; një kolonë bosh merr çdo letër. Stiva kalon vetëm një herë. ¦ Klondike fejn tibni ’l isfel fuq kull lewn tal-karta ħlief tiegħu; kolonna vojta tieħu kwalunkwe karta. Il-mazz jgħaddi darba biss.
+Pas seul ¦ Jo vetëm ¦ Mhux waħdu
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 kolona me nga një letër; zbritet duke alternuar të kuqen dhe të zezën, një kolonë bosh merr çdo letër. Stiva kthehet një letër në një herë dhe kalon vetëm një herë. ¦ 6 kolonni ta’ karta waħda; tibni ’l isfel billi talterna aħmar u iswed, kolonna vojta tieħu kwalunkwe karta. Il-mazz jinqaleb karta karta u jgħaddi darba biss.
+Les impasses ¦ Rrugët pa krye ¦ It-toroq għeluq
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Asët vendosen paraprakisht; 6 kolona me 3 letra (dy të fshehura). Zbritet duke alternuar të kuqen dhe të zezën, një kolonë bosh merr çdo letër; stiva kalon edhe një herë. ¦ L-Assi jitqiegħdu minn qabel; 6 kolonni ta’ 3 karti (tnejn moħbija). Tibni ’l isfel billi talterna aħmar u iswed, kolonna vojta tieħu kwalunkwe karta; il-mazz jgħaddi darba oħra.
+Huit fois huit ¦ Tetë herë tetë ¦ Tmienja drabi tmienja
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Dy pako, 8 kolona me 8 letra të dukshme; zbritet duke alternuar të kuqen dhe të zezën, një kolonë bosh merr çdo letër. Stiva kalon edhe dy herë. ¦ Żewġ mazzi, 8 kolonni ta’ 8 karti viżibbli; tibni ’l isfel billi talterna aħmar u iswed, kolonna vojta tieħu kwalunkwe karta. Il-mazz jgħaddi darbtejn oħra.
+Spike ¦ Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 kolona në formë shkalle si në Klondike; zbritet duke alternuar të kuqen dhe të zezën dhe lëvizen vargje të tëra. Stiva vendos një letër në çdo kolonë. ¦ 7 kolonni f’forma ta’ taraġ bħal Klondike; tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq sekwenzi sħaħ. Il-mazz ipoġġi karta fuq kull kolonna.
+Alternance ¦ Alternim ¦ Alternanza
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dy pako, 7 kolona me 7 letra, një e fshehur mbi dy. Zbritet duke alternuar të kuqen dhe të zezën dhe lëvizen vargje të tëra; një kolonë bosh merr çdo letër. Stiva kalon vetëm një herë. ¦ Żewġ mazzi, 7 kolonni ta’ 7 karti, waħda moħbija kull tnejn. Tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq sekwenzi sħaħ; kolonna vojta tieħu kwalunkwe karta. Il-mazz jgħaddi darba biss.
+La harpe ¦ Harpa ¦ L-arpa
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Dy pako, 9 kolona në formë shkalle; zbritet duke alternuar të kuqen dhe të zezën. Stiva kthehet një letër në një herë dhe kalon edhe tri herë. ¦ Żewġ mazzi, 9 kolonni f’forma ta’ taraġ; tibni ’l isfel billi talterna aħmar u iswed. Il-mazz jinqaleb karta karta u jgħaddi tliet darbiet oħra.
+La grande harpe ¦ Harpa e madhe ¦ L-arpa l-kbira
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Dy pako, 10 kolona në formë shkalle; zbritet duke alternuar të kuqen dhe të zezën. Stiva kthehet një letër në një herë dhe kalon vetëm një herë. ¦ Żewġ mazzi, 10 kolonni f’forma ta’ taraġ; tibni ’l isfel billi talterna aħmar u iswed. Il-mazz jinqaleb karta karta u jgħaddi darba biss.
+Acme ¦ Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ Një rezervë me 13 letra dhe 4 kolona; themelet nisin nga Asi. Zbritet në të njëjtën ngjyrë letre, një letër në një herë; një kolonë bosh mbushet nga rezerva. Stiva kalon edhe një herë. ¦ Riżerva ta’ 13-il karta u 4 kolonni; il-fondazzjonijiet jibdew mill-Ass. Tibni ’l isfel fl-istess lewn tal-karta, karta karta; kolonna vojta timtela mir-riżerva. Il-mazz jgħaddi darba oħra.
+Le crapaud américain ¦ Zhaba amerikane ¦ Iż-żrinġ Amerikan
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Dy pako, një rezervë me 20 letra dhe 8 kolona. Letra e parë e vendosur në një themel jep vlerën e nisjes për të tetë; zbritet në të njëjtën ngjyrë letre, Mbreti kalon mbi Asin. Një kolonë bosh mbushet nga rezerva; stiva kalon edhe një herë. ¦ Żewġ mazzi, riżerva ta’ 20 karta u 8 kolonni. L-ewwel karta mqiegħda fuq fondazzjoni tagħti l-valur tal-bidu tat-tmienja; tibni ’l isfel fl-istess lewn tal-karta, is-Sultan jgħaddi fuq l-Ass. Kolonna vojta timtela mir-riżerva; il-mazz jgħaddi darba oħra.
+Canfield bigarré ¦ Canfield laraman ¦ Canfield imżewwaq
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Dy pako: Asët vendosen paraprakisht, një rezervë me 14 letra dhe 5 kolona. Zbritet duke alternuar të kuqen dhe të zezën; një kolonë bosh mbushet nga rezerva. Stiva kthehet tri letra në një herë dhe kalon edhe dy herë. ¦ Żewġ mazzi: l-Assi jitqiegħdu minn qabel, riżerva ta’ 14-il karta u 5 kolonni. Tibni ’l isfel billi talterna aħmar u iswed; kolonna vojta timtela mir-riżerva. Il-mazz jinqaleb tliet karti kull darba u jgħaddi darbtejn oħra.
+La duchesse ¦ Dukesha ¦ Id-Dukessa
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Katër grumbuj rezervë me 3 letra dhe 4 kolona me një letër. Letra e parë e vendosur në një themel jep vlerën e nisjes për të katërt; zbritet duke alternuar të kuqen dhe të zezën, Mbreti kalon mbi Asin. Një kolonë bosh merr çdo letër; stiva kalon edhe një herë. ¦ Erba’ munzelli ta’ riżerva ta’ 3 karti u 4 kolonni ta’ karta waħda. L-ewwel karta mqiegħda fuq fondazzjoni tagħti l-valur tal-bidu tal-erbgħa; tibni ’l isfel billi talterna aħmar u iswed, is-Sultan jgħaddi fuq l-Ass. Kolonna vojta tieħu kwalunkwe karta; il-mazz jgħaddi darba oħra.
+La porte ¦ Dera ¦ Il-bieb
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dy grumbuj rezervë me 5 letra (kanatet e derës) dhe 8 kolona me një letër. Zbritet duke alternuar të kuqen dhe të zezën dhe lëvizen vargje të tëra; një kolonë bosh merr çdo letër. Stiva kalon vetëm një herë. ¦ Żewġ munzelli ta’ riżerva ta’ 5 karti (il-ġwienaħ tal-bieb) u 8 kolonni ta’ karta waħda. Tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq sekwenzi sħaħ; kolonna vojta tieħu kwalunkwe karta. Il-mazz jgħaddi darba biss.
+Le pingouin ¦ Pinguini ¦ Il-pingwin
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Letra e parë jep vlerën e nisjes së themeleve, dhe tri të tjerat me të njëjtën vlerë ngjiten menjëherë atje. 7 kolona me 7, 7 kuti të lira; zbritet në të njëjtën ngjyrë letre, Mbreti kalon mbi Asin. Një kolonë bosh merr letrën menjëherë nën vlerën e nisjes. ¦ L-ewwel karta tagħti l-valur tal-bidu tal-fondazzjonijiet, u t-tlieta l-oħra tal-istess valur jitilgħu hemm minnufih. 7 kolonni ta’ 7, 7 postijiet ħielsa; tibni ’l isfel fl-istess lewn tal-karta, is-Sultan jgħaddi fuq l-Ass. Kolonna vojta tieħu l-karta eżatt taħt il-valur tal-bidu.
+Baker’s Game (Roi seul) ¦ Baker’s Game (vetëm Mbret) ¦ Baker’s Game (Sultan biss)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (zbritet në të njëjtën ngjyrë letre, 4 kuti të lira), por një kolonë bosh merr vetëm një Mbret. ¦ Baker’s Game (tibni ’l isfel fl-istess lewn tal-karta, 4 postijiet ħielsa), imma kolonna vojta tieħu Sultan biss.
+Seahaven détendu ¦ Seahaven i lirë ¦ Seahaven rilassat
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, por një varg i renditur mirë në të njëjtën ngjyrë letre lëviz njëherësh, sado i gjatë të jetë. ¦ Seahaven, imma sekwenza ordnata sew fl-istess lewn tal-karta tiċċaqlaq f’daqqa, ikun kemm ikun twil.
+Repair ¦ Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Dy pako, 10 kolona me 10 letra të dukshme dhe 4 kuti të lira tashmë të zëna; zbritet duke alternuar të kuqen dhe të zezën, një letër në një herë (ose një varg nëse kutitë e lira e lejojnë). ¦ Żewġ mazzi, 10 kolonni ta’ 10 karti viżibbli u 4 postijiet ħielsa diġà okkupati; tibni ’l isfel billi talterna aħmar u iswed, karta karta (jew sekwenza jekk il-postijiet ħielsa jħallu).
+Ocean Towers ¦ Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Dy pako, 14 kolona me 7 letra dhe 8 kuti të lira nga të cilat 6 tashmë të zëna; zbritet në të njëjtën ngjyrë letre, një kolonë bosh merr vetëm një Mbret. ¦ Żewġ mazzi, 14-il kolonna ta’ 7 karti u 8 postijiet ħielsa li minnhom 6 diġà okkupati; tibni ’l isfel fl-istess lewn tal-karta, kolonna vojta tieħu Sultan biss.
+Sept par quatre ¦ Shtatë me katër ¦ Sebgħa b’erbgħa
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell me 7 kolona dhe 4 kuti të lira: kolonat janë më të larta. ¦ FreeCell b’7 kolonni u 4 postijiet ħielsa: il-kolonni huma ogħla.
+Sept par cinq ¦ Shtatë me pesë ¦ Sebgħa b’ħamsa
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell me 7 kolona dhe 5 kuti të lira. ¦ FreeCell b’7 kolonni u 5 postijiet ħielsa.
+FreeCell défi ¦ FreeCell sfidë ¦ FreeCell sfida
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, por Asët dhe dyshet janë në fund të kolonave, nën të gjitha letrat e tjera. ¦ FreeCell, imma l-Assi u t-2 huma fil-qiegħ tal-kolonni, taħt il-karti l-oħra kollha.
+FreeCell super défi ¦ FreeCell super sfidë ¦ FreeCell super sfida
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell sfidë (Asët dhe dyshet në fund të kolonave), dhe një kolonë bosh merr vetëm një Mbret. ¦ FreeCell sfida (l-Assi u t-2 fil-qiegħ tal-kolonni), u kolonna vojta tieħu Sultan biss.
+Le scarabée ¦ Skarabeu ¦ Il-ħanfusa
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Scorpion pa stivë: të 52 letrat janë të dukshme në 7 kolona. Zbritet në të njëjtën ngjyrë letre dhe lëviz çdo grup; një kolonë bosh merr vetëm një Mbret. Një varg i plotë nga Mbreti te Asi largohet. ¦ Scorpion mingħajr mazz: it-52 karta kollha jidhru f’7 kolonni. Tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq kwalunkwe grupp; kolonna vojta tieħu Sultan biss. Sekwenza sħiħa mis-Sultan sal-Ass titlaq.
+Queue de scorpion ¦ Bishti i akrepit ¦ Denb tal-iskorpjun
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Si Scorpion (7 kolona me 7, lëviz çdo grup), por zbritet duke alternuar të kuqen dhe të zezën dhe letrat ngjiten te themelet nga Asi te Mbreti. ¦ Bħal Scorpion (7 kolonni ta’ 7, kwalunkwe grupp jiċċaqlaq), imma tibni ’l isfel billi talterna aħmar u iswed u l-karti jitilgħu fuq il-fondazzjonijiet mill-Ass sas-Sultan.
+Scorpion double ¦ Scorpion i dyfishtë ¦ Scorpion doppju
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Dy pako, 10 kolona, gjithçka shpërndahet (pesë kolonat e para fshehin 4 letra). Zbritet në të njëjtën ngjyrë letre dhe lëviz çdo grup; një varg i plotë nga Mbreti te Asi largohet. ¦ Żewġ mazzi, 10 kolonni, kollox jitqassam (l-ewwel ħames kolonni jaħbu 4 karti). Tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq kwalunkwe grupp; sekwenza sħiħa mis-Sultan sal-Ass titlaq.
+Motif de divorce ¦ Shkak divorci ¦ Raġuni għad-divorzju
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Dy pako, 10 kolona me 5 letra të dukshme. Zbritet pa u marrë me ngjyrat; vetëm vargjet e së njëjtës ngjyrë letre lëvizin bashkë; një varg i plotë nga Mbreti te Asi largohet. Stiva vendos një letër në çdo kolonë që nuk është bosh. ¦ Żewġ mazzi, 10 kolonni ta’ 5 karti viżibbli. Tibni ’l isfel mingħajr ma tagħti kas tal-kuluri; is-sekwenzi tal-istess lewn tal-karta biss jiċċaqilqu flimkien; sekwenza sħiħa mis-Sultan sal-Ass titlaq. Il-mazz ipoġġi karta fuq kull kolonna li mhix vojta.
+La tarentule ¦ Tarantula ¦ It-tarantula
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Merimanga me katër ngjyra, por një varg që zbret në të njëjtën nuancë (të kuqe ose të zezë) lëviz njëherësh. Një varg i plotë nga Mbreti te Asi në të njëjtën ngjyrë letre largohet. ¦ Il-brimba b’erba’ kuluri, imma sekwenza li tinżel fl-istess sfumatura (aħmar jew iswed) tiċċaqlaq f’daqqa. Sekwenza sħiħa mis-Sultan sal-Ass fl-istess lewn tal-karta titlaq.
+Araignée à découvert ¦ Merimangë e hapur ¦ Brimba miftuħa
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Merimanga me katër ngjyra, por të gjitha letrat janë të dukshme që në fillim. ¦ Il-brimba b’erba’ kuluri, imma l-karti kollha jidhru mill-bidu.
+La harpe de Milligan ¦ Harpa e Milligan ¦ L-arpa ta’ Milligan
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Dy pako, 8 kolona në formë shkalle; zbritet duke alternuar të kuqen dhe të zezën dhe lëvizen vargje të tëra. Një kolonë bosh merr vetëm një Mbret; stiva vendos një letër në çdo kolonë. Themelet ngjiten nga Asi te Mbreti. ¦ Żewġ mazzi, 8 kolonni f’forma ta’ taraġ; tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq sekwenzi sħaħ. Kolonna vojta tieħu Sultan biss; il-mazz ipoġġi karta fuq kull kolonna. Il-fondazzjonijiet jitilgħu mill-Ass sas-Sultan.
+La harpe de Lexington ¦ Harpa e Lexingtonit ¦ L-arpa ta’ Lexington
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Harpa e Milligan (dy pako, 8 kolona në formë shkalle, stiva vendos një letër në çdo kolonë), por lëviz çdo grup letrash të dukshme. ¦ L-arpa ta’ Milligan (żewġ mazzi, 8 kolonni f’forma ta’ taraġ, il-mazz ipoġġi karta fuq kull kolonna), imma ċċaqlaq kwalunkwe grupp ta’ karti viżibbli.
+Brunswick ¦ Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Harpa e Lexingtonit me të gjitha letrat të dukshme: lëviz çdo grup, stiva vendos një letër në çdo kolonë. ¦ L-arpa ta’ Lexington bil-karti kollha viżibbli: kwalunkwe grupp jiċċaqlaq, il-mazz ipoġġi karta fuq kull kolonna.
+Carlton ¦ Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Harpa e Milligan me të gjitha letrat të dukshme, dhe një kolonë bosh merr çdo letër. ¦ L-arpa ta’ Milligan bil-karti kollha viżibbli, u kolonna vojta tieħu kwalunkwe karta.
+Miss Milligan ¦ Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Dy pako, 8 kolona me një letër; stiva vendos një letër në çdo kolonë. Zbritet duke alternuar të kuqen dhe të zezën dhe lëvizen vargje të tëra; një kolonë bosh merr vetëm një Mbret. Kur stiva mbaron, hapet një kuti e lirë për të vënë një letër mënjanë. ¦ Żewġ mazzi, 8 kolonni ta’ karta waħda; il-mazz ipoġġi karta fuq kull kolonna. Tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq sekwenzi sħaħ; kolonna vojta tieħu Sultan biss. Meta l-mazz jispiċċa, jinfetaħ post ħieles biex tpoġġi karta fil-ġenb.
+Millie ¦ Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Dy pako, 8 kolona me një letër; stiva vendos një letër në çdo kolonë. Zbritet duke alternuar të kuqen dhe të zezën dhe një kolonë bosh merr çdo letër. ¦ Żewġ mazzi, 8 kolonni ta’ karta waħda; il-mazz ipoġġi karta fuq kull kolonna. Tibni ’l isfel billi talterna aħmar u iswed u kolonna vojta tieħu kwalunkwe karta.
+L’île d’Elbe ¦ Ishulli i Elbës ¦ Il-gżira ta’ Elba
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Dy pako, 10 kolona me 5 letra (katër të fshehura); zbritet duke alternuar të kuqen dhe të zezën dhe lëvizen vargje të tëra. Një kolonë bosh merr vetëm një Mbret; stiva vendos një letër në çdo kolonë. ¦ Żewġ mazzi, 10 kolonni ta’ 5 karti (erbgħa moħbija); tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq sekwenzi sħaħ. Kolonna vojta tieħu Sultan biss; il-mazz ipoġġi karta fuq kull kolonna.
+Le mont Olympe ¦ Mali Olimp ¦ Il-muntanja Olimpu
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Dy pako: Asët dhe dyshet vendosen paraprakisht, dhe themelet ngjiten dy nga dy në të njëjtën ngjyrë letre (As, 3, 5… ose 2, 4, 6…). 9 kolona; zbritet dy nga dy në të njëjtën ngjyrë letre. Stiva vendos një letër në çdo kolonë. ¦ Żewġ mazzi: l-Assi u t-2 jitqiegħdu minn qabel, u l-fondazzjonijiet jitilgħu tnejn tnejn fl-istess lewn tal-karta (Ass, 3, 5… jew 2, 4, 6…). 9 kolonni; tibni ’l isfel tnejn tnejn fl-istess lewn tal-karta. Il-mazz ipoġġi karta fuq kull kolonna.
+La patience australienne ¦ Pasienca australiane ¦ Is-solitarju Awstraljan
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 kolona me 4 letra të dukshme; zbritet në të njëjtën ngjyrë letre dhe lëviz çdo grup letrash të dukshme. Një kolonë bosh merr vetëm një Mbret; stiva kalon vetëm një herë. ¦ 7 kolonni ta’ 4 karti viżibbli; tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq kwalunkwe grupp ta’ karti viżibbli. Kolonna vojta tieħu Sultan biss; il-mazz jgħaddi darba biss.
+Canberra ¦ Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Pasienca australiane, por stiva kalon edhe një herë. ¦ Is-solitarju Awstraljan, imma l-mazz jgħaddi darba oħra.
+Raw Prawn ¦ Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Pasienca australiane, por një kolonë bosh merr çdo letër. ¦ Is-solitarju Awstraljan, imma kolonna vojta tieħu kwalunkwe karta.
+Rushdike ¦ Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 kolona në formë shkalle; zbritet në të njëjtën ngjyrë letre dhe lëviz çdo grup letrash të dukshme. Stiva vendos një letër në çdo kolonë. ¦ 7 kolonni f’forma ta’ taraġ; tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq kwalunkwe grupp ta’ karti viżibbli. Il-mazz ipoġġi karta fuq kull kolonna.
+La discipline chinoise ¦ Disiplina kineze ¦ Id-dixxiplina Ċiniża
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 kolona me 7 letra (tri të fshehura, përveç të parës); zbritet duke alternuar të kuqen dhe të zezën dhe lëviz çdo grup letrash të dukshme. 3 letrat e fundit shkojnë te tri kolonat e para. ¦ 7 kolonni ta’ 7 karti (tlieta moħbija, ħlief fl-ewwel waħda); tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq kwalunkwe grupp ta’ karti viżibbli. L-aħħar 3 karti jmorru fuq l-ewwel tliet kolonni.
+Solitaire russe double ¦ Pasiencë ruse e dyfishtë ¦ Solitarju Russu doppju
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Dy pako, 10 kolona, 8 themele; zbritet në të njëjtën ngjyrë letre dhe lëviz çdo grup letrash të dukshme. ¦ Żewġ mazzi, 10 kolonni, 8 fondazzjonijiet; tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq kwalunkwe grupp ta’ karti viżibbli.
+Ali Baba ¦ Ali Baba ¦ Ali Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Një pako e vetme: Asët vendosen paraprakisht, 10 kolona me 4 letra të dukshme. Zbritet në të njëjtën ngjyrë letre dhe lëvizen vargje të tëra; stiva kalon vetëm një herë. ¦ Mazz wieħed: l-Assi jitqiegħdu minn qabel, 10 kolonni ta’ 4 karti viżibbli. Tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq sekwenzi sħaħ; il-mazz jgħaddi darba biss.
+Cassim ¦ Kasimi ¦ Cassim
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Një pako e vetme: Asët vendosen paraprakisht, 7 kolona me 3 letra të dukshme. Zbritet në të njëjtën ngjyrë letre dhe lëvizen vargje të tëra; stiva kalon sa herë të duash. ¦ Mazz wieħed: l-Assi jitqiegħdu minn qabel, 7 kolonni ta’ 3 karti viżibbli. Tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq sekwenzi sħaħ; il-mazz jerġa’ jgħaddi kemm trid.
+Rang et file ¦ Rreshti dhe radha ¦ Rank u fila
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Perandori (dy pako, 10 kolona me 4 letra nga të cilat 3 të fshehura, duke alternuar të kuqen dhe të zezën), por lëvizen vargje të tëra. ¦ L-imperatur (żewġ mazzi, 10 kolonni ta’ 4 karti li minnhom 3 moħbija, billi talterna aħmar u iswed), imma ċċaqlaq sekwenzi sħaħ.
+Les As affairés ¦ Asët e zënë ¦ L-Assi okkupati
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dy pako, 12 kolona me një letër; zbritet në të njëjtën ngjyrë letre, një letër në një herë. Stiva kalon vetëm një herë. ¦ Żewġ mazzi, 12-il kolonna ta’ karta waħda; tibni ’l isfel fl-istess lewn tal-karta, karta karta. Il-mazz jgħaddi darba biss.
+La cour ¦ Oborri ¦ Il-qorti
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dy pako, 12 kolona me një letër; zbritet në të njëjtën ngjyrë letre dhe lëvizen vargje të tëra. Stiva kalon vetëm një herë. ¦ Żewġ mazzi, 12-il kolonna ta’ karta waħda; tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq sekwenzi sħaħ. Il-mazz jgħaddi darba biss.
+Le carré de Napoléon ¦ Katrori i Napoleonit ¦ Il-kwadru ta’ Napuljun
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dy pako, 12 kolona me 4 letra të dukshme; zbritet në të njëjtën ngjyrë letre dhe lëvizen vargje të tëra. Stiva kalon vetëm një herë. ¦ Żewġ mazzi, 12-il kolonna ta’ 4 karti viżibbli; tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq sekwenzi sħaħ. Il-mazz jgħaddi darba biss.
+L’exil de Napoléon ¦ Mërgimi i Napoleonit ¦ L-eżilju ta’ Napuljun
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dyzet hajdutët ku zbritet pa u marrë me ngjyrat, një letër në një herë. Stiva kalon vetëm një herë. ¦ L-erbgħin ħalliel fejn tibni ’l isfel mingħajr ma tagħti kas tal-kuluri, karta karta. Il-mazz jgħaddi darba biss.
+Deuces ¦ Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Dy pako: tetë dyshet vendosen paraprakisht, dhe themelet ngjiten në të njëjtën ngjyrë letre deri te Asi. 10 kolona me një letër; zbritet në të njëjtën ngjyrë letre (Asi mbi dyshin, Mbreti mbi Asin), një letër në një herë. Stiva kalon vetëm një herë. ¦ Żewġ mazzi: it-tmien 2 jitqiegħdu minn qabel, u l-fondazzjonijiet jitilgħu fl-istess lewn tal-karta sal-Ass. 10 kolonni ta’ karta waħda; tibni ’l isfel fl-istess lewn tal-karta (l-Ass fuq it-2, is-Sultan fuq l-Ass), karta karta. Il-mazz jgħaddi darba biss.
+La lune décroissante ¦ Hëna në rënie ¦ Il-qamar nieqes
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Dy pako, 13 kolona me 4 letra të dukshme; zbritet në të njëjtën ngjyrë letre dhe lëvizen vargje të tëra. Stiva kalon vetëm një herë. ¦ Żewġ mazzi, 13-il kolonna ta’ 4 karti viżibbli; tibni ’l isfel fl-istess lewn tal-karta u ċċaqlaq sekwenzi sħaħ. Il-mazz jgħaddi darba biss.
+Les cinquante fameux ¦ Pesëdhjetat e famshme ¦ Il-ħamsin famużi
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dyzet hajdutët me 5 letra për kolonë: dy pako, 10 kolona me 5, e njëjta ngjyrë letre, një letër në një herë. Stiva kalon vetëm një herë. ¦ L-erbgħin ħalliel b’5 karti kull kolonna: żewġ mazzi, 10 kolonni ta’ 5, l-istess lewn tal-karta, karta karta. Il-mazz jgħaddi darba biss.
+Quarante-neuf ¦ Dyzet e nëntë ¦ Disgħa u erbgħin
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dy pako, 7 kolona me 7 letra të dukshme; zbritet duke alternuar të kuqen dhe të zezën, një letër në një herë. Stiva kalon vetëm një herë. ¦ Żewġ mazzi, 7 kolonni ta’ 7 karti viżibbli; tibni ’l isfel billi talterna aħmar u iswed, karta karta. Il-mazz jgħaddi darba biss.
+Sans limite ¦ Pa kufi ¦ Bla limitu
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Dyzet hajdutët, por stiva kalon sa herë të duash. ¦ L-erbgħin ħalliel, imma l-mazz jerġa’ jgħaddi kemm trid.
+Les petits quarante ¦ Dyzetat e vegjël ¦ L-erbgħin iż-żgħar
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Dyzet hajdutët ku zbritet pa u marrë me ngjyrat dhe lëvizen vargje të tëra; stiva kthehet tri letra në një herë dhe kalon edhe tri herë. ¦ L-erbgħin ħalliel fejn tibni ’l isfel mingħajr ma tagħti kas tal-kuluri u ċċaqlaq sekwenzi sħaħ; il-mazz jinqaleb tliet karti kull darba u jgħaddi tliet darbiet oħra.
+Le zèbre ¦ Zebra ¦ Iż-żebra
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Dy pako, Asët të vendosur paraprakisht, 8 kolona me një letër; zbritet duke alternuar të kuqen dhe të zezën, një letër në një herë. Stiva kalon edhe një herë. ¦ Żewġ mazzi, l-Assi mqiegħda minn qabel, 8 kolonni ta’ karta waħda; tibni ’l isfel billi talterna aħmar u iswed, karta karta. Il-mazz jgħaddi darba oħra.
+Le congrès ¦ Kongresi ¦ Il-kungress
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Dy pako, 8 kolona me një letër; zbritet pa u marrë me ngjyrat, një letër në një herë. Stiva kalon vetëm një herë. ¦ Żewġ mazzi, 8 kolonni ta’ karta waħda; tibni ’l isfel mingħajr ma tagħti kas tal-kuluri, karta karta. Il-mazz jgħaddi darba biss.
+Le parlement ¦ Parlamenti ¦ Il-parlament
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Kongresi (dy pako, 8 kolona me një letër, zbritet pa u marrë me ngjyrat), me Asët të vendosur paraprakisht. ¦ Il-kungress (żewġ mazzi, 8 kolonni ta’ karta waħda, tibni ’l isfel mingħajr ma tagħti kas tal-kuluri), bl-Assi mqiegħda minn qabel.
+Pair et impair ¦ Çift dhe tek ¦ Par u dispar
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Dy pako: një As dhe një dysh nga çdo ngjyrë letre vendosen paraprakisht, dhe themelet ngjiten dy nga dy në ngjyrën e tyre (As, 3, 5… Mbret, 2, 4… ose 2, 4… Mbretëreshë, As, 3…). 9 vende me një letër, mbi të cilat nuk ndërtohet; një vend bosh merr çdo letër. Stiva kalon edhe një herë. ¦ Żewġ mazzi: Ass u 2 minn kull lewn tal-karta jitqiegħdu minn qabel, u l-fondazzjonijiet jitilgħu tnejn tnejn fil-lewn tagħhom (Ass, 3, 5… Sultan, 2, 4… jew 2, 4… Reġina, Ass, 3…). 9 postijiet ta’ karta waħda, li fuqhom ma tibnix; post vojt jieħu kwalunkwe karta. Il-mazz jgħaddi darba oħra.
+Le cotillon royal ¦ Kotiljoni mbretëror ¦ Il-kotiljun irjali
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Dy pako: një As dhe një dysh nga çdo ngjyrë letre vendosen paraprakisht, dhe themelet ngjiten dy nga dy në ngjyrën e tyre. Katër grumbuj rezervë me 3 letra (luhet vetëm ajo sipër) dhe 16 vende me një letër, mbi të cilat nuk ndërtohet; një vend bosh merr çdo letër. Stiva kalon vetëm një herë. ¦ Żewġ mazzi: Ass u 2 minn kull lewn tal-karta jitqiegħdu minn qabel, u l-fondazzjonijiet jitilgħu tnejn tnejn fil-lewn tagħhom. Erba’ munzelli ta’ riżerva ta’ 3 karti (tintlagħab biss dik ta’ fuq) u 16-il post ta’ karta waħda, li fuqhom ma tibnix; post vojt jieħu kwalunkwe karta. Il-mazz jgħaddi darba biss.
+Le treize porte-bonheur ¦ Trembëdhjetëshi me fat ¦ It-tlettax tax-xorti
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 kolona me 4 letra të dukshme; zbritet pa u marrë me ngjyrat, një letër në një herë; një kolonë bosh mbetet bosh. ¦ 13-il kolonna ta’ 4 karti viżibbli; tibni ’l isfel mingħajr ma tagħti kas tal-kuluri, karta karta; kolonna vojta tibqa’ vojta.
+La patience portugaise ¦ Pasienca portugeze ¦ Is-solitarju Portugiż
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 kolona me 4 letra të dukshme; zbritet pa u marrë me ngjyrat, një letër në një herë; vetëm një Mbret shkon në një kolonë bosh. ¦ 13-il kolonna ta’ 4 karti viżibbli; tibni ’l isfel mingħajr ma tagħti kas tal-kuluri, karta karta; Sultan biss imur f’kolonna vojta.
+Bonne mesure ¦ Masë e mirë ¦ Kejl tajjeb
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Dy Asë vendosen paraprakisht; 10 kolona me 5 letra të dukshme. Zbritet pa u marrë me ngjyrat, një letër në një herë; një kolonë bosh merr çdo letër. ¦ Żewġ Assi jitqiegħdu minn qabel; 10 kolonni ta’ 5 karti viżibbli. Tibni ’l isfel mingħajr ma tagħti kas tal-kuluri, karta karta; kolonna vojta tieħu kwalunkwe karta.
+La cruelle ¦ E egra ¦ Il-krudila
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Asët vendosen paraprakisht; 12 grumbuj me 4 letra. Zbritet në të njëjtën ngjyrë letre, një letër në një herë; një vend bosh mbetet bosh. Sa herë të duash, grumbujt mblidhen me radhë, pa i përzier, dhe rishpërndahen katër nga katër. ¦ L-Assi jitqiegħdu minn qabel; 12-il munzell ta’ 4 karti. Tibni ’l isfel fl-istess lewn tal-karta, karta karta; post vojt jibqa’ vojt. Kemm-il darba trid, il-munzelli jinġabru bl-ordni, mingħajr ma titħallat, u jerġgħu jitqassmu erbgħa erbgħa.
+La persévérance ¦ Këmbëngulja ¦ Il-perseveranza
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Si E egra (Asët të vendosur paraprakisht, 12 grumbuj me 4, e njëjta ngjyrë letre), por lëvizen vargje të tëra dhe mblidhen vetëm dy herë. ¦ Bħall-Krudila (l-Assi mqiegħda minn qabel, 12-il munzell ta’ 4, l-istess lewn tal-karta), imma ċċaqlaq sekwenzi sħaħ u tiġbor darbtejn biss.
+L’éventail en vagues ¦ Freskorja në valë ¦ Il-mrewħa bil-mewġ
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 grumbuj me 4 letra, Asët mbeten të përziera me të tjerat; zbritet në të njëjtën ngjyrë letre, një letër në një herë; një vend bosh mbetet bosh. Sa herë të duash, grumbujt mblidhen me radhë, pa i përzier, dhe rishpërndahen katër nga katër. ¦ 13-il munzell ta’ 4 karti, l-Assi jibqgħu mħallta mal-oħrajn; tibni ’l isfel fl-istess lewn tal-karta, karta karta; post vojt jibqa’ vojt. Kemm-il darba trid, il-munzelli jinġabru bl-ordni, mingħajr ma titħallat, u jerġgħu jitqassmu erbgħa erbgħa.
+L’éventail en boîte ¦ Freskorja në kuti ¦ Il-mrewħa fil-kaxxa
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Asët vendosen paraprakisht; 16 freskore me 3 letra. Zbritet duke alternuar të kuqen dhe të zezën, një letër në një herë; vetëm një Mbret shkon në një vend bosh. ¦ L-Assi jitqiegħdu minn qabel; 16-il mrewħa ta’ 3 karti. Tibni ’l isfel billi talterna aħmar u iswed, karta karta; Sultan biss imur f’post vojt.
+L’éventail fascinant ¦ Freskorja magjepsëse ¦ Il-mrewħa affaxxinanti
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ La Belle Lucie (17 freskore me 3 letra) ku zbritet duke alternuar të kuqen dhe të zezën, me gjashtë rishpërndarje. ¦ La Belle Lucie (17-il mrewħa ta’ 3 karti) fejn tibni ’l isfel billi talterna aħmar u iswed, b’sitt tqassim mill-ġdid.
+La lampe de minuit ¦ Llamba e mesnatës ¦ Il-lampa ta’ nofsillejl
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ La Belle Lucie (17 freskore me 3 letra) ku zbritet duke alternuar të kuqen dhe të zezën, me dy rishpërndarje. ¦ La Belle Lucie (17-il mrewħa ta’ 3 karti) fejn tibni ’l isfel billi talterna aħmar u iswed, b’żewġ tqassim mill-ġdid.
+Shamrocks ¦ Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 freskore me 3 letra; ngjitet ose zbritet një shkallë pa u marrë me ngjyrat, një letër në një herë, dhe një freskore nuk mban kurrë më shumë se 3 letra. Pa rishpërndarje. ¦ 17-il mrewħa ta’ 3 karti; titla’ jew tinżel grad wieħed mingħajr ma tagħti kas tal-kuluri, karta karta, u mrewħa qatt ma żżomm aktar minn 3 karti. L-ebda tqassim mill-ġdid.
+La maison dans les bois ¦ Shtëpia në pyll ¦ Id-dar fil-bosk
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Dy pako, 35 freskore me 3 letra; ngjitet ose zbritet një shkallë në të njëjtën ngjyrë letre, një letër në një herë. Një vend bosh mbetet bosh. ¦ Żewġ mazzi, 35 mrewħa ta’ 3 karti; titla’ jew tinżel grad wieħed fl-istess lewn tal-karta, karta karta. Post vojt jibqa’ vojt.
+La maison sur la colline ¦ Shtëpia në kodër ¦ Id-dar fuq l-għolja
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Shtëpia në pyll (dy pako, 35 freskore), por katër themele ngjiten nga Asi te Mbreti dhe katër të tjera zbresin nga Mbreti te Asi. ¦ Id-dar fil-bosk (żewġ mazzi, 35 mrewħa), imma erba’ fondazzjonijiet jitilgħu mill-Ass sas-Sultan u erbgħa oħra jinżlu mis-Sultan sal-Ass.
+Bisley ¦ Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Asët vendosen paraprakisht; 13 kolona (4 me 3 letra, 9 me 4). Themelet e Asëve ngjiten, ato të Mbretërve zbresin, në të njëjtën ngjyrë letre. Në tabelë ngjitet ose zbritet në të njëjtën ngjyrë letre, një letër në një herë; një kolonë bosh mbetet bosh. ¦ L-Assi jitqiegħdu minn qabel; 13-il kolonna (4 ta’ 3 karti, 9 ta’ 4). Il-fondazzjonijiet tal-Assi jitilgħu, dawk tas-Slaten jinżlu, fl-istess lewn tal-karta. Fuq il-mejda titla’ jew tinżel fl-istess lewn tal-karta, karta karta; kolonna vojta tibqa’ vojta.
+Le cadran du grand-père ¦ Ora e gjyshit ¦ L-arloġġ tan-nannu
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 themele si orët e një ore, që nisin me 2♥, 3♠, 4♦, 5♣… deri te Mbreti ♣ dhe ngjiten në të njëjtën ngjyrë letre (Mbreti kalon te Asi). 8 kolona me 5 letra; zbritet pa u marrë me ngjyrat, një letër në një herë; një kolonë bosh merr çdo letër. ¦ 12-il fondazzjoni bħas-sigħat ta’ arloġġ, li jibdew b’2♥, 3♠, 4♦, 5♣… sas-Sultan ♣ u jitilgħu fl-istess lewn tal-karta (is-Sultan jgħaddi għall-Ass). 8 kolonni ta’ 5 karti; tibni ’l isfel mingħajr ma tagħti kas tal-kuluri, karta karta; kolonna vojta tieħu kwalunkwe karta.
+Le mur de pierre ¦ Muri prej guri ¦ Il-ħajt tal-ġebel
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 kolona me 6 letra, një e fshehur mbi dy, dhe një buqetë me 16 letra nga e cila mund të merret çdo letër. Zbritet duke alternuar të kuqen dhe të zezën dhe lëvizen vargje të tëra; një kolonë bosh merr çdo letër. ¦ 6 kolonni ta’ 6 karti, waħda moħbija kull tnejn, u bukkett ta’ 16-il karta fejn tista’ tieħu kwalunkwe waħda. Tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq sekwenzi sħaħ; kolonna vojta tieħu kwalunkwe karta.
+La fleur sauvage ¦ Lulja e egër ¦ Il-fjura selvaġġa
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Kopshti me lule (6 kolona me 6 dhe një buqetë me 16 letra), por lëvizen vargje të tëra. ¦ Il-ġnien tal-fjuri (6 kolonni ta’ 6 u bukkett ta’ 16-il karta), imma ċċaqlaq sekwenzi sħaħ.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 kolona, të gjitha të dukshme. Letra e parë e vendosur në një themel jep vlerën e nisjes për të katërt (Mbreti kalon te Asi). Ngjitet ose zbritet në të njëjtën ngjyrë letre, një letër në një herë, dhe Mbreti prek Asin. ¦ 10 kolonni, kollha viżibbli. L-ewwel karta mqiegħda fuq fondazzjoni tagħti l-valur tal-bidu tal-erbgħa (is-Sultan jgħaddi għall-Ass). Titla’ jew tinżel fl-istess lewn tal-karta, karta karta, u s-Sultan imiss mal-Ass.
+La place forte ¦ Fortesa ¦ Il-fortizza
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Rrugë dhe rrugica (8 kolona, zbritet pa u marrë me ngjyrat), me një kuti të lirë. ¦ Toroq u sqaqien (8 kolonni, tibni ’l isfel mingħajr ma tagħti kas tal-kuluri), b’post ħieles wieħed.
+Le fort ¦ Kalaja ¦ Il-forti
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Rrugë dhe rrugica (8 kolona, zbritet pa u marrë me ngjyrat), me dy kuti të lira. ¦ Toroq u sqaqien (8 kolonni, tibni ’l isfel mingħajr ma tagħti kas tal-kuluri), b’żewġ postijiet ħielsa.
+L’art du siège ¦ Arti i rrethimit ¦ L-arti tal-assedju
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Kështjella e rrethuar (Asët të vendosur paraprakisht, 8 kolona me 6), me një kuti të lirë. ¦ Il-kastell assedjat (l-Assi mqiegħda minn qabel, 8 kolonni ta’ 6), b’post ħieles wieħed.
+La toile de Pénélope ¦ Pëlhura e Penelopës ¦ In-newl ta’ Penelope
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Kështjella e rrethuar (Asët të vendosur paraprakisht, 8 kolona me 6), por vetëm një Mbret shkon në një kolonë bosh. ¦ Il-kastell assedjat (l-Assi mqiegħda minn qabel, 8 kolonni ta’ 6), imma Sultan biss imur f’kolonna vojta.
+La citadelle ¦ Kështjella ¦ Iċ-ċittadella
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Kështjella e rrethuar, por gjatë shpërndarjes, çdo letër që mund të ngjitet në një themel shkon menjëherë atje. ¦ Il-kastell assedjat, imma waqt it-tqassim, kull karta li tista’ titla’ fuq fondazzjoni tmur hemm minnufih.
+Les rois exilés ¦ Mbretërit e mërguar ¦ Is-slaten eżiljati
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Kështjella (letrat që mund të ngjiten shkojnë atje gjatë shpërndarjes), por vetëm një Mbret shkon në një kolonë bosh. ¦ Iċ-ċittadella (il-karti li jistgħu jitilgħu jmorru hemm waqt it-tqassim), imma Sultan biss imur f’kolonna vojta.
+Le bastion ¦ Bastioni ¦ Is-sur
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 kolona me 5 letra dhe 2 kuti të lira tashmë të zëna; ngjitet ose zbritet në të njëjtën ngjyrë letre, një letër në një herë; një kolonë bosh merr çdo letër. ¦ 10 kolonni ta’ 5 karti u 2 postijiet ħielsa diġà okkupati; titla’ jew tinżel fl-istess lewn tal-karta, karta karta; kolonna vojta tieħu kwalunkwe karta.
+La boîte à thé ¦ Kutia e çajit ¦ Il-kaxxa tat-te
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 kolona me 6 ose 7 letra, gjithçka duket; zbritet pa u marrë me ngjyrat dhe lëvizen vargje të tëra; një kolonë bosh merr çdo letër. ¦ 8 kolonni ta’ 6 jew 7 karti, kollox jidher; tibni ’l isfel mingħajr ma tagħti kas tal-kuluri u ċċaqlaq sekwenzi sħaħ; kolonna vojta tieħu kwalunkwe karta.
+La boîte à thé américaine ¦ Kutia amerikane e çajit ¦ Il-kaxxa tat-te Amerikana
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 kolona me 6 ose 7 letra, gjithçka duket; zbritet duke alternuar të kuqen dhe të zezën dhe lëvizen vargje të tëra; një kolonë bosh merr çdo letër. ¦ 8 kolonni ta’ 6 jew 7 karti, kollox jidher; tibni ’l isfel billi talterna aħmar u iswed u ċċaqlaq sekwenzi sħaħ; kolonna vojta tieħu kwalunkwe karta.
+La boîte à thé anglaise ¦ Kutia angleze e çajit ¦ Il-kaxxa tat-te Ingliża
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 kolona me 6 ose 7 letra, gjithçka duket; zbritet duke alternuar të kuqen dhe të zezën, një letër në një herë; vetëm një Mbret shkon në një kolonë bosh. ¦ 8 kolonni ta’ 6 jew 7 karti, kollox jidher; tibni ’l isfel billi talterna aħmar u iswed, karta karta; Sultan biss imur f’kolonna vojta.
+Les trois sommets stricts ¦ Tri majat strikte ¦ It-tliet qċaċet stretti
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Tri majat, por Mbreti dhe Asi nuk vijnë njëri pas tjetrit: loja është më e vështirë. ¦ It-tliet qċaċet, imma s-Sultan u l-Ass ma jsegwux lil xulxin: il-logħba hija aktar diffiċli.
+Golf double ¦ Golf i dyfishtë ¦ Golf doppju
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf me dy pako: 9 kolona me 7 letra. Dërgo te hedhjet një letër menjëherë sipër ose poshtë; asgjë nuk shkon mbi një Mbret. ¦ Golf b’żewġ mazzi: 9 kolonni ta’ 7 karti. Ibgħat fuq l-iskart karta eżatt fuq jew taħt; xejn ma jmur fuq Sultan.
+As en haut (5 colonnes) ¦ Asët lart (5 kolona) ¦ Assi ’l fuq (5 kolonni)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Asët lart me 5 kolona: hiq një letër kur një kolonë tjetër tregon një letër më të fortë të së njëjtës ngjyrë letre (Asi është më i forti). Fitove nëse mbeten vetëm 4 Asët. ¦ Assi ’l fuq b’5 kolonni: neħħi karta meta kolonna oħra turi karta ogħla tal-istess lewn tal-karta (l-Ass huwa l-ogħla). Rbaħt jekk jibqgħu biss l-4 Assi.
+La baronne ¦ Baronesha ¦ Il-barunessa
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 grumbuj: hiq një Mbret të vetëm, ose dy letra sipër që bëjnë 13 (Fanti 11, Mbretëresha 12). Stiva vendos një letër në çdo grumbull. ¦ 5 munzelli: neħħi Sultan waħdu, jew żewġ karti ta’ fuq li jagħmlu 13 (Fanti 11, Reġina 12). Il-mazz ipoġġi karta fuq kull munzell.
+Sir Tommy ¦ Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Çdo letër e tërhequr shkon në një themel ose në një nga 4 grumbujt e pritjes. Themelet nisin me një As dhe ngjiten një nga një, pa u marrë me ngjyrat. ¦ Kull karta li tiġbed tmur fuq fondazzjoni jew fuq wieħed mill-4 munzelli ta’ stennija. Il-fondazzjonijiet jibdew b’Ass u jitilgħu wieħed wieħed, mingħajr ma tagħti kas tal-kuluri.
+Le chat dans le coin ¦ Macja në qoshe ¦ Il-qattus fil-kantuniera
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Asët vendosen paraprakisht dhe ngjiten një nga një në nuancën e tyre (e kuqe mbi të kuqe, e zezë mbi të zezë). Çdo letër e tërhequr shkon në një themel ose në një nga 4 grumbujt e pritjes; një herë, grumbujt mblidhen për të tërhequr përsëri. ¦ L-Assi jitqiegħdu minn qabel u jitilgħu wieħed wieħed fil-kulur tagħhom (aħmar fuq aħmar, iswed fuq iswed). Kull karta li tiġbed tmur fuq fondazzjoni jew fuq wieħed mill-4 munzelli ta’ stennija; darba, il-munzelli jinġabru biex terġa’ tiġbed.
+La stratégie ¦ Strategjia ¦ L-istrateġija
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Çdo letër e tërhequr shkon në një nga 8 grumbujt e pritjes; vetëm Asët ngjiten menjëherë. Kur stiva mbaron, ngjiten letrat e sipërme të grumbujve, një nga një në të njëjtën ngjyrë letre. ¦ Kull karta li tiġbed tmur fuq wieħed mit-8 munzelli ta’ stennija; l-Assi biss jitilgħu minnufih. Meta l-mazz jispiċċa, ittella’ l-karti ta’ fuq tal-munzelli, wieħed wieħed fl-istess lewn tal-karta.
+Gizeh ¦ Gizeja ¦ Giża
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Piramida pa stivë: 24 letrat e tjera janë të dukshme në 3 rreshta dhe merren të gjitha. Hiq çiftet që bëjnë 13 (Fanti 11, Mbretëresha 12; një Mbret largohet vetëm). ¦ Il-piramida mingħajr mazz: l-24 karta l-oħra jidhru fi 3 ringieli u jistgħu jittieħdu kollha. Neħħi l-pari li jagħmlu 13 (Fanti 11, Reġina 12; Sultan jitlaq waħdu).
+Toutânkhamon ¦ Tutankamoni ¦ Tutankamun
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Piramida, por stiva kthehet tri letra në një herë (luhet vetëm e fundit) dhe kalon sa herë të duash. ¦ Il-piramida, imma l-mazz jinqaleb tliet karti kull darba (l-aħħar waħda biss tintlagħab) u jerġa’ jgħaddi kemm trid.
+La lune bleue ¦ Hëna blu ¦ Il-qamar blu
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, por Asët shkojnë në fillim të rreshtave: duhet renditur çdo rresht nga Asi te Mbreti në të njëjtën ngjyrë letre. Një vrimë merr letrën e së njëjtës ngjyrë menjëherë sipër fqinjës së majtë. Dy herë, mund të mbledhësh atë që nuk është renditur dhe ta rishpërndash. ¦ Montana, imma l-Assi jmorru fil-bidu tar-ringieli: trid tordna kull ringiela mill-Ass sas-Sultan fl-istess lewn. Toqba tieħu l-karta tal-istess lewn eżatt fuq il-ġara tax-xellug tagħha. Darbtejn, tista’ tiġbor dak li mhux ordnat u terġa’ tqassam.
+La lune rouge ¦ Hëna e kuqe ¦ Il-qamar aħmar
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Hëna blu, por Asët vendosen paraprakisht në fillim të rreshtave dhe vrimat janë në fund të rreshtave që në fillim. ¦ Il-qamar blu, imma l-Assi jitqiegħdu minn qabel fil-bidu tar-ringieli u t-toqob huma fit-tarf tar-ringieli mill-bidu.
+Le voisin ¦ Fqinji ¦ Il-ġar
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ Një rrjetë 5 × 5: hiq dy letra që prekin njëra-tjetrën (edhe diagonalisht) dhe bëjnë 13 (Fanti 11, Mbretëresha 12); një Mbret largohet vetëm. Pastaj ngjeshe rrjetën. ¦ Grilja ta’ 5 × 5: neħħi żewġ karti li jmissu ma’ xulxin (anke djagonalment) u jagħmlu 13 (Fanti 11, Reġina 12); Sultan jitlaq waħdu. Imbagħad għafas il-grilja.
+Isabelle ¦ Izabela ¦ Isabelle
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 kolona me 4 letra (vetëm e fundit duket): hiq dy letra me të njëjtën vlerë të marra në fund të kolonave. Një lojë fati e pastër, për t’u çlodhur. ¦ 13-il kolonna ta’ 4 karti (l-aħħar waħda biss tidher): neħħi żewġ karti tal-istess valur meħuda mill-qiegħ tal-kolonni. Logħba ta’ xorti pura, biex tirrilassa.
+Quatorze en colonnes ¦ Katërmbëdhjetë në kolona ¦ Erbatax fil-kolonni
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 kolona me të gjitha letrat të dukshme: hiq dy letra të marra në fund të kolonave që bëjnë 14 (Fanti 11, Mbretëresha 12, Mbreti 13). ¦ 12-il kolonna bil-karti kollha viżibbli: neħħi żewġ karti meħuda mill-qiegħ tal-kolonni li jagħmlu 14 (Fanti 11, Reġina 12, Sultan 13).
+Ramassé et redistribué, sans mélanger. ¦ U mblodh dhe u rishpërnda, pa u përzier. ¦ Inġabar u tqassam mill-ġdid, mingħajr ma tħallat.
+Les tas d’attente sont ramassés dans la pioche. ¦ Grumbujt e pritjes mblidhen në stivë. ¦ Il-munzelli ta’ stennija jinġabru fil-mazz.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Hap Lojën, zgjidh «🂠 Pasianse (lojëra me letra)» te «Lojë», pastaj lojën ndër 233 pasianse të renditura sipas familjes (Klondike, FreeCell, Merimanga, Yukon, Dyzet hajdutët, Kështjella dhe kopshte, lojëra me çifte). Tërhiq një letër (ose një varg) mbi një grumbull tjetër, ose kliko atë pastaj kliko ku do ta vendosësh; klikim i dyfishtë: në një themel; klikim mbi stivë: tërhiq. Në lojërat me çifte (Piramida, Njëmbëdhjetë, Trembëdhjetë…), kliko letrat që shkojnë bashkë. ¦ Iftaħ il-Logħba, agħżel “🂠 Solitarji (logħob tal-karti)” f’“Logħba”, imbagħad il-logħba fost 233 solitarju ordnati skont il-familja (Klondike, FreeCell, Brimba, Yukon, L-erbgħin ħalliel, Kastelli u ġonna, logħob tal-pari). Kaxkar karta (jew sekwenza) fuq munzell ieħor, jew ikklikkjaha u mbagħad ikklikkja fejn trid tpoġġiha; klikk doppju: fuq fondazzjoni; klikk fuq il-mazz: iġbed. Fil-logħob tal-pari (Piramida, Ħdax, Tlettax…), ikklikkja l-karti li jmorru flimkien.
+Quelles autres patiences sont arrivées ensuite ? ¦ Cilat pasianse të tjera erdhën më pas? ¦ Liema solitarji oħra waslu wara?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Edhe njëqind e dy pasianse klasike, secila me rregullat e saj te «📖 Rregullat» e lojës. Familja Klondike dhe Canfield: Agnes Bernauer, Thumb and Pouch, Jo vetëm, Rrugët pa krye, Tetë herë tetë, Spike, Alternim, Harpa, Harpa e madhe, Acme, Zhaba amerikane, Canfield laraman, Dukesha, Dera. Me kuti të lira: Pinguini, Baker’s Game (vetëm Mbret), Seahaven i lirë, Repair, Ocean Towers, Shtatë me katër, Shtatë me pesë, FreeCell sfidë, FreeCell super sfidë. Merimanga dhe cigane: Skarabeu, Bishti i akrepit, Scorpion i dyfishtë, Shkak divorci, Tarantula, Merimangë e hapur, Harpa e Milligan, Harpa e Lexingtonit, Brunswick, Carlton, Miss Milligan, Millie, Ishulli i Elbës, Mali Olimp. Yukon: Pasienca australiane, Canberra, Raw Prawn, Rushdike, Disiplina kineze, Pasiencë ruse e dyfishtë. Dyzet hajdutët dhe kushërinjtë e tyre: Ali Baba, Kasimi, Rreshti dhe radha, Asët e zënë, Oborri, Katrori i Napoleonit, Mërgimi i Napoleonit, Deuces, Hëna në rënie, Pesëdhjetat e famshme, Dyzet e nëntë, Pa kufi, Dyzetat e vegjël, Zebra, Kongresi, Parlamenti, Çift dhe tek, Kotiljoni mbretëror. Kështjella, freskore dhe kopshte: Trembëdhjetëshi me fat, Pasienca portugeze, Masë e mirë, E egra, Këmbëngulja, Freskorja në valë, Freskorja në kuti, Freskorja magjepsëse, Llamba e mesnatës, Shamrocks, Shtëpia në pyll, Shtëpia në kodër, Bisley, Ora e gjyshit, Muri prej guri, Lulja e egër, Fusha e shahut, Fortesa, Kalaja, Arti i rrethimit, Pëlhura e Penelopës, Kështjella, Mbretërit e mërguar, Bastioni, Kutia e çajit (dhe versionet e saj amerikane dhe angleze). Çifte, vargje dhe llogaritje: Tri majat strikte, Golf i dyfishtë, Asët lart (5 kolona), Baronesha, Sir Tommy, Macja në qoshe, Strategjia, Gizeja, Tutankamoni, Hëna blu, Hëna e kuqe, Fqinji, Izabela dhe Katërmbëdhjetë në kolona. ¦ Mija u żewġ solitarju klassiku oħra, kull wieħed bir-regoli tiegħu f’“📖 Ir-regoli” tal-logħba. Familja Klondike u Canfield: Agnes Bernauer, Thumb and Pouch, Mhux waħdu, It-toroq għeluq, Tmienja drabi tmienja, Spike, Alternanza, L-arpa, L-arpa l-kbira, Acme, Iż-żrinġ Amerikan, Canfield imżewwaq, Id-Dukessa, Il-bieb. B’postijiet ħielsa: Il-pingwin, Baker’s Game (Sultan biss), Seahaven rilassat, Repair, Ocean Towers, Sebgħa b’erbgħa, Sebgħa b’ħamsa, FreeCell sfida, FreeCell super sfida. Brimbli u żingari: Il-ħanfusa, Denb tal-iskorpjun, Scorpion doppju, Raġuni għad-divorzju, It-tarantula, Brimba miftuħa, L-arpa ta’ Milligan, L-arpa ta’ Lexington, Brunswick, Carlton, Miss Milligan, Millie, Il-gżira ta’ Elba, Il-muntanja Olimpu. Yukon: Is-solitarju Awstraljan, Canberra, Raw Prawn, Rushdike, Id-dixxiplina Ċiniża, Solitarju Russu doppju. L-erbgħin ħalliel u l-kuġini tagħhom: Ali Baba, Cassim, Rank u fila, L-Assi okkupati, Il-qorti, Il-kwadru ta’ Napuljun, L-eżilju ta’ Napuljun, Deuces, Il-qamar nieqes, Il-ħamsin famużi, Disgħa u erbgħin, Bla limitu, L-erbgħin iż-żgħar, Iż-żebra, Il-kungress, Il-parlament, Par u dispar, Il-kotiljun irjali. Kastelli, mrewħa u ġonna: It-tlettax tax-xorti, Is-solitarju Portugiż, Kejl tajjeb, Il-krudila, Il-perseveranza, Il-mrewħa bil-mewġ, Il-mrewħa fil-kaxxa, Il-mrewħa affaxxinanti, Il-lampa ta’ nofsillejl, Shamrocks, Id-dar fil-bosk, Id-dar fuq l-għolja, Bisley, L-arloġġ tan-nannu, Il-ħajt tal-ġebel, Il-fjura selvaġġa, Iċ-ċessbord, Il-fortizza, Il-forti, L-arti tal-assedju, In-newl ta’ Penelope, Iċ-ċittadella, Is-slaten eżiljati, Is-sur, Il-kaxxa tat-te (u l-verżjonijiet Amerikana u Ingliża tagħha). Pari, sekwenzi u kalkoli: It-tliet qċaċet stretti, Golf doppju, Assi ’l fuq (5 kolonni), Il-barunessa, Sir Tommy, Il-qattus fil-kantuniera, L-istrateġija, Giża, Tutankamun, Il-qamar blu, Il-qamar aħmar, Il-ġar, Isabelle u Erbatax fil-kolonni.
+(suite) ¦ (vazhdim) ¦ (tkomplija)
+.pptx : textes, images, formes, tableaux ¦ .pptx: tekste, imazhe, forma, tabela ¦ .pptx: testi, immaġnijiet, forom, tabelli
+Ce texte est vide : rien à mettre en diapositives. ¦ Ky tekst është bosh: asgjë për të vënë në diapozitivë. ¦ Dan it-test huwa vojt: xejn x’tpoġġi fis-slajds.
+Cette image n’est pas dans les médias. ¦ Ky imazh nuk është te mediat. ¦ Din l-immaġni mhix fil-midja.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Dërgo te…: paraqitja si video, te Montazhi video ose në sajtin tënd ¦ Ibgħat lil…: il-preżentazzjoni bħala vidjo, fl-Immuntar tal-vidjo jew fuq is-sit tiegħek
+Fichier PowerPoint téléchargé. ¦ Skedari PowerPoint u shkarkua. ¦ Fajl PowerPoint imniżżel.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Paraqitja bëhet video ({time}), vendoset te Media, pastaj zgjedh ku shkon: te Montazhi video ose në sajtin tënd. Lëre dritaren hapur gjatë regjistrimit. ¦ Il-preżentazzjoni ssir vidjo ({time}), titqiegħed fil-Midja, imbagħad tagħżel fejn tmur: l-Immuntar tal-vidjo jew is-sit tiegħek. Ħalli t-tieqa miftuħa waqt ir-reġistrazzjoni.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Diaporama bëhet video ({time}), vendoset te Media, pastaj zgjedh ku shkon: te Montazhi video ose në sajtin tënd. Lëre dritaren hapur gjatë regjistrimit. ¦ Is-slideshow isir vidjo ({time}), jitqiegħed fil-Midja, imbagħad tagħżel fejn imur: l-Immuntar tal-vidjo jew is-sit tiegħek. Ħalli t-tieqa miftuħa waqt ir-reġistrazzjoni.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Diaporama si video, e vendosur te mediat, pastaj te Montazhi video ose në sajtin tënd ¦ Is-slideshow bħala vidjo, imqiegħed fil-midja, imbagħad fl-Immuntar tal-vidjo jew fuq is-sit tiegħek
+PowerPoint : assemblage du fichier… ¦ PowerPoint: duke montuar skedarin… ¦ PowerPoint: il-fajl qed jingħaqad…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: diapozitivi {n} / {total} ¦ PowerPoint: slajd {n} / {total}
+PowerPoint impossible : {error} ¦ PowerPoint i pamundur: {error} ¦ PowerPoint ma setax isir: {error}
+📊 PowerPoint ¦ 📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Dërgo paraqitjen ¦ 📤 Ibgħat il-preżentazzjoni
+📤 Envoyer le diaporama ¦ 📤 Dërgo diaporamën ¦ 📤 Ibgħat is-slideshow
+📤 Envoyer vers… (la vidéo) ¦ 📤 Dërgo te… (videon) ¦ 📤 Ibgħat lil… (il-vidjo)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Dërgo te… (Montazhi video, sajti yt) ¦ 📤 Ibgħat lil… (l-Immuntar tal-vidjo, is-sit tiegħek)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Eksporto imazhin (PNG, JPG, WebP, TIFF, printo)… ¦ ⤓ Esporta l-immaġni (PNG, JPG, WebP, TIFF, ipprintja)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Eksporto: imazhin e retushuar (PNG, JPG, WebP, TIFF, printo) ose para / pas ¦ Esporta: l-immaġni rtokkata (PNG, JPG, WebP, TIFF, ipprintja) jew il-qabel / wara
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Imazhi i retushuar (PNG, JPG, WebP, TIFF, printo)… ¦ 🖼 L-immaġni rtokkata (PNG, JPG, WebP, TIFF, ipprintja)…
+🌐 WebP ¦ 🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ i lehtë, për uebin ¦ ħafif, għall-web
+🗂 TIFF ¦ 🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ pa humbje, për arkivim ¦ mingħajr telf, biex tarkivja
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Ky shfletues nuk di të bëjë WebP: zgjidh PNG ose JPG. ¦ Dan il-browser ma jafx jagħmel WebP: agħżel PNG jew JPG.
+Cette action de retouche n’existe plus. ¦ Ky veprim retushimi nuk ekziston më. ¦ Din l-azzjoni tal-irtokk m’għadhiex teżisti.
+Choisis une photo à retoucher. ¦ Zgjidh një foto për të retushuar. ¦ Agħżel ritratt biex tirtokka.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Dërgo imazhin e shfaqur ose raportin te një mjet tjetër ¦ Ibgħat l-immaġni murija jew ir-rapport lil għodda oħra
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Hap foton A ose B te Retushimi i fotove ¦ Iftaħ ir-ritratt A jew B fl-Irtokk tar-ritratti
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Eksporto imazhin e shfaqur, ose printo të dy fotot me ngjashmërinë dhe shënimet ¦ Esporta l-immaġni murija, jew ipprintja ż-żewġ ritratti max-xebh u n-noti
+Exporter l’image (ce qui est affiché)… ¦ Eksporto imazhin (atë që shfaqet)… ¦ Esporta l-immaġni (dak li jidher)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Printo (të dy fotot, ngjashmërinë, shënimet)… ¦ Ipprintja (iż-żewġ ritratti, ix-xebh, in-noti)…
+L’image affichée ¦ Imazhi i shfaqur ¦ L-immaġni murija
+Le compte rendu (photos, ressemblance, notes) ¦ Raporti (fotot, ngjashmëria, shënimet) ¦ Ir-rapport (ritratti, xebh, noti)
+La Retouche des photos n’est pas chargée. ¦ Retushimi i fotove nuk është ngarkuar. ¦ L-Irtokk tar-ritratti mhux mtella’.
+Photo {side} — {name} ¦ Foto {side} — {name} ¦ Ritratt {side} — {name}
+Retoucher quelle photo ? ¦ Cilën foto të retushosh? ¦ Liema ritratt tirtokka?
+Utiliser ¦ Përdor ¦ Uża
+✒️ Quel dessin ? ¦ ✒️ Cili vizatim? ¦ ✒️ Liema tpinġija?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Asnjë vizatim i ruajtur te Vizatimi vektorial. ¦ L-ebda tpinġija ssejvjata fit-Tpinġija vettorjali.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Ky vizatim nuk mund të lexohej: hap Vizatimin vektorial një herë, pastaj provo përsëri. ¦ Din it-tpinġija ma setgħetx tinqara: iftaħ it-Tpinġija vettorjali darba, imbagħad erġa’ pprova.
+📝 Quel document ? ¦ 📝 Cili dokument? ¦ 📝 Liema dokument?
+Aucun document dans le Traitement de texte. ¦ Asnjë dokument te Përpunuesi i tekstit. ¦ L-ebda dokument fil-Proċessur tal-kliem.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Imazhe që rrëshqasin (‹ ›); pa skript, rrëshqasin me gisht ¦ Immaġnijiet li jgħaddu (‹ ›); mingħajr script, jiżżerżqu bis-saba’
+Les images du diaporama ¦ Imazhet e diaporamës ¦ L-immaġnijiet tas-slideshow
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Një video nga mediat e tua (ose nga një skedar: 📁 Importo…), me butonat e luajtjes dhe ekranit të plotë ¦ Vidjo mill-midja tiegħek (jew minn fajl: 📁 Importa…), bil-buttuni tad-daqq u tal-iskrin sħiħ
+La vidéo du site ¦ Videoja e sajtit ¦ Il-vidjo tas-sit
+Télécharger la vidéo ¦ Shkarko videon ¦ Niżżel il-vidjo
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Një zë nga mediat e tua (dëshmi, këngë…), dhe ajo që dëgjohet e shkruar poshtë nëse do ¦ Ħoss mill-midja tiegħek (xhieda, kanzunetta…), u dak li jinstema’ miktub taħtu jekk trid
+Le son du site ¦ Zëri i sajtit ¦ Il-ħoss tas-sit
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Çfarë dëgjohet (opsionale) ¦ 🎧 Dak li jinstema’ (fakultattiv)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Shkruaj ose ngjit transkriptimin: do të jetë nën zërin, për ata që nuk mund ta dëgjojnë. Lëre bosh nëse nuk e do. ¦ Ikteb jew waħħal it-traskrizzjoni: tkun taħt il-ħoss, għal dawk li ma jistgħux jisimgħuh. Ħalliha vojta jekk ma tridhiex.
+Ajouter le son ¦ Shto zërin ¦ Żid il-ħoss
+Télécharger le son ¦ Shkarko zërin ¦ Niżżel il-ħoss
+Ce qu’on entend ¦ Çfarë dëgjohet ¦ Dak li jinstema’
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Një nga vizatimet e tua vektoriale, ose një SVG i ngjitur (pa skript dhe lidhje jashtë) ¦ Waħda mit-tpinġijiet vettorjali tiegħek, jew SVG imwaħħal (mingħajr script jew links għal barra)
+Un de mes dessins ¦ Një nga vizatimet e mia ¦ Waħda mit-tpinġijiet tiegħi
+Dessin vectoriel → mes dessins enregistrés ¦ Vizatim vektorial → vizatimet e mia të ruajtura ¦ Tpinġija vettorjali → it-tpinġijiet issejvjati tiegħi
+Coller un SVG ¦ Ngjit një SVG ¦ Waħħal SVG
+Le code <svg>…</svg> d’un dessin ¦ Kodi <svg>…</svg> i një vizatimi ¦ Il-kodiċi <svg>…</svg> ta’ tpinġija
+📋 Coller un SVG ¦ 📋 Ngjit një SVG ¦ 📋 Waħħal SVG
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Ngjit këtu kodin e vizatimit, nga <svg> deri te </svg>. Skriptet dhe lidhjet jashtë hiqen. ¦ Waħħal hawn il-kodiċi tat-tpinġija, minn <svg> sa </svg>. L-iscripts u l-links għal barra jitneħħew.
+Ajouter le dessin ¦ Shto vizatimin ¦ Żid it-tpinġija
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Një tekst nga Përpunuesi i tekstit (një letër, një rrëfim), i pastruar për faqen ¦ Test mill-Proċessur tal-kliem (ittra, rakkont), ippulitat għall-paġna
+Ce document est vide. ¦ Ky dokument është bosh. ¦ Dan id-dokument huwa vojt.
+Vidéo, son, dessin et texte ¦ Video, zë, vizatim dhe tekst ¦ Vidjo, ħoss, tpinġija u test
+🎬 Changer la vidéo… ¦ 🎬 Ndrysho videon… ¦ 🎬 Ibdel il-vidjo…
+🎧 Changer le son… ¦ 🎧 Ndrysho zërin… ¦ 🎧 Ibdel il-ħoss…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Skedari shkon me sajtin (dosja medias/) gjatë eksportimit dhe publikimit. ¦ Il-fajl imur mas-sit (folder medias/) fl-esportazzjoni u fil-pubblikazzjoni.
+Un autre son ¦ Një zë tjetër ¦ Ħoss ieħor
+Une autre vidéo ¦ Një video tjetër ¦ Vidjo oħra
+{what} (dossier medias/) ¦ {what} (dosja medias/) ¦ {what} (folder medias/)
+vidéo ou son ¦ video ose zë ¦ vidjo jew ħoss
+vidéos ou sons ¦ video ose zëra ¦ vidjows jew ħsejjes
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: shumë i rëndë për një sajt (deri në 90 MB për skedar, 300 MB gjithsej) ¦ {what}: tqil wisq għal sit (90 MB l-aktar kull fajl, 300 MB b’kollox)
+vidéo ou son pas mis ¦ video ose zë i pavendosur ¦ vidjo jew ħoss mhux imqiegħed
+vidéos ou sons pas mis ¦ video ose zëra të pavendosur ¦ vidjows jew ħsejjes mhux imqiegħda
+Mon site web n’est pas chargé : recharge la page. ¦ Faqja ime e internetit nuk është ngarkuar: ringarko faqen. ¦ Is-sit web tiegħi mhux mtella’: erġa’ tella’ l-paġna.
+Mon site web ne sait pas recevoir ça. ¦ Faqja ime e internetit nuk di ta marrë këtë. ¦ Is-sit web tiegħi ma jafx jirċievi dan.
+Ce texte est vide. ¦ Ky tekst është bosh. ¦ Dan it-test huwa vojt.
+Mon site ¦ Sajti im ¦ Is-sit tiegħi
+ouvert ¦ i hapur ¦ miftuħ
+la dernière fois ¦ herën e fundit ¦ l-aħħar darba
+ouvert, pas encore enregistré ¦ i hapur, ende i paruajtur ¦ miftuħ, għadu mhux issejvjat
+{what} : sur quel site ? ¦ {what}: në cilin sajt? ¦ {what}: fuq liema sit?
+Un nouveau site ¦ Një sajt i ri ¦ Sit ġdid
+Sur quelle page ? ¦ Në cilën faqe? ¦ Fuq liema paġna?
+Une nouvelle page… ¦ Një faqe e re… ¦ Paġna ġdida…
+📄 Nouvelle page ¦ 📄 Faqe e re ¦ 📄 Paġna ġdida
+Le nom de la page (il apparaît dans le menu) : ¦ Emri i faqes (shfaqet në menu): ¦ L-isem tal-paġna (jidher fil-menu):
+La vidéo ¦ Videoja ¦ Il-vidjo
+{what} est sur la page « {page} » de « {site} » ¦ {what} është në faqen «{page}» të «{site}» ¦ {what} jinsab fuq il-paġna “{page}” ta’ “{site}”
+vidéos WebM ¦ video WebM ¦ vidjows WebM
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ iPhone-ët para 2024 nuk e lexojnë: parapëlqe MP4 (H.264), që e lexojnë të gjithë. ¦ L-iPhones ta’ qabel l-2024 ma jaqrawhx: ippreferi l-MP4 (H.264), li jaqrah kulħadd.
+vidéos .mov (QuickTime) ¦ video .mov (QuickTime) ¦ vidjows .mov (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Shpesh i palexueshëm jashtë Apple: bëje sërish në MP4 (🎬 Montazh video → Eksporto). ¦ Spiss ma jinqarax barra Apple: erġa’ agħmlu f’MP4 (🎬 Immuntar tal-vidjo → Esporta).
+vidéos Ogg (.ogv) ¦ video Ogg (.ogv) ¦ vidjows Ogg (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Kurrë në Safari as në iPhone: parapëlqe MP4. ¦ Qatt fuq Safari u lanqas fuq iPhone: ippreferi l-MP4.
+sons Ogg (Vorbis, Opus) ¦ zëra Ogg (Vorbis, Opus) ¦ ħsejjes Ogg (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari i lexon vetëm që nga 2025: parapëlqe MP3 (🎧 Zë → Eksporto). ¦ Safari jaqrahom biss mill-2025: ippreferi l-MP3 (🎧 Ħoss → Esporta).
+sons FLAC ¦ zëra FLAC ¦ ħsejjes FLAC
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Funksionon kudo, por është i rëndë për një sajt: MP3 ngarkohet shumë më shpejt. ¦ Jaħdem kullimkien, imma tqil għal sit: l-MP3 jitla’ ħafna aktar malajr.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (diaporama ndalon në çdo imazh) ¦ scroll-snap (is-slideshow jieqaf fuq kull immaġni)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Funksionon kudo që nga 2019; gjetkë, imazhet rrëshqasin pa ndaluar. ¦ Jaħdem kullimkien mill-2019; band’oħra, l-immaġnijiet jgħaddu mingħajr ma jieqfu.
+Maison par époques ¦ Shtëpia sipas periudhave ¦ Dar skont il-perjodi
+Ma carte animée ¦ Harta ime e animuar ¦ Il-mappa animata tiegħi
+La maison au fil du temps ¦ Shtëpia ndër kohë ¦ Id-dar matul iż-żmien
+Le dessin vectoriel n’est pas chargé. ¦ Vizatimi vektorial nuk është ngarkuar. ¦ It-tpinġija vettorjali mhix mtellgħa.
+Lecture de la carte… ¦ Duke lexuar hartën… ¦ Qed tinqara l-mappa…
+Carte introuvable ¦ Harta nuk u gjet ¦ Il-mappa ma nstabitx
+La maison n’est pas chargée. ¦ Shtëpia nuk është ngarkuar. ¦ Id-dar mhix mtellgħa.
+Lecture de la maison… ¦ Duke lexuar shtëpinë… ¦ Qed tinqara d-dar…
+Maison introuvable ¦ Shtëpia nuk u gjet ¦ Id-dar ma nstabitx
+Le plan de cette maison est vide. ¦ Plani i kësaj shtëpie është bosh. ¦ Il-pjanta ta’ din id-dar hija vojta.
+Choisir une carte ¦ Zgjidh një hartë ¦ Agħżel mappa
+Chercher une carte… ¦ Kërko një hartë… ¦ Fittex mappa…
+{n} objets ¦ {n} objekte ¦ {n} oġġetti
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Objektet që kanë vite (skeda Vetitë e hartës) shfaqen në datën e tyre. ¦ L-oġġetti li għandhom snin (tab Proprjetajiet tal-mappa) jidhru fid-data tagħhom.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Asnjë hartë e ruajtur: bëj një te Mjetet e ndryshimit → 🗺️ Harta. ¦ L-ebda mappa ssejvjata: agħmel waħda f’Għodod tal-editjar → 🗺️ Mappa.
+Choisir une maison ¦ Zgjidh një shtëpi ¦ Agħżel dar
+Chercher une maison… ¦ Kërko një shtëpi… ¦ Fittex dar…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Çdo periudhë e shtëpisë (🕰) bëhet një plan, njëri pas tjetrit, me zbehje. ¦ Kull perjodu tad-dar (🕰) isir xena, waħda wara l-oħra, b’dissolvenza.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Asnjë shtëpi e ruajtur: vizato një te Mjetet e ndryshimit → 🏠 Shtëpia. ¦ L-ebda dar issejvjata: pinġi waħda f’Għodod tal-editjar → 🏠 Dar.
+Apparition des objets ¦ Shfaqja e objekteve ¦ Dehra tal-oġġetti
+D’un coup ¦ Njëherësh ¦ F’daqqa
+Avance doucement ¦ Ecën ngadalë ¦ Jimxi bil-mod
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Zbehje nga një periudhë te tjetra (0 deri 0,9) ¦ Dissolvenza minn perjodu għall-ieħor (0 sa 0,9)
+L’année et le nom de l’époque en légende ¦ Viti dhe emri i periudhës si legjendë ¦ Is-sena u l-isem tal-perjodu bħala leġġenda
+(une copie de la carte) ¦ (një kopje e hartës) ¦ (kopja tal-mappa)
+En faire la musique ¦ Bëje muzikë ¦ Agħmlu mużika
+Ce son passe en musique de fond, pour tout le film ¦ Ky zë bëhet muzikë sfondi për gjithë filmin ¦ Dan il-ħoss isir mużika fl-isfond għall-film kollu
+Voix retirée. ¦ Zëri u hoq. ¦ Leħen imneħħi.
+Le son est maintenant la musique du film. ¦ Zëri tani është muzika e filmit. ¦ Il-ħoss issa huwa l-mużika tal-film.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Zëri është zëri i filmit (skeda Film). «🎵 Bëje muzikë» për ta vënë në sfond. ¦ Il-ħoss huwa l-leħen tal-film (tab Film). “🎵 Agħmlu mużika” biex tpoġġih fl-isfond.
+Animer dans le Studio ¦ Animo në Studio ¦ Animah fl-Istudjo
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Rrëshqitësi i kohës luan vetë: objektet shfaqen në datën e tyre ¦ Il-cursor taż-żmien jindaqq waħdu: l-oġġetti jidhru fid-data tagħhom
+Le Studio d’animation n’est pas chargé. ¦ Studio e animacionit nuk është ngarkuar. ¦ L-Istudjo tal-animazzjoni mhux mtella’.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Asnjë hartë e ruajtur: fillo me «＋ Hartë e re». ¦ L-ebda mappa ssejvjata: ibda b’“＋ Mappa ġdida”.
+Quelle carte animer ? ¦ Cilën hartë të animosh? ¦ Liema mappa tanima?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Objektet që kanë vite (skeda Vetitë) shfaqen në datën e tyre, nga viti i parë te i fundit. ¦ L-oġġetti li għandhom snin (tab Proprjetajiet) jidhru fid-data tagħhom, mill-ewwel sena sal-aħħar.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Një film ku rrëshqitësi i kohës ecën vetë, nga viti i parë te i fundit ¦ Film fejn il-cursor taż-żmien jimxi waħdu, mill-ewwel sena sal-aħħar
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Kjo hartë është shumë e rëndë për t’u kopjuar në një film: ruaje, pastaj Mjetet e ndryshimit → 🗺️ Harta → «🎞 Animo në Studio». ¦ Din il-mappa tqila wisq biex tiġi kkupjata f’film: issejvjaha, imbagħad Għodod tal-editjar → 🗺️ Mappa → “🎞 Animah fl-Istudjo”.
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Plani ose pamja 3D në një mjet tjetër: montazh, paraqitje, faqosje, vizatim… ¦ Il-pjanta jew il-veduta 3D f’għodda oħra: immuntar, preżentazzjoni, tqassim, tpinġija…
+🎞 Animer les époques dans le Studio ¦ 🎞 Animo periudhat në Studio ¦ 🎞 Anima l-perjodi fl-Istudjo
+Animer les époques dans le Studio ¦ Animo periudhat në Studio ¦ Anima l-perjodi fl-Istudjo
+Le plan (image) ¦ Plani (imazh) ¦ Il-pjanta (immaġni)
+La vue 3D (image) ¦ Pamja 3D (imazh) ¦ Il-veduta 3D (immaġni)
+Le plan en dessin (vectoriel, mise en page…) ¦ Plani si vizatim (vektorial, faqosje…) ¦ Il-pjanta bħala tpinġija (vettorjali, tqassim…)

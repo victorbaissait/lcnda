@@ -25,6 +25,11 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-mp-'));
     fs.mkdirSync(path.join(tmp, 'media'));
+    // les packs : élections (essai, chiffres inventés : Tulle 62 % républicains en 1877) ; histoire du lieu si elle a été fabriquée
+    const mk = spawnSync('python3', [path.join(root, 'scripts/elections/make-fixture.py'), path.join(tmp, 'fx')], {encoding: 'utf8'});
+    if (mk.status !== 0) { console.error(mk.stderr || mk.stdout); process.exit(1); }
+    fs.mkdirSync(path.join(tmp, 'elections')); fs.copyFileSync(path.join(tmp, 'fx', 'elections.sqlite'), path.join(tmp, 'elections', 'elections.sqlite'));
+    const HIST = process.env.LCNDA_HIST_SQLITE || '/tmp/histoire-pack/histoire-locale.sqlite', hist = fs.existsSync(HIST);
     const phpPath = findPhp([devBundledPhp()]) || 'php';
     const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1'};
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
@@ -65,10 +70,13 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
         await p.waitForFunction(() => window.LCNDA_EXT?.monographiePlus, null, {timeout: 10000});
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).then(r => r.result || r).catch(e => ({error: e.message})), [x, q]);
 
-        await t('serveur : histoire du lieu et élections d’une commune, sans pack : « pas installé » ; lieu inconnu : erreur', async () => {
+        await t('serveur : histoire du lieu sans pack « pas installé » ; élections de la commune (pack d’essai) ; lieu inconnu : erreur', async () => {
             const h = await api('hist_place', {id: ID.tul, from: 1820, to: 1950}); assert.strictEqual(h.installed, false, JSON.stringify(h));
-            const e = await api('elections_place', {id: ID.tul}); assert.strictEqual(e.installed, false, JSON.stringify(e));
-            const bad = await api('hist_place', {id: 999999}); assert.ok(bad.error, JSON.stringify(bad));
+            const e = await api('elections_place', {id: ID.tul}); assert.strictEqual(e.installed, true); assert.strictEqual(e.insee, '19272');
+            assert.ok(e.elections.length >= 2); const y1877 = e.elections.find(x => x.year === 1877); assert.ok(y1877, JSON.stringify(e.elections.map(x => x.year)));
+            assert.strictEqual(Math.round(y1877.groups[0].pct), 62);
+            assert.strictEqual((await api('elections_place', {id: ID.tul, from: 1900})).elections.filter(x => x.year < 1900).length, 0);
+            assert.ok((await api('hist_place', {id: 999999})).error); assert.ok((await api('elections_place', {id: 999999})).error);
         });
 
         const open = () => p.evaluate(id => { const A = window.LCNDA_APP; A.state.graphPlaceMonograph = {...(A.state.graphPlaceMonograph || {}), id, name: 'Tulle', county: 'Corrèze', showEvents: true, showDigests: true, showBattues: true, showCemetery: true}; A.state.graphMode = 'place_monograph'; A.setModule('graphiques'); }, ID.tul);
@@ -97,6 +105,23 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
             assert.strictEqual(await p.locator('.place-monograph-section.is-events').isVisible(), true);
         });
 
+        await t('élections allumées : « 🗳 Comment on votait ici » ; histoire du lieu installée : « 🏘 Le lieu à travers le temps »', async () => {
+            if (hist) { fs.mkdirSync(path.join(tmp, 'histoire'), {recursive: true}); fs.copyFileSync(HIST, path.join(tmp, 'histoire', 'histoire-locale.sqlite')); }
+            await p.evaluate(() => localStorage.setItem('genealogie-elections', JSON.stringify({on: true})));
+            await open(); await p.waitForSelector('.place-monograph-sections[data-mp-mounted] [data-mp="elections"]', {state: 'attached'});
+            await p.evaluate(() => window.LCNDA_EXT.monographiePlus.renderAll());
+            const el = await p.textContent(sec('elections'));
+            assert.match(el, /À Tulle, \d+ % votent/); assert.match(el, /Source :[\s\S]*données d’essai/);
+            if (hist) {
+                assert.strictEqual(await p.locator(sec('histoire')).isVisible(), true);
+                assert.match(await p.textContent(sec('histoire')), /Tulle comptait [\d\s\u202f\u00a0]+ habitants/);
+                assert.ok(await p.locator(`${sec('histoire')} svg.hist-curve`).count(), 'la courbe');
+            } else console.log('  (pack de l’histoire du lieu absent : partie non vérifiée)');
+            await p.evaluate(() => localStorage.setItem('genealogie-elections', JSON.stringify({on: false})));
+            await open(); await p.waitForSelector('.place-monograph-sections[data-mp-mounted] [data-mp="family"]', {state: 'attached'});
+            assert.strictEqual(await p.locator(sec('elections')).count(), 0);
+        });
+
         await t('⚙︎ Personnaliser : masquer une partie (grisée, toujours dans la liste), ↶ Annuler la remet', async () => {
             await p.click('[data-mp-custom]'); await p.waitForSelector('.mp-panel [data-mp-order]');
             assert.ok(await p.locator('.mp-panel li[data-k="battues"] small').textContent().then(x => /rien pour cette commune/.test(x)));
@@ -115,7 +140,11 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
             await p.click('.mp-panel li[data-k="family"] [data-mp-move="-1"]');
             const after = await ids(); assert.strictEqual(after.indexOf('family'), i - 1, after.join(','));
             // glisser « Où chercher » tout en haut de la liste
-            await p.locator('.mp-panel li[data-k="search"]').dragTo(p.locator('.mp-panel [data-mp-order] li').first(), {targetPosition: {x: 20, y: 2}});
+            await p.evaluate(() => document.querySelector('.mp-panel [data-mp-order]').scrollIntoView({block: 'start'}));
+            const a = await p.locator('.mp-panel li[data-k="search"] .mp-grip').boundingBox(), b = await p.locator('.mp-panel [data-mp-order] li').first().boundingBox();
+            await p.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await p.mouse.down();
+            await p.mouse.move(a.x + 5, a.y - 20, {steps: 5}); await p.mouse.move(b.x + 20, b.y + 3, {steps: 12}); await p.mouse.move(b.x + 20, b.y + 2, {steps: 2}); await p.mouse.up();
+            if (process.env.DBG) console.log(a, b, await p.evaluate(() => innerHeight));
             await p.waitForFunction(() => document.querySelector('.place-monograph-sections > *:not([hidden])')?.dataset.mp === 'search', null, {timeout: 5000});
             const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-monographie-parties')));
             assert.ok(saved.order.indexOf('search') < saved.order.indexOf('events'), saved.order.join(','));
@@ -170,7 +199,7 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
 
         await t('un écran d’onglet garde l’organisation de son onglet (le panneau le dit, sans rien changer)', async () => {
             await p.evaluate(() => { window.LCNDA_SCREEN_LAYOUT = {kind: 'monograph', order: ['filters', 'metrics', 'jobs', 'events'], hidden: ['family']}; });
-            await open(); await p.waitForSelector('.place-monograph-sections[data-mp-mounted] [data-mp="family"]');
+            await open(); await p.waitForSelector('.place-monograph-sections[data-mp-mounted] [data-mp="family"]', {state: 'attached'});
             const o = await ids(); assert.strictEqual(o[0], 'jobs'); assert.ok(!o.includes('family'));
             await p.click('[data-mp-custom]'); assert.match(await p.textContent('.mp-panel'), /propre organisation/);
             assert.strictEqual(await p.locator('.mp-panel [data-mp-show]:not([disabled])').count(), 0);

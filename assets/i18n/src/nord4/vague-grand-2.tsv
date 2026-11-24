@@ -1,0 +1,835 @@
+fr ¦ fi ¦ hu
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Monenko päivän hiljaisuuden jälkeen eläin on ”myöhässä”? Punainen, kun aikaraja on ylitetty kaksinkertaisesti. ¦ Hány nap hír nélkül számít egy állat „késésben” lévőnek? Piros a határidő kétszeresénél.
+Espèce inconnue ¦ Tuntematon laji ¦ Ismeretlen faj
+Délais par espèce changés ¦ Lajikohtaiset aikarajat muutettu ¦ Fajonkénti határidők módosítva
+Animal (nom, bague…) ¦ Eläin (nimi, rengas…) ¦ Állat (név, gyűrű…)
+ou bague lue ¦ tai luettu rengas ¦ vagy leolvasott gyűrű
+Bague lue ¦ Luettu rengas ¦ Leolvasott gyűrű
+nb ¦ lkm ¦ db
+Nombre vus ¦ Nähtyjen määrä ¦ Látott egyedek
+Le menu de choix n’est pas encore chargé. ¦ Valintavalikkoa ei ole vielä ladattu. ¦ A választómenü még nem töltődött be.
+⚡ Saisie d’une séance ¦ ⚡ Havaintokerran syöttö ¦ ⚡ Megfigyelési alkalom rögzítése
+Tout enregistrer ¦ Tallenna kaikki ¦ Összes mentése
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Paikka, päivä ja havainnoija vain kerran; sitten yksi rivi jokaista nähtyä eläintä kohti (tai luettua rengasta kohti, jos et vielä tiedä, kuka se on). ¦ A hely, a dátum és a megfigyelő csak egyszer; aztán egy sor minden látott állatnak (vagy leolvasott gyűrűnek, ha még nem tudod, ki az).
+Site de suivi ¦ Seurantapaikka ¦ Megfigyelési hely
+Observateur ¦ Havainnoija ¦ Megfigyelő
+Nb ¦ Lkm ¦ Db
+Dis quand a eu lieu la séance. ¦ Kerro, milloin havaintokerta oli. ¦ Add meg, mikor volt a megfigyelés.
+Choisis un site ou un lieu pour la séance. ¦ Valitse havaintokerralle seurantapaikka tai paikka. ¦ Válassz megfigyelési helyet vagy helyszínt az alkalomhoz.
+Ajoute au moins un animal vu. ¦ Lisää ainakin yksi nähty eläin. ¦ Adj hozzá legalább egy látott állatot.
+Séance enregistrée : {n} ¦ Havaintokerta tallennettu: {n} ¦ Megfigyelés mentve: {n}
+🖨 Fiche de terrain ¦ 🖨 Maastolomake ¦ 🖨 Terepi lap
+Aperçu et impression ¦ Esikatselu ja tulostus ¦ Előnézet és nyomtatás
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Paikalla odotettavat eläimet (jo siellä nähdyt) renkaineen ja merkkeineen sekä valintaruudut: retkelle ilman tietokonetta. ¦ Egy helyen várható állatok (akiket már láttak ott), gyűrűikkel és jelöléseikkel, jelölőnégyzetekkel: számítógép nélküli kiszálláshoz.
+Tous les animaux suivis ¦ Kaikki seuratut eläimet ¦ Minden követett állat
+Tous les sites ¦ Kaikki paikat ¦ Minden hely
+Aucun animal déjà vu sur ce site. ¦ Tällä paikalla ei ole vielä nähty yhtään eläintä. ¦ Ezen a helyen még nem láttak állatot.
+Fiche de terrain — {s} ¦ Maastolomake — {s} ¦ Terepi lap — {s}
+Fiche de terrain ¦ Maastolomake ¦ Terepi lap
+Date de la dernière observation ¦ Viimeisimmän havainnon päivä ¦ Az utolsó megfigyelés dátuma
+Une colonne pour les notes ¦ Sarake muistiinpanoille ¦ Egy oszlop a jegyzeteknek
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Päivä: ____________  Havainnoija: ____________________  Sää: ____________ ¦ Dátum: ____________  Megfigyelő: ____________________  Időjárás: ____________
+SUCCESSIONS ¦ PERINNÖT ¦ HAGYATÉKOK
+Qui s’en charge ? ¦ Kuka hoitaa tämän? ¦ Ki intézi?
+ex. Claire LACOMBE (vide : personne) ¦ esim. Claire LACOMBE (tyhjä: ei kukaan) ¦ pl. Claire LACOMBE (üres: senki)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Se olen minä (suodattimelle ”Omat asiat”) ¦ Én vagyok (a „Saját ügyeim” szűrőhöz)
+Sur cet ordinateur, « moi » = {name}. ¦ Tällä tietokoneella ”minä” = {name}. ¦ Ezen a számítógépen „én” = {name}.
+Confié à {who} ¦ Annettu henkilölle {who} ¦ Rábízva: {who}
+Plus personne n’en est chargé ¦ Kukaan ei enää hoida tätä ¦ Már senki sem felel érte
+Chargé du dossier : ¦ Asian hoitaja: ¦ Az ügy felelőse:
+👥 Confier le dossier… ¦ 👥 Anna asia hoidettavaksi… ¦ 👥 Ügy átadása…
+👥 Chargé du dossier n° {n} ¦ 👥 Hoitaa asiaa nro {n} ¦ 👥 A(z) {n}. számú ügy felelőse
+à confier ¦ annettava hoidettavaksi ¦ átadandó
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Kuka hoitaa tämän määräajan? ¦ 👥 Ki foglalkozik ezzel a határidővel?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Mahdollinen eturistiriita: {n} on jo toisessa avoimessa asiassa. Tarkista ennen sopimuksen allekirjoittamista. ¦ 🛡 Lehetséges összeférhetetlenség: {n} már szerepel egy másik nyitott ügyben. Ellenőrizd, mielőtt szerződést írsz alá.
+dossier n° {n} ¦ asia nro {n} ¦ {n}. számú ügy
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ Tästä asiakirjasta ei ole kuvaa tietokannassa: liitä skannattu asiakirja tapahtumaan ja yritä uudelleen. ¦ Ennek az iratnak nincs képe az adatbázisban: kapcsold a beszkennelt iratot az eseményhez, majd próbáld újra.
+La lecture automatique n’a pas marché : {err} ¦ Automaattinen luku ei onnistunut: {err} ¦ Az automatikus olvasás nem sikerült: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Kuvasta ei luettu tekstiä (käsialaa? kokeile Litterointipajaa). ¦ Ezen a képen nem sikerült szöveget olvasni (kézírás? próbáld az Átíróműhelyt).
+rien de trouvé ¦ mitään ei löytynyt ¦ nincs találat
+PIÈCE ¦ ASIAKIRJA ¦ IRAT
+🔎 Lecture automatique — à vérifier ¦ 🔎 Automaattinen luku — tarkistettava ¦ 🔎 Automatikus olvasás — ellenőrizendő
+✍️ Noter au journal ¦ ✍️ Kirjaa päiväkirjaan ¦ ✍️ Bejegyzés a naplóba
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Mitä kone luuli lukevansa asiakirjasta ”{t}”. Poista rasti vääristä: korteissa ei muutu mitään. ¦ Amit a gép kiolvasni vélt ebből: „{t}”. Vedd ki a pipát a hibásak elől: az adatlapokon semmi sem változik.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Asiakirjan ”{p}” automaattinen luku (tarkistettava) — {line} ¦ A(z) „{p}” irat automatikus olvasása (ellenőrizendő) — {line}
+Noté au journal du dossier. ¦ Kirjattu asian päiväkirjaan. ¦ Bejegyezve az ügy naplójába.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Lue skannatun asiakirjan teksti ja ehdota nimiä, päiviä ja paikkoja ¦ A beszkennelt irat szövegének beolvasása, és nevek, dátumok, helyek javaslata
+🔎 Lire la pièce ¦ 🔎 Lue asiakirja ¦ 🔎 Irat beolvasása
+demandée ¦ pyydetty ¦ kérve
+à obtenir ¦ hankittava ¦ beszerzendő
+Tableau généalogique de dévolution ¦ Perimysjärjestyksen sukutaulu ¦ Öröklési családfa-táblázat
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ LUONNOS — notaarin tarkistettava ja täydennettävä. Suuntaa-antava laskelma tietokannan korttien perusteella. ¦ TERVEZET — a közjegyzőnek ellenőriznie és kiegészítenie kell. Tájékoztató számítás az adatbázis adatlapjai alapján.
+Pièces (renvois) ¦ Asiakirjat (viittaukset) ¦ Iratok (hivatkozások)
+conjoint survivant ¦ leski ¦ túlélő házastárs
+Aucun héritier calculé pour l’instant. ¦ Perillisiä ei ole vielä laskettu. ¦ Még nincs kiszámított örökös.
+Les pièces ¦ Asiakirjat ¦ Az iratok
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Laadittu {d}. Työasiakirja: se ei korvaa perillisselvitystä eikä perintötodistusta. ¦ Készült: {d}. Munkadokumentum: nem helyettesíti sem az öröklési közokiratot, sem az öröklési bizonyítványt.
+Projet de tableau de dévolution ¦ Perimysjärjestystaulukon luonnos ¦ Öröklési táblázat tervezete
+🖨 Imprimer le tableau ¦ 🖨 Tulosta taulukko ¦ 🖨 Táblázat nyomtatása
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Liitettäväksi perillisselvitykseen: jokainen perillinen, hänen sukulaisuutensa, osuutensa ja sen todistavat asiakirjat (P1, P2…). ¦ Az öröklési közokirathoz csatolandó: minden örökös, a rokonsága, a része és az azt igazoló iratok (P1, P2…).
+Tableau de dévolution — {n} ¦ Perimysjärjestystaulukko — {n} ¦ Öröklési táblázat — {n}
+Tableau de dévolution ¦ Perimysjärjestystaulukko ¦ Öröklési táblázat
+Tableau de dévolution {n} ¦ Perimysjärjestystaulukko {n} ¦ Öröklési táblázat {n}
+12 juin 1890 ¦ 12. kesäkuuta 1890 ¦ 1890. június 12.
+2000 et après ¦ 2000 ja myöhemmin ¦ 2000 és utána
+7 mai 1925 ¦ 7. toukokuuta 1925 ¦ 1925. május 7.
+Aucun chemin de parenté connu avec la personne de départ. ¦ Lähtöhenkilöön ei tunneta sukulaisuuspolkua. ¦ Nincs ismert rokoni útvonal a kiinduló személyhez.
+Aucun lien de parenté connu. ¦ Sukulaisuussuhdetta ei tunneta. ¦ Nincs ismert rokoni kapcsolat.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Sukulaisuutta ei löytynyt henkilöön {nm} (lähtöhenkilö). ¦ Nem található rokoni kapcsolat ezzel: {nm} (kiinduló személy).
+Aucune différence : la fiche est comme avant cette modification. ¦ Ei eroja: kortti on samanlainen kuin ennen tätä muutosta. ¦ Nincs különbség: az adatlap olyan, mint a módosítás előtt.
+Aucune union enregistrée pour cette fiche. ¦ Tälle kortille ei ole tallennettu liittoja. ¦ Ehhez az adatlaphoz nincs rögzített kapcsolat.
+Avant cette modification ¦ Ennen tätä muutosta ¦ A módosítás előtt
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Piilotettu katselutilassa, vienneissä, jaoissa ja sivustolla. ¦ Rejtve marad olvasó módban, az exportokban, a megosztásokban és a weboldalon.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Tätä kohdetta ei ole enää: käytä ”Palauta”, jos se on poistettu. ¦ Ez az elem már nem létezik: használd a „Visszaállítás” gombot, ha törölték.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Tällä kortilla on {n} {what}: pidä oikea, toisesta tulee tämän tiedon ”toinen versio”. ¦ Ennek az adatlapnak {n} {what} van: tartsd meg a helyeset, a másik ennek a ténynek „másik változata” lesz.
+Chargement de la fiche familiale… ¦ Ladataan perhekorttia… ¦ Családi adatlap betöltése…
+Chargement des pesées… ¦ Ladataan punnituksia… ¦ Mérések betöltése…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Valitse ”⤓ PDF” tallentaaksesi tiedoston. ¦ Válaszd a „⤓ PDF”-et a fájl mentéséhez.
+Confidentialité et recherche ¦ Yksityisyys ja tutkimus ¦ Adatvédelem és kutatás
+Courbe de poids ¦ Painokäyrä ¦ Súlygörbe
+Créer la famille ¦ Luo perhe ¦ Család létrehozása
+C’est la personne de départ (de cujus). ¦ Tämä on lähtöhenkilö (perittävä). ¦ Ez a kiinduló személy (az örökhagyó).
+C’est la personne de départ. ¦ Tämä on lähtöhenkilö. ¦ Ez a kiinduló személy.
+Date du média moins date de naissance ¦ Median päivä miinus syntymäpäivä ¦ A média dátuma mínusz a születési dátum
+Dernière modification ¦ Viimeisin muutos ¦ Utolsó módosítás
+Dernières fiches créées ¦ Viimeksi luodut kortit ¦ Legutóbb létrehozott adatlapok
+En vie et décédés ¦ Elossa ja kuolleet ¦ Élők és elhunytak
+Exporter la fiche ¦ Vie kortti ¦ Adatlap exportálása
+Exporter la fiche (JSON) ¦ Vie kortti (JSON) ¦ Adatlap exportálása (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Tämän kortin pikaviennit: 🖨 Tulosta avaa sovelluksen esikatselun (koko, suunta, PDF) tämän kortin lohkojen järjestyksellä, koolla ja näkyvyydellä. 🔒 Luottamuksellisia tapahtumia ei koskaan viedä. ¦ Az adatlap gyors exportjai: a 🖨 Nyomtatás megnyitja az alkalmazás előnézetét (méret, tájolás, PDF) az adatlap blokkjainak sorrendjével, méretével és láthatóságával. A 🔒 bizalmas események soha nem kerülnek exportálásra.
+FICHE FAMILIALE ¦ PERHEKORTTI ¦ CSALÁDI ADATLAP
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Perhe tallennettu: {n} korttia luotu. ¦ Család mentve: {n} adatlap létrehozva.
+Famille enregistrée. ¦ Perhe tallennettu. ¦ Család mentve.
+Fiche en JSON ¦ Kortti JSON-muodossa ¦ Adatlap JSON-ban
+Fiche familiale ¦ Perhekortti ¦ Családi adatlap
+Fiche familiale de {nm} ¦ Perhekortti: {nm} ¦ {nm} családi adatlapja
+Fiche familiale… ¦ Perhekortti… ¦ Családi adatlap…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Pidetty: toinen versio on merkitty kohtaan ”Vaihtoehtoinen päivä”. ¦ Megtartva: a másik változat a „Másik dátum” mezőben szerepel.
+Genre inconnu ¦ Tuntematon sukupuoli ¦ Ismeretlen nem
+Hors Sosa ¦ Sosan ulkopuolella ¦ Sosán kívül
+Imprimer la fiche ¦ Tulosta kortti ¦ Adatlap nyomtatása
+Indique au moins le père ou la mère. ¦ Anna ainakin isä tai äiti. ¦ Add meg legalább az apát vagy az anyát.
+Inhumation ¦ Hautaus ¦ Temetés
+Les deux branches ¦ Molemmat haarat ¦ Mindkét ág
+Lien retiré : {nm} ¦ Linkki poistettu: {nm} ¦ Kapcsolat eltávolítva: {nm}
+Naissance (les plus anciens d’abord) ¦ Syntymä (vanhimmat ensin) ¦ Születés (a legidősebbek elöl)
+Naissance (les plus récents d’abord) ¦ Syntymä (uusimmat ensin) ¦ Születés (a legfiatalabbak elöl)
+Naissance inconnue ¦ Tuntematon syntymä ¦ Ismeretlen születés
+Note de recherche ¦ Tutkimusmuistiinpano ¦ Kutatási jegyzet
+Ouvre d’abord une fiche. ¦ Avaa ensin kortti. ¦ Előbb nyiss meg egy adatlapot.
+PDF (aperçu d’impression) ¦ PDF (tulostuksen esikatselu) ¦ PDF (nyomtatási előnézet)
+Pas de fiche d’animal liée. ¦ Ei linkitettyä eläinkorttia. ¦ Nincs kapcsolt állat-adatlap.
+Pas de mariage enregistré. ¦ Avioliittoa ei ole tallennettu. ¦ Nincs rögzített házasság.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Ei vielä punnituksia: lisää paino kohdassa 🩺 Terveys. ¦ Még nincs mérés: adj hozzá súlyt az 🩺 Egészség részben.
+Personnaliser l’export… ¦ Mukauta vientiä… ¦ Export testreszabása…
+Prénom NOM, ou choisis une fiche ¦ Etunimi SUKUNIMI, tai valitse kortti ¦ Utónév VEZETÉKNÉV, vagy válassz adatlapot
+Père, mère, mariage et enfants en une seule saisie ¦ Isä, äiti, avioliitto ja lapset yhdellä kertaa ¦ Apa, anya, házasság és gyerekek egyetlen bevitellel
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Isä, äiti, avioliitto ja lapset yhdellä kertaa. Jokaiselle nimelle: valitse olemassa oleva kortti tai kirjoita ”Etunimi SUKUNIMI” luodaksesi uuden. ¦ Apa, anya, házasság és gyerekek egyetlen bevitellel. Minden névnél: válassz meglévő adatlapot, vagy írd be: „Utónév VEZETÉKNÉV” egy új létrehozásához.
+Recherche du chemin… ¦ Etsitään polkua… ¦ Útvonal keresése…
+Remis : {f} ¦ Palautettu: {f} ¦ Visszaállítva: {f}
+Rien à exporter dans cet écran. ¦ Tässä näkymässä ei ole mitään vietävää. ¦ Ezen a képernyőn nincs mit exportálni.
+SAISIE RAPIDE ¦ PIKASYÖTTÖ ¦ GYORS BEVITEL
+Sans aucune source ¦ Ilman yhtään lähdettä ¦ Forrás nélkül
+Sans parents ¦ Ilman vanhempia ¦ Szülők nélkül
+Sans parents connus ¦ Ei tunnettuja vanhempia ¦ Ismert szülők nélkül
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Jokaisen nimen alla: hänen sukulaisuutensa lähtöhenkilöön. ¦ Minden név alatt: a rokoni kapcsolata a kiinduló személlyel.
+TON LIEN ¦ SUKULAISUUTESI ¦ A KAPCSOLATOD
+Tableau (CSV) ¦ Taulukko (CSV) ¦ Táblázat (CSV)
+Ton lien avec cette personne ¦ Sukulaisuutesi tähän henkilöön ¦ A kapcsolatod ezzel a személlyel
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Sukulaisuutesi tähän henkilöön (lähtien henkilöstä {nm}) — napsauta nähdäksesi polun. ¦ A kapcsolatod ezzel a személlyel ({nm} felől) — kattints az útvonal megtekintéséhez.
+Tous les genres ¦ Kaikki sukupuolet ¦ Minden nem
+Un enfant sans nom de famille prend celui du père. ¦ Lapsi ilman sukunimeä saa isän sukunimen. ¦ A vezetéknév nélküli gyermek az apáét kapja.
+Voir la note de recherche ¦ Näytä tutkimusmuistiinpano ¦ Kutatási jegyzet megtekintése
+conjoint de ¦ puoliso: ¦ házastársa:
+enfant de ¦ lapsi: ¦ gyermeke:
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ esim. tarkistettava: signum 3 E 125, vihje: naapuriseurakunnan kirkonkirja ¦ pl. ellenőrizendő: jelzet 3 E 125, nyom: a szomszéd plébánia anyakönyve
+inconnu(e) ¦ tuntematon ¦ ismeretlen
+par {nm} ¦ tekijä: {nm} ¦ {nm} által
+parent de ¦ vanhempi: ¦ szülője:
+{a}–{b} ¦ {a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} oli noin {age} ¦ {nm} kb. {age} volt
+{nm} avait moins d’un an ¦ {nm} oli alle vuoden ikäinen ¦ {nm} egy évnél fiatalabb volt
+{nm} avait {age} ¦ {nm} oli {age} ¦ {nm} {age} volt
+{n} pesée(s) · dernière : {w} le {d} ¦ {n} punnitusta · viimeisin: {w} {d} ¦ {n} mérés · utolsó: {w}, {d}
+{n} {what} ¦ {n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ {n} askelta lähtöhenkilöstä. ¦ {n} lépés a kiinduló személytől.
+{s} depuis la première ¦ {s} ensimmäisestä ¦ {s} az első óta
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Luottamuksellinen tapahtuma: piilotettu katselussa, vienneissä, jaoissa ja sivustolla. ¦ Bizalmas esemény: rejtve olvasó módban, az exportokban, a megosztásokban és a weboldalon.
+à {x} ¦ paikassa {x} ¦ itt: {x}
+↩ Remettre ¦ ↩ Palauta ¦ ↩ Visszaállítás
+⇆ Comparer avec maintenant ¦ ⇆ Vertaa nykyiseen ¦ ⇆ Összehasonlítás a mostanival
+⚡ ＋ Famille ¦ ⚡ ＋ Perhe ¦ ⚡ ＋ Család
+✓ Garder celle-ci ¦ ✓ Pidä tämä ¦ ✓ Ezt megtartom
+✓ Remis ¦ ✓ Palautettu ¦ ✓ Visszaállítva
+＋ Un enfant de plus ¦ ＋ Vielä yksi lapsi ¦ ＋ Még egy gyermek
+👪 Fiche familiale ¦ 👪 Perhekortti ¦ 👪 Családi adatlap
+📈 Animal : poids et croissance ¦ 📈 Eläin: paino ja kasvu ¦ 📈 Állat: súly és növekedés
+📝 Avec une note de recherche ¦ 📝 Tutkimusmuistiinpanon kanssa ¦ 📝 Kutatási jegyzettel
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Tutkimusmuistiinpano (tarkistettava, signum, vihje) ¦ 📝 Kutatási jegyzet (ellenőrizendő, jelzet, nyom)
+📝 Note de recherche : {x} ¦ 📝 Tutkimusmuistiinpano: {x} ¦ 📝 Kutatási jegyzet: {x}
+🔒 confidentiel ¦ 🔒 luottamuksellinen ¦ 🔒 bizalmas
+🔒 Événement confidentiel ¦ 🔒 Luottamuksellinen tapahtuma ¦ 🔒 Bizalmas esemény
+🧭 Aucun lien connu ¦ 🧭 Ei tunnettua sukulaisuutta ¦ 🧭 Nincs ismert kapcsolat
+🧭 Personne de départ ¦ 🧭 Lähtöhenkilö ¦ 🧭 Kiinduló személy
+🧭 Ton lien ¦ 🧭 Sukulaisuutesi ¦ 🧭 A kapcsolatod
+🧭 Ton lien avec cette personne ¦ 🧭 Sukulaisuutesi tähän henkilöön ¦ 🧭 A kapcsolatod ezzel a személlyel
+🧭 personne de départ ¦ 🧭 lähtöhenkilö ¦ 🧭 kiinduló személy
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Uusi… avoimessa välilehdessä (henkilö välilehdellä Henkilöt) ¦ Új… a nyitott lapon (egy személy a Személyek lapon)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Kumoa kortin viimeisin muutos (tekstikentän ulkopuolella, heti, ja ”↷ Tee uudelleen”) ¦ Egy adatlap utolsó módosításának visszavonása (szövegmezőn kívül, azonnal, „↷ Újra” gombbal)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Vie avoimen välilehden sisältö (⤓ Vie) ¦ A nyitott lap tartalmának exportálása (⤓ Exportálás)
+Chercher dans la colonne de gauche ¦ Hae vasemmasta sarakkeesta ¦ Keresés a bal oldali oszlopban
+Aucune personne ne correspond à ces filtres. ¦ Yksikään henkilö ei vastaa näitä suodattimia. ¦ Egyetlen személy sem felel meg ezeknek a szűrőknek.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Poista suodatin (Suodata ▾) tai vaihda lajittelua. ¦ Vegyél ki egy szűrőt (Szűrés ▾), vagy változtass a rendezésen.
+Peau ¦ Iho ¦ Bőr
+Origine / mention ¦ Alkuperä / maininta ¦ Eredet / említés
+Mention conjoint ¦ Puolison maininta ¦ Házastárs említése
+Mention enfants ¦ Lasten maininta ¦ Gyermekek említése
+Date alternative ¦ Vaihtoehtoinen päivä ¦ Másik dátum
+Lieu (n°) ¦ Paikka (nro) ¦ Hely (sz.)
+Type (n°) ¦ Tyyppi (nro) ¦ Típus (sz.)
+Confidentiel ¦ Luottamuksellinen ¦ Bizalmas
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: ”{a}” ({na}) · B: ”{b}” ({nb}) → {n} henkilö(ä) {op}. ¦ A: „{a}” ({na}) · B: „{b}” ({nb}) → {n} személy {op}.
+Acte à commander supprimé ¦ Tilattava asiakirja poistettu ¦ Megrendelendő irat törölve
+Ajouter à une liste ¦ Lisää luetteloon ¦ Hozzáadás listához
+Apparence (thème, couleurs, police) ¦ Ulkoasu (teema, värit, fontti) ¦ Megjelenés (téma, színek, betűtípus)
+Aucune citation ne contient ce texte. ¦ Mikään viittaus ei sisällä tätä tekstiä. ¦ Egyetlen hivatkozás sem tartalmazza ezt a szöveget.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Missään ”Omat luettelot” -luettelossa ei ole henkilöitä: luo sellainen kohdassa Asetukset → Luetteloeditori. ¦ A „Saját listák” egyike sem tartalmaz személyeket: hozz létre egyet itt: Beállítások → Listaszerkesztő.
+Aucune ligne ne contient « {find} ». ¦ Millään rivillä ei ole ”{find}”. ¦ Egyik sor sem tartalmazza ezt: „{find}”.
+Aucune source ne contient ce texte. ¦ Mikään lähde ei sisällä tätä tekstiä. ¦ Egyetlen forrás sem tartalmazza ezt a szöveget.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Mitä on yhdessä tallennetussa haussa mutta ei toisessa (esim. Corrèzessa syntyneet Sosat ilman kastetodistusta): aukkojen löytämiseen. ¦ Ami az egyik mentett keresésben benne van, a másikban nem (pl. Corrèze-ben született Sosák keresztelési anyakönyv nélkül): a hiányok megtalálásához.
+Changer cette ligne ¦ Muuta tätä riviä ¦ Sor módosítása
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Etsi ja korvaa: mistä etsitään, isot kirjaimet, koko sana ¦ Keresés és csere: hol keressen, kis- és nagybetűk, egész szó
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Etsi sanaa lähteiden otsikosta, tekijästä ja tekstistä sekä kunkin viittauksen sivusta ja huomautuksesta. ¦ Szó keresése a források címében, szerzőjében és szövegében, valamint minden hivatkozás oldalában és megjegyzésében.
+Choisis deux lieux différents. ¦ Valitse kaksi eri paikkaa. ¦ Válassz két különböző helyet.
+Choisis deux recherches enregistrées. ¦ Valitse kaksi tallennettua hakua. ¦ Válassz két mentett keresést.
+Choisis les deux lieux. ¦ Valitse molemmat paikat. ¦ Válaszd ki mindkét helyet.
+Choisis ou écris une étiquette. ¦ Valitse tai kirjoita tunniste. ¦ Válassz vagy írj egy címkét.
+Choisis où chercher. ¦ Valitse, mistä etsitään. ¦ Válaszd ki, hol keressen.
+Citée ¦ Viitattu ¦ Hivatkozott
+Cocher {name} ¦ Valitse {name} ¦ {name} bejelölése
+Comparer deux recherches ¦ Vertaa kahta hakua ¦ Két keresés összehasonlítása
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Korjaa virhe kaikkialta kerralla (”cultivatr” → ”cultivateur”). Näet ensin jokaisen rivin, joka muuttuisi; poista rasti niistä, jotka haluat pitää. ”↶ Kumoa” palauttaa kaiken ennalleen. ¦ Javíts ki egy hibát mindenhol egyszerre („cultivatr” → „cultivateur”). Előbb látod az összes sort, amely változna; vedd ki a pipát azok elől, amelyeket meg akarsz tartani. A „↶ Visszavonás” mindent visszaállít.
+Dernières recherches vidées ¦ Viimeisimmät haut tyhjennetty ¦ Legutóbbi keresések törölve
+Descriptions des événements ¦ Tapahtumien kuvaukset ¦ Események leírásai
+Définition supprimée ¦ Määritelmä poistettu ¦ Definíció törölve
+Dépouillement supprimé ¦ Läpikäynti poistettu ¦ Feldolgozás törölve
+Essaie un autre lien ou moins de critères. ¦ Kokeile toista sukulaisuutta tai vähemmän ehtoja. ¦ Próbálj másik kapcsolatot vagy kevesebb feltételt.
+Ex : Poilu, À vérifier… ¦ Esim. Poilu, Tarkistettava… ¦ Pl. Poilu, Ellenőrizendő…
+Ex : cultivateur (vide = effacer) ¦ Esim. cultivateur (tyhjä = poista) ¦ Pl. cultivateur (üres = törlés)
+Ex : cultivatr ¦ Esim. cultivatr ¦ Pl. cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Esim. kirkonkirja, folio 12, Tulle… ¦ Pl. plébániai anyakönyv, 12. fólió, Tulle…
+Extrait ¦ Ote ¦ Kivonat
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Tee ne kohdassa ”Monikriteerihaku” ja sitten ”Tallenna”. ¦ Készítsd el őket a „Összetett keresés”-ben, majd „Mentés”.
+Graphiques et tableau de bord ¦ Kaaviot ja kojelauta ¦ Grafikonok és irányítópult
+Il faut au moins deux recherches enregistrées. ¦ Tarvitaan vähintään kaksi tallennettua hakua. ¦ Legalább két mentett keresés kell.
+Lacune supprimée ¦ Aukko poistettu ¦ Hiány törölve
+Les recherches enregistrées ne sont pas disponibles. ¦ Tallennetut haut eivät ole käytettävissä. ¦ A mentett keresések nem érhetők el.
+Lien de parenté inconnu. ¦ Sukulaisuus tuntematon. ¦ Ismeretlen rokoni kapcsolat.
+Ligne de transcription supprimée ¦ Litterointirivi poistettu ¦ Átírási sor törölve
+Mot entier seulement ¦ Vain koko sana ¦ Csak egész szó
+Neveux et nièces ¦ Veljen- ja sisarenlapset ¦ Unokaöcsök és unokahúgok
+Nom de table invalide. ¦ Virheellinen taulukon nimi. ¦ Érvénytelen táblanév.
+Noms de lieux ¦ Paikannimet ¦ Helynevek
+Nouvelle étiquette… ¦ Uusi tunniste… ¦ Új címke…
+Nés en ou après ¦ Syntyneet vuonna tai jälkeen ¦ Születtek ekkor vagy később
+Nés en ou avant ¦ Syntyneet vuonna tai ennen ¦ Születtek ekkor vagy korábban
+Oncles et tantes ¦ Sedät ja tädit ¦ Nagybácsik és nagynénik
+Onglets ajoutés au menu ¦ Valikkoon lisätyt välilehdet ¦ A menühöz hozzáadott lapok
+Onglets cachés du menu ¦ Valikosta piilotetut välilehdet ¦ A menüből elrejtett lapok
+Ordre des types de recherche ¦ Hakutyyppien järjestys ¦ A keresési típusok sorrendje
+Ordre du menu ¦ Valikon järjestys ¦ Menü sorrendje
+Ouvrir la recherche multicritère ¦ Avaa monikriteerihaku ¦ Összetett keresés megnyitása
+Où chercher ¦ Mistä etsitään ¦ Hol keressen
+Personne relevée retirée ¦ Poimittu henkilö poistettu ¦ Kigyűjtött személy eltávolítva
+Puis le lien de parenté cherché. ¦ Sitten haettu sukulaisuus. ¦ Aztán a keresett rokoni kapcsolat.
+Rangement des pages des Réglages ¦ Asetusten sivujen järjestys ¦ A Beállítások oldalainak rendezése
+Recherche A ¦ Haku A ¦ A keresés
+Recherche B ¦ Haku B ¦ B keresés
+Recherche dans les sources… ¦ Haetaan lähteistä… ¦ Keresés a forrásokban…
+Recherche dans l’arbre… ¦ Haetaan puusta… ¦ Keresés a fában…
+Recherche des lignes à changer… ¦ Etsitään muutettavia rivejä… ¦ Módosítandó sorok keresése…
+Recherche par lien de parenté ¦ Haku sukulaisuuden mukaan ¦ Keresés rokoni kapcsolat szerint
+Respecter les majuscules ¦ Huomioi isot kirjaimet ¦ Kis- és nagybetűk megkülönböztetése
+Rien de coché : les actions portent sur les {t} résultats ¦ Mitään ei ole valittu: toiminnot koskevat kaikkia {t} tulosta ¦ Nincs semmi bejelölve: a műveletek mind a(z) {t} találatra vonatkoznak
+Règle introuvable. ¦ Sääntöä ei löydy. ¦ A szabály nem található.
+Règle supprimée ¦ Sääntö poistettu ¦ Szabály törölve
+Résultats de la recherche ¦ Hakutulokset ¦ A keresés eredményei
+Sections ouvertes ou fermées ¦ Avatut tai suljetut osiot ¦ Nyitott vagy zárt szakaszok
+Seulement les décédés ¦ Vain kuolleet ¦ Csak az elhunytak
+Seulement les vivants ¦ Vain elossa olevat ¦ Csak az élők
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Vain {n} ensimmäistä riviä näytetään; ”Korvaa” muuttaa valitut rivit. ¦ Csak az első {n} sor látszik; a „Csere” a bejelölt sorokat módosítja.
+Sources et citations ¦ Lähteet ja viittaukset ¦ Források és hivatkozások
+Suppression impossible ici. ¦ Poistaminen ei ole mahdollista tässä. ¦ Itt nem lehet törölni.
+Tape au moins deux lettres. ¦ Kirjoita vähintään kaksi kirjainta. ¦ Írj be legalább két betűt.
+Tape le texte à chercher. ¦ Kirjoita etsittävä teksti. ¦ Írd be a keresendő szöveget.
+Texte à chercher ¦ Etsittävä teksti ¦ Keresendő szöveg
+Texte à chercher trop long. ¦ Etsittävä teksti on liian pitkä. ¦ A keresendő szöveg túl hosszú.
+Tous les ancêtres ¦ Kaikki esivanhemmat ¦ Minden felmenő
+Tous les descendants ¦ Kaikki jälkeläiset ¦ Minden leszármazott
+Trouvé dans ¦ Löytyi kohteesta ¦ Megtalálva itt
+Type d’événement supprimé ¦ Tapahtumatyyppi poistettu ¦ Eseménytípus törölve
+Types de recherche cachés ¦ Piilotetut hakutyypit ¦ Elrejtett keresési típusok
+Vider la liste ¦ Tyhjennä luettelo ¦ Lista ürítése
+Vivant(e) ¦ Elossa ¦ Élő
+Vivants et décédés ¦ Elossa olevat ja kuolleet ¦ Élők és elhunytak
+dans A et dans B ¦ sekä A:ssa että B:ssä ¦ A-ban és B-ben is
+dans A mais pas dans B ¦ A:ssa mutta ei B:ssä ¦ A-ban, de B-ben nem
+dans A ou dans B ¦ A:ssa tai B:ssä ¦ A-ban vagy B-ben
+dans une seule des deux ¦ vain toisessa niistä ¦ csak az egyikben
+{n} cochée(s) sur {t} ¦ {n} valittu / {t} ¦ {n} bejelölve / {t}
+{n} ligne(s) cochée(s) sur {t} ¦ {n} riviä valittu / {t} ¦ {n} sor bejelölve / {t}
+{rel} de {name} : {n} personne(s). ¦ {rel} – {name}: {n} henkilö(ä). ¦ {name} – {rel}: {n} személy.
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ ”Kaikki serkut henkilölle…”, ”elossa olevat jälkeläiset henkilölle… syntyneet 1900 jälkeen”: valitse henkilö ja sukulaisuus. ¦ „… összes első unokatestvére”, „… élő leszármazottai 1900 után születettek közül”: válassz egy személyt és egy kapcsolatot.
+Étiqueter {n} personne(s) ¦ Merkitse {n} henkilö(ä) tunnisteella ¦ {n} személy felcímkézése
+⟳ Recharger la page ¦ ⟳ Lataa sivu uudelleen ¦ ⟳ Oldal újratöltése
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 ”{label}” lisätty {n} henkilölle ¦ 🏷 „{label}” címke {n} személyen
+🏷 Étiqueter ¦ 🏷 Merkitse tunnisteella ¦ 🏷 Címkézés
+📊 Comparer deux recherches ¦ 📊 Vertaa kahta hakua ¦ 📊 Két keresés összehasonlítása
+📋 Ajouter à Mes listes ¦ 📋 Lisää Omiin luetteloihin ¦ 📋 Hozzáadás a Saját listákhoz
+📋 {n} personne(s) ajoutée(s) à « {list} » ¦ 📋 {n} henkilö(ä) lisätty luetteloon ”{list}” ¦ 📋 {n} személy hozzáadva ehhez: „{list}”
+📚 Sources ({n}) ¦ 📚 Lähteet ({n}) ¦ 📚 Források ({n})
+🔁 Chercher et remplacer ¦ 🔁 Etsi ja korvaa ¦ 🔁 Keresés és csere
+🔁 Remplacer ¦ 🔁 Korvaa ¦ 🔁 Csere
+🔁 Remplacer ({n}) ¦ 🔁 Korvaa ({n}) ¦ 🔁 Csere ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 {n} korvausta tehty ¦ 🔁 {n} csere megtörtént
+🔎 Ce que j’ai changé ¦ 🔎 Mitä muutin ¦ 🔎 Amit módosítottam
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 {n} riviä lukitulta kortilta: ne eivät muutu. ¦ 🔒 {n} sor zárolt adatlapról: ezek nem változnak.
+🔖 Citations ({n}) ¦ 🔖 Viittaukset ({n}) ¦ 🔖 Hivatkozások ({n})
+🕘 Dernières recherches ¦ 🕘 Viimeisimmät haut ¦ 🕘 Legutóbbi keresések
+🗄 Santé de la base ¦ 🗄 Tietokannan kunto ¦ 🗄 Az adatbázis állapota
+🧬 Lien de parenté ¦ 🧬 Sukulaisuus ¦ 🧬 Rokoni kapcsolat
+🧾 Sources et citations ¦ 🧾 Lähteet ja viittaukset ¦ 🧾 Források és hivatkozások
+Lieux « {q} » ¦ Paikat ”{q}” ¦ Helyek: „{q}”
+Transcriptions « {q} » ¦ Litteroinnit ”{q}” ¦ Átírások: „{q}”
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Vienti ei onnistu: luottamuksellisia tapahtumia ei voitu poistaa. Yritä hetken päästä uudelleen. ¦ Az exportálás nem lehetséges: a bizalmas eseményeket nem sikerült eltávolítani. Próbáld újra egy kicsit később.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Luottamuksellisia tapahtumia ei voitu piilottaa: yritä hetken päästä uudelleen. ¦ A bizalmas eseményeket nem sikerült elrejteni: próbáld újra egy kicsit később.
+, ni les fiches et événements confidentiels. ¦ , eikä luottamuksellisia kortteja ja tapahtumia. ¦ , sem a bizalmas adatlapokat és eseményeket.
+🔒  ¦ 🔒  ¦ 🔒 
+📤 Envoyer vers… ¦ 📤 Lähetä kohteeseen… ¦ 📤 Küldés ide…
+Dans une nouvelle présentation ¦ Uuteen esitykseen ¦ Új bemutatóba
+Dans un nouveau diaporama ¦ Uuteen diaesitykseen ¦ Új diavetítésbe
+Dans un livre de la Mise en page… ¦ Taiton kirjaan… ¦ Az Elrendezés egyik könyvébe…
+Dans un nouveau document (Traitement de texte) ¦ Uuteen asiakirjaan (Tekstinkäsittely) ¦ Új dokumentumba (Szövegszerkesztő)
+Dans le Tableur ¦ Taulukkolaskentaan ¦ A Táblázatkezelőbe
+Sur une page de mon site… ¦ Sivustoni sivulle… ¦ A webhelyem egyik oldalára…
+Dans la Retouche des photos ¦ Valokuvien käsittelyyn ¦ A Fényképek szerkesztésébe
+Comparer avec une autre photo ¦ Vertaa toiseen valokuvaan ¦ Összehasonlítás egy másik fényképpel
+Dans l’Atelier de transcription ¦ Litterointipajaan ¦ Az Átíróműhelybe
+Dans le Dessin vectoriel ¦ Vektoripiirrokseen ¦ A Vektoros rajzba
+Dans les Traitements par lot ¦ Eräkäsittelyihin ¦ A Kötegelt műveletekbe
+Envoyer les images vers… ¦ Lähetä kuvat kohteeseen… ¦ Képek küldése ide…
+Envoyer le texte vers… ¦ Lähetä teksti kohteeseen… ¦ Szöveg küldése ide…
+Envoyer le tableau vers… ¦ Lähetä taulukko kohteeseen… ¦ Táblázat küldése ide…
+Envoyer le son vers… ¦ Lähetä ääni kohteeseen… ¦ Hang küldése ide…
+Envoyer la vidéo vers… ¦ Lähetä video kohteeseen… ¦ Videó küldése ide…
+Envoyer le dessin vers… ¦ Lähetä piirros kohteeseen… ¦ Rajz küldése ide…
+Rangement du son dans les médias… ¦ Tallennetaan ääntä medioihin… ¦ A hang mentése a médiába…
+Rangement de la vidéo dans les médias… ¦ Tallennetaan videota medioihin… ¦ A videó mentése a médiába…
+Rien à envoyer. ¦ Ei mitään lähetettävää. ¦ Nincs mit küldeni.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Mikään työkalu ei voi vielä vastaanottaa tätä. ¦ Egyik eszköz sem tudja ezt még fogadni.
+En image (montage, studio, présentation, document…) ¦ Kuvana (leikkaus, studio, esitys, asiakirja…) ¦ Képként (vágás, stúdió, bemutató, dokumentum…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Piirroksena, terävä kaikissa koissa (kirja, sivusto…) ¦ Rajzként, minden méretben éles (könyv, webhely…)
+＋ Nouvelle crise ¦ ＋ Uusi kriisi ¦ ＋ Új válság
+Modifier cette crise ¦ Muokkaa tätä kriisiä ¦ Válság szerkesztése
+Supprimer cette crise ¦ Poista tämä kriisi ¦ Válság törlése
+Nouvelle crise ¦ Uusi kriisi ¦ Új válság
+Modifier la crise ¦ Muokkaa kriisiä ¦ Válság szerkesztése
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ EPIDEMIAT, SODAT, ANKARAT TALVET ¦ JÁRVÁNYOK, HÁBORÚK, SZÖRNYŰ TELEK
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Ranskan historian suuret kriisit perheesi kuolemien rinnalla: ymmärtääksesi kuolemien aallon (kolera 1832, suuri talvi 1709, espanjantauti…). Lisää omasi: kylän epidemia, tulipalo, tulva… ¦ Franciaország történetének nagy válságai a családod halálesetei mellett: hogy megértsd a halálozási hullámokat (1832-es kolera, 1709-es nagy tél, spanyolnátha…). Add hozzá a sajátjaidat: falusi járvány, tűzvész, árvíz…
+▦ Vignettes ¦ ▦ Pienoiskuvat ¦ ▦ Bélyegképek
+🏷 Par éditeur ¦ 🏷 Kustantajan mukaan ¦ 🏷 Kiadó szerint
+📍 Par lieu ¦ 📍 Paikan mukaan ¦ 📍 Hely szerint
+✉️ Écrites / vierges ¦ ✉️ Kirjoitetut / tyhjät ¦ ✉️ Megírt / üres
+Survole pour voir le verso ¦ Vie osoitin päälle nähdäksesi kääntöpuolen ¦ Vidd fölé az egeret a hátoldal megtekintéséhez
+Aucune fiche de carte postale pour l’instant ¦ Postikorttikortteja ei vielä ole ¦ Még nincs képeslap-adatlap
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Luettelot → 🏞 Postikortit: anna jokaiselle kortille kustantaja, numero, paikka, etu- ja kääntöpuoli. ¦ Listák → 🏞 Képeslapok: adj meg minden lapnak kiadót, számot, helyet, elő- és hátoldalt.
+Éditeur inconnu ¦ Tuntematon kustantaja ¦ Ismeretlen kiadó
+Écrites ou envoyées ¦ Kirjoitetut tai lähetetyt ¦ Megírt vagy elküldött
+Vierges (jamais envoyées) ¦ Tyhjät (ei koskaan lähetetty) ¦ Üres (soha el nem küldött)
+Il manque les n° {n} ¦ Puuttuvat numerot {n} ¦ Hiányzó számok: {n}
+Il manque le n° {n} ¦ Puuttuu numero {n} ¦ Hiányzik a(z) {n}. szám
+cartes ¦ korttia ¦ lap
+Marge de « vers » ¦ ”Noin”-päivän marginaali ¦ A „körül” tűrése
+Portée de « avant » / « après » ¦ ”Ennen” / ”jälkeen” -ulottuvuus ¦ Az „előtt” / „után” hatóköre
+Longueur d’une vie sans fin connue ¦ Elämän pituus, kun loppua ei tiedetä ¦ Egy élet hossza, ha a vége nem ismert
+Ouvrir dans le Tableur… ¦ Avaa Taulukkolaskennassa… ¦ Megnyitás a Táblázatkezelőben…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Avaa vieraat Taulukkolaskennassa ¦ 🧾 Vendégek megnyitása a Táblázatkezelőben
+📤 Envoyer le tableau des invités ¦ 📤 Lähetä vierastaulukko ¦ 📤 Vendégtáblázat küldése
+🧾 Ouvrir dans le Tableur ¦ 🧾 Avaa Taulukkolaskennassa ¦ 🧾 Megnyitás a Táblázatkezelőben
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Vierastaulukko haaroineen, sukulaisuuksineen ja vastauksineen. ¦ A vendégek táblázata az águkkal, rokoni kapcsolatukkal és válaszukkal.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Kaikki albumin valokuvat: diaesitys, elokuva, eräkäsittely… ¦ Az album összes fényképe: diavetítés, film, kötegelt művelet…
+Album — {nm} ¦ Albumi — {nm} ¦ Album — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Jälkipolvet (ylhäältä alas, yksi väri haaraa kohti) ¦ Leszármazottak (fentről lefelé, águnként egy szín)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Jälkipolvet tarvitsevat Sukukokoukset-työkalun, jota ei ole ladattu. ¦ A leszármazottakhoz a Családi találkozók eszköz kell, de nincs betöltve.
+Aucune descendance pour cette personne. ¦ Tällä henkilöllä ei ole jälkipolvia. ¦ Ennek a személynek nincs leszármazottja.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Tällä henkilöllä ei ole tunnettuja lapsia: ei piirrettäviä jälkipolvia. ¦ Ennek a személynek nincs ismert gyermeke: nincs mit rajzolni.
+La descendance de {nm} ¦ Henkilön {nm} jälkipolvet ¦ {nm} leszármazottai
+la famille ¦ perhe ¦ a család
+L’arbre (en fond) ¦ Puu (taustalla) ¦ A családfa (háttérben)
+📰 En faire un faire-part ¦ 📰 Tee siitä ilmoitus ¦ 📰 Értesítő készítése belőle
+Créer le faire-part ¦ Luo ilmoitus ¦ Értesítő létrehozása
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Puu asettuu taustalle ilmoituksen tekstien taakse. Kaikki avautuu sitten vektoripiirroksessa muokattavaksi. ¦ A családfa a háttérbe kerül, az értesítő szövegei mögé. Utána minden megnyílik a vektoros rajzban szerkesztésre.
+L’arbre derrière le texte ¦ Puu tekstin takana ¦ A családfa a szöveg mögött
+Très pâle ¦ Hyvin vaalea ¦ Nagyon halvány
+Pâle ¦ Vaalea ¦ Halvány
+Bien visible ¦ Hyvin näkyvä ¦ Jól látható
+Fabrication du faire-part… ¦ Tehdään ilmoitusta… ¦ Az értesítő készül…
+Personne à dessiner dans l’arbre. ¦ Puuhun ei ole ketään piirrettävää. ¦ Nincs kit rajzolni a családfába.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Puu sukukokous- tai hääilmoituksen taustalla ¦ A családfa egy családi találkozó vagy esküvő értesítőjének hátterében
+En faire un faire-part ¦ Tee siitä ilmoitus ¦ Értesítő készítése belőle
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Samat asetukset, ilmoitus jokaiselle henkilölle (luettelo, tunniste) tai sukukokouksen jokaiselle taloudelle, kaikki yhdessä PDF:ssä ¦ Ugyanazok a beállítások, értesítő minden személynek (lista, címke) vagy egy családi találkozó minden háztartásának, mind egyetlen PDF-ben
+Un faire-part par personne / par foyer… ¦ Ilmoitus henkilöä / taloutta kohden… ¦ Értesítő személyenként / háztartásonként…
+📬 Un faire-part par personne / par foyer ¦ 📬 Ilmoitus henkilöä / taloutta kohden ¦ 📬 Értesítő személyenként / háztartásonként
+📄 Fabriquer le PDF ¦ 📄 Tee PDF ¦ 📄 PDF készítése
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Ilmoitus sellaisena kuin sen säädit, kerran jokaiselle henkilölle tai taloudelle. Kaikki ilmoitukset ovat yhdessä PDF:ssä, valmiina tulostettaviksi. ¦ Az értesítő úgy, ahogy beállítottad, egyszer minden személynek vagy háztartásnak. Az összes értesítő egyetlen, nyomtatásra kész PDF-ben van.
+Une liste de personnes ¦ Henkilöluettelo ¦ Személyek listája
+Les personnes d’une étiquette ¦ Tunnisteen henkilöt ¦ Egy címke személyei
+Les foyers d’une cousinade ¦ Sukukokouksen taloudet ¦ Egy családi találkozó háztartásai
+La cousinade (les foyers invités) ¦ Sukukokous (kutsutut taloudet) ¦ A családi találkozó (meghívott háztartások)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ Ilmoituksen kentissä nämä sanat korvataan kunkin kohdalla: ¦ Az értesítő mezőiben ezek a szavak mindenkinél kicserélődnek:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (sukukokous: myös {titre}, {date}, {lieu}, {ancetre}…) ¦ (családi találkozó: még {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Henkilön (tai talouden) nimi jokaisen ilmoituksen yläosassa ¦ A személy (vagy háztartás) neve minden értesítő tetején
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Täytä myös kunkin kortilta (nimet, päivät, paikat) ¦ Kitöltés mindenki adatlapjáról is (nevek, dátumok, helyek)
+L’enveloppe de chacun porte son adresse. ¦ Kunkin kirjekuoressa on hänen osoitteensa. ¦ Mindenki borítékján a saját címe szerepel.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ Tässä sukukokouksessa ei ole kutsuttuja talouksia: valitse ensin vieraat. ¦ Ebben a családi találkozóban nincs meghívott háztartás: előbb jelölj be vendégeket.
+Fabrication de {n} faire-part… ¦ Tehdään {n} ilmoitusta… ¦ {n} értesítő készül…
+{i} sur {n}… ¦ {i} / {n}… ¦ {i} / {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ {n} ilmoitusta yhdessä PDF:ssä ({p} sivua). ¦ {n} értesítő egyetlen PDF-ben ({p} oldal).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Vektoripiirrosta ei ole ladattu: PDF:ää ei voi tehdä. ¦ A vektoros rajz nincs betöltve: a PDF nem készíthető el.
+Une action de la Retouche ¦ Valokuvien käsittelyn toiminto ¦ A Fényképek szerkesztésének egy művelete
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Valokuvien käsittelyyn tallennettu toiminto (Tiedosto → Toiminnot), jokaiseen kuvaan. ¦ A Fényképek szerkesztésében mentett művelet (Fájl → Műveletek), minden képen.
+aucune action choisie ¦ ei valittua toimintoa ¦ nincs kiválasztott művelet
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Valokuvien käsittelyä ei ole ladattu: toimintoa ”{name}” ei voi tehdä. ¦ A Fényképek szerkesztése nincs betöltve: a(z) „{name}” művelet nem végezhető el.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Käsittelyn toiminto ”{name}” ei tuottanut mitään. ¦ A szerkesztés „{name}” művelete nem adott eredményt.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Valokuvien käsittelyä ei ole ladattu: tätä vaihetta ei voi tehdä. ¦ A Fényképek szerkesztése nincs betöltve: ez a lépés nem végezhető el.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ Käsittelyyn ei ole tallennettu toimintoja. Avaa valokuva käsittelyssä ja tallenna toiminto kohdassa Tiedosto → Toiminnot. ¦ A szerkesztésben nincs mentett művelet. Nyiss meg egy fényképet a szerkesztésben, majd Fájl → Műveletek, hogy ments egyet.
+L’action ¦ Toiminto ¦ A művelet
+Choisir une action… ¦ Valitse toiminto… ¦ Művelet kiválasztása…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Valokuvien käsittelyyn tallennettu toiminto, tehdään erän jokaiseen kuvaan. ¦ A Fényképek szerkesztésében mentett művelet, a köteg minden képén elvégezve.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Tämän erän medioihin tallentamat kuvat: diaesitys, leikkaus… ¦ A köteg által a médiába mentett képek: diavetítés, vágás…
+Traitement par lot ¦ Eräkäsittely ¦ Kötegelt művelet
+{x} introuvable dans les médias. ¦ {x} ei löydy medioista. ¦ {x} nem található a médiában.
+Ouvrir cette image dans la Retouche des photos ¦ Avaa tämä kuva Valokuvien käsittelyssä ¦ Kép megnyitása a Fényképek szerkesztésében
+Retoucher ¦ Muokkaa ¦ Szerkesztés
+Envoyer cette image vers un autre outil ¦ Lähetä tämä kuva toiseen työkaluun ¦ Kép küldése másik eszközbe
+📤 Envoyer le tableau en image vers… ¦ 📤 Lähetä taulukko kuvana kohteeseen… ¦ 📤 Táblázat küldése képként ide…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Piirros menee toiseen työkaluun: Taiton kirjaan, sivustoni sivulle, Vektoripiirrokseen… ¦ A rajz egy másik eszközbe kerül: az Elrendezés egy könyvébe, a webhelyem egy oldalára, a Vektoros rajzba…
+Créer et envoyer vers… ¦ Luo ja lähetä kohteeseen… ¦ Létrehozás és küldés ide…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Sijoita vektoripiirros (puu, kartta, vaakuna…)… ¦ ✒️ Vektoros rajz elhelyezése (családfa, térkép, címer…)…
+Dessin vectoriel placé ¦ Vektoripiirros sijoitettu ¦ Vektoros rajz elhelyezve
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ ”{name}” sijoitettu: kun sitä muokataan Vektoripiirroksessa, se päivittyy tässä (”↻ Päivitä”). ¦ ✒️ „{name}” elhelyezve: ha a Vektoros rajzban módosítod, itt is frissül („↻ Frissítés”).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Vektoripiirros <b>linkitetty</b>{state}: kun sitä muokataan Vektoripiirroksessa, se piirtyy tässä uudelleen (”Päivitä”). ¦ ✒️ Vektoros rajz <b>összekapcsolva</b>{state}: ha a Vektoros rajzban módosítod, itt újrarajzolódik („Frissítés”).
+✎ Modifier le dessin ¦ ✎ Muokkaa piirrosta ¦ ✎ Rajz szerkesztése
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Piirros pysyy sellaisenaan eikä enää seuraa Vektoripiirrosta ¦ A rajz változatlan marad, és már nem követi a Vektoros rajzot
+Dessin détaché ¦ Piirros irrotettu ¦ Rajz leválasztva
+Le Dessin vectoriel n’est pas chargé. ¦ Vektoripiirrosta ei ole ladattu. ¦ A Vektoros rajz nincs betöltve.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Ei vektoripiirroksia: tee sellainen kohdassa Luettelot → Muokkaustyökalut (Vektoripiirros, Koristeellinen puu, Kartta…). ¦ Nincs vektoros rajz: készíts egyet itt: Listák → Szerkesztőeszközök (Vektoros rajz, Díszes családfa, Térkép…).
+PLACER ¦ SIJOITA ¦ ELHELYEZÉS
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Vektoripiirros (puu, kartta, vaakuna…) ¦ ✒️ Vektoros rajz (családfa, térkép, címer…)
+Placer ce dessin ¦ Sijoita tämä piirros ¦ Rajz elhelyezése
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Piirros pysyy linkitettynä: kun sitä muokataan Vektoripiirroksessa, se päivittyy kirjassa (”↻ Päivitä”). Se pysyy terävänä kaikissa koissa. ¦ A rajz összekapcsolva marad: ha a Vektoros rajzban módosítod, a könyvben is frissül („↻ Frissítés”). Minden méretben éles marad.
+Choisis un dessin. ¦ Valitse piirros. ¦ Válassz egy rajzot.
+Le dessin n’a pas pu être lu. ¦ Piirrosta ei voitu lukea. ¦ A rajzot nem sikerült beolvasni.
+📐 Mettre dans un livre ¦ 📐 Laita kirjaan ¦ 📐 Elhelyezés egy könyvben
+Mettre dans le livre ¦ Laita kirjaan ¦ Elhelyezés a könyvben
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Piirros tallennetaan Medioihin (kuvana) ja sijoitetaan omalle sivulleen marginaalien sisään. ¦ A rajz a Médiába kerül (képként), majd egy saját oldalra, a margókon belülre.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Kuva sijoitetaan omalle sivulleen marginaalien sisään. Se pysyy linkitettynä Medioiden valokuvaan. ¦ A kép egy saját oldalra kerül, a margókon belülre. Összekapcsolva marad a Média fényképével.
+Rangement du dessin dans les médias… ¦ Tallennetaan piirrosta medioihin… ¦ A rajz mentése a médiába…
+Mon livre ¦ Kirjani ¦ A könyvem
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Kuva lisätty uudelle sivulle kirjan loppuun: tarkista ja tallenna. ¦ Kép hozzáadva egy új oldalra a könyv végén: ellenőrizd, majd mentsd.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Uusi kirja kuvan kanssa: tarkista ja tallenna kirja. ¦ Új könyv a képpel: ellenőrizd, majd mentsd a könyvet.
+📱 Livre numérique (.epub) ¦ 📱 E-kirja (.epub) ¦ 📱 E-könyv (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ lukulaitteet: Kobo, Kirjat, Calibre… ¦ e-olvasók: Kobo, Könyvek, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Taittoa ei ole ladattu: ePubia ei voi tehdä. ¦ Az Elrendezés nincs betöltve: az ePub nem készíthető el.
+« Envoyer vers… » n’est pas chargé. ¦ ”Lähetä kohteeseen…” ei ole ladattu. ¦ A „Küldés ide…” nincs betöltve.
+Retoucher cette image ¦ Muokkaa tätä kuvaa ¦ Kép szerkesztése
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Tämä kuva ei ole Medioissa: sitä ei voi muokata. ¦ Ez a kép nincs a Médiában: nem szerkeszthető.
+Image retouchée mise à jour dans le texte. ¦ Muokattu kuva päivitetty tekstiin. ¦ A szerkesztett kép frissítve a szövegben.
+Un document (Traitement de texte) ¦ Asiakirja (Tekstinkäsittely) ¦ Dokumentum (Szövegszerkesztő)
+le tableau dans un texte ¦ taulukko tekstissä ¦ a táblázat egy szövegben
+📝 Créer le document ¦ 📝 Luo asiakirja ¦ 📝 Dokumentum létrehozása
+Image du graphique (PNG) : {kind} ¦ Kaavion kuva (PNG): {kind} ¦ A grafikon képe (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Kaaviota ei voitu piirtää. ¦ A grafikont nem sikerült megrajzolni.
+Image du graphique enregistrée : {name} ¦ Kaavion kuva tallennettu: {name} ¦ A grafikon képe mentve: {name}
+La feuille est vide : rien à envoyer. ¦ Taulukko on tyhjä: ei mitään lähetettävää. ¦ A munkalap üres: nincs mit küldeni.
+⤓ Image du graphique (PNG) ¦ ⤓ Kaavion kuva (PNG) ¦ ⤓ A grafikon képe (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} leikkaukseen peräkkäin. ¦ {what} a vágásba, egymás után.
+image ajoutée ¦ kuva lisätty ¦ kép hozzáadva
+images ajoutées ¦ kuvat lisätty ¦ képek hozzáadva
+sous-titre ajouté ¦ tekstitys lisätty ¦ felirat hozzáadva
+sous-titres ajoutés ¦ tekstitykset lisätty ¦ feliratok hozzáadva
+Le fabricant de GIF n’est pas chargé. ¦ GIF-tekijää ei ole ladattu. ¦ A GIF-készítő nincs betöltve.
+🎞 GIF animé ¦ 🎞 Animoitu GIF ¦ 🎞 Animált GIF
+sans son, petit, tourne en boucle ¦ ilman ääntä, pieni, pyörii silmukassa ¦ hang nélkül, kicsi, ismétlődik
+GIF… {n} % ¦ GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Video tehdään ensin (elokuva toistetaan kokonaan, jätä ikkuna auki) ja tallennetaan sitten medioihin. ¦ Előbb elkészül a videó (a film teljesen lejátszódik, hagyd nyitva az ablakot), aztán a médiába kerül.
+Fabriquer la vidéo pour l’envoyer ? ¦ Tehdäänkö video lähetettäväksi? ¦ Elkészíted a videót a küldéshez?
+Fabriquer et envoyer ¦ Tee ja lähetä ¦ Elkészítés és küldés
+ENVOYER ¦ LÄHETÄ ¦ KÜLDÉS
+Fabrication de la vidéo… ¦ Tehdään videota… ¦ A videó készül…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Videota ei voitu tallentaa medioihin. ¦ A videót nem sikerült a médiába menteni.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Valmis ääni tallennetaan medioihin (kopio) ja lähetetään sitten. ¦ A kész hang a médiába kerül (másolat), aztán elküldjük.
+Envoyer le son ? ¦ Lähetetäänkö ääni? ¦ Elküldöd a hangot?
+Ranger et envoyer ¦ Tallenna ja lähetä ¦ Mentés és küldés
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Ei vielä litterointia: ”⏱ Lisää aika” (⌘T) ja kirjoita sitten, mitä sanotaan. ¦ Még nincs átirat: „⏱ Idő beszúrása” (⌘T), aztán írd be, amit mondanak.
+Transcription — {name} ¦ Litterointi — {name} ¦ Átirat — {name}
+ (avec la transcription en sous-titres) ¦  (litterointi tekstityksenä) ¦  (az átirattal feliratként)
+La transcription (texte) ¦ Litterointi (teksti) ¦ Az átirat (szöveg)
+Pas encore de transcription. ¦ Ei vielä litterointia. ¦ Még nincs átirat.
+Agnès Bernauer ¦ Agnès Bernauer ¦ Agnès Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 porrastettua pinoa ja 7 kasan reservi. Ensimmäinen perustapinoon pantu kortti määrää kaikkien neljän aloitusarvon; rakennetaan laskevasti vuorotellen punainen ja musta, kuninkaasta voi siirtyä ässään. Nostopakka panee yhden kortin jokaiseen reservikasaan; tyhjään pinoon käy aloitusarvoa yhtä pienempi kortti. ¦ 7 lépcsős oszlop és 7 kupacos tartalék. Az alapsorra tett első lap adja meg mind a négy kezdőértékét; lefelé építesz, váltakozva piros és fekete, a Király után jöhet az Ász. A húzópakli a tartalék minden kupacára tesz egy lapot; az üres oszlopba a kezdőértéknél eggyel kisebb lap kerülhet.
+Thumb and Pouch ¦ Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike, jossa rakennetaan laskevasti minkä tahansa maan päälle paitsi omansa; tyhjään pinoon käy mikä tahansa kortti. Nostopakka käydään läpi vain kerran. ¦ Klondike, ahol lefelé bármilyen színre építhetsz, kivéve a sajátját; az üres oszlopba bármilyen lap kerülhet. A húzópaklin csak egyszer mész végig.
+Pas seul ¦ Ei yksin ¦ Nem egyedül
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 yhden kortin pinoa; rakennetaan laskevasti vuorotellen punainen ja musta, tyhjään pinoon käy mikä tahansa kortti. Nostopakasta käännetään yksi kortti kerrallaan ja se käydään läpi vain kerran. ¦ 6 egylapos oszlop; lefelé építesz, váltakozva piros és fekete, az üres oszlopba bármilyen lap kerülhet. A húzópakliból egyszerre egy lapot fordítasz, és csak egyszer mész végig rajta.
+Les impasses ¦ Umpikujat ¦ A zsákutcák
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Ässät on asetettu valmiiksi; 6 pinoa, joissa 3 korttia (kaksi piilossa). Rakennetaan laskevasti vuorotellen punainen ja musta, tyhjään pinoon käy mikä tahansa kortti; nostopakka käydään läpi vielä kerran. ¦ Az Ászok előre le vannak téve; 6 oszlop 3-3 lappal (kettő rejtett). Lefelé építesz, váltakozva piros és fekete, az üres oszlopba bármilyen lap kerülhet; a húzópaklin még egyszer végigmehetsz.
+Huit fois huit ¦ Kahdeksan kertaa kahdeksan ¦ Nyolcszor nyolc
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Kaksi pakkaa, 8 pinoa, joissa 8 näkyvää korttia; rakennetaan laskevasti vuorotellen punainen ja musta, tyhjään pinoon käy mikä tahansa kortti. Nostopakka käydään läpi vielä kaksi kertaa. ¦ Két pakli, 8 oszlop 8-8 látható lappal; lefelé építesz, váltakozva piros és fekete, az üres oszlopba bármilyen lap kerülhet. A húzópaklin még kétszer végigmehetsz.
+Spike ¦ Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 porrastettua pinoa kuten Klondikessa; rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään kokonaisia sarjoja. Nostopakka panee yhden kortin jokaiseen pinoon. ¦ 7 lépcsős oszlop, mint a Klondike-ban; lefelé építesz, váltakozva piros és fekete, és egész sorokat mozgatsz. A húzópakli minden oszlopra tesz egy lapot.
+Alternance ¦ Vuorottelu ¦ Váltakozás
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa, 7 pinoa, joissa 7 korttia, joka toinen piilossa. Rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään kokonaisia sarjoja; tyhjään pinoon käy mikä tahansa kortti. Nostopakka käydään läpi vain kerran. ¦ Két pakli, 7 oszlop 7-7 lappal, minden második rejtett. Lefelé építesz, váltakozva piros és fekete, és egész sorokat mozgatsz; az üres oszlopba bármilyen lap kerülhet. A húzópaklin csak egyszer mész végig.
+La harpe ¦ Harppu ¦ A hárfa
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Kaksi pakkaa, 9 porrastettua pinoa; rakennetaan laskevasti vuorotellen punainen ja musta. Nostopakasta käännetään yksi kortti kerrallaan ja se käydään läpi vielä kolme kertaa. ¦ Két pakli, 9 lépcsős oszlop; lefelé építesz, váltakozva piros és fekete. A húzópakliból egyszerre egy lapot fordítasz, és még háromszor végigmehetsz rajta.
+La grande harpe ¦ Suuri harppu ¦ A nagy hárfa
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Kaksi pakkaa, 10 porrastettua pinoa; rakennetaan laskevasti vuorotellen punainen ja musta. Nostopakasta käännetään yksi kortti kerrallaan ja se käydään läpi vain kerran. ¦ Két pakli, 10 lépcsős oszlop; lefelé építesz, váltakozva piros és fekete. A húzópakliból egyszerre egy lapot fordítasz, és csak egyszer mész végig rajta.
+Acme ¦ Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ 13 kortin reservi ja 4 pinoa; perustapinot alkavat ässästä. Rakennetaan laskevasti samassa maassa, yksi kortti kerrallaan; tyhjä pino täytetään reservistä. Nostopakka käydään läpi vielä kerran. ¦ 13 lapos tartalék és 4 oszlop; az alapsorok az Ásszal kezdődnek. Lefelé építesz ugyanabban a színben, egyszerre egy lapot; az üres oszlop a tartalékból töltődik fel. A húzópaklin még egyszer végigmehetsz.
+Le crapaud américain ¦ Amerikkalainen konna ¦ Az amerikai varangy
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Kaksi pakkaa, 20 kortin reservi ja 8 pinoa. Ensimmäinen perustapinoon pantu kortti määrää kaikkien kahdeksan aloitusarvon; rakennetaan laskevasti samassa maassa, kuninkaasta voi siirtyä ässään. Tyhjä pino täytetään reservistä; nostopakka käydään läpi vielä kerran. ¦ Két pakli, 20 lapos tartalék és 8 oszlop. Az alapsorra tett első lap adja meg mind a nyolc kezdőértékét; lefelé építesz ugyanabban a színben, a Király után jöhet az Ász. Az üres oszlop a tartalékból töltődik fel; a húzópaklin még egyszer végigmehetsz.
+Canfield bigarré ¦ Kirjava Canfield ¦ Tarka Canfield
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Kaksi pakkaa: ässät on asetettu valmiiksi, 14 kortin reservi ja 5 pinoa. Rakennetaan laskevasti vuorotellen punainen ja musta; tyhjä pino täytetään reservistä. Nostopakasta käännetään kolme korttia kerrallaan ja se käydään läpi vielä kaksi kertaa. ¦ Két pakli: az Ászok előre le vannak téve, 14 lapos tartalék és 5 oszlop. Lefelé építesz, váltakozva piros és fekete; az üres oszlop a tartalékból töltődik fel. A húzópakliból egyszerre három lapot fordítasz, és még kétszer végigmehetsz rajta.
+La duchesse ¦ Herttuatar ¦ A hercegnő
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Neljä 3 kortin reservikasaa ja 4 yhden kortin pinoa. Ensimmäinen perustapinoon pantu kortti määrää kaikkien neljän aloitusarvon; rakennetaan laskevasti vuorotellen punainen ja musta, kuninkaasta voi siirtyä ässään. Tyhjään pinoon käy mikä tahansa kortti; nostopakka käydään läpi vielä kerran. ¦ Négy 3 lapos tartalékkupac és 4 egylapos oszlop. Az alapsorra tett első lap adja meg mind a négy kezdőértékét; lefelé építesz, váltakozva piros és fekete, a Király után jöhet az Ász. Az üres oszlopba bármilyen lap kerülhet; a húzópaklin még egyszer végigmehetsz.
+La porte ¦ Portti ¦ A kapu
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Kaksi 5 kortin reservikasaa (portin siivet) ja 8 yhden kortin pinoa. Rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään kokonaisia sarjoja; tyhjään pinoon käy mikä tahansa kortti. Nostopakka käydään läpi vain kerran. ¦ Két 5 lapos tartalékkupac (a kapu szárnyai) és 8 egylapos oszlop. Lefelé építesz, váltakozva piros és fekete, és egész sorokat mozgatsz; az üres oszlopba bármilyen lap kerülhet. A húzópaklin csak egyszer mész végig.
+Le pingouin ¦ Pingviini ¦ A pingvin
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Ensimmäinen kortti määrää perustapinojen aloitusarvon, ja kolme muuta samanarvoista nousevat niihin heti. 7 pinoa, joissa 7 korttia, 7 vapaata solua; rakennetaan laskevasti samassa maassa, kuninkaasta voi siirtyä ässään. Tyhjään pinoon käy aloitusarvoa yhtä pienempi kortti. ¦ Az első lap adja meg az alapsorok kezdőértékét, és a másik három azonos értékű lap azonnal felkerül rájuk. 7 oszlop 7-7 lappal, 7 szabad cella; lefelé építesz ugyanabban a színben, a Király után jöhet az Ász. Az üres oszlopba a kezdőértéknél eggyel kisebb lap kerülhet.
+Baker’s Game (Roi seul) ¦ Baker’s Game (vain kuningas) ¦ Baker’s Game (csak Király)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (rakennetaan laskevasti samassa maassa, 4 vapaata solua), mutta tyhjään pinoon käy vain kuningas. ¦ Baker’s Game (lefelé építesz ugyanabban a színben, 4 szabad cella), de az üres oszlopba csak Király kerülhet.
+Seahaven détendu ¦ Rento Seahaven ¦ Laza Seahaven
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, mutta samassa maassa järjestetty sarja siirtyy kerralla pituudesta riippumatta. ¦ Seahaven, de egy ugyanabban a színben rendezett sor egyszerre mozog, bármilyen hosszú is.
+Repair ¦ Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Kaksi pakkaa, 10 pinoa, joissa 10 näkyvää korttia, ja 4 vapaata solua jo täytettyinä; rakennetaan laskevasti vuorotellen punainen ja musta, yksi kortti kerrallaan (tai sarja, jos vapaat solut sallivat). ¦ Két pakli, 10 oszlop 10-10 látható lappal és 4 már foglalt szabad cella; lefelé építesz, váltakozva piros és fekete, egyszerre egy lapot (vagy egy sort, ha a szabad cellák engedik).
+Ocean Towers ¦ Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Kaksi pakkaa, 14 pinoa, joissa 7 korttia, ja 8 vapaata solua, joista 6 jo täytettyinä; rakennetaan laskevasti samassa maassa, tyhjään pinoon käy vain kuningas. ¦ Két pakli, 14 oszlop 7-7 lappal és 8 szabad cella, ebből 6 már foglalt; lefelé építesz ugyanabban a színben, az üres oszlopba csak Király kerülhet.
+Sept par quatre ¦ Seitsemän kertaa neljä ¦ Hétszer négy
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell 7 pinolla ja 4 vapaalla solulla: pinot ovat korkeampia. ¦ FreeCell 7 oszloppal és 4 szabad cellával: az oszlopok magasabbak.
+Sept par cinq ¦ Seitsemän kertaa viisi ¦ Hétszer öt
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell 7 pinolla ja 5 vapaalla solulla. ¦ FreeCell 7 oszloppal és 5 szabad cellával.
+FreeCell défi ¦ FreeCell-haaste ¦ FreeCell kihívás
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, mutta ässät ja kakkoset ovat pinojen pohjalla kaikkien muiden korttien alla. ¦ FreeCell, de az Ászok és a kettesek az oszlopok legalján vannak, az összes többi lap alatt.
+FreeCell super défi ¦ FreeCell-superhaaste ¦ FreeCell szuperkihívás
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell-haaste (ässät ja kakkoset pinojen pohjalla), ja tyhjään pinoon käy vain kuningas. ¦ FreeCell kihívás (az Ászok és a kettesek az oszlopok alján), és az üres oszlopba csak Király kerülhet.
+Le scarabée ¦ Kovakuoriainen ¦ A szkarabeusz
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Scorpion ilman nostopakkaa: kaikki 52 korttia näkyvät 7 pinossa. Rakennetaan laskevasti samassa maassa ja siirretään mitä tahansa ryhmää; tyhjään pinoon käy vain kuningas. Täysi sarja kuninkaasta ässään poistuu. ¦ Scorpion húzópakli nélkül: mind az 52 lap látható 7 oszlopban. Lefelé építesz ugyanabban a színben, és bármilyen csoportot mozgathatsz; az üres oszlopba csak Király kerülhet. A Királytól Ászig teljes sor kikerül.
+Queue de scorpion ¦ Skorpionin pyrstö ¦ A skorpió farka
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Kuten Scorpion (7 pinoa, joissa 7 korttia, mikä tahansa ryhmä siirtyy), mutta rakennetaan laskevasti vuorotellen punainen ja musta, ja kortit nousevat perustapinoihin ässästä kuninkaaseen. ¦ Mint a Scorpion (7 oszlop 7-7 lappal, bármilyen csoport mozog), de lefelé váltakozva piros és fekete építesz, és a lapok az alapsorokon az Ásztól a Királyig emelkednek.
+Scorpion double ¦ Kaksois-Scorpion ¦ Dupla Scorpion
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Kaksi pakkaa, 10 pinoa, kaikki jaetaan (viisi ensimmäistä pinoa kätkevät 4 korttia). Rakennetaan laskevasti samassa maassa ja siirretään mitä tahansa ryhmää; täysi sarja kuninkaasta ässään poistuu. ¦ Két pakli, 10 oszlop, minden lap ki van osztva (az első öt oszlopban 4 rejtett lap van). Lefelé építesz ugyanabban a színben, és bármilyen csoportot mozgathatsz; a Királytól Ászig teljes sor kikerül.
+Motif de divorce ¦ Avioeron syy ¦ Válóok
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Kaksi pakkaa, 10 pinoa, joissa 5 näkyvää korttia. Rakennetaan laskevasti välittämättä maista; vain saman maan sarjat siirtyvät yhdessä; täysi sarja kuninkaasta ässään poistuu. Nostopakka panee yhden kortin jokaiseen ei-tyhjään pinoon. ¦ Két pakli, 10 oszlop 5-5 látható lappal. Lefelé építesz, a színekre nem figyelve; csak az egyszínű sorok mozognak együtt; a Királytól Ászig teljes sor kikerül. A húzópakli minden nem üres oszlopra tesz egy lapot.
+La tarentule ¦ Tarantella ¦ A tarantula
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Neljän maan hämähäkki, mutta samassa värissä (punainen tai musta) laskeva sarja siirtyy kerralla. Täysi saman maan sarja kuninkaasta ässään poistuu. ¦ A négyszínű pók, de az azonos árnyalatban (piros vagy fekete) lefelé haladó sor egyszerre mozog. A Királytól Ászig teljes egyszínű sor kikerül.
+Araignée à découvert ¦ Avoin hämähäkki ¦ Nyílt pók
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Neljän maan hämähäkki, mutta kaikki kortit näkyvät alusta asti. ¦ A négyszínű pók, de minden lap kezdettől látható.
+La harpe de Milligan ¦ Milliganin harppu ¦ Milligan hárfája
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Kaksi pakkaa, 8 porrastettua pinoa; rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään kokonaisia sarjoja. Tyhjään pinoon käy vain kuningas; nostopakka panee yhden kortin jokaiseen pinoon. Perustapinot nousevat ässästä kuninkaaseen. ¦ Két pakli, 8 lépcsős oszlop; lefelé építesz, váltakozva piros és fekete, és egész sorokat mozgatsz. Az üres oszlopba csak Király kerülhet; a húzópakli minden oszlopra tesz egy lapot. Az alapsorok az Ásztól a Királyig emelkednek.
+La harpe de Lexington ¦ Lexingtonin harppu ¦ Lexington hárfája
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Milliganin harppu (kaksi pakkaa, 8 porrastettua pinoa, nostopakka panee yhden kortin jokaiseen pinoon), mutta mitä tahansa näkyvien korttien ryhmää voi siirtää. ¦ Milligan hárfája (két pakli, 8 lépcsős oszlop, a húzópakli minden oszlopra tesz egy lapot), de bármilyen látható lapcsoportot mozgathatsz.
+Brunswick ¦ Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Lexingtonin harppu kaikki kortit näkyvissä: mikä tahansa ryhmä siirtyy, nostopakka panee yhden kortin jokaiseen pinoon. ¦ Lexington hárfája minden lap láthatóan: bármilyen csoport mozog, a húzópakli minden oszlopra tesz egy lapot.
+Carlton ¦ Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Milliganin harppu kaikki kortit näkyvissä, ja tyhjään pinoon käy mikä tahansa kortti. ¦ Milligan hárfája minden lap láthatóan, és az üres oszlopba bármilyen lap kerülhet.
+Miss Milligan ¦ Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Kaksi pakkaa, 8 yhden kortin pinoa; nostopakka panee yhden kortin jokaiseen pinoon. Rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään kokonaisia sarjoja; tyhjään pinoon käy vain kuningas. Kun nostopakka on tyhjä, avautuu vapaa solu kortin syrjään panemiseksi. ¦ Két pakli, 8 egylapos oszlop; a húzópakli minden oszlopra tesz egy lapot. Lefelé építesz, váltakozva piros és fekete, és egész sorokat mozgatsz; az üres oszlopba csak Király kerülhet. Ha a húzópakli kiürül, megnyílik egy szabad cella egy lap félretételére.
+Millie ¦ Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Kaksi pakkaa, 8 yhden kortin pinoa; nostopakka panee yhden kortin jokaiseen pinoon. Rakennetaan laskevasti vuorotellen punainen ja musta, ja tyhjään pinoon käy mikä tahansa kortti. ¦ Két pakli, 8 egylapos oszlop; a húzópakli minden oszlopra tesz egy lapot. Lefelé építesz, váltakozva piros és fekete, és az üres oszlopba bármilyen lap kerülhet.
+L’île d’Elbe ¦ Elban saari ¦ Elba szigete
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Kaksi pakkaa, 10 pinoa, joissa 5 korttia (neljä piilossa); rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään kokonaisia sarjoja. Tyhjään pinoon käy vain kuningas; nostopakka panee yhden kortin jokaiseen pinoon. ¦ Két pakli, 10 oszlop 5-5 lappal (négy rejtett); lefelé építesz, váltakozva piros és fekete, és egész sorokat mozgatsz. Az üres oszlopba csak Király kerülhet; a húzópakli minden oszlopra tesz egy lapot.
+Le mont Olympe ¦ Olympos-vuori ¦ Az Olümposz
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Kaksi pakkaa: ässät ja kakkoset on asetettu valmiiksi, ja perustapinot nousevat kahden välein samassa maassa (ässä, 3, 5… tai 2, 4, 6…). 9 pinoa; rakennetaan laskevasti kahden välein samassa maassa. Nostopakka panee yhden kortin jokaiseen pinoon. ¦ Két pakli: az Ászok és a kettesek előre le vannak téve, és az alapsorok kettesével emelkednek ugyanabban a színben (Ász, 3, 5… vagy 2, 4, 6…). 9 oszlop; lefelé kettesével építesz ugyanabban a színben. A húzópakli minden oszlopra tesz egy lapot.
+La patience australienne ¦ Australialainen pasianssi ¦ Az ausztrál pasziánsz
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 pinoa, joissa 4 näkyvää korttia; rakennetaan laskevasti samassa maassa ja siirretään mitä tahansa näkyvien korttien ryhmää. Tyhjään pinoon käy vain kuningas; nostopakka käydään läpi vain kerran. ¦ 7 oszlop 4-4 látható lappal; lefelé építesz ugyanabban a színben, és bármilyen látható lapcsoportot mozgathatsz. Az üres oszlopba csak Király kerülhet; a húzópaklin csak egyszer mész végig.
+Canberra ¦ Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Australialainen pasianssi, mutta nostopakka käydään läpi vielä kerran. ¦ Az ausztrál pasziánsz, de a húzópaklin még egyszer végigmehetsz.
+Raw Prawn ¦ Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Australialainen pasianssi, mutta tyhjään pinoon käy mikä tahansa kortti. ¦ Az ausztrál pasziánsz, de az üres oszlopba bármilyen lap kerülhet.
+Rushdike ¦ Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 porrastettua pinoa; rakennetaan laskevasti samassa maassa ja siirretään mitä tahansa näkyvien korttien ryhmää. Nostopakka panee yhden kortin jokaiseen pinoon. ¦ 7 lépcsős oszlop; lefelé építesz ugyanabban a színben, és bármilyen látható lapcsoportot mozgathatsz. A húzópakli minden oszlopra tesz egy lapot.
+La discipline chinoise ¦ Kiinalainen kuri ¦ A kínai fegyelem
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 pinoa, joissa 7 korttia (kolme piilossa, paitsi ensimmäisessä); rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään mitä tahansa näkyvien korttien ryhmää. 3 viimeistä korttia menevät kolmeen ensimmäiseen pinoon. ¦ 7 oszlop 7-7 lappal (három rejtett, kivéve az elsőt); lefelé építesz, váltakozva piros és fekete, és bármilyen látható lapcsoportot mozgathatsz. Az utolsó 3 lap az első három oszlopra kerül.
+Solitaire russe double ¦ Kaksinkertainen venäläinen pasianssi ¦ Dupla orosz pasziánsz
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Kaksi pakkaa, 10 pinoa, 8 perustapinoa; rakennetaan laskevasti samassa maassa ja siirretään mitä tahansa näkyvien korttien ryhmää. ¦ Két pakli, 10 oszlop, 8 alapsor; lefelé építesz ugyanabban a színben, és bármilyen látható lapcsoportot mozgathatsz.
+Ali Baba ¦ Ali Baba ¦ Ali Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Yksi pakka: ässät on asetettu valmiiksi, 10 pinoa, joissa 4 näkyvää korttia. Rakennetaan laskevasti samassa maassa ja siirretään kokonaisia sarjoja; nostopakka käydään läpi vain kerran. ¦ Egy pakli: az Ászok előre le vannak téve, 10 oszlop 4-4 látható lappal. Lefelé építesz ugyanabban a színben, és egész sorokat mozgatsz; a húzópaklin csak egyszer mész végig.
+Cassim ¦ Cassim ¦ Cassim
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Yksi pakka: ässät on asetettu valmiiksi, 7 pinoa, joissa 3 näkyvää korttia. Rakennetaan laskevasti samassa maassa ja siirretään kokonaisia sarjoja; nostopakan voi käydä läpi niin monta kertaa kuin haluat. ¦ Egy pakli: az Ászok előre le vannak téve, 7 oszlop 3-3 látható lappal. Lefelé építesz ugyanabban a színben, és egész sorokat mozgatsz; a húzópaklin annyiszor mehetsz végig, ahányszor csak akarsz.
+Rang et file ¦ Rivi ja jono ¦ Rang és sor
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Keisari (kaksi pakkaa, 10 pinoa, joissa 4 korttia, joista 3 piilossa, vuorotellen punainen ja musta), mutta siirretään kokonaisia sarjoja. ¦ A császár (két pakli, 10 oszlop 4-4 lappal, ebből 3 rejtett, váltakozva piros és fekete), de egész sorokat mozgatsz.
+Les As affairés ¦ Kiireiset ässät ¦ A szorgos Ászok
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa, 12 yhden kortin pinoa; rakennetaan laskevasti samassa maassa, yksi kortti kerrallaan. Nostopakka käydään läpi vain kerran. ¦ Két pakli, 12 egylapos oszlop; lefelé építesz ugyanabban a színben, egyszerre egy lapot. A húzópaklin csak egyszer mész végig.
+La cour ¦ Hovi ¦ Az udvar
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa, 12 yhden kortin pinoa; rakennetaan laskevasti samassa maassa ja siirretään kokonaisia sarjoja. Nostopakka käydään läpi vain kerran. ¦ Két pakli, 12 egylapos oszlop; lefelé építesz ugyanabban a színben, és egész sorokat mozgatsz. A húzópaklin csak egyszer mész végig.
+Le carré de Napoléon ¦ Napoleonin neliö ¦ Napóleon négyzete
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa, 12 pinoa, joissa 4 näkyvää korttia; rakennetaan laskevasti samassa maassa ja siirretään kokonaisia sarjoja. Nostopakka käydään läpi vain kerran. ¦ Két pakli, 12 oszlop 4-4 látható lappal; lefelé építesz ugyanabban a színben, és egész sorokat mozgatsz. A húzópaklin csak egyszer mész végig.
+L’exil de Napoléon ¦ Napoleonin maanpako ¦ Napóleon száműzetése
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Neljäkymmentä rosvoa, jossa rakennetaan laskevasti välittämättä maista, yksi kortti kerrallaan. Nostopakka käydään läpi vain kerran. ¦ A negyven rabló, ahol lefelé építesz a színekre nem figyelve, egyszerre egy lapot. A húzópaklin csak egyszer mész végig.
+Deuces ¦ Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa: kahdeksan kakkosta on asetettu valmiiksi, ja perustapinot nousevat samassa maassa ässään asti. 10 yhden kortin pinoa; rakennetaan laskevasti samassa maassa (ässä menee kakkosen päälle, kuningas ässän päälle), yksi kortti kerrallaan. Nostopakka käydään läpi vain kerran. ¦ Két pakli: a nyolc kettes előre le van téve, és az alapsorok ugyanabban a színben az Ászig emelkednek. 10 egylapos oszlop; lefelé építesz ugyanabban a színben (az Ász a kettesre, a Király az Ászra kerül), egyszerre egy lapot. A húzópaklin csak egyszer mész végig.
+La lune décroissante ¦ Vähenevä kuu ¦ A fogyó hold
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa, 13 pinoa, joissa 4 näkyvää korttia; rakennetaan laskevasti samassa maassa ja siirretään kokonaisia sarjoja. Nostopakka käydään läpi vain kerran. ¦ Két pakli, 13 oszlop 4-4 látható lappal; lefelé építesz ugyanabban a színben, és egész sorokat mozgatsz. A húzópaklin csak egyszer mész végig.
+Les cinquante fameux ¦ Kuuluisat viisikymmentä ¦ A híres ötven
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Neljäkymmentä rosvoa 5 kortilla pinoa kohden: kaksi pakkaa, 10 pinoa, joissa 5 korttia, sama maa, yksi kortti kerrallaan. Nostopakka käydään läpi vain kerran. ¦ A negyven rabló oszloponként 5 lappal: két pakli, 10 oszlop 5-5 lappal, azonos szín, egyszerre egy lap. A húzópaklin csak egyszer mész végig.
+Quarante-neuf ¦ Neljäkymmentäyhdeksän ¦ Negyvenkilenc
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa, 7 pinoa, joissa 7 näkyvää korttia; rakennetaan laskevasti vuorotellen punainen ja musta, yksi kortti kerrallaan. Nostopakka käydään läpi vain kerran. ¦ Két pakli, 7 oszlop 7-7 látható lappal; lefelé építesz, váltakozva piros és fekete, egyszerre egy lapot. A húzópaklin csak egyszer mész végig.
+Sans limite ¦ Rajaton ¦ Korlátlan
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Neljäkymmentä rosvoa, mutta nostopakan voi käydä läpi niin monta kertaa kuin haluat. ¦ A negyven rabló, de a húzópaklin annyiszor mehetsz végig, ahányszor csak akarsz.
+Les petits quarante ¦ Pienet neljäkymmentä ¦ A kis negyven
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Neljäkymmentä rosvoa, jossa rakennetaan laskevasti välittämättä maista ja siirretään kokonaisia sarjoja; nostopakasta käännetään kolme korttia kerrallaan ja se käydään läpi vielä kolme kertaa. ¦ A negyven rabló, ahol lefelé építesz a színekre nem figyelve, és egész sorokat mozgatsz; a húzópakliból egyszerre három lapot fordítasz, és még háromszor végigmehetsz rajta.
+Le zèbre ¦ Seepra ¦ A zebra
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Kaksi pakkaa, ässät valmiiksi asetettuina, 8 yhden kortin pinoa; rakennetaan laskevasti vuorotellen punainen ja musta, yksi kortti kerrallaan. Nostopakka käydään läpi vielä kerran. ¦ Két pakli, az Ászok előre letéve, 8 egylapos oszlop; lefelé építesz, váltakozva piros és fekete, egyszerre egy lapot. A húzópaklin még egyszer végigmehetsz.
+Le congrès ¦ Kongressi ¦ A kongresszus
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa, 8 yhden kortin pinoa; rakennetaan laskevasti välittämättä maista, yksi kortti kerrallaan. Nostopakka käydään läpi vain kerran. ¦ Két pakli, 8 egylapos oszlop; lefelé építesz a színekre nem figyelve, egyszerre egy lapot. A húzópaklin csak egyszer mész végig.
+Le parlement ¦ Parlamentti ¦ A parlament
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Kongressi (kaksi pakkaa, 8 yhden kortin pinoa, rakennetaan laskevasti välittämättä maista), ässät valmiiksi asetettuina. ¦ A kongresszus (két pakli, 8 egylapos oszlop, lefelé építesz a színekre nem figyelve), az Ászok előre letéve.
+Pair et impair ¦ Parillinen ja pariton ¦ Páros és páratlan
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Kaksi pakkaa: yksi ässä ja yksi kakkonen kustakin maasta on asetettu valmiiksi, ja perustapinot nousevat kahden välein omassa maassaan (ässä, 3, 5… kuningas, 2, 4… tai 2, 4… kuningatar, ässä, 3…). 9 yhden kortin paikkaa, joihin ei rakenneta; tyhjään paikkaan käy mikä tahansa kortti. Nostopakka käydään läpi vielä kerran. ¦ Két pakli: minden színből egy Ász és egy kettes előre le van téve, és az alapsorok kettesével emelkednek a saját színükben (Ász, 3, 5… Király, 2, 4… vagy 2, 4… Dáma, Ász, 3…). 9 egylapos hely, amelyekre nem építesz; az üres helyre bármilyen lap kerülhet. A húzópaklin még egyszer végigmehetsz.
+Le cotillon royal ¦ Kuninkaallinen kotiljonki ¦ A királyi kotillion
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Kaksi pakkaa: yksi ässä ja yksi kakkonen kustakin maasta on asetettu valmiiksi, ja perustapinot nousevat kahden välein omassa maassaan. Neljä 3 kortin reservikasaa (vain päällimmäistä pelataan) ja 16 yhden kortin paikkaa, joihin ei rakenneta; tyhjään paikkaan käy mikä tahansa kortti. Nostopakka käydään läpi vain kerran. ¦ Két pakli: minden színből egy Ász és egy kettes előre le van téve, és az alapsorok kettesével emelkednek a saját színükben. Négy 3 lapos tartalékkupac (csak a legfelső játszható) és 16 egylapos hely, amelyekre nem építesz; az üres helyre bármilyen lap kerülhet. A húzópaklin csak egyszer mész végig.
+Le treize porte-bonheur ¦ Onnen kolmetoista ¦ A szerencsés tizenhárom
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 pinoa, joissa 4 näkyvää korttia; rakennetaan laskevasti välittämättä maista, yksi kortti kerrallaan; tyhjä pino jää tyhjäksi. ¦ 13 oszlop 4-4 látható lappal; lefelé építesz a színekre nem figyelve, egyszerre egy lapot; az üres oszlop üres marad.
+La patience portugaise ¦ Portugalilainen pasianssi ¦ A portugál pasziánsz
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 pinoa, joissa 4 näkyvää korttia; rakennetaan laskevasti välittämättä maista, yksi kortti kerrallaan; tyhjään pinoon käy vain kuningas. ¦ 13 oszlop 4-4 látható lappal; lefelé építesz a színekre nem figyelve, egyszerre egy lapot; üres oszlopba csak Király kerülhet.
+Bonne mesure ¦ Hyvä mitta ¦ Jó mérték
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Kaksi ässää on asetettu valmiiksi; 10 pinoa, joissa 5 näkyvää korttia. Rakennetaan laskevasti välittämättä maista, yksi kortti kerrallaan; tyhjään pinoon käy mikä tahansa kortti. ¦ Két Ász előre le van téve; 10 oszlop 5-5 látható lappal. Lefelé építesz a színekre nem figyelve, egyszerre egy lapot; az üres oszlopba bármilyen lap kerülhet.
+La cruelle ¦ Julma ¦ A kegyetlen
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Ässät on asetettu valmiiksi; 12 kasaa, joissa 4 korttia. Rakennetaan laskevasti samassa maassa, yksi kortti kerrallaan; tyhjä paikka jää tyhjäksi. Niin monta kertaa kuin haluat, kasat kerätään järjestyksessä sekoittamatta ja jaetaan uudelleen neljän kortin kasoiksi. ¦ Az Ászok előre le vannak téve; 12 kupac 4-4 lappal. Lefelé építesz ugyanabban a színben, egyszerre egy lapot; az üres hely üres marad. Ahányszor csak akarod, a kupacokat sorrendben, keverés nélkül összeszeded, és újra kiosztod négyesével.
+La persévérance ¦ Sinnikkyys ¦ A kitartás
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Kuten Julma (ässät valmiiksi asetettuina, 12 kasaa, joissa 4 korttia, sama maa), mutta siirretään kokonaisia sarjoja ja kasat kerätään vain kahdesti. ¦ Mint A kegyetlen (az Ászok előre letéve, 12 kupac 4-4 lappal, azonos szín), de egész sorokat mozgatsz, és csak kétszer szeded össze a kupacokat.
+L’éventail en vagues ¦ Aaltoileva viuhka ¦ A hullámzó legyező
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 kasaa, joissa 4 korttia, ässät jäävät sekaan muiden joukkoon; rakennetaan laskevasti samassa maassa, yksi kortti kerrallaan; tyhjä paikka jää tyhjäksi. Niin monta kertaa kuin haluat, kasat kerätään järjestyksessä sekoittamatta ja jaetaan uudelleen neljän kortin kasoiksi. ¦ 13 kupac 4-4 lappal, az Ászok a többi lap között maradnak; lefelé építesz ugyanabban a színben, egyszerre egy lapot; az üres hely üres marad. Ahányszor csak akarod, a kupacokat sorrendben, keverés nélkül összeszeded, és újra kiosztod négyesével.
+L’éventail en boîte ¦ Laatikkoviuhka ¦ A dobozos legyező
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Ässät on asetettu valmiiksi; 16 viuhkaa, joissa 3 korttia. Rakennetaan laskevasti vuorotellen punainen ja musta, yksi kortti kerrallaan; tyhjään paikkaan käy vain kuningas. ¦ Az Ászok előre le vannak téve; 16 legyező 3-3 lappal. Lefelé építesz, váltakozva piros és fekete, egyszerre egy lapot; üres helyre csak Király kerülhet.
+L’éventail fascinant ¦ Lumoava viuhka ¦ A lenyűgöző legyező
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ Kaunis Lucie (17 viuhkaa, joissa 3 korttia), jossa rakennetaan laskevasti vuorotellen punainen ja musta, kuusi uudelleenjakoa. ¦ A szép Lucie (17 legyező 3-3 lappal), ahol lefelé váltakozva piros és fekete építesz, hat újraosztással.
+La lampe de minuit ¦ Keskiyön lamppu ¦ Az éjféli lámpa
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ Kaunis Lucie (17 viuhkaa, joissa 3 korttia), jossa rakennetaan laskevasti vuorotellen punainen ja musta, kaksi uudelleenjakoa. ¦ A szép Lucie (17 legyező 3-3 lappal), ahol lefelé váltakozva piros és fekete építesz, két újraosztással.
+Shamrocks ¦ Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 viuhkaa, joissa 3 korttia; rakennetaan yhden arvon verran nousevasti tai laskevasti välittämättä maista, yksi kortti kerrallaan, eikä viuhkassa ole koskaan yli 3 korttia. Ei uudelleenjakoa. ¦ 17 legyező 3-3 lappal; egy értékkel felfelé vagy lefelé építesz a színekre nem figyelve, egyszerre egy lapot, és egy legyezőben sosem lehet 3-nál több lap. Nincs újraosztás.
+La maison dans les bois ¦ Talo metsässä ¦ Ház az erdőben
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Kaksi pakkaa, 35 viuhkaa, joissa 3 korttia; rakennetaan yhden arvon verran nousevasti tai laskevasti samassa maassa, yksi kortti kerrallaan. Tyhjä paikka jää tyhjäksi. ¦ Két pakli, 35 legyező 3-3 lappal; egy értékkel felfelé vagy lefelé építesz ugyanabban a színben, egyszerre egy lapot. Az üres hely üres marad.
+La maison sur la colline ¦ Talo kukkulalla ¦ Ház a dombon
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Talo metsässä (kaksi pakkaa, 35 viuhkaa), mutta neljä perustapinoa nousee ässästä kuninkaaseen ja neljä muuta laskee kuninkaasta ässään. ¦ Ház az erdőben (két pakli, 35 legyező), de négy alapsor az Ásztól a Királyig emelkedik, négy másik pedig a Királytól az Ászig ereszkedik.
+Bisley ¦ Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Ässät on asetettu valmiiksi; 13 pinoa (4 kolmen kortin, 9 neljän kortin). Ässien perustapinot nousevat, kuninkaiden laskevat, samassa maassa. Pöydällä rakennetaan nousevasti tai laskevasti samassa maassa, yksi kortti kerrallaan; tyhjä pino jää tyhjäksi. ¦ Az Ászok előre le vannak téve; 13 oszlop (4 háromlapos, 9 négylapos). Az Ászok alapsorai emelkednek, a Királyoké ereszkednek, ugyanabban a színben. Az asztalon felfelé vagy lefelé építesz ugyanabban a színben, egyszerre egy lapot; az üres oszlop üres marad.
+Le cadran du grand-père ¦ Isoisän kellotaulu ¦ A nagyapa óralapja
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 perustapinoa kuin kellon tunnit, jotka alkavat 2♥, 3♠, 4♦, 5♣… kuningas ♣ asti ja nousevat samassa maassa (kuninkaan jälkeen tulee ässä). 8 pinoa, joissa 5 korttia; rakennetaan laskevasti välittämättä maista, yksi kortti kerrallaan; tyhjään pinoon käy mikä tahansa kortti. ¦ 12 alapsor, mint egy óra órái, amelyek 2♥, 3♠, 4♦, 5♣… Király ♣-ig kezdődnek, és ugyanabban a színben emelkednek (a Király után az Ász jön). 8 oszlop 5-5 lappal; lefelé építesz a színekre nem figyelve, egyszerre egy lapot; az üres oszlopba bármilyen lap kerülhet.
+Le mur de pierre ¦ Kivimuuri ¦ A kőfal
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 pinoa, joissa 6 korttia, joka toinen piilossa, ja 16 kortin kimppu, josta voi ottaa minkä tahansa. Rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään kokonaisia sarjoja; tyhjään pinoon käy mikä tahansa kortti. ¦ 6 oszlop 6-6 lappal, minden második rejtett, és egy 16 lapos csokor, amelyből bármelyiket elveheted. Lefelé építesz, váltakozva piros és fekete, és egész sorokat mozgatsz; az üres oszlopba bármilyen lap kerülhet.
+La fleur sauvage ¦ Luonnonkukka ¦ A vadvirág
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Kukkapuutarha (6 pinoa, joissa 6 korttia, ja 16 kortin kimppu), mutta siirretään kokonaisia sarjoja. ¦ A virágoskert (6 oszlop 6-6 lappal és egy 16 lapos csokor), de egész sorokat mozgatsz.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 pinoa, kaikki näkyvissä. Ensimmäinen perustapinoon pantu kortti määrää kaikkien neljän aloitusarvon (kuninkaan jälkeen tulee ässä). Rakennetaan nousevasti tai laskevasti samassa maassa, yksi kortti kerrallaan, ja kuningas ja ässä ovat vierekkäin. ¦ 10 oszlop, minden lap látható. Az alapsorra tett első lap adja meg mind a négy kezdőértékét (a Király után az Ász jön). Felfelé vagy lefelé építesz ugyanabban a színben, egyszerre egy lapot, és a Király meg az Ász egymás mellé kerülhet.
+La place forte ¦ Linnake ¦ Az erősség
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Kadut ja kujat (8 pinoa, rakennetaan laskevasti välittämättä maista) yhdellä vapaalla solulla. ¦ Utcák és sikátorok (8 oszlop, lefelé építesz a színekre nem figyelve), egy szabad cellával.
+Le fort ¦ Linnoitus ¦ Az erőd
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Kadut ja kujat (8 pinoa, rakennetaan laskevasti välittämättä maista) kahdella vapaalla solulla. ¦ Utcák és sikátorok (8 oszlop, lefelé építesz a színekre nem figyelve), két szabad cellával.
+L’art du siège ¦ Piirityksen taito ¦ Az ostrom művészete
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Piiritetty linna (ässät valmiiksi asetettuina, 8 pinoa, joissa 6 korttia) yhdellä vapaalla solulla. ¦ Az ostromlott vár (az Ászok előre letéve, 8 oszlop 6-6 lappal), egy szabad cellával.
+La toile de Pénélope ¦ Penelopen kangas ¦ Pénelopé vászna
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Piiritetty linna (ässät valmiiksi asetettuina, 8 pinoa, joissa 6 korttia), mutta tyhjään pinoon käy vain kuningas. ¦ Az ostromlott vár (az Ászok előre letéve, 8 oszlop 6-6 lappal), de üres oszlopba csak Király kerülhet.
+La citadelle ¦ Sitadelli ¦ A citadella
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Piiritetty linna, mutta jaon aikana jokainen kortti, joka voi nousta perustapinoon, menee sinne heti. ¦ Az ostromlott vár, de osztás közben minden lap, amely felkerülhet egy alapsorra, azonnal oda kerül.
+Les rois exilés ¦ Maanpaossa olevat kuninkaat ¦ A száműzött királyok
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Sitadelli (kortit, jotka voivat nousta, menevät sinne jaon aikana), mutta tyhjään pinoon käy vain kuningas. ¦ A citadella (a felkerülni képes lapok osztás közben odakerülnek), de üres oszlopba csak Király kerülhet.
+Le bastion ¦ Bastioni ¦ A bástya
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 pinoa, joissa 5 korttia, ja 2 vapaata solua jo täytettyinä; rakennetaan nousevasti tai laskevasti samassa maassa, yksi kortti kerrallaan; tyhjään pinoon käy mikä tahansa kortti. ¦ 10 oszlop 5-5 lappal és 2 már foglalt szabad cella; felfelé vagy lefelé építesz ugyanabban a színben, egyszerre egy lapot; az üres oszlopba bármilyen lap kerülhet.
+La boîte à thé ¦ Teerasia ¦ A teásdoboz
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 pinoa, joissa 6 tai 7 korttia, kaikki näkyvissä; rakennetaan laskevasti välittämättä maista ja siirretään kokonaisia sarjoja; tyhjään pinoon käy mikä tahansa kortti. ¦ 8 oszlop 6 vagy 7 lappal, minden látható; lefelé építesz a színekre nem figyelve, és egész sorokat mozgatsz; az üres oszlopba bármilyen lap kerülhet.
+La boîte à thé américaine ¦ Amerikkalainen teerasia ¦ Az amerikai teásdoboz
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 pinoa, joissa 6 tai 7 korttia, kaikki näkyvissä; rakennetaan laskevasti vuorotellen punainen ja musta ja siirretään kokonaisia sarjoja; tyhjään pinoon käy mikä tahansa kortti. ¦ 8 oszlop 6 vagy 7 lappal, minden látható; lefelé építesz, váltakozva piros és fekete, és egész sorokat mozgatsz; az üres oszlopba bármilyen lap kerülhet.
+La boîte à thé anglaise ¦ Englantilainen teerasia ¦ Az angol teásdoboz
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 pinoa, joissa 6 tai 7 korttia, kaikki näkyvissä; rakennetaan laskevasti vuorotellen punainen ja musta, yksi kortti kerrallaan; tyhjään pinoon käy vain kuningas. ¦ 8 oszlop 6 vagy 7 lappal, minden látható; lefelé építesz, váltakozva piros és fekete, egyszerre egy lapot; üres oszlopba csak Király kerülhet.
+Les trois sommets stricts ¦ Tiukat kolme huippua ¦ A szigorú három csúcs
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Kolme huippua, mutta kuningas ja ässä eivät seuraa toisiaan: peli on vaikeampi. ¦ A három csúcs, de a Király és az Ász nem követi egymást: a játék nehezebb.
+Golf double ¦ Kaksois-Golf ¦ Dupla Golf
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf kahdella pakalla: 9 pinoa, joissa 7 korttia. Siirrä poistopakkaan kortti, joka on yhtä suurempi tai pienempi; kuninkaan päälle ei mene mitään. ¦ Golf két paklival: 9 oszlop 7-7 lappal. Tegyél a dobópaklira egy eggyel nagyobb vagy kisebb lapot; Királyra semmi sem kerülhet.
+As en haut (5 colonnes) ¦ Ässät ylös (5 pinoa) ¦ Ászok fel (5 oszlop)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Ässät ylös 5 pinolla: poista kortti, kun toisessa pinossa näkyy samaa maata oleva vahvempi kortti (ässä on vahvin). Voitat, jos jäljellä on vain 4 ässää. ¦ Ászok fel 5 oszloppal: vegyél le egy lapot, ha egy másik oszlopban ugyanolyan színű erősebb lap látszik (az Ász a legerősebb). Nyersz, ha csak a 4 Ász marad.
+La baronne ¦ Paronitar ¦ A bárónő
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 kasaa: poista yksinäinen kuningas tai kaksi päällimmäistä korttia, joiden summa on 13 (sotilas 11, kuningatar 12). Nostopakka panee yhden kortin jokaiseen kasaan. ¦ 5 kupac: vegyél le egy magányos Királyt, vagy két felső lapot, amelyek összege 13 (Bubi 11, Dáma 12). A húzópakli minden kupacra tesz egy lapot.
+Sir Tommy ¦ Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Jokainen nostettu kortti menee perustapinoon tai johonkin 4 odotuskasasta. Perustapinot alkavat ässästä ja nousevat yksi kerrallaan välittämättä maista. ¦ Minden húzott lap egy alapsorra vagy a 4 várakozó kupac egyikére kerül. Az alapsorok Ásszal kezdődnek, és egyesével emelkednek, a színekre nem figyelve.
+Le chat dans le coin ¦ Kissa nurkassa ¦ A macska a sarokban
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Ässät on asetettu valmiiksi ja nousevat yksi kerrallaan omassa värissään (punainen punaiselle, musta mustalle). Jokainen nostettu kortti menee perustapinoon tai johonkin 4 odotuskasasta; kerran kasat kerätään uudeksi nostopakaksi. ¦ Az Ászok előre le vannak téve, és egyesével emelkednek a saját árnyalatukban (piros a pirosra, fekete a feketére). Minden húzott lap egy alapsorra vagy a 4 várakozó kupac egyikére kerül; egyszer összeszedheted a kupacokat újrahúzáshoz.
+La stratégie ¦ Strategia ¦ A stratégia
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Jokainen nostettu kortti menee johonkin 8 odotuskasasta; vain ässät nousevat heti. Kun nostopakka on tyhjä, kasojen päällimmäiset kortit nostetaan yksi kerrallaan samassa maassa. ¦ Minden húzott lap a 8 várakozó kupac egyikére kerül; csak az Ászok kerülnek fel azonnal. Ha a húzópakli kiürül, a kupacok felső lapjait egyesével, ugyanabban a színben teszed fel.
+Gizeh ¦ Giza ¦ Gíza
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Pyramidi ilman nostopakkaa: 24 muuta korttia näkyvät 3 rivissä ja kaikki voi ottaa. Poista parit, joiden summa on 13 (sotilas 11, kuningatar 12; kuningas poistuu yksin). ¦ A piramis húzópakli nélkül: a többi 24 lap 3 sorban látható, és mind elvehető. Vedd le a 13-at kiadó párokat (Bubi 11, Dáma 12; a Király egyedül megy).
+Toutânkhamon ¦ Tutankhamon ¦ Tutanhamon
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Pyramidi, mutta nostopakasta käännetään kolme korttia kerrallaan (vain viimeistä pelataan) ja sen voi käydä läpi niin monta kertaa kuin haluat. ¦ A piramis, de a húzópakliból egyszerre három lapot fordítasz (csak az utolsó játszható), és annyiszor mehetsz végig rajta, ahányszor akarsz.
+La lune bleue ¦ Sininen kuu ¦ A kék hold
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, mutta ässät menevät rivien alkuun: jokainen rivi on järjestettävä ässästä kuninkaaseen samassa maassa. Aukkoon käy samaa maata oleva kortti, joka on yhtä suurempi kuin sen vasen naapuri. Kaksi kertaa voit kerätä järjestämättömät ja jakaa uudelleen. ¦ Montana, de az Ászok a sorok elejére kerülnek: minden sort az Ásztól a Királyig kell rendezni egyazon színben. Egy lyukba a bal oldali szomszédjánál eggyel nagyobb, azonos színű lap kerül. Kétszer összeszedheted, ami nincs a helyén, és újra kioszthatod.
+La lune rouge ¦ Punainen kuu ¦ A vörös hold
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Sininen kuu, mutta ässät on asetettu valmiiksi rivien alkuun ja aukot ovat rivien lopussa alusta asti. ¦ A kék hold, de az Ászok előre le vannak téve a sorok elejére, és a lyukak kezdettől a sorok végén vannak.
+Le voisin ¦ Naapuri ¦ A szomszéd
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ 5 × 5 -ruudukko: poista kaksi toisiaan koskettavaa korttia (myös vinottain), joiden summa on 13 (sotilas 11, kuningatar 12); kuningas poistuu yksin. Tiivistä sitten ruudukko. ¦ 5 × 5-ös rács: vegyél le két egymással érintkező lapot (átlósan is), amelyek összege 13 (Bubi 11, Dáma 12); a Király egyedül megy. Aztán tömörítsd a rácsot.
+Isabelle ¦ Isabelle ¦ Isabelle
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 pinoa, joissa 4 korttia (vain viimeinen näkyy): poista kaksi samanarvoista korttia pinojen alaosasta. Puhdas onnenpeli rentoutumiseen. ¦ 13 oszlop 4-4 lappal (csak az utolsó látható): vegyél le két azonos értékű lapot az oszlopok aljáról. Tiszta szerencsejáték, lazításhoz.
+Quatorze en colonnes ¦ Neljätoista pinoissa ¦ Tizennégy oszlopokban
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 pinoa, kaikki kortit näkyvissä: poista kaksi pinojen alaosasta otettua korttia, joiden summa on 14 (sotilas 11, kuningatar 12, kuningas 13). ¦ 12 oszlop, minden lap látható: vegyél le két, az oszlopok aljáról vett lapot, amelyek összege 14 (Bubi 11, Dáma 12, Király 13).
+Ramassé et redistribué, sans mélanger. ¦ Kerätty ja jaettu uudelleen sekoittamatta. ¦ Összeszedve és újraosztva, keverés nélkül.
+Les tas d’attente sont ramassés dans la pioche. ¦ Odotuskasat kerätään nostopakkaan. ¦ A várakozó kupacok visszakerülnek a húzópakliba.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Avaa Peli, valitse ”🂠 Pasianssit (korttipelit)” kohdasta ”Peli” ja sitten peli 233 perheittäin järjestetyn pasianssin joukosta (Klondike, FreeCell, Hämähäkki, Yukon, Neljäkymmentä rosvoa, Linnat ja puutarhat, paripelit). Vedä kortti (tai sarja) toiseen pinoon tai napsauta sitä ja sitten kohtaa, johon se pannaan; kaksoisnapsautus: perustapinoon; napsautus nostopakkaan: nosta. Paripeleissä (Pyramidi, Yksitoista, Kolmetoista…) napsauta yhteen kuuluvia kortteja. ¦ Nyisd meg a Játékot, válaszd a „🂠 Pasziánszok (kártyajátékok)” lehetőséget a „Játék” menüben, majd a játékot a családok szerint rendezett 233 pasziánsz közül (Klondike, FreeCell, Pók, Yukon, A negyven rabló, Kastélyok és kertek, párosítós játékok). Húzz egy lapot (vagy sort) egy másik kupacra, vagy kattints rá, majd oda, ahová tenni akarod; dupla kattintás: alapsorra; kattintás a húzópaklira: húzás. A párosítós játékokban (Piramis, Tizenegy, Tizenhárom…) kattints az összetartozó lapokra.
+Quelles autres patiences sont arrivées ensuite ? ¦ Mitä muita pasiansseja tuli myöhemmin? ¦ Milyen más pasziánszok érkeztek később?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Sata kaksi klassista pasianssia lisää, jokaisella omat sääntönsä pelin kohdassa ”📖 Säännöt”. Klondike- ja Canfield-perhe: Agnès Bernauer, Thumb and Pouch, Ei yksin, Umpikujat, Kahdeksan kertaa kahdeksan, Spike, Vuorottelu, Harppu, Suuri harppu, Acme, Amerikkalainen konna, Kirjava Canfield, Herttuatar, Portti. Vapailla soluilla: Pingviini, Baker’s Game (vain kuningas), Rento Seahaven, Repair, Ocean Towers, Seitsemän kertaa neljä, Seitsemän kertaa viisi, FreeCell-haaste, FreeCell-superhaaste. Hämähäkit ja Gypsy-pelit: Kovakuoriainen, Skorpionin pyrstö, Kaksois-Scorpion, Avioeron syy, Tarantella, Avoin hämähäkki, Milliganin harppu, Lexingtonin harppu, Brunswick, Carlton, Miss Milligan, Millie, Elban saari, Olympos-vuori. Yukon: Australialainen pasianssi, Canberra, Raw Prawn, Rushdike, Kiinalainen kuri, Kaksinkertainen venäläinen pasianssi. Neljäkymmentä rosvoa ja sukulaiset: Ali Baba, Cassim, Rivi ja jono, Kiireiset ässät, Hovi, Napoleonin neliö, Napoleonin maanpako, Deuces, Vähenevä kuu, Kuuluisat viisikymmentä, Neljäkymmentäyhdeksän, Rajaton, Pienet neljäkymmentä, Seepra, Kongressi, Parlamentti, Parillinen ja pariton, Kuninkaallinen kotiljonki. Linnat, viuhkat ja puutarhat: Onnen kolmetoista, Portugalilainen pasianssi, Hyvä mitta, Julma, Sinnikkyys, Aaltoileva viuhka, Laatikkoviuhka, Lumoava viuhka, Keskiyön lamppu, Shamrocks, Talo metsässä, Talo kukkulalla, Bisley, Isoisän kellotaulu, Kivimuuri, Luonnonkukka, Shakkilauta, Linnake, Linnoitus, Piirityksen taito, Penelopen kangas, Sitadelli, Maanpaossa olevat kuninkaat, Bastioni, Teerasia (sekä sen amerikkalainen ja englantilainen versio). Parit, sarjat ja laskut: Tiukat kolme huippua, Kaksois-Golf, Ässät ylös (5 pinoa), Paronitar, Sir Tommy, Kissa nurkassa, Strategia, Giza, Tutankhamon, Sininen kuu, Punainen kuu, Naapuri, Isabelle ja Neljätoista pinoissa. ¦ Százkét további klasszikus pasziánsz, mindegyik saját szabályaival a játszma „📖 Szabályok” részében. Klondike- és Canfield-család: Agnès Bernauer, Thumb and Pouch, Nem egyedül, A zsákutcák, Nyolcszor nyolc, Spike, Váltakozás, A hárfa, A nagy hárfa, Acme, Az amerikai varangy, Tarka Canfield, A hercegnő, A kapu. Szabad cellákkal: A pingvin, Baker’s Game (csak Király), Laza Seahaven, Repair, Ocean Towers, Hétszer négy, Hétszer öt, FreeCell kihívás, FreeCell szuperkihívás. Pókok és Gypsy-félék: A szkarabeusz, A skorpió farka, Dupla Scorpion, Válóok, A tarantula, Nyílt pók, Milligan hárfája, Lexington hárfája, Brunswick, Carlton, Miss Milligan, Millie, Elba szigete, Az Olümposz. Yukon: Az ausztrál pasziánsz, Canberra, Raw Prawn, Rushdike, A kínai fegyelem, Dupla orosz pasziánsz. A negyven rabló és rokonai: Ali Baba, Cassim, Rang és sor, A szorgos Ászok, Az udvar, Napóleon négyzete, Napóleon száműzetése, Deuces, A fogyó hold, A híres ötven, Negyvenkilenc, Korlátlan, A kis negyven, A zebra, A kongresszus, A parlament, Páros és páratlan, A királyi kotillion. Kastélyok, legyezők és kertek: A szerencsés tizenhárom, A portugál pasziánsz, Jó mérték, A kegyetlen, A kitartás, A hullámzó legyező, A dobozos legyező, A lenyűgöző legyező, Az éjféli lámpa, Shamrocks, Ház az erdőben, Ház a dombon, Bisley, A nagyapa óralapja, A kőfal, A vadvirág, A sakktábla, Az erősség, Az erőd, Az ostrom művészete, Pénelopé vászna, A citadella, A száműzött királyok, A bástya, A teásdoboz (és amerikai meg angol változata). Párok, sorok és számolás: A szigorú három csúcs, Dupla Golf, Ászok fel (5 oszlop), A bárónő, Sir Tommy, A macska a sarokban, A stratégia, Gíza, Tutanhamon, A kék hold, A vörös hold, A szomszéd, Isabelle és Tizennégy oszlopokban.
+(suite) ¦ (jatkuu) ¦ (folytatás)
+.pptx : textes, images, formes, tableaux ¦ .pptx: tekstit, kuvat, muodot, taulukot ¦ .pptx: szövegek, képek, alakzatok, táblázatok
+Ce texte est vide : rien à mettre en diapositives. ¦ Tämä teksti on tyhjä: ei mitään dioiksi. ¦ Ez a szöveg üres: nincs mit diákba tenni.
+Cette image n’est pas dans les médias. ¦ Tämä kuva ei ole medioissa. ¦ Ez a kép nincs a médiában.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Lähetä kohteeseen…: esitys videona Videoleikkaukseen tai sivustollesi ¦ Küldés ide…: a bemutató videóként, a Videóvágásba vagy a webhelyedre
+Fichier PowerPoint téléchargé. ¦ PowerPoint-tiedosto ladattu. ¦ PowerPoint-fájl letöltve.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Esityksestä tulee video ({time}), joka tallennetaan Medioihin, ja sitten valitset, minne se menee: Videoleikkaukseen tai sivustollesi. Jätä ikkuna auki tallennuksen ajaksi. ¦ A bemutatóból videó lesz ({time}), amely a Médiába kerül, aztán kiválasztod, hová menjen: a Videóvágásba vagy a webhelyedre. Hagyd nyitva az ablakot a felvétel alatt.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Diaesityksestä tulee video ({time}), joka tallennetaan Medioihin, ja sitten valitset, minne se menee: Videoleikkaukseen tai sivustollesi. Jätä ikkuna auki tallennuksen ajaksi. ¦ A diavetítésből videó lesz ({time}), amely a Médiába kerül, aztán kiválasztod, hová menjen: a Videóvágásba vagy a webhelyedre. Hagyd nyitva az ablakot a felvétel alatt.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Diaesitys videona, tallennettuna medioihin, sitten Videoleikkaukseen tai sivustollesi ¦ A diavetítés videóként, a médiába mentve, aztán a Videóvágásba vagy a webhelyedre
+PowerPoint : assemblage du fichier… ¦ PowerPoint: kootaan tiedostoa… ¦ PowerPoint: a fájl összeállítása…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: dia {n} / {total} ¦ PowerPoint: {n}. dia / {total}
+PowerPoint impossible : {error} ¦ PowerPoint ei onnistu: {error} ¦ PowerPoint nem lehetséges: {error}
+📊 PowerPoint ¦ 📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Lähetä esitys ¦ 📤 Bemutató küldése
+📤 Envoyer le diaporama ¦ 📤 Lähetä diaesitys ¦ 📤 Diavetítés küldése
+📤 Envoyer vers… (la vidéo) ¦ 📤 Lähetä kohteeseen… (video) ¦ 📤 Küldés ide… (a videó)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Lähetä kohteeseen… (Videoleikkaus, sivustosi) ¦ 📤 Küldés ide… (Videóvágás, a webhelyed)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Vie kuva (PNG, JPG, WebP, TIFF, tulosta)… ¦ ⤓ Kép exportálása (PNG, JPG, WebP, TIFF, nyomtatás)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Vie: muokattu kuva (PNG, JPG, WebP, TIFF, tulosta) tai ennen / jälkeen ¦ Exportálás: a szerkesztett kép (PNG, JPG, WebP, TIFF, nyomtatás) vagy az előtte / utána
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Muokattu kuva (PNG, JPG, WebP, TIFF, tulosta)… ¦ 🖼 A szerkesztett kép (PNG, JPG, WebP, TIFF, nyomtatás)…
+🌐 WebP ¦ 🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ kevyt, verkkoon ¦ könnyű, webre
+🗂 TIFF ¦ 🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ häviötön, arkistointiin ¦ veszteségmentes, archiváláshoz
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Tämä selain ei osaa tehdä WebP:tä: valitse PNG tai JPG. ¦ Ez a böngésző nem tud WebP-t készíteni: válaszd a PNG-t vagy a JPG-t.
+Cette action de retouche n’existe plus. ¦ Tätä käsittelytoimintoa ei ole enää. ¦ Ez a szerkesztési művelet már nem létezik.
+Choisis une photo à retoucher. ¦ Valitse muokattava valokuva. ¦ Válassz egy szerkesztendő fényképet.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Lähetä näytetty kuva tai raportti toiseen työkaluun ¦ A megjelenített kép vagy a jelentés küldése másik eszközbe
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Avaa valokuva A tai B Valokuvien käsittelyssä ¦ Az A vagy B fénykép megnyitása a Fényképek szerkesztésében
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Vie näytetty kuva tai tulosta molemmat valokuvat samankaltaisuuden ja muistiinpanojen kanssa ¦ A megjelenített kép exportálása, vagy a két fénykép nyomtatása a hasonlósággal és a jegyzetekkel
+Exporter l’image (ce qui est affiché)… ¦ Vie kuva (näkyvä sisältö)… ¦ Kép exportálása (ami látszik)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Tulosta (molemmat valokuvat, samankaltaisuus, muistiinpanot)… ¦ Nyomtatás (a két fénykép, a hasonlóság, a jegyzetek)…
+L’image affichée ¦ Näytetty kuva ¦ A megjelenített kép
+Le compte rendu (photos, ressemblance, notes) ¦ Raportti (valokuvat, samankaltaisuus, muistiinpanot) ¦ A jelentés (fényképek, hasonlóság, jegyzetek)
+La Retouche des photos n’est pas chargée. ¦ Valokuvien käsittelyä ei ole ladattu. ¦ A Fényképek szerkesztése nincs betöltve.
+Photo {side} — {name} ¦ Valokuva {side} — {name} ¦ {side} fénykép — {name}
+Retoucher quelle photo ? ¦ Mitä valokuvaa muokataan? ¦ Melyik fényképet szerkeszted?
+Utiliser ¦ Käytä ¦ Használat
+✒️ Quel dessin ? ¦ ✒️ Mikä piirros? ¦ ✒️ Melyik rajz?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Vektoripiirrokseen ei ole tallennettu piirroksia. ¦ Nincs mentett rajz a Vektoros rajzban.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Tätä piirrosta ei voitu lukea: avaa Vektoripiirros kerran ja yritä uudelleen. ¦ Ezt a rajzot nem sikerült beolvasni: nyisd meg egyszer a Vektoros rajzot, majd próbáld újra.
+📝 Quel document ? ¦ 📝 Mikä asiakirja? ¦ 📝 Melyik dokumentum?
+Aucun document dans le Traitement de texte. ¦ Tekstinkäsittelyssä ei ole asiakirjoja. ¦ Nincs dokumentum a Szövegszerkesztőben.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Vierivät kuvat (‹ ›); ilman skriptiä niitä liu’utetaan sormella ¦ Görgő képek (‹ ›); szkript nélkül ujjal lapozhatók
+Les images du diaporama ¦ Diaesityksen kuvat ¦ A diavetítés képei
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Video medioistasi (tai tiedostosta: 📁 Tuo…) toisto- ja koko näytön painikkeineen ¦ Egy videó a médiádból (vagy fájlból: 📁 Importálás…), lejátszás és teljes képernyő gombokkal
+La vidéo du site ¦ Sivuston video ¦ A webhely videója
+Télécharger la vidéo ¦ Lataa video ¦ Videó letöltése
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Ääni medioistasi (todistus, laulu…) ja halutessasi sen sisältö kirjoitettuna alle ¦ Egy hang a médiádból (visszaemlékezés, dal…), és ha akarod, alatta leírva, ami hallható
+Le son du site ¦ Sivuston ääni ¦ A webhely hangja
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Mitä kuuluu (valinnainen) ¦ 🎧 Ami hallható (nem kötelező)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Kirjoita tai liitä litterointi: se näkyy äänen alla niille, jotka eivät voi kuunnella sitä. Jätä tyhjäksi, jos et halua sitä. ¦ Írd be vagy illeszd be az átiratot: a hang alatt jelenik meg azoknak, akik nem tudják meghallgatni. Hagyd üresen, ha nem kéred.
+Ajouter le son ¦ Lisää ääni ¦ Hang hozzáadása
+Télécharger le son ¦ Lataa ääni ¦ Hang letöltése
+Ce qu’on entend ¦ Mitä kuuluu ¦ Ami hallható
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Yksi vektoripiirroksistasi tai liitetty SVG (ilman skriptiä tai ulkoisia linkkejä) ¦ Az egyik vektoros rajzod, vagy egy beillesztett SVG (szkript és külső hivatkozás nélkül)
+Un de mes dessins ¦ Yksi piirroksistani ¦ Az egyik rajzom
+Dessin vectoriel → mes dessins enregistrés ¦ Vektoripiirros → tallennetut piirrokseni ¦ Vektoros rajz → mentett rajzaim
+Coller un SVG ¦ Liitä SVG ¦ SVG beillesztése
+Le code <svg>…</svg> d’un dessin ¦ Piirroksen koodi <svg>…</svg> ¦ Egy rajz <svg>…</svg> kódja
+📋 Coller un SVG ¦ 📋 Liitä SVG ¦ 📋 SVG beillesztése
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Liitä tähän piirroksen koodi, <svg>:stä </svg>:hen. Skriptit ja ulkoiset linkit poistetaan. ¦ Illeszd be ide a rajz kódját, <svg>-től </svg>-ig. A szkripteket és a külső hivatkozásokat eltávolítjuk.
+Ajouter le dessin ¦ Lisää piirros ¦ Rajz hozzáadása
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Teksti Tekstinkäsittelystä (kirje, kertomus), siistittynä sivua varten ¦ Egy szöveg a Szövegszerkesztőből (levél, elbeszélés), az oldalhoz letisztázva
+Ce document est vide. ¦ Tämä asiakirja on tyhjä. ¦ Ez a dokumentum üres.
+Vidéo, son, dessin et texte ¦ Video, ääni, piirros ja teksti ¦ Videó, hang, rajz és szöveg
+🎬 Changer la vidéo… ¦ 🎬 Vaihda video… ¦ 🎬 Videó cseréje…
+🎧 Changer le son… ¦ 🎧 Vaihda ääni… ¦ 🎧 Hang cseréje…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Tiedosto lähtee sivuston mukana (kansio medias/) viennissä ja julkaisussa. ¦ A fájl a webhellyel együtt megy (medias/ mappa) exportáláskor és közzétételkor.
+Un autre son ¦ Toinen ääni ¦ Másik hang
+Une autre vidéo ¦ Toinen video ¦ Másik videó
+{what} (dossier medias/) ¦ {what} (kansio medias/) ¦ {what} (medias/ mappa)
+vidéo ou son ¦ video tai ääni ¦ videó vagy hang
+vidéos ou sons ¦ videot tai äänet ¦ videók vagy hangok
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: liian raskas sivustolle (enintään 90 Mt tiedostoa kohden, yhteensä 300 Mt) ¦ {what}: túl nagy egy webhelyhez (fájlonként legfeljebb 90 MB, összesen 300 MB)
+vidéo ou son pas mis ¦ videota tai ääntä ei lisätty ¦ videó vagy hang nincs betéve
+vidéos ou sons pas mis ¦ videoita tai ääniä ei lisätty ¦ videók vagy hangok nincsenek betéve
+Mon site web n’est pas chargé : recharge la page. ¦ Oma verkkosivusto ei ole ladattu: lataa sivu uudelleen. ¦ A Saját weboldal nincs betöltve: töltsd újra az oldalt.
+Mon site web ne sait pas recevoir ça. ¦ Oma verkkosivusto ei osaa vastaanottaa tätä. ¦ A Saját weboldal ezt nem tudja fogadni.
+Ce texte est vide. ¦ Tämä teksti on tyhjä. ¦ Ez a szöveg üres.
+Mon site ¦ Oma sivusto ¦ Saját webhely
+ouvert ¦ auki ¦ megnyitva
+la dernière fois ¦ viimeksi ¦ legutóbb
+ouvert, pas encore enregistré ¦ auki, ei vielä tallennettu ¦ megnyitva, még nincs mentve
+{what} : sur quel site ? ¦ {what}: mille sivustolle? ¦ {what}: melyik webhelyre?
+Un nouveau site ¦ Uusi sivusto ¦ Új webhely
+Sur quelle page ? ¦ Mille sivulle? ¦ Melyik oldalra?
+Une nouvelle page… ¦ Uusi sivu… ¦ Új oldal…
+📄 Nouvelle page ¦ 📄 Uusi sivu ¦ 📄 Új oldal
+Le nom de la page (il apparaît dans le menu) : ¦ Sivun nimi (näkyy valikossa): ¦ Az oldal neve (megjelenik a menüben):
+La vidéo ¦ Video ¦ A videó
+{what} est sur la page « {page} » de « {site} » ¦ {what} on sivuston ”{site}” sivulla ”{page}” ¦ {what} a(z) „{site}” webhely „{page}” oldalán van
+vidéos WebM ¦ WebM-videot ¦ WebM-videók
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ Ennen vuotta 2024 valmistetut iPhonet eivät toista sitä: suosi MP4:ää (H.264), jota kaikki toistavat. ¦ A 2024 előtti iPhone-ok nem játsszák le: inkább MP4-et (H.264) használj, azt mindenki lejátssza.
+vidéos .mov (QuickTime) ¦ .mov-videot (QuickTime) ¦ .mov videók (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Usein toistumaton Applen ulkopuolella: tee se uudelleen MP4-muodossa (🎬 Videoleikkaus → Vie). ¦ Az Apple-en kívül gyakran nem játszható le: készítsd el újra MP4-ben (🎬 Videóvágás → Exportálás).
+vidéos Ogg (.ogv) ¦ Ogg-videot (.ogv) ¦ Ogg-videók (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Ei koskaan Safarissa eikä iPhonessa: suosi MP4:ää. ¦ Soha nem megy Safarin és iPhone-on: inkább MP4-et használj.
+sons Ogg (Vorbis, Opus) ¦ Ogg-äänet (Vorbis, Opus) ¦ Ogg-hangok (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari toistaa niitä vasta vuodesta 2025: suosi MP3:a (🎧 Ääni → Vie). ¦ A Safari csak 2025 óta játssza le őket: inkább MP3-at használj (🎧 Hang → Exportálás).
+sons FLAC ¦ FLAC-äänet ¦ FLAC-hangok
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Toimii kaikkialla, mutta on raskas sivustolle: MP3 latautuu paljon nopeammin. ¦ Mindenhol működik, de nehéz egy webhelyhez: az MP3 sokkal gyorsabban betöltődik.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (diaesitys pysähtyy jokaiseen kuvaan) ¦ scroll-snap (a diavetítés minden képnél megáll)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Toimii kaikkialla vuodesta 2019; muualla kuvat vierivät pysähtymättä. ¦ 2019 óta mindenhol működik; máshol a képek megállás nélkül gördülnek.
+Maison par époques ¦ Talo aikakausittain ¦ A ház korszakonként
+Ma carte animée ¦ Animoitu karttani ¦ Az animált térképem
+La maison au fil du temps ¦ Talo ajan kuluessa ¦ A ház az idők során
+Le dessin vectoriel n’est pas chargé. ¦ Vektoripiirrosta ei ole ladattu. ¦ A vektoros rajz nincs betöltve.
+Lecture de la carte… ¦ Luetaan karttaa… ¦ A térkép beolvasása…
+Carte introuvable ¦ Karttaa ei löydy ¦ A térkép nem található
+La maison n’est pas chargée. ¦ Taloa ei ole ladattu. ¦ A ház nincs betöltve.
+Lecture de la maison… ¦ Luetaan taloa… ¦ A ház beolvasása…
+Maison introuvable ¦ Taloa ei löydy ¦ A ház nem található
+Le plan de cette maison est vide. ¦ Tämän talon pohjapiirros on tyhjä. ¦ Ennek a háznak az alaprajza üres.
+Choisir une carte ¦ Valitse kartta ¦ Térkép kiválasztása
+Chercher une carte… ¦ Hae karttaa… ¦ Térkép keresése…
+{n} objets ¦ {n} kohdetta ¦ {n} objektum
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Kohteet, joilla on vuosiluvut (kartan Ominaisuudet-välilehti), ilmestyvät ajallaan. ¦ Az évszámmal rendelkező objektumok (a térkép Tulajdonságok lapja) a dátumukkor jelennek meg.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Ei tallennettuja karttoja: tee sellainen kohdassa Muokkaustyökalut → 🗺️ Kartta. ¦ Nincs mentett térkép: készíts egyet itt: Szerkesztőeszközök → 🗺️ Térkép.
+Choisir une maison ¦ Valitse talo ¦ Ház kiválasztása
+Chercher une maison… ¦ Hae taloa… ¦ Ház keresése…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Talon jokaisesta aikakaudesta (🕰) tulee otos, yksi toisensa jälkeen, ristihäivytyksellä. ¦ A ház minden korszaka (🕰) egy-egy jelenet lesz, egymás után, áttűnéssel.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Ei tallennettuja taloja: piirrä sellainen kohdassa Muokkaustyökalut → 🏠 Talo. ¦ Nincs mentett ház: rajzolj egyet itt: Szerkesztőeszközök → 🏠 Ház.
+Apparition des objets ¦ Kohteiden ilmestyminen ¦ Az objektumok megjelenése
+D’un coup ¦ Kerralla ¦ Egyszerre
+Avance doucement ¦ Etenee hitaasti ¦ Lassan halad
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Häivytys aikakaudesta toiseen (0–0,9) ¦ Áttűnés korszakról korszakra (0–0,9)
+L’année et le nom de l’époque en légende ¦ Vuosi ja aikakauden nimi kuvatekstinä ¦ Az év és a korszak neve feliratként
+(une copie de la carte) ¦ (kartan kopio) ¦ (a térkép másolata)
+En faire la musique ¦ Tee siitä musiikki ¦ Legyen belőle zene
+Ce son passe en musique de fond, pour tout le film ¦ Tämä ääni soi taustamusiikkina koko elokuvan ajan ¦ Ez a hang háttérzene lesz az egész filmben
+Voix retirée. ¦ Puhe poistettu. ¦ Hang (beszéd) eltávolítva.
+Le son est maintenant la musique du film. ¦ Ääni on nyt elokuvan musiikki. ¦ A hang most a film zenéje.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Ääni on elokuvan puhe (Elokuva-välilehti). ”🎵 Tee siitä musiikki” siirtää sen taustalle. ¦ A hang a film beszédhangja (Film lap). A „🎵 Legyen belőle zene” a háttérbe teszi.
+Animer dans le Studio ¦ Animoi Studiossa ¦ Animálás a Stúdióban
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Aikaliukusäädin etenee itsestään: kohteet ilmestyvät ajallaan ¦ Az idő csúszkája magától halad: az objektumok a dátumukkor jelennek meg
+Le Studio d’animation n’est pas chargé. ¦ Animaatiostudiota ei ole ladattu. ¦ Az Animációs stúdió nincs betöltve.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Ei tallennettuja karttoja: aloita kohdasta ”＋ Uusi kartta”. ¦ Nincs mentett térkép: kezdd az „＋ Új térkép” gombbal.
+Quelle carte animer ? ¦ Mikä kartta animoidaan? ¦ Melyik térképet animálod?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Kohteet, joilla on vuosiluvut (Ominaisuudet-välilehti), ilmestyvät ajallaan ensimmäisestä vuodesta viimeiseen. ¦ Az évszámmal rendelkező objektumok (Tulajdonságok lap) a dátumukkor jelennek meg, az első évtől az utolsóig.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Elokuva, jossa aikaliukusäädin etenee itsestään ensimmäisestä vuodesta viimeiseen ¦ Egy film, amelyben az idő csúszkája magától halad az első évtől az utolsóig
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Tämä kartta on liian raskas kopioitavaksi elokuvaan: tallenna se ja sitten Muokkaustyökalut → 🗺️ Kartta → ”🎞 Animoi Studiossa”. ¦ Ez a térkép túl nagy ahhoz, hogy egy filmbe másold: mentsd el, majd Szerkesztőeszközök → 🗺️ Térkép → „🎞 Animálás a Stúdióban”.
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Pohjapiirros tai 3D-näkymä toisessa työkalussa: leikkaus, esitys, taitto, piirros… ¦ Az alaprajz vagy a 3D-nézet egy másik eszközben: vágás, bemutató, elrendezés, rajz…
+🎞 Animer les époques dans le Studio ¦ 🎞 Animoi aikakaudet Studiossa ¦ 🎞 Korszakok animálása a Stúdióban
+Animer les époques dans le Studio ¦ Animoi aikakaudet Studiossa ¦ Korszakok animálása a Stúdióban
+Le plan (image) ¦ Pohjapiirros (kuva) ¦ Az alaprajz (kép)
+La vue 3D (image) ¦ 3D-näkymä (kuva) ¦ A 3D-nézet (kép)
+Le plan en dessin (vectoriel, mise en page…) ¦ Pohjapiirros piirroksena (vektori, taitto…) ¦ Az alaprajz rajzként (vektoros, elrendezés…)

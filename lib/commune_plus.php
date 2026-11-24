@@ -265,8 +265,12 @@ function cplus_year(string $s): int
 }
 function cplus_text(string $html, int $max = 300): string
 {
+    $html = (string) preg_replace('#<span[^>]*display:\s*none[^>]*>.*?</span>#is', '', $html); // le texte caché (infobulles)
     $t = html_entity_decode(strip_tags(str_replace(['<br>', '<br/>', '<br />'], ' ', $html)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    return mb_substr(trim((string) preg_replace('/\s+/u', ' ', $t)), 0, $max);
+    $t = trim((string) preg_replace('/\s+/u', ' ', $t));
+    // Commons répète parfois le texte (« Unknown authorUnknown author » : un lien et son infobulle cachée)
+    if (preg_match('/^(.{3,}?)\s?\1$/u', $t, $m)) { $t = $m[1]; }
+    return mb_substr($t, 0, $max);
 }
 const CPLUS_OLD_CAT = '/(old|vintage|historic(al)?)\s+(post\s*cards?|photographs?|maps?|images?)|postcards|cartes?\s+postales|history\s+of|in\s+the\s+(1[5-9]|20)\d\ds|in\s+(1[5-9]\d\d|19[0-5]\d)\b|(1[5-9]|19)th[- ]century|in\s+the\s+past|anciennes?|before\s+19[0-6]\d|19th|18th|17th/i';
 

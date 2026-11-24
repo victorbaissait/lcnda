@@ -1,0 +1,835 @@
+fr ¦ lb
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ No wéi villen Deeg ouni Noriicht ass en Déier „ze spéit“? Rout beim duebele Delai.
+Espèce inconnue ¦ Onbekannt Aart
+Délais par espèce changés ¦ Delaie pro Aart geännert
+Animal (nom, bague…) ¦ Déier (Numm, Rank…)
+ou bague lue ¦ oder geliesene Rank
+Bague lue ¦ Gelieser Rank
+nb ¦ Zuel
+Nombre vus ¦ Zuel gesinn
+Le menu de choix n’est pas encore chargé. ¦ De Wielmenü ass nach net gelueden.
+⚡ Saisie d’une séance ¦ ⚡ Eng Sessioun aginn
+Tout enregistrer ¦ Alles späicheren
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ D’Plaz, den Datum an den Observateur nëmmen eemol; dann eng Zeil pro gesinnt Déier (oder pro gelieste Rank, wann s du nach net weess, wien et ass).
+Site de suivi ¦ Iwwerwaachungsplaz
+Observateur ¦ Observateur
+Nb ¦ Zuel
+Dis quand a eu lieu la séance. ¦ So, wéini d’Sessioun war.
+Choisis un site ou un lieu pour la séance. ¦ Wiel eng Iwwerwaachungsplaz oder eng Plaz fir d’Sessioun.
+Ajoute au moins un animal vu. ¦ Setz op d’mannst een gesinnt Déier derbäi.
+Séance enregistrée : {n} ¦ Sessioun gespäichert: {n}
+🖨 Fiche de terrain ¦ 🖨 Terrainsfiche
+Aperçu et impression ¦ Virschau an Drécken
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ D’Déieren, déi op enger Plaz erwaart ginn (déi, déi do scho gesi goufen), mat hire Ränk a Markéierungen, an Ukräizfelder: fir en Ausfluch ouni Computer.
+Tous les animaux suivis ¦ All iwwerwaacht Déieren
+Tous les sites ¦ All Plazen
+Aucun animal déjà vu sur ce site. ¦ Nach keen Déier op dëser Plaz gesinn.
+Fiche de terrain — {s} ¦ Terrainsfiche — {s}
+Fiche de terrain ¦ Terrainsfiche
+Date de la dernière observation ¦ Datum vun der leschter Observatioun
+Une colonne pour les notes ¦ Eng Kolonn fir d’Notizen
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Datum: ____________  Observateur: ____________________  Wieder: ____________
+SUCCESSIONS ¦ IERFSCHAFTEN
+Qui s’en charge ? ¦ Wie këmmert sech drëm?
+ex. Claire LACOMBE (vide : personne) ¦ z. B. Claire LACOMBE (eidel: keen)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Dat sinn ech (fir de Filter „Meng Dossieren“)
+Sur cet ordinateur, « moi » = {name}. ¦ Op dësem Computer ass „ech“ = {name}.
+Confié à {who} ¦ Un {who} uvertraut
+Plus personne n’en est chargé ¦ Keen këmmert sech méi drëm
+Chargé du dossier : ¦ Zoustänneg fir den Dossier:
+👥 Confier le dossier… ¦ 👥 Den Dossier uvertrauen…
+👥 Chargé du dossier n° {n} ¦ 👥 Zoustänneg fir den Dossier Nr. {n}
+à confier ¦ nach z’uvertrauen
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Wie këmmert sech ëm dësen Delai?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Méiglechen Interessekonflikt: {n} schonn an engem aneren oppenen Dossier. Kontrolléier, ier s du e Kontrakt ënnerschreifs.
+dossier n° {n} ¦ Dossier Nr. {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ Kee Bild vun dësem Dokument an der Datebank: verbann de gescannten Akt mam Evenement, a fänk nach eng Kéier un.
+La lecture automatique n’a pas marché : {err} ¦ Dat automatescht Liesen huet net geklappt: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Keen Text op dësem Bild gelies (Handschrëft? probéier den Transkriptiouns-Atelier).
+rien de trouvé ¦ näischt fonnt
+PIÈCE ¦ DOKUMENT
+🔎 Lecture automatique — à vérifier ¦ 🔎 Automatescht Liesen — ze kontrolléieren
+✍️ Noter au journal ¦ ✍️ Am Journal notéieren
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Wat d’Maschinn op „{t}“ gemengt huet ze liesen. Maach den Haken ewech bei deem, wat falsch ass: an de Fiche gëtt näischt geännert.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Automatescht Liese vum Dokument „{p}“ (ze kontrolléieren) — {line}
+Noté au journal du dossier. ¦ Am Journal vum Dossier notéiert.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Den Text vum gescannten Akt liesen an Nimm, Datumen a Plaze virschloen
+🔎 Lire la pièce ¦ 🔎 D’Dokument liesen
+demandée ¦ ugefrot
+à obtenir ¦ nach ze kréien
+Tableau généalogique de dévolution ¦ Genealogeschen Tableau vun der Ierffolleg
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ PROJET — vum Notaire ze kontrolléieren an ze ergänzen. Indikativ Berechnung no de Fiche vun der Datebank.
+Pièces (renvois) ¦ Dokumenter (Verweiser)
+conjoint survivant ¦ iwwerliewende Partner
+Aucun héritier calculé pour l’instant. ¦ Nach keen Ierw gerechent.
+Les pièces ¦ D’Dokumenter
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Erstallt de(n) {d}. Aarbechtsdokument: et ersetzt weder den Akt vun der Notorietéit nach den Ierfschaftszertifikat.
+Projet de tableau de dévolution ¦ Projet vum Ierffolleg-Tableau
+🖨 Imprimer le tableau ¦ 🖨 Den Tableau drécken
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Fir dem Akt vun der Notorietéit bäizeleeën: all Ierw, seng Bezéiung, säin Undeel an d’Dokumenter, déi et beweisen (P1, P2…).
+Tableau de dévolution — {n} ¦ Ierffolleg-Tableau — {n}
+Tableau de dévolution ¦ Ierffolleg-Tableau
+Tableau de dévolution {n} ¦ Ierffolleg-Tableau {n}
+12 juin 1890 ¦ 12. Juni 1890
+2000 et après ¦ 2000 an duerno
+7 mai 1925 ¦ 7. Mee 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Kee bekannte Verwandtschaftswee mat der Persoun vum Ufank.
+Aucun lien de parenté connu. ¦ Keng bekannt Verwandtschaft.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Keng Verwandtschaft mat {nm} (Persoun vum Ufank) fonnt.
+Aucune différence : la fiche est comme avant cette modification. ¦ Keen Ënnerscheed: d’Fiche ass wéi virun dëser Ännerung.
+Aucune union enregistrée pour cette fiche. ¦ Keng Partnerschaft fir dës Fiche agedroen.
+Avant cette modification ¦ Virun dëser Ännerung
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Verstoppt am Liesmodus, an den Exporter, an de Partagen an um Site.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Dëst Element gëtt et net méi: benotz „Restauréieren“, wann et geläscht gouf.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Dës Fiche huet {n} {what}: hal déi richteg, déi aner gëtt eng „aner Versioun“ vun dësem Fakt.
+Chargement de la fiche familiale… ¦ Familljefiche gëtt gelueden…
+Chargement des pesées… ¦ Weeungen ginn gelueden…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Wiel „⤓ PDF“, fir de Fichier ze späicheren.
+Confidentialité et recherche ¦ Vertraulechkeet a Sich
+Courbe de poids ¦ Gewiichtskurv
+Créer la famille ¦ D’Famill uleeën
+C’est la personne de départ (de cujus). ¦ Dat ass d’Persoun vum Ufank (de cujus).
+C’est la personne de départ. ¦ Dat ass d’Persoun vum Ufank.
+Date du média moins date de naissance ¦ Datum vum Medium minus Gebuertsdatum
+Dernière modification ¦ Lescht Ännerung
+Dernières fiches créées ¦ Lescht erstallte Fichen
+En vie et décédés ¦ Lieweg a verstuerwen
+Exporter la fiche ¦ D’Fiche exportéieren
+Exporter la fiche (JSON) ¦ D’Fiche exportéieren (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Séier Exporter vun dëser Fiche: 🖨 Drécken mécht d’Virschau vun der App op (Format, Richtung, PDF), mat der Reiefolleg, der Gréisst an der Visibilitéit vun de Blocke vun dëser Fiche. 🔒 Vertraulech Evenementer ginn ni exportéiert.
+FICHE FAMILIALE ¦ FAMILLJEFICHE
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Famill gespäichert: {n} Fiche(n) erstallt.
+Famille enregistrée. ¦ Famill gespäichert.
+Fiche en JSON ¦ Fiche als JSON
+Fiche familiale ¦ Familljefiche
+Fiche familiale de {nm} ¦ Familljefiche vu(n) {nm}
+Fiche familiale… ¦ Familljefiche…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Gehal: déi aner Versioun ass an „Alternativen Datum“ notéiert.
+Genre inconnu ¦ Onbekannt Geschlecht
+Hors Sosa ¦ Ausserhalb Sosa
+Imprimer la fiche ¦ D’Fiche drécken
+Indique au moins le père ou la mère. ¦ Gëff op d’mannst de Papp oder d’Mamm un.
+Inhumation ¦ Begriefnes
+Les deux branches ¦ Déi zwou Branchen
+Lien retiré : {nm} ¦ Link ewechgeholl: {nm}
+Naissance (les plus anciens d’abord) ¦ Gebuert (déi eelst fir d’éischt)
+Naissance (les plus récents d’abord) ¦ Gebuert (déi jéngst fir d’éischt)
+Naissance inconnue ¦ Gebuert onbekannt
+Note de recherche ¦ Recherchennotiz
+Ouvre d’abord une fiche. ¦ Maach fir d’éischt eng Fiche op.
+PDF (aperçu d’impression) ¦ PDF (Drockvirschau)
+Pas de fiche d’animal liée. ¦ Keng verlinkt Déierefiche.
+Pas de mariage enregistré. ¦ Keng Bestietnes agedroen.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Nach keng Weeung: setz e Gewiicht an 🩺 Gesondheet derbäi.
+Personnaliser l’export… ¦ Den Export upassen…
+Prénom NOM, ou choisis une fiche ¦ Virnumm NUMM, oder wiel eng Fiche
+Père, mère, mariage et enfants en une seule saisie ¦ Papp, Mamm, Bestietnes a Kanner an enger eenzeger Agab
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Papp, Mamm, Bestietnes a Kanner an enger eenzeger Agab. Fir all Numm: wiel eng Fiche, déi et scho gëtt, oder tipp „Virnumm NUMM“, fir eng nei unzeleeën.
+Recherche du chemin… ¦ Wee gëtt gesicht…
+Remis : {f} ¦ Zréckgesat: {f}
+Rien à exporter dans cet écran. ¦ Näischt ze exportéieren op dësem Ecran.
+SAISIE RAPIDE ¦ SÉIER AGAB
+Sans aucune source ¦ Ouni iergendeng Quell
+Sans parents ¦ Ouni Elteren
+Sans parents connus ¦ Ouni bekannt Elteren
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Ënner all Numm: seng Verwandtschaft mat der Persoun vum Ufank.
+TON LIEN ¦ DENG BEZÉIUNG
+Tableau (CSV) ¦ Tabell (CSV)
+Ton lien avec cette personne ¦ Deng Bezéiung zu dëser Persoun
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Deng Bezéiung zu dëser Persoun (vu(n) {nm} aus) — klick, fir de Wee ze gesinn.
+Tous les genres ¦ All Geschlechter
+Un enfant sans nom de famille prend celui du père. ¦ E Kand ouni Familljennumm kritt deen vum Papp.
+Voir la note de recherche ¦ D’Recherchennotiz kucken
+conjoint de ¦ Partner vu(n)
+enfant de ¦ Kand vu(n)
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ z. B. ze kontrolléieren: Cote 3 E 125, Spuer: Regëster vun der Noperpar
+inconnu(e) ¦ onbekannt
+par {nm} ¦ vu(n) {nm}
+parent de ¦ Elterendeel vu(n)
+{a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} war ongeféier {age}
+{nm} avait moins d’un an ¦ {nm} war manner wéi ee Joer al
+{nm} avait {age} ¦ {nm} war {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ {n} Weeung(en) · lescht: {w} de(n) {d}
+{n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ {n} Schrëtt vun der Persoun vum Ufank.
+{s} depuis la première ¦ {s} zënter der éischter
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Vertraulecht Evenement: verstoppt am Liesmodus, an den Exporter, an de Partagen an um Site.
+à {x} ¦ zu {x}
+↩ Remettre ¦ ↩ Zrécksetzen
+⇆ Comparer avec maintenant ¦ ⇆ Mat elo vergläichen
+⚡ ＋ Famille ¦ ⚡ ＋ Famill
+✓ Garder celle-ci ¦ ✓ Dës halen
+✓ Remis ¦ ✓ Zréckgesat
+＋ Un enfant de plus ¦ ＋ Nach e Kand
+👪 Fiche familiale ¦ 👪 Familljefiche
+📈 Animal : poids et croissance ¦ 📈 Déier: Gewiicht a Wuesstem
+📝 Avec une note de recherche ¦ 📝 Mat enger Recherchennotiz
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Recherchennotiz (ze kontrolléieren, Cote, Spuer)
+📝 Note de recherche : {x} ¦ 📝 Recherchennotiz: {x}
+🔒 confidentiel ¦ 🔒 vertraulech
+🔒 Événement confidentiel ¦ 🔒 Vertraulecht Evenement
+🧭 Aucun lien connu ¦ 🧭 Keng bekannt Bezéiung
+🧭 Personne de départ ¦ 🧭 Persoun vum Ufank
+🧭 Ton lien ¦ 🧭 Deng Bezéiung
+🧭 Ton lien avec cette personne ¦ 🧭 Deng Bezéiung zu dëser Persoun
+🧭 personne de départ ¦ 🧭 Persoun vum Ufank
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Nei… am oppene Reiter (eng Persoun a Persounen)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Déi lescht Ännerung vun enger Fiche réckgängeg maachen (ausserhalb vun engem Textfeld, direkt, mat „↷ Widderhuelen“)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Exportéieren, wat den oppene Reiter weist (⤓ Exportéieren)
+Chercher dans la colonne de gauche ¦ An der lénker Kolonn sichen
+Aucune personne ne correspond à ces filtres. ¦ Keng Persoun passt op dës Filteren.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Huel e Filter ewech (Filteren ▾) oder änner d’Zortéierung.
+Peau ¦ Haut
+Origine / mention ¦ Hierkonft / Vermierk
+Mention conjoint ¦ Vermierk Partner
+Mention enfants ¦ Vermierk Kanner
+Date alternative ¦ Alternativen Datum
+Lieu (n°) ¦ Plaz (Nr.)
+Type (n°) ¦ Typ (Nr.)
+Confidentiel ¦ Vertraulech
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: „{a}“ ({na}) · B: „{b}“ ({nb}) → {n} Persoun(en) {op}.
+Acte à commander supprimé ¦ Ze bestellenden Akt geläscht
+Ajouter à une liste ¦ An eng Lëscht derbäisetzen
+Apparence (thème, couleurs, police) ¦ Ausgesinn (Theema, Faarwen, Schrëft)
+Aucune citation ne contient ce texte. ¦ Keen Zitat enthält dësen Text.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Keng vu „Meng Lëschten“ enthält Persounen: maach eng an Astellungen → Editeur fir Lëschten.
+Aucune ligne ne contient « {find} ». ¦ Keng Zeil enthält „{find}“.
+Aucune source ne contient ce texte. ¦ Keng Quell enthält dësen Text.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Wat an enger gespäicherter Sich ass an net an der anerer (z. B. d’Sosa, déi an der Corrèze gebuer sinn ouni Daufakt): fir d’Lächer ze fannen.
+Changer cette ligne ¦ Dës Zeil änneren
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Sichen an ersetzen: wou sichen, Groussbuschtawen, ganzt Wuert
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ E Wuert am Titel, beim Auteur an am Text vun de Quellen sichen, an an der Säit an der Notiz vun all Zitat.
+Choisis deux lieux différents. ¦ Wiel zwou verschidde Plazen.
+Choisis deux recherches enregistrées. ¦ Wiel zwou gespäichert Sichen.
+Choisis les deux lieux. ¦ Wiel déi zwou Plazen.
+Choisis ou écris une étiquette. ¦ Wiel oder schreif en Etikett.
+Choisis où chercher. ¦ Wiel, wou gesicht gëtt.
+Citée ¦ Zitéiert
+Cocher {name} ¦ {name} ukräizen
+Comparer deux recherches ¦ Zwou Sichen vergläichen
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Verbesser e Feeler iwwerall op eemol („cultivatr“ → „cultivateur“). Du gesäis fir d’éischt all Zeil, déi sech géif änneren; maach den Haken ewech bei deenen, déi s du hale wëlls. „↶ Réckgängeg“ setzt alles zréck wéi virdrun.
+Dernières recherches vidées ¦ Lescht Sichen eidel gemaach
+Descriptions des événements ¦ Beschreiwunge vun den Evenementer
+Définition supprimée ¦ Definitioun geläscht
+Dépouillement supprimé ¦ Auszuch geläscht
+Essaie un autre lien ou moins de critères. ¦ Probéier eng aner Bezéiung oder manner Critèren.
+Ex : Poilu, À vérifier… ¦ Z. B.: Poilu, Ze kontrolléieren…
+Ex : cultivateur (vide = effacer) ¦ Z. B.: cultivateur (eidel = läschen)
+Ex : cultivatr ¦ Z. B.: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Z. B.: Parregëster, Folio 12, Tulle…
+Extrait ¦ Auszuch
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Maach se an „Sich mat e puer Critèren“, dann „Späicheren“.
+Graphiques et tableau de bord ¦ Grafiken an Dashboard
+Il faut au moins deux recherches enregistrées. ¦ Et brauch op d’mannst zwou gespäichert Sichen.
+Lacune supprimée ¦ Lück geläscht
+Les recherches enregistrées ne sont pas disponibles. ¦ Déi gespäichert Siche sinn net disponibel.
+Lien de parenté inconnu. ¦ Onbekannt Verwandtschaft.
+Ligne de transcription supprimée ¦ Transkriptiounszeil geläscht
+Mot entier seulement ¦ Nëmme ganz Wierder
+Neveux et nièces ¦ Neveuen an Niessen
+Nom de table invalide. ¦ Ongëltegen Tabellennumm.
+Noms de lieux ¦ Plazennimm
+Nouvelle étiquette… ¦ Neit Etikett…
+Nés en ou après ¦ Gebuer an oder no
+Nés en ou avant ¦ Gebuer an oder virun
+Oncles et tantes ¦ Monnecken an Tatten
+Onglets ajoutés au menu ¦ Reiter, déi an de Menü derbäigesat goufen
+Onglets cachés du menu ¦ Reiter, déi am Menü verstoppt sinn
+Ordre des types de recherche ¦ Reiefolleg vun de Sichtypen
+Ordre du menu ¦ Reiefolleg vum Menü
+Ouvrir la recherche multicritère ¦ D’Sich mat e puer Critèren opmaachen
+Où chercher ¦ Wou sichen
+Personne relevée retirée ¦ Erfaasste Persoun ewechgeholl
+Puis le lien de parenté cherché. ¦ Dann d’Verwandtschaft, déi gesicht gëtt.
+Rangement des pages des Réglages ¦ Organisatioun vun de Säite vun den Astellungen
+Recherche A ¦ Sich A
+Recherche B ¦ Sich B
+Recherche dans les sources… ¦ Sich an de Quellen…
+Recherche dans l’arbre… ¦ Sich am Bam…
+Recherche des lignes à changer… ¦ Zeilen, déi geännert ginn, ginn gesicht…
+Recherche par lien de parenté ¦ Sich no Verwandtschaft
+Respecter les majuscules ¦ Grouss- a Klengbuschtawen respektéieren
+Rien de coché : les actions portent sur les {t} résultats ¦ Näischt ugekräizt: d’Aktiounen gëlle fir déi {t} Resultater
+Règle introuvable. ¦ Regel net fonnt.
+Règle supprimée ¦ Regel geläscht
+Résultats de la recherche ¦ Resultater vun der Sich
+Sections ouvertes ou fermées ¦ Op oder zou Rubriken
+Seulement les décédés ¦ Nëmmen déi Verstuerwen
+Seulement les vivants ¦ Nëmmen déi Lieweg
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Nëmmen déi éischt {n} Zeile ginn gewisen; „Ersetzen“ ännert déi ugekräizt Zeilen.
+Sources et citations ¦ Quellen an Zitater
+Suppression impossible ici. ¦ Hei kann net geläscht ginn.
+Tape au moins deux lettres. ¦ Tipp op d’mannst zwee Buschtawen.
+Tape le texte à chercher. ¦ Tipp den Text, deen s du sichs.
+Texte à chercher ¦ Text fir ze sichen
+Texte à chercher trop long. ¦ Den Text fir ze sichen ass ze laang.
+Tous les ancêtres ¦ All d’Virfahren
+Tous les descendants ¦ All d’Nokommen
+Trouvé dans ¦ Fonnt an
+Type d’événement supprimé ¦ Evenementtyp geläscht
+Types de recherche cachés ¦ Verstoppt Sichtypen
+Vider la liste ¦ D’Lëscht eidel maachen
+Vivant(e) ¦ Lieweg
+Vivants et décédés ¦ Lieweg a verstuerwen
+dans A et dans B ¦ an A an an B
+dans A mais pas dans B ¦ an A awer net an B
+dans A ou dans B ¦ an A oder an B
+dans une seule des deux ¦ an nëmmen enger vun deenen zwou
+{n} cochée(s) sur {t} ¦ {n} vun {t} ugekräizt
+{n} ligne(s) cochée(s) sur {t} ¦ {n} Zeil(en) vun {t} ugekräizt
+{rel} de {name} : {n} personne(s). ¦ {rel} vu(n) {name}: {n} Persoun(en).
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ „All d’Cousinen éischte Grads vu…“, „déi lieweg Nokomme vu… gebuer no 1900“: wiel eng Persoun an eng Bezéiung.
+Étiqueter {n} personne(s) ¦ {n} Persoun(en) etikettéieren
+⟳ Recharger la page ¦ ⟳ D’Säit nei lueden
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 „{label}“ op {n} Persoun(en) gesat
+🏷 Étiqueter ¦ 🏷 Etikettéieren
+📊 Comparer deux recherches ¦ 📊 Zwou Sichen vergläichen
+📋 Ajouter à Mes listes ¦ 📋 A Meng Lëschten derbäisetzen
+📋 {n} personne(s) ajoutée(s) à « {list} » ¦ 📋 {n} Persoun(en) an „{list}“ derbäigesat
+📚 Sources ({n}) ¦ 📚 Quellen ({n})
+🔁 Chercher et remplacer ¦ 🔁 Sichen an ersetzen
+🔁 Remplacer ¦ 🔁 Ersetzen
+🔁 Remplacer ({n}) ¦ 🔁 Ersetzen ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 {n} Ersetzung(en) gemaach
+🔎 Ce que j’ai changé ¦ 🔎 Wat ech geännert hunn
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 {n} Zeil(en) vun enger gespaarter Fiche: si änneren sech net.
+🔖 Citations ({n}) ¦ 🔖 Zitater ({n})
+🕘 Dernières recherches ¦ 🕘 Lescht Sichen
+🗄 Santé de la base ¦ 🗄 Gesondheet vun der Datebank
+🧬 Lien de parenté ¦ 🧬 Verwandtschaft
+🧾 Sources et citations ¦ 🧾 Quellen an Zitater
+Lieux « {q} » ¦ Plazen „{q}“
+Transcriptions « {q} » ¦ Transkriptiounen „{q}“
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Export onméiglech: déi vertraulech Evenementer konnten net ewechgeholl ginn. Probéier et gläich nach eng Kéier.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Déi vertraulech Evenementer konnten net verstoppt ginn: probéier et gläich nach eng Kéier.
+, ni les fiches et événements confidentiels. ¦ , nach déi vertraulech Fichen an Evenementer.
+🔒  ¦ 🔒 
+📤 Envoyer vers… ¦ 📤 Schécken un…
+Dans une nouvelle présentation ¦ An eng nei Presentatioun
+Dans un nouveau diaporama ¦ An eng nei Diashow
+Dans un livre de la Mise en page… ¦ An e Buch vun der Säitegestaltung…
+Dans un nouveau document (Traitement de texte) ¦ An en neit Dokument (Textveraarbechtung)
+Dans le Tableur ¦ An d’Tabelle
+Sur une page de mon site… ¦ Op eng Säit vu mengem Site…
+Dans la Retouche des photos ¦ An d’Retouche vu Fotoen
+Comparer avec une autre photo ¦ Mat enger anerer Foto vergläichen
+Dans l’Atelier de transcription ¦ An den Transkriptiouns-Atelier
+Dans le Dessin vectoriel ¦ An d’Vektorzeechnung
+Dans les Traitements par lot ¦ An d’Veraarbechtung a Serie
+Envoyer les images vers… ¦ D’Biller schécken un…
+Envoyer le texte vers… ¦ Den Text schécken un…
+Envoyer le tableau vers… ¦ D’Tabell schécken un…
+Envoyer le son vers… ¦ Den Toun schécken un…
+Envoyer la vidéo vers… ¦ De Video schécken un…
+Envoyer le dessin vers… ¦ D’Zeechnung schécken un…
+Rangement du son dans les médias… ¦ Den Toun gëtt an de Medie gespäichert…
+Rangement de la vidéo dans les médias… ¦ De Video gëtt an de Medie gespäichert…
+Rien à envoyer. ¦ Näischt ze schécken.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Keen Tool kann dat fir de Moment kréien.
+En image (montage, studio, présentation, document…) ¦ Als Bild (Montage, Studio, Presentatioun, Dokument…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Als Zeechnung, schaarf an alle Gréissten (Buch, Site…)
+＋ Nouvelle crise ¦ ＋ Nei Kris
+Modifier cette crise ¦ Dës Kris änneren
+Supprimer cette crise ¦ Dës Kris läschen
+Nouvelle crise ¦ Nei Kris
+Modifier la crise ¦ D’Kris änneren
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ EPIDEMIEN, KRICHER, SCHRÉCKLECH WINTEREN
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Déi grouss Krisen aus der franséischer Geschicht nieft den Doudesfäll vun denger Famill: fir eng Well vun Doudesfäll ze verstoen (Cholera vun 1832, Grousse Wanter vun 1709, Spuenesch Gripp…). Setz deng eegen derbäi: eng Epidemie am Duerf, e Brand, eng Iwwerschwemmung…
+▦ Vignettes ¦ ▦ Miniaturen
+🏷 Par éditeur ¦ 🏷 No Verlag
+📍 Par lieu ¦ 📍 No Plaz
+✉️ Écrites / vierges ¦ ✉️ Geschriwwen / eidel
+Survole pour voir le verso ¦ Fuer driwwer, fir d’Récksäit ze gesinn
+Aucune fiche de carte postale pour l’instant ¦ Nach keng Postkaartefiche
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Lëschten → 🏞 Postkaarten: gëff all Kaart hire Verlag, hir Nummer, hir Plaz, hir Vir- an hir Récksäit.
+Éditeur inconnu ¦ Onbekannte Verlag
+Écrites ou envoyées ¦ Geschriwwen oder geschéckt
+Vierges (jamais envoyées) ¦ Eidel (ni geschéckt)
+Il manque les n° {n} ¦ Et feelen d’Nr. {n}
+Il manque le n° {n} ¦ Et feelt d’Nr. {n}
+cartes ¦ Kaarten
+Marge de « vers » ¦ Spillraum vu „ronderëm“
+Portée de « avant » / « après » ¦ Reechwäit vu „virun“ / „no“
+Longueur d’une vie sans fin connue ¦ Längt vun engem Liewen ouni bekannt Enn
+Ouvrir dans le Tableur… ¦ An der Tabelle opmaachen…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 D’Gäscht an der Tabelle opmaachen
+📤 Envoyer le tableau des invités ¦ 📤 D’Gäschtetabell schécken
+🧾 Ouvrir dans le Tableur ¦ 🧾 An der Tabelle opmaachen
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ D’Gäschtetabell, mat hirer Branche, hirer Verwandtschaft an hirer Äntwert.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ All d’Fotoe vum Album: eng Diashow, e Film, eng Veraarbechtung a Serie…
+Album — {nm} ¦ Album — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Nokommen (vun uewen no ënnen, eng Faarf pro Branche)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ D’Nokomme brauchen den Tool Familljentreffen, deen net gelueden ass.
+Aucune descendance pour cette personne. ¦ Keng Nokomme fir dës Persoun.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Kee bekannt Kand fir dës Persoun: keng Nokommen ze zeechnen.
+La descendance de {nm} ¦ D’Nokomme vu(n) {nm}
+la famille ¦ d’Famill
+L’arbre (en fond) ¦ De Bam (am Hannergrond)
+📰 En faire un faire-part ¦ 📰 Eng Annonce draus maachen
+Créer le faire-part ¦ D’Annonce erstellen
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ De Bam kënnt an den Hannergrond, hannert d’Texter vun der Annonce. Duerno geet alles an der Vektorzeechnung op, fir et ze retouchéieren.
+L’arbre derrière le texte ¦ De Bam hannert dem Text
+Très pâle ¦ Ganz bleech
+Pâle ¦ Bleech
+Bien visible ¦ Gutt ze gesinn
+Fabrication du faire-part… ¦ D’Annonce gëtt gemaach…
+Personne à dessiner dans l’arbre. ¦ Persoun, déi am Bam gezeechent gëtt.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ De Bam am Hannergrond vun enger Annonce fir e Familljentreffen oder eng Hochzäit
+En faire un faire-part ¦ Eng Annonce draus maachen
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Déi selwecht Astellungen, eng Annonce fir all Persoun (eng Lëscht, en Etikett) oder all Stot vun engem Familljentreffen, alles an engem eenzege PDF
+Un faire-part par personne / par foyer… ¦ Eng Annonce pro Persoun / pro Stot…
+📬 Un faire-part par personne / par foyer ¦ 📬 Eng Annonce pro Persoun / pro Stot
+📄 Fabriquer le PDF ¦ 📄 De PDF maachen
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ D’Annonce, sou wéi s du se agestallt hues, eemol fir all Persoun oder all Stot. All d’Annoncen sinn an engem eenzege PDF, prett fir ze drécken.
+Une liste de personnes ¦ Eng Lëscht vu Persounen
+Les personnes d’une étiquette ¦ D’Persoune vun engem Etikett
+Les foyers d’une cousinade ¦ D’Stéit vun engem Familljentreffen
+La cousinade (les foyers invités) ¦ D’Familljentreffen (déi invitéiert Stéit)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ An de Felder vun der Annonce gi dës Wierder fir jiddereen ersat:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (Familljentreffen: och {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Den Numm vun der Persoun (oder vum Stot) uewen op all Annonce
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Och vun der Fiche vu jidderengem ausfëllen (Nimm, Datumen, Plazen)
+L’enveloppe de chacun porte son adresse. ¦ Op der Enveloppe vu jidderengem steet seng Adress.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ Keen invitéierte Stot an dësem Familljentreffen: kräiz fir d’éischt Gäscht un.
+Fabrication de {n} faire-part… ¦ {n} Annonce(n) gi gemaach…
+{i} sur {n}… ¦ {i} vun {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ {n} Annonce(n) an engem eenzege PDF ({p} Säiten).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ D’Vektorzeechnung ass net gelueden: de PDF kann net gemaach ginn.
+Une action de la Retouche ¦ Eng Aktioun vun der Retouche
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Eng Aktioun, déi an der Retouche vu Fotoe gespäichert ass (Fichier → Aktiounen), op all Bild.
+aucune action choisie ¦ keng Aktioun gewielt
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ D’Retouche vu Fotoen ass net gelueden: d’Aktioun „{name}“ kann net gemaach ginn.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ D’Aktioun „{name}“ vun der Retouche huet näischt erginn.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ D’Retouche vu Fotoen ass net gelueden: dëse Schrëtt kann net gemaach ginn.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ Keng Aktioun an der Retouche gespäichert. Maach eng Foto an der Retouche op, dann Fichier → Aktiounen, fir eng ze späicheren.
+L’action ¦ D’Aktioun
+Choisir une action… ¦ Eng Aktioun wielen…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Eng Aktioun, déi an der Retouche vu Fotoe gespäichert ass, op all Bild vun der Serie gemaach.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ D’Biller, déi dës Serie an de Medie gespäichert huet: eng Diashow, eng Montage…
+Traitement par lot ¦ Veraarbechtung a Serie
+{x} introuvable dans les médias. ¦ {x} net an de Medie fonnt.
+Ouvrir cette image dans la Retouche des photos ¦ Dëst Bild an der Retouche vu Fotoen opmaachen
+Retoucher ¦ Retouchéieren
+Envoyer cette image vers un autre outil ¦ Dëst Bild an en aneren Tool schécken
+📤 Envoyer le tableau en image vers… ¦ 📤 D’Tabell als Bild schécken un…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ D’Zeechnung geet an en aneren Tool: e Buch vun der Säitegestaltung, eng Säit vu mengem Site, d’Vektorzeechnung…
+Créer et envoyer vers… ¦ Erstellen a schécken un…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Eng Vektorzeechnung asetzen (Bam, Kaart, Wopen…)…
+Dessin vectoriel placé ¦ Vektorzeechnung agesat
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ „{name}“ agesat: wann se an der Vektorzeechnung geännert gëtt, gëtt se hei aktualiséiert („↻ Aktualiséieren“).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Vektorzeechnung <b>verlinkt</b>{state}: wann se an der Vektorzeechnung geännert gëtt, gëtt se hei nei gezeechent („Aktualiséieren“).
+✎ Modifier le dessin ¦ ✎ D’Zeechnung änneren
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ D’Zeechnung bleift wéi se ass a follegt d’Vektorzeechnung net méi
+Dessin détaché ¦ Zeechnung ofgekoppelt
+Le Dessin vectoriel n’est pas chargé. ¦ D’Vektorzeechnung ass net gelueden.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Keng Vektorzeechnung: maach eng an Lëschten → Tools fir z’änneren (Vektorzeechnung, Dekorativen Stammbam, Kaart…).
+PLACER ¦ ASETZEN
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Eng Vektorzeechnung (Bam, Kaart, Wopen…)
+Placer ce dessin ¦ Dës Zeechnung asetzen
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ D’Zeechnung bleift verlinkt: wann se an der Vektorzeechnung geännert gëtt, gëtt se am Buch aktualiséiert („↻ Aktualiséieren“). Se bleift schaarf an alle Gréissten.
+Choisis un dessin. ¦ Wiel eng Zeechnung.
+Le dessin n’a pas pu être lu. ¦ D’Zeechnung konnt net gelies ginn.
+📐 Mettre dans un livre ¦ 📐 An e Buch setzen
+Mettre dans le livre ¦ An d’Buch setzen
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ D’Zeechnung gëtt an de Medien (als Bild) gespäichert, dann op eng eege Säit gesat, an de Rännere.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ D’Bild gëtt op eng eege Säit gesat, an de Rännere. Et bleift mat der Foto an de Medie verlinkt.
+Rangement du dessin dans les médias… ¦ D’Zeechnung gëtt an de Medie gespäichert…
+Mon livre ¦ Mäi Buch
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Bild op enger neier Säit um Enn vum Buch derbäigesat: kontrolléier, dann späicher.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Neit Buch mam Bild: kontrolléier, dann späicher d’Buch.
+📱 Livre numérique (.epub) ¦ 📱 Digitaalt Buch (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ E-Reader: Kobo, Bicher, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ D’Säitegestaltung ass net gelueden: den ePub kann net gemaach ginn.
+« Envoyer vers… » n’est pas chargé. ¦ „Schécken un…“ ass net gelueden.
+Retoucher cette image ¦ Dëst Bild retouchéieren
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Dëst Bild ass net an de Medien: et kann net retouchéiert ginn.
+Image retouchée mise à jour dans le texte. ¦ Retouchéiert Bild am Text aktualiséiert.
+Un document (Traitement de texte) ¦ En Dokument (Textveraarbechtung)
+le tableau dans un texte ¦ d’Tabell an engem Text
+📝 Créer le document ¦ 📝 D’Dokument erstellen
+Image du graphique (PNG) : {kind} ¦ Bild vun der Grafik (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ D’Grafik konnt net gezeechent ginn.
+Image du graphique enregistrée : {name} ¦ Bild vun der Grafik gespäichert: {name}
+La feuille est vide : rien à envoyer. ¦ D’Blat ass eidel: näischt ze schécken.
+⤓ Image du graphique (PNG) ¦ ⤓ Bild vun der Grafik (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} an d’Montage, een nom aneren.
+image ajoutée ¦ Bild derbäigesat
+images ajoutées ¦ Biller derbäigesat
+sous-titre ajouté ¦ Ënnertitel derbäigesat
+sous-titres ajoutés ¦ Ënnertitelen derbäigesat
+Le fabricant de GIF n’est pas chargé. ¦ De GIF-Generator ass net gelueden.
+🎞 GIF animé ¦ 🎞 Animéierte GIF
+sans son, petit, tourne en boucle ¦ ouni Toun, kleng, leeft an enger Schleef
+GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ De Video gëtt fir d’éischt gemaach (de Film gëtt ganz nei ofgespillt, loss d’Fënster op), dann an de Medie gespäichert.
+Fabriquer la vidéo pour l’envoyer ? ¦ De Video maache fir en ze schécken?
+Fabriquer et envoyer ¦ Maachen a schécken
+ENVOYER ¦ SCHÉCKEN
+Fabrication de la vidéo… ¦ De Video gëtt gemaach…
+La vidéo n’a pas pu être rangée dans les médias. ¦ De Video konnt net an de Medie gespäichert ginn.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ De fäerdegen Toun gëtt an de Medie gespäichert (eng Kopie), dann geschéckt.
+Envoyer le son ? ¦ Den Toun schécken?
+Ranger et envoyer ¦ Späicheren a schécken
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Nach keng Transkriptioun: „⏱ Zäit asetzen“ (⌘T), dann tipp, wat gesot gëtt.
+Transcription — {name} ¦ Transkriptioun — {name}
+ (avec la transcription en sous-titres) ¦  (mat der Transkriptioun als Ënnertitelen)
+La transcription (texte) ¦ D’Transkriptioun (Text)
+Pas encore de transcription. ¦ Nach keng Transkriptioun.
+Agnès Bernauer ¦ Agnes Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 Kolonnen an Trapen an eng Reserve vu 7 Stapelen. Déi éischt Kaart op engem Ablagestapel gëtt de Startwäert vun alle véier; et gëtt erof gebaut an ofwiesselnd rout a schwaarz, de Kinnek kënnt op d’Ass. De Stapel leet eng Kaart op all Stapel vun der Reserve; eng eidel Kolonn hëlt d’Kaart direkt ënner dem Startwäert.
+Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike, wou een op all Kaartefaarf ausser seng eegen erof baut; eng eidel Kolonn hëlt all Kaart. De Stapel gëtt nëmmen eemol duerchgaang.
+Pas seul ¦ Net eleng
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 Kolonne mat enger eenzeger Kaart; et gëtt erof gebaut an ofwiesselnd rout a schwaarz, eng eidel Kolonn hëlt all Kaart. De Stapel gëtt eng Kaart no der anerer ëmgedréint a nëmmen eemol duerchgaang.
+Les impasses ¦ D’Sakgaassen
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ D’Assen leien am Viraus; 6 Kolonne vun 3 Kaarten (zwou verstoppt). Et gëtt erof gebaut an ofwiesselnd rout a schwaarz, eng eidel Kolonn hëlt all Kaart; de Stapel gëtt nach eemol duerchgaang.
+Huit fois huit ¦ Aacht mol aacht
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Zwee Spiller, 8 Kolonne vun 8 siichtbare Kaarten; et gëtt erof gebaut an ofwiesselnd rout a schwaarz, eng eidel Kolonn hëlt all Kaart. De Stapel gëtt nach zweemol duerchgaang.
+Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 Kolonnen an Trapen wéi bei Klondike; et gëtt erof gebaut an ofwiesselnd rout a schwaarz a ganz Reie ginn verréckelt. De Stapel leet eng Kaart op all Kolonn.
+Alternance ¦ Ofwiesselung
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Zwee Spiller, 7 Kolonne vu 7 Kaarten, all zweet verstoppt. Et gëtt erof gebaut an ofwiesselnd rout a schwaarz a ganz Reie ginn verréckelt; eng eidel Kolonn hëlt all Kaart. De Stapel gëtt nëmmen eemol duerchgaang.
+La harpe ¦ D’Harf
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Zwee Spiller, 9 Kolonnen an Trapen; et gëtt erof gebaut an ofwiesselnd rout a schwaarz. De Stapel gëtt eng Kaart no der anerer ëmgedréint an nach dräimol duerchgaang.
+La grande harpe ¦ Déi grouss Harf
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Zwee Spiller, 10 Kolonnen an Trapen; et gëtt erof gebaut an ofwiesselnd rout a schwaarz. De Stapel gëtt eng Kaart no der anerer ëmgedréint a nëmmen eemol duerchgaang.
+Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ Eng Reserve vun 13 Kaarten a 4 Kolonnen; d’Ablagestapele fänke beim Ass un. Et gëtt an der selwechter Kaartefaarf erof gebaut, eng Kaart no der anerer; eng eidel Kolonn gëtt mat der Reserve gefëllt. De Stapel gëtt nach eemol duerchgaang.
+Le crapaud américain ¦ Déi amerikanesch Mouk
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Zwee Spiller, eng Reserve vun 20 Kaarten an 8 Kolonnen. Déi éischt Kaart op engem Ablagestapel gëtt de Startwäert vun allen aacht; et gëtt an der selwechter Kaartefaarf erof gebaut, de Kinnek kënnt op d’Ass. Eng eidel Kolonn gëtt mat der Reserve gefëllt; de Stapel gëtt nach eemol duerchgaang.
+Canfield bigarré ¦ Bonte Canfield
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Zwee Spiller: d’Assen leien am Viraus, eng Reserve vu 14 Kaarten a 5 Kolonnen. Et gëtt erof gebaut an ofwiesselnd rout a schwaarz; eng eidel Kolonn gëtt mat der Reserve gefëllt. De Stapel gëtt dräi Kaarten op eemol ëmgedréint an nach zweemol duerchgaang.
+La duchesse ¦ D’Herzogin
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Véier Reservestapele vun 3 Kaarten a 4 Kolonne mat enger Kaart. Déi éischt Kaart op engem Ablagestapel gëtt de Startwäert vun alle véier; et gëtt erof gebaut an ofwiesselnd rout a schwaarz, de Kinnek kënnt op d’Ass. Eng eidel Kolonn hëlt all Kaart; de Stapel gëtt nach eemol duerchgaang.
+La porte ¦ D’Dier
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Zwee Reservestapele vu 5 Kaarten (d’Flilleke vun der Dier) an 8 Kolonne mat enger Kaart. Et gëtt erof gebaut an ofwiesselnd rout a schwaarz a ganz Reie ginn verréckelt; eng eidel Kolonn hëlt all Kaart. De Stapel gëtt nëmmen eemol duerchgaang.
+Le pingouin ¦ De Pinguin
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Déi éischt Kaart gëtt de Startwäert vun den Ablagestapelen, an déi dräi aner vum selwechte Wäert ginn direkt drop. 7 Kolonne vu 7, 7 fräi Zellen; et gëtt an der selwechter Kaartefaarf erof gebaut, de Kinnek kënnt op d’Ass. Eng eidel Kolonn hëlt d’Kaart direkt ënner dem Startwäert.
+Baker’s Game (Roi seul) ¦ Baker’s Game (nëmme Kinnek)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (an der selwechter Kaartefaarf erof bauen, 4 fräi Zellen), mee eng eidel Kolonn hëlt nëmmen e Kinnek.
+Seahaven détendu ¦ Entspaanten Seahaven
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, mee eng gutt zortéiert Rei an der selwechter Kaartefaarf gëtt op eemol verréckelt, egal wéi laang se ass.
+Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Zwee Spiller, 10 Kolonne vun 10 siichtbare Kaarten a 4 fräi Zellen, déi scho besat sinn; et gëtt erof gebaut an ofwiesselnd rout a schwaarz, eng Kaart no der anerer (oder eng Rei, wann d’fräi Zellen et erlaben).
+Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Zwee Spiller, 14 Kolonne vu 7 Kaarten an 8 fräi Zellen, vun deenen 6 scho besat sinn; et gëtt an der selwechter Kaartefaarf erof gebaut, eng eidel Kolonn hëlt nëmmen e Kinnek.
+Sept par quatre ¦ Siwen mol véier
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell mat 7 Kolonnen a 4 fräien Zellen: d’Kolonne sinn méi héich.
+Sept par cinq ¦ Siwen mol fënnef
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell mat 7 Kolonnen a 5 fräien Zellen.
+FreeCell défi ¦ FreeCell Challenge
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, mee d’Assen an d’Zweeër sinn ganz ënnen an de Kolonnen, ënner allen anere Kaarten.
+FreeCell super défi ¦ FreeCell Super-Challenge
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell Challenge (d’Assen an d’Zweeër ënnen an de Kolonnen), an eng eidel Kolonn hëlt nëmmen e Kinnek.
+Le scarabée ¦ De Kiewerlek
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Scorpion ouni Stapel: all 52 Kaarte sinn a 7 Kolonne siichtbar. Et gëtt an der selwechter Kaartefaarf erof gebaut an all Grupp gëtt verréckelt; eng eidel Kolonn hëlt nëmmen e Kinnek. Eng komplett Rei vum Kinnek bis zum Ass geet ewech.
+Queue de scorpion ¦ Skorpiounsschwanz
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Wéi Scorpion (7 Kolonne vu 7, all Grupp gëtt verréckelt), mee et gëtt erof gebaut an ofwiesselnd rout a schwaarz an d’Kaarte ginn op d’Ablagestapele vum Ass bis zum Kinnek.
+Scorpion double ¦ Duebele Scorpion
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Zwee Spiller, 10 Kolonnen, alles gëtt verdeelt (déi éischt fënnef Kolonne verstoppen 4 Kaarten). Et gëtt an der selwechter Kaartefaarf erof gebaut an all Grupp gëtt verréckelt; eng komplett Rei vum Kinnek bis zum Ass geet ewech.
+Motif de divorce ¦ Scheedungsgrond
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Zwee Spiller, 10 Kolonne vu 5 siichtbare Kaarten. Et gëtt erof gebaut ouni op d’Faarwen ze kucken; nëmme Reien aus enger Kaartefaarf ginn zesumme verréckelt; eng komplett Rei vum Kinnek bis zum Ass geet ewech. De Stapel leet eng Kaart op all Kolonn, déi net eidel ass.
+La tarentule ¦ D’Tarantel
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ D’Spann mat véier Faarwen, mee eng Rei, déi an der selwechter Téin (rout oder schwaarz) erof geet, gëtt op eemol verréckelt. Eng komplett Rei vum Kinnek bis zum Ass an enger Kaartefaarf geet ewech.
+Araignée à découvert ¦ Opgedeckt Spann
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ D’Spann mat véier Faarwen, mee all d’Kaarte sinn vun Ufank un siichtbar.
+La harpe de Milligan ¦ D’Harf vum Milligan
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Zwee Spiller, 8 Kolonnen an Trapen; et gëtt erof gebaut an ofwiesselnd rout a schwaarz a ganz Reie ginn verréckelt. Eng eidel Kolonn hëlt nëmmen e Kinnek; de Stapel leet eng Kaart op all Kolonn. D’Ablagestapele ginn vum Ass bis zum Kinnek erop.
+La harpe de Lexington ¦ D’Harf vu Lexington
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ D’Harf vum Milligan (zwee Spiller, 8 Kolonnen an Trapen, de Stapel leet eng Kaart op all Kolonn), mee all Grupp vu siichtbare Kaarte gëtt verréckelt.
+Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ D’Harf vu Lexington mat alle Kaarte siichtbar: all Grupp gëtt verréckelt, de Stapel leet eng Kaart op all Kolonn.
+Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ D’Harf vum Milligan mat alle Kaarte siichtbar, an eng eidel Kolonn hëlt all Kaart.
+Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Zwee Spiller, 8 Kolonne mat enger Kaart; de Stapel leet eng Kaart op all Kolonn. Et gëtt erof gebaut an ofwiesselnd rout a schwaarz a ganz Reie ginn verréckelt; eng eidel Kolonn hëlt nëmmen e Kinnek. Wann de Stapel eidel ass, geet eng fräi Zell op, fir eng Kaart op d’Säit ze leeën.
+Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Zwee Spiller, 8 Kolonne mat enger Kaart; de Stapel leet eng Kaart op all Kolonn. Et gëtt erof gebaut an ofwiesselnd rout a schwaarz an eng eidel Kolonn hëlt all Kaart.
+L’île d’Elbe ¦ D’Insel Elba
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Zwee Spiller, 10 Kolonne vu 5 Kaarten (véier verstoppt); et gëtt erof gebaut an ofwiesselnd rout a schwaarz a ganz Reie ginn verréckelt. Eng eidel Kolonn hëlt nëmmen e Kinnek; de Stapel leet eng Kaart op all Kolonn.
+Le mont Olympe ¦ Den Olymp
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Zwee Spiller: d’Assen an d’Zweeër leien am Viraus, an d’Ablagestapele ginn zwee an zwee an der selwechter Kaartefaarf erop (Ass, 3, 5… oder 2, 4, 6…). 9 Kolonnen; et gëtt zwee an zwee an der selwechter Kaartefaarf erof gebaut. De Stapel leet eng Kaart op all Kolonn.
+La patience australienne ¦ Déi australesch Patience
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 Kolonne vu 4 siichtbare Kaarten; et gëtt an der selwechter Kaartefaarf erof gebaut an all Grupp vu siichtbare Kaarte gëtt verréckelt. Eng eidel Kolonn hëlt nëmmen e Kinnek; de Stapel gëtt nëmmen eemol duerchgaang.
+Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Déi australesch Patience, mee de Stapel gëtt nach eemol duerchgaang.
+Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Déi australesch Patience, mee eng eidel Kolonn hëlt all Kaart.
+Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 Kolonnen an Trapen; et gëtt an der selwechter Kaartefaarf erof gebaut an all Grupp vu siichtbare Kaarte gëtt verréckelt. De Stapel leet eng Kaart op all Kolonn.
+La discipline chinoise ¦ Déi chinesesch Disziplin
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 Kolonne vu 7 Kaarten (dräi verstoppt, ausser an der éischter); et gëtt erof gebaut an ofwiesselnd rout a schwaarz an all Grupp vu siichtbare Kaarte gëtt verréckelt. Déi lescht 3 Kaarte ginn op déi éischt dräi Kolonnen.
+Solitaire russe double ¦ Duebel russesch Patience
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Zwee Spiller, 10 Kolonnen, 8 Ablagestapelen; et gëtt an der selwechter Kaartefaarf erof gebaut an all Grupp vu siichtbare Kaarte gëtt verréckelt.
+Ali Baba ¦ Ali Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Een eenzegt Spill: d’Assen leien am Viraus, 10 Kolonne vu 4 siichtbare Kaarten. Et gëtt an der selwechter Kaartefaarf erof gebaut a ganz Reie ginn verréckelt; de Stapel gëtt nëmmen eemol duerchgaang.
+Cassim ¦ Cassim
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Een eenzegt Spill: d’Assen leien am Viraus, 7 Kolonne vun 3 siichtbare Kaarten. Et gëtt an der selwechter Kaartefaarf erof gebaut a ganz Reie ginn verréckelt; de Stapel gëtt sou dacks duerchgaang, wéi s du wëlls.
+Rang et file ¦ Rang a Rei
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ De Keeser (zwee Spiller, 10 Kolonne vu 4 Kaarten, dovun 3 verstoppt, ofwiesselnd rout a schwaarz), mee ganz Reie ginn verréckelt.
+Les As affairés ¦ Déi beschäftegt Assen
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Zwee Spiller, 12 Kolonne mat enger Kaart; et gëtt an der selwechter Kaartefaarf erof gebaut, eng Kaart no der anerer. De Stapel gëtt nëmmen eemol duerchgaang.
+La cour ¦ De Haff
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Zwee Spiller, 12 Kolonne mat enger Kaart; et gëtt an der selwechter Kaartefaarf erof gebaut a ganz Reie ginn verréckelt. De Stapel gëtt nëmmen eemol duerchgaang.
+Le carré de Napoléon ¦ De Karree vum Napoleon
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Zwee Spiller, 12 Kolonne vu 4 siichtbare Kaarten; et gëtt an der selwechter Kaartefaarf erof gebaut a ganz Reie ginn verréckelt. De Stapel gëtt nëmmen eemol duerchgaang.
+L’exil de Napoléon ¦ Den Exil vum Napoleon
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Déi véierzeg Déif, wou ouni op d’Faarwen ze kucken erof gebaut gëtt, eng Kaart no der anerer. De Stapel gëtt nëmmen eemol duerchgaang.
+Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Zwee Spiller: déi aacht Zweeër leien am Viraus, an d’Ablagestapele ginn an der selwechter Kaartefaarf bis zum Ass erop. 10 Kolonne mat enger Kaart; et gëtt an der selwechter Kaartefaarf erof gebaut (d’Ass op den Zwee, de Kinnek op d’Ass), eng Kaart no der anerer. De Stapel gëtt nëmmen eemol duerchgaang.
+La lune décroissante ¦ Den ofhuelende Mound
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Zwee Spiller, 13 Kolonne vu 4 siichtbare Kaarten; et gëtt an der selwechter Kaartefaarf erof gebaut a ganz Reie ginn verréckelt. De Stapel gëtt nëmmen eemol duerchgaang.
+Les cinquante fameux ¦ Déi berühmte Fofzeg
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Déi véierzeg Déif mat 5 Kaarte pro Kolonn: zwee Spiller, 10 Kolonne vu 5, selwecht Kaartefaarf, eng Kaart no der anerer. De Stapel gëtt nëmmen eemol duerchgaang.
+Quarante-neuf ¦ Néngavéierzeg
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Zwee Spiller, 7 Kolonne vu 7 siichtbare Kaarten; et gëtt erof gebaut an ofwiesselnd rout a schwaarz, eng Kaart no der anerer. De Stapel gëtt nëmmen eemol duerchgaang.
+Sans limite ¦ Ouni Limit
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Déi véierzeg Déif, mee de Stapel gëtt sou dacks duerchgaang, wéi s du wëlls.
+Les petits quarante ¦ Déi kleng Véierzeg
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Déi véierzeg Déif, wou ouni op d’Faarwen ze kucken erof gebaut gëtt a ganz Reie verréckelt ginn; de Stapel gëtt dräi Kaarten op eemol ëmgedréint an nach dräimol duerchgaang.
+Le zèbre ¦ D’Zebra
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Zwee Spiller, d’Assen am Viraus geluecht, 8 Kolonne mat enger Kaart; et gëtt erof gebaut an ofwiesselnd rout a schwaarz, eng Kaart no der anerer. De Stapel gëtt nach eemol duerchgaang.
+Le congrès ¦ De Kongress
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Zwee Spiller, 8 Kolonne mat enger Kaart; et gëtt ouni op d’Faarwen ze kucken erof gebaut, eng Kaart no der anerer. De Stapel gëtt nëmmen eemol duerchgaang.
+Le parlement ¦ D’Parlament
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ De Kongress (zwee Spiller, 8 Kolonne mat enger Kaart, et gëtt ouni op d’Faarwen ze kucken erof gebaut), mat den Assen am Viraus geluecht.
+Pair et impair ¦ Gerued an ongerued
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Zwee Spiller: een Ass an een Zwee vun all Kaartefaarf leien am Viraus, an d’Ablagestapele ginn zwee an zwee an hirer Faarf erop (Ass, 3, 5… Kinnek, 2, 4… oder 2, 4… Dame, Ass, 3…). 9 Plaze mat enger Kaart, op déi net gebaut gëtt; eng eidel Plaz hëlt all Kaart. De Stapel gëtt nach eemol duerchgaang.
+Le cotillon royal ¦ De kinneklechen Cotillon
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Zwee Spiller: een Ass an een Zwee vun all Kaartefaarf leien am Viraus, an d’Ablagestapele ginn zwee an zwee an hirer Faarf erop. Véier Reservestapele vun 3 Kaarten (nëmmen déi iewescht gëtt gespillt) a 16 Plaze mat enger Kaart, op déi net gebaut gëtt; eng eidel Plaz hëlt all Kaart. De Stapel gëtt nëmmen eemol duerchgaang.
+Le treize porte-bonheur ¦ Déi glécklech Dräizéng
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 Kolonne vu 4 siichtbare Kaarten; et gëtt ouni op d’Faarwen ze kucken erof gebaut, eng Kaart no der anerer; eng eidel Kolonn bleift eidel.
+La patience portugaise ¦ Déi portugisesch Patience
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 Kolonne vu 4 siichtbare Kaarten; et gëtt ouni op d’Faarwen ze kucken erof gebaut, eng Kaart no der anerer; nëmmen e Kinnek kënnt an eng eidel Kolonn.
+Bonne mesure ¦ Gutt Moossen
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Zwee Assen leien am Viraus; 10 Kolonne vu 5 siichtbare Kaarten. Et gëtt ouni op d’Faarwen ze kucken erof gebaut, eng Kaart no der anerer; eng eidel Kolonn hëlt all Kaart.
+La cruelle ¦ Déi Grausam
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ D’Assen leien am Viraus; 12 Stapele vu 4 Kaarten. Et gëtt an der selwechter Kaartefaarf erof gebaut, eng Kaart no der anerer; eng eidel Plaz bleift eidel. Sou dacks wéi s du wëlls, ginn d’Stapelen an der Rei opgeraf, ouni ze mëschen, a vu véier nei verdeelt.
+La persévérance ¦ D’Ausdauer
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Wéi Déi Grausam (d’Assen am Viraus geluecht, 12 Stapele vu 4, selwecht Kaartefaarf), mee ganz Reie ginn verréckelt an et gëtt nëmmen zweemol opgeraf.
+L’éventail en vagues ¦ De Fächer a Wellen
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 Stapele vu 4 Kaarten, d’Assen bleiwe mat deenen anere gemëscht; et gëtt an der selwechter Kaartefaarf erof gebaut, eng Kaart no der anerer; eng eidel Plaz bleift eidel. Sou dacks wéi s du wëlls, ginn d’Stapelen an der Rei opgeraf, ouni ze mëschen, a vu véier nei verdeelt.
+L’éventail en boîte ¦ De Fächer an der Këscht
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ D’Assen leien am Viraus; 16 Fächere vun 3 Kaarten. Et gëtt erof gebaut an ofwiesselnd rout a schwaarz, eng Kaart no der anerer; nëmmen e Kinnek kënnt op eng eidel Plaz.
+L’éventail fascinant ¦ De faszinéierende Fächer
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ La Belle Lucie (17 Fächere vun 3 Kaarten), wou erof gebaut gëtt an ofwiesselnd rout a schwaarz, mat sechs Neiverdeelungen.
+La lampe de minuit ¦ D’Mëtternuechtslut
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ La Belle Lucie (17 Fächere vun 3 Kaarten), wou erof gebaut gëtt an ofwiesselnd rout a schwaarz, mat zwou Neiverdeelungen.
+Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 Fächere vun 3 Kaarten; et geet ee Rang erop oder erof ouni op d’Faarwen ze kucken, eng Kaart no der anerer, an e Fächer hält ni méi wéi 3 Kaarten. Keng Neiverdeelung.
+La maison dans les bois ¦ D’Haus am Bësch
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Zwee Spiller, 35 Fächere vun 3 Kaarten; et geet ee Rang erop oder erof an der selwechter Kaartefaarf, eng Kaart no der anerer. Eng eidel Plaz bleift eidel.
+La maison sur la colline ¦ D’Haus um Hiwwel
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ D’Haus am Bësch (zwee Spiller, 35 Fächeren), mee véier Ablagestapele ginn vum Ass bis zum Kinnek erop a véier aner vum Kinnek bis zum Ass erof.
+Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ D’Assen leien am Viraus; 13 Kolonnen (4 vun 3 Kaarten, 9 vu 4). D’Ablagestapele vun den Assen ginn erop, déi vun de Kinneken erof, an der selwechter Kaartefaarf. Um Tableau geet et erop oder erof an der selwechter Kaartefaarf, eng Kaart no der anerer; eng eidel Kolonn bleift eidel.
+Le cadran du grand-père ¦ D’Grousspapp-Auer
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 Ablagestapele wéi d’Stonnen op enger Auer, déi mat 2♥, 3♠, 4♦, 5♣… bis zum Kinnek ♣ ufänken an an der selwechter Kaartefaarf erop ginn (de Kinnek geet op d’Ass). 8 Kolonne vu 5 Kaarten; et gëtt ouni op d’Faarwen ze kucken erof gebaut, eng Kaart no der anerer; eng eidel Kolonn hëlt all Kaart.
+Le mur de pierre ¦ D’Steemauer
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 Kolonne vu 6 Kaarten, all zweet verstoppt, an e Bouquet vu 16 Kaarten, wou een all Kaart huele kann. Et gëtt erof gebaut an ofwiesselnd rout a schwaarz a ganz Reie ginn verréckelt; eng eidel Kolonn hëlt all Kaart.
+La fleur sauvage ¦ D’Wëllblumm
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ De Bléiegaart (6 Kolonne vu 6 an e Bouquet vu 16 Kaarten), mee ganz Reie ginn verréckelt.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 Kolonnen, all siichtbar. Déi éischt Kaart op engem Ablagestapel gëtt de Startwäert vun alle véier (de Kinnek geet op d’Ass). Et geet erop oder erof an der selwechter Kaartefaarf, eng Kaart no der anerer, an de Kinnek beréiert d’Ass.
+La place forte ¦ D’Festung
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Stroossen a Gässelcher (8 Kolonnen, et gëtt ouni op d’Faarwen ze kucken erof gebaut), mat enger fräier Zell.
+Le fort ¦ D’Fort
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Stroossen a Gässelcher (8 Kolonnen, et gëtt ouni op d’Faarwen ze kucken erof gebaut), mat zwou fräien Zellen.
+L’art du siège ¦ D’Konscht vun der Belagerung
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ D’belagert Schlass (d’Assen am Viraus geluecht, 8 Kolonne vu 6), mat enger fräier Zell.
+La toile de Pénélope ¦ Dem Penelope säi Gewief
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ D’belagert Schlass (d’Assen am Viraus geluecht, 8 Kolonne vu 6), mee nëmmen e Kinnek kënnt an eng eidel Kolonn.
+La citadelle ¦ D’Zitadell
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ D’belagert Schlass, mee beim Verdeelen geet all Kaart, déi op en Ablagestapel ka goen, direkt dohinner.
+Les rois exilés ¦ D’exiléiert Kinneken
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ D’Zitadell (d’Kaarten, déi erop kënnen, ginn beim Verdeelen dohinner), mee nëmmen e Kinnek kënnt an eng eidel Kolonn.
+Le bastion ¦ D’Bastioun
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 Kolonne vu 5 Kaarten a 2 fräi Zellen, déi scho besat sinn; et geet erop oder erof an der selwechter Kaartefaarf, eng Kaart no der anerer; eng eidel Kolonn hëlt all Kaart.
+La boîte à thé ¦ D’Téisdous
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 Kolonne vu 6 oder 7 Kaarten, alles ass siichtbar; et gëtt ouni op d’Faarwen ze kucken erof gebaut a ganz Reie ginn verréckelt; eng eidel Kolonn hëlt all Kaart.
+La boîte à thé américaine ¦ D’amerikanesch Téisdous
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 Kolonne vu 6 oder 7 Kaarten, alles ass siichtbar; et gëtt erof gebaut an ofwiesselnd rout a schwaarz a ganz Reie ginn verréckelt; eng eidel Kolonn hëlt all Kaart.
+La boîte à thé anglaise ¦ D’englesch Téisdous
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 Kolonne vu 6 oder 7 Kaarten, alles ass siichtbar; et gëtt erof gebaut an ofwiesselnd rout a schwaarz, eng Kaart no der anerer; nëmmen e Kinnek kënnt an eng eidel Kolonn.
+Les trois sommets stricts ¦ Déi strikt dräi Spëtzten
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Déi dräi Spëtzten, mee de Kinnek an d’Ass follegen net openeen: d’Partie ass méi schwéier.
+Golf double ¦ Duebele Golf
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf mat zwee Spiller: 9 Kolonne vu 7 Kaarten. Schéck eng Kaart, déi direkt driwwer oder drënner ass, op den Ablag; näischt kënnt op e Kinnek.
+As en haut (5 colonnes) ¦ Ass uewen (5 Kolonnen)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Ass uewen mat 5 Kolonnen: huel eng Kaart ewech, wann eng aner Kolonn eng méi héich Kaart vun der selwechter Kaartefaarf weist (d’Ass ass déi héchst). Gewonnen, wann nëmmen déi 4 Assen iwwreg bleiwen.
+La baronne ¦ D’Baronin
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 Stapelen: huel e Kinnek eleng ewech, oder zwou iewescht Kaarten, déi 13 maachen (Bauer 11, Dame 12). De Stapel leet eng Kaart op all Stapel.
+Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ All gezunnen Kaart geet op en Ablagestapel oder op ee vun de 4 Waardestapelen. D’Ablagestapele fänke mat engem Ass un a ginn ee fir ee erop, ouni op d’Faarwen ze kucken.
+Le chat dans le coin ¦ D’Kaz am Eck
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ D’Assen leien am Viraus a ginn ee fir ee an hirer Téin erop (rout op rout, schwaarz op schwaarz). All gezunnen Kaart geet op en Ablagestapel oder op ee vun de 4 Waardestapelen; eemol ginn d’Stapelen opgeraf, fir nach eng Kéier ze zéien.
+La stratégie ¦ D’Strategie
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ All gezunnen Kaart geet op ee vun den 8 Waardestapelen; nëmmen d’Assen ginn direkt erop. Wann de Stapel eidel ass, ginn déi iewescht Kaarte vun de Stapelen erop geluecht, ee fir ee an der selwechter Kaartefaarf.
+Gizeh ¦ Gizeh
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ D’Pyramid ouni Stapel: déi aner 24 Kaarte sinn an 3 Reie siichtbar a kënnen all geholl ginn. Huel d’Pairen ewech, déi 13 maachen (Bauer 11, Dame 12; e Kinnek geet eleng).
+Toutânkhamon ¦ Tutanchamun
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ D’Pyramid, mee de Stapel gëtt dräi Kaarten op eemol ëmgedréint (nëmmen déi lescht gëtt gespillt) a sou dacks duerchgaang, wéi s du wëlls.
+La lune bleue ¦ De bloe Mound
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, mee d’Assen ginn un den Ufank vun de Reien: all Rei muss vum Ass bis zum Kinnek an enger Kaartefaarf zortéiert ginn. E Lach hëlt d’Kaart vun der selwechter Faarf direkt iwwer hirem lénksen Noper. Zweemol kann een dat, wat net zortéiert ass, ophuelen an nei verdeelen.
+La lune rouge ¦ De roude Mound
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ De bloe Mound, mee d’Assen leien am Viraus um Ufank vun de Reien an d’Lächer sinn vun Ufank un um Enn vun de Reien.
+Le voisin ¦ Den Noper
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ E Gitter vu 5 × 5: huel zwou Kaarten ewech, déi sech beréieren (och diagonal) an 13 maachen (Bauer 11, Dame 12); e Kinnek geet eleng. Dann dréck d’Gitter zesummen.
+Isabelle ¦ Isabelle
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 Kolonne vu 4 Kaarten (nëmmen déi lescht ass siichtbar): huel zwou Kaarte vum selwechte Wäert ënnen aus de Kolonnen ewech. E reine Glécksspill, fir sech ze entspanen.
+Quatorze en colonnes ¦ Véierzéng a Kolonnen
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 Kolonne mat alle Kaarte siichtbar: huel zwou Kaarten ënnen aus de Kolonnen ewech, déi 14 maachen (Bauer 11, Dame 12, Kinnek 13).
+Ramassé et redistribué, sans mélanger. ¦ Opgeraf an nei verdeelt, ouni ze mëschen.
+Les tas d’attente sont ramassés dans la pioche. ¦ D’Waardestapele ginn an de Stapel opgeraf.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Maach d’Spill op, wiel „🂠 Patiencen (Kaartespiller)“ an „Spill“, dann d’Spill ënner 233 Patiencen no Famill zortéiert (Klondike, FreeCell, Spann, Yukon, Déi véierzeg Déif, Schlässer a Gäert, Pairspiller). Zéi eng Kaart (oder eng Rei) op en anere Stapel, oder klick se an dann do, wou se hi soll; Duebelklick: op en Ablagestapel; Klick op de Stapel: zéien. An de Pairspiller (Pyramid, Eelef, Dräizéng…) klick d’Kaarten, déi zesummegehéieren.
+Quelles autres patiences sont arrivées ensuite ? ¦ Wéi eng aner Patiencen sinn duerno komm?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Honnertzwou klassesch Patiencen derbäi, all mat hire Reegelen an „📖 D’Reegelen“ vun der Partie. Famill Klondike a Canfield: Agnes Bernauer, Thumb and Pouch, Net eleng, D’Sakgaassen, Aacht mol aacht, Spike, Ofwiesselung, D’Harf, Déi grouss Harf, Acme, Déi amerikanesch Mouk, Bonte Canfield, D’Herzogin, D’Dier. Mat fräien Zellen: De Pinguin, Baker’s Game (nëmme Kinnek), Entspaanten Seahaven, Repair, Ocean Towers, Siwen mol véier, Siwen mol fënnef, FreeCell Challenge, FreeCell Super-Challenge. Spannen an Zigeiner: De Kiewerlek, Skorpiounsschwanz, Duebele Scorpion, Scheedungsgrond, D’Tarantel, Opgedeckt Spann, D’Harf vum Milligan, D’Harf vu Lexington, Brunswick, Carlton, Miss Milligan, Millie, D’Insel Elba, Den Olymp. Yukon: Déi australesch Patience, Canberra, Raw Prawn, Rushdike, Déi chinesesch Disziplin, Duebel russesch Patience. Déi véierzeg Déif an hir Cousinen: Ali Baba, Cassim, Rang a Rei, Déi beschäftegt Assen, De Haff, De Karree vum Napoleon, Den Exil vum Napoleon, Deuces, Den ofhuelende Mound, Déi berühmte Fofzeg, Néngavéierzeg, Ouni Limit, Déi kleng Véierzeg, D’Zebra, De Kongress, D’Parlament, Gerued an ongerued, De kinneklechen Cotillon. Schlässer, Fächeren a Gäert: Déi glécklech Dräizéng, Déi portugisesch Patience, Gutt Moossen, Déi Grausam, D’Ausdauer, De Fächer a Wellen, De Fächer an der Këscht, De faszinéierende Fächer, D’Mëtternuechtslut, Shamrocks, D’Haus am Bësch, D’Haus um Hiwwel, Bisley, D’Grousspapp-Auer, D’Steemauer, D’Wëllblumm, D’Schachbriet, D’Festung, D’Fort, D’Konscht vun der Belagerung, Dem Penelope säi Gewief, D’Zitadell, D’exiléiert Kinneken, D’Bastioun, D’Téisdous (an hir amerikanesch an englesch Versioun). Pairen, Reien a Rechnungen: Déi strikt dräi Spëtzten, Duebele Golf, Ass uewen (5 Kolonnen), D’Baronin, Sir Tommy, D’Kaz am Eck, D’Strategie, Gizeh, Tutanchamun, De bloe Mound, De roude Mound, Den Noper, Isabelle a Véierzéng a Kolonnen.
+(suite) ¦ (Fortsetzung)
+.pptx : textes, images, formes, tableaux ¦ .pptx: Texter, Biller, Formen, Tabellen
+Ce texte est vide : rien à mettre en diapositives. ¦ Dësen Text ass eidel: näischt fir an d’Diaen ze setzen.
+Cette image n’est pas dans les médias. ¦ Dëst Bild ass net an de Medien.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Schécken un…: d’Presentatioun als Video, an d’Videomontage oder op däi Site
+Fichier PowerPoint téléchargé. ¦ PowerPoint-Fichier erofgelueden.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ D’Presentatioun gëtt e Video ({time}), an de Medie gespäichert, dann wiels du, wouhinner en geet: d’Videomontage oder däi Site. Loss d’Fënster op, während et opgeholl gëtt.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ D’Diashow gëtt e Video ({time}), an de Medie gespäichert, dann wiels du, wouhinner en geet: d’Videomontage oder däi Site. Loss d’Fënster op, während et opgeholl gëtt.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ D’Diashow als Video, an de Medie gespäichert, dann an d’Videomontage oder op däi Site
+PowerPoint : assemblage du fichier… ¦ PowerPoint: de Fichier gëtt zesummegesat…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: Dia {n} / {total}
+PowerPoint impossible : {error} ¦ PowerPoint onméiglech: {error}
+📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 D’Presentatioun schécken
+📤 Envoyer le diaporama ¦ 📤 D’Diashow schécken
+📤 Envoyer vers… (la vidéo) ¦ 📤 Schécken un… (de Video)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Schécken un… (d’Videomontage, däi Site)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ D’Bild exportéieren (PNG, JPG, WebP, TIFF, drécken)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Exportéieren: dat retouchéiert Bild (PNG, JPG, WebP, TIFF, drécken) oder dat Virdrun / Duerno
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Dat retouchéiert Bild (PNG, JPG, WebP, TIFF, drécken)…
+🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ liicht, fir de Web
+🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ ouni Verloscht, fir ze archivéieren
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Dëse Browser kann keen WebP: wiel PNG oder JPG.
+Cette action de retouche n’existe plus. ¦ Dës Retouche-Aktioun gëtt et net méi.
+Choisis une photo à retoucher. ¦ Wiel eng Foto fir ze retouchéieren.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ D’ugewise Bild oder de Bericht an en aneren Tool schécken
+Ouvrir la photo A ou B dans la Retouche des photos ¦ D’Foto A oder B an der Retouche vu Fotoen opmaachen
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ D’ugewise Bild exportéieren, oder déi zwou Fotoe mat der Ähnlechkeet an den Notizen drécken
+Exporter l’image (ce qui est affiché)… ¦ D’Bild exportéieren (wat ugewise gëtt)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Drécken (déi zwou Fotoen, d’Ähnlechkeet, d’Notizen)…
+L’image affichée ¦ Dat ugewise Bild
+Le compte rendu (photos, ressemblance, notes) ¦ De Bericht (Fotoen, Ähnlechkeet, Notizen)
+La Retouche des photos n’est pas chargée. ¦ D’Retouche vu Fotoen ass net gelueden.
+Photo {side} — {name} ¦ Foto {side} — {name}
+Retoucher quelle photo ? ¦ Wéi eng Foto retouchéieren?
+Utiliser ¦ Benotzen
+✒️ Quel dessin ? ¦ ✒️ Wéi eng Zeechnung?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Keng Zeechnung an der Vektorzeechnung gespäichert.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Dës Zeechnung konnt net gelies ginn: maach d’Vektorzeechnung eemol op, a fänk nach eng Kéier un.
+📝 Quel document ? ¦ 📝 Wéi en Dokument?
+Aucun document dans le Traitement de texte. ¦ Keen Dokument an der Textveraarbechtung.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Biller, déi duerchlafen (‹ ›); ouni Script rutschen se mam Fanger
+Les images du diaporama ¦ D’Biller vun der Diashow
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ E Video aus denge Medien (oder aus engem Fichier: 📁 Importéieren…), mat sengen Knäppercher fir ofspillen a Vollbild
+La vidéo du site ¦ De Video vum Site
+Télécharger la vidéo ¦ De Video eroflueden
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ En Toun aus denge Medien (Zeienaussoen, Lidd…), an dat, wat een héiert, drënner geschriwwen, wann s du wëlls
+Le son du site ¦ Den Toun vum Site
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Wat een héiert (fakultativ)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Schreif oder fëg d’Transkriptioun an: si steet ënner dem Toun, fir déi, déi en net lauschtere kënnen. Loss eidel, wann s du keng wëlls.
+Ajouter le son ¦ Den Toun derbäisetzen
+Télécharger le son ¦ Den Toun eroflueden
+Ce qu’on entend ¦ Wat een héiert
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Eng vun denge Vektorzeechnungen, oder en agefüügte SVG (ouni Script a Linken no baussen)
+Un de mes dessins ¦ Eng vu menge Zeechnungen
+Dessin vectoriel → mes dessins enregistrés ¦ Vektorzeechnung → meng gespäichert Zeechnungen
+Coller un SVG ¦ En SVG afügen
+Le code <svg>…</svg> d’un dessin ¦ De <svg>…</svg>-Code vun enger Zeechnung
+📋 Coller un SVG ¦ 📋 En SVG afügen
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Fëg hei de Code vun der Zeechnung an, vun <svg> bis </svg>. D’Scripten an d’Linken no baussen ginn ewechgeholl.
+Ajouter le dessin ¦ D’Zeechnung derbäisetzen
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ En Text aus der Textveraarbechtung (e Bréif, eng Erzielung), propper fir d’Säit gemaach
+Ce document est vide. ¦ Dëst Dokument ass eidel.
+Vidéo, son, dessin et texte ¦ Video, Toun, Zeechnung an Text
+🎬 Changer la vidéo… ¦ 🎬 De Video wiesselen…
+🎧 Changer le son… ¦ 🎧 Den Toun wiesselen…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ De Fichier geet mam Site mat (Dossier medias/) beim Export a bei der Publikatioun.
+Un autre son ¦ En aneren Toun
+Une autre vidéo ¦ En anere Video
+{what} (dossier medias/) ¦ {what} (Dossier medias/)
+vidéo ou son ¦ Video oder Toun
+vidéos ou sons ¦ Videoen oder Téin
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: ze schwéier fir e Site (héchstens 90 MB pro Fichier, 300 MB am Ganzen)
+vidéo ou son pas mis ¦ Video oder Toun net agesat
+vidéos ou sons pas mis ¦ Videoen oder Téin net agesat
+Mon site web n’est pas chargé : recharge la page. ¦ Meng Websäit ass net gelueden: luet d’Säit nei.
+Mon site web ne sait pas recevoir ça. ¦ Meng Websäit kann dat net kréien.
+Ce texte est vide. ¦ Dësen Text ass eidel.
+Mon site ¦ Mäi Site
+ouvert ¦ op
+la dernière fois ¦ dat leschte Mol
+ouvert, pas encore enregistré ¦ op, nach net gespäichert
+{what} : sur quel site ? ¦ {what}: op wéi engem Site?
+Un nouveau site ¦ En neie Site
+Sur quelle page ? ¦ Op wéi enger Säit?
+Une nouvelle page… ¦ Eng nei Säit…
+📄 Nouvelle page ¦ 📄 Nei Säit
+Le nom de la page (il apparaît dans le menu) : ¦ Den Numm vun der Säit (en erschéngt am Menü):
+La vidéo ¦ De Video
+{what} est sur la page « {page} » de « {site} » ¦ {what} ass op der Säit „{page}“ vu(n) „{site}“
+vidéos WebM ¦ WebM-Videoen
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ D’iPhonen vu virun 2024 liesen en net: huel léiwer MP4 (H.264), deen jiddereen liest.
+vidéos .mov (QuickTime) ¦ .mov-Videoen (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Dacks onliesbar ausserhalb vun Apple: maach en nei als MP4 (🎬 Videomontage → Exportéieren).
+vidéos Ogg (.ogv) ¦ Ogg-Videoen (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Ni op Safari an ni op iPhone: huel léiwer MP4.
+sons Ogg (Vorbis, Opus) ¦ Ogg-Téin (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari liest se eréischt zënter 2025: huel léiwer MP3 (🎧 Toun → Exportéieren).
+sons FLAC ¦ FLAC-Téin
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Funktionéiert iwwerall, mee et ass schwéier fir e Site: MP3 luet vill méi séier.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (d’Diashow hält bei all Bild)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Funktionéiert iwwerall zënter 2019; soss lafen d’Biller duerch ouni ze halen.
+Maison par époques ¦ Haus no Epochen
+Ma carte animée ¦ Meng animéiert Kaart
+La maison au fil du temps ¦ D’Haus am Laf vun der Zäit
+Le dessin vectoriel n’est pas chargé. ¦ D’Vektorzeechnung ass net gelueden.
+Lecture de la carte… ¦ D’Kaart gëtt gelies…
+Carte introuvable ¦ Kaart net fonnt
+La maison n’est pas chargée. ¦ D’Haus ass net gelueden.
+Lecture de la maison… ¦ D’Haus gëtt gelies…
+Maison introuvable ¦ Haus net fonnt
+Le plan de cette maison est vide. ¦ De Plang vun dësem Haus ass eidel.
+Choisir une carte ¦ Eng Kaart wielen
+Chercher une carte… ¦ Eng Kaart sichen…
+{n} objets ¦ {n} Objeten
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ D’Objeten, déi Joren hunn (Reiter Eegeschafte vun der Kaart), erschéngen op hirem Datum.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Keng Kaart gespäichert: maach eng an Tools fir z’änneren → 🗺️ Kaart.
+Choisir une maison ¦ En Haus wielen
+Chercher une maison… ¦ En Haus sichen…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ All Epoch vum Haus (🕰) gëtt eng Aufnam, eng no der anerer, mat Iwwerblendung.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Keen Haus gespäichert: zeechen eent an Tools fir z’änneren → 🏠 Haus.
+Apparition des objets ¦ Objeten erschéngen
+D’un coup ¦ Op eemol
+Avance doucement ¦ Geet lues virun
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Iwwerblendung vun enger Epoch op déi aner (0 bis 0,9)
+L’année et le nom de l’époque en légende ¦ D’Joer an den Numm vun der Epoch als Legend
+(une copie de la carte) ¦ (eng Kopie vun der Kaart)
+En faire la musique ¦ Musek draus maachen
+Ce son passe en musique de fond, pour tout le film ¦ Dësen Toun gëtt Hannergrondmusek fir de ganze Film
+Voix retirée. ¦ Stëmm ewechgeholl.
+Le son est maintenant la musique du film. ¦ Den Toun ass elo d’Musek vum Film.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Den Toun ass d’Stëmm vum Film (Reiter Film). „🎵 Musek draus maachen“, fir en an den Hannergrond ze setzen.
+Animer dans le Studio ¦ Am Studio animéieren
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ De Zäitschieber spillt eleng: d’Objeten erschéngen op hirem Datum
+Le Studio d’animation n’est pas chargé. ¦ Den Animatiounsstudio ass net gelueden.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Keng Kaart gespäichert: fänk mat „＋ Nei Kaart“ un.
+Quelle carte animer ? ¦ Wéi eng Kaart animéieren?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ D’Objeten, déi Joren hunn (Reiter Eegeschaften), erschéngen op hirem Datum, vum éischte bis zum leschte Joer.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ E Film, wou den Zäitschieber eleng virugeet, vum éischte bis zum leschte Joer
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Dës Kaart ass ze schwéier, fir an e Film kopéiert ze ginn: späicher se, dann Tools fir z’änneren → 🗺️ Kaart → „🎞 Am Studio animéieren“.
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ De Plang oder d’3D-Usiicht an engem aneren Tool: Montage, Presentatioun, Säitegestaltung, Zeechnung…
+🎞 Animer les époques dans le Studio ¦ 🎞 D’Epochen am Studio animéieren
+Animer les époques dans le Studio ¦ D’Epochen am Studio animéieren
+Le plan (image) ¦ De Plang (Bild)
+La vue 3D (image) ¦ D’3D-Usiicht (Bild)
+Le plan en dessin (vectoriel, mise en page…) ¦ De Plang als Zeechnung (vektoriell, Säitegestaltung…)

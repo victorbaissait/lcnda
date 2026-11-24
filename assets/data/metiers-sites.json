@@ -1,0 +1,606 @@
+{
+ "title": "Métiers et lieux de travail (table écrite pour LCNDA)",
+ "licence": "CC0 1.0 (table écrite pour l’app)",
+ "note": "Pour chaque sorte de lieu de travail : les métiers qui y travaillaient (« jobs », mots entiers ou début de mot, sans accents) et les mots qui le reconnaissent dans le nom d’un ancien site (« sites », début de mot, sans accents). « mines » : sortes de Wikidata ; « roe » : moulins et usines à eau du ROE.",
+ "trades": [
+  {
+   "id": "tannerie",
+   "label": "une tannerie",
+   "jobs": [
+    "tanneur",
+    "tanneuse",
+    "corroyeur",
+    "megissier",
+    "chamoiseur",
+    "peaussier",
+    "cuiratier"
+   ],
+   "sites": [
+    "tannerie",
+    "tanneries",
+    "megisserie",
+    "corroierie",
+    "chamoiserie",
+    "cuirs",
+    "cuir",
+    "tannage"
+   ],
+   "roe": [
+    "tannerie"
+   ]
+  },
+  {
+   "id": "mine",
+   "label": "une mine",
+   "jobs": [
+    "mineur",
+    "houilleur",
+    "porion",
+    "herscheur",
+    "hiercheur",
+    "galibot",
+    "boiseur",
+    "piqueur",
+    "abatteur",
+    "trieuse",
+    "ouvrier mineur",
+    "mineur de fond",
+    "chef porion"
+   ],
+   "sites": [
+    "mine",
+    "mines",
+    "houillere",
+    "houilleres",
+    "charbonnage",
+    "charbonnages",
+    "extraction de houille",
+    "extraction de minerai",
+    "lavoir a charbon"
+   ],
+   "mines": [
+    "mine"
+   ]
+  },
+  {
+   "id": "carriere",
+   "label": "une carrière",
+   "jobs": [
+    "carrier",
+    "carrieur",
+    "tailleur de pierre",
+    "tailleur de pierres",
+    "ardoisier",
+    "perreyeur",
+    "plâtrier",
+    "platrier"
+   ],
+   "sites": [
+    "carriere",
+    "carrieres",
+    "ardoisiere",
+    "platriere",
+    "gypse"
+   ],
+   "mines": [
+    "carriere"
+   ]
+  },
+  {
+   "id": "forge",
+   "label": "une forge",
+   "jobs": [
+    "forgeron",
+    "marechal ferrant",
+    "taillandier",
+    "cloutier",
+    "maitre de forge",
+    "maitre de forges",
+    "forgeur",
+    "ferronnier",
+    "serrurier",
+    "fondeur",
+    "lamineur",
+    "puddleur",
+    "affineur",
+    "chaineur"
+   ],
+   "sites": [
+    "forge",
+    "forges",
+    "martinet",
+    "taillanderie",
+    "clouterie",
+    "fonderie",
+    "haut fourneau",
+    "hauts fourneaux",
+    "usine a fer",
+    "aciérie",
+    "acierie",
+    "laminoir",
+    "ferronnerie",
+    "chainerie"
+   ],
+   "roe": [
+    "forge",
+    "forges",
+    "martinet",
+    "taillanderie"
+   ]
+  },
+  {
+   "id": "verrerie",
+   "label": "une verrerie",
+   "jobs": [
+    "verrier",
+    "souffleur de verre",
+    "gentilhomme verrier",
+    "cristallier",
+    "bouteillier"
+   ],
+   "sites": [
+    "verrerie",
+    "verreries",
+    "cristallerie",
+    "four a verre"
+   ]
+  },
+  {
+   "id": "textile",
+   "label": "une filature ou un tissage",
+   "jobs": [
+    "tisserand",
+    "tisserande",
+    "tisseur",
+    "tisseuse",
+    "fileur",
+    "fileuse",
+    "filateur",
+    "drapier",
+    "cardeur",
+    "cardeuse",
+    "peigneur",
+    "ourdisseur",
+    "ourdisseuse",
+    "canut",
+    "ouvrier en soie",
+    "ouvriere en soie",
+    "devideuse",
+    "moulinier",
+    "mouliniere",
+    "bonnetier",
+    "bonnetiere",
+    "foulonnier",
+    "tondeur de draps",
+    "passementier",
+    "rubanier",
+    "dentelliere"
+   ],
+   "sites": [
+    "filature",
+    "filatures",
+    "tissage",
+    "tissages",
+    "draperie",
+    "soierie",
+    "moulinage",
+    "textile",
+    "textiles",
+    "bonneterie",
+    "foulon",
+    "teinturerie",
+    "lainage",
+    "passementerie",
+    "rubanerie"
+   ],
+   "roe": [
+    "filature",
+    "foulon"
+   ]
+  },
+  {
+   "id": "moulin",
+   "label": "un moulin",
+   "jobs": [
+    "meunier",
+    "meuniere",
+    "minotier",
+    "farinier",
+    "garde moulin",
+    "fariniere"
+   ],
+   "sites": [
+    "moulin",
+    "moulins",
+    "minoterie",
+    "minoteries"
+   ],
+   "roe": [
+    "moulin",
+    "moulins",
+    "minoterie"
+   ]
+  },
+  {
+   "id": "papeterie",
+   "label": "une papeterie",
+   "jobs": [
+    "papetier",
+    "papetiere",
+    "ouvrier papetier",
+    "maitre papetier",
+    "cartonnier"
+   ],
+   "sites": [
+    "papeterie",
+    "papeteries",
+    "moulin a papier",
+    "cartonnerie"
+   ],
+   "roe": [
+    "papeterie"
+   ]
+  },
+  {
+   "id": "tuilerie",
+   "label": "une tuilerie ou briqueterie",
+   "jobs": [
+    "tuilier",
+    "briquetier",
+    "briquetiere",
+    "tuiliere"
+   ],
+   "sites": [
+    "tuilerie",
+    "tuileries",
+    "briqueterie",
+    "briqueteries",
+    "tuilerie briqueterie"
+   ]
+  },
+  {
+   "id": "chaux",
+   "label": "un four à chaux",
+   "jobs": [
+    "chaufournier",
+    "chaufourniere"
+   ],
+   "sites": [
+    "four a chaux",
+    "fours a chaux",
+    "chaufour",
+    "chaux"
+   ]
+  },
+  {
+   "id": "brasserie",
+   "label": "une brasserie",
+   "jobs": [
+    "brasseur",
+    "brasseuse",
+    "maltier",
+    "malteur"
+   ],
+   "sites": [
+    "brasserie",
+    "brasseries",
+    "malterie"
+   ]
+  },
+  {
+   "id": "distillerie",
+   "label": "une distillerie",
+   "jobs": [
+    "distillateur",
+    "distilleur",
+    "bouilleur",
+    "liquoriste"
+   ],
+   "sites": [
+    "distillerie",
+    "distilleries"
+   ]
+  },
+  {
+   "id": "poterie",
+   "label": "une poterie ou faïencerie",
+   "jobs": [
+    "potier",
+    "potiere",
+    "faiencier",
+    "porcelainier",
+    "porcelainiere",
+    "tourneur en porcelaine",
+    "decoratrice sur porcelaine"
+   ],
+   "sites": [
+    "poterie",
+    "faiencerie",
+    "porcelaine",
+    "porcelainerie",
+    "ceramique"
+   ]
+  },
+  {
+   "id": "scierie",
+   "label": "une scierie",
+   "jobs": [
+    "scieur",
+    "scieur de long",
+    "sagard",
+    "sabotier",
+    "boisselier"
+   ],
+   "sites": [
+    "scierie",
+    "scieries",
+    "saboterie"
+   ],
+   "roe": [
+    "scierie"
+   ]
+  },
+  {
+   "id": "teinturerie",
+   "label": "une teinturerie",
+   "jobs": [
+    "teinturier",
+    "teinturiere"
+   ],
+   "sites": [
+    "teinturerie",
+    "teintureries",
+    "teinture"
+   ]
+  },
+  {
+   "id": "chapellerie",
+   "label": "une chapellerie",
+   "jobs": [
+    "chapelier",
+    "chapeliere"
+   ],
+   "sites": [
+    "chapellerie",
+    "chapelleries"
+   ]
+  },
+  {
+   "id": "armes",
+   "label": "une manufacture d’armes",
+   "jobs": [
+    "armurier",
+    "canonnier",
+    "platineur",
+    "ouvrier a la manufacture d armes"
+   ],
+   "sites": [
+    "manufacture d armes",
+    "fabrication d armes",
+    "armes",
+    "armurerie"
+   ]
+  },
+  {
+   "id": "tonnellerie",
+   "label": "une tonnellerie",
+   "jobs": [
+    "tonnelier"
+   ],
+   "sites": [
+    "tonnellerie"
+   ]
+  },
+  {
+   "id": "savonnerie",
+   "label": "une savonnerie",
+   "jobs": [
+    "savonnier"
+   ],
+   "sites": [
+    "savonnerie"
+   ]
+  },
+  {
+   "id": "corderie",
+   "label": "une corderie",
+   "jobs": [
+    "cordier"
+   ],
+   "sites": [
+    "corderie"
+   ]
+  },
+  {
+   "id": "gaz",
+   "label": "une usine à gaz",
+   "jobs": [
+    "gazier"
+   ],
+   "sites": [
+    "usine a gaz",
+    "gaz d eclairage"
+   ]
+  },
+  {
+   "id": "chandelles",
+   "label": "une fabrique de chandelles",
+   "jobs": [
+    "chandelier",
+    "ciergier",
+    "fondeur de suif"
+   ],
+   "sites": [
+    "chandelles",
+    "chandelle",
+    "fonderie de suif",
+    "ciergerie",
+    "bougies"
+   ]
+  },
+  {
+   "id": "sucrerie",
+   "label": "une sucrerie",
+   "jobs": [
+    "sucrier",
+    "raffineur"
+   ],
+   "sites": [
+    "sucrerie",
+    "raffinerie de sucre"
+   ]
+  },
+  {
+   "id": "saline",
+   "label": "une saline",
+   "jobs": [
+    "saunier",
+    "salinier",
+    "paludier"
+   ],
+   "sites": [
+    "saline",
+    "salines"
+   ]
+  },
+  {
+   "id": "imprimerie",
+   "label": "une imprimerie",
+   "jobs": [
+    "imprimeur",
+    "typographe",
+    "compositeur typographe",
+    "lithographe"
+   ],
+   "sites": [
+    "imprimerie",
+    "imprimeries",
+    "lithographie"
+   ]
+  },
+  {
+   "id": "blanchisserie",
+   "label": "une blanchisserie",
+   "jobs": [
+    "blanchisseur",
+    "blanchisseuse",
+    "repasseuse"
+   ],
+   "sites": [
+    "blanchisserie",
+    "buanderie"
+   ]
+  },
+  {
+   "id": "abattoir",
+   "label": "un abattoir",
+   "jobs": [
+    "boucher",
+    "bouchere",
+    "tueur",
+    "chevillard"
+   ],
+   "sites": [
+    "abattoir",
+    "abattoirs",
+    "tuerie"
+   ]
+  },
+  {
+   "id": "tabac",
+   "label": "une manufacture des tabacs",
+   "jobs": [
+    "cigariere",
+    "cigarier",
+    "ouvriere des tabacs",
+    "ouvrier des tabacs"
+   ],
+   "sites": [
+    "manufacture des tabacs",
+    "tabacs",
+    "tabac"
+   ]
+  },
+  {
+   "id": "chemin_de_fer",
+   "label": "des ateliers du chemin de fer",
+   "jobs": [
+    "cheminot",
+    "chauffeur de locomotive",
+    "mecanicien de locomotive"
+   ],
+   "sites": [
+    "ateliers du chemin de fer",
+    "atelier sncf",
+    "sncf",
+    "depot de locomotives",
+    "chemin de fer"
+   ]
+  }
+ ],
+ "river_jobs": [
+  {
+   "id": "batelier",
+   "jobs": [
+    "batelier",
+    "batelière",
+    "bateliere",
+    "marinier",
+    "gabarier",
+    "voiturier par eau",
+    "haleur",
+    "eclusier",
+    "pontonnier",
+    "debardeur"
+   ],
+   "line": "{p} était {job} : son travail suivait {r}."
+  },
+  {
+   "id": "flotteur",
+   "jobs": [
+    "flotteur",
+    "flotteur de bois",
+    "radelier",
+    "ravageur"
+   ],
+   "line": "{p} était {job} : le bois descendait {r}."
+  },
+  {
+   "id": "pecheur",
+   "jobs": [
+    "pecheur",
+    "pecheuse",
+    "pecheur en riviere"
+   ],
+   "line": "{p} était {job} : on pêchait dans {r}."
+  },
+  {
+   "id": "passeur",
+   "jobs": [
+    "passeur",
+    "passeuse",
+    "bacier",
+    "batelier passeur"
+   ],
+   "line": "{p} était {job} : on traversait {r} avec sa barque ou son bac."
+  },
+  {
+   "id": "lavandiere",
+   "jobs": [
+    "lavandiere",
+    "laveuse",
+    "blanchisseuse"
+   ],
+   "line": "{p} était {job} : le linge se lavait dans {r}."
+  },
+  {
+   "id": "meunier",
+   "jobs": [
+    "meunier",
+    "meuniere",
+    "minotier"
+   ],
+   "line": "{p} était {job} : la roue de son moulin tournait avec l’eau de {r}."
+  }
+ ]
+}

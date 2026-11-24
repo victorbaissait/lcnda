@@ -1,0 +1,835 @@
+fr ¦ is
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Eftir hve marga daga án frétta telst dýr „seint“? Rautt við tvöfaldan frest.
+Espèce inconnue ¦ Óþekkt tegund
+Délais par espèce changés ¦ Frestum eftir tegund breytt
+Animal (nom, bague…) ¦ Dýr (nafn, hringur…)
+ou bague lue ¦ eða lesinn hringur
+Bague lue ¦ Lesinn hringur
+nb ¦ fj.
+Nombre vus ¦ Fjöldi séðra
+Le menu de choix n’est pas encore chargé. ¦ Valmyndin er ekki enn hlaðin.
+⚡ Saisie d’une séance ¦ ⚡ Skrá eina lotu
+Tout enregistrer ¦ Vista allt
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Staður, dagsetning og athugandi aðeins einu sinni; síðan ein lína fyrir hvert dýr sem sást (eða hvern lesinn hring, ef þú veist ekki enn hver það er).
+Site de suivi ¦ Vöktunarstaður
+Observateur ¦ Athugandi
+Nb ¦ Fj.
+Dis quand a eu lieu la séance. ¦ Segðu hvenær lotan fór fram.
+Choisis un site ou un lieu pour la séance. ¦ Veldu vöktunarstað eða stað fyrir lotuna.
+Ajoute au moins un animal vu. ¦ Bættu við að minnsta kosti einu dýri sem sást.
+Séance enregistrée : {n} ¦ Lota vistuð: {n}
+🖨 Fiche de terrain ¦ 🖨 Vettvangsblað
+Aperçu et impression ¦ Forskoðun og prentun
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Dýrin sem búist er við á staðnum (þau sem hafa sést þar áður), með hringjum og merkingum og gátreitum: fyrir ferð án tölvu.
+Tous les animaux suivis ¦ Öll vöktuð dýr
+Tous les sites ¦ Allir staðir
+Aucun animal déjà vu sur ce site. ¦ Ekkert dýr hefur sést áður á þessum stað.
+Fiche de terrain — {s} ¦ Vettvangsblað — {s}
+Fiche de terrain ¦ Vettvangsblað
+Date de la dernière observation ¦ Dagsetning síðustu athugunar
+Une colonne pour les notes ¦ Dálkur fyrir athugasemdir
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Dagsetning: ____________  Athugandi: ____________________  Veður: ____________
+SUCCESSIONS ¦ DÁNARBÚ
+Qui s’en charge ? ¦ Hver sér um það?
+ex. Claire LACOMBE (vide : personne) ¦ t.d. Claire LACOMBE (autt: enginn)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Það er ég (fyrir síuna „Málin mín“)
+Sur cet ordinateur, « moi » = {name}. ¦ Á þessari tölvu er „ég“ = {name}.
+Confié à {who} ¦ Falið {who}
+Plus personne n’en est chargé ¦ Enginn sér lengur um það
+Chargé du dossier : ¦ Umsjón með máli:
+👥 Confier le dossier… ¦ 👥 Fela málið…
+👥 Chargé du dossier n° {n} ¦ 👥 Umsjón með máli nr. {n}
+à confier ¦ á eftir að fela
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Hver sér um þennan frest?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Mögulegir hagsmunaárekstrar: {n} nú þegar í öðru opnu máli. Athugaðu áður en þú skrifar undir samning.
+dossier n° {n} ¦ mál nr. {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ Engin mynd af þessu gagni í grunninum: tengdu skannaða skjalið við atburðinn og reyndu aftur.
+La lecture automatique n’a pas marché : {err} ¦ Sjálfvirki lesturinn tókst ekki: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Enginn texti lesinn á þessari mynd (handskrift? prófaðu Uppskriftarsmiðjuna).
+rien de trouvé ¦ ekkert fannst
+PIÈCE ¦ GAGN
+🔎 Lecture automatique — à vérifier ¦ 🔎 Sjálfvirkur lestur — þarf að athuga
+✍️ Noter au journal ¦ ✍️ Skrá í annálinn
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Það sem vélin hélt sig lesa á „{t}“. Taktu hakið af því sem er rangt: engu er breytt á spjöldunum.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Sjálfvirkur lestur gagnsins „{p}“ (þarf að athuga) — {line}
+Noté au journal du dossier. ¦ Skráð í annál málsins.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Lesa texta skannaða skjalsins og stinga upp á nöfnum, dagsetningum og stöðum
+🔎 Lire la pièce ¦ 🔎 Lesa gagnið
+demandée ¦ beðið um
+à obtenir ¦ á eftir að fá
+Tableau généalogique de dévolution ¦ Ættfræðitafla erfðaraðar
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ DRÖG — lögbókandi þarf að yfirfara og fullgera. Leiðbeinandi útreikningur byggður á spjöldum grunnsins.
+Pièces (renvois) ¦ Gögn (tilvísanir)
+conjoint survivant ¦ eftirlifandi maki
+Aucun héritier calculé pour l’instant. ¦ Enginn erfingi reiknaður enn.
+Les pièces ¦ Gögnin
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Gert {d}. Vinnuskjal: það kemur hvorki í stað vottorðs um almenna vitneskju né erfðavottorðs.
+Projet de tableau de dévolution ¦ Drög að erfðaröðartöflu
+🖨 Imprimer le tableau ¦ 🖨 Prenta töfluna
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Á að fylgja vottorði um almenna vitneskju: hver erfingi, tengsl hans, hlutur og gögnin sem sanna það (P1, P2…).
+Tableau de dévolution — {n} ¦ Erfðaröðartafla — {n}
+Tableau de dévolution ¦ Erfðaröðartafla
+Tableau de dévolution {n} ¦ Erfðaröðartafla {n}
+12 juin 1890 ¦ 12. júní 1890
+2000 et après ¦ 2000 og síðar
+7 mai 1925 ¦ 7. maí 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Engin þekkt skyldleikaleið við upphafseinstaklinginn.
+Aucun lien de parenté connu. ¦ Enginn þekktur skyldleiki.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Enginn skyldleiki fannst við {nm} (upphafseinstakling).
+Aucune différence : la fiche est comme avant cette modification. ¦ Enginn munur: spjaldið er eins og fyrir þessa breytingu.
+Aucune union enregistrée pour cette fiche. ¦ Ekkert samband skráð fyrir þetta spjald.
+Avant cette modification ¦ Fyrir þessa breytingu
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Falið í skoðunarham, í útflutningi, deilingu og á vefnum.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Þetta atriði er ekki lengur til: notaðu „Endurheimta“ ef því var eytt.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Þetta spjald hefur {n} {what}: haltu því rétta, hitt verður „önnur útgáfa“ af þessari staðreynd.
+Chargement de la fiche familiale… ¦ Hleð fjölskylduspjaldi…
+Chargement des pesées… ¦ Hleð vigtunum…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Veldu „⤓ PDF“ til að vista skrána.
+Confidentialité et recherche ¦ Persónuvernd og leit
+Courbe de poids ¦ Þyngdarferill
+Créer la famille ¦ Búa til fjölskylduna
+C’est la personne de départ (de cujus). ¦ Þetta er upphafseinstaklingurinn (de cujus).
+C’est la personne de départ. ¦ Þetta er upphafseinstaklingurinn.
+Date du média moins date de naissance ¦ Dagsetning miðils mínus fæðingardagur
+Dernière modification ¦ Síðasta breyting
+Dernières fiches créées ¦ Nýjustu spjöldin
+En vie et décédés ¦ Lifandi og látnir
+Exporter la fiche ¦ Flytja út spjaldið
+Exporter la fiche (JSON) ¦ Flytja út spjaldið (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Fljótlegur útflutningur þessa spjalds: 🖨 Prenta opnar forskoðun appsins (snið, stefna, PDF), með röð, stærð og sýnileika hluta þessa spjalds. 🔒 Trúnaðaratburðir eru aldrei fluttir út.
+FICHE FAMILIALE ¦ FJÖLSKYLDUSPJALD
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Fjölskylda vistuð: {n} spjöld búin til.
+Famille enregistrée. ¦ Fjölskylda vistuð.
+Fiche en JSON ¦ Spjald í JSON
+Fiche familiale ¦ Fjölskylduspjald
+Fiche familiale de {nm} ¦ Fjölskylduspjald {nm}
+Fiche familiale… ¦ Fjölskylduspjald…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Haldið: hin útgáfan er skráð í „Önnur dagsetning“.
+Genre inconnu ¦ Óþekkt kyn
+Hors Sosa ¦ Utan Sosa
+Imprimer la fiche ¦ Prenta spjaldið
+Indique au moins le père ou la mère. ¦ Tilgreindu að minnsta kosti föðurinn eða móðurina.
+Inhumation ¦ Greftrun
+Les deux branches ¦ Báðar greinar
+Lien retiré : {nm} ¦ Tengsl fjarlægð: {nm}
+Naissance (les plus anciens d’abord) ¦ Fæðing (elstu fyrst)
+Naissance (les plus récents d’abord) ¦ Fæðing (yngstu fyrst)
+Naissance inconnue ¦ Fæðing óþekkt
+Note de recherche ¦ Rannsóknarathugasemd
+Ouvre d’abord une fiche. ¦ Opnaðu fyrst spjald.
+PDF (aperçu d’impression) ¦ PDF (prentforskoðun)
+Pas de fiche d’animal liée. ¦ Ekkert tengt dýraspjald.
+Pas de mariage enregistré. ¦ Ekkert hjónaband skráð.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Engin vigtun enn: bættu við þyngd í 🩺 Heilsa.
+Personnaliser l’export… ¦ Sérsníða útflutning…
+Prénom NOM, ou choisis une fiche ¦ Fornafn EFTIRNAFN, eða veldu spjald
+Père, mère, mariage et enfants en une seule saisie ¦ Faðir, móðir, hjónaband og börn í einni skráningu
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Faðir, móðir, hjónaband og börn í einni skráningu. Fyrir hvert nafn: veldu spjald sem er til, eða sláðu inn „Fornafn EFTIRNAFN“ til að búa til nýtt.
+Recherche du chemin… ¦ Leita að leið…
+Remis : {f} ¦ Sett aftur: {f}
+Rien à exporter dans cet écran. ¦ Ekkert til að flytja út á þessum skjá.
+SAISIE RAPIDE ¦ FLJÓTSKRÁNING
+Sans aucune source ¦ Án nokkurrar heimildar
+Sans parents ¦ Án foreldra
+Sans parents connus ¦ Án þekktra foreldra
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Undir hverju nafni: skyldleiki þess við upphafseinstaklinginn.
+TON LIEN ¦ TENGSL ÞÍN
+Tableau (CSV) ¦ Tafla (CSV)
+Ton lien avec cette personne ¦ Tengsl þín við þennan einstakling
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Tengsl þín við þennan einstakling (frá {nm}) — smelltu til að sjá leiðina.
+Tous les genres ¦ Öll kyn
+Un enfant sans nom de famille prend celui du père. ¦ Barn án eftirnafns fær eftirnafn föðurins.
+Voir la note de recherche ¦ Sjá rannsóknarathugasemdina
+conjoint de ¦ maki
+enfant de ¦ barn
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ t.d. þarf að athuga: safnmark 3 E 125, vísbending: kirkjubók nágrannasóknarinnar
+inconnu(e) ¦ óþekkt(ur)
+par {nm} ¦ eftir {nm}
+parent de ¦ foreldri
+{a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} var um {age}
+{nm} avait moins d’un an ¦ {nm} var undir eins árs
+{nm} avait {age} ¦ {nm} var {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ {n} vigtun(ir) · síðast: {w} þann {d}
+{n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ {n} skref frá upphafseinstaklingnum.
+{s} depuis la première ¦ {s} frá þeirri fyrstu
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Trúnaðaratburður: falinn í skoðun, í útflutningi, deilingu og á vefnum.
+à {x} ¦ í {x}
+↩ Remettre ¦ ↩ Setja aftur
+⇆ Comparer avec maintenant ¦ ⇆ Bera saman við núna
+⚡ ＋ Famille ¦ ⚡ ＋ Fjölskylda
+✓ Garder celle-ci ¦ ✓ Halda þessari
+✓ Remis ¦ ✓ Sett aftur
+＋ Un enfant de plus ¦ ＋ Eitt barn í viðbót
+👪 Fiche familiale ¦ 👪 Fjölskylduspjald
+📈 Animal : poids et croissance ¦ 📈 Dýr: þyngd og vöxtur
+📝 Avec une note de recherche ¦ 📝 Með rannsóknarathugasemd
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Rannsóknarathugasemd (þarf að athuga, safnmark, vísbending)
+📝 Note de recherche : {x} ¦ 📝 Rannsóknarathugasemd: {x}
+🔒 confidentiel ¦ 🔒 trúnaðarmál
+🔒 Événement confidentiel ¦ 🔒 Trúnaðaratburður
+🧭 Aucun lien connu ¦ 🧭 Engin þekkt tengsl
+🧭 Personne de départ ¦ 🧭 Upphafseinstaklingur
+🧭 Ton lien ¦ 🧭 Tengsl þín
+🧭 Ton lien avec cette personne ¦ 🧭 Tengsl þín við þennan einstakling
+🧭 personne de départ ¦ 🧭 upphafseinstaklingur
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Nýtt… í opna flipanum (einstaklingur í Einstaklingar)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Afturkalla síðustu breytingu á spjaldi (utan textareits, strax, með „↷ Endurgera“)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Flytja út það sem opni flipinn sýnir (⤓ Flytja út)
+Chercher dans la colonne de gauche ¦ Leita í vinstri dálkinum
+Aucune personne ne correspond à ces filtres. ¦ Enginn einstaklingur passar við þessar síur.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Fjarlægðu síu (Sía ▾) eða breyttu röðuninni.
+Peau ¦ Húð
+Origine / mention ¦ Uppruni / athugasemd
+Mention conjoint ¦ Athugasemd um maka
+Mention enfants ¦ Athugasemd um börn
+Date alternative ¦ Önnur dagsetning
+Lieu (n°) ¦ Staður (nr.)
+Type (n°) ¦ Tegund (nr.)
+Confidentiel ¦ Trúnaðarmál
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: „{a}“ ({na}) · B: „{b}“ ({nb}) → {n} einstaklingur/ar {op}.
+Acte à commander supprimé ¦ Skjali til að panta eytt
+Ajouter à une liste ¦ Bæta á lista
+Apparence (thème, couleurs, police) ¦ Útlit (þema, litir, letur)
+Aucune citation ne contient ce texte. ¦ Engin tilvitnun inniheldur þennan texta.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Enginn af „Listarnir mínir“ inniheldur einstaklinga: búðu til einn í Stillingar → Listaritill.
+Aucune ligne ne contient « {find} ». ¦ Engin lína inniheldur „{find}“.
+Aucune source ne contient ce texte. ¦ Engin heimild inniheldur þennan texta.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Það sem er í einni vistaðri leit en ekki hinni (t.d. Sosa fædd í Corrèze án skírnarskjals): til að finna götin.
+Changer cette ligne ¦ Breyta þessari línu
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Leita og skipta út: hvar á að leita, hástafir, heilt orð
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Leita að orði í titli, höfundi og texta heimilda, og á síðu og í athugasemd hverrar tilvitnunar.
+Choisis deux lieux différents. ¦ Veldu tvo ólíka staði.
+Choisis deux recherches enregistrées. ¦ Veldu tvær vistaðar leitir.
+Choisis les deux lieux. ¦ Veldu báða staðina.
+Choisis ou écris une étiquette. ¦ Veldu eða skrifaðu merki.
+Choisis où chercher. ¦ Veldu hvar á að leita.
+Citée ¦ Vitnað í
+Cocher {name} ¦ Haka við {name}
+Comparer deux recherches ¦ Bera saman tvær leitir
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Leiðréttu villu alls staðar í einu („cultivatr“ → „cultivateur“). Þú sérð fyrst hverja línu sem myndi breytast; taktu hakið af þeim sem á að halda. „↶ Afturkalla“ setur allt eins og áður.
+Dernières recherches vidées ¦ Nýlegar leitir tæmdar
+Descriptions des événements ¦ Lýsingar atburða
+Définition supprimée ¦ Skilgreiningu eytt
+Dépouillement supprimé ¦ Skráningu eytt
+Essaie un autre lien ou moins de critères. ¦ Prófaðu önnur tengsl eða færri skilyrði.
+Ex : Poilu, À vérifier… ¦ T.d.: Hermaður, Þarf að athuga…
+Ex : cultivateur (vide = effacer) ¦ T.d.: cultivateur (autt = eyða)
+Ex : cultivatr ¦ T.d.: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ T.d.: kirkjubók, blað 12, Tulle…
+Extrait ¦ Útdráttur
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Gerðu þær í „Leit eftir mörgum skilyrðum“, síðan „Vista“.
+Graphiques et tableau de bord ¦ Gröf og stjórnborð
+Il faut au moins deux recherches enregistrées. ¦ Það þarf að minnsta kosti tvær vistaðar leitir.
+Lacune supprimée ¦ Gati eytt
+Les recherches enregistrées ne sont pas disponibles. ¦ Vistaðar leitir eru ekki tiltækar.
+Lien de parenté inconnu. ¦ Óþekktur skyldleiki.
+Ligne de transcription supprimée ¦ Uppskriftarlínu eytt
+Mot entier seulement ¦ Aðeins heil orð
+Neveux et nièces ¦ Systkinabörn (frændsystkin)
+Nom de table invalide. ¦ Ógilt töfluheiti.
+Noms de lieux ¦ Staðarnöfn
+Nouvelle étiquette… ¦ Nýtt merki…
+Nés en ou après ¦ Fædd árið eða eftir
+Nés en ou avant ¦ Fædd árið eða fyrir
+Oncles et tantes ¦ Föðurbræður, móðurbræður og frænkur
+Onglets ajoutés au menu ¦ Flipar bættir í valmyndina
+Onglets cachés du menu ¦ Flipar faldir í valmyndinni
+Ordre des types de recherche ¦ Röð leitartegunda
+Ordre du menu ¦ Röð valmyndar
+Ouvrir la recherche multicritère ¦ Opna leit eftir mörgum skilyrðum
+Où chercher ¦ Hvar á að leita
+Personne relevée retirée ¦ Skráður einstaklingur fjarlægður
+Puis le lien de parenté cherché. ¦ Síðan skyldleikinn sem leitað er að.
+Rangement des pages des Réglages ¦ Uppröðun síðna í Stillingum
+Recherche A ¦ Leit A
+Recherche B ¦ Leit B
+Recherche dans les sources… ¦ Leita í heimildum…
+Recherche dans l’arbre… ¦ Leita í trénu…
+Recherche des lignes à changer… ¦ Leita að línum til að breyta…
+Recherche par lien de parenté ¦ Leit eftir skyldleika
+Respecter les majuscules ¦ Gera greinarmun á há- og lágstöfum
+Rien de coché : les actions portent sur les {t} résultats ¦ Ekkert hakað: aðgerðirnar eiga við {t} niðurstöður
+Règle introuvable. ¦ Regla finnst ekki.
+Règle supprimée ¦ Reglu eytt
+Résultats de la recherche ¦ Leitarniðurstöður
+Sections ouvertes ou fermées ¦ Opnir eða lokaðir hlutar
+Seulement les décédés ¦ Aðeins látnir
+Seulement les vivants ¦ Aðeins lifandi
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Aðeins fyrstu {n} línurnar eru sýndar; „Skipta út“ breytir hökuðu línunum.
+Sources et citations ¦ Heimildir og tilvitnanir
+Suppression impossible ici. ¦ Ekki hægt að eyða hér.
+Tape au moins deux lettres. ¦ Sláðu inn að minnsta kosti tvo stafi.
+Tape le texte à chercher. ¦ Sláðu inn textann sem á að leita að.
+Texte à chercher ¦ Texti til að leita að
+Texte à chercher trop long. ¦ Leitartextinn er of langur.
+Tous les ancêtres ¦ Allir forfeður
+Tous les descendants ¦ Allir afkomendur
+Trouvé dans ¦ Fannst í
+Type d’événement supprimé ¦ Atburðategund eytt
+Types de recherche cachés ¦ Faldar leitartegundir
+Vider la liste ¦ Tæma listann
+Vivant(e) ¦ Á lífi
+Vivants et décédés ¦ Lifandi og látnir
+dans A et dans B ¦ í A og í B
+dans A mais pas dans B ¦ í A en ekki í B
+dans A ou dans B ¦ í A eða í B
+dans une seule des deux ¦ aðeins í annarri þeirra
+{n} cochée(s) sur {t} ¦ {n} hakað af {t}
+{n} ligne(s) cochée(s) sur {t} ¦ {n} lína/línur hakaðar af {t}
+{rel} de {name} : {n} personne(s). ¦ {rel} {name}: {n} einstaklingur/ar.
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ „Öll systkinabörn…“, „lifandi afkomendur… fæddir eftir 1900“: veldu einstakling og tengsl.
+Étiqueter {n} personne(s) ¦ Merkja {n} einstakling(a)
+⟳ Recharger la page ¦ ⟳ Endurhlaða síðuna
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 „{label}“ sett á {n} einstakling(a)
+🏷 Étiqueter ¦ 🏷 Merkja
+📊 Comparer deux recherches ¦ 📊 Bera saman tvær leitir
+📋 Ajouter à Mes listes ¦ 📋 Bæta í Listarnir mínir
+📋 {n} personne(s) ajoutée(s) à « {list} » ¦ 📋 {n} einstaklingi/um bætt í „{list}“
+📚 Sources ({n}) ¦ 📚 Heimildir ({n})
+🔁 Chercher et remplacer ¦ 🔁 Leita og skipta út
+🔁 Remplacer ¦ 🔁 Skipta út
+🔁 Remplacer ({n}) ¦ 🔁 Skipta út ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 {n} útskipti gerð
+🔎 Ce que j’ai changé ¦ 🔎 Það sem ég breytti
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 {n} lína/línur úr læstu spjaldi: þær breytast ekki.
+🔖 Citations ({n}) ¦ 🔖 Tilvitnanir ({n})
+🕘 Dernières recherches ¦ 🕘 Nýlegar leitir
+🗄 Santé de la base ¦ 🗄 Heilsa gagnagrunnsins
+🧬 Lien de parenté ¦ 🧬 Skyldleiki
+🧾 Sources et citations ¦ 🧾 Heimildir og tilvitnanir
+Lieux « {q} » ¦ Staðir „{q}“
+Transcriptions « {q} » ¦ Uppskriftir „{q}“
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Ekki hægt að flytja út: ekki tókst að fjarlægja trúnaðaratburðina. Reyndu aftur eftir smástund.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Ekki tókst að fela trúnaðaratburðina: reyndu aftur eftir smástund.
+, ni les fiches et événements confidentiels. ¦ , né trúnaðarspjöld og -atburðir.
+🔒  ¦ 🔒 
+📤 Envoyer vers… ¦ 📤 Senda til…
+Dans une nouvelle présentation ¦ Í nýja framsetningu
+Dans un nouveau diaporama ¦ Í nýja myndasýningu
+Dans un livre de la Mise en page… ¦ Í bók í Umbroti…
+Dans un nouveau document (Traitement de texte) ¦ Í nýtt skjal (Ritvinnsla)
+Dans le Tableur ¦ Í Töflureikninn
+Sur une page de mon site… ¦ Á síðu á vefnum mínum…
+Dans la Retouche des photos ¦ Í Myndvinnslu
+Comparer avec une autre photo ¦ Bera saman við aðra mynd
+Dans l’Atelier de transcription ¦ Í Uppskriftarsmiðjuna
+Dans le Dessin vectoriel ¦ Í Vigurteikningu
+Dans les Traitements par lot ¦ Í Fjöldavinnslu
+Envoyer les images vers… ¦ Senda myndirnar til…
+Envoyer le texte vers… ¦ Senda textann til…
+Envoyer le tableau vers… ¦ Senda töfluna til…
+Envoyer le son vers… ¦ Senda hljóðið til…
+Envoyer la vidéo vers… ¦ Senda myndbandið til…
+Envoyer le dessin vers… ¦ Senda teikninguna til…
+Rangement du son dans les médias… ¦ Hljóðið sett í miðla…
+Rangement de la vidéo dans les médias… ¦ Myndbandið sett í miðla…
+Rien à envoyer. ¦ Ekkert til að senda.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Ekkert verkfæri getur tekið við þessu í bili.
+En image (montage, studio, présentation, document…) ¦ Sem mynd (klipping, ver, framsetning, skjal…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Sem teikning, skörp í öllum stærðum (bók, vefur…)
+＋ Nouvelle crise ¦ ＋ Ný kreppa
+Modifier cette crise ¦ Breyta þessari kreppu
+Supprimer cette crise ¦ Eyða þessari kreppu
+Nouvelle crise ¦ Ný kreppa
+Modifier la crise ¦ Breyta kreppunni
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ FARSÓTTIR, STRÍÐ, HRÆÐILEGIR VETUR
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Miklar kreppur í sögu Frakklands við hlið dauðsfalla í fjölskyldunni þinni: til að skilja dauðsfallabylgju (kólera 1832, Harði veturinn 1709, spænska veikin…). Bættu við þínum eigin: farsótt í þorpinu, bruna, flóði…
+▦ Vignettes ¦ ▦ Smámyndir
+🏷 Par éditeur ¦ 🏷 Eftir útgefanda
+📍 Par lieu ¦ 📍 Eftir stað
+✉️ Écrites / vierges ¦ ✉️ Skrifuð / óskrifuð
+Survole pour voir le verso ¦ Færðu bendilinn yfir til að sjá bakhliðina
+Aucune fiche de carte postale pour l’instant ¦ Ekkert póstkortaspjald enn
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Listar → 🏞 Póstkort: gefðu hverju korti útgefanda, númer, stað, framhlið og bakhlið.
+Éditeur inconnu ¦ Óþekktur útgefandi
+Écrites ou envoyées ¦ Skrifuð eða send
+Vierges (jamais envoyées) ¦ Óskrifuð (aldrei send)
+Il manque les n° {n} ¦ Það vantar nr. {n}
+Il manque le n° {n} ¦ Það vantar nr. {n}
+cartes ¦ kort
+Marge de « vers » ¦ Svigrúm „um“
+Portée de « avant » / « après » ¦ Umfang „fyrir“ / „eftir“
+Longueur d’une vie sans fin connue ¦ Lengd ævi án þekkts endis
+Ouvrir dans le Tableur… ¦ Opna í Töflureikni…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Opna gestina í Töflureikni
+📤 Envoyer le tableau des invités ¦ 📤 Senda gestatöfluna
+🧾 Ouvrir dans le Tableur ¦ 🧾 Opna í Töflureikni
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Gestatafla, með grein þeirra, skyldleika og svari.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Allar myndir albúmsins: myndasýning, kvikmynd, fjöldavinnsla…
+Album — {nm} ¦ Albúm — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Afkomendur (ofan frá og niður, einn litur fyrir hverja grein)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Afkomendur þurfa verkfærið Ættarmót, sem er ekki hlaðið.
+Aucune descendance pour cette personne. ¦ Engir afkomendur fyrir þennan einstakling.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Ekkert þekkt barn fyrir þennan einstakling: engir afkomendur til að teikna.
+La descendance de {nm} ¦ Afkomendur {nm}
+la famille ¦ fjölskyldan
+L’arbre (en fond) ¦ Tréð (í bakgrunni)
+📰 En faire un faire-part ¦ 📰 Gera úr því tilkynningakort
+Créer le faire-part ¦ Búa til tilkynningakortið
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Tréð fer í bakgrunninn, á bak við texta tilkynningakortsins. Allt opnast síðan í vigurteikningunni til lagfæringar.
+L’arbre derrière le texte ¦ Tréð á bak við textann
+Très pâle ¦ Mjög dauft
+Pâle ¦ Dauft
+Bien visible ¦ Vel sýnilegt
+Fabrication du faire-part… ¦ Bý til tilkynningakortið…
+Personne à dessiner dans l’arbre. ¦ Einstaklingur til að teikna í tréð.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Tréð í bakgrunni tilkynningakorts fyrir ættarmót eða brúðkaup
+En faire un faire-part ¦ Gera úr því tilkynningakort
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Sömu stillingar, eitt tilkynningakort fyrir hvern einstakling (listi, merki) eða hvert heimili ættarmóts, öll í einni PDF
+Un faire-part par personne / par foyer… ¦ Eitt tilkynningakort á einstakling / heimili…
+📬 Un faire-part par personne / par foyer ¦ 📬 Eitt tilkynningakort á einstakling / heimili
+📄 Fabriquer le PDF ¦ 📄 Búa til PDF
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Tilkynningakortið eins og þú stilltir það, einu sinni fyrir hvern einstakling eða hvert heimili. Öll kortin eru sett í eina PDF, tilbúna til prentunar.
+Une liste de personnes ¦ Listi yfir einstaklinga
+Les personnes d’une étiquette ¦ Einstaklingar með merki
+Les foyers d’une cousinade ¦ Heimili ættarmóts
+La cousinade (les foyers invités) ¦ Ættarmótið (boðin heimili)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ Í reitum tilkynningakortsins er þessum orðum skipt út fyrir hvern og einn:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (ættarmót: líka {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Nafn einstaklingsins (eða heimilisins) efst á hverju tilkynningakorti
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Fylla líka út frá spjaldi hvers og eins (nöfn, dagsetningar, staðir)
+L’enveloppe de chacun porte son adresse. ¦ Umslag hvers og eins ber heimilisfang hans.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ Ekkert boðið heimili á þessu ættarmóti: hakaðu fyrst við gesti.
+Fabrication de {n} faire-part… ¦ Bý til {n} tilkynningakort…
+{i} sur {n}… ¦ {i} af {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ {n} tilkynningakort í einni PDF ({p} síður).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Vigurteikningin er ekki hlaðin: ekki er hægt að búa til PDF.
+Une action de la Retouche ¦ Aðgerð úr Myndvinnslu
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Aðgerð vistuð í Myndvinnslu (Skrá → Aðgerðir), á hverja mynd.
+aucune action choisie ¦ engin aðgerð valin
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Myndvinnslan er ekki hlaðin: ekki er hægt að framkvæma aðgerðina „{name}“.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Aðgerðin „{name}“ í Myndvinnslu skilaði engu.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Myndvinnslan er ekki hlaðin: ekki verður hægt að framkvæma þetta skref.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ Engin aðgerð vistuð í Myndvinnslu. Opnaðu mynd í Myndvinnslu, síðan Skrá → Aðgerðir til að vista eina.
+L’action ¦ Aðgerðin
+Choisir une action… ¦ Velja aðgerð…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Aðgerð vistuð í Myndvinnslu, framkvæmd á hverja mynd í lotunni.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Myndirnar sem þessi lota setti í miðla: myndasýning, klipping…
+Traitement par lot ¦ Fjöldavinnsla
+{x} introuvable dans les médias. ¦ {x} finnst ekki í miðlum.
+Ouvrir cette image dans la Retouche des photos ¦ Opna þessa mynd í Myndvinnslu
+Retoucher ¦ Lagfæra
+Envoyer cette image vers un autre outil ¦ Senda þessa mynd í annað verkfæri
+📤 Envoyer le tableau en image vers… ¦ 📤 Senda töfluna sem mynd til…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Teikningin fer í annað verkfæri: bók í Umbroti, síðu á vefnum mínum, Vigurteikningu…
+Créer et envoyer vers… ¦ Búa til og senda til…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Setja inn vigurteikningu (tré, kort, skjaldarmerki…)…
+Dessin vectoriel placé ¦ Vigurteikning sett inn
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ „{name}“ sett inn: ef henni er breytt í Vigurteikningu uppfærist hún hér („↻ Uppfæra“).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Vigurteikning <b>tengd</b>{state}: ef henni er breytt í Vigurteikningu er hún teiknuð aftur hér („Uppfæra“).
+✎ Modifier le dessin ¦ ✎ Breyta teikningunni
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Teikningin helst óbreytt og fylgir ekki lengur Vigurteikningu
+Dessin détaché ¦ Teikning aftengd
+Le Dessin vectoriel n’est pas chargé. ¦ Vigurteikningin er ekki hlaðin.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Engin vigurteikning: búðu til eina í Listar → Breytingaverkfæri (Vigurteikning, Skrautlegt tré, Kort…).
+PLACER ¦ SETJA INN
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Vigurteikning (tré, kort, skjaldarmerki…)
+Placer ce dessin ¦ Setja þessa teikningu inn
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Teikningin helst tengd: ef henni er breytt í Vigurteikningu uppfærist hún í bókinni („↻ Uppfæra“). Hún helst skörp í öllum stærðum.
+Choisis un dessin. ¦ Veldu teikningu.
+Le dessin n’a pas pu être lu. ¦ Ekki tókst að lesa teikninguna.
+📐 Mettre dans un livre ¦ 📐 Setja í bók
+Mettre dans le livre ¦ Setja í bókina
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Teikningin er sett í Miðla (sem mynd), síðan á eigin síðu, innan spássíanna.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Myndin er sett á eigin síðu, innan spássíanna. Hún helst tengd myndinni í Miðlum.
+Rangement du dessin dans les médias… ¦ Teikningin sett í miðla…
+Mon livre ¦ Bókin mín
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Mynd bætt við á nýrri síðu aftast í bókinni: athugaðu og vistaðu svo.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Ný bók með myndinni: athugaðu og vistaðu svo bókina.
+📱 Livre numérique (.epub) ¦ 📱 Rafbók (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ lesbretti: Kobo, Bækur, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Umbrotið er ekki hlaðið: ekki er hægt að búa til ePub.
+« Envoyer vers… » n’est pas chargé. ¦ „Senda til…“ er ekki hlaðið.
+Retoucher cette image ¦ Lagfæra þessa mynd
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Þessi mynd er ekki í Miðlum: ekki er hægt að lagfæra hana.
+Image retouchée mise à jour dans le texte. ¦ Lagfærð mynd uppfærð í textanum.
+Un document (Traitement de texte) ¦ Skjal (Ritvinnsla)
+le tableau dans un texte ¦ taflan í texta
+📝 Créer le document ¦ 📝 Búa til skjalið
+Image du graphique (PNG) : {kind} ¦ Mynd af grafinu (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Ekki tókst að teikna grafið.
+Image du graphique enregistrée : {name} ¦ Mynd af grafinu vistuð: {name}
+La feuille est vide : rien à envoyer. ¦ Blaðið er autt: ekkert til að senda.
+⤓ Image du graphique (PNG) ¦ ⤓ Mynd af grafinu (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} í klippinguna, hvert á eftir öðru.
+image ajoutée ¦ mynd bætt við
+images ajoutées ¦ myndum bætt við
+sous-titre ajouté ¦ skjátexta bætt við
+sous-titres ajoutés ¦ skjátextum bætt við
+Le fabricant de GIF n’est pas chargé. ¦ GIF-gerðin er ekki hlaðin.
+🎞 GIF animé ¦ 🎞 Hreyfð GIF-mynd
+sans son, petit, tourne en boucle ¦ án hljóðs, lítil, í lykkju
+GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Myndbandið er fyrst búið til (myndin er spiluð í heild, hafðu gluggann opinn) og síðan sett í miðla.
+Fabriquer la vidéo pour l’envoyer ? ¦ Búa til myndbandið til að senda það?
+Fabriquer et envoyer ¦ Búa til og senda
+ENVOYER ¦ SENDA
+Fabrication de la vidéo… ¦ Bý til myndbandið…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Ekki tókst að setja myndbandið í miðla.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Fullbúna hljóðið er sett í miðla (afrit) og síðan sent.
+Envoyer le son ? ¦ Senda hljóðið?
+Ranger et envoyer ¦ Geyma og senda
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Engin uppskrift enn: „⏱ Setja inn tíma“ (⌘T), sláðu svo inn það sem er sagt.
+Transcription — {name} ¦ Uppskrift — {name}
+ (avec la transcription en sous-titres) ¦  (með uppskriftinni sem skjátexta)
+La transcription (texte) ¦ Uppskriftin (texti)
+Pas encore de transcription. ¦ Engin uppskrift enn.
+Agnès Bernauer ¦ Agnes Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 dálkar í tröppum og varasjóður með 7 bunkum. Fyrsta spilið sem lagt er á grunnbunka ræður byrjunargildi allra fjögurra; byggt niður til skiptis rautt og svart, Kóngur fer á Ás. Stokkurinn leggur eitt spil á hvern bunka varasjóðsins; auður dálkur tekur spilið rétt fyrir neðan byrjunargildið.
+Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike þar sem byggt er niður á hvaða sort sem er nema sína eigin; auður dálkur tekur hvaða spil sem er. Aðeins er farið einu sinni í gegnum stokkinn.
+Pas seul ¦ Ekki einn
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 dálkar með einu spili; byggt niður til skiptis rautt og svart, auður dálkur tekur hvaða spil sem er. Stokknum er flett eitt spil í einu og aðeins einu sinni farið í gegn.
+Les impasses ¦ Blindgöturnar
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Ásarnir eru lagðir fyrirfram; 6 dálkar með 3 spilum (tvö hulin). Byggt niður til skiptis rautt og svart, auður dálkur tekur hvaða spil sem er; farið er einu sinni aftur í gegnum stokkinn.
+Huit fois huit ¦ Átta sinnum átta
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Tveir stokkar, 8 dálkar með 8 sýnilegum spilum; byggt niður til skiptis rautt og svart, auður dálkur tekur hvaða spil sem er. Farið er tvisvar aftur í gegnum stokkinn.
+Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 dálkar í tröppum eins og í Klondike; byggt niður til skiptis rautt og svart og heilar raðir færðar. Stokkurinn leggur eitt spil á hvern dálk.
+Alternance ¦ Víxl
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Tveir stokkar, 7 dálkar með 7 spilum, annað hvert hulið. Byggt niður til skiptis rautt og svart og heilar raðir færðar; auður dálkur tekur hvaða spil sem er. Aðeins er farið einu sinni í gegnum stokkinn.
+La harpe ¦ Harpan
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Tveir stokkar, 9 dálkar í tröppum; byggt niður til skiptis rautt og svart. Stokknum er flett eitt spil í einu og farið þrisvar aftur í gegn.
+La grande harpe ¦ Stóra harpan
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Tveir stokkar, 10 dálkar í tröppum; byggt niður til skiptis rautt og svart. Stokknum er flett eitt spil í einu og aðeins einu sinni farið í gegn.
+Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ Varasjóður með 13 spilum og 4 dálkar; grunnbunkarnir byrja á Ás. Byggt niður í sömu sort, eitt spil í einu; auður dálkur er fylltur úr varasjóðnum. Farið er einu sinni aftur í gegnum stokkinn.
+Le crapaud américain ¦ Ameríska kartan
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Tveir stokkar, varasjóður með 20 spilum og 8 dálkar. Fyrsta spilið sem lagt er á grunnbunka ræður byrjunargildi allra átta; byggt niður í sömu sort, Kóngur fer á Ás. Auður dálkur er fylltur úr varasjóðnum; farið er einu sinni aftur í gegnum stokkinn.
+Canfield bigarré ¦ Marglitur Canfield
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Tveir stokkar: Ásarnir eru lagðir fyrirfram, varasjóður með 14 spilum og 5 dálkar. Byggt niður til skiptis rautt og svart; auður dálkur er fylltur úr varasjóðnum. Stokknum er flett þremur spilum í einu og farið tvisvar aftur í gegn.
+La duchesse ¦ Hertogaynjan
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Fjórir varasjóðsbunkar með 3 spilum og 4 dálkar með einu spili. Fyrsta spilið sem lagt er á grunnbunka ræður byrjunargildi allra fjögurra; byggt niður til skiptis rautt og svart, Kóngur fer á Ás. Auður dálkur tekur hvaða spil sem er; farið er einu sinni aftur í gegnum stokkinn.
+La porte ¦ Hliðið
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Tveir varasjóðsbunkar með 5 spilum (vængir hliðsins) og 8 dálkar með einu spili. Byggt niður til skiptis rautt og svart og heilar raðir færðar; auður dálkur tekur hvaða spil sem er. Aðeins er farið einu sinni í gegnum stokkinn.
+Le pingouin ¦ Mörgæsin
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Fyrsta spilið ræður byrjunargildi grunnbunkanna og hin þrjú af sama gildi fara strax upp á þá. 7 dálkar með 7, 7 lausir reitir; byggt niður í sömu sort, Kóngur fer á Ás. Auður dálkur tekur spilið rétt fyrir neðan byrjunargildið.
+Baker’s Game (Roi seul) ¦ Baker’s Game (aðeins Kóngur)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (byggt niður í sömu sort, 4 lausir reitir), en auður dálkur tekur aðeins Kóng.
+Seahaven détendu ¦ Afslappaður Seahaven
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, en vel röðuð röð í sömu sort er færð í einu lagi, hversu löng sem hún er.
+Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Tveir stokkar, 10 dálkar með 10 sýnilegum spilum og 4 lausir reitir sem þegar eru uppteknir; byggt niður til skiptis rautt og svart, eitt spil í einu (eða röð ef lausu reitirnir leyfa).
+Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Tveir stokkar, 14 dálkar með 7 spilum og 8 lausir reitir, þar af 6 þegar uppteknir; byggt niður í sömu sort, auður dálkur tekur aðeins Kóng.
+Sept par quatre ¦ Sjö sinnum fjórir
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell með 7 dálkum og 4 lausum reitum: dálkarnir eru hærri.
+Sept par cinq ¦ Sjö sinnum fimm
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell með 7 dálkum og 5 lausum reitum.
+FreeCell défi ¦ FreeCell áskorun
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, en Ásar og tvistar eru neðst í dálkunum, undir öllum hinum spilunum.
+FreeCell super défi ¦ FreeCell ofuráskorun
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell áskorun (Ásar og tvistar neðst í dálkunum), og auður dálkur tekur aðeins Kóng.
+Le scarabée ¦ Bjallan
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Scorpion án stokks: öll 52 spilin sjást í 7 dálkum. Byggt niður í sömu sort og hvaða hópur sem er færður; auður dálkur tekur aðeins Kóng. Heil röð frá Kóngi niður í Ás fer burt.
+Queue de scorpion ¦ Sporðdrekahali
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Eins og Scorpion (7 dálkar með 7, hvaða hópur sem er færist), en byggt niður til skiptis rautt og svart og spilin fara upp á grunnbunkana frá Ás upp í Kóng.
+Scorpion double ¦ Tvöfaldur Scorpion
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Tveir stokkar, 10 dálkar, öllu er gefið (fyrstu fimm dálkarnir fela 4 spil). Byggt niður í sömu sort og hvaða hópur sem er færður; heil röð frá Kóngi niður í Ás fer burt.
+Motif de divorce ¦ Skilnaðarástæða
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Tveir stokkar, 10 dálkar með 5 sýnilegum spilum. Byggt niður án tillits til lita; aðeins raðir í sömu sort færast saman; heil röð frá Kóngi niður í Ás fer burt. Stokkurinn leggur eitt spil á hvern dálk sem er ekki auður.
+La tarentule ¦ Tarantúlan
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Kónguló með fjórum sortum, en röð sem fer niður í sama lit (rauðum eða svörtum) færist í einu lagi. Heil röð frá Kóngi niður í Ás í sömu sort fer burt.
+Araignée à découvert ¦ Opin kónguló
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Kónguló með fjórum sortum, en öll spilin sjást frá byrjun.
+La harpe de Milligan ¦ Harpa Milligans
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Tveir stokkar, 8 dálkar í tröppum; byggt niður til skiptis rautt og svart og heilar raðir færðar. Auður dálkur tekur aðeins Kóng; stokkurinn leggur eitt spil á hvern dálk. Grunnbunkarnir hækka frá Ás upp í Kóng.
+La harpe de Lexington ¦ Harpan frá Lexington
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Harpa Milligans (tveir stokkar, 8 dálkar í tröppum, stokkurinn leggur eitt spil á hvern dálk), en hvaða hópur sýnilegra spila sem er er færður.
+Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Harpan frá Lexington með öll spilin sýnileg: hvaða hópur sem er færist, stokkurinn leggur eitt spil á hvern dálk.
+Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Harpa Milligans með öll spilin sýnileg, og auður dálkur tekur hvaða spil sem er.
+Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Tveir stokkar, 8 dálkar með einu spili; stokkurinn leggur eitt spil á hvern dálk. Byggt niður til skiptis rautt og svart og heilar raðir færðar; auður dálkur tekur aðeins Kóng. Þegar stokkurinn er tómur opnast laus reitur til að leggja spil til hliðar.
+Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Tveir stokkar, 8 dálkar með einu spili; stokkurinn leggur eitt spil á hvern dálk. Byggt niður til skiptis rautt og svart og auður dálkur tekur hvaða spil sem er.
+L’île d’Elbe ¦ Elba-eyja
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Tveir stokkar, 10 dálkar með 5 spilum (fjögur hulin); byggt niður til skiptis rautt og svart og heilar raðir færðar. Auður dálkur tekur aðeins Kóng; stokkurinn leggur eitt spil á hvern dálk.
+Le mont Olympe ¦ Ólympsfjall
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Tveir stokkar: Ásar og tvistar eru lagðir fyrirfram og grunnbunkarnir hækka um tvo í sömu sort (Ás, 3, 5… eða 2, 4, 6…). 9 dálkar; byggt niður um tvo í sömu sort. Stokkurinn leggur eitt spil á hvern dálk.
+La patience australienne ¦ Ástralski kapallinn
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 dálkar með 4 sýnilegum spilum; byggt niður í sömu sort og hvaða hópur sýnilegra spila sem er færður. Auður dálkur tekur aðeins Kóng; aðeins er farið einu sinni í gegnum stokkinn.
+Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Ástralski kapallinn, en farið er einu sinni aftur í gegnum stokkinn.
+Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Ástralski kapallinn, en auður dálkur tekur hvaða spil sem er.
+Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 dálkar í tröppum; byggt niður í sömu sort og hvaða hópur sýnilegra spila sem er færður. Stokkurinn leggur eitt spil á hvern dálk.
+La discipline chinoise ¦ Kínverski aginn
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 dálkar með 7 spilum (þrjú hulin, nema í þeim fyrsta); byggt niður til skiptis rautt og svart og hvaða hópur sýnilegra spila sem er færður. Síðustu 3 spilin fara á fyrstu þrjá dálkana.
+Solitaire russe double ¦ Tvöfaldur rússneskur kapall
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Tveir stokkar, 10 dálkar, 8 grunnbunkar; byggt niður í sömu sort og hvaða hópur sýnilegra spila sem er færður.
+Ali Baba ¦ Alí Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Einn stokkur: Ásarnir eru lagðir fyrirfram, 10 dálkar með 4 sýnilegum spilum. Byggt niður í sömu sort og heilar raðir færðar; aðeins er farið einu sinni í gegnum stokkinn.
+Cassim ¦ Cassim
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Einn stokkur: Ásarnir eru lagðir fyrirfram, 7 dálkar með 3 sýnilegum spilum. Byggt niður í sömu sort og heilar raðir færðar; fara má í gegnum stokkinn eins oft og þú vilt.
+Rang et file ¦ Röð og fylking
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Keisarinn (tveir stokkar, 10 dálkar með 4 spilum, þar af 3 hulin, til skiptis rautt og svart), en heilar raðir eru færðar.
+Les As affairés ¦ Önnum köfnu Ásarnir
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Tveir stokkar, 12 dálkar með einu spili; byggt niður í sömu sort, eitt spil í einu. Aðeins er farið einu sinni í gegnum stokkinn.
+La cour ¦ Hirðin
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Tveir stokkar, 12 dálkar með einu spili; byggt niður í sömu sort og heilar raðir færðar. Aðeins er farið einu sinni í gegnum stokkinn.
+Le carré de Napoléon ¦ Ferningur Napóleons
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Tveir stokkar, 12 dálkar með 4 sýnilegum spilum; byggt niður í sömu sort og heilar raðir færðar. Aðeins er farið einu sinni í gegnum stokkinn.
+L’exil de Napoléon ¦ Útlegð Napóleons
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Fjörutíu þjófar þar sem byggt er niður án tillits til lita, eitt spil í einu. Aðeins er farið einu sinni í gegnum stokkinn.
+Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Tveir stokkar: tvistarnir átta eru lagðir fyrirfram og grunnbunkarnir hækka í sömu sort upp í Ás. 10 dálkar með einu spili; byggt niður í sömu sort (Ás fer á tvist, Kóngur á Ás), eitt spil í einu. Aðeins er farið einu sinni í gegnum stokkinn.
+La lune décroissante ¦ Minnkandi tunglið
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Tveir stokkar, 13 dálkar með 4 sýnilegum spilum; byggt niður í sömu sort og heilar raðir færðar. Aðeins er farið einu sinni í gegnum stokkinn.
+Les cinquante fameux ¦ Hinir frægu fimmtíu
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Fjörutíu þjófar með 5 spilum í dálki: tveir stokkar, 10 dálkar með 5, sama sort, eitt spil í einu. Aðeins er farið einu sinni í gegnum stokkinn.
+Quarante-neuf ¦ Fjörutíu og níu
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Tveir stokkar, 7 dálkar með 7 sýnilegum spilum; byggt niður til skiptis rautt og svart, eitt spil í einu. Aðeins er farið einu sinni í gegnum stokkinn.
+Sans limite ¦ Án takmarkana
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Fjörutíu þjófar, en fara má í gegnum stokkinn eins oft og þú vilt.
+Les petits quarante ¦ Litlu fjörutíu
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Fjörutíu þjófar þar sem byggt er niður án tillits til lita og heilar raðir færðar; stokknum er flett þremur spilum í einu og farið þrisvar aftur í gegn.
+Le zèbre ¦ Sebrahesturinn
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Tveir stokkar, Ásarnir lagðir fyrirfram, 8 dálkar með einu spili; byggt niður til skiptis rautt og svart, eitt spil í einu. Farið er einu sinni aftur í gegnum stokkinn.
+Le congrès ¦ Þingið
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Tveir stokkar, 8 dálkar með einu spili; byggt niður án tillits til lita, eitt spil í einu. Aðeins er farið einu sinni í gegnum stokkinn.
+Le parlement ¦ Löggjafarþingið
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Þingið (tveir stokkar, 8 dálkar með einu spili, byggt niður án tillits til lita), með Ásana lagða fyrirfram.
+Pair et impair ¦ Jafnt og oddatala
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Tveir stokkar: einn Ás og ein tvistur af hverri sort eru lagðir fyrirfram og grunnbunkarnir hækka um tvo í sinni sort (Ás, 3, 5… Kóngur, 2, 4… eða 2, 4… Drottning, Ás, 3…). 9 reitir með einu spili, ekki byggt á þá; auður reitur tekur hvaða spil sem er. Farið er einu sinni aftur í gegnum stokkinn.
+Le cotillon royal ¦ Konunglegi kotillioninn
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Tveir stokkar: einn Ás og ein tvistur af hverri sort eru lagðir fyrirfram og grunnbunkarnir hækka um tvo í sinni sort. Fjórir varasjóðsbunkar með 3 spilum (aðeins það efsta er spilað) og 16 reitir með einu spili, ekki byggt á þá; auður reitur tekur hvaða spil sem er. Aðeins er farið einu sinni í gegnum stokkinn.
+Le treize porte-bonheur ¦ Happaþrettánið
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 dálkar með 4 sýnilegum spilum; byggt niður án tillits til lita, eitt spil í einu; auður dálkur helst auður.
+La patience portugaise ¦ Portúgalski kapallinn
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 dálkar með 4 sýnilegum spilum; byggt niður án tillits til lita, eitt spil í einu; aðeins Kóngur fer í auðan dálk.
+Bonne mesure ¦ Ríflegur skammtur
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Tveir Ásar eru lagðir fyrirfram; 10 dálkar með 5 sýnilegum spilum. Byggt niður án tillits til lita, eitt spil í einu; auður dálkur tekur hvaða spil sem er.
+La cruelle ¦ Sá grimmi
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Ásarnir eru lagðir fyrirfram; 12 bunkar með 4 spilum. Byggt niður í sömu sort, eitt spil í einu; auður reitur helst auður. Eins oft og þú vilt eru bunkarnir teknir saman í röð, án þess að stokka, og gefið aftur fjögur og fjögur.
+La persévérance ¦ Þrautseigjan
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Eins og Sá grimmi (Ásar lagðir fyrirfram, 12 bunkar með 4, sama sort), en heilar raðir eru færðar og aðeins tekið saman tvisvar.
+L’éventail en vagues ¦ Bylgjublævængurinn
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 bunkar með 4 spilum, Ásarnir haldast blandaðir við hin; byggt niður í sömu sort, eitt spil í einu; auður reitur helst auður. Eins oft og þú vilt eru bunkarnir teknir saman í röð, án þess að stokka, og gefið aftur fjögur og fjögur.
+L’éventail en boîte ¦ Blævængurinn í kassa
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Ásarnir eru lagðir fyrirfram; 16 blævængir með 3 spilum. Byggt niður til skiptis rautt og svart, eitt spil í einu; aðeins Kóngur fer á auðan reit.
+L’éventail fascinant ¦ Heillandi blævængurinn
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ La Belle Lucie (17 blævængir með 3 spilum) þar sem byggt er niður til skiptis rautt og svart, með sex endurgjöfum.
+La lampe de minuit ¦ Miðnæturlampinn
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ La Belle Lucie (17 blævængir með 3 spilum) þar sem byggt er niður til skiptis rautt og svart, með tveimur endurgjöfum.
+Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 blævængir með 3 spilum; farið upp eða niður um eitt gildi án tillits til lita, eitt spil í einu, og blævængur geymir aldrei fleiri en 3 spil. Engin endurgjöf.
+La maison dans les bois ¦ Húsið í skóginum
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Tveir stokkar, 35 blævængir með 3 spilum; farið upp eða niður um eitt gildi í sömu sort, eitt spil í einu. Auður reitur helst auður.
+La maison sur la colline ¦ Húsið á hæðinni
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Húsið í skóginum (tveir stokkar, 35 blævængir), en fjórir grunnbunkar hækka frá Ás upp í Kóng og fjórir aðrir lækka frá Kóngi niður í Ás.
+Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Ásarnir eru lagðir fyrirfram; 13 dálkar (4 með 3 spilum, 9 með 4). Grunnbunkar Ásanna hækka, grunnbunkar Kónganna lækka, í sömu sort. Á borðinu er farið upp eða niður í sömu sort, eitt spil í einu; auður dálkur helst auður.
+Le cadran du grand-père ¦ Afaklukkan
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 grunnbunkar eins og stundirnar á klukku, sem byrja á 2♥, 3♠, 4♦, 5♣… upp í Kóng ♣ og hækka í sömu sort (Kóngur fer á Ás). 8 dálkar með 5 spilum; byggt niður án tillits til lita, eitt spil í einu; auður dálkur tekur hvaða spil sem er.
+Le mur de pierre ¦ Steinveggurinn
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 dálkar með 6 spilum, annað hvert hulið, og vöndur með 16 spilum þar sem taka má hvaða spil sem er. Byggt niður til skiptis rautt og svart og heilar raðir færðar; auður dálkur tekur hvaða spil sem er.
+La fleur sauvage ¦ Villiblómið
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Blómagarðurinn (6 dálkar með 6 og vöndur með 16 spilum), en heilar raðir eru færðar.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 dálkar, allir sýnilegir. Fyrsta spilið sem lagt er á grunnbunka ræður byrjunargildi allra fjögurra (Kóngur fer á Ás). Farið upp eða niður í sömu sort, eitt spil í einu, og Kóngur snertir Ás.
+La place forte ¦ Virkið sterka
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Götur og sund (8 dálkar, byggt niður án tillits til lita), með einum lausum reit.
+Le fort ¦ Virkið
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Götur og sund (8 dálkar, byggt niður án tillits til lita), með tveimur lausum reitum.
+L’art du siège ¦ Umsáturslistin
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Umsetni kastalinn (Ásar lagðir fyrirfram, 8 dálkar með 6), með einum lausum reit.
+La toile de Pénélope ¦ Vefur Penelópu
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Umsetni kastalinn (Ásar lagðir fyrirfram, 8 dálkar með 6), en aðeins Kóngur fer í auðan dálk.
+La citadelle ¦ Borgarvirkið
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Umsetni kastalinn, en meðan gefið er fer hvert spil sem getur farið upp á grunnbunka þangað strax.
+Les rois exilés ¦ Útlægu kóngarnir
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Borgarvirkið (spilin sem geta farið upp fara þangað meðan gefið er), en aðeins Kóngur fer í auðan dálk.
+Le bastion ¦ Varnarvirkið
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 dálkar með 5 spilum og 2 lausir reitir sem þegar eru uppteknir; farið upp eða niður í sömu sort, eitt spil í einu; auður dálkur tekur hvaða spil sem er.
+La boîte à thé ¦ Tedósin
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 dálkar með 6 eða 7 spilum, allt sést; byggt niður án tillits til lita og heilar raðir færðar; auður dálkur tekur hvaða spil sem er.
+La boîte à thé américaine ¦ Ameríska tedósin
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 dálkar með 6 eða 7 spilum, allt sést; byggt niður til skiptis rautt og svart og heilar raðir færðar; auður dálkur tekur hvaða spil sem er.
+La boîte à thé anglaise ¦ Enska tedósin
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 dálkar með 6 eða 7 spilum, allt sést; byggt niður til skiptis rautt og svart, eitt spil í einu; aðeins Kóngur fer í auðan dálk.
+Les trois sommets stricts ¦ Ströngu tindarnir þrír
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Tindarnir þrír, en Kóngur og Ás fylgja ekki hvor öðrum: leikurinn er erfiðari.
+Golf double ¦ Tvöfalt Golf
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf með tveimur stokkum: 9 dálkar með 7 spilum. Sendu á afkastbunkann spil sem er rétt fyrir ofan eða neðan; ekkert fer á Kóng.
+As en haut (5 colonnes) ¦ Ásar upp (5 dálkar)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Ásar upp með 5 dálkum: fjarlægðu spil þegar annar dálkur sýnir hærra spil í sömu sort (Ás er hæstur). Unnið ef aðeins Ásarnir 4 eru eftir.
+La baronne ¦ Barónessan
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 bunkar: fjarlægðu stakan Kóng, eða tvö efstu spil sem gera 13 (Gosi 11, Drottning 12). Stokkurinn leggur eitt spil á hvern bunka.
+Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Hvert dregið spil fer á grunnbunka eða á einn af 4 biðbunkum. Grunnbunkarnir byrja á Ás og hækka um einn, án tillits til lita.
+Le chat dans le coin ¦ Kötturinn í horninu
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Ásarnir eru lagðir fyrirfram og hækka um einn í sínum lit (rautt á rautt, svart á svart). Hvert dregið spil fer á grunnbunka eða á einn af 4 biðbunkum; einu sinni eru bunkarnir teknir saman til að draga aftur.
+La stratégie ¦ Herkænskan
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Hvert dregið spil fer á einn af 8 biðbunkum; aðeins Ásar fara strax upp. Þegar stokkurinn er tómur eru efstu spil bunkanna sett upp, um eitt í sömu sort.
+Gizeh ¦ Giza
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Píramídinn án stokks: hin 24 spilin sjást í 3 röðum og öll má taka. Fjarlægðu pör sem gera 13 (Gosi 11, Drottning 12; Kóngur fer einn).
+Toutânkhamon ¦ Tútankamon
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Píramídinn, en stokknum er flett þremur spilum í einu (aðeins það síðasta er spilað) og fara má í gegn eins oft og þú vilt.
+La lune bleue ¦ Blátt tungl
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, en Ásarnir fara fremst í raðirnar: raða þarf hverri röð frá Ás upp í Kóng í sömu sort. Gat tekur spil í sömu sort rétt fyrir ofan nágrannann til vinstri. Tvisvar má taka saman það sem er óraðað og gefa aftur.
+La lune rouge ¦ Rautt tungl
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Blátt tungl, en Ásarnir eru lagðir fyrirfram fremst í raðirnar og götin eru aftast í röðunum frá byrjun.
+Le voisin ¦ Nágranninn
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ 5 × 5 rist: fjarlægðu tvö spil sem snertast (líka á ská) og gera 13 (Gosi 11, Drottning 12); Kóngur fer einn. Þjappaðu svo ristinni.
+Isabelle ¦ Ísabella
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 dálkar með 4 spilum (aðeins það neðsta sést): fjarlægðu tvö spil af sama gildi neðst úr dálkunum. Hreinn heppnisleikur, til að slaka á.
+Quatorze en colonnes ¦ Fjórtán í dálkum
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 dálkar með öll spilin sýnileg: fjarlægðu tvö spil neðst úr dálkunum sem gera 14 (Gosi 11, Drottning 12, Kóngur 13).
+Ramassé et redistribué, sans mélanger. ¦ Tekið saman og gefið aftur, án þess að stokka.
+Les tas d’attente sont ramassés dans la pioche. ¦ Biðbunkarnir eru teknir saman í stokkinn.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Opnaðu Leikur, veldu „🂠 Kaplar (spilaleikir)“ í „Leikur“, síðan leikinn meðal 233 kapla flokkaðra eftir fjölskyldu (Klondike, FreeCell, Kónguló, Yukon, Fjörutíu þjófar, Kastalar og garðar, paraleikir). Dragðu spil (eða röð) á annan bunka, eða smelltu á það og síðan þangað sem það á að fara; tvísmellur: á grunnbunka; smellur á stokkinn: draga. Í paraleikjum (Píramídi, Ellefu, Þrettán…) smellirðu á spilin sem eiga saman.
+Quelles autres patiences sont arrivées ensuite ? ¦ Hvaða aðrir kaplar komu síðan?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Hundrað og tveir sígildir kaplar í viðbót, hver með sínar reglur í „📖 Reglurnar“ í leiknum. Klondike- og Canfield-fjölskyldan: Agnes Bernauer, Thumb and Pouch, Ekki einn, Blindgöturnar, Átta sinnum átta, Spike, Víxl, Harpan, Stóra harpan, Acme, Ameríska kartan, Marglitur Canfield, Hertogaynjan, Hliðið. Með lausum reitum: Mörgæsin, Baker’s Game (aðeins Kóngur), Afslappaður Seahaven, Repair, Ocean Towers, Sjö sinnum fjórir, Sjö sinnum fimm, FreeCell áskorun, FreeCell ofuráskorun. Köngulær og sígaunar: Bjallan, Sporðdrekahali, Tvöfaldur Scorpion, Skilnaðarástæða, Tarantúlan, Opin kónguló, Harpa Milligans, Harpan frá Lexington, Brunswick, Carlton, Miss Milligan, Millie, Elba-eyja, Ólympsfjall. Yukon: Ástralski kapallinn, Canberra, Raw Prawn, Rushdike, Kínverski aginn, Tvöfaldur rússneskur kapall. Fjörutíu þjófar og frændur þeirra: Alí Baba, Cassim, Röð og fylking, Önnum köfnu Ásarnir, Hirðin, Ferningur Napóleons, Útlegð Napóleons, Deuces, Minnkandi tunglið, Hinir frægu fimmtíu, Fjörutíu og níu, Án takmarkana, Litlu fjörutíu, Sebrahesturinn, Þingið, Löggjafarþingið, Jafnt og oddatala, Konunglegi kotillioninn. Kastalar, blævængir og garðar: Happaþrettánið, Portúgalski kapallinn, Ríflegur skammtur, Sá grimmi, Þrautseigjan, Bylgjublævængurinn, Blævængurinn í kassa, Heillandi blævængurinn, Miðnæturlampinn, Shamrocks, Húsið í skóginum, Húsið á hæðinni, Bisley, Afaklukkan, Steinveggurinn, Villiblómið, Skákborðið, Virkið sterka, Virkið, Umsáturslistin, Vefur Penelópu, Borgarvirkið, Útlægu kóngarnir, Varnarvirkið, Tedósin (og amerísk og ensk útgáfa hennar). Pör, raðir og útreikningar: Ströngu tindarnir þrír, Tvöfalt Golf, Ásar upp (5 dálkar), Barónessan, Sir Tommy, Kötturinn í horninu, Herkænskan, Giza, Tútankamon, Blátt tungl, Rautt tungl, Nágranninn, Ísabella og Fjórtán í dálkum.
+(suite) ¦ (framhald)
+.pptx : textes, images, formes, tableaux ¦ .pptx: textar, myndir, form, töflur
+Ce texte est vide : rien à mettre en diapositives. ¦ Þessi texti er auður: ekkert til að setja á glærur.
+Cette image n’est pas dans les médias. ¦ Þessi mynd er ekki í miðlum.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Senda til…: framsetningin sem myndband, í Myndbandsklippingu eða á vefinn þinn
+Fichier PowerPoint téléchargé. ¦ PowerPoint-skrá sótt.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Framsetningin verður myndband ({time}), sett í Miðla, síðan velur þú hvert það fer: Myndbandsklipping eða vefurinn þinn. Hafðu gluggann opinn meðan tekið er upp.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Myndasýningin verður myndband ({time}), sett í Miðla, síðan velur þú hvert það fer: Myndbandsklipping eða vefurinn þinn. Hafðu gluggann opinn meðan tekið er upp.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Myndasýningin sem myndband, sett í miðla, síðan í Myndbandsklippingu eða á vefinn þinn
+PowerPoint : assemblage du fichier… ¦ PowerPoint: set saman skrána…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: glæra {n} / {total}
+PowerPoint impossible : {error} ¦ PowerPoint mistókst: {error}
+📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Senda framsetninguna
+📤 Envoyer le diaporama ¦ 📤 Senda myndasýninguna
+📤 Envoyer vers… (la vidéo) ¦ 📤 Senda til… (myndbandið)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Senda til… (Myndbandsklipping, vefurinn þinn)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Flytja út myndina (PNG, JPG, WebP, TIFF, prenta)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Flytja út: lagfærðu myndina (PNG, JPG, WebP, TIFF, prenta) eða fyrir / eftir
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Lagfærða myndin (PNG, JPG, WebP, TIFF, prenta)…
+🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ létt, fyrir vefinn
+🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ án taps, til varðveislu
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Þessi vafri ræður ekki við WebP: veldu PNG eða JPG.
+Cette action de retouche n’existe plus. ¦ Þessi lagfæringaraðgerð er ekki lengur til.
+Choisis une photo à retoucher. ¦ Veldu mynd til að lagfæra.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Senda sýndu myndina eða skýrsluna í annað verkfæri
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Opna mynd A eða B í Myndvinnslu
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Flytja út sýndu myndina, eða prenta báðar myndirnar með líkindunum og athugasemdunum
+Exporter l’image (ce qui est affiché)… ¦ Flytja út myndina (það sem er sýnt)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Prenta (báðar myndirnar, líkindin, athugasemdirnar)…
+L’image affichée ¦ Sýnda myndin
+Le compte rendu (photos, ressemblance, notes) ¦ Skýrslan (myndir, líkindi, athugasemdir)
+La Retouche des photos n’est pas chargée. ¦ Myndvinnslan er ekki hlaðin.
+Photo {side} — {name} ¦ Mynd {side} — {name}
+Retoucher quelle photo ? ¦ Hvaða mynd á að lagfæra?
+Utiliser ¦ Nota
+✒️ Quel dessin ? ¦ ✒️ Hvaða teikning?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Engin teikning vistuð í Vigurteikningu.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Ekki tókst að lesa þessa teikningu: opnaðu Vigurteikningu einu sinni og reyndu aftur.
+📝 Quel document ? ¦ 📝 Hvaða skjal?
+Aucun document dans le Traitement de texte. ¦ Ekkert skjal í Ritvinnslu.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Myndir sem renna (‹ ›); án skriftu renna þær með fingri
+Les images du diaporama ¦ Myndir myndasýningarinnar
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Myndband úr miðlunum þínum (eða úr skrá: 📁 Flytja inn…), með spilunar- og heilskjáshnöppum
+La vidéo du site ¦ Myndband vefsins
+Télécharger la vidéo ¦ Sækja myndbandið
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Hljóð úr miðlunum þínum (vitnisburður, lag…), og það sem heyrist skrifað fyrir neðan ef þú vilt
+Le son du site ¦ Hljóð vefsins
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Það sem heyrist (valfrjálst)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Skrifaðu eða límdu uppskriftina: hún verður undir hljóðinu, fyrir þá sem geta ekki hlustað. Skildu eftir autt ef þú vilt hana ekki.
+Ajouter le son ¦ Bæta við hljóðinu
+Télécharger le son ¦ Sækja hljóðið
+Ce qu’on entend ¦ Það sem heyrist
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Ein af vigurteikningunum þínum, eða límd SVG (án skriftu eða tengla út á við)
+Un de mes dessins ¦ Ein af teikningunum mínum
+Dessin vectoriel → mes dessins enregistrés ¦ Vigurteikning → vistaðar teikningar mínar
+Coller un SVG ¦ Líma SVG
+Le code <svg>…</svg> d’un dessin ¦ <svg>…</svg> kóði teikningar
+📋 Coller un SVG ¦ 📋 Líma SVG
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Límdu kóða teikningarinnar hér, frá <svg> til </svg>. Skriftur og tenglar út á við eru fjarlægðir.
+Ajouter le dessin ¦ Bæta við teikningunni
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Texti úr Ritvinnslu (bréf, frásögn), hreinritaður fyrir síðuna
+Ce document est vide. ¦ Þetta skjal er autt.
+Vidéo, son, dessin et texte ¦ Myndband, hljóð, teikning og texti
+🎬 Changer la vidéo… ¦ 🎬 Skipta um myndband…
+🎧 Changer le son… ¦ 🎧 Skipta um hljóð…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Skráin fylgir vefnum (mappan medias/) við útflutning og birtingu.
+Un autre son ¦ Annað hljóð
+Une autre vidéo ¦ Annað myndband
+{what} (dossier medias/) ¦ {what} (mappan medias/)
+vidéo ou son ¦ myndband eða hljóð
+vidéos ou sons ¦ myndbönd eða hljóð
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: of þungt fyrir vef (90 MB hámark á skrá, 300 MB samtals)
+vidéo ou son pas mis ¦ myndband eða hljóð ekki sett inn
+vidéos ou sons pas mis ¦ myndbönd eða hljóð ekki sett inn
+Mon site web n’est pas chargé : recharge la page. ¦ Vefsíðan mín er ekki hlaðin: endurhladdu síðuna.
+Mon site web ne sait pas recevoir ça. ¦ Vefsíðan mín getur ekki tekið við þessu.
+Ce texte est vide. ¦ Þessi texti er auður.
+Mon site ¦ Vefurinn minn
+ouvert ¦ opinn
+la dernière fois ¦ síðast
+ouvert, pas encore enregistré ¦ opinn, ekki enn vistaður
+{what} : sur quel site ? ¦ {what}: á hvaða vef?
+Un nouveau site ¦ Nýr vefur
+Sur quelle page ? ¦ Á hvaða síðu?
+Une nouvelle page… ¦ Ný síða…
+📄 Nouvelle page ¦ 📄 Ný síða
+Le nom de la page (il apparaît dans le menu) : ¦ Heiti síðunnar (það birtist í valmyndinni):
+La vidéo ¦ Myndbandið
+{what} est sur la page « {page} » de « {site} » ¦ {what} er á síðunni „{page}“ á „{site}“
+vidéos WebM ¦ WebM-myndbönd
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ iPhone frá því fyrir 2024 spila það ekki: notaðu frekar MP4 (H.264), sem allir geta spilað.
+vidéos .mov (QuickTime) ¦ .mov-myndbönd (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Oft ólæsilegt utan Apple: gerðu það aftur í MP4 (🎬 Myndbandsklipping → Flytja út).
+vidéos Ogg (.ogv) ¦ Ogg-myndbönd (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Aldrei í Safari né á iPhone: notaðu frekar MP4.
+sons Ogg (Vorbis, Opus) ¦ Ogg-hljóð (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari spilar þau aðeins frá 2025: notaðu frekar MP3 (🎧 Hljóð → Flytja út).
+sons FLAC ¦ FLAC-hljóð
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Virkar alls staðar, en það er þungt fyrir vef: MP3 hleðst miklu hraðar.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (myndasýningin stoppar á hverri mynd)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Virkar alls staðar síðan 2019; annars staðar renna myndirnar án þess að stoppa.
+Maison par époques ¦ Hús eftir tímabilum
+Ma carte animée ¦ Hreyfða kortið mitt
+La maison au fil du temps ¦ Húsið í tímans rás
+Le dessin vectoriel n’est pas chargé. ¦ Vigurteikningin er ekki hlaðin.
+Lecture de la carte… ¦ Les kortið…
+Carte introuvable ¦ Kort finnst ekki
+La maison n’est pas chargée. ¦ Húsið er ekki hlaðið.
+Lecture de la maison… ¦ Les húsið…
+Maison introuvable ¦ Hús finnst ekki
+Le plan de cette maison est vide. ¦ Grunnmynd þessa húss er auð.
+Choisir une carte ¦ Velja kort
+Chercher une carte… ¦ Leita að korti…
+{n} objets ¦ {n} hlutir
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Hlutir sem hafa ártöl (flipinn Eiginleikar kortsins) birtast á sínum tíma.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Ekkert kort vistað: búðu til eitt í Breytingaverkfæri → 🗺️ Kort.
+Choisir une maison ¦ Velja hús
+Chercher une maison… ¦ Leita að húsi…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Hvert tímabil hússins (🕰) verður að skoti, hvert á eftir öðru, með deyfingu.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Ekkert hús vistað: teiknaðu eitt í Breytingaverkfæri → 🏠 Hús.
+Apparition des objets ¦ Hlutir birtast
+D’un coup ¦ Allt í einu
+Avance doucement ¦ Færist hægt fram
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Deyfing milli tímabila (0 til 0,9)
+L’année et le nom de l’époque en légende ¦ Árið og heiti tímabilsins sem myndatexti
+(une copie de la carte) ¦ (afrit af kortinu)
+En faire la musique ¦ Gera úr því tónlist
+Ce son passe en musique de fond, pour tout le film ¦ Þetta hljóð verður bakgrunnstónlist fyrir alla myndina
+Voix retirée. ¦ Rödd fjarlægð.
+Le son est maintenant la musique du film. ¦ Hljóðið er nú tónlist myndarinnar.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Hljóðið er rödd myndarinnar (flipinn Mynd). „🎵 Gera úr því tónlist“ til að setja það í bakgrunn.
+Animer dans le Studio ¦ Hreyfa í Hreyfimyndaveri
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Tímasleðinn spilar sjálfur: hlutirnir birtast á sínum tíma
+Le Studio d’animation n’est pas chargé. ¦ Hreyfimyndaverið er ekki hlaðið.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Ekkert kort vistað: byrjaðu á „＋ Nýtt kort“.
+Quelle carte animer ? ¦ Hvaða kort á að hreyfa?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Hlutir sem hafa ártöl (flipinn Eiginleikar) birtast á sínum tíma, frá fyrsta ári til hins síðasta.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Mynd þar sem tímasleðinn færist sjálfur, frá fyrsta ári til hins síðasta
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Þetta kort er of þungt til að afrita í mynd: vistaðu það, síðan Breytingaverkfæri → 🗺️ Kort → „🎞 Hreyfa í Hreyfimyndaveri“.
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Grunnmyndin eða þrívíddarsýnin í öðru verkfæri: klipping, framsetning, umbrot, teikning…
+🎞 Animer les époques dans le Studio ¦ 🎞 Hreyfa tímabilin í Hreyfimyndaveri
+Animer les époques dans le Studio ¦ Hreyfa tímabilin í Hreyfimyndaveri
+Le plan (image) ¦ Grunnmyndin (mynd)
+La vue 3D (image) ¦ Þrívíddarsýnin (mynd)
+Le plan en dessin (vectoriel, mise en page…) ¦ Grunnmyndin sem teikning (vigur, umbrot…)
