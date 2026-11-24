@@ -1,0 +1,227 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Migrations, mesures, crises, météo</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8;--parch:#e8d6ae;--parch-ink:#4a3218;--stage:#3a3d44}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b;--parch:#c9b48a;--parch-ink:#2e1f0e;--stage:#0d0f12}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green);background:var(--green-bg)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.vio{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.wide{grid-column:1 / -1}
+.grid>*,.grid3>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0;font-size:12px}
+.meta span{border:1.5px solid var(--line2);padding:2px 7px;background:var(--grey-bg)}
+.meta .p1{border-color:var(--red);color:var(--red);background:var(--red-bg);font-weight:800}
+.meta .p2{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg);font-weight:800}
+.meta .p3{border-color:#8a8f99;color:var(--muted);font-weight:800}
+.why{font-size:13px;margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.input{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;background:var(--paper);min-height:28px;display:inline-flex;align-items:center;color:var(--ink)}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:4px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.tg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px}.tg i{width:30px;height:17px;border-radius:9px;background:var(--blue);position:relative;flex:none}.tg i:after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.tg.off i{background:var(--line2)}.tg.off i:after{right:auto;left:2px}
+.scrollx{overflow-x:auto;max-width:100%}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.scrollx>table{min-width:720px}
+/* gabarit */
+.fld{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:6px 8px;font-size:12.5px;align-items:center}
+.fld .k{color:var(--muted)}
+.fld .v{border:1.5px solid var(--line2);padding:3px 7px;background:var(--paper);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld .v.empty{color:var(--soft);font-style:italic;border-style:dashed}
+.fld .v.got{border-color:var(--green);background:var(--green-bg)}
+/* documents liés */
+.doc{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--shadow);padding:12px 14px;min-width:0}
+.doc h3{margin:0 0 6px;font-size:16px}
+.blk{border-top:1.5px solid var(--line2);padding-top:8px;margin-top:10px}
+.blk h4{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lk{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line2);font-size:13px}
+.common{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.learn{font-size:13px;margin:4px 0;padding:6px 8px;background:var(--blue-bg);border-left:3px solid var(--blue)}
+.toc{list-style:none;margin:0;padding:0;font-size:13px}
+.toc li{display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px dashed var(--line2)}
+.toc li.sub{padding-left:22px}
+.toc .rng{color:var(--muted);font-variant-numeric:tabular-nums;min-width:86px}
+.strip{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.strip span{width:26px;height:34px;border:1.5px solid var(--line2);background:var(--grey-bg);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px}
+.strip span.c1{background:var(--blue-bg);border-color:var(--blue)}.strip span.c2{background:var(--green-bg);border-color:var(--green)}.strip span.c3{background:var(--yel-bg);border-color:var(--yel)}
+.dq{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 16px;margin:14px 0;max-width:1000px}
+.dq h3{margin:0 0 8px;font-size:16px}
+.opt{border-left:4px solid var(--line2);padding:6px 10px;margin:6px 0;font-size:13px}
+.opt.rec{border-left-color:var(--blue);background:var(--blue-bg)}
+.opt b{display:block}
+@media (max-width:820px){.grid{grid-template-columns:1fr}body{padding:16px}}
+
+/* registres : état des pages */
+.pmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:3px;margin:8px 0}
+.pmap span{height:38px;border:1.5px solid var(--line2);font:700 10px system-ui;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px;background:var(--grey-bg);color:var(--muted);position:relative}
+.pmap .s-fin{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.pmap .s-relue{background:#e3eeff;border-color:var(--blue);color:var(--blue-ink)}
+.pmap .s-cours{background:var(--yel-bg);border-color:var(--yel);color:var(--yel-ink)}
+.pmap .s-todo{background:var(--paper)}
+.pmap .s-abs{background:repeating-linear-gradient(135deg,var(--red-bg) 0 4px,var(--paper) 4px 8px);border-color:var(--red);border-style:dashed;color:var(--red)}
+.pmap .s-pasligne{background:repeating-linear-gradient(135deg,var(--vio-bg) 0 4px,var(--paper) 4px 8px);border-color:var(--vio);border-style:dashed;color:var(--vio)}
+.pmap .s-blank{background:var(--paper);border-style:dotted;color:var(--soft)}
+.pmap .s-cur{outline:3px solid var(--ink);outline-offset:1px}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;margin:6px 0}
+.leg i{display:inline-block;width:14px;height:14px;border:1.5px solid var(--line2);vertical-align:-3px;margin-right:4px}
+.stack{display:flex;height:16px;border:2px solid var(--ink);margin:6px 0;overflow:hidden}
+.stack b{display:block;height:100%}
+.stack .a{background:var(--green)}.stack .b{background:var(--blue)}.stack .c{background:var(--yel)}.stack .d{background:var(--line2)}.stack .e{background:repeating-linear-gradient(135deg,var(--red) 0 3px,var(--red-bg) 3px 6px)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0}
+.kpi div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px}
+.kpi b{display:block;font-size:22px;line-height:1.1}.kpi small{color:var(--muted);font-size:12px}
+.todo{list-style:none;margin:0;padding:0;font-size:13px}
+.todo li{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--line2)}
+.todo li b{min-width:28px;text-align:right}
+.tree{list-style:none;margin:0;padding:0;font-size:13px}
+.tree li{padding:0}
+.tree .ln{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:6px;align-items:center;padding:5px 0;border-bottom:1px dashed var(--line2)}
+.tree ul{list-style:none;margin:0;padding:0 0 0 22px}
+.tree .tw{font:700 12px system-ui;color:var(--muted);text-align:center;border:1.5px solid var(--line2);height:20px;line-height:17px}
+.tree .rng{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px;margin-right:6px}
+.tree .el{color:var(--muted);font-style:italic}
+.minibar{display:inline-flex;width:70px;height:8px;border:1.5px solid var(--ink);vertical-align:middle;overflow:hidden}.minibar b{display:block;height:100%}
+.ft td:has(.minibar){white-space:nowrap}.ft td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.ft tr.grp td{background:var(--grey-bg);font-weight:800;border-bottom:2px solid var(--ink)}
+.ft tr.fonds td{font-weight:700}
+.idf{display:grid;grid-template-columns:170px minmax(0,1fr);gap:6px 10px;font-size:13px}
+.idf .k{color:var(--muted)}
+.hist{display:flex;align-items:flex-end;gap:2px;height:70px;border-bottom:2px solid var(--ink);margin:6px 0 2px}
+.hist i{flex:1;background:var(--blue);min-height:2px}.hist i.gap{background:repeating-linear-gradient(135deg,var(--red) 0 3px,transparent 3px 6px);height:100%!important;opacity:.6}
+.hx{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.chk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px;font-size:12.5px}
+@media (max-width:820px){.grid,.grid3{grid-template-columns:minmax(0,1fr)}.idf{grid-template-columns:minmax(0,1fr)}.chk{grid-template-columns:minmax(0,1fr)}body{padding:14px}}
+
+.idea{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;box-shadow:4px 4px 0 var(--shadow);margin:0 0 10px}
+.idea h4{margin:0 0 4px;font-size:15px}.idea p{margin:4px 0;font-size:13.5px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.pr{font:700 10.5px system-ui;padding:2px 6px;border:1.5px solid;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.pr.a{color:var(--green);background:var(--green-bg)}.pr.b{color:var(--blue-ink);background:var(--blue-bg)}.pr.c{color:var(--muted);background:var(--grey-bg)}
+table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--paper)}table.t td,table.t th{border:1px solid var(--line2);padding:5px 7px;text-align:left;vertical-align:top}table.t th{background:var(--grey-bg)}
+.ask{border:2px solid var(--ink);background:var(--paper);padding:12px;box-shadow:6px 6px 0 var(--shadow);max-width:900px}
+.ask .in{border:2px solid var(--blue);padding:9px 12px;font-size:15px;margin-bottom:10px}
+.sugg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sugg>div{border:2px solid var(--line2);padding:8px}.sugg>div.on{border-color:var(--blue)}
+.sugg .pv{height:70px;display:flex;align-items:flex-end;gap:3px;margin-bottom:6px;background:var(--grey-bg);padding:6px}.sugg .pv b{flex:1;background:var(--blue)}
+.boxes{display:flex;flex-wrap:wrap;gap:12px}.bx{width:150px;font-size:12px;text-align:center}
+.bx .c{height:74px;display:flex;flex-direction:column;justify-content:center;align-items:center;margin-bottom:4px;padding:4px;color:#111}
+@media (max-width:700px){.sugg{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<h1>🌍 Migrations comparées · 💰📏 montants et mesures partout · 🦠 crises plus fines · 🌦 météo en un bouton — maquette</h1>
+<p class="sub">Ce qui existe déjà est gardé (convertisseur d’autrefois, crises, cartes des migrations, météo) ; la maquette montre ce qui s’ajoute. Rien n’est codé : coche, je fais ensuite.</p>
+<div class="toc"><a href="#p1"><b>1</b>Migrations comparées</a><a href="#p2"><b>2</b>Montants et mesures partout</a><a href="#p3"><b>3</b>Crises plus fines</a><a href="#p4"><b>4</b>Météo en un bouton</a><a href="#p5"><b>5</b>Ce que tu décides</a></div>
+
+<div class="part" id="p1">Partie 1</div><h2>🌍 Ta famille dans les grands mouvements</h2>
+<p class="sub">Aujourd’hui : les trajets de ta famille (Départs et émigration, carte des migrations, aire de vie, film). Il manque les <b>grands mouvements de l’histoire</b> pour les comparer.</p>
+<div class="grid">
+<div class="case"><div class="head"><span class="tag">Les données (nouvelles, sourcées)</span></div><h3>Environ 40 grands mouvements</h3>
+<div class="scrollx"><table><thead><tr><th>Mouvement</th><th>Quand</th><th>D’où → où</th><th>Source</th></tr></thead><tbody>
+<tr><td>Exode rural vers Paris</td><td>1850-1930</td><td>Massif central, Bretagne, Nord → Paris</td><td class="mini">INSEE, histoire des migrations</td></tr>
+<tr><td>Auvergnats et Aveyronnais à Paris (bougnats)</td><td>1850-1950</td><td>15, 12, 63, 43 → Paris</td><td class="mini">Musée de l’histoire de l’immigration</td></tr>
+<tr><td>Bretons à Paris et au Havre</td><td>1870-1960</td><td>22, 29, 56 → 75, 76</td><td class="mini">id.</td></tr>
+<tr><td>Savoyards et Piémontais</td><td>1800-1914</td><td>73, 74, Piémont → Lyon, Paris</td><td class="mini">id.</td></tr>
+<tr><td>Barcelonnettes au Mexique</td><td>1821-1950</td><td>04 → Mexique</td><td class="mini">Archives 04</td></tr>
+<tr><td>Basques et Béarnais aux Amériques</td><td>1830-1930</td><td>64 → Argentine, Uruguay, Californie</td><td class="mini">AD 64</td></tr>
+<tr><td>Italiens en France</td><td>1870-1960</td><td>Italie → Sud-Est, Lorraine, Paris</td><td class="mini">id.</td></tr>
+<tr><td>Polonais du Nord et de Lorraine</td><td>1919-1939</td><td>Pologne, Westphalie → 59, 62, 57</td><td class="mini">id.</td></tr>
+<tr><td>Colonisation de l’Algérie</td><td>1830-1914</td><td>Midi, Alsace, Espagne, Malte → Algérie</td><td class="mini">ANOM</td></tr>
+<tr><td>Rapatriés d’Algérie (pieds-noirs)</td><td>1962</td><td>Algérie → Midi, Corse, Paris</td><td class="mini">ANOM, INSEE</td></tr>
+<tr><td>Alsaciens-Lorrains optants</td><td>1871-1872</td><td>67, 68, 57 → France, Algérie</td><td class="mini">AD 67</td></tr>
+<tr><td>Émigration vers le Québec</td><td>1608-1760</td><td>Normandie, Perche, Poitou → Nouvelle-France</td><td class="mini">PRDH</td></tr>
+</tbody></table></div><p class="note">… et l’exode de 1940, les Espagnols de 1939, les Belges du Nord, les Arméniens de 1923, les Portugais de 1960… Chaque ligne : dates, régions de départ et d’arrivée (départements, pays), une phrase, une source.</p></div>
+<div class="case"><div class="head"><span class="tag">Listes → Histoire</span></div><h3>« 🌍 Ta famille dans les grands mouvements »</h3>
+<div style="border-left:4px solid var(--blue);padding:6px 10px;background:var(--blue-bg);margin:6px 0"><b>Exode rural vers Paris</b> <span class="pill ok">5 personnes</span><br><span class="mini">Pierre MAZAUD (Malvialle → Paris, 1891), Marie LACOMBE (Tulle → Paris, 1894), …</span></div>
+<div style="border-left:4px solid var(--blue);padding:6px 10px;background:var(--blue-bg);margin:6px 0"><b>Barcelonnettes au Mexique</b> <span class="pill q">1 possible</span><br><span class="mini">Jean DURAND : né à Barcelonnette, décédé à Puebla (1902) — « Oui, c’est ça » / « Non »</span></div>
+<p class="why">L’app croise les déplacements de chaque personne (naissance, mariage, résidence, décès, départs) avec les mouvements : même départ, même arrivée, même époque. Sûr ou « possible », jamais imposé.</p>
+<div class="row"><span class="btn small">🗺 Sur la carte des migrations</span><span class="btn small">📄 Dans le rapport</span><span class="btn small">🎞 Dans le film</span></div></div>
+<div class="case wide"><h3>Partout ailleurs</h3><table><tbody>
+<tr><td>🗺 Carte des migrations, aire de vie</td><td>Une couche « Grands mouvements » : les flèches des vagues en transparence, sous celles de ta famille ; un clic : la vague et sa source.</td></tr>
+<tr><td>👤 Fiche</td><td>Dans « 🧭 Ses déplacements » : « Pierre a fait partie de l’<b>exode rural vers Paris</b> (1850-1930) ».</td></tr>
+<tr><td>🌍 Le monde autour</td><td>Les vagues de l’époque de la personne, avec la source.</td></tr>
+<tr><td>📄 Rapport</td><td>« Ta famille dans l’histoire » : les vagues suivies, en quelques phrases, avec les noms et les sources.</td></tr>
+<tr><td>＋ Les miennes</td><td>Ajouter un mouvement (ex. « les verriers de Carmaux vers Albi ») : dates, d’où, où, source.</td></tr></tbody></table></div>
+</div>
+
+<div class="part" id="p2">Partie 2</div><h2>💰📏 Les montants et les mesures, partout</h2>
+<p class="sub">Aujourd’hui : le « 🪙 Convertisseur d’autrefois » (Argent, Mesures, Calendrier) et les euros dans les Successions. Il manque : la conversion là où les montants et les mesures sont écrits.</p>
+<div class="grid">
+<div class="case"><h3>Dans un acte transcrit (Atelier)</h3>
+<p style="font-family:Georgia,serif;font-size:15px;line-height:1.9">… la somme de <span style="border-bottom:2px dotted var(--blue)">trois cents livres tournois</span> pour la vente d’<span style="border-bottom:2px dotted var(--green)">un arpent et demi</span> de pré …</p>
+<div class="msg">💰 <b>300 livres</b> (1785) ≈ <b>3 900 €</b> d’aujourd’hui · 1 360 kg de pain · 375 journées de journalier<br><span class="mini">Ordre de grandeur (avant 1901). Source : tables de l’INSEE et prix du pain — <a href="#">voir le calcul</a></span></div>
+<div class="msg ok">📏 <b>1,5 arpent</b> (arpent de Paris, région de l’acte) = <b>0,51 ha</b> · arpent des eaux et forêts : 0,77 ha<br><span class="mini">Source : tables de comparaison de la Corrèze, an X</span></div>
+<p class="why">Repérés tout seuls dans le texte (soulignés en pointillé, comme les abréviations) ; la région vient du lieu de l’acte. Un réglage pour l’éteindre.</p></div>
+<div class="case"><h3>Ailleurs</h3><table><tbody>
+<tr><td>📦 Inventaires après décès</td><td>Une colonne « ≈ € d’aujourd’hui » à côté des journées de travail, et le total.</td></tr>
+<tr><td>💶 Budget, notes, fiches</td><td>Un montant ancien survolé → sa bulle (€, pain, journées).</td></tr>
+<tr><td>💰 Les prix d’autrefois</td><td>Le fichier des prix sourcés (pain, viande, loyer, salaires) branché au convertisseur : « 300 livres = 3 vaches, 2 ans de loyer d’une maison ».</td></tr>
+<tr><td>🪙 Monnaies de compte</td><td>Livre parisis, livre de Lorraine, monnaies de Savoie, de Provence…</td></tr>
+<tr><td>📏 Plus de mesures</td><td>Les tables par département (an X-1812), les poids régionaux, <b>une source par mesure</b>.</td></tr></tbody></table></div>
+<div class="case wide"><h3>Une source par mesure</h3><div class="scrollx"><table><thead><tr><th>Mesure</th><th>Où</th><th>Vaut</th><th>Source</th></tr></thead><tbody>
+<tr><td>Arpent</td><td>Paris</td><td>34,19 a</td><td class="mini">Tables de comparaison, Seine, an X</td></tr>
+<tr><td>Journal</td><td>Bretagne (Rennes)</td><td>48,62 a</td><td class="mini">Tables, Ille-et-Vilaine, an XI</td></tr>
+<tr><td>Setier (grains)</td><td>Paris</td><td>156,1 l</td><td class="mini">Tables, Seine, an X</td></tr>
+<tr><td>Boisseau</td><td>Tulle</td><td>≈ 25 l</td><td class="mini">Tables, Corrèze, an X</td></tr></tbody></table></div></div>
+</div>
+
+<div class="part" id="p3">Partie 3</div><h2>🦠 Les crises, plus fines</h2>
+<p class="sub">Aujourd’hui : 27 crises nationales sourcées, « années noires » de la famille, carte des années de crise, frise. Ce qui s’ajoute :</p>
+<div class="grid3">
+<div class="case"><h3>Épidémies locales</h3><p class="why">Variole, typhus, dysenterie, rougeole, diphtérie, disettes : par département et par année (environ 150 de plus, sourcées). « 5 décès à Malvialle en 1832 : <b>choléra</b> (épidémie dans la Corrèze, juin-sept. 1832) ».</p></div>
+<div class="case"><h3>La cause lue dans les actes</h3><p class="why">« mort de la petite vérole », « décédé du choléra » repérés dans les transcriptions (comme les dates et les métiers) et proposés comme cause du décès : la crise est alors <b>sûre</b>, pas seulement probable.</p></div>
+<div class="case"><h3>Saison, âges, comparaison</h3><p class="why">Les décès mois par mois (l’été du choléra, l’hiver de la grippe), enfants (moins de 5 ans) et adultes séparés, et la comparaison avec la mortalité du département quand elle est connue.</p></div>
+</div>
+<div class="case" style="margin-top:18px"><h3>Une seule liste de crises</h3><p class="why">Aujourd’hui deux listes (dont une en double dans la frise) : une seule, celle du « Monde autour », sert partout. On peut y ajouter les siennes (« incendie de Malvialle, 1789 »).</p></div>
+
+<div class="part" id="p4">Partie 4</div><h2>🌦 La météo d’autrefois, en un bouton</h2>
+<p class="sub">Aujourd’hui : il faut lancer un programme Python (des heures), puis importer le fichier. Proposé : les fichiers sont <b>fabriqués une fois</b> par GitHub et déposés dans une version « météo » du dépôt ; l’app les télécharge elle-même.</p>
+<div class="case"><div class="head"><span class="tag">Réglages → 🌦 Météo d’autrefois</span></div><h3>Les données dans l’app</h3>
+<table><tbody>
+<tr><td><b>Socle</b> (France, 300 stations, depuis 1836)</td><td>550 Mo</td><td><span class="btn blue small">⤓ Installer</span></td></tr>
+<tr><td><b>Pack Europe</b></td><td>≈ 2 Go</td><td><span class="btn small">⤓ Installer</span></td></tr>
+<tr><td><b>Pack complet</b></td><td>≈ 3 Go (en 2 morceaux)</td><td><div class="row"><span class="mini">⏳ 42 % · 1,3 Go sur 3 · reste ≈ 6 min</span><span class="btn small">⏸ Pause</span></div></td></tr>
+</tbody></table>
+<p class="why">Un clic par pack. La barre d’avancée ; « Pause » et reprise (même après avoir fermé l’app) ; le fichier est <b>vérifié</b> (empreinte sha256) puis rangé tout seul. « ⤒ Importer un fichier » reste pour ceux qui le fabriquent eux-mêmes.</p>
+<div class="msg warn">Ce qu’il faut de ton côté : ton accord pour publier ces fichiers sur GitHub (les données sont sous licences ouvertes : Météo-France Licence Ouverte, MétéoSuisse et IRM CC BY, NOAA domaine public), et ils seraient fabriqués <b>sans ERA5</b> (qui demande un compte personnel Copernicus) — on peut l’ajouter plus tard avec ta clé, gardée secrète.</div></div>
+
+<div class="part" id="p5">Partie 5</div><h2>Ce que tu décides</h2>
+<table><tbody>
+<tr><td><span class="cb on"></span></td><td>🌍 Les grands mouvements (≈ 40, sourcés), « Ta famille dans les grands mouvements », couche sur les cartes, fiche, rapport, les miens</td></tr>
+<tr><td><span class="cb on"></span></td><td>💰📏 Montants et mesures repérés dans les actes ; € dans les inventaires et les budgets ; prix d’autrefois branchés ; monnaies de compte ; une source par mesure, plus de départements</td></tr>
+<tr><td><span class="cb on"></span></td><td>🦠 Épidémies locales, causes lues dans les actes, saison et âges, comparaison, une seule liste</td></tr>
+<tr><td><span class="cb on"></span></td><td>🌦 Météo en un bouton (fichiers sur GitHub, sans ERA5 au départ)</td></tr>
+</tbody></table>
+<div class="msg">Tout est coché (conseillé). Réponds « vas-y » ou dis ce qu’il faut changer.</div>
+</div></body></html>
