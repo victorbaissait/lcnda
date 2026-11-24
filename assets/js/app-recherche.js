@@ -961,7 +961,7 @@
         IM.status=s;
         if(check&&s.online&&!s.online_error)imSet(IM_CHECKED,new Date().toISOString().slice(0,10));
         imPaint();
-        if($('#insee-maj-dialog')?.open)imDetailPaint();
+        if($('#insee-maj-detail'))imDetailPaint();
         return s;
     }
     // le temps qui reste : d'après l'avancée des 2 dernières minutes
@@ -1107,7 +1107,7 @@
             parts.push(`<p class="muted" style="margin:.3rem 0">${i18n('Installé : {who}',{who:`<b>${escapeHtml(plural(inst.rows,'personne'))}</b>`})}${ranges?` · ${escapeHtml(ranges)}`:''} · ${i18n('environ {s} sur le disque',{s:imSize(inst.bytes)})}${when?` · ${when}`:''}</p>`);
         }
         const checked=on?.checked_at?(window.LCNDA_UI?.when?.(on.checked_at,{label:'vérifié'})||escapeHtml(on.checked_at)):i18n('jamais vérifié');
-        parts.push(`<p class="muted" style="margin:.3rem 0;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span>data.gouv.fr : ${checked}${s.online_error?` · <span style="color:var(--red)">${escapeHtml(s.online_error)}</span>`:''}</span><button type="button" class="button small secondary" data-im-check>↻ ${i18n('Vérifier maintenant')}</button><button type="button" class="button small secondary" data-im-detail>${i18n('Détail par année et réglages…')}</button></p>`);
+        parts.push(`<p class="muted" style="margin:.3rem 0;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center"><span>data.gouv.fr : ${checked}${s.online_error?` · <span style="color:var(--red)">${escapeHtml(s.online_error)}</span>`:''}</span><button type="button" class="button small secondary" data-im-check>↻ ${i18n('Vérifier maintenant')}</button>${$('#workspace #insee-maj-detail')?'':`<button type="button" class="button small secondary" data-im-detail>${i18n('Détail par année et réglages…')}</button>`}</p>`);
         return parts.join('');
     }
     // la petite pastille en bas de l'écran, quand on n'est pas sur la page des décès
@@ -1194,7 +1194,7 @@
     async function imRemoveYear(year){
         const y=(IM.status?.installed?.years||[]).find(x=>x.year===year);if(!y)return;
         if(IM.status?.job?.status==='running'){toast(i18n('Une installation est en cours : mets-la en pause avant de retirer une année.'),'error');return;}
-        const title=year?i18n('Retirer les décès de {y} ?',{y:year}):i18n('Retirer les fichiers importés à la main ?');
+        const title=year?i18n('Retirer les décès de {y} ?',{y:String(year)}):i18n('Retirer les fichiers importés à la main ?');
         if(!await confirmBox(i18n('{who} seront retirées de l’index des décès (environ {s} libérés). Ta généalogie n’est pas touchée. Pour les remettre, il faudra les retélécharger.',{who:plural(y.rows,'fiche'),s:imSize(y.bytes)}),{title,okLabel:i18n('🗑 Retirer')}))return;
         let removed=0;
         try{
@@ -1202,7 +1202,7 @@
             while(!done&&guard++<5000){const r=await api('insee_maj_remove_year',{},{method:'POST',body:{year}});removed+=Number(r.deleted_rows||0);done=!!r.completed;const b=$(`[data-im-remove="${year}"]`);if(b){b.disabled=true;b.textContent=i18n('Retrait… {n}',{n:removed.toLocaleString('fr-FR')});}}
         }catch(error){toast(error.message,'error');await imLoad().catch(()=>{});return;}
         await imLoad().catch(()=>{});
-        toast(year?i18n('Décès de {y} retirés ({who}).',{y:year,who:plural(removed,'fiche')}):i18n('Fichiers importés à la main retirés ({who}).',{who:plural(removed,'fiche')}),'',year?{duration:12000,action:{label:i18n('↶ Annuler (retélécharger)'),run:()=>imStart([year])}}:{});
+        toast(year?i18n('Décès de {y} retirés ({who}).',{y:String(year),who:plural(removed,'fiche')}):i18n('Fichiers importés à la main retirés ({who}).',{who:plural(removed,'fiche')}),'',year?{duration:12000,action:{label:i18n('↶ Annuler (retélécharger)'),run:()=>imStart([year])}}:{});
     }
     /** Fenêtre « Décès INSEE : installer et mettre à jour » : le cadre, le détail par année, les réglages, fichier par fichier */
     async function openInseeRemoteDialog(){
@@ -1260,6 +1260,39 @@
         imSet(IM_TOLD,JSON.stringify([...told,...ups.map(u=>u.key)].slice(-60)));
         toast(imUpdatesText(ups),'',{duration:30000,action:{label:i18n('⤓ Mettre à jour'),run:()=>imStart('updates')}});
     }
+
+    /* ═════ Intégration : la page « ⚰️ Décès INSEE » des Réglages (groupe Données, à côté de la météo et des élections : même cadre
+     * que l'écran Recherche → Décès INSEE) et la source de données commune LCNDA_EXT.dataSources (« chercher cette personne dans
+     * les décès INSEE », pour n'importe quelle fiche, quand on veut). */
+    const IM_TAB=['insee_deces','25k2','⚰️ Décès INSEE (1970 → aujourd’hui)'];
+    {const app=window.LCNDA_APP;if(Array.isArray(app.defaultMaintenanceTabs)&&!app.defaultMaintenanceTabs.some(t=>t[0]===IM_TAB[0]))app.defaultMaintenanceTabs.push(IM_TAB);}
+    const imExt=window.LCNDA_EXT=window.LCNDA_EXT||{};
+    imExt.maintenance=imExt.maintenance||{};
+    imExt.maintenance[IM_TAB[0]]=async token=>{
+        const ws=$('#workspace');if(!ws)return;
+        ws.innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Réglages')} · ${i18n('Données')}`,title:i18n('Décès INSEE (1970 → aujourd’hui)'),icon:'⚰️',help:i18n('Le fichier des personnes décédées de l’INSEE, installé dans l’app : pour chercher un décès même sans Internet (Recherche → Décès INSEE).')})}<section class="card"><div data-im-box></div><div id="insee-maj-detail"></div></section></section>`;
+        imPaint();
+        if(!IM.running)await imLoad().catch(()=>{});
+        if(token!==undefined&&token!==state.workspaceToken)return;
+        imDetailPaint();
+    };
+    // ctx.person : {first_name, last_name, birth_year?, death_year?} ou une fiche complète (personName, years)
+    async function inseeRunForPerson(ctx,host){
+        const p=ctx?.person||{};
+        const nom=String(p.last_name||p.nom||'').trim(),prenom=String(p.first_name||p.prenom||'').trim().split(/\s+/)[0]||'';
+        if(!nom){host.innerHTML='';return;}
+        let s=IM.status;try{s=s||await imLoad();}catch(_){}
+        if(!Number(s?.installed?.rows)){host.innerHTML=imKiosk()?'':`<p class="muted">⚰️ ${i18n('Les décès INSEE ne sont pas installés.')} <button type="button" class="button small" data-im-all>⤓ ${i18n('Tout installer (1970 → aujourd’hui)')}</button> <button type="button" class="button small secondary" data-im-years>${i18n('Seulement certaines années…')}</button></p>`;return;}
+        const by=Number(p.birth_year||String(p.birth_date||'').match(/\d{4}/)?.[0]||0);
+        const q={nom,prenom,limit:20,offset:0};if(by){q.birth_year_from=by-1;q.birth_year_to=by+1;}
+        host.innerHTML=`<p class="muted">${i18n('Recherche dans les décès INSEE…')}</p>`;
+        try{const r=await api('insee_search',q);host.innerHTML=r.rows?.length?`<p>${i18n('⚰️ {n} dans le fichier des décès de l’INSEE.',{n:plural(Number(r.total||0),'correspondance')})}</p>${inseeResultsTableHtml(r.rows)}`:'';}
+        catch(error){host.innerHTML=`<p class="muted">${escapeHtml(error.message)}</p>`;}
+    }
+    (imExt.dataSources=imExt.dataSources||[]).push({id:'insee_deces',icon:'⚰️',label:i18n('Décès INSEE (1970 → aujourd’hui)'),group:'La personne',needs:['person'],
+        installed:async()=>{try{return Number((IM.status||await imLoad()).installed?.rows)>0;}catch(_){return false;}},
+        install:()=>{const b=document.createElement('button');imStartAll(b);},
+        run:inseeRunForPerson});
 
     // Fenêtre listant précisément chaque fichier déjà importé (nom, date, lignes lues/insérées,
     // plage d'années couverte), pour que l'utilisateur sache exactement ce qui a été chargé.

@@ -60,7 +60,7 @@ const H = win.LCNDA_EXT.cielHeure, SKY = win.LCNDA_EXT.tresorSky;
         x = r('1900-03-12', '04:00', {name: 'Brest', country: 'France', lat: 48.39, lng: -4.49}); assert.strictEqual(x.kind, 'ville'); assert.match(x.sentence, /De 1891 à 1911.*Paris, 9 min 21 s/); assert.match(x.line, /= 4 h 51 à nos montres/);
         x = r('1925-07-12', '14:30', {name: 'Lyon', country: 'France', lat: 45.76, lng: 4.84}); assert.strictEqual(x.kind, 'ete'); assert.match(x.line, /15 h 30 à nos montres d’aujourd’hui \(heure d’été\)/);
         x = r('1925-01-12', '14:30', {name: 'Lyon', country: 'France', lat: 45.76, lng: 4.84}); assert.strictEqual(x.kind, 'legale'); assert.match(x.sentence, /11 mars 1911/);
-        x = r('1941-01-12', '14:30', {name: 'Paris', country: 'France', lat: 48.85, lng: 2.35}); assert.strictEqual(x.kind, 'allemande'); assert.strictEqual(x.utc, '1941-01-12T13:30');
+        x = r('1941-01-12', '14:30', {name: 'Paris', country: 'France', lat: 48.85, lng: 2.35}); assert.strictEqual(x.kind, 'allemande'); assert.strictEqual(x.utc, '1941-01-12T12:30'); // heure d'été allemande sans arrêt jusqu'en novembre 1942
         x = r('1941-01-12', '14:30', {name: 'Lectoure', country: 'France', lat: 43.93, lng: 0.62}); assert.strictEqual(x.kind, 'libre'); assert.strictEqual(x.utc, '1941-01-12T13:30'); assert.match(x.sentence, /1 h de moins qu’en zone occupée/);
         x = r('1900-01-12', '23:30', {name: 'Strasbourg', country: 'France', county: 'Bas-Rhin', lat: 48.58, lng: 7.75}); assert.strictEqual(x.kind, 'allemande'); assert.match(x.sentence, /Alsace-Moselle était allemande/);
         x = r('1885-01-12', '10:00', {name: 'Liège', country: 'Belgique', lat: 50.63, lng: 5.57}); assert.match(x.sentence, /De 1880 à 1892.*Bruxelles, 17 min 30 s/);
@@ -94,9 +94,9 @@ $ev = [];
 $per = function ($f, $l, $g, $st, $evs) use ($pdo, $tag, &$ev) { $pdo->prepare("INSERT INTO persons(first_name,last_name,gender,living_status) VALUES(?,?,?,?)")->execute([$f, $l, $g, $st]); $id = (int) $pdo->lastInsertId();
     foreach ($evs as [$t, $txt, $iso, $p, $time]) { $pdo->prepare("INSERT INTO events(scope, person_id, event_type_id, year, date_text, sort_date, place_id, event_time) VALUES('person',?,?,?,?,?,?,?)")->execute([$id, $tag($t), (int) substr($iso, 0, 4), $txt, $iso, $p, $time]); $ev[$f . $t] = (int) $pdo->lastInsertId(); } return $id; };
 $ids = [
-  'jean' => $per('Jean', 'MAZAUD', 'M', 'deceased', [['BIRT', '12 mars 1850', '1850-03-12', $brest, '04:00'], ['DEAT', '1 mai 1920', '1920-05-01', $brest, '']]),
-  'paul' => $per('Paul', 'DURAND', 'M', 'deceased', [['BIRT', '3 mai 1905', '1905-05-03', $tulle, ''], ['DEAT', '1 janvier 1908', '1908-01-01', $tulle, '']]),
-  'marie' => $per('Marie', 'LACOMBE', 'F', 'living', [['BIRT', '1 avril 1997', '1997-04-01', $paris, '21:00']]),
+  'jean' => $per('Jean', 'MAZAUD', 'male', 'deceased', [['BIRT', '12 mars 1850', '1850-03-12', $brest, '04:00'], ['DEAT', '1 mai 1920', '1920-05-01', $brest, '']]),
+  'paul' => $per('Paul', 'DURAND', 'male', 'deceased', [['BIRT', '3 mai 1905', '1905-05-03', $tulle, ''], ['DEAT', '1 janvier 1908', '1908-01-01', $tulle, '']]),
+  'marie' => $per('Marie', 'LACOMBE', 'female', 'living', [['BIRT', '1 avril 1997', '1997-04-01', $paris, '21:00']]),
 ];
 echo json_encode(['ids' => $ids, 'ev' => $ev]);`], {cwd: root, encoding: 'utf8', env});
     if (seed.status !== 0 || !/jean/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
@@ -125,9 +125,9 @@ echo json_encode(['ids' => $ids, 'ev' => $ev]);`], {cwd: root, encoding: 'utf8',
         });
         await t('fiche de Jean MAZAUD : « Il a pu voir : la comète de Halley (1910, à 60 ans) », 🕰️ sous l’heure de sa naissance', async () => {
             await p.evaluate(id => { const A = window.LCNDA_APP; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.jean);
-            await p.waitForSelector('[data-ch-seen] .ch-seen-list li', {timeout: 20000});
+            await p.waitForSelector('[data-ch-seen] .ch-seen-list li', {timeout: 20000, state: 'attached'});
             const txt = await p.textContent('[data-ch-seen]');
-            assert.match(txt, /Il a pu voir :/); assert.match(txt, /la comète de Halley \(1910, à 60 ans\)/); assert.match(txt, /la comète de Donati \(1858, à 8 ans\)/);
+            assert.match(txt, /^\s*Il a pu voir ☄️ la comète de Donati/); assert.match(txt, /▸ plus/); assert.match(txt, /la comète de Halley \(1910, à 60 ans\)/); assert.match(txt, /la comète de Donati \(1858, à 8 ans\)/);
             assert.match(txt, /la grande aurore de 1859 \(tempête de Carrington\) \(1859, à 9 ans\)/); assert.match(txt, /Source : Wikipédia/); assert.ok(!/1843|NEOWISE/.test(txt));
             await p.waitForSelector(`.event-row[data-event-id="${EVID.JeanBIRT}"] .ch-real`, {timeout: 15000});
             assert.match(await p.textContent(`.event-row[data-event-id="${EVID.JeanBIRT}"] .ch-real summary`), /5 h 18 aujourd’hui/);
@@ -148,7 +148,7 @@ echo json_encode(['ids' => $ids, 'ev' => $ev]);`], {cwd: root, encoding: 'utf8',
         });
         await t('fiche de Paul DURAND (1905–1908) : trop jeune, rien', async () => {
             await p.evaluate(id => { const A = window.LCNDA_APP; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.paul);
-            await p.waitForFunction(() => /Pas de grande comète/.test(document.querySelector('[data-ch-seen]')?.textContent || ''), null, {timeout: 20000});
+            await p.waitForFunction(() => document.querySelector('[data-ch-seen]')?.closest('section.card')?.hidden === true, null, {timeout: 20000}); // rien à dire : pas de bloc vide
         });
         await t('🌌 ciel de naissance de Marie LACOMBE (Paris, 1er avril 1997 à 21 h) : heure de l’acte, Hale-Bopp, ≈ 1 000 étoiles pâles', async () => {
             await p.evaluate(id => { window.LCNDA_EXT.tresorSky.pending = id; window.LCNDA_EXT.tresors.open('ciel'); }, ID.marie);
@@ -159,6 +159,17 @@ echo json_encode(['ids' => $ids, 'ev' => $ev]);`], {cwd: root, encoding: 'utf8',
             const info = await p.textContent('[data-sk-info]'); const n = Number((info.match(/et (\d+) plus pâles/) || [])[1]);
             assert.ok(n > 600 && n < 2000, info); assert.match(info, /HYG v4\.0.*CC BY-SA 4\.0/);
             await p.selectOption('[data-sk] [name=hm]', 'sol'); assert.ok(await p.$('[data-sk-hour][hidden]'), 'heure du soleil : pas de conversion');
+        });
+        await t('🧰 Données : les quatre sources s’utilisent pour n’importe qui, n’importe quelle année ; le réglage éteint le bloc', async () => {
+            const r = await p.evaluate(async ([jean, paul]) => { const L = window.LCNDA_EXT.dataSources, run = async (id, ctx) => { const h = document.createElement('div'); document.body.appendChild(h); await L.find(x => x.id === id).run(ctx, h); const t = h.textContent; h.remove(); return t; };
+                return {ids: L.filter(x => ['il-a-pu-voir', 'comets-annee', 'vraie-heure', 'ciel-naissance'].includes(x.id)).map(x => x.id).sort(), seen: await run('il-a-pu-voir', {person: {id: jean}}), none: await run('il-a-pu-voir', {person: {id: paul}}),
+                    y: await run('comets-annee', {year: 1910}), h: await run('vraie-heure', {person: {id: jean}}), sky: await run('ciel-naissance', {person: {id: jean}})}; }, [ID.jean, ID.paul]);
+            assert.deepStrictEqual(r.ids, ['ciel-naissance', 'comets-annee', 'il-a-pu-voir', 'vraie-heure']);
+            assert.match(r.seen, /Halley \(1910, à 60 ans\)/); assert.match(r.none, /Pas de grande comète/); assert.match(r.y, /janvier 1910.*Halley|Halley.*janvier 1910/s); assert.match(r.h, /heure du soleil à Brest/); assert.match(r.sky, /lune|croissant|quartier/);
+            await p.evaluate(() => window.LCNDA_EXT.cielHeure.setPref({seen: false}));
+            await p.evaluate(id => { const A = window.LCNDA_APP; A.state.currentPersonId = 0; A.state.currentPersonId = id; A.setModule('personnes'); }, ID.jean); await sleep(2500);
+            assert.strictEqual(await p.$('[data-ch-seen]'), null, 'éteint dans les réglages');
+            assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-ciel-heure')), '{"heure":true,"seen":false}');
         });
         assert.deepStrictEqual(errs, [], 'erreurs JS : ' + errs.join(' | '));
     } finally { await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true}); }

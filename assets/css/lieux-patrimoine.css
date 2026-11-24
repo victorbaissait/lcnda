@@ -1,0 +1,23 @@
+/* 📜🏘️⛪ Anciens noms, lieux-dits et patrimoine de la commune (assets/js/heritage-lieux-patrimoine.js) — clair et sombre : couleurs prises du texte */
+.lp-place{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1rem;margin:1rem 0}
+.lp-place:empty{display:none}
+.lp-lead{margin:.2rem 0 .4rem}
+.lp-src{margin:.5rem 0 0;font-size:.82em;opacity:.78}
+.lp-more>summary{cursor:pointer;font-size:.9em}
+.lp-more h4{margin:.7rem 0 .3rem;font-size:.95em}
+.lp-old,.lp-places,.lp-ld,.lp-mh,.lp-guesses{list-style:none;margin:.3rem 0;padding:0;display:grid;gap:.3rem}
+.lp-places,.lp-ld,.lp-mh{max-height:26rem;overflow:auto}
+.lp-old{padding-left:.8rem;border-left:2px solid color-mix(in srgb,currentColor 18%,transparent)}
+.lp-date{font-variant-numeric:tabular-nums;padding:0 .3rem;border-radius:6px;background:color-mix(in srgb,currentColor 8%,transparent)}
+.lp-resume{opacity:.85}
+.lp-filter{width:100%;max-width:24rem;margin:.4rem 0}
+.lp-offer{margin:.2rem 0;display:flex;align-items:center;gap:.4rem;font-size:.92em}
+.lp-x{opacity:.6}
+.lp-pin{position:absolute;transform:translate(-50%,-50%);font-size:.7rem;line-height:1.1;padding:0 .25rem;border-radius:4px;white-space:nowrap;background:rgba(255,255,255,.82);color:#222;border:1px solid rgba(0,0,0,.25);z-index:2;pointer-events:auto}
+.lp-pin.is-hab{font-weight:700}
+.lp-guess{display:inline-block;margin-left:.4rem;font-size:.88em;opacity:.9}
+.lp-scroll{overflow:auto;max-width:100%}
+.lp-table td,.lp-table th{white-space:nowrap}
+.lp-dl{display:inline-flex;align-items:center;gap:.5rem}
+.lp-dl .wx-prog{display:inline-block;width:10rem;height:.5rem;border-radius:4px;background:color-mix(in srgb,currentColor 12%,transparent);overflow:hidden}
+.lp-dl .wx-prog i{display:block;height:100%;background:currentColor;opacity:.6}

@@ -42,6 +42,9 @@
     /* ═════════ commun : l'attente, hors ligne, la ligne de source ═════════ */
     const wait = t => (UI().spinner ? UI().spinner(t) : `<p class="muted">${esc(t)}</p>`);
     const emptyLine = (text, icon = 'ℹ️') => (A().emptyState ? A().emptyState({text, icon, size: 'small'}) : `<p class="muted">${esc(text)}</p>`);
+    /** rien à montrer : le bloc s'efface (pas de bloc vide) — la carte de fiche, ou la partie de la page du lieu */
+    function vanish(host) { const box = host?.closest?.('section.card[data-pblock], .cplus-panel'); if (box) box.remove(); else if (host) host.innerHTML = ''; }
+    const more = (inner, n) => `<details class="cplus-more"><summary>${esc(n ? T('▸ plus ({n})', {n}) : T('▸ plus'))}</summary>${inner}</details>`;
     function failHtml(r, what) {
         if (r?.offline) return `<p class="cplus-off">📴 ${esc(T('Pas de connexion à Internet : {what} s’afficheront quand tu seras connecté.', {what}))}</p>`;
         return emptyLine(r?.message || T('Rien trouvé.'));
@@ -67,8 +70,12 @@
         host.innerHTML = wait(T('On cherche les cimetières autour…'));
         const r = await ask('cplus_cemeteries', placeQuery(place));
         if (!host.isConnected) return r;
-        if (!r.ok) { host.innerHTML = r.noplace ? emptyLine(r.message, '📍') : failHtml(r, T('les cimetières')); return r; }
-        host.innerHTML = (r.items.length ? cemeteryRows(r) : emptyLine(T('Aucun cimetière connu d’OpenStreetMap à moins de {n} km.', {n: Math.round((r.radius || 5000) / 1000)}), '🪦')) + sourceLine(r);
+        if (!r.ok) { if (r.offline) host.innerHTML = failHtml(r, T('les cimetières')); else vanish(host); return r; }
+        if (!r.items.length) { vanish(host); return r; }
+        const first = r.items[0], km = Math.round((r.radius || 5000) / 1000);
+        const sentence = r.items.length === 1 ? T('Un cimetière à moins de {k} km : {n} ({d}).', {k: km, n: first.name || T('sans nom sur la carte'), d: fmtKm(first.km)})
+            : T('{c} cimetières à moins de {k} km ; le plus proche : {n} ({d}).', {c: r.items.length, k: km, n: first.name || T('sans nom sur la carte'), d: fmtKm(first.km)});
+        host.innerHTML = `<p class="cplus-lead">🪦 ${esc(sentence)} ${ext_link(first.route, T('itinéraire ↗'))}</p>${more(cemeteryRows(r) + sourceLine(r), r.items.length)}`;
         if (map) pinsOnMap(map, r);
         return r;
     }
@@ -97,10 +104,13 @@
         host.innerHTML = wait(T('On cherche les images anciennes…'));
         const r = await ask('cplus_images', placeQuery(place));
         if (!host.isConnected) return r;
-        if (!r.ok) { host.innerHTML = r.none ? emptyLine(T('Commune introuvable sur Wikidata : pas d’images anciennes.'), '🖼️') : failHtml(r, T('les images anciennes')); return r; }
+        if (!r.ok) { if (r.offline) host.innerHTML = failHtml(r, T('les images anciennes')); else vanish(host); return r; }
+        if (!r.items.length) { vanish(host); return r; }
         const key = `${r.commune?.qid || ''}`; imgCache.set(key, {items: r.items, place});
-        host.innerHTML = (r.items.length ? `<div class="cplus-strip">${r.items.map((it, i) => imageCard(it, i, key)).join('')}</div>`
-            : emptyLine(r.message || T('Aucune image datée d’avant 1960 dans la catégorie Commons de la commune.'), '🖼️')) + sourceLine(r);
+        const old = r.items.find(x => x.year);
+        const sentence = old ? T('{c} images anciennes libres de droits ; la plus ancienne : {y}.', {c: r.items.length, y: old.year}) : T('{c} cartes postales anciennes libres de droits.', {c: r.items.length});
+        const N = 6, cards = r.items.map((it, i) => imageCard(it, i, key));
+        host.innerHTML = `<p class="cplus-lead">🖼️ ${esc(sentence)}</p><div class="cplus-strip">${cards.slice(0, N).join('')}</div>${more(`${cards.length > N ? `<div class="cplus-strip">${cards.slice(N).join('')}</div>` : ''}${sourceLine(r)}`, cards.length > N ? cards.length - N : 0)}`;
         return r;
     }
     async function keepImage(btn) {
@@ -122,19 +132,19 @@
         return `⛪ ${c.label}${c.when ? ` (${c.when})` : ''}${c.gone ? ` ${T('(disparue)')}` : ''}${who ? ` — ${T(saints.length > 1 ? 'saints patrons :' : 'saint patron :')} ${who}` : ''}`;
     }
     function churchHtml(r) {
-        if (!r.ok) return r.none ? emptyLine(T('Commune introuvable sur Wikidata.'), '⛪') : failHtml(r, T('l’église et son saint patron'));
-        if (!r.churches?.length) return emptyLine(T('Aucune église de cette commune n’est décrite sur Wikidata.'), '⛪') + sourceLine(r);
+        if (!r.ok) return r.offline ? failHtml(r, T('l’église et son saint patron')) : '';
+        if (!r.churches?.length) return '';
         const [first, ...rest] = r.churches;
         const row = (c, big) => `<div class="cplus-church${big ? ' is-main' : ''}">${big && c.thumb ? `<a href="${esc(c.image_page)}" target="_blank" rel="noopener noreferrer"><img loading="lazy" alt="" src="${esc(c.thumb)}" onerror="this.remove()"></a>` : ''}
             <p>${esc(churchLine(c))} <small>${ext_link(c.url, T('Wikidata ↗'))}</small></p></div>`;
-        return row(first, true) + (rest.length ? `<details class="cplus-more"><summary>${esc(T('Les autres églises et chapelles ({n})', {n: rest.length}))}</summary>${rest.map(c => row(c, false)).join('')}</details>` : '') + sourceLine(r);
+        return row(first, true) + more((rest.length ? `<p class="muted">${esc(T('Les autres églises et chapelles :'))}</p>${rest.map(c => row(c, false)).join('')}` : '') + sourceLine(r), rest.length);
     }
     /** pour les autres blocs (ex. « Patrimoine », lieux-patrimoine) : place = {id?, name, lat?, lon?, insee?, qid?} */
     async function church(place) {
         const r = await ask('cplus_church', placeQuery(place));
         return {...r, line: r.ok && r.churches?.length ? churchLine(r.churches[0]) : '', html: churchHtml(r)};
     }
-    async function churchInto(host, place) { if (!host) return null; host.innerHTML = wait(T('On cherche l’église…')); const r = await church(place); if (host.isConnected) host.innerHTML = r.html; return r; }
+    async function churchInto(host, place) { if (!host) return null; host.innerHTML = wait(T('On cherche l’église…')); const r = await church(place); if (host.isConnected) { if (r.html) host.innerHTML = r.html; else vanish(host); } return r; }
 
     /* ═════════ 4. 📰 journaux anciens à l'étranger ═════════ */
     const COUNTRY = [
@@ -187,7 +197,10 @@
     async function fillNewspapers(host, detail) {
         const pid = Number(detail?.person?.id) || 0, P = personInfo(detail);
         const links = newspapers(detail);
-        host.innerHTML = `<ul class="cplus-news">${links.map(e => `<li data-cplus-news="${esc(e.id)}"><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer"><b>${esc(e.title)}</b> ↗</a><small>${esc(e.why)}</small>${e.id === 'chronicling_america' ? '<div class="cplus-hits" data-cplus-hits></div>' : ''}</li>`).join('')}</ul>`;
+        const li = e => `<li data-cplus-news="${esc(e.id)}"><a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer"><b>${esc(e.title)}</b> ↗</a><small>${esc(e.why)}</small>${e.id === 'chronicling_america' ? '<div class="cplus-hits" data-cplus-hits></div>' : ''}</li>`;
+        const a = P.abroad.find(x => ['DEAT', 'BURI'].includes(x.tag)) || P.abroad[0];
+        const lead = a ? T('{w} : ses traces sont peut-être dans les journaux anciens libres de ce pays.', {w: a.place ? `${a.place} (${T(a.label)})` : T(a.label)}) : '';
+        host.innerHTML = `${lead ? `<p class="cplus-lead">📰 ${esc(lead)}</p>` : ''}<ul class="cplus-news">${li(links[0])}</ul>${more(`<ul class="cplus-news">${links.slice(1).map(li).join('')}</ul>`, links.length - 1)}`;
         const box = host.querySelector('[data-cplus-hits]'); if (!box || !pid || P.private) return;
         box.innerHTML = wait(T('On compte les pages où le nom paraît…'));
         const usState = P.abroad.find(a => a.code === 'us' && a.state)?.state || '';
@@ -312,14 +325,33 @@
         if (Array.isArray(B)) {
             [['cplus_cemeteries', '🪦 Cimetières près de son dernier lieu'], ['cplus_newspapers', '📰 Journaux anciens à l’étranger']].forEach(row => {
                 if (B.some(b => b[0] === row[0])) return;
-                let i = B.findIndex(b => b[0] === 'cemetery'); if (row[0] === 'cplus_newspapers') i = B.findIndex(b => b[0] === 'voyages');
-                B.splice(i < 0 ? B.length : i + 1, 0, row);
+                // dans la zone « contexte » de la fiche, à côté de « 🌍 Le monde autour » et « 🏘 Le lieu à son époque »
+                const after = ['cplus_cemeteries', 'histoire', 'world', 'lune', 'meteo'].map(k => B.findIndex(b => b[0] === k)).find(i => i >= 0);
+                B.splice(after === undefined ? B.length : after + 1, 0, row);
             });
         }
         if (app.defaultPersonBlockSpans) { app.defaultPersonBlockSpans.cplus_cemeteries ||= '6'; app.defaultPersonBlockSpans.cplus_newspapers ||= '6'; }
         return !!tabs;
     }
     if (!register()) document.addEventListener('DOMContentLoaded', register, {once: true});
+
+    /* ═════════ 🧰 le registre commun des données : à la demande, pour n'importe quel lieu ou personne ═════════ */
+    const placeOfCtx = pl => (pl ? {id: Number(pl.id || pl.place_id) || 0, name: pl.name || pl.place_name || pl.title || '', lat: pl.lat ?? pl.latitude ?? null, lon: pl.lon ?? pl.longitude ?? null, insee: pl.insee || pl.admin4_code || '', country: pl.country || ''} : null);
+    async function personDetail(person) {
+        if (person?.person && person?.events) return person;
+        const id = Number(person?.id || person); if (!id) return null;
+        try { return await api('person', {id}); } catch (_) { return null; }
+    }
+    const hostDiv = host => { host.innerHTML = '<div class="cplus-block"></div>'; return host.firstElementChild; };
+    (ext.dataSources = ext.dataSources || []).push(
+        {id: 'commune_plus_cemeteries', icon: '🪦', label: T('Cimetières autour du village'), group: 'Le lieu', needs: ['place'], online: true,
+            run: async (ctx, host) => { const r = await fillCemeteries(hostDiv(host), placeOfCtx(ctx.place)); if (host.isConnected && !host.textContent.trim()) host.innerHTML = emptyLine(r?.noplace ? r.message : T('Aucun cimetière connu d’OpenStreetMap à moins de 5 km.'), '🪦'); return r; }},
+        {id: 'commune_plus_images', icon: '🖼️', label: T('Images anciennes de la commune'), group: 'Le lieu', needs: ['place'], online: true,
+            run: async (ctx, host) => { const r = await fillImages(hostDiv(host), placeOfCtx(ctx.place)); if (host.isConnected && !host.textContent.trim()) host.innerHTML = emptyLine(T('Aucune image datée d’avant 1960 dans la catégorie Commons de la commune.'), '🖼️'); return r; }},
+        {id: 'commune_plus_church', icon: '⛪', label: T('Saint patron de l’église'), group: 'Le lieu', needs: ['place'], online: true,
+            run: async (ctx, host) => { const r = await churchInto(hostDiv(host), placeOfCtx(ctx.place)); if (host.isConnected && !host.textContent.trim()) host.innerHTML = emptyLine(T('Aucune église de cette commune n’est décrite sur Wikidata.'), '⛪'); return r; }},
+        {id: 'commune_plus_newspapers', icon: '📰', label: T('Journaux anciens à l’étranger'), group: 'Chercher', needs: ['person'], online: true,
+            run: async (ctx, host) => { const d = await personDetail(ctx.person); if (!d) { host.innerHTML = emptyLine(T('Choisis une personne.')); return; } return fillNewspapers(hostDiv(host), d); }});
 
     ext.communePlus = {church, churchInto, churchLine, newspapers, personInfo, fillCemeteries, fillImages, settings, decorate};
 })();

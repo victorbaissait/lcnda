@@ -238,7 +238,10 @@
         draw(); refresh();
     }
     F.push({key: 'ciel', group: 'decouvrir', icon: '🌌', title: 'Le ciel de naissance', desc: 'Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir.', render: renderSky});
-    ext.tresorSky = {sky, drawSky, birthOf, caption, pending: null};
+    ext.tresorSky = {sky, drawSky, birthOf, caption, loadCatalog, pending: null};
+    // 🧰 Données : le ciel de naissance de n'importe qui, quand on veut (même dessin que le bloc de la fiche)
+    (ext.dataSources = ext.dataSources || []).push({id: 'ciel-naissance', icon: '🌌', label: 'Le ciel de naissance', group: 'La personne', needs: ['person'], installed: () => true,
+        run: async (ctx, host) => { const pid = Number(ctx?.person?.id ?? ctx?.person); host.innerHTML = `<div class="h-tr-skyblock" data-sky-block="${pid}" data-sky-run><canvas width="600" height="670"></canvas><p class="muted" data-sky-txt></p></div>`; await paintBlock(pid, host.querySelector('[data-sky-block]')); }});
 
     /* le bloc de la fiche : une petite image du ciel, « Agrandir » ouvre la page */
     ext.personBlocks = ext.personBlocks || {};
@@ -248,7 +251,11 @@
     };
     ext.afterPerson = ext.afterPerson || [];
     ext.afterPerson.push(async detail => {
-        const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-sky-block="${pid}"]`); if (!el || !ext.tresors) return;
+        const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-sky-block="${pid}"]`); if (el) await paintBlock(pid, el);
+    });
+    /** le petit ciel d'une personne dans un bloc (fiche ou 🧰 Données) */
+    async function paintBlock(pid, el) {
+        if (!el || !ext.tresors) return;
         const T = ext.tresors.T, tr = await T.tree().catch(() => null), p = tr?.byId.get(pid), b = birthOf(T, tr, p);
         if (!b) { el.innerHTML = `<p class="muted">${i18n('Il faut au moins l’année de naissance pour voir le ciel.')}</p>`; return; }
         const paint = (more = {comets: []}) => {
@@ -259,6 +266,6 @@
         // puis, chargés à la demande : les étoiles pâles, la comète de la nuit et l'heure écrite dans l'acte
         extras(b, pid).then(more => { if (el.isConnected) { const s2 = paint(more); if (s2.comets.some(c => c.alt > 0)) el.querySelector('[data-sky-txt]').textContent += ` · ☄️ ${s2.comets.filter(c => c.alt > 0).map(c => i18n(c.n)).join(', ')}`; if (more.act) el.dataset.hour = 'acte'; } }).catch(() => {});
         el.querySelector('[data-sky-txt]').textContent = `${i18n(s.moon.phase)}${s.planets.some(x => x.alt > 0) ? ' · ' + s.planets.filter(x => x.alt > 0).map(x => i18n(x.n, {ctx: 'astre'})).join(', ') : ''}${b.exact ? '' : ' · ' + i18n('date exacte inconnue')}`;
-    });
+    }
     document.addEventListener('click', e => { const b = e.target.closest('[data-sky-big]'); if (b) { ext.tresorSky.pending = Number(b.dataset.skyBig); ext.tresors?.open('ciel'); } });
 })();

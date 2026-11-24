@@ -1,0 +1,107 @@
+# 🎖️ 🏅 Fabrication des bases officielles (Morts pour la France 1914–1918, Légion d'honneur — base Léonore), déposées dans
+# la version « bases-officielles-donnees » du dépôt.
+#
+# L'app n'embarque aucune de ces données : Réglages → 🎖️ Bases officielles → « ⤓ Installer » télécharge la base depuis cette
+# version (lib/bases_officielles_dl.php), la vérifie (taille, empreinte sha256, base lisible) puis la range.
+#
+# Lancer : onglet « Actions » → « Bases officielles » → « Run workflow » (le menu « quoi »), ou pousser une étiquette
+# « bases-officielles-1 » (le chiffre ne sert qu'à relancer ; fabrique les deux).
+# Sources (scripts/bases-officielles/build-bases.py, en tête) : data.gouv.fr (static.data.gouv.fr) — export Léonore des
+# Archives nationales (2018), listes ouvertes Réseau Canopé (ODC-BY) et Ville de Nancy (ODbL) ; Wikidata (CC0) pour les
+# liens vers les notices du site Léonore. bo-rapport.json (fiches lues, gardées, liens) est joint à la version : à relire.
+# Tailles mesurées le 24/11/2026 : bo-mpf.sqlite.gz ≈ 1,0 Mo (3,4 Mo installée), bo-leonore.sqlite.gz ≈ 15,2 Mo (41 Mo installée).
+
+name: Bases officielles
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'La base à fabriquer'
+        type: choice
+        options: [tout, mpf, leonore]
+        default: tout
+  push:
+    tags: ['bases-officielles-*']
+    # un envoi qui touche ce fichier fait seulement connaître l'atelier à GitHub (rien n'est fabriqué)
+    branches: ['claude/**']
+    paths: ['.github/workflows/bases-officielles.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bases-officielles-donnees
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 'Outils (unzip, le fichier Léonore est compressé en Deflate64)'
+        run: sudo apt-get update -q && sudo apt-get install -y -q unzip
+
+      - name: Reprendre les téléchargements déjà faits
+        uses: actions/cache/restore@v4
+        with:
+          path: bo-sortie/cache
+          key: bo-${{ github.run_id }}
+          restore-keys: bo-
+
+      - name: Fabriquer
+        run: |
+          q="${{ inputs.quoi }}"; [ -z "$q" ] && q=tout
+          python3 scripts/bases-officielles/build-bases.py "$q" --dossier bo-sortie
+
+      - name: Garder les téléchargements pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: bo-sortie/cache
+          key: bo-${{ github.run_id }}
+
+      - name: Déposer dans la version « bases-officielles-donnees »
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          R=bases-officielles-donnees
+          mkdir -p envoi && cd envoi
+          gh release view $R --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create $R --repo "$GITHUB_REPOSITORY" --title "Bases officielles (Morts pour la France, Léonore)" --prerelease \
+              --notes "Bases téléchargées par l'app (Réglages → 🎖️ Bases officielles → ⤓ Installer). Léonore : Archives nationales, export des métadonnées (2018), data.gouv.fr — informations publiques réutilisables en citant la source ; liens vers les notices : Wikidata (CC0). Morts pour la France : Réseau Canopé (ODC-BY 1.0) et Ville de Nancy (ODbL 1.0), data.gouv.fr, d'après Mémoire des hommes."
+          gh release download $R --repo "$GITHUB_REPOSITORY" --pattern bases-officielles-manifest.json --dir . 2>/dev/null || echo '{"packs":{}}' > bases-officielles-manifest.json
+          for k in mpf leonore; do
+            f=../bo-sortie/bo-$k.sqlite.gz
+            [ -s "$f" ] || continue
+            for a in $(gh release view $R --repo "$GITHUB_REPOSITORY" --json assets --jq ".assets[].name" | grep -E "^bo-$k\.sqlite\.gz\.[0-9]{3}$" || true); do
+              gh release delete-asset $R "$a" --repo "$GITHUB_REPOSITORY" --yes
+            done
+            split -b 1900M -d -a 3 "$f" "bo-$k.sqlite.gz."
+          done
+          python3 - <<'PY'
+          import json, os, datetime
+          m = json.load(open('bases-officielles-manifest.json'))
+          rep = json.load(open('../bo-sortie/bo-rapport.json'))
+          for k in ('mpf', 'leonore'):
+              f = '../bo-sortie/bo-%s.sqlite.gz' % k
+              if not os.path.exists(f): continue
+              r = rep[k]
+              parts = sorted(p for p in os.listdir('.') if p.startswith('bo-%s.sqlite.gz.' % k) and p.split('.')[-1].isdigit())
+              m.setdefault('packs', {})[k] = {'size': r['size'], 'sha256': r['sha256'], 'sqlite_size': r['sqlite_size'], 'records': r['records'],
+                  'built': datetime.date.today().isoformat(), 'parts': [{'name': p, 'size': os.path.getsize(p)} for p in parts]}
+              assert sum(x['size'] for x in m['packs'][k]['parts']) == r['size']
+          m['version'] = datetime.date.today().strftime('%Y-%m')
+          json.dump(m, open('bases-officielles-manifest.json', 'w'), indent=1)
+          PY
+          cp ../bo-sortie/bo-rapport.json .
+          gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber $(ls | grep -E '\.[0-9]{3}$') bases-officielles-manifest.json bo-rapport.json
+          cat bases-officielles-manifest.json

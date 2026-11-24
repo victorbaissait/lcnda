@@ -206,7 +206,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await openPerson(2);
             await p.waitForSelector('.bo-hit[data-bo-base="leonore"]', {timeout: 20000});
             const txt = await p.textContent('.bo-hit[data-bo-base="leonore"]');
-            assert.match(txt, /Peut-être dans la Léonore/); assert.match(txt, /LACOMBE Lucien/); assert.match(txt, /Cote 19800035\/1303\/50521/); assert.match(txt, /11 février 1872 à Nancy \(54\)/);
+            assert.match(txt, /Peut-être dans la Léonore/); assert.match(txt, /LACOMBE Lucien/); assert.match(txt, /cote 19800035\/1303\/50521/); assert.match(txt, /11 février 1872 à Nancy \(54\)/);
             assert.strictEqual(await p.getAttribute('.bo-hit[data-bo-base="leonore"] a[target="_blank"]', 'href'), 'https://www.leonore.archives-nationales.culture.gouv.fr/ui/notice/3');
             await openPerson(3);
             await p.waitForSelector('.bo-hit[data-bo-base="leonore"]', {timeout: 20000});
@@ -231,6 +231,39 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const s = await p.evaluate(async () => (await window.LCNDA_EXT.officialBases.suggest({id: 1})).map(x => ({id: x.id, local: x.local, count: x.count, why: x.why, url: x.url, open: typeof x.open})));
             assert.deepStrictEqual(s.map(x => [x.id, x.local, x.count]), [['bo_mpf', true, 1], ['bo_leonore', true, 0]]);
             assert.match(s[0].url, /arkotheque/); assert.strictEqual(s[0].open, 'function'); assert.match(s[1].why, /Rien sous son nom/);
+            if (await p.evaluate(() => typeof window.LCNDA_EXT.ouChercher?.openPerson === 'function')) {
+                await p.evaluate(() => window.LCNDA_EXT.ouChercher.openPerson(1));
+                await p.waitForSelector('.bo-ouc [data-bo-ouc="mpf"]', {timeout: 20000});
+                assert.match(await p.textContent('.bo-ouc'), /1 fiche\(s\) qui lui ressemblent/);
+            }
+        });
+        await t('le bloc est avec les blocs de contexte de la fiche ; il s’éteint dans les Réglages (genealogie-bases-officielles, ↶) ; caché quand il n’a rien à dire', async () => {
+            const keys = await p.evaluate(() => window.LCNDA_APP.defaultPersonBlocks.map(b => b[0]));
+            const i = keys.indexOf('bases_officielles'), before = ['histoire', 'monde_contexte', 'world'].map(k => keys.indexOf(k)).find(x => x >= 0);
+            assert.ok(i > 0 && (before === undefined || i === before + 1), JSON.stringify(keys.slice(Math.max(0, i - 3), i + 2)));
+            await openPerson(4);
+            assert.strictEqual(await p.$eval('.bo-card', c => c.hidden), true, 'rien à dire : le bloc est caché');
+            await settings();
+            await p.click('label:has([data-bo-on])'); await sleep(300);
+            assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-bases-officielles')).off), true);
+            await openPerson(1);
+            assert.ok(!(await p.$('.bo-card')), 'éteint : pas de bloc');
+            await settings(); await p.click('label:has([data-bo-on])'); await sleep(300);
+            await openPerson(1); await p.waitForSelector('.bo-card:not([hidden]) .bo-hit', {timeout: 20000});
+            assert.match(await p.textContent('.bo-card .bo-more summary'), /▸ plus/);
+        });
+        await t('🧰 registre commun (LCNDA_EXT.dataSources) : chaque base, pour n’importe quelle personne, quand on veut', async () => {
+            const ds = await p.evaluate(() => window.LCNDA_EXT.dataSources.filter(d => d.id.startsWith('bases_officielles_')).map(d => ({id: d.id, group: d.group, needs: d.needs})));
+            assert.deepStrictEqual(ds.map(d => d.id), ['bases_officielles_mpf', 'bases_officielles_leonore']);
+            assert.deepStrictEqual(ds[0].needs, ['person']);
+            const out = await p.evaluate(async () => {
+                const h = document.createElement('div'); document.body.appendChild(h);
+                const d = window.LCNDA_EXT.dataSources.find(x => x.id === 'bases_officielles_mpf');
+                const inst = await d.installed(); await d.run({person: {id: 1}}, h); const a = h.textContent;
+                await window.LCNDA_EXT.dataSources.find(x => x.id === 'bases_officielles_leonore').run({person: {id: 1}}, h); const b = h.textContent; h.remove();
+                return {inst, a, b};
+            });
+            assert.strictEqual(out.inst, true); assert.match(out.a, /MAZAUD Jean Victor/); assert.match(out.b, /Personne de ce nom/);
         });
         await t('Réglages : « 🗑 Supprimer » puis ↶ Annuler la remet ; sans la base, « Où chercher » propose le site en ligne et l’installation', async () => {
             await settings();

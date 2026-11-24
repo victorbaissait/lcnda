@@ -333,6 +333,20 @@ echo json_encode(['n' => $n, 'b' => $b, 'est' => INSEE_MAJ_ROW_BYTES]);`);
             assert.strictEqual((await api('insee_maj_status')).installed.years.find(y => y.year === 2022).rows, 700);
             await p.click('#insee-maj-dialog [data-close-insee-maj]').catch(() => {});
         });
+        await t('Réglages → 📦 Données → ⚰️ Décès INSEE : le même cadre ; LCNDA_EXT.dataSources : chercher une personne quand on veut', async () => {
+            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'insee_deces'; A.setModule('maintenance'); });
+            await p.waitForSelector('#workspace [data-im-box] [data-im-check]', {timeout: 20000});
+            await p.waitForSelector('#workspace #insee-maj-detail [data-im-remove="2022"]', {timeout: 20000});
+            assert.ok(!(await p.$('#workspace [data-im-detail]')), 'pas de bouton « Détail » : le détail est déjà sur la page');
+            const r = await p.evaluate(async () => {
+                const src = (window.LCNDA_EXT.dataSources || []).find(d => d.id === 'insee_deces');
+                const host = document.createElement('div');
+                await src.run({person: {first_name: 'Jean Pierre', last_name: 'Baissait', birth_year: 1943}}, host);
+                return {needs: src.needs, group: src.group, installed: await src.installed(), text: host.textContent};
+            });
+            assert.deepStrictEqual(r.needs, ['person']); assert.strictEqual(r.group, 'La personne'); assert.strictEqual(r.installed, true);
+            assert.match(r.text, /1 correspondance dans le fichier des décès/); assert.match(r.text, /BAISSAIT/);
+        });
         await t('mode consultation : on voit ce qui est installé, aucun bouton pour installer, rien n’est écrit', async () => {
             assert.ok(!(await post('kiosk_enter', {password: '1234'})).error);
             await p.reload(); await ready();

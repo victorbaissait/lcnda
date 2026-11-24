@@ -21,14 +21,15 @@
     const api = (...a) => A().api(...a);
     const post = (a, b) => api(a, {}, {method: 'POST', body: b}).then(r => r.result || r);
     const KEY = 'genealogie-bases-officielles', DL_KEY = 'genealogie-bases-officielles-dl';
-    const TAB = ['bases_officielles', '25m', '🎖️ Bases officielles'];
+    const TAB = ['bases_officielles', '25m', '🎖️ Bases officielles'], BLOCK = ['bases_officielles', '🎖️ Bases officielles'];
     const KINDS = ['mpf', 'leonore'];
     const NAMES = {mpf: ['🎖️', 'Morts pour la France 1914–1918', 'Peut-être dans Morts pour la France', 'la base Morts pour la France'],
         leonore: ['🏅', 'Légion d’honneur — base Léonore', 'Peut-être dans la Léonore', 'la base Léonore']};
     const HOME = {mpf: 'https://www.memoiredeshommes.sga.defense.gouv.fr/', leonore: 'https://www.leonore.archives-nationales.culture.gouv.fr/'};
     const lsJson = k => { try { const v = JSON.parse(localStorage.getItem(k) || '{}'); return v && typeof v === 'object' ? v : {}; } catch (_) { return {}; } };
     const lsSave = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
-    const settings = () => { const s = lsJson(KEY); return {dismiss: s.dismiss && typeof s.dismiss === 'object' ? s.dismiss : {}}; };
+    const settings = () => { const s = lsJson(KEY); return {...s, dismiss: s.dismiss && typeof s.dismiss === 'object' ? s.dismiss : {}}; };
+    const isOn = () => settings().off !== true; // le bloc de la fiche : allumé au départ
     const kiosk = () => document.body.classList.contains('is-kiosk') || document.body.classList.contains('ms-on');
     const fmtSize = b => (b >= 1e9 ? `${String(Math.round(b / 1e8) / 10).replace('.', ',')} Go` : b >= 1e6 ? `${String(Math.round(b / 1e5) / 10).replace('.', ',')} Mo` : `${Math.max(1, Math.round(b / 1e3))} Ko`);
     const num = n => Number(n || 0).toLocaleString('fr-FR');
@@ -40,6 +41,14 @@
         const app = A(); if (!app.defaultMaintenanceTabs) return false;
         const tabs = app.defaultMaintenanceTabs;
         if (!tabs.some(t => t[0] === TAB[0])) { const i = tabs.findIndex(t => t[0] === 'meteo'); tabs.splice(i >= 0 ? i + 1 : tabs.length, 0, TAB); }
+        // le bloc de la fiche, avec les autres blocs de contexte (après « 🏘 Le lieu à son époque » / « 🌍 Le monde autour »)
+        const B = app.defaultPersonBlocks;
+        if (Array.isArray(B)) {
+            const i = B.findIndex(b => b[0] === BLOCK[0]);
+            if (isOn() && i < 0) { let at = ['histoire', 'monde_contexte', 'world'].map(k => B.findIndex(b => b[0] === k)).find(x => x >= 0); B.splice(at === undefined ? B.length : at + 1, 0, BLOCK); }
+            if (!isOn() && i >= 0) B.splice(i, 1);
+        }
+        if (app.defaultPersonBlockSpans && !app.defaultPersonBlockSpans[BLOCK[0]]) app.defaultPersonBlockSpans[BLOCK[0]] = '12';
         return true;
     }
     if (!register()) document.addEventListener('DOMContentLoaded', register);
@@ -119,30 +128,34 @@
         return out;
     }
     function recordHtml(kind, r, {pid = 0, locked = false, why = true} = {}) {
+        const born = [r.naiss ? dateFr(r.naiss) : (r.annee || ''), r.lieu ? i18n('à {l}', {l: r.lieu + (r.dep ? ` (${r.dep})` : '')}) : ''].filter(Boolean).join(' ');
+        const sentence = [born ? i18n('né(e) {b}', {b: born}) : '', r.deces ? `† ${dateFr(r.deces)}${r.lieu_deces ? ` ${i18n('à {l}', {l: r.lieu_deces})}` : ''}` : '', kind === 'mpf' && r.unite ? r.unite : '', kind === 'leonore' && r.cote ? i18n('cote {c}', {c: r.cote}) : ''].filter(Boolean).join(' · ');
+        const more = [r.grade && kind === 'mpf' ? [r.grade, r.unite].filter(Boolean).join(', ') : '', kind === 'mpf' ? r.cote : '', r.autre].filter(Boolean);
         const link = r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">↗ ${esc(kind === 'leonore' ? i18n('Voir la notice en ligne') : i18n('Voir la fiche numérisée'))}</a>`
             : `<a href="${esc(r.home || HOME[kind])}" target="_blank" rel="noopener">↗ ${esc(kind === 'leonore' ? i18n('Chercher sur le site Léonore') : i18n('Chercher sur Mémoire des hommes'))}</a>${kind === 'leonore' && r.cote ? ` <small class="muted">${esc(i18n('(avec le nom, ou la cote {c})', {c: r.cote}))}</small>` : ''}`;
         const add = !pid ? '' : r.added ? `<span class="bo-added">✓ ${esc(i18n('Ajouté comme source'))}</span>${locked ? '' : ` <button type="button" class="link-button" data-bo-unadd="${esc(r.key)}">↶ ${esc(i18n('Annuler'))}</button>`}`
             : locked ? '' : `<button type="button" class="button small secondary" data-bo-add="${r.id}" data-bo-kind="${kind}">${esc(i18n('＋ Ajouter comme source (à vérifier)'))}</button>`;
-        return `<div class="bo-rec" data-bo-key="${esc(r.key)}"><div class="bo-rec-name"><b>${esc(r.nom)}</b> ${esc(r.prenoms)}${r.annee ? ` <small class="muted">(${r.annee})</small>` : ''}</div>
-            <div class="bo-rec-lines">${recordLines(kind, r).map(l => `<span>${esc(l)}</span>`).join('')}</div>
-            ${why && r.why?.length ? `<div class="bo-why">${esc(r.why.join(' · '))}</div>` : ''}
+        return `<div class="bo-rec" data-bo-key="${esc(r.key)}"><p class="bo-rec-name"><b>${esc(r.nom)}</b> ${esc(r.prenoms)}${sentence ? ` — ${esc(sentence)}` : ''}</p>
             <div class="bo-rec-acts">${link}${add ? ` ${add}` : ''}</div>
-            <div class="bo-src">${esc(i18n('Source : {s}', {s: r.source}))}</div></div>`;
+            <details class="bo-more"><summary>${esc(i18n('▸ plus'))}</summary>${more.length ? `<div class="bo-rec-lines">${more.map(l => `<span>${esc(l)}</span>`).join('')}</div>` : ''}
+            ${why && r.why?.length ? `<div class="bo-why">${esc(i18n('Pourquoi : {w}', {w: r.why.join(' · ')}))}</div>` : ''}
+            <div class="bo-src">${esc(i18n('Source : {s}', {s: r.source}))}${r.licence ? ` — ${esc(r.licence)}` : ''}</div></details></div>`;
     }
-    function blockHtml(d, locked) {
+    function blockHtml(d, locked, only = '') {
         const parts = [], dismiss = settings().dismiss;
         for (const k of KINDS) {
+            if (only && k !== only) continue;
             const b = d.bases?.[k]; if (!b) continue;
             if (b.installed && b.matches.length) {
                 parts.push(`<section class="bo-hit" data-bo-base="${k}"><h4>${NAMES[k][0]} ${esc(i18n(NAMES[k][2]))}</h4>
                     ${b.matches.map(r => recordHtml(k, r, {pid: d.person.id, locked})).join('')}
                     <p class="bo-foot"><button type="button" class="link-button" data-bo-search="${k}" data-bo-nom="${esc(d.person.last)}">🔎 ${esc(i18n('Chercher ce nom dans la base'))}</button> · <small class="muted">${esc(i18n('Même nom, même prénom, né(e) à un an près : rien n’est sûr, compare avec tes actes.'))}</small></p></section>`);
-            } else if (!b.installed && b.could && !dismiss[k]) {
+            } else if (!b.installed && b.could && (only || !dismiss[k])) {
                 const o = DL.online?.[k], r = DL.run[k];
                 parts.push(`<div class="bo-offer" data-bo-offer="${k}"><span>${NAMES[k][0]} ${esc(k === 'mpf' ? i18n('Mort pendant la Grande Guerre ? La base des Morts pour la France 1914–1918 peut le dire.') : i18n('Décoré(e) de la Légion d’honneur ? La base Léonore peut le dire.'))}</span>
                     ${r ? progHtml(k, r) : `<button type="button" class="button small secondary" data-bo-install="${k}">⤓ ${esc(i18n('Installer {t}', {t: i18n(NAMES[k][3])}))}${o ? ` (${esc(fmtSize(o.size))})` : ''}</button>`}
                     <a class="bo-online" href="${HOME[k]}" target="_blank" rel="noopener">↗ ${esc(i18n('ou chercher en ligne'))}</a>
-                    <button type="button" class="bo-x" data-bo-dismiss="${k}" title="${esc(i18n('Ne plus proposer'))}" aria-label="${esc(i18n('Ne plus proposer'))}">✕</button></div>`);
+ ${only ? '' : `<button type="button" class="bo-x" data-bo-dismiss="${k}" title="${esc(i18n('Ne plus proposer'))}" aria-label="${esc(i18n('Ne plus proposer'))}">✕</button>`}</div>`);
             }
         }
         return parts.join('');
@@ -152,23 +165,23 @@
         let d; try { d = await personData(pid); } catch (_) { host.hidden = true; return; }
         if (!host.isConnected) return;
         if (Object.values(d.bases || {}).some(b => !b.installed && b.could) && DL.online === undefined) { loadInfo().then(() => { if (host.isConnected) fillPerson(host); }); }
-        const html = blockHtml(d, locked);
+        const html = blockHtml(d, locked, host.dataset.boOnly || '');
         host.innerHTML = html; host.hidden = !html;
+        const c = cardOf(host); if (c) c.hidden = !html;
     }
-    function mountPerson(detail) {
-        const p = detail?.person, ws = document.getElementById('workspace');
-        if (!p?.id || p.kind === 'animal' || !ws) return;
-        const page = ws.querySelector('.person-page'); if (!page) return;
-        page.querySelector('.bo-person')?.remove();
-        const host = document.createElement('div');
-        host.className = 'bo-person'; host.hidden = true;
-        host.dataset.boPerson = String(p.id);
-        host.dataset.boLocked = Number(p.is_locked) === 1 || kiosk() ? '1' : '0';
-        const after = page.querySelector('.pa-family-bar') || page.querySelector('.relations-strip');
-        if (after) after.insertAdjacentElement('afterend', host); else page.insertAdjacentElement('afterbegin', host);
-        fillPerson(host);
-    }
-    (ext.afterPerson = ext.afterPerson || []).push(detail => { personCache.delete(Number(detail?.person?.id) || 0); mountPerson(detail); });
+    ext.personBlocks = ext.personBlocks || {};
+    ext.personBlocks[BLOCK[0]] = (index, detail, opt = {}) => {
+        const p = detail?.person;
+        if (!isOn() || !p?.id || p.kind === 'animal') return '';
+        const locked = Number(p.is_locked) === 1 || kiosk() || !!opt.isLocked;
+        // caché tant qu'il n'y a rien à dire (fillPerson le montre)
+        return A().card(index, BLOCK[1], '', `<div class="bo-person" data-bo-person="${Number(p.id)}" data-bo-locked="${locked ? 1 : 0}" data-bo-card hidden></div>`, 'span-12 bo-card');
+    };
+    function cardOf(host) { return host.dataset.boCard !== undefined ? host.closest('.card') : null; }
+    (ext.afterPerson = ext.afterPerson || []).push(detail => {
+        personCache.delete(Number(detail?.person?.id) || 0);
+        document.querySelectorAll('#workspace .bo-person[data-bo-card]').forEach(h => { const c = cardOf(h); if (c) c.hidden = true; fillPerson(h); });
+    });
     listeners.add(() => document.querySelectorAll('.bo-person[data-bo-person]').forEach(fillPerson));
 
     async function addSource(btn) {
@@ -217,6 +230,8 @@
     function settingsHtml() {
         const dis = KINDS.filter(k => settings().dismiss[k]);
         return `<section class="page bo-set">${UI().pageHeader ? UI().pageHeader({title: 'Bases officielles', icon: '🎖️', where: 'Réglages · Données', help: 'Deux bases à télécharger une fois : les Morts pour la France de 1914–1918 et la Légion d’honneur. Ensuite, les fiches qui y ressemblent le disent.'}) : `<h2>🎖️ ${esc(i18n('Bases officielles'))}</h2>`}
+            <section class="card"><h3>${esc(i18n('Montrer'))}</h3>
+                ${(UI().toggleHtml || ((l, o) => `<label class="ui-toggle"><input type="checkbox" ${o.attrs} ${o.checked ? 'checked' : ''}><i></i>${esc(l)}</label>`))(i18n('🎖️ Sur les fiches : « Peut-être dans Morts pour la France / dans la Léonore »'), {checked: isOn(), attrs: 'data-bo-on', sub: i18n('Allumé : un bloc sur la fiche quand une personne ressemble à une fiche d’une base installée (rien sinon).')})}</section>
             <section class="card"><h3>${esc(i18n('Les bases'))}</h3>${KINDS.map(baseRowHtml).join('')}
                 ${UI().notice ? UI().notice('info', i18n('Le téléchargement se fait une fois ; ensuite l’app n’a plus besoin d’Internet pour chercher. Rien n’est envoyé.')) : ''}
                 ${dis.length ? `<p class="bo-dis">${esc(i18n('Plus proposé sur les fiches : {l}.', {l: dis.map(k => i18n(NAMES[k][1])).join(', ')}))} <button type="button" class="link-button" data-bo-undismiss>${esc(i18n('Proposer de nouveau'))}</button></p>` : ''}
@@ -263,6 +278,12 @@
         ws.__boBound = true;
         const mine = () => !!ws.querySelector('.bo-set');
         ws.addEventListener('submit', e => { const f = e.target.closest?.('[data-bo-form]'); if (!f || !mine()) return; e.preventDefault(); const fd = new FormData(f); PAGE.view = {kind: String(fd.get('kind')), nom: String(fd.get('nom') || ''), prenom: String(fd.get('prenom') || ''), annee: String(fd.get('annee') || '')}; runSearch(); });
+        ws.addEventListener('change', e => {
+            const c = e.target.closest?.('[data-bo-on]'); if (!c || !mine()) return;
+            const on = !!c.checked, set = v => { lsSave(KEY, {...settings(), off: !v}); register(); };
+            set(on);
+            A().undoToast?.(on ? i18n('🎖️ Le bloc « Bases officielles » revient sur les fiches.') : i18n('🎖️ Le bloc « Bases officielles » n’est plus sur les fiches.'), {undo: () => { set(!on); redraw(); }});
+        });
         ws.addEventListener('click', e => {
             if (!mine()) return;
             if (e.target.closest('[data-bo-back]')) { PAGE.view = null; redraw(); return; }
@@ -312,5 +333,36 @@
         });
     }
 
-    ext.officialBases = {suggest, install, remove, openSettings, openSearch, settings, state: DL, register};
+    /* « Où chercher » : ses lignes, ajoutées par son crochet (ext.ouChercher.afterRedraw), dans le même style que son plan */
+    const oc = ext.ouChercher = ext.ouChercher || {};
+    (oc.afterRedraw = oc.afterRedraw || []).push((view, body) => {
+        const pid = Number(view?.pid) || 0; if (!pid || !body) return;
+        body.querySelector('.bo-ouc')?.remove();
+        suggest({id: pid}).then(list => {
+            if (!list.length || !body.isConnected || body.querySelector('.bo-ouc')) return;
+            const li = x => `<li class="ouc-tip" data-bo-ouc="${x.kind}"><span class="ouc-ico" aria-hidden="true">${x.icon}</span><div class="ouc-main"><div class="ouc-name"><b>${esc(x.title)}</b> ${x.local ? (UI().badge ? UI().badge(i18n('Dans l’app'), 'green') : '') : ''}</div><div class="ouc-why">${esc(x.why)}</div></div>
+                <div class="ouc-acts">${x.local ? `<button type="button" class="button small secondary" data-bo-ouc-open="${x.kind}">🔎 ${esc(i18n('Voir dans la base'))}</button>` : `<a class="button small secondary" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Ouvrir'))}</a> <button type="button" class="button small secondary" data-bo-install="${x.kind}">⤓ ${esc(x.size ? i18n('Installer ({s})', {s: fmtSize(x.size)}) : i18n('Installer'))}</button>`}</div></li>`;
+            const html = `<section class="ouc-plan bo-ouc"><h3>🎖️ ${esc(i18n('Bases officielles'))} <small class="muted">${esc(i18n('soldats morts en 1914–1918, Légion d’honneur'))}</small></h3><ul class="ouc-list">${list.map(li).join('')}</ul></section>`;
+            const at = body.querySelector('.ouc-plus') || body.querySelector('.ouc-facts');
+            if (at) at.insertAdjacentHTML('afterend', html); else body.insertAdjacentHTML('afterbegin', html);
+            body.querySelectorAll('[data-bo-ouc-open]').forEach(b => b.addEventListener('click', () => list.find(x => x.kind === b.dataset.boOucOpen)?.open?.()));
+        });
+    });
+
+    /* 🧰 le registre commun des données : chaque base, pour n'importe quelle personne, quand on veut */
+    const installedNow = async k => { try { return !!(await api('bo_status')).bases?.[k]?.installed; } catch (_) { return false; } };
+    (ext.dataSources = ext.dataSources || []).push(...KINDS.map(k => ({
+        id: `bases_officielles_${k}`, icon: NAMES[k][0], label: NAMES[k][1], group: 'Chercher', needs: ['person'],
+        installed: () => installedNow(k), install: () => install(k),
+        run: async (ctx, host) => {
+            const pid = Number(ctx?.person?.id ?? ctx?.person) || 0;
+            if (!host) return;
+            if (!pid) { host.innerHTML = `<p class="muted">${esc(i18n('Choisis une personne.'))}</p>`; return; }
+            host.innerHTML = `<div class="bo-person" data-bo-person="${pid}" data-bo-only="${k}" data-bo-locked="${kiosk() ? 1 : 0}"></div>`;
+            const h = host.firstElementChild; await fillPerson(h);
+            if (h.hidden) { h.hidden = false; h.innerHTML = `<p class="muted">${esc(i18n('Personne de ce nom, né(e) à un an près, dans {t}.', {t: i18n(NAMES[k][3])}))}</p><p><button type="button" class="link-button" data-bo-search="${k}">🔎 ${esc(i18n('Chercher un autre nom dans la base'))}</button></p>`; }
+        },
+    })));
+
+    ext.officialBases = {suggest, isOn, install, remove, openSettings, openSearch, settings, state: DL, register};
 })();

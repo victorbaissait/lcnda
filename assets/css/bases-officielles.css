@@ -35,3 +35,11 @@
 .bo-results { display: grid; gap: 0; }
 @media (max-width: 640px) { .bo-bar { width: 100px; } .bo-form label { flex: 1 1 100%; } }
 @media print { .bo-person { display: none !important; } }
+.bo-card .bo-person { margin: 0; }
+.bo-rec-name { margin: 0; }
+.bo-more { margin-top: 4px; font-size: .92em; }
+.bo-more > summary { cursor: pointer; color: var(--muted, #6b6b6b); list-style: none; display: inline; }
+.bo-more > summary::-webkit-details-marker { display: none; }
+.bo-more[open] > summary { font-weight: 600; }
+.bo-ouc { margin-top: 12px; }
+.bo-card[hidden] { display: none !important; }

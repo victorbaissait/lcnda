@@ -20,6 +20,10 @@
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const once = {};
+    /* Réglages : genealogie-ciel-heure = {heure: 🕰️ sous les heures, seen: ☄️ sur la fiche}, tout est allumé au départ */
+    const PREF = 'genealogie-ciel-heure';
+    const pref = () => { try { return {heure: true, seen: true, ...(JSON.parse(localStorage.getItem(PREF) || '{}') || {})}; } catch (_) { return {heure: true, seen: true}; } };
+    const setPref = v => { try { localStorage.setItem(PREF, JSON.stringify({...pref(), ...v})); } catch (_) {} };
     const load = (key, url) => (once[key] ||= fetch(url).then(r => (r.ok ? r.json() : Promise.reject(new Error(String(r.status))))).catch(e => { delete once[key]; throw e; }));
     const loadTz = () => load('tz', 'assets/data/tz-europe-amerique.json');
     const loadSkyEvents = () => load('ev', 'assets/data/comets-aurores.json');
@@ -161,7 +165,7 @@
         const lab = field.closest('label') || field.parentElement; let hint = lab.querySelector('[data-ch-hint]');
         if (!hint) { hint = document.createElement('small'); hint.className = 'ch-hint'; hint.dataset.chHint = ''; hint.hidden = true; lab.appendChild(hint); }
         const time = field.value || '', date = form.elements.date_text?.value || '', pid = form.elements.place_id?.value || '', seq = ++formSeq;
-        if (!/^\d{1,2}:\d{2}/.test(time) || !date) { hint.hidden = true; return; }
+        if (!/^\d{1,2}:\d{2}/.test(time) || !date || !pref().heure) { hint.hidden = true; return; }
         try {
             const [ctx, TZ] = await Promise.all([A().api('ciel_heure_ctx', {date, place_id: pid}), loadTz()]);
             if (seq !== formSeq) return;
@@ -179,7 +183,7 @@
     /* la liste des événements de la fiche : un petit « 🕰️ » sous l'heure */
     async function decorateEvents(detail) {
         const list = (detail?.events || []).filter(e => /^\d{1,2}:\d{2}/.test(String(e.event_time || '')) && dateOf(e));
-        if (!list.length) return;
+        if (!list.length || !pref().heure) return;
         let TZ; try { TZ = await loadTz(); } catch (_) { return; }
         list.forEach(e => {
             const row = document.querySelector(`#workspace .event-row[data-event-id="${Number(e.id)}"]`), at = row?.querySelector('.event-time'); if (!at || row.querySelector('.ch-real')) return;
@@ -213,17 +217,26 @@
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks.sky_seen = (index, detail) => {
         const pid = Number(detail?.person?.id); if (!pid || detail.person.kind === 'animal') return '';
-        return A().card(index, i18n('☄️ Il a pu voir…'), '', `<div class="ch-seen" data-ch-seen="${pid}"><p class="muted">${esc(i18n('On regarde le ciel de sa vie…'))}</p></div>`, 'span-6');
+        if (!pref().seen) return '';
+        return A().card(index, i18n('☄️ Il a pu voir…'), '', `<div class="ch-seen" data-ch-seen="${pid}"></div>`, 'span-6');
     };
+    /** le contenu « Il a pu voir… » (une phrase, puis ▸ plus) ; '' quand il n'y a rien à dire — réutilisé par 🧰 Données */
+    function seenHtml(life, data) {
+        const list = life?.birth ? seenDuring(life, data) : []; if (!list.length) return '';
+        const fem = life.gender === 'F' || life.gender === 'female', lead = fem ? i18n('Elle a pu voir') : i18n('Il a pu voir');
+        const names = list.map(e => `${e.kind === 'aurore' ? '🌌' : '☄️'} ${seenTxt(e)}`);
+        return `<p class="ch-seen-lead">${esc(lead)} ${esc(names.slice(0, 3).join(', '))}${names.length > 3 ? esc(i18n(' et {n} autres', {n: String(names.length - 3)})) : ''}.</p>
+            <details class="ch-seen-more"><summary>${esc(i18n('▸ plus'))}</summary><ul class="ch-seen-list">${list.map(e => `<li data-kind="${esc(e.kind)}"><span class="ch-seen-ico" aria-hidden="true">${e.kind === 'aurore' ? '🌌' : '☄️'}</span><div><strong>${esc(seenTxt(e))}</strong>${e.desc ? `<p class="muted">${esc(i18n(e.desc))}</p>` : ''}<small class="ch-src">${esc(i18n('Source :'))} ${srcHtml(e)}</small></div></li>`).join('')}</ul>
+            <p class="muted ch-seen-note"><small>${esc(i18n('« A pu voir » : on la voyait à l’œil nu depuis la France ou l’Europe de l’Ouest, quand le ciel était dégagé, et il ou elle avait au moins 5 ans.'))}</small></p></details>`;
+    }
     async function fillSeen(detail) {
         const pid = Number(detail?.person?.id), host = document.querySelector(`#workspace [data-ch-seen="${pid}"]`); if (!host) return;
-        let data; try { data = await loadSkyEvents(); } catch (_) { host.innerHTML = `<p class="muted">${esc(i18n('La liste des comètes et des aurores n’a pas pu être lue.'))}</p>`; return; }
+        const card = host.closest('section.card') || host, hide = () => { card.hidden = true; };
+        if (!pref().seen) return hide();
+        let data; try { data = await loadSkyEvents(); } catch (_) { return hide(); }
         const life = lifeOf(detail); lives.set(pid, life);
-        if (!life.birth) { host.innerHTML = `<p class="muted">${esc(i18n('Il faut sa date de naissance pour savoir ce qu’on voyait dans le ciel.'))}</p>`; return; }
-        const list = seenDuring(life, data), fem = life.gender === 'F';
-        if (!list.length) { host.innerHTML = `<p class="muted">${esc(i18n('Pas de grande comète ni de grande aurore connue pendant sa vie (à partir de ses 5 ans).'))}</p>`; return; }
-        host.innerHTML = `<p class="ch-seen-lead">${esc(fem ? i18n('Elle a pu voir :') : i18n('Il a pu voir :'))}</p><ul class="ch-seen-list">${list.map(e => `<li data-kind="${esc(e.kind)}"><span class="ch-seen-ico" aria-hidden="true">${e.kind === 'aurore' ? '🌌' : '☄️'}</span><div><strong>${esc(seenTxt(e))}</strong>${e.desc ? `<p class="muted">${esc(i18n(e.desc))}</p>` : ''}<small class="ch-src">${esc(i18n('Source :'))} ${srcHtml(e)}</small></div></li>`).join('')}</ul>
-            <p class="muted ch-seen-note"><small>${esc(i18n('« A pu voir » : l’événement se voyait à l’œil nu depuis la France ou l’Europe de l’Ouest, quand le ciel était dégagé.'))}</small></p>`;
+        const html = seenHtml(life, data); if (!html) return hide(); // rien à dire : pas de bloc vide
+        host.innerHTML = html;
     }
 
     /* la Chronologie : les comètes et aurores rejoignent la colonne « Contexte » (🌍 Le monde autour) */
@@ -232,7 +245,7 @@
         if (wrapped || typeof ext.worldTimeline !== 'function') return; wrapped = true;
         const orig = ext.worldTimeline;
         ext.worldTimeline = id => {
-            const base = orig(id); if (base == null) return base;
+            const base = orig(id); if (base == null || !pref().seen) return base;
             const life = lives.get(Number(id)), data = once.evData;
             if (!life || !data) {
                 if (!chronoBusy) { chronoBusy = true; Promise.all([loadSkyEvents().then(d => { once.evData = d; }), life ? null : A().api('person', {id}).then(d => { lives.set(Number(id), lifeOf(d)); })]).catch(() => {}).finally(() => { if (A().state?.module === 'chronologie' && A().state?.timeline?.history) window.LCNDA_PARTS?.renderTimeline?.(); setTimeout(() => { chronoBusy = false; }, 2000); }); }
@@ -266,5 +279,21 @@
     }
     /** les comètes de la liste visibles à l'œil nu à cette date (AAAA-MM-JJ) et qui ont des éléments d'orbite */
     const cometsOn = (data, date) => (data?.events || []).filter(e => e.kind === 'comete' && e.el && e.from <= date && e.to >= date);
-    ext.cielHeure = {loadTz, loadSkyEvents, zoneFor, countryOf, realHour, hm, lifeOf, seenDuring, cometRaDec, cometsOn, ctx: q => A().api('ciel_heure_ctx', q)};
+    /* ═════════════════ 🧰 Données : utilisable quand on veut, pour n'importe qui / n'importe quelle année ═════════════════ */
+    const personDetail = async ctx => (ctx?.person?.events ? ctx.person : await A().api('person', {id: Number(ctx?.person?.id ?? ctx?.person)}));
+    const none = (host, txt) => { host.innerHTML = `<p class="muted">${esc(txt)}</p>`; };
+    (ext.dataSources = ext.dataSources || []).push(
+        {id: 'il-a-pu-voir', icon: '☄️', label: 'Il a pu voir… (comètes, aurores)', group: 'La personne', needs: ['person'], installed: () => true,
+            run: async (ctx, host) => { const d = await personDetail(ctx), html = seenHtml(lifeOf(d), await loadSkyEvents()); if (html) host.innerHTML = `<div class="ch-seen">${html}</div>`; else none(host, i18n('Pas de grande comète ni de grande aurore connue pendant sa vie (à partir de ses 5 ans).')); }},
+        {id: 'comets-annee', icon: '☄️', label: 'Comètes et aurores d’une année', group: 'Le monde', needs: ['year'], installed: () => true,
+            run: async (ctx, host) => { const y = String(Number(ctx?.year)), d = await loadSkyEvents(), list = d.events.filter(e => e.from.slice(0, 4) <= y && e.to.slice(0, 4) >= y);
+                if (!list.length) return none(host, i18n('Pas de grande comète ni de grande aurore connue en {y}.', {y}));
+                host.innerHTML = `<ul class="ch-seen-list">${list.map(e => `<li><span class="ch-seen-ico" aria-hidden="true">${e.kind === 'aurore' ? '🌌' : '☄️'}</span><div><strong>${esc(i18n(e.name))} (${esc(yearsTxt(e))})</strong><p class="muted">${esc(i18n(e.desc))}</p><small class="ch-src">${esc(i18n('Source :'))} ${srcHtml(e)}</small></div></li>`).join('')}</ul>`; }},
+        {id: 'vraie-heure', icon: '🕰️', label: 'La vraie heure des actes', group: 'La personne', needs: ['person'], installed: () => true,
+            run: async (ctx, host) => { const d = await personDetail(ctx), TZ = await loadTz();
+                const rows = (d?.events || []).filter(e => /^\d{1,2}:\d{2}/.test(String(e.event_time || '')) && dateOf(e)).map(e => [e, realHour({date: dateOf(e), time: e.event_time, place: {name: e.place_name, country: e.country, county: e.county, state: e.state, subdivision: e.subdivision, lat: e.latitude, lng: e.longitude}}, TZ)]).filter(([, r]) => r);
+                if (!rows.length) return none(host, i18n('Aucun acte avec une heure écrite et un lieu placé sur la carte.'));
+                host.innerHTML = rows.map(([e, r]) => `<p class="ch-hint"><b>${esc(e.type_label || '')} · ${esc(e.date_text || '')}</b>${hintHtml(r)}</p>`).join(''); }});
+
+    ext.cielHeure = {pref, setPref, seenHtml, loadTz, loadSkyEvents, zoneFor, countryOf, realHour, hm, lifeOf, seenDuring, cometRaDec, cometsOn, ctx: q => A().api('ciel_heure_ctx', q)};
 })();

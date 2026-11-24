@@ -17,7 +17,7 @@ Ce qui est demandé (chaque étape = une sorte de question) :
   countries : les États d'Europe et des Amériques (P30 continent), les États où le français est langue officielle (P37 = Q150),
               et les pays historiques (Q3024240) de ces continents ou de langue française — pour découper les personnes.
   people    : les personnes (P31 = Q5) de nationalité (P27) d'un de ces États, avec un lieu de naissance (P19) et au moins
-              N liens vers les Wikipédias (wikibase:sitelinks) : N = 3 pour les États de langue française, 6 pour les autres.
+              N liens vers les Wikipédias (wikibase:sitelinks) : N = 4 pour les États de langue française, 12 pour les autres (pour tenir sous 15 Mo).
   details   : pour chaque personne (par paquets de 300) : nom fr/en, nom de famille (P734), naissance (P569, avec la
               précision), décès (P570), lieu de décès (P20), un métier (P106), et si elle a une page sur fr/en.wikipedia.
   places    : pour chaque lieu de naissance ou de décès (par paquets de 300) : nom fr/en, coordonnées (P625), pays (P17),
@@ -55,7 +55,7 @@ OUT = os.path.join(ROOT, 'assets', 'data', 'wikidata')
 PAUSE = 1.0
 EUROPE, N_AMERICA, S_AMERICA = 'Q46', 'Q49', 'Q18'
 FRENCH = 'Q150'
-SL_FRANCO, SL_OTHER = 3, 6
+SL_FRANCO, SL_OTHER = 4, 12
 TILE = 5  # degrés : les fichiers des personnes et des événements sont découpés en carreaux de 5° × 5°
 
 EVENT_KINDS = [  # (clé, classes) — l'ordre compte : une épidémie qui est aussi une catastrophe reste « épidémie »
@@ -252,8 +252,8 @@ def step_people(w, countries):
                 rows += part
         for r in rows:
             p = qnum(r['p'])
-            if p and p not in people:
-                people[p] = (int(r['sl']), qnum(r['pl']))
+            if p and (p not in people or (franco and not people[p][2])):
+                people[p] = (int(r['sl']), qnum(r['pl']), franco)
         if i % 20 == 0:
             log(f'  personnes : {i + 1}/{len(countries)} pays, {len(people)} personnes')
     log(f'Personnes trouvées : {len(people)}')
@@ -386,11 +386,19 @@ def step_songs(w):
       OPTIONAL { ?frw schema:about ?s ; schema:isPartOf <https://fr.wikipedia.org/> . }
       OPTIONAL { ?enw schema:about ?s ; schema:isPartOf <https://en.wikipedia.org/> . }
     } GROUP BY ?s'''
-    rows = w.ask(q, 'songs')
-    if rows is None:
-        rows = []
-        for cls in ('Q7366', 'Q134556'):
-            rows += w.ask(q.replace('VALUES ?cls { wd:Q7366 wd:Q134556 }', f'VALUES ?cls {{ wd:{cls} }}'), f'songs-{cls}') or []
+    rows, seen = [], set()
+    for cls in ('Q7366', 'Q134556'):
+        for dec in range(1850, 2030, 10):  # par décennie : une seule grosse question dépasse le temps permis
+            part = w.ask(q.replace('VALUES ?cls { wd:Q7366 wd:Q134556 }', f'VALUES ?cls {{ wd:{cls} }}')
+                         .replace('FILTER(?sl0 >= 2)', f'FILTER(?sl0 >= 2 && ?pd >= "{dec}-01-01T00:00:00Z"^^xsd:dateTime && ?pd < "{dec + 10}-01-01T00:00:00Z"^^xsd:dateTime)'),
+                         f'songs-{cls}-{dec}')
+            if part is None:
+                log(f'  ⚠ chansons {cls} {dec} : trop long, abandonné')
+                continue
+            for r in part:
+                if r['s'] not in seen:
+                    seen.add(r['s'])
+                    rows.append(r)
     log(f'  chansons : {len(rows)}')
     return rows
 
@@ -425,8 +433,11 @@ META = {'source': 'Wikidata', 'url': 'https://www.wikidata.org', 'licence': 'CC0
         'credit': 'Données : Wikidata (CC0 1.0, domaine public), extraites avec le service de requêtes query.wikidata.org.'}
 
 
-def step_write(people, det, places, pnames, occ, events, oldrows, songs, built):
+def step_write(people, det, places, pnames, occ, events, oldrows, songs, built, min_franco=SL_FRANCO, min_other=SL_OTHER):
     sizes = {}
+    if os.path.isdir(OUT):  # on repart de zéro : pas de vieux carreaux oubliés
+        import shutil
+        shutil.rmtree(OUT)
     # les lieux (coordonnées + nom), pour les personnes
     place = {}
     for q, r in places.items():
@@ -438,7 +449,9 @@ def step_write(people, det, places, pnames, occ, events, oldrows, songs, built):
     by_day = collections.defaultdict(list)
     kept = 0
     occ_used = set()
-    for p, (sl, bpl) in people.items():
+    for p, (sl, bpl, franco) in people.items():
+        if sl < (min_franco if franco else min_other):
+            continue
         r = det.get(p)
         if not r or bpl not in place:
             continue
@@ -471,7 +484,7 @@ def step_write(people, det, places, pnames, occ, events, oldrows, songs, built):
         sizes[f'people/{k}.json.gz'] = write_gz(f'people/{k}.json.gz', {'v': 1, 'tile': k, 'p': t['p'], 'pl': {str(q): v for q, v in t['pl'].items()}})
     sizes['people-index.json.gz'] = write_gz('people-index.json.gz', {'v': 1, 'size': TILE, 'built': built, **META,
         'cols': ['qid', 'nom', 'naissance', 'décès', 'lieu de naissance', 'lieu de décès', 'métier', 'liens (1 fr, 2 en)', 'sitelinks'],
-        'tiles': {k: len(t['p']) for k, t in tiles.items()}, 'count': kept, 'sitelinks_min': {'langue française': SL_FRANCO, 'autres': SL_OTHER}})
+        'tiles': {k: len(t['p']) for k, t in tiles.items()}, 'count': kept, 'sitelinks_min': {'langue française': min_franco, 'autres': min_other}})
     sizes['occupations.json.gz'] = write_gz('occupations.json.gz', {'v': 1, 'o': {str(q): occ.get(q, '') for q in sorted(occ_used) if occ.get(q)}})
     sur = {}
     for k, rows in by_surname.items():
@@ -578,6 +591,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--cache', default=os.path.join(os.getcwd(), 'wikidata-sortie', 'cache'))
     ap.add_argument('--test', action='store_true', help='Belgique et Luxembourg seulement')
+    ap.add_argument('--max-mo', type=float, default=15, help='taille totale permise (Mo), 15 par défaut')
     ap.add_argument('--hors-ligne', action='store_true', help='ne lit que le cache (aucune question au service)')
     a = ap.parse_args()
     global OUT
@@ -594,8 +608,17 @@ def main():
     events = [] if a.test else step_events(w)
     oldrows = [] if a.test else step_oldnames(w)
     songs = step_songs(w)
-    sizes = step_write(people, det, places, pnames, occ, events, oldrows, songs, built)
-    total = sum(sizes.values())
+    mf, mo = SL_FRANCO, SL_OTHER
+    while True:
+        sizes = step_write(people, det, places, pnames, occ, events, oldrows, songs, built, mf, mo)
+        total = sum(sizes.values())
+        if total <= a.max_mo * 1e6 or mo > 60:
+            break
+        log(f'Trop gros ({total / 1e6:.1f} Mo > {a.max_mo} Mo) : on garde moins de personnes')
+        mo += 2
+        if mo % 4 == 0:
+            mf += 1
+    log(f'Seuils retenus : au moins {mf} pages Wikipédia (langue française), {mo} (autres)')
     log(f'Questions posées au service : {w.asked}')
     log(f'Fichiers : {len(sizes)} — total {total / 1e6:.1f} Mo dans {OUT}')
     for k in ['people-index.json.gz', 'occupations.json.gz', 'surnames.json.gz', 'events-index.json.gz', 'oldnames.json.gz', 'songs.json.gz']:

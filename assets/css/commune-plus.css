@@ -29,3 +29,4 @@
 .cplus-tg{display:flex;gap:.6rem;align-items:flex-start;margin:.45rem 0}
 .cplus-scroll{overflow-x:auto}
 @media (max-width:640px){.cplus-cem li{grid-template-columns:1.6rem minmax(0,1fr)}.cplus-links{grid-column:2}.cplus-img{flex-basis:180px}}
+.cplus-lead{margin:.1rem 0 .4rem}

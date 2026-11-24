@@ -136,7 +136,7 @@
         st.textContent = `.wda{display:grid;gap:12px}.wda h4{margin:0 0 4px;font-size:.95em}.wda ul{margin:0;padding:0;list-style:none;display:grid;gap:3px}
 .wda li{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline}.wda li small{opacity:.75}.wda-links{font-size:.85em;white-space:nowrap}.wda-links a{text-decoration:none}
 .wda-tag{font-size:.78em;padding:0 6px;border-radius:8px;background:color-mix(in srgb,currentColor 10%,transparent)}.wda-src{font-size:.8em;opacity:.7;margin-top:4px}
-.wda-more{font-size:.85em}.wdo-hint{font-size:.85em;margin-top:4px;padding:4px 8px;border-radius:6px;background:color-mix(in srgb,#e3b23c 18%,transparent)}.wdo-hint a{text-decoration:none}
+.wda-more{font-size:.85em}.wda-lead{margin:0 0 4px}.wda-fold>summary{cursor:pointer;font-size:.9em;margin:4px 0}.wda-fold[open]>summary{margin-bottom:8px}.wdo-hint{font-size:.85em;margin-top:4px;padding:4px 8px;border-radius:6px;background:color-mix(in srgb,#e3b23c 18%,transparent)}.wdo-hint a{text-decoration:none}
 .wda-set .card{margin-bottom:12px}.wda-set .wda-line{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}`;
         (document.head || document.documentElement).appendChild(st);
     })();
@@ -160,7 +160,7 @@
         const p = detail?.person;
         if (!isOn() || !p?.id || p.kind === 'animal') return '';
         const more = `<button type="button" class="icon-button small" data-wda-more title="${esc(i18n('Plus d’actions'))}" aria-label="${esc(i18n('Plus d’actions'))}">⋯</button>`;
-        return A().card(index, BLOCK[1], '', `<div class="wda" data-wda-person="${Number(p.id)}">${UI().skeleton ? UI().skeleton(3) : ''}</div>`, 'span-12', more);
+        return A().card(index, BLOCK[1], '', `<div class="wda-host" data-wda-person="${Number(p.id)}">${UI().skeleton ? UI().skeleton(3) : ''}</div>`, 'span-12', more);
     };
     const lastDetail = new Map();
     const li = (main, sub, q, fl, tag = '') => `<li><span>${main}</span>${tag ? `<span class="wda-tag">${esc(tag)}</span>` : ''}${sub ? `<small>${esc(sub)}</small>` : ''}${links(q, fl)}</li>`;
@@ -172,10 +172,10 @@
     }
     async function occLabel(q) { if (!q) return ''; try { const f = await load('occupations.json.gz'); return f?.o?.[q] || ''; } catch (_) { return ''; } }
 
-    async function fill(host) {
-        const pid = Number(host.dataset.wdaPerson), detail = lastDetail.get(pid);
-        if (!detail) return;
-        const s = settings(), life = lifeOf(detail);
+    /** Le contenu du bloc, pour une fiche (detail = {person, events}) : une phrase d'abord, le reste replié (« ▸ plus »).
+     *  Rend '' quand il n'y a rien (le bloc se cache alors). Réutilisé par LCNDA_EXT.dataSources (run). */
+    async function render(detail, s = settings()) {
+        const life = lifeOf(detail);
         const tasks = await Promise.all([
             s.song ? songOf(life).catch(() => null) : [],
             s.place ? samePlace(life).catch(() => null) : [],
@@ -183,37 +183,49 @@
             s.names ? namesakes(life).catch(() => null) : [],
             s.events ? eventsNear(life, Number(s.km) || 30).catch(() => null) : [],
         ]);
-        if (!host.isConnected) return;
         const [songs, place, day, names, events] = tasks;
-        if (tasks.every(t => t === null)) { host.innerHTML = A().empty ? A().empty(i18n('Les données Wikidata ne sont pas dans cette version de l’app.'), {icon: '🌟'}) : ''; return; }
-        const parts = [];
+        const parts = [], first = [];
         if (songs?.length) {
             const x = songs[0];
-            parts.push(`<section><h4>🎶 ${esc(i18n('L’année de sa naissance ({y})', {y: String(life.by)}))}</h4><ul>${li(`« ${esc(x.title)} », ${esc(x.perf)}`, x.fr ? '' : i18n('succès dans le monde'), x.q, x.fl)}${songs.slice(1, 3).map(y => li(`« ${esc(y.title)} », ${esc(y.perf)}`, '', y.q, y.fl)).join('')}</ul></section>`);
+            first.push(`🎶 ${esc(i18n('L’année de sa naissance ({y})', {y: String(life.by)}))} : « ${esc(x.title)} », ${esc(x.perf)} ${links(x.q, x.fl)}`);
+            if (songs.length > 1) parts.push(`<section><h4>🎶 ${esc(i18n('Autres chansons de {y}', {y: String(life.by)}))}</h4><ul>${songs.slice(1, 4).map(y => li(`« ${esc(y.title)} », ${esc(y.perf)}`, y.fr ? '' : i18n('succès dans le monde'), y.q, y.fl)).join('')}</ul></section>`);
         }
+        const count = [];
         if (place?.length) {
             const occ = await Promise.all(place.map(r => occLabel(r.occ)));
+            count.push(`📍 ${esc(i18n(place.length === 1 ? '1 célébrité née au même endroit' : '{n} célébrités nées au même endroit', {n: String(place.length)}))}`);
             parts.push(`<section><h4>📍 ${esc(i18n('Célèbres nés au même endroit (à 50 ans près)'))}</h4>${list(place.map((r, i) => ({...r, o: occ[i]})), r => li(`<b>${esc(r.name)}</b> <small>${esc(span(r.b, r.d))}</small>`, [r.o, r.place].filter(Boolean).join(' · '), r.q, r.fl), 'place')}</section>`);
         }
         if (day?.length) {
             const ex = day.filter(r => r.exact), other = day.filter(r => !r.exact);
+            if (ex.length) count.push(`🎂 ${esc(i18n('né le même jour que {n}', {n: ex[0].name}))}`);
             if (ex.length) parts.push(`<section><h4>🎂 ${esc(i18n('Nés le même jour ({d})', {d: dateFr(life.ymd)}))}</h4>${list(ex, r => li(`<b>${esc(r.name)}</b>`, r.place, r.q, r.fl), 'day')}</section>`);
             if (other.length) parts.push(`<section><h4>🎂 ${esc(i18n('Nés un {d}, une autre année', {d: dateFr(life.ymd).replace(/ \d+$/, '')}))}</h4><ul>${other.map(r => li(`<b>${esc(r.name)}</b> <small>${esc(String(yearOf(r.b)))}</small>`, r.place, r.q, r.fl)).join('')}</ul></section>`);
         }
         if (names?.length) {
+            count.push(`👥 ${esc(i18n(names.length === 1 ? '1 homonyme célèbre' : '{n} homonymes célèbres', {n: String(names.length)}))}`);
             parts.push(`<section><h4>👥 ${esc(i18n('Célèbres du même nom : {n}', {n: life.surname}))}</h4>${list(names, r => li(`<b>${esc(r.name)}</b> <small>${esc(span(r.b, r.d))}</small>`, r.place ? i18n('né(e) à {p}', {p: r.place}) : '', r.q, r.fl, i18n('simple homonyme')), 'names')}
                 <p class="wda-src">${esc(i18n('Même nom de famille seulement : ce n’est pas une preuve de parenté.'))}</p></section>`);
         }
         if (events?.length) {
+            count.push(`🗺 ${esc(i18n(events.length === 1 ? '1 grand événement près de chez lui' : '{n} grands événements près de chez lui', {n: String(events.length)}))}`);
             parts.push(`<section><h4>🗺 ${esc(i18n('Pendant sa vie, à moins de {k} km', {k: String(Number(s.km) || 30)}))}</h4>${list(events, r => li(`<b>${esc(r.name)}</b> <small>${esc(dateFr(r.date))}${r.end && yearOf(r.end) !== yearOf(r.date) ? `–${esc(String(yearOf(r.end)))}` : ''}</small>`,
                 [i18n('à {k} km de {p}', {k: String(Math.round(r.km)), p: r.near || '?'}), r.age >= 0 ? i18n('à {n} ans', {n: String(r.age)}) : ''].filter(Boolean).join(' · '), r.q, r.fl, i18n(KIND[r.kind] || r.kind)), 'events')}</section>`);
         }
-        if (!parts.length) {
-            const why = !life.by ? i18n('Ajoute une date de naissance (et un lieu placé sur la carte) pour voir ce qui se passait autour.') : i18n('Rien de connu sur Wikidata autour de sa vie (même lieu, même jour, même nom, événements proches).');
-            host.innerHTML = A().empty ? A().empty(why, {icon: '🌟'}) : esc(why);
-            return;
-        }
-        host.innerHTML = parts.join('') + `<p class="wda-src">${esc(i18n('Source : Wikidata (CC0, domaine public), livré avec l’app. Les liens ↗ ouvrent la page en ligne.'))}</p>`;
+        if (!first.length && !count.length) return '';
+        const lead = [...first, count.join(' · ')].filter(Boolean).map(t => `<p class="wda-lead">${t}</p>`).join('');
+        const src = `<p class="wda-src">${esc(i18n('Source : Wikidata (CC0, domaine public), livré avec l’app. Les liens ↗ ouvrent la page en ligne.'))}</p>`;
+        return lead + (parts.length ? `<details class="wda-fold"><summary>${esc(i18n('▸ plus'))}</summary><div class="wda">${parts.join('')}</div></details>` : '') + src;
+    }
+    async function fill(host) {
+        const pid = Number(host.dataset.wdaPerson), detail = lastDetail.get(pid);
+        if (!detail) return;
+        const html = await render(detail);
+        if (!host.isConnected) return;
+        const card = host.closest('.card');
+        if (!html) { host.innerHTML = ''; if (card) card.hidden = true; return; } // rien à dire : pas de bloc vide
+        if (card) card.hidden = false;
+        host.innerHTML = html;
     }
     (ext.afterPerson = ext.afterPerson || []).push(detail => {
         if (!isOn()) return;
@@ -326,5 +338,33 @@
         }
     };
 
-    ext.wikidataAutour = {settings, save, isOn, register, load, lifeOf, samePlace, sameDay, namesakes, eventsNear, songOf, fold, km, openSettings, openAbout};
+    /* ═════════ « à la demande » : le registre commun des données (une future page « 🧰 Données ») ═════════ */
+    const asDetail = async person => {
+        if (person && typeof person === 'object' && person.person) return person;
+        const id = Number(typeof person === 'object' ? person?.id : person); if (!id || !A().api) return null;
+        return A().api('person', {id});
+    };
+    const nothing = (host, t) => { host.innerHTML = A().empty ? A().empty(t, {icon: '🌟'}) : `<p class="muted">${esc(t)}</p>`; };
+    const DS = ext.dataSources = ext.dataSources || [];
+    const ds = d => { if (!DS.some(x => x.id === d.id)) DS.push(d); };
+    ds({id: 'wikidata_autour', icon: '🌟', label: 'Autour de sa vie (Wikidata)', group: 'La personne', needs: ['person'], installed: () => true,
+        run: async (ctx, host) => { const d = await asDetail(ctx?.person); const html = d ? await render(d, {...settings(), song: true, place: true, day: true, names: true, events: true}) : '';
+            if (!html) return nothing(host, i18n('Rien de connu sur Wikidata autour de sa vie (même lieu, même jour, même nom, événements proches).'));
+            host.innerHTML = `<div class="wda-host">${html.replace('<details class="wda-fold">', '<details class="wda-fold" open>')}</div>`; }});
+    ds({id: 'wikidata_chanson', icon: '🎶', label: 'La chanson à la mode cette année-là (Wikidata)', group: 'Le monde', needs: ['year'], installed: () => true,
+        run: async (ctx, host) => { const y = Number(ctx?.year) || 0; const rows = y ? await songOf({by: y}) : [];
+            if (!rows?.length) return nothing(host, i18n('Pas de chanson connue pour {y}.', {y: String(y || '?')}));
+            host.innerHTML = `<div class="wda"><section><h4>🎶 ${esc(String(y))}</h4><ul>${rows.map(r => li(`« ${esc(r.title)} », ${esc(r.perf)}`, r.fr ? '' : i18n('succès dans le monde'), r.q, r.fl)).join('')}</ul></section></div>`; }});
+    ds({id: 'wikidata_ancien_nom', icon: '🏷', label: 'Ancien nom d’un lieu (Wikidata)', group: 'Le lieu', needs: ['place'], installed: () => true,
+        run: async (ctx, host) => { const name = typeof ctx?.place === 'object' ? (ctx.place?.name || '') : String(ctx?.place || ''); const found = await ext.wikidataOldName(name);
+            if (!found.length) return nothing(host, i18n('« {t} » n’est pas un ancien nom connu.', {t: name}));
+            host.innerHTML = found.map(m => `<p class="wdo-hint">${oldLine(m, name)}</p>`).join(''); }});
+    ds({id: 'wikidata_evenements', icon: '🗺', label: 'Grands événements autour d’un lieu (Wikidata)', group: 'Le lieu', needs: ['place', 'year'], installed: () => true,
+        run: async (ctx, host) => { const pl = ctx?.place || {}; const y = Number(ctx?.year) || 0, lat = Number(pl.latitude ?? pl.lat), lon = Number(pl.longitude ?? pl.lon);
+            if (!Number.isFinite(lat) || !Number.isFinite(lon) || !y) return nothing(host, i18n('Choisis un lieu placé sur la carte et une année.'));
+            const rows = await eventsNear({by: y - 10, end: y + 10, places: [{lat, lon, name: pl.name || ''}]}, Number(settings().km) || 30) || [];
+            if (!rows.length) return nothing(host, i18n('Aucun grand événement connu à moins de {k} km, 10 ans autour de {y}.', {k: String(Number(settings().km) || 30), y: String(y)}));
+            host.innerHTML = `<div class="wda"><ul>${rows.map(r => li(`<b>${esc(r.name)}</b> <small>${esc(dateFr(r.date))}</small>`, i18n('à {k} km', {k: String(Math.round(r.km))}), r.q, r.fl, i18n(KIND[r.kind] || r.kind))).join('')}</ul></div>`; }});
+
+    ext.wikidataAutour = {render, settings, save, isOn, register, load, lifeOf, samePlace, sameDay, namesakes, eventsNear, songOf, fold, km, openSettings, openAbout};
 })();

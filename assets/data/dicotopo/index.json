@@ -49,6 +49,54 @@
    "old": 7324,
    "places": 16127,
    "size": 356010
+  },
+  "10": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Aube",
+    "bibl": "Boutiot (Théophile) et Socard (Émile), Dictionnaire topographique du département de l’Aube, Paris, 1874.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39291f"
+   },
+   "communes": 443,
+   "label": "Aube",
+   "old": 8735,
+   "places": 3710,
+   "size": 223849
+  },
+  "11": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Aude",
+    "bibl": "Sabarthès (Antoine), Dictionnaire topographique du département de l’Aude, Paris, 1912.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110095d"
+   },
+   "communes": 441,
+   "label": "Aude",
+   "old": 20590,
+   "places": 14815,
+   "size": 708643
+  },
+  "14": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Calvados",
+    "bibl": "Hippeau (Célestin), Dictionnaire topographique du département du Calvados, Paris, 1883.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k2064144"
+   },
+   "communes": 709,
+   "label": "Calvados",
+   "old": 5408,
+   "places": 15320,
+   "size": 359311
+  },
+  "15": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Cantal",
+    "bibl": "Amé (Émile), Dictionnaire topographique du département du Cantal, Paris, 1897.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110093n"
+   },
+   "communes": 264,
+   "label": "Cantal",
+   "old": 35002,
+   "places": 16596,
+   "size": 728923
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",
