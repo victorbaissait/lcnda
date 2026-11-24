@@ -60,12 +60,13 @@ echo json_encode(['ok' => 1]);`);
         const p = await ctx.newPage();
         p.on('pageerror', e => errs.push(e.message));
         if (process.env.DBG) p.on('console', m => console.log('[page]', m.text().slice(0, 300)));
-        console.log('…'); await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.openActTranscriber && window.LCNDA_EXT?.sendTo && window.LCNDA_UI?.editorMenus, null, {timeout: 30000});
+        await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.openActTranscriber && window.LCNDA_EXT?.sendTo && window.LCNDA_UI?.editorMenus, null, {timeout: 30000});
         // l'Atelier, et un espion sur ext.sendTo (qui continue vers le vrai menu)
         await p.evaluate(async () => { const ext = window.LCNDA_EXT; window.__sends = []; const real = ext.sendTo; ext.sendTo = (k, d, o) => { window.__sends.push({k, d, o: {exclude: o?.exclude, title: o?.title}}); return real(k, d, o); };
             window.__tx = await ext.openActTranscriber({id: 1}); });
         await p.waitForSelector('dialog.h-tx-dlg[open] [data-ui-menu="Fichier"]', {timeout: 15000}); await sleep(800);
-        const menu = async () => { await p.keyboard.press('Escape').catch(() => {}); await p.evaluate(() => document.querySelectorAll('.ui-actmenu').forEach(m => m.remove()));
+        const shut = () => p.evaluate(() => { document.body.dispatchEvent(new PointerEvent('pointerdown', {bubbles: true})); document.body.click(); document.querySelectorAll('.ui-actmenu').forEach(m => m.remove()); });
+        const menu = async () => { await shut(); await sleep(100);
             await p.click('dialog.h-tx-dlg[open] [data-ui-menu="Fichier"]'); await p.waitForSelector('.ui-actmenu'); return p.$$eval('.ui-actmenu button b', b => b.map(x => x.textContent)); };
         const pick = async label => { await p.locator('.ui-actmenu button', {hasText: label}).first().click(); await sleep(300); };
         const items = async () => p.$$eval('.ui-actmenu button b', b => b.map(x => x.textContent));
@@ -117,7 +118,7 @@ echo json_encode(['ok' => 1]);`);
             await pick('Éclaircir / restaurer l’image');
             const m = await p.evaluate(() => window.__rt); assert.equal(m.id, 1); assert.equal(m.filename, 'acte.png');
             await p.evaluate(() => { if (window.__real) window.LCNDA_EXT.retouchMedia = window.__real; else delete window.LCNDA_EXT.retouchMedia; });
-            await p.keyboard.press('Escape').catch(() => {}); await p.evaluate(() => document.querySelectorAll('.ui-actmenu').forEach(m => m.remove()));
+            await shut();
         });
         await t('✍️ une zone « Signatures » : « Détourer la signature » ; une zone de texte : non ; changer la sorte le fait paraître', async () => {
             await p.evaluate(() => window.__tx.links.selectZone('zt'));
@@ -146,7 +147,7 @@ echo json_encode(['ok' => 1]);`);
         await t('📝 Exporter → Word (.docx) : le texte, le titre et les personnes, relus par le traitement de texte', async () => {
             await p.click('dialog.h-tx-dlg[open] [data-tx-cmd="export"]'); await sleep(500);
             assert.ok(await p.evaluate(() => [...document.querySelectorAll('dialog[open]')].some(d => /📝 Word/.test(d.textContent))), 'le format Word est proposé');
-            await p.keyboard.press('Escape'); await sleep(300);
+            await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].find(x => /📝 Word/.test(x.textContent) && !x.classList.contains('h-tx-dlg')); d?.close(); d?.remove(); }); await sleep(300);
             const r = await p.evaluate(async () => { const tx = window.__tx; tx.t.data.people = [{name: 'Pierre MAZAUD', role: 'sujet', person_id: 1, s: 47, e: 60}];
                 const b = await tx.links.docxBlob(); const back = await window.LCNDA_TEXT.fromDocx(await b.arrayBuffer());
                 const txt = back.doc.sections.flatMap(s => s.blocks).map(x => window.LCNDA_TEXT.blockText(x)).join('\n'); return {size: b.size, type: b.type, txt, sts: back.doc.sections[0].blocks.map(x => x.st)}; });
