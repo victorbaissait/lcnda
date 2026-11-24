@@ -112,6 +112,24 @@ echo json_encode(['ok' => 1, 'rid' => $r['id'], 'svc' => $svc]);`], {cwd: root, 
             await p.evaluate(() => { ['genealogie-recueils-profil', 'genealogie-recueils-remarques', 'genealogie-recueils-trous'].forEach(k => localStorage.removeItem(k)); });
             assert.equal(await p.evaluate(d => window.LCNDA_EXT.recueilEtat.holes(d).length, D), 1, 'trous allumés (conseillé) : « p. 2 à 4 » signalées');
         });
+        await t('📜 une page du recueil s’ouvre dans l’Atelier de transcription ; au retour, le texte remplit la page vide (↶ Annuler)', async () => {
+            // une nouvelle page, avec une photo sur laquelle aucun acte n'est commencé
+            php(`require 'lib/bootstrap.php'; $pdo = db(); $im = imagecreatetruecolor(80, 100); imagefill($im, 0, 0, imagecolorallocate($im, 230, 215, 180)); imagepng($im, MEDIA_DIR . '/neuve.png');
+                $pdo->exec("INSERT INTO media(id,title,filename,thumbnail,media_type) VALUES(900,'Vue neuve','neuve.png','neuve.png','image')");
+                recueil_add_images($pdo, ['recueil_id' => ${rid}, 'version_id' => (int) $pdo->query('SELECT MAX(id) FROM recueil_versions WHERE recueil_id=${rid}')->fetchColumn(), 'mode' => 'new_pages', 'media_ids' => [900]]);`);
+            const R = await api('recueil', {id: rid}), pg = R.pages.find(x => R.images.some(i => i.page_id === x.id && i.media_id === 900)); assert.ok(pg, 'la page neuve');
+            await p.evaluate(id => window.LCNDA_APP.api('save_recueil_page', {}, {method: 'POST', body: {id, transcription: ''}}), pg.id);
+            await p.evaluate(([id, pid]) => window.LCNDA_EXT.openRecueil(id, pid), [rid, pg.id]);
+            await p.waitForSelector('[data-rc-txopen]', {timeout: 20000}); await p.click('[data-rc-txopen]');
+            await p.waitForSelector('dialog.h-tx-dlg [data-tx-body]', {timeout: 20000});
+            assert.match(await p.inputValue('dialog.h-tx-dlg [data-tx="title"]'), /Registre de Sancoins/);
+            await p.fill('dialog.h-tx-dlg [data-tx-body]', 'Le dix mai a été baptisé Jean MAZAUD'); await p.dispatchEvent('dialog.h-tx-dlg [data-tx-body]', 'input');
+            await p.click('dialog.h-tx-dlg [data-tx-cmd="save"]'); await sleep(900); await p.click('dialog.h-tx-dlg [data-tx-cmd="close"]');
+            await p.waitForFunction(() => /baptisé Jean MAZAUD/.test(document.querySelector('[data-rc-field="transcription"]')?.value || ''), null, {timeout: 15000});
+            assert.match((await api('recueil', {id: rid})).pages.find(x => x.id === pg.id).transcription, /baptisé Jean MAZAUD/);
+            await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /Atelier est mis dans la page/.test(x.textContent)).querySelector('button').click()); await sleep(900);
+            assert.equal((await api('recueil', {id: rid})).pages.find(x => x.id === pg.id).transcription, '', '↶ Annuler');
+        });
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true});

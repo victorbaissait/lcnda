@@ -231,6 +231,7 @@ function act_transcription_clean_data(PDO $pdo, $data): array
         if (!is_array($z)) { continue; }
         $zones[] = ['id' => mb_substr(preg_replace('/[^\w-]/', '', (string) ($z['id'] ?? '')), 0, 24), 'x' => $num($z['x'] ?? 0), 'y' => $num($z['y'] ?? 0), 'w' => $num($z['w'] ?? 0), 'h' => $num($z['h'] ?? 0),
             's' => max(0, (int) ($z['s'] ?? 0)), 'e' => max(0, (int) ($z['e'] ?? 0)), 'note' => mb_substr(safe_text($z['note'] ?? ''), 0, 300), 'c' => preg_match('/^#[0-9a-f]{6}$/i', (string) ($z['c'] ?? '')) ? $z['c'] : ''] + (in_array($z['src'] ?? '', ['htr', 'ocr', 'deep'], true) ? ['src' => $z['src']] : [])
+            + (in_array($z['kind'] ?? '', ['skip', 'margin', 'head', 'sign', 'note'], true) ? ['kind' => $z['kind']] : []) // kind : ⛔ à ne pas lire, marge, titre, signatures, note (heritage-transcribe-xml.js)
             + (safe_int($z['p'] ?? 0) > 0 ? ['p' => safe_int($z['p'])] : []); // p : la page (n° du média) d'un acte en plusieurs pages ; absente = l'image de l'acte // src : posée par une lecture (sinon dessinée à la main)
     }
     $people = [];

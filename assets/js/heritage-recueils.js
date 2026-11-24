@@ -384,6 +384,7 @@
                     <label>Nom de la page <small class="muted">(facultatif)</small><input data-rc-field="label" value="${esc(p.label)}" placeholder="f° 12 r°, page 3, lettre B…"></label>
                     <label class="h-rc-trans">Transcription <span class="h-rc-saved muted" data-rc-saved></span><textarea data-rc-field="transcription" rows="16" placeholder="Recopie ici ce qui est écrit sur la page (une ligne par ligne du document)…">${esc(p.transcription)}</textarea></label>
                     ${cur?.media_transcription && !p.transcription.trim() ? `<button type="button" class="link-button" data-rc-usemedia>↧ Reprendre la transcription déjà faite sur cette photo</button>` : ''}
+                    ${cur && ext.openActTranscriber && !document.body.classList.contains('is-kiosk') ? `<button type="button" class="button small secondary h-rc-txopen" data-rc-txopen title="${esc(i18n('L’outil complet : zones sur l’image, lecture automatique de l’écriture, repérage des noms, versions ; le texte revient ici'))}">📜 ${esc(i18n('Ouvrir dans l’Atelier de transcription'))}</button>` : ''}
                     <button type="button" class="link-button h-rc-totable" data-rc-totable>📊 ${p.table ? 'Voir le tableau de la page' : 'Une liste à transposer ? Faire un tableau'} ↓</button>
                     <label>Notes<textarea data-rc-field="notes" rows="4" placeholder="Abréviations, mots incertains, ce qu’il reste à vérifier…">${esc(p.notes)}</textarea></label>
                     <div class="h-rc-sideactions"><button type="button" class="button small secondary" data-rc-pagemove="-1" ${idx ? '' : 'disabled'}>↑ Avancer la page</button><button type="button" class="button small secondary" data-rc-pagemove="1" ${next ? '' : 'disabled'}>↓ Reculer la page</button><button type="button" class="button small secondary" data-rc-insert>＋ Page après</button><button type="button" class="button small secondary" data-rc-linkpage title="Relier cette page à une fiche, un village, une enquête, un projet de l’Atelier, une battue">🔗 Relier la page…</button><button type="button" class="button small secondary danger" data-rc-delpage>Supprimer la page</button></div>
@@ -423,6 +424,20 @@
         body.querySelectorAll('[data-rc-imgstep]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); stepImg(Number(b.dataset.rcImgstep)); }));
         body.querySelector('[data-rc-linkimg]')?.addEventListener('click', () => pageLinkDialog({page: p, image: cur, scope: 'image'}));
         body.querySelector('[data-rc-linkpage]').addEventListener('click', () => pageLinkDialog({page: p, image: cur, scope: 'page'}));
+        // 📜 l'Atelier sur la photo de la page : la transcription déjà commencée sur elle, sinon une nouvelle (avec le texte de la page) ; au retour, le texte de l'Atelier remplit la page si elle était vide
+        body.querySelector('[data-rc-txopen]')?.addEventListener('click', async e => {
+            const b = e.currentTarget; if (b.disabled) return; b.disabled = true;
+            try {
+                let acts = []; try { acts = (await A().api('act_transcriptions_media', {media_id: cur.media_id})).items || []; } catch (_) { acts = []; }
+                const pid = p.id, back = async () => { await load(st().id); const np = D.pages.find(q => q.id === pid), im = D.images.find(i => i.id === cur.id);
+                    if (np && !String(np.transcription || '').trim() && String(im?.media_transcription || '').trim()) { await post('save_recueil_page', {id: pid, transcription: im.media_transcription}); await load(st().id); A().undoToast?.(i18n('Le texte de l’Atelier est mis dans la page.'), {undo: async () => { await post('save_recueil_page', {id: pid, transcription: ''}); await reload(); }}); }
+                    paint(); };
+                const title = `${D.recueil.title} — ${pageName(p)}`;
+                if (acts.length) await ext.openActTranscriber({id: acts[0].id, page: cur.media_id, onClose: back});
+                else await ext.openActTranscriber({mediaId: cur.media_id, filename: cur.filename, title, text: p.transcription || cur.media_transcription || '', onClose: back});
+            } catch (err) { console.error(err); A().toast(i18n('L’Atelier de transcription n’a pas pu s’ouvrir : {x}', {x: String(err?.message || err).slice(0, 200)}), 'error'); }
+            finally { b.disabled = false; }
+        });
         const ownersBox = body.querySelector('[data-rc-owners]');
         if (ownersBox && cur) get('recueil_media_owners', {media_id: cur.media_id}).then(r => { if (!ownersBox.isConnected) return; const o = r.owners || []; ownersBox.innerHTML = o.length ? `🔗 Cette image est aussi : ${o.map(x => `<span class="h-rc-chip">${esc(x.label)}${x.name ? ' · ' + esc(x.name) : ''}</span>`).join(' ')}` : ''; }).catch(() => {});
         body.querySelector('[data-rc-insert]').addEventListener('click', async () => { const r = await run('save_recueil_page', {recueil_id: D.recueil.id, after: p.id}); if (r) go(r.id); });

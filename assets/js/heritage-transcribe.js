@@ -19,6 +19,9 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     let deepRun = null; // 📑 « 🔬 Lecture approfondie » sur toutes les pages : la lecture en cours (elle suit l'Atelier d'un acte à l'autre, un texte par page)
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
+    const TXX = () => ext.txXml; // 🧾 ALTO / 📄 PAGE et les sortes de zone (heritage-transcribe-xml.js)
+    const XK = k => { const r = TXX()?.KINDS.find(q => q[0] === k); return r ? `${r[1]} ${i18n(r[2])}` : ''; };
+    const dl = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.parentNode.removeChild(a); setTimeout(() => URL.revokeObjectURL(a.href), 3000); };
 
     const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', i18n('Naissance')], ['mariage', i18n('Mariage')], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['notoriete', i18n('Acte de notoriété')], ['recensement', i18n('Recensement')], ['militaire', i18n('Registre militaire')], ['lettre', i18n('Lettre')], ['autre', i18n('Autre')]];
     const COLORS = ['#f6c343', '#7cc4f0', '#9be08f', '#f59ab0', '#c3a6f2', '#f7a35c', '#6fd6c8', '#e6e15a'];
@@ -285,6 +288,8 @@
         const PG = ext.txPages;
         let PAGES = [], pageIx = 0, pageForm = '', switching = false, readQ = null, perSet = null, perCombo = null, perWarnAt = 0;
         const curPid = () => Number(PAGES[pageIx]?.media_id || t.media_id);
+        /** ⛔ le centre de ce rectangle (pixels de l'image affichée) est dans une zone « à ne pas lire » de cette page */
+        const skipped = b => !!TXX()?.inSkip(t.data.zones.filter(z => z.kind === 'skip' && onHere(z)), b);
         const onHere = z => pageForm !== 'one' || Number(z.p || t.media_id) === curPid();
         const pz = () => (pageForm === 'one' ? {p: curPid()} : {});
         const pageZone = z => Object.assign(z, pz());
@@ -544,7 +549,7 @@
         const colorOf = (z, i) => z.c || COLORS[i % COLORS.length];
         function paintZoneRects() {
             const g = $('[data-tx-zones]'), sw = 2 / zoom;
-            g.innerHTML = t.data.zones.map((z, i) => !onHere(z) ? '' : `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id ? ' class="is-sel"' : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${(selZone === z.id ? .38 : .2) * zop()}" stroke="${colorOf(z, i)}" stroke-opacity="${selZone === z.id ? 1 : Math.max(.08, zop())}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || i18n('Zone non reliée'))}${selZone === z.id ? ` ${i18n('— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)')}` : ''}</title></rect>`).join('');
+            g.innerHTML = t.data.zones.map((z, i) => !onHere(z) ? '' : `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id || z.kind ? ` class="${selZone === z.id ? 'is-sel' : ''}${z.kind ? ` is-k-${esc(z.kind)}` : ''}"` : ''}${z.kind === 'skip' ? ` stroke-dasharray="${6 / zoom} ${4 / zoom}"` : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${z.kind === 'skip' ? '#6b7280' : colorOf(z, i)}" fill-opacity="${(selZone === z.id ? .38 : .2) * zop()}" stroke="${colorOf(z, i)}" stroke-opacity="${selZone === z.id ? 1 : Math.max(.08, zop())}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${z.kind ? `${esc(XK(z.kind))} — ` : ''}${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || i18n('Zone non reliée'))}${selZone === z.id ? ` ${i18n('— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)')}` : ''}</title></rect>`).join('');
             paintHandles();
         }
         function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); paintTxBar(); }
@@ -643,7 +648,7 @@
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
             const linked = z.e > z.s;
             bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : `<span class="muted">${i18n('pas encore reliée au texte')}</span>`}
-                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><input data-tx-znote placeholder="${esc(i18n('Note (mot illisible, signature…)'))}" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="${esc(i18n('Couleur'))}"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button><button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
+                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><select data-tx-zkind title="${esc(i18n('Ce qu’est cette zone : « ⛔ À ne pas lire » est sautée par la lecture automatique et les exports ; les autres donnent l’ordre de lecture et la sorte de bloc (ALTO, PAGE)'))}">${(TXX()?.KINDS || []).map(([v, ic, l]) => `<option value="${v}"${(z.kind || '') === v ? ' selected' : ''}>${ic} ${esc(i18n(l))}</option>`).join('')}</select><input data-tx-znote placeholder="${esc(i18n('Note (mot illisible, signature…)'))}" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="${esc(i18n('Couleur'))}"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button><button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
                 <small class="muted h-tx-zkeys" title="${esc(i18n('Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille'))}">↔ ${i18n('glisser · poignées · flèches · Maj + flèches · ⌘Z')}</small>`;
         }
         /* ─── ⌘Z / ⇧⌘Z pour les zones (le texte garde l'annulation de la case) ─── */
@@ -915,10 +920,14 @@
         /* ─── ⚖️ chaque lecture gardée (✍ main, 🔬 IA, 🔎 OCR) pour les comparer et prendre le meilleur (heritage-transcribe-compare.js) ─── */
         async function keepReading(text, source, model = '') {
             const C = ext.txCompare; if (!C || !C.keepOn() || !String(text || '').trim()) return;
-            if (!t.id) { try { await save(); } catch (_) {} if (!t.id) return; }
             const page = PAGES.length > 1 ? pageName(PAGES[pageIx], pageIx) : '';
-            post('save_act_transcription_version', {act_id: t.id, label: C.labelOf(source, model, page), body: String(text).trim(), data: {zones: [], people: []}, auto: 0, source: `${source}:${String(model || '').slice(0, 80)}`}).catch(() => {});
+            const v = {label: C.labelOf(source, model, page), body: String(text).trim(), data: {zones: [], people: []}, auto: 0, source: `${source}:${String(model || '').slice(0, 80)}`};
+            // un acte pas encore enregistré : la lecture attend le premier enregistrement (l'enregistrer ici, pendant la lecture, écrasait le texte lu)
+            if (!t.id) { readsWaiting.push(v); return; }
+            post('save_act_transcription_version', {act_id: t.id, ...v}).catch(() => {});
         }
+        const readsWaiting = [];
+        const flushReads = () => { if (!t.id) return; readsWaiting.splice(0).forEach(v => post('save_act_transcription_version', {act_id: t.id, ...v}).catch(() => {})); };
         async function openCompare() {
             if (!ext.txCompare) return toast(i18n('La comparaison des lectures n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }
@@ -1152,7 +1161,7 @@
             try {
                 const T = await A().loadOcrEngine(); status(i18n('Lecture de l’image…'));
                 const r = await T.recognize(await filteredCanvas(), lang);
-                const dd = r?.data || {}, lines = (dd.lines?.length ? dd.lines : (dd.blocks || []).flatMap(bl => (bl.paragraphs || []).flatMap(pg => pg.lines || []))).filter(l => (l.text || '').trim() && l.bbox);
+                const dd = r?.data || {}, lines = (dd.lines?.length ? dd.lines : (dd.blocks || []).flatMap(bl => (bl.paragraphs || []).flatMap(pg => pg.lines || []))).filter(l => (l.text || '').trim() && l.bbox && !skipped({x: l.bbox.x0, y: l.bbox.y0, w: l.bbox.x1 - l.bbox.x0, h: l.bbox.y1 - l.bbox.y0}));
                 if (!lines.length) { const plain = String(dd.text || '').trim(); if (plain) keepReading(plain, 'ocr', lang); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
                     appendRead(plain); before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); return; }
                 keepReading(lines.map(l => l.text.replace(/\s+$/, '')).join('\n'), 'ocr', lang); // ⚖️
@@ -1244,6 +1253,7 @@
         /** Les lignes lues, à côté de leur morceau d'image ; les mots peu sûrs surlignés ; on corrige, puis on met dans le texte */
         async function htrReview(lines, box, modelFile, installed) {
             const ox = box?.x || 0, oy = box?.y || 0;
+            lines = lines.filter(l => !l.bbox || !skipped({x: l.bbox[0] + ox, y: l.bbox[1] + oy, w: l.bbox[2] - l.bbox[0], h: l.bbox[3] - l.bbox[1]})); // ⛔ zones à ne pas lire
             let im = null; try { im = await new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = ko; i.src = origSrc(); }); } catch (_) {}
             const crop = b => { if (!im || !b) return ''; const [x0, y0, x1, y1] = b, w = Math.max(1, x1 - x0), h = Math.max(1, y1 - y0), k = Math.min(1, 52 / h, 900 / w); const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k)); c.getContext('2d').drawImage(im, x0 + ox, y0 + oy, w, h, 0, 0, c.width, c.height); try { return c.toDataURL('image/jpeg', .85); } catch (_) { return ''; } };
             const pct = c => Math.round(c * 100);
@@ -1546,7 +1556,7 @@
             if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${t.kind === 'apreciser' ? i18n('Acte') : (KINDS.find(k => k[0] === t.kind)?.[1] || i18n('Acte'))}${subj ? ` — ${subj.name}` : ''}${t.date_text ? ` — ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
             status('Enregistrement…');
             if (pageForm === 'one' && PAGES.length > 1) { if (!t.data.pageViews || typeof t.data.pageViews !== 'object' || Array.isArray(t.data.pageViews)) t.data.pageViews = {}; t.data.pageViews[curPid()] = {...t.data.view}; }
-            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`);
+            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`); flushReads();
                 // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé)
                 if (typeof r.result.body === 'string' && r.result.body !== t.body) { snap(); area.value = r.result.body; before = area.value; t.body = area.value; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
                 docNote(); ctx.onSaved?.(t.id); }
@@ -1572,6 +1582,17 @@
          * avec son image et ses zones (coordonnées en pixels de l'image), le texte avec un <pb/> par page et un <lb n="…"/> par ligne (relié à
          * sa zone par @facs quand une zone couvre la ligne), les personnes et leur rôle (<listPerson>), les cases du 🧩 gabarit (<interpGrp>).
          */
+        /** ALTO / PAGE : chaque page, ses lignes (avec la zone qui les couvre) et ses zones typées */
+        function xmlPages() {
+            const pages = multiPages() ? pageParts() : [{i: -1, name: '', text: area.value, file: t.filename}], pidOf = q => (q.i >= 0 ? Number(PAGES[q.i].media_id) : Number(t.media_id));
+            let at = 0; return pages.map(q => {
+                const start = multiPages() ? area.value.indexOf(q.text, at) : 0; if (start >= 0) at = start + q.text.length;
+                const zs = t.data.zones.filter(z => (q.i < 0 ? true : Number(z.p || t.media_id) === pidOf(q)) && z.w > 0 && z.h > 0);
+                let pos = Math.max(0, start); const lines = q.text.split('\n').map((l, k) => { const s0 = pos; pos += l.length + 1; const z = zs.find(zz => zz.e > zz.s && zz.s < s0 + l.length && s0 < zz.e); return {id: k + 1, text: l, box: z ? {x: z.x, y: z.y, w: z.w, h: z.h} : null}; });
+                const cur = q.i < 0 || pidOf(q) === curPid();
+                return {n: q.name || '1', file: q.file || '', w: cur ? imgW : 0, h: cur ? imgH : 0, lines, zones: zs.filter(z => z.kind).map(z => ({id: z.id, kind: z.kind, x: z.x, y: z.y, w: z.w, h: z.h}))};
+            });
+        }
         function teiXml() {
             const zid = z => 'z_' + String(z.id).replace(/[^A-Za-z0-9_.-]/g, '_'); // un identifiant XML commence par une lettre
             const x = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'}[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
@@ -1695,7 +1716,11 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
                     {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText({ln: o.checks?.ln !== false, people: !!o.checks?.people})], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
                     {id: 'pdf', hint: i18n('image + texte (« Enregistrer en PDF »)'), ext: '', run: async () => printIt()},
                     {id: 'print', hint: 'image + texte', run: async () => printIt()},
-                    {id: 'tei', label: '🗂 TEI', hint: i18n('XML des chercheurs et des archives (lignes, zones, personnes)'), ext: 'xml', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([teiXml()], {type: 'application/xml;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }}],
+                    {id: 'tei', label: '🗂 TEI', hint: i18n('XML des chercheurs et des archives (lignes, zones, personnes)'), ext: 'xml', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([teiXml()], {type: 'application/xml;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    ...(TXX() ? [{id: 'alto', label: '🧾 ALTO', hint: i18n('XML des bibliothèques et archives (lignes et mots avec leur place sur l’image)'), ext: 'xml', run: async o => dl(new Blob([TXX().alto(xmlPages(), {title: nm})], {type: 'application/xml;charset=utf-8'}), o.filename)},
+                        {id: 'pagexml', label: '📄 PAGE', hint: i18n('XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs'), ext: 'xml', run: async o => { const F = TXX().page(xmlPages()); if (F.length === 1) return dl(new Blob([F[0].xml], {type: 'application/xml;charset=utf-8'}), o.filename);
+                            const Z = window.LCNDA_SHEET?.zipStore; if (Z) return dl(Z(F.map(f => ({name: f.name, data: f.xml}))), o.filename.replace(/\.xml$/i, '') + '.zip'); for (const f of F) dl(new Blob([f.xml], {type: 'application/xml;charset=utf-8'}), f.name); }}] : []),
+                    ],
                     checks: [{id: 'ln', label: i18n('Numéros de ligne'), checked: true, show: id => id === 'file'}, {id: 'people', label: i18n('Personnes et rôles'), checked: true, show: id => id === 'file'}]});
             }
         });
@@ -1706,7 +1731,8 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             if (e.target.matches('[data-tx-znote]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { z.note = e.target.value.slice(0, 300); touch(); } }
             if (e.target.matches('[data-tx-zcolor]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { if (!e.target.dataset.snapped) { snap(); e.target.dataset.snapped = '1'; } z.c = e.target.value; touch(); paintZoneRects(); paintMirror(); } }
         });
-        dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); if (GB()) { fillGabarit(); paintPeople(); } } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); paintProg(); }
+        dlg.addEventListener('change', e => { if (e.target.matches('[data-tx-zkind]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { snap(); if (e.target.value) z.kind = e.target.value; else delete z.kind; touch(); paintZoneRects(); } return; }
+            if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); if (GB()) { fillGabarit(); paintPeople(); } } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); paintProg(); }
             if (e.target.matches('[data-tx-lang]')) { try { localStorage.setItem(TX_LANG_KEY, e.target.value); } catch (_) {} if (found.length) paintPeople(); } }); // la langue : retenue, et les mots connus suivent
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
         const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };
