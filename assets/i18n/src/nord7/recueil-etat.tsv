@@ -1,0 +1,128 @@
+fr ¦ is
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ {n} línur, {r} yfirfarnar
+Photo à refaire ¦ Taka þarf mynd aftur
+🟢 finies ou 🔵 relues ¦ 🟢 lokið eða 🔵 yfirfarnar
+🟡 en cours ¦ 🟡 í gangi
+⚪ pas encore transcrites ¦ ⚪ ekki enn afritaðar
+⛔ absentes ¦ ⛔ vantar
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ {a} lokið, {b} yfirfarnar, {c} í gangi, {d} á að gera, {e} vantar
+Fiabilité : ¦ Áreiðanleiki:
+Pas en ligne ¦ Ekki á netinu
+Blanche ¦ Auð
+p. {x} ¦ bls. {x}
+Ajouter aux demandes ¦ Bæta við beiðnir
+Non communicables ¦ Ekki aðgengilegar
+Ouvrir la première ¦ Opna þá fyrstu
+Relire la première ¦ Yfirfara þá fyrstu
+À transcrire ¦ Á eftir að afrita
+Commencer p. {n} ¦ Byrja á bls. {n}
+Rien ne reste à faire sur ce recueil. ¦ Ekkert er eftir að gera í þessu safnriti.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Beiðni bætt við ({t}): Rannsóknir › Yfirlit yfir kirkjubækur › Beiðnir.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ Á eftir „{a}“ kemur „{b}“: kannski vantar {x}.
+Poser ces pages comme absentes… ¦ Skrá þessar síður sem vantar…
+C’est normal ¦ Það er eðlilegt
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ „{a}“ tvisvar (síður {x} og {y}): tvítekin mynd, eða „bis“?
+Renommer en « {a} bis » ¦ Endurnefna í „{a} bis“
+Laisser ¦ Láta vera
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Safnritið ætti að hafa {e} síður, hér eru {n} (að meðtöldum þeim sem vantar): {x}
+il en manque {d}. ¦ það vantar {d}.
+{d} de trop (une photo en double ?). ¦ {d} of margar (tvítekin mynd?).
+Poser {n} pages absentes ¦ Skrá {n} síður sem vantar
+Marquer {n} pages absentes ¦ Merkja {n} síður sem vantar
+Marquer « {p} » absente ¦ Merkja „{p}“ sem vantar
+🗂 ÉTAT DU RECUEIL ¦ 🗂 STAÐA SAFNRITS
+Poser les pages ¦ Skrá síðurnar
+Marquer absentes ¦ Merkja sem vantar
+Pourquoi ces pages ne sont pas là ? ¦ Hvers vegna vantar þessar síður?
+ex. arrachées, mentionné en marge du f° 16 ¦ t.d. rifnar úr, getið á spássíu f° 16
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Bæta líka við Gloppur í skjalasöfnum (mælt með)
+Les pages ¦ Síðurnar
+Lisibilité ¦ Læsileiki
+(choisi) ¦ (valið)
+État du recueil ¦ Staða safnrits
+Numérotation pas dite ¦ Tölusetning ekki tilgreind
+{n} pages attendues ¦ {n} síður væntanlegar
+Numérotation, pages attendues ¦ Tölusetning, væntanlegar síður
+Cases ¦ Reitir
+Choisir des pages ¦ Velja síður
+Exporter l’état (tableur) ¦ Flytja út stöðuna (töflureiknir)
+Clique sur les pages (Maj + clic : de… à…) ¦ Smelltu á síðurnar (Shift + smellur: frá… til…)
+Changer l’état… ¦ Breyta stöðu…
+Marquer absentes… ¦ Merkja sem vantar…
+Tout choisir ¦ Velja allt
+Pas encore de page ¦ Engin síða enn
+Ajoute des photos : chaque photo devient une page. ¦ Bættu við myndum: hver mynd verður að síðu.
+Ce qui reste, dans l’ordre conseillé ¦ Það sem er eftir, í ráðlagðri röð
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Beiðnir fara í Rannsóknir › Yfirlit yfir kirkjubækur › Beiðnir, gloppur í Gloppur í skjalasöfnum: listana sem eru þegar til.
+Revenir à l’état calculé ¦ Fara aftur í reiknaða stöðu
+État du texte ¦ Staða texta
+Photo bonne (plus à refaire) ¦ Mynd góð (þarf ekki að taka aftur)
+Lisibilité : {x} ¦ Læsileiki: {x}
+Plus absentes ¦ Vantar ekki lengur
+Renommée en « {a} » ¦ Endurnefnd í „{a}“
+État choisi ¦ Valin staða
+Lignes relues ¦ Yfirfarnar línur
+Mots peu sûrs ¦ Óviss orð
+Numérotation enregistrée ¦ Tölusetning vistuð
+Comment ce recueil est numéroté ? ¦ Hvernig er þetta safnrit tölusett?
+Pas dit ¦ Ekki tilgreint
+Pages attendues (pour repérer ce qui manque) ¦ Væntanlegar síður (til að finna það sem vantar)
+ex. 40 ¦ t.d. 40
+dans les Lacunes d’archives ¦ í Gloppur í skjalasöfnum
+Plus absente ¦ Vantar ekki lengur
+Revenir à l’état calculé ({s}) ¦ Fara aftur í reiknaða stöðu ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Reiknað af Smiðju (skjal nr. {n})
+Calculé : texte écrit = en cours ¦ Reiknað: texti skrifaður = í gangi
+Fiabilité de la lecture ¦ Áreiðanleiki lestrar
+rien d’écrit ¦ ekkert skrifað
+{r} lignes relues sur {n} ¦ {r} af {n} línum yfirfarnar
+Cette page est absente… ¦ Þessa síðu vantar…
+État calculé ¦ Reiknuð staða
+Lisibilité notée ¦ Læsileiki skráður
+Photo bonne ¦ Mynd góð
+Manquante ¦ Vantar
+on ne sait pas encore ¦ ekki vitað enn
+Perdue ou détruite ¦ Týnd eða eyðilögð
+n’existe plus ¦ er ekki lengur til
+Pas encore photographiée ¦ Ekki enn ljósmynduð
+par moi ¦ af mér
+Pas numérisée ¦ Ekki skönnuð
+par le service d’archives ¦ af skjalasafninu
+Numérisée, pas en ligne ¦ Skönnuð, ekki á netinu
+Non communicable ¦ Ekki aðgengileg
+jusqu’à une date ¦ fram að ákveðinni dagsetningu
+En restauration ¦ Í viðgerð
+pas consultable ¦ ekki hægt að skoða
+dans un autre registre, un autre fonds ¦ í annarri bók, öðru skjalasafni
+pas absente : vide ¦ vantar ekki: auð
+Paginé ¦ Blaðsíðutalið
+p. 1, 2, 3… ¦ bls. 1, 2, 3…
+Folioté ¦ Blaðtalið
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — mælt með fyrir gamlar bækur
+Sans ordre (liasse, carton) ¦ Án röðunar (búnt, kassi)
+des pièces, rangées par toi ¦ einingar, raðaðar af þér
+Numérotation des archives ¦ Tölusetning skjalasafnsins
+pièce 1, 2… donnée par le service ¦ eining 1, 2… gefin af safninu
+Bonne ¦ Góð
+Illisible en partie ¦ Ólæsileg að hluta
+Illisible ¦ Ólæsileg
+Sûre ¦ Örugg
+=mot peu sûr ¦ óvisst orð|óviss orð
+=blanche ¦ auð|auðar
+=page à relire ¦ síða til yfirlestrar|síður til yfirlestrar
+=page avec des mots peu sûrs ¦ síða með óvissum orðum|síður með óvissum orðum
+=page absente posée ¦ síða sem vantar skráð|síður sem vantar skráðar
+=page marquée absente ¦ síða merkt sem vantar|síður merktar sem vantar
+=page changée ¦ síðu breytt|síðum breytt
+=page choisie ¦ síða valin|síður valdar
+État des pages ¦ Staða síðna
+Une case par page, une couleur par état ¦ Einn reitur á síðu, einn litur á stöðu
+Reste à faire ¦ Eftir að gera
+Autre demande ¦ Önnur beiðni
+À consulter en salle ¦ Til skoðunar á lestrarsal
+À photographier / numériser ¦ Til að ljósmynda / skanna
+pages photographiées sur les {n} attendues ¦ síður ljósmyndaðar af {n} væntanlegum
+pages photographiées ¦ síður ljósmyndaðar
+pièces photographiées sur les {n} attendues ¦ einingar ljósmyndaðar af {n} væntanlegum
+pièces photographiées ¦ einingar ljósmyndaðar

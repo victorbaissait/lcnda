@@ -1,0 +1,128 @@
+fr ¦ ro
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ {n} rânduri, {r} recitite
+Photo à refaire ¦ Fotografie de refăcut
+🟢 finies ou 🔵 relues ¦ 🟢 terminate sau 🔵 recitite
+🟡 en cours ¦ 🟡 în curs
+⚪ pas encore transcrites ¦ ⚪ netranscrise încă
+⛔ absentes ¦ ⛔ absente
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ {a} terminate, {b} recitite, {c} în curs, {d} de făcut, {e} absente
+Fiabilité : ¦ Fiabilitate:
+Pas en ligne ¦ Nu e online
+Blanche ¦ Goală
+p. {x} ¦ p. {x}
+Ajouter aux demandes ¦ Adaugă la cereri
+Non communicables ¦ Necomunicabile
+Ouvrir la première ¦ Deschide-o pe prima
+Relire la première ¦ Recitește-o pe prima
+À transcrire ¦ De transcris
+Commencer p. {n} ¦ Începe p. {n}
+Rien ne reste à faire sur ce recueil. ¦ Nu mai e nimic de făcut în această culegere.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Cerere adăugată ({t}): Cercetare › Urmărirea registrelor indexate › Cereri.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ După „{a}” vine „{b}”: poate lipsește {x}.
+Poser ces pages comme absentes… ¦ Adaugă aceste pagini ca absente…
+C’est normal ¦ E normal
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ „{a}” de două ori (paginile {x} și {y}): o fotografie dublă sau „bis”?
+Renommer en « {a} bis » ¦ Redenumește în „{a} bis”
+Laisser ¦ Lasă așa
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Culegerea ar trebui să aibă {e} pagini, aici are {n} (inclusiv cele absente): {x}
+il en manque {d}. ¦ lipsesc {d}.
+{d} de trop (une photo en double ?). ¦ {d} în plus (o fotografie dublă?).
+Poser {n} pages absentes ¦ Adaugă paginile absente ({n})
+Marquer {n} pages absentes ¦ Marchează paginile ca absente ({n})
+Marquer « {p} » absente ¦ Marchează „{p}” ca absentă
+🗂 ÉTAT DU RECUEIL ¦ 🗂 STAREA CULEGERII
+Poser les pages ¦ Adaugă paginile
+Marquer absentes ¦ Marchează ca absente
+Pourquoi ces pages ne sont pas là ? ¦ De ce nu sunt aici aceste pagini?
+ex. arrachées, mentionné en marge du f° 16 ¦ ex. rupte, menționat pe marginea f° 16
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Adaugă și la Lacune de arhivă (recomandat)
+Les pages ¦ Paginile
+Lisibilité ¦ Lizibilitate
+(choisi) ¦ (ales)
+État du recueil ¦ Starea culegerii
+Numérotation pas dite ¦ Numerotare nespecificată
+{n} pages attendues ¦ Pagini așteptate: {n}
+Numérotation, pages attendues ¦ Numerotare, pagini așteptate
+Cases ¦ Căsuțe
+Choisir des pages ¦ Alege pagini
+Exporter l’état (tableur) ¦ Exportă starea (foaie de calcul)
+Clique sur les pages (Maj + clic : de… à…) ¦ Dă clic pe pagini (Shift + clic: de la… până la…)
+Changer l’état… ¦ Schimbă starea…
+Marquer absentes… ¦ Marchează ca absente…
+Tout choisir ¦ Alege tot
+Pas encore de page ¦ Încă nicio pagină
+Ajoute des photos : chaque photo devient une page. ¦ Adaugă fotografii: fiecare fotografie devine o pagină.
+Ce qui reste, dans l’ordre conseillé ¦ Ce a rămas, în ordinea recomandată
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Cererile merg în Cercetare › Urmărirea registrelor indexate › Cereri, lacunele în Lacune de arhivă: listele care există deja.
+Revenir à l’état calculé ¦ Revino la starea calculată
+État du texte ¦ Starea textului
+Photo bonne (plus à refaire) ¦ Fotografie bună (nu mai trebuie refăcută)
+Lisibilité : {x} ¦ Lizibilitate: {x}
+Plus absentes ¦ Nu mai sunt absente
+Renommée en « {a} » ¦ Redenumită în „{a}”
+État choisi ¦ Stare aleasă
+Lignes relues ¦ Rânduri recitite
+Mots peu sûrs ¦ Cuvinte nesigure
+Numérotation enregistrée ¦ Numerotare salvată
+Comment ce recueil est numéroté ? ¦ Cum e numerotată această culegere?
+Pas dit ¦ Nespecificat
+Pages attendues (pour repérer ce qui manque) ¦ Pagini așteptate (ca să vezi ce lipsește)
+ex. 40 ¦ ex. 40
+dans les Lacunes d’archives ¦ în Lacune de arhivă
+Plus absente ¦ Nu mai e absentă
+Revenir à l’état calculé ({s}) ¦ Revino la starea calculată ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Calculat de Atelier (actul nr. {n})
+Calculé : texte écrit = en cours ¦ Calculat: text scris = în curs
+Fiabilité de la lecture ¦ Fiabilitatea lecturii
+rien d’écrit ¦ nimic scris
+{r} lignes relues sur {n} ¦ Rânduri recitite: {r} din {n}
+Cette page est absente… ¦ Această pagină e absentă…
+État calculé ¦ Stare calculată
+Lisibilité notée ¦ Lizibilitate notată
+Photo bonne ¦ Fotografie bună
+Manquante ¦ Lipsă
+on ne sait pas encore ¦ nu se știe încă
+Perdue ou détruite ¦ Pierdută sau distrusă
+n’existe plus ¦ nu mai există
+Pas encore photographiée ¦ Nefotografiată încă
+par moi ¦ de mine
+Pas numérisée ¦ Nedigitizată
+par le service d’archives ¦ de serviciul de arhive
+Numérisée, pas en ligne ¦ Digitizată, nu e online
+Non communicable ¦ Necomunicabilă
+jusqu’à une date ¦ până la o anumită dată
+En restauration ¦ În restaurare
+pas consultable ¦ nu poate fi consultată
+dans un autre registre, un autre fonds ¦ în alt registru, alt fond
+pas absente : vide ¦ nu lipsește: e goală
+Paginé ¦ Paginat
+p. 1, 2, 3… ¦ p. 1, 2, 3…
+Folioté ¦ Foliat
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — recomandat pentru registrele vechi
+Sans ordre (liasse, carton) ¦ Fără ordine (dosar de piese, cutie)
+des pièces, rangées par toi ¦ piese, ordonate de tine
+Numérotation des archives ¦ Numerotarea arhivei
+pièce 1, 2… donnée par le service ¦ piesa 1, 2… dată de arhivă
+Bonne ¦ Bună
+Illisible en partie ¦ Parțial ilizibilă
+Illisible ¦ Ilizibilă
+Sûre ¦ Sigur
+=mot peu sûr ¦ cuvânt nesigur|cuvinte nesigure|de cuvinte nesigure
+=blanche ¦ pagină goală|pagini goale|de pagini goale
+=page à relire ¦ pagină de recitit|pagini de recitit|de pagini de recitit
+=page avec des mots peu sûrs ¦ pagină cu cuvinte nesigure|pagini cu cuvinte nesigure|de pagini cu cuvinte nesigure
+=page absente posée ¦ pagină absentă adăugată|pagini absente adăugate|de pagini absente adăugate
+=page marquée absente ¦ pagină marcată absentă|pagini marcate absente|de pagini marcate absente
+=page changée ¦ pagină modificată|pagini modificate|de pagini modificate
+=page choisie ¦ pagină aleasă|pagini alese|de pagini alese
+État des pages ¦ Starea paginilor
+Une case par page, une couleur par état ¦ O căsuță pe pagină, o culoare pe stare
+Reste à faire ¦ Rămas de făcut
+Autre demande ¦ Altă cerere
+À consulter en salle ¦ De consultat în sala de studiu
+À photographier / numériser ¦ De fotografiat / digitizat
+pages photographiées sur les {n} attendues ¦ pagini fotografiate din cele {n} așteptate
+pages photographiées ¦ pagini fotografiate
+pièces photographiées sur les {n} attendues ¦ piese fotografiate din cele {n} așteptate
+pièces photographiées ¦ piese fotografiate

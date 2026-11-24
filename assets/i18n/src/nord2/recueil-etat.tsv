@@ -1,0 +1,128 @@
+fr ¦ sk ¦ nb
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ Riadky: {n}, skontrolované: {r} ¦ {n} linjer, {r} gjennomgått
+Photo à refaire ¦ Fotku treba urobiť znova ¦ Ta bildet på nytt
+🟢 finies ou 🔵 relues ¦ 🟢 hotové alebo 🔵 skontrolované ¦ 🟢 ferdige eller 🔵 gjennomgåtte
+🟡 en cours ¦ 🟡 prebieha ¦ 🟡 pågår
+⚪ pas encore transcrites ¦ ⚪ ešte neprepísané ¦ ⚪ ikke transkribert ennå
+⛔ absentes ¦ ⛔ chýbajúce ¦ ⛔ mangler
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ Hotové: {a}, skontrolované: {b}, prebieha: {c}, na urobenie: {d}, chýbajúce: {e} ¦ {a} ferdige, {b} gjennomgått, {c} pågår, {d} skal gjøres, {e} mangler
+Fiabilité : ¦ Spoľahlivosť: ¦ Pålitelighet:
+Pas en ligne ¦ Nie je online ¦ Ikke på nett
+Blanche ¦ Prázdna ¦ Tom
+p. {x} ¦ s. {x} ¦ s. {x}
+Ajouter aux demandes ¦ Pridať do žiadostí ¦ Legg til i forespørsler
+Non communicables ¦ Nesprístupnené ¦ Ikke tilgjengelige
+Ouvrir la première ¦ Otvoriť prvú ¦ Åpne den første
+Relire la première ¦ Skontrolovať prvú ¦ Gå gjennom den første
+À transcrire ¦ Na prepis ¦ Skal transkriberes
+Commencer p. {n} ¦ Začať s. {n} ¦ Start s. {n}
+Rien ne reste à faire sur ce recueil. ¦ V tomto zborníku už nič nezostáva. ¦ Det er ingenting igjen å gjøre i denne samlingen.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Žiadosť pridaná ({t}): Výskum › Prehľad vypísaných matrík › Žiadosti. ¦ Forespørsel lagt til ({t}): Forskning › Oversikt over registrerte protokoller › Forespørsler.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ Po „{a}“ nasleduje „{b}“: možno chýba {x}. ¦ Etter «{a}» kommer «{b}»: kanskje mangler {x}.
+Poser ces pages comme absentes… ¦ Pridať tieto strany ako chýbajúce… ¦ Legg inn disse sidene som manglende…
+C’est normal ¦ To je v poriadku ¦ Det er normalt
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ „{a}“ dvakrát (strany {x} a {y}): duplicitná fotka, alebo „bis“? ¦ «{a}» to ganger (sidene {x} og {y}): et dobbelt bilde, eller «bis»?
+Renommer en « {a} bis » ¦ Premenovať na „{a} bis“ ¦ Gi nytt navn: «{a} bis»
+Laisser ¦ Nechať tak ¦ La være
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Zborník by mal mať {e} strán, tu ich má {n} (vrátane chýbajúcich): {x} ¦ Samlingen skal ha {e} sider, her har den {n} (manglende medregnet): {x}
+il en manque {d}. ¦ chýba ich {d}. ¦ {d} mangler.
+{d} de trop (une photo en double ?). ¦ {d} navyše (duplicitná fotka?). ¦ {d} for mye (et dobbelt bilde?).
+Poser {n} pages absentes ¦ Pridať chýbajúce strany ({n}) ¦ Legg inn {n} manglende sider
+Marquer {n} pages absentes ¦ Označiť strany ako chýbajúce ({n}) ¦ Merk {n} sider som manglende
+Marquer « {p} » absente ¦ Označiť „{p}“ ako chýbajúcu ¦ Merk «{p}» som manglende
+🗂 ÉTAT DU RECUEIL ¦ 🗂 STAV ZBORNÍKA ¦ 🗂 SAMLINGENS STATUS
+Poser les pages ¦ Pridať strany ¦ Legg inn sidene
+Marquer absentes ¦ Označiť ako chýbajúce ¦ Merk som manglende
+Pourquoi ces pages ne sont pas là ? ¦ Prečo tu tieto strany nie sú? ¦ Hvorfor er ikke disse sidene her?
+ex. arrachées, mentionné en marge du f° 16 ¦ napr. vytrhnuté, spomenuté na okraji f° 16 ¦ f.eks. revet ut, nevnt i margen på f° 16
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Pridať aj do Medzier v archívoch (odporúčané) ¦ Legg også til i Hull i arkivene (anbefalt)
+Les pages ¦ Strany ¦ Sidene
+Lisibilité ¦ Čitateľnosť ¦ Lesbarhet
+(choisi) ¦ (vybrané) ¦ (valgt)
+État du recueil ¦ Stav zborníka ¦ Samlingens status
+Numérotation pas dite ¦ Číslovanie neuvedené ¦ Nummerering ikke oppgitt
+{n} pages attendues ¦ Očakávané strany: {n} ¦ {n} sider forventet
+Numérotation, pages attendues ¦ Číslovanie, očakávané strany ¦ Nummerering, forventede sider
+Cases ¦ Políčka ¦ Ruter
+Choisir des pages ¦ Vybrať strany ¦ Velg sider
+Exporter l’état (tableur) ¦ Exportovať stav (tabuľka) ¦ Eksporter status (regneark)
+Clique sur les pages (Maj + clic : de… à…) ¦ Klikni na strany (Shift + klik: od… do…) ¦ Klikk på sidene (Shift + klikk: fra… til…)
+Changer l’état… ¦ Zmeniť stav… ¦ Endre status…
+Marquer absentes… ¦ Označiť ako chýbajúce… ¦ Merk som manglende…
+Tout choisir ¦ Vybrať všetko ¦ Velg alle
+Pas encore de page ¦ Zatiaľ žiadna strana ¦ Ingen sider ennå
+Ajoute des photos : chaque photo devient une page. ¦ Pridaj fotky: z každej fotky bude strana. ¦ Legg til bilder: hvert bilde blir en side.
+Ce qui reste, dans l’ordre conseillé ¦ Čo zostáva, v odporúčanom poradí ¦ Det som gjenstår, i anbefalt rekkefølge
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Žiadosti idú do Výskum › Prehľad vypísaných matrík › Žiadosti, medzery do Medzier v archívoch: zoznamy, ktoré už existujú. ¦ Forespørsler havner i Forskning › Oversikt over registrerte protokoller › Forespørsler, hull i Hull i arkivene: listene som allerede finnes.
+Revenir à l’état calculé ¦ Vrátiť sa k vypočítanému stavu ¦ Gå tilbake til beregnet status
+État du texte ¦ Stav textu ¦ Tekststatus
+Photo bonne (plus à refaire) ¦ Fotka je dobrá (netreba ju robiť znova) ¦ Bildet er bra (trenger ikke tas på nytt)
+Lisibilité : {x} ¦ Čitateľnosť: {x} ¦ Lesbarhet: {x}
+Plus absentes ¦ Už nechýbajú ¦ Ikke lenger manglende
+Renommée en « {a} » ¦ Premenované na „{a}“ ¦ Nytt navn: «{a}»
+État choisi ¦ Stav vybraný ¦ Status valgt
+Lignes relues ¦ Skontrolované riadky ¦ Gjennomgåtte linjer
+Mots peu sûrs ¦ Neisté slová ¦ Usikre ord
+Numérotation enregistrée ¦ Číslovanie uložené ¦ Nummerering lagret
+Comment ce recueil est numéroté ? ¦ Ako je tento zborník číslovaný? ¦ Hvordan er denne samlingen nummerert?
+Pas dit ¦ Neuvedené ¦ Ikke oppgitt
+Pages attendues (pour repérer ce qui manque) ¦ Očakávané strany (aby si zistil, čo chýba) ¦ Forventede sider (for å finne det som mangler)
+ex. 40 ¦ napr. 40 ¦ f.eks. 40
+dans les Lacunes d’archives ¦ v Medzerách v archívoch ¦ i Hull i arkivene
+Plus absente ¦ Už nechýba ¦ Ikke lenger manglende
+Revenir à l’état calculé ({s}) ¦ Vrátiť sa k vypočítanému stavu ({s}) ¦ Gå tilbake til beregnet status ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Vypočítané Dielňou (záznam č. {n}) ¦ Beregnet av Verkstedet (oppføring nr. {n})
+Calculé : texte écrit = en cours ¦ Vypočítané: napísaný text = prebieha ¦ Beregnet: skrevet tekst = pågår
+Fiabilité de la lecture ¦ Spoľahlivosť čítania ¦ Lesingens pålitelighet
+rien d’écrit ¦ nič nenapísané ¦ ingenting skrevet
+{r} lignes relues sur {n} ¦ Skontrolované riadky: {r} z {n} ¦ {r} av {n} linjer gjennomgått
+Cette page est absente… ¦ Táto strana chýba… ¦ Denne siden mangler…
+État calculé ¦ Vypočítaný stav ¦ Beregnet status
+Lisibilité notée ¦ Čitateľnosť zaznamenaná ¦ Lesbarhet notert
+Photo bonne ¦ Fotka je dobrá ¦ Bildet er bra
+Manquante ¦ Chýbajúca ¦ Mangler
+on ne sait pas encore ¦ zatiaľ sa nevie ¦ vet ikke ennå
+Perdue ou détruite ¦ Stratená alebo zničená ¦ Tapt eller ødelagt
+n’existe plus ¦ už neexistuje ¦ finnes ikke lenger
+Pas encore photographiée ¦ Ešte neodfotená ¦ Ikke fotografert ennå
+par moi ¦ mnou ¦ av meg
+Pas numérisée ¦ Nedigitalizovaná ¦ Ikke digitalisert
+par le service d’archives ¦ archívom ¦ av arkivet
+Numérisée, pas en ligne ¦ Digitalizovaná, nie online ¦ Digitalisert, ikke på nett
+Non communicable ¦ Nesprístupnená ¦ Ikke tilgjengelig
+jusqu’à une date ¦ do určitého dátumu ¦ til en viss dato
+En restauration ¦ V reštaurovaní ¦ Under restaurering
+pas consultable ¦ nedá sa nahliadnuť ¦ kan ikke ses
+dans un autre registre, un autre fonds ¦ v inej matrike, v inom fonde ¦ i en annen protokoll, et annet arkiv
+pas absente : vide ¦ nechýba: je prázdna ¦ mangler ikke: tom
+Paginé ¦ Stránkované ¦ Paginert
+p. 1, 2, 3… ¦ s. 1, 2, 3… ¦ s. 1, 2, 3…
+Folioté ¦ Foliované ¦ Foliert
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — odporúčané pre staré matriky ¦ f° 1 r°, f° 1 v°… — anbefalt for gamle protokoller
+Sans ordre (liasse, carton) ¦ Bez poradia (zväzok listín, škatuľa) ¦ Uten rekkefølge (bunt, eske)
+des pièces, rangées par toi ¦ kusy, zoradené tebou ¦ stykker, ordnet av deg
+Numérotation des archives ¦ Číslovanie archívu ¦ Arkivets nummerering
+pièce 1, 2… donnée par le service ¦ kus 1, 2… pridelené archívom ¦ stykke 1, 2… gitt av arkivet
+Bonne ¦ Dobrá ¦ God
+Illisible en partie ¦ Čiastočne nečitateľná ¦ Delvis uleselig
+Illisible ¦ Nečitateľná ¦ Uleselig
+Sûre ¦ Isté ¦ Sikkert
+=mot peu sûr ¦ neisté slovo|neisté slová|neistých slov ¦ usikkert ord|usikre ord
+=blanche ¦ prázdna|prázdne|prázdnych ¦ tom|tomme
+=page à relire ¦ strana na kontrolu|strany na kontrolu|strán na kontrolu ¦ side å gå gjennom|sider å gå gjennom
+=page avec des mots peu sûrs ¦ strana s neistými slovami|strany s neistými slovami|strán s neistými slovami ¦ side med usikre ord|sider med usikre ord
+=page absente posée ¦ pridaná chýbajúca strana|pridané chýbajúce strany|pridaných chýbajúcich strán ¦ manglende side lagt inn|manglende sider lagt inn
+=page marquée absente ¦ strana označená ako chýbajúca|strany označené ako chýbajúce|strán označených ako chýbajúce ¦ side merket som manglende|sider merket som manglende
+=page changée ¦ zmenená strana|zmenené strany|zmenených strán ¦ endret side|endrede sider
+=page choisie ¦ vybraná strana|vybrané strany|vybraných strán ¦ valgt side|valgte sider
+État des pages ¦ Stav strán ¦ Sidenes status
+Une case par page, une couleur par état ¦ Jedno políčko na stranu, jedna farba na stav ¦ Én rute per side, én farge per status
+Reste à faire ¦ Zostáva urobiť ¦ Gjenstår
+Autre demande ¦ Iná žiadosť ¦ Annen forespørsel
+À consulter en salle ¦ Na nahliadnutie v bádateľni ¦ Må ses på lesesalen
+À photographier / numériser ¦ Na odfotenie / digitalizáciu ¦ Må fotograferes / digitaliseres
+pages photographiées sur les {n} attendues ¦ odfotených strán z {n} očakávaných ¦ sider fotografert av {n} forventede
+pages photographiées ¦ odfotených strán ¦ sider fotografert
+pièces photographiées sur les {n} attendues ¦ odfotených kusov z {n} očakávaných ¦ stykker fotografert av {n} forventede
+pièces photographiées ¦ odfotených kusov ¦ stykker fotografert

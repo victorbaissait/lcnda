@@ -1,0 +1,128 @@
+fr ¦ sq ¦ mt
+# 🗂 État d’un recueil (heritage-recueil-etat.js, lib/recueil_etat.php)
+{n} lignes, {r} relues ¦ {n} rreshta, {r} të rishikuar ¦ {n} linji, {r} iċċekkjati
+Photo à refaire ¦ Fotoja duhet ribërë ¦ Ritratt li jrid jerġa’ jittieħed
+🟢 finies ou 🔵 relues ¦ 🟢 të përfunduara ose 🔵 të rishikuara ¦ 🟢 lesti jew 🔵 iċċekkjati
+🟡 en cours ¦ 🟡 në vazhdim ¦ 🟡 għaddejjin
+⚪ pas encore transcrites ¦ ⚪ ende pa u transkriptuar ¦ ⚪ għadhom mhux traskritti
+⛔ absentes ¦ ⛔ mungojnë ¦ ⛔ neqsin
+{a} finies, {b} relues, {c} en cours, {d} à faire, {e} absentes ¦ {a} të përfunduara, {b} të rishikuara, {c} në vazhdim, {d} për t’u bërë, {e} mungojnë ¦ {a} lesti, {b} iċċekkjati, {c} għaddejjin, {d} biex isiru, {e} neqsin
+Fiabilité : ¦ Besueshmëria: ¦ Affidabbiltà:
+Pas en ligne ¦ Jo në internet ¦ Mhux online
+Blanche ¦ E bardhë ¦ Vojta
+p. {x} ¦ f. {x} ¦ p. {x}
+Ajouter aux demandes ¦ Shto te kërkesat ¦ Żid mat-talbiet
+Non communicables ¦ Të pakonsultueshme ¦ Mhux aċċessibbli
+Ouvrir la première ¦ Hap të parën ¦ Iftaħ l-ewwel waħda
+Relire la première ¦ Rishiko të parën ¦ Iċċekkja l-ewwel waħda
+À transcrire ¦ Për t’u transkriptuar ¦ Biex tiġi traskritta
+Commencer p. {n} ¦ Fillo te f. {n} ¦ Ibda minn p. {n}
+Rien ne reste à faire sur ce recueil. ¦ Nuk ka mbetur asgjë për t’u bërë në këtë përmbledhje. ¦ M’hemm xejn aktar x’isir f’din il-ġabra.
+Demande ajoutée ({t}) : Recherche › Suivi des registres › Demandes. ¦ Kërkesa u shtua ({t}): Kërkime › Ndjekja e regjistrave › Kërkesat. ¦ Talba miżjuda ({t}): Riċerka › Segwitu tar-reġistri › Talbiet.
+Après « {a} » vient « {b} » : il manque peut-être {x}. ¦ Pas «{a}» vjen «{b}»: ndoshta mungon {x}. ¦ Wara “{a}” jiġi “{b}”: forsi jonqos {x}.
+Poser ces pages comme absentes… ¦ Shëno këto faqe si mungesë… ¦ Daħħal dawn il-paġni bħala neqsin…
+C’est normal ¦ Është normale ¦ Normali
+« {a} » deux fois (pages {x} et {y}) : une photo en double, ou « bis » ? ¦ «{a}» dy herë (faqet {x} dhe {y}): një foto e dyfishtë, apo «bis»? ¦ “{a}” darbtejn (paġni {x} u {y}): ritratt doppju, jew “bis”?
+Renommer en « {a} bis » ¦ Riemërto në «{a} bis» ¦ Semmiha “{a} bis”
+Laisser ¦ Lëre ¦ Ħalli
+Le recueil devrait avoir {e} pages, il en a {n} ici (absentes comprises) : {x} ¦ Përmbledhja duhet të ketë {e} faqe, këtu ka {n} (përfshirë ato që mungojnë): {x} ¦ Il-ġabra suppost għandha {e} paġni, hawn għandha {n} (inklużi n-neqsin): {x}
+il en manque {d}. ¦ mungojnë {d}. ¦ jonqsu {d}.
+{d} de trop (une photo en double ?). ¦ {d} më shumë (një foto e dyfishtë?). ¦ {d} żejda (ritratt doppju?).
+Poser {n} pages absentes ¦ Shëno {n} faqe që mungojnë ¦ Daħħal {n} paġni neqsin
+Marquer {n} pages absentes ¦ Shëno {n} faqe si mungesë ¦ Immarka {n} paġni bħala neqsin
+Marquer « {p} » absente ¦ Shëno «{p}» si mungesë ¦ Immarka “{p}” bħala nieqsa
+🗂 ÉTAT DU RECUEIL ¦ 🗂 GJENDJA E PËRMBLEDHJES ¦ 🗂 STAT TAL-ĠABRA
+Poser les pages ¦ Shëno faqet ¦ Daħħal il-paġni
+Marquer absentes ¦ Shëno si mungesë ¦ Immarka bħala neqsin
+Pourquoi ces pages ne sont pas là ? ¦ Pse nuk janë këtu këto faqe? ¦ Għaliex dawn il-paġni mhumiex hawn?
+ex. arrachées, mentionné en marge du f° 16 ¦ p.sh. të shqyera, përmendur në anë të f° 16 ¦ eż. maqlugħa, imsemmija fil-marġni tal-f° 16
+Ajouter aussi aux Lacunes d’archives (conseillé) ¦ Shto edhe te Boshllëqe arkivi (këshillohet) ¦ Żid ukoll mal-Lakuni fl-arkivji (rakkomandat)
+Les pages ¦ Faqet ¦ Il-paġni
+Lisibilité ¦ Lexueshmëria ¦ Leġġibbiltà
+(choisi) ¦ (e zgjedhur) ¦ (magħżul)
+État du recueil ¦ Gjendja e përmbledhjes ¦ Stat tal-ġabra
+Numérotation pas dite ¦ Numërimi nuk është treguar ¦ In-numerazzjoni mhix speċifikata
+{n} pages attendues ¦ {n} faqe të pritura ¦ {n} paġni mistennija
+Numérotation, pages attendues ¦ Numërimi, faqet e pritura ¦ Numerazzjoni, paġni mistennija
+Cases ¦ Kutitë ¦ Kaxxi
+Choisir des pages ¦ Zgjidh faqe ¦ Agħżel paġni
+Exporter l’état (tableur) ¦ Eksporto gjendjen (fletë llogaritëse) ¦ Esporta l-istat (folja elettronika)
+Clique sur les pages (Maj + clic : de… à…) ¦ Kliko faqet (Shift + klik: nga… deri…) ¦ Ikklikkja fuq il-paġni (Shift + klikk: minn… sa…)
+Changer l’état… ¦ Ndrysho gjendjen… ¦ Ibdel l-istat…
+Marquer absentes… ¦ Shëno si mungesë… ¦ Immarka bħala neqsin…
+Tout choisir ¦ Zgjidh të gjitha ¦ Agħżel kollox
+Pas encore de page ¦ Ende asnjë faqe ¦ Għad m’hemmx paġni
+Ajoute des photos : chaque photo devient une page. ¦ Shto foto: çdo foto bëhet një faqe. ¦ Żid ritratti: kull ritratt isir paġna.
+Ce qui reste, dans l’ordre conseillé ¦ Ç’ka mbetur, sipas rendit të këshilluar ¦ Dak li fadal, fl-ordni rakkomandata
+Les demandes vont dans Recherche › Suivi des registres › Demandes, les lacunes dans les Lacunes d’archives : les listes qui existent. ¦ Kërkesat shkojnë te Kërkime › Ndjekja e regjistrave › Kërkesat, boshllëqet te Boshllëqe arkivi: listat që ekzistojnë. ¦ It-talbiet imorru f’Riċerka › Segwitu tar-reġistri › Talbiet, il-lakuni fil-Lakuni fl-arkivji: il-listi li diġà jeżistu.
+Revenir à l’état calculé ¦ Kthehu te gjendja e llogaritur ¦ Erġa’ lura għall-istat ikkalkulat
+État du texte ¦ Gjendja e tekstit ¦ Stat tat-test
+Photo bonne (plus à refaire) ¦ Foto e mirë (s’duhet më ribërë) ¦ Ritratt tajjeb (m’għadux jeħtieġ jittieħed mill-ġdid)
+Lisibilité : {x} ¦ Lexueshmëria: {x} ¦ Leġġibbiltà: {x}
+Plus absentes ¦ Nuk mungojnë më ¦ M’għadhomx neqsin
+Renommée en « {a} » ¦ U riemërtua në «{a}» ¦ Imsemmija mill-ġdid “{a}”
+État choisi ¦ Gjendja e zgjedhur ¦ Stat magħżul
+Lignes relues ¦ Rreshta të rishikuar ¦ Linji iċċekkjati
+Mots peu sûrs ¦ Fjalë të pasigurta ¦ Kliem mhux ċert
+Numérotation enregistrée ¦ Numërimi u ruajt ¦ Numerazzjoni ssejvjata
+Comment ce recueil est numéroté ? ¦ Si është numëruar kjo përmbledhje? ¦ Kif inhi numerata din il-ġabra?
+Pas dit ¦ Nuk është treguar ¦ Mhux speċifikat
+Pages attendues (pour repérer ce qui manque) ¦ Faqet e pritura (për të gjetur ç’mungon) ¦ Paġni mistennija (biex issib x’jonqos)
+ex. 40 ¦ p.sh. 40 ¦ eż. 40
+dans les Lacunes d’archives ¦ te Boshllëqe arkivi ¦ fil-Lakuni fl-arkivji
+Plus absente ¦ Nuk mungon më ¦ M’għadhiex nieqsa
+Revenir à l’état calculé ({s}) ¦ Kthehu te gjendja e llogaritur ({s}) ¦ Erġa’ lura għall-istat ikkalkulat ({s})
+Calculé par l’Atelier (acte n° {n}) ¦ Llogaritur nga Punishtja (akti nr. {n}) ¦ Ikkalkulat mil-Laboratorju (att nru {n})
+Calculé : texte écrit = en cours ¦ Llogaritur: tekst i shkruar = në vazhdim ¦ Ikkalkulat: test miktub = għaddej
+Fiabilité de la lecture ¦ Besueshmëria e leximit ¦ Affidabbiltà tal-qari
+rien d’écrit ¦ asgjë e shkruar ¦ xejn miktub
+{r} lignes relues sur {n} ¦ {r} rreshta të rishikuar nga {n} ¦ {r} minn {n} linji iċċekkjati
+Cette page est absente… ¦ Kjo faqe mungon… ¦ Din il-paġna nieqsa…
+État calculé ¦ Gjendja e llogaritur ¦ Stat ikkalkulat
+Lisibilité notée ¦ Lexueshmëria e shënuar ¦ Leġġibbiltà nnotata
+Photo bonne ¦ Foto e mirë ¦ Ritratt tajjeb
+Manquante ¦ Mungon ¦ Nieqsa
+on ne sait pas encore ¦ nuk dihet ende ¦ għadu mhux magħruf
+Perdue ou détruite ¦ E humbur ose e shkatërruar ¦ Mitlufa jew meqruda
+n’existe plus ¦ nuk ekziston më ¦ m’għadhiex teżisti
+Pas encore photographiée ¦ Ende e pafotografuar ¦ Għadha mhux ritrattata
+par moi ¦ nga unë ¦ minni
+Pas numérisée ¦ E padixhitalizuar ¦ Mhux diġitalizzata
+par le service d’archives ¦ nga shërbimi i arkivit ¦ mis-servizz tal-arkivji
+Numérisée, pas en ligne ¦ E dixhitalizuar, jo në internet ¦ Diġitalizzata, mhux online
+Non communicable ¦ E pakonsultueshme ¦ Mhux aċċessibbli
+jusqu’à une date ¦ deri në një datë ¦ sa ċerta data
+En restauration ¦ Në restaurim ¦ Qed tiġi restawrata
+pas consultable ¦ nuk mund të konsultohet ¦ ma tistax tiġi kkonsultata
+dans un autre registre, un autre fonds ¦ në një regjistër tjetër, një fond tjetër ¦ f’reġistru ieħor, f’fond ieħor
+pas absente : vide ¦ nuk mungon: bosh ¦ mhux nieqsa: vojta
+Paginé ¦ Me faqe të numëruara ¦ Paġnata
+p. 1, 2, 3… ¦ f. 1, 2, 3… ¦ p. 1, 2, 3…
+Folioté ¦ Me fletë të numëruara ¦ Folji numerati
+f° 1 r°, f° 1 v°… — conseillé pour les registres anciens ¦ f° 1 r°, f° 1 v°… — këshillohet për regjistrat e vjetër ¦ f° 1 r°, f° 1 v°… — rakkomandat għar-reġistri qodma
+Sans ordre (liasse, carton) ¦ Pa rend (dosje, kuti) ¦ Mingħajr ordni (mazz, kaxxa)
+des pièces, rangées par toi ¦ copa, të renditura nga ti ¦ biċċiet, irranġati minnek
+Numérotation des archives ¦ Numërimi i arkivit ¦ Numerazzjoni tal-arkivji
+pièce 1, 2… donnée par le service ¦ copa 1, 2… dhënë nga shërbimi ¦ biċċa 1, 2… mogħtija mis-servizz
+Bonne ¦ E mirë ¦ Tajba
+Illisible en partie ¦ Pjesërisht e palexueshme ¦ Parzjalment illeġibbli
+Illisible ¦ E palexueshme ¦ Illeġibbli
+Sûre ¦ E sigurt ¦ Ċerta
+=mot peu sûr ¦ fjalë e pasigurt|fjalë të pasigurta ¦ kelma mhux ċerta|kelmiet mhux ċerti|kelmiet mhux ċerti|kelma mhux ċerta|kelma mhux ċerta
+=blanche ¦ e bardhë|të bardha ¦ vojta|vojta|vojta|vojta|vojta
+=page à relire ¦ faqe për t’u rilexuar|faqe për t’u rilexuar ¦ paġna biex terġa’ tinqara|paġni biex jerġgħu jinqraw|paġni biex jerġgħu jinqraw|paġna biex terġa’ tinqara|paġna biex terġa’ tinqara
+=page avec des mots peu sûrs ¦ faqe me fjalë të pasigurta|faqe me fjalë të pasigurta ¦ paġna bi kliem mhux ċert|paġni bi kliem mhux ċert|paġni bi kliem mhux ċert|paġna bi kliem mhux ċert|paġna bi kliem mhux ċert
+=page absente posée ¦ faqe që mungon e shënuar|faqe që mungojnë të shënuara ¦ paġna nieqsa miżjuda|paġni neqsin miżjuda|paġni neqsin miżjuda|paġna nieqsa miżjuda|paġna nieqsa miżjuda
+=page marquée absente ¦ faqe e shënuar si mungesë|faqe të shënuara si mungesë ¦ paġna mmarkata nieqsa|paġni mmarkati neqsin|paġni mmarkati neqsin|paġna mmarkata nieqsa|paġna mmarkata nieqsa
+=page changée ¦ faqe e ndryshuar|faqe të ndryshuara ¦ paġna mibdula|paġni mibdula|paġni mibdula|paġna mibdula|paġna mibdula
+=page choisie ¦ faqe e zgjedhur|faqe të zgjedhura ¦ paġna magħżula|paġni magħżula|paġni magħżula|paġna magħżula|paġna magħżula
+État des pages ¦ Gjendja e faqeve ¦ Stat tal-paġni
+Une case par page, une couleur par état ¦ Një kuti për faqe, një ngjyrë për gjendje ¦ Kaxxa għal kull paġna, kulur għal kull stat
+Reste à faire ¦ Mbetet për t’u bërë ¦ Fadal x’isir
+Autre demande ¦ Kërkesë tjetër ¦ Talba oħra
+À consulter en salle ¦ Për t’u konsultuar në sallë ¦ Biex tiġi kkonsultata fis-sala
+À photographier / numériser ¦ Për t’u fotografuar / dixhitalizuar ¦ Biex tiġi ritrattata / diġitalizzata
+pages photographiées sur les {n} attendues ¦ faqe të fotografuara nga {n} të pritura ¦ paġni ritrattati mill-{n} mistennija
+pages photographiées ¦ faqe të fotografuara ¦ paġni ritrattati
+pièces photographiées sur les {n} attendues ¦ copa të fotografuara nga {n} të pritura ¦ biċċiet ritrattati mill-{n} mistennija
+pièces photographiées ¦ copa të fotografuara ¦ biċċiet ritrattati
