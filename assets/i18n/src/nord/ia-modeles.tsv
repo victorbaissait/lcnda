@@ -1,0 +1,35 @@
+fr ¦ cs ¦ sv ¦ da
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Model ¦ Modell ¦ Model
+conseillé pour cet ordinateur ({n} Go) ¦ doporučeno pro tento počítač ({n} GB) ¦ rekommenderas för den här datorn ({n} GB) ¦ anbefalet til denne computer ({n} GB)
+à l’essai ¦ k vyzkoušení ¦ att prova ¦ til afprøvning
+≈ {x} Go à télécharger ¦ ≈ {x} GB ke stažení ¦ ≈ {x} GB att ladda ned ¦ ≈ {x} GB at downloade
+{n} Go de mémoire conseillés ¦ doporučeno {n} GB paměti ¦ {n} GB minne rekommenderas ¦ {n} GB hukommelse anbefales
+trop gros pour cet ordinateur ¦ příliš velký pro tento počítač ¦ för stor för den här datorn ¦ for stor til denne computer
+Autres modèles à essayer ({n}) ¦ Další modely k vyzkoušení ({n}) ¦ Andra modeller att prova ({n}) ¦ Andre modeller at prøve ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Aplikace je zatím na záznamech nevyzkoušela: porovnej je na svých záznamech („Obě čtení vedle sebe“), než se na ně spolehneš. ¦ Ännu inte provade av appen på handlingar: jämför dem på dina handlingar (”De två läsningarna sida vid sida”) innan du litar på dem. ¦ Endnu ikke afprøvet af appen på dokumenter: sammenlign dem på dine dokumenter (»De to læsninger side om side«), før du stoler på dem.
+Avancé : autre modèle (Ollama) ¦ Pokročilé: jiný model (Ollama) ¦ Avancerat: annan modell (Ollama) ¦ Avanceret: anden model (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Modely už nainstalované v Ollama v tomto počítači. Model, který neumí číst obrázek, nepřečte záznam. Aplikace ho nevyzkoušela: text vždy zkontroluj. ¦ Modellerna som redan finns i Ollama på den här datorn. En modell som inte kan läsa en bild kan inte läsa handlingen. Inte provad av appen: kontrollera alltid texten. ¦ Modellerne, der allerede er installeret i Ollama på denne computer. En model, der ikke kan læse et billede, kan ikke læse dokumentet. Ikke afprøvet af appen: kontrollér altid teksten.
+lit les images ¦ čte obrázky ¦ läser bilder ¦ læser billeder
+ne lit pas les images ¦ nečte obrázky ¦ läser inte bilder ¦ læser ikke billeder
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Žádný jiný model není nainstalovaný. V terminálu: „ollama pull“ a za tím název modelu. ¦ Ingen annan modell installerad. I en terminal: ”ollama pull” följt av modellens namn. ¦ Ingen anden model installeret. I en terminal: »ollama pull« efterfulgt af modellens navn.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ tento počítač: {n} GB · každý model se stahuje jen jednou ¦ den här datorn: {n} GB · varje modell laddas ned bara en gång ¦ denne computer: {n} GB · hver model downloades kun én gang
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Tento model neumí číst obrázek: vyber model „vision“. ¦ Den här modellen kan inte läsa en bild: välj en ”vision”-modell. ¦ Denne model kan ikke læse et billede: vælg en »vision«-model.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ nejlepší vyzkoušený na starých záznamech, dobrý ve francouzštině a latině ¦ den bästa som provats på gamla handlingar, bra på franska och latin ¦ den bedste afprøvet på gamle dokumenter, god til fransk og latin
+16 Go de mémoire conseillés ¦ doporučeno 16 GB paměti ¦ 16 GB minne rekommenderas ¦ 16 GB hukommelse anbefales
+léger et rapide, pour un ordinateur modeste ¦ lehký a rychlý, pro skromný počítač ¦ lätt och snabb, för en enkel dator ¦ let og hurtig, til en beskeden computer
+se trompe plus souvent sur les noms et les écritures difficiles ¦ častěji se plete u jmen a obtížného písma ¦ tar oftare fel på namn och svår handstil ¦ tager oftere fejl af navne og svær håndskrift
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ pro výkonné počítače (64 GB): stejná rodina jako doporučený, přesnější u obtížného písma ¦ för kraftfulla datorer (64 GB): samma familj som den rekommenderade, noggrannare på svår handstil ¦ til kraftige computere (64 GB): samme familie som den anbefalede, mere præcis på svær håndskrift
+lent, gros téléchargement ¦ pomalý, velké stahování ¦ långsam, stor nedladdning ¦ langsom, stor download
+le plus gros qui tienne dans 64 Go ¦ největší, který se vejde do 64 GB ¦ den största som ryms i 64 GB ¦ den største, der kan være i 64 GB
+très lent, très gros téléchargement, licence moins ouverte ¦ velmi pomalý, velmi velké stahování, méně otevřená licence ¦ mycket långsam, mycket stor nedladdning, mindre öppen licens ¦ meget langsom, meget stor download, mindre åben licens
+fort en français, bon pour comprendre l’acte ¦ silný ve francouzštině, dobře chápe záznam ¦ stark på franska, bra på att förstå handlingen ¦ stærk i fransk, god til at forstå dokumentet
+32 Go de mémoire conseillés, plus lent ¦ doporučeno 32 GB paměti, pomalejší ¦ 32 GB minne rekommenderas, långsammare ¦ 32 GB hukommelse anbefales, langsommere
+bon dans les langues européennes ¦ dobrý v evropských jazycích ¦ bra på europeiska språk ¦ god til europæiske sprog
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ méně otevřená licence Googlu, méně přesný u rukopisu ¦ mindre öppen licens från Google, mindre noggrann på handskrift ¦ mindre åben licens fra Google, mindre præcis på håndskrift
+léger, plusieurs langues ¦ lehký, více jazyků ¦ lätt, flera språk ¦ let, flere sprog
+licence de Google, se trompe souvent sur les noms ¦ licence Googlu, často se plete u jmen ¦ licens från Google, tar ofta fel på namn ¦ licens fra Google, tager ofte fejl af navne
+annoncé bon en écriture manuscrite ¦ prý dobrý v rukopisu ¦ sägs vara bra på handskrift ¦ siges at være god til håndskrift
+moins connu, résultats à comparer ¦ méně známý, výsledky k porovnání ¦ mindre känd, resultat att jämföra ¦ mindre kendt, resultater skal sammenlignes
+très léger, fait pour les documents, ordinateurs modestes ¦ velmi lehký, určený pro dokumenty, skromné počítače ¦ mycket lätt, gjord för dokument, enkla datorer ¦ meget let, lavet til dokumenter, beskedne computere
+faible sur l’écriture à la main ancienne ¦ slabý ve starém rukopisu ¦ svag på gammal handskrift ¦ svag til gammel håndskrift

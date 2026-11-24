@@ -1,0 +1,35 @@
+fr ¦ fi ¦ hu
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Malli ¦ Modell
+conseillé pour cet ordinateur ({n} Go) ¦ suositeltu tälle tietokoneelle ({n} Gt) ¦ ajánlott ehhez a számítógéphez ({n} GB)
+à l’essai ¦ kokeiltavana ¦ kipróbálandó
+≈ {x} Go à télécharger ¦ ≈ {x} Gt ladattavaa ¦ ≈ {x} GB letöltendő
+{n} Go de mémoire conseillés ¦ {n} Gt muistia suositellaan ¦ {n} GB memória ajánlott
+trop gros pour cet ordinateur ¦ liian suuri tälle tietokoneelle ¦ túl nagy ehhez a számítógéphez
+Autres modèles à essayer ({n}) ¦ Muita kokeiltavia malleja ({n}) ¦ További kipróbálható modellek ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Sovellus ei ole vielä kokeillut niitä asiakirjoilla: vertaa niitä omilla asiakirjoillasi (”Kaksi luentaa rinnakkain”) ennen kuin luotat niihin. ¦ Az alkalmazás még nem próbálta ki okiratokon: hasonlítsd össze őket a saját okirataidon („A két olvasat egymás mellett”), mielőtt megbízol bennük.
+Avancé : autre modèle (Ollama) ¦ Lisäasetukset: muu malli (Ollama) ¦ Haladó: másik modell (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Tähän tietokoneeseen Ollamaan jo asennetut mallit. Malli, joka ei osaa lukea kuvaa, ei voi lukea asiakirjaa. Sovellus ei ole kokeillut: tarkista teksti aina. ¦ Az Ollamában ezen a számítógépen már telepített modellek. Egy modell, amely nem tud képet olvasni, nem tudja elolvasni az okiratot. Az alkalmazás nem próbálta ki: mindig ellenőrizd a szöveget.
+lit les images ¦ lukee kuvia ¦ képet olvas
+ne lit pas les images ¦ ei lue kuvia ¦ nem olvas képet
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Muita malleja ei ole asennettu. Päätteessä: ”ollama pull” ja mallin nimi. ¦ Nincs más telepített modell. Terminálban: „ollama pull”, majd a modell neve.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ tämä tietokone: {n} Gt · jokainen malli ladataan vain kerran ¦ ez a számítógép: {n} GB · minden modellt csak egyszer kell letölteni
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Tämä malli ei osaa lukea kuvaa: valitse ”vision”-malli. ¦ Ez a modell nem tud képet olvasni: válassz „vision” modellt.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ paras vanhoilla asiakirjoilla kokeiltu, hyvä ranskassa ja latinassa ¦ a legjobb, régi okiratokon kipróbálva, jó franciául és latinul
+16 Go de mémoire conseillés ¦ 16 Gt muistia suositellaan ¦ 16 GB memória ajánlott
+léger et rapide, pour un ordinateur modeste ¦ kevyt ja nopea, vaatimattomalle tietokoneelle ¦ könnyű és gyors, szerény számítógéphez
+se trompe plus souvent sur les noms et les écritures difficiles ¦ erehtyy useammin nimissä ja vaikeissa käsialoissa ¦ gyakrabban téved neveknél és nehéz írásoknál
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ tehokkaille tietokoneille (64 Gt): sama perhe kuin suositeltu, tarkempi vaikeissa käsialoissa ¦ erős számítógépekhez (64 GB): ugyanaz a család, mint az ajánlott, pontosabb nehéz írásoknál
+lent, gros téléchargement ¦ hidas, suuri lataus ¦ lassú, nagy letöltés
+le plus gros qui tienne dans 64 Go ¦ suurin, joka mahtuu 64 gigatavuun ¦ a legnagyobb, ami belefér 64 GB-ba
+très lent, très gros téléchargement, licence moins ouverte ¦ hyvin hidas, hyvin suuri lataus, vähemmän avoin lisenssi ¦ nagyon lassú, nagyon nagy letöltés, kevésbé nyílt licenc
+fort en français, bon pour comprendre l’acte ¦ vahva ranskassa, ymmärtää asiakirjan hyvin ¦ erős franciául, jól érti az okiratot
+32 Go de mémoire conseillés, plus lent ¦ 32 Gt muistia suositellaan, hitaampi ¦ 32 GB memória ajánlott, lassabb
+bon dans les langues européennes ¦ hyvä eurooppalaisissa kielissä ¦ jó az európai nyelvekben
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ Googlen vähemmän avoin lisenssi, epätarkempi käsialassa ¦ kevésbé nyílt Google-licenc, kevésbé pontos kézírásnál
+léger, plusieurs langues ¦ kevyt, useita kieliä ¦ könnyű, több nyelv
+licence de Google, se trompe souvent sur les noms ¦ Googlen lisenssi, erehtyy usein nimissä ¦ Google-licenc, gyakran téved neveknél
+annoncé bon en écriture manuscrite ¦ kerrotaan hyväksi käsialassa ¦ állítólag jó kézírásban
+moins connu, résultats à comparer ¦ vähemmän tunnettu, tulokset vertailtava ¦ kevésbé ismert, az eredményeket össze kell vetni
+très léger, fait pour les documents, ordinateurs modestes ¦ hyvin kevyt, tehty asiakirjoille, vaatimattomat tietokoneet ¦ nagyon könnyű, dokumentumokhoz készült, szerény számítógépek
+faible sur l’écriture à la main ancienne ¦ heikko vanhassa käsialassa ¦ gyenge a régi kézírásnál

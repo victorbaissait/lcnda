@@ -1,0 +1,35 @@
+fr ¦ ro
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Model
+conseillé pour cet ordinateur ({n} Go) ¦ recomandat pentru acest calculator ({n} GB)
+à l’essai ¦ de încercat
+≈ {x} Go à télécharger ¦ ≈ {x} GB de descărcat
+{n} Go de mémoire conseillés ¦ {n} GB de memorie recomandați
+trop gros pour cet ordinateur ¦ prea mare pentru acest calculator
+Autres modèles à essayer ({n}) ¦ Alte modele de încercat ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Încă neîncercate de aplicație pe acte: compară-le pe actele tale („Cele două citiri alăturate”) înainte să te bazezi pe ele.
+Avancé : autre modèle (Ollama) ¦ Avansat: alt model (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Modelele deja instalate în Ollama pe acest calculator. Un model care nu știe să citească o imagine nu poate citi actul. Neîncercat de aplicație: verifică mereu textul.
+lit les images ¦ citește imagini
+ne lit pas les images ¦ nu citește imagini
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Niciun alt model instalat. Într-un terminal: „ollama pull” urmat de numele modelului.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ acest calculator: {n} GB · fiecare model se descarcă o singură dată
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Acest model nu știe să citească o imagine: alege un model „vision”.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ cel mai bun încercat pe acte vechi, bun în franceză și latină
+16 Go de mémoire conseillés ¦ 16 GB de memorie recomandați
+léger et rapide, pour un ordinateur modeste ¦ ușor și rapid, pentru un calculator modest
+se trompe plus souvent sur les noms et les écritures difficiles ¦ greșește mai des la nume și la scrisurile grele
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ pentru calculatoare puternice (64 GB): aceeași familie ca cel recomandat, mai precisă la scrisurile grele
+lent, gros téléchargement ¦ lent, descărcare mare
+le plus gros qui tienne dans 64 Go ¦ cel mai mare care încape în 64 GB
+très lent, très gros téléchargement, licence moins ouverte ¦ foarte lent, descărcare foarte mare, licență mai puțin deschisă
+fort en français, bon pour comprendre l’acte ¦ puternic în franceză, bun la înțelegerea actului
+32 Go de mémoire conseillés, plus lent ¦ 32 GB de memorie recomandați, mai lent
+bon dans les langues européennes ¦ bun în limbile europene
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ licență Google mai puțin deschisă, mai puțin precis la scrisul de mână
+léger, plusieurs langues ¦ ușor, mai multe limbi
+licence de Google, se trompe souvent sur les noms ¦ licență Google, greșește des la nume
+annoncé bon en écriture manuscrite ¦ prezentat ca bun la scrisul de mână
+moins connu, résultats à comparer ¦ mai puțin cunoscut, rezultate de comparat
+très léger, fait pour les documents, ordinateurs modestes ¦ foarte ușor, făcut pentru documente, calculatoare modeste
+faible sur l’écriture à la main ancienne ¦ slab la scrisul de mână vechi

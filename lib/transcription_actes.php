@@ -15,9 +15,27 @@ declare(strict_types=1);
 const TX_DEEP_DEFAULT_URL = 'http://127.0.0.1:11434';
 /** Les modèles proposés : licence vraiment ouverte (Apache 2.0), tag Ollama exact, poids approximatif du téléchargement. */
 // les versions « instruct » : elles écrivent la transcription tout de suite (les autres « réfléchissent » d'abord et la réponse restait vide)
+// tried : essayé sur des actes par l'app (les autres sont « à l'essai » : à comparer sur tes actes avant de t'y fier) ;
+// pros / cons : ses avantages et inconvénients, montrés à côté du choix ; ram_gb : la mémoire conseillée.
 const TX_DEEP_MODELS = [
-    ['tag' => 'qwen3-vl:8b-instruct', 'label' => 'Qwen3-VL 8B', 'size_gb' => 6.1, 'ram_gb' => 16, 'license' => 'Apache 2.0', 'recommended' => true],
-    ['tag' => 'qwen3-vl:4b-instruct', 'label' => 'Qwen3-VL 4B', 'size_gb' => 3.3, 'ram_gb' => 8, 'license' => 'Apache 2.0', 'recommended' => false],
+    ['tag' => 'qwen3-vl:8b-instruct', 'label' => 'Qwen3-VL 8B', 'size_gb' => 6.1, 'ram_gb' => 16, 'license' => 'Apache 2.0', 'recommended' => true, 'tried' => true,
+        'pros' => 'le meilleur essayé sur les actes anciens, bon en français et en latin', 'cons' => '16 Go de mémoire conseillés'],
+    ['tag' => 'qwen3-vl:4b-instruct', 'label' => 'Qwen3-VL 4B', 'size_gb' => 3.3, 'ram_gb' => 8, 'license' => 'Apache 2.0', 'recommended' => false, 'tried' => true,
+        'pros' => 'léger et rapide, pour un ordinateur modeste', 'cons' => 'se trompe plus souvent sur les noms et les écritures difficiles'],
+    ['tag' => 'qwen3-vl:32b-instruct', 'label' => 'Qwen3-VL 32B', 'size_gb' => 21, 'ram_gb' => 64, 'license' => 'Apache 2.0', 'recommended' => false, 'tried' => false,
+        'pros' => 'pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles', 'cons' => 'lent, gros téléchargement'],
+    ['tag' => 'qwen2.5vl:72b', 'label' => 'Qwen2.5-VL 72B', 'size_gb' => 49, 'ram_gb' => 64, 'license' => 'Qwen (libre d’usage)', 'recommended' => false, 'tried' => false,
+        'pros' => 'le plus gros qui tienne dans 64 Go', 'cons' => 'très lent, très gros téléchargement, licence moins ouverte'],
+    ['tag' => 'mistral-small3.2:24b', 'label' => 'Mistral Small 3.2 (24B)', 'size_gb' => 15, 'ram_gb' => 32, 'license' => 'Apache 2.0', 'recommended' => false, 'tried' => false,
+        'pros' => 'fort en français, bon pour comprendre l’acte', 'cons' => '32 Go de mémoire conseillés, plus lent'],
+    ['tag' => 'gemma3:12b', 'label' => 'Gemma 3 12B (Google)', 'size_gb' => 8.1, 'ram_gb' => 16, 'license' => 'Gemma (Google)', 'recommended' => false, 'tried' => false,
+        'pros' => 'bon dans les langues européennes', 'cons' => 'licence de Google moins ouverte, moins précis sur l’écriture à la main'],
+    ['tag' => 'gemma3:4b', 'label' => 'Gemma 3 4B (Google)', 'size_gb' => 3.3, 'ram_gb' => 8, 'license' => 'Gemma (Google)', 'recommended' => false, 'tried' => false,
+        'pros' => 'léger, plusieurs langues', 'cons' => 'licence de Google, se trompe souvent sur les noms'],
+    ['tag' => 'minicpm-v:8b', 'label' => 'MiniCPM-V 8B', 'size_gb' => 5.5, 'ram_gb' => 16, 'license' => 'MiniCPM (libre d’usage)', 'recommended' => false, 'tried' => false,
+        'pros' => 'annoncé bon en écriture manuscrite', 'cons' => 'moins connu, résultats à comparer'],
+    ['tag' => 'granite3.2-vision:2b', 'label' => 'Granite 3.2 Vision 2B (IBM)', 'size_gb' => 2.4, 'ram_gb' => 8, 'license' => 'Apache 2.0', 'recommended' => false, 'tried' => false,
+        'pros' => 'très léger, fait pour les documents, ordinateurs modestes', 'cons' => 'faible sur l’écriture à la main ancienne'],
 ];
 const TX_DEEP_LANGS = ['fra' => 'français', 'lat' => 'latin', 'fra+lat' => 'français et latin', 'eng' => 'anglais', 'deu' => 'allemand', 'ita' => 'italien', 'spa' => 'espagnol', 'pol' => 'polonais', 'nld' => 'néerlandais', 'grc' => 'grec ancien', 'ell' => 'grec moderne'];
 
@@ -87,6 +105,20 @@ function tx_deep_http(string $method, string $path, ?array $body = null, int $ti
 }
 
 /** Ollama est-il là ? (programme trouvé, service qui répond, modèles déjà téléchargés) */
+/** La mémoire de l'ordinateur en Go (0 si on ne sait pas) : pour conseiller le modèle qui lui convient. */
+function tx_deep_ram_gb(): int
+{
+    $b = 0;
+    if (@is_readable('/proc/meminfo') && preg_match('/MemTotal:\s+(\d+)\s*kB/', (string) @file_get_contents('/proc/meminfo'), $m)) { $b = (int) $m[1] * 1024; }
+    elseif (PHP_OS_FAMILY === 'Darwin' && function_exists('shell_exec')) { $b = (int) trim((string) @shell_exec('/usr/sbin/sysctl -n hw.memsize 2>/dev/null')); }
+    elseif (PHP_OS_FAMILY === 'Windows' && function_exists('shell_exec')) { $o = (string) @shell_exec('powershell -NoProfile -Command "(Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory" 2>NUL'); $b = (int) preg_replace('/\D/', '', $o); }
+    $env = (int) getenv('LCNDA_RAM_GB'); if ($env > 0) { return $env; } // pour les essais
+    return $b > 0 ? (int) round($b / 1073741824) : 0;
+}
+
+/** Un nom de modèle d'Ollama sûr (lettres, chiffres, « . : / - _ ») */
+function tx_deep_tag_ok(string $tag): bool { return (bool) preg_match('/^[a-z0-9][a-z0-9._\/:-]{0,79}$/i', $tag); }
+
 function tx_deep_status(): array
 {
     $bin = '';
@@ -101,9 +133,24 @@ function tx_deep_status(): array
             $have = [];
             foreach ((array) ($tags['json']['models'] ?? []) as $m) { if (is_array($m)) { $have[(string) ($m['name'] ?? $m['model'] ?? '')] = true; } }
             foreach (TX_DEEP_MODELS as $m) { $out['models'][] = $m + ['present' => isset($have[$m['tag']]) || isset($have[$m['tag'] . ':latest'])]; }
+            // « Autre modèle (Ollama) » (avancé) : les modèles déjà installés hors de la liste, et s'ils savent lire une image
+            $known = array_column(TX_DEEP_MODELS, 'tag'); $n = 0;
+            foreach (array_keys($have) as $name) {
+                if ($name === '' || in_array($name, $known, true) || in_array(preg_replace('/:latest$/', '', $name), $known, true) || !tx_deep_tag_ok($name) || ++$n > 20) { continue; }
+                $sh = tx_deep_http('POST', '/api/show', ['model' => $name], 4);
+                $caps = $sh['ok'] ? array_map('strval', (array) ($sh['json']['capabilities'] ?? [])) : [];
+                $out['others'][] = ['tag' => $name, 'label' => $name, 'vision' => in_array('vision', $caps, true), 'present' => true];
+            }
         }
     }
     if (!$out['models']) { foreach (TX_DEEP_MODELS as $m) { $out['models'][] = $m + ['present' => false]; } }
+    // le modèle conseillé pour CET ordinateur : le plus grand des modèles essayés qui tient dans sa mémoire
+    $ram = tx_deep_ram_gb(); $out['ram_gb'] = $ram; $out['others'] = $out['others'] ?? [];
+    if ($ram > 0) {
+        $best = ''; foreach ($out['models'] as $m) { if ($m['tried'] && $m['ram_gb'] <= $ram && ($best === '' || $m['ram_gb'] > (tx_deep_model($best)['ram_gb']))) { $best = $m['tag']; } }
+        if ($best === '') { $best = 'qwen3-vl:4b-instruct'; }
+        foreach ($out['models'] as &$m) { $m['recommended'] = $m['tag'] === $best; $m['fits'] = $m['ram_gb'] <= $ram; } unset($m);
+    } else { foreach ($out['models'] as &$m) { $m['fits'] = true; } unset($m); }
     return $out;
 }
 
@@ -164,7 +211,7 @@ function tx_deep_pull_start(array $data): array
 /** 🔍 Lire une image (la zone recadrée, envoyée par le navigateur) avec le modèle vision, en arrière-plan. */
 function tx_deep_read_start(array $data): array
 {
-    $m = tx_deep_model(safe_text($data['model'] ?? ''));
+    $want = safe_text($data['model'] ?? '');
     $lang = (string) ($data['language'] ?? 'fra'); if (!isset(TX_DEEP_LANGS[$lang])) { $lang = 'fra'; }
     $b64 = $data['image_b64'] ?? '';
     if (!is_string($b64) || $b64 === '') { throw new LcndaBadInput('Image manquante.'); }
@@ -175,8 +222,15 @@ function tx_deep_read_start(array $data): array
     if ((int) $info[0] < 8 || (int) $info[1] < 8 || (int) $info[0] > 8000 || (int) $info[1] > 8000) { throw new LcndaBadInput('Image trop grande.'); }
     $st = tx_deep_status();
     if (!$st['running']) { throw new LcndaBadInput('Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie.'); }
-    $present = array_filter($st['models'], static fn($x) => $x['tag'] === $m['tag'] && $x['present']);
-    if (!$present) { throw new LcndaBadInput('Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ».'); }
+    $other = array_values(array_filter($st['others'] ?? [], static fn($x) => $x['tag'] === $want));
+    if ($other) {
+        if (!$other[0]['vision']) { throw new LcndaBadInput('Ce modèle ne sait pas lire une image : choisis un modèle « vision ».'); }
+        $m = ['tag' => $other[0]['tag']];
+    } else {
+        $m = tx_deep_model($want);
+        $present = array_filter($st['models'], static fn($x) => $x['tag'] === $m['tag'] && $x['present']);
+        if (!$present) { throw new LcndaBadInput('Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ».'); }
+    }
     [$id, $dir] = tx_deep_new_job([]);
     file_put_contents($dir . '/image.b64', base64_encode($bin)); unset($bin);
     file_put_contents($dir . '/job.json', json_encode(['kind' => 'read', 'model' => $m['tag'], 'base' => tx_deep_base(), 'prompt' => tx_deep_prompt($lang), 'created' => time()], JSON_UNESCAPED_UNICODE));
@@ -195,7 +249,7 @@ function tx_deep_run(string $dir): void
     try {
         $base = (string) ($job['base'] ?? '');
         if (!tx_deep_url_ok($base)) { throw new RuntimeException('Adresse refusée.'); }
-        $tag = tx_deep_model((string) ($job['model'] ?? ''))['tag'];
+        $tag = (string) ($job['model'] ?? ''); if (($job['kind'] ?? '') === 'pull') { $tag = tx_deep_model($tag)['tag']; } elseif (!tx_deep_tag_ok($tag)) { throw new RuntimeException('Modèle refusé.'); } // lire : vérifié au départ (liste ou modèle installé)
         if (($job['kind'] ?? '') === 'pull') {
             $state = ['state' => 'running', 'completed' => 0, 'total' => 0, 'status' => '']; $last = 0; $err = '';
             $r = tx_deep_http('POST', '/api/pull', ['model' => $tag, 'stream' => true], 6 * 3600, static function (array $j) use (&$state, &$last, &$err, $put, $cancelled) {

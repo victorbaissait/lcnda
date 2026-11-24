@@ -104,3 +104,9 @@
 /* « Cadres » (opacité des zones) : sur la ligne de la barre de l'image quand il y a la place, sinon à la ligne */
 .h-tx-barwrap{display:flex;flex-wrap:wrap;align-items:center;background:var(--card-bg,#fff)}.h-tx-barwrap>:first-child{flex:0 1 auto;width:auto!important;min-width:0;border-bottom:0!important}
 .h-tx-zop{display:flex;align-items:center;gap:6px;padding:2px 10px;font-size:13px;white-space:nowrap}.h-tx-zop input{width:110px;margin:0}
+/* les modèles de la lecture approfondie : avantages et inconvénients, « à l'essai », « Avancé » */
+.h-txa-model{padding:4px 0;border-bottom:1px dashed var(--line,#e3e3e3)}
+.h-txa-model.is-big{opacity:.7}
+.h-txa-pc{display:flex;flex-wrap:wrap;gap:2px 12px;width:100%;font-size:12px;color:var(--muted,#5b6170);padding-left:22px}
+.h-txa-more{margin-top:6px}
+.h-txa-more>summary{cursor:pointer;font-weight:600;padding:4px 0}

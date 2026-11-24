@@ -1,0 +1,35 @@
+fr ¦ sk ¦ nb
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Model ¦ Modell
+conseillé pour cet ordinateur ({n} Go) ¦ odporúčané pre tento počítač ({n} GB) ¦ anbefalt for denne datamaskinen ({n} GB)
+à l’essai ¦ na vyskúšanie ¦ til utprøving
+≈ {x} Go à télécharger ¦ ≈ {x} GB na stiahnutie ¦ ≈ {x} GB å laste ned
+{n} Go de mémoire conseillés ¦ odporúčaných {n} GB pamäte ¦ {n} GB minne anbefales
+trop gros pour cet ordinateur ¦ príliš veľký pre tento počítač ¦ for stor for denne datamaskinen
+Autres modèles à essayer ({n}) ¦ Ďalšie modely na vyskúšanie ({n}) ¦ Andre modeller å prøve ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Aplikácia ich zatiaľ na záznamoch nevyskúšala: porovnaj ich na svojich záznamoch („Obe čítania vedľa seba“), kým sa na ne spoľahneš. ¦ Ennå ikke prøvd av appen på dokumenter: sammenlign dem på dine dokumenter («De to lesningene side om side») før du stoler på dem.
+Avancé : autre modèle (Ollama) ¦ Pokročilé: iný model (Ollama) ¦ Avansert: annen modell (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Modely už nainštalované v Ollama v tomto počítači. Model, ktorý nevie čítať obrázok, neprečíta záznam. Aplikácia ho nevyskúšala: text vždy skontroluj. ¦ Modellene som allerede er installert i Ollama på denne datamaskinen. En modell som ikke kan lese et bilde, kan ikke lese dokumentet. Ikke prøvd av appen: kontroller alltid teksten.
+lit les images ¦ číta obrázky ¦ leser bilder
+ne lit pas les images ¦ nečíta obrázky ¦ leser ikke bilder
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Žiadny iný model nie je nainštalovaný. V termináli: „ollama pull“ a za tým názov modelu. ¦ Ingen annen modell installert. I en terminal: «ollama pull» etterfulgt av modellens navn.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ tento počítač: {n} GB · každý model sa sťahuje len raz ¦ denne datamaskinen: {n} GB · hver modell lastes ned bare én gang
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Tento model nevie čítať obrázok: vyber model „vision“. ¦ Denne modellen kan ikke lese et bilde: velg en «vision»-modell.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ najlepší vyskúšaný na starých záznamoch, dobrý vo francúzštine a latinčine ¦ den beste som er prøvd på gamle dokumenter, god på fransk og latin
+16 Go de mémoire conseillés ¦ odporúčaných 16 GB pamäte ¦ 16 GB minne anbefales
+léger et rapide, pour un ordinateur modeste ¦ ľahký a rýchly, pre skromný počítač ¦ lett og rask, for en enkel datamaskin
+se trompe plus souvent sur les noms et les écritures difficiles ¦ častejšie sa mýli pri menách a ťažkom písme ¦ tar oftere feil av navn og vanskelig håndskrift
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ pre výkonné počítače (64 GB): rovnaká rodina ako odporúčaný, presnejšia pri ťažkom písme ¦ for kraftige datamaskiner (64 GB): samme familie som den anbefalte, mer presis på vanskelig håndskrift
+lent, gros téléchargement ¦ pomalý, veľké sťahovanie ¦ treg, stor nedlasting
+le plus gros qui tienne dans 64 Go ¦ najväčší, ktorý sa zmestí do 64 GB ¦ den største som får plass i 64 GB
+très lent, très gros téléchargement, licence moins ouverte ¦ veľmi pomalý, veľmi veľké sťahovanie, menej otvorená licencia ¦ svært treg, svært stor nedlasting, mindre åpen lisens
+fort en français, bon pour comprendre l’acte ¦ silný vo francúzštine, dobre chápe záznam ¦ sterk på fransk, god til å forstå dokumentet
+32 Go de mémoire conseillés, plus lent ¦ odporúčaných 32 GB pamäte, pomalší ¦ 32 GB minne anbefales, tregere
+bon dans les langues européennes ¦ dobrý v európskych jazykoch ¦ god på europeiske språk
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ menej otvorená licencia Googlu, menej presný pri rukopise ¦ mindre åpen lisens fra Google, mindre presis på håndskrift
+léger, plusieurs langues ¦ ľahký, viac jazykov ¦ lett, flere språk
+licence de Google, se trompe souvent sur les noms ¦ licencia Googlu, často sa mýli pri menách ¦ lisens fra Google, tar ofte feil av navn
+annoncé bon en écriture manuscrite ¦ vraj dobrý v rukopise ¦ sies å være god på håndskrift
+moins connu, résultats à comparer ¦ menej známy, výsledky na porovnanie ¦ mindre kjent, resultater må sammenlignes
+très léger, fait pour les documents, ordinateurs modestes ¦ veľmi ľahký, určený na dokumenty, skromné počítače ¦ svært lett, laget for dokumenter, enkle datamaskiner
+faible sur l’écriture à la main ancienne ¦ slabý v starom rukopise ¦ svak på gammel håndskrift

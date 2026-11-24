@@ -1,0 +1,35 @@
+fr ¦ el ¦ bg
+# 🔬 Lecture approfondie : les modèles d’IA (avantages, inconvénients, « à l’essai », avancé) — lib/transcription_actes.php, heritage-transcribe-acte.js
+ia|Modèle ¦ Μοντέλο ¦ Модел
+conseillé pour cet ordinateur ({n} Go) ¦ προτείνεται για αυτόν τον υπολογιστή ({n} GB) ¦ препоръчително за този компютър ({n} ГБ)
+à l’essai ¦ προς δοκιμή ¦ за изпробване
+≈ {x} Go à télécharger ¦ ≈ {x} GB για λήψη ¦ ≈ {x} ГБ за изтегляне
+{n} Go de mémoire conseillés ¦ προτείνονται {n} GB μνήμης ¦ препоръчват се {n} ГБ памет
+trop gros pour cet ordinateur ¦ πολύ μεγάλο για αυτόν τον υπολογιστή ¦ твърде голям за този компютър
+Autres modèles à essayer ({n}) ¦ Άλλα μοντέλα προς δοκιμή ({n}) ¦ Други модели за изпробване ({n})
+Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier. ¦ Η εφαρμογή δεν τα έχει δοκιμάσει ακόμα σε πράξεις: σύγκρινέ τα στις πράξεις σου («Οι δύο αναγνώσεις δίπλα δίπλα») πριν τα εμπιστευτείς. ¦ Приложението още не ги е изпробвало върху актове: сравни ги върху своите актове („Двете четения едно до друго“), преди да им се довериш.
+Avancé : autre modèle (Ollama) ¦ Για προχωρημένους: άλλο μοντέλο (Ollama) ¦ Разширени: друг модел (Ollama)
+Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte. ¦ Τα μοντέλα που είναι ήδη εγκατεστημένα στο Ollama σε αυτόν τον υπολογιστή. Ένα μοντέλο που δεν διαβάζει εικόνες δεν μπορεί να διαβάσει την πράξη. Δεν δοκιμάστηκε από την εφαρμογή: έλεγχε πάντα το κείμενο. ¦ Моделите, вече инсталирани в Ollama на този компютър. Модел, който не може да чете изображение, не може да прочете акта. Не е изпробван от приложението: винаги проверявай текста.
+lit les images ¦ διαβάζει εικόνες ¦ чете изображения
+ne lit pas les images ¦ δεν διαβάζει εικόνες ¦ не чете изображения
+Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle. ¦ Δεν υπάρχει άλλο εγκατεστημένο μοντέλο. Σε ένα τερματικό: «ollama pull» και μετά το όνομα του μοντέλου. ¦ Няма друг инсталиран модел. В терминал: „ollama pull“ и името на модела.
+cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois ¦ αυτός ο υπολογιστής: {n} GB · κάθε μοντέλο κατεβαίνει μόνο μία φορά ¦ този компютър: {n} ГБ · всеки модел се изтегля само веднъж
+Ce modèle ne sait pas lire une image : choisis un modèle « vision ». ¦ Αυτό το μοντέλο δεν διαβάζει εικόνες: διάλεξε ένα μοντέλο «vision». ¦ Този модел не може да чете изображения: избери модел „vision“.
+le meilleur essayé sur les actes anciens, bon en français et en latin ¦ το καλύτερο που δοκιμάστηκε σε παλιές πράξεις, καλό στα γαλλικά και τα λατινικά ¦ най-добрият, изпробван върху стари актове, добър на френски и латински
+16 Go de mémoire conseillés ¦ προτείνονται 16 GB μνήμης ¦ препоръчват се 16 ГБ памет
+léger et rapide, pour un ordinateur modeste ¦ ελαφρύ και γρήγορο, για έναν απλό υπολογιστή ¦ лек и бърз, за скромен компютър
+se trompe plus souvent sur les noms et les écritures difficiles ¦ κάνει πιο συχνά λάθη σε ονόματα και δύσκολες γραφές ¦ по-често греши в имената и трудния почерк
+pour les ordinateurs puissants (64 Go) : la même famille que le conseillé, plus précise sur les écritures difficiles ¦ για ισχυρούς υπολογιστές (64 GB): η ίδια οικογένεια με το προτεινόμενο, πιο ακριβές σε δύσκολες γραφές ¦ за мощни компютри (64 ГБ): същото семейство като препоръчания, по-точен при труден почерк
+lent, gros téléchargement ¦ αργό, μεγάλη λήψη ¦ бавен, голямо изтегляне
+le plus gros qui tienne dans 64 Go ¦ το μεγαλύτερο που χωράει σε 64 GB ¦ най-големият, който се побира в 64 ГБ
+très lent, très gros téléchargement, licence moins ouverte ¦ πολύ αργό, πολύ μεγάλη λήψη, λιγότερο ανοιχτή άδεια ¦ много бавен, много голямо изтегляне, по-малко отворен лиценз
+fort en français, bon pour comprendre l’acte ¦ δυνατό στα γαλλικά, καλό στην κατανόηση της πράξης ¦ силен на френски, добре разбира акта
+32 Go de mémoire conseillés, plus lent ¦ προτείνονται 32 GB μνήμης, πιο αργό ¦ препоръчват се 32 ГБ памет, по-бавен
+bon dans les langues européennes ¦ καλό στις ευρωπαϊκές γλώσσες ¦ добър на европейските езици
+licence de Google moins ouverte, moins précis sur l’écriture à la main ¦ λιγότερο ανοιχτή άδεια της Google, λιγότερο ακριβές στη χειρόγραφη γραφή ¦ по-малко отворен лиценз на Google, по-малко точен при ръкописен текст
+léger, plusieurs langues ¦ ελαφρύ, πολλές γλώσσες ¦ лек, няколко езика
+licence de Google, se trompe souvent sur les noms ¦ άδεια της Google, κάνει συχνά λάθη στα ονόματα ¦ лиценз на Google, често греши в имената
+annoncé bon en écriture manuscrite ¦ λέγεται ότι είναι καλό στη χειρόγραφη γραφή ¦ представян като добър при ръкописи
+moins connu, résultats à comparer ¦ λιγότερο γνωστό, τα αποτελέσματα θέλουν σύγκριση ¦ по-малко известен, резултатите трябва да се сравнят
+très léger, fait pour les documents, ordinateurs modestes ¦ πολύ ελαφρύ, φτιαγμένο για έγγραφα, απλοί υπολογιστές ¦ много лек, направен за документи, скромни компютри
+faible sur l’écriture à la main ancienne ¦ αδύναμο στην παλιά χειρόγραφη γραφή ¦ слаб при стар ръкописен текст
