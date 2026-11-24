@@ -81,7 +81,7 @@ Moment du film ¦ Momenti i filmit ¦ Mument tal-film
 Film ¦ Film ¦ Film
 {s} s ¦ {s} s ¦ {s} s
 Aucune scène : « ＋ Scène ». ¦ Asnjë skenë: «＋ Skenë». ¦ L-ebda xena: “＋ Xena”.
-Photos et vidéos : dans le Montage vidéo (⤓ Exporter → Continuer dans le Montage) ¦ Foto dhe video: te Montazhi i videos (⤓ Eksporto → Vazhdo te Montazhi) ¦ Ritratti u vidjows: fil-Muntaġġ tal-vidjo (⤓ Esporta → Kompli fil-Muntaġġ)
+Photos et vidéos : dans le Montage vidéo (⤓ Exporter → Continuer dans le Montage) ¦ Foto dhe video: te Montazhi video (⤓ Eksporto → Vazhdo te Montazhi) ¦ Ritratti u vidjows: fl-Immuntar tal-vidjo (⤓ Esporta → Kompli fl-Immuntar)
 Modèle : le grand film de la famille ¦ Modeli: filmi i madh i familjes ¦ Mudell: il-film il-kbir tal-familja
 Ajouter une scène ¦ Shto një skenë ¦ Żid xena
 La fenêtre des médias n’est pas chargée. ¦ Dritarja e mediave nuk është ngarkuar. ¦ It-tieqa tal-midja mhijiex mgħobbija.
@@ -148,9 +148,9 @@ Réglages par défaut enregistrés. ¦ Cilësimet e parazgjedhura u ruajtën. ¦
 Exporter le film ¦ Eksporto filmin ¦ Esporta l-film
 Sous-titres à part (.srt) ¦ Titra më vete (.srt) ¦ Sottotitli separati (.srt)
 Ranger aussi dans les médias ¦ Ruaje edhe te mediat ¦ Poġġih ukoll fil-midja
-La vidéo est rangée dans les médias puis ouverte dans le Montage vidéo : tu y ajoutes tes photos, tes vidéos, des titres, et tu coupes. ¦ Videoja ruhet te mediat dhe pastaj hapet te Montazhi i videos: aty shton fotot, videot, titujt e tu dhe pret. ¦ Il-vidjo titpoġġa fil-midja u mbagħad tinfetaħ fil-Muntaġġ tal-vidjo: hemmhekk iżżid ir-ritratti, il-vidjows u t-titli tiegħek, u taqta’.
-Ajouter au montage ¦ Shto te montazhi ¦ Żid mal-muntaġġ
-Continuer dans le Montage vidéo ¦ Vazhdo te Montazhi i videos ¦ Kompli fil-Muntaġġ tal-vidjo
+La vidéo est rangée dans les médias puis ouverte dans le Montage vidéo : tu y ajoutes tes photos, tes vidéos, des titres, et tu coupes. ¦ Videoja ruhet te mediat dhe pastaj hapet te Montazhi video: aty shton fotot, videot, titujt e tu dhe pret. ¦ Il-vidjo titpoġġa fil-midja u mbagħad tinfetaħ fl-Immuntar tal-vidjo: hemmhekk iżżid ir-ritratti, il-vidjows u t-titli tiegħek, u taqta’.
+Ajouter au montage ¦ Shto te montazhi ¦ Żid mal-immuntar
+Continuer dans le Montage vidéo ¦ Vazhdo te Montazhi video ¦ Kompli fl-Immuntar tal-vidjo
 Fabriquer ¦ Krijo ¦ Agħmel
 GIF : sans son, 640 pixels de large, 10 images par seconde. ¦ GIF: pa zë, 640 piksel i gjerë, 10 imazhe në sekondë. ¦ GIF: bla ħoss, wiesa’ 640 pixel, 10 stampi kull sekonda.
 Rangement dans les médias… ¦ Po ruhet te mediat… ¦ Qed jitpoġġa fil-midja…
@@ -670,8 +670,8 @@ Coche la photo à retirer du recueil (elle reste dans Médias). ¦ Shëno foton 
 Un registre publié en ligne (IIIF) : ses vues téléchargées dans un nouveau recueil ¦ Një regjistër i publikuar në internet (IIIF): pamjet e tij shkarkohen në një përmbledhje të re ¦ Reġistru ppubblikat online (IIIF): l-immaġnijiet tiegħu mniżżla f’ġabra ġdida
 Depuis un registre en ligne… ¦ Nga një regjistër në internet… ¦ Minn reġistru online…
 L’outil complet : zones sur l’image, lecture automatique de l’écriture, repérage des noms, versions ; le texte revient ici ¦ Mjeti i plotë: zona mbi imazh, lexim automatik i shkrimit, gjetja e emrave, versione; teksti kthehet këtu ¦ L-għodda sħiħa: żoni fuq l-istampa, qari awtomatiku tal-kitba, sejba tal-ismijiet, verżjonijiet; it-test jerġa’ lura hawn
-Ouvrir dans l’Atelier de transcription ¦ Hap te Punëtoria e transkriptimit ¦ Iftaħ fil-Workshop tat-traskrizzjoni
-Le texte de l’Atelier est mis dans la page. ¦ Teksti i Punëtorisë u vendos në faqe. ¦ It-test tal-Workshop tqiegħed fil-paġna.
+Ouvrir dans l’Atelier de transcription ¦ Hap në Punishten e transkriptimit ¦ Iftaħ fil-Laboratorju tat-traskrizzjoni
+Le texte de l’Atelier est mis dans la page. ¦ Teksti i Punishtes u vendos në faqe. ¦ It-test tal-Laboratorju tqiegħed fil-paġna.
 🎞 Animation ajoutée à la fin du film. ¦ 🎞 Animacioni u shtua në fund të filmit. ¦ 🎞 Animazzjoni miżjuda fl-aħħar tal-film.
 🎞 Une carte ou un graphique animé (Studio d’animation)… ¦ 🎞 Një hartë ose grafik i animuar (Studio e animacionit)… ¦ 🎞 Mappa jew grafika animata (Studjo tal-animazzjoni)…
 Si un héritier a renoncé, ses enfants ne le représentent pas : vérifie les renonciations. ¦ Nëse një trashëgimtar ka hequr dorë, fëmijët e tij nuk e përfaqësojnë: kontrollo heqjet dorë. ¦ Jekk werriet irrinunzja, uliedu ma jirrappreżentawhx: iċċekkja r-rinunzji.
@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Tekst i bashkuar (për t’u rishikuar) ¦ Test m
 Lectures fusionnées dans le texte. ¦ Leximet u bashkuan në tekst. ¦ Il-qari ngħaqad fit-test.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ XML i bibliotekave dhe arkivave (rreshta dhe fjalë me vendin e tyre në imazh) ¦ XML tal-libreriji u l-arkivji (linji u kliem bil-post tagħhom fuq l-istampa)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ XML i Transkribus dhe eScriptorium (rajone, rreshta, rendi i leximit); një skedar për faqe, në .zip nëse janë disa ¦ XML ta’ Transkribus u eScriptorium (reġjuni, linji, ordni tal-qari); fajl wieħed għal kull paġna, f’.zip jekk ikunu aktar minn wieħed
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Adresa nuk u gjet (gabim {code}). ¦ Indirizz ma nstabx (żball {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Adresa u refuzua: vetëm një adresë publike në http ose https. ¦ Indirizz irrifjutat: indirizz pubbliku biss f’http jew https.
 Le site ne répond pas : {err} ¦ Sajti nuk përgjigjet: {err} ¦ Is-sit ma jwieġibx: {err}

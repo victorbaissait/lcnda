@@ -158,7 +158,7 @@
 
     /* ═════ dans la galerie ═════ */
     const EXAMPLES = ['L’âge au décès selon le siècle', 'Les prénoms les plus donnés dans ma famille', 'D’où venaient les gens nés entre 1800 et 1850', 'Les naissances des hommes et des femmes au XIXe siècle', 'Les migrations de la famille', 'Les mariages entre familles', 'Les naissances selon le mois'];
-    const html = () => `<div class="h-dga" data-dga><label class="h-dga-lab" for="h-dga-q">💬 ${esc(i18n('Je veux représenter…'))}</label><div class="h-dga-row"><input id="h-dga-q" data-dga-q type="search" placeholder="${esc(i18n('ex. l’âge au décès selon le siècle'))}" autocomplete="off"><button type="button" class="button small" data-dga-go>${esc(i18n('Proposer'))}</button></div>
+    const html = () => `<div class="h-dga" data-dga><label class="h-dga-lab" for="h-dga-q">💬 ${esc(i18n('Je veux représenter…'))}</label><div class="h-dga-row"><input id="h-dga-q" data-dga-q type="search" placeholder="${esc(i18n('ex. l’âge au décès selon le siècle'))}" autocomplete="off"><button type="button" class="button small" data-dga-go>${esc(i18n('Proposer', {ctx: 'diagramme'}))}</button></div>
         <div class="h-dga-ex">${EXAMPLES.map(x => `<button type="button" class="link-button" data-dga-ex>${esc(i18n(x))}</button>`).join(' · ')}</div><div class="h-dga-out" data-dga-out aria-live="polite"></div></div>`;
     let D = null;
     const loadD = async () => (D ||= await (M()?.loadBase ? M().loadBase() : window.LCNDA_APP.api('anim_people').then(d => ({...d, byId: new Map((d.people || []).map(p => [p.id, p]))}))));

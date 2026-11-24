@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Sameinaður texti (þarf að yfirfara)
 Lectures fusionnées dans le texte. ¦ Lesningar sameinaðar í textanum.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ XML bókasafna og skjalasafna (línur og orð með staðsetningu á myndinni)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ XML frá Transkribus og eScriptorium (svæði, línur, lestrarröð); ein skrá á síðu, í .zip ef þær eru fleiri
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Slóð fannst ekki (villa {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Slóð hafnað: aðeins opinber slóð með http eða https.
 Le site ne répond pas : {err} ¦ Vefurinn svarar ekki: {err}

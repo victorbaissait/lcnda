@@ -81,7 +81,7 @@ Moment du film ¦ Filmdeki an
 Film ¦ Film
 {s} s ¦ {s} sn
 Aucune scène : « ＋ Scène ». ¦ Sahne yok: “＋ Sahne”.
-Photos et vidéos : dans le Montage vidéo (⤓ Exporter → Continuer dans le Montage) ¦ Fotoğraflar ve videolar: Video Kurgu’da (⤓ Dışa aktar → Kurguda devam et)
+Photos et vidéos : dans le Montage vidéo (⤓ Exporter → Continuer dans le Montage) ¦ Fotoğraflar ve videolar: Video kurgusunda (⤓ Dışa aktar → Kurguda devam et)
 Modèle : le grand film de la famille ¦ Şablon: ailenin büyük filmi
 Ajouter une scène ¦ Sahne ekle
 La fenêtre des médias n’est pas chargée. ¦ Medya penceresi yüklenmedi.
@@ -148,9 +148,9 @@ Réglages par défaut enregistrés. ¦ Varsayılan ayarlar kaydedildi.
 Exporter le film ¦ Filmi dışa aktar
 Sous-titres à part (.srt) ¦ Ayrı altyazılar (.srt)
 Ranger aussi dans les médias ¦ Medyaya da kaydet
-La vidéo est rangée dans les médias puis ouverte dans le Montage vidéo : tu y ajoutes tes photos, tes vidéos, des titres, et tu coupes. ¦ Video medyaya kaydedilir, sonra Video Kurgu’da açılır: oraya fotoğraflarını, videolarını, başlıklar eklersin ve kesersin.
+La vidéo est rangée dans les médias puis ouverte dans le Montage vidéo : tu y ajoutes tes photos, tes vidéos, des titres, et tu coupes. ¦ Video medyaya kaydedilir, sonra Video kurgusunda açılır: oraya fotoğraflarını, videolarını, başlıklar eklersin ve kesersin.
 Ajouter au montage ¦ Kurguya ekle
-Continuer dans le Montage vidéo ¦ Video Kurgu’da devam et
+Continuer dans le Montage vidéo ¦ Video kurgusunda devam et
 Fabriquer ¦ Oluştur
 GIF : sans son, 640 pixels de large, 10 images par seconde. ¦ GIF: sessiz, 640 piksel genişlik, saniyede 10 kare.
 Rangement dans les médias… ¦ Medyaya kaydediliyor…
@@ -670,7 +670,7 @@ Coche la photo à retirer du recueil (elle reste dans Médias). ¦ Derlemeden ç
 Un registre publié en ligne (IIIF) : ses vues téléchargées dans un nouveau recueil ¦ Çevrimiçi yayımlanmış bir kayıt defteri (IIIF): görüntüleri yeni bir derlemeye indirilir
 Depuis un registre en ligne… ¦ Çevrimiçi bir kayıt defterinden…
 L’outil complet : zones sur l’image, lecture automatique de l’écriture, repérage des noms, versions ; le texte revient ici ¦ Tam araç: resim üzerinde alanlar, el yazısının otomatik okunması, adların bulunması, sürümler; metin buraya geri gelir
-Ouvrir dans l’Atelier de transcription ¦ Transkripsiyon Atölyesi’nde aç
+Ouvrir dans l’Atelier de transcription ¦ Transkripsiyon atölyesinde aç
 Le texte de l’Atelier est mis dans la page. ¦ Atölyenin metni sayfaya konuldu.
 🎞 Animation ajoutée à la fin du film. ¦ 🎞 Animasyon filmin sonuna eklendi.
 🎞 Une carte ou un graphique animé (Studio d’animation)… ¦ 🎞 Animasyonlu bir harita ya da grafik (Animasyon Stüdyosu)…
@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Birleştirilmiş metin (yeniden okunacak)
 Lectures fusionnées dans le texte. ¦ Okumalar metinde birleştirildi.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ Kütüphane ve arşivlerin XML’i (resim üzerindeki yerleriyle satırlar ve sözcükler)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ Transkribus ve eScriptorium XML’i (bölgeler, satırlar, okuma sırası); sayfa başına bir dosya, birden çoksa .zip
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Adres bulunamadı (hata {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Adres reddedildi: yalnızca http ya da https ile herkese açık bir adres.
 Le site ne répond pas : {err} ¦ Site yanıt vermiyor: {err}

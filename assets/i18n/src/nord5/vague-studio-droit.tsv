@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Spojeni tekst (za provjeru) ¦ Združeno besedilo
 Lectures fusionnées dans le texte. ¦ Čitanja spojena u tekst. ¦ Branja združena v besedilo.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ XML knjižnica i arhiva (retci i riječi s položajem na slici) ¦ XML knjižnic in arhivov (vrstice in besede s položajem na sliki)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ XML Transkribusa i eScriptoriuma (regije, retci, redoslijed čitanja); jedna datoteka po stranici, u .zip ako ih je više ¦ XML Transkribusa in eScriptoriuma (regije, vrstice, vrstni red branja); ena datoteka na stran, v .zip, če jih je več
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Adresa nije pronađena (pogreška {code}). ¦ Naslova ni mogoče najti (napaka {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Adresa odbijena: samo javna adresa u http ili https. ¦ Naslov zavrnjen: samo javni naslov s http ali https.
 Le site ne répond pas : {err} ¦ Web-mjesto ne odgovara: {err} ¦ Spletno mesto se ne odziva: {err}

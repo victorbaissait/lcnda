@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Text fuzionat (de recitit)
 Lectures fusionnées dans le texte. ¦ Citiri fuzionate în text.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ XML-ul bibliotecilor și arhivelor (rânduri și cuvinte cu locul lor pe imagine)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ XML din Transkribus și eScriptorium (regiuni, rânduri, ordine de citire); un fișier pe pagină, în .zip dacă sunt mai multe
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Adresă negăsită (eroare {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Adresă refuzată: doar o adresă publică în http sau https.
 Le site ne répond pas : {err} ¦ Site-ul nu răspunde: {err}

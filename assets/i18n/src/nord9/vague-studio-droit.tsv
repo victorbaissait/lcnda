@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Fusionéierten Text (nach eng Kéier ze liesen)
 Lectures fusionnées dans le texte. ¦ Liesungen am Text fusionéiert.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ XML vun de Bibliothéiken an Archiven (Zeilen a Wierder mat hirer Plaz um Bild)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ XML vun Transkribus an eScriptorium (Regiounen, Zeilen, Liesreiefolleg); ee Fichier pro Säit, als .zip, wann et der e puer sinn
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Adress net fonnt (Feeler {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Adress refuséiert: just eng ëffentlech Adress mat http oder https.
 Le site ne répond pas : {err} ¦ De Site äntwert net: {err}

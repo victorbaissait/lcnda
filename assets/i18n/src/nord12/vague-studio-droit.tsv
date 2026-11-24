@@ -137,7 +137,7 @@ Relire la base (nouvelles fiches) ¦ Перечитать базу (новые �
 Cet ordinateur ne sait pas enregistrer le son. ¦ Этот компьютер не умеет записывать звук. ¦ Цей комп’ютер не вміє записувати звук.
 Le micro n’est pas autorisé. ¦ Микрофон не разрешён. ¦ Мікрофон не дозволено.
 Enregistrement… parle en regardant le film. ¦ Запись… говори, смотря фильм. ¦ Запис… говори, дивлячись фільм.
-Voix enregistrée (elle est aussi dans les Médias). ¦ Голос записан (он также есть в Медиа). ¦ Голос записано (він також є в Медіа).
+Voix enregistrée (elle est aussi dans les Médias). ¦ Голос записан (он также есть в Медиафайлах). ¦ Голос записано (він також є в Медіафайлах).
 Réglages par défaut des nouveaux films ¦ Настройки по умолчанию для новых фильмов ¦ Налаштування за замовчуванням для нових фільмів
 (recommandé) ¦ (рекомендуется) ¦ (рекомендовано)
 Les films déjà faits ne changent pas. ¦ Уже готовые фильмы не меняются. ¦ Уже готові фільми не змінюються.
@@ -664,13 +664,13 @@ Rien à signaler : aucune page blanche, aucune photo en double. ¦ Ничего 
 Pages qui semblent blanches ¦ Страницы, похожие на пустые ¦ Сторінки, схожі на порожні
 Cochées : elles seront marquées « Page blanche » (pas absentes : vides). ¦ Отмеченные будут помечены «Пустая страница» (не отсутствующие, а пустые). ¦ Позначені буде відмічено «Порожня сторінка» (не відсутні, а порожні).
 Photos qui se ressemblent ¦ Похожие фото ¦ Схожі фото
-Coche la photo à retirer du recueil (elle reste dans Médias). ¦ Отметь фото, которое нужно убрать из сборника (оно останется в Медиа). ¦ Познач фото, яке треба прибрати зі збірника (воно залишиться в Медіа).
+Coche la photo à retirer du recueil (elle reste dans Médias). ¦ Отметь фото, которое нужно убрать из сборника (оно останется в Медиафайлах). ¦ Познач фото, яке треба прибрати зі збірника (воно залишиться в Медіафайлах).
 {p} % pareilles ¦ Совпадение {p} % ¦ Збіг {p} %
 {b} page(s) blanche(s), {d} photo(s) en double retirée(s) ¦ Пустых страниц: {b}, убрано повторяющихся фото: {d} ¦ Порожніх сторінок: {b}, прибрано повторюваних фото: {d}
 Un registre publié en ligne (IIIF) : ses vues téléchargées dans un nouveau recueil ¦ Реестр, опубликованный онлайн (IIIF): его кадры скачиваются в новый сборник ¦ Реєстр, опублікований онлайн (IIIF): його кадри завантажуються в новий збірник
 Depuis un registre en ligne… ¦ Из онлайн-реестра… ¦ З онлайн-реєстру…
 L’outil complet : zones sur l’image, lecture automatique de l’écriture, repérage des noms, versions ; le texte revient ici ¦ Полный инструмент: зоны на изображении, автоматическое чтение почерка, поиск имён, версии; текст возвращается сюда ¦ Повний інструмент: зони на зображенні, автоматичне читання почерку, пошук імен, версії; текст повертається сюди
-Ouvrir dans l’Atelier de transcription ¦ Открыть в Мастерской транскрипции ¦ Відкрити в Майстерні транскрипції
+Ouvrir dans l’Atelier de transcription ¦ Открыть в Мастерской расшифровки ¦ Відкрити в Майстерні транскрипції
 Le texte de l’Atelier est mis dans la page. ¦ Текст из Мастерской помещён на страницу. ¦ Текст із Майстерні вміщено на сторінку.
 🎞 Animation ajoutée à la fin du film. ¦ 🎞 Анимация добавлена в конец фильма. ¦ 🎞 Анімацію додано в кінець фільму.
 🎞 Une carte ou un graphique animé (Studio d’animation)… ¦ 🎞 Анимированная карта или график (Студия анимации)… ¦ 🎞 Анімована мапа або графік (Студія анімації)…
@@ -793,7 +793,7 @@ Une autre source ¦ Другой источник ¦ Інше джерело
 Sources notées. ¦ Источники записаны. ¦ Джерела записано.
 Nouveau dossier, pas à pas ¦ Новое дело, шаг за шагом ¦ Нова справа, крок за кроком
 Date du décès (vide : celle de la fiche) ¦ Дата смерти (пусто: из карточки) ¦ Дата смерті (порожньо: з картки)
-Le dossier s’ouvre à l’étape suivante ; ↶ Annuler le supprime. ¦ Дело открывается на следующем этапе; ↶ Отменить удаляет его. ¦ Справа відкривається на наступному етапі; ↶ Скасувати видаляє її.
+Le dossier s’ouvre à l’étape suivante ; ↶ Annuler le supprime. ¦ Дело открывается на следующем этапе; ↶ Отменить удаляет его. ¦ Справа відкривається на наступному етапі; ↶ Відмінити видаляє її.
 avec un conjoint ¦ с супругом ¦ із подружжям
 {n} héritiers trouvés, {u} dont on ne sait pas s’ils vivaient au décès. ¦ Найдено наследников: {n}; о {u} из них неизвестно, были ли они живы на момент смерти. ¦ Знайдено спадкоємців: {n}; про {u} з них невідомо, чи були вони живі на момент смерті.
 {n} recherches à faire (adresses, dates, branches) : elles seront dans le dossier. ¦ Поисков предстоит: {n} (адреса, даты, ветви): они будут в деле. ¦ Пошуків належить: {n} (адреси, дати, гілки): вони будуть у справі.

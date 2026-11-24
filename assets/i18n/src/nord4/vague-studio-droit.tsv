@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Yhdistetty teksti (tarkistettava) ¦ Egyesített 
 Lectures fusionnées dans le texte. ¦ Luennat yhdistetty tekstiin. ¦ Az olvasatok egyesítve a szövegben.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ Kirjastojen ja arkistojen XML (rivit ja sanat paikkoineen kuvassa) ¦ Könyvtárak és levéltárak XML-je (sorok és szavak a képen elfoglalt helyükkel)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ Transkribusin ja eScriptoriumin XML (alueet, rivit, lukujärjestys); yksi tiedosto sivua kohden, .zip-tiedostona, jos niitä on useita ¦ Transkribus és eScriptorium XML (régiók, sorok, olvasási sorrend); oldalanként egy fájl, .zip-ben, ha több van
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Osoitetta ei löydy (virhe {code}). ¦ A cím nem található (hiba: {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Osoite hylätty: vain julkinen http- tai https-osoite. ¦ A cím elutasítva: csak nyilvános http vagy https cím lehet.
 Le site ne répond pas : {err} ¦ Sivusto ei vastaa: {err} ¦ A webhely nem válaszol: {err}
