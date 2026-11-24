@@ -154,11 +154,17 @@
     }
 
     /* ═════════ 🛡️ Rietstap (si livré) ═════════ */
+    const ABBR = 'arg. = argent · gu. = gueules · sa. = sable · sin. = sinople · ch. = chargé · acc. (ou « ace. ») = accompagné · surm. = surmonté · cant. = cantonné · br. = brochant · p. = pointe · Cq. = casque';
+    const rietRow = (x, N) => `<li><b>${esc(x.name)}</b>${x.where ? ` <small class="muted">(${esc(x.where)})</small>` : ''}${x.blazon ? ` : <i class="cc-blazon">${esc(x.blazon)}</i>` : ` : ${esc(T('texte peu lisible, regarde la page'))}`}
+        <small> · ${esc(T('tome {t}, page {p}', {t: x.tome, p: x.page || x.pdf_page}))} · ${x.scan ? link(x.scan, T('voir la page ↗')) : ''}</small></li>`;
     function rietstapHtml(list, last) {
         if (!list?.length) return '';
-        const f = list[0];
-        return `<p class="cplus-lead">🛡️ ${esc(T('Une famille {n} porte « {b} » (Rietstap, Armorial général, 1884) — même nom ne veut pas dire même famille.', {n: String(last || f.name).toUpperCase(), b: f.blazon}))}</p>
-            ${list.length > 1 ? more(`<ul>${list.slice(1).map(x => `<li><b>${esc(x.name)}</b>${x.where ? ` (${esc(x.where)})` : ''} : <i>${esc(x.blazon)}</i></li>`).join('')}</ul>`, list.length - 1) : ''}`;
+        const name = String(last || list[0].name).toUpperCase(), f = list.find(x => x.blazon) || list[0];
+        const lead = f.blazon ? T('Une famille {n} porte « {b} » (Rietstap, Armorial général, 1884) — même nom ne veut pas dire même famille.', {n: name, b: f.blazon.replace(/\.$/, '')})
+            : T('Le nom {n} figure dans l’Armorial général de Rietstap (1884) — même nom ne veut pas dire même famille.', {n: name});
+        return `<p class="cplus-lead">🛡️ ${esc(lead)} ${f.scan ? link(f.scan, T('voir la page ↗')) : ''}</p>
+            ${more(`<ul class="cc-riet">${list.map(rietRow).join('')}</ul><p class="muted"><small>${esc(T('Texte lu automatiquement sur les pages scannées : des erreurs sont possibles, la page fait foi. Abréviations de Rietstap : {a}.', {a: ABBR}))}</small></p>
+            ${srcLine('J.-B. Rietstap, Armorial général (Gouda, 1884-1887)', T('domaine public'), list[0].scan, ` · <small>${esc(T('scans Internet Archive, via Wikimedia Commons'))}</small>`)}`, list.length)}`;
     }
 
     /* ═════════ la fiche d'une personne : un bloc « 🏷️ Son nom et ses villages » ═════════ */
@@ -316,7 +322,9 @@
             geo: r => (r.lat != null ? [r.lat, r.lon] : null), open: r => openUrl(r.map)},
         {id: 'cc_rietstap', icon: '🛡️', label: T('Blasons à tes noms (Rietstap)'), group: 'La personne', source: 'J.-B. Rietstap, Armorial général (1884-1887), domaine public', enabled: () => on('rietstap') && !!aboutCache?.rietstap,
             load: () => loadList('rietstap'),
-            fields: [{key: 'surname', label: T('Ton nom'), type: 'enum'}, {key: 'name', label: T('Famille'), type: 'text'}, {key: 'where', label: T('Pays ou région'), type: 'text'}, {key: 'blazon', label: T('Blason'), type: 'text'}, {key: 'people', label: T('Personnes de ce nom'), type: 'number'}]});
+            fields: [{key: 'surname', label: T('Ton nom'), type: 'enum'}, {key: 'name', label: T('Famille'), type: 'text'}, {key: 'where', label: T('Pays ou région'), type: 'text'}, {key: 'raw', label: T('Blason (texte lu sur le scan)'), type: 'text'},
+                {key: 'tome', label: T('Tome'), type: 'number'}, {key: 'page', label: T('Page'), type: 'text'}, {key: 'scan', label: T('Page scannée'), type: 'url'}, {key: 'people', label: T('Personnes de ce nom'), type: 'number'}],
+            open: r => openUrl(r.scan)});
 
     /* ═════════ Réglages → 🎬 Le village dans la culture ═════════ */
     setTimeout(() => { try { A().api?.('cc_about').then(r => { aboutCache = r; }).catch(() => {}); } catch (_) {} }, 1500);

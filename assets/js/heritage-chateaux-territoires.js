@@ -580,6 +580,44 @@
             {key: 'limits', label: 'Limites', type: 'enum', values: [T('contour dessiné'), T('limites inconnues')]}, {key: 'wikipedia', label: 'Wikipédia', type: 'url'}, {key: 'wikidata', label: 'Wikidata', type: 'url'}],
         period: r => [r.from, r.to], geo: r => (r.lat != null ? [r.lat, r.lon] : null), open: r => openTerr(r)});
 
+    /* ─────────── 🗺 calques des diagrammes « Cartes » et du dessin vectoriel (heritage-carto-donnees.js) ─────────── */
+    const inBox = (b, x0, y0, x1, y1) => !b || !(x1 < b[0] || x0 > b[2] || y1 < b[1] || y0 > b[3]);
+    const ringsOf = polys => polys.flatMap(poly => poly.map(r => { const out = []; for (let i = 0; i < r.length; i += 2) out.push([r[i], r[i + 1]]); return out; }));
+    const hitQ = (q, ...s) => !q || s.some(x => fold(x).includes(fold(q)));
+    (ext.mapLayerSources = ext.mapLayerSources || []).push(
+        {id: 'ct_territoires', icon: '👑', label: T('Territoires d’autrefois (contours)'), group: 'Le monde', kind: 'areas', needsYear: true,
+            source: T('Cartes anciennes historical-basemaps (A. Ourednik, GPL-3.0, approximatives, avant 1816) ; contours Wikimedia Commons ; Wikidata (CC0)'),
+            run: async ({q, year, bbox, max = 2000}) => {
+                const c = await loadAllTerr(), y = Number(year) || 1700, features = [];
+                const sy = snapYear(c.maps, y);
+                if (sy != null) for (const f of c.maps.snaps[sy]) { const b = f.sh.box; if (features.length < max && inBox(bbox, b[0], b[1], b[2], b[3]) && hitQ(q, f.n, f.s)) features.push({type: 'area', rings: ringsOf(f.sh.polys()), label: f.n}); }
+                for (const s of c.shapes?.shapes || []) { const it = c.terr.byQ.get(s.q), b = s.sh.box; if (it && active(it, y) && features.length < max && inBox(bbox, b[0], b[1], b[2], b[3]) && hitQ(q, it.n)) features.push({type: 'area', rings: ringsOf(s.sh.polys()), label: it.n}); }
+                return {features, source: sy != null ? T('Carte de {s} (historical-basemaps, GPL-3.0) · Wikidata (CC0)', {s: yr(sy)}) : T('Wikidata (CC0) · contours Wikimedia Commons')};
+            }},
+        {id: 'ct_territoires_pts', icon: '👑', label: T('Territoires d’autrefois (centres, limites inconnues)'), group: 'Le monde', kind: 'points', needsYear: true, source: 'Wikidata (CC0)',
+            run: async ({q, year, bbox, max = 2000}) => {
+                const c = await loadAllTerr(), y = Number(year) || 1700;
+                const features = c.terr.items.filter(it => it.la != null && active(it, y) && inBox(bbox, it.lo, it.la, it.lo, it.la) && hitQ(q, it.n, TKINDS[it.k])).slice(0, max).map(it => ({type: 'pt', lat: it.la, lon: it.lo, label: it.n}));
+                return {features, source: 'Wikidata (CC0)'};
+            }},
+        {id: 'ct_chateaux', icon: '🏰', label: T('Châteaux d’Europe'), group: 'Le lieu', kind: 'points', source: 'Wikidata (CC0)',
+            run: async ({q, from, to, bbox, max = 3000}) => {
+                const idx = await loadIndex();
+                const codes = Object.entries(idx.countries).filter(([, c]) => c.box && inBox(bbox, c.box[1], c.box[0], c.box[3], c.box[2])).map(([k]) => k);
+                const features = [];
+                for (const code of codes) {
+                    const f = await loadCountry(code).catch(() => null); if (!f) continue;
+                    for (const c of f.items) {
+                        if (features.length >= max) break;
+                        if (c.la == null || !inBox(bbox, c.lo, c.la, c.lo, c.la) || !hitQ(q, c.n, c.cn, KINDS[c.k])) continue;
+                        if (from != null && c.y1 != null && c.y1 < from) continue;
+                        if (to != null && c.y0 != null && c.y0 > to) continue;
+                        features.push({type: 'pt', lat: c.la, lon: c.lo, label: c.n});
+                    }
+                }
+                return {features, source: 'Wikidata (CC0)'};
+            }});
+
     ext.chateauxTerritoires = {...core, settings, loadIndex, loadCountry, loadTerr, loadShapes, loadMaps, loadAllTerr, castlesAround, castlesInto, terrInto, openCastle, openTerr, decorate, drawSettings,
         openSettings: () => { const st = S(); st.maintenanceTab = TAB[0]; A().persistUiState?.(); A().setModule?.('maintenance'); }};
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -16,8 +16,10 @@ declare(strict_types=1);
  *  - 📜 origine du nom et histoire : sections « Toponymie » et « Histoire » de l'article Wikipédia de la commune (CC BY-SA 4.0) ;
  *    la commune sur Wikidata : comme « Autour du village » (lib/commune_plus.php, cplus_commune), puis son article (sitelinks frwiki) ;
  *  - 🏷️ rues à son nom : Base Adresse Nationale (api-adresse.data.gouv.fr, Licence Ouverte 2.0) — le nom de famille seul est envoyé.
- * 🛡️ « Un blason à son nom ? » (Rietstap, Armorial général, 1884) : pas de transcription libre lisible par une machine trouvée (voir
- *    cc_about) ; la partie reste éteinte tant que assets/data/cc-rietstap.json.gz n'existe pas.
+ * 🛡️ « Un blason à son nom ? » : J.-B. Rietstap, Armorial général (1884-1887, domaine public). Pas de transcription libre trouvée :
+ *    le texte vient de la reconnaissance automatique (OCR) jointe aux scans de l'Internet Archive (sur Wikimedia Commons), découpé en
+ *    articles par scripts/commune-culture/build_rietstap.py → assets/data/cc-rietstap.json.gz (index) + cc-rietstap-<lettre>.json.gz.
+ *    Le blason n'est montré que s'il paraît propre ; il y a toujours le lien vers l'image de la page. Sans ces fichiers : partie éteinte.
  *
  *  - GET cc_place&place_id=|insee=|name=&lat=&lon=   → {commune, arms, works, dishes} (sans réseau)
  *  - GET cc_wiki&…                                   → {toponymie, histoire, article, source} (en ligne, gardé)

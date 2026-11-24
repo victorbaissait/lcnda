@@ -142,6 +142,21 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await waitCount(/^3 lignes/);
             await p.click('[data-ld-chip="crit:0"]'); await waitCount(/^5 lignes/);
         });
+        await t('🧩 filtre en plus (LCNDA_EXT.dataListFilters) : offert aux listes avec une position, vérifié sur la position', async () => {
+            await p.evaluate(() => { window.__xfPrep = 0; (window.LCNDA_EXT.dataListFilters = window.LCNDA_EXT.dataListFilters || []).push({id: 'test_zone', icon: '🧩', label: 'Dans la zone d’essai', needs: 'geo',
+                options: async () => [{value: 'nord', label: 'Au nord de 45°'}, {value: 'sud', label: 'Au sud de 45°'}], prepare: async () => { window.__xfPrep++; },
+                test: ([lat], v) => (v === 'nord' ? lat > 45 : lat <= 45)}); });
+            await p.click('[data-ld-add]');
+            const items = await p.$$eval('.ui-actmenu-i', a => a.map(x => x.textContent));
+            assert.ok(items.some(x => /Dans la zone d’essai/.test(x)), items.join('|'));
+            if (await p.evaluate(() => (window.LCNDA_EXT.dataListFilters || []).some(f => f.id === 'territoire'))) assert.ok(items.some(x => /Dans le territoire/.test(x)), 'le filtre « territoire » de heritage-territoires.js');
+            await p.click('.ui-actmenu-i:has-text("Dans la zone d’essai")');
+            await p.waitForSelector('.ld-ed-form select[name="v"] option[value="sud"]'); await p.selectOption('.ld-ed-form select[name="v"]', 'sud'); await p.click('.ld-ed-form button[type="submit"]');
+            await waitCount(/^1 ligne/); assert.match((await rowsText())[0], /Castel Durand/);
+            assert.match(await p.textContent('[data-ld-chips]'), /Dans la zone d’essai : Au sud de 45°/);
+            assert.ok(await p.evaluate(() => window.__xfPrep) > 0, 'prepare() appelé');
+            await p.click('[data-ld-chip="crit:0"]'); await waitCount(/^5 lignes/);
+        });
         await t('📅 Période : en l’an 1780 / entièrement entre 1250 et 1800 / qui touche 1500–1550', async () => {
             await p.click('[data-ld-period]'); await p.check('.ld-ed-form input[value="in"]'); await p.fill('.ld-ed-form input[name="from"]', '1780'); await p.click('.ld-ed-form button[type="submit"]');
             await waitCount(/^4 lignes/); // tout sauf Castel Durand (1300–1500)
