@@ -343,6 +343,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 for (const [w0, h0, dark, tag] of [[1440, 900, false, '1440'], [390, 844, false, '390'], [1440, 900, true, 'sombre']]) {
                     const { ctx, pg, errs } = await open(w0, h0, dark, '#successoral');
                     const ux = async name => { fs.mkdirSync(UX, { recursive: true }); await pg.screenshot({ path: path.join(UX, `ux-${name}-${tag}.png`), fullPage: true }); };
+                    // R8 (audit des onglets) : la vue choisie est un réglage « genealogie-succ-view », gardé dans la base : un tour précédent a pu laisser « Héritiers »
+                    await pg.waitForSelector('.succ-views [data-succ-view="cases"]'); if (!(await pg.$('.succ-views [data-succ-view="cases"].is-active'))) await pg.click('.succ-views [data-succ-view="cases"]');
                     await pg.waitForSelector('.succ-views [data-succ-view="cases"].is-active');
                     assert.deepEqual(await pg.$$eval('.succ-views [data-succ-view]', bs => bs.map(b => b.textContent.trim())), ['Dossiers', 'Héritiers à contacter', 'Courriers', '📈 Activité']); // 📈 Activité : heritage-successoral-plus2b.js
                     assert.equal(await pg.locator('.main-nav [data-board="ct_usvivants"], .main-nav [data-board="ct_uscourriers"]').count(), 0);
