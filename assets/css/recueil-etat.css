@@ -194,3 +194,16 @@
 :root[data-theme="dark"] .rf-table tr.rf-grp td { background: #2c3139; border-top-color: #eceef2; border-bottom-color: #eceef2; }
 :root[data-theme="dark"] .rf-table tr.rf-fonds td { background: #22262c; }
 :root[data-theme="dark"] .rf-table tr.rf-sep td { background: #121417; }
+
+/* 🔤 langue de la page, 📇 tables et index (heritage-recueil-etat.js, heritage-recueil-index.js) */
+.re-cell em.re-k-tab { right: auto; left: 1px; }
+.ri-box { border-top: 2px solid #111; padding-top: 10px; margin-top: 6px; }
+.ri-box h3 { margin: 0 0 4px; font-size: 15px; }
+.ri-sum { margin: 0 0 6px; font-size: 13px; }
+.ri-tools { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.ri-tools input { flex: 1 1 220px; max-width: 360px; }
+.ri-list { list-style: none; margin: 0; padding: 0; font-size: 13.5px; }
+.ri-list li { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; padding: 4px 0; border-bottom: 1px dashed #c9ced8; }
+.ri-list .ri-t { flex: 1 1 240px; min-width: 0; }
+.ri-list li small { flex-basis: 100%; }
+.ri-abs { color: #c62828; } .ri-miss { color: #7a5d00; font-weight: 600; }

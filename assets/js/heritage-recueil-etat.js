@@ -28,6 +28,14 @@
     // une page absente → une demande dans « Suivi des registres › Demandes » (qui existe) : la sorte de demande
     const ASK = {manquante: 'other', perdue: 'other', photo: 'reading_room', numerisee: 'photograph', en_ligne: 'reading_room', restauration: 'reading_room', ailleurs: 'other', autre: 'other'};
 
+    /* 🔤 la langue d'une page (sinon celle du recueil) ; 📇 la sorte d'une page */
+    const PKINDS = [['', 'Page ordinaire'], ['table', '📇 Table ou index'], ['couverture', 'Couverture'], ['garde', 'Page de garde'], ['annexe', 'Annexe']];
+    const kindOf = k => PKINDS.find(x => x[0] === k) || PKINDS[0];
+    const langOf = (D, p) => p.language || D.recueil.language || '';
+    const LANGS = ['Français', 'Latin', 'Occitan', 'Breton', 'Alsacien', 'Allemand', 'Italien', 'Espagnol', 'Catalan', 'Flamand', 'Basque'];
+    /** le texte semble-t-il en latin ? (des mots des registres paroissiaux latins) */
+    const LATIN = /\b(anno|domini|die|mensis|baptizav[ia]|baptizatus|baptizata|natus|nata|filius|filia|legitim[ua]s?|patrinus|matrina|sepultus|sepulta|matrimonio|coniunx|conjunx|parochia|presbyter|praesente|praesentibus|eiusdem|ejusdem|huius|hujus)\b/gi;
+    const looksLatin = text => (String(text || '').match(LATIN) || []).length >= 3;
     const isLiasse = D => ['liasse', 'archives'].includes(D?.recueil?.numbering);
     const pageWord = (D, p) => (p?.label ? p.label : isLiasse(D) ? T('Pièce {n}', {n: String(p.num)}) : T('Page {n}', {n: String(p.num)}));
     const cls = p => (p.absent === 'blanche' ? 's-blank' : p.absent === 'en_ligne' ? 's-pasligne' : p.absent ? 's-abs' : {done: 's-fin', checked: 's-relue', doing: 's-cours'}[p.state] || 's-todo');
@@ -41,6 +49,8 @@
             if (p.redo) bits.push('📷 ' + T('Photo à refaire'));
             if (!p.has_photo) bits.push(T('pas de photo'));
         }
+        if (p.page_kind) bits.push(T(kindOf(p.page_kind)[1]));
+        if (p.language) bits.push(`🔤 ${p.language}`);
         return bits.join(' · ');
     }
     const counts = D => D.etat || {todo: 0, doing: 0, checked: 0, done: 0, absent: 0, blank: 0, redo: 0, review: 0, doubt: 0, photos: 0};
@@ -64,6 +74,11 @@
     }
     const legendHtml = () => `<div class="re-leg">${[['s-fin', '🟢 ' + T('Finie')], ['s-relue', '🔵 ' + T('Relue')], ['s-cours', '🟡 ' + T('En cours')], ['s-todo', '⚪ ' + T('À faire')], ['s-abs', '⛔ ' + T('Absente')], ['s-pasligne', '🌐 ' + T('Pas en ligne')], ['s-blank', '▫ ' + T('Blanche')]].map(([c, l]) => `<span><i class="${c}"></i>${esc(l)}</span>`).join('')}</div>`;
 
+    /** 🔤 « · dont Latin : p. 5, 7 » : les pages d'une autre langue que celle du recueil */
+    function langNote(D, pages) {
+        const by = {}; pages.forEach(p => { const l = langOf(D, p); if (l && l !== (D.recueil.language || '')) (by[l] ||= []).push(p.num); });
+        return Object.entries(by).map(([l, ns]) => ` · 🔤 ${T('dont {l} : p. {x}', {l: T(l), x: ranges(ns)})}`).join('');
+    }
     /* ─── 📋 ce qui reste à faire, dans l'ordre conseillé ─── */
     function todoItems(D) {
         const P = D.pages, live = P.filter(p => !p.absent), out = [];
@@ -79,9 +94,9 @@
         const redo = live.filter(p => p.redo);
         if (redo.length) out.push({k: 'redo', n: redo.length, pages: redo, text: `📷 ${T('Photo à refaire')} : ${T('p. {x}', {x: ranges(redo.map(p => p.num))})}`, btn: '↗ ' + T('Ouvrir la première')});
         const rel = live.filter(p => p.reliability === 'review' || p.reliability === 'doubt');
-        if (rel.length) out.push({k: 'review', n: rel.length, pages: rel, text: `👁 ${T('À relire')} : ${T('p. {x}', {x: ranges(rel.map(p => p.num))})}`, btn: '👁 ' + T('Relire la première')});
+        if (rel.length) out.push({k: 'review', n: rel.length, pages: rel, text: `👁 ${T('À relire')} : ${T('p. {x}', {x: ranges(rel.map(p => p.num))})}${langNote(D, rel)}`, btn: '👁 ' + T('Relire la première')});
         const todo = live.filter(p => p.state === 'todo' && p.has_photo);
-        if (todo.length) out.push({k: 'todo', n: todo.length, pages: todo, text: `⚪ ${T('À transcrire')} : ${T('p. {x}', {x: ranges(todo.map(p => p.num))})}`, btn: '✍ ' + T('Commencer p. {n}', {n: String(todo[0].num)})});
+        if (todo.length) out.push({k: 'todo', n: todo.length, pages: todo, text: `⚪ ${T('À transcrire')} : ${T('p. {x}', {x: ranges(todo.map(p => p.num))})}${langNote(D, todo)}`, btn: '✍ ' + T('Commencer p. {n}', {n: String(todo[0].num)})});
         return out;
     }
     function todoHtml(D, max = 50) {
@@ -186,24 +201,27 @@
     /* ─── l'onglet « 🗂 État » ─── */
     const sel = new Map(); // recueil → pages choisies
     const whoOf = new Map(); // recueil → « Pages de : … » (👥 confiées à)
+    const langFilter = new Map(); // recueil → « 🔤 Langue : … »
     let view = 'cases', last = 0;
     function paint(body, ctx) {
         const D = ctx.D(), rid = D.recueil.id, picked = sel.get(rid) || new Set(); sel.set(rid, picked);
         [...picked].forEach(id => { if (!D.pages.some(p => p.id === id)) picked.delete(id); });
         const P = D.pages, pickOn = body.dataset.rePick === '1';
         const names = [...new Set(P.map(p => p.assignee).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr')), who = names.includes(whoOf.get(rid)) || whoOf.get(rid) === '-' ? whoOf.get(rid) : '';
-        const dim = p => (who === '-' ? !!p.assignee : who ? p.assignee !== who : false);
+        const langs = [...new Set(P.map(p => langOf(D, p)).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr')), lang = langs.includes(langFilter.get(rid)) ? langFilter.get(rid) : '';
+        const dim = p => (who === '-' ? !!p.assignee : who ? p.assignee !== who : false) || (lang ? langOf(D, p) !== lang : false);
         const numbering = NUMBERING.find(n => n[0] === D.recueil.numbering);
-        const grid = `<div class="re-map${pickOn ? ' is-picking' : ''}" role="list" aria-label="${esc(T('Les pages'))}">${P.map(p => `<button type="button" role="listitem" class="re-cell ${cls(p)}${picked.has(p.id) ? ' is-picked' : ''}${dim(p) ? ' is-dim' : ''}" data-re-page="${p.id}" title="${esc(tip(D, p))}" aria-label="${esc(tip(D, p))}" ${pickOn ? `aria-pressed="${picked.has(p.id)}"` : ''}>${p.num}${p.redo ? '<em aria-hidden="true">📷</em>' : ''}</button>`).join('')}</div>`;
-        const list = `<div class="data-table-wrap"><table class="data-table re-table" data-cols-off><thead><tr>${pickOn ? '<th></th>' : ''}<th>N°</th><th>${esc(T('Nom'))}</th><th>${esc(T('État'))}</th><th>${esc(T('Fiabilité'))}</th><th>${esc(T('Lisibilité'))}</th><th>${esc(T('Absente'))}</th>${names.length ? `<th>${esc(T('Confiée à'))}</th>` : ''}</tr></thead><tbody>${P.map(p => {
+        const grid = `<div class="re-map${pickOn ? ' is-picking' : ''}" role="list" aria-label="${esc(T('Les pages'))}">${P.map(p => `<button type="button" role="listitem" class="re-cell ${cls(p)}${picked.has(p.id) ? ' is-picked' : ''}${dim(p) ? ' is-dim' : ''}" data-re-page="${p.id}" title="${esc(tip(D, p))}" aria-label="${esc(tip(D, p))}" ${pickOn ? `aria-pressed="${picked.has(p.id)}"` : ''}>${p.num}${p.redo ? '<em aria-hidden="true">📷</em>' : ''}${p.page_kind === 'table' ? '<em class="re-k-tab" aria-hidden="true">📇</em>' : ''}</button>`).join('')}</div>`;
+        const list = `<div class="data-table-wrap"><table class="data-table re-table" data-cols-off><thead><tr>${pickOn ? '<th></th>' : ''}<th>N°</th><th>${esc(T('Nom'))}</th><th>${esc(T('État'))}</th><th>${esc(T('Fiabilité'))}</th><th>${esc(T('Lisibilité'))}</th><th>${esc(T('Absente'))}</th><th>${esc(T('Langue'))}</th><th>${esc(T('Sorte de page'))}</th>${names.length ? `<th>${esc(T('Confiée à'))}</th>` : ''}</tr></thead><tbody>${P.map(p => {
             const a = absentOf(p.absent), r = REL[p.reliability];
             return `<tr class="${picked.has(p.id) ? 'is-picked' : ''}">${pickOn ? `<td><input type="checkbox" data-re-check="${p.id}" ${picked.has(p.id) ? 'checked' : ''} aria-label="${esc(pageWord(D, p))}"></td>` : ''}<td>${p.num}</td><td><button type="button" class="table-link" data-re-page="${p.id}">${esc(pageWord(D, p))}</button></td>
                 <td>${p.absent ? '—' : `${STATES[p.state][0]} ${esc(T(STATES[p.state][1]))}${p.state_set ? ' <small class="muted">' + esc(T('(choisi)')) + '</small>' : ''}`}</td><td>${r ? `<span class="re-pill ${r[2]}">${r[0]} ${esc(T(r[1]))}</span>` : '—'}</td>
-                <td>${esc(T(LEGI.find(l => l[0] === p.legibility)?.[1] || '')) || '—'}${p.redo ? ' · 📷' : ''}</td><td>${a ? `${a[1]} ${esc(T(a[2]))}${p.absent_until ? ' ' + esc(T('jusqu’en {y}', {y: p.absent_until})) : ''}${p.absent_note ? `<br><small class="muted">${esc(p.absent_note)}</small>` : ''}` : ''}</td>${names.length ? `<td>${esc(p.assignee)}</td>` : ''}</tr>`; }).join('')}</tbody></table></div>`;
+                <td>${esc(T(LEGI.find(l => l[0] === p.legibility)?.[1] || '')) || '—'}${p.redo ? ' · 📷' : ''}</td><td>${a ? `${a[1]} ${esc(T(a[2]))}${p.absent_until ? ' ' + esc(T('jusqu’en {y}', {y: p.absent_until})) : ''}${p.absent_note ? `<br><small class="muted">${esc(p.absent_note)}</small>` : ''}` : ''}</td><td>${p.language ? esc(p.language) : `<span class="muted">${esc(langOf(D, p))}</span>`}</td><td>${p.page_kind ? esc(T(kindOf(p.page_kind)[1])) : ''}</td>${names.length ? `<td>${esc(p.assignee)}</td>` : ''}</tr>`; }).join('')}</tbody></table></div>`;
         body.innerHTML = `<div class="re-tab">
             <div class="re-head"><div><h3>🗂 ${esc(T('État du recueil'))}</h3><p class="muted">${esc([numbering ? `${numbering[1]} ${T(numbering[2])}` : T('Numérotation pas dite'), D.recueil.expected_pages ? T('{n} pages attendues', {n: String(D.recueil.expected_pages)}) : ''].filter(Boolean).join(' · '))} <button type="button" class="link-button" data-re-meta>✎ ${esc(T('Numérotation, pages attendues'))}</button></p></div>
                 <div class="re-row"><span class="segmented re-seg">${[['cases', '▦ ' + T('Cases')], ['list', '☰ ' + T('Liste')]].map(([k, l]) => `<button type="button" class="${view === k ? 'is-active' : ''}" data-re-view="${k}" aria-pressed="${view === k}">${esc(l)}</button>`).join('')}</span>
                 <button type="button" class="button small secondary${pickOn ? ' is-active' : ''}" data-re-pick aria-pressed="${pickOn}">☑ ${esc(T('Choisir des pages'))}</button><button type="button" class="button small secondary" data-re-csv>⤓ ${esc(T('Exporter l’état (tableur)'))}</button>${ext.recueilPlus ? `<button type="button" class="button small secondary" data-re-share>🌍 ${esc(T('Page à partager'))}</button>` : ''}</div></div>
+            ${langs.length > 1 ? `<label class="re-who">🔤 ${esc(T('Langue :'))} <select data-re-lang><option value="">${esc(T('toutes'))}</option>${langs.map(n => `<option value="${esc(n)}" ${lang === n ? 'selected' : ''}>${esc(T(n))} (${P.filter(p => langOf(D, p) === n).length})</option>`).join('')}</select></label>` : ''}
             ${names.length ? `<label class="re-who">👥 ${esc(T('Pages de :'))} <select data-re-who><option value="">${esc(T('tout le monde'))}</option>${names.map(n => `<option value="${esc(n)}" ${who === n ? 'selected' : ''}>${esc(n)}</option>`).join('')}<option value="-" ${who === '-' ? 'selected' : ''}>${esc(T('personne (pas encore confiées)'))}</option></select></label>` : ''}
             ${kpiHtml(D)}
             <section class="re-progress" data-re-progress hidden></section>
@@ -220,6 +238,7 @@
         body.querySelector('[data-re-csv]').addEventListener('click', () => csv(D));
         body.querySelector('[data-re-share]')?.addEventListener('click', () => ext.recueilPlus.share(ctx)); // 🌍
         body.querySelector('[data-re-who]')?.addEventListener('change', e => { whoOf.set(rid, e.target.value); again(); });
+        body.querySelector('[data-re-lang]')?.addEventListener('change', e => { langFilter.set(rid, e.target.value); again(); });
         ext.recueilPlus?.progress(body.querySelector('[data-re-progress]'), ctx); // 📈
         body.querySelectorAll('[data-re-page]').forEach(b => b.addEventListener('click', e => {
             const id = Number(b.dataset.rePage);
@@ -242,6 +261,8 @@
             if (k === 'more') return window.LCNDA_UI?.menuAt?.(b, [{icon: '📷', label: T('Photo à refaire'), run: async () => { await setPages(ctx, chosen(), {redo: 1}); await done(); }},
                 {icon: '📷', label: T('Photo bonne (plus à refaire)'), run: async () => { await setPages(ctx, chosen(), {redo: 0}); await done(); }}, '-',
                 ...LEGI.filter(l => l[0]).map(([v, l]) => ({icon: '👓', label: T('Lisibilité : {x}', {x: T(l)}), run: async () => { await setPages(ctx, chosen(), {legibility: v}); await done(); }})), '-',
+                {icon: '🔤', label: T('Langue de ces pages…'), run: () => langDialog(ctx, chosen(), done)},
+                ...PKINDS.map(([k, l]) => ({icon: k === 'table' ? '' : '📄', label: T('Sorte : {x}', {x: T(l)}), run: async () => { await setPages(ctx, chosen(), {page_kind: k}); await done(); }})), '-',
                 {icon: '✓', label: T('Plus absentes'), run: async () => { await setPages(ctx, chosen(), {absent: '', absent_note: '', absent_until: ''}); await done(); }}], {title: T('Plus')});
         }));
         const H = holes(D);
@@ -255,11 +276,20 @@
         body.querySelectorAll('[data-re-todo]').forEach(b => b.addEventListener('click', () => runTodo(items[Number(b.dataset.reTodo)], ctx)));
     }
 
+    /** 🔤 la langue de pages (vide : celle du recueil) */
+    function langDialog(ctx, pages, after) {
+        const D = ctx.D(), used = [...new Set([...D.pages.map(p => p.language), D.recueil.language].filter(Boolean))];
+        const cur = pages.length && pages.every(p => p.language === pages[0].language) ? pages[0].language : '';
+        ext.openDialog({eyebrow: T('🗂 ÉTAT DU RECUEIL'), title: pages.length > 1 ? T('Langue de {n} pages', {n: String(pages.length)}) : T('Langue de la page'), submitLabel: T('Enregistrer'),
+            body: `<label class="re-field">${esc(T('Langue (vide : comme le recueil)'))}<input name="language" list="re-langs" maxlength="60" value="${esc(cur)}" placeholder="${esc(D.recueil.language ? T(D.recueil.language) : T('ex. Latin'))}"></label>
+                <datalist id="re-langs">${[...new Set([...used, ...LANGS])].map(l => `<option value="${esc(l)}">`).join('')}</datalist>`,
+            onSubmit: async form => { const l = String(new FormData(form).get('language') || '').trim(); await setPages(ctx, pages, {language: l}, {msg: l ? T('Langue : {l}', {l}) : T('Langue : comme le recueil')}); await after(); return true; }});
+    }
     /** ⤓ l'état page par page, pour un tableur (CSV, séparateur « ; », comme Excel en français) */
     function csv(D) {
         const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-        const head = [T('N°'), T('Nom'), T('État'), T('État choisi'), T('Fiabilité'), T('Lignes'), T('Lignes relues'), T('Mots peu sûrs'), T('Lisibilité'), T('Photo'), T('Photo à refaire'), T('Absente'), T('Jusqu’en'), T('Note')];
-        const rows = D.pages.map(p => [p.num, pageWord(D, p), p.absent ? '' : T(STATES[p.state][1]), p.state_set ? T('oui') : '', REL[p.reliability] ? T(REL[p.reliability][1]) : '', p.act?.lines ?? '', p.act?.reviewed ?? '', p.doubt || '',
+        const head = [T('N°'), T('Nom'), T('Langue'), T('Sorte de page'), T('État'), T('État choisi'), T('Fiabilité'), T('Lignes'), T('Lignes relues'), T('Mots peu sûrs'), T('Lisibilité'), T('Photo'), T('Photo à refaire'), T('Absente'), T('Jusqu’en'), T('Note')];
+        const rows = D.pages.map(p => [p.num, pageWord(D, p), langOf(D, p), p.page_kind ? T(kindOf(p.page_kind)[1]) : '', p.absent ? '' : T(STATES[p.state][1]), p.state_set ? T('oui') : '', REL[p.reliability] ? T(REL[p.reliability][1]) : '', p.act?.lines ?? '', p.act?.reviewed ?? '', p.doubt || '',
             T(LEGI.find(l => l[0] === p.legibility)?.[1] || ''), p.has_photo ? T('oui') : T('non'), p.redo ? T('oui') : '', p.absent ? T(absentOf(p.absent)[2]) : '', p.absent_until, p.absent_note]);
         const blob = new Blob(['﻿' + [head, ...rows].map(r => r.map(q).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'});
         const a = Object.assign(document.createElement('a'), {href: URL.createObjectURL(blob), download: (A().safeExportFilename ? A().safeExportFilename(`${T('État')} — ${D.recueil.title}`) : 'etat') + '.csv'});
@@ -300,6 +330,9 @@
             <div class="re-prow"><label class="re-k" for="re-legi-${p.id}">${esc(T('Lisibilité'))}</label><select id="re-legi-${p.id}" data-re-plegi ${ro ? 'disabled' : ''}>${LEGI.map(([k, l]) => `<option value="${k}" ${p.legibility === k ? 'selected' : ''}>${esc(T(l))}</option>`).join('')}</select>
 </div>
             <div class="re-prow"><span class="re-k"></span><label class="re-check"><input type="checkbox" data-re-predo ${p.redo ? 'checked' : ''} ${ro ? 'disabled' : ''}> 📷 ${esc(T('Photo à refaire'))}</label></div>
+            <div class="re-prow"><span class="re-k">🔤 ${esc(T('Langue'))}</span><span>${p.language ? esc(T(p.language)) : `<span class="muted">${esc(D.recueil.language ? T('comme le recueil : {l}', {l: T(D.recueil.language)}) : T('pas dite'))}</span>`}</span>${ro ? '' : `<button type="button" class="link-button" data-re-plang>✎ ${esc(T('Changer…'))}</button>`}</div>
+            ${!ro && looksLatin(p.act ? '' : p.transcription) && !/^lat/i.test(langOf(D, p)) ? `<p class="re-msg">🔤 ${esc(T('Le texte de cette page semble en latin.'))} <button type="button" class="button small secondary" data-re-platin>${esc(T('Noter « Latin »'))}</button></p>` : ''}
+            <div class="re-prow"><label class="re-k" for="re-pk-${p.id}">📄 ${esc(T('Sorte de page'))}</label><select id="re-pk-${p.id}" data-re-pkind ${ro ? 'disabled' : ''}>${PKINDS.map(([k, l]) => `<option value="${k}" ${p.page_kind === k ? 'selected' : ''}>${esc(T(l))}</option>`).join('')}</select></div>
             ${ext.recueilPlus ? `<div class="re-prow"><span class="re-k">👥 ${esc(T('Confiée à'))}</span><span>${p.assignee ? esc(p.assignee) : `<span class="muted">${esc(T('personne'))}</span>`}</span>${ro ? '' : `<button type="button" class="link-button" data-re-passign>✎ ${esc(T('Confier…'))}</button>`}</div>` : ''}
             ${ro ? '' : `<p><button type="button" class="link-button" data-re-pabs>⛔ ${esc(T('Cette page est absente…'))}</button></p>`}`}</div>`;
         const one = [p];
@@ -310,6 +343,9 @@
         el.querySelector('[data-re-predo]')?.addEventListener('change', async e => { await setPages(ctx, one, {redo: e.target.checked ? 1 : 0}, {msg: e.target.checked ? T('Photo à refaire') : T('Photo bonne')}); await after(); });
         el.querySelectorAll('[data-re-pabs]').forEach(b => b.addEventListener('click', () => absentDialog(ctx, one)));
         el.querySelector('[data-re-passign]')?.addEventListener('click', () => ext.recueilPlus.assign(ctx, one));
+        el.querySelector('[data-re-plang]')?.addEventListener('click', () => langDialog(ctx, one, after));
+        el.querySelector('[data-re-platin]')?.addEventListener('click', async () => { await setPages(ctx, one, {language: 'Latin'}, {msg: T('Langue : {l}', {l: T('Latin')})}); await after(); });
+        el.querySelector('[data-re-pkind]')?.addEventListener('change', async e => { await setPages(ctx, one, {page_kind: e.target.value}, {msg: T('Sorte : {x}', {x: T(kindOf(e.target.value)[1])})}); await after(); });
         el.querySelector('[data-re-pback]')?.addEventListener('click', async () => { await setPages(ctx, one, {absent: '', absent_note: '', absent_until: ''}, {msg: T('Plus absente')}); await after(); });
     }
 
@@ -325,5 +361,5 @@
         root.querySelectorAll('[data-re-todo]').forEach(b => b.addEventListener('click', () => runTodo(items[Number(b.dataset.reTodo)], ctx)));
     }
 
-    ext.recueilEtat = {paint, pageBox, block, bindBlocks, pageWord, fields, parseLabel, holes, todoItems, setPages, STATES, REL, ABSENT};
+    ext.recueilEtat = {paint, pageBox, block, bindBlocks, pageWord, fields, parseLabel, holes, todoItems, setPages, langOf, looksLatin, STATES, REL, ABSENT, PKINDS};
 })();

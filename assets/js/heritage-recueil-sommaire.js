@@ -97,8 +97,10 @@
             ${warn.length ? `<div class="re-msg is-warn rs-warn">${warn.slice(0, 8).join('<br>')}${warn.length > 8 ? `<br>${esc(T('… et {n} autres.', {n: String(warn.length - 8)}))}` : ''}</div>` : ''}
             ${items.length ? (show.length ? `<ul class="rs-tree">${show.map(line).join('')}</ul>` : A().empty(T('Rien ne correspond.'), {icon: '🔎'}))
                 : A().emptyState({icon: '📑', text: T('Pas encore de sommaire'), hint: T('« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits.')})}
-            <p class="muted rs-hint">${esc(T('Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche.'))}</p></div>`;
+            <p class="muted rs-hint">${esc(T('Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche.'))}</p>
+            <section class="ri-box" data-ri-host></section></div>`;
         const again = () => paint(body, ctx);
+        ext.recueilIndex?.mount(body.querySelector('[data-ri-host]'), ctx); // 📇 tables et index (heritage-recueil-index.js)
         const reloadAll = async () => { cache.delete(rid); await ctx.reload(); };
         body.querySelectorAll('[data-rs-fold]').forEach(b => b.addEventListener('click', () => { const id = Number(b.dataset.rsFold), s = shutRead(rid); if (s.has(id)) s.delete(id); else s.add(id); shutWrite(rid, s); again().then(() => body.querySelector(`[data-rs-fold="${id}"]`)?.focus()); }));
         body.querySelectorAll('[data-rs-all]').forEach(b => b.addEventListener('click', () => { shutWrite(rid, b.dataset.rsAll === 'open' ? new Set() : new Set(items.filter(r => r.children).map(r => r.id))); again(); }));

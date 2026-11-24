@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=275">
-    <link rel="stylesheet" href="assets/css/recueil-etat.css?v=11">
+    <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
@@ -1295,7 +1295,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=24" defer></script>
-<script src="assets/js/heritage-more.js?v=400" defer></script>
+<script src="assets/js/heritage-more.js?v=401" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
@@ -1303,8 +1303,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueil-table.js?v=10" defer></script>
 <script src="assets/js/heritage-recueil-sens.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-plus.js?v=1" defer></script>
-<script src="assets/js/heritage-recueil-etat.js?v=5" defer></script>
-<script src="assets/js/heritage-recueil-sommaire.js?v=2" defer></script>
+<script src="assets/js/heritage-recueil-etat.js?v=6" defer></script>
+<script src="assets/js/heritage-recueil-sommaire.js?v=3" defer></script>
+<script src="assets/js/heritage-recueil-index.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-fiche.js?v=2" defer></script>
 <script src="assets/js/heritage-recueil-fonds.js?v=5" defer></script>
 <script src="assets/js/heritage-recueils.js?v=33" defer></script>
