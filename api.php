@@ -696,6 +696,7 @@ try {
         'grands_mouvements' => json_response(mouvements_list($pdo, $_GET)), // 🌍 lib/mouvements.php
         'listes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/listes_plus.php'; json_response(lp_get($pdo, $_GET)); })(), // 📋 Listes en plus : 📚 Sources, 💍 Familles, 🔤 Noms de famille, 📝 Notes (lib/listes_plus.php, lib/sources_gestion.php)
         'person_movements' => json_response(['moves' => mouvements_person($pdo, safe_int($_GET['id'] ?? 0))]),
+        'lune_family' => (static function () use ($pdo) { require_once __DIR__ . '/lib/lune.php'; json_response(lune_family($pdo)); })(), // 🌒 La Lune et les éclipses : les lieux datés de la famille (lib/lune.php)
         'old_trade' => json_response(trade_sheet($pdo, $_GET)), // 🛠️ lib/metiers_anciens.php
         'old_trades' => json_response(trades_list($pdo, $_GET)),
         'metiers_arbre' => (static function () use ($pdo) { require_once __DIR__ . '/lib/metiers_carte.php'; json_response(metiers_arbre_data($pdo, $_GET)); })(), // 🧬 Arbre des métiers (lib/metiers_carte.php)

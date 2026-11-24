@@ -1287,7 +1287,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
-<script src="assets/js/app-listes.js?v=63" defer></script>
+<script src="assets/js/app-listes.js?v=64" defer></script>
 <script src="assets/js/app-maintenance.js?v=64" defer></script>
 <script src="assets/js/app-recherche.js?v=34" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=2" defer></script>
@@ -1424,6 +1424,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-biographie.js?v=4" defer></script>
 <script src="assets/js/heritage-journee.js?v=1" defer></script>
 <script src="assets/js/heritage-monde.js?v=6" defer></script>
+<script src="assets/js/app-lune-core.js?v=1" defer></script>
+<script src="assets/js/heritage-lune.js?v=1" defer></script>
 <script src="assets/js/heritage-mouvements.js?v=1" defer></script>
 <script src="assets/js/heritage-metiers-anciens.js?v=3" defer></script>
 <script src="assets/js/heritage-archive-services.js?v=6" defer></script>
