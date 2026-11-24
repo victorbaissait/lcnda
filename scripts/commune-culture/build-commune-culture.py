@@ -106,6 +106,17 @@ def build_oeuvres(C, Q2I):
             if 'd' in r and re.match(r'^\d{4}', r['d']): m['y'].add(int(r['d'][:4]))
             if 'img' in r and not m['img']: m['img'] = urllib.parse.unquote(r['img'].rsplit('/', 1)[1])
             if 'by' in r and r['by'].startswith('http://www.wikidata.org/entity/Q'): m['by'].add(qid(r['by']))
+    # qui l'a faite : le réalisateur d'abord, puis l'auteur, le créateur, le compositeur (une seule sorte de personne)
+    BYP = ['P57', 'P50', 'P170', 'P86']
+    byp = {}
+    for r in rows('meta_tourne'):
+        if 'by' in r and r['by'].startswith('http://www.wikidata.org/entity/Q'): byp.setdefault(qid(r['w']), {}).setdefault('P57', set()).add(qid(r['by']))
+    for k in ('by_cadre', 'by_sujet'):
+        for r in rows(k):
+            if r['by'].startswith('http://www.wikidata.org/entity/Q'): byp.setdefault(qid(r['w']), {}).setdefault(r['bp'].rsplit('/', 1)[1], set()).add(qid(r['by']))
+    for w, m in meta.items():
+        d = byp.get(w, {})
+        m['by'] = next((d[p] for p in BYP if d.get(p)), set())
     # les œuvres de P921 sans métadonnées (articles scientifiques écartés par la requête) : écartées aussi
     links = [l for l in links if l[3] != 'sujet' or l[0] in meta]
     ids = {l[0] for l in links} | {l[2] for l in links if l[2]} | {t for m in meta.values() for t in m['t']} | {b for m in meta.values() for b in m['by']}
