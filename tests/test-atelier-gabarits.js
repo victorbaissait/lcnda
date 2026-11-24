@@ -98,6 +98,36 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await openAct(); await p.click(`${D} [data-tx-step="find"]`); await detect(); await toGab(); const f = await fields();
             assert.match(f.enfant.cls, /is-ok/); assert.equal(f.cure.v, 'Jean DELPEIROUX, curé de Saint Martin');
         });
+        await t('étape 2 : « ✓ Ajouter à la généalogie » reprend les cases vérifiées ou écrites (l’aperçu le dit, rien n’est écrit avant d’accepter)', async () => {
+            await p.fill(`${D} [data-gab-field="pere"]`, 'Paul MAZAUD, meunier, 40 ans'); await sleep(200);
+            const persons0 = Number(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT count(*) FROM persons')->fetchColumn();`).stdout);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="found"]').click());
+            await p.waitForSelector('[data-txa-gab] .h-txa-msg', {timeout: 15000});
+            const note = await p.textContent('[data-txa-gab]'); assert.match(note, /Repris du gabarit/); assert.match(note, /Père, métier : Paul MAZAUD, meunier, 40 ans/); assert.match(note, /Enfant : Jean/);
+            const ppl = await p.$$eval('[data-txa-found] [data-txa-p]', els => els.map(e => e.textContent.replace(/\s+/g, ' ')));
+            assert.ok(ppl.some(x => /Paul MAZAUD/.test(x) && /meunier/.test(x)), 'le père de la case dans l’aperçu : ' + JSON.stringify(ppl));
+            assert.ok(!ppl.some(x => /Pierre MAZAUD/.test(x)), 'plus l’ancien nom');
+            await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].find(x => x.querySelector('[data-txa-found]')); d?.close(); }); await sleep(300);
+            assert.equal(Number(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT count(*) FROM persons')->fetchColumn();`).stdout), persons0, 'rien d’écrit sans accepter');
+        });
+        await t('étape 2 : accepter l’aperçu crée la fiche d’après la case (Paul MAZAUD, meunier), pas d’après l’ancien nom', async () => {
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="found"]').click());
+            await p.waitForSelector('[data-txa-gab] .h-txa-msg', {timeout: 15000});
+            await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].find(x => x.querySelector('[data-txa-found]')); [...d.querySelectorAll('.modal-actions button')].find(b => /Ajouter à la généalogie/.test(b.textContent)).click(); });
+            let row = null; for (let i = 0; i < 40 && !row; i++) { await sleep(250); row = JSON.parse(php(`require 'lib/bootstrap.php'; echo json_encode(db()->query("SELECT first_name, last_name, occupation FROM persons WHERE first_name='Paul'")->fetch(PDO::FETCH_ASSOC));`).stdout || 'false'); }
+            assert.ok(row, 'la fiche de Paul créée'); assert.equal(row.last_name, 'MAZAUD'); assert.match(String(row.occupation || ''), /meunier/i);
+            assert.equal(php(`require 'lib/bootstrap.php'; echo db()->query("SELECT count(*) FROM persons WHERE first_name='Pierre'")->fetchColumn();`).stdout, '0', 'pas de fiche « Pierre »');
+            await p.evaluate(() => document.querySelectorAll('dialog[open]:not(.h-tx-dlg)').forEach(d => d.close())); await sleep(300);
+        });
+        await t('étape 2 : une personne écrite dans une case mais pas trouvée dans le texte est ajoutée, avec son lien (mère de l’enfant)', async () => {
+            const r = await p.evaluate(() => { const C = window.LCNDA_TXACTE, G = window.LCNDA_EXT.txGabarit;
+                const ex = C.extractAct('L’an mil sept cent quatre vingt dix, le vingt trois mars, a été baptisé Jean, fils de Pierre MAZAUD.', {kind: 'bapteme'});
+                const out = G.apply(ex, {kind: 'bapteme', fields: {mere: {v: 'Marie LACOMBE', own: true, s: -1, e: -1}, pere: {v: 'Pierre MAZAUD', s: 40, e: 53}}});
+                const kid = out.ex.people.find(q => q.role === 'sujet'), m = out.ex.people.find(q => q.role === 'mere');
+                return {changes: out.changes, m: m && {name: m.name, sex: m.sex, of: m.relations[0]?.of === kid?.key}, rel: out.ex.relations.find(x => x.type === 'parents' && x.child === kid?.key)?.mother === m?.key}; });
+            assert.deepEqual(r.changes, ['Mère : Marie LACOMBE'], 'une case remplie par Repérer (pas ✓) ne change rien');
+            assert.deepEqual(r.m, {name: 'Marie LACOMBE', sex: 'f', of: true}); assert.equal(r.rel, true);
+        });
         await t('côté serveur : des cases au nom inconnu, trop longues ou d’une sorte inconnue ne sont pas gardées', async () => {
             const r = php(String.raw`require 'lib/bootstrap.php'; require_once 'lib/transcriptions.php';
 $d = act_transcription_clean_data(db(), ['gabarit' => ['kind' => 'bapteme', 'fields' => ['pere' => ['v' => str_repeat('x', 900), 's' => 3, 'e' => 9, 'ok' => 1], 'Mauvais-Nom' => ['v' => 'x'], 'vide' => ['v' => ''], 'html' => ['v' => '<b>a</b>']]]]);

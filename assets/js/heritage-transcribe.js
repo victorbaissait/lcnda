@@ -1438,7 +1438,7 @@
             flushCommit();
             let undoSnap = null;
             ext.txActe.openFound({text: findText(), kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
-                filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, unsure: lastUnsure, kinds: KINDS, helpers: {detect, findDates, wordsToNumber}, frameText, rich: ext.txTrouve?.selection(area.value),
+                filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, unsure: lastUnsure, kinds: KINDS, gabarit: GB() && t.data.gabarit?.kind === kindNow() ? t.data.gabarit : null, helpers: {detect, findDates, wordsToNumber}, frameText, rich: ext.txTrouve?.selection(area.value),
                 onKeepOnly: list => { keepPeople(list.map(p => ({...p, person_id: p.person_id || 0}))); touch(); paintPeople(); toast(i18n('Personnes gardées dans la transcription, sans créer de fiche.')); },
                 onApplied: async ({result, people, source}) => {
                     undoSnap = {people: t.data.people.map(p => ({...p})), source: $('[data-tx="source"]').value};

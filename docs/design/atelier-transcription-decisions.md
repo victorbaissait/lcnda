@@ -75,7 +75,7 @@ Chaque gros outil : maquette d'abord.
 
 ## 3b · Gabarits d'actes (choix « tout A », 22 novembre)
 - ✅ Étape 1 FAITE : onglet « 🧩 Gabarit » à côté de « Ce que l'app a trouvé », 9 gabarits (dont la nouvelle sorte « Acte de notoriété »), remplis par Repérer sans écraser une case ✓ ou écrite, lien vers le passage (« l. 3 », « page 2, l. 3 »), gardé avec l'acte (vérifié côté serveur), réglage « Modèle d'acte » (menu ⋯), sorte devinée en « À préciser », FAQ (31 langues). Au passage : « a été baptisé Jean, … fils de Pierre » — le prénom seul de l'enfant est reconnu (avant, le père passait pour l'enfant).
-- Étape 2 : « ✓ Ajouter à la généalogie » depuis les cases, avec aperçu.
+- ✅ Étape 2 FAITE : « ✓ Ajouter à la généalogie » reprend les cases vérifiées ✓ ou écrites (elles passent avant ce que l'app avait deviné ; une personne écrite mais pas trouvée est ajoutée avec son lien) ; l'aperçu le dit (« 🧩 Repris du gabarit : … »), rien n'est écrit avant d'accepter. FAQ à compléter avec l'étape 3 (une seule retraduction).
 - Étape 3 : « ＋ Ajouter une case », « 🧩 Mes gabarits », export (tableau à l'impression, ⤓ Tableur par sorte).
 
 ## Idée du 24 novembre : « Où je trouve ça ? » (dans 🌍 Où chercher ?) — après les gabarits

@@ -97,5 +97,51 @@
                     <span class="h-gab-a">${f?.ok ? '<span class="h-gab-ok" title="' + esc(i18n('Vérifié')) + '">✓</span>' : `<button type="button" class="icon-button small" data-gab-ok="${k}" ${f?.v ? '' : 'disabled'} title="${esc(i18n('Vérifié'))}" aria-label="${esc(i18n('Vérifié'))}">✓</button>`}${w ? ` <button type="button" class="link-button" data-tx-goto="${f.s}:${f.e}">${esc(w)}</button>` : ''}</span>`; }).join('')}</div>
             <p class="muted h-gab-hint">${esc(i18n('Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage.'))}</p>`;
     }
-    ext.txGabarit = {G, has, fill, render, mode, setMode, MODE_KEY, KIND_NAME};
+    /* ─── étape 2 : « ✓ Ajouter à la généalogie » part des cases ─── */
+    // une case de personne → le rôle repéré (et pour qui elle est parent)
+    const PERSON = {enfant: ['sujet'], pere: ['pere', 'sujet'], mere: ['mere', 'sujet'], parrain: ['parrain'], marraine: ['marraine'], epoux: ['epoux'], epouse: ['epouse'], defunt: ['defunt'], conjoint: ['conjoint', 'defunt'], nom: ['sujet'], personne: ['autre']};
+    const SEX = {pere: 'm', mere: 'f', parrain: 'm', marraine: 'f', epoux: 'm', epouse: 'f'};
+    /** « Pierre MAZAUD, laboureur, 40 ans » → {name, job, age} */
+    function parsePerson(v) {
+        const parts = String(v || '').split(',').map(x => x.trim()).filter(Boolean); const out = {name: parts.shift() || '', job: '', age: null};
+        parts.forEach(x => { const a = x.match(/^(\d{1,3})\s*ans?\b/i); if (a && out.age == null) out.age = Number(a[1]); else if (!out.job && !/^(?:demeurant|domicili|né|née)\b/i.test(x)) out.job = x; });
+        return out;
+    }
+    /**
+     * reprendre dans ce que l'app a trouvé (ex = extractAct) les cases vérifiées ✓ ou écrites à la main : elles passent avant ce que l'app
+     * avait deviné. Renvoie {ex, changes: ['Père : Paul MAZAUD', …]} ; rien n'est écrit ici (l'aperçu « Ajouter à la généalogie » le montre).
+     */
+    function apply(ex, gab, opt = {}) {
+        if (!ex || !gab || !G[gab.kind] || !gab.fields) return {ex, changes: []};
+        const C = opt.core || window.LCNDA_TXACTE, changes = [], label = k => i18n((G[gab.kind].find(f => f[0] === k) || [k, k])[1]);
+        const sure = Object.entries(gab.fields).filter(([, f]) => f && f.v && (f.ok || f.own));
+        let seq = (ex.people || []).length;
+        sure.forEach(([k, f]) => {
+            if (k === 'date') {
+                const iso = (opt.helpers?.findDates?.(f.v) || []).map(d => d.iso).find(x => /^\d{4}/.test(x || '')) || '';
+                if (ex.date?.label !== f.v) { ex.date = {label: f.v, iso, s: f.s ?? -1, e: f.e ?? -1}; if (iso) ex.year = Number(iso.slice(0, 4)); changes.push(`${label(k)} : ${f.v}`); }
+                return;
+            }
+            if (k === 'lieu' || k === 'commune') { if (ex.place !== f.v) { ex.place = f.v; changes.push(`${label(k)} : ${f.v}`); } return; }
+            const map = PERSON[k]; if (!map) return;
+            const pp = parsePerson(f.v); if (!pp.name) return;
+            let p = (ex.people || []).find(q => q.role === map[0]);
+            const nm = C?.splitName ? C.splitName(pp.name) : {given: pp.name.split(/\s+/)[0], surname: pp.name.split(/\s+/).slice(1).join(' ')};
+            if (p) {
+                if (p.name === pp.name && (!pp.job || p.job === pp.job) && (pp.age == null || p.age === pp.age)) return;
+                Object.assign(p, {name: pp.name, given: nm.given, surname: nm.surname}, pp.job ? {job: pp.job} : {}, pp.age != null ? {age: pp.age, birthYear: ex.year ? ex.year - pp.age : null} : {});
+            } else {
+                // une personne que l'app n'avait pas trouvée : ajoutée avec son rôle (et comme parent de l'enfant ou du défunt)
+                const of = map[1] ? (ex.people || []).find(q => q.role === map[1]) : null;
+                p = {key: `g${++seq}`, name: pp.name, given: nm.given, surname: nm.surname, sex: SEX[k] || (C?.sexOfGiven?.(nm.given) || 'u'), role: map[0], job: pp.job, age: pp.age,
+                    birthYear: pp.age != null && ex.year ? ex.year - pp.age : null, residence: '', deceased: false, relations: of && (map[0] === 'pere' || map[0] === 'mere') ? [{type: 'parent_of', of: of.key}] : of && map[0] === 'conjoint' ? [{type: 'spouse_of', of: of.key}] : [], s: f.s ?? -1, e: f.e ?? -1, mentions: f.s >= 0 ? [[f.s, f.e]] : []};
+                (ex.people = ex.people || []).push(p);
+                if (of && (map[0] === 'pere' || map[0] === 'mere')) { const r = (ex.relations = ex.relations || []).find(x => x.type === 'parents' && x.child === of.key);
+                    if (r) r[map[0] === 'pere' ? 'father' : 'mother'] = p.key; else ex.relations.push({type: 'parents', father: map[0] === 'pere' ? p.key : '', mother: map[0] === 'mere' ? p.key : '', child: of.key}); }
+            }
+            changes.push(`${label(k)} : ${f.v}`);
+        });
+        return {ex, changes};
+    }
+    ext.txGabarit = {G, has, fill, render, mode, setMode, MODE_KEY, KIND_NAME, apply, parsePerson};
 })();

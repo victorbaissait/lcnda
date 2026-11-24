@@ -177,6 +177,10 @@
         // 🧭 le repérage riche (heritage-transcribe-trouve.js) complète : âges, métiers, domiciles cochés, personnes en plus, rien d'écarté
         const enrich = e => (ctx.rich?.rf && C().mergeRich ? C().mergeRich(e, ctx.rich.rf, ctx.rich.keep) : e);
         let ex = enrich(C().extractAct(ctx.text, {kind: ctx.kind, place: ctx.place, date: ctx.date, helpers: ctx.helpers}));
+        // 🧩 les cases du gabarit vérifiées ✓ ou écrites à la main passent avant ce que l'app avait deviné (heritage-transcribe-gabarit.js)
+        let gabChanges = [];
+        const gabIn = () => { gabChanges = []; if (ctx.gabarit && ext.txGabarit?.apply && (ex.kind === ctx.gabarit.kind || ctx.kind === ctx.gabarit.kind)) { const r = ext.txGabarit.apply(ex, ctx.gabarit, {helpers: ctx.helpers}); ex = r.ex; gabChanges = r.changes; } };
+        gabIn();
         if (!ex.people.length) return toast(i18n('Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ».'), 'error');
         let frame = ''; try { frame = await Promise.race([ctx.frameText?.() || '', new Promise(r => setTimeout(() => r(''), 15000))]); } catch (_) {}
         const st = {people: new Map(), check: {candidates: {}, source: null}, opt: {job: true, birth: true, death: true, residence: false}, place: null};
@@ -197,6 +201,9 @@
             body: '<div class="h-txa-found" data-txa-found></div>', onSubmit: () => apply()});
         dlg.classList.add('h-txa-dlg');
         const root = dlg.querySelector('[data-txa-found]');
+        const gabNote = document.createElement('div'); gabNote.dataset.txaGab = ''; root.before(gabNote);
+        const paintGabNote = () => { gabNote.innerHTML = gabChanges.length ? `<div class="ui-notice ui-notice-info h-txa-msg" role="status"><span class="ui-notice-ico" aria-hidden="true">🧩</span><span><b>${esc(i18n('Repris du gabarit (cases vérifiées ou écrites par toi) :'))}</b> ${gabChanges.map(esc).join(' · ')}</span></div>` : ''; };
+        paintGabNote();
         // « Garder seulement la transcription » : à gauche des boutons du bas
         const keepBtn = document.createElement('button'); keepBtn.type = 'button'; keepBtn.className = 'button secondary h-txa-keeponly'; keepBtn.textContent = i18n('Garder seulement la transcription');
         dlg.querySelector('.modal-actions')?.prepend(keepBtn);
@@ -272,7 +279,7 @@
         }
         root.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;
-            if (b.matches('[data-txa-redo]')) { ex = enrich(C().extractAct(ctx.text, {kind: root.querySelector('[data-txa-kind]').value, place: ctx.place, date: ctx.date, helpers: ctx.helpers})); initState(); src = guessSrc(); await check(); paint(); return; }
+            if (b.matches('[data-txa-redo]')) { ex = enrich(C().extractAct(ctx.text, {kind: root.querySelector('[data-txa-kind]').value, place: ctx.place, date: ctx.date, helpers: ctx.helpers})); gabIn(); paintGabNote(); initState(); src = guessSrc(); await check(); paint(); return; }
             if (b.dataset.txaCand) { const [k, id] = b.dataset.txaCand.split(':'), s = st.people.get(k), c = (st.check.candidates?.[k] || []).find(x => x.id === Number(id)); if (s.action === 'link' && s.person_id === Number(id)) { s.action = 'create'; s.person_id = 0; s.cand = null; } else { s.action = 'link'; s.person_id = Number(id); s.cand = c; } repaintPerson(k); return; }
             if (b.dataset.txaAct) {
                 const [k, act] = b.dataset.txaAct.split(':'), p = byKey(k), s = st.people.get(k), c = st.check.candidates?.[k] || [];
