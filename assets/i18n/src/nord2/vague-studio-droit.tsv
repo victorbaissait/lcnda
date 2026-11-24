@@ -645,7 +645,7 @@ Change les mots cherchés ou retire un filtre dans la colonne de gauche. ¦ Zme�
 Repérer les pages qui semblent blanches et les photos prises deux fois ; rien ne change sans ton accord ¦ Nájsť strany, ktoré vyzerajú prázdne, a fotky odfotené dvakrát; bez tvojho súhlasu sa nič nezmení ¦ Finn sider som ser blanke ut og bilder tatt to ganger; ingenting endres uten at du godtar det
 Pages blanches et doublons ¦ Prázdne strany a duplikáty ¦ Blanke sider og duplikater
 Depuis un registre en ligne (IIIF) ¦ Z online matriky (IIIF) ¦ Fra et register på nett (IIIF)
-Beaucoup d’archives, de bibliothèques et Gallica publient leurs registres en IIIF. Colle l’adresse du « manifeste » (souvent …/manifest.json, parfois derrière un logo IIIF) : l’app télécharge les vues dans un nouveau recueil, une vue par page. ¦ Mnohé archívy, knižnice a Gallica zverejňujú svoje matriky v IIIF. Vlož adresu „manifestu“ (často …/manifest.json, niekedy za logom IIIF): aplikácia stiahne snímky do nového zväzku, jednu snímku na stranu. ¦ Mange arkiver, biblioteker og Gallica publiserer registrene sine i IIIF. Lim inn adressen til «manifestet» (ofte …/manifest.json, noen ganger bak en IIIF-logo): appen laster ned bildene til en ny samling, ett bilde per side.
+Beaucoup d’archives, de bibliothèques et Gallica publient leurs registres en IIIF. Colle l’adresse du « manifeste » (souvent …/manifest.json, parfois derrière un logo IIIF) : l’app télécharge les vues dans un nouveau recueil, une vue par page. ¦ Mnohé archívy, knižnice a Gallica zverejňujú svoje matriky v IIIF. Vlož adresu „manifestu“ (často …/manifest.json, niekedy za logom IIIF): aplikácia stiahne snímky do nového zborníka, jednu snímku na stranu. ¦ Mange arkiver, biblioteker og Gallica publiserer registrene sine i IIIF. Lim inn adressen til «manifestet» (ofte …/manifest.json, noen ganger bak en IIIF-logo): appen laster ned bildene til en ny samling, ett bilde per side.
 Lecture du manifeste… ¦ Čítanie manifestu… ¦ Leser manifestet…
 {n} vues ¦ Snímky: {n} ¦ {n} bilder
 Quelles vues ? ¦ Ktoré snímky? ¦ Hvilke bilder?
@@ -656,7 +656,7 @@ Beaucoup de vues : le téléchargement peut être long. Tu peux l’arrêter, ce
 Téléchargement… ¦ Sťahovanie… ¦ Laster ned…
 {d} sur {n} ¦ {d} z {n} ¦ {d} av {n}
 Arrêté : {e} ¦ Zastavené: {e} ¦ Stoppet: {e}
-Recueil « {t} » : {n} vues ¦ Zväzok „{t}“: snímky {n} ¦ Samlingen «{t}»: {n} bilder
+Recueil « {t} » : {n} vues ¦ Zborník „{t}“: snímky {n} ¦ Samlingen «{t}»: {n} bilder
 Pages blanches et photos en double ¦ Prázdne strany a duplicitné fotky ¦ Blanke sider og dobbeltbilder
 Je regarde les {n} photos… ¦ Prezerám fotky ({n})… ¦ Jeg ser på de {n} bildene…
 Faire ce qui est coché ¦ Vykonať zaškrtnuté ¦ Gjør det som er avkrysset
@@ -664,10 +664,10 @@ Rien à signaler : aucune page blanche, aucune photo en double. ¦ Nič na hlás
 Pages qui semblent blanches ¦ Strany, ktoré vyzerajú prázdne ¦ Sider som ser blanke ut
 Cochées : elles seront marquées « Page blanche » (pas absentes : vides). ¦ Zaškrtnuté: označia sa ako „Prázdna strana“ (nie chýbajúce: prázdne). ¦ Avkrysset: de merkes «Blank side» (ikke manglende: tomme).
 Photos qui se ressemblent ¦ Podobné fotky ¦ Bilder som ligner hverandre
-Coche la photo à retirer du recueil (elle reste dans Médias). ¦ Zaškrtni fotku, ktorú chceš odstrániť zo zväzku (zostane v Médiách). ¦ Kryss av bildet som skal fjernes fra samlingen (det blir værende i Medier).
+Coche la photo à retirer du recueil (elle reste dans Médias). ¦ Zaškrtni fotku, ktorú chceš odstrániť zo zborníka (zostane v Médiách). ¦ Kryss av bildet som skal fjernes fra samlingen (det blir værende i Medier).
 {p} % pareilles ¦ zhoda {p} % ¦ {p} % like
 {b} page(s) blanche(s), {d} photo(s) en double retirée(s) ¦ Prázdne strany: {b}, odstránené duplicitné fotky: {d} ¦ {b} blank(e) side(r), {d} dobbeltbilde(r) fjernet
-Un registre publié en ligne (IIIF) : ses vues téléchargées dans un nouveau recueil ¦ Matrika zverejnená online (IIIF): jej snímky stiahnuté do nového zväzku ¦ Et register publisert på nett (IIIF): bildene lastet ned til en ny samling
+Un registre publié en ligne (IIIF) : ses vues téléchargées dans un nouveau recueil ¦ Matrika zverejnená online (IIIF): jej snímky stiahnuté do nového zborníka ¦ Et register publisert på nett (IIIF): bildene lastet ned til en ny samling
 Depuis un registre en ligne… ¦ Z online matriky… ¦ Fra et register på nett…
 L’outil complet : zones sur l’image, lecture automatique de l’écriture, repérage des noms, versions ; le texte revient ici ¦ Úplný nástroj: oblasti na obrázku, automatické čítanie písma, vyhľadávanie mien, verzie; text sa vráti sem ¦ Det fullstendige verktøyet: områder på bildet, automatisk lesing av skriften, navnesøk, versjoner; teksten kommer tilbake hit
 Ouvrir dans l’Atelier de transcription ¦ Otvoriť v Dielni prepisu ¦ Åpne i Transkripsjonsverkstedet
