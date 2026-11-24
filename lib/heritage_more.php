@@ -284,7 +284,7 @@ function historical_context(PDO $pdo): array
         $src = $c[7] ?? ($bundled[$title] ?? null);
         $crises[] = ['from' => $from, 'to' => $to, 'category' => $cat, 'title' => $title, 'scope' => $scope, 'description' => $desc, 'victims' => $victims,
             'excess' => $normal > 0 ? round(count($victims) / ($normal * $years), 1) : null, 'months' => $months, 'kids' => $kids, 'adults' => $adults, 'sure' => $sure,
-            'local' => $scope !== 'France', 'own' => !empty($c[6]), 'src' => (string) ($src['src'] ?? ''), 'url' => (string) ($src['url'] ?? '')];
+            'local' => $scope !== 'France', 'own' => (int) ($c[6] ?: 0), 'src' => (string) ($src['src'] ?? ''), 'url' => (string) ($src['url'] ?? '')];
     }
     // Années de forte mortalité de la famille sans explication connue
     $spikes = [];

@@ -28,6 +28,7 @@
     const pLink = p => p ? personLink(p.id, pname(p) + (p.birth_year || p.death_year ? ` (${p.birth_year || '?'}–${p.death_year || ''})` : '')) : '';
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
     const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro ? i18n(intro) : '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
+    const kiosk = () => document.body.classList.contains('is-kiosk');
     const tools = (...args) => ext.tools ? ext.tools(...args) : '';
     const refresh = () => ext.refreshView ? ext.refreshView() : null;
     const dialog = opts => ext.openDialog(opts);
@@ -192,7 +193,7 @@
         if (!isCurrent(token, 'listes')) return;
         const crises = data.crises || [];
         const hit = crises.filter(c => c.victims.length);
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Épidémies, guerres, hivers terribles', 'Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…).')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Épidémies, guerres, hivers terribles', 'Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation…', kiosk() ? '' : `<button type="button" class="button" data-crisis-new>${esc(i18n('＋ Nouvelle crise'))}</button>`)}
             <section class="maintenance-panel"><h3>Décès de la famille par année</h3>${ext.diagramCartesPlus2?.openCrises ? '<p><button type="button" class="button small secondary" data-cq-crisis-open>🗺 Sur la carte</button></p>' : ''}${deathsChart(data.by_year || {}, crises) || empty('Aucun décès daté.')}
                 <p class="h-legend">${Object.entries(CRISIS_ICONS).map(([k, i]) => `<span><i style="background:${CRISIS_COLORS[k]}"></i>${i} ${esc(k)}</span>`).join('')}</p></section>
             ${(data.spikes || []).length ? `<section class="maintenance-panel"><h3>Années noires de la famille</h3><table class="data-table"><thead><tr><th>Année</th><th>Décès</th><th>D’habitude</th><th>Explication possible</th></tr></thead><tbody>${data.spikes.map(s => `<tr><td><strong>${s.year}</strong></td><td>${s.deaths}</td><td>${fmt(s.usual, 1)} / an</td><td>${s.explained.length ? esc(s.explained.join(' ; ')) : '<span class="muted">aucune crise connue : épidémie locale ? (regarde l’âge des morts : enfants → variole, rougeole, dysenterie)</span>'}</td></tr>`).join('')}</tbody></table></section>` : ''}
@@ -206,7 +207,7 @@
         const causeHtml = v => { if (!v.cause) return '';
             const where = v.cause.from === 'act' ? i18n('lu dans l’acte « {t} »', {t: v.cause.act_title}) : v.cause.from === 'event' ? i18n('lu dans la note du décès') : i18n('noté sur le décès');
             return ` ${v.sure ? '<span class="h-badge is-ok">' + esc(i18n('cause : {c}', {c: v.cause.text})) + '</span>' : '<span class="h-badge">' + esc(i18n('cause : {c}', {c: v.cause.text})) + '</span>'} <small class="muted">${esc(where)}</small>${v.cause.from !== 'noted' && v.event_id ? ` <button type="button" class="link-button" data-crisis-cause="${v.event_id}" data-cause="${esc(v.cause.text)}">${esc(i18n('Noter comme cause du décès'))}</button>` : ''}`; };
-        const crisisHtml = c => `<article class="h-record h-crisis ${c.victims.length ? '' : 'is-quiet'}" style="--crisis:${CRISIS_COLORS[c.category] || '#999'}"><header><div><strong>${CRISIS_ICONS[c.category] || '•'} ${esc(c.title)}</strong>${c.own ? ` <span class="h-badge">${esc(i18n('Ajouté par toi'))}</span>` : ''} <small>${c.from}${c.to !== c.from ? '–' + c.to : ''} · ${esc(c.scope === 'France' ? i18n('toute la France') : i18n('régions : {list}', {list: c.scope}))}</small></div>${c.excess ? `<span class="h-badge ${c.excess >= 2 ? 'is-warn' : ''}">${c.excess >= 2 ? i18n('×{n} la mortalité habituelle', {n: fmt(c.excess, 1)}) : i18n('mortalité ordinaire')}</span>` : ''}</header>
+        const crisisHtml = c => `<article class="h-record h-crisis ${c.victims.length ? '' : 'is-quiet'}" style="--crisis:${CRISIS_COLORS[c.category] || '#999'}"><header><div><strong>${CRISIS_ICONS[c.category] || '•'} ${esc(c.title)}</strong>${c.own ? ` <span class="h-badge">${esc(i18n('Ajouté par toi'))}</span>${kiosk() ? '' : `<span class="h-crisis-acts"><button type="button" class="icon-button" data-crisis-edit="${c.own}" title="${esc(i18n('Modifier'))}" aria-label="${esc(i18n('Modifier cette crise'))}">✎</button><button type="button" class="icon-button" data-crisis-del="${c.own}" title="${esc(i18n('Supprimer'))}" aria-label="${esc(i18n('Supprimer cette crise'))}">🗑</button></span>`}` : ''} <small>${c.from}${c.to !== c.from ? '–' + c.to : ''} · ${esc(c.scope === 'France' ? i18n('toute la France') : i18n('régions : {list}', {list: c.scope}))}</small></div>${c.excess ? `<span class="h-badge ${c.excess >= 2 ? 'is-warn' : ''}">${c.excess >= 2 ? i18n('×{n} la mortalité habituelle', {n: fmt(c.excess, 1)}) : i18n('mortalité ordinaire')}</span>` : ''}</header>
                 <p>${esc(c.description)}</p>${c.src ? `<p class="muted"><small>${esc(i18n('Source'))} : ${c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">${esc(c.src)} ↗</a>` : esc(c.src)}</small></p>` : ''}${c.victims.length ? `<details ${c.victims.length <= 6 ? 'open' : ''}><summary>${i18n('{n} pendant cette période', {n: plural(c.victims.length, 'décès dans la famille', 'décès dans la famille')})}${c.sure ? ' · ' + esc(i18n('{n} sûrs (cause lue)', {n: c.sure})) : ''}</summary>
                     ${c.kids + c.adults ? `<p class="h-crisis-ages">${esc(i18n('Enfants de moins de 5 ans : {k} · plus âgés : {a}', {k: c.kids, a: c.adults}))}</p>` : ''}${seasonHtml(c)}
                     <ul>${c.victims.map(v => `<li>${pLink(v.person)} — ${esc(v.date)}${v.place ? ' ' + i18n('à {place}', {place: esc(v.place)}) : ''}${v.age !== null ? ` <small>(${i18n('{n} ans', {n: v.age})})</small>` : ''}${causeHtml(v)}</li>`).join('')}</ul></details>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👪</span><span class="empty-line-text">Aucun décès de la famille enregistré pendant cette crise.</span></p>'}</article>`;
@@ -236,6 +237,14 @@
         paint();
     };
 
+    // 🦠 mes crises à moi : « ＋ Nouvelle crise », ✎, 🗑 (la même fenêtre que « Le monde autour », sortes de crises seulement)
+    const crisisRelist = () => { if (A().state.module === 'listes' && A().state.listType === 'historical_context') A().renderList?.(); };
+    document.addEventListener('click', async e => {
+        if (!ext.world) return;
+        if (e.target.closest?.('[data-crisis-new]')) { e.preventDefault(); ext.world.editEvent(null, crisisRelist, {crisis: true}); return; }
+        const ed = e.target.closest?.('[data-crisis-edit]'); if (ed) { const r = await ext.world.ownRow(ed.dataset.crisisEdit); if (r) ext.world.editEvent(r, crisisRelist, {crisis: true}); return; }
+        const de = e.target.closest?.('[data-crisis-del]'); if (de) { ext.world.deleteEvent(Number(de.dataset.crisisDel), crisisRelist); }
+    });
     // 🦠 « Noter comme cause du décès » : la cause lue dans un acte, gardée sur le décès (↶ Annuler)
     document.addEventListener('click', async e => {
         const b = e.target.closest?.('[data-crisis-cause]'); if (!b) return;

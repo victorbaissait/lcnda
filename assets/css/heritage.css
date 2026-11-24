@@ -5953,3 +5953,4 @@ button.lb-acts-chip.is-unlinked{border-style:dashed}
 .h-crisis-ages { margin: 4px 0; font-size: .92rem; }
 .h-badge.is-ok { background: #e3f4e8; color: #1e6b3a; }
 :root[data-theme="dark"] .h-badge.is-ok { background: #1f3a29; color: #9fe0b4; }
+.h-crisis-acts { display: inline-flex; gap: 2px; margin-left: 6px; vertical-align: middle; }

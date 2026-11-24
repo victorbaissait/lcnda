@@ -41,7 +41,7 @@ function historical_crises(?PDO $pdo = null): array
             if (!in_array($e['cat'], ['épidémie', 'famine', 'hiver', 'guerre', 'crise'], true)) { continue; }
             // la portée : la commune (son département, faute de mieux pour les décès d'ailleurs), le département, la France
             $scope = $e['reach'] === 'monde' || $e['reach'] === 'france' ? 'France' : ($e['dept'] !== '' ? $e['dept'] : ($e['scope'] ?: 'France'));
-            $out[] = [(int) $e['from'], (int) $e['to'], (string) $e['cat'], (string) $e['title'], $scope, (string) $e['desc'], true, ['src' => (string) $e['src'], 'url' => (string) $e['url']]];
+            $out[] = [(int) $e['from'], (int) $e['to'], (string) $e['cat'], (string) $e['title'], $scope, (string) $e['desc'], (int) $e['own'], ['src' => (string) $e['src'], 'url' => (string) $e['url']]];
         }
     }
     return $out;

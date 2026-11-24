@@ -104,6 +104,26 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /Cause du décès notée/.test(x.textContent)).querySelector('button').click()); await sleep(800);
             assert.strictEqual(crisis(await api('historical_context'), 'Choléra de 1832 à Paris').victims.find(v => v.person.id === ID.pierre).cause.from, 'act', '↶ Annuler');
         });
+        await t('écran : « ＋ Nouvelle crise » (sortes de crises seulement), elle apparaît ; ✎ la modifie ; 🗑 la supprime (↶ Annuler)', async () => {
+            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'historical_context'; A.setModule('listes'); });
+            await p.waitForSelector('[data-crisis-new]', {timeout: 20000});
+            await p.click('[data-crisis-new]'); await p.waitForSelector('dialog[open] select[name="category"]', {timeout: 5000});
+            const cats = await p.$$eval('dialog[open] select[name="category"] option', o => o.map(x => x.value));
+            assert.deepStrictEqual(cats.sort(), ['crise', 'famine', 'guerre', 'hiver', 'épidémie'].sort()); assert.strictEqual(await p.inputValue('dialog[open] select[name="category"]'), 'épidémie');
+            await p.fill('dialog[open] input[name="title"]', 'Dysenterie de Tulle'); await p.fill('dialog[open] input[name="from_year"]', '1832');
+            await p.selectOption('dialog[open] select[name="reach"]', 'france');
+            await p.evaluate(() => document.querySelector('dialog[open] form').requestSubmit());
+            await p.waitForFunction(() => [...document.querySelectorAll('.h-crisis')].some(a => /Dysenterie de Tulle/.test(a.textContent)), null, {timeout: 10000});
+            const own = crisis(await api('historical_context'), 'Dysenterie de Tulle'); assert.ok(own.own > 0 && own.victims.length >= 2, JSON.stringify(own).slice(0, 200));
+            await p.evaluate(id => document.querySelector(`[data-crisis-edit="${id}"]`).click(), own.own); await p.waitForSelector('dialog[open] input[name="title"]', {timeout: 5000});
+            assert.strictEqual(await p.inputValue('dialog[open] input[name="title"]'), 'Dysenterie de Tulle');
+            await p.fill('dialog[open] input[name="title"]', 'Dysenterie de 1832'); await p.evaluate(() => document.querySelector('dialog[open] form').requestSubmit());
+            await p.waitForFunction(() => [...document.querySelectorAll('.h-crisis')].some(a => /Dysenterie de 1832/.test(a.textContent)), null, {timeout: 10000});
+            await p.evaluate(id => document.querySelector(`[data-crisis-del="${id}"]`).click(), own.own);
+            await p.waitForFunction(() => ![...document.querySelectorAll('.h-crisis')].some(a => /Dysenterie de 1832/.test(a.textContent)), null, {timeout: 10000});
+            await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /supprimé/.test(x.textContent)).querySelector('button').click());
+            await p.waitForFunction(() => [...document.querySelectorAll('.h-crisis')].some(a => /Dysenterie de 1832/.test(a.textContent)), null, {timeout: 10000});
+        });
         assert.deepStrictEqual(errs, [], 'erreurs JS : ' + errs.join(' | '));
     } finally { await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true}); }
     console.log(fails ? `${fails} échec(s)` : 'tout est bon'); process.exit(fails ? 1 : 0);
