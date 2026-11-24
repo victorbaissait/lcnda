@@ -187,7 +187,8 @@
             <div class="ong-modebar"><div class="segmented ong-mode is-grid" role="tablist" aria-label="Façon de ranger">${MODES.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>
             <button type="button" class="icon-button small ong-opts" data-ong-under aria-label="Sous le titre" title="Sous le titre">⋯</button></div>
             <div class="ong-bar" data-ong-bar></div>
-            <div class="ong-letters" data-ong-letters ${mode === 'folders' ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div></div>`;
+            <div class="ong-letters" data-ong-letters ${mode === 'folders' ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div>
+            ${mode === 'recueils' ? `<div class="ong-allrec"><button type="button" class="button secondary" data-ong-allrec title="${esc(T('Les recueils en vignettes, à droite, sans quitter Documents'))}">📚 ${esc(T('Voir la liste des recueils'))}</button></div>` : ''}</div>`;
         footer.innerHTML = '<span data-ong-count></span>';
         bar = UI().listBar ? UI().listBar({key: BAR_KEY, search: {placeholder: 'Chercher… (titre, cote, personne, lieu, année)'}, filters: filters(), sort: {options: SORT_OPTS, value: 'az'},
             onChange: () => { shown = STEP; paintList(); paintWorkspaceList(); }}) : null;
@@ -199,6 +200,7 @@
             const o = e.target.closest('[data-ong-under]'); if (o) { underMenu(o); return; }
             const l = e.target.closest('[data-ong-letter]'); if (l && !l.disabled) { jumpTo(l.dataset.ongLetter); return; }
             const fo = e.target.closest('[data-ong-fold]'); if (fo) { toggleFold(Number(fo.dataset.ongFold)); return; }
+            if (e.target.closest('[data-ong-allrec]')) { showRec(''); return; } // 📚 la liste des recueils à droite (le document ouvert se ferme)
             const rh = e.target.closest('[data-ong-rec]'); if (rh) { showRec(rh.dataset.ongRec); return; } // 📚 ses documents à droite (« ↗ Ouvrir le recueil » y est)
             const r = e.target.closest('[data-ong-doc]'); if (r) { if (pick.on && !cur) { togglePick(Number(r.dataset.ongDoc)); return; } select(Number(r.dataset.ongDoc)); return; }
             const more = e.target.closest('[data-ong-more]'); if (more) { shown += STEP; paintList(); }

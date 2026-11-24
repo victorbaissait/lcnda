@@ -149,6 +149,18 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_APP.setModule('documents')); await p.waitForSelector('#sidebar-content [data-ong-mode]');
             await p.click('#workspace [data-ong-recbar] [data-ong-wsrec=""]').catch(() => {});
         });
+        await t('📚 en bas de la colonne : « Voir la liste des recueils » ferme le document ouvert et montre les recueils à droite, dans Documents', async () => {
+            await p.waitForSelector('#sidebar-content [data-ong-allrec]');
+            await p.click('#sidebar-content .ong-list [data-ong-doc="5"]'); await p.waitForFunction(() => /#documents\/5/.test(location.hash), null, {timeout: 10000});
+            assert.ok(await p.isVisible('#sidebar-content [data-ong-allrec]'), 'le bouton est visible en bas');
+            await p.click('#sidebar-content [data-ong-allrec]');
+            await p.waitForSelector('#workspace [data-ong-reccard]', {timeout: 15000});
+            assert.equal(await p.evaluate(() => window.LCNDA_APP.state.module), 'documents', 'on reste dans Documents');
+            assert.equal(await p.evaluate(() => location.hash), '#documents');
+            await p.click('#sidebar-content [data-ong-mode="az"]'); await sleep(300);
+            assert.equal(await p.$('#sidebar-content [data-ong-allrec]'), null, 'seulement en mode Recueils');
+            await p.click('#sidebar-content [data-ong-mode="recueils"]'); await p.waitForSelector('#sidebar-content [data-ong-allrec]');
+        });
         await t('chercher par recueil : son nom dans « Chercher… », et le filtre « Recueil »', async () => {
             await p.click('#sidebar-content [data-ong-mode="az"]');
             assert.deepEqual((await withFilters({}, 'sancoins registre')).sort(), [1, 2, 7, 8]);
