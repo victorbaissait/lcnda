@@ -101,7 +101,7 @@
         return `<svg viewBox="0 0 100 100" class="hz-svg" role="img" aria-label="${pad(p.h)}:${pad(p.mi)}">${shapeEl} fill="${c.face}" stroke="${c.ring}" stroke-width="2.5"/>${marks}
             ${hand(ah, 22, 4, c.hands)}${hand(am, 33, 2.6, c.hands)}${c.seconds ? hand(as, 37, 1, c.second, 9) : ''}<circle cx="50" cy="50" r="2.6" fill="${c.seconds ? c.second : c.hands}"/></svg>`;
     }
-    const api = {CITIES, partsAt, offsetOf, sunUp, clockSvg, SET};
+    const api = {CITIES, partsAt, offsetOf, sunUp, clockSvg, SET, tzOf: (...a) => tzOf(...a), COUNTRY_TZ: null};
     if (typeof module === 'object' && module.exports) { module.exports = api; return; }
 
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {}, A = () => root.LCNDA_APP;
@@ -147,17 +147,100 @@
     /** un ensemble d'horloges (widget, liste) ; data-hz-style garde le style pour la mise à jour */
     function clocksHtml(cities, st) { setTimeout(startTick, 0); return `<div class="hz-set hz-${esc(st.layout)}" data-hz-style="${esc(JSON.stringify(st))}" style="--hz-bg:${esc(st.bg)}">${cities.map(c => clockHtml(c, st)).join('')}</div>`; }
 
-    /* ── 🗺 la carte des fuseaux : bandes de 15°, la nuit en grisé, les villes ── */
-    async function mapHtml(cities, t = Date.now()) {
+
+    /* ── 🗺 l'heure légale de chaque pays (et des régions des grands pays à plusieurs fuseaux) ── */
+    const COUNTRY_TZ = {AD: 'Europe/Andorra', AE: 'Asia/Dubai', AF: 'Asia/Kabul', AG: 'America/Antigua', AI: 'America/Anguilla', AL: 'Europe/Tirane', AM: 'Asia/Yerevan', AO: 'Africa/Luanda', AQ: '', AR: 'America/Argentina/Buenos_Aires',
+        AS: 'Pacific/Pago_Pago', AT: 'Europe/Vienna', AW: 'America/Aruba', AX: 'Europe/Mariehamn', AZ: 'Asia/Baku', BA: 'Europe/Sarajevo', BB: 'America/Barbados', BD: 'Asia/Dhaka', BE: 'Europe/Brussels', BF: 'Africa/Ouagadougou',
+        BG: 'Europe/Sofia', BH: 'Asia/Bahrain', BI: 'Africa/Bujumbura', BJ: 'Africa/Porto-Novo', BL: 'America/St_Barthelemy', BM: 'Atlantic/Bermuda', BN: 'Asia/Brunei', BO: 'America/La_Paz', BS: 'America/Nassau', BT: 'Asia/Thimphu',
+        BW: 'Africa/Gaborone', BY: 'Europe/Minsk', BZ: 'America/Belize', CF: 'Africa/Bangui', CG: 'Africa/Brazzaville', CH: 'Europe/Zurich', CI: 'Africa/Abidjan', CK: 'Pacific/Rarotonga', CM: 'Africa/Douala', CN: 'Asia/Shanghai',
+        CO: 'America/Bogota', CR: 'America/Costa_Rica', CU: 'America/Havana', CV: 'Atlantic/Cape_Verde', CW: 'America/Curacao', CY: 'Asia/Nicosia', CZ: 'Europe/Prague', DE: 'Europe/Berlin', DJ: 'Africa/Djibouti', DK: 'Europe/Copenhagen',
+        DM: 'America/Dominica', DO: 'America/Santo_Domingo', DZ: 'Africa/Algiers', EE: 'Europe/Tallinn', EG: 'Africa/Cairo', EH: 'Africa/El_Aaiun', ER: 'Africa/Asmara', ET: 'Africa/Addis_Ababa', FI: 'Europe/Helsinki', FJ: 'Pacific/Fiji',
+        FK: 'Atlantic/Stanley', FO: 'Atlantic/Faroe', GA: 'Africa/Libreville', GB: 'Europe/London', GD: 'America/Grenada', GE: 'Asia/Tbilisi', GG: 'Europe/Guernsey', GH: 'Africa/Accra', GL: 'America/Nuuk', GM: 'Africa/Banjul',
+        GN: 'Africa/Conakry', GQ: 'Africa/Malabo', GR: 'Europe/Athens', GS: 'Atlantic/South_Georgia', GT: 'America/Guatemala', GU: 'Pacific/Guam', GW: 'Africa/Bissau', GY: 'America/Guyana', HK: 'Asia/Hong_Kong', HM: '',
+        HN: 'America/Tegucigalpa', HR: 'Europe/Zagreb', HT: 'America/Port-au-Prince', HU: 'Europe/Budapest', IE: 'Europe/Dublin', IL: 'Asia/Jerusalem', IM: 'Europe/Isle_of_Man', IN: 'Asia/Kolkata', IO: 'Indian/Chagos', IQ: 'Asia/Baghdad',
+        IR: 'Asia/Tehran', IS: 'Atlantic/Reykjavik', IT: 'Europe/Rome', JE: 'Europe/Jersey', JM: 'America/Jamaica', JO: 'Asia/Amman', JP: 'Asia/Tokyo', KE: 'Africa/Nairobi', KG: 'Asia/Bishkek', KH: 'Asia/Phnom_Penh',
+        KM: 'Indian/Comoro', KN: 'America/St_Kitts', KP: 'Asia/Pyongyang', KR: 'Asia/Seoul', KW: 'Asia/Kuwait', KY: 'America/Cayman', KZ: 'Asia/Almaty', LA: 'Asia/Vientiane', LB: 'Asia/Beirut', LC: 'America/St_Lucia',
+        LI: 'Europe/Vaduz', LK: 'Asia/Colombo', LR: 'Africa/Monrovia', LS: 'Africa/Maseru', LT: 'Europe/Vilnius', LU: 'Europe/Luxembourg', LV: 'Europe/Riga', LY: 'Africa/Tripoli', MA: 'Africa/Casablanca', MC: 'Europe/Monaco',
+        MD: 'Europe/Chisinau', ME: 'Europe/Podgorica', MF: 'America/Marigot', MG: 'Indian/Antananarivo', MH: 'Pacific/Majuro', MK: 'Europe/Skopje', ML: 'Africa/Bamako', MM: 'Asia/Yangon', MO: 'Asia/Macau', MP: 'Pacific/Saipan',
+        MR: 'Africa/Nouakchott', MS: 'America/Montserrat', MT: 'Europe/Malta', MU: 'Indian/Mauritius', MV: 'Indian/Maldives', MW: 'Africa/Blantyre', MY: 'Asia/Kuala_Lumpur', MZ: 'Africa/Maputo', NA: 'Africa/Windhoek', NC: 'Pacific/Noumea',
+        NE: 'Africa/Niamey', NF: 'Pacific/Norfolk', NG: 'Africa/Lagos', NI: 'America/Managua', NL: 'Europe/Amsterdam', NO: 'Europe/Oslo', NP: 'Asia/Kathmandu', NR: 'Pacific/Nauru', NU: 'Pacific/Niue', NZ: 'Pacific/Auckland',
+        OM: 'Asia/Muscat', PA: 'America/Panama', PE: 'America/Lima', PG: 'Pacific/Port_Moresby', PH: 'Asia/Manila', PK: 'Asia/Karachi', PL: 'Europe/Warsaw', PM: 'America/Miquelon', PN: 'Pacific/Pitcairn', PR: 'America/Puerto_Rico',
+        PS: 'Asia/Gaza', PW: 'Pacific/Palau', PY: 'America/Asuncion', QA: 'Asia/Qatar', RO: 'Europe/Bucharest', RS: 'Europe/Belgrade', RW: 'Africa/Kigali', SA: 'Asia/Riyadh', SB: 'Pacific/Guadalcanal', SC: 'Indian/Mahe',
+        SD: 'Africa/Khartoum', SE: 'Europe/Stockholm', SG: 'Asia/Singapore', SH: 'Atlantic/St_Helena', SI: 'Europe/Ljubljana', SK: 'Europe/Bratislava', SL: 'Africa/Freetown', SM: 'Europe/San_Marino', SN: 'Africa/Dakar', SO: 'Africa/Mogadishu',
+        SR: 'America/Paramaribo', SS: 'Africa/Juba', ST: 'Africa/Sao_Tome', SV: 'America/El_Salvador', SX: 'America/Lower_Princes', SY: 'Asia/Damascus', SZ: 'Africa/Mbabane', TC: 'America/Grand_Turk', TD: 'Africa/Ndjamena', TF: 'Indian/Kerguelen',
+        TG: 'Africa/Lome', TH: 'Asia/Bangkok', TJ: 'Asia/Dushanbe', TL: 'Asia/Dili', TM: 'Asia/Ashgabat', TN: 'Africa/Tunis', TO: 'Pacific/Tongatapu', TR: 'Europe/Istanbul', TT: 'America/Port_of_Spain', TW: 'Asia/Taipei',
+        TZ: 'Africa/Dar_es_Salaam', UA: 'Europe/Kyiv', UG: 'Africa/Kampala', UY: 'America/Montevideo', UZ: 'Asia/Tashkent', VA: 'Europe/Vatican', VC: 'America/St_Vincent', VE: 'America/Caracas', VG: 'America/Tortola', VI: 'America/St_Thomas',
+        VN: 'Asia/Ho_Chi_Minh', VU: 'Pacific/Efate', WF: 'Pacific/Wallis', WS: 'Pacific/Apia', XK: 'Europe/Belgrade', YE: 'Asia/Aden', ZA: 'Africa/Johannesburg', ZM: 'Africa/Lusaka', ZW: 'Africa/Harare',
+        'x-n-cyprus': 'Asia/Famagusta', 'x-somaliland': 'Africa/Mogadishu', 'x-siachen-glacier': 'Asia/Kolkata', 'x-indian-ocean-ter': 'Indian/Christmas', KI: 'Pacific/Tarawa', FM: 'Pacific/Pohnpei', PF: 'Pacific/Tahiti', TV: 'Pacific/Funafuti'};
+    /** le fuseau d'un morceau de pays (lon, lat : le milieu du morceau) ; les grands pays sont découpés par régions */
+    function tzOf(iso, lon, lat) {
+        const by = (cuts, last) => { for (const [x, z] of cuts) if (lon < x) return z; return last; };
+        switch (iso) {
+            case 'US': if (lat > 51 && lon < -129) return 'America/Anchorage'; if (lat < 25 && lon < -150) return 'Pacific/Honolulu'; return by([[-114.5, 'America/Los_Angeles'], [-101, 'America/Denver'], [-86.5, 'America/Chicago']], 'America/New_York');
+            case 'CA': return by([[-120, 'America/Vancouver'], [-102, 'America/Edmonton'], [-90, 'America/Winnipeg'], [-67, 'America/Toronto'], [-59, 'America/Halifax']], 'America/St_Johns');
+            case 'MX': return by([[-114.5, 'America/Tijuana'], [-105.5, 'America/Mazatlan']], 'America/Mexico_City');
+            case 'BR': if (lon < -66) return 'America/Rio_Branco'; if (lon < -54 && lat > -18) return 'America/Manaus'; if (lon > -34) return 'America/Noronha'; return 'America/Sao_Paulo';
+            case 'RU': if (lon < 23) return 'Europe/Kaliningrad'; if (lon > 128 && lon < 142 && lat < 55) return 'Asia/Vladivostok'; if (lon > 142 && lat < 50) return 'Asia/Sakhalin'; return by([[48, 'Europe/Moscow'], [54, 'Europe/Samara'], [66, 'Asia/Yekaterinburg'], [82, 'Asia/Omsk'], [88, 'Asia/Novosibirsk'], [106, 'Asia/Krasnoyarsk'], [120, 'Asia/Irkutsk'], [135, 'Asia/Yakutsk'], [150, 'Asia/Vladivostok'], [160, 'Asia/Magadan']], 'Asia/Kamchatka');
+            case 'AU': if (lon < 129) return 'Australia/Perth'; if (lon < 141) return lat > -26 ? 'Australia/Darwin' : 'Australia/Adelaide'; if (lat < -39.5) return 'Australia/Hobart'; return lat > -29 ? 'Australia/Brisbane' : 'Australia/Sydney';
+            case 'ID': return by([[115, 'Asia/Jakarta'], [126, 'Asia/Makassar']], 'Asia/Jayapura');
+            case 'CD': return lon < 22 ? 'Africa/Kinshasa' : 'Africa/Lubumbashi';
+            case 'MN': return lon < 99 ? 'Asia/Hovd' : 'Asia/Ulaanbaatar';
+            case 'CL': return lon < -100 ? 'Pacific/Easter' : 'America/Santiago';
+            case 'EC': return lon < -85 ? 'Pacific/Galapagos' : 'America/Guayaquil';
+            case 'PT': return lon < -20 ? 'Atlantic/Azores' : lon < -14 ? 'Atlantic/Madeira' : 'Europe/Lisbon';
+            case 'ES': return lon < -12 ? 'Atlantic/Canary' : 'Europe/Madrid';
+            case 'FR': if (lon < -100) return 'Pacific/Tahiti'; if (lon < -40) return lat > 10 ? 'America/Martinique' : 'America/Cayenne'; if (lon > 160) return 'Pacific/Noumea'; if (lon > 50) return 'Indian/Reunion'; if (lon > 42) return 'Indian/Mayotte'; return 'Europe/Paris';
+            case 'NL': return lon < -50 ? 'America/Curacao' : 'Europe/Amsterdam';
+            case 'NZ': return lon < 0 || lon > 179 ? 'Pacific/Chatham' : 'Pacific/Auckland';
+            case 'KI': return lon < -160 ? (lon < -165 ? 'Pacific/Kanton' : 'Pacific/Kiritimati') : 'Pacific/Tarawa';
+            case 'FM': return lon < 150 ? 'Pacific/Chuuk' : lon > 160 ? 'Pacific/Kosrae' : 'Pacific/Pohnpei';
+            case 'PF': return lon > -141 ? 'Pacific/Marquesas' : 'Pacific/Tahiti';
+            case 'GL': return lon > -25 ? 'America/Scoresbysund' : 'America/Nuuk';
+            default: return COUNTRY_TZ[iso] || '';
+        }
+    }
+    const OFF_COLORS = ['#3b4cc0', '#4461c8', '#4f77d0', '#5a8cd6', '#68a0da', '#78b2dc', '#8ac2dc', '#9dcfd8', '#b1d9d0', '#c4e0c5', '#d6e5b6', '#e6e7a5', '#f3e494', '#f8d983', '#f9ca73', '#f6b866', '#f0a35b', '#e88d52', '#de764a', '#d15f44', '#c2483e', '#b13339', '#9e2134', '#88122e', '#710a28', '#5a0622', '#43031c'];
+    const offColor = min => OFF_COLORS[Math.max(0, Math.min(OFF_COLORS.length - 1, Math.round(min / 60) + 12))];
+
+    /* ── 🗺 la carte des fuseaux : par pays et régions (l'heure légale, été compris) ou en bandes de 15°, la nuit en grisé, les villes ── */
+    const MAPMODE_KEY = 'genealogie-horloges-carte';
+    async function mapHtml(cities, t = Date.now(), mode = ls.get(MAPMODE_KEY, 'real')) {
         const W = 960, H = 470, X = lon => (lon + 180) / 360 * W, Y = lat => (90 - lat) / 180 * H;
-        let land = '';
-        try { const G = await ext.diagramCartes?.load('monde-50m'); land = (G?.zones || []).map(z => `<path d="${z.polys.map(pp => pp.map(r => { let s = ''; for (let i = 0; i < r.length; i += 2) s += (i ? 'L' : 'M') + X(r[i]).toFixed(1) + ' ' + Y(r[i + 1]).toFixed(1); return s + 'Z'; }).join('')).join('')}"/>`).join(''); } catch (_) {}
-        const bands = Array.from({length: 25}, (_, i) => { const x0 = X(-187.5 + i * 15), off = i - 12; return `<rect x="${x0.toFixed(1)}" y="0" width="${(W / 24).toFixed(1)}" height="${H}" class="${i % 2 ? 'hz-b1' : 'hz-b2'}"/><text x="${Math.min(W - 10, Math.max(10, x0 + W / 48)).toFixed(1)}" y="14" class="hz-bl">${off > 0 ? '+' : ''}${off}</text>`; }).join('');
-        // la nuit : chaque colonne de 2°, du haut au bas, là où le soleil est couché
+        // un contour qui passe la ligne de changement de date (-180 ↔ 180) : on lève le crayon au lieu de traverser toute la carte
+        const ring = r => { let s = '', jumped = false; for (let i = 0; i < r.length; i += 2) { const jump = i && Math.abs(r[i] - r[i - 2]) > 180; if (jump) jumped = true; s += (i && !jump ? 'L' : 'M') + X(r[i]).toFixed(1) + ' ' + Y(r[i + 1]).toFixed(1); } return jumped ? s : s + 'Z'; };
+        let land = '', used = new Map(), clipDefs = '', clipSeq = 0;
+        try {
+            const G = await ext.diagramCartes?.load('monde-50m');
+            land = (G?.zones || []).map(z => {
+                if (mode !== 'real') return `<path d="${z.polys.map(pp => pp.map(ring).join('')).join('')}"/>`;
+                // chaque morceau du pays (île, outre-mer, région d'un grand pays) avec son fuseau
+                const groups = new Map();
+                z.polys.forEach(pp => { const r = pp[0]; if (!r?.length) return; let a = Infinity, b = -Infinity, c = Infinity, d = -Infinity; for (let i = 0; i < r.length; i += 2) { a = Math.min(a, r[i]); b = Math.max(b, r[i]); c = Math.min(c, r[i + 1]); d = Math.max(d, r[i + 1]); }
+                    const big = ['US', 'CA', 'RU', 'BR', 'AU', 'MX', 'ID', 'CD', 'MN', 'GL'].includes(z.id) && b - a > 8;
+                    if (big && b - a > 300) { a = Math.min(...Array.from({length: r.length / 2}, (_, i) => r[i * 2]).filter(v => v > 0), a > 0 ? a : 19); b = 180; } // la Russie : on dessine ses carrés de 19° à 180° (la pointe passée la ligne garde l'heure du Kamtchatka)
+                    if (!big) { const tz = tzOf(z.id, (a + b) / 2, (c + d) / 2); if (!groups.has(tz)) groups.set(tz, []); groups.get(tz).push(pp.map(ring).join('')); return; }
+                    // un grand morceau à plusieurs fuseaux : découpé en tranches de longitude (clipPath)
+                    const dd = pp.map(ring).join(''), byTz = new Map();
+                    // des carrés de 2° (longitude × latitude), rangés par fuseau ; les carrés voisins d'une même ligne sont réunis
+                    for (let y = Math.floor(c / 2) * 2; y < d; y += 2) for (let x = Math.floor(a / 2) * 2; x < b; x += 2) { const tz = tzOf(z.id, x + 1, y + 1); if (!byTz.has(tz)) byTz.set(tz, []); const L = byTz.get(tz), last = L[L.length - 1]; if (last && last[2] === y && last[1] === x) last[1] = x + 2; else L.push([x, x + 2, y]); }
+                    byTz.forEach((ranges, tz) => { const id = 'hzc' + (++clipSeq); clipDefs += `<clipPath id="${id}">${ranges.map(([x0, x1, y0]) => `<rect x="${(X(x0) - .3).toFixed(1)}" y="${(Y(y0 + 2) - .3).toFixed(1)}" width="${(X(x1) - X(x0) + .6).toFixed(1)}" height="${(Y(y0) - Y(y0 + 2) + .6).toFixed(1)}"/>`).join('')}</clipPath>`;
+                        if (!groups.has(tz)) groups.set(tz, []); groups.get(tz).push({clip: id, d: dd}); });
+                });
+                return [...groups].map(([tz, ds]) => { const off = tz && SET(tz) ? offsetOf(tz, t) : null; if (off !== null) used.set(off, (used.get(off) || 0) + 1);
+                    const fill = off === null ? '#e6e3da' : offColor(off), title = `<title>${esc(z.name)}${tz ? ` — ${esc(tz)} (UTC${off >= 0 ? '+' : '−'}${Math.floor(Math.abs(off) / 60)}${Math.abs(off) % 60 ? ':' + pad(Math.abs(off) % 60) : ''})` : ''}</title>`;
+                    const plain = ds.filter(x => typeof x === 'string').join(''), clipped = ds.filter(x => typeof x !== 'string');
+                    return (plain ? `<path d="${plain}" style="fill:${fill}" data-hz-off="${off ?? ''}">${title}</path>` : '') + clipped.map(cd => `<path d="${cd.d}" style="fill:${fill}" data-hz-off="${off ?? ''}" clip-path="url(#${cd.clip})">${title}</path>`).join(''); }).join('');
+            }).join('');
+        } catch (_) {}
+        const clips = clipDefs;
+        const bands = mode === 'real' ? '' : Array.from({length: 25}, (_, i) => { const x0 = X(-187.5 + i * 15), off = i - 12; return `<rect x="${x0.toFixed(1)}" y="0" width="${(W / 24).toFixed(1)}" height="${H}" class="${i % 2 ? 'hz-b1' : 'hz-b2'}"/><text x="${Math.min(W - 10, Math.max(10, x0 + W / 48)).toFixed(1)}" y="14" class="hz-bl">${off > 0 ? '+' : ''}${off}</text>`; }).join('');
         let night = ''; for (let lon = -180; lon < 180; lon += 2) { let y0 = null; for (let lat = 88; lat >= -90; lat -= 2) { const n = sunUp(lat, lon + 1, t) === false; if (n && y0 === null) y0 = lat; if ((!n || lat === -90) && y0 !== null) { night += `M${X(lon).toFixed(1)} ${Y(y0).toFixed(1)}h${(W / 180 + .8).toFixed(1)}V${Y(n ? lat - 2 : lat).toFixed(1)}h-${(W / 180 + .8).toFixed(1)}Z`; y0 = null; } } }
         const dots = cities.filter(c => Number.isFinite(c.lat)).map(c => { const p = partsAt(c.tz, t); return `<g class="hz-dot"><circle cx="${X(c.lon).toFixed(1)}" cy="${Y(c.lat).toFixed(1)}" r="4"/><text x="${(X(c.lon) + (X(c.lon) > W - 150 ? -6 : 6)).toFixed(1)}" y="${(Y(c.lat) + 4).toFixed(1)}" text-anchor="${X(c.lon) > W - 150 ? 'end' : 'start'}">${esc(c.name)} ${pad(p.h)}:${pad(p.mi)}</text></g>`; }).join('');
-        return `<svg viewBox="0 0 ${W} ${H}" class="hz-map" role="img" aria-label="${esc(T('Carte des fuseaux horaires'))}"><rect width="${W}" height="${H}" class="hz-sea"/>${bands}<g class="hz-land">${land}</g><path class="hz-night" d="${night}"/>${dots}</svg>
-            <p class="muted hz-note">${esc(T('Les bandes montrent les fuseaux théoriques (15° chacun) ; l’heure réelle de chaque pays peut en différer (heure légale, heure d’été).'))}</p>`;
+        const fmtOff = o => `${o >= 0 ? '+' : '−'}${Math.floor(Math.abs(o) / 60)}${Math.abs(o) % 60 ? ':' + pad(Math.abs(o) % 60) : ''}`;
+        const legend = mode === 'real' ? `<div class="hz-legend">${[...used.keys()].sort((a, b) => a - b).map(o => `<span><i style="background:${offColor(o)}"></i>UTC${fmtOff(o)}</span>`).join('')}</div>` : '';
+        const seg = `<div class="segmented hz-mapmode">${[['real', T('Par pays et régions (heure légale)')], ['bands', T('Fuseaux théoriques (bandes de 15°)')]].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-hz-mapmode="${k}" aria-pressed="${mode === k}">${esc(l)}</button>`).join('')}</div>`;
+        return `${seg}<svg viewBox="0 0 ${W} ${H}" class="hz-map is-${mode}" role="img" aria-label="${esc(T('Carte des fuseaux horaires'))}"><defs>${clips}</defs><rect width="${W}" height="${H}" class="hz-sea"/>${bands}<g class="hz-land">${land}</g><path class="hz-night" d="${night}"/>${dots}</svg>${legend}
+            <p class="muted hz-note">${esc(mode === 'real' ? T('Chaque pays à son heure légale d’aujourd’hui (heure d’été comprise) ; les grands pays sont découpés par régions, de façon approchée. Survole un pays pour son fuseau.') : T('Les bandes montrent les fuseaux théoriques (15° chacun) ; l’heure réelle de chaque pays peut en différer (heure légale, heure d’été).'))}</p>`;
     }
 
     /* ── 🔁 comparer : à telle heure ici, quelle heure ailleurs ── */
@@ -216,6 +299,7 @@
         const again = () => render(A().state?.workspaceToken);
         ws.querySelector('.hz-page').addEventListener('click', e => {
             const v = e.target.closest('[data-hz-view]'); if (v) { ls.set(VIEW_KEY, v.dataset.hzView); return again(); }
+            const mm = e.target.closest('[data-hz-mapmode]'); if (mm) { ls.set(MAPMODE_KEY, mm.dataset.hzMapmode); return again(); }
             if (e.target.closest('[data-hz-add]')) return addDialog(again);
             if (e.target.closest('[data-hz-style-open]')) return styleDialog(null, again);
             const th = e.target.closest('.hz-cmp thead th'); if (th && /^\d+$/.test(th.textContent)) { cmpHour = Number(th.textContent); return again(); }
@@ -316,7 +400,8 @@
 .hz-cmp{border-collapse:collapse;font-size:12.5px;width:100%;min-width:760px}.hz-cmp th,.hz-cmp td{border:1px solid var(--line,#e4e6ea);padding:4px 3px;text-align:center}.hz-cmp thead th{cursor:pointer}.hz-cmp tbody th{text-align:left;white-space:nowrap}.hz-cmp tbody th small{display:block;color:var(--muted,#666);font-weight:400}
 .hz-cmp .hz-day{background:#e2f0cb}.hz-cmp .hz-mid{background:#fff1d6}.hz-cmp .hz-nite{background:#d9dde6;color:#555}.hz-cmp .is-on{outline:2px solid var(--accent,#055dff);outline-offset:-2px;font-weight:800}
 .hz-body{overflow-x:auto}.hz-map{width:100%;height:auto;display:block;border:2px solid var(--ink,#111)}.hz-sea{fill:#dfe8ee}.hz-b1{fill:rgba(5,93,255,.05)}.hz-b2{fill:rgba(5,93,255,.11)}.hz-bl{font:10px system-ui;fill:#335;text-anchor:middle}
-.hz-land path{fill:#f1eee6;stroke:#b9b2a2;stroke-width:.4}.hz-night{fill:rgba(20,25,45,.32)}.hz-dot circle{fill:#c0392b;stroke:#fff;stroke-width:1.5}.hz-dot text{font:600 11px system-ui;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:3px}
+.hz-land path{fill:#f1eee6;stroke:#b9b2a2;stroke-width:.4}.hz-map.is-real .hz-land path{stroke:#ffffff;stroke-width:.35}.hz-mapmode{margin:0 0 8px}
+.hz-legend{display:flex;flex-wrap:wrap;gap:4px 10px;margin:6px 0 0;font-size:12px}.hz-legend span{display:inline-flex;align-items:center;gap:4px}.hz-legend i{width:14px;height:10px;display:inline-block;border:1px solid rgba(0,0,0,.2)}.hz-night{fill:rgba(20,25,45,.32)}.hz-dot circle{fill:#c0392b;stroke:#fff;stroke-width:1.5}.hz-dot text{font:600 11px system-ui;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:3px}
 .hz-note{font-size:12.5px;margin:6px 0 0}
 .hz-add{width:min(620px,96vw)}.hz-add [data-hz-q]{width:100%}.hz-res{list-style:none;padding:0;margin:8px 0;max-height:46vh;overflow:auto}.hz-pick{display:block;width:100%;text-align:left;padding:6px 8px;border:0;border-bottom:1px solid var(--line,#e4e6ea);background:none;cursor:pointer}.hz-pick:hover{background:var(--surface-2,#f4f5f7)}
 .hz-style{width:min(980px,96vw)}.hz-sgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.hz-sform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px}.hz-sform label{display:grid;gap:3px;font-size:13px}.hz-sform .ui-toggle{display:flex}

@@ -81,6 +81,14 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual(row, '3');
             await p.click('.hz-page [data-hz-view="map"]'); await p.waitForSelector('.hz-map', {timeout: 15000});
             assert.ok(await p.evaluate(() => document.querySelectorAll('.hz-map .hz-dot').length >= 5 && document.querySelectorAll('.hz-map .hz-land path').length > 50 && (document.querySelector('.hz-map .hz-night')?.getAttribute('d') || '').split('Z').length > 10));
+            // par pays et régions : la France à +1 ou +2, le Québec et New York pareils, la Californie 3 h plus tôt, l'Inde à +5 h 30
+            const off = await p.evaluate(() => { const H = window.LCNDA_EXT.horloges, t = Date.UTC(2026, 0, 15, 12); return {fr: H.offsetOf(H.tzOf('FR', 2, 47), t), gf: H.tzOf('FR', -53, 4), re: H.tzOf('FR', 55.5, -21), ny: H.tzOf('US', -74, 41), la: H.tzOf('US', -118, 34), ak: H.tzOf('US', -150, 61), qc: H.tzOf('CA', -71, 47), ru: H.tzOf('RU', 37, 55), vl: H.tzOf('RU', 132, 43), in: H.offsetOf(H.tzOf('IN', 78, 22), t)}; });
+            assert.deepStrictEqual(off, {fr: 60, gf: 'America/Cayenne', re: 'Indian/Reunion', ny: 'America/New_York', la: 'America/Los_Angeles', ak: 'America/Anchorage', qc: 'America/Toronto', ru: 'Europe/Moscow', vl: 'Asia/Vladivostok', in: 330});
+            assert.ok(await p.evaluate(() => document.querySelectorAll('.hz-map.is-real [data-hz-off]').length > 150 && document.querySelectorAll('.hz-legend span').length > 15), 'les pays coloriés, la légende');
+            assert.ok(await p.evaluate(() => new Set([...document.querySelectorAll('.hz-map [clip-path]')].map(x => x.getAttribute('data-hz-off'))).size >= 4), 'les États-Unis, le Canada, la Russie en plusieurs fuseaux');
+            await p.click('.hz-page [data-hz-mapmode="bands"]'); await p.waitForSelector('.hz-map.is-bands .hz-bl');
+            assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-horloges-carte')), '"bands"');
+            await p.click('.hz-page [data-hz-mapmode="real"]'); await p.waitForSelector('.hz-map.is-real');
             await p.click('.hz-page [data-hz-view="clocks"]');
         });
         await t('🎨 Style : préréglage « Numérique » (chiffres seuls), enregistré, ↶ Annuler', async () => {
