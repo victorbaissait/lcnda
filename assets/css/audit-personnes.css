@@ -17,6 +17,8 @@ body.is-kiosk #pa-quick-family, body.is-kiosk [data-pa-quick-family], body.is-ki
 
 /* ── En-tête de fiche ── */
 .pa-kin-badge { cursor: pointer; border: 0; font: inherit; background: var(--kin-bg, #e9f1ff); color: var(--kin-text, #0b3d66); }
+/* un lien très long (« arrière-arrière-…-grand-père · par … ») passe à la ligne au lieu d'écraser le nom de la fiche */
+.person-hero-status .pa-kin-badge { white-space: normal; max-width: min(22rem, 100%); text-align: right; overflow-wrap: anywhere; line-height: 1.35; }
 .pa-kin-badge.is-none { background: var(--surface-2, #f1f1f1); color: var(--muted, #667); }
 .pa-hero-btn { font-size: 16px; }
 .pa-kin-path { margin: 10px 0 4px; padding: 10px 12px; border: 1px solid var(--line, #dde); border-radius: 10px; background: var(--surface, #fff); }

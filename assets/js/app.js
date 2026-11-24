@@ -9144,8 +9144,20 @@ ${backupSectionHtml()}
             if(r.classList.contains('person-list-item'))(r.querySelector('.person-list-copy')||r).insertAdjacentHTML('beforeend',html);else if(r.classList.contains('tree-card'))(r.querySelector('.tree-card-extras')||r).insertAdjacentHTML('beforeend',html);else r.insertAdjacentHTML('afterend',html);});
     }
     new MutationObserver(list=>{if(!kinShown()||state.module==='personnes'&&false)return;for(const m of list)for(const n of m.addedNodes){if(n.nodeType===1&&(n.matches?.('.lineage-tree')||n.querySelector?.('.lineage-tree'))){clearTimeout(paKinQueue);paKinQueue=setTimeout(()=>paDecorateKin($('#workspace')),60);return;}}}).observe(document.getElementById('workspace')||document.body,{childList:true,subtree:true});
+    /* 🧭 l'étiquette « ton lien de parenté » en haut de la fiche : affichée par défaut, masquable (⋯ de la fiche), choix retenu */
+    const KIN_HEAD_KEY='genealogie-kin-head';
+    const paKinHeadOn=()=>{try{return localStorage.getItem(KIN_HEAD_KEY)!=='0';}catch(_){return true;}};
+    function paSetKinHead(on){
+        const before=paKinHeadOn();try{localStorage.setItem(KIN_HEAD_KEY,on?'1':'0');}catch(_){}
+        const id=Number(state.currentPersonId),badge=$(`[data-pa-kin-head="${id}"]`);
+        if(badge){if(on)paFillKinHead({person:{id}});else badge.hidden=true;}
+        undoToast(on?i18n('Lien de parenté affiché sur les fiches.'):i18n('Lien de parenté masqué sur les fiches.'),{undo:()=>paSetKinHead(before),icon:'🧭'});
+    }
+    {const ext=window.LCNDA_EXT=window.LCNDA_EXT||{};ext.personMoreItems=ext.personMoreItems||[];
+     ext.personMoreItems.push(detail=>{const p=detail?.person||{};return p.id&&paRootId()?{icon:'🧭',label:paKinHeadOn()?i18n('Masquer le lien de parenté'):i18n('Afficher le lien de parenté'),run:()=>paSetKinHead(!paKinHeadOn())}:null;});}
     async function paFillKinHead(detail){
         const id=Number(detail?.person?.id),badge=$(`[data-pa-kin-head="${id}"]`);if(!badge||!paRootId())return;
+        if(!paKinHeadOn()){badge.hidden=true;return;} // 🧭 masquée par le choix de la personne (⋯ de la fiche)
         let r;try{r=await api('person_link',{id,root:paRootId()});}catch(_){return;}
         if(!badge.isConnected||Number(state.currentPersonId)!==id)return;
         const l=r.link;
