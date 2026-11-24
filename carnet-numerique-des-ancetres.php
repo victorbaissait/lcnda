@@ -102,10 +102,11 @@
         .presentation-about ul { margin:0; padding:0; list-style:none; font-weight:600; line-height:1.45; color:#3f3f3f; }
         .presentation-about li { padding:7px 0; border-top:1px solid #d7d7d7; }
         .presentation-about li::before { content:"→"; color:var(--presentation-blue); margin-right:7px; font-weight:900; }
-        .presentation-strengths { display:flex; flex-wrap:wrap; gap:0; margin-top:28px; border:2px solid var(--presentation-ink); background:#111; color:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); }
-        .presentation-strengths div { flex:1 1 220px; padding:20px 22px; border-right:1px solid #333; border-bottom:1px solid #333; }
+        .presentation-strengths { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin-top:28px; border:2px solid var(--presentation-ink); background:#111; color:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); }
+        .presentation-strengths div { min-width:0; padding:20px 22px; border-right:1px solid #333; border-bottom:1px solid #333; }
         .presentation-strengths strong { display:block; color:#7fb6ff; font-size:15px; letter-spacing:-.01em; }
         .presentation-strengths span { display:block; margin-top:6px; color:#d9d9d9; font-size:14px; font-weight:600; line-height:1.4; }
+        @media (max-width:760px) { .presentation-strengths { grid-template-columns:1fr; } }
         .presentation-beta-note { margin:22px 0 0; color:var(--presentation-muted); font-size:14px; font-weight:700; line-height:1.5; }
         @media (max-width:760px) { .presentation-about-grid { grid-template-columns:1fr; } }
 
@@ -907,7 +908,7 @@
                     <span class="feature-index">A</span>
                     <h3>Construire et relier</h3>
                     <p>Fiches individuelles, parents, fratries, couples, enfants, variantes de nom, événements et arbres de parenté.</p>
-                    <ul><li>Arbres, éventails et sabliers</li><li>Recensements, lieux et cartes</li><li>Sosa, d’Aboville et ADN</li></ul>
+                    <ul><li>Arbres, éventails et sabliers</li><li>Recensements, lieux et cartes</li><li>Sosa, d’Aboville et ADN</li><li>Parrains, témoins et voisins</li><li>Chronologies et frises de vie</li><li>Doublons à fusionner et incohérences repérées</li></ul>
                 </article>
                 <article class="presentation-feature">
                     <span class="feature-index">B</span>
@@ -918,11 +919,13 @@
                     <span class="feature-index">C</span>
                     <h3>Documenter</h3>
                     <p>Photos, actes, PDF, sons et vidéos, sources et niveau de confiance ; transcription des actes, reconnaissance d’écriture, recueils dépouillés page par page.</p>
+                    <ul><li>Atelier de transcription et comparaison des lectures</li><li>Lettres, cartes postales et correspondances</li><li>Sources classées par fonds et par sorte</li><li>Montants, mesures et monnaies d’autrefois expliqués</li></ul>
                 </article>
                 <article class="presentation-feature feature-blue">
                     <span class="feature-index">D</span>
                     <h3>Enquêter</h3>
                     <p>Enquêtes avec hypothèses et preuves, battues sur une carte, atelier de recherche, visites aux archives, rappels, budget et courriers.</p>
+                    <ul><li>Où chercher : un plan de recherche et les bons registres</li><li>Le lieu et le pays à l’époque, la météo du jour</li><li>Décès INSEE, Morts pour la France, Légion d’honneur</li><li>Archives ouvertes d’Europe interrogées depuis l’app</li></ul>
                 </article>
                 <article class="presentation-feature">
                     <span class="feature-index">E</span>
@@ -1136,6 +1139,7 @@
                 <div><strong>Pensé pour la recherche</strong><span>Pas seulement pour la saisie ; et pour toute la famille, des aînés aux enfants.</span></div>
                 <div><strong>De l’arbre au livre, au film et au site</strong><span>Mise en page, montage, son et site web pour transmettre ce que vous avez trouvé.</span></div>
                 <div><strong>Arrivée facile</strong><span>Depuis Hérédis, MacFamilyTree ou n’importe quel logiciel compatible GEDCOM.</span></div>
+                <div><strong>L’histoire autour de vos ancêtres</strong><span>Météo, histoire du lieu, frontières, prix et prénoms : des données ouvertes à installer en un clic.</span></div>
             </div>
             <p class="presentation-beta-note">LCNDA est en version bêta : faites des sauvegardes régulières, ce que l’application facilite. Il n’est pas encore signé par Apple ni Microsoft, d’où un avertissement au premier lancement.</p>
         </section>

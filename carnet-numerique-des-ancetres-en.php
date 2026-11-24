@@ -102,10 +102,11 @@
         .presentation-about ul { margin:0; padding:0; list-style:none; font-weight:600; line-height:1.45; color:#3f3f3f; }
         .presentation-about li { padding:7px 0; border-top:1px solid #d7d7d7; }
         .presentation-about li::before { content:"→"; color:var(--presentation-blue); margin-right:7px; font-weight:900; }
-        .presentation-strengths { display:flex; flex-wrap:wrap; gap:0; margin-top:28px; border:2px solid var(--presentation-ink); background:#111; color:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); }
-        .presentation-strengths div { flex:1 1 220px; padding:20px 22px; border-right:1px solid #333; border-bottom:1px solid #333; }
+        .presentation-strengths { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin-top:28px; border:2px solid var(--presentation-ink); background:#111; color:#fff; box-shadow:10px 10px 0 rgba(8,8,8,.13); }
+        .presentation-strengths div { min-width:0; padding:20px 22px; border-right:1px solid #333; border-bottom:1px solid #333; }
         .presentation-strengths strong { display:block; color:#7fb6ff; font-size:15px; letter-spacing:-.01em; }
         .presentation-strengths span { display:block; margin-top:6px; color:#d9d9d9; font-size:14px; font-weight:600; line-height:1.4; }
+        @media (max-width:760px) { .presentation-strengths { grid-template-columns:1fr; } }
         .presentation-beta-note { margin:22px 0 0; color:var(--presentation-muted); font-size:14px; font-weight:700; line-height:1.5; }
         @media (max-width:760px) { .presentation-about-grid { grid-template-columns:1fr; } }
 
@@ -906,7 +907,7 @@
                     <span class="feature-index">A</span>
                     <h3>Build and connect</h3>
                     <p>Individual records, parents, siblings, couples, children, name variants, events and family trees.</p>
-                    <ul><li>Trees, fans and hourglasses</li><li>Censuses, places and maps</li><li>Sosa, d’Aboville and DNA</li></ul>
+                    <ul><li>Trees, fans and hourglasses</li><li>Censuses, places and maps</li><li>Sosa, d’Aboville and DNA</li><li>Godparents, witnesses and neighbours</li><li>Chronologies and life timelines</li><li>Duplicates to merge and inconsistencies spotted</li></ul>
                 </article>
                 <article class="presentation-feature">
                     <span class="feature-index">B</span>
@@ -917,11 +918,13 @@
                     <span class="feature-index">C</span>
                     <h3>Document</h3>
                     <p>Photos, records, PDFs, sounds and videos, sources and confidence level; transcription of records, handwriting recognition, collections indexed page by page.</p>
+                    <ul><li>Transcription workshop and comparison of readings</li><li>Letters, postcards and correspondence</li><li>Sources sorted by archive and by kind</li><li>Old amounts, measures and currencies explained</li></ul>
                 </article>
                 <article class="presentation-feature feature-blue">
                     <span class="feature-index">D</span>
                     <h3>Investigate</h3>
                     <p>Investigations with hypotheses and evidence, search sweeps on a map, research workshop, archive visits, reminders, budget and correspondence.</p>
+                    <ul><li>Where to search: a research plan and the right registers</li><li>The place and the country at the time, the weather of the day</li><li>French death records, war dead, Legion of Honour</li><li>Open European archives searched from the app</li></ul>
                 </article>
                 <article class="presentation-feature">
                     <span class="feature-index">E</span>
@@ -1135,6 +1138,7 @@
                 <div><strong>Designed for research</strong><span>Not just for data entry; and for the whole family, from grandparents to children.</span></div>
                 <div><strong>From tree to book, film and website</strong><span>Layout, video editing, sound and a website to pass on what you have found.</span></div>
                 <div><strong>Easy to move in</strong><span>From Hérédis, MacFamilyTree or any GEDCOM-compatible software.</span></div>
+                <div><strong>The history around your ancestors</strong><span>Weather, local history, borders, prices and first names: open data installed in one click.</span></div>
             </div>
             <p class="presentation-beta-note">LCNDA is in beta: make regular backups, which the app makes easy. It is not yet signed by Apple or Microsoft, which is why you get a warning on first launch.</p>
         </section>
