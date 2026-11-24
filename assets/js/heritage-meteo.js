@@ -377,7 +377,7 @@
         let d;
         try { d = await api('meteo_person', {id: pid}); } catch (e) { host.innerHTML = A().empty ? A().empty(e.message, {icon: '⛔'}) : ''; return; }
         if (!host.isConnected) return;
-        if (!d.installed) { host.innerHTML = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: 'Comment les obtenir', attrs: 'data-wx-howto="socle"'}}); return; }
+        if (!d.installed) { host.innerHTML = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: '⤓ Installer les données météo', attrs: 'data-wx-goset'}}); return; }
         const evs = (d.events || []).filter(r => !eventHidden(r.event_id, s) && kindOn(r.tag, s, r.type_id, r.type));
         const ok = evs.filter(r => shown(r, s));
         const card = host.closest('.card'); const small = card?.querySelector('.card-title h3'); if (small && !small.querySelector('small')) small.insertAdjacentHTML('beforeend', ` <small>(${ok.length})</small>`);
@@ -406,6 +406,7 @@
         const more = e.target.closest?.('[data-wx-block-more]');
         if (more) { const pid = Number(more.dataset.wxBlockMore); return UI().menuAt?.(more, [...(kiosk() ? [] : [{icon: '🙈', label: 'Masquer la météo de cette personne', run: () => hidePerson(pid)}, '-']), {icon: '⚙️', label: 'Réglages de la météo', run: openSettings}, {icon: '📚', label: 'À propos des données', run: openAbout}]); }
         const how = e.target.closest?.('[data-wx-howto]'); if (how) return openHowTo(how.dataset.wxHowto || 'socle');
+        if (e.target.closest?.('[data-wx-goset]')) return openSettings();
     });
     (ext.afterPerson = ext.afterPerson || []).push(detail => {
         const pid = Number(detail?.person?.id) || 0;
@@ -431,7 +432,7 @@
     /* ═════════════════ M5 : les réglages (Réglages → 🌦 Météo d'autrefois) ═════════════════ */
     const SEG = (key, val, opts) => `<span class="segmented wx-seg" role="group">${opts.map(([v, l]) => `<button type="button" class="${val === v ? 'is-active' : ''}" aria-pressed="${val === v}" data-wx-set="${key}" data-wx-val="${esc(v)}">${esc(l)}</button>`).join('')}</span>`;
     const fmtSize = b => (b >= 1e9 ? `${String(Math.round(b / 1e8) / 10).replace('.', ',')} Go` : b >= 1e6 ? `${Math.round(b / 1e6)} Mo` : `${Math.max(1, Math.round(b / 1e3))} Ko`);
-    const PACKS = [['socle', 'Socle inclus', '1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo'],
+    const PACKS = [['socle', 'Socle', '1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo'],
         ['complet', 'Pack complet', 'Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go'],
         ['europe', 'Pack Europe', 'Stations d’Allemagne, des Pays-Bas, du Danemark, du Royaume-Uni, d’Espagne, de Pologne, de Tchéquie, d’Italie, du Portugal et de Slovaquie + reconstitution 20CR (1836–1939) et ERA5 sur toute l’Europe · ≈ 1,5 à 3,5 Go']];
     ext.maintenance = ext.maintenance || {};
@@ -450,7 +451,7 @@
                 const on = f && f.ok;
                 const desc = on ? `${k === 'europe' && f.station_countries?.length ? `Stations : ${f.station_countries.map(c => COUNTRY[c] || c).join(', ')} · ` : ''}${k === 'europe' && f.c20?.n ? `20CR ${f.c20.a}–${f.c20.b} (toute l’Europe) · ` : ''}${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · altitudes : ${A().plural(f.relief, 'carré')} de 1°${f.relief_countries?.length ? ` (${f.relief_countries.map(c => COUNTRY[c] || c).join(', ')})` : ''}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
                 const acts = on ? (f.removable ? `<button type="button" class="button small secondary" data-wx-remove="${k}">🗑 Supprimer le pack</button>` : '')
-                    : `<button type="button" class="button small secondary" data-wx-howto="${k}">⤓ ${k === 'socle' ? 'Comment l’obtenir' : `Télécharger le ${k === 'complet' ? 'pack complet (≈ 3 Go)' : 'pack Europe (≈ 2 Go)'}`}</button><button type="button" class="button small secondary" data-wx-import="${k}">⤒ Importer le fichier…</button>`;
+                    : dlActs(k);
                 return `<div class="wx-data-row"><span><b>${esc(name)}</b><small>${esc(desc)}</small></span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
             }).join('');
             ws.innerHTML = `<section class="page wx-settings">${UI().pageHeader({title: 'Météo d’autrefois', icon: '🌦', attrs: 'data-ph-title', where: 'Réglages · Données', saved: true, help: 'Le temps qu’il faisait le jour de chaque événement, sans Internet.',
@@ -486,6 +487,11 @@
         };
         draw();
         const refresh = async () => { try { st = await api('meteo_status'); } catch (_) {} cache.clear(); draw(); };
+        dlRedraw = draw; dlRefresh = refresh;
+        // ce qui est en ligne (taille de chaque pack), et les téléchargements interrompus à reprendre
+        api('meteo_dl_info').then(r => { DL.online = r.packs || {}; DL.err = ''; }).catch(x => { DL.online = {}; DL.err = x.message; }).finally(async () => {
+            const ids = dlSaved(); for (const [k, id] of Object.entries(ids)) { if (DL.run[k]) continue; try { const r = await api('meteo_dl_resume', {id}); if (r.exists) DL.paused[k] = {id, received: r.received, size: r.size}; else dlForget(k); } catch (_) {} }
+            if (ws.querySelector('.wx-settings')) draw(); });
         if (ws.__wxBound !== true) {
             ws.__wxBound = true;
             ws.addEventListener('click', async e => {
@@ -497,6 +503,9 @@
                 if (un) { const [t, id] = un.dataset.wxUnhide.split(':'); const s = settings(); if (t === 'p') s.hidePersons = s.hidePersons.filter(x => Number(x.id) !== Number(id)); else s.hideEvents = s.hideEvents.filter(x => Number(x.id) !== Number(id)); save(s); return draw(); }
                 if (e.target.closest('[data-wx-about]')) return openAbout();
                 const imp = e.target.closest('[data-wx-import]'); if (imp) { await importPack(imp.dataset.wxImport); return refresh(); }
+                const dl = e.target.closest('[data-wx-dl]'); if (dl) return dlRun(dl.dataset.wxDl);
+                const pz = e.target.closest('[data-wx-dl-pause]'); if (pz) { const k = pz.dataset.wxDlPause; if (DL.run[k]) DL.run[k].stop = true; return; }
+                const cx = e.target.closest('[data-wx-dl-cancel]'); if (cx) return dlCancel(cx.dataset.wxDlCancel);
                 const rm = e.target.closest('[data-wx-remove]');
                 if (rm) {
                     const kind = rm.dataset.wxRemove;
@@ -522,7 +531,56 @@
         UI().autoSave?.(ws, {redraw: () => draw()});
     };
 
-    /* ⤓ comment obtenir un pack (pas de téléchargement obligatoire depuis l'app : le fichier se fabrique ou se télécharge une fois) */
+    /* ═════════ ⤓ Installer un pack en un bouton (lib/meteo_dl.php) : rien de météo n'est livré avec l'app ═════════ */
+    const DL = {online: null, err: '', run: {}, paused: {}}, DL_KEY = 'genealogie-meteo-dl';
+    let dlRedraw = () => {}, dlRefresh = async () => {};
+    const dlSaved = () => { try { return JSON.parse(localStorage.getItem(DL_KEY) || '{}') || {}; } catch (_) { return {}; } };
+    const dlRemember = (k, id) => { const v = dlSaved(); v[k] = id; try { localStorage.setItem(DL_KEY, JSON.stringify(v)); } catch (_) {} };
+    const dlForget = k => { const v = dlSaved(); delete v[k]; try { localStorage.setItem(DL_KEY, JSON.stringify(v)); } catch (_) {} };
+    const pct = (a, b) => (b ? Math.floor(a / b * 100) : 0);
+    function dlActs(k) {
+        const run = DL.run[k], pz = DL.paused[k], on = DL.online && DL.online[k];
+        if (run) return `<span class="wx-dl" data-wx-dl-box="${k}"><span class="wx-prog"><i style="width:${pct(run.received, run.size)}%"></i></span><small data-wx-dl-txt>${esc(dlText(run))}</small><button type="button" class="button small secondary" data-wx-dl-pause="${k}">⏸ ${esc(i18n('Pause'))}</button></span>`;
+        const imp = `<button type="button" class="button small secondary" data-wx-import="${k}" title="${esc(i18n('Un fichier .lcmeteo déjà téléchargé ou fabriqué'))}">⤒ ${esc(i18n('Importer un fichier…'))}</button>`;
+        if (pz) return `<span class="wx-dl"><span class="wx-prog"><i style="width:${pct(pz.received, pz.size)}%"></i></span><small>${esc(i18n('En pause : {p} %', {p: String(pct(pz.received, pz.size))}))}</small><button type="button" class="button small" data-wx-dl="${k}">▶ ${esc(i18n('Reprendre'))}</button><button type="button" class="button small secondary" data-wx-dl-cancel="${k}">✕ ${esc(i18n('Abandonner'))}</button></span>`;
+        if (DL.online === null) return `<small class="muted">${esc(i18n('Recherche des données en ligne…'))}</small>${imp}`;
+        if (!on) return `<small class="muted" title="${esc(DL.err)}">${esc(DL.err ? i18n('Pas de connexion aux données en ligne.') : i18n('Pas encore en ligne.'))}</small>${imp}<button type="button" class="link-button" data-wx-howto="${k}">${esc(i18n('Le fabriquer soi-même'))}</button>`;
+        return `<button type="button" class="button small" data-wx-dl="${k}">⤓ ${esc(i18n('Installer ({s})', {s: fmtSize(on.size)}))}</button>${imp}`;
+    }
+    function dlText(run) { const el = (Date.now() - run.t0) / 1000, rate = el > 2 ? (run.received - run.r0) / el : 0, left = rate > 0 ? (run.size - run.received) / rate : 0;
+        return `${pct(run.received, run.size)} % · ${fmtSize(run.received)} ${i18n('sur')} ${fmtSize(run.size)}${left > 0 ? ` · ${i18n('reste ≈ {m} min', {m: String(Math.max(1, Math.round(left / 60)))})}` : ''}`; }
+    function dlPaint(k) { const run = DL.run[k], box = document.querySelector(`[data-wx-dl-box="${k}"]`); if (!run || !box) return; box.querySelector('.wx-prog i').style.width = `${pct(run.received, run.size)}%`; box.querySelector('[data-wx-dl-txt]').textContent = dlText(run); }
+    async function dlRun(k) {
+        if (DL.run[k]) return;
+        const post = (a, b) => api(a, {}, {method: 'POST', body: b}).then(r => r.result || r);
+        let id = DL.paused[k]?.id || dlSaved()[k] || '', run;
+        try {
+            if (id) { const r = await api('meteo_dl_resume', {id}); if (!r.exists) id = ''; else run = {id, received: r.received, size: r.size}; }
+            if (!id) { const r = await post('meteo_dl_start', {kind: k}); id = r.id; run = {id, received: 0, size: r.size}; }
+        } catch (x) { return A().toast(x.message, 'error'); }
+        dlRemember(k, id); delete DL.paused[k];
+        DL.run[k] = {...run, t0: Date.now(), r0: run.received, stop: false}; dlRedraw();
+        let fails = 0;
+        while (!DL.run[k].stop) {
+            try { const r = await post('meteo_dl_step', {id}); DL.run[k].received = r.received; fails = 0; dlPaint(k); if (r.done) break; }
+            catch (x) { if (++fails >= 3) { A().toast(i18n('Téléchargement arrêté : {e}', {e: x.message}), 'error'); DL.paused[k] = {id, received: DL.run[k].received, size: DL.run[k].size}; delete DL.run[k]; return dlRedraw(); } await new Promise(r => setTimeout(r, 1500 * fails)); }
+        }
+        if (DL.run[k].stop) { DL.paused[k] = {id, received: DL.run[k].received, size: DL.run[k].size}; delete DL.run[k]; return dlRedraw(); }
+        const box = document.querySelector(`[data-wx-dl-box="${k}"] [data-wx-dl-txt]`); if (box) box.textContent = i18n('Vérification et installation…');
+        try {
+            const r = await post('meteo_pack_finish', {id}); dlForget(k); delete DL.run[k];
+            await dlRefresh();
+            A().undoToast?.(i18n('🌦 {name} installé ({n} stations).', {name: i18n(PACKS.find(p => p[0] === k)?.[1] || 'Pack'), n: String(r.stations || 0)}), {undo: async () => { await post('meteo_pack_undo', {kind: k}); await dlRefresh(); }});
+        } catch (x) { dlForget(k); delete DL.run[k]; dlRedraw(); A().toast(x.message, 'error'); }
+    }
+    async function dlCancel(k) {
+        const id = DL.paused[k]?.id || dlSaved()[k]; delete DL.paused[k]; dlForget(k);
+        if (id) { try { await api('meteo_dl_cancel', {}, {method: 'POST', body: {id}}); } catch (_) {} }
+        dlRedraw();
+    }
+    ext.meteoDl = {run: dlRun, state: DL};
+
+    /* ⤓ le fabriquer soi-même (le fichier se fabrique une fois, puis s'importe) */
     function openHowTo(kind) {
         const url = PACK_URLS[kind];
         const name = {socle: 'le socle', complet: 'le pack complet', europe: 'le pack Europe'}[kind] || 'le pack';
@@ -584,7 +642,7 @@
         const today = new Date(), md = `${today.getDate() === 1 ? '1er' : today.getDate()} ${MONTHS[today.getMonth()]}`;
         let body;
         if (d?.off) body = A().empty('La météo est masquée ici (Réglages → 🌦 Météo d’autrefois).', {icon: '🌦'});
-        else if (!d || !d.installed) body = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: 'Comment les obtenir', attrs: 'data-wx-howto="socle"'}});
+        else if (!d || !d.installed) body = A().empty('Les données météo ne sont pas installées.', {icon: '🌦', action: {label: '⤓ Installer les données météo', attrs: 'data-wx-goset'}});
         else if (!d.pick) body = A().empty('Aucun anniversaire rond avec une météo connue aujourd’hui.', {icon: '🌦', hint: 'Il en faut un de 10, 25, 50, 100 ans… d’une naissance, d’un mariage ou d’un décès.'});
         else {
             const r = d.pick, s = settings(), lk = look(r, s), k = kindOf(r.tag);

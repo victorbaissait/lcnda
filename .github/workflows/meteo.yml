@@ -1,0 +1,109 @@
+# 🌦 Fabrication des données de la Météo d'autrefois, déposées dans la version « meteo-donnees » du dépôt.
+#
+# L'app n'embarque aucune donnée météo : Réglages → 🌦 Météo d'autrefois → « ⤓ Installer » télécharge le pack depuis cette
+# version (lib/meteo_dl.php), le vérifie (empreinte sha256) puis le range.
+#
+# Lancer : pousser une étiquette « meteo-socle-1 », « meteo-europe-1 » ou « meteo-complet-1 » (le chiffre ne sert qu'à
+# relancer), ou onglet « Actions » → « Données météo » → « Run workflow » (le menu « quoi »).
+# Une fabrication peut dépasser les 6 h d'une machine GitHub : le programme reprend où il s'était arrêté (dossier
+# meteo-sortie gardé en cache d'une fois sur l'autre) ; relancer jusqu'à ce que le pack soit déposé.
+# Sans ERA5 (compte Copernicus personnel) : --sans-era5.
+# Le pack est coupé en morceaux de 1 900 Mo (limite d'un fichier d'une version GitHub : 2 Go) ; meteo-manifest.json dit les
+# morceaux, la taille et l'empreinte de chaque pack.
+
+name: Données météo
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'Le pack à fabriquer'
+        type: choice
+        options: [socle, europe, complet]
+        default: socle
+  push:
+    tags: ['meteo-*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: meteo-donnees
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Quel pack ?
+        id: q
+        run: |
+          q="${{ inputs.quoi }}"
+          if [ -z "$q" ]; then q=$(echo "${GITHUB_REF_NAME}" | sed -E 's/^meteo-([a-z]+).*/\1/'); fi
+          case "$q" in socle|europe|complet) ;; *) echo "pack inconnu : $q"; exit 1;; esac
+          echo "quoi=$q" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Bibliothèques (20CR)
+        run: pip install netCDF4
+
+      - name: Reprendre le travail déjà fait
+        uses: actions/cache/restore@v4
+        with:
+          path: meteo-sortie
+          key: meteo-${{ steps.q.outputs.quoi }}-${{ github.run_id }}
+          restore-keys: meteo-${{ steps.q.outputs.quoi }}-
+
+      - name: Fabriquer (5 h 20 au plus ; la suite à la prochaine fois)
+        id: build
+        continue-on-error: true
+        run: timeout 19200 python3 scripts/meteo/build-meteo.py "${{ steps.q.outputs.quoi }}" --sans-era5 --dossier meteo-sortie
+
+      - name: Garder le travail pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: meteo-sortie
+          key: meteo-${{ steps.q.outputs.quoi }}-${{ github.run_id }}
+
+      - name: Déposer le pack dans la version « meteo-donnees »
+        if: steps.build.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          Q: ${{ steps.q.outputs.quoi }}
+        run: |
+          set -e
+          f=meteo-sortie/meteo-pack-$Q.lcmeteo; [ "$Q" = socle ] && f=meteo-sortie/meteo-socle.lcmeteo
+          test -s "$f"
+          mkdir -p envoi && cd envoi
+          split -b 1900M -d -a 3 "../$f" "$(basename "$f")."
+          size=$(stat -c %s "../$f"); sum=$(sha256sum "../$f" | cut -d' ' -f1)
+          gh release view meteo-donnees --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create meteo-donnees --repo "$GITHUB_REPOSITORY" --title "Données de la Météo d'autrefois" --prerelease \
+              --notes "Les packs de la Météo d'autrefois, téléchargés par l'app (Réglages → 🌦 Météo d'autrefois → ⤓ Installer). Licences : voir « À propos des données » dans l'app."
+          gh release download meteo-donnees --repo "$GITHUB_REPOSITORY" --pattern meteo-manifest.json --dir . 2>/dev/null || echo '{"packs":{}}' > meteo-manifest.json
+          # les anciens morceaux de ce pack sont retirés
+          for a in $(gh release view meteo-donnees --repo "$GITHUB_REPOSITORY" --json assets --jq ".assets[].name" | grep -E "^$(basename "$f")\.[0-9]{3}$" || true); do
+            gh release delete-asset meteo-donnees "$a" --repo "$GITHUB_REPOSITORY" --yes
+          done
+          python3 - "$Q" "$size" "$sum" <<'PY'
+          import json, os, sys, datetime
+          q, size, sha = sys.argv[1], int(sys.argv[2]), sys.argv[3]
+          m = json.load(open('meteo-manifest.json'))
+          parts = sorted(p for p in os.listdir('.') if p.split('.')[-1].isdigit())
+          m.setdefault('packs', {})[q] = {'size': size, 'sha256': sha, 'built': datetime.date.today().isoformat(), 'parts': [{'name': p, 'size': os.path.getsize(p)} for p in parts]}
+          m['version'] = datetime.date.today().strftime('%Y-%m')
+          json.dump(m, open('meteo-manifest.json', 'w'), indent=1)
+          PY
+          gh release upload meteo-donnees --repo "$GITHUB_REPOSITORY" --clobber $(ls | grep -E '\.[0-9]{3}$') meteo-manifest.json
+          cat meteo-manifest.json
+
+      - name: Pas encore fini
+        if: steps.build.outcome != 'success'
+        run: echo "::notice::La fabrication n'est pas finie (6 h au plus par machine). Relance « Données météo » : elle reprendra où elle s'est arrêtée."

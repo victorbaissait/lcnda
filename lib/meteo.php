@@ -20,6 +20,7 @@ declare(strict_types=1);
  */
 
 const METEO_COLS = [1 => 'TN', 2 => 'TX', 3 => 'T', 4 => 'RR', 5 => 'SN', 6 => 'FX', 7 => 'NN', 8 => 'SS', 9 => 'WW', 10 => 'Z'];
+require_once __DIR__ . '/meteo_dl.php'; // ⤓ installer un pack en un bouton (version « meteo-donnees » du dépôt)
 const METEO_KINDS = ['complet' => 3, 'europe' => 2, 'socle' => 1]; // ordre de préférence quand une station est dans deux fichiers
 const METEO_MEASURED_KM = 15.0;
 const METEO_STATION_KM = 40.0;
@@ -1076,6 +1077,8 @@ function meteo_api_get(PDO $pdo, string $action, array $q): array
         'meteo_today' => meteo_today_data($pdo, $q),
         'meteo_place' => meteo_place_data($pdo, safe_int($q['id'] ?? 0)),
         'meteo_altitude' => ['m' => meteo_altitude((float) ($q['lat'] ?? 0), (float) ($q['lon'] ?? 0))],
+        'meteo_dl_info' => meteo_dl_info(),
+        'meteo_dl_resume' => meteo_dl_resume((string) ($q['id'] ?? '')),
         default => throw new RuntimeException('Action météo inconnue.'),
     };
 }
@@ -1089,6 +1092,9 @@ function meteo_api_post(string $action, array $data, array $q): array
         'meteo_pack_undo' => meteo_pack_undo($data),
         'meteo_pack_remove' => meteo_pack_remove($data),
         'meteo_pack_restore' => meteo_pack_restore($data),
+        'meteo_dl_start' => meteo_dl_start($data),
+        'meteo_dl_step' => meteo_dl_step($data),
+        'meteo_dl_cancel' => meteo_dl_cancel($data),
         default => throw new RuntimeException('Action météo inconnue.'),
     };
 }

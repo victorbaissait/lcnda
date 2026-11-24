@@ -152,3 +152,7 @@
 :root[data-theme="dark"] .wx-data-row{border-bottom:1px solid #474a52}
 :root[data-theme="dark"] .wx-wid-ft{border-top:1px solid #474a52}
 /* ═════ fin du mode sombre automatique ═════ */
+/* ⤓ installer un pack en un bouton */
+.wx-dl { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-width: min(100%, 320px); }
+.wx-dl .wx-prog { flex: 1 1 140px; margin: 0; }
+.wx-dl small { color: var(--muted); }
