@@ -46,7 +46,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
-    <link rel="stylesheet" href="assets/css/onglets.css?v=5">
+    <link rel="stylesheet" href="assets/css/onglets.css?v=6">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
     <link rel="stylesheet" href="assets/css/oeuvres.css?v=2">
@@ -1177,7 +1177,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=100"></script>
+<script src="assets/js/app-i18n.js?v=101"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
@@ -1220,7 +1220,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-chronologie.js?v=11" defer></script>
 <script src="assets/js/app-comparaison.js?v=8" defer></script>
 <script src="assets/js/app-carte.js?v=14" defer></script>
-<script src="assets/js/app-enquetes.js?v=12" defer></script>
+<script src="assets/js/app-enquetes.js?v=13" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=23" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=32" defer></script>
@@ -1488,7 +1488,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-relecture.js?v=7" defer></script>
 <script src="assets/js/heritage-transcribe-gabarit.js?v=5" defer></script>
 <script src="assets/js/heritage-transcribe-aligne.js?v=2" defer></script>
-<script src="assets/js/heritage-liens.js?v=3" defer></script>
+<script src="assets/js/heritage-liens.js?v=4" defer></script>
 <script src="assets/js/heritage-pages.js?v=4" defer></script>
 <script src="assets/js/heritage-transcribe-pages.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe.js?v=73" defer></script>

@@ -25,3 +25,9 @@ Ouvrir ce document ¦ Atidaryti šį dokumentą ¦ Atvērt šo dokumentu ¦ Ava 
 Changer la raison… ¦ Keisti priežastį… ¦ Mainīt iemeslu… ¦ Muuda põhjust…
 Choisis les deux documents à lier. ¦ Pasirink du susietinus dokumentus. ¦ Izvēlies abus saistāmos dokumentus. ¦ Vali kaks seotavat dokumenti.
 Ce lien n’existe plus. ¦ Šios sąsajos nebėra. ¦ Šīs saites vairs nav. ¦ Seda seost pole enam.
+pas dans le dossier ¦ nėra byloje ¦ nav lietā ¦ pole toimikus
+Ajouter au dossier ¦ Įtraukti į bylą ¦ Pievienot lietai ¦ Lisa toimikusse
+Ce que les documents liés apprennent ({n}) ¦ Ką sako susieti dokumentai ({n}) ¦ Ko stāsta saistītie dokumenti ({n}) ¦ Mida seotud dokumendid ütlevad ({n})
+Ajouté au dossier de l’enquête. ¦ Įtraukta į tyrimo bylą. ¦ Pievienots izmeklēšanas lietai. ¦ Lisatud uurimise toimikusse.
+D’après « {doc} », l. {n} ¦ Pagal „{doc}“, {n} eil. ¦ Pēc “{doc}”, {n}. r. ¦ „{doc}“ järgi, r. {n}
+Piste ajoutée à l’enquête. ¦ Pėdsakas įtrauktas į tyrimą. ¦ Pavediens pievienots izmeklēšanai. ¦ Jälg lisatud uurimisse.

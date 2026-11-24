@@ -110,6 +110,24 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TA
             assert.equal(await p.$('#workspace [data-ong-id="1"] [data-ong-links] [data-dl-add]'), null); assert.equal(await p.$('#workspace [data-ong-id="1"] [data-ong-links] [data-dl-more]'), null);
             await p.evaluate(() => document.body.classList.remove('is-kiosk'));
         });
+        await t('🔎 dans une enquête : les liens entre ses documents, « ＋ Ajouter au dossier », « 🔎 En faire une piste »', async () => {
+            const inv = await post('save_investigation', {person_id: 1, title: 'Pierre MAZAUD, soldat de l’Empire', question: 'Où a-t-il servi ?', status: 'open'});
+            const invId = Number(inv.id || inv.investigation_id); assert.ok(invId > 0, JSON.stringify(inv));
+            assert.ok(!(await post('link_investigation_media', {investigation_id: invId, media_ids: [1]})).error);
+            await p.evaluate(i => { const A = window.LCNDA_APP; A.state.currentInvestigationId = i; A.state.investigationFolderId = 0; A.setModule('enquetes'); }, invId);
+            await p.waitForSelector('.investigation-detail [data-dl-inv] .dl-item', {timeout: 20000});
+            const s = await p.evaluate(() => { const b = document.querySelector('[data-dl-inv]'); return {txt: b.textContent.replace(/\s+/g, ' '), add: !!b.querySelector('[data-dl-inv-add="2"]'), leads: b.querySelectorAll('[data-dl-inv-lead]').length}; });
+            assert.match(s.txt, /Notoriété de Pierre MAZAUD ↔ Notoriété de Jean DURAND/); assert.match(s.txt, /pas dans le dossier/); assert.match(s.txt, /En commun :.*152e régiment/);
+            assert.ok(s.add && s.leads >= 1, JSON.stringify(s));
+            const n0 = (await api('investigation', {id: invId})).items?.length ?? 0;
+            await p.click('[data-dl-inv] [data-dl-inv-lead="0"]');
+            await p.waitForFunction(() => /Piste ajoutée/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 10000});
+            const items = (await api('investigation', {id: invId})).items || []; assert.equal(items.length, n0 + 1); assert.match(items.at(-1).notes || items[0].notes || '', /D’après « Notoriété de Jean DURAND », l\. \d/);
+            await p.click('[data-dl-inv] [data-dl-inv-add="2"]');
+            await p.waitForFunction(() => /Ajouté au dossier/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 10000});
+            const media = (await api('investigation', {id: invId})).media || []; assert.deepEqual(media.map(m => Number(m.id)).sort(), [1, 2]);
+            await p.waitForFunction(() => document.querySelector('[data-dl-inv]') && !document.querySelector('[data-dl-inv] [data-dl-inv-add]'), null, {timeout: 15000});
+        });
         await t('côté serveur : pas de lien à soi-même, document inconnu refusé, raison inconnue → « autre »', async () => {
             assert.match((await post('doc_link_save', {media_id: 1, other_id: 1})).error || '', /lui-même/);
             assert.match((await post('doc_link_save', {media_id: 1, other_id: 999})).error || '', /introuvable/);

@@ -123,5 +123,36 @@
         new MutationObserver(() => { if (lb.open) go(); }).observe(lb, {attributes: true, attributeFilter: ['open']}); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lbWatch); else lbWatch();
 
+    /* ─── 🔎 dans une enquête : les liens entre les documents du dossier, ceux qui n'y sont pas encore, ce qu'ils apprennent ─── */
+    async function invDocLinks(page, data, invId, refresh) {
+        if (!page || !Array.isArray(data?.media) || !data.media.length) return;
+        const inDossier = new Map(data.media.map(m => [Number(m.id || m.media_id), m])), ro = kiosk();
+        let all; try { all = await Promise.all([...inDossier.keys()].map(async id => ({id, st: await load(id)}))); } catch (_) { return; }
+        if (!page.isConnected) return;
+        const pairs = [], outside = new Map(), learns = [], seen = new Set();
+        all.forEach(({id, st}) => (st.items || []).forEach(l => {
+            const k = [Math.min(id, l.media_id), Math.max(id, l.media_id)].join('-'); if (seen.has(k)) return; seen.add(k);
+            const a = inDossier.get(id); pairs.push({a: {id, title: a?.title || a?.filename || ''}, b: l, inB: inDossier.has(l.media_id)});
+            if (!inDossier.has(l.media_id)) outside.set(l.media_id, {...l, via: a?.title || ''});
+            if (learnOn()) compare(st.text, l.text).learn.slice(0, 4).forEach(e => learns.push({...e, from: l.title, fromId: l.media_id}));
+        }));
+        if (!pairs.length) return;
+        const sec = document.createElement('section'); sec.className = 'card dl-inv'; sec.dataset.dlInv = '';
+        sec.innerHTML = `<div class="dl-h"><h3>🔗 ${esc(T('Documents liés'))} <small class="muted">${pairs.length}</small></h3></div>
+            <ul class="dl-list">${pairs.map(p => `<li class="dl-item"><div class="dl-head"><span class="dl-ic">${reasonOf(p.b.reason)[1]}</span><b>${esc(p.a.title)}</b> ↔ <button type="button" class="link-button" data-dl-inv-open="${p.b.media_id}"><b>${esc(p.b.title)}</b></button>
+                <small class="dl-why">${esc(reasonText(p.b))}</small>${p.inB ? '' : ` <span class="ui-badge is-yellow">${esc(T('pas dans le dossier'))}</span>`}<span class="spacer"></span>${p.inB || ro ? '' : `<button type="button" class="button small" data-dl-inv-add="${p.b.media_id}">＋ ${esc(T('Ajouter au dossier'))}</button>`}</div>
+                ${(() => { const c = compare(all.find(x => x.id === p.a.id)?.st.text || '', p.b.text).common; return c.length ? `<div class="dl-common"><span class="muted">${esc(T('En commun :'))}</span> ${c.slice(0, 10).map(e => `<span class="dl-chip is-${e.type}">${ICON[e.type] || ''} ${esc(e.label)}</span>`).join(' ')}</div>` : ''; })()}</li>`).join('')}</ul>
+            ${learns.length ? `<details class="dl-learn" open><summary>💡 ${esc(T('Ce que les documents liés apprennent ({n})', {n: learns.length}))}</summary><ul>${learns.map((e, i) => `<li><span class="dl-chip is-${e.type}">${ICON[e.type] || ''} ${esc(e.label)}</span> <small class="muted">${esc(e.from)} · ${esc(T('l. {n}', {n: e.line}))}</small>${ro ? '' : ` <button type="button" class="button small secondary" data-dl-inv-lead="${i}">🔎 ${esc(T('En faire une piste'))}</button>`}${e.quote ? `<br><small class="dl-quote">« ${esc(e.quote)} »</small>` : ''}</li>`).join('')}</ul></details>` : ''}`;
+        page.querySelector('[data-dl-inv]')?.remove(); page.append(sec);
+        sec.addEventListener('click', async e => {
+            const b = e.target.closest('button'); if (!b) return;
+            if (b.dataset.dlInvOpen) return ext.openDocMedia?.(Number(b.dataset.dlInvOpen));
+            if (b.dataset.dlInvAdd) { b.disabled = true; try { await A().api('link_investigation_media', {}, {method: 'POST', body: {investigation_id: invId, media_ids: [Number(b.dataset.dlInvAdd)]}}); toast(T('Ajouté au dossier de l’enquête.')); refresh?.(); } catch (err) { b.disabled = false; toast(err.message, 'error'); } return; }
+            if (b.dataset.dlInvLead) { const x = learns[Number(b.dataset.dlInvLead)]; if (!x) return; b.disabled = true;
+                try { await A().api('add_investigation_item', {}, {method: 'POST', body: {investigation_id: invId, kind: 'lead', status: 'to_explore', title: x.label, notes: `${T('D’après « {doc} », l. {n}', {doc: x.from, n: x.line})}${x.quote ? ` : « ${x.quote} »` : ''}`}}); toast(T('Piste ajoutée à l’enquête.')); refresh?.(); } catch (err) { b.disabled = false; toast(err.message, 'error'); } }
+        });
+    }
+
     ext.docLinks = {mount, compare, entities, REASONS, LEARN_KEY};
+    ext.invDocLinks = invDocLinks;
 })();

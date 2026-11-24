@@ -25,3 +25,9 @@ Ouvrir ce document ¦ Avaa tämä asiakirja ¦ Dokumentum megnyitása
 Changer la raison… ¦ Muuta syytä… ¦ Ok módosítása…
 Choisis les deux documents à lier. ¦ Valitse kaksi yhdistettävää asiakirjaa. ¦ Válaszd ki a két kapcsolandó dokumentumot.
 Ce lien n’existe plus. ¦ Tätä yhteyttä ei ole enää. ¦ Ez a kapcsolat már nem létezik.
+pas dans le dossier ¦ ei kansiossa ¦ nincs az aktában
+Ajouter au dossier ¦ Lisää kansioon ¦ Hozzáadás az aktához
+Ce que les documents liés apprennent ({n}) ¦ Mitä yhdistetyt asiakirjat kertovat ({n}) ¦ Amit a kapcsolt dokumentumok elárulnak ({n})
+Ajouté au dossier de l’enquête. ¦ Lisätty tutkimuksen kansioon. ¦ Hozzáadva a nyomozás aktájához.
+D’après « {doc} », l. {n} ¦ Lähteen ”{doc}” mukaan, r. {n} ¦ A(z) „{doc}” szerint, {n}. s.
+Piste ajoutée à l’enquête. ¦ Johtolanka lisätty tutkimukseen. ¦ Nyom hozzáadva a nyomozáshoz.
