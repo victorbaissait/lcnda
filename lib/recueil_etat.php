@@ -39,11 +39,11 @@ function recueil_etat_install(PDO $pdo): void
     $have = static fn(string $t) => array_column($pdo->query("PRAGMA table_info($t)")->fetchAll(PDO::FETCH_ASSOC), 'name');
     $p = $have('recueil_pages');
     foreach (['state' => "TEXT NOT NULL DEFAULT ''", 'absent' => "TEXT NOT NULL DEFAULT ''", 'absent_note' => "TEXT NOT NULL DEFAULT ''", 'absent_until' => "TEXT NOT NULL DEFAULT ''",
-        'legibility' => "TEXT NOT NULL DEFAULT ''", 'redo' => 'INTEGER NOT NULL DEFAULT 0', 'gap_id' => 'INTEGER'] as $c => $def) {
+        'legibility' => "TEXT NOT NULL DEFAULT ''", 'redo' => 'INTEGER NOT NULL DEFAULT 0', 'gap_id' => 'INTEGER', 'assignee' => "TEXT NOT NULL DEFAULT ''"] as $c => $def) { // assignee : 👥 confiée à (migration 109)
         if (!in_array($c, $p, true)) { $pdo->exec("ALTER TABLE recueil_pages ADD COLUMN $c $def"); }
     }
     $r = $have('recueils');
-    foreach (['numbering' => "TEXT NOT NULL DEFAULT ''", 'expected_pages' => 'INTEGER NOT NULL DEFAULT 0'] as $c => $def) {
+    foreach (['numbering' => "TEXT NOT NULL DEFAULT ''", 'expected_pages' => 'INTEGER NOT NULL DEFAULT 0', 'goal_date' => "TEXT NOT NULL DEFAULT ''"] as $c => $def) { // goal_date : 📈 objectif (migration 109)
         if (!in_array($c, $r, true)) { $pdo->exec("ALTER TABLE recueils ADD COLUMN $c $def"); }
     }
 }
@@ -76,11 +76,12 @@ function recueil_etat_decorate(PDO $pdo, array $detail): array
 {
     recueil_etat_ensure($pdo);
     $rid = (int) $detail['recueil']['id'];
-    $s = $pdo->prepare('SELECT numbering, expected_pages FROM recueils WHERE id=?'); $s->execute([$rid]); $r = $s->fetch(PDO::FETCH_ASSOC) ?: [];
+    $s = $pdo->prepare('SELECT numbering, expected_pages, goal_date FROM recueils WHERE id=?'); $s->execute([$rid]); $r = $s->fetch(PDO::FETCH_ASSOC) ?: [];
+    $detail['recueil']['goal_date'] = (string) ($r['goal_date'] ?? '');
     $detail['recueil']['numbering'] = in_array($r['numbering'] ?? '', RECUEIL_NUMBERING, true) ? $r['numbering'] : '';
     $detail['recueil']['expected_pages'] = (int) ($r['expected_pages'] ?? 0);
     $rows = [];
-    $s = $pdo->prepare('SELECT id, state, absent, absent_note, absent_until, legibility, redo, gap_id FROM recueil_pages WHERE recueil_id=?'); $s->execute([$rid]);
+    $s = $pdo->prepare('SELECT id, state, absent, absent_note, absent_until, legibility, redo, gap_id, assignee FROM recueil_pages WHERE recueil_id=?'); $s->execute([$rid]);
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $x) { $rows[(int) $x['id']] = $x; }
     // les photos « page » de chaque page, et les autres pages de leur document (📑) : l'acte de l'Atelier peut être sur l'une d'elles
     $mediaOf = []; $set = [];
@@ -126,7 +127,7 @@ function recueil_etat_decorate(PDO $pdo, array $detail): array
         }
         $p += ['state' => $state, 'state_auto' => $auto, 'state_set' => ($x['state'] ?? '') !== '', 'act' => $info, 'reliability' => $rel, 'doubt' => $doubt,
             'absent' => $absent, 'absent_note' => (string) ($x['absent_note'] ?? ''), 'absent_until' => (string) ($x['absent_until'] ?? ''),
-            'legibility' => $legi, 'redo' => (int) ($x['redo'] ?? 0), 'gap_id' => isset($x['gap_id']) ? (int) $x['gap_id'] : 0, 'has_photo' => !empty($mediaOf[$p['id']])];
+            'legibility' => $legi, 'redo' => (int) ($x['redo'] ?? 0), 'gap_id' => isset($x['gap_id']) ? (int) $x['gap_id'] : 0, 'has_photo' => !empty($mediaOf[$p['id']]), 'assignee' => (string) ($x['assignee'] ?? '')];
         if ($absent === 'blanche') { $count['blank']++; }
         elseif ($absent) { $count['absent']++; }
         else { $count[$state]++; if ($rel === 'review') { $count['review']++; } if ($rel === 'doubt') { $count['doubt']++; } }
@@ -135,6 +136,7 @@ function recueil_etat_decorate(PDO $pdo, array $detail): array
     }
     unset($p);
     $detail['etat'] = $count;
+    if (function_exists('recueil_progress_record')) { recueil_progress_record($pdo, $rid, $count); } // 📈 un point par jour (lib/recueil_plus.php)
     return $detail;
 }
 
@@ -160,6 +162,7 @@ function recueil_etat_clean(array $f): array
     if (array_key_exists('absent_until', $f)) { $y = (string) ($f['absent_until'] ?? ''); $out['absent_until'] = preg_match('/^\d{4}$/', $y) ? $y : ''; }
     if (array_key_exists('legibility', $f)) { $out['legibility'] = in_array($f['legibility'], RECUEIL_LEGIBILITY, true) ? $f['legibility'] : ''; }
     if (array_key_exists('redo', $f)) { $out['redo'] = !empty($f['redo']) ? 1 : 0; }
+    if (array_key_exists('assignee', $f)) { $out['assignee'] = mb_substr(safe_text((string) ($f['assignee'] ?? '')), 0, 80); }
     return $out;
 }
 
@@ -174,7 +177,7 @@ function recueil_pages_set(PDO $pdo, array $data): array
     $ids = recueil_etat_pages($pdo, $rid, is_array($data['page_ids'] ?? null) ? $data['page_ids'] : []);
     $f = recueil_etat_clean(is_array($data['fields'] ?? null) ? $data['fields'] : []);
     if (!$f) { throw new RuntimeException('Rien à changer.'); }
-    $before = $pdo->query('SELECT id, state, absent, absent_note, absent_until, legibility, redo, gap_id FROM recueil_pages WHERE id IN (' . implode(',', $ids) . ')')->fetchAll(PDO::FETCH_ASSOC);
+    $before = $pdo->query('SELECT id, state, absent, absent_note, absent_until, legibility, redo, gap_id, assignee FROM recueil_pages WHERE id IN (' . implode(',', $ids) . ')')->fetchAll(PDO::FETCH_ASSOC);
     $gapId = 0;
     if (!empty($data['gap']) && !empty($f['absent']) && $f['absent'] !== 'blanche') {
         $nums = recueil_etat_nums($pdo, $rid, $ids);
@@ -201,10 +204,10 @@ function recueil_pages_restore(PDO $pdo, array $data): array
     $rid = safe_int($data['recueil_id'] ?? 0); recueil_row($pdo, $rid);
     $rows = is_array($data['before'] ?? null) ? $data['before'] : [];
     $ids = recueil_etat_pages($pdo, $rid, array_column($rows, 'id'));
-    $u = $pdo->prepare('UPDATE recueil_pages SET state=?, absent=?, absent_note=?, absent_until=?, legibility=?, redo=?, gap_id=? WHERE id=? AND recueil_id=?');
+    $u = $pdo->prepare('UPDATE recueil_pages SET state=?, absent=?, absent_note=?, absent_until=?, legibility=?, redo=?, gap_id=?, assignee=? WHERE id=? AND recueil_id=?');
     foreach ($rows as $x) {
-        $c = recueil_etat_clean($x + ['state' => '', 'absent' => '', 'absent_note' => '', 'absent_until' => '', 'legibility' => '', 'redo' => 0]);
-        $u->execute([$c['state'], $c['absent'], $c['absent_note'], $c['absent_until'], $c['legibility'], $c['redo'], safe_int($x['gap_id'] ?? 0) ?: null, (int) $x['id'], $rid]);
+        $c = recueil_etat_clean($x + ['state' => '', 'absent' => '', 'absent_note' => '', 'absent_until' => '', 'legibility' => '', 'redo' => 0, 'assignee' => '']);
+        $u->execute([$c['state'], $c['absent'], $c['absent_note'], $c['absent_until'], $c['legibility'], $c['redo'], safe_int($x['gap_id'] ?? 0) ?: null, $c['assignee'], (int) $x['id'], $rid]);
     }
     $gap = safe_int($data['gap_id'] ?? 0);
     if ($gap) {
@@ -263,6 +266,7 @@ function recueil_etat_save_meta(PDO $pdo, int $rid, array $data): void
 {
     recueil_etat_ensure($pdo);
     if (array_key_exists('numbering', $data)) { $pdo->prepare('UPDATE recueils SET numbering=? WHERE id=?')->execute([in_array($data['numbering'], RECUEIL_NUMBERING, true) ? $data['numbering'] : '', $rid]); }
+    if (array_key_exists('goal_date', $data)) { $g = (string) ($data['goal_date'] ?? ''); $pdo->prepare('UPDATE recueils SET goal_date=? WHERE id=?')->execute([preg_match('/^\d{4}-\d{2}-\d{2}$/', $g) ? $g : '', $rid]); }
     if (array_key_exists('expected_pages', $data)) { $pdo->prepare('UPDATE recueils SET expected_pages=? WHERE id=?')->execute([max(0, min(100000, safe_int($data['expected_pages'] ?? 0))), $rid]); }
 }
 

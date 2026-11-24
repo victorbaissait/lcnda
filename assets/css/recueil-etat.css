@@ -169,3 +169,17 @@
 .rsn-note { font-size: 12px; margin: 4px 0 0; }
 .rsn-hist + .rsn-hx + .re-msg, .rsn-hist + .rsn-hx + .re-msg + .re-msg { margin-bottom: 6px; }
 .rf-opts { display: grid; gap: 4px; margin-top: 10px; }
+
+/* ➕ confiée à, avancement (heritage-recueil-plus.js) */
+.re-cell.is-dim { opacity: .28; }
+.re-who { font-size: 13px; display: inline-flex; gap: 6px; align-items: center; }
+.re-progress { border: 1.5px solid #c9ced8; padding: 8px 12px; }
+.re-progress h3 { margin: 0 0 4px; font-size: 15px; }
+.rp-chart { width: 100%; max-width: 420px; height: 80px; display: block; border-bottom: 2px solid #111; }
+.rp-chart polyline { fill: none; stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.rp-chart .rp-tr { stroke: #d4a800; } .rp-chart .rp-rel { stroke: #1a7f37; }
+.rp-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; margin: 4px 0; }
+.rp-legend i { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 4px; }
+.rp-legend i.rp-tr { background: #d4a800; } .rp-legend i.rp-rel { background: #1a7f37; }
+.rp-msg, .rp-goal { margin: 2px 0; font-size: 13px; }
+.rp-goal.is-late { color: #c62828; font-weight: 700; } .rp-goal.is-ok { color: #1a7f37; font-weight: 700; }

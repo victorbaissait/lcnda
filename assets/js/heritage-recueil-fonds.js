@@ -123,7 +123,7 @@
         host.innerHTML = `<div class="rf-fonds-view">
             <div class="re-kpis">${kpi(String(tot.n), esc(T('recueils · {s}', {s: plural(services, 'service', 'services')})))}${kpi(String(tot.exp), esc(T('pages attendues')))}${kpi(`${pc(tot.photos, tot.exp)} %`, esc(T('photographiées')))}${kpi(`${pc(tot.tr, tot.live)} %`, esc(T('transcrites · {r} % relues', {r: String(pc(tot.rel, tot.live))})))}${kpi(String(tot.absent), esc(T('pages absentes · {g}', {g: plural(tot.gaps, 'lacune', 'lacunes')})))}</div>
             <div class="rf-tools"><label class="rf-show">${esc(T('Montrer :'))} <select data-rf-show>${SHOW.map(([k, l]) => `<option value="${k}" ${show === k ? 'selected' : ''}>${esc(T(l))}</option>`).join('')}</select></label><span class="spacer"></span>
-                <button type="button" class="button small secondary" data-rf-cols>☰ ${esc(T('Colonnes…'))}</button><button type="button" class="button small secondary" data-rf-csv>⤓ ${esc(T('Tableur'))}</button><button type="button" class="button small secondary" data-rf-print>🖨 ${esc(T('État des fonds'))}</button></div>
+                <button type="button" class="button small secondary" data-rf-cols>☰ ${esc(T('Colonnes…'))}</button><button type="button" class="button small secondary" data-rf-csv>⤓ ${esc(T('Tableur'))}</button>${ext.recueilPlus ? `<button type="button" class="button small secondary" data-rf-ead title="${esc(T('Le format des inventaires d’archives (EAD), pour un centre d’archives'))}">⤓ EAD</button>` : ''}<button type="button" class="button small secondary" data-rf-print>🖨 ${esc(T('État des fonds'))}</button></div>
             ${rows.length ? `<div class="data-table-wrap"><table class="data-table rf-table" data-cols-off><thead><tr><th>${esc(T('Recueil'))}</th>${cols.map(k => `<th class="rf-col-${k}">${esc(colTitle(k))}</th>`).join('')}</tr></thead><tbody>${body}</tbody></table></div>`
                 : A().emptyState({icon: '🏛', text: all.length ? T('Aucun recueil ne correspond') : T('Aucun recueil pour l’instant'), hint: all.length ? T('Change « Montrer » ou les mots cherchés.') : T('Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ».')})}
             <p class="muted rf-note">${esc(T('Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ».'))}</p></div>`;
@@ -133,6 +133,7 @@
         host.querySelectorAll('[data-rf-etat]').forEach(b => b.addEventListener('click', () => { const A2 = A(); A2.state.hRecueil = {id: Number(b.dataset.rfEtat), tab: 'etat', page: 0, view: 'grid', q: ''}; A2.state.listType = 'recueils'; A2.setModule('listes'); }));
         host.querySelector('[data-rf-cols]').addEventListener('click', () => colsDialog(() => draw(host, q)));
         host.querySelector('[data-rf-csv]').addEventListener('click', () => csv(rows));
+        host.querySelector('[data-rf-ead]')?.addEventListener('click', () => ext.recueilPlus.ead()); // 📤
         host.querySelector('[data-rf-print]').addEventListener('click', () => (UI().printPage ? UI().printPage(T('État des fonds')) : window.print()));
     }
     function colsDialog(after) {
