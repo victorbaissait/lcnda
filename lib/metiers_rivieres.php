@@ -125,6 +125,8 @@ function mr_http(string $step, string $url, int $max = 8_000_000, string $accept
     if ($too) { throw new RuntimeException(i18n_t('Réponse trop grosse.')); }
     if ($code === 0) { throw new RuntimeException(i18n_t('Pas de connexion à Internet : réessaie quand tu seras connecté.') . ($err !== '' ? " ({$err})" : '')); }
     if ($code < 200 || $code >= 300) { throw new RuntimeException(i18n_t('Le site répond {code}.', ['code' => (string) $code])); }
+    // fabriquer les fichiers d'essai (scripts seulement) : LCNDA_MR_RECORD_DIR
+    if (PHP_SAPI === 'cli' && ($rec = (string) getenv('LCNDA_MR_RECORD_DIR')) !== '') { @file_put_contents($rec . '/' . preg_replace('/[^A-Za-z0-9_.-]/', '', $step), $body); }
     return $body;
 }
 /** une adresse de l'API de POP : les listes s'écrivent « bases[]=… » (pas « bases[0]=… ») */
@@ -180,7 +182,7 @@ function mr_deps_near(array $p): array
         }
     }
     unset($deps['']);
-    return array_keys($deps);
+    return array_map('strval', array_keys($deps));
 }
 function mr_dep_of(string $insee): string { return preg_match('/^(97\d|2[AB]|\d{2})/', strtoupper($insee), $m) ? $m[1] : ''; }
 
@@ -330,7 +332,7 @@ function mr_person_data(PDO $pdo, int $id): array
     foreach ($L['jobs'] as $j) { foreach (mr_job_trades($j['text']) as $t) { $wanted[$t['id']] ??= ['trade' => $t, 'job' => $j['text']]; } }
     if (!$wanted) { return $out; }
     $deps = []; foreach ($L['places'] as $pl) { foreach (mr_deps_near($pl) as $d) { $deps[$d] = 1; } }
-    $casias = []; foreach (array_keys($deps) as $d) { foreach (mr_casias($d) as $r) { $casias[] = $r; } }
+    $casias = []; foreach (array_keys($deps) as $d) { foreach (mr_casias((string) $d) as $r) { $casias[] = $r; } }
     $mines = mr_load('metiers-mines.json.gz')['rows'] ?? []; $mills = mr_load('roe-moulins.json.gz')['rows'] ?? [];
     foreach ($wanted as $tid => $w) {
         $t = $w['trade']; $found = [];
@@ -441,11 +443,12 @@ function mr_high_waters(array $st, int $from, int $to): ?array
 /** une station sur la rivière (si elle est connue), la plus proche, qui a des mesures */
 function mr_pick_station(array $stations, array $rivers): ?array
 {
-    $names = array_map(static fn($r) => mr_fold(preg_replace("/^(la |le |les |l')/iu", '', $r['name'])), $rivers);
-    usort($stations, static function ($a, $b) use ($names) {
-        $on = static fn($s) => (int) array_filter($names, static fn($n) => $n !== '' && str_contains(mr_fold($s['river'] . ' ' . $s['name']), $n));
-        return [$on($b), -$a['km']] <=> [$on($a), -$b['km']];
-    });
+    $score = static function (array $st) use ($rivers): float {
+        $txt = mr_fold($st['river'] . ' ' . $st['name']); $best = 0.0;
+        foreach ($rivers as $r) { $n = mr_fold((string) preg_replace("/^(la |le |les |l')/iu", '', $r['name'])); if ($n !== '' && mr_has($txt, $n)) { $best = max($best, (float) $r['len_km']); } }
+        return $best;
+    };
+    usort($stations, static fn($a, $b) => [$score($b), $a['km']] <=> [$score($a), $b['km']]);
     return $stations[0] ?? null;
 }
 /** GET mr_rivers&id= (une personne) | &place_id=… (un lieu) → rivières, repères de crues, hautes eaux, métiers de la rivière */

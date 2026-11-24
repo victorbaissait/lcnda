@@ -163,11 +163,14 @@
         if (!host.isConnected) return;
         if (!d.installed) {
             host.innerHTML = (A().empty ? A().empty(i18n('L’histoire des lieux n’est pas installée.'), {icon: '🏘', hint: i18n('Population de la commune, arrivée du train, été de l’année, séismes et inondations : un fichier d’environ 18 Mo, téléchargé une fois.'), action: {label: i18n('⤓ Installer l’histoire des lieux'), attrs: 'data-hist-install'}}) : '') + childLines(d);
-            return;
+            return afterFill(host, d);
         }
         const html = [popLines(d), trainLines(d), travelLines(d), climateLines(d), quakeLines(d), floodLines(d), childLines(d)].join('');
         host.innerHTML = html || (A().empty ? A().empty(i18n('Rien à dire pour l’instant : il faut des lieux en France (placés sur la carte) et des dates.'), {icon: '🏘'}) : '');
+        afterFill(host, d);
     }
+    /** crochet : d'autres modules ajoutent leurs lignes au bloc (ex. 🌊 la rivière, heritage-metiers-rivieres.js) — ext.histoireAfter.push((host, d) => …) */
+    function afterFill(host, d) { (ext.histoireAfter || []).forEach(f => { try { Promise.resolve(f(host, d)).catch(e => console.error(e)); } catch (e) { console.error(e); } }); }
 
     (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-hist-life]').forEach(fill); });
 

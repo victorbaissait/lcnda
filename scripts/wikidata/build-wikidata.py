@@ -37,6 +37,7 @@ import argparse
 import collections
 import gzip
 import hashlib
+import http.client
 import json
 import math
 import os
@@ -130,7 +131,7 @@ class Wdqs:
                     time.sleep(10 * (attempt + 1))
                     continue
                 raise
-            except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+            except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException, OSError) as e:
                 self.last = time.time()
                 log(f'  … réseau : {e} — nouvel essai dans 30 s')
                 time.sleep(30)

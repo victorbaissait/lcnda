@@ -277,6 +277,30 @@
    "old": 17370,
    "places": 9269,
    "size": 441763
+  },
+  "44": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Loire-Inférieure",
+    "bibl": "Quilgars (Henri), Dictionnaire topographique du département de la Loire-Inférieure, Nantes, 1906.",
+    "gallica": ""
+   },
+   "communes": 221,
+   "label": "Loire-Atlantique",
+   "old": 1790,
+   "places": 20577,
+   "size": 373021
+  },
+  "51": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Marne",
+    "bibl": "Longnon (Auguste), Dictionnaire topographique du département de la Marne, Paris, 1891.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39298v"
+   },
+   "communes": 635,
+   "label": "Marne",
+   "old": 15768,
+   "places": 6626,
+   "size": 424890
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

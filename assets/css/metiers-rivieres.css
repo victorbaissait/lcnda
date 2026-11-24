@@ -1,0 +1,16 @@
+/* ⛏️🏭⚙️🌊🖼️ Métiers et rivières (assets/js/heritage-metiers-rivieres.js) — reprend .hist-row (histoire.css) et .cplus-* (commune-plus.css) ;
+   ici seulement le peu qui manque. Couleurs prises du texte (currentColor) : clair et sombre. */
+.mr-block, .mr-hist { display: grid; gap: 10px; }
+.mr-hist { margin-top: 2px; }
+.mr-place { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 1rem; margin: 1rem 0; }
+.mr-place:empty { display: none; }
+.mr-place .mr-panel[data-mr-part="place_pop"] { grid-column: 1 / -1; }
+.mr-panel p { margin: .2rem 0 .4rem; line-height: 1.45; }
+.mr-more summary { cursor: pointer; margin: .3rem 0; font-size: .92em; }
+.mr-list { list-style: none; margin: .3rem 0; padding: 0; display: grid; gap: .3rem; max-height: 22rem; overflow: auto; }
+.mr-list li { padding: .3rem .55rem; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: 8px; overflow-wrap: anywhere; }
+.mr-filter { width: 100%; max-width: 22rem; margin: .2rem 0 .4rem; }
+.mr-src { margin: .5rem 0 0; font-size: .82em; opacity: .78; }
+.mr-life { font-weight: 600; }
+.mr-off { font-size: .9em; }
+@media (max-width: 640px) { .mr-place { grid-template-columns: 1fr; } }
