@@ -85,7 +85,7 @@ echo json_encode(['ok' => 1]);`);
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
         const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result || r; } catch (e) { return {error: e.message}; } }, [a, b]);
         const openPerson = async id => { await p.evaluate(i => window.LCNDA_APP.openPersonById(i), id); await p.waitForSelector('.person-page', {timeout: 20000}); await sleep(900); };
-        const openPage = async () => { await p.evaluate(() => { const A = window.LCNDA_APP; A.state.graphMode = 'stats'; A.state.graphStatsType = 'firstnames_france'; A.setModule('graphiques'); }); await p.waitForSelector('#h-prenoms-import', {timeout: 20000}); await sleep(500); };
+        const openPage = async () => { await p.evaluate(() => { const A = window.LCNDA_APP; A.state.graphMode = 'stats'; A.state.graphStatsType = 'firstnames_france'; A.setModule('graphiques'); }); await p.waitForSelector('#h-prenoms-import', {state: 'attached', timeout: 20000}); await sleep(500); };
         const toastClick = async re => { await p.waitForFunction(r => [...document.querySelectorAll('.ui-toast')].some(x => new RegExp(r).test(x.textContent)), re, {timeout: 30000}); await p.evaluate(r => [...document.querySelectorAll('.ui-toast')].reverse().find(x => new RegExp(r).test(x.textContent)).querySelector('button').click(), re); await sleep(800); };
         const ppLine = async () => { await sleep(700); return p.evaluate(() => document.querySelector('#workspace .ppx-line')?.textContent || ''); };
 
@@ -152,7 +152,7 @@ echo json_encode(['ok' => 1]);`);
             await p.waitForSelector('.ppx-chart', {timeout: 10000});
             const txt = await p.evaluate(() => document.querySelector('dialog[open]').textContent);
             assert.match(txt, /Marie au fil des années/); assert.match(txt, /Cantal/); assert.match(txt, /France/);
-            assert.match(txt, /en 1912 : 380 sur 1 391/); assert.match(txt, /Licence Ouverte/);
+            assert.match(txt, /en 1912 : 380 sur 1\s391/); assert.match(txt, /Licence Ouverte/);
             assert.strictEqual(await p.$$eval('dialog[open] .ppx-chart polyline', l => l.length), 2);
             await p.evaluate(() => document.querySelector('dialog[open]').close());
         });
