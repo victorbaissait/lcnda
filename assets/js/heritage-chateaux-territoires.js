@@ -409,7 +409,7 @@
     ext.mapSetup.push(() => {
         if (!on('map')) return;
         const strip = document.querySelector('.map-layout .tool-strip'), stage = document.getElementById('map-stage');
-        if (!strip || !stage) return;
+        if (!strip || !stage || strip.querySelector('.ct-ctl') || document.getElementById('ct-layer')) return; // une seule fois par carte
         const layer = document.createElement('div'); layer.id = 'ct-layer'; layer.className = 'ct-layer'; layer.innerHTML = '<svg aria-hidden="true"></svg>';
         stage.insertBefore(layer, document.getElementById('map-overlay') || null);
         const p = settings(), ctl = document.createElement('span'); ctl.className = 'ct-ctl';

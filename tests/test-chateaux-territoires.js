@@ -148,7 +148,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.mapMode = 'standard'; A.state.mapCenter = {lat: 48.7, lon: 6.2}; A.state.mapZoom = 6; A.setModule('carte'); });
             await p.waitForSelector('[data-ct-layer]', {timeout: 30000});
             await p.fill('[data-ct-myear]', '1700'); await p.dispatchEvent('[data-ct-myear]', 'change');
-            await p.check('[data-ct-layer]');
+            await p.check('[data-ct-layer]'); console.log('DBG', await p.evaluate(() => JSON.stringify({n: document.querySelectorAll('[data-ct-layer]').length, setups: window.LCNDA_EXT.mapSetup.length, s: localStorage.getItem('genealogie-chateaux-territoires')})));
             await p.waitForFunction(() => document.querySelectorAll('#ct-layer path.ct-snap').length > 5, null, {timeout: 30000}).catch(async e => { console.log(await p.evaluate(() => JSON.stringify({s: localStorage.getItem('genealogie-chateaux-territoires'), svg: document.querySelector('#ct-layer svg')?.innerHTML.slice(0, 300), mode: window.LCNDA_APP.state.mapMode, dm: typeof window.LCNDA_APP.drawMap, chk: document.querySelector('[data-ct-layer]').checked}))); throw e; });
             assert.match(await p.textContent('#ct-layer .ct-cap'), /carte de 1700.*GPL-3\.0/);
             assert.ok(await p.$$eval('#ct-layer text', n => n.some(x => /France/.test(x.textContent))));
