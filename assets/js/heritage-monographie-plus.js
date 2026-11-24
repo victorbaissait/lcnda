@@ -214,7 +214,9 @@
         if (!cur?.shell) return;
         if (cur.panel?.isConnected) { if (toggle) { cur.panel.remove(); cur.panel = null; document.querySelector('[data-mp-custom]')?.setAttribute('aria-expanded', 'false'); } return; }
         const head = cur.shell.querySelector('.place-monograph-head');
-        const div = document.createElement('div'); div.className = 'mp-panel no-export'; div.setAttribute('role', 'region'); div.setAttribute('aria-label', T('Personnaliser la monographie'));
+        const div = document.createElement('div'); div.className = 'mp-panel no-export';
+        // la liste a son propre glisser et ses ↑ ↓ : heritage-dnd.js (poignée posée partout où il y a ↑ ↓) ne doit pas la retoucher
+        div.dataset.dndOff = '1'; div.dataset.ordOff = '1'; div.setAttribute('role', 'region'); div.setAttribute('aria-label', T('Personnaliser la monographie'));
         (head || cur.shell.firstElementChild)?.insertAdjacentElement('afterend', div) || cur.shell.prepend(div);
         cur.panel = div; document.querySelector('[data-mp-custom]')?.setAttribute('aria-expanded', 'true');
         drawPanel(); bindPanel(div);

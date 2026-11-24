@@ -140,11 +140,14 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
             await p.click('.mp-panel li[data-k="family"] [data-mp-move="-1"]');
             const after = await ids(); assert.strictEqual(after.indexOf('family'), i - 1, after.join(','));
             // glisser « Où chercher » tout en haut de la liste
+            // la liste compte une partie par fichier qui en déclare (25 et plus) : une fenêtre assez haute pour voir la ligne tirée et l'endroit visé
+            await p.setViewportSize({width: 1440, height: 2000});
             await p.evaluate(() => document.querySelector('.mp-panel [data-mp-order]').scrollIntoView({block: 'start'}));
             const a = await p.locator('.mp-panel li[data-k="search"] .mp-grip').boundingBox(), b = await p.locator('.mp-panel [data-mp-order] li').first().boundingBox();
             await p.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await p.mouse.down();
             await p.mouse.move(a.x + 5, a.y - 20, {steps: 5}); await p.mouse.move(b.x + 20, b.y + 3, {steps: 12}); await p.mouse.move(b.x + 20, b.y + 2, {steps: 2}); await p.mouse.up();
             await p.waitForFunction(() => document.querySelector('.place-monograph-sections > *:not([hidden])')?.dataset.mp === 'search', null, {timeout: 5000});
+            await p.setViewportSize({width: 1440, height: 900});
             const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-monographie-parties')));
             assert.ok(saved.order.indexOf('search') < saved.order.indexOf('events'), saved.order.join(','));
             // rouvrir la monographie : même ordre

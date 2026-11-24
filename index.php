@@ -1622,7 +1622,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-terre-quotidien.js?v=1" defer></script>
 <script src="assets/js/heritage-commune-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-lieux-patrimoine.js?v=1" defer></script>
-<script src="assets/js/heritage-monographie-plus.js?v=1" defer></script>
+<script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
