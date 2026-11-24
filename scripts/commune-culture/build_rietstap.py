@@ -49,9 +49,7 @@ def parse(path, vol):
                 if cur: out.append(cur)
                 cur = {'name': h.group(1).strip(), 'rest': h.group(2), 'vol': vol, 'pdf': pi, 'page': printed}
             elif cur:
-                cur['rest'] += (' ' if not cur['rest'].endswith('-') else '') + l if not cur['rest'].endswith('-') else ''
-                if cur['rest'].endswith('-') is False and l: pass
-                if cur['rest'] and cur['rest'][-1:] == '-': cur['rest'] = cur['rest'][:-1] + l
+                cur['rest'] = cur['rest'][:-1] + l if cur['rest'].endswith('-') else cur['rest'] + ' ' + l
             if cur and len(cur['rest']) > 1200: out.append(cur); cur = None
         if cur: out.append(cur)
     return out

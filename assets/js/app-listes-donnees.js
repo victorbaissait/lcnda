@@ -96,7 +96,20 @@
     /* ═════════════ les filtres : pastilles → demande ═════════════ */
     const fieldOf = (d, key) => (d.fields || []).find(f => f.key === key) || {key, label: key, type: 'text'};
     const kindOf = f => (['number', 'year'].includes(f.type) ? 'range' : ['enum', 'place', 'bool'].includes(f.type) ? f.type : 'text');
+    /* 🧩 filtres en plus, apportés par d'autres fichiers (ex. « Dans le territoire », heritage-territoires.js) :
+       LCNDA_EXT.dataListFilters = [{id, icon?, label, options() → [{value, label}], prepare?(), test([lat, lon], value) → bool}] ;
+       offerts pour toute liste qui a geo() ; vérifiés ici, dans le navigateur (pas par le serveur). */
+    const xfAll = () => (Array.isArray(ext.dataListFilters) ? ext.dataListFilters : []).filter(f => f && f.id && typeof f.test === 'function');
+    const xfOf = id => xfAll().find(f => f.id === id);
+    const xfCrit = st => st.crit.filter(c => c.kind === 'xf');
+    async function xfPrepare(st) { for (const c of xfCrit(st)) { try { await xfOf(c.fid)?.prepare?.(); } catch (_) {} } }
+    function xfOk(d, row, st) {
+        const cs = xfCrit(st); if (!cs.length) return true;
+        const g = geoOf(d, row); if (!g) return false;
+        return cs.every(c => { const f = xfOf(c.fid); if (!f) return true; try { return !!f.test(g, c.value); } catch (_) { return false; } });
+    }
     function critFilters(c) {
+        if (c.kind === 'xf') return [];
         if (c.kind === 'range') return [c.from !== '' && c.from != null ? {key: c.key, op: 'gte', value: Number(c.from)} : null, c.to !== '' && c.to != null ? {key: c.key, op: 'lte', value: Number(c.to)} : null].filter(Boolean);
         if (c.kind === 'enum') return c.values?.length ? [{key: c.key, op: 'in', value: c.values}] : [];
         if (c.kind === 'bool') return [{key: c.key, op: c.value ? 'true' : 'false'}];
@@ -106,6 +119,7 @@
     }
     const PERIOD_MODES = () => [['in', T('en l’an')], ['within', T('entièrement entre')], ['overlap', T('qui touche la période')]];
     function critText(d, c) {
+        if (c.kind === 'xf') { const x = xfOf(c.fid); return `${x?.icon || '🧩'} ${T(x?.label || c.fid)} : ${c.valueLabel || c.value}`; }
         const f = fieldOf(d, c.key), l = T(f.label);
         if (c.kind === 'range') return c.from !== '' && c.from != null && c.to !== '' && c.to != null ? `${l} : ${c.from} → ${c.to}` : c.from !== '' && c.from != null ? `${l} ≥ ${c.from}` : `${l} ≤ ${c.to}`;
         if (c.kind === 'enum') return `${l} : ${c.values.slice(0, 3).join(', ')}${c.values.length > 3 ? ` +${c.values.length - 3}` : ''}`;
@@ -158,6 +172,7 @@
             if (q && !keys.some(k => fold(r0[k]).includes(q))) continue;
             if (!fs.every(f => rowMatch(r0, f))) continue;
             if (st.period && !periodOk(d, r0, st.period)) continue;
+            if (!xfOk(d, r0, st)) continue;
             let r = r0;
             if (st.near) { const g = geoOf(d, r0); if (!g) continue; const k = km(st.near.lat, st.near.lon, g[0], g[1]); if (k > st.near.km) continue; r = {...r0, _km: Math.round(k * 10) / 10}; }
             out.push(r);
@@ -175,7 +190,18 @@
     const cache = new Map(); // id → Promise(rows) (données « load »)
     const loadAll = d => { if (!cache.has(d.id)) cache.set(d.id, Promise.resolve().then(() => d.load()).then(r => (Array.isArray(r) ? r : r?.rows || [])).catch(e => { cache.delete(d.id); throw e; })); return cache.get(d.id); };
     /** une page de résultats : {rows, total, more} */
+    const XF_MAX = 10000;
     async function fetchPage(d, st, offset, limit) {
+        await xfPrepare(st);
+        if (d.query && xfCrit(st).length) { // un filtre 🧩 : on lit jusqu'à 10 000 lignes du serveur et on trie ici
+            const got = []; let total = Infinity, truncated = false;
+            while (got.length < Math.min(total, XF_MAX)) { const r = await d.query(buildQuery(st, {offset: got.length, limit: 2000})) || {}; const rows = Array.isArray(r) ? r : r.rows || []; total = Number.isFinite(Number(r.total)) ? Number(r.total) : rows.length; if (!rows.length) break; got.push(...rows); }
+            if (total > XF_MAX) truncated = true;
+            let rows = got.filter(r => xfOk(d, r, st));
+            if (st.near) rows = rows.map(x => { if (x._km != null) return x; const g = geoOf(d, x); return g ? {...x, _km: Math.round(km(st.near.lat, st.near.lon, g[0], g[1]) * 10) / 10} : x; });
+            if (st.sort === '_km') rows = sortRows(rows, '_km', st.dir);
+            return {rows: rows.slice(offset, offset + limit), total: rows.length, more: truncated, all: rows};
+        }
         if (d.query) {
             const r = await d.query(buildQuery(st, {offset, limit})) || {};
             let rows = Array.isArray(r) ? r : r.rows || [];
@@ -357,7 +383,19 @@
     function openAdd(btn) {
         const d = cur.d, fs = (d.fields || []).filter(f => f.type !== 'url' && !f.hidden);
         const icon = f => ({year: '📅', number: '#', enum: '☰', place: '📍', bool: '☑'}[f.type] || '🔤');
-        UI().menuAt?.(btn, fs.map(f => ({icon: icon(f), label: T(f.label), run: () => openCrit(f.key)})), {title: T('Ajouter un critère')});
+        const xs = d.geo ? xfAll().filter(f => !f.needs || f.needs === 'geo') : [];
+        UI().menuAt?.(btn, [...fs.map(f => ({icon: icon(f), label: T(f.label), run: () => openCrit(f.key)})), xs.length ? '-' : null, ...xs.map(f => ({icon: f.icon || '🧩', label: T(f.label || f.id), run: () => openXf(f)}))], {title: T('Ajouter un critère')});
+    }
+    async function openXf(x, editIndex = -1) {
+        const st = cur.st, old = editIndex >= 0 ? st.crit[editIndex] : null;
+        const form = editor(`<b>${esc(x.icon || '🧩')} ${esc(T(x.label || x.id))}</b><select name="v" data-ld-xf="${esc(x.id)}" aria-label="${esc(T(x.label || x.id))}"><option value="">${esc(T('Chargement…'))}</option></select>`,
+            form => { const sel = form.elements.v; if (!sel.value) { toast(T('Choisis dans la liste.'), 'error'); return false; }
+                const c = {kind: 'xf', fid: x.id, value: sel.value, valueLabel: sel.selectedOptions[0]?.textContent || sel.value};
+                if (editIndex >= 0) st.crit.splice(editIndex, 1, c); else st.crit.push(c); rerun(); }, 'select');
+        if (!form) return;
+        let opts = []; try { opts = (await x.options?.()) || []; } catch (_) {}
+        const sel = form.elements.v; if (!sel) return;
+        sel.innerHTML = opts.length ? opts.map(o => `<option value="${esc(o.value)}"${String(old?.value) === String(o.value) ? ' selected' : ''}>${esc(o.label ?? o.value)}</option>`).join('') : `<option value="">${esc(T('Rien à choisir pour l’instant.'))}</option>`;
     }
     function openPeriod() {
         const p = cur.st.period || {mode: 'in', from: '', to: ''};

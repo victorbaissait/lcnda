@@ -465,12 +465,23 @@ function cc_person(PDO $pdo, array $q): array
 
 /* ═════════════════════ 🛡️ Rietstap (seulement si une transcription libre est livrée) ═════════════════════ */
 
-/** null = pas de données livrées ; [] = rien pour ce nom */
+/** null = pas de données livrées ; [] = rien pour ce nom. Chaque article : le nom tel qu'imprimé, le pays, le blason (texte de l'OCR,
+ *  montré seulement s'il paraît propre), le tome, la page du scan (lien vers l'image de la page sur Commons) et la page imprimée. */
 function cc_rietstap_lookup(string $last): ?array
 {
-    $D = cc_data('rietstap'); if ($D === null) { return null; }
-    $k = cc_fold($last); if ($k === '') { return []; }
-    return array_values(array_map(static fn($r) => ['name' => $r[0], 'where' => (string) ($r[1] ?? ''), 'blazon' => (string) ($r[2] ?? ''), 'page' => (string) ($r[3] ?? '')], $D['n'][$k] ?? []));
+    $M = cc_data('rietstap'); if ($M === null) { return null; }
+    $k = cc_fold($last); if (mb_strlen($k) < 3) { return []; }
+    $L = ctype_alpha($k[0]) ? $k[0] : '0';
+    if (!in_array($L, $M['letters'] ?? [], true)) { return []; }
+    $D = cc_data('rietstap-' . $L); $rows = $D['n'][$k] ?? [];
+    $out = [];
+    foreach ($rows as $r) {
+        $file = (string) ($M['files'][(string) $r[3]] ?? '');
+        $out[] = ['name' => (string) $r[0], 'where' => (string) $r[1], 'blazon' => (int) $r[6] === 1 ? (string) $r[2] : '', 'raw' => (string) $r[2], 'clean' => (int) $r[6] === 1,
+            'tome' => (int) $r[3], 'page' => (string) $r[5], 'pdf_page' => (int) $r[4],
+            'scan' => $file !== '' ? 'https://commons.wikimedia.org/w/index.php?' . http_build_query(['title' => $file, 'page' => (int) $r[4]]) : ''];
+    }
+    return $out;
 }
 
 /* ═════════════════════ 🧰 les listes (Listes → Données) ═════════════════════ */
@@ -495,7 +506,7 @@ function cc_list(PDO $pdo, array $q): array
     if ($kind === 'rues') {
         // les noms de famille les plus portés de la généalogie (jamais ceux des fiches confidentielles ou des vivants seuls)
         $rows = [];
-        $names = $pdo->query("SELECT last_name, COUNT(*) n FROM persons WHERE TRIM(COALESCE(last_name,''))<>'' AND COALESCE(is_private,0)=0 AND COALESCE(living_status,'')<>'living' GROUP BY UPPER(last_name) ORDER BY n DESC LIMIT " . max(1, min(30, safe_int($q['n'] ?? 12) ?: 12)))->fetchAll(PDO::FETCH_ASSOC);
+        $names = $pdo->query("SELECT MIN(last_name) AS last_name, COUNT(*) n FROM persons WHERE TRIM(COALESCE(last_name,''))<>'' AND COALESCE(is_private,0)=0 AND COALESCE(living_status,'')<>'living' GROUP BY UPPER(last_name) ORDER BY n DESC LIMIT " . max(1, min(30, safe_int($q['n'] ?? 12) ?: 12)))->fetchAll(PDO::FETCH_ASSOC);
         $off = false;
         foreach ($names as $r) {
             $x = cc_rues_search((string) $r['last_name']);
@@ -507,8 +518,8 @@ function cc_list(PDO $pdo, array $q): array
     if ($kind === 'rietstap') {
         if (cc_data('rietstap') === null) { return ['ok' => true, 'rows' => [], 'missing' => true]; }
         $rows = [];
-        foreach ($pdo->query("SELECT last_name, COUNT(*) n FROM persons WHERE TRIM(COALESCE(last_name,''))<>'' GROUP BY last_name ORDER BY n DESC LIMIT 400") as $r) {
-            foreach (cc_rietstap_lookup((string) $r['last_name']) ?? [] as $x) { $rows[] = $x + ['surname' => (string) $r['last_name'], 'people' => (int) $r['n']]; }
+        foreach ($pdo->query("SELECT MIN(last_name) AS last_name, COUNT(*) n FROM persons WHERE TRIM(COALESCE(last_name,''))<>'' GROUP BY UPPER(last_name) ORDER BY n DESC LIMIT 400") as $r) {
+            foreach (cc_rietstap_lookup((string) $r['last_name']) ?? [] as $x) { $rows[] = $x + ['surname' => mb_strtoupper((string) $r['last_name']), 'people' => (int) $r['n']]; }
         }
         return ['ok' => true, 'rows' => $rows];
     }
@@ -553,6 +564,7 @@ function cc_about(): array
         ['id' => 'communes', 'label' => 'Wikidata', 'what' => i18n_t('Communes de France (code INSEE, position)'), 'licence' => 'CC0 1.0', 'mention' => 'Wikidata', 'url' => 'https://www.wikidata.org/wiki/Wikidata:Licensing', 'count' => $count('communes', 'c'), 'bytes' => $size('communes')],
         ['id' => 'wikipedia', 'label' => i18n_t('Wikipédia (français), en ligne'), 'what' => i18n_t('Origine du nom et histoire de la commune'), 'licence' => 'CC BY-SA 4.0', 'mention' => i18n_t('les contributeurs de Wikipédia, lien vers l’article'), 'url' => 'https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Citation_et_r%C3%A9utilisation_du_contenu_de_Wikip%C3%A9dia', 'online' => true],
         ['id' => 'ban', 'label' => i18n_t('Base Adresse Nationale, en ligne'), 'what' => i18n_t('Rues et lieux-dits qui portent un nom de famille'), 'licence' => 'Licence Ouverte 2.0', 'mention' => 'Base Adresse Nationale (BAN)', 'url' => 'https://adresse.data.gouv.fr/', 'online' => true],
+        ...(cc_data('rietstap') ? [['id' => 'rietstap', 'label' => 'J.-B. Rietstap, Armorial général (1884-1887)', 'what' => i18n_t('Blasons de familles d’Europe, par nom (texte lu automatiquement sur les scans : vérifie sur la page)'), 'licence' => i18n_t('domaine public'), 'mention' => i18n_t('scans Internet Archive (University of Toronto), via Wikimedia Commons'), 'url' => 'https://commons.wikimedia.org/wiki/File:Armorial_g%C3%A9n%C3%A9ral_-_pr%C3%A9c%C3%A9d%C3%A9_d%27un_dictionnaire_des_Termes_du_blason_(IA_armorialgnra01rietuoft).pdf', 'count' => (int) (cc_data('rietstap')['entries'] ?? 0), 'bytes' => array_sum(array_map(static fn($f) => (int) filesize($f), glob(APP_ROOT . '/assets/data/cc-rietstap*.json.gz') ?: []))]] : []),
     ], 'rietstap' => cc_data('rietstap') !== null,
         'rietstap_note' => i18n_t('L’Armorial général de Rietstap (1884-1887) est dans le domaine public, mais aucune transcription libre lisible par l’ordinateur n’a été trouvée (seulement des images des pages) : cette partie n’est pas encore là.')];
 }

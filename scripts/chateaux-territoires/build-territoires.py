@@ -127,7 +127,7 @@ def dp(pts, tol):
 
 
 def enc_ring(ring, q, tol):
-    r = dp([(float(x), float(y)) for x, y in ring[:]], tol)
+    r = dp([(float(p[0]), float(p[1])) for p in ring], tol)
     if len(r) < 4:
         return None
     out, px, py = [], 0, 0
@@ -235,7 +235,7 @@ def build_items(cache, shapes_out):
                 lst.append(row)
         sh = wd.val(b, 'sh')
         if sh and shapes_out is not None:
-            name = urllib.parse.unquote(sh.rsplit('/Data:', 1)[-1]).replace('_', ' ')
+            name = urllib.parse.unquote_plus(sh.rsplit('/Data:', 1)[-1]).replace('_', ' ')
             if name not in shape_ix:
                 d = commons_map(name, os.path.join(cache, 'maps'))
                 lic = ((d or {}).get('license') or '').strip()
