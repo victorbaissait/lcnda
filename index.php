@@ -1220,7 +1220,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu.js?v=16" defer></script>
 <script src="assets/js/app-chronologie.js?v=13" defer></script>
 <script src="assets/js/app-comparaison.js?v=10" defer></script>
-<script src="assets/js/app-carte.js?v=15" defer></script>
+<script src="assets/js/app-carte.js?v=16" defer></script>
 <script src="assets/js/app-enquetes.js?v=15" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=24" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
@@ -1286,7 +1286,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-maintenance.js?v=64" defer></script>
 <script src="assets/js/app-recherche.js?v=34" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=2" defer></script>
-<script src="assets/js/app-graphiques.js?v=26" defer></script>
+<script src="assets/js/app-graphiques.js?v=27" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=45" defer></script>
