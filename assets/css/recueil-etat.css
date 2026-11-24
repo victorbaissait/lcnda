@@ -70,3 +70,48 @@
 .h-rc-side .re-page .re-check, dialog .re-check { display: inline-flex; flex-direction: row; align-items: center; gap: 6px; margin: 0; }
 .h-rc-side .re-page .re-check input, dialog .re-check input { width: auto; margin: 0; flex: none; }
 .h-rc-side .re-page select { width: auto; }
+
+/* 📑 Sommaire (heritage-recueil-sommaire.js) */
+.rs-tab { display: grid; gap: 10px; }
+.rs-bar-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.rs-q { flex: 1 1 220px; min-width: 0; max-width: 360px; }
+.rs-level { margin: 0; display: inline-flex; }
+.rs-tree { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.rs-li { padding-left: calc(var(--lv, 0) * 22px); }
+.rs-ln { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px dashed #c9ced8; flex-wrap: wrap; }
+.rs-ln .spacer { flex: 1; }
+.rs-tw { flex: none; width: 22px; height: 22px; border: 1.5px solid #c9ced8; background: #fff; font: 700 12px system-ui, sans-serif; line-height: 1; padding: 0; cursor: pointer; color: inherit; }
+.rs-tw.is-leaf { border-color: transparent; background: none; cursor: default; text-align: center; color: #888; }
+.rs-rng { color: #666; font-variant-numeric: tabular-nums; font-size: 12.5px; white-space: nowrap; }
+.rs-title { border: 0; background: none; padding: 0; font: inherit; font-weight: 700; color: inherit; text-align: left; cursor: pointer; }
+.rs-title:hover, .rs-title:focus-visible { text-decoration: underline; }
+.rs-title.is-el { font-weight: 400; font-style: italic; }
+.lv-1 > .rs-ln .rs-title:not(.is-el) { font-size: 15px; }
+.rs-pill { font: 700 10.5px/1.3 system-ui, sans-serif; text-transform: uppercase; letter-spacing: .03em; border: 1.5px solid #8a8f99; color: #555; background: #f1f2f4; padding: 1px 5px; }
+.rs-years { font-size: 12px; color: #666; }
+.rs-prog { display: inline-flex; align-items: center; gap: 6px; }
+.rs-bar { display: inline-block; width: 70px; height: 8px; border: 1.5px solid #111; overflow: hidden; background: #fff; }
+.rs-bar i { display: block; height: 100%; background: #055dff; }
+.rs-bar i.is-full { background: #1a7f37; } .rs-bar i.is-doing { background: #d4a800; }
+.rs-prog small { font-size: 11.5px; color: #555; font-variant-numeric: tabular-nums; }
+.rs-prog .rs-abs { color: #c62828; }
+.rs-note { margin: 2px 0 6px 30px; font-size: 13px; color: #333; white-space: normal; }
+.rs-tab.is-read .rs-tree { font-size: 16px; }
+.rs-tab.is-read .rs-note { font-size: 14.5px; margin-left: 30px; border-left: 3px solid #055dff; padding-left: 8px; }
+.rs-tree.is-mini { font-size: 13px; }
+.rs-tree.is-mini .rs-ln { padding: 3px 0; }
+.rs-hint { font-size: 12px; margin: 0; }
+.rs-warn { line-height: 1.6; }
+.rs-form .rs-years-in { display: flex; gap: 6px; align-items: center; }
+.rs-form .rs-years-in input { width: 80px; }
+.rs-prop, .rs-prop ul { list-style: none; margin: 0; padding: 0; }
+.rs-prop ul { padding-left: 24px; }
+.rs-prop li { padding: 3px 0; }
+.rs-prop .re-check { display: flex; gap: 8px; align-items: center; }
+.rs-ptitle { flex: 1; min-width: 0; }
+.h-rc-path { font-size: 13px; margin-bottom: 8px; }
+.rs-path { margin: 0 0 4px; }
+.rs-pels { margin: 0; padding-left: 18px; font-size: 12.5px; color: #444; }
+.rd-chap { margin: 0 0 6px; font-size: 13px; color: #444; }
+:root[data-theme="dark"] .rs-tw, :root[data-theme="dark"] .rs-bar { background: #1c1f24; }
+:root[data-theme="dark"] .rs-note { color: #ccc; }

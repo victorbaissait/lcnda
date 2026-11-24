@@ -33,6 +33,8 @@
     const fullUrl = i => i ? `media/${encodeURIComponent(i.filename)}?v=${bust}` : '';
     const LINK_TYPES = {person: ['👤', 'Fiche'], village: ['🏘️', 'Village'], investigation: ['🔍', 'Enquête'], atelier_project: ['📚', 'Projet de l’Atelier'], battue: ['🧭', 'Battue']};
     const pageName = p => p ? (p.label ? i18n('p. {num} — {label}', {num: String(p.num), label: p.label}) : ['liasse', 'archives'].includes(D?.recueil?.numbering) ? i18n('Pièce {n}', {n: String(p.num)}) : i18n('Page {num}', {num: String(p.num)})) : ''; // 🗃 une liasse : « pièce »
+    /** le nom court d'une page : son nom, sinon « Page 3 » (« Pièce 3 » dans une liasse) */
+    const pageShort = p => (p.label || (['liasse', 'archives'].includes(D?.recueil?.numbering) ? i18n('Pièce {n}', {n: String(p.num)}) : 'Page ' + p.num));
     const excerpt = (t, n = 140) => { const s = String(t || '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; };
 
     /* ─────────── Ouvrir un recueil depuis n'importe où ─────────── */
@@ -143,7 +145,8 @@
     async function load(id) { const d = await get('recueil', {id}); D = d; return d; }
     const reload = async () => { await load(st().id); paint(); };
     /** 🗂 l'état des pages (heritage-recueil-etat.js) : ce qu'il lui faut de ce recueil */
-    const etatCtx = () => ({D: () => D, reload, post, openPage: id => { Object.assign(st(), {tab: 'pages', page: Number(id), image: 0, compare: 0}); paint(); }, addPhotos: pid => addPhotosDialog({pageId: pid})});
+    const etatCtx = () => ({D: () => D, reload, post, openPage: id => { Object.assign(st(), {tab: 'pages', page: Number(id), image: 0, compare: 0}); paint(); }, addPhotos: pid => addPhotosDialog({pageId: pid}),
+        openTab: tab => { Object.assign(st(), {tab, page: 0, image: 0, compare: 0}); paint(); }});
     const run = async (action, body, msg) => { try { const r = await post(action, body); if (msg) toast(msg); await reload(); return r.result || r; } catch (e) { toast(e.message, 'error'); return null; } };
 
     async function renderRecueil(token) {
@@ -157,7 +160,7 @@
     function paint() {
         const s = st(), r = D.recueil, ws = A().$('#workspace');
         const pct = D.pages.length ? Math.round(D.pages.filter(p => p.transcription.trim()).length / D.pages.length * 100) : 0;
-        const tabs = [['summary', '📋', 'Résumé', ''], ...(ext.recueilEtat ? [['etat', '🗂', 'État', '']] : []), ['pages', '📄', 'Pages', D.pages.length], ['versions', '🗂️', 'Versions', D.versions.length], ['links', '🔗', 'Rattachements', D.links.length]];
+        const tabs = [['summary', '📋', 'Résumé', ''], ...(ext.recueilEtat ? [['etat', '🗂', 'État', '']] : []), ...(ext.recueilSommaire ? [['sommaire', '📑', 'Sommaire', '']] : []), ['pages', '📄', 'Pages', D.pages.length], ['versions', '🗂️', 'Versions', D.versions.length], ['links', '🔗', 'Rattachements', D.links.length]];
         ws.innerHTML = `<section class="page collection-page h-rc h-rc-one">
             <header class="page-header"><div><button type="button" class="back-link" data-rc-back>← Tous les recueils</button><span class="eyebrow">RECUEIL</span><h2>${esc(r.icon || '📚')} ${esc(r.title)}</h2>
                 <p class="muted">${esc([r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ')) || '&nbsp;'}</p></div>
@@ -175,6 +178,7 @@
         const body = sec.querySelector('.h-rc-body');
         if (s.tab === 'pages' && s.page) return paintPage(body);
         if (s.tab === 'etat' && ext.recueilEtat) return ext.recueilEtat.paint(body, etatCtx());
+        if (s.tab === 'sommaire' && ext.recueilSommaire) return ext.recueilSommaire.paint(body, etatCtx());
         ({summary: paintSummary, pages: paintPages, versions: paintVersions, links: paintLinks}[s.tab] || paintSummary)(body);
     }
 
@@ -184,7 +188,7 @@
         const dots = D.versions.length > 1 ? `<span class="h-rc-dots">${D.versions.map(v => `<i class="${imgs.some(i => i.version_id === v.id && i.role === 'page') ? 'on' : ''}" title="${esc(v.name)} : ${imgs.some(i => i.version_id === v.id && i.role === 'page') ? 'photographiée' : 'pas de photo'}"></i>`).join('')}</span>` : '';
         return `<button type="button" class="h-rc-page" draggable="true" data-rc-page="${p.id}" data-rc-num="${p.num}">
             <span class="h-rc-thumb">${shown ? `<img src="${esc(thumbUrl(shown))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">pas de photo</span>'}<span class="h-rc-num">${p.num}</span>${p.state && ext.recueilEtat ? `<span class="h-rc-done" title="${esc(p.absent ? i18n('Absente') : i18n(ext.recueilEtat.STATES[p.state][1]))}">${p.absent ? '⛔' : ext.recueilEtat.STATES[p.state][0]}</span>` : p.transcription.trim() ? '<span class="h-rc-done" title="Transcrite">✍️</span>' : ''}</span>
-            <span class="h-rc-page-name">${esc(p.label || 'Page ' + p.num)}</span>
+            <span class="h-rc-page-name">${esc(pageShort(p))}</span>
             <span class="h-rc-page-meta">${dots}${details ? `<small title="Détails (zooms)">🔍 ${details}</small>` : ''}</span></button>`;
     }
     function paintPages(body) {
@@ -194,16 +198,17 @@
         const ls = loose();
         body.innerHTML = `<div class="collection-toolbar h-rc-toolbar"><input type="search" data-rc-q2 value="${esc(s.q || '')}" placeholder="Chercher dans les transcriptions, les noms de page…">
                 <span class="segmented"><button type="button" class="${s.view !== 'table' ? 'is-active' : ''}" data-rc-view="grid">▦ Mosaïque</button><button type="button" class="${s.view === 'table' ? 'is-active' : ''}" data-rc-view="table">☰ Tableau</button></span>
-                <button type="button" class="button small secondary" data-rc-newpage>＋ Page sans photo</button></div>
+                <button type="button" class="button small secondary" data-rc-newpage>＋ Page sans photo</button>${ext.recueilSommaire && ['liasse', 'archives'].includes(D.recueil.numbering) ? `<button type="button" class="button small secondary" data-rc-arrange>🗃 ${i18n('Ranger par…')}</button>` : ''}</div>
             ${ls.length || trays().length ? looseHtml(ls) : ''}
             ${!D.pages.length ? A().emptyState({icon: '📄', text: 'Aucune page pour l’instant', hint: 'Chaque photo devient une page, dans l’ordre.', action: {label: '＋ Ajouter des photos', attrs: 'data-rc-add-empty'}}) :
             s.view === 'table' ? `<div class="data-table-wrap"><table class="data-table h-rc-table"><thead><tr><th>N°</th><th>Page</th>${D.versions.map(v => `<th>${esc(v.name)}</th>`).join('')}<th>Transcription</th></tr></thead><tbody>${pages.map(p => {
                 const imgs = pageImages(p.id);
-                return `<tr data-rc-row="${p.id}"><td>${p.num}</td><td><button type="button" class="table-link" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button></td>${D.versions.map(v => `<td>${imgs.filter(i => i.version_id === v.id).map(i => `<button type="button" class="h-rc-thumb tiny ${i.id === p.shown_image_id ? 'is-best' : ''}" data-rc-open="${p.id}" data-rc-image="${i.id}" title="${i.role === 'detail' ? 'Détail' : 'Page'}${i.id === p.shown_image_id ? ' · image retenue' : ''}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy">${i.role === 'detail' ? '<em>🔍</em>' : ''}</button>`).join('') || '<span class="muted">—</span>'}</td>`).join('')}<td class="h-rc-excerpt">${esc(excerpt(p.transcription)) || '<span class="muted">—</span>'}</td></tr>`; }).join('')}</tbody></table></div>`
+                return `<tr data-rc-row="${p.id}"><td>${p.num}</td><td><button type="button" class="table-link" data-rc-open="${p.id}">${esc(pageShort(p))}</button></td>${D.versions.map(v => `<td>${imgs.filter(i => i.version_id === v.id).map(i => `<button type="button" class="h-rc-thumb tiny ${i.id === p.shown_image_id ? 'is-best' : ''}" data-rc-open="${p.id}" data-rc-image="${i.id}" title="${i.role === 'detail' ? 'Détail' : 'Page'}${i.id === p.shown_image_id ? ' · image retenue' : ''}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy">${i.role === 'detail' ? '<em>🔍</em>' : ''}</button>`).join('') || '<span class="muted">—</span>'}</td>`).join('')}<td class="h-rc-excerpt">${esc(excerpt(p.transcription)) || '<span class="muted">—</span>'}</td></tr>`; }).join('')}</tbody></table></div>`
             : `<p class="muted h-rc-hint">Clique sur une page pour l’ouvrir et la transcrire ; glisse-la pour changer l’ordre.</p><div class="h-rc-pages">${pages.map(pageCard).join('')}</div>`}`;
         let timer = 0;
         body.querySelector('[data-rc-q2]').addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { s.q = e.target.value.trim(); paintPages(body); const i = body.querySelector('[data-rc-q2]'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 250); });
         body.querySelectorAll('[data-rc-view]').forEach(b => b.addEventListener('click', () => { s.view = b.dataset.rcView; paintPages(body); }));
+        body.querySelector('[data-rc-arrange]')?.addEventListener('click', e => ext.recueilSommaire.arrange(e.currentTarget, etatCtx())); // 🗃 une liasse
         body.querySelector('[data-rc-newpage]').addEventListener('click', async () => { const r = await run('save_recueil_page', {recueil_id: D.recueil.id}); if (r) { s.page = r.id; paint(); } });
         body.querySelector('[data-rc-add-empty]')?.addEventListener('click', () => addPhotosDialog());
         body.querySelectorAll('[data-rc-page],[data-rc-open]').forEach(b => b.addEventListener('click', () => { s.page = Number(b.dataset.rcPage || b.dataset.rcOpen); s.image = Number(b.dataset.rcImage || 0); s.compare = 0; paint(); }));
@@ -365,6 +370,7 @@
                         <button type="button" class="h-rc-thumb h-rc-addthumb" data-rc-addhere title="Ajouter une photo de cette page (autre version, détail…)">＋</button></div>
                 </div>
                 <div class="h-rc-side">
+                    <div class="h-rc-path" data-rc-path hidden></div>
                     <div class="h-rc-etat" data-rc-etat></div>
                     <label>Nom de la page <small class="muted">(facultatif)</small><input data-rc-field="label" value="${esc(p.label)}" placeholder="f° 12 r°, page 3, lettre B…"></label>
                     <label class="h-rc-trans">Transcription <span class="h-rc-saved muted" data-rc-saved></span><textarea data-rc-field="transcription" rows="16" placeholder="Recopie ici ce qui est écrit sur la page (une ligne par ligne du document)…">${esc(p.transcription)}</textarea></label>
@@ -379,6 +385,7 @@
                 <div data-rc-table>${p.table ? '' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas encore de tableau sur cette page.</span></p><button type="button" class="button small" data-rc-tnew>＋ Créer le tableau</button>'}</div></details>`;
         const go = id => { if (!id) return; s.page = Number(id); s.image = 0; s.compare = 0; paint(); };
         bindPageTable(body, p);
+        ext.recueilSommaire?.pagePath(body.querySelector('[data-rc-path]'), p, etatCtx()); // 📑 « Année 1789 › Baptêmes 1789 »
         ext.recueilEtat?.pageBox(body.querySelector('[data-rc-etat]'), p, etatCtx()); // 🗂 état du texte, fiabilité, lisibilité, absente
         body.querySelector('[data-rc-totable]')?.addEventListener('click', () => { const tb = body.querySelector('[data-rc-tablebox]'); tb.open = true; tb.scrollIntoView({behavior: 'smooth', block: 'start'}); });
         body.querySelector('[data-rc-allpages]').addEventListener('click', () => { s.page = 0; paint(); });
@@ -741,8 +748,9 @@
         toc: ['📑', 'Table des pages', 'Nom et début de la transcription'], latest: ['✍️', 'Transcriptions', 'Les pages transcrites, en entier'], links: ['🔗', 'Rattachements', 'Fiches, villages, enquêtes…'],
         mosaic: ['▦', 'Mosaïque', 'Les pages en vignettes'], note: ['🗒️', 'Note libre', 'Un texte à toi'],
         ...(ext.recueilEtat ? {etat: ['🗂', 'État des pages', 'Une case par page, une couleur par état'], todo: ['📋', 'Reste à faire', 'Ce qui reste, dans l’ordre conseillé']} : {}),
+        ...(ext.recueilSommaire ? {chapters: ['📑', 'Sommaire', 'Chapitres et sous-chapitres, avec leur avancement']} : {}),
     };
-    const DEFAULT_SUMMARY = ['cover', 'figures', 'etat', 'todo', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing'].map(type => ({type, on: true, n: type === 'toc' ? 20 : type === 'mosaic' ? 24 : 12, wide: ['description', 'toc', 'mosaic', 'versions', 'etat', 'todo'].includes(type)}));
+    const DEFAULT_SUMMARY = ['cover', 'figures', 'etat', 'todo', 'chapters', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing'].map(type => ({type, on: true, n: type === 'toc' ? 20 : type === 'mosaic' ? 24 : 12, wide: ['description', 'toc', 'mosaic', 'versions', 'etat', 'todo', 'chapters'].includes(type)}));
     const summaryBlocks = () => { const b = D.recueil.summary?.blocks; return Array.isArray(b) && b.length ? b : DEFAULT_SUMMARY; };
     function blockHtml(b) {
         const [icon, label] = BLOCKS[b.type] || ['•', ''], title = b.title || label, pages = D.pages, imgs = D.images;
@@ -761,11 +769,12 @@
             case 'missing': { const rows = D.versions.map(v => ({v, miss: pages.filter(p => !imgs.some(i => i.page_id === p.id && i.version_id === v.id && i.role === 'page'))})).filter(x => x.miss.length);
                 const none = pages.filter(p => !imgs.some(i => i.page_id === p.id));
                 inner = rows.length || none.length ? `${none.length ? `<p><b>${i18n('Sans aucune photo :')}</b> ${none.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}</p>` : ''}${D.versions.length > 1 ? rows.map(x => `<p><b>${esc(x.v.name)} :</b> ${x.miss.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${x.miss.length > b.n ? '…' : ''}</p>`).join('') : ''}` : '<p class="muted">Toutes les pages ont leurs photos.</p>'; break; }
-            case 'toc': inner = pages.length ? `<ol class="h-rc-toc">${pages.slice(0, b.n).map(p => `<li><button type="button" class="link-button" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button> ${p.transcription.trim() ? `<small class="muted">${esc(excerpt(p.transcription, 90))}</small>` : '<small class="muted">—</small>'}</li>`).join('')}</ol>${pages.length > b.n ? `<p class="muted">${i18n('… et {n} autres.', {n: pages.length - b.n})}</p>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
+            case 'toc': inner = pages.length ? `<ol class="h-rc-toc">${pages.slice(0, b.n).map(p => `<li><button type="button" class="link-button" data-rc-open="${p.id}">${esc(pageShort(p))}</button> ${p.transcription.trim() ? `<small class="muted">${esc(excerpt(p.transcription, 90))}</small>` : '<small class="muted">—</small>'}</li>`).join('')}</ol>${pages.length > b.n ? `<p class="muted">${i18n('… et {n} autres.', {n: pages.length - b.n})}</p>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
             case 'latest': inner = done.length ? done.slice(0, b.n).map(p => `<div class="h-rc-tr"><button type="button" class="link-button" data-rc-open="${p.id}">${esc(pageName(p))}</button><p>${nl(p.transcription)}</p></div>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Aucune page transcrite.</span></p>'; break;
             case 'links': inner = D.links.length ? `<ul class="h-rc-llist">${D.links.map(l => `<li>${linkLabel(l)} <small class="muted">· ${esc(linkPages(l))}</small></li>`).join('')}</ul>` : '<p class="muted">Rattaché à rien.</p>'; break;
             case 'mosaic': inner = pages.length ? `<div class="h-rc-mosaic">${pages.slice(0, b.n).map(p => { const i = imgById(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-rc-open="${p.id}" title="${esc(pageName(p))}">${i ? `<img src="${esc(thumbUrl(i))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">—</span>'}<small>${p.num}</small></button>`; }).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
             case 'etat': case 'todo': inner = ext.recueilEtat ? ext.recueilEtat.block(b.type, b, etatCtx()) : ''; break;
+            case 'chapters': inner = `<div data-rs-host="${b.n || 30}"></div>`; break; // rempli après (heritage-recueil-sommaire.js)
             case 'note': inner = b.text ? `<p>${nl(b.text)}</p>` : '<p class="muted">Note vide : « Personnaliser » pour l’écrire.</p>'; break;
         }
         return `<section class="maintenance-panel h-rc-block ${b.wide ? 'is-wide' : ''}"><h3>${icon} ${esc(title)}</h3>${inner}</section>`;
@@ -780,6 +789,7 @@
         body.querySelector('[data-rc-coverzoom]')?.addEventListener('click', () => { const c = D.recueil.cover; openViewer([{id: 0, media_id: c.media_id, filename: c.filename, thumbnail: c.thumbnail, title: 'Couverture'}], 0); });
         bindEntityOpen(body);
         ext.recueilEtat?.bindBlocks(body, etatCtx()); // 📋 reste à faire
+        body.querySelectorAll('[data-rs-host]').forEach(el => { el.innerHTML = ext.recueilSommaire?.block({n: Number(el.dataset.rsHost)}, etatCtx(), el) || ''; }); // 📑 sommaire
         A().bindTableLinks?.();
     }
     function summaryDialog() {
@@ -788,7 +798,7 @@
         const row = (b, i) => { const [icon, label, help] = BLOCKS[b.type];
             return `<div class="h-cfg-row ${b.on ? '' : 'is-hidden'}" data-sb="${i}"><span class="h-rb-tools"><button type="button" class="icon-button" data-sb-move="-1" ${i ? '' : 'disabled'}>↑</button><button type="button" class="icon-button" data-sb-move="1" ${i < blocks.length - 1 ? '' : 'disabled'}>↓</button></span>
                 <label class="checkbox-line"><input type="checkbox" data-sb-f="on" ${b.on ? 'checked' : ''}> ${icon}</label><input data-sb-f="title" value="${esc(b.title || '')}" placeholder="${esc(label)}" class="h-cfg-label" title="${esc(help)}">
-                ${['toc', 'latest', 'mosaic', 'missing', 'progress', 'todo'].includes(b.type) ? `<label class="h-sb-n">combien <input type="number" min="1" max="200" data-sb-f="n" value="${b.n || 12}" class="h-lr-year"></label>` : ''}
+                ${['toc', 'latest', 'mosaic', 'missing', 'progress', 'todo', 'chapters'].includes(b.type) ? `<label class="h-sb-n">combien <input type="number" min="1" max="200" data-sb-f="n" value="${b.n || 12}" class="h-lr-year"></label>` : ''}
                 <label class="checkbox-line"><input type="checkbox" data-sb-f="wide" ${b.wide ? 'checked' : ''}> large</label>
                 ${b.type === 'note' ? `<textarea data-sb-f="text" rows="2" placeholder="Ta note…" class="span-all">${esc(b.text || '')}</textarea><button type="button" class="icon-button danger" data-sb-del title="Supprimer">🗑</button>` : ''}</div>`; };
         dialog({eyebrow: 'RÉSUMÉ DU RECUEIL', title: 'Ce qu’on voit dans le résumé', wide: true, submitLabel: 'Enregistrer',

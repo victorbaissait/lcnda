@@ -97,6 +97,7 @@
         el.hidden = false;
         el.innerHTML = `<h3>📚 ${esc(places.length > 1 ? T('Dans les recueils') : T('Dans le recueil'))}</h3>` + places.map(p => `<div class="rd-place">
             <p><b>${esc(p.icon)} ${esc(p.title)}</b>${p.reference ? ` <small class="muted">${esc(p.reference)}</small>` : ''} · ${esc(T('page {n} sur {t}', {n: String(p.num), t: String(p.total)}))}${p.other_page ? ` <small class="muted">${esc(T('(une autre page de ce document)'))}</small>` : ''}</p>
+            ${(p.chapters || []).length ? `<p class="rd-chap">📑 ${esc(p.chapters.join(' › '))}</p>` : ''}
             <div class="rd-nav">${nav(p, p.prev, -1)}${nav(p, p.next, 1)}<button type="button" class="button small" data-rd-open="${p.recueil_id}" data-rd-page="${p.page_id}">${esc(T('📚 Ouvrir le recueil'))}</button></div></div>`).join('');
         el.onclick = e => {
             const o = e.target.closest('[data-rd-open]'); if (o) { ext.openRecueil?.(Number(o.dataset.rdOpen), Number(o.dataset.rdPage)); return; }

@@ -167,6 +167,7 @@ function delete_recueil(PDO $pdo, array $data): array
     $media = $pdo->prepare('SELECT DISTINCT media_id FROM recueil_images WHERE recueil_id=?'); $media->execute([$id]);
     $mediaIds = array_map('intval', $media->fetchAll(PDO::FETCH_COLUMN));
     $pdo->prepare("DELETE FROM family_collection_media WHERE collection_type='recueil' AND collection_id=?")->execute([$id]);
+    if (function_exists('recueil_toc_ensure')) { recueil_toc_ensure($pdo); $pdo->prepare('DELETE FROM recueil_toc WHERE recueil_id=?')->execute([$id]); } // 📑 son sommaire
     $pdo->prepare('DELETE FROM recueils WHERE id=?')->execute([$id]);
     $deleted = 0;
     if (!empty($data['delete_media']) && $mediaIds) {
@@ -345,6 +346,7 @@ function recueil_page_to_index(PDO $pdo, int $rid, int $id, int $index): void
 function delete_recueil_page(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0); $rid = recueil_page_owner($pdo, $id);
+    if (function_exists('recueil_toc_forget_page')) { recueil_toc_forget_page($pdo, $id); } // 📑 le sommaire se resserre
     $pdo->prepare('UPDATE recueil_images SET page_id=NULL WHERE page_id=?')->execute([$id]);
     // Un rattachement « de telle page à telle page » garde sa plage : il se resserre sur les pages qui restent.
     // Un rattachement qui ne visait que cette page (une page, une ligne de son tableau) n'a plus d'objet
@@ -801,6 +803,7 @@ function recueil_places_of(PDO $pdo, int $mediaId): array
         $nb = static fn($k) => isset($list[$k]) ? ['page_id' => $list[$k]['id'], 'num' => $list[$k]['num'], 'media_id' => $shown[$list[$k]['id']] ?? 0] : null;
         $r = $titles[$rid] ?? ['title' => '', 'icon' => '📚', 'reference' => ''];
         $out[] = ['recueil_id' => $rid, 'title' => (string) $r['title'], 'icon' => (string) ($r['icon'] ?: '📚'), 'reference' => (string) $r['reference'], 'page_id' => (int) $i['page_id'], 'num' => $num,
+            'chapters' => function_exists('recueil_toc_path') ? array_column(recueil_toc_path($pdo, $rid, $num), 'title') : [],
             'total' => count($list), 'other_page' => (int) $i['media_id'] !== $mediaId, 'prev' => $nb($num - 2), 'next' => $nb($num)];
     }
     usort($out, static fn($a, $b) => strcasecmp($a['title'], $b['title']));
