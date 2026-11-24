@@ -152,9 +152,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const txt = await p.$eval('[data-mr-metier="1"]', n => n.closest('section.card').textContent);
             assert.match(txt, /Il était maître tanneur\. À .* de Tulle, une tannerie/); assert.match(txt, /il y a peut-être travaillé/); assert.match(txt, /ne dit pas les années/);
             assert.ok(await p.$eval('[data-mr-metier="1"]', n => !n.closest('section.card').hidden));
+            if (process.env.MR_SHOTS) await (await p.$('[data-mr-metier="1"]')).evaluate(n => n.closest('section.card').scrollIntoView()) || await p.screenshot({path: path.join(process.env.MR_SHOTS, 'personne.png')});
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
             await p.waitForSelector('[data-hist-life="2"] [data-mr-hist]', {timeout: 20000});
             const h = await p.$eval('[data-hist-life="2"] [data-mr-hist]', n => n.textContent);
+            if (process.env.MR_SHOTS) { await p.$eval('[data-hist-life="2"]', n => n.scrollIntoView()); await sleep(300); await p.screenshot({path: path.join(process.env.MR_SHOTS, 'histoire.png')}); }
             assert.match(h, /la Corrèze/); assert.match(h, /octobre 1960 : 5,33 m/); assert.match(h, /la roue de son moulin tournait avec l’eau de la Corrèze/); assert.match(h, /une marque rappelle la crue/);
             await p.waitForSelector('[data-mr-metier="2"] .mr-row', {timeout: 20000});
             assert.match(await p.$eval('[data-mr-metier="2"]', n => n.textContent), /Elle était meunière\..*un moulin.*c’était peut-être le sien/);
@@ -171,6 +173,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(txt, /🏭 Activités anciennes de la commune/); assert.match(txt, /anciens ateliers, usines et commerces connus à Tulle/); assert.match(txt, /tannerie \(\d+\)/);
             assert.match(txt, /⚙️ Moulins et usines à eau/); assert.match(txt, /🌊 La rivière du village/); assert.match(txt, /5,33 m/); assert.match(txt, /🖼️ Ton village au musée/);
             assert.strictEqual(await p.$$eval('.h-village [data-mr-keep]', n => n.length), 0);
+            if (process.env.MR_SHOTS) { await p.$eval('.h-village [data-mr-host]', n => n.scrollIntoView()); await sleep(800); await p.screenshot({path: path.join(process.env.MR_SHOTS, 'village.png'), fullPage: false}); }
             const filt = await p.$('.h-village [data-mr-filter]');
             if (filt) { await p.$eval('.h-village [data-mr-part="place_sites"] details', d => { d.open = true; }); await filt.fill('tannerie'); const vis = await p.$$eval('.h-village [data-mr-part="place_sites"] .mr-list > li', l => l.filter(x => !x.hidden).map(x => x.textContent)); assert.ok(vis.length >= 1 && vis.every(x => /tannerie/i.test(x))); }
         });

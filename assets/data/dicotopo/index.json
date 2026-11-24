@@ -361,6 +361,30 @@
    "old": 9728,
    "places": 3662,
    "size": 236033
+  },
+  "58": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Nièvre",
+    "bibl": "Soultrait (Georges de), Dictionnaire topographique du département de la Nièvre, Paris, 1865.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k61272v"
+   },
+   "communes": 313,
+   "label": "Nièvre",
+   "old": 7161,
+   "places": 9276,
+   "size": 283419
+  },
+  "60": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Oise",
+    "bibl": "Lambert (Émile), Dictionnaire topographique du département de l’Oise, Amiens, 1982.",
+    "gallica": ""
+   },
+   "communes": 706,
+   "label": "Oise",
+   "old": 30444,
+   "places": 3863,
+   "size": 443521
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

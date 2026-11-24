@@ -71,7 +71,7 @@
         const s = m.sites[0], where = s.km != null ? T('À {d} de {p}', {d: fmtKm(s.km), p: s.near}) : T('À {p}', {p: s.near});
         const tail = m.trade === 'moulin' ? T('c’était peut-être le sien.') : T('il y a peut-être travaillé.');
         const nm = siteName(s), lbl = T(m.label), same = !nm || lbl.toLowerCase().includes(nm.toLowerCase());
-        let html = `${T('{who} était {job}.', {who: he(P), job: `<b>${esc(m.job.toLowerCase())}</b>`})} ${esc(where)}, ${esc(lbl)}${same ? '' : ` (« ${esc(nm)} »)`}${esc(siteDates(s))} : ${esc(tail)}`;
+        let html = `${T('{who} était {job}.', {who: he(P), job: `<b>${esc(m.job.toLowerCase())}</b>`})} ${esc(where)}, ${esc(same ? lbl : lbl.replace(/\s*\(.*\)$/, ''))}${same ? '' : ` (« ${esc(nm)} »)`}${esc(siteDates(s))} : ${esc(tail)}`;
         if (s.dates === 'unknown') html += ` <span class="muted">${esc(s.src === 'casias' ? T('(l’inventaire ne dit pas les années d’activité)') : T('(ses dates ne sont pas connues)'))}</span>`;
         const more = m.sites.slice(1);
         const extra = more.length ? `<details class="mr-more"><summary>${esc(T('▸ plus ({n})', {n: more.length + (m.count > m.sites.length ? m.count - m.sites.length : 0)}))}</summary><ul class="hist-ul">${more.map(x => `<li>${esc(siteName(x))}${esc(siteDates(x))} — ${esc(x.km != null ? T('{d} de {p}', {d: fmtKm(x.km), p: x.near}) : x.near)}${siteLink(x)}</li>`).join('')}</ul></details>` : '';
@@ -268,7 +268,7 @@
     document.addEventListener('input', e => {
         const f = e.target.closest?.('[data-mr-filter]'); if (!f) return;
         const q = f.value.trim().toLowerCase();
-        f.parentElement.querySelectorAll('.mr-list > li').forEach(li => { li.hidden = !!q && !li.textContent.toLowerCase().includes(q); });
+        (f.closest('details, .mr-panel') || f.parentElement).querySelectorAll('.mr-list > li').forEach(li => { li.hidden = !!q && !li.textContent.toLowerCase().includes(q); });
     });
     document.addEventListener('change', e => { const t = e.target.closest?.('[data-mr-tg]'); if (t && e.target.matches('input')) { const s = settings(); s[t.dataset.mrTg] = e.target.checked; save(s); memo.clear(); } });
 

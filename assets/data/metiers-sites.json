@@ -147,7 +147,7 @@
   },
   {
    "id": "textile",
-   "label": "une filature ou un tissage",
+   "label": "un atelier textile (filature, tissage)",
    "jobs": [
     "tisserand",
     "tisserande",
@@ -243,7 +243,7 @@
   },
   {
    "id": "tuilerie",
-   "label": "une tuilerie ou briqueterie",
+   "label": "une tuilerie (ou briqueterie)",
    "jobs": [
     "tuilier",
     "briquetier",
@@ -303,7 +303,7 @@
   },
   {
    "id": "poterie",
-   "label": "une poterie ou faïencerie",
+   "label": "une poterie (ou faïencerie)",
    "jobs": [
     "potier",
     "potiere",

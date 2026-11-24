@@ -227,7 +227,8 @@ function mr_place_data(PDO $pdo, array $q): array
 {
     $p = mr_place($pdo, $q);
     if (!mr_in_france($p) || ($p['insee'] === '' && !mr_has_pos($p))) { return ['ok' => false, 'noplace' => true, 'place' => $p]; }
-    $km = MR_PLACE_KM; $sel = static fn(array $rows) => mr_rows_near($rows, $p, $km, true);
+    $km = MR_PLACE_KM; // la commune : son code INSEE ; sans code, 2 km autour de sa position
+    $sel = static fn(array $rows) => $p['insee'] !== '' ? array_values(array_filter($rows, static fn($r) => (string) $r[2] === $p['insee'])) : mr_rows_near($rows, $p, $km, false);
     $from = mr_has_pos($p) ? $p : null;
     $sites = [];
     foreach (mr_deps_near($p) as $dep) {
@@ -461,7 +462,8 @@ function mr_rivers_data(PDO $pdo, array $q): array
         $from = $L['birth'] ?? ($L['death'] !== null ? $L['death'] - 60 : null); $to = $L['death'] ?? ($L['birth'] !== null ? min((int) date('Y'), $L['birth'] + 80) : null);
     } else {
         $p = mr_place($pdo, $q); $places = mr_has_pos($p) && mr_in_france($p) ? [$p] : []; $L = null;
-        $from = is_numeric($q['from'] ?? null) ? (int) $q['from'] : null; $to = is_numeric($q['to'] ?? null) ? (int) $q['to'] : null;
+        // un lieu : toutes les années mesurées (ou celles demandées)
+        $from = is_numeric($q['from'] ?? null) ? (int) $q['from'] : 1000; $to = is_numeric($q['to'] ?? null) ? (int) $q['to'] : (int) date('Y');
     }
     $out = ['ok' => true, 'places' => [], 'reperes' => [], 'gauges' => [], 'river_jobs' => [], 'offline' => false, 'person' => $L ? array_diff_key($L, ['places' => 1]) : null];
     if (!$places) { return $out; }
