@@ -60,6 +60,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         const ldq = (src, query) => api('ld_query', {src, query: JSON.stringify(query)});
         const count = () => p.textContent('[data-ld-count]');
         const waitCount = async re => { await p.waitForFunction(s => new RegExp(s).test(document.querySelector('[data-ld-count]')?.textContent || ''), re.source, {timeout: 15000}); return count(); };
+        const clearAll = async () => { while (await p.$('[data-ld-chip]')) { const n = await p.$$eval('[data-ld-chip]', a => a.length); await p.click('[data-ld-chip]'); await p.waitForFunction(k => document.querySelectorAll('[data-ld-chip]').length < k, n); } };
         const rowsText = () => p.$$eval('.ld-table tbody tr', trs => trs.map(tr => tr.textContent));
 
         /* ═════════ 1. le serveur ═════════ */
@@ -133,11 +134,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
         await t('pastille × : le critère s’en va ; texte « commence par » ; « oui / non »', async () => {
             await p.click('[data-ld-chip="crit:1"]'); await waitCount(/^2 lignes/);
-            await p.click('[data-ld-clear]'); await waitCount(/^5 lignes/);
+            await clearAll(); await waitCount(/^5 lignes/);
             await p.click('[data-ld-add]'); await p.click('.ui-actmenu-i:has-text("Nom")');
             await p.selectOption('.ld-ed-form select[name="op"]', 'starts'); await p.fill('.ld-ed-form input[name="v"]', 'chateau'); await p.click('.ld-ed-form button[type="submit"]');
             await waitCount(/^1 ligne/);
-            await p.click('[data-ld-clear]').catch(() => p.click('[data-ld-chip="crit:0"]')); await waitCount(/^5 lignes/);
+            await clearAll(); await waitCount(/^5 lignes/);
             await p.click('[data-ld-add]'); await p.click('.ui-actmenu-i:has-text("Ouvert au public")'); await p.click('.ld-ed-form button[type="submit"]');
             await waitCount(/^3 lignes/);
             await p.click('[data-ld-chip="crit:0"]'); await waitCount(/^5 lignes/);
@@ -151,7 +152,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(items.some(x => /Dans la zone d’essai/.test(x)), items.join('|'));
             if (await p.evaluate(() => (window.LCNDA_EXT.dataListFilters || []).some(f => f.id === 'territoire'))) assert.ok(items.some(x => /Dans le territoire/.test(x)), 'le filtre « territoire » de heritage-territoires.js');
             await p.click('.ui-actmenu-i:has-text("Dans la zone d’essai")');
-            await p.waitForSelector('.ld-ed-form select[name="v"] option[value="sud"]'); await p.selectOption('.ld-ed-form select[name="v"]', 'sud'); await p.click('.ld-ed-form button[type="submit"]');
+            await p.waitForSelector('.ld-ed-form select[name="v"] option[value="sud"]', {state: 'attached'}); await p.selectOption('.ld-ed-form select[name="v"]', 'sud'); await p.click('.ld-ed-form button[type="submit"]');
             await waitCount(/^1 ligne/); assert.match((await rowsText())[0], /Castel Durand/);
             assert.match(await p.textContent('[data-ld-chips]'), /Dans la zone d’essai : Au sud de 45°/);
             assert.ok(await p.evaluate(() => window.__xfPrep) > 0, 'prepare() appelé');
@@ -196,7 +197,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('[data-ld-saved-go="0"]');
             const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-listes-donnees')));
             assert.strictEqual(saved.saved.test_chateaux[0].name, 'Autour de Tulle'); assert.strictEqual(saved.saved.test_chateaux[0].st.near.km, 10);
-            await p.click('[data-ld-clear]').catch(() => p.click('[data-ld-chip="near"]')); await waitCount(/^5 lignes/);
+            await clearAll(); await waitCount(/^5 lignes/);
             await p.click('[data-ld-saved-go="0"]'); await waitCount(/^3 lignes/);
             await p.click('[data-ld-saved-x="0"]'); await p.waitForFunction(() => !document.querySelector('[data-ld-saved-go]'));
             await p.click('.ui-toast button:has-text("Annuler")'); await p.waitForFunction(() => JSON.parse(localStorage.getItem('genealogie-listes-donnees') || '{}').saved?.test_chateaux?.length === 1);
@@ -210,7 +211,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.lists.data_test_chateaux(++window.LCNDA_APP.state.workspaceToken)); await waitCount(/^3 lignes/);
             await p.click('[data-ld-send]'); await p.waitForFunction(() => window.__sent);
             const sent = await p.evaluate(() => window.__sent); assert.strictEqual(sent.kind, 'rows'); assert.strictEqual(sent.data.rows.length, 4); assert.strictEqual(sent.data.rows[0][0], 'Nom'); assert.match(sent.data.name, /Châteaux inventés — 📍 À 10 km autour de Tulle/);
-            await p.click('[data-ld-print]'); await p.waitForFunction(() => window.__printed);
+            if (!(await p.isVisible('[data-ld-print]'))) await p.click('.ld-page .ui-ph-more > summary'); /* 3e bouton : rangé dans ⋯ */ await p.click('[data-ld-print]'); await p.waitForFunction(() => window.__printed);
             assert.match(await p.evaluate(() => window.__printed), /Château de Mazaud[\s\S]*3 lignes/);
         });
         if (hasPack) await t('liste serveur (🚂 Gares) : autour de Tulle, « Voir les suivantes », choix « Source » avec leur nombre', async () => {

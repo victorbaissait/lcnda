@@ -315,7 +315,7 @@
     async function loadSome(kinds) { const out = {}; await Promise.all(kinds.map(async k => { try { out[k] = await load(k); } catch (e) { console.error(e); out[k] = null; } })); return out; }
 
     /* ─────────── les phrases ─────────── */
-    const battleName = b => esc(b.n);
+    const battleName = b => esc(String(b.n).replace(/^(Bataille|Siège|Combat|Prise|Bombardement|Massacre|Blocus|Escarmouche|Affaire)\b/, w => w.toLowerCase()));
     const battleDate = b => dateTxt(b.d, b.y);
     function battleLi(x, withAge, P) {
         const b = x.b, extra = [b.war ? esc(b.war) : '', b.bel.length ? esc(b.bel.slice(0, 4).join(' / ')) : ''].filter(Boolean).join(' · ');
