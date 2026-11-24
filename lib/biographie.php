@@ -17,6 +17,7 @@ declare(strict_types=1);
  */
 
 const BIO_LENGTHS = ['short', 'normal', 'long'];
+const BIO_PRIVATE_MARK = '🔒 '; // une phrase tirée d'un événement confidentiel
 const BIO_TONES = ['neutral', 'warm'];
 const BIO_SOURCES = ['none', 'inline', 'notes'];
 const BIO_MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
@@ -376,6 +377,7 @@ function bio_get(PDO $pdo, int $id, array $q = []): array
     $o = bio_options(array_intersect_key($q, array_flip(['length', 'tone', 'jobs', 'witnesses', 'census', 'sources'])) + $saved);
     $gen = bio_generate($pdo, $id, $o);
     $own = $row && trim((string) $row['text']) !== '' ? (string) $row['text'] : '';
+    if ($own !== '' && function_exists('private_events_masked') && private_events_masked()) { $own = bio_strip_private($own); } // 🔒 en consultation
     return [
         'person_id' => $id, 'options' => $o, 'generated' => $gen['text'], 'paragraphs' => $gen['paragraphs'], 'notes' => $gen['notes'],
         'own' => $own, 'own_base' => $own !== '' ? (string) $row['generated_text'] : '',
@@ -401,11 +403,22 @@ function bio_save(PDO $pdo, array $d): array
     return ['ok' => true] + bio_get($pdo, $id);
 }
 
+/**
+ * 🔒 Sans les phrases d'événements confidentiels (celles qui commencent par 🔒, jusqu'au point) : pour ta version gardée quand
+ * elle sort de l'app (exports, livre, site) ou se lit en consultation.
+ */
+function bio_strip_private(string $text): string
+{
+    if (!str_contains($text, trim(BIO_PRIVATE_MARK))) { return $text; }
+    $out = preg_replace('/' . preg_quote(trim(BIO_PRIVATE_MARK), '/') . '[^\n]*?(?:\.(?=\s|$)|(?=\n)|$)[ \t]*/u', '', $text);
+    return trim((string) preg_replace("/\n{3,}/", "\n\n", (string) $out));
+}
+
 /** Le texte à utiliser ailleurs (livre de famille, mise en page) : ta version, sinon celui de l'app avec tes réglages */
 function bio_text_for(PDO $pdo, int $id): string
 {
     $row = bio_row($pdo, $id);
-    if ($row && trim((string) $row['text']) !== '') { return (string) $row['text']; }
+    if ($row && trim((string) $row['text']) !== '') { return function_exists('private_events_masked') && private_events_masked() ? bio_strip_private((string) $row['text']) : (string) $row['text']; }
     $o = $row ? (json_decode((string) $row['options_json'], true) ?: []) : [];
     return bio_generate($pdo, $id, $o)['text'];
 }

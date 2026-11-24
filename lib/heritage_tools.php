@@ -55,6 +55,14 @@ function private_events_hidden_for(string $action, bool $isWrite): bool
     return !$isWrite && function_exists('kiosk_state') && !empty(kiosk_state()['on']);
 }
 
+/** Les événements confidentiels sont-ils cachés pour cette requête (private_events_shadow) ? */
+function private_events_masked(?bool $set = null): bool
+{
+    static $on = false;
+    if ($set !== null) { $on = $set; }
+    return $on;
+}
+
 /**
  * Le temps d'une requête : des vues temporaires du même nom (events, event_witnesses, notes, media_links, source_links, media,
  * sources) cachent les événements confidentiels et ce qui leur est joint (sources, notes, médias, témoins). SQLite lit l'objet
@@ -64,6 +72,7 @@ function private_events_hidden_for(string $action, bool $isWrite): bool
  */
 function private_events_shadow(PDO $pdo): bool
 {
+    private_events_masked(true);
     try {
         $cols = array_column($pdo->query('PRAGMA main.table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name');
         if (!in_array('is_private', $cols, true)) { return true; } // base d'avant la structure 111 : aucun événement confidentiel
