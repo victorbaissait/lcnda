@@ -199,3 +199,20 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 .ong-recbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; padding: 8px 10px; border: 2px solid var(--ink, #111); background: var(--surface, #fff); }
 .ong-recbar strong { font-size: 1.05rem; overflow-wrap: anywhere; }
 .ong-recbar .spacer { flex: 1; }
+
+/* 🗺 Carte et 📅 Frise des documents (heritage-onglets-documents.js) */
+.ong-wsview { margin: 0 0 12px; }
+.ong-map { position: relative; width: 100%; overflow: hidden; border: 2px solid var(--ink, #111); background: var(--surface-2, #eef0f3); }
+.ong-map-tiles { position: absolute; left: 0; top: 0; }
+.ong-map-tiles .map-tile { position: absolute; width: 256px; height: 256px; }
+.ong-pin { position: absolute; transform: translate(-50%, -50%); border-radius: 50%; border: 2px solid #fff; background: var(--accent, #055dff); color: #fff; font-weight: 700; font-size: 12px; display: grid; place-items: center; box-shadow: 0 1px 4px rgba(0, 0, 0, .45); cursor: pointer; padding: 0; min-width: 22px; }
+.ong-pin.is-on { background: #c62828; }
+.ong-mapside { margin-top: 10px; }
+.ong-time { display: grid; gap: 14px; }
+.ong-tdec h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; font-size: 1rem; }
+.ong-tdec h3 span { min-width: 92px; }
+.ong-tdec h3 i { display: block; height: 8px; background: var(--accent, #055dff); max-width: 40%; }
+.ong-tline { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.ong-tdoc { display: grid; gap: 2px; justify-items: center; width: 110px; flex: none; border: 2px solid var(--line, #c9ced8); background: var(--surface, #fff); padding: 6px; cursor: pointer; text-align: center; }
+.ong-tdoc img, .ong-tdoc .ong-ico { width: 90px; height: 90px; object-fit: cover; display: grid; place-items: center; font-size: 30px; }
+.ong-tdoc small { font-size: 11.5px; line-height: 1.2; max-height: 2.4em; overflow: hidden; overflow-wrap: anywhere; }

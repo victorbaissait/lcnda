@@ -170,6 +170,20 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.deepEqual(await withFilters({place: 'txt:Lyon'}), [3], 'un lieu écrit à la main');
             await withFilters({});
         });
+        await t('à droite : ▦ Vignettes, 🗺 Carte (un rond par lieu, un clic → ses documents), 📅 Frise par décennie ; retenu', async () => {
+            await p.click('#workspace [data-ong-wsview="map"]'); await p.waitForSelector('#workspace [data-ong-pin]');
+            const pins = await p.$$eval('#workspace [data-ong-pin]', b => b.map(x => [x.title.split(' · ')[0], Number(x.textContent)]).sort());
+            assert.deepEqual(pins, [['Lyon', 1], ['Nérondes', 2], ['Sancoins', 1]]);
+            assert.match(await p.textContent('#workspace [data-ong-mapside]'), /sans lieu connu/);
+            await p.evaluate(() => [...document.querySelectorAll('#workspace [data-ong-pin]')].find(x => /Nérondes/.test(x.title)).click());
+            assert.deepEqual((await p.$$eval('#workspace [data-ong-mapside] [data-ong-card]', c => c.map(x => Number(x.dataset.ongCard)))).sort(), [2, 4]);
+            await p.click('#workspace [data-ong-wsview="time"]'); await p.waitForSelector('#workspace .ong-tdec');
+            const dec = await p.$$eval('#workspace .ong-tdec', s => s.map(x => [x.querySelector('h3 span').textContent, [...x.querySelectorAll('[data-ong-card]')].map(b => Number(b.dataset.ongCard)).sort()]));
+            assert.deepEqual(dec, [['1810–1819', [5]], ['1870–1879', [1, 2, 3, 4]], ['1880–1889', [7, 8]]]);
+            await p.evaluate(() => window.LCNDA_APP.renderSidebar()); await sleep(300);
+            await p.evaluate(() => { window.LCNDA_APP.setModule('documents'); }); await p.waitForSelector('#workspace .ong-tdec', {timeout: 10000});
+            await p.click('#workspace [data-ong-wsview="cards"]'); await p.waitForSelector('#workspace [data-ong-card="5"] [data-ong-doc]');
+        });
         await t('☑ Choisir plusieurs → « 📚 Faire un recueil avec 2 documents » : l’ordre des clics, ranger ↑ ↓, ↶ Annuler', async () => {
             await p.click('#workspace [data-ong-pick]');
             await p.click('#workspace [data-ong-card="5"] [data-ong-doc]'); await p.click('#workspace [data-ong-card="3"] [data-ong-doc]');

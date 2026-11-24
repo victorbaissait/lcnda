@@ -360,6 +360,45 @@
         if (!items.length) return A().emptyState({icon: '📚', text: T('Aucun recueil pour l’instant'), hint: T('« ☑ Choisir plusieurs », puis « 📚 Faire un recueil » : les documents choisis deviennent ses pages, dans l’ordre des clics.')});
         return UI().cardsHtml(items);
     }
+    /* ─── 🗺 Carte et 📅 Frise : les documents trouvés, par lieu ou par décennie (réglage retenu) ─── */
+    const WS_VIEWS = [['cards', '▦ Vignettes'], ['map', '🗺 Carte'], ['time', '📅 Frise']];
+    const wsView = () => { const v = readPref().wsView; return WS_VIEWS.some(x => x[0] === v) ? v : 'cards'; };
+    const mercX = (lon, z) => (lon + 180) / 360 * 256 * 2 ** z, mercY = (lat, z) => { const r = lat * Math.PI / 180; return (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * 256 * 2 ** z; };
+    /** les lieux des documents (coordonnées connues), chacun avec ses documents ; ceux sans lieu à part */
+    function docsByPlace(list) {
+        const P = new Map(), none = [];
+        list.forEach(d => { const g = (d.geo || []).find(x => x.lat != null && x.lon != null); if (!g) return none.push(d); const k = `${g.lat.toFixed(4)},${g.lon.toFixed(4)}`; if (!P.has(k)) P.set(k, {name: g.name, lat: g.lat, lon: g.lon, docs: []}); P.get(k).docs.push(d); });
+        return {places: [...P.values()].sort((a, b) => b.docs.length - a.docs.length), none};
+    }
+    function docsMapHtml(list) {
+        const {places, none} = docsByPlace(list), W = 900, H = 440;
+        if (!places.length) return A().emptyState({icon: '🗺', text: T('Aucun de ces documents n’a de lieu avec des coordonnées'), hint: T('Donne un lieu aux documents (avec ses coordonnées dans Lieux) pour les voir sur la carte.')});
+        const lat0 = Math.min(...places.map(p => p.lat)), lat1 = Math.max(...places.map(p => p.lat)), lon0 = Math.min(...places.map(p => p.lon)), lon1 = Math.max(...places.map(p => p.lon));
+        let z = 13; while (z > 2 && (mercX(lon1, z) - mercX(lon0, z) > W - 120 || mercY(lat0, z) - mercY(lat1, z) > H - 100)) z--;
+        const cx = (mercX(lon0, z) + mercX(lon1, z)) / 2, cy = (mercY(lat0, z) + mercY(lat1, z)) / 2, left = cx - W / 2, top = cy - H / 2;
+        const tiles = ext.mapCompare?.tilesHtml ? ext.mapCompare.tilesHtml(readPref().wsMapBg || 'osmfr', left, top, z, W, H) : '';
+        const max = Math.max(...places.map(p => p.docs.length));
+        const pins = places.map((p, i) => { const x = mercX(p.lon, z) - left, y = mercY(p.lat, z) - top, r = 11 + 13 * Math.sqrt(p.docs.length / max);
+            return `<button type="button" class="ong-pin" data-ong-pin="${i}" style="left:${(x / W * 100).toFixed(2)}%;top:${(y / H * 100).toFixed(2)}%;width:${2 * r}px;height:${2 * r}px" title="${esc(`${p.name} · ${plural(p.docs.length, 'document', 'documents')}`)}">${p.docs.length}</button>`; }).join('');
+        return `<div class="ong-map" data-ong-map style="aspect-ratio:${W}/${H}"><div class="ong-map-tiles" style="width:${W}px;height:${H}px;transform-origin:0 0" data-ong-maptiles>${tiles}</div>${pins}</div>
+            <div class="ong-mapside" data-ong-mapside><p class="muted">${esc(T('{n} lieux : clique un rond pour voir ses documents.', {n: String(places.length)}))}${none.length ? ' ' + esc(T('{n} documents sans lieu connu ne sont pas sur la carte.', {n: String(none.length)})) : ''}</p></div>`;
+    }
+    function bindDocsMap(box, list) {
+        const {places} = docsByPlace(list), map = box.querySelector('[data-ong-map]'), tl = box.querySelector('[data-ong-maptiles]');
+        const fit = () => { if (map && tl) tl.style.transform = `scale(${map.clientWidth / 900})`; }; fit(); new ResizeObserver(fit).observe(map);
+        box.querySelectorAll('[data-ong-pin]').forEach(b => b.addEventListener('click', () => { const p = places[Number(b.dataset.ongPin)]; box.querySelectorAll('.ong-pin.is-on').forEach(x => x.classList.remove('is-on')); b.classList.add('is-on');
+            box.querySelector('[data-ong-mapside]').innerHTML = `<h3>📍 ${esc(p.name)} <small class="muted">${esc(plural(p.docs.length, 'document', 'documents'))}</small></h3>${UI().cardsHtml ? UI().cardsHtml(p.docs.slice(0, 60).map(d => ({thumb: thumbOf(d), name: d.title, open: `data-ong-doc="${d.id}"`, attrs: `data-ong-card="${d.id}"`, lines: cardLines(d)}))) : ''}`; }));
+    }
+    function docsTimeHtml(list) {
+        const dated = list.filter(d => d.year), none = list.length - dated.length;
+        if (!dated.length) return A().emptyState({icon: '📅', text: T('Aucun de ces documents n’a de date'), hint: T('Donne une date aux documents pour les voir sur la frise.')});
+        const by = new Map(); dated.forEach(d => { const k = Math.floor(d.year / 10) * 10; if (!by.has(k)) by.set(k, []); by.get(k).push(d); });
+        const keys = [...by.keys()].sort((a, b) => a - b), max = Math.max(...[...by.values()].map(v => v.length));
+        return `<div class="ong-time">${keys.map(k => { const ds = by.get(k).sort((a, b) => a.year - b.year);
+            return `<section class="ong-tdec"><h3><span>${k}–${k + 9}</span><i style="width:${Math.max(4, ds.length / max * 100)}%"></i><small class="muted">${esc(plural(ds.length, 'document', 'documents'))}</small></h3>
+                <div class="ong-tline">${ds.map(d => `<button type="button" class="ong-tdoc" data-ong-doc="${d.id}" data-ong-card="${d.id}" title="${esc(d.title)}">${thumbOf(d)}<b>${d.year}</b><small>${esc(d.title)}</small></button>`).join('')}</div></section>`; }).join('')}</div>
+            ${none ? `<p class="muted">${esc(T('{n} documents sans date ne sont pas sur la frise.', {n: String(none)}))}</p>` : ''}`;
+    }
     function paintWorkspaceList() {
         const box = document.querySelector('#workspace [data-ong-cards]'); if (!box || cur) return;
         const all = filtered();
@@ -370,7 +409,10 @@
             <strong>${rec ? `${esc(rec.icon || '📚')} ${esc(rec.title || T('Recueil'))}` : `🗂️ ${esc(T('Dans aucun recueil'))}`}</strong><small class="muted">${esc(plural(list.length, 'document', 'documents'))}${rec ? ` · ${esc(T('dans l’ordre des pages'))}` : ''}</small>
             <span class="spacer"></span>${rec ? `<button type="button" class="button small secondary" data-ong-recopen="${rec.id}">↗ ${esc(T('Ouvrir le recueil'))}</button>` : ''}</div>` : '';
         if (!list.length) { box.innerHTML = head + A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre dans la colonne de gauche.'}); return; }
-        box.innerHTML = head + (UI().cardsHtml ? UI().cardsHtml(list.slice(0, wsShown).map(d => ({thumb: thumbOf(d), name: rec && d._num ? `${T('p. {n}', {n: String(d._num)})} · ${d.title}` : d.title, open: `data-ong-doc="${d.id}"`, attrs: `data-ong-card="${d.id}"`, lines: cardLines(d),
+        const vw = wsView(), seg = `<div class="ong-wsview segmented" role="tablist" aria-label="${esc(T('Montrer les documents'))}">${WS_VIEWS.map(([k, l]) => `<button type="button" class="${vw === k ? 'is-active' : ''}" data-ong-wsview="${k}" aria-pressed="${vw === k}">${esc(T(l))}</button>`).join('')}</div>`;
+        if (vw === 'map') { box.innerHTML = head + seg + docsMapHtml(list); bindDocsMap(box, list); paintPick(); return; }
+        if (vw === 'time') { box.innerHTML = head + seg + docsTimeHtml(list); paintPick(); return; }
+        box.innerHTML = head + seg + (UI().cardsHtml ? UI().cardsHtml(list.slice(0, wsShown).map(d => ({thumb: thumbOf(d), name: rec && d._num ? `${T('p. {n}', {n: String(d._num)})} · ${d.title}` : d.title, open: `data-ong-doc="${d.id}"`, attrs: `data-ong-card="${d.id}"`, lines: cardLines(d),
             badges: [{text: sortMeta(d.sort)[2], kind: 'grey'}, ...(d.has_tr ? [{text: 'Transcrit', kind: 'green'}] : [])], when: d.created_at, whenLabel: 'Ajouté'}))) : '');
         if (list.length > wsShown && UI().moreButton) box.appendChild(UI().moreButton({remaining: list.length - wsShown, step: 24, onClick: () => { wsShown += 24; paintWorkspaceList(); }}));
         paintPick();
@@ -515,6 +557,7 @@
             return;
         }
         if (b.matches('[data-ong-wsrec]')) { showRec(b.dataset.ongWsrec); return; }
+        if (b.matches('[data-ong-wsview]')) { writePref({wsView: b.dataset.ongWsview}); paintWorkspaceList(); return; }
         if (b.matches('[data-ong-recopen]')) { b.closest('details')?.removeAttribute('open'); ext.openRecueil?.(Number(b.dataset.ongRecopen)); return; }
         if (pick.on && !cur && b.matches('[data-ong-doc]')) { e.preventDefault(); togglePick(Number(b.dataset.ongDoc)); return; }
         let d = cache.get(cur);
