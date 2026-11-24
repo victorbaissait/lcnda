@@ -115,6 +115,26 @@
                     why: [['👍', '<b>On reconnaît les visages</b> ; sans photo, des initiales à la couleur du genre.'], ['👎', 'Cases plus hautes : moins de générations à l’écran.']]},
                 {k: 'mini', t: 'Mini', sub: 'le nom seul', d: {tw: 120, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: false, sosa: false},
                     why: [['👍', '<b>Beaucoup de générations</b> d’un coup : idéal pour les grands arbres et les petits écrans.'], ['👎', 'Les dates n’apparaissent qu’au survol (sauf si tu les remets).']]},
+                {k: 'parchemin', t: '📜 Parchemin', sub: 'papier ancien, lettres à empattements', d: {tw: 180, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Un air d’archives</b> : fond crème, double filet, belle écriture.'], ['👎', 'Moins contrasté à l’écran ; à l’impression, prévois une imprimante couleur.']]},
+                {k: 'medaillon', t: '🖼 Médaillon', sub: 'une case ovale, centrée', d: {tw: 165, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Élégant</b> : comme un portrait encadré au mur.'], ['👎', 'Les noms très longs passent sur deux lignes.']]},
+                {k: 'ecusson', t: '🛡 Écusson', sub: 'une case en forme de blason', d: {tw: 165, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: true, sosa: false},
+                    why: [['👍', '<b>Noble et lisible</b> : la pointe guide l’œil vers la génération suivante.'], ['👎', 'Un peu plus haute ; le bas de la case est plus étroit.']]},
+                {k: 'postale', t: '✉️ Carte postale', sub: 'un timbre dans le coin, filet pointillé', d: {tw: 185, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Rétro et chaleureux</b>, idéal pour une affiche de cousinade.'], ['👎', 'Plus large que les autres.']]},
+                {k: 'timbre', t: '📮 Timbre-poste', sub: 'bords dentelés', d: {tw: 150, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: true, sosa: false},
+                    why: [['👍', '<b>Amusant</b> : chaque ancêtre devient un petit timbre de collection.'], ['👎', 'Les bords dentelés prennent un peu de place.']]},
+                {k: 'polaroid', t: '📷 Polaroïd', sub: 'cadre blanc, un peu penché', d: {tw: 165, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Vivant</b> : comme des photos posées sur une table.'], ['👎', 'Les cases penchées sont moins sages pour un document officiel.']]},
+                {k: 'musee', t: '🏛 Étiquette de musée', sub: 'bandeau noir, petites capitales', d: {tw: 180, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: true, sosa: true},
+                    why: [['👍', '<b>Très net</b> : le nom en capitales, les dates dessous, comme un cartel.'], ['👎', 'Assez sévère pour les arbres de famille joyeux.']]},
+                {k: 'pastel', t: '🎨 Pastel par génération', sub: 'une couleur douce par génération', d: {tw: 170, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>On suit les générations</b> d’un coup d’œil, sans regarder les dates.'], ['👎', 'Les couleurs ne disent plus homme ou femme (une petite bande le garde).']]},
+                {k: 'trait', t: '✏️ Trait seul', sub: 'juste un contour fin', d: {tw: 170, m: K7_DEF.m, f: K7_DEF.f, links: 'droits', dates: true, sosa: false},
+                    why: [['👍', '<b>Le plus léger</b> : parfait à imprimer et à annoter au crayon.'], ['👎', 'Moins de repères visuels sur un grand arbre.']]},
+                {k: 'nuit', t: '🌙 Nuit dorée', sub: 'fond sombre, filet doré', d: {tw: 175, m: K7_DEF.m, f: K7_DEF.f, links: 'arrondis', dates: true, sosa: false},
+                    why: [['👍', '<b>Chic</b>, et doux pour les yeux en mode sombre.'], ['👎', 'Sombre aussi en mode clair : à éviter pour imprimer.']]},
             ],
             settings: [
                 {k: 'tw', type: 'range', label: 'Largeur des cases', min: 100, max: 240, step: 5, unit: 'px', why: 'Des cases larges montrent les noms en entier ; étroites, l’arbre tient sur l’écran.'},
@@ -588,7 +608,9 @@
     function treeCards(root, G) {
         root.querySelectorAll('.tree-card .lc-tree-sosa').forEach(x => x.remove());
         const on = isOn(G, 'a5');
+        const pastel = on && G.a5.v === 'pastel';
         root.querySelectorAll('.tree-card').forEach(c => {
+            if (pastel) { let n = 0, e = c.parentElement; while (e && e !== root) { if (e.classList?.contains('tree-node-shell')) n++; e = e.parentElement; } c.dataset.lcGen = String((n - 1 + 60) % 6); } else if (c.dataset.lcGen) delete c.dataset.lcGen;
             const sm = c.querySelector(':scope > small');
             if (on && !G.a5.dates && sm && !c.title) { c.title = sm.textContent.trim(); c.dataset.lcTitle = '1'; }
             else if ((!on || G.a5.dates) && c.dataset.lcTitle) { c.removeAttribute('title'); delete c.dataset.lcTitle; }

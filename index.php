@@ -110,7 +110,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=37" id="lc-frame-css" media="not all">
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=39" id="lc-designs-gen" media="not all">
-    <link rel="stylesheet" href="assets/css/designs.css?v=13">
+    <link rel="stylesheet" href="assets/css/designs.css?v=14">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
@@ -1596,7 +1596,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-imports-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-photos-import.js?v=2" defer></script>
 <script src="assets/js/app-apparence.js?v=27" defer></script>
-<script src="assets/js/app-designs.js?v=25" defer></script>
+<script src="assets/js/app-designs.js?v=26" defer></script>
 <script src="assets/js/app-sections.js?v=10" defer></script>
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=2" defer></script>

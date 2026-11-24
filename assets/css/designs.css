@@ -451,3 +451,30 @@
 html.a11y-calm .lcd-mv * { animation: none !important; }
 html.a11y-calm .lcd-mv .lcd-mv-toast { opacity: 1; visibility: visible; }
 .lcd-toc-ic { font-size: 22px; line-height: 1; flex: none; width: 30px; text-align: center; }
+
+/* A5 · 10 cases d'arbre en plus (Apparence → 🌳 Cases des arbres) */
+:root[data-lc-tree="parchemin"] .tree-card { background: #f6ecd2; color: #3b2a14; border: 3px double #8a6a3a; font-family: Georgia, "Times New Roman", serif; box-shadow: 2px 3px 0 rgba(90, 60, 20, .25); }
+:root[data-lc-tree="parchemin"] .tree-card small { color: #6b5233; font-style: italic; }
+:root[data-lc-tree="medaillon"] .tree-card { border-radius: 50% / 46%; text-align: center; padding: 14px 16px; border-width: 3px; }
+:root[data-lc-tree="medaillon"] .tree-card.gender-male { border-color: var(--lc-tm); } :root[data-lc-tree="medaillon"] .tree-card.gender-female { border-color: var(--lc-tf); }
+:root[data-lc-tree="ecusson"] .tree-card { clip-path: polygon(0 0, 100% 0, 100% 62%, 50% 100%, 0 62%); text-align: center; padding: 10px 12px 26px; border: 0; box-shadow: none; background: var(--lc-tm-bg, #e9f0fb); }
+:root[data-lc-tree="ecusson"] .tree-card.gender-female { background: var(--lc-tf-bg, #fbe9f0); } :root[data-lc-tree="ecusson"] .tree-card { outline: 0; filter: drop-shadow(0 0 1.5px var(--ink, #111)); }
+:root[data-lc-tree="postale"] .tree-card { background: #fffdf6; border: 2px dashed #9aa3ad; position: relative; padding-right: 34px; }
+:root[data-lc-tree="postale"] .tree-card::after { content: ""; position: absolute; top: 6px; right: 6px; width: 20px; height: 24px; border: 2px dotted #c0392b; background: repeating-linear-gradient(45deg, #fbe2e0 0 4px, #fff 4px 8px); }
+:root[data-lc-tree="timbre"] .tree-card { background: #fff; border: 0; padding: 12px; box-shadow: none; -webkit-mask: radial-gradient(circle 4px at 4px 4px, #0000 98%, #000) -4px -4px / 12px 12px; mask: radial-gradient(circle 4px at 4px 4px, #0000 98%, #000) -4px -4px / 12px 12px; outline: 0; filter: drop-shadow(0 0 1px #7a7f87); }
+:root[data-lc-tree="timbre"] .tree-card.gender-male { background: var(--lc-tm-bg); } :root[data-lc-tree="timbre"] .tree-card.gender-female { background: var(--lc-tf-bg); }
+:root[data-lc-tree="polaroid"] .tree-card { background: #fff; border: 1px solid #d8d8d8; padding: 10px 10px 22px; box-shadow: 0 3px 10px rgba(0, 0, 0, .18); text-align: center; transform: rotate(-1.2deg); }
+:root[data-lc-tree="polaroid"] .tree-person-unit:nth-child(even) .tree-card, :root[data-lc-tree="polaroid"] .tree-node-shell:nth-child(even) .tree-card { transform: rotate(1.3deg); }
+:root[data-lc-tree="polaroid"] .tree-card strong { font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive; }
+:root[data-lc-tree="musee"] .tree-card { background: #fff; border: 1px solid #222; border-top: 10px solid #111; box-shadow: none; padding: 8px 10px; }
+:root[data-lc-tree="musee"] .tree-card strong { font-variant: small-caps; letter-spacing: .04em; }
+:root[data-lc-tree="pastel"] .tree-card { border: 0; box-shadow: 0 1px 3px rgba(0, 0, 0, .15); border-radius: 10px; }
+:root[data-lc-tree="pastel"] .tree-card[data-lc-gen="0"] { background: #fde2e4; color: #4a2a2e; } :root[data-lc-tree="pastel"] .tree-card[data-lc-gen="1"] { background: #fff1d6; color: #4a3a1a; }
+:root[data-lc-tree="pastel"] .tree-card[data-lc-gen="2"] { background: #e2f0cb; color: #2f4020; } :root[data-lc-tree="pastel"] .tree-card[data-lc-gen="3"] { background: #d6eef8; color: #1f3a4a; }
+:root[data-lc-tree="pastel"] .tree-card[data-lc-gen="4"] { background: #e6defa; color: #33284a; } :root[data-lc-tree="pastel"] .tree-card[data-lc-gen="5"] { background: #f3e1d0; color: #4a3322; }
+:root[data-lc-tree="pastel"] .tree-card.gender-male { border-left: 4px solid var(--lc-tm); } :root[data-lc-tree="pastel"] .tree-card.gender-female { border-left: 4px solid var(--lc-tf); }
+:root[data-lc-tree="trait"] .tree-card { background: transparent; border: 1px solid currentColor; box-shadow: none; color: var(--ink, #111); }
+:root[data-lc-tree="trait"] .tree-card:is(.gender-male, .gender-female, .gender-unknown) { background: transparent; color: var(--ink, #111); }
+:root[data-lc-tree="nuit"] .tree-card { background: #1d2230; color: #f3ead2; border: 1px solid #c8a24a; box-shadow: 0 0 0 3px #1d2230, 0 0 0 4px #c8a24a; }
+:root[data-lc-tree="nuit"] .tree-card small { color: #d8c79a; }
+:root[data-lc-tree]:is([data-lc-tree="parchemin"], [data-lc-tree="medaillon"], [data-lc-tree="ecusson"], [data-lc-tree="postale"], [data-lc-tree="timbre"], [data-lc-tree="polaroid"], [data-lc-tree="musee"], [data-lc-tree="pastel"], [data-lc-tree="trait"], [data-lc-tree="nuit"]) .tree-card:hover { background: var(--blue); color: #fff; }

@@ -299,6 +299,23 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-grid')), null);
             await setDesigns(page, null);
         });
+        await t('A5 : 14 cases au choix (dont parchemin, médaillon, écusson, timbre, polaroïd, musée, pastel par génération, nuit) ; le pastel colore par génération', async () => {
+            await page.evaluate(() => window.LCNDA_APP.openStatsColorsDialog());
+            await page.waitForSelector('#stats-colors-dialog[open] #tree-cards-panel [data-tc-v="parchemin"]');
+            const ks = await page.$$eval('#tree-cards-panel [data-tc-v]', l => l.map(x => x.dataset.tcV));
+            assert.deepEqual(ks, ['avant', 'genre', 'photo', 'mini', 'parchemin', 'medaillon', 'ecusson', 'postale', 'timbre', 'polaroid', 'musee', 'pastel', 'trait', 'nuit']);
+            await page.screenshot({path: require('path').join(require('os').tmpdir(), 'lcnda-a5-cases.png')});
+            await page.evaluate(() => document.querySelector('#stats-colors-dialog').close());
+            for (const v of ['parchemin', 'pastel', 'nuit']) {
+                await setDesigns(page, {ver: 2, a5: {v}});
+                assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-lc-tree')), v);
+            }
+            await setDesigns(page, {ver: 2, a5: {v: 'pastel'}});
+            const gens = await page.evaluate(() => { const root = document.createElement('div'); root.innerHTML = '<div class="tree-node-shell"><div class="tree-person-unit"><button class="tree-card gender-male" data-tree-person="1"><strong>A</strong></button></div><div class="tree-node-shell"><div class="tree-person-unit"><button class="tree-card gender-female" data-tree-person="2"><strong>B</strong></button></div></div></div>'; document.body.appendChild(root);
+                window.LCNDA_DESIGNS.decorate(root, window.LCNDA_DESIGNS.read()); const g = [...root.querySelectorAll('.tree-card')].map(c => c.dataset.lcGen); const bg = getComputedStyle(root.querySelector('.tree-card')).backgroundColor; root.remove(); return {g, bg}; });
+            assert.deepEqual(gens.g, ['0', '1']); assert.equal(gens.bg, 'rgb(253, 226, 228)');
+            await setDesigns(page, null);
+        });
         await t('recoupements : A7 et « Réduire les animations », A5 et les portraits', async () => {
             await setDesigns(page, {ver: 2, a7: {v: 'petit'}});
             const anim = () => page.evaluate(() => { const d = document.createElement('dialog'); d.className = 'modal'; document.body.appendChild(d); d.show(); const a = getComputedStyle(d).animationDuration; d.remove(); return a; });
