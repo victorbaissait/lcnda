@@ -5,6 +5,12 @@
 /* ── barre commune dans la colonne ── */
 .enq-bar { margin: 8px 0 4px; }
 .enq-bar .ui-listbar { width: 100%; }
+/* le menu Trier (« Alphabétique (A → Z) ») ne fait plus déborder la colonne : Chercher sur toute la ligne, Filtrer / Liste · Fiches / Trier en dessous */
+.enq-bar { min-width: 0; }
+.enq-bar .ui-listbar-search { min-width: 0; }
+.enq-bar .ui-listbar-sort { flex: 1 1 0; min-width: 0; }
+.enq-bar .ui-listbar-sort .ui-sortbar-sort { width: 100%; min-width: 0; }
+.enq-bar .ui-listbar-sort select { flex: 1 1 auto; min-width: 0; width: 100%; }
 #sidebar-footer #new-investigation-template { margin-top: 6px; }
 
 /* ── « ⋯ » d'une ligne ou d'une fiche ── */

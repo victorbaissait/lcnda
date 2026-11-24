@@ -157,7 +157,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('🛡️ crédit d’une image d’armoiries : auteur et licence relus sur Commons', async () => {
             const a = (await api('cc_place', PLACE)).arms;
             if (!a?.image) return;
-            const r = await api('cc_credit', {files: a.image});
+            const r = await api('cc_credit', {files: [a.image, AR.c[LIMOGES][1]].join('|')});
             assert.strictEqual(r.ok, true, JSON.stringify(r).slice(0, 200));
             const c = r.credits[a.image]; assert.ok(c && c.licence, JSON.stringify(r.credits));
         });

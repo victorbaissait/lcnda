@@ -243,7 +243,8 @@ def build_plats(C, Q2I):
     reg2dep = {}
     for r in rows('depts'):
         code = r['code']
-        if re.match(r'^(\d[\dAB]|97\d)$', code): reg2dep.setdefault(qid(r['reg']), set()).add(code)
+        if code in DEP and qid(r['reg']) != 'Q142': reg2dep.setdefault(qid(r['reg']), set()).add(code)
+    reg2dep = {k: v for k, v in reg2dep.items() if len(v) <= 13}  # une région (ou une ancienne région), pas la France entière
     types = {}
     for r in dl: types.setdefault(qid(r['d']), set()).add(qid(r['t']))
     ft = food_types({x for t in types.values() for x in t if re.match(r'^Q\d+$', x)})
@@ -278,12 +279,12 @@ def build_plats(C, Q2I):
     LV = {'commune': 0, 'dep': 1, 'region': 2, 'province': 3}
     for d, v in cand.items():
         name = (L.get(d) or {}).get('fr')
-        if not name or re.match(r'^Q\d+$', name): continue
+        if not name or re.match(r'^Q\d+$', name) or re.match(r'^(cuisine|gastronomie)\b', name, re.I): continue  # une cuisine n'est pas un plat
         opts = [(l, '') for l in v['loc']] + [(l, cu) for cu, l in v['cu']]
         best = None
         for loc, cu in opts:
             lvl, deps, ins = where(loc)
-            cand_row = (LV[lvl], loc, cu, lvl, deps, ins)
+            cand_row = ((LV[lvl], len(deps) or 999), loc, cu, lvl, deps, ins)  # le lieu le plus précis : « Auvergne » plutôt qu'« Auvergne-Rhône-Alpes »
             if best is None or cand_row[0] < best[0]: best = cand_row
         _, loc, cu, lvl, deps, ins = best
         le = E.get(loc) or {}

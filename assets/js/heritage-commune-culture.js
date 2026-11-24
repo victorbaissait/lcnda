@@ -186,7 +186,7 @@
     const anyPersonPart = () => ['arms', 'works', 'dish', 'rues', 'rietstap'].some(on);
     ext.personBlocks.commune_culture = (index, detail) => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || !anyPersonPart()) return '';
-        return A().card(index, T('🏷️ Son nom et ses villages'), '', `<div class="cc-block" data-cc-person="${Number(p.id)}"></div>`, 'span-12').replace('<section class="card ', '<section hidden class="card ');
+        return A().card(index, T('🏷️ Son nom et ses villages'), '', `<div class="cc-block" data-cc-person="${Number(p.id)}"></div>`, 'span-12').replace(/^(\s*<section class="card[^"]*")/, '$1 hidden'); // caché tant qu'il n'y a rien (data-pblock est ajouté après « <section class="card »)
     };
     async function fillPerson(host, id, only = null) {
         const on = k => (only ? only.includes(k) : settings()[k] !== false);

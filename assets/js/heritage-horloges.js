@@ -430,10 +430,10 @@
     // les réglages du widget (au dos de la carte) : écoutés sur la page, la fenêtre est fabriquée par le tableau de bord
     document.addEventListener('change', e => { const t = e.target.closest?.('[data-hzw-own]'); if (t) { const box = t.closest('.hz-wcfg')?.querySelector('[data-hzw-style]'); if (box) box.hidden = !t.checked; } });
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-hzw-preset]'); if (!b) return; e.preventDefault(); const box = b.closest('[data-hzw-style]'), cur = {...styleOf(), ...readStyle(box), ...PRESETS[Number(b.dataset.hzwPreset)][1]}; box.querySelector('.hz-sform').outerHTML = styleFormHtml(cur); });
-    ext.dashboard.clocks_widget = {load: () => Promise.resolve(null), render: (index, widget) => {
+    ext.dashboard.clocks_widget = {load: () => Promise.resolve(null), render: (index, widget, span) => {
         const c = widget?.config || {}, all = mine(), list = Array.isArray(c.cities) ? all.filter(x => c.cities.includes(x.id)) : all, st = styleOf(widget);
         const html = list.length ? clocksHtml(list, st) : `<p class="empty-line">${esc(T('Aucune ville : ajoute-en dans Listes → Heures du monde.'))}</p>`;
-        return A().card(index, `🕰 ${T('Horloges du monde')}`, '', html + `<p><button type="button" class="link-button" data-h-open-list="world_clocks">↗ ${esc(T('Heures du monde'))}</button></p>`);
+        return A().card(index, `🕰 ${T('Horloges du monde')}`, '', html + `<p><button type="button" class="link-button" data-h-open-list="world_clocks">↗ ${esc(T('Heures du monde'))}</button></p>`, span || 'span-6'); // sans la largeur : « card undefined », une colonne de 60 px
     }};
 
     /* ── au catalogue des listes et des widgets ── */

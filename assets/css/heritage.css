@@ -4670,6 +4670,10 @@ canvas.is-picking{cursor:crosshair}
 .h-df-cfg { display: grid; gap: 8px; border: 0; padding: 0; margin: 8px 0; }
 .h-df-kinds { display: flex; flex-wrap: wrap; gap: 4px 14px; }
 @media (max-width: 640px) { .h-df-row { grid-template-columns: auto minmax(0, 1fr) auto; } .h-df-when { grid-column: 1 / -1; } }
+/* widget étroit (une demi-largeur sur un écran de 1024 px) : la date au-dessus, puis le Sosa et 🔔 sous la phrase — sinon la phrase n'a plus que 10 px (une lettre par ligne) */
+.h-df-list { container-type: inline-size; }
+@container (max-width: 460px) { .h-df-row { grid-template-columns: auto minmax(0, 1fr) auto; } .h-df-when { grid-column: 1 / -1; } }
+@container (max-width: 340px) { .h-df-row { grid-template-columns: auto minmax(0, 1fr); } .h-df-end { grid-column: 2; justify-self: start; } }
 /* ═════ 📤 Partager avec la famille (F11, assets/js/heritage-partage.js) ═════ */
 .h-fs-fs { border: 1px solid var(--line-color, #d9dce3); border-radius: 10px; padding: 8px 12px 10px; margin: 10px 0; display: grid; gap: 6px; min-width: 0; }
 .h-fs-fs legend { padding: 0 4px; font-weight: 600; }

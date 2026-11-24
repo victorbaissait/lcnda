@@ -40,3 +40,5 @@
 @media print { .ad-badge, .ad-ouc { display: none !important; } }
 body.is-kiosk .ad-badge, body.is-kiosk .ad-ouc { display: none !important; }
 .event-date .ad-badge { white-space: normal; text-align: left; }
+/* dans la colonne étroite de la date : le texte coule sur plusieurs lignes (plus « · Ma / de / Argen » coupé), sans dépasser de la colonne */
+.event-date .ad-badge { display: inline-block; margin: 2px 0 0; border-radius: 10px; overflow: visible; overflow-wrap: anywhere; box-sizing: border-box; }

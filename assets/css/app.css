@@ -4042,6 +4042,7 @@ select { max-width: 100%; }
 /* Chercher sur internet (widget et outil) : la plage d'années passe à la ligne au lieu de sortir du panneau */
 .web-search-options label { flex-wrap: wrap; min-width: 0; max-width: 100%; }
 .web-search-options input[type="number"], .web-search-options input[type="text"] { min-width: 0; max-width: 100%; }
+.web-search-options select { min-width: 0; max-width: min(22em, 100%); } /* un lieu très long (« Mariage : Châteauneuf-sur-Charente-et-… ») ne fait plus sortir la liste du widget */
 /* tableau de bord : une ligne de widget au nom de lieu interminable reste dans sa carte (téléphone) */
 .dashboard-list { grid-template-columns: minmax(0, 1fr); }
 .dashboard-row, .dashboard-row > div { min-width: 0; }
