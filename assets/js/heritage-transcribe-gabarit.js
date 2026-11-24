@@ -64,12 +64,28 @@
             ['regiment', 'Régiment', (ex, s) => rx(s, /\b\d+\s*(?:e|ème|eme|er)?\s*(?:régiment|regiment|bataillon|escadron|demi-brigade)\b[^,.;\n]{0,50}/i)],
             ['campagnes', 'Campagnes', (ex, s) => rx(s, /\bcampagnes?\b[^.\n]{0,100}/i)], ['blessures', 'Blessures', (ex, s) => rx(s, /\bbless[ée]e?s?(?![a-zà-ÿ])[^.\n]{0,80}/i)]],
     };
-    const has = kind => !!G[kind];
-    const KIND_NAME = {bapteme: 'Baptême', naissance: 'Naissance', mariage: 'Mariage', deces: 'Décès', sepulture: 'Sépulture', notarial: 'Acte notarié', notoriete: 'Acte de notoriété', recensement: 'Recensement', militaire: 'Registre militaire'};
+    const KIND_NAME = {bapteme: 'Baptême', naissance: 'Naissance', mariage: 'Mariage', deces: 'Décès', sepulture: 'Sépulture', notarial: 'Acte notarié', notoriete: 'Acte de notoriété', recensement: 'Recensement', militaire: 'Registre militaire', lettre: 'Lettre', autre: 'Autre'};
+    /* ─── étape 3 : « 🧩 Mes gabarits » (pour toute une sorte, gardé sur cet ordinateur) et « ＋ Ajouter une case » (dans un acte) ───
+     * perso = {sorte: {add: [{key: 'x_…', label}], hide: ['cure', …]}} ; « Lettre » et « Autre » n'ont pas de cases au départ : on y crée les siennes. */
+    const PERSO_KEY = 'genealogie-gabarits-perso';
+    const perso = () => { try { const v = JSON.parse(localStorage.getItem(PERSO_KEY) || '{}'); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch (_) { return {}; } };
+    const setPerso = v => { try { localStorage.setItem(PERSO_KEY, JSON.stringify(v)); } catch (_) {} };
+    const slug = label => 'x_' + (String(label).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 22) || 'case');
+    const uniqueKey = (label, taken) => { let k = slug(label), n = 2; while (taken.has(k)) k = slug(label).slice(0, 18) + '_' + n++; return k; };
+    /** les cases d'une sorte pour cet acte : celles prêtes (sauf masquées), puis « Mes gabarits », puis celles ajoutées dans l'acte — [clé, nom, remplir|null, à moi] */
+    function fieldsOf(kind, gab) {
+        const P = perso()[kind] || {}, hide = new Set(Array.isArray(P.hide) ? P.hide : []);
+        const base = (G[kind] || []).filter(([k]) => !hide.has(k)).map(([k, l, f]) => [k, i18n(l), f, false]);
+        const mine = (Array.isArray(P.add) ? P.add : []).filter(x => x && x.key && x.label).map(x => [x.key, x.label, null, false]);
+        const extra = (gab && gab.kind === kind && Array.isArray(gab.extra) ? gab.extra : []).filter(x => x && x.key && x.label).map(x => [x.key, x.label, null, true]);
+        const seen = new Set(); return [...base, ...mine, ...extra].filter(([k]) => !seen.has(k) && seen.add(k));
+    }
+    const has = kind => fieldsOf(kind, null).length > 0 || !!G[kind];
 
     /** remplir le gabarit (rien d'écrasé : une case ✓ ou écrite à la main reste) ; renvoie le gabarit à garder */
     function fill(gab, kind, ex, text) {
         const out = {kind, fields: {...(gab && gab.kind === kind ? gab.fields || {} : {})}};
+        if (gab && gab.kind === kind && Array.isArray(gab.extra) && gab.extra.length) out.extra = gab.extra.slice();
         if (!G[kind]) return out;
         G[kind].forEach(([k, , f]) => {
             const cur = out.fields[k]; if (cur && (cur.ok || cur.own)) return;
@@ -85,16 +101,17 @@
      */
     function render(box, o) {
         const kind = o.kind, gab = o.gab && o.gab.kind === kind ? o.gab : {kind, fields: {}};
-        if (!G[kind]) {
+        if (!has(kind)) {
             const g = o.guess && G[o.guess] ? o.guess : '';
             box.innerHTML = `<div class="h-gab-empty"><p class="muted">${esc(i18n('Choisis la sorte d’acte (en haut) : chaque sorte a ses cases.'))}</p>${g ? `<button type="button" class="button small" data-gab-kind="${g}">🧩 ${esc(i18n('On dirait : {x}. Utiliser ce gabarit ?', {x: i18n(KIND_NAME[g])}))}</button>` : ''}</div>`;
             return;
         }
-        const F = G[kind], filled = F.filter(([k]) => gab.fields[k]?.v).length, ok = F.filter(([k]) => gab.fields[k]?.ok).length;
+        const F = fieldsOf(kind, gab), filled = F.filter(([k]) => gab.fields[k]?.v).length, ok = F.filter(([k]) => gab.fields[k]?.ok).length;
         box.innerHTML = `<div class="h-gab-head"><b>${esc(i18n(KIND_NAME[kind]))}</b><small class="muted" data-gab-count>${esc(i18n('Cases remplies : {a}/{b} · vérifiées : {c}', {a: filled, b: F.length, c: ok}))}</small><span class="spacer"></span><button type="button" class="icon-button small" data-gab-menu aria-haspopup="menu" title="${esc(i18n('Gabarit'))}" aria-label="${esc(i18n('Gabarit'))}">⋯</button></div>
-            <div class="h-gab-fields">${F.map(([k, label]) => { const f = gab.fields[k] || null, st = !f?.v ? 'is-empty' : f.ok ? 'is-ok' : f.own ? 'is-own' : 'is-auto', w = f && f.s >= 0 ? o.where?.(f.s) : '';
-                return `<label class="h-gab-k" for="gab-${k}">${esc(i18n(label))}</label><input id="gab-${k}" class="h-gab-v ${st}" data-gab-field="${k}" value="${esc(f?.v || '')}" placeholder="${esc(i18n('à remplir'))}" spellcheck="false" autocomplete="off">
-                    <span class="h-gab-a">${f?.ok ? '<span class="h-gab-ok" title="' + esc(i18n('Vérifié')) + '">✓</span>' : `<button type="button" class="icon-button small" data-gab-ok="${k}" ${f?.v ? '' : 'disabled'} title="${esc(i18n('Vérifié'))}" aria-label="${esc(i18n('Vérifié'))}">✓</button>`}${w ? ` <button type="button" class="link-button" data-tx-goto="${f.s}:${f.e}">${esc(w)}</button>` : ''}</span>`; }).join('')}</div>
+            <div class="h-gab-fields">${F.map(([k, label, , own]) => { const f = gab.fields[k] || null, st = !f?.v ? 'is-empty' : f.ok ? 'is-ok' : f.own ? 'is-own' : 'is-auto', w = f && f.s >= 0 ? o.where?.(f.s) : '';
+                return `<label class="h-gab-k" for="gab-${k}">${esc(label)}</label><input id="gab-${k}" class="h-gab-v ${st}" data-gab-field="${k}" value="${esc(f?.v || '')}" placeholder="${esc(i18n('à remplir'))}" spellcheck="false" autocomplete="off">
+                    <span class="h-gab-a">${f?.ok ? '<span class="h-gab-ok" title="' + esc(i18n('Vérifié')) + '">✓</span>' : `<button type="button" class="icon-button small" data-gab-ok="${k}" ${f?.v ? '' : 'disabled'} title="${esc(i18n('Vérifié'))}" aria-label="${esc(i18n('Vérifié'))}">✓</button>`}${w ? ` <button type="button" class="link-button" data-tx-goto="${f.s}:${f.e}">${esc(w)}</button>` : ''}${own ? ` <button type="button" class="icon-button small" data-gab-del="${k}" title="${esc(i18n('Retirer cette case'))}" aria-label="${esc(i18n('Retirer cette case'))}">×</button>` : ''}</span>`; }).join('')}</div>
+            <div class="h-gab-add"><button type="button" class="button small secondary" data-gab-add>＋ ${esc(i18n('Ajouter une case'))}</button><span class="h-gab-addrow" data-gab-addrow hidden><input type="text" data-gab-newlabel maxlength="60" placeholder="${esc(i18n('Nom de la case (ex. Profession du parrain)'))}" aria-label="${esc(i18n('Nom de la case'))}" spellcheck="false" autocomplete="off"><button type="button" class="button small" data-gab-addok>＋ ${esc(i18n('Ajouter'))}</button></span></div>
             <p class="muted h-gab-hint">${esc(i18n('Vert : rempli par « 🧭 Repérer », à vérifier · Entrée : ✓ vérifié · un clic sur « l. 3 » montre le passage.'))}</p>`;
     }
     /* ─── étape 2 : « ✓ Ajouter à la généalogie » part des cases ─── */
@@ -143,5 +160,5 @@
         });
         return {ex, changes};
     }
-    ext.txGabarit = {G, has, fill, render, mode, setMode, MODE_KEY, KIND_NAME, apply, parsePerson};
+    ext.txGabarit = {G, has, fill, render, mode, setMode, MODE_KEY, KIND_NAME, apply, parsePerson, fieldsOf, perso, setPerso, PERSO_KEY, uniqueKey};
 })();

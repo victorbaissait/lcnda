@@ -1006,18 +1006,64 @@
         }
         const gabWhere = s0 => { const r = pageRef(s0); return r ? i18n('page {n}, l. {line}', {n: r.n, line: r.line}) : i18n('l. {n}', {n: area.value.slice(0, s0).split('\n').length}); };
         function paintGabarit() { const box = $('[data-gab-box]'); if (box) GB()?.render(box, {gab: t.data.gabarit, kind: kindNow(), guess: lastExtract?.kind, where: gabWhere}); }
-        function gabCount() { const g = GB(), el = $('[data-gab-count]'); if (!g || !el || !g.G[kindNow()]) return; const F = g.G[kindNow()], f = t.data.gabarit?.fields || {};
+        function gabCount() { const g = GB(), el = $('[data-gab-count]'); if (!g || !el || !g.has(kindNow())) return; const F = g.fieldsOf(kindNow(), t.data.gabarit), f = t.data.gabarit?.fields || {};
             el.textContent = i18n('Cases remplies : {a}/{b} · vérifiées : {c}', {a: F.filter(([k]) => f[k]?.v).length, b: F.length, c: F.filter(([k]) => f[k]?.ok).length}); }
         function gabField(k) { const g = t.data.gabarit = (t.data.gabarit && t.data.gabarit.kind === kindNow()) ? t.data.gabarit : {kind: kindNow(), fields: {}}; g.fields = g.fields || {}; return g; }
         /** le texte à trous d'avant (« Coller le texte à trous » dans le menu ⋯, ou le réglage « Modèle d'acte : texte à trous ») */
         async function pasteTemplate() { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast(i18n('Pas de modèle pour ce genre d’acte.'), 'error'); const sgT = multiPages() ? PG.segments(area.value)[segIx()] : null; if ((sgT ? area.value.slice(sgT.s, sgT.e) : area.value).trim() && !await A().confirmBox(i18n('Le texte déjà écrit est gardé.'), {title: i18n('Ajouter le modèle à la fin du texte ?'), okLabel: i18n('Ajouter le modèle')})) return; if (multiPages()) { const sg = PG.segments(area.value)[segIx()]; if (sg) { snap(); spliceText(sg.e, sg.e, (area.value.slice(sg.s, sg.e).trim() ? '\n\n' : '') + tp); area.dispatchEvent(new Event('input')); return; } } // 📑 dans la page affichée
                 area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
+        /** « ＋ Ajouter une case » : une case à toi, dans cet acte seulement (pour toute la sorte : « 🧩 Mes gabarits… ») */
+        function gabAddCase() {
+            const inp = $('[data-gab-newlabel]'), label = String(inp?.value || '').replace(/\s+/g, ' ').trim().slice(0, 60); if (!label) { inp?.focus(); return; }
+            const g = gabField(), taken = new Set(ext.txGabarit.fieldsOf(kindNow(), g).map(x => x[0])), key = ext.txGabarit.uniqueKey(label, taken);
+            snap(); g.extra = [...(g.extra || []), {key, label}].slice(0, 20); touch(); paintGabarit(); $(`[data-gab-field="${key}"]`)?.focus();
+        }
+        /** « 🧩 Mes gabarits… » : pour une sorte d'acte, montrer ou masquer les cases prêtes, et ajouter les siennes (gardé sur cet ordinateur) */
+        function openMesGabarits() {
+            const G2 = ext.txGabarit; let kind = G2.KIND_NAME[kindNow()] ? kindNow() : 'bapteme';
+            const d = ext.openDialog({eyebrow: i18n('GABARITS'), title: `🧩 ${i18n('Mes gabarits')}`, body: '<div class="h-gab-mine" data-gab-mine></div>'});
+            const box = d.querySelector('[data-gab-mine]');
+            const paint = () => { const P = G2.perso(), mine = P[kind] || {}, hide = new Set(mine.hide || []);
+                box.innerHTML = `<label class="h-gab-mk">${esc(i18n('Sorte d’acte'))} <select data-gab-mkind>${Object.entries(G2.KIND_NAME).map(([k, l]) => `<option value="${k}" ${k === kind ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                    <p class="muted">${esc(i18n('Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur.'))}</p>
+                    <ul class="h-gab-mlist">${(G2.G[kind] || []).map(([k, l]) => `<li><label><input type="checkbox" data-gab-mshow="${k}" ${hide.has(k) ? '' : 'checked'}> ${esc(i18n(l))}</label></li>`).join('')}
+                    ${(mine.add || []).map(x => `<li><label><input type="checkbox" checked disabled> ${esc(x.label)}</label> <button type="button" class="icon-button small" data-gab-mdel="${esc(x.key)}" title="${esc(i18n('Retirer cette case'))}" aria-label="${esc(i18n('Retirer cette case'))}">×</button></li>`).join('')}</ul>
+                    <div class="h-gab-addrow"><input type="text" data-gab-mnew maxlength="60" placeholder="${esc(i18n('Nom de la case (ex. Profession du parrain)'))}" aria-label="${esc(i18n('Nom de la case'))}" spellcheck="false" autocomplete="off"><button type="button" class="button small" data-gab-madd>＋ ${esc(i18n('Ajouter une case'))}</button></div>`; };
+            const save = fn => { const P = G2.perso(); P[kind] = P[kind] || {add: [], hide: []}; fn(P[kind]); G2.setPerso(P); paint(); paintGabarit(); };
+            const add = () => { const inp = box.querySelector('[data-gab-mnew]'), label = String(inp.value || '').replace(/\s+/g, ' ').trim().slice(0, 60); if (!label) return inp.focus();
+                save(m => { const taken = new Set([...(G2.G[kind] || []).map(x => x[0]), ...(m.add || []).map(x => x.key)]); m.add = [...(m.add || []), {key: G2.uniqueKey(label, taken), label}].slice(0, 30); }); box.querySelector('[data-gab-mnew]')?.focus(); };
+            box.addEventListener('change', e => { if (e.target.matches('[data-gab-mkind]')) { kind = e.target.value; paint(); return; }
+                const k = e.target.dataset.gabMshow; if (k) save(m => { const h = new Set(m.hide || []); if (e.target.checked) h.delete(k); else h.add(k); m.hide = [...h]; }); });
+            box.addEventListener('click', e => { if (e.target.closest('[data-gab-madd]')) return add();
+                const del = e.target.closest('[data-gab-mdel]'); if (!del) return; const k = del.dataset.gabMdel, before = (G2.perso()[kind]?.add || []).slice();
+                save(m => { m.add = (m.add || []).filter(x => x.key !== k); });
+                A().undoToast?.(i18n('Case retirée'), {undo: () => save(m => { m.add = before; })}); });
+            box.addEventListener('keydown', e => { if (e.target.matches('[data-gab-mnew]') && e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); add(); } });
+            paint();
+        }
+        /** « ⤓ Tableur » : tous les actes d'une sorte, une ligne par acte, une colonne par case (relevé de paroisse) */
+        async function gabSheet(kind) {
+            const G2 = ext.txGabarit; flushCommit(); if (dirty) await save();
+            let items = []; try { items = (await api('act_gabarits', {kind})).items || []; } catch (e) { return toast(e.message, 'error'); }
+            if (!items.length) return toast(i18n('Aucun acte de cette sorte pour l’instant.'));
+            const cols = []; const seen = new Set(); const addCol = (k, l) => { if (!seen.has(k)) { seen.add(k); cols.push([k, l]); } };
+            G2.fieldsOf(kind, null).forEach(([k, l]) => addCol(k, l));
+            items.forEach(it => (it.gabarit?.extra || []).forEach(x => addCol(x.key, x.label)));
+            const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';', quote: 'always'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+            const head = [i18n('Titre'), i18n('Date'), i18n('Lieu'), i18n('Source'), ...cols.map(c => c[1])];
+            const rows = items.map(it => [it.title, it.date_text, it.place, it.source, ...cols.map(([k]) => it.gabarit?.fields?.[k]?.v || '')]);
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + [head, ...rows].map(r => r.map(cell).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'}));
+            a.download = `${A().safeExportFilename ? A().safeExportFilename(`${i18n(G2.KIND_NAME[kind] || 'Autre')} ${i18n('gabarits')}`, 'gabarits') : 'gabarits'}.csv`; /* sans accents : sinon le navigateur l'appelle « download » */ document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+                        toast(i18n('Tableur : {x}', {x: plural(items.length, 'acte')}));
+        }
         function gabMenu(at) {
             const g = GB() || ext.txGabarit, m = g.mode(), set = v => { g.setMode(v); paintPeople(); };
             UI.menuAt?.(at, [
                 {icon: m === 'gabarit' ? '✓' : '', label: i18n('🧩 Gabarit à cases (conseillé)'), run: () => set('gabarit')},
                 {icon: m === 'texte' ? '✓' : '', label: i18n('Texte à trous (comme avant)'), run: () => set('texte')},
                 '-', {icon: '🧭', label: i18n('Remplir à nouveau'), run: () => runDetect()},
+                {icon: '🧩', label: i18n('Mes gabarits…'), run: () => openMesGabarits()},
+                {icon: '⤓', label: i18n('Tableur de tous les actes « {x} »', {x: i18n(g.KIND_NAME[kindNow()] || 'Autre')}), run: () => gabSheet(kindNow())},
                 {icon: '📝', label: i18n('Coller le texte à trous'), run: () => pasteTemplate()},
             ], {title: i18n('Modèle d’acte')});
         }
@@ -1042,6 +1088,7 @@
             e.target.className = `h-gab-v ${!f.v ? 'is-empty' : 'is-own'}`; touch(); gabCount();
         });
         $('[data-tx-found]').addEventListener('keydown', e => {
+            if (e.target.matches?.('[data-gab-newlabel]') && e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); return gabAddCase(); }
             const k = e.target.dataset?.gabField; if (!k || e.key !== 'Enter') return; e.preventDefault(); e.stopPropagation();
             const g = gabField(), f = g.fields[k]; if (f?.v) { snap(); f.ok = true; touch(); }
             paintGabarit(); const all = [...dlg.querySelectorAll('[data-gab-field]')], i = all.findIndex(x => x.dataset.gabField === k); (all[i + 1] || all[i])?.focus();
@@ -1053,6 +1100,11 @@
             if (d.gabOk) { const g = gabField(); const f = g.fields[d.gabOk]; if (!f?.v) return; snap(); f.ok = true; touch(); paintGabarit(); $(`[data-gab-field="${d.gabOk}"]`)?.focus(); return; }
             if (d.gabKind) { const sel = $('[data-tx="kind"]'); if (sel && [...sel.options].some(o => o.value === d.gabKind)) { sel.value = d.gabKind; sel.dispatchEvent(new Event('change', {bubbles: true})); } return; }
             if ('gabMenu' in d) return gabMenu(b);
+            if ('gabAdd' in d) { const r = $('[data-gab-addrow]'); if (r) { r.hidden = !r.hidden; if (!r.hidden) r.querySelector('input')?.focus(); } return; }
+            if ('gabAddok' in d) return gabAddCase();
+            if (d.gabDel) { const g = gabField(), k = d.gabDel, before = {extra: (g.extra || []).slice(), f: g.fields[k] ? {...g.fields[k]} : null};
+                snap(); g.extra = (g.extra || []).filter(x => x.key !== k); delete g.fields[k]; touch(); paintGabarit();
+                A().undoToast?.(i18n('Case retirée'), {undo: () => { const h = gabField(); h.extra = before.extra; if (before.f) h.fields[k] = before.f; touch(); paintGabarit(); }}); return; }
             if (d.txLookword) return ext.readingAid?.open({q: d.txLookword, lang: aideLang($('[data-tx-lang]').value)});
             if (d.txGoto && d.txGoto[0] === 'p') { const [i, s, en] = d.txGoto.slice(1).split(':').map(Number); if (i !== pageIx) return void goPage(i, {goto: {s, e: en}}); return gotoRange(s, en); } // 📑 un texte par page : l'acte de l'autre page
             if (d.txGoto) { const [s, en] = d.txGoto.split(':').map(Number); return gotoRange(s, en); }
@@ -1492,6 +1544,8 @@
                 return {i, name: i >= 0 ? pageName(PAGES[i], i) : i18n('Page {n}', {n: k + 1}), text: area.value.slice(sg.s, sg.e).replace(/^\n+|\n+$/g, ''), file: i >= 0 ? PAGES[i].filename : ''}; });
         }
         const namedText = () => (multiPages() ? pageParts().map(q => `— ${q.name} —\n${q.text}`).join('\n\n') : area.value);
+        /** les cases remplies du gabarit, dans l'ordre : [[nom, valeur]] (impression, PDF) */
+        const gabRows = () => { const g = GB(), gb = t.data.gabarit; if (!g || !gb || gb.kind !== kindNow()) return []; return g.fieldsOf(kindNow(), gb).filter(([k]) => gb.fields?.[k]?.v).map(([k, l]) => [l, gb.fields[k].v + (gb.fields[k].ok ? ' ✓' : '')]); };
         async function printIt() {
             const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error');
             const plainUrl = t.filename ? `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${encodeURIComponent(t.filename)}` : '';
@@ -1503,11 +1557,12 @@
             UI2.openPrintDialog({title, key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
                 options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', i18n('Image puis texte')], ['text', i18n('Texte seul')]]},
                     ...(multiPages() ? [{key: 'pages', type: 'radio', value: 'all', choices: [['all', i18n('Sur toutes les pages')], ['here', i18n('Sur la page affichée')]]}] : []),
-                    ...(canEnh ? [{key: 'enh', label: i18n('Image améliorée'), checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: i18n('Personnes et rôles'), checked: true}],
+                    ...(canEnh ? [{key: 'enh', label: i18n('Image améliorée'), checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: i18n('Personnes et rôles'), checked: true},
+                    ...(gabRows().length ? [{key: 'gab', label: `🧩 ${i18n('Gabarit')}`, checked: true}] : [])],
                 html: async c => { const img = c.lay === 'text' ? '' : await imgFor(c);
-                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}h2{font-size:16px;margin:12px 0 6px}.brk{break-before:page}</style></head><body>
+                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}h2{font-size:16px;margin:12px 0 6px}.brk{break-before:page}table.gab{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0 10px}table.gab th{text-align:left;font-weight:600;color:#555;width:34%;padding:3px 8px 3px 0;vertical-align:top}table.gab td{padding:3px 0;border-bottom:1px solid #ddd}</style></head><body>
                         <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p>${multiPages() ? (await Promise.all(pageParts().filter(q => c.pages !== 'here' || q.i === pageIx).map(async (q, k) => { const u = c.lay === 'text' || !q.file ? '' : q.i === pageIx ? img : base + encodeURIComponent(q.file);
-                            return `<section class="pg${k ? ' brk' : ''}"><h2>${esc(q.name)}</h2><div class="g ${c.lay}">${u ? `<img src="${esc(u)}" alt="">` : ''}<div><pre>${esc(q.text)}</pre></div></div></section>`; }))).join('') + '<div><div>' : `<div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>`}${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
+                            return `<section class="pg${k ? ' brk' : ''}"><h2>${esc(q.name)}</h2><div class="g ${c.lay}">${u ? `<img src="${esc(u)}" alt="">` : ''}<div><pre>${esc(q.text)}</pre></div></div></section>`; }))).join('') + '<div><div>' : `<div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>`}${c.gab && gabRows().length ? `<h3>🧩 ${esc(i18n('Gabarit'))}</h3><table class="gab">${gabRows().map(([l, v]) => `<tr><th>${esc(l)}</th><td>${esc(v)}</td></tr>`).join('')}</table>` : ''}${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
         }
         window.LCNDA_UI?.onPrintKey?.(dlg, () => printIt()); // L1 : ⌘P
         dlg.addEventListener('click', async e => {

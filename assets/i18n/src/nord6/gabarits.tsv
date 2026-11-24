@@ -33,3 +33,15 @@ Texte à trous (comme avant) ¦ Tekstas su tarpais (kaip anksčiau) ¦ Teksts ar
 Remplir à nouveau ¦ Užpildyti iš naujo ¦ Aizpildīt vēlreiz ¦ Täida uuesti
 Coller le texte à trous ¦ Įklijuoti tekstą su tarpais ¦ Ielīmēt tekstu ar tukšumiem ¦ Kleebi lünktekst
 Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Paimta iš šablono (laukeliai, kuriuos patikrinai ar įrašei): ¦ Ņemts no veidnes (lauki, ko pārbaudīji vai uzrakstīji): ¦ Võetud mallist (lahtrid, mida kontrollisid või kirjutasid):
+Retirer cette case ¦ Pašalinti šį laukelį ¦ Noņemt šo lauku ¦ Eemalda see lahter
+Ajouter une case ¦ Pridėti laukelį ¦ Pievienot lauku ¦ Lisa lahter
+Nom de la case (ex. Profession du parrain) ¦ Laukelio pavadinimas (pvz. Krikštatėvio profesija) ¦ Lauka nosaukums (piem. Krusttēva nodarbošanās) ¦ Lahtri nimi (nt Ristiisa amet)
+Nom de la case ¦ Laukelio pavadinimas ¦ Lauka nosaukums ¦ Lahtri nimi
+Case retirée ¦ Laukelis pašalintas ¦ Lauks noņemts ¦ Lahter eemaldatud
+Mes gabarits… ¦ Mano šablonai… ¦ Manas veidnes… ¦ Minu mallid…
+Mes gabarits ¦ Mano šablonai ¦ Manas veidnes ¦ Minu mallid
+Tableur de tous les actes « {x} » ¦ Visų dokumentų „{x}“ skaičiuoklė ¦ Visu dokumentu “{x}” izklājlapa ¦ Kõigi dokumentide „{x}“ tabel
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Pažymėti laukeliai rodomi kiekvieno šios rūšies dokumento šablone. Išsaugota šiame kompiuteryje. ¦ Atzīmētie lauki redzami katra šī veida dokumenta veidnē. Saglabāts šajā datorā. ¦ Märgitud lahtrid on näha selle liigi iga dokumendi mallis. Salvestatud selles arvutis.
+Aucun acte de cette sorte pour l’instant. ¦ Kol kas nėra šios rūšies dokumentų. ¦ Vēl nav neviena šī veida dokumenta. ¦ Selle liigi dokumente veel pole.
+gabarits ¦ šablonai ¦ veidnes ¦ mallid
+Tableur : {x} ¦ Skaičiuoklė: {x} ¦ Izklājlapa: {x} ¦ Tabel: {x}

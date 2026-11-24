@@ -33,3 +33,15 @@ Texte à trous (comme avant) ¦ Aukkoteksti (kuten ennen) ¦ Kitöltendő szöve
 Remplir à nouveau ¦ Täytä uudelleen ¦ Kitöltés újra
 Coller le texte à trous ¦ Liitä aukkoteksti ¦ Kitöltendő szöveg beillesztése
 Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Otettu mallista (kentät, jotka tarkistit tai kirjoitit): ¦ A sablonból átvéve (általad ellenőrzött vagy beírt mezők):
+Retirer cette case ¦ Poista tämä kenttä ¦ Mező eltávolítása
+Ajouter une case ¦ Lisää kenttä ¦ Mező hozzáadása
+Nom de la case (ex. Profession du parrain) ¦ Kentän nimi (esim. Kummisedän ammatti) ¦ A mező neve (pl. A keresztapa foglalkozása)
+Nom de la case ¦ Kentän nimi ¦ A mező neve
+Case retirée ¦ Kenttä poistettu ¦ Mező eltávolítva
+Mes gabarits… ¦ Omat mallit… ¦ Saját sablonok…
+Mes gabarits ¦ Omat mallit ¦ Saját sablonok
+Tableur de tous les actes « {x} » ¦ Taulukko kaikista asiakirjoista ”{x}” ¦ Táblázat minden „{x}” okiratról
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Valitut kentät näkyvät tämän lajin jokaisen asiakirjan mallissa. Tallennettu tälle tietokoneelle. ¦ A bejelölt mezők minden ilyen fajtájú okirat sablonjában megjelennek. Ezen a számítógépen tárolva.
+Aucun acte de cette sorte pour l’instant. ¦ Ei vielä tämän lajin asiakirjoja. ¦ Még nincs ilyen fajtájú okirat.
+gabarits ¦ mallit ¦ sablonok
+Tableur : {x} ¦ Taulukko: {x} ¦ Táblázat: {x}

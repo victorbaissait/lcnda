@@ -148,7 +148,7 @@ echo json_encode([$d['gabarit'] ?? null, $e['gabarit'] ?? null]);`);
             const opts = await p.$$eval(`${D} [data-tx="kind"] option`, o => o.map(x => x.value));
             assert.ok(opts.includes('notoriete'));
             const keys = await p.evaluate(() => window.LCNDA_EXT.txGabarit.G.notoriete.map(x => x[0])); assert.deepEqual(keys, ['date', 'juge', 'personne', 'atteste', 'temoins']);
-            assert.deepEqual(Object.keys(await p.evaluate(() => window.LCNDA_EXT.txGabarit.KIND_NAME)).length, 9);
+            assert.equal(Object.keys(await p.evaluate(() => window.LCNDA_EXT.txGabarit.G)).length, 9, '9 gabarits prêts'); assert.equal(Object.keys(await p.evaluate(() => window.LCNDA_EXT.txGabarit.KIND_NAME)).length, 11, '+ Lettre et Autre, pour ses propres gabarits');
         });
         await t('réglage « Modèle d’acte » (menu ⋯) : « Texte à trous » → plus d’onglet, « 🧩 Modèle » colle le texte à trous ; retour au gabarit', async () => {
             await p.click(`${D} [data-gab-menu]`); await p.waitForSelector('.ui-actmenu .ui-actmenu-i');
@@ -163,6 +163,57 @@ echo json_encode([$d['gabarit'] ?? null, $e['gabarit'] ?? null]);`);
             await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-modele'));
             await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="template"]').click()); await sleep(400);
             assert.ok(await p.$(`${D} [data-gab-field]`), '« 🧩 Modèle » ouvre le gabarit (conseillé)');
+        });
+        await t('étape 3 : « ＋ Ajouter une case » dans l’acte (gardée avec l’acte, × la retire, ↶ Annuler la remet)', async () => {
+            await p.click(`${D} [data-gab-add]`); await p.fill(`${D} [data-gab-newlabel]`, 'Profession du parrain'); await p.press(`${D} [data-gab-newlabel]`, 'Enter'); await sleep(200);
+            const k = 'x_profession_du_parrain'; assert.ok(await p.$(`${D} [data-gab-field="${k}"]`), 'la nouvelle case');
+            await p.fill(`${D} [data-gab-field="${k}"]`, 'tisserand'); await sleep(150);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(1200);
+            const row = JSON.parse(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT data_json FROM act_transcriptions WHERE id=1')->fetchColumn();`).stdout);
+            assert.deepEqual(row.gabarit.extra, [{key: k, label: 'Profession du parrain'}]); assert.equal(row.gabarit.fields[k].v, 'tisserand');
+            await p.click(`${D} [data-gab-del="${k}"]`); await sleep(200); assert.equal(await p.$(`${D} [data-gab-field="${k}"]`), null);
+            await p.evaluate(() => { const tt = [...document.querySelectorAll('.ui-toast')].filter(x => /Case retirée/.test(x.textContent)).at(-1); [...tt.querySelectorAll('button')].find(b => /Annuler/.test(b.textContent)).click(); }); await sleep(250);
+            assert.equal(await p.$eval(`${D} [data-gab-field="${k}"]`, e => e.value), 'tisserand', '↶ Annuler la remet, avec sa valeur');
+        });
+        await t('étape 3 : « 🧩 Mes gabarits… » : masquer une case prête, ajouter la sienne pour toute la sorte ; gardé', async () => {
+            await p.click(`${D} [data-gab-menu]`); await p.waitForSelector('.ui-actmenu .ui-actmenu-i'); await p.locator('.ui-actmenu .ui-actmenu-i', {hasText: 'Mes gabarits…'}).click();
+            await p.waitForSelector('[data-gab-mine] [data-gab-mshow="cure"]');
+            await p.uncheck('[data-gab-mine] [data-gab-mshow="cure"]'); await sleep(150);
+            await p.fill('[data-gab-mine] [data-gab-mnew]', 'Lieu du baptême'); await p.press('[data-gab-mine] [data-gab-mnew]', 'Enter'); await sleep(200);
+            const P = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-gabarits-perso')));
+            assert.deepEqual(P.bapteme.hide, ['cure']); assert.deepEqual(P.bapteme.add, [{key: 'x_lieu_du_bapteme', label: 'Lieu du baptême'}]);
+            const keys = await p.$$eval(`${D} [data-gab-field]`, e => e.map(x => x.dataset.gabField));
+            assert.ok(!keys.includes('cure') && keys.includes('x_lieu_du_bapteme'), 'le gabarit de l’acte suit : ' + keys);
+            await p.check('[data-gab-mine] [data-gab-mshow="cure"]'); await sleep(150);
+            assert.ok((await p.$$eval(`${D} [data-gab-field]`, e => e.map(x => x.dataset.gabField))).includes('cure'), 'remontrée');
+            await p.evaluate(() => [...document.querySelectorAll('dialog[open]')].find(d => d.querySelector('[data-gab-mine]'))?.close()); await sleep(200);
+        });
+        await t('étape 3 : « ⤓ Tableur » : une ligne par acte de la sorte, une colonne par case (avec les cases ajoutées)', async () => {
+            await p.fill(`${D} [data-gab-field="x_lieu_du_bapteme"]`, 'église Saint-Martin'); await sleep(150);
+            await p.click(`${D} [data-gab-menu]`); await p.waitForSelector('.ui-actmenu .ui-actmenu-i');
+            const [dl] = await Promise.all([p.waitForEvent('download', {timeout: 15000}), p.locator('.ui-actmenu .ui-actmenu-i', {hasText: 'Tableur de tous les actes « Baptême »'}).click()]);
+            const csv = fs.readFileSync(await dl.path(), 'utf8').replace(/^\ufeff/, ''), lines = csv.split('\r\n');
+            assert.equal(dl.suggestedFilename(), 'bapteme-gabarits.csv');
+            assert.match(lines[0], /^"Titre";"Date";"Lieu";"Source";"Date du baptême";"Enfant"/); assert.match(lines[0], /"Lieu du baptême"/); assert.match(lines[0], /"Profession du parrain"/);
+            assert.equal(lines.length, 2, 'un seul acte de cette sorte'); assert.match(lines[1], /"Jean[^"]*"/); assert.match(lines[1], /"église Saint-Martin"/); assert.match(lines[1], /"tisserand"/);
+        });
+        await t('étape 3 : 🖨 l’impression et le PDF montrent le gabarit en tableau (case à cocher « 🧩 Gabarit »)', async () => {
+            const r = await p.evaluate(async () => { const UI = window.LCNDA_UI, keep = {pr: UI.openPrintDialog, ex: UI.openExportDialog}; let pr = null, ex = null;
+                UI.openPrintDialog = o => { pr = o; }; UI.openExportDialog = o => { ex = o; };
+                try { const d = document.querySelector('dialog.h-tx-dlg'); [...d.querySelectorAll('[data-tx-menus] button')].find(b => b.textContent.trim() === 'Fichier').click(); await new Promise(x => setTimeout(x, 200));
+                    [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Exporter/.test(b.textContent)).click(); await new Promise(x => setTimeout(x, 200));
+                    await ex.formats.find(f => f.id === 'print').run({});
+                    return pr ? {opt: pr.options.some(o => o.key === 'gab'), html: await pr.html({lay: 'text', gab: true, people: false}), off: await pr.html({lay: 'text', gab: false, people: false})} : null;
+                } finally { UI.openPrintDialog = keep.pr; UI.openExportDialog = keep.ex; } });
+            assert.ok(r, 'la fenêtre « Imprimer » s’ouvre'); assert.equal(r.opt, true);
+            assert.match(r.html, /<table class="gab">/); assert.match(r.html, /<th>Enfant<\/th><td>Jean[^<]*✓<\/td>/); assert.match(r.html, /<th>Profession du parrain<\/th><td>tisserand<\/td>/);
+            assert.doesNotMatch(r.off, /<table class="gab">/);
+        });
+        await t('étape 3 : côté serveur, les cases ajoutées : un nom en « x_… », 60 lettres au plus, pas de doublon', async () => {
+            const r = php(String.raw`require 'lib/bootstrap.php'; require_once 'lib/transcriptions.php';
+$d = act_transcription_clean_data(db(), ['gabarit' => ['kind' => 'bapteme', 'fields' => ['x_a' => ['v' => 'ok']], 'extra' => [['key' => 'x_a', 'label' => str_repeat('n', 90)], ['key' => 'x_a', 'label' => 'double'], ['key' => 'pere', 'label' => 'pas à moi'], ['key' => 'x_b', 'label' => '']]]]);
+echo json_encode($d['gabarit']);`);
+            const g = JSON.parse(r.stdout); assert.deepEqual(g.extra, [{key: 'x_a', label: 'n'.repeat(60)}]); assert.equal(g.fields.x_a.v, 'ok');
         });
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {

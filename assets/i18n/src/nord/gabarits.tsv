@@ -33,3 +33,15 @@ Texte à trous (comme avant) ¦ Text s mezerami (jako dřív) ¦ Lucktext (som f
 Remplir à nouveau ¦ Vyplnit znovu ¦ Fyll i igen ¦ Udfyld igen
 Coller le texte à trous ¦ Vložit text s mezerami ¦ Klistra in lucktexten ¦ Indsæt teksten med huller
 Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Převzato ze šablony (pole ověřená nebo napsaná tebou): ¦ Hämtat från mallen (rutor som du kontrollerat eller skrivit): ¦ Hentet fra skabelonen (felter, du har kontrolleret eller skrevet):
+Retirer cette case ¦ Odebrat toto pole ¦ Ta bort den här rutan ¦ Fjern dette felt
+Ajouter une case ¦ Přidat pole ¦ Lägg till en ruta ¦ Tilføj et felt
+Nom de la case (ex. Profession du parrain) ¦ Název pole (např. Povolání kmotra) ¦ Rutans namn (t.ex. Gudfaderns yrke) ¦ Feltets navn (f.eks. Gudfarens erhverv)
+Nom de la case ¦ Název pole ¦ Rutans namn ¦ Feltets navn
+Case retirée ¦ Pole odebráno ¦ Rutan borttagen ¦ Felt fjernet
+Mes gabarits… ¦ Moje šablony… ¦ Mina mallar … ¦ Mine skabeloner …
+Mes gabarits ¦ Moje šablony ¦ Mina mallar ¦ Mine skabeloner
+Tableur de tous les actes « {x} » ¦ Tabulka všech záznamů „{x}“ ¦ Kalkylblad med alla handlingar ”{x}” ¦ Regneark med alle dokumenter »{x}«
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Zaškrtnutá pole se zobrazí v šabloně každého záznamu tohoto druhu. Uloženo v tomto počítači. ¦ Ikryssade rutor visas i mallen för varje handling av den här typen. Sparas på den här datorn. ¦ Afkrydsede felter vises i skabelonen for hvert dokument af denne type. Gemt på denne computer.
+Aucun acte de cette sorte pour l’instant. ¦ Zatím žádný záznam tohoto druhu. ¦ Ännu ingen handling av den här typen. ¦ Endnu intet dokument af denne type.
+gabarits ¦ šablony ¦ mallar ¦ skabeloner
+Tableur : {x} ¦ Tabulka: {x} ¦ Kalkylblad: {x} ¦ Regneark: {x}

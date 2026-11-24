@@ -33,3 +33,15 @@ Texte à trous (comme avant) ¦ Tekst me boshllëqe (si më parë) ¦ Test b’v
 Remplir à nouveau ¦ Plotëso përsëri ¦ Erġa’ imla
 Coller le texte à trous ¦ Ngjit tekstin me boshllëqe ¦ Waħħal it-test b’vojt
 Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Marrë nga shablloni (kuti të verifikuara ose të shkruara nga ti): ¦ Meħud mill-mudell (kaxxi li vverifikajt jew ktibt int):
+Retirer cette case ¦ Hiq këtë kuti ¦ Neħħi din il-kaxxa
+Ajouter une case ¦ Shto një kuti ¦ Żid kaxxa
+Nom de la case (ex. Profession du parrain) ¦ Emri i kutisë (p.sh. Profesioni i kumbarit) ¦ Isem il-kaxxa (eż. Xogħol il-parrinu)
+Nom de la case ¦ Emri i kutisë ¦ Isem il-kaxxa
+Case retirée ¦ Kutia u hoq ¦ Kaxxa mneħħija
+Mes gabarits… ¦ Shabllonet e mia… ¦ Il-mudelli tiegħi…
+Mes gabarits ¦ Shabllonet e mia ¦ Il-mudelli tiegħi
+Tableur de tous les actes « {x} » ¦ Fletë llogaritëse e të gjitha akteve «{x}» ¦ Spreadsheet tal-atti kollha “{x}”
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Kutitë e shënuara shfaqen në shabllonin e çdo akti të këtij lloji. Ruhet në këtë kompjuter. ¦ Il-kaxxi mmarkati jidhru fil-mudell ta’ kull att ta’ dan it-tip. Maħżun fuq dan il-kompjuter.
+Aucun acte de cette sorte pour l’instant. ¦ Ende asnjë akt i këtij lloji. ¦ Għad m’hemmx atti ta’ dan it-tip.
+gabarits ¦ shabllone ¦ mudelli
+Tableur : {x} ¦ Fletë llogaritëse: {x} ¦ Spreadsheet: {x}

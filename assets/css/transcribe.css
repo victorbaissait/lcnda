@@ -345,3 +345,10 @@
 .h-gab-ok{color:#1a7f37;font-weight:800}
 .h-gab-hint,.h-gab-empty p{font-size:12px;margin:0}
 @media (max-width:520px){.h-gab-fields{grid-template-columns:minmax(0,1fr) auto}.h-gab-k{grid-column:1 / -1;margin-top:4px}}
+.h-gab-add{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-gab-addrow{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-gab-addrow[hidden]{display:none}
+.h-gab-addrow input{min-width:220px;max-width:100%;padding:4px 8px;border:1.5px solid var(--line,#c9ced8);background:var(--panel,#fff);color:inherit;font:inherit}
+.h-gab-mine{display:grid;gap:10px}
+.h-gab-mlist{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.h-gab-mlist li{display:flex;align-items:center;gap:6px}

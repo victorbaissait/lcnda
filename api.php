@@ -632,6 +632,7 @@ try {
         'slideshows' => json_response(['items' => slideshows_list($pdo)]),
         'slideshow' => json_response(slideshow_get($pdo, safe_int($_GET['id'] ?? 0))),
         'act_transcriptions' => json_response(['items' => act_transcriptions_list($pdo)]),
+        'act_gabarits' => json_response(['items' => act_gabarits($pdo, (string) ($_GET['kind'] ?? ''))]), // 🧩 « ⤓ Tableur » des gabarits d'une sorte
         'act_transcriptions_page' => json_response(act_transcriptions_page($pdo, $_GET)), // Listes → Transcriptions d'actes (lecture seule, page par page)
         'act_transcription_versions' => json_response(['items' => act_transcription_versions($pdo, safe_int($_GET['act_id'] ?? 0))]), // 🕘 Versions du texte d'un acte
         'act_transcription_version' => json_response(act_transcription_version($pdo, safe_int($_GET['id'] ?? 0))),

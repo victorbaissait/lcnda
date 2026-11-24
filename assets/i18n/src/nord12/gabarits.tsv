@@ -33,3 +33,15 @@ Texte à trous (comme avant) ¦ Текст с пропусками (как ра�
 Remplir à nouveau ¦ Заполнить заново ¦ Заповнити знову
 Coller le texte à trous ¦ Вставить текст с пропусками ¦ Вставити текст із пропусками
 Repris du gabarit (cases vérifiées ou écrites par toi) : ¦ Взято из шаблона (поля, проверенные или написанные тобой): ¦ Взято з шаблону (поля, перевірені або написані тобою):
+Retirer cette case ¦ Убрать это поле ¦ Прибрати це поле
+Ajouter une case ¦ Добавить поле ¦ Додати поле
+Nom de la case (ex. Profession du parrain) ¦ Название поля (напр. Занятие крёстного) ¦ Назва поля (напр. Заняття хрещеного)
+Nom de la case ¦ Название поля ¦ Назва поля
+Case retirée ¦ Поле убрано ¦ Поле прибрано
+Mes gabarits… ¦ Мои шаблоны… ¦ Мої шаблони…
+Mes gabarits ¦ Мои шаблоны ¦ Мої шаблони
+Tableur de tous les actes « {x} » ¦ Таблица всех актов «{x}» ¦ Таблиця всіх актів «{x}»
+Les cases cochées se montrent dans le gabarit de chaque acte de cette sorte. Gardé sur cet ordinateur. ¦ Отмеченные поля показываются в шаблоне каждого акта этого вида. Хранится на этом компьютере. ¦ Позначені поля показуються в шаблоні кожного акта цього виду. Зберігається на цьому комп’ютері.
+Aucun acte de cette sorte pour l’instant. ¦ Пока нет ни одного акта этого вида. ¦ Поки немає жодного акта цього виду.
+gabarits ¦ шаблоны ¦ шаблони
+Tableur : {x} ¦ Таблица: {x} ¦ Таблиця: {x}

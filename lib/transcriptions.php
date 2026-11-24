@@ -108,6 +108,18 @@ function rename_act_transcription_version(PDO $pdo, array $data): array
     return ['id' => $old['id'], 'label' => $label];
 }
 
+/** 🧩 « ⤓ Tableur » : les actes d'une sorte avec leur gabarit (heritage-transcribe.js gabSheet), 5 000 au plus, dans l'ordre des dates */
+function act_gabarits(PDO $pdo, string $kind): array
+{
+    act_transcriptions_ensure($pdo);
+    if (!in_array($kind, TRANSCRIPTION_KINDS, true)) { return []; }
+    $pdo->sqliteCreateFunction('act_year', static fn($v) => act_transcription_year($v === null ? '' : (string) $v), 1);
+    $s = $pdo->prepare("SELECT id, title, date_text, place, source, json_extract(data_json, '$.gabarit') AS g FROM act_transcriptions WHERE kind = ? ORDER BY act_year(date_text) IS NULL, act_year(date_text), date_text, id LIMIT 5000");
+    $s->execute([$kind]);
+    return array_map(static function ($r) { $g = json_decode((string) ($r['g'] ?? ''), true);
+        return ['id' => (int) $r['id'], 'title' => (string) $r['title'], 'date_text' => (string) $r['date_text'], 'place' => (string) $r['place'], 'source' => (string) $r['source'], 'gabarit' => is_array($g) ? $g : null]; }, $s->fetchAll(PDO::FETCH_ASSOC));
+}
+
 function act_transcriptions_list(PDO $pdo): array
 {
     act_transcriptions_ensure($pdo);
@@ -245,11 +257,17 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     if ($gb && in_array($gb['kind'] ?? '', TRANSCRIPTION_KINDS, true)) {
         $gf = [];
         foreach (array_slice(is_array($gb['fields'] ?? null) ? $gb['fields'] : [], 0, 40, true) as $k => $f) {
-            if (!is_string($k) || !preg_match('/^[a-z_]{1,24}$/', $k) || !is_array($f)) { continue; }
+            if (!is_string($k) || !preg_match('/^[a-z0-9_]{1,24}$/', $k) || !is_array($f)) { continue; }
             $v = mb_substr(safe_text(is_scalar($f['v'] ?? '') ? (string) ($f['v'] ?? '') : ''), 0, 300); if ($v === '') { continue; }
             $gf[$k] = ['v' => $v, 's' => max(-1, (int) ($f['s'] ?? -1)), 'e' => max(-1, (int) ($f['e'] ?? -1))] + (!empty($f['ok']) ? ['ok' => true] : []) + (!empty($f['own']) ? ['own' => true] : []);
         }
-        $gabarit = ['kind' => $gb['kind'], 'fields' => (object) $gf];
+        // les cases ajoutées dans l'acte (« ＋ Ajouter une case ») : leur nom, 20 au plus
+        $gx = [];
+        foreach (array_slice(is_array($gb['extra'] ?? null) ? $gb['extra'] : [], 0, 20) as $x) {
+            $xk = is_array($x) ? (string) ($x['key'] ?? '') : ''; $xl = is_array($x) ? mb_substr(safe_text(is_scalar($x['label'] ?? '') ? (string) ($x['label'] ?? '') : ''), 0, 60) : '';
+            if (preg_match('/^x_[a-z0-9_]{1,22}$/', $xk) && $xl !== '' && !in_array($xk, array_column($gx, 'key'), true)) { $gx[] = ['key' => $xk, 'label' => $xl]; }
+        }
+        $gabarit = ['kind' => $gb['kind'], 'fields' => (object) $gf] + ($gx ? ['extra' => $gx] : []);
     }
     // 📜 le texte lu autour de l'acte sur une capture d'écran (« Saint-Amand-Montrond, 1807-1809, N, M, D », « 139 / 268 ») : pour la source
     $frame = mb_substr(safe_text(is_string($data['frame_text'] ?? null) ? $data['frame_text'] : ''), 0, 600);
