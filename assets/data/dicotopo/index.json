@@ -37,6 +37,18 @@
    "old": 6121,
    "places": 9661,
    "size": 240417
+  },
+  "07": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Ardèche",
+    "bibl": "Charrié (Pierre), Dictionnaire topographique du département de l’Ardèche, Paris, 1979.",
+    "gallica": ""
+   },
+   "communes": 340,
+   "label": "Ardèche",
+   "old": 7324,
+   "places": 16127,
+   "size": 356010
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",
