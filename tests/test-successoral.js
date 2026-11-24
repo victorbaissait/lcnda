@@ -312,7 +312,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             });
             await t('héritiers : parts, total 1, autre hypothèse, liens Légifrance ; arbre ; notaire ; ⋯ de la fiche ; modèles du traitement de texte seulement en usage successoral', async () => {
                 const { ctx, pg, errs } = await open(1440, 900, false, '#successoral');
-                await pg.evaluate(() => { localStorage.setItem('lcnda-succ-tab', JSON.stringify('heirs')); });
+                await pg.evaluate(() => { localStorage.setItem('genealogie-succ-tab', JSON.stringify('heirs')); });
                 await pg.waitForSelector('[data-succ-open]'); await pg.click('[data-succ-open]'); await pg.click('[data-succ-tab="heirs"]'); await pg.waitForSelector('.succ-table');
                 const txt = await pg.textContent('.succ-table'); assert.match(txt, /1\/3/); assert.match(txt, /1\/12/);
                 assert.match(await pg.textContent('tfoot'), /1/);
@@ -349,7 +349,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                     await noSide(pg); await ux('dossiers');
                     // 👥 Héritiers à contacter
                     await pg.click('[data-succ-view="heirs"]'); await pg.waitForSelector('[data-succ-hrow]');
-                    assert.equal(await pg.evaluate(() => JSON.parse(localStorage.getItem('lcnda-succ-view'))), 'heirs', 'retenu');
+                    assert.equal(await pg.evaluate(() => JSON.parse(localStorage.getItem('genealogie-succ-view'))), 'heirs', 'retenu');
                     const names = await pg.$$eval('[data-succ-hrow]', rs => rs.map(r => r.querySelector('.ui-row-name, .ui-card-name').textContent.trim()));
                     for (const n of ['Suzanne MAZAUD', 'Claire MAZAUD', 'Lucas MAZAUD', 'Emma MAZAUD', 'André MAZAUD']) assert.ok(names.includes(n), n);
                     for (const n of ['Marcel MAZAUD', 'Paul MAZAUD', 'Jean MAZAUD', 'Henri MAZAUD']) assert.ok(!names.includes(n), 'pas un mort : ' + n);
