@@ -138,8 +138,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TA
             const del = await post('delete_media', {media_id: 4});
             assert.ok(!del.error, JSON.stringify(del));
             assert.equal(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT count(*) FROM doc_links WHERE a=4 OR b=4')->fetchColumn();`).stdout, '0');
-            const r = php(`require 'lib/bootstrap.php'; $p = db(); schema_v105($p); schema_v105($p); echo $p->query('SELECT count(*) FROM doc_links')->fetchColumn(), ' ', $p->query('PRAGMA user_version')->fetchColumn();`);
-            assert.match(r.stdout, /^1 105$/, r.stdout + r.stderr);
+            const r = php(`require 'lib/bootstrap.php'; $p = db(); schema_v105($p); schema_v105($p); echo $p->query('SELECT count(*) FROM doc_links')->fetchColumn(), ' ', $p->query('PRAGMA user_version')->fetchColumn(), ' ', SCHEMA_VERSION;`);
+            const m = r.stdout.match(/^1 (\d+) (\d+)$/); assert.ok(m && Number(m[1]) >= 105 && m[1] === m[2], r.stdout + r.stderr); // la base est à la version courante (105 ou plus)
         });
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {

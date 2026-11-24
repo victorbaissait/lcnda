@@ -29,6 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=275">
+    <link rel="stylesheet" href="assets/css/recueil-etat.css?v=3">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
@@ -1294,13 +1295,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=24" defer></script>
-<script src="assets/js/heritage-more.js?v=394" defer></script>
+<script src="assets/js/heritage-more.js?v=395" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
 <script src="assets/js/heritage-av.js?v=20" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=10" defer></script>
-<script src="assets/js/heritage-recueils.js?v=27" defer></script>
+<script src="assets/js/heritage-recueil-etat.js?v=2" defer></script>
+<script src="assets/js/heritage-recueils.js?v=29" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=31" defer></script>
 <script src="assets/js/heritage-decennales.js?v=4" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=14" defer></script>

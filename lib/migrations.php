@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 105;
+const SCHEMA_VERSION = 106;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -134,6 +134,7 @@ function migration_steps(): array
         103 => 'schema_v103',
         104 => 'schema_v104',
         105 => 'schema_v105',
+        106 => 'schema_v106',
     ];
 }
 
@@ -2831,4 +2832,11 @@ function schema_v105(PDO $pdo): void
 {
     if (!function_exists('doc_links_install')) { require_once __DIR__ . '/doc_links.php'; }
     doc_links_install($pdo);
+}
+
+/** 106 : 🗂 l'état des pages d'un recueil (état choisi, absence et sa raison, lisibilité, photo à refaire, lacune) ; numérotation et pages attendues */
+function schema_v106(PDO $pdo): void
+{
+    if (!function_exists('recueil_etat_install')) { require_once __DIR__ . '/recueil_etat.php'; }
+    recueil_etat_install($pdo);
 }

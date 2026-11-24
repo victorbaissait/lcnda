@@ -1,0 +1,72 @@
+/* 🗂 État d'un recueil (heritage-recueil-etat.js ; maquette docs/design/registres-etat-fonds.html) */
+.re-tab { display: grid; gap: 12px; }
+.re-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.re-head h3 { margin: 0 0 2px; }
+.re-head p { margin: 0; }
+.re-row { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.re-seg { margin: 0; display: inline-flex; }
+.re-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.re-kpi { border: 2px solid var(--ink, #111); background: var(--surface, #fff); padding: 8px 10px; }
+.re-kpi b { display: block; font-size: 22px; line-height: 1.1; }
+.re-kpi small { color: var(--muted, #555); font-size: 12px; }
+.re-kpi.is-abs { border-color: #c62828; }
+.re-stack { display: flex; height: 14px; border: 2px solid var(--ink, #111); overflow: hidden; margin: 2px 0; background: var(--surface, #fff); }
+.re-stack b { display: block; height: 100%; }
+.re-stack .re-s-done { background: #1a7f37; } .re-stack .re-s-checked { background: #055dff; } .re-stack .re-s-doing { background: #d4a800; } .re-stack .re-s-todo { background: #c9ced8; }
+.re-stack .re-s-abs { background: repeating-linear-gradient(135deg, #c62828 0 3px, #fdecec 3px 6px); }
+.re-rel { margin: 0; font-size: 13px; }
+.re-pill { display: inline-block; font: 700 11px/1.3 system-ui, sans-serif; padding: 2px 6px; border: 1.5px solid #c9ced8; background: #f1f2f4; color: #444; white-space: nowrap; }
+.re-pill.ok { border-color: #1a7f37; background: #eaf6ee; color: #1a7f37; }
+.re-pill.q { border-color: #d4a800; background: #fff8d6; color: #7a5d00; }
+.re-pill.red { border-color: #c62828; background: #fdecec; color: #c62828; }
+.re-map { display: grid; grid-template-columns: repeat(auto-fill, minmax(34px, 1fr)); gap: 3px; }
+.re-map.is-mini { grid-template-columns: repeat(auto-fill, minmax(24px, 1fr)); margin-top: 8px; }
+.re-cell { position: relative; height: 40px; border: 1.5px solid #c9ced8; background: #fff; color: #555; font: 700 11px system-ui, sans-serif; display: flex; align-items: flex-end; justify-content: center; padding: 0 0 3px; cursor: pointer; min-width: 0; }
+.re-map.is-mini .re-cell { height: 28px; font-size: 9.5px; }
+.re-cell em { position: absolute; top: 1px; right: 1px; font-style: normal; font-size: 9px; }
+.re-cell:hover, .re-cell:focus-visible { outline: 2px solid var(--ink, #111); outline-offset: 1px; z-index: 1; }
+.re-cell.s-fin, .re-leg i.s-fin { background: #eaf6ee; border-color: #1a7f37; color: #1a7f37; }
+.re-cell.s-relue, .re-leg i.s-relue { background: #e3eeff; border-color: #055dff; color: #1a3d8f; }
+.re-cell.s-cours, .re-leg i.s-cours { background: #fff8d6; border-color: #d4a800; color: #7a5d00; }
+.re-cell.s-abs, .re-leg i.s-abs { background: repeating-linear-gradient(135deg, #fdecec 0 4px, #fff 4px 8px); border: 1.5px dashed #c62828; color: #c62828; }
+.re-cell.s-pasligne, .re-leg i.s-pasligne { background: repeating-linear-gradient(135deg, #f3ecff 0 4px, #fff 4px 8px); border: 1.5px dashed #6929c4; color: #6929c4; }
+.re-cell.s-blank, .re-leg i.s-blank { border-style: dotted; color: #888; }
+.re-map.is-picking .re-cell { cursor: copy; }
+.re-cell.is-picked { box-shadow: inset 0 0 0 3px #055dff; }
+.re-leg { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; margin-top: 6px; }
+.re-leg i { display: inline-block; width: 14px; height: 14px; border: 1.5px solid #c9ced8; background: #fff; vertical-align: -3px; margin-right: 4px; }
+.re-pickbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 8px 10px; border: 2px solid var(--ink, #111); background: var(--surface, #fff); position: sticky; top: 0; z-index: 3; }
+.re-pickbar .spacer { flex: 1; }
+.re-table tr.is-picked td { background: #eef4ff; }
+.re-msg { border-left: 4px solid #055dff; background: #eef4ff; padding: 8px 12px; font-size: 13px; margin: 0; }
+.re-msg.is-warn { border-color: #d4a800; background: #fff8d6; }
+.re-msg .re-row { display: flex; margin-top: 6px; }
+.re-todo-box h3 { margin: 4px 0 6px; font-size: 15px; }
+.re-todo { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.re-todo li { display: flex; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px dashed #c9ced8; flex-wrap: wrap; }
+.re-todo li b { min-width: 30px; text-align: right; }
+.re-todo li span { flex: 1; min-width: 180px; }
+.re-alldone { color: #1a7f37; font-weight: 700; margin: 0; }
+.re-note { font-size: 12px; margin: 6px 0 0; }
+.re-page { border: 1.5px solid #c9ced8; padding: 8px 10px; margin-bottom: 10px; display: grid; gap: 6px; font-size: 13px; }
+.re-prow { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.re-k { color: var(--muted, #555); min-width: 130px; font-weight: 600; }
+.re-sub { margin: -2px 0 0; font-size: 12px; }
+.re-page .re-seg button { font-size: 12px; padding: 3px 7px; }
+.re-reasons { display: grid; gap: 2px; margin: 0 0 8px; }
+.re-why { margin: 0 0 6px; font-weight: 600; }
+.re-numbering { border: 1.5px solid #c9ced8; padding: 6px 10px 8px; margin: 0 0 8px; display: grid; gap: 2px; }
+:root[data-theme="dark"] .re-cell, :root[data-theme="dark"] .re-kpi, :root[data-theme="dark"] .re-pickbar { background: #1c1f24; color: #ccc; }
+:root[data-theme="dark"] .re-msg { background: #18233a; } :root[data-theme="dark"] .re-msg.is-warn { background: #2c2612; }
+@media (max-width: 640px) { .re-k { min-width: 0; width: 100%; } .re-head { flex-direction: column; } }
+
+.re-check { display: inline-flex; align-items: center; gap: 6px; font-weight: 400; cursor: pointer; }
+.re-check input { margin: 0; width: auto; }
+.re-field { display: grid; gap: 4px; margin: 8px 0; font-weight: 600; }
+.re-field input { width: 100%; max-width: 420px; font-weight: 400; }
+.re-reasons .checkbox-line { display: flex; align-items: baseline; gap: 6px; }
+.h-rc-block .re-kpis { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+.h-rc-block .re-kpi b { font-size: 18px; }
+.h-rc-side .re-page .re-check, dialog .re-check { display: inline-flex; flex-direction: row; align-items: center; gap: 6px; margin: 0; }
+.h-rc-side .re-page .re-check input, dialog .re-check input { width: auto; margin: 0; flex: none; }
+.h-rc-side .re-page select { width: auto; }

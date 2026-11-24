@@ -113,7 +113,8 @@ function recueil_detail(PDO $pdo, int $id): array
         if ($p['best_image_id'] && $p['best_image_id'] !== $chosen) { $p['best_image_id'] = null; } // image retenue retirée depuis
     }
     unset($p);
-    return ['recueil' => $r, 'versions' => $versions, 'pages' => $pages, 'images' => $images, 'links' => recueil_links_resolved($pdo, $id, $pages)];
+    $out = ['recueil' => $r, 'versions' => $versions, 'pages' => $pages, 'images' => $images, 'links' => recueil_links_resolved($pdo, $id, $pages)];
+    return function_exists('recueil_etat_decorate') ? recueil_etat_decorate($pdo, $out) : $out; // 🗂 l'état de chaque page (lib/recueil_etat.php)
 }
 
 function save_recueil(PDO $pdo, array $data): array
@@ -132,6 +133,7 @@ function save_recueil(PDO $pdo, array $data): array
         $name = mb_substr(safe_text($data['first_version'] ?? ''), 0, 120) ?: 'Photos ' . date('Y');
         $pdo->prepare('INSERT INTO recueil_versions(recueil_id, name, position) VALUES(?,?,1)')->execute([$id, $name]);
     }
+    if (function_exists('recueil_etat_save_meta')) { recueil_etat_save_meta($pdo, $id, $data); } // 🗂 numérotation, pages attendues
     if (array_key_exists('cover_media_id', $data)) {
         $cover = safe_int($data['cover_media_id'] ?? 0);
         if ($cover) { $m = $pdo->prepare("SELECT 1 FROM media WHERE id=? AND media_type='image'"); $m->execute([$cover]); if (!$m->fetchColumn()) { throw new RuntimeException('Choisis une image pour la couverture.'); } }
