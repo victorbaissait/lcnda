@@ -377,7 +377,7 @@ function family_share_dispatch(PDO $pdo, string $action, array $q): never
         $made = date('d/m/Y');
         $zip->addFromString('LISEZ-MOI.txt', "« {$data['title']} » — copie de l’arbre en lecture seule ({$made})\r\n\r\n"
             . "1. Décompresse ce dossier (clic droit → Extraire tout, ou double-clic sur Mac).\r\n2. Ouvre le fichier index.html (double-clic) : l’arbre s’affiche dans le navigateur, sans internet ni logiciel à installer.\r\n\r\n"
-            . "Rien ne peut y être modifié. Les personnes vivantes n’y figurent pas" . ($o['living'] === 'first' ? ' (seulement leur prénom)' : '') . ", ni les fiches confidentielles.\r\n\r\nFait avec LCNDA — Le Carnet numérique des ancêtres.\r\n");
+            . "Rien ne peut y être modifié. Les personnes vivantes n’y figurent pas" . ($o['living'] === 'first' ? ' (seulement leur prénom)' : '') . ", ni les fiches et événements confidentiels.\r\n\r\nFait avec LCNDA — Le Carnet numérique des ancêtres.\r\n");
         $zip->close();
         $slug = trim((string) preg_replace('/[^a-z0-9]+/', '-', strtolower((string) @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $data['title']))), '-') ?: 'famille';
         $name = 'arbre-' . mb_substr($slug, 0, 50) . '-' . date('Ymd') . '.zip';

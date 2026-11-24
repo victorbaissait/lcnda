@@ -75,15 +75,15 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await p.evaluate(() => { localStorage.setItem('genealogie-menu-documents', '1'); localStorage.setItem('genealogie-menu-hidden', '[]'); location.hash = '#documents'; });
         await p.waitForSelector('#sidebar-content .ong-mode [data-ong-mode]', {timeout: 20000});
         const modes = () => p.evaluate(() => [...document.querySelectorAll('#sidebar-content .ong-modes [data-ong-mode]')].map(b => ({t: b.textContent.trim(), cut: b.scrollWidth > b.clientWidth + 1, top: Math.round(b.getBoundingClientRect().top)})));
-        await t('A : 6 façons de ranger en 3 × 2, sans libellé coupé ; B (⋯ → Réglages) : 4 cases et « 📚 Ensembles », puis le petit choix', async () => {
+        await t('A : 8 façons de ranger en 3 colonnes (📍 Lieux et 🕰 Années : audit des onglets §4), sans libellé coupé ; B (⋯ → Réglages) : 4 cases et « 📚 Ensembles », puis le petit choix', async () => {
             const r = await modes();
-            assert.deepStrictEqual(r.map(x => x.t), ['A → Z', '👤 Personnes', '📚 Recueils', '📁 Dossiers', '✉️ Lettres', '🏷 Sortes']);
-            assert.ok(r.every(x => !x.cut), JSON.stringify(r)); assert.strictEqual(new Set(r.map(x => x.top)).size, 2);
+            assert.deepStrictEqual(r.map(x => x.t), ['A → Z', '👤 Personnes', '📚 Recueils', '📁 Dossiers', '✉️ Lettres', '🏷 Sortes', '📍 Lieux', '🕰 Années']);
+            assert.ok(r.every(x => !x.cut), JSON.stringify(r)); assert.strictEqual(new Set(r.map(x => x.top)).size, 3);
             await p.evaluate(() => { const v = JSON.parse(localStorage.getItem('genealogie-documents-tab') || '{}'); localStorage.setItem('genealogie-documents-tab', JSON.stringify({...v, layout: 'B'})); window.LCNDA_APP.renderSidebar(); });
             await sleep(300);
             assert.deepStrictEqual((await modes()).map(x => x.t), ['A → Z', '👤 Par personne', '📚 Ensembles', '📁 Dossiers']);
             await p.click('#sidebar-content [data-ong-sets="1"]'); await sleep(300);
-            assert.deepStrictEqual((await modes()).map(x => x.t).slice(4), ['📚 Recueils', '✉️ Lettres', '🏷 Sortes'], 'le petit choix sous « Ensembles »');
+            assert.deepStrictEqual((await modes()).map(x => x.t).slice(4), ['📚 Recueils', '✉️ Lettres', '🏷 Sortes', '📍 Lieux', '🕰 Années'], 'le petit choix sous « Ensembles »');
             await p.evaluate(() => { const v = JSON.parse(localStorage.getItem('genealogie-documents-tab') || '{}'); localStorage.setItem('genealogie-documents-tab', JSON.stringify({...v, layout: 'A', mode: 'az'})); window.LCNDA_APP.renderSidebar(); });
             await sleep(300);
         });

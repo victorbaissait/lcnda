@@ -9132,13 +9132,14 @@ ${backupSectionHtml()}
     /** sous chaque nom (colonne, arbres d'ascendants / descendants) : le lien avec la personne de départ */
     async function paDecorateKin(root){
         if(!root||!paRootId()||!kinShown())return;
-        const rows=[...root.querySelectorAll('.person-list-item[data-person-id]:not([data-pa-kin]), .lineage-person[data-open-person]:not([data-pa-kin])')];
+        // 📊 aussi les cases des arbres ascendant / descendant de Graphiques (.tree-card[data-tree-person], app-graphiques.js)
+        const rows=[...root.querySelectorAll('.person-list-item[data-person-id]:not([data-pa-kin]), .lineage-person[data-open-person]:not([data-pa-kin]), .tree-card[data-tree-person]:not([data-pa-kin])')].filter(r=>Number(r.dataset.personId||r.dataset.openPerson||r.dataset.treePerson)>0);
         if(!rows.length)return;
-        const ids=rows.map(r=>Number(r.dataset.personId||r.dataset.openPerson));
+        const ids=rows.map(r=>Number(r.dataset.personId||r.dataset.openPerson||r.dataset.treePerson));
         const cache=await paKinFetch(ids);
         rows.forEach((r,i)=>{if(!r.isConnected||r.dataset.paKin)return;r.dataset.paKin='1';const l=cache.get(ids[i]);if(!l)return;
             const html=`<small class="pa-kin" title="${escapeHtml(i18n('Ton lien avec cette personne'))}">${escapeHtml(paKinText(l))}</small>`;
-            if(r.classList.contains('person-list-item'))(r.querySelector('.person-list-copy')||r).insertAdjacentHTML('beforeend',html);else r.insertAdjacentHTML('afterend',html);});
+            if(r.classList.contains('person-list-item'))(r.querySelector('.person-list-copy')||r).insertAdjacentHTML('beforeend',html);else if(r.classList.contains('tree-card'))(r.querySelector('.tree-card-extras')||r).insertAdjacentHTML('beforeend',html);else r.insertAdjacentHTML('afterend',html);});
     }
     new MutationObserver(list=>{if(!kinShown()||state.module==='personnes'&&false)return;for(const m of list)for(const n of m.addedNodes){if(n.nodeType===1&&(n.matches?.('.lineage-tree')||n.querySelector?.('.lineage-tree'))){clearTimeout(paKinQueue);paKinQueue=setTimeout(()=>paDecorateKin($('#workspace')),60);return;}}}).observe(document.getElementById('workspace')||document.body,{childList:true,subtree:true});
     async function paFillKinHead(detail){

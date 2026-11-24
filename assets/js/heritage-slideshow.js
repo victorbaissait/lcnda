@@ -271,7 +271,8 @@
         const titleSub = [yrs, clean(p.occupation)].filter(Boolean).join(' — ');
         const opening = newSlide('title', {title: nm, sub: titleSub, dur: 6, notes: srcPerson.join('\n'), ...(portraitFile ? {filename: portraitFile, media_id: Number(p.portrait_media_id) || 0} : {})});
         // 2. les événements, dans l'ordre
-        const evs = (r.events || []).filter(e => e && (Number(e.person_id) === pid || e.scope === 'family')).sort((a, b) => (a.year || 9999) - (b.year || 9999) || String(a.sort_date || '').localeCompare(String(b.sort_date || '')) || a.id - b.id);
+        // 🔒 un événement confidentiel n'entre pas dans le récit : la présentation se garde, se montre à la famille et s'exporte
+        const evs = (r.events || []).filter(e => e && !Number(e.is_private) && (Number(e.person_id) === pid || e.scope === 'family')).sort((a, b) => (a.year || 9999) - (b.year || 9999) || String(a.sort_date || '').localeCompare(String(b.sort_date || '')) || a.id - b.id);
         const birth = evs.find(e => isType(e, ['BIRT'], ['naissance']));
         const birthY = Number(p.birth_year || birth?.year) || 0, deathE = evs.find(e => isType(e, ['DEAT'], ['deces'])), deathY = Number(p.death_year || deathE?.year) || 0;
         const partnerOf = e => { const other = Number(e.partner1_id) === pid ? Number(e.partner2_id) : Number(e.partner1_id); const q = (r.partners || []).find(x => Number(x.id) === other); return q ? AP.personName(q) : ''; };
@@ -366,7 +367,7 @@
         }
         // 📖 sa biographie (lib/biographie.php : ta version, sinon le texte court de l'app), juste après le titre
         if (o.bio) {
-            try { const bi = await api('biography', {id: pid, length: 'short'}); const txt = clean(String(bi.own || bi.generated || '').split(/\n\s*Notes :/)[0].replace(/\n+/g, ' '));
+            try { const bi = await api('biography', {id: pid, length: 'short'}); const txt = clean(String(bi.own || bi.generated || '').split(/\n\s*Notes :/)[0].replace(/🔒[^\n]*?(?:\.(?=\s|$)|(?=\n)|$)[ \t]*/gu, '').replace(/\n+/g, ' ')); // 🔒 sans les phrases d'événements confidentiels
                 if (txt) add(-1, 0, newSlide('title', {title: i18n('Sa vie en quelques mots'), sub: txt.length > 700 ? txt.slice(0, 697).replace(/\s+\S*$/, '') + '…' : txt, dur: durFor(txt), notes: bi.own ? i18n('Ta version de la biographie (📖 sur la fiche).') : i18n('Biographie écrite par l’app d’après la fiche.')})); } catch (_) {}
         }
         // la carte des lieux de vie, reliés dans l'ordre (seulement s'il y a au moins deux lieux)
@@ -429,7 +430,7 @@
                         const my = ++loadSeq; photoIds = null; personMedia = []; sum.hidden = true; paintPhotos(); if (!pid) return;
                         try { const r = await api('person', {id: pid}); if (my !== loadSeq) return; const pp = r.person || {};
                             personMedia = (r.media || []).filter(isImage).filter(m => Number(m.id) !== Number(pp.portrait_media_id));
-                            const n = (r.events || []).filter(e => Number(e.person_id) === pid || e.scope === 'family').length;
+                            const n = (r.events || []).filter(e => !Number(e.is_private) && (Number(e.person_id) === pid || e.scope === 'family')).length;
                             sum.hidden = false; sum.innerHTML = `<b>${esc(A().personName(pp))}</b> ${esc(A().years?.(pp) || '')} · ${esc(plural(n, 'événement'))} · ${esc(plural(personMedia.length, 'photo'))}${(r.children || []).length ? ` · ${esc(plural(r.children.length, 'enfant'))}` : ''}${pp.portrait_media_id || pp.portrait ? ' · ' + esc(i18n('portrait ✓')) : ''}`;
                             paintPhotos(); } catch (e) { toast(e.message, 'error'); }
                     };
@@ -591,7 +592,7 @@
         /* ─── ✨ le récit d'une vie ─── */
         async function placesOf(pid) {
             const r = await api('person', {id: pid}); const p = r.person || {};
-            const ev = (r.events || []).filter(e => e.latitude && e.longitude).sort((a, b) => (a.year || 9999) - (b.year || 9999) || String(a.sort_date || '').localeCompare(String(b.sort_date || '')));
+            const ev = (r.events || []).filter(e => e.latitude && e.longitude && !Number(e.is_private)).sort((a, b) => (a.year || 9999) - (b.year || 9999) || String(a.sort_date || '').localeCompare(String(b.sort_date || '')));
             const route = []; ev.forEach(e => { const last = route[route.length - 1]; if (last && Math.abs(last.lat - e.latitude) < 1e-4 && Math.abs(last.lon - e.longitude) < 1e-4) return; route.push({name: e.place_name, label: `${e.place_name}${e.type_label ? ` (${String(e.type_label).toLowerCase()})` : ''}`, year: e.year || '', lat: +e.latitude, lon: +e.longitude}); });
             return {r, p, route};
         }

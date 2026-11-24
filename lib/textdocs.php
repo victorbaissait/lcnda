@@ -315,7 +315,8 @@ function textdoc_people(PDO $pdo, array $ids): array
     $ids = array_slice($ids, 0, 400);
     if (!$ids) { return []; }
     $in = implode(',', array_fill(0, count($ids), '?'));
-    $ev = static fn(string $tag) => "(SELECT e.id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='{$tag}' ORDER BY e.id LIMIT 1)";
+    // 🔒 un événement confidentiel n'entre jamais dans un document (champs, publipostage, arbre) : il en sortirait de l'app
+    $ev = static fn(string $tag) => "(SELECT e.id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='{$tag}' AND COALESCE(e.is_private,0)=0 ORDER BY e.id LIMIT 1)";
     $s = $pdo->prepare("SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, {$ev('BIRT')} AS b, {$ev('DEAT')} AS d,
         (SELECT f.partner1_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=p.id ORDER BY fc.id LIMIT 1) AS p1,
         (SELECT f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=p.id ORDER BY fc.id LIMIT 1) AS p2
@@ -355,7 +356,7 @@ function textdoc_merge_people(PDO $pdo, array $ids): array
     $occ = [];
     $cols = array_flip(array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(PDO::FETCH_ASSOC), 'name'));
     if (isset($cols['occupation'])) { $s = $pdo->prepare("SELECT id, occupation FROM persons WHERE id IN ($in)"); $s->execute($all); foreach ($s as $r) { $occ[(int) $r['id']] = trim((string) $r['occupation']); } }
-    $s = $pdo->prepare("SELECT e.person_id, COALESCE(NULLIF(e.title,''), e.description) AS t FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='OCCU' AND e.person_id IN ($in) ORDER BY COALESCE(e.year, 9999), e.id");
+    $s = $pdo->prepare("SELECT e.person_id, COALESCE(NULLIF(e.title,''), e.description) AS t FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='OCCU' AND COALESCE(e.is_private,0)=0 AND e.person_id IN ($in) ORDER BY COALESCE(e.year, 9999), e.id");
     $s->execute($all); foreach ($s as $r) { $k = (int) $r['person_id']; if (($occ[$k] ?? '') === '') { $occ[$k] = trim((string) $r['t']); } }
     // conjoint et mariage : la première union de la personne
     $sp = [];
@@ -367,7 +368,7 @@ function textdoc_merge_people(PDO $pdo, array $ids): array
     $marr = [];
     if ($sp) {
         $fids = array_values(array_unique(array_map(static fn($x) => $x['fid'], $sp)));
-        $s = $pdo->prepare('SELECT e.family_id, e.date_text, pl.name AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE t.gedcom_tag=\'MARR\' AND e.family_id IN (' . implode(',', array_fill(0, count($fids), '?')) . ') ORDER BY e.id');
+        $s = $pdo->prepare('SELECT e.family_id, e.date_text, pl.name AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE t.gedcom_tag=\'MARR\' AND COALESCE(e.is_private,0)=0 AND e.family_id IN (' . implode(',', array_fill(0, count($fids), '?')) . ') ORDER BY e.id');
         $s->execute($fids); foreach ($s as $r) { $k = (int) $r['family_id']; if (!isset($marr[$k])) { $marr[$k] = ['date' => trim((string) $r['date_text']), 'place' => trim((string) $r['place'])]; } }
     }
     $out = [];

@@ -234,13 +234,13 @@
         const mode = modeOf();
         content.innerHTML = `<div class="ong-side" data-ong-side="documents" data-no-reorder>
             <div class="ong-modebar"><div class="ong-modes">${modeBarHtml(mode)}</div>
-            ${kiosk() ? '' : `<button type="button" class="icon-button small ong-selbtn${selMode ? ' is-active' : ''}" data-ong-selmode aria-pressed="${selMode}" aria-label="${esc(T('☑ Cocher plusieurs documents'))}" title="${esc(T('☑ Cocher plusieurs documents'))}">☑</button>`}
             <button type="button" class="icon-button small ong-opts" data-ong-under aria-label="Sous le titre" title="Sous le titre">⋯</button></div>
             <div class="ong-bar" data-ong-bar></div>
             <div class="ong-letters" data-ong-letters ${['folders', 'places', 'years'].includes(mode) ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div></div>`;
         // 📚 dans le pied de la colonne (fixe, il ne cache aucun document), sous le nombre : la liste des recueils à droite
-        footer.innerHTML = `<span data-ong-count></span><button type="button" class="button secondary ong-allrec" data-ong-allrec title="${esc(T('Les recueils en vignettes, à droite, sans quitter Documents'))}">📚 ${esc(T('Voir la liste des recueils'))}<small class="ong-allrec-n" data-ong-allrec-n>${docs ? esc(plural(recs.length, 'recueil')) : ''}</small></button>`;
+        footer.innerHTML = `<span data-ong-count></span>${kiosk() ? '' : `<button type="button" class="icon-button small ong-selbtn${selMode ? ' is-active' : ''}" data-ong-selmode aria-pressed="${selMode}" aria-label="${esc(T('☑ Cocher plusieurs documents'))}" title="${esc(T('☑ Cocher plusieurs documents'))}">☑</button>`}<button type="button" class="button secondary ong-allrec" data-ong-allrec title="${esc(T('Les recueils en vignettes, à droite, sans quitter Documents'))}">📚 ${esc(T('Voir la liste des recueils'))}<small class="ong-allrec-n" data-ong-allrec-n>${docs ? esc(plural(recs.length, 'recueil')) : ''}</small></button>`;
         // d'une autre façon de ranger : la colonne passe en « 📚 Recueils », la liste des recueils s'ouvre à droite
+        footer.querySelector('[data-ong-selmode]')?.addEventListener('click', () => { selMode = !selMode; if (!selMode) { sel?.clear(); sel?.destroy(); sel = null; } A().renderSidebar(); });
         footer.querySelector('[data-ong-allrec]')?.addEventListener('click', () => { if (modeOf() !== 'recueils') { writePref({mode: 'recueils', wsRec: ''}); shown = STEP; A().renderSidebar(); } showRec(''); });
         bar = UI().listBar ? UI().listBar({key: BAR_KEY, search: {placeholder: 'Chercher… (titre, cote, personne, lieu, année)'}, filters: filters(), sort: {options: SORT_OPTS, value: 'az'},
             onChange: () => { shown = STEP; paintList(); paintWorkspaceList(); }}) : null;
@@ -252,7 +252,6 @@
             const xh = e.target.closest('[data-ong-ex]'); if (xh) { showEx(xh.dataset.ongEx); return; } // ✉️ le fil de cette correspondance à droite
             const sh = e.target.closest('[data-ong-sorth]'); if (sh) { showSort(sh.dataset.ongSorth); return; } // 🏷 les documents de cette sorte à droite
             const o = e.target.closest('[data-ong-under]'); if (o) { underMenu(o); return; }
-            const sm = e.target.closest('[data-ong-selmode]'); if (sm) { selMode = !selMode; if (!selMode) { sel?.clear(); sel?.destroy(); sel = null; } A().renderSidebar(); return; }
             const gf = e.target.closest('[data-ong-gfold]'); if (gf) { toggleKey(gf.dataset.ongGkey, gf.dataset.ongGfold); return; }
             const l = e.target.closest('[data-ong-letter]'); if (l && !l.disabled) { jumpTo(l.dataset.ongLetter); return; }
             const fo = e.target.closest('[data-ong-fold]'); if (fo) { toggleFold(Number(fo.dataset.ongFold)); return; }

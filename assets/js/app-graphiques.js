@@ -680,6 +680,8 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         $('#gp-unhide')?.addEventListener('click',()=>{gpHidden.clear();gpApplyHidden();});
         $$('#workspace [data-tree-add-parent]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();gpAddRelation(Number(b.dataset.treeAddParent),'parent');}));
         if($('#workspace .tree-stage')){gpApplyHidden();gpApplyMarks();gpMinimap();}
+        // 🧭 « Ton lien avec… » (app.js paDecorateKin(root)) : aussi dans les cases des arbres ascendant et descendant
+        const kinRoot=$('#workspace .tree-stage')||$('#workspace .graph-layout');if(kinRoot)window.LCNDA_APP?.decorateKinship?.(kinRoot);
     }
     const gpBoot=()=>{
         const ws=$('#workspace');if(!ws)return;

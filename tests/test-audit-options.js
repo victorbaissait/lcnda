@@ -197,7 +197,7 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
             await p.waitForFunction(id => !!document.querySelector(`#sidebar-content [data-ong-doc="${id}"]`), ID.docs[0], {timeout: 8000});
         });
         await t('📄 ☑ Cocher : barre commune → 👤 Relier à une personne, ⤓ ZIP, 🏷 (↶ Annuler)', async () => {
-            await p.click('#sidebar-content [data-ong-selmode]');
+            await p.click('#sidebar-footer [data-ong-selmode]');
             await p.waitForSelector('#sidebar-content .ong-selbar');
             await p.check(`#sidebar-content [data-ong-sel="${ID.docs[1]}"] [data-sel-check]`);
             await p.check(`#sidebar-content [data-ong-sel="${ID.docs[4]}"] [data-sel-check]`);
@@ -211,7 +211,7 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
             assert.equal(zip.readUInt32LE(0), 0x04034b50); assert.ok(zip.includes(Buffer.from('documents.csv')));
             await lastToastUndo(); // ↶ la liaison (le dernier message ↶)
             await p.waitForFunction(async id => !(await window.LCNDA_APP.api('onglets', {op: 'document', id})).document.people.some(x => x.name === 'Anne MAZAUD'), ID.docs[1], {timeout: 8000});
-            await p.click('#sidebar-content [data-ong-selmode]'); await sleep(300);
+            await p.click('#sidebar-footer [data-ong-selmode]'); await sleep(300);
         });
         await t('📄 👯 « peut-être un doublon de… » (empreintes d’images)', async () => {
             const n = await p.evaluate(async ids => {
@@ -397,8 +397,10 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
             const pr = await p.evaluate(() => window.LCNDA_EXT.succAuditPropose('Le 12 mars 1903, est né à Tulle Paul MAZAUD, fils de Pierre MAZAUD.'));
             assert.ok(pr.dates.includes('12 mars 1903') && pr.places.includes('Tulle') && pr.names.includes('Paul MAZAUD'), JSON.stringify(pr));
             // R8 : l'ancienne clé est reprise une fois en genealogie-succ-*
-            assert.equal(await p.evaluate(() => localStorage.getItem('lcnda-succ-view')), null);
-            assert.ok(await p.evaluate(() => localStorage.getItem('genealogie-succ-view') !== null || localStorage.getItem('genealogie-succ-tab') !== null));
+            await p.evaluate(() => { localStorage.removeItem('genealogie-succ-npages'); localStorage.setItem('lcnda-succ-npages', JSON.stringify({tree: false})); });
+            await boot();
+            assert.equal(await p.evaluate(() => localStorage.getItem('lcnda-succ-npages')), null);
+            assert.deepEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-succ-npages'))), {tree: false});
         });
 
         /* ═════ 🗂 Onglets à soi ═════ */

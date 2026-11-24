@@ -670,7 +670,7 @@
                     textItem({x: x0 + 6, y, w: r1(b.w - 36), h: 12, html: `<p data-ps="ps-body" style="text-indent:0;text-align:left"><b>${esc(e.type)}</b>${e.place ? ` — ${esc(e.place)}` : ''}</p>`, name: 'Événement'})); });
             }
             chapter('Sa vie', String(p.bio || '').split(/\n+/).filter(Boolean).map(t => ({ps: 'ps-body', text: t})));
-            let sources = []; try { sources = (await api('person', {id: p.id})).sources || []; } catch (_) {}
+            let sources = []; try { const r = await api('person', {id: p.id}), priv = new Set((r.events || []).filter(e => Number(e.is_private)).map(e => Number(e.id))); sources = (r.sources || []).filter(s => !(s.entity_type === 'event' && priv.has(Number(s.entity_id)))); } catch (_) {} // 🔒 pas les sources d'un événement confidentiel
             chapter('Sources', sources.length ? sources.map(s => ({ps: 'ps-list', text: `• ${[s.title || s.name || 'Source', s.author, s.citation || s.page || s.reference].filter(Boolean).join(' — ')}`})) : [{ps: 'ps-body', text: 'Aucune source rattachée à la fiche pour l’instant : ajoute-les dans la fiche, ou écris-les ici.'}]);
             if ((p.photos || []).length > 1) photoPages(p.photos, 'Photos');
         } else if (kind === 'tree2') {
@@ -1423,7 +1423,7 @@
         }
         async function personQrChoices(id) {
             const r = await api('person', {id}), p = r.person || {}, nm = [p.first_name, p.last_name].filter(Boolean).join(' ') || 'Fiche';
-            const ev = r.events || [], find = re => ev.find(e => re.test(String(e.type_label || e.type || e.event_type || ''))), when = e => String(e?.date_text || e?.year || '');
+            const ev = (r.events || []).filter(e => !Number(e.is_private)), find = re => ev.find(e => re.test(String(e.type_label || e.type || e.event_type || ''))), when = e => String(e?.date_text || e?.year || ''); // 🔒 un événement confidentiel ne va pas dans un QR code
             const b = find(/naiss|birth|bapt/i), d = find(/décè|deces|death|inhum|sépult/i);
             const life = [b && `° ${[when(b), b.place_name || b.place].filter(Boolean).join(' ')}`, d && `† ${[when(d), d.place_name || d.place].filter(Boolean).join(' ')}`].filter(Boolean).join(' ');
             const ident = [nm, life, p.reference_number ? `réf. ${p.reference_number}` : ''].filter(Boolean).join(' — ');
@@ -2442,7 +2442,7 @@
     const DYN_FIELDS = [['name', 'Nom complet'], ['life', 'Naissance et décès (dates et lieux)'], ['parents', 'Parents'], ['partners', 'Conjoints'], ['children', 'Enfants'], ['occupation', 'Profession'], ['events', 'Tous les événements'], ['notes', 'Notes']];
     async function personDynHtml(id, fields) {
         const r = await api('person', {id}), p = r.person || {}, nm = x => [x?.first_name, x?.last_name].filter(Boolean).join(' ') || x?.name || '';
-        const ev = (r.events || []), find = re => ev.find(e => re.test(String(e.type || e.type_label || e.event_type || '')));
+        const ev = (r.events || []).filter(e => !Number(e.is_private)), find = re => ev.find(e => re.test(String(e.type || e.type_label || e.event_type || ''))); // 🔒 un événement confidentiel n'entre pas dans un livre (il s'imprime, s'exporte)
         const evTxt = e => e ? [e.date_text || e.year, e.place_name || e.place].filter(Boolean).join(', ') : '';
         const out = [];
         if (fields.includes('name')) out.push(`<p data-ps="ps-name">${esc(nm(p))}</p>`);

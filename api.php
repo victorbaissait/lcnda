@@ -209,8 +209,8 @@ try {
     if ($action === 'bootstrap') { access_log_purge($pdo); } // 📜 les lignes plus vieilles que la durée réglée (une fois par jour)
     if (str_starts_with((string) $action, 'sd_')) { json_response(sd_dispatch($pdo, (string) $action, is_array($payload) ? $payload : [], $isWrite)); } // 🔄 deux ordinateurs
     // 🔒 événements confidentiels (lib/heritage_tools.php) : jamais dans un export, le partage ou le site ; cachés en consultation
-    if (is_string($action) && private_events_hidden_for($action, $isWrite) && !private_events_shadow($pdo) && in_array($action, PRIVATE_EVENT_EXPORT_ACTIONS, true)) {
-        json_response(['error' => 'Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant.'], 503);
+    if (is_string($action) && private_events_hidden_for($action, $isWrite) && !private_events_shadow($pdo)) { // jamais montré faute d'avoir pu le cacher
+        json_response(['error' => in_array($action, PRIVATE_EVENT_EXPORT_ACTIONS, true) ? 'Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant.' : 'Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant.'], 503);
     }
 
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
