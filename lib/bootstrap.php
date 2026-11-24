@@ -53,6 +53,7 @@ require_once __DIR__ . '/recueil_toc.php'; // 📑 sommaire d'un recueil (migrat
 require_once __DIR__ . '/recueil_fiche.php'; // 🏛 fiche d'identité d'un recueil (migration 108)
 require_once __DIR__ . '/recueil_sens.php'; // 💡 ce qu'on trouve dans un recueil
 require_once __DIR__ . '/recueil_plus.php';
+require_once __DIR__ . '/recueil_iiif.php'; // 📚 un recueil depuis un registre en ligne (IIIF)
 require_once __DIR__ . '/anim_studio.php'; // 🎞 Studio d'animation : projets, données des modèles (migration 110) // ➕ confiée à, avancement, EAD (migration 109)
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
 require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille
