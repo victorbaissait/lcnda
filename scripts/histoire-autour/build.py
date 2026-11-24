@@ -278,10 +278,11 @@ INST_COUNTRIES = 'wd:Q142 wd:Q31 wd:Q39 wd:Q32 wd:Q235 wd:Q38 wd:Q29 wd:Q183 wd:
 def build_institutions(cache):
     base, labs = {}, {}
     for key, classes, _ in INST:
-        cls = ' '.join(f'wd:{c}' for c in classes)
+        cls = ' UNION '.join(f'{{ ?it wdt:P31/wdt:P279* wd:{c} }}' for c in classes)
+        ctl = ', '.join(INST_COUNTRIES.split())
         q = f'''SELECT ?it ?itfr ?iten ?frw ?c ?inc ?dis ?ctry ?ctryfr ?adm ?admfr WHERE {{
-  VALUES ?cls {{ {cls} }} VALUES ?ctry {{ {INST_COUNTRIES} }}
-  ?it wdt:P31/wdt:P279* ?cls ; wdt:P625 ?c ; wdt:P17 ?ctry .
+  {cls}
+  ?it wdt:P625 ?c ; wdt:P17 ?ctry . FILTER(?ctry IN ({ctl}))
   OPTIONAL {{ ?it wdt:P571 ?inc }} OPTIONAL {{ ?it wdt:P576 ?dis }}
   {lab("?it")}
   OPTIONAL {{ ?ctry rdfs:label ?ctryfr FILTER(LANG(?ctryfr)="fr") }}
