@@ -236,3 +236,13 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 .ong-reply { color: var(--accent, #2a5fa8) !important; }
 .ong-modebar .segmented.ong-mode.is-grid.is-3 button { font-size: .8rem; padding-left: 2px; padding-right: 2px; letter-spacing: -.02em; }
 .ong-modebar .segmented.ong-mode.is-grid.is-3 button { white-space: normal; line-height: 1.15; overflow: visible; text-overflow: clip; }
+/* 🏞 la collection de cartes postales : recto, le verso au survol */
+.ong-pcgroup h3 { margin: 14px 0 6px; font-size: 1rem; }
+.ong-pcmiss { margin: 0 0 6px; padding: 3px 8px; border-left: 3px solid #d9a400; background: color-mix(in srgb, #f0c419 14%, transparent); font-size: .85rem; }
+.ong-pcgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.ong-pc { display: flex; flex-direction: column; gap: 3px; text-align: left; background: var(--panel, #fff); border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 6px; cursor: pointer; color: inherit; }
+.ong-pc small { color: var(--muted, #667); }
+.ong-pc-flip { position: relative; display: block; aspect-ratio: 3 / 2; background: var(--grey-bg, #f1f2f4); border-radius: 4px; overflow: hidden; }
+.ong-pc-flip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .25s; }
+.ong-pc-flip img.v { opacity: 0; }
+.ong-pc:hover .ong-pc-flip img.v, .ong-pc:focus-visible .ong-pc-flip img.v { opacity: 1; }

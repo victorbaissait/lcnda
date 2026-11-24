@@ -488,6 +488,36 @@
             + (v === 'map' ? docsMapHtml(docsOf) : v === 'time' ? docsTimeHtml(docsOf) : exFilHtml(x));
         if (v === 'map') bindDocsMap(box, docsOf);
     }
+    /* 🏞 la collection de cartes postales (🏷 Sortes → Cartes postales) : vignettes recto ⇄ verso, par éditeur (numéros manquants), par lieu, vierges */
+    let pcData = null, pcLoading = null;
+    function loadPostcards() { if (pcData || pcLoading) return; pcLoading = A().api('postcards').then(r => { pcData = r.postcards || []; }).catch(() => { pcData = []; }).finally(() => { pcLoading = null; if (A().state?.module === 'documents') paintWorkspaceList(); }); }
+    const PC_VIEWS = [['cards', '▦ Vignettes'], ['publisher', '🏷 Par éditeur'], ['place', '📍 Par lieu'], ['blank', '✉️ Écrites / vierges']];
+    const pcThumb = c => `<span class="ong-pc-flip">${c.recto?.thumb ? `<img class="r" src="${esc(c.recto.thumb)}" alt="" loading="lazy">` : ''}${c.verso?.thumb ? `<img class="v" src="${esc(c.verso.thumb)}" alt="" loading="lazy">` : ''}</span>`;
+    const pcCard = c => `<button type="button" class="ong-pc" data-ong-doc="${c.media_id}" data-ong-card="${c.media_id}" title="${esc(c.verso ? T('Survole pour voir le verso') : c.title)}">${pcThumb(c)}<b>${esc(c.title)}</b><small>${esc([c.publisher, c.card_number && `n° ${c.card_number}`, c.place?.name, c.year].filter(Boolean).join(' · '))}</small></button>`;
+    /** les numéros qui manquent dans une série (numéros entiers, trous de 30 au plus) */
+    function missingNums(cards) {
+        const n = [...new Set(cards.map(c => Number(String(c.card_number).match(/\d+/)?.[0])).filter(x => x > 0))].sort((a, b) => a - b), out = [];
+        for (let i = 1; i < n.length; i++) if (n[i] - n[i - 1] > 1 && n[i] - n[i - 1] <= 31) for (let k = n[i - 1] + 1; k < n[i]; k++) out.push(k);
+        return out;
+    }
+    function postcardsHtml(list) {
+        if (!pcData) { loadPostcards(); return UI().skeleton ? UI().skeleton(4) : ''; }
+        const keep = new Set(list.map(d => d.id)), cards = pcData.filter(c => keep.has(c.media_id));
+        const v = PC_VIEWS.some(x => x[0] === readPref().pcView) ? readPref().pcView : 'cards';
+        const seg = `<div class="ong-wsview segmented" role="tablist">${PC_VIEWS.map(([k, l]) => `<button type="button" class="${v === k ? 'is-active' : ''}" data-ong-pcview="${k}" aria-pressed="${v === k}">${esc(T(l))}</button>`).join('')}</div>`;
+        if (!cards.length) return seg + A().emptyState({icon: '🏞', text: T('Aucune fiche de carte postale pour l’instant'), hint: T('Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso.')});
+        const group = (key, label) => { const by = new Map(); cards.forEach(c => { const k = key(c) || ''; if (!by.has(k)) by.set(k, []); by.get(k).push(c); });
+            return [...by.entries()].sort((a, b) => (a[0] === '') - (b[0] === '') || a[0].localeCompare(b[0], 'fr')).map(([k, cs]) => ({name: k || label, cards: cs})); };
+        const numSort = cs => [...cs].sort((a, b) => (Number(String(a.card_number).match(/\d+/)?.[0]) || 1e9) - (Number(String(b.card_number).match(/\d+/)?.[0]) || 1e9));
+        let groups;
+        if (v === 'publisher') groups = group(c => c.publisher.trim(), T('Éditeur inconnu')).map(g => ({...g, cards: numSort(g.cards), miss: g.name !== T('Éditeur inconnu') ? missingNums(g.cards) : []}));
+        else if (v === 'place') groups = group(c => c.place?.name || '', T('Lieu inconnu'));
+        else if (v === 'blank') { const blank = c => !c.sent_date && !c.postmark && !c.writer && !c.writer_text && !c.recipient && !c.recipient_text; groups = [{name: T('Écrites ou envoyées'), cards: cards.filter(c => !blank(c))}, {name: T('Vierges (jamais envoyées)'), cards: cards.filter(blank)}].filter(g => g.cards.length); }
+        else groups = [{name: '', cards}];
+        return seg + groups.map(g => `<section class="ong-pcgroup">${g.name ? `<h3>${esc(g.name)} <small class="muted">${esc(plural(g.cards.length, 'carte', 'cartes'))}</small></h3>` : ''}
+            ${g.miss?.length ? `<p class="ong-pcmiss">⚠ ${esc(g.miss.length > 1 ? T('Il manque les n° {n}', {n: g.miss.slice(0, 20).join(', ') + (g.miss.length > 20 ? '…' : '')}) : T('Il manque le n° {n}', {n: String(g.miss[0])}))}</p>` : ''}
+            <div class="ong-pcgrid">${g.cards.map(pcCard).join('')}</div></section>`).join('');
+    }
     function sortCardsHtml(list) {
         const by = new Map(); list.forEach(d => { const k = CO().sortOf(d); if (!by.has(k)) by.set(k, []); by.get(k).push(d); });
         const keys = CO().SORTS.map(s => s[0]).filter(k => by.has(k));
@@ -501,6 +531,8 @@
         if ((docs || []).length && CO() && modeOf() === 'sorts' && !pick.on && !wsSort()) { box.innerHTML = sortCardsHtml(all); return; }
         if (!(docs || []).length) { box.innerHTML = A().emptyState({icon: '📄', text: 'Aucun document pour l’instant', hint: 'Les photos, actes, lettres et papiers ajoutés aux fiches (ou importés) arrivent ici, sans rien ressaisir.', action: kiosk() ? null : {label: '⤒ Importer des documents', attrs: 'data-empty-click="[data-ong-import]"'}}); return; }
         if (modeOf() === 'recueils' && !wsRec() && !pick.on) { box.innerHTML = recCardsHtml(all); return; }
+        if (wsSort() === 'postcard' && CO() && !pick.on) { const pl = all.filter(d => CO().sortOf(d) === 'postcard');
+            box.innerHTML = `<div class="ong-recbar"><button type="button" class="button small secondary" data-ong-wssort="">← ${esc(T('Toutes les sortes'))}</button><strong>🏞 ${esc(T('Cartes postales'))}</strong><small class="muted">${esc(plural(pl.length, 'document', 'documents'))}</small></div>` + postcardsHtml(pl); return; }
         const w = wsRec(), rec = w && w !== 'none' ? (recOf(w) || {id: Number(w), title: '', icon: '📚'}) : null, ws0 = wsSort(), list = ws0 && CO() ? all.filter(d => CO().sortOf(d) === ws0) : wsDocs(all);
         const head = ws0 && CO() ? `<div class="ong-recbar"><button type="button" class="button small secondary" data-ong-wssort="">← ${esc(T('Toutes les sortes'))}</button><strong>${CO().sortMeta(ws0)[1]} ${esc(T(CO().sortMeta(ws0)[2]))}</strong><small class="muted">${esc(plural(list.length, 'document', 'documents'))}</small></div>` : w ? `<div class="ong-recbar" data-ong-recbar><button type="button" class="button small secondary" data-ong-wsrec="">← ${esc(T('Tous les recueils'))}</button>
             <strong>${rec ? `${esc(rec.icon || '📚')} ${esc(rec.title || T('Recueil'))}` : `🗂️ ${esc(T('Dans aucun recueil'))}`}</strong><small class="muted">${esc(plural(list.length, 'document', 'documents'))}${rec ? ` · ${esc(T('dans l’ordre des pages'))}` : ''}</small>
@@ -655,6 +687,7 @@
         }
         if (b.matches('[data-ong-wsrec]')) { showRec(b.dataset.ongWsrec); return; }
         if (b.matches('[data-ong-wsex]')) { showEx(b.dataset.ongWsex === '' && !b.closest('[data-ong-excard]') ? null : b.dataset.ongWsex); return; }
+        if (b.matches('[data-ong-pcview]')) { writePref({pcView: b.dataset.ongPcview}); paintWorkspaceList(); return; }
         if (b.matches('[data-ong-exview]')) { writePref({exView: b.dataset.ongExview}); paintWorkspaceList(); return; }
         if (b.matches('[data-ong-wssort]')) { showSort(b.dataset.ongWssort); return; }
         if (b.matches('[data-ong-wsview]')) { writePref({wsView: b.dataset.ongWsview}); paintWorkspaceList(); return; }

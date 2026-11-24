@@ -51,7 +51,10 @@ $m->execute([2, 'Carte de Marie', 'b.jpg', 'image', '19 août 1914', 'carte post
 $m->execute([3, 'Lettre de Pierre (décembre)', 'c.jpg', 'image', '14 décembre 1914', 'lettre', $mm, 0, '']);
 $m->execute([4, 'Photo de mariage', 'd.jpg', 'image', '1920', '', '', 0, '']);
 $m->execute([5, 'Faire-part de décès de Pierre', 'e.pdf', 'pdf', '1950', '', '', 0, '']);
-foreach ([1, 2, 3, 4, 5] as $i) { $pdo->exec("INSERT INTO media_links(media_id,entity_type,entity_id) VALUES($i,'person',1)"); }
+$m->execute([6, 'CPA Malvialle, l’église', 'f.jpg', 'image', '', '', '', 0, '']);
+require_once 'lib/postcards.php'; postcards_ensure($pdo);
+$pdo->exec("INSERT INTO postcards(media_id, publisher, card_number, sent_date) VALUES(2, 'ND Phot.', '142', '19 août 1914'), (6, 'ND Phot.', '144', '')");
+foreach ([1, 2, 3, 4, 5, 6] as $i) { $pdo->exec("INSERT INTO media_links(media_id,entity_type,entity_id) VALUES($i,'person',1)"); }
 echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
     if (seed.status !== 0 || !/"ok"/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
     const port = await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
@@ -100,11 +103,21 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('🏷 Sortes : les sortes dans la colonne et en vignettes ; une sorte → ses documents', async () => {
             await p.click('#sidebar-content [data-ong-mode="sorts"]'); await p.waitForSelector('#sidebar-content [data-ong-sorth]', {timeout: 10000});
             const h = await p.evaluate(() => [...document.querySelectorAll('#sidebar-content [data-ong-sorth]')].map(b => b.dataset.ongSorth));
-            assert.deepStrictEqual(h, ['letter', 'postcard', 'photo', 'announce']);
+            assert.deepStrictEqual(h, ['postcard', 'letter', 'photo', 'announce']);
             await p.waitForSelector('#workspace [data-ong-sortcard="announce"]', {timeout: 5000});
             await p.click('#sidebar-content [data-ong-sorth="announce"]'); await sleep(400);
             const r = await p.evaluate(() => ({ids: [...document.querySelectorAll('#workspace [data-ong-card]')].map(c => Number(c.dataset.ongCard)), head: document.querySelector('#workspace .ong-recbar')?.textContent || ''}));
             assert.deepStrictEqual(r.ids, [5]); assert.match(r.head, /Faire-part/);
+        });
+        await t('🏞 Cartes postales : la collection, par éditeur (« il manque le n° 143 »), écrites / vierges', async () => {
+            await p.click('#sidebar-content [data-ong-sorth="postcard"]'); await p.waitForSelector('#workspace .ong-pc', {timeout: 10000});
+            assert.deepStrictEqual(await p.$$eval('#workspace .ong-pc', b => b.map(x => Number(x.dataset.ongDoc)).sort()), [2, 6]);
+            await p.click('#workspace [data-ong-pcview="publisher"]'); await p.waitForSelector('#workspace .ong-pcmiss', {timeout: 5000});
+            assert.match(await p.textContent('#workspace .ong-pcmiss'), /Il manque le n° 143/);
+            await p.click('#workspace [data-ong-pcview="blank"]'); await sleep(200);
+            const h = await p.$$eval('#workspace .ong-pcgroup h3', x => x.map(e => e.textContent.replace(/\s+/g, ' ').trim()));
+            assert.deepStrictEqual(h, ['Écrites ou envoyées 1 carte', 'Vierges (jamais envoyées) 1 carte']);
+            assert.strictEqual(JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-documents-tab'))).pcView, 'blank', 'le choix est gardé');
         });
         assert.deepStrictEqual(errs, [], 'erreurs JS : ' + errs.join(' | '));
     } finally { await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true}); }

@@ -47,7 +47,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
-    <link rel="stylesheet" href="assets/css/onglets.css?v=14">
+    <link rel="stylesheet" href="assets/css/onglets.css?v=15">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=2">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
@@ -1493,7 +1493,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/app-correspondances-core.js?v=1" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=25" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=26" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=2" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=12" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=4" defer></script>
