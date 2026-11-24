@@ -1,10 +1,14 @@
 /**
  * ✨ Trésors — 🌌 Le ciel de naissance (groupe Découvrir) : le ciel tel qu'il était au-dessus du lieu de naissance, la nuit de la
  * naissance — une image (PNG) à télécharger ou à garder dans les médias, et un petit bloc sur la fiche.
- * Les calculs (sans réseau) : les 100 étoiles les plus brillantes (positions J2000 ramenées à la date par la précession), les tracés
+ * Les calculs (sans réseau) : les 100 étoiles les plus brillantes (positions J2000 ramenées à la date par la précession), puis, chargées à la
+ * demande, les ≈ 2 900 étoiles visibles à l'œil nu (magnitude ≤ 5,5) du catalogue HYG v4.0 (assets/data/stars-hyg.json, CC BY-SA 4.0,
+ * scripts/ciel-heure/build-stars.py), la Voie lactée (le plan de la Galaxie, calculé), la comète visible cette nuit-là s'il y en avait une
+ * (assets/data/comets-aurores.json, heritage-ciel-heure.js), les tracés
  * des constellations connues, la Lune (position et phase) et le Soleil (formules simplifiées), Vénus, Mars, Jupiter et Saturne
  * (éléments orbitaux moyens, valables de 1800 à 2050), l'heure du coucher et du lever du soleil. Précision : de l'ordre du degré,
- * largement assez pour une image ; l'heure de naissance est rarement connue, 22 h (heure solaire du lieu) par défaut.
+ * largement assez pour une image ; l'heure de naissance est rarement connue : 22 h (heure solaire du lieu) par défaut, sinon l'heure écrite
+ * dans l'acte, remise à l'heure du soleil avec les règles de l'époque (🕰️ heritage-ciel-heure.js).
  */
 (() => {
     'use strict';
@@ -57,6 +61,16 @@
         const xp = a * (Math.cos(E) - e), yp = a * Math.sqrt(1 - e * e) * Math.sin(E), cO = Math.cos(O * R), sO = Math.sin(O * R), cI = Math.cos(I * R), sI = Math.sin(I * R), cw = Math.cos(om), sw = Math.sin(om);
         return [(cw * cO - sw * sO * cI) * xp + (-sw * cO - cw * sO * cI) * yp, (cw * sO + sw * cO * cI) * xp + (-sw * sO + cw * cO * cI) * yp, sw * sI * xp + cw * sI * yp];
     }
+    /** coordonnées galactiques → équatoriales J2000 (pôle nord galactique 192,85948° / 27,12825°, nœud 122,93192°) */
+    const galToEq = (l, b) => { const dG = 27.12825, s = sin(b) * sin(dG) + cos(b) * cos(dG) * cos(122.93192 - l); return [norm(192.85948 + Math.atan2(cos(b) * sin(122.93192 - l), sin(b) * cos(dG) - cos(b) * sin(dG) * cos(122.93192 - l)) / R), Math.asin(s) / R]; };
+    /* le catalogue HYG, chargé une fois à la demande ; dup : les étoiles déjà dans la liste nommée */
+    const CAT = {data: null, wait: null};
+    function loadCatalog() {
+        return CAT.wait ||= fetch('assets/data/stars-hyg.json').then(r => (r.ok ? r.json() : Promise.reject(new Error(String(r.status))))).then(c => {
+            c.dup = c.ra.map((ra, k) => c.m[k] < 380 && STARS.some(([, r2, d2, m2]) => Math.abs(ra / 1000 - r2) * 15 * cos(d2) < 0.4 && Math.abs(c.de[k] / 100 - d2) < 0.4 && Math.abs(c.m[k] / 100 - m2) < 0.7));
+            CAT.data = c; return c;
+        }).catch(e => { CAT.wait = null; throw e; });
+    }
     const eqOf = ([x, y, z], eps = 23.4393) => { const Y = y * cos(eps) - z * sin(eps), Z = y * sin(eps) + z * cos(eps); return [norm(Math.atan2(Y, x) / R), Math.atan2(Z, Math.hypot(x, Y)) / R]; };
     function sunMoon(d) {
         const L = 280.46 + 0.9856474 * d, g = 357.528 + 0.9856003 * d, ls = norm(L + 1.915 * sin(g) + 0.02 * sin(2 * g)), eps = 23.439 - 0.0000004 * d;
@@ -67,16 +81,25 @@
     const PHASES = ['nouvelle lune', 'premier croissant', 'premier quartier', 'lune gibbeuse croissante', 'pleine lune', 'lune gibbeuse décroissante', 'dernier quartier', 'dernier croissant', 'nouvelle lune'];
     const altaz = (ra, dec, lst, lat) => { const H = lst - ra, s = sin(lat) * sin(dec) + cos(lat) * cos(dec) * cos(H), alt = Math.asin(s) / R; return [alt, norm(Math.atan2(-cos(dec) * sin(H), sin(dec) * cos(lat) - cos(dec) * sin(lat) * cos(H)) / R)]; };
     /** le ciel d'un lieu à une date et une heure (solaire du lieu) → étoiles, planètes, lune, soleil, en hauteur et azimut */
-    function sky({date, hour = 22, lat, lng}) {
+    function sky({date, hour = 22, lat, lng, catalog = CAT.data, comets = []}) {
         const [y, m, dd] = date.split('-').map(Number), ut = hour - lng / 15, J = jd(y, m, dd, ut), d = J - 2451545, T = d / 36525, lst = norm(280.46061837 + 360.98564736629 * d + 0.000387933 * T * T + lng);
         const stars = STARS.map(([n, ra, dec, mag]) => { const [a, de] = precess(ra * 15, dec, T), [alt, az] = altaz(a, de, lst, lat); return {n, mag, alt, az}; });
+        // les étoiles du catalogue (sans celles qui ont déjà un nom ci-dessus) : seulement celles au-dessus de l'horizon
+        const faint = []; if (catalog) for (let k = 0; k < catalog.ra.length; k++) { if (catalog.dup[k]) continue; const [a, de] = precess(catalog.ra[k] * 0.015, catalog.de[k] / 100, T), [alt, az] = altaz(a, de, lst, lat); if (alt > 0) faint.push({mag: catalog.m[k] / 100, bv: catalog.bv[k], alt, az}); }
+        // la Voie lactée : le plan de la Galaxie (latitude galactique 0), plus clair vers le centre (Sagittaire) — calculé, sans tracé recopié
+        const milkyWay = []; for (let l = 0; l < 360; l += 3) { const [ra, de] = galToEq(l, 0), [a2, d2] = precess(ra, de, T), [alt, az] = altaz(a2, d2, lst, lat); if (alt > -12) milkyWay.push({alt, az, w: 0.45 + 0.55 * Math.max(0, cos(l)) ** 2}); }
         const earth = helio(EARTH, T), planets = Object.entries(PLANETS).map(([n, [e0, r, col, mag]]) => { const p = helio([e0, r], T), [ra, dec] = eqOf([p[0] - earth[0], p[1] - earth[1], p[2] - earth[2]]), [a, de] = precess(ra, dec, T), [alt, az] = altaz(a, de, lst, lat); return {n, col, mag, alt, az}; });
         const sm = sunMoon(d), [salt, saz] = altaz(sm.sun[0], sm.sun[1], lst, lat), [malt, maz] = altaz(sm.moon[0], sm.moon[1], lst, lat);
+        // ☄️ la comète de la liste visible cette nuit-là (éléments d'orbite → position), et la direction de sa queue (à l'opposé du Soleil)
+        const vec = (ra, de) => [cos(de) * cos(ra), cos(de) * sin(ra), sin(de)], unvec = v => { const n = Math.hypot(...v); return [norm(Math.atan2(v[1], v[0]) / R), Math.asin(v[2] / n) / R]; };
+        const cometList = (ext.cielHeure && comets.length ? comets : []).map(c => { try {
+            const p = ext.cielHeure.cometRaDec(c.el, J, earth), [a, de] = precess(p.ra, p.dec, T), [alt, az] = altaz(a, de, lst, lat), cv = vec(a, de), sv = vec(sm.sun[0], sm.sun[1]), tl = Math.min(0.35, 0.08 / Math.max(0.15, p.delta));
+            const [ta, td] = unvec(cv.map((v, k) => v - tl * sv[k])), [talt, taz] = altaz(ta, td, lst, lat); return {n: c.name, alt, az, talt, taz, r: p.r, delta: p.delta}; } catch (_) { return null; } }).filter(Boolean);
         // le coucher (avant l'heure choisie) et le lever (après) du soleil, en heure solaire du lieu
         const sunAlt = h => { const dj = jd(y, m, dd, h - lng / 15) - 2451545, s = sunMoon(dj).sun, l = norm(280.46061837 + 360.98564736629 * dj + lng); return altaz(s[0], s[1], l, lat)[0]; };
         let set = null, rise = null; for (let h = 12; h < 24; h += 1 / 30) if (sunAlt(h) > -0.83 && sunAlt(h + 1 / 30) <= -0.83) { set = h; break; }
         for (let h = 0; h < 12; h += 1 / 30) if (sunAlt(h) < -0.83 && sunAlt(h + 1 / 30) >= -0.83) { rise = h; break; }
-        return {stars, planets, sun: {alt: salt, az: saz}, moon: {alt: malt, az: maz, elong: sm.elong, lit: (1 - cos(sm.elong)) / 2, phase: PHASES[Math.round(sm.elong / 45)]}, set, rise, lst};
+        return {stars, faint, milkyWay, comets: cometList, planets, sun: {alt: salt, az: saz}, moon: {alt: malt, az: maz, elong: sm.elong, lit: (1 - cos(sm.elong)) / 2, phase: PHASES[Math.round(sm.elong / 45)]}, set, rise, lst};
     }
     const hm = h => (h == null ? '' : `${Math.floor(h)} h ${String(Math.round((h % 1) * 60)).padStart(2, '0')}`.replace(/ 60$/, ' 59'));
     const THEMES = {nuit: {bg: ['#0b1a3a', '#020611'], star: '#ffffff', line: 'rgba(170,200,255,.35)', text: '#f2ead8', ring: 'rgba(255,255,255,.5)', paper: '#050b1c'},
@@ -98,13 +121,28 @@
         const outline = (r = rad) => { x.beginPath(); if (shape === 'carre') { const a = r, q = 24 * k; x.roundRect ? x.roundRect(cx - a, cy - a, 2 * a, 2 * a, q) : x.rect(cx - a, cy - a, 2 * a, 2 * a); } else if (shape === 'arche') { x.moveTo(cx - r * 0.85, cy + r); x.lineTo(cx - r * 0.85, cy - r * 0.15); x.arc(cx, cy - r * 0.15, r * 0.85, Math.PI, 0); x.lineTo(cx + r * 0.85, cy + r); x.closePath(); } else x.arc(cx, cy, r, 0, 7); };
         const day = s.sun.alt > -6, g = x.createRadialGradient(cx, cy, rad * 0.1, cx, cy, rad * 1.4); g.addColorStop(0, day ? '#3f6aa8' : th.bg[0]); g.addColorStop(1, day ? '#1a3563' : th.bg[1]);
         x.save(); outline(); x.fillStyle = g; x.fill(); x.clip();
-        if (milky) { x.save(); x.translate(cx, cy); x.rotate(((s.lst || 0) % 360) * R); const mg = x.createLinearGradient(0, -rad * 0.25, 0, rad * 0.25); mg.addColorStop(0, 'rgba(255,255,255,0)'); mg.addColorStop(0.5, 'rgba(255,255,255,.13)'); mg.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = mg; x.fillRect(-rad * 1.5, -rad * 0.25, rad * 3, rad * 0.5); x.restore(); }
-        if (grid) { x.strokeStyle = th.line; x.globalAlpha = 0.5; x.lineWidth = 0.8 * k; [30, 60].forEach(a => { const r = rad * Math.tan((90 - a) * R / 2); x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke(); }); for (let a = 0; a < 360; a += 30) { x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx - rad * sin(a), cy - rad * cos(a)); x.stroke(); } x.globalAlpha = 1; }
         const pos = (alt, az) => { const r = rad * Math.tan((90 - alt) * R / 2); return [cx - r * sin(az), cy - r * cos(az)]; };
+        const light = !/^#(0|1|2|3)/.test(th.bg[0]) || theme === 'aube', rgb = theme === 'encre' ? '0,0,0' : '255,255,255';
+        if (milky) { // la Voie lactée : des taches douces le long du plan de la Galaxie
+            const pts = s.milkyWay || [];
+            pts.forEach(p => { const [px, py] = pos(Math.max(-12, p.alt), p.az), rr = rad * 0.16 * (1 + Math.max(0, -p.alt) / 30), gr = x.createRadialGradient(px, py, 0, px, py, rr); gr.addColorStop(0, `rgba(${rgb},${(theme === 'encre' ? 0.05 : 0.075) * p.w})`); gr.addColorStop(1, `rgba(${rgb},0)`); x.fillStyle = gr; x.beginPath(); x.arc(px, py, rr, 0, 7); x.fill(); });
+            if (!pts.length) { x.save(); x.translate(cx, cy); x.rotate(((s.lst || 0) % 360) * R); const mg = x.createLinearGradient(0, -rad * 0.25, 0, rad * 0.25); mg.addColorStop(0, 'rgba(255,255,255,0)'); mg.addColorStop(0.5, 'rgba(255,255,255,.13)'); mg.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = mg; x.fillRect(-rad * 1.5, -rad * 0.25, rad * 3, rad * 0.5); x.restore(); }
+        }
+        if (grid) { x.strokeStyle = th.line; x.globalAlpha = 0.5; x.lineWidth = 0.8 * k; [30, 60].forEach(a => { const r = rad * Math.tan((90 - a) * R / 2); x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke(); }); for (let a = 0; a < 360; a += 30) { x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx - rad * sin(a), cy - rad * cos(a)); x.stroke(); } x.globalAlpha = 1; }
         const byName = new Map(s.stars.map(st => [st.n, st]));
         if (lines) { x.strokeStyle = th.line; x.lineWidth = 1.6 * k; x.font = `${15 * k}px Georgia`; x.fillStyle = th.line;
             LINES.forEach(([cn, segs]) => { const pts = []; segs.forEach(([a, b]) => { const A1 = byName.get(a), B1 = byName.get(b); if (!A1 || !B1 || A1.alt < 0 || B1.alt < 0) return; const p = pos(A1.alt, A1.az), q = pos(B1.alt, B1.az); x.beginPath(); x.moveTo(...p); x.lineTo(...q); x.stroke(); pts.push(p, q); });
                 if (names && pts.length > 2) { const mx = pts.reduce((n, p) => n + p[0], 0) / pts.length, my = pts.reduce((n, p) => n + p[1], 0) / pts.length; x.globalAlpha = 0.9; x.fillText(i18n(cn).toUpperCase(), mx + 8 * k, my + 26 * k); x.globalAlpha = 1; } }); }
+        // les étoiles du catalogue : plus petites et plus pâles quand la magnitude monte ; une pointe de couleur (B−V) sur les fonds sombres
+        (s.faint || []).forEach(st => { const [px, py] = pos(st.alt, st.az), r = Math.max(0.5, 3.6 - 0.62 * st.mag) * k; x.globalAlpha = st.mag < 3 ? 1 : Math.max(0.3, 1 - (st.mag - 3) * 0.28);
+            x.fillStyle = light || st.bv == null ? th.star : st.bv < 0 ? '#cfdcff' : st.bv > 120 ? '#ffd2a8' : st.bv > 60 ? '#fff1d6' : th.star; x.beginPath(); x.arc(px, py, r, 0, 7); x.fill(); });
+        x.globalAlpha = 1;
+        // ☄️ la comète : la tête et la queue, à l'opposé du Soleil
+        (s.comets || []).filter(c => c.alt > 0).forEach(c => { const [px, py] = pos(c.alt, c.az), [qx, qy] = pos(c.talt, c.taz), dx = qx - px, dy = qy - py, len = Math.hypot(dx, dy) || 1, L = Math.min(rad * 0.45, Math.max(70 * k, len)), ex = px + dx / len * L, ey = py + dy / len * L;
+            const tg = x.createLinearGradient(px, py, ex, ey); tg.addColorStop(0, theme === 'encre' ? 'rgba(0,0,0,.55)' : 'rgba(235,245,255,.75)'); tg.addColorStop(1, 'rgba(235,245,255,0)');
+            x.strokeStyle = tg; x.lineCap = 'round'; [9, 5, 2].forEach((w, j) => { x.lineWidth = w * k; x.globalAlpha = [0.25, 0.45, 0.9][j]; x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(px + dx / len * L * 0.5 - dy / len * 8 * k, py + dy / len * L * 0.5 + dx / len * 8 * k, ex, ey); x.stroke(); });
+            x.globalAlpha = 1; x.fillStyle = th.star; x.shadowColor = th.star; x.shadowBlur = 12 * k; x.beginPath(); x.arc(px, py, 4.5 * k, 0, 7); x.fill(); x.shadowBlur = 0;
+            if (names) { x.font = `italic ${16 * k}px Georgia`; x.fillText(i18n(c.n), px + 8 * k, py - 8 * k); } });
         s.stars.filter(st => st.alt > 0).forEach(st => { const [px, py] = pos(st.alt, st.az), r = Math.max(1.1, 4.6 - 1.05 * st.mag) * k; x.fillStyle = th.star; x.shadowColor = th.star; x.shadowBlur = 6 * k; x.beginPath(); x.arc(px, py, r, 0, 7); x.fill(); x.shadowBlur = 0;
             if (names && st.mag < 1.3) { x.fillStyle = th.star; x.globalAlpha = 0.8; x.font = `${14 * k}px system-ui`; x.fillText(st.n, px + r + 4 * k, py - r); x.globalAlpha = 1; } });
         s.planets.filter(p => p.alt > 0).forEach(p => { const [px, py] = pos(p.alt, p.az), r = Math.max(2.5, 5 - 0.6 * p.mag) * k; x.fillStyle = p.col; x.shadowColor = p.col; x.shadowBlur = 10 * k; x.beginPath(); x.arc(px, py, r, 0, 7); x.fill(); x.shadowBlur = 0; x.font = `italic ${16 * k}px Georgia`; x.fillText(p.n, px + r + 5 * k, py + 5 * k); });
@@ -124,15 +162,32 @@
         return {date: p.bd || `${p.by}-07-01`, exact: !!p.bd, lat: ok ? pl.lat : 48.857, lng: ok ? pl.lng : 2.352, place: ok ? pl.name : (pl?.name ? i18n('{place} (pas placé sur la carte : ciel de Paris)', {place: pl.name}) : i18n('Paris (lieu inconnu)')), placed: ok};
     }
     function caption(T, p, b, s, hour) {
-        const vis = s.planets.filter(x => x.alt > 0).map(x => x.n), day = s.sun.alt > -6;
+        const vis = s.planets.filter(x => x.alt > 0).map(x => x.n), day = s.sun.alt > -6, com = (s.comets || []).filter(c => c.alt > 0).map(c => '☄️ ' + i18n(c.n)).join(', ');
         return {title: T.name(p), sub: i18n('{place} — {when}, vers {h}', {place: b.place.replace(/ \(.*$/, ''), when: b.exact ? T.on(b.date) : T.on(null, b.date.slice(0, 4)), h: hm(hour)}),
-            foot: `${i18n(s.moon.phase)}${s.moon.alt > 0 ? '' : ' ' + i18n('(sous l’horizon)')}${vis.length ? ` · ${i18n(vis.length > 1 ? '{list} brillaient' : '{list} brillait', {list: vis.map(n => i18n(n, {ctx: 'astre'})).join(', ')})}` : ''}${day ? ' · ' + i18n('il faisait jour : voici les étoiles cachées par le soleil') : ''}`};
+            foot: `${i18n(s.moon.phase)}${s.moon.alt > 0 ? '' : ' ' + i18n('(sous l’horizon)')}${vis.length ? ` · ${i18n(vis.length > 1 ? '{list} brillaient' : '{list} brillait', {list: vis.map(n => i18n(n, {ctx: 'astre'})).join(', ')})}` : ''}${com && !day ? ' · ' + com : ''}${day ? ' · ' + i18n('il faisait jour : voici les étoiles cachées par le soleil') : ''}`};
     }
+    /** tout ce qu'il faut pour la nuit d'une naissance, chargé à la demande : le catalogue d'étoiles, la comète de la nuit, l'heure de l'acte */
+    const night = {comets: null};
+    async function extras(b, pid) {
+        const H = ext.cielHeure, out = {comets: [], act: null};
+        await loadCatalog().catch(() => null);
+        if (!H) return out;
+        try { const d = await H.loadSkyEvents(); out.comets = b?.exact ? H.cometsOn(d, b.date) : []; } catch (_) {}
+        if (pid) try {
+            const c = await H.ctx({person_id: pid}), TZ = c?.ok && /^\d{1,2}:\d{2}/.test(c.time || '') && c.date && c.place ? await H.loadTz() : null;
+            if (TZ) { const r = H.realHour({date: c.date, time: c.time, place: c.place}, TZ); if (r) out.act = {time: c.time.slice(0, 5), date: c.date, r, lng: Number(c.place.lng)}; }
+        } catch (_) {}
+        return out;
+    }
+    /** l'heure de l'époque (comme dans l'acte) → l'heure du soleil du lieu, comptée depuis minuit du jour écrit (peut dépasser 24 h) */
+    const solarFromLegal = (hour, r, lng) => hour - r.offset / 3600 + lng / 15;
     async function renderSky(host, T) {
         const tr = await T.tree(), st = T.start(tr), pend = ext.tresorSky.pending; ext.tresorSky.pending = null;
         const first = pend || (tr.byId.get(st?.id)?.by ? st.id : tr.people.find(p => p.by)?.id);
         host.innerHTML = `<div class="h-tr-split"><form class="h-tr-panel" data-sk><div><span class="pk-lab">${i18n('La naissance de')}</span>${T.personField('who', first)}</div>
-            <label>${i18n('Vers quelle heure (heure solaire du lieu)')}<input name="h" value="22:00" data-ui-time></label>
+            <label>${i18n('Vers quelle heure')}<input name="h" value="22:00" data-ui-time></label>
+            <label>${i18n('Cette heure est')}<select name="hm"><option value="sol">${i18n('l’heure du soleil du lieu')}</option><option value="acte">${i18n('l’heure de l’époque (comme dans l’acte)')}</option></select></label>
+            <small class="ch-hint" data-sk-hour hidden></small>
             <label>${i18n('Le style')}<select name="th">${[['nuit', 'Nuit bleue'], ['papier', 'Affiche (fond crème)'], ['or', 'Noir et or'], ['encre', 'Encre sur papier (à imprimer)'], ['aube', 'Aube (rose et bleu)'], ['aquarelle', 'Aquarelle'], ['foret', 'Vert forêt'], ['bordeaux', 'Bordeaux et or']].map(([v, l]) => `<option value="${v}">${i18n(l)}</option>`).join('')}</select></label>
             <label>${i18n('La forme')}<select name="shape"><option value="rond">${i18n('Ronde')}</option><option value="carre">${i18n('Carrée')}</option><option value="arche">${i18n('Fenêtre en arc')}</option></select></label>
             <label>${i18n('Le format')}<select name="fmt">${Object.entries(SKY_FORMATS).map(([k, [, , l]]) => `<option value="${k}">${i18n(l)}</option>`).join('')}</select></label>
@@ -143,23 +198,43 @@
             <div data-sk-info class="h-tr-muted"></div></form>
             <div class="h-tr-view"><canvas class="h-tr-canvas" data-sk-c width="1200" height="1340" style="max-width:min(520px, 100%)"></canvas></div></div>`;
         const form = host.querySelector('[data-sk]'), cv = host.querySelector('[data-sk-c]'), info = host.querySelector('[data-sk-info]');
-        let cur = null;
+        let cur = null, more = {comets: [], act: null}, morePid = 0;
+        const hourBox = host.querySelector('[data-sk-hour]');
+        // quand on change de personne : son heure de naissance (si l'acte la donne), la comète de la nuit, le catalogue — puis on redessine
+        const refresh = async () => {
+            const pid = Number(form.elements.who.value), p = tr.byId.get(pid), b = birthOf(T, tr, p); if (!b) return;
+            const got = await extras(b, pid); if (Number(form.elements.who.value) !== pid) return;
+            more = got; morePid = pid;
+            if (got.act) { form.elements.h.value = got.act.time; form.elements.hm.value = 'acte'; } else if (form.elements.hm.value === 'acte') { form.elements.hm.value = 'sol'; form.elements.h.value = '22:00'; }
+            form.elements.h.dispatchEvent(new Event('lcnda:set', {bubbles: false})); draw();
+        };
         const draw = () => {
             const p = tr.byId.get(Number(form.elements.who.value)), b = birthOf(T, tr, p);
             if (!b) { info.textContent = i18n('Il faut au moins l’année de naissance.'); cv.getContext('2d').clearRect(0, 0, cv.width, cv.height); cur = null; return; }
-            const [hh, mm] = (form.elements.h.value || '22:00').split(':').map(Number), hour = hh + (mm || 0) / 60, s = sky({date: b.date, hour, lat: b.lat, lng: b.lng}), c = caption(T, p, b, s, hour), e = form.elements;
+            const [hh, mm] = (form.elements.h.value || '22:00').split(':').map(Number), written = hh + (mm || 0) / 60, e = form.elements;
+            // l'heure de l'époque → l'heure du soleil du lieu (avec les règles de ce jour-là : 🕰️ heritage-ciel-heure.js)
+            let hour = written, conv = null;
+            if (e.hm.value === 'acte' && ext.cielHeure && morePid === p.id) {
+                const H = ext.cielHeure, t = `${String(hh).padStart(2, '0')}:${String(mm || 0).padStart(2, '0')}`;
+                conv = more.act && more.act.r && t === more.act.time ? more.act.r : null;
+                if (!conv && more.tz && more.place) conv = H.realHour({date: b.date, time: t, place: more.place}, more.tz);
+                if (conv) hour = solarFromLegal(written, conv, b.lng);
+            }
+            hourBox.hidden = !conv; if (conv) hourBox.innerHTML = `<span class="ch-line">🕰️ ${T.esc(conv.line)}</span><span class="ch-why">${T.esc(i18n('Le ciel est dessiné à {h}, heure du soleil à cet endroit.', {h: hm(((hour % 24) + 24) % 24)}))}</span>`;
+            const s = sky({date: b.date, hour, lat: b.lat, lng: b.lng, comets: morePid === p.id ? more.comets : []}), c = caption(T, p, b, s, ((hour % 24) + 24) % 24);
             const [fw, fh] = SKY_FORMATS[e.fmt.value] || SKY_FORMATS.affiche; if (cv.width !== fw || cv.height !== fh) { cv.width = fw; cv.height = fh; }
             drawSky(cv, s, {theme: e.th.value, names: e.names.checked, lines: e.lines.checked, shape: e.shape.value, font: e.font.value, milky: e.milky.checked, grid: e.grid.checked, frame: e.frame.checked, title: e.tt.value.trim() || c.title, sub: e.ts.value.trim() || c.sub, foot: e.tf.value.trim() || c.foot}); cur = {p, b, s};
             const up = s.stars.filter(x => x.alt > 0).length;
-            info.innerHTML = `${b.exact ? '' : i18n('⚠️ Date exacte inconnue : ciel du 1er juillet.') + ' '}${b.placed ? '' : i18n('⚠️ Lieu non placé sur la carte.') + ' '}<br>🌙 ${T.esc(i18n(s.moon.phase))} (${i18n('{n} % éclairée', {n: String(Math.round(s.moon.lit * 100))})})${s.moon.alt > 0 ? '' : ', ' + i18n('sous l’horizon')}<br>🌇 ${i18n('coucher du soleil vers {h}', {h: hm(s.set) || '—'})} · 🌅 ${i18n('lever vers {h}', {h: hm(s.rise) || '—'})}<br>✨ ${i18n('{n} étoiles brillantes au-dessus de l’horizon', {n: String(up)})}${s.planets.filter(x => x.alt > 0).length ? ` · 🪐 ${s.planets.filter(x => x.alt > 0).map(x => i18n(x.n, {ctx: 'astre'})).join(', ')}` : ''}`;
+            const vc = s.comets.filter(x => x.alt > 0);
+            info.innerHTML = `${b.exact ? '' : i18n('⚠️ Date exacte inconnue : ciel du 1er juillet.') + ' '}${b.placed ? '' : i18n('⚠️ Lieu non placé sur la carte.') + ' '}<br>🌙 ${T.esc(i18n(s.moon.phase))} (${i18n('{n} % éclairée', {n: String(Math.round(s.moon.lit * 100))})})${s.moon.alt > 0 ? '' : ', ' + i18n('sous l’horizon')}<br>🌇 ${i18n('coucher du soleil vers {h}', {h: hm(s.set) || '—'})} · 🌅 ${i18n('lever vers {h}', {h: hm(s.rise) || '—'})}<br>✨ ${i18n('{n} étoiles brillantes au-dessus de l’horizon', {n: String(up)})}${s.faint.length ? ' ' + i18n('(et {n} plus pâles)', {n: String(s.faint.length)}) : ''}${s.planets.filter(x => x.alt > 0).length ? ` · 🪐 ${s.planets.filter(x => x.alt > 0).map(x => i18n(x.n, {ctx: 'astre'})).join(', ')}` : ''}${vc.length ? `<br>☄️ ${T.esc(vc.map(x => i18n(x.n)).join(', '))} ${T.esc(i18n('dans le ciel cette nuit-là'))}` : (more.comets.length ? `<br>☄️ ${T.esc(i18n('{n} était visible ces jours-là, mais pas au-dessus de l’horizon à cette heure', {n: i18n(more.comets[0].name)}))}` : '')}${s.faint.length ? `<br><small>${T.esc(i18n('Étoiles : catalogue HYG v4.0 (D. Nash, astronexus), licence CC BY-SA 4.0.'))}</small>` : ''}`;
             cv.dataset.moon = s.moon.phase;
         };
-        form.addEventListener('change', draw); form.addEventListener('input', e => { if (['h', 'tt', 'ts', 'tf'].includes(e.target.name)) draw(); });
+        form.addEventListener('change', e => { if (e.target.name === 'who') { draw(); refresh(); } else draw(); }); form.addEventListener('input', e => { if (['h', 'tt', 'ts', 'tf'].includes(e.target.name)) draw(); });
         const fname = () => `ciel-de-naissance-${(cur?.p?.first || 'x').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')}.png`;
         T.actions(host, {exports: [{icon: '🖼', label: i18n('Image PNG'), name: fname, make: () => (cur ? T.canvasPng(cv) : null)}],
             layout: () => cur && T.toLayout(i18n('Le ciel de naissance de {nm}', {nm: T.name(cur.p)}), cv.toDataURL('image/png'), {w: 210, h: Math.round(210 * cv.height / cv.width)}),
             media: {title: () => i18n('Le ciel de naissance de {nm}', {nm: T.name(cur?.p)}), person: () => cur?.p?.id, help: i18n('Aussi rangée sur sa fiche'), make: async () => (cur ? {blob: await T.canvasPng(cv), name: fname()} : null)}});
-        draw();
+        draw(); refresh();
     }
     F.push({key: 'ciel', group: 'decouvrir', icon: '🌌', title: 'Le ciel de naissance', desc: 'Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir.', render: renderSky});
     ext.tresorSky = {sky, drawSky, birthOf, caption, pending: null};

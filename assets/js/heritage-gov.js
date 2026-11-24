@@ -62,7 +62,7 @@
     const forget = () => { STATUS = null; evCache.clear(); };
 
     /* ═════════ Morceaux d'affichage ═════════ */
-    const span = n => (n.from && n.to ? i18n('{a} → {b}', {a: n.from, b: n.to}) : n.from ? i18n('depuis {y}', {y: n.from}) : n.to ? i18n('jusqu’en {y}', {y: n.to}) : n.year ? i18n('attesté en {y}', {y: n.year}) : '');
+    const span = n => (n.from && n.to ? i18n('{a} → {b}', {a: String(n.from), b: String(n.to)}) : n.from ? i18n('depuis {y}', {y: String(n.from)}) : n.to ? i18n('jusqu’en {y}', {y: String(n.to)}) : n.year ? i18n('attesté en {y}', {y: String(n.year)}) : '');
     const namesHtml = names => `<div class="gov-names">${(names || []).map(n => `<span>${esc(n.name)} <small>(${esc([n.lang_fr, span(n)].filter(Boolean).join(', '))})</small></span>`).join('')}</div>`;
     const chainLines = ch => {
         if (!ch) return '';
@@ -174,7 +174,7 @@
         if (!host.isConnected) return;
         if (!r.installed || r.how === 'none') { host.hidden = true; return; }
         host.hidden = false;
-        const head = `<h4>🏰 ${esc(i18n('Ce lieu dans GOV'))}</h4>`;
+        const head = `<h4>🏰 ${esc(i18n('Ce lieu dans GOV'))} <button type="button" class="link-button gov-muted" data-gov-search>🔎 ${esc(i18n('Trouver un lieu ancien'))}</button></h4>`;
         if (r.how === 'choose') {
             host.innerHTML = `${head}<p class="gov-muted">${esc(i18n('Plusieurs lieux de GOV portent ce nom : lequel est le tien ?'))}</p>${r.choices.map(c => `<div class="gov-choice"><span><b>${esc(c.name_today)}</b> <span class="gov-muted">${esc([c.type, c.where, c.km != null ? i18n('à {n} km', {n: c.km}) : ''].filter(Boolean).join(' · '))}</span></span>
                 <span class="gov-acts">${kiosk() ? '' : `<button type="button" class="button small" data-gov-link="${esc(c.gov)}" data-gov-place-id="${pid}">${esc(i18n('C’est celui-ci'))}</button>`}<button type="button" class="button small secondary" data-gov-open="${esc(c.gov)}">🏰</button></span></div>`).join('')}${srcLine()}`;

@@ -673,11 +673,30 @@ def build_prix(cache, out_dir):
         if cur in MONEY and f and o > 0 and y >= MONEY[cur][2]:
             money.setdefault(mk, {}).setdefault(cur, {}).setdefault(y, []).append(s * f / o)
     med = lambda v: sorted(v)[len(v) // 2]  # noqa: E731
+    # contrôle : la source mêle parfois des séries aux unités fausses (Udine : 300 g d'argent le litre de blé…) ;
+    # on écarte une valeur plus de 5 fois au-dessus ou au-dessous de la médiane des villes d'Europe pour la même denrée
+    # et la même époque (± 10 ans) — rien n'est corrigé, seulement écarté
+    ref = {}
+    for mk, goods in prices.items():
+        for k, ys in goods.items():
+            for y, v in ys.items():
+                ref.setdefault((k, y // 10), []).append(med(v))
+    dropped = 0
+
+    def around(k, y):
+        vals = ref.get((k, y // 10), []) + ref.get((k, y // 10 - 1), []) + ref.get((k, y // 10 + 1), [])
+        return med(vals) if len(vals) >= 5 else None
     cities = {}
     for mk, goods in prices.items():
         g = {}
         for k, ys in goods.items():
-            pts = [[y, float(f'{med(v):.4g}')] for y, v in sorted(ys.items())]
+            pts = []
+            for y, v in sorted(ys.items()):
+                m = around(k, y)
+                keep = [x for x in v if m is None or m / 5 <= x <= m * 5]
+                dropped += len(v) - len(keep)
+                if keep:
+                    pts.append([y, float(f'{med(keep):.4g}')])
             if len(pts) >= 5:
                 g[k] = pts
         if not g:
@@ -697,12 +716,12 @@ def build_prix(cache, out_dir):
             'src': 'Allen, Robert C. et Richard W. Unger, The Allen-Unger Global Commodity Prices Dataset (IISG, dataverse.nl).',
             'url': f'{DATAVERSE}/dataset.xhtml?persistentId={ALLEN_UNGER_DOI}', 'licence': 'CC BY-SA 4.0',
             'licence_url': 'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
-            'note': 'Prix convertis par les auteurs en grammes d’argent fin, par kilogramme, litre ou pièce. Valeur d’une unité de monnaie : retrouvée ici à partir des prix de la source donnés à la fois dans la monnaie de la ville et en argent.',
+            'note': 'Prix convertis par les auteurs en grammes d’argent fin, par kilogramme, litre ou pièce. Un prix plus de 5 fois loin de la médiane des villes d’Europe à la même époque est écarté (erreur d’unité probable dans la source). Valeur d’une unité de monnaie : retrouvée ici à partir des prix de la source donnés à la fois dans la monnaie de la ville et en argent.',
             'c': dict(sorted(cities.items(), key=lambda kv: kv[1]['n']))}
     dest = os.path.join(out_dir, 'prix-europe.json')
     with open(dest, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, separators=(',', ':'))
-    log(f'✓ {dest} : {len(cities)} villes ; {os.path.getsize(dest) / 1e6:.2f} Mo')
+    log(f'✓ {dest} : {len(cities)} villes ; {dropped} prix écartés (plus de 5 fois loin de la médiane européenne) ; {os.path.getsize(dest) / 1e6:.2f} Mo')
     return dest
 
 

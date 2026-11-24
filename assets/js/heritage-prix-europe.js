@@ -66,7 +66,7 @@
     }
     const emptyLine = (text, icon = '💶') => `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">${icon}</span><span class="empty-line-text">${esc(text)}</span></p>`;
     const unitText = (u, q) => (u === 'kg' ? 'kg' : u === 'L' ? (q >= 2 ? T('litres') : T('litre')) : (q >= 2 ? T('pièces') : T('pièce')));
-    const yNote = (y, year) => (y !== year ? ` <small class="muted">(${esc(T('prix de {y}', {y}))})</small>` : '');
+    const yNote = (y, year) => (y !== year ? ` <small class="muted">(${esc(T('prix de {y}', {y: String(y)}))})</small>` : '');
 
     async function mount(pane, {year = '', value = ''} = {}) {
         pane.innerHTML = emptyLine(T('Chargement des prix…'), '⏳');
@@ -78,7 +78,7 @@
         const cities = Object.entries(P.c).map(([k, c]) => [k, `${c.n} (${c.pays})`]);
         pane.innerHTML = `<div class="af-fields">
                 <label class="af-field"><span>${esc(T('La somme'))}</span><input type="text" inputmode="decimal" data-pe-amount autocomplete="off" value="${esc(st.amount)}" placeholder="10"></label>
-                <label class="af-field"><span>${esc(T('La monnaie'))}</span><select data-pe-money><option value="silver"${st.money === 'silver' ? ' selected' : ''}>${esc(T('grammes d’argent'))}</option>${ms.map(m => `<option value="${esc(m.id)}"${m.id === st.money ? ' selected' : ''}>${esc(T('{curs} — d’après {ville} ({a}-{b})', {curs: m.curs, ville: m.cityName, a: m.from, b: m.to}))}</option>`).join('')}</select></label>
+                <label class="af-field"><span>${esc(T('La monnaie'))}</span><select data-pe-money><option value="silver"${st.money === 'silver' ? ' selected' : ''}>${esc(T('grammes d’argent'))}</option>${ms.map(m => `<option value="${esc(m.id)}"${m.id === st.money ? ' selected' : ''}>${esc(T('{curs} — relevés à {ville} ({a}-{b})', {curs: m.curs, ville: m.cityName, a: String(m.from), b: String(m.to)}))}</option>`).join('')}</select></label>
                 <label class="af-field af-year"><span>${esc(T('L’année'))}</span><input type="number" min="1200" max="1914" data-pe-year value="${esc(st.year)}"></label>
                 <label class="af-field"><span>${esc(T('Dépensée à'))}</span><select data-pe-city>${cities.map(([k, l]) => `<option value="${esc(k)}"${k === st.city ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label></div>
             <p class="af-examples">${esc(T('Exemples :'))} ${[['10', 'Arnhem|florin', '1750', 'Amsterdam'], ['100', 'Paris|livre tournois', '1780', 'Paris'], ['20', 'Paris|franc', '1850', 'Strasbourg'], ['5', 'Krakow|złoty', '1880', 'Krakow']].filter(e => ms.some(m => m.id === e[1])).map(([a, m, y, c]) => `<button type="button" class="link-button" data-pe-ex="${esc([a, m, y, c].join('~'))}">${esc(`${a} ${ms.find(x => x.id === m).curs} ${T('en')} ${y}`)}</button>`).join(' · ')}</p>
@@ -95,17 +95,17 @@
                 return;
             }
             const m = ms.find(x => x.id === v.money), c = P.c[v.city];
-            const head = m ? T('{a} {curs} en {y} ≈ {g} g d’argent', {a: nf(r.amount, 2), curs: m.curs, y: r.year, g: nf(r.grams, r.grams < 10 ? 2 : 0)}) : T('{g} g d’argent en {y}', {g: nf(r.grams, 2), y: r.year});
-            const rateLine = m ? `<small>${esc(T('1 {cur} = {v} g d’argent en {y}, d’après les prix de {ville} dans la source', {cur: m.cur, v: nf(r.rate.v, 3), y: r.rate.y, ville: m.cityName}))}</small>` : '';
+            const head = m ? T('{a} {curs} en {y} ≈ {g} g d’argent', {a: nf(r.amount, 2), curs: r.amount < 2 ? m.cur : m.curs, y: String(r.year), g: nf(r.grams, r.grams < 10 ? 2 : 0)}) : T('{g} g d’argent en {y}', {g: nf(r.grams, 2), y: String(r.year)});
+            const rateLine = m ? `<small>${esc(T('1 {cur} = {v} g d’argent en {y} (d’après les prix relevés à {ville} dans la source)', {cur: m.cur, v: nf(r.rate.v, 3), y: String(r.rate.y), ville: m.cityName}))}</small>` : '';
             const here = r.here.slice(0, 8);
             out.innerHTML = `<div class="af-big"><small>${esc(T('En argent'))}</small><strong>${esc(head)}</strong>${UI().badge ? UI().badge(T('Ordre de grandeur'), 'yellow') : ''}${rateLine}</div>
                 <h4 class="af-h">${esc(T('À {ville}, avec cette somme', {ville: c ? c.n : v.city}))}</h4>
                 ${here.length ? `<div class="af-cards">${here.map(h => `<div><small>${esc(h.name)}</small><b>≈ ${esc(qtyText(h.qty))} ${esc(unitText(h.unit, h.qty))}</b>${yNote(h.y, r.year)}</div>`).join('')}</div>` : emptyLine(T('Pas de prix pour cette ville à 5 ans près : regarde les autres villes ci-dessous.'), '🔍')}
                 <h4 class="af-h">${esc(T('💶 Ailleurs en Europe, la même année'))}</h4>
-                ${r.elsewhere.length ? `<table class="af-table pe-table"><thead><tr><th>${esc(T('Ville'))}</th><th>${esc(T('Blé'))}</th><th>${esc(T('Seigle'))}</th><th>${esc(T('Pain'))}</th></tr></thead><tbody>
+                ${r.elsewhere.length ? `<table class="af-table pe-table" style="width:100%"><thead><tr><th>${esc(T('Ville'))}</th><th>${esc(T('Blé'))}</th><th>${esc(T('Seigle'))}</th><th>${esc(T('Pain'))}</th></tr></thead><tbody>
                     ${r.elsewhere.map(e => `<tr${e.city === v.city ? ' class="is-cur"' : ''}><td>${esc(e.name)} <small class="muted">${esc(e.pays)}</small></td>${['ble', 'seigle', 'pain'].map(k => `<td>${e[k] ? `≈ ${esc(qtyText(e[k].qty))} ${esc(k === 'pain' ? 'kg' : 'L')}${yNote(e[k].y, r.year)}` : '<span class="muted">—</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table>`
                     : emptyLine(T('Aucune ville n’a de prix du blé, du seigle ou du pain à 5 ans près de cette année.'), '🔍')}
-                ${c?.src?.length ? `<p class="ui-hint">${esc(T('Prix de {ville} : {src}', {ville: c.n, src: c.src.join(' ; ')}))}</p>` : ''}`;
+                ${c?.src?.length ? `<p class="ui-hint">${esc(T('Sources des prix ({ville}) : {src}', {ville: c.n, src: c.src.join(' ; ')}))}</p>` : ''}`;
         }
         pane.addEventListener('input', e => { if (e.target.matches('[data-pe-amount], [data-pe-year]')) draw(); });
         pane.addEventListener('change', e => { if (e.target.matches('select')) draw(); });

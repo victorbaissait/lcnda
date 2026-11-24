@@ -267,7 +267,7 @@
         const name = C.c[String(c.iso)]?.n || '';
         for (const y of pick) {
             const st = statsAt(C, c.iso, y); if (!st.length) continue;
-            out.push(`<li>${esc(T('{enPays} en {y} : {liste}.', {enPays: (x => x.charAt(0).toUpperCase() + x.slice(1))(inCountry(name)), y, liste: st.map(s => s.text + (s.y !== y ? ` (${s.y})` : '')).join(' · ')}))}</li>`);
+            out.push(`<li>${esc(T('{enPays} en {y} : {liste}.', {enPays: (x => x.charAt(0).toUpperCase() + x.slice(1))(inCountry(name)), y: String(y), liste: st.map(s => s.text + (s.y !== y ? ` (${s.y})` : '')).join(' · ')}))}</li>`);
         }
         return out.join('');
     }
@@ -281,7 +281,7 @@
         const stat = countries.map(c => statLines(C, c)).join('');
         if (!rows.length && !stat) { host.innerHTML = A().empty ? A().empty(T('Ajoute des lieux (avec leur position sur la carte) et des dates : l’app dira dans quel pays ils étaient à l’époque.'), {icon: '🗺'}) : ''; return; }
         const changed = rows.filter(r => r.changed).length;
-        host.innerHTML = `${rows.length ? `<p class="muted">${esc(changed ? T('{n} lieu(x) de sa vie étaient dans un autre pays qu’aujourd’hui.', {n: changed}) : T('Les lieux de sa vie, avec le pays de l’époque.'))}</p>
+        host.innerHTML = `${rows.length ? `<p class="muted">${esc(changed ? (changed > 1 ? T('{n} lieux de sa vie étaient dans un autre pays qu’aujourd’hui.', {n: String(changed)}) : T('Un lieu de sa vie était dans un autre pays qu’aujourd’hui.')) : T('Les lieux de sa vie, avec le pays de l’époque.'))}</p>
             <ul class="mc-rows">${rows.map(rowHtml).join('')}</ul>${bordersCredit(B)}` : ''}
             ${stat ? `<h4>${esc(T('🌍 Le pays en chiffres'))}</h4><ul class="mc-stats">${stat}</ul>
             <p><small class="muted">${esc(T('Pays dans leurs frontières d’aujourd’hui ; entre parenthèses, l’année du chiffre quand il n’y en a pas pour l’année exacte.'))}</small></p>${srcList(C)}
@@ -314,7 +314,7 @@
         const keys = STAT_ORDER.filter(k => ys.some(y => statAt(C, c.iso, k, y)));
         if (!keys.length) return `<p class="muted">${esc(T('Pas de chiffres pour ce pays dans les sources.'))}</p>`;
         const short = {le: T('Espérance de vie'), im: T('Mortalité infantile (‰)'), ht: T('Taille des hommes'), ed: T('Années d’école'), gdp: T('Richesse par habitant ($ de 2011)'), pop: T('Population')};
-        const cell = (k, y) => { const s = statAt(C, c.iso, k, y); if (!s) return '<td class="muted">—</td>'; const v = k === 'le' ? `${nf(s.v)} ${T('ans')}` : k === 'ht' ? `${nf(s.v)} cm` : k === 'ed' ? nf(s.v, 1) : k === 'pop' ? (s.v >= 1000 ? `${nf(s.v / 1000, s.v >= 10000 ? 0 : 1)} M` : `${nf(s.v)} 000`) : nf(s.v); return `<td${s.y !== y ? ` title="${esc(T('chiffre de {y}', {y: s.y}))}"` : ''}>${esc(v)}${s.y !== y ? '*' : ''}</td>`; };
+        const cell = (k, y) => { const s = statAt(C, c.iso, k, y); if (!s) return '<td class="muted">—</td>'; const v = k === 'le' ? `${nf(s.v)} ${T('ans')}` : k === 'ht' ? `${nf(s.v)} cm` : k === 'ed' ? nf(s.v, 1) : k === 'pop' ? (s.v >= 1000 ? `${nf(s.v / 1000, s.v >= 10000 ? 0 : 1)} M` : `${nf(s.v)} 000`) : nf(s.v); return `<td${s.y !== y ? ` title="${esc(T('chiffre de {y}', {y: String(s.y)}))}"` : ''}>${esc(v)}${s.y !== y ? '*' : ''}</td>`; };
         return `<div class="table-scroll"><table class="mc-table"><thead><tr><th>${esc(T('Année'))}</th>${keys.map(k => `<th>${esc(short[k])}</th>`).join('')}</tr></thead>
             <tbody>${ys.map(y => `<tr><td>${y}</td>${keys.map(k => cell(k, y)).join('')}</tr>`).join('')}</tbody></table></div>`;
     }
@@ -383,7 +383,7 @@
             parts.push(`<path d="${path}" fill="${COLORS[e.gw % COLORS.length]}" fill-rule="evenodd"><title>${esc(name)}</title></path>`);
             if (x1 - x0 > 60 && y1 - y0 > 24) { const l = B.raw.lab[e.g]; labels.push(`<text x="${(lngToX(l[0] * q, z) - left).toFixed(0)}" y="${(latToY(l[1] * q, z) - top).toFixed(0)}">${esc(name)}</text>`); }
         }
-        svg.innerHTML = `${parts.join('')}${labels.join('')}<text x="${width - 10}" y="${height - 10}" style="text-anchor:end;font-size:11px">${esc(T('Frontières de {y} — CShapes (ETH Zürich), CC BY-NC-SA 4.0', {y}))}</text>`;
+        svg.innerHTML = `${parts.join('')}${labels.join('')}<text x="${width - 10}" y="${height - 10}" style="text-anchor:end;font-size:11px">${esc(T('Frontières de {y} — CShapes (ETH Zürich), CC BY-NC-SA 4.0', {y: String(y)}))}</text>`;
     });
 
     document.addEventListener('click', e => {

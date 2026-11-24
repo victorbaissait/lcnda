@@ -292,8 +292,9 @@ function cplus_images(PDO $pdo, array $q): array
             foreach ($hs['query']['categorymembers'] ?? [] as $m) { $t = (string) ($m['title'] ?? ''); if (preg_match(CPLUS_OLD_CAT, $t) && !in_array($t, $cats, true)) { $cats[] = $t; } }
         }
         $cats = array_slice(array_values(array_unique($cats)), 0, 12);
-        $inc = implode('|', array_map(static fn($t) => '"' . str_replace([' ', '"'], ['_', ''], (string) preg_replace('/^Category:/', '', $t)) . '"', $cats));
-        $j = cplus_commons('commons_files.json', ['action' => 'query', 'generator' => 'search', 'gsrnamespace' => 6, 'gsrsearch' => 'filetype:bitmap incategory:' . $inc, 'gsrlimit' => 100,
+        // incategory:"A|B|C" (un « ou » entre les catégories ; espaces → _)
+        $inc = implode('|', array_map(static fn($t) => str_replace([' ', '"', '|'], ['_', '', ''], (string) preg_replace('/^Category:/', '', $t)), $cats));
+        $j = cplus_commons('commons_files.json', ['action' => 'query', 'generator' => 'search', 'gsrnamespace' => 6, 'gsrsearch' => 'filetype:bitmap incategory:"' . $inc . '"', 'gsrlimit' => 100,
             'prop' => 'imageinfo', 'iiprop' => 'url|extmetadata', 'iiurlwidth' => 360,
             'iiextmetadatafilter' => 'DateTimeOriginal|DateTime|Artist|Credit|LicenseShortName|LicenseUrl|UsageTerms|ImageDescription|ObjectName|Categories|AttributionRequired|Copyrighted']);
         $items = [];

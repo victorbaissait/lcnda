@@ -211,7 +211,7 @@ function insee_maj_dir(bool $create = false): string
 function insee_maj_budget(): float
 {
     $t = (float) (insee_maj_test_dir() !== '' ? (getenv('LCNDA_TEST_INSEE_SECONDS') ?: 8) : 8);
-    return max(0.05, $t);
+    return max(0.00001, $t);
 }
 
 /* ─── réglages et travail en cours, gardés dans la base (une petite table, créée à la première écriture) ─── */

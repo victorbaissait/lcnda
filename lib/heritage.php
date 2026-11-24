@@ -1537,9 +1537,25 @@ function insee_prenoms_import(PDO $pdo, ?array $file): never
  * Prénoms de la famille comparés à la France : pour chaque prénom donné au XXᵉ siècle (ou après), année du pic national,
  * rang, et années où la famille l'a donné.
  */
-function firstnames_france_data(PDO $pdo, int $minYear = 1900): array
+function firstnames_france_data(PDO $pdo, int $minYear = 1900, int $zoneId = 0): array
 {
     $meta = json_decode((string) ($pdo->query("SELECT value FROM app_settings WHERE key='lcnda-insee-prenoms'")->fetchColumn() ?: ''), true) ?: null;
+    // 📊 le pack « Prénoms d'ici et d'ailleurs » (lib/prenoms_pays.php), s'il est installé, passe devant le fichier importé à la main :
+    // France entière, un département, la Suisse ou le Québec (zone choisie dans la page)
+    $zone = null; $zones = [];
+    if (is_file(__DIR__ . '/prenoms_pays.php')) {
+        require_once __DIR__ . '/prenoms_pays.php';
+        $st = pp_status();
+        if ($st['installed']) {
+            $zones = $st['zones'];
+            foreach ($zones as $z) { if ($zoneId && $z['id'] === $zoneId) { $zone = $z; break; } }
+            foreach ($zone ? [] : $zones as $z) { if ($z['country'] === 'FR' && $z['code'] === '') { $zone = $z; break; } } // sinon la France entière
+            if ($zone) {
+                $src = array_values(array_filter($st['sources'], static fn($x) => $x['pays'] === $zone['country']))[0] ?? null;
+                $meta = ['pack' => true, 'zone' => $zone['id'], 'zone_name' => $zone['name'], 'zone_where' => pp_where($zone), 'from' => $zone['from'], 'to' => $zone['to'], 'source' => $src, 'manual' => $meta];
+            }
+        }
+    }
     $births = $pdo->query("SELECT p.id, p.first_name, p.gender, p.last_name,
             (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('BIRT','CHR','BAPM') AND e.year IS NOT NULL ORDER BY t.gedcom_tag='BIRT' DESC, e.year LIMIT 1) AS year
         FROM persons p WHERE TRIM(COALESCE(p.first_name,''))<>''")->fetchAll();
@@ -1560,8 +1576,9 @@ function firstnames_france_data(PDO $pdo, int $minYear = 1900): array
         $years = array_column($f['people'], 'year'); sort($years);
         $row = ['name' => $f['label'], 'sex' => $f['sex'], 'family_years' => $years, 'people' => $f['people'], 'peak_year' => null, 'peak_count' => 0, 'total' => 0, 'series' => []];
         if ($meta) {
-            $series->execute([$f['key'], $f['sex'], $f['sex']]);
-            foreach ($series->fetchAll() as $s) {
+            if ($zone) { $rowsS = []; foreach (pp_series_by_key($f['key'], $f['sex'], $zone['id']) ?? [] as $y => $n) { $rowsS[] = ['annee' => $y, 'n' => $n]; } }
+            else { $series->execute([$f['key'], $f['sex'], $f['sex']]); $rowsS = $series->fetchAll(); }
+            foreach ($rowsS as $s) {
                 $row['series'][(int) $s['annee']] = (int) $s['n']; $row['total'] += (int) $s['n'];
                 if ((int) $s['n'] > $row['peak_count']) { $row['peak_count'] = (int) $s['n']; $row['peak_year'] = (int) $s['annee']; }
             }
@@ -1571,7 +1588,7 @@ function firstnames_france_data(PDO $pdo, int $minYear = 1900): array
         $out[] = $row;
     }
     usort($out, static fn($a, $b) => count($b['people']) <=> count($a['people']) ?: strcmp($a['name'], $b['name']));
-    return ['meta' => $meta, 'names' => $out, 'min_year' => $minYear];
+    return ['meta' => $meta, 'names' => $out, 'min_year' => $minYear, 'zones' => $zones];
 }
 
 /* ─── 📊 Inventaires après décès ─────────────────────────────────────── */

@@ -1,0 +1,21 @@
+{
+ "version": "essai",
+ "packs": {
+  "pays": {
+   "size": 33007,
+   "sha256": "f8d69a128577ac654915a5430603b90bf1f091ff1ed5e1f8a3256469ff07dffe",
+   "raw_size": 135168,
+   "built": "essai",
+   "parts": [
+    {
+     "name": "prenoms-pays.sqlite.gz.000",
+     "size": 20000
+    },
+    {
+     "name": "prenoms-pays.sqlite.gz.001",
+     "size": 13007
+    }
+   ]
+  }
+ }
+}

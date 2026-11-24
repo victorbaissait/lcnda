@@ -1,0 +1,36 @@
+/* LCNDA — 📊 Prénoms d'ici et d'ailleurs (assets/js/heritage-prenoms-pays.js).
+ * Couleurs : variables de l'app (--ink, --muted, --blue-bright, --blue-soft, --card-bg) ; le mode sombre suit tout seul,
+ * sauf les deux couleurs des courbes, redonnées plus claires en sombre. */
+:root { --ppx-c1: #cc4700; --ppx-c2: #2a6fdb; --ppx-c3: #2e8b57; --ppx-c4: #8e44ad; }
+:root[data-theme="dark"], .theme-dark { --ppx-c1: #ff8a4c; --ppx-c2: #7aa7ff; --ppx-c3: #5fc28a; --ppx-c4: #c08ae0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ppx-c1: #ff8a4c; --ppx-c2: #7aa7ff; --ppx-c3: #5fc28a; --ppx-c4: #c08ae0; } }
+
+/* la petite ligne de la fiche */
+.ppx-line { display: flex; gap: 8px; align-items: baseline; margin: 6px 0 2px; font-size: 13.5px; line-height: 1.45; color: var(--ink); }
+.ppx-line .ppx-ico { flex: none; }
+.ppx-line .ppx-text { min-width: 0; overflow-wrap: anywhere; }
+.ppx-line small.ui-hint { display: block; color: var(--muted); font-size: 11.5px; }
+.ppx-line .link-button { font-size: 13px; }
+
+/* le bloc ⤓ Installer */
+.ppx-panel { margin: 4px 0 10px; }
+.ppx-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.ppx-row > span:first-child { min-width: 0; flex: 1 1 260px; }
+.ppx-acts { display: inline-flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ppx-dl { display: inline-flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ppx-prog { display: inline-block; width: 140px; height: 8px; border: 1.5px solid var(--ink); background: var(--card-bg, #fff); vertical-align: middle; }
+.ppx-prog i { display: block; height: 100%; background: var(--blue-bright, #055dff); }
+.ppx-opt { display: flex; gap: 6px; align-items: center; margin-top: 8px; font-size: 13px; }
+.h-prenoms-manual { margin: 8px 0; }
+.h-prenoms-manual > summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+
+/* la courbe */
+.ppx-chart { width: 100%; height: auto; max-height: 300px; display: block; margin: 6px 0; color: var(--ink); }
+.ppx-chart .ppx-grid { stroke: currentColor; stroke-opacity: .12; }
+.ppx-chart .ppx-ax { fill: var(--muted, #666); font: 11px system-ui, sans-serif; }
+.ppx-chart .ppx-year { stroke: currentColor; stroke-opacity: .45; stroke-dasharray: 2 3; }
+.ppx-legend { list-style: none; padding: 0; margin: 6px 0; font-size: 13px; }
+.ppx-legend li { margin: 3px 0; }
+.ppx-key { display: inline-block; width: 14px; height: 4px; margin-right: 6px; vertical-align: middle; }
+.ppx-src p { margin: 4px 0; color: var(--muted); }
+.ppx-sub { margin: 0 0 4px; color: var(--muted); font-size: 13px; }

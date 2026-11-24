@@ -111,9 +111,9 @@ echo json_encode(array_map(fn($f) => $f['key'] . ($f['replaces'] ? '+' : ''), in
         assert.deepStrictEqual(r, ['2025-a00+', '2026-t02', '2026-m07', '2026-m08', '2026-m09']);
         // l'ancienne liste (insee_remote_files) ne propose plus le trimestre en doublon avec ses mois
         const old = php(tmp, site, String.raw`$u = 'https://static.data.gouv.fr/x/'; $pdo->exec("INSERT INTO insee_deces_imports(filename,row_count,inserted_count) VALUES('deces-2026-m06.txt',1,1)");
-$l = insee_remote_files($pdo, [['url' => $u.'deces-2026-m07.txt'], ['url' => $u.'deces-2026-t3.txt']])['files']; $pdo->exec("DELETE FROM insee_deces_imports");
+$l = insee_remote_files($pdo, [['url' => $u.'deces-2026-m06.txt'], ['url' => $u.'deces-2026-m07.txt'], ['url' => $u.'deces-2026-t3.txt']])['files']; $pdo->exec("DELETE FROM insee_deces_imports");
 echo json_encode(array_map(fn($f) => [$f['key'], $f['new'], $f['superseded']], $l));`);
-        assert.deepStrictEqual(old, [['2026-t03', false, true], ['2026-m07', true, false]]);
+        assert.deepStrictEqual(old, [['2026-t03', false, true], ['2026-m07', true, false], ['2026-m06', false, false]]);
     });
     let steps = 0;
     await t('⤓ Tout installer : dans l’ordre (1970 → aujourd’hui), par petits pas ; pause au milieu d’un fichier, reprise dans un autre processus, sans doublon', async () => {

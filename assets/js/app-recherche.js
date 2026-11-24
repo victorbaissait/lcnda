@@ -1045,24 +1045,42 @@
         out.push(a===b?label(a):`${a.year} – ${label(b)}`);
         return out.join(', ');
     }
-    function imJobHtml(job){
+    function imJobParts(job){
         const ro=imKiosk();
         const pct=job.work_total?Math.min(100,Math.floor(job.work_done/job.work_total*100)):0;
         const cur=job.current;
         const phase=!cur?'':cur.phase==='download'?i18n('téléchargement'):cur.phase==='import'?i18n('rangement dans la base'):i18n('retrait des mois remplacés par l’année');
         const left=imLeft(job);
-        let line2=`${i18n('Fichier {i} sur {n}',{i:Math.min(job.total,job.done+1),n:job.total})}${cur?` · <b>${escapeHtml(cur.label)}</b> (${escapeHtml(phase)})`:''}`;
-        let line3=`${i18n('{a} sur {b} téléchargés',{a:imSize(job.bytes_done),b:imSize(job.bytes_total)})}${left&&IM.running?` · ${i18n('encore environ {t}',{t:left})}`:''}`;
-        let state='';
-        if(job.status==='paused')state=`<p class="muted">⏸ ${i18n('En pause. Tu peux reprendre quand tu veux, même après avoir fermé l’app.')}</p>`;
-        else if(job.status==='error')state=`<p class="h-offsite-sentence is-warn">⚠️ ${escapeHtml(job.error||i18n('L’installation s’est arrêtée.'))}</p>`;
-        else if(IM.offline)state=`<p class="muted">📴 ${i18n('Pas de connexion à Internet : ça reprendra tout seul dès qu’elle revient.')}</p>`;
-        else if(IM.waitUntil)state=`<p class="muted">📴 ${escapeHtml(job.error||i18n('Connexion coupée'))} ${i18n('(dans {n} s)',{n:Math.max(1,Math.round((IM.waitUntil-Date.now())/1000))})}</p>`;
-        else if(job.status==='running'&&!IM.running)state=`<p class="muted">${i18n('En attente : rouvre cette page ou clique sur « Reprendre ».')}</p>`;
+        const lines=`${i18n('Fichier {i} sur {n}',{i:Math.min(job.total,job.done+1),n:job.total})}${cur?` · <b>${escapeHtml(cur.label)}</b> (${escapeHtml(phase)})`:''}<br>${i18n('{a} sur {b} téléchargés',{a:imSize(job.bytes_done),b:imSize(job.bytes_total)})}${left&&IM.running?` · ${i18n('encore environ {t}',{t:left})}`:''}`;
+        let st='';
+        if(job.status==='paused')st=`<p class="muted">⏸ ${i18n('En pause. Tu peux reprendre quand tu veux, même après avoir fermé l’app.')}</p>`;
+        else if(job.status==='error')st=`<p class="h-offsite-sentence is-warn">⚠️ ${escapeHtml(job.error||i18n('L’installation s’est arrêtée.'))}</p>`;
+        else if(IM.offline)st=`<p class="muted">📴 ${i18n('Pas de connexion à Internet : ça reprendra tout seul dès qu’elle revient.')}</p>`;
+        else if(IM.waitUntil)st=`<p class="muted">📴 ${escapeHtml(job.error||i18n('Connexion coupée'))} ${i18n('(dans {n} s)',{n:Math.max(1,Math.round((IM.waitUntil-Date.now())/1000))})}</p>`;
+        else if(job.status==='running'&&!IM.running)st=`<p class="muted">${i18n('En attente : rouvre cette page ou clique sur « Reprendre ».')}</p>`;
         const btns=ro?'':job.status==='running'&&IM.running?`<button type="button" class="button small secondary" data-im-pause>⏸ ${i18n('Pause')}</button>`
             :`<button type="button" class="button small" data-im-resume>▶ ${job.status==='error'?i18n('Réessayer'):i18n('Reprendre')}</button><button type="button" class="button small secondary" data-im-cancel>✕ ${i18n('Abandonner')}</button>`;
-        return `<div class="im-job" data-im-job><p style="margin:.2rem 0"><b>⤓ ${i18n('Installation des décès INSEE')}</b> — ${pct} %</p><progress max="100" value="${pct}" style="width:100%;height:14px" aria-label="${escapeHtml(i18n('Avancée de l’installation'))}"></progress><p class="muted" style="margin:.3rem 0">${line2}<br>${line3}</p>${state}<div class="page-actions">${btns}</div></div>`;
+        return {pct,lines,st,btns};
     }
+    function imJobHtml(job){
+        const x=imJobParts(job);
+        return `<div class="im-job" data-im-job><p style="margin:.2rem 0"><b>⤓ ${i18n('Installation des décès INSEE')}</b> — <span data-im-pct>${x.pct}</span> %</p><progress max="100" value="${x.pct}" style="width:100%;height:14px" aria-label="${escapeHtml(i18n('Avancée de l’installation'))}"></progress><p class="muted" style="margin:.3rem 0" data-im-lines>${x.lines}</p><div data-im-st>${x.st}</div><div class="page-actions" data-im-btns>${x.btns}</div></div>`;
+    }
+    // la barre change à chaque pas : on ne remplace que ce qui a changé (un bouton qu'on est en train de cliquer reste en place)
+    function imPatch(host,html,job,partsFn){
+        if(host._imHtml===html)return;
+        const el=host.querySelector('[data-im-job]');
+        const x=job&&partsFn?partsFn(job):null;
+        if(el&&x&&host._imShape===imShape(html)){
+            el.querySelector('progress').value=x.pct;
+            const set=(sel,v,prop='innerHTML')=>{const n=el.querySelector(sel);if(n&&n[prop]!==String(v))n[prop]=v;};
+            set('[data-im-pct]',x.pct,'textContent');set('[data-im-lines]',x.lines);set('[data-im-st]',x.st);
+            const bt=el.querySelector('[data-im-btns]');if(bt&&bt._h!==x.btns){bt.innerHTML=x.btns;bt._h=x.btns;}
+        }else{host.innerHTML=html;const bt=host.querySelector('[data-im-btns]');if(bt)bt._h=x?.btns;}
+        host._imHtml=html;host._imShape=imShape(html);
+    }
+    // la forme du cadre sans ce qui bouge à chaque pas (le texte de la barre)
+    const imShape=html=>html.replace(/<div class="im-job"[\s\S]*?<div class="page-actions" data-im-btns>/,'[job]');
     /** le cadre « Décès INSEE » : en cours / nouveau / tout installer / ce qui est là */
     function imBoxHtml(){
         const s=IM.status;
@@ -1093,20 +1111,27 @@
         return parts.join('');
     }
     // la petite pastille en bas de l'écran, quand on n'est pas sur la page des décès
-    function imChipHtml(job){
+    function imChipParts(job){
         const pct=job.work_total?Math.min(100,Math.floor(job.work_done/job.work_total*100)):0;
         const txt=job.status==='paused'?i18n('Décès INSEE : en pause ({p} %)',{p:pct}):job.status==='error'?i18n('Décès INSEE : arrêté'):i18n('Décès INSEE : {p} % ({i}/{n})',{p:pct,i:job.done,n:job.total});
-        return `<button type="button" data-im-chip-open style="all:unset;cursor:pointer;display:flex;gap:.5rem;align-items:center">⤓ <span>${escapeHtml(txt)}</span><progress max="100" value="${pct}" style="width:90px;height:8px"></progress></button>${job.status==='running'&&IM.running?`<button type="button" class="button small secondary" data-im-pause title="${escapeHtml(i18n('Pause'))}">⏸</button>`:job.status!=='running'||!IM.running?`<button type="button" class="button small" data-im-resume title="${escapeHtml(i18n('Reprendre'))}">▶</button>`:''}`;
+        const btns=job.status==='running'&&IM.running?`<button type="button" class="button small secondary" data-im-pause title="${escapeHtml(i18n('Pause'))}">⏸</button>`:`<button type="button" class="button small" data-im-resume title="${escapeHtml(i18n('Reprendre'))}">▶</button>`;
+        return {pct,lines:escapeHtml(txt),st:'',btns};
+    }
+    function imChipHtml(job){
+        const x=imChipParts(job);
+        return `<div data-im-job style="display:flex;gap:.5rem;align-items:center"><button type="button" data-im-chip-open style="all:unset;cursor:pointer;display:flex;gap:.5rem;align-items:center">⤓ <span data-im-lines>${x.lines}</span><progress max="100" value="${x.pct}" style="width:90px;height:8px"></progress></button><span data-im-btns>${x.btns}</span></div>`;
     }
     function imPaint(){
         const boxes=$$('[data-im-box]');
-        boxes.forEach(b=>{b.innerHTML=imBoxHtml();});
+        boxes.forEach(b=>imPatch(b,imBoxHtml(),IM.status?.job,imJobParts));
         const job=IM.status?.job&&['running','paused','error'].includes(IM.status.job.status)?IM.status.job:null;
         let chip=$('#im-chip');
         const visible=boxes.some(b=>b.offsetParent!==null);
         if(job&&!visible&&!imKiosk()){
             if(!chip){document.body.insertAdjacentHTML('beforeend','<div id="im-chip" role="status" style="position:fixed;left:12px;bottom:12px;z-index:60;background:var(--panel,#fff);border:1px solid var(--line,#ccc);border-radius:10px;padding:.35rem .6rem;box-shadow:0 2px 10px rgba(0,0,0,.15);display:flex;gap:.5rem;align-items:center;font-size:.85rem"></div>');chip=$('#im-chip');}
-            chip.innerHTML=imChipHtml(job);
+            const x=imChipParts(job),el=chip.querySelector('[data-im-job]');
+            if(el){el.querySelector('progress').value=x.pct;el.querySelector('[data-im-lines]').innerHTML=x.lines;const bt=el.querySelector('[data-im-btns]');if(bt._h!==x.btns){bt.innerHTML=x.btns;bt._h=x.btns;}}
+            else chip.innerHTML=imChipHtml(job);
         }else chip?.remove();
     }
     // un seul écouteur pour tous les boutons (cadre de la page, fenêtre de détail, pastille)

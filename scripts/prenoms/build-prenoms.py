@@ -122,9 +122,6 @@ def read_insee(path, acc, zone_of, essai, dept_col):
         k = '' if rare else key(name)
         if not rare and not k:
             continue
-        if essai and not rare and k not in ESSAI_NAMES:
-            acc.add(zone, int(row[i_s]), int(y), '', int(row[i_c]), True)  # compte dans le total, pas gardé
-            continue
         acc.add(zone, int(row[i_s]), int(y), k, int(row[i_c]), rare)
 
 
@@ -145,8 +142,7 @@ def read_ch(path, sex, acc, zone, essai):
         for i in range(2, min(len(row), len(head))):
             h, v = head[i], row[i]
             if isinstance(h, str) and h.startswith('J_') and isinstance(v, (int, float)) and v > 0:
-                keep = not essai or k in ESSAI_NAMES
-                acc.add(zone, sex, int(h[2:]), k, int(v), not keep)
+                acc.add(zone, sex, int(h[2:]), k, int(v))
 
 
 def read_qc(path, sex, acc, zone, essai):
@@ -161,8 +157,7 @@ def read_qc(path, sex, acc, zone, essai):
             for i, y in years:
                 v = row[i].strip() if i < len(row) else ''
                 if v.isdigit() and int(v) > 0:
-                    keep = not essai or k in ESSAI_NAMES
-                    acc.add(zone, sex, y, k, int(v), not keep)
+                    acc.add(zone, sex, y, k, int(v))
 
 
 def build(args):
@@ -209,6 +204,8 @@ def build(args):
         for i, (nm, n) in enumerate(ranked):
             if n != prev:
                 rank, prev = i + 1, n
+            if args.essai and nm not in ESSAI_NAMES:  # le pack d'essai garde quelques prénoms, avec leur vrai rang
+                continue
             if nm not in names:
                 names[nm] = len(names) + 1
             rows.append((names[nm], zone, sex, year, n, rank))

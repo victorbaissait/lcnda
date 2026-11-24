@@ -1779,23 +1779,40 @@
     }
     ext.graphStats.firstnames_france = async token => {
         const st = S(), minYear = Number(st.hNamesMinYear) || 1900;
-        const data = await api('firstnames_france', {min_year: minYear});
+        // 📊 la zone de comparaison (pack « Prénoms d’ici et d’ailleurs » : France, un département, Suisse, Québec)
+        if (st.hNamesZone === undefined) { try { st.hNamesZone = Number(localStorage.getItem('genealogie-prenoms-zone')) || 0; } catch (_) { st.hNamesZone = 0; } }
+        const data = await api('firstnames_france', {min_year: minYear, ...(st.hNamesZone ? {zone: st.hNamesZone} : {})});
         if (token !== st.workspaceToken || st.module !== 'graphiques') return;
         const meta = data.meta;
         const rows = data.names || [];
+        const zones = data.zones || [];
         const from = meta ? Math.max(meta.from, minYear) : minYear, to = meta ? meta.to : new Date().getFullYear();
+        const where = meta?.pack ? meta.zone_where : i18n('en France');
         const phrase = r => {
             if (!meta) return '';
-            if (!r.peak_year) return i18n('<em>{name}</em> : prénom très rare en France (moins de 3 naissances par an), absent du fichier.', {name: esc(r.name)});
+            if (!r.peak_year) return meta.pack ? i18n('<em>{name}</em> : prénom rare {where}, absent du fichier.', {name: esc(r.name), where: esc(where)}) : i18n('<em>{name}</em> : prénom très rare en France (moins de 3 naissances par an), absent du fichier.', {name: esc(r.name)});
             const given = r.family_years.map(y => { const diff = y - r.peak_year; return `${y} ${Math.abs(diff) <= 2 ? i18n('(en pleine mode)') : diff < 0 ? i18n('({n} ans avant le pic : en avance)', {n: -diff}) : i18n('({n} ans après le pic)', {n: diff})}`; });
-            return i18n('<strong>{name}</strong> : au sommet en France vers <strong>{year}</strong> ({n} bébés). Ta famille l’a donné en {list}.', {name: esc(r.name), year: String(r.peak_year), n: fmt(r.peak_count), list: given.join(', ')});
+            return meta.pack ? i18n('<strong>{name}</strong> : au sommet {where} vers <strong>{year}</strong> ({n} enfants). Ta famille l’a donné en {list}.', {name: esc(r.name), where: esc(where), year: String(r.peak_year), n: fmt(r.peak_count), list: given.join(', ')})
+                : i18n('<strong>{name}</strong> : au sommet en France vers <strong>{year}</strong> ({n} bébés). Ta famille l’a donné en {list}.', {name: esc(r.name), year: String(r.peak_year), n: fmt(r.peak_count), list: given.join(', ')});
         };
-        A().$('#workspace').innerHTML = `<section class="page">${pageHeader('STATISTIQUES', 'Prénoms : la famille et la France', 'La mode des prénoms de ta famille comparée à la France entière, d’après le fichier public des prénoms de l’INSEE (naissances depuis 1900 : il n’y a pas de données avant).')}
-            <section class="maintenance-panel"><h3>Fichier des prénoms de l’INSEE</h3>${meta ? `<p>✅ ${i18n('{n} lignes importées, de {a} à {b}', {n: fmt(meta.rows), a: String(meta.from), b: String(meta.to)})}${meta.file ? ` (${esc(meta.file)})` : ''}.</p>` : '<p>Pas encore importé. Télécharge le « Fichier des prénoms — France » (CSV, quelques Mo) sur le site de l’INSEE, puis importe-le ici. Il reste sur ton ordinateur.</p>'}
+        const manual = meta?.pack ? meta.manual : meta;
+        const COUNTRY = {FR: 'France', CH: 'Suisse', QC: 'Québec'};
+        const zoneSelect = zones.length ? `<label class="h-inline">${esc(i18n('Comparer avec'))} <select id="h-names-zone">${['FR', 'CH', 'QC'].filter(c => zones.some(z => z.country === c)).map(c => `<optgroup label="${esc(i18n(COUNTRY[c]))}">${zones.filter(z => z.country === c).sort((a, b) => (a.code === '' ? -1 : b.code === '' ? 1 : a.code.localeCompare(b.code))).map(z => `<option value="${z.country === 'FR' && z.code === '' ? 0 : z.id}" ${(meta?.zone === z.id) ? 'selected' : ''}>${esc(z.code === '' ? i18n('{c} entière', {c: i18n(COUNTRY[c])}) : `${z.code} — ${z.name}`)}${z.country === 'CH' && z.code === '' ? ' ' + esc(i18n('(personnes vivant en Suisse)')) : ''}</option>`).join('')}</optgroup>`).join('')}</select></label>` : '';
+        const manualBlock = `<p>${manual ? `✅ ${i18n('{n} lignes importées, de {a} à {b}', {n: fmt(manual.rows), a: String(manual.from), b: String(manual.to)})}${manual.file ? ` (${esc(manual.file)})` : ''}.` : 'Télécharge le « Fichier des prénoms — France » (CSV, quelques Mo) sur le site de l’INSEE, puis importe-le ici. Il reste sur ton ordinateur.'}</p>
                 <p><a href="https://www.insee.fr/fr/statistiques/2540004" target="_blank" rel="noopener noreferrer">Fichier des prénoms sur insee.fr ↗</a> · <a href="https://www.data.gouv.fr/fr/datasets/fichier-des-prenoms-depuis-1900/" target="_blank" rel="noopener noreferrer">sur data.gouv.fr ↗</a></p>
-                <form id="h-prenoms-import" class="page-actions"><input type="file" name="file" accept=".csv,.txt,.zip" required><button class="button small" type="submit">${meta ? 'Remplacer' : 'Importer'}</button><span class="muted" data-h-import-status></span></form>
+                <form id="h-prenoms-import" class="page-actions"><input type="file" name="file" accept=".csv,.txt,.zip" required><button class="button small" type="submit">${manual ? 'Remplacer' : 'Importer'}</button><span class="muted" data-h-import-status></span></form>`;
+        const hasPack = !!ext.prenomsPays;
+        A().$('#workspace').innerHTML = `<section class="page">${pageHeader('STATISTIQUES', 'Prénoms : la famille et la France', 'La mode des prénoms de ta famille comparée à la France entière, à un département, à la Suisse ou au Québec, d’après les fichiers publics des prénoms (en France : naissances depuis 1900, il n’y a pas de données avant).')}
+            <section class="maintenance-panel"><h3>${esc(i18n('Fichiers des prénoms'))}</h3>
+                ${hasPack ? '<div data-h-prenoms-pack></div>' : ''}
+                ${meta?.pack ? `<p>✅ ${esc(i18n('Comparé avec : {z} ({a}–{b})', {z: meta.zone_name, a: String(meta.from), b: String(meta.to)}))}${meta.source ? ` · <small>${esc(meta.source.mention)}</small>` : ''}</p>` : ''}
+                ${zoneSelect}
+                ${hasPack ? `<details class="h-prenoms-manual" ${!meta?.pack && manual ? 'open' : ''}><summary>${esc(i18n('Ou importer un fichier de l’INSEE (France entière, sans Internet)'))}</summary>${manualBlock}</details>` : manualBlock}
                 <label class="h-inline">Prénoms donnés à partir de <select id="h-names-min">${[1900, 1920, 1945, 1970].map(y => `<option value="${y}" ${minYear === y ? 'selected' : ''}>${y}</option>`).join('')}</select></label></section>
-            ${rows.length ? `<div class="data-table-wrap"><table class="data-table h-names-table"><thead><tr><th>Prénom</th><th>Dans la famille</th><th>${i18n('En France ({a}–{b})', {a: String(from), b: String(to)})}</th><th>Comparaison</th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.name)}</strong> <small>${r.sex === 2 ? '♀' : r.sex === 1 ? '♂' : ''}</small></td><td>${r.people.slice(0, 6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}${r.people.length > 6 ? `<span data-h-names-more hidden><br>${r.people.slice(6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}</span><br><button type="button" class="link-button" data-h-names-toggle data-more="${r.people.length - 6}" aria-expanded="false">+ ${r.people.length - 6} personne${r.people.length - 6 > 1 ? 's' : ''}</button>` : ''}</td><td>${meta && r.peak_year ? sparkline(r.series, r.family_years, from, to, r.peak_year) : '—'}</td><td>${phrase(r)}</td></tr>`).join('')}</tbody></table></div><p class="muted">Courbe : nombre de naissances en France chaque année ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.</p>` : empty(i18n('Aucune naissance datée depuis {year} dans ta base.', {year: String(minYear)}))}</section>`;
+            ${rows.length ? `<div class="data-table-wrap"><table class="data-table h-names-table"><thead><tr><th>Prénom</th><th>Dans la famille</th><th>${meta?.pack ? esc(`${meta.zone_name} (${from}–${to})`) : i18n('En France ({a}–{b})', {a: String(from), b: String(to)})}</th><th>Comparaison</th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.name)}</strong> <small>${r.sex === 2 ? '♀' : r.sex === 1 ? '♂' : ''}</small></td><td>${r.people.slice(0, 6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}${r.people.length > 6 ? `<span data-h-names-more hidden><br>${r.people.slice(6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}</span><br><button type="button" class="link-button" data-h-names-toggle data-more="${r.people.length - 6}" aria-expanded="false">+ ${r.people.length - 6} personne${r.people.length - 6 > 1 ? 's' : ''}</button>` : ''}</td><td>${meta && r.peak_year ? sparkline(r.series, r.family_years, from, to, r.peak_year) : '—'}</td><td>${phrase(r)}</td></tr>`).join('')}</tbody></table></div><p class="muted">${meta?.pack ? esc(i18n('Courbe : nombre d’enfants comptés chaque année ({z}) ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.', {z: meta.zone_name})) : 'Courbe : nombre de naissances en France chaque année ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.'}</p>` : empty(i18n('Aucune naissance datée depuis {year} dans ta base.', {year: String(minYear)}))}</section>`;
+        // ⤓ Installer / 🗑 Supprimer le pack (assets/js/heritage-prenoms-pays.js) : la page se redessine quand il change
+        const packHost = A().$('[data-h-prenoms-pack]');
+        if (packHost) ext.prenomsPays.panel(packHost, () => { if (token === st.workspaceToken) ext.graphStats.firstnames_france(++st.workspaceToken); });
         // « ＋ 12 personnes » : déplie (ou replie) le reste de la liste
         A().$('#workspace > section').addEventListener('click', event => {
             const button = event.target.closest('[data-h-names-toggle]'); if (!button) return;
@@ -1805,6 +1822,7 @@
             button.textContent = open ? 'Replier' : `+ ${n} personne${n > 1 ? 's' : ''}`;
         });
         A().$('#h-names-min').addEventListener('change', event => { st.hNamesMinYear = Number(event.target.value); ext.graphStats.firstnames_france(++st.workspaceToken); });
+        A().$('#h-names-zone')?.addEventListener('change', event => { st.hNamesZone = Number(event.target.value) || 0; try { localStorage.setItem('genealogie-prenoms-zone', String(st.hNamesZone)); } catch (_) {} ext.graphStats.firstnames_france(++st.workspaceToken); });
         A().$('#h-prenoms-import').addEventListener('submit', async event => {
             event.preventDefault();
             const fd = new FormData(event.currentTarget); fd.append('csrf', st.csrf);

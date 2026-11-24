@@ -132,7 +132,7 @@ echo json_encode(['jean' => $jean, 'marie' => $marie, 'near' => $near, 'vague' =
             assert.match(await p.textContent('.gov-ev'), /🏰 en 1870 : Kirchspiel Lacombsdorf, Kreis Durandsberg, Province de Lacombie, Royaume de Durandie/);
             await p.click('.gov-ev button');
             await p.waitForSelector('dialog[open] [data-gov-obj="LACORFJO70AA"]', {timeout: 10000});
-            console.log(await p.evaluate(() => document.querySelector('dialog[open] .gov-names')?.outerHTML));assert.match(await p.textContent('dialog[open]'), /Lakomice \(polonais, depuis 1945\)/);
+            assert.match(await p.textContent('dialog[open]'), /Lakomice \(polonais, depuis 1945\)/);
             assert.match(await p.textContent('dialog[open]'), /CC BY-SA/);
             await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
         });
@@ -142,8 +142,7 @@ echo json_encode(['jean' => $jean, 'marie' => $marie, 'near' => $near, 'vague' =
             await p.waitForSelector('[data-gov-place] [data-gov-obj]', {timeout: 20000});
             const txt = await p.textContent('[data-gov-place]');
             assert.match(txt, /Ce lieu dans GOV/); assert.match(txt, /Trouvé par le nom et la position/); assert.match(txt, /en 1870 : Kirchspiel Lacombsdorf/);
-            console.log(await p.evaluate(() => { const b = document.querySelector('[data-gov-place] [data-gov-link]'); const r = b.getBoundingClientRect(); let e = b, out = []; while (e) { const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden' || e.hidden) out.push(e.className + '|' + cs.display + '|' + e.hidden); e = e.parentElement; } return JSON.stringify([r.x, r.y, r.width, r.height, out]); })); console.log(await p.evaluate(() => document.querySelector('dialog[open] .gov-names')?.outerHTML || 'nodialog'));
-            await p.click('[data-gov-place] [data-gov-link]');
+            await p.$eval('[data-gov-place] [data-gov-link]', b => b.click()); // la page de la monographie bouge encore (zoom) : clic direct
             await p.waitForFunction(() => /relié à GOV/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 10000});
             assert.strictEqual((await api('gov_place', {id: ID.near})).how, 'link');
             await undoLast(/relié à GOV/);
@@ -154,7 +153,7 @@ echo json_encode(['jean' => $jean, 'marie' => $marie, 'near' => $near, 'vague' =
             await p.waitForSelector('[data-gov-place] .gov-choice', {timeout: 20000});
             assert.strictEqual((await p.$$('[data-gov-place] .gov-choice')).length, 2);
             assert.match(await p.textContent('[data-gov-place]'), /Plusieurs lieux de GOV portent ce nom/);
-            await p.click('[data-gov-place] [data-gov-link="LACORFJO70AA"]');
+            await p.$eval('[data-gov-place] [data-gov-link="LACORFJO70AA"]', b => b.click());
             await p.waitForSelector('[data-gov-place] [data-gov-obj="LACORFJO70AA"]', {timeout: 10000});
             const r = await api('gov_place', {id: ID.vague}); assert.deepStrictEqual([r.how, r.year, r.object.at.sentence.slice(0, 7)], ['link', 1890, 'en 1890']);
             assert.ok(Object.values((await api('gov_events', {ids: '3'})).events).length === 1, 'l’événement de Marie LACOMBE suit le lien');
@@ -180,11 +179,10 @@ echo json_encode(['jean' => $jean, 'marie' => $marie, 'near' => $near, 'vague' =
             assert.match((await post('gov_place_add_undo', {place_id: ID.near})).error, /sert déjà/);
         });
         await t('choix d’un lieu : « 🏰 Chercher … dans les lieux anciens (GOV) »', async () => {
-            const has = await p.evaluate(() => { const A = window.LCNDA_APP; return !!(A.picker || window.LCNDA_PICKER); });
-            const html = await p.evaluate(() => {
+            // un menu de lieux tel que app-picker.js le dessine (champ 📍, liste ouverte)
+            await p.evaluate(() => {
                 const d = document.createElement('div'); d.innerHTML = '<div class="pk-search"><div class="pk-box"><span class="pk-ico">📍</span><input class="pk-input" value="Lakom"></div><div class="pk-list" role="listbox" hidden></div></div>';
-                document.body.appendChild(d); const l = d.querySelector('.pk-list'); l.innerHTML = '<div class="pk-empty">x</div>'; l.hidden = false; window.__govPk = d; return true; });
-            assert.ok(html || has);
+                document.body.appendChild(d); const l = d.querySelector('.pk-list'); l.innerHTML = '<div class="pk-empty">x</div>'; l.hidden = false; window.__govPk = d; });
             await p.waitForSelector('.pk-list [data-gov-pk]', {timeout: 5000});
             await p.click('.pk-list [data-gov-pk]');
             await p.waitForSelector('dialog[open] [data-gov-hit="LACORFJO70AA"]', {timeout: 10000});
