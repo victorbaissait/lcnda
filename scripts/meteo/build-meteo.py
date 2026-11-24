@@ -1519,14 +1519,16 @@ def do_20cr(db, years, boxes, test=False, net=None):
         lats = lons = None
         for k, (path, var) in C20_FILES.items():
             url = C20_OPENDAP + path.format(year=y)
-            try:
-                ds = nc.Dataset(url)
-            except OSError:
+
+            def open_full():
                 # sans OPeNDAP : le fichier entier (≈ 50 Mo) dans les téléchargements
                 if net is None:
                     raise Stop(f'20CR {y} : fichier inaccessible ({url}).')
-                p = net.get(C20_HTTP + path.format(year=y), f'20cr-{var}-{y}.nc', f'20CR {var} {y}')
-                ds = nc.Dataset(p)
+                return nc.Dataset(net.get(C20_HTTP + path.format(year=y), f'20cr-{var}-{y}.nc', f'20CR {var} {y}'))
+            try:
+                ds = nc.Dataset(url)
+            except OSError:
+                ds = open_full()
             la = ds.variables['lat'][:]
             lo = ds.variables['lon'][:]
             li = [i for i, x in enumerate(la) if s_ - 1 <= x <= n_ + 1]
@@ -1537,8 +1539,23 @@ def do_20cr(db, years, boxes, test=False, net=None):
             for prev, cur in zip(oi, oi[1:] + [None]):
                 if cur != prev + 1:
                     runs.append((start, prev)); start = cur
-            v = ds.variables[var]
-            data = np.concatenate([v[:, min(li):max(li) + 1, r0:r1 + 1] for r0, r1 in runs], axis=2)
+            # une coupure du serveur OPeNDAP (« NetCDF: Access failure ») : on rouvre et on réessaie, puis le fichier entier
+            data = None
+            for essai in range(4):
+                try:
+                    v = ds.variables[var]
+                    data = np.concatenate([v[:, min(li):max(li) + 1, r0:r1 + 1] for r0, r1 in runs], axis=2)
+                    break
+                except (RuntimeError, OSError) as err:
+                    print(f'   … 20CR {y} {var} : lecture coupée ({err}) — nouvel essai', flush=True)
+                    try:
+                        ds.close()
+                    except Exception:
+                        pass
+                    time.sleep(10 * (essai + 1))
+                    ds = nc.Dataset(url) if essai < 2 else open_full()
+            if data is None:
+                raise Stop(f'20CR {y} : lecture impossible après plusieurs essais ({url}).')
             lats = [float(la[i]) for i in range(min(li), max(li) + 1)]
             lons = [float(lo[i]) for i in oi]
             cols[k] = (data, list(range(len(oi))))
