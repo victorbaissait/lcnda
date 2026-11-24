@@ -1,0 +1,41 @@
+fr ¦ vi ¦ id
+# ➕ Pages confiées, avancement, EAD, page à partager (heritage-recueil-plus.js)
+Confier {n} pages ¦ Giao {n} trang ¦ Tugaskan {n} halaman
+Confier la page ¦ Giao trang ¦ Tugaskan halaman
+Confier ¦ Giao ¦ Tugaskan
+À qui ? (vide : à personne) ¦ Giao cho ai? (để trống: không ai) ¦ Kepada siapa? (kosong: tidak kepada siapa pun)
+ex. Marie ¦ vd. Mai ¦ mis. Maria
+Pour se répartir un registre : chacun voit ses pages avec « Pages de : … » dans l’onglet État. ¦ Để chia nhau một sổ: mỗi người xem trang của mình bằng “Trang của: …” trong thẻ Tình trạng. ¦ Untuk membagi sebuah register: masing-masing melihat halamannya lewat “Halaman milik: …” di tab Status.
+{p} confiées à {w} ¦ {p} đã giao cho {w} ¦ {p} ditugaskan kepada {w}
+{p} confiées à personne ¦ {p} chưa giao cho ai ¦ {p} tidak ditugaskan kepada siapa pun
+Avancement du {a} au {b} ¦ Tiến độ từ {a} đến {b} ¦ Kemajuan dari {a} sampai {b}
+transcrites ¦ đã chép lại ¦ ditranskripsikan
+relues ou finies ¦ đã đọc lại hoặc đã xong ¦ diperiksa atau selesai
+Tout est relu ou fini. ¦ Tất cả đã được đọc lại hoặc đã xong. ¦ Semua sudah diperiksa atau selesai.
+Au rythme actuel ({r} pages relues par semaine), fini vers le {d}. ¦ Với tốc độ hiện tại ({r} trang đọc lại mỗi tuần), sẽ xong vào khoảng {d}. ¦ Dengan laju saat ini ({r} halaman diperiksa per minggu), selesai sekitar {d}.
+Pas encore de pages relues sur la période : pas d’estimation. ¦ Chưa có trang nào được đọc lại trong giai đoạn này: chưa ước tính được. ¦ Belum ada halaman yang diperiksa dalam periode ini: belum ada perkiraan.
+Pas assez de recul : l’app note l’avancement chaque jour où tu ouvres le recueil. ¦ Chưa đủ dữ liệu: ứng dụng ghi lại tiến độ mỗi ngày bạn mở tuyển tập. ¦ Data belum cukup: aplikasi mencatat kemajuan setiap hari kamu membuka kumpulan.
+Objectif : fini pour le {d} ¦ Mục tiêu: xong trước {d} ¦ Target: selesai pada {d}
+à ce rythme, en retard ¦ với tốc độ này, bị chậm ¦ dengan laju ini, terlambat
+en avance ¦ đi trước ¦ lebih cepat
+Inventaire EAD : {n} ¦ Danh mục EAD: {n} ¦ Inventaris EAD: {n}
+absente ¦ vắng mặt ¦ tidak ada
+Actes transcrits ¦ Giấy tờ đã chép lại ¦ Akta yang ditranskripsikan
+Sortes d’actes ¦ Loại giấy tờ ¦ Jenis akta
+Noms les plus fréquents ¦ Tên thường gặp nhất ¦ Nama yang paling sering
+Consulter en ligne ¦ Xem trực tuyến ¦ Lihat daring
+pages ¦ trang ¦ halaman
+absentes ¦ vắng mặt ¦ tidak ada
+Fait avec LCNDA le {d}. ¦ Làm bằng LCNDA ngày {d}. ¦ Dibuat dengan LCNDA pada {d}.
+Page à partager enregistrée : un seul fichier, qui s’ouvre dans n’importe quel navigateur. ¦ Đã lưu trang để chia sẻ: một tệp duy nhất, mở được trong mọi trình duyệt. ¦ Halaman untuk dibagikan tersimpan: satu berkas saja, bisa dibuka di peramban apa pun.
+Confiée à ¦ Đã giao cho ¦ Ditugaskan kepada
+Page à partager ¦ Trang để chia sẻ ¦ Halaman untuk dibagikan
+Pages de : ¦ Trang của: ¦ Halaman milik:
+personne (pas encore confiées) ¦ không ai (chưa giao) ¦ tidak ada (belum ditugaskan)
+Confier à… ¦ Giao cho… ¦ Tugaskan kepada…
+Objectif : tout relu pour le (facultatif) ¦ Mục tiêu: đọc lại hết trước (không bắt buộc) ¦ Target: semua diperiksa pada (opsional)
+Confier… ¦ Giao… ¦ Tugaskan…
+Personnes citées ¦ Người được nhắc đến ¦ Orang yang disebut
+Lien d’une vue ¦ Liên kết của một ảnh số ¦ Tautan sebuah gambar
+Autre exemplaire ¦ Bản khác ¦ Salinan lain
+=page absente ¦ trang thiếu ¦ halaman hilang

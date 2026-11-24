@@ -1,0 +1,155 @@
+fr ¦ sq ¦ mt
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ copa {n} ¦ biċċa {n}
+vue {n} ¦ pamja {n} ¦ immaġni {n}
+Citer ¦ Cito ¦ Iċċita
+Copie le texte : ¦ Kopjo tekstin: ¦ Ikkopja t-test:
+Communicable ¦ E konsultueshme ¦ Aċċessibbli
+le délai est passé ({y}) ¦ afati ka kaluar ({y}) ¦ l-iskadenza għaddiet ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ akti më i ri: {y}; afati {d} vjet ¦ l-att l-aktar riċenti: {y}; skadenza {d} sena
+Réservé jusqu’en {y} ¦ E rezervuar deri në {y} ¦ Riżervat sa {y}
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ akti më i ri: {y}; afati {d} vjet ({k}) ¦ l-att l-aktar riċenti: {y}; skadenza {d} sena ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ lloji i aktit nuk është thënë: 75 vjet për siguri ¦ tip ta’ att mhux speċifikat: 75 sena b’kawtela
+Sur autorisation ¦ Me autorizim ¦ B’awtorizzazzjoni
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ shkruaj vitet e përmbledhjes (ose bëj përmbajtjen e saj) që aplikacioni të llogarisë ¦ ikteb is-snin tal-ġabra (jew agħmel il-werrej tagħha) biex l-app tikkalkula
+Où il est, qui peut le voir ¦ Ku ndodhet, kush mund ta shohë ¦ Fejn tinsab, min jista’ jaraha
+service d’archives, fonds, liens, communicabilité, support… ¦ shërbimi i arkivave, fondi, lidhjet, konsultueshmëria, mbajtësi… ¦ servizz tal-arkivji, fond, links, aċċessibbiltà, mezz…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ Në listën e Cilësimet › Shërbimet e arkivave; «Vendi i ruajtjes» mbetet për tekst të lirë. ¦ Fil-lista ta’ Issettjar › Servizzi tal-arkivji; “Post fejn tinżamm” jibqa’ għal test liberu.
+Fonds ¦ Fondi ¦ Fond
+ex. Fonds de la paroisse de Sancoins ¦ p.sh. Fondi i famullisë së Sancoins ¦ eż. Fond tal-parroċċa ta’ Sancoins
+Série · sous-série ¦ Seria · nënseria ¦ Serje · sottoserje
+ex. E · 3 E (état civil) ¦ p.sh. E · 3 E (gjendja civile) ¦ eż. E · 3 E (stat ċivili)
+Lien en ligne du recueil ¦ Lidhja në internet e përmbledhjes ¦ Link online tal-ġabra
+Lien d’une vue ({n} = numéro de la vue) ¦ Lidhja e një pamjeje ({n} = numri i pamjes) ¦ Link ta’ immaġni ({n} = in-numru tal-immaġni)
+Vue = page + … ¦ Pamja = faqja + … ¦ Immaġni = paġna + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ p.sh. 2 nëse pamja 1 është kopertina dhe pamja 2 një faqe e bardhë ¦ eż. 2 jekk l-immaġni 1 hija l-qoxra u l-immaġni 2 paġna vojta
+Autre exemplaire (un autre recueil) ¦ Kopje tjetër (një përmbledhje tjetër) ¦ Kopja oħra (ġabra oħra)
+… ou décrit ¦ … ose e përshkruar ¦ … jew deskritta
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ p.sh. Koleksioni i sekretarisë së gjykatës, AD 18, 3 E 1235 ¦ eż. Kollezzjoni tar-reġistru tal-qorti, AD 18, 3 E 1235
+Communicabilité ¦ Konsultueshmëria ¦ Aċċessibbiltà
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ E llogaritur sipas viteve dhe llojeve të akteve (këshillohet) ¦ Ikkalkulata skont is-snin u t-tipi ta’ atti (rakkomandat)
+Réservée jusqu’en… ¦ E rezervuar deri në… ¦ Riżervata sa…
+Réutilisation ¦ Ripërdorimi ¦ Użu mill-ġdid
+Support ¦ Mbajtësi ¦ Mezz
+État matériel ¦ Gjendja fizike ¦ Kundizzjoni fiżika
+Numérisé par ¦ Dixhitalizuar nga ¦ Diġitalizzata minn
+ex. AD 18 (2009), moi (2026) ¦ p.sh. AD 18 (2009), unë (2026) ¦ eż. AD 18 (2009), jien (2026)
+Provenance ¦ Prejardhja ¦ Provenjenza
+ex. Dépôt de la commune, 1952 ¦ p.sh. Depozitë e bashkisë, 1952 ¦ eż. Depożitu tal-kunsill lokali, 1952
+vue = page + {n} ¦ pamja = faqja + {n} ¦ immaġni = paġna + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Ende e pathënë: «Ndrysho» → «🏛 Ku ndodhet, kush mund ta shohë». ¦ Għadu mhux speċifikat: “Editja” → “🏛 Fejn tinsab, min jista’ jaraha”.
+Citer : ¦ Cito: ¦ Iċċita:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Mënyra e leximit: fshih përmbledhjet e pakonsultueshme (këshillohet) ¦ Modalità ta’ qari: aħbi l-ġabriet mhux aċċessibbli (rakkomandat)
+En mode consultation, les recueils non communicables sont cachés. ¦ Në mënyrën e leximit, përmbledhjet e pakonsultueshme fshihen. ¦ Fil-modalità ta’ qari, il-ġabriet mhux aċċessibbli huma moħbija.
+En mode consultation, tous les recueils sont montrés. ¦ Në mënyrën e leximit, shfaqen të gjitha përmbledhjet. ¦ Fil-modalità ta’ qari, il-ġabriet kollha jintwerew.
+Vue {n} en ligne ¦ Pamja {n} në internet ¦ Immaġni {n} online
+Citer cette page ¦ Cito këtë faqe ¦ Iċċita din il-paġna
+Recueils chez eux ¦ Përmbledhjet atje ¦ Ġabriet għandhom
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} faqe · {d} të përfunduara ose të rishikuara · {a} mungojnë ¦ {p} paġni · {d} lesti jew iċċekkjati · {a} assenti
+Fonds · série ¦ Fondi · seria ¦ Fond · serje
+Transcrit · relu ¦ Transkriptuar · rishikuar ¦ Traskritt · iċċekkjat
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ Asnjë përmbledhje e lidhur me këtë shërbim: në një përmbledhje, «Ndrysho» → «🏛 Ku ndodhet» → Shërbimi i arkivave. ¦ L-ebda ġabra marbuta ma’ dan is-servizz: f’ġabra, “Editja” → “🏛 Fejn tinsab” → Servizz tal-arkivji.
+Lacunes ({n}) ¦ Boshllëqe ({n}) ¦ Lakuni ({n})
+Licence ouverte (Etalab) ¦ Licencë e hapur (Etalab) ¦ Liċenzja miftuħa (Etalab)
+CC BY ¦ CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Domen publik ¦ Dominju pubbliku
+Tous droits réservés ¦ Të gjitha të drejtat të rezervuara ¦ Id-drittijiet kollha riżervati
+À demander au service ¦ Duhet pyetur shërbimi ¦ Staqsi lis-servizz
+Microfilm ¦ Mikrofilm ¦ Mikrofilm
+Bon ¦ E mirë ¦ Tajba
+Abîmé ¦ E dëmtuar ¦ Imħassra
+Fragile (ne pas manipuler) ¦ E brishtë (mos e prek) ¦ Fraġli (tmissx)
+Restauré ¦ E restauruar ¦ Restawrata
+{n} à transcrire ¦ {n} për t’u transkriptuar ¦ {n} biex jiġu traskritti
+{n} à relire ¦ {n} për t’u rishikuar ¦ {n} biex jiġu ċċekkjati
+{n} absentes ¦ {n} mungojnë ¦ {n} assenti
+{n} à photographier ¦ {n} për t’u fotografuar ¦ {n} biex jiġu ritrattati
+pas en ligne ¦ jo në internet ¦ mhux online
+Chargement des fonds… ¦ Po ngarkohen fondet… ¦ Qed jitgħabbew il-fondi…
+La vue des fonds ne s’ouvre pas ¦ Pamja e fondeve nuk hapet ¦ Il-veduta tal-fondi ma tiftaħx
+Sans service d’archives ¦ Pa shërbim arkivash ¦ Mingħajr servizz tal-arkivji
+Sans fonds ¦ Pa fond ¦ Mingħajr fond
+{n} · {t} % transcrit · {r} % relu ¦ {n} · {t} % e transkriptuar · {r} % e rishikuar ¦ {n} · {t} % traskritt · {r} % iċċekkjat
+recueils · {s} ¦ përmbledhje · {s} ¦ ġabriet · {s}
+pages attendues ¦ faqe të pritura ¦ paġni mistennija
+photographiées ¦ të fotografuara ¦ ritrattati
+transcrites · {r} % relues ¦ të transkriptuara · {r} % të rishikuara ¦ traskritti · {r} % iċċekkjati
+pages absentes · {g} ¦ faqe që mungojnë · {g} ¦ paġni assenti · {g}
+Montrer : ¦ Shfaq: ¦ Uri:
+Colonnes… ¦ Kolonat… ¦ Kolonni…
+État des fonds ¦ Gjendja e fondeve ¦ Stat tal-fondi
+Aucun recueil ne correspond ¦ Asnjë përmbledhje nuk përputhet ¦ L-ebda ġabra ma taqbel
+Change « Montrer » ou les mots cherchés. ¦ Ndrysho «Shfaq» ose fjalët e kërkuara. ¦ Biddel “Uri” jew il-kliem imfittex.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Krijo një përmbledhje, pastaj thuaj ku ndodhet: «Ndrysho» → «🏛 Ku ndodhet». ¦ Oħloq ġabra, imbagħad għid fejn tinsab: “Editja” → “🏛 Fejn tinsab”.
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ Çdo grup paloset. Një klikim te «Mbetet» hap gjendjen e përmbledhjes. Një përmbledhje pa shërbim arkivash shkon te «Pa shërbim arkivash»: «Ndrysho» → «🏛 Ku ndodhet». ¦ Kull grupp jingħalaq. Klikk fuq “Fadal” jiftaħ l-istat tal-ġabra. Ġabra mingħajr servizz tal-arkivji tmur f’“Mingħajr servizz tal-arkivji”: “Editja” → “🏛 Fejn tinsab”.
+🏛 VUE DES FONDS ¦ 🏛 PAMJA E FONDEVE ¦ 🏛 VEDUTA TAL-FONDI
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Shëno kolonat që do të shfaqen (përmbledhja është gjithmonë aty). ¦ Immarka l-kolonni li għandhom jintwerew (il-ġabra hija dejjem hemm).
+Les recueils n’ont pas pu être lus. ¦ Përmbledhjet nuk u lexuan dot. ¦ Il-ġabriet ma setgħux jinqraw.
+Rien ne reste à faire dans tes recueils. ¦ Nuk ka mbetur asgjë për t’u bërë në përmbledhjet e tua. ¦ M’hemm xejn aktar x’isir fil-ġabriet tiegħek.
+Registres : reste à faire ¦ Regjistrat: mbetet për t’u bërë ¦ Reġistri: fadal x’isir
+Vue des fonds ¦ Pamja e fondeve ¦ Veduta tal-fondi
+=recueil ¦ përmbledhje|përmbledhje ¦ ġabra|ġabriet|ġabriet|ġabra|ġabra
+=service ¦ shërbim|shërbime ¦ servizz|servizzi|servizzi|servizz|servizz
+=lacune ¦ boshllëk|boshllëqe ¦ lakuna|lakuni|lakuni|lakuna|lakuna
+Photographié ¦ Fotografuar ¦ Ritrattat
+Reste ¦ Mbetet ¦ Fadal
+Numérotation ¦ Numërimi ¦ Numerazzjoni
+Reste à transcrire ¦ Mbetet për t’u transkriptuar ¦ Fadal x’jiġi traskritt
+Reste à relire ¦ Mbetet për t’u rishikuar ¦ Fadal x’jiġi ċċekkjat
+Avec des pages absentes ¦ Me faqe që mungojnë ¦ B’paġni assenti
+📚 RECUEILS ¦ 📚 PËRMBLEDHJET ¦ 📚 ĠABRIET
+Réglages des recueils ¦ Cilësimet e përmbledhjeve ¦ Issettjar tal-ġabriet
+Ma généalogie (conseillé) ¦ Gjenealogjia ime (këshillohet) ¦ Il-ġenealoġija tiegħi (rakkomandat)
+Centre d’archives, association ¦ Qendër arkivash, shoqatë ¦ Ċentru tal-arkivji, assoċjazzjoni
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Qendër arkivash: pamja e fondeve në fillim, kolonat mbajtësi, gjendja fizike, gjuha dhe ripërdorimi, dhe skeda («Ku ndodhet», «Kush mund ta shohë») në krye të përmbledhjes së përmbledhjeve të reja. Asgjë nuk fshihet përgjithmonë: mund të ndryshosh mendje kur të duash. ¦ Ċentru tal-arkivji: il-veduta tal-fondi l-ewwel, il-kolonni mezz, kundizzjoni fiżika, lingwa u użu mill-ġdid, u l-iskeda (“Fejn tinsab”, “Min jista’ jaraha”) fil-quċċata tas-sommarju tal-ġabriet il-ġodda. Xejn ma jinħeba għal dejjem: tista’ tbiddel fehmtek meta trid.
+Me signaler les trous de numérotation (conseillé) ¦ Më sinjalizo boshllëqet në numërim (këshillohet) ¦ Avżani dwar il-vojt fin-numerazzjoni (rakkomandat)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ Shfaq besueshmërinë e leximit në çdo faqe (këshillohet) ¦ Uri l-affidabbiltà tal-qari fuq kull paġna (rakkomandat)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ Shfaq shënimet «për t’u verifikuar» (vite pa akt, kulme vdekjesh) (këshillohet) ¦ Uri r-rimarki “biex jiġu vverifikati” (snin mingħajr att, qċaċet ta’ mwiet) (rakkomandat)
+Réglages des recueils enregistrés. ¦ Cilësimet e përmbledhjeve u ruajtën. ¦ Issettjar tal-ġabriet salvat.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Asgjë për të shfaqur tani për tani: transkripto akte në Punishte (mbi fotot e faqeve), aplikacioni nxjerr prej tyre vitet, emrat, profesionet, vendet. ¦ Xejn x’turi għalissa: ittraskrivi atti fil-Laboratorju (fuq ir-ritratti tal-paġni), l-app toħroġ minnhom is-snin, l-ismijiet, ix-xogħlijiet, il-postijiet.
+Actes par année, de {a} à {b} ¦ Akte sipas vitit, nga {a} deri në {b} ¦ Atti skont is-sena, minn {a} sa {b}
+{y} : aucun acte ¦ {y}: asnjë akt ¦ {y}: l-ebda att
+{a}-{b} : aucun acte ¦ {a}-{b}: asnjë akt ¦ {a}-{b}: l-ebda att
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ regjistër i humbur, diku tjetër, apo ende i patranskriptuar? ¦ reġistru mitluf, x’imkien ieħor, jew għadu mhux traskritt?
+Marquer une lacune ¦ Shëno një boshllëk ¦ Immarka lakuna
+{y} : {n} décès ou sépultures ¦ {y}: {n} vdekje ose varrime ¦ {y}: {n} mwiet jew difniet
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ të paktën dy herë më shumë se zakonisht ({m}): epidemi, zi buke, luftë? Për t’u verifikuar. ¦ mill-inqas darbtejn aktar mis-soltu ({m}): epidemija, ġuħ, gwerra? Biex jiġi vverifikat.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} të lidhura me një skedë) ¦ {n} ({l} marbuta ma’ skeda)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ {p} % nënshkruajnë ({s} nga {t} akte që e thonë) ¦ {p} % jiffirmaw ({s} minn {t} atti li jgħidu dan)
+sans acte : {x} ¦ pa akt: {x} ¦ mingħajr att: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Llogaritur nga aktet e transkriptuara në Punishte: nuk pohohet kurrë, duhet verifikuar. ¦ Ikkalkulat mill-atti traskritti fil-Laboratorju: qatt mhu affermat, għandu jiġi vverifikat.
+{w} : aucun acte en {y} ¦ {w}: asnjë akt në {y} ¦ {w}: l-ebda att fl-{y}
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Boshllëku u shtua: Kërkime › Ndjekja e regjistrave › Boshllëqe arkivi. ¦ Lakuna miżjuda: Riċerka › Segwitu tar-reġistri › Lakuni fl-arkivji.
+Lacune notée ¦ Boshllëku u shënua ¦ Lakuna nnotata
+Calcul… ¦ Po llogaritet… ¦ Qed jikkalkula…
+Ce qu’on trouve chez eux ¦ Çfarë gjen atje ¦ X’issib għandhom
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Rregulli (Kodi francez i trashëgimisë, Code du patrimoine, L213-2): menjëherë në rastin e përgjithshëm dhe për aktet e vdekjes; 50 vjet (jeta private, dokumente ushtarake); 75 vjet (lindje, martesa, noterë, regjistrime të popullsisë); 100 vjet nëse përfshihen të mitur; 120 vjet pas lindjes për dosjet mjekësore. Aplikacioni propozon, ti korrigjon: shërbimi i arkivave ka fjalën e fundit. ¦ Regola (Kodiċi Franċiż tal-Patrimonju, Code du patrimoine, L213-2): minnufih fil-każ ġenerali u għall-atti tal-mewt; 50 sena (ħajja privata, dokumenti militari); 75 sena (twelid, żwiġijiet, nutara, ċensimenti); 100 sena jekk jikkonċernaw minorenni; 120 sena wara t-twelid għall-fajls mediċi. L-app tipproponi, int tikkoreġi: is-servizz tal-arkivji għandu l-aħħar kelma.
+Alsacien ¦ Alsasisht ¦ Alsazjan
+Catalan ¦ Katalanisht ¦ Katalan
+Flamand ¦ Flamandisht ¦ Fjamming
+Basque ¦ Baskisht ¦ Bask
+Cursive moderne ¦ Shkrim dore modern ¦ Korsiv modern
+Cursive XVIIIᵉ ¦ Shkrim dore i shek. XVIII ¦ Korsiv tas-seklu 18
+Écriture secrétaire ¦ Shkrim sekretarie ¦ Kitba tas-segretarju
+Gothique ¦ Shkrim gotik ¦ Gotiku
+Kurrent (allemande) ¦ Kurrent (gjermanisht) ¦ Kurrent (Ġermaniż)
+Imprimé ¦ I shtypur ¦ Stampat
+Dactylographié ¦ I daktilografuar ¦ Ittajpjat
+Par fonds ¦ Sipas fondit ¦ Skont il-fond
+Façon de montrer les recueils ¦ Mënyra e shfaqjes së përmbledhjeve ¦ Kif jintwerew il-ġabriet
+Où il est ¦ Ku ndodhet ¦ Fejn tinsab
+Service d’archives, fonds, cote, liens, citation ¦ Shërbimi i arkivave, fondi, shenja arkivore, lidhjet, citimi ¦ Servizz tal-arkivji, fond, referenza, links, ċitazzjoni
+Qui peut le voir ¦ Kush mund ta shohë ¦ Min jista’ jaraha
+Communicabilité, réutilisation, support, état ¦ Konsultueshmëria, ripërdorimi, mbajtësi, gjendja ¦ Aċċessibbiltà, użu mill-ġdid, mezz, kundizzjoni
+Ce qu’on y trouve ¦ Çfarë gjen në të ¦ X’issib fiha
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Akte sipas vitit, emra, profesione, vende, shënime për t’u verifikuar ¦ Atti skont is-sena, ismijiet, xogħlijiet, postijiet, rimarki biex jiġu vverifikati
+🗂 Registres : reste à faire ¦ 🗂 Regjistrat: mbetet për t’u bërë ¦ 🗂 Reġistri: fadal x’isir
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ Përmbledhjet (regjistra, dosje) ku mbeten faqe për t’u transkriptuar, për t’u rishikuar, që mungojnë ose për t’u fotografuar. ¦ Il-ġabriet (reġistri, mazzi) fejn fadal paġni biex jiġu traskritti, iċċekkjati, assenti jew biex jiġu ritrattati.
+Le lien doit commencer par http:// ou https://. ¦ Lidhja duhet të fillojë me http:// ose https://. ¦ Il-link irid jibda b’http:// jew https://.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ Lidhja e një pamjeje duhet të përmbajë {n} në vend të numrit të pamjes. ¦ Il-link ta’ immaġni jrid ikun fih {n} minflok in-numru tal-immaġni.
+Ce lien n’est pas une adresse valide. ¦ Kjo lidhje nuk është adresë e vlefshme. ¦ Dan il-link mhuwiex indirizz validu.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ Një përmbledhje nuk mund të jetë kopja e vet tjetër. ¦ Ġabra ma tistax tkun il-kopja l-oħra tagħha nnifisha.
+Mode consultation : ce recueil n’est pas communicable. ¦ Mënyra e leximit: kjo përmbledhje nuk është e konsultueshme. ¦ Modalità ta’ qari: din il-ġabra mhix aċċessibbli.
+archives|Cote ¦ Shenja arkivore ¦ Referenza

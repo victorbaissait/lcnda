@@ -1,0 +1,41 @@
+fr ¦ hr ¦ sl
+# ➕ Pages confiées, avancement, EAD, page à partager (heritage-recueil-plus.js)
+Confier {n} pages ¦ Dodijeli stranice: {n} ¦ Dodeli strani: {n}
+Confier la page ¦ Dodijeli stranicu ¦ Dodeli stran
+Confier ¦ Dodijeli ¦ Dodeli
+À qui ? (vide : à personne) ¦ Kome? (prazno: nikome) ¦ Komu? (prazno: nikomur)
+ex. Marie ¦ npr. Marija ¦ npr. Marija
+Pour se répartir un registre : chacun voit ses pages avec « Pages de : … » dans l’onglet État. ¦ Za podjelu knjige: svatko vidi svoje stranice preko „Čije stranice: …” u kartici Stanje. ¦ Za razdelitev knjige: vsak vidi svoje strani z »Čigave strani: …« v zavihku Stanje.
+{p} confiées à {w} ¦ {p} dodijeljeno: {w} ¦ {p} dodeljeno: {w}
+{p} confiées à personne ¦ {p} nije dodijeljeno nikome ¦ {p} ni dodeljeno nikomur
+Avancement du {a} au {b} ¦ Napredak od {a} do {b} ¦ Napredek od {a} do {b}
+transcrites ¦ prepisane ¦ prepisane
+relues ou finies ¦ provjerene ili gotove ¦ pregledane ali končane
+Tout est relu ou fini. ¦ Sve je provjereno ili gotovo. ¦ Vse je pregledano ali končano.
+Au rythme actuel ({r} pages relues par semaine), fini vers le {d}. ¦ Ovim tempom ({r} provjerenih stranica tjedno) gotovo oko {d}. ¦ S trenutnim tempom ({r} pregledanih strani na teden) končano okoli {d}.
+Pas encore de pages relues sur la période : pas d’estimation. ¦ Još nema provjerenih stranica u tom razdoblju: nema procjene. ¦ V tem obdobju še ni pregledanih strani: ni ocene.
+Pas assez de recul : l’app note l’avancement chaque jour où tu ouvres le recueil. ¦ Još premalo podataka: aplikacija bilježi napredak svaki dan kad otvoriš zbirku. ¦ Še premalo podatkov: aplikacija beleži napredek vsak dan, ko odpreš zbirko.
+Objectif : fini pour le {d} ¦ Cilj: gotovo do {d} ¦ Cilj: končano do {d}
+à ce rythme, en retard ¦ ovim tempom kasniš ¦ s tem tempom zamujaš
+en avance ¦ ispred plana ¦ pred načrtom
+Inventaire EAD : {n} ¦ EAD inventar: {n} ¦ Popis EAD: {n}
+absente ¦ nedostaje ¦ manjka
+Actes transcrits ¦ Prepisani zapisi ¦ Prepisani akti
+Sortes d’actes ¦ Vrste zapisa ¦ Vrste aktov
+Noms les plus fréquents ¦ Najčešća prezimena ¦ Najpogostejši priimki
+Consulter en ligne ¦ Pogledaj na mreži ¦ Poglej na spletu
+pages ¦ stranice ¦ strani
+absentes ¦ nedostaju ¦ manjkajoče
+Fait avec LCNDA le {d}. ¦ Izrađeno s LCNDA {d}. ¦ Narejeno z LCNDA {d}.
+Page à partager enregistrée : un seul fichier, qui s’ouvre dans n’importe quel navigateur. ¦ Stranica za dijeljenje spremljena: jedna datoteka koja se otvara u bilo kojem pregledniku. ¦ Stran za deljenje shranjena: ena sama datoteka, ki se odpre v katerem koli brskalniku.
+Confiée à ¦ Dodijeljeno ¦ Dodeljeno
+Page à partager ¦ Stranica za dijeljenje ¦ Stran za deljenje
+Pages de : ¦ Čije stranice: ¦ Čigave strani:
+personne (pas encore confiées) ¦ nitko (još nije dodijeljeno) ¦ nihče (še ni dodeljeno)
+Confier à… ¦ Dodijeli osobi… ¦ Dodeli osebi…
+Objectif : tout relu pour le (facultatif) ¦ Cilj: sve provjereno do (neobavezno) ¦ Cilj: vse pregledano do (neobvezno)
+Confier… ¦ Dodijeli… ¦ Dodeli…
+Personnes citées ¦ Spomenute osobe ¦ Omenjene osebe
+Lien d’une vue ¦ Poveznica na snimku ¦ Povezava do posnetka
+Autre exemplaire ¦ Drugi primjerak ¦ Drug izvod
+=page absente ¦ stranica koja nedostaje|stranice koje nedostaju|stranica koje nedostaju ¦ manjkajoča stran|manjkajoči strani|manjkajoče strani|manjkajočih strani

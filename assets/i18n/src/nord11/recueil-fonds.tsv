@@ -1,0 +1,155 @@
+fr ¦ vi ¦ id
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ mảnh {n} ¦ lembaran {n}
+vue {n} ¦ hình {n} ¦ citra {n}
+Citer ¦ Trích dẫn ¦ Kutip
+Copie le texte : ¦ Sao chép văn bản: ¦ Salin teksnya:
+Communicable ¦ Được tiếp cận ¦ Boleh diakses
+le délai est passé ({y}) ¦ đã hết thời hạn ({y}) ¦ batas waktunya sudah lewat ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ giấy tờ gần nhất: {y}; thời hạn {d} năm ¦ akta terbaru: {y}; batas waktu {d} tahun
+Réservé jusqu’en {y} ¦ Hạn chế đến năm {y} ¦ Dibatasi sampai {y}
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ giấy tờ gần nhất: {y}; thời hạn {d} năm ({k}) ¦ akta terbaru: {y}; batas waktu {d} tahun ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ chưa nói loại giấy tờ: 75 năm cho chắc ¦ jenis akta tidak disebut: 75 tahun untuk berjaga-jaga
+Sur autorisation ¦ Cần được cho phép ¦ Dengan izin
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ hãy ghi các năm của tuyển tập (hoặc làm mục lục) để ứng dụng tính toán ¦ tulis tahun-tahun kumpulan ini (atau buat daftar isinya) agar aplikasi bisa menghitung
+Où il est, qui peut le voir ¦ Ở đâu, ai được xem ¦ Di mana, siapa yang boleh melihat
+service d’archives, fonds, liens, communicabilité, support… ¦ cơ quan lưu trữ, phông, liên kết, khả năng tiếp cận, vật mang tin… ¦ kantor arsip, fonds, tautan, keterbukaan akses, media…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ Trong danh sách ở Cài đặt › Cơ quan lưu trữ; “Nơi lưu giữ” vẫn dùng cho văn bản tự do. ¦ Dari daftar di Pengaturan › Layanan arsip; “Tempat penyimpanan” tetap untuk teks bebas.
+Fonds ¦ Phông ¦ Fonds
+ex. Fonds de la paroisse de Sancoins ¦ vd. Phông giáo xứ Sancoins ¦ mis. Fonds paroki Sancoins
+Série · sous-série ¦ Loạt · tiểu loạt ¦ Seri · subseri
+ex. E · 3 E (état civil) ¦ vd. E · 3 E (hộ tịch) ¦ mis. E · 3 E (catatan sipil)
+Lien en ligne du recueil ¦ Liên kết trực tuyến của tuyển tập ¦ Tautan daring kumpulan
+Lien d’une vue ({n} = numéro de la vue) ¦ Liên kết của một hình ({n} = số hình) ¦ Tautan sebuah citra ({n} = nomor citra)
+Vue = page + … ¦ Hình = trang + … ¦ Citra = halaman + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ vd. 2 nếu hình 1 là bìa và hình 2 là trang trắng ¦ mis. 2 jika citra 1 adalah sampul dan citra 2 halaman kosong
+Autre exemplaire (un autre recueil) ¦ Bản khác (một tuyển tập khác) ¦ Eksemplar lain (kumpulan lain)
+… ou décrit ¦ … hoặc mô tả ¦ … atau dideskripsikan
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ vd. Bộ của phòng lục sự tòa án, AD 18, 3 E 1235 ¦ mis. Koleksi kepaniteraan pengadilan, AD 18, 3 E 1235
+Communicabilité ¦ Khả năng tiếp cận ¦ Keterbukaan akses
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ Tính theo các năm và loại giấy tờ (nên dùng) ¦ Dihitung dari tahun dan jenis akta (disarankan)
+Réservée jusqu’en… ¦ Hạn chế đến năm… ¦ Dibatasi sampai…
+Réutilisation ¦ Tái sử dụng ¦ Penggunaan ulang
+Support ¦ Vật mang tin ¦ Media
+État matériel ¦ Tình trạng vật lý ¦ Kondisi fisik
+Numérisé par ¦ Số hóa bởi ¦ Didigitalkan oleh
+ex. AD 18 (2009), moi (2026) ¦ vd. AD 18 (2009), tôi (2026) ¦ mis. AD 18 (2009), aku (2026)
+Provenance ¦ Nguồn gốc ¦ Asal-usul
+ex. Dépôt de la commune, 1952 ¦ vd. Xã nộp lưu, 1952 ¦ mis. Titipan dari pemerintah desa, 1952
+vue = page + {n} ¦ hình = trang + {n} ¦ citra = halaman + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Chưa nói: “Sửa” → “🏛 Ở đâu, ai được xem”. ¦ Belum disebut: “Ubah” → “🏛 Di mana, siapa yang boleh melihat”.
+Citer : ¦ Trích dẫn: ¦ Kutip:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Chế độ chỉ xem: ẩn các tuyển tập chưa được tiếp cận (nên dùng) ¦ Mode lihat saja: sembunyikan kumpulan yang belum boleh diakses (disarankan)
+En mode consultation, les recueils non communicables sont cachés. ¦ Trong chế độ chỉ xem, các tuyển tập chưa được tiếp cận bị ẩn. ¦ Dalam mode lihat saja, kumpulan yang belum boleh diakses disembunyikan.
+En mode consultation, tous les recueils sont montrés. ¦ Trong chế độ chỉ xem, mọi tuyển tập đều được hiện. ¦ Dalam mode lihat saja, semua kumpulan ditampilkan.
+Vue {n} en ligne ¦ Hình {n} trực tuyến ¦ Citra {n} daring
+Citer cette page ¦ Trích dẫn trang này ¦ Kutip halaman ini
+Recueils chez eux ¦ Tuyển tập ở đó ¦ Kumpulan di sana
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} trang · {d} đã xong hoặc đã đọc lại · {a} vắng ¦ {p} halaman · {d} selesai atau diperiksa · {a} tidak ada
+Fonds · série ¦ Phông · loạt ¦ Fonds · seri
+Transcrit · relu ¦ Đã chép · đã đọc lại ¦ Ditranskripsi · diperiksa
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ Chưa có tuyển tập nào gắn với cơ quan này: trong một tuyển tập, “Sửa” → “🏛 Ở đâu” → Cơ quan lưu trữ. ¦ Belum ada kumpulan yang terhubung ke kantor ini: di sebuah kumpulan, “Ubah” → “🏛 Di mana” → Kantor arsip.
+Lacunes ({n}) ¦ Chỗ thiếu ({n}) ¦ Celah ({n})
+Licence ouverte (Etalab) ¦ Giấy phép mở (Etalab) ¦ Lisensi Terbuka (Etalab)
+CC BY ¦ CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Phạm vi công cộng ¦ Domain publik
+Tous droits réservés ¦ Bảo lưu mọi quyền ¦ Hak cipta dilindungi
+À demander au service ¦ Hỏi cơ quan lưu trữ ¦ Tanyakan ke kantor arsip
+Microfilm ¦ Vi phim ¦ Mikrofilm
+Bon ¦ Tốt ¦ Baik
+Abîmé ¦ Hư hỏng ¦ Rusak
+Fragile (ne pas manipuler) ¦ Dễ hỏng (đừng cầm vào) ¦ Rapuh (jangan dipegang)
+Restauré ¦ Đã tu bổ ¦ Sudah direstorasi
+{n} à transcrire ¦ {n} cần chép ¦ {n} perlu ditranskripsi
+{n} à relire ¦ {n} cần đọc lại ¦ {n} perlu diperiksa
+{n} absentes ¦ {n} vắng ¦ {n} tidak ada
+{n} à photographier ¦ {n} cần chụp ảnh ¦ {n} perlu difoto
+pas en ligne ¦ không trực tuyến ¦ tidak daring
+Chargement des fonds… ¦ Đang tải các phông… ¦ Memuat fonds…
+La vue des fonds ne s’ouvre pas ¦ Không mở được chế độ xem theo phông ¦ Tampilan fonds tidak bisa dibuka
+Sans service d’archives ¦ Không có cơ quan lưu trữ ¦ Tanpa kantor arsip
+Sans fonds ¦ Không có phông ¦ Tanpa fonds
+{n} · {t} % transcrit · {r} % relu ¦ {n} · {t} % đã chép · {r} % đã đọc lại ¦ {n} · {t} % ditranskripsi · {r} % diperiksa
+recueils · {s} ¦ tuyển tập · {s} ¦ kumpulan · {s}
+pages attendues ¦ trang dự kiến ¦ halaman yang diharapkan
+photographiées ¦ đã chụp ¦ sudah difoto
+transcrites · {r} % relues ¦ đã chép · {r} % đã đọc lại ¦ ditranskripsi · {r} % diperiksa
+pages absentes · {g} ¦ trang vắng · {g} ¦ halaman tidak ada · {g}
+Montrer : ¦ Hiện: ¦ Tampilkan:
+Colonnes… ¦ Cột… ¦ Kolom…
+État des fonds ¦ Tình trạng các phông ¦ Laporan fonds
+Aucun recueil ne correspond ¦ Không có tuyển tập nào khớp ¦ Tidak ada kumpulan yang cocok
+Change « Montrer » ou les mots cherchés. ¦ Hãy đổi “Hiện” hoặc từ tìm kiếm. ¦ Ubah “Tampilkan” atau kata yang dicari.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Hãy tạo một tuyển tập, rồi nói nó ở đâu: “Sửa” → “🏛 Ở đâu”. ¦ Buat sebuah kumpulan, lalu sebutkan di mana tempatnya: “Ubah” → “🏛 Di mana”.
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ Mỗi nhóm đều thu gọn được. Nhấn vào “Còn lại” để mở tình trạng của tuyển tập. Tuyển tập chưa có cơ quan lưu trữ nằm trong “Không có cơ quan lưu trữ”: “Sửa” → “🏛 Ở đâu”. ¦ Setiap kelompok bisa diciutkan. Klik “Sisa” untuk membuka status kumpulan. Kumpulan tanpa kantor arsip masuk ke “Tanpa kantor arsip”: “Ubah” → “🏛 Di mana”.
+🏛 VUE DES FONDS ¦ 🏛 XEM THEO PHÔNG ¦ 🏛 TAMPILAN FONDS
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Đánh dấu các cột muốn hiện (tuyển tập luôn có). ¦ Centang kolom yang ingin ditampilkan (kumpulan selalu ada).
+Les recueils n’ont pas pu être lus. ¦ Không đọc được các tuyển tập. ¦ Kumpulan tidak bisa dibaca.
+Rien ne reste à faire dans tes recueils. ¦ Các tuyển tập của bạn không còn gì phải làm. ¦ Tidak ada lagi yang perlu dikerjakan di kumpulanmu.
+Registres : reste à faire ¦ Sổ: còn phải làm ¦ Register: masih perlu dikerjakan
+Vue des fonds ¦ Xem theo phông ¦ Tampilan fonds
+=recueil ¦ tuyển tập ¦ kumpulan
+=service ¦ cơ quan ¦ kantor
+=lacune ¦ chỗ thiếu ¦ celah
+Photographié ¦ Đã chụp ¦ Sudah difoto
+Reste ¦ Còn lại ¦ Sisa
+Numérotation ¦ Cách đánh số ¦ Penomoran
+Reste à transcrire ¦ Còn phải chép ¦ Masih perlu ditranskripsi
+Reste à relire ¦ Còn phải đọc lại ¦ Masih perlu diperiksa
+Avec des pages absentes ¦ Có trang vắng ¦ Dengan halaman yang tidak ada
+📚 RECUEILS ¦ 📚 TUYỂN TẬP ¦ 📚 KUMPULAN
+Réglages des recueils ¦ Cài đặt tuyển tập ¦ Pengaturan kumpulan
+Ma généalogie (conseillé) ¦ Gia phả của tôi (nên dùng) ¦ Genealogiku (disarankan)
+Centre d’archives, association ¦ Trung tâm lưu trữ, hội ¦ Pusat arsip, perkumpulan
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Trung tâm lưu trữ: xem theo phông trước tiên, các cột vật mang tin, tình trạng vật lý, ngôn ngữ và tái sử dụng, và phiếu (“Ở đâu”, “Ai được xem”) ở đầu phần tóm tắt của tuyển tập mới. Không có gì bị ẩn vĩnh viễn: bạn có thể đổi ý bất cứ lúc nào. ¦ Pusat arsip: tampilan fonds lebih dulu, kolom media, kondisi fisik, bahasa dan penggunaan ulang, serta kartu (“Di mana”, “Siapa yang boleh melihat”) di bagian atas ringkasan kumpulan baru. Tidak ada yang disembunyikan selamanya: kamu bisa berubah pikiran kapan saja.
+Me signaler les trous de numérotation (conseillé) ¦ Báo cho tôi các lỗ hổng trong cách đánh số (nên dùng) ¦ Beri tahu aku jika ada lompatan dalam penomoran (disarankan)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ Hiện độ tin cậy của bản đọc trên từng trang (nên dùng) ¦ Tampilkan keandalan bacaan di setiap halaman (disarankan)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ Hiện các ghi chú “cần kiểm tra” (năm không có giấy tờ, đỉnh tử vong) (nên dùng) ¦ Tampilkan catatan “perlu dicek” (tahun tanpa akta, lonjakan kematian) (disarankan)
+Réglages des recueils enregistrés. ¦ Đã lưu cài đặt tuyển tập. ¦ Pengaturan kumpulan disimpan.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Hiện chưa có gì để hiện: hãy chép giấy tờ trong Xưởng (trên ảnh các trang), ứng dụng sẽ rút ra năm, tên, nghề nghiệp, địa điểm. ¦ Belum ada yang bisa ditampilkan: transkripsikan akta di Bengkel (pada foto halaman), aplikasi akan mengambil tahun, nama, pekerjaan, dan tempat darinya.
+Actes par année, de {a} à {b} ¦ Giấy tờ theo năm, từ {a} đến {b} ¦ Akta per tahun, dari {a} sampai {b}
+{y} : aucun acte ¦ {y}: không có giấy tờ nào ¦ {y}: tidak ada akta
+{a}-{b} : aucun acte ¦ {a}-{b}: không có giấy tờ nào ¦ {a}-{b}: tidak ada akta
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ sổ bị mất, ở nơi khác, hay chưa được chép? ¦ register hilang, ada di tempat lain, atau belum ditranskripsi?
+Marquer une lacune ¦ Đánh dấu chỗ thiếu ¦ Tandai celah
+{y} : {n} décès ou sépultures ¦ {y}: {n} ca tử vong hoặc chôn cất ¦ {y}: {n} kematian atau pemakaman
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ ít nhất gấp đôi bình thường ({m}): dịch bệnh, nạn đói, chiến tranh? Cần kiểm tra. ¦ setidaknya dua kali lipat dari biasanya ({m}): wabah, kelaparan, perang? Perlu dicek.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} gắn với một hồ sơ) ¦ {n} ({l} terhubung ke kartu)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ {p} % ký tên ({s} trên {t} giấy tờ có ghi điều này) ¦ {p} % menandatangani ({s} dari {t} akta yang menyebutkannya)
+sans acte : {x} ¦ không có giấy tờ: {x} ¦ tanpa akta: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Tính từ các giấy tờ đã chép trong Xưởng: không bao giờ là khẳng định, cần kiểm tra. ¦ Dihitung dari akta yang ditranskripsi di Bengkel: tidak pernah dipastikan, perlu dicek.
+{w} : aucun acte en {y} ¦ {w}: không có giấy tờ nào năm {y} ¦ {w}: tidak ada akta pada {y}
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Đã thêm chỗ thiếu: Nghiên cứu › Theo dõi các sổ › Chỗ thiếu trong lưu trữ. ¦ Celah ditambahkan: Riset › Pemantauan register › Celah arsip.
+Lacune notée ¦ Đã ghi chỗ thiếu ¦ Celah dicatat
+Calcul… ¦ Đang tính… ¦ Menghitung…
+Ce qu’on trouve chez eux ¦ Những gì có ở đó ¦ Apa yang ada di sana
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Quy tắc (Bộ luật Di sản Pháp, Code du patrimoine, L213-2): ngay lập tức trong trường hợp chung và với giấy khai tử; 50 năm (đời tư, tài liệu quân sự); 75 năm (khai sinh, kết hôn, công chứng, điều tra dân số); 100 năm nếu liên quan đến người chưa thành niên; 120 năm sau ngày sinh với hồ sơ y tế. Ứng dụng đề xuất, bạn sửa: cơ quan lưu trữ có tiếng nói cuối cùng. ¦ Aturan (Kode Warisan Budaya Prancis, Code du patrimoine, L213-2): langsung untuk kasus umum dan untuk akta kematian; 50 tahun (kehidupan pribadi, dokumen militer); 75 tahun (kelahiran, pernikahan, notaris, sensus); 100 tahun jika menyangkut anak di bawah umur; 120 tahun setelah kelahiran untuk berkas medis. Aplikasi mengusulkan, kamu mengoreksi: kantor arsip yang punya keputusan akhir.
+Alsacien ¦ Tiếng Alsace ¦ Bahasa Alsace
+Catalan ¦ Tiếng Catalan ¦ Bahasa Katalan
+Flamand ¦ Tiếng Flemish ¦ Bahasa Flam
+Basque ¦ Tiếng Basque ¦ Bahasa Basque
+Cursive moderne ¦ Chữ viết thảo hiện đại ¦ Tulisan sambung modern
+Cursive XVIIIᵉ ¦ Chữ viết thảo thế kỷ XVIII ¦ Tulisan sambung abad ke-18
+Écriture secrétaire ¦ Chữ thư ký ¦ Tulisan sekretaris
+Gothique ¦ Chữ Gothic ¦ Huruf Gotik
+Kurrent (allemande) ¦ Kurrent (Đức) ¦ Kurrent (Jerman)
+Imprimé ¦ In ¦ Cetak
+Dactylographié ¦ Đánh máy ¦ Ketik mesin
+Par fonds ¦ Theo phông ¦ Per fonds
+Façon de montrer les recueils ¦ Cách hiện các tuyển tập ¦ Cara menampilkan kumpulan
+Où il est ¦ Ở đâu ¦ Di mana
+Service d’archives, fonds, cote, liens, citation ¦ Cơ quan lưu trữ, phông, ký hiệu lưu trữ, liên kết, trích dẫn ¦ Kantor arsip, fonds, kode arsip, tautan, kutipan
+Qui peut le voir ¦ Ai được xem ¦ Siapa yang boleh melihat
+Communicabilité, réutilisation, support, état ¦ Khả năng tiếp cận, tái sử dụng, vật mang tin, tình trạng ¦ Keterbukaan akses, penggunaan ulang, media, kondisi
+Ce qu’on y trouve ¦ Những gì có trong đó ¦ Apa yang ada di dalamnya
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Giấy tờ theo năm, tên, nghề nghiệp, địa điểm, ghi chú cần kiểm tra ¦ Akta per tahun, nama, pekerjaan, tempat, catatan yang perlu dicek
+🗂 Registres : reste à faire ¦ 🗂 Sổ: còn phải làm ¦ 🗂 Register: masih perlu dikerjakan
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ Các tuyển tập (sổ, tập hồ sơ) còn trang cần chép, cần đọc lại, bị vắng hoặc cần chụp ảnh. ¦ Kumpulan (register, bundel) yang masih punya halaman untuk ditranskripsi, diperiksa, tidak ada, atau perlu difoto.
+Le lien doit commencer par http:// ou https://. ¦ Liên kết phải bắt đầu bằng http:// hoặc https://. ¦ Tautan harus diawali dengan http:// atau https://.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ Liên kết của một hình phải chứa {n} thay cho số hình. ¦ Tautan sebuah citra harus berisi {n} sebagai ganti nomor citra.
+Ce lien n’est pas une adresse valide. ¦ Liên kết này không phải là địa chỉ hợp lệ. ¦ Tautan ini bukan alamat yang valid.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ Một tuyển tập không thể là bản khác của chính nó. ¦ Sebuah kumpulan tidak bisa menjadi eksemplar lain dari dirinya sendiri.
+Mode consultation : ce recueil n’est pas communicable. ¦ Chế độ chỉ xem: tuyển tập này chưa được tiếp cận. ¦ Mode lihat saja: kumpulan ini belum boleh diakses.
+archives|Cote ¦ Ký hiệu lưu trữ ¦ Kode arsip

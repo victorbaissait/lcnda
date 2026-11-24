@@ -1,0 +1,41 @@
+fr ¦ cs ¦ sv ¦ da
+# ➕ Pages confiées, avancement, EAD, page à partager (heritage-recueil-plus.js)
+Confier {n} pages ¦ Svěřit stránky ({n}) ¦ Tilldela {n} sidor ¦ Tildel {n} sider
+Confier la page ¦ Svěřit stránku ¦ Tilldela sidan ¦ Tildel siden
+Confier ¦ Svěřit ¦ Tilldela ¦ Tildel
+À qui ? (vide : à personne) ¦ Komu? (prázdné: nikomu) ¦ Till vem? (tomt: ingen) ¦ Til hvem? (tomt: ingen)
+ex. Marie ¦ např. Marie ¦ t.ex. Marie ¦ f.eks. Marie
+Pour se répartir un registre : chacun voit ses pages avec « Pages de : … » dans l’onglet État. ¦ Pro rozdělení matriky: každý vidí své stránky přes „Stránky osoby: …“ na kartě Stav. ¦ För att dela upp ett register: var och en ser sina sidor med ”Sidor för: …” på fliken Status. ¦ For at dele et register op: hver ser sine sider med »Sider for: …« under fanen Status.
+{p} confiées à {w} ¦ {p} svěřeno: {w} ¦ {p} tilldelade {w} ¦ {p} tildelt {w}
+{p} confiées à personne ¦ {p} nesvěřeno nikomu ¦ {p} inte tilldelade någon ¦ {p} ikke tildelt nogen
+Avancement du {a} au {b} ¦ Postup od {a} do {b} ¦ Framsteg från {a} till {b} ¦ Fremskridt fra {a} til {b}
+transcrites ¦ přepsané ¦ transkriberade ¦ transskriberede
+relues ou finies ¦ zkontrolované nebo hotové ¦ granskade eller klara ¦ gennemsete eller færdige
+Tout est relu ou fini. ¦ Vše je zkontrolované nebo hotové. ¦ Allt är granskat eller klart. ¦ Alt er gennemset eller færdigt.
+Au rythme actuel ({r} pages relues par semaine), fini vers le {d}. ¦ Při současném tempu (zkontrolované stránky za týden: {r}) hotovo kolem {d}. ¦ I nuvarande takt ({r} granskade sidor per vecka) klart runt {d}. ¦ I det nuværende tempo ({r} gennemsete sider om ugen) færdig omkring {d}.
+Pas encore de pages relues sur la période : pas d’estimation. ¦ V tomto období zatím žádné zkontrolované stránky: bez odhadu. ¦ Inga granskade sidor under perioden ännu: ingen uppskattning. ¦ Ingen gennemsete sider i perioden endnu: intet skøn.
+Pas assez de recul : l’app note l’avancement chaque jour où tu ouvres le recueil. ¦ Zatím málo údajů: aplikace zaznamenává postup každý den, kdy otevřeš sborník. ¦ För lite historik ännu: appen noterar framstegen varje dag du öppnar samlingen. ¦ For lidt historik endnu: appen noterer fremskridtet hver dag, du åbner samlingen.
+Objectif : fini pour le {d} ¦ Cíl: hotovo do {d} ¦ Mål: klart senast {d} ¦ Mål: færdig senest {d}
+à ce rythme, en retard ¦ tímto tempem se zpozdíš ¦ i den här takten efter schemat ¦ i dette tempo bagud
+en avance ¦ v předstihu ¦ före schemat ¦ foran tidsplanen
+Inventaire EAD : {n} ¦ Inventář EAD: {n} ¦ EAD-förteckning: {n} ¦ EAD-registratur: {n}
+absente ¦ chybí ¦ saknas ¦ mangler
+Actes transcrits ¦ Přepsané záznamy ¦ Transkriberade handlingar ¦ Transskriberede akter
+Sortes d’actes ¦ Druhy záznamů ¦ Typer av handlingar ¦ Typer af akter
+Noms les plus fréquents ¦ Nejčastější příjmení ¦ Vanligaste efternamnen ¦ Hyppigste efternavne
+Consulter en ligne ¦ Zobrazit online ¦ Visa online ¦ Se online
+pages ¦ stránky ¦ sidor ¦ sider
+absentes ¦ chybí ¦ saknade ¦ manglende
+Fait avec LCNDA le {d}. ¦ Vytvořeno v LCNDA {d}. ¦ Gjord med LCNDA den {d}. ¦ Lavet med LCNDA den {d}.
+Page à partager enregistrée : un seul fichier, qui s’ouvre dans n’importe quel navigateur. ¦ Stránka ke sdílení uložena: jediný soubor, který se otevře v každém prohlížeči. ¦ Delningssida sparad: en enda fil som öppnas i vilken webbläsare som helst. ¦ Delingsside gemt: én enkelt fil, der kan åbnes i enhver browser.
+Confiée à ¦ Svěřeno ¦ Tilldelad ¦ Tildelt
+Page à partager ¦ Stránka ke sdílení ¦ Delningssida ¦ Delingsside
+Pages de : ¦ Stránky osoby: ¦ Sidor för: ¦ Sider for:
+personne (pas encore confiées) ¦ nikdo (zatím nesvěřeno) ¦ ingen (inte tilldelade än) ¦ ingen (endnu ikke tildelt)
+Confier à… ¦ Svěřit osobě… ¦ Tilldela till… ¦ Tildel til…
+Objectif : tout relu pour le (facultatif) ¦ Cíl: vše zkontrolováno do (nepovinné) ¦ Mål: allt granskat senast (valfritt) ¦ Mål: alt gennemset senest (valgfrit)
+Confier… ¦ Svěřit… ¦ Tilldela… ¦ Tildel…
+Personnes citées ¦ Zmíněné osoby ¦ Nämnda personer ¦ Nævnte personer
+Lien d’une vue ¦ Odkaz na snímek ¦ Länk till en bild ¦ Link til et billede
+Autre exemplaire ¦ Jiný exemplář ¦ Annat exemplar ¦ Andet eksemplar
+=page absente ¦ chybějící strana|chybějící strany|chybějících stran ¦ saknad sida|saknade sidor ¦ manglende side|manglende sider

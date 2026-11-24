@@ -1,0 +1,155 @@
+fr ¦ tr
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ parça {n}
+vue {n} ¦ görüntü {n}
+Citer ¦ Kaynak göster
+Copie le texte : ¦ Metni kopyala:
+Communicable ¦ Erişime açık
+le délai est passé ({y}) ¦ süre doldu ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ en yeni kayıt: {y}; süre {d} yıl
+Réservé jusqu’en {y} ¦ {y} yılına kadar kapalı
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ en yeni kayıt: {y}; süre {d} yıl ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ kayıt türü belirtilmedi: ihtiyaten 75 yıl
+Sur autorisation ¦ İzinle
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ uygulamanın hesaplayabilmesi için derlemenin yıllarını yaz (ya da içindekilerini çıkar)
+Où il est, qui peut le voir ¦ Nerede, kim görebilir
+service d’archives, fonds, liens, communicabilité, support… ¦ arşiv kurumu, fon, bağlantılar, erişilebilirlik, malzeme…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ Ayarlar › Arşiv kurumları listesinden; “Saklandığı yer” serbest metin için kalır.
+Fonds ¦ Fon
+ex. Fonds de la paroisse de Sancoins ¦ örn. Sancoins kilisesi fonu
+Série · sous-série ¦ Seri · alt seri
+ex. E · 3 E (état civil) ¦ örn. E · 3 E (nüfus kayıtları)
+Lien en ligne du recueil ¦ Derlemenin çevrimiçi bağlantısı
+Lien d’une vue ({n} = numéro de la vue) ¦ Bir görüntünün bağlantısı ({n} = görüntü numarası)
+Vue = page + … ¦ Görüntü = sayfa + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ örn. 1. görüntü kapak, 2. görüntü boş sayfaysa 2
+Autre exemplaire (un autre recueil) ¦ Başka nüsha (başka bir derleme)
+… ou décrit ¦ … ya da tarif edilmiş
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ örn. Mahkeme kalemi koleksiyonu, AD 18, 3 E 1235
+Communicabilité ¦ Erişilebilirlik
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ Yıllara ve kayıt türlerine göre hesaplanır (önerilir)
+Réservée jusqu’en… ¦ Şu tarihe kadar kapalı…
+Réutilisation ¦ Yeniden kullanım
+Support ¦ Malzeme
+État matériel ¦ Fiziksel durum
+Numérisé par ¦ Dijitalleştiren
+ex. AD 18 (2009), moi (2026) ¦ örn. AD 18 (2009), ben (2026)
+Provenance ¦ Köken
+ex. Dépôt de la commune, 1952 ¦ örn. Belediyenin teslimi, 1952
+vue = page + {n} ¦ görüntü = sayfa + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Henüz belirtilmedi: “Düzenle” → “🏛 Nerede, kim görebilir”.
+Citer : ¦ Kaynak göster:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Görüntüleme modu: erişime kapalı derlemeleri gizle (önerilir)
+En mode consultation, les recueils non communicables sont cachés. ¦ Görüntüleme modunda erişime kapalı derlemeler gizlenir.
+En mode consultation, tous les recueils sont montrés. ¦ Görüntüleme modunda tüm derlemeler gösterilir.
+Vue {n} en ligne ¦ Görüntü {n} çevrimiçi
+Citer cette page ¦ Bu sayfayı kaynak göster
+Recueils chez eux ¦ Onlardaki derlemeler
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} sayfa · {d} bitti ya da gözden geçirildi · {a} eksik
+Fonds · série ¦ Fon · seri
+Transcrit · relu ¦ Yazıya döküldü · gözden geçirildi
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ Bu kuruma bağlı derleme yok: bir derlemede “Düzenle” → “🏛 Nerede” → Arşiv kurumu.
+Lacunes ({n}) ¦ Boşluklar ({n})
+Licence ouverte (Etalab) ¦ Açık Lisans (Etalab)
+CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Kamu malı
+Tous droits réservés ¦ Tüm hakları saklıdır
+À demander au service ¦ Kuruma sorulmalı
+Microfilm ¦ Mikrofilm
+Bon ¦ İyi
+Abîmé ¦ Hasarlı
+Fragile (ne pas manipuler) ¦ Kırılgan (dokunma)
+Restauré ¦ Restore edildi
+{n} à transcrire ¦ {n} yazıya dökülecek
+{n} à relire ¦ {n} gözden geçirilecek
+{n} absentes ¦ {n} eksik
+{n} à photographier ¦ {n} fotoğraflanacak
+pas en ligne ¦ çevrimiçi değil
+Chargement des fonds… ¦ Fonlar yükleniyor…
+La vue des fonds ne s’ouvre pas ¦ Fon görünümü açılmıyor
+Sans service d’archives ¦ Arşiv kurumu yok
+Sans fonds ¦ Fon yok
+{n} · {t} % transcrit · {r} % relu ¦ {n} · %{t} yazıya döküldü · %{r} gözden geçirildi
+recueils · {s} ¦ derleme · {s}
+pages attendues ¦ beklenen sayfa
+photographiées ¦ fotoğraflandı
+transcrites · {r} % relues ¦ yazıya döküldü · %{r} gözden geçirildi
+pages absentes · {g} ¦ eksik sayfa · {g}
+Montrer : ¦ Göster:
+Colonnes… ¦ Sütunlar…
+État des fonds ¦ Fon durumu
+Aucun recueil ne correspond ¦ Eşleşen derleme yok
+Change « Montrer » ou les mots cherchés. ¦ “Göster”i ya da aranan kelimeleri değiştir.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Bir derleme oluştur, sonra nerede olduğunu belirt: “Düzenle” → “🏛 Nerede”.
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ Her grup daraltılabilir. “Kalan”a tıklamak derlemenin durumunu açar. Arşiv kurumu olmayan bir derleme “Arşiv kurumu yok” altına gider: “Düzenle” → “🏛 Nerede”.
+🏛 VUE DES FONDS ¦ 🏛 FON GÖRÜNÜMÜ
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Gösterilecek sütunları işaretle (derleme her zaman görünür).
+Les recueils n’ont pas pu être lus. ¦ Derlemeler okunamadı.
+Rien ne reste à faire dans tes recueils. ¦ Derlemelerinde yapılacak bir şey kalmadı.
+Registres : reste à faire ¦ Kayıt defterleri: yapılacaklar
+Vue des fonds ¦ Fon görünümü
+=recueil ¦ derleme|derleme
+=service ¦ kurum|kurum
+=lacune ¦ boşluk|boşluk
+Photographié ¦ Fotoğraflandı
+Reste ¦ Kalan
+Numérotation ¦ Numaralandırma
+Reste à transcrire ¦ Yazıya dökülecek
+Reste à relire ¦ Gözden geçirilecek
+Avec des pages absentes ¦ Eksik sayfaları olan
+📚 RECUEILS ¦ 📚 DERLEMELER
+Réglages des recueils ¦ Derleme ayarları
+Ma généalogie (conseillé) ¦ Soy ağacım (önerilir)
+Centre d’archives, association ¦ Arşiv merkezi, dernek
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Arşiv merkezi: önce fon görünümü, malzeme, fiziksel durum, dil ve yeniden kullanım sütunları, ve yeni derlemelerin özetinin başında kart (“Nerede”, “Kim görebilir”). Hiçbir şey kalıcı olarak gizlenmez: istediğin zaman fikrini değiştirebilirsin.
+Me signaler les trous de numérotation (conseillé) ¦ Numaralandırmadaki boşlukları bana bildir (önerilir)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ Her sayfada okumanın güvenilirliğini göster (önerilir)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ “Kontrol edilecek” notları göster (kaydı olmayan yıllar, ölüm zirveleri) (önerilir)
+Réglages des recueils enregistrés. ¦ Derleme ayarları kaydedildi.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Şimdilik gösterilecek bir şey yok: Atölye’de (sayfaların fotoğrafları üzerinde) kayıtları yazıya dök, uygulama bunlardan yılları, adları, meslekleri, yerleri çıkarır.
+Actes par année, de {a} à {b} ¦ Yıllara göre kayıtlar, {a} ile {b} arası
+{y} : aucun acte ¦ {y}: kayıt yok
+{a}-{b} : aucun acte ¦ {a}-{b}: kayıt yok
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ defter kayıp mı, başka yerde mi, yoksa henüz yazıya dökülmedi mi?
+Marquer une lacune ¦ Boşluk olarak işaretle
+{y} : {n} décès ou sépultures ¦ {y}: {n} ölüm ya da defin
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ olağanın en az iki katı ({m}): salgın, kıtlık, savaş? Kontrol edilmeli.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} tanesi bir karta bağlı)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ %{p} imza atıyor ({t} kayıttan bunu belirten {s} tanesi)
+sans acte : {x} ¦ kaydı olmayan: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Atölye’de yazıya dökülen kayıtlardan hesaplandı: asla kesin değildir, kontrol edilmeli.
+{w} : aucun acte en {y} ¦ {w}: {y} yılında kayıt yok
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Boşluk eklendi: Araştırma › Kayıt defterlerinin takibi › Arşiv boşlukları.
+Lacune notée ¦ Boşluk kaydedildi
+Calcul… ¦ Hesaplanıyor…
+Ce qu’on trouve chez eux ¦ Onlarda ne bulunur
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Kural (Fransız Miras Kanunu, Code du patrimoine, L213-2): genel durumda ve ölüm kayıtlarında hemen; 50 yıl (özel hayat, askerî belgeler); 75 yıl (doğumlar, evlilikler, noterler, nüfus sayımları); reşit olmayanlar söz konusuysa 100 yıl; tıbbi dosyalar için doğumdan sonra 120 yıl. Uygulama önerir, sen düzeltirsin: son sözü arşiv kurumu söyler.
+Alsacien ¦ Alsasça
+Catalan ¦ Katalanca
+Flamand ¦ Flamanca
+Basque ¦ Baskça
+Cursive moderne ¦ Modern el yazısı
+Cursive XVIIIᵉ ¦ 18. yüzyıl el yazısı
+Écriture secrétaire ¦ Sekreter yazısı
+Gothique ¦ Gotik yazı
+Kurrent (allemande) ¦ Kurrent (Alman)
+Imprimé ¦ Matbu
+Dactylographié ¦ Daktilo
+Par fonds ¦ Fona göre
+Façon de montrer les recueils ¦ Derlemelerin gösterilme biçimi
+Où il est ¦ Nerede
+Service d’archives, fonds, cote, liens, citation ¦ Arşiv kurumu, fon, arşiv numarası, bağlantılar, kaynak gösterme
+Qui peut le voir ¦ Kim görebilir
+Communicabilité, réutilisation, support, état ¦ Erişilebilirlik, yeniden kullanım, malzeme, durum
+Ce qu’on y trouve ¦ Neler bulunur
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Yıllara göre kayıtlar, adlar, meslekler, yerler, kontrol edilecek notlar
+🗂 Registres : reste à faire ¦ 🗂 Kayıt defterleri: yapılacaklar
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ Yazıya dökülecek, gözden geçirilecek, eksik ya da fotoğraflanacak sayfaları kalan derlemeler (defterler, dosyalar).
+Le lien doit commencer par http:// ou https://. ¦ Bağlantı http:// ya da https:// ile başlamalı.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ Bir görüntünün bağlantısı, görüntü numarasının yerine {n} içermeli.
+Ce lien n’est pas une adresse valide. ¦ Bu bağlantı geçerli bir adres değil.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ Bir derleme kendi başka nüshası olamaz.
+Mode consultation : ce recueil n’est pas communicable. ¦ Görüntüleme modu: bu derleme erişime kapalı.
+archives|Cote ¦ Arşiv numarası

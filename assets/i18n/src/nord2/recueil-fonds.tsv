@@ -1,0 +1,155 @@
+fr ¦ sk ¦ nb
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ kus {n} ¦ stykke {n}
+vue {n} ¦ snímka {n} ¦ bilde {n}
+Citer ¦ Citovať ¦ Siter
+Copie le texte : ¦ Skopíruj text: ¦ Kopier teksten:
+Communicable ¦ Sprístupnený ¦ Tilgjengelig
+le délai est passé ({y}) ¦ lehota uplynula ({y}) ¦ fristen er utløpt ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ najnovší záznam: {y}; lehota {d} rokov ¦ nyeste dokument: {y}; frist {d} år
+Réservé jusqu’en {y} ¦ Neprístupný do roku {y} ¦ Sperret til {y}
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ najnovší záznam: {y}; lehota {d} rokov ({k}) ¦ nyeste dokument: {y}; frist {d} år ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ druh záznamu neuvedený: 75 rokov pre istotu ¦ dokumenttype ikke oppgitt: 75 år for sikkerhets skyld
+Sur autorisation ¦ Na povolenie ¦ Etter søknad
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ napíš roky zborníka (alebo urob jeho obsah), aby to aplikácia vypočítala ¦ skriv inn årene for samlingen (eller lag innholdsfortegnelsen), så regner appen ut
+Où il est, qui peut le voir ¦ Kde je, kto ho môže vidieť ¦ Hvor den er, hvem som kan se den
+service d’archives, fonds, liens, communicabilité, support… ¦ archív, fond, odkazy, prístupnosť, nosič… ¦ arkiv, arkivbestand, lenker, tilgjengelighet, materiale…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ Zo zoznamu Nastavenia › Archívy; „Miesto uloženia“ zostáva na voľný text. ¦ Fra listen i Innstillinger › Arkiver; «Oppbevart hos» er fortsatt for fritekst.
+Fonds ¦ Fond ¦ Arkivbestand
+ex. Fonds de la paroisse de Sancoins ¦ napr. Fond farnosti Sancoins ¦ f.eks. Sancoins menighets arkiv
+Série · sous-série ¦ Séria · podséria ¦ Serie · underserie
+ex. E · 3 E (état civil) ¦ napr. E · 3 E (civilné matriky) ¦ f.eks. E · 3 E (sivilregistrering)
+Lien en ligne du recueil ¦ Online odkaz na zborník ¦ Samlingens nettlenke
+Lien d’une vue ({n} = numéro de la vue) ¦ Odkaz na snímku ({n} = číslo snímky) ¦ Lenke til et bilde ({n} = bildenummeret)
+Vue = page + … ¦ Snímka = strana + … ¦ Bilde = side + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ napr. 2, ak je snímka 1 obálka a snímka 2 prázdna strana ¦ f.eks. 2 hvis bilde 1 er omslaget og bilde 2 en tom side
+Autre exemplaire (un autre recueil) ¦ Iný exemplár (iný zborník) ¦ Annet eksemplar (en annen samling)
+… ou décrit ¦ … alebo opísaný ¦ … eller beskrevet
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ napr. Exemplár súdu, AD 18, 3 E 1235 ¦ f.eks. Rettens eksemplar, AD 18, 3 E 1235
+Communicabilité ¦ Prístupnosť ¦ Tilgjengelighet
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ Vypočítaná podľa rokov a druhov záznamov (odporúčané) ¦ Beregnet ut fra årene og dokumenttypene (anbefalt)
+Réservée jusqu’en… ¦ Neprístupný do… ¦ Sperret til…
+Réutilisation ¦ Opätovné použitie ¦ Gjenbruk
+Support ¦ Nosič ¦ Materiale
+État matériel ¦ Fyzický stav ¦ Fysisk tilstand
+Numérisé par ¦ Digitalizoval ¦ Digitalisert av
+ex. AD 18 (2009), moi (2026) ¦ napr. AD 18 (2009), ja (2026) ¦ f.eks. AD 18 (2009), meg (2026)
+Provenance ¦ Pôvod ¦ Proveniens
+ex. Dépôt de la commune, 1952 ¦ napr. Depozit obce, 1952 ¦ f.eks. Avlevert av kommunen, 1952
+vue = page + {n} ¦ snímka = strana + {n} ¦ bilde = side + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Ešte neuvedené: „Upraviť“ → „🏛 Kde je, kto ho môže vidieť“. ¦ Ikke oppgitt ennå: «Rediger» → «🏛 Hvor den er, hvem som kan se den».
+Citer : ¦ Citovať: ¦ Siter:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Režim prehliadania: skryť nesprístupnené zborníky (odporúčané) ¦ Visningsmodus: skjul samlinger som ikke er tilgjengelige (anbefalt)
+En mode consultation, les recueils non communicables sont cachés. ¦ V režime prehliadania sú nesprístupnené zborníky skryté. ¦ I visningsmodus er samlinger som ikke er tilgjengelige, skjult.
+En mode consultation, tous les recueils sont montrés. ¦ V režime prehliadania sa zobrazujú všetky zborníky. ¦ I visningsmodus vises alle samlinger.
+Vue {n} en ligne ¦ Snímka {n} online ¦ Bilde {n} på nett
+Citer cette page ¦ Citovať túto stranu ¦ Siter denne siden
+Recueils chez eux ¦ Ich zborníky ¦ Samlinger hos dem
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} strán · {d} hotových alebo skontrolovaných · {a} chýbajúcich ¦ {p} sider · {d} ferdige eller gjennomgåtte · {a} mangler
+Fonds · série ¦ Fond · séria ¦ Arkivbestand · serie
+Transcrit · relu ¦ Prepísané · skontrolované ¦ Transkribert · gjennomgått
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ S týmto archívom nie je prepojený žiadny zborník: v zborníku „Upraviť“ → „🏛 Kde je“ → Archív. ¦ Ingen samling er knyttet til dette arkivet: i en samling, «Rediger» → «🏛 Hvor den er» → Arkiv.
+Lacunes ({n}) ¦ Medzery ({n}) ¦ Hull ({n})
+Licence ouverte (Etalab) ¦ Otvorená licencia (Etalab) ¦ Åpen lisens (Etalab)
+CC BY ¦ CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Verejné vlastníctvo ¦ Allemannseie
+Tous droits réservés ¦ Všetky práva vyhradené ¦ Alle rettigheter forbeholdt
+À demander au service ¦ Treba sa opýtať archívu ¦ Spør arkivet
+Microfilm ¦ Mikrofilm ¦ Mikrofilm
+Bon ¦ Dobrý ¦ God
+Abîmé ¦ Poškodený ¦ Skadet
+Fragile (ne pas manipuler) ¦ Krehký (nemanipulovať) ¦ Skjør (må ikke håndteres)
+Restauré ¦ Reštaurovaný ¦ Restaurert
+{n} à transcrire ¦ {n} na prepis ¦ {n} skal transkriberes
+{n} à relire ¦ {n} na kontrolu ¦ {n} skal gjennomgås
+{n} absentes ¦ {n} chýbajúcich ¦ {n} mangler
+{n} à photographier ¦ {n} na odfotenie ¦ {n} skal fotograferes
+pas en ligne ¦ nie je online ¦ ikke på nett
+Chargement des fonds… ¦ Načítavajú sa fondy… ¦ Laster arkivbestandene…
+La vue des fonds ne s’ouvre pas ¦ Prehľad fondov sa neotvára ¦ Bestandsoversikten åpnes ikke
+Sans service d’archives ¦ Bez archívu ¦ Uten arkiv
+Sans fonds ¦ Bez fondu ¦ Uten arkivbestand
+{n} · {t} % transcrit · {r} % relu ¦ {n} · {t} % prepísané · {r} % skontrolované ¦ {n} · {t} % transkribert · {r} % gjennomgått
+recueils · {s} ¦ zborníky · {s} ¦ samlinger · {s}
+pages attendues ¦ očakávané strany ¦ forventede sider
+photographiées ¦ odfotené ¦ fotografert
+transcrites · {r} % relues ¦ prepísané · {r} % skontrolované ¦ transkribert · {r} % gjennomgått
+pages absentes · {g} ¦ chýbajúce strany · {g} ¦ manglende sider · {g}
+Montrer : ¦ Zobraziť: ¦ Vis:
+Colonnes… ¦ Stĺpce… ¦ Kolonner…
+État des fonds ¦ Stav fondov ¦ Bestandsrapport
+Aucun recueil ne correspond ¦ Žiadny zborník nezodpovedá ¦ Ingen samlinger passer
+Change « Montrer » ou les mots cherchés. ¦ Zmeň „Zobraziť“ alebo hľadané slová. ¦ Endre «Vis» eller søkeordene.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Vytvor zborník a potom uveď, kde je: „Upraviť“ → „🏛 Kde je“. ¦ Opprett en samling, og si så hvor den er: «Rediger» → «🏛 Hvor den er».
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ Každá skupina sa dá zbaliť. Klik na „Zostáva“ otvorí stav zborníka. Zborník bez archívu ide do „Bez archívu“: „Upraviť“ → „🏛 Kde je“. ¦ Hver gruppe kan felles sammen. Et klikk på «Gjenstår» åpner samlingens status. En samling uten arkiv havner under «Uten arkiv»: «Rediger» → «🏛 Hvor den er».
+🏛 VUE DES FONDS ¦ 🏛 PREHĽAD FONDOV ¦ 🏛 BESTANDSOVERSIKT
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Zaškrtni stĺpce, ktoré sa majú zobraziť (zborník je tam vždy). ¦ Kryss av kolonnene som skal vises (samlingen er alltid med).
+Les recueils n’ont pas pu être lus. ¦ Zborníky sa nepodarilo načítať. ¦ Samlingene kunne ikke leses.
+Rien ne reste à faire dans tes recueils. ¦ V tvojich zborníkoch už nič nezostáva. ¦ Det er ingenting igjen å gjøre i samlingene dine.
+Registres : reste à faire ¦ Matriky: zostáva urobiť ¦ Protokoller: gjenstår
+Vue des fonds ¦ Prehľad fondov ¦ Bestandsoversikt
+=recueil ¦ zborník|zborníky|zborníkov ¦ samling|samlinger
+=service ¦ archív|archívy|archívov ¦ arkiv|arkiver
+=lacune ¦ medzera|medzery|medzier ¦ hull|hull
+Photographié ¦ Odfotené ¦ Fotografert
+Reste ¦ Zostáva ¦ Gjenstår
+Numérotation ¦ Číslovanie ¦ Nummerering
+Reste à transcrire ¦ Zostáva prepísať ¦ Gjenstår å transkribere
+Reste à relire ¦ Zostáva skontrolovať ¦ Gjenstår å gjennomgå
+Avec des pages absentes ¦ S chýbajúcimi stranami ¦ Med manglende sider
+📚 RECUEILS ¦ 📚 ZBORNÍKY ¦ 📚 SAMLINGER
+Réglages des recueils ¦ Nastavenia zborníkov ¦ Innstillinger for samlinger
+Ma généalogie (conseillé) ¦ Môj rodokmeň (odporúčané) ¦ Mitt slektstre (anbefalt)
+Centre d’archives, association ¦ Archívne centrum, spolok ¦ Arkivsenter, forening
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Archívne centrum: najprv prehľad fondov, stĺpce nosič, fyzický stav, jazyk a opätovné použitie a karta („Kde je“, „Kto ho môže vidieť“) na začiatku súhrnu nových zborníkov. Nič nie je skryté natrvalo: názor môžeš kedykoľvek zmeniť. ¦ Arkivsenter: bestandsoversikten først, kolonnene materiale, fysisk tilstand, språk og gjenbruk, og kortet («Hvor den er», «Hvem som kan se den») øverst i sammendraget for nye samlinger. Ingenting er skjult for godt: du kan ombestemme deg når du vil.
+Me signaler les trous de numérotation (conseillé) ¦ Upozorňovať ma na medzery v číslovaní (odporúčané) ¦ Varsle meg om hull i nummereringen (anbefalt)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ Zobraziť spoľahlivosť čítania na každej strane (odporúčané) ¦ Vis lesingens pålitelighet på hver side (anbefalt)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ Zobraziť poznámky „na overenie“ (roky bez záznamu, vrcholy úmrtí) (odporúčané) ¦ Vis merknadene «må sjekkes» (år uten dokumenter, topper i dødsfall) (anbefalt)
+Réglages des recueils enregistrés. ¦ Nastavenia zborníkov uložené. ¦ Innstillingene for samlinger er lagret.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Zatiaľ nie je čo zobraziť: prepisuj záznamy v Dielni (na fotkách strán), aplikácia z nich vytiahne roky, priezviská, povolania, miesta. ¦ Ingenting å vise ennå: transkriber dokumenter i Verkstedet (på bildene av sidene), så henter appen ut år, etternavn, yrker og steder.
+Actes par année, de {a} à {b} ¦ Záznamy podľa rokov, od {a} do {b} ¦ Dokumenter per år, fra {a} til {b}
+{y} : aucun acte ¦ {y}: žiadny záznam ¦ {y}: ingen dokumenter
+{a}-{b} : aucun acte ¦ {a}-{b}: žiadny záznam ¦ {a}-{b}: ingen dokumenter
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ stratená matrika, inde, alebo ešte neprepísaná? ¦ tapt protokoll, et annet sted, eller ikke transkribert ennå?
+Marquer une lacune ¦ Označiť medzeru ¦ Marker et hull
+{y} : {n} décès ou sépultures ¦ {y}: {n} úmrtí alebo pohrebov ¦ {y}: {n} dødsfall eller begravelser
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ aspoň dvakrát viac ako zvyčajne ({m}): epidémia, hladomor, vojna? Treba overiť. ¦ minst dobbelt så mange som vanlig ({m}): epidemi, hungersnød, krig? Må sjekkes.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} prepojených s kartou) ¦ {n} ({l} knyttet til et kort)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ {p} % sa podpisuje ({s} z {t} záznamov, ktoré to uvádzajú) ¦ {p} % skriver under ({s} av {t} dokumenter som sier det)
+sans acte : {x} ¦ bez záznamu: {x} ¦ uten dokumenter: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Vypočítané zo záznamov prepísaných v Dielni: nikdy to nie je isté, treba to overiť. ¦ Beregnet fra dokumentene transkribert i Verkstedet: det er aldri sikkert, det må sjekkes.
+{w} : aucun acte en {y} ¦ {w}: žiadny záznam v roku {y} ¦ {w}: ingen dokumenter i {y}
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Medzera pridaná: Výskum › Prehľad vypísaných matrík › Medzery v archívoch. ¦ Hull lagt til: Forskning › Oversikt over registrerte protokoller › Hull i arkivene.
+Lacune notée ¦ Medzera zaznamenaná ¦ Hull notert
+Calcul… ¦ Počítam… ¦ Beregner…
+Ce qu’on trouve chez eux ¦ Čo u nich nájdeš ¦ Dette finner du hos dem
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Pravidlo (francúzsky Code du patrimoine, L213-2): ihneď vo všeobecnosti a pri úmrtných záznamoch; 50 rokov (súkromný život, vojenské dokumenty); 75 rokov (narodenia, sobáše, notári, sčítania ľudu); 100 rokov, ak sa to týka maloletých; 120 rokov od narodenia pri zdravotných záznamoch. Aplikácia navrhne, ty opravíš: posledné slovo má archív. ¦ Regel (Code du patrimoine, L213-2): straks i det generelle tilfellet og for dødsfall; 50 år (privatliv, militære dokumenter); 75 år (fødsler, ekteskap, notarer, folketellinger); 100 år hvis mindreårige er berørt; 120 år etter fødselen for pasientjournaler. Appen foreslår, du retter: arkivet har siste ord.
+Alsacien ¦ Alsasčina ¦ Alsassisk
+Catalan ¦ Katalánčina ¦ Katalansk
+Flamand ¦ Flámčina ¦ Flamsk
+Basque ¦ Baskičtina ¦ Baskisk
+Cursive moderne ¦ Moderné kurzívne písmo ¦ Moderne kursiv
+Cursive XVIIIᵉ ¦ Kurzíva 18. storočia ¦ Kursiv fra 1700-tallet
+Écriture secrétaire ¦ Sekretárske písmo ¦ Sekretærskrift
+Gothique ¦ Gotické písmo ¦ Gotisk skrift
+Kurrent (allemande) ¦ Kurrent (nemecké písmo) ¦ Kurrent (tysk)
+Imprimé ¦ Tlačené ¦ Trykt
+Dactylographié ¦ Písané na stroji ¦ Maskinskrevet
+Par fonds ¦ Podľa fondov ¦ Etter arkivbestand
+Façon de montrer les recueils ¦ Spôsob zobrazenia zborníkov ¦ Måte å vise samlingene på
+Où il est ¦ Kde je ¦ Hvor den er
+Service d’archives, fonds, cote, liens, citation ¦ Archív, fond, signatúra, odkazy, citácia ¦ Arkiv, arkivbestand, signatur, lenker, sitering
+Qui peut le voir ¦ Kto ho môže vidieť ¦ Hvem som kan se den
+Communicabilité, réutilisation, support, état ¦ Prístupnosť, opätovné použitie, nosič, stav ¦ Tilgjengelighet, gjenbruk, materiale, tilstand
+Ce qu’on y trouve ¦ Čo v ňom nájdeš ¦ Dette finner du i den
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Záznamy podľa rokov, priezviská, povolania, miesta, poznámky na overenie ¦ Dokumenter per år, etternavn, yrker, steder, merknader som må sjekkes
+🗂 Registres : reste à faire ¦ 🗂 Matriky: zostáva urobiť ¦ 🗂 Protokoller: gjenstår
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ Zborníky (matriky, zväzky listín), v ktorých zostávajú strany na prepis, na kontrolu, chýbajúce alebo na odfotenie. ¦ Samlingene (protokoller, bunter) der det gjenstår sider som skal transkriberes, gjennomgås, mangler eller skal fotograferes.
+Le lien doit commencer par http:// ou https://. ¦ Odkaz musí začínať http:// alebo https://. ¦ Lenken må begynne med http:// eller https://.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ Odkaz na snímku musí obsahovať {n} namiesto čísla snímky. ¦ Lenken til et bilde må inneholde {n} i stedet for bildenummeret.
+Ce lien n’est pas une adresse valide. ¦ Tento odkaz nie je platná adresa. ¦ Denne lenken er ikke en gyldig adresse.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ Zborník nemôže byť svojím vlastným iným exemplárom. ¦ En samling kan ikke være sitt eget andre eksemplar.
+Mode consultation : ce recueil n’est pas communicable. ¦ Režim prehliadania: tento zborník nie je sprístupnený. ¦ Visningsmodus: denne samlingen er ikke tilgjengelig.
+archives|Cote ¦ Signatúra ¦ Signatur

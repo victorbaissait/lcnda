@@ -1,0 +1,155 @@
+fr ¦ ro
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ piesa {n}
+vue {n} ¦ imaginea {n}
+Citer ¦ Citează
+Copie le texte : ¦ Copiază textul:
+Communicable ¦ Comunicabilă
+le délai est passé ({y}) ¦ termenul a trecut ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ cel mai recent act: {y}; termen {d} ani
+Réservé jusqu’en {y} ¦ Rezervată până în {y}
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ cel mai recent act: {y}; termen {d} ani ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ tip de act nespecificat: 75 de ani din prudență
+Sur autorisation ¦ Cu autorizație
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ scrie anii culegerii (sau fă-i cuprinsul) ca aplicația să calculeze
+Où il est, qui peut le voir ¦ Unde se află, cine o poate vedea
+service d’archives, fonds, liens, communicabilité, support… ¦ serviciu de arhive, fond, linkuri, comunicabilitate, suport…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ Din lista din Setări › Servicii de arhivă; „Locul de păstrare” rămâne pentru text liber.
+Fonds ¦ Fond
+ex. Fonds de la paroisse de Sancoins ¦ ex. Fondul parohiei Sancoins
+Série · sous-série ¦ Serie · subserie
+ex. E · 3 E (état civil) ¦ ex. E · 3 E (stare civilă)
+Lien en ligne du recueil ¦ Linkul online al culegerii
+Lien d’une vue ({n} = numéro de la vue) ¦ Linkul unei imagini ({n} = numărul imaginii)
+Vue = page + … ¦ Imagine = pagină + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ ex. 2 dacă imaginea 1 e coperta și imaginea 2 o pagină goală
+Autre exemplaire (un autre recueil) ¦ Alt exemplar (altă culegere)
+… ou décrit ¦ … sau descris
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ ex. Exemplarul grefei, AD 18, 3 E 1235
+Communicabilité ¦ Comunicabilitate
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ Calculată după ani și tipurile de acte (recomandat)
+Réservée jusqu’en… ¦ Rezervată până în…
+Réutilisation ¦ Reutilizare
+Support ¦ Suport
+État matériel ¦ Starea fizică
+Numérisé par ¦ Digitizat de
+ex. AD 18 (2009), moi (2026) ¦ ex. AD 18 (2009), eu (2026)
+Provenance ¦ Proveniență
+ex. Dépôt de la commune, 1952 ¦ ex. Depozitul comunei, 1952
+vue = page + {n} ¦ imagine = pagină + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Nespecificat încă: „Modifică” → „🏛 Unde se află, cine o poate vedea”.
+Citer : ¦ Citează:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Mod consultare: ascunde culegerile necomunicabile (recomandat)
+En mode consultation, les recueils non communicables sont cachés. ¦ În modul consultare, culegerile necomunicabile sunt ascunse.
+En mode consultation, tous les recueils sont montrés. ¦ În modul consultare, toate culegerile sunt afișate.
+Vue {n} en ligne ¦ Imaginea {n} online
+Citer cette page ¦ Citează această pagină
+Recueils chez eux ¦ Culegeri la ei
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} pagini · {d} terminate sau recitite · {a} absente
+Fonds · série ¦ Fond · serie
+Transcrit · relu ¦ Transcris · recitit
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ Nicio culegere legată de acest serviciu: într-o culegere, „Modifică” → „🏛 Unde se află” → Serviciu de arhive.
+Lacunes ({n}) ¦ Lacune ({n})
+Licence ouverte (Etalab) ¦ Licență deschisă (Etalab)
+CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Domeniu public
+Tous droits réservés ¦ Toate drepturile rezervate
+À demander au service ¦ De cerut serviciului
+Microfilm ¦ Microfilm
+Bon ¦ Bună
+Abîmé ¦ Deteriorată
+Fragile (ne pas manipuler) ¦ Fragilă (a nu se manipula)
+Restauré ¦ Restaurată
+{n} à transcrire ¦ {n} de transcris
+{n} à relire ¦ {n} de recitit
+{n} absentes ¦ {n} absente
+{n} à photographier ¦ {n} de fotografiat
+pas en ligne ¦ nu e online
+Chargement des fonds… ¦ Se încarcă fondurile…
+La vue des fonds ne s’ouvre pas ¦ Vederea pe fonduri nu se deschide
+Sans service d’archives ¦ Fără serviciu de arhive
+Sans fonds ¦ Fără fond
+{n} · {t} % transcrit · {r} % relu ¦ {n} · {t} % transcris · {r} % recitit
+recueils · {s} ¦ culegeri · {s}
+pages attendues ¦ pagini așteptate
+photographiées ¦ fotografiate
+transcrites · {r} % relues ¦ transcrise · {r} % recitite
+pages absentes · {g} ¦ pagini absente · {g}
+Montrer : ¦ Arată:
+Colonnes… ¦ Coloane…
+État des fonds ¦ Starea fondurilor
+Aucun recueil ne correspond ¦ Nicio culegere nu corespunde
+Change « Montrer » ou les mots cherchés. ¦ Schimbă „Arată” sau cuvintele căutate.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Creează o culegere, apoi spune unde se află: „Modifică” → „🏛 Unde se află”.
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ Fiecare grup se poate restrânge. Un clic pe „Rămas” deschide starea culegerii. O culegere fără serviciu de arhive merge la „Fără serviciu de arhive”: „Modifică” → „🏛 Unde se află”.
+🏛 VUE DES FONDS ¦ 🏛 VEDERE PE FONDURI
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Bifează coloanele de afișat (culegerea e mereu acolo).
+Les recueils n’ont pas pu être lus. ¦ Culegerile nu au putut fi citite.
+Rien ne reste à faire dans tes recueils. ¦ Nu mai e nimic de făcut în culegerile tale.
+Registres : reste à faire ¦ Registre: rămas de făcut
+Vue des fonds ¦ Vedere pe fonduri
+=recueil ¦ culegere|culegeri|de culegeri
+=service ¦ serviciu|servicii|de servicii
+=lacune ¦ lacună|lacune|de lacune
+Photographié ¦ Fotografiat
+Reste ¦ Rămas
+Numérotation ¦ Numerotare
+Reste à transcrire ¦ Rămas de transcris
+Reste à relire ¦ Rămas de recitit
+Avec des pages absentes ¦ Cu pagini absente
+📚 RECUEILS ¦ 📚 CULEGERI
+Réglages des recueils ¦ Setările culegerilor
+Ma généalogie (conseillé) ¦ Genealogia mea (recomandat)
+Centre d’archives, association ¦ Centru de arhive, asociație
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Centru de arhive: vederea pe fonduri mai întâi, coloanele suport, starea fizică, limbă și reutilizare, și fișa („Unde se află”, „Cine o poate vedea”) în capul rezumatului noilor culegeri. Nimic nu e ascuns definitiv: te poți răzgândi oricând.
+Me signaler les trous de numérotation (conseillé) ¦ Semnalează-mi golurile din numerotare (recomandat)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ Arată fiabilitatea citirii pe fiecare pagină (recomandat)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ Arată observațiile „de verificat” (ani fără acte, vârfuri de decese) (recomandat)
+Réglages des recueils enregistrés. ¦ Setările culegerilor au fost salvate.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Nimic de arătat deocamdată: transcrie acte în Atelier (pe fotografiile paginilor), iar aplicația extrage anii, numele, meseriile, locurile.
+Actes par année, de {a} à {b} ¦ Acte pe an, din {a} până în {b}
+{y} : aucun acte ¦ {y}: niciun act
+{a}-{b} : aucun acte ¦ {a}-{b}: niciun act
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ registru pierdut, în altă parte sau netranscris încă?
+Marquer une lacune ¦ Marchează o lacună
+{y} : {n} décès ou sépultures ¦ {y}: {n} decese sau înmormântări
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ cel puțin de două ori mai mult decât de obicei ({m}): epidemie, foamete, război? De verificat.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} legate de o fișă)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ {p} % semnează ({s} din {t} acte care o spun)
+sans acte : {x} ¦ fără acte: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Calculat din actele transcrise în Atelier: nu e niciodată sigur, e de verificat.
+{w} : aucun acte en {y} ¦ {w}: niciun act în {y}
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Lacună adăugată: Cercetare › Urmărirea registrelor indexate › Lacune de arhivă.
+Lacune notée ¦ Lacună notată
+Calcul… ¦ Se calculează…
+Ce qu’on trouve chez eux ¦ Ce găsești la ei
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Regula (Code du patrimoine, L213-2): imediat în cazul general și pentru actele de deces; 50 de ani (viața privată, documente militare); 75 de ani (nașteri, căsătorii, notari, recensăminte); 100 de ani dacă sunt implicați minori; 120 de ani de la naștere pentru dosarele medicale. Aplicația propune, tu corectezi: serviciul de arhive are ultimul cuvânt.
+Alsacien ¦ Alsaciană
+Catalan ¦ Catalană
+Flamand ¦ Flamandă
+Basque ¦ Bască
+Cursive moderne ¦ Cursivă modernă
+Cursive XVIIIᵉ ¦ Cursivă din secolul al XVIII-lea
+Écriture secrétaire ¦ Scriere de secretariat
+Gothique ¦ Gotică
+Kurrent (allemande) ¦ Kurrent (germană)
+Imprimé ¦ Tipărit
+Dactylographié ¦ Dactilografiat
+Par fonds ¦ Pe fonduri
+Façon de montrer les recueils ¦ Modul de afișare a culegerilor
+Où il est ¦ Unde se află
+Service d’archives, fonds, cote, liens, citation ¦ Serviciu de arhive, fond, cotă, linkuri, citare
+Qui peut le voir ¦ Cine o poate vedea
+Communicabilité, réutilisation, support, état ¦ Comunicabilitate, reutilizare, suport, stare
+Ce qu’on y trouve ¦ Ce găsești în ea
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Acte pe an, nume, meserii, locuri, observații de verificat
+🗂 Registres : reste à faire ¦ 🗂 Registre: rămas de făcut
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ Culegerile (registre, dosare de piese) în care au rămas pagini de transcris, de recitit, absente sau de fotografiat.
+Le lien doit commencer par http:// ou https://. ¦ Linkul trebuie să înceapă cu http:// sau https://.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ Linkul unei imagini trebuie să conțină {n} în locul numărului imaginii.
+Ce lien n’est pas une adresse valide. ¦ Acest link nu este o adresă validă.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ O culegere nu poate fi propriul ei alt exemplar.
+Mode consultation : ce recueil n’est pas communicable. ¦ Mod consultare: această culegere nu este comunicabilă.
+archives|Cote ¦ Cotă

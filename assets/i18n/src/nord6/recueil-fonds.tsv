@@ -1,0 +1,155 @@
+fr ¦ lt ¦ lv ¦ et
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ vienetas {n} ¦ vienība {n} ¦ üksus {n}
+vue {n} ¦ vaizdas {n} ¦ attēls {n} ¦ pilt {n}
+Citer ¦ Cituoti ¦ Citēt ¦ Viita
+Copie le texte : ¦ Nukopijuok tekstą: ¦ Nokopē tekstu: ¦ Kopeeri tekst:
+Communicable ¦ Prieinamas visuomenei ¦ Publiski pieejams ¦ Avalik
+le délai est passé ({y}) ¦ terminas suėjo ({y}) ¦ termiņš ir pagājis ({y}) ¦ tähtaeg on möödas ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ naujausias įrašas: {y}; terminas {d} m. ¦ jaunākais ieraksts: {y}; termiņš {d} gadi ¦ uusim kirje: {y}; tähtaeg {d} aastat
+Réservé jusqu’en {y} ¦ Neprieinamas iki {y} m. ¦ Ierobežots līdz {y} ¦ Piiratud kuni {y}
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ naujausias įrašas: {y}; terminas {d} m. ({k}) ¦ jaunākais ieraksts: {y}; termiņš {d} gadi ({k}) ¦ uusim kirje: {y}; tähtaeg {d} aastat ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ įrašo rūšis nenurodyta: atsargumo dėlei 75 metai ¦ ieraksta veids nav norādīts: piesardzības pēc 75 gadi ¦ kirje liik määramata: igaks juhuks 75 aastat
+Sur autorisation ¦ Su leidimu ¦ Ar atļauju ¦ Loa alusel
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ įrašyk rinkinio metus (arba sudaryk jo turinį), kad programa apskaičiuotų ¦ ieraksti krājuma gadus (vai izveido tā satura rādītāju), lai lietotne varētu aprēķināt ¦ kirjuta kogumiku aastad (või koosta selle sisukord), et rakendus saaks arvutada
+Où il est, qui peut le voir ¦ Kur jis yra, kas gali jį matyti ¦ Kur tas atrodas, kas to var redzēt ¦ Kus see on, kes seda näha saab
+service d’archives, fonds, liens, communicabilité, support… ¦ archyvų tarnyba, fondas, nuorodos, prieinamumas, laikmena… ¦ arhīvu dienests, fonds, saites, pieejamība, nesējs… ¦ arhiiviasutus, fond, lingid, avalikkus, kandja…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ Iš sąrašo Nustatymai › Archyvų tarnybos; „Saugojimo vieta“ lieka laisvam tekstui. ¦ No saraksta Iestatījumi › Arhīvu dienesti; „Glabāšanas vieta“ paliek brīvam tekstam. ¦ Loendist Seaded › Arhiiviasutused; „Hoiukoht“ jääb vaba teksti jaoks.
+Fonds ¦ Fondas ¦ Fonds ¦ Fond
+ex. Fonds de la paroisse de Sancoins ¦ pvz. Sancoins parapijos fondas ¦ piem., Sankuānas draudzes fonds ¦ nt Sancoins’i koguduse fond
+Série · sous-série ¦ Serija · poserija ¦ Sērija · apakšsērija ¦ Sari · alamsari
+ex. E · 3 E (état civil) ¦ pvz. E · 3 E (civilinė metrikacija) ¦ piem., E · 3 E (civilstāvokļa akti) ¦ nt E · 3 E (perekonnaseisuaktid)
+Lien en ligne du recueil ¦ Internetinė rinkinio nuoroda ¦ Krājuma tiešsaistes saite ¦ Kogumiku veebilink
+Lien d’une vue ({n} = numéro de la vue) ¦ Vaizdo nuoroda ({n} = vaizdo numeris) ¦ Attēla saite ({n} = attēla numurs) ¦ Pildi link ({n} = pildi number)
+Vue = page + … ¦ Vaizdas = puslapis + … ¦ Attēls = lapa + … ¦ Pilt = lehekülg + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ pvz. 2, jei 1 vaizdas yra viršelis, o 2 vaizdas – tuščias puslapis ¦ piem., 2, ja 1. attēls ir vāks un 2. attēls ir tukša lapa ¦ nt 2, kui pilt 1 on kaas ja pilt 2 tühi lehekülg
+Autre exemplaire (un autre recueil) ¦ Kitas egzempliorius (kitas rinkinys) ¦ Cits eksemplārs (cits krājums) ¦ Teine eksemplar (teine kogumik)
+… ou décrit ¦ … arba aprašytas ¦ … vai aprakstīts ¦ … või kirjeldatud
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ pvz. Teismo egzempliorius, AD 18, 3 E 1235 ¦ piem., Tiesas eksemplārs, AD 18, 3 E 1235 ¦ nt Kohtu eksemplar, AD 18, 3 E 1235
+Communicabilité ¦ Prieinamumas ¦ Pieejamība ¦ Avalikkus
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ Apskaičiuotas pagal metus ir įrašų rūšis (rekomenduojama) ¦ Aprēķināta pēc gadiem un ierakstu veidiem (ieteicams) ¦ Arvutatud aastate ja kirjete liikide järgi (soovitatav)
+Réservée jusqu’en… ¦ Neprieinamas iki… ¦ Ierobežots līdz… ¦ Piiratud kuni…
+Réutilisation ¦ Pakartotinis naudojimas ¦ Atkalizmantošana ¦ Taaskasutus
+Support ¦ Laikmena ¦ Nesējs ¦ Kandja
+État matériel ¦ Fizinė būklė ¦ Fiziskais stāvoklis ¦ Füüsiline seisund
+Numérisé par ¦ Skaitmenino ¦ Digitalizēja ¦ Digiteeris
+ex. AD 18 (2009), moi (2026) ¦ pvz. AD 18 (2009), aš (2026) ¦ piem., AD 18 (2009), es (2026) ¦ nt AD 18 (2009), mina (2026)
+Provenance ¦ Kilmė ¦ Izcelsme ¦ Päritolu
+ex. Dépôt de la commune, 1952 ¦ pvz. Savivaldybės perduota, 1952 ¦ piem., Pašvaldības nodots, 1952 ¦ nt Valla hoiule antud, 1952
+vue = page + {n} ¦ vaizdas = puslapis + {n} ¦ attēls = lapa + {n} ¦ pilt = lehekülg + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Dar nenurodyta: „Redaguoti“ → „🏛 Kur jis yra, kas gali jį matyti“. ¦ Vēl nav norādīts: „Rediģēt“ → „🏛 Kur tas atrodas, kas to var redzēt“. ¦ Veel määramata: „Muuda“ → „🏛 Kus see on, kes seda näha saab“.
+Citer : ¦ Cituoti: ¦ Citēt: ¦ Viita:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Peržiūros režimas: slėpti visuomenei neprieinamus rinkinius (rekomenduojama) ¦ Skatīšanās režīms: slēpt krājumus, kas nav publiski pieejami (ieteicams) ¦ Vaatamisrežiim: peida mitteavalikud kogumikud (soovitatav)
+En mode consultation, les recueils non communicables sont cachés. ¦ Peržiūros režimu visuomenei neprieinami rinkiniai paslėpti. ¦ Skatīšanās režīmā krājumi, kas nav publiski pieejami, ir paslēpti. ¦ Vaatamisrežiimis on mitteavalikud kogumikud peidetud.
+En mode consultation, tous les recueils sont montrés. ¦ Peržiūros režimu rodomi visi rinkiniai. ¦ Skatīšanās režīmā tiek rādīti visi krājumi. ¦ Vaatamisrežiimis näidatakse kõiki kogumikke.
+Vue {n} en ligne ¦ Vaizdas {n} internete ¦ Attēls {n} tiešsaistē ¦ Pilt {n} veebis
+Citer cette page ¦ Cituoti šį puslapį ¦ Citēt šo lapu ¦ Viita sellele leheküljele
+Recueils chez eux ¦ Jų rinkiniai ¦ Viņu krājumi ¦ Nende kogumikud
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} psl. · {d} baigta arba peržiūrėta · {a} trūksta ¦ {p} lapas · {d} pabeigtas vai pārskatītas · {a} trūkst ¦ {p} lk · {d} valmis või üle vaadatud · {a} puudu
+Fonds · série ¦ Fondas · serija ¦ Fonds · sērija ¦ Fond · sari
+Transcrit · relu ¦ Perrašyta · peržiūrėta ¦ Pārrakstīts · pārskatīts ¦ Ümber kirjutatud · üle vaadatud
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ Su šia tarnyba nesusietas joks rinkinys: rinkinyje „Redaguoti“ → „🏛 Kur jis yra“ → Archyvų tarnyba. ¦ Ar šo dienestu nav saistīts neviens krājums: krājumā „Rediģēt“ → „🏛 Kur tas atrodas“ → Arhīvu dienests. ¦ Selle asutusega pole seotud ühtki kogumikku: kogumikus „Muuda“ → „🏛 Kus see on“ → Arhiiviasutus.
+Lacunes ({n}) ¦ Spragos ({n}) ¦ Robi ({n}) ¦ Lüngad ({n})
+Licence ouverte (Etalab) ¦ Atviroji licencija (Etalab) ¦ Atvērtā licence (Etalab) ¦ Avatud litsents (Etalab)
+CC BY ¦ CC BY ¦ CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA ¦ CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC ¦ CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Viešoji nuosavybė ¦ Publiskais īpašums ¦ Avalik omand
+Tous droits réservés ¦ Visos teisės saugomos ¦ Visas tiesības aizsargātas ¦ Kõik õigused kaitstud
+À demander au service ¦ Klausti archyvų tarnybos ¦ Jājautā arhīvu dienestam ¦ Küsi arhiiviasutuselt
+Microfilm ¦ Mikrofilmas ¦ Mikrofilma ¦ Mikrofilm
+Bon ¦ Gera ¦ Labs ¦ Hea
+Abîmé ¦ Pažeista ¦ Bojāts ¦ Kahjustatud
+Fragile (ne pas manipuler) ¦ Trapi (neliesti) ¦ Trausls (neaiztikt) ¦ Habras (mitte käsitseda)
+Restauré ¦ Restauruota ¦ Restaurēts ¦ Restaureeritud
+{n} à transcrire ¦ {n} perrašyti ¦ {n} jāpārraksta ¦ {n} ümber kirjutada
+{n} à relire ¦ {n} peržiūrėti ¦ {n} jāpārskata ¦ {n} üle vaadata
+{n} absentes ¦ {n} trūksta ¦ {n} trūkst ¦ {n} puudu
+{n} à photographier ¦ {n} nufotografuoti ¦ {n} jānofotografē ¦ {n} pildistada
+pas en ligne ¦ ne internete ¦ nav tiešsaistē ¦ pole veebis
+Chargement des fonds… ¦ Įkeliami fondai… ¦ Ielādē fondus… ¦ Fondide laadimine…
+La vue des fonds ne s’ouvre pas ¦ Fondų vaizdas neatsidaro ¦ Fondu skats neatveras ¦ Fondivaade ei avane
+Sans service d’archives ¦ Be archyvų tarnybos ¦ Bez arhīvu dienesta ¦ Arhiiviasutuseta
+Sans fonds ¦ Be fondo ¦ Bez fonda ¦ Fondita
+{n} · {t} % transcrit · {r} % relu ¦ {n} · {t} % perrašyta · {r} % peržiūrėta ¦ {n} · {t} % pārrakstīts · {r} % pārskatīts ¦ {n} · {t} % ümber kirjutatud · {r} % üle vaadatud
+recueils · {s} ¦ rinkiniai · {s} ¦ krājumi · {s} ¦ kogumikud · {s}
+pages attendues ¦ laukiami puslapiai ¦ gaidāmās lapas ¦ oodatud leheküljed
+photographiées ¦ nufotografuota ¦ nofotografētas ¦ pildistatud
+transcrites · {r} % relues ¦ perrašyta · {r} % peržiūrėta ¦ pārrakstītas · {r} % pārskatītas ¦ ümber kirjutatud · {r} % üle vaadatud
+pages absentes · {g} ¦ trūkstami puslapiai · {g} ¦ trūkstošās lapas · {g} ¦ puuduvad leheküljed · {g}
+Montrer : ¦ Rodyti: ¦ Rādīt: ¦ Näita:
+Colonnes… ¦ Stulpeliai… ¦ Kolonnas… ¦ Veerud…
+État des fonds ¦ Fondų būklė ¦ Fondu stāvoklis ¦ Fondide seis
+Aucun recueil ne correspond ¦ Neatitinka nė vienas rinkinys ¦ Neviens krājums neatbilst ¦ Ükski kogumik ei sobi
+Change « Montrer » ou les mots cherchés. ¦ Pakeisk „Rodyti“ arba paieškos žodžius. ¦ Maini „Rādīt“ vai meklējamos vārdus. ¦ Muuda „Näita“ valikut või otsingusõnu.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Sukurk rinkinį, tada nurodyk, kur jis yra: „Redaguoti“ → „🏛 Kur jis yra“. ¦ Izveido krājumu un tad norādi, kur tas atrodas: „Rediģēt“ → „🏛 Kur tas atrodas“. ¦ Loo kogumik ja ütle siis, kus see on: „Muuda“ → „🏛 Kus see on“.
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ Kiekvieną grupę galima suskleisti. Spustelėjus „Liko“ atsidaro rinkinio būsena. Rinkinys be archyvų tarnybos patenka į „Be archyvų tarnybos“: „Redaguoti“ → „🏛 Kur jis yra“. ¦ Katru grupu var sakļaut. Klikšķis uz „Atlicis“ atver krājuma stāvokli. Krājums bez arhīvu dienesta nonāk sadaļā „Bez arhīvu dienesta“: „Rediģēt“ → „🏛 Kur tas atrodas“. ¦ Iga rühma saab kokku voltida. Klõps „Jäänud“ peal avab kogumiku oleku. Arhiiviasutuseta kogumik läheb rühma „Arhiiviasutuseta“: „Muuda“ → „🏛 Kus see on“.
+🏛 VUE DES FONDS ¦ 🏛 FONDŲ VAIZDAS ¦ 🏛 FONDU SKATS ¦ 🏛 FONDIVAADE
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Pažymėk stulpelius, kuriuos rodyti (rinkinys rodomas visada). ¦ Atzīmē rādāmās kolonnas (krājums ir vienmēr redzams). ¦ Märgi näidatavad veerud (kogumik on alati olemas).
+Les recueils n’ont pas pu être lus. ¦ Rinkinių nepavyko nuskaityti. ¦ Krājumus neizdevās nolasīt. ¦ Kogumikke ei õnnestunud lugeda.
+Rien ne reste à faire dans tes recueils. ¦ Tavo rinkiniuose nebeliko ką daryti. ¦ Tavos krājumos vairs nav ko darīt. ¦ Sinu kogumikes pole enam midagi teha.
+Registres : reste à faire ¦ Registrai: liko padaryti ¦ Reģistri: atlicis paveikt ¦ Registrid: veel teha
+Vue des fonds ¦ Fondų vaizdas ¦ Fondu skats ¦ Fondivaade
+=recueil ¦ rinkinys|rinkiniai|rinkinių ¦ krājumu|krājums|krājumi ¦ kogumik|kogumikku
+=service ¦ tarnyba|tarnybos|tarnybų ¦ dienestu|dienests|dienesti ¦ asutus|asutust
+=lacune ¦ spraga|spragos|spragų ¦ robu|robs|robi ¦ lünk|lünka
+Photographié ¦ Nufotografuota ¦ Nofotografēts ¦ Pildistatud
+Reste ¦ Liko ¦ Atlicis ¦ Jäänud
+Numérotation ¦ Numeracija ¦ Numerācija ¦ Nummerdus
+Reste à transcrire ¦ Liko perrašyti ¦ Atlicis pārrakstīt ¦ Veel ümber kirjutada
+Reste à relire ¦ Liko peržiūrėti ¦ Atlicis pārskatīt ¦ Veel üle vaadata
+Avec des pages absentes ¦ Su trūkstamais puslapiais ¦ Ar trūkstošām lapām ¦ Puuduvate lehekülgedega
+📚 RECUEILS ¦ 📚 RINKINIAI ¦ 📚 KRĀJUMI ¦ 📚 KOGUMIKUD
+Réglages des recueils ¦ Rinkinių nustatymai ¦ Krājumu iestatījumi ¦ Kogumike seaded
+Ma généalogie (conseillé) ¦ Mano genealogija (rekomenduojama) ¦ Mana ģenealoģija (ieteicams) ¦ Minu sugupuu (soovitatav)
+Centre d’archives, association ¦ Archyvų centras, draugija ¦ Arhīvu centrs, biedrība ¦ Arhiivikeskus, ühing
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Archyvų centras: pirmiausia fondų vaizdas, stulpeliai laikmena, fizinė būklė, kalba ir pakartotinis naudojimas, o kortelė („Kur jis yra“, „Kas gali jį matyti“) – naujų rinkinių santraukos viršuje. Niekas nepaslėpta visam laikui: gali persigalvoti bet kada. ¦ Arhīvu centrs: vispirms fondu skats, kolonnas nesējs, fiziskais stāvoklis, valoda un atkalizmantošana, un kartīte („Kur tas atrodas“, „Kas to var redzēt“) jauno krājumu kopsavilkuma sākumā. Nekas nav paslēpts uz visiem laikiem: vari pārdomāt jebkurā brīdī. ¦ Arhiivikeskus: esmalt fondivaade, veerud kandja, füüsiline seisund, keel ja taaskasutus ning kaart („Kus see on“, „Kes seda näha saab“) uute kogumike kokkuvõtte alguses. Midagi pole jäädavalt peidetud: võid meelt muuta millal tahes.
+Me signaler les trous de numérotation (conseillé) ¦ Pranešti man apie numeracijos spragas (rekomenduojama) ¦ Brīdināt mani par numerācijas robiem (ieteicams) ¦ Teavita mind nummerduse lünkadest (soovitatav)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ Rodyti skaitymo patikimumą kiekviename puslapyje (rekomenduojama) ¦ Rādīt lasījuma ticamību katrā lapā (ieteicams) ¦ Näita lugemise usaldusväärsust igal leheküljel (soovitatav)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ Rodyti pastabas „patikrinti“ (metai be įrašų, mirčių šuoliai) (rekomenduojama) ¦ Rādīt piezīmes „jāpārbauda“ (gadi bez ierakstiem, nāves gadījumu kāpumi) (ieteicams) ¦ Näita märkusi „kontrollida“ (kirjeteta aastad, surmade tipud) (soovitatav)
+Réglages des recueils enregistrés. ¦ Rinkinių nustatymai įrašyti. ¦ Krājumu iestatījumi saglabāti. ¦ Kogumike seaded salvestatud.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Kol kas nėra ką rodyti: perrašyk įrašus Dirbtuvėse (puslapių nuotraukose), programa iš jų išrinks metus, pavardes, profesijas, vietas. ¦ Pagaidām nav ko rādīt: pārraksti ierakstus Darbnīcā (uz lapu fotogrāfijām), lietotne no tiem iegūs gadus, uzvārdus, nodarbošanās, vietas. ¦ Veel pole midagi näidata: kirjuta kirjeid ümber Töökojas (lehekülgede fotodel), rakendus võtab neist välja aastad, perekonnanimed, ametid, kohad.
+Actes par année, de {a} à {b} ¦ Įrašai pagal metus, nuo {a} iki {b} ¦ Ieraksti pa gadiem, no {a} līdz {b} ¦ Kirjed aastate kaupa, {a}–{b}
+{y} : aucun acte ¦ {y}: nėra įrašų ¦ {y}: neviena ieraksta ¦ {y}: ühtki kirjet pole
+{a}-{b} : aucun acte ¦ {a}-{b}: nėra įrašų ¦ {a}-{b}: neviena ieraksta ¦ {a}-{b}: ühtki kirjet pole
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ registras prarastas, kitur ar dar neperrašytas? ¦ reģistrs pazaudēts, citur vai vēl nav pārrakstīts? ¦ register kadunud, mujal või veel ümber kirjutamata?
+Marquer une lacune ¦ Pažymėti spragą ¦ Atzīmēt robu ¦ Märgi lünk
+{y} : {n} décès ou sépultures ¦ {y}: {n} mirčių ar laidojimų ¦ {y}: {n} nāves gadījumi vai apbedīšanas ¦ {y}: {n} surma või matust
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ bent dvigubai daugiau nei įprastai ({m}): epidemija, badas, karas? Reikia patikrinti. ¦ vismaz divreiz vairāk nekā parasti ({m}): epidēmija, bads, karš? Jāpārbauda. ¦ vähemalt kaks korda rohkem kui tavaliselt ({m}): epideemia, nälg, sõda? Tuleb kontrollida.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} susieta su kortele) ¦ {n} ({l} saistīti ar kartīti) ¦ {n} ({l} kaardiga seotud)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ {p} % pasirašo ({s} iš {t} įrašų, kuriuose tai nurodyta) ¦ {p} % parakstās ({s} no {t} ierakstiem, kuros tas norādīts) ¦ {p} % kirjutab alla ({s} / {t} kirjest, kus see on öeldud)
+sans acte : {x} ¦ be įrašų: {x} ¦ bez ierakstiem: {x} ¦ kirjeteta: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Apskaičiuota iš Dirbtuvėse perrašytų įrašų: tai niekada nėra tikra, reikia patikrinti. ¦ Aprēķināts no Darbnīcā pārrakstītajiem ierakstiem: tas nekad nav droši, tas jāpārbauda. ¦ Arvutatud Töökojas ümber kirjutatud kirjetest: see pole kunagi kindel, seda tuleb kontrollida.
+{w} : aucun acte en {y} ¦ {w}: nėra įrašų {y} m. ¦ {w}: neviena ieraksta {y}. gadā ¦ {w}: aastal {y} ühtki kirjet pole
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Spraga pridėta: Tyrimai › Peržiūrėtų registrų stebėjimas › Archyvų spragos. ¦ Robs pievienots: Pētniecība › Izskatīto reģistru uzskaite › Arhīvu robi. ¦ Lünk lisatud: Uurimine › Läbitöötatud registrite jälgimine › Arhiivide lüngad.
+Lacune notée ¦ Spraga pažymėta ¦ Robs atzīmēts ¦ Lünk märgitud
+Calcul… ¦ Skaičiuojama… ¦ Aprēķina… ¦ Arvutamine…
+Ce qu’on trouve chez eux ¦ Ką pas juos rasi ¦ Ko pie viņiem atrast ¦ Mida neilt leiab
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Taisyklė (Prancūzijos Code du patrimoine, L213-2): bendruoju atveju ir mirties įrašams – iškart; 50 metų (privatus gyvenimas, kariniai dokumentai); 75 metai (gimimai, santuokos, notarai, gyventojų surašymai); 100 metų, jei susiję nepilnamečiai; 120 metų nuo gimimo – medicininiams dokumentams. Programa siūlo, tu taisai: paskutinis žodis – archyvų tarnybos. ¦ Noteikums (Francijas Code du patrimoine, L213-2): vispārējā gadījumā un miršanas ierakstiem – uzreiz; 50 gadi (privātā dzīve, militārie dokumenti); 75 gadi (dzimšanas, laulības, notāri, tautas skaitīšanas); 100 gadi, ja skarti nepilngadīgie; 120 gadi pēc dzimšanas medicīniskajiem dokumentiem. Lietotne iesaka, tu labo: pēdējais vārds pieder arhīvu dienestam. ¦ Reegel (Prantsusmaa Code du patrimoine, L213-2): üldjuhul ja surmakirjete puhul kohe; 50 aastat (eraelu, sõjaväedokumendid); 75 aastat (sünnid, abielud, notarid, rahvaloendused); 100 aastat, kui see puudutab alaealisi; 120 aastat sünnist meditsiinidokumentide puhul. Rakendus pakub, sina parandad: viimane sõna on arhiiviasutusel.
+Alsacien ¦ Elzasiečių ¦ Elzasiešu ¦ Elsassi
+Catalan ¦ Katalonų ¦ Katalāņu ¦ Katalaani
+Flamand ¦ Flamandų ¦ Flāmu ¦ Flaami
+Basque ¦ Baskų ¦ Basku ¦ Baski
+Cursive moderne ¦ Šiuolaikinis kursyvas ¦ Mūsdienu kursīvs ¦ Tänapäeva kursiiv
+Cursive XVIIIᵉ ¦ XVIII a. kursyvas ¦ 18. gadsimta kursīvs ¦ 18. sajandi kursiiv
+Écriture secrétaire ¦ Sekretorių raštas ¦ Sekretāru rakstība ¦ Sekretärikiri
+Gothique ¦ Gotikinis raštas ¦ Gotiskā rakstība ¦ Gooti kiri
+Kurrent (allemande) ¦ Kurrent (vokiškas) ¦ Kurrent (vācu) ¦ Kurrent (saksa)
+Imprimé ¦ Spausdinta ¦ Iespiests ¦ Trükitud
+Dactylographié ¦ Spausdinta mašinėle ¦ Rakstīts ar rakstāmmašīnu ¦ Masinakirjas
+Par fonds ¦ Pagal fondus ¦ Pa fondiem ¦ Fondide kaupa
+Façon de montrer les recueils ¦ Rinkinių rodymo būdas ¦ Krājumu rādīšanas veids ¦ Kogumike näitamise viis
+Où il est ¦ Kur jis yra ¦ Kur tas atrodas ¦ Kus see on
+Service d’archives, fonds, cote, liens, citation ¦ Archyvų tarnyba, fondas, šifras, nuorodos, citavimas ¦ Arhīvu dienests, fonds, šifrs, saites, citēšana ¦ Arhiiviasutus, fond, viide, lingid, viitamine
+Qui peut le voir ¦ Kas gali jį matyti ¦ Kas to var redzēt ¦ Kes seda näha saab
+Communicabilité, réutilisation, support, état ¦ Prieinamumas, pakartotinis naudojimas, laikmena, būklė ¦ Pieejamība, atkalizmantošana, nesējs, stāvoklis ¦ Avalikkus, taaskasutus, kandja, seisund
+Ce qu’on y trouve ¦ Ką jame rasi ¦ Ko tajā atrast ¦ Mida sealt leiab
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Įrašai pagal metus, pavardės, profesijos, vietos, pastabos patikrinti ¦ Ieraksti pa gadiem, uzvārdi, nodarbošanās, vietas, pārbaudāmas piezīmes ¦ Kirjed aastate kaupa, perekonnanimed, ametid, kohad, kontrollimist vajavad märkused
+🗂 Registres : reste à faire ¦ 🗂 Registrai: liko padaryti ¦ 🗂 Reģistri: atlicis paveikt ¦ 🗂 Registrid: veel teha
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ Rinkiniai (registrai, ryšuliai), kuriuose dar liko puslapių perrašyti, peržiūrėti, trūkstamų ar nufotografuoti. ¦ Krājumi (reģistri, saišķi), kuros vēl ir lapas, kas jāpārraksta, jāpārskata, trūkst vai jānofotografē. ¦ Kogumikud (registrid, kimbud), kus on veel lehekülgi ümber kirjutada, üle vaadata, puudu või pildistada.
+Le lien doit commencer par http:// ou https://. ¦ Nuoroda turi prasidėti http:// arba https://. ¦ Saitei jāsākas ar http:// vai https://. ¦ Link peab algama http:// või https://.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ Vaizdo nuorodoje vietoj vaizdo numerio turi būti {n}. ¦ Attēla saitē attēla numura vietā jābūt {n}. ¦ Pildi link peab pildi numbri asemel sisaldama {n}.
+Ce lien n’est pas une adresse valide. ¦ Ši nuoroda nėra tinkamas adresas. ¦ Šī saite nav derīga adrese. ¦ See link ei ole kehtiv aadress.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ Rinkinys negali būti savo paties kitas egzempliorius. ¦ Krājums nevar būt pats savs cits eksemplārs. ¦ Kogumik ei saa olla iseenda teine eksemplar.
+Mode consultation : ce recueil n’est pas communicable. ¦ Peržiūros režimas: šis rinkinys neprieinamas visuomenei. ¦ Skatīšanās režīms: šis krājums nav publiski pieejams. ¦ Vaatamisrežiim: see kogumik pole avalik.
+archives|Cote ¦ Šifras ¦ Šifrs ¦ Viide

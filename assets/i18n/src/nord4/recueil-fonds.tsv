@@ -1,0 +1,155 @@
+fr ¦ fi ¦ hu
+# 🏛 Fiche d’identité, vue des fonds, ce qu’on y trouve, réglages des recueils (heritage-recueil-fiche.js, heritage-recueil-fonds.js, heritage-recueil-sens.js, lib/recueil_fiche.php)
+pièce {n} ¦ asiakirja {n} ¦ {n}. darab
+vue {n} ¦ kuva {n} ¦ {n}. felvétel
+Citer ¦ Viittaa ¦ Hivatkozás
+Copie le texte : ¦ Kopioi teksti: ¦ Másold ki a szöveget:
+Communicable ¦ Julkinen ¦ Kutatható
+le délai est passé ({y}) ¦ määräaika on kulunut ({y}) ¦ a határidő lejárt ({y})
+acte le plus récent : {y} ; délai {d} ans ¦ uusin asiakirja: {y}; määräaika {d} vuotta ¦ legutóbbi bejegyzés: {y}; határidő {d} év
+Réservé jusqu’en {y} ¦ Salassa vuoteen {y} asti ¦ Zárolva {y}-ig
+acte le plus récent : {y} ; délai {d} ans ({k}) ¦ uusin asiakirja: {y}; määräaika {d} vuotta ({k}) ¦ legutóbbi bejegyzés: {y}; határidő {d} év ({k})
+sorte d’acte pas dite : 75 ans par prudence ¦ asiakirjan lajia ei kerrottu: varmuuden vuoksi 75 vuotta ¦ a bejegyzés fajtája nincs megadva: 75 év a biztonság kedvéért
+Sur autorisation ¦ Luvalla ¦ Engedéllyel
+écris les années du recueil (ou fais son sommaire) pour que l’app calcule ¦ kirjoita kokoelman vuodet (tai tee sen sisällysluettelo), niin sovellus laskee ¦ írd be a gyűjtemény éveit (vagy készítsd el a tartalomjegyzékét), hogy az app ki tudja számolni
+Où il est, qui peut le voir ¦ Missä se on, kuka voi nähdä sen ¦ Hol van, ki láthatja
+service d’archives, fonds, liens, communicabilité, support… ¦ arkisto, arkistonmuodostaja, linkit, julkisuus, aineisto… ¦ levéltár, fond, linkek, kutathatóság, hordozó…
+Dans la liste de Réglages › Services d’archives ; « Lieu de conservation » reste pour un texte libre. ¦ Luettelosta Asetukset › Arkistolaitokset; ”Säilytyspaikka” jää vapaata tekstiä varten. ¦ A Beállítások › Levéltárak listájából; az „Őrzési hely” szabad szövegre marad.
+Fonds ¦ Arkistonmuodostaja ¦ Fond
+ex. Fonds de la paroisse de Sancoins ¦ esim. Sancoinsin seurakunnan arkisto ¦ pl. Sancoins-i plébánia fondja
+Série · sous-série ¦ Sarja · alasarja ¦ Sorozat · alsorozat
+ex. E · 3 E (état civil) ¦ esim. E · 3 E (väestörekisteri) ¦ pl. E · 3 E (anyakönyvek)
+Lien en ligne du recueil ¦ Kokoelman verkkolinkki ¦ A gyűjtemény online linkje
+Lien d’une vue ({n} = numéro de la vue) ¦ Kuvan linkki ({n} = kuvan numero) ¦ Egy felvétel linkje ({n} = a felvétel száma)
+Vue = page + … ¦ Kuva = sivu + … ¦ Felvétel = oldal + …
+ex. 2 si la vue 1 est la couverture et la vue 2 une page blanche ¦ esim. 2, jos kuva 1 on kansi ja kuva 2 tyhjä sivu ¦ pl. 2, ha az 1. felvétel a borító, a 2. felvétel pedig üres oldal
+Autre exemplaire (un autre recueil) ¦ Toinen kappale (toinen kokoelma) ¦ Másik példány (másik gyűjtemény)
+… ou décrit ¦ … tai kuvattu ¦ … vagy leírva
+ex. Collection du greffe, AD 18, 3 E 1235 ¦ esim. Tuomioistuimen kappale, AD 18, 3 E 1235 ¦ pl. A bírósági példány, AD 18, 3 E 1235
+Communicabilité ¦ Julkisuus ¦ Kutathatóság
+Calculée d’après les années et les sortes d’actes (conseillé) ¦ Laskettu vuosien ja asiakirjojen lajien mukaan (suositus) ¦ Az évek és a bejegyzésfajták alapján számolva (ajánlott)
+Réservée jusqu’en… ¦ Salassa vuoteen… ¦ Zárolva eddig…
+Réutilisation ¦ Uudelleenkäyttö ¦ Újrahasznosítás
+Support ¦ Aineisto ¦ Hordozó
+État matériel ¦ Kunto ¦ Fizikai állapot
+Numérisé par ¦ Digitoinut ¦ Digitalizálta
+ex. AD 18 (2009), moi (2026) ¦ esim. AD 18 (2009), minä (2026) ¦ pl. AD 18 (2009), én (2026)
+Provenance ¦ Alkuperä ¦ Proveniencia
+ex. Dépôt de la commune, 1952 ¦ esim. Kunnan luovuttama, 1952 ¦ pl. A község letétje, 1952
+vue = page + {n} ¦ kuva = sivu + {n} ¦ felvétel = oldal + {n}
+Pas encore dit : « Modifier » → « 🏛 Où il est, qui peut le voir ». ¦ Ei vielä kerrottu: ”Muokkaa” → ”🏛 Missä se on, kuka voi nähdä sen”. ¦ Még nincs megadva: „Szerkesztés” → „🏛 Hol van, ki láthatja”.
+Citer : ¦ Viittaa: ¦ Hivatkozás:
+Mode consultation : cacher les recueils non communicables (conseillé) ¦ Selaustila: piilota kokoelmat, jotka eivät ole julkisia (suositus) ¦ Megtekintő mód: a nem kutatható gyűjtemények elrejtése (ajánlott)
+En mode consultation, les recueils non communicables sont cachés. ¦ Selaustilassa kokoelmat, jotka eivät ole julkisia, on piilotettu. ¦ Megtekintő módban a nem kutatható gyűjtemények rejtve vannak.
+En mode consultation, tous les recueils sont montrés. ¦ Selaustilassa kaikki kokoelmat näytetään. ¦ Megtekintő módban minden gyűjtemény látszik.
+Vue {n} en ligne ¦ Kuva {n} verkossa ¦ {n}. felvétel online
+Citer cette page ¦ Viittaa tähän sivuun ¦ Hivatkozás erre az oldalra
+Recueils chez eux ¦ Heidän kokoelmansa ¦ Náluk őrzött gyűjtemények
+{p} pages · {d} finies ou relues · {a} absentes ¦ {p} sivua · {d} valmista tai tarkistettua · {a} puuttuu ¦ {p} oldal · {d} kész vagy átnézett · {a} hiányzó
+Fonds · série ¦ Arkistonmuodostaja · sarja ¦ Fond · sorozat
+Transcrit · relu ¦ Litteroitu · tarkistettu ¦ Átírva · átnézve
+Aucun recueil relié à ce service : dans un recueil, « Modifier » → « 🏛 Où il est » → Service d’archives. ¦ Tähän arkistoon ei ole liitetty kokoelmia: kokoelmassa ”Muokkaa” → ”🏛 Missä se on” → Arkisto. ¦ Ehhez a levéltárhoz nincs gyűjtemény kapcsolva: egy gyűjteményben „Szerkesztés” → „🏛 Hol van” → Levéltár.
+Lacunes ({n}) ¦ Aukot ({n}) ¦ Hiányok ({n})
+Licence ouverte (Etalab) ¦ Avoin lisenssi (Etalab) ¦ Nyílt licenc (Etalab)
+CC BY ¦ CC BY ¦ CC BY
+CC BY-SA ¦ CC BY-SA ¦ CC BY-SA
+CC BY-NC ¦ CC BY-NC ¦ CC BY-NC
+Domaine public ¦ Vapaasti käytettävä (public domain) ¦ Közkincs
+Tous droits réservés ¦ Kaikki oikeudet pidätetään ¦ Minden jog fenntartva
+À demander au service ¦ Kysy arkistosta ¦ Kérdezd meg a levéltárat
+Microfilm ¦ Mikrofilmi ¦ Mikrofilm
+Bon ¦ Hyvä ¦ Jó
+Abîmé ¦ Vaurioitunut ¦ Sérült
+Fragile (ne pas manipuler) ¦ Hauras (ei saa käsitellä) ¦ Törékeny (nem kézbe venni)
+Restauré ¦ Konservoitu ¦ Restaurált
+{n} à transcrire ¦ {n} litteroitavana ¦ {n} átírandó
+{n} à relire ¦ {n} tarkistettavana ¦ {n} átnézendő
+{n} absentes ¦ {n} puuttuu ¦ {n} hiányzó
+{n} à photographier ¦ {n} kuvattavana ¦ {n} lefotózandó
+pas en ligne ¦ ei verkossa ¦ nincs online
+Chargement des fonds… ¦ Ladataan arkistoja… ¦ Fondok betöltése…
+La vue des fonds ne s’ouvre pas ¦ Arkistonäkymä ei avaudu ¦ A fondnézet nem nyílik meg
+Sans service d’archives ¦ Ilman arkistoa ¦ Levéltár nélkül
+Sans fonds ¦ Ilman arkistonmuodostajaa ¦ Fond nélkül
+{n} · {t} % transcrit · {r} % relu ¦ {n} · {t} % litteroitu · {r} % tarkistettu ¦ {n} · {t} % átírva · {r} % átnézve
+recueils · {s} ¦ kokoelmat · {s} ¦ gyűjtemény · {s}
+pages attendues ¦ odotetut sivut ¦ várt oldal
+photographiées ¦ kuvattu ¦ lefotózva
+transcrites · {r} % relues ¦ litteroitu · {r} % tarkistettu ¦ átírva · {r} % átnézve
+pages absentes · {g} ¦ puuttuvat sivut · {g} ¦ hiányzó oldal · {g}
+Montrer : ¦ Näytä: ¦ Mutasd:
+Colonnes… ¦ Sarakkeet… ¦ Oszlopok…
+État des fonds ¦ Arkistojen tilanne ¦ Fondok állapota
+Aucun recueil ne correspond ¦ Mikään kokoelma ei vastaa hakua ¦ Nincs megfelelő gyűjtemény
+Change « Montrer » ou les mots cherchés. ¦ Muuta kohtaa ”Näytä” tai hakusanoja. ¦ Módosítsd a „Mutasd” beállítást vagy a keresett szavakat.
+Crée un recueil, puis dis où il est : « Modifier » → « 🏛 Où il est ». ¦ Luo kokoelma ja kerro sitten, missä se on: ”Muokkaa” → ”🏛 Missä se on”. ¦ Hozz létre egy gyűjteményt, majd add meg, hol van: „Szerkesztés” → „🏛 Hol van”.
+Chaque groupe se replie. Un clic sur « Reste » ouvre l’état du recueil. Un recueil sans service d’archives va dans « Sans service d’archives » : « Modifier » → « 🏛 Où il est ». ¦ Jokaisen ryhmän voi pienentää. Napsautus kohtaan ”Jäljellä” avaa kokoelman tilan. Kokoelma, jolla ei ole arkistoa, menee kohtaan ”Ilman arkistoa”: ”Muokkaa” → ”🏛 Missä se on”. ¦ Minden csoport összecsukható. A „Hátravan” gombra kattintva megnyílik a gyűjtemény állapota. A levéltár nélküli gyűjtemény a „Levéltár nélkül” csoportba kerül: „Szerkesztés” → „🏛 Hol van”.
+🏛 VUE DES FONDS ¦ 🏛 ARKISTONÄKYMÄ ¦ 🏛 FONDNÉZET
+Coche les colonnes à montrer (le recueil est toujours là). ¦ Valitse näytettävät sarakkeet (kokoelma on aina mukana). ¦ Jelöld be a megjelenítendő oszlopokat (a gyűjtemény mindig ott van).
+Les recueils n’ont pas pu être lus. ¦ Kokoelmia ei voitu lukea. ¦ A gyűjteményeket nem sikerült beolvasni.
+Rien ne reste à faire dans tes recueils. ¦ Kokoelmissasi ei ole enää mitään tehtävää. ¦ A gyűjteményeidben már nincs teendő.
+Registres : reste à faire ¦ Kirkonkirjat: jäljellä ¦ Anyakönyvek: hátralévő teendők
+Vue des fonds ¦ Arkistonäkymä ¦ Fondnézet
+=recueil ¦ kokoelma|kokoelmaa ¦ gyűjtemény|gyűjtemény
+=service ¦ arkisto|arkistoa ¦ levéltár|levéltár
+=lacune ¦ aukko|aukkoa ¦ hiány|hiány
+Photographié ¦ Kuvattu ¦ Lefotózva
+Reste ¦ Jäljellä ¦ Hátravan
+Numérotation ¦ Numerointi ¦ Számozás
+Reste à transcrire ¦ Litteroimatta ¦ Átírásra vár
+Reste à relire ¦ Tarkistamatta ¦ Átnézésre vár
+Avec des pages absentes ¦ Puuttuvia sivuja ¦ Hiányzó oldalakkal
+📚 RECUEILS ¦ 📚 KOKOELMAT ¦ 📚 GYŰJTEMÉNYEK
+Réglages des recueils ¦ Kokoelmien asetukset ¦ Gyűjtemények beállításai
+Ma généalogie (conseillé) ¦ Sukututkimukseni (suositus) ¦ Családfám (ajánlott)
+Centre d’archives, association ¦ Arkistokeskus, yhdistys ¦ Levéltári központ, egyesület
+Centre d’archives : la vue des fonds en premier, les colonnes support, état matériel, langue et réutilisation, et la fiche (« Où il est », « Qui peut le voir ») en tête du résumé des nouveaux recueils. Rien n’est caché pour de bon : on change d’avis quand on veut. ¦ Arkistokeskus: ensin arkistonäkymä, sarakkeet aineisto, kunto, kieli ja uudelleenkäyttö sekä kortti (”Missä se on”, ”Kuka voi nähdä sen”) uusien kokoelmien yhteenvedon alussa. Mitään ei piiloteta lopullisesti: voit muuttaa mielesi milloin vain. ¦ Levéltári központ: elöl a fondnézet, a hordozó, fizikai állapot, nyelv és újrahasznosítás oszlopok, és az adatlap („Hol van”, „Ki láthatja”) az új gyűjtemények összefoglalójának elején. Semmi sincs végleg elrejtve: bármikor meggondolhatod magad.
+Me signaler les trous de numérotation (conseillé) ¦ Ilmoita minulle numeroinnin aukoista (suositus) ¦ Jelezze a számozás hézagait (ajánlott)
+Montrer la fiabilité de la lecture sur chaque page (conseillé) ¦ Näytä lukemisen luotettavuus jokaisella sivulla (suositus) ¦ Az olvasat megbízhatóságának megjelenítése minden oldalon (ajánlott)
+Montrer les remarques « à vérifier » (années sans acte, pics de décès) (conseillé) ¦ Näytä ”tarkistettavat” huomiot (vuodet ilman asiakirjoja, kuolleisuuden huiput) (suositus) ¦ Az „ellenőrizendő” megjegyzések megjelenítése (bejegyzés nélküli évek, halálozási csúcsok) (ajánlott)
+Réglages des recueils enregistrés. ¦ Kokoelmien asetukset tallennettu. ¦ A gyűjtemények beállításai elmentve.
+Rien à montrer pour l’instant : transcris des actes dans l’Atelier (sur les photos des pages), l’app en tire les années, les noms, les métiers, les lieux. ¦ Ei vielä näytettävää: litteroi asiakirjoja Työpajassa (sivujen kuvista), niin sovellus poimii niistä vuodet, nimet, ammatit ja paikat. ¦ Még nincs mit mutatni: írj át bejegyzéseket a Műhelyben (az oldalak fotóin), és az app kinyeri belőlük az éveket, neveket, foglalkozásokat, helyeket.
+Actes par année, de {a} à {b} ¦ Asiakirjat vuosittain, {a}–{b} ¦ Bejegyzések évenként, {a}–{b}
+{y} : aucun acte ¦ {y}: ei asiakirjoja ¦ {y}: nincs bejegyzés
+{a}-{b} : aucun acte ¦ {a}-{b}: ei asiakirjoja ¦ {a}-{b}: nincs bejegyzés
+registre perdu, ailleurs, ou pas encore transcrit ? ¦ kadonnut kirja, muualla vai vielä litteroimatta? ¦ elveszett anyakönyv, máshol van, vagy még nincs átírva?
+Marquer une lacune ¦ Merkitse aukko ¦ Hiány megjelölése
+{y} : {n} décès ou sépultures ¦ {y}: {n} kuolemaa tai hautausta ¦ {y}: {n} halálozás vagy temetés
+au moins deux fois plus que d’habitude ({m}) : épidémie, disette, guerre ? À vérifier. ¦ vähintään kaksi kertaa tavallista enemmän ({m}): epidemia, nälänhätä, sota? Tarkistettava. ¦ legalább kétszer annyi, mint általában ({m}): járvány, éhínség, háború? Ellenőrizendő.
+{n} ({l} reliées à une fiche) ¦ {n} ({l} liitetty korttiin) ¦ {n} ({l} adatlaphoz kapcsolva)
+{p} % signent ({s} sur {t} actes qui le disent) ¦ {p} % allekirjoittaa ({s}/{t} asiakirjasta, joissa se kerrotaan) ¦ {p} % aláír ({s} a {t} olyan bejegyzésből, amely ezt jelzi)
+sans acte : {x} ¦ ilman asiakirjoja: {x} ¦ bejegyzés nélkül: {x}
+Calculé depuis les actes transcrits dans l’Atelier : ce n’est jamais affirmé, c’est à vérifier. ¦ Laskettu Työpajassa litteroiduista asiakirjoista: tämä ei ole koskaan varmaa, se on tarkistettava. ¦ A Műhelyben átírt bejegyzésekből számolva: soha nem biztos, ellenőrizni kell.
+{w} : aucun acte en {y} ¦ {w}: ei asiakirjoja vuonna {y} ¦ {w}: nincs bejegyzés ({y})
+Lacune ajoutée : Recherche › Suivi des registres › Lacunes d’archives. ¦ Aukko lisätty: Tutkimus › Indeksoitujen kirkonkirjojen seuranta › Arkistojen aukot. ¦ Hiány felvéve: Kutatás › Feldolgozott anyakönyvek nyilvántartása › Levéltári hiányok.
+Lacune notée ¦ Aukko merkitty ¦ Hiány feljegyezve
+Calcul… ¦ Lasketaan… ¦ Számolás…
+Ce qu’on trouve chez eux ¦ Mitä heiltä löytyy ¦ Mi található náluk
+Règle (Code du patrimoine, L213-2) : tout de suite dans le cas général et pour les actes de décès ; 50 ans (vie privée, documents militaires) ; 75 ans (naissances, mariages, notaires, recensements) ; 100 ans si des mineurs sont concernés ; 120 ans après la naissance pour les dossiers médicaux. L’app propose, tu corriges : le service d’archives a le dernier mot. ¦ Sääntö (Code du patrimoine, L213-2): heti yleisessä tapauksessa ja kuolinasiakirjoille; 50 vuotta (yksityiselämä, sotilasasiakirjat); 75 vuotta (syntymät, avioliitot, notaarit, väestölaskennat); 100 vuotta, jos asia koskee alaikäisiä; 120 vuotta syntymästä potilasasiakirjoille. Sovellus ehdottaa, sinä korjaat: arkistolla on viimeinen sana. ¦ Szabály (Code du patrimoine, L213-2): általános esetben és halálozási bejegyzéseknél azonnal; 50 év (magánélet, katonai iratok); 75 év (születések, házasságok, közjegyzők, népszámlálások); 100 év, ha kiskorúakat érint; 120 év a születéstől az egészségügyi iratoknál. Az app javasol, te javítasz: a levéltáré az utolsó szó.
+Alsacien ¦ Elsassi ¦ Elzászi
+Catalan ¦ Katalaani ¦ Katalán
+Flamand ¦ Flaami ¦ Flamand
+Basque ¦ Baski ¦ Baszk
+Cursive moderne ¦ Moderni kaunokirjoitus ¦ Modern kurzív
+Cursive XVIIIᵉ ¦ 1700-luvun kaunokirjoitus ¦ 18. századi kurzív
+Écriture secrétaire ¦ Sihteerinkäsiala ¦ Titkári írás
+Gothique ¦ Goottilainen kirjoitus ¦ Gótikus írás
+Kurrent (allemande) ¦ Kurrent (saksalainen) ¦ Kurrent (német)
+Imprimé ¦ Painettu ¦ Nyomtatott
+Dactylographié ¦ Konekirjoitettu ¦ Gépelt
+Par fonds ¦ Arkistonmuodostajittain ¦ Fondonként
+Façon de montrer les recueils ¦ Kokoelmien näyttötapa ¦ A gyűjtemények megjelenítési módja
+Où il est ¦ Missä se on ¦ Hol van
+Service d’archives, fonds, cote, liens, citation ¦ Arkisto, arkistonmuodostaja, signum, linkit, viittaus ¦ Levéltár, fond, jelzet, linkek, hivatkozás
+Qui peut le voir ¦ Kuka voi nähdä sen ¦ Ki láthatja
+Communicabilité, réutilisation, support, état ¦ Julkisuus, uudelleenkäyttö, aineisto, kunto ¦ Kutathatóság, újrahasznosítás, hordozó, állapot
+Ce qu’on y trouve ¦ Mitä siitä löytyy ¦ Mi található benne
+Actes par année, noms, métiers, lieux, remarques à vérifier ¦ Asiakirjat vuosittain, nimet, ammatit, paikat, tarkistettavat huomiot ¦ Bejegyzések évenként, nevek, foglalkozások, helyek, ellenőrizendő megjegyzések
+🗂 Registres : reste à faire ¦ 🗂 Kirkonkirjat: jäljellä ¦ 🗂 Anyakönyvek: hátralévő teendők
+Les recueils (registres, liasses) où il reste des pages à transcrire, à relire, absentes ou à photographier. ¦ Kokoelmat (kirkonkirjat, niput), joissa on vielä sivuja litteroitavana, tarkistettavana, puuttuvina tai kuvattavana. ¦ A gyűjtemények (anyakönyvek, kötegek), amelyekben még vannak átírandó, átnézendő, hiányzó vagy lefotózandó oldalak.
+Le lien doit commencer par http:// ou https://. ¦ Linkin on alettava http:// tai https://. ¦ A linknek http:// vagy https:// előtaggal kell kezdődnie.
+Le lien d’une vue doit contenir {n} à la place du numéro de la vue. ¦ Kuvan linkissä on oltava {n} kuvan numeron paikalla. ¦ Egy felvétel linkjének a felvétel száma helyett {n}-t kell tartalmaznia.
+Ce lien n’est pas une adresse valide. ¦ Tämä linkki ei ole kelvollinen osoite. ¦ Ez a link nem érvényes cím.
+Un recueil ne peut pas être son propre autre exemplaire. ¦ Kokoelma ei voi olla oma toinen kappaleensa. ¦ Egy gyűjtemény nem lehet a saját másik példánya.
+Mode consultation : ce recueil n’est pas communicable. ¦ Selaustila: tämä kokoelma ei ole julkinen. ¦ Megtekintő mód: ez a gyűjtemény nem kutatható.
+archives|Cote ¦ Signum ¦ Jelzet
