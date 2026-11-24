@@ -189,3 +189,9 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 .rd-h { margin: 14px 0 6px; font-size: 1rem; }
 .rd-picks { display: grid; gap: 2px; max-height: 46vh; overflow: auto; }
 .rd-q { width: 100%; margin-bottom: 8px; }
+/* 📚 Recueils : chaque groupe se replie (▸ / ▾) */
+.ong-rhrow { display: flex; align-items: center; gap: 4px; padding-left: 0; }
+.ong-rhrow .ong-rh { flex: 1; min-width: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 6px; padding: 2px 4px; }
+.ong-rhrow .ong-rh span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ong-fold { flex: none; width: 24px; height: 24px; border: 1.5px solid var(--line, #ccd); background: var(--surface, #fff); color: inherit; font: inherit; line-height: 1; cursor: pointer; padding: 0; }
+.ong-fold:hover, .ong-fold:focus-visible { border-color: var(--ink, #111); }

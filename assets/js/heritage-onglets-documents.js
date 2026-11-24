@@ -157,9 +157,18 @@
         <span class="ong-thumb">${thumbOf(d)}</span><span class="ong-txt"><strong>${esc(d.title)}</strong>${subLines(d, {cote: bar?.state?.sort === 'cote'})}</span></button>`;
     const MODES = [['az', 'A → Z'], ['people', '👤 Par personne'], ['recueils', '📚 Recueils'], ['folders', '📁 Dossiers']];
     const modeOf = () => (MODES.some(m => m[0] === readPref().mode) ? readPref().mode : 'az');
+    /* 📚 Recueils : les groupes repliés (0 = « Dans aucun recueil ») ; tout ouvert au départ */
+    const foldedRecs = () => (Array.isArray(readPref().recFold) ? readPref().recFold.map(Number) : []);
+    function toggleFold(id) {
+        const f = foldedRecs(), i = f.indexOf(id); if (i >= 0) f.splice(i, 1); else f.push(id);
+        writePref({recFold: f}); paintList();
+        document.querySelector(`#sidebar-content [data-ong-fold="${id}"].ong-fold`)?.focus({preventScroll: true});
+    }
     function underMenu(btn) {
         const u = under();
-        UI().menuAt?.(btn, UNDER.map(([k, l]) => ({icon: k === u ? '✓' : '', label: l, run: () => { writePref({under: k}); paintList(); paintWorkspaceList(); }})), {title: 'Sous le titre'});
+        const items = UNDER.map(([k, l]) => ({icon: k === u ? '✓' : '', label: l, run: () => { writePref({under: k}); paintList(); paintWorkspaceList(); }}));
+        if (modeOf() === 'recueils') items.push('-', {icon: foldedRecs().includes(0) ? '' : '✓', label: T('Montrer « Dans aucun recueil »'), run: () => toggleFold(0)});
+        UI().menuAt?.(btn, items, {title: 'Sous le titre'});
     }
     function rowMenu(id, e) { // K14 : UI.contextMenu = le menu de l'app à l'endroit de la souris
         const d = byId(id); if (!d || !UI().contextMenu) return;
@@ -187,6 +196,7 @@
             const m = e.target.closest('[data-ong-mode]'); if (m) { writePref({mode: m.dataset.ongMode}); shown = STEP; A().renderSidebar(); return; }
             const o = e.target.closest('[data-ong-under]'); if (o) { underMenu(o); return; }
             const l = e.target.closest('[data-ong-letter]'); if (l && !l.disabled) { jumpTo(l.dataset.ongLetter); return; }
+            const fo = e.target.closest('[data-ong-fold]'); if (fo) { toggleFold(Number(fo.dataset.ongFold)); return; }
             const rh = e.target.closest('[data-ong-rec]'); if (rh) { ext.openRecueil?.(Number(rh.dataset.ongRec)); return; }
             const r = e.target.closest('[data-ong-doc]'); if (r) { if (pick.on && !cur) { togglePick(Number(r.dataset.ongDoc)); return; } select(Number(r.dataset.ongDoc)); return; }
             const more = e.target.closest('[data-ong-more]'); if (more) { shown += STEP; paintList(); }
@@ -215,12 +225,14 @@
         const out = [];
         if (mode === 'recueils') { // 📚 chaque recueil, ses documents dans l'ordre des pages ; « Dans aucun recueil » à la fin
             const keep = new Set(list.map(d => d.id)), none = list.filter(d => !(d.recueils || []).length);
+            const folded = foldedRecs(); // ▸ / ▾ : un recueil, ou « Dans aucun recueil » (0), replié ou ouvert (retenu)
             recs.forEach(r => {
                 const ds = (docs || []).filter(d => keep.has(d.id) && (d.recueils || []).some(x => x.id === r.id)).map(d => ({d, num: d.recueils.find(x => x.id === r.id).num})).sort((a, b) => a.num - b.num);
                 if (!ds.length && (bar?.state?.q || Object.keys(bar?.state?.filters || {}).length)) return;
-                out.push({rh: r, n: ds.length}); ds.forEach(x => out.push({d: x.d, letter: '#', num: x.num}));
+                const shut = folded.includes(r.id);
+                out.push({rh: r, n: ds.length, shut}); if (!shut) ds.forEach(x => out.push({d: x.d, letter: '#', num: x.num}));
             });
-            if (none.length) { out.push({rh: null, n: none.length}); none.forEach(d => out.push({d, letter: '#'})); }
+            if (none.length) { const shut = folded.includes(0); out.push({rh: null, n: none.length, shut}); if (!shut) none.forEach(d => out.push({d, letter: '#'})); }
             return out;
         }
         if (mode === 'people') {
@@ -274,7 +286,9 @@
         for (const e of all) {
             if (e.d && rows >= shown) break;
             if (e.lh) html += `<div class="section-label ong-lh" data-ong-lh="${esc(e.lh)}">${esc(e.lh)}</div>`;
-            else if (e.rh !== undefined) html += e.rh ? `<button type="button" class="ong-ph ong-rh" data-ong-rec="${e.rh.id}" title="${esc(T('📚 Ouvrir le recueil'))}"><span>${esc(e.rh.icon || '📚')} ${esc(e.rh.title)}</span><small>${e.n}</small></button>` : `<div class="ong-ph"><span>${esc(T('Dans aucun recueil'))}</span><small>${e.n}</small></div>`;
+            else if (e.rh !== undefined) { const fid = e.rh ? e.rh.id : 0, fold = `<button type="button" class="ong-fold" data-ong-fold="${fid}" aria-expanded="${!e.shut}" title="${esc(e.shut ? T('Montrer') : T('Masquer'))}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
+                html += e.rh ? `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-rec="${e.rh.id}" title="${esc(T('📚 Ouvrir le recueil'))}"><span>${esc(e.rh.icon || '📚')} ${esc(e.rh.title)}</span><small>${e.n}</small></button></div>`
+                    : `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-fold="0"><span>${esc(T('Dans aucun recueil'))}</span><small>${e.n}</small></button></div>`; }
             else if (e.ph) html += `<div class="ong-ph" data-ong-ph="${e.ph.p ? e.ph.p.id : 0}"><span>${e.ph.p ? `👤 ${esc(e.ph.p.name)}` : esc(T('Sans personne'))}</span><small>${e.ph.docs.length}</small></div>`;
             else { html += e.num ? rowHtml(e.d, e.letter).replace('<strong>', `<strong><span class="ong-pnum">${esc(T('p. {n}', {n: String(e.num)}))}</span> `) : rowHtml(e.d, e.letter); rows++; }
         }

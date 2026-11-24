@@ -109,6 +109,21 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(r.h[0], /📚 Registre de Sancoins\s*4/); assert.match(r.h[1], /Dans aucun recueil/);
             assert.deepEqual(r.rows.slice(0, 4), ['p. 1 Acte B', 'p. 2 Acte A', 'p. 3 Contrat, page 1', 'p. 4 Contrat, page 2']);
         });
+        await t('📚 Recueils : « Dans aucun recueil » (et chaque recueil) se masque et se montre, retenu ; aussi dans « ⋯ »', async () => {
+            const rows = () => p.evaluate(() => document.querySelectorAll('#sidebar-content .ong-list [data-ong-doc]').length);
+            assert.equal(await rows(), 8);
+            await p.click('#sidebar-content .ong-fold[data-ong-fold="0"]');
+            assert.equal(await rows(), 4, 'les 4 documents hors recueil sont masqués');
+            assert.match(await p.evaluate(() => document.querySelector('#sidebar-content .ong-fold[data-ong-fold="0"]').getAttribute('aria-expanded')), /false/);
+            await p.evaluate(() => window.LCNDA_APP.renderSidebar()); await p.waitForSelector('#sidebar-content [data-ong-fold="0"]'); await sleep(300);
+            assert.equal(await rows(), 4, 'retenu');
+            await p.click(`#sidebar-content .ong-fold[data-ong-fold="${rid}"]`); assert.equal(await rows(), 0, 'un recueil se replie aussi');
+            await p.click(`#sidebar-content .ong-fold[data-ong-fold="${rid}"]`);
+            await p.click('#sidebar-content [data-ong-under]');
+            const item = p.locator('.ui-actmenu [role=menuitem]').filter({hasText: 'Montrer « Dans aucun recueil »'}).first();
+            await item.click(); await sleep(200);
+            assert.equal(await rows(), 8, '« ⋯ » le montre de nouveau');
+        });
         await t('chercher par recueil : son nom dans « Chercher… », et le filtre « Recueil »', async () => {
             await p.click('#sidebar-content [data-ong-mode="az"]');
             assert.deepEqual((await withFilters({}, 'sancoins registre')).sort(), [1, 2, 7, 8]);
