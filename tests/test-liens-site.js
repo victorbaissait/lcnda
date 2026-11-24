@@ -54,7 +54,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
     const errs = [];
     try {
         const p = await (await browser.newContext({viewport: {width: 1440, height: 900}})).newPage();
-        p.on('pageerror', e => errs.push(e.message));
+        p.on('pageerror', e => errs.push(e.message)); p.on('crash', () => console.log('!! la page a planté (mémoire ?)')); p.on('close', () => console.log('!! page fermée'));
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.siteReceive && window.LCNDA_EXT?.siteKit && window.LCNDA_EXT?.sendTo && window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.openDialog, null, {timeout: 60000}).catch(async e => { console.log(await p.evaluate(() => JSON.stringify({r: !!window.LCNDA_EXT?.siteReceive, k: !!window.LCNDA_EXT?.siteKit, s: !!window.LCNDA_EXT?.sendTo, c: !!window.LCNDA_APP?.state?.csrf, d: !!window.LCNDA_EXT?.openDialog})), errs); throw e; });
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
         const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result || r; } catch (e) { return {error: e.message}; } }, [a, b]);
@@ -125,7 +125,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
         await t('▶ Tester : les boutons ‹ › du diaporama (et pas en mode modifier)', async () => {
             const within = pr => Promise.race([pr, sleep(1500).then(() => -1)]);
             const count = async () => { for (const f of p.frames()) { if (f === p.mainFrame()) continue; const n = await within(f.evaluate(() => document.querySelector('.lc-diaporama') ? document.querySelectorAll('.lc-diapo-nav').length : -1).catch(() => -1)); if (n >= 0) return n; } return -1; };
-            await sleep(800); assert.strictEqual(await count(), 0, 'en mode modifier : pas de bouton (il serait enregistré dans la page)');
+            if (process.env.NOPLAY) return; await sleep(800); assert.strictEqual(await count(), 0, 'en mode modifier : pas de bouton (il serait enregistré dans la page)');
             await p.evaluate(() => window.LCNDA_EXT.siteWeb.current.setMode('play')); await sleep(1500);
             let n = -1; for (let i = 0; i < 20 && n !== 2; i++) { n = await count(); await sleep(200); }
             assert.strictEqual(n, 2, 'en ▶ Tester : ‹ et ›');

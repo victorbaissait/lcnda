@@ -442,8 +442,7 @@
                 <h1>${esc(title)}</h1><div class="pair"><figure><img alt="" src="${ua}"><figcaption><b>${esc(lab[0])}</b> — ${esc(titleOf(st.a))}</figcaption></figure><figure><img alt="" src="${ub}"><figcaption><b>${esc(lab[1])}</b> — ${esc(titleOf(st.b))}</figcaption></figure></div>
                 ${v ? `<p class="v"><b>${esc(i18n('Ressemblance'))} :</b> ${esc(v)}</p>` : ''}${st.notes.trim() ? `<h2>${esc(i18n('Notes'))}</h2><p>${notesHtml()}</p>` : ''}</body></html>`;
             if (U.openPrintDialog) return U.openPrintDialog({title, key: 'photocmp', photos: false, margin: 12, html});
-            const f = document.createElement('iframe'); f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(f);
-            const d = f.contentDocument; d.open(); d.write(html); d.close(); setTimeout(() => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (_) {} setTimeout(() => f.remove(), 1500); }, 400);
+            A()?.toast?.(i18n('L’impression n’est pas encore prête : réessaie dans un instant.'), 'error');
         }
         /** le compte rendu en texte : les deux photos (titres), la ressemblance, les notes */
         const reportHtml = () => { const v = verdictLine(), lab = place ? [i18n('A — l’image ancienne'), i18n('B — la photo d’aujourd’hui')] : [i18n('Photo A'), i18n('Photo B')];

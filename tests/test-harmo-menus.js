@@ -78,7 +78,9 @@ step('K14 : « ⋯ » ouvre toujours le menu de l’app ; le clic droit aussi', 
     const cm = grepAll(/addEventListener\('contextmenu'/).filter(([f]) => !['app-actions.js', 'app-ui.js'].includes(f));
     // le clic droit peut passer par une méthode de l'outil (« e => this.onContext(e) ») : on regarde alors dans cette méthode
     const viaMethod = (f, l) => [...l.slice(l.indexOf("'contextmenu'")).matchAll(/this\.([A-Za-z_$][\w$]*)\(/g)].some(([, name]) => { const at = all[f].search(new RegExp(`\\n\\s*(?:async\\s+)?${name}\\([\\w, ]*\\)\\s*\\{`)); return at >= 0 && /contextMenu\(|menuAt\(/.test(all[f].slice(at, at + 4000)); }); // menuAt : le menu de l'app (contextMenu n'en est qu'un raccourci)
-    for (const [f, n, l] of cm) assert.ok(/contextMenu|e => e\.preventDefault\(\)\);/.test(l) || /contextMenu/.test(all[f].split('\n').slice(n - 1, n + 6).join('\n')) || viaMethod(f, l), `${f}:${n}`);
+    // … ou par une fonction du même fichier (« e => moreMenu(id, {x, y}) ») : on regarde aussi dans cette fonction
+    const viaFunction = (f, n) => { const body = all[f].split('\n').slice(n - 1, n + 6).join('\n'); return [...body.matchAll(/\b([A-Za-z_$][\w$]*)\(/g)].some(([, name]) => { const at = all[f].search(new RegExp(`\\bfunction ${name}\\(`)); return at >= 0 && /contextMenu(\?\.)?\(|menuAt(\?\.)?\(/.test(all[f].slice(at, at + 4000)); }); };
+    for (const [f, n, l] of cm) assert.ok(/contextMenu|e => e\.preventDefault\(\)\);/.test(l) || /contextMenu/.test(all[f].split('\n').slice(n - 1, n + 6).join('\n')) || viaMethod(f, l) || viaFunction(f, n), `${f}:${n}`);
     assert.doesNotMatch(all['heritage-keynote.js'], /contextmenu', e => \{ e\.preventDefault\(\); prev\(\); \}/);
     assert.match(all['app-ui.js'], /UI\.menuAt = \(anchor, items, \{title = '', onClose = null, at = null\}/);
 });
