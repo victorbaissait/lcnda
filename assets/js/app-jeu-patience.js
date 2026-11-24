@@ -1,4 +1,4 @@
-/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 131 patiences.
+/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 234 patiences.
  * Les règles sont dans app-jeu-patience-regles.js (LCNDA_PATIENCES, sans écran) ; ici : la table, les cartes, la souris et le clavier.
  * Jouer : glisser une carte (ou une suite) sur une autre pile, ou cliquer la carte puis la pile où la poser ; double-clic : sur une
  * fondation ; clic sur la pioche : piocher. Jeux à paires (Pyramide, Onze, Monte-Carlo…) : cliquer les cartes qui vont ensemble.
@@ -99,7 +99,7 @@
                 return {pos, W: maxX * cw, H: H + 8};
             }
             const faceHtml = card => `<span class="pc-c">${RANK[card.r]}<i>${SUIT[card.s]}</i></span><span class="pc-mid">${card.r > 10 ? `<b>${RANK[card.r]}</b>` : SUIT[card.s]}</span><span class="pc-c pc-c2">${RANK[card.r]}<i>${SUIT[card.s]}</i></span>`;
-            const slotLabel = p => p.type === 'found' ? (st().base === 1 ? 'A' : RANK[st().base] || '') : p.type === 'stock' ? (st().redeals > 0 && pile('waste')?.cards.length ? '↻' : '') : p.type === 'cell' ? '□' : p.type === 'tab' ? '' : '';
+            const slotLabel = p => p.type === 'found' ? (p.down ? 'R' : st().base === 1 ? 'A' : RANK[st().base] || '') : p.type === 'stock' ? (st().redeals > 0 && pile('waste')?.cards.length ? '↻' : '') : p.type === 'cell' ? '□' : p.type === 'tab' ? '' : '';
 
             function draw() {
                 const {pos, W, H} = layout(), S = st(), stuck = !S.won && P().stuck(S);
