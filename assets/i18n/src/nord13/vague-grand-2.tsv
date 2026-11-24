@@ -1,0 +1,835 @@
+fr ¦ el ¦ bg
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ Μετά από πόσες μέρες χωρίς νέα ένα ζώο θεωρείται « καθυστερημένο »; Κόκκινο στο διπλάσιο της προθεσμίας. ¦ След колко дни без вест едно животно е « закъсняло »? Червено при двойния срок.
+Espèce inconnue ¦ Άγνωστο είδος ¦ Неизвестен вид
+Délais par espèce changés ¦ Οι προθεσμίες ανά είδος άλλαξαν ¦ Сроковете по видове са променени
+Animal (nom, bague…) ¦ Ζώο (όνομα, δαχτυλίδι…) ¦ Животно (име, пръстен…)
+ou bague lue ¦ ή δαχτυλίδι που διαβάστηκε ¦ или прочетен пръстен
+Bague lue ¦ Δαχτυλίδι που διαβάστηκε ¦ Прочетен пръстен
+nb ¦ αρ. ¦ бр.
+Nombre vus ¦ Πόσα είδες ¦ Брой видени
+Le menu de choix n’est pas encore chargé. ¦ Το μενού επιλογής δεν έχει φορτωθεί ακόμα. ¦ Менюто за избор още не е заредено.
+⚡ Saisie d’une séance ¦ ⚡ Καταχώριση εξόρμησης ¦ ⚡ Въвеждане на излизане
+Tout enregistrer ¦ Αποθήκευση όλων ¦ Запази всичко
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Τόπος, ημερομηνία και παρατηρητής μία φορά· μετά μία γραμμή ανά ζώο που είδες (ή ανά δαχτυλίδι που διάβασες, αν δεν ξέρεις ακόμα ποιο είναι). ¦ Мястото, датата и наблюдателят веднъж; после по ред за всяко видяно животно (или прочетен пръстен, ако още не знаеш кое е).
+Site de suivi ¦ Τοποθεσία παρακολούθησης ¦ Място за наблюдение
+Observateur ¦ Παρατηρητής ¦ Наблюдател
+Nb ¦ Αρ. ¦ Бр.
+Dis quand a eu lieu la séance. ¦ Πες πότε έγινε η εξόρμηση. ¦ Кажи кога беше излизането.
+Choisis un site ou un lieu pour la séance. ¦ Διάλεξε μια τοποθεσία ή έναν τόπο για την εξόρμηση. ¦ Избери място за наблюдение или място за излизането.
+Ajoute au moins un animal vu. ¦ Πρόσθεσε τουλάχιστον ένα ζώο που είδες. ¦ Добави поне едно видяно животно.
+Séance enregistrée : {n} ¦ Η εξόρμηση αποθηκεύτηκε: {n} ¦ Излизането е запазено: {n}
+🖨 Fiche de terrain ¦ 🖨 Φύλλο πεδίου ¦ 🖨 Полеви лист
+Aperçu et impression ¦ Προεπισκόπηση και εκτύπωση ¦ Преглед и печат
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Τα ζώα που αναμένονται σε μια τοποθεσία (όσα έχουν ήδη δει εκεί), με τα δαχτυλίδια και τα σημάδια τους, και κουτάκια για τσεκάρισμα: για έξοδο χωρίς υπολογιστή. ¦ Животните, очаквани на място (вече виждани там), с пръстените и маркировките им и квадратчета за отметка: за излизане без компютър.
+Tous les animaux suivis ¦ Όλα τα ζώα που παρακολουθούνται ¦ Всички наблюдавани животни
+Tous les sites ¦ Όλες οι τοποθεσίες ¦ Всички места
+Aucun animal déjà vu sur ce site. ¦ Δεν έχει δει ακόμα κανένα ζώο σε αυτή την τοποθεσία. ¦ На това място още не е видяно животно.
+Fiche de terrain — {s} ¦ Φύλλο πεδίου — {s} ¦ Полеви лист — {s}
+Fiche de terrain ¦ Φύλλο πεδίου ¦ Полеви лист
+Date de la dernière observation ¦ Ημερομηνία τελευταίας παρατήρησης ¦ Дата на последното наблюдение
+Une colonne pour les notes ¦ Μια στήλη για σημειώσεις ¦ Колона за бележки
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Ημερομηνία: ____________  Παρατηρητής: ____________________  Καιρός: ____________ ¦ Дата: ____________  Наблюдател: ____________________  Време: ____________
+SUCCESSIONS ¦ ΚΛΗΡΟΝΟΜΙΕΣ ¦ НАСЛЕДСТВА
+Qui s’en charge ? ¦ Ποιος το αναλαμβάνει; ¦ Кой се занимава?
+ex. Claire LACOMBE (vide : personne) ¦ π.χ. Claire LACOMBE (κενό: κανείς) ¦ напр. Claire LACOMBE (празно: никой)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Είμαι εγώ (για το φίλτρο « Οι υποθέσεις μου ») ¦ Това съм аз (за филтъра « Моите дела »)
+Sur cet ordinateur, « moi » = {name}. ¦ Σε αυτόν τον υπολογιστή, « εγώ » = {name}. ¦ На този компютър « аз » = {name}.
+Confié à {who} ¦ Ανατέθηκε σε {who} ¦ Възложено на {who}
+Plus personne n’en est chargé ¦ Κανείς δεν το έχει πια αναλάβει ¦ Вече никой не отговаря
+Chargé du dossier : ¦ Υπεύθυνος υπόθεσης: ¦ Отговорник по делото:
+👥 Confier le dossier… ¦ 👥 Ανάθεση υπόθεσης… ¦ 👥 Възложи делото…
+👥 Chargé du dossier n° {n} ¦ 👥 Υπεύθυνος υπόθεσης αρ. {n} ¦ 👥 Отговорник по дело № {n}
+à confier ¦ προς ανάθεση ¦ за възлагане
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Ποιος αναλαμβάνει αυτή την προθεσμία; ¦ 👥 Кой се занимава с този срок?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Πιθανή σύγκρουση συμφερόντων: {n} ήδη σε άλλη ανοιχτή υπόθεση. Έλεγξε πριν υπογράψεις σύμβαση. ¦ 🛡 Възможен конфликт на интереси: {n} вече е в друго отворено дело. Провери, преди да подпишеш договор.
+dossier n° {n} ¦ υπόθεση αρ. {n} ¦ дело № {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ Δεν υπάρχει εικόνα αυτού του εγγράφου στη βάση: σύνδεσε τη σαρωμένη πράξη με το γεγονός και ξαναδοκίμασε. ¦ В базата няма изображение на този документ: свържи сканирания акт със събитието и опитай отново.
+La lecture automatique n’a pas marché : {err} ¦ Η αυτόματη ανάγνωση απέτυχε: {err} ¦ Автоматичното четене не успя: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Δεν διαβάστηκε κείμενο σε αυτή την εικόνα (χειρόγραφο; δοκίμασε το Εργαστήριο μεταγραφής). ¦ На това изображение не е прочетен текст (ръкопис? опитай Работилницата за препис).
+rien de trouvé ¦ δεν βρέθηκε τίποτα ¦ нищо не е намерено
+PIÈCE ¦ ΕΓΓΡΑΦΟ ¦ ДОКУМЕНТ
+🔎 Lecture automatique — à vérifier ¦ 🔎 Αυτόματη ανάγνωση — προς έλεγχο ¦ 🔎 Автоматично четене — за проверка
+✍️ Noter au journal ¦ ✍️ Σημείωση στο ημερολόγιο ¦ ✍️ Запиши в дневника
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Ό,τι νόμισε το μηχάνημα ότι διάβασε στο « {t} ». Ξετσέκαρε ό,τι είναι λάθος: τίποτα δεν αλλάζει στις καρτέλες. ¦ Какво машината смята, че е прочела на « {t} ». Махни отметката от грешното: нищо не се променя в картоните.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Αυτόματη ανάγνωση του εγγράφου « {p} » (προς έλεγχο) — {line} ¦ Автоматично четене на документа « {p} » (за проверка) — {line}
+Noté au journal du dossier. ¦ Σημειώθηκε στο ημερολόγιο της υπόθεσης. ¦ Записано в дневника на делото.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Ανάγνωση του κειμένου της σαρωμένης πράξης και πρόταση ονομάτων, ημερομηνιών και τόπων ¦ Прочети текста на сканирания акт и предложи имена, дати и места
+🔎 Lire la pièce ¦ 🔎 Ανάγνωση εγγράφου ¦ 🔎 Прочети документа
+demandée ¦ ζητήθηκε ¦ поискан
+à obtenir ¦ προς απόκτηση ¦ за набавяне
+Tableau généalogique de dévolution ¦ Γενεαλογικός πίνακας διαδοχής ¦ Генеалогична таблица на наследяването
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ ΣΧΕΔΙΟ — προς έλεγχο και συμπλήρωση από τον συμβολαιογράφο. Ενδεικτικός υπολογισμός με βάση τις καρτέλες της βάσης. ¦ ПРОЕКТ — да се провери и допълни от нотариуса. Ориентировъчно изчисление по картоните в базата.
+Pièces (renvois) ¦ Έγγραφα (παραπομπές) ¦ Документи (препратки)
+conjoint survivant ¦ επιζών σύζυγος ¦ преживял съпруг
+Aucun héritier calculé pour l’instant. ¦ Δεν έχει υπολογιστεί ακόμα κανένας κληρονόμος. ¦ Засега няма изчислени наследници.
+Les pièces ¦ Τα έγγραφα ¦ Документите
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Συντάχθηκε στις {d}. Έγγραφο εργασίας: δεν αντικαθιστά ούτε την πράξη βεβαίωσης κληρονόμων ούτε το πιστοποιητικό κληρονομικού δικαιώματος. ¦ Съставено на {d}. Работен документ: не замества нито нотариалния акт за наследниците, нито удостоверението за наследници.
+Projet de tableau de dévolution ¦ Σχέδιο πίνακα διαδοχής ¦ Проект на таблица на наследяването
+🖨 Imprimer le tableau ¦ 🖨 Εκτύπωση πίνακα ¦ 🖨 Печат на таблицата
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ Για επισύναψη στην πράξη βεβαίωσης κληρονόμων: κάθε κληρονόμος, η σχέση του, το μερίδιό του και τα έγγραφα που το αποδεικνύουν (P1, P2…). ¦ За прилагане към акта за наследниците: всеки наследник, връзката му, делът му и документите, които го доказват (P1, P2…).
+Tableau de dévolution — {n} ¦ Πίνακας διαδοχής — {n} ¦ Таблица на наследяването — {n}
+Tableau de dévolution ¦ Πίνακας διαδοχής ¦ Таблица на наследяването
+Tableau de dévolution {n} ¦ Πίνακας διαδοχής {n} ¦ Таблица на наследяването {n}
+12 juin 1890 ¦ 12 Ιουνίου 1890 ¦ 12 юни 1890
+2000 et après ¦ 2000 και μετά ¦ 2000 и след това
+7 mai 1925 ¦ 7 Μαΐου 1925 ¦ 7 май 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Δεν υπάρχει γνωστή διαδρομή συγγένειας με το πρόσωπο αφετηρίας. ¦ Няма известна връзка на родство с началното лице.
+Aucun lien de parenté connu. ¦ Καμία γνωστή συγγένεια. ¦ Няма известно родство.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Δεν βρέθηκε συγγένεια με {nm} (πρόσωπο αφετηρίας). ¦ Не е намерено родство с {nm} (начално лице).
+Aucune différence : la fiche est comme avant cette modification. ¦ Καμία διαφορά: η καρτέλα είναι όπως πριν από αυτή την αλλαγή. ¦ Няма разлика: картонът е като преди тази промяна.
+Aucune union enregistrée pour cette fiche. ¦ Δεν έχει καταχωριστεί καμία ένωση για αυτή την καρτέλα. ¦ В този картон няма записан съюз.
+Avant cette modification ¦ Πριν από αυτή την αλλαγή ¦ Преди тази промяна
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Κρυφό στη λειτουργία προβολής, στις εξαγωγές, στις κοινοποιήσεις και στον ιστότοπο. ¦ Скрито в режим на преглед, в експортите, споделянията и сайта.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Αυτό το στοιχείο δεν υπάρχει πια: χρησιμοποίησε την « Επαναφορά » αν διαγράφηκε. ¦ Този елемент вече не съществува: използвай « Възстанови », ако е изтрит.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Αυτή η καρτέλα έχει {n} {what}: κράτα το σωστό, το άλλο γίνεται « άλλη εκδοχή » αυτού του γεγονότος. ¦ Този картон има {n} {what}: запази вярното, другото става « друга версия » на този факт.
+Chargement de la fiche familiale… ¦ Φόρτωση οικογενειακής καρτέλας… ¦ Зареждане на семейния картон…
+Chargement des pesées… ¦ Φόρτωση ζυγισμάτων… ¦ Зареждане на претеглянията…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Διάλεξε « ⤓ PDF » για να αποθηκεύσεις το αρχείο. ¦ Избери « ⤓ PDF », за да запазиш файла.
+Confidentialité et recherche ¦ Απόρρητο και αναζήτηση ¦ Поверителност и търсене
+Courbe de poids ¦ Καμπύλη βάρους ¦ Крива на теглото
+Créer la famille ¦ Δημιουργία οικογένειας ¦ Създай семейство
+C’est la personne de départ (de cujus). ¦ Αυτό είναι το πρόσωπο αφετηρίας (de cujus). ¦ Това е началното лице (de cujus).
+C’est la personne de départ. ¦ Αυτό είναι το πρόσωπο αφετηρίας. ¦ Това е началното лице.
+Date du média moins date de naissance ¦ Ημερομηνία πολυμέσου μείον ημερομηνία γέννησης ¦ Дата на медията минус дата на раждане
+Dernière modification ¦ Τελευταία αλλαγή ¦ Последна промяна
+Dernières fiches créées ¦ Τελευταίες καρτέλες που δημιουργήθηκαν ¦ Последно създадени картони
+En vie et décédés ¦ Εν ζωή και αποθανόντες ¦ Живи и починали
+Exporter la fiche ¦ Εξαγωγή καρτέλας ¦ Експорт на картона
+Exporter la fiche (JSON) ¦ Εξαγωγή καρτέλας (JSON) ¦ Експорт на картона (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Γρήγορες εξαγωγές αυτής της καρτέλας: η 🖨 Εκτύπωση ανοίγει την προεπισκόπηση της εφαρμογής (μέγεθος, προσανατολισμός, PDF), με τη σειρά, το μέγεθος και την ορατότητα των μπλοκ αυτής της καρτέλας. Τα 🔒 εμπιστευτικά γεγονότα δεν εξάγονται ποτέ. ¦ Бързи експорти на този картон: 🖨 Печат отваря прегледа в приложението (формат, ориентация, PDF) с реда, размера и видимостта на блоковете на този картон. Поверителните 🔒 събития никога не се експортират.
+FICHE FAMILIALE ¦ ΟΙΚΟΓΕΝΕΙΑΚΗ ΚΑΡΤΕΛΑ ¦ СЕМЕЕН КАРТОН
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Η οικογένεια αποθηκεύτηκε: δημιουργήθηκαν {n} καρτέλες. ¦ Семейството е запазено: създадени картони: {n}.
+Famille enregistrée. ¦ Η οικογένεια αποθηκεύτηκε. ¦ Семейството е запазено.
+Fiche en JSON ¦ Καρτέλα σε JSON ¦ Картон в JSON
+Fiche familiale ¦ Οικογενειακή καρτέλα ¦ Семеен картон
+Fiche familiale de {nm} ¦ Οικογενειακή καρτέλα του/της {nm} ¦ Семеен картон на {nm}
+Fiche familiale… ¦ Οικογενειακή καρτέλα… ¦ Семеен картон…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Κρατήθηκε: η άλλη εκδοχή σημειώνεται στην « Εναλλακτική ημερομηνία ». ¦ Запазено: другата версия е отбелязана в « Алтернативна дата ».
+Genre inconnu ¦ Άγνωστο φύλο ¦ Неизвестен пол
+Hors Sosa ¦ Εκτός Sosa ¦ Извън Sosa
+Imprimer la fiche ¦ Εκτύπωση καρτέλας ¦ Печат на картона
+Indique au moins le père ou la mère. ¦ Συμπλήρωσε τουλάχιστον τον πατέρα ή τη μητέρα. ¦ Посочи поне бащата или майката.
+Inhumation ¦ Ταφή ¦ Погребение
+Les deux branches ¦ Και οι δύο κλάδοι ¦ И двата клона
+Lien retiré : {nm} ¦ Ο σύνδεσμος αφαιρέθηκε: {nm} ¦ Връзката е премахната: {nm}
+Naissance (les plus anciens d’abord) ¦ Γέννηση (πρώτα οι παλαιότεροι) ¦ Раждане (първо най-старите)
+Naissance (les plus récents d’abord) ¦ Γέννηση (πρώτα οι νεότεροι) ¦ Раждане (първо най-новите)
+Naissance inconnue ¦ Άγνωστη γέννηση ¦ Неизвестно раждане
+Note de recherche ¦ Σημείωση έρευνας ¦ Изследователска бележка
+Ouvre d’abord une fiche. ¦ Άνοιξε πρώτα μια καρτέλα. ¦ Първо отвори картон.
+PDF (aperçu d’impression) ¦ PDF (προεπισκόπηση εκτύπωσης) ¦ PDF (преглед за печат)
+Pas de fiche d’animal liée. ¦ Δεν υπάρχει συνδεδεμένη καρτέλα ζώου. ¦ Няма свързан картон на животно.
+Pas de mariage enregistré. ¦ Δεν έχει καταχωριστεί γάμος. ¦ Няма записан брак.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Δεν υπάρχει ακόμα ζύγισμα: πρόσθεσε βάρος στην 🩺 Υγεία. ¦ Още няма претегляне: добави тегло в 🩺 Здраве.
+Personnaliser l’export… ¦ Προσαρμογή εξαγωγής… ¦ Персонализирай експорта…
+Prénom NOM, ou choisis une fiche ¦ Όνομα ΕΠΩΝΥΜΟ, ή διάλεξε καρτέλα ¦ Име ФАМИЛИЯ или избери картон
+Père, mère, mariage et enfants en une seule saisie ¦ Πατέρας, μητέρα, γάμος και παιδιά σε μία καταχώριση ¦ Баща, майка, брак и деца с едно въвеждане
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Πατέρας, μητέρα, γάμος και παιδιά σε μία καταχώριση. Για κάθε όνομα: διάλεξε υπάρχουσα καρτέλα ή γράψε « Όνομα ΕΠΩΝΥΜΟ » για να δημιουργήσεις νέα. ¦ Баща, майка, брак и деца с едно въвеждане. За всяко име: избери съществуващ картон или напиши « Име ФАМИЛИЯ », за да създадеш нов.
+Recherche du chemin… ¦ Αναζήτηση διαδρομής… ¦ Търсене на връзката…
+Remis : {f} ¦ Επαναφέρθηκε: {f} ¦ Възстановено: {f}
+Rien à exporter dans cet écran. ¦ Δεν υπάρχει τίποτα για εξαγωγή σε αυτή την οθόνη. ¦ На този екран няма нищо за експорт.
+SAISIE RAPIDE ¦ ΓΡΗΓΟΡΗ ΚΑΤΑΧΩΡΙΣΗ ¦ БЪРЗО ВЪВЕЖДАНЕ
+Sans aucune source ¦ Χωρίς καμία πηγή ¦ Без никакъв източник
+Sans parents ¦ Χωρίς γονείς ¦ Без родители
+Sans parents connus ¦ Χωρίς γνωστούς γονείς ¦ Без известни родители
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Κάτω από κάθε όνομα: η συγγένειά του με το πρόσωπο αφετηρίας. ¦ Под всяко име: родството му с началното лице.
+TON LIEN ¦ Η ΣΥΓΓΕΝΕΙΑ ΣΟΥ ¦ ТВОЕТО РОДСТВО
+Tableau (CSV) ¦ Πίνακας (CSV) ¦ Таблица (CSV)
+Ton lien avec cette personne ¦ Η συγγένειά σου με αυτό το πρόσωπο ¦ Твоето родство с това лице
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Η συγγένειά σου με αυτό το πρόσωπο (από {nm}) — πάτησε για να δεις τη διαδρομή. ¦ Твоето родство с това лице (от {nm}) — щракни, за да видиш връзката.
+Tous les genres ¦ Όλα τα φύλα ¦ Всички полове
+Un enfant sans nom de famille prend celui du père. ¦ Ένα παιδί χωρίς επώνυμο παίρνει του πατέρα. ¦ Дете без фамилия получава тази на бащата.
+Voir la note de recherche ¦ Δες τη σημείωση έρευνας ¦ Виж изследователската бележка
+conjoint de ¦ σύζυγος του/της ¦ съпруг(а) на
+enfant de ¦ παιδί του/της ¦ дете на
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ π.χ. προς έλεγχο: ταξιθέτηση 3 E 125, ίχνος: μητρώο της γειτονικής ενορίας ¦ напр. за проверка: сигнатура 3 E 125, следа: регистър на съседната енория
+inconnu(e) ¦ άγνωστος/η ¦ неизвестен(а)
+par {nm} ¦ από {nm} ¦ от {nm}
+parent de ¦ γονέας του/της ¦ родител на
+{a}–{b} ¦ {a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} ήταν περίπου {age} ¦ {nm} беше на около {age}
+{nm} avait moins d’un an ¦ {nm} ήταν κάτω από ενός έτους ¦ {nm} беше на по-малко от година
+{nm} avait {age} ¦ {nm} ήταν {age} ¦ {nm} беше на {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ {n} ζυγίσματα · τελευταίο: {w} στις {d} ¦ Претегляния: {n} · последно: {w} на {d}
+{n} {what} ¦ {n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ {n} βήματα από το πρόσωπο αφετηρίας. ¦ Стъпки от началното лице: {n}.
+{s} depuis la première ¦ {s} από το πρώτο ¦ {s} от първото
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Εμπιστευτικό γεγονός: κρυφό στην προβολή, στις εξαγωγές, στις κοινοποιήσεις και στον ιστότοπο. ¦ Поверително събитие: скрито при преглед, в експортите, споделянията и сайта.
+à {x} ¦ στα {x} ¦ на {x}
+↩ Remettre ¦ ↩ Επαναφορά ¦ ↩ Върни
+⇆ Comparer avec maintenant ¦ ⇆ Σύγκριση με τώρα ¦ ⇆ Сравни със сега
+⚡ ＋ Famille ¦ ⚡ ＋ Οικογένεια ¦ ⚡ ＋ Семейство
+✓ Garder celle-ci ¦ ✓ Κράτα αυτό ¦ ✓ Запази това
+✓ Remis ¦ ✓ Επαναφέρθηκε ¦ ✓ Възстановено
+＋ Un enfant de plus ¦ ＋ Ένα παιδί ακόμα ¦ ＋ Още едно дете
+👪 Fiche familiale ¦ 👪 Οικογενειακή καρτέλα ¦ 👪 Семеен картон
+📈 Animal : poids et croissance ¦ 📈 Ζώο: βάρος και ανάπτυξη ¦ 📈 Животно: тегло и растеж
+📝 Avec une note de recherche ¦ 📝 Με σημείωση έρευνας ¦ 📝 С изследователска бележка
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Σημείωση έρευνας (προς έλεγχο, ταξιθέτηση, ίχνος) ¦ 📝 Изследователска бележка (за проверка, сигнатура, следа)
+📝 Note de recherche : {x} ¦ 📝 Σημείωση έρευνας: {x} ¦ 📝 Изследователска бележка: {x}
+🔒 confidentiel ¦ 🔒 εμπιστευτικό ¦ 🔒 поверително
+🔒 Événement confidentiel ¦ 🔒 Εμπιστευτικό γεγονός ¦ 🔒 Поверително събитие
+🧭 Aucun lien connu ¦ 🧭 Καμία γνωστή σχέση ¦ 🧭 Няма известна връзка
+🧭 Personne de départ ¦ 🧭 Πρόσωπο αφετηρίας ¦ 🧭 Начално лице
+🧭 Ton lien ¦ 🧭 Η συγγένειά σου ¦ 🧭 Твоето родство
+🧭 Ton lien avec cette personne ¦ 🧭 Η συγγένειά σου με αυτό το πρόσωπο ¦ 🧭 Твоето родство с това лице
+🧭 personne de départ ¦ 🧭 πρόσωπο αφετηρίας ¦ 🧭 начално лице
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Νέο… στην ανοιχτή καρτέλα (ένα άτομο στα Άτομα) ¦ Ново… в отворения раздел (лице в Хора)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Αναίρεση της τελευταίας αλλαγής σε καρτέλα (εκτός πεδίου κειμένου, αμέσως, με « ↷ Επανάληψη ») ¦ Отмени последната промяна на картон (извън текстово поле, веднага, с « ↷ Върни отново »)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Εξαγωγή όσων δείχνει η ανοιχτή καρτέλα (⤓ Εξαγωγή) ¦ Експортирай това, което показва отвореният раздел (⤓ Експортирай)
+Chercher dans la colonne de gauche ¦ Αναζήτηση στην αριστερή στήλη ¦ Търси в лявата колона
+Aucune personne ne correspond à ces filtres. ¦ Κανένα άτομο δεν ταιριάζει με αυτά τα φίλτρα. ¦ Никой не отговаря на тези филтри.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Αφαίρεσε ένα φίλτρο (Φίλτρο ▾) ή άλλαξε την ταξινόμηση. ¦ Махни филтър (Филтрирай ▾) или смени подредбата.
+Peau ¦ Δέρμα ¦ Кожа
+Origine / mention ¦ Προέλευση / μνεία ¦ Произход / бележка
+Mention conjoint ¦ Μνεία συζύγου ¦ Бележка за съпруга
+Mention enfants ¦ Μνεία παιδιών ¦ Бележка за децата
+Date alternative ¦ Εναλλακτική ημερομηνία ¦ Алтернативна дата
+Lieu (n°) ¦ Τόπος (αρ.) ¦ Място (№)
+Type (n°) ¦ Τύπος (αρ.) ¦ Тип (№)
+Confidentiel ¦ Εμπιστευτικό ¦ Поверително
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: « {a} » ({na}) · B: « {b} » ({nb}) → {n} άτομα {op}. ¦ A: « {a} » ({na}) · B: « {b} » ({nb}) → {n} лица {op}.
+Acte à commander supprimé ¦ Η πράξη για παραγγελία διαγράφηκε ¦ Актът за поръчка е изтрит
+Ajouter à une liste ¦ Προσθήκη σε λίστα ¦ Добави към списък
+Apparence (thème, couleurs, police) ¦ Εμφάνιση (θέμα, χρώματα, γραμματοσειρά) ¦ Външен вид (тема, цветове, шрифт)
+Aucune citation ne contient ce texte. ¦ Καμία παραπομπή δεν περιέχει αυτό το κείμενο. ¦ Никой цитат не съдържа този текст.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Καμία από τις « Οι λίστες μου » δεν περιέχει άτομα: φτιάξε μία στις Ρυθμίσεις → Επεξεργαστής λιστών. ¦ Никой от « Моите списъци » не съдържа хора: създай един в Настройки → Редактор на списъци.
+Aucune ligne ne contient « {find} ». ¦ Καμία γραμμή δεν περιέχει « {find} ». ¦ Никой ред не съдържа « {find} ».
+Aucune source ne contient ce texte. ¦ Καμία πηγή δεν περιέχει αυτό το κείμενο. ¦ Никой източник не съдържа този текст.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Ό,τι υπάρχει σε μια αποθηκευμένη αναζήτηση και όχι στην άλλη (π.χ. οι Sosa που γεννήθηκαν στην Κορέζ χωρίς πράξη βάπτισης): για να βρεις τα κενά. ¦ Това, което е в едно запазено търсене, а не в другото (напр. Sosa, родени в Кореза, без акт за кръщене): за да намериш празнините.
+Changer cette ligne ¦ Αλλαγή αυτής της γραμμής ¦ Промени този ред
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Αναζήτηση και αντικατάσταση: πού να ψάξεις, κεφαλαία, ολόκληρη λέξη ¦ Търсене и замяна: къде да търсиш, главни букви, цяла дума
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Αναζήτηση λέξης στον τίτλο, τον συγγραφέα και το κείμενο των πηγών, και στη σελίδα και τη σημείωση κάθε παραπομπής. ¦ Търси дума в заглавието, автора и текста на източниците, както и в страницата и бележката на всеки цитат.
+Choisis deux lieux différents. ¦ Διάλεξε δύο διαφορετικούς τόπους. ¦ Избери две различни места.
+Choisis deux recherches enregistrées. ¦ Διάλεξε δύο αποθηκευμένες αναζητήσεις. ¦ Избери две запазени търсения.
+Choisis les deux lieux. ¦ Διάλεξε και τους δύο τόπους. ¦ Избери двете места.
+Choisis ou écris une étiquette. ¦ Διάλεξε ή γράψε μια ετικέτα. ¦ Избери или напиши етикет.
+Choisis où chercher. ¦ Διάλεξε πού να ψάξεις. ¦ Избери къде да търсиш.
+Citée ¦ Αναφέρεται ¦ Цитиран
+Cocher {name} ¦ Τσεκάρισμα {name} ¦ Отметни {name}
+Comparer deux recherches ¦ Σύγκριση δύο αναζητήσεων ¦ Сравни две търсения
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Διόρθωσε ένα λάθος παντού με μια κίνηση (« cultivatr » → « cultivateur »). Βλέπεις πρώτα κάθε γραμμή που θα άλλαζε· ξετσέκαρε όσες θέλεις να κρατήσεις. Η « ↶ Αναίρεση » τα επαναφέρει όλα όπως πριν. ¦ Поправи грешка навсякъде наведнъж (« cultivatr » → « cultivateur »). Първо виждаш всеки ред, който би се променил; махни отметката от тези, които да запазиш. « ↶ Отмени » връща всичко както преди.
+Dernières recherches vidées ¦ Οι πρόσφατες αναζητήσεις αδειάστηκαν ¦ Последните търсения са изчистени
+Descriptions des événements ¦ Περιγραφές γεγονότων ¦ Описания на събитията
+Définition supprimée ¦ Ο ορισμός διαγράφηκε ¦ Определението е изтрито
+Dépouillement supprimé ¦ Η αποδελτίωση διαγράφηκε ¦ Извлечението е изтрито
+Essaie un autre lien ou moins de critères. ¦ Δοκίμασε άλλη σχέση ή λιγότερα κριτήρια. ¦ Опитай друга връзка или по-малко критерии.
+Ex : Poilu, À vérifier… ¦ Π.χ.: Poilu, Προς έλεγχο… ¦ Напр.: Poilu, За проверка…
+Ex : cultivateur (vide = effacer) ¦ Π.χ.: cultivateur (κενό = διαγραφή) ¦ Напр.: cultivateur (празно = изтрий)
+Ex : cultivatr ¦ Π.χ.: cultivatr ¦ Напр.: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Π.χ.: ενοριακό μητρώο, φύλλο 12, Τυλ… ¦ Напр.: енорийски регистър, лист 12, Тюл…
+Extrait ¦ Απόσπασμα ¦ Откъс
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Φτιάξ’ τες στην « Αναζήτηση με πολλά κριτήρια » και μετά « Αποθήκευση ». ¦ Направи ги в « Търсене по много критерии », после « Запази ».
+Graphiques et tableau de bord ¦ Γραφήματα και πίνακας ελέγχου ¦ Графики и табло
+Il faut au moins deux recherches enregistrées. ¦ Χρειάζονται τουλάχιστον δύο αποθηκευμένες αναζητήσεις. ¦ Нужни са поне две запазени търсения.
+Lacune supprimée ¦ Το κενό διαγράφηκε ¦ Празнината е изтрита
+Les recherches enregistrées ne sont pas disponibles. ¦ Οι αποθηκευμένες αναζητήσεις δεν είναι διαθέσιμες. ¦ Запазените търсения не са налични.
+Lien de parenté inconnu. ¦ Άγνωστη συγγένεια. ¦ Неизвестно родство.
+Ligne de transcription supprimée ¦ Η γραμμή μεταγραφής διαγράφηκε ¦ Редът от преписа е изтрит
+Mot entier seulement ¦ Μόνο ολόκληρη λέξη ¦ Само цяла дума
+Neveux et nièces ¦ Ανιψιοί και ανιψιές ¦ Племенници и племенници
+Nom de table invalide. ¦ Μη έγκυρο όνομα πίνακα. ¦ Невалидно име на таблица.
+Noms de lieux ¦ Ονόματα τόπων ¦ Имена на места
+Nouvelle étiquette… ¦ Νέα ετικέτα… ¦ Нов етикет…
+Nés en ou après ¦ Γεννημένοι το ή μετά το ¦ Родени през или след
+Nés en ou avant ¦ Γεννημένοι το ή πριν το ¦ Родени през или преди
+Oncles et tantes ¦ Θείοι και θείες ¦ Чичовци и лели
+Onglets ajoutés au menu ¦ Καρτέλες που προστέθηκαν στο μενού ¦ Раздели, добавени в менюто
+Onglets cachés du menu ¦ Καρτέλες κρυμμένες από το μενού ¦ Раздели, скрити от менюто
+Ordre des types de recherche ¦ Σειρά των τύπων αναζήτησης ¦ Ред на видовете търсене
+Ordre du menu ¦ Σειρά μενού ¦ Ред на менюто
+Ouvrir la recherche multicritère ¦ Άνοιγμα αναζήτησης με πολλά κριτήρια ¦ Отвори търсенето по много критерии
+Où chercher ¦ Πού να ψάξεις ¦ Къде да търсиш
+Personne relevée retirée ¦ Το καταγεγραμμένο άτομο αφαιρέθηκε ¦ Записаното лице е премахнато
+Puis le lien de parenté cherché. ¦ Μετά η συγγένεια που ψάχνεις. ¦ После търсеното родство.
+Rangement des pages des Réglages ¦ Διάταξη των σελίδων των Ρυθμίσεων ¦ Подредба на страниците в Настройки
+Recherche A ¦ Αναζήτηση A ¦ Търсене A
+Recherche B ¦ Αναζήτηση B ¦ Търсене B
+Recherche dans les sources… ¦ Αναζήτηση στις πηγές… ¦ Търсене в източниците…
+Recherche dans l’arbre… ¦ Αναζήτηση στο δέντρο… ¦ Търсене в дървото…
+Recherche des lignes à changer… ¦ Αναζήτηση γραμμών προς αλλαγή… ¦ Търсене на редове за промяна…
+Recherche par lien de parenté ¦ Αναζήτηση με βάση τη συγγένεια ¦ Търсене по родство
+Respecter les majuscules ¦ Διάκριση κεφαλαίων ¦ Спазвай главните букви
+Rien de coché : les actions portent sur les {t} résultats ¦ Τίποτα τσεκαρισμένο: οι ενέργειες αφορούν τα {t} αποτελέσματα ¦ Нищо не е отметнато: действията засягат {t} резултата
+Règle introuvable. ¦ Ο κανόνας δεν βρέθηκε. ¦ Правилото не е намерено.
+Règle supprimée ¦ Ο κανόνας διαγράφηκε ¦ Правилото е изтрито
+Résultats de la recherche ¦ Αποτελέσματα αναζήτησης ¦ Резултати от търсенето
+Sections ouvertes ou fermées ¦ Ανοιχτές ή κλειστές ενότητες ¦ Отворени или затворени раздели
+Seulement les décédés ¦ Μόνο οι αποθανόντες ¦ Само починалите
+Seulement les vivants ¦ Μόνο οι εν ζωή ¦ Само живите
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Εμφανίζονται μόνο οι πρώτες {n} γραμμές· η « Αντικατάσταση » αλλάζει τις τσεκαρισμένες γραμμές. ¦ Показани са само първите {n} реда; « Замени » променя отметнатите редове.
+Sources et citations ¦ Πηγές και παραπομπές ¦ Източници и цитати
+Suppression impossible ici. ¦ Δεν γίνεται διαγραφή εδώ. ¦ Тук не може да се изтрие.
+Tape au moins deux lettres. ¦ Γράψε τουλάχιστον δύο γράμματα. ¦ Напиши поне две букви.
+Tape le texte à chercher. ¦ Γράψε το κείμενο που ψάχνεις. ¦ Напиши текста за търсене.
+Texte à chercher ¦ Κείμενο αναζήτησης ¦ Текст за търсене
+Texte à chercher trop long. ¦ Το κείμενο αναζήτησης είναι πολύ μεγάλο. ¦ Текстът за търсене е твърде дълъг.
+Tous les ancêtres ¦ Όλοι οι πρόγονοι ¦ Всички предци
+Tous les descendants ¦ Όλοι οι απόγονοι ¦ Всички потомци
+Trouvé dans ¦ Βρέθηκε σε ¦ Намерено в
+Type d’événement supprimé ¦ Ο τύπος γεγονότος διαγράφηκε ¦ Типът събитие е изтрит
+Types de recherche cachés ¦ Κρυφοί τύποι αναζήτησης ¦ Скрити видове търсене
+Vider la liste ¦ Άδειασμα λίστας ¦ Изчисти списъка
+Vivant(e) ¦ Εν ζωή ¦ Жив(а)
+Vivants et décédés ¦ Εν ζωή και αποθανόντες ¦ Живи и починали
+dans A et dans B ¦ στο A και στο B ¦ в A и в B
+dans A mais pas dans B ¦ στο A αλλά όχι στο B ¦ в A, но не в B
+dans A ou dans B ¦ στο A ή στο B ¦ в A или в B
+dans une seule des deux ¦ μόνο σε ένα από τα δύο ¦ само в едно от двете
+{n} cochée(s) sur {t} ¦ {n} τσεκαρισμένα από {t} ¦ Отметнати {n} от {t}
+{n} ligne(s) cochée(s) sur {t} ¦ {n} τσεκαρισμένες γραμμές από {t} ¦ Отметнати редове: {n} от {t}
+{rel} de {name} : {n} personne(s). ¦ {rel} του/της {name}: {n} άτομα. ¦ {rel} на {name}: {n} лица.
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ « Όλα τα πρώτα ξαδέλφια του… », « οι εν ζωή απόγονοι του… γεννημένοι μετά το 1900 »: διάλεξε ένα άτομο και μια σχέση. ¦ « Всички първи братовчеди на… », « живите потомци на… родени след 1900 »: избери лице и връзка.
+Étiqueter {n} personne(s) ¦ Ετικέτα σε {n} άτομα ¦ Сложи етикет на {n} лица
+⟳ Recharger la page ¦ ⟳ Επαναφόρτωση σελίδας ¦ ⟳ Презареди страницата
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 Η ετικέτα « {label} » μπήκε σε {n} άτομα ¦ 🏷 Етикет « {label} » е поставен на {n} лица
+🏷 Étiqueter ¦ 🏷 Ετικέτα ¦ 🏷 Сложи етикет
+📊 Comparer deux recherches ¦ 📊 Σύγκριση δύο αναζητήσεων ¦ 📊 Сравни две търсения
+📋 Ajouter à Mes listes ¦ 📋 Προσθήκη στις Οι λίστες μου ¦ 📋 Добави към Моите списъци
+📋 {n} personne(s) ajoutée(s) à « {list} » ¦ 📋 {n} άτομα προστέθηκαν στο « {list} » ¦ 📋 {n} лица са добавени в « {list} »
+📚 Sources ({n}) ¦ 📚 Πηγές ({n}) ¦ 📚 Източници ({n})
+🔁 Chercher et remplacer ¦ 🔁 Αναζήτηση και αντικατάσταση ¦ 🔁 Търсене и замяна
+🔁 Remplacer ¦ 🔁 Αντικατάσταση ¦ 🔁 Замени
+🔁 Remplacer ({n}) ¦ 🔁 Αντικατάσταση ({n}) ¦ 🔁 Замени ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 Έγιναν {n} αντικαταστάσεις ¦ 🔁 Направени замени: {n}
+🔎 Ce que j’ai changé ¦ 🔎 Τι άλλαξα ¦ 🔎 Какво промених
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 {n} γραμμές από κλειδωμένη καρτέλα: δεν θα αλλάξουν. ¦ 🔒 {n} реда от заключен картон: няма да се променят.
+🔖 Citations ({n}) ¦ 🔖 Παραπομπές ({n}) ¦ 🔖 Цитати ({n})
+🕘 Dernières recherches ¦ 🕘 Πρόσφατες αναζητήσεις ¦ 🕘 Последни търсения
+🗄 Santé de la base ¦ 🗄 Υγεία της βάσης ¦ 🗄 Състояние на базата
+🧬 Lien de parenté ¦ 🧬 Συγγένεια ¦ 🧬 Родство
+🧾 Sources et citations ¦ 🧾 Πηγές και παραπομπές ¦ 🧾 Източници и цитати
+Lieux « {q} » ¦ Τόποι « {q} » ¦ Места « {q} »
+Transcriptions « {q} » ¦ Μεταγραφές « {q} » ¦ Преписи « {q} »
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Η εξαγωγή δεν έγινε: τα εμπιστευτικά γεγονότα δεν αφαιρέθηκαν. Ξαναδοκίμασε σε λίγο. ¦ Експортът е невъзможен: поверителните събития не можаха да се махнат. Опитай пак след малко.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Τα εμπιστευτικά γεγονότα δεν κρύφτηκαν: ξαναδοκίμασε σε λίγο. ¦ Поверителните събития не можаха да се скрият: опитай пак след малко.
+, ni les fiches et événements confidentiels. ¦ , ούτε τις εμπιστευτικές καρτέλες και γεγονότα. ¦ , нито поверителните картони и събития.
+🔒  ¦ 🔒 ¦ 🔒
+📤 Envoyer vers… ¦ 📤 Αποστολή σε… ¦ 📤 Изпрати към…
+Dans une nouvelle présentation ¦ Σε νέα παρουσίαση ¦ В нова презентация
+Dans un nouveau diaporama ¦ Σε νέα προβολή διαφανειών ¦ В ново слайдшоу
+Dans un livre de la Mise en page… ¦ Σε βιβλίο της Σελιδοποίησης… ¦ В книга от Оформление…
+Dans un nouveau document (Traitement de texte) ¦ Σε νέο έγγραφο (Επεξεργαστής κειμένου) ¦ В нов документ (Текстообработка)
+Dans le Tableur ¦ Στο Υπολογιστικό φύλλο ¦ В Електронната таблица
+Sur une page de mon site… ¦ Σε σελίδα του ιστότοπού μου… ¦ На страница от моя сайт…
+Dans la Retouche des photos ¦ Στην Επεξεργασία φωτογραφιών ¦ В Обработка на снимки
+Comparer avec une autre photo ¦ Σύγκριση με άλλη φωτογραφία ¦ Сравни с друга снимка
+Dans l’Atelier de transcription ¦ Στο Εργαστήριο μεταγραφής ¦ В Работилницата за препис
+Dans le Dessin vectoriel ¦ Στο Διανυσματικό σχέδιο ¦ Във Векторна рисунка
+Dans les Traitements par lot ¦ Στη Μαζική επεξεργασία ¦ В Пакетна обработка
+Envoyer les images vers… ¦ Αποστολή εικόνων σε… ¦ Изпрати изображенията към…
+Envoyer le texte vers… ¦ Αποστολή κειμένου σε… ¦ Изпрати текста към…
+Envoyer le tableau vers… ¦ Αποστολή πίνακα σε… ¦ Изпрати таблицата към…
+Envoyer le son vers… ¦ Αποστολή ήχου σε… ¦ Изпрати звука към…
+Envoyer la vidéo vers… ¦ Αποστολή βίντεο σε… ¦ Изпрати видеото към…
+Envoyer le dessin vers… ¦ Αποστολή σχεδίου σε… ¦ Изпрати рисунката към…
+Rangement du son dans les médias… ¦ Αποθήκευση του ήχου στα πολυμέσα… ¦ Запазване на звука в медиите…
+Rangement de la vidéo dans les médias… ¦ Αποθήκευση του βίντεο στα πολυμέσα… ¦ Запазване на видеото в медиите…
+Rien à envoyer. ¦ Δεν υπάρχει τίποτα για αποστολή. ¦ Няма какво да се изпрати.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Κανένα εργαλείο δεν μπορεί να το δεχτεί προς το παρόν. ¦ Засега никой инструмент не може да приеме това.
+En image (montage, studio, présentation, document…) ¦ Ως εικόνα (μοντάζ, στούντιο, παρουσίαση, έγγραφο…) ¦ Като изображение (монтаж, студио, презентация, документ…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Ως σχέδιο, καθαρό σε κάθε μέγεθος (βιβλίο, ιστότοπος…) ¦ Като рисунка, ясна при всякакъв размер (книга, сайт…)
+＋ Nouvelle crise ¦ ＋ Νέα κρίση ¦ ＋ Нова криза
+Modifier cette crise ¦ Επεξεργασία αυτής της κρίσης ¦ Промени тази криза
+Supprimer cette crise ¦ Διαγραφή αυτής της κρίσης ¦ Изтрий тази криза
+Nouvelle crise ¦ Νέα κρίση ¦ Нова криза
+Modifier la crise ¦ Επεξεργασία κρίσης ¦ Промени кризата
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ ΕΠΙΔΗΜΙΕΣ, ΠΟΛΕΜΟΙ, ΦΟΒΕΡΟΙ ΧΕΙΜΩΝΕΣ ¦ ЕПИДЕМИИ, ВОЙНИ, СТРАШНИ ЗИМИ
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Οι μεγάλες κρίσεις της ιστορίας της Γαλλίας δίπλα στους θανάτους της οικογένειάς σου: για να καταλάβεις ένα κύμα θανάτων (χολέρα του 1832, Μεγάλος Χειμώνας του 1709, ισπανική γρίπη…). Πρόσθεσε τις δικές σου: μια επιδημία στο χωριό, μια πυρκαγιά, μια πλημμύρα… ¦ Големите кризи в историята на Франция до смъртните случаи в семейството ти: за да разбереш вълна от смърт (холерата от 1832, Голямата зима от 1709, испанският грип…). Добави свои: епидемия в селото, пожар, наводнение…
+▦ Vignettes ¦ ▦ Μικρογραφίες ¦ ▦ Миниатюри
+🏷 Par éditeur ¦ 🏷 Ανά εκδότη ¦ 🏷 По издател
+📍 Par lieu ¦ 📍 Ανά τόπο ¦ 📍 По място
+✉️ Écrites / vierges ¦ ✉️ Γραμμένες / λευκές ¦ ✉️ Писани / празни
+Survole pour voir le verso ¦ Πέρνα από πάνω για να δεις την πίσω όψη ¦ Посочи, за да видиш гърба
+Aucune fiche de carte postale pour l’instant ¦ Δεν υπάρχει ακόμα καρτέλα καρτ ποστάλ ¦ Засега няма картон на пощенска картичка
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Λίστες → 🏞 Καρτ ποστάλ: δώσε σε κάθε κάρτα τον εκδότη, τον αριθμό, τον τόπο, την μπροστινή και την πίσω όψη της. ¦ Списъци → 🏞 Пощенски картички: дай на всяка картичка издател, номер, място, лице и гръб.
+Éditeur inconnu ¦ Άγνωστος εκδότης ¦ Неизвестен издател
+Écrites ou envoyées ¦ Γραμμένες ή σταλμένες ¦ Писани или изпратени
+Vierges (jamais envoyées) ¦ Λευκές (δεν στάλθηκαν ποτέ) ¦ Празни (никога не изпращани)
+Il manque les n° {n} ¦ Λείπουν οι αρ. {n} ¦ Липсват №: {n}
+Il manque le n° {n} ¦ Λείπει ο αρ. {n} ¦ Липсва № {n}
+cartes ¦ κάρτες ¦ картички
+Marge de « vers » ¦ Περιθώριο του « περίπου » ¦ Допуск за « около »
+Portée de « avant » / « après » ¦ Εύρος του « πριν » / « μετά » ¦ Обхват на « преди » / « след »
+Longueur d’une vie sans fin connue ¦ Διάρκεια ζωής χωρίς γνωστό τέλος ¦ Дължина на живот без известен край
+Ouvrir dans le Tableur… ¦ Άνοιγμα στο Υπολογιστικό φύλλο… ¦ Отвори в Електронната таблица…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Άνοιγμα των καλεσμένων στο Υπολογιστικό φύλλο ¦ 🧾 Отвори гостите в Електронната таблица
+📤 Envoyer le tableau des invités ¦ 📤 Αποστολή πίνακα καλεσμένων ¦ 📤 Изпрати таблицата с гостите
+🧾 Ouvrir dans le Tableur ¦ 🧾 Άνοιγμα στο Υπολογιστικό φύλλο ¦ 🧾 Отвори в Електронната таблица
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Ο πίνακας των καλεσμένων, με τον κλάδο, τη συγγένεια και την απάντησή τους. ¦ Таблицата с гостите, с клона, родството и отговора им.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Όλες οι φωτογραφίες του άλμπουμ: προβολή διαφανειών, ταινία, μαζική επεξεργασία… ¦ Всички снимки от албума: слайдшоу, филм, пакетна обработка…
+Album — {nm} ¦ Άλμπουμ — {nm} ¦ Албум — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Απόγονοι (από πάνω προς τα κάτω, ένα χρώμα ανά κλάδο) ¦ Потомство (отгоре надолу, по цвят за клон)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Οι απόγονοι χρειάζονται το εργαλείο Οικογενειακές συγκεντρώσεις, που δεν έχει φορτωθεί. ¦ Потомството изисква инструмента Родови срещи, който не е зареден.
+Aucune descendance pour cette personne. ¦ Αυτό το άτομο δεν έχει απογόνους. ¦ Това лице няма потомство.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Κανένα γνωστό παιδί για αυτό το άτομο: δεν υπάρχουν απόγονοι για σχεδίαση. ¦ Това лице няма известни деца: няма потомство за рисуване.
+La descendance de {nm} ¦ Οι απόγονοι του/της {nm} ¦ Потомството на {nm}
+la famille ¦ η οικογένεια ¦ семейството
+L’arbre (en fond) ¦ Το δέντρο (στο φόντο) ¦ Дървото (за фон)
+📰 En faire un faire-part ¦ 📰 Φτιάξε αναγγελία ¦ 📰 Направи съобщение
+Créer le faire-part ¦ Δημιουργία αναγγελίας ¦ Създай съобщение
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Το δέντρο μπαίνει στο φόντο, πίσω από τα κείμενα της αναγγελίας. Μετά όλα ανοίγουν στο Διανυσματικό σχέδιο για διόρθωση. ¦ Дървото застава за фон, зад текстовете на съобщението. После всичко се отваря във Векторна рисунка за доработка.
+L’arbre derrière le texte ¦ Το δέντρο πίσω από το κείμενο ¦ Дървото зад текста
+Très pâle ¦ Πολύ αχνό ¦ Много бледо
+Pâle ¦ Αχνό ¦ Бледо
+Bien visible ¦ Πολύ ορατό ¦ Добре видимо
+Fabrication du faire-part… ¦ Δημιουργία αναγγελίας… ¦ Изработване на съобщението…
+Personne à dessiner dans l’arbre. ¦ Κανένα άτομο για σχεδίαση στο δέντρο. ¦ Няма кого да нарисуваш в дървото.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Το δέντρο στο φόντο αναγγελίας οικογενειακής συγκέντρωσης ή γάμου ¦ Дървото за фон на съобщение за родова среща или сватба
+En faire un faire-part ¦ Φτιάξε αναγγελία ¦ Направи съобщение
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Οι ίδιες ρυθμίσεις, μία αναγγελία για κάθε άτομο (λίστα, ετικέτα) ή κάθε νοικοκυριό μιας οικογενειακής συγκέντρωσης, όλες σε ένα PDF ¦ Със същите настройки — съобщение за всяко лице (списък, етикет) или всяко домакинство от родова среща, всички в един PDF
+Un faire-part par personne / par foyer… ¦ Μία αναγγελία ανά άτομο / ανά νοικοκυριό… ¦ Съобщение за всяко лице / домакинство…
+📬 Un faire-part par personne / par foyer ¦ 📬 Μία αναγγελία ανά άτομο / ανά νοικοκυριό ¦ 📬 Съобщение за всяко лице / домакинство
+📄 Fabriquer le PDF ¦ 📄 Δημιουργία PDF ¦ 📄 Създай PDF
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Η αναγγελία όπως τη ρύθμισες, μία φορά για κάθε άτομο ή νοικοκυριό. Όλες οι αναγγελίες μπαίνουν σε ένα PDF, έτοιμο για εκτύπωση. ¦ Съобщението, както си го настроил, веднъж за всяко лице или домакинство. Всички съобщения са в един PDF, готов за печат.
+Une liste de personnes ¦ Μια λίστα ατόμων ¦ Списък с хора
+Les personnes d’une étiquette ¦ Τα άτομα μιας ετικέτας ¦ Хората с даден етикет
+Les foyers d’une cousinade ¦ Τα νοικοκυριά μιας οικογενειακής συγκέντρωσης ¦ Домакинствата от родова среща
+La cousinade (les foyers invités) ¦ Η οικογενειακή συγκέντρωση (τα καλεσμένα νοικοκυριά) ¦ Родовата среща (поканените домакинства)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ Στα πεδία της αναγγελίας, αυτές οι λέξεις αντικαθίστανται για τον καθένα: ¦ В полетата на съобщението тези думи се заменят за всеки:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (οικογενειακή συγκέντρωση: επίσης {titre}, {date}, {lieu}, {ancetre}…) ¦ (родова среща: също {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Το όνομα του ατόμου (ή του νοικοκυριού) πάνω σε κάθε αναγγελία ¦ Името на лицето (или домакинството) горе на всяко съобщение
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Συμπλήρωση και από την καρτέλα του καθενός (ονόματα, ημερομηνίες, τόποι) ¦ Попълвай и от картона на всеки (имена, дати, места)
+L’enveloppe de chacun porte son adresse. ¦ Ο φάκελος του καθενός έχει τη διεύθυνσή του. ¦ Пликът на всеки носи адреса му.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ Κανένα καλεσμένο νοικοκυριό σε αυτή τη συγκέντρωση: τσέκαρε πρώτα καλεσμένους. ¦ В тази родова среща няма поканени домакинства: първо отметни гости.
+Fabrication de {n} faire-part… ¦ Δημιουργία {n} αναγγελιών… ¦ Изработване на {n} съобщения…
+{i} sur {n}… ¦ {i} από {n}… ¦ {i} от {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ {n} αναγγελίες σε ένα PDF ({p} σελίδες). ¦ {n} съобщения в един PDF ({p} страници).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Το Διανυσματικό σχέδιο δεν έχει φορτωθεί: το PDF δεν μπορεί να δημιουργηθεί. ¦ Векторната рисунка не е заредена: PDF не може да се създаде.
+Une action de la Retouche ¦ Μια ενέργεια της Επεξεργασίας φωτογραφιών ¦ Действие от Обработка на снимки
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ Μια ενέργεια αποθηκευμένη στην Επεξεργασία φωτογραφιών (Αρχείο → Ενέργειες), σε κάθε εικόνα. ¦ Действие, запазено в Обработка на снимки (Файл → Действия), за всяко изображение.
+aucune action choisie ¦ δεν επιλέχθηκε ενέργεια ¦ не е избрано действие
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Η Επεξεργασία φωτογραφιών δεν έχει φορτωθεί: η ενέργεια « {name} » δεν μπορεί να γίνει. ¦ Обработка на снимки не е заредена: действието « {name} » не може да се изпълни.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Η ενέργεια « {name} » της Επεξεργασίας δεν έβγαλε τίποτα. ¦ Действието « {name} » от Обработка не върна нищо.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Η Επεξεργασία φωτογραφιών δεν έχει φορτωθεί: αυτό το βήμα δεν θα μπορέσει να γίνει. ¦ Обработка на снимки не е заредена: тази стъпка няма да може да се изпълни.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ Δεν υπάρχει αποθηκευμένη ενέργεια στην Επεξεργασία. Άνοιξε μια φωτογραφία στην Επεξεργασία και μετά Αρχείο → Ενέργειες για να αποθηκεύσεις μία. ¦ В Обработка няма запазени действия. Отвори снимка в Обработка, после Файл → Действия, за да запазиш действие.
+L’action ¦ Η ενέργεια ¦ Действието
+Choisir une action… ¦ Επιλογή ενέργειας… ¦ Избери действие…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ Μια ενέργεια αποθηκευμένη στην Επεξεργασία φωτογραφιών, σε κάθε εικόνα της παρτίδας. ¦ Действие, запазено в Обработка на снимки, за всяко изображение от пакета.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Οι εικόνες που αποθήκευσε αυτή η παρτίδα στα πολυμέσα: προβολή διαφανειών, μοντάζ… ¦ Изображенията, запазени от този пакет в медиите: слайдшоу, монтаж…
+Traitement par lot ¦ Μαζική επεξεργασία ¦ Пакетна обработка
+{x} introuvable dans les médias. ¦ Το {x} δεν βρέθηκε στα πολυμέσα. ¦ {x} не е намерено в медиите.
+Ouvrir cette image dans la Retouche des photos ¦ Άνοιγμα αυτής της εικόνας στην Επεξεργασία φωτογραφιών ¦ Отвори това изображение в Обработка на снимки
+Retoucher ¦ Επεξεργασία ¦ Обработи
+Envoyer cette image vers un autre outil ¦ Αποστολή αυτής της εικόνας σε άλλο εργαλείο ¦ Изпрати това изображение към друг инструмент
+📤 Envoyer le tableau en image vers… ¦ 📤 Αποστολή του πίνακα ως εικόνα σε… ¦ 📤 Изпрати таблицата като изображение към…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Το σχέδιο πηγαίνει σε άλλο εργαλείο: βιβλίο της Σελιδοποίησης, σελίδα του ιστότοπού μου, Διανυσματικό σχέδιο… ¦ Рисунката отива в друг инструмент: книга от Оформление, страница от моя сайт, Векторна рисунка…
+Créer et envoyer vers… ¦ Δημιουργία και αποστολή σε… ¦ Създай и изпрати към…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Τοποθέτηση διανυσματικού σχεδίου (δέντρο, χάρτης, θυρεός…)… ¦ ✒️ Постави векторна рисунка (дърво, карта, герб…)…
+Dessin vectoriel placé ¦ Το διανυσματικό σχέδιο τοποθετήθηκε ¦ Векторната рисунка е поставена
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ Το « {name} » τοποθετήθηκε: αν αλλάξει στο Διανυσματικό σχέδιο, ενημερώνεται εδώ (« ↻ Ενημέρωση »). ¦ ✒️ « {name} » е поставена: ако я промениш във Векторна рисунка, тя се обновява тук (« ↻ Обнови »).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Διανυσματικό σχέδιο <b>συνδεδεμένο</b>{state}: αν αλλάξει στο Διανυσματικό σχέδιο, ξανασχεδιάζεται εδώ (« Ενημέρωση »). ¦ ✒️ Векторна рисунка <b>свързана</b>{state}: ако я промениш във Векторна рисунка, тя се прерисува тук (« Обнови »).
+✎ Modifier le dessin ¦ ✎ Επεξεργασία σχεδίου ¦ ✎ Промени рисунката
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Το σχέδιο μένει ως έχει και δεν ακολουθεί πια το Διανυσματικό σχέδιο ¦ Рисунката остава както е и вече не следва Векторна рисунка
+Dessin détaché ¦ Το σχέδιο αποσυνδέθηκε ¦ Рисунката е откачена
+Le Dessin vectoriel n’est pas chargé. ¦ Το Διανυσματικό σχέδιο δεν έχει φορτωθεί. ¦ Векторната рисунка не е заредена.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Δεν υπάρχει διανυσματικό σχέδιο: φτιάξε ένα στις Λίστες → Εργαλεία επεξεργασίας (Διανυσματικό σχέδιο, Διακοσμητικό δέντρο, Χάρτης…). ¦ Няма векторна рисунка: направи една в Списъци → Инструменти за редактиране (Векторна рисунка, Декоративно дърво, Карта…).
+PLACER ¦ ΤΟΠΟΘΕΤΗΣΗ ¦ ПОСТАВИ
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Ένα διανυσματικό σχέδιο (δέντρο, χάρτης, θυρεός…) ¦ ✒️ Векторна рисунка (дърво, карта, герб…)
+Placer ce dessin ¦ Τοποθέτηση αυτού του σχεδίου ¦ Постави тази рисунка
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Το σχέδιο μένει συνδεδεμένο: αν αλλάξει στο Διανυσματικό σχέδιο, ενημερώνεται στο βιβλίο (« ↻ Ενημέρωση »). Μένει καθαρό σε κάθε μέγεθος. ¦ Рисунката остава свързана: ако я промениш във Векторна рисунка, тя се обновява в книгата (« ↻ Обнови »). Остава ясна при всякакъв размер.
+Choisis un dessin. ¦ Διάλεξε ένα σχέδιο. ¦ Избери рисунка.
+Le dessin n’a pas pu être lu. ¦ Το σχέδιο δεν διαβάστηκε. ¦ Рисунката не можа да се прочете.
+📐 Mettre dans un livre ¦ 📐 Βάλε σε βιβλίο ¦ 📐 Сложи в книга
+Mettre dans le livre ¦ Βάλε στο βιβλίο ¦ Сложи в книгата
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Το σχέδιο αποθηκεύεται στα Πολυμέσα (ως εικόνα) και μπαίνει σε δική του σελίδα, μέσα στα περιθώρια. ¦ Рисунката се запазва в Медии (като изображение), после се поставя на отделна страница, в полетата.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Η εικόνα μπαίνει σε δική της σελίδα, μέσα στα περιθώρια. Μένει συνδεδεμένη με τη φωτογραφία των Πολυμέσων. ¦ Изображението се поставя на отделна страница, в полетата. Остава свързано със снимката в Медии.
+Rangement du dessin dans les médias… ¦ Αποθήκευση του σχεδίου στα πολυμέσα… ¦ Запазване на рисунката в медиите…
+Mon livre ¦ Το βιβλίο μου ¦ Моята книга
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Η εικόνα προστέθηκε σε νέα σελίδα στο τέλος του βιβλίου: έλεγξε και μετά αποθήκευσε. ¦ Изображението е добавено на нова страница в края на книгата: провери, после запази.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Νέο βιβλίο με την εικόνα: έλεγξε και μετά αποθήκευσε το βιβλίο. ¦ Нова книга с изображението: провери, после запази книгата.
+📱 Livre numérique (.epub) ¦ 📱 Ηλεκτρονικό βιβλίο (.epub) ¦ 📱 Електронна книга (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ συσκευές ανάγνωσης: Kobo, Βιβλία, Calibre… ¦ четци: Kobo, Книги, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Η Σελιδοποίηση δεν έχει φορτωθεί: το ePub δεν μπορεί να γίνει. ¦ Оформлението не е заредено: ePub не може да се направи.
+« Envoyer vers… » n’est pas chargé. ¦ Το « Αποστολή σε… » δεν έχει φορτωθεί. ¦ « Изпрати към… » не е заредено.
+Retoucher cette image ¦ Επεξεργασία αυτής της εικόνας ¦ Обработи това изображение
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Αυτή η εικόνα δεν είναι στα Πολυμέσα: δεν μπορεί να επεξεργαστεί. ¦ Това изображение не е в Медии: не може да се обработи.
+Image retouchée mise à jour dans le texte. ¦ Η επεξεργασμένη εικόνα ενημερώθηκε στο κείμενο. ¦ Обработеното изображение е обновено в текста.
+Un document (Traitement de texte) ¦ Ένα έγγραφο (Επεξεργαστής κειμένου) ¦ Документ (Текстообработка)
+le tableau dans un texte ¦ ο πίνακας σε κείμενο ¦ таблицата в текст
+📝 Créer le document ¦ 📝 Δημιουργία εγγράφου ¦ 📝 Създай документа
+Image du graphique (PNG) : {kind} ¦ Εικόνα του γραφήματος (PNG): {kind} ¦ Изображение на графиката (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Το γράφημα δεν σχεδιάστηκε. ¦ Графиката не можа да се начертае.
+Image du graphique enregistrée : {name} ¦ Η εικόνα του γραφήματος αποθηκεύτηκε: {name} ¦ Изображението на графиката е запазено: {name}
+La feuille est vide : rien à envoyer. ¦ Το φύλλο είναι κενό: τίποτα για αποστολή. ¦ Листът е празен: няма какво да се изпрати.
+⤓ Image du graphique (PNG) ¦ ⤓ Εικόνα γραφήματος (PNG) ¦ ⤓ Изображение на графиката (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} στο μοντάζ, το ένα μετά το άλλο. ¦ {what} в монтажа, едно след друго.
+image ajoutée ¦ προστέθηκε εικόνα ¦ добавено изображение
+images ajoutées ¦ προστέθηκαν εικόνες ¦ добавени изображения
+sous-titre ajouté ¦ προστέθηκε υπότιτλος ¦ добавен субтитър
+sous-titres ajoutés ¦ προστέθηκαν υπότιτλοι ¦ добавени субтитри
+Le fabricant de GIF n’est pas chargé. ¦ Ο δημιουργός GIF δεν έχει φορτωθεί. ¦ Създателят на GIF не е зареден.
+🎞 GIF animé ¦ 🎞 Κινούμενο GIF ¦ 🎞 Анимиран GIF
+sans son, petit, tourne en boucle ¦ χωρίς ήχο, μικρό, παίζει σε επανάληψη ¦ без звук, малък, върти се в кръг
+GIF… {n} % ¦ GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Το βίντεο φτιάχνεται πρώτα (η ταινία παίζει ολόκληρη, άφησε το παράθυρο ανοιχτό) και μετά αποθηκεύεται στα πολυμέσα. ¦ Първо се създава видеото (филмът се пуска целият, остави прозореца отворен), после се запазва в медиите.
+Fabriquer la vidéo pour l’envoyer ? ¦ Δημιουργία του βίντεο για αποστολή; ¦ Да се създаде видеото за изпращане?
+Fabriquer et envoyer ¦ Δημιουργία και αποστολή ¦ Създай и изпрати
+ENVOYER ¦ ΑΠΟΣΤΟΛΗ ¦ ИЗПРАТИ
+Fabrication de la vidéo… ¦ Δημιουργία βίντεο… ¦ Създаване на видеото…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Το βίντεο δεν αποθηκεύτηκε στα πολυμέσα. ¦ Видеото не можа да се запази в медиите.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Ο τελικός ήχος αποθηκεύεται στα πολυμέσα (ένα αντίγραφο) και μετά στέλνεται. ¦ Готовият звук се запазва в медиите (копие), после се изпраща.
+Envoyer le son ? ¦ Αποστολή του ήχου; ¦ Да се изпрати звукът?
+Ranger et envoyer ¦ Αποθήκευση και αποστολή ¦ Запази и изпрати
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Δεν υπάρχει ακόμα μεταγραφή: « ⏱ Εισαγωγή ώρας » (⌘T) και μετά γράψε ό,τι λέγεται. ¦ Още няма препис: « ⏱ Вмъкни часа » (⌘T), после напиши какво се казва.
+Transcription — {name} ¦ Μεταγραφή — {name} ¦ Препис — {name}
+ (avec la transcription en sous-titres) ¦ (με τη μεταγραφή ως υπότιτλους) ¦ (с преписа като субтитри)
+La transcription (texte) ¦ Η μεταγραφή (κείμενο) ¦ Преписът (текст)
+Pas encore de transcription. ¦ Δεν υπάρχει ακόμα μεταγραφή. ¦ Още няма препис.
+Agnès Bernauer ¦ Agnès Bernauer ¦ Агнес Бернауер
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 στήλες σε σκάλα και ένα απόθεμα 7 στοιβών. Το πρώτο φύλλο σε μια βάση ορίζει την αρχική τιμή και των τεσσάρων· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, ο Ρήγας μπαίνει πάνω στον Άσο. Η τράπουλα βάζει ένα φύλλο σε κάθε στοίβα του αποθέματος· μια άδεια στήλη δέχεται το φύλλο ακριβώς κάτω από την αρχική τιμή. ¦ 7 колони на стълби и резерв от 7 купчини. Първата карта на основа дава началната стойност на четирите; нареждаш надолу, редувайки червено и черно, Попът отива върху Асото. Тестето слага по карта на всяка купчина от резерва; празна колона приема картата точно под началната стойност.
+Thumb and Pouch ¦ Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike όπου κατεβαίνεις σε οποιοδήποτε σύμβολο εκτός από το δικό του· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. Η τράπουλα περνά μόνο μία φορά. ¦ Клондайк, в който нареждаш надолу върху всяка боя освен своята; празна колона приема всяка карта. Тестето минава само веднъж.
+Pas seul ¦ Pas seul ¦ Pas seul
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 στήλες του ενός φύλλου· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. Η τράπουλα γυρίζει ένα φύλλο τη φορά και περνά μόνο μία φορά. ¦ 6 колони с по една карта; нареждаш надолу, редувайки червено и черно, празна колона приема всяка карта. Тестето се обръща по една карта и минава само веднъж.
+Les impasses ¦ Τα αδιέξοδα ¦ Задънените улици
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Οι Άσοι μπαίνουν από πριν· 6 στήλες των 3 φύλλων (δύο κρυφά). Κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, μια άδεια στήλη δέχεται οποιοδήποτε φύλλο· η τράπουλα ξαναπερνιέται μία φορά. ¦ Асата са поставени предварително; 6 колони по 3 карти (две скрити). Нареждаш надолу, редувайки червено и черно, празна колона приема всяка карта; тестето може да се мине отново веднъж.
+Huit fois huit ¦ Οκτώ επί οκτώ ¦ Осем по осем
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Δύο τράπουλες, 8 στήλες των 8 ορατών φύλλων· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. Η τράπουλα ξαναπερνιέται δύο φορές. ¦ Две колоди, 8 колони по 8 видими карти; нареждаш надолу, редувайки червено и черно, празна колона приема всяка карта. Тестето може да се мине отново два пъти.
+Spike ¦ Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 στήλες σε σκάλα όπως στο Klondike· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς ολόκληρες σειρές. Η τράπουλα βάζει ένα φύλλο σε κάθε στήλη. ¦ 7 колони на стълби като в Клондайк; нареждаш надолу, редувайки червено и черно, и местиш цели поредици. Тестето слага по карта на всяка колона.
+Alternance ¦ Εναλλαγές ¦ Редуване
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες, 7 στήλες των 7 φύλλων, ένα κρυφό κάθε δεύτερο. Κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς ολόκληρες σειρές· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди, 7 колони по 7 карти, всяка втора скрита. Нареждаш надолу, редувайки червено и черно, и местиш цели поредици; празна колона приема всяка карта. Тестето минава само веднъж.
+La harpe ¦ Η άρπα ¦ Арфата
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Δύο τράπουλες, 9 στήλες σε σκάλα· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο. Η τράπουλα γυρίζει ένα φύλλο τη φορά και ξαναπερνιέται τρεις φορές. ¦ Две колоди, 9 колони на стълби; нареждаш надолу, редувайки червено и черно. Тестето се обръща по една карта и може да се мине отново три пъти.
+La grande harpe ¦ Η μεγάλη άρπα ¦ Голямата арфа
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Δύο τράπουλες, 10 στήλες σε σκάλα· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο. Η τράπουλα γυρίζει ένα φύλλο τη φορά και περνά μόνο μία φορά. ¦ Две колоди, 10 колони на стълби; нареждаш надолу, редувайки червено и черно. Тестето се обръща по една карта и минава само веднъж.
+Acme ¦ Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ Ένα απόθεμα 13 φύλλων και 4 στήλες· οι βάσεις ξεκινούν από τον Άσο. Κατεβαίνεις στο ίδιο σύμβολο, ένα φύλλο τη φορά· μια άδεια στήλη γεμίζει από το απόθεμα. Η τράπουλα ξαναπερνιέται μία φορά. ¦ Резерв от 13 карти и 4 колони; основите започват от Асо. Нареждаш надолу в една боя, по една карта; празна колона се запълва от резерва. Тестето може да се мине отново веднъж.
+Le crapaud américain ¦ Ο αμερικανικός φρύνος ¦ Американската жаба
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Δύο τράπουλες, ένα απόθεμα 20 φύλλων και 8 στήλες. Το πρώτο φύλλο σε μια βάση ορίζει την αρχική τιμή και των οκτώ· κατεβαίνεις στο ίδιο σύμβολο, ο Ρήγας μπαίνει πάνω στον Άσο. Μια άδεια στήλη γεμίζει από το απόθεμα· η τράπουλα ξαναπερνιέται μία φορά. ¦ Две колоди, резерв от 20 карти и 8 колони. Първата карта на основа дава началната стойност на осемте; нареждаш надолу в една боя, Попът отива върху Асото. Празна колона се запълва от резерва; тестето може да се мине отново веднъж.
+Canfield bigarré ¦ Ποικιλόχρωμο Canfield ¦ Пъстър Канфийлд
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Δύο τράπουλες: οι Άσοι μπαίνουν από πριν, ένα απόθεμα 14 φύλλων και 5 στήλες. Κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο· μια άδεια στήλη γεμίζει από το απόθεμα. Η τράπουλα γυρίζει τρία φύλλα τη φορά και ξαναπερνιέται δύο φορές. ¦ Две колоди: Асата са поставени предварително, резерв от 14 карти и 5 колони. Нареждаш надолу, редувайки червено и черно; празна колона се запълва от резерва. Тестето се обръща по три карти и може да се мине отново два пъти.
+La duchesse ¦ Η δούκισσα ¦ Херцогинята
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Τέσσερις στοίβες αποθέματος των 3 φύλλων και 4 στήλες του ενός φύλλου. Το πρώτο φύλλο σε μια βάση ορίζει την αρχική τιμή και των τεσσάρων· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, ο Ρήγας μπαίνει πάνω στον Άσο. Μια άδεια στήλη δέχεται οποιοδήποτε φύλλο· η τράπουλα ξαναπερνιέται μία φορά. ¦ Четири купчини резерв по 3 карти и 4 колони с по една карта. Първата карта на основа дава началната стойност на четирите; нареждаш надолу, редувайки червено и черно, Попът отива върху Асото. Празна колона приема всяка карта; тестето може да се мине отново веднъж.
+La porte ¦ Η πόρτα ¦ Портата
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Δύο στοίβες αποθέματος των 5 φύλλων (τα φύλλα της πόρτας) και 8 στήλες του ενός φύλλου. Κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς ολόκληρες σειρές· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. Η τράπουλα περνά μόνο μία φορά. ¦ Две купчини резерв по 5 карти (крилата на портата) и 8 колони с по една карта. Нареждаш надолу, редувайки червено и черно, и местиш цели поредици; празна колона приема всяка карта. Тестето минава само веднъж.
+Le pingouin ¦ Ο πιγκουίνος ¦ Пингвинът
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Το πρώτο φύλλο ορίζει την αρχική τιμή των βάσεων, και τα άλλα τρία της ίδιας τιμής ανεβαίνουν εκεί αμέσως. 7 στήλες των 7, 7 ελεύθερα κελιά· κατεβαίνεις στο ίδιο σύμβολο, ο Ρήγας μπαίνει πάνω στον Άσο. Μια άδεια στήλη δέχεται το φύλλο ακριβώς κάτω από την αρχική τιμή. ¦ Първата карта дава началната стойност на основите и другите три със същата стойност отиват там веднага. 7 колони по 7, 7 свободни клетки; нареждаш надолу в една боя, Попът отива върху Асото. Празна колона приема картата точно под началната стойност.
+Baker’s Game (Roi seul) ¦ Baker’s Game (μόνο Ρήγας) ¦ Baker’s Game (само Поп)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (κατεβαίνεις στο ίδιο σύμβολο, 4 ελεύθερα κελιά), αλλά μια άδεια στήλη δέχεται μόνο Ρήγα. ¦ Baker’s Game (надолу в една боя, 4 свободни клетки), но празна колона приема само Поп.
+Seahaven détendu ¦ Χαλαρό Seahaven ¦ Облекчен Seahaven
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, αλλά μια σωστά τακτοποιημένη σειρά στο ίδιο σύμβολο μετακινείται μονομιάς, όσο μεγάλη κι αν είναι. ¦ Seahaven, но добре подредена поредица в една боя се мести наведнъж, колкото и да е дълга.
+Repair ¦ Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Δύο τράπουλες, 10 στήλες των 10 ορατών φύλλων και 4 ελεύθερα κελιά ήδη πιασμένα· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, ένα φύλλο τη φορά (ή μια σειρά αν το επιτρέπουν τα ελεύθερα κελιά). ¦ Две колоди, 10 колони по 10 видими карти и 4 вече заети свободни клетки; нареждаш надолу, редувайки червено и черно, по една карта (или поредица, ако свободните клетки позволяват).
+Ocean Towers ¦ Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Δύο τράπουλες, 14 στήλες των 7 φύλλων και 8 ελεύθερα κελιά, από τα οποία 6 ήδη πιασμένα· κατεβαίνεις στο ίδιο σύμβολο, μια άδεια στήλη δέχεται μόνο Ρήγα. ¦ Две колоди, 14 колони по 7 карти и 8 свободни клетки, от които 6 вече заети; нареждаш надолу в една боя, празна колона приема само Поп.
+Sept par quatre ¦ Επτά επί τέσσερα ¦ Седем по четири
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell με 7 στήλες και 4 ελεύθερα κελιά: οι στήλες είναι ψηλότερες. ¦ FreeCell със 7 колони и 4 свободни клетки: колоните са по-високи.
+Sept par cinq ¦ Επτά επί πέντε ¦ Седем по пет
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell με 7 στήλες και 5 ελεύθερα κελιά. ¦ FreeCell със 7 колони и 5 свободни клетки.
+FreeCell défi ¦ FreeCell πρόκληση ¦ FreeCell предизвикателство
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, αλλά οι Άσοι και τα 2 είναι στον πάτο των στηλών, κάτω από όλα τα άλλα φύλλα. ¦ FreeCell, но Асата и двойките са най-отдолу в колоните, под всички други карти.
+FreeCell super défi ¦ FreeCell σούπερ πρόκληση ¦ FreeCell суперпредизвикателство
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell πρόκληση (οι Άσοι και τα 2 στον πάτο των στηλών), και μια άδεια στήλη δέχεται μόνο Ρήγα. ¦ FreeCell предизвикателство (Асата и двойките най-отдолу в колоните), а празна колона приема само Поп.
+Le scarabée ¦ Ο σκαραβαίος ¦ Скарабеят
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Σκορπιός χωρίς τράπουλα: και τα 52 φύλλα φαίνονται σε 7 στήλες. Κατεβαίνεις στο ίδιο σύμβολο και μετακινείς οποιαδήποτε ομάδα· μια άδεια στήλη δέχεται μόνο Ρήγα. Μια πλήρης σειρά από τον Ρήγα ως τον Άσο φεύγει. ¦ Скорпион без тесте: всичките 52 карти се виждат в 7 колони. Нареждаш надолу в една боя и местиш всяка група; празна колона приема само Поп. Пълна поредица от Поп до Асо се маха.
+Queue de scorpion ¦ Ουρά σκορπιού ¦ Опашка на скорпион
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Όπως ο Σκορπιός (7 στήλες των 7, οποιαδήποτε ομάδα μετακινείται), αλλά κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και τα φύλλα ανεβαίνουν στις βάσεις από τον Άσο ως τον Ρήγα. ¦ Като Скорпион (7 колони по 7, мести се всяка група), но нареждаш надолу, редувайки червено и черно, а картите се качват на основите от Асо до Поп.
+Scorpion double ¦ Διπλός σκορπιός ¦ Двоен скорпион
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Δύο τράπουλες, 10 στήλες, όλα μοιράζονται (οι πέντε πρώτες στήλες κρύβουν 4 φύλλα). Κατεβαίνεις στο ίδιο σύμβολο και μετακινείς οποιαδήποτε ομάδα· μια πλήρης σειρά από τον Ρήγα ως τον Άσο φεύγει. ¦ Две колоди, 10 колони, всичко е раздадено (първите пет колони крият по 4 карти). Нареждаш надолу в една боя и местиш всяка група; пълна поредица от Поп до Асо се маха.
+Motif de divorce ¦ Λόγος διαζυγίου ¦ Повод за развод
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Δύο τράπουλες, 10 στήλες των 5 ορατών φύλλων. Κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο· μόνο οι σειρές του ίδιου συμβόλου μετακινούνται μαζί· μια πλήρης σειρά από τον Ρήγα ως τον Άσο φεύγει. Η τράπουλα βάζει ένα φύλλο σε κάθε στήλη που δεν είναι άδεια. ¦ Две колоди, 10 колони по 5 видими карти. Нареждаш надолу без значение от боята; заедно се местят само поредици от една боя; пълна поредица от Поп до Асо се маха. Тестето слага по карта на всяка непразна колона.
+La tarentule ¦ Η ταραντούλα ¦ Тарантулата
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Η αράχνη με τέσσερα σύμβολα, αλλά μια φθίνουσα σειρά στην ίδια απόχρωση (κόκκινη ή μαύρη) μετακινείται μονομιάς. Μια πλήρης σειρά από τον Ρήγα ως τον Άσο στο ίδιο σύμβολο φεύγει. ¦ Паякът с четири бои, но низходяща поредица в един цвят (червена или черна) се мести наведнъж. Пълна поредица от Поп до Асо в една боя се маха.
+Araignée à découvert ¦ Ανοιχτή αράχνη ¦ Открит паяк
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Η αράχνη με τέσσερα σύμβολα, αλλά όλα τα φύλλα φαίνονται από την αρχή. ¦ Паякът с четири бои, но всички карти се виждат от началото.
+La harpe de Milligan ¦ Η άρπα της Milligan ¦ Арфата на Милиган
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Δύο τράπουλες, 8 στήλες σε σκάλα· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς ολόκληρες σειρές. Μια άδεια στήλη δέχεται μόνο Ρήγα· η τράπουλα βάζει ένα φύλλο σε κάθε στήλη. Οι βάσεις ανεβαίνουν από τον Άσο ως τον Ρήγα. ¦ Две колоди, 8 колони на стълби; нареждаш надолу, редувайки червено и черно, и местиш цели поредици. Празна колона приема само Поп; тестето слага по карта на всяка колона. Основите се качват от Асо до Поп.
+La harpe de Lexington ¦ Η άρπα του Lexington ¦ Арфата на Лексингтън
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Η άρπα της Milligan (δύο τράπουλες, 8 στήλες σε σκάλα, η τράπουλα βάζει ένα φύλλο σε κάθε στήλη), αλλά μετακινείς οποιαδήποτε ομάδα ορατών φύλλων. ¦ Арфата на Милиган (две колоди, 8 колони на стълби, тестето слага по карта на всяка колона), но местиш всяка група видими карти.
+Brunswick ¦ Brunswick ¦ Брънзуик
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Η άρπα του Lexington με όλα τα φύλλα ορατά: οποιαδήποτε ομάδα μετακινείται, η τράπουλα βάζει ένα φύλλο σε κάθε στήλη. ¦ Арфата на Лексингтън с всички карти видими: мести се всяка група, тестето слага по карта на всяка колона.
+Carlton ¦ Carlton ¦ Карлтън
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Η άρπα της Milligan με όλα τα φύλλα ορατά, και μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ Арфата на Милиган с всички карти видими, а празна колона приема всяка карта.
+Miss Milligan ¦ Miss Milligan ¦ Мис Милиган
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Δύο τράπουλες, 8 στήλες του ενός φύλλου· η τράπουλα βάζει ένα φύλλο σε κάθε στήλη. Κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς ολόκληρες σειρές· μια άδεια στήλη δέχεται μόνο Ρήγα. Όταν αδειάσει η τράπουλα, ανοίγει ένα ελεύθερο κελί για να βάλεις ένα φύλλο στην άκρη. ¦ Две колоди, 8 колони с по една карта; тестето слага по карта на всяка колона. Нареждаш надолу, редувайки червено и черно, и местиш цели поредици; празна колона приема само Поп. Когато тестето свърши, се отваря свободна клетка, за да оставиш една карта настрана.
+Millie ¦ Millie ¦ Мили
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Δύο τράπουλες, 8 στήλες του ενός φύλλου· η τράπουλα βάζει ένα φύλλο σε κάθε στήλη. Κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ Две колоди, 8 колони с по една карта; тестето слага по карта на всяка колона. Нареждаш надолу, редувайки червено и черно, и празна колона приема всяка карта.
+L’île d’Elbe ¦ Το νησί της Έλβας ¦ Остров Елба
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Δύο τράπουλες, 10 στήλες των 5 φύλλων (τέσσερα κρυφά)· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς ολόκληρες σειρές. Μια άδεια στήλη δέχεται μόνο Ρήγα· η τράπουλα βάζει ένα φύλλο σε κάθε στήλη. ¦ Две колоди, 10 колони по 5 карти (четири скрити); нареждаш надолу, редувайки червено и черно, и местиш цели поредици. Празна колона приема само Поп; тестето слага по карта на всяка колона.
+Le mont Olympe ¦ Ο Όλυμπος ¦ Връх Олимп
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Δύο τράπουλες: οι Άσοι και τα 2 μπαίνουν από πριν, και οι βάσεις ανεβαίνουν ανά δύο στο ίδιο σύμβολο (Άσος, 3, 5… ή 2, 4, 6…). 9 στήλες· κατεβαίνεις ανά δύο στο ίδιο σύμβολο. Η τράπουλα βάζει ένα φύλλο σε κάθε στήλη. ¦ Две колоди: Асата и двойките са поставени предварително, а основите се качват през една в една боя (Асо, 3, 5… или 2, 4, 6…). 9 колони; нареждаш надолу през една в една боя. Тестето слага по карта на всяка колона.
+La patience australienne ¦ Η αυστραλιανή πασιέντζα ¦ Австралийският пасианс
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 στήλες των 4 ορατών φύλλων· κατεβαίνεις στο ίδιο σύμβολο και μετακινείς οποιαδήποτε ομάδα ορατών φύλλων. Μια άδεια στήλη δέχεται μόνο Ρήγα· η τράπουλα περνά μόνο μία φορά. ¦ 7 колони по 4 видими карти; нареждаш надолу в една боя и местиш всяка група видими карти. Празна колона приема само Поп; тестето минава само веднъж.
+Canberra ¦ Καμπέρα ¦ Канбера
+La patience australienne, mais la pioche repasse une fois. ¦ Η αυστραλιανή πασιέντζα, αλλά η τράπουλα ξαναπερνιέται μία φορά. ¦ Австралийският пасианс, но тестето може да се мине отново веднъж.
+Raw Prawn ¦ Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Η αυστραλιανή πασιέντζα, αλλά μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ Австралийският пасианс, но празна колона приема всяка карта.
+Rushdike ¦ Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 στήλες σε σκάλα· κατεβαίνεις στο ίδιο σύμβολο και μετακινείς οποιαδήποτε ομάδα ορατών φύλλων. Η τράπουλα βάζει ένα φύλλο σε κάθε στήλη. ¦ 7 колони на стълби; нареждаш надолу в една боя и местиш всяка група видими карти. Тестето слага по карта на всяка колона.
+La discipline chinoise ¦ Η κινεζική πειθαρχία ¦ Китайската дисциплина
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 στήλες των 7 φύλλων (τρία κρυφά, εκτός από την πρώτη)· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς οποιαδήποτε ομάδα ορατών φύλλων. Τα 3 τελευταία φύλλα πηγαίνουν στις τρεις πρώτες στήλες. ¦ 7 колони по 7 карти (три скрити, освен в първата); нареждаш надолу, редувайки червено и черно, и местиш всяка група видими карти. Последните 3 карти отиват на първите три колони.
+Solitaire russe double ¦ Διπλή ρωσική πασιέντζα ¦ Двоен руски пасианс
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Δύο τράπουλες, 10 στήλες, 8 βάσεις· κατεβαίνεις στο ίδιο σύμβολο και μετακινείς οποιαδήποτε ομάδα ορατών φύλλων. ¦ Две колоди, 10 колони, 8 основи; нареждаш надолу в една боя и местиш всяка група видими карти.
+Ali Baba ¦ Αλή Μπαμπά ¦ Али Баба
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Μία τράπουλα: οι Άσοι μπαίνουν από πριν, 10 στήλες των 4 ορατών φύλλων. Κατεβαίνεις στο ίδιο σύμβολο και μετακινείς ολόκληρες σειρές· η τράπουλα περνά μόνο μία φορά. ¦ Една колода: Асата са поставени предварително, 10 колони по 4 видими карти. Нареждаш надолу в една боя и местиш цели поредици; тестето минава само веднъж.
+Cassim ¦ Κασίμ ¦ Касим
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Μία τράπουλα: οι Άσοι μπαίνουν από πριν, 7 στήλες των 3 ορατών φύλλων. Κατεβαίνεις στο ίδιο σύμβολο και μετακινείς ολόκληρες σειρές· η τράπουλα ξαναπερνιέται όσες φορές θέλεις. ¦ Една колода: Асата са поставени предварително, 7 колони по 3 видими карти. Нареждаш надолу в една боя и местиш цели поредици; тестето може да се минава отново колкото искаш.
+Rang et file ¦ Τάξη και γραμμή ¦ Редица и колона
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Ο αυτοκράτορας (δύο τράπουλες, 10 στήλες των 4 φύλλων με 3 κρυφά, εναλλάσσοντας κόκκινο και μαύρο), αλλά μετακινείς ολόκληρες σειρές. ¦ Императорът (две колоди, 10 колони по 4 карти, от които 3 скрити, с редуване на червено и черно), но местиш цели поредици.
+Les As affairés ¦ Οι πολυάσχολοι Άσοι ¦ Заетите аса
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες, 12 στήλες του ενός φύλλου· κατεβαίνεις στο ίδιο σύμβολο, ένα φύλλο τη φορά. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди, 12 колони с по една карта; нареждаш надолу в една боя, по една карта. Тестето минава само веднъж.
+La cour ¦ Η αυλή ¦ Дворът
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες, 12 στήλες του ενός φύλλου· κατεβαίνεις στο ίδιο σύμβολο και μετακινείς ολόκληρες σειρές. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди, 12 колони с по една карта; нареждаш надолу в една боя и местиш цели поредици. Тестето минава само веднъж.
+Le carré de Napoléon ¦ Το τετράγωνο του Ναπολέοντα ¦ Карето на Наполеон
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες, 12 στήλες των 4 ορατών φύλλων· κατεβαίνεις στο ίδιο σύμβολο και μετακινείς ολόκληρες σειρές. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди, 12 колони по 4 видими карти; нареждаш надолу в една боя и местиш цели поредици. Тестето минава само веднъж.
+L’exil de Napoléon ¦ Η εξορία του Ναπολέοντα ¦ Изгнанието на Наполеон
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Οι σαράντα κλέφτες όπου κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο, ένα φύλλο τη φορά. Η τράπουλα περνά μόνο μία φορά. ¦ Четирийсетте разбойници, където нареждаш надолу без значение от боята, по една карта. Тестето минава само веднъж.
+Deuces ¦ Τα δυάρια ¦ Двойките
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες: τα οκτώ 2 μπαίνουν από πριν, και οι βάσεις ανεβαίνουν στο ίδιο σύμβολο ως τον Άσο. 10 στήλες του ενός φύλλου· κατεβαίνεις στο ίδιο σύμβολο (ο Άσος στο 2, ο Ρήγας στον Άσο), ένα φύλλο τη φορά. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди: осемте двойки са поставени предварително, а основите се качват в една боя до Асо. 10 колони с по една карта; нареждаш надолу в една боя (Асото върху двойката, Попът върху Асото), по една карта. Тестето минава само веднъж.
+La lune décroissante ¦ Η φθίνουσα σελήνη ¦ Намаляващата луна
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες, 13 στήλες των 4 ορατών φύλλων· κατεβαίνεις στο ίδιο σύμβολο και μετακινείς ολόκληρες σειρές. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди, 13 колони по 4 видими карти; нареждаш надолу в една боя и местиш цели поредици. Тестето минава само веднъж.
+Les cinquante fameux ¦ Οι διάσημοι πενήντα ¦ Прочутите петдесет
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Οι σαράντα κλέφτες με 5 φύλλα ανά στήλη: δύο τράπουλες, 10 στήλες των 5, ίδιο σύμβολο, ένα φύλλο τη φορά. Η τράπουλα περνά μόνο μία φορά. ¦ Четирийсетте разбойници с 5 карти в колона: две колоди, 10 колони по 5, една боя, по една карта. Тестето минава само веднъж.
+Quarante-neuf ¦ Σαράντα εννιά ¦ Четирийсет и девет
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες, 7 στήλες των 7 ορατών φύλλων· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, ένα φύλλο τη φορά. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди, 7 колони по 7 видими карти; нареждаш надолу, редувайки червено и черно, по една карта. Тестето минава само веднъж.
+Sans limite ¦ Χωρίς όριο ¦ Без ограничение
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Οι σαράντα κλέφτες, αλλά η τράπουλα ξαναπερνιέται όσες φορές θέλεις. ¦ Четирийсетте разбойници, но тестето може да се минава отново колкото искаш.
+Les petits quarante ¦ Οι μικροί σαράντα ¦ Малките четирийсет
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Οι σαράντα κλέφτες όπου κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο και μετακινείς ολόκληρες σειρές· η τράπουλα γυρίζει τρία φύλλα τη φορά και ξαναπερνιέται τρεις φορές. ¦ Четирийсетте разбойници, където нареждаш надолу без значение от боята и местиш цели поредици; тестето се обръща по три карти и може да се мине отново три пъти.
+Le zèbre ¦ Η ζέβρα ¦ Зебрата
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Δύο τράπουλες, οι Άσοι μπαίνουν από πριν, 8 στήλες του ενός φύλλου· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, ένα φύλλο τη φορά. Η τράπουλα ξαναπερνιέται μία φορά. ¦ Две колоди, Асата са поставени предварително, 8 колони с по една карта; нареждаш надолу, редувайки червено и черно, по една карта. Тестето може да се мине отново веднъж.
+Le congrès ¦ Το συνέδριο ¦ Конгресът
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες, 8 στήλες του ενός φύλλου· κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο, ένα φύλλο τη φορά. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди, 8 колони с по една карта; нареждаш надолу без значение от боята, по една карта. Тестето минава само веднъж.
+Le parlement ¦ Το κοινοβούλιο ¦ Парламентът
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Το συνέδριο (δύο τράπουλες, 8 στήλες του ενός φύλλου, κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο), με τους Άσους από πριν. ¦ Конгресът (две колоди, 8 колони с по една карта, надолу без значение от боята), с Асата, поставени предварително.
+Pair et impair ¦ Μονά και ζυγά ¦ Чифт и тек
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Δύο τράπουλες: ένας Άσος και ένα 2 από κάθε σύμβολο μπαίνουν από πριν, και οι βάσεις ανεβαίνουν ανά δύο στο σύμβολό τους (Άσος, 3, 5… Ρήγας, 2, 4… ή 2, 4… Ντάμα, Άσος, 3…). 9 θέσεις του ενός φύλλου, πάνω στις οποίες δεν χτίζεις· μια άδεια θέση δέχεται οποιοδήποτε φύλλο. Η τράπουλα ξαναπερνιέται μία φορά. ¦ Две колоди: по едно Асо и една двойка от всяка боя са поставени предварително, а основите се качват през една в своята боя (Асо, 3, 5… Поп, 2, 4… или 2, 4… Дама, Асо, 3…). 9 места с по една карта, върху които не се нарежда; празно място приема всяка карта. Тестето може да се мине отново веднъж.
+Le cotillon royal ¦ Το βασιλικό κοτιγιόν ¦ Кралският котильон
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Δύο τράπουλες: ένας Άσος και ένα 2 από κάθε σύμβολο μπαίνουν από πριν, και οι βάσεις ανεβαίνουν ανά δύο στο σύμβολό τους. Τέσσερις στοίβες αποθέματος των 3 φύλλων (παίζεται μόνο το πάνω) και 16 θέσεις του ενός φύλλου, πάνω στις οποίες δεν χτίζεις· μια άδεια θέση δέχεται οποιοδήποτε φύλλο. Η τράπουλα περνά μόνο μία φορά. ¦ Две колоди: по едно Асо и една двойка от всяка боя са поставени предварително, а основите се качват през една в своята боя. Четири купчини резерв по 3 карти (играе се само горната) и 16 места с по една карта, върху които не се нарежда; празно място приема всяка карта. Тестето минава само веднъж.
+Le treize porte-bonheur ¦ Το γουρλίδικο δεκατρία ¦ Щастливото тринайсет
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 στήλες των 4 ορατών φύλλων· κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο, ένα φύλλο τη φορά· μια άδεια στήλη μένει άδεια. ¦ 13 колони по 4 видими карти; нареждаш надолу без значение от боята, по една карта; празна колона остава празна.
+La patience portugaise ¦ Η πορτογαλική πασιέντζα ¦ Португалският пасианс
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 στήλες των 4 ορατών φύλλων· κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο, ένα φύλλο τη φορά· μόνο ένας Ρήγας μπαίνει σε άδεια στήλη. ¦ 13 колони по 4 видими карти; нареждаш надолу без значение от боята, по една карта; само Поп отива в празна колона.
+Bonne mesure ¦ Το καλό μέτρο ¦ Добрата мярка
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Δύο Άσοι μπαίνουν από πριν· 10 στήλες των 5 ορατών φύλλων. Κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο, ένα φύλλο τη φορά· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ Две Аса са поставени предварително; 10 колони по 5 видими карти. Нареждаш надолу без значение от боята, по една карта; празна колона приема всяка карта.
+La cruelle ¦ Η σκληρή ¦ Жестоката
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Οι Άσοι μπαίνουν από πριν· 12 στοίβες των 4 φύλλων. Κατεβαίνεις στο ίδιο σύμβολο, ένα φύλλο τη φορά· μια άδεια θέση μένει άδεια. Όσες φορές θέλεις, μαζεύεις τις στοίβες με τη σειρά, χωρίς ανακάτεμα, και ξαναμοιράζεις ανά 4. ¦ Асата са поставени предварително; 12 купчини по 4 карти. Нареждаш надолу в една боя, по една карта; празно място остава празно. Колкото пъти искаш, събираш купчините по ред, без разбъркване, и раздаваш отново по 4.
+La persévérance ¦ Η επιμονή ¦ Упоритостта
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Όπως η Σκληρή (οι Άσοι από πριν, 12 στοίβες των 4, ίδιο σύμβολο), αλλά μετακινείς ολόκληρες σειρές και μαζεύεις μόνο δύο φορές. ¦ Като Жестоката (Асата предварително, 12 купчини по 4, една боя), но местиш цели поредици и събираш само два пъти.
+L’éventail en vagues ¦ Η βεντάλια σε κύματα ¦ Ветрилото на вълни
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 στοίβες των 4 φύλλων, οι Άσοι μένουν ανακατεμένοι με τα άλλα· κατεβαίνεις στο ίδιο σύμβολο, ένα φύλλο τη φορά· μια άδεια θέση μένει άδεια. Όσες φορές θέλεις, μαζεύεις τις στοίβες με τη σειρά, χωρίς ανακάτεμα, και ξαναμοιράζεις ανά 4. ¦ 13 купчини по 4 карти, Асата остават размесени с другите; нареждаш надолу в една боя, по една карта; празно място остава празно. Колкото пъти искаш, събираш купчините по ред, без разбъркване, и раздаваш отново по 4.
+L’éventail en boîte ¦ Η βεντάλια στο κουτί ¦ Ветрилото в кутия
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Οι Άσοι μπαίνουν από πριν· 16 βεντάλιες των 3 φύλλων. Κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, ένα φύλλο τη φορά· μόνο ένας Ρήγας μπαίνει σε άδεια θέση. ¦ Асата са поставени предварително; 16 ветрила по 3 карти. Нареждаш надолу, редувайки червено и черно, по една карта; само Поп отива на празно място.
+L’éventail fascinant ¦ Η γοητευτική βεντάλια ¦ Омайното ветрило
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ La Belle Lucie (17 βεντάλιες των 3 φύλλων) όπου κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, με έξι ξαναμοιράσματα. ¦ La Belle Lucie (17 ветрила по 3 карти), където нареждаш надолу, редувайки червено и черно, с шест преразпределяния.
+La lampe de minuit ¦ Η λάμπα του μεσονυχτίου ¦ Среднощната лампа
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ La Belle Lucie (17 βεντάλιες των 3 φύλλων) όπου κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, με δύο ξαναμοιράσματα. ¦ La Belle Lucie (17 ветрила по 3 карти), където нареждаш надолу, редувайки червено и черно, с две преразпределяния.
+Shamrocks ¦ Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 βεντάλιες των 3 φύλλων· ανεβαίνεις ή κατεβαίνεις έναν βαθμό χωρίς να σε νοιάζει το σύμβολο, ένα φύλλο τη φορά, και μια βεντάλια δεν κρατά ποτέ πάνω από 3 φύλλα. Χωρίς ξαναμοίρασμα. ¦ 17 ветрила по 3 карти; качваш или сваляш с една стойност без значение от боята, по една карта, и ветрило никога не държи повече от 3 карти. Без преразпределяне.
+La maison dans les bois ¦ Το σπίτι στο δάσος ¦ Къщата в гората
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Δύο τράπουλες, 35 βεντάλιες των 3 φύλλων· ανεβαίνεις ή κατεβαίνεις έναν βαθμό στο ίδιο σύμβολο, ένα φύλλο τη φορά. Μια άδεια θέση μένει άδεια. ¦ Две колоди, 35 ветрила по 3 карти; качваш или сваляш с една стойност в една боя, по една карта. Празно място остава празно.
+La maison sur la colline ¦ Το σπίτι στον λόφο ¦ Къщата на хълма
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Το σπίτι στο δάσος (δύο τράπουλες, 35 βεντάλιες), αλλά τέσσερις βάσεις ανεβαίνουν από τον Άσο ως τον Ρήγα και τέσσερις άλλες κατεβαίνουν από τον Ρήγα ως τον Άσο. ¦ Къщата в гората (две колоди, 35 ветрила), но четири основи се качват от Асо до Поп, а четири други слизат от Поп до Асо.
+Bisley ¦ Bisley ¦ Бисли
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Οι Άσοι μπαίνουν από πριν· 13 στήλες (4 των 3 φύλλων, 9 των 4). Οι βάσεις των Άσων ανεβαίνουν, των Ρηγάδων κατεβαίνουν, στο ίδιο σύμβολο. Στο τραπέζι ανεβαίνεις ή κατεβαίνεις στο ίδιο σύμβολο, ένα φύλλο τη φορά· μια άδεια στήλη μένει άδεια. ¦ Асата са поставени предварително; 13 колони (4 по 3 карти, 9 по 4). Основите на Асата се качват, тези на Поповете слизат, в една боя. На масата качваш или сваляш в една боя, по една карта; празна колона остава празна.
+Le cadran du grand-père ¦ Το ρολόι του παππού ¦ Дядовият часовник
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 βάσεις σαν τις ώρες ενός ρολογιού, που ξεκινούν από 2♥, 3♠, 4♦, 5♣… ως τον Ρήγα ♣ και ανεβαίνουν στο ίδιο σύμβολο (μετά τον Ρήγα ο Άσος). 8 στήλες των 5 φύλλων· κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο, ένα φύλλο τη φορά· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ 12 основи като часовете на часовник, които започват с 2♥, 3♠, 4♦, 5♣… до Поп ♣ и се качват в една боя (след Попа идва Асото). 8 колони по 5 карти; нареждаш надолу без значение от боята, по една карта; празна колона приема всяка карта.
+Le mur de pierre ¦ Ο πέτρινος τοίχος ¦ Каменната стена
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 στήλες των 6 φύλλων, ένα κρυφό κάθε δεύτερο, και ένα μπουκέτο 16 φύλλων από το οποίο παίρνεις όποιο θέλεις. Κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς ολόκληρες σειρές· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ 6 колони по 6 карти, всяка втора скрита, и букет от 16 карти, от който може да се вземе всяка. Нареждаш надолу, редувайки червено и черно, и местиш цели поредици; празна колона приема всяка карта.
+La fleur sauvage ¦ Το αγριολούλουδο ¦ Дивото цвете
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Ο ανθισμένος κήπος (6 στήλες των 6 και ένα μπουκέτο 16 φύλλων), αλλά μετακινείς ολόκληρες σειρές. ¦ Цветната градина (6 колони по 6 и букет от 16 карти), но местиш цели поредици.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 στήλες, όλες ορατές. Το πρώτο φύλλο σε μια βάση ορίζει την αρχική τιμή και των τεσσάρων (μετά τον Ρήγα ο Άσος). Ανεβαίνεις ή κατεβαίνεις στο ίδιο σύμβολο, ένα φύλλο τη φορά, και ο Ρήγας ακουμπά τον Άσο. ¦ 10 колони, всички видими. Първата карта на основа дава началната стойност на четирите (след Попа идва Асото). Качваш или сваляш в една боя, по една карта, и Попът се допира до Асото.
+La place forte ¦ Το οχυρό ¦ Крепостта
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Δρόμοι και σοκάκια (8 στήλες, κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο), με ένα ελεύθερο κελί. ¦ Улици и улички (8 колони, надолу без значение от боята), с една свободна клетка.
+Le fort ¦ Το φρούριο ¦ Фортът
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Δρόμοι και σοκάκια (8 στήλες, κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο), με δύο ελεύθερα κελιά. ¦ Улици и улички (8 колони, надолу без значение от боята), с две свободни клетки.
+L’art du siège ¦ Η τέχνη της πολιορκίας ¦ Изкуството на обсадата
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Το πολιορκημένο κάστρο (οι Άσοι από πριν, 8 στήλες των 6), με ένα ελεύθερο κελί. ¦ Обсаденият замък (Асата предварително, 8 колони по 6), с една свободна клетка.
+La toile de Pénélope ¦ Το πανί της Πηνελόπης ¦ Платното на Пенелопа
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Το πολιορκημένο κάστρο (οι Άσοι από πριν, 8 στήλες των 6), αλλά μόνο ένας Ρήγας μπαίνει σε άδεια στήλη. ¦ Обсаденият замък (Асата предварително, 8 колони по 6), но само Поп отива в празна колона.
+La citadelle ¦ Η ακρόπολη ¦ Цитаделата
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Το πολιορκημένο κάστρο, αλλά κατά το μοίρασμα, κάθε φύλλο που μπορεί να ανέβει σε βάση πηγαίνει εκεί αμέσως. ¦ Обсаденият замък, но по време на раздаването всяка карта, която може да се качи на основа, отива там веднага.
+Les rois exilés ¦ Οι εξόριστοι βασιλιάδες ¦ Изгнаните крале
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Η ακρόπολη (τα φύλλα που μπορούν ανεβαίνουν κατά το μοίρασμα), αλλά μόνο ένας Ρήγας μπαίνει σε άδεια στήλη. ¦ Цитаделата (картите, които могат, се качват при раздаването), но само Поп отива в празна колона.
+Le bastion ¦ Ο προμαχώνας ¦ Бастионът
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 στήλες των 5 φύλλων και 2 ελεύθερα κελιά ήδη πιασμένα· ανεβαίνεις ή κατεβαίνεις στο ίδιο σύμβολο, ένα φύλλο τη φορά· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ 10 колони по 5 карти и 2 вече заети свободни клетки; качваш или сваляш в една боя, по една карта; празна колона приема всяка карта.
+La boîte à thé ¦ Το κουτί του τσαγιού ¦ Кутията за чай
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 στήλες των 6 ή 7 φύλλων, όλα φαίνονται· κατεβαίνεις χωρίς να σε νοιάζει το σύμβολο και μετακινείς ολόκληρες σειρές· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ 8 колони по 6 или 7 карти, всичко се вижда; нареждаш надолу без значение от боята и местиш цели поредици; празна колона приема всяка карта.
+La boîte à thé américaine ¦ Το αμερικανικό κουτί του τσαγιού ¦ Американската кутия за чай
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 στήλες των 6 ή 7 φύλλων, όλα φαίνονται· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο και μετακινείς ολόκληρες σειρές· μια άδεια στήλη δέχεται οποιοδήποτε φύλλο. ¦ 8 колони по 6 или 7 карти, всичко се вижда; нареждаш надолу, редувайки червено и черно, и местиш цели поредици; празна колона приема всяка карта.
+La boîte à thé anglaise ¦ Το αγγλικό κουτί του τσαγιού ¦ Английската кутия за чай
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 στήλες των 6 ή 7 φύλλων, όλα φαίνονται· κατεβαίνεις εναλλάσσοντας κόκκινο και μαύρο, ένα φύλλο τη φορά· μόνο ένας Ρήγας μπαίνει σε άδεια στήλη. ¦ 8 колони по 6 или 7 карти, всичко се вижда; нареждаш надолу, редувайки червено и черно, по една карта; само Поп отива в празна колона.
+Les trois sommets stricts ¦ Οι αυστηρές τρεις κορυφές ¦ Строгите три върха
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Οι τρεις κορυφές, αλλά ο Ρήγας και ο Άσος δεν ακολουθούν ο ένας τον άλλον: η παρτίδα είναι πιο δύσκολη. ¦ Трите върха, но Попът и Асото не се следват: играта е по-трудна.
+Golf double ¦ Διπλό Golf ¦ Двоен голф
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf με δύο τράπουλες: 9 στήλες των 7 φύλλων. Ρίξε στα πεταμένα ένα φύλλο ακριβώς πάνω ή κάτω· τίποτα δεν μπαίνει πάνω σε Ρήγα. ¦ Голф с две колоди: 9 колони по 7 карти. Слагай на изхвърлените карта точно с една по-висока или по-ниска; нищо не отива върху Поп.
+As en haut (5 colonnes) ¦ Άσοι πάνω (5 στήλες) ¦ Аса нагоре (5 колони)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Άσοι πάνω με 5 στήλες: βγάλε ένα φύλλο όταν μια άλλη στήλη δείχνει μεγαλύτερο φύλλο του ίδιου συμβόλου (ο Άσος είναι το μεγαλύτερο). Κερδίζεις αν μείνουν μόνο οι 4 Άσοι. ¦ Аса нагоре с 5 колони: махни карта, когато друга колона показва по-силна карта от същата боя (Асото е най-силно). Печелиш, ако останат само 4-те Аса.
+La baronne ¦ Η βαρόνη ¦ Баронесата
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 στοίβες: βγάλε έναν Ρήγα μόνο του, ή δύο πάνω φύλλα που κάνουν 13 (Βαλές 11, Ντάμα 12). Η τράπουλα βάζει ένα φύλλο σε κάθε στοίβα. ¦ 5 купчини: махни един Поп сам или две горни карти, които правят 13 (Вале 11, Дама 12). Тестето слага по карта на всяка купчина.
+Sir Tommy ¦ Sir Tommy ¦ Сър Томи
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Κάθε φύλλο που τραβάς πηγαίνει σε μια βάση ή σε μία από τις 4 στοίβες αναμονής. Οι βάσεις ξεκινούν με Άσο και ανεβαίνουν ανά ένα, χωρίς να σε νοιάζει το σύμβολο. ¦ Всяка изтеглена карта отива на основа или на една от 4-те купчини за изчакване. Основите започват с Асо и се качват по една, без значение от боята.
+Le chat dans le coin ¦ Η γάτα στη γωνία ¦ Котката в ъгъла
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Οι Άσοι μπαίνουν από πριν και ανεβαίνουν ανά ένα στην απόχρωσή τους (κόκκινο σε κόκκινο, μαύρο σε μαύρο). Κάθε φύλλο που τραβάς πηγαίνει σε μια βάση ή σε μία από τις 4 στοίβες αναμονής· μία φορά, μαζεύεις τις στοίβες για να ξανατραβήξεις. ¦ Асата са поставени предварително и се качват по една в своя цвят (червено върху червено, черно върху черно). Всяка изтеглена карта отива на основа или на една от 4-те купчини за изчакване; веднъж събираш купчините, за да теглиш отново.
+La stratégie ¦ Η στρατηγική ¦ Стратегията
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Κάθε φύλλο που τραβάς πηγαίνει σε μία από τις 8 στοίβες αναμονής· μόνο οι Άσοι ανεβαίνουν αμέσως. Όταν αδειάσει η τράπουλα, ανεβάζεις τα πάνω φύλλα των στοιβών, ανά ένα στο ίδιο σύμβολο. ¦ Всяка изтеглена карта отива на една от 8-те купчини за изчакване; веднага се качват само Асата. Когато тестето свърши, качваш горните карти на купчините по една в една боя.
+Gizeh ¦ Γκίζα ¦ Гиза
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Η πυραμίδα χωρίς τράπουλα: τα άλλα 24 φύλλα φαίνονται σε 3 σειρές και παίρνονται όλα. Βγάλε τα ζευγάρια που κάνουν 13 (Βαλές 11, Ντάμα 12· ο Ρήγας φεύγει μόνος). ¦ Пирамидата без тесте: другите 24 карти се виждат в 3 реда и всички може да се вземат. Махай двойки, които правят 13 (Вале 11, Дама 12; Попът се маха сам).
+Toutânkhamon ¦ Τουταγχαμών ¦ Тутанкамон
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Η πυραμίδα, αλλά η τράπουλα γυρίζει τρία φύλλα τη φορά (παίζεται μόνο το τελευταίο) και ξαναπερνιέται όσες φορές θέλεις. ¦ Пирамидата, но тестето се обръща по три карти (играе се само последната) и може да се минава отново колкото искаш.
+La lune bleue ¦ Το μπλε φεγγάρι ¦ Синята луна
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, αλλά οι Άσοι πηγαίνουν στην αρχή των σειρών: πρέπει να τακτοποιήσεις κάθε σειρά από τον Άσο ως τον Ρήγα στο ίδιο σύμβολο. Μια τρύπα δέχεται το φύλλο του ίδιου συμβόλου ακριβώς πάνω από τον αριστερό του γείτονα. Δύο φορές μπορείς να μαζέψεις ό,τι δεν έχει τακτοποιηθεί και να ξαναμοιράσεις. ¦ Монтана, но Асата отиват в началото на редовете: трябва да подредиш всеки ред от Асо до Поп в една боя. Дупка приема картата от същата боя точно над лявата ѝ съседка. Два пъти можеш да събереш неподреденото и да раздадеш отново.
+La lune rouge ¦ Το κόκκινο φεγγάρι ¦ Червената луна
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Το μπλε φεγγάρι, αλλά οι Άσοι μπαίνουν από πριν στην αρχή των σειρών και οι τρύπες είναι στο τέλος των σειρών από την αρχή. ¦ Синята луна, но Асата са поставени предварително в началото на редовете, а дупките са в края на редовете от самото начало.
+Le voisin ¦ Ο γείτονας ¦ Съседът
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ Ένα πλέγμα 5 × 5: βγάλε δύο φύλλα που ακουμπούν (ακόμη και διαγώνια) και κάνουν 13 (Βαλές 11, Ντάμα 12)· ένας Ρήγας φεύγει μόνος. Μετά σφίξε το πλέγμα. ¦ Мрежа 5 × 5: махни две допиращи се карти (дори по диагонал), които правят 13 (Вале 11, Дама 12); Попът се маха сам. После сгъсти мрежата.
+Isabelle ¦ Isabelle ¦ Изабел
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 στήλες των 4 φύλλων (φαίνεται μόνο το τελευταίο): βγάλε δύο φύλλα ίδιας αξίας από το κάτω μέρος των στηλών. Ένα παιχνίδι καθαρής τύχης, για χαλάρωση. ¦ 13 колони по 4 карти (видима е само последната): махни две карти с еднаква стойност отдолу на колоните. Игра на чист късмет, за отпускане.
+Quatorze en colonnes ¦ Δεκατέσσερα σε στήλες ¦ Четиринайсет в колони
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 στήλες με όλα τα φύλλα ορατά: βγάλε δύο φύλλα από το κάτω μέρος των στηλών που κάνουν 14 (Βαλές 11, Ντάμα 12, Ρήγας 13). ¦ 12 колони с всички карти видими: махни две карти отдолу на колоните, които правят 14 (Вале 11, Дама 12, Поп 13).
+Ramassé et redistribué, sans mélanger. ¦ Μαζεύτηκαν και ξαναμοιράστηκαν, χωρίς ανακάτεμα. ¦ Събрано и раздадено отново, без разбъркване.
+Les tas d’attente sont ramassés dans la pioche. ¦ Οι στοίβες αναμονής μαζεύτηκαν στην τράπουλα. ¦ Купчините за изчакване са събрани в тестето.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Άνοιξε το Παιχνίδι, διάλεξε « 🂠 Πασιέντζες (παιχνίδια με τράπουλα) » στο « Παιχνίδι » και μετά το παιχνίδι ανάμεσα σε 233 πασιέντζες ταξινομημένες ανά οικογένεια (Klondike, FreeCell, Αράχνη, Yukon, Οι σαράντα κλέφτες, Κάστρα και κήποι, παιχνίδια ζευγαριών). Σύρε ένα φύλλο (ή μια σειρά) σε άλλη στοίβα, ή πάτησέ το και μετά πάτησε εκεί που θα μπει· διπλό πάτημα: σε βάση· πάτημα στην τράπουλα: τράβηγμα. Στα παιχνίδια ζευγαριών (Πυραμίδα, Έντεκα, Δεκατρία…), πάτα τα φύλλα που ταιριάζουν. ¦ Отвори Игра, избери « 🂠 Пасианси (игри с карти) » в « Игра », после играта измежду 233 пасианса, подредени по семейства (Клондайк, FreeCell, Паяк, Юкон, Четирийсетте разбойници, Замъци и градини, игри с двойки). Плъзни карта (или поредица) върху друга купчина или щракни я, после щракни къде да отиде; двойно щракване: на основа; щракване върху тестето: изтегли. В игрите с двойки (Пирамида, Единайсет, Тринайсет…) щраквай картите, които вървят заедно.
+Quelles autres patiences sont arrivées ensuite ? ¦ Ποιες άλλες πασιέντζες ήρθαν μετά; ¦ Какви други пасианси дойдоха после?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ Εκατόν δύο κλασικές πασιέντζες ακόμα, η καθεμιά με τους κανόνες της στους « 📖 Κανόνες » της παρτίδας. Οικογένεια Klondike και Canfield: Agnès Bernauer, Thumb and Pouch, Pas seul, Τα αδιέξοδα, Οκτώ επί οκτώ, Spike, Εναλλαγές, Η άρπα, Η μεγάλη άρπα, Acme, Ο αμερικανικός φρύνος, Ποικιλόχρωμο Canfield, Η δούκισσα, Η πόρτα. Με ελεύθερα κελιά: Ο πιγκουίνος, Baker’s Game (μόνο Ρήγας), Χαλαρό Seahaven, Repair, Ocean Towers, Επτά επί τέσσερα, Επτά επί πέντε, FreeCell πρόκληση, FreeCell σούπερ πρόκληση. Αράχνες και τσιγγάνες: Ο σκαραβαίος, Ουρά σκορπιού, Διπλός σκορπιός, Λόγος διαζυγίου, Η ταραντούλα, Ανοιχτή αράχνη, Η άρπα της Milligan, Η άρπα του Lexington, Brunswick, Carlton, Miss Milligan, Millie, Το νησί της Έλβας, Ο Όλυμπος. Yukon: Η αυστραλιανή πασιέντζα, Καμπέρα, Raw Prawn, Rushdike, Η κινεζική πειθαρχία, Διπλή ρωσική πασιέντζα. Οι σαράντα κλέφτες και τα ξαδέλφια τους: Αλή Μπαμπά, Κασίμ, Τάξη και γραμμή, Οι πολυάσχολοι Άσοι, Η αυλή, Το τετράγωνο του Ναπολέοντα, Η εξορία του Ναπολέοντα, Τα δυάρια, Η φθίνουσα σελήνη, Οι διάσημοι πενήντα, Σαράντα εννιά, Χωρίς όριο, Οι μικροί σαράντα, Η ζέβρα, Το συνέδριο, Το κοινοβούλιο, Μονά και ζυγά, Το βασιλικό κοτιγιόν. Κάστρα, βεντάλιες και κήποι: Το γουρλίδικο δεκατρία, Η πορτογαλική πασιέντζα, Το καλό μέτρο, Η σκληρή, Η επιμονή, Η βεντάλια σε κύματα, Η βεντάλια στο κουτί, Η γοητευτική βεντάλια, Η λάμπα του μεσονυχτίου, Shamrocks, Το σπίτι στο δάσος, Το σπίτι στον λόφο, Bisley, Το ρολόι του παππού, Ο πέτρινος τοίχος, Το αγριολούλουδο, Η σκακιέρα, Το οχυρό, Το φρούριο, Η τέχνη της πολιορκίας, Το πανί της Πηνελόπης, Η ακρόπολη, Οι εξόριστοι βασιλιάδες, Ο προμαχώνας, Το κουτί του τσαγιού (και οι αμερικανική και αγγλική εκδοχή του). Ζευγάρια, σειρές και λογαριασμοί: Οι αυστηρές τρεις κορυφές, Διπλό Golf, Άσοι πάνω (5 στήλες), Η βαρόνη, Sir Tommy, Η γάτα στη γωνία, Η στρατηγική, Γκίζα, Τουταγχαμών, Το μπλε φεγγάρι, Το κόκκινο φεγγάρι, Ο γείτονας, Isabelle και Δεκατέσσερα σε στήλες. ¦ Още сто и два класически пасианса, всеки със своите правила в « 📖 Правилата » на играта. Семейство Клондайк и Канфийлд: Агнес Бернауер, Thumb and Pouch, Pas seul, Задънените улици, Осем по осем, Spike, Редуване, Арфата, Голямата арфа, Acme, Американската жаба, Пъстър Канфийлд, Херцогинята, Портата. Със свободни клетки: Пингвинът, Baker’s Game (само Поп), Облекчен Seahaven, Repair, Ocean Towers, Седем по четири, Седем по пет, FreeCell предизвикателство, FreeCell суперпредизвикателство. Паяци и циганки: Скарабеят, Опашка на скорпион, Двоен скорпион, Повод за развод, Тарантулата, Открит паяк, Арфата на Милиган, Арфата на Лексингтън, Брънзуик, Карлтън, Мис Милиган, Мили, Остров Елба, Връх Олимп. Юкон: Австралийският пасианс, Канбера, Raw Prawn, Rushdike, Китайската дисциплина, Двоен руски пасианс. Четирийсетте разбойници и роднините им: Али Баба, Касим, Редица и колона, Заетите аса, Дворът, Карето на Наполеон, Изгнанието на Наполеон, Двойките, Намаляващата луна, Прочутите петдесет, Четирийсет и девет, Без ограничение, Малките четирийсет, Зебрата, Конгресът, Парламентът, Чифт и тек, Кралският котильон. Замъци, ветрила и градини: Щастливото тринайсет, Португалският пасианс, Добрата мярка, Жестоката, Упоритостта, Ветрилото на вълни, Ветрилото в кутия, Омайното ветрило, Среднощната лампа, Shamrocks, Къщата в гората, Къщата на хълма, Бисли, Дядовият часовник, Каменната стена, Дивото цвете, Шахматната дъска, Крепостта, Фортът, Изкуството на обсадата, Платното на Пенелопа, Цитаделата, Изгнаните крале, Бастионът, Кутията за чай (и американската и английската ѝ версия). Двойки, поредици и сметки: Строгите три върха, Двоен голф, Аса нагоре (5 колони), Баронесата, Сър Томи, Котката в ъгъла, Стратегията, Гиза, Тутанкамон, Синята луна, Червената луна, Съседът, Изабел и Четиринайсет в колони.
+(suite) ¦ (συνέχεια) ¦ (продължение)
+.pptx : textes, images, formes, tableaux ¦ .pptx: κείμενα, εικόνες, σχήματα, πίνακες ¦ .pptx: текстове, изображения, фигури, таблици
+Ce texte est vide : rien à mettre en diapositives. ¦ Αυτό το κείμενο είναι κενό: τίποτα για διαφάνειες. ¦ Този текст е празен: няма какво да се сложи в слайдове.
+Cette image n’est pas dans les médias. ¦ Αυτή η εικόνα δεν είναι στα πολυμέσα. ¦ Това изображение не е в медиите.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Αποστολή σε…: η παρουσίαση ως βίντεο, στο Μοντάζ βίντεο ή στον ιστότοπό σου ¦ Изпрати към…: презентацията като видео, във Видеомонтаж или в сайта ти
+Fichier PowerPoint téléchargé. ¦ Το αρχείο PowerPoint κατέβηκε. ¦ Файлът PowerPoint е изтеглен.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Η παρουσίαση γίνεται βίντεο ({time}), αποθηκεύεται στα Πολυμέσα και μετά διαλέγεις πού πηγαίνει: στο Μοντάζ βίντεο ή στον ιστότοπό σου. Άφησε το παράθυρο ανοιχτό κατά την εγγραφή. ¦ Презентацията става видео ({time}), запазва се в Медии, после избираш къде да отиде: във Видеомонтаж или в сайта ти. Остави прозореца отворен по време на записа.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Η προβολή διαφανειών γίνεται βίντεο ({time}), αποθηκεύεται στα Πολυμέσα και μετά διαλέγεις πού πηγαίνει: στο Μοντάζ βίντεο ή στον ιστότοπό σου. Άφησε το παράθυρο ανοιχτό κατά την εγγραφή. ¦ Слайдшоуто става видео ({time}), запазва се в Медии, после избираш къде да отиде: във Видеомонтаж или в сайта ти. Остави прозореца отворен по време на записа.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Η προβολή διαφανειών ως βίντεο, στα πολυμέσα, μετά στο Μοντάζ βίντεο ή στον ιστότοπό σου ¦ Слайдшоуто като видео, запазено в медиите, после във Видеомонтаж или в сайта ти
+PowerPoint : assemblage du fichier… ¦ PowerPoint: συναρμολόγηση αρχείου… ¦ PowerPoint: сглобяване на файла…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: διαφάνεια {n} / {total} ¦ PowerPoint: слайд {n} / {total}
+PowerPoint impossible : {error} ¦ Το PowerPoint απέτυχε: {error} ¦ PowerPoint е невъзможен: {error}
+📊 PowerPoint ¦ 📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Αποστολή παρουσίασης ¦ 📤 Изпрати презентацията
+📤 Envoyer le diaporama ¦ 📤 Αποστολή προβολής διαφανειών ¦ 📤 Изпрати слайдшоуто
+📤 Envoyer vers… (la vidéo) ¦ 📤 Αποστολή σε… (το βίντεο) ¦ 📤 Изпрати към… (видеото)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Αποστολή σε… (Μοντάζ βίντεο, ο ιστότοπός σου) ¦ 📤 Изпрати към… (Видеомонтаж, сайтът ти)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Εξαγωγή εικόνας (PNG, JPG, WebP, TIFF, εκτύπωση)… ¦ ⤓ Експорт на изображението (PNG, JPG, WebP, TIFF, печат)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Εξαγωγή: η επεξεργασμένη εικόνα (PNG, JPG, WebP, TIFF, εκτύπωση) ή το πριν / μετά ¦ Експорт: обработеното изображение (PNG, JPG, WebP, TIFF, печат) или преди / след
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Η επεξεργασμένη εικόνα (PNG, JPG, WebP, TIFF, εκτύπωση)… ¦ 🖼 Обработеното изображение (PNG, JPG, WebP, TIFF, печат)…
+🌐 WebP ¦ 🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ ελαφρύ, για το web ¦ лек, за уеб
+🗂 TIFF ¦ 🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ χωρίς απώλειες, για αρχειοθέτηση ¦ без загуби, за архивиране
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Αυτός ο περιηγητής δεν υποστηρίζει WebP: διάλεξε PNG ή JPG. ¦ Този браузър не може WebP: избери PNG или JPG.
+Cette action de retouche n’existe plus. ¦ Αυτή η ενέργεια επεξεργασίας δεν υπάρχει πια. ¦ Това действие за обработка вече не съществува.
+Choisis une photo à retoucher. ¦ Διάλεξε μια φωτογραφία για επεξεργασία. ¦ Избери снимка за обработка.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Αποστολή της εικόνας που εμφανίζεται ή της αναφοράς σε άλλο εργαλείο ¦ Изпрати показаното изображение или отчета към друг инструмент
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Άνοιγμα της φωτογραφίας A ή B στην Επεξεργασία φωτογραφιών ¦ Отвори снимка A или B в Обработка на снимки
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Εξαγωγή της εικόνας που εμφανίζεται, ή εκτύπωση και των δύο φωτογραφιών με την ομοιότητα και τις σημειώσεις ¦ Експортирай показаното изображение или отпечатай двете снимки с приликата и бележките
+Exporter l’image (ce qui est affiché)… ¦ Εξαγωγή εικόνας (ό,τι εμφανίζεται)… ¦ Експорт на изображението (каквото е показано)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Εκτύπωση (οι δύο φωτογραφίες, η ομοιότητα, οι σημειώσεις)… ¦ Печат (двете снимки, приликата, бележките)…
+L’image affichée ¦ Η εικόνα που εμφανίζεται ¦ Показаното изображение
+Le compte rendu (photos, ressemblance, notes) ¦ Η αναφορά (φωτογραφίες, ομοιότητα, σημειώσεις) ¦ Отчетът (снимки, прилика, бележки)
+La Retouche des photos n’est pas chargée. ¦ Η Επεξεργασία φωτογραφιών δεν έχει φορτωθεί. ¦ Обработка на снимки не е заредена.
+Photo {side} — {name} ¦ Φωτογραφία {side} — {name} ¦ Снимка {side} — {name}
+Retoucher quelle photo ? ¦ Ποια φωτογραφία να επεξεργαστείς; ¦ Коя снимка да обработиш?
+Utiliser ¦ Χρήση ¦ Използвай
+✒️ Quel dessin ? ¦ ✒️ Ποιο σχέδιο; ¦ ✒️ Коя рисунка?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Δεν υπάρχει αποθηκευμένο σχέδιο στο Διανυσματικό σχέδιο. ¦ Във Векторна рисунка няма запазени рисунки.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Αυτό το σχέδιο δεν διαβάστηκε: άνοιξε μία φορά το Διανυσματικό σχέδιο και ξαναδοκίμασε. ¦ Тази рисунка не можа да се прочете: отвори веднъж Векторна рисунка, после опитай отново.
+📝 Quel document ? ¦ 📝 Ποιο έγγραφο; ¦ 📝 Кой документ?
+Aucun document dans le Traitement de texte. ¦ Δεν υπάρχει έγγραφο στον Επεξεργαστή κειμένου. ¦ В Текстообработка няма документи.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Εικόνες που κυλούν (‹ ›)· χωρίς script, γλιστρούν με το δάχτυλο ¦ Превъртащи се изображения (‹ ›); без скрипт се плъзгат с пръст
+Les images du diaporama ¦ Οι εικόνες της προβολής διαφανειών ¦ Изображенията от слайдшоуто
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Ένα βίντεο από τα πολυμέσα σου (ή από αρχείο: 📁 Εισαγωγή…), με κουμπιά αναπαραγωγής και πλήρους οθόνης ¦ Видео от медиите ти (или от файл: 📁 Импортирай…) с бутони за пускане и цял екран
+La vidéo du site ¦ Το βίντεο του ιστότοπου ¦ Видеото на сайта
+Télécharger la vidéo ¦ Λήψη του βίντεο ¦ Изтегли видеото
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Ένας ήχος από τα πολυμέσα σου (μαρτυρία, τραγούδι…), και ό,τι ακούγεται γραμμένο από κάτω αν θέλεις ¦ Звук от медиите ти (разказ, песен…) и написано отдолу какво се чува, ако искаш
+Le son du site ¦ Ο ήχος του ιστότοπου ¦ Звукът на сайта
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Τι ακούγεται (προαιρετικό) ¦ 🎧 Какво се чува (по желание)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Γράψε ή επικόλλησε τη μεταγραφή: θα μπει κάτω από τον ήχο, για όσους δεν μπορούν να τον ακούσουν. Άφησέ το κενό αν δεν τη θέλεις. ¦ Напиши или постави преписа: той ще е под звука за тези, които не могат да го чуят. Остави празно, ако не искаш.
+Ajouter le son ¦ Προσθήκη ήχου ¦ Добави звука
+Télécharger le son ¦ Λήψη του ήχου ¦ Изтегли звука
+Ce qu’on entend ¦ Τι ακούγεται ¦ Какво се чува
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Ένα από τα διανυσματικά σχέδιά σου, ή ένα SVG που επικολλάς (χωρίς script ή εξωτερικούς συνδέσμους) ¦ Една от векторните ти рисунки или поставен SVG (без скриптове и външни връзки)
+Un de mes dessins ¦ Ένα από τα σχέδιά μου ¦ Една от моите рисунки
+Dessin vectoriel → mes dessins enregistrés ¦ Διανυσματικό σχέδιο → τα αποθηκευμένα σχέδιά μου ¦ Векторна рисунка → моите запазени рисунки
+Coller un SVG ¦ Επικόλληση SVG ¦ Постави SVG
+Le code <svg>…</svg> d’un dessin ¦ Ο κώδικας <svg>…</svg> ενός σχεδίου ¦ Кодът <svg>…</svg> на рисунка
+📋 Coller un SVG ¦ 📋 Επικόλληση SVG ¦ 📋 Постави SVG
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Επικόλλησε εδώ τον κώδικα του σχεδίου, από <svg> ως </svg>. Τα script και οι εξωτερικοί σύνδεσμοι αφαιρούνται. ¦ Постави тук кода на рисунката, от <svg> до </svg>. Скриптовете и външните връзки се премахват.
+Ajouter le dessin ¦ Προσθήκη σχεδίου ¦ Добави рисунката
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Ένα κείμενο από τον Επεξεργαστή κειμένου (μια επιστολή, μια αφήγηση), καθαρογραμμένο για τη σελίδα ¦ Текст от Текстообработка (писмо, разказ), подреден за страницата
+Ce document est vide. ¦ Αυτό το έγγραφο είναι κενό. ¦ Този документ е празен.
+Vidéo, son, dessin et texte ¦ Βίντεο, ήχος, σχέδιο και κείμενο ¦ Видео, звук, рисунка и текст
+🎬 Changer la vidéo… ¦ 🎬 Αλλαγή βίντεο… ¦ 🎬 Смени видеото…
+🎧 Changer le son… ¦ 🎧 Αλλαγή ήχου… ¦ 🎧 Смени звука…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Το αρχείο φεύγει μαζί με τον ιστότοπο (φάκελος medias/) στην εξαγωγή και τη δημοσίευση. ¦ Файлът тръгва със сайта (папка medias/) при експорт и публикуване.
+Un autre son ¦ Άλλος ήχος ¦ Друг звук
+Une autre vidéo ¦ Άλλο βίντεο ¦ Друго видео
+{what} (dossier medias/) ¦ {what} (φάκελος medias/) ¦ {what} (папка medias/)
+vidéo ou son ¦ βίντεο ή ήχος ¦ видео или звук
+vidéos ou sons ¦ βίντεο ή ήχοι ¦ видеа или звуци
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: πολύ βαρύ για ιστότοπο (έως 90 MB ανά αρχείο, 300 MB συνολικά) ¦ {what}: твърде тежко за сайт (най-много 90 MB на файл, 300 MB общо)
+vidéo ou son pas mis ¦ βίντεο ή ήχος που δεν μπήκε ¦ видео или звук, които не са сложени
+vidéos ou sons pas mis ¦ βίντεο ή ήχοι που δεν μπήκαν ¦ видеа или звуци, които не са сложени
+Mon site web n’est pas chargé : recharge la page. ¦ Ο ιστότοπός μου δεν έχει φορτωθεί: φόρτωσε ξανά τη σελίδα. ¦ Моят уебсайт не е зареден: презареди страницата.
+Mon site web ne sait pas recevoir ça. ¦ Ο ιστότοπός μου δεν μπορεί να το δεχτεί. ¦ Моят уебсайт не може да приеме това.
+Ce texte est vide. ¦ Αυτό το κείμενο είναι κενό. ¦ Този текст е празен.
+Mon site ¦ Ο ιστότοπός μου ¦ Моят сайт
+ouvert ¦ ανοιχτό ¦ отворен
+la dernière fois ¦ την τελευταία φορά ¦ последния път
+ouvert, pas encore enregistré ¦ ανοιχτό, δεν έχει αποθηκευτεί ακόμα ¦ отворен, още не е запазен
+{what} : sur quel site ? ¦ {what}: σε ποιον ιστότοπο; ¦ {what}: в кой сайт?
+Un nouveau site ¦ Νέος ιστότοπος ¦ Нов сайт
+Sur quelle page ? ¦ Σε ποια σελίδα; ¦ На коя страница?
+Une nouvelle page… ¦ Νέα σελίδα… ¦ Нова страница…
+📄 Nouvelle page ¦ 📄 Νέα σελίδα ¦ 📄 Нова страница
+Le nom de la page (il apparaît dans le menu) : ¦ Το όνομα της σελίδας (εμφανίζεται στο μενού): ¦ Името на страницата (появява се в менюто):
+La vidéo ¦ Το βίντεο ¦ Видеото
+{what} est sur la page « {page} » de « {site} » ¦ {what} βρίσκεται στη σελίδα « {page} » του « {site} » ¦ {what} е на страницата « {page} » от « {site} »
+vidéos WebM ¦ βίντεο WebM ¦ видеа WebM
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ Τα iPhone πριν από το 2024 δεν το παίζουν: προτίμησε MP4 (H.264), που το παίζουν όλοι. ¦ iPhone отпреди 2024 не го пускат: предпочети MP4 (H.264), който се чете навсякъде.
+vidéos .mov (QuickTime) ¦ βίντεο .mov (QuickTime) ¦ видеа .mov (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Συχνά δεν παίζει εκτός Apple: ξαναφτιάξ’ το σε MP4 (🎬 Μοντάζ βίντεο → Εξαγωγή). ¦ Често не се пуска извън Apple: направи го отново в MP4 (🎬 Видеомонтаж → Експортирай).
+vidéos Ogg (.ogv) ¦ βίντεο Ogg (.ogv) ¦ видеа Ogg (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Ποτέ σε Safari ούτε σε iPhone: προτίμησε MP4. ¦ Никога в Safari и на iPhone: предпочети MP4.
+sons Ogg (Vorbis, Opus) ¦ ήχοι Ogg (Vorbis, Opus) ¦ звуци Ogg (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Το Safari τους παίζει μόνο από το 2025: προτίμησε MP3 (🎧 Ήχος → Εξαγωγή). ¦ Safari ги пуска едва от 2025: предпочети MP3 (🎧 Звук → Експортирай).
+sons FLAC ¦ ήχοι FLAC ¦ звуци FLAC
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Παίζει παντού, αλλά είναι βαρύ για ιστότοπο: το MP3 φορτώνει πολύ πιο γρήγορα. ¦ Работи навсякъде, но е тежко за сайт: MP3 се зарежда много по-бързо.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (η προβολή σταματά σε κάθε εικόνα) ¦ scroll-snap (слайдшоуто спира на всяко изображение)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Παίζει παντού από το 2019· αλλού, οι εικόνες κυλούν χωρίς να σταματούν. ¦ Работи навсякъде от 2019; иначе изображенията се превъртат без спиране.
+Maison par époques ¦ Το σπίτι ανά εποχή ¦ Къщата по епохи
+Ma carte animée ¦ Ο κινούμενος χάρτης μου ¦ Моята анимирана карта
+La maison au fil du temps ¦ Το σπίτι μέσα στον χρόνο ¦ Къщата през времето
+Le dessin vectoriel n’est pas chargé. ¦ Το διανυσματικό σχέδιο δεν έχει φορτωθεί. ¦ Векторната рисунка не е заредена.
+Lecture de la carte… ¦ Ανάγνωση χάρτη… ¦ Четене на картата…
+Carte introuvable ¦ Ο χάρτης δεν βρέθηκε ¦ Картата не е намерена
+La maison n’est pas chargée. ¦ Το σπίτι δεν έχει φορτωθεί. ¦ Къщата не е заредена.
+Lecture de la maison… ¦ Ανάγνωση σπιτιού… ¦ Четене на къщата…
+Maison introuvable ¦ Το σπίτι δεν βρέθηκε ¦ Къщата не е намерена
+Le plan de cette maison est vide. ¦ Το σχέδιο αυτού του σπιτιού είναι κενό. ¦ Планът на тази къща е празен.
+Choisir une carte ¦ Επιλογή χάρτη ¦ Избери карта
+Chercher une carte… ¦ Αναζήτηση χάρτη… ¦ Търси карта…
+{n} objets ¦ {n} αντικείμενα ¦ {n} обекта
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Τα αντικείμενα που έχουν χρονολογίες (καρτέλα Ιδιότητες του χάρτη) εμφανίζονται στην ημερομηνία τους. ¦ Обектите с години (раздел Свойства на картата) се появяват на датата си.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Δεν υπάρχει αποθηκευμένος χάρτης: φτιάξε έναν στα Εργαλεία επεξεργασίας → 🗺️ Χάρτης. ¦ Няма запазени карти: направи една в Инструменти за редактиране → 🗺️ Карта.
+Choisir une maison ¦ Επιλογή σπιτιού ¦ Избери къща
+Chercher une maison… ¦ Αναζήτηση σπιτιού… ¦ Търси къща…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Κάθε εποχή του σπιτιού (🕰) γίνεται ένα πλάνο, το ένα μετά το άλλο, με σβήσιμο. ¦ Всяка епоха на къщата (🕰) става кадър, един след друг, с преливане.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Δεν υπάρχει αποθηκευμένο σπίτι: σχεδίασε ένα στα Εργαλεία επεξεργασίας → 🏠 Σπίτι. ¦ Няма запазени къщи: нарисувай една в Инструменти за редактиране → 🏠 Къща.
+Apparition des objets ¦ Εμφάνιση των αντικειμένων ¦ Появяване на обектите
+D’un coup ¦ Μονομιάς ¦ Наведнъж
+Avance doucement ¦ Προχωρά απαλά ¦ Плавно напредва
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Σβήσιμο από εποχή σε εποχή (0 έως 0,9) ¦ Преливане от епоха в епоха (от 0 до 0,9)
+L’année et le nom de l’époque en légende ¦ Η χρονιά και το όνομα της εποχής ως λεζάντα ¦ Годината и името на епохата като надпис
+(une copie de la carte) ¦ (αντίγραφο του χάρτη) ¦ (копие на картата)
+En faire la musique ¦ Κάν’ το μουσική ¦ Направи го музика
+Ce son passe en musique de fond, pour tout le film ¦ Αυτός ο ήχος γίνεται μουσική υπόκρουση για όλη την ταινία ¦ Този звук става фонова музика за целия филм
+Voix retirée. ¦ Η φωνή αφαιρέθηκε. ¦ Гласът е премахнат.
+Le son est maintenant la musique du film. ¦ Ο ήχος είναι τώρα η μουσική της ταινίας. ¦ Звукът вече е музиката на филма.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Ο ήχος είναι η φωνή της ταινίας (καρτέλα Ταινία). « 🎵 Κάν’ το μουσική » για να μπει στο φόντο. ¦ Звукът е гласът на филма (раздел Филм). « 🎵 Направи го музика », за да го сложиш на фон.
+Animer dans le Studio ¦ Κίνηση στο Στούντιο ¦ Анимирай в Студиото
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Ο δρομέας του χρόνου παίζει μόνος του: τα αντικείμενα εμφανίζονται στην ημερομηνία τους ¦ Плъзгачът на времето върви сам: обектите се появяват на датата си
+Le Studio d’animation n’est pas chargé. ¦ Το Στούντιο κινούμενης εικόνας δεν έχει φορτωθεί. ¦ Студиото за анимация не е заредено.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Δεν υπάρχει αποθηκευμένος χάρτης: ξεκίνα με « ＋ Νέος χάρτης ». ¦ Няма запазени карти: започни с « ＋ Нова карта ».
+Quelle carte animer ? ¦ Ποιον χάρτη να κινήσεις; ¦ Коя карта да анимираш?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Τα αντικείμενα που έχουν χρονολογίες (καρτέλα Ιδιότητες) εμφανίζονται στην ημερομηνία τους, από την πρώτη χρονιά ως την τελευταία. ¦ Обектите с години (раздел Свойства) се появяват на датата си, от първата до последната година.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Μια ταινία όπου ο δρομέας του χρόνου προχωρά μόνος του, από την πρώτη χρονιά ως την τελευταία ¦ Филм, в който плъзгачът на времето върви сам, от първата до последната година
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Αυτός ο χάρτης είναι πολύ βαρύς για να αντιγραφεί σε ταινία: αποθήκευσέ τον και μετά Εργαλεία επεξεργασίας → 🗺️ Χάρτης → « 🎞 Κίνηση στο Στούντιο ». ¦ Тази карта е твърде тежка, за да се копира във филм: запази я, после Инструменти за редактиране → 🗺️ Карта → « 🎞 Анимирай в Студиото ».
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Η κάτοψη ή η τρισδιάστατη όψη σε άλλο εργαλείο: μοντάζ, παρουσίαση, σελιδοποίηση, σχέδιο… ¦ Планът или 3D изгледът в друг инструмент: монтаж, презентация, оформление, рисунка…
+🎞 Animer les époques dans le Studio ¦ 🎞 Κίνηση των εποχών στο Στούντιο ¦ 🎞 Анимирай епохите в Студиото
+Animer les époques dans le Studio ¦ Κίνηση των εποχών στο Στούντιο ¦ Анимирай епохите в Студиото
+Le plan (image) ¦ Η κάτοψη (εικόνα) ¦ Планът (изображение)
+La vue 3D (image) ¦ Η τρισδιάστατη όψη (εικόνα) ¦ 3D изгледът (изображение)
+Le plan en dessin (vectoriel, mise en page…) ¦ Η κάτοψη ως σχέδιο (διανυσματικό, σελιδοποίηση…) ¦ Планът като рисунка (векторна, оформление…)
