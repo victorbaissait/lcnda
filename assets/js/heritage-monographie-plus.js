@@ -36,7 +36,8 @@
     const TOP = [['filters', '🔎 Les filtres (commune, années, sorte d’acte)', '.place-monograph-filter'], ['metrics', '🔢 Les chiffres', '.place-monograph-metrics']];
     const FIXED = [['events', '📜 Actes rattachés', '.place-monograph-section.is-events'], ['census', '🏠 Recensements', '.place-monograph-section.is-census'],
         ['digests', '📑 Dépouillements', '.place-monograph-section.is-digests'], ['battues', '🧭 Battues', '.place-monograph-section.is-battues'], ['cemetery', '⚰️ Cimetière', '.place-monograph-section.is-cemetery']];
-    const ADOPTED = [['cplus', '🪦 Autour du village (église, cimetières, images anciennes)', '.cplus-place'], ['lp', '📜 Anciens noms, lieux-dits, patrimoine', '.lp-place'],
+    const ADOPTED = [['cplus', '🪦 Autour du village (église, cimetières, images anciennes)', '.cplus-place'], ['lp', '📜 Anciens noms, lieux-dits, patrimoine', '.lp-place, [data-lp-host]'],
+        ['mr', '⛏️ Activités anciennes, moulins, rivière, musée', '.mr-place, [data-mr-host]'],
         ['postcards', '🏞 Cartes postales', '.place-monograph-postcards'], ['placeimgs', '🖼 Images du lieu', '.place-monograph-images']];
     const EMPTY_OK = new Set(['events']); // « Aucun acte pour ces filtres » reste : c'est la réponse aux filtres
 

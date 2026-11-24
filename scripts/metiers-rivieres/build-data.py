@@ -3,9 +3,9 @@
 
     python3 scripts/metiers-rivieres/build-data.py roe                     # assets/data/roe-moulins.json.gz (LIVRÉ avec l'app)
     python3 scripts/metiers-rivieres/build-data.py mines                   # assets/data/metiers-mines.json.gz (LIVRÉ avec l'app)
-    python3 scripts/metiers-rivieres/build-data.py casias --dossier S      # S/casias-<dép>.json.gz : packs TÉLÉCHARGÉS (un par département)
-    python3 scripts/metiers-rivieres/build-data.py casias --dep 19 --dossier S
-    python3 scripts/metiers-rivieres/build-data.py manifeste --dossier S   # S/metiers-rivieres-manifest.json (taille, sha256 de chaque pack)
+    python3 scripts/metiers-rivieres/build-data.py casias --dossier assets/data/casias   # casias-<dép>.json.gz, un par département
+    python3 scripts/metiers-rivieres/build-data.py casias --dep 19 --dossier S            # (LIVRÉS avec l'app : ≈ 9 Mo en tout)
+    python3 scripts/metiers-rivieres/build-data.py manifeste --dossier S   # taille et sha256 des fichiers (pour comparer deux fabrications)
     (les repères de crues : build-reperes.py)
 
 Sources (vérifiées, redistribution permise avec la mention) :
@@ -168,7 +168,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('quoi', choices=['roe', 'mines', 'casias', 'manifeste'])
     ap.add_argument('--dep', action='append')
-    ap.add_argument('--dossier', default='metiers-rivieres-sortie')
+    ap.add_argument('--dossier', default='assets/data/casias')
     ap.add_argument('--sortie', default='')
     a = ap.parse_args()
     if a.quoi == 'roe':
@@ -177,7 +177,6 @@ def main():
         build_mines(a.sortie or 'assets/data/metiers-mines.json.gz')
     elif a.quoi == 'casias':
         build_casias(a.dossier, a.dep or DEPS)
-        manifest(a.dossier)
     else:
         manifest(a.dossier)
 

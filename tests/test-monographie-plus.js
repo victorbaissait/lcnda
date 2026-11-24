@@ -144,7 +144,6 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
             const a = await p.locator('.mp-panel li[data-k="search"] .mp-grip').boundingBox(), b = await p.locator('.mp-panel [data-mp-order] li').first().boundingBox();
             await p.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await p.mouse.down();
             await p.mouse.move(a.x + 5, a.y - 20, {steps: 5}); await p.mouse.move(b.x + 20, b.y + 3, {steps: 12}); await p.mouse.move(b.x + 20, b.y + 2, {steps: 2}); await p.mouse.up();
-            if (process.env.DBG) console.log(a, b, await p.evaluate(() => innerHeight));
             await p.waitForFunction(() => document.querySelector('.place-monograph-sections > *:not([hidden])')?.dataset.mp === 'search', null, {timeout: 5000});
             const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-monographie-parties')));
             assert.ok(saved.order.indexOf('search') < saved.order.indexOf('events'), saved.order.join(','));

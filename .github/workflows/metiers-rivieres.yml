@@ -1,0 +1,68 @@
+# ⛏️🏭⚙️🌊 Métiers et rivières : refaire les données LIVRÉES avec l'app (lib/metiers_rivieres.php).
+#
+# Tout tient dans l'app (moins de 15 Mo en tout) : anciens sites industriels CASIAS (assets/data/casias/, un fichier par
+# département, ≈ 9 Mo), moulins du ROE (assets/data/roe-moulins.json.gz), mines et carrières Wikidata
+# (assets/data/metiers-mines.json.gz), repères de crues (assets/data/reperes-crues.json.gz). Ce travail les refait avec les
+# sources du jour et les donne en pièce jointe (« metiers-rivieres-donnees ») : à recopier dans assets/data/.
+# Les rivières, les hautes eaux (Hub'Eau) et les musées (POP) sont lus en ligne par l'app : rien à fabriquer ici.
+#
+# Lancer : onglet « Actions » → « Métiers et rivières » → « Run workflow » (le menu « quoi » ; départements : vide = tous).
+
+name: Métiers et rivières
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'Ce qu’il faut refaire'
+        type: choice
+        options: [tout, casias, roe, mines, reperes]
+        default: tout
+      deps:
+        description: 'Départements pour CASIAS, séparés par des espaces (vide = tous), ex. « 19 87 »'
+        type: string
+        default: ''
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/metiers-rivieres.yml']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: metiers-rivieres-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fabriquer
+        env:
+          QUOI: ${{ inputs.quoi }}
+          DEPS: ${{ inputs.deps }}
+        run: |
+          set -e
+          args=""
+          for d in $DEPS; do case "$d" in [0-9][0-9]|2[AB]|97[0-9]) args="$args --dep $d";; *) echo "département refusé : $d"; exit 1;; esac; done
+          mkdir -p sortie/casias
+          if [ "$QUOI" = tout ] || [ "$QUOI" = roe ]; then python3 scripts/metiers-rivieres/build-data.py roe --sortie sortie/roe-moulins.json.gz; fi
+          if [ "$QUOI" = tout ] || [ "$QUOI" = mines ]; then python3 scripts/metiers-rivieres/build-data.py mines --sortie sortie/metiers-mines.json.gz; fi
+          if [ "$QUOI" = tout ] || [ "$QUOI" = casias ]; then python3 scripts/metiers-rivieres/build-data.py casias $args --dossier sortie/casias; rm -f sortie/casias/metiers-rivieres-manifest.json; fi
+          if [ "$QUOI" = tout ] || [ "$QUOI" = reperes ]; then python3 scripts/metiers-rivieres/build-reperes.py --sortie sortie/reperes-crues.json.gz --cache reperes-cache; fi
+          du -sh sortie sortie/*
+
+      - name: Les données en pièce jointe (à recopier dans assets/data/)
+        uses: actions/upload-artifact@v4
+        with:
+          name: metiers-rivieres-donnees
+          path: sortie

@@ -277,15 +277,7 @@
             fillParts(village.querySelector('.cplus-place'), place, village.querySelector('.h-village-map'));
             return;
         }
-        const mono = ws.querySelector('.place-monograph-postcards:not([data-cplus])');
-        if (mono && !mono.closest('.h-village')) {
-            mono.dataset.cplus = '1';
-            const pli = ws.querySelector('.place-monograph-images[data-pli-host]');
-            const place = {id: Number(mono.dataset.cpoPlace) || 0, name: mono.dataset.cpoName || '', lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null};
-            const html = partsHtml(); if (!html || !place.name) return;
-            mono.insertAdjacentHTML('beforebegin', html);
-            fillParts(mono.previousElementSibling, place, null);
-        }
+        // la Monographie de commune : des parties déclarées (LCNDA_EXT.monographSections, plus bas), pas d'insertion ici
     }
     let pending = 0;
     new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; try { decorate(); } catch (e) { console.error(e); } }); }).observe(document.documentElement, {childList: true, subtree: true});
@@ -342,6 +334,18 @@
         return !!tabs;
     }
     if (!register()) document.addEventListener('DOMContentLoaded', register, {once: true});
+
+    /* ═════════ 📜 Monographie de commune : trois parties (ordre, affichage, impression gérés par heritage-monographie-plus.js) ═════════ */
+    const monoPlace = pl => ({id: Number(pl?.id) || 0, name: pl?.name || '', lat: pl?.latitude ?? pl?.lat ?? null, lon: pl?.longitude ?? pl?.lon ?? null, country: pl?.country || '', county: pl?.county || ''});
+    const monoRun = fill => async (place, host, ctx) => {
+        let insee = ''; try { insee = (await ctx?.village?.())?.insee || ''; } catch (_) {}
+        await fill(host, {...monoPlace(place), insee});
+        return !!host.textContent.trim();
+    };
+    (ext.monographSections = ext.monographSections || []).push(
+        {id: 'cplus_church', icon: '⛪', label: T('L’église et son saint patron'), group: 'Le lieu', defaultOn: true, enabled: () => on('church'), render: monoRun(churchInto)},
+        {id: 'cplus_cemeteries', icon: '🪦', label: T('Cimetières autour du village'), group: 'Le lieu', defaultOn: true, enabled: () => on('cemeteries'), render: monoRun((h, pl) => fillCemeteries(h, pl))},
+        {id: 'cplus_images', icon: '🖼️', label: T('Images anciennes de la commune'), group: 'Le lieu', defaultOn: true, enabled: () => on('images'), render: monoRun(fillImages)});
 
     /* ═════════ 🧰 le registre commun des données : à la demande, pour n'importe quel lieu ou personne ═════════ */
     const placeOfCtx = pl => (pl ? {id: Number(pl.id || pl.place_id) || 0, name: pl.name || pl.place_name || pl.title || '', lat: pl.lat ?? pl.latitude ?? null, lon: pl.lon ?? pl.longitude ?? null, insee: pl.insee || pl.admin4_code || '', country: pl.country || ''} : null);

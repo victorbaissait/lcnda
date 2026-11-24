@@ -540,20 +540,23 @@ function mr_pop_data(PDO $pdo, array $q): array
         $items = [];
         if ($p['insee'] !== '') {
             $j = mr_json('pop-memoire.json', mr_pop_url('/search/simple', ['bases' => ['memoire'], 'facets' => ['INSEE' => [$p['insee']]], 'size' => 24, 'filters' => ['hasImage' => 'true']]));
-            foreach ($j['hits'] ?? [] as $h) { if ($it = mr_pop_item($h['_source'] ?? [], 'memoire')) { $items[] = $it; } }
+            $titles = []; // la même châsse photographiée dix fois : une seule
+            foreach ($j['hits'] ?? [] as $h) { if (($it = mr_pop_item($h['_source'] ?? [], 'memoire')) && !isset($titles[$k = mr_fold($it['title'])])) { $titles[$k] = 1; $items[] = $it; } }
             $memTotal = (int) ($j['total'] ?? 0);
         }
         if ($p['name'] !== '' && mb_strlen($p['name']) >= 3) {
             $j = mr_json('pop-joconde.json', mr_pop_url('/search/simple', ['bases' => ['joconde'], 'text' => '"' . $p['name'] . '"', 'size' => 40, 'filters' => ['hasImage' => 'true']]));
             // la commune doit être NOMMÉE (avec sa majuscule) dans le sujet, le titre ou le lieu de création : pas le « tulle » du tissu
-            $re = '/(^|[^\p{L}])' . preg_quote($p['name'], '/') . '([^\p{L}]|$)/u'; $dep = $p['insee'] !== '' ? mr_dep_of($p['insee']) : '';
+            // (« Tulle » ou « TULLE », jamais « tulle ») ; sinon conservé dans un musée de la commune (LOCA), montré après
+            $re = '/(^|[^\p{L}])(' . preg_quote($p['name'], '/') . '|' . preg_quote(mb_strtoupper($p['name'], 'UTF-8'), '/') . ')([^\p{L}]|$)/u';
+            $str = static fn(array $s, array $keys) => implode(' ; ', array_map(static fn($k) => is_array($s[$k] ?? null) ? implode(' ; ', array_map('strval', $s[$k])) : (string) ($s[$k] ?? ''), $keys));
+            $about = []; $held = [];
             foreach ($j['hits'] ?? [] as $h) {
                 $s = $h['_source'] ?? [];
-                $txt = implode(' ; ', array_map(static fn($k) => is_array($s[$k] ?? null) ? implode(' ; ', array_map('strval', $s[$k])) : (string) ($s[$k] ?? ''), ['REPR', 'TITR', 'LIEUX', 'PLIEUX', 'GEOHI', 'PREP', 'HIST']));
-                if (!preg_match($re, $txt)) { continue; }
-                if ($it = mr_pop_item($s, 'joconde')) { $items[] = $it; }
-                if (count($items) >= 40) { break; }
+                if (preg_match($re, $str($s, ['REPR', 'TICO', 'TITR', 'LIEUX', 'PLIEUX', 'GEOHI', 'PREP', 'HIST']))) { if ($it = mr_pop_item($s, 'joconde')) { $about[] = $it; } }
+                elseif (preg_match($re, $str($s, ['LOCA']))) { if ($it = mr_pop_item($s, 'joconde')) { $held[] = ['held' => true] + $it; } }
             }
+            $items = array_merge($items, $about, array_slice($held, 0, 12));
         }
         return ['ok' => true, 'items' => $items, 'memoire_total' => $memTotal ?? 0, 'search' => 'https://pop.culture.gouv.fr/search/list?mainSearch=' . rawurlencode('"' . $p['name'] . '"'), 'source' => MR_SOURCES['pop']];
     }) + ['place' => $p];

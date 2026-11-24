@@ -301,6 +301,66 @@
    "old": 15768,
    "places": 6626,
    "size": 424890
+  },
+  "52": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Haute-Marne",
+    "bibl": "Roserot (Alphonse), Dictionnaire topographique du département de la Haute-Marne, Paris, 1903.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39297h"
+   },
+   "communes": 437,
+   "label": "Haute-Marne",
+   "old": 7784,
+   "places": 4139,
+   "size": 203100
+  },
+  "54": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Meurthe",
+    "bibl": "Lepage (Henri), Dictionnaire topographique du département de la Meurthe, Paris, 1862.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k96349681"
+   },
+   "communes": 718,
+   "label": "Meurthe-et-Moselle",
+   "old": 6150,
+   "places": 3933,
+   "size": 222571
+  },
+  "55": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Meuse",
+    "bibl": "Liénard (Félix), Dictionnaire topographique du département de la Meuse, Paris, 1872.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k392996"
+   },
+   "communes": 511,
+   "label": "Meuse",
+   "old": 6844,
+   "places": 6079,
+   "size": 256531
+  },
+  "56": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Morbihan",
+    "bibl": "Rosenzweig (Louis), Dictionnaire topographique du département du Morbihan, Paris, 1870.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39300k"
+   },
+   "communes": 238,
+   "label": "Morbihan",
+   "old": 1705,
+   "places": 20742,
+   "size": 442569
+  },
+  "57": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Moselle",
+    "bibl": "Bouteiller (Ernest de), Dictionnaire topographique du département de la Moselle, Paris, 1874.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39301x"
+   },
+   "communes": 611,
+   "label": "Moselle",
+   "old": 9728,
+   "places": 3662,
+   "size": 236033
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

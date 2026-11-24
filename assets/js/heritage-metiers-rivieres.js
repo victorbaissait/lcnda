@@ -141,7 +141,7 @@
         const name = d.place.name || T('la commune');
         const out = [];
         if (S.count) {
-            const kinds = (S.tally || []).slice(0, 5).map(x => `${esc(T(x.label))} (${x.count})`).join(', ');
+            const kinds = (S.tally || []).slice(0, 5).map(x => `${esc(T(x.label).replace(/^(une?|des) /, ''))} (${x.count})`).join(', ');
             const item = x => `<li><b>${esc(x.name)}</b>${x.activity ? ` — ${esc(x.activity)}` : ''}${x.address ? ` <small class="muted">${esc(x.address)}</small>` : ''}${x.url ? ` ${link(x.url, T('fiche ↗'))}` : ''}</li>`;
             out.push(`<p>${T(S.count > 1 ? '{n} anciens ateliers, usines et commerces connus à {p}' : '{n} ancien atelier ou usine connu à {p}', {n: `<b>${S.count}</b>`, p: esc(name)})}${kinds ? ` ${T('— dont {k}', {k: kinds})}` : ''}.</p>
                 <details class="mr-more"><summary>${esc(T('▸ voir la liste'))}</summary>${S.count > 12 ? `<input type="search" class="mr-filter" data-mr-filter placeholder="${esc(T('Filtrer (ex. tannerie)'))}">` : ''}<ul class="mr-list">${S.items.map(item).join('')}</ul>${S.count > S.items.length ? `<p class="muted">${esc(T('… et {n} autres.', {n: S.count - S.items.length}))}</p>` : ''}</details>
@@ -176,7 +176,7 @@
     function popCard(it, key, i) {
         const cap = [it.when, it.author].filter(Boolean).join(' · ');
         return `<figure class="cplus-img mr-img"><a href="${esc(it.page)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Voir sur POP'))}"><img loading="lazy" alt="${esc(it.title)}" src="${esc(it.thumb)}" onerror="this.closest('figure').classList.add('is-noimg')"></a>
-            <figcaption><b>${esc(it.kind === 'photo' ? T('📷 Photo') : T('🏛 Musée'))}${it.where ? ` — ${esc(it.where)}` : ''}</b><span class="cplus-img-t">${esc(it.title)}</span><small>${cap ? esc(cap) + ' · ' : ''}${esc(it.copy || T('droits non précisés'))}</small>
+            <figcaption><b>${esc(it.kind === 'photo' ? T('📷 Photo') : it.held ? T('🏛 Au musée de la commune') : T('🏛 Musée'))}${it.where ? ` — ${esc(it.where)}` : ''}</b><span class="cplus-img-t">${esc(it.title)}</span><small>${cap ? esc(cap) + ' · ' : ''}${esc(it.copy || T('droits non précisés'))}</small>
             ${it.free && !kiosk() ? `<button type="button" class="button small secondary" data-mr-keep="${i}" data-mr-key="${esc(key)}">${esc(T('＋ Garder dans les médias'))}</button>` : ''}</figcaption></figure>`;
     }
     async function fillPop(body, place) {
