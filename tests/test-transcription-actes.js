@@ -317,7 +317,8 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
             assert.match(urls.base, /cet ordinateur/); assert.match(urls.local, /^http:\/\/127\.0\.0\.1:11434$/);
         }],
         ['lecture approfondie : Ollama trouvé, modèles ouverts (Apache 2.0) proposés, lecture refusée avant le téléchargement', () => {
-            assert.equal(out.st0.running, true); assert.deepEqual(out.st0.models.map(m => [m.tag, m.license, m.present]), [['qwen3-vl:8b-instruct', 'Apache 2.0', false], ['qwen3-vl:4b-instruct', 'Apache 2.0', false]]);
+            assert.equal(out.st0.running, true); const ms = out.st0.models.map(m => [m.tag, m.license, m.present]); // la liste a grandi (9 modèles, commit 122d9fb) : les deux conseillés d'abord, aucun présent avant le téléchargement
+            assert.deepEqual(ms.slice(0, 2), [['qwen3-vl:8b-instruct', 'Apache 2.0', false], ['qwen3-vl:4b-instruct', 'Apache 2.0', false]]); assert.equal(ms.length, 9); assert.ok(ms.every(m => m[1] && m[2] === false), JSON.stringify(ms));
             assert.equal(out.readBefore.status, 422); assert.match(err(out.readBefore), /pas encore téléchargé/); assert.equal(out.pullBad.status, 422);
         }],
         ['lecture approfondie : téléchargement en arrière-plan avec sa progression, puis modèle présent', () => {

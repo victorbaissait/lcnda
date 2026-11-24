@@ -168,7 +168,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
             await p.evaluate(s => window.LCNDA_EXT.openAudioStudio(s), SOUND);
             await p.waitForSelector('dialog.h-as[open] [data-as-canvas]'); await p.waitForTimeout(300);
             await p.evaluate(m => eval(m).addFx('eqg'), AS);
-            await p.evaluate(m => { eval(m).sendSound(document.body); }, AS);
+            await p.evaluate(m => { eval(m).sendSound(document.querySelector('dialog.h-as[open] [data-as-menus]')); }, AS);
             await p.waitForSelector('dialog.confirm-box-dialog[open] [data-cb-ok]'); await p.click('dialog.confirm-box-dialog[open] [data-cb-ok]');
             await p.waitForSelector('.ui-actmenu-i', { timeout: 30000 });
             await p.evaluate(() => { window.__siteGot = null; window.LCNDA_EXT.siteReceive = x => { window.__siteGot = x; }; });

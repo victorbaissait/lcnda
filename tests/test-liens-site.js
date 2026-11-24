@@ -123,12 +123,12 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t('▶ Tester : les boutons ‹ › du diaporama (et pas en mode modifier)', async () => {
-            const frame = () => p.frames().find(f => f !== p.mainFrame() && f.parentFrame() === p.mainFrame() && /lcb-ov|lc-diaporama/.test(f.url() + '') || false);
-            const count = async () => { for (const f of p.frames()) { const n = await f.evaluate(() => document.querySelector('.lc-diaporama') ? document.querySelectorAll('.lc-diapo-nav').length : -1).catch(() => -1); if (n >= 0) return n; } return -1; };
+            const within = pr => Promise.race([pr, sleep(1500).then(() => -1)]);
+            const count = async () => { for (const f of p.frames()) { if (f === p.mainFrame()) continue; const n = await within(f.evaluate(() => document.querySelector('.lc-diaporama') ? document.querySelectorAll('.lc-diapo-nav').length : -1).catch(() => -1)); if (n >= 0) return n; } return -1; };
             await sleep(800); assert.strictEqual(await count(), 0, 'en mode modifier : pas de bouton (il serait enregistré dans la page)');
             await p.evaluate(() => window.LCNDA_EXT.siteWeb.current.setMode('play')); await sleep(1500);
             let n = -1; for (let i = 0; i < 20 && n !== 2; i++) { n = await count(); await sleep(200); }
-            assert.strictEqual(n, 2, 'en ▶ Tester : ‹ et ›'); void frame;
+            assert.strictEqual(n, 2, 'en ▶ Tester : ‹ et ›');
             await p.evaluate(() => window.LCNDA_EXT.siteWeb.current.setMode('select')); await sleep(600);
             assert.ok(!/lc-diapo-nav/.test((await ed()).pages[0].html), 'rien d’ajouté au code');
         });
