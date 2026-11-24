@@ -19,6 +19,9 @@ on:
         default: true
   push:
     tags: ['histoire-*']
+    # un envoi qui touche ce fichier fait seulement connaître l'atelier à GitHub (rien n'est fabriqué)
+    branches: ['claude/**']
+    paths: ['.github/workflows/histoire.yml']
 
 permissions:
   contents: write
@@ -29,6 +32,7 @@ concurrency:
 
 jobs:
   pack:
+    if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
