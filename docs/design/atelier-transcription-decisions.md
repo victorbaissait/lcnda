@@ -83,3 +83,6 @@ Une question en une phrase, sans fiche : « Je cherche [un acte de naissance ▾
 
 ## 3c · Le même texte, montré pareil (K7) — ✅ FAIT le 24 novembre
 La page du document et la visionneuse montrent le texte de l'Atelier avec les mêmes numéros de ligne dans la marge (réglage « Numéros de ligne » de l'Atelier, conseillé : oui ; éteint partout d'un coup) ; dans la visionneuse, les numéros suivent l'écriture et les lignes coupées. Un nom relevé pas encore relié est un bouton « 🔗 » qui ouvre l'Atelier sur l'acte (page du document et visionneuse). Essai : tests/test-atelier-aligne.js. FAQ : avec la 3d.
+
+## 3d · Export avec numéros de ligne — ✅ FAIT le 24 novembre
+« ⤓ Exporter » → 📝 Texte : cases « Numéros de ligne » et « Personnes et rôles » (cochées au départ, conseillé) ; plusieurs pages : numéros par page, sous le nom de la page. 🖨 Imprimer / PDF : case « Numéros de ligne » (cochée). FAQ « Comment citer une ligne d'un acte ? » (3c + 3d, 31 langues). Essai : tests/test-atelier-aligne.js.

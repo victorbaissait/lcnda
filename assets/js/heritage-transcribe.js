@@ -1543,9 +1543,15 @@
             return segs.map((sg, k) => { const id = Number((t.data.pages || [])[k] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id);
                 return {i, name: i >= 0 ? pageName(PAGES[i], i) : i18n('Page {n}', {n: k + 1}), text: area.value.slice(sg.s, sg.e).replace(/^\n+|\n+$/g, ''), file: i >= 0 ? PAGES[i].filename : ''}; });
         }
-        const namedText = () => (multiPages() ? pageParts().map(q => `— ${q.name} —\n${q.text}`).join('\n\n') : area.value);
+        // 3d : « l. 5 » se cite dans une preuve — les numéros comme dans l'Atelier (par page : « page 2, l. 3 »)
+        const numbered = text => { const L = String(text).split('\n'), w = String(L.length).length; return L.map((l, i) => `${String(i + 1).padStart(w, ' ')}  ${l}`).join('\n'); };
+        const peopleText = () => (t.data.people || []).filter(p => p.name).map(p => `- ${p.name}${p.role ? ` — ${i18n(p.role)}` : ''}`).join('\n');
+        const namedText = (o = {}) => { const body = multiPages() ? pageParts().map(q => `— ${q.name} —\n${o.ln ? numbered(q.text) : q.text}`).join('\n\n') : (o.ln ? numbered(area.value) : area.value);
+            const pp = o.people ? peopleText() : ''; return pp ? `${body}\n\n${i18n('Personnes')}\n${pp}\n` : body; };
         /** les cases remplies du gabarit, dans l'ordre : [[nom, valeur]] (impression, PDF) */
         const gabRows = () => { const g = GB(), gb = t.data.gabarit; if (!g || !gb || gb.kind !== kindNow()) return []; return g.fieldsOf(kindNow(), gb).filter(([k]) => gb.fields?.[k]?.v).map(([k, l]) => [l, gb.fields[k].v + (gb.fields[k].ok ? ' ✓' : '')]); };
+        /** le texte à l'impression : tel quel, ou une liste numérotée (les numéros dans la marge, comme dans l'Atelier) */
+        const preOf = (text, ln) => (ln ? `<ol class="ln">${String(text).split('\n').map(l => `<li>${esc(l) || '&#8203;'}</li>`).join('')}</ol>` : `<pre>${esc(text)}</pre>`);
         async function printIt() {
             const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error');
             const plainUrl = t.filename ? `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${encodeURIComponent(t.filename)}` : '';
@@ -1558,11 +1564,11 @@
                 options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', i18n('Image puis texte')], ['text', i18n('Texte seul')]]},
                     ...(multiPages() ? [{key: 'pages', type: 'radio', value: 'all', choices: [['all', i18n('Sur toutes les pages')], ['here', i18n('Sur la page affichée')]]}] : []),
                     ...(canEnh ? [{key: 'enh', label: i18n('Image améliorée'), checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: i18n('Personnes et rôles'), checked: true},
-                    ...(gabRows().length ? [{key: 'gab', label: `🧩 ${i18n('Gabarit')}`, checked: true}] : [])],
+                    ...(gabRows().length ? [{key: 'gab', label: `🧩 ${i18n('Gabarit')}`, checked: true}] : []), {key: 'ln', label: i18n('Numéros de ligne'), checked: true}],
                 html: async c => { const img = c.lay === 'text' ? '' : await imgFor(c);
-                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}h2{font-size:16px;margin:12px 0 6px}.brk{break-before:page}table.gab{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0 10px}table.gab th{text-align:left;font-weight:600;color:#555;width:34%;padding:3px 8px 3px 0;vertical-align:top}table.gab td{padding:3px 0;border-bottom:1px solid #ddd}</style></head><body>
+                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}h2{font-size:16px;margin:12px 0 6px}.brk{break-before:page}ol.ln{margin:0;padding-left:3.2em;white-space:pre-wrap;font:inherit}ol.ln li{padding-left:.4em}ol.ln li::marker{color:#888;font-size:11px}table.gab{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0 10px}table.gab th{text-align:left;font-weight:600;color:#555;width:34%;padding:3px 8px 3px 0;vertical-align:top}table.gab td{padding:3px 0;border-bottom:1px solid #ddd}</style></head><body>
                         <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p>${multiPages() ? (await Promise.all(pageParts().filter(q => c.pages !== 'here' || q.i === pageIx).map(async (q, k) => { const u = c.lay === 'text' || !q.file ? '' : q.i === pageIx ? img : base + encodeURIComponent(q.file);
-                            return `<section class="pg${k ? ' brk' : ''}"><h2>${esc(q.name)}</h2><div class="g ${c.lay}">${u ? `<img src="${esc(u)}" alt="">` : ''}<div><pre>${esc(q.text)}</pre></div></div></section>`; }))).join('') + '<div><div>' : `<div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>`}${c.gab && gabRows().length ? `<h3>🧩 ${esc(i18n('Gabarit'))}</h3><table class="gab">${gabRows().map(([l, v]) => `<tr><th>${esc(l)}</th><td>${esc(v)}</td></tr>`).join('')}</table>` : ''}${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
+                            return `<section class="pg${k ? ' brk' : ''}"><h2>${esc(q.name)}</h2><div class="g ${c.lay}">${u ? `<img src="${esc(u)}" alt="">` : ''}<div>${preOf(q.text, c.ln)}</div></div></section>`; }))).join('') + '<div><div>' : `<div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div>${preOf(area.value, c.ln)}`}${c.gab && gabRows().length ? `<h3>🧩 ${esc(i18n('Gabarit'))}</h3><table class="gab">${gabRows().map(([l, v]) => `<tr><th>${esc(l)}</th><td>${esc(v)}</td></tr>`).join('')}</table>` : ''}${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
         }
         window.LCNDA_UI?.onPrintKey?.(dlg, () => printIt()); // L1 : ⌘P
         dlg.addEventListener('click', async e => {
@@ -1616,9 +1622,10 @@
                 if (!UI.openExportDialog) return printIt();
                 const nm = $('[data-tx="title"]').value || 'transcription';
                 return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${i18n('Mots : {n}', {n: area.value.trim().split(/\s+/).filter(Boolean).length})}${t.filename ? ` · ${i18n('avec l’image de l’acte')}` : ''}`, formats: [
-                    {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText()], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText({ln: o.checks?.ln !== false, people: !!o.checks?.people})], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
                     {id: 'pdf', hint: i18n('image + texte (« Enregistrer en PDF »)'), ext: '', run: async () => printIt()},
-                    {id: 'print', hint: 'image + texte', run: async () => printIt()}]});
+                    {id: 'print', hint: 'image + texte', run: async () => printIt()}],
+                    checks: [{id: 'ln', label: i18n('Numéros de ligne'), checked: true, show: id => id === 'file'}, {id: 'people', label: i18n('Personnes et rôles'), checked: true, show: id => id === 'file'}]});
             }
         });
         dlg.addEventListener('input', e => {

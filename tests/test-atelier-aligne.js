@@ -92,6 +92,24 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             assert.equal(await p.$('#lightbox .tx-gut.is-on'), null); assert.notEqual(await p.$eval('#lightbox-transcription', a => getComputedStyle(a).paddingLeft), '44px');
             await p.evaluate(() => { document.getElementById('lightbox').close(); localStorage.removeItem('genealogie-tx-linenos'); });
         });
+        await t('3d · export : le texte avec ses numéros de ligne et les personnes avec leur rôle (cochés au départ) ; l’impression numérote aussi', async () => {
+            await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({id: 1}));
+            await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-img]')?.getAttribute('href'), null, {timeout: 15000}); await sleep(500);
+            const r = await p.evaluate(async () => { const UI = window.LCNDA_UI, keep = {pr: UI.openPrintDialog, ex: UI.openExportDialog}; let pr = null, ex = null;
+                UI.openPrintDialog = o => { pr = o; }; UI.openExportDialog = o => { ex = o; };
+                try { const d = document.querySelector('dialog.h-tx-dlg'); [...d.querySelectorAll('[data-tx-menus] button')].find(b => b.textContent.trim() === 'Fichier').click(); await new Promise(x => setTimeout(x, 200));
+                    [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Exporter/.test(b.textContent)).click(); await new Promise(x => setTimeout(x, 200));
+                    const grab = async checks => { let blob = ''; const oc = URL.createObjectURL; URL.createObjectURL = b => { blob = b; return oc.call(URL, b); }; await ex.formats.find(f => f.id === 'file').run({filename: 'x.txt', checks}); URL.createObjectURL = oc; return blob.text(); };
+                    const on = await grab({ln: true, people: true}), off = await grab({ln: false, people: false});
+                    await ex.formats.find(f => f.id === 'print').run({});
+                    return {checks: ex.checks.map(c => [c.id, c.checked]), on, off, prOpt: pr.options.find(o => o.key === 'ln')?.checked, html: await pr.html({lay: 'text', ln: true, people: false})};
+                } finally { UI.openPrintDialog = keep.pr; UI.openExportDialog = keep.ex; } });
+            assert.deepEqual(r.checks, [['ln', true], ['people', true]]);
+            assert.match(r.on, /^1  L’an mil sept cent/); assert.match(r.on, /\n4  de Pierre MAZAUD/); assert.match(r.on, /\nPersonnes\n- Jean MAZAUD — sujet\n- Pierre MAZAUD — parent/);
+            assert.equal(r.off, BODY, 'sans les cases : le texte tel quel');
+            assert.equal(r.prOpt, true); assert.match(r.html, /<ol class="ln"><li>L’an mil/); assert.equal((r.html.match(/<li>/g) || []).length, 4);
+            await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'); d?.querySelector('[data-tx-cmd="close"]')?.click(); }); await sleep(300);
+        });
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true});
