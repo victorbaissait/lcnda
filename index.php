@@ -55,6 +55,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/audit-cartes.css?v=1">
     <link rel="stylesheet" href="assets/css/audit-personnes.css?v=1">
     <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=1">
+    <link rel="stylesheet" href="assets/css/audit-options.css?v=1">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=2">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
@@ -1228,7 +1229,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=25" defer></script>
 <script src="assets/js/app-chrono-recherche.js?v=1" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
-<script src="assets/js/app-ui.js?v=33" defer></script>
+<script src="assets/js/app-ui.js?v=34" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=11" defer></script>
 <script src="assets/js/app-aide-lecture.js?v=4" defer></script>
 <!-- aide-langues : une langue = un fichier (assets/js/aide-langues/README-format.md) -->
@@ -1336,8 +1337,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-voters.js?v=11" defer></script>
 <script src="assets/js/heritage-widgets.js?v=56" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=17" defer></script>
-<script src="assets/js/heritage-tabs.js?v=16" defer></script>
-<script src="assets/js/app-onglets-plus.js?v=6" defer></script>
+<script src="assets/js/heritage-tabs.js?v=17" defer></script>
+<script src="assets/js/app-onglets-plus.js?v=7" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=3" defer></script>
 <script src="assets/js/heritage-employers.js?v=9" defer></script>
 <script src="assets/js/heritage-book.js?v=10" defer></script>
@@ -1380,7 +1381,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-widgets.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-listes.js?v=6" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=16" defer></script>
-<script src="assets/js/heritage-fiches.js?v=27" defer></script>
+<script src="assets/js/heritage-fiches.js?v=28" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=7" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=17" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=11" defer></script>
@@ -1491,21 +1492,22 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-successoral-core.js?v=6" defer></script>
 <script src="assets/js/heritage-successoral-outils-core.js?v=2" defer></script>
 <script src="assets/js/heritage-successoral-plus2-core.js?v=3" defer></script>
-<script src="assets/js/heritage-successoral.js?v=14" defer></script>
-<script src="assets/js/heritage-successoral-dossiers.js?v=8" defer></script>
-<script src="assets/js/heritage-successoral-outils.js?v=2" defer></script>
+<script src="assets/js/heritage-successoral.js?v=15" defer></script>
+<script src="assets/js/heritage-successoral-dossiers.js?v=9" defer></script>
+<script src="assets/js/heritage-successoral-outils.js?v=3" defer></script>
 <script src="assets/js/heritage-successoral-plus2.js?v=6" defer></script>
 <script src="assets/js/heritage-successoral-plus2b.js?v=3" defer></script>
 <script src="assets/js/heritage-successoral-droit-core.js?v=2" defer></script>
 <script src="assets/js/heritage-successoral-droit.js?v=2" defer></script>
+<script src="assets/js/heritage-successoral-audit.js?v=1" defer></script>
 <script src="assets/js/heritage-complements-core.js?v=1" defer></script>
 <script src="assets/js/heritage-complements.js?v=1" defer></script>
 <script src="assets/js/heritage-complements-2.js?v=2" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/app-correspondances-core.js?v=2" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=27" defer></script>
-<script src="assets/js/heritage-onglets-catalogue.js?v=3" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=28" defer></script>
+<script src="assets/js/heritage-onglets-catalogue.js?v=4" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=12" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=4" defer></script>
 <script src="assets/js/heritage-transcribe-acte.js?v=16" defer></script>
@@ -1593,7 +1595,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-dates-feter.js?v=3" defer></script>
 <script src="assets/js/heritage-meteo.js?v=10" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
-<script src="assets/js/heritage-suivi.js?v=12" defer></script>
+<script src="assets/js/heritage-suivi.js?v=13" defer></script>
+<script src="assets/js/heritage-suivi-audit.js?v=1" defer></script>
 <script src="assets/js/heritage-suivi-fiche.js?v=7" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=2" defer></script>
 <script src="assets/js/heritage-partage.js?v=3" defer></script>

@@ -10100,6 +10100,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_history_event' => world_save_event($pdo,$data),
             'delete_history_event' => world_delete_event($pdo,$data),
             'movement_mark' => mouvements_mark($pdo,$data),
+            'onglets_write' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/onglets.php'; return onglets_api_post($pdo,$data); })(), // 📄 Documents : modifier sur place, relier, pièces manquantes
             'listes_plus_write' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/listes_plus.php'; return lp_post($pdo, $data); })(), // 📋 ☑ actions groupées, ✎ dans la cellule, 📚 sources (fusion, modèles), ↶ Annuler (lib/listes_plus.php)
             'set_death_cause' => set_death_cause($pdo,$data), // 🦠 lib/heritage_more.php
             'save_own_movement' => mouvements_save_own($pdo,$data),
