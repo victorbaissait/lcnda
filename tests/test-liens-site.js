@@ -88,7 +88,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
 
         let siteId = 0;
         await t('＋ Blocs : vidéo, son (avec ce qu’on entend), dessin, document, diaporama', async () => {
-            await p.evaluate(() => window.LCNDA_EXT.siteWeb.open({data: window.LCNDA_EXT.siteWeb.blankSite(), name: 'La famille MAZAUD'}));
+            await p.evaluate(() => { window.LCNDA_EXT.siteWeb.open({data: window.LCNDA_EXT.siteWeb.blankSite(), name: 'La famille MAZAUD'}); });
             await p.waitForSelector('.sw-dlg [data-sw-frame]');
             siteId = await p.evaluate(() => window.LCNDA_EXT.siteWeb.current.save({quiet: true})); assert.ok(siteId > 0);
             // le choix d'un média : on répond à la place de la fenêtre
@@ -122,7 +122,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.siteWeb.current.save({quiet: true}));
         });
 
-        if (!process.env.NOPLAY) await t('▶ Tester : les boutons ‹ › du diaporama (et pas en mode modifier)', async () => {
+        await t('▶ Tester : les boutons ‹ › du diaporama (et pas en mode modifier)', async () => {
             const within = pr => Promise.race([pr, sleep(1500).then(() => -1)]);
             const count = async () => { for (const f of p.frames()) { if (f === p.mainFrame()) continue; const n = await within(f.evaluate(() => document.querySelector('.lc-diaporama') ? document.querySelectorAll('.lc-diapo-nav').length : -1).catch(() => -1)); if (n >= 0) return n; } return -1; };
             await sleep(800); assert.strictEqual(await count(), 0, 'en mode modifier : pas de bouton (il serait enregistré dans la page)');
@@ -134,7 +134,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t('📤 Envoyer vers… → 🌐 Sur une page de mon site : une vidéo à la fin de l’accueil, ↶ Annuler', async () => {
-            await p.evaluate(M => window.LCNDA_EXT.sendTo('video', {media: M.video}, {to: 'site', title: 'La cousinade DURAND'}), M);
+            await p.evaluate(M => { window.LCNDA_EXT.sendTo('video', {media: M.video}, {to: 'site', title: 'La cousinade DURAND'}); }, M); // (sans attendre : le menu attend un clic)
             await menu('La famille MAZAUD'); await menu('Accueil'); await sleep(900);
             const s = await api('website', {id: siteId}); const h = s.data.pages[0].html;
             assert.strictEqual((h.match(/<video\b/g) || []).length, 2, 'une deuxième vidéo');
@@ -145,7 +145,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             const h2 = (await api('website', {id: siteId})).data.pages[0].html; assert.strictEqual((h2.match(/<video\b/g) || []).length, 1, '↶ Annuler : retirée et enregistré');
         });
         await t('un dessin sur une nouvelle page ; ↶ Annuler retire la page', async () => {
-            await p.evaluate(() => window.LCNDA_EXT.siteReceive({type: 'svg', svg: '<svg viewBox="0 0 10 10"><script>x()</script><circle cx="5" cy="5" r="4" fill="#3d5a2a" onclick="x()"/></svg>', name: 'Arbre LACOMBE'}, {}));
+            await p.evaluate(() => { window.LCNDA_EXT.siteReceive({type: 'svg', svg: '<svg viewBox="0 0 10 10"><script>x()</script><circle cx="5" cy="5" r="4" fill="#3d5a2a" onclick="x()"/></svg>', name: 'Arbre LACOMBE'}, {}); });
             await menu('La famille MAZAUD'); await menu('Une nouvelle page'); await submitTop('Nos dessins'); await sleep(900);
             const s = await api('website', {id: siteId}); const pg = s.data.pages.find(x => x.name === 'Nos dessins');
             assert.ok(pg, 'la page est créée'); assert.match(pg.html, /<figure class="lc-dessin"[\s\S]*<circle cx="5" cy="5" r="4" fill="#3d5a2a"\/>[\s\S]*Arbre LACOMBE/); assert.ok(!/script|onclick|Un titre/.test(pg.html), pg.html);
@@ -155,16 +155,16 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(!(await api('website', {id: siteId})).data.pages.some(x => x.name === 'Nos dessins'), '↶ Annuler : la page est retirée');
         });
         await t('un son avec sa transcription, un texte ; un nouveau site (↶ Annuler le retire)', async () => {
-            await p.evaluate(M => window.LCNDA_EXT.siteReceive({type: 'audio', media: M.audio, html: '<p>Je suis née à Tulle.</p><script>x()</script>'}, {}), M);
+            await p.evaluate(M => { window.LCNDA_EXT.siteReceive({type: 'audio', media: M.audio, html: '<p>Je suis née à Tulle.</p><script>x()</script>'}, {}); }, M);
             await menu('La famille MAZAUD'); await menu('Accueil'); await sleep(900);
             let h = (await api('website', {id: siteId})).data.pages[0].html;
             assert.match(h, /temoignage-lacombe.mp3[\s\S]*<summary>Ce qu’on entend<\/summary>\s*<p>Je suis née à Tulle.<\/p>/); assert.ok(!/<script/.test(h));
-            await p.evaluate(() => window.LCNDA_EXT.siteReceive({type: 'text', html: '<h1>Souvenirs</h1><p>Les étés chez les DURAND.</p>', name: 'Souvenirs DURAND'}, {}));
+            await p.evaluate(() => { window.LCNDA_EXT.siteReceive({type: 'text', html: '<h1>Souvenirs</h1><p>Les étés chez les DURAND.</p>', name: 'Souvenirs DURAND'}, {}); });
             await menu('La famille MAZAUD'); await menu('Accueil'); await sleep(900);
             h = (await api('website', {id: siteId})).data.pages[0].html;
             assert.match(h, /<article class="lc-document"[^>]*>\s*<h2>Souvenirs DURAND<\/h2>\s*<h2>Souvenirs<\/h2><p>Les étés chez les DURAND.<\/p>/);
             const before = (await api('websites')).items.length;
-            await p.evaluate(M => window.LCNDA_EXT.siteReceive({type: 'image', media: M.img2, name: 'Le moulin'}, {}), M);
+            await p.evaluate(M => { window.LCNDA_EXT.siteReceive({type: 'image', media: M.img2, name: 'Le moulin'}, {}); }, M);
             await menu('Un nouveau site'); await sleep(1200); await menu('Accueil'); await sleep(1200);
             const list = (await api('websites')).items; assert.strictEqual(list.length, before + 1, 'un site de plus');
             const neu = list.find(x => x.id !== siteId); const nh = (await api('website', {id: neu.id})).data.pages[0].html;

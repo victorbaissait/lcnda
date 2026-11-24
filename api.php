@@ -22,6 +22,7 @@ require_once __DIR__ . '/lib/premier.php'; // 🧭 premier lancement : usages, b
 require_once __DIR__ . '/lib/sync_dossier.php'; // 🔄 deux ordinateurs (dossier partagé, paquets, conflits) et 🔒 verrou d'ouverture de la base
 require_once __DIR__ . '/lib/sauvegarde_auto.php'; // 🗓 sauvegarde automatique (jour, semaine, fermeture ; dossier choisi ; intégrité ; revenir à une copie)
 require_once __DIR__ . '/lib/diagram_genea.php'; // 📊 diagrammes Généalogie et Frises : éventail, soleil, réseau, arcs, Venn, calendrier, rose, spirale
+require_once __DIR__ . '/lib/enquetes_plus.php'; // 🕵️ enquêtes : conclusion, temps passé, recherches négatives, pistes en colonnes, ↶ Annuler (assets/js/app-enquetes.js)
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
 const EVENT_FACT_CONFIDENCE_LEVELS = ['unknown','certain','deduced','estimated','doubt'];
@@ -453,6 +454,11 @@ try {
     if ($isWrite && $action === 'delete_empty_families') {
         delete_empty_families($pdo);
     }
+    // 🔎 🛠 chercher et remplacer, lien de parenté, sources, actions sur les résultats, santé de la base, règles d'étiquettes (lib/recherche_outils.php)
+    if (is_string($action) && str_starts_with($action, 'ro_')) {
+        require_once __DIR__ . '/lib/recherche_outils.php';
+        ro_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []);
+    }
     // Fusion de l'arbre d'un cousin : hors de la transaction générale (copie de sécurité VACUUM INTO d'abord)
     if ($isWrite && $action === 'merge_gedcom_analyse') {
         merge_gedcom_analyse($pdo, $_FILES['file'] ?? null);
@@ -610,6 +616,8 @@ try {
         'periodicals' => json_response(periodicals_all($pdo)),
         'diagrams' => json_response(diagrams_all($pdo, $_GET)),
         'vector_docs' => json_response(['docs' => vector_docs_list($pdo)]),
+        'enquetes_plus' => json_response(enqp_get($pdo, $_GET)), // 🕵️ lib/enquetes_plus.php
+        'dna_plus' => json_response(dna_plus_get($pdo, $_GET)), // 🧬 phasage, rappels (lib/dna.php)
         'dna' => json_response(dna_all($pdo, $_GET)),
         'dna_lines' => json_response(dna_lines($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['depth'] ?? 10))),
         'dna_tree' => json_response(dna_tree_data($pdo, safe_int($_GET['kit'] ?? 0), safe_int($_GET['gen'] ?? 8))),
@@ -682,6 +690,7 @@ try {
         'world_around' => json_response(world_around($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 🌍 lib/monde_autour.php
         'world_events' => json_response(world_events_list($pdo, $_GET)),
         'grands_mouvements' => json_response(mouvements_list($pdo, $_GET)), // 🌍 lib/mouvements.php
+        'listes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/listes_plus.php'; json_response(lp_get($pdo, $_GET)); })(), // 📋 Listes en plus : 📚 Sources, 💍 Familles, 🔤 Noms de famille, 📝 Notes (lib/listes_plus.php, lib/sources_gestion.php)
         'person_movements' => json_response(['moves' => mouvements_person($pdo, safe_int($_GET['id'] ?? 0))]),
         'old_trade' => json_response(trade_sheet($pdo, $_GET)), // 🛠️ lib/metiers_anciens.php
         'old_trades' => json_response(trades_list($pdo, $_GET)),
@@ -774,6 +783,11 @@ try {
         'census_member_memberships' => census_member_memberships_data($pdo, safe_int($_GET['person_id'] ?? 0)),
         'tree' => tree_data($pdo, safe_int($_GET['id'] ?? 0)),
         'kinship' => kinship_data($pdo, safe_int($_GET['from'] ?? 0), safe_int($_GET['to'] ?? 0)),
+        // 👤 Personnes (lib/people_audit.php) : 🧭 ton lien avec une fiche / plusieurs fiches, 👪 fiche familiale, choix des filtres de la colonne
+        'person_link' => (static function () use ($pdo) { require_once __DIR__ . '/lib/people_audit.php'; json_response(pa_person_link($pdo, safe_int($_GET['id'] ?? 0), safe_int($_GET['root'] ?? 0))); })(),
+        'people_links' => (static function () use ($pdo) { require_once __DIR__ . '/lib/people_audit.php'; json_response(pa_people_links($pdo, explode(',', (string) ($_GET['ids'] ?? '')), safe_int($_GET['root'] ?? 0))); })(),
+        'family_sheet' => (static function () use ($pdo) { require_once __DIR__ . '/lib/people_audit.php'; json_response(pa_family_sheet($pdo, safe_int($_GET['id'] ?? 0))); })(),
+        'people_filter_choices' => (static function () use ($pdo) { require_once __DIR__ . '/lib/people_audit.php'; json_response(pa_filter_choices($pdo)); })(),
         // 🐘 la carte de toute la base (2 s à 200 000 fiches) : gardée tant que la base ne change pas, pour les réglages
         // sans filtre de personne (sorte, limite, lieu précis) ; jamais avec le filtre des dossiers de succession
         'map' => !isset($_GET['succ_cases']) && !array_diff(array_keys($_GET), ['action', 'tag', 'limit', 'location_mode', 'surname_mode']) ? calc_cached_response($pdo, 'map_' . substr(md5(json_encode([$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''])), 0, 12), ['persons', 'events', 'event_types', 'families', 'places', 'surname_groups', 'census_records', 'census_members'], [$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''], static fn() => map_data($pdo)) : map_data($pdo),
@@ -2133,11 +2147,14 @@ function people_list(PDO $pdo): never
     $offset = max(0, safe_int($_GET['offset'] ?? 0));
     $limit = min(250, max(20, safe_int($_GET['limit'] ?? 120)));
     $kind = (string) ($_GET['kind'] ?? '');
+    require_once __DIR__ . '/lib/people_audit.php'; // 🔍 Filtrer ▾ et Trier de la colonne (genre, vivant, Sosa, branche, étiquette, siècle…)
+    [$paWhere, $paParams] = pa_people_filters($pdo, $_GET);
+    $paSort = (string) ($_GET['sort'] ?? '');
     if ($search !== '') {
         // 🔎 recherche « à la française » (lib/recherche_fr.php) : nom de la fiche, autres noms, particules, prénoms latins et
         // abrégés, phonétique en repli (ou toujours, interrupteur « Toujours phonétique »), dates tapées en français
         $res = rfr_person_ids($pdo, $search, ['offset' => $offset, 'limit' => $limit, 'phonetic' => $phonetic, 'kind' => in_array($kind, ['animal', 'human'], true) ? $kind : '',
-            'where' => $group ? 'p.surname_group_id=:rgroup' : '', 'params' => $group ? [':rgroup' => $group] : []]);
+            'where' => implode(' AND ', array_merge($group ? ['p.surname_group_id=:rgroup'] : [], $paWhere)), 'params' => ($group ? [':rgroup' => $group] : []) + $paParams]);
         $rows = [];
         if ($res['ids']) {
             $why = rfr_why_of($pdo, $res);
@@ -2145,6 +2162,7 @@ function people_list(PDO $pdo): never
             foreach ($pdo->query(person_select() . ' WHERE p.id IN (' . implode(',', $res['ids']) . ')')->fetchAll() as $r) { $byId[(int) $r['id']] = $r; }
             foreach ($res['ids'] as $id) { if (isset($byId[$id])) { $rows[] = $byId[$id] + ['why' => $why[$id] ?? [], 'tier' => $res['tiers'][$id] ?? 0]; } }
         }
+        $rows = pa_sort_rows($rows, $paSort);
         json_response(['people' => $rows, 'offset' => $offset, 'limit' => $limit, 'phonetic' => $res['phonetic'], 'fallback' => $res['fallback'], 'total' => $res['total']]);
     }
     $where = [];
@@ -2154,7 +2172,9 @@ function people_list(PDO $pdo): never
         $params[':group'] = $group;
     }
     if ($kind === 'animal') { $where[] = "p.kind='animal'"; } elseif ($kind === 'human') { $where[] = "p.kind<>'animal'"; }
-    $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,".fold_sort_sql('p.last_name').",".fold_sort_sql('p.first_name').",p.id LIMIT :limit OFFSET :offset";
+    $where = array_merge($where, $paWhere); $params += $paParams;
+    $paOrder = pa_people_order($paSort);
+    $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . ($paOrder !== null ? " ORDER BY {$paOrder} LIMIT :limit OFFSET :offset" : '') . ($paOrder !== null ? '' : " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,".fold_sort_sql('p.last_name').",".fold_sort_sql('p.first_name').",p.id LIMIT :limit OFFSET :offset");
     $stmt = $pdo->prepare($sql);
     foreach ($params as $key => $value) $stmt->bindValue($key, $value);
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -2563,7 +2583,7 @@ function person_detail(PDO $pdo, int $id): never
         'family_memories' => family_memories_data($pdo, $id),
         'heritage' => heritage_person_data($pdo, $id),
         'onlineSheets' => $onlineSheetRows,
-        'events' => $completion['_events'],
+        'events' => kiosk_state()['on'] ? array_values(array_filter($completion['_events'], static fn($e) => empty($e['is_private']))) : $completion['_events'], // 🔒 événement confidentiel : caché en consultation
         'witnessEvents' => $witnessEventRows,
         'parents' => $completion['_parents'],
         'partners' => $completion['_partners'],
@@ -9889,6 +9909,12 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'add_event_type' => add_event_type($pdo,$data),
             'add_event' => add_event($pdo,$data),
             'save_event' => save_event($pdo,$data),
+            // 👤 Personnes (lib/people_audit.php) : ⚡ saisie rapide d'une famille, 🧮 garder un fait (l'autre devient une version), 🕘 remettre un champ
+            'quick_family' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_quick_family($pdo,$data); })(),
+            'quick_family_undo' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_quick_family_undo($pdo,$data); })(),
+            'event_keep_version' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_event_keep($pdo,$data); })(),
+            'event_keep_version_undo' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_event_keep_undo($pdo,$data); })(),
+            'restore_field' => (static function () use ($pdo,$data) { require_once __DIR__ . '/lib/people_audit.php'; return pa_restore_field($pdo,$data); })(),
             'delete_event' => delete_event($pdo,$data),
             'picker_place_adopt' => picker_place_adopt($pdo,$data),
             'restore_change' => restore_change($pdo,$data),
@@ -10069,6 +10095,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_history_event' => world_save_event($pdo,$data),
             'delete_history_event' => world_delete_event($pdo,$data),
             'movement_mark' => mouvements_mark($pdo,$data),
+            'listes_plus_write' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/listes_plus.php'; return lp_post($pdo, $data); })(), // 📋 ☑ actions groupées, ✎ dans la cellule, 📚 sources (fusion, modèles), ↶ Annuler (lib/listes_plus.php)
             'set_death_cause' => set_death_cause($pdo,$data), // 🦠 lib/heritage_more.php
             'save_own_movement' => mouvements_save_own($pdo,$data),
             'delete_own_movement' => mouvements_delete_own($pdo,$data),
@@ -10107,6 +10134,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_succession' => save_succession($pdo,$data), // 🏠 Héritages et successions (lib/successions.php)
             'delete_succession' => delete_succession($pdo,$data),
             'restore_succession' => restore_succession($pdo,$data),
+            'enquetes_plus' => enqp_post($pdo,$data), // 🕵️ lib/enquetes_plus.php
+            'dna_plus' => dna_plus_post($pdo,$data), // 🧬 ↶ Annuler, phasage, rappels (lib/dna.php)
             'save_dna_kit' => save_dna_kit($pdo,$data),
             'delete_dna_kit' => delete_dna_kit($pdo,$data),
             'save_dna_match' => save_dna_match($pdo,$data),
@@ -12987,6 +13016,8 @@ function add_event(PDO $pdo,array $data): array
     foreach(['signed1','signed2'] as $sk)if(array_key_exists($sk,$data)){$sv=is_scalar($data[$sk])?(string)$data[$sk]:'';$pdo->prepare("UPDATE events SET $sk=? WHERE id=?")->execute([$sv==='1'?1:($sv==='0'?0:null),$id]);} // ✍️ qui a signé l'acte (D35 « Savoir signer »)
     if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]);
     if(array_key_exists('event_time',$data))$pdo->prepare('UPDATE events SET event_time=? WHERE id=?')->execute([event_time_value($data['event_time']),$id]); // 🌦 l'heure écrite dans l'acte (« 14:30 »)
+    if(array_key_exists('is_private',$data))$pdo->prepare('UPDATE events SET is_private=? WHERE id=?')->execute([!empty($data['is_private'])&&$data['is_private']!=='0'?1:0,$id]); // 🔒 événement confidentiel (migration 111)
+    if(array_key_exists('research_note',$data))$pdo->prepare('UPDATE events SET research_note=? WHERE id=?')->execute([mb_substr(safe_text($data['research_note']),0,2000),$id]); // 📝 note de recherche du fait
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     log_change($pdo,'event',$id,'create',$scope==='family'?'Ajout d’un événement à la famille #'.$familyId:'Ajout d’un événement à la fiche #'.$personId);
     return ['id'=>$id];
@@ -13055,6 +13086,8 @@ function save_event(PDO $pdo,array $data): array
     foreach(['signed1','signed2'] as $sk)if(array_key_exists($sk,$data)){$sv=is_scalar($data[$sk])?(string)$data[$sk]:'';$pdo->prepare("UPDATE events SET $sk=? WHERE id=?")->execute([$sv==='1'?1:($sv==='0'?0:null),$id]);} // ✍️ qui a signé l'acte (D35 « Savoir signer »)
     if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]); // « date incertaine » cochée
     if(array_key_exists('event_time',$data))$pdo->prepare('UPDATE events SET event_time=? WHERE id=?')->execute([event_time_value($data['event_time']),$id]); // 🌦 l'heure écrite dans l'acte (« 14:30 »)
+    if(array_key_exists('is_private',$data))$pdo->prepare('UPDATE events SET is_private=? WHERE id=?')->execute([!empty($data['is_private'])&&$data['is_private']!=='0'?1:0,$id]); // 🔒 événement confidentiel (migration 111)
+    if(array_key_exists('research_note',$data))$pdo->prepare('UPDATE events SET research_note=? WHERE id=?')->execute([mb_substr(safe_text($data['research_note']),0,2000),$id]); // 📝 note de recherche du fait
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     $stmt->execute([$id]);$after=$stmt->fetch();
     log_change($pdo,'event',$id,'update','Modification de l’événement #'.$id,$before,$after);
