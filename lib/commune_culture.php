@@ -223,14 +223,13 @@ function cc_arms(string $insee): ?array
     $D = cc_data('armoiries'); if (!$D || $insee === '' || !isset($D['c'][$insee])) { return null; }
     return cc_arms_row($insee, $D['c'][$insee], $D);
 }
-/** une commune de l'armorial : [nom, fichier, blasonnement, page Wikipédia de l'armorial] ; le fichier → [auteur, licence, url licence] */
+/** une commune de l'armorial : [nom, fichier, blasonnement, page Wikipédia de l'armorial] (auteur et licence de l'image : cc_credit) */
 function cc_arms_row(string $insee, array $r, array $D): array
 {
-    $file = (string) ($r[1] ?? ''); $cr = $file !== '' ? ($D['files'][$file] ?? null) : null;
+    $file = (string) ($r[1] ?? '');
     $page = (string) ($r[3] ?? ''); $c = cc_data('communes')['c'][$insee] ?? null;
     return ['insee' => $insee, 'commune' => (string) $r[0], 'dep' => cc_dep_of_insee($insee), 'dep_name' => (string) (cc_departements()[cc_dep_of_insee($insee)] ?? ''),
         'image' => $file, 'thumb' => $file !== '' ? cc_thumb($file, 200) : '', 'image_page' => $file !== '' ? cc_file_page($file) : '',
-        'author' => (string) ($cr[0] ?? ''), 'licence' => (string) ($cr[1] ?? ''), 'licence_url' => (string) ($cr[2] ?? ''),
         'blazon' => (string) ($r[2] ?? ''), 'blazon_page' => $page, 'blazon_url' => $page !== '' ? 'https://fr.wikipedia.org/wiki/' . rawurlencode(str_replace(' ', '_', $page)) : '',
         'lat' => $c[1] ?? null, 'lon' => $c[2] ?? null];
 }

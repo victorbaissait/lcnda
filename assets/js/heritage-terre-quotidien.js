@@ -436,15 +436,24 @@
             });
             return;
         }
-        const mono = ws.querySelector('.place-monograph-images[data-pli-host]:not([data-tq])');
-        if (mono && !mono.closest('.h-village')) {
-            mono.dataset.tq = '1';
-            const place = {lat: mono.dataset.pliLat, lon: mono.dataset.pliLon}; if (!place.lat || !place.lon) return;
-            placeHtml(place).then(html => { if (html && mono.isConnected) mono.insertAdjacentHTML('beforebegin', html); });
-        }
+        // la Monographie de commune : des parties déclarées (LCNDA_EXT.monographSections, plus bas), pas d'insertion ici
     }
     let pending = 0;
     new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; try { decoratePlace(); decorateLetters(); } catch (e) { console.error(e); } }); }).observe(document.documentElement, {childList: true, subtree: true});
+
+    /* ─────────── 📜 Monographie de commune : deux parties (registre commun, heritage-monographie-plus.js) ─────────── */
+    const monoRender = k => async (place, host) => {
+        const html = await placeHtml({lat: place?.latitude ?? place?.lat, lon: place?.longitude ?? place?.lon, name: place?.name}, {only: [k]});
+        if (!html) return false;
+        const box = document.createElement('div'); box.innerHTML = html;
+        const sec = box.querySelector('section.tq-panel'); if (!sec) return false;
+        sec.querySelector('h3')?.remove();
+        host.replaceChildren(...sec.childNodes);
+        return true;
+    };
+    (ext.monographSections = ext.monographSections || []).push(
+        {id: 'tq_sites', icon: '🏺', label: T('Préhistoire et Antiquité autour du village'), group: 'Le lieu', defaultOn: true, enabled: () => settings().sites, source: 'Wikidata (CC0)', render: monoRender('sites')},
+        {id: 'tq_arbres', icon: '🌳', label: T('Arbres remarquables'), group: 'Le lieu', defaultOn: true, enabled: () => settings().arbre, source: 'Wikidata (CC0)', render: monoRender('arbre')});
 
     /* ─────────── ✉️ Documents → Lettres : le prix du timbre ─────────── */
     const stampTxt = r => T('✉️ {p} le timbre', {p: r.label}) + (r.other ? ' ' + T('(ou {n} : le tarif a changé cette année-là)', {n: r.other.label}) : r.midYear ? ' ' + T('(à partir du {d})', {d: r.from.split('-').reverse().join('/')}) : '');

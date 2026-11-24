@@ -23,6 +23,10 @@ on:
         description: 'Départements, séparés par des espaces (vide = tous), ex. « 15 19 87 »'
         type: string
         default: ''
+  # un envoi qui touche ce fichier fait seulement connaître l'atelier à GitHub (rien n'est fabriqué)
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/lieux-patrimoine.yml']
 
 permissions:
   contents: write
@@ -33,6 +37,7 @@ concurrency:
 
 jobs:
   packs:
+    if: github.event_name != 'push'
     runs-on: ubuntu-24.04
     timeout-minutes: 340
     steps:

@@ -5,16 +5,16 @@ Sources (toutes téléchargées par ce script, réponses gardées dans raw/ : re
   - Wikidata (CC0 1.0) — query.wikidata.org (SPARQL, une requête par minute : fetch_sparql.py) et www.wikidata.org/w/api.php :
       communes (P374 code INSEE, P625 position, libellé), œuvres (P915 lieu de tournage, P840 lieu de l'action, P921 sujet),
       armoiries (P94), plats (P1071 lieu de création, P361/P2012 cuisine régionale), départements (P2586) ;
-  - Wikimedia Commons (API, extmetadata) : auteur et licence de chaque image d'armoiries (fetch_commons.py) ;
+  (l'auteur et la licence de chaque image d'armoiries sont lus en ligne par l'app, quand l'image s'affiche : lib/commune_culture.php cc_credit)
   - Wikipédia en français (CC BY-SA 4.0) : pages « Armorial des communes de … », modèle {{Blason commune}} (fetch_wiki.py).
-Lancer :  python3 fetch_sparql.py && python3 fetch_wiki.py && python3 fetch_commons.py && python3 build-commune-culture.py
+Lancer :  python3 fetch_sparql.py && python3 fetch_wiki.py && python3 build-commune-culture.py
           (CC_RAW=dossier des réponses gardées ; sortie : assets/data/ de l'app, ou le dossier donné en argument)
 Rietstap : build_rietstap.py (à part : scans PDF de Commons + pdftotext).
 """
 import datetime, gzip, json, os, re, sys, urllib.parse
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import wm, fetch_sparql, fetch_wiki, fetch_commons
+import wm, fetch_sparql, fetch_wiki
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, '..', '..', 'assets', 'data')
 TODAY = datetime.date.today().isoformat()
@@ -201,24 +201,13 @@ def build_armoiries(C, Q2I):
             if len(hits) != 1: continue
             img = prm.get('image', '').strip().replace('_', ' ')
             blaz[hits[0]] = (b[:600], p['title'], img)
-    files = set(imgs.values()) | {v[2] for v in blaz.values() if v[2]}
-    cr = fetch_commons.credits(sorted(files))
-    def credit(f):
-        x = cr.get(f) or cr.get(f.replace('_', ' ')) or {}
-        a = re.sub(r'<[^>]+>', '', x.get('Artist', '') or x.get('Credit', '')); a = re.sub(r'\s+', ' ', a).strip()[:160]
-        return [a, x.get('LicenseShortName', '')[:60], x.get('LicenseUrl', '')]
-    out, F = {}, {}
+    out = {}
     for ins in sorted(set(imgs) | set(blaz)):
         f = imgs.get(ins) or (blaz.get(ins, ('', '', ''))[2])
         b, page = (blaz[ins][0], blaz[ins][1]) if ins in blaz else ('', '')
-        if f:
-            c = credit(f)
-            if not c[1]: f = ''  # sans licence lisible : pas d'image
-            else: F[f] = c
-        if not f and not b: continue
         out[ins] = [C[ins][0], f, b, page]
-    write('armoiries', {'v': 1, 'attr': 'Images : Wikidata P94 → Wikimedia Commons (auteur et licence de chaque fichier) ; blasonnements : Wikipédia en français, pages « Armorial des communes de … » (les contributeurs de Wikipédia)',
-                        'licence': 'images : licence de chaque fichier ; textes : CC BY-SA 4.0', 'url': 'https://fr.wikipedia.org/wiki/Armorial_des_communes_de_France', 'built': TODAY, 'c': out, 'files': F})
+    write('armoiries', {'v': 1, 'attr': 'Images : Wikidata P94 → Wikimedia Commons (auteur et licence de chaque fichier : lus en ligne) ; blasonnements : Wikipédia en français, pages « Armorial des communes de … » (les contributeurs de Wikipédia)',
+                        'licence': 'images : licence de chaque fichier ; textes : CC BY-SA 4.0', 'url': 'https://fr.wikipedia.org/wiki/Armorial_des_communes_de_France', 'built': TODAY, 'c': out})
     print('armoiries', len(out), 'avec blason', sum(1 for v in out.values() if v[2]), 'pages', pages)
 
 # ═══════════════ 4. les plats ═══════════════

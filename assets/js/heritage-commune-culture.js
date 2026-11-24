@@ -75,7 +75,21 @@
     }
 
     /* ═════════ 🛡️ armoiries ═════════ */
-    const credit = a => `${a.author ? `${esc(a.author)} · ` : ''}${a.licence ? (a.licence_url ? link(a.licence_url, a.licence) : esc(a.licence)) : esc(T('licence : voir la page de l’image'))} · ${link(a.image_page, T('Wikimedia Commons ↗'))}`;
+    /** l'auteur et la licence de l'image : lus en ligne sur Commons (gardés) quand l'image s'affiche ; sinon le lien vers sa page */
+    const credit = a => `<span data-cc-credit="${esc(a.image)}">${esc(T('auteur et licence :'))}</span> ${link(a.image_page, T('Wikimedia Commons ↗'))}`;
+    async function fillCredits(root) {
+        const spans = [...(root?.querySelectorAll?.('[data-cc-credit]:not([data-done])') || [])]; if (!spans.length) return;
+        spans.forEach(s => { s.dataset.done = '1'; });
+        const files = [...new Set(spans.map(s => s.dataset.ccCredit))];
+        for (let i = 0; i < files.length; i += 20) {
+            const r = await ask('cc_credit', {files: files.slice(i, i + 20).join('|')});
+            spans.filter(s => files.slice(i, i + 20).includes(s.dataset.ccCredit)).forEach(s => {
+                const c = r?.credits?.[s.dataset.ccCredit];
+                if (c) s.innerHTML = `${c.author ? `${esc(c.author)} · ` : ''}${c.licence_url ? link(c.licence_url, c.licence) : esc(c.licence)} ·`;
+                else s.textContent = r?.offline ? T('auteur et licence : sur la page de l’image (hors ligne)') : T('auteur et licence : sur la page de l’image');
+            });
+        }
+    }
     function armsHtml(a, {small = false} = {}) {
         if (!a || (!a.image && !a.blazon)) return '';
         return `<div class="cc-arms${small ? ' is-small' : ''}">${a.image ? `<figure><a href="${esc(a.image_page)}" target="_blank" rel="noopener noreferrer"><img loading="lazy" alt="${esc(T('Armoiries de {c}', {c: a.commune}))}" src="${esc(a.thumb)}" onerror="this.closest('figure').remove()"></a><figcaption>${credit(a)}</figcaption></figure>` : ''}
@@ -192,6 +206,7 @@
         if (on('rietstap') && r.rietstap?.length) out.push(`<div class="cc-line" data-cc-line="rietstap">${rietstapHtml(r.rietstap, r.last)}</div>`);
         if (on('rues') && r.last && !r.private) out.push('<div class="cc-line" data-cc-line="rues" hidden></div>');
         host.innerHTML = out.join('');
+        fillCredits(host);
         const card = host.closest('section.card');
         if (card && host.querySelector('.cc-line:not([hidden])')) card.hidden = false;
         const rb = host.querySelector('[data-cc-line="rues"]');
@@ -220,6 +235,7 @@
         if (want('works') && r.works?.length) out.push(panel('works', T('🎬 Le village dans les œuvres'), worksHtml(r.works)));
         if (want('dish') && r.dishes?.length) out.push(panel('dish', T('🍲 Le plat de la région'), dishesHtml(r.dishes, {lead: T('Plat typique de la région ({w}) : {d}.', {w: r.dishes[0].cuisine || r.dishes[0].origin || r.commune.dep_name, d: r.dishes[0].name})})));
         host.innerHTML = out.join('');
+        fillCredits(host);
         const jobs = ['toponymie', 'histoire'].map(k => { const b = host.querySelector(`[data-cc-part="${k}"] [data-cc-body]`); return b ? fillWiki(b, pl, k).then(() => { if (!b.innerHTML.trim()) b.closest('[data-cc-part]')?.remove(); }) : null; }).filter(Boolean);
         await Promise.all(jobs);
         return r;
@@ -259,6 +275,7 @@
         const body = host.querySelector('[data-cc-part]');
         if (!body || !body.textContent.trim()) { host.innerHTML = ''; return false; }
         host.innerHTML = body.innerHTML.replace(/^<h3>.*?<\/h3>/s, ''); // le titre est celui de la partie
+        await fillCredits(host);
         return true;
     };
     (ext.monographSections = ext.monographSections || []).push(
@@ -308,7 +325,7 @@
         {id: 'cc_armoiries', icon: '🛡️', label: T('Armoiries des communes'), group: 'Le lieu', source: T('Wikidata (CC0), images Wikimedia Commons (licence de chaque fichier), blasonnements Wikipédia (CC BY-SA 4.0)'), sourceUrl: 'https://fr.wikipedia.org/wiki/Armorial_des_communes_de_France', enabled: () => on('arms'),
             load: () => loadList('armoiries'),
             fields: [{key: 'commune', label: T('Commune'), type: 'place'}, {key: 'dep_name', label: T('Département'), type: 'enum'}, {key: 'blazon', label: T('Blasonnement'), type: 'text'},
-                {key: 'author', label: T('Auteur de l’image'), type: 'text'}, {key: 'licence', label: T('Licence de l’image'), type: 'enum'}, {key: 'image_page', label: T('Image'), type: 'url'}, {key: 'insee', label: 'INSEE', type: 'text'}],
+                {key: 'image_page', label: T('Image (auteur et licence sur sa page)'), type: 'url'}, {key: 'blazon_url', label: T('Armorial (Wikipédia)'), type: 'url'}, {key: 'insee', label: 'INSEE', type: 'text'}],
             geo: r => (r.lat != null ? [r.lat, r.lon] : null), open: r => openUrl(r.image_page || r.blazon_url)},
         {id: 'cc_plats', icon: '🍲', label: T('Plats des régions'), group: 'Le lieu', source: 'Wikidata (CC0)', sourceUrl: 'https://www.wikidata.org/', enabled: () => on('dish'),
             load: () => loadList('plats'),
