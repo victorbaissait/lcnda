@@ -5527,6 +5527,8 @@
 :root[data-lc-density] .h-txr-bar{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-txr-bar{padding:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp))}
 :root[data-lc-density] .h-txr-zoom{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-scope{gap:calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-scope label{gap:calc(5px * var(--lc-sp))}
 @media (max-width:700px){
   :root[data-lc-density] .h-txr-body{padding:calc(12px * var(--lc-sp))}
   :root[data-lc-density] .h-txr-top{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
@@ -5563,8 +5565,24 @@
 :root[data-lc-density] .h-tx-readscope{gap:calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-readscope{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-readscope label{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-fixpages{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-deepall{gap:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-deepall{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-gab{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-gab-head{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-gab-fields{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-gab-v{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root .h-gab-v:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .h-gab-a{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-gab-add{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-gab-addrow{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-gab-addrow input{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root .h-gab-addrow input:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .h-gab-mine{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-gab-mlist{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-gab-mlist li{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .tx-num{padding-left:calc(44px * var(--lc-sp))}
+:root[data-lc-density] .tx-gut.is-on>textarea{padding-left:calc(44px * var(--lc-sp)) !important}
 /* photomaps.css */
 :root[data-lc-density] .pm-carte{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(28px * var(--lc-sp))}
 :root[data-lc-density] .pm-screen{gap:calc(10px * var(--lc-sp))}

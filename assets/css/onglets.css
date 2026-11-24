@@ -140,3 +140,5 @@ span.ong-cov.is-empty, .ong-ico { font-size: 20px; }
 }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 /* ═════ fin du mode sombre automatique ═════ */
+button.ong-uname { background: none; color: inherit; font: inherit; cursor: pointer; }
+button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; border-color: var(--accent, #2b5ff0); }

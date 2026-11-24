@@ -80,3 +80,6 @@ Chaque gros outil : maquette d'abord.
 
 ## Idée du 24 novembre : « Où je trouve ça ? » (dans 🌍 Où chercher ?) — après les gabarits
 Une question en une phrase, sans fiche : « Je cherche [un acte de naissance ▾] à [commune ou département] en [année] ». L'app répond avec ce qu'elle sait déjà : les années en ligne aux archives départementales (config/archives-en-ligne.json, les pastilles 🟢 🟡 📮 🔒 ❔), le lien vers le site, les tables décennales, les autres sites utiles (« Où chercher ? », 132 sites), et si l'acte a moins de 75 / 100 ans : à qui écrire (mairie, greffe) avec un courrier tout prêt (« Courriers tout prêts »). Maquette d'abord.
+
+## 3c · Le même texte, montré pareil (K7) — ✅ FAIT le 24 novembre
+La page du document et la visionneuse montrent le texte de l'Atelier avec les mêmes numéros de ligne dans la marge (réglage « Numéros de ligne » de l'Atelier, conseillé : oui ; éteint partout d'un coup) ; dans la visionneuse, les numéros suivent l'écriture et les lignes coupées. Un nom relevé pas encore relié est un bouton « 🔗 » qui ouvre l'Atelier sur l'acte (page du document et visionneuse). Essai : tests/test-atelier-aligne.js. FAQ : avec la 3d.

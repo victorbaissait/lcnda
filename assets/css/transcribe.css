@@ -352,3 +352,13 @@
 .h-gab-mine{display:grid;gap:10px}
 .h-gab-mlist{list-style:none;margin:0;padding:0;display:grid;gap:4px}
 .h-gab-mlist li{display:flex;align-items:center;gap:6px}
+/* 3c : les numéros de ligne de l'Atelier, aussi dans la visionneuse et sur la page du document (heritage-transcribe-aligne.js) */
+.tx-num{position:relative;white-space:pre-wrap;overflow-wrap:anywhere;padding-left:44px}
+.tx-plain{white-space:pre-wrap;overflow-wrap:anywhere}
+.tx-ln{display:block;position:relative;min-height:1em}
+.tx-num .tx-ln::before,.tx-gut-mirror .tx-ln::before{content:attr(data-n);position:absolute;left:-42px;width:32px;text-align:right;color:var(--muted,#5b6170);font:11px/inherit system-ui,sans-serif;font-variant-numeric:tabular-nums;opacity:.8}
+.tx-num::before,.tx-gut.is-on::before{content:'';position:absolute;left:36px;top:0;bottom:0;border-left:1px solid var(--line,#e3e3e3);pointer-events:none}
+.tx-gut{position:relative}
+.tx-gut.is-on>textarea{padding-left:44px!important}
+.tx-gut-mirror{position:absolute;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;color:transparent;pointer-events:none;border-style:solid;border-color:transparent;box-sizing:border-box;z-index:1}
+.tx-gut:not(.is-on) .tx-gut-mirror{display:none}

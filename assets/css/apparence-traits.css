@@ -2502,6 +2502,7 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .sa-msg, :root[data-theme="dark"] .sa-msg:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #304869}
 :root[data-theme="dark"].lc-frame .sa-msg.is-error, :root[data-theme="dark"] .sa-msg.is-error:is([data-lc-lines], [data-lc-lines] *) {border-color:#633636}
 :root[data-theme="dark"].lc-frame .h-at-detail, :root[data-theme="dark"] .h-at-detail:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #4c4c4c}
+:root.lc-frame button.lb-acts-chip.is-unlinked, :root button.lb-acts-chip.is-unlinked:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
 /* transcription-actes.css */
 :root.lc-frame .h-txa-cropprev, :root .h-txa-cropprev:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
 :root.lc-frame .h-txa-cta, :root .h-txa-cta:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9d8f5;border-left:4px solid #1473e6}
@@ -2964,6 +2965,7 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .ong-uname, :root .ong-uname:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed var(--line-color)}
 :root.lc-frame .ong-person, :root .ong-person:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ong-app2, :root .ong-app2:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
 :root.lc-frame .ong-person:hover, :root .ong-person:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ong-app2:hover, :root .ong-app2:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame button.ong-uname:hover, :root button.ong-uname:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame button.ong-uname:focus-visible, :root button.ong-uname:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:var(--accent, #2b5ff0)}
 /* onglets-plus.css */
 :root.lc-frame .nav-add-tab, :root .nav-add-tab:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed currentColor}
 :root.lc-frame .nav-add-tab:hover, :root .nav-add-tab:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .nav-add-tab:focus-visible, :root .nav-add-tab:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-style:solid}
@@ -3477,6 +3479,12 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-tx-pages, :root[data-theme="dark"] .h-tx-pages:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-page, :root[data-theme="dark"] .h-tx-page:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root.lc-frame .h-tx-deepall, :root .h-tx-deepall:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#e3e5ea)}
+:root.lc-frame .h-gab-v, :root .h-gab-v:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#c9ced8)}
+:root.lc-frame .h-gab-v.is-empty, :root .h-gab-v.is-empty:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
+:root.lc-frame .h-gab-v.is-auto, :root .h-gab-v.is-auto:is([data-lc-lines], [data-lc-lines] *) {border-color:#1a7f37}
+:root.lc-frame .h-gab-v.is-ok, :root .h-gab-v.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:currentColor}
+:root.lc-frame .h-gab-addrow input, :root .h-gab-addrow input:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#c9ced8)}
+:root.lc-frame .tx-gut-mirror, :root .tx-gut-mirror:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:transparent}
 /* photomaps.css */
 :root.lc-frame .pm-filter, :root .pm-filter:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pm-chip, :root .pm-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
 :root.lc-frame .pm-filter.is-active, :root .pm-filter.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}

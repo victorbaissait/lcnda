@@ -1756,6 +1756,7 @@
      *  zones, personnes relevées) et « 📜 Ouvrir dans l'Atelier » ; plusieurs actes sur l'image : un bloc par acte, la case en lecture */
     async function lbRefresh(force = false) {
         const area = document.getElementById('lightbox-transcription'), it = lbItem(); if (!area || !document.getElementById('lightbox')?.open) return;
+        ext.txAligne?.gutter(area)?.paint();
         let box = document.getElementById('lightbox-acts'); if (!box) { box = document.createElement('div'); box.id = 'lightbox-acts'; box.className = 'lb-acts'; area.after(box); }
         const old = document.getElementById('act-transcriber-open'); if (old) old.hidden = true; // remplacé par « 📜 Ouvrir dans l'Atelier » ci-dessous
         const isImg = it && /\.(jpe?g|png|webp|gif|tiff?)$/i.test(it.filename || '');
@@ -1769,8 +1770,11 @@
         if (force && text != null && area.value !== text) { area.value = text; it.transcription = text; }
         const many = lbActs.length > 1, ro = !!document.body?.classList.contains('is-kiosk'), pageOf = lbActs.some(a => a.page_of); // 📑 une page d'un acte en plusieurs pages
         area.readOnly = many || pageOf;
+        ext.txAligne?.gutter(area)?.paint(); // 3c : les mêmes numéros de ligne que dans l'Atelier
         area.title = many ? i18n('Plusieurs actes sur cette image : chacun se modifie dans l’Atelier de transcription.') : pageOf ? i18n('Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription.') : '';
-        const people = a => (a.people || []).filter(p => p.name).map(p => `<span class="lb-acts-chip">${esc(p.name)}${p.role ? ` <small>${esc(p.role)}</small>` : ''}${p.person_id ? ' ✓' : ''}</span>`).join('');
+        // 3c : comme sur la page du document, un nom pas encore relié se relie dans l'Atelier (🔗)
+        const people = a => (a.people || []).filter(p => p.name).map(p => (!p.person_id && !ro ? `<button type="button" class="lb-acts-chip is-unlinked" data-lbact-open="${a.id}" title="${esc(i18n('Pas encore relié : le relier dans l’Atelier'))}">🔗 ${esc(p.name)}${p.role ? ` <small>${esc(p.role)}</small>` : ''}</button>`
+            : `<span class="lb-acts-chip">${esc(p.name)}${p.role ? ` <small>${esc(p.role)}</small>` : ''}${p.person_id ? ' ✓' : ''}</span>`)).join('');
         const actRow = a => { const st = ST_LABEL[a.status] || ST_LABEL.doing;
             return `<li><div class="lb-acts-meta">${many ? `<b>📜 ${esc(a.title || kindLabel(a.kind))}</b> ` : ''}${badgeH(kindLabel(a.kind), 'grey')}${badgeH(i18n(st[0]), st[1])}${a.zones ? badgeH(A().plural(a.zones, 'zone'), 'blue') : ''}${many && !ro ? ` <button type="button" class="link-button" data-lbact-open="${a.id}">${esc(i18n('📜 Ouvrir dans l’Atelier'))}</button>` : ''}</div>
                 ${(a.people || []).some(p => p.name) ? `<div class="lb-acts-people"><span class="muted">${esc(i18n('Relevés dans le texte :'))}</span> ${people(a)}</div>` : ''}</li>`; };

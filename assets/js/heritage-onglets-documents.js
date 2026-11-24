@@ -291,20 +291,24 @@
        un bloc par acte (sorte, état, lieu, date, cote, zones) avec « 📜 Ouvrir dans l'Atelier » ; sans acte, le texte du document */
     const TXST = {todo: ['À faire', 'grey'], doing: ['En cours', 'yellow'], checked: ['Relue', 'blue'], done: ['Finie', 'green']};
     const bdg = (t, k) => (UI().badge ? UI().badge(t, k) : `<span class="ui-badge is-${k}">${esc(t)}</span>`);
+    // 3c : le texte montré comme dans l'Atelier, avec les mêmes numéros de ligne (heritage-transcribe-aligne.js ; réglage « Numéros de ligne »)
+    const trText = v => (ext.txAligne ? ext.txAligne.numberedHtml(v, {cls: 'ong-tr'}) : `<div class="ong-tr">${esc(v)}</div>`);
     function trHtml(d, isImg, ro) {
         const acts = d.acts || [], wp = ext.openTextDoc ? `<button type="button" class="button small secondary" data-ong-wp>${esc(T('📝 Dans le traitement de texte'))}</button>` : '';
         const open = id => (!ro && isImg && ext.openActTranscriber ? `<button type="button" class="button small" data-ong-txopen="${id}">${esc(T('📜 Ouvrir dans l’Atelier'))}</button>` : '');
-        if (!acts.length) return d.transcription ? `<section class="card ong-sec ong-trsec"><div class="ong-sh"><h3>📜 ${esc(T('Transcription'))}</h3><span class="spacer"></span>${open(0)}${wp}</div><div class="ong-tr">${esc(d.transcription)}</div></section>` : '';
+        if (!acts.length) return d.transcription ? `<section class="card ong-sec ong-trsec"><div class="ong-sh"><h3>📜 ${esc(T('Transcription'))}</h3><span class="spacer"></span>${open(0)}${wp}</div>${trText(d.transcription)}</section>` : '';
         return acts.map((a, i) => { const st = TXST[a.status] || TXST.doing;
             const meta = [a.place, a.date_text, a.source, a.zones ? A().plural(a.zones, 'zone') : ''].filter(Boolean).join(' · ');
             return `<section class="card ong-sec ong-trsec" data-ong-act="${a.id}"><div class="ong-sh"><h3>📜 ${esc(acts.length > 1 ? a.title || T('Transcription') : T('Transcription'))}</h3>${bdg(ext.actKindLabel ? ext.actKindLabel(a.kind) : a.kind, 'grey')}${bdg(T(st[0]), st[1])}<span class="spacer"></span>${open(a.id)}${i === 0 ? wp : ''}</div>
-                ${acts.length === 1 && a.title ? `<p class="ong-trtitle">${esc(a.title)}</p>` : ''}${String(a.body || '').trim() ? `<div class="ong-tr">${esc(a.body)}</div>` : `<p class="muted">${esc(T('Rien d’écrit pour l’instant.'))}</p>`}
+                ${acts.length === 1 && a.title ? `<p class="ong-trtitle">${esc(a.title)}</p>` : ''}${String(a.body || '').trim() ? trText(a.body) : `<p class="muted">${esc(T('Rien d’écrit pour l’instant.'))}</p>`}
                 ${meta ? `<p class="ong-trmeta">${esc(meta)}</p>` : ''}</section>`; }).join('');
     }
     /** les noms relevés dans l'Atelier pas encore reliés à une fiche (ils se relient dans l'Atelier, ou sur la fiche qui leur ressemble) */
     function unlinked(d) {
-        const names = (d.acts || []).flatMap(a => (a.people || []).filter(p => !p.person_id && p.name).map(p => [p.name, p.role]));
-        return names.length ? `<p class="ong-unlinked"><span class="muted">${esc(T('Relevés dans le texte, pas encore reliés :'))}</span> ${names.slice(0, 30).map(([n, r]) => `<span class="ong-uname">${esc(n)}${r ? ` <small>${esc(r)}</small>` : ''}</span>`).join(' ')}</p>` : '';
+        const names = (d.acts || []).flatMap(a => (a.people || []).filter(p => !p.person_id && p.name).map(p => [p.name, p.role, a.id]));
+        // 3c : comme dans la visionneuse, un clic (🔗) ouvre l'Atelier sur l'acte pour relier la personne
+        const ro = kiosk(), chip = ([n, r, id]) => (ro ? `<span class="ong-uname">${esc(n)}${r ? ` <small>${esc(r)}</small>` : ''}</span>` : `<button type="button" class="ong-uname is-unlinked" data-ong-txlink="${id}" title="${esc(T('Pas encore relié : le relier dans l’Atelier'))}">🔗 ${esc(n)}${r ? ` <small>${esc(r)}</small>` : ''}</button>`);
+        return names.length ? `<p class="ong-unlinked"><span class="muted">${esc(T('Relevés dans le texte, pas encore reliés :'))}</span> ${names.slice(0, 30).map(chip).join(' ')}</p>` : '';
     }
     async function showDoc(id, token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
@@ -396,14 +400,15 @@
             lb?.addEventListener('close', async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } }, {once: true});
             return;
         }
-        if (b.matches('[data-ong-tx], [data-ong-txopen]')) { // 📜 l'outil de transcription complet : la transcription déjà commencée sur cette image, sinon une nouvelle
+        if (b.matches('[data-ong-tx], [data-ong-txopen], [data-ong-txlink]')) { // (data-ong-txlink : un nom pas encore relié, 🔗) // 📜 l'outil de transcription complet : la transcription déjà commencée sur cette image, sinon une nouvelle
             if (!d.filename) return A().toast(T('Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image.'), 'error');
             if (!ext.openActTranscriber) return A().toast(T('L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant.'), 'error');
             if (b.disabled) return; b.disabled = true; // un seul clic à la fois (le serveur peut mettre un instant à répondre)
             try {
                 let acts = []; try { acts = (await A().api('act_transcriptions_media', {media_id: d.id})).items || []; } catch (_) { acts = []; }
                 const again = async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } };
-                if (b.dataset.ongTxopen && Number(b.dataset.ongTxopen)) await ext.openActTranscriber({id: Number(b.dataset.ongTxopen), page: d.id, onClose: again});
+                const aid = Number(b.dataset.ongTxopen || b.dataset.ongTxlink || 0);
+                if (aid) await ext.openActTranscriber({id: aid, page: d.id, onClose: again});
                 else if (acts.length) await ext.openActTranscriber({id: acts[0].id, page: d.id, onClose: again}); // 📑 une page d'un acte en plusieurs pages : l'Atelier s'ouvre sur elle
                 else await ext.openActTranscriber({mediaId: d.id, filename: d.filename, title: d.title || '', text: d.transcription || '', onClose: again});
             } catch (err) { console.error(err); A().toast(T('L’Atelier de transcription n’a pas pu s’ouvrir : {x}', {x: String(err?.message || err).slice(0, 200)}), 'error'); }
