@@ -41,7 +41,7 @@ t('plus de 2 500 objets en plus : le catalogue fait au moins 4 fois celui d’av
 t('chaque objet : catégorie connue, vraies dimensions, couleur, mots-clés, dessin et forme 3D de son modèle', () => {
     for (const l of added) {
         const [k, n, cat, w, d, h, c, s2, , o] = l;
-        assert.ok(/^o_[a-z0-9_]+$/.test(k), k); assert.ok(CATS.includes(cat), `${k} : ${cat}`); assert.ok(n.length > 2, k);
+        assert.ok(/^o_[a-z0-9_]+$/.test(k), k); assert.ok(CATS.includes(cat), `${k} : ${cat}`); assert.ok(n.length >= 2, k);
         for (const v of [w, d, h]) assert.ok(Number.isFinite(v) && v >= 1 && v <= 2500, `${k} : ${w}×${d}×${h}`);
         assert.match(c, /^#[0-9a-f]{6}$/i, k); assert.ok(typeof s2 === 'string' && s2, `${k} : dessin`); assert.ok(o.kw.length > 2, `${k} : mots-clés`);
         assert.ok(!o.custom && !o.id, `${k} : rien de copié d’un objet à moi`);

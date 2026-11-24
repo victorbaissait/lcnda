@@ -106,7 +106,7 @@
             ["o_pinparasol","Pin parasol","conifere",600,600,1800,"#2f5a2a","conifère sud pin",0],
             ["o_pinsylvestre","Pin sylvestre","conifere",300,300,1600,"#2f4a2a","conifère pin",0],
             ["o_cypres","Cyprès","conifere",150,150,1200,"#2f4a2a","conifère sud cimetière",0],
-            ["o_iftaille","If taillé","conifere",200,200,500,"#2f5a2a","conifère taillé",0],
+            ["o_if","If","conifere",200,200,500,"#2f5a2a","conifère taillé",0],
             ["o_cedre","Cèdre","conifere",800,800,2500,"#2f4a2a","conifère parc grand",0],
             ["o_thuya","Thuya","conifere",100,100,200,"#2f5a2a","haie conifère",0],
             ["o_rosier","Rosier","buisson",150,150,120,"#d04a6a","rose fleurs massif",0],

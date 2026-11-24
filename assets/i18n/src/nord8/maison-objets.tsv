@@ -1,0 +1,710 @@
+fr ¦ tr
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Stil mobilyalar
+🎨 Tous les styles ¦ 🎨 Tüm stiller
+Sans les meubles de style ¦ Stil mobilyalar hariç
+D’ailleurs ¦ Başka yerlerden
+Modernes ¦ Modern
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Burada “{s}” stilinde bir şey yok: “🎨 Tüm stiller”i seç.
+Louis XIII ¦ XIII. Louis
+Louis XIV ¦ XIV. Louis
+Régence ¦ Régence
+Louis XV ¦ XV. Louis
+Louis XVI ¦ XVI. Louis
+Directoire ¦ Directoire
+Empire ¦ Empire
+Restauration ¦ Restorasyon
+Charles X ¦ X. Charles
+Louis-Philippe ¦ Louis-Philippe
+Napoléon III ¦ III. Napolyon
+Art nouveau ¦ Art nouveau
+Art déco ¦ Art déco
+Henri II ¦ II. Henri
+Renaissance ¦ Rönesans
+Biedermeier ¦ Biedermeier
+victorien ¦ Viktorya
+Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne
+gustavien ¦ Gustavyen
+shaker ¦ Shaker
+colonial ¦ Kolonyal
+marocain ¦ Fas
+japonais ¦ Japon
+chinois laqué ¦ Çin lake
+Thonet ¦ Thonet
+vénitien ¦ Venedik
+normand ¦ Normandiya
+breton ¦ Breton
+basque ¦ Bask
+alsacien ¦ Alsas
+savoyard ¦ Savoie
+auvergnat ¦ Auvergne
+bressan ¦ Bresse
+lorrain ¦ Lorraine
+landais ¦ Landes
+vendéen ¦ Vendée
+limousin ¦ Limousin
+bourguignon ¦ Burgonya
+catalan ¦ Katalan
+corse ¦ Korsika
+champenois ¦ Champagne
+flamand ¦ Flaman
+franc-comtois ¦ Franche-Comté
+béarnais ¦ Béarn
+dauphinois ¦ Dauphiné
+picard ¦ Picardie
+gascon ¦ Gascogne
+années 1930 ¦ 1930’lar
+années 1950 ¦ 1950’ler
+années 1960 ¦ 1960’lar
+années 1970 ¦ 1970’ler
+années 1980 ¦ 1980’ler
+scandinave ¦ İskandinav
+industriel ¦ endüstriyel
+contemporain ¦ çağdaş
+laqué blanc ¦ beyaz lake
+en pin ¦ çam
+en chêne clair ¦ açık meşe
+en merisier ¦ kiraz ağacı
+en noyer ¦ ceviz
+en acajou ¦ maun
+en rotin ¦ rattan
+en bambou ¦ bambu
+en métal ¦ metal
+patiné (shabby chic) ¦ eskitme (shabby chic)
+bohème ¦ bohem
+en teck ¦ tik
+Chiffonnier ¦ Şifonyer
+Table de salle à manger ¦ Yemek masası
+Pendule ¦ Masa saati
+Bonnetière ¦ Tek kapılı dolap
+Desserte ¦ Servis masası
+Buffet de cuisine ¦ Mutfak büfesi
+Table de toilette ¦ Lavabo masası
+Horloge de parquet ¦ Ayaklı sarkaçlı saat
+Pommier ¦ Elma ağacı
+Poirier ¦ Armut ağacı
+Cerisier ¦ Kiraz ağacı
+Prunier ¦ Erik ağacı
+Pêcher ¦ Şeftali ağacı
+Abricotier ¦ Kayısı ağacı
+Cognassier ¦ Ayva ağacı
+Châtaignier ¦ Kestane ağacı
+Figuier ¦ İncir ağacı
+Olivier ¦ Zeytin ağacı
+Citronnier en bac ¦ Saksıda limon ağacı
+Oranger en bac ¦ Saksıda portakal ağacı
+Noisetier ¦ Fındık ağacı
+Mûrier ¦ Dut ağacı
+Tilleul ¦ Ihlamur
+Platane ¦ Çınar
+Marronnier ¦ At kestanesi
+Hêtre ¦ Kayın
+Frêne ¦ Dişbudak
+Saule pleureur ¦ Salkım söğüt
+Peuplier ¦ Kavak
+Érable ¦ Akçaağaç
+Magnolia ¦ Manolya
+Lilas ¦ Leylak
+Cerisier du Japon ¦ Japon kirazı
+Orme ¦ Karaağaç
+Acacia ¦ Akasya
+Charme ¦ Gürgen
+Sureau ¦ Mürver
+Tilleul de la Liberté ¦ Özgürlük ıhlamuru
+Sapin ¦ Göknar
+Épicéa ¦ Ladin
+Pin parasol ¦ Fıstık çamı
+Pin sylvestre ¦ Sarıçam
+Cyprès ¦ Selvi
+If ¦ Porsuk
+Cèdre ¦ Sedir
+Thuya ¦ Mazı
+Rosier ¦ Gül
+Rosier grimpant ¦ Sarmaşık gül
+Hortensia ¦ Ortanca
+Lavande ¦ Lavanta
+Romarin ¦ Biberiye
+Thym ¦ Kekik
+Buis taillé en boule ¦ Top şeklinde budanmış şimşir
+Forsythia ¦ Altın çanak (forsythia)
+Laurier-sauce ¦ Defne
+Laurier-rose ¦ Zakkum
+Buddleia ¦ Kelebek çalısı
+Camélia ¦ Kamelya
+Rhododendron ¦ Orman gülü
+Azalée ¦ Açelya
+Houx ¦ Çobanpüskülü
+Cassissier ¦ Frenk üzümü (siyah)
+Groseillier ¦ Frenk üzümü (kırmızı)
+Framboisier ¦ Ahududu
+Pied de vigne ¦ Asma
+Bambou ¦ Bambu
+Bananier ¦ Muz ağacı
+Palmier ¦ Palmiye
+Herbes de la pampa ¦ Pampas otu
+Graminées ¦ Süs otları
+Fuchsia ¦ Küpe çiçeği
+Glycine ¦ Mor salkım
+Lierre ¦ Sarmaşık
+Fougère ¦ Eğrelti otu
+Massif de géraniums ¦ Sardunya tarhı
+Massif de tournesols ¦ Ayçiçeği tarhı
+Massif de tulipes ¦ Lale tarhı
+Massif de jonquilles ¦ Nergis tarhı
+Massif d’iris ¦ Süsen tarhı
+Massif de dahlias ¦ Yıldız çiçeği tarhı
+Massif de soucis ¦ Aynısefa tarhı
+Massif de pivoines ¦ Şakayık tarhı
+Massif de marguerites ¦ Papatya tarhı
+Carré de fraisiers ¦ Çilek tarhı
+Rang de pommes de terre ¦ Patates sırası
+Rang de salades ¦ Marul sırası
+Rang de tomates ¦ Domates sırası
+Rang de carottes ¦ Havuç sırası
+Rang de poireaux ¦ Pırasa sırası
+Rang de haricots à rames ¦ Sırık fasulye sırası
+Rang de choux ¦ Lahana sırası
+Planche de courges ¦ Kabak tarhı
+Planche d’oignons ¦ Soğan tarhı
+Carré d’aromatiques ¦ Aromatik bitki tarhı
+Pelouse ¦ Çim
+Prairie fleurie ¦ Çiçekli çayır
+Pot de géraniums ¦ Saksıda sardunya
+Jardinière de fleurs ¦ Çiçek saksısı (balkon)
+Agapanthe en pot ¦ Saksıda agapant
+Buis en pot ¦ Saksıda şimşir
+Pot de basilic ¦ Saksıda fesleğen
+Bac à fleurs en zinc ¦ Çinko çiçeklik
+Pot en terre d’Anduze ¦ Anduze toprak saksısı
+Grande jarre provençale ¦ Büyük Provence küpü
+Yucca ¦ Yuka
+Plante grasse (aloe) ¦ Sukulent (aloe)
+Cactus colonne ¦ Sütun kaktüs
+Kentia ¦ Kentia palmiyesi
+Sansevieria ¦ Paşa kılıcı
+Pothos suspendu ¦ Sarkan potos
+Oiseau de paradis (strelitzia) ¦ Cennet kuşu (strelitzia)
+Bonsaï sur sellette ¦ Sehpa üzerinde bonsai
+Poinsettia ¦ Atatürk çiçeği
+Plante aromatique sur rebord ¦ Pencere önünde aromatik bitki
+Palmier d’intérieur ¦ İç mekân palmiyesi
+Banc de jardin en bois et fonte ¦ Ahşap ve döküm bahçe bankı
+Banc de jardin en bois ¦ Ahşap bahçe bankı
+Banc en pierre sculpté ¦ Oymalı taş bank
+Table de bistrot en fer ¦ Demir bistro masası
+Table de jardin ronde en résine ¦ Yuvarlak plastik bahçe masası
+Table de jardin en teck ¦ Tik bahçe masası
+Table de pique-nique ¦ Piknik masası
+Chaise longue ¦ Şezlong
+Transat de plage rayé ¦ Çizgili plaj şezlongu
+Bain de soleil en résine ¦ Plastik güneşlenme yatağı
+Portique de jeux ¦ Salıncak seti
+Grand toboggan ¦ Büyük kaydırak
+Bac à sable couvert ¦ Kapaklı kum havuzu
+Petit trampoline ¦ Küçük trambolin
+Hamac sur pied ¦ Ayaklı hamak
+Tonnelle de jardin ¦ Bahçe çardağı
+Pergola en bois ¦ Ahşap pergola
+Pergola bioclimatique ¦ Biyoklimatik pergola
+Parasol déporté ¦ Yandan ayaklı şemsiye
+Parasol rouge de terrasse ¦ Kırmızı teras şemsiyesi
+Fontaine en pierre ¦ Taş çeşme
+Fontaine murale ¦ Duvar çeşmesi
+Bassin rond ¦ Yuvarlak havuzcuk
+Bassin aux nénuphars ¦ Nilüferli havuz
+Piscine rectangulaire ¦ Dikdörtgen yüzme havuzu
+Petite piscine ¦ Küçük yüzme havuzu
+Piscine hors-sol ronde ¦ Yuvarlak yer üstü havuz
+Spa d’extérieur ¦ Dış mekân jakuzisi
+Barbecue au charbon ¦ Kömürlü mangal
+Plancha sur chariot ¦ Arabalı plancha ızgara
+Four à pizza ¦ Pizza fırını
+Brasero en acier ¦ Çelik ateş çukuru
+Composteur en bois ¦ Ahşap kompost kutusu
+Potager surélevé ¦ Yükseltilmiş sebze yatağı
+Serre de jardin ¦ Bahçe serası
+Petite serre adossée ¦ Duvara yaslanan küçük sera
+Mangeoire à oiseaux ¦ Kuş yemliği
+Cadran solaire sur colonne ¦ Sütun üzerinde güneş saati
+Enrouleur de tuyau ¦ Hortum makarası
+Lanterne de jardin ¦ Bahçe feneri
+Mât de drapeau ¦ Bayrak direği
+Clôture en bois ¦ Ahşap çit
+Grillage rigide ¦ Panel tel çit
+Barrière blanche ¦ Beyaz çit
+Haie de lauriers ¦ Defne çiti
+Haie de charmille ¦ Gürgen çiti
+Muret en pierres sèches ¦ Kuru taş duvar
+Portail en fer forgé ¦ Ferforje bahçe kapısı
+Portail en bois ¦ Ahşap bahçe kapısı
+Portillon ¦ Küçük bahçe kapısı
+Abri à bûches ¦ Odunluk
+Éolienne de pompage ¦ Su pompalama yel değirmeni
+Puits couvert ¦ Üstü kapalı kuyu
+Abreuvoir en pierre ¦ Taş yalak
+Abri de jardin en bois ¦ Ahşap bahçe kulübesi
+Abri de jardin en métal ¦ Metal bahçe kulübesi
+Cabane dans les arbres ¦ Ağaç ev
+Carport ¦ Araba sundurması
+Kiosque de jardin ¦ Bahçe köşkü
+Cabane de jardin pour enfants ¦ Çocuk oyun evi
+Allée en gravier ¦ Çakıl yol
+Terrasse dallée ¦ Taş döşeli teras
+Terrasse en bois ¦ Ahşap teras
+Bac à compost ouvert ¦ Açık kompost kasası
+Jardin japonais ¦ Japon bahçesi
+Rocaille ¦ Kaya bahçesi
+Vasque de jardin ¦ Bahçe vazosu
+Statue de jardin ¦ Bahçe heykeli
+Lion en pierre ¦ Taş aslan
+Boule décorative ¦ Süs küresi
+Nichoir à mésanges ¦ Baştankara yuvası
+Hôtel à insectes ¦ Böcek oteli
+Boîte à livres ¦ Kitap paylaşım kutusu
+Ruche kenyane ¦ Kenya tipi kovan
+Pompe d’arrosage ¦ Sulama pompası
+Arroseur oscillant ¦ Salınımlı fıskiye
+Arrosoir en zinc ¦ Çinko sulama kovası
+Tondeuse hélicoïdale ¦ Elle itilen çim biçme makinesi
+Motoculteur ¦ Çapa makinesi
+Débroussailleuse ¦ Tırpan makinesi
+Souffleur à feuilles ¦ Yaprak üfleyici
+Réverbère ancien ¦ Eski sokak lambası
+Enseigne de commerce ¦ Dükkân tabelası
+Vache normande ¦ Normandiya ineği
+Vache limousine ¦ Limousin ineği
+Vache charolaise ¦ Charolais ineği
+Vache bretonne pie noir ¦ Siyah alaca Breton ineği
+Vache montbéliarde ¦ Montbéliarde ineği
+Veau ¦ Buzağı
+Bœuf de trait ¦ Koşum öküzü
+Cheval de trait (percheron) ¦ Koşum atı (Percheron)
+Cheval de trait breton ¦ Breton koşum atı
+Cheval de selle ¦ Binek atı
+Poney ¦ Midilli
+Mulet ¦ Katır
+Poulain ¦ Tay
+Brebis ¦ Koyun
+Agneau ¦ Kuzu
+Bélier ¦ Koç
+Chevreau ¦ Oğlak
+Truie ¦ Dişi domuz
+Porcelet ¦ Domuz yavrusu
+Coq ¦ Horoz
+Poule blanche ¦ Beyaz tavuk
+Poussin ¦ Civciv
+Canard ¦ Ördek
+Dindon ¦ Hindi
+Pintade ¦ Beç tavuğu
+Pigeon ¦ Güvercin
+Lapin ¦ Tavşan
+Chien de berger ¦ Çoban köpeği
+Grand chien ¦ Büyük köpek
+Petit chien ¦ Küçük köpek
+Chat roux ¦ Sarman kedi
+Chat noir ¦ Siyah kedi
+Chat tigré ¦ Tekir kedi
+Chat endormi en boule ¦ Kıvrılıp uyuyan kedi
+Lama ¦ Lama
+Cerf ¦ Geyik
+Sanglier ¦ Yaban domuzu
+Renard ¦ Tilki
+Tortue ¦ Kaplumbağa
+Héron ¦ Balıkçıl
+Cygne ¦ Kuğu
+Cage à oiseaux en osier ¦ Hasır kuş kafesi
+Cage à canaris ¦ Kanarya kafesi
+Poulailler en bois ¦ Ahşap kümes
+Niche en bois ¦ Ahşap köpek kulübesi
+Abri pour moutons ¦ Koyun barınağı
+Box à cheval ¦ At bölmesi
+Ruche Dadant ¦ Dadant kovanı
+Ruche Langstroth ¦ Langstroth kovanı
+Ruche en paille tressée ¦ Örgü saman kovan
+Stalle de vache ¦ İnek bölmesi
+Box de veau ¦ Buzağı bölmesi
+Mangeoire à foin ¦ Saman yemliği
+Tonneaux de cidre ¦ Elma şarabı fıçıları
+Cuve à lait ¦ Süt tankı
+Barrique de vin ¦ Şarap fıçısı
+Brabant ¦ Brabant pulluk
+Herse en bois ¦ Ahşap tapan
+Charrette à foin ¦ Saman arabası
+Char à bancs ¦ Sıralı at arabası
+Chariot à ridelles ¦ Parmaklıklı araba
+Tracteur rouge des années 1950 ¦ 1950’lerden kırmızı traktör
+Tracteur vert ¦ Yeşil traktör
+Petit tracteur gris (Ferguson) ¦ Küçük gri traktör (Ferguson)
+Faneuse ¦ Ot çevirme makinesi
+Moissonneuse-lieuse ¦ Biçerbağlar
+Batteuse ¦ Harman makinesi
+Andaineur ¦ Ot toplama tırmığı
+Alambic de bouilleur de cru ¦ Köylü imbiği
+Seau à traire ¦ Sağım kovası
+Chèvre angora ¦ Ankara keçisi
+Cochon noir gascon ¦ Siyah Gascogne domuzu
+Vache salers ¦ Salers ineği
+Vache aubrac ¦ Aubrac ineği
+Vache jersiaise ¦ Jersey ineği
+Mouton noir ¦ Siyah koyun
+Mouton mérinos ¦ Merinos koyunu
+Poule noire ¦ Siyah tavuk
+Poule rousse ¦ Kızıl tavuk
+Poule naine ¦ Cüce tavuk
+Paon blanc ¦ Beyaz tavus kuşu
+Paon ¦ Tavus kuşu
+Lapin blanc ¦ Beyaz tavşan
+Cochon d’Inde ¦ Kobay
+Hamster ¦ Hamster
+Perroquet ¦ Papağan
+Canari ¦ Kanarya
+Cheval blanc ¦ Beyaz at
+Cheval noir ¦ Siyah at
+Chien terre-neuve ¦ Newfoundland köpeği
+Chien labrador ¦ Labrador köpeği
+Chien beauceron ¦ Beauceron köpeği
+Chien teckel ¦ Dachshund köpeği
+Volière ¦ Kuşhane
+Cage à lapin d’intérieur ¦ İç mekân tavşan kafesi
+Panier pour chien ¦ Köpek sepeti
+Corbeille pour chat ¦ Kedi sepeti
+Arbre à chat ¦ Kedi tırmalama ağacı
+Gamelles ¦ Mama kapları
+Abreuvoir automatique ¦ Otomatik suluk
+Tonneau de pluie en chêne ¦ Meşe yağmur suyu fıçısı
+Cuve à vendange ¦ Üzüm teknesi
+Pot à lait en fer-blanc ¦ Teneke süt güğümü
+Charrette à bras ¦ El arabası
+Diligence ¦ Posta arabası
+Roulotte ¦ Çingene arabası
+Râteau-faneur à cheval ¦ Atlı ot tırmığı
+Botteleuse ¦ Balya makinesi
+Semoir ¦ Ekim makinesi
+Pulvérisateur ¦ İlaçlama makinesi
+Bouilloire électrique ¦ Elektrikli su ısıtıcısı
+Machine à expresso ¦ Espresso makinesi
+Machine à café à levier ¦ Kollu kahve makinesi
+Cafetière à dosettes ¦ Kapsüllü kahve makinesi
+Presse-agrumes ¦ Narenciye sıkacağı
+Four à micro-ondes encastrable ¦ Ankastre mikrodalga fırın
+Corbeille de fruits ¦ Meyve sepeti
+Corbeille à pain sur pied ¦ Ayaklı ekmek sepeti
+Étagère à épices ¦ Baharat rafı
+Desserte de cuisine en bois ¦ Ahşap mutfak arabası
+Bar de cuisine ¦ Mutfak bar tezgâhı
+Plaque vitrocéramique ¦ Seramik ocak
+Grande plaque à induction ¦ Büyük indüksiyonlu ocak
+Table de cuisson au gaz (5 feux) ¦ Gazlı ocak (5 gözlü)
+Hotte en inox ¦ Paslanmaz çelik davlumbaz
+Lave-vaisselle compact ¦ Kompakt bulaşık makinesi
+Réfrigérateur rétro vert d’eau ¦ Retro su yeşili buzdolabı
+Réfrigérateur rétro orange ¦ Retro turuncu buzdolabı
+Évier à deux bacs en céramique ¦ Çift gözlü seramik evye
+Évier timbre d’office ¦ Derin seramik evye
+Évier en pierre à potager ¦ Eski taş evye
+Cuisinière à charbon ¦ Kömürlü mutfak sobası
+Buffet de cuisine en formica ¦ Formika mutfak büfesi
+Buffet de cuisine bleu ciel ¦ Açık mavi mutfak büfesi
+Table en formica ¦ Formika masa
+Chaise en formica ¦ Formika sandalye
+Tabouret de cuisine ¦ Mutfak taburesi
+Cruche en grès ¦ Taş testi
+Fontaine à eau en grès ¦ Taş su sebili
+Balance de cuisine Roberval ¦ Roberval mutfak terazisi
+Batterie de casseroles en cuivre ¦ Bakır tencere takımı
+Égouttoir à vaisselle ¦ Bulaşık süzgeci
+Poubelles de tri ¦ Geri dönüşüm kutuları
+Planche à découper ¦ Kesme tahtası
+Bassine à confiture en cuivre ¦ Bakır reçel kazanı
+Pot-au-feu en fonte ¦ Döküm tencere
+Service à vaisselle ¦ Yemek takımı
+Soupière en faïence ¦ Fayans çorba kâsesi
+Panier de légumes ¦ Sebze sepeti
+Bocaux de conserves ¦ Konserve kavanozları
+Stérilisateur à bocaux ¦ Kavanoz sterilizatörü
+Moulin à légumes ¦ Sebze püre değirmeni
+Crêpière ¦ Krep makinesi
+Appareil à fondue ¦ Fondü seti
+Extracteur de jus ¦ Meyve sıkacağı (katı)
+Cafetière italienne ¦ İtalyan mokka demliği
+Samovar ¦ Semaver
+Étagère à confitures ¦ Reçel rafı
+Chariot de cuisine à roulettes ¦ Tekerlekli mutfak arabası
+Garde-manger grillagé ¦ Tel kafesli kiler dolabı
+Coffre à bois de cuisine ¦ Mutfak odun sandığı
+Baignoire en fonte sur pieds de lion ¦ Aslan ayaklı döküm küvet
+Baignoire îlot moderne ¦ Modern ada küvet
+Meuble double vasque ¦ Çift lavabolu dolap
+Vasque à poser sur plan bois ¦ Ahşap tezgâh üstü lavabo
+Meuble vasque suspendu ¦ Asma lavabo dolabı
+WC à chasse haute ¦ Yüksek rezervuarlı klozet
+WC rehaussé ¦ Yükseltilmiş klozet
+Miroir lumineux ¦ Işıklı ayna
+Panier à linge en osier ¦ Hasır çamaşır sepeti
+Broc et cuvette en faïence ¦ Fayans ibrik ve leğen
+Tub en zinc ¦ Çinko leğen
+Échelle porte-serviettes ¦ Merdiven havluluk
+Tapis de bain ¦ Banyo paspası
+Panier à linge en tissu ¦ Kumaş çamaşır sepeti
+Colonne de salle de bain ¦ Banyo boy dolabı
+Étagère de douche ¦ Duş rafı
+Vasque en pierre ¦ Taş lavabo
+Baignoire noire ¦ Siyah küvet
+Paroi de douche en verre ¦ Cam duş paneli
+WC avec abattant bois ¦ Ahşap kapaklı klozet
+Meuble vasque en bois ¦ Ahşap lavabo dolabı
+Lave-mains ¦ Küçük el lavabosu
+Lave-linge hublot ¦ Önden yüklemeli çamaşır makinesi
+Bac à laver ¦ Çamaşır teknesi
+Table à repasser ¦ Ütü masası
+Fil à linge ¦ Çamaşır ipi
+Essoreuse à rouleaux ¦ Merdaneli sıkma makinesi
+Machine à laver à manivelle ¦ Kollu çamaşır makinesi
+Balai et pelle ¦ Süpürge ve faraş
+Nettoyeur vapeur ¦ Buharlı temizleyici
+Vestiaire d’entrée ¦ Antre portmantosu
+Patère murale ¦ Duvar askısı
+Boîte à clés ¦ Anahtar kutusu
+Console avec miroir ¦ Aynalı konsol
+Valet de nuit ¦ Elbise askısı (sessiz uşak)
+Fauteuil ergonomique ¦ Ergonomik koltuk
+Bureau d’angle ¦ Köşe çalışma masası
+Petit bureau d’écolier ¦ Küçük öğrenci masası
+Ordinateur de bureau et écran ¦ Masaüstü bilgisayar ve monitör
+Deux écrans ¦ İki monitör
+Imprimante multifonction ¦ Çok fonksiyonlu yazıcı
+Destructeur de papier ¦ Kâğıt öğütücü
+Armoire à classeurs ¦ Klasör dolabı
+Caisson à roulettes ¦ Tekerlekli çekmece ünitesi
+Tableau en liège ¦ Mantar pano
+Téléphone de bureau ¦ Masa telefonu
+Globe terrestre de bureau ¦ Masaüstü dünya küresi
+Globe terrestre sur pied ¦ Ayaklı dünya küresi
+Pupitre de lecture ¦ Okuma kürsüsü
+Lampe de banquier ¦ Bankacı lambası
+Albums de famille ¦ Aile albümleri
+Console de jeux ¦ Oyun konsolu
+Scanner de documents ¦ Belge tarayıcı
+Carte de France ancienne ¦ Eski Fransa haritası
+Carte de Cassini encadrée ¦ Çerçeveli Cassini haritası
+Lutrin d’archives ¦ Arşiv kürsüsü
+Loupe sur pied ¦ Ayaklı büyüteç
+Lecteur de microfilms ¦ Mikrofilm okuyucu
+Couffin en osier ¦ Hasır bebek sepeti
+Berceau en fer ¦ Demir beşik
+Lit mezzanine ¦ Asma kat yatak
+Poussette ¦ Bebek arabası
+Parc pour bébé ¦ Bebek parkı
+Cuisine pour enfant ¦ Oyuncak mutfak
+Ours en peluche géant ¦ Dev oyuncak ayı
+Poupée en porcelaine ¦ Porselen bebek
+Cubes de construction ¦ Yapı blokları
+Théâtre de marionnettes ¦ Kukla tiyatrosu
+Luge ¦ Kızak
+Table de jeux de société ¦ Kutu oyunu masası
+Petite table d’enfant ¦ Küçük çocuk masası
+Chevalet de peinture ¦ Resim şövalesi
+Pupitre d’écolier double ¦ İki kişilik okul sırası
+Tableau noir d’école ¦ Okul karatahtası
+Coiffeuse d’enfant ¦ Çocuk tuvalet masası
+Marchande ¦ Oyuncak dükkân
+Circuit de voitures ¦ Yarış arabası pisti
+Arche de Noé en bois ¦ Ahşap Nuh’un gemisi
+Toupie ¦ Topaç
+Tapis d’éveil ¦ Oyun halısı
+Piscine à balles ¦ Top havuzu
+Tipi d’enfant ¦ Çocuk çadırı (tipi)
+Draisienne ¦ Denge bisikleti
+Voiture à pédales ¦ Pedallı araba
+Cheval sur roulettes ¦ Tekerlekli oyuncak at
+Bureau d’écolier réglable ¦ Ayarlanabilir öğrenci masası
+Tabouret d’enfant ¦ Çocuk taburesi
+Suspension trois globes ¦ Üç küreli avize
+Lampe Tiffany ¦ Tiffany lamba
+Lampe en opaline ¦ Opalin lamba
+Lampe à poser en céramique ¦ Seramik masa lambası
+Lampadaire trépied en bois ¦ Ahşap üç ayaklı lambader
+Lampadaire arc en marbre ¦ Mermer ayaklı yay lambader
+Liseuse sur pied ¦ Ayaklı okuma lambası
+Réglette néon ¦ Floresan lamba
+Lanterne à bougie ¦ Mumlu fener
+Lampe à pétrole en cuivre ¦ Bakır gaz lambası
+Lampe à huile romaine ¦ Roma kandili
+Bougies sur plateau ¦ Tepside mumlar
+Chandelier à trois branches ¦ Üç kollu şamdan
+Borne lumineuse ¦ Bahçe aydınlatma direği
+Mur de cadres photos ¦ Fotoğraf çerçeveleri duvarı
+Portrait d’ancêtre ¦ Ata portresi
+Tableau de paysage ¦ Manzara tablosu
+Marine ¦ Deniz manzarası tablosu
+Cadre photo sur pied ¦ Ayaklı fotoğraf çerçevesi
+Trophée de chasse ¦ Av trofesi
+Maquette de bateau ¦ Gemi maketi
+Sculpture sur socle ¦ Kaide üzerinde heykel
+Buste en plâtre ¦ Alçı büst
+Statuette en bronze ¦ Bronz heykelcik
+Grand vase en terre ¦ Büyük toprak vazo
+Bouquet de fleurs ¦ Çiçek buketi
+Horloge de gare ¦ İstasyon saati
+Coucou de la Forêt-Noire ¦ Kara Orman guguklu saati
+Rideaux ¦ Perdeler
+Grand tapis persan ¦ Büyük İran halısı
+Tapis berbère à losanges ¦ Baklava desenli Berberi halısı
+Kilim ¦ Kilim
+Tapis rond en jute ¦ Yuvarlak jüt halı
+Paravent japonais ¦ Japon paravanı
+Panier à journaux ¦ Gazete sepeti
+Grand panier en osier ¦ Büyük hasır sepet
+Garde-feu en laiton ¦ Pirinç şömine paravanı
+Terrarium ¦ Teraryum
+Diplôme encadré ¦ Çerçeveli diploma
+Photo de classe encadrée ¦ Çerçeveli sınıf fotoğrafı
+Livret de famille sous verre ¦ Cam altında aile cüzdanı
+Canevas brodé ¦ İşlemeli kanaviçe
+Tapisserie murale ¦ Duvar halısı (goblen)
+Médaillon de famille ¦ Aile madalyonu
+Trophée sportif ¦ Spor kupası
+Buste de Marianne ¦ Marianne büstü
+Vase de Gien ¦ Gien vazosu
+Vase de Sèvres ¦ Sèvres vazosu
+Potiche chinoise ¦ Çin küpü
+Vase en étain ¦ Kalay vazo
+Bouquet de fleurs séchées ¦ Kuru çiçek buketi
+Sapin de Noël décoré ¦ Süslenmiş Noel ağacı
+Couronne de porte ¦ Kapı çelengi
+Photophores ¦ Mumluklar
+Bateau en bouteille ¦ Şişede gemi
+Maquette de locomotive ¦ Lokomotif maketi
+Collection de dés à coudre ¦ Yüksük koleksiyonu
+Vitrine de minéraux ¦ Mineral vitrini
+Collection de papillons ¦ Kelebek koleksiyonu
+Boîte à musique ¦ Müzik kutusu
+Baromètre ¦ Barometre
+Thermomètre ancien ¦ Eski termometre
+Voilages ¦ Tül perdeler
+Rideaux de velours ¦ Kadife perdeler
+Store bateau ¦ Katlamalı stor perde
+Tapis moderne ¦ Modern halı
+Tapis en peau de mouton ¦ Koyun postu halı
+Poêle à granulés rouge ¦ Kırmızı pelet sobası
+Poêle Godin ¦ Godin sobası
+Radiateur vertical design ¦ Dikey tasarım radyatör
+Chauffe-eau ¦ Su ısıtıcısı (termosifon)
+Téléviseur sur meuble ¦ Sehpa üzerinde televizyon
+Téléviseur au mur ¦ Duvara monte televizyon
+Téléviseur à tube ¦ Tüplü televizyon
+Chaîne hi-fi ¦ Müzik seti
+Enceintes colonnes ¦ Kule hoparlörler
+Radiocassette ¦ Radyo-kasetçalar
+Magnétoscope ¦ Video oynatıcı
+Ventilateur de plafond ¦ Tavan vantilatörü
+Ventilateur de table ¦ Masa vantilatörü
+Radiateur soufflant ¦ Fanlı ısıtıcı
+Convecteur électrique ¦ Elektrikli konvektör
+Poêle à bois moderne ¦ Modern odun sobası
+Cuisinière à bois moderne ¦ Modern odunlu mutfak sobası
+Pompe à chaleur ¦ Isı pompası
+Chaudière au fioul ¦ Mazotlu kalorifer kazanı
+Chaudière à gaz murale ¦ Duvar tipi doğalgaz kombisi
+Cuve à fioul ¦ Mazot tankı
+Robot tondeuse ¦ Robot çim biçme makinesi
+Téléviseur portatif années 70 ¦ 1970’lerden portatif televizyon
+Lecteur CD ¦ CD çalar
+Magnétophone à bandes ¦ Makaralı teyp
+Enceinte connectée ¦ Akıllı hoparlör
+Piano droit noir ¦ Siyah duvar piyanosu
+Piano droit en acajou ¦ Maun duvar piyanosu
+Piano demi-queue ¦ Yarım kuyruklu piyano
+Piano à queue de concert ¦ Konser kuyruklu piyanosu
+Épinette ¦ Spinet
+Orgue de salon ¦ Salon orgu
+Clavier électronique ¦ Elektronik klavye
+Guitare classique ¦ Klasik gitar
+Banjo ¦ Banjo
+Mandoline ¦ Mandolin
+Violon sur pupitre ¦ Nota sehpasında keman
+Bandonéon ¦ Bandoneon
+Trompette sur pied ¦ Ayaklı trompet
+Saxophone sur pied ¦ Ayaklı saksafon
+Cor de chasse ¦ Av borusu
+Clarinette sur pied ¦ Ayaklı klarnet
+Pupitre de musique ¦ Nota sehpası
+Gramophone à pavillon ¦ Borulu gramofon
+Cornemuse (biniou) ¦ Gayda (biniou)
+Timbales ¦ Timpani
+Xylophone ¦ Ksilofon
+Marimba ¦ Marimba
+Cithare ¦ Kanun (zither)
+Ukulélé ¦ Ukulele
+Luth ¦ Lavta
+Flûte traversière sur support ¦ Sehpada yan flüt
+Flûte à bec ¦ Blok flüt
+Trombone sur pied ¦ Ayaklı trombon
+Hautbois sur support ¦ Sehpada obua
+Harmonica et pupitre ¦ Mızıka ve sehpası
+Meuble à partitions ¦ Nota dolabı
+Table de mixage ¦ Mikser masası
+Rayonnage de cave ¦ Mahzen rafı
+Cartons de déménagement ¦ Taşınma kolileri
+Étagère d’archives familiales ¦ Aile arşivi rafı
+Coffret à bijoux ¦ Mücevher kutusu
+Portant à vêtements ¦ Elbise askılığı
+Dressing d’angle ¦ Köşe giyinme dolabı
+Meuble à cases (cubes) ¦ Kübik raf
+Étagère de cellier ¦ Kiler rafları
+Boîtes de rangement en plastique ¦ Plastik saklama kutuları
+Caisses en bois ¦ Ahşap kasalar
+Panier à pique-nique ¦ Piknik sepeti
+Boîte à couture ¦ Dikiş kutusu
+Housse à vêtements ¦ Elbise kılıfı
+Crucifix mural ¦ Duvar haçı
+Crèche provençale et santons ¦ Provence doğum sahnesi ve santon figürleri
+Chapelet ¦ Tespih
+Coin du souvenir (photos et bougie) ¦ Anı köşesi (fotoğraflar ve mum)
+Boîte à lettres d’amour ¦ Aşk mektupları kutusu
+Vitrine de médailles ¦ Madalya vitrini
+Bouquet de mariée sous globe ¦ Fanus içinde gelin buketi
+Bénitier mural ¦ Duvar kutsal su kabı
+Icône orthodoxe ¦ Ortodoks ikonası
+Rameau de buis bénit ¦ Kutsanmış şimşir dalı
+Statue de saint ¦ Aziz heykeli
+Plaque de communion encadrée ¦ Çerçeveli komünyon hatırası
+Livre de prières ancien ¦ Eski dua kitabı
+Scie circulaire sur table ¦ Masa tipi daire testere
+Scie à onglets ¦ Gönye testeresi
+Forge et soufflet ¦ Demirci ocağı ve körük
+Établi de mécanicien ¦ Tamirci tezgâhı
+Établi d’horloger ¦ Saatçi tezgâhı
+Table de cordonnier ¦ Ayakkabıcı tezgâhı
+Table de coupe de tailleur ¦ Terzi kesim masası
+Paillasse de laboratoire ¦ Laboratuvar tezgâhı
+Scie à ruban ¦ Şerit testere
+Tour à métaux ¦ Metal torna tezgâhı
+Surjeteuse ¦ Overlok makinesi
+Métier à broder ¦ Nakış kasnağı
+Petite citadine ¦ Küçük şehir arabası
+Voiture familiale ¦ Aile arabası
+Voiture ancienne (années 30) ¦ Klasik araba (1930’lar)
+Deux-chevaux ¦ Citroën 2CV
+Coccinelle ¦ VW Beetle
+Fourgonnette ¦ Panelvan
+Mobylette ¦ Moped
+Vélo de course ¦ Yarış bisikleti
+Vélo hollandais ¦ Hollanda bisikleti
+Vélo cargo ¦ Kargo bisikleti
+Pneus empilés ¦ Üst üste lastikler
+Échelle double ¦ Çift taraflı merdiven
+Second congélateur ¦ İkinci dondurucu
+Voiture tout-terrain ¦ Arazi aracı
+Voiture de sport ¦ Spor araba
+Voiture électrique ¦ Elektrikli araba
+Camping-car ¦ Karavan
+Moto ancienne avec side-car ¦ Sepetli eski motosiklet
+Vélo ancien ¦ Eski bisiklet
+VTT ¦ Dağ bisikleti
+Borne de recharge ¦ Şarj istasyonu
+Armoire à outils ¦ Alet dolabı
+Chariot de pneus ¦ Lastik arabası
+Caisse à outils ¦ Alet çantası
+Chargeur de batterie ¦ Akü şarj cihazı

@@ -1,0 +1,710 @@
+fr ¦ sk ¦ nb
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Štýlový nábytok ¦ Stilmøbler
+🎨 Tous les styles ¦ 🎨 Všetky štýly ¦ 🎨 Alle stiler
+Sans les meubles de style ¦ Bez štýlového nábytku ¦ Uten stilmøbler
+D’ailleurs ¦ Odinakiaľ ¦ Fra andre steder
+Modernes ¦ Moderné ¦ Moderne
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ V štýle „{s}“ tu nič nie je: vyber „🎨 Všetky štýly“. ¦ Ingenting i stilen «{s}» her: velg «🎨 Alle stiler».
+Louis XIII ¦ Ľudovít XIII. ¦ Ludvig XIII
+Louis XIV ¦ Ľudovít XIV. ¦ Ludvig XIV
+Régence ¦ Régence ¦ Régence
+Louis XV ¦ Ľudovít XV. ¦ Ludvig XV
+Louis XVI ¦ Ľudovít XVI. ¦ Ludvig XVI
+Directoire ¦ Directoire ¦ Directoire
+Empire ¦ Empír ¦ Empire
+Restauration ¦ Reštaurácia ¦ Restaurasjon
+Charles X ¦ Karol X. ¦ Karl X
+Louis-Philippe ¦ Ľudovít Filip ¦ Louis-Philippe
+Napoléon III ¦ Napoleon III. ¦ Napoleon III
+Art nouveau ¦ Secesia ¦ Art nouveau
+Art déco ¦ Art deco ¦ Art deco
+Henri II ¦ Henrich II. ¦ Henrik II
+Renaissance ¦ Renesancia ¦ Renessanse
+Biedermeier ¦ Biedermeier ¦ Biedermeier
+victorien ¦ viktoriánsky ¦ viktoriansk
+Chippendale ¦ Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne ¦ Queen Anne
+gustavien ¦ gustaviánsky ¦ gustaviansk
+shaker ¦ shakerský ¦ shaker
+colonial ¦ koloniálny ¦ kolonial
+marocain ¦ marocký ¦ marokkansk
+japonais ¦ japonský ¦ japansk
+chinois laqué ¦ čínsky lakovaný ¦ kinesisk lakk
+Thonet ¦ Thonet ¦ Thonet
+vénitien ¦ benátsky ¦ venetiansk
+normand ¦ normandský ¦ normannisk
+breton ¦ bretónsky ¦ bretonsk
+basque ¦ baskický ¦ baskisk
+alsacien ¦ alsaský ¦ alsacisk
+savoyard ¦ savojský ¦ savoyardisk
+auvergnat ¦ auvergnský ¦ auvergnisk
+bressan ¦ bressský ¦ fra Bresse
+lorrain ¦ lotrinský ¦ lothringsk
+landais ¦ landský ¦ fra Landes
+vendéen ¦ vendéeský ¦ fra Vendée
+limousin ¦ limousinský ¦ limousinsk
+bourguignon ¦ burgundský ¦ burgundisk
+catalan ¦ katalánsky ¦ katalansk
+corse ¦ korzický ¦ korsikansk
+champenois ¦ champagneský ¦ fra Champagne
+flamand ¦ flámsky ¦ flamsk
+franc-comtois ¦ franche-comtéský ¦ fra Franche-Comté
+béarnais ¦ béarnský ¦ fra Béarn
+dauphinois ¦ dauphinéský ¦ fra Dauphiné
+picard ¦ pikardský ¦ pikardisk
+gascon ¦ gaskonský ¦ gaskognisk
+années 1930 ¦ 30. roky ¦ 1930-tallet
+années 1950 ¦ 50. roky ¦ 1950-tallet
+années 1960 ¦ 60. roky ¦ 1960-tallet
+années 1970 ¦ 70. roky ¦ 1970-tallet
+années 1980 ¦ 80. roky ¦ 1980-tallet
+scandinave ¦ škandinávsky ¦ skandinavisk
+industriel ¦ industriálny ¦ industriell
+contemporain ¦ súčasný ¦ moderne samtid
+laqué blanc ¦ biely lakovaný ¦ hvitlakkert
+en pin ¦ z borovice ¦ i furu
+en chêne clair ¦ zo svetlého duba ¦ i lys eik
+en merisier ¦ z čerešne ¦ i kirsebærtre
+en noyer ¦ z orecha ¦ i valnøtt
+en acajou ¦ z mahagónu ¦ i mahogni
+en rotin ¦ z ratanu ¦ i rotting
+en bambou ¦ z bambusu ¦ i bambus
+en métal ¦ z kovu ¦ i metall
+patiné (shabby chic) ¦ patinovaný (shabby chic) ¦ patinert (shabby chic)
+bohème ¦ boho ¦ boho
+en teck ¦ z teaku ¦ i teak
+Chiffonnier ¦ Bielizník ¦ Smal kommode
+Table de salle à manger ¦ Jedálenský stôl ¦ Spisebord
+Pendule ¦ Kyvadlové hodiny ¦ Pendelur
+Bonnetière ¦ Vysoká skriňa na čepce ¦ Smalt linskap
+Desserte ¦ Servírovací stolík ¦ Serveringsbord
+Buffet de cuisine ¦ Kuchynský kredenc ¦ Kjøkkenskjenk
+Table de toilette ¦ Toaletný stolík ¦ Toalettbord
+Horloge de parquet ¦ Stojacie hodiny ¦ Gulvur
+Pommier ¦ Jabloň ¦ Epletre
+Poirier ¦ Hruška ¦ Pæretre
+Cerisier ¦ Čerešňa ¦ Kirsebærtre
+Prunier ¦ Slivka ¦ Plommetre
+Pêcher ¦ Broskyňa ¦ Ferskentre
+Abricotier ¦ Marhuľa ¦ Aprikostre
+Cognassier ¦ Dula ¦ Kvedetre
+Châtaignier ¦ Gaštan jedlý ¦ Ekte kastanje
+Figuier ¦ Figovník ¦ Fikentre
+Olivier ¦ Olivovník ¦ Oliventre
+Citronnier en bac ¦ Citrónovník v kvetináči ¦ Sitrontre i krukke
+Oranger en bac ¦ Pomarančovník v kvetináči ¦ Appelsintre i krukke
+Noisetier ¦ Lieska ¦ Hassel
+Mûrier ¦ Moruša ¦ Morbærtre
+Tilleul ¦ Lipa ¦ Lind
+Platane ¦ Platan ¦ Platan
+Marronnier ¦ Pagaštan ¦ Hestekastanje
+Hêtre ¦ Buk ¦ Bøk
+Frêne ¦ Jaseň ¦ Ask
+Saule pleureur ¦ Smútočná vŕba ¦ Tårepil
+Peuplier ¦ Topoľ ¦ Poppel
+Érable ¦ Javor ¦ Lønn
+Magnolia ¦ Magnólia ¦ Magnolia
+Lilas ¦ Orgován ¦ Syrin
+Cerisier du Japon ¦ Japonská čerešňa ¦ Japansk kirsebærtre
+Orme ¦ Brest ¦ Alm
+Acacia ¦ Agát ¦ Akasie
+Charme ¦ Hrab ¦ Agnbøk
+Sureau ¦ Baza ¦ Hyll
+Tilleul de la Liberté ¦ Lipa slobody ¦ Frihetslind
+Sapin ¦ Jedľa ¦ Edelgran
+Épicéa ¦ Smrek ¦ Gran
+Pin parasol ¦ Pínia ¦ Pinje
+Pin sylvestre ¦ Borovica lesná ¦ Furu
+Cyprès ¦ Cyprus ¦ Sypress
+If ¦ Tis ¦ Barlind
+Cèdre ¦ Céder ¦ Seder
+Thuya ¦ Tuja ¦ Tuja
+Rosier ¦ Ruža ¦ Rosebusk
+Rosier grimpant ¦ Popínavá ruža ¦ Klatrerose
+Hortensia ¦ Hortenzia ¦ Hortensia
+Lavande ¦ Levanduľa ¦ Lavendel
+Romarin ¦ Rozmarín ¦ Rosmarin
+Thym ¦ Tymian ¦ Timian
+Buis taillé en boule ¦ Krušpán strihaný do gule ¦ Buksbom klipt som kule
+Forsythia ¦ Zlatovka ¦ Forsythia
+Laurier-sauce ¦ Vavrín ¦ Laurbær
+Laurier-rose ¦ Oleander ¦ Oleander
+Buddleia ¦ Budleja ¦ Sommerfuglbusk
+Camélia ¦ Kamélia ¦ Kamelia
+Rhododendron ¦ Rododendron ¦ Rododendron
+Azalée ¦ Azalka ¦ Asalea
+Houx ¦ Cezmína ¦ Kristtorn
+Cassissier ¦ Čierna ríbezľa ¦ Solbærbusk
+Groseillier ¦ Ríbezľa ¦ Ripsbusk
+Framboisier ¦ Malina ¦ Bringebærbusk
+Pied de vigne ¦ Vinič ¦ Vinranke
+Bambou ¦ Bambus ¦ Bambus
+Bananier ¦ Banánovník ¦ Bananplante
+Palmier ¦ Palma ¦ Palme
+Herbes de la pampa ¦ Pampová tráva ¦ Pampasgress
+Graminées ¦ Okrasné trávy ¦ Prydgress
+Fuchsia ¦ Fuchsia ¦ Fuchsia
+Glycine ¦ Vistéria ¦ Blåregn
+Lierre ¦ Brečtan ¦ Eføy
+Fougère ¦ Papraď ¦ Bregne
+Massif de géraniums ¦ Záhon muškátov ¦ Bed med pelargonier
+Massif de tournesols ¦ Záhon slnečníc ¦ Bed med solsikker
+Massif de tulipes ¦ Záhon tulipánov ¦ Bed med tulipaner
+Massif de jonquilles ¦ Záhon narcisov ¦ Bed med påskeliljer
+Massif d’iris ¦ Záhon kosatcov ¦ Bed med iris
+Massif de dahlias ¦ Záhon georgín ¦ Bed med georginer
+Massif de soucis ¦ Záhon nechtíkov ¦ Bed med ringblomster
+Massif de pivoines ¦ Záhon pivónií ¦ Bed med peoner
+Massif de marguerites ¦ Záhon margarét ¦ Bed med prestekrager
+Carré de fraisiers ¦ Záhon jahôd ¦ Jordbærbed
+Rang de pommes de terre ¦ Rad zemiakov ¦ Rad med poteter
+Rang de salades ¦ Rad šalátu ¦ Rad med salat
+Rang de tomates ¦ Rad paradajok ¦ Rad med tomater
+Rang de carottes ¦ Rad mrkvy ¦ Rad med gulrøtter
+Rang de poireaux ¦ Rad póru ¦ Rad med purre
+Rang de haricots à rames ¦ Rad tyčovej fazule ¦ Rad med stangbønner
+Rang de choux ¦ Rad kapusty ¦ Rad med kål
+Planche de courges ¦ Záhon tekvíc ¦ Bed med gresskar
+Planche d’oignons ¦ Záhon cibule ¦ Bed med løk
+Carré d’aromatiques ¦ Záhon byliniek ¦ Urtebed
+Pelouse ¦ Trávnik ¦ Plen
+Prairie fleurie ¦ Kvetinová lúka ¦ Blomstereng
+Pot de géraniums ¦ Kvetináč s muškátmi ¦ Potte med pelargonier
+Jardinière de fleurs ¦ Truhlík s kvetmi ¦ Blomsterkasse
+Agapanthe en pot ¦ Agapant v kvetináči ¦ Agapanthus i potte
+Buis en pot ¦ Krušpán v kvetináči ¦ Buksbom i potte
+Pot de basilic ¦ Kvetináč s bazalkou ¦ Potte med basilikum
+Bac à fleurs en zinc ¦ Zinkový truhlík na kvety ¦ Blomsterkasse i sink
+Pot en terre d’Anduze ¦ Kvetináč z Anduze ¦ Leirkrukke fra Anduze
+Grande jarre provençale ¦ Veľká provensalská amfora ¦ Stor provençalsk krukke
+Yucca ¦ Juka ¦ Yucca
+Plante grasse (aloe) ¦ Sukulent (aloe) ¦ Sukkulent (aloe)
+Cactus colonne ¦ Stĺpovitý kaktus ¦ Søylekaktus
+Kentia ¦ Kencia ¦ Kentiapalme
+Sansevieria ¦ Svokrin jazyk ¦ Svigermors tunge
+Pothos suspendu ¦ Visiaci potos ¦ Hengende gullranke
+Oiseau de paradis (strelitzia) ¦ Strelícia (rajský vták) ¦ Paradisfugl (strelitzia)
+Bonsaï sur sellette ¦ Bonsaj na stojane ¦ Bonsai på stativ
+Poinsettia ¦ Vianočná hviezda ¦ Julestjerne
+Plante aromatique sur rebord ¦ Bylinka na parapete ¦ Krydderurt i vinduskarmen
+Palmier d’intérieur ¦ Izbová palma ¦ Innendørs palme
+Banc de jardin en bois et fonte ¦ Záhradná lavička z dreva a liatiny ¦ Hagebenk i tre og støpejern
+Banc de jardin en bois ¦ Drevená záhradná lavička ¦ Hagebenk i tre
+Banc en pierre sculpté ¦ Vyrezávaná kamenná lavička ¦ Utskåret steinbenk
+Table de bistrot en fer ¦ Železný bistro stolík ¦ Bistrobord i jern
+Table de jardin ronde en résine ¦ Okrúhly záhradný stôl zo živice ¦ Rundt hagebord i plast
+Table de jardin en teck ¦ Teakový záhradný stôl ¦ Hagebord i teak
+Table de pique-nique ¦ Piknikový stôl ¦ Piknikbord
+Chaise longue ¦ Ležadlo ¦ Fluktstol
+Transat de plage rayé ¦ Pruhované plážové ležadlo ¦ Stripete strandstol
+Bain de soleil en résine ¦ Ležadlo zo živice ¦ Solseng i plast
+Portique de jeux ¦ Detská hojdačková zostava ¦ Lekestativ
+Grand toboggan ¦ Veľká šmykľavka ¦ Stor sklie
+Bac à sable couvert ¦ Kryté pieskovisko ¦ Sandkasse med lokk
+Petit trampoline ¦ Malá trampolína ¦ Liten trampoline
+Hamac sur pied ¦ Hojdacia sieť so stojanom ¦ Hengekøye med stativ
+Tonnelle de jardin ¦ Záhradné podlubie ¦ Hagelysthus
+Pergola en bois ¦ Drevená pergola ¦ Pergola i tre
+Pergola bioclimatique ¦ Bioklimatická pergola ¦ Bioklimatisk pergola
+Parasol déporté ¦ Konzolový slnečník ¦ Hengeparasoll
+Parasol rouge de terrasse ¦ Červený terasový slnečník ¦ Rød terrasseparasoll
+Fontaine en pierre ¦ Kamenná fontána ¦ Steinfontene
+Fontaine murale ¦ Nástenná fontána ¦ Veggfontene
+Bassin rond ¦ Okrúhle jazierko ¦ Rund dam
+Bassin aux nénuphars ¦ Jazierko s leknami ¦ Dam med nøkkeroser
+Piscine rectangulaire ¦ Obdĺžnikový bazén ¦ Rektangulært basseng
+Petite piscine ¦ Malý bazén ¦ Lite basseng
+Piscine hors-sol ronde ¦ Okrúhly nadzemný bazén ¦ Rundt overbakkebasseng
+Spa d’extérieur ¦ Vonkajšia vírivka ¦ Utendørs boblebad
+Barbecue au charbon ¦ Gril na drevené uhlie ¦ Kullgrill
+Plancha sur chariot ¦ Plancha na vozíku ¦ Plancha på tralle
+Four à pizza ¦ Pec na pizzu ¦ Pizzaovn
+Brasero en acier ¦ Oceľové ohnisko ¦ Bålpanne i stål
+Composteur en bois ¦ Drevený kompostér ¦ Kompostbinge i tre
+Potager surélevé ¦ Vyvýšený záhon ¦ Høybed
+Serre de jardin ¦ Záhradný skleník ¦ Drivhus
+Petite serre adossée ¦ Malý prístenný skleník ¦ Lite veggdrivhus
+Mangeoire à oiseaux ¦ Kŕmidlo pre vtáky ¦ Fuglebrett
+Cadran solaire sur colonne ¦ Slnečné hodiny na stĺpe ¦ Solur på søyle
+Enrouleur de tuyau ¦ Navijak na hadicu ¦ Slangetrommel
+Lanterne de jardin ¦ Záhradný lampáš ¦ Hagelykt
+Mât de drapeau ¦ Stožiar na vlajku ¦ Flaggstang
+Clôture en bois ¦ Drevený plot ¦ Tregjerde
+Grillage rigide ¦ Pevné pletivo ¦ Stivt nettinggjerde
+Barrière blanche ¦ Biela ohrada ¦ Hvitt stakitt
+Haie de lauriers ¦ Vavrínový živý plot ¦ Laurbærhekk
+Haie de charmille ¦ Hrabový živý plot ¦ Agnbøkhekk
+Muret en pierres sèches ¦ Múrik zo suchého kameňa ¦ Tørrmur i stein
+Portail en fer forgé ¦ Kovaná brána ¦ Smijernsport
+Portail en bois ¦ Drevená brána ¦ Treport
+Portillon ¦ Bránka ¦ Grind
+Abri à bûches ¦ Prístrešok na drevo ¦ Vedskjul
+Éolienne de pompage ¦ Čerpacie veterné koleso ¦ Vindpumpe
+Puits couvert ¦ Krytá studňa ¦ Overbygd brønn
+Abreuvoir en pierre ¦ Kamenné napájadlo ¦ Vanntrau i stein
+Abri de jardin en bois ¦ Drevený záhradný domček ¦ Hagebod i tre
+Abri de jardin en métal ¦ Kovový záhradný domček ¦ Hagebod i metall
+Cabane dans les arbres ¦ Domček na strome ¦ Trehytte
+Carport ¦ Prístrešok na auto ¦ Carport
+Kiosque de jardin ¦ Záhradný altánok ¦ Hagepaviljong
+Cabane de jardin pour enfants ¦ Detský záhradný domček ¦ Lekehytte
+Allée en gravier ¦ Štrkový chodník ¦ Grusgang
+Terrasse dallée ¦ Dláždená terasa ¦ Hellelagt terrasse
+Terrasse en bois ¦ Drevená terasa ¦ Terrasse i tre
+Bac à compost ouvert ¦ Otvorený kompostér ¦ Åpen kompostkasse
+Jardin japonais ¦ Japonská záhrada ¦ Japansk hage
+Rocaille ¦ Skalka ¦ Steinbed
+Vasque de jardin ¦ Záhradná misa ¦ Hageurne
+Statue de jardin ¦ Záhradná socha ¦ Hagestatue
+Lion en pierre ¦ Kamenný lev ¦ Steinløve
+Boule décorative ¦ Dekoratívna guľa ¦ Dekorativ kule
+Nichoir à mésanges ¦ Búdka pre sýkorky ¦ Fuglekasse for meiser
+Hôtel à insectes ¦ Hmyzí hotel ¦ Insekthotell
+Boîte à livres ¦ Knižná búdka ¦ Bokkasse
+Ruche kenyane ¦ Kenský úľ ¦ Toppstangkube
+Pompe d’arrosage ¦ Ručná pumpa na zalievanie ¦ Hagepumpe
+Arroseur oscillant ¦ Oscilačný postrekovač ¦ Oscillerende vanningsspreder
+Arrosoir en zinc ¦ Zinková krhla ¦ Vannkanne i sink
+Tondeuse hélicoïdale ¦ Vretenová kosačka ¦ Sylinderklipper
+Motoculteur ¦ Malotraktor ¦ Jordfreser
+Débroussailleuse ¦ Krovinorez ¦ Krattrydder
+Souffleur à feuilles ¦ Fúkač lístia ¦ Løvblåser
+Réverbère ancien ¦ Starodávna pouličná lampa ¦ Gammel gatelykt
+Enseigne de commerce ¦ Obchodný vývesný štít ¦ Butikkskilt
+Vache normande ¦ Normandská krava ¦ Normandisk ku
+Vache limousine ¦ Limousinská krava ¦ Limousin-ku
+Vache charolaise ¦ Charolaiská krava ¦ Charolais-ku
+Vache bretonne pie noir ¦ Bretónska strakatá krava ¦ Svartbroket bretonsk ku
+Vache montbéliarde ¦ Montbéliardská krava ¦ Montbéliarde-ku
+Veau ¦ Teľa ¦ Kalv
+Bœuf de trait ¦ Ťažný vôl ¦ Trekkokse
+Cheval de trait (percheron) ¦ Ťažný kôň (percherón) ¦ Trekkhest (percheron)
+Cheval de trait breton ¦ Bretónsky ťažný kôň ¦ Bretonsk trekkhest
+Cheval de selle ¦ Jazdecký kôň ¦ Ridehest
+Poney ¦ Poník ¦ Ponni
+Mulet ¦ Mulica ¦ Muldyr
+Poulain ¦ Žriebä ¦ Føll
+Brebis ¦ Ovca ¦ Søye
+Agneau ¦ Jahňa ¦ Lam
+Bélier ¦ Baran ¦ Vær
+Chevreau ¦ Kozľa ¦ Kje
+Truie ¦ Prasnica ¦ Purke
+Porcelet ¦ Prasiatko ¦ Smågris
+Coq ¦ Kohút ¦ Hane
+Poule blanche ¦ Biela sliepka ¦ Hvit høne
+Poussin ¦ Kuriatko ¦ Kylling
+Canard ¦ Kačica ¦ And
+Dindon ¦ Morka ¦ Kalkun
+Pintade ¦ Perlička ¦ Perlehøne
+Pigeon ¦ Holub ¦ Due
+Lapin ¦ Králik ¦ Kanin
+Chien de berger ¦ Ovčiarsky pes ¦ Gjeterhund
+Grand chien ¦ Veľký pes ¦ Stor hund
+Petit chien ¦ Malý pes ¦ Liten hund
+Chat roux ¦ Ryšavá mačka ¦ Rød katt
+Chat noir ¦ Čierna mačka ¦ Svart katt
+Chat tigré ¦ Pásikavá mačka ¦ Stripete katt
+Chat endormi en boule ¦ Mačka spiaca v klbku ¦ Katt som sover sammenkrøllet
+Lama ¦ Lama ¦ Lama
+Cerf ¦ Jeleň ¦ Hjort
+Sanglier ¦ Diviak ¦ Villsvin
+Renard ¦ Líška ¦ Rev
+Tortue ¦ Korytnačka ¦ Skilpadde
+Héron ¦ Volavka ¦ Hegre
+Cygne ¦ Labuť ¦ Svane
+Cage à oiseaux en osier ¦ Prútená klietka na vtáky ¦ Fuglebur i vidjer
+Cage à canaris ¦ Klietka pre kanáriky ¦ Kanarifuglbur
+Poulailler en bois ¦ Drevený kurín ¦ Hønsehus i tre
+Niche en bois ¦ Drevená búda pre psa ¦ Hundehus i tre
+Abri pour moutons ¦ Prístrešok pre ovce ¦ Saueskjul
+Box à cheval ¦ Konský box ¦ Hestebinge
+Ruche Dadant ¦ Úľ Dadant ¦ Dadant-kube
+Ruche Langstroth ¦ Úľ Langstroth ¦ Langstroth-kube
+Ruche en paille tressée ¦ Pletený slamený úľ ¦ Flettet halmkube
+Stalle de vache ¦ Kravské stojisko ¦ Kubås
+Box de veau ¦ Box pre teľa ¦ Kalvebinge
+Mangeoire à foin ¦ Jasle na seno ¦ Høyhekk
+Tonneaux de cidre ¦ Sudy na cider ¦ Siderfat
+Cuve à lait ¦ Nádoba na mlieko ¦ Melketank
+Barrique de vin ¦ Vínny sud ¦ Vinfat
+Brabant ¦ Obracací pluh (brabant) ¦ Brabantplog
+Herse en bois ¦ Drevené brány ¦ Treharv
+Charrette à foin ¦ Rebrinový voz na seno ¦ Høyvogn
+Char à bancs ¦ Žudrový voz ¦ Benkevogn
+Chariot à ridelles ¦ Rebrinový voz ¦ Hesjevogn
+Tracteur rouge des années 1950 ¦ Červený traktor z 50. rokov ¦ Rød traktor fra 1950-tallet
+Tracteur vert ¦ Zelený traktor ¦ Grønn traktor
+Petit tracteur gris (Ferguson) ¦ Malý sivý traktor (Ferguson) ¦ Liten grå traktor (Ferguson)
+Faneuse ¦ Obracač sena ¦ Høyvender
+Moissonneuse-lieuse ¦ Samoviaz ¦ Selvbinder
+Batteuse ¦ Mláťačka ¦ Treskeverk
+Andaineur ¦ Zhrňovač ¦ Strengvender
+Alambic de bouilleur de cru ¦ Pálenica na ovocie ¦ Brennevinsapparat
+Seau à traire ¦ Vedro na dojenie ¦ Melkebøtte
+Chèvre angora ¦ Angorská koza ¦ Angorageit
+Cochon noir gascon ¦ Čierne gaskonské prasa ¦ Svart gascognegris
+Vache salers ¦ Krava plemena salers ¦ Salers-ku
+Vache aubrac ¦ Krava plemena aubrac ¦ Aubrac-ku
+Vache jersiaise ¦ Jerseyská krava ¦ Jerseyku
+Mouton noir ¦ Čierna ovca ¦ Svart sau
+Mouton mérinos ¦ Merino ovca ¦ Merinosau
+Poule noire ¦ Čierna sliepka ¦ Svart høne
+Poule rousse ¦ Hnedá sliepka ¦ Brun høne
+Poule naine ¦ Zakrpatená sliepka ¦ Dverghøne
+Paon blanc ¦ Biely páv ¦ Hvit påfugl
+Paon ¦ Páv ¦ Påfugl
+Lapin blanc ¦ Biely králik ¦ Hvit kanin
+Cochon d’Inde ¦ Morča ¦ Marsvin
+Hamster ¦ Škrečok ¦ Hamster
+Perroquet ¦ Papagáj ¦ Papegøye
+Canari ¦ Kanárik ¦ Kanarifugl
+Cheval blanc ¦ Biely kôň ¦ Hvit hest
+Cheval noir ¦ Čierny kôň ¦ Svart hest
+Chien terre-neuve ¦ Novofundlandský pes ¦ Newfoundlandshund
+Chien labrador ¦ Labradorský retriever ¦ Labrador
+Chien beauceron ¦ Beauceron ¦ Beauceron
+Chien teckel ¦ Jazvečík ¦ Dachshund
+Volière ¦ Voliéra ¦ Voliere
+Cage à lapin d’intérieur ¦ Izbová klietka pre králika ¦ Innendørs kaninbur
+Panier pour chien ¦ Pelech pre psa ¦ Hundekurv
+Corbeille pour chat ¦ Košík pre mačku ¦ Kattekurv
+Arbre à chat ¦ Mačací strom ¦ Klatretre for katt
+Gamelles ¦ Misky ¦ Matskåler
+Abreuvoir automatique ¦ Automatické napájadlo ¦ Automatisk drikkekar
+Tonneau de pluie en chêne ¦ Dubový sud na dažďovú vodu ¦ Regnvannstønne i eik
+Cuve à vendange ¦ Kaď na hrozno ¦ Druekar
+Pot à lait en fer-blanc ¦ Plechová kanva na mlieko ¦ Melkespann i blikk
+Charrette à bras ¦ Ručný vozík ¦ Trillekjerre
+Diligence ¦ Poštový dostavník ¦ Diligence
+Roulotte ¦ Maringotka ¦ Sigøynervogn
+Râteau-faneur à cheval ¦ Konské hrable ¦ Hesterive
+Botteleuse ¦ Lis na balíky ¦ Ballepresse
+Semoir ¦ Sejačka ¦ Såmaskin
+Pulvérisateur ¦ Postrekovač ¦ Sprøyte
+Bouilloire électrique ¦ Rýchlovarná kanvica ¦ Vannkoker
+Machine à expresso ¦ Espresso kávovar ¦ Espressomaskin
+Machine à café à levier ¦ Pákový kávovar ¦ Espressomaskin med spak
+Cafetière à dosettes ¦ Kapsulový kávovar ¦ Kapselkaffemaskin
+Presse-agrumes ¦ Odšťavovač na citrusy ¦ Sitruspresse
+Four à micro-ondes encastrable ¦ Vstavaná mikrovlnná rúra ¦ Integrert mikrobølgeovn
+Corbeille de fruits ¦ Misa s ovocím ¦ Fruktkurv
+Corbeille à pain sur pied ¦ Košík na chlieb na stojane ¦ Brødkurv på fot
+Étagère à épices ¦ Polička na korenie ¦ Krydderhylle
+Desserte de cuisine en bois ¦ Drevený kuchynský vozík ¦ Kjøkkentralle i tre
+Bar de cuisine ¦ Kuchynský bar ¦ Kjøkkenbar
+Plaque vitrocéramique ¦ Sklokeramická doska ¦ Keramisk koketopp
+Grande plaque à induction ¦ Veľká indukčná doska ¦ Stor induksjonstopp
+Table de cuisson au gaz (5 feux) ¦ Plynová varná doska (5 horákov) ¦ Gasskoketopp (5 bluss)
+Hotte en inox ¦ Nerezový digestor ¦ Kjøkkenvifte i rustfritt stål
+Lave-vaisselle compact ¦ Kompaktná umývačka riadu ¦ Kompakt oppvaskmaskin
+Réfrigérateur rétro vert d’eau ¦ Retro chladnička mätovej farby ¦ Mintgrønt retrokjøleskap
+Réfrigérateur rétro orange ¦ Oranžová retro chladnička ¦ Oransje retrokjøleskap
+Évier à deux bacs en céramique ¦ Keramický dvojdrez ¦ Keramisk dobbel oppvaskkum
+Évier timbre d’office ¦ Hlboký keramický drez ¦ Dyp keramisk vask
+Évier en pierre à potager ¦ Kamenný kuchynský drez ¦ Steinvask
+Cuisinière à charbon ¦ Sporák na uhlie ¦ Kullkomfyr
+Buffet de cuisine en formica ¦ Kuchynský kredenc z umakartu ¦ Kjøkkenskjenk i formica
+Buffet de cuisine bleu ciel ¦ Svetlomodrý kuchynský kredenc ¦ Lyseblå kjøkkenskjenk
+Table en formica ¦ Stôl z umakartu ¦ Formicabord
+Chaise en formica ¦ Stolička z umakartu ¦ Formicastol
+Tabouret de cuisine ¦ Kuchynská stolička ¦ Kjøkkenkrakk
+Cruche en grès ¦ Kameninový džbán ¦ Steintøymugge
+Fontaine à eau en grès ¦ Kameninová nádoba na vodu ¦ Vannbeholder i steintøy
+Balance de cuisine Roberval ¦ Kuchynské rovnoramenné váhy ¦ Roberval-vekt
+Batterie de casseroles en cuivre ¦ Sada medených hrncov ¦ Kobberkjeler
+Égouttoir à vaisselle ¦ Odkvapkávač na riad ¦ Oppvaskstativ
+Poubelles de tri ¦ Koše na triedený odpad ¦ Kildesorteringsbøtter
+Planche à découper ¦ Doska na krájanie ¦ Skjærebrett
+Bassine à confiture en cuivre ¦ Medená panvica na džem ¦ Syltetøygryte i kobber
+Pot-au-feu en fonte ¦ Liatinový hrniec ¦ Støpejernsgryte
+Service à vaisselle ¦ Jedálenská súprava ¦ Servise
+Soupière en faïence ¦ Fajansová polievková misa ¦ Terrin i fajanse
+Panier de légumes ¦ Košík so zeleninou ¦ Grønnsakskurv
+Bocaux de conserves ¦ Zaváraniny ¦ Hermetikkglass
+Stérilisateur à bocaux ¦ Zavárací hrniec ¦ Hermetikkoker
+Moulin à légumes ¦ Mlynček na zeleninu ¦ Grønnsakskvern
+Crêpière ¦ Palacinkovač ¦ Pannekakejern
+Appareil à fondue ¦ Súprava na fondue ¦ Fonduesett
+Extracteur de jus ¦ Odšťavovač ¦ Saftpresse
+Cafetière italienne ¦ Moka kanvička ¦ Mokkakanne
+Samovar ¦ Samovar ¦ Samovar
+Étagère à confitures ¦ Polička na džemy ¦ Syltetøyhylle
+Chariot de cuisine à roulettes ¦ Pojazdný kuchynský vozík ¦ Kjøkkentralle på hjul
+Garde-manger grillagé ¦ Mriežkovaná komora na potraviny ¦ Fluenettskap
+Coffre à bois de cuisine ¦ Kuchynská debna na drevo ¦ Vedkasse til kjøkkenet
+Baignoire en fonte sur pieds de lion ¦ Liatinová vaňa na levích labách ¦ Badekar i støpejern med løveføtter
+Baignoire îlot moderne ¦ Moderná voľne stojaca vaňa ¦ Moderne frittstående badekar
+Meuble double vasque ¦ Skrinka s dvoma umývadlami ¦ Dobbel servantinnredning
+Vasque à poser sur plan bois ¦ Umývadlo na drevenej doske ¦ Oppsatt servant på treplate
+Meuble vasque suspendu ¦ Závesná skrinka s umývadlom ¦ Veggmontert servant
+WC à chasse haute ¦ WC s vysoko umiestnenou nádržkou ¦ Toalett med høy sisterne
+WC rehaussé ¦ Zvýšené WC ¦ Forhøyet toalett
+Miroir lumineux ¦ Podsvietené zrkadlo ¦ Lysspeil
+Panier à linge en osier ¦ Prútený kôš na bielizeň ¦ Skittentøykurv i vidjer
+Broc et cuvette en faïence ¦ Fajansový džbán s umývadlom ¦ Mugge og vaskefat i fajanse
+Tub en zinc ¦ Zinková vaňa ¦ Sinkbalje
+Échelle porte-serviettes ¦ Rebríkový vešiak na uteráky ¦ Håndklestige
+Tapis de bain ¦ Kúpeľňová predložka ¦ Baderomsmatte
+Panier à linge en tissu ¦ Látkový kôš na bielizeň ¦ Skittentøykurv i stoff
+Colonne de salle de bain ¦ Kúpeľňová vysoká skrinka ¦ Høyskap til bad
+Étagère de douche ¦ Sprchová polička ¦ Dusjhylle
+Vasque en pierre ¦ Kamenné umývadlo ¦ Steinservant
+Baignoire noire ¦ Čierna vaňa ¦ Svart badekar
+Paroi de douche en verre ¦ Sklená sprchová zástena ¦ Dusjvegg i glass
+WC avec abattant bois ¦ WC s dreveným sedadlom ¦ Toalett med tresete
+Meuble vasque en bois ¦ Drevená skrinka s umývadlom ¦ Servantinnredning i tre
+Lave-mains ¦ Malé umývadlo ¦ Liten håndvask
+Lave-linge hublot ¦ Práčka s predným plnením ¦ Frontmatet vaskemaskin
+Bac à laver ¦ Umývací drez ¦ Vaskekum
+Table à repasser ¦ Žehliaca doska ¦ Strykebrett
+Fil à linge ¦ Šnúra na bielizeň ¦ Klessnor
+Essoreuse à rouleaux ¦ Valcový žmýkač ¦ Valsevrider
+Machine à laver à manivelle ¦ Ručná práčka s kľukou ¦ Vaskemaskin med sveiv
+Balai et pelle ¦ Metla a lopatka ¦ Kost og feiebrett
+Nettoyeur vapeur ¦ Parný čistič ¦ Damprenser
+Vestiaire d’entrée ¦ Vešiak v predsieni ¦ Garderobe i entré
+Patère murale ¦ Nástenný vešiak ¦ Veggknagg
+Boîte à clés ¦ Skrinka na kľúče ¦ Nøkkelskap
+Console avec miroir ¦ Konzolový stolík so zrkadlom ¦ Konsollbord med speil
+Valet de nuit ¦ Nočný vešiak na oblek ¦ Stumtjener
+Fauteuil ergonomique ¦ Ergonomické kreslo ¦ Ergonomisk kontorstol
+Bureau d’angle ¦ Rohový písací stôl ¦ Hjørneskrivebord
+Petit bureau d’écolier ¦ Malý školský písací stôl ¦ Lite skolepult
+Ordinateur de bureau et écran ¦ Stolový počítač s monitorom ¦ Stasjonær PC med skjerm
+Deux écrans ¦ Dva monitory ¦ To skjermer
+Imprimante multifonction ¦ Multifunkčná tlačiareň ¦ Multifunksjonsskriver
+Destructeur de papier ¦ Skartovačka ¦ Makuleringsmaskin
+Armoire à classeurs ¦ Skriňa na šanóny ¦ Arkivskap
+Caisson à roulettes ¦ Pojazdný kontajner ¦ Skuffeseksjon på hjul
+Tableau en liège ¦ Korková nástenka ¦ Korktavle
+Téléphone de bureau ¦ Stolový telefón ¦ Bordtelefon
+Globe terrestre de bureau ¦ Stolový glóbus ¦ Bordglobus
+Globe terrestre sur pied ¦ Glóbus na stojane ¦ Globus på stativ
+Pupitre de lecture ¦ Stojan na čítanie ¦ Lesepult
+Lampe de banquier ¦ Bankárska lampa ¦ Bankierlampe
+Albums de famille ¦ Rodinné albumy ¦ Familiealbum
+Console de jeux ¦ Herná konzola ¦ Spillkonsoll
+Scanner de documents ¦ Skener dokumentov ¦ Dokumentskanner
+Carte de France ancienne ¦ Stará mapa Francúzska ¦ Gammelt Frankrike-kart
+Carte de Cassini encadrée ¦ Zarámovaná Cassiniho mapa ¦ Innrammet Cassini-kart
+Lutrin d’archives ¦ Archívny pult ¦ Arkivpult
+Loupe sur pied ¦ Lupa na stojane ¦ Lupe på stativ
+Lecteur de microfilms ¦ Čítačka mikrofilmov ¦ Mikrofilmleser
+Couffin en osier ¦ Prútený košík pre bábätko ¦ Vidjekurv til baby
+Berceau en fer ¦ Železná kolíska ¦ Vugge i jern
+Lit mezzanine ¦ Vyvýšená posteľ ¦ Hemsseng
+Poussette ¦ Kočík ¦ Barnevogn
+Parc pour bébé ¦ Detská ohrádka ¦ Lekegrind
+Cuisine pour enfant ¦ Detská kuchynka ¦ Lekekjøkken
+Ours en peluche géant ¦ Obrovský plyšový medveď ¦ Gigantisk teddybjørn
+Poupée en porcelaine ¦ Porcelánová bábika ¦ Porselensdukke
+Cubes de construction ¦ Stavebné kocky ¦ Byggeklosser
+Théâtre de marionnettes ¦ Bábkové divadlo ¦ Dukketeater
+Luge ¦ Sánky ¦ Kjelke
+Table de jeux de société ¦ Stôl na spoločenské hry ¦ Spillbord
+Petite table d’enfant ¦ Malý detský stolík ¦ Lite barnebord
+Chevalet de peinture ¦ Maliarsky stojan ¦ Staffeli
+Pupitre d’écolier double ¦ Dvojmiestna školská lavica ¦ Dobbel skolepult
+Tableau noir d’école ¦ Školská tabuľa ¦ Skoletavle
+Coiffeuse d’enfant ¦ Detský toaletný stolík ¦ Barnetoalettbord
+Marchande ¦ Detský obchod ¦ Lekebutikk
+Circuit de voitures ¦ Autodráha ¦ Bilbane
+Arche de Noé en bois ¦ Drevená Noemova archa ¦ Noahs ark i tre
+Toupie ¦ Vĺčik ¦ Snurrebass
+Tapis d’éveil ¦ Hracia deka ¦ Aktivitetsmatte
+Piscine à balles ¦ Bazén s loptičkami ¦ Ballbinge
+Tipi d’enfant ¦ Detské teepee ¦ Barnetipi
+Draisienne ¦ Odrážadlo ¦ Balansesykkel
+Voiture à pédales ¦ Šliapacie auto ¦ Tråbil
+Cheval sur roulettes ¦ Kôň na kolieskach ¦ Hest på hjul
+Bureau d’écolier réglable ¦ Nastaviteľný školský stôl ¦ Regulerbar skolepult
+Tabouret d’enfant ¦ Detská stolička ¦ Barnekrakk
+Suspension trois globes ¦ Závesné svietidlo s tromi guľami ¦ Taklampe med tre kupler
+Lampe Tiffany ¦ Tiffany lampa ¦ Tiffanylampe
+Lampe en opaline ¦ Opálová lampa ¦ Opalinlampe
+Lampe à poser en céramique ¦ Keramická stolová lampa ¦ Bordlampe i keramikk
+Lampadaire trépied en bois ¦ Drevená trojnožková stojacia lampa ¦ Trebeint gulvlampe i tre
+Lampadaire arc en marbre ¦ Oblúková stojacia lampa s mramorom ¦ Buegulvlampe med marmorfot
+Liseuse sur pied ¦ Stojacia lampa na čítanie ¦ Leselampe på fot
+Réglette néon ¦ Žiarivková lišta ¦ Lysrørarmatur
+Lanterne à bougie ¦ Sviečkový lampáš ¦ Lykt med stearinlys
+Lampe à pétrole en cuivre ¦ Medená petrolejová lampa ¦ Parafinlampe i kobber
+Lampe à huile romaine ¦ Rímska olejová lampa ¦ Romersk oljelampe
+Bougies sur plateau ¦ Sviečky na podnose ¦ Stearinlys på brett
+Chandelier à trois branches ¦ Trojramenný svietnik ¦ Tredelt lysestake
+Borne lumineuse ¦ Záhradné stĺpikové svietidlo ¦ Lyspullert
+Mur de cadres photos ¦ Stena s fotorámikmi ¦ Vegg med fotorammer
+Portrait d’ancêtre ¦ Portrét predka ¦ Portrett av en forfader
+Tableau de paysage ¦ Krajinomaľba ¦ Landskapsmaleri
+Marine ¦ Obraz mora ¦ Marinemaleri
+Cadre photo sur pied ¦ Stojaci fotorámik ¦ Fotoramme på fot
+Trophée de chasse ¦ Lovecká trofej ¦ Jakttrofé
+Maquette de bateau ¦ Model lode ¦ Skipsmodell
+Sculpture sur socle ¦ Socha na podstavci ¦ Skulptur på sokkel
+Buste en plâtre ¦ Sadrová busta ¦ Gipsbyste
+Statuette en bronze ¦ Bronzová soška ¦ Bronsestatuett
+Grand vase en terre ¦ Veľká hlinená váza ¦ Stor leirvase
+Bouquet de fleurs ¦ Kytica kvetov ¦ Blomsterbukett
+Horloge de gare ¦ Staničné hodiny ¦ Stasjonsur
+Coucou de la Forêt-Noire ¦ Schwarzwaldské kukučkové hodiny ¦ Gjøkur fra Schwarzwald
+Rideaux ¦ Závesy ¦ Gardiner
+Grand tapis persan ¦ Veľký perzský koberec ¦ Stort persisk teppe
+Tapis berbère à losanges ¦ Berberský koberec s kosoštvorcami ¦ Berberteppe med ruter
+Kilim ¦ Kilim ¦ Kilim
+Tapis rond en jute ¦ Okrúhly jutový koberec ¦ Rundt juteteppe
+Paravent japonais ¦ Japonský paraván ¦ Japansk skjermbrett
+Panier à journaux ¦ Stojan na noviny ¦ Avisholder
+Grand panier en osier ¦ Veľký prútený kôš ¦ Stor vidjekurv
+Garde-feu en laiton ¦ Mosadzná zástena pred krb ¦ Gnistskjerm i messing
+Terrarium ¦ Terárium ¦ Terrarium
+Diplôme encadré ¦ Zarámovaný diplom ¦ Innrammet diplom
+Photo de classe encadrée ¦ Zarámovaná triedna fotka ¦ Innrammet klassebilde
+Livret de famille sous verre ¦ Rodinná knižka pod sklom ¦ Familiebok under glass
+Canevas brodé ¦ Vyšívaná kanava ¦ Brodert stramei
+Tapisserie murale ¦ Nástenná tapiséria ¦ Veggteppe
+Médaillon de famille ¦ Rodinný medailón ¦ Familiemedaljong
+Trophée sportif ¦ Športová trofej ¦ Idrettstrofé
+Buste de Marianne ¦ Busta Marianne ¦ Byste av Marianne
+Vase de Gien ¦ Váza z Gienu ¦ Vase fra Gien
+Vase de Sèvres ¦ Sèvreská váza ¦ Sèvres-vase
+Potiche chinoise ¦ Čínska váza ¦ Kinesisk urne
+Vase en étain ¦ Cínová váza ¦ Tinnvase
+Bouquet de fleurs séchées ¦ Kytica sušených kvetov ¦ Bukett med tørkede blomster
+Sapin de Noël décoré ¦ Ozdobený vianočný stromček ¦ Pyntet juletre
+Couronne de porte ¦ Dverový veniec ¦ Dørkrans
+Photophores ¦ Svietniky na čajové sviečky ¦ Telysholdere
+Bateau en bouteille ¦ Loď vo fľaši ¦ Skip i flaske
+Maquette de locomotive ¦ Model lokomotívy ¦ Lokomotivmodell
+Collection de dés à coudre ¦ Zbierka náprstkov ¦ Samling av fingerbøl
+Vitrine de minéraux ¦ Vitrína s minerálmi ¦ Mineralmonter
+Collection de papillons ¦ Zbierka motýľov ¦ Sommerfuglsamling
+Boîte à musique ¦ Hracia skrinka ¦ Spilledåse
+Baromètre ¦ Barometer ¦ Barometer
+Thermomètre ancien ¦ Starý teplomer ¦ Gammelt termometer
+Voilages ¦ Záclony ¦ Tynne gardiner
+Rideaux de velours ¦ Zamatové závesy ¦ Fløyelsgardiner
+Store bateau ¦ Rímska roleta ¦ Liftgardin
+Tapis moderne ¦ Moderný koberec ¦ Moderne teppe
+Tapis en peau de mouton ¦ Koberec z ovčej kože ¦ Saueskinnsfell
+Poêle à granulés rouge ¦ Červené kachle na pelety ¦ Rød pelletsovn
+Poêle Godin ¦ Kachle Godin ¦ Godin-ovn
+Radiateur vertical design ¦ Dizajnový vertikálny radiátor ¦ Vertikal designradiator
+Chauffe-eau ¦ Ohrievač vody ¦ Varmtvannsbereder
+Téléviseur sur meuble ¦ Televízor na skrinke ¦ TV på benk
+Téléviseur au mur ¦ Televízor na stene ¦ Veggmontert TV
+Téléviseur à tube ¦ Televízor s katódovou obrazovkou ¦ Billedrør-TV
+Chaîne hi-fi ¦ Hi-fi veža ¦ Stereoanlegg
+Enceintes colonnes ¦ Stĺpové reproduktory ¦ Gulvhøyttalere
+Radiocassette ¦ Rádiomagnetofón ¦ Radiokassettspiller
+Magnétoscope ¦ Videorekordér ¦ Videospiller
+Ventilateur de plafond ¦ Stropný ventilátor ¦ Takvifte
+Ventilateur de table ¦ Stolový ventilátor ¦ Bordvifte
+Radiateur soufflant ¦ Teplovzdušný ventilátor ¦ Vifteovn
+Convecteur électrique ¦ Elektrický konvektor ¦ Elektrisk panelovn
+Poêle à bois moderne ¦ Moderné kachle na drevo ¦ Moderne vedovn
+Cuisinière à bois moderne ¦ Moderný sporák na drevo ¦ Moderne vedkomfyr
+Pompe à chaleur ¦ Tepelné čerpadlo ¦ Varmepumpe
+Chaudière au fioul ¦ Olejový kotol ¦ Oljefyr
+Chaudière à gaz murale ¦ Nástenný plynový kotol ¦ Veggmontert gasskjel
+Cuve à fioul ¦ Nádrž na vykurovací olej ¦ Oljetank
+Robot tondeuse ¦ Robotická kosačka ¦ Robotgressklipper
+Téléviseur portatif années 70 ¦ Prenosný televízor zo 70. rokov ¦ Bærbar TV fra 70-tallet
+Lecteur CD ¦ CD prehrávač ¦ CD-spiller
+Magnétophone à bandes ¦ Kotúčový magnetofón ¦ Spolebåndopptaker
+Enceinte connectée ¦ Inteligentný reproduktor ¦ Smarthøyttaler
+Piano droit noir ¦ Čierne pianino ¦ Svart piano
+Piano droit en acajou ¦ Mahagónové pianino ¦ Piano i mahogni
+Piano demi-queue ¦ Polokrídlo ¦ Halvflygel
+Piano à queue de concert ¦ Koncertné krídlo ¦ Konsertflygel
+Épinette ¦ Spinet ¦ Spinett
+Orgue de salon ¦ Salónne harmónium ¦ Stueorgel
+Clavier électronique ¦ Elektronické klávesy ¦ Elektronisk keyboard
+Guitare classique ¦ Klasická gitara ¦ Klassisk gitar
+Banjo ¦ Bendžo ¦ Banjo
+Mandoline ¦ Mandolína ¦ Mandolin
+Violon sur pupitre ¦ Husle na pulte ¦ Fiolin på notestativ
+Bandonéon ¦ Bandoneón ¦ Bandoneon
+Trompette sur pied ¦ Trúbka na stojane ¦ Trompet på stativ
+Saxophone sur pied ¦ Saxofón na stojane ¦ Saksofon på stativ
+Cor de chasse ¦ Lovecký roh ¦ Jakthorn
+Clarinette sur pied ¦ Klarinet na stojane ¦ Klarinett på stativ
+Pupitre de musique ¦ Notový pult ¦ Notestativ
+Gramophone à pavillon ¦ Gramofón s trúbou ¦ Grammofon med trakt
+Cornemuse (biniou) ¦ Gajdy (biniou) ¦ Sekkepipe (biniou)
+Timbales ¦ Tympany ¦ Pauker
+Xylophone ¦ Xylofón ¦ Xylofon
+Marimba ¦ Marimba ¦ Marimba
+Cithare ¦ Citara ¦ Siter
+Ukulélé ¦ Ukulele ¦ Ukulele
+Luth ¦ Lutna ¦ Lutt
+Flûte traversière sur support ¦ Priečna flauta na stojane ¦ Tverrfløyte på stativ
+Flûte à bec ¦ Zobcová flauta ¦ Blokkfløyte
+Trombone sur pied ¦ Trombón na stojane ¦ Trombone på stativ
+Hautbois sur support ¦ Hoboj na stojane ¦ Obo på stativ
+Harmonica et pupitre ¦ Ústna harmonika a pult ¦ Munnspill og stativ
+Meuble à partitions ¦ Skrinka na noty ¦ Noteskap
+Table de mixage ¦ Mixážny pult ¦ Miksebord
+Rayonnage de cave ¦ Pivničný regál ¦ Kjellerreol
+Cartons de déménagement ¦ Sťahovacie krabice ¦ Flytteesker
+Étagère d’archives familiales ¦ Polica s rodinným archívom ¦ Hylle med familiearkiv
+Coffret à bijoux ¦ Šperkovnica ¦ Smykkeskrin
+Portant à vêtements ¦ Stojan na oblečenie ¦ Klesstativ
+Dressing d’angle ¦ Rohový šatník ¦ Hjørnegarderobe
+Meuble à cases (cubes) ¦ Kockový regál ¦ Kubereol
+Étagère de cellier ¦ Polica v komore ¦ Bodhylle
+Boîtes de rangement en plastique ¦ Plastové úložné boxy ¦ Oppbevaringsbokser i plast
+Caisses en bois ¦ Drevené debny ¦ Trekasser
+Panier à pique-nique ¦ Piknikový košík ¦ Piknikkurv
+Boîte à couture ¦ Šijacia krabica ¦ Syskrin
+Housse à vêtements ¦ Obal na oblečenie ¦ Klestrekk
+Crucifix mural ¦ Nástenný kríž ¦ Krusifiks på veggen
+Crèche provençale et santons ¦ Provensalský betlehem so santons ¦ Provençalsk julekrybbe med santons
+Chapelet ¦ Ruženec ¦ Rosenkrans
+Coin du souvenir (photos et bougie) ¦ Kútik spomienok (fotky a sviečka) ¦ Minnekrok (bilder og lys)
+Boîte à lettres d’amour ¦ Krabica s ľúbostnými listami ¦ Eske med kjærlighetsbrev
+Vitrine de médailles ¦ Vitrína s medailami ¦ Medaljemonter
+Bouquet de mariée sous globe ¦ Svadobná kytica pod skleneným zvonom ¦ Brudebukett under glasskuppel
+Bénitier mural ¦ Nástenná kropenička ¦ Vievannskar på veggen
+Icône orthodoxe ¦ Pravoslávna ikona ¦ Ortodoks ikon
+Rameau de buis bénit ¦ Posvätená krušpánová ratolesť ¦ Velsignet buksbomkvist
+Statue de saint ¦ Socha svätca ¦ Helgenstatue
+Plaque de communion encadrée ¦ Zarámovaná pamiatka na prijímanie ¦ Innrammet minne om førstekommunion
+Livre de prières ancien ¦ Stará modlitebná knižka ¦ Gammel bønnebok
+Scie circulaire sur table ¦ Stolová kotúčová píla ¦ Bordsirkelsag
+Scie à onglets ¦ Pokosová píla ¦ Gjæringssag
+Forge et soufflet ¦ Vyhňa s mechom ¦ Smie med blåsebelg
+Établi de mécanicien ¦ Mechanický ponk ¦ Mekanikerbenk
+Établi d’horloger ¦ Hodinársky stôl ¦ Urmakerbenk
+Table de cordonnier ¦ Obuvnícky stôl ¦ Skomakerbord
+Table de coupe de tailleur ¦ Krajčírsky strihací stôl ¦ Skredderens tilskjæringsbord
+Paillasse de laboratoire ¦ Laboratórny stôl ¦ Laboratoriebenk
+Scie à ruban ¦ Pásová píla ¦ Båndsag
+Tour à métaux ¦ Sústruh na kov ¦ Metalldreiebenk
+Surjeteuse ¦ Overlock ¦ Overlockmaskin
+Métier à broder ¦ Vyšívací rám ¦ Broderiramme
+Petite citadine ¦ Malé mestské auto ¦ Liten bybil
+Voiture familiale ¦ Rodinné auto ¦ Familiebil
+Voiture ancienne (années 30) ¦ Historické auto (30. roky) ¦ Veteranbil (30-tallet)
+Deux-chevaux ¦ Citroën 2CV ¦ Citroën 2CV
+Coccinelle ¦ VW Chrobák ¦ VW Boble
+Fourgonnette ¦ Dodávka ¦ Varebil
+Mobylette ¦ Moped ¦ Moped
+Vélo de course ¦ Cestný bicykel ¦ Racersykkel
+Vélo hollandais ¦ Holandský bicykel ¦ Bestemorsykkel
+Vélo cargo ¦ Nákladný bicykel ¦ Lastesykkel
+Pneus empilés ¦ Stoh pneumatík ¦ Stablede dekk
+Échelle double ¦ Dvojitý rebrík ¦ Trappestige
+Second congélateur ¦ Druhá mraznička ¦ Ekstra fryser
+Voiture tout-terrain ¦ Terénne auto ¦ Terrengbil
+Voiture de sport ¦ Športové auto ¦ Sportsbil
+Voiture électrique ¦ Elektromobil ¦ Elbil
+Camping-car ¦ Obytný automobil ¦ Bobil
+Moto ancienne avec side-car ¦ Starý motocykel so sajdkárou ¦ Gammel motorsykkel med sidevogn
+Vélo ancien ¦ Starý bicykel ¦ Gammel sykkel
+VTT ¦ Horský bicykel ¦ Terrengsykkel
+Borne de recharge ¦ Nabíjacia stanica ¦ Ladestasjon
+Armoire à outils ¦ Skriňa na náradie ¦ Verktøyskap
+Chariot de pneus ¦ Vozík na pneumatiky ¦ Dekktralle
+Caisse à outils ¦ Debna na náradie ¦ Verktøykasse
+Chargeur de batterie ¦ Nabíjačka batérií ¦ Batterilader

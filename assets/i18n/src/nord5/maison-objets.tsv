@@ -1,0 +1,710 @@
+fr ¦ hr ¦ sl
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Stilski namještaj ¦ Stilno pohištvo
+🎨 Tous les styles ¦ 🎨 Svi stilovi ¦ 🎨 Vsi slogi
+Sans les meubles de style ¦ Bez stilskog namještaja ¦ Brez stilnega pohištva
+D’ailleurs ¦ Iz svijeta ¦ Od drugod
+Modernes ¦ Moderni ¦ Moderni
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Ovdje nema ničega u stilu „{s}”: odaberi „🎨 Svi stilovi”. ¦ Tu ni ničesar v slogu »{s}«: izberi »🎨 Vsi slogi«.
+Louis XIII ¦ Luj XIII. ¦ Ludvik XIII.
+Louis XIV ¦ Luj XIV. ¦ Ludvik XIV.
+Régence ¦ Regencija ¦ Régence
+Louis XV ¦ Luj XV. ¦ Ludvik XV.
+Louis XVI ¦ Luj XVI. ¦ Ludvik XVI.
+Directoire ¦ Direktorij ¦ Directoire
+Empire ¦ Empire ¦ Empire
+Restauration ¦ Restauracija ¦ Restavracija
+Charles X ¦ Karlo X. ¦ Karel X.
+Louis-Philippe ¦ Luj Filip ¦ Ludvik Filip
+Napoléon III ¦ Napoleon III. ¦ Napoleon III.
+Art nouveau ¦ Secesija ¦ Secesija
+Art déco ¦ Art déco ¦ Art deco
+Henri II ¦ Henrik II. ¦ Henrik II.
+Renaissance ¦ Renesansa ¦ Renesansa
+Biedermeier ¦ Bidermajer ¦ Bidermajer
+victorien ¦ viktorijanski ¦ viktorijanski
+Chippendale ¦ Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne ¦ Queen Anne
+gustavien ¦ gustavijanski ¦ gustavijanski
+shaker ¦ shaker ¦ shaker
+colonial ¦ kolonijalni ¦ kolonialni
+marocain ¦ marokanski ¦ maroški
+japonais ¦ japanski ¦ japonski
+chinois laqué ¦ kineski lakirani ¦ kitajski lakiran
+Thonet ¦ Thonet ¦ Thonet
+vénitien ¦ venecijanski ¦ beneški
+normand ¦ normandijski ¦ normandijski
+breton ¦ bretonski ¦ bretonski
+basque ¦ baskijski ¦ baskovski
+alsacien ¦ alzaški ¦ alzaški
+savoyard ¦ savojski ¦ savojski
+auvergnat ¦ overnjski ¦ overnjski
+bressan ¦ bresanski ¦ bresanski
+lorrain ¦ lorenski ¦ lorenski
+landais ¦ landski ¦ landski
+vendéen ¦ vendejski ¦ vandejski
+limousin ¦ limuzenski ¦ limuzinski
+bourguignon ¦ burgundski ¦ burgundski
+catalan ¦ katalonski ¦ katalonski
+corse ¦ korzikanski ¦ korziški
+champenois ¦ šampanjski ¦ šampanjski
+flamand ¦ flamanski ¦ flamski
+franc-comtois ¦ franškontejski ¦ franškontejski
+béarnais ¦ bearnski ¦ bearnski
+dauphinois ¦ dofinejski ¦ dofinejski
+picard ¦ pikardijski ¦ pikardijski
+gascon ¦ gaskonjski ¦ gaskonjski
+années 1930 ¦ 1930-ih ¦ 1930-ih
+années 1950 ¦ 1950-ih ¦ 1950-ih
+années 1960 ¦ 1960-ih ¦ 1960-ih
+années 1970 ¦ 1970-ih ¦ 1970-ih
+années 1980 ¦ 1980-ih ¦ 1980-ih
+scandinave ¦ skandinavski ¦ skandinavski
+industriel ¦ industrijski ¦ industrijski
+contemporain ¦ suvremeni ¦ sodobni
+laqué blanc ¦ bijelo lakirani ¦ belo lakiran
+en pin ¦ od bora ¦ iz borovine
+en chêne clair ¦ od svijetlog hrasta ¦ iz svetle hrastovine
+en merisier ¦ od trešnje ¦ iz češnjevine
+en noyer ¦ od oraha ¦ iz orehovine
+en acajou ¦ od mahagonija ¦ iz mahagonija
+en rotin ¦ od ratana ¦ iz ratana
+en bambou ¦ od bambusa ¦ iz bambusa
+en métal ¦ metalni ¦ kovinski
+patiné (shabby chic) ¦ patinirani (shabby chic) ¦ patiniran (shabby chic)
+bohème ¦ boho ¦ boho
+en teck ¦ od tikovine ¦ iz tikovine
+Chiffonnier ¦ Visoka komoda s ladicama ¦ Visoka predalčnica
+Table de salle à manger ¦ Blagovaonski stol ¦ Jedilna miza
+Pendule ¦ Stolni sat ¦ Kaminska ura
+Bonnetière ¦ Uski ormar ¦ Ozka omara
+Desserte ¦ Servirni stolić ¦ Servirna mizica
+Buffet de cuisine ¦ Kuhinjska kredenca ¦ Kuhinjska kredenca
+Table de toilette ¦ Toaletni stolić ¦ Toaletna mizica
+Horloge de parquet ¦ Podni sat s njihalom ¦ Stoječa ura
+Pommier ¦ Jabuka ¦ Jablana
+Poirier ¦ Kruška ¦ Hruška
+Cerisier ¦ Trešnja ¦ Češnja
+Prunier ¦ Šljiva ¦ Sliva
+Pêcher ¦ Breskva ¦ Breskev
+Abricotier ¦ Marelica ¦ Marelica
+Cognassier ¦ Dunja ¦ Kutina
+Châtaignier ¦ Pitomi kesten ¦ Pravi kostanj
+Figuier ¦ Smokva ¦ Figa
+Olivier ¦ Maslina ¦ Oljka
+Citronnier en bac ¦ Limun u posudi ¦ Limonovec v posodi
+Oranger en bac ¦ Naranča u posudi ¦ Pomarančevec v posodi
+Noisetier ¦ Lijeska ¦ Leska
+Mûrier ¦ Dud ¦ Murva
+Tilleul ¦ Lipa ¦ Lipa
+Platane ¦ Platana ¦ Platana
+Marronnier ¦ Divlji kesten ¦ Divji kostanj
+Hêtre ¦ Bukva ¦ Bukev
+Frêne ¦ Jasen ¦ Jesen
+Saule pleureur ¦ Žalosna vrba ¦ Žalujka
+Peuplier ¦ Topola ¦ Topol
+Érable ¦ Javor ¦ Javor
+Magnolia ¦ Magnolija ¦ Magnolija
+Lilas ¦ Jorgovan ¦ Španski bezeg
+Cerisier du Japon ¦ Japanska trešnja ¦ Japonska češnja
+Orme ¦ Brijest ¦ Brest
+Acacia ¦ Bagrem ¦ Akacija
+Charme ¦ Grab ¦ Gaber
+Sureau ¦ Bazga ¦ Bezeg
+Tilleul de la Liberté ¦ Lipa slobode ¦ Lipa svobode
+Sapin ¦ Jela ¦ Jelka
+Épicéa ¦ Smreka ¦ Smreka
+Pin parasol ¦ Pinija ¦ Pinija
+Pin sylvestre ¦ Bijeli bor ¦ Rdeči bor
+Cyprès ¦ Čempres ¦ Cipresa
+If ¦ Tisa ¦ Tisa
+Cèdre ¦ Cedar ¦ Cedra
+Thuya ¦ Tuja ¦ Klek
+Rosier ¦ Ruža ¦ Vrtnica
+Rosier grimpant ¦ Ruža penjačica ¦ Plezalna vrtnica
+Hortensia ¦ Hortenzija ¦ Hortenzija
+Lavande ¦ Lavanda ¦ Sivka
+Romarin ¦ Ružmarin ¦ Rožmarin
+Thym ¦ Majčina dušica ¦ Timijan
+Buis taillé en boule ¦ Šimšir oblikovan u kuglu ¦ Pušpan, obrezan v kroglo
+Forsythia ¦ Forzicija ¦ Forzicija
+Laurier-sauce ¦ Lovor ¦ Lovor
+Laurier-rose ¦ Oleandar ¦ Oleander
+Buddleia ¦ Budleja ¦ Budleja
+Camélia ¦ Kamelija ¦ Kamelija
+Rhododendron ¦ Rododendron ¦ Rododendron
+Azalée ¦ Azaleja ¦ Azaleja
+Houx ¦ Božikovina ¦ Bodika
+Cassissier ¦ Crni ribiz ¦ Črni ribez
+Groseillier ¦ Crveni ribiz ¦ Rdeči ribez
+Framboisier ¦ Malina ¦ Malinjak
+Pied de vigne ¦ Vinova loza ¦ Vinska trta
+Bambou ¦ Bambus ¦ Bambus
+Bananier ¦ Banana ¦ Bananovec
+Palmier ¦ Palma ¦ Palma
+Herbes de la pampa ¦ Pampas trava ¦ Pampaška trava
+Graminées ¦ Ukrasne trave ¦ Okrasne trave
+Fuchsia ¦ Fuksija ¦ Fuksija
+Glycine ¦ Glicinija ¦ Glicinija
+Lierre ¦ Bršljan ¦ Bršljan
+Fougère ¦ Paprat ¦ Praprot
+Massif de géraniums ¦ Gredica pelargonija ¦ Greda pelargonij
+Massif de tournesols ¦ Gredica suncokreta ¦ Greda sončnic
+Massif de tulipes ¦ Gredica tulipana ¦ Greda tulipanov
+Massif de jonquilles ¦ Gredica narcisa ¦ Greda narcis
+Massif d’iris ¦ Gredica perunika ¦ Greda perunik
+Massif de dahlias ¦ Gredica dalija ¦ Greda dalij
+Massif de soucis ¦ Gredica nevena ¦ Greda ognjičev
+Massif de pivoines ¦ Gredica božura ¦ Greda potonik
+Massif de marguerites ¦ Gredica ivančica ¦ Greda marjetic
+Carré de fraisiers ¦ Gredica jagoda ¦ Greda jagod
+Rang de pommes de terre ¦ Red krumpira ¦ Vrsta krompirja
+Rang de salades ¦ Red salate ¦ Vrsta solate
+Rang de tomates ¦ Red rajčica ¦ Vrsta paradižnika
+Rang de carottes ¦ Red mrkve ¦ Vrsta korenja
+Rang de poireaux ¦ Red poriluka ¦ Vrsta pora
+Rang de haricots à rames ¦ Red graha penjača ¦ Vrsta visokega fižola
+Rang de choux ¦ Red kupusa ¦ Vrsta zelja
+Planche de courges ¦ Gredica tikava ¦ Greda buč
+Planche d’oignons ¦ Gredica luka ¦ Greda čebule
+Carré d’aromatiques ¦ Gredica začinskog bilja ¦ Greda zelišč
+Pelouse ¦ Travnjak ¦ Trata
+Prairie fleurie ¦ Cvjetna livada ¦ Cvetoči travnik
+Pot de géraniums ¦ Lonac s pelargonijama ¦ Lonec pelargonij
+Jardinière de fleurs ¦ Žardinjera s cvijećem ¦ Korito s cvetjem
+Agapanthe en pot ¦ Afrički ljiljan u loncu ¦ Agapantus v loncu
+Buis en pot ¦ Šimšir u loncu ¦ Pušpan v loncu
+Pot de basilic ¦ Lonac bosiljka ¦ Lonček bazilike
+Bac à fleurs en zinc ¦ Cinčana posuda za cvijeće ¦ Pocinkano korito za rože
+Pot en terre d’Anduze ¦ Glineni lonac iz Anduzea ¦ Glinen lonec iz Anduza
+Grande jarre provençale ¦ Veliki provansalski ćup ¦ Velik provansalski vrč
+Yucca ¦ Juka ¦ Juka
+Plante grasse (aloe) ¦ Sukulent (aloja) ¦ Sukulent (aloja)
+Cactus colonne ¦ Stupasti kaktus ¦ Stebrasti kaktus
+Kentia ¦ Kencija ¦ Kencija
+Sansevieria ¦ Sansevijerija ¦ Taščin jezik
+Pothos suspendu ¦ Viseći potos ¦ Viseči potos
+Oiseau de paradis (strelitzia) ¦ Rajska ptica (strelicija) ¦ Rajska ptica (strelicija)
+Bonsaï sur sellette ¦ Bonsai na stalku ¦ Bonsaj na stojalu
+Poinsettia ¦ Božićna zvijezda ¦ Božična zvezda
+Plante aromatique sur rebord ¦ Začinska biljka na prozoru ¦ Zelišče na okenski polici
+Palmier d’intérieur ¦ Sobna palma ¦ Sobna palma
+Banc de jardin en bois et fonte ¦ Vrtna klupa od drva i lijevanog željeza ¦ Vrtna klop iz lesa in litega železa
+Banc de jardin en bois ¦ Drvena vrtna klupa ¦ Lesena vrtna klop
+Banc en pierre sculpté ¦ Klesana kamena klupa ¦ Klesana kamnita klop
+Table de bistrot en fer ¦ Željezni bistro stol ¦ Železna bistrojska miza
+Table de jardin ronde en résine ¦ Okrugli vrtni stol od smole ¦ Okrogla vrtna miza iz smole
+Table de jardin en teck ¦ Vrtni stol od tikovine ¦ Vrtna miza iz tikovine
+Table de pique-nique ¦ Stol za piknik ¦ Piknik miza
+Chaise longue ¦ Ležaljka ¦ Ležalnik
+Transat de plage rayé ¦ Prugasta ležaljka za plažu ¦ Črtast ležalnik za plažo
+Bain de soleil en résine ¦ Ležaljka za sunčanje od smole ¦ Ležalnik za sončenje iz smole
+Portique de jeux ¦ Dječje igralište s ljuljačkama ¦ Igralo z gugalnicami
+Grand toboggan ¦ Veliki tobogan ¦ Veliki tobogan
+Bac à sable couvert ¦ Pokriveni pješčanik ¦ Pokrit peskovnik
+Petit trampoline ¦ Mali trampolin ¦ Majhen trampolin
+Hamac sur pied ¦ Viseća mreža sa stalkom ¦ Viseča mreža na stojalu
+Tonnelle de jardin ¦ Vrtna sjenica ¦ Vrtna senčnica
+Pergola en bois ¦ Drvena pergola ¦ Lesena pergola
+Pergola bioclimatique ¦ Bioklimatska pergola ¦ Bioklimatska pergola
+Parasol déporté ¦ Konzolni suncobran ¦ Konzolni senčnik
+Parasol rouge de terrasse ¦ Crveni suncobran za terasu ¦ Rdeč senčnik za teraso
+Fontaine en pierre ¦ Kamena fontana ¦ Kamnit vodnjak
+Fontaine murale ¦ Zidna fontana ¦ Stenski vodnjak
+Bassin rond ¦ Okrugli ribnjak ¦ Okrogel ribnik
+Bassin aux nénuphars ¦ Ribnjak s lopočima ¦ Ribnik z lokvanji
+Piscine rectangulaire ¦ Pravokutni bazen ¦ Pravokoten bazen
+Petite piscine ¦ Mali bazen ¦ Majhen bazen
+Piscine hors-sol ronde ¦ Okrugli nadzemni bazen ¦ Okrogel nadzemni bazen
+Spa d’extérieur ¦ Vanjski spa ¦ Zunanji masažni bazen
+Barbecue au charbon ¦ Roštilj na drveni ugljen ¦ Žar na oglje
+Plancha sur chariot ¦ Plancha na kolicima ¦ Plancha na vozičku
+Four à pizza ¦ Krušna peć za pizzu ¦ Krušna peč za pico
+Brasero en acier ¦ Čelični žar ¦ Jekleno kurišče
+Composteur en bois ¦ Drveni komposter ¦ Lesen kompostnik
+Potager surélevé ¦ Povišena gredica ¦ Dvignjena greda
+Serre de jardin ¦ Vrtni staklenik ¦ Vrtni rastlinjak
+Petite serre adossée ¦ Mali zidni staklenik ¦ Majhen stenski rastlinjak
+Mangeoire à oiseaux ¦ Hranilica za ptice ¦ Krmilnica za ptice
+Cadran solaire sur colonne ¦ Sunčani sat na stupu ¦ Sončna ura na stebru
+Enrouleur de tuyau ¦ Namotač crijeva ¦ Navijalec za cev
+Lanterne de jardin ¦ Vrtna svjetiljka ¦ Vrtna svetilka
+Mât de drapeau ¦ Jarbol za zastavu ¦ Drog za zastavo
+Clôture en bois ¦ Drvena ograda ¦ Lesena ograja
+Grillage rigide ¦ Kruta žičana ograda ¦ Panelna žična ograja
+Barrière blanche ¦ Bijela ograda ¦ Bela ograja
+Haie de lauriers ¦ Živica od lovorvišnje ¦ Živa meja iz lovorikovca
+Haie de charmille ¦ Živica od graba ¦ Živa meja iz gabra
+Muret en pierres sèches ¦ Suhozid ¦ Suhozid
+Portail en fer forgé ¦ Kovana vrata ¦ Kovana vrata
+Portail en bois ¦ Drvena vrata ¦ Lesena vrata
+Portillon ¦ Vratašca ¦ Vrtna vratca
+Abri à bûches ¦ Spremište za drva ¦ Drvarnica
+Éolienne de pompage ¦ Vjetrenjača za crpljenje vode ¦ Vetrna črpalka
+Puits couvert ¦ Natkriveni bunar ¦ Pokrit vodnjak
+Abreuvoir en pierre ¦ Kameno pojilo ¦ Kamnito napajališče
+Abri de jardin en bois ¦ Drvena vrtna kućica ¦ Lesena vrtna uta
+Abri de jardin en métal ¦ Metalna vrtna kućica ¦ Kovinska vrtna uta
+Cabane dans les arbres ¦ Kućica na drvetu ¦ Hišica na drevesu
+Carport ¦ Nadstrešnica za automobil ¦ Nadstrešek za avto
+Kiosque de jardin ¦ Vrtni paviljon ¦ Vrtni paviljon
+Cabane de jardin pour enfants ¦ Dječja vrtna kućica ¦ Otroška vrtna hišica
+Allée en gravier ¦ Šljunčana staza ¦ Prodnata pot
+Terrasse dallée ¦ Popločana terasa ¦ Tlakovana terasa
+Terrasse en bois ¦ Drvena terasa ¦ Lesena terasa
+Bac à compost ouvert ¦ Otvoreni komposter ¦ Odprt kompostnik
+Jardin japonais ¦ Japanski vrt ¦ Japonski vrt
+Rocaille ¦ Kamenjar ¦ Skalnjak
+Vasque de jardin ¦ Vrtna kamena posuda ¦ Vrtna kamnita posoda
+Statue de jardin ¦ Vrtni kip ¦ Vrtni kip
+Lion en pierre ¦ Kameni lav ¦ Kamnit lev
+Boule décorative ¦ Ukrasna kugla ¦ Okrasna krogla
+Nichoir à mésanges ¦ Kućica za sjenice ¦ Gnezdilnica za sinice
+Hôtel à insectes ¦ Hotel za kukce ¦ Hotel za žuželke
+Boîte à livres ¦ Kućica za knjige ¦ Knjigobežnica
+Ruche kenyane ¦ Kenijska košnica ¦ Kenijski panj
+Pompe d’arrosage ¦ Ručna pumpa za zalijevanje ¦ Ročna črpalka za zalivanje
+Arroseur oscillant ¦ Oscilirajuća prskalica ¦ Nihajni razpršilec
+Arrosoir en zinc ¦ Cinčana kanta za zalijevanje ¦ Pocinkana zalivalka
+Tondeuse hélicoïdale ¦ Ručna kosilica ¦ Ročna kosilnica
+Motoculteur ¦ Motokultivator ¦ Motokultivator
+Débroussailleuse ¦ Trimer ¦ Motorna kosa
+Souffleur à feuilles ¦ Puhalica za lišće ¦ Puhalnik za listje
+Réverbère ancien ¦ Stara ulična svjetiljka ¦ Stara ulična svetilka
+Enseigne de commerce ¦ Trgovački natpis ¦ Trgovski napis
+Vache normande ¦ Normandijska krava ¦ Normandijska krava
+Vache limousine ¦ Limuzinska krava ¦ Limuzinska krava
+Vache charolaise ¦ Šarolejska krava ¦ Šarolejska krava
+Vache bretonne pie noir ¦ Crno-bijela bretonska krava ¦ Črno-bela bretonska krava
+Vache montbéliarde ¦ Montbéliard krava ¦ Krava pasme montbéliarde
+Veau ¦ Tele ¦ Tele
+Bœuf de trait ¦ Radni vol ¦ Delovni vol
+Cheval de trait (percheron) ¦ Teški konj (perkeron) ¦ Težki konj (peršeron)
+Cheval de trait breton ¦ Bretonski teški konj ¦ Bretonski težki konj
+Cheval de selle ¦ Jahaći konj ¦ Jahalni konj
+Poney ¦ Poni ¦ Poni
+Mulet ¦ Mazga ¦ Mula
+Poulain ¦ Ždrijebe ¦ Žrebe
+Brebis ¦ Ovca ¦ Ovca
+Agneau ¦ Janje ¦ Jagnje
+Bélier ¦ Ovan ¦ Oven
+Chevreau ¦ Jare ¦ Kozliček
+Truie ¦ Krmača ¦ Svinja
+Porcelet ¦ Prase ¦ Pujsek
+Coq ¦ Pijetao ¦ Petelin
+Poule blanche ¦ Bijela kokoš ¦ Bela kokoš
+Poussin ¦ Pile ¦ Piščanec
+Canard ¦ Patka ¦ Raca
+Dindon ¦ Puran ¦ Puran
+Pintade ¦ Biserka ¦ Pegatka
+Pigeon ¦ Golub ¦ Golob
+Lapin ¦ Kunić ¦ Kunec
+Chien de berger ¦ Ovčarski pas ¦ Ovčarski pes
+Grand chien ¦ Veliki pas ¦ Velik pes
+Petit chien ¦ Mali pas ¦ Majhen pes
+Chat roux ¦ Riđa mačka ¦ Rdeča mačka
+Chat noir ¦ Crna mačka ¦ Črna mačka
+Chat tigré ¦ Prugasta mačka ¦ Tigrasta mačka
+Chat endormi en boule ¦ Mačka spava sklupčana ¦ Mačka, zvita v klobčič
+Lama ¦ Lama ¦ Lama
+Cerf ¦ Jelen ¦ Jelen
+Sanglier ¦ Divlja svinja ¦ Divji prašič
+Renard ¦ Lisica ¦ Lisica
+Tortue ¦ Kornjača ¦ Želva
+Héron ¦ Čaplja ¦ Čaplja
+Cygne ¦ Labud ¦ Labod
+Cage à oiseaux en osier ¦ Pletena krletka za ptice ¦ Pletena ptičja kletka
+Cage à canaris ¦ Krletka za kanarince ¦ Kletka za kanarčke
+Poulailler en bois ¦ Drveni kokošinjac ¦ Lesen kokošnjak
+Niche en bois ¦ Drvena pseća kućica ¦ Lesena pasja uta
+Abri pour moutons ¦ Zaklon za ovce ¦ Zavetje za ovce
+Box à cheval ¦ Konjski boks ¦ Konjski boks
+Ruche Dadant ¦ Košnica Dadant ¦ Panj Dadant
+Ruche Langstroth ¦ Košnica Langstroth ¦ Panj Langstroth
+Ruche en paille tressée ¦ Pletena slamnata košnica ¦ Pleten slamnat panj
+Stalle de vache ¦ Kravlje stajsko mjesto ¦ Kravje stojišče
+Box de veau ¦ Boks za tele ¦ Boks za tele
+Mangeoire à foin ¦ Jasle za sijeno ¦ Jasli za seno
+Tonneaux de cidre ¦ Bačve jabukovače ¦ Sodi jabolčnika
+Cuve à lait ¦ Posuda za mlijeko ¦ Posoda za mleko
+Barrique de vin ¦ Vinska bačva ¦ Vinski sod
+Brabant ¦ Plug obrtač ¦ Obračalni plug
+Herse en bois ¦ Drvena drljača ¦ Lesena brana
+Charrette à foin ¦ Kola za sijeno ¦ Voz za seno
+Char à bancs ¦ Kola s klupama ¦ Voz s klopmi
+Chariot à ridelles ¦ Kola s ljestvama ¦ Lojtrski voz
+Tracteur rouge des années 1950 ¦ Crveni traktor iz 1950-ih ¦ Rdeč traktor iz 1950-ih
+Tracteur vert ¦ Zeleni traktor ¦ Zelen traktor
+Petit tracteur gris (Ferguson) ¦ Mali sivi traktor (Ferguson) ¦ Majhen siv traktor (Ferguson)
+Faneuse ¦ Okretač sijena ¦ Obračalnik sena
+Moissonneuse-lieuse ¦ Žetelica-vezačica ¦ Žetvenik vezalnik
+Batteuse ¦ Vršalica ¦ Mlatilnica
+Andaineur ¦ Sakupljač sijena ¦ Zgrabljalnik
+Alambic de bouilleur de cru ¦ Kućni kotao za rakiju ¦ Domači kotel za žganje
+Seau à traire ¦ Kabao za mužnju ¦ Vedro za molžo
+Chèvre angora ¦ Angorska koza ¦ Angorska koza
+Cochon noir gascon ¦ Crna gaskonjska svinja ¦ Črni gaskonjski prašič
+Vache salers ¦ Krava salers ¦ Krava pasme salers
+Vache aubrac ¦ Krava aubrac ¦ Krava pasme aubrac
+Vache jersiaise ¦ Jerseyska krava ¦ Jerseyjska krava
+Mouton noir ¦ Crna ovca ¦ Črna ovca
+Mouton mérinos ¦ Merino ovca ¦ Merino ovca
+Poule noire ¦ Crna kokoš ¦ Črna kokoš
+Poule rousse ¦ Smeđa kokoš ¦ Rjava kokoš
+Poule naine ¦ Patuljasta kokoš ¦ Pritlikava kokoš
+Paon blanc ¦ Bijeli paun ¦ Bel pav
+Paon ¦ Paun ¦ Pav
+Lapin blanc ¦ Bijeli kunić ¦ Bel kunec
+Cochon d’Inde ¦ Zamorac ¦ Morski prašiček
+Hamster ¦ Hrčak ¦ Hrček
+Perroquet ¦ Papiga ¦ Papiga
+Canari ¦ Kanarinac ¦ Kanarček
+Cheval blanc ¦ Bijeli konj ¦ Bel konj
+Cheval noir ¦ Crni konj ¦ Črn konj
+Chien terre-neuve ¦ Pas newfoundland ¦ Novofundlandec
+Chien labrador ¦ Pas labrador ¦ Labradorec
+Chien beauceron ¦ Pas beauceron ¦ Beauceron
+Chien teckel ¦ Pas jazavčar ¦ Jazbečar
+Volière ¦ Volijera ¦ Ptičnica
+Cage à lapin d’intérieur ¦ Kavez za kunića u kući ¦ Notranja kletka za kunca
+Panier pour chien ¦ Košara za psa ¦ Pasja košara
+Corbeille pour chat ¦ Košara za mačku ¦ Mačja košara
+Arbre à chat ¦ Penjalica za mačke ¦ Mačje drevo
+Gamelles ¦ Zdjelice za hranu ¦ Skledice za hrano
+Abreuvoir automatique ¦ Automatska pojilica ¦ Samodejno napajališče
+Tonneau de pluie en chêne ¦ Hrastova bačva za kišnicu ¦ Hrastov sod za deževnico
+Cuve à vendange ¦ Kaca za berbu ¦ Kad za trgatev
+Pot à lait en fer-blanc ¦ Limena kanta za mlijeko ¦ Pločevinast vrč za mleko
+Charrette à bras ¦ Ručna kolica ¦ Ročni voziček
+Diligence ¦ Poštanska kočija ¦ Poštna kočija
+Roulotte ¦ Cirkuska kola ¦ Cirkuški voz
+Râteau-faneur à cheval ¦ Konjske grablje ¦ Konjske grablje
+Botteleuse ¦ Preša za bale ¦ Stiskalnica za bale
+Semoir ¦ Sijačica ¦ Sejalnica
+Pulvérisateur ¦ Prskalica ¦ Škropilnica
+Bouilloire électrique ¦ Električno kuhalo za vodu ¦ Električni grelnik vode
+Machine à expresso ¦ Aparat za espresso ¦ Aparat za espresso
+Machine à café à levier ¦ Aparat za kavu s polugom ¦ Kavni aparat z ročico
+Cafetière à dosettes ¦ Aparat za kavu na kapsule ¦ Kavni aparat na kapsule
+Presse-agrumes ¦ Sokovnik za citruse ¦ Ožemalnik citrusov
+Four à micro-ondes encastrable ¦ Ugradbena mikrovalna pećnica ¦ Vgradna mikrovalovna pečica
+Corbeille de fruits ¦ Zdjela s voćem ¦ Košara s sadjem
+Corbeille à pain sur pied ¦ Košarica za kruh na nožici ¦ Košarica za kruh na nogi
+Étagère à épices ¦ Polica za začine ¦ Polica za začimbe
+Desserte de cuisine en bois ¦ Drvena kuhinjska kolica ¦ Lesen kuhinjski voziček
+Bar de cuisine ¦ Kuhinjski šank ¦ Kuhinjski pult
+Plaque vitrocéramique ¦ Staklokeramička ploča ¦ Steklokeramična plošča
+Grande plaque à induction ¦ Velika indukcijska ploča ¦ Velika indukcijska plošča
+Table de cuisson au gaz (5 feux) ¦ Plinska ploča (5 plamenika) ¦ Plinska kuhalna plošča (5 gorilnikov)
+Hotte en inox ¦ Napa od nehrđajućeg čelika ¦ Napa iz nerjavnega jekla
+Lave-vaisselle compact ¦ Kompaktna perilica posuđa ¦ Kompaktni pomivalni stroj
+Réfrigérateur rétro vert d’eau ¦ Retro hladnjak vodenozelene boje ¦ Retro hladilnik vodno zelene barve
+Réfrigérateur rétro orange ¦ Narančasti retro hladnjak ¦ Oranžen retro hladilnik
+Évier à deux bacs en céramique ¦ Keramički sudoper s dva korita ¦ Keramično dvojno pomivalno korito
+Évier timbre d’office ¦ Duboki keramički sudoper ¦ Globoko keramično korito
+Évier en pierre à potager ¦ Kameni sudoper ¦ Kamnito korito
+Cuisinière à charbon ¦ Štednjak na ugljen ¦ Štedilnik na premog
+Buffet de cuisine en formica ¦ Kuhinjska kredenca od formike ¦ Kuhinjska kredenca iz formike
+Buffet de cuisine bleu ciel ¦ Svjetloplava kuhinjska kredenca ¦ Svetlo modra kuhinjska kredenca
+Table en formica ¦ Stol od formike ¦ Miza iz formike
+Chaise en formica ¦ Stolica od formike ¦ Stol iz formike
+Tabouret de cuisine ¦ Kuhinjski tabure ¦ Kuhinjski stolček
+Cruche en grès ¦ Vrč od kamenine ¦ Vrč iz kamenine
+Fontaine à eau en grès ¦ Kamenina posuda za vodu ¦ Posoda za vodo iz kamenine
+Balance de cuisine Roberval ¦ Kuhinjska vaga Roberval ¦ Kuhinjska tehtnica Roberval
+Batterie de casseroles en cuivre ¦ Garnitura bakrenih lonaca ¦ Garnitura bakrenih loncev
+Égouttoir à vaisselle ¦ Cjedilo za posuđe ¦ Odcejalnik za posodo
+Poubelles de tri ¦ Kante za razvrstavanje otpada ¦ Koši za ločevanje odpadkov
+Planche à découper ¦ Daska za rezanje ¦ Deska za rezanje
+Bassine à confiture en cuivre ¦ Bakreni kotao za pekmez ¦ Bakren kotel za marmelado
+Pot-au-feu en fonte ¦ Lijevani lonac za kuhanje ¦ Litoželezni lonec
+Service à vaisselle ¦ Servis za jelo ¦ Jedilni servis
+Soupière en faïence ¦ Fajansna zdjela za juhu ¦ Fajansna jušnica
+Panier de légumes ¦ Košara s povrćem ¦ Košara z zelenjavo
+Bocaux de conserves ¦ Staklenke zimnice ¦ Kozarci ozimnice
+Stérilisateur à bocaux ¦ Sterilizator za staklenke ¦ Sterilizator za kozarce
+Moulin à légumes ¦ Mlin za povrće ¦ Pasirka za zelenjavo
+Crêpière ¦ Aparat za palačinke ¦ Aparat za palačinke
+Appareil à fondue ¦ Set za fondue ¦ Komplet za fondi
+Extracteur de jus ¦ Sokovnik ¦ Sokovnik
+Cafetière italienne ¦ Moka kuhalo za kavu ¦ Moka kuhalnik
+Samovar ¦ Samovar ¦ Samovar
+Étagère à confitures ¦ Polica za pekmeze ¦ Polica za marmelade
+Chariot de cuisine à roulettes ¦ Kuhinjska kolica na kotačima ¦ Kuhinjski voziček na kolesih
+Garde-manger grillagé ¦ Smočnica s mrežicom ¦ Shramba z mrežo
+Coffre à bois de cuisine ¦ Kuhinjski sanduk za drva ¦ Kuhinjski zaboj za drva
+Baignoire en fonte sur pieds de lion ¦ Lijevana kada na lavljim nogama ¦ Litoželezna kad na levjih tacah
+Baignoire îlot moderne ¦ Moderna samostojeća kada ¦ Moderna samostoječa kad
+Meuble double vasque ¦ Ormarić s dvostrukim umivaonikom ¦ Omarica z dvojnim umivalnikom
+Vasque à poser sur plan bois ¦ Nadgradni umivaonik na drvenoj ploči ¦ Nadpultni umivalnik na leseni plošči
+Meuble vasque suspendu ¦ Viseći ormarić s umivaonikom ¦ Viseča omarica z umivalnikom
+WC à chasse haute ¦ WC s visokim vodokotlićem ¦ WC z visokim kotličkom
+WC rehaussé ¦ Povišeni WC ¦ Povišan WC
+Miroir lumineux ¦ Osvijetljeno ogledalo ¦ Osvetljeno ogledalo
+Panier à linge en osier ¦ Pletena košara za rublje ¦ Pletena košara za perilo
+Broc et cuvette en faïence ¦ Fajansni vrč i lavor ¦ Fajansni vrč in umivalnik
+Tub en zinc ¦ Cinčana kada ¦ Pocinkana kad
+Échelle porte-serviettes ¦ Ljestve za ručnike ¦ Lestev za brisače
+Tapis de bain ¦ Kupaonski tepih ¦ Kopalniška preproga
+Panier à linge en tissu ¦ Platnena košara za rublje ¦ Blagovna košara za perilo
+Colonne de salle de bain ¦ Visoki kupaonski ormarić ¦ Visoka kopalniška omarica
+Étagère de douche ¦ Polica za tuš ¦ Polica za prho
+Vasque en pierre ¦ Kameni umivaonik ¦ Kamnit umivalnik
+Baignoire noire ¦ Crna kada ¦ Črna kad
+Paroi de douche en verre ¦ Staklena stijena za tuš ¦ Steklena tuš stena
+WC avec abattant bois ¦ WC s drvenom daskom ¦ WC z leseno desko
+Meuble vasque en bois ¦ Drveni ormarić s umivaonikom ¦ Lesena omarica z umivalnikom
+Lave-mains ¦ Mali umivaonik ¦ Majhen umivalnik
+Lave-linge hublot ¦ Perilica rublja s prednjim punjenjem ¦ Pralni stroj s sprednjim polnjenjem
+Bac à laver ¦ Korito za pranje ¦ Pralno korito
+Table à repasser ¦ Daska za glačanje ¦ Likalna deska
+Fil à linge ¦ Konop za rublje ¦ Vrv za perilo
+Essoreuse à rouleaux ¦ Ručna cijedilica s valjcima ¦ Ožemalnik z valji
+Machine à laver à manivelle ¦ Perilica rublja s ručicom ¦ Pralni stroj z ročico
+Balai et pelle ¦ Metla i lopatica ¦ Metla in smetišnica
+Nettoyeur vapeur ¦ Parni čistač ¦ Parni čistilnik
+Vestiaire d’entrée ¦ Garderoba u predsoblju ¦ Garderoba v predsobi
+Patère murale ¦ Zidna vješalica ¦ Stenski obešalnik
+Boîte à clés ¦ Kutija za ključeve ¦ Omarica za ključe
+Console avec miroir ¦ Konzola s ogledalom ¦ Konzola z ogledalom
+Valet de nuit ¦ Sobni sluga ¦ Nočni obešalnik
+Fauteuil ergonomique ¦ Ergonomska fotelja ¦ Ergonomski stol
+Bureau d’angle ¦ Kutni radni stol ¦ Kotna pisalna miza
+Petit bureau d’écolier ¦ Mali đački stol ¦ Majhna šolska miza
+Ordinateur de bureau et écran ¦ Stolno računalo i zaslon ¦ Namizni računalnik in zaslon
+Deux écrans ¦ Dva zaslona ¦ Dva zaslona
+Imprimante multifonction ¦ Višenamjenski pisač ¦ Večnamenski tiskalnik
+Destructeur de papier ¦ Uništavač papira ¦ Uničevalnik dokumentov
+Armoire à classeurs ¦ Ormar za registratore ¦ Omara za registratorje
+Caisson à roulettes ¦ Pokretni ladičar ¦ Predalnik na kolesih
+Tableau en liège ¦ Ploča od pluta ¦ Plutovinasta tabla
+Téléphone de bureau ¦ Stolni telefon ¦ Namizni telefon
+Globe terrestre de bureau ¦ Stolni globus ¦ Namizni globus
+Globe terrestre sur pied ¦ Globus na stalku ¦ Globus na stojalu
+Pupitre de lecture ¦ Stalak za čitanje ¦ Bralni pult
+Lampe de banquier ¦ Bankarska svjetiljka ¦ Bančna svetilka
+Albums de famille ¦ Obiteljski albumi ¦ Družinski albumi
+Console de jeux ¦ Igraća konzola ¦ Igralna konzola
+Scanner de documents ¦ Skener dokumenata ¦ Optični bralnik dokumentov
+Carte de France ancienne ¦ Stara karta Francuske ¦ Stari zemljevid Francije
+Carte de Cassini encadrée ¦ Uokvirena Cassinijeva karta ¦ Uokvirjen Cassinijev zemljevid
+Lutrin d’archives ¦ Stalak za arhivske knjige ¦ Stojalo za arhivske knjige
+Loupe sur pied ¦ Povećalo na stalku ¦ Povečevalno steklo na stojalu
+Lecteur de microfilms ¦ Čitač mikrofilmova ¦ Čitalnik mikrofilmov
+Couffin en osier ¦ Pletena košara za bebu ¦ Pletena košara za dojenčka
+Berceau en fer ¦ Željezna kolijevka ¦ Železna zibka
+Lit mezzanine ¦ Krevet na kat s radnim prostorom ¦ Visoka postelja
+Poussette ¦ Dječja kolica ¦ Otroški voziček
+Parc pour bébé ¦ Ogradica za bebu ¦ Stajica za dojenčka
+Cuisine pour enfant ¦ Dječja kuhinja ¦ Otroška kuhinja
+Ours en peluche géant ¦ Divovski plišani medo ¦ Velikanski plišasti medvedek
+Poupée en porcelaine ¦ Porculanska lutka ¦ Porcelanasta punčka
+Cubes de construction ¦ Kocke za gradnju ¦ Gradbene kocke
+Théâtre de marionnettes ¦ Kazalište lutaka ¦ Lutkovno gledališče
+Luge ¦ Sanjke ¦ Sani
+Table de jeux de société ¦ Stol za društvene igre ¦ Miza za družabne igre
+Petite table d’enfant ¦ Mali dječji stolić ¦ Majhna otroška mizica
+Chevalet de peinture ¦ Slikarski štafelaj ¦ Slikarsko stojalo
+Pupitre d’écolier double ¦ Dvostruka školska klupa ¦ Dvojna šolska klop
+Tableau noir d’école ¦ Školska ploča ¦ Šolska tabla
+Coiffeuse d’enfant ¦ Dječji toaletni stolić ¦ Otroška toaletna mizica
+Marchande ¦ Dječji dućan ¦ Otroška trgovinica
+Circuit de voitures ¦ Staza za autiće ¦ Avtodirkališče
+Arche de Noé en bois ¦ Drvena Noina arka ¦ Lesena Noetova barka
+Toupie ¦ Zvrk ¦ Vrtavka
+Tapis d’éveil ¦ Podloga za igru ¦ Igralna podloga
+Piscine à balles ¦ Bazen s lopticama ¦ Bazen z žogicami
+Tipi d’enfant ¦ Dječji tipi šator ¦ Otroški tipi
+Draisienne ¦ Bicikl bez pedala ¦ Poganjalec
+Voiture à pédales ¦ Autić na pedale ¦ Avto na pedala
+Cheval sur roulettes ¦ Konjić na kotačima ¦ Konjiček na kolesih
+Bureau d’écolier réglable ¦ Podesivi đački stol ¦ Nastavljiva šolska miza
+Tabouret d’enfant ¦ Dječji tabure ¦ Otroški stolček
+Suspension trois globes ¦ Viseća svjetiljka s tri kugle ¦ Viseča svetilka s tremi kroglami
+Lampe Tiffany ¦ Tiffany svjetiljka ¦ Svetilka Tiffany
+Lampe en opaline ¦ Svjetiljka od opalina ¦ Svetilka iz opalina
+Lampe à poser en céramique ¦ Keramička stolna svjetiljka ¦ Keramična namizna svetilka
+Lampadaire trépied en bois ¦ Drvena podna svjetiljka na tronošcu ¦ Lesena stoječa svetilka na trinožniku
+Lampadaire arc en marbre ¦ Lučna podna svjetiljka s mramorom ¦ Ločna stoječa svetilka z marmorjem
+Liseuse sur pied ¦ Podna svjetiljka za čitanje ¦ Stoječa bralna svetilka
+Réglette néon ¦ Neonska letvica ¦ Neonska letev
+Lanterne à bougie ¦ Fenjer sa svijećom ¦ Svetilka s svečo
+Lampe à pétrole en cuivre ¦ Bakrena petrolejka ¦ Bakrena petrolejka
+Lampe à huile romaine ¦ Rimska uljanica ¦ Rimska oljenka
+Bougies sur plateau ¦ Svijeće na pladnju ¦ Sveče na pladnju
+Chandelier à trois branches ¦ Svijećnjak s tri kraka ¦ Trikraki svečnik
+Borne lumineuse ¦ Svjetlosni stupić ¦ Svetlobni stebriček
+Mur de cadres photos ¦ Zid s fotografijama ¦ Stena z uokvirjenimi fotografijami
+Portrait d’ancêtre ¦ Portret pretka ¦ Portret prednika
+Tableau de paysage ¦ Pejzaž ¦ Krajinska slika
+Marine ¦ Marina ¦ Marina
+Cadre photo sur pied ¦ Okvir za fotografiju sa stalkom ¦ Fotografski okvir na stojalu
+Trophée de chasse ¦ Lovački trofej ¦ Lovska trofeja
+Maquette de bateau ¦ Model broda ¦ Model ladje
+Sculpture sur socle ¦ Skulptura na postolju ¦ Skulptura na podstavku
+Buste en plâtre ¦ Gipsana bista ¦ Mavčni doprsni kip
+Statuette en bronze ¦ Brončani kipić ¦ Bronast kipec
+Grand vase en terre ¦ Velika glinena vaza ¦ Velika glinena vaza
+Bouquet de fleurs ¦ Buket cvijeća ¦ Šopek rož
+Horloge de gare ¦ Kolodvorski sat ¦ Postajna ura
+Coucou de la Forêt-Noire ¦ Švarcvaldski sat s kukavicom ¦ Švarcvaldska ura s kukavico
+Rideaux ¦ Zavjese ¦ Zavese
+Grand tapis persan ¦ Veliki perzijski tepih ¦ Velika perzijska preproga
+Tapis berbère à losanges ¦ Berberski tepih s rombovima ¦ Berberska preproga z rombi
+Kilim ¦ Ćilim ¦ Kilim
+Tapis rond en jute ¦ Okrugli tepih od jute ¦ Okrogla preproga iz jute
+Paravent japonais ¦ Japanski paravan ¦ Japonski paravan
+Panier à journaux ¦ Košara za novine ¦ Košara za časopise
+Grand panier en osier ¦ Velika pletena košara ¦ Velika pletena košara
+Garde-feu en laiton ¦ Mjedena zaštita za kamin ¦ Medeninasta zaščita za kamin
+Terrarium ¦ Terarij ¦ Terarij
+Diplôme encadré ¦ Uokvirena diploma ¦ Uokvirjena diploma
+Photo de classe encadrée ¦ Uokvirena razredna fotografija ¦ Uokvirjena razredna fotografija
+Livret de famille sous verre ¦ Obiteljska knjižica pod staklom ¦ Družinska knjižica pod steklom
+Canevas brodé ¦ Vezeni goblen ¦ Vezenina na kanvasu
+Tapisserie murale ¦ Zidna tapiserija ¦ Stenska tapiserija
+Médaillon de famille ¦ Obiteljski medaljon ¦ Družinski medaljon
+Trophée sportif ¦ Sportski trofej ¦ Športna trofeja
+Buste de Marianne ¦ Bista Marianne ¦ Doprsni kip Marianne
+Vase de Gien ¦ Vaza iz Giena ¦ Vaza iz Giena
+Vase de Sèvres ¦ Sèvreska vaza ¦ Sèvreska vaza
+Potiche chinoise ¦ Kineska vaza s poklopcem ¦ Kitajska vaza s pokrovom
+Vase en étain ¦ Kositrena vaza ¦ Kositrna vaza
+Bouquet de fleurs séchées ¦ Buket suhog cvijeća ¦ Šopek suhega cvetja
+Sapin de Noël décoré ¦ Okićeno božićno drvce ¦ Okrašena novoletna jelka
+Couronne de porte ¦ Vijenac za vrata ¦ Venec za vrata
+Photophores ¦ Svijećnjaci od stakla ¦ Steklene lučke za sveče
+Bateau en bouteille ¦ Brod u boci ¦ Ladja v steklenici
+Maquette de locomotive ¦ Model lokomotive ¦ Model lokomotive
+Collection de dés à coudre ¦ Zbirka naprstaka ¦ Zbirka naprstnikov
+Vitrine de minéraux ¦ Vitrina s mineralima ¦ Vitrina z minerali
+Collection de papillons ¦ Zbirka leptira ¦ Zbirka metuljev
+Boîte à musique ¦ Glazbena kutija ¦ Glasbena skrinjica
+Baromètre ¦ Barometar ¦ Barometer
+Thermomètre ancien ¦ Stari termometar ¦ Star termometer
+Voilages ¦ Prozirne zavjese ¦ Tančice
+Rideaux de velours ¦ Baršunaste zavjese ¦ Žametne zavese
+Store bateau ¦ Rimska roleta ¦ Rimski senčnik
+Tapis moderne ¦ Moderni tepih ¦ Moderna preproga
+Tapis en peau de mouton ¦ Tepih od ovčje kože ¦ Preproga iz ovčje kože
+Poêle à granulés rouge ¦ Crvena peć na pelete ¦ Rdeča peč na pelete
+Poêle Godin ¦ Godin peć ¦ Peč Godin
+Radiateur vertical design ¦ Dizajnerski vertikalni radijator ¦ Dizajnerski vertikalni radiator
+Chauffe-eau ¦ Bojler ¦ Bojler
+Téléviseur sur meuble ¦ Televizor na ormariću ¦ Televizor na omarici
+Téléviseur au mur ¦ Zidni televizor ¦ Stenski televizor
+Téléviseur à tube ¦ Televizor s katodnom cijevi ¦ Televizor s katodno cevjo
+Chaîne hi-fi ¦ Hi-fi linija ¦ Hi-fi linija
+Enceintes colonnes ¦ Stupni zvučnici ¦ Stoječi zvočniki
+Radiocassette ¦ Radiokasetofon ¦ Radiokasetofon
+Magnétoscope ¦ Videorekorder ¦ Videorekorder
+Ventilateur de plafond ¦ Stropni ventilator ¦ Stropni ventilator
+Ventilateur de table ¦ Stolni ventilator ¦ Namizni ventilator
+Radiateur soufflant ¦ Grijalica s ventilatorom ¦ Grelnik s ventilatorjem
+Convecteur électrique ¦ Električni konvektor ¦ Električni konvektor
+Poêle à bois moderne ¦ Moderna peć na drva ¦ Moderna peč na drva
+Cuisinière à bois moderne ¦ Moderni štednjak na drva ¦ Moderni štedilnik na drva
+Pompe à chaleur ¦ Toplinska pumpa ¦ Toplotna črpalka
+Chaudière au fioul ¦ Kotao na lož-ulje ¦ Kotel na kurilno olje
+Chaudière à gaz murale ¦ Zidni plinski kotao ¦ Stenski plinski kotel
+Cuve à fioul ¦ Spremnik za lož-ulje ¦ Rezervoar za kurilno olje
+Robot tondeuse ¦ Robotska kosilica ¦ Robotska kosilnica
+Téléviseur portatif années 70 ¦ Prijenosni televizor iz 70-ih ¦ Prenosni televizor iz 70-ih
+Lecteur CD ¦ CD player ¦ Predvajalnik CD-jev
+Magnétophone à bandes ¦ Magnetofon s trakom ¦ Magnetofon s trakom
+Enceinte connectée ¦ Pametni zvučnik ¦ Pametni zvočnik
+Piano droit noir ¦ Crni pianino ¦ Črn pianino
+Piano droit en acajou ¦ Pianino od mahagonija ¦ Pianino iz mahagonija
+Piano demi-queue ¦ Polukoncertni klavir ¦ Polkoncertni klavir
+Piano à queue de concert ¦ Koncertni klavir ¦ Koncertni klavir
+Épinette ¦ Spinet ¦ Spinet
+Orgue de salon ¦ Kućne orgulje ¦ Salonske orgle
+Clavier électronique ¦ Električna klavijatura ¦ Električne klaviature
+Guitare classique ¦ Klasična gitara ¦ Klasična kitara
+Banjo ¦ Bendžo ¦ Bendžo
+Mandoline ¦ Mandolina ¦ Mandolina
+Violon sur pupitre ¦ Violina na stalku ¦ Violina na stojalu
+Bandonéon ¦ Bandoneon ¦ Bandoneon
+Trompette sur pied ¦ Truba na stalku ¦ Trobenta na stojalu
+Saxophone sur pied ¦ Saksofon na stalku ¦ Saksofon na stojalu
+Cor de chasse ¦ Lovački rog ¦ Lovski rog
+Clarinette sur pied ¦ Klarinet na stalku ¦ Klarinet na stojalu
+Pupitre de musique ¦ Notni stalak ¦ Notno stojalo
+Gramophone à pavillon ¦ Gramofon s trubom ¦ Gramofon s trobljo
+Cornemuse (biniou) ¦ Gajde (biniou) ¦ Dude (biniou)
+Timbales ¦ Timpani ¦ Pavke
+Xylophone ¦ Ksilofon ¦ Ksilofon
+Marimba ¦ Marimba ¦ Marimba
+Cithare ¦ Citra ¦ Citre
+Ukulélé ¦ Ukulele ¦ Ukulele
+Luth ¦ Lutnja ¦ Lutnja
+Flûte traversière sur support ¦ Poprečna flauta na stalku ¦ Prečna flavta na stojalu
+Flûte à bec ¦ Kljunasta flauta ¦ Kljunasta flavta
+Trombone sur pied ¦ Trombon na stalku ¦ Pozavna na stojalu
+Hautbois sur support ¦ Oboa na stalku ¦ Oboa na stojalu
+Harmonica et pupitre ¦ Usna harmonika i stalak ¦ Orglice in stojalo
+Meuble à partitions ¦ Ormarić za note ¦ Omara za note
+Table de mixage ¦ Mikseta ¦ Mešalna miza
+Rayonnage de cave ¦ Podrumske police ¦ Kletne police
+Cartons de déménagement ¦ Kutije za selidbu ¦ Selitvene škatle
+Étagère d’archives familiales ¦ Polica s obiteljskim arhivom ¦ Polica z družinskim arhivom
+Coffret à bijoux ¦ Kutija za nakit ¦ Skrinjica za nakit
+Portant à vêtements ¦ Stalak za odjeću ¦ Stojalo za oblačila
+Dressing d’angle ¦ Kutna garderoba ¦ Kotna garderoba
+Meuble à cases (cubes) ¦ Ormarić s pretincima (kocke) ¦ Omarica s predali (kocke)
+Étagère de cellier ¦ Polica u ostavi ¦ Polica v shrambi
+Boîtes de rangement en plastique ¦ Plastične kutije za pohranu ¦ Plastične škatle za shranjevanje
+Caisses en bois ¦ Drveni sanduci ¦ Leseni zaboji
+Panier à pique-nique ¦ Košara za piknik ¦ Piknik košara
+Boîte à couture ¦ Kutija za šivanje ¦ Šivalna skrinjica
+Housse à vêtements ¦ Navlaka za odjeću ¦ Prevleka za oblačila
+Crucifix mural ¦ Zidno raspelo ¦ Stensko razpelo
+Crèche provençale et santons ¦ Provansalske jaslice s figuricama ¦ Provansalske jaslice s figuricami
+Chapelet ¦ Krunica ¦ Rožni venec
+Coin du souvenir (photos et bougie) ¦ Kutak sjećanja (fotografije i svijeća) ¦ Kotiček spomina (fotografije in sveča)
+Boîte à lettres d’amour ¦ Kutija s ljubavnim pismima ¦ Škatla z ljubezenskimi pismi
+Vitrine de médailles ¦ Vitrina s medaljama ¦ Vitrina z medaljami
+Bouquet de mariée sous globe ¦ Vjenčani buket pod staklenim zvonom ¦ Poročni šopek pod stekleno kupolo
+Bénitier mural ¦ Zidna škropionica ¦ Stenska kropilnica
+Icône orthodoxe ¦ Pravoslavna ikona ¦ Pravoslavna ikona
+Rameau de buis bénit ¦ Blagoslovljena grančica šimšira ¦ Blagoslovljena vejica pušpana
+Statue de saint ¦ Kip sveca ¦ Kip svetnika
+Plaque de communion encadrée ¦ Uokvirena spomen-slika prve pričesti ¦ Uokvirjena spominska podobica prvega obhajila
+Livre de prières ancien ¦ Stari molitvenik ¦ Star molitvenik
+Scie circulaire sur table ¦ Stolna kružna pila ¦ Namizna krožna žaga
+Scie à onglets ¦ Pila za kosi rez ¦ Zajeralna žaga
+Forge et soufflet ¦ Kovačnica s mijehom ¦ Kovačija z mehom
+Établi de mécanicien ¦ Mehaničarski radni stol ¦ Mehanikov delovni pult
+Établi d’horloger ¦ Urarski radni stol ¦ Urarski delovni pult
+Table de cordonnier ¦ Postolarski stol ¦ Čevljarska miza
+Table de coupe de tailleur ¦ Krojački stol za krojenje ¦ Krojaška miza za krojenje
+Paillasse de laboratoire ¦ Laboratorijski stol ¦ Laboratorijski pult
+Scie à ruban ¦ Tračna pila ¦ Tračna žaga
+Tour à métaux ¦ Tokarilica za metal ¦ Stružnica za kovino
+Surjeteuse ¦ Overlock stroj ¦ Overlock stroj
+Métier à broder ¦ Okvir za vezenje ¦ Vezilni okvir
+Petite citadine ¦ Mali gradski automobil ¦ Majhen mestni avto
+Voiture familiale ¦ Obiteljski automobil ¦ Družinski avto
+Voiture ancienne (années 30) ¦ Oldtimer (1930-ih) ¦ Starodobnik (1930-ih)
+Deux-chevaux ¦ Citroën 2CV ¦ Citroën 2CV
+Coccinelle ¦ VW Buba ¦ VW hrošč
+Fourgonnette ¦ Dostavno vozilo ¦ Kombi
+Mobylette ¦ Moped ¦ Moped
+Vélo de course ¦ Cestovni bicikl ¦ Cestno kolo
+Vélo hollandais ¦ Nizozemski bicikl ¦ Nizozemsko kolo
+Vélo cargo ¦ Teretni bicikl ¦ Tovorno kolo
+Pneus empilés ¦ Naslagane gume ¦ Zložene pnevmatike
+Échelle double ¦ Dvokrake ljestve ¦ Dvokraka lestev
+Second congélateur ¦ Dodatni zamrzivač ¦ Dodatna zamrzovalna skrinja
+Voiture tout-terrain ¦ Terenac ¦ Terensko vozilo
+Voiture de sport ¦ Sportski automobil ¦ Športni avto
+Voiture électrique ¦ Električni automobil ¦ Električni avto
+Camping-car ¦ Kamper ¦ Avtodom
+Moto ancienne avec side-car ¦ Stari motocikl s prikolicom ¦ Star motocikel s prikolico
+Vélo ancien ¦ Stari bicikl ¦ Staro kolo
+VTT ¦ Brdski bicikl ¦ Gorsko kolo
+Borne de recharge ¦ Punionica ¦ Polnilnica
+Armoire à outils ¦ Ormar za alat ¦ Omara za orodje
+Chariot de pneus ¦ Kolica za gume ¦ Voziček za pnevmatike
+Caisse à outils ¦ Kutija za alat ¦ Zaboj za orodje
+Chargeur de batterie ¦ Punjač akumulatora ¦ Polnilec akumulatorjev

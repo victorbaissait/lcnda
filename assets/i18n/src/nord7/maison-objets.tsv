@@ -1,0 +1,710 @@
+fr ¦ is
+# 🏠 Plan de maison : les objets en plus, les styles, le choix « 🎨 Style » (heritage-house-objets.js, heritage-house-lib.js)
+Meubles de style ¦ Stílhúsgögn
+🎨 Tous les styles ¦ 🎨 Allir stílar
+Sans les meubles de style ¦ Án stílhúsgagna
+D’ailleurs ¦ Erlendir stílar
+Modernes ¦ Nútímalegir
+Rien dans le style « {s} » ici : choisis « 🎨 Tous les styles ». ¦ Ekkert í stílnum „{s}“ hér: veldu „🎨 Allir stílar“.
+Louis XIII ¦ Loðvík XIII
+Louis XIV ¦ Loðvík XIV
+Régence ¦ Régence
+Louis XV ¦ Loðvík XV
+Louis XVI ¦ Loðvík XVI
+Directoire ¦ Directoire
+Empire ¦ Empire
+Restauration ¦ Restauration
+Charles X ¦ Karl X
+Louis-Philippe ¦ Loðvík Filippus
+Napoléon III ¦ Napóleon III
+Art nouveau ¦ Art nouveau
+Art déco ¦ Art deco
+Henri II ¦ Hinrik II
+Renaissance ¦ Endurreisn
+Biedermeier ¦ Biedermeier
+victorien ¦ viktoríanskur
+Chippendale ¦ Chippendale
+Queen Anne ¦ Queen Anne
+gustavien ¦ gústavískur
+shaker ¦ shaker
+colonial ¦ nýlendustíll
+marocain ¦ marokkóskur
+japonais ¦ japanskur
+chinois laqué ¦ kínverskur lakkaður
+Thonet ¦ Thonet
+vénitien ¦ feneyskur
+normand ¦ normannskur
+breton ¦ bretónskur
+basque ¦ baskneskur
+alsacien ¦ elsasskur
+savoyard ¦ savojskur
+auvergnat ¦ frá Auvergne
+bressan ¦ frá Bresse
+lorrain ¦ lóthringskur
+landais ¦ frá Landes
+vendéen ¦ frá Vendée
+limousin ¦ frá Limousin
+bourguignon ¦ búrgúndískur
+catalan ¦ katalónskur
+corse ¦ korsískur
+champenois ¦ frá Champagne
+flamand ¦ flæmskur
+franc-comtois ¦ frá Franche-Comté
+béarnais ¦ frá Béarn
+dauphinois ¦ frá Dauphiné
+picard ¦ frá Picardie
+gascon ¦ gaskónskur
+années 1930 ¦ fjórði áratugurinn
+années 1950 ¦ sjötti áratugurinn
+années 1960 ¦ sjöundi áratugurinn
+années 1970 ¦ áttundi áratugurinn
+années 1980 ¦ níundi áratugurinn
+scandinave ¦ skandinavískur
+industriel ¦ iðnaðarstíll
+contemporain ¦ nútímalegur
+laqué blanc ¦ hvítlakkaður
+en pin ¦ úr furu
+en chêne clair ¦ úr ljósri eik
+en merisier ¦ úr kirsuberjaviði
+en noyer ¦ úr hnotu
+en acajou ¦ úr mahóní
+en rotin ¦ úr rattan
+en bambou ¦ úr bambus
+en métal ¦ úr málmi
+patiné (shabby chic) ¦ slitinn (shabby chic)
+bohème ¦ bóhem
+en teck ¦ úr tekki
+Chiffonnier ¦ Há kommóða
+Table de salle à manger ¦ Borðstofuborð
+Pendule ¦ Arinklukka
+Bonnetière ¦ Lítill fataskápur
+Desserte ¦ Framreiðsluborð
+Buffet de cuisine ¦ Eldhússkápur
+Table de toilette ¦ Snyrtiborð
+Horloge de parquet ¦ Gólfklukka
+Pommier ¦ Eplatré
+Poirier ¦ Perutré
+Cerisier ¦ Kirsuberjatré
+Prunier ¦ Plómutré
+Pêcher ¦ Ferskjutré
+Abricotier ¦ Apríkósutré
+Cognassier ¦ Kveðutré
+Châtaignier ¦ Kastaníutré
+Figuier ¦ Fíkjutré
+Olivier ¦ Ólífutré
+Citronnier en bac ¦ Sítrónutré í keri
+Oranger en bac ¦ Appelsínutré í keri
+Noisetier ¦ Heslirunni
+Mûrier ¦ Mórberjatré
+Tilleul ¦ Linditré
+Platane ¦ Platanviður
+Marronnier ¦ Hrossakastanía
+Hêtre ¦ Beyki
+Frêne ¦ Askur
+Saule pleureur ¦ Grátvíðir
+Peuplier ¦ Ösp
+Érable ¦ Hlynur
+Magnolia ¦ Magnólía
+Lilas ¦ Sýrena
+Cerisier du Japon ¦ Japanskt kirsuberjatré
+Orme ¦ Álmur
+Acacia ¦ Akasía
+Charme ¦ Agnbeyki
+Sureau ¦ Yllir
+Tilleul de la Liberté ¦ Frelsislind
+Sapin ¦ Þinur
+Épicéa ¦ Greni
+Pin parasol ¦ Sólhlífarfura
+Pin sylvestre ¦ Skógarfura
+Cyprès ¦ Sýprus
+If ¦ Ýviður
+Cèdre ¦ Sedrusviður
+Thuya ¦ Lífviður
+Rosier ¦ Rósarunni
+Rosier grimpant ¦ Klifurrós
+Hortensia ¦ Hortensía
+Lavande ¦ Lofnarblóm
+Romarin ¦ Rósmarín
+Thym ¦ Timían
+Buis taillé en boule ¦ Kúlulaga klipptur buxus
+Forsythia ¦ Forsythia
+Laurier-sauce ¦ Lárviður
+Laurier-rose ¦ Oleander
+Buddleia ¦ Fiðrildarunni
+Camélia ¦ Kamelía
+Rhododendron ¦ Lyngrós
+Azalée ¦ Asalea
+Houx ¦ Kristþyrnir
+Cassissier ¦ Sólber
+Groseillier ¦ Rifsber
+Framboisier ¦ Hindber
+Pied de vigne ¦ Vínviður
+Bambou ¦ Bambus
+Bananier ¦ Bananatré
+Palmier ¦ Pálmatré
+Herbes de la pampa ¦ Pampasgras
+Graminées ¦ Skrautgrös
+Fuchsia ¦ Fúksía
+Glycine ¦ Bláregn
+Lierre ¦ Bergflétta
+Fougère ¦ Burkni
+Massif de géraniums ¦ Pelargóníubeð
+Massif de tournesols ¦ Sólblómabeð
+Massif de tulipes ¦ Túlípanabeð
+Massif de jonquilles ¦ Páskaliljubeð
+Massif d’iris ¦ Sverðliljubeð
+Massif de dahlias ¦ Dahlíubeð
+Massif de soucis ¦ Morgunfrúarbeð
+Massif de pivoines ¦ Bóndarósabeð
+Massif de marguerites ¦ Prestafífilsbeð
+Carré de fraisiers ¦ Jarðarberjabeð
+Rang de pommes de terre ¦ Kartöfluröð
+Rang de salades ¦ Salatröð
+Rang de tomates ¦ Tómataröð
+Rang de carottes ¦ Gulrótaröð
+Rang de poireaux ¦ Blaðlauksröð
+Rang de haricots à rames ¦ Stangarbaunaröð
+Rang de choux ¦ Kálröð
+Planche de courges ¦ Graskersbeð
+Planche d’oignons ¦ Laukbeð
+Carré d’aromatiques ¦ Kryddjurtabeð
+Pelouse ¦ Grasflöt
+Prairie fleurie ¦ Blómaengi
+Pot de géraniums ¦ Pelargóníupottur
+Jardinière de fleurs ¦ Blómakassi
+Agapanthe en pot ¦ Afríkulilja í potti
+Buis en pot ¦ Buxus í potti
+Pot de basilic ¦ Basilíkupottur
+Bac à fleurs en zinc ¦ Blómaker úr sinki
+Pot en terre d’Anduze ¦ Leirpottur frá Anduze
+Grande jarre provençale ¦ Stór próvensalsk leirkrukka
+Yucca ¦ Jukka
+Plante grasse (aloe) ¦ Þykkblöðungur (alóe)
+Cactus colonne ¦ Súlukaktus
+Kentia ¦ Kentíupálmi
+Sansevieria ¦ Tengdamóðurtunga
+Pothos suspendu ¦ Hangandi gullflétta
+Oiseau de paradis (strelitzia) ¦ Paradísarfugl (strelitzia)
+Bonsaï sur sellette ¦ Bonsaí á standi
+Poinsettia ¦ Jólastjarna
+Plante aromatique sur rebord ¦ Kryddjurt í gluggakistu
+Palmier d’intérieur ¦ Innipálmi
+Banc de jardin en bois et fonte ¦ Garðbekkur úr tré og steypujárni
+Banc de jardin en bois ¦ Garðbekkur úr tré
+Banc en pierre sculpté ¦ Útskorinn steinbekkur
+Table de bistrot en fer ¦ Bístróborð úr járni
+Table de jardin ronde en résine ¦ Kringlótt garðborð úr plasti
+Table de jardin en teck ¦ Garðborð úr tekki
+Table de pique-nique ¦ Lautarferðarborð
+Chaise longue ¦ Legubekkur
+Transat de plage rayé ¦ Röndóttur strandstóll
+Bain de soleil en résine ¦ Sólbekkur úr plasti
+Portique de jeux ¦ Leiktæki með rólum
+Grand toboggan ¦ Stór rennibraut
+Bac à sable couvert ¦ Sandkassi með loki
+Petit trampoline ¦ Lítið trampólín
+Hamac sur pied ¦ Hengirúm á standi
+Tonnelle de jardin ¦ Garðlaufskáli
+Pergola en bois ¦ Viðarpergóla
+Pergola bioclimatique ¦ Pergóla með stillanlegum rimlum
+Parasol déporté ¦ Hliðarsólhlíf
+Parasol rouge de terrasse ¦ Rauð verandarsólhlíf
+Fontaine en pierre ¦ Steinbrunnur
+Fontaine murale ¦ Veggbrunnur
+Bassin rond ¦ Kringlótt tjörn
+Bassin aux nénuphars ¦ Vatnaliljutjörn
+Piscine rectangulaire ¦ Rétthyrnd sundlaug
+Petite piscine ¦ Lítil sundlaug
+Piscine hors-sol ronde ¦ Kringlótt laug ofanjarðar
+Spa d’extérieur ¦ Útipottur
+Barbecue au charbon ¦ Kolagrill
+Plancha sur chariot ¦ Grillplata á vagni
+Four à pizza ¦ Pítsuofn
+Brasero en acier ¦ Eldskál úr stáli
+Composteur en bois ¦ Moltukassi úr tré
+Potager surélevé ¦ Upphækkað matjurtabeð
+Serre de jardin ¦ Gróðurhús
+Petite serre adossée ¦ Lítið gróðurhús við vegg
+Mangeoire à oiseaux ¦ Fuglafóðrari
+Cadran solaire sur colonne ¦ Sólúr á súlu
+Enrouleur de tuyau ¦ Slönguhjól
+Lanterne de jardin ¦ Garðlukt
+Mât de drapeau ¦ Fánastöng
+Clôture en bois ¦ Trégirðing
+Grillage rigide ¦ Stíf vírgirðing
+Barrière blanche ¦ Hvítt grindverk
+Haie de lauriers ¦ Lárviðarlimgerði
+Haie de charmille ¦ Agnbeykilimgerði
+Muret en pierres sèches ¦ Hlaðinn grjótveggur
+Portail en fer forgé ¦ Smíðajárnshlið
+Portail en bois ¦ Viðarhlið
+Portillon ¦ Lítið hlið
+Abri à bûches ¦ Eldiviðarskýli
+Éolienne de pompage ¦ Vindmylla til vatnsdælingar
+Puits couvert ¦ Yfirbyggður brunnur
+Abreuvoir en pierre ¦ Steinbrynningarþró
+Abri de jardin en bois ¦ Garðskúr úr tré
+Abri de jardin en métal ¦ Garðskúr úr málmi
+Cabane dans les arbres ¦ Trjáhús
+Carport ¦ Bílskýli
+Kiosque de jardin ¦ Garðskáli
+Cabane de jardin pour enfants ¦ Leikhús fyrir börn
+Allée en gravier ¦ Malarstígur
+Terrasse dallée ¦ Hellulögð verönd
+Terrasse en bois ¦ Viðarverönd
+Bac à compost ouvert ¦ Opinn moltukassi
+Jardin japonais ¦ Japanskur garður
+Rocaille ¦ Steinhæð
+Vasque de jardin ¦ Garðker
+Statue de jardin ¦ Garðstytta
+Lion en pierre ¦ Steinljón
+Boule décorative ¦ Skrautkúla
+Nichoir à mésanges ¦ Meisuhreiðurkassi
+Hôtel à insectes ¦ Skordýrahótel
+Boîte à livres ¦ Bókaskápur til skipta
+Ruche kenyane ¦ Kenísk býkúpa
+Pompe d’arrosage ¦ Vatnsdæla
+Arroseur oscillant ¦ Sveifluvökvari
+Arrosoir en zinc ¦ Vatnskanna úr sinki
+Tondeuse hélicoïdale ¦ Handsláttuvél
+Motoculteur ¦ Jarðtætari
+Débroussailleuse ¦ Kantsláttuvél
+Souffleur à feuilles ¦ Laufblásari
+Réverbère ancien ¦ Gamall götuljósastaur
+Enseigne de commerce ¦ Verslunarskilti
+Vache normande ¦ Normandí-kýr
+Vache limousine ¦ Limousin-kýr
+Vache charolaise ¦ Charolais-kýr
+Vache bretonne pie noir ¦ Svartskjöldótt bretónsk kýr
+Vache montbéliarde ¦ Montbéliarde-kýr
+Veau ¦ Kálfur
+Bœuf de trait ¦ Dráttaruxi
+Cheval de trait (percheron) ¦ Dráttarhestur (percheron)
+Cheval de trait breton ¦ Bretónskur dráttarhestur
+Cheval de selle ¦ Reiðhestur
+Poney ¦ Smáhestur
+Mulet ¦ Múldýr
+Poulain ¦ Folald
+Brebis ¦ Ær
+Agneau ¦ Lamb
+Bélier ¦ Hrútur
+Chevreau ¦ Kiðlingur
+Truie ¦ Gylta
+Porcelet ¦ Grís
+Coq ¦ Hani
+Poule blanche ¦ Hvít hæna
+Poussin ¦ Kjúklingur
+Canard ¦ Önd
+Dindon ¦ Kalkúnn
+Pintade ¦ Perluhæna
+Pigeon ¦ Dúfa
+Lapin ¦ Kanína
+Chien de berger ¦ Fjárhundur
+Grand chien ¦ Stór hundur
+Petit chien ¦ Lítill hundur
+Chat roux ¦ Rauðbröndóttur köttur
+Chat noir ¦ Svartur köttur
+Chat tigré ¦ Bröndóttur köttur
+Chat endormi en boule ¦ Sofandi köttur í hnipri
+Lama ¦ Lamadýr
+Cerf ¦ Hjörtur
+Sanglier ¦ Villisvín
+Renard ¦ Refur
+Tortue ¦ Skjaldbaka
+Héron ¦ Hegri
+Cygne ¦ Svanur
+Cage à oiseaux en osier ¦ Fuglabúr úr tágum
+Cage à canaris ¦ Kanarífuglabúr
+Poulailler en bois ¦ Hænsnakofi úr tré
+Niche en bois ¦ Hundakofi úr tré
+Abri pour moutons ¦ Fjárskýli
+Box à cheval ¦ Hestastía
+Ruche Dadant ¦ Dadant-býkúpa
+Ruche Langstroth ¦ Langstroth-býkúpa
+Ruche en paille tressée ¦ Býkúpa úr fléttuðu strái
+Stalle de vache ¦ Kúabás
+Box de veau ¦ Kálfastía
+Mangeoire à foin ¦ Heyjata
+Tonneaux de cidre ¦ Eplavínstunnur
+Cuve à lait ¦ Mjólkurtankur
+Barrique de vin ¦ Víntunna
+Brabant ¦ Plógur (brabant)
+Herse en bois ¦ Tréherfi
+Charrette à foin ¦ Heyvagn
+Char à bancs ¦ Bekkjavagn
+Chariot à ridelles ¦ Grindavagn
+Tracteur rouge des années 1950 ¦ Rauð dráttarvél frá sjötta áratugnum
+Tracteur vert ¦ Græn dráttarvél
+Petit tracteur gris (Ferguson) ¦ Lítil grá dráttarvél (Ferguson)
+Faneuse ¦ Heysnúningsvél
+Moissonneuse-lieuse ¦ Kornbindivél
+Batteuse ¦ Þreskivél
+Andaineur ¦ Múgavél
+Alambic de bouilleur de cru ¦ Eimingartæki bóndans
+Seau à traire ¦ Mjaltafata
+Chèvre angora ¦ Angórageit
+Cochon noir gascon ¦ Svart gaskónskt svín
+Vache salers ¦ Salers-kýr
+Vache aubrac ¦ Aubrac-kýr
+Vache jersiaise ¦ Jersey-kýr
+Mouton noir ¦ Svört kind
+Mouton mérinos ¦ Merínókind
+Poule noire ¦ Svört hæna
+Poule rousse ¦ Rauðbrún hæna
+Poule naine ¦ Dverghæna
+Paon blanc ¦ Hvítur páfugl
+Paon ¦ Páfugl
+Lapin blanc ¦ Hvít kanína
+Cochon d’Inde ¦ Naggrís
+Hamster ¦ Hamstur
+Perroquet ¦ Páfagaukur
+Canari ¦ Kanarífugl
+Cheval blanc ¦ Hvítur hestur
+Cheval noir ¦ Svartur hestur
+Chien terre-neuve ¦ Nýfundnalandshundur
+Chien labrador ¦ Labradorhundur
+Chien beauceron ¦ Beauceron-hundur
+Chien teckel ¦ Dakshundur
+Volière ¦ Fuglahús
+Cage à lapin d’intérieur ¦ Kanínubúr fyrir innandyra
+Panier pour chien ¦ Hundakarfa
+Corbeille pour chat ¦ Kattakarfa
+Arbre à chat ¦ Klórutré
+Gamelles ¦ Matardallar
+Abreuvoir automatique ¦ Sjálfvirkur brynningarbúnaður
+Tonneau de pluie en chêne ¦ Regntunna úr eik
+Cuve à vendange ¦ Vínberjaker
+Pot à lait en fer-blanc ¦ Mjólkurbrúsi úr blikki
+Charrette à bras ¦ Handvagn
+Diligence ¦ Póstvagn
+Roulotte ¦ Sígaunavagn
+Râteau-faneur à cheval ¦ Hestadregin heyrífa
+Botteleuse ¦ Heybindivél
+Semoir ¦ Sáðvél
+Pulvérisateur ¦ Úðadæla
+Bouilloire électrique ¦ Hraðsuðuketill
+Machine à expresso ¦ Espressóvél
+Machine à café à levier ¦ Kaffivél með handfangi
+Cafetière à dosettes ¦ Hylkjakaffivél
+Presse-agrumes ¦ Sítrónupressa
+Four à micro-ondes encastrable ¦ Innbyggður örbylgjuofn
+Corbeille de fruits ¦ Ávaxtakarfa
+Corbeille à pain sur pied ¦ Brauðkarfa á fæti
+Étagère à épices ¦ Kryddhilla
+Desserte de cuisine en bois ¦ Eldhúsvagn úr tré
+Bar de cuisine ¦ Eldhúsbar
+Plaque vitrocéramique ¦ Keramikhelluborð
+Grande plaque à induction ¦ Stórt spanhelluborð
+Table de cuisson au gaz (5 feux) ¦ Gashelluborð (5 hellur)
+Hotte en inox ¦ Háfur úr ryðfríu stáli
+Lave-vaisselle compact ¦ Lítil uppþvottavél
+Réfrigérateur rétro vert d’eau ¦ Gamaldags ljósgrænn ísskápur
+Réfrigérateur rétro orange ¦ Gamaldags appelsínugulur ísskápur
+Évier à deux bacs en céramique ¦ Tvöfaldur keramikvaskur
+Évier timbre d’office ¦ Stór djúpur vaskur
+Évier en pierre à potager ¦ Gamall steinvaskur
+Cuisinière à charbon ¦ Kolaeldavél
+Buffet de cuisine en formica ¦ Eldhússkápur úr formica
+Buffet de cuisine bleu ciel ¦ Ljósblár eldhússkápur
+Table en formica ¦ Formicaborð
+Chaise en formica ¦ Formicastóll
+Tabouret de cuisine ¦ Eldhúskollur
+Cruche en grès ¦ Steinleirskanna
+Fontaine à eau en grès ¦ Vatnsbrúsi úr steinleir
+Balance de cuisine Roberval ¦ Roberval-eldhúsvog
+Batterie de casseroles en cuivre ¦ Koparpottasett
+Égouttoir à vaisselle ¦ Diskagrind
+Poubelles de tri ¦ Flokkunartunnur
+Planche à découper ¦ Skurðbretti
+Bassine à confiture en cuivre ¦ Sultupottur úr kopar
+Pot-au-feu en fonte ¦ Pottur úr steypujárni
+Service à vaisselle ¦ Matarstell
+Soupière en faïence ¦ Súpuskál úr fajansleir
+Panier de légumes ¦ Grænmetiskarfa
+Bocaux de conserves ¦ Niðursuðukrukkur
+Stérilisateur à bocaux ¦ Krukkusuðutæki
+Moulin à légumes ¦ Grænmetiskvörn
+Crêpière ¦ Pönnukökupanna
+Appareil à fondue ¦ Fondúsett
+Extracteur de jus ¦ Safapressa
+Cafetière italienne ¦ Ítölsk mokkakanna
+Samovar ¦ Samóvar
+Étagère à confitures ¦ Sultuhilla
+Chariot de cuisine à roulettes ¦ Eldhúsvagn á hjólum
+Garde-manger grillagé ¦ Matarskápur með neti
+Coffre à bois de cuisine ¦ Eldiviðarkista í eldhúsi
+Baignoire en fonte sur pieds de lion ¦ Steypujárnsbaðkar á ljónsfótum
+Baignoire îlot moderne ¦ Nútímalegt frístandandi baðkar
+Meuble double vasque ¦ Innrétting með tveimur vöskum
+Vasque à poser sur plan bois ¦ Borðvaskur á viðarplötu
+Meuble vasque suspendu ¦ Vegghengd vaskinnrétting
+WC à chasse haute ¦ Salerni með háum vatnskassa
+WC rehaussé ¦ Upphækkað salerni
+Miroir lumineux ¦ Upplýstur spegill
+Panier à linge en osier ¦ Tágakarfa fyrir þvott
+Broc et cuvette en faïence ¦ Kanna og skál úr fajansleir
+Tub en zinc ¦ Sinkbali
+Échelle porte-serviettes ¦ Handklæðastigi
+Tapis de bain ¦ Baðmotta
+Panier à linge en tissu ¦ Taukarfa fyrir þvott
+Colonne de salle de bain ¦ Baðherbergisskápur
+Étagère de douche ¦ Sturtuhilla
+Vasque en pierre ¦ Handlaug úr steini
+Baignoire noire ¦ Svart baðkar
+Paroi de douche en verre ¦ Sturtuveggur úr gleri
+WC avec abattant bois ¦ Salerni með viðarsetu
+Meuble vasque en bois ¦ Vaskinnrétting úr tré
+Lave-mains ¦ Handlaug
+Lave-linge hublot ¦ Framhlaðin þvottavél
+Bac à laver ¦ Þvottabali
+Table à repasser ¦ Strauborð
+Fil à linge ¦ Þvottasnúra
+Essoreuse à rouleaux ¦ Valsavinda
+Machine à laver à manivelle ¦ Handsnúin þvottavél
+Balai et pelle ¦ Kústur og fægiskófla
+Nettoyeur vapeur ¦ Gufuhreinsir
+Vestiaire d’entrée ¦ Fatahengi í anddyri
+Patère murale ¦ Veggsnagi
+Boîte à clés ¦ Lyklabox
+Console avec miroir ¦ Hliðarborð með spegli
+Valet de nuit ¦ Fatastandur
+Fauteuil ergonomique ¦ Vinnuvistvænn stóll
+Bureau d’angle ¦ Hornskrifborð
+Petit bureau d’écolier ¦ Lítið skólaborð
+Ordinateur de bureau et écran ¦ Borðtölva og skjár
+Deux écrans ¦ Tveir skjáir
+Imprimante multifonction ¦ Fjölnotaprentari
+Destructeur de papier ¦ Pappírstætari
+Armoire à classeurs ¦ Skjalaskápur
+Caisson à roulettes ¦ Skúffueining á hjólum
+Tableau en liège ¦ Korktafla
+Téléphone de bureau ¦ Borðsími
+Globe terrestre de bureau ¦ Hnattlíkan á borði
+Globe terrestre sur pied ¦ Hnattlíkan á standi
+Pupitre de lecture ¦ Lespúlt
+Lampe de banquier ¦ Bankaralampi
+Albums de famille ¦ Fjölskyldualbúm
+Console de jeux ¦ Leikjatölva
+Scanner de documents ¦ Skjalaskanni
+Carte de France ancienne ¦ Gamalt Frakklandskort
+Carte de Cassini encadrée ¦ Innrammað Cassini-kort
+Lutrin d’archives ¦ Skjalapúlt
+Loupe sur pied ¦ Stækkunargler á standi
+Lecteur de microfilms ¦ Örfilmulesari
+Couffin en osier ¦ Tágavagga
+Berceau en fer ¦ Járnvagga
+Lit mezzanine ¦ Hátt rúm (svefnloft)
+Poussette ¦ Barnavagn
+Parc pour bébé ¦ Leikgrind
+Cuisine pour enfant ¦ Barnaeldhús
+Ours en peluche géant ¦ Risastór bangsi
+Poupée en porcelaine ¦ Postulínsdúkka
+Cubes de construction ¦ Kubbar
+Théâtre de marionnettes ¦ Brúðuleikhús
+Luge ¦ Sleði
+Table de jeux de société ¦ Spilaborð
+Petite table d’enfant ¦ Lítið barnaborð
+Chevalet de peinture ¦ Málaratrönur
+Pupitre d’écolier double ¦ Tvöfalt skólapúlt
+Tableau noir d’école ¦ Skólatafla
+Coiffeuse d’enfant ¦ Snyrtiborð fyrir börn
+Marchande ¦ Leikbúð
+Circuit de voitures ¦ Bílabraut
+Arche de Noé en bois ¦ Örk Nóa úr tré
+Toupie ¦ Snúður
+Tapis d’éveil ¦ Leikteppi
+Piscine à balles ¦ Boltaland
+Tipi d’enfant ¦ Barnatjald (tipi)
+Draisienne ¦ Jafnvægishjól
+Voiture à pédales ¦ Stigin leikfangabifreið
+Cheval sur roulettes ¦ Ruggudýr á hjólum
+Bureau d’écolier réglable ¦ Stillanlegt skólaborð
+Tabouret d’enfant ¦ Barnakollur
+Suspension trois globes ¦ Ljósakróna með þremur kúlum
+Lampe Tiffany ¦ Tiffany-lampi
+Lampe en opaline ¦ Ópallampi
+Lampe à poser en céramique ¦ Keramikborðlampi
+Lampadaire trépied en bois ¦ Gólflampi á þrífæti úr tré
+Lampadaire arc en marbre ¦ Bogalampi á marmarafæti
+Liseuse sur pied ¦ Leslampi á fæti
+Réglette néon ¦ Flúrljós
+Lanterne à bougie ¦ Kertalukt
+Lampe à pétrole en cuivre ¦ Steinolíulampi úr kopar
+Lampe à huile romaine ¦ Rómverskur olíulampi
+Bougies sur plateau ¦ Kerti á bakka
+Chandelier à trois branches ¦ Þriggja arma kertastjaki
+Borne lumineuse ¦ Ljósastólpi
+Mur de cadres photos ¦ Myndaveggur
+Portrait d’ancêtre ¦ Forfeðramynd
+Tableau de paysage ¦ Landslagsmálverk
+Marine ¦ Sjávarmynd
+Cadre photo sur pied ¦ Myndarammi á fæti
+Trophée de chasse ¦ Veiðibikar (hjartarhorn)
+Maquette de bateau ¦ Skipslíkan
+Sculpture sur socle ¦ Höggmynd á stalli
+Buste en plâtre ¦ Gipsbrjóstmynd
+Statuette en bronze ¦ Bronsstytta
+Grand vase en terre ¦ Stór leirvasi
+Bouquet de fleurs ¦ Blómvöndur
+Horloge de gare ¦ Járnbrautarklukka
+Coucou de la Forêt-Noire ¦ Gauksklukka frá Svartaskógi
+Rideaux ¦ Gluggatjöld
+Grand tapis persan ¦ Stórt persneskt teppi
+Tapis berbère à losanges ¦ Berbateppi með tíglamynstri
+Kilim ¦ Kelím
+Tapis rond en jute ¦ Kringlótt jútuteppi
+Paravent japonais ¦ Japanskt skilrúm
+Panier à journaux ¦ Blaðakarfa
+Grand panier en osier ¦ Stór tágakarfa
+Garde-feu en laiton ¦ Neistahlíf úr messing
+Terrarium ¦ Terraríum
+Diplôme encadré ¦ Innrammað prófskírteini
+Photo de classe encadrée ¦ Innrammuð bekkjarmynd
+Livret de famille sous verre ¦ Fjölskyldubók undir gleri
+Canevas brodé ¦ Útsaumaður strammi
+Tapisserie murale ¦ Veggteppi
+Médaillon de famille ¦ Fjölskyldumedalía
+Trophée sportif ¦ Íþróttabikar
+Buste de Marianne ¦ Brjóstmynd af Marianne
+Vase de Gien ¦ Vasi frá Gien
+Vase de Sèvres ¦ Vasi frá Sèvres
+Potiche chinoise ¦ Kínversk postulínskrukka
+Vase en étain ¦ Tinvasi
+Bouquet de fleurs séchées ¦ Vöndur af þurrkuðum blómum
+Sapin de Noël décoré ¦ Skreytt jólatré
+Couronne de porte ¦ Hurðakrans
+Photophores ¦ Kertaluktir
+Bateau en bouteille ¦ Skip í flösku
+Maquette de locomotive ¦ Eimreiðarlíkan
+Collection de dés à coudre ¦ Fingurbjargasafn
+Vitrine de minéraux ¦ Steinasafn í skáp
+Collection de papillons ¦ Fiðrildasafn
+Boîte à musique ¦ Spiladós
+Baromètre ¦ Loftvog
+Thermomètre ancien ¦ Gamall hitamælir
+Voilages ¦ Gardínur úr voile
+Rideaux de velours ¦ Flauelsgluggatjöld
+Store bateau ¦ Rúllugardína með fellingum
+Tapis moderne ¦ Nútímalegt teppi
+Tapis en peau de mouton ¦ Gæruskinn
+Poêle à granulés rouge ¦ Rauð kögglaeldavél
+Poêle Godin ¦ Godin-kamína
+Radiateur vertical design ¦ Lóðréttur hönnunarofn
+Chauffe-eau ¦ Vatnshitari
+Téléviseur sur meuble ¦ Sjónvarp á skáp
+Téléviseur au mur ¦ Veggsjónvarp
+Téléviseur à tube ¦ Túbusjónvarp
+Chaîne hi-fi ¦ Hljómflutningstæki
+Enceintes colonnes ¦ Gólfhátalarar
+Radiocassette ¦ Kassettutæki með útvarpi
+Magnétoscope ¦ Myndbandstæki
+Ventilateur de plafond ¦ Loftvifta
+Ventilateur de table ¦ Borðvifta
+Radiateur soufflant ¦ Hitablásari
+Convecteur électrique ¦ Rafmagnsþilofn
+Poêle à bois moderne ¦ Nútímaleg viðarkamína
+Cuisinière à bois moderne ¦ Nútímaleg viðareldavél
+Pompe à chaleur ¦ Varmadæla
+Chaudière au fioul ¦ Olíuketill
+Chaudière à gaz murale ¦ Vegghengdur gasketill
+Cuve à fioul ¦ Olíutankur
+Robot tondeuse ¦ Sláttuþjarkur
+Téléviseur portatif années 70 ¦ Ferðasjónvarp frá áttunda áratugnum
+Lecteur CD ¦ Geislaspilari
+Magnétophone à bandes ¦ Segulbandstæki
+Enceinte connectée ¦ Snjallhátalari
+Piano droit noir ¦ Svart píanó
+Piano droit en acajou ¦ Píanó úr mahóní
+Piano demi-queue ¦ Hálfflygill
+Piano à queue de concert ¦ Konsertflygill
+Épinette ¦ Spínett
+Orgue de salon ¦ Stofuorgel
+Clavier électronique ¦ Hljómborð
+Guitare classique ¦ Klassískur gítar
+Banjo ¦ Banjó
+Mandoline ¦ Mandólín
+Violon sur pupitre ¦ Fiðla á nótnastandi
+Bandonéon ¦ Bandóneon
+Trompette sur pied ¦ Trompet á standi
+Saxophone sur pied ¦ Saxófónn á standi
+Cor de chasse ¦ Veiðihorn
+Clarinette sur pied ¦ Klarínett á standi
+Pupitre de musique ¦ Nótnastandur
+Gramophone à pavillon ¦ Grammófónn með horni
+Cornemuse (biniou) ¦ Sekkjapípa (biniou)
+Timbales ¦ Pákur
+Xylophone ¦ Sílófónn
+Marimba ¦ Marimba
+Cithare ¦ Sítar
+Ukulélé ¦ Úkúlele
+Luth ¦ Lúta
+Flûte traversière sur support ¦ Þverflauta á standi
+Flûte à bec ¦ Blokkflauta
+Trombone sur pied ¦ Básúna á standi
+Hautbois sur support ¦ Óbó á standi
+Harmonica et pupitre ¦ Munnharpa og standur
+Meuble à partitions ¦ Nótnaskápur
+Table de mixage ¦ Hljóðblandari
+Rayonnage de cave ¦ Kjallarahillur
+Cartons de déménagement ¦ Flutningskassar
+Étagère d’archives familiales ¦ Hilla með fjölskylduskjölum
+Coffret à bijoux ¦ Skartgripaskrín
+Portant à vêtements ¦ Fataslá
+Dressing d’angle ¦ Hornfataherbergi
+Meuble à cases (cubes) ¦ Hólfahilla (kubbar)
+Étagère de cellier ¦ Búrhilla
+Boîtes de rangement en plastique ¦ Plastgeymslukassar
+Caisses en bois ¦ Trékassar
+Panier à pique-nique ¦ Lautarferðarkarfa
+Boîte à couture ¦ Saumakassi
+Housse à vêtements ¦ Fatapoki
+Crucifix mural ¦ Róðukross á vegg
+Crèche provençale et santons ¦ Próvensölsk jötusena með santons-styttum
+Chapelet ¦ Talnaband
+Coin du souvenir (photos et bougie) ¦ Minningarhorn (myndir og kerti)
+Boîte à lettres d’amour ¦ Kassi með ástarbréfum
+Vitrine de médailles ¦ Medalíuskápur
+Bouquet de mariée sous globe ¦ Brúðarvöndur undir glerkúpli
+Bénitier mural ¦ Vígsluvatnsskál á vegg
+Icône orthodoxe ¦ Rétttrúnaðaríkon
+Rameau de buis bénit ¦ Vígð buxusgrein
+Statue de saint ¦ Dýrlingastytta
+Plaque de communion encadrée ¦ Innrammað fermingarspjald
+Livre de prières ancien ¦ Gömul bænabók
+Scie circulaire sur table ¦ Borðsög
+Scie à onglets ¦ Geirungssög
+Forge et soufflet ¦ Smiðja og físibelgur
+Établi de mécanicien ¦ Vélvirkjabekkur
+Établi d’horloger ¦ Úrsmiðsborð
+Table de cordonnier ¦ Skósmiðsborð
+Table de coupe de tailleur ¦ Klæðskeraborð
+Paillasse de laboratoire ¦ Rannsóknarstofuborð
+Scie à ruban ¦ Bandsög
+Tour à métaux ¦ Málmrennibekkur
+Surjeteuse ¦ Overlock-saumavél
+Métier à broder ¦ Útsaumsrammi
+Petite citadine ¦ Lítill borgarbíll
+Voiture familiale ¦ Fjölskyldubíll
+Voiture ancienne (années 30) ¦ Fornbíll (fjórði áratugurinn)
+Deux-chevaux ¦ Citroën 2CV
+Coccinelle ¦ VW-bjalla
+Fourgonnette ¦ Sendibíll
+Mobylette ¦ Skellinaðra
+Vélo de course ¦ Keppnishjól
+Vélo hollandais ¦ Hollenskt hjól
+Vélo cargo ¦ Flutningahjól
+Pneus empilés ¦ Dekkjastafli
+Échelle double ¦ Tröppustigi
+Second congélateur ¦ Aukafrystikista
+Voiture tout-terrain ¦ Torfærubíll
+Voiture de sport ¦ Sportbíll
+Voiture électrique ¦ Rafbíll
+Camping-car ¦ Húsbíll
+Moto ancienne avec side-car ¦ Gamalt mótorhjól með hliðarvagni
+Vélo ancien ¦ Gamalt reiðhjól
+VTT ¦ Fjallahjól
+Borne de recharge ¦ Hleðslustöð
+Armoire à outils ¦ Verkfæraskápur
+Chariot de pneus ¦ Dekkjavagn
+Caisse à outils ¦ Verkfærakassi
+Chargeur de batterie ¦ Rafgeymahleðslutæki
