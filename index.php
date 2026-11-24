@@ -1485,6 +1485,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-successoral-outils.js?v=1" defer></script>
 <script src="assets/js/heritage-successoral-plus2.js?v=6" defer></script>
 <script src="assets/js/heritage-successoral-plus2b.js?v=3" defer></script>
+<script src="assets/js/heritage-successoral-droit-core.js?v=1" defer></script>
+<script src="assets/js/heritage-successoral-droit.js?v=1" defer></script>
 <script src="assets/js/heritage-complements-core.js?v=1" defer></script>
 <script src="assets/js/heritage-complements.js?v=1" defer></script>
 <script src="assets/js/heritage-complements-2.js?v=2" defer></script>

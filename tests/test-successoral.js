@@ -262,6 +262,26 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                     assert.deepEqual(errs, []); await ctx.close();
                 });
             }
+            await t('⚖️ Droit et parts : la loi, le régime (gardé), l’actif (jamais gardé), le testament, les droits estimés, l’étranger ; 🗂 Suivi : étapes et sources (gardées, ↶)', async () => {
+                const { ctx, pg, errs } = await open(1440, 900, false, '#successoral');
+                await pg.waitForSelector('[data-succ-open]'); await pg.click('[data-succ-open]'); await pg.waitForSelector('[data-succ-tab="droit"]');
+                await pg.click('[data-succ-tab="droit"]'); await pg.waitForSelector('.sd [data-sd="law"]');
+                assert.match(await pg.textContent('.sd'), /Droit d’aujourd’hui/);
+                await pg.selectOption('.sd [data-sd="matrim"]', 'separation'); await pg.waitForTimeout(500);
+                await pg.fill('.sd [data-sdm="net"]', '300000'); await pg.dispatchEvent('.sd [data-sdm="net"]', 'change'); await pg.waitForSelector('.sd .sd-sum');
+                assert.match(await pg.textContent('.sd'), /Masse de calcul/); assert.match(await pg.textContent('.sd'), /Droits estimés/);
+                await pg.fill('.sd [data-sd="residence"]', 'Belgique'); await pg.dispatchEvent('.sd [data-sd="residence"]', 'change'); await pg.waitForTimeout(500);
+                assert.match(await pg.textContent('.sd'), /règlement européen 650\/2012/);
+                const Dx = await get('get', { id: c2.id }); assert.equal(Dx.options.droit.matrim, 'separation'); assert.equal(Dx.options.droit.residence, 'Belgique'); assert.doesNotMatch(JSON.stringify(Dx.options), /300000/, 'l’actif n’est jamais gardé');
+                await pg.click('[data-succ-tab="suivi"]'); await pg.waitForSelector('.sd-kanban [data-sd-stage="22"]');
+                await pg.selectOption('.sd-kanban [data-sd-stage="22"]', 'contacte'); await pg.waitForSelector('.sd-col[data-sd-col="contacte"] [data-sd-card="22"]');
+                await pg.click('.sd-kanban [data-sd-src="22"]'); await pg.waitForSelector('.sd-srcdlg [data-ssadd]');
+                await pg.click('.sd-srcdlg [data-ssadd="Fichier des décès (INSEE)"]'); await pg.click('.sd-srcdlg [data-ok]'); await pg.waitForTimeout(500);
+                const Dy = await get('get', { id: c2.id }); assert.equal(Dy.options.suivi['22'].stage, 'contacte'); assert.equal(Dy.options.suivi['22'].sources[0].what, 'Fichier des décès (INSEE)');
+                await pg.evaluate(() => [...[...document.querySelectorAll('.ui-toast')].at(-1).querySelectorAll('button')].find(x => /Annuler/.test(x.textContent))?.click()); await pg.waitForTimeout(500);
+                assert.equal((await get('get', { id: c2.id })).options.suivi['22'].sources.length, 0, '↶ Annuler');
+                await noSide(pg); assert.deepEqual(errs, []); await ctx.close();
+            });
             await t('héritiers : parts, total 1, autre hypothèse, liens Légifrance ; arbre ; notaire ; ⋯ de la fiche ; modèles du traitement de texte seulement en usage successoral', async () => {
                 const { ctx, pg, errs } = await open(1440, 900, false, '#successoral');
                 await pg.evaluate(() => { localStorage.setItem('lcnda-succ-tab', JSON.stringify('heirs')); });

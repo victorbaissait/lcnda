@@ -27,7 +27,8 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/successoral_dossiers.php'; // rangement, filtre ⚖️, rattachement, tableau de bord, archive en fichier (migration 91)
 require_once __DIR__ . '/successoral_outils.php'; // ⏱ chronomètre, 🔔 échéances, ✉️ courriers en série, modèles à soi (migration 93)
-require_once __DIR__ . '/successoral_plus2.php'; // ⚰️ 📋 📞 📮 🧾 📈 🤝 🗺 📝 💶 🔗 🗓 👥 🕵️ 📦 : quinze outils de plus et cinq idées (migration 97)
+require_once __DIR__ . '/successoral_plus2.php';
+require_once __DIR__ . '/successoral_droit.php'; // ⚖️ le droit en plus : loi de l'époque, testament, cascade, régime, droits, suivi des héritiers // ⚰️ 📋 📞 📮 🧾 📈 🤝 🗺 📝 💶 🔗 🗓 👥 🕵️ 📦 : quinze outils de plus et cinq idées (migration 97)
 
 const SUCC_STATES = ['ouvert', 'recherche', 'trouves', 'remis', 'clos', 'archive'];
 const SUCC_STATE_LABELS = ['ouvert' => 'Ouvert', 'recherche' => 'En recherche', 'trouves' => 'Héritiers trouvés', 'remis' => 'Remis au notaire', 'clos' => 'Clos', 'archive' => 'Archivé'];
