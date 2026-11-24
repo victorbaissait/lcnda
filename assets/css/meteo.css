@@ -156,3 +156,8 @@
 .wx-dl { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-width: min(100%, 320px); }
 .wx-dl .wx-prog { flex: 1 1 140px; margin: 0; }
 .wx-dl small { color: var(--muted); }
+/* 🌍 les packs du monde (un par continent) : un titre au-dessus */
+.wx-data-head { padding: 10px 12px 8px; border-bottom: 1px solid #e3e5ea; border-top: 2px solid var(--ink); background: var(--surface-2, #f6f7f9); }
+.wx-data-head b { font-size: 14px; }
+.wx-data-head small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+:root[data-theme="dark"] .wx-data-head { background: #2a2c31; border-bottom-color: #474a52; }

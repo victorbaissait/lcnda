@@ -99,16 +99,18 @@
     function badge(r) {
         const B = UI().badge || ((t, k) => `<span class="ui-badge is-${k}">${esc(t)}</span>`);
         if (r.reliability === 'measured') return B(i18n('Mesuré'), 'green', {title: i18n('Station à moins de 15 km (et moins de 150 m d’écart d’altitude)')});
-        if (r.reliability === 'station') return B(i18n('Station à {n} km', {n: Math.round(r.station?.km || 0)}), 'yellow', {title: i18n('Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre)')});
+        if (r.reliability === 'station') return B(i18n('Station à {n} km', {n: Math.round(r.station?.km || 0)}), 'yellow', {title: (r.station?.km || 0) > 40 ? i18n('Station entre 40 et 150 km (pack du monde, là où les stations sont rares) : une idée du temps de la région') : i18n('Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre)')});
         if (r.reliability === 'estimated') return B(i18n('Estimé (carreau ≈ 30 km)'), 'yellow', {title: i18n('Réanalyse ERA5 : aucune station à moins de 40 km')});
         if (r.reliability === 'coarse') return B(i18n('Reconstitution grossière (≈ 100 km)'), 'grey', {title: i18n('Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure')});
         return '';
     }
     const badgeShort = r => (r.reliability === 'station' ? (UI().badge ? UI().badge(`${Math.round(r.station?.km || 0)} km`, 'yellow') : '') : badge(r));
     const COUNTRY = {FR: 'France', BE: 'Belgique', CH: 'Suisse', LU: 'Luxembourg', IT: 'Italie', NL: 'Pays-Bas', ES: 'Espagne', DE: 'Allemagne', PT: 'Portugal', GB: 'Royaume-Uni', PL: 'Pologne', DK: 'Danemark', CZ: 'Tchéquie', SK: 'Slovaquie'};
+    let regionNames = null; // les autres pays (packs du monde) : le nom donné par le navigateur
+    const countryName = c => COUNTRY[c] || (() => { try { regionNames = regionNames || new Intl.DisplayNames(['fr'], {type: 'region'}); return regionNames.of(c) || c; } catch (_) { return c; } })();
     const emptyText = r => i18n(r.why === 'nodata' ? 'Les données météo ne sont pas installées.' : r.why === 'place' ? 'Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'
         : r.why === 'date' ? 'La date n’est pas connue au jour près.'
-        : r.why === 'out' ? 'Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste).' : r.first ? 'Pas de relevé connu près d’ici avant {year} (première station : {name}).' : 'Pas de relevé connu près d’ici avant {year}.', {year: String(r.first?.year || 1836), name: r.first?.name || ''});
+        : r.why === 'out' ? 'Pas de météo pour ce lieu : aucune station connue à moins de 150 km dans les données installées (Réglages → 🌦 Météo d’autrefois : le pack Europe et les packs du monde ajoutent les autres pays).' : r.first ? 'Pas de relevé connu près d’ici avant {year} (première station : {name}).' : 'Pas de relevé connu près d’ici avant {year}.', {year: String(r.first?.year || 1836), name: r.first?.name || ''});
     const sourcesLine = r => (r.sources || []).map(x => { const m = x.mention || x.nom || ''; return `${x.id === 'era5' && r.hours_source && r.reliability !== 'estimated' ? 'Heures : ' : ''}${m}${x.licence && !/Copernicus|20th/.test(m) ? ', ' + x.licence : ''}`; }).join(' · ');
     const shown = (r, s = settings()) => r && r.ok && (r.reliability !== 'coarse' || s.coarse);
 
@@ -434,7 +436,16 @@
     const fmtSize = b => (b >= 1e9 ? `${String(Math.round(b / 1e8) / 10).replace('.', ',')} Go` : b >= 1e6 ? `${Math.round(b / 1e6)} Mo` : `${Math.max(1, Math.round(b / 1e3))} Ko`);
     const PACKS = [['socle', 'Socle', '1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo'],
         ['complet', 'Pack complet', 'Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go'],
-        ['europe', 'Pack Europe', 'Stations d’Allemagne, des Pays-Bas, du Danemark, du Royaume-Uni, d’Espagne, de Pologne, de Tchéquie, d’Italie, du Portugal et de Slovaquie + reconstitution 20CR (1836–1939) et ERA5 sur toute l’Europe · ≈ 1,5 à 3,5 Go']];
+        ['europe', 'Pack Europe', 'Stations d’Allemagne, des Pays-Bas, du Danemark, du Royaume-Uni, d’Espagne, de Pologne, de Tchéquie, d’Italie, du Portugal et de Slovaquie + reconstitution 20CR (1836–1939) et ERA5 sur toute l’Europe · ≈ 1,5 à 3,5 Go'],
+        // les packs du monde (NOAA GHCN-Daily) : un par continent, les plus longues séries bien réparties, chaque jour (températures, pluie, neige)
+        ['monde-amerique-nord', 'Amérique du Nord', '≈ 2 500 stations (États-Unis, Canada, Mexique, Amérique centrale, Caraïbes, Groenland) · __SZ_NA__'],
+        ['monde-amerique-sud', 'Amérique du Sud', '≈ 400 stations · __SZ_SA__'],
+        ['monde-afrique', 'Afrique', '≈ 600 stations · __SZ_AF__'],
+        ['monde-asie', 'Asie', '≈ 1 800 stations (avec la Russie à l’est de l’Oural, la Turquie et le Caucase) · __SZ_AS__'],
+        ['monde-oceanie', 'Océanie', '≈ 1 000 stations (Australie, Nouvelle-Zélande, îles du Pacifique) · __SZ_OC__'],
+        ['monde-europe', 'Europe (hors pack Europe)', '≈ 1 200 stations des pays que le pack Europe n’a pas (Autriche, Scandinavie, Europe de l’Est, Russie jusqu’à l’Oural…) · __SZ_EU__']];
+    const isWorld = k => String(k).startsWith('monde-');
+    const packName = k => (PACKS.find(p => p[0] === k) || [k, 'Pack'])[1];
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.meteo = async token => {
         const ws = document.getElementById('workspace'); if (!ws) return;
@@ -449,10 +460,11 @@
             const dataRows = PACKS.map(([k, name, sub]) => {
                 const f = files[k];
                 const on = f && f.ok;
-                const desc = on ? `${k === 'europe' && f.station_countries?.length ? `Stations : ${f.station_countries.map(c => COUNTRY[c] || c).join(', ')} · ` : ''}${k === 'europe' && f.c20?.n ? `20CR ${f.c20.a}–${f.c20.b} (toute l’Europe) · ` : ''}${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · altitudes : ${A().plural(f.relief, 'carré')} de 1°${f.relief_countries?.length ? ` (${f.relief_countries.map(c => COUNTRY[c] || c).join(', ')})` : ''}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
+                const head = k === 'monde-amerique-nord' ? `<div class="wx-data-head"><b>${esc(i18n('Le reste du monde'))}</b><small>${esc(i18n('Un pack par continent (NOAA GHCN-Daily) : chaque jour, températures, pluie et neige des plus longues séries. Là où les stations sont rares, la plus proche jusqu’à 150 km.'))}</small></div>` : '';
+                const desc = on ? `${isWorld(k) && f.station_countries?.length ? `${A().plural(f.station_countries.length, 'pays', 'pays')} · ` : ''}${k === 'europe' && f.station_countries?.length ? `Stations : ${f.station_countries.map(countryName).join(', ')} · ` : ''}${k === 'europe' && f.c20?.n ? `20CR ${f.c20.a}–${f.c20.b} (toute l’Europe) · ` : ''}${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · altitudes : ${A().plural(f.relief, 'carré')} de 1°${f.relief_countries?.length ? ` (${f.relief_countries.map(countryName).join(', ')})` : ''}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
                 const acts = on ? (f.removable ? `<button type="button" class="button small secondary" data-wx-remove="${k}">🗑 Supprimer le pack</button>` : '')
                     : dlActs(k);
-                return `<div class="wx-data-row"><span><b>${esc(name)}</b><small>${esc(desc)}</small></span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
+                return `${head}<div class="wx-data-row${isWorld(k) ? ' wx-world' : ''}"><span><b>${esc(name)}</b><small>${esc(desc)}</small></span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
             }).join('');
             ws.innerHTML = `<section class="page wx-settings">${UI().pageHeader({title: 'Météo d’autrefois', icon: '🌦', attrs: 'data-ph-title', where: 'Réglages · Données', saved: true, help: 'Le temps qu’il faisait le jour de chaque événement, sans Internet.',
                 actions: ['<button type="button" class="button secondary" data-wx-reset data-ui-reset>↺ Remettre comme au départ</button>']})}
@@ -511,7 +523,7 @@
                     const kind = rm.dataset.wxRemove;
                     try { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); } catch (x) { return A().toast(x.message, 'error'); }
                     await refresh();
-                    A().undoToast(i18n('🗑 {name} supprimé', {name: i18n(PACKS.find(p => p[0] === kind)?.[1] || 'Pack')}), {undo: async () => { await api('meteo_pack_restore', {}, {method: 'POST', body: {kind}}); await refresh(); }, redo: async () => { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); await refresh(); }});
+                    A().undoToast(i18n('🗑 {name} supprimé', {name: i18n(packName(kind))}), {undo: async () => { await api('meteo_pack_restore', {}, {method: 'POST', body: {kind}}); await refresh(); }, redo: async () => { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); await refresh(); }});
                 }
             });
             ws.addEventListener('change', e => {
@@ -570,7 +582,7 @@
         try {
             const r = await post('meteo_pack_finish', {id}); dlForget(k); delete DL.run[k];
             await dlRefresh();
-            A().undoToast?.(i18n('🌦 {name} installé ({n} stations).', {name: i18n(PACKS.find(p => p[0] === k)?.[1] || 'Pack'), n: String(r.stations || 0)}), {undo: async () => { await post('meteo_pack_undo', {kind: k}); await dlRefresh(); }});
+            A().undoToast?.(i18n('🌦 {name} installé ({n} stations).', {name: i18n(packName(k)), n: String(r.stations || 0)}), {undo: async () => { await post('meteo_pack_undo', {kind: k}); await dlRefresh(); }});
         } catch (x) { dlForget(k); delete DL.run[k]; dlRedraw(); A().toast(x.message, 'error'); }
     }
     async function dlCancel(k) {
@@ -583,8 +595,8 @@
     /* ⤓ le fabriquer soi-même (le fichier se fabrique une fois, puis s'importe) */
     function openHowTo(kind) {
         const url = PACK_URLS[kind];
-        const name = {socle: 'le socle', complet: 'le pack complet', europe: 'le pack Europe'}[kind] || 'le pack';
-        const cmd = {socle: 'socle', complet: 'complet', europe: 'europe'}[kind] || 'socle';
+        const name = {socle: 'le socle', complet: 'le pack complet', europe: 'le pack Europe'}[kind] || (isWorld(kind) ? i18n('le pack « {name} »', {name: i18n(packName(kind))}) : 'le pack');
+        const cmd = PACKS.some(p => p[0] === kind) ? kind : 'socle';
         const body = `${url ? `<p><a class="button" href="${esc(url)}" target="_blank" rel="noopener">⤓ Télécharger ${esc(name)}</a></p>` : ''}
             <ol class="wx-steps"><li>${url ? 'Ou bien, sur' : 'Sur'} un ordinateur qui a Internet, suis le mode d’emploi <b>docs/METEO.md</b> (livré avec l’app) : il installe Python si besoin, puis lance<br><code>python3 scripts/meteo/build-meteo.py ${esc(cmd)}</code></li>
             <li>Le fichier <code>meteo-${esc(cmd === 'socle' ? 'socle.sqlite' : 'pack-' + cmd + '.lcmeteo')}</code> apparaît dans le dossier <code>meteo-sortie</code>.</li>
@@ -603,9 +615,9 @@
                 const head = await f.slice(0, 4096).text();
                 if (!head.startsWith('LCMETEO1\n')) throw new Error('ce n’est pas un pack météo de LCNDA (il faut un fichier .lcmeteo, fabriqué par build-meteo.py).');
                 let h; try { h = JSON.parse(head.slice(9).trim()); } catch (_) { throw new Error('l’en-tête du pack est abîmé.'); }
-                if (!['socle', 'complet', 'europe'].includes(h.kind)) throw new Error('sorte de pack inconnue.');
+                if (!PACKS.some(p => p[0] === h.kind)) throw new Error('sorte de pack inconnue.');
                 if (f.size - 4096 !== Number(h.size)) throw new Error('le fichier est incomplet (téléchargement interrompu ?).');
-                const name = {socle: 'Socle', complet: 'Pack complet', europe: 'Pack Europe'}[h.kind];
+                const name = packName(h.kind);
                 const nf = n => Number(n || 0).toLocaleString('fr-FR');
                 const what = `<div class="wx-what"><div><b>${nf(h.stations)}</b><small>stations</small></div>${h.cells ? `<div><b>${nf(h.cells)}</b><small>carreaux</small></div>` : ''}<div><b>${h.from || '?'}–${h.to || '?'}</b><small>chaque jour</small></div>${h.hours_from ? `<div><b>${h.hours_from} →</b><small>heure par heure</small></div>` : ''}<div><b>${fmtSize(h.size)}</b><small>sur le disque</small></div></div>`;
                 const notes = [{kind: 'ok', text: h.kind === 'socle' ? 'Le socle sert de base : les packs s’ajoutent par-dessus.' : 'Le socle reste : le pack s’ajoute par-dessus.'}];
@@ -628,7 +640,7 @@
                 if (txt) txt.textContent = 'Vérification du pack…';
                 const r = await api('meteo_pack_finish', {}, {method: 'POST', body: {id}});
                 cache.clear();
-                const name = {socle: 'Socle', complet: 'Pack complet', europe: 'Pack Europe'}[r.kind];
+                const name = packName(r.kind);
                 return {message: `✓ ${name} importé : ${A().plural(r.stations || h.stations || 0, 'station')}`, undo: async () => { await api('meteo_pack_undo', {}, {method: 'POST', body: {kind: r.kind}}); cache.clear(); if (A().state?.maintenanceTab === 'meteo') ext.maintenance.meteo(); }};
             }});
     }

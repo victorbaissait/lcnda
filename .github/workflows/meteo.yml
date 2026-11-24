@@ -3,8 +3,10 @@
 # L'app n'embarque aucune donnée météo : Réglages → 🌦 Météo d'autrefois → « ⤓ Installer » télécharge le pack depuis cette
 # version (lib/meteo_dl.php), le vérifie (empreinte sha256) puis le range.
 #
-# Lancer : pousser une étiquette « meteo-socle-1 », « meteo-europe-1 » ou « meteo-complet-1 » (le chiffre ne sert qu'à
-# relancer), ou onglet « Actions » → « Données météo » → « Run workflow » (le menu « quoi »).
+# Lancer : pousser une étiquette « meteo-socle-1 », « meteo-europe-1 », « meteo-complet-1 » ou « meteo-monde-asie-1 » (le
+# chiffre ne sert qu'à relancer), ou onglet « Actions » → « Données météo » → « Run workflow » (le menu « quoi »).
+# Les packs du monde (NOAA GHCN-Daily, un par continent : monde-amerique-nord, monde-amerique-sud, monde-afrique, monde-asie,
+# monde-oceanie, monde-europe) se fabriquent un par un, sans réanalyse ni clé.
 # Une fabrication peut dépasser les 6 h d'une machine GitHub : le programme reprend où il s'était arrêté (dossier
 # meteo-sortie gardé en cache d'une fois sur l'autre) ; relancer jusqu'à ce que le pack soit déposé.
 # Sans ERA5 (compte Copernicus personnel) : --sans-era5.
@@ -19,7 +21,7 @@ on:
       quoi:
         description: 'Le pack à fabriquer'
         type: choice
-        options: [socle, europe, complet]
+        options: [socle, europe, complet, monde-amerique-nord, monde-amerique-sud, monde-afrique, monde-asie, monde-oceanie, monde-europe]
         default: socle
   push:
     tags: ['meteo-*']
@@ -42,8 +44,8 @@ jobs:
         id: q
         run: |
           q="${{ inputs.quoi }}"
-          if [ -z "$q" ]; then q=$(echo "${GITHUB_REF_NAME}" | sed -E 's/^meteo-([a-z]+).*/\1/'); fi
-          case "$q" in socle|europe|complet) ;; *) echo "pack inconnu : $q"; exit 1;; esac
+          if [ -z "$q" ]; then q=$(echo "${GITHUB_REF_NAME}" | sed -E 's/^meteo-([a-z-]*[a-z])(-[0-9]+)?$/\1/'); fi
+          case "$q" in socle|europe|complet|monde-amerique-nord|monde-amerique-sud|monde-afrique|monde-asie|monde-oceanie|monde-europe) ;; *) echo "pack inconnu : $q"; exit 1;; esac
           echo "quoi=$q" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-python@v5

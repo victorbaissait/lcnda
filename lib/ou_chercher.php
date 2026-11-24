@@ -25,6 +25,8 @@ declare(strict_types=1);
  * Aucune requête sortante : l'app ne fait que fabriquer des adresses que le navigateur de la personne ouvre.
  */
 
+require_once __DIR__ . '/ou_chercher_openarch.php'; // 🇳🇱🇧🇪 Open Archives : chercher dans les actes indexés, à la demande
+
 const OUC_STATUSES = ['open' => 'À chercher', 'progress' => 'En cours', 'solved' => 'Résolu', 'abandoned' => 'Abandonné'];
 const OUC_MAX_GEN = 16;
 
