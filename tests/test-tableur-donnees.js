@@ -72,7 +72,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         eq(await ed(() => JSON.stringify(window.LCNDA_EXT.boardsInternals.tableValues([['Nom', 'Né', 'Mort', 'Âge'], ['Jean', '1792', '1868', '=C2-B2'], ['Marie', '1798', '1871', '=C3-B3'], ['Moyenne', '', '', '=MOYENNE(D2:D3)'], ['', '', '', '=SOMME(D2:D3)*2'], ['', '', '', '=ARRONDI(D4/3;1)']]))),
             JSON.stringify([['Nom', 'Né', 'Mort', 'Âge'], ['Jean', 1792, 1868, 76], ['Marie', 1798, 1871, 73], ['Moyenne', '', '', 74.5], ['', '', '', 298], ['', '', '', 24.8]]), 'tableValues : mêmes résultats sur le moteur commun');
         eq(await ed(() => JSON.stringify(window.LCNDA_EXT.diagramsInternals.parseTable('Ville;Nombre\n"Saint-Malo; port";"1 200"\nRennes;42'))), JSON.stringify([['Ville', 'Nombre'], ['Saint-Malo; port', '1 200'], ['Rennes', '42']]), 'parseTable des diagrammes : le lecteur commun');
-        eq(await ed(() => Object.keys(window.LCNDA_EXT.sheetTargets).sort().join(',')), 'board,diagram,graph,keynote,recueil', 'les endroits déclarés (ext.sheetTargets)');
+        eq(await ed(() => Object.keys(window.LCNDA_EXT.sheetTargets).sort().join(',')), 'board,diagram,graph,keynote,recueil,textdoc', 'les endroits déclarés (ext.sheetTargets)');
 
         /* A. Diagrammes → Données → 🧾 Modifier les données → ✓ Enregistrer et revenir */
         await ed(() => window.LCNDA_EXT.openDiagramEditor(null, {spec: {kind: 'columns', o: {title: 'Essai'}, series: [{name: 'Hommes'}], rows: [{label: 'A', s0: 1, color: '#ff0000'}, {label: 'B', s0: 2}]}, name: 'Essai'}));
