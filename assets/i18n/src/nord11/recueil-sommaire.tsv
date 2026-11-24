@@ -1,0 +1,88 @@
+fr ¦ vi ¦ id
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ đầu ¦ atas
+milieu de ¦ giữa ¦ tengah
+bas de ¦ cuối ¦ bawah
+p. ¦ tr. ¦ hlm.
+pages pas dites ¦ chưa ghi trang ¦ halaman belum disebut
+{d} sur {n} pages finies ou relues ¦ {d} trên {n} trang đã xong hoặc đã đọc lại ¦ {d} dari {n} halaman selesai atau sudah diperiksa
+Chargement du sommaire… ¦ Đang tải mục lục… ¦ Memuat daftar isi…
+Le sommaire ne s’ouvre pas ¦ Không mở được mục lục ¦ Daftar isi tidak bisa dibuka
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ “{a}” và “{b}” chồng lên nhau ({p} {x}–{y}). ¦ “{a}” dan “{b}” tumpang tindih ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: một giấy tờ “{k}” trong “{t}”. ¦ {p} {n}: akta “{k}” di “{t}”.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: một giấy tờ năm {y} trong “{t}”. ¦ {p} {n}: akta tahun {y} di “{t}”.
+Tout ouvrir ¦ Mở tất cả ¦ Buka semua
+Tout fermer ¦ Đóng tất cả ¦ Tutup semua
+Niveaux montrés ¦ Các cấp hiển thị ¦ Tingkat yang ditampilkan
+Niveau 1 ¦ Cấp 1 ¦ Tingkat 1
++ passages ¦ + đoạn ¦ + petikan
+Chercher dans le sommaire… ¦ Tìm trong mục lục… ¦ Cari di daftar isi…
+Chercher dans le sommaire ¦ Tìm trong mục lục ¦ Cari di daftar isi
+Chapitre… ¦ Chương… ¦ Bab…
+Passage… ¦ Đoạn… ¦ Petikan…
+Proposer le découpage ¦ Đề xuất chia chương ¦ Usulkan pembagian
+Ranger par… ¦ Xếp theo… ¦ Urutkan menurut…
+Mode lecture ¦ Chế độ đọc ¦ Mode baca
+Pas encore de sommaire ¦ Chưa có mục lục ¦ Belum ada daftar isi
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ “＋ Chương…”: một tiêu đề, từ trang này đến trang kia (vd. “Hôn nhân 1870”, trang 15 đến 19). Hoặc “✨ Đề xuất chia chương” dựa trên các giấy tờ đã chép lại. ¦ “＋ Bab…”: sebuah judul, dari halaman sekian sampai halaman sekian (mis. “Pernikahan 1870”, halaman 15 sampai 19). Atau “✨ Usulkan pembagian” berdasarkan akta yang sudah ditranskripsi.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Bấm vào một tiêu đề: mở trang đầu tiên của nó. Một đoạn được mô tả (“từ giữa trang 5 đến giữa trang 7: hôn lễ…”) không tạo hồ sơ. ¦ Klik judul: halaman pertamanya terbuka. Petikan yang dideskripsikan (“dari tengah halaman 5 sampai tengah halaman 7: pernikahan…”) tidak membuat profil.
+Modifier… ¦ Sửa… ¦ Ubah…
+Sous-chapitre… ¦ Chương con… ¦ Subbab…
+Passage dans ce chapitre… ¦ Đoạn trong chương này… ¦ Petikan di bab ini…
+Proposer le découpage de ce chapitre ¦ Đề xuất chia chương này ¦ Usulkan pembagian bab ini
+Supprimer (avec ce qu’il contient) ¦ Xoá (cùng với những gì bên trong) ¦ Hapus (beserta isinya)
+« {t} » retiré du sommaire ¦ Đã gỡ “{t}” khỏi mục lục ¦ “{t}” dihapus dari daftar isi
+toute la page ¦ cả trang ¦ seluruh halaman
+Nouveau passage ¦ Đoạn mới ¦ Petikan baru
+Modifier le passage ¦ Sửa đoạn ¦ Ubah petikan
+Modifier le chapitre ¦ Sửa chương ¦ Ubah bab
+📑 SOMMAIRE ¦ 📑 MỤC LỤC ¦ 📑 DAFTAR ISI
+Ce que c’est (sans créer de fiche) ¦ Đây là gì (không tạo hồ sơ) ¦ Apa ini (tanpa membuat profil)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ vd. Hôn lễ của Louis LACOMBE và Anne MAZAUD ¦ mis. Pernikahan Louis LACOMBE dan Anne MAZAUD
+ex. Mariages 1870 ¦ vd. Hôn nhân 1870 ¦ mis. Pernikahan 1870
+— au premier niveau — ¦ — ở cấp đầu tiên — ¦ — di tingkat pertama —
+— pas dit — ¦ — chưa ghi — ¦ — belum disebut —
+Endroit ¦ Vị trí ¦ Letak
+À la page ¦ Ở trang ¦ Di halaman
+— la même — ¦ — như trên — ¦ — sama —
+Sorte d’acte (facultatif) ¦ Loại giấy tờ (không bắt buộc) ¦ Jenis akta (opsional)
+— toutes — ¦ — tất cả — ¦ — semua —
+Années (facultatif) ¦ Năm (không bắt buộc) ¦ Tahun (opsional)
+Description, résumé, ce qu’on y apprend ¦ Mô tả, tóm tắt, những gì biết được từ đó ¦ Deskripsi, ringkasan, apa yang bisa dipelajari di sana
+Note (facultatif) ¦ Ghi chú (không bắt buộc) ¦ Catatan (opsional)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Một đoạn được mô tả giúp bạn tìm lại những gì có trong tuyển tập; vẫn có thể dùng “👤” trên hồ sơ từ Xưởng. ¦ Petikan yang dideskripsikan membantu kamu menemukan isi kumpulan; “👤” pada profil tetap bisa dilakukan dari Bengkel.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Một chương có thể chứa chương con và đoạn. Loại và năm giúp phát hiện những gì không đúng chỗ. ¦ Bab bisa berisi subbab dan petikan. Jenis dan tahun membantu menemukan yang tidak pada tempatnya.
+« {t} » ajouté au sommaire ¦ Đã thêm “{t}” vào mục lục ¦ “{t}” ditambahkan ke daftar isi
+« {t} » modifié ¦ Đã sửa “{t}” ¦ “{t}” diubah
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Không có gì để đề xuất: không tìm thấy giấy tờ nào trên các trang này. ¦ Tidak ada yang bisa diusulkan: tidak ada akta yang ditemukan di halaman ini.
+Découper « {t} » ¦ Chia “{t}” ¦ Bagi “{t}”
+✨ Proposer le découpage ¦ ✨ Đề xuất chia chương ¦ ✨ Usulkan pembagian
+Ajouter au sommaire ¦ Thêm vào mục lục ¦ Tambahkan ke daftar isi
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Dựa trên các giấy tờ đã chép lại trong Xưởng (loại và năm của chúng), từng trang một. Bỏ chọn những gì không đúng, sửa tiêu đề: không có gì được thêm trước khi bạn chấp nhận. ¦ Berdasarkan akta yang sudah ditranskripsi di Bengkel (jenis dan tahunnya), halaman demi halaman. Hapus centang yang tidak cocok, perbaiki judulnya: tidak ada yang ditambahkan sebelum kamu menerimanya.
+Déjà dans cet ordre. ¦ Đã theo thứ tự này. ¦ Sudah dalam urutan ini.
+Pièces rangées ({x}) ¦ Đã sắp xếp các mục ({x}) ¦ Item diurutkan ({x})
+par sorte ¦ theo loại ¦ menurut jenis
+par cote ¦ theo ký hiệu lưu trữ ¦ menurut kode arsip
+Par date (de l’acte, sinon du document) ¦ Theo ngày (của giấy tờ, nếu không thì của tài liệu) ¦ Menurut tanggal (akta, atau jika tidak ada, dokumen)
+Par sorte d’acte ¦ Theo loại giấy tờ ¦ Menurut jenis akta
+Ranger les pièces ¦ Sắp xếp các mục ¦ Urutkan item
+Tout le sommaire ¦ Toàn bộ mục lục ¦ Seluruh daftar isi
+Pas encore de sommaire. ¦ Chưa có mục lục. ¦ Belum ada daftar isi.
+Faire le sommaire ¦ Lập mục lục ¦ Buat daftar isi
+=chapitre ajouté au sommaire ¦ chương đã thêm vào mục lục ¦ bab ditambahkan ke daftar isi
+Document militaire ¦ Giấy tờ quân sự ¦ Dokumen militer
+Choisis au moins une page. ¦ Chọn ít nhất một trang. ¦ Pilih setidaknya satu halaman.
+Trop de pages d’un coup. ¦ Quá nhiều trang cùng lúc. ¦ Terlalu banyak halaman sekaligus.
+Une de ces pages n’est pas dans ce recueil. ¦ Một trong các trang này không thuộc tuyển tập này. ¦ Salah satu halaman ini tidak ada di kumpulan ini.
+Donne le nom des pages à poser (400 au plus). ¦ Cho biết tên các trang cần ghi (tối đa 400). ¦ Sebutkan nama halaman yang akan dicatat (paling banyak 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Một trong các trang này đã có ảnh: hãy tự gỡ nó. ¦ Salah satu halaman ini sudah punya foto: hapus secara manual.
+Ligne du sommaire introuvable. ¦ Không tìm thấy dòng mục lục. ¦ Baris daftar isi tidak ditemukan.
+La première page n’est pas dans ce recueil. ¦ Trang đầu tiên không thuộc tuyển tập này. ¦ Halaman pertama tidak ada di kumpulan ini.
+La dernière page n’est pas dans ce recueil. ¦ Trang cuối cùng không thuộc tuyển tập này. ¦ Halaman terakhir tidak ada di kumpulan ini.
+Dis sur quelle page commence ce passage. ¦ Cho biết đoạn này bắt đầu ở trang nào. ¦ Sebutkan di halaman mana petikan ini dimulai.
+Le chapitre parent n’est pas dans ce recueil. ¦ Chương cha không thuộc tuyển tập này. ¦ Bab induk tidak ada di kumpulan ini.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Một đoạn được mô tả không thể chứa chương: hãy chọn một chương. ¦ Petikan yang dideskripsikan tidak bisa berisi bab: pilih sebuah bab.
+Un chapitre ne peut pas être dans lui-même. ¦ Một chương không thể nằm trong chính nó. ¦ Bab tidak bisa berada di dalam dirinya sendiri.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Mục lục theo thứ tự các trang: tốt hơn hãy đổi các trang của chương này. ¦ Daftar isi mengikuti urutan halaman: lebih baik ubah halaman bab ini.
+Trop de documents d’un coup (2000 au plus). ¦ Quá nhiều tài liệu cùng lúc (tối đa 2000). ¦ Terlalu banyak dokumen sekaligus (paling banyak 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Tuyển tập được tạo từ hình ảnh (ảnh chụp trang): không tài liệu nào trong số này là hình ảnh. ¦ Kumpulan dibuat dari gambar (foto halaman): tidak satu pun dokumen ini adalah gambar.

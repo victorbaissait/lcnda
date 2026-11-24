@@ -1,0 +1,88 @@
+fr ¦ hr ¦ sl
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ na vrhu ¦ na vrhu
+milieu de ¦ na sredini ¦ na sredini
+bas de ¦ na dnu ¦ na dnu
+p. ¦ str. ¦ str.
+pages pas dites ¦ stranice nisu navedene ¦ strani niso navedene
+{d} sur {n} pages finies ou relues ¦ Gotove ili provjerene stranice: {d} od {n} ¦ Končane ali pregledane strani: {d} od {n}
+Chargement du sommaire… ¦ Učitavanje sadržaja… ¦ Nalaganje kazala…
+Le sommaire ne s’ouvre pas ¦ Sadržaj se ne otvara ¦ Kazala ni mogoče odpreti
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ „{a}” i „{b}” se preklapaju ({p} {x}–{y}). ¦ »{a}« in »{b}« se prekrivata ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: zapis „{k}” u „{t}”. ¦ {p} {n}: vpis »{k}« v »{t}«.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: zapis iz {y}. u „{t}”. ¦ {p} {n}: vpis iz leta {y} v »{t}«.
+Tout ouvrir ¦ Otvori sve ¦ Odpri vse
+Tout fermer ¦ Zatvori sve ¦ Zapri vse
+Niveaux montrés ¦ Prikazane razine ¦ Prikazane ravni
+Niveau 1 ¦ Razina 1 ¦ Raven 1
++ passages ¦ + odlomci ¦ + odlomki
+Chercher dans le sommaire… ¦ Traži u sadržaju… ¦ Išči v kazalu…
+Chercher dans le sommaire ¦ Traži u sadržaju ¦ Išči v kazalu
+Chapitre… ¦ Poglavlje… ¦ Poglavje…
+Passage… ¦ Odlomak… ¦ Odlomek…
+Proposer le découpage ¦ Predloži podjelu ¦ Predlagaj razdelitev
+Ranger par… ¦ Poredaj po… ¦ Razvrsti po…
+Mode lecture ¦ Način čitanja ¦ Bralni način
+Pas encore de sommaire ¦ Još nema sadržaja ¦ Kazala še ni
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ „＋ Poglavlje…”: naslov, od jedne stranice do druge (npr. „Vjenčanja 1870”, stranice 15 do 19). Ili „✨ Predloži podjelu” prema već prepisanim zapisima. ¦ »＋ Poglavje…«: naslov, od ene strani do druge (npr. »Poroke 1870«, strani 15 do 19). Ali »✨ Predlagaj razdelitev« na podlagi že prepisanih vpisov.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Klik na naslov otvara njegovu prvu stranicu. Opisani odlomak („od sredine stranice 5 do sredine stranice 7: vjenčanje…”) ne stvara zapis osobe. ¦ Klik na naslov odpre njegovo prvo stran. Opisani odlomek (»od sredine strani 5 do sredine strani 7: poroka …«) ne ustvari zapisa.
+Modifier… ¦ Uredi… ¦ Uredi…
+Sous-chapitre… ¦ Potpoglavlje… ¦ Podpoglavje…
+Passage dans ce chapitre… ¦ Odlomak u ovom poglavlju… ¦ Odlomek v tem poglavju…
+Proposer le découpage de ce chapitre ¦ Predloži podjelu ovog poglavlja ¦ Predlagaj razdelitev tega poglavja
+Supprimer (avec ce qu’il contient) ¦ Izbriši (sa svime što sadrži) ¦ Izbriši (z vsebino vred)
+« {t} » retiré du sommaire ¦ „{t}” uklonjeno iz sadržaja ¦ »{t}« odstranjeno iz kazala
+toute la page ¦ cijela stranica ¦ cela stran
+Nouveau passage ¦ Novi odlomak ¦ Nov odlomek
+Modifier le passage ¦ Uredi odlomak ¦ Uredi odlomek
+Modifier le chapitre ¦ Uredi poglavlje ¦ Uredi poglavje
+📑 SOMMAIRE ¦ 📑 SADRŽAJ ¦ 📑 KAZALO VSEBINE
+Ce que c’est (sans créer de fiche) ¦ Što je to (bez stvaranja zapisa osobe) ¦ Kaj je to (brez ustvarjanja zapisa)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ npr. Vjenčanje Louisa LACOMBEA i Anne MAZAUD ¦ npr. Poroka Louisa LACOMBA in Anne MAZAUD
+ex. Mariages 1870 ¦ npr. Vjenčanja 1870 ¦ npr. Poroke 1870
+— au premier niveau — ¦ — na prvoj razini — ¦ — na prvi ravni —
+— pas dit — ¦ — nije navedeno — ¦ — ni navedeno —
+Endroit ¦ Mjesto ¦ Mesto
+À la page ¦ Do stranice ¦ Do strani
+— la même — ¦ — ista — ¦ — ista —
+Sorte d’acte (facultatif) ¦ Vrsta matičnog zapisa (neobavezno) ¦ Vrsta matičnega vpisa (neobvezno)
+— toutes — ¦ — sve — ¦ — vse —
+Années (facultatif) ¦ Godine (neobavezno) ¦ Leta (neobvezno)
+Description, résumé, ce qu’on y apprend ¦ Opis, sažetak, što se iz njega saznaje ¦ Opis, povzetek, kaj izveš iz njega
+Note (facultatif) ¦ Bilješka (neobavezno) ¦ Opomba (neobvezno)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Opisani odlomak služi da pronađeš što je u zbirci; „👤” na zapisima osoba i dalje je moguće iz Radionice. ¦ Opisani odlomek ti pomaga najti, kaj je v zbirki; »👤« na zapisih je še vedno mogoč iz Delavnice.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Poglavlje može sadržavati potpoglavlja i odlomke. Vrsta i godine služe da se uoči ono što nije na svom mjestu. ¦ Poglavje lahko vsebuje podpoglavja in odlomke. Vrsta in leta pomagajo opaziti, kar ni na svojem mestu.
+« {t} » ajouté au sommaire ¦ „{t}” dodano u sadržaj ¦ »{t}« dodano v kazalo
+« {t} » modifié ¦ „{t}” izmijenjeno ¦ »{t}« spremenjeno
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Nema se što predložiti: na ovim stranicama nije pronađen nijedan zapis. ¦ Ni česa predlagati: na teh straneh ni najdenega nobenega vpisa.
+Découper « {t} » ¦ Podijeli „{t}” ¦ Razdeli »{t}«
+✨ Proposer le découpage ¦ ✨ Predloži podjelu ¦ ✨ Predlagaj razdelitev
+Ajouter au sommaire ¦ Dodaj u sadržaj ¦ Dodaj v kazalo
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Prema zapisima već prepisanima u Radionici (njihovoj vrsti i godini), stranicu po stranicu. Odznači ono što ne valja, ispravi naslove: ništa se ne dodaje dok ne prihvatiš. ¦ Na podlagi vpisov, že prepisanih v Delavnici (njihove vrste in leta), stran za stranjo. Odznači, kar ni prav, popravi naslove: nič se ne doda, dokler ne sprejmeš.
+Déjà dans cet ordre. ¦ Već je tim redom. ¦ Že v tem vrstnem redu.
+Pièces rangées ({x}) ¦ Jedinice poredane ({x}) ¦ Enote razvrščene ({x})
+par sorte ¦ po vrsti ¦ po vrsti
+par cote ¦ po signaturi ¦ po signaturi
+Par date (de l’acte, sinon du document) ¦ Po datumu (zapisa, inače dokumenta) ¦ Po datumu (vpisa, sicer dokumenta)
+Par sorte d’acte ¦ Po vrsti matičnog zapisa ¦ Po vrsti matičnega vpisa
+Ranger les pièces ¦ Poredaj jedinice ¦ Razvrsti enote
+Tout le sommaire ¦ Cijeli sadržaj ¦ Celotno kazalo
+Pas encore de sommaire. ¦ Još nema sadržaja. ¦ Kazala še ni.
+Faire le sommaire ¦ Napravi sadržaj ¦ Naredi kazalo
+=chapitre ajouté au sommaire ¦ poglavlje dodano u sadržaj|poglavlja dodana u sadržaj|poglavlja dodanih u sadržaj ¦ poglavje dodano v kazalo|poglavji dodani v kazalo|poglavja dodana v kazalo|poglavij dodanih v kazalo
+Document militaire ¦ Vojni dokument ¦ Vojaški dokument
+Choisis au moins une page. ¦ Odaberi barem jednu stranicu. ¦ Izberi vsaj eno stran.
+Trop de pages d’un coup. ¦ Previše stranica odjednom. ¦ Preveč strani hkrati.
+Une de ces pages n’est pas dans ce recueil. ¦ Jedna od ovih stranica nije u ovoj zbirci. ¦ Ena od teh strani ni v tej zbirki.
+Donne le nom des pages à poser (400 au plus). ¦ Navedi nazive stranica koje treba dodati (najviše 400). ¦ Navedi imena strani, ki jih želiš dodati (največ 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Jedna od ovih stranica već ima fotografiju: ukloni je ručno. ¦ Ena od teh strani že ima fotografijo: odstrani jo ročno.
+Ligne du sommaire introuvable. ¦ Redak sadržaja nije pronađen. ¦ Vrstice kazala ni mogoče najti.
+La première page n’est pas dans ce recueil. ¦ Prva stranica nije u ovoj zbirci. ¦ Prva stran ni v tej zbirki.
+La dernière page n’est pas dans ce recueil. ¦ Zadnja stranica nije u ovoj zbirci. ¦ Zadnja stran ni v tej zbirki.
+Dis sur quelle page commence ce passage. ¦ Navedi na kojoj stranici počinje ovaj odlomak. ¦ Navedi, na kateri strani se ta odlomek začne.
+Le chapitre parent n’est pas dans ce recueil. ¦ Nadređeno poglavlje nije u ovoj zbirci. ¦ Nadrejeno poglavje ni v tej zbirki.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Opisani odlomak ne može sadržavati poglavlje: odaberi poglavlje. ¦ Opisani odlomek ne more vsebovati poglavja: izberi poglavje.
+Un chapitre ne peut pas être dans lui-même. ¦ Poglavlje ne može biti unutar samoga sebe. ¦ Poglavje ne more biti v samem sebi.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Sadržaj prati redoslijed stranica: radije promijeni stranice ovog poglavlja. ¦ Kazalo sledi vrstnemu redu strani: raje spremeni strani tega poglavja.
+Trop de documents d’un coup (2000 au plus). ¦ Previše dokumenata odjednom (najviše 2000). ¦ Preveč dokumentov hkrati (največ 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Zbirka se radi od slika (fotografija stranica): nijedan od ovih dokumenata nije slika. ¦ Zbirka se naredi iz slik (fotografij strani): noben od teh dokumentov ni slika.

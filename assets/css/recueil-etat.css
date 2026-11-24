@@ -115,3 +115,22 @@
 .rd-chap { margin: 0 0 6px; font-size: 13px; color: #444; }
 :root[data-theme="dark"] .rs-tw, :root[data-theme="dark"] .rs-bar { background: #1c1f24; }
 :root[data-theme="dark"] .rs-note { color: #ccc; }
+
+/* 🏛 Fiche d'identité (heritage-recueil-fiche.js) */
+.rf-box { border: 1.5px solid #c9ced8; padding: 6px 10px; margin: 4px 0; }
+.rf-box > summary { cursor: pointer; padding: 4px 0; }
+.rf-grid { margin-top: 8px; }
+.rf-comm-in { border: 1.5px solid #c9ced8; padding: 6px 10px; display: grid; gap: 4px; }
+.rf-dl { display: grid; grid-template-columns: minmax(110px, max-content) minmax(0, 1fr); gap: 4px 12px; margin: 0 0 8px; font-size: 13.5px; }
+.rf-dl dt { color: #666; } .rf-dl dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.rf-cite { margin: 6px 0 0; font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.rf-cite q { font-style: normal; font-weight: 600; }
+.rf-comm { margin: 0 0 8px; padding: 6px 10px; border-left: 4px solid #8a8f99; background: #f1f2f4; font-size: 13.5px; }
+.rf-comm.is-ok { border-color: #1a7f37; background: #eaf6ee; }
+.rf-comm.is-lock { border-color: #d4a800; background: #fff8d6; }
+.rf-hide { margin-top: 6px; font-size: 13px; }
+.rf-page { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+.rf-svc td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.rf-gaps-h { margin: 12px 0 4px; font-size: 14px; }
+.rf-gaps { margin: 0; padding-left: 18px; font-size: 13px; }
+:root[data-theme="dark"] .rf-comm { background: #262a31; }

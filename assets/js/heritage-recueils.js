@@ -112,8 +112,9 @@
                 <label>Date du document<input name="date_text" value="${esc(r?.date_text || '')}" placeholder="1805"></label>
                 ${r ? '' : `<label>Nom de la première série de photos<input name="first_version" value="Photos ${new Date().getFullYear()}" placeholder="Photos 2015"></label>`}
                 <label class="span-2">Description<textarea name="description" rows="4" placeholder="Ce que contient le recueil, ce qui manque, où le consulter…">${esc(r?.description || '')}</textarea></label>
-                ${ext.recueilEtat ? `<div class="span-2">${ext.recueilEtat.fields(r)}</div>` : ''}</div>`,
-            onOpen: dl => dl.querySelector('[data-rc-emoji]').addEventListener('click', () => ext.pickEmoji?.(dl.querySelector('[name=icon]'))),
+                ${ext.recueilEtat ? `<div class="span-2">${ext.recueilEtat.fields(r)}</div>` : ''}
+                ${ext.recueilFiche ? `<div class="span-2">${ext.recueilFiche.fields(r)}</div>` : ''}</div>`,
+            onOpen: dl => { dl.querySelector('[data-rc-emoji]').addEventListener('click', () => ext.pickEmoji?.(dl.querySelector('[name=icon]'))); ext.recueilFiche?.bind(dl, r); },
             onSubmit: async form => {
                 const f = Object.fromEntries(new FormData(form));
                 const res = await post('save_recueil', {...f, id: r?.id || 0});
@@ -163,7 +164,7 @@
         const tabs = [['summary', '📋', 'Résumé', ''], ...(ext.recueilEtat ? [['etat', '🗂', 'État', '']] : []), ...(ext.recueilSommaire ? [['sommaire', '📑', 'Sommaire', '']] : []), ['pages', '📄', 'Pages', D.pages.length], ['versions', '🗂️', 'Versions', D.versions.length], ['links', '🔗', 'Rattachements', D.links.length]];
         ws.innerHTML = `<section class="page collection-page h-rc h-rc-one">
             <header class="page-header"><div><button type="button" class="back-link" data-rc-back>← Tous les recueils</button><span class="eyebrow">RECUEIL</span><h2>${esc(r.icon || '📚')} ${esc(r.title)}</h2>
-                <p class="muted">${esc([r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ')) || '&nbsp;'}</p></div>
+                <p class="muted">${esc([r.service ? (r.service.short_name || r.service.name) : r.place_text, r.fonds, r.reference, r.date_text].filter(Boolean).join(' · ')) || '&nbsp;'}</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-rc-cover title="Choisir l’image de couverture du recueil">🖼️ Couverture</button><button type="button" class="button secondary" data-rc-edit>Modifier</button><button type="button" class="button" data-rc-add>＋ Ajouter des photos</button></div></header>
             <div class="h-rc-tabs segmented">${tabs.map(([k, icon, label, n]) => `<button type="button" class="${s.tab === k ? 'is-active' : ''}" data-rc-tab="${k}">${icon} ${label}${n !== '' ? ` <small>${n}</small>` : ''}</button>`).join('')}
                 <span class="h-rc-tabs-info muted">${plural(D.pages.length, 'page', 'pages')} · ${pct} % transcrit${loose().length ? ` · <button type="button" class="link-button h-rc-warn" data-rc-goloose>${plural(loose().length, 'photo à ranger', 'photos à ranger')}</button>` : ''}</span></div>
@@ -372,6 +373,7 @@
                 <div class="h-rc-side">
                     <div class="h-rc-path" data-rc-path hidden></div>
                     <div class="h-rc-etat" data-rc-etat></div>
+                    <div class="h-rc-fiche" data-rc-fiche></div>
                     <label>Nom de la page <small class="muted">(facultatif)</small><input data-rc-field="label" value="${esc(p.label)}" placeholder="f° 12 r°, page 3, lettre B…"></label>
                     <label class="h-rc-trans">Transcription <span class="h-rc-saved muted" data-rc-saved></span><textarea data-rc-field="transcription" rows="16" placeholder="Recopie ici ce qui est écrit sur la page (une ligne par ligne du document)…">${esc(p.transcription)}</textarea></label>
                     ${cur?.media_transcription && !p.transcription.trim() ? `<button type="button" class="link-button" data-rc-usemedia>↧ Reprendre la transcription déjà faite sur cette photo</button>` : ''}
@@ -386,7 +388,8 @@
         const go = id => { if (!id) return; s.page = Number(id); s.image = 0; s.compare = 0; paint(); };
         bindPageTable(body, p);
         ext.recueilSommaire?.pagePath(body.querySelector('[data-rc-path]'), p, etatCtx()); // 📑 « Année 1789 › Baptêmes 1789 »
-        ext.recueilEtat?.pageBox(body.querySelector('[data-rc-etat]'), p, etatCtx()); // 🗂 état du texte, fiabilité, lisibilité, absente
+        ext.recueilEtat?.pageBox(body.querySelector('[data-rc-etat]'), p, etatCtx());
+        ext.recueilFiche?.pageLinks(body.querySelector('[data-rc-fiche]'), p, etatCtx()); // 🏛 vue en ligne, citer // 🗂 état du texte, fiabilité, lisibilité, absente
         body.querySelector('[data-rc-totable]')?.addEventListener('click', () => { const tb = body.querySelector('[data-rc-tablebox]'); tb.open = true; tb.scrollIntoView({behavior: 'smooth', block: 'start'}); });
         body.querySelector('[data-rc-allpages]').addEventListener('click', () => { s.page = 0; paint(); });
         body.querySelectorAll('[data-rc-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.rcGo)));
@@ -749,8 +752,9 @@
         mosaic: ['▦', 'Mosaïque', 'Les pages en vignettes'], note: ['🗒️', 'Note libre', 'Un texte à toi'],
         ...(ext.recueilEtat ? {etat: ['🗂', 'État des pages', 'Une case par page, une couleur par état'], todo: ['📋', 'Reste à faire', 'Ce qui reste, dans l’ordre conseillé']} : {}),
         ...(ext.recueilSommaire ? {chapters: ['📑', 'Sommaire', 'Chapitres et sous-chapitres, avec leur avancement']} : {}),
+        ...(ext.recueilFiche ? {where: ['🏛', 'Où il est', 'Service d’archives, fonds, cote, liens, citation'], access: ['🔐', 'Qui peut le voir', 'Communicabilité, réutilisation, support, état']} : {}),
     };
-    const DEFAULT_SUMMARY = ['cover', 'figures', 'etat', 'todo', 'chapters', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing'].map(type => ({type, on: true, n: type === 'toc' ? 20 : type === 'mosaic' ? 24 : 12, wide: ['description', 'toc', 'mosaic', 'versions', 'etat', 'todo', 'chapters'].includes(type)}));
+    const DEFAULT_SUMMARY = ['cover', 'figures', 'etat', 'todo', 'chapters', 'where', 'access', 'description', 'progress', 'versions', 'links', 'toc', 'mosaic', 'missing'].map(type => ({type, on: true, n: type === 'toc' ? 20 : type === 'mosaic' ? 24 : 12, wide: ['description', 'toc', 'mosaic', 'versions', 'etat', 'todo', 'chapters'].includes(type)}));
     const summaryBlocks = () => { const b = D.recueil.summary?.blocks; return Array.isArray(b) && b.length ? b : DEFAULT_SUMMARY; };
     function blockHtml(b) {
         const [icon, label] = BLOCKS[b.type] || ['•', ''], title = b.title || label, pages = D.pages, imgs = D.images;
@@ -775,6 +779,7 @@
             case 'mosaic': inner = pages.length ? `<div class="h-rc-mosaic">${pages.slice(0, b.n).map(p => { const i = imgById(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-rc-open="${p.id}" title="${esc(pageName(p))}">${i ? `<img src="${esc(thumbUrl(i))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">—</span>'}<small>${p.num}</small></button>`; }).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
             case 'etat': case 'todo': inner = ext.recueilEtat ? ext.recueilEtat.block(b.type, b, etatCtx()) : ''; break;
             case 'chapters': inner = `<div data-rs-host="${b.n || 30}"></div>`; break; // rempli après (heritage-recueil-sommaire.js)
+            case 'where': case 'access': inner = ext.recueilFiche ? ext.recueilFiche.block(b.type, etatCtx()) : ''; break;
             case 'note': inner = b.text ? `<p>${nl(b.text)}</p>` : '<p class="muted">Note vide : « Personnaliser » pour l’écrire.</p>'; break;
         }
         return `<section class="maintenance-panel h-rc-block ${b.wide ? 'is-wide' : ''}"><h3>${icon} ${esc(title)}</h3>${inner}</section>`;
@@ -789,6 +794,7 @@
         body.querySelector('[data-rc-coverzoom]')?.addEventListener('click', () => { const c = D.recueil.cover; openViewer([{id: 0, media_id: c.media_id, filename: c.filename, thumbnail: c.thumbnail, title: 'Couverture'}], 0); });
         bindEntityOpen(body);
         ext.recueilEtat?.bindBlocks(body, etatCtx()); // 📋 reste à faire
+        ext.recueilFiche?.bindBlocks(body, etatCtx()); // 🏛 citer, le service, le mode consultation
         body.querySelectorAll('[data-rs-host]').forEach(el => { el.innerHTML = ext.recueilSommaire?.block({n: Number(el.dataset.rsHost)}, etatCtx(), el) || ''; }); // 📑 sommaire
         A().bindTableLinks?.();
     }

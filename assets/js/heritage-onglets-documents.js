@@ -424,7 +424,7 @@
                     <figcaption data-ong-size>${isImg ? '' : esc(kindWord({...d, sort}))}</figcaption></figure>
                 <div class="card ong-fields"><h3>Description</h3><dl>
                     ${field('Sorte', UI().badge ? UI().badge(kindWord({...d, sort}), 'grey') : kindWord({...d, sort}), true)}
-                    ${field('Cote', d.cote)}
+                    ${field(T('Cote', {ctx: 'archives'}), d.cote)}
                     ${d.date_text ? `<dt>Date</dt><dd>${esc(d.date_text)}${readDate?.ok ? `<small class="ong-ok">✓ Compris : ${esc(readDate.label)}${readDate.extra ? ` ${esc(readDate.extra)}` : ''}</small>` : ''}</dd>` : ''}
                     ${field('Lieu', (d.places || []).map(p => `📍 ${esc(p.name)}`).join(', '), true)}
                     ${field('Fonds · série', [d.service, d.series].filter(Boolean).join(' › '))}

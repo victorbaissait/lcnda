@@ -1,0 +1,88 @@
+fr ¦ ru ¦ uk
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ верх ¦ верх
+milieu de ¦ середина ¦ середина
+bas de ¦ низ ¦ низ
+p. ¦ с. ¦ с.
+pages pas dites ¦ страницы не указаны ¦ сторінки не вказано
+{d} sur {n} pages finies ou relues ¦ Готово или проверено страниц: {d} из {n} ¦ Готово або перевірено сторінок: {d} з {n}
+Chargement du sommaire… ¦ Загрузка оглавления… ¦ Завантаження змісту…
+Le sommaire ne s’ouvre pas ¦ Оглавление не открывается ¦ Зміст не відкривається
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ «{a}» и «{b}» пересекаются ({p} {x}–{y}). ¦ «{a}» і «{b}» перетинаються ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: запись «{k}» в «{t}». ¦ {p} {n}: запис «{k}» у «{t}».
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: запись {y} года в «{t}». ¦ {p} {n}: запис {y} року в «{t}».
+Tout ouvrir ¦ Развернуть всё ¦ Розгорнути все
+Tout fermer ¦ Свернуть всё ¦ Згорнути все
+Niveaux montrés ¦ Показанные уровни ¦ Показані рівні
+Niveau 1 ¦ Уровень 1 ¦ Рівень 1
++ passages ¦ + фрагменты ¦ + фрагменти
+Chercher dans le sommaire… ¦ Искать в оглавлении… ¦ Шукати в змісті…
+Chercher dans le sommaire ¦ Искать в оглавлении ¦ Шукати в змісті
+Chapitre… ¦ Глава… ¦ Розділ…
+Passage… ¦ Фрагмент… ¦ Фрагмент…
+Proposer le découpage ¦ Предложить разбивку ¦ Запропонувати поділ
+Ranger par… ¦ Упорядочить по… ¦ Упорядкувати за…
+Mode lecture ¦ Режим чтения ¦ Режим читання
+Pas encore de sommaire ¦ Оглавления пока нет ¦ Змісту ще немає
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ «＋ Глава…»: название, с такой-то страницы по такую-то (напр. «Браки 1870», страницы 15–19). Или «✨ Предложить разбивку» по уже расшифрованным записям. ¦ «＋ Розділ…»: назва, з такої-то сторінки по таку-то (напр. «Шлюби 1870», сторінки 15–19). Або «✨ Запропонувати поділ» за вже розшифрованими записами.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Щелчок по названию: его первая страница. Описанный фрагмент («с середины страницы 5 до середины страницы 7: брак…») не создаёт карточку. ¦ Клацання по назві: її перша сторінка. Описаний фрагмент («від середини сторінки 5 до середини сторінки 7: шлюб…») не створює картки.
+Modifier… ¦ Изменить… ¦ Змінити…
+Sous-chapitre… ¦ Подглава… ¦ Підрозділ…
+Passage dans ce chapitre… ¦ Фрагмент в этой главе… ¦ Фрагмент у цьому розділі…
+Proposer le découpage de ce chapitre ¦ Предложить разбивку этой главы ¦ Запропонувати поділ цього розділу
+Supprimer (avec ce qu’il contient) ¦ Удалить (вместе с содержимым) ¦ Видалити (разом із вмістом)
+« {t} » retiré du sommaire ¦ «{t}» убрано из оглавления ¦ «{t}» прибрано зі змісту
+toute la page ¦ вся страница ¦ уся сторінка
+Nouveau passage ¦ Новый фрагмент ¦ Новий фрагмент
+Modifier le passage ¦ Изменить фрагмент ¦ Змінити фрагмент
+Modifier le chapitre ¦ Изменить главу ¦ Змінити розділ
+📑 SOMMAIRE ¦ 📑 ОГЛАВЛЕНИЕ ¦ 📑 ЗМІСТ
+Ce que c’est (sans créer de fiche) ¦ Что это (без создания карточки) ¦ Що це (без створення картки)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ напр. Брак Louis LACOMBE и Anne MAZAUD ¦ напр. Шлюб Louis LACOMBE і Anne MAZAUD
+ex. Mariages 1870 ¦ напр. Браки 1870 ¦ напр. Шлюби 1870
+— au premier niveau — ¦ — на первом уровне — ¦ — на першому рівні —
+— pas dit — ¦ — не указано — ¦ — не вказано —
+Endroit ¦ Место ¦ Місце
+À la page ¦ На странице ¦ На сторінці
+— la même — ¦ — та же — ¦ — та сама —
+Sorte d’acte (facultatif) ¦ Вид записи (необязательно) ¦ Вид запису (необов’язково)
+— toutes — ¦ — все — ¦ — усі —
+Années (facultatif) ¦ Годы (необязательно) ¦ Роки (необов’язково)
+Description, résumé, ce qu’on y apprend ¦ Описание, краткое содержание, что из этого можно узнать ¦ Опис, короткий зміст, що з цього можна дізнатися
+Note (facultatif) ¦ Заметка (необязательно) ¦ Нотатка (необов’язково)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Описанный фрагмент помогает тебе найти, что есть в сборнике; «👤» на карточки по-прежнему можно сделать из Мастерской. ¦ Описаний фрагмент допомагає тобі знайти, що є у збірці; «👤» на картки й далі можна зробити з Майстерні.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Глава может содержать подглавы и фрагменты. Вид и годы помогают заметить то, что не на своём месте. ¦ Розділ може містити підрозділи та фрагменти. Вид і роки допомагають помітити те, що не на своєму місці.
+« {t} » ajouté au sommaire ¦ «{t}» добавлено в оглавление ¦ «{t}» додано до змісту
+« {t} » modifié ¦ «{t}» изменено ¦ «{t}» змінено
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Нечего предложить: на этих страницах не найдено ни одной записи. ¦ Нічого запропонувати: на цих сторінках не знайдено жодного запису.
+Découper « {t} » ¦ Разбить «{t}» ¦ Поділити «{t}»
+✨ Proposer le découpage ¦ ✨ Предложить разбивку ¦ ✨ Запропонувати поділ
+Ajouter au sommaire ¦ Добавить в оглавление ¦ Додати до змісту
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ По записям, уже расшифрованным в Мастерской (их виду и году), страница за страницей. Сними отметку с того, что не подходит, исправь названия: ничего не добавится, пока ты не примешь. ¦ За записами, уже розшифрованими в Майстерні (їхнім видом і роком), сторінка за сторінкою. Зніми позначку з того, що не підходить, виправ назви: нічого не додасться, доки ти не приймеш.
+Déjà dans cet ordre. ¦ Уже в этом порядке. ¦ Уже в цьому порядку.
+Pièces rangées ({x}) ¦ Единицы упорядочены ({x}) ¦ Одиниці впорядковано ({x})
+par sorte ¦ по виду ¦ за видом
+par cote ¦ по шифру ¦ за шифром
+Par date (de l’acte, sinon du document) ¦ По дате (записи, иначе документа) ¦ За датою (запису, інакше документа)
+Par sorte d’acte ¦ По виду записи ¦ За видом запису
+Ranger les pièces ¦ Упорядочить единицы ¦ Упорядкувати одиниці
+Tout le sommaire ¦ Всё оглавление ¦ Увесь зміст
+Pas encore de sommaire. ¦ Оглавления пока нет. ¦ Змісту ще немає.
+Faire le sommaire ¦ Составить оглавление ¦ Скласти зміст
+=chapitre ajouté au sommaire ¦ глава добавлена в оглавление|главы добавлены в оглавление|глав добавлено в оглавление ¦ розділ додано до змісту|розділи додано до змісту|розділів додано до змісту
+Document militaire ¦ Военный документ ¦ Військовий документ
+Choisis au moins une page. ¦ Выбери хотя бы одну страницу. ¦ Вибери принаймні одну сторінку.
+Trop de pages d’un coup. ¦ Слишком много страниц сразу. ¦ Забагато сторінок за раз.
+Une de ces pages n’est pas dans ce recueil. ¦ Одной из этих страниц нет в этом сборнике. ¦ Однієї з цих сторінок немає в цій збірці.
+Donne le nom des pages à poser (400 au plus). ¦ Укажи названия страниц для внесения (не больше 400). ¦ Вкажи назви сторінок для внесення (не більше 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ У одной из этих страниц уже есть фото: убери её вручную. ¦ Одна з цих сторінок уже має фото: прибери її вручну.
+Ligne du sommaire introuvable. ¦ Строка оглавления не найдена. ¦ Рядок змісту не знайдено.
+La première page n’est pas dans ce recueil. ¦ Первой страницы нет в этом сборнике. ¦ Першої сторінки немає в цій збірці.
+La dernière page n’est pas dans ce recueil. ¦ Последней страницы нет в этом сборнике. ¦ Останньої сторінки немає в цій збірці.
+Dis sur quelle page commence ce passage. ¦ Укажи, на какой странице начинается этот фрагмент. ¦ Вкажи, на якій сторінці починається цей фрагмент.
+Le chapitre parent n’est pas dans ce recueil. ¦ Родительской главы нет в этом сборнике. ¦ Батьківського розділу немає в цій збірці.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Описанный фрагмент не может содержать главу: выбери главу. ¦ Описаний фрагмент не може містити розділ: вибери розділ.
+Un chapitre ne peut pas être dans lui-même. ¦ Глава не может находиться внутри самой себя. ¦ Розділ не може бути всередині самого себе.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Оглавление следует порядку страниц: лучше измени страницы этой главы. ¦ Зміст іде за порядком сторінок: краще зміни сторінки цього розділу.
+Trop de documents d’un coup (2000 au plus). ¦ Слишком много документов сразу (не больше 2000). ¦ Забагато документів за раз (не більше 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Сборник составляется из изображений (фото страниц): ни один из этих документов не является изображением. ¦ Збірка складається із зображень (фото сторінок): жоден із цих документів не є зображенням.

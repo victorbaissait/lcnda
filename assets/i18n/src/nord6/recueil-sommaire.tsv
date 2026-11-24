@@ -1,0 +1,88 @@
+fr ¦ lt ¦ lv ¦ et
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ viršuje ¦ augšā ¦ üleval
+milieu de ¦ viduryje ¦ vidū ¦ keskel
+bas de ¦ apačioje ¦ apakšā ¦ all
+p. ¦ p. ¦ lpp. ¦ lk
+pages pas dites ¦ puslapiai nenurodyti ¦ lapas nav norādītas ¦ leheküljed märkimata
+{d} sur {n} pages finies ou relues ¦ Baigta arba peržiūrėta puslapių: {d} iš {n} ¦ Pabeigtas vai pārskatītas lapas: {d} no {n} ¦ {d}/{n} lehekülge valmis või üle vaadatud
+Chargement du sommaire… ¦ Įkeliamas turinys… ¦ Ielādē satura rādītāju… ¦ Sisukorra laadimine…
+Le sommaire ne s’ouvre pas ¦ Turinys neatsidaro ¦ Satura rādītājs neatveras ¦ Sisukord ei avane
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ „{a}“ ir „{b}“ persidengia ({p} {x}–{y}). ¦ „{a}“ un „{b}“ pārklājas ({x}.–{y}. {p}). ¦ „{a}“ ja „{b}“ kattuvad ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: įrašas „{k}“ skyriuje „{t}“. ¦ {n}. {p}: ieraksts „{k}“ sadaļā „{t}“. ¦ {p} {n}: kanne „{k}“ osas „{t}“.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: {y} m. įrašas skyriuje „{t}“. ¦ {n}. {p}: {y}. gada ieraksts sadaļā „{t}“. ¦ {p} {n}: {y}. aasta kanne osas „{t}“.
+Tout ouvrir ¦ Išskleisti viską ¦ Izvērst visu ¦ Ava kõik
+Tout fermer ¦ Suskleisti viską ¦ Sakļaut visu ¦ Sulge kõik
+Niveaux montrés ¦ Rodomi lygiai ¦ Rādītie līmeņi ¦ Näidatud tasemed
+Niveau 1 ¦ 1 lygis ¦ 1. līmenis ¦ Tase 1
++ passages ¦ + ištraukos ¦ + fragmenti ¦ + lõigud
+Chercher dans le sommaire… ¦ Ieškoti turinyje… ¦ Meklēt satura rādītājā… ¦ Otsi sisukorrast…
+Chercher dans le sommaire ¦ Ieškoti turinyje ¦ Meklēt satura rādītājā ¦ Otsi sisukorrast
+Chapitre… ¦ Skyrius… ¦ Nodaļa… ¦ Peatükk…
+Passage… ¦ Ištrauka… ¦ Fragments… ¦ Lõik…
+Proposer le découpage ¦ Pasiūlyti suskirstymą ¦ Ieteikt sadalījumu ¦ Paku jaotus
+Ranger par… ¦ Rikiuoti pagal… ¦ Kārtot pēc… ¦ Järjesta…
+Mode lecture ¦ Skaitymo režimas ¦ Lasīšanas režīms ¦ Lugemisrežiim
+Pas encore de sommaire ¦ Turinio dar nėra ¦ Satura rādītāja vēl nav ¦ Sisukorda veel pole
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ „＋ Skyrius…“: pavadinimas, nuo vieno puslapio iki kito (pvz., „Santuokos 1870“, 15–19 puslapiai). Arba „✨ Pasiūlyti suskirstymą“ pagal jau perrašytus įrašus. ¦ „＋ Nodaļa…“: nosaukums, no vienas lapas līdz otrai (piem., „Laulības 1870“, 15.–19. lapa). Vai „✨ Ieteikt sadalījumu“ pēc jau pārrakstītajiem ierakstiem. ¦ „＋ Peatükk…“: pealkiri, ühelt leheküljelt teisele (nt „Abielud 1870“, leheküljed 15–19). Või „✨ Paku jaotus“ juba ümber kirjutatud kannete põhjal.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Paspaudus pavadinimą atsidaro pirmasis jo puslapis. Aprašyta ištrauka („nuo 5 puslapio vidurio iki 7 puslapio vidurio: santuoka…“) nesukuria kortelės. ¦ Klikšķis uz nosaukuma atver tā pirmo lapu. Aprakstīts fragments („no 5. lapas vidus līdz 7. lapas vidum: laulība…“) neizveido kartīti. ¦ Klõps pealkirjal avab selle esimese lehekülje. Kirjeldatud lõik („lehekülje 5 keskelt lehekülje 7 keskeni: abielu …“) ei loo kaarti.
+Modifier… ¦ Redaguoti… ¦ Rediģēt… ¦ Muuda…
+Sous-chapitre… ¦ Poskyris… ¦ Apakšnodaļa… ¦ Alapeatükk…
+Passage dans ce chapitre… ¦ Ištrauka šiame skyriuje… ¦ Fragments šajā nodaļā… ¦ Lõik selles peatükis…
+Proposer le découpage de ce chapitre ¦ Pasiūlyti šio skyriaus suskirstymą ¦ Ieteikt šīs nodaļas sadalījumu ¦ Paku selle peatüki jaotus
+Supprimer (avec ce qu’il contient) ¦ Ištrinti (su visu turiniu) ¦ Dzēst (ar visu saturu) ¦ Kustuta (koos sisuga)
+« {t} » retiré du sommaire ¦ „{t}“ pašalinta iš turinio ¦ „{t}“ izņemts no satura rādītāja ¦ „{t}“ sisukorrast eemaldatud
+toute la page ¦ visas puslapis ¦ visa lapa ¦ kogu lehekülg
+Nouveau passage ¦ Nauja ištrauka ¦ Jauns fragments ¦ Uus lõik
+Modifier le passage ¦ Redaguoti ištrauką ¦ Rediģēt fragmentu ¦ Muuda lõiku
+Modifier le chapitre ¦ Redaguoti skyrių ¦ Rediģēt nodaļu ¦ Muuda peatükki
+📑 SOMMAIRE ¦ 📑 TURINYS ¦ 📑 SATURA RĀDĪTĀJS ¦ 📑 SISUKORD
+Ce que c’est (sans créer de fiche) ¦ Kas tai yra (nekuriant kortelės) ¦ Kas tas ir (neizveidojot kartīti) ¦ Mis see on (kaarti loomata)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ pvz., Louis LACOMBE ir Anne MAZAUD santuoka ¦ piem., Louis LACOMBE un Anne MAZAUD laulība ¦ nt Louis LACOMBE’i ja Anne MAZAUD’ abielu
+ex. Mariages 1870 ¦ pvz., Santuokos 1870 ¦ piem., Laulības 1870 ¦ nt Abielud 1870
+— au premier niveau — ¦ — pirmajame lygyje — ¦ — pirmajā līmenī — ¦ — esimesel tasemel —
+— pas dit — ¦ — nenurodyta — ¦ — nav norādīts — ¦ — märkimata —
+Endroit ¦ Vieta ¦ Vieta ¦ Asukoht
+À la page ¦ Iki puslapio ¦ Līdz lapai ¦ Leheküljeni
+— la même — ¦ — tas pats — ¦ — tā pati — ¦ — sama —
+Sorte d’acte (facultatif) ¦ Dokumento rūšis (neprivaloma) ¦ Dokumenta veids (nav obligāts) ¦ Dokumendi liik (valikuline)
+— toutes — ¦ — visos — ¦ — visi — ¦ — kõik —
+Années (facultatif) ¦ Metai (neprivaloma) ¦ Gadi (nav obligāti) ¦ Aastad (valikuline)
+Description, résumé, ce qu’on y apprend ¦ Aprašymas, santrauka, ką iš jo sužinai ¦ Apraksts, kopsavilkums, ko no tā uzzini ¦ Kirjeldus, kokkuvõte, mida sealt teada saad
+Note (facultatif) ¦ Pastaba (neprivaloma) ¦ Piezīme (nav obligāta) ¦ Märkus (valikuline)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Aprašyta ištrauka padeda rasti, kas yra rinkinyje; „👤“ kortelėse vis tiek galima naudoti iš Dirbtuvių. ¦ Aprakstīts fragments palīdz atrast, kas ir krājumā; „👤“ uz kartītēm joprojām ir pieejams no Darbnīcas. ¦ Kirjeldatud lõik aitab leida, mis kogumikus on; „👤“ kaartidel on endiselt võimalik Töökojast.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Skyriuje gali būti poskyrių ir ištraukų. Rūšis ir metai padeda pastebėti, kas ne savo vietoje. ¦ Nodaļā var būt apakšnodaļas un fragmenti. Veids un gadi palīdz pamanīt to, kas nav savā vietā. ¦ Peatükk võib sisaldada alapeatükke ja lõike. Liik ja aastad aitavad märgata, mis pole oma kohal.
+« {t} » ajouté au sommaire ¦ „{t}“ pridėta prie turinio ¦ „{t}“ pievienots satura rādītājam ¦ „{t}“ lisatud sisukorda
+« {t} » modifié ¦ „{t}“ pakeista ¦ „{t}“ mainīts ¦ „{t}“ muudetud
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Nėra ką pasiūlyti: šiuose puslapiuose nerasta jokių įrašų. ¦ Nav ko ieteikt: šajās lapās nav atrasts neviens ieraksts. ¦ Pole midagi pakkuda: neilt lehekülgedelt ei leitud ühtegi kannet.
+Découper « {t} » ¦ Suskirstyti „{t}“ ¦ Sadalīt „{t}“ ¦ Jaota „{t}“
+✨ Proposer le découpage ¦ ✨ Pasiūlyti suskirstymą ¦ ✨ Ieteikt sadalījumu ¦ ✨ Paku jaotus
+Ajouter au sommaire ¦ Pridėti prie turinio ¦ Pievienot satura rādītājam ¦ Lisa sisukorda
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Pagal įrašus, jau perrašytus Dirbtuvėse (jų rūšį ir metus), puslapis po puslapio. Atžymėk, kas netinka, pataisyk pavadinimus: niekas nepridedama, kol nesutiksi. ¦ Pēc Darbnīcā jau pārrakstītajiem ierakstiem (to veida un gada), lapu pa lapai. Noņem atzīmi tam, kas neder, izlabo nosaukumus: nekas netiek pievienots, kamēr tu nepiekrīti. ¦ Töökojas juba ümber kirjutatud kannete põhjal (nende liik ja aasta), lehekülg lehekülje haaval. Eemalda linnuke sellelt, mis ei sobi, paranda pealkirjad: midagi ei lisata enne, kui nõustud.
+Déjà dans cet ordre. ¦ Jau šia tvarka. ¦ Jau šajā secībā. ¦ Juba selles järjekorras.
+Pièces rangées ({x}) ¦ Vienetai surikiuoti ({x}) ¦ Vienības sakārtotas ({x}) ¦ Üksused järjestatud ({x})
+par sorte ¦ pagal rūšį ¦ pēc veida ¦ liigi järgi
+par cote ¦ pagal šifrą ¦ pēc šifra ¦ viite järgi
+Par date (de l’acte, sinon du document) ¦ Pagal datą (įrašo, kitaip dokumento) ¦ Pēc datuma (ieraksta, citādi dokumenta) ¦ Kuupäeva järgi (kande, muidu dokumendi)
+Par sorte d’acte ¦ Pagal dokumento rūšį ¦ Pēc dokumenta veida ¦ Dokumendi liigi järgi
+Ranger les pièces ¦ Rikiuoti vienetus ¦ Kārtot vienības ¦ Järjesta üksused
+Tout le sommaire ¦ Visas turinys ¦ Viss satura rādītājs ¦ Kogu sisukord
+Pas encore de sommaire. ¦ Turinio dar nėra. ¦ Satura rādītāja vēl nav. ¦ Sisukorda veel pole.
+Faire le sommaire ¦ Sudaryti turinį ¦ Izveidot satura rādītāju ¦ Koosta sisukord
+=chapitre ajouté au sommaire ¦ skyrius pridėtas prie turinio|skyriai pridėti prie turinio|skyrių pridėta prie turinio ¦ nodaļas pievienotas satura rādītājam|nodaļa pievienota satura rādītājam|nodaļas pievienotas satura rādītājam ¦ peatükk lisatud sisukorda|peatükki lisatud sisukorda
+Document militaire ¦ Karinis dokumentas ¦ Militārs dokuments ¦ Sõjaväedokument
+Choisis au moins une page. ¦ Pasirink bent vieną puslapį. ¦ Izvēlies vismaz vienu lapu. ¦ Vali vähemalt üks lehekülg.
+Trop de pages d’un coup. ¦ Per daug puslapių vienu metu. ¦ Pārāk daudz lapu vienlaikus. ¦ Liiga palju lehekülgi korraga.
+Une de ces pages n’est pas dans ce recueil. ¦ Vieno iš šių puslapių nėra šiame rinkinyje. ¦ Viena no šīm lapām nav šajā krājumā. ¦ Üks neist lehekülgedest pole selles kogumikus.
+Donne le nom des pages à poser (400 au plus). ¦ Nurodyk pridedamų puslapių pavadinimus (daugiausia 400). ¦ Norādi pievienojamo lapu nosaukumus (ne vairāk kā 400). ¦ Anna lisatavate lehekülgede nimed (kuni 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Vienas iš šių puslapių jau turi nuotrauką: pašalink jį rankiniu būdu. ¦ Vienai no šīm lapām jau ir fotogrāfija: noņem to manuāli. ¦ Ühel neist lehekülgedest on juba foto: eemalda see käsitsi.
+Ligne du sommaire introuvable. ¦ Turinio eilutė nerasta. ¦ Satura rādītāja rinda nav atrasta. ¦ Sisukorra rida ei leitud.
+La première page n’est pas dans ce recueil. ¦ Pirmojo puslapio nėra šiame rinkinyje. ¦ Pirmā lapa nav šajā krājumā. ¦ Esimene lehekülg pole selles kogumikus.
+La dernière page n’est pas dans ce recueil. ¦ Paskutinio puslapio nėra šiame rinkinyje. ¦ Pēdējā lapa nav šajā krājumā. ¦ Viimane lehekülg pole selles kogumikus.
+Dis sur quelle page commence ce passage. ¦ Nurodyk, kuriame puslapyje prasideda ši ištrauka. ¦ Norādi, kurā lapā sākas šis fragments. ¦ Ütle, millisel leheküljel see lõik algab.
+Le chapitre parent n’est pas dans ce recueil. ¦ Aukštesniojo skyriaus nėra šiame rinkinyje. ¦ Virsnodaļa nav šajā krājumā. ¦ Ülempeatükk pole selles kogumikus.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Aprašytoje ištraukoje negali būti skyriaus: pasirink skyrių. ¦ Aprakstīts fragments nevar saturēt nodaļu: izvēlies nodaļu. ¦ Kirjeldatud lõik ei saa sisaldada peatükki: vali peatükk.
+Un chapitre ne peut pas être dans lui-même. ¦ Skyrius negali būti pats savyje. ¦ Nodaļa nevar būt pati sevī. ¦ Peatükk ei saa olla iseenda sees.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Turinys eina puslapių tvarka: geriau pakeisk šio skyriaus puslapius. ¦ Satura rādītājs seko lapu secībai: labāk maini šīs nodaļas lapas. ¦ Sisukord järgib lehekülgede järjekorda: muuda pigem selle peatüki lehekülgi.
+Trop de documents d’un coup (2000 au plus). ¦ Per daug dokumentų vienu metu (daugiausia 2000). ¦ Pārāk daudz dokumentu vienlaikus (ne vairāk kā 2000). ¦ Liiga palju dokumente korraga (kuni 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Rinkinys sudaromas iš vaizdų (puslapių nuotraukų): nė vienas iš šių dokumentų nėra vaizdas. ¦ Krājumu veido no attēliem (lapu fotogrāfijām): neviens no šiem dokumentiem nav attēls. ¦ Kogumik tehakse piltidest (lehekülgede fotodest): ükski neist dokumentidest pole pilt.

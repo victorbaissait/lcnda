@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 107;
+const SCHEMA_VERSION = 108;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -136,6 +136,7 @@ function migration_steps(): array
         105 => 'schema_v105',
         106 => 'schema_v106',
         107 => 'schema_v107',
+        108 => 'schema_v108',
     ];
 }
 
@@ -2833,6 +2834,13 @@ function schema_v105(PDO $pdo): void
 {
     if (!function_exists('doc_links_install')) { require_once __DIR__ . '/doc_links.php'; }
     doc_links_install($pdo);
+}
+
+/** 108 : 🏛 la fiche d'identité d'un recueil (service d'archives, fonds, série, liens, autre exemplaire, communicabilité, réutilisation, support, état…) */
+function schema_v108(PDO $pdo): void
+{
+    if (!function_exists('recueil_fiche_install')) { require_once __DIR__ . '/recueil_fiche.php'; }
+    recueil_fiche_install($pdo);
 }
 
 /** 107 : 📑 le sommaire d'un recueil (chapitres sur plusieurs niveaux, passages décrits) */

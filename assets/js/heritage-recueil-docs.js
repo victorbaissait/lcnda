@@ -37,7 +37,7 @@
             body: `<p class="muted">${esc(T('Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages.'))}</p>
                 <div class="form-grid rd-grid">
                     <label class="full">${esc(T('Nom du recueil'))}<input name="title" required maxlength="200" value="${esc(same('series'))}" placeholder="${esc(T('ex. Registre de Sancoins, 1870-1872'))}"></label>
-                    <label>${esc(T('Cote'))}<input name="reference" maxlength="300" value="${esc(same('cote'))}" placeholder="${esc(T('ex. 3 E 1234'))}"></label>
+                    <label>${esc(T('Cote', {ctx: 'archives'}))}<input name="reference" maxlength="300" value="${esc(same('cote'))}" placeholder="${esc(T('ex. 3 E 1234'))}"></label>
                     <label>${esc(T('Lieu'))}<input name="place_text" maxlength="300" value="${esc(same('place'))}" placeholder="${esc(T('ex. Sancoins'))}"></label>
                     <label>${esc(T('Années'))}<input name="date_text" maxlength="100" value="${esc(span)}" placeholder="${esc(T('ex. 1870-1872'))}"></label>
                 </div>

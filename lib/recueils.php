@@ -47,7 +47,8 @@ function recueils_list(PDO $pdo, string $q = ''): array
     $out = [];
     foreach ($rows as $r) {
         $id = (int) $r['id'];
-        if ($q !== '' && !str_contains(mb_strtolower($r['title'] . ' ' . $r['reference'] . ' ' . $r['place_text'] . ' ' . $r['description']), $q)) { continue; }
+        if ($q !== '' && !str_contains(mb_strtolower($r['title'] . ' ' . $r['reference'] . ' ' . $r['place_text'] . ' ' . $r['description'] . ' ' . ($r['fonds'] ?? '') . ' ' . ($r['series'] ?? '')), $q)) { continue; }
+        if (function_exists('recueil_hidden_in_kiosk') && recueil_hidden_in_kiosk($pdo, $r)) { continue; } // 🔐 mode consultation : pas les recueils non communicables
         $cover = recueil_cover($pdo, $id);
         $out[] = ['id' => $id, 'title' => $r['title'], 'icon' => $r['icon'], 'reference' => $r['reference'], 'place_text' => $r['place_text'], 'date_text' => $r['date_text'],
             'description' => $r['description'], 'updated_at' => $r['updated_at'], 'cover' => $cover,
@@ -76,6 +77,7 @@ function recueil_cover(PDO $pdo, int $id): ?array
 function recueil_detail(PDO $pdo, int $id): array
 {
     $r = recueil_row($pdo, $id);
+    if (function_exists('recueil_hidden_in_kiosk') && recueil_hidden_in_kiosk($pdo, $r)) { throw new RuntimeException('Mode consultation : ce recueil n’est pas communicable.'); } // 🔐
     $r['id'] = (int) $r['id'];
     $summary = json_decode((string) $r['summary'], true);
     $r['summary'] = is_array($summary) ? $summary : null;
@@ -114,7 +116,9 @@ function recueil_detail(PDO $pdo, int $id): array
     }
     unset($p);
     $out = ['recueil' => $r, 'versions' => $versions, 'pages' => $pages, 'images' => $images, 'links' => recueil_links_resolved($pdo, $id, $pages)];
-    return function_exists('recueil_etat_decorate') ? recueil_etat_decorate($pdo, $out) : $out; // 🗂 l'état de chaque page (lib/recueil_etat.php)
+    if (function_exists('recueil_etat_decorate')) { $out = recueil_etat_decorate($pdo, $out); } // 🗂 l'état de chaque page (lib/recueil_etat.php)
+    if (function_exists('recueil_fiche_decorate')) { $out = recueil_fiche_decorate($pdo, $out); } // 🏛 la fiche d'identité (lib/recueil_fiche.php)
+    return $out;
 }
 
 function save_recueil(PDO $pdo, array $data): array
@@ -134,6 +138,7 @@ function save_recueil(PDO $pdo, array $data): array
         $pdo->prepare('INSERT INTO recueil_versions(recueil_id, name, position) VALUES(?,?,1)')->execute([$id, $name]);
     }
     if (function_exists('recueil_etat_save_meta')) { recueil_etat_save_meta($pdo, $id, $data); } // 🗂 numérotation, pages attendues
+    if (function_exists('recueil_fiche_save_meta')) { recueil_fiche_save_meta($pdo, $id, $data); } // 🏛 service, fonds, liens, communicabilité…
     if (array_key_exists('cover_media_id', $data)) {
         $cover = safe_int($data['cover_media_id'] ?? 0);
         if ($cover) { $m = $pdo->prepare("SELECT 1 FROM media WHERE id=? AND media_type='image'"); $m->execute([$cover]); if (!$m->fetchColumn()) { throw new RuntimeException('Choisis une image pour la couverture.'); } }

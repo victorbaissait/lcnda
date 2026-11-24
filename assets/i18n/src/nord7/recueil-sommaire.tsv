@@ -1,0 +1,88 @@
+fr ¦ is
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ efst á
+milieu de ¦ á miðri
+bas de ¦ neðst á
+p. ¦ bls.
+pages pas dites ¦ síður ekki tilgreindar
+{d} sur {n} pages finies ou relues ¦ {d} af {n} síðum lokið eða yfirfarnar
+Chargement du sommaire… ¦ Hleð efnisyfirliti…
+Le sommaire ne s’ouvre pas ¦ Efnisyfirlitið opnast ekki
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ „{a}“ og „{b}“ skarast ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: skjal „{k}“ í „{t}“.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: skjal frá {y} í „{t}“.
+Tout ouvrir ¦ Opna allt
+Tout fermer ¦ Loka öllu
+Niveaux montrés ¦ Sýnd stig
+Niveau 1 ¦ Stig 1
++ passages ¦ + textabrot
+Chercher dans le sommaire… ¦ Leita í efnisyfirliti…
+Chercher dans le sommaire ¦ Leita í efnisyfirliti
+Chapitre… ¦ Kafli…
+Passage… ¦ Textabrot…
+Proposer le découpage ¦ Stinga upp á skiptingu
+Ranger par… ¦ Raða eftir…
+Mode lecture ¦ Lestrarhamur
+Pas encore de sommaire ¦ Ekkert efnisyfirlit enn
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ „＋ Kafli…“: titill, frá einni síðu til annarrar (t.d. „Hjónabönd 1870“, síður 15 til 19). Eða „✨ Stinga upp á skiptingu“ út frá skjölum sem þegar eru skrifuð upp.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Smelltu á titil: fyrsta síðan hans opnast. Textabrot sem er lýst („frá miðri síðu 5 að miðri síðu 7: hjónavígsla…“) býr ekki til spjald.
+Modifier… ¦ Breyta…
+Sous-chapitre… ¦ Undirkafli…
+Passage dans ce chapitre… ¦ Textabrot í þessum kafla…
+Proposer le découpage de ce chapitre ¦ Stinga upp á skiptingu þessa kafla
+Supprimer (avec ce qu’il contient) ¦ Eyða (með því sem hann inniheldur)
+« {t} » retiré du sommaire ¦ „{t}“ fjarlægt úr efnisyfirliti
+toute la page ¦ öll síðan
+Nouveau passage ¦ Nýtt textabrot
+Modifier le passage ¦ Breyta textabroti
+Modifier le chapitre ¦ Breyta kafla
+📑 SOMMAIRE ¦ 📑 EFNISYFIRLIT
+Ce que c’est (sans créer de fiche) ¦ Hvað þetta er (án þess að búa til spjald)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ t.d. Hjónavígsla Louis LACOMBE og Anne MAZAUD
+ex. Mariages 1870 ¦ t.d. Hjónabönd 1870
+— au premier niveau — ¦ — á efsta stigi —
+— pas dit — ¦ — ekki tilgreint —
+Endroit ¦ Staðsetning
+À la page ¦ Á síðu
+— la même — ¦ — sú sama —
+Sorte d’acte (facultatif) ¦ Tegund skjals (valfrjálst)
+— toutes — ¦ — allar —
+Années (facultatif) ¦ Ár (valfrjálst)
+Description, résumé, ce qu’on y apprend ¦ Lýsing, samantekt, það sem þar kemur fram
+Note (facultatif) ¦ Athugasemd (valfrjálst)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Textabrot sem er lýst hjálpar þér að finna það sem er í safnritinu; „👤“ á spjöldin er áfram hægt úr Smiðjunni.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Kafli getur innihaldið undirkafla og textabrot. Tegundin og árin hjálpa til við að finna það sem er ekki á sínum stað.
+« {t} » ajouté au sommaire ¦ „{t}“ bætt við efnisyfirlit
+« {t} » modifié ¦ „{t}“ breytt
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Ekkert að stinga upp á: engin skjöl fundust á þessum síðum.
+Découper « {t} » ¦ Skipta „{t}“
+✨ Proposer le découpage ¦ ✨ Stinga upp á skiptingu
+Ajouter au sommaire ¦ Bæta við efnisyfirlit
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Út frá skjölum sem þegar eru skrifuð upp í Smiðjunni (tegund þeirra og ár), síðu fyrir síðu. Taktu hakið af því sem passar ekki, leiðréttu titlana: engu er bætt við fyrr en þú samþykkir.
+Déjà dans cet ordre. ¦ Þegar í þessari röð.
+Pièces rangées ({x}) ¦ Gögnum raðað ({x})
+par sorte ¦ eftir tegund
+par cote ¦ eftir safnmarki
+Par date (de l’acte, sinon du document) ¦ Eftir dagsetningu (skjalsins, annars gagnsins)
+Par sorte d’acte ¦ Eftir tegund skjals
+Ranger les pièces ¦ Raða gögnunum
+Tout le sommaire ¦ Allt efnisyfirlitið
+Pas encore de sommaire. ¦ Ekkert efnisyfirlit enn.
+Faire le sommaire ¦ Búa til efnisyfirlit
+=chapitre ajouté au sommaire ¦ kafla bætt við efnisyfirlit|köflum bætt við efnisyfirlit
+Document militaire ¦ Herskjal
+Choisis au moins une page. ¦ Veldu að minnsta kosti eina síðu.
+Trop de pages d’un coup. ¦ Of margar síður í einu.
+Une de ces pages n’est pas dans ce recueil. ¦ Ein af þessum síðum er ekki í þessu safnriti.
+Donne le nom des pages à poser (400 au plus). ¦ Gefðu upp heiti síðnanna sem á að skrá (400 að hámarki).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Ein af þessum síðum er þegar með mynd: fjarlægðu hana handvirkt.
+Ligne du sommaire introuvable. ¦ Lína í efnisyfirliti finnst ekki.
+La première page n’est pas dans ce recueil. ¦ Fyrsta síðan er ekki í þessu safnriti.
+La dernière page n’est pas dans ce recueil. ¦ Síðasta síðan er ekki í þessu safnriti.
+Dis sur quelle page commence ce passage. ¦ Segðu á hvaða síðu þetta textabrot byrjar.
+Le chapitre parent n’est pas dans ce recueil. ¦ Yfirkaflinn er ekki í þessu safnriti.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Textabrot sem er lýst getur ekki innihaldið kafla: veldu kafla.
+Un chapitre ne peut pas être dans lui-même. ¦ Kafli getur ekki verið inni í sjálfum sér.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Efnisyfirlitið fylgir röð síðnanna: breyttu frekar síðum þessa kafla.
+Trop de documents d’un coup (2000 au plus). ¦ Of mörg skjöl í einu (2000 að hámarki).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Safnrit er búið til úr myndum (ljósmyndum af síðum): ekkert þessara skjala er mynd.

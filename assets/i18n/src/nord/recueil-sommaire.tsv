@@ -1,0 +1,88 @@
+fr ¦ cs ¦ sv ¦ da
+# 📑 Sommaire d’un recueil, messages du serveur (heritage-recueil-sommaire.js, lib/recueil_toc.php, lib/recueil_etat.php, lib/recueils.php)
+haut de ¦ začátek ¦ början av ¦ starten af
+milieu de ¦ střed ¦ mitten av ¦ midten af
+bas de ¦ konec ¦ slutet av ¦ slutningen af
+p. ¦ s. ¦ s. ¦ s.
+pages pas dites ¦ stránky neuvedeny ¦ sidor inte angivna ¦ sider ikke angivet
+{d} sur {n} pages finies ou relues ¦ Hotové nebo zkontrolované stránky: {d} z {n} ¦ {d} av {n} sidor klara eller granskade ¦ {d} af {n} sider færdige eller gennemsete
+Chargement du sommaire… ¦ Načítání obsahu… ¦ Laddar innehållet… ¦ Indlæser indholdet…
+Le sommaire ne s’ouvre pas ¦ Obsah nejde otevřít ¦ Innehållet går inte att öppna ¦ Indholdet kan ikke åbnes
+« {a} » et « {b} » se chevauchent ({p} {x}–{y}). ¦ „{a}“ a „{b}“ se překrývají ({p} {x}–{y}). ¦ ”{a}” och ”{b}” överlappar ({p} {x}–{y}). ¦ »{a}« og »{b}« overlapper ({p} {x}–{y}).
+{p} {n} : un acte « {k} » dans « {t} ». ¦ {p} {n}: záznam „{k}“ v „{t}“. ¦ {p} {n}: en handling ”{k}” i ”{t}”. ¦ {p} {n}: et dokument »{k}« i »{t}«.
+{p} {n} : un acte de {y} dans « {t} ». ¦ {p} {n}: záznam z roku {y} v „{t}“. ¦ {p} {n}: en handling från {y} i ”{t}”. ¦ {p} {n}: et dokument fra {y} i »{t}«.
+Tout ouvrir ¦ Rozbalit vše ¦ Öppna alla ¦ Fold alle ud
+Tout fermer ¦ Sbalit vše ¦ Stäng alla ¦ Fold alle sammen
+Niveaux montrés ¦ Zobrazené úrovně ¦ Visade nivåer ¦ Viste niveauer
+Niveau 1 ¦ Úroveň 1 ¦ Nivå 1 ¦ Niveau 1
++ passages ¦ + pasáže ¦ + avsnitt ¦ + passager
+Chercher dans le sommaire… ¦ Hledat v obsahu… ¦ Sök i innehållet… ¦ Søg i indholdet…
+Chercher dans le sommaire ¦ Hledat v obsahu ¦ Sök i innehållet ¦ Søg i indholdet
+Chapitre… ¦ Kapitola… ¦ Kapitel… ¦ Kapitel…
+Passage… ¦ Pasáž… ¦ Avsnitt… ¦ Passage…
+Proposer le découpage ¦ Navrhnout rozdělení ¦ Föreslå indelning ¦ Foreslå inddeling
+Ranger par… ¦ Seřadit podle… ¦ Ordna efter… ¦ Ordn efter…
+Mode lecture ¦ Režim čtení ¦ Läsläge ¦ Læsetilstand
+Pas encore de sommaire ¦ Zatím žádný obsah ¦ Inget innehåll än ¦ Intet indhold endnu
+« ＋ Chapitre… » : un titre, de telle page à telle page (ex. « Mariages 1870 », pages 15 à 19). Ou « ✨ Proposer le découpage » d’après les actes déjà transcrits. ¦ „＋ Kapitola…“: název, od jedné stránky po druhou (např. „Sňatky 1870“, stránky 15 až 19). Nebo „✨ Navrhnout rozdělení“ podle již přepsaných záznamů. ¦ ”＋ Kapitel…”: en titel, från en sida till en annan (t.ex. ”Vigslar 1870”, sidorna 15 till 19). Eller ”✨ Föreslå indelning” utifrån de handlingar som redan är transkriberade. ¦ »＋ Kapitel…«: en titel, fra én side til en anden (f.eks. »Vielser 1870«, side 15 til 19). Eller »✨ Foreslå inddeling« ud fra de dokumenter, der allerede er transskriberet.
+Un clic sur un titre : sa première page. Un passage décrit (« du milieu de la page 5 au milieu de la page 7 : mariage… ») ne crée pas de fiche. ¦ Klik na název: jeho první stránka. Popsaná pasáž („od středu stránky 5 do středu stránky 7: sňatek…“) nevytváří kartu. ¦ Ett klick på en titel: dess första sida. Ett beskrivet avsnitt (”från mitten av sidan 5 till mitten av sidan 7: vigsel …”) skapar ingen post. ¦ Et klik på en titel: dens første side. En beskrevet passage (»fra midten af side 5 til midten af side 7: vielse …«) opretter ikke en post.
+Modifier… ¦ Upravit… ¦ Redigera… ¦ Rediger…
+Sous-chapitre… ¦ Podkapitola… ¦ Underkapitel… ¦ Underkapitel…
+Passage dans ce chapitre… ¦ Pasáž v této kapitole… ¦ Avsnitt i det här kapitlet… ¦ Passage i dette kapitel…
+Proposer le découpage de ce chapitre ¦ Navrhnout rozdělení této kapitoly ¦ Föreslå indelning av det här kapitlet ¦ Foreslå inddeling af dette kapitel
+Supprimer (avec ce qu’il contient) ¦ Smazat (i s obsahem) ¦ Radera (med innehållet) ¦ Slet (med indholdet)
+« {t} » retiré du sommaire ¦ „{t}“ odebráno z obsahu ¦ ”{t}” borttaget ur innehållet ¦ »{t}« fjernet fra indholdet
+toute la page ¦ celá stránka ¦ hela sidan ¦ hele siden
+Nouveau passage ¦ Nová pasáž ¦ Nytt avsnitt ¦ Ny passage
+Modifier le passage ¦ Upravit pasáž ¦ Redigera avsnittet ¦ Rediger passagen
+Modifier le chapitre ¦ Upravit kapitolu ¦ Redigera kapitlet ¦ Rediger kapitlet
+📑 SOMMAIRE ¦ 📑 OBSAH ¦ 📑 INNEHÅLL ¦ 📑 INDHOLD
+Ce que c’est (sans créer de fiche) ¦ Co to je (bez vytvoření karty) ¦ Vad det är (utan att skapa en post) ¦ Hvad det er (uden at oprette en post)
+ex. Mariage de Louis LACOMBE et Anne MAZAUD ¦ např. Sňatek Louise LACOMBE a Anne MAZAUD ¦ t.ex. Vigsel mellan Louis LACOMBE och Anne MAZAUD ¦ f.eks. Vielse af Louis LACOMBE og Anne MAZAUD
+ex. Mariages 1870 ¦ např. Sňatky 1870 ¦ t.ex. Vigslar 1870 ¦ f.eks. Vielser 1870
+— au premier niveau — ¦ — na první úrovni — ¦ — på översta nivån — ¦ — på øverste niveau —
+— pas dit — ¦ — neuvedeno — ¦ — inte angivet — ¦ — ikke angivet —
+Endroit ¦ Místo na stránce ¦ Plats på sidan ¦ Placering
+À la page ¦ Na stránce ¦ På sidan ¦ På side
+— la même — ¦ — stejná — ¦ — samma — ¦ — den samme —
+Sorte d’acte (facultatif) ¦ Druh záznamu (nepovinné) ¦ Typ av handling (valfritt) ¦ Dokumenttype (valgfrit)
+— toutes — ¦ — všechny — ¦ — alla — ¦ — alle —
+Années (facultatif) ¦ Roky (nepovinné) ¦ År (valfritt) ¦ År (valgfrit)
+Description, résumé, ce qu’on y apprend ¦ Popis, shrnutí, co se z toho dozvíš ¦ Beskrivning, sammanfattning, vad man får veta ¦ Beskrivelse, resumé, hvad man får at vide
+Note (facultatif) ¦ Poznámka (nepovinné) ¦ Anteckning (valfritt) ¦ Note (valgfrit)
+Un passage décrit sert à retrouver ce qu’il y a dans le recueil ; « 👤 » sur les fiches reste possible depuis l’Atelier. ¦ Popsaná pasáž pomáhá najít, co ve sborníku je; „👤“ na kartách jde dál dělat z Dílny. ¦ Ett beskrivet avsnitt hjälper dig att hitta vad som finns i samlingen; ”👤” på poster går fortfarande att göra från Verkstaden. ¦ En beskrevet passage hjælper dig med at finde, hvad der er i samlingen; »👤« på poster er stadig muligt fra Værkstedet.
+Un chapitre peut contenir des sous-chapitres et des passages. La sorte et les années servent à repérer ce qui n’est pas à sa place. ¦ Kapitola může obsahovat podkapitoly a pasáže. Druh a roky pomáhají odhalit, co není na svém místě. ¦ Ett kapitel kan innehålla underkapitel och avsnitt. Typen och åren hjälper dig att upptäcka det som inte är på sin plats. ¦ Et kapitel kan indeholde underkapitler og passager. Typen og årene hjælper med at opdage, hvad der ikke er på sin plads.
+« {t} » ajouté au sommaire ¦ „{t}“ přidáno do obsahu ¦ ”{t}” tillagt i innehållet ¦ »{t}« føjet til indholdet
+« {t} » modifié ¦ „{t}“ upraveno ¦ ”{t}” ändrat ¦ »{t}« ændret
+Rien à proposer : aucun acte repéré sur ces pages. ¦ Není co navrhnout: na těchto stránkách nebyl nalezen žádný záznam. ¦ Inget att föreslå: inga handlingar hittades på de här sidorna. ¦ Intet at foreslå: ingen dokumenter fundet på disse sider.
+Découper « {t} » ¦ Rozdělit „{t}“ ¦ Dela in ”{t}” ¦ Inddel »{t}«
+✨ Proposer le découpage ¦ ✨ Navrhnout rozdělení ¦ ✨ Föreslå indelning ¦ ✨ Foreslå inddeling
+Ajouter au sommaire ¦ Přidat do obsahu ¦ Lägg till i innehållet ¦ Føj til indholdet
+D’après les actes déjà transcrits dans l’Atelier (leur sorte et leur année), page par page. Décoche ce qui ne va pas, corrige les titres : rien n’est ajouté avant que tu acceptes. ¦ Podle záznamů již přepsaných v Dílně (jejich druhu a roku), stránku po stránce. Odškrtni, co nesedí, oprav názvy: nic se nepřidá, dokud to nepřijmeš. ¦ Utifrån de handlingar som redan är transkriberade i Verkstaden (typ och år), sida för sida. Bocka ur det som inte stämmer, rätta titlarna: inget läggs till förrän du godkänner. ¦ Ud fra de dokumenter, der allerede er transskriberet i Værkstedet (deres type og år), side for side. Fjern fluebenet ved det, der ikke passer, ret titlerne: intet bliver tilføjet, før du accepterer.
+Déjà dans cet ordre. ¦ Už je v tomto pořadí. ¦ Redan i den här ordningen. ¦ Allerede i denne rækkefølge.
+Pièces rangées ({x}) ¦ Seřazené dokumenty ({x}) ¦ Handlingar ordnade ({x}) ¦ Dokumenter ordnet ({x})
+par sorte ¦ podle druhu ¦ efter typ ¦ efter type
+par cote ¦ podle signatury ¦ efter signum ¦ efter arkivsignatur
+Par date (de l’acte, sinon du document) ¦ Podle data (záznamu, jinak dokumentu) ¦ Efter datum (handlingens, annars dokumentets) ¦ Efter dato (aktens, ellers dokumentets)
+Par sorte d’acte ¦ Podle druhu záznamu ¦ Efter typ av handling ¦ Efter dokumenttype
+Ranger les pièces ¦ Seřadit dokumenty ¦ Ordna handlingarna ¦ Ordn dokumenterne
+Tout le sommaire ¦ Celý obsah ¦ Hela innehållet ¦ Hele indholdet
+Pas encore de sommaire. ¦ Zatím žádný obsah. ¦ Inget innehåll än. ¦ Intet indhold endnu.
+Faire le sommaire ¦ Vytvořit obsah ¦ Skapa innehållet ¦ Lav indholdet
+=chapitre ajouté au sommaire ¦ kapitola přidána do obsahu|kapitoly přidány do obsahu|kapitol přidáno do obsahu ¦ kapitel tillagt i innehållet|kapitel tillagda i innehållet ¦ kapitel føjet til indholdet|kapitler føjet til indholdet
+Document militaire ¦ Vojenský dokument ¦ Militärt dokument ¦ Militært dokument
+Choisis au moins une page. ¦ Vyber aspoň jednu stránku. ¦ Välj minst en sida. ¦ Vælg mindst én side.
+Trop de pages d’un coup. ¦ Příliš mnoho stránek najednou. ¦ För många sidor på en gång. ¦ For mange sider på én gang.
+Une de ces pages n’est pas dans ce recueil. ¦ Jedna z těchto stránek není v tomto sborníku. ¦ En av de här sidorna finns inte i den här samlingen. ¦ En af disse sider er ikke i denne samling.
+Donne le nom des pages à poser (400 au plus). ¦ Zadej názvy stránek k přidání (nejvýše 400). ¦ Ange namnen på sidorna som ska läggas till (högst 400). ¦ Angiv navnene på de sider, der skal tilføjes (højst 400).
+Une de ces pages a déjà une photo : retire-la à la main. ¦ Jedna z těchto stránek už má fotku: odeber ji ručně. ¦ En av de här sidorna har redan ett foto: ta bort den för hand. ¦ En af disse sider har allerede et foto: fjern den manuelt.
+Ligne du sommaire introuvable. ¦ Řádek obsahu nebyl nalezen. ¦ Raden i innehållet hittades inte. ¦ Linjen i indholdet blev ikke fundet.
+La première page n’est pas dans ce recueil. ¦ První stránka není v tomto sborníku. ¦ Första sidan finns inte i den här samlingen. ¦ Første side er ikke i denne samling.
+La dernière page n’est pas dans ce recueil. ¦ Poslední stránka není v tomto sborníku. ¦ Sista sidan finns inte i den här samlingen. ¦ Sidste side er ikke i denne samling.
+Dis sur quelle page commence ce passage. ¦ Uveď, na které stránce tato pasáž začíná. ¦ Ange på vilken sida avsnittet börjar. ¦ Angiv, på hvilken side passagen begynder.
+Le chapitre parent n’est pas dans ce recueil. ¦ Nadřazená kapitola není v tomto sborníku. ¦ Det överordnade kapitlet finns inte i den här samlingen. ¦ Det overordnede kapitel er ikke i denne samling.
+Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre. ¦ Popsaná pasáž nemůže obsahovat kapitolu: vyber kapitolu. ¦ Ett beskrivet avsnitt kan inte innehålla ett kapitel: välj ett kapitel. ¦ En beskrevet passage kan ikke indeholde et kapitel: vælg et kapitel.
+Un chapitre ne peut pas être dans lui-même. ¦ Kapitola nemůže být sama v sobě. ¦ Ett kapitel kan inte ligga i sig självt. ¦ Et kapitel kan ikke ligge i sig selv.
+Le sommaire suit l’ordre des pages : change plutôt les pages de ce chapitre. ¦ Obsah sleduje pořadí stránek: změň raději stránky této kapitoly. ¦ Innehållet följer sidornas ordning: ändra hellre sidorna för det här kapitlet. ¦ Indholdet følger sidernes rækkefølge: ret hellere siderne i dette kapitel.
+Trop de documents d’un coup (2000 au plus). ¦ Příliš mnoho dokumentů najednou (nejvýše 2000). ¦ För många dokument på en gång (högst 2000). ¦ For mange dokumenter på én gang (højst 2000).
+Un recueil se fait avec des images (photos de pages) : aucun de ces documents n’en est une. ¦ Sborník se skládá z obrázků (fotek stránek): žádný z těchto dokumentů obrázkem není. ¦ En samling består av bilder (foton av sidor): inget av de här dokumenten är en bild. ¦ En samling består af billeder (fotos af sider): ingen af disse dokumenter er et billede.
