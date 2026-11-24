@@ -1,0 +1,835 @@
+fr ¦ ro
+Au bout de combien de jours sans nouvelles un animal est-il « en retard » ? Rouge au double du délai. ¦ După câte zile fără vești un animal e „întârziat”? Roșu la dublul termenului.
+Espèce inconnue ¦ Specie necunoscută
+Délais par espèce changés ¦ Termene pe specie schimbate
+Animal (nom, bague…) ¦ Animal (nume, inel…)
+ou bague lue ¦ sau inel citit
+Bague lue ¦ Inel citit
+nb ¦ nr.
+Nombre vus ¦ Număr văzute
+Le menu de choix n’est pas encore chargé. ¦ Meniul de alegere nu e încă încărcat.
+⚡ Saisie d’une séance ¦ ⚡ Înregistrarea unei sesiuni
+Tout enregistrer ¦ Salvează tot
+Le lieu, la date et l’observateur une seule fois ; puis une ligne par animal vu (ou par bague lue, si tu ne sais pas encore qui c’est). ¦ Locul, data și observatorul o singură dată; apoi un rând pentru fiecare animal văzut (sau pentru fiecare inel citit, dacă nu știi încă cine e).
+Site de suivi ¦ Loc de monitorizare
+Observateur ¦ Observator
+Nb ¦ Nr.
+Dis quand a eu lieu la séance. ¦ Spune când a avut loc sesiunea.
+Choisis un site ou un lieu pour la séance. ¦ Alege un loc de monitorizare sau un loc pentru sesiune.
+Ajoute au moins un animal vu. ¦ Adaugă cel puțin un animal văzut.
+Séance enregistrée : {n} ¦ Sesiune salvată: {n}
+🖨 Fiche de terrain ¦ 🖨 Fișă de teren
+Aperçu et impression ¦ Previzualizare și tipărire
+Les animaux attendus sur un site (ceux qu’on y a déjà vus), avec leurs bagues et marques, et des cases à cocher : pour une sortie sans ordinateur. ¦ Animalele așteptate într-un loc (cele deja văzute acolo), cu inelele și semnele lor și căsuțe de bifat: pentru o ieșire fără calculator.
+Tous les animaux suivis ¦ Toate animalele urmărite
+Tous les sites ¦ Toate locurile
+Aucun animal déjà vu sur ce site. ¦ Niciun animal văzut încă în acest loc.
+Fiche de terrain — {s} ¦ Fișă de teren — {s}
+Fiche de terrain ¦ Fișă de teren
+Date de la dernière observation ¦ Data ultimei observații
+Une colonne pour les notes ¦ O coloană pentru note
+Date : ____________  Observateur : ____________________  Météo : ____________ ¦ Data: ____________  Observator: ____________________  Vreme: ____________
+SUCCESSIONS ¦ SUCCESIUNI
+Qui s’en charge ? ¦ Cine se ocupă?
+ex. Claire LACOMBE (vide : personne) ¦ ex. Claire LACOMBE (gol: nimeni)
+C’est moi (pour le filtre « Mes dossiers ») ¦ Sunt eu (pentru filtrul „Dosarele mele”)
+Sur cet ordinateur, « moi » = {name}. ¦ Pe acest calculator, „eu” = {name}.
+Confié à {who} ¦ Încredințat lui {who}
+Plus personne n’en est chargé ¦ Nu se mai ocupă nimeni
+Chargé du dossier : ¦ Responsabil de dosar:
+👥 Confier le dossier… ¦ 👥 Încredințează dosarul…
+👥 Chargé du dossier n° {n} ¦ 👥 Responsabil de dosarul nr. {n}
+à confier ¦ de încredințat
+👥 Qui s’occupe de cette échéance ? ¦ 👥 Cine se ocupă de acest termen?
+🛡 Conflit d’intérêts possible : {n} déjà dans un autre dossier ouvert. Vérifie avant de signer un contrat. ¦ 🛡 Posibil conflict de interese: {n} e deja în alt dosar deschis. Verifică înainte să semnezi un contract.
+dossier n° {n} ¦ dosarul nr. {n}
+Pas d’image de cette pièce dans la base : relie l’acte scanné à l’événement, puis recommence. ¦ Nu există nicio imagine a acestui act în bază: leagă actul scanat de eveniment, apoi reîncearcă.
+La lecture automatique n’a pas marché : {err} ¦ Citirea automată n-a mers: {err}
+Aucun texte lu sur cette image (écriture manuscrite ? essaie l’Atelier de transcription). ¦ Niciun text citit pe această imagine (scris de mână? încearcă Atelierul de transcriere).
+rien de trouvé ¦ nimic găsit
+PIÈCE ¦ ACT
+🔎 Lecture automatique — à vérifier ¦ 🔎 Citire automată — de verificat
+✍️ Noter au journal ¦ ✍️ Notează în jurnal
+Ce que la machine a cru lire sur « {t} ». Décoche ce qui est faux : rien n’est changé dans les fiches. ¦ Ce a crezut mașina că citește pe „{t}”. Debifează ce e greșit: nimic nu se schimbă în fișe.
+Lecture automatique de la pièce « {p} » (à vérifier) — {line} ¦ Citirea automată a actului „{p}” (de verificat) — {line}
+Noté au journal du dossier. ¦ Notat în jurnalul dosarului.
+Lire le texte de l’acte scanné et proposer noms, dates et lieux ¦ Citește textul actului scanat și propune nume, date și locuri
+🔎 Lire la pièce ¦ 🔎 Citește actul
+demandée ¦ cerut
+à obtenir ¦ de obținut
+Tableau généalogique de dévolution ¦ Tabel genealogic al devoluțiunii
+PROJET — à vérifier et compléter par le notaire. Calcul indicatif établi d’après les fiches de la base. ¦ PROIECT — de verificat și completat de notar. Calcul orientativ făcut după fișele din bază.
+Pièces (renvois) ¦ Acte (trimiteri)
+conjoint survivant ¦ soț supraviețuitor
+Aucun héritier calculé pour l’instant. ¦ Niciun moștenitor calculat deocamdată.
+Les pièces ¦ Actele
+Établi le {d}. Document de travail : il ne remplace ni l’acte de notoriété ni le certificat d’hérédité. ¦ Întocmit la {d}. Document de lucru: nu înlocuiește nici actul de notorietate, nici certificatul de moștenitor.
+Projet de tableau de dévolution ¦ Proiect de tabel al devoluțiunii
+🖨 Imprimer le tableau ¦ 🖨 Tipărește tabelul
+À joindre à l’acte de notoriété : chaque héritier, son lien, sa part, et les pièces qui le prouvent (P1, P2…). ¦ De anexat la actul de notorietate: fiecare moștenitor, legătura lui, partea lui și actele care o dovedesc (P1, P2…).
+Tableau de dévolution — {n} ¦ Tabelul devoluțiunii — {n}
+Tableau de dévolution ¦ Tabelul devoluțiunii
+Tableau de dévolution {n} ¦ Tabelul devoluțiunii {n}
+12 juin 1890 ¦ 12 iunie 1890
+2000 et après ¦ 2000 și după
+7 mai 1925 ¦ 7 mai 1925
+Aucun chemin de parenté connu avec la personne de départ. ¦ Niciun drum de rudenie cunoscut cu persoana de pornire.
+Aucun lien de parenté connu. ¦ Nicio legătură de rudenie cunoscută.
+Aucun lien de parenté trouvé avec {nm} (personne de départ). ¦ Nicio legătură de rudenie găsită cu {nm} (persoana de pornire).
+Aucune différence : la fiche est comme avant cette modification. ¦ Nicio diferență: fișa e ca înainte de această modificare.
+Aucune union enregistrée pour cette fiche. ¦ Nicio uniune înregistrată pentru această fișă.
+Avant cette modification ¦ Înainte de această modificare
+Caché en mode consultation, dans les exports, les partages et le site. ¦ Ascuns în modul consultare, în exporturi, partajări și pe site.
+Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé. ¦ Acest element nu mai există: folosește „Restaurează” dacă a fost șters.
+Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait. ¦ Această fișă are {n} {what}: păstrează-l pe cel bun, celălalt devine o „altă versiune” a acestui fapt.
+Chargement de la fiche familiale… ¦ Se încarcă fișa familială…
+Chargement des pesées… ¦ Se încarcă cântăririle…
+Choisis « ⤓ PDF » pour enregistrer le fichier. ¦ Alege „⤓ PDF” ca să salvezi fișierul.
+Confidentialité et recherche ¦ Confidențialitate și căutare
+Courbe de poids ¦ Curba greutății
+Créer la famille ¦ Creează familia
+C’est la personne de départ (de cujus). ¦ E persoana de pornire (de cujus).
+C’est la personne de départ. ¦ E persoana de pornire.
+Date du média moins date de naissance ¦ Data media minus data nașterii
+Dernière modification ¦ Ultima modificare
+Dernières fiches créées ¦ Ultimele fișe create
+En vie et décédés ¦ În viață și decedați
+Exporter la fiche ¦ Exportă fișa
+Exporter la fiche (JSON) ¦ Exportă fișa (JSON)
+Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés. ¦ Exporturi rapide ale acestei fișe: 🖨 Tipărește deschide previzualizarea aplicației (format, orientare, PDF), cu ordinea, mărimea și vizibilitatea blocurilor acestei fișe. Evenimentele 🔒 confidențiale nu sunt exportate niciodată.
+FICHE FAMILIALE ¦ FIȘĂ FAMILIALĂ
+Famille enregistrée : {n} fiche(s) créée(s). ¦ Familie salvată: {n} fișă(e) creată(e).
+Famille enregistrée. ¦ Familie salvată.
+Fiche en JSON ¦ Fișa în JSON
+Fiche familiale ¦ Fișă familială
+Fiche familiale de {nm} ¦ Fișa familială a lui {nm}
+Fiche familiale… ¦ Fișă familială…
+Gardé : l’autre version est notée dans « Date alternative ». ¦ Păstrat: cealaltă versiune e notată în „Dată alternativă”.
+Genre inconnu ¦ Gen necunoscut
+Hors Sosa ¦ În afara Sosa
+Imprimer la fiche ¦ Tipărește fișa
+Indique au moins le père ou la mère. ¦ Indică cel puțin tatăl sau mama.
+Inhumation ¦ Înmormântare
+Les deux branches ¦ Ambele ramuri
+Lien retiré : {nm} ¦ Legătură eliminată: {nm}
+Naissance (les plus anciens d’abord) ¦ Naștere (cei mai vechi întâi)
+Naissance (les plus récents d’abord) ¦ Naștere (cei mai recenți întâi)
+Naissance inconnue ¦ Naștere necunoscută
+Note de recherche ¦ Notă de cercetare
+Ouvre d’abord une fiche. ¦ Deschide mai întâi o fișă.
+PDF (aperçu d’impression) ¦ PDF (previzualizare tipărire)
+Pas de fiche d’animal liée. ¦ Nicio fișă de animal legată.
+Pas de mariage enregistré. ¦ Nicio căsătorie înregistrată.
+Pas encore de pesée : ajoute un poids dans 🩺 Santé. ¦ Încă nicio cântărire: adaugă o greutate în 🩺 Sănătate.
+Personnaliser l’export… ¦ Personalizează exportul…
+Prénom NOM, ou choisis une fiche ¦ Prenume NUME, sau alege o fișă
+Père, mère, mariage et enfants en une seule saisie ¦ Tată, mamă, căsătorie și copii într-o singură introducere
+Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une. ¦ Tată, mamă, căsătorie și copii într-o singură introducere. Pentru fiecare nume: alege o fișă existentă sau scrie „Prenume NUME” ca să creezi una.
+Recherche du chemin… ¦ Se caută drumul…
+Remis : {f} ¦ Repus: {f}
+Rien à exporter dans cet écran. ¦ Nimic de exportat în acest ecran.
+SAISIE RAPIDE ¦ INTRODUCERE RAPIDĂ
+Sans aucune source ¦ Fără nicio sursă
+Sans parents ¦ Fără părinți
+Sans parents connus ¦ Fără părinți cunoscuți
+Sous chaque nom : son lien de parenté avec la personne de départ. ¦ Sub fiecare nume: legătura de rudenie cu persoana de pornire.
+TON LIEN ¦ LEGĂTURA TA
+Tableau (CSV) ¦ Tabel (CSV)
+Ton lien avec cette personne ¦ Legătura ta cu această persoană
+Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin. ¦ Legătura ta cu această persoană (de la {nm}) — dă clic ca să vezi drumul.
+Tous les genres ¦ Toate genurile
+Un enfant sans nom de famille prend celui du père. ¦ Un copil fără nume de familie îl primește pe al tatălui.
+Voir la note de recherche ¦ Vezi nota de cercetare
+conjoint de ¦ soț/soție al/a lui
+enfant de ¦ copil al lui
+ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine ¦ ex. de verificat: cota 3 E 125, pistă: registrul parohiei vecine
+inconnu(e) ¦ necunoscut(ă)
+par {nm} ¦ de {nm}
+parent de ¦ părinte al lui
+{a}–{b} ¦ {a}–{b}
+{nm} avait environ {age} ¦ {nm} avea cam {age}
+{nm} avait moins d’un an ¦ {nm} avea sub un an
+{nm} avait {age} ¦ {nm} avea {age}
+{n} pesée(s) · dernière : {w} le {d} ¦ {n} cântărire(i) · ultima: {w} la {d}
+{n} {what} ¦ {n} {what}
+{n} étape(s) depuis la personne de départ. ¦ {n} pas(i) de la persoana de pornire.
+{s} depuis la première ¦ {s} de la prima
+Événement confidentiel : caché en consultation, dans les exports, les partages et le site. ¦ Eveniment confidențial: ascuns în consultare, în exporturi, partajări și pe site.
+à {x} ¦ la {x}
+↩ Remettre ¦ ↩ Repune
+⇆ Comparer avec maintenant ¦ ⇆ Compară cu acum
+⚡ ＋ Famille ¦ ⚡ ＋ Familie
+✓ Garder celle-ci ¦ ✓ Păstrează-o pe aceasta
+✓ Remis ¦ ✓ Repus
+＋ Un enfant de plus ¦ ＋ Încă un copil
+👪 Fiche familiale ¦ 👪 Fișă familială
+📈 Animal : poids et croissance ¦ 📈 Animal: greutate și creștere
+📝 Avec une note de recherche ¦ 📝 Cu o notă de cercetare
+📝 Note de recherche (à vérifier, cote, piste) ¦ 📝 Notă de cercetare (de verificat, cotă, pistă)
+📝 Note de recherche : {x} ¦ 📝 Notă de cercetare: {x}
+🔒 confidentiel ¦ 🔒 confidențial
+🔒 Événement confidentiel ¦ 🔒 Eveniment confidențial
+🧭 Aucun lien connu ¦ 🧭 Nicio legătură cunoscută
+🧭 Personne de départ ¦ 🧭 Persoana de pornire
+🧭 Ton lien ¦ 🧭 Legătura ta
+🧭 Ton lien avec cette personne ¦ 🧭 Legătura ta cu această persoană
+🧭 personne de départ ¦ 🧭 persoana de pornire
+Nouveau… dans l’onglet ouvert (une personne dans Personnes) ¦ Nou… în fila deschisă (o persoană în Persoane)
+Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir ») ¦ Anulează ultima modificare a unei fișe (în afara unei casete de text, imediat, cu „↷ Refă”)
+Exporter ce que montre l’onglet ouvert (⤓ Exporter) ¦ Exportă ce arată fila deschisă (⤓ Exportă)
+Chercher dans la colonne de gauche ¦ Caută în coloana din stânga
+Aucune personne ne correspond à ces filtres. ¦ Nicio persoană nu corespunde acestor filtre.
+Retire un filtre (Filtrer ▾) ou change le tri. ¦ Scoate un filtru (Filtrează ▾) sau schimbă ordonarea.
+Peau ¦ Piele
+Origine / mention ¦ Origine / mențiune
+Mention conjoint ¦ Mențiune soț
+Mention enfants ¦ Mențiune copii
+Date alternative ¦ Dată alternativă
+Lieu (n°) ¦ Loc (nr.)
+Type (n°) ¦ Tip (nr.)
+Confidentiel ¦ Confidențial
+A : « {a} » ({na}) · B : « {b} » ({nb}) → {n} personne(s) {op}. ¦ A: „{a}” ({na}) · B: „{b}” ({nb}) → {n} persoană(e) {op}.
+Acte à commander supprimé ¦ Act de comandat șters
+Ajouter à une liste ¦ Adaugă într-o listă
+Apparence (thème, couleurs, police) ¦ Aspect (temă, culori, font)
+Aucune citation ne contient ce texte. ¦ Niciun citat nu conține acest text.
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Réglages → Éditeur de listes. ¦ Niciuna din „Listele mele” nu conține persoane: creează una în Setări → Editor de liste.
+Aucune ligne ne contient « {find} ». ¦ Niciun rând nu conține „{find}”.
+Aucune source ne contient ce texte. ¦ Nicio sursă nu conține acest text.
+Ce qui est dans une recherche enregistrée et pas dans l’autre (ex. les Sosa nés en Corrèze sans acte de baptême) : pour trouver les trous. ¦ Ce e într-o căutare salvată și nu în cealaltă (ex. Sosa născuți în Corrèze fără act de botez): ca să găsești golurile.
+Changer cette ligne ¦ Schimbă acest rând
+Chercher et remplacer : où chercher, majuscules, mot entier ¦ Caută și înlocuiește: unde să cauți, majuscule, cuvânt întreg
+Chercher un mot dans le titre, l’auteur et le texte des sources, et dans la page et la note de chaque citation. ¦ Caută un cuvânt în titlul, autorul și textul surselor și în pagina și nota fiecărui citat.
+Choisis deux lieux différents. ¦ Alege două locuri diferite.
+Choisis deux recherches enregistrées. ¦ Alege două căutări salvate.
+Choisis les deux lieux. ¦ Alege ambele locuri.
+Choisis ou écris une étiquette. ¦ Alege sau scrie o etichetă.
+Choisis où chercher. ¦ Alege unde să cauți.
+Citée ¦ Citată
+Cocher {name} ¦ Bifează {name}
+Comparer deux recherches ¦ Compară două căutări
+Corrige une faute partout d’un coup (« cultivatr » → « cultivateur »). Tu vois d’abord chaque ligne qui changerait ; décoche celles à garder. « ↶ Annuler » remet tout comme avant. ¦ Corectează o greșeală peste tot dintr-o dată („cultivatr” → „cultivateur”). Vezi mai întâi fiecare rând care s-ar schimba; debifează-le pe cele de păstrat. „↶ Anulează” pune totul la loc ca înainte.
+Dernières recherches vidées ¦ Ultimele căutări golite
+Descriptions des événements ¦ Descrierile evenimentelor
+Définition supprimée ¦ Definiție ștearsă
+Dépouillement supprimé ¦ Indexare ștearsă
+Essaie un autre lien ou moins de critères. ¦ Încearcă altă legătură sau mai puține criterii.
+Ex : Poilu, À vérifier… ¦ Ex.: Poilu, De verificat…
+Ex : cultivateur (vide = effacer) ¦ Ex.: cultivateur (gol = șterge)
+Ex : cultivatr ¦ Ex.: cultivatr
+Ex : registre paroissial, folio 12, Tulle… ¦ Ex.: registru parohial, folio 12, Tulle…
+Extrait ¦ Extras
+Fais-les dans « Recherche multicritère », puis « Enregistrer ». ¦ Fă-le în „Căutare cu mai multe criterii”, apoi „Salvează”.
+Graphiques et tableau de bord ¦ Grafice și tablou de bord
+Il faut au moins deux recherches enregistrées. ¦ Ai nevoie de cel puțin două căutări salvate.
+Lacune supprimée ¦ Lacună ștearsă
+Les recherches enregistrées ne sont pas disponibles. ¦ Căutările salvate nu sunt disponibile.
+Lien de parenté inconnu. ¦ Legătură de rudenie necunoscută.
+Ligne de transcription supprimée ¦ Rând de transcriere șters
+Mot entier seulement ¦ Doar cuvânt întreg
+Neveux et nièces ¦ Nepoți și nepoate
+Nom de table invalide. ¦ Nume de tabel nevalid.
+Noms de lieux ¦ Nume de locuri
+Nouvelle étiquette… ¦ Etichetă nouă…
+Nés en ou après ¦ Născuți în sau după
+Nés en ou avant ¦ Născuți în sau înainte de
+Oncles et tantes ¦ Unchi și mătuși
+Onglets ajoutés au menu ¦ File adăugate în meniu
+Onglets cachés du menu ¦ File ascunse din meniu
+Ordre des types de recherche ¦ Ordinea tipurilor de căutare
+Ordre du menu ¦ Ordinea meniului
+Ouvrir la recherche multicritère ¦ Deschide căutarea cu mai multe criterii
+Où chercher ¦ Unde să cauți
+Personne relevée retirée ¦ Persoană notată eliminată
+Puis le lien de parenté cherché. ¦ Apoi legătura de rudenie căutată.
+Rangement des pages des Réglages ¦ Ordonarea paginilor din Setări
+Recherche A ¦ Căutarea A
+Recherche B ¦ Căutarea B
+Recherche dans les sources… ¦ Se caută în surse…
+Recherche dans l’arbre… ¦ Se caută în arbore…
+Recherche des lignes à changer… ¦ Se caută rândurile de schimbat…
+Recherche par lien de parenté ¦ Căutare după legătura de rudenie
+Respecter les majuscules ¦ Ține cont de majuscule
+Rien de coché : les actions portent sur les {t} résultats ¦ Nimic bifat: acțiunile privesc cele {t} rezultate
+Règle introuvable. ¦ Regula nu a fost găsită.
+Règle supprimée ¦ Regulă ștearsă
+Résultats de la recherche ¦ Rezultatele căutării
+Sections ouvertes ou fermées ¦ Secțiuni deschise sau închise
+Seulement les décédés ¦ Doar decedații
+Seulement les vivants ¦ Doar cei în viață
+Seules les {n} premières lignes sont montrées ; « Remplacer » change les lignes cochées. ¦ Sunt arătate doar primele {n} rânduri; „Înlocuiește” schimbă rândurile bifate.
+Sources et citations ¦ Surse și citate
+Suppression impossible ici. ¦ Ștergerea nu e posibilă aici.
+Tape au moins deux lettres. ¦ Scrie cel puțin două litere.
+Tape le texte à chercher. ¦ Scrie textul de căutat.
+Texte à chercher ¦ Text de căutat
+Texte à chercher trop long. ¦ Textul de căutat e prea lung.
+Tous les ancêtres ¦ Toți strămoșii
+Tous les descendants ¦ Toți descendenții
+Trouvé dans ¦ Găsit în
+Type d’événement supprimé ¦ Tip de eveniment șters
+Types de recherche cachés ¦ Tipuri de căutare ascunse
+Vider la liste ¦ Golește lista
+Vivant(e) ¦ În viață
+Vivants et décédés ¦ În viață și decedați
+dans A et dans B ¦ în A și în B
+dans A mais pas dans B ¦ în A dar nu în B
+dans A ou dans B ¦ în A sau în B
+dans une seule des deux ¦ doar în una din cele două
+{n} cochée(s) sur {t} ¦ {n} bifată(e) din {t}
+{n} ligne(s) cochée(s) sur {t} ¦ {n} rând(uri) bifat(e) din {t}
+{rel} de {name} : {n} personne(s). ¦ {rel} lui {name}: {n} persoană(e).
+« Tous les cousins germains de… », « les descendants vivants de… nés après 1900 » : choisis une personne et un lien. ¦ „Toți verii primari ai lui…”, „descendenții în viață ai lui… născuți după 1900”: alege o persoană și o legătură.
+Étiqueter {n} personne(s) ¦ Etichetează {n} persoană(e)
+⟳ Recharger la page ¦ ⟳ Reîncarcă pagina
+🏷 « {label} » posée sur {n} personne(s) ¦ 🏷 „{label}” pusă pe {n} persoană(e)
+🏷 Étiqueter ¦ 🏷 Etichetează
+📊 Comparer deux recherches ¦ 📊 Compară două căutări
+📋 Ajouter à Mes listes ¦ 📋 Adaugă în Listele mele
+📋 {n} personne(s) ajoutée(s) à « {list} » ¦ 📋 {n} persoană(e) adăugată(e) în „{list}”
+📚 Sources ({n}) ¦ 📚 Surse ({n})
+🔁 Chercher et remplacer ¦ 🔁 Caută și înlocuiește
+🔁 Remplacer ¦ 🔁 Înlocuiește
+🔁 Remplacer ({n}) ¦ 🔁 Înlocuiește ({n})
+🔁 {n} remplacement(s) faits ¦ 🔁 {n} înlocuire(i) făcută(e)
+🔎 Ce que j’ai changé ¦ 🔎 Ce am schimbat
+🔒 {n} ligne(s) d’une fiche verrouillée : elles ne changeront pas. ¦ 🔒 {n} rând(uri) dintr-o fișă blocată: nu se vor schimba.
+🔖 Citations ({n}) ¦ 🔖 Citate ({n})
+🕘 Dernières recherches ¦ 🕘 Ultimele căutări
+🗄 Santé de la base ¦ 🗄 Sănătatea bazei
+🧬 Lien de parenté ¦ 🧬 Legătură de rudenie
+🧾 Sources et citations ¦ 🧾 Surse și citate
+Lieux « {q} » ¦ Locuri „{q}”
+Transcriptions « {q} » ¦ Transcrieri „{q}”
+Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant. ¦ Export imposibil: evenimentele confidențiale n-au putut fi scoase. Reîncearcă peste o clipă.
+Les événements confidentiels n’ont pas pu être cachés : réessaie dans un instant. ¦ Evenimentele confidențiale n-au putut fi ascunse: reîncearcă peste o clipă.
+, ni les fiches et événements confidentiels. ¦ , nici fișele și evenimentele confidențiale.
+🔒  ¦ 🔒 
+📤 Envoyer vers… ¦ 📤 Trimite către…
+Dans une nouvelle présentation ¦ Într-o prezentare nouă
+Dans un nouveau diaporama ¦ Într-o diaporamă nouă
+Dans un livre de la Mise en page… ¦ Într-o carte din Așezare în pagină…
+Dans un nouveau document (Traitement de texte) ¦ Într-un document nou (Procesor de text)
+Dans le Tableur ¦ În Foaia de calcul
+Sur une page de mon site… ¦ Pe o pagină a site-ului meu…
+Dans la Retouche des photos ¦ În Retușarea fotografiilor
+Comparer avec une autre photo ¦ Compară cu altă fotografie
+Dans l’Atelier de transcription ¦ În Atelierul de transcriere
+Dans le Dessin vectoriel ¦ În Desenul vectorial
+Dans les Traitements par lot ¦ În Procesările în lot
+Envoyer les images vers… ¦ Trimite imaginile către…
+Envoyer le texte vers… ¦ Trimite textul către…
+Envoyer le tableau vers… ¦ Trimite tabelul către…
+Envoyer le son vers… ¦ Trimite sunetul către…
+Envoyer la vidéo vers… ¦ Trimite video-ul către…
+Envoyer le dessin vers… ¦ Trimite desenul către…
+Rangement du son dans les médias… ¦ Se pune sunetul în media…
+Rangement de la vidéo dans les médias… ¦ Se pune video-ul în media…
+Rien à envoyer. ¦ Nimic de trimis.
+Aucun outil ne peut recevoir ça pour l’instant. ¦ Niciun instrument nu poate primi asta deocamdată.
+En image (montage, studio, présentation, document…) ¦ Ca imagine (montaj, studio, prezentare, document…)
+En dessin, net à toutes les tailles (livre, site…) ¦ Ca desen, clar la orice mărime (carte, site…)
+＋ Nouvelle crise ¦ ＋ Criză nouă
+Modifier cette crise ¦ Modifică această criză
+Supprimer cette crise ¦ Șterge această criză
+Nouvelle crise ¦ Criză nouă
+Modifier la crise ¦ Modifică criza
+ÉPIDÉMIES, GUERRES, HIVERS TERRIBLES ¦ EPIDEMII, RĂZBOAIE, IERNI CUMPLITE
+Les grandes crises de l’histoire de France à côté des décès de ta famille : pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…). Ajoute les tiennes : une épidémie au village, un incendie, une inondation… ¦ Marile crize din istoria Franței alături de decesele din familia ta: ca să înțelegi un val de morți (holera din 1832, Marea Iarnă din 1709, gripa spaniolă…). Adaugă-le pe ale tale: o epidemie în sat, un incendiu, o inundație…
+▦ Vignettes ¦ ▦ Miniaturi
+🏷 Par éditeur ¦ 🏷 După editor
+📍 Par lieu ¦ 📍 După loc
+✉️ Écrites / vierges ¦ ✉️ Scrise / goale
+Survole pour voir le verso ¦ Treci cu mouse-ul ca să vezi versoul
+Aucune fiche de carte postale pour l’instant ¦ Încă nicio fișă de carte poștală
+Listes → 🏞 Cartes postales : donne à chaque carte son éditeur, son numéro, son lieu, son recto et son verso. ¦ Liste → 🏞 Cărți poștale: dă fiecărei cărți editorul, numărul, locul, fața și versoul.
+Éditeur inconnu ¦ Editor necunoscut
+Écrites ou envoyées ¦ Scrise sau trimise
+Vierges (jamais envoyées) ¦ Goale (niciodată trimise)
+Il manque les n° {n} ¦ Lipsesc nr. {n}
+Il manque le n° {n} ¦ Lipsește nr. {n}
+cartes ¦ cărți
+Marge de « vers » ¦ Marja pentru „pe la”
+Portée de « avant » / « après » ¦ Întinderea lui „înainte” / „după”
+Longueur d’une vie sans fin connue ¦ Durata unei vieți fără sfârșit cunoscut
+Ouvrir dans le Tableur… ¦ Deschide în Foaia de calcul…
+🧾 Ouvrir les invités dans le Tableur ¦ 🧾 Deschide invitații în Foaia de calcul
+📤 Envoyer le tableau des invités ¦ 📤 Trimite tabelul invitaților
+🧾 Ouvrir dans le Tableur ¦ 🧾 Deschide în Foaia de calcul
+Le tableau des invités, avec leur branche, leur lien de parenté et leur réponse. ¦ Tabelul invitaților, cu ramura, legătura de rudenie și răspunsul lor.
+Toutes les photos de l’album : un diaporama, un film, un traitement par lot… ¦ Toate fotografiile albumului: o diaporamă, un film, o prelucrare în serie…
+Album — {nm} ¦ Album — {nm}
+Descendance (de haut en bas, une couleur par branche) ¦ Descendență (de sus în jos, o culoare pe ramură)
+La descendance a besoin de l’outil Cousinades, qui n’est pas chargé. ¦ Descendența are nevoie de instrumentul Reuniuni de familie, care nu e încărcat.
+Aucune descendance pour cette personne. ¦ Nicio descendență pentru această persoană.
+Aucun enfant connu pour cette personne : pas de descendance à dessiner. ¦ Niciun copil cunoscut pentru această persoană: nicio descendență de desenat.
+La descendance de {nm} ¦ Descendența lui {nm}
+la famille ¦ familia
+L’arbre (en fond) ¦ Arborele (în fundal)
+📰 En faire un faire-part ¦ 📰 Fă din el un anunț
+Créer le faire-part ¦ Creează anunțul
+L’arbre se pose en fond, derrière les textes du faire-part. Tout s’ouvre ensuite dans le dessin vectoriel pour le retoucher. ¦ Arborele se pune în fundal, în spatele textelor anunțului. Totul se deschide apoi în desenul vectorial ca să-l retușezi.
+L’arbre derrière le texte ¦ Arborele în spatele textului
+Très pâle ¦ Foarte pal
+Pâle ¦ Pal
+Bien visible ¦ Bine vizibil
+Fabrication du faire-part… ¦ Se face anunțul…
+Personne à dessiner dans l’arbre. ¦ Persoana de desenat în arbore.
+L’arbre en fond d’un faire-part de cousinade ou de noces ¦ Arborele în fundalul unui anunț de reuniune de familie sau de nuntă
+En faire un faire-part ¦ Fă din el un anunț
+Les mêmes réglages, un faire-part pour chaque personne (une liste, une étiquette) ou chaque foyer d’une cousinade, tous dans un seul PDF ¦ Aceleași setări, un anunț pentru fiecare persoană (o listă, o etichetă) sau fiecare gospodărie dintr-o reuniune de familie, toate într-un singur PDF
+Un faire-part par personne / par foyer… ¦ Un anunț pe persoană / pe gospodărie…
+📬 Un faire-part par personne / par foyer ¦ 📬 Un anunț pe persoană / pe gospodărie
+📄 Fabriquer le PDF ¦ 📄 Fă PDF-ul
+Le faire-part tel que tu l’as réglé, une fois pour chaque personne ou chaque foyer. Tous les faire-part sont rangés dans un seul PDF, prêt à imprimer. ¦ Anunțul așa cum l-ai reglat, o dată pentru fiecare persoană sau gospodărie. Toate anunțurile sunt puse într-un singur PDF, gata de tipărit.
+Une liste de personnes ¦ O listă de persoane
+Les personnes d’une étiquette ¦ Persoanele unei etichete
+Les foyers d’une cousinade ¦ Gospodăriile unei reuniuni de familie
+La cousinade (les foyers invités) ¦ Reuniunea de familie (gospodăriile invitate)
+Dans les champs du faire-part, ces mots se remplacent pour chacun : ¦ În câmpurile anunțului, aceste cuvinte se înlocuiesc pentru fiecare:
+(cousinade : aussi {titre}, {date}, {lieu}, {ancetre}…) ¦ (reuniune de familie: și {titre}, {date}, {lieu}, {ancetre}…)
+Le nom de la personne (ou du foyer) en haut de chaque faire-part ¦ Numele persoanei (sau al gospodăriei) sus pe fiecare anunț
+Remplir aussi depuis la fiche de chacun (noms, dates, lieux) ¦ Completează și din fișa fiecăruia (nume, date, locuri)
+L’enveloppe de chacun porte son adresse. ¦ Plicul fiecăruia poartă adresa lui.
+Aucun foyer invité dans cette cousinade : coche des invités d’abord. ¦ Nicio gospodărie invitată la această reuniune de familie: bifează mai întâi invitați.
+Fabrication de {n} faire-part… ¦ Se fac {n} anunțuri…
+{i} sur {n}… ¦ {i} din {n}…
+{n} faire-part dans un seul PDF ({p} pages). ¦ {n} anunțuri într-un singur PDF ({p} pagini).
+Le dessin vectoriel n’est pas chargé : le PDF ne peut pas être fabriqué. ¦ Desenul vectorial nu e încărcat: PDF-ul nu poate fi făcut.
+Une action de la Retouche ¦ O acțiune din Retușare
+Une action enregistrée dans la Retouche des photos (Fichier → Actions), sur chaque image. ¦ O acțiune salvată în Retușarea fotografiilor (Fișier → Acțiuni), pe fiecare imagine.
+aucune action choisie ¦ nicio acțiune aleasă
+La Retouche des photos n’est pas chargée : l’action « {name} » ne peut pas se faire. ¦ Retușarea fotografiilor nu e încărcată: acțiunea „{name}” nu se poate face.
+L’action « {name} » de la Retouche n’a rien rendu. ¦ Acțiunea „{name}” din Retușare n-a dat nimic.
+La Retouche des photos n’est pas chargée : cette étape ne pourra pas se faire. ¦ Retușarea fotografiilor nu e încărcată: acest pas nu se va putea face.
+Aucune action enregistrée dans la Retouche. Ouvre une photo dans la Retouche, puis Fichier → Actions pour en enregistrer une. ¦ Nicio acțiune salvată în Retușare. Deschide o fotografie în Retușare, apoi Fișier → Acțiuni ca să salvezi una.
+L’action ¦ Acțiunea
+Choisir une action… ¦ Alege o acțiune…
+Une action enregistrée dans la Retouche des photos, faite sur chaque image du lot. ¦ O acțiune salvată în Retușarea fotografiilor, făcută pe fiecare imagine din lot.
+Les images rangées dans les médias par ce lot : un diaporama, un montage… ¦ Imaginile puse în media de acest lot: o diaporamă, un montaj…
+Traitement par lot ¦ Prelucrare în serie
+{x} introuvable dans les médias. ¦ {x} negăsit în media.
+Ouvrir cette image dans la Retouche des photos ¦ Deschide această imagine în Retușarea fotografiilor
+Retoucher ¦ Retușează
+Envoyer cette image vers un autre outil ¦ Trimite această imagine către alt instrument
+📤 Envoyer le tableau en image vers… ¦ 📤 Trimite tabelul ca imagine către…
+Le dessin va dans un autre outil : un livre de la Mise en page, une page de mon site, le Dessin vectoriel… ¦ Desenul merge în alt instrument: o carte din Așezare în pagină, o pagină a site-ului meu, Desenul vectorial…
+Créer et envoyer vers… ¦ Creează și trimite către…
+✒️ Placer un dessin vectoriel (arbre, carte, blason…)… ¦ ✒️ Pune un desen vectorial (arbore, hartă, blazon…)…
+Dessin vectoriel placé ¦ Desen vectorial pus
+✒️ « {name} » placé : modifié dans le Dessin vectoriel, il se met à jour ici (« ↻ Mettre à jour »). ¦ ✒️ „{name}” pus: modificat în Desenul vectorial, se actualizează aici („↻ Actualizează”).
+✒️ Dessin vectoriel <b>lié</b>{state} : modifié dans le Dessin vectoriel, il se redessine ici (« Mettre à jour »). ¦ ✒️ Desen vectorial <b>legat</b>{state}: modificat în Desenul vectorial, se redesenează aici („Actualizează”).
+✎ Modifier le dessin ¦ ✎ Modifică desenul
+Le dessin reste tel quel et ne suit plus le Dessin vectoriel ¦ Desenul rămâne așa cum e și nu mai urmează Desenul vectorial
+Dessin détaché ¦ Desen detașat
+Le Dessin vectoriel n’est pas chargé. ¦ Desenul vectorial nu e încărcat.
+Aucun dessin vectoriel : fais-en un dans Listes → Outils de modification (Dessin vectoriel, Arbre décoratif, Carte…). ¦ Niciun desen vectorial: fă unul în Liste → Instrumente de modificare (Desen vectorial, Arbore decorativ, Hartă…).
+PLACER ¦ PUNE
+✒️ Un dessin vectoriel (arbre, carte, blason…) ¦ ✒️ Un desen vectorial (arbore, hartă, blazon…)
+Placer ce dessin ¦ Pune acest desen
+Le dessin reste lié : modifié dans le Dessin vectoriel, il se met à jour dans le livre (« ↻ Mettre à jour »). Il reste net à toutes les tailles. ¦ Desenul rămâne legat: modificat în Desenul vectorial, se actualizează în carte („↻ Actualizează”). Rămâne clar la orice mărime.
+Choisis un dessin. ¦ Alege un desen.
+Le dessin n’a pas pu être lu. ¦ Desenul n-a putut fi citit.
+📐 Mettre dans un livre ¦ 📐 Pune într-o carte
+Mettre dans le livre ¦ Pune în carte
+Le dessin est rangé dans les Médias (en image), puis posé sur une page à lui, dans les marges. ¦ Desenul e pus în Media (ca imagine), apoi așezat pe o pagină a lui, în margini.
+L’image est posée sur une page à elle, dans les marges. Elle reste liée à la photo des Médias. ¦ Imaginea e așezată pe o pagină a ei, în margini. Rămâne legată de fotografia din Media.
+Rangement du dessin dans les médias… ¦ Se pune desenul în media…
+Mon livre ¦ Cartea mea
+Image ajoutée sur une nouvelle page à la fin du livre : vérifie, puis enregistre. ¦ Imagine adăugată pe o pagină nouă la sfârșitul cărții: verifică, apoi salvează.
+Nouveau livre avec l’image : vérifie, puis enregistre le livre. ¦ Carte nouă cu imaginea: verifică, apoi salvează cartea.
+📱 Livre numérique (.epub) ¦ 📱 Carte electronică (.epub)
+liseuses : Kobo, Livres, Calibre… ¦ cititoare: Kobo, Cărți, Calibre…
+La mise en page n’est pas chargée : l’ePub ne peut pas être fait. ¦ Așezarea în pagină nu e încărcată: ePub-ul nu poate fi făcut.
+« Envoyer vers… » n’est pas chargé. ¦ „Trimite către…” nu e încărcat.
+Retoucher cette image ¦ Retușează această imagine
+Cette image n’est pas dans les Médias : elle ne peut pas être retouchée. ¦ Această imagine nu e în Media: nu poate fi retușată.
+Image retouchée mise à jour dans le texte. ¦ Imaginea retușată actualizată în text.
+Un document (Traitement de texte) ¦ Un document (Procesor de text)
+le tableau dans un texte ¦ tabelul într-un text
+📝 Créer le document ¦ 📝 Creează documentul
+Image du graphique (PNG) : {kind} ¦ Imaginea graficului (PNG): {kind}
+Le graphique n’a pas pu être dessiné. ¦ Graficul n-a putut fi desenat.
+Image du graphique enregistrée : {name} ¦ Imaginea graficului salvată: {name}
+La feuille est vide : rien à envoyer. ¦ Foaia e goală: nimic de trimis.
+⤓ Image du graphique (PNG) ¦ ⤓ Imaginea graficului (PNG)
+{what} au montage, l’une après l’autre. ¦ {what} în montaj, unul după altul.
+image ajoutée ¦ imagine adăugată
+images ajoutées ¦ imagini adăugate
+sous-titre ajouté ¦ subtitrare adăugată
+sous-titres ajoutés ¦ subtitrări adăugate
+Le fabricant de GIF n’est pas chargé. ¦ Generatorul de GIF nu e încărcat.
+🎞 GIF animé ¦ 🎞 GIF animat
+sans son, petit, tourne en boucle ¦ fără sunet, mic, în buclă
+GIF… {n} % ¦ GIF… {n} %
+La vidéo est d’abord fabriquée (le film est rejoué en entier, laisse la fenêtre ouverte), puis rangée dans les médias. ¦ Video-ul e făcut mai întâi (filmul e redat în întregime, lasă fereastra deschisă), apoi pus în media.
+Fabriquer la vidéo pour l’envoyer ? ¦ Faci video-ul ca să-l trimiți?
+Fabriquer et envoyer ¦ Fă și trimite
+ENVOYER ¦ TRIMITE
+Fabrication de la vidéo… ¦ Se face video-ul…
+La vidéo n’a pas pu être rangée dans les médias. ¦ Video-ul n-a putut fi pus în media.
+Le son fini est rangé dans les médias (une copie), puis envoyé. ¦ Sunetul terminat e pus în media (o copie), apoi trimis.
+Envoyer le son ? ¦ Trimiți sunetul?
+Ranger et envoyer ¦ Pune și trimite
+Pas encore de transcription : « ⏱ Insérer l’heure » (⌘T), puis tape ce qui est dit. ¦ Încă nicio transcriere: „⏱ Inserează ora” (⌘T), apoi scrie ce se spune.
+Transcription — {name} ¦ Transcriere — {name}
+ (avec la transcription en sous-titres) ¦  (cu transcrierea ca subtitrări)
+La transcription (texte) ¦ Transcrierea (text)
+Pas encore de transcription. ¦ Încă nicio transcriere.
+Agnès Bernauer ¦ Agnès Bernauer
+7 colonnes en escalier et une réserve de 7 tas. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. La pioche pose une carte sur chaque tas de la réserve ; une colonne vide prend la carte juste sous la valeur de départ. ¦ 7 coloane în trepte și o rezervă de 7 grămezi. Prima carte pusă pe o fundație dă valoarea de pornire a tuturor celor patru; se coboară alternând roșu și negru, regele trece peste as. Pachetul pune o carte pe fiecare grămadă din rezervă; o coloană goală primește cartea imediat sub valoarea de pornire.
+Thumb and Pouch ¦ Thumb and Pouch
+Klondike où l’on descend sur n’importe quelle couleur de carte sauf la sienne ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Klondike în care se coboară pe orice culoare de carte în afară de a sa; o coloană goală primește orice carte. Pachetul se trece o singură dată.
+Pas seul ¦ Pas seul
+6 colonnes d’une seule carte ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ 6 coloane de câte o carte; se coboară alternând roșu și negru, o coloană goală primește orice carte. Pachetul se întoarce câte o carte și se trece o singură dată.
+Les impasses ¦ Fundăturile
+Les As sont posés d’avance ; 6 colonnes de 3 cartes (deux cachées). On descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Așii sunt puși dinainte; 6 coloane de câte 3 cărți (două ascunse). Se coboară alternând roșu și negru, o coloană goală primește orice carte; pachetul se mai trece o dată.
+Huit fois huit ¦ Opt ori opt
+Deux jeux, 8 colonnes de 8 cartes visibles ; on descend en alternant rouge et noir, une colonne vide prend n’importe quelle carte. La pioche repasse deux fois. ¦ Două pachete, 8 coloane de câte 8 cărți vizibile; se coboară alternând roșu și negru, o coloană goală primește orice carte. Pachetul se mai trece de două ori.
+Spike ¦ Spike
+7 colonnes en escalier comme Klondike ; on descend en alternant rouge et noir et on déplace des suites entières. La pioche pose une carte sur chaque colonne. ¦ 7 coloane în trepte ca la Klondike; se coboară alternând roșu și negru și se mută secvențe întregi. Pachetul pune o carte pe fiecare coloană.
+Alternance ¦ Alternanță
+Deux jeux, 7 colonnes de 7 cartes, une cachée sur deux. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Două pachete, 7 coloane de câte 7 cărți, una din două ascunsă. Se coboară alternând roșu și negru și se mută secvențe întregi; o coloană goală primește orice carte. Pachetul se trece o singură dată.
+La harpe ¦ Harpa
+Deux jeux, 9 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et repasse trois fois. ¦ Două pachete, 9 coloane în trepte; se coboară alternând roșu și negru. Pachetul se întoarce câte o carte și se mai trece de trei ori.
+La grande harpe ¦ Harpa cea mare
+Deux jeux, 10 colonnes en escalier ; on descend en alternant rouge et noir. La pioche se retourne une carte à la fois et ne passe qu’une fois. ¦ Două pachete, 10 coloane în trepte; se coboară alternând roșu și negru. Pachetul se întoarce câte o carte și se trece o singură dată.
+Acme ¦ Acme
+Une réserve de 13 cartes et 4 colonnes ; les fondations partent de l’As. On descend dans la même couleur de carte, une carte à la fois ; une colonne vide se remplit avec la réserve. La pioche repasse une fois. ¦ O rezervă de 13 cărți și 4 coloane; fundațiile pornesc de la as. Se coboară în aceeași culoare, câte o carte; o coloană goală se umple din rezervă. Pachetul se mai trece o dată.
+Le crapaud américain ¦ Broasca americană
+Deux jeux, une réserve de 20 cartes et 8 colonnes. La première carte posée sur une fondation donne la valeur de départ des huit ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide se remplit avec la réserve ; la pioche repasse une fois. ¦ Două pachete, o rezervă de 20 de cărți și 8 coloane. Prima carte pusă pe o fundație dă valoarea de pornire a tuturor celor opt; se coboară în aceeași culoare, regele trece peste as. O coloană goală se umple din rezervă; pachetul se mai trece o dată.
+Canfield bigarré ¦ Canfield pestriț
+Deux jeux : les As sont posés d’avance, une réserve de 14 cartes et 5 colonnes. On descend en alternant rouge et noir ; une colonne vide se remplit avec la réserve. La pioche se retourne trois cartes à la fois et repasse deux fois. ¦ Două pachete: așii sunt puși dinainte, o rezervă de 14 cărți și 5 coloane. Se coboară alternând roșu și negru; o coloană goală se umple din rezervă. Pachetul se întoarce câte trei cărți și se mai trece de două ori.
+La duchesse ¦ Ducesa
+Quatre tas de réserve de 3 cartes et 4 colonnes d’une carte. La première carte posée sur une fondation donne la valeur de départ des quatre ; on descend en alternant rouge et noir, le Roi passe sur l’As. Une colonne vide prend n’importe quelle carte ; la pioche repasse une fois. ¦ Patru grămezi de rezervă de câte 3 cărți și 4 coloane de câte o carte. Prima carte pusă pe o fundație dă valoarea de pornire a tuturor celor patru; se coboară alternând roșu și negru, regele trece peste as. O coloană goală primește orice carte; pachetul se mai trece o dată.
+La porte ¦ Poarta
+Deux tas de réserve de 5 cartes (les battants de la porte) et 8 colonnes d’une carte. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Două grămezi de rezervă de câte 5 cărți (canaturile porții) și 8 coloane de câte o carte. Se coboară alternând roșu și negru și se mută secvențe întregi; o coloană goală primește orice carte. Pachetul se trece o singură dată.
+Le pingouin ¦ Pinguinul
+La première carte donne la valeur de départ des fondations, et les trois autres de même valeur y montent tout de suite. 7 colonnes de 7, 7 cases libres ; on descend dans la même couleur de carte, le Roi passe sur l’As. Une colonne vide prend la carte juste sous la valeur de départ. ¦ Prima carte dă valoarea de pornire a fundațiilor, iar celelalte trei de aceeași valoare urcă imediat acolo. 7 coloane de câte 7, 7 celule libere; se coboară în aceeași culoare, regele trece peste as. O coloană goală primește cartea imediat sub valoarea de pornire.
+Baker’s Game (Roi seul) ¦ Baker’s Game (doar rege)
+Baker’s Game (descendre dans la même couleur de carte, 4 cases libres), mais une colonne vide ne prend qu’un Roi. ¦ Baker’s Game (se coboară în aceeași culoare, 4 celule libere), dar o coloană goală primește doar un rege.
+Seahaven détendu ¦ Seahaven relaxat
+Seahaven, mais une suite bien rangée dans la même couleur de carte se déplace d’un coup, quelle que soit sa longueur. ¦ Seahaven, dar o secvență bine ordonată în aceeași culoare se mută dintr-odată, oricât de lungă ar fi.
+Repair ¦ Repair
+Deux jeux, 10 colonnes de 10 cartes visibles et 4 cases libres déjà occupées ; on descend en alternant rouge et noir, une carte à la fois (ou une suite si les cases libres le permettent). ¦ Două pachete, 10 coloane de câte 10 cărți vizibile și 4 celule libere deja ocupate; se coboară alternând roșu și negru, câte o carte (sau o secvență, dacă celulele libere permit).
+Ocean Towers ¦ Ocean Towers
+Deux jeux, 14 colonnes de 7 cartes et 8 cases libres dont 6 déjà occupées ; on descend dans la même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ Două pachete, 14 coloane de câte 7 cărți și 8 celule libere, din care 6 deja ocupate; se coboară în aceeași culoare, o coloană goală primește doar un rege.
+Sept par quatre ¦ Șapte pe patru
+FreeCell à 7 colonnes et 4 cases libres : les colonnes sont plus hautes. ¦ FreeCell cu 7 coloane și 4 celule libere: coloanele sunt mai înalte.
+Sept par cinq ¦ Șapte pe cinci
+FreeCell à 7 colonnes et 5 cases libres. ¦ FreeCell cu 7 coloane și 5 celule libere.
+FreeCell défi ¦ FreeCell provocare
+FreeCell, mais les As et les 2 sont tout au fond des colonnes, sous toutes les autres cartes. ¦ FreeCell, dar așii și doiarii sunt chiar la fundul coloanelor, sub toate celelalte cărți.
+FreeCell super défi ¦ FreeCell super provocare
+FreeCell défi (les As et les 2 au fond des colonnes), et une colonne vide ne prend qu’un Roi. ¦ FreeCell provocare (așii și doiarii la fundul coloanelor), iar o coloană goală primește doar un rege.
+Le scarabée ¦ Scarabeul
+Scorpion sans pioche : les 52 cartes sont visibles en 7 colonnes. On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une colonne vide ne prend qu’un Roi. Une suite complète du Roi à l’As s’en va. ¦ Scorpion fără pachet: toate cele 52 de cărți sunt vizibile în 7 coloane. Se coboară în aceeași culoare și se mută orice grup; o coloană goală primește doar un rege. O secvență completă de la rege la as pleacă.
+Queue de scorpion ¦ Coada scorpionului
+Comme Scorpion (7 colonnes de 7, n’importe quel groupe se déplace), mais on descend en alternant rouge et noir et les cartes montent sur les fondations de l’As au Roi. ¦ Ca Scorpion (7 coloane de câte 7, se mută orice grup), dar se coboară alternând roșu și negru, iar cărțile urcă pe fundații de la as la rege.
+Scorpion double ¦ Scorpion dublu
+Deux jeux, 10 colonnes, tout est distribué (les cinq premières colonnes cachent 4 cartes). On descend dans la même couleur de carte et on déplace n’importe quel groupe ; une suite complète du Roi à l’As s’en va. ¦ Două pachete, 10 coloane, totul e împărțit (primele cinci coloane ascund 4 cărți). Se coboară în aceeași culoare și se mută orice grup; o secvență completă de la rege la as pleacă.
+Motif de divorce ¦ Motiv de divorț
+Deux jeux, 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs ; seules les suites d’une même couleur de carte se déplacent ensemble ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne qui n’est pas vide. ¦ Două pachete, 10 coloane de câte 5 cărți vizibile. Se coboară fără a ține seama de culori; doar secvențele de aceeași culoare se mută împreună; o secvență completă de la rege la as pleacă. Pachetul pune o carte pe fiecare coloană care nu e goală.
+La tarentule ¦ Tarantula
+L’araignée à quatre couleurs, mais une suite qui descend dans la même teinte (rouge ou noire) se déplace d’un coup. Une suite complète du Roi à l’As dans une même couleur de carte s’en va. ¦ Păianjenul cu patru culori, dar o secvență care coboară în aceeași nuanță (roșie sau neagră) se mută dintr-odată. O secvență completă de la rege la as de aceeași culoare pleacă.
+Araignée à découvert ¦ Păianjen la vedere
+L’araignée à quatre couleurs, mais toutes les cartes sont visibles dès le départ. ¦ Păianjenul cu patru culori, dar toate cărțile sunt vizibile de la început.
+La harpe de Milligan ¦ Harpa lui Milligan
+Deux jeux, 8 colonnes en escalier ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. Les fondations montent de l’As au Roi. ¦ Două pachete, 8 coloane în trepte; se coboară alternând roșu și negru și se mută secvențe întregi. O coloană goală primește doar un rege; pachetul pune o carte pe fiecare coloană. Fundațiile urcă de la as la rege.
+La harpe de Lexington ¦ Harpa din Lexington
+La harpe de Milligan (deux jeux, 8 colonnes en escalier, la pioche pose une carte sur chaque colonne), mais on déplace n’importe quel groupe de cartes visibles. ¦ Harpa lui Milligan (două pachete, 8 coloane în trepte, pachetul pune o carte pe fiecare coloană), dar se mută orice grup de cărți vizibile.
+Brunswick ¦ Brunswick
+La harpe de Lexington avec toutes les cartes visibles : n’importe quel groupe se déplace, la pioche pose une carte sur chaque colonne. ¦ Harpa din Lexington cu toate cărțile vizibile: se mută orice grup, pachetul pune o carte pe fiecare coloană.
+Carlton ¦ Carlton
+La harpe de Milligan avec toutes les cartes visibles, et une colonne vide prend n’importe quelle carte. ¦ Harpa lui Milligan cu toate cărțile vizibile, iar o coloană goală primește orice carte.
+Miss Milligan ¦ Miss Milligan
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide ne prend qu’un Roi. Quand la pioche est vide, une case libre s’ouvre pour mettre une carte de côté. ¦ Două pachete, 8 coloane de câte o carte; pachetul pune o carte pe fiecare coloană. Se coboară alternând roșu și negru și se mută secvențe întregi; o coloană goală primește doar un rege. Când pachetul e gol, se deschide o celulă liberă ca să pui o carte deoparte.
+Millie ¦ Millie
+Deux jeux, 8 colonnes d’une carte ; la pioche pose une carte sur chaque colonne. On descend en alternant rouge et noir et une colonne vide prend n’importe quelle carte. ¦ Două pachete, 8 coloane de câte o carte; pachetul pune o carte pe fiecare coloană. Se coboară alternând roșu și negru, iar o coloană goală primește orice carte.
+L’île d’Elbe ¦ Insula Elba
+Deux jeux, 10 colonnes de 5 cartes (quatre cachées) ; on descend en alternant rouge et noir et on déplace des suites entières. Une colonne vide ne prend qu’un Roi ; la pioche pose une carte sur chaque colonne. ¦ Două pachete, 10 coloane de câte 5 cărți (patru ascunse); se coboară alternând roșu și negru și se mută secvențe întregi. O coloană goală primește doar un rege; pachetul pune o carte pe fiecare coloană.
+Le mont Olympe ¦ Muntele Olimp
+Deux jeux : les As et les 2 sont posés d’avance, et les fondations montent de deux en deux dans la même couleur de carte (As, 3, 5… ou 2, 4, 6…). 9 colonnes ; on descend de deux en deux dans la même couleur de carte. La pioche pose une carte sur chaque colonne. ¦ Două pachete: așii și doiarii sunt puși dinainte, iar fundațiile urcă din două în două în aceeași culoare (as, 3, 5… sau 2, 4, 6…). 9 coloane; se coboară din două în două în aceeași culoare. Pachetul pune o carte pe fiecare coloană.
+La patience australienne ¦ Pasiansul australian
+7 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. Une colonne vide ne prend qu’un Roi ; la pioche ne passe qu’une fois. ¦ 7 coloane de câte 4 cărți vizibile; se coboară în aceeași culoare și se mută orice grup de cărți vizibile. O coloană goală primește doar un rege; pachetul se trece o singură dată.
+Canberra ¦ Canberra
+La patience australienne, mais la pioche repasse une fois. ¦ Pasiansul australian, dar pachetul se mai trece o dată.
+Raw Prawn ¦ Raw Prawn
+La patience australienne, mais une colonne vide prend n’importe quelle carte. ¦ Pasiansul australian, dar o coloană goală primește orice carte.
+Rushdike ¦ Rushdike
+7 colonnes en escalier ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. La pioche pose une carte sur chaque colonne. ¦ 7 coloane în trepte; se coboară în aceeași culoare și se mută orice grup de cărți vizibile. Pachetul pune o carte pe fiecare coloană.
+La discipline chinoise ¦ Disciplina chinezească
+7 colonnes de 7 cartes (trois cachées, sauf dans la première) ; on descend en alternant rouge et noir et on déplace n’importe quel groupe de cartes visibles. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 coloane de câte 7 cărți (trei ascunse, cu excepția primei); se coboară alternând roșu și negru și se mută orice grup de cărți vizibile. Ultimele 3 cărți merg pe primele trei coloane.
+Solitaire russe double ¦ Solitaire rusesc dublu
+Deux jeux, 10 colonnes, 8 fondations ; on descend dans la même couleur de carte et on déplace n’importe quel groupe de cartes visibles. ¦ Două pachete, 10 coloane, 8 fundații; se coboară în aceeași culoare și se mută orice grup de cărți vizibile.
+Ali Baba ¦ Ali Baba
+Un seul jeu : les As sont posés d’avance, 10 colonnes de 4 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche ne passe qu’une fois. ¦ Un singur pachet: așii sunt puși dinainte, 10 coloane de câte 4 cărți vizibile. Se coboară în aceeași culoare și se mută secvențe întregi; pachetul se trece o singură dată.
+Cassim ¦ Cassim
+Un seul jeu : les As sont posés d’avance, 7 colonnes de 3 cartes visibles. On descend dans la même couleur de carte et on déplace des suites entières ; la pioche repasse autant que tu veux. ¦ Un singur pachet: așii sunt puși dinainte, 7 coloane de câte 3 cărți vizibile. Se coboară în aceeași culoare și se mută secvențe întregi; pachetul se trece de câte ori vrei.
+Rang et file ¦ Rânduri și șiruri
+L’empereur (deux jeux, 10 colonnes de 4 cartes dont 3 cachées, en alternant rouge et noir), mais on déplace des suites entières. ¦ Împăratul (două pachete, 10 coloane de câte 4 cărți din care 3 ascunse, alternând roșu și negru), dar se mută secvențe întregi.
+Les As affairés ¦ Așii ocupați
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Două pachete, 12 coloane de câte o carte; se coboară în aceeași culoare, câte o carte. Pachetul se trece o singură dată.
+La cour ¦ Curtea
+Deux jeux, 12 colonnes d’une carte ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Două pachete, 12 coloane de câte o carte; se coboară în aceeași culoare și se mută secvențe întregi. Pachetul se trece o singură dată.
+Le carré de Napoléon ¦ Careul lui Napoleon
+Deux jeux, 12 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Două pachete, 12 coloane de câte 4 cărți vizibile; se coboară în aceeași culoare și se mută secvențe întregi. Pachetul se trece o singură dată.
+L’exil de Napoléon ¦ Exilul lui Napoleon
+Les quarante voleurs où l’on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Cei patruzeci de hoți, în care se coboară fără a ține seama de culori, câte o carte. Pachetul se trece o singură dată.
+Deuces ¦ Deuces
+Deux jeux : les huit 2 sont posés d’avance, et les fondations montent dans la même couleur de carte jusqu’à l’As. 10 colonnes d’une carte ; on descend dans la même couleur de carte (l’As va sur le 2, le Roi sur l’As), une carte à la fois. La pioche ne passe qu’une fois. ¦ Două pachete: cei opt doiari sunt puși dinainte, iar fundațiile urcă în aceeași culoare până la as. 10 coloane de câte o carte; se coboară în aceeași culoare (asul merge pe 2, regele pe as), câte o carte. Pachetul se trece o singură dată.
+La lune décroissante ¦ Luna în descreștere
+Deux jeux, 13 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte et on déplace des suites entières. La pioche ne passe qu’une fois. ¦ Două pachete, 13 coloane de câte 4 cărți vizibile; se coboară în aceeași culoare și se mută secvențe întregi. Pachetul se trece o singură dată.
+Les cinquante fameux ¦ Cei cincizeci faimoși
+Les quarante voleurs avec 5 cartes par colonne : deux jeux, 10 colonnes de 5, même couleur de carte, une carte à la fois. La pioche ne passe qu’une fois. ¦ Cei patruzeci de hoți cu 5 cărți pe coloană: două pachete, 10 coloane de câte 5, aceeași culoare, câte o carte. Pachetul se trece o singură dată.
+Quarante-neuf ¦ Patruzeci și nouă
+Deux jeux, 7 colonnes de 7 cartes visibles ; on descend en alternant rouge et noir, une carte à la fois. La pioche ne passe qu’une fois. ¦ Două pachete, 7 coloane de câte 7 cărți vizibile; se coboară alternând roșu și negru, câte o carte. Pachetul se trece o singură dată.
+Sans limite ¦ Fără limită
+Les quarante voleurs, mais la pioche repasse autant que tu veux. ¦ Cei patruzeci de hoți, dar pachetul se trece de câte ori vrei.
+Les petits quarante ¦ Cei patruzeci mici
+Les quarante voleurs où l’on descend sans s’occuper des couleurs et on déplace des suites entières ; la pioche se retourne trois cartes à la fois et repasse trois fois. ¦ Cei patruzeci de hoți, în care se coboară fără a ține seama de culori și se mută secvențe întregi; pachetul se întoarce câte trei cărți și se mai trece de trei ori.
+Le zèbre ¦ Zebra
+Deux jeux, les As posés d’avance, 8 colonnes d’une carte ; on descend en alternant rouge et noir, une carte à la fois. La pioche repasse une fois. ¦ Două pachete, așii puși dinainte, 8 coloane de câte o carte; se coboară alternând roșu și negru, câte o carte. Pachetul se mai trece o dată.
+Le congrès ¦ Congresul
+Deux jeux, 8 colonnes d’une carte ; on descend sans s’occuper des couleurs, une carte à la fois. La pioche ne passe qu’une fois. ¦ Două pachete, 8 coloane de câte o carte; se coboară fără a ține seama de culori, câte o carte. Pachetul se trece o singură dată.
+Le parlement ¦ Parlamentul
+Le congrès (deux jeux, 8 colonnes d’une carte, on descend sans s’occuper des couleurs), avec les As posés d’avance. ¦ Congresul (două pachete, 8 coloane de câte o carte, se coboară fără a ține seama de culori), cu așii puși dinainte.
+Pair et impair ¦ Par și impar
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur (As, 3, 5… Roi, 2, 4… ou 2, 4… Dame, As, 3…). 9 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche repasse une fois. ¦ Două pachete: un as și un 2 din fiecare culoare sunt puși dinainte, iar fundațiile urcă din două în două în culoarea lor (as, 3, 5… rege, 2, 4… sau 2, 4… damă, as, 3…). 9 locuri de câte o carte, pe care nu se construiește; un loc gol primește orice carte. Pachetul se mai trece o dată.
+Le cotillon royal ¦ Cotilionul regal
+Deux jeux : un As et un 2 de chaque couleur de carte sont posés d’avance, et les fondations montent de deux en deux dans leur couleur. Quatre tas de réserve de 3 cartes (seule celle du dessus se joue) et 16 places d’une carte, sur lesquelles on ne construit pas ; une place vide prend n’importe quelle carte. La pioche ne passe qu’une fois. ¦ Două pachete: un as și un 2 din fiecare culoare sunt puși dinainte, iar fundațiile urcă din două în două în culoarea lor. Patru grămezi de rezervă de câte 3 cărți (se joacă doar cea de deasupra) și 16 locuri de câte o carte, pe care nu se construiește; un loc gol primește orice carte. Pachetul se trece o singură dată.
+Le treize porte-bonheur ¦ Treisprezece cu noroc
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide reste vide. ¦ 13 coloane de câte 4 cărți vizibile; se coboară fără a ține seama de culori, câte o carte; o coloană goală rămâne goală.
+La patience portugaise ¦ Pasiansul portughez
+13 colonnes de 4 cartes visibles ; on descend sans s’occuper des couleurs, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 13 coloane de câte 4 cărți vizibile; se coboară fără a ține seama de culori, câte o carte; doar un rege merge într-o coloană goală.
+Bonne mesure ¦ Măsura bună
+Deux As sont posés d’avance ; 10 colonnes de 5 cartes visibles. On descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ Doi ași sunt puși dinainte; 10 coloane de câte 5 cărți vizibile. Se coboară fără a ține seama de culori, câte o carte; o coloană goală primește orice carte.
+La cruelle ¦ Cea crudă
+Les As sont posés d’avance ; 12 tas de 4 cartes. On descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ Așii sunt puși dinainte; 12 grămezi de câte 4 cărți. Se coboară în aceeași culoare, câte o carte; un loc gol rămâne gol. De câte ori vrei, se strâng grămezile în ordine, fără amestecare, și se reîmpart câte 4.
+La persévérance ¦ Perseverența
+Comme la cruelle (les As posés d’avance, 12 tas de 4, même couleur de carte), mais on déplace des suites entières et on ne ramasse que deux fois. ¦ Ca la Cea crudă (așii puși dinainte, 12 grămezi de câte 4, aceeași culoare), dar se mută secvențe întregi și se strânge doar de două ori.
+L’éventail en vagues ¦ Evantaiul în valuri
+13 tas de 4 cartes, les As restent mélangés aux autres ; on descend dans la même couleur de carte, une carte à la fois ; une place vide reste vide. Autant de fois que tu veux, on ramasse les tas dans l’ordre, sans mélanger, et on redistribue par 4. ¦ 13 grămezi de câte 4 cărți, așii rămân amestecați cu celelalte; se coboară în aceeași culoare, câte o carte; un loc gol rămâne gol. De câte ori vrei, se strâng grămezile în ordine, fără amestecare, și se reîmpart câte 4.
+L’éventail en boîte ¦ Evantaiul în cutie
+Les As sont posés d’avance ; 16 éventails de 3 cartes. On descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une place vide. ¦ Așii sunt puși dinainte; 16 evantaie de câte 3 cărți. Se coboară alternând roșu și negru, câte o carte; doar un rege merge pe un loc gol.
+L’éventail fascinant ¦ Evantaiul fascinant
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec six redistributions. ¦ La Belle Lucie (17 evantaie de câte 3 cărți) în care se coboară alternând roșu și negru, cu șase reîmpărțiri.
+La lampe de minuit ¦ Lampa de la miezul nopții
+La Belle Lucie (17 éventails de 3 cartes) où l’on descend en alternant rouge et noir, avec deux redistributions. ¦ La Belle Lucie (17 evantaie de câte 3 cărți) în care se coboară alternând roșu și negru, cu două reîmpărțiri.
+Shamrocks ¦ Shamrocks
+17 éventails de 3 cartes ; on monte ou on descend d’un rang sans s’occuper des couleurs, une carte à la fois, et un éventail ne garde jamais plus de 3 cartes. Pas de redistribution. ¦ 17 evantaie de câte 3 cărți; se urcă sau se coboară cu o treaptă fără a ține seama de culori, câte o carte, iar un evantai nu păstrează niciodată mai mult de 3 cărți. Fără reîmpărțire.
+La maison dans les bois ¦ Casa din pădure
+Deux jeux, 35 éventails de 3 cartes ; on monte ou on descend d’un rang dans la même couleur de carte, une carte à la fois. Une place vide reste vide. ¦ Două pachete, 35 de evantaie de câte 3 cărți; se urcă sau se coboară cu o treaptă în aceeași culoare, câte o carte. Un loc gol rămâne gol.
+La maison sur la colline ¦ Casa de pe deal
+La maison dans les bois (deux jeux, 35 éventails), mais quatre fondations montent de l’As au Roi et quatre autres descendent du Roi à l’As. ¦ Casa din pădure (două pachete, 35 de evantaie), dar patru fundații urcă de la as la rege și alte patru coboară de la rege la as.
+Bisley ¦ Bisley
+Les As sont posés d’avance ; 13 colonnes (4 de 3 cartes, 9 de 4). Les fondations des As montent, celles des Rois descendent, dans la même couleur de carte. Sur le tableau, on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide reste vide. ¦ Așii sunt puși dinainte; 13 coloane (4 de câte 3 cărți, 9 de câte 4). Fundațiile așilor urcă, cele ale regilor coboară, în aceeași culoare. Pe masă, se urcă sau se coboară în aceeași culoare, câte o carte; o coloană goală rămâne goală.
+Le cadran du grand-père ¦ Ceasul bunicului
+12 fondations comme les heures d’une horloge, qui commencent par 2♥, 3♠, 4♦, 5♣… jusqu’au Roi ♣ et montent dans la même couleur de carte (le Roi passe à l’As). 8 colonnes de 5 cartes ; on descend sans s’occuper des couleurs, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 12 fundații ca orele unui ceas, care încep cu 2♥, 3♠, 4♦, 5♣… până la regele ♣ și urcă în aceeași culoare (regele trece la as). 8 coloane de câte 5 cărți; se coboară fără a ține seama de culori, câte o carte; o coloană goală primește orice carte.
+Le mur de pierre ¦ Zidul de piatră
+6 colonnes de 6 cartes, une cachée sur deux, et un bouquet de 16 cartes où l’on peut prendre n’importe laquelle. On descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 6 coloane de câte 6 cărți, una din două ascunsă, și un buchet de 16 cărți din care se poate lua oricare. Se coboară alternând roșu și negru și se mută secvențe întregi; o coloană goală primește orice carte.
+La fleur sauvage ¦ Floarea sălbatică
+Le jardin fleuri (6 colonnes de 6 et un bouquet de 16 cartes), mais on déplace des suites entières. ¦ Grădina înflorită (6 coloane de câte 6 și un buchet de 16 cărți), dar se mută secvențe întregi.
+10 colonnes toutes visibles. La première carte posée sur une fondation donne la valeur de départ des quatre (le Roi passe à l’As). On monte ou on descend dans la même couleur de carte, une carte à la fois, et le Roi touche l’As. ¦ 10 coloane, toate vizibile. Prima carte pusă pe o fundație dă valoarea de pornire a tuturor celor patru (regele trece la as). Se urcă sau se coboară în aceeași culoare, câte o carte, iar regele se leagă de as.
+La place forte ¦ Fortăreața
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec une case libre. ¦ Străzi și străduțe (8 coloane, se coboară fără a ține seama de culori), cu o celulă liberă.
+Le fort ¦ Fortul
+Rues et ruelles (8 colonnes, on descend sans s’occuper des couleurs), avec deux cases libres. ¦ Străzi și străduțe (8 coloane, se coboară fără a ține seama de culori), cu două celule libere.
+L’art du siège ¦ Arta asediului
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), avec une case libre. ¦ Castelul asediat (așii puși dinainte, 8 coloane de câte 6), cu o celulă liberă.
+La toile de Pénélope ¦ Pânza Penelopei
+Le château assiégé (les As posés d’avance, 8 colonnes de 6), mais seul un Roi va dans une colonne vide. ¦ Castelul asediat (așii puși dinainte, 8 coloane de câte 6), dar doar un rege merge într-o coloană goală.
+La citadelle ¦ Citadela
+Le château assiégé, mais pendant la distribution, toute carte qui peut monter sur une fondation y va tout de suite. ¦ Castelul asediat, dar în timpul împărțirii, orice carte care poate urca pe o fundație merge acolo imediat.
+Les rois exilés ¦ Regii exilați
+La citadelle (les cartes qui peuvent monter y vont pendant la distribution), mais seul un Roi va dans une colonne vide. ¦ Citadela (cărțile care pot urca merg acolo în timpul împărțirii), dar doar un rege merge într-o coloană goală.
+Le bastion ¦ Bastionul
+10 colonnes de 5 cartes et 2 cases libres déjà occupées ; on monte ou on descend dans la même couleur de carte, une carte à la fois ; une colonne vide prend n’importe quelle carte. ¦ 10 coloane de câte 5 cărți și 2 celule libere deja ocupate; se urcă sau se coboară în aceeași culoare, câte o carte; o coloană goală primește orice carte.
+La boîte à thé ¦ Cutia de ceai
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend sans s’occuper des couleurs et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 coloane de câte 6 sau 7 cărți, totul e vizibil; se coboară fără a ține seama de culori și se mută secvențe întregi; o coloană goală primește orice carte.
+La boîte à thé américaine ¦ Cutia de ceai americană
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir et on déplace des suites entières ; une colonne vide prend n’importe quelle carte. ¦ 8 coloane de câte 6 sau 7 cărți, totul e vizibil; se coboară alternând roșu și negru și se mută secvențe întregi; o coloană goală primește orice carte.
+La boîte à thé anglaise ¦ Cutia de ceai englezească
+8 colonnes de 6 ou 7 cartes, tout est visible ; on descend en alternant rouge et noir, une carte à la fois ; seul un Roi va dans une colonne vide. ¦ 8 coloane de câte 6 sau 7 cărți, totul e vizibil; se coboară alternând roșu și negru, câte o carte; doar un rege merge într-o coloană goală.
+Les trois sommets stricts ¦ Cele trei vârfuri stricte
+Les trois sommets, mais le Roi et l’As ne se suivent pas : la partie est plus difficile. ¦ Cele trei vârfuri, dar regele și asul nu se succed: partida e mai grea.
+Golf double ¦ Golf dublu
+Golf avec deux jeux : 9 colonnes de 7 cartes. Envoie sur la défausse une carte juste au-dessus ou au-dessous ; rien ne va sur un Roi. ¦ Golf cu două pachete: 9 coloane de câte 7 cărți. Trimite la teancul de aruncat o carte imediat deasupra sau dedesubt; nimic nu merge pe un rege.
+As en haut (5 colonnes) ¦ Așii sus (5 coloane)
+As en haut avec 5 colonnes : enlève une carte quand une autre colonne montre une carte plus forte de la même couleur de carte (l’As est le plus fort). Gagné s’il ne reste que les 4 As. ¦ Așii sus cu 5 coloane: scoate o carte când altă coloană arată o carte mai mare de aceeași culoare (asul e cel mai mare). Câștigat dacă rămân doar cei 4 ași.
+La baronne ¦ Baroana
+5 tas : enlève un Roi seul, ou deux cartes du dessus qui font 13 (Valet 11, Dame 12). La pioche pose une carte sur chaque tas. ¦ 5 grămezi: scoate un rege singur sau două cărți de deasupra care fac 13 (valet 11, damă 12). Pachetul pune o carte pe fiecare grămadă.
+Sir Tommy ¦ Sir Tommy
+Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente. Les fondations commencent par un As et montent de 1 en 1, sans s’occuper des couleurs. ¦ Fiecare carte trasă merge pe o fundație sau pe una din cele 4 grămezi de așteptare. Fundațiile încep cu un as și urcă din unu în unu, fără a ține seama de culori.
+Le chat dans le coin ¦ Pisica din colț
+Les As sont posés d’avance et montent de 1 en 1 dans leur teinte (rouge sur rouge, noir sur noir). Chaque carte piochée va sur une fondation ou sur l’un des 4 tas d’attente ; une fois, on ramasse les tas pour repiocher. ¦ Așii sunt puși dinainte și urcă din unu în unu în nuanța lor (roșu pe roșu, negru pe negru). Fiecare carte trasă merge pe o fundație sau pe una din cele 4 grămezi de așteptare; o dată se strâng grămezile ca să tragi din nou.
+La stratégie ¦ Strategia
+Chaque carte piochée va sur l’un des 8 tas d’attente ; seuls les As montent tout de suite. Quand la pioche est vide, on monte les cartes du dessus des tas, de 1 en 1 dans la même couleur de carte. ¦ Fiecare carte trasă merge pe una din cele 8 grămezi de așteptare; doar așii urcă imediat. Când pachetul e gol, se urcă cărțile de deasupra grămezilor, din unu în unu în aceeași culoare.
+Gizeh ¦ Giza
+La pyramide sans pioche : les 24 autres cartes sont visibles en 3 rangées et se prennent toutes. Enlève les paires qui font 13 (Valet 11, Dame 12 ; un Roi s’en va seul). ¦ Piramida fără pachet: celelalte 24 de cărți sunt vizibile pe 3 rânduri și se pot lua toate. Scoate perechile care fac 13 (valet 11, damă 12; un rege pleacă singur).
+Toutânkhamon ¦ Tutankhamon
+La pyramide, mais la pioche se retourne trois cartes à la fois (seule la dernière se joue) et repasse autant que tu veux. ¦ Piramida, dar pachetul se întoarce câte trei cărți (se joacă doar ultima) și se trece de câte ori vrei.
+La lune bleue ¦ Luna albastră
+Montana, mais les As vont au début des rangées : il faut ranger chaque rangée de l’As au Roi dans une même couleur. Un trou prend la carte de même couleur juste au-dessus de sa voisine de gauche. Deux fois, on peut ramasser ce qui n’est pas rangé et redistribuer. ¦ Montana, dar așii merg la începutul rândurilor: fiecare rând trebuie ordonat de la as la rege în aceeași culoare. O gaură primește cartea de aceeași culoare imediat deasupra vecinei din stânga. De două ori poți strânge ce nu e ordonat și reîmpărți.
+La lune rouge ¦ Luna roșie
+La lune bleue, mais les As sont posés d’avance au début des rangées et les trous sont au bout des rangées dès le départ. ¦ Luna albastră, dar așii sunt puși dinainte la începutul rândurilor, iar găurile sunt la capătul rândurilor de la început.
+Le voisin ¦ Vecinul
+Une grille de 5 × 5 : enlève deux cartes qui se touchent (même en diagonale) et font 13 (Valet 11, Dame 12) ; un Roi s’en va seul. Puis tasse la grille. ¦ O grilă de 5 × 5: scoate două cărți care se ating (chiar pe diagonală) și fac 13 (valet 11, damă 12); un rege pleacă singur. Apoi strânge grila.
+Isabelle ¦ Isabela
+13 colonnes de 4 cartes (seule la dernière est visible) : enlève deux cartes de même valeur prises en bas des colonnes. Un jeu de pure chance, pour se détendre. ¦ 13 coloane de câte 4 cărți (doar ultima e vizibilă): scoate două cărți de aceeași valoare luate de la baza coloanelor. Un joc de noroc pur, ca să te relaxezi.
+Quatorze en colonnes ¦ Paisprezece pe coloane
+12 colonnes avec toutes les cartes visibles : enlève deux cartes prises en bas des colonnes qui font 14 (Valet 11, Dame 12, Roi 13). ¦ 12 coloane cu toate cărțile vizibile: scoate două cărți luate de la baza coloanelor care fac 14 (valet 11, damă 12, rege 13).
+Ramassé et redistribué, sans mélanger. ¦ Strâns și reîmpărțit, fără amestecare.
+Les tas d’attente sont ramassés dans la pioche. ¦ Grămezile de așteptare sunt strânse în pachet.
+Ouvre le Jeu, choisis « 🂠 Patiences (jeux de cartes) » dans « Jeu », puis le jeu parmi 233 patiences rangées par famille (Klondike, FreeCell, Araignée, Yukon, Les quarante voleurs, Châteaux et jardins, jeux de paires). Glisse une carte (ou une suite) sur une autre pile, ou clique-la puis clique où la poser ; double-clic : sur une fondation ; clic sur la pioche : piocher. Dans les jeux de paires (Pyramide, Onze, Treize…), clique les cartes qui vont ensemble. ¦ Deschide Jocul, alege „🂠 Pasențe (jocuri de cărți)” în „Joc”, apoi jocul dintre 233 de pasențe ordonate pe familii (Klondike, FreeCell, Păianjen, Yukon, Cei patruzeci de hoți, Castele și grădini, jocuri de perechi). Trage o carte (sau o secvență) pe altă grămadă, sau dă clic pe ea, apoi unde s-o pui; dublu clic: pe o fundație; clic pe pachet: trage o carte. În jocurile de perechi (Piramida, Unsprezece, Treisprezece…), dă clic pe cărțile care merg împreună.
+Quelles autres patiences sont arrivées ensuite ? ¦ Ce alte pasențe au apărut apoi?
+Cent deux patiences classiques de plus, chacune avec ses règles dans « 📖 Les règles » de la partie. Famille Klondike et Canfield : Agnès Bernauer, Thumb and Pouch, Pas seul, Les impasses, Huit fois huit, Spike, Alternance, La harpe, La grande harpe, Acme, Le crapaud américain, Canfield bigarré, La duchesse, La porte. Avec des cases libres : Le pingouin, Baker’s Game (Roi seul), Seahaven détendu, Repair, Ocean Towers, Sept par quatre, Sept par cinq, FreeCell défi, FreeCell super défi. Araignées et gitanes : Le scarabée, Queue de scorpion, Scorpion double, Motif de divorce, La tarentule, Araignée à découvert, La harpe de Milligan, La harpe de Lexington, Brunswick, Carlton, Miss Milligan, Millie, L’île d’Elbe, Le mont Olympe. Yukon : La patience australienne, Canberra, Raw Prawn, Rushdike, La discipline chinoise, Solitaire russe double. Les quarante voleurs et leurs cousins : Ali Baba, Cassim, Rang et file, Les As affairés, La cour, Le carré de Napoléon, L’exil de Napoléon, Deuces, La lune décroissante, Les cinquante fameux, Quarante-neuf, Sans limite, Les petits quarante, Le zèbre, Le congrès, Le parlement, Pair et impair, Le cotillon royal. Châteaux, éventails et jardins : Le treize porte-bonheur, La patience portugaise, Bonne mesure, La cruelle, La persévérance, L’éventail en vagues, L’éventail en boîte, L’éventail fascinant, La lampe de minuit, Shamrocks, La maison dans les bois, La maison sur la colline, Bisley, Le cadran du grand-père, Le mur de pierre, La fleur sauvage, L’échiquier, La place forte, Le fort, L’art du siège, La toile de Pénélope, La citadelle, Les rois exilés, Le bastion, La boîte à thé (et ses versions américaine et anglaise). Paires, suites et calculs : Les trois sommets stricts, Golf double, As en haut (5 colonnes), La baronne, Sir Tommy, Le chat dans le coin, La stratégie, Gizeh, Toutânkhamon, La lune bleue, La lune rouge, Le voisin, Isabelle et Quatorze en colonnes. ¦ O sută două pasențe clasice în plus, fiecare cu regulile ei în „📖 Regulile” partidei. Familia Klondike și Canfield: Agnès Bernauer, Thumb and Pouch, Pas seul, Fundăturile, Opt ori opt, Spike, Alternanță, Harpa, Harpa cea mare, Acme, Broasca americană, Canfield pestriț, Ducesa, Poarta. Cu celule libere: Pinguinul, Baker’s Game (doar rege), Seahaven relaxat, Repair, Ocean Towers, Șapte pe patru, Șapte pe cinci, FreeCell provocare, FreeCell super provocare. Păianjeni și Gypsy: Scarabeul, Coada scorpionului, Scorpion dublu, Motiv de divorț, Tarantula, Păianjen la vedere, Harpa lui Milligan, Harpa din Lexington, Brunswick, Carlton, Miss Milligan, Millie, Insula Elba, Muntele Olimp. Yukon: Pasiansul australian, Canberra, Raw Prawn, Rushdike, Disciplina chinezească, Solitaire rusesc dublu. Cei patruzeci de hoți și verii lor: Ali Baba, Cassim, Rânduri și șiruri, Așii ocupați, Curtea, Careul lui Napoleon, Exilul lui Napoleon, Deuces, Luna în descreștere, Cei cincizeci faimoși, Patruzeci și nouă, Fără limită, Cei patruzeci mici, Zebra, Congresul, Parlamentul, Par și impar, Cotilionul regal. Castele, evantaie și grădini: Treisprezece cu noroc, Pasiansul portughez, Măsura bună, Cea crudă, Perseverența, Evantaiul în valuri, Evantaiul în cutie, Evantaiul fascinant, Lampa de la miezul nopții, Shamrocks, Casa din pădure, Casa de pe deal, Bisley, Ceasul bunicului, Zidul de piatră, Floarea sălbatică, Tabla de șah, Fortăreața, Fortul, Arta asediului, Pânza Penelopei, Citadela, Regii exilați, Bastionul, Cutia de ceai (și versiunile ei americană și englezească). Perechi, secvențe și calcule: Cele trei vârfuri stricte, Golf dublu, Așii sus (5 coloane), Baroana, Sir Tommy, Pisica din colț, Strategia, Giza, Tutankhamon, Luna albastră, Luna roșie, Vecinul, Isabela și Paisprezece pe coloane.
+(suite) ¦ (continuare)
+.pptx : textes, images, formes, tableaux ¦ .pptx: texte, imagini, forme, tabele
+Ce texte est vide : rien à mettre en diapositives. ¦ Acest text e gol: nimic de pus în diapozitive.
+Cette image n’est pas dans les médias. ¦ Această imagine nu e în media.
+Envoyer vers… : la présentation en vidéo, dans le Montage vidéo ou sur ton site ¦ Trimite către…: prezentarea ca video, în Montaj video sau pe site-ul tău
+Fichier PowerPoint téléchargé. ¦ Fișier PowerPoint descărcat.
+La présentation devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Prezentarea devine un video ({time}), pus în Media, apoi alegi unde merge: în Montaj video sau pe site-ul tău. Lasă fereastra deschisă în timpul înregistrării.
+Le diaporama devient une vidéo ({time}), rangée dans les Médias, puis tu choisis où elle va : le Montage vidéo ou ton site. Laisse la fenêtre ouverte pendant l’enregistrement. ¦ Diaporama devine un video ({time}), pus în Media, apoi alegi unde merge: în Montaj video sau pe site-ul tău. Lasă fereastra deschisă în timpul înregistrării.
+Le diaporama en vidéo, rangé dans les médias, puis dans le Montage vidéo ou sur ton site ¦ Diaporama ca video, pusă în media, apoi în Montaj video sau pe site-ul tău
+PowerPoint : assemblage du fichier… ¦ PowerPoint: se asamblează fișierul…
+PowerPoint : diapositive {n} / {total} ¦ PowerPoint: diapozitivul {n} / {total}
+PowerPoint impossible : {error} ¦ PowerPoint imposibil: {error}
+📊 PowerPoint ¦ 📊 PowerPoint
+📊 PowerPoint (.pptx) ¦ 📊 PowerPoint (.pptx)
+📤 Envoyer la présentation ¦ 📤 Trimite prezentarea
+📤 Envoyer le diaporama ¦ 📤 Trimite diaporama
+📤 Envoyer vers… (la vidéo) ¦ 📤 Trimite către… (video-ul)
+📤 Envoyer vers… (le Montage vidéo, ton site) ¦ 📤 Trimite către… (Montaj video, site-ul tău)
+⤓ Exporter l’image (PNG, JPG, WebP, TIFF, imprimer)… ¦ ⤓ Exportă imaginea (PNG, JPG, WebP, TIFF, tipărire)…
+Exporter : l’image retouchée (PNG, JPG, WebP, TIFF, imprimer) ou l’avant / après ¦ Exportă: imaginea retușată (PNG, JPG, WebP, TIFF, tipărire) sau înainte / după
+🖼 L’image retouchée (PNG, JPG, WebP, TIFF, imprimer)… ¦ 🖼 Imaginea retușată (PNG, JPG, WebP, TIFF, tipărire)…
+🌐 WebP ¦ 🌐 WebP
+léger, pour le web ¦ ușor, pentru web
+🗂 TIFF ¦ 🗂 TIFF
+sans perte, pour archiver ¦ fără pierderi, pentru arhivare
+Ce navigateur ne sait pas faire du WebP : choisis PNG ou JPG. ¦ Acest browser nu știe să facă WebP: alege PNG sau JPG.
+Cette action de retouche n’existe plus. ¦ Această acțiune de retușare nu mai există.
+Choisis une photo à retoucher. ¦ Alege o fotografie de retușat.
+Envoyer l’image affichée ou le compte rendu vers un autre outil ¦ Trimite imaginea afișată sau raportul către alt instrument
+Ouvrir la photo A ou B dans la Retouche des photos ¦ Deschide fotografia A sau B în Retușarea fotografiilor
+Exporter l’image affichée, ou imprimer les deux photos avec la ressemblance et les notes ¦ Exportă imaginea afișată sau tipărește cele două fotografii cu asemănarea și notele
+Exporter l’image (ce qui est affiché)… ¦ Exportă imaginea (ce e afișat)…
+Imprimer (les deux photos, la ressemblance, les notes)… ¦ Tipărește (cele două fotografii, asemănarea, notele)…
+L’image affichée ¦ Imaginea afișată
+Le compte rendu (photos, ressemblance, notes) ¦ Raportul (fotografii, asemănare, note)
+La Retouche des photos n’est pas chargée. ¦ Retușarea fotografiilor nu e încărcată.
+Photo {side} — {name} ¦ Fotografia {side} — {name}
+Retoucher quelle photo ? ¦ Ce fotografie retușezi?
+Utiliser ¦ Folosește
+✒️ Quel dessin ? ¦ ✒️ Ce desen?
+Aucun dessin enregistré dans le Dessin vectoriel. ¦ Niciun desen salvat în Desenul vectorial.
+Ce dessin n’a pas pu être lu : ouvre le Dessin vectoriel une fois, puis recommence. ¦ Acest desen n-a putut fi citit: deschide o dată Desenul vectorial, apoi reîncearcă.
+📝 Quel document ? ¦ 📝 Ce document?
+Aucun document dans le Traitement de texte. ¦ Niciun document în Procesorul de text.
+Des images qui défilent (‹ ›) ; sans script, elles glissent au doigt ¦ Imagini care defilează (‹ ›); fără script, alunecă cu degetul
+Les images du diaporama ¦ Imaginile diaporamei
+Une vidéo de tes médias (ou d’un fichier : 📁 Importer…), avec ses boutons lecture et plein écran ¦ Un video din media ta (sau dintr-un fișier: 📁 Importă…), cu butoanele de redare și ecran complet
+La vidéo du site ¦ Video-ul site-ului
+Télécharger la vidéo ¦ Descarcă video-ul
+Un son de tes médias (témoignage, chanson…), et ce qu’on y entend écrit dessous si tu veux ¦ Un sunet din media ta (mărturie, cântec…) și, dedesubt, ce se aude scris, dacă vrei
+Le son du site ¦ Sunetul site-ului
+🎧 Ce qu’on entend (facultatif) ¦ 🎧 Ce se aude (opțional)
+Écris ou colle la transcription : elle sera sous le son, pour ceux qui ne peuvent pas l’écouter. Laisse vide si tu n’en veux pas. ¦ Scrie sau lipește transcrierea: va fi sub sunet, pentru cei care nu-l pot asculta. Lasă gol dacă nu vrei.
+Ajouter le son ¦ Adaugă sunetul
+Télécharger le son ¦ Descarcă sunetul
+Ce qu’on entend ¦ Ce se aude
+Un de tes dessins vectoriels, ou un SVG collé (sans script ni lien vers l’extérieur) ¦ Unul din desenele tale vectoriale sau un SVG lipit (fără script și fără legături spre exterior)
+Un de mes dessins ¦ Unul din desenele mele
+Dessin vectoriel → mes dessins enregistrés ¦ Desen vectorial → desenele mele salvate
+Coller un SVG ¦ Lipește un SVG
+Le code <svg>…</svg> d’un dessin ¦ Codul <svg>…</svg> al unui desen
+📋 Coller un SVG ¦ 📋 Lipește un SVG
+Colle ici le code du dessin, de <svg> à </svg>. Les scripts et les liens vers l’extérieur sont retirés. ¦ Lipește aici codul desenului, de la <svg> la </svg>. Scripturile și legăturile spre exterior sunt scoase.
+Ajouter le dessin ¦ Adaugă desenul
+Un texte du Traitement de texte (une lettre, un récit), mis au propre pour la page ¦ Un text din Procesorul de text (o scrisoare, o povestire), pus pe curat pentru pagină
+Ce document est vide. ¦ Acest document e gol.
+Vidéo, son, dessin et texte ¦ Video, sunet, desen și text
+🎬 Changer la vidéo… ¦ 🎬 Schimbă video-ul…
+🎧 Changer le son… ¦ 🎧 Schimbă sunetul…
+Le fichier part avec le site (dossier medias/) à l’export et à la publication. ¦ Fișierul pleacă odată cu site-ul (dosarul medias/) la export și la publicare.
+Un autre son ¦ Alt sunet
+Une autre vidéo ¦ Alt video
+{what} (dossier medias/) ¦ {what} (dosarul medias/)
+vidéo ou son ¦ video sau sunet
+vidéos ou sons ¦ video-uri sau sunete
+{what} : trop lourd pour un site (90 Mo au plus par fichier, 300 Mo en tout) ¦ {what}: prea greu pentru un site (cel mult 90 MB pe fișier, 300 MB în total)
+vidéo ou son pas mis ¦ video sau sunet nepus
+vidéos ou sons pas mis ¦ video-uri sau sunete nepuse
+Mon site web n’est pas chargé : recharge la page. ¦ Site-ul meu web nu e încărcat: reîncarcă pagina.
+Mon site web ne sait pas recevoir ça. ¦ Site-ul meu web nu știe să primească asta.
+Ce texte est vide. ¦ Acest text e gol.
+Mon site ¦ Site-ul meu
+ouvert ¦ deschis
+la dernière fois ¦ ultima dată
+ouvert, pas encore enregistré ¦ deschis, încă nesalvat
+{what} : sur quel site ? ¦ {what}: pe ce site?
+Un nouveau site ¦ Un site nou
+Sur quelle page ? ¦ Pe ce pagină?
+Une nouvelle page… ¦ O pagină nouă…
+📄 Nouvelle page ¦ 📄 Pagină nouă
+Le nom de la page (il apparaît dans le menu) : ¦ Numele paginii (apare în meniu):
+La vidéo ¦ Video-ul
+{what} est sur la page « {page} » de « {site} » ¦ {what} e pe pagina „{page}” a „{site}”
+vidéos WebM ¦ video-uri WebM
+Les iPhone d’avant 2024 ne la lisent pas : préfère le MP4 (H.264), que tout le monde lit. ¦ iPhone-urile dinainte de 2024 nu-l redau: alege mai bine MP4 (H.264), pe care îl redă oricine.
+vidéos .mov (QuickTime) ¦ video-uri .mov (QuickTime)
+Souvent illisible hors d’Apple : refais-la en MP4 (🎬 Montage vidéo → Exporter). ¦ Adesea ilizibil în afara Apple: refă-l în MP4 (🎬 Montaj video → Exportă).
+vidéos Ogg (.ogv) ¦ video-uri Ogg (.ogv)
+Jamais sur Safari ni sur iPhone : préfère le MP4. ¦ Niciodată în Safari sau pe iPhone: alege mai bine MP4.
+sons Ogg (Vorbis, Opus) ¦ sunete Ogg (Vorbis, Opus)
+Safari ne les lit que depuis 2025 : préfère le MP3 (🎧 Son → Exporter). ¦ Safari le redă abia din 2025: alege mai bine MP3 (🎧 Sunet → Exportă).
+sons FLAC ¦ sunete FLAC
+Marche partout, mais c’est lourd pour un site : le MP3 se charge bien plus vite. ¦ Merge peste tot, dar e greu pentru un site: MP3 se încarcă mult mai repede.
+scroll-snap (le diaporama s’arrête sur chaque image) ¦ scroll-snap (diaporama se oprește la fiecare imagine)
+Marche partout depuis 2019 ; ailleurs, les images défilent sans s’arrêter. ¦ Merge peste tot din 2019; în rest, imaginile defilează fără să se oprească.
+Maison par époques ¦ Casa pe epoci
+Ma carte animée ¦ Harta mea animată
+La maison au fil du temps ¦ Casa de-a lungul timpului
+Le dessin vectoriel n’est pas chargé. ¦ Desenul vectorial nu e încărcat.
+Lecture de la carte… ¦ Se citește harta…
+Carte introuvable ¦ Hartă negăsită
+La maison n’est pas chargée. ¦ Casa nu e încărcată.
+Lecture de la maison… ¦ Se citește casa…
+Maison introuvable ¦ Casă negăsită
+Le plan de cette maison est vide. ¦ Planul acestei case e gol.
+Choisir une carte ¦ Alege o hartă
+Chercher une carte… ¦ Caută o hartă…
+{n} objets ¦ {n} obiecte
+Les objets qui ont des années (onglet Propriétés de la carte) apparaissent à leur date. ¦ Obiectele care au ani (fila Proprietăți a hărții) apar la data lor.
+Aucune carte enregistrée : fais-en une dans Outils de modification → 🗺️ Carte. ¦ Nicio hartă salvată: fă una în Instrumente de modificare → 🗺️ Hartă.
+Choisir une maison ¦ Alege o casă
+Chercher une maison… ¦ Caută o casă…
+Chaque époque de la maison (🕰) devient un plan, l’un après l’autre, en fondu. ¦ Fiecare epocă a casei (🕰) devine un cadru, una după alta, cu fondu.
+Aucune maison enregistrée : dessine-en une dans Outils de modification → 🏠 Maison. ¦ Nicio casă salvată: desenează una în Instrumente de modificare → 🏠 Casă.
+Apparition des objets ¦ Apariția obiectelor
+D’un coup ¦ Dintr-odată
+Avance doucement ¦ Înaintează încet
+Fondu d’une époque à l’autre (0 à 0,9) ¦ Fondu de la o epocă la alta (0 la 0,9)
+L’année et le nom de l’époque en légende ¦ Anul și numele epocii în legendă
+(une copie de la carte) ¦ (o copie a hărții)
+En faire la musique ¦ Fă din el muzica
+Ce son passe en musique de fond, pour tout le film ¦ Acest sunet devine muzică de fundal pentru tot filmul
+Voix retirée. ¦ Voce scoasă.
+Le son est maintenant la musique du film. ¦ Sunetul e acum muzica filmului.
+Le son est la voix du film (onglet Film). « 🎵 En faire la musique » pour le mettre en fond. ¦ Sunetul e vocea filmului (fila Film). „🎵 Fă din el muzica” îl pune în fundal.
+Animer dans le Studio ¦ Animează în Studio
+Le curseur du temps joue tout seul : les objets apparaissent à leur date ¦ Cursorul timpului merge singur: obiectele apar la data lor
+Le Studio d’animation n’est pas chargé. ¦ Studioul de animație nu e încărcat.
+Aucune carte enregistrée : commence par « ＋ Nouvelle carte ». ¦ Nicio hartă salvată: începe cu „＋ Hartă nouă”.
+Quelle carte animer ? ¦ Ce hartă animezi?
+Les objets qui ont des années (onglet Propriétés) apparaissent à leur date, de la première année à la dernière. ¦ Obiectele care au ani (fila Proprietăți) apar la data lor, de la primul an la ultimul.
+Un film où le curseur du temps avance tout seul, de la première année à la dernière ¦ Un film în care cursorul timpului înaintează singur, de la primul an la ultimul
+Cette carte est trop lourde pour être copiée dans un film : enregistre-la, puis Outils de modification → 🗺️ Carte → « 🎞 Animer dans le Studio ». ¦ Această hartă e prea grea ca să fie copiată într-un film: salveaz-o, apoi Instrumente de modificare → 🗺️ Hartă → „🎞 Animează în Studio”.
+Le plan ou la vue 3D dans un autre outil : montage, présentation, mise en page, dessin… ¦ Planul sau vederea 3D în alt instrument: montaj, prezentare, așezare în pagină, desen…
+🎞 Animer les époques dans le Studio ¦ 🎞 Animează epocile în Studio
+Animer les époques dans le Studio ¦ Animează epocile în Studio
+Le plan (image) ¦ Planul (imagine)
+La vue 3D (image) ¦ Vederea 3D (imagine)
+Le plan en dessin (vectoriel, mise en page…) ¦ Planul ca desen (vectorial, așezare în pagină…)

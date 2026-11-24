@@ -118,7 +118,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
 
         await t('Réglages : la page « 🎖️ Bases officielles » est juste après la météo ; rien d’installé au départ', async () => {
             const tabs = await p.evaluate(() => window.LCNDA_APP.defaultMaintenanceTabs.map(x => x[0]));
-            assert.strictEqual(tabs[tabs.indexOf('meteo') + 1], 'bases_officielles');
+            // avec les autres packs de données (histoire du lieu, GOV…) : après la météo, parmi eux
+            assert.ok(tabs.indexOf('bases_officielles') > tabs.indexOf('meteo') && tabs.indexOf('meteo') >= 0, tabs.join(','));
             const st = await api('bo_status'); assert.strictEqual(st.bases.mpf.installed, false); assert.strictEqual(st.bases.leonore.installed, false);
             const d = await api('bo_person', {id: 1}); assert.deepStrictEqual([d.bases.mpf.could, d.bases.mpf.matches.length, d.bases.leonore.could], [true, 0, true]);
             assert.strictEqual((await api('bo_person', {id: 3})).bases.mpf.could, false, 'une femme : pas dans les Morts pour la France');

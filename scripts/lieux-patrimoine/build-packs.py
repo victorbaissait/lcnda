@@ -360,13 +360,13 @@ def manifest(folder):
 def essai(folder):
     """petits packs d'ESSAI pour les tests (noms inventés, marqués fixture) — jamais montrés comme de vraies données"""
     os.makedirs(folder, exist_ok=True)
-    rows = [('la Croix MAZAUD', fold('la Croix MAZAUD'), 'Lieu-dit habité', '15999', 45.10, 2.50, 1), ('Bois LACOMBE', fold('Bois LACOMBE'), 'Lieu-dit non habité', '15999', 45.11, 2.51, 0),
+    rows = [('la Croix MAZAUD', fold('la Croix MAZAUD'), 'Lieu-dit habité', '15014', 45.10, 2.50, 1), ('Bois LACOMBE', fold('Bois LACOMBE'), 'Lieu-dit non habité', '15014', 45.11, 2.51, 0),
             ('Moulin DURAND', fold('Moulin DURAND'), 'Moulin', '15998', 45.12, 2.52, 1)]
     db = os.path.join(folder, 'tmp.sqlite')
-    n = write_lieuxdits_db(db, '15', rows, {'15999': 'Essai-sur-Lande', '15998': 'Autre-Essai'}, fixture=True)
+    n = write_lieuxdits_db(db, '15', rows, {'15014': 'Aurillac', '15998': 'Autre-Essai'}, fixture=True)
     seal(db, os.path.join(folder, pack_name('lieuxdits', '15')), 'lieuxdits', '15', n)
-    items = [{'ref': 'PA99000001', 'base': 'merimee', 'nom': 'Église d’essai', 'deno': 'église', 'insee': '15999', 'dep': '15', 'commune': 'Essai-sur-Lande', 'siecle': '12e siècle', 'dates': '', 'protection': '1900/01/01 : classé MH', 'resume': 'Notice d’essai.', 'edifice': '', 'vocable': '', 'lat': 45.1, 'lon': 2.5},
-             {'ref': 'PM99000001', 'base': 'palissy', 'nom': 'Cloche d’essai', 'deno': 'cloche', 'insee': '15999', 'dep': '15', 'commune': 'Essai-sur-Lande', 'siecle': '17e siècle', 'dates': '1650', 'protection': '1910/01/01 : classé au titre objet', 'resume': '', 'edifice': 'église d’essai', 'vocable': '', 'lat': None, 'lon': None}]
+    items = [{'ref': 'PA99000001', 'base': 'merimee', 'nom': 'Église d’essai', 'deno': 'église', 'insee': '15014', 'dep': '15', 'commune': 'Aurillac', 'siecle': '12e siècle', 'dates': '', 'protection': '1900/01/01 : classé MH', 'resume': 'Notice d’essai.', 'edifice': '', 'vocable': '', 'lat': 45.1, 'lon': 2.5},
+             {'ref': 'PM99000001', 'base': 'palissy', 'nom': 'Cloche d’essai', 'deno': 'cloche', 'insee': '15014', 'dep': '15', 'commune': 'Aurillac', 'siecle': '17e siècle', 'dates': '1650', 'protection': '1910/01/01 : classé au titre objet', 'resume': '', 'edifice': 'église d’essai', 'vocable': '', 'lat': None, 'lon': None}]
     n = write_patrimoine_db(db, '15', items, fixture=True)
     seal(db, os.path.join(folder, pack_name('patrimoine', '15')), 'patrimoine', '15', n)
     return manifest(folder)
