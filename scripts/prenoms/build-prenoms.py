@@ -2,10 +2,9 @@
 """
 LCNDA — 📊 Prénoms d'ici et d'ailleurs : fabrique le pack « prenoms-pays » (scripts/prenoms/, .github/workflows/prenoms.yml).
 
-Le pack est une base SQLite compressée (gzip), précédée d'un en-tête de 4096 octets :
-    « LCPRENOMS1\n » + JSON {kind, format, size (octets compressés), raw_size, sha256 (des octets compressés), built, countries}
-L'app (lib/prenoms_pays.php) le télécharge depuis la version GitHub « prenoms-donnees » (prenoms-manifest.json), vérifie
-l'empreinte, le décompresse et le range dans SHARED_DATA_DIR/prenoms/prenoms-pays.sqlite.
+Le pack est une base SQLite compressée (prenoms-pays.sqlite.gz). L'app (lib/prenoms_pays.php) le télécharge depuis la
+version GitHub « prenoms-donnees » (prenoms-manifest.json : taille, empreinte sha256, morceaux), vérifie l'empreinte, le
+décompresse et le range dans SHARED_DATA_DIR/prenoms/prenoms-pays.sqlite.
 
 Sources (vérifiées en les téléchargeant, novembre 2026) :
   FR  Insee, « Fichier des prénoms », édition 2024 (naissances 1900–2023), fichier par département de naissance
@@ -55,7 +54,6 @@ FR_DEPTS = {'01': 'Ain', '02': 'Aisne', '03': 'Allier', '04': 'Alpes-de-Haute-Pr
 
 ESSAI_NAMES = {'MARIE', 'JEAN', 'PIERRE', 'ANNE', 'LOUIS', 'JEANNE', 'MARGUERITE', 'ANTOINE', 'SOFIA', 'NOAH', 'ROSA', 'ALICE'}
 ESSAI_DEPTS = {'15'}
-HEADER = 4096
 
 
 def key(name):
@@ -231,14 +229,10 @@ def build(args):
 
     raw = open(db_path, 'rb').read()
     comp = gzip.compress(raw, 9, mtime=0)
-    sha = hashlib.sha256(comp).hexdigest()
-    head = {'kind': 'pays', 'format': 1, 'size': len(comp), 'raw_size': len(raw), 'sha256': sha, 'built': built, 'countries': ['FR', 'CH', 'QC'], 'rows': len(rows), 'essai': bool(args.essai)}
-    h = ('LCPRENOMS1\n' + json.dumps(head)).encode()
-    pack = os.path.join(args.dossier, 'prenoms-pays.lcprenoms')
+    pack = os.path.join(args.dossier, 'prenoms-pays.sqlite.gz')
     with open(pack, 'wb') as out:
-        out.write(h + b' ' * (HEADER - len(h)))
         out.write(comp)
-    print(json.dumps({'pack': pack, 'raw': len(raw), 'gz': len(comp), 'rows': len(rows), 'names': len(names), 'zones': len(zones)}))
+    print(json.dumps({'pack': pack, 'raw': len(raw), 'gz': len(comp), 'sha256': hashlib.sha256(comp).hexdigest(), 'rows': len(rows), 'names': len(names), 'zones': len(zones)}))
 
 
 if __name__ == '__main__':

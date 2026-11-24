@@ -132,7 +132,7 @@ echo json_encode(['jean' => $jean, 'marie' => $marie, 'near' => $near, 'vague' =
             assert.match(await p.textContent('.gov-ev'), /🏰 en 1870 : Kirchspiel Lacombsdorf, Kreis Durandsberg, Province de Lacombie, Royaume de Durandie/);
             await p.click('.gov-ev button');
             await p.waitForSelector('dialog[open] [data-gov-obj="LACORFJO70AA"]', {timeout: 10000});
-            assert.match(await p.textContent('dialog[open]'), /Lakomice \(polonais, depuis 1945\)/);
+            console.log(await p.evaluate(() => document.querySelector('dialog[open] .gov-names')?.outerHTML));assert.match(await p.textContent('dialog[open]'), /Lakomice \(polonais, depuis 1945\)/);
             assert.match(await p.textContent('dialog[open]'), /CC BY-SA/);
             await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
         });
@@ -142,6 +142,7 @@ echo json_encode(['jean' => $jean, 'marie' => $marie, 'near' => $near, 'vague' =
             await p.waitForSelector('[data-gov-place] [data-gov-obj]', {timeout: 20000});
             const txt = await p.textContent('[data-gov-place]');
             assert.match(txt, /Ce lieu dans GOV/); assert.match(txt, /Trouvé par le nom et la position/); assert.match(txt, /en 1870 : Kirchspiel Lacombsdorf/);
+            console.log(await p.evaluate(() => { const b = document.querySelector('[data-gov-place] [data-gov-link]'); const r = b.getBoundingClientRect(); let e = b, out = []; while (e) { const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden' || e.hidden) out.push(e.className + '|' + cs.display + '|' + e.hidden); e = e.parentElement; } return JSON.stringify([r.x, r.y, r.width, r.height, out]); })); console.log(await p.evaluate(() => document.querySelector('dialog[open] .gov-names')?.outerHTML || 'nodialog'));
             await p.click('[data-gov-place] [data-gov-link]');
             await p.waitForFunction(() => /relié à GOV/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 10000});
             assert.strictEqual((await api('gov_place', {id: ID.near})).how, 'link');
