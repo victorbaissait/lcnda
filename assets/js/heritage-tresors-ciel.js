@@ -169,13 +169,14 @@
     /** tout ce qu'il faut pour la nuit d'une naissance, chargé à la demande : le catalogue d'étoiles, la comète de la nuit, l'heure de l'acte */
     const night = {comets: null};
     async function extras(b, pid) {
-        const H = ext.cielHeure, out = {comets: [], act: null};
+        const H = ext.cielHeure, out = {comets: [], act: null, tz: null, place: null};
         await loadCatalog().catch(() => null);
         if (!H) return out;
         try { const d = await H.loadSkyEvents(); out.comets = b?.exact ? H.cometsOn(d, b.date) : []; } catch (_) {}
         if (pid) try {
-            const c = await H.ctx({person_id: pid}), TZ = c?.ok && /^\d{1,2}:\d{2}/.test(c.time || '') && c.date && c.place ? await H.loadTz() : null;
-            if (TZ) { const r = H.realHour({date: c.date, time: c.time, place: c.place}, TZ); if (r) out.act = {time: c.time.slice(0, 5), date: c.date, r, lng: Number(c.place.lng)}; }
+            const c = await H.ctx({person_id: pid}); if (!c?.ok || !c.place) return out;
+            out.place = c.place; out.tz = await H.loadTz();
+            if (/^\d{1,2}:\d{2}/.test(c.time || '') && c.date) { const r = H.realHour({date: c.date, time: c.time, place: c.place}, out.tz); if (r) out.act = {time: c.time.slice(0, 5), date: c.date, r}; }
         } catch (_) {}
         return out;
     }
@@ -206,7 +207,7 @@
             const got = await extras(b, pid); if (Number(form.elements.who.value) !== pid) return;
             more = got; morePid = pid;
             if (got.act) { form.elements.h.value = got.act.time; form.elements.hm.value = 'acte'; } else if (form.elements.hm.value === 'acte') { form.elements.hm.value = 'sol'; form.elements.h.value = '22:00'; }
-            form.elements.h.dispatchEvent(new Event('lcnda:set', {bubbles: false})); draw();
+            draw();
         };
         const draw = () => {
             const p = tr.byId.get(Number(form.elements.who.value)), b = birthOf(T, tr, p);
@@ -250,7 +251,13 @@
         const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-sky-block="${pid}"]`); if (!el || !ext.tresors) return;
         const T = ext.tresors.T, tr = await T.tree().catch(() => null), p = tr?.byId.get(pid), b = birthOf(T, tr, p);
         if (!b) { el.innerHTML = `<p class="muted">${i18n('Il faut au moins l’année de naissance pour voir le ciel.')}</p>`; return; }
-        const s = sky({date: b.date, hour: 22, lat: b.lat, lng: b.lng}); drawSky(el.querySelector('canvas'), s, caption(T, p, b, s, 22));
+        const paint = (more = {comets: []}) => {
+            const hour = more.act ? solarFromLegal(Number(more.act.time.slice(0, 2)) + Number(more.act.time.slice(3, 5)) / 60, more.act.r, b.lng) : 22, h24 = ((hour % 24) + 24) % 24;
+            const s = sky({date: b.date, hour, lat: b.lat, lng: b.lng, comets: more.comets}); drawSky(el.querySelector('canvas'), s, caption(T, p, b, s, h24)); return s;
+        };
+        const s = paint();
+        // puis, chargés à la demande : les étoiles pâles, la comète de la nuit et l'heure écrite dans l'acte
+        extras(b, pid).then(more => { if (el.isConnected) { const s2 = paint(more); if (s2.comets.some(c => c.alt > 0)) el.querySelector('[data-sky-txt]').textContent += ` · ☄️ ${s2.comets.filter(c => c.alt > 0).map(c => i18n(c.n)).join(', ')}`; if (more.act) el.dataset.hour = 'acte'; } }).catch(() => {});
         el.querySelector('[data-sky-txt]').textContent = `${i18n(s.moon.phase)}${s.planets.some(x => x.alt > 0) ? ' · ' + s.planets.filter(x => x.alt > 0).map(x => i18n(x.n, {ctx: 'astre'})).join(', ') : ''}${b.exact ? '' : ' · ' + i18n('date exacte inconnue')}`;
     });
     document.addEventListener('click', e => { const b = e.target.closest('[data-sky-big]'); if (b) { ext.tresorSky.pending = Number(b.dataset.skyBig); ext.tresors?.open('ciel'); } });

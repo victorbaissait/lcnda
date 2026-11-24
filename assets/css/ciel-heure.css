@@ -1,0 +1,20 @@
+/* LCNDA — 🕰️ La vraie heure de l'acte, ☄️ Il a pu voir… (assets/js/heritage-ciel-heure.js) et l'heure du 🌌 ciel de naissance.
+ * Couleurs : variables de l'app (--ink, --muted, --blue-bright, --card-bg) ; le mode sombre suit tout seul. */
+.ch-hint { display: block; margin-top: 4px; font-size: 12px; line-height: 1.4; font-weight: 400; }
+.ch-hint[hidden] { display: none; }
+.ch-line { display: block; color: var(--blue-bright, #055dff); font-weight: 600; }
+.ch-why { display: block; color: var(--muted, #667); }
+.ch-real { display: block; margin-top: 2px; font-size: 11.5px; max-width: 32em; }
+.ch-real > summary { cursor: pointer; color: var(--blue-bright, #055dff); list-style: none; display: inline-block; }
+.ch-real > summary::-webkit-details-marker { display: none; }
+.ch-real > summary:focus-visible { outline: 2px solid var(--blue-bright, #055dff); outline-offset: 2px; border-radius: 3px; }
+.ch-real[open] > summary { font-weight: 600; }
+.ch-real > p { margin: 3px 0 0; line-height: 1.4; }
+.ch-seen-lead { margin: 0 0 6px; font-weight: 600; }
+.ch-seen-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ch-seen-list li { display: flex; gap: 8px; align-items: flex-start; }
+.ch-seen-ico { font-size: 18px; line-height: 1.3; flex: none; width: 24px; text-align: center; }
+.ch-seen-list li > div { min-width: 0; flex: 1; }
+.ch-seen-list p { margin: 2px 0 0; line-height: 1.4; font-size: 13px; }
+.ch-src { display: block; color: var(--muted, #667); font-size: 11.5px; margin-top: 2px; overflow-wrap: anywhere; }
+.ch-seen-note { margin: 8px 0 0; }
