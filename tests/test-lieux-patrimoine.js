@@ -76,6 +76,10 @@ echo json_encode(['aur' => $aur, 'tul' => $tul]);`], {cwd: root, encoding: 'utf8
         }
         await p.waitForFunction(() => window.LCNDA_EXT?.lieuxPatrimoine, null, {timeout: 10000});
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).then(r => r.result || r).catch(e => ({error: e.message})), [x, q]);
+        // la monographie (heritage-monographie-plus.js) dessine ses parties quand on les voit : on les fait défiler
+        const monoParts = async ids => { for (const id of ids) { await p.waitForSelector(`[data-mp="${id}"]`, {timeout: 20000}); await p.evaluate(i => document.querySelector(`[data-mp="${i}"]`).scrollIntoView(), id); }
+            await p.waitForFunction(i => i.every(id => document.querySelector(`[data-mp="${id}"]`)?.dataset.mpState && !['wait', 'run'].includes(document.querySelector(`[data-mp="${id}"]`).dataset.mpState)), ids, {timeout: 20000}); await sleep(200); };
+        const monoText = () => p.evaluate(() => [...document.querySelectorAll('[data-mp^="lp_"]')].filter(x => !x.hidden).map(x => x.querySelector('.lp-lead, .lp-src') ? [...x.querySelectorAll('.lp-lead, .lp-src')].map(y => y.textContent).join(' ') : x.textContent).join(' | '));
         const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result || r; } catch (e) { return {error: e.message}; } }, [a, b]);
 
         await t('serveur : sommaire en ligne (le pack mal décrit est écarté) ; rien d’installé au départ ; le Cantal est le département de la famille', async () => {
@@ -125,8 +129,8 @@ echo json_encode(['aur' => $aur, 'tul' => $tul]);`], {cwd: root, encoding: 'utf8
         });
         await t('Monographie de commune : 📜 anciens noms, 🏘️ lieux-dits (à chercher), ⛪ patrimoine avec le lien POP', async () => {
             await p.evaluate(id => { const A = window.LCNDA_APP; A.state.graphPlaceMonograph = {...(A.state.graphPlaceMonograph || {}), id, name: 'Aurillac', showEvents: true}; A.state.graphMode = 'place_monograph'; A.setModule('graphiques'); }, ID.aur);
-            await p.waitForSelector('[data-lp-part="patrimoine"]', {timeout: 20000});
-            const txt = await p.textContent('[data-lp-host]');
+            await monoParts(['lp_dico', 'lp_lieuxdits', 'lp_patrimoine']);
+            const txt = await monoText();
             assert.match(txt, /Aurillac s’écrivait « Aureliacus » en 984/); assert.match(txt, /DicoTopo/);
             assert.match(txt, /2 lieux-dits à Aurillac, dont 1 habités/); assert.match(txt, /données d’essai/);
             assert.match(txt, /1 monument\(s\) protégé\(s\) et 1 objet\(s\) protégé\(s\)/);
@@ -142,13 +146,13 @@ echo json_encode(['aur' => $aur, 'tul' => $tul]);`], {cwd: root, encoding: 'utf8
             await post('lp_pack_remove', {key: 'lieuxdits-15'});
             await p.evaluate(() => { window.LCNDA_APP.setModule('dashboard'); }); await sleep(300);
             await p.evaluate(() => window.LCNDA_APP.setModule('graphiques'));
-            await p.waitForSelector('[data-lp-offer="lieuxdits"]', {timeout: 20000});
+            await monoParts(['lp_lieuxdits']); await p.waitForSelector('[data-lp-offer="lieuxdits"]', {timeout: 20000});
             await p.click('[data-lp-hide-offer="lieuxdits"]');
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-lieux-patrimoine-offres')), '{"lieuxdits":true}');
             await p.evaluate(() => { localStorage.setItem('genealogie-lieux-patrimoine', JSON.stringify({patrimoine: false})); window.LCNDA_APP.setModule('dashboard'); }); await sleep(300);
             await p.evaluate(() => window.LCNDA_APP.setModule('graphiques'));
-            await p.waitForSelector('[data-lp-part="dico"]', {timeout: 20000}); await sleep(300);
-            assert.ok(!(await p.$('[data-lp-part="patrimoine"]')) && !(await p.$('[data-lp-offer]')));
+            await monoParts(['lp_dico']); await sleep(300);
+            assert.ok(!(await p.$('[data-mp="lp_patrimoine"]')) && !(await p.$('[data-lp-offer]')), 'partie éteinte : pas proposée ; offre cachée : plus là');
             await p.evaluate(() => localStorage.removeItem('genealogie-lieux-patrimoine'));
         });
         await t('Atelier : un lieu lu absent de la base → « 💡 Ce serait peut-être Aurillac (Cantal) »', async () => {
@@ -162,6 +166,19 @@ echo json_encode(['aur' => $aur, 'tul' => $tul]);`], {cwd: root, encoding: 'utf8
             assert.deepStrictEqual(ids, ['lp_dicotopo', 'lp_lieuxdits', 'lp_patrimoine', 'lp_suggest']);
             const html = await p.evaluate(async id => { const h = document.createElement('div'); await window.LCNDA_EXT.dataSources.find(x => x.id === 'lp_dicotopo').run({place: {id}}, h); return h.textContent; }, ID.aur);
             assert.match(html, /Aureliacus/);
+        });
+        await t('📋 Listes (LCNDA_EXT.dataLists) : 4 listes ; filtres combinés, année, distance autour d’Aurillac', async () => {
+            const ids = await p.evaluate(() => window.LCNDA_EXT.dataLists.filter(x => x.id.startsWith('lp_')).map(x => x.id));
+            assert.deepStrictEqual(ids, ['lp_lieuxdits', 'lp_merimee', 'lp_palissy', 'lp_dicotopo']);
+            const q = (id, query) => p.evaluate(([i, x]) => window.LCNDA_EXT.dataLists.find(l => l.id === i).query(x), [id, query]);
+            let r = await q('lp_dicotopo', {filters: [{key: 'dep', op: '=', value: '15'}, {key: 'commune', op: '=', value: 'Aurillac'}], years: {from: 900, to: 1000}});
+            assert.ok(r.rows.some(x => x.name === 'Aureliacus' && x.year === 984), JSON.stringify(r).slice(0, 300)); assert.ok(r.rows.every(x => x.year >= 900 && x.year <= 1000));
+            r = await q('lp_dicotopo', {q: 'orlhac', near: {lat: 44.9277, lon: 2.4476, km: 5}}); assert.ok(r.total >= 1 && r.rows.every(x => x.km <= 5));
+            await post('lp_pack_restore', {key: 'lieuxdits-15'});
+            r = await q('lp_lieuxdits', {filters: [{key: 'habite', op: '=', value: 'habité'}]}); assert.deepStrictEqual(r.rows.map(x => x.name), ['la Croix MAZAUD', 'Moulin DURAND']);
+            r = await q('lp_palissy', {years: {from: 1600, to: 1700}}); assert.deepStrictEqual(r.rows.map(x => [x.name, x.from, x.to]), [['Cloche d’essai', 1650, 1650]]);
+            r = await q('lp_merimee', {near: {lat: 45.1, lon: 2.5, km: 1}}); assert.strictEqual(r.total, 1);
+            const per = await p.evaluate(() => window.LCNDA_EXT.dataLists.find(l => l.id === 'lp_merimee').period({from: 1100, to: 1199})); assert.deepStrictEqual(per, [1100, 1199]);
         });
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally { await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true}); }

@@ -385,6 +385,42 @@
    "old": 30444,
    "places": 3863,
    "size": 443521
+  },
+  "62": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Pas-de-Calais",
+    "bibl": "Loisne (Auguste de), Dictionnaire topographique du département du Pas-de-Calais, Paris, 1907.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k1101013"
+   },
+   "communes": 890,
+   "label": "Pas-de-Calais",
+   "old": 19357,
+   "places": 10667,
+   "size": 538560
+  },
+  "64": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique des Basses-Pyrénées",
+    "bibl": "Raymond (Paul), Dictionnaire topographique du département des Basses-Pyrénées, Paris, 1863.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110099x"
+   },
+   "communes": 555,
+   "label": "Pyrénées-Atlantiques",
+   "old": 5412,
+   "places": 5799,
+   "size": 232326
+  },
+  "68": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique du Haut-Rhin",
+    "bibl": "Stoffel (Georges), Dictionnaire topographique du département du Haut-Rhin, Paris, 1868.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k399665"
+   },
+   "communes": 479,
+   "label": "Haut-Rhin",
+   "old": 7608,
+   "places": 10922,
+   "size": 357055
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

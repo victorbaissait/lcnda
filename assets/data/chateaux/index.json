@@ -1,0 +1,57 @@
+{
+"built": "2026-11-24",
+"classes": {
+"Q1015644": "r",
+"Q1195705": "f",
+"Q1404207": "c",
+"Q1408475": "mf",
+"Q1424449": "h",
+"Q1535658": "t",
+"Q15710038": "c",
+"Q16823155": "h",
+"Q17715832": "r",
+"Q1785071": "f",
+"Q1802963": "m",
+"Q1970243": "c",
+"Q2066754": "m",
+"Q2116450": "m",
+"Q2312233": "c",
+"Q23413": "c",
+"Q2776067": "c",
+"Q32164125": "mf",
+"Q365216": "c",
+"Q3802482": "m",
+"Q3898745": "t",
+"Q57831": "f",
+"Q58271381": "r",
+"Q615810": "c",
+"Q7335033": "o",
+"Q751876": "h",
+"Q879050": "m",
+"Q91165": "t",
+"Q91312": "t",
+"Q92062": "o",
+"Q92107": "c"
+},
+"countries": {
+"LU": {
+"bytes": 5893,
+"geo": 82,
+"kinds": {
+"c": 27,
+"f": 13,
+"h": 37,
+"m": 3,
+"r": 7
+},
+"n": 87,
+"q": "Q32"
+}
+},
+"licence": "CC0 1.0",
+"licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+"source": "Wikidata (requête SPARQL, classes « château », « château fort », « ruine de château », « forteresse », « manoir », « maison forte », « motte »…)",
+"total": 87,
+"url": "https://www.wikidata.org/",
+"v": 1
+}

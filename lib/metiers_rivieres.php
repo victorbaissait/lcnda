@@ -629,6 +629,131 @@ function mr_pop_keep_undo(PDO $pdo, array $d): array
     return ['ok' => true];
 }
 
+/* ═════════════════════ 📋 Listes (LCNDA_EXT.dataLists) : filtrer côté serveur ═════════════════════ */
+
+/** la sorte de lieu de travail d'un nom d'ancien site (« Tannerie Malaquin » → « tannerie ») */
+function mr_category(string $name): string
+{
+    static $tr = null; $tr ??= array_map(static fn($t) => [(string) preg_replace('/^(une?|des) |\s*\(.*\)$/u', '', $t['label']), array_map('mr_fold', $t['sites'])], mr_trades()['trades']);
+    $f = mr_fold($name);
+    foreach ($tr as [$label, $keys]) { foreach ($keys as $k) { if (mr_has($f, $k)) { return $label; } } }
+    return '';
+}
+/** un fichier lu sans le garder en mémoire (les listes parcourent tous les départements) */
+function mr_load_once(string $rel): array
+{
+    $f = mr_data_dir() . '/' . $rel; if (!is_file($f)) { return []; }
+    $j = json_decode((string) @gzdecode((string) file_get_contents($f)), true);
+    return is_array($j['rows'] ?? null) ? $j['rows'] : [];
+}
+const MR_ETAT = ['existant', 'détruit en partie', 'détruit'];
+const MR_KINDS = ['casias', 'roe', 'mines', 'reperes'];
+/** les lignes d'une sorte de données, en objets ; $deps limite CASIAS à quelques départements */
+function mr_list_rows(string $kind, ?array $deps = null): iterable
+{
+    if ($kind === 'casias') {
+        $files = array_map('basename', glob(mr_data_dir() . '/casias/casias-*.json.gz') ?: []);
+        if ($deps !== null) { $files = array_values(array_filter($files, static fn($f) => in_array((string) preg_replace('/^casias-|\.json\.gz$/', '', $f), $deps, true))); }
+        foreach ($files as $f) {
+            foreach (mr_load_once('casias/' . $f) as $r) {
+                $name = mr_nice((string) $r[4]); $act = mr_nice((string) $r[5]);
+                yield ['name' => $name !== '' ? $name : $act, 'activite' => $act, 'categorie' => mr_category($r[4] . ' ' . $r[5]), 'commune' => mr_nice((string) $r[3]), 'insee' => (string) $r[2], 'dep' => mr_dep_of((string) $r[2]),
+                    'adresse' => mr_nice((string) $r[6]), 'lat' => $r[0], 'lon' => $r[1], 'url' => (string) $r[7] !== '' ? 'https://fiches-risques.brgm.fr/georisques/casias/' . rawurlencode((string) $r[7]) : ''];
+            }
+        }
+    } elseif ($kind === 'roe') {
+        foreach (mr_load('roe-moulins.json.gz')['rows'] ?? [] as $r) {
+            preg_match('/\b(moulins?|minoterie|forges?|martinet|scierie|papeterie|filature|foulon|usine|taillanderie|tannerie)\b/iu', (string) $r[3], $m);
+            yield ['name' => mr_nice((string) $r[3]), 'categorie' => mb_strtolower(rtrim($m[1] ?? 'usine', 's')), 'riviere' => (string) $r[4], 'etat' => MR_ETAT[(int) $r[5]] ?? '', 'chute' => $r[6], 'insee' => (string) $r[2], 'dep' => mr_dep_of((string) $r[2]),
+                'lat' => $r[0], 'lon' => $r[1], 'roe' => (string) $r[7]];
+        }
+    } elseif ($kind === 'mines') {
+        foreach (mr_load('metiers-mines.json.gz')['rows'] ?? [] as $r) {
+            yield ['name' => (string) $r[3], 'categorie' => $r[4] === 'carriere' ? 'carrière' : 'mine', 'debut' => $r[5], 'fin' => $r[6], 'insee' => (string) $r[2], 'dep' => mr_dep_of((string) $r[2]), 'lat' => $r[0], 'lon' => $r[1], 'url' => 'https://www.wikidata.org/wiki/' . $r[7]];
+        }
+    } elseif ($kind === 'reperes') {
+        foreach (mr_load('reperes-crues.json.gz')['rows'] ?? [] as $r) {
+            yield ['commune' => (string) $r[3], 'insee' => (string) $r[2], 'dep' => mr_dep_of((string) $r[2]), 'riviere' => (string) $r[4], 'annee' => (int) $r[5],
+                'date' => sprintf('%04d', $r[5]) . ($r[6] ? sprintf('-%02d', $r[6]) . ($r[7] ? sprintf('-%02d', $r[7]) : '') : ''), 'plus_haute' => $r[8] ? 'oui' : 'non', 'altitude' => $r[9], 'description' => (string) $r[10],
+                'lat' => $r[0], 'lon' => $r[1], 'url' => 'https://www.reperesdecrues.developpement-durable.gouv.fr/repere/' . (int) $r[11]];
+        }
+    }
+}
+function mr_row_period(string $kind, array $r): ?array
+{
+    return match ($kind) { 'mines' => $r['debut'] || $r['fin'] ? [$r['debut'] ?? $r['fin'], $r['fin'] ?? (int) date('Y')] : null, 'reperes' => [$r['annee'], $r['annee']], default => null };
+}
+/** un filtre {key, op, value} ; textes comparés sans accents ni majuscules */
+function mr_filter_ok(array $row, array $f): bool
+{
+    $k = (string) ($f['key'] ?? ''); $op = (string) ($f['op'] ?? '='); $v = $f['value'] ?? '';
+    if ($k === '' || !array_key_exists($k, $row)) { return true; }
+    $x = $row[$k];
+    if (in_array($op, ['>', '>=', '<', '<='], true)) {
+        if (!is_numeric($x) || !is_numeric($v)) { return false; }
+        return match ($op) { '>' => $x > $v, '>=' => $x >= $v, '<' => $x < $v, default => $x <= $v };
+    }
+    $fx = mr_fold((string) $x);
+    if ($op === 'in' || is_array($v)) { $vs = array_map(static fn($y) => mr_fold((string) $y), (array) $v); return in_array($fx, $vs, true); }
+    $fv = mr_fold((string) $v);
+    return match ($op) { 'contains', '~' => $fv === '' || str_contains($fx, $fv), '!=', 'not' => $fx !== $fv, 'empty' => $fx === '', 'notempty' => $fx !== '', 'starts' => str_starts_with($fx, $fv), default => $fx === $fv };
+}
+/** GET mr_list&kind=casias|roe|mines|reperes&query={q, filters:[{key, op, value}], near:{lat, lon, km}, years:{from, to}, sort, dir, offset, limit} → {rows, total} */
+function mr_list_data(array $in): array
+{
+    $kind = (string) ($in['kind'] ?? '');
+    if (!in_array($kind, MR_KINDS, true)) { throw new LcndaBadInput('Liste inconnue.'); }
+    $q = is_string($in['query'] ?? null) ? (json_decode((string) $in['query'], true) ?: []) : (is_array($in['query'] ?? null) ? $in['query'] : []);
+    @ini_set('memory_limit', '1024M'); @set_time_limit(120);
+    $text = mr_fold((string) ($q['q'] ?? '')); $filters = array_values(array_filter((array) ($q['filters'] ?? []), 'is_array'));
+    $near = is_array($q['near'] ?? null) && is_numeric($q['near']['lat'] ?? null) && is_numeric($q['near']['lon'] ?? null) ? ['lat' => (float) $q['near']['lat'], 'lon' => (float) $q['near']['lon'], 'km' => max(0.1, min(200.0, (float) ($q['near']['km'] ?? 10)))] : null;
+    $yf = is_numeric($q['years']['from'] ?? null) ? (int) $q['years']['from'] : null; $yt = is_numeric($q['years']['to'] ?? null) ? (int) $q['years']['to'] : null;
+    // CASIAS : seulement les départements utiles quand on cherche autour d'un lieu ou dans un département
+    $deps = null;
+    if ($kind === 'casias') {
+        if ($near) { $deps = mr_deps_near(['insee' => '', 'lat' => $near['lat'], 'lon' => $near['lon']]); if ($near['km'] > 15) { $deps = null; } }
+        foreach ($filters as $f) { if (($f['key'] ?? '') === 'dep' && in_array($f['op'] ?? '=', ['=', 'in'], true)) { $deps = array_map('strval', (array) $f['value']); } if (($f['key'] ?? '') === 'insee' && ($f['op'] ?? '=') === '=') { $deps = [mr_dep_of((string) $f['value'])]; } }
+    }
+    $out = []; $total = 0;
+    foreach (mr_list_rows($kind, $deps) as $r) {
+        if ($near && ($r['lat'] === null || mr_km($near['lat'], $near['lon'], (float) $r['lat'], (float) $r['lon']) > $near['km'])) { continue; }
+        if ($yf !== null || $yt !== null) { $pd = mr_row_period($kind, $r); if (!$pd || ($yt !== null && $pd[0] > $yt) || ($yf !== null && $pd[1] < $yf)) { continue; } }
+        foreach ($filters as $f) { if (!mr_filter_ok($r, $f)) { continue 2; } }
+        if ($text !== '' && !str_contains(mr_fold(implode(' ', array_filter($r, 'is_string'))), $text)) { continue; }
+        if ($near) { $r['km'] = round(mr_km($near['lat'], $near['lon'], (float) $r['lat'], (float) $r['lon']), 2); }
+        $total++; $out[] = $r;
+    }
+    $sort = (string) ($q['sort'] ?? ($near ? 'km' : '')); $dir = strtolower((string) ($q['dir'] ?? 'asc')) === 'desc' ? -1 : 1;
+    if ($sort !== '' && $out && array_key_exists($sort, $out[0])) {
+        usort($out, static function ($a, $b) use ($sort, $dir) { $x = $a[$sort]; $y = $b[$sort]; if ($x === null || $x === '') { return 1; } if ($y === null || $y === '') { return -1; } return $dir * (is_numeric($x) && is_numeric($y) ? $x <=> $y : strcmp(mr_fold((string) $x), mr_fold((string) $y))); });
+    }
+    $off = max(0, (int) ($q['offset'] ?? 0)); $lim = max(1, min(5000, (int) ($q['limit'] ?? 200)));
+    return ['ok' => true, 'kind' => $kind, 'total' => $total, 'rows' => array_slice($out, $off, $lim)];
+}
+/** la commune la plus proche d'un point, d'après les anciens sites (CASIAS) : pour la liste « au musée » */
+function mr_commune_near(float $lat, float $lon): ?array
+{
+    $best = null;
+    foreach (mr_deps_near(['insee' => '', 'lat' => $lat, 'lon' => $lon]) as $d) {
+        foreach (mr_casias($d) as $r) { if ($r[0] === null) { continue; } $k = mr_km($lat, $lon, (float) $r[0], (float) $r[1]); if (!$best || $k < $best[0]) { $best = [$k, (string) $r[2], mr_nice((string) $r[3])]; } }
+    }
+    return $best && $best[0] < 5 ? ['insee' => $best[1], 'name' => $best[2]] : null;
+}
+/** GET mr_list_pop&query={q (nom de commune), near:{lat, lon}} → les photos et objets de musée d'UNE commune (en ligne) */
+function mr_list_pop(PDO $pdo, array $in): array
+{
+    $q = is_string($in['query'] ?? null) ? (json_decode((string) $in['query'], true) ?: []) : [];
+    $place = null;
+    if (is_numeric($q['near']['lat'] ?? null) && is_numeric($q['near']['lon'] ?? null)) { $c = mr_commune_near((float) $q['near']['lat'], (float) $q['near']['lon']); if ($c) { $place = ['insee' => $c['insee'], 'name' => $c['name']]; } }
+    foreach ((array) ($q['filters'] ?? []) as $f) { if (in_array($f['key'] ?? '', ['commune', 'insee'], true) && is_string($f['value'] ?? null)) { $place = ($f['key'] === 'insee' ? ['insee' => $f['value'], 'name' => $place['name'] ?? ''] : ['name' => $f['value'], 'insee' => $place['insee'] ?? '']); } }
+    if (!$place && trim((string) ($q['q'] ?? '')) !== '') { $place = ['name' => trim((string) $q['q']), 'insee' => '']; }
+    if (!$place) { return ['ok' => true, 'rows' => [], 'total' => 0, 'message' => i18n_t('Choisis une commune (autour de…) : les musées sont cherchés en ligne, une commune à la fois.')]; }
+    $r = mr_pop_data($pdo, $place);
+    $rows = array_map(static fn($it) => ['titre' => $it['title'], 'sorte' => $it['kind'] === 'photo' ? 'photo' : (!empty($it['held']) ? 'conservé dans la commune' : 'musée'), 'auteur' => $it['author'], 'date' => $it['when'], 'lieu' => $it['where'],
+        'commune' => $r['place']['name'] ?? '', 'droits' => $it['copy'], 'libre' => $it['free'] ? 'oui' : 'non', 'url' => $it['page'], 'image' => $it['thumb']], $r['items'] ?? []);
+    return ['ok' => (bool) ($r['ok'] ?? false), 'offline' => !empty($r['offline']), 'rows' => $rows, 'total' => count($rows)];
+}
+
 /* ═════════════════════ Réglages : ce qui est gardé, les sources ═════════════════════ */
 
 function mr_cache_info(): array { $n = 0; $b = 0; foreach (glob(mr_cache_dir() . '/*.json') ?: [] as $f) { $n++; $b += (int) @filesize($f); } return ['count' => $n, 'bytes' => $b]; }
@@ -674,6 +799,8 @@ function mr_api_get(PDO $pdo, string $action, array $q): array
         'mr_rivers' => mr_rivers_data($pdo, $q),
         'mr_pop' => mr_pop_data($pdo, $q),
         'mr_about' => mr_about(),
+        'mr_list' => mr_list_data($q),
+        'mr_list_pop' => mr_list_pop($pdo, $q),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }

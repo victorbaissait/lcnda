@@ -365,5 +365,31 @@
         {id: 'commune_plus_newspapers', icon: '📰', label: T('Journaux anciens à l’étranger'), group: 'Chercher', needs: ['person'], online: true,
             run: async (ctx, host) => { const d = await personDetail(ctx.person); if (!d) { host.innerHTML = emptyLine(T('Choisis une personne.')); return; } return fillNewspapers(hostDiv(host), d); }});
 
+    /* ═════════ 📋 Listes : les données gardées, en lignes (moteur commun app-listes-donnees.js) ═════════ */
+    const listRows = async (kind, extra = {}) => { const r = await api('cplus_list', {kind, ...extra}); return r.rows || []; };
+    const openUrl = row => { if (row?.url) window.open(row.url, '_blank', 'noopener'); };
+    const geo = row => (row.lat != null && row.lon != null ? [Number(row.lat), Number(row.lon)] : null);
+    (ext.dataLists = ext.dataLists || []).push(
+        {id: 'cplus_cemeteries', icon: '🪦', label: T('Cimetières autour des lieux de la famille'), group: 'Le lieu', source: '© OpenStreetMap contributors (ODbL 1.0)', sourceUrl: 'https://www.openstreetmap.org/copyright',
+            load: async () => listRows('cemeteries', {fetch: 1}),
+            fields: [{key: 'name', label: T('Cimetière'), type: 'text'}, {key: 'near', label: T('Près de'), type: 'place'}, {key: 'km', label: T('Distance (km)'), type: 'number'},
+                {key: 'religion', label: T('Religion'), type: 'enum'}, {key: 'kind', label: T('Sorte'), type: 'enum'}],
+            geo, open: openUrl},
+        {id: 'cplus_images', icon: '🖼️', label: T('Images anciennes des communes'), group: 'Le lieu', source: 'Wikimedia Commons (licence de chaque image)', sourceUrl: 'https://commons.wikimedia.org/',
+            load: async () => listRows('images'),
+            fields: [{key: 'title', label: T('Image'), type: 'text'}, {key: 'commune', label: T('Commune'), type: 'place'}, {key: 'year', label: T('Année'), type: 'year'},
+                {key: 'postcard', label: T('Carte postale'), type: 'enum', values: [T('oui'), T('non')]}, {key: 'author', label: T('Auteur'), type: 'text'}, {key: 'licence', label: T('Licence'), type: 'enum'}],
+            period: row => (row.year ? [row.year, row.year] : null), geo, open: openUrl},
+        {id: 'cplus_churches', icon: '⛪', label: T('Églises et saints patrons'), group: 'Le lieu', source: 'Wikidata (CC0 1.0)', sourceUrl: 'https://www.wikidata.org/',
+            load: async () => listRows('churches'),
+            fields: [{key: 'name', label: T('Église'), type: 'text'}, {key: 'commune', label: T('Commune'), type: 'place'}, {key: 'when', label: T('Époque'), type: 'text'},
+                {key: 'saint', label: T('Saint patron'), type: 'text'}, {key: 'feast', label: T('Fêté le'), type: 'text'}, {key: 'gone', label: T('Disparue'), type: 'enum'}],
+            period: row => (row.year ? [row.year, null] : null), geo, open: openUrl},
+        {id: 'cplus_newspapers', icon: '📰', label: T('Journaux anciens à l’étranger (pages trouvées)'), group: 'Chercher', source: 'Chronicling America — Library of Congress', sourceUrl: 'https://www.loc.gov/collections/chronicling-america/',
+            load: async () => listRows('newspapers'),
+            fields: [{key: 'name', label: T('Nom cherché'), type: 'text'}, {key: 'title', label: T('Journal'), type: 'text'}, {key: 'date', label: T('Date'), type: 'text'}, {key: 'year', label: T('Année'), type: 'year'},
+                {key: 'place', label: T('Ville'), type: 'text'}, {key: 'language', label: T('Langue'), type: 'enum'}],
+            period: row => (row.year ? [row.year, row.year] : null), open: openUrl});
+
     ext.communePlus = {church, churchInto, churchLine, newspapers, personInfo, fillCemeteries, fillImages, settings, decorate};
 })();

@@ -366,5 +366,83 @@
             if (!rows.length) return nothing(host, i18n('Aucun grand événement connu à moins de {k} km, 10 ans autour de {y}.', {k: String(Number(settings().km) || 30), y: String(y)}));
             host.innerHTML = `<div class="wda"><ul>${rows.map(r => li(`<b>${esc(r.name)}</b> <small>${esc(dateFr(r.date))}</small>`, i18n('à {k} km', {k: String(Math.round(r.km))}), r.q, r.fl, i18n(KIND[r.kind] || r.kind))).join('')}</ul></div>`; }});
 
-    ext.wikidataAutour = {render, settings, save, isOn, register, load, lifeOf, samePlace, sameDay, namesakes, eventsNear, songOf, fold, km, openSettings, openAbout};
+    /* ═════════ Listes : les données Wikidata dans le moteur commun (app-listes-donnees.js) ═════════ */
+    const DL = ext.dataLists = ext.dataLists || [];
+    const dl = d => { if (!DL.some(x => x.id === d.id)) DL.push(d); };
+    const SRC = 'Wikidata (CC0 1.0, domaine public)';
+    const openUrl = u => { try { window.open(u, '_blank', 'noopener,noreferrer'); } catch (_) {} };
+    async function occMap() { try { return (await load('occupations.json.gz'))?.o || {}; } catch (_) { return {}; } }
+    const personRow = (r, pl, occ) => {
+        const bp = pl[r[4]] || [], dp = pl[r[5]] || [];
+        return {qid: `Q${r[0]}`, name: r[1], born: yearOf(r[2]), died: yearOf(r[3]), birth: r[2], death: r[3], day: /^\d+-\d\d-\d\d$/.test(r[2]) ? r[2].slice(5) : '',
+            place: bp[2] || '', deathPlace: dp[2] || '', occupation: occ[r[6]] || '', fame: r[8], lat: bp[0], lon: bp[1], url: wdUrl(r[0]), wikipedia: wpUrl(r[0], r[7])};
+    };
+    /** applique la demande du moteur (texte, filtres, autour d'un lieu, années, tri, page) à des lignes déjà prêtes */
+    function applyQuery(rows, qy, period, geo) {
+        const q = fold(qy?.q || '');
+        let out = rows.filter(r => !q || Object.values(r).some(v => typeof v === 'string' && fold(v).includes(q)));
+        for (const f of qy?.filters || []) {
+            const v = f.value, k = f.key;
+            out = out.filter(r => { const x = r[k];
+                switch (f.op) { case '=': case 'eq': return String(x ?? '') === String(v ?? ''); case '!=': case 'ne': return String(x ?? '') !== String(v ?? '');
+                    case '>': case 'gt': return Number(x) > Number(v); case '>=': case 'gte': return Number(x) >= Number(v); case '<': case 'lt': return Number(x) < Number(v); case '<=': case 'lte': return Number(x) <= Number(v);
+                    case 'in': return (Array.isArray(v) ? v : [v]).map(String).includes(String(x ?? '')); case 'between': return Array.isArray(v) && Number(x) >= Number(v[0]) && Number(x) <= Number(v[1]);
+                    case 'empty': return x == null || x === ''; case 'notempty': return !(x == null || x === '');
+                    default: return fold(x).includes(fold(v)); } });
+        }
+        if (qy?.years && (qy.years.from != null || qy.years.to != null)) {
+            const a = qy.years.from ?? -1e9, b = qy.years.to ?? 1e9;
+            out = out.filter(r => { const [x, y] = period(r); return x != null && x <= b && (y ?? x) >= a; });
+        }
+        if (qy?.near && Number.isFinite(Number(qy.near.lat))) {
+            const {lat, lon} = qy.near, k0 = Number(qy.near.km) || 10;
+            out = out.filter(r => { const g = geo(r); return g && Number.isFinite(g[0]) && km(lat, lon, g[0], g[1]) <= k0; });
+        }
+        if (qy?.sort) { const k = qy.sort, d = qy.dir === 'desc' ? -1 : 1; out.sort((a, b) => (a[k] ?? '') > (b[k] ?? '') ? d : (a[k] ?? '') < (b[k] ?? '') ? -d : 0); }
+        const total = out.length, off = Number(qy?.offset) || 0, lim = Number(qy?.limit) || total;
+        return {rows: out.slice(off, off + lim), total};
+    }
+    /* les personnes : trop nombreuses pour tout charger d'un coup → seulement les carreaux utiles quand on cherche autour d'un lieu */
+    const pPeriod = r => [r.born, r.died ?? r.born], pGeo = r => (Number.isFinite(r.lat) ? [r.lat, r.lon] : null);
+    async function peopleRows(qy) {
+        const idx = await load('people-index.json.gz'); if (!idx) return [];
+        let keys = Object.keys(idx.tiles);
+        if (qy?.near && Number.isFinite(Number(qy.near.lat))) keys = tilesAround(Number(qy.near.lat), Number(qy.near.lon), Number(qy.near.km) || 10, idx.size, idx.tiles);
+        const occ = await occMap(), out = [];
+        for (const k of keys) { const t = await load(`people/${k}.json.gz`); if (t) t.p.forEach(r => out.push(personRow(r, t.pl, occ))); }
+        return out;
+    }
+    dl({id: 'wikidata_personnes', icon: '🌟', label: 'Personnes célèbres (Wikidata)', group: 'La personne', source: SRC, sourceUrl: 'https://www.wikidata.org',
+        fields: [{key: 'name', label: 'Nom', type: 'text'}, {key: 'born', label: 'Naissance (année)', type: 'year'}, {key: 'died', label: 'Décès (année)', type: 'year'},
+            {key: 'birth', label: 'Date de naissance', type: 'text'}, {key: 'day', label: 'Jour de naissance (mois-jour)', type: 'text'}, {key: 'place', label: 'Lieu de naissance', type: 'place'},
+            {key: 'deathPlace', label: 'Lieu de décès', type: 'place'}, {key: 'occupation', label: 'Métier', type: 'text'}, {key: 'fame', label: 'Pages Wikipédia', type: 'number'},
+            {key: 'qid', label: 'Wikidata', type: 'text'}, {key: 'url', label: 'Lien Wikidata', type: 'url'}, {key: 'wikipedia', label: 'Lien Wikipédia', type: 'url'}],
+        period: pPeriod, geo: pGeo, installed: () => true,
+        query: async qy => applyQuery(await peopleRows(qy), qy, pPeriod, pGeo), open: r => openUrl(r.url)});
+    const evRow = r => ({qid: `Q${r[0]}`, name: r[1], kind: i18n(KIND[r[2]] || r[2]), date: r[3], year: yearOf(r[3]), end: yearOf(r[4]) || yearOf(r[3]), lat: r[5], lon: r[6], fame: r[8], url: wdUrl(r[0]), wikipedia: wpUrl(r[0], r[7])});
+    const ePeriod = r => [r.year, r.end], eGeo = r => [r.lat, r.lon];
+    dl({id: 'wikidata_evenements', icon: '🗺', label: 'Batailles, catastrophes, épidémies, traités (Wikidata)', group: 'Le monde', source: SRC, sourceUrl: 'https://www.wikidata.org',
+        fields: [{key: 'name', label: 'Événement', type: 'text'}, {key: 'kind', label: 'Sorte', type: 'enum', values: Object.values(KIND).map(x => i18n(x))}, {key: 'year', label: 'Année', type: 'year'},
+            {key: 'end', label: 'Fin', type: 'year'}, {key: 'date', label: 'Date', type: 'text'}, {key: 'fame', label: 'Pages Wikipédia', type: 'number'}, {key: 'url', label: 'Lien Wikidata', type: 'url'}, {key: 'wikipedia', label: 'Lien Wikipédia', type: 'url'}],
+        period: ePeriod, geo: eGeo, installed: () => true,
+        query: async qy => { const idx = await load('events-index.json.gz'); if (!idx) return {rows: [], total: 0};
+            let keys = Object.keys(idx.tiles); if (qy?.near && Number.isFinite(Number(qy.near.lat))) keys = tilesAround(Number(qy.near.lat), Number(qy.near.lon), Number(qy.near.km) || 10, idx.size, idx.tiles);
+            const rows = []; for (const k of keys) { const t = await load(`events/${k}.json.gz`); if (t) t.e.forEach(r => rows.push(evRow(r))); }
+            return applyQuery(rows, qy, ePeriod, eGeo); }, open: r => openUrl(r.url)});
+    dl({id: 'wikidata_chansons', icon: '🎶', label: 'Chansons à la mode, année par année (Wikidata)', group: 'Le monde', source: SRC, sourceUrl: 'https://www.wikidata.org',
+        fields: [{key: 'year', label: 'Année', type: 'year'}, {key: 'title', label: 'Titre', type: 'text'}, {key: 'performer', label: 'Interprète', type: 'text'},
+            {key: 'francophone', label: 'En français ou d’un pays francophone', type: 'enum', values: ['oui', 'non']}, {key: 'fame', label: 'Pages Wikipédia', type: 'number'}, {key: 'url', label: 'Lien Wikidata', type: 'url'}, {key: 'wikipedia', label: 'Lien Wikipédia', type: 'url'}],
+        period: r => [r.year, r.year], installed: () => true,
+        load: async () => { const f = await load('songs.json.gz'); if (!f) return [];
+            return Object.entries(f.y).flatMap(([y, rows]) => rows.map(r => ({year: Number(y), title: r[1], performer: r[2], francophone: r[3] ? 'oui' : 'non', fame: r[5], qid: `Q${r[0]}`, url: wdUrl(r[0]), wikipedia: wpUrl(r[0], r[4])}))); },
+        open: r => openUrl(r.url)});
+    dl({id: 'wikidata_anciens_noms', icon: '🏷', label: 'Anciens noms de lieux (Wikidata)', group: 'Le lieu', source: SRC, sourceUrl: 'https://www.wikidata.org',
+        fields: [{key: 'old', label: 'Ancien nom', type: 'text'}, {key: 'now', label: 'Nom actuel', type: 'place'}, {key: 'kind', label: 'Sorte', type: 'enum', values: Object.values(KIND_OLD).map(x => i18n(x))},
+            {key: 'from', label: 'Depuis', type: 'year'}, {key: 'to', label: 'Jusqu’à', type: 'year'}, {key: 'url', label: 'Lien Wikidata', type: 'url'}],
+        period: r => [r.from ?? r.to, r.to ?? r.from], geo: r => [r.lat, r.lon], installed: () => true,
+        load: async () => { const f = await load('oldnames.json.gz'); if (!f) return [];
+            return Object.values(f.n).flat().map(r => ({old: r[2], now: r[1], kind: i18n(KIND_OLD[r[3]] || KIND_OLD.o), from: yearOf(r[4]), to: yearOf(r[5]), lat: r[6], lon: r[7], qid: `Q${r[0]}`, url: wdUrl(r[0])})); },
+        open: r => openUrl(r.url)});
+
+    ext.wikidataAutour = {render, applyQuery, settings, save, isOn, register, load, lifeOf, samePlace, sameDay, namesakes, eventsNear, songOf, fold, km, openSettings, openAbout};
 })();

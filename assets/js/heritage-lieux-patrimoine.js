@@ -109,6 +109,7 @@
         if (!host.isConnected && !opts.detached) return d;
         host.__lpData = d; host.__lpPlace = place;
         if (!d?.ok) { host.innerHTML = ''; return d; }
+        if (opts.bare) { host.innerHTML = parts.map(k => RENDER[k](d)).join(''); return d; }
         host.innerHTML = parts.map(k => { const h = RENDER[k](d); return h ? `<section class="maintenance-panel cplus-panel lp-panel" data-lp-part="${k}"><h3>${esc(T(TITLE[k]))}</h3>${h}</section>` : ''; }).join('');
         host.classList.toggle('lp-place', !!host.innerHTML);
         return d;
@@ -149,7 +150,7 @@
             return;
         }
         const mono = ws.querySelector('.place-monograph-sections:not([data-lp])');
-        if (mono && !mono.closest('.h-village')) {
+        if (mono && !mono.closest('.h-village') && !ext.monographSectionList) { // sans heritage-monographie-plus.js : on pose nos parties nous-mêmes
             mono.dataset.lp = '1';
             const pli = ws.querySelector('.place-monograph-images[data-pli-host]'), cpo = ws.querySelector('[data-cpo-place]');
             const place = {id: Number(pli?.dataset.pliPlace || cpo?.dataset.cpoPlace) || 0, name: pli?.dataset.pliName || '', lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null};
@@ -362,6 +363,41 @@
                 host.innerHTML = r.guesses?.length ? `<ul class="lp-guesses">${r.guesses.map(g => `<li>💡 ${g.url ? link(g.url, guessText(g)) : `<b>${esc(guessText(g))}</b>`} <small class="muted">${esc(guessTitle(g))}</small></li>`).join('')}</ul>` : emptyLine(T('Aucun lieu-dit ni ancien nom de ce nom dans les départements de ta famille.'), '💡');
                 return r;
             }});
+
+    /* ═════════ 📜 Monographie de commune : nos trois parties (heritage-monographie-plus.js : ordre, masquer, imprimer) ═════════ */
+    const SRC = {dico: 'DicoTopo (CTHS, Archives nationales, École nationale des chartes) — Licence Ouverte 2.0', lieuxdits: '© IGN – BD TOPO® — Licence Ouverte Etalab 2.0', patrimoine: 'Ministère de la Culture, POP (Mérimée, Palissy) — Licence Ouverte'};
+    (ext.monographSections = ext.monographSections || []).push(...['dico', 'lieuxdits', 'patrimoine'].map(k => ({
+        id: `lp_${k}`, icon: TITLE[k].split(' ')[0], label: T(TITLE[k].replace(/^\S+\s/, '')), group: 'Le lieu', defaultOn: true,
+        enabled: () => !!settings()[k],
+        render: async (place, host, ctx) => {
+            const d = await placeInto(host, {id: Number(place?.id) || 0, name: place?.name || '', lat: place?.latitude ?? null, lon: place?.longitude ?? null, insee: place?.admin4_code || ''}, {parts: [k], force: true, bare: true, detached: true, fresh: true});
+            if (!host.innerHTML.trim()) return false;
+            const n = k === 'dico' ? (d?.dicotopo?.commune?.old?.length || 0) : (d?.[k]?.list?.length || 0); if (n) ctx?.count?.(n);
+            return true;
+        }})));
+
+    /* ═════════ 📋 Listes : quatre listes dans le moteur commun (filtres combinés, année, distance, carte, export) ═════════ */
+    const listQuery = kind => async query => { const r = await api('lp_list', {kind, query: JSON.stringify(query || {})}); const x = r.result || r; return {rows: x.rows || [], total: x.total || 0, truncated: !!x.truncated}; };
+    const openUrl = row => { if (row.url) window.open(row.url, '_blank', 'noopener'); };
+    const openVillage = row => { const st = A().state; if (!st || !row.insee) return; st.hVillage = row.insee; st.listType = 'villages'; A().setModule?.('listes'); ext.lists?.villages?.(++st.workspaceToken); };
+    const geo = row => (row.lat != null && row.lon != null ? [Number(row.lat), Number(row.lon)] : null);
+    const COMMON = [{key: 'commune', label: 'Commune', type: 'place'}, {key: 'dep_name', label: 'Département', type: 'enum'}, {key: 'dep', label: 'N° de département', type: 'enum'}];
+    (ext.dataLists = ext.dataLists || []).push(
+        {id: 'lp_lieuxdits', icon: '🏘️', label: T('Lieux-dits (IGN)'), group: 'Le lieu', source: '© IGN – BD TOPO® — Licence Ouverte Etalab 2.0', sourceUrl: 'https://www.data.gouv.fr/datasets/bd-topo-r',
+            query: listQuery('lieuxdits'), installed: () => installedKind('lieuxdits'), install: openSettings, geo, open: openVillage,
+            fields: [{key: 'name', label: 'Lieu-dit', type: 'text'}, {key: 'nature', label: 'Sorte', type: 'enum'}, {key: 'habite', label: 'Habité', type: 'enum', values: ['habité', 'non habité']}, ...COMMON, {key: 'insee', label: 'Code INSEE', type: 'text'}, {key: 'km', label: 'Distance (km)', type: 'number'}]},
+        {id: 'lp_merimee', icon: '⛪', label: T('Monuments historiques (Mérimée)'), group: 'Le lieu', source: 'Ministère de la Culture, POP — base Mérimée — Licence Ouverte 2.0', sourceUrl: 'https://www.data.gouv.fr/datasets/5af120e5b595087cfabcde81',
+            query: listQuery('merimee'), installed: () => installedKind('patrimoine'), install: openSettings, geo, open: openUrl, period: row => [row.from, row.to],
+            fields: [{key: 'name', label: 'Monument', type: 'text'}, {key: 'deno', label: 'Sorte', type: 'enum'}, {key: 'siecle', label: 'Siècle', type: 'text'}, {key: 'from', label: 'Construit (de)', type: 'year'}, {key: 'to', label: 'Construit (à)', type: 'year'},
+                {key: 'protection', label: 'Protection', type: 'text'}, {key: 'protected', label: 'Protégé en', type: 'year'}, ...COMMON, {key: 'resume', label: 'Historique', type: 'text'}, {key: 'ref', label: 'Référence POP', type: 'text'}, {key: 'km', label: 'Distance (km)', type: 'number'}]},
+        {id: 'lp_palissy', icon: '🔔', label: T('Objets protégés (Palissy)'), group: 'Le lieu', source: 'Ministère de la Culture, POP — base Palissy — Licence Ouverte', sourceUrl: 'https://www.data.gouv.fr/datasets/615bcdd729be9185b3b0681a',
+            query: listQuery('palissy'), installed: () => installedKind('patrimoine'), install: openSettings, geo, open: openUrl, period: row => [row.from, row.to],
+            fields: [{key: 'name', label: 'Objet', type: 'text'}, {key: 'deno', label: 'Sorte', type: 'enum'}, {key: 'edifice', label: 'Conservé dans', type: 'text'}, {key: 'siecle', label: 'Siècle', type: 'text'}, {key: 'from', label: 'Fait (de)', type: 'year'}, {key: 'to', label: 'Fait (à)', type: 'year'},
+                {key: 'protection', label: 'Protection', type: 'text'}, {key: 'protected', label: 'Protégé en', type: 'year'}, ...COMMON, {key: 'ref', label: 'Référence POP', type: 'text'}, {key: 'km', label: 'Distance (km)', type: 'number'}]},
+        {id: 'lp_dicotopo', icon: '📜', label: T('Anciens noms des lieux (DicoTopo)'), group: 'Le lieu', source: 'DicoTopo, Dictionnaire topographique de la France (CTHS) — Licence Ouverte 2.0', sourceUrl: 'https://dicotopo.cths.fr',
+            query: listQuery('dicotopo'), installed: () => true, geo, open: openUrl, period: row => [row.year, row.year],
+            fields: [{key: 'name', label: 'Forme ancienne', type: 'text'}, {key: 'year', label: 'Année', type: 'year'}, {key: 'date', label: 'Date écrite', type: 'text'}, {key: 'place', label: 'Nom d’aujourd’hui', type: 'text'}, {key: 'desc', label: 'Description', type: 'text'},
+                {key: 'ref', label: 'Source ancienne', type: 'text'}, ...COMMON, {key: 'km', label: 'Distance (km)', type: 'number'}]});
 
     ext.lieuxPatrimoine = {suggest, placeInto, placeData, settings, openSettings, install: installKeys, status, decorate, decorateAtelier, state: DL};
 })();

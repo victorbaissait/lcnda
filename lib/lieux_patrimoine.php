@@ -301,6 +301,115 @@ function lp_suggest_data(PDO $pdo, array $q): array
     return ['q' => $name, 'deps' => $deps, 'guesses' => array_slice($out, 0, $limit), 'more' => max(0, count($out) - $limit)];
 }
 
+/* ═════════════════════════ 📋 Listes (moteur commun LCNDA_EXT.dataLists) : filtrer côté serveur ═════════════════════════ */
+
+/** « 2e moitié 12e siècle » → [1150, 1199] ; « 1810 » → [1810, 1810] ; « 17e siècle ; 18e siècle » → [1600, 1799] */
+function lp_period(string ...$texts): array
+{
+    $from = null; $to = null;
+    foreach ($texts as $t) {
+        if (preg_match_all('/\b(\d{1,2})e\s+(?:s\.|siècle)/u', $t, $m)) { foreach ($m[1] as $c) { $c = (int) $c; if ($c < 1 || $c > 21) { continue; } $a = ($c - 1) * 100; $b = $a + 99;
+            if (preg_match('/1(?:re|ère) moitié ' . $c . 'e/u', $t)) { $b = $a + 49; } elseif (preg_match('/2e moitié ' . $c . 'e/u', $t)) { $a += 50; }
+            $from = $from === null ? $a : min($from, $a); $to = $to === null ? $b : max($to, $b); } }
+        if (preg_match_all('/\b(1[0-9]{3}|[5-9][0-9]{2})\b/', $t, $m)) { foreach ($m[1] as $y) { $y = (int) $y; $from = $from === null ? $y : min($from, $y); $to = $to === null ? $y : max($to, $y); } }
+        if ($from !== null) { break; } // la première colonne qui dit quelque chose
+    }
+    return [$from, $to];
+}
+
+function lp_km(float $a, float $b, float $c, float $d): float
+{
+    $r = M_PI / 180; $x = sin(($c - $a) * $r / 2) ** 2 + cos($a * $r) * cos($c * $r) * sin(($d - $b) * $r / 2) ** 2;
+    return 6371 * 2 * asin(min(1.0, sqrt($x)));
+}
+
+/** une ligne passe-t-elle un filtre {key, op, value} ? */
+function lp_row_match(array $row, array $f): bool
+{
+    $k = (string) ($f['key'] ?? ''); $op = (string) ($f['op'] ?? 'contains'); $v = $f['value'] ?? '';
+    if ($k === '' || !array_key_exists($k, $row)) { return true; }
+    $x = $row[$k];
+    if (is_array($v)) { return in_array(lp_fold((string) $x), array_map(static fn($y) => lp_fold((string) $y), $v), true) !== ($op === '!=' || $op === 'not'); }
+    $num = is_numeric($x) && is_numeric($v);
+    return match ($op) {
+        '=', 'eq', 'is' => $num ? (float) $x == (float) $v : lp_fold((string) $x) === lp_fold((string) $v),
+        '!=', 'not', 'neq' => $num ? (float) $x != (float) $v : lp_fold((string) $x) !== lp_fold((string) $v),
+        '>', 'gt' => $x !== null && $x !== '' && (float) $x > (float) $v,
+        '>=', 'gte' => $x !== null && $x !== '' && (float) $x >= (float) $v,
+        '<', 'lt' => $x !== null && $x !== '' && (float) $x < (float) $v,
+        '<=', 'lte' => $x !== null && $x !== '' && (float) $x <= (float) $v,
+        'starts', 'startsWith', '^' => str_starts_with(lp_fold((string) $x), lp_fold((string) $v)),
+        'empty' => $x === null || $x === '',
+        'notempty' => $x !== null && $x !== '',
+        default => str_contains(lp_fold((string) $x), lp_fold((string) $v)),
+    };
+}
+
+/** GET lp_list&kind=lieuxdits|merimee|palissy|dicotopo&query={q, filters, near:{lat,lon,km}, years:{from,to}, sort, dir, offset, limit} → {rows, total} */
+function lp_list_data(array $q): array
+{
+    $kind = (string) ($q['kind'] ?? '');
+    if (!in_array($kind, ['lieuxdits', 'merimee', 'palissy', 'dicotopo'], true)) { throw new LcndaBadInput(i18n_t('Liste inconnue.')); }
+    $qq = json_decode((string) ($q['query'] ?? '{}'), true); $qq = is_array($qq) ? $qq : [];
+    $text = lp_fold(mb_substr((string) ($qq['q'] ?? ''), 0, 120));
+    $filters = array_values(array_filter(is_array($qq['filters'] ?? null) ? $qq['filters'] : [], 'is_array'));
+    $near = is_array($qq['near'] ?? null) && is_numeric($qq['near']['lat'] ?? null) && is_numeric($qq['near']['lon'] ?? null) ? ['lat' => (float) $qq['near']['lat'], 'lon' => (float) $qq['near']['lon'], 'km' => max(0.1, min(500.0, (float) ($qq['near']['km'] ?? 10)))] : null;
+    $years = is_array($qq['years'] ?? null) ? $qq['years'] : null;
+    $yf = is_numeric($years['from'] ?? null) ? (int) $years['from'] : null; $yt = is_numeric($years['to'] ?? null) ? (int) $years['to'] : null;
+    $offset = max(0, safe_int($qq['offset'] ?? 0)); $limit = max(1, min(2000, safe_int($qq['limit'] ?? 200)));
+    // les départements à lire : un filtre « dep » s'il y en a un, sinon tous ceux installés (ou couverts par DicoTopo)
+    $depWanted = [];
+    foreach ($filters as $f) { if (($f['key'] ?? '') === 'dep') { foreach ((array) ($f['value'] ?? []) as $d) { $d = strtoupper(trim((string) $d)); if (preg_match('/^(\d{2}|2A|2B|97\d)$/', $d)) { $depWanted[] = $d; } } } }
+    $packKind = $kind === 'lieuxdits' ? 'lieuxdits' : 'patrimoine';
+    $deps = $kind === 'dicotopo' ? array_map('strval', array_keys(lp_dico_index()['deps']))
+        : array_values(array_filter(array_map(static fn($f) => explode('-', basename($f, '.sqlite'), 2)[1] ?? '', glob(lp_dir() . "/$packKind-*.sqlite") ?: [])));
+    if ($depWanted) { $deps = array_values(array_intersect($deps, $depWanted)); }
+    $names = lp_dep_names(); $rows = []; $cap = 60000; $truncated = false;
+    $bbox = $near ? [$near['lat'] - $near['km'] / 110.0, $near['lat'] + $near['km'] / 110.0, $near['lon'] - $near['km'] / (111.0 * max(0.2, cos(deg2rad($near['lat'])))), $near['lon'] + $near['km'] / (111.0 * max(0.2, cos(deg2rad($near['lat']))))] : null;
+    foreach ($deps as $dep) {
+        if ($kind === 'dicotopo') {
+            $d = lp_dico($dep); if (!$d) { continue; }
+            foreach ($d['o'] as $o) {
+                $p = $d['p'][(int) $o[0]]; $c = $d['c'][(string) $p[2]] ?? null;
+                if ($text !== '' && !str_contains(lp_fold($o[1] . ' ' . $p[1]), $text)) { continue; }
+                if ($bbox && (!$c || $c[2] === null || $c[2] < $bbox[0] || $c[2] > $bbox[1] || $c[1] < $bbox[2] || $c[1] > $bbox[3])) { continue; }
+                $rows[] = ['name' => (string) $o[1], 'date' => (string) $o[2], 'year' => $o[3] === null ? null : (int) $o[3], 'ref' => (string) $o[4], 'place' => (string) $p[1], 'desc' => (string) $p[3],
+                    'commune' => (string) ($c[0] ?? ''), 'insee' => (string) $p[2], 'dep' => $dep, 'dep_name' => $names[$dep] ?? $dep, 'lat' => $c[2] ?? null, 'lon' => $c[1] ?? null, 'url' => LP_DICO_URL . '/places/P' . $p[0]];
+                if (count($rows) >= $cap) { $truncated = true; break 2; }
+            }
+            continue;
+        }
+        $pdo = lp_pdo("$packKind-$dep"); if (!$pdo) { continue; }
+        $w = []; $args = [];
+        if ($kind === 'lieuxdits') { $sql = 'SELECT l.nom, l.nature, l.habite, l.insee, l.lat, l.lon, c.nom AS commune FROM lieux l LEFT JOIN communes c ON c.insee=l.insee'; $col = 'l.'; if ($text !== '') { $w[] = '(l.cle LIKE ? OR c.cle LIKE ?)'; $args[] = "%$text%"; $args[] = "%$text%"; } }
+        else { $sql = 'SELECT * FROM objets'; $col = ''; $w[] = 'base=?'; $args[] = $kind; if ($text !== '') { $w[] = '(cle LIKE ? OR lower(deno) LIKE ? OR lower(commune) LIKE ?)'; array_push($args, "%$text%", "%$text%", "%$text%"); } }
+        if ($bbox) { $w[] = "{$col}lat BETWEEN ? AND ? AND {$col}lon BETWEEN ? AND ?"; array_push($args, $bbox[0], $bbox[1], $bbox[2], $bbox[3]); }
+        $s = $pdo->prepare($sql . ($w ? ' WHERE ' . implode(' AND ', $w) : '') . ' LIMIT ' . ($cap - count($rows) + 1)); $s->execute($args);
+        foreach ($s->fetchAll() as $r) {
+            if ($kind === 'lieuxdits') { $rows[] = ['name' => (string) $r['nom'], 'nature' => (string) $r['nature'], 'habite' => (int) $r['habite'] ? i18n_t('habité') : i18n_t('non habité'), 'commune' => (string) ($r['commune'] ?? ''), 'insee' => (string) $r['insee'], 'dep' => $dep, 'dep_name' => $names[$dep] ?? $dep, 'lat' => $r['lat'] === null ? null : (float) $r['lat'], 'lon' => $r['lon'] === null ? null : (float) $r['lon']]; }
+            else { [$a, $b] = lp_period((string) $r['dates'], (string) $r['siecle']); [$pa] = lp_period((string) $r['protection']);
+                $rows[] = ['name' => (string) $r['nom'], 'deno' => (string) $r['deno'], 'siecle' => (string) $r['siecle'], 'dates' => (string) $r['dates'], 'from' => $a, 'to' => $b, 'protection' => (string) $r['protection'], 'protected' => $pa,
+                    'edifice' => (string) $r['edifice'], 'resume' => (string) $r['resume'], 'commune' => (string) $r['commune'], 'insee' => (string) $r['insee'], 'dep' => $dep, 'dep_name' => $names[$dep] ?? $dep,
+                    'lat' => $r['lat'] === null ? null : (float) $r['lat'], 'lon' => $r['lon'] === null ? null : (float) $r['lon'], 'ref' => (string) $r['ref'], 'url' => 'https://pop.culture.gouv.fr/notice/' . $kind . '/' . rawurlencode((string) $r['ref'])]; }
+            if (count($rows) >= $cap) { $truncated = true; break 2; }
+        }
+    }
+    // les filtres combinés, la distance exacte, les années
+    $out = [];
+    foreach ($rows as $r) {
+        foreach ($filters as $f) { if (($f['key'] ?? '') !== 'dep' && !lp_row_match($r, $f)) { continue 2; } }
+        if ($near) { if ($r['lat'] === null) { continue; } $r['km'] = round(lp_km($near['lat'], $near['lon'], (float) $r['lat'], (float) $r['lon']), 1); if ($r['km'] > $near['km']) { continue; } }
+        if ($yf !== null || $yt !== null) {
+            [$a, $b] = $kind === 'dicotopo' ? [$r['year'], $r['year']] : [$r['from'] ?? null, $r['to'] ?? null];
+            if ($a === null || ($yt !== null && $a > $yt) || ($yf !== null && ($b ?? $a) < $yf)) { continue; }
+        }
+        $out[] = $r;
+    }
+    $sort = (string) ($qq['sort'] ?? ($near ? 'km' : 'name')); $dir = strtolower((string) ($qq['dir'] ?? 'asc')) === 'desc' ? -1 : 1;
+    if ($out && array_key_exists($sort, $out[0])) { usort($out, static function ($a, $b) use ($sort, $dir) { $x = $a[$sort]; $y = $b[$sort]; if ($x === null || $x === '') { return 1; } if ($y === null || $y === '') { return -1; } return $dir * (is_numeric($x) && is_numeric($y) ? $x <=> $y : strcmp(lp_fold((string) $x), lp_fold((string) $y))); }); }
+    return ['rows' => array_slice($out, $offset, $limit), 'total' => count($out), 'truncated' => $truncated, 'deps' => $deps];
+}
+
 /* ═════════════════════════ Réglages : ce qui est installé, les sources ═════════════════════════ */
 
 function lp_status_data(PDO $pdo): array
@@ -524,6 +633,7 @@ function lp_api_get(PDO $pdo, string $action, array $q): array
         'lp_about' => lp_about_data(),
         'lp_place' => lp_place_data($pdo, $q),
         'lp_suggest' => lp_suggest_data($pdo, $q),
+        'lp_list' => lp_list_data($q),
         // sans internet (ou rien encore en ligne) : une réponse normale qui le dit, pas une erreur du serveur
         'lp_dl_info' => (static function () { try { return lp_dl_info(); } catch (RuntimeException $e) { return ['version' => '', 'packs' => (object) [], 'offline' => true, 'error' => $e->getMessage()]; } })(),
         'lp_dl_resume' => lp_dl_resume((string) ($q['id'] ?? '')),

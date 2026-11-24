@@ -74,7 +74,7 @@
         let html = `${T('{who} était {job}.', {who: he(P), job: `<b>${esc(m.job.toLowerCase())}</b>`})} ${esc(where)}, ${esc(same ? lbl : lbl.replace(/\s*\(.*\)$/, ''))}${same ? '' : ` (« ${esc(nm)} »)`}${esc(siteDates(s))} : ${esc(tail)}`;
         if (s.dates === 'unknown') html += ` <span class="muted">${esc(s.src === 'casias' ? T('(l’inventaire ne dit pas les années d’activité)') : T('(ses dates ne sont pas connues)'))}</span>`;
         const more = m.sites.slice(1);
-        const extra = more.length ? `<details class="mr-more"><summary>${esc(T('▸ plus ({n})', {n: more.length + (m.count > m.sites.length ? m.count - m.sites.length : 0)}))}</summary><ul class="hist-ul">${more.map(x => `<li>${esc(siteName(x))}${esc(siteDates(x))} — ${esc(x.km != null ? T('{d} de {p}', {d: fmtKm(x.km), p: x.near}) : x.near)}${siteLink(x)}</li>`).join('')}</ul></details>` : '';
+        const extra = more.length ? `<details class="mr-more"><summary>${esc(T('plus ({n})', {n: more.length + (m.count > m.sites.length ? m.count - m.sites.length : 0)}))}</summary><ul class="hist-ul">${more.map(x => `<li>${esc(siteName(x))}${esc(siteDates(x))} — ${esc(x.km != null ? T('{d} de {p}', {d: fmtKm(x.km), p: x.near}) : x.near)}${siteLink(x)}</li>`).join('')}</ul></details>` : '';
         const icon = {mine: '⛏️', carriere: '⛏️', moulin: '⚙️', forge: '🔨', textile: '🧵', verrerie: '🫙', tannerie: '🏭'}[m.trade] || '🏭';
         return row(icon, html + siteLink(s), [...new Set(m.sites.map(x => SRC_WORD[x.src]))].map(w => esc(w)).join(' · '), extra);
     }
@@ -102,7 +102,7 @@
             const one = x => `${T('{where}, une marque rappelle la crue du {d}', {where: esc(x.desc && x.desc !== '-' ? `${x.commune} — « ${x.desc} »` : x.commune), d: esc(dayTxt(x.day, x.month, x.year))})}${x.river ? ` (${esc(x.river)})` : ''}${x.max ? ` — <b>${esc(T('la plus haute connue ici'))}</b>` : ''}${x.in_life ? ` · <span class="mr-life">${esc(T('de son vivant'))}</span>` : ''} ${link(x.url, T('photo et fiche ↗'))}`;
             const first = reps.slice(0, 3), rest = reps.slice(3);
             out.push(row('〰️', `<b>${esc(T('Repères de crues tout près'))}</b><ul class="hist-ul">${first.map(x => `<li>${one(x)}</li>`).join('')}</ul>`, link('https://www.reperesdecrues.developpement-durable.gouv.fr/', T('Plateforme des repères de crues')) + ' (Licence Ouverte)',
-                rest.length ? `<details class="mr-more"><summary>${esc(T('▸ plus ({n})', {n: (r.reperes_count || reps.length) - 3}))}</summary><ul class="hist-ul">${rest.map(x => `<li>${one(x)}</li>`).join('')}</ul></details>` : ''));
+                rest.length ? `<details class="mr-more"><summary>${esc(T('plus ({n})', {n: (r.reperes_count || reps.length) - 3}))}</summary><ul class="hist-ul">${rest.map(x => `<li>${one(x)}</li>`).join('')}</ul></details>` : ''));
         }
         (r.gauges || []).forEach(g => {
             const top = g.top.map(x => `${esc(ymTxt(x.ym))} : <b>${esc(T('{h} m', {h: num(x.h_m, 2)}))}</b>${x.ym === g.record.ym ? ` (${esc(T('le record de la station'))})` : ''}`);
@@ -144,7 +144,7 @@
             const kinds = (S.tally || []).slice(0, 5).map(x => `${esc(T(x.label).replace(/^(une?|des) /, ''))} (${x.count})`).join(', ');
             const item = x => `<li><b>${esc(x.name)}</b>${x.activity ? ` — ${esc(x.activity)}` : ''}${x.address ? ` <small class="muted">${esc(x.address)}</small>` : ''}${x.url ? ` ${link(x.url, T('fiche ↗'))}` : ''}</li>`;
             out.push(`<p>${T(S.count > 1 ? '{n} anciens ateliers, usines et commerces connus à {p}' : '{n} ancien atelier ou usine connu à {p}', {n: `<b>${S.count}</b>`, p: esc(name)})}${kinds ? ` ${T('— dont {k}', {k: kinds})}` : ''}.</p>
-                <details class="mr-more"><summary>${esc(T('▸ voir la liste'))}</summary>${S.count > 12 ? `<input type="search" class="mr-filter" data-mr-filter placeholder="${esc(T('Filtrer (ex. tannerie)'))}">` : ''}<ul class="mr-list">${S.items.map(item).join('')}</ul>${S.count > S.items.length ? `<p class="muted">${esc(T('… et {n} autres.', {n: S.count - S.items.length}))}</p>` : ''}</details>
+                <details class="mr-more"><summary>${esc(T('voir la liste'))}</summary>${S.count > 12 ? `<input type="search" class="mr-filter" data-mr-filter placeholder="${esc(T('Filtrer (ex. tannerie)'))}">` : ''}<ul class="mr-list">${S.items.map(item).join('')}</ul>${S.count > S.items.length ? `<p class="muted">${esc(T('… et {n} autres.', {n: S.count - S.items.length}))}</p>` : ''}</details>
                 <p class="mr-src">${esc(T('L’inventaire ne dit pas les années d’activité ; beaucoup de sites sont d’après 1850.'))} ${T('Source :')} ${link(d.sources[0].url, d.sources[0].mention)} (${esc(d.sources[0].licence)})</p>`);
         }
         if (mines.length) out.push(`<p>⛏️ ${esc(T('Mines et carrières :'))} ${mines.map(m => `${link(m.url, m.name)}${m.start || m.end ? ` (${m.start || '?'}–${m.end || ''})` : ''}`).join(', ')} <small class="muted">${esc(T('Source :'))} Wikidata (CC0)</small></p>`);
@@ -156,7 +156,7 @@
         const li = x => `<li><b>${esc(x.name)}</b>${x.river ? ` — ${esc(x.river)}` : ''}${x.state ? ` <small class="muted">(${esc(ETAT[x.state])})</small>` : ''}${x.drop_m ? ` <small class="muted">${esc(T('chute de {h} m', {h: num(x.drop_m)}))}</small>` : ''}${x.km != null && d.rule === 'radius' ? ` <small class="muted">${esc(fmtKm(x.km))}</small>` : ''}</li>`;
         const rivers = [...new Set(M.map(x => x.river).filter(Boolean))].slice(0, 3);
         return `<p>${T(d.mills_count > 1 ? '{n} moulins et usines à eau{r}.' : '{n} moulin ou usine à eau{r}.', {n: `<b>${d.mills_count}</b>`, r: rivers.length ? ' ' + esc(T('sur {r}', {r: rivers.join(', ')})) : ''})}</p>
-            <ul class="mr-list">${M.slice(0, 4).map(li).join('')}</ul>${M.length > 4 ? `<details class="mr-more"><summary>${esc(T('▸ plus ({n})', {n: d.mills_count - 4}))}</summary><ul class="mr-list">${M.slice(4).map(li).join('')}</ul></details>` : ''}
+            <ul class="mr-list">${M.slice(0, 4).map(li).join('')}</ul>${M.length > 4 ? `<details class="mr-more"><summary>${esc(T('plus ({n})', {n: d.mills_count - 4}))}</summary><ul class="mr-list">${M.slice(4).map(li).join('')}</ul></details>` : ''}
             <p class="mr-src">${esc(T('Le nom de l’ouvrage garde souvent celui du moulin d’autrefois.'))} ${T('Source :')} ${link('https://www.sandre.eaufrance.fr/', 'OFB, Sandre — ROE')} (Licence Ouverte)</p>`;
     }
     async function fillRiverPlace(body, place, d) {
@@ -331,6 +331,33 @@
         {id: 'mr_moulins', icon: '⚙️', label: T('Moulins et usines à eau de la commune'), group: 'Le lieu', needs: ['place'], installed: () => true, run: (ctx, host) => runPlace('place_mills', ctx, host, T('Aucun moulin connu du ROE ici.'))},
         {id: 'mr_riviere', icon: '🌊', label: T('La rivière du village et ses crues'), group: 'Le lieu', needs: ['place'], online: true, run: (ctx, host) => runPlace('place_river', ctx, host, T('Pas de rivière ni de repère de crue connus ici.'))},
         {id: 'mr_musee', icon: '🖼️', label: T('Ton village au musée (POP)'), group: 'Le lieu', needs: ['place'], online: true, run: (ctx, host) => runPlace('place_pop', ctx, host, T('Rien dans les musées pour cette commune.'))});
+
+    /* ═════════ 📋 Listes : chaque jeu de données dans Listes (moteur commun, LCNDA_EXT.dataLists) ═════════ */
+    const listQuery = kind => async query => { const r = await api('mr_list', {kind, query: JSON.stringify(query || {})}); return {rows: r.rows || [], total: r.total || 0}; };
+    const geo = r => (r.lat != null && r.lon != null ? [r.lat, r.lon] : null);
+    const openUrl = r => { if (r.url) window.open(r.url, '_blank', 'noopener'); };
+    const DEPF = {key: 'dep', label: T('Département'), type: 'enum'}, INSEEF = {key: 'insee', label: T('Code INSEE'), type: 'text'};
+    (ext.dataLists = ext.dataLists || []).push(
+        {id: 'mr_casias', icon: '🏭', label: T('Anciens sites industriels (CASIAS)'), group: 'Le lieu', source: 'Géorisques, BRGM — CASIAS (Licence Ouverte Etalab 2.0)', sourceUrl: 'https://www.georisques.gouv.fr/donnees/bases-de-donnees/inventaire-historique-de-sites-industriels-et-activites-de-service',
+            query: listQuery('casias'), geo, open: openUrl, period: () => null,
+            fields: [{key: 'name', label: T('Nom'), type: 'text'}, {key: 'categorie', label: T('Sorte (métier)'), type: 'enum', values: ['tannerie', 'mine', 'carrière', 'forge', 'verrerie', 'atelier textile', 'moulin', 'papeterie', 'tuilerie', 'four à chaux', 'brasserie', 'distillerie', 'poterie', 'scierie', 'teinturerie', 'chapellerie', 'manufacture d’armes', 'tonnellerie', 'savonnerie', 'corderie', 'usine à gaz', 'fabrique de chandelles', 'sucrerie', 'saline', 'imprimerie', 'blanchisserie', 'abattoir', 'manufacture des tabacs', 'ateliers du chemin de fer']},
+                {key: 'activite', label: T('Activité'), type: 'text'}, {key: 'commune', label: T('Commune'), type: 'place'}, DEPF, INSEEF, {key: 'adresse', label: T('Adresse'), type: 'text'}, {key: 'km', label: T('Distance (km)'), type: 'number'}, {key: 'url', label: T('Fiche'), type: 'url'}]},
+        {id: 'mr_mines', icon: '⛏️', label: T('Mines et carrières (Wikidata)'), group: 'Le lieu', source: 'Wikidata (CC0)', sourceUrl: 'https://www.wikidata.org/wiki/Q820477',
+            query: listQuery('mines'), geo, open: openUrl, period: r => (r.debut || r.fin ? [r.debut || r.fin, r.fin || new Date().getFullYear()] : null),
+            fields: [{key: 'name', label: T('Nom'), type: 'text'}, {key: 'categorie', label: T('Sorte'), type: 'enum', values: ['mine', 'carrière']}, {key: 'debut', label: T('Ouverte'), type: 'year'}, {key: 'fin', label: T('Fermée'), type: 'year'}, DEPF, {key: 'km', label: T('Distance (km)'), type: 'number'}, {key: 'url', label: T('Wikidata'), type: 'url'}]},
+        {id: 'mr_moulins', icon: '⚙️', label: T('Moulins et usines à eau (ROE)'), group: 'Le lieu', source: 'OFB, Sandre — ROE (Licence Ouverte Etalab 2.0)', sourceUrl: 'https://www.sandre.eaufrance.fr/',
+            query: listQuery('roe'), geo, period: () => null,
+            fields: [{key: 'name', label: T('Nom'), type: 'text'}, {key: 'categorie', label: T('Sorte'), type: 'enum', values: ['moulin', 'minoterie', 'forge', 'martinet', 'scierie', 'papeterie', 'filature', 'foulon', 'usine', 'taillanderie', 'tannerie']},
+                {key: 'riviere', label: T('Rivière'), type: 'text'}, {key: 'etat', label: T('État'), type: 'enum', values: ['existant', 'détruit en partie', 'détruit']}, {key: 'chute', label: T('Hauteur de chute (m)'), type: 'number'}, DEPF, INSEEF, {key: 'km', label: T('Distance (km)'), type: 'number'}]},
+        {id: 'mr_reperes', icon: '🌊', label: T('Repères de crues'), group: 'Le lieu', source: 'Plateforme nationale des repères de crues (Licence Ouverte Etalab 2.0)', sourceUrl: 'https://www.reperesdecrues.developpement-durable.gouv.fr/',
+            query: listQuery('reperes'), geo, open: openUrl, period: r => [r.annee, r.annee],
+            fields: [{key: 'date', label: T('Date de la crue'), type: 'text'}, {key: 'annee', label: T('Année'), type: 'year'}, {key: 'commune', label: T('Commune'), type: 'place'}, {key: 'riviere', label: T('Rivière'), type: 'enum'}, {key: 'plus_haute', label: T('Plus haute crue connue ici'), type: 'enum', values: ['oui', 'non']},
+                {key: 'description', label: T('Où est la marque'), type: 'text'}, {key: 'altitude', label: T('Altitude de l’eau (m NGF)'), type: 'number'}, DEPF, INSEEF, {key: 'km', label: T('Distance (km)'), type: 'number'}, {key: 'url', label: T('Photo et fiche'), type: 'url'}]},
+        {id: 'mr_musee', icon: '🖼️', label: T('Ton village au musée (POP, en ligne)'), group: 'Le lieu', source: 'Ministère de la Culture, POP — notices Licence Ouverte ; photos : droits propres à chacune', sourceUrl: 'https://pop.culture.gouv.fr/', online: true,
+            query: async query => { const r = await api('mr_list_pop', {query: JSON.stringify(query || {})}); return {rows: r.rows || [], total: r.total || 0, message: r.message || (r.offline ? T('Pas de connexion à Internet.') : '')}; },
+            open: openUrl, period: () => null,
+            fields: [{key: 'titre', label: T('Titre'), type: 'text'}, {key: 'sorte', label: T('Sorte'), type: 'enum', values: ['photo', 'musée', 'conservé dans la commune']}, {key: 'commune', label: T('Commune'), type: 'place'}, {key: 'date', label: T('Date'), type: 'text'},
+                {key: 'auteur', label: T('Auteur'), type: 'text'}, {key: 'lieu', label: T('Lieu ou musée'), type: 'text'}, {key: 'droits', label: T('Droits'), type: 'text'}, {key: 'libre', label: T('Licence libre'), type: 'enum', values: ['oui', 'non']}, {key: 'url', label: T('Notice POP'), type: 'url'}, {key: 'image', label: T('Image'), type: 'image'}]});
 
     ext.metiersRivieres = {settings, placeInto, fillMetier, histoireAfter, riversHtml, decorate, openSettings: () => { const st = A().state; if (!st) return; st.maintenanceTab = TAB[0]; A().persistUiState?.(); A().setModule?.('maintenance'); }};
 })();

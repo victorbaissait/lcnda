@@ -5,7 +5,7 @@
  *  3. écran : Jean DURAND (né le 7 novembre 1867 à Varsovie, mort à Paris en 1934) → bloc « 🌟 Autour de sa vie » : une phrase,
  *     « ▸ plus » (Marie Curie née au même endroit et le même jour, homonymes « simple homonyme », événements près de Paris),
  *     chaque ligne avec « ↗ Wikidata » ; Pierre MAZAUD (sans date) → pas de bloc ; « Lemberg » tapé dans un lieu → l'aide ;
- *     Réglages → 🌟 Wikidata : éteindre (↶ Annuler) ; LCNDA_EXT.dataSources (chanson d'une année, ancien nom).
+ *     Réglages → 🌟 Wikidata : éteindre (↶ Annuler) ; LCNDA_EXT.dataSources (chanson d'une année, ancien nom) ; LCNDA_EXT.dataLists.
  *   node tests/test-wikidata.js */
 'use strict';
 const assert = require('assert');
@@ -135,6 +135,20 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
                 await D.find(d => d.id === 'wikidata_autour').run({person: id}, h); const a = h.innerHTML;
                 await D.find(d => d.id === 'wikidata_ancien_nom').run({place: 'Lemberg'}, h); return [a, h.textContent]; }, ID.jean);
             assert.match(out[0], /Q7186/); assert.match(out[1], /Lviv/);
+        });
+        await t('Listes : LCNDA_EXT.dataLists (personnes autour de Varsovie, nés un 7 novembre, chansons, anciens noms)', async () => {
+            const r = await p.evaluate(async () => {
+                const L = window.LCNDA_EXT.dataLists.filter(d => /^wikidata_/.test(d.id)), by = id => L.find(d => d.id === id);
+                const near = await by('wikidata_personnes').query({near: {lat: 52.2297, lon: 21.0122, km: 5}, years: {from: 1867, to: 1867}, filters: [{key: 'day', op: '=', value: '11-07'}], limit: 50});
+                const songs = await by('wikidata_chansons').load(); const old = await by('wikidata_anciens_noms').load();
+                const ev = await by('wikidata_evenements').query({near: {lat: 48.8566, lon: 2.3522, km: 30}, years: {from: 1870, to: 1871}});
+                return {ids: L.map(d => d.id).sort(), near: near.rows.map(x => x.qid), geo: by('wikidata_personnes').geo(near.rows[0] || {}), songs: songs.length, songKeys: Object.keys(songs[0] || {}),
+                    lemberg: old.filter(x => x.old === 'Lemberg').map(x => x.qid), ev: ev.total, fields: L.every(d => d.fields.length >= 4 && typeof d.period === 'function')};
+            });
+            assert.deepStrictEqual(r.ids, ['wikidata_anciens_noms', 'wikidata_chansons', 'wikidata_evenements', 'wikidata_personnes']);
+            assert.ok(r.near.includes('Q7186'), 'Marie Curie, née à Varsovie un 7 novembre 1867'); assert.ok(Array.isArray(r.geo) && r.geo.length === 2);
+            assert.ok(r.songs > 100); assert.ok(['year', 'title', 'performer', 'url'].every(k => r.songKeys.includes(k)));
+            assert.ok(r.lemberg.includes('Q36036')); assert.ok(r.ev > 0, 'la guerre de 1870 autour de Paris'); assert.ok(r.fields);
         });
         await t('Réglages → 🌟 Wikidata : éteindre cache le bloc, ↶ Annuler le remet', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'wikidata_autour'; A.setModule('maintenance'); });

@@ -193,6 +193,25 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const out = await p.evaluate(async () => { const h = document.createElement('div'); document.body.appendChild(h); const ds = window.LCNDA_EXT.dataSources.find(d => d.id === 'mr_moulins'); await ds.run({place: {id: 1, name: 'Tulle'}}, h); const t = h.textContent; h.remove(); return t; });
             assert.match(out, /moulin/i);
         });
+        await t('Listes (LCNDA_EXT.dataLists) : filtres combinés côté serveur — autour de Tulle, sorte, années, département, texte, tri', async () => {
+            const lists = await p.evaluate(() => (window.LCNDA_EXT.dataLists || []).filter(d => /^mr_/.test(d.id)).map(d => ({id: d.id, keys: d.fields.map(f => f.key), q: typeof d.query === 'function', geo: typeof d.geo === 'function', period: typeof d.period === 'function'})));
+            assert.deepStrictEqual(lists.map(l => l.id), ['mr_casias', 'mr_mines', 'mr_moulins', 'mr_reperes', 'mr_musee']);
+            assert.ok(lists.every(l => l.q && l.period && l.keys.length >= 5));
+            const run = (id, query) => p.evaluate(async ([i, q]) => window.LCNDA_EXT.dataLists.find(d => d.id === i).query(q), [id, query]);
+            const near = {lat: 45.267, lon: 1.768, km: 3};
+            const tan = await run('mr_casias', {near, filters: [{key: 'categorie', op: '=', value: 'tannerie'}]});
+            assert.ok(tan.total >= 2 && tan.rows.every(r => r.categorie === 'tannerie' && r.km <= 3), JSON.stringify(tan).slice(0, 300));
+            assert.ok(tan.rows.every((r, i, a) => !i || a[i - 1].km <= r.km), 'du plus proche au plus loin');
+            const rep = await run('mr_reperes', {years: {from: 1960, to: 1960}, filters: [{key: 'dep', op: '=', value: '19'}], sort: 'commune'});
+            assert.ok(rep.total >= 1 && rep.rows.every(r => r.annee === 1960 && r.dep === '19'));
+            const mo = await run('mr_moulins', {q: 'moulin', filters: [{key: 'insee', op: '=', value: '19272'}]});
+            assert.ok(mo.total >= 1 && mo.rows.every(r => r.insee === '19272'));
+            const mi = await run('mr_mines', {filters: [{key: 'categorie', op: '=', value: 'mine'}], limit: 5});
+            assert.ok(mi.total >= 100 && mi.rows.length === 5);
+            const mu = await run('mr_musee', {near: {lat: 45.2650, lon: 1.7700, km: 2}});
+            assert.ok(mu.total >= 5 && mu.rows.every(r => r.commune === 'Tulle' && r.libre === 'non'), JSON.stringify(mu).slice(0, 300));
+            const none = await run('mr_musee', {}); assert.strictEqual(none.total, 0); assert.match(none.message, /Choisis une commune/);
+        });
         await t('pas d’erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill();

@@ -8,8 +8,9 @@ assets/data/chateaux/index.json (pays, nombre, taille, date, source).
 
 Ce qui est gardé pour chaque château (clés courtes, pour la taille) :
   q  : numéro Wikidata (Q…)                     n  : nom (français s'il existe, sinon la langue du pays, sinon anglais)
-  k  : sorte (c château fort, h château/Schloss, r ruine ou site, f forteresse/fort, m manoir/maison forte, t tour, o motte)
-  la, lo : position                              cq, cn : commune (Wikidata P131) et son nom ; ci : code INSEE (France)
+  k  : sorte (c château fort, h château/Schloss, r ruine ou site, f forteresse/fort, m manoir, mf maison forte, t tour, o motte)
+  la, lo : position                              cq, cn : commune (Wikidata P131) et son nom ; ci : code INSEE (France) ; rg : ce qui contient la commune (département, Kreis…)
+  v  : 1 = il se visite (Wikidata : c'est aussi un musée, ou un nombre de visiteurs est connu)
   y0 : construction (P571, année) ; y1 : démoli/disparu (P576) ; st : état (P5816, ex. « ruine »)
   hs : protections (P1435, noms)                 im : image (fichier Commons, P18) ; me : Mérimée (P380)
   w  : article Wikipédia en français (titre)     wl : [langue, titre] de l'article dans la langue du pays
@@ -35,7 +36,7 @@ CLASSES = {
     'Q751876': 'h', 'Q16823155': 'h', 'Q1424449': 'h',                  # château (résidence), Schloss, pavillon de chasse
     'Q17715832': 'r', 'Q1015644': 'r', 'Q58271381': 'r',                # ruine de château, Burgstall, Wasserburgstall
     'Q57831': 'f', 'Q1785071': 'f', 'Q1195705': 'f',                    # forteresse, fort, rocca
-    'Q879050': 'm', 'Q2116450': 'm', 'Q1802963': 'm', 'Q2066754': 'm', 'Q1408475': 'm', 'Q32164125': 'm', 'Q3802482': 'm',
+    'Q879050': 'm', 'Q2116450': 'm', 'Q1802963': 'm', 'Q2066754': 'm', 'Q1408475': 'mf', 'Q32164125': 'mf', 'Q3802482': 'm',
     #                                                                     manoir, domaine seigneurial, Herrenhaus, manoir, maison forte, manoir fortifié, stins
     'Q91312': 't', 'Q1535658': 't', 'Q3898745': 't', 'Q91165': 't',     # maison-tour, tour, peel tower, donjon
     'Q92062': 'o', 'Q7335033': 'o',                                     # motte castrale, ringwork
@@ -51,6 +52,8 @@ COUNTRIES = [
     ('IS', 'Q189', 'is'), ('RU', 'Q159', 'ru'), ('MT', 'Q233', 'mt'), ('CY', 'Q229', 'el'), ('LI', 'Q347', 'de'), ('MC', 'Q235', 'fr'),
     ('SM', 'Q238', 'it'), ('AD', 'Q228', 'ca'), ('VA', 'Q237', 'it'), ('XK', 'Q1246', 'sq'),
 ]
+ORDER = ['c', 'h', 'f', 'mf', 'm', 't', 'o', 'r']
+MUSEUMS = 'wd:Q33506 wd:Q2087181 wd:Q1007870 wd:Q17431399 wd:Q207694 wd:Q24699794'
 BOX = (34.0, 72.0, -25.0, 60.0)  # Europe (la Russie et la Turquie d'Asie sont coupées)
 
 
@@ -63,7 +66,7 @@ def items_of(cq, cache):
         k = CLASSES.get(wd.qid(wd.val(b, 'c')), 'c')
         it = out.setdefault(x, {'q': x, 'k': k})
         # plusieurs classes : la plus « château » d'abord (c > h > f > m > t > o > r)
-        if 'chfmtor'.index(k) < 'chfmtor'.index(it['k']):
+        if ORDER.index(k) < ORDER.index(it['k']):
             it['k'] = k
         p = wd.point(wd.val(b, 'co'))
         if p and 'la' not in it:
@@ -75,7 +78,7 @@ def details(ids, lang, cache):
     vals = ' '.join('wd:' + i for i in ids)
     q = f"""SELECT ?x (SAMPLE(?fr) AS ?nfr) (SAMPLE(?ll) AS ?nl) (SAMPLE(?en) AS ?nen) (SAMPLE(?com) AS ?c) (MIN(?inc) AS ?i) (MIN(?dis) AS ?d)
       (SAMPLE(?stl) AS ?st) (SAMPLE(?img) AS ?im) (SAMPLE(?mer) AS ?me) (SAMPLE(?wfr) AS ?wf) (SAMPLE(?wlo) AS ?wl)
-      (GROUP_CONCAT(DISTINCT ?hl; separator="|") AS ?hs) WHERE {{
+      (GROUP_CONCAT(DISTINCT ?hl; separator="|") AS ?hs) (SAMPLE(?mu) AS ?mus) (MAX(?vis) AS ?visn) WHERE {{
       VALUES ?x {{ {vals} }}
       OPTIONAL {{ ?x rdfs:label ?fr FILTER(lang(?fr)="fr") }}
       OPTIONAL {{ ?x rdfs:label ?ll FILTER(lang(?ll)="{lang}") }}
@@ -86,6 +89,8 @@ def details(ids, lang, cache):
       OPTIONAL {{ ?x wdt:P5816 ?s . ?s rdfs:label ?stl FILTER(lang(?stl)="fr") }}
       OPTIONAL {{ ?x wdt:P18 ?img }}
       OPTIONAL {{ ?x wdt:P380 ?mer }}
+      OPTIONAL {{ VALUES ?mu {{ {MUSEUMS} }} ?x wdt:P31 ?mu }}
+      OPTIONAL {{ ?x wdt:P1174 ?vis }}
       OPTIONAL {{ ?x wdt:P1435 ?h . ?h rdfs:label ?hl FILTER(lang(?hl)="fr") }}
       OPTIONAL {{ ?wfr schema:about ?x ; schema:isPartOf <https://fr.wikipedia.org/> }}
       OPTIONAL {{ ?wlo schema:about ?x ; schema:isPartOf <https://{lang}.wikipedia.org/> }}
@@ -104,9 +109,10 @@ def owners(ids, cache):
 
 def communes(ids, cache):
     vals = ' '.join('wd:' + i for i in ids)
-    q = f"""SELECT ?c (SAMPLE(?fr) AS ?nfr) (SAMPLE(?any) AS ?n) (SAMPLE(?ins) AS ?insee) WHERE {{ VALUES ?c {{ {vals} }}
+    q = f"""SELECT ?c (SAMPLE(?fr) AS ?nfr) (SAMPLE(?any) AS ?n) (SAMPLE(?ins) AS ?insee) (SAMPLE(?rl) AS ?rg) WHERE {{ VALUES ?c {{ {vals} }}
       OPTIONAL {{ ?c rdfs:label ?fr FILTER(lang(?fr)="fr") }} OPTIONAL {{ ?c rdfs:label ?any FILTER(lang(?any)="en") }}
-      OPTIONAL {{ ?c wdt:P374 ?ins }} }} GROUP BY ?c"""
+      OPTIONAL {{ ?c wdt:P374 ?ins }}
+      OPTIONAL {{ ?c wdt:P131 ?r . ?r rdfs:label ?rl FILTER(lang(?rl)="fr") }} }} GROUP BY ?c"""
     return wd.sparql(q, cache)
 
 
@@ -138,6 +144,8 @@ def build_country(code, cq, lang, cache):
                     it[k] = wd.val(b, src)
             if wd.val(b, 'im'):
                 it['im'] = wd.commons_file(wd.val(b, 'im'))
+            if wd.val(b, 'mus') or wd.val(b, 'visn'):
+                it['v'] = 1  # musée ou nombre de visiteurs connu : il se visite
             hs = [h for h in (wd.val(b, 'hs') or '').split('|') if h]
             if hs:
                 it['hs'] = hs[:3]
@@ -160,15 +168,17 @@ def build_country(code, cq, lang, cache):
     cnames = {}
     for chunk in wd.batches(cids, 400):
         for b in communes(chunk, cache):
-            cnames[wd.qid(wd.val(b, 'c'))] = (wd.val(b, 'nfr') or wd.val(b, 'n'), wd.val(b, 'insee'))
+            cnames[wd.qid(wd.val(b, 'c'))] = (wd.val(b, 'nfr') or wd.val(b, 'n'), wd.val(b, 'insee'), wd.val(b, 'rg'))
     rows = []
     for it in items.values():
         if 'la' in it and not (BOX[0] <= it['la'] <= BOX[1] and BOX[2] <= it['lo'] <= BOX[3]):
             continue
         if it.get('cq') in cnames:
-            n, ins = cnames[it['cq']]
+            n, ins, rg = cnames[it['cq']]
             if n:
                 it['cn'] = n
+            if rg:
+                it['rg'] = rg
             if ins and code == 'FR':
                 it['ci'] = ins
         if 'n' not in it:
@@ -205,7 +215,9 @@ def main():
         kinds = {}
         for r in rows:
             kinds[r['k']] = kinds.get(r['k'], 0) + 1
-        index['countries'][code] = {'n': len(rows), 'geo': sum(1 for r in rows if 'la' in r), 'bytes': os.path.getsize(path), 'kinds': kinds, 'q': cq}
+        geo = [r for r in rows if 'la' in r]
+        box = [min(r['la'] for r in geo), min(r['lo'] for r in geo), max(r['la'] for r in geo), max(r['lo'] for r in geo)] if geo else None
+        index['countries'][code] = {'n': len(rows), 'geo': len(geo), 'bytes': os.path.getsize(path), 'kinds': kinds, 'q': cq, 'box': box}
         print(code, len(rows), os.path.getsize(path), flush=True)
     index.update({'v': 1, 'built': datetime.date.today().isoformat(),
                   'source': 'Wikidata (requête SPARQL, classes « château », « château fort », « ruine de château », « forteresse », « manoir », « maison forte », « motte »…)',

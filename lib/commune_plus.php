@@ -218,7 +218,7 @@ function cplus_cemeteries(PDO $pdo, array $q): array
     if ($p['lat'] === null) { return ['ok' => false, 'noplace' => true, 'message' => i18n_t('Le lieu n’a pas de coordonnées : place-le sur la carte pour voir les cimetières autour.')]; }
     $radius = max(1000, min(10000, safe_int($q['radius'] ?? 5000) ?: 5000));
     $lat = round($p['lat'], 4); $lon = round((float) $p['lon'], 4);
-    $r = cplus_cached('cemeteries', "{$lat},{$lon},{$radius}", static function () use ($lat, $lon, $radius) {
+    $r = cplus_cached('cemeteries', "{$lat},{$lon},{$radius}", static function () use ($lat, $lon, $radius, $p) {
         $ql = sprintf('[out:json][timeout:25];(nwr["landuse"="cemetery"](around:%1$d,%2$.4F,%3$.4F);nwr["amenity"="grave_yard"](around:%1$d,%2$.4F,%3$.4F););out center tags;', $radius, $lat, $lon);
         $j = cplus_json('overpass.json', 'https://overpass-api.de/api/interpreter', ['data' => $ql]);
         $items = []; $seen = [];
@@ -237,7 +237,7 @@ function cplus_cemeteries(PDO $pdo, array $q): array
             foreach ($seen as $s) { if (cplus_km($s['lat'], $s['lon'], $it['lat'], $it['lon']) < 0.06 && ($s['name'] === $it['name'] || $it['name'] === '')) { continue 2; } }
             $seen[] = $it;
         }
-        return ['ok' => true, 'items' => $seen, 'radius' => $radius, 'source' => CPLUS_OSM];
+        return ['ok' => true, 'items' => $seen, 'radius' => $radius, 'near' => ['name' => $p['name'], 'lat' => $lat, 'lon' => $lon], 'source' => CPLUS_OSM];
     }, !empty($q['fresh']));
     if (empty($r['ok'])) { return $r; }
     foreach ($r['items'] as &$it) {
@@ -326,7 +326,7 @@ function cplus_images(PDO $pdo, array $q): array
                 'thumb' => (string) ($ii['thumburl'] ?? ''), 'full' => (string) ($ii['url'] ?? ''), 'page' => (string) ($ii['descriptionurl'] ?? ('https://commons.wikimedia.org/wiki/' . rawurlencode(str_replace(' ', '_', $title))))];
         }
         usort($items, static fn($a, $b) => ($a['year'] ?: 1960) <=> ($b['year'] ?: 1960) ?: strcmp($a['file'], $b['file']));
-        return ['ok' => true, 'items' => array_slice($items, 0, 60), 'categories' => $cats,
+        return ['ok' => true, 'items' => array_slice($items, 0, 60), 'categories' => $cats, 'commune_label' => $c['label'], 'commune_lat' => $c['lat'], 'commune_lon' => $c['lon'],
             'source' => ['label' => 'Wikimedia Commons', 'licence' => i18n_t('licence propre à chaque image'), 'url' => 'https://commons.wikimedia.org/wiki/Category:' . rawurlencode(str_replace(' ', '_', $cat))]];
     }, $fresh);
     return $r + ['commune' => $c];
@@ -407,7 +407,7 @@ function cplus_church(PDO $pdo, array $q): array
         // d'abord les églises (pas les chapelles), celles qui ont un saint patron, encore debout
         usort($churches, static fn($a, $b) => [(int) $a['gone'], $a['saints'] ? 0 : 1, preg_match('/^(église|eglise|collégiale|cathédrale|basilique)/iu', $a['label']) ? 0 : 1, $a['label']]
             <=> [(int) $b['gone'], $b['saints'] ? 0 : 1, preg_match('/^(église|eglise|collégiale|cathédrale|basilique)/iu', $b['label']) ? 0 : 1, $b['label']]);
-        return ['ok' => true, 'churches' => array_slice($churches, 0, 8), 'source' => cplus_wd_source()];
+        return ['ok' => true, 'churches' => array_slice($churches, 0, 8), 'commune_label' => $c['label'], 'commune_lat' => $c['lat'], 'commune_lon' => $c['lon'], 'source' => cplus_wd_source()];
     }, $fresh);
     return $r + ['commune' => $c];
 }
@@ -446,14 +446,14 @@ function cplus_newspapers(PDO $pdo, array $q): array
     $state = trim(safe_text($q['state'] ?? ''));
     $qtext = '"' . str_replace('"', '', $last) . '"';
     $search = 'https://www.loc.gov/collections/chronicling-america/?' . http_build_query(['q' => $qtext, 'dates' => "{$from}/{$to}"] + ($state !== '' ? ['fa' => 'location_state:' . mb_strtolower($state)] : []));
-    $r = cplus_cached('newspapers', $qtext . "|{$from}|{$to}|{$state}", static function () use ($search) {
+    $r = cplus_cached('newspapers', $qtext . "|{$from}|{$to}|{$state}", static function () use ($search, $last) {
         $j = cplus_json('loc.json', $search . '&fo=json&c=10&at=results,pagination');
         $items = [];
         foreach ($j['results'] ?? [] as $x) {
             $items[] = ['title' => (string) (($x['partof_title'][0] ?? '') ?: ($x['title'] ?? '')), 'date' => (string) ($x['date'] ?? ''), 'url' => (string) ($x['url'] ?? ($x['id'] ?? '')),
                 'place' => trim(implode(', ', array_filter([ucwords((string) ($x['location_city'][0] ?? '')), ucwords((string) ($x['location_state'][0] ?? ''))]))), 'language' => (string) ($x['language'][0] ?? '')];
         }
-        return ['ok' => true, 'total' => (int) ($j['pagination']['of'] ?? count($items)), 'items' => $items];
+        return ['ok' => true, 'total' => (int) ($j['pagination']['of'] ?? count($items)), 'items' => $items, 'name' => $last];
     }, !empty($q['fresh']));
     return $r + ['search_url' => $search, 'from' => $from, 'to' => $to, 'source' => cplus_loc_source()];
 }
@@ -565,6 +565,61 @@ function cplus_cache_restore(array $d): array
     return ['ok' => true, 'restored' => $n];
 }
 
+/* ═════════════════════ 📋 Listes : tout ce qui est gardé, en lignes (LCNDA_EXT.dataLists) ═════════════════════ */
+
+/** GET cplus_list&kind=cemeteries|images|churches|newspapers[&fetch=1] → {rows} ; « fetch » : les cimetières des lieux de la famille pas encore cherchés (5 au plus par appel) */
+function cplus_list(PDO $pdo, array $q): array
+{
+    $kind = (string) ($q['kind'] ?? '');
+    $prefix = ['cemeteries' => 'cemeteries:', 'images' => 'images:', 'churches' => 'church:', 'newspapers' => 'newspapers:'][$kind] ?? null;
+    if ($prefix === null) { throw new LcndaBadInput('Liste inconnue.'); }
+    $fetched = 0; $missing = 0;
+    if ($kind === 'cemeteries' && !empty($q['fetch'])) {
+        // les lieux de la famille (placés sur la carte), les plus fréquents d'abord
+        $rows = $pdo->query("SELECT pl.id, pl.name, pl.latitude, pl.longitude, count(e.id) n FROM places pl JOIN events e ON e.place_id=pl.id
+            WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL GROUP BY pl.id ORDER BY n DESC LIMIT 60")->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as $r) {
+            $key = 'cemeteries:' . round((float) $r['latitude'], 4) . ',' . round((float) $r['longitude'], 4) . ',5000';
+            if (cplus_cache_get($key)) { continue; }
+            if ($fetched >= 5) { $missing++; continue; }
+            $res = cplus_cemeteries($pdo, ['place_id' => (int) $r['id']]); $fetched++;
+            if (!empty($res['offline'])) { $missing += count($rows); break; }
+        }
+    }
+    $out = []; $seen = [];
+    foreach (glob(cplus_cache_dir() . '/*.json') ?: [] as $f) {
+        $c = json_decode((string) @file_get_contents($f), true);
+        if (!is_array($c) || !str_starts_with((string) ($c['key'] ?? ''), $prefix) || empty($c['data']['ok'])) { continue; }
+        $d = $c['data'];
+        if ($kind === 'cemeteries') {
+            $n = $d['near'] ?? null;
+            foreach ($d['items'] ?? [] as $it) {
+                if (isset($seen[$it['osm']])) { continue; } $seen[$it['osm']] = 1;
+                $out[] = ['name' => $it['name'] !== '' ? $it['name'] : i18n_t('Cimetière (sans nom sur la carte)'), 'near' => (string) ($n['name'] ?? ''), 'km' => $n ? round(cplus_km((float) $n['lat'], (float) $n['lon'], $it['lat'], $it['lon']), 1) : null,
+                    'religion' => CPLUS_DENOM[$it['denomination']] ?? (CPLUS_RELIGION[$it['religion']] ?? ''), 'kind' => ['war' => i18n_t('militaire'), 'churchyard' => i18n_t('autour de l’église'), 'cemetery' => i18n_t('cimetière')][$it['kind']] ?? '',
+                    'lat' => $it['lat'], 'lon' => $it['lon'], 'url' => 'https://www.openstreetmap.org/' . $it['osm']];
+            }
+        } elseif ($kind === 'images') {
+            foreach ($d['items'] ?? [] as $it) {
+                $out[] = ['title' => $it['title'], 'commune' => (string) ($d['commune_label'] ?? ''), 'year' => $it['year'] ?: null, 'postcard' => $it['postcard'] ? i18n_t('oui') : i18n_t('non'), 'author' => $it['author'], 'licence' => $it['licence'],
+                    'lat' => $d['commune_lat'] ?? null, 'lon' => $d['commune_lon'] ?? null, 'url' => $it['page'], 'thumb' => $it['thumb'], 'file' => $it['file']];
+            }
+        } elseif ($kind === 'churches') {
+            foreach ($d['churches'] ?? [] as $ch) {
+                $saints = array_values(array_filter(array_map(static fn($x) => (string) ($x['label'] ?? ''), $ch['saints'] ?? [])));
+                $feast = array_values(array_filter(array_map(static fn($x) => (string) ($x['feast'][0] ?? ''), $ch['saints'] ?? [])));
+                $out[] = ['name' => $ch['label'], 'commune' => (string) ($d['commune_label'] ?? ''), 'when' => $ch['when'], 'year' => preg_match('/^\d{3,4}$/', (string) $ch['when']) ? (int) $ch['when'] : null,
+                    'saint' => implode(', ', $saints), 'feast' => implode(', ', $feast), 'gone' => $ch['gone'] ? i18n_t('disparue') : '', 'lat' => $d['commune_lat'] ?? null, 'lon' => $d['commune_lon'] ?? null, 'url' => $ch['url']];
+            }
+        } else {
+            foreach ($d['items'] ?? [] as $it) {
+                $out[] = ['name' => (string) ($d['name'] ?? ''), 'title' => $it['title'], 'date' => $it['date'], 'year' => (int) substr((string) $it['date'], 0, 4) ?: null, 'place' => $it['place'], 'language' => $it['language'], 'url' => $it['url']];
+            }
+        }
+    }
+    return ['ok' => true, 'rows' => $out, 'fetched' => $fetched, 'missing' => $missing];
+}
+
 function cplus_about(): array
 {
     return ['ok' => true, 'cache' => cplus_cache_info(), 'sources' => [
@@ -587,6 +642,7 @@ function cplus_api_get(PDO $pdo, string $action, array $q): array
         'cplus_church' => cplus_church($pdo, $q),
         'cplus_newspapers' => cplus_newspapers($pdo, $q),
         'cplus_about' => cplus_about(),
+        'cplus_list' => cplus_list($pdo, $q),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }
