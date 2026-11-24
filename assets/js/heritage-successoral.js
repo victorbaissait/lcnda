@@ -103,7 +103,7 @@
         if (!VIEWS.some(v => v[0] === cur.view)) cur.view = 'cases';
         w.innerHTML = `<section class="page succ-page">${UI().pageHeader({title: i18n('Dossiers de succession'), icon: '⚖️', where,
             help: i18n('Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres).'),
-            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), ...(P2().boardMore?.() || []), ...(ext.complEtudes?.boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
+            actions: [LAW_BTN(), ...(ext.succDroit?.wizard ? [`<button type="button" class="button secondary" data-succ-wizard title="${esc(i18n('Le dossier en 4 étapes : le défunt, la famille trouvée, les doutes, les héritiers'))}">🧭 ${esc(i18n('Pas à pas'))}</button>`] : []), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), ...(P2().boardMore?.() || []), ...(ext.complEtudes?.boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
             <div class="segmented succ-views" role="tablist" aria-label="${esc(i18n('Que montrer'))}">${VIEWS.map(([k, l]) => `<button type="button" role="tab" data-succ-view="${k}" class="${cur.view === k ? 'is-active' : ''}" aria-selected="${cur.view === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <div data-succ-body>${UI().spinner(i18n(cur.view === 'heirs' ? 'Lecture des héritiers…' : cur.view === 'mail' ? 'Lecture des courriers…' : 'Lecture des dossiers…'))}</div></section>`;
         const body = w.querySelector('[data-succ-body]');
@@ -1027,6 +1027,7 @@
     /* ═════ Les clics ═════ */
     document.addEventListener('click', async e => {
         const t = e.target; if (!t.closest) return;
+        if (t.closest('[data-succ-wizard]')) { e.preventDefault(); return ext.succDroit?.wizard?.(); } // 🧭 heritage-successoral-droit.js
         if (t.closest('[data-succ-new]')) { e.preventDefault(); if (ext.succDossiers?.beforeNew && await ext.succDossiers.beforeNew()) return; return caseDialog(); } // 1. la première fois : où ranger les dossiers
         const op = t.closest('[data-succ-open]'); if (op) { e.preventDefault(); return openCase(op.dataset.succOpen); }
         if (t.closest('[data-succ-back]')) { e.preventDefault(); return openCase(0); }

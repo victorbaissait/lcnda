@@ -282,6 +282,34 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 assert.equal((await get('get', { id: c2.id })).options.suivi['22'].sources.length, 0, '↶ Annuler');
                 await noSide(pg); assert.deepEqual(errs, []); await ctx.close();
             });
+            await t('🧭 Pas à pas : 4 étapes, le dossier s’ouvre à l’étape 1 (↶ le supprime) ; 📄 acte de notoriété comparé ; 📝 notaire vers le traitement de texte', async () => {
+                const { ctx, pg, errs } = await open(1440, 900, false, '#successoral');
+                await pg.waitForSelector('[data-succ-wizard]'); await pg.click('[data-succ-wizard]'); await pg.waitForSelector('.sd-wiz [data-wnext]');
+                await pg.evaluate(() => { const i = document.querySelector('.sd-wiz [name=deceased_id]'); i.value = '1'; });
+                await pg.click('.sd-wiz [data-wnext]'); await pg.waitForFunction(() => /Étape 2 sur 4/.test(document.querySelector('.sd-wiz')?.textContent || ''));
+                assert.match(await pg.textContent('.sd-wiz'), /ordre|Aucun héritier/);
+                assert.ok((await get('list')).items.some(c => /Louis MAZAUD/.test(c.title || '')), 'le dossier est créé à l’étape 1');
+                await pg.click('.sd-wiz [data-wnext]'); await pg.waitForFunction(() => /Étape 3 sur 4/.test(document.querySelector('.sd-wiz').textContent));
+                await pg.click('.sd-wiz [data-wnext]'); await pg.waitForFunction(() => /Étape 4 sur 4/.test(document.querySelector('.sd-wiz').textContent));
+                await pg.click('.sd-wiz [data-wprev]'); await pg.waitForFunction(() => /Étape 3 sur 4/.test(document.querySelector('.sd-wiz').textContent));
+                await pg.click('.sd-wiz [data-wnext]'); await pg.click('.sd-wiz [data-wnext]'); await pg.waitForSelector('[data-succ-tab="heirs"].is-active, .succ-table', {timeout: 10000});
+                assert.equal(await pg.$('.sd-wiz'), null, 'le pas à pas se ferme sur le dossier');
+                const mine = (await get('list')).items.find(c => /Louis MAZAUD/.test(c.title || '')); await w({op: 'delete', id: mine.id});
+                // ↶ Annuler juste après l’étape 1 : le dossier est supprimé
+                await pg.evaluate(() => window.LCNDA_EXT.succDroit.wizard()); await pg.waitForSelector('.sd-wiz [data-wnext]');
+                await pg.evaluate(() => { document.querySelector('.sd-wiz [name=deceased_id]').value = '1'; });
+                await pg.click('.sd-wiz [data-wnext]'); await pg.waitForFunction(() => /Étape 2 sur 4/.test(document.querySelector('.sd-wiz')?.textContent || ''));
+                await pg.evaluate(() => [...[...document.querySelectorAll('.ui-toast')].filter(x => /Dossier ouvert/.test(x.textContent)).at(-1).querySelectorAll('button')].find(x => /Annuler/.test(x.textContent)).click()); await pg.waitForTimeout(800);
+                assert.equal(await pg.$('.sd-wiz'), null, '↶ ferme le pas à pas');
+                assert.ok(!(await get('list')).items.some(c => /Louis MAZAUD/.test(c.title || '')), '↶ supprime le dossier');
+                await pg.evaluate(() => window.LCNDA_EXT.successoral.openCase(0)); await pg.waitForTimeout(500);
+                await pg.click('[data-succ-open]'); await pg.waitForSelector('[data-succ-tab="droit"]'); await pg.click('[data-succ-tab="droit"]'); await pg.waitForSelector('.sd [data-sd-noto]');
+                await pg.fill('.sd [data-sd-noto]', 'Suzanne MAZAUD 1/3\nInconnu DUPONT 1/6'); await pg.dispatchEvent('.sd [data-sd-noto]', 'change'); await pg.waitForTimeout(400);
+                const tx = await pg.textContent('.sd'); assert.match(tx, /pareil/); assert.match(tx, /pas dans l’acte/); assert.match(tx, /Inconnu DUPONT/);
+                await pg.click('[data-succ-tab="notary"]'); await pg.waitForSelector('[data-sd-wp]');
+                assert.equal(await pg.evaluate(() => typeof window.LCNDA_EXT.openTextDoc), 'function');
+                await noSide(pg); assert.deepEqual(errs, []); await ctx.close();
+            });
             await t('héritiers : parts, total 1, autre hypothèse, liens Légifrance ; arbre ; notaire ; ⋯ de la fiche ; modèles du traitement de texte seulement en usage successoral', async () => {
                 const { ctx, pg, errs } = await open(1440, 900, false, '#successoral');
                 await pg.evaluate(() => { localStorage.setItem('lcnda-succ-tab', JSON.stringify('heirs')); });

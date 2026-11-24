@@ -65,6 +65,17 @@ t('en cascade : un héritier mort après le défunt passe sa part à ses hériti
     assert.equal(C.steps.length, 1); assert.equal(C.steps[0].from, 3);
     same(C.shares.map(s => [s.id, X.str(s.share)]).sort(), [[4, '1/2'], [5, '1/4'], [6, '1/4']]); assert.equal(C.total, '1');
 });
+t('en cascade : « mort après » noté à la main (sans date) compte aussi', () => {
+    const f = fam().P(1, 'Pierre', 'm', 1920, '2010-05-01').P(3, 'Jean', 'm', 1950).P(4, 'Louise', 'f', 1952).P(5, 'Paul', 'm', 1975).kid(3, 1).kid(4, 1).kid(5, 3);
+    const R = run(f.g, 1, '2010-05-01'), sh = R.rows.filter(r => r.share !== '0').map(r => ({id: r.id, share: r.share}));
+    assert.equal(X.cascade(sh, f.g, {deathDate: '2010-05-01', compute: (g, o) => S.compute(g, o)}).steps.length, 0, 'sans la note : rien');
+    const C = X.cascade(sh, f.g, {deathDate: '2010-05-01', after: [3], compute: (g, o) => S.compute(g, o)});
+    assert.equal(C.steps.length, 1); assert.equal(C.steps[0].from, 3); assert.equal(C.total, '1');
+});
+t('acte de notoriété : 1/3, 25 %, « la moitié » comparés ; manquants et en trop', () => {
+    const N = X.notoriete('Suzanne MAZAUD, la moitié\nAndré MAZAUD 1/4\nClaire Mazaud 16,67 %\nInconnu DUPONT 1/6', [{id: 1, name: 'Suzanne MAZAUD', share: '1/2'}, {id: 2, name: 'André MAZAUD', share: '1/3'}, {id: 3, name: 'Claire MAZAUD', share: '1/6'}, {id: 4, name: 'Emma MAZAUD', share: '1/12'}]);
+    same(N.rows.map(r => r.state), ['same', 'diff', 'same', 'missing']); same(N.extra, ['Inconnu DUPONT 1/6']);
+});
 t('réserve : 1 enfant ½, 2 enfants ⅔, 3 et plus ¾ ; conjoint seul ¼', () => {
     same([X.reserveOf(1, false), X.reserveOf(2, false), X.reserveOf(3, false), X.reserveOf(5, false), X.reserveOf(0, true), X.reserveOf(0, false)].map(X.str), ['1/2', '2/3', '3/4', '3/4', '1/4', '0']);
 });

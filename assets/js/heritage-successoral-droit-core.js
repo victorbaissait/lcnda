@@ -170,9 +170,9 @@
      * cascade(shares, graph, {deathDate, compute(graph, opts) (le moteur), depth}) : un héritier mort APRÈS le défunt passe sa part à ses héritiers.
      * → {shares: [{id, share, via: [ids]}], steps: [{from, date, to: [{id, share}]}]}
      */
-    function cascade(shares, graph, {deathDate = '', compute, depth = 2, t = T0} = {}) {
-        const P = graph.persons || {}, steps = [];
-        const deadAfter = id => { const d = P[id]?.death; const dd = d?.date || (d?.year ? String(d.year) : ''); return dd && dkey(dd) > dkey(deathDate) ? dd : ''; };
+    function cascade(shares, graph, {deathDate = '', compute, depth = 2, after = [], t = T0} = {}) { // after : ids notés « mort après » (sans date : le lendemain du défunt)
+        const P = graph.persons || {}, steps = [], forced = new Set(after.map(Number));
+        const deadAfter = id => { const d = P[id]?.death; const dd = d?.date || (d?.year ? String(d.year) : ''); if (dd && dkey(dd) > dkey(deathDate)) return dd; return forced.has(Number(id)) && deathDate ? deathDate : ''; };
         const go = (list, level, seen) => {
             const out = [];
             list.forEach(s => {
@@ -201,5 +201,19 @@
         return out;
     }
 
-    return {F, parse, str, num, REGIMES, regimeOf, filiationOf, historical, reserveOf, liberalites, regime, ABAT, BAREME, lienOf, droits, delais, cascade, abroad};
+    /* ═════ 📄 comparer avec l'acte de notoriété (le texte collé : un héritier par ligne, son nom et sa part) ═════ */
+    const foldName = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim();
+    function notoriete(text, rows) {
+        const found = String(text || '').split(/\n+/).map(l => { const m = l.match(/(\d+)\s*\/\s*(\d+)|(\d+(?:[.,]\d+)?)\s*%|(moiti[eé]|tiers|quart|totalit[eé]|tout)/i), w = {moitie: '1/2', tiers: '1/3', quart: '1/4', totalite: '1', tout: '1'};
+            const fr = !m ? null : m[1] ? str(F(BigInt(m[1]), BigInt(m[2]))) : m[3] ? null : w[foldName(m[4])] || null, pc = m && m[3] ? Number(m[3].replace(',', '.')) : null;
+            return {line: l.trim(), name: foldName(l.replace(/\d+\s*\/\s*\d+|\d+(?:[.,]\d+)?\s*%/g, '')), fr, pc}; }).filter(x => x.line);
+        const out = rows.filter(r => r.share !== '0').map(r => { const n = foldName(r.name), words = n.split(' ').filter(w => w.length > 2);
+            const hit = found.find(f => words.length && words.every(w => f.name.includes(w)));
+            const ok = hit ? (hit.fr ? hit.fr === r.share : hit.pc !== null ? Math.abs(hit.pc - num(parse(r.share)) * 100) < .02 : null) : null;
+            return {id: r.id, name: r.name, share: r.share, act: hit ? (hit.fr || (hit.pc !== null ? `${hit.pc} %` : '?')) : '', state: !hit ? 'missing' : ok === null ? 'unknown' : ok ? 'same' : 'diff'}; });
+        const extra = found.filter(f => !rows.some(r => { const words = foldName(r.name).split(' ').filter(w => w.length > 2); return words.length && words.every(w => f.name.includes(w)); }) && (f.fr || f.pc !== null)).map(f => f.line);
+        return {rows: out, extra};
+    }
+
+    return {notoriete, F, parse, str, num, REGIMES, regimeOf, filiationOf, historical, reserveOf, liberalites, regime, ABAT, BAREME, lienOf, droits, delais, cascade, abroad};
 });

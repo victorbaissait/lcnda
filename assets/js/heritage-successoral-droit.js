@@ -32,6 +32,14 @@
         const ic = out.findIndex(t => t[0] === 'contacts'); out.splice(ic + 1, 0, ['suivi', '🗂 Suivi des héritiers']);
         return out;
     };
+    const prevAfter = SP.after;
+    SP.after = (tab, body, D, R, P_) => {
+        try { prevAfter?.(tab, body, D, R, P_); } catch (e) { console.error(e); }
+        if (tab !== 'notary' || hidden() || !ext.openTextDoc || !ext.textDocTools?.dataOf) return;
+        const pv = body.querySelector('.succ-npreview'); if (!pv || body.querySelector('[data-sd-wp]')) return;
+        pv.insertAdjacentHTML('beforebegin', `<p><button type="button" class="button small secondary" data-sd-wp>📝 ${esc(T('Dans le traitement de texte (modifiable, puis Word ou PDF)'))}</button></p>`);
+        body.querySelector('[data-sd-wp]').addEventListener('click', () => ext.openTextDoc({data: ext.textDocTools.dataOf(pv.innerHTML), name: T('Dévolution — {t}', {t: D.title || ''})}));
+    };
     SP.tab = (k, body, D, R, P_) => { if (k === 'droit') return tabDroit(body, D, R); if (k === 'suivi') return tabSuivi(body, D, R); return prevTab?.(k, body, D, R, P_); };
 
     /* ═════ ce que le dossier garde ═════ */
@@ -56,7 +64,7 @@
         const regime = dr.law === 'today' ? 'today' : X.regimeOf(R.deathDate || D.death_iso);
         const H = X.historical(R, D.graph, {overrides: Object.fromEntries(Object.entries(dr.filiation).map(([k, v]) => [k, {filiation: v}])), regime, recompute: e => recompute(D, e), t: T});
         let shares = H.shares.filter(s => !s.usufruct || s.share.n);
-        const C = dr.cascade !== false ? X.cascade(shares, D.graph, {deathDate: R.deathDate || D.death_iso, compute: (g, o) => recompute(D, o), t: T}) : null;
+        const C = dr.cascade !== false ? X.cascade(shares, D.graph, {deathDate: R.deathDate || D.death_iso, compute: (g, o) => recompute(D, o), after: Object.entries(D.overrides || {}).filter(([, o]) => o.status === 'dead_after').map(([k]) => Number(k)), t: T}) : null;
         if (C && C.steps.length) shares = C.shares;
         const rowOf = id => R.rows.find(r => r.id === Number(id)) || {};
         const kids = R.order === 1 ? R.rows.filter(r => r.a === 0 && r.b === 1) : [];
@@ -77,6 +85,9 @@
                 ${H.notes.map(n => `<p class="muted">• ${esc(n)}</p>`).join('')}${H.warnings.map(w => notice('warn', esc(w))).join('')}
                 ${kids.length && regime !== 'today' && regime !== 'y2002' ? `<h4>${esc(T('La filiation des enfants (déduite des mariages, à corriger)'))}</h4><table class="sd-t"><tbody>${kids.map(k => { const f = X.filiationOf(D.graph, D.deceased_id, k.id, Object.fromEntries(Object.entries(dr.filiation).map(([a, b]) => [a, {filiation: b}]))); return `<tr><td>${esc(k.name)}</td><td><select data-sd-fil="${k.id}" ${ro ? 'disabled' : ''}>${[['legitime', 'Légitime (né du mariage)'], ['naturelle', 'Naturel (parents non mariés)'], ['adulterine', 'Adultérin (un parent marié à quelqu’un d’autre)']].map(([v, l]) => `<option value="${v}" ${f === v ? 'selected' : ''}>${esc(T(l))}</option>`).join('')}</select></td></tr>`; }).join('')}</tbody></table>` : ''}
                 <table class="sd-t"><thead><tr><th>${esc(T('Héritier'))}</th><th>${esc(T('Lien'))}</th><th>${esc(T('Part'))}</th></tr></thead><tbody>${H.shares.map(s => `<tr><td>${esc(nameOf(D, s.id))}</td><td>${esc(rowOf(s.id).kin || '')}</td><td>${s.usufruct ? esc(T('usufruit de {u}', {u: pct(s.usufruct)})) : `${esc(X.str(s.share))} · ${pct(s.share)}`}</td></tr>`).join('')}</tbody></table></section>
+            ${R.hypotheses?.length ? `<section class="sd-sec"><h3>🔀 ${esc(T('Les hypothèses côte à côte'))}</h3><div class="sd-scroll"><table class="sd-t"><thead><tr><th>${esc(T('Héritier'))}</th><th>${esc(T('Calcul principal'))}</th>${R.hypotheses.map((h, i) => `<th title="${esc(h.label)}">${String.fromCharCode(66 + i)}</th>`).join('')}</tr></thead><tbody>${[...new Set([...R.rows.filter(r => r.share !== '0').map(r => r.id), ...R.hypotheses.flatMap(h => h.shares.map(x => x.id))])].map(id => `<tr><td>${esc(nameOf(D, id))}</td><td>${esc(R.rows.find(r => r.id === id)?.share || '—')}</td>${R.hypotheses.map(h => `<td>${esc(h.shares.find(x => x.id === id)?.share || '—')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${R.hypotheses.map((h, i) => `<p class="muted">${String.fromCharCode(66 + i)} : ${esc(h.label)}</p>`).join('')}</section>` : ''}
+            <section class="sd-sec"><h3>📄 ${esc(T('Comparer avec l’acte de notoriété'))}</h3><p class="muted">${esc(T('Colle la liste des héritiers de l’acte (un par ligne, avec sa part : « Jean MAZAUD 1/4 », « 25 % », « la moitié ») : l’app compare avec son calcul.'))}</p>
+                <textarea data-sd-noto rows="3" placeholder="Jean MAZAUD 1/4">${esc(m.noto || '')}</textarea>${m.noto ? (() => { const N = X.notoriete(m.noto, R.rows); return `<table class="sd-t"><thead><tr><th>${esc(T('Héritier'))}</th><th>${esc(T('Calcul'))}</th><th>${esc(T('Acte'))}</th><th></th></tr></thead><tbody>${N.rows.map(r => `<tr><td>${esc(r.name)}</td><td>${esc(r.share)}</td><td>${esc(r.act || '—')}</td><td>${r.state === 'same' ? badge(T('pareil'), 'green') : r.state === 'diff' ? badge(T('différent'), 'red') : r.state === 'missing' ? badge(T('pas dans l’acte'), 'yellow') : badge(T('part illisible'), 'grey')}</td></tr>`).join('')}</tbody></table>${N.extra.length ? notice('warn', esc(T('Dans l’acte mais pas dans le calcul : {l}', {l: N.extra.join(' ; ')}))) : ''}`; })() : ''}</section>
             <section class="sd-sec"><h3>🔗 ${esc(T('Les successions en cascade'))}</h3>
                 <label class="ui-toggle"><input type="checkbox" data-sd="cascade" ${dr.cascade !== false ? 'checked' : ''} ${ro ? 'disabled' : ''}><i></i>${esc(T('Un héritier mort après le défunt : sa part passe à ses propres héritiers'))}</label>
                 ${C && C.steps.length ? `${C.steps.map(st => `<p>• ${esc(T('{n}, mort le {d} : sa part va à {to}.', {n: nameOf(D, st.from), d: st.date, to: st.to.map(x => `${nameOf(D, x.id)} (${x.share})`).join(', ')}))}</p>`).join('')}<table class="sd-t"><thead><tr><th>${esc(T('Qui reçoit au bout du compte'))}</th><th>${esc(T('Part'))}</th></tr></thead><tbody>${C.shares.map(s => `<tr><td>${esc(nameOf(D, s.id))}${s.via?.length ? ` <small class="muted">${esc(T('par {v}', {v: s.via.map(v => nameOf(D, v)).join(' → ')}))}</small>` : ''}</td><td>${esc(X.str(s.share))} · ${pct(s.share)}</td></tr>`).join('')}</tbody></table>` : `<p class="muted">${esc(T('Aucun héritier mort après le défunt.'))}</p>`}</section>
@@ -112,6 +123,7 @@
         body.querySelectorAll('[data-sd-fil]').forEach(el => el.addEventListener('change', () => setDr('filiation', {...droitOf(D).filiation, [el.dataset.sdFil]: el.value}, T('Filiation changée.'))));
         body.querySelectorAll('[data-sd-hand]').forEach(el => el.addEventListener('change', () => { const id = Number(el.dataset.sdHand), h = droitOf(D).handicap.filter(x => x !== id); if (el.checked) h.push(id); setDr('handicap', h, ''); }));
         body.querySelectorAll('[data-sdm]').forEach(el => el.addEventListener('change', () => { m[el.dataset.sdm] = el.value; redraw(); }));
+        body.querySelector('[data-sd-noto]')?.addEventListener('change', e => { m.noto = e.target.value; redraw(); });
         body.querySelectorAll('[data-sdl]').forEach(el => el.addEventListener('change', () => { const [list, i, k] = el.dataset.sdl.split('|'); m[list][Number(i)][k] = el.type === 'checkbox' ? el.checked : el.value; redraw(); }));
         body.querySelectorAll('[data-sdadd]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.sdadd; m[k].push(k === 'donations' ? {to: R.rows[0]?.id || 0, amount: '', hors: false} : {to: R.rows[0]?.id || 0, kind: 'amount', amount: '', fraction: ''}); redraw(); }));
         body.querySelectorAll('[data-sddel]').forEach(b => b.addEventListener('click', () => { const [k, i] = b.dataset.sddel.split('|'); const was = m[k].splice(Number(i), 1)[0]; redraw(); A().undoToast?.(T('Ligne enlevée.'), {undo: () => { m[k].splice(Number(i), 0, was); redraw(); }}); }));
@@ -164,7 +176,51 @@
         dg.addEventListener('cancel', e => { e.preventDefault(); done(); });
     }
 
-    ext.succDroit = {tabDroit, tabSuivi, sourcesDialog, STAGES, SOURCES};
+    /* ═════ 🧭 un nouveau dossier pas à pas : 1 le défunt, 2 la famille trouvée, 3 les doutes, 4 les héritiers ═════ */
+    const STEPS = ['Le défunt', 'La famille trouvée', 'Les doutes', 'Les héritiers'];
+    const STATUS_CHOICES = [['alive', '✓ Vivant au décès'], ['dead_before', '✝ Mort avant'], ['dead_after', '✝ Mort après'], ['unknown', '? On ne sait pas']];
+    async function wizard() {
+        if (hidden()) return A().toast(T('Pas en mode consultation ni en mode simple.'));
+        const P = window.LCNDA_PICKER || window.LCNDA_APP;
+        let step = 0, D = null, R = null, created = 0;
+        const dg = document.createElement('dialog'); dg.className = 'modal sd-wiz'; dg.innerHTML = '<div class="sd-wroot"></div>'; document.body.appendChild(dg); const root = dg.firstChild; // le message « ↶ Annuler » se met dans la fenêtre : on ne la réécrit pas en entier
+        const load = async () => { D = await A().api('successoral', {op: 'get', id: created}); const ov = {}, sp = {}; for (const [k, o] of Object.entries(D.overrides || {})) { if (o.status || o.adoption) ov[k] = {status: o.status, adoption: o.adoption}; if (o.spouse) sp[k] = o.spouse; } R = S().compute(D.graph, {deceasedId: D.deceased_id, deathDate: D.death_iso || '', overrides: ov, spouse: sp, t: T}); };
+        const ORD = {0: 'Aucun héritier trouvé', 1: '1er ordre : les descendants', 2: '2e ordre : parents, frères et sœurs', 3: '3e ordre : les autres ascendants', 4: '4e ordre : oncles, tantes, cousins'};
+        function paint() {
+            const head = `<div class="modal-head"><div><span class="eyebrow">🧭 ${esc(T('Nouveau dossier, pas à pas'))} · ${esc(T('Étape {i} sur {n}', {i: String(step + 1), n: '4'}))}</span><h2>${esc(T(STEPS[step]))}</h2></div><button type="button" class="icon-button" data-wx aria-label="${esc(T('Fermer'))}">×</button></div>
+                <ol class="sd-wsteps">${STEPS.map((s, i) => `<li class="${i === step ? 'is-on' : i < step ? 'is-done' : ''}">${i < step ? '✓' : i + 1}. ${esc(T(s))}</li>`).join('')}</ol>`;
+            let body = '';
+            if (step === 0) body = `<div class="form-grid"><div class="span-2"><span class="pk-lab">${esc(T('La personne décédée'))}</span>${P.pickerField({name: 'deceased_id', kind: 'person', animals: false, value: null})}</div>
+                <label>${esc(T('Date du décès (vide : celle de la fiche)'))}<input name="death_date_text" maxlength="120"></label><label>${esc(T('Dernier domicile'))}<input name="last_address" maxlength="400"></label></div>
+                <p class="ui-hint">${esc(T('Le dossier s’ouvre à l’étape suivante ; ↶ Annuler le supprime.'))}</p>`;
+            if (step === 1) { const heirs = R.rows.filter(r => r.share !== '0'), unk = R.rows.filter(r => r.unknown);
+                body = `<p><b>${esc(T(ORD[R.order] || ''))}</b>${R.spouse ? ` · ${esc(T('avec un conjoint'))}` : ''}</p><p>${esc(T('{n} héritiers trouvés, {u} dont on ne sait pas s’ils vivaient au décès.', {n: String(heirs.length), u: String(unk.length)}))}</p>
+                    ${R.notes.map(n => `<p class="muted">• ${esc(n)}</p>`).join('')}${R.search?.length ? `<p class="muted">${esc(T('{n} recherches à faire (adresses, dates, branches) : elles seront dans le dossier.', {n: String(R.search.length)}))}</p>` : ''}`; }
+            if (step === 2) { const unk = R.rows.filter(r => r.unknown || r.baseTiming === 'unknown');
+                body = unk.length ? `<p>${esc(T('Pour chacun, ce qu’on sait au jour du décès. Le calcul se refait à chaque choix.'))}</p><table class="sd-t"><tbody>${unk.map(r => `<tr><td><b>${esc(r.name)}</b><br><small class="muted">${esc(r.kin)}${r.years ? ` · ${esc(r.years)}` : ''}</small></td><td>${STATUS_CHOICES.map(([v, l]) => `<button type="button" class="button small ${D.overrides?.[r.id]?.status === v ? '' : 'secondary'}" data-wst="${r.id}|${v}">${esc(T(l))}</button>`).join(' ')}</td></tr>`).join('')}</tbody></table>${R.hypotheses?.length ? `<p class="muted">${esc(T('Sans réponse, le dossier garde les hypothèses ({n}) côte à côte.', {n: String(R.hypotheses.length)}))}</p>` : ''}` : `<p>✓ ${esc(T('Aucun doute : chaque héritier a un statut connu.'))}</p>`; }
+            if (step === 3) body = `<table class="sd-t"><thead><tr><th>${esc(T('Héritier'))}</th><th>${esc(T('Lien'))}</th><th>${esc(T('Part'))}</th></tr></thead><tbody>${R.rows.filter(r => r.share !== '0').map(r => `<tr><td>${esc(r.name)}${r.unknown ? ' ' + badge(T('vivant ?'), 'yellow') : ''}</td><td>${esc(r.kin)}</td><td>${esc(r.share)} · ${esc(String(r.pct).replace('.', ','))} %</td></tr>`).join('')}</tbody></table>${R.totalOk ? '' : notice('warn', esc(T('Le total ne fait pas 1 : il manque sans doute des personnes.')))}`;
+            root.innerHTML = `<form method="dialog">${head}<div class="sd-wbody">${body}</div><div class="modal-actions">${step ? `<button type="button" class="button secondary" data-wprev>← ${esc(T('Retour'))}</button>` : ''}<span class="spacer"></span><button type="button" class="button" data-wnext>${step === 3 ? esc(T('Ouvrir le dossier')) : `${esc(T('Suivant'))} →`}</button></div></form>`;
+        }
+        paint(); dg.showModal();
+        const close = () => { dg.close(); dg.parentNode?.removeChild(dg); };
+        dg.addEventListener('cancel', e => { e.preventDefault(); close(); if (created) ext.successoral?.openCase?.(created); });
+        dg.addEventListener('click', async e => {
+            if (e.target.closest('[data-wx]')) { close(); if (created) ext.successoral?.openCase?.(created); return; }
+            if (e.target.closest('[data-wprev]')) { step = Math.max(created ? 1 : 0, step - 1); return paint(); }
+            const st = e.target.closest('[data-wst]'); if (st) { const [pid, v] = st.dataset.wst.split('|'); try { await post({op: 'override', case_id: created, person_id: Number(pid), field: 'status', value: v}); await load(); paint(); } catch (err) { A().toast(err.message, 'error'); } return; }
+            if (!e.target.closest('[data-wnext]')) return;
+            if (step === 0) {
+                const f = dg.querySelector('form'), did = Number(f.querySelector('[name=deceased_id]')?.value) || 0; if (!did) return A().toast(T('Choisis la personne décédée.'), 'error');
+                const body = {op: 'save', id: 0, deceased_id: did, last_address: f.querySelector('[name=last_address]').value}; const dt = f.querySelector('[name=death_date_text]').value.trim(); if (dt) body.death_date_text = dt;
+                try { const r = await post(body); created = r.id; } catch (err) { return A().toast(err.message, 'error'); }
+                A().undoToast?.(T('Dossier ouvert'), {undo: async () => { await post({op: 'delete', id: created}); close(); ext.successoral?.openCase?.(0); }});
+                await load(); step = 1; return paint();
+            }
+            if (step < 3) { step++; return paint(); }
+            close(); ext.successoral?.openCase?.(created, 'heirs');
+        });
+    }
+    ext.succDroit = {tabDroit, tabSuivi, sourcesDialog, wizard, STAGES, SOURCES};
     if (!document.getElementById('sd-css')) { const st = document.createElement('style'); st.id = 'sd-css'; st.textContent = `
 .sd{display:grid;gap:14px}.sd-sec{border:2px solid var(--ink,#111);padding:10px 14px;background:var(--surface,#fff)}.sd-sec h3{margin:0 0 8px}.sd-sec h4{margin:12px 0 6px;font-size:13px}
 .sd-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px 14px;align-items:end}.sd-grid label{display:grid;gap:3px;font-size:13px}
@@ -174,6 +230,8 @@
 .sd-col{background:var(--surface-2,#f4f5f7);border:2px solid var(--line,#c9ced8);padding:8px;min-height:160px}.sd-col.is-over{border-color:var(--accent,#055dff)}.sd-col h4{margin:0 0 8px;font-size:13px}.sd-col h4 small{color:var(--muted,#666)}
 .sd-card{background:var(--surface,#fff);border:2px solid var(--ink,#111);padding:8px;margin-bottom:8px;display:grid;gap:4px;cursor:grab}.sd-card.is-drag{opacity:.5}.sd-card small{font-size:11.5px}
 .sd-next{margin:0;font-size:12.5px}.sd-late{margin:0;color:#c62828;font-weight:700;font-size:12.5px}.sd-cardact{display:flex;gap:4px;flex-wrap:wrap}.sd-cardact select{flex:1;min-width:0;font-size:12px}
+.sd-wiz{width:min(860px,96vw)}.sd-wsteps{display:flex;gap:6px;flex-wrap:wrap;list-style:none;padding:0;margin:0 0 12px}.sd-wsteps li{border:2px solid var(--line,#c9ced8);padding:3px 8px;font-size:12.5px}.sd-wsteps li.is-on{border-color:var(--accent,#055dff);font-weight:700}.sd-wsteps li.is-done{color:var(--muted,#666)}.sd-wbody{min-height:160px}
+.sd-scroll{overflow-x:auto}[data-sd-noto]{width:100%}
 .sd-srcadd{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.sd-srcdlg{width:min(900px,96vw)}
 @media (max-width:900px){.sd-kanban{grid-template-columns:repeat(5,220px)}}
 `; document.head.appendChild(st); }
