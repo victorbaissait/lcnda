@@ -1,0 +1,835 @@
+fr ¦ sk ¦ nb
+Le texte est vide : écris ou lis d’abord l’acte. ¦ Text je prázdny: najprv záznam napíš alebo prečítaj. ¦ Teksten er tom: skriv eller les akten først.
+Aucune personne repérée dans le texte pour l’instant. ¦ V texte sa zatiaľ nenašla žiadna osoba. ¦ Ingen personer funnet i teksten ennå.
+Personnes — {t} ¦ Osoby — {t} ¦ Personer — {t}
+L’envoi vers les autres outils n’est pas chargé. ¦ Odosielanie do ďalších nástrojov nie je načítané. ¦ Send til andre verktøy er ikke lastet inn.
+L’image de l’acte ¦ Obrázok záznamu ¦ Bildet av akten
+Le texte de la transcription ¦ Text prepisu ¦ Teksten i transkripsjonen
+Les personnes repérées (tableau) ¦ Nájdené osoby (tabuľka) ¦ Funne personer (tabell)
+Envoyer vers… ¦ Poslať do… ¦ Send til…
+Transcription — {t} ¦ Prepis — {t} ¦ Transkripsjon — {t}
+Signature — {t} ¦ Podpis — {t} ¦ Underskrift — {t}
+L’export Word n’est pas chargé. ¦ Export do Wordu nie je načítaný. ¦ Word-eksporten er ikke lastet inn.
+Éclaircir / restaurer l’image ¦ Zosvetliť / obnoviť obrázok ¦ Lys opp / gjenopprett bildet
+le texte mis en page, à ouvrir dans Word ou LibreOffice (.docx) ¦ formátovaný text na otvorenie vo Worde alebo LibreOffice (.docx) ¦ den formaterte teksten, til å åpne i Word eller LibreOffice (.docx)
+Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net ¦ Otvoriť tento podpis v „Podpisy a pečate“: papier zmizne, atrament sa zmení na čistú čiaru ¦ Åpne underskriften i «Underskrifter og segl»: papiret forsvinner, blekket blir en skarp strek
+Détourer la signature ¦ Vyrezať podpis ¦ Frilegg underskriften
++ {n} autres : zoome pour les voir. ¦ + {n} ďalších: priblíž, aby si ich videl. ¦ + {n} til: zoom inn for å se dem.
+1 case repérée ¦ 1 označené pole ¦ 1 markert boks
+1 lieu pas sur la carte ¦ 1 miesto nie je na mape ¦ 1 sted er ikke på kartet
+Affiche d’abord un arbre. ¦ Najprv zobraz strom. ¦ Vis et tre først.
+Ajouter la mère ¦ Pridať matku ¦ Legg til moren
+Ajouter le père ¦ Pridať otca ¦ Legg til faren
+Ajouter l’autre parent ¦ Pridať druhého rodiča ¦ Legg til den andre forelderen
+Aller à un lieu… ¦ Prejsť na miesto… ¦ Gå til et sted…
+Ancêtres (Sosa) ¦ Predkovia (Sosa) ¦ Aner (Sosa)
+Ancêtres (Sosa) sur {n} générations ¦ Predkovia (Sosa) za {n} generácií ¦ Aner (Sosa) over {n} generasjoner
+Ascendants de {nm} ¦ Predkovia osoby {nm} ¦ Aner til {nm}
+Au zoom faible, les points proches deviennent une pastille avec leur nombre ¦ Pri malom priblížení sa blízke body spoja do krúžku s ich počtom ¦ Ved lav zoom blir punkter som ligger nær hverandre til en merke med antallet
+Aucune carte à exporter. ¦ Žiadna mapa na export. ¦ Ingen kart å eksportere.
+Aucune donnée. ¦ Žiadne údaje. ¦ Ingen data.
+Aucune naissance d’ancêtre n’a de lieu placé sur la carte. ¦ Žiadne narodenie predka nemá miesto umiestnené na mape. ¦ Ingen anefødsel har et sted plassert på kartet.
+Branche : {x} ¦ Vetva: {x} ¦ Gren: {x}
+CARTE · {x} ¦ MAPA · {x} ¦ KART · {x}
+Centre de gravité (G1 = la personne de départ) ¦ Ťažisko (G1 = východisková osoba) ¦ Tyngdepunkt (G1 = startpersonen)
+Centrer la carte sur un lieu et ouvrir sa bulle ¦ Vycentrovať mapu na miesto a otvoriť jeho bublinu ¦ Sentrer kartet på et sted og åpne boblen
+Chargement du graphique… ¦ Načítava sa graf… ¦ Laster inn diagrammet…
+Choisis d’abord la personne de départ (Sosa 1). ¦ Najprv vyber východiskovú osobu (Sosa 1). ¦ Velg først startpersonen (Sosa 1).
+Colorer les cases : une étiquette, une branche, ou les fiches sans source ¦ Zafarbiť polia: štítok, vetva alebo karty bez zdroja ¦ Farg boksene: en etikett, en gren eller oppføringer uten kilde
+Dans cette zone ¦ V tejto oblasti ¦ I dette området
+Dans la fenêtre d’impression, choisis « Enregistrer en PDF ». ¦ V okne tlače vyber „Uložiť ako PDF“. ¦ I utskriftsvinduet velger du «Lagre som PDF».
+De {a} à {b} ¦ Od {a} do {b} ¦ Fra {a} til {b}
+Depuis {a} ¦ Od {a} ¦ Fra {a}
+Famille de {nm} ¦ Rodina osoby {nm} ¦ Familien til {nm}
+Feuilles en largeur ¦ Listov na šírku ¦ Ark i bredden
+GRAPHIQUES ¦ GRAFY ¦ DIAGRAMMER
+Grand arbre à assembler ¦ Veľký strom na zloženie ¦ Stort tre til å sette sammen
+Génération {g} : {n}{y} ¦ Generácia {g}: {n}{y} ¦ Generasjon {g}: {n}{y}
+Image impossible avec ce fond de carte : choisis PDF. ¦ S týmto podkladom mapy nemožno vytvoriť obrázok: vyber PDF. ¦ Bilde er ikke mulig med dette bakgrunnskartet: velg PDF.
+Imprime à 100 % (sans « ajuster à la page »). ¦ Tlač na 100 % (bez „prispôsobiť strane“). ¦ Skriv ut i 100 % (uten «tilpass til siden»).
+Imprimer ce graphique (⌘P) ¦ Vytlačiť tento graf (⌘P) ¦ Skriv ut diagrammet (⌘P)
+Imprimer la carte affichée (⌘P) ¦ Vytlačiť zobrazenú mapu (⌘P) ¦ Skriv ut kartet som vises (⌘P)
+Imprimer l’arbre en grand, sur plusieurs feuilles A4 ou A3 à assembler ¦ Vytlačiť strom vo veľkom na niekoľko listov A4 alebo A3 na zloženie ¦ Skriv ut treet i stort format på flere A4- eller A3-ark som settes sammen
+Inhumations ¦ Pohreby ¦ Begravelser
+Jusqu’à {b} ¦ Do {b} ¦ Til {b}
+La liste des événements visibles, qui suit la carte ¦ Zoznam viditeľných udalostí, ktorý sleduje mapu ¦ Listen over synlige hendelser, som følger kartet
+La photo de la fiche dans chaque case ¦ Fotka karty v každom poli ¦ Oppføringens bilde i hver boks
+Latitude ¦ Zemepisná šírka ¦ Breddegrad
+Les chiffres : {t} ¦ Čísla: {t} ¦ Tallene: {t}
+Les couleurs des sortes d’événements et la période ¦ Farby druhov udalostí a obdobie ¦ Fargene for hendelsestyper og perioden
+Les {n} premiers. ¦ Prvých {n}. ¦ De {n} første.
+Longitude ¦ Zemepisná dĺžka ¦ Lengdegrad
+L’arbre est découpé en feuilles qui se recouvrent un peu : coupe, pose sur la voisine en faisant coïncider les croix, colle. ¦ Strom je rozdelený na listy, ktoré sa trochu prekrývajú: odstrihni, polož na susedný tak, aby sa krížiky kryli, a prilep. ¦ Treet deles i ark som overlapper litt: klipp, legg på naboarket slik at kryssene passer, og lim.
+L’impression en feuilles n’est pas disponible ici. ¦ Tlač na listy tu nie je k dispozícii. ¦ Utskrift på flere ark er ikke tilgjengelig her.
+Masquer cette branche ¦ Skryť túto vetvu ¦ Skjul denne grenen
+Montrer cette branche ¦ Ukázať túto vetvu ¦ Vis denne grenen
+Même échelle des deux côtés (le plus grand = {m}). ¦ Rovnaká mierka na oboch stranách (najväčšie = {m}). ¦ Samme skala på begge sider (størst = {m}).
+Nom : {x} ¦ Meno: {x} ¦ Navn: {x}
+PNG, JPG, PDF ou CSV de la carte affichée ¦ PNG, JPG, PDF alebo CSV zobrazenej mapy ¦ PNG, JPG, PDF eller CSV av kartet som vises
+Plan d’assemblage ¦ Plán skladania ¦ Monteringsplan
+Plan d’assemblage en première page ¦ Plán skladania na prvej strane ¦ Monteringsplan på første side
+Pose les feuilles dans l’ordre du plan : A1 en haut à gauche. ¦ Rozlož listy v poradí plánu: A1 vľavo hore. ¦ Legg arkene i planens rekkefølge: A1 øverst til venstre.
+Pose-la sur sa voisine jusqu’au pointillé, en faisant coïncider les croix ⊕, puis colle. ¦ Polož ho na susedný až po bodkovanú čiaru tak, aby sa krížiky ⊕ kryli, a prilep. ¦ Legg det på naboarket fram til den stiplede linjen slik at kryssene ⊕ passer, og lim.
+Période : {a} – {b} ¦ Obdobie: {a} – {b} ¦ Periode: {a} – {b}
+Recentrer l’arbre ici ¦ Vycentrovať strom sem ¦ Sentrer treet her
+Recouvrement ¦ Prekrytie ¦ Overlapp
+Repères de collage (✂, pointillés, croix) ¦ Značky na lepenie (✂, bodkované čiary, krížiky) ¦ Limmerker (✂, stiplede linjer, kryss)
+Rien dans le cadre : déplace la carte ou dézoome. ¦ V rámčeku nič nie je: posuň mapu alebo oddiaľ. ¦ Ingenting i rammen: flytt kartet eller zoom ut.
+Rien à imprimer. ¦ Nič na tlač. ¦ Ingenting å skrive ut.
+Sans source (en rouge) ¦ Bez zdroja (červenou) ¦ Uten kilde (i rødt)
+Sosa et côtés : depuis la personne de départ. ¦ Sosa a strany: od východiskovej osoby. ¦ Sosa og sider: fra startpersonen.
+Sur chaque feuille qui n’est pas dans la première colonne ou la première rangée, coupe la marge blanche le long du trait ✂. ¦ Na každom liste, ktorý nie je v prvom stĺpci ani v prvom rade, odstrihni biely okraj pozdĺž čiary ✂. ¦ På hvert ark som ikke er i første kolonne eller første rad, klipper du bort den hvite margen langs streken ✂.
+Un point par génération d’ancêtres (la moyenne des lieux de naissance), reliés par une flèche ¦ Jeden bod za každú generáciu predkov (priemer miest narodenia), spojené šípkou ¦ Ett punkt per anegenerasjon (gjennomsnittet av fødestedene), knyttet sammen med en pil
+Une personne… ¦ Osoba… ¦ En person…
+Voir tous les points (⌘0) ¦ Zobraziť všetky body (⌘0) ¦ Vis alle punkter (⌘0)
+Vue d’ensemble : glisse le cadre pour te déplacer ¦ Celkový pohľad: posúvaj rámček, aby si sa pohyboval ¦ Oversikt: dra rammen for å flytte deg
+au-dessus : {x} ¦ nad: {x} ¦ over: {x}
+deux périodes ¦ dve obdobia ¦ to perioder
+elle seule ¦ len ona ¦ bare vedkommende
+les hommes et les femmes ¦ muži a ženy ¦ mennene og kvinnene
+les événements visibles ¦ viditeľné udalosti ¦ de synlige hendelsene
+rangée {r}, colonne {c} ¦ rad {r}, stĺpec {c} ¦ rad {r}, kolonne {c}
+ses ascendants ¦ jej predkovia ¦ vedkommendes aner
+{e} sans position : clique pour placer leurs lieux ¦ {e} bez polohy: klikni a umiestni ich miesta ¦ {e} uten posisjon: klikk for å plassere stedene deres
+{e} · {p} ¦ {e} · {p} ¦ {e} · {p}
+{n} cases repérées ¦ {n} označených polí ¦ {n} markerte bokser
+{n} feuilles : {c} en largeur, {r} en hauteur. Affiche finie : {w} × {h} cm. ¦ {n} listov: {c} na šírku, {r} na výšku. Hotový plagát: {w} × {h} cm. ¦ {n} ark: {c} i bredden, {r} i høyden. Ferdig plakat: {w} × {h} cm.
+{n} lieux pas sur la carte ¦ {n} miest nie je na mape ¦ {n} steder er ikke på kartet
+{n} événements ¦ {n} udalostí ¦ {n} hendelser
+{n} événements dans {p} lieux : clique pour zoomer ¦ {n} udalostí na {p} miestach: klikni na priblíženie ¦ {n} hendelser på {p} steder: klikk for å zoome
+{what} de {nm} (créer la fiche ou relier une fiche) ¦ {what} osoby {nm} (vytvoriť kartu alebo prepojiť kartu) ¦ {what} til {nm} (opprett oppføringen eller koble til en oppføring)
+{x} se pose ici ¦ {x} sa umiestni sem ¦ {x} plasseres her
+© contributeurs OpenStreetMap ¦ © prispievatelia OpenStreetMap ¦ © OpenStreetMap-bidragsytere
+« {x} » n’a pas encore de position sur la carte. ¦ „{x}“ zatiaľ nemá na mape polohu. ¦ «{x}» har ingen posisjon på kartet ennå.
+Âge {a} – {b} ¦ Vek {a} – {b} ¦ Alder {a} – {b}
+Étiquette : {x} ¦ Štítok: {x} ¦ Etikett: {x}
+à gauche : {x} ¦ vľavo: {x} ¦ til venstre: {x}
+↔ Comparer ¦ ↔ Porovnať ¦ ↔ Sammenlign
+↔ Comparer deux statistiques ¦ ↔ Porovnať dve štatistiky ¦ ↔ Sammenlign to statistikker
+⤓ CSV ¦ ⤓ CSV ¦ ⤓ CSV
+⧉ Copier ¦ ⧉ Kopírovať ¦ ⧉ Kopier
+👁 Montrer les branches masquées ({n}) ¦ 👁 Ukázať skryté vetvy ({n}) ¦ 👁 Vis skjulte grener ({n})
+📊 CSV ¦ 📊 CSV ¦ 📊 CSV
+🖼 Portraits ¦ 🖼 Portréty ¦ 🖼 Portretter
+🧩 Grand format à assembler ¦ 🧩 Veľký formát na zloženie ¦ 🧩 Stort format å sette sammen
+🧮 Voir les chiffres ¦ 🧮 Zobraziť čísla ¦ 🧮 Vis tallene
+🧷 Repères ¦ 🧷 Značky ¦ 🧷 Merker
+moins d’un an ¦ menej ako rok ¦ under ett år
+Âge à cet événement ¦ Vek pri tejto udalosti ¦ Alder ved hendelsen
+Ajoute des dates aux événements des fiches, ou montre d’autres sortes d’événements. ¦ Pridaj dátumy k udalostiam na kartách alebo ukáž iné druhy udalostí. ¦ Legg til datoer på hendelsene i oppføringene, eller vis andre hendelsestyper.
+Voir plus d’années ¦ Zobraziť viac rokov ¦ Vis flere år
+Agrandir une période ¦ Zväčšiť obdobie ¦ Forstørr en periode
+⌘ ou Ctrl + molette : agrandir là où est la souris. ¦ ⌘ alebo Ctrl + koliesko: zväčšiť tam, kde je myš. ¦ ⌘ eller Ctrl + rullehjul: forstørr der musen er.
+1 génération ¦ 1 generácia ¦ 1 generasjon
+Partir de ¦ Začať od ¦ Start fra
+Barres de vie ¦ Pruhy života ¦ Livsstolper
+Âge à chaque événement ¦ Vek pri každej udalosti ¦ Alder ved hver hendelse
+Anomalies en rouge ¦ Nezrovnalosti červenou ¦ Avvik i rødt
+Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ». ¦ Zatiaľ žiadny pohľad: nastav časovú os a potom „💾 Uložiť pohľad“. ¦ Ingen visning ennå: still inn tidslinjen og deretter «💾 Lagre visningen».
+Le monde autour… ¦ Svet okolo… ¦ Verden rundt…
+Chercher dans la frise… (nom, lieu, année) ¦ Hľadať na časovej osi… (meno, miesto, rok) ¦ Søk i tidslinjen… (navn, sted, år)
+Chronologie de {x} ¦ Chronológia osoby {x} ¦ Kronologi for {x}
+Vue « {name} » affichée. ¦ Pohľad „{name}“ zobrazený. ¦ Visningen «{name}» vises.
+Vue « {name} » supprimée ¦ Pohľad „{name}“ zmazaný ¦ Visningen «{name}» slettet
+Partir de cette personne ¦ Začať od tejto osoby ¦ Start fra denne personen
+Comparer avec la personne de départ ¦ Porovnať s východiskovou osobou ¦ Sammenlign med startpersonen
+Copier la ligne ¦ Kopírovať riadok ¦ Kopier linjen
+Supprimer l’événement ¦ Zmazať udalosť ¦ Slett hendelsen
+Événement supprimé ¦ Udalosť zmazaná ¦ Hendelsen slettet
+La frise n’a pas pu se charger. ¦ Časovú os sa nepodarilo načítať. ¦ Tidslinjen kunne ikke lastes inn.
+Choisis un lieu dans la colonne de gauche. ¦ Vyber miesto v ľavom stĺpci. ¦ Velg et sted i venstre kolonne.
+Tout ce qui s’y est passé : naissances, mariages, décès, domiciles… familles comprises. ¦ Všetko, čo sa tam odohralo: narodenia, sobáše, úmrtia, bydliská… vrátane rodín. ¦ Alt som har skjedd der: fødsler, vielser, dødsfall, bosteder … familier medregnet.
+PERSONNE {l} ¦ OSOBA {l} ¦ PERSON {l}
+{n} frises parallèles ¦ {n} súbežných časových osí ¦ {n} parallelle tidslinjer
+{a} événements sur {b} ¦ {a} udalostí z {b} ¦ {a} hendelser av {b}
+Tout ce qui s’est passé à {x}, familles comprises. ¦ Všetko, čo sa odohralo v {x}, vrátane rodín. ¦ Alt som har skjedd i {x}, familier medregnet.
+Événements connus autour de {x}, classés sans modifier la formulation originale des dates. ¦ Známe udalosti okolo {x}, zoradené bez zmeny pôvodného znenia dátumov. ¦ Kjente hendelser rundt {x}, sortert uten å endre datoenes opprinnelige ordlyd.
+Exporter la frise (⌘E) ¦ Exportovať časovú os (⌘E) ¦ Eksporter tidslinjen (⌘E)
+Imprimer la frise (⌘P) ¦ Vytlačiť časovú os (⌘P) ¦ Skriv ut tidslinjen (⌘P)
+Enregistrer la vue ¦ Uložiť pohľad ¦ Lagre visningen
+Rien à exporter. ¦ Nič na export. ¦ Ingenting å eksportere.
+Ce navigateur ne sait pas faire une image de la frise : choisis PDF. ¦ Tento prehliadač nevie z časovej osi urobiť obrázok: vyber PDF. ¦ Denne nettleseren kan ikke lage et bilde av tidslinjen: velg PDF.
+Image impossible : la frise est trop grande. ¦ Obrázok nemožno vytvoriť: časová os je príliš veľká. ¦ Bilde ikke mulig: tidslinjen er for stor.
+tableur ¦ tabuľkový procesor ¦ regneark
+👶 Naissances et baptêmes ¦ 👶 Narodenia a krsty ¦ 👶 Fødsler og dåp
+💍 Mariages et unions ¦ 💍 Sobáše a zväzky ¦ 💍 Vielser og forbindelser
+✝️ Décès et sépultures ¦ ✝️ Úmrtia a pohreby ¦ ✝️ Dødsfall og begravelser
+🔨 Métiers ¦ 🔨 Povolania ¦ 🔨 Yrker
+🏠 Domiciles et départs ¦ 🏠 Bydliská a odchody ¦ 🏠 Bosteder og utflyttinger
+🎖 Militaire ¦ 🎖 Vojenská služba ¦ 🎖 Militært
+📋 Recensements ¦ 📋 Sčítania obyvateľov ¦ 📋 Folketellinger
+📌 Autres ¦ 📌 Ostatné ¦ 📌 Annet
+Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ». ¦ Zatiaľ žiadny pohľad: vyber karty a potom „💾 Uložiť pohľad“. ¦ Ingen visning ennå: velg oppføringene og deretter «💾 Lagre visningen».
+Choisir {x} ¦ Vybrať {x} ¦ Velg {x}
+Inverser A et B ¦ Vymeniť A a B ¦ Bytt om A og B
+L’acte transcrit ¦ Prepísaný záznam ¦ Den transkriberte akten
+Choisir un acte… ¦ Vybrať záznam… ¦ Velg en akt…
+Aucun acte transcrit pour l’instant. ¦ Zatiaľ žiadny prepísaný záznam. ¦ Ingen transkribert akt ennå.
+Personne {l} ¦ Osoba {l} ¦ Person {l}
+Retirer cette fiche de la comparaison ¦ Odobrať túto kartu z porovnania ¦ Fjern oppføringen fra sammenligningen
+Ajouter une fiche ({l}) ¦ Pridať kartu ({l}) ¦ Legg til en oppføring ({l})
+Les actes viennent de Listes → Transcriptions d’actes. ¦ Záznamy pochádzajú zo Zoznamy → Prepisy záznamov. ¦ Aktene kommer fra Lister → Transkripsjoner av akter.
+naissance : {a} / {b} ¦ narodenie: {a} / {b} ¦ fødsel: {a} / {b}
+décès : {a} / {b} ¦ úmrtie: {a} / {b} ¦ død: {a} / {b}
+Parents en commun ¦ Spoloční rodičia ¦ Felles foreldre
+Chargement de la comparaison… ¦ Načítava sa porovnanie… ¦ Laster inn sammenligningen…
+Exporter la comparaison (⌘E) ¦ Exportovať porovnanie (⌘E) ¦ Eksporter sammenligningen (⌘E)
+Imprimer la comparaison (⌘P) ¦ Vytlačiť porovnanie (⌘P) ¦ Skriv ut sammenligningen (⌘P)
+Garder une seule fiche : choisis la valeur de A ou de B ligne à ligne ¦ Ponechať iba jednu kartu: riadok po riadku vyber hodnotu z A alebo B ¦ Behold én oppføring: velg verdien fra A eller B linje for linje
+Fusionner… ¦ Zlúčiť… ¦ Slå sammen…
+Comparer des fiches ¦ Porovnať karty ¦ Sammenlign oppføringer
+Pour décider si deux fiches sont des doublons, des homonymes ou deux branches distinctes. ¦ Aby si rozhodol, či sú dve karty duplikáty, menovci alebo dve odlišné vetvy. ¦ For å avgjøre om to oppføringer er duplikater, navnebrødre eller to ulike grener.
+Sans doute la même personne ¦ Najskôr tá istá osoba ¦ Sannsynligvis samme person
+Peut-être la même personne ¦ Možno tá istá osoba ¦ Kanskje samme person
+Sans doute deux personnes différentes ¦ Najskôr dve rôzne osoby ¦ Sannsynligvis to ulike personer
+rien à comparer ¦ nič na porovnanie ¦ ingenting å sammenligne
+Sexes différents ¦ Rozdielne pohlavie ¦ Ulikt kjønn
+Une aide pour décider, pas une preuve : regarde aussi les sources. ¦ Pomoc pri rozhodovaní, nie dôkaz: pozri sa aj na zdroje. ¦ En hjelp til å bestemme, ikke et bevis: se også på kildene.
+Choisis cette personne dans la colonne de gauche. ¦ Vyber túto osobu v ľavom stĺpci. ¦ Velg denne personen i venstre kolonne.
+Ressemblance avec A : {n} % ¦ Podobnosť s A: {n} % ¦ Likhet med A: {n} %
+Naissance en face de naissance, décès en face de décès ; les lignes différentes sont marquées. ¦ Narodenie oproti narodeniu, úmrtie oproti úmrtiu; odlišné riadky sú označené. ¦ Fødsel mot fødsel, død mot død; ulike linjer er markert.
+Parents : {x} ¦ Rodičia: {x} ¦ Foreldre: {x}
+Conjoints : {x} ¦ Partneri: {x} ¦ Ektefeller: {x}
+Enfants : {x} ¦ Deti: {x} ¦ Barn: {x}
+Fusionner ces deux fiches ¦ Zlúčiť tieto dve karty ¦ Slå sammen de to oppføringene
+Pour chaque ligne, choisis la valeur à garder. Les sources, médias, notes, liens de famille des deux fiches sont tous gardés. ¦ Pri každom riadku vyber hodnotu, ktorú ponecháš. Zdroje, médiá, poznámky a rodinné väzby oboch kariet sa ponechajú všetky. ¦ Velg for hver linje verdien som skal beholdes. Kilder, medier, notater og familiebånd fra begge oppføringene beholdes alle.
+Fiche gardée : ¦ Ponechaná karta: ¦ Beholdt oppføring:
+Rien à choisir : les deux fiches ne se contredisent pas. ¦ Nie je čo vyberať: karty si neodporujú. ¦ Ingenting å velge: oppføringene motsier ikke hverandre.
+{n} événement(s) présent(s) sur une seule fiche : gardé(s) tel(s) quel(s). ¦ {n} udalosť(í) iba na jednej karte: ponechá sa bez zmeny. ¦ {n} hendelse(r) bare i én oppføring: beholdes som de er.
+Fusionner les deux fiches ? ¦ Zlúčiť obe karty? ¦ Slå sammen de to oppføringene?
+« {b} » sera fusionnée dans « {a} » : tout ce qui la concerne passe sur « {a} », puis elle disparaît. Une fusion ne peut pas être annulée. ¦ „{b}“ bude zlúčená do „{a}“: všetko, čo sa jej týka, prejde na „{a}“, a potom zmizne. Zlúčenie nemožno vrátiť späť. ¦ «{b}» slås sammen med «{a}»: alt som gjelder den, flyttes til «{a}», deretter forsvinner den. En sammenslåing kan ikke angres.
+🔀 Fusionner ¦ 🔀 Zlúčiť ¦ 🔀 Slå sammen
+Fusion faite, mais une valeur n’a pas pu être reprise : {err} ¦ Zlúčenie hotové, ale jednu hodnotu sa nepodarilo prevziať: {err} ¦ Sammenslåingen er ferdig, men en verdi kunne ikke overføres: {err}
+Fiches fusionnées : {n} événement(s) en double retiré(s) ¦ Karty zlúčené: odobratých {n} duplicitných udalostí ¦ Oppføringene slått sammen: {n} doble hendelse(r) fjernet
+événements en double remis ¦ duplicitné udalosti vrátené ¦ doble hendelser gjenopprettet
+Fiches fusionnées. ¦ Karty zlúčené. ¦ Oppføringene slått sammen.
+Comparer avec un acte ¦ Porovnať so záznamom ¦ Sammenlign med en akt
+Cet acte parle-t-il de cette personne ? Les noms, années et lieux de la fiche sont cherchés dans le texte. ¦ Hovorí tento záznam o tejto osobe? Mená, roky a miesta z karty sa hľadajú v texte. ¦ Handler denne akten om denne personen? Navn, år og steder fra oppføringen søkes i teksten.
+Concordance {n} % ¦ Zhoda {n} % ¦ Samsvar {n} %
+Cet acte parle sans doute de cette personne ¦ Tento záznam najskôr hovorí o tejto osobe ¦ Akten handler sannsynligvis om denne personen
+Cet acte parle peut-être de cette personne ¦ Tento záznam možno hovorí o tejto osobe ¦ Akten handler kanskje om denne personen
+Peu d’indices dans cet acte ¦ V tomto zázname je málo indícií ¦ Få spor i denne akten
+Texte vide. ¦ Prázdny text. ¦ Tom tekst.
+Choisis un acte transcrit dans la colonne de gauche. ¦ Vyber prepísaný záznam v ľavom stĺpci. ¦ Velg en transkribert akt i venstre kolonne.
+Année de l’acte dans sa vie ¦ Rok záznamu v jej živote ¦ Aktens år i vedkommendes liv
+acte de {y}, fiche {a}–{b} ¦ záznam z {y}, karta {a}–{b} ¦ akt fra {y}, oppføring {a}–{b}
+acte sans année ¦ záznam bez roku ¦ akt uten år
+Même année qu’un événement ¦ Rovnaký rok ako udalosť ¦ Samme år som en hendelse
+Choisis un média à gauche pour {x}. ¦ Vyber vľavo médium pre {x}. ¦ Velg et medium til venstre for {x}.
+Place du rideau ¦ Poloha opony ¦ Gardinens plassering
+Image retirée de la comparaison ¦ Obrázok odobratý z porovnania ¦ Bildet fjernet fra sammenligningen
+Image A ¦ Obrázok A ¦ Bilde A
+Image B ¦ Obrázok B ¦ Bilde B
+{a} et un acte ¦ {a} a záznam ¦ {a} og en akt
+Comparaison de deux images ¦ Porovnanie dvoch obrázkov ¦ Sammenligning av to bilder
+Comparaison avec un acte ¦ Porovnanie so záznamom ¦ Sammenligning med en akt
+Comparaison : {x} ¦ Porovnanie: {x} ¦ Sammenligning: {x}
+Ressemblance A–B ¦ Podobnosť A–B ¦ Likhet A–B
+, une carte ¦ , pohľadnica ¦ , et kort
+12/05/1882, vers 1880… ¦ 12/05/1882, okolo 1880… ¦ 12/05/1882, omkring 1880…
+7 derniers jours ¦ Posledných 7 dní ¦ Siste 7 dager
+Ajoute la date de mariage de {a} et {b}. ¦ Pridaj dátum sobáša osôb {a} a {b}. ¦ Legg til vielsesdatoen for {a} og {b}.
+Ajoute la naissance de {a}. ¦ Pridaj narodenie osoby {a}. ¦ Legg til fødselen til {a}.
+Aucun objectif pour l’instant ¦ Zatiaľ žiadny cieľ ¦ Ingen mål ennå
+Aucun trésor ne correspond ¦ Žiadny poklad nezodpovedá ¦ Ingen skatt passer
+Bilan du {date} ¦ Prehľad k {date} ¦ Status per {date}
+Cacher ce trésor ¦ Skryť tento poklad ¦ Skjul denne skatten
+Ce jour-là, le {day} ¦ V ten deň, {day} ¦ Den dagen, {day}
+Ce qui est arrivé à la famille ce jour du calendrier : naissances, mariages, décès… en une carte à partager. ¦ Čo sa rodine stalo v tento deň kalendára: narodenia, sobáše, úmrtia… na jednej karte na zdieľanie. ¦ Hva som skjedde med familien denne kalenderdagen: fødsler, vielser, dødsfall … på ett kort å dele.
+Cette page montre seulement : <b>{what}</b> ¦ Táto stránka ukazuje iba: <b>{what}</b> ¦ Denne siden viser bare: <b>{what}</b>
+Chasse supprimée. ¦ Hľadanie pokladu zmazané. ¦ Skattejakten slettet.
+Chercher un trésor ¦ Hľadať poklad ¦ Søk etter en skatt
+Chercher un trésor… ¦ Hľadať poklad… ¦ Søk etter en skatt…
+Choisis au moins une question. ¦ Vyber aspoň jednu otázku. ¦ Velg minst ett spørsmål.
+Choisis d’abord quoi montrer. ¦ Najprv vyber, čo ukázať. ¦ Velg først hva som skal vises.
+Choisis un widget dans la colonne de gauche (+). ¦ Vyber widget v ľavom stĺpci (+). ¦ Velg en widget i venstre kolonne (+).
+Combien ¦ Koľko ¦ Hvor mange
+Copier vers… ¦ Kopírovať do… ¦ Kopier til…
+Croissance ¦ Rast ¦ Vekst
+Croissance de la base mois par mois ¦ Rast databázy mesiac po mesiaci ¦ Databasens vekst måned for måned
+Croissance indisponible. ¦ Rast nie je k dispozícii. ¦ Vekst ikke tilgjengelig.
+Dans la fenêtre, « ⤓ PDF » ¦ V okne „⤓ PDF“ ¦ I vinduet «⤓ PDF»
+Date butoir ¦ Termín ¦ Frist
+De cujus (ses ancêtres et descendants) ¦ De cujus (jeho predkovia a potomkovia) ¦ De cujus (vedkommendes aner og etterkommere)
+Des objectifs au long cours (« 8 générations complètes d’ici décembre », « 100 actes transcrits ») avec une barre de progression calculée sur la base et une date butoir. ¦ Dlhodobé ciele („8 úplných generácií do decembra“, „100 prepísaných záznamov“) s ukazovateľom postupu počítaným z databázy a termínom. ¦ Langsiktige mål («8 komplette generasjoner innen desember», «100 transkriberte akter») med en fremdriftslinje beregnet fra databasen og en frist.
+Des questions sur un ancêtre envoyées en un fichier à un proche ; ses réponses reviennent dans les fiches. ¦ Otázky o predkovi poslané v súbore blízkemu; jeho odpovede sa vrátia do kariet. ¦ Spørsmål om en ane sendt i en fil til en slektning; svarene kommer tilbake i oppføringene.
+Dossier (enquête) ¦ Priečinok (pátranie) ¦ Mappe (undersøkelse)
+Démarre le chronomètre quand tu te mets à chercher : le temps passé est rangé par jour et par sujet. ¦ Spusti stopky, keď sa pustíš do hľadania: strávený čas sa ukladá po dňoch a po témach. ¦ Start stoppeklokken når du begynner å lete: tiden lagres per dag og per emne.
+En plein écran : le portrait, chaque étape avec sa date et son lieu, les photos, la carte. Espace = pause, flèches = avant / après, Échap = fin. ¦ Na celú obrazovku: portrét, každá etapa s dátumom a miestom, fotky, mapa. Medzerník = pauza, šípky = vpred / späť, Esc = koniec. ¦ I fullskjerm: portrettet, hvert steg med dato og sted, bildene, kartet. Mellomrom = pause, piler = fram / tilbake, Esc = slutt.
+Entretien supprimé (le son reste dans les médias). ¦ Rozhovor zmazaný (zvuk zostáva v médiách). ¦ Intervjuet slettet (lyden blir værende i medier).
+Essaie le lendemain, ou complète les dates exactes des actes. ¦ Skús to ďalší deň alebo doplň presné dátumy záznamov. ¦ Prøv neste dag, eller fyll inn aktenes nøyaktige datoer.
+Essaie un autre mot : « lettre », « carte », « jeu »… ¦ Skús iné slovo: „list“, „mapa“, „hra“… ¦ Prøv et annet ord: «brev», «kart», «spill»…
+Et toi, que sais-tu encore de {name} ? ¦ A čo ty ešte vieš o {name}? ¦ Og du, hva mer vet du om {name}?
+Ex. : 8 générations complètes d’ici décembre, 100 actes transcrits. ¦ Napr.: 8 úplných generácií do decembra, 100 prepísaných záznamov. ¦ F.eks.: 8 komplette generasjoner innen desember, 100 transkriberte akter.
+Exporter ce widget (PDF) ¦ Exportovať tento widget (PDF) ¦ Eksporter denne widgeten (PDF)
+Favori ¦ Obľúbené ¦ Favoritt
+Filtre retiré : toute la base. ¦ Filter odobratý: celá databáza. ¦ Filter fjernet: hele databasen.
+Général ¦ Všeobecné ¦ Generelt
+Ils ont {n}, mais pas encore de mariage noté. ¦ Majú {n}, ale zatiaľ nie je zapísaný žiadny sobáš. ¦ De har {n}, men ingen ekteskap er notert ennå.
+Image de la carte (PNG) ¦ Obrázok pohľadnice (PNG) ¦ Bilde av kortet (PNG)
+La courbe mois par mois des fiches, événements, sources et médias ajoutés, d’après le journal des modifications. ¦ Krivka pridaných kariet, udalostí, zdrojov a médií mesiac po mesiaci podľa záznamu zmien. ¦ Kurven måned for måned over oppføringer, hendelser, kilder og medier som er lagt til, ifølge endringsloggen.
+La vie de ¦ Život ¦ Livet til
+Le jour ¦ Deň ¦ Dagen
+Lendemain › ¦ Ďalší deň › ¦ Neste dag ›
+Les questionnaires n’ont pas pu être lus. ¦ Dotazníky sa nepodarilo prečítať. ¦ Spørreskjemaene kunne ikke leses.
+Lettre supprimée. ¦ List zmazaný. ¦ Brevet slettet.
+L’import des réponses n’est pas encore prêt. ¦ Import odpovedí ešte nie je pripravený. ¦ Import av svar er ikke klar ennå.
+L’impression n’est pas encore prête : réessaie dans un instant. ¦ Tlač ešte nie je pripravená: skús to o chvíľu znova. ¦ Utskriften er ikke klar ennå: prøv igjen om litt.
+Mes questionnaires ¦ Moje dotazníky ¦ Mine spørreskjemaer
+Mettre dans une autre page du tableau de bord… ¦ Dať na inú stránku prehľadu… ¦ Legg på en annen side i oversikten…
+Mettre en favori ¦ Pridať do obľúbených ¦ Merk som favoritt
+Ni naissance ni baptême sur sa fiche. ¦ Na jeho karte nie je narodenie ani krst. ¦ Verken fødsel eller dåp i oppføringen.
+Objectif ¦ Cieľ ¦ Mål
+Objectif ajouté. ¦ Cieľ pridaný. ¦ Mål lagt til.
+Objectif en pause. ¦ Cieľ pozastavený. ¦ Mål satt på pause.
+Objectif repris. ¦ Cieľ obnovený. ¦ Mål gjenopptatt.
+Objectif supprimé. ¦ Cieľ zmazaný. ¦ Mål slettet.
+PDF (bilan imprimable) ¦ PDF (prehľad na tlač) ¦ PDF (status for utskrift)
+Page enregistrée. ¦ Stránka uložená. ¦ Siden er lagret.
+Page filtrée : {what}. ¦ Filtrovaná stránka: {what}. ¦ Filtrert side: {what}.
+Page web (.html) ¦ Webová stránka (.html) ¦ Nettside (.html)
+Page « {name} » supprimée, avec {widgets}. ¦ Stránka „{name}“ zmazaná, s {widgets}. ¦ Siden «{name}» slettet, med {widgets}.
+Page « {name} » supprimée. ¦ Stránka „{name}“ zmazaná. ¦ Siden «{name}» slettet.
+Pas assez d’éléments pour un diaporama. ¦ Na prezentáciu nie je dosť položiek. ¦ Ikke nok innhold til en lysbildefremvisning.
+Pas encore de mariage noté pour ce couple. ¦ Pre tento pár zatiaľ nie je zapísaný sobáš. ¦ Ingen ekteskap notert for paret ennå.
+Passeport supprimé. ¦ Pas zmazaný. ¦ Passet slettet.
+Passer › ¦ Preskočiť › ¦ Hopp over ›
+Pour qui (le proche qui répond) ¦ Pre koho (blízky, ktorý odpovedá) ¦ Til hvem (slektningen som svarer)
+Prépare-en un ci-dessus : il part en un seul fichier, les réponses reviennent dans les fiches. ¦ Priprav nejaký vyššie: odíde v jedinom súbore, odpovede sa vrátia do kariet. ¦ Forbered et ovenfor: det sendes som én fil, svarene kommer tilbake i oppføringene.
+Quelle page ? ¦ Ktorá stránka? ¦ Hvilken side?
+Questionnaire aux anciens ¦ Dotazník pre starších ¦ Spørreskjema til de eldre
+Questionnaire noté comme envoyé. ¦ Dotazník označený ako odoslaný. ¦ Spørreskjemaet merket som sendt.
+Retirer des favoris ¦ Odobrať z obľúbených ¦ Fjern fra favoritter
+Rien de noté ce jour-là dans la famille ¦ V rodine nič zapísané k tomuto dňu ¦ Ingenting notert den dagen i familien
+Rien d’urgent : tout ce que je sais vérifier est rempli. ¦ Nič naliehavé: všetko, čo viem skontrolovať, je vyplnené. ¦ Ingenting som haster: alt jeg kan sjekke, er fylt ut.
+Secondes par image ¦ Sekúnd na obrázok ¦ Sekunder per bilde
+Succession ¦ Dedičstvo ¦ Arv
+Sur combien de mois ? ¦ Za koľko mesiacov? ¦ Over hvor mange måneder?
+Sur quel ancêtre ? ¦ O ktorom predkovi? ¦ Om hvilken ane?
+Sur quoi ? ¦ O čom? ¦ Om hva?
+Tableau des chiffres (.csv) ¦ Tabuľka čísel (.csv) ¦ Tabell med tall (.csv)
+Tableau enregistré. ¦ Tabuľka uložená. ¦ Tabellen er lagret.
+Tante Lucie ¦ Teta Lucia ¦ Tante Lucie
+Te souviens-tu de sa maison ? ¦ Pamätáš si na jeho dom? ¦ Husker du huset til vedkommende?
+Tes souvenirs de famille ¦ Tvoje rodinné spomienky ¦ Dine familieminner
+Tous les widgets de la page ne montrent que les fiches choisies (les chiffres clés aussi). ¦ Všetky widgety stránky ukazujú iba vybrané karty (aj kľúčové čísla). ¦ Alle widgetene på siden viser bare de valgte oppføringene (nøkkeltallene også).
+Tulle ¦ Tulle ¦ Tulle
+Un bilan imprimable de la page (A4, ⤓ PDF) ¦ Prehľad stránky na tlač (A4, ⤓ PDF) ¦ En status over siden for utskrift (A4, ⤓ PDF)
+Un chronomètre de séance : démarre-le quand tu cherches, le temps est rangé par jour et par sujet (une branche, une enquête). Montre aussi le temps des Successions et de l’Atelier. ¦ Stopky sedenia: spusti ich, keď hľadáš, čas sa ukladá po dňoch a po témach (vetva, pátranie). Ukazuje aj čas z Dedičstva a z Dielne. ¦ En stoppeklokke for økten: start den når du leter, tiden lagres per dag og per emne (en gren, en undersøkelse). Viser også tiden for Arv og Verkstedet.
+Un nombre plus grand que zéro. ¦ Číslo väčšie ako nula. ¦ Et tall større enn null.
+Un seul fichier à envoyer par e-mail ; il le remplit chez lui et te renvoie ses réponses. ¦ Jediný súbor na odoslanie e-mailom; vyplní ho doma a pošle ti odpovede späť. ¦ Én fil å sende på e-post; vedkommende fyller den ut hjemme og sender deg svarene.
+Une personne, et le diaporama est prêt : son portrait, chaque étape avec sa date et son lieu, ses photos, la carte de sa vie, une musique douce. ¦ Jedna osoba a prezentácia je hotová: jej portrét, každá etapa s dátumom a miestom, fotky, mapa jej života, jemná hudba. ¦ Én person, og lysbildefremvisningen er klar: portrettet, hvert steg med dato og sted, bildene, kartet over livet, rolig musikk.
+Une seule chose concrète à faire, remplie dans le widget : la date de mariage d’un couple, la naissance d’un ancêtre… puis ✓. ¦ Jediná konkrétna vec na urobenie, vyplnená vo widgete: dátum sobáša páru, narodenie predka… a potom ✓. ¦ Én konkret ting å gjøre, fylt ut i widgeten: vielsesdatoen til et par, en anes fødsel … deretter ✓.
+Une vie en diaporama ¦ Život v prezentácii ¦ Et liv i lysbilder
+Widget ¦ Widget ¦ Widget
+Widget copié vers « {name} ». ¦ Widget skopírovaný do „{name}“. ¦ Widgeten kopiert til «{name}».
+Widget dupliqué. ¦ Widget zduplikovaný. ¦ Widgeten duplisert.
+Widget « {name} » supprimé. ¦ Widget „{name}“ zmazaný. ¦ Widgeten «{name}» slettet.
+actes transcrits ¦ prepísané záznamy ¦ transkriberte akter
+ajoutés sur {n} mois ¦ pridané za {n} mesiacov ¦ lagt til over {n} måneder
+ancêtres Sosa ¦ predkovia Sosa ¦ Sosa-aner
+ce mois-ci : +{p} fiches, +{e} événements ¦ tento mesiac: +{p} kariet, +{e} udalostí ¦ denne måneden: +{p} oppføringer, +{e} hendelser
+ce qui est ajouté chaque mois ¦ čo sa každý mesiac pridá ¦ det som legges til hver måned
+date dépassée ¦ termín uplynul ¦ datoen er passert
+d’ici le {date} ¦ do {date} ¦ innen {date}
+générations complètes ¦ úplné generácie ¦ komplette generasjoner
+le total, mois après mois ¦ spolu, mesiac po mesiaci ¦ totalen, måned for måned
+sources ¦ zdroje ¦ kilder
+trésor ¦ poklad ¦ skatt
+{n} images : {e} étapes, {ph} photos{map}. ¦ {n} obrázkov: {e} etáp, {ph} fotiek{map}. ¦ {n} bilder: {e} steg, {ph} bilder{map}.
+{n} questions ¦ {n} otázok ¦ {n} spørsmål
+{n} réponses ¦ {n} odpovedí ¦ {n} svar
+{t} aujourd’hui ¦ {t} dnes ¦ {t} i dag
+{v} sur {t} {what} ¦ {v} z {t} {what} ¦ {v} av {t} {what}
+{what} : {who} ¦ {what}: {who} ¦ {what}: {who}
+{who} a été baptisé ¦ {who} bol pokrstený ¦ {who} ble døpt
+{who} a été baptisée ¦ {who} bola pokrstená ¦ {who} ble døpt
+{who} a été inhumé ¦ {who} bol pochovaný ¦ {who} ble gravlagt
+{who} a été inhumée ¦ {who} bola pochovaná ¦ {who} ble gravlagt
+{who} est mort ¦ {who} zomrel ¦ {who} døde
+{who} est morte ¦ {who} zomrela ¦ {who} døde
+{who} est né ¦ {who} sa narodil ¦ {who} ble født
+{who} est née ¦ {who} sa narodila ¦ {who} ble født
+{who} se sont mariés ¦ {who} uzavreli sobáš ¦ {who} giftet seg
+« {title} » caché (⚙️ Réglages pour le remontrer). ¦ „{title}“ skryté (⚙️ Nastavenia na opätovné zobrazenie). ¦ «{title}» skjult (⚙️ Innstillinger for å vise igjen).
+« {title} » retiré des favoris. ¦ „{title}“ odobraté z obľúbených. ¦ «{title}» fjernet fra favoritter.
+« {title} » supprimé. ¦ „{title}“ zmazané. ¦ «{title}» slettet.
+À ouvrir ou envoyer tel quel ¦ Na otvorenie alebo odoslanie tak, ako je ¦ Til å åpne eller sende som den er
+Écris la date (même approximative). ¦ Napíš dátum (aj približný). ¦ Skriv datoen (også omtrentlig).
+Écris le nom du proche. ¦ Napíš meno blízkeho. ¦ Skriv navnet på slektningen.
+à {n} ans ¦ v {n} rokoch ¦ som {n}-åring
+‹ Veille ¦ ‹ Predchádzajúci deň ¦ ‹ Dagen før
+↕ Réordonner les widgets ¦ ↕ Preusporiadať widgety ¦ ↕ Omorganiser widgetene
+⏱ C’est parti : « {s} ». ¦ ⏱ Ideme na to: „{s}“. ¦ ⏱ Nå kjører vi: «{s}».
+⏱ Temps de recherche ¦ ⏱ Čas hľadania ¦ ⏱ Søketid
+⏱ {t} rangées dans « {s} ». ¦ ⏱ {t} uložené do „{s}“. ¦ ⏱ {t} lagret i «{s}».
+▶ Démarrer ¦ ▶ Spustiť ¦ ▶ Start
+✉ Envoyé ¦ ✉ Odoslané ¦ ✉ Sendt
+✓ Mariage ajouté. ¦ ✓ Sobáš pridaný. ¦ ✓ Vielsen lagt til.
+✓ Naissance ajoutée. ¦ ✓ Narodenie pridané. ¦ ✓ Fødselen lagt til.
+✕ Tout montrer ¦ ✕ Ukázať všetko ¦ ✕ Vis alt
+⭐ Favoris ¦ ⭐ Obľúbené ¦ ⭐ Favoritter
+⭐ « {title} » dans les favoris. ¦ ⭐ „{title}“ v obľúbených. ¦ ⭐ «{title}» i favorittene.
+＋ Ajouter un widget ¦ ＋ Pridať widget ¦ ＋ Legg til en widget
+＋ Objectif ¦ ＋ Cieľ ¦ ＋ Mål
+🎞 Lancer le diaporama ¦ 🎞 Spustiť prezentáciu ¦ 🎞 Start lysbildefremvisningen
+🎯 Mes objectifs ¦ 🎯 Moje ciele ¦ 🎯 Mine mål
+📈 Croissance de la base ¦ 📈 Rast databázy ¦ 📈 Databasens vekst
+📌 « {block} » de {name} mis dans le tableau de bord, page « {page} ». ¦ 📌 „{block}“ osoby {name} dané do prehľadu, stránka „{page}“. ¦ 📌 «{block}» for {name} lagt i oversikten, siden «{page}».
+📚 Atelier ¦ 📚 Dielňa ¦ 📚 Verksted
+📮 Préparer et télécharger ¦ 📮 Pripraviť a stiahnuť ¦ 📮 Forbered og last ned
+🔎 Filtrer cette page ¦ 🔎 Filtrovať túto stránku ¦ 🔎 Filtrer denne siden
+🔎 Filtrer cette page… ¦ 🔎 Filtrovať túto stránku… ¦ 🔎 Filtrer denne siden…
+🕘 Récents ¦ 🕘 Nedávne ¦ 🕘 Nylige
+🧭 Prochaine action ¦ 🧭 Ďalší krok ¦ 🧭 Neste handling
+(inconnus : {list}) ¦ (neznámi: {list}) ¦ (ukjente: {list})
+AVANCEMENT ¦ POSTUP ¦ FREMDRIFT
+Acte de naissance ou de baptême ¦ Záznam o narodení alebo krste ¦ Fødsels- eller dåpsakt
+Affichage des pistes ¦ Zobrazenie stôp ¦ Visning av spor
+Ajouter en note sur la fiche ¦ Pridať ako poznámku na kartu ¦ Legg til som notat i oppføringen
+Années parcourues ¦ Prehľadané roky ¦ Gjennomsøkte år
+Années parcourues : de ¦ Prehľadané roky: od ¦ Gjennomsøkte år: fra
+Argument de preuve ¦ Argumentácia dôkazu ¦ Bevisargument
+Arrêter le chronomètre ¦ Zastaviť stopky ¦ Stopp stoppeklokken
+Aucun groupe. ¦ Žiadna skupina. ¦ Ingen gruppe.
+Aucun test. ¦ Žiadny test. ¦ Ingen test.
+Aucune piste dans cette enquête. ¦ V tomto pátraní nie je žiadna stopa. ¦ Ingen spor i denne undersøkelsen.
+Aucune piste. ¦ Žiadna stopa. ¦ Ingen spor.
+Battue « {title} » supprimée ¦ Hromadné pátranie „{title}“ zmazané ¦ Leteaksjonen «{title}» slettet
+CONCLUSION ¦ ZÁVER ¦ KONKLUSJON
+Ce que l’enquête a établi ¦ Čo pátranie zistilo ¦ Hva undersøkelsen har fastslått
+Ce qui est reconstitué ¦ Čo je zrekonštruované ¦ Det som er rekonstruert
+Chargement de la battue… ¦ Načítava sa hromadné pátranie… ¦ Laster inn leteaksjonen…
+Chargement de l’enquête… ¦ Načítava sa pátranie… ¦ Laster inn undersøkelsen…
+Chargement des battues… ¦ Načítavajú sa hromadné pátrania… ¦ Laster inn leteaksjonene…
+Chargement des enquêtes… ¦ Načítavajú sa pátrania… ¦ Laster inn undersøkelsene…
+Chercher dans cette page… ¦ Hľadať na tejto stránke… ¦ Søk på denne siden…
+Chercher une rubrique… ¦ Hľadať oddiel… ¦ Søk etter en rubrikk…
+Choisis la personne cherchée. ¦ Vyber hľadanú osobu. ¦ Velg personen du leter etter.
+Chronologie des pistes ¦ Chronológia stôp ¦ Kronologi over spor
+Clic sur un morceau : changer son grand-parent ou le retirer. ¦ Klikni na úsek: zmeniť jeho starého rodiča alebo ho odobrať. ¦ Klikk på et segment: bytt besteforelderen eller fjern det.
+Coller des correspondances partagées ¦ Vložiť zdieľané zhody ¦ Lim inn delte treff
+Commune de départ ¦ Východisková obec ¦ Startkommune
+Communes terminées ¦ Dokončené obce ¦ Ferdige kommuner
+Comprendre et régler ¦ Pochopiť a nastaviť ¦ Forstå og stille inn
+Conclue le {d} ¦ Uzavreté {d} ¦ Avsluttet {d}
+Conclure l’enquête ¦ Uzavrieť pátranie ¦ Avslutt undersøkelsen
+Conclusion : {title} ¦ Záver: {title} ¦ Konklusjon: {title}
+Conclusion ajoutée sur la fiche de {name} ¦ Záver pridaný na kartu osoby {name} ¦ Konklusjonen lagt til i oppføringen til {name}
+Conclusion enregistrée ¦ Záver uložený ¦ Konklusjonen lagret
+Contrat de mariage chez le notaire ¦ Svadobná zmluva u notára ¦ Ektepakt hos notarius
+Correspondance supprimée ¦ Zhoda zmazaná ¦ Treffet slettet
+Correspondance « {name} » supprimée ¦ Zhoda „{name}“ zmazaná ¦ Treffet «{name}» slettet
+Correspondances ADN ¦ Zhody DNA ¦ DNA-treff
+Correspondances introuvables. ¦ Zhody sa nedajú nájsť. ¦ Treffene finnes ikke.
+Correspondances montrées ¦ Zobrazené zhody ¦ Viste treff
+Correspondances partagées ¦ Zdieľané zhody ¦ Delte treff
+Corrigé pour l’endogamie ¦ Opravené o endogamiu ¦ Korrigert for endogami
+Couleurs de la carte ¦ Farby mapy ¦ Kartets farger
+Crée un phasage, puis ajoute les frères et sœurs testés. ¦ Vytvor fázovanie a potom pridaj testovaných súrodencov. ¦ Opprett en fasing, og legg deretter til testede søsken.
+Créer l’enquête ¦ Vytvoriť pátranie ¦ Opprett undersøkelsen
+Créée le ¦ Vytvorené ¦ Opprettet
+Dans quelle unité {name} a-t-il servi, où, et que lui est-il arrivé ? ¦ V akej jednotke {name} slúžil, kde a čo sa mu stalo? ¦ I hvilken avdeling tjenestegjorde {name}, hvor, og hva skjedde med vedkommende?
+Date de relance invalide. ¦ Neplatný dátum pripomenutia. ¦ Ugyldig påminnelsesdato.
+Depuis un modèle… ¦ Zo šablóny… ¦ Fra en mal…
+Donne au moins la cote ou le fonds parcouru. ¦ Uveď aspoň signatúru alebo prehľadaný fond. ¦ Oppgi minst signaturen eller arkivet som er gjennomsøkt.
+Donner à : {gp} ¦ Dať: {gp} ¦ Gi til: {gp}
+Dossier de recherche sur ¦ Výskumný priečinok o ¦ Forskningsmappe om
+Dossier « {name} » supprimé ¦ Priečinok „{name}“ zmazaný ¦ Mappen «{name}» slettet
+Dupliquer l’enquête ¦ Duplikovať pátranie ¦ Dupliser undersøkelsen
+Déjà parcouru : ¦ Už prehľadané: ¦ Allerede gjennomsøkt:
+D’après l’enquête « {title} ». ¦ Podľa pátrania „{title}“. ¦ Ifølge undersøkelsen «{title}».
+ENQUÊTE ¦ PÁTRANIE ¦ UNDERSØKELSE
+En cours : a répondu ¦ Prebieha: odpovedal(a) ¦ Pågår: har svart
+En cours : arbre échangé ¦ Prebieha: strom vymenený ¦ Pågår: tre utvekslet
+En cours : contacté ¦ Prebieha: kontaktované ¦ Pågår: kontaktet
+En pause : pas de réponse ¦ Pozastavené: bez odpovede ¦ På pause: ikke noe svar
+Enquête dupliquée ¦ Pátranie zduplikované ¦ Undersøkelsen duplisert
+Enquête supprimée ¦ Pátranie zmazané ¦ Undersøkelsen slettet
+Enquête sur {name} ¦ Pátranie o {name} ¦ Undersøkelse om {name}
+Enquête vide ¦ Prázdne pátranie ¦ Tom undersøkelse
+Enquête « {title} » créée ¦ Pátranie „{title}“ vytvorené ¦ Undersøkelsen «{title}» opprettet
+Enquête « {title} » supprimée ¦ Pátranie „{title}“ zmazané ¦ Undersøkelsen «{title}» slettet
+Enregistrer la conclusion ¦ Uložiť záver ¦ Lagre konklusjonen
+Ex. AD de la Corrèze, registres paroissiaux de Naves ¦ Napr. AD de la Corrèze, farské matriky z Naves ¦ F.eks. AD de la Corrèze, kirkebøker fra Naves
+Ex. Jean DURAND est le fils de Pierre DURAND et de Marie LACOMBE. ¦ Napr. Jean DURAND je syn Pierra DURANDA a Marie LACOMBE. ¦ F.eks. Jean DURAND er sønn av Pierre DURAND og Marie LACOMBE.
+Exploré avec doute ¦ Preskúmané s pochybnosťami ¦ Utforsket med tvil
+Exporter le rapport… ¦ Exportovať správu… ¦ Eksporter rapporten…
+Exporter ses segments pour DNA Painter ¦ Exportovať jeho segmenty pre DNA Painter ¦ Eksporter segmentene til DNA Painter
+Fonds ou archives ¦ Fond alebo archív ¦ Arkivbestand eller arkiv
+Force de l’endogamie ¦ Sila endogamie ¦ Endogamiens styrke
+Frères et sœurs testés ¦ Testovaní súrodenci ¦ Testede søsken
+Glisse une piste ici ¦ Pretiahni sem stopu ¦ Dra et spor hit
+Groupe « {name} » supprimé ¦ Skupina „{name}“ zmazaná ¦ Gruppen «{name}» slettet
+Il en faut au moins trois pour un phasage fiable. ¦ Na spoľahlivé fázovanie treba aspoň troch. ¦ Det trengs minst tre for en pålitelig fasing.
+Impasse ¦ Slepá ulička ¦ Blindvei
+Imprimer le rapport ¦ Vytlačiť správu ¦ Skriv ut rapporten
+La fin doit être après le début. ¦ Koniec musí byť po začiatku. ¦ Slutten må komme etter starten.
+Lancer le chronomètre : le temps passé sur cette enquête ¦ Spustiť stopky: čas strávený na tomto pátraní ¦ Start stoppeklokken: tiden brukt på denne undersøkelsen
+Le départ de {name} ¦ Odchod osoby {name} ¦ Utvandringen til {name}
+Le parcours militaire de {name} ¦ Vojenská dráha osoby {name} ¦ Militær løpebane for {name}
+Les parents de {name} ¦ Rodičia osoby {name} ¦ Foreldrene til {name}
+Lignées et origines ¦ Rody a pôvod ¦ Slektslinjer og opprinnelse
+Livret militaire, lettres, photos de famille ¦ Vojenská knižka, listy, rodinné fotky ¦ Militær tjenestebok, brev, familiebilder
+L’enquête de ce dossier n’existe plus. ¦ Pátranie z tohto priečinka už neexistuje. ¦ Undersøkelsen i denne mappen finnes ikke lenger.
+L’enquête de cette recherche n’existe plus. ¦ Pátranie tohto hľadania už neexistuje. ¦ Undersøkelsen for dette søket finnes ikke lenger.
+L’enquête est terminée. Mettre la conclusion sur la fiche de {name} ? ¦ Pátranie je na konci. Dať záver na kartu osoby {name}? ¦ Undersøkelsen er ferdig. Legge konklusjonen i oppføringen til {name}?
+Mes données ¦ Moje údaje ¦ Mine data
+Mettre dans « {col} » ¦ Dať do „{col}“ ¦ Legg i «{col}»
+Mettre l’enquête dans « Terminées » ¦ Dať pátranie do „Dokončené“ ¦ Legg undersøkelsen i «Avsluttede»
+Modifier la recherche sans résultat ¦ Upraviť bezvýsledné hľadanie ¦ Endre søket uten resultat
+Morceau attribué ¦ Úsek priradený ¦ Segment tildelt
+Morceau changé ¦ Úsek zmenený ¦ Segment endret
+Morceau retiré ¦ Úsek odobratý ¦ Segment fjernet
+Média retiré de la piste ¦ Médium odobraté zo stopy ¦ Medium fjernet fra sporet
+Média retiré de l’enquête ¦ Médium odobraté z pátrania ¦ Medium fjernet fra undersøkelsen
+Mémoire des hommes : morts pour la France, journaux des unités ¦ Mémoire des hommes: padlí za Francúzsko, denníky jednotiek ¦ Mémoire des hommes: falne for Frankrike, avdelingenes dagbøker
+MémorialGenWeb : monuments aux morts ¦ MémorialGenWeb: pomníky padlým ¦ MémorialGenWeb: minnesmerker over falne
+Naturalisation dans le pays d’arrivée ¦ Naturalizácia v cieľovej krajine ¦ Naturalisering i ankomstlandet
+Note ici chaque registre parcouru sans rien trouver : l’app te prévient avant de le refaire. ¦ Zapíš sem každú prehľadanú matriku, kde si nič nenašiel: aplikácia ťa upozorní, skôr než ju prejdeš znova. ¦ Noter her hvert gjennomsøkte register der du ikke fant noe: appen varsler deg før du gjør det igjen.
+Nouveau phasage ¦ Nové fázovanie ¦ Ny fasing
+Nouvelle enquête depuis un modèle ¦ Nové pátranie zo šablóny ¦ Ny undersøkelse fra en mal
+Nouvelle enquête depuis un modèle… ¦ Nové pátranie zo šablóny… ¦ Ny undersøkelse fra en mal…
+Parcouru le ¦ Prehľadané ¦ Gjennomsøkt den
+Partagé entre frères et sœurs ¦ Zdieľané medzi súrodencami ¦ Delt mellom søsken
+Partagées ¦ Zdieľané ¦ Delte
+Pas de relance ¦ Bez pripomenutia ¦ Ingen påminnelse
+Pas encore de conclusion : quand tu as la réponse, écris-la avec l’argument qui la prouve et les sources retenues. ¦ Zatiaľ žiadny záver: keď budeš mať odpoveď, napíš ju s argumentom, ktorý ju dokazuje, a s vybranými zdrojmi. ¦ Ingen konklusjon ennå: når du har svaret, skriv det med argumentet som beviser det og kildene du har valgt.
+Pas encore de conclusion. ¦ Zatiaľ žiadny záver. ¦ Ingen konklusjon ennå.
+Personne cherchée ¦ Hľadaná osoba ¦ Person det letes etter
+Phasage ¦ Fázovanie ¦ Fasing
+Phasage introuvable. ¦ Fázovanie sa nedá nájsť. ¦ Fasingen finnes ikke.
+Phasage visuel ¦ Vizuálne fázovanie ¦ Visuell fasing
+Phasage « {name} » supprimé ¦ Fázovanie „{name}“ zmazané ¦ Fasingen «{name}» slettet
+Piste « {title} » : {col} ¦ Stopa „{title}“: {col} ¦ Sporet «{title}»: {col}
+Plus de relance pour « {name} » ¦ Už žiadne pripomenutie pre „{name}“ ¦ Ingen flere påminnelser for «{name}»
+Point de recombinaison ajouté ¦ Bod rekombinácie pridaný ¦ Rekombinasjonspunkt lagt til
+Presse locale et courriers de la famille restée au pays ¦ Miestna tlač a listy rodiny, ktorá zostala doma ¦ Lokalaviser og brev fra familien som ble igjen hjemme
+Quand et par où {name} est-il parti, et où s’est-il installé ? ¦ Kedy a kadiaľ {name} odišiel a kde sa usadil? ¦ Når og hvilken vei dro {name}, og hvor slo vedkommende seg ned?
+Question, chronologie des pistes, pièces, conclusion : à envoyer à un cousin ou à une association. ¦ Otázka, chronológia stôp, doklady, záver: na poslanie bratrancovi alebo spolku. ¦ Spørsmål, kronologi over spor, dokumenter, konklusjon: til å sende til en fetter eller en forening.
+Qui sont le père et la mère de {name} ? Où et quand se sont-ils mariés ? ¦ Kto sú otec a matka osoby {name}? Kde a kedy uzavreli sobáš? ¦ Hvem er far og mor til {name}? Hvor og når giftet de seg?
+RIEN TROUVÉ ¦ NIČ SA NENAŠLO ¦ INGENTING FUNNET
+Rapport : {t} ¦ Správa: {t} ¦ Rapport: {t}
+Rapport fait le {d} ¦ Správa vytvorená {d} ¦ Rapport laget {d}
+Recensements : le foyer et ses voisins ¦ Sčítania obyvateľov: domácnosť a jej susedia ¦ Folketellinger: husstanden og naboene
+Recensements du pays d’arrivée ¦ Sčítania obyvateľov v cieľovej krajine ¦ Folketellinger i ankomstlandet
+Recherche commune par commune : les registres parcourus, ville par ville. ¦ Hľadanie obec po obci: prehľadané matriky, mesto po meste. ¦ Søk kommune for kommune: de gjennomsøkte registrene, by for by.
+Recherche introuvable. ¦ Hľadanie sa nedá nájsť. ¦ Søket finnes ikke.
+Recherche sans résultat ¦ Bezvýsledné hľadanie ¦ Søk uten resultat
+Recherche sans résultat notée. ¦ Bezvýsledné hľadanie zapísané. ¦ Søk uten resultat notert.
+Recherche sans résultat supprimée ¦ Bezvýsledné hľadanie zmazané ¦ Søk uten resultat slettet
+Recherches sans résultat ¦ Bezvýsledné hľadania ¦ Søk uten resultat
+Registres des consulats ¦ Matriky konzulátov ¦ Konsulatenes registre
+Registres parcourus ¦ Prehľadané matriky ¦ Gjennomsøkte registre
+Regrouper et placer ¦ Zoskupiť a umiestniť ¦ Grupper og plasser
+Relance de « {name} » le {d} ¦ Pripomenutie „{name}“ {d} ¦ Påminnelse til «{name}» {d}
+Relancer dans {n} jours ¦ Pripomenúť o {n} dní ¦ Påminn om {n} dager
+Relancer {name} (ADN) ¦ Pripomenúť sa {name} (DNA) ¦ Påminn {name} (DNA)
+Remettre le temps à zéro ¦ Vynulovať čas ¦ Nullstill tiden
+Retirer ce morceau ¦ Odobrať tento úsek ¦ Fjern dette segmentet
+Retrouver un soldat ¦ Nájsť vojaka ¦ Finn en soldat
+Rien de prérempli ¦ Nič predvyplnené ¦ Ingenting forhåndsutfylt
+Rien à relancer : sur une correspondance « Contactée », « 🔔 Relancer dans 30 jours ». ¦ Nie je čo pripomínať: pri zhode „Kontaktované“ daj „🔔 Pripomenúť o 30 dní“. ¦ Ingenting å påminne om: på et treff «Kontaktet», «🔔 Påminn om 30 dager».
+Rubriques de l’ADN ¦ Oddiely DNA ¦ DNA-rubrikker
+Segment supprimé ¦ Segment zmazaný ¦ Segment slettet
+Sources retenues ¦ Vybrané zdroje ¦ Valgte kilder
+Sépultures de guerre et nécropoles ¦ Vojnové hroby a vojenské cintoríny ¦ Krigsgraver og krigskirkegårder
+Tables décennales autour de la naissance ¦ Desaťročné registre okolo narodenia ¦ Tiårsregistre rundt fødselen
+Temps remis à zéro ¦ Čas vynulovaný ¦ Tiden nullstilt
+Terminé : placé dans l’arbre ✓ ¦ Hotovo: umiestnené do stromu ✓ ¦ Ferdig: plassert i treet ✓
+Test « {name} » supprimé ¦ Test „{name}“ zmazaný ¦ Testen «{name}» slettet
+Tests entièrement endogames ¦ Úplne endogamné testy ¦ Helt endogame tester
+Trouver les parents de… ¦ Nájsť rodičov osoby… ¦ Finn foreldrene til…
+Un point de recombinaison à la position « De » ¦ Bod rekombinácie v polohe „Od“ ¦ Et rekombinasjonspunkt ved posisjonen «Fra»
+Une question à résoudre : ses pistes, ses pièces, sa conclusion. ¦ Otázka na vyriešenie: jej stopy, doklady, záver. ¦ Et spørsmål å løse: sporene, dokumentene, konklusjonen.
+Voir ses correspondances ¦ Zobraziť jeho zhody ¦ Vis treffene
+années non notées ¦ nezapísané roky ¦ år som ikke er notert
+aussi : {list} ¦ aj: {list} ¦ også: {list}
+la page affichée ¦ zobrazená stránka ¦ siden som vises
+ouverte le {d} ¦ otvorené {d} ¦ åpnet {d}
+paire notée ¦ zapísaný pár ¦ notert par
+paires notées ¦ zapísané páry ¦ noterte par
+partagé : {a}–{b} Mb, {cm} cM ¦ zdieľané: {a}–{b} Mb, {cm} cM ¦ delt: {a}–{b} Mb, {cm} cM
+un fichier .html à envoyer ¦ súbor .html na odoslanie ¦ en .html-fil å sende
+{cote} ({years}) le {d}, enquête « {title} » ¦ {cote} ({years}) {d}, pátranie „{title}“ ¦ {cote} ({years}) den {d}, undersøkelsen «{title}»
+{m} min ¦ {m} min ¦ {m} min
+{n} ajoutées ¦ {n} pridaných ¦ {n} lagt til
+{n} commencées ¦ {n} začatých ¦ {n} påbegynt
+{n} correspondances supprimées ¦ {n} zhôd zmazaných ¦ {n} treff slettet
+{n} entre {lo} et {hi} cM ; {pairs} ¦ {n} medzi {lo} a {hi} cM; {pairs} ¦ {n} mellom {lo} og {hi} cM; {pairs}
+{n} pistes préparées ¦ {n} pripravených stôp ¦ {n} forberedte spor
+{n} sur {all} ¦ {n} z {all} ¦ {n} av {all}
+{n}/{all} ({pct} %) ¦ {n}/{all} ({pct} %) ¦ {n}/{all} ({pct} %)
+{n}/{all} registres parcourus ¦ {n}/{all} prehľadaných matrík ¦ {n}/{all} gjennomsøkte registre
+{raw} cM comptés comme {cm} cM ¦ {raw} cM počítané ako {cm} cM ¦ {raw} cM regnet som {cm} cM
+« Enregistrer en PDF » dans la fenêtre d’impression ¦ „Uložiť ako PDF“ v okne tlače ¦ «Lagre som PDF» i utskriftsvinduet
+« Trouver les parents de… », « Retrouver un soldat », « Émigré » : questions et pistes préparées ¦ „Nájsť rodičov osoby…“, „Nájsť vojaka“, „Vysťahovalec“: pripravené otázky a stopy ¦ «Finn foreldrene til…», «Finn en soldat», «Utvandrer»: forberedte spørsmål og spor
+« {a} » et « {b} » ne se correspondent plus ¦ „{a}“ a „{b}“ si už nezodpovedajú ¦ «{a}» og «{b}» samsvarer ikke lenger
+« {a} » et « {b} » se correspondent ¦ „{a}“ a „{b}“ si zodpovedajú ¦ «{a}» og «{b}» samsvarer
+« {name} » a répondu ¦ „{name}“ odpovedal(a) ¦ «{name}» har svart
+À explorer → En cours → Explorée → Impasse : glisse les pistes d’une colonne à l’autre ¦ Na preskúmanie → Prebieha → Preskúmané → Slepá ulička: preťahuj stopy z jedného stĺpca do druhého ¦ Å utforske → Pågår → Utforsket → Blindvei: dra sporene fra én kolonne til en annen
+À faire : contacter ¦ Urobiť: kontaktovať ¦ Å gjøre: kontakte
+Écris la conclusion. ¦ Napíš záver. ¦ Skriv konklusjonen.
+Émigré : retrouver le départ et l’arrivée ¦ Vysťahovalec: nájsť odchod a príchod ¦ Utvandrer: finn avreisen og ankomsten
+État de la commune ¦ Stav obce ¦ Kommunens status
+Événement retiré de la piste ¦ Udalosť odobratá zo stopy ¦ Hendelsen fjernet fra sporet
+à relancer depuis le {d} ¦ na pripomenutie od {d} ¦ skal påminnes siden {d}
+⏱ Chronomètre lancé. ¦ ⏱ Stopky spustené. ¦ ⏱ Stoppeklokken er startet.
+⏱ Temps gardé : {t}. ¦ ⏱ Čas uložený: {t}. ¦ ⏱ Tiden lagret: {t}.
+✂ Point de recombinaison ¦ ✂ Bod rekombinácie ¦ ✂ Rekombinasjonspunkt
+✅ Conclue ¦ ✅ Uzavreté ¦ ✅ Avsluttet
+✅ Conclure l’enquête ¦ ✅ Uzavrieť pátranie ¦ ✅ Avslutt undersøkelsen
+✎ Modifier la conclusion ¦ ✎ Upraviť záver ¦ ✎ Endre konklusjonen
+✓ A répondu ¦ ✓ Odpovedal(a) ¦ ✓ Har svart
+⤒ Coller une liste ¦ ⤒ Vložiť zoznam ¦ ⤒ Lim inn en liste
+＋ Attribuer ¦ ＋ Priradiť ¦ ＋ Tildel
+＋ Frère ou sœur ¦ ＋ Brat alebo sestra ¦ ＋ Bror eller søster
+＋ Nouveau phasage ¦ ＋ Nové fázovanie ¦ ＋ Ny fasing
+＋ Recherche sans résultat ¦ ＋ Bezvýsledné hľadanie ¦ ＋ Søk uten resultat
+🌐 Page web ¦ 🌐 Webová stránka ¦ 🌐 Nettside
+💾 Fichier ¦ 💾 Súbor ¦ 💾 Fil
+📈 Branche endogame (cM × {f}) ¦ 📈 Endogamná vetva (cM × {f}) ¦ 📈 Endogam gren (cM × {f})
+📈 Branche endogame : {raw} cM comptés comme {cm} cM. ¦ 📈 Endogamná vetva: {raw} cM počítané ako {cm} cM. ¦ 📈 Endogam gren: {raw} cM regnet som {cm} cM.
+📈 Endogamie ¦ 📈 Endogamia ¦ 📈 Endogami
+📊 Tableur ¦ 📊 Tabuľkový procesor ¦ 📊 Regneark
+🔔 Relancer le ¦ 🔔 Pripomenúť dňa ¦ 🔔 Påminn den
+🔔 « Relancer dans… » propose ¦ 🔔 „Pripomenúť o…“ ponúka ¦ 🔔 «Påminn om…» foreslår
+🔔 À relancer ¦ 🔔 Na pripomenutie ¦ 🔔 Skal påminnes
+🗂 Ranger en groupes… ¦ 🗂 Roztriediť do skupín… ¦ 🗂 Ordne i grupper…
+🗑 Supprimer ce phasage ¦ 🗑 Zmazať toto fázovanie ¦ 🗑 Slett denne fasingen
+(pourquoi c’est sûr : les sources qui s’accordent, les contradictions levées) ¦ (prečo je to isté: zdroje, ktoré sa zhodujú, vyriešené rozpory) ¦ (hvorfor det er sikkert: kildene som stemmer overens, motsigelsene som er løst)
+A répondu (plus de relance) ¦ Odpovedal(a) (už bez pripomenutia) ¦ Har svart (ingen flere påminnelser)
+Acte de décès (âge, parents, témoins) ¦ Záznam o úmrtí (vek, rodičia, svedkovia) ¦ Dødsakt (alder, foreldre, vitner)
+Acte de mariage (il nomme les parents) ¦ Záznam o sobáši (uvádza rodičov) ¦ Vielsesakt (den nevner foreldrene)
+Aucune correspondance dans cette fourchette : importe tes correspondances (👥 Correspondances). ¦ V tomto rozmedzí žiadna zhoda: importuj svoje zhody (👥 Zhody). ¦ Ingen treff i dette intervallet: importer treffene dine (👥 Treff).
+Avec trois frères et sœurs testés (ou plus) : attribue chaque morceau de chromosome à l’un des quatre grands-parents, chromosome par chromosome. Les comparaisons entre frères et sœurs (segments partagés) aident à placer les points de recombinaison. ¦ S tromi (alebo viacerými) testovanými súrodencami: priraď každý úsek chromozómu jednému zo štyroch starých rodičov, chromozóm po chromozóme. Porovnania medzi súrodencami (zdieľané segmenty) pomáhajú umiestniť body rekombinácie. ¦ Med tre testede søsken (eller flere): tildel hvert kromosomsegment til én av de fire besteforeldrene, kromosom for kromosom. Sammenligninger mellom søsken (delte segmenter) hjelper med å plassere rekombinasjonspunktene.
+Branches endogames (groupes) ¦ Endogamné vetvy (skupiny) ¦ Endogame grener (grupper)
+CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice) ¦ CSV (Excel, Numbers, LibreOffice)
+Chercher une battue… (nom, commune, cible) ¦ Hľadať hromadné pátranie… (názov, obec, cieľ) ¦ Søk etter en leteaksjon… (navn, kommune, mål)
+Chercher une enquête… (personne, acte, lieu) ¦ Hľadať pátranie… (osoba, záznam, miesto) ¦ Søk etter en undersøkelse… (person, akt, sted)
+Dans une branche endogame (village fermé, île, communauté), on partage plus d’ADN qu’attendu : les cM de ces correspondances sont corrigés avant d’estimer la relation. ¦ V endogamnej vetve (uzavretá dedina, ostrov, komunita) sa zdieľa viac DNA, ako sa čaká: cM týchto zhôd sa opravia pred odhadom príbuznosti. ¦ I en endogam gren (lukket bygd, øy, fellesskap) deler man mer DNA enn ventet: cM for disse treffene korrigeres før slektskapet anslås.
+Donne la position (De). ¦ Zadaj polohu (Od). ¦ Oppgi posisjonen (Fra).
+Ex. 3 E 145/2 ¦ Napr. 3 E 145/2 ¦ F.eks. 3 E 145/2
+Exporter (CSV) ¦ Exportovať (CSV) ¦ Eksporter (CSV)
+Exporter les annotations (CSV) ¦ Exportovať poznámky (CSV) ¦ Eksporter merknadene (CSV)
+Fiche matricule (registres matricules des archives départementales) ¦ Kmeňový list (vojenské kmeňové knihy v departementálnych archívoch) ¦ Rulleblad (militærruller i departementsarkivene)
+Forte (île, communauté très fermée) ¦ Silná (ostrov, veľmi uzavretá komunita) ¦ Sterk (øy, svært lukket fellesskap)
+Journal des marches et opérations (JMO) de son régiment ¦ Denník pochodov a operácií (JMO) jeho pluku ¦ Regimentets dagbok over marsjer og operasjoner (JMO)
+Listes de passagers (port de départ, port d’arrivée) ¦ Zoznamy cestujúcich (prístav odchodu, prístav príchodu) ¦ Passasjerlister (avreisehavn, ankomsthavn)
+Légère (quelques mariages entre cousins) ¦ Mierna (niekoľko sobášov medzi bratrancami) ¦ Lett (noen ekteskap mellom søskenbarn)
+Moyenne (village ou vallée assez fermés) ¦ Stredná (dosť uzavretá dedina alebo údolie) ¦ Middels (ganske lukket bygd eller dal)
+Nom du phasage (ex. « Fratrie DURAND ») ¦ Názov fázovania (napr. „Súrodenci DURANDOVCI“) ¦ Navn på fasingen (f.eks. «Søsknene DURAND»)
+Passeports et registres de départ (archives départementales, série M) ¦ Pasy a registre odchodov (departementálne archívy, séria M) ¦ Pass og utreiseregistre (departementsarkivene, serie M)
+Phasage visuel (frères et sœurs) ¦ Vizuálne fázovanie (súrodenci) ¦ Visuell fasing (søsken)
+Reconstitué (tous) ¦ Zrekonštruované (všetci) ¦ Rekonstruert (alle)
+cM corrigés (endogamie) ¦ Opravené cM (endogamia) ¦ Korrigerte cM (endogami)
+la page affichée (« Enregistrer en PDF ») ¦ zobrazená stránka („Uložiť ako PDF“) ¦ siden som vises («Lagre som PDF»)
+pat. ¦ otc. ¦ fed.
+mat. ¦ mat. ¦ mød.
+à (Mb) ¦ do (Mb) ¦ til (Mb)
+jours ¦ dní ¦ dager
+Toutes les battues ¦ Všetky hromadné pátrania ¦ Alle leteaksjoner
+prioritaire ¦ prioritné ¦ prioritert
+Code ¦ Kód ¦ Kode
+Fiche de {name} ¦ Karta osoby {name} ¦ Oppføringen til {name}
+tout l’ADN (JSON) ¦ celá DNA (JSON) ¦ alt DNA (JSON)
+Aucune paire « Nom A ; Nom B ». ¦ Žiadny pár „Meno A; Meno B“. ¦ Ingen par «Navn A; Navn B».
+Une paire par ligne : « Nom A ; Nom B » (ou une tabulation, une virgule). Les noms tels que sur le site du test. ¦ Jeden pár na riadok: „Meno A; Meno B“ (alebo tabulátor, čiarka). Mená tak, ako sú na webe testu. ¦ Ett par per linje: «Navn A; Navn B» (eller en tabulator, et komma). Navnene som på testens nettsted.
+Qui correspond avec qui : la base des regroupements (Leeds, grappes). Une case pleine, A et B se correspondent. Clique une case pour l’ajouter ou la retirer ; ou colle la liste « en commun » donnée par la société. ¦ Kto si zodpovedá s kým: základ zoskupovania (Leeds, zhluky). Plné pole = A a B si zodpovedajú. Klikni na pole, aby si ho pridal alebo odobral; alebo vlož zoznam „spoločných“ od spoločnosti. ¦ Hvem som samsvarer med hvem: grunnlaget for grupperinger (Leeds, klynger). En fylt boks = A og B samsvarer. Klikk på en boks for å legge den til eller fjerne den; eller lim inn listen «felles» fra firmaet.
+rubriques ¦ oddiely ¦ rubrikker
+＋ Correspondances ¦ ＋ Zhody ¦ ＋ Treff
+ligne cochée ¦ začiarknutý riadok ¦ avkrysset linje
+lignes cochées ¦ začiarknuté riadky ¦ avkryssede linjer
+✕ Décocher ¦ ✕ Odčiarknuť ¦ ✕ Fjern avkrysning
+Cocher cette ligne ¦ Začiarknuť tento riadok ¦ Kryss av denne linjen
+Étiqueter ¦ Označiť štítkom ¦ Sett etikett
+Poser une étiquette sur toutes les lignes cochées ¦ Dať štítok na všetky začiarknuté riadky ¦ Sett en etikett på alle avkryssede linjer
+ÉTIQUETER ¦ OZNAČIŤ ŠTÍTKOM ¦ SETT ETIKETT
+Une étiquette pour {n} ¦ Štítok pre {n} ¦ En etikett for {n}
+Étiquette existante ¦ Existujúci štítok ¦ Eksisterende etikett
+— Une nouvelle — ¦ — Nový — ¦ — En ny —
+Ou une nouvelle étiquette ¦ Alebo nový štítok ¦ Eller en ny etikett
+ex. À vérifier aux archives ¦ napr. Overiť v archíve ¦ f.eks. Sjekk i arkivet
+Étiquette posée sur {n} ¦ Štítok daný na {n} ¦ Etikett satt på {n}
+({n} verrouillées laissées de côté) ¦ ({n} zamknutých vynechaných) ¦ ({n} låste hoppet over)
+Ajouter à Mes listes ¦ Pridať do Moje zoznamy ¦ Legg til i Mine lister
+Ajouter les fiches cochées à une de « Mes listes » ¦ Pridať začiarknuté karty do jedného z „Moje zoznamy“ ¦ Legg de avkryssede oppføringene til i en av «Mine lister»
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Listes → Mes listes. ¦ Žiadny z „Moje zoznamy“ neobsahuje osoby: vytvor nejaký v Zoznamy → Moje zoznamy. ¦ Ingen av «Mine lister» inneholder personer: opprett en i Lister → Mine lister.
+MES LISTES ¦ MOJE ZOZNAMY ¦ MINE LISTER
+Ajouter {n} à une liste ¦ Pridať {n} do zoznamu ¦ Legg til {n} i en liste
+{n} ajoutées à « {list} » ¦ {n} pridaných do „{list}“ ¦ {n} lagt til i «{list}»
+Plus rien ne pourra changer sur ces fiches tant qu’elles sont verrouillées ¦ Na týchto kartách sa nič nezmení, kým sú zamknuté ¦ Ingenting kan endres i oppføringene så lenge de er låst
+Ces fiches pourront de nouveau être modifiées ¦ Tieto karty bude možné znova upravovať ¦ Oppføringene kan endres igjen
+{n} verrouillées ¦ {n} zamknutých ¦ {n} låst
+{n} déverrouillées ¦ {n} odomknutých ¦ {n} låst opp
+Les lignes cochées dans un fichier CSV (tableur) ¦ Začiarknuté riadky v súbore CSV (tabuľkový procesor) ¦ De avkryssede linjene i en CSV-fil (regneark)
+{n} exportées. ¦ {n} exportovaných. ¦ {n} eksportert.
+Supprime les fiches cochées ; « ↶ Annuler » les remet ¦ Zmaže začiarknuté karty; „↶ Späť“ ich vráti ¦ Sletter de avkryssede oppføringene; «↶ Angre» gjenoppretter dem
+Supprime les lignes cochées ; « ↶ Annuler » les remet ¦ Zmaže začiarknuté riadky; „↶ Späť“ ich vráti ¦ Sletter de avkryssede linjene; «↶ Angre» gjenoppretter dem
+{n} laissées de côté : {why} ¦ {n} vynechaných: {why} ¦ {n} hoppet over: {why}
+{n} supprimées ¦ {n} zmazaných ¦ {n} slettet
+{n} supprimés ¦ {n} zmazaných ¦ {n} slettet
+Plus d’actions pour « {name} » ¦ Ďalšie akcie pre „{name}“ ¦ Flere handlinger for «{name}»
+Copie impossible : choisis le texte et copie-le à la main. ¦ Kopírovanie nie je možné: vyber text a skopíruj ho ručne. ¦ Kopiering ikke mulig: merk teksten og kopier den manuelt.
+Toutes les sources de ta généalogie : où elles sont gardées, combien de fois elles sont citées, sur quelles fiches. Ouvre une source pour son modèle de citation, ses doublons et « Où est-elle citée ? ». ¦ Všetky zdroje tvojej genealógie: kde sú uložené, koľkokrát sú citované, na ktorých kartách. Otvor zdroj a uvidíš jeho citačný vzor, duplikáty a „Kde je citovaný?“. ¦ Alle kildene i slektsforskningen din: hvor de oppbevares, hvor mange ganger de siteres, i hvilke oppføringer. Åpne en kilde for sitatmalen, duplikatene og «Hvor er den sitert?».
+＋ Nouvelle source ¦ ＋ Nový zdroj ¦ ＋ Ny kilde
+Chercher une source… (titre, auteur, dépôt, cote) ¦ Hľadať zdroj… (názov, autor, uloženie, signatúra) ¦ Søk etter en kilde… (tittel, forfatter, arkiv, signatur)
+Doublons possibles ({n}) ¦ Možné duplikáty ({n}) ¦ Mulige duplikater ({n})
+Doublons possibles ¦ Možné duplikáty ¦ Mulige duplikater
+Jamais citées ({n}) ¦ Nikdy necitované ({n}) ¦ Aldri sitert ({n})
+Jamais citées ¦ Nikdy necitované ¦ Aldri sitert
+Sans modèle de citation ¦ Bez citačného vzoru ¦ Uten sitatmal
+Sans modèle ¦ Bez vzoru ¦ Uten mal
+Tous les dépôts ¦ Všetky uloženia ¦ Alle arkiver
+Z → A ¦ Z → A ¦ Å → A
+Les moins citées ¦ Najmenej citované ¦ Minst sitert
+{n} sur {t} ¦ {n} z {t} ¦ {n} av {t}
+Les sources s’ajoutent depuis une fiche (bloc Sources) ou ici avec « ＋ Nouvelle source ». ¦ Zdroje sa pridávajú z karty (blok Zdroje) alebo tu cez „＋ Nový zdroj“. ¦ Kilder legges til fra en oppføring (blokken Kilder) eller her med «＋ Ny kilde».
+Aucune source ne correspond ¦ Žiadny zdroj nezodpovedá ¦ Ingen kilde passer
+Citations ¦ Citácie ¦ Sitater
+Même titre ou même lien qu’une autre source ¦ Rovnaký názov alebo rovnaký odkaz ako iný zdroj ¦ Samme tittel eller samme lenke som en annen kilde
+doublon ? ¦ duplikát? ¦ duplikat?
+source cochée ¦ začiarknutý zdroj ¦ avkrysset kilde
+sources cochées ¦ začiarknuté zdroje ¦ avkryssede kilder
+Garder une seule des sources cochées : les citations des autres passent dans celle-là ¦ Ponechať iba jeden zo začiarknutých zdrojov: citácie ostatných prejdú doň ¦ Behold én av de avkryssede kildene: sitatene fra de andre flyttes dit
+Supprime les sources cochées et leurs citations ; « ↶ Annuler » les remet ¦ Zmaže začiarknuté zdroje a ich citácie; „↶ Späť“ ich vráti ¦ Sletter de avkryssede kildene og sitatene deres; «↶ Angre» gjenoppretter dem
+FUSIONNER DES SOURCES ¦ ZLÚČIŤ ZDROJE ¦ SLÅ SAMMEN KILDER
+Garder une seule source ¦ Ponechať iba jeden zdroj ¦ Behold én kilde
+⇄ Fusionner ¦ ⇄ Zlúčiť ¦ ⇄ Slå sammen
+Les citations, étiquettes, médias et notes des autres passent dans la source gardée ; ses cases vides sont complétées. « ↶ Annuler » remet tout comme avant. ¦ Citácie, štítky, médiá a poznámky ostatných prejdú do ponechaného zdroja; jeho prázdne polia sa doplnia. „↶ Späť“ vráti všetko, ako bolo. ¦ Sitatene, etikettene, mediene og notatene fra de andre flyttes til kilden som beholdes; de tomme feltene fylles ut. «↶ Angre» gjenoppretter alt som før.
+{n} fusionnées dans une seule ¦ {n} zlúčených do jedného ¦ {n} slått sammen til én
+Fusionner avec ses doublons ¦ Zlúčiť s jeho duplikátmi ¦ Slå sammen med duplikatene
+{n} sources se ressemblent ¦ {n} zdrojov je si podobných ¦ {n} kilder ligner hverandre
+Copier la citation ¦ Kopírovať citáciu ¦ Kopier sitatet
+Le style classique, à la française ¦ Klasický francúzsky štýl ¦ Den klassiske franske stilen
+Exporter (RIS, BibTeX) ¦ Exportovať (RIS, BibTeX) ¦ Eksporter (RIS, BibTeX)
+« ↶ Annuler » la remet ¦ „↶ Späť“ ho vráti ¦ «↶ Angre» gjenoppretter den
+Entrée de la liste des sources ¦ Položka zoznamu zdrojov ¦ Post i kildelisten
+Première note ¦ Prvá poznámka ¦ Første note
+Note suivante ¦ Ďalšia poznámka ¦ Neste note
+Choisis un modèle : la citation s’écrit toute seule, à la manière d’Evidence Explained. ¦ Vyber vzor: citácia sa napíše sama, v štýle Evidence Explained. ¦ Velg en mal: sitatet skriver seg selv, på samme måte som Evidence Explained.
+Toutes les sources ¦ Všetky zdroje ¦ Alle kilder
+{c} · {p} ¦ {c} · {p} ¦ {c} · {p}
+Dépôt (service d’archives) ¦ Uloženie (archív) ¦ Arkiv (arkivinstitusjon)
+— Aucun — ¦ — Žiadne — ¦ — Ingen —
+Dépôt écrit à la main ¦ Uloženie napísané ručne ¦ Arkiv skrevet for hånd
+Publication ¦ Publikácia ¦ Publikasjon
+Modèle de citation ¦ Citačný vzor ¦ Sitatmal
+— Pas de modèle — ¦ — Bez vzoru — ¦ — Ingen mal —
+La citation, prête à coller ¦ Citácia pripravená na vloženie ¦ Sitatet, klart til å lime inn
+Autres styles (classique, Chicago, forum…) ¦ Ďalšie štýly (klasický, Chicago, fórum…) ¦ Andre stiler (klassisk, Chicago, forum…)
+Où est-elle citée ? ¦ Kde je citovaný? ¦ Hvor er den sitert?
+Citée nulle part pour l’instant. ¦ Zatiaľ nikde necitovaný. ¦ Ikke sitert noe sted ennå.
+Médias rattachés ¦ Pripojené médiá ¦ Tilknyttede medier
+Fusionner dans celle-ci ¦ Zlúčiť do tohto ¦ Slå sammen med denne
+💍 Familles et couples ¦ 💍 Rodiny a páry ¦ 💍 Familier og par
+Chaque couple : le mariage (date, lieu), les enfants, une séparation, les sources. ¦ Každý pár: sobáš (dátum, miesto), deti, rozchod, zdroje. ¦ Hvert par: vielsen (dato, sted), barna, en separasjon, kildene.
+Chercher un couple… (nom, lieu, année) ¦ Hľadať pár… (meno, miesto, rok) ¦ Søk etter et par… (navn, sted, år)
+Sans date de mariage ¦ Bez dátumu sobáša ¦ Uten vielsesdato
+Avec des enfants ¦ S deťmi ¦ Med barn
+Sans enfant connu ¦ Bez známeho dieťaťa ¦ Uten kjente barn
+Séparés, divorcés ¦ Odlúčení, rozvedení ¦ Separerte, skilt
+Mariage : les plus anciens ¦ Sobáš: najstaršie ¦ Vielse: eldste først
+Mariage : les plus récents ¦ Sobáš: najnovšie ¦ Vielse: nyeste først
+Le plus d’enfants ¦ Najviac detí ¦ Flest barn
+Aucun couple ne correspond ¦ Žiadny pár nezodpovedá ¦ Ingen par passer
+Aucun couple pour l’instant ¦ Zatiaľ žiadny pár ¦ Ingen par ennå
+Un couple se crée sur une fiche, en ajoutant un conjoint. ¦ Pár sa vytvorí na karte pridaním partnera. ¦ Et par opprettes i en oppføring ved å legge til en ektefelle.
+Ouvrir la fiche de {name} ¦ Otvoriť kartu osoby {name} ¦ Åpne oppføringen til {name}
+🔤 Noms de famille ¦ 🔤 Priezviská ¦ 🔤 Etternavn
+Chaque nom de famille : combien de personnes le portent, à quelle époque, où, ses autres orthographes. Un clic : les personnes de ce nom. ¦ Každé priezvisko: koľko osôb ho nesie, v akej dobe, kde, jeho iné pravopisné podoby. Jedno kliknutie: osoby s týmto menom. ¦ Hvert etternavn: hvor mange personer som bærer det, i hvilken tid, hvor, andre stavemåter. Ett klikk: personene med dette navnet.
+Chercher un nom… (ex. Mazaud, Tulle) ¦ Hľadať meno… (napr. Mazaud, Tulle) ¦ Søk etter et navn… (f.eks. Mazaud, Tulle)
+Portés par au moins 2 personnes ¦ Nesené aspoň 2 osobami ¦ Båret av minst 2 personer
+Avec des variantes ¦ S variantmi ¦ Med varianter
+Les plus portés ¦ Najčastejšie ¦ Mest brukt
+Aucun nom de famille pour l’instant ¦ Zatiaľ žiadne priezvisko ¦ Ingen etternavn ennå
+Porteurs ¦ Nositelia ¦ Bærere
+Variantes ¦ Varianty ¦ Varianter
+Tous les noms ¦ Všetky mená ¦ Alle navn
+Personne ne porte ce nom ¦ Toto meno nikto nenesie ¦ Ingen bærer dette navnet
+fiche cochée ¦ začiarknutá karta ¦ avkrysset oppføring
+fiches cochées ¦ začiarknuté karty ¦ avkryssede oppføringer
+Toutes les notes écrites sur les fiches, les événements, les couples et les sources. La recherche lit tout le texte. ¦ Všetky poznámky napísané na kartách, udalostiach, pároch a zdrojoch. Hľadanie číta celý text. ¦ Alle notater skrevet i oppføringer, hendelser, par og kilder. Søket leser hele teksten.
+Chercher dans les notes… (ex. moulin, Tulle, 1870) ¦ Hľadať v poznámkach… (napr. mlyn, Tulle, 1870) ¦ Søk i notatene… (f.eks. mølle, Tulle, 1870)
+Rattachées à ¦ Pripojené k ¦ Knyttet til
+Aucune note ne contient ces mots ¦ Žiadna poznámka neobsahuje tieto slová ¦ Ingen notater inneholder disse ordene
+Essaie un autre mot, ou une partie du mot. ¦ Skús iné slovo alebo časť slova. ¦ Prøv et annet ord, eller en del av ordet.
+Les notes s’écrivent sur les fiches, les événements et les sources. ¦ Poznámky sa píšu na kartách, udalostiach a zdrojoch. ¦ Notater skrives i oppføringer, hendelser og kilder.
+Voir plus ¦ Zobraziť viac ¦ Vis mer
+note cochée ¦ začiarknutá poznámka ¦ avkrysset notat
+notes cochées ¦ začiarknuté poznámky ¦ avkryssede notater
+notes ¦ poznámky ¦ notater
+« ↶ Annuler » les remet ¦ „↶ Späť“ ich vráti ¦ «↶ Angre» gjenoppretter dem
+NOTE ¦ POZNÁMKA ¦ NOTAT
+SOURCES ¦ ZDROJE ¦ KILDER
+Nouvelle source ¦ Nový zdroj ¦ Ny kilde
+ex. État civil de Tulle, naissances 1823 ¦ napr. Matrika Tulle, narodenia 1823 ¦ f.eks. Sivilstand i Tulle, fødsler 1823
+ex. Archives de la Corrèze ¦ napr. Archives de la Corrèze ¦ f.eks. Archives de la Corrèze
+Source ajoutée ¦ Zdroj pridaný ¦ Kilde lagt til
+Enregistrer ces filtres sous un nom, ou rappeler des filtres enregistrés ¦ Uložiť tieto filtre pod názvom alebo vyvolať uložené filtre ¦ Lagre disse filtrene under et navn, eller hent lagrede filtre
+{n} filtre(s) ¦ {n} filter(rov) ¦ {n} filter
+La recherche, les filtres et le tri de maintenant, sous un nom ¦ Súčasné hľadanie, filtre a zoradenie pod jedným názvom ¦ Nåværende søk, filtre og sortering under et navn
+Choisis d’abord une recherche ou un filtre ¦ Najprv vyber hľadanie alebo filter ¦ Velg først et søk eller et filter
+Un nom pour retrouver cette liste filtrée d’un clic. ¦ Názov, aby si tento filtrovaný zoznam našiel jedným kliknutím. ¦ Et navn for å finne denne filtrerte listen med ett klikk.
+ex. Les Mazaud nés à Tulle ¦ napr. Mazaudovci narodení v Tulle ¦ f.eks. Familien Mazaud født i Tulle
+Filtres gardés sous « {name} ». ¦ Filtre uložené pod „{name}“. ¦ Filtrene lagret under «{name}».
+Oublier « {name} » ¦ Zabudnúť „{name}“ ¦ Glem «{name}»
+Filtres « {name} » oubliés ¦ Filtre „{name}“ zabudnuté ¦ Filtrene «{name}» glemt
+Filtres enregistrés ¦ Uložené filtre ¦ Lagrede filtre
+événement coché ¦ začiarknutá udalosť ¦ avkrysset hendelse
+événements cochés ¦ začiarknuté udalosti ¦ avkryssede hendelser
+Double-clic pour corriger ¦ Dvojklikom opravíš ¦ Dobbeltklikk for å rette
+Corriger la date ¦ Opraviť dátum ¦ Rett datoen
+Ou double-clic sur la case ¦ Alebo dvojklik na pole ¦ Eller dobbeltklikk på boksen
+Nouvelle valeur ¦ Nová hodnota ¦ Ny verdi
+Corrigé : « {v} » ¦ Opravené: „{v}“ ¦ Rettet: «{v}»
+✓ Terminée le {date} ¦ ✓ Dokončené {date} ¦ ✓ Ferdig {date}
+À faire (date passée) ¦ Urobiť (termín uplynul) ¦ Å gjøre (datoen er passert)
+À faire ({n}) ¦ Urobiť ({n}) ¦ Å gjøre ({n})
+✓ Terminées ({n}) ¦ ✓ Dokončené ({n}) ¦ ✓ Ferdige ({n})
+✓ Terminées ¦ ✓ Dokončené ¦ ✓ Ferdige
+Date passée, pas faites ({n}) ¦ Termín uplynul, neurobené ({n}) ¦ Datoen passert, ikke gjort ({n})
+Date passée ¦ Termín uplynul ¦ Datoen passert
+Cote retirée de la visite. ¦ Signatúra odobratá z návštevy. ¦ Signaturen fjernet fra besøket.
+Donne un titre à la source. ¦ Daj zdroju názov. ¦ Gi kilden en tittel.
+Adresse internet invalide (elle doit commencer par https://). ¦ Neplatná internetová adresa (musí začínať https://). ¦ Ugyldig nettadresse (den må begynne med https://).
+Source à garder introuvable. ¦ Zdroj na ponechanie sa nedá nájsť. ¦ Kilden som skal beholdes, finnes ikke.
+Choisis au moins une autre source à fusionner. ¦ Vyber aspoň jeden ďalší zdroj na zlúčenie. ¦ Velg minst én annen kilde å slå sammen.
+Choisis une étiquette ou écris son nom. ¦ Vyber štítok alebo napíš jeho názov. ¦ Velg en etikett eller skriv navnet.
+Cette liste ne contient pas des personnes. ¦ Tento zoznam neobsahuje osoby. ¦ Denne listen inneholder ikke personer.
+Cette case ne se modifie pas ici. ¦ Toto pole sa tu neupravuje. ¦ Denne boksen endres ikke her.
+La feuille de mission n’existe plus. ¦ Pracovný list už neexistuje. ¦ Oppdragsarket finnes ikke lenger.
+Acte d’état civil ¦ Matričný záznam ¦ Sivilstandsakt
+Registre (ex. Naissances) ¦ Matrika (napr. Narodenia) ¦ Register (f.eks. Fødsler)
+Année(s) ¦ Rok(y) ¦ År
+N° de l’acte ¦ Č. záznamu ¦ Aktens nr.
+Qui (personne de l’acte) ¦ Kto (osoba v zázname) ¦ Hvem (personen i akten)
+Lien de la vue ¦ Odkaz na snímku ¦ Lenke til bildet
+Paroisse ¦ Farnosť ¦ Sogn
+Registre (ex. Baptêmes, mariages, sépultures) ¦ Matrika (napr. Krsty, sobáše, pohreby) ¦ Register (f.eks. Dåp, vielser, begravelser)
+Quartier, rue ¦ Štvrť, ulica ¦ Bydel, gate
+Page ou folio ¦ Strana alebo fólio ¦ Side eller folio
+Foyer de ¦ Domácnosť ¦ Husstand for
+Résidence du notaire ¦ Sídlo notára ¦ Notarens sete
+Nature de l’acte ¦ Druh listiny ¦ Aktens art
+Bureau de recrutement ¦ Odvodný úrad ¦ Utskrivningskontor
+N° matricule ¦ Kmeňové č. ¦ Rullenr.
+Soldat ¦ Vojak ¦ Soldat
+Livre, revue ¦ Kniha, časopis ¦ Bok, tidsskrift
+Page(s) ¦ Strana/strany ¦ Side(r)
+Page internet, base en ligne ¦ Webová stránka, online databáza ¦ Nettside, nettdatabase
+Auteur ou organisme ¦ Autor alebo organizácia ¦ Forfatter eller organisasjon
+Titre de la page ¦ Názov stránky ¦ Sidens tittel
+Site n° {n} ¦ Lokalita č. {n} ¦ Lokalitet nr. {n}
+Sans site ¦ Bez lokality ¦ Uten lokalitet
+revus l’année suivante ({b} sur {n}) ¦ znova spozorovaní nasledujúci rok ({b} z {n}) ¦ gjensett året etter ({b} av {n})
+Cohorte ¦ Kohorta ¦ Kohort
+Site ¦ Lokalita ¦ Lokalitet
+Revus l’année suivante ¦ Znova spozorovaní nasledujúci rok ¦ Gjensett året etter
+Pas encore assez d’années d’observations pour calculer les retours. ¦ Zatiaľ nie je dosť rokov pozorovaní na výpočet návratov. ¦ Ikke nok års observasjoner ennå til å beregne returer.
+cohorte ¦ kohorta ¦ kohort
+délai : {n} ¦ lehota: {n} ¦ frist: {n}
+jamais vu ¦ nikdy nespozorovaný ¦ aldri sett
+Délais par espèce ¦ Lehoty podľa druhu ¦ Frister per art
+Tous ont été revus à temps. ¦ Všetci boli znova spozorovaní včas. ¦ Alle er gjensett i tide.
+🔔 Délais par espèce ¦ 🔔 Lehoty podľa druhu ¦ 🔔 Frister per art
