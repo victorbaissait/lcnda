@@ -77,3 +77,6 @@ Chaque gros outil : maquette d'abord.
 - ✅ Étape 1 FAITE : onglet « 🧩 Gabarit » à côté de « Ce que l'app a trouvé », 9 gabarits (dont la nouvelle sorte « Acte de notoriété »), remplis par Repérer sans écraser une case ✓ ou écrite, lien vers le passage (« l. 3 », « page 2, l. 3 »), gardé avec l'acte (vérifié côté serveur), réglage « Modèle d'acte » (menu ⋯), sorte devinée en « À préciser », FAQ (31 langues). Au passage : « a été baptisé Jean, … fils de Pierre » — le prénom seul de l'enfant est reconnu (avant, le père passait pour l'enfant).
 - Étape 2 : « ✓ Ajouter à la généalogie » depuis les cases, avec aperçu.
 - Étape 3 : « ＋ Ajouter une case », « 🧩 Mes gabarits », export (tableau à l'impression, ⤓ Tableur par sorte).
+
+## Idée du 24 novembre : « Où je trouve ça ? » (dans 🌍 Où chercher ?) — après les gabarits
+Une question en une phrase, sans fiche : « Je cherche [un acte de naissance ▾] à [commune ou département] en [année] ». L'app répond avec ce qu'elle sait déjà : les années en ligne aux archives départementales (config/archives-en-ligne.json, les pastilles 🟢 🟡 📮 🔒 ❔), le lien vers le site, les tables décennales, les autres sites utiles (« Où chercher ? », 132 sites), et si l'acte a moins de 75 / 100 ans : à qui écrire (mairie, greffe) avec un courrier tout prêt (« Courriers tout prêts »). Maquette d'abord.
