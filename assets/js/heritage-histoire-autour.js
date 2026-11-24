@@ -353,7 +353,8 @@
     }
     const EV_WORD = {eq: 'séisme', vo: 'éruption', ts: 'tsunami'};
     function disasterTitle(ev) {
-        const where = [ev.loc ? cap(String(ev.loc).toLowerCase().replace(/^[^:]+:\s*/, '')) : '', ev.country].filter(Boolean);
+        const titled = x => String(x).toLowerCase().replace(/(^|[\s'(-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
+        const where = [ev.k !== 'vo' && ev.loc ? titled(String(ev.loc).replace(/^[^:]+:\s*/, '').replace(/\s+/g, ' ')) : '', ev.country].filter(Boolean);
         const uniq = [...new Set(where.map(w => w.trim()))].join(', ');
         if (ev.k === 'vo') return T('éruption du volcan {v}{w}', {v: esc(ev.volcano || '?'), w: uniq ? ` (${esc(uniq)})` : ''});
         if (ev.k === 'ts') return T('tsunami{w}', {w: uniq ? ` (${esc(uniq)})` : ''}) + (num(ev.mag) ? `, ${esc(T('vague de {m} m', {m: dec(ev.mag)}))}` : '');

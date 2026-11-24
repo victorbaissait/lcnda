@@ -211,8 +211,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.lists.data_test_chateaux(++window.LCNDA_APP.state.workspaceToken)); await waitCount(/^3 lignes/);
             await p.click('[data-ld-send]'); await p.waitForFunction(() => window.__sent);
             const sent = await p.evaluate(() => window.__sent); assert.strictEqual(sent.kind, 'rows'); assert.strictEqual(sent.data.rows.length, 4); assert.strictEqual(sent.data.rows[0][0], 'Nom'); assert.match(sent.data.name, /Châteaux inventés — 📍 À 10 km autour de Tulle/);
-            if (!(await p.isVisible('[data-ld-print]'))) await p.click('.ld-page .ui-ph-more > summary'); /* 3e bouton : rangé dans ⋯ */ await p.click('[data-ld-print]'); await p.waitForFunction(() => window.__printed);
-            assert.match(await p.evaluate(() => window.__printed), /Château de Mazaud[\s\S]*3 lignes/);
+            await p.$eval('[data-ld-print]', b => b.click()); // 3e bouton de l'en-tête : rangé dans ⋯ await p.waitForFunction(() => window.__printed);
+            assert.match(await p.evaluate(() => window.__printed), /3 lignes[\s\S]*<td>Château de Mazaud<\/td>[\s\S]*<td>oui<\/td>/);
         });
         if (hasPack) await t('liste serveur (🚂 Gares) : autour de Tulle, « Voir les suivantes », choix « Source » avec leur nombre', async () => {
             await p.evaluate(() => localStorage.setItem('lcnda-ld:hist_gares', JSON.stringify({near: {lat: 45.2675, lon: 1.7711, km: 60, title: 'Tulle'}, sort: '_km'})));

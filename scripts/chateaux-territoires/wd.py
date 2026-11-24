@@ -13,7 +13,7 @@ UA = 'LCNDA-build/1.0 (genealogy app open-data build; https://github.com/)'
 ENDPOINT = 'https://query.wikidata.org/sparql'
 
 
-def sparql(query, cache_dir, tries=4):
+def sparql(query, cache_dir, tries=3):
     os.makedirs(cache_dir, exist_ok=True)
     key = hashlib.sha256(query.encode()).hexdigest()[:24]
     path = os.path.join(cache_dir, key + '.json')

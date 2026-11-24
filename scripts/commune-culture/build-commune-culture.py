@@ -2,8 +2,9 @@
 """🎬📜🛡️🍲 Le village dans la culture : fabrique les données livrées avec l'app (assets/data/cc-*.json.gz).
 
 Sources (toutes téléchargées par ce script, réponses gardées dans raw/ : relancer ne refait pas les appels) :
+  - les communes (nom, centre) : référentiel de l'app data/reference/geo-fr.sqlite.gz (france-geojson, IGN / Etalab, Licence Ouverte 2.0) ;
   - Wikidata (CC0 1.0) — query.wikidata.org (SPARQL, une requête par minute : fetch_sparql.py) et www.wikidata.org/w/api.php :
-      communes (P374 code INSEE, P625 position, libellé), œuvres (P915 lieu de tournage, P840 lieu de l'action, P921 sujet),
+      communes (P374 code INSEE), œuvres (P915 lieu de tournage, P840 lieu de l'action, P921 sujet),
       armoiries (P94), plats (P1071 lieu de création, P361/P2012 cuisine régionale), départements (P2586) ;
   (l'auteur et la licence de chaque image d'armoiries sont lus en ligne par l'app, quand l'image s'affiche : lib/commune_culture.php cc_credit)
   - Wikipédia en français (CC BY-SA 4.0) : pages « Armorial des communes de … », modèle {{Blason commune}} (fetch_wiki.py).
@@ -30,16 +31,21 @@ def point(s):
     m = re.match(r'Point\(([-\d.eE]+) ([-\d.eE]+)\)', s or '')
     return (round(float(m.group(2)), 4), round(float(m.group(1)), 4)) if m else (None, None)
 
-def labels(ids, langs='fr|en'):
-    """libellés (et article Wikipédia en français) de beaucoup d'éléments : wbgetentities props=labels|sitelinks, 50 par appel"""
+def labels(ids, chunk=2500):
+    """libellés fr/en, description fr et article Wikipédia en français de beaucoup d'éléments : SPARQL avec VALUES (2500 par requête,
+    une requête par minute — l'API wbgetentities, 50 par appel, est bien plus souvent refusée « trop de demandes »)"""
+    import hashlib
     out = {}
-    ids = sorted(set(ids), key=lambda x: int(x[1:]))
-    for i in range(0, len(ids), 50):
-        j = wm.wd({'action': 'wbgetentities', 'ids': '|'.join(ids[i:i + 50]), 'props': 'labels|descriptions|sitelinks', 'languages': langs, 'sitefilter': 'frwiki'})
-        for q, e in j.get('entities', {}).items():
-            L = e.get('labels', {}); D = e.get('descriptions', {})
-            out[q] = {'fr': (L.get('fr') or {}).get('value', ''), 'en': (L.get('en') or {}).get('value', ''), 'desc': (D.get('fr') or {}).get('value', ''),
-                      'wp': (e.get('sitelinks', {}).get('frwiki') or {}).get('title', '')}
+    ids = sorted({i for i in ids if re.match(r'^Q\d+$', i)}, key=lambda x: int(x[1:]))
+    for i in range(0, len(ids), chunk):
+        part = ids[i:i + chunk]
+        q = ('SELECT ?i ?fr ?en ?d ?wp WHERE { VALUES ?i { ' + ' '.join('wd:' + x for x in part) + ' } '
+             'OPTIONAL { ?i rdfs:label ?fr FILTER(lang(?fr)="fr") } OPTIONAL { ?i rdfs:label ?en FILTER(lang(?en)="en") } '
+             'OPTIONAL { ?i schema:description ?d FILTER(lang(?d)="fr") } OPTIONAL { ?wp schema:about ?i ; schema:isPartOf <https://fr.wikipedia.org/> } }')
+        for r in wm.sparql(q, 'lab-' + hashlib.sha1(' '.join(part).encode()).hexdigest()[:16]):
+            o = out.setdefault(qid(r['i']), {'fr': '', 'en': '', 'desc': '', 'wp': ''})
+            o['fr'] = o['fr'] or r.get('fr', ''); o['en'] = o['en'] or r.get('en', ''); o['desc'] = o['desc'] or r.get('d', '')
+            if r.get('wp') and not o['wp']: o['wp'] = urllib.parse.unquote(r['wp'].rsplit('/wiki/', 1)[1]).replace('_', ' ')
     return out
 
 wpurl = lambda t: 'https://fr.wikipedia.org/wiki/' + urllib.parse.quote(t.replace(' ', '_')) if t else ''
@@ -56,23 +62,20 @@ dep_of = lambda insee: insee[:3] if insee.startswith('97') else insee[:2]
 
 # ═══════════════ 1. les communes ═══════════════
 def build_communes():
-    lab = {}
-    for i in range(5):
-        for r in rows(f'labels_{i}'): lab[qid(r['c'])] = r['l']
-    by = {}
+    """noms et positions : le référentiel des communes déjà livré avec l'app (data/reference/geo-fr.sqlite.gz, table commune_contours :
+    france-geojson, IGN / Etalab, Licence Ouverte 2.0) ; le lien élément Wikidata → code INSEE : Wikidata P374 (CC0)"""
+    import sqlite3, tempfile
+    ref = os.path.join(HERE, '..', '..', 'data', 'reference', 'geo-fr.sqlite.gz')
+    tmp = tempfile.NamedTemporaryFile(suffix='.sqlite', delete=False); tmp.write(gzip.open(ref).read()); tmp.close()
+    db = sqlite3.connect(tmp.name)
+    C = {ins: [name, round(lat, 4) if lat is not None else None, round(lon, 4) if lon is not None else None]
+         for ins, name, lat, lon in db.execute('SELECT insee_code, name, centroid_lat, centroid_lon FROM commune_contours')}
+    db.close(); os.unlink(tmp.name)
+    Q2I = {}
     for r in rows('communes'):
-        q = qid(r['c']); ins = r['insee']
-        if not re.match(r'^\d[\dAB]\d{3}$', ins): continue
-        lat, lon = point(r.get('coord'))
-        by.setdefault(ins, []).append((q, lab.get(q, ''), lat, lon))
-    C, Q2I = {}, {}
-    for ins, items in by.items():
-        for q, *_ in items: Q2I[q] = ins
-        items.sort(key=lambda x: (x[1] == '', x[2] is None, int(x[0][1:])))
-        q, name, lat, lon = items[0]
-        if not name: continue
-        C[ins] = [name, lat, lon]
-    write('communes', {'v': 1, 'attr': 'Wikidata (communes : code INSEE P374, position P625, libellé)', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/', 'built': TODAY, 'c': C})
+        if r['insee'] in C: Q2I.setdefault(qid(r['c']), r['insee'])
+    write('communes', {'v': 1, 'attr': 'Communes de France au 1er janvier (nom, centre) : france-geojson (IGN / Etalab), déjà dans le référentiel de l’app ; lien avec Wikidata : P374 (code INSEE)',
+                       'licence': 'Licence Ouverte 2.0 (noms, positions) ; CC0 1.0 (Wikidata)', 'url': 'https://github.com/gregoiredavid/france-geojson', 'built': TODAY, 'c': C})
     return C, Q2I
 
 # ═══════════════ 2. les œuvres ═══════════════

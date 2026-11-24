@@ -431,7 +431,7 @@
         while (out.length < Math.min(total, EXPORT_MAX)) { const p = await fetchPage(d, st, out.length, 2000); total = p.total; if (!p.rows.length) break; out.push(...p.rows); }
         return out.slice(0, EXPORT_MAX);
     }
-    const table2d = rows => { const cs = [...cols(cur.d, cur.st), ...urlFields(cur.d)]; return [cs.map(f => T(f.label)), ...rows.map(r => cs.map(f => r[f.key] ?? ''))]; };
+    const table2d = rows => { const cs = [...cols(cur.d, cur.st), ...urlFields(cur.d)]; const val = (f, v) => (v == null ? '' : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : v); return [cs.map(f => T(f.label)), ...rows.map(r => cs.map(f => val(f, r[f.key])))]; };
     const critSummary = () => { const d = cur.d, st = cur.st; return [st.q ? `« ${st.q} »` : '', ...st.crit.map(c => critText(d, c)), st.period ? periodText(st.period) : '', st.near ? nearText(st.near) : ''].filter(Boolean).join(' · '); };
     async function exportCsv() {
         let rows; try { rows = await allRows(); } catch (e) { return toast(e.message, 'error'); }

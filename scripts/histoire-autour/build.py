@@ -339,23 +339,52 @@ def noaa_all(cache, kind):
         page += 1
 
 
+COUNTRY_FR = {  # noms des pays de la NOAA → français (les autres restent en anglais)
+    'Japan': 'Japon', 'Indonesia': 'Indonésie', 'China': 'Chine', 'Italy': 'Italie', 'Usa': 'États-Unis', 'United States': 'États-Unis', 'Usa Territory': 'États-Unis (territoire)',
+    'Iran': 'Iran', 'Greece': 'Grèce', 'Turkey': 'Turquie', 'Philippines': 'Philippines', 'Chile': 'Chili', 'Mexico': 'Mexique', 'Russia': 'Russie', 'Peru': 'Pérou',
+    'Papua New Guinea': 'Papouasie-Nouvelle-Guinée', 'New Zealand': 'Nouvelle-Zélande', 'Taiwan': 'Taïwan', 'India': 'Inde', 'Solomon Islands': 'Îles Salomon', 'Solomon Is.': 'Îles Salomon',
+    'Ecuador': 'Équateur', 'Colombia': 'Colombie', 'Afghanistan': 'Afghanistan', 'Iceland': 'Islande', 'Algeria': 'Algérie', 'Albania': 'Albanie', 'New Caledonia': 'Nouvelle-Calédonie',
+    'Croatia': 'Croatie', 'Spain': 'Espagne', 'Canada': 'Canada', 'Myanmar (Burma)': 'Birmanie', 'Argentina': 'Argentine', 'Australia': 'Australie', 'Syria': 'Syrie', 'Switzerland': 'Suisse',
+    'Norway': 'Norvège', 'Tajikistan': 'Tadjikistan', 'Israel': 'Israël', 'Haiti': 'Haïti', 'Azores (Portugal)': 'Açores (Portugal)', 'South Korea': 'Corée du Sud', 'North Korea': 'Corée du Nord',
+    'Iraq': 'Irak', 'Fiji': 'Fidji', 'Slovenia': 'Slovénie', 'Nepal': 'Népal', 'Morocco': 'Maroc', 'Dominican Republic': 'République dominicaine', 'Jamaica': 'Jamaïque', 'Bulgaria': 'Bulgarie',
+    'Bolivia': 'Bolivie', 'Egypt': 'Égypte', 'Azerbaijan': 'Azerbaïdjan', 'Uk': 'Royaume-Uni', 'Uk Territory': 'Royaume-Uni (territoire)', 'Ethiopia': 'Éthiopie', 'Kyrgyzstan': 'Kirghizistan',
+    'Georgia': 'Géorgie', 'Serbia': 'Serbie', 'Romania': 'Roumanie', 'South Africa': 'Afrique du Sud', 'Antarctica': 'Antarctique', 'Lebanon': 'Liban', 'Yemen': 'Yémen', 'Armenia': 'Arménie',
+    'Uzbekistan': 'Ouzbékistan', 'Brazil': 'Brésil', 'Turkmenistan': 'Turkménistan', 'North Macedonia': 'Macédoine du Nord', 'Tanzania': 'Tanzanie', 'Cyprus': 'Chypre', 'Montenegro': 'Monténégro',
+    'Bosnia-Herzegovina': 'Bosnie-Herzégovine', 'Pacific Ocean': 'océan Pacifique', 'Atlantic Ocean': 'océan Atlantique', 'Trinidad And Tobago': 'Trinité-et-Tobago', 'Greenland': 'Groenland',
+    'Tunisia': 'Tunisie', 'Germany': 'Allemagne', 'Eritrea': 'Érythrée', 'Vietnam': 'Viêt Nam', 'Austria': 'Autriche', 'Martinique (French Territory)': 'Martinique', 'Guadeloupe (French Territory)': 'Guadeloupe',
+    'Poland': 'Pologne', 'Mongolia': 'Mongolie', 'Comores': 'Comores', 'Comoros': 'Comores', 'Cameroon': 'Cameroun', 'Jordan': 'Jordanie', 'Congo, DRC': 'Congo (RDC)', 'Netherlands': 'Pays-Bas',
+    'Hungary': 'Hongrie', 'Thailand': 'Thaïlande', 'Saudi Arabia': 'Arabie saoudite', 'Antigua And Barbuda': 'Antigua-et-Barbuda', 'St. Vincent & the Grenadines': 'Saint-Vincent-et-les-Grenadines',
+    'South Sudan': 'Soudan du Sud', 'Ouganda': 'Ouganda', 'Uganda': 'Ouganda', 'Malawi': 'Malawi', 'Kermadec Islands': 'Îles Kermadec', 'Kermadec Islands (New Zealand)': 'Îles Kermadec (Nouvelle-Zélande)',
+    'Samoa': 'Samoa', 'Belgium': 'Belgique', 'Ireland': 'Irlande', 'Reunion': 'La Réunion', 'Reunion (French Territory)': 'La Réunion', 'French Polynesia': 'Polynésie française',
+    'French Polynesia (French Territory)': 'Polynésie française', 'French Guiana': 'Guyane', 'Saint Pierre And Miquelon': 'Saint-Pierre-et-Miquelon', 'Wallis And Futuna (French Territory)': 'Wallis-et-Futuna',
+    'Mayotte (French Territory)': 'Mayotte', 'Libya': 'Libye', 'Sudan': 'Soudan', 'Kenya': 'Kenya', 'Rwanda': 'Rwanda', 'Bhutan': 'Bhoutan', 'Uruguay': 'Uruguay', 'Cuba': 'Cuba', 'Honduras': 'Honduras',
+    'Panama': 'Panama', 'Nicaragua': 'Nicaragua', 'Costa Rica': 'Costa Rica', 'El Salvador': 'Salvador', 'Guatemala': 'Guatemala', 'Venezuela': 'Venezuela', 'Pakistan': 'Pakistan', 'Bangladesh': 'Bangladesh',
+    'Ukraine': 'Ukraine', 'Portugal': 'Portugal', 'France': 'France', 'Tonga': 'Tonga', 'Vanuatu': 'Vanuatu', 'Martinique': 'Martinique', 'Guadeloupe': 'Guadeloupe', 'Montserrat': 'Montserrat',
+    'Ghana': 'Ghana', 'Congo': 'Congo', 'Kazakhstan': 'Kazakhstan', 'Micronesia, Fed. States Of': 'Micronésie', 'South Georgia And The South Sandwich Islands': 'Géorgie du Sud-et-les îles Sandwich du Sud'}
+
+
+def fr_country(c):
+    c = (c or '').strip()
+    return COUNTRY_FR.get(c, c)
+
+
 def build_catastrophes(cache):
     rows = []
     for it in noaa_all(cache, 'earthquakes'):
         if it.get('latitude') is None or it.get('year') is None:
             continue
         deaths = it.get('deathsTotal', it.get('deaths'))
-        rows.append(['eq', it['id'], it['year'], it.get('month'), it.get('day'), round(it['latitude'], 3), round(it['longitude'], 3), (it.get('locationName') or '').strip(), (it.get('country') or '').title(),
+        rows.append(['eq', it['id'], it['year'], it.get('month'), it.get('day'), round(it['latitude'], 3), round(it['longitude'], 3), (it.get('locationName') or '').strip(), fr_country((it.get('country') or '').title()),
                      it.get('eqMagnitude'), it.get('intensity'), deaths, it.get('deathsAmountOrderTotal'), it.get('housesDestroyedTotal', it.get('housesDestroyed')), 1 if it.get('tsunamiEventId') else 0, ''])
     for it in noaa_all(cache, 'volcanoes'):
         if it.get('latitude') is None or it.get('year') is None:
             continue
-        rows.append(['vo', it['id'], it['year'], it.get('month'), it.get('day'), round(it['latitude'], 3), round(it['longitude'], 3), (it.get('location') or '').strip(), it.get('country') or '',
+        rows.append(['vo', it['id'], it['year'], it.get('month'), it.get('day'), round(it['latitude'], 3), round(it['longitude'], 3), (it.get('location') or '').strip(), fr_country(it.get('country') or ''),
                      it.get('vei'), None, it.get('deathsTotal', it.get('deaths')), it.get('deathsAmountOrderTotal'), it.get('housesDestroyedTotal', it.get('housesDestroyed')), 1 if it.get('tsunamiEventId') else 0, it.get('name') or ''])
     for it in noaa_all(cache, 'tsunamis/events'):
         if it.get('latitude') is None or it.get('year') is None or (it.get('eventValidity') or 0) < 3:
             continue
-        rows.append(['ts', it['id'], it['year'], it.get('month'), it.get('day'), round(it['latitude'], 3), round(it['longitude'], 3), (it.get('locationName') or '').strip(), (it.get('country') or '').title(),
+        rows.append(['ts', it['id'], it['year'], it.get('month'), it.get('day'), round(it['latitude'], 3), round(it['longitude'], 3), (it.get('locationName') or '').strip(), fr_country((it.get('country') or '').title()),
                      it.get('maxWaterHeight'), it.get('tsIntensity'), it.get('deathsTotal', it.get('deaths')), it.get('deathsAmountOrderTotal'), it.get('housesDestroyedTotal', it.get('housesDestroyed')), 0, ''])
     rows.sort(key=lambda r: (r[2], r[3] or 0, r[4] or 0))
     print(f'🌋 {len(rows)} événements NOAA', flush=True)
@@ -460,6 +489,7 @@ def build_phares(cache):
     # la portée manquante : OpenStreetMap (seamark:light:range), le feu le plus proche à 300 m au plus
     osm = []
     try:
+        http('https://overpass-api.de/api/status', tries=1, timeout=30)  # Overpass joignable ? sinon on ne s'acharne pas
         for k, bb in enumerate(['-60,-180,0,0', '0,-180,75,0', '-60,0,0,180', '0,0,75,180']):
             res = overpass(cache, f'phares-osm{k}', f'[out:json][timeout:800][bbox:{bb}];(node["man_made"="lighthouse"]["seamark:light:range"];node["seamark:type"="light_major"]["seamark:light:range"];node["man_made"="lighthouse"]["seamark:light:1:range"];);out;')
             for e in res['elements']:

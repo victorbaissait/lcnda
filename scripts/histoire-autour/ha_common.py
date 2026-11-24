@@ -44,8 +44,9 @@ def http(url, data=None, headers=None, timeout=300, tries=6):
             time.sleep(70 if e.code == 429 else 15 * (i + 1))
         except Exception as e:  # réseau capricieux : on réessaie
             last = e
-            print(f'  … essai {i + 1} raté ({e}), on réessaie', flush=True)
-            time.sleep(15 * (i + 1))
+            if i + 1 < tries:
+                print(f'  … essai {i + 1} raté ({e}), on réessaie', flush=True)
+                time.sleep(15 * (i + 1))
     raise RuntimeError(f'{url} : {last}')
 
 

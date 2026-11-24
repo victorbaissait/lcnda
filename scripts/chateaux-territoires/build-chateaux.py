@@ -58,19 +58,19 @@ BOX = (34.0, 72.0, -25.0, 60.0)  # Europe (la Russie et la Turquie d'Asie sont c
 
 
 def items_of(cq, cache):
-    vals = ' '.join('wd:' + c for c in CLASSES)
-    q = f"""SELECT ?x ?c ?co WHERE {{ VALUES ?c {{ {vals} }} ?x wdt:P31 ?c ; wdt:P17 wd:{cq} . OPTIONAL {{ ?x wdt:P625 ?co }} }}"""
+    """les éléments d'un pays, classe par classe (une seule grosse réponse peut être coupée en route)"""
     out = {}
-    for b in wd.sparql(q, cache):
-        x = wd.qid(wd.val(b, 'x'))
-        k = CLASSES.get(wd.qid(wd.val(b, 'c')), 'c')
-        it = out.setdefault(x, {'q': x, 'k': k})
-        # plusieurs classes : la plus « château » d'abord (c > h > f > m > t > o > r)
-        if ORDER.index(k) < ORDER.index(it['k']):
-            it['k'] = k
-        p = wd.point(wd.val(b, 'co'))
-        if p and 'la' not in it:
-            it['la'], it['lo'] = p
+    for cls, k in CLASSES.items():
+        q = f"""SELECT ?x ?co WHERE {{ ?x wdt:P31 wd:{cls} ; wdt:P17 wd:{cq} . OPTIONAL {{ ?x wdt:P625 ?co }} }}"""
+        for b in wd.sparql(q, cache):
+            x = wd.qid(wd.val(b, 'x'))
+            it = out.setdefault(x, {'q': x, 'k': k})
+            # plusieurs classes : la plus « château » d'abord
+            if ORDER.index(k) < ORDER.index(it['k']):
+                it['k'] = k
+            p = wd.point(wd.val(b, 'co'))
+            if p and 'la' not in it:
+                it['la'], it['lo'] = p
     return out
 
 
@@ -121,11 +121,22 @@ def title_of(url):
     return urllib.parse.unquote(url.rsplit('/wiki/', 1)[-1]).replace('_', ' ') if url else None
 
 
+def split_run(fn, chunk, *args):
+    """une requête qui échoue (réponse coupée, délai) : on la refait en deux moitiés"""
+    try:
+        return fn(chunk, *args)
+    except RuntimeError:
+        if len(chunk) <= 10:
+            raise
+        h = len(chunk) // 2
+        return split_run(fn, chunk[:h], *args) + split_run(fn, chunk[h:], *args)
+
+
 def build_country(code, cq, lang, cache):
     items = items_of(cq, cache)
     ids = sorted(items)
     for chunk in wd.batches(ids, 250):
-        for b in details(chunk, lang, cache):
+        for b in split_run(details, chunk, lang, cache):
             it = items[wd.qid(wd.val(b, 'x'))]
             nfr, nl, nen = wd.val(b, 'nfr'), wd.val(b, 'nl'), wd.val(b, 'nen')
             it['n'] = nfr or nl or nen or it['q']
@@ -153,7 +164,7 @@ def build_country(code, cq, lang, cache):
                 it['w'] = title_of(wd.val(b, 'wf'))
             if wd.val(b, 'wl') and lang != 'fr':
                 it['wl'] = [lang, title_of(wd.val(b, 'wl'))]
-        for b in owners(chunk, cache):
+        for b in split_run(owners, chunk, cache):
             it = items[wd.qid(wd.val(b, 'x'))]
             o = wd.qid(wd.val(b, 'o'))
             row = [wd.val(b, 'ol2') or o, o, wd.year(wd.val(b, 's')), wd.year(wd.val(b, 'e'))]
@@ -167,7 +178,7 @@ def build_country(code, cq, lang, cache):
     cids = sorted({it['cq'] for it in items.values() if it.get('cq')})
     cnames = {}
     for chunk in wd.batches(cids, 400):
-        for b in communes(chunk, cache):
+        for b in split_run(communes, chunk, cache):
             cnames[wd.qid(wd.val(b, 'c'))] = (wd.val(b, 'nfr') or wd.val(b, 'n'), wd.val(b, 'insee'), wd.val(b, 'rg'))
     rows = []
     for it in items.values():
