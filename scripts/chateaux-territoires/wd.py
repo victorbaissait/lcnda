@@ -28,8 +28,10 @@ def sparql(query, cache_dir, tries=4):
                                                                        'Content-Type': 'application/x-www-form-urlencoded'})
             with urllib.request.urlopen(req, timeout=320) as r:
                 out = json.loads(r.read().decode('utf-8'))['results']['bindings']
-            with open(path, 'w', encoding='utf-8') as f:
+            tmp = path + '.part'
+            with open(tmp, 'w', encoding='utf-8') as f:
                 json.dump(out, f)
+            os.replace(tmp, path)  # écrit d'un coup : un autre script qui lit le cache ne voit jamais un fichier à moitié
             return out
         except Exception as e:  # 429, 500 (timeout), réseau : on attend et on recommence
             last = e

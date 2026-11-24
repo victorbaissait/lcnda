@@ -80,6 +80,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=4">
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
+    <link rel="stylesheet" href="assets/css/carto-territoires.css?v=1">
     <link rel="stylesheet" href="assets/css/monographie-plus.css?v=1">
     <link rel="stylesheet" href="assets/css/adn-livres.css?v=1">
     <link rel="stylesheet" href="assets/css/ciel-heure.css?v=1">
@@ -1395,7 +1396,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagrams.js?v=37" defer></script>
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
-<script src="assets/js/heritage-vector.js?v=42" defer></script>
+<script src="assets/js/heritage-vector.js?v=43" defer></script>
 <script src="assets/js/heritage-vector-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=21" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=16" defer></script>
@@ -1612,10 +1613,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-bases-officielles.js?v=1" defer></script>
 <script src="assets/js/heritage-ciel-heure.js?v=1" defer></script>
 <script src="assets/js/heritage-adn-livres.js?v=1" defer></script>
-<script src="assets/js/heritage-monographie-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-histoire.js?v=2" defer></script>
 <script src="assets/js/heritage-monde-contexte.js?v=1" defer></script>
 <script src="assets/js/heritage-prix-europe.js?v=1" defer></script>
+<script src="assets/js/heritage-monographie-plus.js?v=1" defer></script>
+<script src="assets/js/heritage-territoires.js?v=1" defer></script>
+<script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>
 <script src="assets/js/heritage-suivi-audit.js?v=1" defer></script>

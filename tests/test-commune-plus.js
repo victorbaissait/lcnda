@@ -9,6 +9,8 @@
  *  2. écran : fiche d'un village (église, cimetières + 🪦 sur la carte, bande d'images, ＋ Garder et ↶) ; fiches de personnes
  *     (🪦 près du lieu d'inhumation ; 📰 pour MAZAUD mort aux États-Unis, pas pour DURAND) ; LCNDA_EXT.communePlus.church/newspapers ;
  *     Réglages → 🪦 Autour du village : éteindre un bloc.
+ * image.jpg : « Tirailleurs sénégalais blessés, hôpital temporaire de Saint-Léonard, 1914-1918 », carte postale ancienne,
+ * Wikimedia Commons, CC BY-SA 4.0 (vignette 500 px).
  *   node tests/test-commune-plus.js */
 'use strict';
 const assert = require('assert');
@@ -28,7 +30,7 @@ const fx = n => JSON.parse(fs.readFileSync(path.join(FX, n), 'utf8'));
 
 (async () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-cplus-')), net0 = path.join(tmp, 'net');
-    fs.mkdirSync(path.join(tmp, 'media'), {recursive: true}); fs.cpSync(FX, net0, {recursive: true});
+    fs.mkdirSync(path.join(tmp, 'media'), {recursive: true}); fs.cpSync(FX, net0, {recursive: true}); fs.rmSync(path.join(net0, 'eglise'), {recursive: true, force: true});
     const calls = () => { try { return fs.readFileSync(path.join(net0, 'calls.log'), 'utf8').trim().split('\n').filter(Boolean); } catch (_) { return []; } };
     const phpPath = findPhp([devBundledPhp()]) || 'php';
     const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_CPLUS_DIR: net0};
@@ -64,38 +66,50 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         const toastWith = re => p.waitForFunction(s => new RegExp(s).test([...document.querySelectorAll('.ui-toast, .toast')].map(x => x.textContent).join(' ')), re.source, {timeout: 20000});
 
         /* ═════════ 1. le serveur ═════════ */
-        const over = fx('overpass.json');
+        // OpenStreetMap (Overpass) : sa réponse n'a pas pu être enregistrée si overpass.json manque → seulement le cas « hors ligne »
+        const HAS_OSM = fs.existsSync(path.join(FX, 'overpass.json')), HAS_SAINT = fs.existsSync(path.join(FX, 'eglise/wd_saints.json'));
+        if (!HAS_OSM) console.log('   (pas de réponse Overpass enregistrée : les cimetières ne sont essayés que hors ligne)');
         await t('🪦 cimetières : ceux d’OpenStreetMap à moins de 5 km, du plus proche au plus loin, avec itinéraire et mention ODbL', async () => {
             const r = await api('cplus_cemeteries', PLACE);
-            assert.strictEqual(r.ok, true, JSON.stringify(r));
+            if (!HAS_OSM) { assert.strictEqual(r.ok, false); assert.strictEqual(r.offline, true); assert.match(r.message, /connexion/); return; }
+                assert.strictEqual(r.ok, true, JSON.stringify(r));
             assert.ok(r.items.length >= 1 && r.items.length <= over.elements.length);
             for (let i = 1; i < r.items.length; i++) assert.ok(r.items[i].km >= r.items[i - 1].km);
             assert.ok(r.items.every(x => x.km <= 5.5 && /^https:\/\/www\.openstreetmap\.org\/directions\?route=%3B/.test(x.route) && /^https:\/\/www\.openstreetmap\.org\/(node|way|relation)\/\d+$/.test(x.url)));
             const named = over.elements.filter(e => e.tags?.name).map(e => e.tags.name);
-            assert.ok(r.items.some(x => named.includes(x.name)), 'un nom relu dans la réponse');
+            if (named.length) assert.ok(r.items.some(x => named.includes(x.name)), 'un nom relu dans la réponse');
             assert.strictEqual(r.source.label, '© OpenStreetMap contributors'); assert.strictEqual(r.source.licence, 'ODbL 1.0');
             assert.strictEqual(r.cached, false);
         });
-        await t('⛪ église : relue sur Wikidata — nom, siècle, saint patron et sa fête', async () => {
-            const r = await api('cplus_church', PLACE);
-            assert.strictEqual(r.ok, true, JSON.stringify(r)); assert.strictEqual(r.commune.qid, 'Q200202'); assert.strictEqual(r.commune.category, 'Saint-Léonard-de-Noblat');
-            assert.ok(r.churches.length >= 1);
-            const c = r.churches[0]; const ent = fx('wd_churches.json').entities[c.qid];
-            assert.ok(ent, 'l’église vient de la réponse');
-            assert.strictEqual(c.label, ent.labels.fr.value);
-            const line = await p.evaluate(x => window.LCNDA_EXT.communePlus.churchLine(x), c);
-            assert.match(line, /^⛪ /); if (c.saints.length) assert.match(line, /saint patron/);
-            console.log('   ' + line);
-            assert.strictEqual(r.source.licence, 'CC0 1.0');
-        });
         await t('🖼️ images : seulement ≤ 1960 (ou cartes postales sans date), les plus anciennes d’abord, auteur et licence pour chacune', async () => {
             const r = await api('cplus_images', PLACE);
-            assert.strictEqual(r.ok, true, JSON.stringify(r).slice(0, 300));
+            assert.strictEqual(r.ok, true, JSON.stringify(r).slice(0, 300)); assert.strictEqual(r.commune.qid, 'Q200202');
             assert.ok(r.items.length >= 1, 'au moins une image ancienne');
             assert.ok(r.items.every(x => (x.year && x.year <= 1960) || (x.postcard && !x.year)));
-            assert.ok(r.items.every(x => x.licence && /^https:\/\/upload\.wikimedia\.org\//.test(x.thumb) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(x.page)));
+            assert.ok(r.items.every(x => x.licence && x.author && !/(.{4,})\1/.test(x.author) && /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(x.thumb) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(x.page)));
             const ys = r.items.map(x => x.year || 1960); assert.deepStrictEqual(ys, [...ys].sort((a, b) => a - b));
-            const pages = fx('commons_files.json').query.pages; assert.ok(pages.length > r.items.length || r.items.length === pages.length);
+            const all = ['commons_files_0.json', 'commons_files_1.json'].flatMap(n => fx(n).query.pages); assert.ok(all.length > r.items.length, 'les images récentes sont écartées');
+        });
+        await t('⛪ église (Saint-Léonard) : relue sur Wikidata ; sans saint patron sur Wikidata, la ligne n’en invente pas', async () => {
+            const r = await api('cplus_church', PLACE);
+            assert.strictEqual(r.ok, true, JSON.stringify(r)); assert.strictEqual(r.commune.category, 'Saint-Léonard-de-Noblat');
+            const c = r.churches[0]; const ent = fx('wd_churches.json').entities[c.qid];
+            assert.ok(ent, 'l’église vient de la réponse'); assert.strictEqual(c.label, ent.labels.fr.value);
+            const line = await p.evaluate(x => window.LCNDA_EXT.communePlus.churchLine(x), c);
+            assert.strictEqual(line, `⛪ ${c.label}`); console.log('   ' + line);
+            assert.strictEqual(r.source.licence, 'CC0 1.0');
+        });
+        await t('⛪ église avec saint patron, fête et date (Wikidata, quartier Saint-Gervais) : « ⛪ … (XVe s.) — saint patron : …, fêté le … »', async () => {
+            for (const f of fs.readdirSync(path.join(FX, 'eglise'))) fs.copyFileSync(path.join(FX, 'eglise', f), path.join(net0, f));
+            try {
+                const r = await api('cplus_church', {qid: 'Q3413113', name: 'Saint-Gervais'});
+                assert.strictEqual(r.ok, true, JSON.stringify(r));
+                const c = r.churches.find(x => x.qid === 'Q427340'); assert.ok(c, JSON.stringify(r.churches.map(x => x.qid)));
+                assert.strictEqual(c.when, 'XVe s.'); // P571 = 1401, précision siècle
+                const line = await p.evaluate(x => window.LCNDA_EXT.communePlus.churchLine(x), c); console.log('   ' + line);
+                if (HAS_SAINT) { assert.ok(c.saints[0].label); assert.match(line, /^⛪ église Saint-Gervais-Saint-Protais \(XVe s\.\) — saint patron : /); if (c.saints[0].feast.length) assert.match(line, /, fêté le /); }
+                else assert.strictEqual(c.saints[0].qid, 'Q1515920');
+            } finally { for (const f of fs.readdirSync(path.join(FX, 'eglise'))) { if (fs.existsSync(path.join(FX, f))) fs.copyFileSync(path.join(FX, f), path.join(net0, f)); else fs.rmSync(path.join(net0, f), {force: true}); } }
         });
         await t('📰 journaux : le nombre de pages de Chronicling America où le nom paraît, pendant sa vie (fiche MAZAUD)', async () => {
             const r = await api('cplus_newspapers', {person_id: 1});
@@ -106,20 +120,27 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
         await t('gardé sur l’ordinateur : la même question ne repart pas sur Internet', async () => {
             const n = calls().length;
-            for (const a of ['cplus_cemeteries', 'cplus_church', 'cplus_images']) { const r = await api(a, PLACE); assert.strictEqual(r.cached, true, a); }
+            for (const a of [...(HAS_OSM ? ['cplus_cemeteries'] : []), 'cplus_church', 'cplus_images']) { const r = await api(a, PLACE); assert.strictEqual(r.cached, true, a); }
             assert.strictEqual((await api('cplus_newspapers', {person_id: 1})).cached, true);
             assert.strictEqual(calls().length, n);
         });
         await t('hors ligne : la réponse gardée revient ; une autre commune → un petit message, pas une erreur', async () => {
             fs.renameSync(net0, net0 + '-off');
             try {
-                assert.strictEqual((await api('cplus_cemeteries', PLACE)).ok, true);
+                assert.strictEqual((await api('cplus_images', PLACE)).ok, true);
                 const r = await api('cplus_cemeteries', {name: 'Limoges', lat: 45.8336, lon: 1.2611});
                 assert.strictEqual(r.ok, false); assert.strictEqual(r.offline, true); assert.match(r.message, /connexion/);
                 const n = await api('cplus_newspapers', {last: 'LACOMBE'}); assert.strictEqual(n.offline, true);
             } finally { fs.renameSync(net0 + '-off', net0); }
         });
+        await t('📋 Listes (cplus_list) : images, églises, journaux tirés de ce qui est gardé', async () => {
+            const im = (await api('cplus_list', {kind: 'images'})).rows; assert.ok(im.length >= 1 && im.every(x => x.commune === 'Saint-Léonard-de-Noblat' && x.licence && x.lat));
+            const ch = (await api('cplus_list', {kind: 'churches'})).rows; assert.ok(ch.some(x => x.name.startsWith('collégiale Saint-Léonard')) && ch.some(x => x.when === 'XVe s.'));
+            const nw = (await api('cplus_list', {kind: 'newspapers'})).rows; assert.ok(nw.length >= 1 && nw.every(x => x.name === 'MAZAUD' && x.url));
+            assert.ok((await api('cplus_list', {kind: 'xx'})).error);
+        });
         await t('« ＋ Garder dans les médias » : l’image, et une source avec l’auteur, la licence et le lien ; ↶ retire tout', async () => {
+            if (!fs.existsSync(path.join(FX, 'image.jpg'))) { console.log('   (image non enregistrée : essai sauté)'); return; }
             const img = (await api('cplus_images', PLACE)).items[0];
             const k = await post('cplus_keep', {file: img.file, place_name: 'Saint-Léonard-de-Noblat'});
             assert.ok(k.batch && k.media_id, JSON.stringify(k));
@@ -138,35 +159,44 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
 
         /* ═════════ 2. l'écran ═════════ */
-        await t('fiche d’un village : église et saint patron, cimetières (🪦 sur la carte), bande « Le village en … » avec auteur et licence', async () => {
+        await t('fiche d’un village : ⛪ dans « Église et paroisse », cimetières, bande « Le village en … » (auteur, licence), une phrase puis « ▸ plus »', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'villages'; A.state.hVillage = '87161'; A.setModule('listes'); });
             await p.waitForSelector('.h-village .cplus-place', {timeout: 20000});
-            await p.waitForFunction(() => document.querySelectorAll('.cplus-place [data-cplus-part] .cplus-src').length === 3, null, {timeout: 20000});
+            await p.waitForSelector('[data-vsec="church"] [data-cplus-church-in] .cplus-church', {timeout: 20000});
+            await p.waitForSelector('[data-cplus-part="images"] .cplus-strip', {timeout: 20000});
+            assert.match(await p.textContent('[data-cplus-church-in]'), /⛪ collégiale Saint-Léonard/);
+            assert.strictEqual(await p.$('.cplus-place [data-cplus-part="church"]'), null, 'pas de deuxième bloc église');
             const txt = await p.textContent('.cplus-place');
-            assert.match(txt, /⛪ /); assert.match(txt, /© OpenStreetMap contributors/); assert.match(txt, /Le village en \d{4}|Carte postale ancienne/); assert.match(txt, /itinéraire/);
-            assert.ok(await p.$$eval('.h-village-map .cplus-pin', n => n.length) >= 1, '🪦 sur la carte');
-            assert.ok(await p.$$eval('.cplus-img figcaption small', n => n.every(x => x.textContent.trim().length > 0)));
+            assert.match(txt, /Le village en \d{4}/); assert.match(txt, /images anciennes libres de droits ; la plus ancienne : 1914/); assert.match(txt, /▸ plus/);
+            if (HAS_OSM) { await p.waitForSelector('[data-cplus-part="cemeteries"] .cplus-cem'); assert.match(txt + await p.textContent('.cplus-place'), /© OpenStreetMap contributors/); assert.ok(await p.$$eval('.h-village-map .cplus-pin', n => n.length) >= 1, '🪦 sur la carte'); }
+            else { await p.waitForSelector('[data-cplus-part="cemeteries"] .cplus-off'); }
+            assert.ok(await p.$$eval('.cplus-img figcaption small', n => n.length && n.every(x => x.textContent.trim().length > 0)));
         });
         await t('« ＋ Garder dans les médias » depuis la bande, puis ↶ Annuler', async () => {
+            if (!fs.existsSync(path.join(FX, 'image.jpg'))) return;
             await p.click('[data-cplus-keep="0"]');
             await toastWith(/Image rangée dans les médias/);
             await p.click('.ui-toast button:has-text("Annuler"), .toast button:has-text("Annuler")');
             await toastWith(/Annulé/);
             assert.strictEqual(await p.$eval('[data-cplus-keep="0"]', b => b.disabled), false);
         });
-        await t('fiche de LACOMBE (inhumée à Saint-Léonard) : « 🪦 Cimetières près de Saint-Léonard-de-Noblat » ; pas de bloc journaux', async () => {
+        await t('fiche de LACOMBE (inhumée à Saint-Léonard) : « 🪦 Cimetières près de Saint-Léonard-de-Noblat » (si connu) ; pas de bloc journaux', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
-            await p.waitForSelector('[data-cplus-pcem="2"] .cplus-cem', {timeout: 20000});
-            assert.match(await p.textContent('[data-pblock="cplus_cemeteries"]'), /Cimetières près de Saint-Léonard-de-Noblat/);
+            if (HAS_OSM) { await p.waitForSelector('[data-cplus-pcem="2"] .cplus-lead', {timeout: 20000}); assert.match(await p.textContent('[data-pblock="cplus_cemeteries"]'), /Cimetières près de Saint-Léonard-de-Noblat/); }
+            else { await p.waitForSelector('[data-cplus-pcem="2"] .cplus-off', {timeout: 20000}); }
             assert.strictEqual(await p.$('[data-cplus-pnews="2"]'), null);
+            const order = await p.evaluate(() => window.LCNDA_APP.defaultPersonBlocks.map(b => b[0]));
+            assert.ok(order.indexOf('cplus_newspapers') === order.indexOf('cplus_cemeteries') + 1, 'les deux blocs ensemble, dans le contexte');
         });
-        await t('fiche de MAZAUD (mort à Milwaukee) : 📰 Chronicling America d’abord, avec le nombre de pages ; Delpher et ANNO en liens', async () => {
+        await t('fiche de MAZAUD (mort à Milwaukee) : une phrase, Chronicling America avec le nombre de pages, Delpher et ANNO sous « ▸ plus »', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-cplus-pnews="1"] [data-cplus-hits] p', {timeout: 20000});
             const ids = await p.$$eval('[data-cplus-pnews="1"] [data-cplus-news]', n => n.map(x => x.dataset.cplusNews));
             assert.deepStrictEqual(ids, ['chronicling_america', 'delpher', 'anno']);
-            assert.match(await p.textContent('[data-cplus-pnews="1"]'), new RegExp(`sur ${fx('loc.json').pagination.of} pages entre 1872 et 1913`));
-            assert.match(await p.textContent('[data-cplus-pnews="1"]'), /États-Unis/);
+            assert.ok(await p.$('[data-cplus-pnews="1"] details [data-cplus-news="delpher"]'));
+            const txt = await p.textContent('[data-cplus-pnews="1"]');
+            assert.match(txt, /Milwaukee \(États-Unis\) : ses traces/);
+            assert.match(txt, new RegExp(`sur ${fx('loc.json').pagination.of} pages entre 1872 et 1913`));
         });
         await t('LCNDA_EXT.communePlus : newspapers(person) → {title, url, why} sans réseau ; church(place) → la ligne', async () => {
             const r = await p.evaluate(() => window.LCNDA_EXT.communePlus.newspapers({person: {first_name: 'Paul', last_name: 'DURAND'}, events: [{gedcom_tag: 'BIRT', year: 1880, country: 'France'}, {gedcom_tag: 'DEAT', year: 1950, place_name: 'Vienne', country: 'Autriche'}]}));
@@ -176,7 +206,15 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const c = await p.evaluate(pl => window.LCNDA_EXT.communePlus.church(pl), PLACE);
             assert.ok(c.ok && /^⛪ /.test(c.line) && /cplus-church/.test(c.html));
         });
-        await t('fiche de DURAND (toute sa vie en France) : pas de bloc journaux, mais les cimetières près de Limoges', async () => {
+        await t('registres communs : dataSources (4), dataLists (4, avec geo et fields), monographSections (3) ; run() d’une source', async () => {
+            const r = await p.evaluate(() => { const E = window.LCNDA_EXT; return {ds: (E.dataSources || []).filter(x => x.id.startsWith('commune_plus_')).map(x => x.id), dl: (E.dataLists || []).filter(x => x.id.startsWith('cplus_')).map(x => [x.id, !!x.geo, x.fields.length]), ms: (E.monographSections || []).filter(x => x.id.startsWith('cplus_')).map(x => x.id)}; });
+            assert.strictEqual(r.ds.length, 4); assert.strictEqual(r.ms.length, 3); assert.strictEqual(r.dl.length, 4); assert.ok(r.dl.filter(x => x[1]).length === 3 && r.dl.every(x => x[2] >= 5));
+            const html = await p.evaluate(async pl => { const h = document.createElement('div'); document.body.appendChild(h); await window.LCNDA_EXT.dataSources.find(x => x.id === 'commune_plus_images').run({place: pl}, h); const t = h.textContent; h.remove(); return t; }, PLACE);
+            assert.match(html, /images anciennes libres de droits/);
+            const rows = await p.evaluate(() => window.LCNDA_EXT.dataLists.find(x => x.id === 'cplus_churches').load());
+            assert.ok(rows.length >= 1 && rows[0].name);
+        });
+        await t('fiche de DURAND (toute sa vie en France) : pas de bloc journaux', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 3; A.setModule('personnes'); });
             await p.waitForSelector('[data-cplus-pcem="3"]', {timeout: 20000});
             assert.match(await p.textContent('[data-pblock="cplus_cemeteries"]'), /près de Limoges/);
@@ -189,8 +227,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.uncheck('[data-cplus-tg="images"] input');
             assert.strictEqual(JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-commune-plus'))).images, false);
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'villages'; A.state.hVillage = '87161'; A.setModule('listes'); });
-            await p.waitForSelector('.h-village .cplus-place', {timeout: 20000});
-            assert.strictEqual(await p.$('[data-cplus-part="images"]'), null); assert.ok(await p.$('[data-cplus-part="church"]'));
+            await p.waitForSelector('.h-village [data-cplus-church-in]', {timeout: 20000});
+            assert.strictEqual(await p.$('[data-cplus-part="images"]'), null);
         });
         await t('pas d’erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {

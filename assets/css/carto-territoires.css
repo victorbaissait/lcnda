@@ -1,0 +1,75 @@
+/* 🧩 Mes territoires (heritage-territoires.js) et 🗺 données sur les cartes (heritage-carto-donnees.js) */
+.ct-dialog{width:min(1180px,96vw);max-height:94vh;padding:0;border:var(--line);background:var(--card-bg,#fff);color:var(--ink,#080808);box-shadow:var(--shadow)}
+.ct-dialog::backdrop{background:rgba(0,0,0,.35)}
+.ct-manage,.cd-dialog{width:min(720px,96vw)}
+.ct-shell{display:flex;flex-direction:column;max-height:94vh;margin:0}
+.ct-head{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line-color,#d6d6d6)}
+.ct-head h2{flex:1;margin:0;font-size:1.15em}
+.ct-body{display:grid;grid-template-columns:minmax(260px,330px) 1fr;gap:0;min-height:0;flex:1;overflow:hidden}
+.ct-side{padding:12px 14px;overflow:auto;border-right:1px solid var(--line-color,#d6d6d6);display:flex;flex-direction:column;gap:8px}
+.ct-f{display:flex;flex-direction:column;gap:3px;font-size:.92em;min-width:0}
+.ct-f input:not([type=checkbox]):not([type=range]):not([type=color]),.ct-f select{width:100%;box-sizing:border-box}
+.ct-row{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-end}
+.ct-row>.ct-f{flex:1 1 120px}
+.ct-ac{position:relative}
+.ct-sugg{position:absolute;left:0;right:0;top:100%;z-index:5;max-height:260px;overflow:auto;background:var(--card-bg,#fff);border:1px solid var(--line-color,#d6d6d6);box-shadow:var(--shadow-small)}
+.ct-sugg[hidden]{display:none}
+.ct-sugg button{display:block;width:100%;text-align:left;padding:5px 8px;border:0;background:none;color:inherit;cursor:pointer}
+.ct-sugg button:hover,.ct-sugg button:focus{background:var(--blue-soft,#eaf2ff)}
+.ct-sugg small{color:var(--muted,#6d6d6d)}
+.ct-sugg p{margin:6px 8px}
+.ct-count{margin:2px 0;font-weight:600}
+.ct-chips{display:flex;flex-wrap:wrap;gap:4px;max-height:220px;overflow:auto}
+.ct-chip{display:inline-flex;align-items:center;gap:3px;padding:1px 2px 1px 7px;border:1px solid var(--line-color,#d6d6d6);border-radius:12px;font-size:.85em;background:var(--card-head-bg,#fafafa)}
+.ct-chip small{color:var(--muted,#6d6d6d)}
+.ct-chip button{border:0;background:none;color:inherit;cursor:pointer;padding:0 4px;font-size:.9em}
+.ct-plist{max-height:200px;overflow:auto;margin-bottom:6px}
+.ct-places[hidden]{display:none}
+.ct-style summary{cursor:pointer;font-weight:600}
+.ct-style{display:flex;flex-direction:column;gap:6px}
+.ct-mapbox{position:relative;display:flex;flex-direction:column;min-width:0;min-height:420px}
+.ct-mapbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:6px 10px;border-bottom:1px solid var(--line-color,#d6d6d6)}
+.ct-mapbar small{flex:1 1 220px}
+.ct-map{flex:1;width:100%;min-height:380px;background:#e3edf6;cursor:grab;touch-action:none;user-select:none}
+.ct-map:active{cursor:grabbing}
+.ct-com{fill:#f6f4ee;stroke:#a8a59b;stroke-width:.6px;vector-effect:non-scaling-stroke;cursor:pointer}
+.ct-com:hover{fill:#fff3c4}
+.ct-com.is-on{fill-opacity:.55}
+.ct-dep{fill:#f1f0ec;stroke:#7d7a70;stroke-width:.8px;vector-effect:non-scaling-stroke;cursor:zoom-in}
+.ct-dep:hover{fill:#fff3c4}
+.ct-shape{stroke-width:2.5px;vector-effect:non-scaling-stroke;pointer-events:none;stroke-linejoin:round}
+.ct-map text{fill:#3a3a3a;text-anchor:middle;dominant-baseline:middle;pointer-events:none;paint-order:stroke;stroke:#ffffffcc;stroke-width:.0015px}
+.ct-attr{position:absolute;right:8px;bottom:2px;margin:0;font-size:.72em;pointer-events:none}
+.ct-wait{position:absolute;inset:50% 0 auto;text-align:center;margin:0;font-weight:600;color:var(--muted,#6d6d6d)}
+.ct-wait[hidden]{display:none}
+.ct-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--line-color,#d6d6d6)}
+.ct-sp{flex:1}
+.ct-list{display:flex;flex-direction:column;gap:8px;padding:8px 16px;overflow:auto}
+.ct-item{display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:center;padding:6px;border:1px solid var(--line-color,#d6d6d6)}
+.ct-thumb{background:#eef2f6}
+.ct-manage>.ct-shell>p{margin:8px 16px 0}
+/* 🗺 la Carte */
+.ct-map-layer{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.ct-map-layer svg{position:absolute;inset:0;width:100%;height:100%}
+.ct-map-layer text{font:700 13px system-ui,sans-serif;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:3px}
+.ct-map-layer .ct-map-attr{font:400 10px system-ui,sans-serif;text-anchor:end;fill:#444}
+.ct-map-ctl{display:inline-flex;align-items:center;gap:4px}
+/* 📊 la barre « Données sur la carte » de l'éditeur de diagramme */
+.cd-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px;padding:6px 0;border-bottom:1px dashed var(--line-color,#d6d6d6)}
+.cd-bar[hidden]{display:none}
+.cd-bar-t{font-weight:700;margin-right:4px}
+.cd-chip{display:inline-flex;align-items:center;gap:3px;padding:2px 2px 2px 6px;border:1px solid var(--line-color,#d6d6d6);border-radius:12px;font-size:.88em}
+.cd-chip i{display:inline-block;width:10px;height:10px;border-radius:50%}
+.cd-chip.is-off{opacity:.5}
+.cd-chip button{border:0;background:none;color:inherit;cursor:pointer;padding:0 3px}
+.cd-body{padding:12px 16px;overflow:auto;display:flex;flex-direction:column;gap:10px}
+.cd-body fieldset{display:flex;flex-direction:column;gap:6px;border:1px solid var(--line-color,#d6d6d6);padding:8px 10px}
+.cd-body [hidden]{display:none}
+.cd-src{margin:0;font-size:.85em}
+.cd-count{margin:0;font-weight:600}
+.cd-terrs{display:flex;flex-direction:column;gap:3px}
+@media (max-width:760px){.ct-body{grid-template-columns:1fr;overflow:auto}.ct-side{border-right:0;border-bottom:1px solid var(--line-color,#d6d6d6)}.ct-item{grid-template-columns:80px 1fr}.ct-item .ct-row{grid-column:1/-1}}
+:root[data-theme="dark"] .ct-com{fill:#2c2c2c;stroke:#6b6b6b}
+:root[data-theme="dark"] .ct-dep{fill:#2a2a2a;stroke:#888}
+:root[data-theme="dark"] .ct-map{background:#1b2630}
+:root[data-theme="dark"] .ct-map text{fill:#ddd;stroke:#000a}

@@ -92,7 +92,7 @@ function cplus_http(string $step, string $url, ?array $post = null, int $max = 6
     }
     if (!function_exists('curl_init')) { throw new RuntimeException(i18n_t('Recherche impossible : PHP n’a pas l’extension curl.')); }
     $host = strtolower((string) parse_url($url, PHP_URL_HOST));
-    if (!in_array($host, ['overpass-api.de', 'commons.wikimedia.org', 'upload.wikimedia.org', 'www.wikidata.org', 'www.loc.gov'], true)) { throw new RuntimeException('Adresse refusée.'); }
+    if (!in_array($host, ['overpass-api.de', 'commons.wikimedia.org', 'upload.wikimedia.org', 'thumb.wikimedia.org', 'www.wikidata.org', 'www.loc.gov'], true)) { throw new RuntimeException('Adresse refusée.'); }
     $body = ''; $too = false;
     $ch = curl_init($url);
     $opt = [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 45, CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
@@ -450,7 +450,10 @@ function cplus_newspapers(PDO $pdo, array $q): array
         $j = cplus_json('loc.json', $search . '&fo=json&c=10&at=results,pagination');
         $items = [];
         foreach ($j['results'] ?? [] as $x) {
-            $items[] = ['title' => (string) (($x['partof_title'][0] ?? '') ?: ($x['title'] ?? '')), 'date' => (string) ($x['date'] ?? ''), 'url' => (string) ($x['url'] ?? ($x['id'] ?? '')),
+            // « Image 3 of Wisconsin Vorwärts (Milwaukee, Wis.), October 5, 1895 » → « Wisconsin Vorwärts (Milwaukee, Wis.) » (partof_title est en minuscules)
+            $tt = (string) ($x['title'] ?? '');
+            $tt = trim((string) preg_replace(['/^Image \d+ of /i', '/,\s*[A-Z][a-z]+ \d{1,2}, \d{4}$/'], '', $tt));
+            $items[] = ['title' => $tt !== '' ? $tt : ucwords((string) ($x['partof_title'][0] ?? '')), 'date' => (string) ($x['date'] ?? ''), 'url' => (string) ($x['url'] ?? ($x['id'] ?? '')),
                 'place' => trim(implode(', ', array_filter([ucwords((string) ($x['location_city'][0] ?? '')), ucwords((string) ($x['location_state'][0] ?? ''))]))), 'language' => (string) ($x['language'][0] ?? '')];
         }
         return ['ok' => true, 'total' => (int) ($j['pagination']['of'] ?? count($items)), 'items' => $items, 'name' => $last];
@@ -484,7 +487,7 @@ function cplus_keep(PDO $pdo, array $d): array
     $author = cplus_text($v('Artist'), 200) ?: cplus_text($v('Credit'), 200);
     $page = (string) ($ii['descriptionurl'] ?? ('https://commons.wikimedia.org/wiki/' . rawurlencode(str_replace(' ', '_', $file))));
     $url = (string) ($ii['thumburl'] ?? ($ii['url'] ?? ''));
-    if (strtolower((string) parse_url($url, PHP_URL_HOST)) !== 'upload.wikimedia.org' || parse_url($url, PHP_URL_SCHEME) !== 'https') { throw new RuntimeException('Adresse d’image refusée.'); }
+    if (!in_array(strtolower((string) parse_url($url, PHP_URL_HOST)), ['upload.wikimedia.org', 'thumb.wikimedia.org'], true) || parse_url($url, PHP_URL_SCHEME) !== 'https') { throw new RuntimeException('Adresse d’image refusée.'); }
     $bin = cplus_http('image.jpg', $url, null, 25_000_000, 'image/*');
     $info = @getimagesizefromstring($bin);
     $ext = [IMAGETYPE_JPEG => 'jpg', IMAGETYPE_PNG => 'png', IMAGETYPE_WEBP => 'webp', IMAGETYPE_GIF => 'gif'][$info[2] ?? 0] ?? null;

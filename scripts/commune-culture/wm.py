@@ -25,10 +25,15 @@ def get(url, data=None, accept='application/json', gap=1.5, key=None, tries=12):
               **({'Content-Type': 'application/x-www-form-urlencoded'} if data else {})})
         try:
             with urllib.request.urlopen(req, timeout=300) as r: body = r.read()
-            if body[:1] in (b'{', b'[') or accept != 'application/json':
+            if 'json' not in accept:
                 with open(f, 'wb') as fh: fh.write(body)
                 return body
-            print('  réponse non JSON, on attend', file=sys.stderr)
+            try:
+                json.loads(body)
+                with open(f, 'wb') as fh: fh.write(body)
+                return body
+            except ValueError:
+                print('  réponse non JSON ou coupée, on attend', file=sys.stderr)
         except Exception as e:
             print(f'  {host}: {e} — essai {i + 1}', file=sys.stderr)
         time.sleep(min(120, 20 * (i + 1)))

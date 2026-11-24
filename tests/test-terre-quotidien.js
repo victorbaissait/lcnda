@@ -106,7 +106,7 @@ $per = function ($f, $l, $g, $evs) use ($pdo, $tag) { $pdo->prepare("INSERT INTO
 echo json_encode([
   'pierre' => $per('Pierre', 'MAZAUD', 'male', [['BIRT', 1791, $mort], ['DEAT', 1855, $cham]]),
   'marie' => $per('Marie', 'LACOMBE', 'female', [['BIRT', 1930, $paris], ['DEAT', 2010, $paris]]),
-  'jean' => $per('Jean', 'DURAND', 'male', [['BIRT', 1700, null]]),
+  'jean' => $per('Jean', 'DURAND', 'male', [['BIRT', 1600, null]]),
 ]);`], {cwd: root, encoding: 'utf8', env});
     if (seed.status !== 0 || !/pierre/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
     const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
@@ -136,10 +136,15 @@ echo json_encode([
             assert.ok(!/météorite/.test(txt), 'les météorites vont dans « Il a pu voir… »');
             await p.waitForFunction(() => /L'Aigle/.test(document.querySelector('[data-ch-seen]')?.textContent || ''), null, {timeout: 20000});
             assert.match(await p.textContent('[data-ch-seen]'), /En 1803, une météorite tombe du ciel à \d+ km de Mortagne-au-Perche/);
-            if (await p.$('[data-wx-life]')) {
-                await p.waitForSelector('[data-wx-life] [data-tq-clim]', {timeout: 20000});
-                assert.match(await p.textContent('[data-wx-life] [data-tq-clim]'), /L’année de sa naissance \(1791\)/);
-            }
+            assert.match(txt, /L’année de sa naissance \(1791\)/, 'sans le bloc météo, le climat est dans notre bloc');
+            // le bloc « 🌦 Météo de sa vie » allumé : le climat y va
+            await p.evaluate(() => localStorage.setItem('genealogie-meteo', JSON.stringify({block: true})));
+            await openPerson(ID.marie); await sleep(500); await openPerson(ID.pierre);
+            await p.waitForSelector('[data-wx-life] [data-tq-clim]', {timeout: 20000});
+            assert.match(await p.textContent('[data-wx-life] [data-tq-clim]'), /L’année de sa naissance \(1791\)/);
+            await p.waitForFunction(() => /poche/.test(document.querySelector('[data-tq-life]')?.textContent || ''), null, {timeout: 20000});
+            assert.ok(!/L’année de sa naissance/.test(await p.textContent('[data-tq-life]')), 'pas deux fois');
+            await p.evaluate(() => localStorage.removeItem('genealogie-meteo'));
             await openPerson(ID.jean); await sleep(1500);
             const card = await p.$('[data-tq-life]');
             assert.ok(!card || await card.evaluate(h => h.closest('section.card').hidden), 'rien à dire : pas de bloc');
@@ -180,7 +185,7 @@ echo json_encode([
             for (const [k, v] of Object.entries(lists)) { assert.ok(v[0] > 0, k + ' : des lignes'); assert.ok(v[3], k + ' : les champs sont dans les lignes'); }
             assert.deepStrictEqual(Object.keys(lists).sort(), ['tq_arbres', 'tq_climat', 'tq_esperance', 'tq_glaciers', 'tq_meteorites', 'tq_poche', 'tq_sites', 'tq_timbre']);
             const per = await p.evaluate(async id => { const s = window.LCNDA_EXT.dataSources.find(x => x.id === 'tq_esperance'); const h = document.createElement('div'); await s.run({person: {id}}, h); return h.textContent; }, ID.marie);
-            assert.match(per, /À 65 ans, en 1995, une femme pouvait espérer vivre encore 20,9 ans en moyenne\. Elle en a vécu 15\./);
+            assert.match(per, /À 65 ans, en 1995, une femme pouvait espérer vivre encore 20,6 ans en moyenne\. Elle en a vécu 15\./);
         });
         assert.deepStrictEqual(errs, [], 'erreurs JS : ' + errs.join(' | '));
     } finally { await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true}); }

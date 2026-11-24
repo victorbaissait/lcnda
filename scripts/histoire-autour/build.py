@@ -12,14 +12,13 @@ Sources (toutes téléchargées, licence lue) :
 Chaque fichier porte sa source, sa licence, son lien et la date de fabrication.
 """
 import argparse
-import csv
 import datetime
-import io
 import json
 import math
 import os
 import re
 import sys
+import urllib.parse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from ha_common import (cached, encode_line, http, km, overpass, qid, simplify, sparql, wd_date, wkt_point, write_gz)  # noqa: E402
@@ -31,28 +30,6 @@ WD_SRC = {'source': 'Wikidata', 'licence': 'CC0 1.0', 'url': 'https://www.wikida
 def batches(seq, n):
     for i in range(0, len(seq), n):
         yield seq[i:i + n]
-
-
-def label_query(ids, extra='', extra_vars=''):
-    vals = ' '.join(f'wd:{q}' for q in ids)
-    return f'''SELECT ?it ?fr ?en ?frw {extra_vars} WHERE {{
-  VALUES ?it {{ {vals} }}
-  OPTIONAL {{ ?it rdfs:label ?fr FILTER(LANG(?fr)="fr") }}
-  OPTIONAL {{ ?it rdfs:label ?en FILTER(LANG(?en)="en") }}
-  OPTIONAL {{ ?frw schema:about ?it ; schema:isPartOf <https://fr.wikipedia.org/> }}
-  {extra}
-}}'''
-
-
-def labels_of(cache, name, ids):
-    """{Qid: libellé fr (sinon en)} pour une liste d'entités"""
-    out = {}
-    ids = sorted(set(i for i in ids if i))
-    for k, b in enumerate(batches(ids, 400)):
-        for r in sparql(cache, f'{name}-lab{k}', label_query(b)):
-            q = qid(r['it'])
-            out.setdefault(q, r.get('fr') or r.get('en') or '')
-    return out
 
 
 def precise(v, prec):
@@ -68,33 +45,60 @@ def precise(v, prec):
     return y, ''
 
 
-def details(cache, name, ids, props):
-    """attributs « valeur-entité » (libellés) par lot : {Qid: {prop: [libellé, …]}}"""
-    out = {q: {p: [] for p in props} for q in ids}
-    opt = '\n'.join(f'OPTIONAL {{ ?it wdt:{p} ?v_{p} . OPTIONAL {{ ?v_{p} rdfs:label ?l_{p} FILTER(LANG(?l_{p})="fr") }} OPTIONAL {{ ?v_{p} rdfs:label ?e_{p} FILTER(LANG(?e_{p})="en") }} }}' for p in props)
-    for k, b in enumerate(batches(sorted(ids), 150)):
-        vals = ' '.join(f'wd:{q}' for q in b)
-        sel = ' '.join(f'?v_{p} ?l_{p} ?e_{p}' for p in props)
-        q = f'SELECT ?it {sel} WHERE {{ VALUES ?it {{ {vals} }} {opt} }}'
-        for r in sparql(cache, f'{name}-det{k}', q):
-            it = qid(r['it'])
-            for p in props:
-                lab = r.get(f'l_{p}') or r.get(f'e_{p}') or ''
-                if lab and not re.match(r'^Q\d+$', lab) and lab not in out[it][p]:
-                    out[it][p].append(lab)
+def lab(v):
+    """les deux libellés (fr, en) d'une variable SPARQL : ?xfr, ?xen"""
+    return f'OPTIONAL {{ {v} rdfs:label {v}fr FILTER(LANG({v}fr)="fr") }} OPTIONAL {{ {v} rdfs:label {v}en FILTER(LANG({v}en)="en") }}'
+
+
+def pick(r, v):
+    x = r.get(v + 'fr') or r.get(v + 'en') or ''
+    return '' if re.match(r'^Q\d+$', x) else x
+
+
+def multi(rows, key, v):
+    """{Qid: [libellés distincts]} d'une requête « un objet par ligne »"""
+    out = {}
+    for r in rows:
+        x = pick(r, v)
+        if x:
+            lst = out.setdefault(qid(r[key]), [])
+            if x not in lst:
+                lst.append(x)
+    return out
+
+
+def names_of(cache, name, where, var='?it'):
+    """{Qid: (libellé, titre frwiki)} pour tous les objets d'un motif SPARQL (une seule requête)"""
+    q = f'SELECT {var} {var}fr {var}en ?frw WHERE {{ {where} {lab(var)} OPTIONAL {{ ?frw schema:about {var} ; schema:isPartOf <https://fr.wikipedia.org/> }} }}'
+    out = {}
+    for r in sparql(cache, name, q):
+        k = qid(r[var[1:]])
+        if k not in out or (not out[k][0] and pick(r, var[1:])):
+            frw = r.get('frw', '')
+            out[k] = (pick(r, var[1:]), urllib.parse.unquote(frw.rsplit('/', 1)[-1]) if frw else '')
+    return out
+
+
+def images_of(cache, name, where, var='?it'):
+    out = {}
+    for r in sparql(cache, name, f'SELECT {var} (SAMPLE(?i) AS ?img) WHERE {{ {where} {var} wdt:P18 ?i }} GROUP BY {var}'):
+        out[qid(r[var[1:]])] = urllib.parse.unquote(r['img'].rsplit('/', 1)[-1])
     return out
 
 
 # ═══════════════════════ ⚔️ batailles et sièges ═══════════════════════
+BAT = '{ ?b wdt:P31/wdt:P279* wd:Q178561 } UNION { ?b wdt:P31/wdt:P279* wd:Q188055 } ?b wdt:P625 ?c0 .'
+WAR_WORDS = re.compile(r'guerre|\bwar\b|campagne|campaign|révolution|revolution|conflit|conflict|insurrection|rébellion|rebellion|croisade|crusade|invasion|expédition|front|offensive', re.I)
+
+
 def build_batailles(cache):
-    q = '''SELECT ?b ?d ?dp ?s ?sp ?e ?ep ?c WHERE {
-  { ?b wdt:P31/wdt:P279* wd:Q178561 } UNION { ?b wdt:P31/wdt:P279* wd:Q188055 }
-  ?b wdt:P625 ?c .
-  OPTIONAL { ?b p:P585/psv:P585 [wikibase:timeValue ?d; wikibase:timePrecision ?dp] }
-  OPTIONAL { ?b p:P580/psv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp] }
-  OPTIONAL { ?b p:P582/psv:P582 [wikibase:timeValue ?e; wikibase:timePrecision ?ep] }
+    q = f"""SELECT ?b ?d ?dp ?s ?sp ?e ?ep ?c WHERE {{
+  {BAT.replace('?c0', '?c')}
+  OPTIONAL {{ ?b p:P585/psv:P585 [wikibase:timeValue ?d; wikibase:timePrecision ?dp] }}
+  OPTIONAL {{ ?b p:P580/psv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp] }}
+  OPTIONAL {{ ?b p:P582/psv:P582 [wikibase:timeValue ?e; wikibase:timePrecision ?ep] }}
   FILTER(BOUND(?d) || BOUND(?s))
-}'''
+}}"""
     base = {}
     for r in sparql(cache, 'batailles', q):
         b = qid(r['b'])
@@ -106,39 +110,32 @@ def build_batailles(cache):
         if y is None:
             continue
         cur = base.get(b)
-        if cur and (cur['d'] and not d or cur['y'] <= y):  # garder la date la plus précise / la plus ancienne
+        if cur and ((cur['d'] and not d) or (bool(cur['d']) == bool(d) and cur['y'] <= y)):  # la date la plus précise, puis la plus ancienne
             continue
-        base[b] = {'y': y, 'd': d, 'y2': y2 if y2 and y2 >= y else None, 'd2': d2 if y2 and y2 >= y else '', 'lat': pt[0], 'lon': pt[1]}
+        ok2 = y2 is not None and y2 >= y
+        base[b] = {'y': y, 'd': d, 'y2': y2 if ok2 else None, 'd2': d2 if ok2 else '', 'lat': pt[0], 'lon': pt[1]}
     ids = sorted(base)
     print(f'⚔️ {len(ids)} batailles et sièges datés et placés', flush=True)
-    labs = {}
-    for k, b in enumerate(batches(ids, 400)):
-        for r in sparql(cache, f'bat-lab{k}', label_query(b)):
-            labs.setdefault(qid(r['it']), (r.get('fr') or r.get('en') or '', r.get('frw', '')))
-    det = details(cache, 'bat', ids, ['P361', 'P710', 'P276', 'P17'])
-    # les guerres : P361 « fait partie de » ; on garde celles qui sont des guerres (Q198) ou des conflits (Q180684)
-    wars_q = sparql(cache, 'guerres', '''SELECT DISTINCT ?w WHERE { { ?w wdt:P31/wdt:P279* wd:Q198 } UNION { ?w wdt:P31/wdt:P279* wd:Q180684 } UNION { ?w wdt:P31/wdt:P279* wd:Q350604 } }''')
-    wars = {qid(r['w']) for r in wars_q}
-    part_ids = {}
-    for k, b in enumerate(batches(ids, 300)):
-        vals = ' '.join(f'wd:{q}' for q in b)
-        for r in sparql(cache, f'bat-part{k}', f'SELECT ?it ?w WHERE {{ VALUES ?it {{ {vals} }} ?it wdt:P361 ?w }}'):
-            part_ids.setdefault(qid(r['it']), []).append(qid(r['w']))
-    wl = labels_of(cache, 'bat-wars', [w for v in part_ids.values() for w in v])
+    labs = names_of(cache, 'bat-noms', BAT.replace('?b', '?it'))
+    wars = {}
+    for r in sparql(cache, 'bat-guerres', f'SELECT ?b ?w ?wfr ?wen WHERE {{ {BAT} ?b wdt:P361 ?w . {lab("?w")} }}'):
+        x = pick(r, 'w')
+        if x:
+            wars.setdefault(qid(r['b']), []).append(x)
+    bel = multi(sparql(cache, 'bat-camps', f'SELECT ?b ?p ?pfr ?pen WHERE {{ {BAT} ?b wdt:P710 ?p . {lab("?p")} }}'), 'b', 'p')
+    locs = multi(sparql(cache, 'bat-lieux', f'SELECT ?b ?l ?lfr ?len WHERE {{ {BAT} ?b wdt:P276 ?l . {lab("?l")} }}'), 'b', 'l')
+    ctry = multi(sparql(cache, 'bat-pays', f'SELECT ?b ?l ?lfr ?len WHERE {{ {BAT} ?b wdt:P17 ?l . {lab("?l")} }}'), 'b', 'l')
     rows = []
     for b in ids:
         x = base[b]
         name, frw = labs.get(b, ('', ''))
-        if not name or re.match(r'^Q\d+$', name):
+        if not name:
             continue
-        war_ids = [w for w in part_ids.get(b, []) if w in wars] or part_ids.get(b, [])
-        war = next((wl[w] for w in war_ids if wl.get(w)), '')
-        bel = [p for p in det[b]['P710'] if p][:6]
-        loc = (det[b]['P276'] or [''])[0]
-        country = (det[b]['P17'] or [''])[0]
-        rows.append([b, name, x['y'], x['d'], x['y2'], x['d2'], x['lat'], x['lon'], war, '|'.join(bel), loc, country, frw.rsplit('/', 1)[-1] if frw else ''])
+        ws = sorted(set(wars.get(b, [])))
+        war = next((w for w in ws if WAR_WORDS.search(w)), ws[0] if ws else '')
+        rows.append([b, name, x['y'], x['d'], x['y2'], x['d2'], x['lat'], x['lon'], war, '|'.join(bel.get(b, [])[:6]), (locs.get(b) or [''])[0], (ctry.get(b) or [''])[0], frw])
     rows.sort(key=lambda r: (r[2], r[3]))
-    meta = dict(WD_SRC, what='Batailles et sièges (Wikidata : nature = bataille Q178561 ou siège Q188055, avec date et coordonnées)')
+    meta = dict(WD_SRC, what='Batailles et sièges (Wikidata : nature = bataille Q178561 ou siège Q188055 et leurs sous-classes, avec date et coordonnées)')
     return write_gz('ha-batailles.json.gz', {**meta, 'fields': ['q', 'n', 'y', 'd', 'y2', 'd2', 'lat', 'lon', 'war', 'bel', 'loc', 'country', 'frwiki'], 'rows': rows}), len(rows)
 
 
@@ -236,30 +233,37 @@ out tags;'''
 
 
 # ═══════════════════════ 🏥 institutions ═══════════════════════
-INST = [  # (clé, Qid de la classe, libellé)
-    ('hopital', 'Q16917', 'hôpital'),
-    ('hoteldieu', 'Q1503158', 'hôtel-Dieu'),
-    ('hospice', 'Q2416723', 'hospice'),
-    ('orphelinat', 'Q228371', 'orphelinat'),
-    ('enfants', 'Q2101917', 'hospice des enfants trouvés'),
-    ('tour', 'Q1069186', 'tour d’abandon'),
-    ('prison', 'Q40357', 'prison'),
-    ('bagne', 'Q1752541', 'bagne'),
-    ('asile', 'Q847208', 'asile d’aliénés'),
-    ('couvent', 'Q44613', 'monastère, couvent'),
-    ('leproserie', 'Q817056', 'léproserie'),
+INST = [  # (clé, classes Wikidata, libellé)
+    ('hopital', ['Q16917'], 'hôpital'),
+    ('hoteldieu', ['Q1643052', 'Q1643057'], 'hôtel-Dieu'),
+    ('hospice', ['Q180370'], 'hospice, hôpital ancien'),
+    ('orphelinat', ['Q160645'], 'orphelinat'),
+    ('enfants', ['Q5474633'], 'hospice des enfants trouvés'),
+    ('prison', ['Q40357'], 'prison'),
+    ('bagne', ['Q870455', 'Q1140316'], 'bagne'),
+    ('asile', ['Q210999'], 'asile, hôpital psychiatrique'),
+    ('couvent', ['Q44613', 'Q1128397'], 'monastère, couvent'),
+    ('leproserie', ['Q1406569'], 'léproserie'),
 ]
+# pays gardés : France (avec l'outre-mer), Belgique, Suisse, Luxembourg, Monaco, Italie, Espagne, Allemagne, Pays-Bas,
+# Royaume-Uni, Irlande, Portugal, Autriche, Canada, Algérie
+INST_COUNTRIES = 'wd:Q142 wd:Q31 wd:Q39 wd:Q32 wd:Q235 wd:Q38 wd:Q29 wd:Q183 wd:Q55 wd:Q145 wd:Q27 wd:Q45 wd:Q40 wd:Q16 wd:Q262'
 
 
 def build_institutions(cache):
-    base = {}
-    for key, cls, lab in INST:
-        q = f'''SELECT ?it ?c ?inc ?dis ?country WHERE {{
-  ?it wdt:P31/wdt:P279* wd:{cls} ; wdt:P625 ?c .
-  OPTIONAL {{ ?it wdt:P571 ?inc }} OPTIONAL {{ ?it wdt:P576 ?dis }} OPTIONAL {{ ?it wdt:P17 ?country }}
-  FILTER(!BOUND(?country) || ?country IN (wd:Q142, wd:Q31, wd:Q39, wd:Q32, wd:Q38, wd:Q29, wd:Q183, wd:Q55, wd:Q145, wd:Q27, wd:Q45, wd:Q40, wd:Q233, wd:Q16, wd:Q30, wd:Q36, wd:Q213, wd:Q35, wd:Q34, wd:Q20))
+    base, labs = {}, {}
+    for key, classes, _ in INST:
+        cls = ' '.join(f'wd:{c}' for c in classes)
+        q = f'''SELECT ?it ?itfr ?iten ?frw ?c ?inc ?dis ?ctry ?ctryfr ?adm ?admfr WHERE {{
+  VALUES ?cls {{ {cls} }} VALUES ?ctry {{ {INST_COUNTRIES} }}
+  ?it wdt:P31/wdt:P279* ?cls ; wdt:P625 ?c ; wdt:P17 ?ctry .
+  OPTIONAL {{ ?it wdt:P571 ?inc }} OPTIONAL {{ ?it wdt:P576 ?dis }}
+  {lab("?it")}
+  OPTIONAL {{ ?ctry rdfs:label ?ctryfr FILTER(LANG(?ctryfr)="fr") }}
+  OPTIONAL {{ ?it wdt:P131 ?adm . ?adm rdfs:label ?admfr FILTER(LANG(?admfr)="fr") }}
+  OPTIONAL {{ ?frw schema:about ?it ; schema:isPartOf <https://fr.wikipedia.org/> }}
 }}'''
-        n = 0
+        n = set()
         for r in sparql(cache, f'inst-{key}', q):
             it = qid(r['it'])
             pt = wkt_point(r.get('c'))
@@ -267,31 +271,30 @@ def build_institutions(cache):
                 continue
             y1 = wd_date(r.get('inc'))[0]
             y2 = wd_date(r.get('dis'))[0]
-            x = base.setdefault(it, {'k': [], 'lat': pt[0], 'lon': pt[1], 'from': y1, 'to': y2, 'c': qid(r.get('country', ''))})
+            x = base.setdefault(it, {'k': [], 'lat': pt[0], 'lon': pt[1], 'from': None, 'to': None, 'c': r.get('ctryfr', ''), 'adm': r.get('admfr', '')})
             if key not in x['k']:
                 x['k'].append(key)
             if y1 is not None and (x['from'] is None or y1 < x['from']):
                 x['from'] = y1
             if y2 is not None and (x['to'] is None or y2 > x['to']):
                 x['to'] = y2
-            n += 1
-        print(f'🏥 {key} : {n}', flush=True)
-    ids = sorted(base)
-    labs = {}
-    for k, b in enumerate(batches(ids, 400)):
-        for r in sparql(cache, f'inst-lab{k}', label_query(b)):
-            labs.setdefault(qid(r['it']), (r.get('fr') or r.get('en') or '', r.get('frw', '')))
-    det = details(cache, 'inst', ids, ['P131'])
-    cl = labels_of(cache, 'inst-c', [base[i]['c'] for i in ids])
+            if not x['adm'] and r.get('admfr'):
+                x['adm'] = r['admfr']
+            name = pick(r, 'it')
+            if name and not labs.get(it, ('',))[0]:
+                frw = r.get('frw', '')
+                labs[it] = (name, urllib.parse.unquote(frw.rsplit('/', 1)[-1]) if frw else '')
+            n.add(it)
+        print(f'🏥 {key} : {len(n)}', flush=True)
     rows = []
-    for it in ids:
+    for it in sorted(base):
         x = base[it]
         name, frw = labs.get(it, ('', ''))
-        if not name or re.match(r'^Q\d+$', name):
+        if not name:
             continue
-        rows.append([it, name, ','.join(x['k']), x['from'], x['to'], x['lat'], x['lon'], (det[it]['P131'] or [''])[0], cl.get(x['c'], ''), frw.rsplit('/', 1)[-1] if frw else ''])
-    rows.sort(key=lambda r: r[1])
-    meta = dict(WD_SRC, what='Hôpitaux, hôtels-Dieu, hospices, orphelinats et enfants trouvés, prisons, bagnes, asiles, couvents, léproseries (Wikidata, avec coordonnées ; Europe de l’Ouest et Amérique du Nord)',
+        rows.append([it, name, ','.join(x['k']), x['from'], x['to'], x['lat'], x['lon'], x['adm'], x['c'], frw])
+    rows.sort(key=lambda r: r[1].lower())
+    meta = dict(WD_SRC, what='Hôpitaux, hôtels-Dieu, hospices, orphelinats et enfants trouvés, prisons, bagnes, asiles, couvents, léproseries (Wikidata, avec coordonnées ; France, pays voisins, Royaume-Uni, Irlande, Portugal, Autriche, Canada, Algérie)',
                 kinds={k: l for k, _, l in INST})
     return write_gz('ha-institutions.json.gz', {**meta, 'fields': ['q', 'n', 'kinds', 'from', 'to', 'lat', 'lon', 'commune', 'country', 'frwiki'], 'rows': rows}), len(rows)
 
@@ -303,7 +306,7 @@ NOAA = 'https://www.ngdc.noaa.gov/hazel/hazard-service/api/v1/'
 def noaa_all(cache, kind):
     out, page = [], 1
     while True:
-        raw = cached(cache, f'noaa-{kind.replace("/", "-")}-{page}.json', lambda: http(f'{NOAA}{kind}?page={page}&itemsPerPage=1000'))
+        raw = cached(cache, f'noaa-{kind.replace("/", "-")}-{page}.json', lambda: http(f'{NOAA}{kind}?page={page}&itemsPerPage=200'))
         d = json.loads(raw)
         out += d['items']
         if page >= d.get('totalPages', 1):
@@ -338,45 +341,45 @@ def build_catastrophes(cache):
 
 
 # ═══════════════════════ ⚓ navires ═══════════════════════
+SHIP = '?it wdt:P31/wdt:P279* wd:Q11446 . ?it wdt:P1191|wdt:P729|wdt:P571 ?d0 .'
+
+
 def build_navires(cache):
-    # les navires (Q11446 et sous-classes) ayant une date de mise à l'eau, de mise en service ou de construction
-    q = '''SELECT ?s ?l ?srv ?inc ?dec ?wreck ?dis WHERE {
-  ?s wdt:P31/wdt:P279* wd:Q11446 .
-  OPTIONAL { ?s wdt:P1191 ?l } OPTIONAL { ?s wdt:P729 ?srv } OPTIONAL { ?s wdt:P571 ?inc }
-  OPTIONAL { ?s wdt:P730 ?dec } OPTIONAL { ?s wdt:P5045 ?wreck } OPTIONAL { ?s wdt:P576 ?dis }
+    # les navires (Q11446 et sous-classes) avec une date de mise à l'eau (P1191), de mise en service (P729) ou de construction (P571)
+    q = '''SELECT ?it ?l ?srv ?inc ?dec ?wreck ?dis WHERE {
+  ?it wdt:P31/wdt:P279* wd:Q11446 .
+  OPTIONAL { ?it wdt:P1191 ?l } OPTIONAL { ?it wdt:P729 ?srv } OPTIONAL { ?it wdt:P571 ?inc }
+  OPTIONAL { ?it wdt:P730 ?dec } OPTIONAL { ?it wdt:P5045 ?wreck } OPTIONAL { ?it wdt:P576 ?dis }
   FILTER(BOUND(?l) || BOUND(?srv) || BOUND(?inc))
 }'''
     base = {}
     for r in sparql(cache, 'navires', q):
-        s = qid(r['s'])
+        s = qid(r['it'])
         y0 = wd_date(r.get('l'))[0] or wd_date(r.get('srv'))[0] or wd_date(r.get('inc'))[0]
         if y0 is None:
             continue
-        y1 = wd_date(r.get('dec'))[0] or wd_date(r.get('wreck'))[0] or wd_date(r.get('dis'))[0]
-        x = base.setdefault(s, {'from': y0, 'to': y1, 'wreck': wd_date(r.get('wreck'))[0]})
+        yw = wd_date(r.get('wreck'))[0]
+        y1 = wd_date(r.get('dec'))[0] or yw or wd_date(r.get('dis'))[0]
+        x = base.setdefault(s, {'from': y0, 'to': y1, 'wreck': yw})
         x['from'] = min(x['from'], y0)
         if y1 is not None:
             x['to'] = max(x['to'] or y1, y1)
-    ids = sorted(base)
-    print(f'⚓ {len(ids)} navires datés', flush=True)
-    labs = {}
-    for k, b in enumerate(batches(ids, 400)):
-        for r in sparql(cache, f'nav-lab{k}', label_query(b)):
-            labs.setdefault(qid(r['it']), (r.get('fr') or r.get('en') or '', r.get('frw', '')))
-    det = details(cache, 'nav', ids, ['P31', 'P504', 'P8047', 'P17', 'P137'])
-    img = {}
-    for k, b in enumerate(batches(ids, 400)):
-        vals = ' '.join(f'wd:{q}' for q in b)
-        for r in sparql(cache, f'nav-img{k}', f'SELECT ?it (SAMPLE(?i) AS ?img) WHERE {{ VALUES ?it {{ {vals} }} ?it wdt:P18 ?i }} GROUP BY ?it'):
-            img[qid(r['it'])] = r['img'].rsplit('/', 1)[-1]
+        if yw is not None:
+            x['wreck'] = yw
+    print(f'⚓ {len(base)} navires datés', flush=True)
+    labs = names_of(cache, 'nav-noms', SHIP)
+    kind = multi(sparql(cache, 'nav-types', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {SHIP} ?it wdt:P31 ?t . {lab("?t")} }}'), 'it', 't')
+    port = multi(sparql(cache, 'nav-ports', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {SHIP} ?it wdt:P504 ?t . {lab("?t")} }}'), 'it', 't')
+    flag = multi(sparql(cache, 'nav-pavillons', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {SHIP} ?it wdt:P8047|wdt:P17 ?t . {lab("?t")} }}'), 'it', 't')
+    oper = multi(sparql(cache, 'nav-armateurs', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {SHIP} ?it wdt:P137 ?t . {lab("?t")} }}'), 'it', 't')
+    img = images_of(cache, 'nav-images', SHIP)
     rows = []
-    for s in ids:
+    for s in sorted(base):
         x = base[s]
         name, frw = labs.get(s, ('', ''))
-        if not name or re.match(r'^Q\d+$', name):
+        if not name:
             continue
-        d = det[s]
-        rows.append([s, name, (d['P31'] or [''])[0], x['from'], x['to'], x['wreck'], (d['P504'] or [''])[0], (d['P8047'] or d['P17'] or [''])[0], (d['P137'] or [''])[0], img.get(s, ''), frw.rsplit('/', 1)[-1] if frw else ''])
+        rows.append([s, name, (kind.get(s) or [''])[0], x['from'], x['to'], x['wreck'], (port.get(s) or [''])[0], (flag.get(s) or [''])[0], (oper.get(s) or [''])[0], img.get(s, ''), frw])
     rows.sort(key=lambda r: r[1].lower())
     meta = dict(WD_SRC, what='Navires (Wikidata : navire Q11446 et sous-classes, avec date de mise à l’eau, de mise en service ou de construction)')
     return write_gz('ha-navires.json.gz', {**meta, 'fields': ['q', 'n', 'type', 'from', 'to', 'wreck', 'port', 'flag', 'operator', 'img', 'frwiki'], 'rows': rows}), len(rows)
@@ -384,7 +387,7 @@ def build_navires(cache):
 
 # ═══════════════════════ 🗼 phares ═══════════════════════
 def nm_of(v):
-    """« 22 », « 22.5 », « 22;18 » → milles marins (le plus grand)"""
+    """« 22 », « 22.5 », « 22;18 », « 22/18 » → milles marins (le plus grand)"""
     if v is None:
         return None
     nums = [float(x) for x in re.findall(r'\d+(?:\.\d+)?', str(v).replace(',', '.'))]
@@ -392,14 +395,16 @@ def nm_of(v):
     return max(nums) if nums else None
 
 
+LIGHT = '?it wdt:P31/wdt:P279* wd:Q39715 ; wdt:P625 ?c0 .'
+
+
 def build_phares(cache):
-    q = '''SELECT ?it ?c ?inc ?lit ?dis ?h ?hu ?fh ?fhu ?rg ?rgu ?country WHERE {
+    q = '''SELECT ?it ?c ?inc ?lit ?dis ?h ?hu ?fh ?fhu ?rg ?rgu WHERE {
   ?it wdt:P31/wdt:P279* wd:Q39715 ; wdt:P625 ?c .
   OPTIONAL { ?it wdt:P571 ?inc } OPTIONAL { ?it wdt:P729 ?lit } OPTIONAL { ?it wdt:P730 ?dis }
   OPTIONAL { ?it p:P2048/psv:P2048 [wikibase:quantityAmount ?h; wikibase:quantityUnit ?hu] }
   OPTIONAL { ?it p:P2923/psv:P2923 [wikibase:quantityAmount ?fh; wikibase:quantityUnit ?fhu] }
   OPTIONAL { ?it p:P2929/psv:P2929 [wikibase:quantityAmount ?rg; wikibase:quantityUnit ?rgu] }
-  OPTIONAL { ?it wdt:P17 ?country }
 }'''
     unit_m = {'Q11573': 1.0, 'Q3710': 0.3048}
     unit_nm = {'Q93318': 1.0, 'Q828224': 1 / 1.852, 'Q11573': 1 / 1852}
@@ -409,7 +414,7 @@ def build_phares(cache):
         pt = wkt_point(r.get('c'))
         if not pt:
             continue
-        x = base.setdefault(it, {'lat': pt[0], 'lon': pt[1], 'from': None, 'lit': None, 'to': None, 'h': None, 'fh': None, 'rg': None, 'c': qid(r.get('country', ''))})
+        x = base.setdefault(it, {'lat': pt[0], 'lon': pt[1], 'from': None, 'lit': None, 'to': None, 'h': None, 'fh': None, 'rg': None})
         for k, v in (('from', r.get('inc')), ('lit', r.get('lit')), ('to', r.get('dis'))):
             y = wd_date(v)[0]
             if y is not None and (x[k] is None or y < x[k]):
@@ -425,21 +430,14 @@ def build_phares(cache):
                 x[k] = val
     ids = sorted(base)
     print(f'🗼 {len(ids)} phares placés ; {sum(1 for i in ids if base[i]["rg"])} avec portée Wikidata', flush=True)
-    labs = {}
-    for k, b in enumerate(batches(ids, 400)):
-        for r in sparql(cache, f'ph-lab{k}', label_query(b)):
-            labs.setdefault(qid(r['it']), (r.get('fr') or r.get('en') or '', r.get('frw', '')))
-    img = {}
-    for k, b in enumerate(batches(ids, 400)):
-        vals = ' '.join(f'wd:{q}' for q in b)
-        for r in sparql(cache, f'ph-img{k}', f'SELECT ?it (SAMPLE(?i) AS ?img) WHERE {{ VALUES ?it {{ {vals} }} ?it wdt:P18 ?i }} GROUP BY ?it'):
-            img[qid(r['it'])] = r['img'].rsplit('/', 1)[-1]
-    cl = labels_of(cache, 'ph-c', [base[i]['c'] for i in ids])
+    labs = names_of(cache, 'ph-noms', LIGHT)
+    ctry = multi(sparql(cache, 'ph-pays', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {LIGHT} ?it wdt:P17 ?t . {lab("?t")} }}'), 'it', 't')
+    img = images_of(cache, 'ph-images', LIGHT)
     # la portée manquante : OpenStreetMap (seamark:light:range), le feu le plus proche à 300 m au plus
     osm = []
     try:
         for k, bb in enumerate(['-60,-180,0,0', '0,-180,75,0', '-60,0,0,180', '0,0,75,180']):
-            res = overpass(cache, f'phares-osm{k}', f'[out:json][timeout:800][bbox:{bb}];(node["man_made"="lighthouse"]["seamark:light:range"];node["seamark:type"="light_major"]["seamark:light:range"];);out tags center;')
+            res = overpass(cache, f'phares-osm{k}', f'[out:json][timeout:800][bbox:{bb}];(node["man_made"="lighthouse"]["seamark:light:range"];node["seamark:type"="light_major"]["seamark:light:range"];node["man_made"="lighthouse"]["seamark:light:1:range"];);out;')
             for e in res['elements']:
                 rg = nm_of(e['tags'].get('seamark:light:range') or e['tags'].get('seamark:light:1:range'))
                 if rg and e.get('lat') is not None:
@@ -453,10 +451,9 @@ def build_phares(cache):
     for it in ids:
         x = base[it]
         name, frw = labs.get(it, ('', ''))
-        if not name or re.match(r'^Q\d+$', name):
+        if not name:
             continue
-        rs = 'wd' if x['rg'] else ''
-        osm_id = None
+        rs, osm_id = ('wd' if x['rg'] else ''), None
         if not x['rg']:
             best = None
             for dla in (-0.1, 0, 0.1):
@@ -468,11 +465,12 @@ def build_phares(cache):
             if best:
                 x['rg'], rs, osm_id = best[1], 'osm', best[2]
                 from_osm += 1
-        rows.append([it, name, x['from'], x['lit'], x['to'], x['lat'], x['lon'], x['h'], x['fh'], x['rg'], rs, osm_id, cl.get(x['c'], ''), img.get(it, ''), frw.rsplit('/', 1)[-1] if frw else ''])
+        rows.append([it, name, x['from'], x['lit'], x['to'], x['lat'], x['lon'], x['h'], x['fh'], x['rg'], rs, osm_id, (ctry.get(it) or [''])[0], img.get(it, ''), frw])
     rows.sort(key=lambda r: r[1].lower())
     print(f'🗼 {len(rows)} phares ; portée : {sum(1 for r in rows if r[10] == "wd")} Wikidata + {from_osm} OSM', flush=True)
     meta = dict(WD_SRC, what='Phares (Wikidata : phare Q39715, coordonnées ; hauteur P2048, hauteur focale P2923, portée P2929, mise en service P729, création P571)',
-                range_osm={'source': 'OpenStreetMap, balise seamark:light:range (portée en milles marins), le feu à 300 m au plus du phare', 'licence': 'ODbL 1.0', 'mention': '© OpenStreetMap contributors', 'url': 'https://www.openstreetmap.org/copyright'})
+                range_osm={'source': 'OpenStreetMap, balise seamark:light:range (portée en milles marins) du feu à 300 m au plus du phare', 'licence': 'ODbL 1.0', 'mention': '© OpenStreetMap contributors', 'url': 'https://www.openstreetmap.org/copyright'},
+                osm_ok=bool(osm))
     return write_gz('ha-phares.json.gz', {**meta, 'fields': ['q', 'n', 'from', 'lit', 'to', 'lat', 'lon', 'height', 'focal', 'range', 'rangeSrc', 'osm', 'country', 'img', 'frwiki'], 'rows': rows}), len(rows)
 
 

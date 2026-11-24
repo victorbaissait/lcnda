@@ -421,6 +421,66 @@
    "old": 7608,
    "places": 10922,
    "size": 357055
+  },
+  "71": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de Saône-et-Loire",
+    "bibl": "Rigault (Jean), Dictionnaire topographique du département de Saône-et-Loire, Paris, 2008.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k3205682j"
+   },
+   "communes": 576,
+   "label": "Saône-et-Loire",
+   "old": 69103,
+   "places": 20208,
+   "size": 1298707
+  },
+  "72": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Sarthe",
+    "bibl": "Vallée (Eugène) et Latouche (Robert), Dictionnaire topographique du département de la Sarthe, tome 1, Paris, 1950-1952.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k6562600r"
+   },
+   "communes": 414,
+   "label": "Sarthe",
+   "old": 30831,
+   "places": 49115,
+   "size": 1335512
+  },
+  "76": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Seine-Maritime",
+    "bibl": "Robillard de Beaurepaire (Charles de) et Laporte (dom Jean), Dictionnaire topographique du département de la Seine-Maritime, 2 t., Paris, 1982-1984.",
+    "gallica": ""
+   },
+   "communes": 750,
+   "label": "Seine-Maritime",
+   "old": 76293,
+   "places": 31052,
+   "size": 2035068
+  },
+  "77": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de Seine-et-Marne",
+    "bibl": "Stein (Henri) et Hubert (Jean), Dictionnaire topographique du département de Seine-et-Marne, Paris, 1954.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k96129891"
+   },
+   "communes": 523,
+   "label": "Seine-et-Marne",
+   "old": 28625,
+   "places": 17402,
+   "size": 874522
+  },
+  "79": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique des Deux-Sèvres",
+    "bibl": "Ledain (Bélisaire), Dictionnaire topographique du département des Deux-Sèvres, Poitiers, 1902.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110100q"
+   },
+   "communes": 304,
+   "label": "Deux-Sèvres",
+   "old": 12190,
+   "places": 11651,
+   "size": 395300
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

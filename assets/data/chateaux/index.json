@@ -34,6 +34,28 @@
 "Q92107": "c"
 },
 "countries": {
+"DE": {
+"box": [
+47.37932,
+5.99353,
+54.8969,
+15.01103
+],
+"bytes": 665095,
+"geo": 15970,
+"kinds": {
+"c": 5071,
+"f": 199,
+"h": 5061,
+"m": 1984,
+"mf": 1,
+"o": 527,
+"r": 3350,
+"t": 46
+},
+"n": 16239,
+"q": "Q183"
+},
 "LU": {
 "bytes": 5893,
 "geo": 82,
@@ -51,7 +73,7 @@
 "licence": "CC0 1.0",
 "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
 "source": "Wikidata (requête SPARQL, classes « château », « château fort », « ruine de château », « forteresse », « manoir », « maison forte », « motte »…)",
-"total": 87,
+"total": 16326,
 "url": "https://www.wikidata.org/",
 "v": 1
 }

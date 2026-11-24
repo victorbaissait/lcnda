@@ -1,0 +1,33 @@
+/* 🎬📜🛡️🏷️🍲 Le village dans la culture (assets/js/heritage-commune-culture.js) — reprend l'allure de « Autour du village »
+ * (commune-plus.css : .cplus-panel, .cplus-lead, .cplus-src, .cplus-more) ; clair et sombre : couleurs prises du texte (currentColor) */
+.cc-place{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1rem;margin:1rem 0}
+.cc-place:empty{display:none}
+.cc-place .cc-panel[data-cc-part="histoire"],.cc-place .cc-panel[data-cc-part="works"]{grid-column:1/-1}
+.cc-src{margin:.6rem 0 0;font-size:.82em;opacity:.78}
+.cc-more summary{cursor:pointer;margin:.4rem 0}
+.cc-wiki p{margin:.3rem 0;line-height:1.5}.cc-wiki h5{margin:.7rem 0 .2rem;font-size:.95em}
+.cc-wiki-more{max-height:28rem;overflow:auto;padding-right:.4rem}
+.cc-readmore{margin:.4rem 0 0}
+.cc-arms{display:flex;gap:.9rem;align-items:flex-start}
+.cc-arms figure{margin:0;flex:0 0 120px;display:flex;flex-direction:column;gap:.25rem}
+.cc-arms img{width:120px;height:auto;max-height:140px;object-fit:contain}
+.cc-arms figcaption{font-size:.72em;opacity:.8;overflow-wrap:anywhere}
+.cc-arms.is-small figure{flex-basis:72px}.cc-arms.is-small img{width:72px;max-height:86px}
+.cc-arms + .cc-arms{margin-top:.6rem}
+.cc-blazon{font-style:italic}
+.cc-works,.cc-dishes,.cc-rues{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.cc-work,.cc-dish{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem .6rem;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:10px}
+.cc-work > div,.cc-dish > div{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.cc-work small,.cc-dish small{opacity:.82;overflow-wrap:anywhere}
+.cc-thumb img{width:64px;height:64px;object-fit:cover;border-radius:6px;display:block;background:color-mix(in srgb,currentColor 8%,transparent)}
+.cc-linkbtn{background:none;border:0;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit}
+.cc-linkbtn:disabled{text-decoration:none;opacity:.75;cursor:default}
+.cc-line + .cc-line{margin-top:.8rem;padding-top:.7rem;border-top:1px solid color-mix(in srgb,currentColor 12%,transparent)}
+.cc-pill{display:inline-block;padding:0 .45em;border-radius:999px;font-size:.8em;background:color-mix(in srgb,currentColor 10%,transparent)}
+.cc-anc{font-weight:600}
+.cc-map{width:180px;max-width:100%;height:auto;float:right;margin:0 0 .5rem .8rem}
+.cc-map-fr{fill:color-mix(in srgb,currentColor 8%,transparent);stroke:currentColor;stroke-opacity:.35;stroke-width:1}
+.cc-map circle{fill:#b5462b;stroke:#fff;stroke-width:1}
+.cc-rues{clear:none}
+@media (max-width:640px){.cc-arms{flex-direction:column}.cc-map{float:none;display:block;margin:0 auto .5rem}}
+@media print{.cc-linkbtn,.cc-readmore{display:none}.cc-more[open] summary{display:none}}

@@ -20,7 +20,7 @@
 .tq-sites { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }
 .tq-clim { margin-top: 12px; background: #eef6ff; border-left: 4px solid #3b82f6; padding: 7px 10px; font-size: 13px; }
 .tq-sky { margin-top: 10px; }
-.tq-met-lead { margin-top: 4px; }
+.tq-met .tq-more { margin-top: 2px; }
 .tq-stamp { display: block; color: var(--muted, #667); font-size: 11.5px; }
 .tq-tg { margin: 6px 0; }
 :root[data-theme="dark"] .tq-clim { background: #10233d; border-color: #3b82f6; color: #dbe8fb; }

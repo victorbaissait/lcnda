@@ -12,6 +12,10 @@
  *  4. 📰 Journaux anciens libres à l'étranger : Chronicling America (États-Unis), Delpher (Pays-Bas), ANNO (Autriche).
  *     Pour « Où chercher » : window.LCNDA_EXT.communePlus.newspapers(person) → [{id, title, url, why}] (tout de suite, sans réseau) ;
  *     bloc de fiche « 📰 Journaux anciens à l'étranger » pour qui est mort ou a vécu hors de France.
+ * Où : fiche d'un village (⛪ dans « Église et paroisse », 🪦 et 🖼️ sous la grille) ; Monographie de commune : 3 parties déclarées
+ * (LCNDA_EXT.monographSections) ; fiche personne : 2 blocs dans la zone « contexte » (après « 🏘 Le lieu à son époque »).
+ * Une phrase d'abord, le détail sous « ▸ plus » ; rien quand il n'y a rien (sauf « hors ligne », en une ligne).
+ * À la demande : LCNDA_EXT.dataSources (4 entrées) ; Listes : LCNDA_EXT.dataLists (4 listes, depuis ce qui est gardé ; GET cplus_list).
  * Réglages → « 🪦 Autour du village (en ligne) » : chaque partie s'éteint ; localStorage « genealogie-commune-plus ».
  * Essai : tests/test-commune-plus.js
  */
@@ -99,7 +103,7 @@
     /* ═════════ 2. 🖼️ images anciennes ═════════ */
     const imgCache = new Map();
     function imageCard(it, i, key) {
-        const when = it.year ? T('Le village en {y}', {y: it.year}) : T('Carte postale ancienne (sans date)');
+        const when = it.year ? T('Le village en {y}', {y: String(it.year)}) : T('Carte postale ancienne (sans date)');
         return `<figure class="cplus-img"><a href="${esc(it.page)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Voir sur Wikimedia Commons'))}"><img loading="lazy" alt="${esc(it.title)}" src="${esc(it.thumb)}" onerror="this.closest('figure').classList.add('is-noimg')"></a>
             <figcaption><b>${esc(when)}</b><span class="cplus-img-t">${esc(it.title)}</span><small>${it.author ? `${esc(it.author)} · ` : ''}${it.licence_url ? ext_link(it.licence_url, it.licence) : esc(it.licence)}</small>
             ${kiosk() ? '' : `<button type="button" class="button small secondary" data-cplus-keep="${i}" data-cplus-key="${esc(key)}">${esc(T('＋ Garder dans les médias'))}</button>`}</figcaption></figure>`;
@@ -112,7 +116,7 @@
         if (!r.items.length) { vanish(host); return r; }
         const key = `${r.commune?.qid || ''}`; imgCache.set(key, {items: r.items, place});
         const old = r.items.find(x => x.year);
-        const sentence = old ? T('{c} images anciennes libres de droits ; la plus ancienne : {y}.', {c: r.items.length, y: old.year}) : T('{c} cartes postales anciennes libres de droits.', {c: r.items.length});
+        const sentence = old ? T('{c} images anciennes libres de droits ; la plus ancienne : {y}.', {c: r.items.length, y: String(old.year)}) : T('{c} cartes postales anciennes libres de droits.', {c: r.items.length});
         const N = 6, cards = r.items.map((it, i) => imageCard(it, i, key));
         host.innerHTML = `<p class="cplus-lead">🖼️ ${esc(sentence)}</p><div class="cplus-strip">${cards.slice(0, N).join('')}</div>${more(`${cards.length > N ? `<div class="cplus-strip">${cards.slice(N).join('')}</div>` : ''}${sourceLine(r)}`, cards.length > N ? cards.length - N : 0)}`;
         return r;
@@ -152,15 +156,15 @@
 
     /* ═════════ 4. 📰 journaux anciens à l'étranger ═════════ */
     const COUNTRY = [
-        ['us', /^(us|usa|u\.s\.a?\.?|[ée]tats?[- ]unis|united states|am[ée]rique|america)\b/i, 'les États-Unis'],
-        ['nl', /^(nl|pays[- ]bas|netherlands|nederland|hollande)\b/i, 'les Pays-Bas'],
-        ['be', /^(be|belgique|belgium|belgi[eë])\b/i, 'la Belgique'],
-        ['at', /^(at|autriche|austria|[öo]sterreich)\b/i, 'l’Autriche'],
-        ['de', /^(de|allemagne|germany|deutschland)\b/i, 'l’Allemagne'],
-        ['cz', /^(cz|tch[ée]quie|r[ée]publique tch[eè]que|boh[êe]me|czech)/i, 'la Bohême'],
-        ['hu', /^(hu|hongrie|hungary)\b/i, 'la Hongrie'],
-        ['it', /^(it|italie|italy|italia)\b/i, 'l’Italie'],
-        ['ca', /^(ca|canada)\b/i, 'le Canada']];
+        ['us', /^(us|usa|u\.s\.a?\.?|[ée]tats?[- ]unis|united states|am[ée]rique|america)\b/i, 'États-Unis'],
+        ['nl', /^(nl|pays[- ]bas|netherlands|nederland|hollande)\b/i, 'Pays-Bas'],
+        ['be', /^(be|belgique|belgium|belgi[eë])\b/i, 'Belgique'],
+        ['at', /^(at|autriche|austria|[öo]sterreich)\b/i, 'Autriche'],
+        ['de', /^(de|allemagne|germany|deutschland)\b/i, 'Allemagne'],
+        ['cz', /^(cz|tch[ée]quie|r[ée]publique tch[eè]que|boh[êe]me|czech)/i, 'Bohême'],
+        ['hu', /^(hu|hongrie|hungary)\b/i, 'Hongrie'],
+        ['it', /^(it|italie|italy|italia)\b/i, 'Italie'],
+        ['ca', /^(ca|canada)\b/i, 'Canada']];
     const isFrance = c => !c || /^(fr|france|fra)\b/i.test(String(c).trim());
     const countryOf = c => COUNTRY.find(x => x[1].test(String(c || '').trim()));
     /** la personne : {first, last, y1, y2, abroad:[{code, label, tag, place}]} depuis une fiche (detail) ou un objet personne */
@@ -182,7 +186,7 @@
         const P = personInfo(person); if (!P.last) return [];
         const from = P.y1 ? Math.max(1756, P.y1 + 10) : 1756, to = P.y2 ? Math.min(1963, P.y2 + 2) : 1963;
         const name = `"${P.last.replace(/"/g, '')}"`, codes = new Set(P.abroad.map(a => a.code));
-        const where = code => { const a = P.abroad.find(x => x.code === code); return a ? (a.place ? `${a.place} (${T(a.label)})` : T(a.label)) : ''; };
+        const where = code => { const a = P.abroad.find(x => x.code === code); return a ? (a.place ? `${a.place}, ${T(a.label)}` : T(a.label)) : ''; };
         const out = [];
         const us = codes.has('us') || codes.has('ca');
         out.push({id: 'chronicling_america', title: T('🇺🇸 Chronicling America — journaux des États-Unis (1756–1963)'), rank: us ? 0 : 3,
@@ -212,7 +216,7 @@
         if (!box.isConnected) return;
         if (!r.ok) { box.innerHTML = r.offline ? `<p class="cplus-off">📴 ${esc(T('Pas de connexion : le nombre de pages s’affichera quand tu seras connecté. Les liens marchent dès que tu l’es.'))}</p>` : `<p class="muted">${esc(r.message || '')}</p>`; return; }
         if (r.out_of_range) { box.innerHTML = `<p class="muted">${esc(T('Sa vie est hors des années couvertes (1756–1963).'))}</p>`; return; }
-        box.innerHTML = `<p>${esc(r.total ? T('Le nom « {n} » paraît sur {c} pages entre {a} et {b} (ce peut être un homonyme) :', {n: P.last, c: r.total.toLocaleString('fr-FR'), a: r.from, b: r.to}) : T('Le nom « {n} » ne paraît sur aucune page entre {a} et {b}.', {n: P.last, a: r.from, b: r.to}))}</p>
+        box.innerHTML = `<p>${esc(r.total ? T('Le nom « {n} » paraît sur {c} pages entre {a} et {b} (ce peut être un homonyme) :', {n: P.last, c: r.total.toLocaleString('fr-FR'), a: String(r.from), b: String(r.to)}) : T('Le nom « {n} » ne paraît sur aucune page entre {a} et {b}.', {n: P.last, a: String(r.from), b: String(r.to)}))}</p>
             ${r.items.length ? `<ul>${r.items.slice(0, 5).map(x => `<li>${ext_link(x.url, `${x.title}${x.date ? ', ' + x.date : ''}`)}${x.place ? ` <small class="muted">${esc(x.place)}</small>` : ''}</li>`).join('')}</ul>` : ''}${sourceLine(r)}`;
     }
 

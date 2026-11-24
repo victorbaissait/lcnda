@@ -10,6 +10,7 @@ import math
 import os
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
 
 UA = 'LCNDA-data-builder/1.0 (genealogy app; offline data build)'
@@ -17,15 +18,30 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 OUT = os.path.join(ROOT, 'assets', 'data')
 
 
-def http(url, data=None, headers=None, timeout=300, tries=4):
+PACE = {'query.wikidata.org': 62, 'www.wikidata.org': 2, 'overpass-api.de': 20}  # secondes entre deux requêtes (WDQS : 1 par minute en ce moment)
+_last = {}
+
+
+def http(url, data=None, headers=None, timeout=300, tries=6):
     h = {'User-Agent': UA}
     h.update(headers or {})
+    host = urllib.parse.urlparse(url).hostname
     last = None
     for i in range(tries):
+        wait = PACE.get(host, 0) - (time.time() - _last.get(host, 0))
+        if wait > 0:
+            time.sleep(wait)
+        _last[host] = time.time()
         try:
             req = urllib.request.Request(url, data=data, headers=h)
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 return r.read()
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code == 400:
+                raise RuntimeError(f'{url} : {e} {e.read()[:500]!r}')
+            print(f'  … essai {i + 1} raté ({e}), on réessaie', flush=True)
+            time.sleep(70 if e.code == 429 else 15 * (i + 1))
         except Exception as e:  # réseau capricieux : on réessaie
             last = e
             print(f'  … essai {i + 1} raté ({e}), on réessaie', flush=True)

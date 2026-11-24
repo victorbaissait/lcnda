@@ -98,18 +98,18 @@
         for (const key of SERIES_OF(cc)) {
             const s = C?.series?.[key]; if (!s) continue;
             const v = s.v[y - s.y0]; if (v == null) continue;
-            const cen = centuryOf(y), vals = [];
-            for (let k = cen.from; k <= cen.to; k++) { const x = s.v[k - s.y0]; if (x != null) vals.push(x); }
+            const cen = centuryOf(y), vals = []; let kFrom = 0, kTo = 0;
+            for (let k = cen.from; k <= cen.to; k++) { const x = s.v[k - s.y0]; if (x != null) { vals.push(x); kFrom ||= k; kTo = k; } }
             if (vals.length < 30) continue;
             const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
-            return {y, d: Math.round((v - mean) * 10) / 10, n: vals.length, century: cen, key, name: s.n, src: s.src, url: s.url, licence: s.licence, partial: vals.length < 100};
+            return {y, d: Math.round((v - mean) * 10) / 10, n: vals.length, century: cen, key, name: s.n, src: s.src, url: s.url, licence: s.licence, partial: vals.length < 100, kFrom, kTo};
         }
         return null;
     }
     const inName = n => (/^(Angleterre)/.test(n) ? `en ${n}` : /^(Pays-Bas)$/.test(n) ? `aux ${n}` : /^(Portugal|Danemark|Royaume-Uni|Luxembourg)$/.test(n) ? `au ${n}` : `en ${n}`);
     function climateText(r, what = 'birth') {
         const lead = what === 'birth' ? T('L’année de sa naissance ({y})', {y: r.y}) : T('L’année {y}', {y: r.y});
-        const cen = r.partial ? T('des années {a}–{b} connues', {a: r.century.from, b: Math.min(r.century.to, r.century.from + r.n - 1)}) : T('du {s}', {s: r.century.label});
+        const cen = r.partial ? T('des années {a}–{b}', {a: r.kFrom, b: r.kTo}) : T('du {s}', {s: r.century.label});
         const body = Math.abs(r.d) < 0.3 ? T('{lead} a été proche de la moyenne {cen} {pays}', {lead, cen, pays: inName(r.name)})
             : T('{lead} a été {d} °C plus {mot} que la moyenne {cen} {pays}', {lead, d: nf(Math.abs(r.d), 1), mot: r.d < 0 ? T('froide') : T('chaude'), cen, pays: inName(r.name)});
         return body + (NAMED_YEARS[r.y] ? ` — « ${T(NAMED_YEARS[r.y])} »` : '') + '.';
@@ -180,8 +180,8 @@
     const capital = s => String(s || '').charAt(0).toUpperCase() + String(s || '').slice(1);
     function treeText(r, life) {
         const ag = r.min ? T('au moins {n} ans', {n: r.age}) : T('{n} ans', {n: r.age});
-        return T('{arbre}{ou} avait déjà {ag} quand {il} est {né}.', {arbre: capital(r.row[1]), ou: r.km >= 1 ? ` (${T('à {d} de {p}', {d: kmTxt(r.km), p: r.place || T('son lieu de naissance')})})` : '',
-            ag, il: fem(life.gender) ? T('elle') : T('il'), né: fem(life.gender) ? T('née') : T('né')});
+        return T('{arbre}{ou} avait déjà {ag} quand {il} est {ne}.', {arbre: capital(r.row[1]), ou: r.km >= 1 ? ` (${T('à {d} de {p}', {d: kmTxt(r.km), p: r.place || T('son lieu de naissance')})})` : '',
+            ag, il: fem(life.gender) ? T('elle') : T('il'), ne: fem(life.gender) ? T('née') : T('né')});
     }
     const SITE_ICON = {grotte: '🎨', abri: '🪨', prehist: '🦴', dolmen: '🪨', menhir: '🗿', tumulus: '⛰️', oppidum: '🏰', villa: '🏛️', romain: '🏛️', necropole: '⚱️', gravure: '🪨', site: '🏺'};
     const SITE_WORD = {grotte: ['grotte ornée', 'grottes ornées'], abri: ['abri sous roche', 'abris sous roche'], prehist: ['site préhistorique', 'sites préhistoriques'], dolmen: ['dolmen', 'dolmens'],
@@ -285,8 +285,12 @@
     async function meteoritesHtml(life) {
         const M = await tryLoad('meteorites'); const list = meteorites(M, life); if (!list.length) return '';
         const src = link(M.url, T('NASA, Meteorite Landings (The Meteoritical Society)'));
-        return `<ul class="ch-seen-list tq-met">${list.map(m => `<li data-kind="meteorite"><span class="ch-seen-ico" aria-hidden="true">🌠</span><div><strong>${esc(meteoriteText(m, life))}</strong>
-            <small class="ch-src">${esc(T('Source :'))} ${src} · ${esc(T('classe {c}', {c: M.rows.find(r => r[0] === m.name)?.[5] || '?'}))} · ${link(`https://www.lpi.usra.edu/meteor/metbull.php?sea=${encodeURIComponent(m.name)}&srt=name&lrec=50&map=ge`, T('Meteoritical Bulletin'))}</small></div></li>`).join('')}</ul>`;
+        const lui = fem(life.gender) ? T('elle') : T('lui');
+        const lead = list.length === 1 ? `🌠 ${meteoriteText(list[0], life)}`
+            : T('🌠 Des météorites sont tombées près de chez {lui} : {l}.', {lui, l: list.map(m => T('« {n} » ({y}, à {age})', {n: m.name, y: m.y, age: ageTxt(m.age)})).join(', ')});
+        const items = list.map(m => `<li data-kind="meteorite"><span class="ch-seen-ico" aria-hidden="true">🌠</span><div><strong>${esc(meteoriteText(m, life))}</strong>
+            <small class="ch-src">${esc(T('Source :'))} ${src} · ${esc(T('classe {c}', {c: M.rows.find(r => r[0] === m.name)?.[5] || '?'}))} · ${link(`https://www.lpi.usra.edu/meteor/metbull.php?sea=${encodeURIComponent(m.name)}&srt=name&lrec=50&map=ge`, T('Meteoritical Bulletin'))}</small></div></li>`).join('');
+        return `<div class="tq-met"><p class="ch-seen-lead">${esc(lead)}</p>${fold1(`<ul class="ch-seen-list">${items}</ul><p class="muted"><small>${esc(T('Chutes observées à moins de 100 km d’un de ses lieux, de son vivant. La base donne l’année, pas le jour.'))}</small></p>`)}</div>`;
     }
     async function climateHtml(life, {compact = false} = {}) {
         const C = await tryLoad('climat'); const r = C && climateFor(C, life); if (!r) return '';
@@ -313,9 +317,9 @@
         if (!life?.by) return ''; const y = life.by + 20; if (y > life.end) return '';
         const P = await tryLoad('poche'); const list = coinsAt(P, y); if (!list.length) return '';
         const main = list[0];
-        const more = list.length > 1 ? `<ul class="tq-coins">${list.slice(1).map(c => `<li>${coinImg(c)}<span><b>${esc(c.name)}</b> <small class="muted">(${c.from}–${c.to})</small>${c.note ? `<br><small class="muted">${esc(c.note)}</small>` : ''}<br><small class="tq-src">${coinSrc(c)}</small></span></li>`).join('')}</ul>` : '';
-        return `<div class="tq-row"><span class="tq-i" aria-hidden="true">🪙</span><div class="tq-t tq-pocket">${coinImg(main)}<div><p>${esc(T('Dans sa poche, à 20 ans ({y}) : {c} ({a}–{b}).', {y, c: main.name, a: main.from, b: main.to}))}</p>
-            ${main.note ? `<p class="muted"><small>${esc(main.note)}</small></p>` : ''}${fold1(more, T('▸ les autres pièces de l’époque'))}<small class="tq-src">${esc(T('Source :'))} ${coinSrc(main)}</small></div></div></div>`;
+        const more = list.length > 1 ? `<ul class="tq-coins">${list.slice(1).map(c => `<li>${coinImg(c)}<span><b>${esc(c.name)}</b> <small class="muted">${esc(T('frappée de {a} à {b}', {a: c.from, b: c.to}))}</small><br><small class="tq-src">${coinSrc(c)}</small></span></li>`).join('')}</ul>` : '';
+        return `<div class="tq-row"><span class="tq-i" aria-hidden="true">🪙</span><div class="tq-t tq-pocket">${coinImg(main)}<div><p>${esc(T('Dans sa poche, à 20 ans ({y}) : {c} (frappée de {a} à {b}).', {y, c: main.name, a: main.from, b: main.to}))}</p>
+            ${fold1(more, T('▸ les autres pièces de l’époque'))}<small class="tq-src">${esc(T('Source :'))} ${coinSrc(main)}</small></div></div></div>`;
     }
     async function esperanceHtml(life) {
         const E = await tryLoad('esperance'); const r = E && lifeExpFor(E, life); if (!r) return '';
@@ -336,7 +340,7 @@
         const s = settings(), life = lifeOf(detail), on = k => (only ? only.includes(k) : s[k] && !skip.includes(k));
         const parts = await Promise.all([on('climat') ? climateHtml(life) : '', on('glacier') ? glacierHtml(life) : '', on('arbre') ? treeHtml(life) : '',
             on('poche') ? pocheHtml(life) : '', on('esperance') ? esperanceHtml(life) : '',
-            on('meteorites') ? meteoritesHtml(life).then(h => (h ? row('🌠', esc(T('Des météorites sont tombées près de chez lui de son vivant :')), '', h) : '')) : '']);
+            on('meteorites') ? meteoritesHtml(life) : '']);
         return parts.filter(Boolean).join('');
     }
     const hostOf = pid => document.querySelector(`#workspace [data-tq-life="${pid}"]`);
@@ -364,9 +368,8 @@
             const put = () => {
                 if (!host.isConnected || host.querySelector('.tq-met')) return;
                 const card = host.closest('section.card');
-                const lead = `<p class="ch-seen-lead tq-met-lead">${esc(T('🌠 Et des météorites, tombées près de chez {lui} :', {lui: fem(life.gender) ? T('elle') : T('lui')}))}</p>`;
-                if (card?.hidden || !host.textContent.trim()) { if (card) card.hidden = false; host.insertAdjacentHTML('beforeend', lead + html); }
-                else host.insertAdjacentHTML('beforeend', `<div class="tq-sky">${lead}${html}</div>`);
+                if (card?.hidden || !host.textContent.trim()) { if (card) card.hidden = false; host.insertAdjacentHTML('beforeend', html); }
+                else host.insertAdjacentHTML('beforeend', `<div class="tq-sky">${html}</div>`);
             };
             put();
             // « Il a pu voir… » se remplit peut-être après nous : on se remet en place
@@ -472,7 +475,7 @@
             const y = Math.round(Number(pane.querySelector('[data-tq-year]').value)) || 0, out = pane.querySelector('[data-tq-out]');
             const [P, R] = await Promise.all([tryLoad('poche'), tryLoad('timbre')]);
             const coins = coinsAt(P, y), st = stampAt(R, y);
-            out.innerHTML = `<h4 class="af-h">${esc(T('🪙 Les pièces de tous les jours en {y}', {y}))}</h4>${coins.length ? `<ul class="tq-coins">${coins.map(c => `<li>${coinImg(c)}<span><b>${esc(c.name)}</b> <small class="muted">(${c.from}–${c.to})</small>${c.note ? `<br><small class="muted">${esc(c.note)}</small>` : ''}<br><small class="tq-src">${coinSrc(c)}</small></span></li>`).join('')}</ul>` : emptyLine(T('Pas de pièce dans la liste pour cette année.'), '🪙')}
+            out.innerHTML = `<h4 class="af-h">${esc(T('🪙 Les pièces de tous les jours en {y}', {y}))}</h4>${coins.length ? `<ul class="tq-coins">${coins.map(c => `<li>${coinImg(c)}<span><b>${esc(c.name)}</b> <small class="muted">${esc(T('frappée de {a} à {b}', {a: c.from, b: c.to}))}</small><br><small class="tq-src">${coinSrc(c)}</small></span></li>`).join('')}</ul>` : emptyLine(T('Pas de pièce dans la liste pour cette année.'), '🪙')}
                 <h4 class="af-h">${esc(T('✉️ Envoyer une lettre en {y}', {y}))}</h4>${st ? `<p>${esc(T('Une lettre simple pour la France coûtait {p}', {p: st.label}))}${st.other ? esc(' ' + T('(ou {n} : le tarif a changé cette année-là)', {n: st.other.label})) : ''}. <small class="muted">${esc(capital(sinceTxt(st)) + '.')}</small></p><small class="tq-src">${esc(T('Source :'))} ${link(st.url, st.src)}</small>` : emptyLine(T('Pas de tarif connu pour cette année (les timbres commencent en 1849).'), '✉️')}`;
         };
         pane.addEventListener('input', e => { if (e.target.matches('[data-tq-year]')) draw(); });

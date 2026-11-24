@@ -90,8 +90,8 @@ function ld_sources(): array
         }, 'text' => ['commune', 'code'], 'geo' => ['lat', 'lon'], 'sort' => 'commune'],
         /* 📊 Prénoms d'ici et d'ailleurs : prénom × zone × année × sexe */
         'pp_prenoms' => ['open' => static function () { require_once __DIR__ . '/prenoms_pays.php'; return pp_pdo(); },
-            'keys' => ['name', 'zone', 'country', 'year', 'sex', 'n', 'rank', 'permil'], 'text' => ['name'], 'y1' => 'year', 'sort' => '',
-            'sql' => "SELECT nm.prenom AS name, z.nom AS zone, z.pays AS country, c.annee AS year, CASE c.sexe WHEN 1 THEN 'garçon' ELSE 'fille' END AS sex, c.n AS n, c.rang AS rank,
+            'keys' => ['name', 'zone', 'zone_id', 'country', 'year', 'sex', 'n', 'rank', 'permil'], 'text' => ['name'], 'y1' => 'year', 'sort' => '',
+            'sql' => "SELECT nm.prenom AS name, z.nom AS zone, z.id AS zone_id, z.pays AS country, c.annee AS year, CASE c.sexe WHEN 1 THEN 'garçon' ELSE 'fille' END AS sex, c.n AS n, c.rang AS rank,
                 CASE WHEN tt.n > 0 THEN ROUND(1000.0 * c.n / tt.n, 1) END AS permil
                 FROM counts c JOIN names nm ON nm.id = c.name JOIN zones z ON z.id = c.zone LEFT JOIN totals tt ON tt.zone = c.zone AND tt.sexe = c.sexe AND tt.annee = c.annee"],
         /* 🎖️ Morts pour la France, 🏅 Léonore */
@@ -293,14 +293,14 @@ function ld_query(PDO $pdo, string $src, array $g): array
     if (!$pack) { return ['rows' => [], 'total' => 0, 'installed' => false]; }
     $qq = ld_read_query($g);
     if (isset($def['php'])) { return ld_query_php($pdo, $pack, $def, $qq); }
-    $keys = $def['keys']; $sort = $qq['sort'] === '_km' && $qq['near'] ? '_km' : (in_array($qq['sort'], $keys, true) ? $qq['sort'] : ($def['sort'] ?? ''));
+    $keys = $def['keys']; $sort = $qq['near'] && ($qq['sort'] === '_km' || $qq['sort'] === '') ? '_km' : (in_array($qq['sort'], $keys, true) ? $qq['sort'] : ($def['sort'] ?? ''));
     [$where, $args] = ld_sql_where($def, $qq, $pdo);
     $base = 'SELECT * FROM (' . $def['sql'] . ') t' . $where;
     $post = static fn(array $rows) => isset($def['post']) ? ($def['post'])($rows, $pack, $pdo) : $rows;
     if ($qq['near']) { // tout ce qui est dans le carré, puis la vraie distance, le tri et la page en PHP
         $s = $pack->prepare($base . ' LIMIT ' . LD_NEAR_MAX); $s->execute($args);
         $rows = ld_with_geo($post($s->fetchAll(PDO::FETCH_ASSOC)), $def, $pdo, $qq['near']);
-        $rows = ld_sort($rows, $sort ?: '_km', $sort ? $qq['dir'] : 'asc');
+        $rows = ld_sort($rows, $sort ?: '_km', $qq['dir']);
         return ['rows' => array_slice($rows, $qq['offset'], $qq['limit']), 'total' => count($rows), 'more' => false];
     }
     $c = $pack->prepare('SELECT COUNT(*) FROM (SELECT 1 FROM (' . $def['sql'] . ') t' . $where . ' LIMIT ' . (LD_COUNT_MAX + 1) . ')'); $c->execute($args); $total = (int) $c->fetchColumn();

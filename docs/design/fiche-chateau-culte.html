@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fiche château et lieu de culte</title>
+<style>
+:root{--bg:#f4f1ea;--paper:#fff;--ink:#1d1b17;--muted:#6b665c;--line:#ddd5c6;--accent:#8a4b12;--accent2:#7a1f5c;--reuse:#1f6f3f;--reuse-bg:#e7f5ec;--new:#0a4fbf;--new-bg:#e7efff;--warn:#8a5a00;--warn-bg:#fff4d6;--chip:#f1ece2;--shadow:0 2px 10px rgba(0,0,0,.07)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17150f;--paper:#221f19;--ink:#efe9dd;--muted:#a79f90;--line:#3a352b;--accent:#e0a35c;--accent2:#f0a8d8;--reuse:#7fdca2;--reuse-bg:#16301f;--new:#8fb5ff;--new-bg:#16233d;--warn:#ffd27a;--warn-bg:#3a2e12;--chip:#2e2a22;--shadow:none}}
+:root[data-theme="dark"]{--bg:#17150f;--paper:#221f19;--ink:#efe9dd;--muted:#a79f90;--line:#3a352b;--accent:#e0a35c;--accent2:#f0a8d8;--reuse:#7fdca2;--reuse-bg:#16301f;--new:#8fb5ff;--new-bg:#16233d;--warn:#ffd27a;--warn-bg:#3a2e12;--chip:#2e2a22;--shadow:none}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px 16px 60px}
+main{max-width:1120px;margin:0 auto}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:19px;margin:34px 0 10px}h3{font-size:16px;margin:0 0 8px}h4{font-size:14px;margin:14px 0 6px}
+p{margin:.4em 0}a{color:var(--new)}.muted{color:var(--muted)}small{font-size:12.5px}
+.top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.theme{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.b{display:inline-block;font:700 11px/1 system-ui;letter-spacing:.03em;padding:4px 7px;border-radius:5px;white-space:nowrap;vertical-align:middle}
+.b.r{color:var(--reuse);background:var(--reuse-bg)}.b.n{color:var(--new);background:var(--new-bg)}.b.w{color:var(--warn);background:var(--warn-bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow);min-width:0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.scroll{overflow-x:auto}
+code{font:12.5px ui-monospace,Menlo,monospace;background:var(--chip);padding:1px 4px;border-radius:4px}
+/* la fiche */
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.hero{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;padding:14px;border-bottom:1px solid var(--line)}
+.ph{width:120px;height:96px;border-radius:9px;background:linear-gradient(135deg,#c9b38a,#8a6a3c);display:flex;align-items:center;justify-content:center;font-size:42px}
+.eyebrow{font:700 11px system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.chip{background:var(--chip);border-radius:999px;padding:3px 9px;font-size:12.5px}
+.sec{padding:12px 14px;border-bottom:1px solid var(--line)}.sec:last-child{border-bottom:0}
+.sec h4{margin:0 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+ul.l{list-style:none;margin:0;padding:0}ul.l li{padding:5px 0;border-bottom:1px dashed var(--line);display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}ul.l li:last-child{border-bottom:0}
+.who{color:var(--accent2);font-weight:600;text-decoration:underline;text-decoration-style:dotted}
+.yr{font-variant-numeric:tabular-nums;color:var(--muted);min-width:7.5em}
+.btn{display:inline-block;border:1px solid var(--line);border-radius:8px;padding:5px 10px;background:var(--paper);color:var(--ink);font:600 13px system-ui;cursor:pointer}
+.btn.p{background:var(--accent);border-color:var(--accent);color:#fff}
+.mini-map{height:120px;border-radius:9px;background:repeating-linear-gradient(45deg,var(--chip) 0 10px,transparent 10px 20px);position:relative;border:1px solid var(--line)}
+.mini-map span{position:absolute;font-size:22px}
+.kinds{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}.kinds button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer}.kinds button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.phone{max-width:390px}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+details summary{cursor:pointer;color:var(--accent);font-weight:600}
+@media (max-width:480px){body{padding:16px 16px 40px}.hero{grid-template-columns:72px minmax(0,1fr)}.ph{width:72px;height:72px;font-size:30px}}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><div><h1>🏰 Fiche d’un château · ⛪ Fiche d’un lieu de culte</h1>
+<p class="muted">Maquette (rien n’est encore fait). Une fiche pour un château, une église, une abbaye, un prieuré, un temple, une synagogue, une mosquée ou une chapelle, rattachée à une commune et à sa monographie, reliée aux personnes de l’arbre.</p></div>
+<button class="theme" type="button" id="theme">🌓 Clair / sombre</button></div>
+<div class="legend"><span class="b r">RÉUTILISÉ</span> <small class="muted">existe déjà dans l’app</small> <span class="b n">NOUVEAU</span> <small class="muted">à faire</small> <span class="b w">À DÉCIDER</span> <small class="muted">question pour toi</small></div>
+
+<h2>1. Ce qui existe aujourd’hui</h2>
+<div class="card scroll"><table>
+<thead><tr><th>Où</th><th>Ce qu’il y a</th><th>Pour les nouvelles fiches</th></tr></thead>
+<tbody>
+<tr><td>Listes → <b>Fiche d’un village</b> (structure n°13, table <code>village_profiles</code>)</td><td>Un panneau « ⛪ Église et paroisse » : <i>église</i>, <i>saint patron</i>, <i>diocèse</i> en texte libre ; « Avant la Révolution, dépendait de la paroisse de… » (table <code>place_parishes</code>, n°10) ; registres en ligne ; cimetières notés.</td><td><span class="b r">RÉUTILISÉ</span> le texte « église » devient un lien vers la fiche du lieu de culte (on garde le texte s’il n’y a pas de fiche).</td></tr>
+<tr><td>« Autour du village » (<code>heritage-commune-plus.js</code>)</td><td>⛪ l’église de la commune et son <b>saint patron</b> d’après Wikidata (« Église Saint-Martin (XIIe s.) — saint patron : Martin de Tours, fêté le 11 novembre ») ; 🪦 cimetières OpenStreetMap ; 🖼 images anciennes Commons.</td><td><span class="b r">RÉUTILISÉ</span> pré-remplissage de la fiche (nom, date, saint patron, image).</td></tr>
+<tr><td>« Lieux-dits et patrimoine » (<code>lib/lieux_patrimoine.php</code>)</td><td>Packs par département : monuments historiques <b>Mérimée</b> (églises, châteaux, croix…) et objets <b>Palissy</b> (cloches, fonts baptismaux, tableaux).</td><td><span class="b r">RÉUTILISÉ</span> protection, historique Mérimée, objets Palissy de l’édifice (« les fonts baptismaux où ton ancêtre a été baptisé »).</td></tr>
+<tr><td>🏰 Châteaux d’Europe (<code>heritage-chateaux-territoires.js</code>, ce lot)</td><td>Châteaux, ruines, manoirs, maisons fortes de Wikidata : commune, dates, état, propriétaires (P127 avec dates), protection, image, Wikipédia ; sur la fiche du village, la monographie, la Carte et dans Listes.</td><td><span class="b r">RÉUTILISÉ</span> « ＋ Faire une fiche » à partir d’une ligne ; propriétaires proposés comme seigneurs.</td></tr>
+<tr><td>👑 Territoires d’autrefois (ce lot)</td><td>Seigneuries, comtés, évêchés… de Wikidata ; « dans quel territoire était ce lieu en 1700 ? ».</td><td><span class="b r">RÉUTILISÉ</span> la seigneurie du château, le diocèse ou l’évêché de l’église.</td></tr>
+<tr><td>Biographie d’une journée (<code>lib/biographie_journee.php</code>)</td><td>« Au village, il y a l’église X (saint patron : Y). » d’après la fiche du village.</td><td><span class="b r">RÉUTILISÉ</span> « Il a été baptisé à l’église Saint-Martin, bâtie au XIIe siècle. »</td></tr>
+<tr><td>Événements (table <code>events</code>)</td><td>Un lieu (commune) + une <b>adresse</b> en texte libre (« église Saint-Martin »), + parfois une position précise (<code>precise_lat/lon</code>, Listes → Lieux précis).</td><td><span class="b n">NOUVEAU</span> un lien facultatif <code>site_id</code> : l’acte « s’est passé dans cet édifice ».</td></tr>
+<tr><td>Table <code>places</code></td><td>Un lieu = une commune ou une localité (nom, département, région, pays, position, autres noms). <b>Pas de « sorte » de lieu</b> : pas de château, pas d’église.</td><td><span class="b n">NOUVEAU</span> une table à part pour les édifices (ci-dessous), plutôt que de mélanger avec les communes.</td></tr>
+<tr><td>Sources, Services d’archives (<code>archive_services</code>), Médias</td><td>Sources citées, fiches des services d’archives (AD, archives diocésaines…), photos.</td><td><span class="b r">RÉUTILISÉ</span> « où sont les registres aujourd’hui » renvoie à un service d’archives ; photos et plans = médias.</td></tr>
+<tr><td>📜 Monographie de commune (<code>heritage-monographie-plus.js</code>)</td><td>Registre commun des parties (<code>LCNDA_EXT.monographSections</code>), ordre et masquage.</td><td><span class="b r">RÉUTILISÉ</span> une partie « 🏰⛪ Les édifices de la commune ».</td></tr>
+</tbody></table></div>
+
+<h2>2. 🏰 Fiche d’un château</h2>
+<div class="grid">
+<div class="sheet phone" aria-label="Maquette de fiche château">
+  <div class="hero"><div class="ph" aria-hidden="true">🏰</div><div>
+    <div class="eyebrow">Château fort · Lorraine</div><h3 style="margin:2px 0">Château de Fléville</h3>
+    <div class="chips"><span class="chip">XIIIe – XVIe s.</span><span class="chip">debout · restauré</span><span class="chip">Monument historique classé</span><span class="chip">se visite</span></div>
+    <small class="muted">Fléville-devant-Nancy (54) · <a href="#">Wikipédia ↗</a> · <a href="#">Wikidata ↗</a> · <a href="#">Mérimée ↗</a></small>
+  </div></div>
+  <div class="sec"><h4>📜 Son histoire <span class="b r">WIKIDATA · MÉRIMÉE</span></h4><p>Construit au XIIIe siècle, remanié en 1533 ; siège de la <a href="#" class="who">seigneurie de Fléville</a>, dans le <a href="#" class="who">duché de Lorraine</a> (👑 territoires).</p><details><summary>▸ plus</summary><p class="muted">Historique Mérimée (Licence Ouverte), texte complet ; ta note à toi en dessous.</p></details></div>
+  <div class="sec"><h4>👑 Seigneurs et propriétaires <span class="b r">WIKIDATA P127</span> <span class="b n">LIEN À L’ARBRE</span></h4>
+    <ul class="l"><li><span class="yr">1520 – 1580</span><span>Famille de Lutzelbourg</span></li><li><span class="yr">1700 – 1745</span><span class="who">Jean LACOMBE</span><small class="muted">(dans ton arbre, ＋ rôle « seigneur »)</small></li><li><span class="yr">1745 – 1789</span><span>Famille Beauvau-Craon</span><button class="btn" type="button">＋ Relier à une personne</button></li></ul></div>
+  <div class="sec"><h4>👪 Ta famille ici <span class="b n">AUTOMATIQUE</span></h4>
+    <ul class="l"><li><span class="yr">1712</span><span>Mariage de <span class="who">Pierre MAZAUD</span> et <span class="who">Anne DURAND</span>, « en la chapelle du château »</span></li><li><span class="yr">1731</span><span><span class="who">Marie MAZAUD</span>, servante au château (recensement)</span></li></ul>
+    <p class="note">La liste vient des actes reliés à la fiche, et des actes dont l’adresse dit « château de Fléville » (proposés, à confirmer d’un clic).</p></div>
+  <div class="sec"><h4>📚 Archives du château <span class="b n">NOUVEAU</span></h4><p>Chartrier de Fléville → <a href="#">Archives départementales de Meurthe-et-Moselle, série E ↗</a> <span class="b r">SERVICES D’ARCHIVES</span></p></div>
+  <div class="sec"><h4>🖼 Photos et plans <span class="b r">MÉDIAS · COMMONS</span></h4><p class="muted">3 photos, 1 plan cadastral (Napoléonien, 1828). ＋ Garder une image de Commons (auteur et licence gardés).</p></div>
+  <div class="sec"><h4>🗺 Sur la carte</h4><div class="mini-map"><span style="left:45%;top:35%">🏰</span><span style="left:20%;top:60%;font-size:16px">⛪</span></div></div>
+  <div class="sec"><h4>📑 Sources</h4><p class="muted">Wikidata Q… (CC0) · Mérimée PA0010… (Licence Ouverte) · tes sources (comme partout dans l’app).</p></div>
+</div>
+<div class="card">
+  <h3>Comment on y arrive</h3>
+  <ul>
+    <li><b>Fiche d’un village / Monographie</b> → partie « 🏰 Châteaux de la commune et alentours » (déjà là) → clic sur un château → la petite fiche Wikidata, avec <span class="b n">＋ Faire une fiche</span> : la fiche se crée pré-remplie, rattachée à la commune.</li>
+    <li><b>Listes → 🏰 Châteaux d’Europe</b> (déjà là) → même bouton.</li>
+    <li><b>Un acte</b> dont l’adresse contient « château » → « Relier à une fiche de château ? ».</li>
+    <li><b>La Carte</b> : « 🏰 Châteaux » (déjà là) ; les châteaux qui ont une fiche sont mis en avant.</li>
+    <li><b>Une personne</b> « seigneur de… » : bloc de fiche « 🏰 Ses châteaux » (seulement s’il y en a).</li>
+  </ul>
+  <p class="note">Les données Wikidata ne sont pas recopiées pour toujours : la fiche garde le numéro Q… et ce que tu as choisi de garder ; « ↻ Mettre à jour depuis Wikidata » montre ce qui change avant d’écrire, avec ↶.</p>
+  <h4><span class="b w">À DÉCIDER</span></h4>
+  <ul><li>Les propriétaires de Wikidata deviennent-ils des personnes de l’arbre (non par défaut : seulement si tu cliques « Relier ») ?</li><li>Un manoir, une maison forte, une ferme seigneuriale : même fiche « château » avec une « sorte » ? (proposé : oui)</li></ul>
+</div>
+</div>
+
+<h2>3. ⛪ Fiche d’un lieu de culte</h2>
+<div class="kinds" role="group" aria-label="Sorte de lieu de culte" id="kinds">
+<button type="button" aria-pressed="true" data-k="eglise">⛪ Église</button><button type="button" aria-pressed="false" data-k="abbaye">🏛 Abbaye</button><button type="button" aria-pressed="false" data-k="prieure">🏛 Prieuré</button><button type="button" aria-pressed="false" data-k="chapelle">⛪ Chapelle</button><button type="button" aria-pressed="false" data-k="temple">🕍 Temple protestant</button><button type="button" aria-pressed="false" data-k="synagogue">🕍 Synagogue</button><button type="button" aria-pressed="false" data-k="mosquee">🕌 Mosquée</button>
+</div>
+<div class="grid">
+<div class="sheet phone" aria-label="Maquette de fiche lieu de culte">
+  <div class="hero"><div class="ph" aria-hidden="true" id="k-ico">⛪</div><div>
+    <div class="eyebrow" id="k-eyebrow">Église paroissiale · catholique</div><h3 style="margin:2px 0" id="k-name">Église Saint-Martin</h3>
+    <div class="chips" id="k-chips"><span class="chip">XIIe s.</span><span class="chip">saint patron : Martin de Tours (11 novembre)</span><span class="chip">MH inscrit</span></div>
+    <small class="muted"><span id="k-where">Saint-Jal (19) · diocèse de Limoges</span> · <a href="#">Wikidata ↗</a> · <a href="#">Mérimée ↗</a></small>
+  </div></div>
+  <div class="sec"><h4>📜 Son histoire <span class="b r">WIKIDATA · MÉRIMÉE · COMMUNE-PLUS</span></h4><p id="k-hist">Nef romane du XIIe siècle, clocher reconstruit en 1868. Paroisse de l’archiprêtré de Lubersac ; avant 1790, la paroisse comprenait aussi les villages voisins <span class="b r">PAROISSES (n°10)</span>.</p></div>
+  <div class="sec"><h4 id="k-clergy-h">👤 Les curés <span class="b n">LIEN À L’ARBRE</span></h4>
+    <ul class="l" id="k-clergy"><li><span class="yr">1702 – 1739</span><span>Jean Delmas, curé</span><small class="muted">(lu dans les signatures des actes)</small></li><li><span class="yr">1740 – 1771</span><span class="who">Antoine LACOMBE</span><small class="muted">grand-oncle de Pierre MAZAUD</small></li></ul>
+    <p class="note" id="k-clergy-note">Proposés à partir des signatures relevées dans tes actes et dépouillements ; tu confirmes.</p></div>
+  <div class="sec"><h4>👪 Ta famille ici <span class="b n">AUTOMATIQUE</span></h4>
+    <ul class="l" id="k-fam"><li><span class="yr">1745</span><span>Baptême de <span class="who">Jean MAZAUD</span></span></li><li><span class="yr">1768</span><span>Mariage de <span class="who">Jean MAZAUD</span> et <span class="who">Marie DURAND</span></span></li><li><span class="yr">1801</span><span>Inhumation de <span class="who">Jean MAZAUD</span> (cimetière autour de l’église)</span></li></ul>
+    <p class="note">12 baptêmes, 4 mariages, 9 inhumations de ta famille · par décennie ▸</p></div>
+  <div class="sec"><h4 id="k-reg-h">📚 Les registres tenus ici <span class="b n">NOUVEAU</span></h4>
+    <ul class="l" id="k-reg"><li><span class="yr">1621 – 1792</span><span>Registres paroissiaux (BMS) → AD Corrèze, 4 E 245 · <a href="#">en ligne ↗</a></span><span class="b r">REGISTRES EN LIGNE</span></li><li><span class="yr">1793 – …</span><span>État civil → mairie, puis AD</span></li><li><span class="yr">1802 – 1905</span><span>Registres de catholicité → archives diocésaines de Tulle</span><span class="b r">SERVICES D’ARCHIVES</span></li></ul></div>
+  <div class="sec"><h4>🔔 Objets <span class="b r">PALISSY</span></h4><p class="muted">Fonts baptismaux (XIIe s., classés) · cloche de 1683 — « les fonts où ont été baptisés 12 de tes ancêtres ».</p></div>
+  <div class="sec"><h4>🖼 Photos et plans · 🗺 Carte · 📑 Sources</h4><p class="muted">Comme pour le château : médias, Commons (auteur, licence), mini-carte, sources.</p></div>
+</div>
+<div class="card">
+  <h3>Ce qui change selon la sorte</h3>
+  <div class="scroll"><table><thead><tr><th>Sorte</th><th>Les personnes</th><th>Les registres</th><th>D’où viennent les données</th></tr></thead><tbody>
+  <tr><td>⛪ Église, chapelle</td><td>curés, vicaires, desservants, chapelains</td><td>paroissiaux (BMS), catholicité</td><td>Wikidata (saint patron P825), Mérimée, Palissy</td></tr>
+  <tr><td>🏛 Abbaye, prieuré</td><td>abbés, abbesses, prieurs, moines, moniales</td><td>registres de vêtures et professions, cartulaires</td><td>Wikidata (ordre religieux P611, diocèse P708)</td></tr>
+  <tr><td>🕍 Temple protestant</td><td>pasteurs, anciens du consistoire</td><td>registres pastoraux, « du Désert » (avant 1787)</td><td>Wikidata ; registres protestants des AD</td></tr>
+  <tr><td>🕍 Synagogue</td><td>rabbins, ministres officiants, mohels</td><td>registres consistoriaux, circoncisions</td><td>Wikidata ; consistoires</td></tr>
+  <tr><td>🕌 Mosquée</td><td>imams</td><td>(rares ; état civil)</td><td>Wikidata</td></tr>
+  </tbody></table></div>
+  <p class="note">Les rôles sont une liste qu’on peut compléter (comme les rôles des personnes ailleurs dans l’app).</p>
+  <h4><span class="b w">À DÉCIDER</span></h4>
+  <ul><li>Une église a-t-elle sa fiche même sans rien de ta famille ? (proposé : seulement quand tu la crées, ou quand un acte y est relié)</li><li>La « paroisse » (une institution, des villages) et l’« église » (un bâtiment) : deux choses ; la fiche de l’église montre la paroisse qu’on a déjà (n°10) sans la remplacer.</li></ul>
+</div>
+</div>
+
+<h2>4. Dans la monographie et sur la fiche d’une personne</h2>
+<div class="grid">
+<div class="card"><h3>📜 Monographie : « 🏰⛪ Les édifices de la commune » <span class="b r">REGISTRE monographSections</span></h3>
+<ul class="l"><li>⛪ <span class="who">Église Saint-Martin</span><small class="muted">XIIe s. · 25 actes de ta famille</small></li><li>🏰 <span class="who">Château de la Roche</span><small class="muted">ruine · seigneurie de la Roche</small></li><li>🕍 Temple <small class="muted">(Wikidata, pas encore de fiche) ＋</small></li></ul>
+<p class="note">Une ligne par édifice ; ceux qui ont une fiche d’abord. Vide → la partie est passée (comme les autres).</p></div>
+<div class="card"><h3>👤 Fiche d’une personne : dans la ligne de l’acte <span class="b n">NOUVEAU</span></h3>
+<p>👶 Baptême, 12 mars 1745, Saint-Jal — <span class="who">⛪ église Saint-Martin</span></p>
+<p>💍 Mariage, 1768 — <span class="who">⛪ église Saint-Martin</span> · curé <span class="who">Antoine LACOMBE</span></p>
+<p class="note">Pas de nouveau bloc : le nom de l’édifice devient un lien dans l’événement. Les rôles « seigneur de », « curé de » s’affichent dans le bloc des fonctions déjà existant.</p></div>
+</div>
+
+<h2>5. Ce qu’il faudrait en base <span class="b n">NOUVEAU</span></h2>
+<div class="card scroll"><table><thead><tr><th>Table</th><th>Champs</th><th>Note</th></tr></thead><tbody>
+<tr><td><code>sites</code></td><td>id, kind (château, manoir, maison forte, église, chapelle, abbaye, prieuré, temple, synagogue, mosquée…), name, place_id → <code>places</code>, lat, lon, built_from, built_to, gone_year, state, cult (catholique, protestant, juif, musulman…), patron_saint, diocese, wikidata, merimee, history, notes</td><td>Une structure de plus dans <code>lib/migrations.php</code> ; sauvegardes, export et ↶ comme le reste.</td></tr>
+<tr><td><code>site_people</code></td><td>site_id, person_id (facultatif), name (si pas dans l’arbre), role (seigneur, propriétaire, curé, abbé, pasteur, rabbin, imam…), from, to, source_id</td><td>Les propriétaires Wikidata y arrivent seulement si tu confirmes.</td></tr>
+<tr><td><code>site_registers</code></td><td>site_id, what (BMS, catholicité, pastoral, consistorial…), from, to, archive_service_id → <code>archive_services</code>, cote, url</td><td>Reprend les « registres en ligne » déjà connus de la commune.</td></tr>
+<tr><td><code>events.site_id</code></td><td>lien facultatif vers <code>sites</code></td><td>L’adresse en texte libre reste ; « Relier » propose les fiches de la commune de l’acte.</td></tr>
+</tbody></table>
+<p class="note">GEDCOM : à l’export, l’édifice va dans l’adresse de l’événement (<code>ADDR</code>) et en note ; rien n’est perdu à l’import (on propose de relier les adresses « église … » aux fiches).</p></div>
+</main>
+<script>
+(function(){
+  var root=document.documentElement,b=document.getElementById('theme');
+  b.addEventListener('click',function(){var dark=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);root.setAttribute('data-theme',dark?'light':'dark');});
+  var K={eglise:['⛪','Église paroissiale · catholique','Église Saint-Martin','👤 Les curés',[['1702 – 1739','Jean Delmas, curé'],['1740 – 1771','Antoine LACOMBE, curé']],'📚 Les registres tenus ici',['XIIe s.','saint patron : Martin de Tours (11 novembre)','MH inscrit'],'Saint-Jal (19) · diocèse de Limoges'],
+    abbaye:['🏛','Abbaye · bénédictins','Abbaye Notre-Dame (exemple)','👤 Les abbés et abbesses',[['1690 – 1720','Dom Claude Martin, abbé'],['1720 – 1758','Dom Louis DURAND, abbé']],'📚 Registres de l’abbaye (vêtures, professions)',['XIe – XVIIIe s.','ordre de Saint-Benoît','en partie ruinée'],'commune · diocèse'],
+    prieure:['🏛','Prieuré · dépendant d’une abbaye','Prieuré Saint-Jean (exemple)','👤 Les prieurs',[['1650 – 1680','Frère Jacques, prieur']],'📚 Les registres et le cartulaire',['XIIe s.','dépend de l’abbaye de…'],'commune · diocèse'],
+    chapelle:['⛪','Chapelle · castrale','Chapelle du château (exemple)','👤 Les chapelains',[['1712 – 1730','Abbé Pierre Vidal, chapelain']],'📚 Les actes célébrés ici (dans les registres de la paroisse)',['XVIe s.','dans le château de…'],'commune · paroisse de…'],
+    temple:['🕍','Temple · Église réformée','Temple protestant (exemple)','👤 Les pasteurs',[['1802 – 1834','Pasteur Jean LACOMBE']],'📚 Registres pastoraux et « du Désert »',['1820','Église réformée'],'commune · consistoire de…'],
+    synagogue:['🕍','Synagogue · consistoire','Synagogue (exemple)','👤 Les rabbins et ministres officiants',[['1820 – 1851','Rabbin (nom)']],'📚 Registres consistoriaux',['1785','culte israélite'],'commune · consistoire de…'],
+    mosquee:['🕌','Mosquée','Mosquée (exemple)','👤 Les imams',[['1926 – …','(à compléter)']],'📚 Les registres (rares : voir l’état civil)',['XXe s.'],'commune']};
+  document.getElementById('kinds').addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;
+    [].forEach.call(this.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===t?'true':'false');});
+    var k=K[t.dataset.k];document.getElementById('k-ico').textContent=k[0];document.getElementById('k-eyebrow').textContent=k[1];document.getElementById('k-name').textContent=k[2];
+    document.getElementById('k-clergy-h').firstChild.textContent=k[3]+' ';
+    document.getElementById('k-clergy').innerHTML=k[4].map(function(r){return '<li><span class="yr">'+r[0]+'</span><span>'+r[1]+'</span></li>';}).join('');
+    document.getElementById('k-reg-h').firstChild.textContent=k[5]+' ';
+    document.getElementById('k-chips').innerHTML=k[6].map(function(c){return '<span class="chip">'+c+'</span>';}).join('');
+    document.getElementById('k-where').textContent=k[7];});
+})();
+</script>
+</body>
+</html>

@@ -92,11 +92,54 @@ def build_esperance(cache):
 
 
 # ═══════════════════ 🪙 pièces (rempli plus bas) ═══════════════════
-COINS = []
+# [nom, du, au, métal, valeur, page, phrase lue, image Commons, auteur (Commons), licence de l'image]
+COINS_RAW = [
+    ['un louis d’or (24 livres)', 1640, 1792, 'or', '24 livres', 'Louis (monnaie)', 'la monnaie d’or française frappée de 1640 à 1792',
+     'Louis XV Gold.jpg', 'Norbert Roettiers (graveur) — Wikimedia Commons', 'CC BY-SA 1.0'],
+    ['un écu de 6 livres en argent', 1734, 1793, 'argent', '6 livres', 'Écu (monnaie)', 'se stabiliser aux alentours de six livres au milieu du XVIIIe siècle, après […] la réforme monétaire de 1734 ; la dernière émission de l’écu de 6 livres date de 1793',
+     'Convention nationale écu 1793 76001793.jpg', 'CNG — Wikimedia Commons', 'CC BY-SA 3.0'],
+    ['une pièce de 5 francs en argent (« cent sous »)', 1796, 1878, 'argent', '5 francs', 'Franc français', 'Pièce de 5 francs en argent, l’An V de la République (1796), première émission du Franc ; aucune pièce de 5 francs n’avait été frappée depuis 1879 (Type Semeuse)',
+     'France, 5 franc, 1821 - Louis XVIII.jpg', 'Петров Эдуард — Wikimedia Commons', 'CC0'],
+    ['une pièce de 1 franc en argent', 1803, 1920, 'argent', '1 franc', 'Franc français', 'Pièce en argent de 1 franc […] frappée en 1803 ; pièce de 1 franc en argent : la dernière sera émise en 1920',
+     '1 franc an 12 France.jpg', 'Pierre-Joseph Tiolier (graveur) — Wikimedia Commons', 'domaine public'],
+    ['un napoléon (20 francs en or)', 1803, 1914, 'or', '20 francs', 'Napoléon (pièce de monnaie)', 'année d’émission : 1803 - 1914 ; de très nombreuses pièces françaises en or de 20 francs frappées de 1803 à 1914',
+     'France 1803-04-A 20 Francs.jpg', 'National Museum of American History — Wikimedia Commons', 'domaine public'],
+    ['une pièce de 50 centimes Semeuse en argent', 1897, 1920, 'argent', '50 centimes', 'Type Semeuse (monnaie)', '1897 à 1920 : 50 centimes, argent 835 (très peu circulée à partir de 1914)', '', '', ''],
+    ['une pièce de 1 franc Semeuse en argent', 1898, 1920, 'argent', '1 franc', 'Type Semeuse (monnaie)', '1898 à 1920 : 1 franc, argent 835',
+     '1 franc semeuse revers.png', 'Lyhana8 — Wikimedia Commons', 'domaine public'],
+    ['une pièce de 2 francs Semeuse en argent', 1898, 1920, 'argent', '2 francs', 'Type Semeuse (monnaie)', '1898 à 1920 : 2 francs, argent 835', '', '', ''],
+    ['une pièce de 10 centimes Lindauer (trouée)', 1917, 1938, 'cupronickel', '10 centimes', 'Type Lindauer', '1917 à 1938 : 10 centimes, 21 mm, cupro-nickel',
+     '2015-06-04 16-52-37 piece.jpg', 'Thomas Bresson — Wikimedia Commons', 'CC BY 3.0'],
+    ['une pièce de 5 centimes Lindauer (trouée)', 1920, 1938, 'cupronickel', '5 centimes', 'Type Lindauer', '1920 à 1938 : 5 centimes, 15 mm, cupro-nickel (réduction du module)', '', '', ''],
+    ['une pièce de 1 franc Morlon en bronze d’aluminium', 1931, 1940, 'bronze d’aluminium', '1 franc', 'Type Morlon', '1931 à 1940 : 1 franc, 23 mm, 4 g, bronze d’aluminium',
+     '1 France 1936 VSRS.png', 'McGoinz — Wikimedia Commons', 'CC0'],
+    ['une pièce de 50 centimes Morlon', 1931, 1940, 'bronze d’aluminium', '50 centimes', 'Type Morlon', '1931 à 1940 : 50 centimes, 18 mm, bronze d’aluminium',
+     '50 Centimes 1941 VSRS.png', 'McGoinz — Wikimedia Commons', 'CC0'],
+    ['une pièce de 1 franc Morlon en aluminium', 1944, 1959, 'aluminium', '1 franc', 'Type Morlon', '1944 à 1959 : 1 franc, 23 mm, 1,3 g, aluminium', '', '', ''],
+    ['une pièce de 2 francs Morlon en aluminium', 1944, 1959, 'aluminium', '2 francs', 'Type Morlon', '1944 à 1959 : 2 francs, 27 mm, 2,2 g, aluminium', '', '', ''],
+    ['une pièce de 5 francs Semeuse en argent', 1959, 1969, 'argent', '5 nouveaux francs', 'Type Semeuse (monnaie)', '1959 à 1969 : 5 francs, 29 mm, 12 g, argent 835',
+     '5 French francs Semeuse silver 1960 F340-4 obverse.jpg', 'Louis-Oscar Roty (graveur) — Wikimedia Commons', 'CC BY-SA 3.0'],
+    ['une pièce de 1 franc Semeuse', 1960, 2001, 'nickel', '1 franc', 'Type Semeuse (monnaie)', '1960 à 2001 : 1 franc, 24 mm, 6 g, nickel — 41 ans sans changer',
+     '1Franc1999.jpg', 'Choloepus — Wikimedia Commons', 'domaine public'],
+    ['une pièce de 10 francs Hercule en argent', 1964, 1973, 'argent', '10 francs', 'Pièce de 10 francs Hercule', 'une pièce de monnaie française ayant cours légal, frappée entre 1964 et 1973',
+     '10 French francs Hercule 1967 F364-6 obverse.png', 'Eric Gaba (Sting) — Wikimedia Commons', 'CC BY-SA 3.0'],
+    ['une pièce de 1/2 franc Semeuse', 1965, 2001, 'nickel', '1/2 franc', 'Type Semeuse (monnaie)', '1965 à 2001 : 1/2 franc, 19,5 mm, nickel', '', '', ''],
+    ['une pièce de 5 francs Semeuse en nickel', 1970, 2001, 'nickel', '5 francs', 'Type Semeuse (monnaie)', '1970 à 2001 : 5 francs, 29 mm, 10 g, nickel', '', '', ''],
+    ['une pièce de 50 francs Hercule en argent', 1974, 1980, 'argent', '50 francs', 'Franc français', 'La 50 francs type Hercule (avers et revers) émise entre 1974 et 1980',
+     '50 franc of France Republic 5 - 1978.png', 'Windrain — Wikimedia Commons', 'CC BY-SA 4.0'],
+    ['une pièce de 2 francs Semeuse', 1979, 2001, 'nickel', '2 francs', 'Type Semeuse (monnaie)', '1979 à 2001 : 2 francs, 26,5 mm, nickel (dessin stylisé)', '', '', ''],
+    ['une pièce de 100 francs Panthéon en argent', 1982, 2001, 'argent', '100 francs', 'Franc français', 'La 100 francs type Panthéon (avers), frappée entre 1982 et 2001',
+     '100 Francs 1983 avers.png', 'Choloepus — Wikimedia Commons', 'domaine public'],
+]
+# la pièce la plus « de tous les jours » d'abord (pour la phrase) : petites valeurs avant l'or
+ORDER = {'1 franc': 0, '50 centimes': 1, '10 centimes': 2, '5 centimes': 3, '1/2 franc': 4, '2 francs': 5, '5 francs': 6, '5 nouveaux francs': 6, '6 livres': 7, '10 francs': 8, '20 francs': 9, '24 livres': 10, '50 francs': 11, '100 francs': 12}
+COINS = [{'id': i + 1, 'cc': 'FR', 'name': n, 'from': a, 'to': b, 'metal': m, 'value': v, 'src': 'Wikipédia : ' + page, 'url': WP(page), 'evidence': ev,
+          'img': img or None, 'credit': cr or None, 'licence': lic or None, 'rank': ORDER.get(v, 20)}
+         for i, (n, a, b, m, v, page, ev, img, cr, lic) in enumerate(COINS_RAW)]
 
 
 def build_poche(cache):
-    items = [dict(c) for c in COINS]
+    items = sorted((dict(c) for c in COINS), key=lambda c: (c['rank'], c['from']))
     _write('tq-poche.json', {'src': 'Wikipédia en français (articles sur les pièces) ; images Wikimedia Commons', 'url': WP('Franc français'),
-                             'licence': 'Textes : CC BY-SA 4.0 ; images : licence de chaque fichier (indiquée)', 'note': 'Dates de frappe ou de mise en circulation lues dans chaque article.',
+                             'licence': 'Textes : CC BY-SA 4.0 ; images : licence de chaque fichier (indiquée)', 'note': 'Années de frappe lues dans chaque article (une pièce frappée une année était dans les poches cette année-là ; elle a souvent circulé plus longtemps).',
                              'items': items})
