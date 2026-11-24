@@ -189,18 +189,50 @@ function act_open_reminder(PDO $pdo, array $data): array
 function crisis_in_scope(string $scope, array $place): bool
 {
     if ($scope === 'France') { return in_array(mb_strtolower((string) ($place['country'] ?? 'france')), ['france', ''], true); }
-    $code = substr((string) ($place['admin4_code'] ?? ''), 0, 2);
+    // le département : code INSEE, sinon le nom du département (« Corrèze », « Seine-Inférieure »), outre-mer compris (971…)
+    $code = function_exists('world_place_dept') ? world_place_dept($place) : substr((string) ($place['admin4_code'] ?? ''), 0, 2);
     foreach (explode(',', $scope) as $s) {
         $s = trim($s);
-        if (ctype_digit($s) && $code === $s) { return true; }
+        if ((ctype_digit($s) || preg_match('/^2[AB]$/i', $s)) && $code !== '' && strtoupper($code) === strtoupper($s)) { return true; }
         if (!ctype_digit($s) && $s !== '' && (stripos((string) ($place['state'] ?? ''), $s) !== false || stripos((string) ($place['county'] ?? ''), $s) !== false)) { return true; }
     }
     return false;
 }
 
+/** 🦠 la cause d'un décès lue dans un texte (« mort de la petite vérole », « décédé du choléra ») → [clé, nom] ou null */
+function crisis_cause_read(string $text): ?array
+{
+    $t = mb_strtolower($text);
+    $rules = [['cholera', 'choléra', '/chol[ée]ra/u'], ['variole', 'variole (petite vérole)', '/petite[\s-]+v[ée]role|variole/u'], ['typhoide', 'fièvre typhoïde', '/typho[iï]de/u'],
+        ['typhus', 'typhus', '/typhus|fi[èe]vre (?:putride|maligne|des prisons|des hôpitaux)/u'], ['dysenterie', 'dysenterie', '/dysenterie|flux de (?:sang|ventre)/u'],
+        ['rougeole', 'rougeole', '/rougeole/u'], ['diphterie', 'diphtérie (croup)', '/dipht[ée]rie|\bcroup\b/u'], ['suette', 'suette', '/\bsuette/u'], ['peste', 'peste', '/\bpeste\b/u'],
+        ['grippe', 'grippe', '/\bgrippe|influenza/u'], ['noyade', 'noyade', '/\bnoy[ée]e?s?\b/u'], ['froid', 'froid', '/mort(?:e)? de froid|gel[ée]e? de froid/u'], ['faim', 'faim', '/mort(?:e)? de faim|d[ée]nuement/u'],
+        ['guerre', 'guerre', '/mort(?:e)? pour la france|tu[ée] à l[’\']ennemi|bless(?:é|ures) de guerre/u'], ['coup_grisou', 'coup de grisou', '/grisou|coup de poussier/u']];
+    foreach ($rules as [$k, $label, $re]) { if (preg_match($re, $t)) { return [$k, $label]; } }
+    return null;
+}
+
+/** la cause lue colle-t-elle à la crise ? (le choléra pour « Choléra de 1832 », la noyade pour une crue…) */
+function crisis_cause_fits(string $key, array $crisis): bool
+{
+    $title = mb_strtolower($crisis[3] . ' ' . $crisis[5]);
+    $words = ['cholera' => 'choléra', 'variole' => 'variole', 'typhus' => 'typhus', 'typhoide' => 'typho', 'dysenterie' => 'dysenterie', 'suette' => 'suette', 'peste' => 'peste', 'grippe' => 'grippe',
+        'rougeole' => 'rougeole', 'diphterie' => 'diphtérie', 'noyade' => 'crue|inond|ouragan|barrage', 'froid' => 'hiver', 'faim' => 'famine|disette|siège|subsistances', 'guerre' => 'guerre|siège|campagne|commune', 'coup_grisou' => 'courrières|mine'];
+    return isset($words[$key]) && (bool) preg_match('/' . $words[$key] . '/u', $title);
+}
+
+/** le mois d'une date écrite (« 12 juillet 1832 », « 1832-07-12 », « 12/07/1832 ») : 1-12, ou 0 */
+function crisis_month(string $d): int
+{
+    $f = mb_strtolower($d);
+    if (preg_match('/\b\d{4}-(\d{2})-\d{2}\b/', $f, $m) || preg_match('/\b\d{1,2}[\/.](\d{1,2})[\/.]\d{4}\b/', $f, $m)) { $n = (int) $m[1]; return $n >= 1 && $n <= 12 ? $n : 0; }
+    foreach (['janv', 'f[ée]v', 'mars', 'avr', 'mai', 'juin', 'juil', 'ao[ûu]', 'sept|7bre', 'oct|8bre', 'nov|9bre', 'd[ée]c|10bre|xbre'] as $i => $re) { if (preg_match('/\b(?:' . $re . ')/u', $f)) { return $i + 1; } }
+    return 0;
+}
+
 function historical_context(PDO $pdo): array
 {
-    $deaths = $pdo->query("SELECT e.person_id, e.year, e.date_text, t.gedcom_tag, pl.name AS place, pl.county, pl.state, pl.country, pl.admin4_code
+    $deaths = $pdo->query("SELECT e.id AS event_id, e.person_id, e.year, e.date_text, e.cause, e.description, t.gedcom_tag, pl.name AS place, pl.county, pl.state, pl.country, pl.admin4_code
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
         WHERE t.gedcom_tag IN ('DEAT','BURI') AND e.year IS NOT NULL AND e.person_id IS NOT NULL ORDER BY t.gedcom_tag='DEAT' DESC")->fetchAll();
     $byPerson = [];
@@ -210,23 +242,49 @@ function historical_context(PDO $pdo): array
     foreach ($deaths as $d) { $byYear[(int) $d['year']] = ($byYear[(int) $d['year']] ?? 0) + 1; }
     ksort($byYear);
     $people = collection_people($pdo, array_keys($byPerson));
+    // 🦠 la cause : notée sur le décès, sinon lue dans la description du décès ou dans un acte transcrit relié à la personne
+    $actText = [];
+    try {
+        foreach ($pdo->query('SELECT id, title, body, data_json FROM act_transcriptions')->fetchAll(PDO::FETCH_ASSOC) as $a) {
+            $dj = json_decode((string) $a['data_json'], true);
+            foreach ((array) ($dj['people'] ?? []) as $pp) { $pid = (int) ($pp['person_id'] ?? 0); if ($pid && isset($byPerson[$pid])) { $actText[$pid][] = ['id' => (int) $a['id'], 'title' => (string) $a['title'], 'body' => (string) $a['body']]; } }
+        }
+    } catch (Throwable $_) {}
+    $causeOf = [];
+    foreach ($byPerson as $pid => $d) {
+        if (trim((string) $d['cause']) !== '') { $r = crisis_cause_read((string) $d['cause']); $causeOf[$pid] = ['text' => (string) $d['cause'], 'key' => $r[0] ?? '', 'from' => 'noted']; continue; }
+        if (($r = crisis_cause_read((string) $d['description'])) !== null) { $causeOf[$pid] = ['text' => $r[1], 'key' => $r[0], 'from' => 'event']; continue; }
+        foreach ($actText[$pid] ?? [] as $a) { if (($r = crisis_cause_read($a['body'])) !== null) { $causeOf[$pid] = ['text' => $r[1], 'key' => $r[0], 'from' => 'act', 'act_id' => $a['id'], 'act_title' => $a['title']]; break; } }
+    }
     $crises = [];
     $min = $byYear ? min(array_keys($byYear)) : 0; $max = $byYear ? max(array_keys($byYear)) : 0;
-    foreach (historical_crises() as [$from, $to, $cat, $title, $scope, $desc]) {
+    $bundled = []; foreach (world_events_bundled()['events'] as $e) { if (!empty($e['crisis'])) { $bundled[(string) $e['title']] = $e; } }
+    foreach (historical_crises($pdo) as $c) {
+        [$from, $to, $cat, $title, $scope, $desc] = $c;
         if ($to < $min - 1 || $from > $max + 1) { continue; }
-        $victims = [];
+        $victims = []; $months = array_fill(0, 12, 0); $kids = 0; $adults = 0; $sure = 0;
         foreach ($deaths as $d) {
             if ((int) $d['year'] < $from || (int) $d['year'] > $to) { continue; }
             if (!crisis_in_scope($scope, $d)) { continue; }
             $p = $people[(int) $d['person_id']] ?? null;
-            if ($p) { $victims[] = ['person' => $p, 'date' => $d['date_text'] ?: $d['year'], 'place' => $d['place'], 'age' => $p['birth_year'] ? ((int) $d['year'] - (int) $p['birth_year']) : null]; }
+            if (!$p) { continue; }
+            $age = $p['birth_year'] ? ((int) $d['year'] - (int) $p['birth_year']) : null;
+            $cause = $causeOf[(int) $d['person_id']] ?? null;
+            $fits = $cause && $cause['key'] !== '' && crisis_cause_fits($cause['key'], $c);
+            $mo = crisis_month((string) $d['date_text']); if ($mo) { $months[$mo - 1]++; }
+            if ($age !== null) { if ($age < 5) { $kids++; } else { $adults++; } }
+            if ($fits) { $sure++; }
+            $victims[] = ['person' => $p, 'date' => $d['date_text'] ?: $d['year'], 'place' => $d['place'], 'age' => $age, 'event_id' => (int) $d['event_id'],
+                'cause' => $cause, 'sure' => $fits, 'month' => $mo];
         }
         // Mortalité « normale » de la famille : moyenne des 10 années avant
         $before = 0; for ($y = $from - 10; $y < $from; $y++) { $before += $byYear[$y] ?? 0; }
         $normal = $before / 10;
         $years = $to - $from + 1;
+        $src = $c[7] ?? ($bundled[$title] ?? null);
         $crises[] = ['from' => $from, 'to' => $to, 'category' => $cat, 'title' => $title, 'scope' => $scope, 'description' => $desc, 'victims' => $victims,
-            'excess' => $normal > 0 ? round(count($victims) / ($normal * $years), 1) : null];
+            'excess' => $normal > 0 ? round(count($victims) / ($normal * $years), 1) : null, 'months' => $months, 'kids' => $kids, 'adults' => $adults, 'sure' => $sure,
+            'local' => $scope !== 'France', 'own' => !empty($c[6]), 'src' => (string) ($src['src'] ?? ''), 'url' => (string) ($src['url'] ?? '')];
     }
     // Années de forte mortalité de la famille sans explication connue
     $spikes = [];
@@ -1231,4 +1289,18 @@ function apply_pending_labels(PDO $pdo, string $action, array $data, $result): v
     $id = in_array($type, ['poilu', 'resistance', 'voter'], true) ? safe_int($data['person_id'] ?? 0) : safe_int(is_array($result) ? ($result['id'] ?? 0) : 0);
     if (!$id) { $id = safe_int($data['id'] ?? 0); }
     if ($id) { set_label_links($pdo, ['entity_type' => $type, 'entity_id' => $id, 'label_ids' => $raw]); }
+}
+
+/** POST set_death_cause {event_id, cause} : la cause lue dans un acte, notée sur le décès → l'ancienne (pour « ↶ Annuler ») */
+function set_death_cause(PDO $pdo, array $d): array
+{
+    $id = safe_int($d['event_id'] ?? 0);
+    $s = $pdo->prepare("SELECT e.id, e.person_id, e.cause FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.id=? AND t.gedcom_tag IN ('DEAT','BURI')"); $s->execute([$id]);
+    $ev = $s->fetch(PDO::FETCH_ASSOC);
+    if (!$ev) { throw new LcndaBadInput(i18n_t('Décès introuvable.')); }
+    if (function_exists('assert_person_unlocked') && $ev['person_id']) { assert_person_unlocked($pdo, (int) $ev['person_id']); }
+    $cause = mb_substr(trim((string) ($d['cause'] ?? '')), 0, 300);
+    $pdo->prepare('UPDATE events SET cause=? WHERE id=?')->execute([$cause, $id]);
+    log_change($pdo, 'person', (int) $ev['person_id'], 'update', 'Cause du décès : ' . ($cause !== '' ? $cause : '(retirée)'));
+    return ['ok' => true, 'old' => (string) $ev['cause']];
 }

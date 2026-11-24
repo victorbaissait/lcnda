@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Объединённый текст (перечи
 Lectures fusionnées dans le texte. ¦ Прочтения объединены в тексте. ¦ Прочитання об’єднано в тексті.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ XML библиотек и архивов (строки и слова с их местом на изображении) ¦ XML бібліотек і архівів (рядки й слова з їхнім місцем на зображенні)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ XML Transkribus и eScriptorium (области, строки, порядок чтения); один файл на страницу, в .zip, если их несколько ¦ XML Transkribus та eScriptorium (області, рядки, порядок читання); один файл на сторінку, у .zip, якщо їх кілька
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Адрес не найден (ошибка {code}). ¦ Адресу не знайдено (помилка {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Адрес отклонён: только публичный адрес http или https. ¦ Адресу відхилено: лише публічна адреса http або https.
 Le site ne répond pas : {err} ¦ Сайт не отвечает: {err} ¦ Сайт не відповідає: {err}

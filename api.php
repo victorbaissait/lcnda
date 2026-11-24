@@ -10069,6 +10069,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_history_event' => world_save_event($pdo,$data),
             'delete_history_event' => world_delete_event($pdo,$data),
             'movement_mark' => mouvements_mark($pdo,$data),
+            'set_death_cause' => set_death_cause($pdo,$data), // 🦠 lib/heritage_more.php
             'save_own_movement' => mouvements_save_own($pdo,$data),
             'delete_own_movement' => mouvements_delete_own($pdo,$data),
             'save_old_trade' => trade_save($pdo,$data),

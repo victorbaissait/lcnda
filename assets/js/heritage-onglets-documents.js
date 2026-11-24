@@ -157,8 +157,22 @@
     /* ─── la colonne de gauche ─── */
     const rowHtml = (d, letter = letterOf(d.title)) => `<button type="button" class="side-menu-item ong-row ong-docrow${d.id === cur ? ' is-active' : ''}" data-ong-doc="${d.id}" data-letter="${esc(letter)}">
         <span class="ong-thumb">${thumbOf(d)}</span><span class="ong-txt"><strong>${esc(d.title)}</strong>${subLines(d, {cote: bar?.state?.sort === 'cote'})}</span></button>`;
-    const MODES = [['az', 'A → Z'], ['people', '👤 Par personne'], ['recueils', '📚 Recueils'], ['folders', '📁 Dossiers']];
+    /* les façons de ranger (maquette correspondances.html, partie 2) : A = 6 cases en 3 × 2 (conseillé) ; B = 4 cases, « 📚 Ensembles »
+       et dessous un petit choix Recueils / Lettres / Sortes. Le choix A ou B : ⋯ → « Façons de ranger » (retenu). */
+    const MODES = [['az', 'A → Z'], ['people', '👤 Personnes'], ['recueils', '📚 Recueils'], ['folders', '📁 Dossiers'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes']];
+    const SETS = [['recueils', '📚 Recueils'], ['letters', '✉️ Lettres'], ['sorts', '🏷 Sortes']];
+    const layout = () => (readPref().layout === 'B' ? 'B' : 'A');
     const modeOf = () => (MODES.some(m => m[0] === readPref().mode) ? readPref().mode : 'az');
+    const isSet = m => SETS.some(x => x[0] === m);
+    const CO = () => window.LCNDA_CORRESP;
+    const gapMonths = () => { const n = Number(readPref().gapMonths); return n >= 1 && n <= 24 ? n : 2; };
+    function modeBarHtml(mode) {
+        if (layout() === 'A') return `<div class="segmented ong-mode is-grid is-3" role="tablist" aria-label="${esc(T('Façon de ranger'))}">${MODES.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${esc(T(l))}</button>`).join('')}</div>`;
+        const four = [['az', 'A → Z'], ['people', '👤 Par personne'], ['sets', '📚 Ensembles'], ['folders', '📁 Dossiers']];
+        const on = k => (k === 'sets' ? isSet(mode) : mode === k);
+        return `<div class="segmented ong-mode is-grid" role="tablist" aria-label="${esc(T('Façon de ranger'))}">${four.map(([k, l]) => `<button type="button" class="${on(k) ? 'is-active' : ''}" data-ong-mode="${k === 'sets' ? (isSet(mode) ? mode : (readPref().lastSet || 'recueils')) : k}" data-ong-sets="${k === 'sets' ? 1 : ''}" aria-pressed="${on(k)}">${esc(T(l))}</button>`).join('')}</div>`
+            + (isSet(mode) ? `<div class="segmented ong-submode" role="tablist" aria-label="${esc(T('Ensembles'))}">${SETS.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${esc(T(l))}</button>`).join('')}</div>` : '');
+    }
     /* 📚 Recueils : les groupes repliés (0 = « Dans aucun recueil ») ; tout ouvert au départ */
     const foldedRecs = () => (Array.isArray(readPref().recFold) ? readPref().recFold.map(Number) : []);
     function toggleFold(id) {
@@ -166,11 +180,16 @@
         writePref({recFold: f}); paintList(); if (id === 0) paintWorkspaceList();
         document.querySelector(`#sidebar-content [data-ong-fold="${id}"].ong-fold`)?.focus({preventScroll: true});
     }
+    const foldedKeys = k => (Array.isArray(readPref()[k]) ? readPref()[k].map(String) : []);
+    function toggleKey(k, id) { const f = foldedKeys(k), i = f.indexOf(String(id)); if (i >= 0) f.splice(i, 1); else f.push(String(id)); writePref({[k]: f}); paintList(); }
     function underMenu(btn) {
         const u = under();
         const items = UNDER.map(([k, l]) => ({icon: k === u ? '✓' : '', label: l, run: () => { writePref({under: k}); paintList(); paintWorkspaceList(); }}));
         if (modeOf() === 'recueils') items.push('-', {icon: foldedRecs().includes(0) ? '' : '✓', label: T('Montrer « Dans aucun recueil »'), run: () => toggleFold(0)});
-        UI().menuAt?.(btn, items, {title: 'Sous le titre'});
+        const L = layout(), setL = v => { writePref({layout: v}); A().renderSidebar(); };
+        items.push('-', {icon: L === 'A' ? '●' : '○', label: T('Façons de ranger : 6 cases (conseillé)'), run: () => setL('A')}, {icon: L === 'B' ? '●' : '○', label: T('Façons de ranger : 4 cases, avec « 📚 Ensembles »'), run: () => setL('B')});
+        if (modeOf() === 'letters') { const g = gapMonths(); items.push('-', ...[1, 2, 3, 6].map(n => ({icon: g === n ? '●' : '○', label: T('Trou signalé à partir de {n} mois', {n: String(n)}), run: () => { writePref({gapMonths: n}); paintList(); paintWorkspaceList(); }}))); }
+        UI().menuAt?.(btn, items, {title: T('Réglages de Documents')});
     }
     function rowMenu(id, e) { // K14 : UI.contextMenu = le menu de l'app à l'endroit de la souris
         const d = byId(id); if (!d || !UI().contextMenu) return;
@@ -184,7 +203,7 @@
     function sidebar(content, footer) {
         const mode = modeOf();
         content.innerHTML = `<div class="ong-side" data-ong-side="documents" data-no-reorder>
-            <div class="ong-modebar"><div class="segmented ong-mode is-grid" role="tablist" aria-label="Façon de ranger">${MODES.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>
+            <div class="ong-modebar"><div class="ong-modes">${modeBarHtml(mode)}</div>
             <button type="button" class="icon-button small ong-opts" data-ong-under aria-label="Sous le titre" title="Sous le titre">⋯</button></div>
             <div class="ong-bar" data-ong-bar></div>
             <div class="ong-letters" data-ong-letters ${mode === 'folders' ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div></div>`;
@@ -198,10 +217,14 @@
         const sig = A().state?.module, signal = A().sidebarSignal?.();
         SF()?.bind(content, {signal});
         content.addEventListener('click', e => {
-            const m = e.target.closest('[data-ong-mode]'); if (m) { writePref({mode: m.dataset.ongMode}); shown = STEP; A().renderSidebar(); return; }
+            const m = e.target.closest('[data-ong-mode]'); if (m) { const k = m.dataset.ongMode; writePref({mode: k, ...(isSet(k) ? {lastSet: k} : {})}); shown = STEP; A().renderSidebar(); paintWorkspaceList(); return; }
+            const xh = e.target.closest('[data-ong-ex]'); if (xh) { showEx(xh.dataset.ongEx); return; } // ✉️ le fil de cette correspondance à droite
+            const sh = e.target.closest('[data-ong-sorth]'); if (sh) { showSort(sh.dataset.ongSorth); return; } // 🏷 les documents de cette sorte à droite
             const o = e.target.closest('[data-ong-under]'); if (o) { underMenu(o); return; }
             const l = e.target.closest('[data-ong-letter]'); if (l && !l.disabled) { jumpTo(l.dataset.ongLetter); return; }
             const fo = e.target.closest('[data-ong-fold]'); if (fo) { toggleFold(Number(fo.dataset.ongFold)); return; }
+            const fx = e.target.closest('[data-ong-exfold]'); if (fx) { toggleKey('exFold', fx.dataset.ongExfold); return; }
+            const fs = e.target.closest('[data-ong-sortfold]'); if (fs) { toggleKey('sortFold', fs.dataset.ongSortfold); return; }
             const rh = e.target.closest('[data-ong-rec]'); if (rh) { showRec(rh.dataset.ongRec); return; } // 📚 ses documents à droite (« ↗ Ouvrir le recueil » y est)
             const r = e.target.closest('[data-ong-doc]'); if (r) { if (pick.on && !cur) { togglePick(Number(r.dataset.ongDoc)); return; } select(Number(r.dataset.ongDoc)); return; }
             const more = e.target.closest('[data-ong-more]'); if (more) { shown += STEP; paintList(); }
@@ -228,6 +251,25 @@
     /** ce que la colonne montre, dans l'ordre : titres de lettre, noms (Par personne), lignes */
     function entries(list, mode, st) {
         const out = [];
+        if (mode === 'letters' && CO()) { // ✉️ une correspondance par groupe de personnes, ses pièces dans l'ordre, les trous signalés
+            const folded = foldedKeys('exFold');
+            CO().exchanges(list, {gapMonths: gapMonths()}).forEach(x => {
+                const shut = folded.includes(x.key); out.push({xh: x, shut});
+                if (shut) return;
+                const gapAfter = new Map(x.gaps.map(g => [g.after, g]));
+                x.pieces.forEach(d => { out.push({d: byId(d.id) || d, letter: '#', ex: x}); const g = gapAfter.get(d.id); if (g) out.push({gap: g}); });
+            });
+            return out;
+        }
+        if (mode === 'sorts' && CO()) { // 🏷 une sorte après l'autre (les plus nombreuses d'abord), « Autres » à la fin
+            const folded = foldedKeys('sortFold'), by = new Map();
+            list.forEach(d => { const k = CO().sortOf(d); if (!by.has(k)) by.set(k, []); by.get(k).push(d); });
+            const rank = k => CO().SORTS.findIndex(x => x[0] === k);
+            [...by.entries()].sort((a, b) => (a[0] === 'other') - (b[0] === 'other') || b[1].length - a[1].length || rank(a[0]) - rank(b[0])).forEach(([k, ds]) => {
+                const shut = folded.includes(k); out.push({sh: k, n: ds.length, shut}); if (!shut) ds.forEach(d => out.push({d, letter: '#'}));
+            });
+            return out;
+        }
         if (mode === 'recueils') { // 📚 chaque recueil, ses documents dans l'ordre des pages ; « Dans aucun recueil » à la fin
             const keep = new Set(list.map(d => d.id)), none = list.filter(d => !(d.recueils || []).length);
             const folded = foldedRecs(); // ▸ / ▾ : un recueil, ou « Dans aucun recueil » (0), replié ou ouvert (retenu)
@@ -295,6 +337,11 @@
             else if (e.rh !== undefined) { const fid = e.rh ? e.rh.id : 0, fold = `<button type="button" class="ong-fold" data-ong-fold="${fid}" aria-expanded="${!e.shut}" title="${esc(e.shut ? T('Montrer') : T('Masquer'))}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
                 html += e.rh ? `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-rec="${e.rh.id}" title="${esc(T('Voir ses documents à droite'))}"><span>${esc(e.rh.icon || '📚')} ${esc(e.rh.title)}</span><small>${e.n}</small></button></div>`
                     : `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-fold="0"><span>${esc(T('Dans aucun recueil'))}</span><small>${e.n}</small></button></div>`; }
+            else if (e.xh) { const x = e.xh, fold = `<button type="button" class="ong-fold" data-ong-exfold="${esc(x.key)}" aria-expanded="${!e.shut}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
+                html += `<div class="ong-ph ong-rhrow ong-exrow">${fold}<button type="button" class="ong-rh" data-ong-ex="${esc(x.key)}" title="${esc(T('Voir le fil à droite'))}"><span>✉️ ${esc(x.title || T('Correspondant inconnu'))}</span><small>${x.from ? esc(x.from === x.to ? String(x.from) : `${x.from}–${x.to}`) + ' · ' : ''}${x.pieces.length}</small></button></div>`; }
+            else if (e.gap) html += `<div class="ong-gap" role="note">⚠ ${esc(T('rien entre {a} et {b} ({n} mois)', {a: e.gap.from, b: e.gap.to, n: String(e.gap.months)}))}</div>`;
+            else if (e.sh) { const [k, ic, l] = CO().sortMeta(e.sh), fold = `<button type="button" class="ong-fold" data-ong-sortfold="${esc(k)}" aria-expanded="${!e.shut}" aria-label="${esc(e.shut ? T('Montrer') : T('Masquer'))}">${e.shut ? '▸' : '▾'}</button>`;
+                html += `<div class="ong-ph ong-rhrow">${fold}<button type="button" class="ong-rh" data-ong-sorth="${esc(k)}" title="${esc(T('Voir ces documents à droite'))}"><span>${ic} ${esc(T(l))}</span><small>${e.n}</small></button></div>`; }
             else if (e.ph) html += `<div class="ong-ph" data-ong-ph="${e.ph.p ? e.ph.p.id : 0}"><span>${e.ph.p ? `👤 ${esc(e.ph.p.name)}` : esc(T('Sans personne'))}</span><small>${e.ph.docs.length}</small></div>`;
             else { html += e.num ? rowHtml(e.d, e.letter).replace('<strong>', `<strong><span class="ong-pnum">${esc(T('p. {n}', {n: String(e.num)}))}</span> `) : rowHtml(e.d, e.letter); rows++; }
         }
@@ -403,13 +450,59 @@
                 <div class="ong-tline">${ds.map(d => `<button type="button" class="ong-tdoc" data-ong-doc="${d.id}" data-ong-card="${d.id}" title="${esc(d.title)}">${thumbOf(d)}<b>${d.year}</b><small>${esc(d.title)}</small></button>`).join('')}</div></section>`; }).join('')}</div>
             ${none ? `<p class="muted">${esc(T('{n} documents sans date ne sont pas sur la frise.', {n: String(none)}))}</p>` : ''}`;
     }
+    /* ✉️ à droite, en mode « ✉️ Lettres » : les correspondances en vignettes ; un clic → le fil (ou la carte, la frise) */
+    const wsEx = () => (modeOf() === 'letters' ? readPref().wsEx ?? null : null);
+    const wsSort = () => (modeOf() === 'sorts' ? String(readPref().wsSort || '') : '');
+    function backToList() { if (cur) { cur = 0; writePref({cur: 0}); history.pushState(null, '', '#documents'); document.querySelectorAll('#sidebar-content [data-ong-doc].is-active').forEach(x => x.classList.remove('is-active')); render(); } else { paintWorkspaceList(); document.querySelector('#workspace [data-ong-page]')?.scrollIntoView({block: 'start'}); } }
+    function showEx(key) { writePref({wsEx: key == null ? null : String(key)}); backToList(); }
+    function showSort(k) { writePref({wsSort: String(k || '')}); wsShown = 24; backToList(); }
+    const yrs = x => (x.from ? (x.from === x.to ? String(x.from) : `${x.from}–${x.to}`) : T('Sans date'));
+    function exCardsHtml(list) {
+        const xs = CO().exchanges(list, {gapMonths: gapMonths()});
+        if (!xs.length) return A().emptyState({icon: '✉️', text: T('Aucune correspondance pour l’instant'), hint: T('Dans la visionneuse d’un média, donne-lui une sorte de correspondance (lettre, carte postale, télégramme…) et ses correspondants : il arrive ici, rangé avec les autres pièces du même échange.')});
+        return UI().cardsHtml(xs.map(x => { const first = x.pieces.find(d => fold(d.media_type) === 'image') || x.pieces[0], pct = Math.round(x.transcribed / x.pieces.length * 100);
+            return {thumb: thumbOf(first), name: `✉️ ${x.title || T('Correspondant inconnu')}`, open: `data-ong-wsex="${esc(x.key)}"`, openLabel: T('Voir le fil'), attrs: `data-ong-excard="${esc(x.key)}"`,
+                lines: [`${yrs(x)} · ${plural(x.pieces.length, 'pièce', 'pièces')}`], badges: [{text: T('{n} % transcrit', {n: String(pct)}), kind: pct >= 100 ? 'green' : pct ? 'blue' : 'grey'}, x.gaps.length ? {text: plural(x.gaps.length, 'trou', 'trous'), kind: 'yellow'} : null].filter(Boolean)}; }));
+    }
+    const EX_VIEWS = [['fil', '🧵 Le fil'], ['map', '🗺 Carte'], ['time', '📅 Frise']];
+    function exFilHtml(x) {
+        const ids = new Map(x.pieces.map(d => [d.id, d])), gapAfter = new Map(x.gaps.map(g => [g.after, g])), reply = new Map(x.replies.map(r => [r.id, r]));
+        const places = [...new Set(x.pieces.map(d => d.place).filter(Boolean))];
+        const stat = (l, v) => `<div><small>${esc(T(l))}</small><b>${esc(v)}</b></div>`;
+        const head = `<div class="ong-exstats">${stat('Pièces', String(x.pieces.length))}${stat('Période', yrs(x))}${stat('Délai moyen de réponse', x.avgDelay != null ? T('{n} jours (le plus long : {m})', {n: String(x.avgDelay), m: String(x.maxDelay)}) : '—')}
+            ${stat('Transcrites', `${x.transcribed} / ${x.pieces.length} (${Math.round(x.transcribed / x.pieces.length * 100)} %)`)}${stat('Trous', T('{n} (plus de {m} mois)', {n: String(x.gaps.length), m: String(gapMonths())}))}${places.length ? stat('Lieux', places.slice(0, 5).join(', ')) : ''}</div>`;
+        const rows = x.pieces.map(d => { const r = reply.get(d.id), to = r ? ids.get(r.to) : null, g = gapAfter.get(d.id);
+            return `<li class="ong-piece"><button type="button" class="ong-piece-main" data-ong-doc="${d.id}" data-ong-card="${d.id}"><span class="ong-thumb">${thumbOf(d)}</span><span class="ong-txt"><strong>${esc(d.title)}</strong>
+                <small>${esc([d.date_text || T('Sans date'), d.corr, d.place].filter(Boolean).join(' · '))}</small>${to ? `<small class="ong-reply">↩ ${esc(T('répond à « {t} »', {t: to.title}))}${r.days != null ? ' · ' + esc(T('délai : {n} jours', {n: String(r.days)})) : ''}</small>` : ''}</span>
+                ${bdg(d.has_tr ? T('transcrite') : T('à transcrire'), d.has_tr ? 'green' : 'grey')}</button></li>${g ? `<li class="ong-gap" role="note">⚠ ${esc(T('{n} mois sans pièce ({a} → {b}) : perdues ?', {n: String(g.months), a: g.from, b: g.to}))}</li>` : ''}`; }).join('');
+        return head + `<ol class="ong-fil">${rows}</ol>`;
+    }
+    function paintExWs(box, list, key) {
+        const x = CO().exchanges(list, {gapMonths: gapMonths()}).find(e => e.key === key);
+        const back = `<div class="ong-recbar"><button type="button" class="button small secondary" data-ong-wsex="">← ${esc(T('Toutes les correspondances'))}</button>`;
+        if (!x) { box.innerHTML = back + '</div>' + A().emptyState({icon: '🔎', text: T('Rien ne correspond'), hint: T('Change les mots cherchés ou retire un filtre dans la colonne de gauche.')}); return; }
+        const v = EX_VIEWS.some(e => e[0] === readPref().exView) ? readPref().exView : 'fil';
+        const seg = `<div class="ong-wsview segmented" role="tablist">${EX_VIEWS.map(([k, l]) => `<button type="button" class="${v === k ? 'is-active' : ''}" data-ong-exview="${k}" aria-pressed="${v === k}">${esc(T(l))}</button>`).join('')}</div>`;
+        const docsOf = x.pieces.map(d => byId(d.id) || d);
+        box.innerHTML = `${back}<strong>✉️ ${esc(x.title || T('Correspondant inconnu'))}</strong><small class="muted">${esc(yrs(x))} · ${esc(plural(x.pieces.length, 'pièce', 'pièces'))}</small></div>${seg}`
+            + (v === 'map' ? docsMapHtml(docsOf) : v === 'time' ? docsTimeHtml(docsOf) : exFilHtml(x));
+        if (v === 'map') bindDocsMap(box, docsOf);
+    }
+    function sortCardsHtml(list) {
+        const by = new Map(); list.forEach(d => { const k = CO().sortOf(d); if (!by.has(k)) by.set(k, []); by.get(k).push(d); });
+        const keys = CO().SORTS.map(s => s[0]).filter(k => by.has(k));
+        return UI().cardsHtml(keys.map(k => { const [, ic, l] = CO().sortMeta(k), ds = by.get(k), img = ds.find(d => fold(d.media_type) === 'image');
+            return {thumb: img ? thumbOf(img) : `<span class="ui-card-ico">${ic}</span>`, name: `${ic} ${T(l)}`, open: `data-ong-wssort="${k}"`, openLabel: T('Voir ces documents'), attrs: `data-ong-sortcard="${k}"`, lines: [plural(ds.length, 'document', 'documents')]}; }));
+    }
     function paintWorkspaceList() {
         const box = document.querySelector('#workspace [data-ong-cards]'); if (!box || cur) return;
         const all = filtered();
+        if ((docs || []).length && CO() && modeOf() === 'letters' && !pick.on) { const k = wsEx(); if (k == null) box.innerHTML = exCardsHtml(all); else paintExWs(box, all, k); return; }
+        if ((docs || []).length && CO() && modeOf() === 'sorts' && !pick.on && !wsSort()) { box.innerHTML = sortCardsHtml(all); return; }
         if (!(docs || []).length) { box.innerHTML = A().emptyState({icon: '📄', text: 'Aucun document pour l’instant', hint: 'Les photos, actes, lettres et papiers ajoutés aux fiches (ou importés) arrivent ici, sans rien ressaisir.', action: kiosk() ? null : {label: '⤒ Importer des documents', attrs: 'data-empty-click="[data-ong-import]"'}}); return; }
         if (modeOf() === 'recueils' && !wsRec() && !pick.on) { box.innerHTML = recCardsHtml(all); return; }
-        const w = wsRec(), rec = w && w !== 'none' ? (recOf(w) || {id: Number(w), title: '', icon: '📚'}) : null, list = wsDocs(all);
-        const head = w ? `<div class="ong-recbar" data-ong-recbar><button type="button" class="button small secondary" data-ong-wsrec="">← ${esc(T('Tous les recueils'))}</button>
+        const w = wsRec(), rec = w && w !== 'none' ? (recOf(w) || {id: Number(w), title: '', icon: '📚'}) : null, ws0 = wsSort(), list = ws0 && CO() ? all.filter(d => CO().sortOf(d) === ws0) : wsDocs(all);
+        const head = ws0 && CO() ? `<div class="ong-recbar"><button type="button" class="button small secondary" data-ong-wssort="">← ${esc(T('Toutes les sortes'))}</button><strong>${CO().sortMeta(ws0)[1]} ${esc(T(CO().sortMeta(ws0)[2]))}</strong><small class="muted">${esc(plural(list.length, 'document', 'documents'))}</small></div>` : w ? `<div class="ong-recbar" data-ong-recbar><button type="button" class="button small secondary" data-ong-wsrec="">← ${esc(T('Tous les recueils'))}</button>
             <strong>${rec ? `${esc(rec.icon || '📚')} ${esc(rec.title || T('Recueil'))}` : `🗂️ ${esc(T('Dans aucun recueil'))}`}</strong><small class="muted">${esc(plural(list.length, 'document', 'documents'))}${rec ? ` · ${esc(T('dans l’ordre des pages'))}` : ''}</small>
             <span class="spacer"></span>${rec ? `<button type="button" class="button small secondary" data-ong-recopen="${rec.id}">↗ ${esc(T('Ouvrir le recueil'))}</button>` : ''}</div>` : '';
         if (!list.length) { box.innerHTML = head + A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre dans la colonne de gauche.'}); return; }
@@ -561,6 +654,9 @@
             return;
         }
         if (b.matches('[data-ong-wsrec]')) { showRec(b.dataset.ongWsrec); return; }
+        if (b.matches('[data-ong-wsex]')) { showEx(b.dataset.ongWsex === '' && !b.closest('[data-ong-excard]') ? null : b.dataset.ongWsex); return; }
+        if (b.matches('[data-ong-exview]')) { writePref({exView: b.dataset.ongExview}); paintWorkspaceList(); return; }
+        if (b.matches('[data-ong-wssort]')) { showSort(b.dataset.ongWssort); return; }
         if (b.matches('[data-ong-wsview]')) { writePref({wsView: b.dataset.ongWsview}); paintWorkspaceList(); return; }
         if (b.matches('[data-ong-recopen]')) { b.closest('details')?.removeAttribute('open'); ext.openRecueil?.(Number(b.dataset.ongRecopen)); return; }
         if (pick.on && !cur && b.matches('[data-ong-doc]')) { e.preventDefault(); togglePick(Number(b.dataset.ongDoc)); return; }

@@ -90,11 +90,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
 
         await p.evaluate(() => { localStorage.setItem('genealogie-menu-documents', '1'); localStorage.setItem('genealogie-menu-hidden', '[]'); location.hash = '#documents'; });
         await p.waitForSelector('#sidebar-content .ong-mode [data-ong-mode]', {timeout: 20000});
-        await t('les 4 façons de ranger (A → Z, Par personne, Recueils, Dossiers) tiennent sans être coupées, en 2 × 2', async () => {
+        await t('les 6 façons de ranger (A → Z, Personnes, Recueils, Dossiers, Lettres, Sortes) tiennent sans être coupées, en 3 × 2', async () => {
             for (const w of [1440, 1100]) {
                 await p.setViewportSize({width: w, height: 900}); await sleep(200);
                 const r = await p.evaluate(() => [...document.querySelectorAll('#sidebar-content .ong-mode [data-ong-mode]')].map(b => ({t: b.textContent.trim(), cut: b.scrollWidth > b.clientWidth + 1, top: Math.round(b.getBoundingClientRect().top)})));
-                assert.deepEqual(r.map(x => x.t), ['A → Z', '👤 Par personne', '📚 Recueils', '📁 Dossiers']);
+                assert.deepEqual(r.map(x => x.t), ['A → Z', '👤 Personnes', '📚 Recueils', '📁 Dossiers', '✉️ Lettres', '🏷 Sortes']);
                 assert.ok(r.every(x => !x.cut), `largeur ${w} : un libellé coupé ${JSON.stringify(r)}`);
                 assert.equal(new Set(r.map(x => x.top)).size, 2, 'deux rangées');
             }

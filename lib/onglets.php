@@ -150,6 +150,16 @@ function onglets_place_point(PDO $pdo, int $id): array
     return ['id' => (int) $p['id'], 'name' => (string) $p['name'], 'lat' => is_numeric($p['latitude']) ? (float) $p['latitude'] : null, 'lon' => is_numeric($p['longitude']) ? (float) $p['longitude'] : null];
 }
 
+/** ✉️ les correspondants d'une pièce : [{id, name}] (au plus 6) depuis correspondent_json, sinon correspondent_name (« Jean ; Marie ») */
+function onglets_correspondents(string $json, string $name): array
+{
+    $out = [];
+    $list = json_decode($json, true);
+    if (is_array($list)) { foreach ($list as $x) { if (is_array($x) && trim((string) ($x['name'] ?? '')) !== '') { $out[] = ['id' => (int) ($x['id'] ?? 0), 'name' => mb_substr(trim((string) $x['name']), 0, 80)]; } } }
+    if (!$out && trim($name) !== '') { foreach (preg_split('/\s*[;,\/]\s*/u', $name) as $n) { if ($n !== '') { $out[] = ['id' => 0, 'name' => mb_substr($n, 0, 80)]; } } }
+    return array_slice($out, 0, 6);
+}
+
 /** la liste : une ligne courte par document (la colonne de gauche, A → Z ou dossiers) */
 function onglets_documents(PDO $pdo): array
 {
@@ -157,6 +167,7 @@ function onglets_documents(PDO $pdo): array
     $sealed = function_exists('sealed_media_sql') ? sealed_media_sql($pdo) : '';
     $s = $pdo->prepare("SELECT m.id, m.title, m.document_title, m.filename, m.thumbnail, m.media_type, COALESCE(m.date_text,'') AS date_text,
             COALESCE(m.document_reference,'') AS cote, COALESCE(m.media_subject_type,'') AS subject, COALESCE(m.correspondence_type,'') AS corr,
+            COALESCE(m.correspondent_json,'') AS corr_json, COALESCE(m.correspondent_name,'') AS corr_name, COALESCE(m.correspondence_reply_to_media_id,0) AS reply_to,
             CASE WHEN trim(COALESCE(m.transcription,''))<>'' THEN 1 ELSE 0 END AS has_tr, m.created_at, {$series} AS series,
             (SELECT count(*) FROM media_links l WHERE l.media_id=m.id) AS links
         FROM media m WHERE 1{$sealed} ORDER BY m.id LIMIT " . (ONGLETS_MAX_DOCS + 1));
@@ -168,7 +179,8 @@ function onglets_documents(PDO $pdo): array
     $places = onglets_media_places($pdo);
     $geo = onglets_media_geo($pdo);
     $acts = onglets_media_acts($pdo);
-    $docs = array_map(static function (array $r) use ($people, $places, $geo, $acts) {
+    $ro = function_exists('onglets_kiosk') && onglets_kiosk();
+    $docs = array_map(static function (array $r) use ($people, $places, $geo, $acts, $ro) {
         $id = (int) $r['id'];
         $title = trim((string) $r['title']) ?: trim((string) $r['document_title']) ?: trim((string) $r['filename']) ?: 'Document sans titre';
         $pp = $people[$id] ?? [];
@@ -178,7 +190,9 @@ function onglets_documents(PDO $pdo): array
             'series' => mb_substr((string) $r['series'], 0, 120), 'links' => (int) $r['links'], 'place' => mb_substr($places[$id] ?? '', 0, 120),
             // les noms montrés sous le titre et cherchés par « Chercher… » (bornés ; en consultation, sans vivants ni fiches confidentielles)
             'geo' => $geo[$id] ?? [], 'kinds' => $acts[$id]['kinds'] ?? [],
-            'people' => array_slice(array_map(static fn($p) => ['id' => $p['id'], 'name' => mb_substr($p['name'], 0, 80), 'last' => mb_substr($p['last'], 0, 60), 'first' => mb_substr($p['first'], 0, 60)], $pp), 0, ONGLETS_MAX_DOC_PEOPLE), 'people_count' => count($pp)];
+            'people' => array_slice(array_map(static fn($p) => ['id' => $p['id'], 'name' => mb_substr($p['name'], 0, 80), 'last' => mb_substr($p['last'], 0, 60), 'first' => mb_substr($p['first'], 0, 60)], $pp), 0, ONGLETS_MAX_DOC_PEOPLE), 'people_count' => count($pp),
+            // ✉️ les correspondants (fiches ou noms libres ; pas en mode consultation : un vivant pourrait y être) et la pièce à laquelle elle répond
+            'corrs' => $ro || (string) $r['corr'] === '' ? [] : onglets_correspondents((string) $r['corr_json'], (string) $r['corr_name']), 'reply_to' => (int) $r['reply_to']];
     }, $rows);
     // 📚 les recueils où est chaque document (chercher et filtrer par recueil, « 📚 Recueils » dans la colonne)
     $rx = function_exists('recueil_doc_index') ? recueil_doc_index($pdo) : ['recueils' => [], 'of' => []];

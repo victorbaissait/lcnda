@@ -873,7 +873,6 @@ Texte fusionné (à relire) ¦ Συγχωνευμένο κείμενο (προς
 Lectures fusionnées dans le texte. ¦ Οι αναγνώσεις συγχωνεύτηκαν στο κείμενο. ¦ Прочитите са слети в текста.
 XML des bibliothèques et archives (lignes et mots avec leur place sur l’image) ¦ XML βιβλιοθηκών και αρχείων (γραμμές και λέξεις με τη θέση τους στην εικόνα) ¦ XML на библиотеки и архиви (редове и думи с мястото им върху изображението)
 XML de Transkribus et eScriptorium (régions, lignes, ordre de lecture) ; un fichier par page, en .zip s’il y en a plusieurs ¦ XML του Transkribus και του eScriptorium (περιοχές, γραμμές, σειρά ανάγνωσης)· ένα αρχείο ανά σελίδα, σε .zip αν είναι πολλά ¦ XML на Transkribus и eScriptorium (области, редове, ред на четене); по един файл на страница, в .zip, ако са няколко
-openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}], ¦ openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
 Adresse introuvable (erreur {code}). ¦ Η διεύθυνση δεν βρέθηκε (σφάλμα {code}). ¦ Адресът не е намерен (грешка {code}).
 Adresse refusée : seulement une adresse publique en http ou https. ¦ Η διεύθυνση απορρίφθηκε: μόνο δημόσια διεύθυνση http ή https. ¦ Адресът е отхвърлен: само публичен адрес с http или https.
 Le site ne répond pas : {err} ¦ Ο ιστότοπος δεν απαντά: {err} ¦ Сайтът не отговаря: {err}

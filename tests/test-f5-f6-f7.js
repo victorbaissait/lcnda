@@ -139,8 +139,8 @@ const check = async (name, fn) => { try { await fn(); results.push([name, true])
         });
         await check('la liste des crises (Épidémies, guerres, hivers) vient du même fichier', async () => {
             const h = await get('historical_context'); const j = JSON.parse(fs.readFileSync(path.join(appRoot, 'assets/data/monde-autour.json'), 'utf8'));
-            const crises = new Set(j.events.filter(e => e.crisis).map(e => e.title)); assert.equal(crises.size, 27);
-            assert.ok(h.crises.length && h.crises.every(c => crises.has(c.title)) && h.crises.some(c => c.title === 'Phylloxéra'), JSON.stringify(h.crises.map(c => c.title)));
+            const crises = new Set(j.events.filter(e => e.crisis).map(e => e.title)); assert.equal(crises.size, 47, '27 de toute la France + 20 locales (choléra de 1832 à Paris…)');
+            assert.ok(h.crises.length && h.crises.every(c => crises.has(c.title) || c.own) && h.crises.some(c => c.title === 'Phylloxéra'), JSON.stringify(h.crises.map(c => c.title)));
             assert.ok(j.events.length >= 300 && j.events.filter(e => e.from >= 1500 && e.from <= 1960).length >= 280, 'liste assez riche');
             assert.ok(j.licence && j.credit && j.events.every(e => e.src && e.url && e.quand && e.desc), 'source de chaque événement');
         });

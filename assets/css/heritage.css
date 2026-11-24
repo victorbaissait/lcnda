@@ -5944,3 +5944,12 @@ button.lb-acts-chip.is-unlinked{border-style:dashed}
 .mv-person h4 { margin: 0 0 4px; font-size: .95rem; }
 .mv-person ul { margin: 0 0 4px; padding-left: 18px; }
 .mv-person li { margin: 2px 0; }
+
+/* 🦠 Les crises : la saison (décès mois par mois) et les âges */
+.h-crisis-season { display: flex; align-items: flex-end; gap: 3px; height: 54px; margin: 6px 0 8px; max-width: 360px; }
+.h-crisis-season span { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.h-crisis-season i { display: block; width: 100%; min-height: 1px; background: var(--crisis, #999); border-radius: 2px 2px 0 0; }
+.h-crisis-season small { font-size: .7rem; color: var(--muted, #667); line-height: 1.2; }
+.h-crisis-ages { margin: 4px 0; font-size: .92rem; }
+.h-badge.is-ok { background: #e3f4e8; color: #1e6b3a; }
+:root[data-theme="dark"] .h-badge.is-ok { background: #1f3a29; color: #9fe0b4; }

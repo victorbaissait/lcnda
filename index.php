@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=277">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=278">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -47,7 +47,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
-    <link rel="stylesheet" href="assets/css/onglets.css?v=13">
+    <link rel="stylesheet" href="assets/css/onglets.css?v=14">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=2">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
@@ -1174,7 +1174,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=112"></script>
+<script src="assets/js/app-i18n.js?v=113"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
@@ -1292,7 +1292,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=7" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=6" defer></script>
 <script src="assets/js/heritage-links.js?v=25" defer></script>
-<script src="assets/js/heritage-more.js?v=404" defer></script>
+<script src="assets/js/heritage-more.js?v=405" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
@@ -1426,7 +1426,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-graphs.js?v=7" defer></script>
 <script src="assets/js/heritage-diagram-chiffres.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-cartes.js?v=11" defer></script>
-<script src="assets/js/heritage-diagram-more.js?v=7" defer></script>
+<script src="assets/js/heritage-diagram-more.js?v=8" defer></script>
 <script src="assets/js/heritage-diagram-famille.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-vie.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-adn-chiffres.js?v=9" defer></script>
@@ -1492,7 +1492,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-complements-2.js?v=2" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=24" defer></script>
+<script src="assets/js/app-correspondances-core.js?v=1" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=25" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=2" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=12" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=4" defer></script>

@@ -219,3 +219,20 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 /* 📚 pied de la colonne (mode Recueils) : la liste des recueils à droite */
 #sidebar-footer .ong-allrec { display: flex; width: 100%; justify-content: center; align-items: baseline; gap: 8px; margin: 8px 0 0; font-size: 14px; }
 #sidebar-footer .ong-allrec-n { font-size: 12px; font-weight: 400; opacity: .75; }
+
+/* ✉️ Lettres et 🏷 Sortes (maquette correspondances.html) : 6 façons de ranger en 3 × 2, ou 4 + « 📚 Ensembles » */
+.ong-modes { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.ong-modebar .segmented.ong-mode.is-grid.is-3 { grid-template-columns: 1fr 1fr 1fr; }
+.ong-submode { display: flex; }
+.ong-submode button { flex: 1; font-size: .85rem; padding: 2px 4px; white-space: nowrap; }
+.ong-gap { margin: 2px 8px 4px 28px; padding: 3px 8px; border-left: 3px solid #d9a400; background: color-mix(in srgb, #f0c419 14%, transparent); font-size: .82rem; list-style: none; }
+.ong-exstats { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin: 8px 0 12px; }
+.ong-exstats > div { border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 6px 10px; }
+.ong-exstats small { display: block; color: var(--muted, #667); }
+.ong-fil { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ong-piece-main { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: var(--panel, #fff); border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 6px 10px; cursor: pointer; color: inherit; }
+.ong-piece-main .ong-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.ong-piece-main small { color: var(--muted, #667); }
+.ong-reply { color: var(--accent, #2a5fa8) !important; }
+.ong-modebar .segmented.ong-mode.is-grid.is-3 button { font-size: .8rem; padding-left: 2px; padding-right: 2px; letter-spacing: -.02em; }
+.ong-modebar .segmented.ong-mode.is-grid.is-3 button { white-space: normal; line-height: 1.15; overflow: visible; text-overflow: clip; }
