@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=275">
-    <link rel="stylesheet" href="assets/css/recueil-etat.css?v=5">
+    <link rel="stylesheet" href="assets/css/recueil-etat.css?v=7">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
@@ -1185,7 +1185,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=572" defer></script>
+<script src="assets/js/app.js?v=573" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=6" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1295,16 +1295,17 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=24" defer></script>
-<script src="assets/js/heritage-more.js?v=397" defer></script>
+<script src="assets/js/heritage-more.js?v=398" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
 <script src="assets/js/heritage-av.js?v=20" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=10" defer></script>
-<script src="assets/js/heritage-recueil-etat.js?v=2" defer></script>
+<script src="assets/js/heritage-recueil-etat.js?v=3" defer></script>
 <script src="assets/js/heritage-recueil-sommaire.js?v=1" defer></script>
-<script src="assets/js/heritage-recueil-fiche.js?v=1" defer></script>
-<script src="assets/js/heritage-recueils.js?v=31" defer></script>
+<script src="assets/js/heritage-recueil-fiche.js?v=2" defer></script>
+<script src="assets/js/heritage-recueil-fonds.js?v=2" defer></script>
+<script src="assets/js/heritage-recueils.js?v=32" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=31" defer></script>
 <script src="assets/js/heritage-decennales.js?v=4" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=14" defer></script>

@@ -181,3 +181,24 @@ function archive_service_recueils(PDO $pdo, int $sid): array
     }
     return ['recueils' => $out, 'gaps' => array_slice($gaps, 0, 200)];
 }
+
+/**
+ * 🏛 GET recueils_fonds : tous les recueils avec leur fiche et leur avancement, pour la vue « Par fonds » (Listes › Recueils) et le widget
+ * « 🗂 Registres : reste à faire ». Mode consultation : sans les recueils non communicables (réglage).
+ */
+function recueils_fonds_data(PDO $pdo): array
+{
+    recueil_fiche_ensure($pdo);
+    $out = [];
+    foreach (array_map('intval', $pdo->query('SELECT id FROM recueils ORDER BY title COLLATE NOCASE, id')->fetchAll(PDO::FETCH_COLUMN)) as $rid) {
+        if (recueil_hidden_in_kiosk($pdo, recueil_row($pdo, $rid))) { continue; }
+        $d = recueil_detail($pdo, $rid); $r = $d['recueil'];
+        $gaps = []; foreach ($d['pages'] as $p) { if (!empty($p['gap_id'])) { $gaps[(int) $p['gap_id']] = true; } }
+        $out[] = ['id' => $rid, 'title' => (string) $r['title'], 'icon' => (string) $r['icon'], 'reference' => (string) $r['reference'], 'place_text' => (string) $r['place_text'],
+            'fonds' => (string) ($r['fonds'] ?? ''), 'series' => (string) ($r['series'] ?? ''), 'date_text' => (string) $r['date_text'], 'url' => (string) ($r['url'] ?? ''),
+            'service' => $r['service'] ?? null, 'pages' => count($d['pages']), 'expected' => (int) ($r['expected_pages'] ?? 0), 'etat' => $d['etat'] ?? null, 'gaps' => count($gaps),
+            'communicability' => $r['communicability'] ?? null, 'numbering' => (string) ($r['numbering'] ?? ''), 'support' => (string) ($r['support'] ?? ''), 'material_state' => (string) ($r['material_state'] ?? ''),
+            'language' => (string) ($r['language'] ?? ''), 'script' => (string) ($r['script'] ?? ''), 'reuse' => (string) ($r['reuse'] ?? ''), 'updated_at' => (string) $r['updated_at']];
+    }
+    return ['recueils' => $out];
+}
