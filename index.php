@@ -80,6 +80,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=4">
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
+    <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
     <link rel="stylesheet" href="assets/css/lieux-patrimoine.css?v=1">
     <link rel="stylesheet" href="assets/css/commune-plus.css?v=1">
     <link rel="stylesheet" href="assets/css/terre-quotidien.css?v=1">
@@ -1616,12 +1617,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-bases-officielles.js?v=1" defer></script>
 <script src="assets/js/heritage-ciel-heure.js?v=1" defer></script>
 <script src="assets/js/heritage-adn-livres.js?v=1" defer></script>
-<script src="assets/js/heritage-histoire.js?v=2" defer></script>
+<script src="assets/js/heritage-histoire.js?v=3" defer></script>
 <script src="assets/js/heritage-monde-contexte.js?v=1" defer></script>
 <script src="assets/js/heritage-prix-europe.js?v=1" defer></script>
 <script src="assets/js/heritage-terre-quotidien.js?v=1" defer></script>
 <script src="assets/js/heritage-commune-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-lieux-patrimoine.js?v=1" defer></script>
+<script src="assets/js/heritage-metiers-rivieres.js?v=1" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>

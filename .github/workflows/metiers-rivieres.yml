@@ -1,7 +1,7 @@
 # ⛏️🏭⚙️🌊 Métiers et rivières : refaire les données LIVRÉES avec l'app (lib/metiers_rivieres.php).
 #
 # Tout tient dans l'app (moins de 15 Mo en tout) : anciens sites industriels CASIAS (assets/data/casias/, un fichier par
-# département, ≈ 9 Mo), moulins du ROE (assets/data/roe-moulins.json.gz), mines et carrières Wikidata
+# département, ≈ 6,5 Mo), moulins du ROE (assets/data/roe-moulins.json.gz), mines et carrières Wikidata
 # (assets/data/metiers-mines.json.gz), repères de crues (assets/data/reperes-crues.json.gz). Ce travail les refait avec les
 # sources du jour et les donne en pièce jointe (« metiers-rivieres-donnees ») : à recopier dans assets/data/.
 # Les rivières, les hautes eaux (Hub'Eau) et les musées (POP) sont lus en ligne par l'app : rien à fabriquer ici.

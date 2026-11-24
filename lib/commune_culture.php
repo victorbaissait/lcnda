@@ -171,9 +171,11 @@ function cc_find_insee(string $name, string $county, ?float $lat, ?float $lon, s
 {
     if ($country !== '' && !preg_match('/^(fr|fra|france)$/i', trim($country))) { return ''; }
     $C = cc_data('communes'); if (!$C) { return ''; }
+    static $byName = null;
+    if ($byName === null) { $byName = []; foreach ($C['c'] as $insee => $r) { $byName[cc_fold((string) $r[0])][] = (string) $insee; } }
     $want = cc_fold($name); $dep = cc_dep_of_name($county); $hits = [];
     if ($want !== '') {
-        foreach ($C['c'] as $insee => $r) { if (cc_fold((string) $r[0]) === $want) { $hits[] = (string) $insee; } }
+        $hits = $byName[$want] ?? [];
         if ($dep !== '') { $in = array_values(array_filter($hits, static fn($i) => cc_dep_of_insee($i) === $dep)); if ($in) { $hits = $in; } }
     }
     if (count($hits) > 1 && $lat !== null) {
@@ -181,9 +183,9 @@ function cc_find_insee(string $name, string $county, ?float $lat, ?float $lon, s
     }
     if (count($hits) === 1 || (count($hits) > 1 && ($dep !== '' || $lat !== null))) { return $hits[0]; }
     if ($lat !== null && $lon !== null) {
-        $best = ''; $bk = 3.0;
+        $best = ''; $bk = 6.0; // le centre de commune le plus proche, à moins de 6 km
         foreach ($C['c'] as $insee => $r) {
-            if ($r[1] === null || abs((float) $r[1] - $lat) > 0.05 || abs((float) $r[2] - $lon) > 0.07) { continue; }
+            if ($r[1] === null || abs((float) $r[1] - $lat) > 0.06 || abs((float) $r[2] - $lon) > 0.09) { continue; }
             $k = cplus_km($lat, $lon, (float) $r[1], (float) $r[2]); if ($k < $bk) { $bk = $k; $best = (string) $insee; }
         }
         return $best;

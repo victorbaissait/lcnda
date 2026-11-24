@@ -5,7 +5,7 @@ declare(strict_types=1);
  * ⛏️🏭⚙️🌊🖼️ Métiers et rivières (assets/js/heritage-metiers-rivieres.js ; données : scripts/metiers-rivieres/*).
  *
  *  · 🏭 Anciens sites industriels — CASIAS (BRGM / Géorisques, Licence Ouverte Etalab 2.0) : assets/data/casias/casias-<dép>.json.gz,
- *    livrés avec l'app (≈ 9 Mo pour la France entière), lus un département à la fois. Nom, activité quand elle est dite, commune,
+ *    livrés avec l’app (≈ 6,5 Mo pour la France entière, 244 000 sites nommés), lus un département à la fois. Nom, activité quand elle est dite, commune,
  *    position. L'inventaire ne donne PAS de dates : on le dit.
  *  · ⛏️ Mines et carrières — Wikidata (CC0) : assets/data/metiers-mines.json.gz (nom, sorte, dates quand elles sont connues).
  *  · ⚙️ Moulins et usines à eau — ROE, Référentiel des obstacles à l'écoulement (OFB, Sandre, Licence Ouverte Etalab 2.0) :

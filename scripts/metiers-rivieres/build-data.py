@@ -4,7 +4,7 @@
     python3 scripts/metiers-rivieres/build-data.py roe                     # assets/data/roe-moulins.json.gz (LIVRÉ avec l'app)
     python3 scripts/metiers-rivieres/build-data.py mines                   # assets/data/metiers-mines.json.gz (LIVRÉ avec l'app)
     python3 scripts/metiers-rivieres/build-data.py casias --dossier assets/data/casias   # casias-<dép>.json.gz, un par département
-    python3 scripts/metiers-rivieres/build-data.py casias --dep 19 --dossier S            # (LIVRÉS avec l'app : ≈ 9 Mo en tout)
+    python3 scripts/metiers-rivieres/build-data.py casias --dep 19 --dossier S            # (LIVRÉS avec l’app : ≈ 6,5 Mo en tout)
     python3 scripts/metiers-rivieres/build-data.py manifeste --dossier S   # taille et sha256 des fichiers (pour comparer deux fabrications)
     (les repères de crues : build-reperes.py)
 
