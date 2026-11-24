@@ -135,41 +135,6 @@
         window.addEventListener('pagehide',()=>flush(true));
     })();
 
-    /* ── R8 (audit des onglets) : les vrais réglages s'écrivent en « genealogie-* » ─────────────────────────────────────
-     * Une clé « genealogie-* » est copiée dans la base (sauvegarde, autre ordinateur) ; une clé « lcnda-* » reste sur cet
-     * ordinateur (état d'affichage passager). Ces réglages-ci étaient en « lcnda-* » : ils passent sous leur nouveau nom.
-     * Au démarrage, l'ancienne valeur est reprise une fois (si le nouveau nom est vide), puis l'ancienne clé est retirée.
-     * Les fichiers qui lisent encore l'ancien nom continuent de marcher : lire l'ancien nom rend la valeur du nouveau
-     * (nouveau d'abord, ancien ensuite) ; écrire l'un écrit les deux ; retirer l'un retire les deux.
-     * POUR DU CODE NOUVEAU : utiliser le nom « genealogie-… » (liste : window.LCNDA_SETTING_RENAMES, ancien → nouveau). */
-    const SETTING_RENAMES={
-        'lcnda-side-order':'genealogie-side-order','lcnda-tresors-order':'genealogie-tresors-order','lcnda-decor-tree':'genealogie-decor-tree','lcnda-decor-tree-card':'genealogie-decor-tree-card',
-        'lcnda-cite-style':'genealogie-cite-style','lcnda-layout-cite-style':'genealogie-layout-cite-style','lcnda-family-share':'genealogie-family-share','lcnda-decennale-gabarits':'genealogie-decennale-gabarits',
-        'lcnda-museum-voice-rate':'genealogie-museum-voice-rate','lcnda-vx-smart':'genealogie-vx-smart','lcnda-vx-alignto':'genealogie-vx-alignto','lcnda-mt-rush-sort':'genealogie-mt-rush-sort',
-        'lcnda-imgdup-mode':'genealogie-imgdup-mode','lcnda-imgdup-sens':'genealogie-imgdup-sens','lcnda-media-picker-size':'genealogie-media-picker-size','lcnda-controle-filtres':'genealogie-controle-filtres',
-        'lcnda-gazette-style':'genealogie-gazette-style','lcnda-trajets-jour':'genealogie-trajets-jour','lcnda-aide-lecture-lang':'genealogie-aide-lecture-lang','lcnda-autrefois-region':'genealogie-autrefois-region',
-        'lcnda-faces-speed':'genealogie-faces-speed','lcnda-tr-era':'genealogie-tr-era','lcnda-fond-ecran':'genealogie-fond-ecran','lcnda-jeux-famille-prefs-v1':'genealogie-jeux-famille-prefs-v1',
-        'lcnda-laby-prefs-v1':'genealogie-laby-prefs-v1','lcnda-laby-presets-v1':'genealogie-laby-presets-v1',
-    };
-    (function renameSettingKeys(){
-        let store;try{store=window.localStorage;store.length;}catch(_){return;}
-        try{Object.freeze(SETTING_RENAMES);window.LCNDA_SETTING_RENAMES=SETTING_RENAMES;}catch(_){}
-        const proto=Object.getPrototypeOf(store);if(proto.__lcndaRenames)return;
-        const get=proto.getItem,set=proto.setItem,remove=proto.removeItem;
-        const toNew=new Map(Object.entries(SETTING_RENAMES)),toOld=new Map(Object.entries(SETTING_RENAMES).map(([o,n])=>[n,o]));
-        // reprise une seule fois sur cet ordinateur : l'ancienne valeur passe sous le nouveau nom (la base, déjà relue, gagne si elle a
-        // la nouvelle clé) ; ensuite l'ancien nom n'est plus qu'un reflet (retiré à chaque démarrage, réécrit avec le nouveau)
-        const DONE='lcnda-settings-renamed-v1',first=(()=>{try{return get.call(store,DONE)===null;}catch(_){return false;}})();
-        for(const [oldKey,newKey] of toNew){try{const old=get.call(store,oldKey);if(old===null)continue;if(first&&get.call(store,newKey)===null)store.setItem(newKey,old);remove.call(store,oldKey);}catch(_){}}
-        try{if(first)set.call(store,DONE,'1');}catch(_){}
-        // lire l'ancien nom = lire le nouveau (une autre généalogie ouverte ne reprend pas les réglages de la précédente)
-        proto.getItem=function(key){if(this===store&&toNew.has(String(key)))return get.call(this,toNew.get(String(key)));return get.call(this,key);};
-        // écrire l'un écrit les deux (le nouveau part dans la base) ; retirer l'un retire les deux
-        proto.setItem=function(key,value){set.call(this,key,value);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)set.call(this,twin,value);}};
-        proto.removeItem=function(key){remove.call(this,key);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)remove.call(this,twin);}};
-        proto.__lcndaRenames=true;
-    })();
-
     const $ = (selector, root = document) => root.querySelector(selector);
     /** 🌐 i18n('Texte français', {vars}) : le texte dans la langue choisie (assets/js/app-i18n.js) ; en français, le texte tel quel */
     const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? ''));
@@ -349,8 +314,8 @@
     const PERSON_BADGE_COLOR_PRESETS_KEY = 'genealogie-person-badge-color-presets';
     const SITE_DEFAULTS_APPLIED_KEY = 'genealogie-site-defaults-applied';
     const SITE_DEFAULT_KEYS = [
-        'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden','genealogie-menu-names','genealogie-menu-icons','genealogie-lightbox-sections','genealogie-calendar-choices','genealogie-diagram-kinds','genealogie-house-snap','genealogie-house-lib','genealogie-decor-tree','genealogie-decor-tree-formats','genealogie-decor-tree-styles','genealogie-edit-tools-order','genealogie-maintenance-groups','genealogie-list-groups','genealogie-mylists-order','genealogie-keynote-prefs','genealogie-vector-map-palette',
-        'genealogie-list-order','genealogie-list-hidden','genealogie-tresors-order','genealogie-map-order','genealogie-map-hidden','genealogie-maintenance-order','genealogie-board-prefs','genealogie-board-prefs-sets',
+        'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden','genealogie-menu-names','genealogie-menu-icons','genealogie-lightbox-sections','genealogie-calendar-choices','genealogie-diagram-kinds','genealogie-house-snap','genealogie-house-lib','lcnda-decor-tree','genealogie-decor-tree-formats','genealogie-decor-tree-styles','genealogie-edit-tools-order','genealogie-maintenance-groups','genealogie-list-groups','genealogie-mylists-order','genealogie-keynote-prefs','genealogie-vector-map-palette',
+        'genealogie-list-order','genealogie-list-hidden','lcnda-tresors-order','genealogie-map-order','genealogie-map-hidden','genealogie-maintenance-order','genealogie-board-prefs','genealogie-board-prefs-sets',
         'genealogie-graph-diagram-order','genealogie-graph-diagram-hidden','genealogie-graph-stats-order','genealogie-graph-stats-hidden','genealogie-side-folders',
         'genealogie-research-kind-order','genealogie-research-kind-hidden', // 🔎 Recherche → ordre et types cachés de « Type de recherche » (app-recherche.js)
         'genealogie-tile-cat-order','genealogie-tile-hidden-cats','genealogie-tile-hidden','genealogie-tile-custom-cats','genealogie-tile-user',
@@ -630,9 +595,9 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     const courrierFilters = [['','En cours'],['fait_utilise','Faits — utilisés'],['fait_non_utilise','Faits — non utilisés'],['fait_tous','Tous les faits'],['tous','Tout (en cours + faits)']];
     const defaultMapTypes = [['all','Tous les événements'],['BIRT','Naissances'],['DEAT','Décès'],['MARR','Mariages'],['BURI','Inhumations']];
     const defaultPersonBlocks = [
-        ['identity','Identité'],['animal','🐾 Animal : caractéristiques'],['animal_parents','🌳 Animal : pedigree'],['animal_offspring','🐾 Animal : descendance'],['animal_siblings','👥 Animal : frères et sœurs'],['animal_owners','🏠 Animal : ses maîtres'],['animal_titles','🏆 Animal : titres et concours'],['animal_marks','🔖 Animal : bagues et marques'],['animal_obs','👁 Animal : observations'],['animal_health','🩺 Animal : santé'],['animal_growth','📈 Animal : poids et croissance'],['animal_group','👥 Animal : groupe'],['animal_map','🗺 Animal : carte et trajets'],['animal_life','📅 Animal : sa vie'],['animal_story','📖 Animal : histoire et souvenirs'],['animal_custom','🗂️ Animal : mes catégories'],['web_search','Chercher sur internet'],['ou_chercher','🌍 Où chercher ?'],['family_objects','Objets de famille'],['family_memories','Mémoire familiale'],['events','Événements'],['ascendants','Ascendants'],['descendants','Descendants'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['travel','🧭 Ses déplacements (distances et temps de trajet)'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['artist_books','📚 Artiste : bibliographie'],['artist_works','🖼️ Artiste : œuvres et inventaire'],['artist_discography','💿 Artiste : discographie'],['artist_filmography','🎬 Artiste : filmographie'],['profiles','🧩 Cette personne était… (profils)'],['artist_page','🎨 Artiste : sa page'],['artist_cited','🎨 Cité dans des catalogues d’artistes'],['sciences','🔬 Sciences, inventions, explorations'],['in_media','📰 Dans les médias'],['heard','🎧 On l’entend'],['acts','📜 Actes et transcriptions'],['awards','🏆 Concours et récompenses'],['education','🎓 Diplômes et formation'],['voyages','Départs / émigration'],['placements','Enfant placé'],['heraldry','Blason / noblesse'],['poilu','Poilu 14-18'],['probate','Inventaire après décès'],['family_papers_block','Papiers de famille (originaux)'],['languages','Langues'],['resistance','Résistant'],['voter','Cartes d’électeur'],['booklets','Livrets de famille'],['boards','Tableaux'],['diagrams','📊 Diagrammes'],['dna','🧬 ADN'],['pets','Animaux de compagnie'],['custom_blocks','Mes blocs (éditeur de blocs)'],['mentions','Cité dans'],['recueils','Recueils'],['person_exports','Exports fiche'],['meteo','🌦 Météo de sa vie'],['tresors','✨ Trésors (souvenirs, recettes, lettres…)'],['birth_sky','🌌 Le ciel de sa naissance'],['passports','🛂 Passeports']
+        ['identity','Identité'],['animal','🐾 Animal : caractéristiques'],['animal_parents','🌳 Animal : pedigree'],['animal_offspring','🐾 Animal : descendance'],['animal_siblings','👥 Animal : frères et sœurs'],['animal_owners','🏠 Animal : ses maîtres'],['animal_titles','🏆 Animal : titres et concours'],['animal_marks','🔖 Animal : bagues et marques'],['animal_obs','👁 Animal : observations'],['animal_health','🩺 Animal : santé'],['animal_group','👥 Animal : groupe'],['animal_map','🗺 Animal : carte et trajets'],['animal_life','📅 Animal : sa vie'],['animal_story','📖 Animal : histoire et souvenirs'],['animal_custom','🗂️ Animal : mes catégories'],['web_search','Chercher sur internet'],['ou_chercher','🌍 Où chercher ?'],['family_objects','Objets de famille'],['family_memories','Mémoire familiale'],['events','Événements'],['ascendants','Ascendants'],['descendants','Descendants'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['travel','🧭 Ses déplacements (distances et temps de trajet)'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['artist_books','📚 Artiste : bibliographie'],['artist_works','🖼️ Artiste : œuvres et inventaire'],['artist_discography','💿 Artiste : discographie'],['artist_filmography','🎬 Artiste : filmographie'],['profiles','🧩 Cette personne était… (profils)'],['artist_page','🎨 Artiste : sa page'],['artist_cited','🎨 Cité dans des catalogues d’artistes'],['sciences','🔬 Sciences, inventions, explorations'],['in_media','📰 Dans les médias'],['heard','🎧 On l’entend'],['acts','📜 Actes et transcriptions'],['awards','🏆 Concours et récompenses'],['education','🎓 Diplômes et formation'],['voyages','Départs / émigration'],['placements','Enfant placé'],['heraldry','Blason / noblesse'],['poilu','Poilu 14-18'],['probate','Inventaire après décès'],['family_papers_block','Papiers de famille (originaux)'],['languages','Langues'],['resistance','Résistant'],['voter','Cartes d’électeur'],['booklets','Livrets de famille'],['boards','Tableaux'],['diagrams','📊 Diagrammes'],['dna','🧬 ADN'],['pets','Animaux de compagnie'],['custom_blocks','Mes blocs (éditeur de blocs)'],['mentions','Cité dans'],['recueils','Recueils'],['person_exports','Exports fiche'],['meteo','🌦 Météo de sa vie'],['tresors','✨ Trésors (souvenirs, recettes, lettres…)'],['birth_sky','🌌 Le ciel de sa naissance'],['passports','🛂 Passeports']
     ];
-    const defaultPersonBlockSpans={animal_growth:'12',tresors:'12',birth_sky:'6',passports:'12',meteo:'6',diagrams:'12',dna:'12',recueils:'12',voter:'12',booklets:'12',boards:'12',pets:'12',animal:'12',animal_parents:'12',animal_marks:'12',animal_obs:'12',animal_group:'12',animal_map:'12',animal_offspring:'12',animal_siblings:'6',animal_owners:'6',animal_titles:'12',animal_health:'12',animal_life:'12',animal_story:'12',animal_custom:'12',ascendants:'6',descendants:'6',family_objects:'12',family_memories:'12',web_search:'12',ou_chercher:'12',identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',travel:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',artist_books:'12',artist_works:'12',artist_discography:'12',artist_filmography:'12',profiles:'12',artist_page:'12',artist_cited:'6',sciences:'12',in_media:'12',heard:'12',acts:'12',awards:'12',education:'12',voyages:'12',placements:'12',heraldry:'6',poilu:'12',probate:'12',family_papers_block:'6',languages:'6',resistance:'12',custom_blocks:'12',mentions:'6',person_exports:'6'};
+    const defaultPersonBlockSpans={tresors:'12',birth_sky:'6',passports:'12',meteo:'6',diagrams:'12',dna:'12',recueils:'12',voter:'12',booklets:'12',boards:'12',pets:'12',animal:'12',animal_parents:'12',animal_marks:'12',animal_obs:'12',animal_group:'12',animal_map:'12',animal_offspring:'12',animal_siblings:'6',animal_owners:'6',animal_titles:'12',animal_health:'12',animal_life:'12',animal_story:'12',animal_custom:'12',ascendants:'6',descendants:'6',family_objects:'12',family_memories:'12',web_search:'12',ou_chercher:'12',identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',travel:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',artist_books:'12',artist_works:'12',artist_discography:'12',artist_filmography:'12',profiles:'12',artist_page:'12',artist_cited:'6',sciences:'12',in_media:'12',heard:'12',acts:'12',awards:'12',education:'12',voyages:'12',placements:'12',heraldry:'6',poilu:'12',probate:'12',family_papers_block:'6',languages:'6',resistance:'12',custom_blocks:'12',mentions:'6',person_exports:'6'};
     const personBlockWidthChoices=[['12','1'],['6','1/2'],['4','1/3'],['3','1/4'],['8','2/3'],['9','3/4']];
     function savedOrder(key,defaults){try{const stored=JSON.parse(localStorage.getItem(key)||'[]');const order=stored.filter(item=>defaults.includes(item));defaults.forEach((item,index)=>{if(order.includes(item))return;const previous=defaults.slice(0,index).reverse().find(value=>order.includes(value));const next=defaults.slice(index+1).find(value=>order.includes(value));if(previous)order.splice(order.indexOf(previous)+1,0,item);else if(next)order.splice(order.indexOf(next),0,item);else order.push(item);});return order;}catch(_){return defaults;}}
     /** Ordre du menu principal : les onglets de l'app et ses onglets à soi (Éditeur d'onglets), rangés ensemble */
@@ -939,9 +904,9 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     }
     // fiches des personnes et fiches des animaux : deux réglages à part (« Toutes les fiches »), plus l'exception de chaque fiche
     // blocs propres aux animaux (seulement sur leurs fiches) ; sur une fiche d'animal, les blocs d'humains les plus courants sont cachés au départ
-    const ANIMAL_BLOCKS=['animal','animal_parents','animal_offspring','animal_siblings','animal_owners','animal_titles','animal_marks','animal_obs','animal_health','animal_growth','animal_group','animal_map','animal_life','animal_story','animal_custom']; // 🐾 fiche animal unique : « identification » est dans les caractéristiques, « poids et taille » dans la santé
+    const ANIMAL_BLOCKS=['animal','animal_parents','animal_offspring','animal_siblings','animal_owners','animal_titles','animal_marks','animal_obs','animal_health','animal_group','animal_map','animal_life','animal_story','animal_custom']; // 🐾 fiche animal unique : « identification » est dans les caractéristiques, « poids et taille » dans la santé
     // la disposition de départ des fiches d'animaux (avant tout réglage) : ordre, blocs cachés, largeurs
-    const ANIMAL_BLOCKS0={'order':['identity','animal','animal_parents','animal_offspring','animal_siblings','animal_owners','animal_titles','animal_marks','animal_obs','animal_health','animal_growth','animal_group','animal_map','animal_life','animal_story','animal_custom','web_search','family_objects','family_memories','events','ascendants','descendants','media','correspondance','memories','notes','census','sources','refs','maternity','investigations','signatures','event_map','completion','bio','military','cemetery','artistic_works','voyages','placements','heraldry','poilu','probate','family_papers_block','languages','resistance','voter','booklets','boards','pets','custom_blocks','mentions','recueils','person_exports'],'hidden':['web_search','family_objects','family_memories','correspondance','census','maternity','signatures','military','voter','booklets','pets'],'widths':{'identity':'4','animal':'4','animal_parents':'4','animal_offspring':'4','animal_siblings':'4','animal_owners':'4','animal_titles':'4','animal_marks':'12','animal_obs':'12','animal_health':'12','animal_group':'12','animal_map':'12','animal_life':'4','animal_story':'4','animal_custom':'4','web_search':'12','family_objects':'12','family_memories':'12','events':'4','ascendants':'4','descendants':'4','media':'12','correspondance':'12','memories':'12','notes':'4','census':'12','sources':'4','refs':'4','maternity':'12','investigations':'4','signatures':'12','event_map':'6','completion':'6','bio':'12','military':'12','cemetery':'12','artistic_works':'12','voyages':'12','placements':'12','heraldry':'6','poilu':'12','probate':'12','family_papers_block':'6','languages':'6','resistance':'6','voter':'12','booklets':'12','boards':'6','pets':'6','custom_blocks':'6','mentions':'6','recueils':'6','person_exports':'6'}};
+    const ANIMAL_BLOCKS0={'order':['identity','animal','animal_parents','animal_offspring','animal_siblings','animal_owners','animal_titles','animal_marks','animal_obs','animal_health','animal_group','animal_map','animal_life','animal_story','animal_custom','web_search','family_objects','family_memories','events','ascendants','descendants','media','correspondance','memories','notes','census','sources','refs','maternity','investigations','signatures','event_map','completion','bio','military','cemetery','artistic_works','voyages','placements','heraldry','poilu','probate','family_papers_block','languages','resistance','voter','booklets','boards','pets','custom_blocks','mentions','recueils','person_exports'],'hidden':['web_search','family_objects','family_memories','correspondance','census','maternity','signatures','military','voter','booklets','pets'],'widths':{'identity':'4','animal':'4','animal_parents':'4','animal_offspring':'4','animal_siblings':'4','animal_owners':'4','animal_titles':'4','animal_marks':'12','animal_obs':'12','animal_health':'12','animal_group':'12','animal_map':'12','animal_life':'4','animal_story':'4','animal_custom':'4','web_search':'12','family_objects':'12','family_memories':'12','events':'4','ascendants':'4','descendants':'4','media':'12','correspondance':'12','memories':'12','notes':'4','census':'12','sources':'4','refs':'4','maternity':'12','investigations':'4','signatures':'12','event_map':'6','completion':'6','bio':'12','military':'12','cemetery':'12','artistic_works':'12','voyages':'12','placements':'12','heraldry':'6','poilu':'12','probate':'12','family_papers_block':'6','languages':'6','resistance':'6','voter':'12','booklets':'12','boards':'6','pets':'6','custom_blocks':'6','mentions':'6','recueils':'6','person_exports':'6'}};
     let blockKindPreview=null; // 🗂 l'aperçu d'une autre fiche (Réglages → Fiches) : sa sorte à elle, le temps de la dessiner
     const blockKindOf=personId=>blockKindPreview&&Number(personId)===blockKindPreview.id?blockKindPreview.kind:personId&&Number(personId)===Number(state.currentPersonId)&&state.currentPersonKind==='animal'?'animal':'human';
     const blockBaseKey=kind=>kind==='animal'?'genealogie-animal-blocks':'genealogie-person-blocks';
@@ -2689,101 +2654,29 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         localStorage.setItem('genealogie-dashboard-recent-people',JSON.stringify(rows));
     }
 
-    /* 👤 Colonne Personnes (audit des onglets, R2 / H10) : la barre commune (🔍 C1 · Filtrer ▾ · Trier), plus de « ⌕ ».
-     * Les filtres et le tri sont gardés (« genealogie-people-column », copiés dans la base) ; la recherche tapée dans l'état de l'écran. */
-    const PEOPLE_COLUMN_KEY='genealogie-people-column',KIN_SHOW_KEY='genealogie-kin-show';
-    function peopleColumnPrefs(){try{const v=JSON.parse(localStorage.getItem(PEOPLE_COLUMN_KEY)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?{filters:v.filters&&typeof v.filters==='object'?v.filters:{},sort:typeof v.sort==='string'?v.sort:'name'}:{filters:{},sort:'name'};}catch(_){return {filters:{},sort:'name'};}}
-    function savePeopleColumnPrefs(p){try{localStorage.setItem(PEOPLE_COLUMN_KEY,JSON.stringify({filters:p.filters||{},sort:p.sort||'name'}));}catch(_){}}
-    const kinShown=()=>{try{return localStorage.getItem(KIN_SHOW_KEY)!=='0';}catch(_){return true;}};
-    let peopleChoices=null,peopleChoicesAt=0;
-    async function peopleFilterChoices(){if(peopleChoices&&Date.now()-peopleChoicesAt<60000)return peopleChoices;try{peopleChoices=await api('people_filter_choices');peopleChoicesAt=Date.now();}catch(_){peopleChoices=peopleChoices||{groups:[],labels:[]};}return peopleChoices;}
-    function peopleFilterDefs(choices){
-        const groups=(choices?.groups||[]),labels=(choices?.labels||[]);
-        const centuries=[['','Tous les siècles'],...[15,16,17,18,19,20].map(c=>[String(c+1),i18n('{a}–{b}',{a:c*100,b:c*100+99})]),['21',i18n('2000 et après')],['none',i18n('Naissance inconnue')]];
-        return [
-            {id:'gender',group:i18n('Qui'),label:i18n('Genre'),type:'select',dflt:'',options:[['',i18n('Tous les genres')],['male',i18n('Hommes')],['female',i18n('Femmes')],['unknown',i18n('Genre inconnu')]]},
-            {id:'life',group:i18n('Qui'),label:i18n('En vie ou décédé'),type:'select',dflt:'',options:[['',i18n('En vie et décédés')],['living',i18n('En vie')],['deceased',i18n('Décédés')],['unknown',i18n('À vérifier')]]},
-            {id:'sosa',group:i18n('Lignée'),label:i18n('Sosa'),type:'select',dflt:'',options:[['',i18n('Tout le monde')],['in',i18n('Ancêtres (Sosa)')],['out',i18n('Hors Sosa')]]},
-            {id:'branch',group:i18n('Lignée'),label:i18n('Branche'),type:'select',dflt:'',options:[['',i18n('Les deux branches')],['father',i18n('Côté du père')],['mother',i18n('Côté de la mère')]]},
-            ...(groups.length?[{id:'sgroup',group:i18n('Lignée'),label:i18n('Famille / groupe'),type:'select',dflt:'',options:[['',i18n('Tous les groupes')],...groups.map(g=>[String(g.id),g.name,'',Number(g.n)||''])]}]:[]),
-            ...(labels.length?[{id:'label',group:i18n('Étiquette'),label:i18n('Étiquette'),type:'select',dflt:'',options:[['',i18n('Toutes les étiquettes')],...labels.map(l=>[String(l.id),l.name,'',Number(l.n)||''])]}]:[]),
-            {id:'century',group:i18n('Époque'),label:i18n('Siècle de naissance'),type:'select',dflt:'',options:centuries},
-            {id:'noparents',group:i18n('À compléter'),label:i18n('Sans parents'),text:i18n('Sans parents connus'),type:'check'},
-            {id:'nosource',group:i18n('À compléter'),label:i18n('Sans source'),text:i18n('Sans aucune source'),type:'check'},
-            {id:'research',group:i18n('À compléter'),label:i18n('Note de recherche'),text:i18n('📝 Avec une note de recherche'),type:'check'},
-        ];
-    }
-    const PEOPLE_SORTS=()=>[['name',i18n('Nom')],['birth',i18n('Naissance (les plus anciens d’abord)')],['birth_desc',i18n('Naissance (les plus récents d’abord)')],['modified',i18n('Dernière modification')],['created',i18n('Dernières fiches créées')]];
     function renderPeopleSidebar(content, footer) {
-        const UI=window.LCNDA_UI,prefs=peopleColumnPrefs();
-        state.peopleFilters=prefs.filters;state.peopleSort=prefs.sort;
         content.innerHTML = `
             <div class="segmented">${peopleTabs().map(([k, l]) => `<button class="${state.personTab === k ? 'is-active':''}" data-person-tab="${k}">${l}</button>`).join('')}</div>
-            <div class="search-box pa-people-bar" data-pa-people-bar>${UI?.listBar?'':`<label for="person-search">${escapeHtml(i18n('Prénom, nom (de naissance ou mariage) ou variante'))}</label><input id="person-search" type="search" value="${escapeHtml(state.peopleQuery)}" placeholder="Dupont, Dupond…">`}<div class="pa-people-toggles"><label class="ui-toggle" title="${escapeHtml(i18n('Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe.'))}"><input type="checkbox" id="person-phonetic" ${state.peoplePhonetic?'checked':''}><i></i>${escapeHtml(i18n('Toujours phonétique'))}</label><label class="ui-toggle" title="${escapeHtml(i18n('Sous chaque nom : son lien de parenté avec la personne de départ.'))}"><input type="checkbox" id="person-kin-show" ${kinShown()?'checked':''}><i></i>${escapeHtml(i18n('🧭 Ton lien'))}</label></div></div>
-            <div class="person-list" id="person-list">${waitHtml(i18n('Chargement…'))}</div>`;
+            <div class="search-box"><label for="person-search">Prénom, nom (de naissance ou mariage) ou variante</label><div class="search-row"><input id="person-search" value="${escapeHtml(state.peopleQuery)}" placeholder="Dupont, Dupond…"><button id="person-search-button" aria-label="Rechercher">⌕</button></div><label class="ui-toggle" title="${escapeHtml(i18n('Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe.'))}"><input type="checkbox" id="person-phonetic" ${state.peoplePhonetic?'checked':''}><i></i>${escapeHtml(i18n('Toujours phonétique'))}</label></div>
+            <div class="person-list" id="person-list"><div class="loading-block">Chargement…</div></div>`;
         window.LCNDA_EXT?.peopleList?.sidebar?.(content); // ⚖️ « Vue actuelle | ⚖️ Par dossier » (heritage-successoral-dossiers.js)
-        footer.innerHTML = `<button class="button small" id="new-person">${baseMode() === 'breeding' || state.peopleScope === 'animals' || state.personTab === 'animals' ? '＋ Nouvel animal' : animalsTabOn() ? '＋ Nouvelle personne' : '＋ Nouvelle fiche'}</button>${document.body.classList.contains('is-kiosk')?'':` <button class="button small secondary" type="button" id="pa-quick-family" title="${escapeHtml(i18n('Père, mère, mariage et enfants en une seule saisie'))}">${escapeHtml(i18n('⚡ ＋ Famille'))}</button>`}<span style="display:block;margin-top:9px" data-person-count>${i18n('{what} dans la base',{what:personCountLabel(state.bootstrap.stats.personnes)})}</span>`;
-        const signal=sidebarController.signal;
+        footer.innerHTML = `<button class="button small" id="new-person">${baseMode() === 'breeding' || state.peopleScope === 'animals' || state.personTab === 'animals' ? '＋ Nouvel animal' : animalsTabOn() ? '＋ Nouvelle personne' : '＋ Nouvelle fiche'}</button><span style="display:block;margin-top:9px" data-person-count>${i18n('{what} dans la base',{what:personCountLabel(state.bootstrap.stats.personnes)})}</span>`;
         content.addEventListener('click', event => {
-            const more=event.target.closest('[data-pa-row-more]');
-            if(more){event.preventDefault();event.stopPropagation();openPeopleRowMenu(Number(more.dataset.paRowMore),more);return;}
             const tab = event.target.closest('[data-person-tab]');
             if (tab) { state.personTab = tab.dataset.personTab; renderSidebar(); loadPeople(); }
             const person = event.target.closest('[data-person-id]');
             if (person) selectPerson(Number(person.dataset.personId));
-        },{signal});
-        // K14 : clic droit sur une ligne = le même menu que « ⋯ »
-        content.addEventListener('contextmenu',event=>{const row=event.target.closest('.person-list-item[data-person-id]');if(!row||event.shiftKey)return;event.preventDefault();openPeopleRowMenu(Number(row.dataset.personId),null,event);},{signal});
-        const slot=content.querySelector('[data-pa-people-bar]');
-        if(UI?.listBar){
-            const build=choices=>{
-                if(signal.aborted)return;
-                const bar=UI.listBar({key:'personnes:colonne',remember:'given',search:{placeholder:i18n('Prénom, nom (de naissance ou mariage) ou variante'),value:state.peopleQuery||'',delay:300},
-                    filters:peopleFilterDefs(choices).map(f=>({...f,value:prefs.filters[f.id]??(f.type==='check'?false:'')})),
-                    sort:{options:PEOPLE_SORTS(),value:prefs.sort||'name'},
-                    onChange:st=>{const changedQ=st.q!==state.peopleQuery;state.peopleQuery=st.q;state.peopleFilters=st.filters;state.peopleSort=st.sort||'name';savePeopleColumnPrefs({filters:st.filters,sort:state.peopleSort});persistUiState();if(changedQ||true)loadPeople();}});
-                bar.classList.add('pa-listbar');
-                if(bar.input){bar.input.id='person-search';bar.input.setAttribute('aria-label',i18n('Prénom, nom (de naissance ou mariage) ou variante'));}
-                slot.insertBefore(bar,slot.firstChild);
-            };
-            if(peopleChoices&&Date.now()-peopleChoicesAt<60000)build(peopleChoices);else{build(peopleChoices||{groups:[],labels:[]});peopleFilterChoices().then(c=>{if(signal.aborted||!c||(!c.groups?.length&&!c.labels?.length))return;const old=slot.querySelector('.pa-listbar');const had=document.activeElement===old?.input;old?.remove();build(c);if(had)$('#person-search')?.focus();});}
-        }else{
-            const searchInput=$('#person-search');
-            const runSearch=()=>{state.peopleQuery=searchInput.value;persistUiState();loadPeople();};
-            searchInput.addEventListener('input',debounce(runSearch));
-            searchInput.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();runSearch();}});
-        }
+        },{signal:sidebarController.signal});
+        const searchInput=$('#person-search');
+        const runSearch=()=>{state.peopleQuery=searchInput.value;persistUiState();loadPeople();};
+        searchInput.addEventListener('input',debounce(runSearch));
+        searchInput.addEventListener('change',runSearch);
+        searchInput.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();runSearch();}});
+        $('#person-search-button').addEventListener('click',runSearch);
         $('#person-phonetic').addEventListener('change',event=>{state.peoplePhonetic=event.target.checked;persistUiState();loadPeople();});
-        $('#person-kin-show').addEventListener('change',event=>{try{localStorage.setItem(KIN_SHOW_KEY,event.target.checked?'1':'0');}catch(_){}const list=$('#person-list');if(event.target.checked)paDecorateKin(list);else $$('.pa-kin',list).forEach(x=>x.remove());});
         $('#new-person').addEventListener('click', openNewPersonDialog);
-        $('#pa-quick-family')?.addEventListener('click',()=>openQuickFamilyDialog());
     }
-    /** les paramètres des filtres de la colonne pour api('people') */
-    function peopleFilterParams(){
-        const f=state.peopleFilters||{},out={};
-        ['gender','life','sosa','branch','sgroup','label','century'].forEach(k=>{if(f[k]!=null&&f[k]!=='')out[k]=String(f[k]);});
-        ['noparents','nosource','research'].forEach(k=>{if(f[k]===true||f[k]==='1')out[k]=1;});
-        if(state.peopleSort&&state.peopleSort!=='name')out.sort=state.peopleSort;
-        if(out.sosa||out.branch)out.root=Number(state.bootstrap?.startPersonId)||0;
-        return out;
-    }
-    /** R11 : le menu d'une ligne (⋯ ou clic droit) — Ouvrir · Modifier · Signet · 🧭 Ton lien · ⤓ Exporter · — · 🗑 Supprimer */
-    async function openPeopleRowMenu(id,anchor,event=null){
-        const UI=window.LCNDA_UI;if(!UI?.menuAt||!id)return;
-        const ro=document.body.classList.contains('is-kiosk');
-        const p=(state.people||[]).find(x=>Number(x.id)===id)||{id};
-        const withDetail=async fn=>{try{const d=await api('person',{id});await fn(d);}catch(error){toast(error.message,'error');}};
-        const items=[
-            {icon:'👁',label:i18n('Ouvrir'),run:()=>selectPerson(id)},
-            ...(ro?[]:[{icon:'✎',label:i18n('Modifier'),run:()=>withDetail(d=>{if(Number(d.person?.is_locked))return toast(i18n('Cette fiche est verrouillée.'),'error');openPersonDialog(d);})}]),
-            ...(ro?[]:[{icon:Number(p.is_bookmarked)?'★':'☆',label:Number(p.is_bookmarked)?i18n('Retirer des signets'):i18n('Ajouter aux signets'),run:async()=>{try{await api('set_person_bookmark',{},{method:'POST',body:{person_id:id,bookmarked:Number(p.is_bookmarked)?0:1}});await loadPeople();}catch(error){toast(error.message,'error');}}}]),
-            {icon:'🧭',label:i18n('Ton lien avec cette personne'),run:()=>withDetail(d=>openKinPathDialog(d.person))},
-            {icon:'⤓',label:i18n('Exporter la fiche (JSON)'),run:()=>withDetail(d=>exportPersonJson(d))},
-            ...(ro?[]:['-',{icon:'🗑',label:i18n('Supprimer la fiche'),danger:true,run:()=>withDetail(d=>deletePerson(d))}]),
-        ];
-        const title=personName(p)||'';
-        if(event)UI.menuAt({x:event.clientX,y:event.clientY},items,{title});else UI.menuAt(anchor,items,{title});
-    }
+
     async function loadPeopleAndPerson() {
         await loadPeople();
         // onglets « Personnes » et « Animaux » à part : on rouvre la dernière fiche de cet onglet
@@ -2810,7 +2703,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         // « Personnes » sans les animaux (sauf base « les deux » : tout), « Animaux » seulement eux ; base d'élevage : les animaux d'abord
         if (!animalsTabOn() && baseMode() === 'breeding' && state.personTab === 'all' && !loadPeople.modeSet && Number(state.bootstrap?.stats?.animaux)) { state.personTab = 'animals'; loadPeople.modeSet = true; }
         const kind = animalsTabOn() ? (state.peopleScope === 'animals' ? 'animal' : 'human') : state.personTab === 'animals' ? 'animal' : state.personTab === 'all' && baseMode() === 'family' && Number(state.bootstrap?.stats?.animaux) ? 'human' : '';
-        const data = await api('people', {q:state.peopleQuery, limit:180, phonetic:state.peoplePhonetic?1:0, kind, ...peopleFilterParams()});
+        const data = await api('people', {q:state.peopleQuery, limit:180, phonetic:state.peoplePhonetic?1:0, kind});
         if(seq!==peopleSeq)return;
         state.people = state.personTab === 'bookmarked' ? data.people.filter(person => Number(person.is_bookmarked)) : data.people;
         const list = $('#person-list');
@@ -2819,11 +2712,10 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         const lcAv = !!(window.LCNDA_UI?.avatarOn?.() || window.LCNDA_DESIGNS?.listAv?.()); // K7 : le portrait commun devant chaque nom (ou Designs au choix → A8 « Portrait »)
         list.innerHTML = state.people.length ? state.people.map(person => `
             <button class="person-list-item ${lcAv?'has-lc-av':person.portrait?'has-thumb':''} ${Number(person.id) === state.currentPersonId ? 'is-active':''}" data-person-id="${person.id}">
-                ${Number(person.outside_genealogy)?'<span class="outside-genealogy-mark" title="Hors généalogie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>':''}${person.kind==='animal'?'<span class="animal-mark" title="Animal">🐾</span>':''}<span class="life-dot ${person.living_status}"></span>${lcAv?window.LCNDA_UI.avatar({...person, name: personName(person), photo: person.portrait ? `media/${encodeURIComponent(person.portrait)}` : ''}, 34):person.portrait?`<img class="person-thumb" src="media/${encodeURIComponent(person.portrait)}" alt="">`:''}<span class="person-list-copy"><strong>${Number(person.is_bookmarked)?'<span class="bookmark-mark" title="En signet" aria-label="En signet"></span>':''}${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small>${window.LCNDA_RFR?.whyHtml?.(person.why)||''}</span><span class="pa-row-more" role="button" tabindex="-1" data-pa-row-more="${person.id}" aria-label="${escapeHtml(i18n('Actions'))}" title="${escapeHtml(i18n('Actions'))}">⋯</span>
-            </button>`).join('') : emptyState({text: Object.keys(peopleFilterParams()).length&&!state.peopleQuery?'Aucune personne ne correspond à ces filtres.':'Aucune personne ne correspond à cette recherche.', icon: '🔎', hint: Object.keys(peopleFilterParams()).length?'Retire un filtre (Filtrer ▾) ou change le tri.':'Essaie une autre orthographe ou une partie du nom.'});
+                ${Number(person.outside_genealogy)?'<span class="outside-genealogy-mark" title="Hors généalogie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>':''}${person.kind==='animal'?'<span class="animal-mark" title="Animal">🐾</span>':''}<span class="life-dot ${person.living_status}"></span>${lcAv?window.LCNDA_UI.avatar({...person, name: personName(person), photo: person.portrait ? `media/${encodeURIComponent(person.portrait)}` : ''}, 34):person.portrait?`<img class="person-thumb" src="media/${encodeURIComponent(person.portrait)}" alt="">`:''}<span class="person-list-copy"><strong>${Number(person.is_bookmarked)?'<span class="bookmark-mark" title="En signet" aria-label="En signet"></span>':''}${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small>${window.LCNDA_RFR?.whyHtml?.(person.why)||''}</span>
+            </button>`).join('') : emptyState({text: 'Aucune personne ne correspond à cette recherche.', icon: '🔎', hint: 'Essaie une autre orthographe ou une partie du nom.'});
         if (state.people.length && data.fallback) list.insertAdjacentHTML('afterbegin', window.LCNDA_RFR?.fallbackHtml?.(data.fallback) || ''); // 🔎 « Aucun « Dupond » ; 3 personnes proches : … »
         window.LCNDA_EXT?.peopleList?.decorate?.(list); // ⚖️ « ⚖️ 2 » : une fiche dans plusieurs dossiers de succession
-        if(kinShown())paDecorateKin(list); // 🧭 le lien de chaque fiche avec la personne de départ
     }
 
     function getDesignEventDisplayMode(){try{const d=readDesignSettings();return d.eventDisplayMode||'all_mixed';}catch(_){return 'all_mixed';}}
@@ -3141,11 +3033,10 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
                 const mode=state.eventDisplayMode||'all_mixed';
                 const showWitness=mode==='all_mixed'||mode==='all_bottom'||mode==='witness_only';
                 const showOwn=mode!=='witness_only';
-                const dupTags=paDuplicateFacts(events); // 🧮 deux naissances, deux décès… dans la même fiche
-                const renderOwnEvent=event=>`<div class="event-row${Number(event.is_private)?' is-private-event':''}${dupTags[event.id]?' pa-dup-event':''}" data-event-id="${Number(event.id)||''}" data-event-tag="${escapeHtml(event.gedcom_tag||'')}" data-event-type-id="${Number(event.event_type_id)||0}"><span class="event-icon" style="--event-color:${escapeHtml(event.color)}">${typeGlyph(event.icon,event.gedcom_tag)}</span><div class="event-date">${escapeHtml(event.date_text || 'Date inconnue')}${eventTimeHtml(event)}${eventConvertedDateHtml(event)}<small>${escapeHtml(eventAgeText(event,birthEvent))}</small></div><div class="event-content"><div class="item-title-row"><strong>${escapeHtml(event.type_label)}</strong>${paEventMarksHtml(event,dupTags,isLocked)}<span class="item-title-extra"><span class="inline-actions">${mediaForEvent(orderedMedia,event.id).length?actionButton('media','Voir les médias liés',`data-view-event-media="${event.id}"`):''}<button type="button" class="icon-button small event-ics-btn" data-event-ics="${event.id}" data-event-ics-person="${Number(event.person_id)||''}" title="＋ Ajouter à mon calendrier" aria-label="Ajouter à mon calendrier">📅</button>${editOnly(`${actionButton('source',`${i18n('Source')}${eventSources(event.id).length?` (${eventSources(event.id).length})`:''}`,`data-add-event-source="${event.id}"`)}${actionButton('edit','Modifier',`data-edit-event="${event.id}"`)}${actionButton('delete','Supprimer',`data-delete-event="${event.id}"`)}`)}</span></span></div>${placeText(event) ? `<p>${escapeHtml(placeText(event))}</p>`:''}${event.title || event.description ? `<p>${escapeHtml(event.title || event.description)}</p>`:''}${eventFactConfidenceHtml(event)}${eventSourcesHtml(event)}${(event.witnesses&&event.witnesses.length)?`<div class="event-witnesses"><span>Témoins</span><div class="event-witnesses-names">${event.witnesses.map(w=>`<span class="event-witness"><button type="button" class="witness-owner-link" data-open-person="${w.person_id}"><strong>${escapeHtml([w.first_name,w.last_name].filter(Boolean).join(' '))}</strong></button>${w.note?` — ${escapeHtml(w.note)}`:''}</span>`).join('')}</div></div>`:''}</div></div>`;
+                const renderOwnEvent=event=>`<div class="event-row" data-event-id="${Number(event.id)||''}" data-event-tag="${escapeHtml(event.gedcom_tag||'')}" data-event-type-id="${Number(event.event_type_id)||0}"><span class="event-icon" style="--event-color:${escapeHtml(event.color)}">${typeGlyph(event.icon,event.gedcom_tag)}</span><div class="event-date">${escapeHtml(event.date_text || 'Date inconnue')}${eventTimeHtml(event)}${eventConvertedDateHtml(event)}<small>${escapeHtml(eventAgeText(event,birthEvent))}</small></div><div class="event-content"><div class="item-title-row"><strong>${escapeHtml(event.type_label)}</strong><span class="item-title-extra"><span class="inline-actions">${mediaForEvent(orderedMedia,event.id).length?actionButton('media','Voir les médias liés',`data-view-event-media="${event.id}"`):''}<button type="button" class="icon-button small event-ics-btn" data-event-ics="${event.id}" data-event-ics-person="${Number(event.person_id)||''}" title="＋ Ajouter à mon calendrier" aria-label="Ajouter à mon calendrier">📅</button>${editOnly(`${actionButton('source',`${i18n('Source')}${eventSources(event.id).length?` (${eventSources(event.id).length})`:''}`,`data-add-event-source="${event.id}"`)}${actionButton('edit','Modifier',`data-edit-event="${event.id}"`)}${actionButton('delete','Supprimer',`data-delete-event="${event.id}"`)}`)}</span></span></div>${placeText(event) ? `<p>${escapeHtml(placeText(event))}</p>`:''}${event.title || event.description ? `<p>${escapeHtml(event.title || event.description)}</p>`:''}${eventFactConfidenceHtml(event)}${eventSourcesHtml(event)}${(event.witnesses&&event.witnesses.length)?`<div class="event-witnesses"><span>Témoins</span><div class="event-witnesses-names">${event.witnesses.map(w=>`<span class="event-witness"><button type="button" class="witness-owner-link" data-open-person="${w.person_id}"><strong>${escapeHtml([w.first_name,w.last_name].filter(Boolean).join(' '))}</strong></button>${w.note?` — ${escapeHtml(w.note)}`:''}</span>`).join('')}</div></div>`:''}</div></div>`;
                 const renderWitnessEvent=ev=>`<div class="event-row event-row-witness"><span class="event-icon-witness" style="--event-color:${escapeHtml(ev.color)}">${typeGlyph(ev.icon,ev.gedcom_tag)}</span><div class="event-date">${escapeHtml(ev.date_text||'Date inconnue')}${eventConvertedDateHtml(ev)}</div><div class="event-content"><div class="item-title-row"><strong><button type="button" class="witness-owner-link" data-open-person="${ev.person_id}">${escapeHtml(ev.owner_name||'Personne')}</button> — ${escapeHtml(ev.type_label)}</strong></div>${placeText(ev)?`<p>${escapeHtml(placeText(ev))}</p>`:''}${ev.witness_note?`<p class="witness-role">${escapeHtml(ev.witness_note)}</p>`:''}</div></div>`;
                 // Convertit les recensements trouvés en événements virtuels si l'option est active
-                const showCensusInEvents=evtFilter.showCensus;const artistDisplay=person.artist_events_display||'events';const artisticTypeIds=new Set((state.bootstrap?.eventTypes||[]).filter(t=>Number(t.is_artistic)).map(t=>Number(t.id)));const filteredEvents=events.filter(e=>!evtFilter.hiddenTypeIds.includes(Number(e.event_type_id))&&(artistDisplay!=='block'||!artisticTypeIds.has(Number(e.event_type_id)))&&!(Number(e.is_private)&&document.body.classList.contains('is-kiosk'))); // 🔒 un événement confidentiel n'est pas montré en consultation
+                const showCensusInEvents=evtFilter.showCensus;const artistDisplay=person.artist_events_display||'events';const artisticTypeIds=new Set((state.bootstrap?.eventTypes||[]).filter(t=>Number(t.is_artistic)).map(t=>Number(t.id)));const filteredEvents=events.filter(e=>!evtFilter.hiddenTypeIds.includes(Number(e.event_type_id))&&(artistDisplay!=='block'||!artisticTypeIds.has(Number(e.event_type_id))));
                 const censusRecords=census?.records||[];
                 const censusFakeColor='#7c5c2e';
                 const renderCensusEvent=record=>`<div class="event-row event-row-census"><span class="event-icon" style="--event-color:${escapeHtml(censusFakeColor)}">📋</span><div class="event-date">${escapeHtml(record.date_text||(record.year?String(record.year):'Date inconnue'))}<small>${escapeHtml(eventAgeText({id:record.id,date_text:record.date_text,year:record.year},birthEvent))}</small></div><div class="event-content"><div class="item-title-row"><strong>Recensement ${escapeHtml(String(record.year||''))}</strong><span class="item-title-extra"><span class="census-event-badge">recensement</span>${editOnly(`<span class="inline-actions">${actionButton('edit','Modifier ce recensement',`data-edit-census="${record.id}"`)}</span>`)}</span></div>${record.place_name?`<p>${escapeHtml(placeDisplay(record))}</p>`:record.country?`<p>${escapeHtml(record.country)}</p>`:''}<p>${escapeHtml(censusStatusText(record.status))}${record.address?` — ${escapeHtml(record.address)}`:''}</p>${record.occupation||record.household_position?`<p>${[record.occupation,record.household_position].filter(Boolean).map(escapeHtml).join(' · ')}</p>`:''}</div></div>`;
@@ -3169,7 +3060,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
                 const displaySelect=`<label class="media-filter-label">${i18n('Afficher')} <select id="event-display-mode"><option value="all_mixed" ${mode==='all_mixed'?'selected':''}>Tous (mélangés)</option><option value="all_bottom" ${mode==='all_bottom'?'selected':''}>Tous (séparés)</option><option value="own_only" ${mode==='own_only'?'selected':''}>Mes événements</option><option value="witness_only" ${mode==='witness_only'?'selected':''}>Comme témoin</option></select></label>`;
                 return card(index,'Événements',events.length,body?`<div class="event-list">${body}</div>`:empty('Aucun événement pour l’instant',{icon:'📅',hint:'Naissance, baptême, mariage, décès… tout ce qui date une vie.',action:isLocked?null:{label:'＋ Ajouter un événement',attrs:`data-add-event-inline="${person.id}"`}}),'span-8',`${displaySelect}${editOnly(actionButton('add','Ajouter un événement',`data-add-event-inline="${person.id}"`))}${editOnly(families.length?actionButton('family','Ajouter un événement de famille',`data-add-family-event-inline="${person.id}"`):'')}`);
             },
-            media:index=>{const displayMedia=sortMediaForDisplay(orderedMedia,person.id);const directPortraits=displayMedia.filter(item=>Number(item.direct_person_link)===1&&Number(item.other_context_link_count||0)===0).sort((a,b)=>Number(a.direct_person_position||0)-Number(b.direct_person_position||0)||Number(a.id)-Number(b.id));const portraitIds=new Set(directPortraits.map(item=>Number(item.id)));const otherMedia=displayMedia.filter(item=>!portraitIds.has(Number(item.id)));const mediaCard=item=>`<article class="media-card-item" data-media-card-id="${item.id}"><button class="media-item media-card-preview" draggable="false" data-media-id="${item.id}" data-media-index="${orderedMedia.indexOf(item)}" data-media-types="${escapeHtml(mediaFilterValue(item))}">${mediaPreviewHtml(item,item.title || 'Document généalogique')}<span>${escapeHtml(item.attachment_label || item.title || 'Document')}</span></button><div class="media-card-labels">${entityLabelsInline('media',item.id,item.labels,true)}</div>${paMediaAgeHtml(item,person,birthEvent)}</article>`;const portraits=directPortraits.length?`<section class="person-portraits"><div class="person-portraits-head"><div><strong>Médias de la fiche</strong><small>Rattachés uniquement à cette personne, dont les portraits.</small></div>${editOnly(`<button type="button" class="icon-action media-order-lock is-unlocked" id="portrait-order-lock" data-locked="0" aria-label="Verrouiller le réordonnancement des médias de la fiche" title="Verrouiller le réordonnancement des médias de la fiche"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 7.3-2.2M12 14v3"/></svg></button>`)}</div><div class="media-grid media-card-grid drag-unlocked" id="person-portrait-grid">${directPortraits.map(mediaCard).join('')}</div></section>`:'';const body=displayMedia.length?`${portraits}${otherMedia.length?`<div class="media-grid media-card-grid" id="person-media-grid">${otherMedia.map(mediaCard).join('')}</div>`:''}`:empty('Aucune photographie ou reproduction d’acte',{icon:'🖼️',action:isLocked?null:{label:'＋ Ajouter un média',attrs:'data-empty-click="[data-add-media-inline]"'}});return card(index,'Médias',displayMedia.length,body,'span-12',`${mediaFilterSelect(displayMedia)}${editOnly(mediaSortControlsHtml(person.id))}${editOnly(actionButton('add','Ajouter des médias',`data-add-media-inline="${person.id}"`))}`);},
+            media:index=>{const displayMedia=sortMediaForDisplay(orderedMedia,person.id);const directPortraits=displayMedia.filter(item=>Number(item.direct_person_link)===1&&Number(item.other_context_link_count||0)===0).sort((a,b)=>Number(a.direct_person_position||0)-Number(b.direct_person_position||0)||Number(a.id)-Number(b.id));const portraitIds=new Set(directPortraits.map(item=>Number(item.id)));const otherMedia=displayMedia.filter(item=>!portraitIds.has(Number(item.id)));const mediaCard=item=>`<article class="media-card-item" data-media-card-id="${item.id}"><button class="media-item media-card-preview" draggable="false" data-media-id="${item.id}" data-media-index="${orderedMedia.indexOf(item)}" data-media-types="${escapeHtml(mediaFilterValue(item))}">${mediaPreviewHtml(item,item.title || 'Document généalogique')}<span>${escapeHtml(item.attachment_label || item.title || 'Document')}</span></button><div class="media-card-labels">${entityLabelsInline('media',item.id,item.labels,true)}</div></article>`;const portraits=directPortraits.length?`<section class="person-portraits"><div class="person-portraits-head"><div><strong>Médias de la fiche</strong><small>Rattachés uniquement à cette personne, dont les portraits.</small></div>${editOnly(`<button type="button" class="icon-action media-order-lock is-unlocked" id="portrait-order-lock" data-locked="0" aria-label="Verrouiller le réordonnancement des médias de la fiche" title="Verrouiller le réordonnancement des médias de la fiche"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 7.3-2.2M12 14v3"/></svg></button>`)}</div><div class="media-grid media-card-grid drag-unlocked" id="person-portrait-grid">${directPortraits.map(mediaCard).join('')}</div></section>`:'';const body=displayMedia.length?`${portraits}${otherMedia.length?`<div class="media-grid media-card-grid" id="person-media-grid">${otherMedia.map(mediaCard).join('')}</div>`:''}`:empty('Aucune photographie ou reproduction d’acte',{icon:'🖼️',action:isLocked?null:{label:'＋ Ajouter un média',attrs:'data-empty-click="[data-add-media-inline]"'}});return card(index,'Médias',displayMedia.length,body,'span-12',`${mediaFilterSelect(displayMedia)}${editOnly(mediaSortControlsHtml(person.id))}${editOnly(actionButton('add','Ajouter des médias',`data-add-media-inline="${person.id}"`))}`);},
             correspondance:index=>{
                 const correspondenceItems=correspondenceMediaOnly(orderedMedia);
                 return card(index,'Correspondance',correspondenceItems.length,correspondenceItems.length?correspondenceBodyHtml(correspondenceItems,orderedMedia,person.id):empty('Aucune lettre, carte postale ou autre correspondance',{icon:'✉️',action:isLocked?null:{label:'＋ Ajouter une correspondance',attrs:'data-empty-click="[data-add-correspondence-inline]"'}}),'span-12',`${correspondenceItems.length?correspondenceSortControlsHtml(person.id):''}${editOnly(actionButton('add','Ajouter une correspondance',`data-add-correspondence-inline="${person.id}"`))}`);
@@ -3294,7 +3185,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             family_objects:index=>card(index,'Objets de famille',personObjects.length||'',personObjects.length?`<div class="collection-grid is-compact">${personObjects.map(o=>familyObjectCardHtml(o,true)).join('')}</div>`:empty('Aucun objet lié à cette personne.',{icon:'🏺'}),'span-12',`<button class="button small secondary" type="button" data-open-list="family_objects">Gérer les objets</button>`),
             family_memories:index=>{const kept=personMemories.filter(m=>m.kind!=='testimony');/* les témoignages sont dans « Témoignages / souvenirs » */return card(index,'Mémoire familiale',kept.length||'',kept.length?`<div class="collection-grid is-compact">${kept.map(m=>familyMemoryCardHtml(m,true)).join('')}</div>`:empty('Aucun souvenir lié à cette personne.',{icon:'💬'}),'span-12',`<button class="button small secondary" type="button" data-open-list="family_memories">Gérer la mémoire familiale</button>`);},
             person_exports:index=>{
-                const body=`<div class="person-export-block"><p>${escapeHtml(i18n('Exports rapides de cette fiche : 🖨 Imprimer ouvre l’aperçu de l’app (format, sens, PDF), avec l’ordre, la taille et la visibilité des blocs de cette fiche. Les événements 🔒 confidentiels ne sont jamais exportés.'))}</p><div class="page-actions"><button class="button small secondary" type="button" data-customize-person-export="${person.id}">Personnaliser l’export</button><button class="button small secondary" type="button" data-print-person="${person.id}">${escapeHtml(i18n('🖨 Imprimer'))}</button><button class="button small secondary" type="button" data-pa-export-menu="${person.id}" aria-haspopup="true">${escapeHtml(i18n('⤓ Exporter ▾'))}</button></div></div>`;
+                const body=`<div class="person-export-block"><p>Exports rapides de cette fiche. Le PDF utilise l’impression du navigateur, avec l’ordre, la taille et la visibilité des blocs de cette fiche.</p><div class="page-actions"><button class="button small secondary" type="button" data-customize-person-export="${person.id}">Personnaliser l’export</button><button class="button small secondary" type="button" data-print-person="${person.id}">PDF / imprimer</button><button class="button small secondary" type="button" data-export-person-json="${person.id}">JSON fiche</button></div></div>`;
                 return card(index,'Exports fiche','',body,'span-6');
             },
         };
@@ -3304,17 +3195,14 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         const pageHtml = `<article class="page person-page">
             <div class="person-hero">
                 ${portrait}<div><span class="eyebrow">${person.kind==='animal'?`🐾 FICHE ANIMAL${detail.heritage?.animal?.data?.species?' · '+escapeHtml(window.LCNDA_EXT?.speciesLabel?.(detail.heritage.animal.data.species)||(detail.heritage.animal.species||{})[detail.heritage.animal.data.species]||''):''}${detail.heritage?.animal?.data?.breed?' · '+escapeHtml(detail.heritage.animal.data.breed):''}`:'FICHE INDIVIDUELLE'} · #${person.id}</span><h2>${escapeHtml(personName(person))}</h2><div class="person-meta"><span>${escapeHtml(years(person))}</span><span>${person.kind==='animal'?`Sexe : <strong>${person.gender==='male'?'♂ mâle':person.gender==='female'?'♀ femelle':'?'}</strong>`:`Genre : <strong>${genderText(person.gender)}</strong>`}</span>${person.surname_group ? `<span>Groupe : <strong>${escapeHtml(person.surname_group)}</strong></span>`:''}</div></div>
-                <div class="person-hero-tools"><div class="person-hero-status">${sosaNumber?`<span class="ui-badge is-sosa" title="${i18n(sosaNumber.includes('&')?'Numéros Sosa (ancêtre présent plusieurs fois dans l’arbre)':'Numéro Sosa')} ${escapeHtml(sosaNumber)}">${i18n('Sosa {n}',{n:escapeHtml(String(sosaNumber))})}</span>`:''}${dabovilleNumber?`<span class="ui-badge is-blue" title="${i18n('Numéro d’Aboville {n}',{n:escapeHtml(dabovilleNumber)})}">${i18n('d’Aboville {n}',{n:escapeHtml(dabovilleNumber)})}</span>`:''}<span class="ui-badge is-${({living:'green',deceased:'black'})[person.living_status]||'yellow'} status-badge ${person.living_status}">${person.living_status==='deceased'?'† ':''}${lifeText(person.living_status, person.gender)}</span>${person.outside_genealogy?'<span class="ui-badge is-grey">Hors généalogie</span>':''}<button type="button" class="ui-badge is-kin pa-kin-badge" data-pa-kin-head="${person.id}" hidden></button>${Number(person.is_artist)?`<span class="ui-badge artist-badge" title="${escapeHtml({'photographe':'Photographe','peintre':'Peintre','ecrivain':'Écrivain','cineaste':'Cinéaste','sculpteur':'Sculpteur','dramaturge':'Dramaturge','poete':'Poète','videaste':'Vidéaste','plasticien':'Plasticien','danseur':'Danseur','acteur':'Acteur'}[person.artist_discipline||'']||'Artiste')}">🎨 Artiste</span>`:''}</div><div class="person-hero-actions">${actionButton(Number(person.is_bookmarked)?'bookmark-on':'bookmark',bookmarkButtonLabel(person),`data-toggle-bookmark="${person.id}"${bookmarkShortcut()?` data-shortcut="${bookmarkShortcut()}"`:''}`)}${editOnly(actionButton('delete','Supprimer cette fiche',`data-delete-person="${person.id}"`))}${actionButton(isLocked?'lock':'unlock',isLocked?'Déverrouiller la fiche':'Verrouiller la fiche',`data-toggle-person-lock="${person.id}" data-lock-value="${isLocked?0:1}"`)}${actionButton('history','Historique de la fiche',`data-person-history="${person.id}"`)}<button type="button" class="icon-button pa-hero-btn" data-print-person="${person.id}" title="${escapeHtml(i18n('🖨 Imprimer'))}" aria-label="${escapeHtml(i18n('Imprimer la fiche'))}">🖨</button><button type="button" class="icon-button pa-hero-btn" data-pa-export-menu="${person.id}" aria-haspopup="true" title="${escapeHtml(i18n('⤓ Exporter ▾'))}" aria-label="${escapeHtml(i18n('Exporter la fiche'))}">⤓</button></div></div>
+                <div class="person-hero-tools"><div class="person-hero-status">${sosaNumber?`<span class="ui-badge is-sosa" title="${i18n(sosaNumber.includes('&')?'Numéros Sosa (ancêtre présent plusieurs fois dans l’arbre)':'Numéro Sosa')} ${escapeHtml(sosaNumber)}">${i18n('Sosa {n}',{n:escapeHtml(String(sosaNumber))})}</span>`:''}${dabovilleNumber?`<span class="ui-badge is-blue" title="${i18n('Numéro d’Aboville {n}',{n:escapeHtml(dabovilleNumber)})}">${i18n('d’Aboville {n}',{n:escapeHtml(dabovilleNumber)})}</span>`:''}<span class="ui-badge is-${({living:'green',deceased:'black'})[person.living_status]||'yellow'} status-badge ${person.living_status}">${person.living_status==='deceased'?'† ':''}${lifeText(person.living_status, person.gender)}</span>${person.outside_genealogy?'<span class="ui-badge is-grey">Hors généalogie</span>':''}${Number(person.is_artist)?`<span class="ui-badge artist-badge" title="${escapeHtml({'photographe':'Photographe','peintre':'Peintre','ecrivain':'Écrivain','cineaste':'Cinéaste','sculpteur':'Sculpteur','dramaturge':'Dramaturge','poete':'Poète','videaste':'Vidéaste','plasticien':'Plasticien','danseur':'Danseur','acteur':'Acteur'}[person.artist_discipline||'']||'Artiste')}">🎨 Artiste</span>`:''}</div><div class="person-hero-actions">${actionButton(Number(person.is_bookmarked)?'bookmark-on':'bookmark',bookmarkButtonLabel(person),`data-toggle-bookmark="${person.id}"${bookmarkShortcut()?` data-shortcut="${bookmarkShortcut()}"`:''}`)}${editOnly(actionButton('delete','Supprimer cette fiche',`data-delete-person="${person.id}"`))}${actionButton(isLocked?'lock':'unlock',isLocked?'Déverrouiller la fiche':'Verrouiller la fiche',`data-toggle-person-lock="${person.id}" data-lock-value="${isLocked?0:1}"`)}${actionButton('history','Historique de la fiche',`data-person-history="${person.id}"`)}</div></div>
             </div>
             <div class="relations-strip">${relationChips('Parents','parent',parents,'unknown',isLocked)}${relationChips('Conjoints','spouse',partners,person.spouse_status,isLocked)}${relationChips('Enfants','child',children,person.children_status,isLocked)}${siblingChips('Frères & sœurs',siblings)}</div>
-            <div class="pa-kin-path" data-pa-kin-path hidden></div>
-            ${person.kind==='animal'?'':`<div class="pa-family-bar"><button type="button" class="button small secondary" data-pa-family-sheet="${person.id}">${escapeHtml(i18n('👪 Fiche familiale'))}</button>${editOnly(`<button type="button" class="button small secondary" data-pa-quick-family="${person.id}">${escapeHtml(i18n('⚡ ＋ Famille'))}</button>`)}</div>`}
             ${renderPersonBody(person.id,personBlockRenderers,htmlOnly)}
         </article>`;
         if(htmlOnly)return pageHtml;
         $('#workspace').innerHTML = pageHtml;
         bindPersonPage({...detail,media:orderedMedia});
-        paAfterPerson(detail);
         (window.LCNDA_EXT?.afterPerson||[]).forEach(fn=>{try{fn(detail);}catch(error){console.error(error);}});
     }
 
@@ -3759,7 +3647,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         }
         $('#person-history-title').textContent = detail?.person ? `Historique de ${personName(detail.person)}` : 'Historique de la fiche';
         const body = $('#person-history-body');
-        body.innerHTML = waitHtml(i18n('Chargement de l’historique…'));
+        body.innerHTML = '<div class="loading-block">Chargement de l’historique…</div>';
         dialog.showModal();
         try {
             const data = await api('person_history', {id: personId});
@@ -3773,10 +3661,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
                         ? `<button type="button" class="button small secondary is-disabled" disabled title="${escapeHtml(row.restore_block_reason || 'Restauration bloquée')}">Restaurer</button>`
                         : '';
                 const details = (row.before_json || row.after_json) ? `<details class="change-json-details"><summary>Détails</summary><pre>${i18n('Avant')}\n${escapeHtml(row.before_json || '—')}\n\n${i18n('Après')}\n${escapeHtml(row.after_json || '—')}</pre></details>` : '';
-                const compare = paHistoryCanCompare(row) ? `<button type="button" class="button small secondary" data-pa-history-compare="${row.id}">${escapeHtml(i18n('⇆ Comparer avec maintenant'))}</button>` : '';
-                return `<article class="person-history-row" data-pa-history-row="${row.id}">${window.LCNDA_UI?.when?.(row.created_at) || `<time>${escapeHtml(row.created_at || '')}</time>`}<div><h3>${escapeHtml(row.summary || row.action || 'Modification')}</h3><p><strong>${escapeHtml(label)}</strong> · ${escapeHtml(technical)}</p>${row.changed_fields?.length ? `<small>${i18n('Champs modifiés : {list}',{list:escapeHtml(row.changed_fields.slice(0, 10).join(', '))+(row.changed_fields.length > 10 ? '…' : '')})}</small>` : ''}${row.restore_blocked ? `<small class="cell-muted">${escapeHtml(row.restore_block_reason || 'Restauration bloquée')}</small>` : ''}${details}<div class="pa-history-diff" data-pa-history-diff="${row.id}" hidden></div></div><div class="pa-history-actions">${compare}${restore}</div></article>`;
+                return `<article class="person-history-row">${window.LCNDA_UI?.when?.(row.created_at) || `<time>${escapeHtml(row.created_at || '')}</time>`}<div><h3>${escapeHtml(row.summary || row.action || 'Modification')}</h3><p><strong>${escapeHtml(label)}</strong> · ${escapeHtml(technical)}</p>${row.changed_fields?.length ? `<small>${i18n('Champs modifiés : {list}',{list:escapeHtml(row.changed_fields.slice(0, 10).join(', '))+(row.changed_fields.length > 10 ? '…' : '')})}</small>` : ''}${row.restore_blocked ? `<small class="cell-muted">${escapeHtml(row.restore_block_reason || 'Restauration bloquée')}</small>` : ''}${details}</div>${restore}</article>`;
             }).join('')}</div>` : empty('Aucune modification enregistrée pour cette fiche.',{icon:'🕘'});
-            $$('[data-pa-history-compare]', body).forEach(button => button.addEventListener('click', () => paHistoryCompare(rows.find(r => String(r.id) === button.dataset.paHistoryCompare), personId, body)));
             $$('[data-person-history-restore]', body).forEach(button => button.addEventListener('click', async () => {
                 if (!await confirmBox('L’élément supprimé sera remis dans la base.', {title: 'Restaurer cette suppression ?', okLabel: 'Restaurer', danger: false})) return;
                 button.disabled = true;
@@ -3812,11 +3698,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         }));
         $$('[data-add-grave-person]').forEach(button=>button.addEventListener('click',()=>openAddGravePersonDialog(detail,Number(button.dataset.addGravePerson))));
         $$('[data-remove-grave-person]').forEach(button=>button.addEventListener('click',async()=>{
-            // R7 (H7) : retirée tout de suite, « ↶ Annuler » la remet dans la sépulture (sa fiche n'est pas supprimée)
-            const gp={grave_id:button.dataset.graveId,person_id:button.dataset.removeGravePerson};
-            try{await api('remove_grave_person',{},{method:'POST',body:gp});await selectPerson(detail.person.id);
-                undoToast(i18n('Personne retirée de la sépulture.'),{undo:async()=>{await api('add_grave_person',{},{method:'POST',body:gp});await selectPerson(detail.person.id);},redo:async()=>{await api('remove_grave_person',{},{method:'POST',body:gp});await selectPerson(detail.person.id);}});
-            }catch(error){toast(error.message,'error');}
+            if(!await confirmBox('Sa fiche n’est pas supprimée.',{title:'Retirer cette personne de la sépulture ?',okLabel:'Retirer'}))return;
+            try{await api('remove_grave_person',{},{method:'POST',body:{grave_id:button.dataset.graveId,person_id:button.dataset.removeGravePerson}});toast('Personne retirée de la sépulture.');await selectPerson(detail.person.id);}catch(error){toast(error.message,'error');}
         }));
         $$('[data-manage-grave-media]').forEach(button=>button.addEventListener('click',()=>openEntityMediaDialog(detail,'grave',Number(button.dataset.manageGraveMedia),'CIMETIÈRE','Ajouter ou lier une photo de la sépulture')));
         $$('[data-view-grave-photo]').forEach(button=>button.addEventListener('click',()=>{const photos=(detail.grave?.photos||[]);if(photos.length)openLightbox(photos,Number(button.dataset.viewGravePhoto));}));
@@ -3829,7 +3712,15 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             }catch(error){toast(error.message,'error');}
         }));
         $$('[data-print-person]').forEach(button=>button.addEventListener('click',()=>printScreen(personPrintTitle())));
-        $$('[data-export-person-json]').forEach(button=>button.addEventListener('click',()=>exportPersonJson(detail)));
+        $$('[data-export-person-json]').forEach(button=>button.addEventListener('click',()=>{
+            const payload={exported_at:new Date().toISOString(),person:detail.person,events:detail.events,parents:detail.parents,partners:detail.partners,children:detail.children,notes:detail.notes,media:detail.media,sources:detail.sources,investigations:detail.investigations,battues:detail.battues};
+            const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+            const link=document.createElement('a');
+            link.href=URL.createObjectURL(blob);
+            link.download=`fiche-${detail.person.id}-${(personName(detail.person)||'personne').toLowerCase().replace(/[^a-z0-9]+/gi,'-')}.json`;
+            link.click();
+            setTimeout(()=>URL.revokeObjectURL(link.href),1000);
+        }));
         $$('[data-customize-person-export]').forEach(button=>button.addEventListener('click',()=>openPersonExportDialog(detail)));
         $$('[data-add-event-inline]').forEach(button=>button.addEventListener('click',()=>openEventDialog(detail)));
         $$('[data-add-event-inline-artistic]').forEach(button=>button.addEventListener('click',()=>openEventDialog(detail,null,true)));
@@ -3888,11 +3779,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         $$('[data-delete-evidence]').forEach(button=>button.addEventListener('click',async()=>{/* H7 : supprimée tout de suite, « ↶ Annuler » */const id=Number(button.dataset.deleteEvidence),pid=detail.person.id;await deleteWithUndo({action:'delete_evidence',body:{id},type:'evidence',id,message:'Preuve supprimée',after:()=>state.module==='personnes'&&Number(state.currentPersonId)===Number(pid)&&selectPerson(pid,false)});}));
         $$('[data-remove-relation]').forEach(button => button.addEventListener('click',async()=>{
             const related=[...detail.parents,...detail.partners,...detail.children].find(person=>Number(person.id)===Number(button.dataset.relatedId));
-            // R7 (H7) : retiré tout de suite, « ↶ Annuler » remet le lien (aucune fiche n'est supprimée)
-            const rel={person_id:detail.person.id,related_id:Number(button.dataset.relatedId),relation_type:button.dataset.removeRelation};
-            try{await api('remove_relation',{}, {method:'POST',body:rel});await selectPerson(detail.person.id);
-                undoToast(i18n('Lien retiré : {nm}',{nm:personName(related||{})}),{undo:async()=>{await api('add_relation',{},{method:'POST',body:rel});await selectPerson(detail.person.id);},redo:async()=>{await api('remove_relation',{},{method:'POST',body:rel});await selectPerson(detail.person.id);}});
-            }catch(error){toast(error.message,'error');}
+            if(!await confirmBox('Le lien de parenté est retiré ; aucune fiche n’est supprimée.',{title:`Retirer ${personName(related||{})} des ${button.dataset.removeRelation==='spouse'?'conjoints':button.dataset.removeRelation==='parent'?'parents':'enfants'} ?`,okLabel:'Retirer le lien'}))return;
+            try{await api('remove_relation',{}, {method:'POST',body:{person_id:detail.person.id,related_id:button.dataset.relatedId,relation_type:button.dataset.removeRelation}});toast('Relation retirée.');await selectPerson(detail.person.id);}catch(error){toast(error.message,'error');}
         }));
         $$('[data-media-index]').forEach(button => button.addEventListener('click', () => openLightbox(detail.media,Number(button.dataset.mediaIndex))));
         $$('[data-view-event-media]').forEach(button => button.addEventListener('click',()=>{const items=mediaForEvent(detail.media,Number(button.dataset.viewEventMedia));if(items.length)openLightbox(items,0);}));
@@ -4549,9 +4437,9 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         sc('settings','move','Ouvrir les réglages (Apparence)','Mod+,','global',()=>{state.maintenanceTab='design';setModule('maintenance');},{menu:true}),
         sc('help','move','Afficher la liste des raccourcis','F1','any',()=>openShortcutHelp(),{menu:true}),
         sc('edit_person','person','Modifier la fiche ouverte','Mod+E','person',()=>{if(personIsLocked())return toast('Cette fiche est verrouillée.','error');openPersonDialog(state.currentPerson);},{noTyping:true,menu:true}),
-        sc('new_person','person','Nouveau… dans l’onglet ouvert (une personne dans Personnes)','Mod+Shift+N','global',()=>runTabShortcut('new'),{menu:true}),
+        sc('new_person','person','Nouvelle personne','Mod+Shift+N','global',()=>openNewPersonDialog(),{menu:true}),
         sc('bookmark','person','Ajouter ou retirer des signets','Mod+D','person',()=>togglePersonBookmark(),{menu:true}),
-        sc('print','person','Imprimer la fiche ou l’écran','Mod+P','global',()=>runTabShortcut('print'),{menu:true}),
+        sc('print','person','Imprimer la fiche ou l’écran','Mod+P','global',()=>printScreen(state.module==='personnes'&&state.currentPerson?personPrintTitle():''),{menu:true}),
         sc('copy_ref','person','Copier la référence de la personne (nom, années, Sosa)','Mod+Shift+C','person',()=>copyPersonReference(),{menu:true}),
         sc('go_father','family','Aller au père','Alt+ArrowUp','person',()=>goToRelative('father')),
         sc('go_mother','family','Aller à la mère','Alt+Shift+ArrowUp','person',()=>goToRelative('mother')),
@@ -4589,10 +4477,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         sc('battue_next','battue','Aller à la prochaine commune pas encore terminée','N','battue',()=>moveBattueCursor()),
         sc('battue_registers','battue','Ouvrir les registres en ligne de la commune choisie','R','battue',()=>{const card=battueActiveCard();card?.querySelector('[data-battue-registers]')?.click();}),
         sc('backup_now','safety','Faire une sauvegarde tout de suite','Mod+Shift+B','global',()=>backupNow(),{menu:true}),
-        sc('undo','safety','Annuler la dernière modification d’une fiche (hors d’une case de texte, tout de suite, avec « ↷ Rétablir »)','Mod+Z','global',()=>undoLastChange(),{noTyping:true}),
-        // R5 (audit des onglets) : le socle commun à chaque onglet — chaque onglet donne ses gestes dans LCNDA_EXT.tabShortcuts[module]
-        sc('tab_export','move','Exporter ce que montre l’onglet ouvert (⤓ Exporter)','Mod+E','global',()=>runTabShortcut('export'),{noTyping:true,menu:true}),
-        sc('column_search','move','Chercher dans la colonne de gauche','/','global',()=>focusColumnSearch(),{noTyping:true,when:()=>!!columnSearchInput()}),
+        sc('undo','safety','Annuler la dernière modification d’une fiche (hors d’une case de texte, avec confirmation)','Mod+Z','global',()=>undoLastChange(),{noTyping:true}),
     ];
     // Raccourcis du système : une touche choisie ici ne marcherait pas (ou ferait autre chose). « all » = les trois systèmes,
     // pour les raccourcis du menu de l'application (copier, coller, recharger…).
@@ -4959,10 +4844,10 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             toast(i18n('↶ Annulé : « {what} »',{what:r.undone||c.summary}),'',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});
             refresh(r);return;
         }
-        // H7 : défaire au lieu de demander — tout de suite, puis « ↶ Annulé : … » avec « ↷ Rétablir » (qui défait l'annulation)
+        const when=c.created_at?(window.LCNDA_UI?.whenText?.(c.created_at)||c.created_at):''; // K4
+        if(!await confirmBox(`« ${c.summary} »${when?`\n(${when})`:''}\n\n${c.mode==='restore'?'Ce qui a été supprimé sera remis.':'La fiche reprendra exactement son état d’avant cette modification.'}`,{title:'Annuler la dernière modification ?',okLabel:'Annuler la modification',cancelLabel:'Garder',danger:true}))return;
         const r=await api('undo_change',{},{method:'POST',body:{id:c.id}});
-        const redoRevert=async()=>{try{const n=await api('undo_candidate');if(!n.available||!['revert','restore','uncreate','lock','unrelate'].includes(n.mode))throw new Error(i18n(n.reason||'plus possible'));await api('undo_change',{},{method:'POST',body:{id:n.id}});toast(i18n('↷ Rétabli : « {nm} »',{nm:c.summary}));refresh();}catch(error){toast(i18n('Impossible de rétablir : {err}',{err:error.message||error}),'error',{retry:redoRevert});}};
-        toast(i18n('↶ Annulé : « {what} »',{what:r.result?.undone||c.summary}),'',{action:{label:i18n('↷ Rétablir'),run:redoRevert}});
+        toast(i18n('Annulé : {x}',{x:r.result?.undone||c.summary}));
         refresh();
     }
 
@@ -6946,7 +6831,7 @@ ${backupSectionHtml()}
         });
         $('#grave-person-form').addEventListener('submit',async event=>{event.preventDefault();try{const form=event.currentTarget;const personId=form.elements.selected_person_id.value;if(!Number(personId))return window.LCNDA_UI.fail(form.elements.selected_person_id,'Choisis une personne.');await api('add_grave_person',{},{method:'POST',body:{grave_id:form.elements.grave_id.value,person_id:personId}});$('#grave-person-dialog').close();toast('Personne ajoutée à la sépulture.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         pkBindQuickCreate($('#grave-person-dialog')); // la personne : menu de choix unique (champ selected_person_id)
-        $('#event-form').addEventListener('submit',async event=>{event.preventDefault();if(event.currentTarget.elements.work_fields)event.currentTarget.elements.work_fields.value=collectEventWorkFields();const values=formObject(event.currentTarget);if(event.currentTarget.elements.date_uncertain)values.date_uncertain=event.currentTarget.elements.date_uncertain.checked?'1':'0';if(event.currentTarget.elements.is_private)values.is_private=event.currentTarget.elements.is_private.checked?'1':'0';if(event.currentTarget.elements.research_note)values.research_note=event.currentTarget.elements.research_note.value;try{const result=await api(values.id?'save_event':'add_event',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#event-label-picker',savedId);if(savedId&&state.eventWitnesses!==undefined){try{const sponsors=isBaptismEventType(values.event_type_id)?(state.eventSponsors||[]):[];const linked=[...sponsors.map(s=>({person_id:s.person_id,note:sponsorNote(s)})),...state.eventWitnesses.map(w=>({person_id:w.person_id,note:w.note||'',signed:w.signed===''||w.signed==null?null:Number(w.signed)}))];await api('save_event_witnesses',{},{method:'POST',body:{event_id:savedId,witnesses:JSON.stringify(linked)}});}catch(_){}}$('#event-dialog').close();const dateCheck=values.date_text&&window.LCNDA_UI?.readDate?window.LCNDA_UI.readDate(values.date_text):null;const dateWarn=dateCheck&&!dateCheck.ok&&/impossible/.test(dateCheck.text||'')?` — ${i18n('⚠️ la date « {date} » est impossible, vérifie-la.',{date:String(values.date_text).trim()})}`:''; /* C4 : on n'empêche pas d'enregistrer, on prévient */toast(dateWarn?i18n(values.id?'Événement modifié':'Événement ajouté')+dateWarn:i18n(values.id?'Événement modifié.':'Événement ajouté.'));await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
+        $('#event-form').addEventListener('submit',async event=>{event.preventDefault();if(event.currentTarget.elements.work_fields)event.currentTarget.elements.work_fields.value=collectEventWorkFields();const values=formObject(event.currentTarget);if(event.currentTarget.elements.date_uncertain)values.date_uncertain=event.currentTarget.elements.date_uncertain.checked?'1':'0';try{const result=await api(values.id?'save_event':'add_event',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#event-label-picker',savedId);if(savedId&&state.eventWitnesses!==undefined){try{const sponsors=isBaptismEventType(values.event_type_id)?(state.eventSponsors||[]):[];const linked=[...sponsors.map(s=>({person_id:s.person_id,note:sponsorNote(s)})),...state.eventWitnesses.map(w=>({person_id:w.person_id,note:w.note||'',signed:w.signed===''||w.signed==null?null:Number(w.signed)}))];await api('save_event_witnesses',{},{method:'POST',body:{event_id:savedId,witnesses:JSON.stringify(linked)}});}catch(_){}}$('#event-dialog').close();const dateCheck=values.date_text&&window.LCNDA_UI?.readDate?window.LCNDA_UI.readDate(values.date_text):null;const dateWarn=dateCheck&&!dateCheck.ok&&/impossible/.test(dateCheck.text||'')?` — ${i18n('⚠️ la date « {date} » est impossible, vérifie-la.',{date:String(values.date_text).trim()})}`:''; /* C4 : on n'empêche pas d'enregistrer, on prévient */toast(dateWarn?i18n(values.id?'Événement modifié':'Événement ajouté')+dateWarn:i18n(values.id?'Événement modifié.':'Événement ajouté.'));await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         (()=>{const wrap=$('#event-form .date-text-wrap');if(!wrap)return;const textInput=wrap.querySelector('[name="date_text"]');const hiddenPicker=wrap.querySelector('.date-picker-hidden');const toggleBtn=wrap.querySelector('.date-picker-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});bindEventDateAlternative();})();
         (()=>{const wrap=$('#media-form .date-text-wrap');if(!wrap)return;const textInput=wrap.querySelector('[name="date_text"]');const hiddenPicker=wrap.querySelector('.date-picker-hidden');const toggleBtn=wrap.querySelector('.date-picker-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});})();
         (()=>{const textInput=$('#lightbox-date');const hiddenPicker=$('#lightbox-date-picker');const toggleBtn=$('#lightbox-date-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});})();
@@ -7508,7 +7393,7 @@ ${backupSectionHtml()}
     }
 
     function fillFamilyOptions(families,selected){const select=$('#event-form').elements.family_id;if(!select)return;select.innerHTML=(families||[]).map(fam=>{const label=fam.other_partner_name?i18n('Union avec {nm}',{nm:fam.other_partner_name}):i18n('Union #{n}',{n:String(fam.id)});const year=fam.marriage_year?` (${fam.marriage_year})`:'';return `<option value="${fam.id}" ${Number(fam.id)===Number(selected)?'selected':''}>${escapeHtml(label+year)}</option>`;}).join('');}
-    function openEventDialog(detail,eventItem=null,artisticOnly=false,forceFamily=false){const personId=detail.person.id;const families=detail.families||[];const form=$('#event-form');form.reset();paEventDialogExtras(form,eventItem);form.elements.person_id.value=personId;form.elements.id.value=eventItem?.id||'';form.elements.place_id.value=eventItem?.place_id||'';
+    function openEventDialog(detail,eventItem=null,artisticOnly=false,forceFamily=false){const personId=detail.person.id;const families=detail.families||[];const form=$('#event-form');form.reset();form.elements.person_id.value=personId;form.elements.id.value=eventItem?.id||'';form.elements.place_id.value=eventItem?.place_id||'';
         // Portée famille (ex: Mariage) : uniquement proposée à la création (pas à l'édition) et
         // seulement si la personne a au moins une union enregistrée.
         const canFamily=!eventItem&&!artisticOnly&&families.length>0;
@@ -9091,309 +8976,7 @@ ${backupSectionHtml()}
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';setCountStatus($('#database-status'),personCountLabel(state.bootstrap.stats.personnes));if(state.module==='personnes'){renderSidebar();loadPeople();}}
     // 🌐 langue changée (Réglages → Apparence, premier lancement, ↶ Annuler) : la colonne et l'écran sont redessinés dans la nouvelle langue
     window.addEventListener('lcnda:lang',async()=>{try{if(!window.GENEALOGY_READY)return;renderSidebar();await refreshScreen();if(state.module!=='maintenance')return;const tab=state.maintenanceTab;for(let i=0;i<30&&state.module==='maintenance'&&state.maintenanceTab===tab;i++){await new Promise(r=>setTimeout(r,100));const h=document.querySelector('#workspace .page-header .page-actions');if(h&&!h.querySelector('.ui-ph-saved'))window.LCNDA_UI?.pageSaved?.('saved');}}catch(error){console.error(error);}}); // K2 : la langue est gardée tout de suite, « ✓ Enregistré » reste à droite du titre redessiné
-
-    /* ══════════════ 👤 Onglet Personnes — ajouts de l'audit des onglets (docs/design/audit-onglets.html §2, R5) ══════════════
-     * 🧭 ton lien avec chaque fiche (en-tête, colonne, arbres), 👪 fiche familiale, ⚡ saisie rapide d'une famille,
-     * 🔒 événement confidentiel, 📝 note de recherche par fait, 🧮 faits en double, 🖼 âge sur chaque photo,
-     * 🕘 comparer une ancienne version, 🐾 courbe de poids, ⌨️ socle commun des raccourcis (LCNDA_EXT.tabShortcuts). */
-    const PA_EXT=window.LCNDA_EXT=window.LCNDA_EXT||{};
-    PA_EXT.personBlocks=PA_EXT.personBlocks||{};
-    /** R5 : chaque onglet peut donner ses gestes : LCNDA_EXT.tabShortcuts[module] = {new(), print(), export()} (⌘⇧N, ⌘P, ⌘E) */
-    PA_EXT.tabShortcuts=PA_EXT.tabShortcuts||{};
-    PA_EXT.tabShortcuts.personnes=PA_EXT.tabShortcuts.personnes||{
-        new:()=>openNewPersonDialog(),
-        print:()=>printScreen(state.currentPerson?personPrintTitle():''),
-        export:()=>{if(!state.currentPerson?.person)return toast(i18n('Ouvre d’abord une fiche.'));openPersonExportMenu($('[data-pa-export-menu]'),state.currentPerson);},
-    };
-    const paKiosk=()=>document.body.classList.contains('is-kiosk');
-    function runTabShortcut(kind){
-        const h=(PA_EXT.tabShortcuts||{})[state.module];
-        if(h&&typeof h[kind]==='function')return h[kind]();
-        if(kind==='new')return openNewPersonDialog();
-        if(kind==='print')return printScreen();
-        // ⤓ : le bouton « Exporter » de l'écran affiché, s'il y en a un
-        const btn=[...document.querySelectorAll('#workspace button, #workspace [role=button]')].find(b=>b.offsetParent&&!b.disabled&&/^\s*⤓/.test(b.textContent||''));
-        if(btn)return btn.click();
-        toast(i18n('Rien à exporter dans cet écran.'));
-    }
-    const columnSearchInput=()=>[...document.querySelectorAll('#sidebar-content .ui-search-input, #sidebar-content input[type=search], #sidebar-content #person-search, #sidebar-content input[data-ui-search]')].find(x=>x.offsetParent&&!x.disabled)||null;
-    function focusColumnSearch(){const i=columnSearchInput();if(!i)return;i.focus();i.select?.();}
-
-    /* ── 🧭 Ton lien avec cette personne ── */
-    const paRootId=()=>Number(state.bootstrap?.startPersonId)||0;
-    const paKinCache=new Map();let paKinRoot=0,paKinQueue=null;
-    function paKinCacheFor(){const r=paRootId();if(r!==paKinRoot){paKinCache.clear();paKinRoot=r;}return paKinCache;}
-    async function paKinFetch(ids){
-        const cache=paKinCacheFor(),want=[...new Set(ids.map(Number).filter(id=>id&&!cache.has(id)))];
-        for(let i=0;i<want.length;i+=200){const part=want.slice(i,i+200);try{const r=await api('people_links',{ids:part.join(','),root:paRootId()});const links=r.links||{};part.forEach(id=>cache.set(id,links[id]||''));}catch(_){part.forEach(id=>cache.set(id,''));}}
-        return cache;
-    }
-    function paKinText(label){return label==='personne de départ'?i18n('🧭 personne de départ'):`🧭 ${label}`;}
-    /** sous chaque nom (colonne, arbres d'ascendants / descendants) : le lien avec la personne de départ */
-    async function paDecorateKin(root){
-        if(!root||!paRootId()||!kinShown())return;
-        const rows=[...root.querySelectorAll('.person-list-item[data-person-id]:not([data-pa-kin]), .lineage-person[data-open-person]:not([data-pa-kin])')];
-        if(!rows.length)return;
-        const ids=rows.map(r=>Number(r.dataset.personId||r.dataset.openPerson));
-        const cache=await paKinFetch(ids);
-        rows.forEach((r,i)=>{if(!r.isConnected||r.dataset.paKin)return;r.dataset.paKin='1';const l=cache.get(ids[i]);if(!l)return;
-            const html=`<small class="pa-kin" title="${escapeHtml(i18n('Ton lien avec cette personne'))}">${escapeHtml(paKinText(l))}</small>`;
-            if(r.classList.contains('person-list-item'))(r.querySelector('.person-list-copy')||r).insertAdjacentHTML('beforeend',html);else r.insertAdjacentHTML('afterend',html);});
-    }
-    new MutationObserver(list=>{if(!kinShown()||state.module==='personnes'&&false)return;for(const m of list)for(const n of m.addedNodes){if(n.nodeType===1&&(n.matches?.('.lineage-tree')||n.querySelector?.('.lineage-tree'))){clearTimeout(paKinQueue);paKinQueue=setTimeout(()=>paDecorateKin($('#workspace')),60);return;}}}).observe(document.getElementById('workspace')||document.body,{childList:true,subtree:true});
-    async function paFillKinHead(detail){
-        const id=Number(detail?.person?.id),badge=$(`[data-pa-kin-head="${id}"]`);if(!badge||!paRootId())return;
-        let r;try{r=await api('person_link',{id,root:paRootId()});}catch(_){return;}
-        if(!badge.isConnected||Number(state.currentPersonId)!==id)return;
-        const l=r.link;
-        if(!l){badge.hidden=false;badge.classList.add('is-none');badge.textContent=i18n('🧭 Aucun lien connu');badge.title=i18n('Aucun lien de parenté trouvé avec {nm} (personne de départ).',{nm:r.root_name||''});badge.dataset.paKinLabel='';return;}
-        const via=l.via?.name?` · ${i18n('par {nm}',{nm:l.via.name})}`:'';
-        const text=l.kind==='self'?i18n('🧭 Personne de départ'):`🧭 ${l.label}${via}`;
-        badge.hidden=false;badge.textContent=text;badge.dataset.paKinLabel=l.label||'';
-        badge.title=l.kind==='self'?i18n('C’est la personne de départ (de cujus).'):i18n('Ton lien avec cette personne (depuis {nm}) — clique pour voir le chemin.',{nm:r.root_name||''});
-    }
-    /** le chemin de parenté dessiné en petit (dans la fiche, ou dans une fenêtre depuis la colonne) */
-    async function paKinPathHtml(personId){
-        const root=paRootId();if(!root)return empty(i18n('Aucune personne de départ n’est définie.'),{icon:'🧭'});
-        const r=await api('kinship',{from:root,to:personId});
-        const path=r.path||[],rel=r.relations||[];
-        if(!path.length)return empty(i18n('Aucun chemin de parenté connu avec la personne de départ.'),{icon:'🧭'});
-        const relText={'enfant de':i18n('enfant de'),'parent de':i18n('parent de'),'conjoint de':i18n('conjoint de')};
-        return `<ol class="pa-kin-chain">${path.map((p,i)=>`<li><button type="button" class="pa-kin-node gender-${escapeHtml(p.gender||'unknown')}" data-open-person="${p.id}"><strong>${escapeHtml(personName(p))}</strong><small>${escapeHtml(years(p))}</small></button>${i<rel.length?`<span class="pa-kin-rel">${escapeHtml(relText[rel[i]]||rel[i])} →</span>`:''}</li>`).join('')}</ol><small class="muted">${escapeHtml(i18n('{n} étape(s) depuis la personne de départ.',{n:Math.max(0,path.length-1)}))}</small>`;
-    }
-    async function toggleKinPath(personId){
-        const box=$('[data-pa-kin-path]');if(!box)return;
-        if(!box.hidden){box.hidden=true;return;}
-        box.hidden=false;box.innerHTML=waitHtml(i18n('Recherche du chemin…'));
-        try{box.innerHTML=`<div class="pa-kin-path-head"><strong>${escapeHtml(i18n('🧭 Ton lien avec cette personne'))}</strong><button type="button" class="icon-button small" data-pa-kin-close aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div>${await paKinPathHtml(personId)}`;bindTableLinks();}
-        catch(error){box.innerHTML=`<p class="error-text">${escapeHtml(error.message)}</p>`;}
-    }
-    async function openKinPathDialog(person){
-        const dlg=document.createElement('dialog');dlg.className='modal pa-kin-dialog';
-        dlg.innerHTML=`<div class="modal-head"><div><span class="eyebrow">${escapeHtml(i18n('TON LIEN'))}</span><h2>${escapeHtml(personName(person))}</h2></div><button class="icon-button" type="button" data-pa-x aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div><div class="modal-body" data-pa-body>${waitHtml(i18n('Recherche du chemin…'))}</div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-pa-x>${escapeHtml(i18n('Fermer'))}</button></div>`;
-        document.body.appendChild(dlg);dlg.addEventListener('close',()=>dlg.remove());dlg.querySelectorAll('[data-pa-x]').forEach(b=>b.addEventListener('click',()=>dlg.close()));
-        dlg.addEventListener('click',e=>{const b=e.target.closest('[data-open-person]');if(b){dlg.close();openPersonById(Number(b.dataset.openPerson));}});
-        dlg.showModal();
-        try{const r=await api('person_link',{id:person.id,root:paRootId()});const l=r.link;dlg.querySelector('[data-pa-body]').innerHTML=`<p class="pa-kin-sentence">${escapeHtml(l?(l.kind==='self'?i18n('C’est la personne de départ.'):`${l.label}${l.via?.name?' · '+i18n('par {nm}',{nm:l.via.name}):''}`):i18n('Aucun lien de parenté connu.'))}</p>${await paKinPathHtml(person.id)}`;}
-        catch(error){dlg.querySelector('[data-pa-body]').innerHTML=`<p class="error-text">${escapeHtml(error.message)}</p>`;}
-    }
-
-    /* ── ⤓ Exporter ▾ de la fiche (R4) ── */
-    function exportPersonJson(detail){
-        // 🔒 les événements confidentiels ne sortent jamais de l'app
-        const events=(detail.events||[]).filter(e=>!Number(e.is_private));
-        const payload={exported_at:new Date().toISOString(),person:detail.person,events,parents:detail.parents,partners:detail.partners,children:detail.children,notes:detail.notes,media:detail.media,sources:(detail.sources||[]).filter(s=>!(s.entity_type==='event'&&!events.some(e=>Number(e.id)===Number(s.entity_id)))),investigations:detail.investigations,battues:detail.battues};
-        const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-        const link=document.createElement('a');link.href=URL.createObjectURL(blob);
-        link.download=`fiche-${detail.person.id}-${(personName(detail.person)||'personne').toLowerCase().replace(/[^a-z0-9]+/gi,'-')}.json`;
-        link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
-    }
-    function openPersonExportMenu(anchor,detail){
-        const UI=window.LCNDA_UI;if(!detail?.person)return;
-        const items=[
-            {icon:'📄',label:i18n('PDF (aperçu d’impression)'),run:()=>printScreen(personPrintTitle(),{pdf:true})},
-            {icon:'🧾',label:i18n('Fiche en JSON'),run:()=>exportPersonJson(detail)},
-            ...(paKiosk()?[]:[{icon:'⚙️',label:i18n('Personnaliser l’export…'),run:()=>openPersonExportDialog(detail)}]),
-            {icon:'👪',label:i18n('Fiche familiale…'),run:()=>openFamilySheetDialog(detail.person.id)},
-        ];
-        if(UI?.menuAt)UI.menuAt(anchor||document.body,items,{title:i18n('⤓ Exporter')});else exportPersonJson(detail);
-    }
-
-    /* ── 👪 Fiche familiale (couple + enfants), imprimable (L1) ── */
-    function paEvText(e){if(!e)return '';const place=[e.place_name,e.county].filter(Boolean).join(', ');return [e.date_text||(e.year?String(e.year):''),place?i18n('à {x}',{x:place}):''].filter(Boolean).join(' ');}
-    function paSheetPersonHtml(p,role){
-        if(!p)return `<div class="pa-fs-person is-empty"><span class="pa-fs-role">${escapeHtml(role)}</span><em>${escapeHtml(i18n('inconnu(e)'))}</em></div>`;
-        if(p.private)return `<div class="pa-fs-person"><span class="pa-fs-role">${escapeHtml(role)}</span><strong>${escapeHtml(i18n('Fiche confidentielle'))}</strong></div>`;
-        const rows=[[i18n('Naissance'),paEvText(p.birth)],[i18n('Baptême'),paEvText(p.baptism)],[i18n('Décès'),paEvText(p.death)],[i18n('Inhumation'),paEvText(p.burial)],[i18n('Métier'),p.occupation]].filter(([,v])=>v);
-        return `<div class="pa-fs-person"><span class="pa-fs-role">${escapeHtml(role)}</span><button type="button" class="table-link" data-open-person="${p.id}"><strong>${escapeHtml(p.name)}</strong></button><dl>${rows.map(([k,v])=>`<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd></div>`).join('')}</dl>${p.sources?.length?`<small class="pa-fs-src">📚 ${p.sources.map(s=>escapeHtml(s.title||'')).join(' · ')}</small>`:''}</div>`;
-    }
-    function familySheetHtml(data,forPrint=false){
-        const fams=data.families||[];
-        if(!fams.length)return empty(i18n('Aucune union enregistrée pour cette fiche.'),{icon:'👪'});
-        return fams.map(f=>{
-            const role=p=>p?.gender==='female'?i18n('Épouse'):p?.gender==='male'?i18n('Époux'):i18n('Conjoint');
-            const evs=(f.events||[]).filter(e=>!forPrint||!Number(e.is_private));
-            return `<section class="pa-fs-family"><div class="pa-fs-couple">${paSheetPersonHtml(f.partner1,role(f.partner1))}${paSheetPersonHtml(f.partner2,role(f.partner2))}</div>
-                <div class="pa-fs-union"><strong>${escapeHtml(i18n('Union'))}</strong>${evs.length?`<ul>${evs.map(e=>`<li>${Number(e.is_private)?'🔒 ':''}${escapeHtml(e.type_label)} : ${escapeHtml(paEvText(e)||'—')}</li>`).join('')}</ul>`:`<p class="muted">${escapeHtml(i18n('Pas de mariage enregistré.'))}</p>`}${f.sources?.length?`<small class="pa-fs-src">📚 ${f.sources.map(s=>escapeHtml(s.title||'')).join(' · ')}</small>`:''}</div>
-                <table class="pa-fs-children"><thead><tr><th>#</th><th>${escapeHtml(i18n('Enfant'))}</th><th>${escapeHtml(i18n('Naissance'))}</th><th>${escapeHtml(i18n('Décès'))}</th><th>${escapeHtml(i18n('Conjoint(s)'))}</th></tr></thead><tbody>${(f.children||[]).length?f.children.map((c,i)=>`<tr><td>${i+1}</td><td>${c.private?escapeHtml(i18n('Fiche confidentielle')):`<button type="button" class="table-link" data-open-person="${c.id}">${escapeHtml(c.name)}</button>`}</td><td>${escapeHtml(paEvText(c.birth))}</td><td>${escapeHtml(paEvText(c.death))}</td><td>${(c.spouses||[]).map(sp=>`<button type="button" class="table-link" data-open-person="${sp.id}">${escapeHtml(sp.name)}</button>`).join(', ')}</td></tr>`).join(''):`<tr><td colspan="5" class="muted">${escapeHtml(i18n('Aucun enfant connu.'))}</td></tr>`}</tbody></table></section>`;
-        }).join('');
-    }
-    async function openFamilySheetDialog(personId){
-        const dlg=document.createElement('dialog');dlg.className='modal pa-family-sheet';dlg.id='pa-family-sheet-dialog';
-        dlg.innerHTML=`<div class="modal-head"><div><span class="eyebrow">${escapeHtml(i18n('FICHE FAMILIALE'))}</span><h2 data-pa-title>${escapeHtml(i18n('Fiche familiale'))}</h2></div><button class="icon-button" type="button" data-pa-x aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div><div class="modal-body" data-pa-body>${waitHtml(i18n('Chargement de la fiche familiale…'))}</div><div class="modal-actions"><button class="button secondary" type="button" data-pa-fs-export aria-haspopup="true">${escapeHtml(i18n('⤓ Exporter ▾'))}</button><button class="button secondary" type="button" data-pa-fs-print>${escapeHtml(i18n('🖨 Imprimer'))}</button><span class="spacer"></span><button class="button" type="button" data-pa-x>${escapeHtml(i18n('Fermer'))}</button></div>`;
-        document.body.appendChild(dlg);dlg.addEventListener('close',()=>dlg.remove());dlg.querySelectorAll('[data-pa-x]').forEach(b=>b.addEventListener('click',()=>dlg.close()));
-        dlg.addEventListener('click',e=>{const b=e.target.closest('[data-open-person]');if(b){dlg.close();openPersonById(Number(b.dataset.openPerson));}});
-        dlg.showModal();
-        let data;try{data=await api('family_sheet',{id:personId});}catch(error){dlg.querySelector('[data-pa-body]').innerHTML=`<p class="error-text">${escapeHtml(error.message)}</p>`;return;}
-        const name=personName(state.currentPerson?.person&&Number(state.currentPerson.person.id)===Number(personId)?state.currentPerson.person:{})||'';
-        const title=name?i18n('Fiche familiale de {nm}',{nm:name}):i18n('Fiche familiale');
-        dlg.querySelector('[data-pa-title]').textContent=title;
-        dlg.querySelector('[data-pa-body]').innerHTML=familySheetHtml(data);
-        const printIt=(pdf=false)=>{const UI=window.LCNDA_UI;const html=`<h1 class="pa-fs-h1">${escapeHtml(title)}</h1>${familySheetHtml(data,true)}`;if(UI?.openPrintDialog)UI.openPrintDialog({title,icon:'👪',key:'fiche-familiale',html,pdf:true,info:pdf?i18n('Choisis « ⤓ PDF » pour enregistrer le fichier.'):''});};
-        dlg.querySelector('[data-pa-fs-print]').addEventListener('click',()=>printIt());
-        dlg.querySelector('[data-pa-fs-export]').addEventListener('click',e=>{
-            const rows=[[i18n('Union'),i18n('Rôle'),i18n('Nom'),i18n('Naissance'),i18n('Décès'),i18n('Conjoint(s)')]];
-            (data.families||[]).forEach((f,i)=>{[f.partner1,f.partner2].forEach(p=>{if(p)rows.push([String(i+1),p.gender==='female'?i18n('Épouse'):i18n('Époux'),p.name,paEvText(p.birth),paEvText(p.death),'']);});(f.children||[]).forEach(c=>rows.push([String(i+1),i18n('Enfant'),c.name,paEvText(c.birth),paEvText(c.death),(c.spouses||[]).map(s=>s.name).join(', ')]));});
-            const csv=()=>{const text='﻿'+rows.map(r=>r.map(v=>csvCell(v)).join(';')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'}));a.download=`fiche-familiale-${personId}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
-            window.LCNDA_UI?.menuAt?.(e.currentTarget,[{icon:'📄',label:i18n('PDF (aperçu d’impression)'),run:()=>printIt(true)},{icon:'📊',label:i18n('Tableau (CSV)'),run:csv}],{title:i18n('⤓ Exporter')});
-        });
-    }
-
-    /* ── ⚡ Saisie rapide d'une famille ── */
-    function paSplitName(txt){const t=String(txt||'').replace(/^txt:/,'').trim().replace(/\s+/g,' ');if(!t)return null;const w=t.split(' ');const up=w.filter(x=>x.length>1&&x===x.toUpperCase()&&/\p{L}/u.test(x));if(up.length&&up.length<w.length)return {first_name:w.filter(x=>!up.includes(x)).join(' '),last_name:up.join(' ')};if(w.length===1)return {first_name:w[0],last_name:''};return {first_name:w.slice(0,-1).join(' '),last_name:w[w.length-1]};}
-    function paPickerValue(form,name){const v=String(form.elements[name]?.value||'').trim();if(!v)return null;if(/^\d+$/.test(v))return {id:Number(v)};const n=paSplitName(v);return n&&(n.first_name||n.last_name)?n:null;}
-    function openQuickFamilyDialog(){
-        if(paKiosk())return toast(i18n('Mode consultation : rien ne peut être modifié.'));
-        const P=window.LCNDA_PICKER,cur=state.module==='personnes'?state.currentPerson?.person:null;
-        const field=(name,value=null,ph='')=>P?.pickerField?P.pickerField({name,kind:'person',allowFree:true,allowCreate:false,value,placeholder:ph}):`<input name="${name}" placeholder="${escapeHtml(ph)}">`;
-        const me=cur&&cur.kind!=='animal'?{id:Number(cur.id),title:personName(cur)}:null;
-        const childRow=i=>`<div class="pa-qf-child" data-pa-qf-child="${i}"><div class="pk-host"><span>${escapeHtml(i18n('Enfant {n}',{n:i+1}))}</span>${field(`qf_child_${i}`,null,i18n('Prénom NOM, ou choisis une fiche'))}</div><label>${escapeHtml(i18n('Sexe'))}<select name="qf_child_${i}_gender"><option value="unknown">?</option><option value="male">${escapeHtml(i18n('Garçon'))}</option><option value="female">${escapeHtml(i18n('Fille'))}</option></select></label><label>${escapeHtml(i18n('Naissance'))}<input name="qf_child_${i}_date" placeholder="${escapeHtml(i18n('7 mai 1925'))}" data-ui-date="nocal"></label><label>${escapeHtml(i18n('Lieu'))}<input name="qf_child_${i}_place" placeholder="${escapeHtml(i18n('Commune'))}"></label></div>`;
-        const dlg=document.createElement('dialog');dlg.className='modal pa-quick-family';dlg.id='pa-quick-family-dialog';
-        dlg.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${escapeHtml(i18n('SAISIE RAPIDE'))}</span><h2>${escapeHtml(i18n('⚡ ＋ Famille'))}</h2><p>${escapeHtml(i18n('Père, mère, mariage et enfants en une seule saisie. Pour chaque nom : choisis une fiche existante, ou tape « Prénom NOM » pour en créer une.'))}</p></div><button class="icon-button" type="button" data-pa-x aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div>
-            <div class="form-grid pa-qf-grid"><div class="pk-host"><span>${escapeHtml(i18n('Père'))}</span>${field('qf_father',cur?.gender==='male'?me:null,i18n('Prénom NOM, ou choisis une fiche'))}</div><div class="pk-host"><span>${escapeHtml(i18n('Mère'))}</span>${field('qf_mother',cur?.gender==='female'?me:null,i18n('Prénom NOM, ou choisis une fiche'))}</div>
-            <label>${escapeHtml(i18n('Date du mariage'))}<input name="qf_marr_date" placeholder="${escapeHtml(i18n('12 juin 1890'))}" data-ui-date="nocal"></label><label>${escapeHtml(i18n('Lieu du mariage'))}<input name="qf_marr_place" placeholder="${escapeHtml(i18n('Commune'))}"></label></div>
-            <div class="pa-qf-children" data-pa-qf-children>${childRow(0)}${childRow(1)}</div>
-            <p><button type="button" class="button small secondary" data-pa-qf-more>${escapeHtml(i18n('＋ Un enfant de plus'))}</button> <small class="muted">${escapeHtml(i18n('Un enfant sans nom de famille prend celui du père.'))}</small></p>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-pa-x>${escapeHtml(i18n('Annuler'))}</button><button type="submit" class="button">${escapeHtml(i18n('Créer la famille'))}</button></div></form>`;
-        document.body.appendChild(dlg);dlg.addEventListener('close',()=>dlg.remove());dlg.querySelectorAll('[data-pa-x]').forEach(b=>b.addEventListener('click',()=>dlg.close()));
-        let n=2;dlg.querySelector('[data-pa-qf-more]').addEventListener('click',()=>{if(n>=30)return;dlg.querySelector('[data-pa-qf-children]').insertAdjacentHTML('beforeend',childRow(n++));});
-        const form=dlg.querySelector('form');
-        form.addEventListener('submit',async ev=>{
-            ev.preventDefault();
-            const body={father:paPickerValue(form,'qf_father'),mother:paPickerValue(form,'qf_mother'),marriage:{date:form.elements.qf_marr_date.value,place:form.elements.qf_marr_place.value},children:[]};
-            for(let i=0;i<n;i++){const c=paPickerValue(form,`qf_child_${i}`);if(!c)continue;if(!c.id)c.gender=form.elements[`qf_child_${i}_gender`]?.value||'unknown';c.birth_date=form.elements[`qf_child_${i}_date`]?.value||'';c.birth_place=form.elements[`qf_child_${i}_place`]?.value||'';body.children.push(c);}
-            if(!body.father&&!body.mother)return window.LCNDA_UI?.fail?window.LCNDA_UI.fail(form.querySelector('.pk-host'),i18n('Indique au moins le père ou la mère.')):toast(i18n('Indique au moins le père ou la mère.'),'error');
-            try{
-                const r=(await api('quick_family',{},{method:'POST',body})).result||{};
-                dlg.dataset.dirty='';dlg.close();
-                const refresh=async()=>{peopleChoices=null;paKinCache.clear();if(state.module==='personnes'){await loadPeople();if(state.currentPersonId)await selectPerson(state.currentPersonId,false);}};
-                await refresh();
-                const made=(r.created||[]).length;
-                undoToast(made?i18n('Famille enregistrée : {n} fiche(s) créée(s).',{n:made}):i18n('Famille enregistrée.'),{undo:async()=>{await api('quick_family_undo',{},{method:'POST',body:{created:r.created||[],events:r.events||[],links:r.links||[]}});await refresh();}});
-            }catch(error){toast(error.message,'error');}
-        });
-        dlg.showModal();
-    }
-
-    /* ── 🔒 confidentiel, 📝 note de recherche, 🧮 faits en double (bloc Événements) ── */
-    const PA_DUP_TAGS={BIRT:['naissance','naissances'],DEAT:['décès','décès'],BURI:['inhumation','inhumations'],CHR:['baptême','baptêmes'],BAPM:['baptême','baptêmes']};
-    function paDuplicateFacts(events){
-        const own=(events||[]).filter(e=>e.scope!=='family'&&PA_DUP_TAGS[e.gedcom_tag]&&!(Number(e.is_private)&&paKiosk()));
-        const by={};own.forEach(e=>{const k=e.gedcom_tag==='BAPM'?'CHR':e.gedcom_tag;(by[k]=by[k]||[]).push(e);});
-        const out={};Object.values(by).forEach(list=>{if(list.length<2)return;list.forEach(e=>{out[e.id]={tag:e.gedcom_tag,count:list.length,others:list.filter(x=>x.id!==e.id).map(x=>Number(x.id))};});});
-        return out;
-    }
-    function paEventMarksHtml(event,dupTags,locked){
-        let h='';
-        if(Number(event.is_private))h+=`<span class="ui-badge is-grey pa-private-badge" title="${escapeHtml(i18n('Événement confidentiel : caché en consultation, dans les exports, les partages et le site.'))}">${escapeHtml(i18n('🔒 confidentiel'))}</span>`;
-        if(String(event.research_note||'').trim())h+=`<button type="button" class="pa-note-btn" data-pa-note="${Number(event.id)}" title="${escapeHtml(i18n('📝 Note de recherche : {x}',{x:String(event.research_note).trim()}))}" aria-label="${escapeHtml(i18n('Voir la note de recherche'))}">📝</button>`;
-        const d=dupTags[event.id];
-        if(d){const w=PA_DUP_TAGS[d.tag]||['fait','faits'];h+=`<span class="ui-badge is-yellow pa-dup-badge" title="${escapeHtml(i18n('Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait.',{n:d.count,what:w[1]}))}">⚠️ ${escapeHtml(i18n('{n} {what}',{n:d.count,what:w[1]}))}</span>${locked||paKiosk()?'':`<button type="button" class="button small secondary pa-keep-btn" data-pa-keep-event="${Number(event.id)}" data-pa-keep-others="${d.others.join(',')}">${escapeHtml(i18n('✓ Garder celle-ci'))}</button>`}`;}
-        return h;
-    }
-    async function paKeepEvent(keepId,others){
-        const done=[];
-        try{for(const drop of others){const r=(await api('event_keep_version',{},{method:'POST',body:{keep_id:keepId,drop_id:drop}})).result||{};done.push(r);}}
-        catch(error){toast(error.message,'error');}
-        if(!done.length)return;
-        await selectPerson(state.currentPersonId,false);
-        undoToast(i18n('Gardé : l’autre version est notée dans « Date alternative ».'),{undo:async()=>{for(const r of [...done].reverse()){await api('restore_last_delete',{},{method:'POST',body:{entity_type:'event',entity_id:r.drop_id}});await api('event_keep_version_undo',{},{method:'POST',body:{keep_id:r.keep_id,drop_id:r.drop_id,before_alt:r.before_alt}});}await selectPerson(state.currentPersonId,false);}});
-    }
-    function paEventDialogExtras(form,eventItem){
-        let box=form.querySelector('[data-pa-event-extra]');
-        if(!box){
-            form.querySelector('.modal-actions')?.insertAdjacentHTML('beforebegin',`<div class="dialog-labels-block pa-event-extra" data-pa-event-extra><span class="section-label">${escapeHtml(i18n('Confidentialité et recherche'))}</span><label class="checkbox-line" title="${escapeHtml(i18n('Caché en mode consultation, dans les exports, les partages et le site.'))}"><input type="checkbox" name="is_private" value="1"> ${escapeHtml(i18n('🔒 Événement confidentiel'))}</label><small class="muted">${escapeHtml(i18n('Caché en mode consultation, dans les exports, les partages et le site.'))}</small><label class="pa-research-note">${escapeHtml(i18n('📝 Note de recherche (à vérifier, cote, piste)'))}<textarea name="research_note" rows="2" maxlength="2000" placeholder="${escapeHtml(i18n('ex. à vérifier : cote 3 E 125, piste : registre de la paroisse voisine'))}"></textarea></label></div>`);
-            box=form.querySelector('[data-pa-event-extra]');
-        }
-        if(!box)return;
-        form.elements.is_private.checked=Number(eventItem?.is_private)===1;
-        form.elements.research_note.value=String(eventItem?.research_note||'');
-    }
-
-    /* ── 🖼 Âge sur chaque photo ── */
-    function paMediaAgeHtml(item,person,birthEvent){
-        if(!birthEvent||person?.kind==='animal'&&false)return '';
-        const type=normalizedMediaType(item);if(type!=='image'&&type!=='photo')return '';
-        const md=parsedGenealogyDate(item.date_text||''),bd=parsedGenealogyDate(birthEvent.date_text||birthEvent.year||'');if(!md||!bd)return '';
-        let age;
-        if(md.exact&&bd.exact){if(md.date<bd.date)return '';age=md.date.getUTCFullYear()-bd.date.getUTCFullYear();const m=md.date.getUTCMonth()-bd.date.getUTCMonth();if(m<0||(m===0&&md.date.getUTCDate()<bd.date.getUTCDate()))age--;}
-        else{age=(md.year||0)-(bd.year||0);if(age<0)return '';}
-        const death=Number(person?.death_year)||0;if(death&&md.year>death)return '';
-        const name=person?.first_name||personName(person)||'';
-        const txt=age<1?i18n('{nm} avait moins d’un an',{nm:name}):(md.exact&&bd.exact?i18n('{nm} avait {age}',{nm:name,age:ansText(age)}):i18n('{nm} avait environ {age}',{nm:name,age:ansText(age)}));
-        return `<small class="pa-media-age" title="${escapeHtml(i18n('Date du média moins date de naissance'))}">🎂 ${escapeHtml(txt)}</small>`;
-    }
-
-    /* ── 🕘 Comparer une ancienne version avec maintenant (historique de la fiche) ── */
-    const PA_FIELDS={person:{first_name:'Prénom',middle_name:'Autres prénoms',last_name:'Nom',prefix:'Titre / préfixe',suffix:'Suffixe',gender:'Genre',living_status:'Statut',occupation:'Métier / activité',height_text:'Taille',physical_description:'Description physique',eye_color:'Yeux',skin_color:'Peau',nationality:'Nationalité',ethnicity:'Origine / mention',reference_number:'Référence',verify_status:'Mode vérification',surname_group_id:'Famille / groupe',is_private:'Fiche confidentielle',outside_genealogy:'Hors généalogie',spouse_status:'Mention conjoint',children_status:'Mention enfants',mort_pour_la_france:'Mort pour la France'},
-        event:{date_text:'Date',date_alternative:'Date alternative',title:'Titre',description:'Description',address:'Adresse',extra_info:'Informations complémentaires',former_place_name:'Ancien nom du lieu',former_country:'Ancien pays',first_name:'Prénom relevé',last_name:'Nom relevé',place_id:'Lieu (n°)',event_type_id:'Type (n°)',date_calendar:'Calendrier',fact_confidence:'Confiance',is_private:'Confidentiel',research_note:'Note de recherche'}};
-    function paHistoryCanCompare(row){if(!PA_FIELDS[row?.entity_type]||paKiosk())return false;try{const b=JSON.parse(row.before_json||'null');return !!b&&typeof b==='object'&&Object.keys(PA_FIELDS[row.entity_type]).some(k=>k in b);}catch(_){return false;}}
-    async function paHistoryCompare(row,personId,body){
-        const box=body.querySelector(`[data-pa-history-diff="${row.id}"]`);if(!box)return;
-        if(!box.hidden){box.hidden=true;return;}
-        box.hidden=false;box.innerHTML=waitHtml(i18n('Comparaison…'));
-        let before={};try{before=JSON.parse(row.before_json||'{}')||{};}catch(_){}
-        let now=null;
-        try{const d=await api('person',{id:personId});now=row.entity_type==='person'?d.person:(d.events||[]).find(e=>Number(e.id)===Number(row.entity_id));}catch(error){box.innerHTML=`<p class="error-text">${escapeHtml(error.message)}</p>`;return;}
-        if(!now){box.innerHTML=`<p class="muted">${escapeHtml(i18n('Cet élément n’existe plus : utilise « Restaurer » s’il a été supprimé.'))}</p>`;return;}
-        const fields=Object.keys(PA_FIELDS[row.entity_type]).filter(k=>k in before&&String(before[k]??'')!==String(now[k]??''));
-        if(!fields.length){box.innerHTML=`<p class="muted">${escapeHtml(i18n('Aucune différence : la fiche est comme avant cette modification.'))}</p>`;return;}
-        const show=v=>v===null||v===undefined||v===''?'—':String(v);
-        box.innerHTML=`<table class="pa-diff"><thead><tr><th>${escapeHtml(i18n('Champ'))}</th><th>${escapeHtml(i18n('Avant cette modification'))}</th><th>${escapeHtml(i18n('Maintenant'))}</th><th></th></tr></thead><tbody>${fields.map(f=>`<tr><th>${escapeHtml(i18n(PA_FIELDS[row.entity_type][f]))}</th><td>${escapeHtml(show(before[f]))}</td><td>${escapeHtml(show(now[f]))}</td><td><button type="button" class="button small secondary" data-pa-restore-field="${escapeHtml(f)}">${escapeHtml(i18n('↩ Remettre'))}</button></td></tr>`).join('')}</tbody></table>`;
-        box.querySelectorAll('[data-pa-restore-field]').forEach(b=>b.addEventListener('click',async()=>{
-            const f=b.dataset.paRestoreField,id=Number(row.entity_type==='person'?personId:row.entity_id);
-            try{
-                const r=(await api('restore_field',{},{method:'POST',body:{entity_type:row.entity_type,id,field:f,value:before[f]}})).result||{};
-                b.disabled=true;b.textContent=i18n('✓ Remis');await selectPerson(personId,false);
-                undoToast(i18n('Remis : {f}',{f:i18n(PA_FIELDS[row.entity_type][f])}),{undo:async()=>{await api('restore_field',{},{method:'POST',body:{entity_type:row.entity_type,id,field:f,value:r.old}});await selectPerson(personId,false);}});
-            }catch(error){toast(error.message,'error');}
-        }));
-    }
-
-    /* ── 🐾 Animal : poids et croissance (courbe tirée des pesées de la santé) ── */
-    PA_EXT.personBlocks.animal_growth=PA_EXT.personBlocks.animal_growth||((index,detail)=>{
-        const pet=Number(detail?.heritage?.animal?.id)||0;
-        return card(index,i18n('📈 Animal : poids et croissance'),'',`<div class="pa-growth" data-pa-growth="${pet}">${pet?waitHtml(i18n('Chargement des pesées…')):empty(i18n('Pas de fiche d’animal liée.'),{icon:'🐾'})}</div>`,'span-12');
-    });
-    function paGrowthSvg(points){
-        const W=640,H=220,L=48,R=12,T=12,B=30;
-        const xs=points.map(p=>p.t),ys=points.map(p=>p.g);
-        const x0=Math.min(...xs),x1=Math.max(...xs),y0=0,y1=Math.max(...ys)*1.1||1;
-        const X=t=>L+(x1===x0?0.5:(t-x0)/(x1-x0))*(W-L-R),Y=g=>H-B-(g-y0)/(y1-y0)*(H-T-B);
-        const kg=y1>=2000,fmt=g=>kg?`${num1(g/1000)} kg`:`${Math.round(g)} g`;
-        const ticks=[0,0.25,0.5,0.75,1].map(f=>y0+f*(y1-y0));
-        const d=points.map((p,i)=>`${i?'L':'M'}${X(p.t).toFixed(1)},${Y(p.g).toFixed(1)}`).join(' ');
-        return `<svg class="pa-growth-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${escapeHtml(i18n('Courbe de poids'))}">${ticks.map(v=>`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" class="pa-g-grid"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end" class="pa-g-lab">${escapeHtml(fmt(v))}</text>`).join('')}<path d="${d}" class="pa-g-line" fill="none"/>${points.map(p=>`<circle cx="${X(p.t)}" cy="${Y(p.g)}" r="4" class="pa-g-dot"><title>${escapeHtml(`${p.iso} : ${fmt(p.g)}`)}</title></circle>`).join('')}<text x="${L}" y="${H-8}" class="pa-g-lab">${escapeHtml(points[0].iso)}</text><text x="${W-R}" y="${H-8}" text-anchor="end" class="pa-g-lab">${escapeHtml(points[points.length-1].iso)}</text></svg>`;
-    }
-    async function paFillGrowth(){
-        const box=$('[data-pa-growth]');const pet=Number(box?.dataset.paGrowth)||0;if(!box||!pet)return;
-        let data;try{data=await api('suivi');}catch(error){box.innerHTML=`<small class="muted">${escapeHtml(error.message)}</small>`;return;}
-        if(!box.isConnected)return;
-        const an=(data.animals||[]).find(a=>Number(a.id)===pet);
-        const pts=(an?.weights||[]).map(w=>({iso:String(w.iso||''),g:Number(w.g),t:Date.parse(String(w.iso||'').slice(0,10))})).filter(p=>Number.isFinite(p.g)&&Number.isFinite(p.t)).sort((a,b)=>a.t-b.t);
-        if(!pts.length){box.innerHTML=empty(i18n('Pas encore de pesée : ajoute un poids dans 🩺 Santé.'),{icon:'⚖️'});return;}
-        const last=pts[pts.length-1],first=pts[0],diff=last.g-first.g;
-        box.innerHTML=`${pts.length>1?paGrowthSvg(pts):''}<p class="pa-growth-sum">${escapeHtml(i18n('{n} pesée(s) · dernière : {w} le {d}',{n:pts.length,w:last.g>=2000?`${num1(last.g/1000)} kg`:`${Math.round(last.g)} g`,d:last.iso}))}${pts.length>1?` · ${escapeHtml(i18n('{s} depuis la première',{s:(diff>=0?'+':'−')+(Math.abs(diff)>=2000?`${num1(Math.abs(diff)/1000)} kg`:`${Math.round(Math.abs(diff))} g`)}))}`:''}</p>`;
-    }
-
-    /** après chaque fiche affichée : 🧭 lien dans l'en-tête, 🧭 dans les arbres, 📈 courbe de poids */
-    function paAfterPerson(detail){
-        paFillKinHead(detail);
-        paFillGrowth();
-    }
-    // un seul écouteur pour les boutons ajoutés à la fiche (ils sont redessinés à chaque fiche)
-    document.addEventListener('click',event=>{
-        const t=event.target;if(!(t instanceof Element))return;
-        const kin=t.closest('[data-pa-kin-head]');if(kin){event.preventDefault();toggleKinPath(Number(kin.dataset.paKinHead));return;}
-        if(t.closest('[data-pa-kin-close]')){const b=$('[data-pa-kin-path]');if(b)b.hidden=true;return;}
-        const ex=t.closest('[data-pa-export-menu]');if(ex&&state.currentPerson){event.preventDefault();openPersonExportMenu(ex,state.currentPerson);return;}
-        const fs=t.closest('[data-pa-family-sheet]');if(fs){event.preventDefault();openFamilySheetDialog(Number(fs.dataset.paFamilySheet));return;}
-        const qf=t.closest('[data-pa-quick-family]');if(qf){event.preventDefault();openQuickFamilyDialog();return;}
-        const keep=t.closest('[data-pa-keep-event]');if(keep){event.preventDefault();if(personIsLocked())return toast(i18n('Cette fiche est verrouillée.'),'error');paKeepEvent(Number(keep.dataset.paKeepEvent),String(keep.dataset.paKeepOthers||'').split(',').map(Number).filter(Boolean));return;}
-        const note=t.closest('[data-pa-note]');if(note){event.preventDefault();const ev=(state.currentPerson?.events||[]).find(e=>Number(e.id)===Number(note.dataset.paNote));if(ev)toast(i18n('📝 Note de recherche : {x}',{x:String(ev.research_note||'').trim()}));return;}
-    });
-
-    window.LCNDA_APP={runTabShortcut,openFamilySheetDialog,openQuickFamilyDialog,decorateKinship:paDecorateKin,openKinPathDialog,settingRenames:()=>({...SETTING_RENAMES}),designTabs:()=>DESIGN_TABS,askDeleteSheet,openWidgetLibraryDialog,openGraphReorderDialog,personPageHtml,setSheetRoute,ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,accord,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,reglagesA,setReglagesA,REGLAGES_A_PAGES,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,defaultPersonBlockSpans,personBlockSettings,savePersonBlockSettings,blockBaseKey,ANIMAL_BLOCKS,applyBlockWidth,rerenderPerson,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={designTabs:()=>DESIGN_TABS,askDeleteSheet,openWidgetLibraryDialog,openGraphReorderDialog,personPageHtml,setSheetRoute,ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,accord,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,reglagesA,setReglagesA,REGLAGES_A_PAGES,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,defaultPersonBlockSpans,personBlockSettings,savePersonBlockSettings,blockBaseKey,ANIMAL_BLOCKS,applyBlockWidth,rerenderPerson,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,loadPeople,loadPeopleAndPerson,bindTableLinks,actionButton,openLightbox,showFaceSuggestionsOnLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,lightboxGoTo,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,dashboardSpace,dashboardSpaceDo,applyMenuOrder,menuHiddenKeys,orderedMenuKeys,menuOwnLast,/* l'ordre et les fonds cachés de Réglages → Cartes et fonds de carte, relus à chaque fois */get tileLayerCategories(){return orderedTileCategories(false);},orderedTileCategories,sortTileKeys};
 

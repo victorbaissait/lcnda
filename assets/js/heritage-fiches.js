@@ -357,6 +357,20 @@
             '-', {icon: '🖨', label: i18n('PDF (par 🖨 Imprimer)'), run: () => printSheet()}];
         if (UIx().menuAt) UIx().menuAt(anchor, items, {title: i18n('⤓ Exporter la fiche')}); else items[0].run();
     }
+    /* 🗂 une Fiche comme page d'un onglet à soi (heritage-tabs.js, pièce « tab_fiche ») : les blocs en lecture */
+    ext.fiches.embed = async (el, id) => {
+        let d; try { d = await api('topic_sheet', {id: Number(id)}); } catch (e) { el.innerHTML = A().empty(e.message || i18n('Fiche introuvable.'), {icon: '📒'}); return null; }
+        const keep = cur; cur = d;
+        let html = '';
+        try { html = d.blocks.map(b => b.type === 'divider' ? `<h3 class="h-fi-divider span-12">${esc(b.title || '')}</h3>` : `<section class="card span-${esc(b.width || '12')} h-fi-block"><header class="card-head"><h3>${kindOf(b.type)[1]} ${esc(titleOf(b))}</h3></header><div class="card-body">${blockBody(b)}</div></section>`).join(''); }
+        finally { cur = keep; }
+        el.innerHTML = `<div class="h-fi h-fi-embed" data-fi-embed="${Number(id)}"><p class="h-fi-embedhead"><b>${esc(d.icon || '📒')} ${esc(d.title)}</b>${d.subtitle ? ` <small class="muted">${esc(d.subtitle)}</small>` : ''} <button type="button" class="button small secondary" data-fi-embedopen="${Number(id)}">${esc(i18n('↗ Ouvrir la fiche'))}</button></p><div class="card-grid h-fi-grid">${html || A().empty(i18n('Fiche vide.'))}</div></div>`;
+        el.querySelector('[data-fi-embedopen]')?.addEventListener('click', () => { S().ficheId = Number(id); editing = false; A().setModule('fiches'); });
+        el.querySelectorAll('[data-fi-widget]').forEach(w => { if (ext.renderCustomWidgetInto) ext.renderCustomWidgetInto(w, w.dataset.fiWidget).catch?.(() => {}); });
+        el.querySelectorAll('[data-fi-photomap]').forEach(w => { let c = {}; try { c = JSON.parse(w.dataset.fiPhotomap || '{}'); } catch (_) {} ext.photomapEmbed?.(w, c); });
+        return d;
+    };
+    ext.fiches.list = async () => { await loadList(); return sheets.map(x => ({id: x.id, title: x.title, icon: x.icon})); };
     ext.fiches.exportMarkdown = () => (cur ? sheetMarkdown(cur) : ''); ext.fiches.exportHtml = () => (cur ? sheetHtml(cur) : ''); // (essais)
     /* 🕘 Versions (L3, app-versions.js) : l'état d'avant chaque enregistrement ; « ↺ Revenir » garde l'état actuel d'abord */
     function openVersions() {

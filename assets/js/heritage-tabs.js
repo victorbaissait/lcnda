@@ -5,11 +5,15 @@
  *  - ou un raccourci vers un écran de l'app (une liste, un diagramme, une statistique, un outil de maintenance…) ;
  *  - partir de rien, d'un onglet existant (copie du tableau de bord, un de ses onglets, un écran de l'app) ou d'un modèle ;
  *  - rangés dans le réglage « genealogie-custom-tabs » (suit la base et la sauvegarde) ; partage par fichier.
+ *  - audit des onglets (§18) : deux sortes de pages de plus, chacune une pièce de la page —
+ *    🌐 « Page web » (tab_web) : une adresse d'archives en ligne dans un cadre, et des notes à côté (genealogie-tab-web-notes) ;
+ *    📒 « Fiche » (tab_fiche) : une Fiche de l'onglet 📒 Fiches comme page d'onglet (heritage-fiches.js : ext.fiches.embed).
  * Chargé après app.js et heritage-widgets.js (window.LCNDA_APP, window.LCNDA_EXT).
  */
 (() => {
     'use strict';
     const A = () => window.LCNDA_APP;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.maintenance = ext.maintenance || {};
     const esc = value => A().escapeHtml(value ?? '');
@@ -147,6 +151,50 @@
         html: wd => `<fieldset class="h-ct-wcfg"><legend>Texte libre</legend><label>Titre<input data-ctn="title" value="${esc(wd.config?.title || '')}" placeholder="À faire cette semaine"></label><label>Texte<textarea data-ctn="text" rows="5">${esc(wd.config?.text || '')}</textarea></label></fieldset>`,
         read: ed => ({title: str(ed.querySelector('[data-ctn="title"]')?.value, 120), text: str(ed.querySelector('[data-ctn="text"]')?.value, 8000)}),
     };
+    /* 🌐 une page web (archives en ligne) dans un cadre, avec des notes à côté ; 📒 une Fiche comme page d'onglet */
+    const WEB_NOTES = 'genealogie-tab-web-notes';
+    const webUrlOk = u => /^https?:\/\/[^\s"'<>]{3,1500}$/i.test(String(u || '').trim());
+    const readNotes = () => { try { const v = JSON.parse(localStorage.getItem(WEB_NOTES) || '{}'); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch (_) { return {}; } };
+    const writeNote = (id, text) => { const all = readNotes(); if (text) all[id] = String(text).slice(0, 20000); else delete all[id]; try { localStorage.setItem(WEB_NOTES, JSON.stringify(all)); } catch (_) {} };
+    ext.dashboard.tab_web = {render: (index, widget, span) => {
+        const c = widget.config || {}, url = webUrlOk(c.url) ? String(c.url).trim() : '', note = readNotes()[widget.id] || '', ro = document.body.classList.contains('is-kiosk');
+        const host = url ? (() => { try { return new URL(url).host; } catch (_) { return url; } })() : '';
+        const body = url ? `<div class="h-ct-web" data-ct-web="${esc(widget.id)}"><div class="h-ct-webframe"><iframe src="${esc(url)}" title="${esc(c.title || host)}" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads" style="height:${Math.max(320, Math.min(2000, Number(c.height) || 700))}px"></iframe>
+                <p class="muted h-ct-webhint">${esc(i18n('La page ne s’affiche pas ? Certains sites refusent d’être montrés dans un cadre : « ↗ Ouvrir » la montre dans un nouvel onglet du navigateur.'))}</p></div>
+            <label class="h-ct-webnotes"><span>📝 ${esc(i18n('Mes notes'))}</span><textarea data-ct-webnote="${esc(widget.id)}" rows="16" ${ro ? 'readonly' : ''} placeholder="${esc(i18n('Ce que tu lis : cote, vue, nom, date… (gardé tout seul)'))}">${esc(note)}</textarea><small class="muted" data-ct-websaved></small></label></div>`
+            : A().empty(i18n('Pas encore d’adresse : ✎ pour coller l’adresse d’une page d’archives en ligne (https://…).'), {icon: '🌐'});
+        return A().card(index, c.title || host || i18n('Page web'), '', body, span, url ? `<a class="button small secondary" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Ouvrir'))}</a>` : '');
+    }};
+    ext.dashboardConfig.tab_web = {
+        html: wd => `<fieldset class="h-ct-wcfg"><legend>${esc(i18n('Page web'))}</legend><label>${esc(i18n('Adresse'))}<input data-ctweb="url" type="url" value="${esc(wd.config?.url || '')}" placeholder="https://archives.example.fr/…"></label><label>${esc(i18n('Titre'))} <small>(${esc(i18n('facultatif'))})</small><input data-ctweb="title" value="${esc(wd.config?.title || '')}"></label>
+            <label>${esc(i18n('Hauteur'))} <select data-ctweb="height">${HEIGHTS.map(([v, l]) => `<option value="${v}" ${String(wd.config?.height || 800) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label></fieldset>`,
+        read: ed => ({url: webUrlOk(ed.querySelector('[data-ctweb="url"]')?.value) ? str(ed.querySelector('[data-ctweb="url"]').value.trim(), 1500) : '', title: str(ed.querySelector('[data-ctweb="title"]')?.value, 120), height: Number(ed.querySelector('[data-ctweb="height"]')?.value) || 800}),
+    };
+    document.addEventListener('input', e => {
+        const t = e.target.closest?.('[data-ct-webnote]'); if (!t) return;
+        clearTimeout(t._t); t._t = setTimeout(() => { writeNote(t.dataset.ctWebnote, t.value); const s2 = t.parentElement.querySelector('[data-ct-websaved]'); if (s2) s2.textContent = i18n('✓ Enregistré'); }, 400);
+    });
+    ext.dashboard.tab_fiche = {render: (index, widget, span) => {
+        const id = Number(widget.config?.sheet) || 0;
+        if (id) setTimeout(() => { const el = document.querySelector(`[data-ct-fiche="${esc(widget.id)}"]`); if (el && ext.fiches?.embed) ext.fiches.embed(el, id); else if (el) el.innerHTML = A().empty(i18n('Les Fiches ne sont pas encore chargées.')); }, 0);
+        return A().card(index, widget.config?.title || i18n('Fiche'), '', id ? `<div class="h-ct-fiche" data-ct-fiche="${esc(widget.id)}">${window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(i18n('Chargement de la fiche…')) : ''}</div>` : A().empty(i18n('Aucune fiche choisie : ✎ pour en choisir une (onglet 📒 Fiches).'), {icon: '📒'}), span);
+    }};
+    let fichesList = [];
+    const loadFiches = async () => { try { fichesList = (await ext.fiches?.list?.()) || []; } catch (_) { fichesList = []; } return fichesList; };
+    const ficheSelect = (cur, attr) => `<select ${attr}><option value="">${esc(i18n('— choisir une fiche —'))}</option>${fichesList.map(f => `<option value="${f.id}" ${Number(cur) === f.id ? 'selected' : ''}>${esc(`${f.icon || '📒'} ${f.title}`)}</option>`).join('')}</select>`;
+    ext.dashboardConfig.tab_fiche = {
+        html: wd => { if (!fichesList.length) loadFiches().then(() => { const sel = document.querySelector('[data-ctfi="sheet"]'); if (sel) sel.outerHTML = ficheSelect(wd.config?.sheet, 'data-ctfi="sheet"'); }); return `<fieldset class="h-ct-wcfg"><legend>${esc(i18n('Fiche'))}</legend><label>${esc(i18n('Fiche'))} ${ficheSelect(wd.config?.sheet, 'data-ctfi="sheet"')}</label></fieldset>`; },
+        read: ed => ({sheet: Number(ed.querySelector('[data-ctfi="sheet"]')?.value) || 0, title: fichesList.find(f => f.id === Number(ed.querySelector('[data-ctfi="sheet"]')?.value))?.title || ''}),
+    };
+    function registerTabPieces() {
+        const app = A(); if (!app?.defaultDashboardBlocks) return;
+        [['tab_web', i18n('🌐 Page web (archives en ligne) et notes'), '12', i18n('Une adresse d’archives en ligne dans un cadre, et tes notes à côté.')], ['tab_fiche', i18n('📒 Une Fiche'), '12', i18n('Une de tes Fiches (onglet 📒 Fiches), en lecture.')]].forEach(([k, l, w, info]) => {
+            if (!app.defaultDashboardBlocks.some(x => x[0] === k)) app.defaultDashboardBlocks.push([k, l]);
+            if (app.defaultDashboardBlockSpans) app.defaultDashboardBlockSpans[k] = w;
+            if (app.dashboardWidgetInfo) app.dashboardWidgetInfo[k] = info;
+        });
+    }
+    registerTabPieces(); document.addEventListener('DOMContentLoaded', registerTabPieces, {once: true});
     document.addEventListener('click', event => { const b = event.target.closest?.('[data-ct-open-screen]'); if (b) A().openCustomScreen(b.dataset.ctOpenScreen); });
     // pour l'Éditeur de widgets (sorte « Écran de l'app ») et les blocs de fiche
     ext.appScreen = {nested: NESTED, nestedLink, targets: () => screenTargets(), select: (cur, attr) => screenSelect(cur, attr), url: screenUrl, label: targetLabel, valid: validTarget, heights: HEIGHTS, loadLists: async () => { await Promise.all([loadMyLists(), loadVillages()]); return myLists; },
@@ -172,6 +220,9 @@
         if (!isCurrent(token)) return;
         const open = S().tabsEditorOpen; S().tabsEditorOpen = '';
         if (open) { const t = tabs().find(x => x.id === open); if (t) return editTab({...t}, true); }
+        const start = S().tabsEditorStart; S().tabsEditorStart = ''; // 🌐 📒 « ＋ Ajouter un onglet » → une page web ou une Fiche
+        if (start === 'web') return editTab({id: newId(), icon: '🌐', intro: '', after: '', kind: 'page', name: i18n('Archives en ligne'), widgets: [{type: 'tab_web', width: '12', config: {url: '', title: '', height: 800}}]}, false);
+        if (start === 'fiche') { await loadFiches(); return editTab({id: newId(), icon: fichesList[0]?.icon || '📒', intro: '', after: '', kind: 'page', name: (fichesList[0]?.title || i18n('Ma fiche')).slice(0, 40), widgets: [{type: 'tab_fiche', width: '12', config: {sheet: fichesList[0]?.id || 0, title: fichesList[0]?.title || ''}}]}, false); }
         const list = tabs();
         const kindText = t => t.kind === 'screen' ? `raccourci vers « ${esc(targetLabel(t.target))} »` : `${(t.widgets || []).length} widget${(t.widgets || []).length > 1 ? 's' : ''}`;
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('RÉGLAGES', 'Éditeur d’onglets', 'Crée tes propres onglets dans la barre du haut, sans rien programmer : une page de widgets comme le tableau de bord (widgets de l’app, tes widgets, tes listes, tes graphiques), ou un raccourci vers un écran de l’app. Pars de rien, d’un onglet existant ou d’un modèle.', '<button type="button" class="button" data-ct-new>＋ Nouvel onglet</button>')}
@@ -226,6 +277,7 @@
         ext.openDialog({
             eyebrow: 'NOUVEL ONGLET', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
             body: `<h4>Partir de rien</h4><div class="h-templates">${tile('🧩', 'Page composée', 'Une page vide où tu poses ce que tu veux : écrans de l’app (listes, diagrammes, fiches, carte…), widgets, graphiques, textes.', 'data-ct-blank')}${tile('🔗', 'Raccourci vers un écran', 'Un onglet qui ouvre directement une liste, un diagramme, une statistique ou un outil.', 'data-ct-screen')}</div>
+                <h4>${esc(i18n('Une page toute prête'))}</h4><div class="h-templates">${tile('🌐', i18n('Page web (archives en ligne)'), i18n('Une adresse d’archives en ligne dans un cadre, avec tes notes à côté.'), 'data-ct-web')}${tile('📒', i18n('Une Fiche'), i18n('Une de tes Fiches (onglet 📒 Fiches) comme page d’onglet.'), 'data-ct-fiche')}</div>
                 <h4>Partir d’un onglet existant</h4><div class="h-templates">${tile('📊', 'Copie du tableau de bord', `Les ${board().widgets.length} widgets du tableau de bord, dans le même ordre, à arranger à ta façon.`, 'data-ct-dashboard')}${mine.map(t => tile(t.icon || '🗂️', t.name || 'Mon onglet', 'Un de mes onglets', `data-ct-mine="${esc(t.id)}"`)).join('')}</div>
                 <h4>Partir d’un écran de l’app</h4><p class="muted">L’écran (avec ses menus) dans une page à toi, où tu ajoutes ensuite d’autres écrans, des widgets ou des notes.</p><div class="h-templates">${['list:villages', 'module:carte', 'graph:ancestors', 'list:reminders', 'module:enquetes', 'list:census_households'].map(v => tile('📺', targetLabel(v), 'Écran de l’app', `data-ct-fromscreen="${v}"`)).join('')}</div>
                 <h4>Modèles</h4><div class="h-templates">${TEMPLATES.map((t, i) => tile(t.icon, t.name, t.intro, `data-ct-tpl="${i}"`)).join('')}</div>`,
@@ -234,6 +286,8 @@
                 dlg.querySelector('[data-ct-blank]').addEventListener('click', () => go({name: '', widgets: []}));
                 dlg.querySelectorAll('[data-ct-fromscreen]').forEach(b => b.addEventListener('click', () => go({name: targetLabel(b.dataset.ctFromscreen), icon: '📺', widgets: [sc(b.dataset.ctFromscreen, 12, 800)]})));
                 dlg.querySelector('[data-ct-screen]').addEventListener('click', () => go({name: '', kind: 'screen', icon: '🔗', target: 'list:villages'}));
+                dlg.querySelector('[data-ct-web]')?.addEventListener('click', () => go({name: i18n('Archives en ligne'), icon: '🌐', widgets: [{type: 'tab_web', width: '12', config: {url: '', title: '', height: 800}}]}));
+                dlg.querySelector('[data-ct-fiche]')?.addEventListener('click', async () => { await loadFiches(); go({name: fichesList[0]?.title?.slice(0, 40) || i18n('Ma fiche'), icon: fichesList[0]?.icon || '📒', widgets: [{type: 'tab_fiche', width: '12', config: {sheet: fichesList[0]?.id || 0, title: fichesList[0]?.title || ''}}]}); });
                 dlg.querySelector('[data-ct-dashboard]').addEventListener('click', () => go({name: 'Mon tableau de bord', icon: '📊', widgets: board().widgets.map(x => ({type: x.type, width: x.width, limit: x.limit, config: x.config}))}));
                 dlg.querySelectorAll('[data-ct-mine]').forEach(b => b.addEventListener('click', () => { const t = mine.find(x => x.id === b.dataset.ctMine); go({...t, id: newId(), hidden: false, name: (t.name || 'Mon onglet') + ' (copie)'}); }));
                 dlg.querySelectorAll('[data-ct-tpl]').forEach(b => b.addEventListener('click', () => go(TEMPLATES[Number(b.dataset.ctTpl)])));
@@ -258,6 +312,13 @@
         } else if (x.type === 'tab_note') {
             kind = '📝 Texte'; label = c.title || 'Texte libre';
             settings = `<div class="form-grid h-ct-piece-set"><label>Titre<input data-ct-p="title" value="${esc(c.title || '')}" placeholder="À faire cette semaine"></label><label class="span-2">Texte<textarea data-ct-p="text" rows="3" placeholder="Une note, une consigne, des liens à suivre…">${esc(c.text || '')}</textarea></label></div>`;
+        } else if (x.type === 'tab_web') {
+            kind = '🌐 ' + i18n('Page web'); label = c.title || c.url || i18n('Page web');
+            settings = `<div class="form-grid h-ct-piece-set"><label class="span-2">${esc(i18n('Adresse'))}<input data-ct-p="url" type="url" value="${esc(c.url || '')}" placeholder="https://archives.example.fr/…"></label><label>${esc(i18n('Titre'))} <small>(${esc(i18n('facultatif'))})</small><input data-ct-p="title" value="${esc(c.title || '')}"></label>
+                <label>${esc(i18n('Hauteur'))} <select data-ct-p="height">${HEIGHTS.map(([v, l]) => `<option value="${v}" ${String(c.height || 800) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label></div>`;
+        } else if (x.type === 'tab_fiche') {
+            kind = '📒 ' + i18n('Fiche'); label = c.title || i18n('Fiche');
+            settings = `<div class="form-grid h-ct-piece-set"><label class="span-2">${esc(i18n('Fiche'))} ${ficheSelect(c.sheet, 'data-ct-p="sheet"')}</label></div>`;
         } else if (String(x.type).startsWith('cw_')) kind = '✨ À moi';
         return `<li data-ct-i="${i}"><header><span><small class="h-ct-kind">${kind}</small> <strong>${esc(label)}</strong>${known.has(x.type) ? '' : ' <small class="muted">(n’existe plus ici)</small>'}</span>${tools}</header>${settings}</li>`;
     }
@@ -265,7 +326,7 @@
     /* ─── Réglages d'un onglet ─── */
     async function editTab(t, existing) {
         const token = ++S().workspaceToken;
-        await Promise.all([loadMyLists(), loadVillages()]); if (token !== S().workspaceToken) return;
+        await Promise.all([loadMyLists(), loadVillages(), loadFiches()]); if (token !== S().workspaceToken) return;
         t.widgets = Array.isArray(t.widgets) ? t.widgets : [];
         const app = A();
         const afterOptions = [['', 'à la fin (avant Réglages)'], ...Object.entries(app.appModules).filter(([k]) => !['jeu', 'maintenance'].includes(k)).map(([k, v]) => [k, 'après « ' + v[1] + ' »'])];
@@ -284,10 +345,11 @@
                         ${t.widgets.length ? `<ol class="h-ct-widgets">${t.widgets.map((x, i) => pieceHtml(x, i, known)).join('')}</ol>` : '<p class="muted">La page est vide : ajoute une première pièce ci-dessous.</p>'}
                         <div class="h-ct-add"><label>＋ Ajouter <select data-ct-wadd><option value="">choisir…</option>
                             <optgroup label="📝 Texte"><option value="note">Texte libre (titre, note, consigne)</option></optgroup>
+                            <optgroup label="${esc(i18n('🌐 Page web et 📒 Fiche'))}"><option value="web">${esc(i18n('🌐 Page web (archives en ligne) et notes'))}</option>${fichesList.length ? `<option value="fiche">${esc(i18n('📒 Une Fiche'))}</option>` : ''}</optgroup>
                             ${screenTargets().map(([g, items]) => `<optgroup label="📺 ${esc(g)}">${items.map(([v, l]) => `<option value="screen|${esc(v)}">${esc(l)}</option>`).join('')}</optgroup>`).join('')}
                             ${myLists.length ? `<optgroup label="📋 Mes listes">${myLists.map(l => `<option value="screen|mylist:${Number(l.id)}">${esc((l.icon || '📋') + ' ' + l.name)}</option>`).join('')}</optgroup>` : ''}
                             <optgroup label="👤 Une personne"><option value="screen|person:">Fiche d’une personne…</option></optgroup>
-                            ${(() => { const all = catalog().filter(([k]) => !['app_screen', 'tab_note'].includes(k)); const own = all.filter(([k]) => String(k).startsWith('cw_')); const appW = all.filter(([k]) => !String(k).startsWith('cw_')); return `${own.length ? `<optgroup label="✨ Mes widgets et graphiques">${own.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>` : ''}<optgroup label="🧱 Widgets de l’app">${appW.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`; })()}</select></label>
+                            ${(() => { const all = catalog().filter(([k]) => !['app_screen', 'tab_note', 'tab_web', 'tab_fiche'].includes(k)); const own = all.filter(([k]) => String(k).startsWith('cw_')); const appW = all.filter(([k]) => !String(k).startsWith('cw_')); return `${own.length ? `<optgroup label="✨ Mes widgets et graphiques">${own.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>` : ''}<optgroup label="🧱 Widgets de l’app">${appW.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join('')}</optgroup>`; })()}</select></label>
                         <span class="h-ct-create"><span class="muted">Créer d’abord :</span><button type="button" class="button small secondary" data-ct-go="widget_editor">🧱 un widget</button><button type="button" class="button small secondary" data-ct-go="stats_editor">📊 un graphique</button><button type="button" class="button small secondary" data-ct-go="my_lists">📋 une liste</button><button type="button" class="button small secondary" data-ct-go="block_editor">🧩 un bloc de fiche</button></span></div></section>`}
                 <div class="page-actions"><button type="button" class="button" data-ct-save>Enregistrer</button><button type="button" class="button secondary" data-ct-saveopen>Enregistrer et ouvrir</button><button type="button" class="button secondary" data-ct-back>Annuler</button></div></section>`;
             const ws = app.$('#workspace');
@@ -298,6 +360,8 @@
             ws.querySelector('[data-ct-wadd]')?.addEventListener('change', e => {
                 const v = e.target.value; if (!v) return;
                 if (v === 'note') t.widgets.push(note('', '', 6));
+                else if (v === 'web') t.widgets.push({type: 'tab_web', width: '12', config: {url: '', title: '', height: 800}});
+                else if (v === 'fiche') t.widgets.push({type: 'tab_fiche', width: '12', config: {sheet: fichesList[0]?.id || 0, title: fichesList[0]?.title || ''}});
                 else if (v.startsWith('screen|')) { const target = v.slice(7); t.widgets.push(sc(target, 12, 560, {sidebar: false})); }
                 else t.widgets.push(w(v, ext.customWidgetDefs?.()?.[v]?.width || '6'));
                 paint();
@@ -309,7 +373,8 @@
             const cfgOf = i => (t.widgets[i].config ||= {});
             ws.querySelectorAll('[data-ct-p]').forEach(el => el.addEventListener(el.tagName === 'SELECT' || el.type === 'checkbox' ? 'change' : 'input', () => {
                 const i = Number(el.closest('[data-ct-i]').dataset.ctI), k = el.dataset.ctP, c = cfgOf(i);
-                c[k] = el.type === 'checkbox' ? el.checked : k === 'height' ? Number(el.value) || 560 : el.value;
+                c[k] = el.type === 'checkbox' ? el.checked : k === 'height' ? Number(el.value) || 560 : k === 'sheet' ? Number(el.value) || 0 : el.value;
+                if (k === 'sheet') c.title = fichesList.find(f => f.id === Number(el.value))?.title || '';
                 if (k === 'target') { if (el.value.startsWith('person:')) c.target = 'person:' + (Number(c.personId) || ''); paint(); }
             }));
             ws.querySelectorAll('[data-ct-i]').forEach(li => { const x = t.widgets[Number(li.dataset.ctI)]; if (x?.type === 'app_screen' && placeKind(x.config?.target)) bindPlace(li, cfgOf(Number(li.dataset.ctI))); });
@@ -346,6 +411,8 @@
             const c = x.config && typeof x.config === 'object' ? x.config : {};
             if (x.type === 'app_screen') return {target: validTarget(c.target) ? c.target : 'module:carte', title: str(c.title, 120), personName: str(c.personName, 120), personId: Number(c.personId) || 0, height: Math.max(240, Math.min(2000, Number(c.height) || 560)), sidebar: !!c.sidebar, ...(validTarget(c.target) ? cleanPlace(c) : {})};
             if (x.type === 'tab_note') return {title: str(c.title, 120), text: str(c.text, 8000)};
+            if (x.type === 'tab_web') return {url: webUrlOk(c.url) ? str(String(c.url).trim(), 1500) : '', title: str(c.title, 120), height: Math.max(320, Math.min(2000, Number(c.height) || 800))};
+            if (x.type === 'tab_fiche') return {sheet: Number(c.sheet) || 0, title: str(c.title, 120)};
             return c;
         };
         const widgets = (Array.isArray(t.widgets) ? t.widgets : []).filter(x => x && types.has(x.type)).slice(0, 60).map(x => app.dashboardNewWidget(x.type, {...x, config: cleanConfig(x)}));
@@ -357,7 +424,7 @@
     function shareTab(t) {
         const own = (t.widgets || []).filter(x => String(x.type).startsWith('cw_')).length;
         const file = {kind: FILE_KIND, version: 1, tab: {name: t.name, icon: t.icon, intro: t.intro, kind: t.kind, after: t.after, target: t.target,
-            widgets: (t.widgets || []).filter(x => !String(x.type).startsWith('cw_')).map(x => ({type: x.type, width: x.width, limit: x.limit, ...(['app_screen', 'tab_note'].includes(x.type) ? {config: x.config} : {})}))}};
+            widgets: (t.widgets || []).filter(x => !String(x.type).startsWith('cw_')).map(x => ({type: x.type, width: x.width, limit: x.limit, ...(['app_screen', 'tab_note', 'tab_web', 'tab_fiche'].includes(x.type) ? {config: x.config} : {})}))}};
         const name = `${String(t.name || 'onglet').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase() || 'onglet'}.lcnda-onglet.json`;
         if (ext.downloadText) ext.downloadText(name, JSON.stringify(file, null, 2), 'application/json');
         if (own) toast(`${own} widget${own > 1 ? 's' : ''} à toi ne part${own > 1 ? 'ent' : ''} pas avec le fichier : partage-les depuis l’Éditeur de widgets.`);
@@ -370,4 +437,5 @@
     }
     setTimeout(loadMyLists, 2500); // pour nommer « Mes listes » posées dans un onglet
     ext.cleanCustomTab = t => cleanTab(t); // pour les tests
+    ext.tabsEditorStart = kind => { S().tabsEditorStart = kind; S().maintenanceTab = 'tabs_editor'; A().setModule('maintenance'); };
 })();

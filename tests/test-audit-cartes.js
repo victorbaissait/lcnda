@@ -234,10 +234,11 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             await p.setViewportSize({width: 900, height: 600});
             await p.evaluate(() => { window.LCNDA_APP.state.graphZoom = 1.8; }); await p.evaluate(() => window.LCNDA_PARTS.renderGraph());
             await p.waitForSelector('.gp-minimap:not([hidden]) canvas', {timeout: 5000});
-            const before = await p.$eval('.tree-stage', s => s.scrollLeft);
+            await sleep(400); await p.$eval('.tree-stage', s => { s.scrollLeft = 0; s.scrollTop = 0; }); await sleep(150);
+            const before = await p.$eval('.tree-stage', s => s.scrollLeft + s.scrollTop);
             const box = await (await p.$('.gp-minimap canvas')).boundingBox();
-            await p.mouse.click(box.x + box.width - 2, box.y + box.height / 2);
-            assert.ok(await p.$eval('.tree-stage', s => s.scrollLeft) !== before, 'déplacé');
+            await p.mouse.click(box.x + box.width - 3, box.y + box.height - 3);
+            await sleep(100); assert.ok(await p.$eval('.tree-stage', s => s.scrollLeft + s.scrollTop) > before, 'déplacé');
             await p.setViewportSize({width: 1440, height: 900}); await p.evaluate(() => { window.LCNDA_APP.state.graphZoom = 1; });
         });
         await t('Graphiques : 🧩 grand arbre en feuilles à assembler — plan, recouvrement, repères, feuilles nommées', async () => {

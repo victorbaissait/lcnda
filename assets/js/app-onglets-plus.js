@@ -244,6 +244,7 @@
                 <div class="segmented tp-filter" role="tablist">${[['all', i18n('Tous')], ['rec', i18n('Conseillés ({n})', {n: rec.length})], ['menu', i18n('Déjà dans le menu ({n})', {n: shown.length + ownOn})], ['order', i18n('⠿ Ordre du menu')]].map(([k, l]) => `<button type="button" role="tab" data-tp-filter="${k}" class="${f === k ? 'is-active' : ''}" aria-selected="${f === k}">${esc(l)}</button>`).join('')}</div>
                 <div class="tp-list">${groups || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(i18n('Aucun onglet ne correspond.'))}</span></p>`}</div>
                 ${f === 'order' ? '' : `<p class="ui-hint">${esc(i18n('Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé).'))}</p>`}
+                <p class="tp-own"><button type="button" class="button small secondary" data-tp-newpage="web">${esc(i18n('🌐 Une page web (archives en ligne) et mes notes…'))}</button> <button type="button" class="button small secondary" data-tp-newpage="fiche">${esc(i18n('📒 Une Fiche comme onglet…'))}</button></p>
                 <p><button type="button" class="link-button" data-tp-editor>${esc(i18n('↗ Faire un onglet à moi (Éditeur d’onglets)'))}</button></p>`;
         }
         function openCatalog() {
@@ -267,6 +268,7 @@
                         const f = e.target.closest('[data-tp-filter]'); if (f) { dlgState.filter = f.dataset.tpFilter; return refreshDialog(); }
                         const mo = e.target.closest('[data-tp-more]'); if (mo) { addMore(mo.dataset.tpMore); return; }
                         if (e.target.closest('[data-tp-own-group]')) { const snap = snapshot(); ls.put('genealogie-menu-order', JSON.stringify(ownGrouped(menuKeys()))); A()?.applyMenuOrder?.(); paintPlus(); orderChanged = true; refreshDialog(); A()?.undoToast?.(i18n('Tes onglets sont regroupés à la fin du menu'), {undo: () => { restore(snap); refreshDialog(); }}); return; }
+                        const np = e.target.closest('[data-tp-newpage]'); if (np) { dlg.close(); return ext.tabsEditorStart ? ext.tabsEditorStart(np.dataset.tpNewpage) : null; } // 🌐 📒 heritage-tabs.js (audit §18)
                         if (e.target.closest('[data-tp-editor]')) { dlg.close(); return A()?.openCustomScreen ? A().openCustomScreen('maint:tabs_editor') : (A().state.maintenanceTab = 'tabs_editor', A().setModule('maintenance')); }
                         if (e.target.closest('[data-tp-usage]')) { dlg.close(); A().state.maintenanceTab = 'nav_menus'; A().setModule('maintenance'); setTimeout(() => doc.getElementById('lc-usage')?.scrollIntoView({block: 'start'}), 900); }
                     });

@@ -66,7 +66,7 @@
             run: (k, d, o) => openText(k === 'image' ? imgHtml(d.media) : k === 'rows' ? `<h1>${esc(d.name || o.title || '')}</h1>${rowsHtml(d.rows)}` : d.html, d.name || o.title || T('Document'))},
         {key: 'sheet', icon: '🧾', label: 'Dans le Tableur', group: 'Tableur', kinds: ['rows'], ready: () => !!ext.openRowsInSheet, run: (k, d, o) => ext.openRowsInSheet({name: d.name || o.title || T('Tableau'), rows: d.rows})},
         {key: 'site', icon: '🌐', label: 'Sur une page de mon site…', group: 'Mon site web', kinds: ['image', 'video', 'audio', 'text', 'svg'], ready: () => !!ext.siteReceive,
-            run: (k, d, o) => ext.siteReceive({type: k, media: d.media || null, html: d.html || '', svg: d.svg || '', name: d.name || o.title || ''}, {anchor: o.anchor})},
+            run: (k, d, o) => ext.siteReceive({type: k, media: d.media || null, html: d.html || (d.subs || []).map(x => `<p>${esc(x.text || '')}</p>`).join(''), svg: d.svg || '', name: d.name || o.title || ''}, {anchor: o.anchor})},
         {key: 'retouch', icon: '🎚️', label: 'Dans la Retouche des photos', group: 'Retouche', kinds: ['image'], ready: () => !!ext.retouchMedia, run: (k, d) => ext.retouchMedia(d.media)},
         {key: 'compare', icon: '🔍', label: 'Comparer avec une autre photo', group: 'Comparer deux photos', kinds: ['image'], ready: () => !!ext.photoCompareWith, run: (k, d) => ext.photoCompareWith(d.media.id)},
         {key: 'atelier', icon: '📜', label: 'Dans l’Atelier de transcription', group: 'Atelier de transcription', kinds: ['image'], ready: () => !!ext.openActTranscriber,
