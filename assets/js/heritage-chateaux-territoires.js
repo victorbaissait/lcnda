@@ -233,20 +233,20 @@
         const c = r.raw;
         const rows = [[T('Sorte'), r.type], [T('État'), r.state === 'non précisé' ? T('non précisé dans Wikidata') : r.state], [T('Construit'), c.y0 != null ? `${yr(c.y0)} (${centuryLabel(c.y0)})` : ''],
             [T('Détruit ou disparu'), yr(c.y1)], [T('Commune'), [r.commune, r.region, r.country].filter(Boolean).join(', ')], [T('Protection'), r.protection], [T('Se visite'), c.v ? T('oui (d’après Wikidata)') : '']].filter(x => x[1]);
-        return `<div class="ct-card">${c.im ? `<figure class="ct-img"><img src="${esc(imgUrl(c.im))}" alt="${esc(r.name)}" loading="lazy" onerror="this.closest('figure').hidden=true"><figcaption><small>${link(fileUrl(c.im), T('Image Wikimedia Commons (auteur et licence)'))}</small></figcaption></figure>` : ''}
+        return `<div class="cht-card">${c.im ? `<figure class="cht-img"><img src="${esc(imgUrl(c.im))}" alt="${esc(r.name)}" loading="lazy" onerror="this.closest('figure').hidden=true"><figcaption><small>${link(fileUrl(c.im), T('Image Wikimedia Commons (auteur et licence)'))}</small></figcaption></figure>` : ''}
             ${r.local && r.local !== r.name ? `<p class="muted">${esc(r.local)}</p>` : ''}
             <dl class="data-list">${rows.map(([k, v]) => `<div class="data-row"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
             ${(c.ow || []).length ? `<h4>${esc(T('Propriétaires et seigneurs connus'))}</h4><ul>${c.ow.map(o => `<li>${esc(ownerText(o))}</li>`).join('')}</ul>` : ''}
             <p class="h-links">${[r.wikipedia ? link(r.wikipedia, T('Wikipédia')) : '', link(r.wikidata, 'Wikidata'), r.merimee ? link(`https://pop.culture.gouv.fr/notice/merimee/${r.merimee}`, T('Mérimée (Monuments historiques)')) : '',
-            r.lat != null ? `<button type="button" class="link-button" data-ct-map="${r.lat},${r.lon}">${esc(T('🗺 Voir sur la carte'))}</button>` : ''].filter(Boolean).join(' · ')}</p>
+            r.lat != null ? `<button type="button" class="link-button" data-cht-map="${r.lat},${r.lon}">${esc(T('🗺 Voir sur la carte'))}</button>` : ''].filter(Boolean).join(' · ')}</p>
             <p><small class="muted">${esc(T('Source : Wikidata (CC0), {q}.', {q: c.q}))}</small></p></div>`;
     }
     function dialog(title, body) {
-        const d = document.createElement('dialog'); d.className = 'modal ct-dlg';
-        d.innerHTML = `<div class="modal-head"><h2>${esc(title)}</h2><button type="button" class="icon-button" data-ct-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">✕</button></div><div class="modal-body">${body}</div>`;
+        const d = document.createElement('dialog'); d.className = 'modal cht-dlg';
+        d.innerHTML = `<div class="modal-head"><h2>${esc(title)}</h2><button type="button" class="icon-button" data-cht-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">✕</button></div><div class="modal-body">${body}</div>`;
         document.body.appendChild(d);
         d.addEventListener('close', () => d.remove());
-        d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-ct-close]')) d.close(); if (e.target.closest('[data-ct-map]')) d.close(); });
+        d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-cht-close]')) d.close(); if (e.target.closest('[data-cht-map]')) d.close(); });
         if (d.showModal) d.showModal(); else d.setAttribute('open', '');
         return d;
     }
@@ -255,25 +255,25 @@
         const it = r.raw;
         const rows = [[T('Sorte'), r.kind], [T('Dates'), span(it.y0, it.y1)], [T('Capitale'), r.capital], [T('Faisait partie de'), r.parent], [T('Avant'), r.before], [T('Après'), r.after],
             [T('Limites'), it.sh != null ? T('contour dessiné (Wikimedia Commons)') : T('limites inconnues : seulement un point')]].filter(x => x[1]);
-        return `<div class="ct-card">${it.arms ? `<figure class="ct-arms"><img src="${esc(imgUrl(it.arms, 120))}" alt="${esc(T('Armoiries'))}" loading="lazy" onerror="this.closest('figure').hidden=true"></figure>` : ''}
+        return `<div class="cht-card">${it.arms ? `<figure class="cht-arms"><img src="${esc(imgUrl(it.arms, 120))}" alt="${esc(T('Armoiries'))}" loading="lazy" onerror="this.closest('figure').hidden=true"></figure>` : ''}
             <dl class="data-list">${rows.map(([k, v]) => `<div class="data-row"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>${extra}
             <p class="h-links">${[r.wikipedia ? link(r.wikipedia, T('Wikipédia')) : '', link(r.wikidata, 'Wikidata')].filter(Boolean).join(' · ')}</p>
             <p><small class="muted">${esc(T('Source : Wikidata (CC0), {q}.', {q: it.q}))}${it.sh != null && terrCtx?.shapes?.shapes[it.sh] ? ' ' + esc(T('Contour : {f}, licence {l}.', {f: terrCtx.shapes.shapes[it.sh].file, l: terrCtx.shapes.shapes[it.sh].licence})) : ''}</small></p></div>`;
     }
     const openTerr = r => dialog(`👑 ${r.name}`, terrCardHtml(r));
     document.addEventListener('click', e => {
-        const m = e.target.closest?.('[data-ct-map]');
-        if (m) { e.preventDefault(); const [lat, lon] = m.dataset.ctMap.split(',').map(Number); const st = S(); st.mapCenter = {lat, lon}; st.mapZoom = 13; save({castles: true}); A().persistUiState?.(); A().setModule?.('carte'); return; }
-        const c = e.target.closest?.('[data-ct-castle]');
-        if (c) { e.preventDefault(); const [code, q] = c.dataset.ctCastle.split(':'); loadCountry(code).then(f => { const it = f.items.find(x => x.q === q); if (it) openCastle(castleRow(it, code)); }); return; }
-        const t = e.target.closest?.('[data-ct-terr]');
-        if (t) { e.preventDefault(); loadAllTerr().then(ctx => { const it = ctx.terr.byQ.get(t.dataset.ctTerr); if (it) openTerr(terrRow(it, ctx.terr)); }); }
+        const m = e.target.closest?.('[data-cht-map]');
+        if (m) { e.preventDefault(); const [lat, lon] = m.dataset.chtMap.split(',').map(Number); const st = S(); st.mapCenter = {lat, lon}; st.mapZoom = 13; save({castles: true}); A().persistUiState?.(); A().setModule?.('carte'); return; }
+        const c = e.target.closest?.('[data-cht-castle]');
+        if (c) { e.preventDefault(); const [code, q] = c.dataset.chtCastle.split(':'); loadCountry(code).then(f => { const it = f.items.find(x => x.q === q); if (it) openCastle(castleRow(it, code)); }); return; }
+        const t = e.target.closest?.('[data-cht-terr]');
+        if (t) { e.preventDefault(); loadAllTerr().then(ctx => { const it = ctx.terr.byQ.get(t.dataset.chtTerr); if (it) openTerr(terrRow(it, ctx.terr)); }); }
     });
 
     /* ─────────── 🏰 Châteaux de la commune et alentours ─────────── */
     function castleLi(x) {
         const c = x.c, st = condition(c);
-        return `<li><button type="button" class="link-button" data-ct-castle="${esc(x.code)}:${esc(c.q)}">${KIND_ICON[c.k] || '🏰'} ${esc(c.n)}</button>
+        return `<li><button type="button" class="link-button" data-cht-castle="${esc(x.code)}:${esc(c.q)}">${KIND_ICON[c.k] || '🏰'} ${esc(c.n)}</button>
             <small class="muted">${esc([KINDS[c.k], st !== 'non précisé' ? st : '', c.y0 != null ? centuryLabel(c.y0) : '', x.here ? '' : T('à {d} km', {d: String(Math.round(x.d * 10) / 10).replace('.', ',')})].filter(Boolean).join(' · '))}</small>
             ${(c.ow || []).length ? `<br><small>${esc(T('Seigneurs, propriétaires : {l}', {l: c.ow.slice(0, 3).map(ownerText).join(' ; ')}))}</small>` : ''}</li>`;
     }
@@ -289,22 +289,22 @@
         const nm = place.name || T('cette commune');
         const first = here.length ? T('{n} à {c}, {m} à moins de {r} km.', {n: A().plural ? A().plural(here.length, T('château connu'), T('châteaux connus')) : here.length, c: nm, m: near.length, r: radius})
             : T('Aucun château connu à {c} même, mais {m} à moins de {r} km.', {c: nm, m: near.length, r: radius});
-        host.innerHTML = `<p>${esc(first)}</p><ul class="ct-list">${[...here, ...near].slice(0, 6).map(castleLi).join('')}</ul>
-            ${list.length > 6 ? `<details class="mp-more"><summary>${esc(T('▸ plus ({n})', {n: list.length - 6}))}</summary><ul class="ct-list">${[...here, ...near].slice(6, 120).map(castleLi).join('')}</ul></details>` : ''}
-            <p class="ct-ctl"><label>${esc(T('Autour :'))} <select data-ct-radius>${[5, 10, 20, 30].map(k => `<option value="${k}" ${k === radius ? 'selected' : ''}>${k} km</option>`).join('')}</select></label>
-            ${ext.dataLists ? ` · <button type="button" class="link-button" data-ct-list="chateaux">${esc(T('Tous les châteaux (Listes)'))}</button>` : ''}</p>
+        host.innerHTML = `<p>${esc(first)}</p><ul class="cht-list">${[...here, ...near].slice(0, 6).map(castleLi).join('')}</ul>
+            ${list.length > 6 ? `<details class="mp-more"><summary>${esc(T('▸ plus ({n})', {n: list.length - 6}))}</summary><ul class="cht-list">${[...here, ...near].slice(6, 120).map(castleLi).join('')}</ul></details>` : ''}
+            <p class="cht-ctl"><label>${esc(T('Autour :'))} <select data-cht-radius>${[5, 10, 20, 30].map(k => `<option value="${k}" ${k === radius ? 'selected' : ''}>${k} km</option>`).join('')}</select></label>
+            ${ext.dataLists ? ` · <button type="button" class="link-button" data-cht-list="chateaux">${esc(T('Tous les châteaux (Listes)'))}</button>` : ''}</p>
             <p><small class="muted">${esc(T('Source : Wikidata (CC0) — ce que les contributeurs y ont décrit ; un château absent n’a peut-être pas encore de fiche.'))}</small></p>`;
-        host.querySelector('[data-ct-radius]').addEventListener('change', e => { const r = Number(e.target.value) || 10; save({radius: r}); castlesInto(host, place, {radius: r}); });
+        host.querySelector('[data-cht-radius]').addEventListener('change', e => { const r = Number(e.target.value) || 10; save({radius: r}); castlesInto(host, place, {radius: r}); });
         return true;
     }
-    document.addEventListener('click', e => { const l = e.target.closest?.('[data-ct-list]'); if (l) { e.preventDefault(); const st = S(); st.listType = 'data:' + l.dataset.ctList; ext.openDataList ? ext.openDataList(l.dataset.ctList) : A().setModule?.('listes'); } });
+    document.addEventListener('click', e => { const l = e.target.closest?.('[data-cht-list]'); if (l) { e.preventDefault(); const st = S(); st.listType = 'data:' + l.dataset.chtList; ext.openDataList ? ext.openDataList(l.dataset.chtList) : A().setModule?.('listes'); } });
 
     /* ─────────── 👑 Territoires d'autrefois (lieu) ─────────── */
     function terrLine(r, year) {
         const bits = [];
-        if (r.drawn.length) bits.push(r.drawn.slice(0, 3).map(it => `<button type="button" class="link-button" data-ct-terr="${esc(it.q)}">${esc(it.n)}</button>`).join(', '));
+        if (r.drawn.length) bits.push(r.drawn.slice(0, 3).map(it => `<button type="button" class="link-button" data-cht-terr="${esc(it.q)}">${esc(it.n)}</button>`).join(', '));
         if (r.snap) bits.push(`${esc(r.snap.name)}${r.snap.subject && r.snap.subject !== r.snap.name ? ` <small class="muted">(${esc(r.snap.subject)})</small>` : ''} <small class="muted" title="${esc(T('Carte du monde de {y}, tracé approximatif (historical-basemaps)', {y: String(r.snap.year)}))}">${esc(T('carte de {y}', {y: yr(r.snap.year)}))}</small>`);
-        if (r.seats.length) bits.push(esc(T('siège de : {l}', {l: ''})) + r.seats.slice(0, 3).map(it => `<button type="button" class="link-button" data-ct-terr="${esc(it.q)}">${esc(it.n)}</button>`).join(', '));
+        if (r.seats.length) bits.push(esc(T('siège de : {l}', {l: ''})) + r.seats.slice(0, 3).map(it => `<button type="button" class="link-button" data-cht-terr="${esc(it.q)}">${esc(it.n)}</button>`).join(', '));
         return bits.join(' · ');
     }
     /** les étapes du lieu à travers les cartes anciennes : [{from, to, name}] */
@@ -324,17 +324,17 @@
         const r = placeAt(ctx, lat, lon, y), st = steps(ctx, lat, lon);
         const seatsAll = ctx.terr.items.filter(it => it.la != null && !it.pc && Math.abs(it.la - lat) < 0.05 && km(lat, lon, it.la, it.lo) < 4);
         if (!r.any && !st.length && !seatsAll.length) { host.innerHTML = ''; return false; }
-        host.innerHTML = `<p class="ct-ask"><label>${esc(T('Dans quel territoire était ce lieu en'))} <input type="number" data-ct-year min="-1" max="2025" step="1" value="${esc(String(y))}" aria-label="${esc(T('Année'))}"></label> ?</p>
-            <p class="ct-answer">${r.any ? terrLine(r, y) : `<span class="muted">${esc(y >= CSHAPES_FROM ? T('Après 1815 : vois « 🗺 Le pays à l’époque ».') : T('Pas de territoire connu à cette date pour ce lieu.'))}</span>`}</p>
+        host.innerHTML = `<p class="cht-ask"><label>${esc(T('Dans quel territoire était ce lieu en'))} <input type="number" data-cht-year min="-1" max="2025" step="1" value="${esc(String(y))}" aria-label="${esc(T('Année'))}"></label> ?</p>
+            <p class="cht-answer">${r.any ? terrLine(r, y) : `<span class="muted">${esc(y >= CSHAPES_FROM ? T('Après 1815 : vois « 🗺 Le pays à l’époque ».') : T('Pas de territoire connu à cette date pour ce lieu.'))}</span>`}</p>
             ${st.length ? `<details class="mp-more"><summary>${esc(T('▸ plus : ce lieu sur les cartes anciennes'))}</summary><ul class="mc-rows">${st.map(s => `<li><b>${esc(s.from === s.to ? yr(s.from) : `${yr(s.from)}–${yr(s.to)}`)}</b> : ${esc(s.name)}</li>`).join('')}</ul></details>` : ''}
-            ${seatsAll.length ? `<p>${esc(T('Ce lieu a été le siège de :'))} ${seatsAll.slice(0, 8).map(it => `<button type="button" class="link-button" data-ct-terr="${esc(it.q)}">${esc(it.n)}</button> <small class="muted">${esc(span(it.y0, it.y1))}</small>`).join(', ')}</p>` : ''}
+            ${seatsAll.length ? `<p>${esc(T('Ce lieu a été le siège de :'))} ${seatsAll.slice(0, 8).map(it => `<button type="button" class="link-button" data-cht-terr="${esc(it.q)}">${esc(it.n)}</button> <small class="muted">${esc(span(it.y0, it.y1))}</small>`).join(', ')}</p>` : ''}
             <p><small class="muted">${esc(T('Sources : Wikidata (CC0) ; cartes anciennes historical-basemaps (A. Ourednik, GPL-3.0), tracés approximatifs, à vérifier ; contours Wikimedia Commons (licence de chaque fichier).'))}</small></p>`;
-        host.querySelector('[data-ct-year]').addEventListener('change', e => { const v = Math.round(Number(e.target.value)); if (!Number.isFinite(v)) return; save({year: v}); terrInto(host, place, {year: v}); });
+        host.querySelector('[data-cht-year]').addEventListener('change', e => { const v = Math.round(Number(e.target.value)); if (!Number.isFinite(v)) return; save({year: v}); terrInto(host, place, {year: v}); });
         return true;
     }
 
     /* ─────────── la fiche d'un village (lieu) ─────────── */
-    const panel = (id, title, sub = '') => `<section class="maintenance-panel cplus-panel ct-panel" data-ct-part="${id}"><h3>${esc(title)}${sub ? ` <small class="muted">${esc(sub)}</small>` : ''}</h3><div data-ct-body></div></section>`;
+    const panel = (id, title, sub = '') => `<section class="maintenance-panel cplus-panel cht-panel" data-cht-part="${id}"><h3>${esc(title)}${sub ? ` <small class="muted">${esc(sub)}</small>` : ''}</h3><div data-cht-body></div></section>`;
     function villagePlace(village) {
         const pli = village.querySelector('[data-pli-host]'), head = village.querySelector('.page-header p, header p')?.textContent || '';
         const name = pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim();
@@ -343,18 +343,18 @@
     }
     function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
-        const village = ws.querySelector('.h-village:not([data-ct])');
+        const village = ws.querySelector('.h-village:not([data-cht])');
         if (!village) return;
-        village.dataset.ct = '1';
+        village.dataset.cht = '1';
         const place = villagePlace(village); if (!place.name || place.lat == null) return;
         const parts = [on('place_castles') ? panel('castles', T('🏰 Châteaux de la commune et alentours')) : '', on('place_terr') ? panel('terr', T('👑 Territoires d’autrefois')) : ''].join('');
         if (!parts) return;
-        const box = `<div class="ct-place" data-ct-host>${parts}</div>`;
+        const box = `<div class="cht-place" data-cht-host>${parts}</div>`;
         const anchor = village.querySelector('[data-mr-host], .mr-place') || village.querySelector('[data-lp-host]') || village.querySelector('.cplus-place') || village.querySelector('.h-village-grid');
         if (anchor) anchor.insertAdjacentHTML('afterend', box); else village.insertAdjacentHTML('beforeend', box);
-        village.querySelectorAll('[data-ct-host] [data-ct-part]').forEach(async sec => {
-            const body = sec.querySelector('[data-ct-body]');
-            const ok = sec.dataset.ctPart === 'castles' ? await castlesInto(body, place) : await terrInto(body, place);
+        village.querySelectorAll('[data-cht-host] [data-cht-part]').forEach(async sec => {
+            const body = sec.querySelector('[data-cht-body]');
+            const ok = sec.dataset.chtPart === 'castles' ? await castlesInto(body, place) : await terrInto(body, place);
             if (!ok) sec.remove();
         });
     }
@@ -391,14 +391,14 @@
                 const m = [...li.querySelectorAll(':scope > span.muted')].pop(); // « trop tôt : … » (le premier .muted est « (Naissance, 1702) »)
                 const html = `${esc(T('à cette date, ce lieu était dans :'))} <span class="mc-then">${terrLine({...res, seats: []}, r.year)}</span>`;
                 if (m) m.outerHTML = html; else li.insertAdjacentHTML('beforeend', ' → ' + html);
-            } else if (res.drawn.length) li.insertAdjacentHTML('beforeend', ` <small class="ct-in">👑 ${terrLine({snap: null, drawn: res.drawn, seats: []}, r.year)}</small>`);
-            li.classList.add('ct-done');
+            } else if (res.drawn.length) li.insertAdjacentHTML('beforeend', ` <small class="cht-in">👑 ${terrLine({snap: null, drawn: res.drawn, seats: []}, r.year)}</small>`);
+            li.classList.add('cht-done');
         });
-        if (host.querySelector('.ct-done') && !host.querySelector('.ct-src')) (host.querySelector('.mc-src') || host.lastElementChild)?.insertAdjacentHTML('afterend', `<small class="ct-src muted">${esc(T('👑 Avant 1816 : cartes anciennes historical-basemaps (GPL-3.0, tracés approximatifs) ; territoires Wikidata (CC0).'))}</small>`);
+        if (host.querySelector('.cht-done') && !host.querySelector('.cht-src')) (host.querySelector('.mc-src') || host.lastElementChild)?.insertAdjacentHTML('afterend', `<small class="cht-src muted">${esc(T('👑 Avant 1816 : cartes anciennes historical-basemaps (GPL-3.0, tracés approximatifs) ; territoires Wikidata (CC0).'))}</small>`);
     }
     function decoratePerson() {
         if (!on('person_terr')) return;
-        document.querySelectorAll('#workspace [data-mc-host]').forEach(h => { if (h.dataset.ctDone || !h.querySelector('.mc-rows')) return; h.dataset.ctDone = '1'; personInto(h); });
+        document.querySelectorAll('#workspace [data-mc-host]').forEach(h => { if (h.dataset.chtDone || !h.querySelector('.mc-rows')) return; h.dataset.chtDone = '1'; personInto(h); });
     }
 
     /* ─────────── 🗺 la Carte : « 👑 Territoires d'autrefois » ─────────── */
@@ -409,21 +409,21 @@
     ext.mapSetup.push(() => {
         if (!on('map')) return;
         const strip = document.querySelector('.map-layout .tool-strip'), stage = document.getElementById('map-stage');
-        if (!strip || !stage || strip.querySelector('.ct-ctl') || document.getElementById('ct-layer')) return; // une seule fois par carte
-        const layer = document.createElement('div'); layer.id = 'ct-layer'; layer.className = 'ct-layer'; layer.innerHTML = '<svg aria-hidden="true"></svg>';
+        if (!strip || !stage || strip.querySelector('.cht-ctl') || document.getElementById('cht-layer')) return; // une seule fois par carte
+        const layer = document.createElement('div'); layer.id = 'cht-layer'; layer.className = 'cht-layer'; layer.innerHTML = '<svg aria-hidden="true"></svg>';
         stage.insertBefore(layer, document.getElementById('map-overlay') || null);
-        const p = settings(), ctl = document.createElement('span'); ctl.className = 'ct-ctl';
-        ctl.innerHTML = `<label class="ui-toggle" title="${esc(T('Royaumes, duchés, comtés, principautés, évêchés… de l’année choisie (cartes anciennes avant 1816, et les territoires de Wikidata)'))}"><input type="checkbox" data-ct-layer ${p.layer ? 'checked' : ''}><i></i>${esc(T('👑 Territoires d’autrefois'))}</label>
-            <input type="number" data-ct-myear min="-1" max="2025" step="1" value="${esc(String(p.year))}" aria-label="${esc(T('Année des territoires'))}">
-            <label class="ui-toggle" title="${esc(T('Les châteaux de Wikidata (à partir d’un zoom assez proche)'))}"><input type="checkbox" data-ct-castles ${p.castles ? 'checked' : ''}><i></i>${esc(T('🏰 Châteaux'))}</label>`;
+        const p = settings(), ctl = document.createElement('span'); ctl.className = 'cht-ctl';
+        ctl.innerHTML = `<label class="ui-toggle" title="${esc(T('Royaumes, duchés, comtés, principautés, évêchés… de l’année choisie (cartes anciennes avant 1816, et les territoires de Wikidata)'))}"><input type="checkbox" data-cht-layer ${p.layer ? 'checked' : ''}><i></i>${esc(T('👑 Territoires d’autrefois'))}</label>
+            <input type="number" data-cht-myear min="-1" max="2025" step="1" value="${esc(String(p.year))}" aria-label="${esc(T('Année des territoires'))}">
+            <label class="ui-toggle" title="${esc(T('Les châteaux de Wikidata (à partir d’un zoom assez proche)'))}"><input type="checkbox" data-cht-castles ${p.castles ? 'checked' : ''}><i></i>${esc(T('🏰 Châteaux'))}</label>`;
         strip.insertBefore(ctl, strip.querySelector('.spacer'));
-        ctl.querySelector('[data-ct-layer]').addEventListener('change', e => { save({layer: e.target.checked}); A().drawMap?.(); });
-        ctl.querySelector('[data-ct-castles]').addEventListener('change', e => { save({castles: e.target.checked}); A().drawMap?.(); });
-        ctl.querySelector('[data-ct-myear]').addEventListener('change', e => { const y = Math.max(-1, Math.min(2025, Math.round(Number(e.target.value)) || 1700)); e.target.value = y; save({year: y}); A().drawMap?.(); });
+        ctl.querySelector('[data-cht-layer]').addEventListener('change', e => { save({layer: e.target.checked}); A().drawMap?.(); });
+        ctl.querySelector('[data-cht-castles]').addEventListener('change', e => { save({castles: e.target.checked}); A().drawMap?.(); });
+        ctl.querySelector('[data-cht-myear]').addEventListener('change', e => { const y = Math.max(-1, Math.min(2025, Math.round(Number(e.target.value)) || 1700)); e.target.value = y; save({year: y}); A().drawMap?.(); });
         let down = null;
         stage.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
         stage.addEventListener('click', e => {
-            if (!mapLast || !(settings().layer || settings().castles) || e.target.closest('#map-overlay > *, .map-zone-panel, .ct-pop, button, a, input, select')) return;
+            if (!mapLast || !(settings().layer || settings().castles) || e.target.closest('#map-overlay > *, .map-zone-panel, .cht-pop, button, a, input, select')) return;
             if (down && Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 4) return;
             const rect = stage.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
             const pt = mapPts.map(p => ({p, d: Math.hypot(p.x - x, p.y - y)})).filter(o => o.d < 9).sort((a, b) => a.d - b.d)[0];
@@ -435,11 +435,11 @@
         });
     });
     function popup(stage, x, y, html) {
-        stage.querySelector('.ct-pop')?.remove();
-        const d = document.createElement('div'); d.className = 'ct-pop'; d.style.left = Math.min(x, stage.clientWidth - 260) + 'px'; d.style.top = Math.min(y, stage.clientHeight - 120) + 'px';
-        d.innerHTML = `<button type="button" class="icon-button small" aria-label="${esc(T('Fermer'))}" data-ct-popclose>✕</button>${html}`;
+        stage.querySelector('.cht-pop')?.remove();
+        const d = document.createElement('div'); d.className = 'cht-pop'; d.style.left = Math.min(x, stage.clientWidth - 260) + 'px'; d.style.top = Math.min(y, stage.clientHeight - 120) + 'px';
+        d.innerHTML = `<button type="button" class="icon-button small" aria-label="${esc(T('Fermer'))}" data-cht-popclose>✕</button>${html}`;
         stage.appendChild(d);
-        d.querySelector('[data-ct-popclose]').addEventListener('click', ev => { ev.stopPropagation(); d.remove(); });
+        d.querySelector('[data-cht-popclose]').addEventListener('click', ev => { ev.stopPropagation(); d.remove(); });
     }
     const pathOf = (polys, toXY) => {
         let p = '';
@@ -453,21 +453,21 @@
     let castleIdx = null; const castleFiles = {};
     ext.mapDraw.push(({left, top, z, width, height}) => {
         mapLast = {left, top, z, width, height}; mapPts = [];
-        const layer = document.getElementById('ct-layer'); if (!layer) return;
+        const layer = document.getElementById('cht-layer'); if (!layer) return;
         const svg = layer.querySelector('svg'), p = settings();
         if (!p.layer && !p.castles) { svg.innerHTML = ''; return; }
         if (p.layer && !terrCtx) { if (!layer.dataset.loading) { layer.dataset.loading = '1'; loadAllTerr().then(() => { layer.dataset.loading = ''; A().drawMap?.(); }).catch(e => { layer.dataset.loading = ''; A().toast?.(e.message, 'error'); }); } }
         const lngToX = A().lngToX, latToY = A().latToY, toXY = (lo, la) => [lngToX(lo, z) - left, latToY(la, z) - top];
         const vis = b => { const x0 = lngToX(b[0], z) - left, x1 = lngToX(b[2], z) - left, y0 = latToY(b[3], z) - top, y1 = latToY(b[1], z) - top; return x1 >= 0 && x0 <= width && y1 >= 0 && y0 <= height ? [x0, y0, x1, y1] : null; };
         const y = layerYear(), out = [], labels = [], dots = [];
-        const yEl = document.querySelector('[data-ct-myear]'); if (yEl && S().mapMode === 'timeline') yEl.value = y;
+        const yEl = document.querySelector('[data-cht-myear]'); if (yEl && S().mapMode === 'timeline') yEl.value = y;
         let caption = '';
         if (p.layer && terrCtx) {
             const sy = snapYear(terrCtx.maps, y);
             if (sy != null) {
                 for (const f of terrCtx.maps.snaps[sy]) {
                     const b = vis(f.sh.box); if (!b) continue;
-                    out.push(`<path class="ct-snap" d="${pathOf(f.sh.polys(), toXY)}" fill="${colorOf(f.s || f.n)}" fill-rule="evenodd"><title>${esc(f.n)}</title></path>`);
+                    out.push(`<path class="cht-snap" d="${pathOf(f.sh.polys(), toXY)}" fill="${colorOf(f.s || f.n)}" fill-rule="evenodd"><title>${esc(f.n)}</title></path>`);
                     if (b[2] - b[0] > 70 && b[3] - b[1] > 26) { const cx = Math.max(30, Math.min(width - 30, (b[0] + b[2]) / 2)), cy = Math.max(14, Math.min(height - 14, (b[1] + b[3]) / 2)); labels.push(`<text x="${cx.toFixed(0)}" y="${cy.toFixed(0)}">${esc(f.n)}</text>`); }
                 }
                 caption = T('Territoires en {y} : carte de {s} (historical-basemaps, GPL-3.0, approximative) · Wikidata (CC0)', {y: yr(y), s: yr(sy)});
@@ -477,8 +477,8 @@
                 const it = terrCtx.terr.byQ.get(s.q); if (!it || !active(it, y)) continue;
                 const b = vis(s.sh.box); if (!b) continue;
                 drawnQ.add(it.q);
-                out.push(`<path class="ct-wd" d="${pathOf(s.sh.polys(), toXY)}"><title>${esc(`${it.n} (${span(it.y0, it.y1)})`)}</title></path>`);
-                if (b[2] - b[0] > 50) labels.push(`<text class="ct-wdl" x="${((b[0] + b[2]) / 2).toFixed(0)}" y="${((b[1] + b[3]) / 2 + 14).toFixed(0)}">${esc(it.n)}</text>`);
+                out.push(`<path class="cht-wd" d="${pathOf(s.sh.polys(), toXY)}"><title>${esc(`${it.n} (${span(it.y0, it.y1)})`)}</title></path>`);
+                if (b[2] - b[0] > 50) labels.push(`<text class="cht-wdl" x="${((b[0] + b[2]) / 2).toFixed(0)}" y="${((b[1] + b[3]) / 2 + 14).toFixed(0)}">${esc(it.n)}</text>`);
             }
             // les territoires sans contour : un point (leur capitale ou leur centre), « limites inconnues »
             const minZ = z >= 9 ? 99 : z >= 7 ? 3 : 2;
@@ -489,7 +489,7 @@
                 const [px, py] = toXY(it.lo, it.la); if (px < 0 || py < 0 || px > width || py > height) continue;
                 if (++n > 600) break;
                 mapPts.push({x: px, y: py, q: it.q});
-                dots.push(`<g class="ct-pt k-${esc(it.k)}"><circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${rank(it) === 1 ? 5 : 3.5}"><title>${esc(`${it.n} (${span(it.y0, it.y1)}) — ${T('limites inconnues')}`)}</title></circle>${z >= 7 || rank(it) === 1 ? `<text x="${(px + 7).toFixed(0)}" y="${(py + 4).toFixed(0)}">${esc(it.n)}</text>` : ''}</g>`);
+                dots.push(`<g class="cht-pt k-${esc(it.k)}"><circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${rank(it) === 1 ? 5 : 3.5}"><title>${esc(`${it.n} (${span(it.y0, it.y1)}) — ${T('limites inconnues')}`)}</title></circle>${z >= 7 || rank(it) === 1 ? `<text x="${(px + 7).toFixed(0)}" y="${(py + 4).toFixed(0)}">${esc(it.n)}</text>` : ''}</g>`);
             }
         }
         if (p.castles) {
@@ -504,14 +504,14 @@
                         if (it.la == null) continue; const [px, py] = toXY(it.lo, it.la); if (px < -5 || py < -5 || px > width + 5 || py > height + 5) continue;
                         mapPts.push({x: px, y: py, q: it.q, code: c, castle: true});
                         const st = condition(it);
-                        dots.push(`<text class="ct-castle s-${st === 'ruine' ? 'r' : st === 'disparu' ? 'd' : 'o'}" x="${px.toFixed(0)}" y="${(py + 5).toFixed(0)}">${KIND_ICON[it.k] || '🏰'}<title>${esc(`${it.n} — ${KINDS[it.k]}${st !== 'non précisé' ? ' · ' + st : ''}`)}</title></text>`);
+                        dots.push(`<text class="cht-castle s-${st === 'ruine' ? 'r' : st === 'disparu' ? 'd' : 'o'}" x="${px.toFixed(0)}" y="${(py + 5).toFixed(0)}">${KIND_ICON[it.k] || '🏰'}<title>${esc(`${it.n} — ${KINDS[it.k]}${st !== 'non précisé' ? ' · ' + st : ''}`)}</title></text>`);
                     }
                 }
                 caption = (caption ? caption + ' · ' : '') + T('🏰 Wikidata (CC0)');
             }
         }
         svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-        svg.innerHTML = `${out.join('')}${labels.join('')}${dots.join('')}${caption ? `<text class="ct-cap" x="${width - 10}" y="${height - 24}">${esc(caption)}</text>` : ''}`;
+        svg.innerHTML = `${out.join('')}${labels.join('')}${dots.join('')}${caption ? `<text class="cht-cap" x="${width - 10}" y="${height - 24}">${esc(caption)}</text>` : ''}`;
     });
 
     /* ─────────── Réglages → « 🏰 Châteaux et territoires » ─────────── */
@@ -521,14 +521,14 @@
         let idx = null, tr = null; try { [idx, tr] = await Promise.all([loadIndex(), loadTerr()]); } catch (_) {}
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         const s = settings();
-        const tg = ([k, label, sub]) => `<label class="checkbox-line" data-ct-tg="${k}"><input type="checkbox" ${s[k] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
+        const tg = ([k, label, sub]) => `<label class="checkbox-line" data-cht-tg="${k}"><input type="checkbox" ${s[k] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
         const kinds = {}; Object.values(idx?.countries || {}).forEach(c => Object.entries(c.kinds || {}).forEach(([k, n]) => { kinds[k] = (kinds[k] || 0) + n; }));
         const tk = {}; (tr?.items || []).forEach(it => { tk[it.k] = (tk[it.k] || 0) + 1; });
         const src = [['Wikidata', T('Châteaux ({n}) : nom, commune, dates, état, propriétaires, protection, image', {n: nf(idx?.total)}), 'CC0 1.0', 'https://www.wikidata.org/'],
             ['Wikidata', T('Territoires ({n}) : dates, capitale, armoiries, rattachements', {n: nf(tr?.items.length)}), 'CC0 1.0', 'https://www.wikidata.org/'],
             ['Wikimedia Commons (Data:*.map)', T('Contours de certains territoires'), T('licence de chaque fichier (CC0, CC BY-SA, ODbL…)'), 'https://commons.wikimedia.org/wiki/Help:Map_Data'],
             ['historical-basemaps (André Ourednik)', T('L’Europe à des dates choisies, de l’an 1 à 1815 (tracés approximatifs)'), 'GPL-3.0', 'https://github.com/aourednik/historical-basemaps']];
-        ws.innerHTML = `<section class="page ct-settings" data-ct-settings>${UI().pageHeader ? UI().pageHeader({title: T('Châteaux et territoires'), help: esc(T('Les châteaux d’Europe et les territoires d’autrefois (royaumes, duchés, comtés, évêchés…), livrés avec l’app. Rien ne part sur Internet, sauf les images des châteaux.'))}) : `<h2>${esc(T(TAB[2]))}</h2>`}
+        ws.innerHTML = `<section class="page cht-settings" data-cht-settings>${UI().pageHeader ? UI().pageHeader({title: T('Châteaux et territoires'), help: esc(T('Les châteaux d’Europe et les territoires d’autrefois (royaumes, duchés, comtés, évêchés…), livrés avec l’app. Rien ne part sur Internet, sauf les images des châteaux.'))}) : `<h2>${esc(T(TAB[2]))}</h2>`}
             <div class="maintenance-panel"><h3>${esc(T('Ce qui s’affiche'))}</h3>${PARTS.map(tg).join('')}</div>
             <div class="maintenance-panel"><h3>${esc(T('Ce qu’il y a dedans'))}</h3>
                 <p>${esc(T('{n} châteaux dans {p} pays : {l}.', {n: nf(idx?.total), p: Object.keys(idx?.countries || {}).length, l: Object.entries(kinds).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${nf(n)} ${KINDS[k] || k}`).join(', ')}))}</p>
@@ -539,8 +539,8 @@
     }
     ext.maintenance[TAB[0]] = token => drawSettings(token);
     document.addEventListener('change', e => {
-        const t = e.target.closest?.('[data-ct-tg]'); if (!t || !e.target.matches('input')) return;
-        const k = t.dataset.ctTg, before = settings()[k]; save({[k]: e.target.checked});
+        const t = e.target.closest?.('[data-cht-tg]'); if (!t || !e.target.matches('input')) return;
+        const k = t.dataset.chtTg, before = settings()[k]; save({[k]: e.target.checked});
         A().undoToast?.(e.target.checked ? T('Partie montrée') : T('Partie masquée'), {undo: () => { save({[k]: before}); drawSettings(); }, redo: () => { save({[k]: !before}); drawSettings(); }});
     });
     function register() {
@@ -561,7 +561,7 @@
         {id: 'territoires_annee', icon: '👑', label: T('Les territoires d’une année'), group: 'Le monde', needs: ['year'], installed: () => true,
             run: async (ctx, host) => {
                 const c = await loadAllTerr(), y = Number(ctx.year) || 1700, list = c.terr.items.filter(it => active(it, y));
-                host.innerHTML = `<p>${esc(T('{n} territoires de Wikidata existaient en {y}.', {n: nf(list.length), y: yr(y)}))}</p><ul class="ct-list">${list.slice(0, 200).map(it => `<li><button type="button" class="link-button" data-ct-terr="${esc(it.q)}">${esc(it.n)}</button> <small class="muted">${esc([TKINDS[it.k], span(it.y0, it.y1)].join(' · '))}</small></li>`).join('')}</ul>`;
+                host.innerHTML = `<p>${esc(T('{n} territoires de Wikidata existaient en {y}.', {n: nf(list.length), y: yr(y)}))}</p><ul class="cht-list">${list.slice(0, 200).map(it => `<li><button type="button" class="link-button" data-cht-terr="${esc(it.q)}">${esc(it.n)}</button> <small class="muted">${esc([TKINDS[it.k], span(it.y0, it.y1)].join(' · '))}</small></li>`).join('')}</ul>`;
             }});
     const L = ext.dataLists = ext.dataLists || [];
     L.push({id: 'chateaux', icon: '🏰', label: 'Châteaux d’Europe', group: 'Le lieu', source: 'Wikidata (CC0 1.0)', sourceUrl: 'https://www.wikidata.org/',
@@ -585,7 +585,7 @@
     const ringsOf = polys => polys.flatMap(poly => poly.map(r => { const out = []; for (let i = 0; i < r.length; i += 2) out.push([r[i], r[i + 1]]); return out; }));
     const hitQ = (q, ...s) => !q || s.some(x => fold(x).includes(fold(q)));
     (ext.mapLayerSources = ext.mapLayerSources || []).push(
-        {id: 'ct_territoires', icon: '👑', label: T('Territoires d’autrefois (contours)'), group: 'Le monde', kind: 'areas', needsYear: true,
+        {id: 'cht_territoires', icon: '👑', label: T('Territoires d’autrefois (contours)'), group: 'Le monde', kind: 'areas', needsYear: true,
             source: T('Cartes anciennes historical-basemaps (A. Ourednik, GPL-3.0, approximatives, avant 1816) ; contours Wikimedia Commons ; Wikidata (CC0)'),
             run: async ({q, year, bbox, max = 2000}) => {
                 const c = await loadAllTerr(), y = Number(year) || 1700, features = [];
@@ -594,13 +594,13 @@
                 for (const s of c.shapes?.shapes || []) { const it = c.terr.byQ.get(s.q), b = s.sh.box; if (it && active(it, y) && features.length < max && inBox(bbox, b[0], b[1], b[2], b[3]) && hitQ(q, it.n)) features.push({type: 'area', rings: ringsOf(s.sh.polys()), label: it.n}); }
                 return {features, source: sy != null ? T('Carte de {s} (historical-basemaps, GPL-3.0) · Wikidata (CC0)', {s: yr(sy)}) : T('Wikidata (CC0) · contours Wikimedia Commons')};
             }},
-        {id: 'ct_territoires_pts', icon: '👑', label: T('Territoires d’autrefois (centres, limites inconnues)'), group: 'Le monde', kind: 'points', needsYear: true, source: 'Wikidata (CC0)',
+        {id: 'cht_territoires_pts', icon: '👑', label: T('Territoires d’autrefois (centres, limites inconnues)'), group: 'Le monde', kind: 'points', needsYear: true, source: 'Wikidata (CC0)',
             run: async ({q, year, bbox, max = 2000}) => {
                 const c = await loadAllTerr(), y = Number(year) || 1700;
                 const features = c.terr.items.filter(it => it.la != null && active(it, y) && inBox(bbox, it.lo, it.la, it.lo, it.la) && hitQ(q, it.n, TKINDS[it.k])).slice(0, max).map(it => ({type: 'pt', lat: it.la, lon: it.lo, label: it.n}));
                 return {features, source: 'Wikidata (CC0)'};
             }},
-        {id: 'ct_chateaux', icon: '🏰', label: T('Châteaux d’Europe'), group: 'Le lieu', kind: 'points', source: 'Wikidata (CC0)',
+        {id: 'cht_chateaux', icon: '🏰', label: T('Châteaux d’Europe'), group: 'Le lieu', kind: 'points', source: 'Wikidata (CC0)',
             run: async ({q, from, to, bbox, max = 3000}) => {
                 const idx = await loadIndex();
                 const codes = Object.entries(idx.countries).filter(([, c]) => c.box && inBox(bbox, c.box[1], c.box[0], c.box[3], c.box[2])).map(([k]) => k);

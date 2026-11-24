@@ -51,6 +51,9 @@ $I['sophie'] = $per('Sophie', 'LACOMBE', 'female', [['BIRT', '1955', $paris]]);
 $I['julie'] = $per('Julie', 'LACOMBE', 'female', [['BIRT', '1954', $paris]]);
 $I['albert'] = $per('Albert', 'LACOMBE', 'male', [['BIRT', '1801', $paris]]);
 $I['felix'] = $per('Félix', 'MAZAUD', 'male', [], 'animal');
+// 🧭 une lignée profonde (pas encore reliée à Louis : les filtres ci-dessous comptent les ancêtres de Jean) ; le test « lien très long » la relie
+$I['g3'] = $per('Adrien', 'BAISSAIT', 'male'); $I['g4'] = $per('Barthélemy', 'BAISSAIT', 'male'); $I['g5'] = $per('Gaspard-Hippolyte', 'BAISSAIT-LAROCHEFOUCAULD', 'male');
+$fam($I['g5'], null, [$I['g4']]); $fam($I['g4'], null, [$I['g3']]);
 $pdo->exec('UPDATE persons SET is_start=1 WHERE id=' . $I['jean']);
 $fam($I['louis'], $I['anne'], [$I['pierre'], $I['paul']]);
 $fam($I['henri'], $I['rose'], [$I['marie'], $I['claire']]);
@@ -291,6 +294,36 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForFunction(i => !window.LCNDA_APP.state.currentPerson.partners.some(x => x.id === i), ID.julie, {timeout: 15000});
             await clickToast('↶ Annuler');
             await p.waitForFunction(i => window.LCNDA_APP.state.currentPerson.partners.some(x => x.id === i), ID.julie, {timeout: 15000});
+        });
+
+        await t('🧭 lien très long (arrière-arrière-arrière-grand-père · par …) : le nom garde sa largeur (1440 et 1024 px) ; ⋯ le masque, retenu, ↶ Annuler', async () => {
+            const r = await post('add_relation', {person_id: ID.louis, related_id: ID.g3, relation_type: 'parent'}); assert.ok(!r.error, r.error);
+            const l = await api('person_link', {id: ID.g5, root: ID.jean}); assert.equal(l.link.label, 'arrière-arrière-arrière-grand-père');
+            await p.evaluate(() => localStorage.removeItem('genealogie-kin-head'));
+            const badge = '[data-pa-kin-head]', shown = () => p.waitForFunction(() => { const b = document.querySelector('[data-pa-kin-head]'); return b && !b.hidden && /arrière-arrière-arrière-grand-père/i.test(b.textContent); }, null, {timeout: 15000});
+            for (const width of [1440, 1024]) {
+                await p.setViewportSize({width, height: 900}); await openPerson(ID.g5); await shown(); await sleep(200); /*DBG*/await p.screenshot({path: '/tmp/claude-0/-home-user-lcnda/ad8201b5-1353-5614-bebe-2d8bd96b57cd/scratchpad/visuel/kin-' + width + '.png'}); console.log(await p.evaluate(() => { const h = document.querySelector('.person-hero'); const out = []; let n = h.querySelector('h2'); while (n && n !== h) { out.push(n.tagName+'.'+n.className + ' ' + Math.round(n.getBoundingClientRect().width) + ' ' + getComputedStyle(n).display); n = n.parentElement; } return out.join(' / ') + ' || ' + h.outerHTML.slice(0, 900); }));/*DBG*/
+                const m = await p.evaluate(() => { const h = document.querySelector('.person-hero'), n = h.querySelector('h2'), b = h.querySelector('[data-pa-kin-head]'); const lh = parseFloat(getComputedStyle(n).lineHeight) || parseFloat(getComputedStyle(n).fontSize) * 1.25;
+                    return {hero: h.getBoundingClientRect().width, name: n.getBoundingClientRect().width, lines: Math.round(n.getBoundingClientRect().height / lh), words: n.textContent.trim().split(/\s+/).length, badge: b.getBoundingClientRect().width, over: document.documentElement.scrollWidth - document.documentElement.clientWidth}; });
+                assert.ok(m.name >= 0.4 * m.hero, `${width} px : nom ${Math.round(m.name)} / en-tête ${Math.round(m.hero)}`);
+                assert.ok(m.lines < m.words, `${width} px : un mot par ligne (${m.lines} lignes, ${m.words} mots)`);
+                assert.ok(m.badge <= m.hero, `${width} px : étiquette plus large que l’en-tête`); assert.ok(m.over <= 0, `${width} px : la page déborde de ${m.over} px`);
+            }
+            await p.setViewportSize({width: 1440, height: 900});
+            const menuItem = async label => { await p.click('.person-hero [data-fsec-hero-more]'); await p.waitForSelector('.ui-actmenu');
+                await p.evaluate(l => [...document.querySelectorAll('.ui-actmenu button')].find(b => b.textContent.includes(l)).click(), label); };
+            await menuItem('Masquer le lien de parenté');
+            await p.waitForFunction(() => document.querySelector('[data-pa-kin-head]').hidden, null, {timeout: 10000});
+            assert.equal(await p.evaluate(() => localStorage.getItem('genealogie-kin-head')), '0');
+            await openPerson(ID.luc); await openPerson(ID.g5); await sleep(400);
+            assert.equal(await p.$eval(badge, b => b.hidden), true, 'choix retenu en rouvrant la fiche');
+            await clickToast('↶ Annuler'); await shown();
+            assert.notEqual(await p.evaluate(() => localStorage.getItem('genealogie-kin-head')), '0');
+            await menuItem('Masquer le lien de parenté'); await p.waitForFunction(() => document.querySelector('[data-pa-kin-head]').hidden, null, {timeout: 10000});
+            await p.click('.person-hero [data-fsec-hero-more]'); await p.waitForSelector('.ui-actmenu');
+            assert.ok(await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu button')].some(b => b.textContent.includes('Afficher le lien de parenté'))));
+            await p.keyboard.press('Escape'); await menuItem('Afficher le lien de parenté'); await shown();
+            assert.equal(await p.evaluate(() => localStorage.getItem('genealogie-kin-head')), '1');
         });
 
         await t('R5 : ⌘⇧N / ⌘P / ⌘E passent par LCNDA_EXT.tabShortcuts[onglet] ; « / » va dans la colonne ; ⌘1 = 1er onglet', async () => {

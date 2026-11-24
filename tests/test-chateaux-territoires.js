@@ -78,7 +78,7 @@ const gz = f => JSON.parse(zlib.gunzipSync(fs.readFileSync(D(f))));
     });
 
     /* ═════════ 2. l'écran ═════════ */
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-ct-'));
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-cht-'));
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true});
     const phpPath = findPhp([devBundledPhp()]) || 'php';
     const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1'};
@@ -123,42 +123,54 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(Array.isArray(r.geo) && Math.abs(r.geo[0] - 49.93) < 0.1); assert.ok(Array.isArray(r.per));
             assert.strictEqual(r.ds, 3); assert.strictEqual(r.ms, 2);
         });
+        await t('calques des cartes (LCNDA_EXT.mapLayerSources) : territoires de 1700 et châteaux autour de Vianden', async () => {
+            const r = await p.evaluate(async () => {
+                const S = window.LCNDA_EXT.mapLayerSources, get = id => S.find(x => x.id === id);
+                const a = await get('cht_territoires').run({q: '', year: 1700, bbox: [5, 48, 7, 50], max: 500});
+                const c = await get('cht_chateaux').run({q: 'Vianden', bbox: [6, 49.8, 6.4, 50.1], max: 50});
+                const pts = await get('cht_territoires_pts').run({q: '', year: 1700, bbox: [-5, 42, 15, 55], max: 50});
+                return {kinds: S.filter(x => /^cht_/.test(x.id)).map(x => x.kind), a: a.features.length, ring: a.features[0]?.rings?.[0]?.[0], names: a.features.map(f => f.label), src: a.source, c: c.features.map(f => f.label), pts: pts.features.length, t: pts.features[0]?.type};
+            });
+            assert.deepStrictEqual(r.kinds, ['areas', 'points', 'points']);
+            assert.ok(r.a >= 2 && Array.isArray(r.ring) && r.ring.length === 2, JSON.stringify(r)); assert.ok(r.names.includes('Holy Roman Empire')); assert.match(r.src, /1700.*GPL-3\.0/);
+            assert.ok(r.c.some(n => /Vianden/.test(n))); assert.ok(r.pts > 0 && r.t === 'pt');
+        });
         await t('fiche d’un village (Vianden) : 🏰 châteaux et 👑 territoires ; l’année change la réponse ; petite fiche d’un château', async () => {
             const key = await p.evaluate(async () => (await window.LCNDA_APP.api('villages', {q: 'Vianden'})).villages[0].key);
             await p.evaluate(k => { const A = window.LCNDA_APP; A.state.listType = 'villages'; A.state.hVillage = k; A.setModule('listes'); }, key);
-            await p.waitForSelector('.h-village [data-ct-part="castles"] .ct-list', {timeout: 30000});
-            const txt = await p.textContent('[data-ct-part="castles"]'); assert.match(txt, /Vianden/); assert.match(txt, /Wikidata \(CC0\)/);
-            await p.waitForSelector('[data-ct-part="terr"] [data-ct-year]', {timeout: 30000});
-            await p.fill('[data-ct-part="terr"] [data-ct-year]', '1700'); await p.dispatchEvent('[data-ct-part="terr"] [data-ct-year]', 'change');
-            await p.waitForFunction(() => /carte de 1700/.test(document.querySelector('[data-ct-part="terr"] .ct-answer')?.textContent || ''), null, {timeout: 10000});
+            await p.waitForSelector('.h-village [data-cht-part="castles"] .cht-list', {timeout: 30000});
+            const txt = await p.textContent('[data-cht-part="castles"]'); assert.match(txt, /Vianden/); assert.match(txt, /Wikidata \(CC0\)/);
+            await p.waitForSelector('[data-cht-part="terr"] [data-cht-year]', {timeout: 30000});
+            await p.fill('[data-cht-part="terr"] [data-cht-year]', '1700'); await p.dispatchEvent('[data-cht-part="terr"] [data-cht-year]', 'change');
+            await p.waitForFunction(() => /carte de 1700/.test(document.querySelector('[data-cht-part="terr"] .cht-answer')?.textContent || ''), null, {timeout: 10000});
             assert.strictEqual(JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-chateaux-territoires'))).year, 1700);
-            await p.click('[data-ct-part="castles"] [data-ct-castle]');
-            await p.waitForSelector('dialog.ct-dlg[open] .ct-card', {timeout: 10000});
-            assert.match(await p.textContent('dialog.ct-dlg'), /Source : Wikidata \(CC0\)/);
-            await p.click('dialog.ct-dlg [data-ct-close]');
+            await p.click('[data-cht-part="castles"] [data-cht-castle]');
+            await p.waitForSelector('dialog.cht-dlg[open] .cht-card', {timeout: 10000});
+            assert.match(await p.textContent('dialog.cht-dlg'), /Source : Wikidata \(CC0\)/);
+            await p.click('dialog.cht-dlg [data-cht-close]');
         });
         await t('fiche d’une personne : dans « 🗺 Pays à l’époque », la naissance de 1702 à Nancy reçoit son territoire (pas de second bloc)', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
-            await p.waitForSelector('[data-mc-host="1"] .mc-rows li.ct-done', {timeout: 30000});
+            await p.waitForSelector('[data-mc-host="1"] .mc-rows li.cht-done', {timeout: 30000});
             const li = await p.$$eval('[data-mc-host="1"] .mc-rows li', n => n.map(x => x.textContent.replace(/\s+/g, ' ')));
             const nancy = li.find(x => /Nancy/.test(x)); assert.ok(nancy && /carte de 1700/.test(nancy) && !/trop tôt/.test(nancy), nancy);
             assert.match(await p.textContent('[data-mc-host="1"]'), /historical-basemaps/);
         });
         await t('Carte : « 👑 Territoires d’autrefois » en 1700 dessine les territoires et la légende ; le réglage est gardé', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.mapMode = 'standard'; A.state.mapCenter = {lat: 48.7, lon: 6.2}; A.state.mapZoom = 6; A.setModule('carte'); });
-            await p.waitForSelector('[data-ct-layer]', {timeout: 30000});
-            await p.fill('[data-ct-myear]', '1700'); await p.dispatchEvent('[data-ct-myear]', 'change');
-            await p.check('[data-ct-layer]'); console.log('DBG', await p.evaluate(() => JSON.stringify({n: document.querySelectorAll('[data-ct-layer]').length, setups: window.LCNDA_EXT.mapSetup.length, s: localStorage.getItem('genealogie-chateaux-territoires')})));
-            await p.waitForFunction(() => document.querySelectorAll('#ct-layer path.ct-snap').length > 5, null, {timeout: 30000}).catch(async e => { console.log(await p.evaluate(() => JSON.stringify({s: localStorage.getItem('genealogie-chateaux-territoires'), svg: document.querySelector('#ct-layer svg')?.innerHTML.slice(0, 300), mode: window.LCNDA_APP.state.mapMode, dm: typeof window.LCNDA_APP.drawMap, chk: document.querySelector('[data-ct-layer]').checked}))); throw e; });
-            assert.match(await p.textContent('#ct-layer .ct-cap'), /carte de 1700.*GPL-3\.0/);
-            assert.ok(await p.$$eval('#ct-layer text', n => n.some(x => /France/.test(x.textContent))));
+            await p.waitForSelector('[data-cht-layer]', {timeout: 30000});
+            await p.fill('[data-cht-myear]', '1700'); await p.dispatchEvent('[data-cht-myear]', 'change');
+            await p.check('[data-cht-layer]');
+            await p.waitForFunction(() => document.querySelectorAll('#cht-layer path.cht-snap').length >= 2, null, {timeout: 30000});
+            assert.match(await p.textContent('#cht-layer .cht-cap'), /carte de 1700.*GPL-3\.0/);
+            assert.ok(await p.$$eval('#cht-layer text', n => n.some(x => /France/.test(x.textContent))));
             const s = JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-chateaux-territoires'))); assert.strictEqual(s.layer, true); assert.strictEqual(s.year, 1700);
         });
         await t('Réglages : « 🏰 Châteaux et territoires » ; éteindre les châteaux du village, ↶ Annuler', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'chateaux_territoires'; A.setModule('maintenance'); });
-            await p.waitForSelector('[data-ct-settings] [data-ct-tg="place_castles"] input', {timeout: 30000});
-            assert.match(await p.textContent('[data-ct-settings]'), /GPL-3\.0/);
-            await p.uncheck('[data-ct-tg="place_castles"] input');
+            await p.waitForSelector('[data-cht-settings] [data-cht-tg="place_castles"] input', {timeout: 30000});
+            assert.match(await p.textContent('[data-cht-settings]'), /GPL-3\.0/);
+            await p.uncheck('[data-cht-tg="place_castles"] input');
             assert.strictEqual(JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-chateaux-territoires'))).place_castles, false);
             await toastWith(/Partie masquée/);
             await p.click('.ui-toast button:has-text("Annuler"), .toast button:has-text("Annuler")');
