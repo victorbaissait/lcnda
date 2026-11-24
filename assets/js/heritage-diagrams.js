@@ -280,6 +280,7 @@
                 else all.forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });
                 dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 DIAGRAMMES</span><h2>${esc(title)}</h2><p class="muted">Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app).</p></div><span>${ext.openDiagramKindsEditor ? '<button type="button" class="button small secondary" data-kinds-cfg title="Ordre, types montrés ou cachés, groupes à toi">⚙️ Ranger les types</button>' : ''}<button type="button" class="icon-button" data-close>×</button></span></div>
                 ${Object.entries(groups).map(([g, items]) => `<h4>${esc(g)}</h4><div class="h-dg-tiles">${items.map(([t, i]) => `<button type="button" class="h-dg-tile ${current === t.kind && !t.o && !t.preset ? 'is-current' : ''}" data-tpl="${i}"${R().KINDS[t.kind]?.help && !t.o && !t.preset ? ` title="${esc(R().KINDS[t.kind].help)}"` : ''}><span class="h-dg-mini">${R().svg({...presetSpec(t), o: {...presetSpec(t).o, title: '', subtitle: '', source: '', legend: 'none', scale: 1.6}}, 480)}</span><span>${esc(t.icon)} ${esc(t.label)}</span></button>`).join('')}</div>`).join('')}`;
+                if (ext.diagramAssistant) { dlg.querySelector('.h-dg-galhead')?.insertAdjacentHTML('afterend', ext.diagramAssistant.html()); ext.diagramAssistant.bind(dlg, pickd => done(pickd)); } // 💬 « Je veux représenter… » (heritage-diagram-assistant.js)
                 dlg.insertAdjacentHTML('beforeend', '<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Fermer</button></div>'); // K6 : le bas de fenêtre (K3 : « Fermer » seul, rien à valider)
             };
             paint();
@@ -301,7 +302,7 @@
             rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
         else {
             const t = kind ? {kind} : await chooseType(); if (!t) return null;
-            const spec = presetSpec(t);
+            const spec = t.spec ? {o: {}, ...clone(t.spec)} : presetSpec(t); // 💬 l'assistant donne un diagramme tout fait
             rec = {id: 0, name: spec.o.title || R().KINDS[t.kind].label, spec, links: link ? [link] : []};
         }
         let spec = rec.spec, tab = 'data', dirty = !rec.id, timer = 0;

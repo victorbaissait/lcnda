@@ -1374,7 +1374,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-genealogies.js?v=7" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=17" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=11" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=36" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=37" defer></script>
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
 <script src="assets/js/heritage-vector.js?v=40" defer></script>
@@ -1437,6 +1437,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-graphique.js?v=12" defer></script>
 <script src="assets/js/heritage-diagram-nouveaux.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-manquants.js?v=1" defer></script>
+<script src="assets/js/heritage-diagram-assistant.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-lot-c.js?v=2" defer></script>
 <script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>
 <script src="assets/js/heritage-diagram-plus.js?v=4" defer></script>

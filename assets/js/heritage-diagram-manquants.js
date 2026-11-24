@@ -444,7 +444,7 @@
     const FROM = {
         parsets: {html: () => appBox('🔀 Des parcours de ma base', 'Chaque personne passe d’une catégorie à l’autre. Choisis 2 ou 3 axes ; les plus fréquents gardent leur nom, les autres sont regroupés.', `<label>${esc(i18n('1er axe'))}${dimSel('a', 'bplace')}</label><label>${esc(i18n('2e axe'))}${dimSel('b', 'occ')}</label><label>${esc(i18n('3e axe'))}${dimSel('c', 'dplace')}</label>`),
             bind: bind((D, pane, s) => { const ax = ['a', 'b', 'c'].map(k => val(pane, k)).filter(Boolean); if (ax.length < 2) throw new Error(i18n('Choisis au moins deux axes.')); const n = topN(pane, 8);
-                const vals = people(D).map(p => ax.map(a => DIMS[a][1](D, p))).filter(v => v.every(Boolean)); if (!vals.length) throw new Error(i18n('Aucune personne n’a ces renseignements.'));
+                const unk = i18n('Inconnu'), vals = people(D).map(p => ax.map(a => DIMS[a][1](D, p))).filter(v => v.some(Boolean)).map(v => v.map(x => x || unk)); if (!vals.length) throw new Error(i18n('Aucune personne n’a ces renseignements.')); // un renseignement qui manque : « Inconnu » (la personne reste)
                 const keep = ax.map((_, i) => new Set(topKeys(vals.map(v => v[i]), n).map(x => x[0]))), m = new Map();
                 vals.forEach(v => { const k = v.map((x, i) => othersOf(keep[i], x)).join('\u0001'); m.set(k, (m.get(k) || 0) + 1); });
                 s.rows = [...m.entries()].map(([k, value]) => { const [a, b, c] = k.split('\u0001'); return {a, b, c: c || '', value}; }); s.o = {...(s.o || {}), axisA: i18n(DIMS[ax[0]][0]), axisB: i18n(DIMS[ax[1]][0]), axisC: ax[2] ? i18n(DIMS[ax[2]][0]) : ''};
