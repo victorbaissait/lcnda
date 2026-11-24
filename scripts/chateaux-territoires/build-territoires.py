@@ -156,6 +156,15 @@ def enc_geom(geom, q, tol, clip=None):
     return (out, [round(v / q) for v in box]) if out else (None, None)
 
 
+def _xs(r, k=0):
+    """les valeurs absolues (x si k=0, y si k=1) d'un anneau codé en différences"""
+    out, v = [], 0
+    for i in range(k, len(r), 2):
+        v += r[i]
+        out.append(v)
+    return out
+
+
 def commons_map(name, cache):
     os.makedirs(cache, exist_ok=True)
     path = os.path.join(cache, 'map-' + urllib.parse.quote(name, safe='')[:150])
@@ -251,6 +260,13 @@ def build_items(cache, shapes_out):
                             if enc:
                                 geoms += enc
                     g = geoms or None
+                    # un contour qui déborde largement de l'Europe (empires coloniaux…) : il dirait « Paris est dans l'empire colonial » ; écarté
+                    if g:
+                        xs = [v for poly in g for r in poly[:1] for v in _xs(r)]
+                        ys = [v for poly in g for r in poly[:1] for v in _xs(r, 1)]
+                        if min(xs) * 0.001 < -32 or max(xs) * 0.001 > 65 or min(ys) * 0.001 < 25 or max(ys) * 0.001 > 75:
+                            print('  contour hors d’Europe écarté', name, flush=True)
+                            g = None
                 if g:
                     shape_ix[name] = len(shapes)
                     shapes.append({'q': x, 'file': 'Data:' + name, 'licence': lic, 'g': g})

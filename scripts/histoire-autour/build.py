@@ -21,7 +21,7 @@ import sys
 import urllib.parse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from ha_common import (cached, encode_line, http, km, overpass, qid, simplify, sparql, wd_date, wkt_point, write_gz)  # noqa: E402
+from ha_common import (cached, encode_line, http, km, overpass, qid, simplify, sparql, wd_date, wd_labels, wkt_point, write_gz)  # noqa: E402
 
 TODAY = datetime.date.today().isoformat()
 WD_SRC = {'source': 'Wikidata', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org', 'built': TODAY}
@@ -67,8 +67,18 @@ def multi(rows, key, v):
     return out
 
 
-def names_of(cache, name, where, var='?it'):
-    """{Qid: (libellé, titre frwiki)} pour tous les objets d'un motif SPARQL (une seule requête)"""
+def names_of(cache, name, where, var='?it', ids=None):
+    """{Qid: (libellé, titre frwiki)} pour tous les objets d'un motif SPARQL (une seule requête ; sinon par lots, sans frwiki)"""
+    try:
+        return names_inline(cache, name, where, var)
+    except RuntimeError as e:
+        if ids is None:
+            raise
+        print(f'  ⚠️ {e} : libellés par lots', flush=True)
+        return {k: (v, '') for k, v in wd_labels(cache, name + '-ids', ids).items()}
+
+
+def names_inline(cache, name, where, var):
     q = f'SELECT {var} {var}fr {var}en ?frw WHERE {{ {where} {lab(var)} OPTIONAL {{ ?frw schema:about {var} ; schema:isPartOf <https://fr.wikipedia.org/> }} }}'
     out = {}
     for r in sparql(cache, name, q):
@@ -76,6 +86,21 @@ def names_of(cache, name, where, var='?it'):
         if k not in out or (not out[k][0] and pick(r, var[1:])):
             frw = r.get('frw', '')
             out[k] = (pick(r, var[1:]), urllib.parse.unquote(frw.rsplit('/', 1)[-1]) if frw else '')
+    return out
+
+
+def attrs(cache, name, where, props, var='?it'):
+    """{prop: {Qid: [libellés]}} : une requête pour les valeurs (sans libellés), puis les libellés par lots"""
+    vals = ' '.join(f'wdt:{p}' for p in props)
+    rows = sparql(cache, name, f'SELECT DISTINCT {var} ?p ?v WHERE {{ {where} VALUES ?p {{ {vals} }} {var} ?p ?v . FILTER(isIRI(?v)) }}')
+    labs = wd_labels(cache, name, [qid(r['v']) for r in rows])
+    out = {p: {} for p in props}
+    for r in rows:
+        p, x = qid(r['p']), labs.get(qid(r['v']), '')
+        if x and p in out:
+            lst = out[p].setdefault(qid(r[var[1:]]), [])
+            if x not in lst:
+                lst.append(x)
     return out
 
 
@@ -123,8 +148,8 @@ def build_batailles(cache):
         if x:
             wars.setdefault(qid(r['b']), []).append(x)
     bel = multi(sparql(cache, 'bat-camps', f'SELECT ?b ?p ?pfr ?pen WHERE {{ {BAT} ?b wdt:P710 ?p . {lab("?p")} }}'), 'b', 'p')
-    locs = multi(sparql(cache, 'bat-lieux', f'SELECT ?b ?l ?lfr ?len WHERE {{ {BAT} ?b wdt:P276 ?l . {lab("?l")} }}'), 'b', 'l')
-    ctry = multi(sparql(cache, 'bat-pays', f'SELECT ?b ?l ?lfr ?len WHERE {{ {BAT} ?b wdt:P17 ?l . {lab("?l")} }}'), 'b', 'l')
+    at = attrs(cache, 'bat-lieux-pays', BAT, ['P276', 'P17'], '?b')
+    locs, ctry = at['P276'], at['P17']
     rows = []
     for b in ids:
         x = base[b]
@@ -367,11 +392,10 @@ def build_navires(cache):
         if yw is not None:
             x['wreck'] = yw
     print(f'⚓ {len(base)} navires datés', flush=True)
-    labs = names_of(cache, 'nav-noms', SHIP)
-    kind = multi(sparql(cache, 'nav-types', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {SHIP} ?it wdt:P31 ?t . {lab("?t")} }}'), 'it', 't')
-    port = multi(sparql(cache, 'nav-ports', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {SHIP} ?it wdt:P504 ?t . {lab("?t")} }}'), 'it', 't')
-    flag = multi(sparql(cache, 'nav-pavillons', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {SHIP} ?it wdt:P8047|wdt:P17 ?t . {lab("?t")} }}'), 'it', 't')
-    oper = multi(sparql(cache, 'nav-armateurs', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {SHIP} ?it wdt:P137 ?t . {lab("?t")} }}'), 'it', 't')
+    labs = names_of(cache, 'nav-noms', SHIP, ids=list(base))
+    at = attrs(cache, 'nav-attrs', SHIP, ['P31', 'P504', 'P8047', 'P17', 'P137'])
+    kind, port, oper = at['P31'], at['P504'], at['P137']
+    flag = {k: at['P8047'].get(k) or at['P17'].get(k) for k in set(at['P8047']) | set(at['P17'])}
     img = images_of(cache, 'nav-images', SHIP)
     rows = []
     for s in sorted(base):
@@ -431,7 +455,7 @@ def build_phares(cache):
     ids = sorted(base)
     print(f'🗼 {len(ids)} phares placés ; {sum(1 for i in ids if base[i]["rg"])} avec portée Wikidata', flush=True)
     labs = names_of(cache, 'ph-noms', LIGHT)
-    ctry = multi(sparql(cache, 'ph-pays', f'SELECT ?it ?t ?tfr ?ten WHERE {{ {LIGHT} ?it wdt:P17 ?t . {lab("?t")} }}'), 'it', 't')
+    ctry = attrs(cache, 'ph-pays', LIGHT, ['P17'])['P17']
     img = images_of(cache, 'ph-images', LIGHT)
     # la portée manquante : OpenStreetMap (seamark:light:range), le feu le plus proche à 300 m au plus
     osm = []

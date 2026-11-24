@@ -64,9 +64,33 @@ def cached(cache, name, fetch):
 def sparql(cache, name, query):
     """une requête Wikidata, gardée dans le cache (nom = name + empreinte de la requête)"""
     key = hashlib.sha1(query.encode()).hexdigest()[:10]
-    raw = cached(cache, f'wd-{name}-{key}.json', lambda: http('https://query.wikidata.org/sparql', data=urllib.parse.urlencode({'query': query}).encode(),
-                                                              headers={'Accept': 'application/sparql-results+json', 'Content-Type': 'application/x-www-form-urlencoded'}))
+
+    def fetch():  # une réponse coupée (délai dépassé côté serveur) n'est pas gardée : on réessaie
+        for i in range(4):
+            raw = http('https://query.wikidata.org/sparql', data=urllib.parse.urlencode({'query': query}).encode(),
+                       headers={'Accept': 'application/sparql-results+json', 'Content-Type': 'application/x-www-form-urlencoded'})
+            try:
+                json.loads(raw)
+                return raw
+            except ValueError:
+                print(f'  … réponse coupée ({name}), on réessaie', flush=True)
+        raise RuntimeError(f'Wikidata : la requête {name} dépasse le délai')
+    raw = cached(cache, f'wd-{name}-{key}.json', fetch)
     return [{k: v['value'] for k, v in b.items()} for b in json.loads(raw)['results']['bindings']]
+
+
+def wd_labels(cache, name, ids, size=2500):
+    """{Qid: libellé fr (sinon en)} pour une liste d'entités, par lots (VALUES)"""
+    out = {}
+    ids = sorted({i for i in ids if i})
+    for k in range(0, len(ids), size):
+        vals = ' '.join(f'wd:{q}' for q in ids[k:k + size])
+        q = f'SELECT ?it ?fr ?en WHERE {{ VALUES ?it {{ {vals} }} OPTIONAL {{ ?it rdfs:label ?fr FILTER(LANG(?fr)="fr") }} OPTIONAL {{ ?it rdfs:label ?en FILTER(LANG(?en)="en") }} }}'
+        for r in sparql(cache, f'{name}-lab{k // size}', q):
+            x = r.get('fr') or r.get('en') or ''
+            if x:
+                out.setdefault(qid(r['it']), x)
+    return out
 
 
 def overpass(cache, name, query):

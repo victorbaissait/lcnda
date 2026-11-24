@@ -45,7 +45,7 @@
 
     /* ═════════════ l'annuaire : ce qui est enregistré, avant ou après nous ═════════════ */
     let changed = null, syncTries = 0;
-    const schedule = () => { clearTimeout(changed); changed = setTimeout(sync, 30); };
+    const schedule = () => { try { sync(false); } catch (_) {} clearTimeout(changed); changed = setTimeout(sync, 30); };
     const adopt = arr => {
         if (!Array.isArray(arr)) arr = [];
         if (arr.__ld) return arr;
@@ -63,8 +63,10 @@
     const groupOf = d => (GROUPS.some(g => g[0] === d.group) ? d.group : 'Le monde');
 
     /** range chaque liste dans Listes : le nom (app.js defaultListTypes), le groupe « 🧰 Données », la page */
-    function sync() {
-        const app = A(), L = app.defaultListTypes; if (!Array.isArray(L) || (!ext.listGroupDefaults && syncTries < 50)) { syncTries++; setTimeout(sync, 200); if (!Array.isArray(L)) return; }
+    function sync(repaint = true) {
+        const app = A(), L = app.defaultListTypes;
+        if (repaint && (!Array.isArray(L) || (!ext.listGroupDefaults && syncTries < 50))) { syncTries++; setTimeout(sync, 200); }
+        if (!Array.isArray(L)) return;
         ext.lists = ext.lists || {};
         if (!L.some(x => x[0] === OVERVIEW)) L.push([OVERVIEW, '90', T('🧰 Toutes les données')]);
         ext.lists[OVERVIEW] = token => renderOverview(token);
@@ -77,7 +79,7 @@
         }
         if (G) G[3].splice(0, G[3].length, OVERVIEW, ...ds.map(keyOf));
         const st = app.state;
-        if (st?.module === 'listes') { try { app.renderSidebar?.(); } catch (_) {} }
+        if (repaint && st?.module === 'listes') { try { app.renderSidebar?.(); } catch (_) {} }
     }
     const prevShown = ext.listShown;
     ext.listShown = k => { if (String(k).startsWith('data_')) { const d = byKey(k); return !!d && shown(d); } return prevShown ? prevShown(k) : true; };

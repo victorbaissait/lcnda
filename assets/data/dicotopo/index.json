@@ -481,6 +481,54 @@
    "old": 12190,
    "places": 11651,
    "size": 395300
+  },
+  "80": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Somme",
+    "bibl": "Garnier (Jacques), Dictionnaire topographique du département de la Somme, tome 1, Paris/Amiens, 1867-1878.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k1109689"
+   },
+   "communes": 783,
+   "label": "Somme",
+   "old": 19734,
+   "places": 5802,
+   "size": 369431
+  },
+  "86": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Vienne",
+    "bibl": "Redet (Louis-François-Xavier), Dictionnaire topographique du département de la Vienne, Paris, 1881.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k110098j"
+   },
+   "communes": 295,
+   "label": "Vienne",
+   "old": 22363,
+   "places": 11968,
+   "size": 597440
+  },
+  "88": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique des Vosges",
+    "bibl": "Marichal (Paul), Dictionnaire topographique du département des Vosges, Paris, 1941.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k6561169q"
+   },
+   "communes": 531,
+   "label": "Vosges",
+   "old": 16774,
+   "places": 17258,
+   "size": 635138
+  },
+  "89": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Yonne",
+    "bibl": "Quantin (Maximilien), Dictionnaire topographique du département de l’Yonne, Paris, 1862.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k1100975"
+   },
+   "communes": 467,
+   "label": "Yonne",
+   "old": 4582,
+   "places": 5925,
+   "size": 199232
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

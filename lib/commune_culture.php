@@ -9,8 +9,8 @@ declare(strict_types=1);
  *  - cc-communes.json.gz   : les communes (code INSEE → nom, position) — Wikidata (CC0), pour reconnaître un lieu sans code INSEE ;
  *  - cc-oeuvres.json.gz    : 🎬 films tournés dans la commune (P915 lieu de tournage) et 📖🎵🎨 œuvres qui s'y passent (P840 lieu de
  *                            l'action) ou qui en parlent (P921 sujet) — Wikidata (CC0) ;
- *  - cc-armoiries.json.gz  : 🛡️ armoiries des communes : image (Wikidata P94 → Wikimedia Commons, auteur et licence de chaque fichier)
- *                            et blasonnement (pages « Armorial des communes de … » de Wikipédia en français, CC BY-SA 4.0) ;
+ *  - cc-armoiries.json.gz  : 🛡️ armoiries des communes : image (Wikidata P94 → Wikimedia Commons ; l'auteur et la licence de chaque
+ *                            fichier sont lus en ligne quand l'image s'affiche : cc_credit) et blasonnement (pages « Armorial des communes de … » de Wikipédia en français, CC BY-SA 4.0) ;
  *  - cc-plats.json.gz      : 🍲 plats et produits d'une région (Wikidata : lieu de création P1071, cuisine régionale P361) — CC0.
  * EN LIGNE, à la demande, puis gardé sur l'ordinateur (dossier « cache/commune-culture ») :
  *  - 📜 origine du nom et histoire : sections « Toponymie » et « Histoire » de l'article Wikipédia de la commune (CC BY-SA 4.0) ;
@@ -24,7 +24,8 @@ declare(strict_types=1);
  *  - GET cc_place&place_id=|insee=|name=&lat=&lon=   → {commune, arms, works, dishes} (sans réseau)
  *  - GET cc_wiki&…                                   → {toponymie, histoire, article, source} (en ligne, gardé)
  *  - GET cc_person&id=                               → {lines…} (sans réseau) · GET cc_rues&id=|name=&first= (en ligne, gardé)
- *  - GET cc_list&kind=oeuvres|armoiries|plats|rietstap → {rows} · GET cc_about
+ *  - GET cc_credit&files=a.svg|b.svg (auteur et licence des images, Commons, en ligne, gardé)
+ *  - GET cc_list&kind=oeuvres|armoiries|plats|rues|rietstap → {rows} · GET cc_about
  *  - POST cc_cache_clear / cc_cache_restore {token}
  * Essais : GENEALOGY_TEST=1 + LCNDA_TEST_CC_DIR (un fichier <étape>.json par appel) ; fichier absent = hors ligne.
  * Fabriquer ces fichiers à partir des vraies réponses : LCNDA_CC_RECORD_DIR (ligne de commande seulement).
@@ -33,8 +34,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/commune_plus.php';
 
 const CC_UA = 'LCNDA-genealogie/1.0 (application de bureau ; recherche a la demande ; https://github.com/victorbaissait/lcnda)';
-const CC_TTL = ['wiki' => 180 * 86400, 'article' => 180 * 86400, 'rues' => 90 * 86400];
-const CC_HOSTS = ['fr.wikipedia.org', 'www.wikidata.org', 'api-adresse.data.gouv.fr'];
+const CC_TTL = ['wiki' => 180 * 86400, 'article' => 180 * 86400, 'rues' => 90 * 86400, 'credit' => 180 * 86400];
+const CC_HOSTS = ['fr.wikipedia.org', 'www.wikidata.org', 'commons.wikimedia.org', 'api-adresse.data.gouv.fr'];
 const CC_WP_LICENCE = ['label' => 'CC BY-SA 4.0', 'url' => 'https://creativecommons.org/licenses/by-sa/4.0/deed.fr'];
 const CC_BAN = ['label' => 'Base Adresse Nationale (BAN)', 'licence' => 'Licence Ouverte 2.0 (Etalab)', 'url' => 'https://adresse.data.gouv.fr/'];
 const CC_WD = ['label' => 'Wikidata', 'licence' => 'CC0 1.0', 'url' => 'https://www.wikidata.org/wiki/Wikidata:Licensing'];
@@ -234,6 +235,31 @@ function cc_arms_row(string $insee, array $r, array $D): array
         'lat' => $c[1] ?? null, 'lon' => $c[2] ?? null];
 }
 
+/** l'auteur et la licence d'images de Commons (en ligne, gardé) : files = « Blason ville fr X.svg » (au plus 20) → {fichier: {author, licence, licence_url}} */
+function cc_credit(array $q): array
+{
+    $files = array_values(array_unique(array_filter(array_map(static fn($f) => trim(str_replace('_', ' ', (string) $f)), is_array($q['files'] ?? null) ? $q['files'] : explode('|', (string) ($q['files'] ?? ''))),
+        static fn($f) => $f !== '' && mb_strlen($f) < 240 && !preg_match('#[/\\\\<>{}\[\]|\#]#', $f))));
+    $files = array_slice($files, 0, 20);
+    if (!$files) { return ['ok' => true, 'credits' => new stdClass()]; }
+    sort($files);
+    $r = cc_cached('credit', implode('|', $files), static function () use ($files) {
+        $j = cc_json('commons_credit_' . substr(sha1(implode('|', $files)), 0, 10) . '.json', 'https://commons.wikimedia.org/w/api.php?' . http_build_query(['action' => 'query', 'titles' => implode('|', array_map(static fn($f) => 'File:' . $f, $files)),
+            'prop' => 'imageinfo', 'iiprop' => 'extmetadata', 'iiextmetadatafilter' => 'Artist|Credit|LicenseShortName|LicenseUrl|UsageTerms', 'format' => 'json', 'formatversion' => '2']));
+        $norm = []; foreach ($j['query']['normalized'] ?? [] as $n) { $norm[(string) $n['to']] = (string) $n['from']; }
+        $out = [];
+        foreach ($j['query']['pages'] ?? [] as $pg) {
+            $t = (string) ($pg['title'] ?? ''); $t = (string) preg_replace('/^(File|Fichier):/', '', $norm[$t] ?? $t);
+            $md = $pg['imageinfo'][0]['extmetadata'] ?? []; $v = static fn($k) => (string) ($md[$k]['value'] ?? '');
+            $lic = cplus_text($v('LicenseShortName') ?: $v('UsageTerms'), 80);
+            if ($lic === '') { continue; }
+            $out[str_replace('_', ' ', $t)] = ['author' => cplus_text($v('Artist'), 160) ?: cplus_text($v('Credit'), 160), 'licence' => $lic, 'licence_url' => $v('LicenseUrl')];
+        }
+        return ['ok' => true, 'credits' => $out ?: new stdClass()];
+    }, !empty($q['fresh']));
+    return $r + ['source' => ['label' => 'Wikimedia Commons', 'licence' => i18n_t('licence propre à chaque image'), 'url' => 'https://commons.wikimedia.org/']];
+}
+
 /* ═════════════════════ 🍲 le plat de sa région ═════════════════════ */
 
 /** les plats liés au lieu : la commune elle-même, puis son département, puis sa région ou sa province ; au plus $max */
@@ -362,15 +388,16 @@ function cc_wiki(PDO $pdo, array $q): array
 /* ═════════════════════ 🏷️ rues à son nom (Base Adresse Nationale, en ligne) ═════════════════════ */
 
 /** les voies et lieux-dits de France dont le nom contient le nom de famille (mot entier) ; avec le prénom : « Rue Jean Mazaud » */
-function cc_rues_search(string $last, string $first = '', bool $fresh = false): array
+function cc_rues_search(string $last, string $first = '', bool $fresh = false, string $citycode = ''): array
 {
     $last = trim((string) preg_replace('/\s+/u', ' ', $last)); $first = trim((string) preg_replace('/\s+/u', ' ', $first));
     if (mb_strlen($last) < 3) { return ['ok' => false, 'message' => i18n_t('Il faut un nom de famille d’au moins 3 lettres.')]; }
-    $key = cc_fold($last) . '|' . cc_fold($first);
-    return cc_cached('rues', $key, static function () use ($last, $first) {
+    $citycode = preg_match('/^\d[\dAB]\d{3}$/', $citycode) ? $citycode : '';
+    $key = cc_fold($last) . '|' . cc_fold($first) . '|' . $citycode;
+    return cc_cached('rues', $key, static function () use ($last, $first, $citycode) {
         $q = trim(($first !== '' ? $first . ' ' : '') . $last);
-        $step = 'ban_' . substr(sha1(cc_fold($q)), 0, 10) . '.json';
-        $j = cc_json($step, 'https://api-adresse.data.gouv.fr/search/?' . http_build_query(['q' => $q, 'type' => 'street', 'limit' => 50, 'autocomplete' => 0]));
+        $step = 'ban_' . substr(sha1(cc_fold($q) . $citycode), 0, 10) . '.json';
+        $j = cc_json($step, 'https://api-adresse.data.gouv.fr/search/?' . http_build_query(['q' => $q, 'type' => 'street', 'limit' => 50, 'autocomplete' => 0] + ($citycode !== '' ? ['citycode' => $citycode] : [])));
         $L = cc_fold($last); $F = $first !== '' ? cc_fold(explode(' ', $first)[0]) : '';
         $items = []; $seen = [];
         foreach ($j['features'] ?? [] as $f) {
@@ -399,10 +426,13 @@ function cc_rues(PDO $pdo, array $q): array
         $r = cc_rues_search($P['last'], '', $fresh);
         if (empty($r['ok'])) { return $r; }
         // « une rue porte peut-être le nom de ton ancêtre » : prénom + nom dans une commune de sa vie
+        // (une question par commune de sa vie, au plus 4, filtrée sur la commune : citycode)
         $mine = [];
         if ($P['first'] !== '') {
-            $rf = cc_rues_search($P['last'], $P['first'], $fresh);
-            foreach ($rf['items'] ?? [] as $it) { if ($it['first'] && in_array($it['insee'], $P['insees'], true)) { $mine[] = $it; } }
+            foreach (array_slice($P['insees'], 0, 4) as $ins) {
+                $rf = cc_rues_search($P['last'], $P['first'], $fresh, $ins);
+                foreach ($rf['items'] ?? [] as $it) { if ($it['first'] && $it['insee'] === $ins) { $mine[] = $it; } }
+            }
         }
         foreach ($r['items'] as &$it) { $it['his'] = in_array($it['insee'], $P['insees'], true); }
         unset($it);
@@ -580,6 +610,7 @@ function cc_api_get(PDO $pdo, string $action, array $q): array
         'cc_wiki' => cc_wiki($pdo, $q),
         'cc_person' => cc_person($pdo, $q),
         'cc_rues' => cc_rues($pdo, $q),
+        'cc_credit' => cc_credit($q),
         'cc_list' => cc_list($pdo, $q),
         'cc_about' => cc_about(),
         default => throw new LcndaBadInput('Action inconnue.'),
