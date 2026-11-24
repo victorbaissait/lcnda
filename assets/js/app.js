@@ -148,8 +148,8 @@
         'lcnda-museum-voice-rate':'genealogie-museum-voice-rate','lcnda-vx-smart':'genealogie-vx-smart','lcnda-vx-alignto':'genealogie-vx-alignto','lcnda-mt-rush-sort':'genealogie-mt-rush-sort',
         'lcnda-imgdup-mode':'genealogie-imgdup-mode','lcnda-imgdup-sens':'genealogie-imgdup-sens','lcnda-media-picker-size':'genealogie-media-picker-size','lcnda-controle-filtres':'genealogie-controle-filtres',
         'lcnda-gazette-style':'genealogie-gazette-style','lcnda-trajets-jour':'genealogie-trajets-jour','lcnda-aide-lecture-lang':'genealogie-aide-lecture-lang','lcnda-autrefois-region':'genealogie-autrefois-region',
-        'lcnda-faces-speed':'genealogie-faces-speed','lcnda-tr-era':'genealogie-tr-era','lcnda-fond-ecran':'genealogie-fond-ecran','lcnda-jeux-famille-prefs-v1':'genealogie-jeux-famille-prefs-v1',
-        'lcnda-laby-prefs-v1':'genealogie-laby-prefs-v1','lcnda-laby-presets-v1':'genealogie-laby-presets-v1',
+        'lcnda-faces-speed':'genealogie-faces-speed','lcnda-tr-era':'genealogie-tr-era','lcnda-fond-ecran':'genealogie-fond-ecran',
+        // les jeux (lcnda-jeux-famille-prefs-v1, lcnda-laby-*) restent sur cet ordinateur : une partie n'écrit jamais dans la base (tests/test-jeux-cartes.js)
     };
     (function renameSettingKeys(){
         let store;try{store=window.localStorage;store.length;}catch(_){return;}

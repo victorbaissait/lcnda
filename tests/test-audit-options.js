@@ -102,6 +102,7 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
         const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result ?? r; } catch (e) { return {error: e.message}; } }, [a, b]);
         const go = async m => { await p.evaluate(mod => window.LCNDA_APP.setModule(mod), m); await sleep(500); };
+        const closeDlgs = () => p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.dataset.ownClose = '1'; delete d.dataset.dirty; d.close(); d.remove(); }));
         const lastToastUndo = async () => { const b = p.locator('.toast.undo .ui-toast-btn').last(); await b.click(); await sleep(400); };
 
         /* ═════ 🕘 Historique unifié ═════ */
@@ -186,7 +187,7 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
             await p.click('#workspace [data-ong-cite]'); await p.waitForSelector('dialog[open] [data-ong-citetext]');
             await p.check('dialog[open] input[name="style"][value="ee"]');
             assert.match(await p.inputValue('dialog[open] [data-ong-citetext]'), /3 E 12\/4/);
-            await p.keyboard.press('Escape'); await sleep(200);
+            await closeDlgs(); await sleep(200);
             assert.equal(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-documents-tab')).citeStyle), 'ee');
             await p.evaluate(() => { const d = document.querySelector('#workspace details.ui-ph-more'); if (d) d.open = true; });
             await p.click('#workspace [data-ong-del]');
