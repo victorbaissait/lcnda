@@ -52,6 +52,9 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=2">
+    <link rel="stylesheet" href="assets/css/audit-cartes.css?v=1">
+    <link rel="stylesheet" href="assets/css/audit-personnes.css?v=1">
+    <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=1">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=2">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
