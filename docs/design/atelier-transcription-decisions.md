@@ -95,3 +95,6 @@ Catalogue de 9 modèles (lib/transcription_actes.php, TX_DEEP_MODELS) : chacun a
 
 ## Décision du 24 novembre (ordre)
 Pour plus tard : commandes vocales dans toute l'app, « Poser une question au document », infographie familiale. Le reste de la liste continue (B, C, D, E, dictée Mac/Windows, « ce n'est pas une personne », résumé et découvertes, documents liés, actes en double, frise des documents, prochaine piste, comparer deux personnes, « Où je trouve ça ? », petits restes de l'Atelier).
+
+## Documents liés, recueils depuis Documents, chapitres (24 novembre) — maquette docs/design/documents-lies-recueils.html
+Demandé : documents liés (aussi dans les enquêtes) ; recueil depuis Documents ; chapitres d'un recueil (« de telle page à telle page : les mariages de 1870 »). Choix conseillés pris (« fais tout ») : liens dans les deux sens ; « En commun » / « Ce que l'autre t'apprend » calculés depuis les transcriptions ; découpage proposé seulement sur demande ; liens et raison dans le TEI et le GEDCOM, table des matières à l'impression. Ordre : 1) documents liés ; 2) enquêtes ; 3) recueil depuis Documents ; 4) chapitres ; 5) découpage proposé et incohérences ; 6) exports, FAQ.
