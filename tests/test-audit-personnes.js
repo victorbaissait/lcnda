@@ -280,7 +280,7 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
             await p.click('.person-hero h2'); await p.keyboard.press('Control+z');
             await p.waitForFunction(async i => ((await window.LCNDA_APP.api('person', {id: i})).person.occupation || '') === '', ID.jean, {timeout: 15000});
             assert.equal(await p.$('dialog.confirm-dialog[open], dialog[open] .confirm-box'), null);
-            assert.ok(await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].some(x => /Annulé/.test(x.textContent))));
+            await p.waitForFunction(() => [...document.querySelectorAll('.ui-toast')].some(x => /Annulé/.test(x.textContent) && /Rétablir/.test(x.textContent)), null, {timeout: 10000});
             await clickToast('↷ Rétablir');
             await p.waitForFunction(async i => (await window.LCNDA_APP.api('person', {id: i})).person.occupation === 'charron', ID.jean, {timeout: 15000});
         });

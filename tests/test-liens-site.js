@@ -50,11 +50,11 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
     const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env, stdio: 'ignore'});
     const base = `http://127.0.0.1:${port}/`;
     for (let i = 0; i < 100; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await sleep(100); } }
-    const browser = await chromium.launch(); browser.on('disconnected', () => console.log('!! navigateur déconnecté (tué ailleurs ?)'));
+    const browser = await chromium.launch();
     const errs = [];
     try {
         const p = await (await browser.newContext({viewport: {width: 1440, height: 900}})).newPage();
-        p.on('pageerror', e => errs.push(e.message)); p.on('crash', () => console.log('!! la page a planté (mémoire ?)')); p.on('close', () => console.log('!! page fermée'));
+        p.on('pageerror', e => errs.push(e.message));
         await p.goto(base, {timeout: 90000}); await p.waitForFunction(() => window.LCNDA_EXT?.siteReceive && window.LCNDA_EXT?.siteKit && window.LCNDA_EXT?.sendTo && window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.openDialog, null, {timeout: 60000}).catch(async e => { console.log(await p.evaluate(() => JSON.stringify({r: !!window.LCNDA_EXT?.siteReceive, k: !!window.LCNDA_EXT?.siteKit, s: !!window.LCNDA_EXT?.sendTo, c: !!window.LCNDA_APP?.state?.csrf, d: !!window.LCNDA_EXT?.openDialog})), errs); throw e; });
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
         const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result || r; } catch (e) { return {error: e.message}; } }, [a, b]);

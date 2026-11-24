@@ -5,6 +5,7 @@
  *  - 👶 Les prénoms qui sautent une génération (la popularité INSEE est déjà dans Patrimoine → Prénoms).
  *  - 💰 Le pouvoir d'achat : une somme d'une année → euros d'aujourd'hui, kilos de pain, journées de travail ; les sommes de l'arbre.
  *  - 📜 Les vieux mots des actes : un dictionnaire, et un acte collé dont les mots anciens sont surlignés et expliqués.
+ *  - 📅 Ce jour-là : ce qui est arrivé à la famille ce jour du calendrier, en une carte à partager (image, impression).
  */
 (() => {
     'use strict';
@@ -197,4 +198,51 @@
     }
     F.push({key: 'vieux-mots', group: 'decouvrir', icon: '📜', title: 'Les vieux mots des actes', desc: 'Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués.', render: renderWords});
     ext.tresorWords = {WORDS, highlight, skippedNames};
+
+    /* ═════════ 📅 Ce jour-là : ce qui est arrivé à la famille ce jour du calendrier (une carte à partager) ═════════ */
+    const CJ_VERB = {BIRT: ['est né', 'est née'], CHR: ['a été baptisé', 'a été baptisée'], BAPM: ['a été baptisé', 'a été baptisée'], DEAT: ['est mort', 'est morte'], BURI: ['a été inhumé', 'a été inhumée'], MARR: ['se sont mariés', 'se sont mariés']};
+    function cjDayEvents(T, tr, m, d) {
+        const md = `-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`, thisYear = new Date().getFullYear(), out = [];
+        tr.events.forEach(e => {
+            if (!e.d || !e.d.endsWith(md)) return;
+            let who = [], gender = 'male';
+            if (e.p) { const p = tr.byId.get(e.p); if (!p) return; who = [p]; gender = p.gender; }
+            else if (e.f) { const f = (tr.families || []).find(x => x.id === e.f); if (!f) return; who = [f.a, f.b].map(id => tr.byId.get(id)).filter(Boolean); if (!who.length) return; }
+            else return;
+            const y = Number(e.d.slice(0, 4)), v = CJ_VERB[e.tag], names = T.and(who.map(T.name)), pl = T.place(tr, e.place);
+            const text = v ? (who.length > 1 ? i18n('{who} se sont mariés', {who: names}) : gx(who[0], `{who} ${v[0]}`, `{who} ${v[1]}`, {who: names})) : i18n('{what} : {who}', {what: e.label, who: names});
+            out.push({y, ago: thisYear - y, text: `${text}${pl ? ' ' + T.at(pl) : ''}`, ids: who.map(p => p.id), tag: e.tag});
+        });
+        return out.sort((a, b) => a.y - b.y);
+    }
+    async function renderCeJour(host, T) {
+        const tr = await T.tree(), now = new Date();
+        host.innerHTML = `<form class="h-tr-panel h-tr-row" data-cj-form><label>${i18n('Le jour')}<input type="date" name="day" value="${now.toISOString().slice(0, 10)}"></label>
+            <button type="button" class="button small secondary" data-cj-shift="-1">${i18n('‹ Veille')}</button><button type="button" class="button small secondary" data-cj-shift="1">${i18n('Lendemain ›')}</button><button type="button" class="button small secondary" data-cj-today>${i18n('Aujourd’hui')}</button></form><div data-cj-out></div>`;
+        const form = host.querySelector('[data-cj-form]'), out = host.querySelector('[data-cj-out]');
+        const md = () => { const v = form.elements.day.value || now.toISOString().slice(0, 10); return [Number(v.slice(5, 7)), Number(v.slice(8, 10))]; };
+        let list = [];
+        const draw = () => {
+            const [m, d] = md(); list = cjDayEvents(T, tr, m, d);
+            out.innerHTML = `<article class="h-tr-cj" data-cj-card><h3 class="h-tr-big">${T.esc(i18n('Ce jour-là, le {day}', {day: T.dayMonth(m, d)}))}</h3>${list.length ? `<ul class="h-tr-cj-list">${list.map(x => `<li><b>${x.y}</b> <span>${T.esc(x.text)}</span> <small class="h-tr-muted">${T.esc(i18n('il y a {n} ans', {n: String(x.ago)}))}</small> <button type="button" class="link-button h-tr-noprint" data-cj-open="${x.ids[0]}">${i18n('Voir la fiche')}</button></li>`).join('')}</ul>` : T.empty(i18n('Rien de noté ce jour-là dans la famille'), {icon: '📅', hint: i18n('Essaie le lendemain, ou complète les dates exactes des actes.')})}</article>`;
+            T.actions(host, {exports: [{icon: '🖼', label: i18n('Image de la carte (PNG)'), name: () => `ce-jour-la-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}.png`, make: () => T.svgPng(cjCardSvg(T, m, d, list), 1200)}], media: true, print: () => T.printNode(i18n('Ce jour-là'), out)});
+        };
+        form.addEventListener('change', draw);
+        form.addEventListener('click', e => {
+            const s = e.target.closest('[data-cj-shift]'), t = e.target.closest('[data-cj-today]'); if (!s && !t) return; e.preventDefault();
+            const cur = new Date((form.elements.day.value || now.toISOString().slice(0, 10)) + 'T12:00'); if (s) cur.setDate(cur.getDate() + Number(s.dataset.cjShift));
+            form.elements.day.value = (t ? now : cur).toISOString().slice(0, 10); draw();
+        });
+        out.addEventListener('click', e => { const o = e.target.closest('[data-cj-open]'); if (o) T.openPerson(Number(o.dataset.cjOpen)); });
+        draw();
+    }
+    /** la carte à partager : un dessin (SVG) avec le jour et ses événements */
+    function cjCardSvg(T, m, d, list) {
+        const W = 1200, rows = list.slice(0, 9), H = 260 + Math.max(1, rows.length) * 64, e = T.esc;
+        const wrap = s => (s.length > 70 ? s.slice(0, 68) + '…' : s);
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="#fbf7ef"/><rect x="24" y="24" width="${W - 48}" height="${H - 48}" fill="none" stroke="#b08d57" stroke-width="3"/>
+            <text x="${W / 2}" y="110" text-anchor="middle" font-family="Georgia, serif" font-size="56" fill="#3b2a14">${e(i18n('Ce jour-là, le {day}', {day: T.dayMonth(m, d)}))}</text>
+            ${rows.length ? rows.map((x, i) => `<text x="80" y="${200 + i * 64}" font-family="Georgia, serif" font-size="30" fill="#3b2a14"><tspan font-weight="bold">${x.y}</tspan>  ${e(wrap(x.text))}</text>`).join('') : `<text x="${W / 2}" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="30" fill="#6b5a44">${e(i18n('Rien de noté ce jour-là dans la famille'))}</text>`}</svg>`;
+    }
+    F.push({key: 'ce-jour-la', group: 'decouvrir', icon: '📅', title: 'Ce jour-là', desc: 'Ce qui est arrivé à la famille ce jour du calendrier : naissances, mariages, décès… en une carte à partager.', render: renderCeJour});
 })();

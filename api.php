@@ -1001,7 +1001,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-diagram-kinds',
         'genealogie-house-snap',
         'genealogie-house-lib',
-        'lcnda-decor-tree',
+        'lcnda-decor-tree', 'genealogie-decor-tree', // R8 : le nouveau nom (assets/js/app.js SETTING_RENAMES) ; l’ancien reste accepté (défauts déjà enregistrés)
         'genealogie-decor-tree-formats',
         'genealogie-decor-tree-styles',
         'genealogie-edit-tools-order',
@@ -1020,7 +1020,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-menu-hidden',
         'genealogie-list-order',
         'genealogie-list-hidden',
-        'lcnda-tresors-order',
+        'lcnda-tresors-order', 'genealogie-tresors-order',
         'genealogie-map-order',
         'genealogie-map-hidden',
         'genealogie-maintenance-order',
@@ -1107,7 +1107,7 @@ function save_site_defaults(PDO $pdo,array $data): array
         $value=site_default_value_clean($key,(string)$value);
         if($value===null)continue;
         // les réglages des tableaux peuvent contenir des formes faites d'une image : plus de place pour eux
-        if(strlen($value)>((str_starts_with($key,'genealogie-board-prefs')||in_array($key,['genealogie-house-lib','lcnda-decor-tree','genealogie-keynote-prefs'],true))?4000000:200000))throw new RuntimeException('Un réglage est trop volumineux.');
+        if(strlen($value)>((str_starts_with($key,'genealogie-board-prefs')||in_array($key,['genealogie-house-lib','lcnda-decor-tree','genealogie-decor-tree','genealogie-keynote-prefs'],true))?4000000:200000))throw new RuntimeException('Un réglage est trop volumineux.');
         $settings[$key]=$value;
     }
     if(!is_dir(dirname(SITE_DEFAULTS_PATH))&&!mkdir(dirname(SITE_DEFAULTS_PATH),0775,true)&&!is_dir(dirname(SITE_DEFAULTS_PATH)))throw new RuntimeException('Impossible de créer le dossier de configuration.');

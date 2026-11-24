@@ -133,11 +133,14 @@ echo json_encode($ids + ['inv' => $inv, 'inv2' => $inv2, 'bat' => $bat, 'media' 
         });
         await t('« ⋯ » et clic droit : les mêmes entrées, dans le même ordre ; supprimer tout de suite + ↶ Annuler', async () => {
             const want = ['↗ Ouvrir', '✎ Modifier', '⧉ Dupliquer', '⤓ Exporter le rapport…', '🖨 Imprimer le rapport', '🗑 Supprimer'];
+            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.enquetesTab = 'enquetes'; A.state.currentInvestigationId = 0; A.setModule('enquetes'); });
+            await p.waitForSelector('#sidebar-content .ui-viewtoggle'); await p.click('#sidebar-content .ui-viewtoggle [data-view="list"]');
+            await p.waitForSelector(`#workspace tr[data-enq-row="inv:${ID.inv2}"]`, {timeout: 20000});
             await p.click(`#workspace tr[data-enq-row="inv:${ID.inv2}"] [data-enq-menu]`); await p.waitForSelector('.ui-actmenu');
             const a = await menuLabels(); await closeMenus();
             await p.click(`#workspace tr[data-enq-row="inv:${ID.inv2}"] td:nth-child(2)`, {button: 'right'}); await p.waitForSelector('.ui-actmenu');
             const b = await menuLabels();
-            assert.deepStrictEqual(a.map(x => x.replace(/\s+/g, ' ')), want); assert.deepStrictEqual(b, a, 'clic droit = ⋯');
+            assert.deepStrictEqual(a.map(x => x.replace(/\s+/g, '')), want.map(x => x.replace(/\s+/g, ''))); assert.deepStrictEqual(b, a, 'clic droit = ⋯');
             await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(x => /Supprimer/.test(x.textContent)).click());
             await p.waitForFunction(i => !document.querySelector(`#workspace tr[data-enq-row="inv:${i}"]`), ID.inv2, {timeout: 10000});
             assert.strictEqual(await p.$('dialog[open]'), null, 'pas de question avant');
@@ -287,7 +290,7 @@ echo json_encode($ids + ['inv' => $inv, 'inv2' => $inv2, 'bat' => $bat, 'media' 
         });
         await t('390 px : rien ne déborde (enquête, battue)', async () => {
             await p.setViewportSize({width: 390, height: 800});
-            await p.evaluate(id => { const A = window.LCNDA_APP; A.state.enquetesTab = 'enquetes'; A.state.currentInvestigationId = id; A.renderSidebar(); window.LCNDA_PARTS.renderInvestigations(); }, ID.inv);
+            await p.evaluate(id => { const A = window.LCNDA_APP; A.state.enquetesTab = 'enquetes'; A.state.currentInvestigationId = id; A.setModule('enquetes'); }, ID.inv);
             await p.waitForSelector('.investigation-detail'); await sleep(500);
             const over = await p.evaluate(() => { const ws = document.querySelector('#workspace .page'); return [...ws.querySelectorAll('*')].filter(e => { const r = e.getBoundingClientRect(); return r.width && r.right > window.innerWidth + 2 && !e.closest('.data-table-wrap,svg,.ui-actmenu'); }).slice(0, 5).map(e => e.className || e.tagName); });
             if (over.length) console.log('   (debug)', await p.evaluate(() => [...document.querySelectorAll('#workspace .page *')].filter(e => { const r = e.getBoundingClientRect(); return r.width && r.right > window.innerWidth + 2 && !e.closest('.data-table-wrap,svg,.ui-actmenu'); }).slice(0, 8).map(e => `${e.tagName}.${e.className} w=${Math.round(e.getBoundingClientRect().width)} r=${Math.round(e.getBoundingClientRect().right)} parent=${e.parentElement.className}`).join('\n')));

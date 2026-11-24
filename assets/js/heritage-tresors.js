@@ -84,6 +84,13 @@
         items: (kind, personId = 0) => A().api('tresors', {kind, ...(personId ? {person_id: personId} : {})}).then(r => r.items || []),
         save: item => T.post('tresor_write', {op: 'save', item}),
         remove: id => T.post('tresor_write', {op: 'delete', id}),
+        /** R7 : supprimer tout de suite, avec « ↶ Annuler » (l'élément revient tel quel, même numéro) ; mem : un souvenir (« m12 ») */
+        async removeUndo(id, {mem = false, label = '', msg = '', after = null} = {}) {
+            const action = mem ? 'tresor_memory_write' : 'tresor_write', r = await T.post(action, {op: 'delete', id}), undo = r?.undo || r?.result?.undo;
+            await after?.();
+            msg = msg || (label ? i18n('« {title} » supprimé.', {title: label}) : i18n('Élément supprimé.'));
+            if (undo && A().undoToast) A().undoToast(msg, {undo: async () => { await T.post(action, {op: 'restore', undo}); await after?.(); }}); else A().toast(msg);
+        },
         download(name, blob) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000); },
         /** un nombre au hasard qui dépend d'une graine (le même tirage à chaque fois) */
         rng(seed) { let s = (Number(seed) || 1) % 2147483647; if (s <= 0) s += 2147483646; return () => (s = s * 16807 % 2147483647) / 2147483647; },
@@ -245,7 +252,7 @@
     }
     function openSettings() {
         const S = sg();
-        if (S) { S.openDialog(); const d = [...document.querySelectorAll('dialog.mt-reorder')].pop(); d?.addEventListener('close', () => { if (A().state.module === 'tresors' && A().$('#workspace .h-tr:not(.h-tr-page)')) A().$('#workspace').innerHTML = hub(); }); return; }
+        if (S) { S.openDialog(); const d = [...document.querySelectorAll('dialog.mt-reorder')].pop(); d?.addEventListener('close', () => { if (A().state.module === 'tresors' && A().$('#workspace .h-tr:not(.h-tr-page)')) { A().$('#workspace').innerHTML = hub(); applySearch(); } }); return; }
         openSettingsFlat();
     }
     function openSettingsFlat() {
@@ -256,34 +263,88 @@
             save: rows => {
                 if (rows.every(r => r.hidden)) { A().toast(i18n('Garde au moins un trésor affiché.'), 'error'); return false; }
                 try { localStorage.setItem(PREF_KEY, JSON.stringify({order: rows.map(r => r.key), hidden: rows.filter(r => r.hidden).map(r => r.key)})); } catch (_) {}
-                if (A().state.module === 'tresors' && A().$('#workspace .h-tr:not(.h-tr-page)')) A().$('#workspace').innerHTML = hub();
+                if (A().state.module === 'tresors' && A().$('#workspace .h-tr:not(.h-tr-page)')) { A().$('#workspace').innerHTML = hub(); applySearch(); }
                 A().toast(i18n('Ordre et trésors affichés enregistrés.'));
             }});
     }
+    /* ⭐ favoris et 🕘 récents (réglages gardés : genealogie-*), 🔍 chercher un trésor (C1, R13) */
+    const FAV_KEY = 'genealogie-tresors-favs', RECENT_KEY = 'genealogie-tresors-recent';
+    const lsList = k => { try { const v = JSON.parse(localStorage.getItem(k) || '[]'); return Array.isArray(v) ? v.filter(x => typeof x === 'string') : []; } catch (_) { return []; } };
+    const lsPut = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
+    const favs = () => lsList(FAV_KEY), recents = () => lsList(RECENT_KEY);
+    const fOf = k => ext.tresorFeatures.find(f => f.key === k);
+    const fold = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const isRO = () => document.body.classList.contains('is-kiosk');
+    let query = '';
+    function toggleFav(key) {
+        const l = favs(), on = l.includes(key), f = fOf(key), name = f ? i18n(f.title) : key;
+        lsPut(FAV_KEY, on ? l.filter(x => x !== key) : [...l, key]);
+        redrawHub();
+        A().toast(on ? i18n('« {title} » retiré des favoris.', {title: name}) : i18n('⭐ « {title} » dans les favoris.', {title: name}));
+    }
+    function hideFeature(key) {
+        const before = localStorage.getItem(PREF_KEY), f = fOf(key);
+        try { localStorage.setItem(PREF_KEY, JSON.stringify({...prefs(), hidden: [...prefs().hidden, key]})); } catch (_) {}
+        redrawHub();
+        A().undoToast?.(i18n('« {title} » caché (⚙️ Réglages pour le remontrer).', {title: f ? i18n(f.title) : key}), {undo: () => { try { if (before == null) localStorage.removeItem(PREF_KEY); else localStorage.setItem(PREF_KEY, before); } catch (_) {} redrawHub(); }});
+    }
+    /** R11 : le menu d'un trésor (⋯ et clic droit) — Ouvrir · ⭐ Favori · — · Cacher */
+    function cardMenu(key, anchor, ev = null) {
+        const UI = window.LCNDA_UI || {}, f = fOf(key); if (!f) return;
+        const on = favs().includes(key);
+        const items = [{icon: '↗', label: i18n('Ouvrir'), run: () => openFeature(key)}, {icon: on ? '☆' : '⭐', label: on ? i18n('Retirer des favoris') : i18n('Mettre en favori'), run: () => toggleFav(key)},
+            ...(isRO() ? [] : ['-', {icon: '🙈', label: i18n('Cacher ce trésor'), danger: true, run: () => hideFeature(key)}])];
+        return ev ? UI.contextMenu?.(ev, items, {title: `${f.icon} ${i18n(f.title)}`}) : UI.menuAt?.(anchor, items, {title: `${f.icon} ${i18n(f.title)}`});
+    }
+    const cardHtml = f => `<div class="h-tr-cell" data-tr-cell="${esc(f.key)}" data-tr-words="${esc(fold(`${i18n(f.title)} ${i18n(f.desc)} ${f.title} ${f.desc} ${f.key}`))}"><button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(i18n(f.title))}</b><small>${esc(i18n(f.desc))}</small></button><button type="button" class="h-tr-more" data-tr-more="${esc(f.key)}" title="${esc(i18n('Plus d’actions'))}" aria-label="${esc(i18n('Plus d’actions'))}">⋯</button><button type="button" class="h-tr-fav${favs().includes(f.key) ? ' is-on' : ''}" data-tr-fav="${esc(f.key)}" aria-pressed="${favs().includes(f.key)}" title="${esc(favs().includes(f.key) ? i18n('Retirer des favoris') : i18n('Mettre en favori'))}" aria-label="${esc(i18n('Favori'))}">${favs().includes(f.key) ? '★' : '☆'}</button></div>`;
+    const chipRow = (cls, label, keys) => { const l = keys.map(fOf).filter(f => f && !prefs().hidden.includes(f.key)); return l.length ? `<div class="h-tr-quick ${cls}"><span class="h-tr-quick-lab">${esc(label)}</span>${l.map(f => `<button type="button" class="h-tr-chip" data-tr-open="${esc(f.key)}" data-tr-chip="${esc(f.key)}"><span aria-hidden="true">${esc(f.icon)}</span> ${esc(i18n(f.title))}</button>`).join('')}</div>` : ''; };
     function hub() {
-        const {hidden} = prefs(), list = ordered().filter(f => !hidden.includes(f.key)), nHid = ext.tresorFeatures.filter(f => hidden.includes(f.key)).length;
-        return `<section class="page h-tr">
-            ${window.LCNDA_UI?.pageHeader ? window.LCNDA_UI.pageHeader({where: i18n('Trésors'), icon: '✨', title: i18n('Trésors de famille'), help: i18n('Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.'), actions: [`<button type="button" class="button secondary" data-tr-settings title="${esc(nHid ? i18n('Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n})', {n: A().plural(nHid, 'trésor caché')}) : i18n('Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche'))}">${i18n('⚙️ Réglages')}</button>`]})
-                : `<div class="page-header"><div><span class="eyebrow">Trésors</span><h2>✨ Trésors de famille</h2></div><div class="page-actions"><button type="button" class="button secondary" data-tr-settings>⚙️ Réglages</button></div></div>`}
-            ${folders().map(([label, fs]) => { void list; return !fs.length ? (label ? `<h2 class="h-tr-group">${esc(i18n(label))}</h2>${A().empty(i18n('Dossier vide'), {icon: '📂', hint: i18n('⚙️ Réglages pour y ranger des trésors (ou l’effacer).')})}` : '') : `${label ? `<h2 class="h-tr-group">${esc(i18n(label))}</h2>` : ''}<div class="h-tr-grid">${fs.map(f => `<button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(i18n(f.title))}</b><small>${esc(i18n(f.desc))}</small></button>`).join('')}</div>`; }).join('')}
+        const {hidden} = prefs(), nHid = ext.tresorFeatures.filter(f => hidden.includes(f.key)).length;
+        const settingsBtn = isRO() ? '' : `<button type="button" class="button secondary" data-tr-settings title="${esc(nHid ? i18n('Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n})', {n: A().plural(nHid, 'trésor caché')}) : i18n('Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche'))}">${esc(i18n('⚙️ Réglages'))}${nHid ? ` <span class="h-tr-hid">${nHid}</span>` : ''}</button>`;
+        return `<section class="page h-tr" data-tr-hub>
+            ${window.LCNDA_UI.pageHeader({where: i18n('Trésors'), icon: '✨', title: i18n('Trésors de famille'), help: i18n('Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.'), actions: [settingsBtn]})}
+            <div class="h-tr-find"><input type="search" data-tr-search placeholder="${esc(i18n('Chercher un trésor…'))}" aria-label="${esc(i18n('Chercher un trésor'))}" value="${esc(query)}" autocomplete="off"><span class="h-tr-find-count muted" data-tr-count aria-live="polite"></span></div>
+            <div data-tr-quick>${chipRow('is-fav', i18n('⭐ Favoris'), favs())}${chipRow('is-recent', i18n('🕘 Récents'), recents())}</div>
+            ${folders().map(([label, fs]) => !fs.length ? (label ? `<h2 class="h-tr-group">${esc(i18n(label))}</h2>${A().empty(i18n('Dossier vide'), {icon: '📂', hint: i18n('⚙️ Réglages pour y ranger des trésors (ou l’effacer).')})}` : '') : `<div class="h-tr-sec">${label ? `<h2 class="h-tr-group">${esc(i18n(label))}</h2>` : ''}<div class="h-tr-grid">${fs.map(cardHtml).join('')}</div></div>`).join('')}
+            <div data-tr-none hidden>${A().empty(i18n('Aucun trésor ne correspond'), {icon: '🔍', hint: i18n('Essaie un autre mot : « lettre », « carte », « jeu »…')})}</div>
         </section>`;
     }
+    /** filtre la page d'accueil (titre, phrase, sans accents) ; « N trésors » */
+    function applySearch(root = A().$('#workspace [data-tr-hub]')) {
+        if (!root) return;
+        const words = fold(query).split(/\s+/).filter(Boolean); let n = 0;
+        root.querySelectorAll('[data-tr-cell]').forEach(c => { const ok = words.every(w => c.dataset.trWords.includes(w)); c.hidden = !ok; if (ok) n++; });
+        root.querySelectorAll('.h-tr-sec').forEach(sec => { sec.hidden = !sec.querySelector('[data-tr-cell]:not([hidden])'); });
+        const cnt = root.querySelector('[data-tr-count]'); if (cnt) cnt.textContent = words.length ? T.pl(n, i18n('trésor'), i18n('trésors')) : '';
+        const none = root.querySelector('[data-tr-none]'); if (none) none.hidden = !words.length || n > 0;
+        const quick = root.querySelector('[data-tr-quick]'); if (quick) quick.hidden = !!words.length;
+    }
+    function redrawHub() {
+        const ws = A().$('#workspace'); if (!ws || A().state.module !== 'tresors' || !ws.querySelector('[data-tr-hub]')) return;
+        const had = document.activeElement?.matches?.('[data-tr-search]');
+        ws.innerHTML = hub(); applySearch();
+        if (had) { const i = ws.querySelector('[data-tr-search]'); i?.focus(); try { i.setSelectionRange(i.value.length, i.value.length); } catch (_) {} }
+    }
+    document.addEventListener('input', e => { const i = e.target.closest?.('[data-tr-search]'); if (!i) return; query = i.value; applySearch(i.closest('[data-tr-hub]')); });
+    document.addEventListener('search', e => { const i = e.target.closest?.('[data-tr-search]'); if (!i) return; query = i.value; applySearch(i.closest('[data-tr-hub]')); }, true);
+    document.addEventListener('keydown', e => { const i = e.target.closest?.('[data-tr-search]'); if (!i || e.key !== 'Enter') return; const first = i.closest('[data-tr-hub]')?.querySelector('[data-tr-cell]:not([hidden]) [data-tr-open]'); if (first) { e.preventDefault(); first.click(); } });
+    document.addEventListener('contextmenu', e => { const c = e.target.closest?.('.h-tr[data-tr-hub] [data-tr-cell], .h-tr[data-tr-hub] [data-tr-chip]'); if (!c || e.shiftKey) return; e.preventDefault(); cardMenu(c.dataset.trCell || c.dataset.trChip, null, e); });
     async function render(token) {
         const ws = A().$('#workspace'); if (!ws) return;
         const key = (location.hash.match(/^#tresors\/([\w-]+)/) || [])[1] || pending; pending = null;
         if (key && ext.tresorFeatures.some(f => f.key === key)) return openFeature(key, !location.hash.startsWith(`#tresors/${key}`));
-        ws.innerHTML = hub(); void token;
+        ws.innerHTML = hub(); applySearch(); void token;
     }
     async function openFeature(key, push = true) {
         const f = ext.tresorFeatures.find(x => x.key === key), ws = A().$('#workspace'); if (!f || !ws) return;
         if (A().state.module !== 'tresors') { pending = key; return A().setModule('tresors'); }
         if (push && location.hash !== `#tresors/${key}`) history.pushState(null, '', `#tresors/${key}`);
+        lsPut(RECENT_KEY, [key, ...recents().filter(k => k !== key)].slice(0, 6)); // 🕘 récents
         // K5 : un seul en-tête pour toutes les pages des Trésors — « ← Tous les trésors » (et la liste qui va avec) au-dessus,
         // sur-titre « Trésors · la famille du trésor », l'icône à part du nom, une phrase d'aide ; les boutons à droite (T.actions)
         const fam = i18n(GROUPS.find(g => g[0] === f.group)?.[1].replace(/^\S+\s/, '') || '');
         const back = `<nav class="h-tr-back" aria-label="Trésors"><button type="button" class="link-button" data-tr-home>${i18n('← Tous les trésors')}</button>${(ext.tresorRelated?.[key] || []).map(([l], i) => `<button type="button" class="link-button" data-tr-rel="${esc(key)}:${i}">${esc(l)}</button>`).join('')}</nav>`;
-        const head = window.LCNDA_UI?.pageHeader ? window.LCNDA_UI.pageHeader({where: fam ? i18n('Trésors · {fam}', {fam}) : i18n('Trésors'), icon: f.icon, title: i18n(f.title), help: esc(i18n(f.desc)), back, cls: 'h-tr-head', attrs: `data-tr-head="${esc(key)}"`})
-            : `<header class="page-header h-tr-head" data-tr-head="${esc(key)}"><div>${back}<span class="eyebrow">${esc(fam ? i18n('Trésors · {fam}', {fam}) : i18n('Trésors'))}</span><h2>${esc(f.icon)} ${esc(i18n(f.title))}</h2><p>${esc(i18n(f.desc))}</p></div><div class="page-actions"></div></header>`;
+        const head = window.LCNDA_UI.pageHeader({where: fam ? i18n('Trésors · {fam}', {fam}) : i18n('Trésors'), icon: f.icon, title: i18n(f.title), help: esc(i18n(f.desc)), back, cls: 'h-tr-head', attrs: `data-tr-head="${esc(key)}"`});
         ws.innerHTML = `<section class="page h-tr h-tr-page" data-tr-page="${esc(key)}">${head}<div class="h-tr-body" data-tr-body></div></section>`;
         const host = ws.querySelector('[data-tr-body]');
         // l'arbre relu à chaque ouverture : les fiches changées ailleurs y sont
@@ -292,8 +353,10 @@
     document.addEventListener('click', e => {
         const o = e.target.closest('[data-tr-open]'); if (o && o.closest('.h-tr')) { e.preventDefault(); openFeature(o.dataset.trOpen); return; }
         if (e.target.closest('[data-tr-settings]')) { e.preventDefault(); openSettings(); return; }
+        const fv = e.target.closest('[data-tr-fav]'); if (fv && fv.closest('.h-tr')) { e.preventDefault(); toggleFav(fv.dataset.trFav); return; }
+        const mo = e.target.closest('[data-tr-more]'); if (mo && mo.closest('.h-tr')) { e.preventDefault(); cardMenu(mo.dataset.trMore, mo); return; }
         const rel = e.target.closest('[data-tr-rel]'); if (rel) { e.preventDefault(); const [k, i] = rel.dataset.trRel.split(':'); ext.tresorRelated?.[k]?.[Number(i)]?.[1](); return; }
-        const h = e.target.closest('[data-tr-home]'); if (h) { e.preventDefault(); history.pushState(null, '', '#tresors'); A().$('#workspace').innerHTML = hub(); }
+        const h = e.target.closest('[data-tr-home]'); if (h) { e.preventDefault(); history.pushState(null, '', '#tresors'); A().$('#workspace').innerHTML = hub(); applySearch(); }
     });
     /* ═════════ Le bloc de la fiche : ✨ Trésors de cette personne ═════════ */
     const KIND_INFO = {letter: ['✉️', 'Lettres', 'lettres'], sense: ['👃', 'Souvenirs des sens', 'sens'], recipe: ['🥘', 'Recettes', 'recettes'], song: ['🎶', 'Chansons', 'chansons'], interview: ['🎙️', 'Entretiens', 'entretien'], candle: ['🕯️', 'Bougies', 'bougie'], passport: ['🛂', 'Passeports', 'passeports'], story: ['📖', 'Récits', ''], stamp: ['📍', 'Tampons', ''], hunt: ['🗝️', 'Chasses au trésor', ''], gazette: ['📰', 'Gazettes', ''], share: ['🔗', 'Partages', ''], reminder: ['⏰', 'Rappels', '']};

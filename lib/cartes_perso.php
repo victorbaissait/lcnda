@@ -69,6 +69,7 @@ function cartes_perso_dispatch(PDO $pdo, string $action, bool $isWrite, array $p
     try {
         if (!$isWrite && $action === 'cartes_perso') {
             $op = scalar_text($_GET['op'] ?? '', 'op');
+            if (str_starts_with($op, 'map_')) { require_once __DIR__ . '/carte_plus.php'; json_response(carte_plus_op($pdo, $op)); } // 🗺 Carte et 📊 Graphiques : filtres de lignée, centre de gravité, lieux sans position (lib/carte_plus.php)
             json_response(match ($op) {
                 'list' => ['maps' => mcp_list($pdo), 'ready' => mcp_ready(), 'kinds' => mcp_kinds_out()],
                 'get' => ['map' => mcp_get($pdo, safe_int($_GET['id'] ?? 0))],

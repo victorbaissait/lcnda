@@ -16,9 +16,10 @@
         // le Suivi montre d'abord ses blocs, puis « Autres widgets de l'app » ; le tableau de bord met les blocs du Suivi dans leur rubrique, à la fin
         const mine=all.filter(([type])=>isSuiviWidget(type)),others=all.filter(([type])=>!isSuiviWidget(type));
         const groups=suivi?[[null,mine],['Autres widgets de l’app',others]]:[[null,others],['🐾 Suivi des animaux',mine]];
-        let n=1;const item=([type,,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${String(++n).padStart(2,'0')}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button><button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="${escapeHtml(i18n('Ajouter {what}',{what:i18n(label)}))}">+</button></div></div>`;
+        const ro=kiosk(); // R6 : en consultation, la colonne montre les widgets sans « + » ni boutons de rangement
+        let n=1;const item=([type,,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${String(++n).padStart(2,'0')}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button>${ro?'':`<button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="${escapeHtml(i18n('Ajouter {what}',{what:i18n(label)}))}">+</button>`}</div></div>`;
         content.innerHTML = `<div class="dashboard-widget-catalog"><div class="dashboard-widget-catalog-item dashboard-widget-overview is-active"><div><span>01</span><strong>Vue générale</strong></div></div>${groups.filter(([,items])=>items.length).map(([title,items])=>`${title?`<div class="section-label dashboard-widget-catalog-group">${escapeHtml(title)}</div>`:''}${items.map(item).join('')}`).join('')}</div>`;
-        footer.innerHTML = `<div class="dashboard-footer-actions"><button class="button small secondary" id="dashboard-library" title="L’ordre des sortes de widgets dans cette colonne, et celles qu’on cache">🧩 Bibliothèque des widgets</button><button class="button small secondary" id="dashboard-reorder" title="Changer l’ordre des widgets de la vue générale">Réordonner les widgets</button><button class="button small secondary" id="dashboard-create-widget" title="Créer ton propre widget, de zéro ou à partir d’un widget existant">＋ Créer un widget</button></div><span style="display:block;margin-top:9px">Widgets duplicables et configurables.</span>`;
+        footer.innerHTML = ro?`<span class="muted">${escapeHtml(i18n('Mode consultation : rien ne peut être modifié.'))}</span>`:`<div class="dashboard-footer-actions"><button class="button small secondary" id="dashboard-library" title="L’ordre des sortes de widgets dans cette colonne, et celles qu’on cache">🧩 Bibliothèque des widgets</button><button class="button small secondary" id="dashboard-reorder" title="Changer l’ordre des widgets de la vue générale">Réordonner les widgets</button><button class="button small secondary" id="dashboard-create-widget" title="Créer ton propre widget, de zéro ou à partir d’un widget existant">＋ Créer un widget</button></div><span style="display:block;margin-top:9px">Widgets duplicables et configurables.</span>`;
         $$('[data-info-dashboard-widget]',content).forEach(button=>button.addEventListener('click',()=>toast(dashboardWidgetInfo[button.dataset.infoDashboardWidget]||dashboardWidgetLabel(button.dataset.infoDashboardWidget)),{signal:sidebarSignal()}));
         $$('[data-add-dashboard-widget]',content).forEach(button=>button.addEventListener('click',async()=>{
             const settings=dashboardBlockSettings();
@@ -54,6 +55,11 @@
         const extDashboard=window.LCNDA_EXT?.dashboard||{};const extData={};
         const extReady=Promise.all([...new Set(settings.widgets.map(widget=>widget.type).filter(type=>extDashboard[type]))].map(async type=>{try{extData[type]=extDashboard[type].load?await extDashboard[type].load(settings.widgets.filter(widget=>widget.type===type)):null; /* les widgets de cette sorte (leurs réglages) : « Mon agenda » ne lit que les jours qu'il montre */}catch(_){extData[type]=null;}}));
         const extraReady=cached&&cached.extra?Promise.resolve(cached.extra):Promise.all([settings.widgets.some(widget=>widget.type==='saint_day')?api('saint_of_day').catch(()=>null):null,settings.widgets.some(widget=>widget.type==='research_progress')?api('research_progress').catch(()=>null):null]);
+        // 🔎 filtre de la page (branche, de cujus, étiquette, dossier) et 🔄 « depuis 30 jours » : demandés en même temps que le reste
+        const isMainDash=state.module==='dashboard'&&!currentCustomTab();
+        const pageFilter=isMainDash?currentDashboardPage().filter:null;
+        const filterReady=pageFilter?.kind?loadPageFilter(pageFilter).catch(()=>null):Promise.resolve(null);
+        const periodReady=settings.widgets.some(w=>['stats','research_progress','quick_stat'].includes(w.type))?dashApi('period',{days:periodDays()}).catch(()=>null):Promise.resolve(null);
         const quizData=cached?cached.quizData:{};
         const sosaIds=Object.keys(sosaMap()).filter(id=>Number(id)>0&&Number(sosaNumberFor(id))>0).join(',');
         const quizReady=cached?null:Promise.all(settings.widgets.filter(widget=>widget.type==='person_quiz').map(async widget=>{
@@ -73,7 +79,7 @@
             }catch(_){quizData[widget.id]=null;}
         }));
         quizReady?.catch(()=>{}); // une erreur reste lancée plus bas (await), sans « promesse rejetée non attrapée » si la suite s'arrête avant
-        const data=cached?cached.data:await api('dashboard',{seed:state.dashboardRandomSeed||Date.now(),...dashParams});
+        let data=cached?cached.data:await api('dashboard',{seed:state.dashboardRandomSeed||Date.now(),...dashParams});
         if(token!==state.workspaceToken||!isDashModule())return;
         if(quizReady)await quizReady;
         if(token!==state.workspaceToken||!isDashModule())return;
@@ -87,7 +93,10 @@
         if(cached&&cached.people)Object.assign(personBlockDetails,cached.people);
         await Promise.all(personBlockIds.filter(id=>!(id in personBlockDetails)).map(async id=>{try{personBlockDetails[id]=await api('person',{id});}catch(_){personBlockDetails[id]=null;}}));
         pageCachePut(cacheKey,{data,quizData,extra:[saintData,progressData],people:{...personBlockDetails}});
+        const [filterRes,periodData]=await Promise.all([filterReady,periodReady]);
         if(token!==state.workspaceToken||!isDashModule())return;
+        currentFilter=filterRes;
+        if(filterRes)data=applyPageFilter(data,filterRes);
         let index=1;
         const limit=widget=>Math.max(1,Number(widget.limit||defaultDashboardBlockLimits[widget.type]||6));
         const span=widget=>`span-${widget.width||defaultDashboardBlockSpans[widget.type]||'6'}`;
@@ -95,7 +104,7 @@
         const widgetPersonMap=widget=>widget.config?.personMode==='specific'?data.selected_person_maps?.[String(widget.config.personId)]||{}:data.widget_person_maps?.[widget.id]||data.random_person_map||{};
         const widgetPersonDetail=widget=>personBlockDetails[widget.config?.personMode==='specific'?Number(widget.config.personId):Number(data.widget_people?.[widget.id]?.id||data.random_person?.id)]||null;
         const blockRenderers={
-            stats:widget=>dashboardStatsCard(String(index++).padStart(2,'0'),data.stats||{},span(widget)),
+            stats:widget=>dashboardStatsCard(String(index++).padStart(2,'0'),data.stats||{},span(widget),periodData),
             upcoming:widget=>dashboardUpcomingCard(String(index++).padStart(2,'0'),(data.upcoming||[]).slice(0,limit(widget)),span(widget)),
             today:widget=>dashboardTodayCard(String(index++).padStart(2,'0'),(data.today||[]).slice(0,limit(widget)),span(widget)),
             reminders:widget=>dashboardRemindersCard(String(index++).padStart(2,'0'),(data.reminders||[]).slice(0,limit(widget)),span(widget)),
@@ -108,7 +117,7 @@
             web_search:widget=>dashboardWebSearchCard(String(index++).padStart(2,'0'),personBlockDetails[webSearchPersonId(widget)]||null,widget,span(widget)),
             saint_day:widget=>dashboardSaintCard(String(index++).padStart(2,'0'),saintData,span(widget)),
             lineage_widget:widget=>dashboardLineageCard(String(index++).padStart(2,'0'),widget,span(widget),webSearchPersonId(widget)),
-            research_progress:widget=>dashboardProgressCard(String(index++).padStart(2,'0'),progressData,span(widget)),
+            research_progress:widget=>dashboardProgressCard(String(index++).padStart(2,'0'),progressData,span(widget),periodData),
             family_objects_widget:widget=>dashboardCollectionCard(String(index++).padStart(2,'0'),personBlockDetails[webSearchPersonId(widget)]||null,widget,span(widget),'objects'),
             family_memories_widget:widget=>dashboardCollectionCard(String(index++).padStart(2,'0'),personBlockDetails[webSearchPersonId(widget)]||null,widget,span(widget),'memories'),
             person_quiz:widget=>dashboardPersonQuizCard(String(index++).padStart(2,'0'),quizData[widget.id],span(widget),widget.id),
@@ -177,9 +186,10 @@
         const {pages:dashPagesList}=dashboardPages(),dashPage=currentDashboardPage();
         const dashPagesBar=dashPagesList.length>1?`<div class="segmented dash-pages" role="tablist">${dashPagesList.map(p=>`<button type="button" role="tab" data-dash-page="${escapeHtml(p.id)}" class="${p.id===dashPage.id?'is-active':''}" aria-selected="${p.id===dashPage.id}">${escapeHtml(p.name||'Page')}</button>`).join('')}</div>`:'';
         const suiviHead=state.module==='suivi'?window.LCNDA_EXT?.suivi?.headerHtml?.(dashPage,dashPagesList):''; // 🐾 en-tête du Suivi (titre de la page, ses pages, ses boutons)
-        $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}${suiviHead?' sv-page':''}">${suiviHead||`<header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">✎ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>${escapeHtml(dashPage.name||'Vue d’ensemble')}</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p>${dashPagesBar}</div>`}</header>`}
-        <div class="card-grid dashboard-grid">${blocks||emptyState({text: ownTab?'Onglet vide':'Aucun widget affiché', icon:'🧩',hint:ownTab?'Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche.':'Ajoute-en depuis la colonne de gauche, ou crée le tien.',action:{label:'＋ Ajouter un widget',attrs:document.querySelector('[data-add-dashboard-widget]')?'data-dash-empty-add':'data-empty-click="#dashboard-create-widget"'}})}</div></section>`;
+        $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}${suiviHead?' sv-page':''}">${suiviHead||dashHeaderHtml(ownTab,dashPage,dashPagesBar)}
+        <div class="card-grid dashboard-grid">${blocks||emptyState({text: ownTab?'Onglet vide':'Aucun widget affiché', icon:'🧩',hint:kiosk()?'':ownTab?'Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche.':'Ajoute-en depuis la colonne de gauche, ou crée le tien.',action:kiosk()?undefined:{label:'＋ Ajouter un widget',attrs:document.querySelector('[data-add-dashboard-widget]')?'data-dash-empty-add':'data-empty-click="#dashboard-create-widget"'}})}</div></section>`;
         $$('[data-dash-page]').forEach(b=>b.addEventListener('click',()=>{if(state.module==='suivi')state.suiviPage=b.dataset.dashPage;else state.dashboardPage=b.dataset.dashPage;renderDashboard(++state.workspaceToken,{reuse:'page'});renderSidebar();}));
+        bindDashExtras($('#workspace'),{ownTab,suivi:state.module==='suivi'}); // ⋯ et clic droit des widgets, 🖨, ⤓, 🔎 filtre, 🔄 période, widgets en plus
         $$('[data-dash-group-toggle]').forEach(b=>b.addEventListener('click',()=>{const current=dashboardBlockSettings();const g=current.widgets.find(w=>w.id===b.dataset.dashGroupToggle);if(!g)return;g.config={...g.config,collapsed:!g.config?.collapsed};saveDashboardBlockSettings(current);renderDashboard(undefined,{reuse:true});}));
         $('[data-edit-custom-tab]')?.addEventListener('click',()=>{state.tabsEditorOpen=ownTab.id;state.maintenanceTab='tabs_editor';setModule('maintenance');});
         $$('[data-reroll-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const current=dashboardBlockSettings();const widget=current.widgets.find(item=>item.id===button.dataset.rerollDashboardWidget);if(widget){widget.config={...(widget.config||{}),randomSeed:Date.now()};saveDashboardBlockSettings(current);}await renderDashboard();}));
@@ -228,7 +238,8 @@
     }
     function dashboardWidgetChrome(widget,html){
         const editing=state.dashboardEditingWidget===widget.id;
-        const tools=`<div class="dashboard-widget-tools">${state.module==='suivi'?`<button type="button" class="icon-action" data-dash-widget-more="${escapeHtml(widget.id)}" title="Plus d’actions" aria-label="Plus d’actions">⋯</button>`:''}<button type="button" class="icon-action" data-edit-dashboard-widget="${escapeHtml(widget.id)}" title="${editing?'Revenir au widget':'Modifier le widget'}">${editing?'↩':'✎'}</button><button type="button" class="icon-action danger" data-delete-dashboard-widget="${escapeHtml(widget.id)}" title="Supprimer ce widget">×</button></div>`;
+        // R6 : en consultation, ni ✎ ni × ni ⋯ ; R11 : le ⋯ du tableau de bord (le Suivi a le sien)
+        const tools=kiosk()?'':`<div class="dashboard-widget-tools">${state.module==='suivi'?`<button type="button" class="icon-action" data-dash-widget-more="${escapeHtml(widget.id)}" title="Plus d’actions" aria-label="Plus d’actions">⋯</button>`:`<button type="button" class="icon-action" data-dash-more="${escapeHtml(widget.id)}" title="${escapeHtml(i18n('Plus d’actions'))}" aria-label="${escapeHtml(i18n('Plus d’actions'))}">⋯</button>`}<button type="button" class="icon-action" data-edit-dashboard-widget="${escapeHtml(widget.id)}" title="${editing?'Revenir au widget':'Modifier le widget'}">${editing?'↩':'✎'}</button><button type="button" class="icon-action danger" data-delete-dashboard-widget="${escapeHtml(widget.id)}" title="Supprimer ce widget">×</button></div>`;
         const wrapper=document.createElement('div');
         wrapper.innerHTML=html.trim();
         const section=wrapper.querySelector('.card');
@@ -238,7 +249,7 @@
         section.dataset.dashboardWidget=widget.id;
         section.dataset.widgetType=widget.type;
         const header=section.querySelector('.card-head');
-        if(header)header.insertAdjacentHTML('beforeend',tools);
+        if(header&&tools)header.insertAdjacentHTML('beforeend',tools);
         if(editing)section.insertAdjacentHTML('beforeend',dashboardWidgetEditorPanel(widget));
         return wrapper.innerHTML;
     }
@@ -385,7 +396,13 @@
             if(e.target.closest('[data-page-add]')){const id=newPageId();pagesWork.push({id,name:`Page ${pagesWork.length+1}`,widgets:[]});editing=id;draw();setTimeout(()=>{const inp=pagesBox.querySelector(`[data-page-row="${id}"] [data-page-name]`);inp?.focus();inp?.select();},0);return;}
             const row=e.target.closest('[data-page-row]');if(!row)return;const id=row.dataset.pageRow;
             if(e.target.closest('[data-page-edit]')){editing=id;draw();return;}
-            if(e.target.closest('[data-page-del]')){const p=pagesWork.find(x=>x.id===id);if(p.widgets.length&&!await confirmBox(p.widgets.length<2?i18n('Son widget sera supprimé avec elle.'):i18n('Ses {widgets} seront supprimés avec elle.',{widgets:plural(p.widgets.length,'widget')}),{title:i18n('Supprimer la page « {name} » ?',{name:p.name||i18n('Page')}),okLabel:i18n('Supprimer la page')}))return;pagesWork=pagesWork.filter(x=>x.id!==id);if(editing===id)editing=pagesWork[0].id;if(defaultWork===id)defaultWork=pagesWork[0].id;draw();}
+            // R7 (H7) : la page part tout de suite, avec ses widgets ; « ↶ Annuler » la remet à sa place (fenêtre ouverte ou déjà enregistrée)
+            if(e.target.closest('[data-page-del]')){const at=pagesWork.findIndex(x=>x.id===id),p=pagesWork[at];if(!p||pagesWork.length<2)return;const wasDefault=defaultWork===id;
+                pagesWork=pagesWork.filter(x=>x.id!==id);if(editing===id)editing=pagesWork[0].id;if(wasDefault)defaultWork=pagesWork[0].id;draw();
+                const undo=window.LCNDA_APP?.undoToast,msg=p.widgets.length?i18n('Page « {name} » supprimée, avec {widgets}.',{name:p.name||i18n('Page'),widgets:plural(p.widgets.length,'widget')}):i18n('Page « {name} » supprimée.',{name:p.name||i18n('Page')});
+                const putBack=async()=>{if(dialog.isConnected){if(pagesWork.some(x=>x.id===id))return {already:true};pagesWork.splice(Math.min(at,pagesWork.length),0,p);if(wasDefault)defaultWork=id;editing=id;draw();return;}
+                    const meta=dashboardPages();if(meta.pages.some(x=>x.id===id))return {already:true};const list=[...meta.pages];list.splice(Math.min(at,list.length),0,p);saveDashboardPages(list,wasDefault?id:meta.defaultPage);if(isDashModule()){await renderDashboard();renderSidebar();}};
+                if(undo)undo(msg,{undo:putBack});else toast(msg);}
         });
         pagesBox.addEventListener('input',e=>{const inp=e.target.closest('[data-page-name]');if(inp)pagesWork.find(x=>x.id===inp.closest('[data-page-row]').dataset.pageRow).name=inp.value;});
         pagesBox.addEventListener('change',e=>{if(e.target.name==='dash-default')defaultWork=e.target.value;});
@@ -404,11 +421,308 @@
         dialog.addEventListener('close',()=>dialog.remove());
         dialog.showModal();
     }
+
+    /* ═════════ Audit des onglets — 🏠 Tableau de bord : ce qui s'ajoute (en-tête commun, 🖨, ⤓, 🔎 filtre de page, 🔄 période,
+       📈 croissance, 🎯 objectifs, 🧭 prochaine action, ⋯ et clic droit, 📌 depuis une fiche, raccourcis, consultation) ═════════ */
+    const UI=()=>window.LCNDA_UI||{};
+    const kiosk=()=>document.body.classList.contains('is-kiosk');
+    const ext=window.LCNDA_EXT=window.LCNDA_EXT||{};
+    /** les calculs en plus (lib/tableau_de_bord_plus.php) */
+    const dashApi=(op,q={})=>api('tresors',{dash:op,...q});
+    const lsGet=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k)||'null');return v==null?d:v;}catch(_){return d;}};
+    const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(_){}};
+    const PERIOD_KEY='genealogie-dash-period';
+    const periodDays=()=>{const n=Number(lsGet(PERIOD_KEY,30));return [7,30,90,365].includes(n)?n:30;};
+    const nf=n=>Number(n||0).toLocaleString(loc());
+    /** 🔄 « Depuis 30 jours : +42 fiches, +18 sources » (Chiffres clés, Bilan de recherche) */
+    function periodLineHtml(p){
+        if(!p)return '';
+        const parts=[[p.persons,'fiche','fiches'],[p.events,'événement','événements'],[p.sources,'source','sources'],[p.media,'média','médias']].filter(([n])=>Number(n)>0).map(([n,a,b])=>`+${plural(Number(n),a,b)}`);
+        const opts=[[7,i18n('7 jours')],[30,i18n('30 jours')],[90,i18n('3 mois')],[365,i18n('un an')]].map(([v,l])=>`<option value="${v}" ${Number(p.days)===v?'selected':''}>${escapeHtml(l)}</option>`).join('');
+        return `<p class="dash-period" data-dash-period-line>🔄 <span>${escapeHtml(i18n('Depuis'))}</span> <select data-dash-period aria-label="${escapeHtml(i18n('Période'))}">${opts}</select> : <b>${escapeHtml(parts.length?parts.join(', '):i18n('rien de nouveau'))}</b></p>`;
+    }
+
+    /* ── 🔎 filtre de la page ── */
+    let currentFilter=null;const filterCache=new Map();
+    async function loadPageFilter(f){
+        const key=`${f.kind}:${f.value}:${state.writeCount||0}`;if(filterCache.has(key))return filterCache.get(key);
+        const r=await dashApi('filter',{kind:f.kind,value:f.value});r.idSet=new Set((r.ids||[]).map(Number));filterCache.set(key,r);if(filterCache.size>6)filterCache.delete(filterCache.keys().next().value);return r;
+    }
+    const PERSON_KEYS=['person_id','partner1_id','partner2_id','child_id','father_id','mother_id','owner_id'];
+    /** garde, dans chaque liste des données, ce qui touche une fiche de la page ; ce qui ne nomme personne reste */
+    function keepItem(it,ids){
+        if(!it||typeof it!=='object'||Array.isArray(it))return true;
+        const keys=PERSON_KEYS.filter(k=>it[k]!=null&&it[k]!=='');
+        if(it.id!=null&&('first_name' in it||'last_name' in it))keys.push('id');
+        if(it.entity_type==='person'&&it.entity_id!=null)keys.push('entity_id');
+        if(Array.isArray(it.people_ids))return !it.people_ids.length||it.people_ids.some(x=>ids.has(Number(x)));
+        return !keys.length||keys.some(k=>ids.has(Number(it[k])));
+    }
+    function applyPageFilter(data,f){
+        const ids=f.idSet||new Set(f.ids||[]),out={...data};
+        Object.keys(out).forEach(k=>{if(Array.isArray(out[k]))out[k]=out[k].filter(it=>keepItem(it,ids));});
+        if(out.random_person&&!keepItem(out.random_person,ids))out.random_person=null;
+        out.stats={...(data.stats||{}),...(f.stats||{})};
+        return out;
+    }
+    const filterKinds=()=>({branch:i18n('Branche'),person:i18n('De cujus (ses ancêtres et descendants)'),label:i18n('Étiquette'),folder:i18n('Dossier (enquête)')});
+    const filterText=f=>f?.kind?`${filterKinds()[f.kind]?.replace(/ \(.*$/,'')||''} : ${f.label||f.value}`:'';
+    ext.dashboardFilter=()=>currentFilter; // pour les widgets ajoutés par les autres fichiers : {kind, value, label, ids}
+    function savePageFilter(filter){
+        const meta=dashboardPages(),cur=currentDashboardPage();
+        const pages=meta.pages.map(p=>p.id===cur.id?{...p,widgets:Array.isArray(p.widgets)?p.widgets:dashboardBlockSettings().widgets,filter:filter&&filter.kind?filter:undefined}:p);
+        saveDashboardPages(pages,meta.defaultPage);
+    }
+    async function openFilterDialog(){
+        const cur=currentDashboardPage().filter||{};let opts={branches:[],labels:[],folders:[]};
+        try{opts=await dashApi('filter_options');}catch(error){toast(error.message,'error');}
+        const dlg=document.createElement('dialog');dlg.className='modal dash-filter-dialog';
+        const K=filterKinds();
+        const pk=window.LCNDA_PICKER?.pickerField?window.LCNDA_PICKER.pickerField({name:'dash_filter_person',kind:'person',allowCreate:false,value:cur.kind==='person'&&cur.value?{id:Number(cur.value),title:cur.label||'',kind:'person'}:null}):`<input name="dash_filter_person" value="${escapeHtml(cur.kind==='person'?cur.value:'')}">`;
+        dlg.innerHTML=`<form method="dialog" class="dash-filter-form"><div class="modal-head"><div><span class="eyebrow">${escapeHtml(i18n('TABLEAU DE BORD'))}</span><h2>${escapeHtml(i18n('🔎 Filtrer cette page'))}</h2><p>${escapeHtml(i18n('Tous les widgets de la page ne montrent que les fiches choisies (les chiffres clés aussi).'))}</p></div><button class="icon-button" type="button" data-close aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div>
+            <div class="dash-filter-body">
+            <label class="checkbox-line"><input type="radio" name="kind" value="" ${cur.kind?'':'checked'}> ${escapeHtml(i18n('Toute la base'))}</label>
+            <label class="checkbox-line"><input type="radio" name="kind" value="branch" ${cur.kind==='branch'?'checked':''}> ${escapeHtml(K.branch)}</label>
+            <select name="branch" aria-label="${escapeHtml(K.branch)}"><option value=""></option>${(opts.branches||[]).map(b=>`<option value="${escapeHtml(b.name)}" ${cur.kind==='branch'&&cur.value===b.name?'selected':''}>${escapeHtml(b.name)} (${nf(b.n)})</option>`).join('')}</select>
+            <label class="checkbox-line"><input type="radio" name="kind" value="person" ${cur.kind==='person'?'checked':''}> ${escapeHtml(K.person)}</label>
+            <div class="dash-filter-pk" data-dash-filter-pk>${pk}</div>
+            <label class="checkbox-line"><input type="radio" name="kind" value="label" ${cur.kind==='label'?'checked':''}> ${escapeHtml(K.label)}</label>
+            <select name="label" aria-label="${escapeHtml(K.label)}"><option value=""></option>${(opts.labels||[]).map(l=>`<option value="${l.id}" ${cur.kind==='label'&&String(cur.value)===String(l.id)?'selected':''}>${escapeHtml(l.name)}</option>`).join('')}</select>
+            <label class="checkbox-line"><input type="radio" name="kind" value="folder" ${cur.kind==='folder'?'checked':''}> ${escapeHtml(K.folder)}</label>
+            <select name="folder" aria-label="${escapeHtml(K.folder)}"><option value=""></option>${(opts.folders||[]).map(l=>`<option value="${l.id}" ${cur.kind==='folder'&&String(cur.value)===String(l.id)?'selected':''}>${escapeHtml(l.title)}</option>`).join('')}</select>
+            </div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>${escapeHtml(i18n('Annuler'))}</button><button class="button" type="submit" data-dash-filter-ok>${escapeHtml(i18n('Appliquer'))}</button></div></form>`;
+        document.body.append(dlg);
+        const form=dlg.querySelector('form');
+        // choisir une valeur coche sa sorte
+        ['branch','label','folder'].forEach(k=>form.elements[k].addEventListener('change',()=>{form.querySelector(`input[name=kind][value=${k}]`).checked=true;}));
+        let pickedName=cur.kind==='person'?(cur.label||''):'';
+        dlg.querySelector('[data-dash-filter-pk]').addEventListener('picker-change',ev=>{pickedName=ev.detail?.item?.title||'';form.querySelector('input[name=kind][value=person]').checked=true;});
+        dlg.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>dlg.close()));
+        dlg.addEventListener('close',()=>dlg.remove());
+        form.addEventListener('submit',async e=>{
+            e.preventDefault();const kind=form.querySelector('input[name=kind]:checked')?.value||'';let value='',label='';
+            if(kind==='person'){value=form.elements.dash_filter_person?.value||'';label=pickedName;}
+            else if(kind){const sel=form.elements[kind];value=sel.value;label=sel.selectedOptions[0]?.textContent.replace(/\s*\(\d[\d\s ]*\)$/,'')||'';}
+            if(kind&&!value){UI().fail?UI().fail(kind==='person'?form.elements.dash_filter_person:form.elements[kind],i18n('Choisis d’abord quoi montrer.')):toast(i18n('Choisis d’abord quoi montrer.'),'error');return;}
+            const before=currentDashboardPage().filter||null;
+            savePageFilter(kind?{kind,value:String(value),label}:null);dlg.close();
+            const undo=window.LCNDA_APP?.undoToast,msg=kind?i18n('Page filtrée : {what}.',{what:filterText({kind,value,label})}):i18n('Filtre retiré : toute la base.');
+            if(undo)undo(msg,{undo:async()=>{savePageFilter(before);await renderDashboard();}});else toast(msg);
+            await renderDashboard();
+        });
+        dlg.showModal();
+    }
+
+    /* ── en-tête commun (R1) : 🖨 Imprimer · ⤓ Exporter ▾ · ⋯ (🔎 filtre, ＋ widget, ↕ réordonner) ── */
+    function dashHeaderHtml(ownTab,dashPage,pagesBar){
+        const ro=kiosk(),f=!ownTab&&state.module==='dashboard'?dashPage.filter:null;
+        const print=`<button type="button" class="button secondary" data-dash-print data-shortcut="Mod+P" title="${escapeHtml(i18n('Un bilan imprimable de la page (A4, ⤓ PDF)'))}">${escapeHtml(i18n('🖨 Imprimer'))}</button>`;
+        const exp=`<button type="button" class="button secondary" data-dash-export data-shortcut="Mod+E" aria-haspopup="menu">${escapeHtml(i18n('⤓ Exporter ▾'))}</button>`;
+        const more=ro?[]:[ownTab?'':`<button type="button" data-dash-filter>${escapeHtml(i18n('🔎 Filtrer cette page…'))}</button>`,`<button type="button" data-dash-add data-shortcut="Mod+Shift+N">${escapeHtml(i18n('＋ Ajouter un widget'))}</button>`,`<button type="button" data-dash-reorder>${escapeHtml(i18n('↕ Réordonner les widgets'))}</button>`].filter(Boolean);
+        const head=UI().pageHeader?UI().pageHeader(ownTab?{where:i18n('Mon onglet'),icon:ownTab.icon||'',title:ownTab.name||i18n('Mon onglet'),help:ownTab.intro?escapeHtml(ownTab.intro):'',actions:[ro?'':`<button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">✎ Modifier l’onglet</button>`,print,exp],more,cls:'dash-head'}
+            :{where:i18n('Tableau de bord'),title:dashPage.name||i18n('Vue d’ensemble'),help:escapeHtml(i18n('Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.')),actions:[print,exp],more,cls:'dash-head'})
+            :`<header class="page-header"><div><h2>${escapeHtml(ownTab?ownTab.name:dashPage.name||'')}</h2></div><div class="page-actions">${print}${exp}</div></header>`;
+        const fbar=f?.kind?`<div class="dash-filterbar" data-dash-filterbar>🔎 ${i18n('Cette page montre seulement : <b>{what}</b>',{what:escapeHtml(filterText(f))})}${ro?'':` <button type="button" class="link-button" data-dash-filter>${escapeHtml(i18n('Changer'))}</button> <button type="button" class="link-button" data-dash-filter-clear>${escapeHtml(i18n('✕ Tout montrer'))}</button>`}</div>`:'';
+        return head+(pagesBar?`<div class="dash-pages-host">${pagesBar}</div>`:'')+fbar;
+    }
+
+    /* ── 🖨 Imprimer / PDF (L1 UI.openPrintDialog) et ⤓ Exporter ── */
+    function dashSheetHtml(){
+        const grid=$('#workspace .dashboard-grid');if(!grid)return '';
+        const c=grid.cloneNode(true);c.querySelectorAll('.dashboard-widget-tools, .dashboard-widget-back, button, select, input, .card-head .button, [data-rc-host] .rc-scope').forEach(x=>x.remove());
+        return c.innerHTML;
+    }
+    function dashTitle(){const ownTab=currentCustomTab();return ownTab?(ownTab.name||i18n('Mon onglet')):`${i18n('Tableau de bord')} — ${currentDashboardPage().name||i18n('Vue d’ensemble')}`;}
+    function dashPrintDoc(){
+        const css=[...document.querySelectorAll('link[rel=stylesheet]')].map(l=>`<link rel="stylesheet" href="${escapeHtml(l.href)}">`).join('');
+        const f=currentFilter?`<p class="dash-print-filter">🔎 ${escapeHtml(filterText(currentFilter))}</p>`:'';
+        const when=new Date().toLocaleDateString(loc(),{day:'numeric',month:'long',year:'numeric'});
+        return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${escapeHtml(dashTitle())}</title><base href="${escapeHtml(location.href.replace(/[#?].*$/,'').replace(/[^/]*$/,''))}">${css}<style>body{background:#fff;padding:0;margin:0}.dash-print{padding:10mm}.dash-print h1{font-size:20pt;margin:0 0 2mm}.dash-print .dash-print-when{color:#555;margin:0 0 6mm}.dash-print .dashboard-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:4mm}.dash-print .card{break-inside:avoid;page-break-inside:avoid;box-shadow:none}.dash-print .span-12{grid-column:span 12}.dash-print .span-9{grid-column:span 9}.dash-print .span-8{grid-column:span 8}.dash-print .span-6{grid-column:span 6}.dash-print .span-4{grid-column:span 4}.dash-print .span-3{grid-column:span 3}</style></head><body><main class="dash-print"><h1>${escapeHtml(dashTitle())}</h1><p class="dash-print-when">${escapeHtml(i18n('Bilan du {date}',{date:when}))}</p>${f}<div class="card-grid dashboard-grid">${dashSheetHtml()}</div></main></body></html>`;
+    }
+    function dashPrint(){
+        if(UI().openPrintDialog)return UI().openPrintDialog({title:dashTitle(),icon:'🖨',key:'dashboard',html:dashPrintDoc(),photos:false});
+        toast(i18n('L’impression n’est pas encore prête : réessaie dans un instant.'),'error');
+    }
+    function dashDownload(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000);}
+    const fileBase=()=>dashTitle().replace(/[\\/:*?"<>|]+/g,'-').replace(/\s+/g,' ').trim()||'tableau-de-bord';
+    /** les chiffres de la page en tableau (CSV) : une ligne par nombre affiché */
+    function dashCsv(){
+        const rows=[[i18n('Widget'),i18n('Libellé'),i18n('Valeur')]];
+        $$('#workspace .dashboard-widget').forEach(c=>{const t=c.querySelector('.card-head h3, h3')?.textContent.trim()||'';
+            c.querySelectorAll('.dashboard-metrics > div, .dashboard-mini-metrics > button, .dashboard-coverage > div').forEach(m=>{const v=m.querySelector('strong')?.textContent.trim()||'',l=(m.querySelector('span')?.textContent||'').trim();if(v||l)rows.push([t,l,v]);});
+            c.querySelectorAll('.dashboard-row').forEach(r=>{const l=r.querySelector('strong')?.textContent.trim()||'',v=r.querySelector('small')?.textContent.trim()||'';if(l)rows.push([t,l,v]);});});
+        return '﻿'+rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(';')).join('\r\n');
+    }
+    function dashExportMenu(anchor){
+        const items=[{icon:'📄',label:i18n('PDF (bilan imprimable)'),help:i18n('Dans la fenêtre, « ⤓ PDF »'),run:dashPrint},
+            {icon:'🌐',label:i18n('Page web (.html)'),help:i18n('À ouvrir ou envoyer tel quel'),run:()=>{dashDownload(fileBase()+'.html',dashPrintDoc(),'text/html;charset=utf-8');toast(i18n('Page enregistrée.'));}},
+            {icon:'📊',label:i18n('Tableau des chiffres (.csv)'),help:i18n('Pour un tableur'),run:()=>{dashDownload(fileBase()+'.csv',dashCsv(),'text/csv;charset=utf-8');toast(i18n('Tableau enregistré.'));}}];
+        if(UI().menuAt)UI().menuAt(anchor,items,{title:i18n('⤓ Exporter')});else items[0].run();
+    }
+    ext.tabShortcuts=ext.tabShortcuts||{};
+    const addWidget=()=>{if(kiosk())return;document.getElementById('app')?.classList.remove('sidebar-collapsed');const first=document.querySelector('[data-add-dashboard-widget]');if(first){first.scrollIntoView({behavior:'smooth',block:'center'});first.focus({preventScroll:true});toast(i18n('Choisis un widget dans la colonne de gauche (+).'));}};
+    ext.tabShortcuts.dashboard={new:addWidget,print:dashPrint,export:()=>{const b=$('#workspace [data-dash-export]');if(b)dashExportMenu(b);}};
+    /** « ] » et « [ » : page suivante, page précédente (quand on n'écrit pas) */
+    document.addEventListener('keydown',e=>{
+        if(state.module!=='dashboard'||currentCustomTab()||e.metaKey||e.ctrlKey||e.altKey||!(e.key===']'||e.key==='['))return;
+        const t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))||document.querySelector('dialog[open]'))return;
+        const {pages}=dashboardPages();if(pages.length<2)return;e.preventDefault();
+        const i=pages.findIndex(p=>p.id===currentDashboardPage().id),n=pages[(i+(e.key===']'?1:-1)+pages.length)%pages.length];
+        state.dashboardPage=n.id;renderDashboard(++state.workspaceToken,{reuse:'page'});renderSidebar();
+    });
+
+    /* ── ⋯ d'un widget et clic droit (R11) : ✎ Régler · ⧉ Dupliquer · 📄 Copier vers une autre page · ⤓ Exporter · — · 🗑 Supprimer ── */
+    function widgetMenu(id,anchor,ev=null){
+        if(kiosk())return;
+        const s0=dashboardBlockSettings(),w=s0.widgets.find(x=>x.id===id);if(!w)return;
+        const cardEl=$(`#workspace [data-dashboard-widget="${CSS.escape(id)}"]`);
+        const {pages}=dashboardPages(),cur=currentDashboardPage(),others=currentCustomTab()?[]:pages.filter(p=>p.id!==cur.id);
+        const key=currentCustomTab()?'genealogie-custom-tabs':'genealogie-dashboard-blocks';
+        const items=[
+            {icon:'✎',label:i18n('Régler'),run:()=>cardEl?.querySelector('[data-edit-dashboard-widget]')?.click()},
+            {icon:'⧉',label:i18n('Dupliquer'),run:()=>{window.LCNDA_APP.undoLocalChange(i18n('Widget dupliqué.'),[key],()=>{const s=dashboardBlockSettings(),i=s.widgets.findIndex(x=>x.id===id);s.widgets.splice(i+1,0,dashboardNewWidget(w.type,{...JSON.parse(JSON.stringify(w)),id:undefined}));saveDashboardBlockSettings(s);},()=>renderDashboard());renderDashboard();}},
+            ...(others.length?[{icon:'📄',label:i18n('Copier vers une autre page…'),run:()=>UI().menuAt?.(anchor||{x:ev?.clientX||100,y:ev?.clientY||100},others.map(p=>({icon:'📄',label:p.name||i18n('Page'),run:()=>{window.LCNDA_APP.undoLocalChange(i18n('Widget copié vers « {name} ».',{name:p.name||i18n('Page')}),[key],()=>{const meta=dashboardPages();saveDashboardPages(meta.pages.map(x=>x.id===p.id?{...x,widgets:[...(Array.isArray(x.widgets)?x.widgets:[]),dashboardNewWidget(w.type,{...JSON.parse(JSON.stringify(w)),id:undefined})]}:x),meta.defaultPage);});}})),{title:i18n('Copier vers…')})}]:[]),
+            {icon:'⤓',label:i18n('Exporter ce widget (PDF)'),run:()=>{if(!cardEl||!UI().openPrintDialog)return;const c=cardEl.cloneNode(true);c.querySelectorAll('.dashboard-widget-tools, button, select, input').forEach(x=>x.remove());const css=[...document.querySelectorAll('link[rel=stylesheet]')].map(l=>`<link rel="stylesheet" href="${escapeHtml(l.href)}">`).join('');UI().openPrintDialog({title:dashboardWidgetLabel(w.type),html:`<!doctype html><html><head><meta charset="utf-8">${css}<style>body{background:#fff;padding:10mm}</style></head><body>${c.outerHTML}</body></html>`,photos:false});}},
+            '-',
+            {icon:'🗑',label:i18n('Supprimer'),danger:true,run:()=>cardEl?.querySelector('[data-delete-dashboard-widget]')?.click()},
+        ];
+        const title=dashboardWidgetLabel(w.type);
+        return ev?UI().contextMenu?.(ev,items,{title}):UI().menuAt?.(anchor,items,{title});
+    }
+
+    /** après chaque dessin : boutons de l'en-tête, filtre, période, ⋯, clic droit, widgets en plus */
+    function bindDashExtras(ws,{ownTab=null,suivi=false}={}){
+        if(!ws)return;
+        ws.querySelector('[data-dash-print]')?.addEventListener('click',dashPrint);
+        ws.querySelector('[data-dash-export]')?.addEventListener('click',e=>dashExportMenu(e.currentTarget));
+        ws.querySelectorAll('[data-dash-filter]').forEach(b=>b.addEventListener('click',openFilterDialog));
+        ws.querySelector('[data-dash-filter-clear]')?.addEventListener('click',async()=>{const before=currentDashboardPage().filter||null;savePageFilter(null);window.LCNDA_APP?.undoToast?.(i18n('Filtre retiré : toute la base.'),{undo:async()=>{savePageFilter(before);await renderDashboard();}});await renderDashboard();});
+        ws.querySelector('[data-dash-add]')?.addEventListener('click',addWidget);
+        ws.querySelector('[data-dash-reorder]')?.addEventListener('click',()=>openDashboardReorderDialog());
+        ws.querySelectorAll('[data-dash-period]').forEach(sel=>sel.addEventListener('change',async()=>{lsSet(PERIOD_KEY,Number(sel.value));await renderDashboard(undefined,{reuse:true});}));
+        if(!suivi&&!kiosk()){
+            ws.querySelectorAll('[data-dash-more]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();widgetMenu(b.dataset.dashMore,b);}));
+            ws.querySelectorAll('.dashboard-widget').forEach(c=>c.addEventListener('contextmenu',e=>{if(e.shiftKey||e.target.closest('input, textarea, select, a, .dashboard-widget-back'))return;e.stopPropagation();widgetMenu(c.dataset.dashboardWidget,null,e);})); // K14
+        }
+        bindPlusWidgets(ws);
+    }
+
+    /* ── 📈 Croissance de la base · 🎯 Mes objectifs · 🧭 Prochaine action (widgets en plus, rangés dans le catalogue) ── */
+    [['db_growth','📈 Croissance de la base','12','La courbe mois par mois des fiches, événements, sources et médias ajoutés, d’après le journal des modifications.'],
+     ['long_goals','🎯 Mes objectifs','6','Des objectifs au long cours (« 8 générations complètes d’ici décembre », « 100 actes transcrits ») avec une barre de progression calculée sur la base et une date butoir.'],
+     ['next_action','🧭 Prochaine action','6','Une seule chose concrète à faire, remplie dans le widget : la date de mariage d’un couple, la naissance d’un ancêtre… puis ✓.']]
+        .forEach(([type,label,span,info])=>{if(!defaultDashboardBlocks.some(x=>x[0]===type))defaultDashboardBlocks.push([type,label]);defaultDashboardBlockSpans[type]=defaultDashboardBlockSpans[type]||span;if(dashboardWidgetInfo&&!dashboardWidgetInfo[type])dashboardWidgetInfo[type]=info;});
+    ext.dashboard=ext.dashboard||{};
+    const SERIES=[['persons','Fiches','#0066cc'],['events','Événements','#2f8f5b'],['sources','Sources','#cc4700'],['media','Médias','#7a47db']];
+    ext.dashboardConfig=ext.dashboardConfig||{};
+    ext.dashboardConfig.db_growth={html:w=>{const c=w?.config||{};return `<fieldset><legend>${escapeHtml(i18n('Croissance'))}</legend><label>${escapeHtml(i18n('Sur combien de mois ?'))}<select data-dg="months">${[6,12,24,36].map(n=>`<option value="${n}" ${Number(c.months||12)===n?'selected':''}>${n}</option>`).join('')}</select></label><label>${escapeHtml(i18n('Courbe'))}<select data-dg="mode"><option value="total" ${c.mode!=='added'?'selected':''}>${escapeHtml(i18n('le total, mois après mois'))}</option><option value="added" ${c.mode==='added'?'selected':''}>${escapeHtml(i18n('ce qui est ajouté chaque mois'))}</option></select></label></fieldset>`;},read:ed=>({months:Number(ed.querySelector('[data-dg=months]')?.value)||12,mode:ed.querySelector('[data-dg=mode]')?.value||'total'})};
+    ext.dashboard.db_growth={
+        load:async(widgets=[])=>dashApi('growth',{months:Math.max(6,...widgets.map(w=>Number(w.config?.months)||12))}),
+        render:(index,widget,span,d)=>{
+            if(!d?.months)return card(index,i18n('📈 Croissance de la base'),'',empty(i18n('Croissance indisponible.'),{icon:'📈'}),span);
+            const n=Math.min(d.months.length,Number(widget.config?.months)||12),months=d.months.slice(-n),mode=widget.config?.mode==='added'?'added':'total';
+            // le total à la fin de chaque mois : on part d'aujourd'hui et on retire ce qui a été ajouté ensuite
+            const series=SERIES.map(([k,l,col])=>{let run=Number(d.totals?.[k]||0);const tot=[];for(let i=d.months.length-1;i>=0;i--){tot.unshift(Math.max(0,run));run-=Number(d.months[i][k]||0);}return {k,l:i18n(l),col,vals:(mode==='added'?d.months.map(m=>Number(m[k]||0)):tot).slice(-n)};});
+            const W=600,H=180,pad=28,max=Math.max(1,...series.flatMap(x=>x.vals)),X=i=>pad+(W-2*pad)*(months.length<2?0.5:i/(months.length-1)),Y=v=>H-pad-(H-2*pad)*v/max;
+            const lines=series.map(x=>`<polyline fill="none" stroke="${x.col}" stroke-width="2.5" points="${x.vals.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ')}"><title>${escapeHtml(x.l)}</title></polyline>`).join('');
+            const ticks=months.map((m,i)=>i%Math.ceil(months.length/6)===0||i===months.length-1?`<text x="${X(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="10" fill="currentColor">${escapeHtml(new Date(m.month+'-15').toLocaleDateString(loc(),{month:'short',year:'2-digit'}))}</text>`:'').join('');
+            const last=months[months.length-1]||{};
+            const legend=`<ul class="dg-legend">${series.map(x=>`<li><i style="background:${x.col}"></i>${escapeHtml(x.l)} <b>${nf(mode==='added'?x.vals.reduce((a,b)=>a+b,0):x.vals[x.vals.length-1])}</b></li>`).join('')}</ul>`;
+            const sub=mode==='added'?i18n('ajoutés sur {n} mois',{n:months.length}):i18n('ce mois-ci : +{p} fiches, +{e} événements',{p:nf(last.persons),e:nf(last.events)});
+            return card(index,i18n('📈 Croissance de la base'),'',`<div class="dg-box" data-dg-box><svg class="dg-chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${escapeHtml(i18n('Croissance de la base mois par mois'))}"><line x1="${pad}" y1="${H-pad}" x2="${W-pad}" y2="${H-pad}" stroke="currentColor" stroke-opacity=".25"/>${lines}${ticks}</svg>${legend}<p class="muted">${escapeHtml(sub)}</p></div>`,span);
+        }
+    };
+
+    /* 🎯 Mes objectifs : rangés dans le réglage du widget (genealogie-dashboard-blocks) */
+    const GOAL_KINDS=()=>[['generations',i18n('générations complètes')],['persons',i18n('fiches')],['transcribed',i18n('actes transcrits')],['sources',i18n('sources')],['events',i18n('événements')],['media',i18n('médias')],['sosa',i18n('ancêtres Sosa')]];
+    const goalState=(value,goal)=>{const pct=goal.target>0?Math.min(100,Math.round(100*value/goal.target)):0;if(goal.paused)return [pct,i18n('En pause'),'grey'];if(pct>=100)return [pct,i18n('Terminé'),'green'];if(value>Number(goal.start||0))return [pct,i18n('En cours'),'blue'];return [pct,i18n('À faire'),'yellow'];};
+    ext.dashboard.long_goals={
+        load:()=>dashApi('goals'),
+        render:(index,widget,span,d)=>{
+            const goals=Array.isArray(widget.config?.goals)?widget.config.goals:[],vals=d?.values||{},K=Object.fromEntries(GOAL_KINDS()),today=new Date().toISOString().slice(0,10),ro=kiosk();
+            const rows=goals.map((g,i)=>{const v=Number(vals[g.kind]||0),[pct,word,col]=goalState(v,g),late=g.due&&g.due<today&&pct<100;
+                return `<li class="lg-row" data-lg-row="${i}"><div class="lg-top"><b>${escapeHtml(g.label||`${nf(g.target)} ${K[g.kind]||g.kind}`)}</b>${UI().badge?UI().badge(word,col):`<span>${escapeHtml(word)}</span>`}${late?` <span class="lg-late">${escapeHtml(i18n('date dépassée'))}</span>`:''}${ro?'':`<button type="button" class="icon-action" data-lg-more="${i}" title="${escapeHtml(i18n('Plus d’actions'))}" aria-label="${escapeHtml(i18n('Plus d’actions'))}">⋯</button>`}</div>
+                    <div class="lg-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div>
+                    <small class="muted">${escapeHtml(i18n('{v} sur {t} {what}',{v:nf(v),t:nf(g.target),what:K[g.kind]||''}))}${g.due?` · ${escapeHtml(i18n('d’ici le {date}',{date:new Date(g.due+'T12:00').toLocaleDateString(loc(),{day:'numeric',month:'long',year:'numeric'})}))}`:''}</small></li>`;}).join('');
+            const form=ro?'':`<form class="lg-add" data-lg-add="${escapeHtml(widget.id)}"><input type="number" name="target" min="1" max="1000000" required aria-label="${escapeHtml(i18n('Combien'))}" placeholder="8"><select name="kind" aria-label="${escapeHtml(i18n('De quoi'))}">${GOAL_KINDS().map(([k,l])=>`<option value="${k}">${escapeHtml(l)}</option>`).join('')}</select><input type="date" name="due" aria-label="${escapeHtml(i18n('Date butoir'))}"><button type="submit" class="button small">${escapeHtml(i18n('＋ Objectif'))}</button></form>`;
+            return card(index,i18n('🎯 Mes objectifs'),goals.length||'',`<div class="lg-box" data-lg-box="${escapeHtml(widget.id)}">${goals.length?`<ul class="lg-list">${rows}</ul>`:empty(i18n('Aucun objectif pour l’instant'),{icon:'🎯',hint:i18n('Ex. : 8 générations complètes d’ici décembre, 100 actes transcrits.')})}${form}</div>`,span);
+        }
+    };
+    function saveGoals(widgetId,fn,msg){
+        const key=currentCustomTab()?'genealogie-custom-tabs':'genealogie-dashboard-blocks';
+        window.LCNDA_APP.undoLocalChange(msg,[key],()=>{const s=dashboardBlockSettings(),w=s.widgets.find(x=>x.id===widgetId);if(!w)return;const goals=Array.isArray(w.config?.goals)?[...w.config.goals]:[];fn(goals);w.config={...(w.config||{}),goals};saveDashboardBlockSettings(s);},()=>renderDashboard(undefined,{reuse:true}));
+        renderDashboard(undefined,{reuse:true});
+    }
+
+    /* 🧭 Prochaine action : une chose, remplie sur place */
+    const SKIP_KEY='genealogie-dash-next-skip';
+    ext.dashboard.next_action={
+        load:()=>dashApi('next',{skip:(lsGet(SKIP_KEY,[])||[]).slice(-300).join(',')}),
+        render:(index,widget,span,d)=>{
+            const it=d?.item,ro=kiosk();
+            if(!it)return card(index,i18n('🧭 Prochaine action'),'',empty(i18n('Rien d’urgent : tout ce que je sais vérifier est rempli.'),{icon:'🎉'}),span);
+            const q=it.kind==='marriage'?i18n('Ajoute la date de mariage de {a} et {b}.',{a:it.a,b:it.b}):i18n('Ajoute la naissance de {a}.',{a:it.a});
+            const why=it.kind==='marriage'?(it.kids?i18n('Ils ont {n}, mais pas encore de mariage noté.',{n:plural(it.kids,'enfant')}):i18n('Pas encore de mariage noté pour ce couple.')):i18n('Ni naissance ni baptême sur sa fiche.');
+            const form=ro?'':`<form class="na-form" data-na-form data-kind="${escapeHtml(it.kind)}" data-family="${Number(it.family_id)||0}" data-person="${Number(it.person_id)||0}" data-type="${Number(it.kind==='marriage'?d.types?.MARR:d.types?.BIRT)||0}" data-key="${escapeHtml(it.key)}">
+                <label>${escapeHtml(i18n('Date'))}<input name="date_text" required placeholder="${escapeHtml(i18n('12/05/1882, vers 1880…'))}" autocomplete="off"></label>
+                <label>${escapeHtml(i18n('Lieu'))}<input name="place_name" placeholder="${escapeHtml(i18n('Tulle'))}" autocomplete="off"></label>
+                <div class="na-acts"><button type="submit" class="button small">✓ ${escapeHtml(i18n('Enregistrer'))}</button><button type="button" class="button small secondary" data-na-skip>${escapeHtml(i18n('Passer ›'))}</button><button type="button" class="link-button" data-open-dashboard-person="${Number(it.person_id||it.a_id)||0}">${escapeHtml(i18n('Ouvrir la fiche'))}</button></div></form>`;
+            return card(index,i18n('🧭 Prochaine action'),'',`<div class="na-box"><p class="na-q"><b>${escapeHtml(q)}</b></p><p class="muted">${escapeHtml(why)}</p>${form}</div>`,span);
+        }
+    };
+    function bindPlusWidgets(ws){
+        ws.querySelectorAll('[data-lg-add]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();const t=Number(f.elements.target.value);if(!(t>0))return UI().fail?.(f.elements.target,i18n('Un nombre plus grand que zéro.'));
+            const g={kind:f.elements.kind.value,target:t,due:f.elements.due.value||'',created:new Date().toISOString().slice(0,10)};saveGoals(f.dataset.lgAdd,goals=>goals.push(g),i18n('Objectif ajouté.'));}));
+        ws.querySelectorAll('[data-lg-more]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();const box=b.closest('[data-lg-box]'),wid=box.dataset.lgBox,i=Number(b.dataset.lgMore);
+            const s=dashboardBlockSettings(),g=(s.widgets.find(x=>x.id===wid)?.config?.goals||[])[i];if(!g)return;
+            UI().menuAt?.(b,[{icon:g.paused?'▶':'⏸',label:g.paused?i18n('Reprendre'):i18n('Mettre en pause'),run:()=>saveGoals(wid,goals=>{goals[i]={...goals[i],paused:!goals[i].paused};},g.paused?i18n('Objectif repris.'):i18n('Objectif en pause.'))},
+                '-',{icon:'🗑',label:i18n('Supprimer'),danger:true,run:()=>saveGoals(wid,goals=>goals.splice(i,1),i18n('Objectif supprimé.'))}],{title:i18n('Objectif')});}));
+        ws.querySelectorAll('[data-na-skip]').forEach(b=>b.addEventListener('click',async()=>{const f=b.closest('[data-na-form]');const list=lsGet(SKIP_KEY,[])||[];list.push(f.dataset.key);lsSet(SKIP_KEY,list.slice(-300));await renderDashboard();}));
+        ws.querySelectorAll('[data-na-form]').forEach(f=>f.addEventListener('submit',async e=>{
+            e.preventDefault();const date=f.elements.date_text.value.trim();if(!date)return UI().fail?.(f.elements.date_text,i18n('Écris la date (même approximative).'));
+            const fam=f.dataset.kind==='marriage',body={event_type_id:Number(f.dataset.type),date_text:date,place_name:f.elements.place_name.value.trim(),...(fam?{event_scope:'family',family_id:Number(f.dataset.family)}:{person_id:Number(f.dataset.person)})};
+            const btn=f.querySelector('[type=submit]');btn.disabled=true;
+            try{const r=await api('add_event',{},{method:'POST',body});const id=Number(r?.id||r?.result?.id)||0;state.writeCount=(state.writeCount||0)+1;
+                window.LCNDA_APP.undoToast(fam?i18n('✓ Mariage ajouté.'):i18n('✓ Naissance ajoutée.'),{undo:async()=>{if(id)await api('delete_event',{},{method:'POST',body:{id}});state.writeCount=(state.writeCount||0)+1;await renderDashboard();}});
+                await renderDashboard();}
+            catch(error){btn.disabled=false;toast(error.message,'error');}
+        }));
+    }
+
+    /* ── 📌 Mettre un bloc de fiche dans le tableau de bord : le ⋯ de chaque bloc de la fiche (ext.afterPerson) ── */
+    function pinBlock(detail,key,pageId){
+        const p=detail?.person;if(!p)return;
+        const name=personName(p)||'',label=(defaultPersonBlocks.find(r=>r[0]===key)||[,key])[1];
+        const meta=window.LCNDA_APP.dashboardSpaceDo('',()=>dashboardPages());const page=meta.pages.find(x=>x.id===pageId)||meta.pages.find(x=>x.id===meta.defaultPage)||meta.pages[0];
+        window.LCNDA_APP.undoLocalChange(i18n('📌 « {block} » de {name} mis dans le tableau de bord, page « {page} ».',{block:label,name,page:page.name||i18n('Vue d’ensemble')}),['genealogie-dashboard-blocks'],()=>window.LCNDA_APP.dashboardSpaceDo('',()=>{
+            const keep=state.dashboardPage;state.dashboardPage=page.id;
+            try{const s=dashboardBlockSettings();s.widgets.push(dashboardNewWidget('person_block',{width:'6',config:{personMode:'specific',personId:Number(p.id),personName:name,personBlockKey:key}}));saveDashboardBlockSettings(s);}finally{state.dashboardPage=keep;}
+        }));
+    }
+    function decoratePersonBlocks(detail){
+        if(kiosk()||!detail?.person?.id||detail.person.kind==='animal')return;
+        $$('#workspace [data-pblock]').forEach(c=>{
+            const head=c.querySelector(':scope > .card-head');if(!head||head.querySelector('[data-pin-block]'))return;
+            head.insertAdjacentHTML('beforeend',`<button type="button" class="icon-action dash-pin-more" data-pin-block="${escapeHtml(c.dataset.pblock)}" title="${escapeHtml(i18n('Plus d’actions'))}" aria-label="${escapeHtml(i18n('Plus d’actions'))}">⋯</button>`);
+        });
+    }
+    (ext.afterPerson=ext.afterPerson||[]).push(detail=>{try{decoratePersonBlocks(detail);}catch(error){console.error(error);}});
+    document.addEventListener('click',e=>{
+        const b=e.target.closest?.('[data-pin-block]');if(!b)return;e.preventDefault();e.stopPropagation();
+        const detail=state.currentPerson,key=b.dataset.pinBlock;if(!detail?.person)return;
+        const pages=window.LCNDA_APP.dashboardSpaceDo('',()=>dashboardPages().pages);
+        UI().menuAt?.(b,[{icon:'📌',label:i18n('Mettre dans le tableau de bord'),run:()=>pinBlock(detail,key,'')},
+            ...(pages.length>1?[{icon:'📄',label:i18n('Mettre dans une autre page du tableau de bord…'),run:()=>UI().menuAt?.(b,pages.map(p=>({icon:'📄',label:p.name||i18n('Page'),run:()=>pinBlock(detail,key,p.id)})),{title:i18n('Quelle page ?')})}]:[])],{title:(defaultPersonBlocks.find(r=>r[0]===key)||[,i18n('Bloc')])[1]});
+    },true);
+    /** un bloc de fiche que le widget ne sait pas dessiner lui-même : pris dans la vraie fiche (app.js : personPageHtml) */
+    function realPersonBlockBody(detail,key){
+        try{const html=window.LCNDA_APP.personPageHtml?.(detail);if(!html)return '';const box=document.createElement('div');box.innerHTML=html;const c=box.querySelector(`[data-pblock="${CSS.escape(key)}"]`);if(!c)return '';c.querySelectorAll('button, form, input, select, textarea').forEach(x=>x.remove());return (c.querySelector('.card-body')||c).innerHTML;}catch(_){return '';}
+    }
     function progressSentence(p){
         const n=(v,one,many)=>v?plural(Number(v),one,many):'';
         return [n(p.persons_created,'fiche créée','fiches créées'),n(p.persons_edited,'fiche complétée','fiches complétées'),n(p.events_created,'événement ajouté','événements ajoutés'),n(p.sources_created,'source ajoutée','sources ajoutées'),n(p.census_created,'recensement ajouté','recensements ajoutés'),n(p.media_added,'média ajouté','médias ajoutés'),n(p.sosa_new,'nouvel ancêtre Sosa','nouveaux ancêtres Sosa'),n(p.battues_closed,'battue terminée','battues terminées'),n(p.investigations_closed,'enquête terminée','enquêtes terminées')].filter(Boolean).join(', ');
     }
-    function dashboardProgressCard(index,data,spanClass){
+    function dashboardProgressCard(index,data,spanClass,period=null){
         if(!data)return card(index,'Bilan de recherche','',empty('Bilan indisponible.',{icon:'📊'}),spanClass);
         const month=new Date().toLocaleDateString(loc(),{month:'long'});
         const m=data.month,y=data.year,prev=data.previous_month;
@@ -419,7 +733,7 @@
         const body=`<p class="progress-line"><strong>${i18n('En {month} :',{month:escapeHtml(month)})}</strong> ${escapeHtml(monthText)}.${m.work_days?` <span class="muted">${i18n('{days} de recherche.',{days:plural(m.work_days,'jour')})}</span>`:''} ${trend}</p>
             <p class="progress-line"><strong>${i18n('En {year} :',{year:escapeHtml(String(data.year_label))})}</strong> ${escapeHtml(progressSentence(y)||i18n('rien pour l’instant'))}.${y.work_days?` <span class="muted">${i18n('{days} de recherche, {changes}.',{days:plural(y.work_days,'jour'),changes:plural(y.changes,'modification')})}</span>`:''}</p>
             <div class="progress-chart" aria-label="Modifications par mois sur un an">${bars}</div>
-            <small class="muted">D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées).</small>`;
+            <small class="muted">D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées).</small>${periodLineHtml(period)}`;
         return card(index,'Bilan de recherche','',body,spanClass);
     }
     function dashboardCollectionCard(index,detail,widget,spanClass,kind){
@@ -481,7 +795,7 @@
             military:()=>{const milData=detail.militaryData||{};const rows=[['N° matricule',milData.matricule],['Classe',milData.classe_mobilisation],['Bureau',milData.bureau_recrutement],['Décision',milData.decision_conseil],['Notes',milData.notes_militaires]].filter(([,v])=>v&&String(v).trim());return rows.length?`<dl class="data-list">${rows.map(([k,v])=>dataRow(k,v)).join('')}</dl>`:empty('Aucune information militaire renseignée.',{icon:'🎖️'});},
             artistic_works:()=>{const artisticIds=new Set((state.bootstrap?.eventTypes||[]).filter(t=>Number(t.is_artistic)).map(t=>Number(t.id)));const works=arrays.events.filter(event=>artisticIds.has(Number(event.event_type_id)));return listRows(works.slice(0,6),'Aucune œuvre ou réalisation enregistrée.',event=>`<article class="dashboard-row"><div><strong>${escapeHtml(event.type_label||'Œuvre')}</strong><small>${escapeHtml([event.date_text||event.year,event.title||event.description].filter(Boolean).join(' · '))}</small></div></article>`);}
         };
-        const body=(bodies[blockKey]||bodies.identity)();
+        const body=bodies[blockKey]?bodies[blockKey]():(realPersonBlockBody(detail,blockKey)||bodies.identity());
         return card(index,`${label} · ${personTitle}`,'',body,spanClass,`${isSpecific?'':`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`}<button class="button small" data-open-dashboard-person="${person.id}">Ouvrir fiche</button>`);
     }
     function dashboardCompletionCard(index,items,spanClass){
@@ -646,9 +960,9 @@
         const body=`<div class="dashboard-achievements">${badges.map(([done,label,detail])=>`<article class="${done?'is-earned':''}"><span>${done?'★':'○'}</span><div><strong>${escapeHtml(label)}</strong><small>${escapeHtml(detail)}</small></div></article>`).join('')}</div>`;
         return card(index,'Accomplissements',`${earned.length}/${badges.length}`,body,spanClass);
     }
-    function dashboardStatsCard(index,stats,spanClass){
+    function dashboardStatsCard(index,stats,spanClass,period=null){
         const metrics=[['Personnes',stats.persons],['Événements',stats.events],['Médias',stats.media],['Lieux',stats.places],['Sources',stats.sources],['Étiquettes',stats.labels],['Enquêtes',stats.investigations],['Battues',stats.battues]];
-        return card(index,'Chiffres clés','',`<div class="dashboard-metrics">${metrics.map(([label,value])=>`<div><strong>${Number(value||0).toLocaleString('fr-FR')}</strong><span>${escapeHtml(label)}</span></div>`).join('')}</div>`, spanClass, `<button class="button small secondary" data-dashboard-list="persons">Listes</button>`);
+        return card(index,'Chiffres clés','',`<div class="dashboard-metrics">${metrics.map(([label,value])=>`<div><strong>${Number(value||0).toLocaleString('fr-FR')}</strong><span>${escapeHtml(label)}</span></div>`).join('')}</div>${periodLineHtml(period)}`, spanClass, `<button class="button small secondary" data-dashboard-list="persons">Listes</button>`);
     }
     function dashboardUpcomingCard(index,items,spanClass){
         const body=items.length?`<div class="dashboard-list">${items.map(item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.date_label)} · ${escapeHtml(item.when_label)}</small></div>${item.person_id?`<button class="button small secondary" data-open-dashboard-person="${item.person_id}">Ouvrir</button>`:''}</article>`).join('')}</div>`:empty('Aucune date récurrente repérée dans les 7 prochains jours.',{icon:'🎂'});

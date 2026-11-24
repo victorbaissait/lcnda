@@ -49,6 +49,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
     <link rel="stylesheet" href="assets/css/onglets.css?v=15">
     <link rel="stylesheet" href="assets/css/audit-chrono.css?v=1">
+    <link rel="stylesheet" href="assets/css/audit-listes.css?v=1">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=2">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
@@ -1279,13 +1280,15 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
-<script src="assets/js/app-listes.js?v=61" defer></script>
+<script src="assets/js/app-listes.js?v=62" defer></script>
 <script src="assets/js/app-maintenance.js?v=62" defer></script>
 <script src="assets/js/app-recherche.js?v=32" defer></script>
 <script src="assets/js/app-graphiques.js?v=25" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=45" defer></script>
+<script src="assets/js/app-selection.js?v=1" defer></script>
+<script src="assets/js/app-sources-liste.js?v=1" defer></script>
 <script src="assets/js/heritage-tools.js?v=22" defer></script>
 <script src="assets/js/heritage-sauvegarde.js?v=5" defer></script>
 <script src="assets/js/heritage-alphabets-data.js?v=2" defer></script>
