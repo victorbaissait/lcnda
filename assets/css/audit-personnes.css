@@ -1,0 +1,93 @@
+/* 👤 Onglet Personnes — ajouts de l'audit des onglets (assets/js/app.js, bloc « Onglet Personnes — ajouts de l'audit »).
+ * Colonne (barre commune, ⋯ des lignes, 🧭 lien), en-tête de fiche (🧭, 🖨, ⤓), fiche familiale, saisie rapide d'une famille,
+ * 🔒 / 📝 / 🧮 dans les événements, 🖼 âge sur les photos, 🕘 comparaison de versions, 🐾 courbe de poids ; R12 téléphone. */
+
+/* ── Colonne ── */
+.pa-people-bar { display: grid; gap: 8px; }
+.pa-people-bar .ui-listbar { margin: 0; }
+.pa-people-toggles { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.person-list-item { position: relative; }
+.person-list-item .pa-row-more { margin-left: auto; align-self: center; padding: 0 6px; border-radius: 6px; line-height: 1.6; opacity: 0; color: var(--muted, #667); cursor: pointer; flex: none; }
+.person-list-item:hover .pa-row-more, .person-list-item:focus-visible .pa-row-more, .person-list-item.is-active .pa-row-more { opacity: 1; }
+.person-list-item .pa-row-more:hover { background: var(--hover, rgba(0, 0, 0, .06)); }
+@media (hover: none) { .person-list-item .pa-row-more { opacity: 1; } }
+.pa-kin { display: block; font-size: .78em; color: var(--muted, #667); line-height: 1.3; }
+.lineage-tree .pa-kin { display: inline; margin-left: 6px; }
+body.is-kiosk #pa-quick-family, body.is-kiosk [data-pa-quick-family], body.is-kiosk .pa-keep-btn, body.is-kiosk [data-pa-restore-field] { display: none !important; }
+
+/* ── En-tête de fiche ── */
+.pa-kin-badge { cursor: pointer; border: 0; font: inherit; background: var(--kin-bg, #e9f1ff); color: var(--kin-text, #0b3d66); }
+.pa-kin-badge.is-none { background: var(--surface-2, #f1f1f1); color: var(--muted, #667); }
+.pa-hero-btn { font-size: 16px; }
+.pa-kin-path { margin: 10px 0 4px; padding: 10px 12px; border: 1px solid var(--line, #dde); border-radius: 10px; background: var(--surface, #fff); }
+.pa-kin-path-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.pa-kin-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; list-style: none; margin: 0 0 6px; padding: 0; }
+.pa-kin-chain li { display: flex; align-items: center; gap: 6px; }
+.pa-kin-node { display: grid; text-align: left; padding: 4px 8px; border: 1px solid var(--line, #dde); border-radius: 8px; background: var(--surface-2, #f7f7fa); font: inherit; cursor: pointer; }
+.pa-kin-node small { color: var(--muted, #667); font-size: .8em; }
+.pa-kin-node.gender-male { border-left: 3px solid var(--gender-male, #5b8def); }
+.pa-kin-node.gender-female { border-left: 3px solid var(--gender-female, #e07aa8); }
+.pa-kin-rel { font-size: .8em; color: var(--muted, #667); }
+.pa-kin-sentence { font-weight: 600; }
+.pa-family-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; }
+
+/* ── Événements : 🔒 📝 🧮 ── */
+.pa-private-badge, .pa-dup-badge { margin-left: 6px; font-size: .75em; vertical-align: middle; }
+.pa-note-btn { margin-left: 4px; border: 0; background: none; cursor: pointer; font-size: 14px; padding: 0 2px; }
+.pa-keep-btn { margin-left: 6px; }
+.event-row.pa-dup-event { box-shadow: inset 3px 0 0 var(--warning, #e0b24b); }
+.event-row.is-private-event .event-content > strong, .event-row.is-private-event { opacity: .92; }
+@media print { .event-row.is-private-event, .pa-private-badge, .pa-note-btn, .pa-keep-btn, .pa-row-more { display: none !important; } }
+.pa-event-extra .pa-research-note { display: grid; gap: 4px; margin-top: 8px; }
+.pa-event-extra textarea { width: 100%; }
+
+/* ── 🖼 Âge sur la photo ── */
+.pa-media-age { display: block; padding: 2px 6px 4px; font-size: .78em; color: var(--muted, #667); }
+
+/* ── 👪 Fiche familiale ── */
+.pa-family-sheet { width: min(980px, 96vw); }
+.pa-fs-family { margin-bottom: 18px; }
+.pa-fs-couple { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pa-fs-person { padding: 8px 10px; border: 1px solid var(--line, #dde); border-radius: 8px; }
+.pa-fs-person dl { margin: 4px 0 0; display: grid; gap: 2px; }
+.pa-fs-person dl div { display: flex; gap: 6px; }
+.pa-fs-person dt { color: var(--muted, #667); min-width: 84px; }
+.pa-fs-person dd { margin: 0; }
+.pa-fs-role { display: block; font-size: .75em; text-transform: uppercase; letter-spacing: .04em; color: var(--muted, #667); }
+.pa-fs-union { margin: 8px 0; }
+.pa-fs-union ul { margin: 4px 0; padding-left: 18px; }
+.pa-fs-src { display: block; color: var(--muted, #667); margin-top: 4px; }
+.pa-fs-children { width: 100%; border-collapse: collapse; }
+.pa-fs-children th, .pa-fs-children td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line, #eee); vertical-align: top; }
+
+/* ── ⚡ Saisie rapide d'une famille ── */
+.pa-quick-family { width: min(860px, 96vw); }
+.pa-qf-grid { grid-template-columns: 1fr 1fr; }
+.pa-qf-children { display: grid; gap: 8px; margin-top: 10px; }
+.pa-qf-child { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, .8fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: end; padding: 8px; border: 1px dashed var(--line, #dde); border-radius: 8px; }
+
+/* ── 🕘 Comparaison de versions ── */
+.pa-history-actions { display: grid; gap: 6px; align-content: start; }
+.pa-diff { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .9em; }
+.pa-diff th, .pa-diff td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line, #eee); vertical-align: top; word-break: break-word; }
+
+/* ── 🐾 Courbe de poids ── */
+.pa-growth-svg { width: 100%; height: auto; max-height: 260px; }
+.pa-g-grid { stroke: var(--line, #e4e4ea); stroke-width: 1; }
+.pa-g-line { stroke: var(--accent, #055dff); stroke-width: 2.5; }
+.pa-g-dot { fill: var(--surface, #fff); stroke: var(--accent, #055dff); stroke-width: 2; }
+.pa-g-lab { font-size: 11px; fill: var(--muted, #667); }
+
+/* ── R12 : téléphone (390 px) ── */
+@media (max-width: 700px) {
+    .pa-people-toggles { gap: 4px 10px; }
+    .person-hero-actions { flex-wrap: wrap; }
+    .pa-kin-badge { white-space: normal; text-align: left; }
+    .pa-fs-couple, .pa-qf-grid, .pa-qf-child { grid-template-columns: minmax(0, 1fr); }
+    .pa-fs-children, .pa-diff { display: block; overflow-x: auto; }
+    .pa-family-sheet, .pa-quick-family { width: 100vw; max-width: 100vw; }
+    .pa-kin-chain { flex-direction: column; align-items: stretch; }
+    .pa-kin-chain li { flex-wrap: wrap; }
+    .pa-family-bar .button { flex: 1 1 auto; }
+    .person-history-row { grid-template-columns: minmax(0, 1fr); }
+}

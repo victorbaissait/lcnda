@@ -192,7 +192,7 @@ $pdo->exec("INSERT INTO census_members(census_id,person_id,display_name,occupati
                     assert.equal(r.view, cards === null ? '' : cards ? 'cards' : 'list', '« Liste | Fiches » et sa présentation de départ');
                     if (SHOTS) await (w > 500 ? page.screenshot({ path: path.join(SHOTS, `${type}-${w}${dark ? '-sombre' : ''}.png`), fullPage: true }) : page.locator('#workspace').screenshot({ path: path.join(SHOTS, `${type}-${w}${dark ? '-sombre' : ''}.png`) }));
                     // la rubrique « État » des visites est cochée au départ (« À venir ») : on part de tout
-                    if (type === 'archive_visits') { assert.deepEqual(r.chips, ['À venir'], 'Visites : « À venir » au départ, en pastille'); await page.evaluate(() => document.querySelector('#workspace .ui-listbar').clear()); r = await barInfo(page); }
+                    if (type === 'archive_visits') { assert.deepEqual(r.chips, ['À faire'], 'Visites : « À faire » au départ, en pastille (R9 : mots d’état communs)'); await page.evaluate(() => document.querySelector('#workspace .ui-listbar').clear()); r = await barInfo(page); }
                     const total = N(r.count);
                     assert.ok(total >= 2, `${type} : ${r.count}`);
                     // Filtrer : les rubriques de la maquette

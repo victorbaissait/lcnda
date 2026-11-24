@@ -1,0 +1,82 @@
+/* LCNDA — 🔎 Recherche et 🛠 Réglages : ce qu'a ajouté l'audit des onglets (assets/js/app-recherche.js, app-recherche-outils.js, app-maintenance.js). */
+
+/* R2 — la sorte de recherche : la colonne de boutons numérotés */
+#research-form .rk-menu { margin: 0 0 .75rem; display: grid; gap: 2px; }
+#research-form .rk-menu .side-menu-item { text-align: left; }
+
+/* 🕘 les dernières recherches */
+.rp-history { margin: 0 0 .9rem; border: 1px solid var(--line, #ddd); border-radius: 8px; background: var(--surface, transparent); }
+.rp-history > summary { cursor: pointer; padding: .45rem .6rem; font-weight: 600; font-size: .85rem; }
+.rp-history > summary small { color: var(--muted, #777); font-weight: 400; margin-left: .3rem; }
+.rp-history-list { display: grid; gap: 2px; padding: 0 .35rem .45rem; max-height: 320px; overflow: auto; }
+.rp-history-item { display: grid; text-align: left; gap: 1px; padding: .35rem .45rem; border: 0; border-radius: 6px; background: transparent; color: inherit; cursor: pointer; font: inherit; }
+.rp-history-item:hover, .rp-history-item:focus-visible { background: var(--hover, rgba(0, 102, 204, .08)); }
+.rp-history-item b { font-weight: 500; font-size: .85rem; overflow-wrap: anywhere; }
+.rp-history-item small { color: var(--muted, #777); font-size: .75rem; }
+.rp-history-clear { justify-self: start; margin: .2rem .45rem 0; font-size: .78rem; }
+
+/* ☑ la barre d'actions sur les résultats */
+.rp-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; padding: .55rem .7rem; margin: 0 0 .75rem; border: 1px solid var(--line, #ddd); border-radius: 8px; background: var(--surface-2, rgba(0, 0, 0, .025)); }
+.rp-bar-all { display: inline-flex; align-items: center; gap: .35rem; font-weight: 600; }
+.rp-bar-count { color: var(--muted, #777); font-size: .85rem; flex: 1 1 auto; }
+.rp-pick-cell { width: 2rem; text-align: center; }
+.rp-pick { margin-right: .45rem; vertical-align: middle; }
+.research-person-card .rp-pick { align-self: flex-start; margin-top: .3rem; }
+
+/* 🔁 chercher et remplacer */
+.rp-replace-table mark, .rp-snippet mark { background: color-mix(in srgb, #f5c400 45%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+.rp-replace-table .rp-after { color: var(--accent, #0066cc); }
+.rp-replace-table tr.is-locked { opacity: .55; }
+.rp-replace-table td, .rp-src-table td, .rp-cit-table td { overflow-wrap: anywhere; }
+
+/* 🔎 Ce que j'ai changé */
+.mc-find { display: block; margin: 0 0 .9rem; max-width: 420px; }
+.mc-find input { width: 100%; }
+.mc-group-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
+.mc-group-head h3 small { color: var(--muted, #777); font-weight: 400; margin-left: .25rem; }
+.mc-list { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: 2px; }
+.mc-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 14rem) auto; align-items: center; gap: .6rem; padding: .4rem .3rem; border-top: 1px solid var(--line, #eee); }
+.mc-name { display: grid; min-width: 0; }
+.mc-name small { color: var(--muted, #777); font-size: .75rem; overflow-wrap: anywhere; }
+.mc-val { color: var(--muted, #666); font-size: .85rem; overflow-wrap: anywhere; }
+
+/* 🗄 santé de la base */
+.dbh-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .7rem; margin: 0 0 1rem; }
+.dbh-card { display: grid; gap: .15rem; padding: .7rem .85rem; border: 1px solid var(--line, #ddd); border-radius: 10px; background: var(--surface, transparent); }
+.dbh-card span { color: var(--muted, #777); font-size: .8rem; }
+.dbh-card b { font-size: 1.25rem; }
+.dbh-card small { color: var(--muted, #777); font-size: .75rem; overflow-wrap: anywhere; }
+.dbh-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* 🔁 remplacer un lieu · 🏷 règles automatiques */
+.pr-events { margin: .4rem 0 .6rem; padding-left: 1.1rem; max-height: 260px; overflow: auto; }
+.lr-panel { margin-top: 1rem; }
+.lr-list { list-style: none; margin: .5rem 0 1rem; padding: 0; display: grid; gap: 4px; }
+.lr-row { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .45rem .3rem; border-top: 1px solid var(--line, #eee); }
+.lr-name { display: grid; flex: 1 1 14rem; min-width: 0; }
+.lr-name small { color: var(--muted, #777); }
+.lr-form { border-top: 1px solid var(--line, #eee); padding-top: .8rem; }
+
+/* R6 — mode consultation : rien qui modifie */
+body.is-kiosk [data-ro-edit], body.is-kiosk #archive-digest-add, body.is-kiosk [data-archive-digest-new], body.is-kiosk #archive-digest-csv, body.is-kiosk [data-import-plus="releves"], body.is-kiosk [data-archive-digest-decennale],
+body.is-kiosk #archive-digest-category-order, body.is-kiosk .archive-digest-row [data-archive-digest-edit], body.is-kiosk .archive-digest-row [data-archive-digest-delete], body.is-kiosk .archive-digest-row [data-archive-digest-person],
+body.is-kiosk .archive-digest-row [data-archive-digest-page], body.is-kiosk .archive-digest-row [data-archive-digest-media], body.is-kiosk [data-archive-digest-person-edit], body.is-kiosk [data-archive-digest-person-delete],
+body.is-kiosk [data-archive-digest-page-edit], body.is-kiosk [data-archive-digest-page-delete], body.is-kiosk [data-archive-digest-page-person], body.is-kiosk [data-archive-digest-page-media], body.is-kiosk [data-unlink-archive-digest-media],
+body.is-kiosk [data-edit-archive-digest-page-media], body.is-kiosk [data-archive-aux-delete], body.is-kiosk [data-archive-transcription-line-delete],
+body.is-kiosk #branch-form, body.is-kiosk [data-delete-branch], body.is-kiosk [data-edit-branch], body.is-kiosk [data-merge-target], body.is-kiosk #bulk-form, body.is-kiosk #ocr-batch-panel,
+body.is-kiosk [data-delete-event-type], body.is-kiosk [data-delete-personal-dictionary], body.is-kiosk #label-form, body.is-kiosk [data-pr-apply], body.is-kiosk [data-dbh-vacuum] { display: none !important; }
+
+/* R12 — téléphone : rien ne dépasse à 390 px */
+@media (max-width: 700px) {
+    .rp-bar { gap: .4rem; padding: .5rem; }
+    .rp-bar .button { flex: 1 1 auto; }
+    .rp-bar-count { flex-basis: 100%; order: 5; }
+    .rp-results, .rp-replace-table, .dbh-table { font-size: .85rem; }
+    .data-table-wrap:has(.rp-replace-table), .data-table-wrap:has(.rp-src-table), .data-table-wrap:has(.rp-cit-table), .data-table-wrap:has(.dbh-table) { overflow-x: auto; max-width: 100%; }
+    .mc-row { grid-template-columns: minmax(0, 1fr) auto; }
+    .mc-val { grid-column: 1 / -1; grid-row: 2; }
+    .dbh-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .lr-row .button { flex: 1 1 auto; }
+    .archive-digest-row .row-actions { flex-wrap: wrap; }
+    .rp-replace-form .checkbox-group, .lr-form .form-grid, .rp-kinship .form-grid { grid-template-columns: minmax(0, 1fr); }
+}

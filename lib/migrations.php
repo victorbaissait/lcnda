@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 110;
+const SCHEMA_VERSION = 111;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -139,6 +139,7 @@ function migration_steps(): array
         108 => 'schema_v108',
         109 => 'schema_v109',
         110 => 'schema_v110',
+        111 => 'schema_v111',
     ];
 }
 
@@ -2836,6 +2837,15 @@ function schema_v105(PDO $pdo): void
 {
     if (!function_exists('doc_links_install')) { require_once __DIR__ . '/doc_links.php'; }
     doc_links_install($pdo);
+}
+
+/** 111 : 👤 Personnes — 🔒 événement confidentiel (events.is_private : caché en consultation, dans les exports, les partages et
+ *  le site) et 📝 note de recherche par fait (events.research_note : « à vérifier : cote, piste »), audit des onglets §2 */
+function schema_v111(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+    if (!in_array('is_private', $cols, true)) { $pdo->exec('ALTER TABLE events ADD COLUMN is_private INTEGER NOT NULL DEFAULT 0'); }
+    if (!in_array('research_note', $cols, true)) { $pdo->exec("ALTER TABLE events ADD COLUMN research_note TEXT NOT NULL DEFAULT ''"); }
 }
 
 /** 109 : ➕ recueils — l'avancement dans le temps (recueil_progress), « confiée à » d'une page, l'objectif d'un recueil */

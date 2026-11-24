@@ -50,7 +50,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
     const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env, stdio: 'ignore'});
     const base = `http://127.0.0.1:${port}/`;
     for (let i = 0; i < 100; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await sleep(100); } }
-    const browser = await chromium.launch();
+    const browser = await chromium.launch(); browser.on('disconnected', () => console.log('!! navigateur déconnecté (tué ailleurs ?)'));
     const errs = [];
     try {
         const p = await (await browser.newContext({viewport: {width: 1440, height: 900}})).newPage();

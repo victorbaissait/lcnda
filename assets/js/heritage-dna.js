@@ -21,7 +21,30 @@
     const plural = (n, one, many) => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.plural(n, one, many) : `${fmt(n)} ${n > 1 ? many : one}`); // 🌐 accordé dans la langue choisie
     const isCurrent = token => token === S().workspaceToken && S().module === 'adn';
     // K5 : l’en-tête unique (app-pages.js) ; le sur-titre est l’endroit où l’on est, calculé d’après le menu
-    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []});
+    const header = (eyebrow, title, intro, actions = '') => window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|ADN|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: [actions, `<button type="button" class="button secondary" data-dna-print>${i18n('🖨 Imprimer')}</button>`].filter(Boolean)});
+    /* audit (docs/design/audit-onglets.html §14) : R6 consultation, R7 ↶ Annuler, R9 mots d'état, R11 « ⋯ », R13 chercher dans la page */
+    const kiosk = () => document.body.classList.contains('is-kiosk');
+    const UIx = () => window.LCNDA_UI || {};
+    const undoToast = (msg, o) => (A().undoToast ? A().undoToast(msg, o) : toast(msg));
+    /** ↶ une suppression : le serveur a rendu ce qui est parti (undo) ; « ↶ Annuler » le remet avec les mêmes numéros */
+    const undoRestore = (msg, undo, redo) => undoToast(msg, {undo: async () => { await post('dna_plus', {op: 'restore', undo}); await refresh(); }, redo: redo ? async () => { await redo(); await refresh(); } : null});
+    const RO_SEL = '[data-dna-newkit], [data-dna-newmatch], [data-dna-import], [data-dna-segimport], [data-dna-segadd], [data-dna-segdel], [data-dna-newgroup], [data-dna-leedsmake], [data-auto-make], .h-dna-bulk, [data-dna-chk], [data-dna-all], [data-dna-reset], [data-dna-group], [data-dna-kit], [data-dna-edit], [data-ph-edit]';
+    function readOnly(root) { if (!kiosk() || !root) return; root.querySelectorAll(RO_SEL).forEach(el => el.remove()); root.querySelectorAll('.h-dna-settings input, .h-dna-settings button, [data-sm-cell]').forEach(el => { el.disabled = true; el.removeAttribute('data-sm-cell'); }); }
+    /** R13 : « chercher dans cette page » sur une longue rubrique */
+    function pageFind(page) {
+        const SEL = '.h-dna-table tbody tr, .data-table tbody tr, .card, .h-dna-learn, .h-dna-orow, li';
+        if (!page || page.querySelector('.h-dna-find')) return;
+        const n = page.querySelectorAll(SEL).length; if (n < 12) return;
+        const fold = v => String(v || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const box = document.createElement('div'); box.className = 'h-dna-find enq-find ui-l6'; box.setAttribute('role', 'search');
+        const sf = UIx().searchField ? UIx().searchField({placeholder: i18n('Chercher dans cette page…'), label: i18n('Chercher dans cette page')}) : null;
+        const input = sf ? sf.input : Object.assign(document.createElement('input'), {type: 'search', placeholder: i18n('Chercher dans cette page…')});
+        input.dataset.dnaFind = '1'; box.appendChild(sf || input);
+        const info = document.createElement('small'); info.className = 'ui-l6-info'; info.setAttribute('aria-live', 'polite'); box.appendChild(info);
+        const apply = () => { const q = fold(input.value.trim()); let hit = 0, all = 0; page.querySelectorAll(SEL).forEach(el => { if (el.closest('.h-dna-find')) return; if (el.matches('li') && el.closest('.card') && q) { /* une ligne de cadre : son cadre décide */ } all++; const ok = !q || fold(el.textContent).includes(q); el.classList.toggle('enq-find-off', !ok); if (ok) hit++; }); page.querySelectorAll('.card').forEach(c => { if (q && fold(c.textContent).includes(q)) { c.classList.remove('enq-find-off'); c.querySelectorAll('.enq-find-off').forEach(x => { if (!x.matches('tr')) x.classList.remove('enq-find-off'); }); } }); info.textContent = q ? i18n('{n} sur {all}', {n: hit, all}) : ''; };
+        input.addEventListener('input', () => { clearTimeout(input._t); input._t = setTimeout(apply, 120); }); input.addEventListener('search', apply);
+        const head = page.querySelector(':scope > .page-header'); if (head) head.after(box); else page.prepend(box);
+    }
 
     /* ═════════ La loi ═════════ */
     const LAW_LINKS = [
@@ -45,16 +68,16 @@
         <h4>${i18n('Textes officiels')}</h4><ul class="h-dna-links">${LAW_LINKS.map(([t, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(i18n(t))} ↗</a></li>`).join('')}</ul>` : `<p><button type="button" class="link-button" data-dna-go="law">${i18n('Lire la mise en garde complète et les textes officiels →')}</button></p>`}</section>`;
 
     /* ═════════ Réglages (modulable) ═════════ */
-    const SECTIONS = [['home', '🏠', 'Synthèse'], ['law', '⚖️', 'Loi et mises en garde'], ['kits', '🧬', 'Mes tests'], ['matches', '👥', 'Correspondances'], ['groups', '🗂️', 'Groupes (méthode de Leeds)'], ['auto', '🔗', 'Groupes automatiques'], ['place', '📍', 'Placer un cousin'],
-        ['chromo', '🧩', 'Chromosomes et segments'], ['calc', '📐', 'Calculateur de cM'], ['lines', '🌳', 'Lignées Y, mt et X'], ['origins', '🌍', 'Origines estimées'], ['learn', '📚', 'Comprendre l’ADN'], ['settings', '⚙️', 'Réglages']];
+    const SECTIONS = [['home', '🏠', 'Synthèse'], ['law', '⚖️', 'Loi et mises en garde'], ['kits', '🧬', 'Mes tests'], ['matches', '👥', 'Correspondances'], ['shared', '🧪', 'Correspondances partagées'], ['groups', '🗂️', 'Groupes (méthode de Leeds)'], ['auto', '🔗', 'Groupes automatiques'], ['place', '📍', 'Placer un cousin'],
+        ['chromo', '🧩', 'Chromosomes et segments'], ['phasing', '🧬', 'Phasage visuel (frères et sœurs)'], ['calc', '📐', 'Calculateur de cM'], ['lines', '🌳', 'Lignées Y, mt et X'], ['origins', '🌍', 'Origines estimées'], ['learn', '📚', 'Comprendre l’ADN'], ['settings', '⚙️', 'Réglages']];
     const COLUMNS = [['name', 'Nom'], ['kit', 'Test'], ['cm', 'cM partagés'], ['pct', '% partagé'], ['segments', 'Segments'], ['longest', 'Plus long segment'], ['relationship', 'Relation (société)'], ['guess', 'Relation probable'],
-        ['side', 'Côté'], ['groups', 'Groupes'], ['person', 'Fiche liée'], ['mrca', 'Ancêtre commun'], ['status', 'Suivi'], ['tree', 'Arbre'], ['surnames', 'Noms en commun'], ['places', 'Lieux'], ['stars', '★'], ['notes', 'Notes']];
+        ['side', 'Côté'], ['groups', 'Groupes'], ['person', 'Fiche liée'], ['mrca', 'Ancêtre commun'], ['status', 'Suivi'], ['follow', 'Relance'], ['shared', 'Partagées'], ['cmcorr', 'cM corrigés (endogamie)'], ['tree', 'Arbre'], ['surnames', 'Noms en commun'], ['places', 'Lieux'], ['stars', '★'], ['notes', 'Notes']];
     const PKEY = 'genealogie-adn-prefs';
     const DEFAULTS = () => ({order: SECTIONS.map(s => s[0]), hidden: ['origins'], columns: ['name', 'cm', 'segments', 'longest', 'guess', 'side', 'groups', 'person', 'status', 'stars'], minCm: 0, pageSize: 200,
-        colors: {paternal: '#4e79a7', maternal: '#e15759', both: '#7b3f8c', unknown: '#9aa0a6', '': '#9aa0a6'}, leedsMin: 90, leedsMax: 400, autoMin: 30, autoMax: 600, total: 6800, ack: false, home: ['law', 'counts', 'hist', 'top', 'todo', 'sides']});
+        colors: {paternal: '#4e79a7', maternal: '#e15759', both: '#7b3f8c', unknown: '#9aa0a6', '': '#9aa0a6'}, leedsMin: 90, leedsMax: 400, autoMin: 30, autoMax: 600, total: 6800, ack: false, home: ['law', 'counts', 'hist', 'top', 'todo', 'sides'], endo: {factor: 0.7, groups: [], kits: []}, followDays: 30});
     let prefsCache = null;
     const prefs = () => { if (prefsCache) return prefsCache; let p = {}; try { p = JSON.parse(localStorage.getItem(PKEY) || '{}') || {}; } catch (_) {} const d = DEFAULTS();
-        prefsCache = {...d, ...p, colors: {...d.colors, ...(p.colors || {})}}; const known = SECTIONS.map(s => s[0]);
+        prefsCache = {...d, ...p, colors: {...d.colors, ...(p.colors || {})}, endo: {...d.endo, ...(p.endo && typeof p.endo === 'object' ? p.endo : {})}}; const known = SECTIONS.map(s => s[0]);
         prefsCache.order = [...(Array.isArray(prefsCache.order) ? prefsCache.order : []).filter(k => known.includes(k)), ...known.filter(k => !(prefsCache.order || []).includes(k))];
         prefsCache.hidden = (Array.isArray(prefsCache.hidden) ? prefsCache.hidden : []).filter(k => known.includes(k) && k !== 'settings' && k !== 'law');
         prefsCache.columns = (Array.isArray(prefsCache.columns) ? prefsCache.columns : d.columns).filter(k => COLUMNS.some(c => c[0] === k)); if (!prefsCache.columns.includes('name')) prefsCache.columns.unshift('name');
@@ -69,7 +92,7 @@
     const kitById = id => data?.kits.find(k => k.id === Number(id));
     const groupById = id => data?.groups.find(g => g.id === Number(id));
     const SIDES = [['', '—'], ['paternal', 'Paternel'], ['maternal', 'Maternel'], ['both', 'Des deux côtés'], ['unknown', 'Inconnu']];
-    const STATUSES = [['', '—'], ['todo', 'À contacter'], ['contacted', 'Contacté'], ['replied', 'A répondu'], ['no_reply', 'Pas de réponse'], ['tree_shared', 'Arbre échangé'], ['placed', 'Placé dans l’arbre ✓'], ['ignore', 'À ignorer']];
+    const STATUSES = [['', '—'], ['todo', 'À faire : contacter'], ['contacted', 'En cours : contacté'], ['replied', 'En cours : a répondu'], ['no_reply', 'En pause : pas de réponse'], ['tree_shared', 'En cours : arbre échangé'], ['placed', 'Terminé : placé dans l’arbre ✓'], ['ignore', 'À ignorer']]; // R9 : À faire · En cours · En pause · Terminé
     const TYPES = [['autosomal', 'Autosomal (atDNA) : tous les ancêtres récents'], ['y', 'ADN-Y : lignée paternelle directe'], ['mt', 'ADN mitochondrial : lignée maternelle directe'], ['x', 'ADN-X'], ['other', 'Autre']];
     const COMPANIES = ['AncestryDNA', '23andMe', 'MyHeritage DNA', 'FamilyTreeDNA', 'Living DNA', 'GEDmatch', 'Geneanet ADN', 'Nebula / séquençage complet', 'Labo médical', 'Autre'];
     const label = (list, k) => (list.find(x => x[0] === k) || ['', k || '—'])[1];
@@ -90,15 +113,33 @@
         return sc.map(x => ({name: i18n(x.r[0]), code: x.r[1], avg: x.r[2], min: x.r[3], max: x.r[4], p: x.w / tot})).sort((a, b) => b.p - a.p);
     }
     const guessShort = cm => { const g = guess(cm).slice(0, 2); return g.map(x => `${x.code} ${Math.round(x.p * 100)} %`).join(' · '); };
+    /* 📈 Endogamie : dans une branche endogame (villages fermés, îles), on partage plus d'ADN qu'attendu ; les cM sont multipliés par un
+     * facteur (0,85 léger · 0,7 moyen · 0,55 fort) avant d'estimer la relation. Branches : les groupes et les tests cochés dans ⚙️ Réglages. */
+    const ENDO_LEVELS = [[0.85, 'Légère (quelques mariages entre cousins)'], [0.7, 'Moyenne (village ou vallée assez fermés)'], [0.55, 'Forte (île, communauté très fermée)']];
+    const endoOf = m => { const e = prefs().endo || {}; if (!m) return 0; const on = (e.kits || []).map(Number).includes(Number(m.kit_id)) || (m.groups || []).some(g => (e.groups || []).map(Number).includes(Number(g))); return on ? (num(e.factor) || 0.7) : 0; };
+    const cmFor = m => { const f = endoOf(m); return f ? num(m.shared_cm) * f : num(m?.shared_cm); };
     const pctOf = cm => num(cm) / (prefs().total || 6800) * 100;
 
     /* ═════════ La colonne de gauche ═════════ */
     const visibleSections = () => prefs().order.filter(k => !prefs().hidden.includes(k)).map(k => SECTIONS.find(s => s[0] === k)).filter(Boolean);
+    /* R2 : la même colonne que Listes et Réglages (groupes repliables, case « Chercher », « Réordonner ») */
+    const DNA_GROUPS = [['g_dna_mine', '🧬', 'Mes données', ['home', 'kits', 'matches', 'shared']], ['g_dna_group', '🗂️', 'Regrouper et placer', ['groups', 'auto', 'place']],
+        ['g_dna_seg', '🧩', 'Chromosomes', ['chromo', 'phasing', 'calc']], ['g_dna_tree', '🌳', 'Lignées et origines', ['lines', 'origins']], ['g_dna_help', '📚', 'Comprendre et régler', ['law', 'learn', 'settings']]];
+    let SG = null;
+    const sg = () => { if (SG || !window.LCNDA_SIDEGROUPS) return SG;
+        SG = window.LCNDA_SIDEGROUPS({name: 'adn', panelTitle: i18n('Rubriques de l’ADN'), key: 'genealogie-adn-groups', defaults: DNA_GROUPS.map(([id, ic, l, k]) => [id, ic, i18n(l), k]), allKeys: () => SECTIONS.map(x => x[0]),
+            label: k => { const x = SECTIONS.find(y => y[0] === k); return x ? `${x[1]} ${i18n(x[2])}` : k; }, defaultEnabled: true,
+            flatOrder: () => prefs().order, flatDefaults: () => SECTIONS.map(x => x[0]), setFlatOrder: keys => { const q = prefs(); q.order = keys; savePrefs(q); },
+            canHide: true, hidden: () => prefs().hidden, setHidden: keys => { const q = prefs(); q.hidden = keys.filter(k => k !== 'settings' && k !== 'law'); savePrefs(q); },
+            current: () => S().adnTab || 'home', eyebrow: 'ADN', what: i18n('rubriques'), searchPh: i18n('Chercher une rubrique…')});
+        return SG; };
     ext.adn = {
         sidebar(content, footer) {
-            const cur = S().adnTab || 'home';
-            content.innerHTML = `<div class="side-menu">${visibleSections().map(([k, ic, l], i) => `<button class="side-menu-item ${cur === k ? 'is-active' : ''}" data-dna-go="${k}"><span class="side-number">${String(i + 1).padStart(2, '0')}</span>${ic} ${esc(l)}</button>`).join('')}</div>`;
-            footer.innerHTML = '<div style="display:flex;flex-direction:column;gap:8px"><button class="button small" data-dna-go="kits">＋ Nouveau test</button><button class="button small secondary" data-dna-go="matches">＋ Correspondances</button></div>';
+            const cur = S().adnTab || 'home', G = sg(), signal = A().sidebarSignal?.();
+            if (G) { G.render(content, signal); content.addEventListener('click', e => { const b = e.target.closest('[data-side-value]'); if (b) go(b.dataset.sideValue); }, signal ? {signal} : undefined); }
+            else content.innerHTML = `<div class="side-menu">${visibleSections().map(([k, ic, l], i) => `<button class="side-menu-item ${cur === k ? 'is-active' : ''}" data-dna-go="${k}"><span class="side-number">${String(i + 1).padStart(2, '0')}</span>${ic} ${esc(l)}</button>`).join('')}</div>`;
+            footer.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px">${kiosk() ? '' : `<button class="button small" data-dna-go="kits">${i18n('＋ Nouveau test')}</button><button class="button small secondary" data-dna-go="matches">${i18n('＋ Correspondances')}</button>`}${G ? `<button class="button small secondary" type="button" data-dna-reorder title="${esc(i18n('En groupes ou en une seule liste, l’ordre, ce qui s’affiche'))}">${i18n('Réordonner')}</button>` : ''}</div>`;
+            footer.querySelector('[data-dna-reorder]')?.addEventListener('click', () => G.openDialog());
         },
         async render(token) {
             const ws = A().$('#workspace'); const sec = S().adnTab || 'home';
@@ -107,7 +148,10 @@
             const banner = !prefs().ack && sec !== 'law' ? lawHtml(false) : '';
             const r = RENDER[sec] || RENDER.home;
             ws.innerHTML = `<section class="page h-dna-page" data-dna-sec="${esc(sec)}">${banner}${r.html()}</section>`;
-            r.bind?.(ws.querySelector('.h-dna-page'));
+            const page = ws.querySelector('.h-dna-page');
+            page.querySelectorAll('[data-dna-print]').forEach(b => b.addEventListener('click', () => UIx().printPage?.()));
+            await r.bind?.(page);
+            readOnly(page); pageFind(page);
         },
     };
     const go = sec => { S().adnTab = sec; A().setModule('adn'); };
@@ -131,9 +175,11 @@
             <div class="h-dna-grid">${matches.length ? `<section class="card"><h3>Correspondances par nombre de cM</h3>${chart({kind: 'columns', series: [{name: i18n('Correspondances'), color: '#4e79a7'}], rows: buckets.map(([, l], i) => ({label: l + ' cM', s0: hist[i]})), o: {height: 220}})}</section>
                 <section class="card"><h3>Par côté</h3>${chart({kind: 'donut', series: [{name: i18n('Correspondances')}], rows: bySide.filter(x => x[1]).map(([l, n, c]) => ({label: i18n(l), s0: n, color: c})), o: {height: 260, legend: 'right'}})}</section>
                 <section class="card"><h3>Les plus proches</h3><ol class="h-dna-top">${matches.slice(0, 10).map(m => `<li><button type="button" class="link-button" data-dna-match="${m.id}">${esc(m.name)}</button> — ${fmt(m.shared_cm, 1)} cM <small class="muted">${esc(guessShort(m.shared_cm))}</small></li>`).join('')}</ol></section>
+                <section class="card h-dna-followups" data-dna-followups><h3>${i18n('🔔 À relancer')}</h3>${(() => { const today = new Date().toISOString().slice(0, 10), f = matches.filter(m => m.data?.follow_up && !['replied', 'placed', 'ignore', 'tree_shared'].includes(m.status)).sort((a, b) => String(a.data.follow_up).localeCompare(String(b.data.follow_up))).slice(0, 15);
+                    return f.length ? `<ul>${f.map(m => `<li class="${m.data.follow_up <= today ? 'is-late' : ''}"><button type="button" class="link-button" data-dna-match="${m.id}">${esc(m.name)}</button> — ${esc(i18n(m.data.follow_up <= today ? 'à relancer depuis le {d}' : 'le {d}', {d: m.data.follow_up}))} <button type="button" class="button small secondary" data-dna-edit data-dna-fdone="${m.id}">${i18n('✓ A répondu')}</button></li>`).join('')}</ul>` : `<p class="muted">${i18n('Rien à relancer : sur une correspondance « Contactée », « 🔔 Relancer dans 30 jours ».')}</p>`; })()}</section>
                 <section class="card"><h3>À contacter</h3>${todo.length ? `<ul>${todo.map(m => `<li><button type="button" class="link-button" data-dna-match="${m.id}">${esc(m.name)}</button> — ${fmt(m.shared_cm, 1)} cM</li>`).join('')}</ul>` : '<p class="muted">Personne : mets « À contacter » dans le suivi d’une correspondance.</p>'}</section>` : ''}
                 ${kits.map(k => `<section class="card"><h3>🧬 ${esc(kitName(k))}</h3><p>${esc(tl(TYPES, k.test_type))}${k.haplo_y ? `<br>ADN-Y : <b>${esc(k.haplo_y)}</b>` : ''}${k.haplo_mt ? `<br>ADNmt : <b>${esc(k.haplo_mt)}</b>` : ''}</p><p class="muted">${plural(matches.filter(m => m.kit_id === k.id).length, 'correspondance', 'correspondances')}</p></section>`).join('')}</div>`;
-    }, bind: root => bindMatchLinks(root)};
+    }, bind: root => { bindMatchLinks(root); root.querySelectorAll('[data-dna-fdone]').forEach(b => b.addEventListener('click', () => { const m = data.matches.find(x => x.id === Number(b.dataset.dnaFdone)); if (m) setFollowUp(m, '', 'replied'); })); }};
 
     /* ═════════ ⚖️ Loi ═════════ */
     RENDER.law = {html: () => `${header('ADN', '⚖️ Loi et mises en garde', 'À lire avant d’utiliser cet onglet.')}${lawHtml(true)}
@@ -160,7 +206,7 @@
                 <label>Marqueurs Y-STR<textarea name="y_str" rows="4" placeholder="DYS393=13, DYS390=24…">${esc(d.y_str || '')}</textarea></label><label>Mutations ADNmt<textarea name="mt_mutations" rows="4" placeholder="16519C, 263G…">${esc(d.mt_mutations || '')}</textarea></label>
                 <label class="span-2">Notes<textarea name="notes" rows="3">${esc(d.notes || '')}</textarea></label></div>`,
             onOpen: () => {},
-            onDelete: k.id ? async () => { if (!await A().confirmBox('Supprimer ce test, ses correspondances et ses segments ?', {title: 'Supprimer le test', okLabel: 'Supprimer le test'})) return false; await post('delete_dna_kit', {id: k.id}); toast('Test supprimé.'); await refresh(); } : undefined,
+            onDelete: k.id && !kiosk() ? async () => { const r = await post('delete_dna_kit', {id: k.id}); await refresh(); undoRestore(i18n('Test « {name} » supprimé', {name: kitName(k)}), r.result?.undo, () => post('delete_dna_kit', {id: k.id})); } : undefined,
             onSubmit: async f => { const v = Object.fromEntries(new FormData(f));
                 try { await post('save_dna_kit', {id: k.id || 0, person_id: Number(v.dna_person) || 0, label: v.label, company: v.company, test_type: v.test_type, kit_number: v.kit_number, test_date: v.test_date, haplo_y: v.haplo_y, haplo_mt: v.haplo_mt,
                     data: {ethnicity: ethParse(v.ethnicity), y_str: v.y_str, mt_mutations: v.mt_mutations, notes: v.notes, chip: v.chip, manager: v.manager, gedmatch: v.gedmatch, raw_file: v.raw_file, consent: v.consent}}); toast('Test enregistré.'); await refresh(); }
@@ -169,7 +215,7 @@
     RENDER.kits = {html() {
         const {kits, matches} = data;
         return `${header('ADN', '🧬 Mes tests', 'Un test par personne et par société : type, haplogroupes, origines estimées, marqueurs.', '<button type="button" class="button" data-dna-newkit>＋ Nouveau test</button>')}
-            <div class="h-dna-cards">${kits.map(k => `<article class="card h-dna-kit"><header><h3>${esc(kitName(k))}</h3><button type="button" class="icon-action" data-dna-kit="${k.id}" title="Modifier">✎</button></header>
+            <div class="h-dna-cards">${kits.map(k => `<article class="card h-dna-kit"><header><h3>${esc(kitName(k))}</h3><span><button type="button" class="icon-action" data-dna-kit="${k.id}" title="Modifier">✎</button><button type="button" class="icon-button small enq-more" data-dna-kmenu="${k.id}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></span></header>
                 <p>${esc(tl(TYPES, k.test_type))}${k.kit_number ? ` · ${i18n('n° {n}', {n: esc(k.kit_number)})}` : ''}${k.test_date ? ` · ${esc(k.test_date)}` : ''}</p>
                 ${k.person_id ? `<p><button type="button" class="table-link" data-open-person="${k.person_id}">👤 ${esc(k.person_name)}</button></p>` : ''}
                 ${k.haplo_y || k.haplo_mt ? `<p>${k.haplo_y ? `ADN-Y <b>${esc(k.haplo_y)}</b> ` : ''}${k.haplo_mt ? `ADNmt <b>${esc(k.haplo_mt)}</b>` : ''}</p>` : ''}
@@ -178,6 +224,9 @@
     }, bind(root) {
         root.querySelectorAll('[data-dna-newkit]').forEach(b => b.addEventListener('click', () => kitDialog()));
         root.querySelectorAll('[data-dna-kit]').forEach(b => b.addEventListener('click', () => kitDialog(kitById(b.dataset.dnaKit))));
+        root.querySelectorAll('[data-dna-kmenu]').forEach(b => b.addEventListener('click', () => { const k = kitById(b.dataset.dnaKmenu); if (!k) return; const ro = kiosk();
+            UIx().menuAt?.(b, [{icon: '↗', label: i18n('Voir ses correspondances'), run: () => { S().adnFilter = {...(S().adnFilter || {}), kit: k.id}; go('matches'); }}, ro ? null : {icon: '✎', label: i18n('Modifier'), run: () => kitDialog(k)},
+                {icon: '⤓', label: i18n('Exporter ses segments pour DNA Painter'), run: () => exportDnaPainter(k.id)}, ro ? null : '-', ro ? null : {icon: '🗑', label: i18n('Supprimer'), danger: true, run: async () => { const r = await post('delete_dna_kit', {id: k.id}); await refresh(); undoRestore(i18n('Test « {name} » supprimé', {name: kitName(k)}), r.result?.undo, () => post('delete_dna_kit', {id: k.id})); }}].filter(Boolean), {title: `« ${kitName(k).slice(0, 50)} »`}); }));
         root.querySelectorAll('[data-dna-kitmatches]').forEach(b => b.addEventListener('click', () => { S().adnFilter = {...(S().adnFilter || {}), kit: Number(b.dataset.dnaKitmatches)}; go('matches'); }));
     }};
 
@@ -199,7 +248,10 @@
         if (k === 'segments') return m.segments ? fmt(m.segments) : '';
         if (k === 'longest') return m.longest_cm ? fmt(m.longest_cm, 1) : '';
         if (k === 'relationship') return esc(m.relationship);
-        if (k === 'guess') return `<small>${esc(guessShort(m.shared_cm))}</small>`;
+        if (k === 'guess') return endoOf(m) ? `<small class="h-dna-endo-note" title="${esc(i18n('Corrigé pour l’endogamie'))}">≈ ${esc(guessShort(cmFor(m)))}</small>` : `<small>${esc(guessShort(m.shared_cm))}</small>`;
+        if (k === 'cmcorr') return endoOf(m) ? `<span class="h-dna-endo-note">${fmt(cmFor(m), 1)}</span>` : '';
+        if (k === 'follow') { const f = m.data?.follow_up || ''; return f ? `<span class="${f <= new Date().toISOString().slice(0, 10) ? 'is-late' : ''}">🔔 ${esc(f)}</span>` : ''; }
+        if (k === 'shared') { const n = (m.data?.shared_matches || []).length; return n ? fmt(n) : ''; }
         if (k === 'side') return m.side ? `<span class="h-dna-side" style="--c:${color(prefs().colors[m.side])}">${esc(tl(SIDES, m.side))}</span>` : '';
         if (k === 'groups') return m.groups.map(groupById).filter(Boolean).map(g => `<span class="h-dna-gchip" style="--c:${color(g.color)}" title="${esc(g.ancestor || '')}">${esc(g.name)}</span>`).join('');
         if (k === 'person') return m.person_id ? `<button type="button" class="table-link" data-open-person="${m.person_id}">${esc(m.person_name)}</button>` : '';
@@ -216,15 +268,15 @@
         const f = filt(), p = prefs(), list = filtered(), size = Math.max(50, num(p.pageSize) || 200), shown = list.slice(0, size + (f.shown || 0));
         const sel = (k, opts, v) => `<select data-dna-f="${k}">${opts.map(([a, b]) => `<option value="${esc(a)}" ${String(v ?? '') === String(a) ? 'selected' : ''}>${esc(b)}</option>`).join('')}</select>`;
         return `${header('ADN', '👥 ' + i18n('Correspondances'), i18n('{n} sur {total}. Clic sur un nom : sa fiche (cM, ancêtre commun, arbre, suivi). Le calculateur propose la relation la plus probable.', {n: fmt(list.length), total: fmt(data.matches.length)}),
-            `<button type="button" class="button" data-dna-newmatch>＋ Correspondance</button><button type="button" class="button secondary" data-dna-import>⤒ Importer (CSV)</button><button type="button" class="button secondary" data-dna-export>⤓ Exporter en CSV</button><button type="button" class="button secondary" data-dna-cols>⚙ Colonnes</button>`)}
+            `<button type="button" class="button" data-dna-newmatch>＋ Correspondance</button><button type="button" class="button secondary" data-dna-import>⤒ Importer (CSV)</button><button type="button" class="button secondary" data-dna-export>${i18n('⤓ Exporter ▾')}</button><button type="button" class="button secondary" data-dna-cols>⚙ Colonnes</button>`)}
             ${!data.kits.length ? `<p class="h-dna-warn">Ajoute d’abord un test dans « 🧬 Mes tests » : les correspondances s’y rattachent.</p>` : ''}
             <div class="h-dna-filters">${sel('kit', [[0, 'Tous les tests'], ...data.kits.map(k => [k.id, kitName(k)])], f.kit)}<input type="search" data-dna-f="q" value="${esc(f.q || '')}" placeholder="Nom, nom de famille, lieu, note…">
                 ${sel('side', [['', 'Tous les côtés'], ...SIDES.slice(1)], f.side)}${sel('status', [['', 'Tout suivi'], ...STATUSES.slice(1)], f.status)}${sel('group', [[0, 'Tous les groupes'], [-1, 'Sans groupe'], ...data.groups.map(g => [g.id, g.name])], f.group)}
                 <input type="number" data-dna-f="min" value="${esc(f.min || '')}" placeholder="cM min" min="0"><input type="number" data-dna-f="max" value="${esc(f.max || '')}" placeholder="cM max" min="0">
 </div>
             <div class="h-dna-bulk" hidden><span data-dna-nsel></span>${sel('bside', [['', 'Côté…'], ...SIDES.slice(1)], '')}${sel('bstatus', [['', 'Suivi…'], ...STATUSES.slice(1)], '')}${sel('bgroup', [[0, 'Ajouter au groupe…'], ...data.groups.map(g => [g.id, g.name])], 0)}${sel('bungroup', [[0, 'Retirer du groupe…'], ...data.groups.map(g => [g.id, g.name])], 0)}<button type="button" class="button small danger" data-dna-bdel>Supprimer</button></div>
-            <div data-dna-sortbar></div><div class="data-table-wrap"><table class="data-table h-dna-table"><thead><tr><th><input type="checkbox" data-dna-all title="Tout cocher"></th>${p.columns.map(k => `<th>${esc(i18n(label(COLUMNS, k), {ctx: 'adn'}))}</th>`).join('')}</tr></thead>
-            <tbody>${shown.map(m => `<tr data-id="${m.id}"><td><input type="checkbox" data-dna-chk="${m.id}"></td>${p.columns.map(k => `<td class="c-${k}">${cell(k, m)}</td>`).join('')}</tr>`).join('') || `<tr><td colspan="${p.columns.length + 1}">${A().empty('Aucune correspondance pour ces filtres.')}</td></tr>`}</tbody></table></div>
+            <div data-dna-sortbar></div><div class="data-table-wrap"><table class="data-table h-dna-table"><thead><tr><th><input type="checkbox" data-dna-all title="Tout cocher"></th>${p.columns.map(k => `<th>${esc(i18n(label(COLUMNS, k), {ctx: 'adn'}))}</th>`).join('')}<th></th></tr></thead>
+            <tbody>${shown.map(m => `<tr data-id="${m.id}" data-dna-row="${m.id}"><td><input type="checkbox" data-dna-chk="${m.id}"></td>${p.columns.map(k => `<td class="c-${k}">${cell(k, m)}</td>`).join('')}<td class="h-dna-row-act"><button type="button" class="icon-button small enq-more" data-dna-rmenu="${m.id}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></td></tr>`).join('') || `<tr><td colspan="${p.columns.length + 2}">${A().empty('Aucune correspondance pour ces filtres.')}</td></tr>`}</tbody></table></div>
             <div data-dna-morebox data-rest="${list.length - shown.length}" data-step="${size}"></div>`;
     }, bind(root) {
         const f = filt();
@@ -246,7 +298,9 @@
             mb.appendChild(UI?.moreButton ? UI.moreButton({remaining: Number(mb.dataset.rest), step, feminine: true, onClick: onMore}) : Object.assign(document.createElement('button'), {type: 'button', className: 'button secondary', textContent: 'Afficher la suite', onclick: onMore})); }
         root.querySelector('[data-dna-newmatch]').addEventListener('click', () => matchDialog({kit_id: f.kit || data.kits[0]?.id}));
         root.querySelector('[data-dna-import]').addEventListener('click', () => importDialog());
-        root.querySelector('[data-dna-export]').addEventListener('click', () => exportCsv(filtered()));
+        root.querySelector('[data-dna-export]').addEventListener('click', () => exportMatches(filtered()));
+        root.addEventListener('click', e => { const b = e.target.closest('[data-dna-rmenu]'); if (!b) return; e.stopPropagation(); const m = data.matches.find(x => x.id === Number(b.dataset.dnaRmenu)); if (m) UIx().menuAt?.(b, matchMenu(m), {title: `« ${m.name.slice(0, 50)} »`}); });
+        root.addEventListener('contextmenu', e => { const r = e.target.closest('[data-dna-row]'); if (!r || e.shiftKey || e.target.closest('a, input, select') || !UIx().contextMenu) return; const m = data.matches.find(x => x.id === Number(r.dataset.dnaRow)); if (!m) return; e.preventDefault(); UIx().contextMenu(e, matchMenu(m), {title: `« ${m.name.slice(0, 50)} »`}); });
         root.querySelector('[data-dna-cols]').addEventListener('click', () => go('settings'));
         const upd = () => { const n = root.querySelectorAll('[data-dna-chk]:checked').length; root.querySelector('.h-dna-bulk').hidden = !n; root.querySelector('[data-dna-nsel]').textContent = `${plural(n, 'cochée', 'cochées')} :`; };
         root.addEventListener('change', e => { if (e.target.matches('[data-dna-all]')) root.querySelectorAll('[data-dna-chk]').forEach(c => { c.checked = e.target.checked; }); if (e.target.matches('[data-dna-chk], [data-dna-all]')) upd(); });
@@ -256,14 +310,15 @@
     async function bulk(root, k, v) {
         const ids = [...root.querySelectorAll('[data-dna-chk]:checked')].map(c => Number(c.dataset.dnaChk)); if (!ids.length || !v || v === '0') return;
         const body = {ids}; if (k === 'bside') body.side = v; if (k === 'bstatus') body.status = v; if (k === 'bgroup') body.add_group = Number(v); if (k === 'bungroup') body.remove_group = Number(v);
-        if (k === 'delete') { if (!await A().confirmBox(ids.length > 1 ? i18n('Supprimer {n} correspondances et leurs segments ?', {n: ids.length}) : i18n('Supprimer cette correspondance et ses segments ?'), {title: 'Supprimer les correspondances', okLabel: 'Supprimer'})) return; body.delete = 1; }
+        if (k === 'delete') { body.delete = 1; try { const r = await post('bulk_dna_matches', body); await refresh(); undoRestore(ids.length > 1 ? i18n('{n} correspondances supprimées', {n: ids.length}) : i18n('Correspondance supprimée'), r.result?.undo, () => post('bulk_dna_matches', body)); } catch (e) { toast(e.message, 'error'); } return; }
         try { await post('bulk_dna_matches', body); toast('Fait.'); await refresh(); } catch (e) { toast(e.message, 'error'); }
     }
     function bindMatchLinks(root) { root.querySelectorAll('[data-dna-match]').forEach(b => b.addEventListener('click', () => { const m = data.matches.find(x => x.id === Number(b.dataset.dnaMatch)); if (m) matchDialog(m); })); }
     function matchDialog(m = {}) {
         const d = m.data || {};
         if (!data.kits.length) { toast('Ajoute d’abord un test (« 🧬 Mes tests »).', 'error'); return go('kits'); }
-        ext.openDialog({eyebrow: 'ADN · CORRESPONDANCE', title: m.id ? m.name : 'Nouvelle correspondance', wide: true, submitLabel: 'Enregistrer',
+        if (kiosk() && !m.id) return;
+        ext.openDialog({eyebrow: 'ADN · CORRESPONDANCE', title: m.id ? m.name : 'Nouvelle correspondance', wide: true, submitLabel: kiosk() ? 'Fermer' : 'Enregistrer',
             body: `<div class="form-grid">
                 <label>Nom (tel que sur le site)<input name="name" required value="${esc(m.name || '')}" maxlength="200"></label>
                 <label>Test<select name="kit_id">${data.kits.map(k => `<option value="${k.id}" ${Number(m.kit_id) === k.id ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label>
@@ -274,6 +329,7 @@
                 <div><span class="pk-lab">Fiche dans l’arbre</span>${PKF({name: 'dna_mperson', kind: 'person', value: Number(m.person_id) || null, placeholder: i18n('Si tu sais qui c’est…')})}</div>
                 <label>Ancêtre(s) commun(s) (MRCA)<input name="mrca" value="${esc(d.mrca || '')}" placeholder="Jean Martin et Marie Durand"></label>
                 <label>Suivi<select name="status">${STATUSES.map(([v, l]) => `<option value="${v}" ${(m.status || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Étoiles (0 à 5)<input name="stars" type="number" min="0" max="5" value="${esc(d.stars || '')}"></label>
+                <label>${i18n('🔔 Relancer le')}<input name="follow_up" type="date" value="${esc(d.follow_up || '')}" data-dna-follow></label><div class="h-dna-follow-quick"><span class="pk-lab">&nbsp;</span><button type="button" class="button small secondary" data-dna-follow-days="${num(prefs().followDays) || 30}">${i18n('Relancer dans {n} jours', {n: num(prefs().followDays) || 30})}</button> <button type="button" class="button small secondary" data-dna-follow-days="0">${i18n('Pas de relance')}</button></div>
                 <div class="span-2"><span class="section-label">Groupes</span><div class="h-dna-gpick">${data.groups.map(g => `<label class="checkbox-line"><input type="checkbox" name="g_${g.id}" ${(m.groups || []).includes(g.id) ? 'checked' : ''}> <span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></label>`).join('') || '<small class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧬</span><span class="empty-line-text">Aucun groupe (« 🗂️ Groupes »).</span></small>'}</div></div>
                 <label>Noms de famille en commun<input name="surnames" value="${esc(d.surnames || '')}"></label><label>Lieux en commun<input name="places" value="${esc(d.places || '')}"></label>
                 <label>Arbre en ligne (adresse)<input name="tree_url" value="${esc(d.tree_url || '')}" placeholder="https://…"></label><label>Taille de son arbre<input name="tree_size" value="${esc(d.tree_size || '')}"></label>
@@ -281,13 +337,15 @@
                 <label class="span-2">Correspondances en commun <small>(une par ligne ou séparées par ; — sert à la méthode de Leeds)</small><textarea name="shared_matches" rows="3">${esc((d.shared_matches || []).join('\n'))}</textarea></label>
                 <label class="span-2">Notes<textarea name="notes" rows="3">${esc(d.notes || '')}</textarea></label></div>`,
             onOpen: dlg => { const box = dlg.querySelector('[data-dna-guess]'), inp = dlg.querySelector('[data-dna-cm]');
-                const paint = () => { const g = guess(inp.value); box.innerHTML = g.length ? `<b>${i18n('Relation probable ({cm} cM, {pct} %)', {cm: fmt(num(inp.value), 1), pct: fmt(pctOf(inp.value), 2)})}</b> : ${g.slice(0, 5).map(x => `${esc(x.name)} <small>${Math.round(x.p * 100)} %</small>`).join(' · ')}` : `<small class="muted">${i18n('Tape les cM partagés : la relation probable s’affiche ici.')}</small>`; };
-                inp.addEventListener('input', paint); paint(); },
-            onDelete: m.id ? async () => { if (!await A().confirmBox(i18n('Supprimer « {name} » ?', {name: m.name}), {title: 'Supprimer la correspondance', okLabel: 'Supprimer la correspondance'})) return false; await post('delete_dna_match', {id: m.id}); toast('Supprimée.'); await refresh(); } : undefined,
-            onSubmit: async f => { const v = Object.fromEntries(new FormData(f));
+                dlg.querySelectorAll('[data-dna-follow-days]').forEach(b => b.addEventListener('click', () => { const n = Number(b.dataset.dnaFollowDays), f = dlg.querySelector('[data-dna-follow]'); if (!n) { f.value = ''; return; } const dt = new Date(Date.now() + n * 864e5); f.value = dt.toISOString().slice(0, 10); const st = dlg.querySelector('[name=status]'); if (st && ['', 'todo'].includes(st.value)) st.value = 'contacted'; }));
+                if (kiosk()) { dlg.querySelectorAll('input, select, textarea, [data-dna-follow-days]').forEach(el => { el.disabled = true; }); dlg.querySelectorAll('button[type=submit], [data-dialog-delete], .danger').forEach(el => { el.hidden = true; }); }
+                const paint = () => { const endo = endoOf({kit_id: Number(dlg.querySelector('[name=kit_id]')?.value), groups: data.groups.filter(g => dlg.querySelector(`[name=g_${g.id}]`)?.checked).map(g => g.id)}), raw = num(inp.value), cmv = endo ? raw * endo : raw; const g = guess(cmv); box.innerHTML = g.length ? `<b>${i18n('Relation probable ({cm} cM, {pct} %)', {cm: fmt(num(inp.value), 1), pct: fmt(pctOf(inp.value), 2)})}</b> : ${g.slice(0, 5).map(x => `${esc(x.name)} <small>${Math.round(x.p * 100)} %</small>`).join(' · ')}${endo ? `<br><small class="h-dna-endo-note" data-dna-endo-note>${i18n('📈 Branche endogame : {raw} cM comptés comme {cm} cM.', {raw: fmt(raw, 1), cm: fmt(cmv, 1)})}</small>` : ''}` : `<small class="muted">${i18n('Tape les cM partagés : la relation probable s’affiche ici.')}</small>`; };
+                inp.addEventListener('input', paint); dlg.addEventListener('change', e => { if (e.target.matches('[name=kit_id], [name^=g_]')) paint(); }); paint(); },
+            onDelete: m.id && !kiosk() ? async () => { await deleteMatch(m); } : undefined,
+            onSubmit: async f => { if (kiosk()) return; const v = Object.fromEntries(new FormData(f));
                 try { await post('save_dna_match', {id: m.id || 0, kit_id: Number(v.kit_id), name: v.name, shared_cm: v.shared_cm, segments: v.segments, longest_cm: v.longest_cm, relationship: v.relationship, side: v.side, status: v.status,
                     person_id: Number(v.dna_mperson) || 0, groups: data.groups.filter(g => v['g_' + g.id]).map(g => g.id),
-                    data: {...d, x_cm: v.x_cm, mrca: v.mrca, stars: v.stars, surnames: v.surnames, places: v.places, tree_url: v.tree_url, tree_size: v.tree_size, contact: v.contact, country: v.country, shared_matches: v.shared_matches, notes: v.notes}});
+                    data: {...d, x_cm: v.x_cm, mrca: v.mrca, stars: v.stars, surnames: v.surnames, places: v.places, tree_url: v.tree_url, tree_size: v.tree_size, contact: v.contact, country: v.country, shared_matches: v.shared_matches, notes: v.notes, follow_up: v.follow_up || ''}});
                     toast('Correspondance enregistrée.'); await refresh(); } catch (e) { toast(e.message, 'error'); return false; } }});
     }
     /* import CSV : les colonnes des sociétés reconnues toutes seules, modifiables */
@@ -472,13 +530,13 @@
         ext.openDialog({eyebrow: 'ADN', title: g.id ? 'Modifier le groupe' : 'Nouveau groupe', submitLabel: 'Enregistrer',
             body: `<label>${i18n('Nom', {ctx: 'adn'})}<input name="name" required value="${esc(g.name || '')}" placeholder="${esc(i18n('Branche Martin (Bretagne)'))}"></label><label>Couleur<input type="color" name="color" value="${esc(color(g.color || PALETTE[data.groups.length % PALETTE.length]))}"></label>
                 <label>Côté<select name="side">${SIDES.map(([v, l]) => `<option value="${v}" ${(g.side || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Couple d’ancêtres supposé<input name="ancestor" value="${esc(g.ancestor || '')}"></label><label>Notes<textarea name="notes" rows="3">${esc(g.notes || '')}</textarea></label>`,
-            onDelete: g.id ? async () => { if (!await A().confirmBox(i18n('Supprimer le groupe « {name} » ? (les correspondances restent)', {name: g.name}), {title: 'Supprimer le groupe', okLabel: 'Supprimer le groupe'})) return false; await post('delete_dna_group', {id: g.id}); await refresh(); } : undefined,
+            onDelete: g.id && !kiosk() ? async () => { const r = await post('delete_dna_group', {id: g.id}); await refresh(); undoRestore(i18n('Groupe « {name} » supprimé', {name: g.name}), r.result?.undo, () => post('delete_dna_group', {id: g.id})); } : undefined,
             onSubmit: async f => { const v = Object.fromEntries(new FormData(f)); try { await post('save_dna_group', {id: g.id || 0, ...v}); await refresh(); } catch (e) { toast(e.message, 'error'); return false; } }});
     }
     RENDER.groups = {html() {
         const kit = Number(filt().kit) || 0, L = leeds(kit);
         return `${header('ADN', '🗂️ Groupes et méthode de Leeds', 'Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ».', '<button type="button" class="button" data-dna-newgroup>＋ Nouveau groupe</button>')}
-            <div class="h-dna-cards">${data.groups.map(g => `<article class="card h-dna-group" style="--c:${color(g.color)}"><header><h3><span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></h3><button type="button" class="icon-action" data-dna-group="${g.id}">✎</button></header>
+            <div class="h-dna-cards">${data.groups.map(g => `<article class="card h-dna-group" style="--c:${color(g.color)}"><header><h3><span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></h3><span><button type="button" class="icon-action" data-dna-group="${g.id}">✎</button><button type="button" class="icon-button small enq-more" data-dna-gmenu="${g.id}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></span></header>
                 <p>${esc(tl(SIDES, g.side))}${g.ancestor ? ` · ${esc(g.ancestor)}` : ''}</p><p class="muted">${plural(data.matches.filter(m => m.groups.includes(g.id)).length, 'correspondance', 'correspondances')} · <button type="button" class="link-button" data-dna-gmatches="${g.id}">les voir</button></p>${g.notes ? `<p><small>${esc(g.notes)}</small></p>` : ''}</article>`).join('') || A().emptyState({icon: '🗂️', text: 'Aucun groupe pour l’instant', hint: 'Un groupe range ensemble les correspondances d’une même branche.', action: {label: '＋ Nouveau groupe', attrs: 'data-dna-newgroup'}})}</div>
             <h3>Méthode de Leeds automatique</h3>
             <p class="muted">${(() => { const base = i18n(kit ? '{n} entre {lo} et {hi} cM pour ce test (bornes dans ⚙️ Réglages)' : '{n} entre {lo} et {hi} cM (bornes dans ⚙️ Réglages)', {n: plural(L.pool, 'correspondance', 'correspondances'), lo: L.lo, hi: L.hi}); return L.missing ? i18n('{base} ; {n} sans « correspondances en commun » notées, donc ignorées.', {base, n: fmt(L.missing)}) : base + '.'; })()}</p>
@@ -489,6 +547,9 @@
         bindMatchLinks(root);
         root.querySelectorAll('[data-dna-newgroup]').forEach(b => b.addEventListener('click', () => groupDialog()));
         root.querySelectorAll('[data-dna-group]').forEach(b => b.addEventListener('click', () => groupDialog(groupById(b.dataset.dnaGroup))));
+        root.querySelectorAll('[data-dna-gmenu]').forEach(b => b.addEventListener('click', () => { const g = groupById(b.dataset.dnaGmenu); if (!g) return; const ro = kiosk();
+            UIx().menuAt?.(b, [{icon: '↗', label: i18n('Voir ses correspondances'), run: () => { filt().group = g.id; go('matches'); }}, ro ? null : {icon: '✎', label: i18n('Modifier'), run: () => groupDialog(g)},
+                ro ? null : '-', ro ? null : {icon: '🗑', label: i18n('Supprimer'), danger: true, run: async () => { const r = await post('delete_dna_group', {id: g.id}); await refresh(); undoRestore(i18n('Groupe « {name} » supprimé', {name: g.name}), r.result?.undo, () => post('delete_dna_group', {id: g.id})); }}].filter(Boolean), {title: `« ${g.name.slice(0, 50)} »`}); }));
         root.querySelectorAll('[data-dna-gmatches]').forEach(b => b.addEventListener('click', () => { filt().group = Number(b.dataset.dnaGmatches); go('matches'); }));
         root.querySelector('[data-dna-leedsmake]')?.addEventListener('click', async () => { const L = leeds(Number(filt().kit) || 0);
             try { for (const [i, c] of L.clusters.entries()) { const name = `Leeds ${i + 1} (${c.seed.name})`, old = data.groups.find(g => g.name === name); const gid = old ? old.id : (await post('save_dna_group', {name, color: PALETTE[i % PALETTE.length], notes: i18n('Créé par la méthode de Leeds autour de {name} ({cm} cM).', {name: c.seed.name, cm: fmt(c.seed.shared_cm)})})).result.id; await post('bulk_dna_matches', {ids: c.members.map(m => m.id), add_group: gid}); }
@@ -663,7 +724,8 @@
         const f = filt();
         root.querySelector('[data-dna-ck]')?.addEventListener('change', e => { f.kit = Number(e.target.value); go('chromo'); });
         root.querySelector('[data-dna-paint]').addEventListener('change', e => { f.paint = e.target.value; go('chromo'); });
-        root.querySelectorAll('[data-dna-segdel]').forEach(b => b.addEventListener('click', async () => { await post('delete_dna_segments', {ids: [Number(b.dataset.dnaSegdel)]}); await refresh(); }));
+        root.querySelectorAll('[data-dna-segdel]').forEach(b => b.addEventListener('click', async () => { const sg = data.segments.find(x => x.id === Number(b.dataset.dnaSegdel)); try { await post('delete_dna_segments', {ids: [Number(b.dataset.dnaSegdel)]}); await refresh(); } catch (e) { toast(e.message, 'error'); return; }
+            if (sg) undoRestore(i18n('Segment supprimé'), {segments: [{...sg, start_pos: sg.start, end_pos: sg.end}]}); }));
         const kit = () => Number(f.kit) || data.kits[0]?.id || 0;
         root.querySelector('[data-dna-segadd]').addEventListener('click', () => { if (!kit()) return toast('Ajoute d’abord un test.', 'error');
             ext.openDialog({eyebrow: 'ADN', title: 'Nouveau segment', submitLabel: 'Ajouter', body: `<div class="form-grid"><label>Chromosome<select name="chromosome">${CHR.map(([c]) => `<option>${c}</option>`).join('')}</select></label><label>cM<input name="cm" inputmode="decimal"></label><label>Début (Mb ou paires de bases)<input name="start" inputmode="decimal" required></label><label>Fin<input name="end" inputmode="decimal" required></label>
@@ -675,14 +737,14 @@
 
     /* ═════════ 📐 Calculateur ═════════ */
     RENDER.calc = {html() {
-        const f = filt(), cm = f.calc ?? '';
-        const g = guess(cm);
+        const f = filt(), cm = f.calc ?? '', endoF = f.calcEndo ? (num(prefs().endo?.factor) || 0.7) : 0;
+        const g = guess(endoF ? num(cm) * endoF : cm);
         return `${header('ADN', '📐 Calculateur de cM', 'Combien de centimorgans partagés pour quelle relation ? Valeurs indicatives d’après le Shared cM Project (Blaine Bettinger, version 4, 2020) : une moyenne et une fourchette observées sur des milliers de cas réels. Une même valeur peut convenir à plusieurs relations.')}
-            <div class="h-dna-calc"><label>cM partagés<input type="number" min="0" max="8000" step="0.1" data-dna-calc value="${esc(cm)}" placeholder="Ex. 230"></label><span class="muted">${cm !== '' ? '= ' + i18n('{pct} % de l’ADN (sur {total} cM)', {pct: fmt(pctOf(cm), 2), total: fmt(prefs().total)}) : ''}</span></div>
+            <div class="h-dna-calc"><label>cM partagés<input type="number" min="0" max="8000" step="0.1" data-dna-calc value="${esc(cm)}" placeholder="Ex. 230"></label><span class="muted">${cm !== '' ? '= ' + i18n('{pct} % de l’ADN (sur {total} cM)', {pct: fmt(pctOf(cm), 2), total: fmt(prefs().total)}) : ''}</span><label class="checkbox-line"><input type="checkbox" data-dna-calc-endo ${f.calcEndo ? 'checked' : ''}> ${i18n('📈 Branche endogame (cM × {f})', {f: fmt(num(prefs().endo?.factor) || 0.7, 2)})}</label>${endoF && cm !== '' ? `<span class="h-dna-endo-note" data-dna-calc-corr>${i18n('{raw} cM comptés comme {cm} cM', {raw: fmt(num(cm), 1), cm: fmt(num(cm) * endoF, 1)})}</span>` : ''}</div>
             ${g.length ? `<div class="card">${chart({kind: 'bars', width: 700, series: [{name: i18n('Probabilité')}], rows: g.slice(0, 10).map(x => ({label: x.name, s0: Math.round(x.p * 100)})), o: {unit: '%'}})}</div>` : cm !== '' ? '<p class="h-dna-warn">Aucune relation connue pour cette valeur (au-delà de 3 720 cM, c’est soi-même ou un vrai jumeau).</p>' : ''}
             <h3>Tableau de référence</h3><div class="data-table-wrap"><table class="data-table h-dna-ref"><thead><tr><th>Relation</th><th>Moyenne</th><th>Fourchette</th><th>%</th></tr></thead><tbody>${SCP.map(r => `<tr class="${g.some(x => x.code === r[1]) ? 'is-fit' : ''}"><td>${esc(i18n(r[0]))}</td><td>${fmt(r[2])}</td><td>${fmt(r[3])} – ${fmt(r[4])}</td><td>${fmt(pctOf(r[2]), 2)} %</td></tr>`).join('')}</tbody></table></div>
             <p class="muted">${i18n('Pour aller plus loin (outils externes, en anglais) : <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" rel="noopener noreferrer">Shared cM Project tool ↗</a>. L’endogamie (villages isolés, communautés fermées) et l’implexe gonflent les cM : une relation paraît alors plus proche qu’elle ne l’est.')}</p>`;
-    }, bind(root) { const i = root.querySelector('[data-dna-calc]'); i.addEventListener('change', () => { if (filt().calc === i.value) return; filt().calc = i.value; setTimeout(() => go('calc'), 0); }); }};
+    }, bind(root) { const i = root.querySelector('[data-dna-calc]'); i.addEventListener('change', () => { if (filt().calc === i.value) return; filt().calc = i.value; setTimeout(() => go('calc'), 0); }); root.querySelector('[data-dna-calc-endo]')?.addEventListener('change', e => { filt().calcEndo = e.target.checked; go('calc'); }); }};
 
     /* ═════════ 🌳 Lignées Y, mt, X ═════════ */
     RENDER.lines = {html() {
@@ -733,7 +795,7 @@
     RENDER.settings = {html() {
         const p = prefs();
         return `${header('ADN', '⚙️ Réglages', 'Ce que montre l’onglet, dans l’ordre voulu, et comment.', '<button type="button" class="button secondary" data-dna-reset>↺ Remettre comme au départ</button>')}
-            <div class="h-dna-settings"><section class="card"><h3>Rubriques de la colonne de gauche</h3><p class="muted">Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée).</p>
+            <div class="h-dna-settings"><section class="card"><h3>Rubriques de la colonne de gauche</h3><p class="muted">Coche ce que tu veux voir ; ↑ ↓ pour l’ordre (ou glisse la poignée).</p>${sg() ? `<p><button type="button" class="button small secondary" data-dna-groups>${i18n('🗂 Ranger en groupes…')}</button></p>` : ''}
                 <div data-dna-order>${p.order.map(k => { const s = SECTIONS.find(x => x[0] === k); return `<div class="h-dna-orow" data-k="${k}"><label class="checkbox-line"><input type="checkbox" ${p.hidden.includes(k) ? '' : 'checked'} ${['settings', 'law'].includes(k) ? 'disabled' : ''}> ${s[1]} ${esc(s[2])}</label><span><button type="button" data-up>↑</button><button type="button" data-down>↓</button></span></div>`; }).join('')}</div></section>
             <section class="card"><h3>Colonnes du tableau des correspondances</h3><div data-dna-cols>${[...p.columns, ...COLUMNS.map(c => c[0]).filter(k => !p.columns.includes(k))].map(k => `<div class="h-dna-orow" data-k="${k}"><label class="checkbox-line"><input type="checkbox" ${p.columns.includes(k) ? 'checked' : ''} ${k === 'name' ? 'disabled' : ''}> ${esc(i18n(label(COLUMNS, k), {ctx: 'adn'}))}</label><span><button type="button" data-up>↑</button><button type="button" data-down>↓</button></span></div>`).join('')}</div></section>
             <section class="card"><h3>Chiffres et couleurs</h3><div class="form-grid">
@@ -741,6 +803,11 @@
                 <label>Méthode de Leeds : de<input data-unit="cM" type="number" min="0" data-p="leedsMin" value="${esc(p.leedsMin)}"></label><label>à<input data-unit="cM" type="number" min="0" data-p="leedsMax" value="${esc(p.leedsMax)}"></label>
                 <label>Total de cM pour les % (6 800 Ancestry/MyHeritage, 7 400 23andMe)<input type="number" min="1000" max="8000" data-p="total" value="${esc(p.total)}"></label><span></span>
                 ${SIDES.slice(1).map(([k, l]) => `<label>${i18n('Couleur « {name} »', {name: esc(i18n(l))})}<input type="color" data-c="${k}" value="${esc(color(p.colors[k]))}"></label>`).join('')}</div></section>
+            <section class="card" data-dna-endo-card><h3>${i18n('📈 Endogamie')}</h3><p class="muted">${i18n('Dans une branche endogame (village fermé, île, communauté), on partage plus d’ADN qu’attendu : les cM de ces correspondances sont corrigés avant d’estimer la relation.')}</p>
+                <label>${i18n('Force de l’endogamie')}<select data-dna-endo-f>${ENDO_LEVELS.map(([v, l]) => `<option value="${v}" ${num(p.endo?.factor) === v ? 'selected' : ''}>${esc(i18n(l))} — × ${fmt(v, 2)}</option>`).join('')}</select></label>
+                <span class="section-label">${i18n('Branches endogames (groupes)')}</span><div class="h-dna-gpick">${data.groups.map(g => `<label class="checkbox-line"><input type="checkbox" data-dna-endo-g="${g.id}" ${(p.endo?.groups || []).map(Number).includes(g.id) ? 'checked' : ''}> <span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></label>`).join('') || `<small class="muted">${i18n('Aucun groupe.')}</small>`}</div>
+                <span class="section-label">${i18n('Tests entièrement endogames')}</span><div class="h-dna-gpick">${data.kits.map(k => `<label class="checkbox-line"><input type="checkbox" data-dna-endo-k="${k.id}" ${(p.endo?.kits || []).map(Number).includes(k.id) ? 'checked' : ''}> ${esc(kitName(k))}</label>`).join('') || `<small class="muted">${i18n('Aucun test.')}</small>`}</div>
+                <label>${i18n('🔔 « Relancer dans… » propose')}<input data-unit="${esc(i18n('jours'))}" type="number" min="1" max="365" data-p="followDays" value="${esc(p.followDays || 30)}"></label></section>
             <section class="card"><h3>Sauvegarde de l’onglet</h3><p class="muted">Les tests, correspondances, segments et groupes sont dans la base (et ses sauvegardes). Tu peux aussi les exporter à part.</p><button type="button" class="button secondary" data-dna-json>⤓ Exporter tout l’ADN (JSON)</button></section></div>`;
     }, bind(root) {
         const p = prefs();
@@ -752,11 +819,13 @@
             p.order = [...root.querySelectorAll('[data-dna-order] .h-dna-orow')].map(r => r.dataset.k); p.hidden = [...root.querySelectorAll('[data-dna-order] .h-dna-orow')].filter(r => !r.querySelector('input').checked).map(r => r.dataset.k);
             p.columns = [...root.querySelectorAll('[data-dna-cols] .h-dna-orow')].filter(r => r.querySelector('input').checked).map(r => r.dataset.k);
             root.querySelectorAll('[data-p]').forEach(i => { p[i.dataset.p] = num(i.value); }); root.querySelectorAll('[data-c]').forEach(i => { p.colors[i.dataset.c] = i.value; });
+            const ef = root.querySelector('[data-dna-endo-f]'); if (ef) p.endo = {factor: num(ef.value) || 0.7, groups: [...root.querySelectorAll('[data-dna-endo-g]:checked')].map(i => Number(i.dataset.dnaEndoG)), kits: [...root.querySelectorAll('[data-dna-endo-k]:checked')].map(i => Number(i.dataset.dnaEndoK))};
             const was = localStorage.getItem(PKEY), now = JSON.stringify(p); if (was === now) return;
             savePrefs(p); if (before !== JSON.stringify([p.order, p.hidden]) && S().module === 'adn') A().renderSidebar?.();
         };
         window.LCNDA_UI?.autoSave?.(root, {save: saveNow, redraw: () => reopenSettings()});
-        root.querySelector('[data-dna-reset]').addEventListener('click', () => { const ack = p.ack; savePrefs({...DEFAULTS(), ack}); reopenSettings(); });
+        root.querySelector('[data-dna-groups]')?.addEventListener('click', () => sg()?.openDialog());
+        root.querySelector('[data-dna-reset]')?.addEventListener('click', () => { const ack = p.ack; savePrefs({...DEFAULTS(), ack}); reopenSettings(); });
         root.querySelector('[data-dna-json]').addEventListener('click', () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda_dna: 1, exported: new Date().toISOString(), ...data}, null, 1)], {type: 'application/json'})); a.download = 'adn.json'; document.body.appendChild(a); a.click(); a.remove(); });
     }};
 
@@ -765,6 +834,173 @@
     /* (avant : Réglages → « ADN : affichage », le même réglage que l'onglet ADN → ⚙️ Réglages ; retiré des Réglages à la demande) */
     ext.maintenance.dna_prefs = () => { S().maintenanceTab = ''; go('settings'); }; // et Réglages se rouvre sur sa première page, pas encore sur l'ADN
     ext.maintenance = ext.maintenance || {};
+    /* ═════════ Audit §14 : « ⋯ » d'une correspondance, ↶ Annuler, ⤓ Exporter ▾, 🔔 relances ═════════ */
+    async function deleteMatch(m) {
+        try { const r = await post('delete_dna_match', {id: m.id}); await refresh(); undoRestore(i18n('Correspondance « {name} » supprimée', {name: m.name}), r.result?.undo, () => post('delete_dna_match', {id: m.id})); }
+        catch (e) { toast(e.message, 'error'); }
+    }
+    /** 🔔 relance : une date (ou '' = plus de relance) ; « ↶ Annuler » remet l'ancienne date et l'ancien suivi */
+    async function setFollowUp(m, date, status) {
+        try { const body = {op: 'follow_up', id: m.id, date}; if (status) body.status = status; const r = (await post('dna_plus', body)).result || {};
+            await refresh();
+            undoToast(date ? i18n('Relance de « {name} » le {d}', {name: m.name, d: date}) : status === 'replied' ? i18n('« {name} » a répondu', {name: m.name}) : i18n('Plus de relance pour « {name} »', {name: m.name}),
+                {undo: async () => { await post('dna_plus', {op: 'follow_up', id: m.id, date: r.old || '', status: r.old_status || ''}); await refresh(); }});
+        } catch (e) { toast(e.message, 'error'); }
+    }
+    const inDays = n => new Date(Date.now() + n * 864e5).toISOString().slice(0, 10);
+    /** R11 : les mêmes entrées sous « ⋯ » et au clic droit : Ouvrir · Modifier · 🔔 · ⤓ · — · 🗑 */
+    function matchMenu(m) {
+        const ro = kiosk(), days = num(prefs().followDays) || 30;
+        return [{icon: '↗', label: i18n('Ouvrir'), run: () => matchDialog(m)}, ro ? null : {icon: '✎', label: i18n('Modifier'), run: () => matchDialog(m)},
+            ro ? null : {icon: '🔔', label: i18n('Relancer dans {n} jours', {n: days}), run: () => setFollowUp(m, inDays(days))},
+            ro || !m.data?.follow_up ? null : {icon: '✓', label: i18n('A répondu (plus de relance)'), run: () => setFollowUp(m, '', 'replied')},
+            m.person_id ? {icon: '👤', label: i18n('Fiche de {name}', {name: m.person_name || ''}), run: () => A().openPersonById?.(m.person_id)} : null,
+            {icon: '⤓', label: i18n('Exporter (CSV)'), run: () => exportCsv([m])},
+            ro ? null : '-', ro ? null : {icon: '🗑', label: i18n('Supprimer'), danger: true, run: () => deleteMatch(m)}].filter(Boolean);
+    }
+    /** R4 : ⤓ Exporter ▾ (tableur CSV, page imprimée ou PDF, tout l'ADN en JSON) */
+    function exportMatches(list) {
+        const UI = UIx(); if (!UI.openExportDialog) return exportCsv(list);
+        return UI.openExportDialog({title: i18n('Correspondances ADN'), defaultName: 'correspondances-adn', quality: false, info: plural(list.length, 'correspondance', 'correspondances'), formats: [
+            {id: 'csv', label: i18n('📊 Tableur'), hint: i18n('CSV (Excel, Numbers, LibreOffice)'), ext: 'csv', run: async () => exportCsv(list)},
+            {id: 'pdf', hint: i18n('la page affichée (« Enregistrer en PDF »)'), ext: '', run: async () => UI.printPage?.()},
+            {id: 'print', hint: i18n('la page affichée'), run: async () => UI.printPage?.()},
+            {id: 'file', label: i18n('💾 Fichier'), hint: i18n('tout l’ADN (JSON)'), ext: 'json', run: async () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda_dna: 1, exported: new Date().toISOString(), ...data}, null, 1)], {type: 'application/json'})); a.download = 'adn.json'; document.body.appendChild(a); a.click(); a.remove(); }}]});
+    }
+
+    /* ═════════ 🧪 Correspondances partagées : la matrice A × B ═════════
+     * Une case pleine : A et B se correspondent (noté dans « Correspondances en commun » de l'un ou de l'autre). Un clic sur une case
+     * l'ajoute ou la retire chez les deux (↶ Annuler) ; « ⤒ Coller une liste » : une paire par ligne « Nom A ; Nom B » (export ICW). */
+    function sharedPairs(pool) {
+        const idx = new Map(pool.map((m, i) => [m.name.toLowerCase().trim(), i])), on = new Set();
+        pool.forEach((m, i) => (m.data?.shared_matches || []).forEach(n => { const j = idx.get(String(n).toLowerCase().trim()); if (j !== undefined && j !== i) { on.add(`${Math.min(i, j)}|${Math.max(i, j)}`); } }));
+        return on;
+    }
+    RENDER.shared = {html() {
+        const f = filt(), p = prefs(), kit = Number(f.kit) || data.kits[0]?.id || 0, lo = num(p.autoMin) || 30, hi = num(p.autoMax) || 600, max = Number(f.sharedMax) || 40;
+        const pool = data.matches.filter(m => m.kit_id === kit && m.shared_cm >= lo && m.shared_cm <= hi).sort((a, b) => b.shared_cm - a.shared_cm).slice(0, max);
+        const on = sharedPairs(pool), n = pool.length;
+        const head = `<tr><th></th><th>cM</th>${pool.map((m, j) => `<th class="rot" title="${esc(m.name)}">${esc(m.name.slice(0, 22))}</th>`).join('')}</tr>`;
+        const rows = pool.map((a, i) => `<tr><th style="text-align:left"><button type="button" class="link-button" data-dna-match="${a.id}">${esc(a.name.slice(0, 30))}</button></th><td>${fmt(a.shared_cm)}</td>${pool.map((b, j) => i === j ? '<td class="is-self"></td>' : `<td class="${on.has(`${Math.min(i, j)}|${Math.max(i, j)}`) ? 'is-on' : 'is-off'}" data-sm-cell="${a.id}:${b.id}" title="${esc(`${a.name} × ${b.name}`)}">${on.has(`${Math.min(i, j)}|${Math.max(i, j)}`) ? '●' : ''}</td>`).join('')}</tr>`).join('');
+        return `${header('ADN', '🧪 ' + i18n('Correspondances partagées'), i18n('Qui correspond avec qui : la base des regroupements (Leeds, grappes). Une case pleine, A et B se correspondent. Clique une case pour l’ajouter ou la retirer ; ou colle la liste « en commun » donnée par la société.'), `<button type="button" class="button secondary" data-dna-edit data-sm-import>${i18n('⤒ Coller une liste')}</button>`)}
+            <div class="h-dna-filters"><label>${i18n('Test')}<select data-sm-kit>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('') || `<option>${i18n('Aucun test')}</option>`}</select></label><label>${i18n('Correspondances montrées')}<select data-sm-max>${[20, 40, 60, 100].map(v => `<option ${v === max ? 'selected' : ''}>${v}</option>`).join('')}</select></label><span class="muted">${i18n('{n} entre {lo} et {hi} cM ; {pairs}', {n: plural(n, 'correspondance', 'correspondances'), lo, hi, pairs: plural(on.size, 'paire notée', 'paires notées')})}</span></div>
+            ${n ? `<div class="h-dna-shared-matrix card" data-sm-matrix><table>${head}${rows}</table></div>` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧪</span><span class="empty-line-text">${i18n('Aucune correspondance dans cette fourchette : importe tes correspondances (👥 Correspondances).')}</span></p>`}`;
+    }, bind(root) {
+        const f = filt();
+        root.querySelector('[data-sm-kit]')?.addEventListener('change', e => { f.kit = Number(e.target.value); go('shared'); });
+        root.querySelector('[data-sm-max]')?.addEventListener('change', e => { f.sharedMax = Number(e.target.value); go('shared'); });
+        bindMatchLinks(root);
+        root.querySelector('[data-sm-matrix]')?.addEventListener('click', async e => {
+            const c = e.target.closest('[data-sm-cell]'); if (!c || kiosk()) return;
+            const [a, b] = c.dataset.smCell.split(':').map(Number), wasOn = c.classList.contains('is-on');
+            try { const r = (await post('dna_plus', {op: 'set_shared', a, b, on: wasOn ? 0 : 1})).result || {}; await refresh();
+                const na = data.matches.find(x => x.id === a)?.name || '', nb = data.matches.find(x => x.id === b)?.name || '';
+                undoToast(i18n(wasOn ? '« {a} » et « {b} » ne se correspondent plus' : '« {a} » et « {b} » se correspondent', {a: na, b: nb}), {undo: async () => { await post('dna_plus', {op: 'restore_shared', before: r.before}); await refresh(); }});
+            } catch (err) { toast(err.message, 'error'); }
+        });
+        root.querySelector('[data-sm-import]')?.addEventListener('click', () => {
+            const kit = Number(root.querySelector('[data-sm-kit]')?.value) || 0; if (!kit) return toast(i18n('Ajoute d’abord un test.'), 'error');
+            ext.openDialog({eyebrow: 'ADN', title: i18n('Coller des correspondances partagées'), submitLabel: i18n('Ajouter'), body: `<p class="muted">${i18n('Une paire par ligne : « Nom A ; Nom B » (ou une tabulation, une virgule). Les noms tels que sur le site du test.')}</p><textarea name="pairs" rows="10" placeholder="Paul MAZAUD ; Lucie DURAND"></textarea>`,
+                onSubmit: async fm => {
+                    const pairs = String(new FormData(fm).get('pairs') || '').split(/\r?\n/).map(l => l.split(/\s*[;\t,]\s*/).map(x => x.trim()).filter(Boolean)).filter(x => x.length >= 2).map(x => [x[0], x[1]]);
+                    if (!pairs.length) { toast(i18n('Aucune paire « Nom A ; Nom B ».'), 'error'); return false; }
+                    try { const r = (await post('dna_plus', {op: 'import_shared', kit_id: kit, pairs})).result || {}; await refresh();
+                        undoToast(i18n('{n} ajoutées', {n: plural(r.n || 0, 'paire', 'paires')}) + (r.unknown?.length ? ' ' + i18n('(inconnus : {list})', {list: r.unknown.slice(0, 5).join(', ')}) : ''), {undo: async () => { await post('dna_plus', {op: 'restore_shared', before: r.before}); await refresh(); }});
+                    } catch (err) { toast(err.message, 'error'); return false; } }});
+        });
+    }};
+
+    /* ═════════ 🧬 Phasage visuel (« visual phasing », Kathy Johnston) ═════════
+     * Avec 3 frères et sœurs (ou plus) testés : sur chaque chromosome, chacun a un morceau du côté paternel et un du côté maternel ;
+     * on note où passe chaque grand-parent (points de recombinaison), d'après les comparaisons entre frères et sœurs
+     * (zones entièrement, à moitié ou pas identiques). L'outil range ces attributions, les dessine et calcule ce qui est reconstitué
+     * de l'ADN de chaque grand-parent. Les segments partagés entre frères et sœurs (🧩 Chromosomes) s'affichent pour aider. */
+    const GP = [['PGF', 'Grand-père paternel', '#1f4e8c', 'p'], ['PGM', 'Grand-mère paternelle', '#78a9e0', 'p'], ['MGF', 'Grand-père maternel', '#a32a2a', 'm'], ['MGM', 'Grand-mère maternelle', '#ee9a9a', 'm']];
+    const gpColor = g => (GP.find(x => x[0] === g) || [])[2] || '#9aa0a6';
+    let phase = null; // {projects}
+    const loadPhase = async (force = false) => { if (!phase || force) phase = (await api('dna_plus', {op: 'phasing'})) || {projects: []}; return phase; };
+    const chrLen = c => (CHR.find(x => x[0] === String(c)) || [0, 0])[1];
+    /** ce qui est attribué : par frère ou sœur et grand-parent, en Mb ; « union » : ce qui est reconstitué de chaque grand-parent */
+    function phaseCoverage(pr) {
+        const d = pr?.data || {}, sib = d.siblings || [], out = {per: sib.map(() => ({PGF: 0, PGM: 0, MGF: 0, MGM: 0})), union: {PGF: 0, PGM: 0, MGF: 0, MGM: 0}, total: CHR.filter(c => c[0] !== 'X').reduce((a, c) => a + c[1], 0)};
+        const merge = list => { const l = list.slice().sort((a, b) => a[0] - b[0]); let tot = 0, cur = null; l.forEach(([a, b]) => { if (!cur || a > cur[1]) { if (cur) tot += cur[1] - cur[0]; cur = [a, b]; } else cur[1] = Math.max(cur[1], b); }); if (cur) tot += cur[1] - cur[0]; return tot; };
+        GP.forEach(([g]) => {
+            sib.forEach((_, i) => { CHR.forEach(([c]) => { out.per[i][g] += merge((d.segments || []).filter(s => s.sib === i && s.gp === g && s.chr === c).map(s => [s.start, s.end])); }); });
+            CHR.forEach(([c]) => { out.union[g] += merge((d.segments || []).filter(s => s.gp === g && s.chr === c).map(s => [s.start, s.end])); });
+        });
+        return out;
+    }
+    /** les segments partagés entre deux frères et sœurs : ceux du test de l'un dont la correspondance est l'autre (même fiche ou même nom) */
+    function siblingShared(a, b, c) {
+        if (!a?.kit_id) return [];
+        const kb = kitById(b?.kit_id), names = [b?.name, kb?.person_name, kb?.label].filter(Boolean).map(x => String(x).toLowerCase().trim());
+        const ms = data.matches.filter(m => m.kit_id === Number(a.kit_id) && ((kb?.person_id && m.person_id === kb.person_id) || names.includes(String(m.name).toLowerCase().trim()))).map(m => m.id);
+        return data.segments.filter(s => s.kit_id === Number(a.kit_id) && ms.includes(s.match_id) && String(s.chromosome) === String(c)).map(s => [mb(s.start), mb(s.end), num(s.cm)]);
+    }
+    RENDER.phasing = {html() {
+        const f = filt(), list = phase?.projects || [], pr = list.find(x => x.id === Number(f.phase)) || list[0] || null, c = f.phaseChr || '1', L = chrLen(c);
+        if (!phase) return `${header('ADN', '🧬 ' + i18n('Phasage visuel'), '')}${window.LCNDA_UI.spinner(i18n('Chargement…'))}`;
+        const intro = i18n('Avec trois frères et sœurs testés (ou plus) : attribue chaque morceau de chromosome à l’un des quatre grands-parents, chromosome par chromosome. Les comparaisons entre frères et sœurs (segments partagés) aident à placer les points de recombinaison.');
+        const top = `<div class="h-dna-phase-tools"><label>${i18n('Phasage')}<select data-ph-pick>${list.map(x => `<option value="${x.id}" ${pr && x.id === pr.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('') || `<option value="">${i18n('Aucun')}</option>`}</select></label><button type="button" class="button small" data-ph-edit data-ph-new>${i18n('＋ Nouveau phasage')}</button>${pr ? `<button type="button" class="button small secondary" data-ph-edit data-ph-del>${i18n('🗑 Supprimer ce phasage')}</button>` : ''}</div>`;
+        if (!pr) return `${header('ADN', '🧬 ' + i18n('Phasage visuel'), intro)}${top}<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧬</span><span class="empty-line-text">${i18n('Crée un phasage, puis ajoute les frères et sœurs testés.')}</span></p>`;
+        const d = pr.data || {}, sib = d.siblings || [], segs = (d.segments || []).filter(s => s.chr === c), W = 900, lab = 120, k = (W - lab - 10) / Math.max(1, L), rowH = 16;
+        const tracks = []; sib.forEach((s, i) => { tracks.push({i, side: 'p', label: `${s.name || '?'} · ${i18n('pat.')}`}); tracks.push({i, side: 'm', label: `${s.name || '?'} · ${i18n('mat.')}`}); });
+        const pairs = []; for (let i = 0; i < sib.length; i++) for (let j = i + 1; j < sib.length; j++) pairs.push([i, j]);
+        const cmp = pairs.map(([i, j]) => ({i, j, segs: siblingShared(sib[i], sib[j], c)})).filter(x => x.segs.length);
+        const H = (tracks.length + cmp.length) * (rowH + 6) + 30;
+        let y = 20;
+        const svg = `<svg class="h-dna-phase-svg" viewBox="0 0 ${W} ${H}" data-ph-svg><text x="${lab}" y="12" font-size="10">0</text><text x="${W - 10}" y="12" font-size="10" text-anchor="end">${fmt(L, 0)} Mb</text>${tracks.map(t => { const yy = y; y += rowH + 6;
+            return `<text x="${lab - 6}" y="${yy + rowH - 4}" font-size="11" text-anchor="end">${esc(t.label.slice(0, 24))}</text><rect x="${lab}" y="${yy}" width="${(L * k).toFixed(1)}" height="${rowH}" rx="4" fill="#eef0f3" stroke="#c4c9cf"/>${segs.filter(s => s.sib === t.i && s.side === t.side).map(s => `<rect x="${(lab + s.start * k).toFixed(1)}" y="${yy}" width="${Math.max(2, (s.end - s.start) * k).toFixed(1)}" height="${rowH}" fill="${gpColor(s.gp)}" data-ph-seg="${(d.segments || []).indexOf(s)}" style="cursor:pointer"><title>${esc(`${(GP.find(g => g[0] === s.gp) || [])[1] || '?'} : ${fmt(s.start, 1)}–${fmt(s.end, 1)} Mb`)}</title></rect>`).join('')}${(d.crossovers || []).filter(x => x.chr === c && x.sib === t.i && (!x.side || x.side === t.side)).map(x => `<line x1="${(lab + x.pos * k).toFixed(1)}" x2="${(lab + x.pos * k).toFixed(1)}" y1="${yy - 2}" y2="${yy + rowH + 2}" stroke="#111" stroke-width="2"/>`).join('')}`; }).join('')}
+            ${cmp.map(x => { const yy = y; y += rowH + 6; return `<text x="${lab - 6}" y="${yy + rowH - 4}" font-size="10" text-anchor="end" fill="#555">${esc(`${(sib[x.i].name || '?').slice(0, 10)} × ${(sib[x.j].name || '?').slice(0, 10)}`)}</text><rect x="${lab}" y="${yy + 4}" width="${(L * k).toFixed(1)}" height="${rowH - 8}" fill="#f6f6f6"/>${x.segs.map(([a, b, cm]) => `<rect x="${(lab + a * k).toFixed(1)}" y="${yy + 4}" width="${Math.max(2, (b - a) * k).toFixed(1)}" height="${rowH - 8}" fill="#7a7a7a"><title>${esc(i18n('partagé : {a}–{b} Mb, {cm} cM', {a: fmt(a, 1), b: fmt(b, 1), cm: fmt(cm, 1)}))}</title></rect>`).join('')}`; }).join('')}</svg>`;
+        const cov = phaseCoverage(pr), pct = v => `${fmt(v / cov.total * 100, 1)} %`;
+        return `${header('ADN', '🧬 ' + i18n('Phasage visuel'), intro)}${top}
+            <section class="card"><h3>${i18n('Frères et sœurs testés')}</h3><div data-ph-sibs>${sib.map((s, i) => `<div class="h-dna-phase-tools" data-ph-sib="${i}"><label>${i18n('Prénom')}<input data-ph-sname value="${esc(s.name || '')}" maxlength="120"></label><label>${i18n('Test')}<select data-ph-skit><option value="0">—</option>${data.kits.map(kk => `<option value="${kk.id}" ${kk.id === s.kit_id ? 'selected' : ''}>${esc(kitName(kk))}</option>`).join('')}</select></label></div>`).join('')}</div>
+                <button type="button" class="button small secondary" data-ph-edit data-ph-addsib ${sib.length >= 6 ? 'disabled' : ''}>${i18n('＋ Frère ou sœur')}</button>${sib.length < 3 ? ` <small class="h-dna-warn">${i18n('Il en faut au moins trois pour un phasage fiable.')}</small>` : ''}</section>
+            <section class="card"><div class="h-dna-phase-tools"><label>${i18n('Chromosome')}<select data-ph-chr>${CHR.map(([cc]) => `<option ${cc === c ? 'selected' : ''}>${cc}</option>`).join('')}</select></label>
+                ${sib.length ? `<span data-ph-edit class="h-dna-phase-tools"><label>${i18n('Qui')}<select data-ph-who>${sib.map((s, i) => `<option value="${i}">${esc(s.name || '?')}</option>`).join('')}</select></label><label>${i18n('Grand-parent')}<select data-ph-gp>${GP.map(([g, l]) => `<option value="${g}">${esc(i18n(l))}</option>`).join('')}</select></label><label>${i18n('De (Mb)')}<input type="number" step="0.1" min="0" data-ph-a value="0"></label><label>${i18n('à (Mb)')}<input type="number" step="0.1" min="0" data-ph-b value="${fmt(L, 1).replace(/\s/g, '').replace(',', '.')}"></label><button type="button" class="button small" data-ph-add>${i18n('＋ Attribuer')}</button><button type="button" class="button small secondary" data-ph-cross title="${esc(i18n('Un point de recombinaison à la position « De »'))}">${i18n('✂ Point de recombinaison')}</button></span>` : ''}</div>
+                <div class="h-dna-phase-legend">${GP.map(([g, l, col]) => `<span><i style="background:${col}"></i>${esc(i18n(l))}</span>`).join('')}<span><i style="background:#7a7a7a"></i>${i18n('Partagé entre frères et sœurs')}</span></div>${svg}<small class="muted">${i18n('Clic sur un morceau : changer son grand-parent ou le retirer.')}</small></section>
+            <section class="card"><h3>${i18n('Ce qui est reconstitué')}</h3><div class="data-table-wrap"><table class="data-table h-dna-phase-sum"><thead><tr><th></th>${GP.map(([, l]) => `<th>${esc(i18n(l))}</th>`).join('')}</tr></thead><tbody>${sib.map((s, i) => `<tr><td>${esc(s.name || '?')}</td>${GP.map(([g]) => `<td>${pct(cov.per[i][g])}</td>`).join('')}</tr>`).join('')}<tr><th>${i18n('Reconstitué (tous)')}</th>${GP.map(([g]) => `<th data-ph-union="${g}">${pct(cov.union[g])}</th>`).join('')}</tr></tbody></table></div></section>
+            <section class="card"><h3>${i18n('Notes')}</h3><textarea data-ph-notes rows="3" style="width:100%">${esc(d.notes || '')}</textarea></section>`;
+    }, async bind(root) {
+        const f = filt();
+        if (!phase) { await loadPhase(); if (S().adnTab === 'phasing') go('phasing'); return; }
+        const list = phase.projects || [], pr = list.find(x => x.id === Number(f.phase)) || list[0] || null;
+        const save = async (msg, before) => { try { await post('dna_plus', {op: 'save_phasing', id: pr.id, name: pr.name, data: pr.data}); await loadPhase(true); go('phasing');
+            if (msg && before) undoToast(msg, {undo: async () => { await post('dna_plus', {op: 'save_phasing', id: pr.id, name: pr.name, data: before}); await loadPhase(true); go('phasing'); }}); } catch (e) { toast(e.message, 'error'); } };
+        const snap = () => JSON.parse(JSON.stringify(pr.data || {}));
+        root.querySelector('[data-ph-pick]')?.addEventListener('change', e => { f.phase = Number(e.target.value); go('phasing'); });
+        root.querySelector('[data-ph-chr]')?.addEventListener('change', e => { f.phaseChr = e.target.value; go('phasing'); });
+        root.querySelector('[data-ph-new]')?.addEventListener('click', async () => {
+            const name = A().askText ? await A().askText({title: i18n('Nouveau phasage'), message: i18n('Nom du phasage (ex. « Fratrie DURAND »)'), okLabel: i18n('Créer')}) : 'Phasage';
+            if (!name || !String(name).trim()) return;
+            const sibs = data.kits.filter(k => k.test_type === 'autosomal').slice(0, 3).map(k => ({kit_id: k.id, name: k.person_name || k.label || ''}));
+            try { const r = (await post('dna_plus', {op: 'save_phasing', name: String(name).trim(), data: {siblings: sibs, segments: [], crossovers: []}})).result; f.phase = r.id; await loadPhase(true); go('phasing'); } catch (e) { toast(e.message, 'error'); }
+        });
+        if (!pr) return;
+        pr.data = {siblings: [], segments: [], crossovers: [], notes: '', ...(pr.data || {})};
+        root.querySelector('[data-ph-del]')?.addEventListener('click', async () => { try { const r = (await post('dna_plus', {op: 'delete_phasing', id: pr.id})).result; f.phase = 0; await loadPhase(true); go('phasing');
+            undoToast(i18n('Phasage « {name} » supprimé', {name: pr.name}), {undo: async () => { await post('dna_plus', {op: 'restore_phasing', row: r.row}); f.phase = pr.id; await loadPhase(true); go('phasing'); }}); } catch (e) { toast(e.message, 'error'); } });
+        root.querySelector('[data-ph-addsib]')?.addEventListener('click', () => { pr.data.siblings.push({kit_id: 0, name: ''}); save(); });
+        root.querySelectorAll('[data-ph-sib]').forEach(row => { const i = Number(row.dataset.phSib);
+            row.querySelector('[data-ph-sname]').addEventListener('change', e => { pr.data.siblings[i].name = e.target.value; save(); });
+            row.querySelector('[data-ph-skit]').addEventListener('change', e => { const kk = kitById(e.target.value); pr.data.siblings[i].kit_id = Number(e.target.value) || 0; if (kk && !pr.data.siblings[i].name) pr.data.siblings[i].name = kk.person_name || kk.label || ''; save(); }); });
+        const gpSel = root.querySelector('[data-ph-gp]');
+        root.querySelector('[data-ph-add]')?.addEventListener('click', () => {
+            const a = num(root.querySelector('[data-ph-a]').value), b = num(root.querySelector('[data-ph-b]').value), g = gpSel.value, who = Number(root.querySelector('[data-ph-who]').value), c = f.phaseChr || '1';
+            if (!(b > a)) return toast(i18n('La fin doit être après le début.'), 'error');
+            const before = snap(), side = (GP.find(x => x[0] === g) || [])[3] || 'p';
+            // le même côté du même frère ou sœur : le nouveau morceau remplace ce qu'il recouvre
+            const keep = []; pr.data.segments.forEach(s => { if (s.chr !== c || s.sib !== who || s.side !== side || s.end <= a || s.start >= b) { keep.push(s); return; } if (s.start < a) keep.push({...s, end: a}); if (s.end > b) keep.push({...s, start: b}); });
+            pr.data.segments = [...keep, {chr: c, sib: who, side, start: a, end: Math.min(b, chrLen(c) || b), gp: g}];
+            save(i18n('Morceau attribué'), before);
+        });
+        root.querySelector('[data-ph-cross]')?.addEventListener('click', () => { const pos = num(root.querySelector('[data-ph-a]').value), who = Number(root.querySelector('[data-ph-who]').value); if (!(pos > 0)) return toast(i18n('Donne la position (De).'), 'error'); const before = snap(); pr.data.crossovers.push({chr: f.phaseChr || '1', sib: who, pos, side: ((GP.find(x => x[0] === gpSel.value) || [])[3]) || ''}); save(i18n('Point de recombinaison ajouté'), before); });
+        root.querySelector('[data-ph-svg]')?.addEventListener('click', e => { const r = e.target.closest('[data-ph-seg]'); if (!r || kiosk()) return; const i = Number(r.dataset.phSeg), sgm = pr.data.segments[i]; if (!sgm) return;
+            UIx().menuAt?.({x: e.clientX, y: e.clientY}, [...GP.filter(g => g[3] === sgm.side && g[0] !== sgm.gp).map(([g, l]) => ({icon: '↔', label: i18n('Donner à : {gp}', {gp: i18n(l)}), run: () => { const before = snap(); pr.data.segments[i] = {...sgm, gp: g}; save(i18n('Morceau changé'), before); }})), '-', {icon: '🗑', label: i18n('Retirer ce morceau'), danger: true, run: () => { const before = snap(); pr.data.segments.splice(i, 1); save(i18n('Morceau retiré'), before); }}], {title: `${fmt(sgm.start, 1)}–${fmt(sgm.end, 1)} Mb`}); });
+        root.querySelector('[data-ph-notes]')?.addEventListener('change', e => { pr.data.notes = e.target.value; save(); });
+        if (kiosk()) root.querySelectorAll('[data-ph-sib] input, [data-ph-sib] select, [data-ph-notes]').forEach(el => { el.disabled = true; });
+    }};
+
     /* ═════════ Sur la fiche d'une personne ═════════ */
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks.dna = (index, detail) => A().card(index, '🧬 ADN', '', `<div data-dna-host="${Number(detail.person?.id || detail.id) || 0}"></div>`, 'span-12');
@@ -778,5 +1014,5 @@
     };
     new MutationObserver(() => { document.querySelectorAll('[data-dna-host]:not([data-dna-done])').forEach(b => fillHost(b)); }).observe(document.documentElement, {childList: true, subtree: true});
 
-    ext.dnaInternals = {guess, SCP, overlaps, leeds: k => leeds(k), autoMap, sideOf, prefs, lawHtml};
+    ext.dnaInternals = {guess, SCP, overlaps, leeds: k => leeds(k), autoMap, sideOf, prefs, lawHtml, cmFor, endoOf, sharedPairs, phaseCoverage, STATUSES};
 })();

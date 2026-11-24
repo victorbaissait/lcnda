@@ -48,6 +48,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
     <link rel="stylesheet" href="assets/css/onglets.css?v=15">
+    <link rel="stylesheet" href="assets/css/audit-chrono.css?v=1">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=2">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
@@ -1214,8 +1215,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu-cartes-regles.js?v=2" defer></script>
 <script src="assets/js/app-jeu-cartes.js?v=2" defer></script>
 <script src="assets/js/app-jeu.js?v=16" defer></script>
-<script src="assets/js/app-chronologie.js?v=11" defer></script>
-<script src="assets/js/app-comparaison.js?v=8" defer></script>
+<script src="assets/js/app-chronologie.js?v=12" defer></script>
+<script src="assets/js/app-comparaison.js?v=9" defer></script>
 <script src="assets/js/app-carte.js?v=14" defer></script>
 <script src="assets/js/app-enquetes.js?v=13" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=23" defer></script>

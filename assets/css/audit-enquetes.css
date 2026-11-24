@@ -1,0 +1,144 @@
+/* 🕵️ Enquêtes et 🧬 ADN — audit des onglets (docs/design/audit-onglets.html, §12 et §14).
+ * Pistes en colonnes, conclusion, recherches sans résultat, modèles, temps passé, avancement des battues, phasage visuel,
+ * « ⋯ » des lignes, chercher dans la page ; R12 : rien ne déborde à 390 px. */
+
+/* ── barre commune dans la colonne ── */
+.enq-bar { margin: 8px 0 4px; }
+.enq-bar .ui-listbar { width: 100%; }
+#sidebar-footer #new-investigation-template { margin-top: 6px; }
+
+/* ── « ⋯ » d'une ligne ou d'une fiche ── */
+.enq-more { min-width: 28px; }
+.enq-row-act { white-space: nowrap; display: flex; gap: 6px; align-items: center; justify-content: flex-end; }
+.investigation-item .enq-more { margin-top: 4px; }
+
+/* ── ⏱ temps passé ── */
+.enq-meta-bar { display: flex; justify-content: flex-end; margin: -6px 0 8px; }
+.enq-chrono { font-variant-numeric: tabular-nums; }
+.enq-chrono.is-running { background: #e8f6ec; border-color: #2f8a4c; color: #1d5e33; }
+
+/* ── ✅ conclusion ── */
+.enq-conclusion { border: 2px solid var(--line, #d0d4dc); border-radius: 8px; padding: 10px 14px; margin: 16px 0; background: var(--card, #fff); }
+.enq-conclusion.has-conclusion { border-color: #2f8a4c; background: #f3fbf5; }
+.enq-conclusion .section-title { margin: 0 0 6px; }
+.enq-conclusion-text { font-size: 1.05em; font-weight: 600; white-space: pre-wrap; }
+.enq-conclusion-body p { white-space: pre-wrap; margin: 4px 0; }
+.enq-conclusion-body h4 { margin: 10px 0 2px; font-size: .95em; }
+.enq-kept { margin: 2px 0 6px 18px; padding: 0; }
+.enq-conclusion-propose { margin-top: 10px; padding: 8px 10px; border-radius: 6px; background: #fff8e1; border: 1px solid #e0c060; }
+.enq-conclusion-propose p { margin: 0 0 6px; }
+.enq-kept-pick { max-height: 220px; overflow: auto; border: 1px solid var(--line, #d0d4dc); border-radius: 6px; padding: 6px 10px; margin: 8px 0; }
+.enq-kept-pick legend { font-weight: 700; padding: 0 4px; }
+.enq-conclude-dialog textarea, .enq-neg-dialog textarea { width: 100%; }
+
+/* ── 🚫 recherches sans résultat ── */
+.enq-negatives { margin: 18px 0; }
+.enq-neg-table td { vertical-align: top; }
+.enq-neg-act { width: 40px; text-align: right; }
+.enq-neg-warn { margin: 8px 0; padding: 8px 10px; border-radius: 6px; background: #fff1e0; border: 1px solid #e09040; color: #6b3a00; }
+.enq-neg-warn p, .enq-neg-warn ul { margin: 2px 0; }
+
+/* ── 🗂 modèles ── */
+.enq-tpl-list { display: grid; gap: 6px; margin: 4px 0 12px; }
+.enq-tpl { display: flex; gap: 10px; align-items: center; border: 1px solid var(--line, #d0d4dc); border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+.enq-tpl:has(input:checked) { border-color: var(--accent, #2563eb); background: #eef4ff; }
+.enq-tpl span:last-child { display: flex; flex-direction: column; }
+.enq-tpl-ico { font-size: 1.5em; }
+
+/* ── 🧩 pistes en colonnes ── */
+.enq-pistes-view button { padding: 3px 10px; font-size: .85em; }
+.enq-list-tools { display: inline-flex; gap: .5rem; align-items: center; }
+.enq-list-tools[hidden] { display: none; }
+.enq-kanban { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 10px 0 18px; }
+.enq-kcol { background: var(--soft, #f4f6fa); border-radius: 8px; padding: 8px; min-width: 0; }
+.enq-kcol h4 { margin: 0 0 8px; font-size: .9em; display: flex; justify-content: space-between; }
+.enq-kcards { display: flex; flex-direction: column; gap: 6px; min-height: 60px; border-radius: 6px; }
+.enq-kcards.is-drop-target { outline: 2px dashed var(--accent, #2563eb); background: #eef4ff; }
+.enq-kcard { position: relative; background: var(--card, #fff); border: 1px solid var(--line, #d0d4dc); border-radius: 6px; padding: 6px 30px 6px 8px; display: flex; flex-direction: column; gap: 2px; cursor: grab; overflow-wrap: anywhere; }
+.enq-kcard[draggable="false"] { cursor: default; }
+.enq-kcard.is-dragging { opacity: .45; }
+.enq-kcard.is-priority { border-left: 4px solid #d9534f; }
+.enq-kcard .enq-more { position: absolute; top: 4px; right: 4px; }
+.enq-kcard .investigation-item-kind-badge { align-self: flex-start; font-size: .75em; }
+.enq-kprio { color: #b03a2e; font-size: .78em; }
+.enq-kempty { padding: 10px 4px; text-align: center; }
+[data-enq-kcol="dead"] .enq-kcard b { text-decoration: line-through; color: var(--muted, #667); }
+
+/* ── 🧭 avancement des battues ── */
+.battue-progress-panel { border: 2px solid var(--ink, #222); background: var(--card, #fff); padding: 10px 14px; margin: 14px 0 0; }
+.battue-progress-bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 20px; margin-top: 6px; }
+.battue-pline { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; }
+.battue-pline small { grid-column: 1 / -1; }
+.battue-pbar { grid-column: 1 / -1; display: block; height: 8px; border-radius: 4px; background: #e6e8ec; overflow: hidden; }
+.battue-pbar em { display: block; height: 100%; background: #2f8a4c; }
+.battue-color-mode { margin-right: 8px; }
+.battue-color-mode button { padding: 2px 10px; font-size: .85em; }
+.battue-legend-level[hidden], .battue-legend-progress[hidden] { display: none; }
+.battue-legend-progress { display: inline-flex; flex-wrap: wrap; gap: 8px; }
+.battue-legend-progress i { display: inline-block; width: 14px; height: 14px; margin-right: 4px; vertical-align: -2px; border: 1px solid var(--ink, #222); }
+.battue-map.is-progress .battue-map-shape.commune-status-not_started, .battue-legend-progress i.commune-status-not_started { fill: #d9d9d9; background: #d9d9d9; }
+.battue-map.is-progress .battue-map-shape.commune-status-unfinished, .battue-legend-progress i.commune-status-unfinished { fill: #f0a050; background: #f0a050; }
+.battue-map.is-progress .battue-map-shape.commune-status-done, .battue-legend-progress i.commune-status-done { fill: #3fa35f; background: #3fa35f; }
+.battue-map.is-progress .battue-map-shape.commune-status-doubt, .battue-legend-progress i.commune-status-doubt { fill: #e6c84a; background: #e6c84a; }
+
+/* ── 🔍 chercher dans cette page (R13) ── */
+.enq-find { position: sticky; top: 0; z-index: 3; display: flex; gap: 10px; align-items: center; padding: 6px 0; background: var(--bg, #fff); }
+.enq-find .ui-search, .enq-find input { flex: 1 1 auto; min-width: 0; }
+.enq-find-off { display: none !important; }
+
+/* ── 🧬 ADN ── */
+.h-dna-followups li { margin: 2px 0; }
+.h-dna-followups .is-late { color: #b03a2e; font-weight: 700; }
+.h-dna-row-act { white-space: nowrap; }
+.h-dna-endo-note { color: #8a5a00; }
+.h-dna-shared-matrix { overflow: auto; max-width: 100%; }
+.h-dna-shared-matrix table { border-collapse: collapse; font-size: .8em; }
+.h-dna-shared-matrix th, .h-dna-shared-matrix td { border: 1px solid #d0d4dc; padding: 2px 4px; text-align: center; min-width: 22px; }
+.h-dna-shared-matrix th.rot { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; max-height: 140px; }
+.h-dna-shared-matrix td.is-on { background: #4e79a7; color: #fff; cursor: pointer; }
+.h-dna-shared-matrix td.is-off { cursor: pointer; }
+.h-dna-shared-matrix td.is-self { background: #e9ecef; }
+.h-dna-phase-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin: 8px 0; }
+.h-dna-phase-svg { width: 100%; height: auto; }
+.h-dna-phase-legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0; }
+.h-dna-phase-legend i { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 4px; vertical-align: -2px; }
+.h-dna-phase-sum td, .h-dna-phase-sum th { text-align: right; }
+.h-dna-phase-sum td:first-child, .h-dna-phase-sum th:first-child { text-align: left; }
+
+/* ── R12 : largeur téléphone ── */
+@media (max-width: 700px) {
+    .enq-kanban { grid-template-columns: 1fr; }
+    .investigation-detail .section-title, .battue-detail .section-title { flex-wrap: wrap; gap: 6px; }
+    .investigation-detail .section-title .page-actions, .battue-page .page-actions { flex-wrap: wrap; justify-content: flex-start; }
+    .investigation-detail .investigation-summary { grid-template-columns: 1fr; }
+    .investigation-item { grid-template-columns: minmax(0, 1fr) auto; gap: 8px; min-width: 0; }
+    .investigation-item-kind-col { grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; }
+    .investigation-item-body { min-width: 0; overflow-wrap: anywhere; }
+    .investigation-detail .section-title .page-actions { max-width: 100%; }
+    .enq-list-tools { flex-wrap: wrap; max-width: 100%; }
+    .enq-list-tools select { max-width: 100%; }
+    .enq-meta-bar { justify-content: flex-start; }
+    .investigation-media-grid, .investigation-folder-grid { grid-template-columns: 1fr; }
+    .enq-neg-table thead { display: none; }
+    .enq-neg-table, .enq-neg-table tbody, .enq-neg-table tr, .enq-neg-table td { display: block; width: 100%; }
+    .enq-neg-table tr { border-bottom: 1px solid var(--line, #d0d4dc); padding: 6px 0; }
+    .enq-neg-act { text-align: left; }
+    .battue-commune header, .battue-commune-controls { flex-direction: column; align-items: stretch; }
+    .battue-map-legend { flex-wrap: wrap; }
+    .battue-map-distance-scale, .battue-map-hover { position: static; }
+    .battue-progress-bars { grid-template-columns: 1fr; }
+    .enq-row-act { flex-wrap: wrap; justify-content: flex-start; }
+    .data-table-wrap { max-width: 100%; overflow-x: auto; }
+    .enq-tpl-dialog .form-grid, .enq-neg-dialog .form-grid { grid-template-columns: 1fr; }
+    .h-dna-filters, .h-dna-phase-tools { flex-direction: column; align-items: stretch; }
+    .h-dna-filters > *, .h-dna-phase-tools > * { width: 100%; min-width: 0; }
+    .h-dna-grid, .h-dna-cards, .h-dna-settings, .h-dna-auto { grid-template-columns: 1fr !important; }
+    .h-dna-bulk { flex-wrap: wrap; }
+    .h-dna-page .data-table-wrap { overflow-x: auto; }
+    .h-dna-page svg { max-width: 100%; height: auto; }
+}
+:root[data-theme="dark"] .enq-conclusion.has-conclusion { background: #13261a; }
+:root[data-theme="dark"] .enq-conclusion-propose, :root[data-theme="dark"] .enq-neg-warn { background: #2e2410; color: inherit; }
+:root[data-theme="dark"] .enq-kcol { background: #1c1f24; }
+:root[data-theme="dark"] .enq-tpl:has(input:checked), :root[data-theme="dark"] .enq-kcards.is-drop-target { background: #14213a; }
+:root[data-theme="dark"] .enq-chrono.is-running { background: #13261a; color: #b9e6c6; }

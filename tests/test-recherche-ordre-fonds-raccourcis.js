@@ -136,7 +136,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
                     assert.equal(await p.$eval('#research-archive-digest-fields', e => e.hidden), false, 'ses champs sont là');
                     await p.waitForFunction(() => document.querySelector('#workspace')?.textContent.trim().length > 20, null, { timeout: 10000 });
                     // on change de type : l'écran suit
-                    await p.selectOption('#research-form [name=search_kind]', 'question');
+                    await p.click('#research-form [data-rk-pick="question"]'); // R2 (audit des onglets) : la colonne de boutons numérotés remplace le menu déroulant
                     await p.waitForFunction(() => window.LCNDA_APP.state.researchKind === 'question');
                     await p.evaluate(() => localStorage.removeItem('genealogie-research-kind-hidden'));
                 });

@@ -875,7 +875,12 @@
             const c = s.cards.pop(); c.up = true; w.cards.push(c); st.moves++; return {ok: true};
         },
         end(st) { st.won = st.piles.filter(p => p.type === 'found').every(p => p.cards.length === 13); },
-        moves(st, def) { const out = []; st.piles.filter(p => (p.type === 'waste' || p.type === 'tab') && p.cards.length).forEach(p => st.piles.filter(q => q.type === 'found').forEach(q => { if (this.canDrop(st, def, [top(p)], q.id, p.id)) out.push({from: p.id, idx: p.cards.length - 1, to: q.id, score: 10}); })); return out; },
+        moves(st, def) {
+            const out = []; st.piles.filter(p => (p.type === 'waste' || p.type === 'tab') && p.cards.length).forEach(p => st.piles.filter(q => q.type === 'found').forEach(q => { if (this.canDrop(st, def, [top(p)], q.id, p.id)) out.push({from: p.id, idx: p.cards.length - 1, to: q.id, score: 10}); }));
+            // la carte piochée peut toujours aller sur un tas d'attente (sinon la partie aurait l'air bloquée) : le plus bas d'abord
+            const w = pileOf(st, 'waste'); if (w.cards.length) st.piles.filter(p => p.type === 'tab').sort((a, b) => a.cards.length - b.cards.length).forEach((p, i) => out.push({from: 'waste', idx: w.cards.length - 1, to: p.id, score: -i}));
+            return out;
+        },
         canStock: st => !pileOf(st, 'waste').cards.length && (!!pileOf(st, 'stock').cards.length || (st.redeals > 0 && st.piles.some(p => p.type === 'tab' && p.cards.length))),
     };
 

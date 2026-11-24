@@ -259,7 +259,7 @@ await ctx.addInitScript(() => { try { localStorage.setItem('lcnda-sheet-sections
                         await p.waitForSelector('dialog[open] input[name=done_at]');
                         await p.fill('dialog[open] input[name=done_at]', '2025-04-02');
                         await p.click('dialog[open] .modal-actions button[type=submit]');
-                        await p.waitForFunction(() => [...document.querySelectorAll('.ui-listbar .ui-listbar-chip')].map(c => c.textContent.replace('×', '').trim()).join('|') === '✓ Faites'); // H10 : « État : ✓ Visites faites » en pastille
+                        await p.waitForFunction(() => [...document.querySelectorAll('.ui-listbar .ui-listbar-chip')].map(c => c.textContent.replace('×', '').trim()).join('|') === '✓ Terminées'); // H10 : « État : ✓ Terminées » en pastille (R9 : mots d’état communs)
                         assert.equal((await get('archive_visit_plans')).plans.find(x => x.id === ids.v2).done_at, '2025-04-02');
                         await p.selectOption(`select[data-archive-visit-result="${ids.i3}"]`, 'not_consulted');
                         await p.waitForFunction(() => [...document.querySelectorAll('.ui-toast')].some(x => /Résultat noté/.test(x.textContent)));
