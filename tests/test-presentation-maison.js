@@ -148,7 +148,9 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
 
         /* ─── 4. la transcription : le message du lecteur d'écriture absent ─── */
         await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({mediaId: 1, filename: 'acte.png', title: 'Acte'}));
-        await p.waitForSelector('.h-tx-dlg [data-tx-cmd=htr]'); await p.waitForTimeout(1200);
+        // « ✨ Lire ▾ » (Atelier, vague 1) : la lecture de l'écriture à la main est dans ce menu
+        await p.waitForSelector('.h-tx-dlg [data-tx-cmd=readmenu]'); await p.waitForTimeout(800); await p.click('.h-tx-dlg [data-tx-cmd=readmenu]');
+        await p.waitForSelector('.h-tx-dlg [data-tx-cmd=htr]', {state: 'visible'}); await p.waitForTimeout(300);
         await p.click('.h-tx-dlg [data-tx-cmd=htr]');
         await p.waitForFunction(() => [...document.querySelectorAll('.toast')].some(t => /modèle|Reconnaissance|impossible/i.test(t.innerText)), null, { timeout: 15000 }).catch(() => {});
         out.htrToast = await p.evaluate(() => [...document.querySelectorAll('.toast')].map(t => t.innerText).find(t => /modèle|Reconnaissance|impossible/i.test(t)) || '');

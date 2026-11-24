@@ -345,9 +345,11 @@
         const body = !list.length ? A().emptyState({icon: '🕰', text: T('Aucune ville pour l’instant'), hint: T('« ＋ Ajouter une ville » : plus de 200 villes, ou n’importe quel fuseau horaire.')})
             : view === 'compare' ? compareHtml(list, cmpHour) : view === 'map' ? await mapHtml(list) : `<div class="hz-list">${list.map((c, i) => `<div class="hz-item" data-hz-id="${esc(c.id)}">${clocksHtml([c], st)}<div class="hz-item-act"><button type="button" class="icon-button small" data-hz-up="${i}" ${i ? '' : 'disabled'} aria-label="${esc(T('Monter'))}">↑</button><button type="button" class="icon-button small" data-hz-down="${i}" ${i < list.length - 1 ? '' : 'disabled'} aria-label="${esc(T('Descendre'))}">↓</button><button type="button" class="icon-button small" data-hz-del="${esc(c.id)}" aria-label="${esc(T('Retirer'))}">🗑</button></div></div>`).join('')}</div>`;
         if (token != null && token !== A().state?.workspaceToken) return;
-        ws.innerHTML = `<section class="page hz-page">${A().pageHeader ? '' : ''}<div class="page-header"><div><span class="eyebrow">${esc(T('Listes'))}</span><h1>🕰 ${esc(T('Heures du monde'))}</h1>
-            <p class="muted">${esc(T('Ici ({z}) : il est {h}.', {z: HERE, h: `${pad(here.h)}:${pad(here.mi)}`}))}</p></div>
-            <div class="page-actions"><button type="button" class="button" data-hz-add>＋ ${esc(T('Ajouter une ville'))}</button><button type="button" class="button secondary" data-hz-style-open>🎨 ${esc(T('Style des horloges'))}</button></div></div>
+        const UIx = window.LCNDA_UI || {};
+        const head = UIx.pageHeader ? UIx.pageHeader({title: `🕰 ${T('Heures du monde')}`, help: T('Ici ({z}) : il est {h}.', {z: HERE, h: `${pad(here.h)}:${pad(here.mi)}`}),
+                actions: [`<button type="button" class="button" data-hz-add>＋ ${esc(T('Ajouter une ville'))}</button>`, `<button type="button" class="button secondary" data-hz-style-open>🎨 ${esc(T('Style des horloges'))}</button>`]})
+            : `<div class="page-header"><div><h2>🕰 ${esc(T('Heures du monde'))}</h2></div><div class="page-actions"><button type="button" class="button" data-hz-add>＋ ${esc(T('Ajouter une ville'))}</button><button type="button" class="button secondary" data-hz-style-open>🎨 ${esc(T('Style des horloges'))}</button></div></div>`;
+        ws.innerHTML = `<section class="page hz-page">${head}
             <div class="segmented hz-views" role="tablist">${views.map(([k, l]) => `<button type="button" class="${view === k ? 'is-active' : ''}" data-hz-view="${k}" aria-pressed="${view === k}">${esc(l)}</button>`).join('')}</div>
             <div class="hz-body" data-hz-body>${body}</div></section>`;
         startTick();

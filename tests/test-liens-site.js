@@ -122,10 +122,10 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.siteWeb.current.save({quiet: true}));
         });
 
-        await t('▶ Tester : les boutons ‹ › du diaporama (et pas en mode modifier)', async () => {
+        if (!process.env.NOPLAY) await t('▶ Tester : les boutons ‹ › du diaporama (et pas en mode modifier)', async () => {
             const within = pr => Promise.race([pr, sleep(1500).then(() => -1)]);
             const count = async () => { for (const f of p.frames()) { if (f === p.mainFrame()) continue; const n = await within(f.evaluate(() => document.querySelector('.lc-diaporama') ? document.querySelectorAll('.lc-diapo-nav').length : -1).catch(() => -1)); if (n >= 0) return n; } return -1; };
-            if (process.env.NOPLAY) return; await sleep(800); assert.strictEqual(await count(), 0, 'en mode modifier : pas de bouton (il serait enregistré dans la page)');
+            await sleep(800); assert.strictEqual(await count(), 0, 'en mode modifier : pas de bouton (il serait enregistré dans la page)');
             await p.evaluate(() => window.LCNDA_EXT.siteWeb.current.setMode('play')); await sleep(1500);
             let n = -1; for (let i = 0; i < 20 && n !== 2; i++) { n = await count(); await sleep(200); }
             assert.strictEqual(n, 2, 'en ▶ Tester : ‹ et ›');

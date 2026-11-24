@@ -68,6 +68,9 @@ echo json_encode($o);`, dir], { encoding: 'utf8' });
 const diff = (a, b) => Object.keys({ ...a, ...b }).filter(k => a[k] !== b[k]);
 /** pendant que la page est ouverte, elle range ses réglages d'écran (app_settings) : ils ne comptent pas */
 const diffData = (a, b) => diff(a, b).filter(k => k !== 'app_settings');
+/** data_gen : les jetons du cache des calculs (lib/calc_cache.php), tirés au hasard à chaque écriture pour que les calculs gardés soient refaits — pas des données */
+// … ni une table vide créée entre-temps par une autre page de l'app (CREATE TABLE IF NOT EXISTS au premier appel) : aucune ligne n'y est
+const diffBase = (a, b) => diff(a, b).filter(k => k !== 'data_gen' && !(a[k] === undefined && /:0$/.test(String(b[k]))));
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 const SHOTS = process.env.TABLEUR_SHOTS || '';
 let n = 0; const ok = (c, m) => { assert.ok(c, m); n++; }; const eq = (a, b, m) => { assert.deepStrictEqual(a, b, m); n++; };
@@ -156,7 +159,7 @@ let n = 0; const ok = (c, m) => { assert.ok(c, m); n++; }; const eq = (a, b, m) 
         ok(diff(before, after).includes('persons') && diff(before, after).includes('census_members') && diff(before, after).includes('family_children'), 'la base a bien changé');
         r = await post('sheet_push_undo', { token });
         eq([r.status, r.body.result?.removed?.persons, r.body.result?.removed?.households], [200, 2, 2], '↶ Annuler');
-        eq(diff(before, snapshot()), [], '↶ Annuler : la base est EXACTEMENT comme avant');
+        eq(diffBase(before, snapshot()), [], '↶ Annuler : la base est EXACTEMENT comme avant');
         eq((await post('sheet_push_undo', { token })).status, 422, 'un envoi ne s’annule qu’une fois');
         eq((await post('sheet_push_undo', { token: '../../x' })).status, 422, 'jeton de mauvaise forme');
         eq((await post('sheet_push_undo', { token }, 'x')).status, 419, 'annuler sans CSRF : refusé');
@@ -174,7 +177,7 @@ let n = 0; const ok = (c, m) => { assert.ok(c, m); n++; }; const eq = (a, b, m) 
         const p2 = await get('person', { id: r.body.result.person_ids.find(x => x.i === 1).id });
         ok((p2.body.events || []).some(e => /frimaire an XII/.test(e.date_text)), 'la date d’acte est gardée telle quelle');
         await post('sheet_push_undo', { token: r.body.result.token });
-        eq(diff(before, snapshot()), [], 'événements : ↶ Annuler remet la base comme avant (lieu créé compris)');
+        eq(diffBase(before, snapshot()), [], 'événements : ↶ Annuler remet la base comme avant (lieu créé compris)');
 
         // 📤 un relevé de dépouillement : la personne relevée est reliée à sa fiche
         r = await post('sheet_push', { target: 'persons', name: 'Page 3', rows: [row(2, { last_name: 'MARTIN', first_name: 'Jeanne', age: '20' }, 'd:2'), row(3, { last_name: 'MARTIN', first_name: 'Jean' }, 'd:1')], context: { year: 1836, digest_id: 1 } });
@@ -183,7 +186,7 @@ let n = 0; const ok = (c, m) => { assert.ok(c, m); n++; }; const eq = (a, b, m) 
         r = await fill({ source: 'digest', filters: { digest_id: 1, page: '3' }, cols: ['first_name', 'person'] });
         ok(r.body.rows.every(x => x.cells.person?.ref), 'les personnes relevées sont reliées à leur fiche');
         eq((await post('sheet_push_undo', { token: digestTok })).status, 200, '↶ Annuler (relevé)');
-        eq(diff(before, snapshot()), [], 'relevé : les liens posés sont défaits, la base est comme avant');
+        eq(diffBase(before, snapshot()), [], 'relevé : les liens posés sont défaits, la base est comme avant');
 
         // 🔒 mode consultation
         eq((await post('kiosk_enter', { password: '1234' })).status, 200, 'mode consultation');
@@ -269,7 +272,7 @@ let n = 0; const ok = (c, m) => { assert.ok(c, m); n++; }; const eq = (a, b, m) 
         await shot('envoye');
         await page.click('.ui-toast:has-text("foyers depuis") button:has-text("↶ Annuler")');
         await page.waitForSelector('.ui-toast:has-text("↶ Annulé")');
-        eq(diffData(before2, snapshot()), [], '↶ Annuler (message H7) : la base est exactement comme avant');
+        eq(diffData(before2, snapshot()).filter(k => diffBase({[k]: before2[k]}, {[k]: snapshot()[k]}).length), [], '↶ Annuler (message H7) : la base est exactement comme avant');
         // 390 px, sombre
         await page.setViewportSize({ width: 390, height: 800 });
         await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });

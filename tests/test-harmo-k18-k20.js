@@ -276,6 +276,8 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             const bad = [];
             for (const [name, expr] of [OPENERS[0], OPENERS[7]]) {
                 await closeAll(ph); await ph.evaluate(e => { (0, eval)(e); }, expr); await ph.waitForTimeout(1800);
+                // Transcription sur téléphone : trois onglets Image / Texte / Personnes (vague 2, décision 4) ; la barre du bas (zoom) est celle de l'onglet 🖼️ Image
+                if (name === 'Transcription') { await ph.evaluate(() => document.querySelector('dialog[open] [data-tx-ptab="image"]')?.click()); await ph.waitForTimeout(300); }
                 const p = await probe(ph); if (!p.sb) { bad.push(`${name} : pas de barre`); continue; }
                 if (p.rail !== 36) bad.push(`${name} : colonne ${p.rail}`);
                 const wide = await ph.evaluate(() => { const sb = [...document.querySelectorAll('dialog[open] [data-ed-status]')].at(-1).getBoundingClientRect(); return sb.right > innerWidth + 1 || sb.left < -1; });
