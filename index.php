@@ -48,6 +48,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
     <link rel="stylesheet" href="assets/css/onglets.css?v=9">
+    <link rel="stylesheet" href="assets/css/anim-studio.css?v=1">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
     <link rel="stylesheet" href="assets/css/oeuvres.css?v=2">
@@ -1294,7 +1295,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=4" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
-<script src="assets/js/heritage-links.js?v=24" defer></script>
+<script src="assets/js/heritage-links.js?v=25" defer></script>
 <script src="assets/js/heritage-more.js?v=403" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
@@ -1439,7 +1440,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>
 <script src="assets/js/heritage-diagram-plus.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-lot-b.js?v=1" defer></script>
-<script src="assets/js/heritage-diagram-perso.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-perso.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-lot-a.js?v=2" defer></script>
 <script src="assets/js/heritage-artist.js?v=19" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=12" defer></script>
@@ -1553,6 +1554,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-house-cultes.js?v=1" defer></script>
 <script src="assets/js/heritage-house-equip.js?v=1" defer></script>
 <script src="assets/js/heritage-house-objets.js?v=1" defer></script>
+<script src="assets/js/heritage-anim-render.js?v=1" defer></script>
+<script src="assets/js/heritage-anim-export.js?v=1" defer></script>
+<script src="assets/js/heritage-anim-studio.js?v=1" defer></script>
 <script src="assets/js/heritage-dna.js?v=23" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=11" defer></script>
 <script src="assets/js/museum-viewer.js?v=10" defer></script>

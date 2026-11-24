@@ -481,7 +481,9 @@
                 <label>Durée de la vidéo<select name="seconds"><option value="20">20 secondes</option><option value="40" selected>40 secondes</option><option value="60">1 minute</option><option value="90">1 min 30</option><option value="120">2 minutes</option></select></label>
                 <label>Format<select name="size"><option value="1280x720">Paysage 1280 × 720 (écran, réunion)</option><option value="1080x1080">Carré 1080 × 1080 (messages)</option><option value="720x1280">Portrait 720 × 1280 (téléphone)</option></select></label>
                 <label class="span-2 checkbox-line"><input type="checkbox" name="online" checked> Fond de carte détaillé (Internet) — sinon, fond hors ligne</label></div>
+                ${ext.openAnimStudio ? `<p><button type="button" class="link-button" data-h-film-studio>🎞 ${i18n('Plus de réglages (couleurs, caméra qui suit, légendes, musique, voix, GIF) : ouvrir dans le Studio d’animation')}</button></p>` : ''}
                 <div class="h-film-preview" hidden><canvas></canvas><div class="h-progress"><span></span></div><p class="muted" data-h-film-status></p></div>`,
+            onOpen: dlg => dlg.querySelector('[data-h-film-studio]')?.addEventListener('click', () => { dlg.close?.(); ext.openAnimStudio({template: 'migrations'}); }),
             onSubmit: async form => { if (!mime) { toast('Cet ordinateur ne sait pas enregistrer de vidéo depuis l’application.', 'error'); return false; } await recordFilm(form, mime); return false; },
         });
     }

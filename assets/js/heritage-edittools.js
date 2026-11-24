@@ -163,7 +163,7 @@
                 if (d.etX && t.onExtra) return t.onExtra(d.etX, again); // les boutons en plus d'un outil ajouté
                 if (d.etOpen) return t.open(Number(d.etOpen), again);
                 if (d.etRen) { const r = rows.find(x => x.id === Number(d.etRen)), n = await A().askText({title: i18n('Renommer le projet'), message: i18n('Nouveau nom :'), value: r?.name || '', okLabel: i18n('Renommer')}); if (!n?.trim()) return; await t.rename(r.id, n.trim().slice(0, 160)); toast(i18n('Projet renommé.')); return load(); }
-                if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!await A().confirmBox(i18n('Les photos, vidéos et sons restent dans les Médias.'), {title: i18n('Supprimer le projet « {name} » ?', {name: r?.name}), okLabel: i18n('Supprimer le projet')})) return; await t.remove(r.id); toast(i18n('Projet supprimé.')); return load(); }
+                if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!await A().confirmBox(i18n('Les photos, vidéos et sons restent dans les Médias.'), {title: i18n('Supprimer le projet « {name} » ?', {name: r?.name}), okLabel: i18n('Supprimer le projet')})) return; const res = await t.remove(r.id); if (res && typeof res.undo === 'function' && A().undoToast) A().undoToast(i18n('Projet supprimé.'), {undo: async () => { await res.undo(); load(); }}); else toast(i18n('Projet supprimé.')); return load(); } // ↶ Annuler quand l'outil sait remettre le projet
             } catch (err) { toast(err.message, 'error'); }
         };
         ws.oninput = null; ws.onchange = null;

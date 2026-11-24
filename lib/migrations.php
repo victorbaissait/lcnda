@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 109;
+const SCHEMA_VERSION = 110;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -138,6 +138,7 @@ function migration_steps(): array
         107 => 'schema_v107',
         108 => 'schema_v108',
         109 => 'schema_v109',
+        110 => 'schema_v110',
     ];
 }
 
@@ -2838,6 +2839,13 @@ function schema_v105(PDO $pdo): void
 }
 
 /** 109 : ➕ recueils — l'avancement dans le temps (recueil_progress), « confiée à » d'une page, l'objectif d'un recueil */
+/** 110 : 🎞 Studio d'animation, les projets */
+function schema_v110(PDO $pdo): void
+{
+    if (!function_exists('anim_install')) { require_once __DIR__ . '/anim_studio.php'; }
+    anim_install($pdo);
+}
+
 function schema_v109(PDO $pdo): void
 {
     if (!function_exists('recueil_etat_install')) { require_once __DIR__ . '/recueil_etat.php'; }

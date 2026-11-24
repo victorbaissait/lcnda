@@ -295,7 +295,7 @@
             <input type="range" min="0" max="${T.years.length - 1}" step="1" value="${i}" aria-label="Année" data-ui-done="1"><output>${esc(fmt(T.years[i], 0))}</output>
             <select data-dgp-speed aria-label="Vitesse">${SPEEDS.map(([k, l]) => `<option value="${k}" ${k === (tm.speed || '') ? 'selected' : ''}>${l}</option>`).join('')}</select>
             <label class="ui-toggle h-dgp-loop"><input type="checkbox" data-dgp-loop ${loop ? 'checked' : ''}><i></i>Boucle</label>
-            <button type="button" class="link-button" data-dgp-all title="Revenir au dessin complet">⤢ Tout</button>${canVideo ? '<button type="button" class="link-button" data-dgp-video title="Enregistrer la lecture en vidéo">🎬 Vidéo</button>' : ''}${calm() ? '<small class="muted" title="Réglages → Accessibilité → Mouvement">Mouvements réduits : une étape à la fois, sans glisser</small>' : ''}`;
+            <button type="button" class="link-button" data-dgp-all title="Revenir au dessin complet">⤢ Tout</button>${canVideo ? '<button type="button" class="link-button" data-dgp-video title="Enregistrer la lecture en vidéo">🎬 Vidéo</button>' : ''}${ext.openAnimStudio ? '<button type="button" class="link-button" data-dgp-anim title="Le Studio d’animation : passages en douceur, caméra, légendes, musique, MP4, GIF">🎞 Animer</button>' : ''}${calm() ? '<small class="muted" title="Réglages → Accessibilité → Mouvement">Mouvements réduits : une étape à la fois, sans glisser</small>' : ''}`;
         box.after(bar);
         const range = bar.querySelector('input[type=range]'), out = bar.querySelector('output'), pb = bar.querySelector('[data-dgp-p]');
         const show = k => { i = clamp(k, 0, T.years.length - 1); range.value = String(i); out.textContent = fmt(T.years[i], 0); box.innerHTML = R().svg(T.at(T.years[i])); };
@@ -308,6 +308,7 @@
         bar.querySelector('[data-dgp-loop]').addEventListener('change', e => { loop = e.target.checked; });
         bar.querySelector('[data-dgp-all]').addEventListener('click', () => { stop(); i = T.years.length - 1; range.value = String(i); out.textContent = fmt(T.years[i], 0); box.innerHTML = R().svg(spec); onStop?.(); });
         bar.querySelector('[data-dgp-video]')?.addEventListener('click', e => recordVideo(spec, T, speed, e.currentTarget));
+        bar.querySelector('[data-dgp-anim]')?.addEventListener('click', () => { stop(); ext.openAnimStudio({diagram: {spec: clone(spec), name: spec.title || spec.o?.title || spec.name || ''}}); }); // 🎞 heritage-anim-studio.js
         bar._stop = stop; bar._show = show;
         return bar;
     }
