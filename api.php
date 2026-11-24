@@ -261,6 +261,9 @@ try {
     if ($isWrite && $action === 'insee_remote_import') { // décès INSEE : téléchargé sur data.gouv.fr puis importé
         insee_remote_import($pdo, $payload);
     }
+    if ($isWrite && str_starts_with((string) $action, 'insee_maj_')) { // ⤓ décès INSEE : tout installer, par petits pas, et mises à jour (lib/insee_remote.php)
+        try { json_response(insee_maj_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
+    }
     if ($isWrite && $action === 'museum_upload') {
         museum_upload($pdo, $_FILES['file'] ?? null, $_POST);
     }
@@ -876,6 +879,7 @@ try {
         'insee_import' => insee_deces_import($pdo),
         'insee_imports_list' => insee_deces_imports_list($pdo),
         'insee_remote_files' => json_response(insee_remote_files($pdo)),
+        'insee_maj_status' => json_response(insee_maj_status($pdo, $_GET)), // ⤓ décès INSEE : installé, en cours, en ligne (lib/insee_remote.php)
         default => json_response(['error' => 'Action inconnue'], 404),
     };
 } catch (Throwable $e) {

@@ -139,7 +139,16 @@ function ouc_oa_person(PDO $pdo, int $pid): array
     $estimated = false;
     if ($by === null && $years) { $by = min($years) - 25; $estimated = true; }
     $first = trim(preg_split('/[\s,]+/', trim((string) $p['first_name']))[0] ?? '');
-    return ['id' => $pid, 'first' => $first, 'first_full' => trim((string) $p['first_name']), 'last' => trim((string) $p['last_name']), 'gender' => (string) $p['gender'],
+    // les proches qu'on peut chercher dans le même acte (« Jan Jansen & Maria Pieters ») : conjoint, père, mère
+    $kin = [];
+    $nm = static function (?int $id) use ($pdo): string { if (!$id) { return ''; } $s = $pdo->prepare('SELECT first_name, last_name FROM persons WHERE id=?'); $s->execute([$id]); $r = $s->fetch(PDO::FETCH_ASSOC);
+        return $r ? trim(trim(preg_split('/[\s,]+/', trim((string) $r['first_name']))[0] ?? '') . ' ' . trim((string) $r['last_name'])) : ''; };
+    $f = $pdo->prepare('SELECT partner1_id, partner2_id FROM families WHERE partner1_id=? OR partner2_id=? ORDER BY id LIMIT 1'); $f->execute([$pid, $pid]);
+    if ($fr = $f->fetch(PDO::FETCH_ASSOC)) { $sp = (int) $fr['partner1_id'] === $pid ? (int) $fr['partner2_id'] : (int) $fr['partner1_id']; if (($n = $nm($sp)) !== '') { $kin['spouse'] = $n; } }
+    [$fa, $mo] = function_exists('ouc_parents') ? ouc_parents($pdo, $pid) : [null, null];
+    if (($n = $nm($fa ? (int) $fa : null)) !== '') { $kin['father'] = $n; }
+    if (($n = $nm($mo ? (int) $mo : null)) !== '') { $kin['mother'] = $n; }
+    return ['id' => $pid, 'kin' => $kin, 'first' => $first, 'first_full' => trim((string) $p['first_name']), 'last' => trim((string) $p['last_name']), 'gender' => (string) $p['gender'],
         'living' => (string) $p['living_status'], 'private' => (int) ($p['is_private'] ?? 0) === 1, 'birth_year' => $by, 'death_year' => $dy, 'estimated' => $estimated, 'places' => array_slice($places, 0, 12)];
 }
 
@@ -159,21 +168,30 @@ function ouc_oa_search(PDO $pdo, array $g): array
     if (!$y2 && $p['birth_year']) { $y2 = ($p['death_year'] ?: $p['birth_year'] + 90) + 5; }
     $y1 = $y1 ? max(1400, min(2030, $y1)) : 0; $y2 = $y2 ? max(1400, min(2030, $y2)) : 0;
     if ($y1 && $y2 && $y2 < $y1) { [$y1, $y2] = [$y2, $y1]; }
-    $name = trim(preg_replace('/[&"*?~]+/u', ' ', $first . ' ' . $last) ?? '');
-    $q = ['name' => trim($name . ($y1 && $y2 ? " $y1-$y2" : ($y1 ? " $y1" : ''))), 'lang' => 'fr', 'number_show' => 50, 'sort' => 4];
+    // la façon de chercher le nom (les « astuces » du site) : exact (« "Jan Jansen" »), sons voisins (« Jan ~Jansen »), ou large
+    $clean = static fn(string $x) => trim(preg_replace('/\s+/u', ' ', preg_replace('/[&"*?~$%>()\-]+/u', ' ', $x) ?? '') ?? '');
+    $first = $clean($first); $last = $clean($last);
+    $how = in_array((string) ($g['how'] ?? ''), ['exact', 'sound', 'wide'], true) ? (string) $g['how'] : 'exact';
+    $name = $how === 'sound' ? trim($first . ' ~' . str_replace(' ', ' ~', $last)) : ($how === 'exact' ? ($first !== '' ? '"' . $first . ' ' . $last . '"' : '>' . str_replace(' ', ' >', $last)) : trim($first . ' ' . $last));
+    $with = (string) ($g['with'] ?? '');
+    $other = isset($p['kin'][$with]) ? $clean($p['kin'][$with]) : '';
+    if ($other !== '') { $name .= ' & "' . $other . '"'; } else { $with = ''; }
+    $q = ['name' => trim($name . ($y1 && $y2 ? " $y1-$y2" : ($y1 ? " $y1" : ''))), 'lang' => 'fr', 'number_show' => 100, 'sort' => 4];
     $type = (string) ($g['type'] ?? '');
     if (isset(OUC_OA_TYPES[$type]) && OUC_OA_TYPES[$type] !== '') { $q['eventtype'] = OUC_OA_TYPES[$type]; }
     $place = mb_substr(trim(safe_text($g['place'] ?? '')), 0, 80);
     if ($place !== '') { $q['eventplace'] = $place; }
-    $start = max(0, min(950, safe_int($g['start'] ?? 0)));
+    $start = max(0, min(900, safe_int($g['start'] ?? 0)));
     if ($start) { $q['start'] = $start; }
     [$j, $cached, $at] = ouc_oa_cached($pdo, 'records/search.json', $q, !empty($g['fresh']));
     $docs = is_array($j['response']['docs'] ?? null) ? $j['response']['docs'] : [];
     $rows = [];
     foreach ($docs as $d) { if (is_array($d) && ($r = ouc_oa_row($d))) { $rows[] = $r; } }
     $found = (int) ($j['response']['number_found'] ?? count($rows));
-    if (!$cached) { $pdo->prepare('INSERT INTO ouc_oa_searches(person_id, query, found) VALUES(?,?,?)')->execute([$pid, $q['name'] . (isset($q['eventtype']) ? ' · ' . $type : '') . ($place !== '' ? ' · ' . $place : ''), $found]); }
-    return ['person' => $p, 'query' => ['first' => $first, 'last' => $last, 'y1' => $y1, 'y2' => $y2, 'type' => $type, 'place' => $place, 'start' => $start, 'sent' => $q['name']],
+    $said = $q['name'] . (isset($q['eventtype']) ? ' · ' . $type : '') . ($place !== '' ? ' · ' . $place : '') . ($start ? ' · +' . $start : '');
+    $pdo->prepare('DELETE FROM ouc_oa_searches WHERE person_id=? AND query=?')->execute([$pid, $said]); // la même recherche refaite : une seule ligne, à la date du jour
+    $pdo->prepare('INSERT INTO ouc_oa_searches(person_id, query, found) VALUES(?,?,?)')->execute([$pid, $said, $found]);
+    return ['person' => $p, 'query' => ['first' => $first, 'last' => $last, 'y1' => $y1, 'y2' => $y2, 'type' => $type, 'place' => $place, 'start' => $start, 'how' => $how, 'with' => $with, 'sent' => $q['name']],
         'found' => $found, 'rows' => $rows, 'cached' => $cached, 'fetched_at' => date('Y-m-d H:i', $at),
         'marks' => ouc_oa_marks($pdo, $pid), 'history' => ouc_oa_history($pdo, $pid),
         'search_url' => 'https://www.openarchieven.nl/search.php?lang=fr&name=' . rawurlencode($q['name']) . ($place !== '' ? '&eventplace=' . rawurlencode($place) : ''),
@@ -186,7 +204,7 @@ function ouc_oa_row(array $d): ?array
     $arch = preg_replace('/[^A-Za-z0-9_-]/', '', (string) ($d['archive_code'] ?? '')) ?? '';
     $id = preg_replace('/[^A-Za-z0-9_-]/', '', (string) ($d['identifier'] ?? '')) ?? '';
     if ($arch === '' || $id === '') { return null; }
-    $t = static fn($v) => mb_substr(trim(strip_tags(is_array($v) ? implode(', ', array_map('strval', array_filter($v, 'is_scalar'))) : (string) $v)), 0, 200);
+    $t = static fn($v) => mb_substr(trim(html_entity_decode(strip_tags(is_array($v) ? implode(', ', array_map('strval', array_filter($v, 'is_scalar'))) : (string) $v), ENT_QUOTES | ENT_HTML5, 'UTF-8')), 0, 200);
     $dt = is_array($d['eventdate'] ?? null) ? $d['eventdate'] : [];
     return ['key' => $arch . ':' . $id, 'archive_code' => $arch, 'identifier' => $id, 'pid' => $t($d['pid'] ?? ''),
         'name' => trim(preg_replace('/^#+\s*/', '', $t($d['personname'] ?? '')) ?? ''), 'role' => $t($d['relationtype'] ?? ''), 'role_nl' => $t($d['_relationtype'] ?? ''),
@@ -253,7 +271,7 @@ function ouc_oa_record(PDO $pdo, array $g): array
 
 function ouc_oa_parse_record(array $j, string $arch, string $id): array
 {
-    $t = static fn($v) => mb_substr(trim(strip_tags(is_scalar($v) ? (string) $v : '')), 0, 300);
+    $t = static fn($v) => mb_substr(trim(html_entity_decode(strip_tags(is_scalar($v) ? (string) $v : ''), ENT_QUOTES | ENT_HTML5, 'UTF-8')), 0, 300);
     $roles = [];
     foreach (ouc_oa_list($j['RelationEP'] ?? null) as $r) { if (is_array($r)) { $roles[(string) ($r['PersonKeyRef'] ?? '')] = $t($r['RelationType'] ?? ''); } }
     $persons = [];
@@ -280,6 +298,7 @@ function ouc_oa_parse_record(array $j, string $arch, string $id): array
     $src = is_array($j['Source'] ?? null) ? $j['Source'] : [];
     $ref = is_array($src['SourceReference'] ?? null) ? $src['SourceReference'] : [];
     if ($eplace === '') { $eplace = $t(is_array($src['SourcePlace'] ?? null) ? ($src['SourcePlace']['Place'] ?? '') : ''); }
+    if (!$edate['year']) { $edate = ouc_oa_date($src['SourceDate'] ?? null); }
     $scan = '';
     foreach (ouc_oa_list(is_array($src['SourceAvailableScans'] ?? null) ? ($src['SourceAvailableScans']['Scan'] ?? null) : null) as $s) { if (is_array($s)) { $u = (string) ($s['UriViewer'] ?? $s['Uri'] ?? ''); if (preg_match('#^https?://#i', $u)) { $scan = mb_substr($u, 0, 500); break; } } }
     $refText = implode(', ', array_filter([$t($ref['InstitutionName'] ?? ''), $t($ref['Archive'] ?? '') !== '' ? 'archive ' . $t($ref['Archive']) : '', $t($ref['Collection'] ?? ''), $t($ref['Book'] ?? ''),
