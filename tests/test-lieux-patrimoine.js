@@ -132,6 +132,12 @@ echo json_encode(['aur' => $aur, 'tul' => $tul]);`], {cwd: root, encoding: 'utf8
             assert.match(txt, /1 monument\(s\) protégé\(s\) et 1 objet\(s\) protégé\(s\)/);
             assert.ok(await p.$('a[href="https://pop.culture.gouv.fr/notice/palissy/PM99000001"]'));
         });
+        await t('Fiche d’un village (Listes → Villages) : les mêmes parties ; « 🗺 Sur la carte » pose les lieux-dits sur la carte du village', async () => {
+            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.hVillage = '15014'; A.state.listType = 'villages'; A.setModule('listes'); window.LCNDA_EXT.lists.villages?.(++A.state.workspaceToken); });
+            await p.waitForSelector('.h-village [data-lp-part="lieuxdits"]', {timeout: 20000});
+            assert.match(await p.textContent('.h-village [data-lp-host]'), /Aureliacus/);
+            if (await p.$('.h-village-map')) { await p.click('[data-lp-pins]'); await p.waitForSelector('.h-village-map .lp-pin', {timeout: 5000}); }
+        });
         await t('une offre d’installation, ✕ retenue (genealogie-lieux-patrimoine-offres) ; une partie éteinte ne se montre plus', async () => {
             await post('lp_pack_remove', {key: 'lieuxdits-15'});
             await p.evaluate(() => { window.LCNDA_APP.setModule('dashboard'); }); await sleep(300);

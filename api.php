@@ -420,6 +420,10 @@ try {
     if (in_array($action, SO7_ACTIONS, true)) { // 🌍 Archives en ligne, 7e lot (lib/sources_ouvertes_7.php) : Europe, Justes, enfants assistés, monuments, cadastres — aucune requête vers les sites
         so7_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['adn_ancien', 'adn_livres', 'adn_livres_write'], true)) { // 🦴 ADN ancien (AADR) et 📚 auteurs de la BnF (lib/adn_livres.php)
+        require_once __DIR__ . '/lib/adn_livres.php';
+        adn_livres_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if ($action === 'media_limits' || ($isWrite && $action === 'save_media_limits')) { // 📎 taille des fichiers ajoutés (lib/media_limits.php)
         try { json_response($isWrite ? ['ok' => true, 'result' => media_limits_save($pdo ?? db(), $payload)] : media_limits_for_page($pdo ?? db())); } catch (RuntimeException $e) { json_response(['error' => readable_error_message($e)], 422); }
     }
