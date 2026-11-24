@@ -1188,7 +1188,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=577" defer></script>
+<script src="assets/js/app.js?v=578" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=6" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1221,9 +1221,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu-cartes-regles.js?v=2" defer></script>
 <script src="assets/js/app-jeu-cartes.js?v=2" defer></script>
 <script src="assets/js/app-jeu.js?v=16" defer></script>
-<script src="assets/js/app-chronologie.js?v=13" defer></script>
+<script src="assets/js/app-chronologie.js?v=14" defer></script>
 <script src="assets/js/app-comparaison.js?v=10" defer></script>
-<script src="assets/js/app-carte.js?v=16" defer></script>
+<script src="assets/js/app-carte.js?v=17" defer></script>
 <script src="assets/js/app-enquetes.js?v=15" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=25" defer></script>
 <script src="assets/js/app-chrono-recherche.js?v=1" defer></script>
@@ -1290,7 +1290,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-maintenance.js?v=64" defer></script>
 <script src="assets/js/app-recherche.js?v=34" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=2" defer></script>
-<script src="assets/js/app-graphiques.js?v=27" defer></script>
+<script src="assets/js/app-graphiques.js?v=28" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=45" defer></script>
@@ -1343,7 +1343,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-book.js?v=10" defer></script>
 <script src="assets/js/heritage-layout-facts.js?v=4" defer></script>
 <script src="assets/js/heritage-qr.js?v=1" defer></script>
-<script src="assets/js/heritage-layout.js?v=65" defer></script>
+<script src="assets/js/heritage-layout.js?v=66" defer></script>
 <script src="assets/js/heritage-layout-pdfa.js?v=2" defer></script>
 <script src="assets/js/heritage-layout-livret.js?v=4" defer></script>
 <script src="assets/js/heritage-edittools.js?v=26" defer></script>
@@ -1523,7 +1523,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=7" defer></script>
-<script src="assets/js/heritage-slideshow.js?v=24" defer></script>
+<script src="assets/js/heritage-slideshow.js?v=25" defer></script>
 <script src="assets/js/heritage-keynote.js?v=28" defer></script>
 <script src="assets/js/heritage-tableur.js?v=15" defer></script>
 <script src="assets/js/heritage-tableur-cibles.js?v=5" defer></script>
