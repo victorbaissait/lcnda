@@ -36,8 +36,9 @@ jobs:
     timeout-minutes: 240
     env:
       QUOI: ${{ github.event.inputs.quoi || 'tout' }}
-      TD_RAW: ${{ runner.temp }}/td-cache
     steps:
+      - name: Dossier de travail
+        run: echo "TD_RAW=$RUNNER_TEMP/td-cache" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
