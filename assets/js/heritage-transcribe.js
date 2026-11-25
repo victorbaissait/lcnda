@@ -937,7 +937,7 @@
                 ${[...CAR_GROUPS, ...(extra.length ? [['Autres', extra]] : [])].map(([n, l]) => `<h4>${esc(i18n(n))}</h4><div class="h-tx-cgrp">${l.map(c => { const on = favs.includes(c); return `<button type="button" class="h-tx-ch${c.length > 2 ? ' is-wide' : ''}${on ? ' is-pinned' : ''}" data-tx-char="${esc(c)}" data-tx-pc${carPin ? ` aria-pressed="${on}"` : ''} title="${esc(carPin ? (on ? i18n('Retirer {c} de mes favoris', {c}) : i18n('Ajouter {c} à mes favoris', {c})) : i18n('Insérer {c}', {c}))}">${esc(c)}</button>`; }).join('')}</div>`).join('')}</div>`;
         }
         function paintChars({open = null, focus = false} = {}) {
-            const bar = $('[data-tx-chars]'); if (!bar) return; const was = !$('[data-tx-cpanel]')?.hidden;
+            const bar = $('[data-tx-chars]'); if (!bar) return; const old = $('[data-tx-cpanel]'), was = !!old && !old.hidden;
             bar.innerHTML = charsHtml(); const on = open ?? was, pn = $('[data-tx-cpanel]');
             pn.hidden = !on; $('[data-tx-charplus]').setAttribute('aria-expanded', String(on)); bar.classList.toggle('is-open', on);
             if (on && focus) pn.querySelector('[data-tx-pc]')?.focus();
@@ -2231,7 +2231,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
                 const before = {...t.data.view}, id = rcp.dataset.txRecipe, r = TV.RECIPES.find(x => x[0] === id); if (!r) return;
                 const put = v => { t.data.view = TV.viewOf(v); syncControls(); geom({keepCenter: !fitOn}); if (fitOn) applyFit(fitMode); else applyView(); applyImage(); touch(); };
                 put(TV.recipeView(before, id)); A().undoToast?.(i18n('Recette « {name} » posée sur l’image', {name: r[2]}), {undo: () => put(before), redo: () => put(TV.recipeView(before, id))}); return; }
-            if (e.target.closest('[data-tx-charplus]')) { const pn = $('[data-tx-cpanel]'); paintChars({open: pn.hidden, focus: true}); if (pn.hidden) $('[data-tx-charplus]')?.focus(); return; }
+            if (e.target.closest('[data-tx-charplus]')) { const on = !!$('[data-tx-cpanel]')?.hidden; paintChars({open: on, focus: true}); if (!on) $('[data-tx-charplus]')?.focus(); return; }
             if (e.target.closest('[data-tx-carpin]')) { carPin = !carPin; paintChars({open: true}); $('[data-tx-carpin]')?.focus(); return; }
             if (e.target.closest('[data-tx-carclose]')) { carPin = false; paintChars({open: false}); $('[data-tx-charplus]')?.focus(); return; }
             const zcb = e.target.closest('[data-tx-zcbtn]'); if (zcb) { const pop = $('[data-tx-zcpop]'); pop.hidden = !pop.hidden; zcb.setAttribute('aria-expanded', String(!pop.hidden)); if (!pop.hidden) (pop.querySelector('[aria-pressed="true"]') || pop.querySelector('button'))?.focus(); return; }
@@ -2408,7 +2408,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         offerDraft();
         if (deepRun && dlg.isConnected) setTimeout(deepAllStep, 0); // 📑 la lecture approfondie de toutes les pages continue sur cette page
         if (fixAfterSwitch && dlg.isConnected) { fixAfterSwitch = false; runFix({quiet: true}); }
-        if (ctx.goto && dlg.isConnected) { runDetect({quiet: true}); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
+        if (ctx.goto && dlg.isConnected) { showStep('find', {focus: false}); /* venu de « Ce que l'app a trouvé » : il reste ouvert */ runDetect({quiet: true}); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
         /* E1 : l'historique (instantanés de tout l'acte) ; ⌘Z dans une case de texte garde l'annulation de la case */
         const F_KEYS = ['title', 'kind', 'date_text', 'place', 'source'];
         HX = UI.editorHistory?.({get: () => ({f: Object.fromEntries(F_KEYS.map(k => [k, $(`[data-tx="${k}"]`).value])), st: t.data.status, body: area.value, zones: t.data.zones, people: t.data.people, view: t.data.view}),

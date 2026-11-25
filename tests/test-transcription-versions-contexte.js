@@ -140,7 +140,7 @@ echo json_encode(['g' => $g, 'c' => $c]);`, { TX_BODY: BODY, TX_ZONES: JSON.stri
         out.boxRed = await boxes(); out.colorStored = await p.evaluate(() => localStorage.getItem('genealogie-htr-word-color'));
 
         /* ─── 3. 🧠 Aider l'IA ─── */
-        await p.evaluate(() => document.querySelector('dialog.h-tx-dlg header [data-tx-cmd="aideia"]').click());
+        await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="aideia"]').click());
         await p.waitForSelector('dialog[open] [data-ia] [data-ia-hint]', { timeout: 10000 });
         out.hints = await p.evaluate(() => [...document.querySelectorAll('dialog[open] [data-ia-hint]')].map(i => ({ key: i.dataset.iaHint, on: i.checked, text: i.closest('label').textContent.replace(/\s+/g, ' ').trim() })));
         const shot = async n => { if (process.env.SHOTS) { fs.mkdirSync(process.env.SHOTS, { recursive: true }); await p.screenshot({ path: path.join(process.env.SHOTS, n) }); } };
@@ -251,7 +251,7 @@ echo json_encode(['g' => $g, 'c' => $c]);`, { TX_BODY: BODY, TX_ZONES: JSON.stri
         await p.evaluate(() => document.querySelector('dialog[open] [data-vers-close]').click()); await sleep(400);
         // ✎ travailler sur une version dans l'éditeur : même nombre de lignes → chaque zone reliée à sa ligne ; la bande dit sur quoi on travaille
         const zonesNow = async () => { await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(900); return (await api('act_transcription', { id: 1 })).data.zones; };
-        const statusNow = () => p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-status]').title);
+        const statusNow = () => p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-say]').title); // atelier-etapes (point 11) : les messages sont dans la barre du bas
         out.workTextBefore = await textNow(); out.workZonesBefore = await zonesNow();
         await p.click(`dialog.h-tx-dlg [data-tx-v="${wid}"]`); await p.waitForSelector('dialog.h-tx-dlg [data-tx-vprev] [data-tx-vedit]', { timeout: 10000 });
         await p.click('dialog.h-tx-dlg [data-tx-vedit]'); await sleep(900);

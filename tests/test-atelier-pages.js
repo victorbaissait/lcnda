@@ -248,7 +248,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         });
         await t('✨ Lire sur la page affichée : le texte lu va dans la page 2, sa zone est sur la page 2', async () => {
             await p.click(`${D} [data-tx-page="1"]`); await sleep(500);
-            await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="ocr"]`); await sleep(900);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="ocr"]`); await sleep(900);
             const b = (await tx()).body, seg = b.split(/\n— page \d —\n/);
             assert.equal(seg[1].trim(), 'ligne lue sur la feuille 2'); assert.doesNotMatch(seg[0] + seg[2] + seg[3], /ligne lue/);
             const z = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().data.zones.filter(q => q.src === 'ocr').map(q => ({p: q.p, t: document.querySelector('dialog.h-tx-dlg [data-tx-body]').value.slice(q.s, q.e)})));
@@ -257,14 +257,14 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             assert.equal(bb.slice(zr.s, zr.e), 'et Rose TAVERGNE, sa future épouse,', 'la zone de la page 3 suit son texte');
         });
         await t('✨ Lire sur toutes les pages : une lecture par page, chacune dans son morceau', async () => {
-            await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="all"]`);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="all"]`);
             assert.equal(await p.isVisible(`${D} [data-tx-readscope]`), true);
             await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="ocr"]`); await sleep(3500);
             const seg = (await tx()).body.split(/\n— page \d —\n/);
             [1, 2, 3, 4].forEach(n => assert.match(seg[n - 1], new RegExp(`ligne lue sur la feuille ${n}`), `page ${n}`));
             const z = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().data.zones.filter(q => q.src === 'ocr').map(q => q.p).sort());
             assert.deepEqual(z, [1, 2, 2, 3, 4]);
-            await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="page"]`); await p.click(`${D} [data-tx-cmd="readmenu"]`);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="page"]`); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click(`${D} [data-tx-cmd="readmenu"]`);
         });
         await t('enregistrer : un seul acte, ses pages, chaque zone avec sa page ; chaque page garde son morceau du texte', async () => {
             await saveTx();
@@ -313,7 +313,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         await t('un acte d’une seule page s’ouvre comme avant : pas d’onglets, rien de changé', async () => {
             await openTx({id: 1});
             const s = await tx(); assert.equal(s.bar, false); assert.equal(s.body, SOLO); assert.equal(s.rects, 1); assert.equal(s.form, '');
-            assert.equal(await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-status]').textContent.trim()), '');
+            assert.equal(await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-status]').textContent.trim() + document.querySelector('dialog.h-tx-dlg [data-tx-say]').textContent.trim()), ''); // ni état d'enregistrement ni message
             await closeAtelier();
         });
 
@@ -325,7 +325,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
                 items: [...d.querySelectorAll('[data-tf-item]')].map(i => ({main: i.querySelector('.h-tf-main')?.textContent.trim(), where: i.querySelector('.h-tf-where')?.textContent.trim() || ''})), all: d.textContent}; });
         await t('une personne citée sur deux pages : une seule carte ; chaque information dit sa page et sa ligne', async () => {
             await openTx({id: act3a});
-            await setBody(CONTRAT); await p.click(`${D} [data-tx-cmd="detect"]`);
+            await setBody(CONTRAT); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="find"]')?.click()); await p.click(`${D} [data-tx-cmd="detect"]`);
             await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000}); await sleep(600);
             const r = await trouve(), louis = r.cards.filter(c => /Louis VERNIAL/i.test(c.name || ''));
             assert.equal(louis.length, 1, 'une seule carte pour Louis VERNIAL : ' + JSON.stringify(r.cards.map(c => c.name)));
@@ -368,7 +368,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await setBody(P7); await saveTx();
             await p.click(`${D} [data-tx-page="1"]`);
             await p.waitForFunction(() => /page8\.png/.test(document.querySelector('dialog.h-tx-dlg [data-tx-img]')?.getAttribute('href') || ''), null, {timeout: 15000}); await sleep(500);
-            await setBody(P8); await p.click(`${D} [data-tx-cmd="detect"]`);
+            await setBody(P8); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="find"]')?.click()); await p.click(`${D} [data-tx-cmd="detect"]`);
             await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000}); await sleep(600);
             const r = await trouve(), louis = r.cards.filter(c => /Louis VERNIAL/i.test(c.name || ''));
             assert.equal(louis.length, 1, 'une seule carte pour Louis VERNIAL : ' + JSON.stringify(r.cards.map(c => c.name)));
@@ -411,7 +411,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             const setBody = v => p.evaluate(x => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.value = x; a.dispatchEvent(new Event('input')); }, v);
             await setBody(P7 + '\nle quinze novembe'); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(900);
             await p.click(`${D} [data-tx-page="1"]`); await p.waitForFunction(() => /page8\.png/.test(document.querySelector('dialog.h-tx-dlg [data-tx-img]')?.getAttribute('href') || ''), null, {timeout: 15000}); await sleep(700);
-            await p.click(`${D} [data-tx-step="fix"]`); await p.click(`${D} [data-tx-cmd="fix"]`);
+            await p.click(`${D} [data-tx-step="fix"]`); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="fix"]')?.click()); await p.click(`${D} [data-tx-cmd="fix"]`);
             await p.waitForSelector(`${D} [data-txfix-page="0"]`, {timeout: 15000});
             assert.match(await p.textContent(`${D} [data-txfix-page="0"]`), / : [1-9]/);
             await p.click(`${D} [data-txfix-page="0"]`);
@@ -425,12 +425,12 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         await p.evaluate(async () => { const A = window.LCNDA_APP, st = await A.api('tx_deep_status'), m = (st.models.find(x => x.recommended) || st.models[0]).tag;
             const r = await A.api('tx_deep_pull', {}, {method: 'POST', body: {model: m}}); for (let i = 0; i < 60; i++) { const j = await A.api('tx_deep_job', {id: r.result.id}); if (j.state !== 'running') break; await new Promise(x => setTimeout(x, 150)); } });
         const deepAll = async () => {
-            await p.click(`${D} [data-tx-cmd="readmenu"]`); assert.equal(await p.isVisible(`${D} [data-tx-readscope]`), true, 'le choix « Sur toutes les pages » se voit');
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click(`${D} [data-tx-cmd="readmenu"]`); assert.equal(await p.isVisible(`${D} [data-tx-readscope]`), true, 'le choix « Sur toutes les pages » se voit');
             await p.check(`${D} [data-tx-readscope] input[value="all"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`);
             await p.waitForSelector('[data-txa-readall]', {timeout: 15000});
             const o = await p.evaluate(() => ({btn: document.querySelector('[data-txa-readall]').textContent, link: document.querySelector('[data-txl-link]')?.checked, one: !!document.querySelector('[data-txa-read]')}));
             await p.click('[data-txa-readall]'); return o; };
-        const statusTx = () => p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-status]')?.textContent || '');
+        const statusTx = () => p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-say]')?.textContent || ''); // atelier-etapes (point 11) : les messages sont dans la barre du bas
         await t('🔬 toutes les pages, un texte par page : une demande par page, chaque texte dans l’acte de sa page (enregistré)', async () => {
             await p.evaluate(() => { localStorage.setItem('genealogie-transcribe-pages-mode', 'per'); window.LCNDA_EXT.mediaPages.clear(); });
             const a7 = Number(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT id FROM act_transcriptions WHERE media_id=7')->fetchColumn();`).stdout);
@@ -453,7 +453,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         await t('🔬 toutes les pages, un seul texte : chaque page lue dans son morceau, ses lignes reliées sur sa page', async () => {
             await openTx({id: act3a}); const b0 = (await tx()).body, z0 = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().data.zones.length), c0 = ollama.chats;
             await deepAll();
-            await p.waitForFunction(() => /Toutes les pages sont lues/.test(document.querySelector('dialog.h-tx-dlg [data-tx-status]')?.textContent || ''), null, {timeout: 60000});
+            await p.waitForFunction(() => /Toutes les pages sont lues/.test(document.querySelector('dialog.h-tx-dlg [data-tx-say]')?.textContent || ''), null, {timeout: 60000});
             const s = await tx(), seg = s.body.split(/\n— page \d —\n/), seg0 = b0.split(/\n— page \d —\n/);
             assert.equal(seg.length, 4);
             [1, 2, 3, 4].forEach(n => { assert.ok(seg[n - 1].startsWith(seg0[n - 1].replace(/\n+$/, '')), `page ${n} : le texte d’avant reste`); assert.match(seg[n - 1], new RegExp(`Lecture approfondie numéro ${c0 + n},\\ndeuxième ligne de la lecture ${c0 + n}\\.`), `page ${n}`); });
@@ -466,7 +466,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         await t('🪄 corrections, un seul texte : le nombre par page, un clic montre la page', async () => {
             const b0 = (await tx()).body, sg = b0.split(/\n— page \d —\n/), at = b0.indexOf(sg[1]) + sg[1].length;
             await p.evaluate(([v]) => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.value = v; a.dispatchEvent(new Event('input')); }, [b0.slice(0, at) + '\nle quinze novembe' + b0.slice(at)]);
-            await p.click(`${D} [data-tx-step="fix"]`); await p.click(`${D} [data-tx-cmd="fix"]`);
+            await p.click(`${D} [data-tx-step="fix"]`); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="fix"]')?.click()); await p.click(`${D} [data-tx-cmd="fix"]`);
             await p.waitForSelector(`${D} [data-txfix-page]`, {timeout: 15000});
             const btns = await p.$$eval(`${D} [data-txfix-page]`, b => b.map(x => [x.dataset.txfixPage, x.textContent]));
             const two = btns.find(x => x[0] === '1'); assert.ok(two && / : [1-9]/.test(two[1]), 'la page 2 a sa correction : ' + JSON.stringify(btns));
@@ -478,7 +478,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         });
         await t('« Seulement les pages pas encore lues » : toutes ont du texte → une phrase, aucune lecture lancée', async () => {
             const c0 = ollama.chats;
-            await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="empty"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`); await sleep(600);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="empty"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`); await sleep(600);
             const toastTxt = await p.evaluate(() => [...document.querySelectorAll('.toast, [role=status], .ui-toast')].map(e => e.textContent).join(' | '));
             assert.match(toastTxt, /Toutes les pages ont déjà du texte/, toastTxt);
             assert.equal(await p.evaluate(() => !!document.querySelector('[data-txa-deep]')), false, 'pas de fenêtre de lecture');
@@ -487,7 +487,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         await t('🔬 sur la page affichée (page 2) : la fenêtre dit la page, et compare avec le texte de cette page seulement', async () => {
             await p.click(`${D} [data-tx-page="1"]`); await sleep(500);
             const seg2 = (await tx()).body.split(/\n— page \d —\n/)[1].trim();
-            await p.click(`${D} [data-tx-cmd="readmenu"]`);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click(`${D} [data-tx-cmd="readmenu"]`);
             const pr = await p.$eval(`${D} [data-tx-pread]`, e => e.textContent);
             const counts = (await tx()).body.split(/\n— page \d —\n/).map(x => x.split('\n').filter(l => l.trim()).length);
             assert.match(pr, /^Lignes déjà écrites — /, pr); assert.deepEqual([...pr.matchAll(/ : (\d+)/g)].map(m => Number(m[1])), counts, 'l’état de chaque page : ' + pr);
@@ -506,7 +506,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             const b0 = (await tx()).body, sg0 = b0.split(/\n— page \d —\n/);
             const id = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().id);
             const v0 = (await p.evaluate(i => window.LCNDA_APP.api('act_transcription_versions', {act_id: i}), id)).items.length;
-            await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="page"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="page"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`);
             await p.waitForSelector('[data-txa-read]', {timeout: 15000}); await p.click('[data-txa-read]');
             await p.waitForSelector('[data-txa-keep="deep"][data-txa-mode="replace"]', {timeout: 30000});
             assert.equal(await p.isVisible('[data-txa-keep="deep"][data-txa-mode="append"]'), true, '« ＋ Ajouter à la suite » aussi');
@@ -625,7 +625,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             ollama.delay = 20; await closeAtelier();
         });
         await t('un acte d’une seule page : « Ce que l’app a trouvé » sans page (comme avant)', async () => {
-            await openTx({id: 1}); await p.click(`${D} [data-tx-cmd="detect"]`);
+            await openTx({id: 1}); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="find"]')?.click()); await p.click(`${D} [data-tx-cmd="detect"]`);
             await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000}); await sleep(400);
             const r = await trouve(); assert.ok(r.cards.length >= 2); assert.equal((r.all.match(/\(page \d/g) || []).length, 0);
             await closeAtelier();

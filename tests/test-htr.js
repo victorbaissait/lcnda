@@ -191,9 +191,10 @@ const appSnapshot = () => ['models', '.venv-htr', 'scripts', 'config'].flatMap(s
                     await shoot(p, `test-wiz-${w}${dark ? '-dark' : ''}.png`);
                     await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({ mediaId: 1, filename: 'acte.png', title: 'Acte' }));
                     // « ✨ Lire ▾ » (vague 1) : la lecture de l'écriture à la main est dans ce menu
-                    await p.waitForSelector('.h-tx-dlg [data-tx-cmd=readmenu]'); await p.waitForTimeout(800);
+                    await p.waitForSelector('.h-tx-dlg [data-tx-step="read"]'); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); // atelier-etapes : « ✨ Lire ▾ » est dans l’étape Lire
+                    await p.waitForTimeout(800);
                     if (!(await p.isVisible('.h-tx-dlg [data-tx-cmd=readmenu]'))) await p.click('.h-tx-dlg [data-tx-tab="text"], .h-tx-dlg [data-tx-mtab="text"]').catch(() => {}); // téléphone : onglet Texte
-                    await p.click('.h-tx-dlg [data-tx-cmd=readmenu]');
+                    await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click('.h-tx-dlg [data-tx-cmd=readmenu]');
                     await p.waitForSelector('.h-tx-dlg [data-tx-cmd=htr]', { state: 'visible' });
                     await p.click('.h-tx-dlg [data-tx-cmd=htr]');
                     const busy = await p.waitForSelector('[data-tx-htrrun]:not([hidden])', { timeout: 3000 }).then(() => true).catch(() => false);

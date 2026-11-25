@@ -234,7 +234,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
                 await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="detect"]').click());
                 await p.waitForFunction(() => document.querySelector('.h-txa-cta'), null, { timeout: 10000 }); await sleep(300);
                 await shot('txa-C0-carte.png');
-                await p.evaluate(() => document.querySelector('.h-txa-cta [data-tx-cmd="found"]').click());
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-pane="add"] [data-tx-cmd="found"]').click()); // atelier-etapes : le seul « ✓ Ajouter à la généalogie… », dans l'étape Ajouter
                 await p.waitForFunction(() => document.querySelector('.h-txa-pers'), null, { timeout: 30000 }); await sleep(500);
                 out.found = await p.evaluate(() => [...document.querySelectorAll('.h-txa-pers')].map(r => [r.querySelector('.h-txa-role').textContent, r.querySelector('b').textContent, r.querySelector('.h-txa-seg .is-on')?.textContent || '']));
                 out.srcInputs = await p.evaluate(() => Object.fromEntries([...document.querySelectorAll('[data-txa-src]')].map(i => [i.dataset.txaSrc, i.value])));

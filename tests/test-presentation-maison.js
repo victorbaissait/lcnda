@@ -149,7 +149,8 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         /* ─── 4. la transcription : le message du lecteur d'écriture absent ─── */
         await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({mediaId: 1, filename: 'acte.png', title: 'Acte'}));
         // « ✨ Lire ▾ » (Atelier, vague 1) : la lecture de l'écriture à la main est dans ce menu
-        await p.waitForSelector('.h-tx-dlg [data-tx-cmd=readmenu]'); await p.waitForTimeout(800); await p.click('.h-tx-dlg [data-tx-cmd=readmenu]');
+        await p.waitForSelector('.h-tx-dlg [data-tx-step="read"]'); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); // atelier-etapes : « ✨ Lire ▾ » est dans l’étape Lire
+                    await p.waitForTimeout(800); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click('.h-tx-dlg [data-tx-cmd=readmenu]');
         await p.waitForSelector('.h-tx-dlg [data-tx-cmd=htr]', {state: 'visible'}); await p.waitForTimeout(300);
         await p.click('.h-tx-dlg [data-tx-cmd=htr]');
         await p.waitForFunction(() => [...document.querySelectorAll('.toast')].some(t => /modèle|Reconnaissance|impossible/i.test(t.innerText)), null, { timeout: 15000 }).catch(() => {});

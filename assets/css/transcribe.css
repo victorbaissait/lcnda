@@ -182,7 +182,7 @@
     .h-tx-dlg .h-tx:not([data-ptab=image]) .h-tx-main>.h-tx-right{grid-column:1 / -1!important;grid-row:1!important;border-left:0}
     .h-tx-dlg .h-tx[data-ptab=image] .h-tx-main>.h-tx-left{grid-row:1!important}
     .h-tx-dlg .h-tx[data-ptab=text] .h-tx-found{display:none}
-    .h-tx-dlg .h-tx[data-ptab=people] :is(.h-tx-flow,.h-tx-chars,.h-tx-editor,.h-tx-fixbar,.h-tx-docnote){display:none!important}
+    .h-tx-dlg .h-tx[data-ptab=people] :is(.h-tx-chars,.h-tx-editor,.h-tx-fixbar,.h-tx-docnote){display:none!important} /* la frise reste : l'état de l'acte et « ✓ Ajouter à la généalogie… » (étape Ajouter) avec les personnes */
     .h-tx-dlg .h-tx[data-ptab=people] .h-tx-found{flex:1 1 auto;border-top:0}
     /* la fiche de l'acte (sorte, date, lieu, source, état) : avec les personnes ; en haut, le titre et les commandes */
     .h-tx-dlg .h-tx:not([data-ptab=people]) .h-tx-meta{display:none}
@@ -520,5 +520,10 @@
     .h-tx-dlg .h-tx[data-ptab=text] .ed-status:has(.h-tx-say:not(:empty)){display:flex!important}
     .h-tx-dlg .h-tx[data-ptab=text] .ed-status :is(.ed-status-where,.ed-status-right,.ed-status-help){display:none}
     .h-tx-prog .h-tx-stepnextl{display:none}
+    .h-tx-dlg .ed-status .ed-status-help{display:none} /* la consigne de l'étape : trop longue pour la barre du bas d'un téléphone (les messages, eux, restent) */
+    .h-tx-dlg .ed-status .h-tx-say{white-space:normal;overflow:visible}
     .h-tx-barwrap .h-tx-follow{margin-left:8px}
 }
+/* Réglages (⚙️ et Réglages) : la place de « 🧠 Aider l'IA », « Ce que l'app a trouvé » */
+.h-txb-pick{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;margin:6px 0;font-size:13px}
+.h-txb-pick select{font:inherit;padding:3px 6px;max-width:100%;min-width:0}

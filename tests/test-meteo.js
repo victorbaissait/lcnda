@@ -46,7 +46,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
     if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 }
 const dir = path.join(tmp, 'data');
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', LCNDA_METEO_DIR: fx });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', LCNDA_METEO_DIR: fx });
 fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
 const seedOut = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

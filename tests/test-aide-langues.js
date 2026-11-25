@@ -163,16 +163,16 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         await page.click('dialog[open] .modal-actions [type=submit]');
         // transcription d'actes en allemand → l'aide s'ouvre en allemand, et « 🧭 Repérer » montre les mots connus
         await page.evaluate(() => window.LCNDA_EXT.openActTranscriber({text: 'ist getauft worden Johann ehelicher Sohn des Michael Weber Wittwe'}));
-        await page.waitForSelector('[data-tx-cmd="aide"]'); await page.waitForTimeout(400); await page.evaluate(() => document.querySelectorAll('dialog.mpk-dialog[open]').forEach(d => d.close()));
-        await page.click('[data-tx-cmd="readmenu"]'); // la langue du texte est dans le menu « ✨ Lire ▾ »
+        await page.waitForSelector('dialog.h-tx-dlg [data-tx-step="fix"]'); await page.waitForSelector('dialog.mpk-dialog[open]', {timeout: 5000}).catch(() => {}); await page.waitForTimeout(200); await page.evaluate(() => document.querySelectorAll('dialog.mpk-dialog[open]').forEach(d => d.close())); // atelier-etapes : « 📖 Aide à la lecture » est dans l’étape Corriger
+        await page.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await page.click('[data-tx-cmd="readmenu"]'); // la langue du texte est dans le menu « ✨ Lire ▾ »
         await page.selectOption('[data-tx-lang]', 'deu'); await page.keyboard.press('Escape');
         await page.evaluate(() => { const a = document.querySelector('[data-tx-body]'); a.value = 'ist getauft worden Johann ehelicher Sohn des Michael Weber Wittwe'; a.dispatchEvent(new Event('input', {bubbles: true})); a.setSelectionRange(4, 11); });
-        await page.click('[data-tx-cmd="aide"]'); await page.waitForSelector('.la-dialog .la-row').catch(async e => { await shot(page, 'debug-tx'); console.log(errors, await page.evaluate(() => [...document.querySelectorAll('dialog[open]')].map(d => d.className + ' ' + d.textContent.slice(0, 200)))); throw e; });
+        await page.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="fix"]')?.click()); await page.click('[data-tx-cmd="aide"]'); await page.waitForSelector('.la-dialog .la-row').catch(async e => { await shot(page, 'debug-tx'); console.log(errors, await page.evaluate(() => [...document.querySelectorAll('dialog[open]')].map(d => d.className + ' ' + d.textContent.slice(0, 200)))); throw e; });
         ok(await page.$eval('.la-dialog [data-la-lang="de"]', b => b.classList.contains('is-active')), 'transcription en allemand : l’aide s’ouvre en allemand');
         ok(/baptisé/.test(await page.textContent('.la-dialog .la-dict')), 'transcription : « getauft » cherché');
         await shot(page, 'langues-depuis-transcription-1440');
         await page.click('.la-dialog .modal-actions [type=submit]');
-        await page.click('[data-tx-cmd="detect"]'); await page.waitForSelector('.h-tx-chip.is-word', {timeout: 5000});
+        await page.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="find"]')?.click()); await page.click('[data-tx-cmd="detect"]'); await page.waitForSelector('.h-tx-chip.is-word', {timeout: 5000});
         ok(/getauft/.test(await page.textContent('[data-tx-found]')) && /veuve/.test(await page.textContent('[data-tx-found]')), '« 🧭 Repérer » : les mots connus en allemand');
         ok(await page.evaluate(() => localStorage.getItem('genealogie-tx-lang')) === 'deu', 'la langue du texte est retenue');
         await shot(page, 'langues-transcription-mots-1440');

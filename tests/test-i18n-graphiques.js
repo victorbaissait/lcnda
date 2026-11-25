@@ -65,7 +65,7 @@ const ALLOWED_BY = {dashboard: Number(process.env.I18N_ALLOWED_DASH || 35)};
     const R = require('../scripts/i18n-remaining.js');
     const shots = process.env.I18N_SHOTS || '';
     const tmp = fs.mkdtempSync(path.join(process.env.I18N_TMP || os.tmpdir(), 'carnet-i18n-graphiques-'));
-    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1'};
+    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'};
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true});
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

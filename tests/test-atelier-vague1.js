@@ -129,12 +129,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         const readPanel = () => p.evaluate(() => { const pn = document.querySelector('dialog.h-tx-dlg [data-tx-readpanel]'), r = pn.getBoundingClientRect();
             return {open: !pn.hidden && r.width > 0, left: Math.round(r.left), right: Math.round(r.right), items: [...pn.querySelectorAll('.h-tx-readopt[data-tx-cmd]')].map(b => ({cmd: b.dataset.txCmd, title: b.querySelector('b')?.textContent || b.textContent.trim(), what: b.querySelector('small')?.textContent || '', st: b.querySelector('[data-tx-readst]')?.dataset.state || '', stText: b.querySelector('[data-tx-readst]')?.textContent || ''}))}; });
         await t('« ✨ Lire ▾ » : un seul bouton à droite, plus trois boutons de lecture qui se ressemblent', async () => {
+            await p.click('dialog.h-tx-dlg [data-tx-step="read"]'); // atelier-etapes : « ✨ Lire ▾ » est dans l’étape Lire (une étape à la fois)
             const o = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), vis = el => el.getBoundingClientRect().width > 0;
                 return {read: [...d.querySelectorAll('[data-tx-cmd="readmenu"]')].filter(vis).map(b => b.textContent.trim()), loose: [...d.querySelectorAll('[data-tx-cmd="ocr"], [data-tx-cmd="htr"], [data-tx-cmd="deep"], [data-tx-lang], [data-tx-useenh]')].filter(el => !el.closest('[data-tx-readpanel]')).length}; });
             assert.equal(o.read.length, 1); assert.match(o.read[0], /^✨ Lire ▾$/); assert.equal(o.loose, 0, 'les lectures, la langue et l’image améliorée sont dans le menu');
         });
         await t('le menu : trois lectures, chacune avec une phrase qui dit la différence et son état (installé / à installer)', async () => {
-            await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]');
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]');
             await p.waitForFunction(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-readst]')].every(x => x.dataset.state), null, {timeout: 15000});
             const r = await readPanel(); assert.ok(r.open);
             assert.deepEqual(r.items.map(x => x.cmd), ['htr', 'ocr', 'deep', 'lines']);
@@ -150,7 +151,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await p.keyboard.press('Escape'); await sleep(100); assert.equal((await readPanel()).open, false, 'Échap ferme le menu');
         });
         await t('une entrée du menu lance sa lecture et ferme le menu (Lecture approfondie → sa fenêtre)', async () => {
-            await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]'); await p.click('dialog.h-tx-dlg [data-tx-readpanel] [data-tx-cmd="deep"]');
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]'); await p.click('dialog.h-tx-dlg [data-tx-readpanel] [data-tx-cmd="deep"]');
             await p.waitForFunction(() => document.querySelector('[data-txa-deep]'), null, {timeout: 15000});
             assert.equal((await readPanel()).open, false);
             await p.evaluate(() => { const d = document.querySelector('[data-txa-deep]').closest('dialog'); d.querySelector('[data-x], .modal-head .icon-button')?.click(); }); await sleep(300);
@@ -202,7 +203,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
                 const over = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'); return {sw: document.documentElement.scrollWidth, out: [...d.querySelectorAll('.h-tx-top > *, .h-tx-tools > *, [data-tx-bar] > *, .h-tx-editor')].filter(e => { const r = e.getBoundingClientRect(); return r.width && (r.right > 391 || r.left < -1); }).map(e => e.className || e.tagName)}; });
                 assert.ok(over.sw <= 391, 'largeur ' + over.sw);
                 await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-ptab="text"]')?.click()); await sleep(200); // vague 2 : « ✨ Lire ▾ » est dans l’onglet Texte
-                await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]'); await sleep(300);
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-step="read"]')?.click()); await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]'); await sleep(300);
                 const r = await readPanel(); assert.ok(r.open && r.left >= 0 && r.right <= 390, JSON.stringify(r));
                 await shot(`v1-390-lire${th ? '-sombre' : ''}.png`); await p.keyboard.press('Escape');
                 await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-ptab="image"]')?.click()); await sleep(300); // vague 2 : sur téléphone, « Mieux voir » est dans l’onglet Image

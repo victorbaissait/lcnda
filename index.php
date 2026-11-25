@@ -1562,7 +1562,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-onglets-catalogue.js?v=4" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=13" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=5" defer></script>
-<script src="assets/js/heritage-transcribe-acte.js?v=21" defer></script>
+<script src="assets/js/heritage-transcribe-acte.js?v=22" defer></script>
 <script src="assets/js/heritage-transcribe-trouve.js?v=5" defer></script>
 <script src="assets/js/heritage-transcribe-relecture.js?v=7" defer></script>
 <script src="assets/js/heritage-transcribe-gabarit.js?v=6" defer></script>
@@ -1574,7 +1574,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-compare.js?v=3" defer></script>
 <script src="assets/js/heritage-transcribe-xml.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-contexte.js?v=6" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=89" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=90" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=8" defer></script>

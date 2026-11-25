@@ -102,7 +102,7 @@ try { ({ chromium } = require('playwright')); } catch (_) { try { ({ chromium } 
 const phpPath = findPhp([devBundledPhp()]);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-harmo-menus-'));
 const shots = process.env.HARMO_MENUS_SHOTS || '';
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 
 (async () => {
@@ -149,10 +149,12 @@ require 'lib/bootstrap.php'; $pdo = db(); echo 'ok';`], { cwd: appRoot, encoding
             });
             await t(`${tag} K13 : « 🖨 Imprimer » d’une fiche (aperçu, A5, Paysage)`, async () => {
                 await p.evaluate(async () => { await window.LCNDA_APP.openPersonById?.(1); }); await p.waitForTimeout(1200);
-                await p.evaluate(() => { window.LCNDA_UI.printPage(''); }); await p.waitForTimeout(1500);
-                assert.ok(await p.$('dialog.k-print[open] .k-print-prev iframe'), 'aperçu');
+                // l'aperçu se construit après coup (feuille de styles, pages mesurées) : on attend qu'il soit là, puis qu'il suive le papier choisi
+                await p.evaluate(() => { window.LCNDA_UI.printPage(''); });
+                assert.ok(await p.waitForSelector('dialog.k-print[open] .k-print-prev iframe', {timeout: 20000}).catch(() => null), 'aperçu');
                 await p.click('dialog.k-print [data-k-paper="A5"]'); await p.click('dialog.k-print [data-k-or="landscape"]'); await p.waitForTimeout(400);
                 assert.equal(await p.evaluate(() => document.querySelector('dialog.k-print [data-k-or="landscape"]').classList.contains('is-active')), true);
+                await p.waitForFunction(() => /@page\{size:A5 landscape\}/.test(document.querySelector('dialog.k-print .k-print-prev iframe')?.srcdoc || ''), null, {timeout: 20000}).catch(() => {});
                 const doc = await p.evaluate(() => document.querySelector('dialog.k-print .k-print-prev iframe').srcdoc);
                 assert.match(doc, /@page\{size:A5 landscape\}/); assert.doesNotMatch(doc, /<script/i, 'pas de script dans l’aperçu');
                 if (shots) await p.locator('dialog.k-print').screenshot({ path: path.join(shots, `k13-imprimer-${tag}.png`) });
