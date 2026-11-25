@@ -1897,7 +1897,7 @@
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
             const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
             const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, htrFrom: htrText ? 'htr' : 'mine', pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), onReading: (txt, model, info) => { lastHints = Number(info?.hints) || 0; keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}); }, context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, htrFrom: htrText ? 'htr' : 'mine', pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), expectedLines: () => knownLines(b), onReading: (txt, model, info) => { lastHints = Number(info?.hints) || 0; keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}); }, context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
                 existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
                 onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
@@ -1911,6 +1911,9 @@
         /* ─── 📑 la lecture approfondie de toutes les pages : une demande à Ollama par page, l'une après l'autre ; le texte de chaque page
          * dans son morceau (un seul texte) ou dans l'acte de sa page (un texte par page, l'Atelier passe d'un acte à l'autre) ;
          * ▤ les lignes reliées à l'image page par page si la case est cochée ; 🪄 les corrections proposées comme pour une page ─── */
+        /** 🔁 les lignes déjà repérées dans cette zone (lecture rapide) : la lecture approfondie est bornée d'après elles (0 : inconnu) */
+        function knownLines(b) { if (htrCache?.file !== t.filename) return 0;
+            return htrCache.lines.filter(l => !b || !Array.isArray(l.bbox) || ((l.bbox[1] + l.bbox[3]) / 2 >= b.y && (l.bbox[1] + l.bbox[3]) / 2 <= b.y + b.h)).length; }
         function startDeepAll(model) {
             if (deepRun || PAGES.length < 2) return;
             const left = pagesToRead(); if (!left.length) return toast(i18n('Toutes les pages ont déjà du texte.'));
@@ -1931,23 +1934,28 @@
             const i = R.left[0]; if (i == null) return deepAllEnd(false);
             if (i !== pageIx) { await goPage(i); if (pageForm === 'per') { if (dlg.isConnected) deepAllEnd(true); return; } } // un texte par page : l'Atelier de l'autre acte continue
             R.busy = true; paintDeepAll();
-            let txt = '', err = '', b = null;
+            let txt = '', err = '', b = null, warn = '';
             try {
                 b = await pageArea({ask: false}); if (b === false) b = null;
                 const img = await areaB64(b, {max: 2200, mode: ext.txActe?.imageMode?.() || 'auto'}); // 🖼 l'image choisie dans la fenêtre
-                if (!R.stop) { const r = await post('tx_deep_read', {model: R.model, language: R.lang, image_b64: img, ...(R.ctx ? {context: R.ctx} : {})}); R.job = r.result.id; } // 🧠 « Aider l'IA »
-                while (!R.stop && R.job) { await new Promise(res => setTimeout(res, 900)); if (R.stop) break;
-                    const j = await api('tx_deep_job', {id: R.job}); if (j.state === 'running') continue;
-                    if (j.state === 'done') txt = String(j.text || ''); else if (j.state !== 'cancelled') err = j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.');
+                const lines = knownLines(b); // 🔁 bornée (lignes attendues, temps maximum choisi dans la fenêtre)
+                if (!R.stop) { const r = await post('tx_deep_read', {model: R.model, language: R.lang, image_b64: img, time_limit: ext.txActe?.timeLimit?.() || 0, ...(lines ? {lines} : {}), ...(R.ctx ? {context: R.ctx} : {})}); R.job = r.result.id; } // 🧠 « Aider l'IA »
+                // ■ Arrêter : la lecture en cours s'arrête et rend le texte déjà lu (gardé pour cette page) ; on l'attend quelques secondes
+                for (let waited = 0; R.job;) { await new Promise(res => setTimeout(res, 900));
+                    const j = await api('tx_deep_job', {id: R.job}); if (j.state === 'running') { if (R.stop && ++waited > 12) break; continue; }
+                    if (j.state === 'done' || (j.state === 'cancelled' && String(j.text || '').trim())) { txt = String(j.text || ''); warn = ext.txActe?.warnText?.(j.state === 'cancelled' ? {...j, warn: j.warn || 'stopped'} : j) || ''; }
+                    else if (j.state !== 'cancelled') err = j.error ? i18n(j.error, j.error_vars && typeof j.error_vars === 'object' ? j.error_vars : undefined) : i18n('La lecture approfondie n’a pas abouti.');
                     break; }
             } catch (e) { err = e?.message || String(e); }
             R.busy = false; R.job = 0;
-            if (R.stop || !dlg.isConnected) return deepAllEnd(true);
+            if (!dlg.isConnected) return deepAllEnd(true);
             if (err) { toast(err, 'error'); return deepAllEnd(true); }
+            if (warn) { toast(`${pageName(PAGES[pageIx], pageIx)} · ${warn}`, 'error'); R.warns = [...(R.warns || []), `${pageName(PAGES[pageIx], pageIx)} · ${warn}`]; } // 🔁 ⏱ ■ dit, page par page
             if (txt.trim()) keepReading(txt, 'deep', R.model, {img: ext.txActe?.imageMode?.() || 'auto', hints: R.ctx?.hints?.length || 0, part: 'page'}); // ⚖️
             if (txt.trim()) { if (R.ctx?.hints?.length) t.data.hinted = Math.max(Number(t.data.hinted) || 0, R.ctx.hints.length); const put = appendRead(txt.trim() + '\n'); before = area.value; t.body = area.value; touch(); paintMirror();
                 if (LG()?.linkOn()) await linkLines({s: put.s, e: put.e, box: b || null, src: 'deep'}); // ▤ une zone par ligne, sur l'image de cette page
                 if (fixOn()) runFix({quiet: true}); } // 🪄
+            if (R.stop) return deepAllEnd(true); // ■ le texte déjà lu de cette page est gardé ci-dessus
             R.left.shift(); R.done++;
             deepAllStep();
         }
@@ -1955,7 +1963,7 @@
             const R = deepRun; deepRun = null; paintDeepAll(); if (!R || !dlg.isConnected) return;
             await runDetect({quiet: true});
             if (pageForm === 'per' && dirty) await save(); // un texte par page : l'acte de la dernière page aussi (les autres l'ont été en changeant de page)
-            status(stopped ? i18n('La lecture a été arrêtée.') : i18n('Toutes les pages sont lues (à relire)'));
+            status(R.warns?.length ? R.warns[R.warns.length - 1] : stopped ? i18n('La lecture a été arrêtée.') : i18n('Toutes les pages sont lues (à relire)'));
             if (!stopped) toast(i18n('Toutes les pages sont lues (à relire)'));
         }
         /* ─── ▤ Relier les lignes du texte à l'image (calculs : app-lignes-alignement.js) : après la lecture approfondie, ou à la demande ─── */

@@ -148,6 +148,7 @@ function tx_deep_status(): array
     if (!$out['models']) { foreach (TX_DEEP_MODELS as $m) { $out['models'][] = $m + ['present' => false]; } }
     // le modèle conseillé pour CET ordinateur : le plus grand des modèles essayés qui tient dans sa mémoire
     $ram = tx_deep_ram_gb(); $out['ram_gb'] = $ram; $out['others'] = $out['others'] ?? [];
+    $out['server'] = IA_SRV_KINDS[ia_srv_config()['kind']]['label'] ?? 'Ollama'; // « ⚙️ Avancé : autre modèle (…) » : le serveur choisi
     if ($ram > 0) {
         $best = ''; foreach ($out['models'] as $m) { if ($m['tried'] && $m['ram_gb'] <= $ram && ($best === '' || $m['ram_gb'] > (tx_deep_model($best)['ram_gb']))) { $best = $m['tag']; } }
         if ($best === '') { $best = 'qwen3-vl:4b-instruct'; }
@@ -213,6 +214,121 @@ function tx_deep_base_prompt(string $l): string
         . "- Ne commente pas : réponds seulement par la transcription.";
 }
 
+/* ─── 🔁 Une lecture bornée : un modèle « vision » tombe parfois dans une boucle (« [illisible] » ou la même ligne sans fin, jusqu'au
+ * plafond de jetons, de longues minutes) : on borne ce qu'il peut écrire, on le pénalise quand il se répète, on surveille le flux
+ * (tx_deep_loop) et on arrête au temps maximum (tx_deep_time_limit). Le texte déjà lu est toujours gardé. Essai : tests/test-lecture-approfondie-boucle.js ─── */
+const TX_DEEP_TOKENS_PER_LINE = 40;    // une ligne d'acte ≈ 20 à 35 jetons ; ×1,5 de marge en plus
+const TX_DEEP_MAX_TOKENS = 4096;       // jamais plus (une page dense de 70 lignes y tient)
+const TX_DEEP_REPEAT = 3;              // la même ligne (ou un bloc de lignes, ou une ligne « [illisible] » seule) 3 fois de suite : boucle
+
+/** les lignes attendues (les zones / lignes connues de la page, sinon d'après la hauteur de l'image) et le plafond de jetons */
+function tx_deep_budget(int $h, int $lines = 0): array
+{
+    $est = $lines > 0 ? max(3, min(200, $lines)) : (int) max(12, min(90, (int) ceil($h / 35))); // ≥ 35 px par ligne : une borne haute
+    $tokens = (int) min(TX_DEEP_MAX_TOKENS, max(384, (int) ceil($est * TX_DEEP_TOKENS_PER_LINE * 1.5) + 256));
+    return ['lines' => $est, 'num_predict' => $tokens];
+}
+
+/** ⏱ le temps maximum d'une page (secondes) : choisi (10 s – 1 h), sinon LCNDA_TX_DEEP_LIMIT, sinon selon la taille du modèle (6 min pour un gros) */
+function tx_deep_time_limit(string $tag, $want = null): int
+{
+    $w = is_numeric($want) ? (int) $want : 0;
+    if ($w <= 0) { $w = (int) getenv('LCNDA_TX_DEEP_LIMIT'); }
+    if ($w > 0) { return max(10, min(3600, $w)); }
+    $b = 0.0;
+    foreach (TX_DEEP_MODELS as $m) { if ($m['tag'] === $tag && preg_match('/(\d+(?:\.\d+)?)\s*B\b/i', $m['label'], $x)) { $b = (float) $x[1]; } }
+    if ($b <= 0 && preg_match('/(?:^|[:\-_])(\d+(?:\.\d+)?)b(?:\b|[-_])/i', $tag, $x)) { $b = (float) $x[1]; }
+    return $b > 40 ? 600 : ($b > 12 ? 360 : ($b > 4 ? 300 : ($b > 0 ? 180 : 360)));
+}
+
+/** des secondes en minutes lisibles (« 6 », « 1,5 ») */
+function tx_deep_minutes(int $sec): string { $m = round($sec / 60, 1); return str_replace('.', ',', (string) ($m == (int) $m ? (int) $m : $m)); }
+
+/** une ligne ramenée à l'essentiel (casse, ponctuation, espaces) pour la comparer à ses voisines */
+function tx_deep_norm_line(string $l): string
+{
+    return trim((string) preg_replace('/[\s.,;:!?«»"\'’()\-–—_*]+/u', ' ', mb_strtolower($l)));
+}
+
+/** une ligne sans rien de lu : « [illisible] », « [?] », « … », ponctuation */
+function tx_deep_junk_line(string $l): bool
+{
+    $t = trim($l);
+    if ($t === '' || stripos($t, 'illisible') === false && stripos($t, 'illegible') === false && !str_contains($t, '[?]') && !str_contains($t, '…') && !str_contains($t, '...')) { return false; }
+    return trim((string) preg_replace('/\[\s*(?:illisible|illegible|\?)\s*\]|illisible|illegible|\.\.\.|…|[\s.,;:!?«»"\'’()\-–—_*\[\]]+/iu', '', $t)) === '';
+}
+
+/** les lignes de la fin qui ne disent rien (vides, « [illisible] » seul, la même que la précédente) retirées */
+function tx_deep_trim_tail(array $lines): array
+{
+    while ($lines) {
+        $n = count($lines); $l = $lines[$n - 1];
+        if (trim($l) === '' || tx_deep_junk_line($l) || ($n > 1 && tx_deep_norm_line($l) === tx_deep_norm_line($lines[$n - 2]))) { array_pop($lines); continue; }
+        // la fin d'une ligne : « [illisible] [illisible] … » retirés
+        $c = rtrim((string) preg_replace('/(?:\s*(?:\[\s*(?:illisible|illegible)\s*\]|\.\.\.|…))+\s*$/iu', '', $l));
+        if ($c !== rtrim($l)) { $lines[$n - 1] = $c; continue; }
+        break;
+    }
+    return $lines;
+}
+
+/**
+ * 🔁 Le modèle s'est-il mis à se répéter ? $text : ce qui est écrit jusqu'ici ; $expected : les lignes attendues (0 : inconnu) ;
+ * $final : le texte est complet (sinon la dernière ligne, pas finie, n'est regardée que pour une répétition dans la ligne).
+ * Rend null, ou ['text' => le texte gardé (avant la boucle, fin nettoyée), 'line' => la ligne où la lecture s'arrête, 'why' => loop | overflow].
+ */
+function tx_deep_loop(string $text, int $expected = 0, bool $final = false): ?array
+{
+    $all = explode("\n", str_replace("\r", '', $text));
+    $partial = $final ? null : array_pop($all);
+    $ix = []; $norm = []; $junk = [];
+    foreach ($all as $i => $l) { if (trim($l) === '') { continue; } $ix[] = $i; $norm[] = tx_deep_norm_line($l); $junk[] = tx_deep_junk_line($l); }
+    $cut = static function (int $keep) use ($all): array { // les lignes 0..$keep-1 gardées, la fin nettoyée
+        $k = tx_deep_trim_tail(array_slice($all, 0, $keep));
+        $line = count(array_filter($k, static fn($x) => trim($x) !== '')) + 1;
+        return ['text' => rtrim(implode("\n", $k)), 'line' => $line];
+    };
+    $n = count($norm);
+    for ($i = 0; $i < $n; $i++) {
+        // un bloc de 1 à 4 lignes répété TX_DEEP_REPEAT fois de suite (la même ligne, ou « A B A B A B »)
+        for ($p = 1; $p <= 4 && $i + $p * TX_DEEP_REPEAT <= $n; $p++) {
+            $ok = true;
+            for ($r = 1; $r < TX_DEEP_REPEAT && $ok; $r++) { for ($q = 0; $q < $p; $q++) { if ($norm[$i + $q] === '' || $norm[$i + $q] !== $norm[$i + $r * $p + $q]) { $ok = false; break; } } }
+            if ($ok) { $blockJunk = !in_array(false, array_slice($junk, $i, $p), true);
+                return $cut($blockJunk ? $ix[$i] : $ix[$i + $p - 1] + 1) + ['why' => 'loop']; } // une seule fois le bloc lu, jamais « [illisible] »
+        }
+        // des lignes « [illisible] » seules, même un peu différentes, TX_DEEP_REPEAT + 1 fois de suite
+        if ($junk[$i] && $i + TX_DEEP_REPEAT < $n && !in_array(false, array_slice($junk, $i, TX_DEEP_REPEAT + 1), true)) {
+            return $cut($ix[$i]) + ['why' => 'loop'];
+        }
+    }
+    // dans une ligne : le même morceau (2 à 60 caractères) six fois de suite, ou « [illisible] » huit fois
+    $lines = $all; if ($partial !== null) { $lines[] = $partial; }
+    foreach ($lines as $i => $l) {
+        if (mb_strlen($l) < 60) { continue; }
+        $tail = mb_substr($l, -900);
+        $at = -1;
+        if (preg_match('/(?:\[\s*(?:illisible|illegible)\s*\][\s.,;]*){8,}/iu', $tail, $m, PREG_OFFSET_CAPTURE)) { $at = $m[0][1]; }
+        elseif (preg_match('/(\S.{1,59}?)(?:\s*\1){5,}/us', $tail, $m, PREG_OFFSET_CAPTURE) && preg_match('/\pL/u', $m[1][0])) { $at = $m[0][1] + strlen($m[1][0]); } // des lettres (pas « ------ »)
+        if ($at < 0) { continue; }
+        $head = substr($tail, 0, $at); $pre = mb_strlen($l) > 900 ? mb_substr($l, 0, mb_strlen($l) - 900) : '';
+        $all2 = array_slice($lines, 0, $i); $keep = rtrim($pre . $head);
+        if ($keep !== '') { $all2[] = $keep; }
+        $k = tx_deep_trim_tail($all2);
+        return ['text' => rtrim(implode("\n", $k)), 'line' => count(array_filter($k, static fn($x) => trim($x) !== '')) + ($keep !== '' && $k && end($k) === $keep ? 0 : 1), 'why' => 'loop'];
+    }
+    // bien plus de lignes que la page n'en a : on s'arrête là
+    if ($expected > 0 && $n > (int) ceil($expected * 1.5) + 10) { return $cut(count($all)) + ['why' => 'overflow']; }
+    return null;
+}
+
+/** le texte gardé quand la lecture est arrêtée (bouton ■ Arrêter, temps maximum) : sans la ligne pas finie si elle ne dit rien, fin nettoyée */
+function tx_deep_keep_partial(string $text): array
+{
+    $k = tx_deep_trim_tail(explode("\n", str_replace("\r", '', trim((string) preg_replace('/^```[a-z]*\s*/', '', trim($text))))));
+    return ['text' => rtrim(implode("\n", $k)), 'line' => count(array_filter($k, static fn($x) => trim($x) !== '')) + 1];
+}
+
 function tx_deep_new_job(array $job): array
 {
     $running = 0;
@@ -266,7 +382,10 @@ function tx_deep_read_start(array $data): array
     }
     [$id, $dir] = tx_deep_new_job([]);
     file_put_contents($dir . '/image.b64', base64_encode($bin)); unset($bin);
-    file_put_contents($dir . '/job.json', json_encode(['kind' => 'read', 'model' => $m['tag'], 'base' => tx_deep_base(), 'prompt' => tx_deep_prompt($lang, is_array($data['context'] ?? null) ? $data['context'] : []), 'created' => time()], JSON_UNESCAPED_UNICODE));
+    // 🔁 bornée : les lignes attendues (zones de la page envoyées par l'Atelier, sinon d'après la hauteur), les jetons, le temps maximum
+    $budget = tx_deep_budget((int) $info[1], is_numeric($data['lines'] ?? null) ? (int) $data['lines'] : 0);
+    file_put_contents($dir . '/job.json', json_encode(['kind' => 'read', 'model' => $m['tag'], 'base' => tx_deep_base(), 'prompt' => tx_deep_prompt($lang, is_array($data['context'] ?? null) ? $data['context'] : []), 'created' => time(),
+        'lines' => $budget['lines'], 'num_predict' => $budget['num_predict'], 'limit' => tx_deep_time_limit($m['tag'], $data['time_limit'] ?? null)], JSON_UNESCAPED_UNICODE));
     file_put_contents($dir . '/result.json', json_encode(['state' => 'running', 'updated' => time(), 'text' => '']));
     htr_spawn_php([APP_ROOT . '/scripts/tx_deep_job.php', $dir, APP_ROOT], $dir . '/run.log');
     return ['id' => $id, 'model' => $m['tag']];
@@ -301,18 +420,31 @@ function tx_deep_run(string $dir): void
         // Qwen3-VL « réfléchit » d'abord (message.thinking) : sans « think: false », toute la place peut y passer et la réponse
         // reste vide. On le demande ; un Ollama trop ancien qui ne connaît pas « think » est relancé sans.
         $text = ''; $thinking = ''; $last = 0; $err = ''; $r = ['ok' => false]; $info = '';
+        $isRead = ($job['kind'] ?? '') !== 'find';
+        // 🔁 lecture bornée : jetons au plus (selon les lignes attendues), pénalité de répétition, surveillance du flux, temps maximum
+        $expected = (int) ($job['lines'] ?? 0); $limit = $isRead ? max(10, (int) ($job['limit'] ?? 0) ?: tx_deep_time_limit($tag)) : 1800;
+        $t0 = microtime(true); $loop = null; $timedOut = false; $seen = 0;
         foreach ([true, false] as $noThink) {
-            $text = ''; $thinking = ''; $err = '';
-            $body = ['model' => $tag, 'stream' => true, 'keep_alive' => '5m', 'options' => ['temperature' => 0, 'num_ctx' => 16384, 'num_predict' => 4096],
+            $text = ''; $thinking = ''; $err = ''; $seen = 0;
+            $opt = ['temperature' => 0, 'num_ctx' => 16384, 'num_predict' => $isRead ? (int) ($job['num_predict'] ?? 0 ?: TX_DEEP_MAX_TOKENS) : 4096];
+            if ($isRead) { $opt += ['repeat_penalty' => 1.12, 'repeat_last_n' => 128]; } // pas pour le JSON de « Repérer » (ses clés se répètent)
+            $body = ['model' => $tag, 'stream' => true, 'keep_alive' => '5m', 'options' => $opt,
                 'messages' => [['role' => 'user', 'content' => (string) ($job['prompt'] ?? '')] + ($img !== '' ? ['images' => [$img]] : [])]];
             if ($noThink) { $body['think'] = false; }
             if (($job['kind'] ?? '') === 'find') { $body['format'] = 'json'; $body['options']['num_predict'] = 3072; } // 🔍 Repérer avec l'IA : du texte seulement, réponse en JSON
-            $r = tx_deep_http('POST', '/api/chat', $body, 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, &$info, $put, $cancelled) {
+            $left = max(5, (int) ceil($limit - (microtime(true) - $t0)));
+            $r = tx_deep_http('POST', '/api/chat', $body, $isRead ? $left + 15 : 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, &$info, &$loop, &$timedOut, &$seen, $put, $cancelled, $isRead, $expected, $limit, $t0) {
                 if (!empty($j['error'])) { $err = mb_substr((string) $j['error'], 0, 300); return false; }
                 if (!empty($j['done'])) { $info = trim(implode(' · ', array_filter([isset($j['done_reason']) ? 'fin : ' . mb_substr((string) $j['done_reason'], 0, 20) : '', isset($j['prompt_eval_count']) ? 'image et consigne : ' . (int) $j['prompt_eval_count'] : '', isset($j['eval_count']) ? 'écrit : ' . (int) $j['eval_count'] : '']))); }
-                $text .= (string) ($j['message']['content'] ?? '');
+                $piece = (string) ($j['message']['content'] ?? '');
+                $text .= $piece;
                 $thinking .= (string) ($j['message']['thinking'] ?? '');
                 if (mb_strlen($text) > 60000 || mb_strlen($thinking) > 60000) { return false; }
+                if ($isRead) {
+                    // une ligne de plus (ou une longue ligne qui ne finit pas) : le modèle se répète-t-il ?
+                    if ($piece !== '' && (str_contains($piece, "\n") || strlen($text) - $seen > 300)) { $seen = strlen($text); if (($loop = tx_deep_loop($text, $expected)) !== null) { return false; } }
+                    if (microtime(true) - $t0 > $limit) { $timedOut = true; return false; }
+                }
                 if (microtime(true) - $last > .7) { $last = microtime(true); $put(['state' => 'running', 'text' => $text]); }
                 return !$cancelled();
             }, $base);
@@ -320,7 +452,18 @@ function tx_deep_run(string $dir): void
             break;
         }
         @unlink($dir . '/image.b64');
-        if ($cancelled()) { $put(['state' => 'cancelled']); return; }
+        if ($isRead && $loop === null && !$cancelled() && $err === '') { $loop = tx_deep_loop($text, $expected, true); } // la fin aussi (un flux sans « \n » final)
+        if ($isRead && !$timedOut && $loop === null && !$cancelled() && microtime(true) - $t0 >= $limit) { $timedOut = true; } // rien reçu à temps : cURL a coupé
+        if ($cancelled()) { $k = $isRead ? tx_deep_keep_partial($text) : ['text' => '', 'line' => 1]; $put(['state' => 'cancelled', 'text' => $k['text'], 'line' => $k['line'], 'warn' => $k['text'] !== '' ? 'stopped' : '']); return; } // ■ Arrêter : le texte déjà lu est gardé
+        if ($loop !== null) { // 🔁 la boucle coupée : le texte d'avant, et le mot qui le dit
+            if (trim($loop['text']) === '') { $put(['state' => 'error', 'error' => 'L’IA s’est mise à répéter sans rien lire. Recadre une zone plus petite (quelques lignes) ou essaie un autre modèle, puis relance.', 'detail' => $info, 'warn' => $loop['why'], 'line' => 1]); return; }
+            $put(['state' => 'done', 'text' => $loop['text'], 'warn' => $loop['why'], 'line' => $loop['line']]); return;
+        }
+        if ($timedOut) { // ⏱ le temps maximum : le texte déjà lu est gardé
+            $k = tx_deep_keep_partial($text);
+            if ($k['text'] === '') { $put(['state' => 'error', 'error' => 'Temps maximum atteint ({m} min) sans rien lire. Recadre une zone plus petite, essaie un modèle plus léger, ou allonge le temps maximum.', 'error_vars' => ['m' => tx_deep_minutes($limit)], 'warn' => 'timeout', 'line' => 1, 'limit' => $limit]); return; }
+            $put(['state' => 'done', 'text' => $k['text'], 'warn' => 'timeout', 'line' => $k['line'], 'limit' => $limit]); return;
+        }
         if ($err !== '' || (!$r['ok'] && trim($text) === '')) { $put(['state' => 'error', 'error' => $err !== '' ? $err : 'La lecture approfondie n’a pas abouti.', 'detail' => trim($info . ($r['ok'] ? '' : ' · HTTP ' . (int) ($r['code'] ?? 0)), ' ·')]); return; }
         if (trim($text) === '') { // jamais un texte vide présenté comme une lecture
             $put(['state' => 'error', 'error' => trim($thinking) !== ''
@@ -349,8 +492,15 @@ function tx_deep_job(string $id): array
         $log = trim((string) @file_get_contents($dir . '/run.log'));
         $state = 'error'; $r['error'] = 'Le programme de lecture n’a pas démarré.'; $r['detail'] = mb_substr(preg_replace('/\s+/', ' ', $log) ?? '', -300);
     }
+    // ⏱ filet : le programme de lecture n'a pas fini longtemps après son temps maximum (il a été tué…) : on le dit, au lieu d'une barre sans fin
+    $lim = (int) ($job['limit'] ?? 0);
+    if ($state === 'running' && $lim > 0 && ($job['kind'] ?? '') === 'read' && time() - (int) ($job['created'] ?? time()) > $lim + 90) {
+        @file_put_contents($dir . '/cancel', '1');
+        $state = 'error'; $r['error'] = 'Temps maximum atteint ({m} min) : la lecture est arrêtée.'; $r['error_vars'] = ['m' => tx_deep_minutes($lim)]; $r['warn'] = 'timeout';
+    }
     return ['id' => $id, 'kind' => (string) ($job['kind'] ?? ''), 'model' => (string) ($job['model'] ?? ''), 'state' => $state, 'elapsed' => max(0, time() - (int) ($job['created'] ?? time())),
-        'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => (string) ($r['error'] ?? ''), 'detail' => (string) ($r['detail'] ?? '')]
+        'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => (string) ($r['error'] ?? ''), 'detail' => (string) ($r['detail'] ?? ''),
+        'limit' => $lim, 'warn' => (string) ($r['warn'] ?? ''), 'line' => (int) ($r['line'] ?? 0), 'error_vars' => is_array($r['error_vars'] ?? null) ? $r['error_vars'] : new stdClass()]
         + (($job['kind'] ?? '') === 'find' && is_array($r['found'] ?? null) ? ['found' => $r['found']] : []);
 }
 

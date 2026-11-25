@@ -285,6 +285,8 @@ function ia_srv_openai_chat_body(array $body, string $model): array
     $opt = is_array($body['options'] ?? null) ? $body['options'] : [];
     if (isset($opt['temperature'])) { $o['temperature'] = (float) $opt['temperature']; }
     if (isset($opt['num_predict'])) { $o['max_tokens'] = (int) $opt['num_predict']; }
+    // 🔁 la pénalité de répétition d'Ollama (1 = aucune) → frequency_penalty (0 = aucune ; 1,12 → 0,3) : contre les boucles « [illisible] »
+    if (isset($opt['repeat_penalty']) && (float) $opt['repeat_penalty'] > 1) { $o['frequency_penalty'] = round(min(1.0, ((float) $opt['repeat_penalty'] - 1) * 2.5), 2); }
     if (!empty($body['tools']) && is_array($body['tools'])) { $o['tools'] = $body['tools']; }
     if ($o['stream']) { $o['stream_options'] = ['include_usage' => true]; }
     // « think », « keep_alive », « num_ctx », « format » : propres à Ollama, pas envoyés (la consigne demande déjà le JSON)

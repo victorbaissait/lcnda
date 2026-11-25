@@ -247,7 +247,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'villages'; A.state.hVillage = '87161'; A.setModule('listes'); });
             await p.waitForSelector('.h-village [data-cc-host]', {timeout: 20000});
             await sleep(800);
-            assert.strictEqual(await p.$('[data-cc-part="toponymie"]'), null);
+            assert.strictEqual(await p.locator('.h-village [data-cc-part="toponymie"]').count(), 0); // dans la fiche du village (« Tout sur » garde ses résultats cachés dans .ts-parking)
             await p.evaluate(() => localStorage.removeItem('genealogie-commune-culture'));
         });
         await t('pas d’erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });

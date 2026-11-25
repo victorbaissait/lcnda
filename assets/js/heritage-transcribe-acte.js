@@ -64,6 +64,21 @@
      * Toujours une copie temporaire (canvas) : le fichier de l'acte n'est jamais modifié ni réenregistré. */
     const IMG_KEY = 'genealogie-htr-image-mode', IMG_MODES = ['auto', 'mine', 'orig'];
     const imageMode = () => { try { const v = localStorage.getItem(IMG_KEY); return IMG_MODES.includes(v) ? v : 'auto'; } catch (_) { return 'auto'; } };
+    /* ⏱ le temps maximum d'une page (secondes ; 0 : selon le modèle, 6 min pour un gros) ; au-delà, la lecture s'arrête et garde le texte lu */
+    const LIMIT_KEY = 'genealogie-tx-deep-limit', LIMITS = [0, 180, 360, 600, 1200];
+    const timeLimit = () => { try { const v = Number(localStorage.getItem(LIMIT_KEY)); return LIMITS.includes(v) ? v : 0; } catch (_) { return 0; } };
+    const minutes = s => String(Math.round(s / 6) / 10).replace('.', ',');
+    /** 🔁 ce qui a arrêté la lecture (lib/transcription_actes.php : j.warn, j.line, j.limit), en une phrase ; '' si elle a fini normalement */
+    function warnText(j) {
+        const n = Math.max(1, Number(j?.line) || 1);
+        switch (j?.warn) {
+            case 'loop': return i18n('⚠ L’IA s’est mise à répéter : lecture arrêtée à la ligne {n}, le reste est à lire à la main', {n});
+            case 'overflow': return i18n('⚠ L’IA a écrit bien plus de lignes que la page n’en a : lecture arrêtée à la ligne {n}, le reste est à lire à la main', {n});
+            case 'timeout': return i18n('⏱ Temps maximum atteint ({m} min) : lecture arrêtée à la ligne {n}, le reste est à lire à la main', {m: minutes(Number(j.limit) || 360), n});
+            case 'stopped': return i18n('■ Lecture arrêtée : le texte déjà lu est gardé (jusqu’à la ligne {n})', {n: Math.max(1, n - 1)});
+            default: return '';
+        }
+    }
     const IMG_USED = {auto: 'Image envoyée : améliorée automatiquement', mine: 'Image envoyée : avec ton réglage « Mieux voir »', orig: 'Image envoyée : l’image d’origine'};
     /** amélioration douce pour un modèle d'IA (pas de noir et blanc franc, qui le gêne) : petite image agrandie (grand côté ≈ target,
      *  ×2,5 au plus), niveaux étirés d'après l'histogramme (0,5 % – 99,5 %, pente ×3 au plus), un peu de netteté. Rend un nouveau canvas. */
@@ -98,15 +113,15 @@
      * o.onCompare(zone) : ajoute ce qu'il faut sous les deux textes (corrections proposées, case « ▤ Relier les lignes à l'image »).
      */
     async function openDeep(o = {}) {
-        let st = null, job = null, timer = 0, model = '', both = false, stepLabel = '';
+        let st = null, job = null, timer = 0, model = '', both = false, stepLabel = '', stopReq = false;
         try { model = localStorage.getItem(DEEP_KEY) || ''; } catch (_) {}
         const dlg = ext.openDialog({eyebrow: i18n('LECTURE APPROFONDIE'), title: `🔬 ${i18n('Lecture approfondie')}`, wide: true, body: '<div data-txa-deep></div>',
             onOpen: d => { d.addEventListener('close', () => { clearTimeout(timer); if (job && job.state === 'running') post('tx_deep_cancel', {id: job.id}).catch(() => {}); }); }});
         const box = dlg.querySelector('[data-txa-deep]');
         const info = () => `<div class="h-txa-grid">
             <span class="k">${esc(i18n('Ce qu’il faut'))}</span><span>${esc(i18n('Ollama (gratuit, open source) et un modèle vision ouvert, au choix :'))}</span>
-            <span class="k">${esc(i18n('Modèle', {ctx: 'ia'}))}</span><span class="h-txa-models">${modelsHtml()}</span>
-            ${imgHtml()}${ctxHtml()}
+            <span class="k h-txa-k-model">${esc(i18n('Modèle', {ctx: 'ia'}))}</span><span class="h-txa-models" data-txa-models role="radiogroup" aria-label="${esc(i18n('Modèle', {ctx: 'ia'}))}">${modelsHtml()}</span>
+            ${imgHtml()}${limitHtml()}${ctxHtml()}
             <span class="k">${esc(i18n('Mémoire'))}</span><span>${esc(st?.ram_gb ? i18n('cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois', {n: st.ram_gb}) : i18n('8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois'))}</span>
             <span class="k">${esc(i18n('Vitesse'))}</span><span>${esc(i18n('≈ 20 à 60 s par page sur un ordinateur récent'))}</span>
             <span class="k">${esc(i18n('Confidentialité'))}</span><span>${esc(i18n('rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur'))}</span></div>`;
@@ -118,19 +133,25 @@
                 ${m.pros || m.cons ? `<span class="h-txa-pc">${m.pros ? `<span>👍 ${esc(i18n(m.pros))}</span>` : ''}${m.cons ? `<span>👎 ${esc(i18n(m.cons))}</span>` : ''}${m.fits === false ? `<span>⚠️ ${esc(i18n('trop gros pour cet ordinateur'))}</span>` : ''}</span>` : ''}</label>`; };
         const modelsHtml = () => { const all = st?.models || [], main = all.filter(m => m.tried || m.recommended || m.tag === model), test = all.filter(m => !main.includes(m)), oth = st?.others || [];
             return main.map(modelRow).join('') + (test.length ? `<details class="h-txa-more"${test.some(m => m.tag === model) ? ' open' : ''}><summary>🧪 ${esc(i18n('Autres modèles à essayer ({n})', {n: test.length}))}</summary><p class="ui-hint">${esc(i18n('Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier.'))}</p>${test.map(modelRow).join('')}</details>` : '')
-                + `<details class="h-txa-more"${oth.some(m => m.tag === model) ? ' open' : ''}><summary>⚙️ ${esc(i18n('Avancé : autre modèle (Ollama)'))}</summary><p class="ui-hint">${esc(i18n('Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte.'))}</p>${oth.length ? oth.map(m => `<label class="h-txa-model"><input type="radio" name="txa_model" value="${esc(m.tag)}" ${m.tag === model ? 'checked' : ''} ${m.vision ? '' : 'disabled'}> <b>${esc(m.label)}</b> <small class="muted">${esc(m.vision ? i18n('lit les images') : i18n('ne lit pas les images'))}</small></label>`).join('') : `<p class="muted">${esc(i18n('Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle.'))}</p>`}</details>`; };
+                + `<details class="h-txa-more"${oth.some(m => m.tag === model) ? ' open' : ''}><summary>⚙️ ${esc(i18n('Avancé : autre modèle ({s})', {s: srvLabel()}))}</summary><p class="ui-hint">${esc(i18n('Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte.'))}</p>${oth.length ? oth.map(m => `<label class="h-txa-model"><input type="radio" name="txa_model" value="${esc(m.tag)}" ${m.tag === model ? 'checked' : ''} ${m.vision ? '' : 'disabled'}> <b>${esc(m.label)}</b> <small class="muted">${esc(m.vision ? i18n('lit les images') : i18n('ne lit pas les images'))}</small></label>`).join('') : `<p class="muted">${esc(i18n('Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle.'))}</p>`}</details>`; };
         /** 🖼 sous le choix du modèle : quelle image envoyer (retenu dans IMG_KEY), et « Essayer les deux et comparer » (une seule page) */
         const imgHtml = () => { if (o.setupOnly || !(o.getImage || o.all)) return ''; const cur = imageMode();
             const opts = [['auto', '✨', 'Améliorer l’image automatiquement', 'Contraste ajusté, un peu de netteté, petite image agrandie (pas de noir et blanc forcé).'], ['mine', '🎚️', 'Utiliser mon réglage « Mieux voir »', 'Les réglages de « 🎚️ Mieux voir » de cette page.'], ['orig', '🖼', 'Image d’origine', 'L’image telle quelle.']];
-            return `<span class="k">${esc(i18n('Image'))}</span><span class="h-txa-models h-txa-imgmode" data-txa-imgmode>${opts.map(([v, ic, l, h]) => `<label class="h-txa-model"><input type="radio" name="txa_img" value="${v}" ${v === cur ? 'checked' : ''}> ${ic} <b>${esc(i18n(l))}</b>${v === 'auto' ? ` <span class="ui-badge is-green">${esc(i18n('conseillé'))}</span>` : ''} <small class="muted">${esc(i18n(h))}</small></label>`).join('')}
+            // une rangée à part (libellé « Image » en haut, trait au-dessus) : jamais mêlée à la liste des modèles
+            return `<span class="k h-txa-sep h-txa-k-img" data-txa-imgk>🖼 ${esc(i18n('Image'))}</span><span class="h-txa-sep h-txa-imgmode" data-txa-imgmode role="radiogroup" aria-label="${esc(i18n('Image'))}">${opts.map(([v, ic, l, h]) => `<label class="h-txa-imgopt"><input type="radio" name="txa_img" value="${v}" ${v === cur ? 'checked' : ''}> ${ic} <b>${esc(i18n(l))}</b>${v === 'auto' ? ` <span class="ui-badge is-green">${esc(i18n('conseillé'))}</span>` : ''} <small class="muted">${esc(i18n(h))}</small></label>`).join('')}
                 ${o.getImage && !o.all ? `<label class="checkbox-line"><input type="checkbox" data-txa-both ${both ? 'checked' : ''}> ${esc(i18n('Essayer les deux et comparer'))} <small class="muted">${esc(i18n('lit l’image d’origine et l’image améliorée, puis montre les deux textes côte à côte (deux fois plus long)'))}</small></label>` : ''}
                 <small class="muted">${esc(i18n('Une copie améliorée est envoyée au modèle : l’image de l’acte n’est jamais modifiée.'))}</small></span>`; };
+        /** ⏱ le temps maximum d'une page : au-delà, la lecture s'arrête et garde le texte déjà lu */
+        const limitHtml = () => { if (o.setupOnly || !(o.getImage || o.all)) return ''; const cur = timeLimit();
+            return `<span class="k h-txa-sep">⏱ ${esc(i18n('Temps maximum'))}</span><span class="h-txa-sep"><select data-txa-limit aria-label="${esc(i18n('Temps maximum par page'))}">${LIMITS.map(v => `<option value="${v}"${v === cur ? ' selected' : ''}>${esc(v ? i18n('{m} min par page', {m: minutes(v)}) : i18n('Selon le modèle (6 min pour un gros)'))}</option>`).join('')}</select>
+                <small class="muted">${esc(i18n('Au-delà, la lecture s’arrête et garde le texte déjà lu.'))}</small></span>`; };
         /** 🧠 « Aider l'IA » (heritage-transcribe-contexte.js) : combien d'indices partent avec l'image, et le bouton pour les choisir */
         const ctxHtml = () => { if (o.setupOnly || !o.context) return ''; const n = o.ctxCount?.() || 0;
             return `<span class="k">🧠 ${esc(i18n('Aider l’IA'))}</span><span class="h-txa-ctx" data-txa-ctxline>${esc(n ? i18n(n > 1 ? '{n} indices cochés : l’IA s’en sert pour les mots douteux, sans rien inventer' : '{n} indice coché : l’IA s’en sert pour les mots douteux, sans rien inventer', {n}) : i18n('sans indices'))} ${o.onCtx ? `<button type="button" class="link-button" data-txa-ctx>${esc(i18n('Choisir…'))}</button>` : ''}</span>`; };
         const pick = () => { const r = box.querySelector('[name="txa_model"]:checked'); if (r) { model = r.value; try { localStorage.setItem(DEEP_KEY, model); } catch (_) {} } return model; };
         /** 🖥 le serveur d'IA choisi dans Réglages → « 🤖 IA » (lib/ia_serveur.php) : s'il n'est pas Ollama, les messages le nomment */
         let srv = null; const srvP = api('ia_srv_get').then(r => { srv = r; }, () => {});
+        const srvLabel = () => i18n(st?.server || srv?.label || 'Ollama'); // le serveur choisi (tx_deep_status le dit à chaque vérification)
         function srvName(root) { // ext.txActe.srvName aussi (le menu « ✨ Lire ▾ » de l'Atelier)
             if (!srv || !srv.kind || srv.kind === 'ollama' || !srv.label) return;
             const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (/Ollama/.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/Ollama/g, i18n(srv.label));
@@ -150,7 +171,7 @@
             // 19 (audit) : prêt → le bouton « 🔬 Lire » en haut, « Modèle et image » replié dans « ⚙️ Réglages ▸ » ; sinon les réglages d'abord (il faut installer)
             const readBtn = ready && !o.setupOnly && o.all ? `<button type="button" class="button" data-txa-readall>🔬 ${esc(i18n('Lire toutes les pages avec ce modèle ({n})', {n: o.all.n}))}</button>` : ready && !o.setupOnly ? `<button type="button" class="button" data-txa-read>🔬 ${esc(i18n('Lire l’acte avec ce modèle'))}</button>` : '';
             const fold = ready && !o.setupOnly, cur = (st.models || []).find(m => m.tag === model)?.label || model;
-            box.innerHTML = `${head}${fold ? `<div class="h-txa-row h-txa-deepbtns h-txa-readtop">${readBtn}<small class="muted">${esc(i18n('Modèle : {m}', {m: cur}))}</small></div><details class="h-txa-settings"><summary>⚙️ ${esc(i18n('Réglages (modèle et image)'))}</summary>${info()}</details>` : info()}<div class="h-txa-prog" data-txa-prog hidden><div class="h-txa-bar"><i></i></div><small data-txa-progtxt></small></div><div class="h-txa-out" data-txa-out></div>
+            box.innerHTML = `${head}${fold ? `<div class="h-txa-row h-txa-deepbtns h-txa-readtop">${readBtn}<small class="muted">${esc(i18n('Modèle : {m}', {m: cur}))}</small></div><details class="h-txa-settings"><summary>⚙️ ${esc(i18n('Réglages (modèle et image)'))}</summary>${info()}</details>` : info()}<div class="h-txa-prog" data-txa-prog hidden><div class="h-txa-bar"><i></i></div><div class="h-txa-progrow"><small data-txa-progtxt></small><button type="button" class="button small secondary" data-txa-stop hidden title="${esc(i18n('Arrêter la lecture et garder le texte déjà lu'))}">■ ${esc(i18n('Arrêter'))}</button></div></div><div class="h-txa-out" data-txa-out></div>
                 <div class="h-txa-row h-txa-deepbtns">${!st.installed ? `<a class="button" href="${esc(st.download_url)}" target="_blank" rel="noopener noreferrer">↗ ${esc(i18n('Télécharger Ollama (ollama.com)'))}</a>` : ''}
                 ${st.running && !ready ? `<button type="button" class="button" data-txa-pull>⤓ ${esc(i18n('Installer la lecture approfondie'))}</button>` : ''}
                 ${fold ? '' : readBtn}
@@ -161,19 +182,22 @@
             if (ready && o.all) { const out = box.querySelector('[data-txa-out]'); out.innerHTML = '<div class="h-txa-cmp2 is-one" hidden></div>'; o.onCompare?.(out); }
             srvName(box);
         }
-        const prog = (on, pct, txt) => { const p = box.querySelector('[data-txa-prog]'); if (!p) return; p.hidden = !on; p.querySelector('i').style.width = `${Math.max(0, Math.min(100, pct))}%`; p.querySelector('[data-txa-progtxt]').textContent = txt || ''; };
+        const prog = (on, pct, txt, stoppable = false) => { const p = box.querySelector('[data-txa-prog]'); if (!p) return; p.hidden = !on; p.querySelector('i').style.width = `${Math.max(0, Math.min(100, pct))}%`; p.querySelector('[data-txa-progtxt]').textContent = txt || '';
+            const sb = p.querySelector('[data-txa-stop]'); if (sb) { sb.hidden = !(on && stoppable); if (!on) sb.disabled = false; } };
         async function poll(onDone, onFail) {
             let j; try { j = await api('tx_deep_job', {id: job.id}); } catch (e) { job = null; onFail?.(); prog(false); box.querySelectorAll('[data-txa-read], [data-txa-pull]').forEach(x => { x.disabled = false; }); const out = box.querySelector('[data-txa-out]'); if (out) out.innerHTML = notice('error', `${esc(i18n('Impossible de suivre la lecture : {x}', {x: e.message || '?'}))}`); return toast(e.message, 'error'); }
             job = {...job, ...j};
             if (j.state === 'running') {
                 if (j.kind === 'pull') prog(true, j.total ? j.completed / j.total * 100 : 3, j.total ? i18n('Téléchargement du modèle… {done} sur {total}', {done: gb(j.completed), total: gb(j.total)}) : i18n('Téléchargement du modèle…'));
-                else { prog(true, Math.min(95, j.elapsed * 2), (o.pageLabel ? o.pageLabel + ' · ' : '') + (stepLabel ? stepLabel + ' · ' : '') + i18n('Lecture approfondie… {n} s', {n: j.elapsed})); const out = box.querySelector('[data-txa-out]'); if (out && j.text) out.innerHTML = `<pre class="h-txa-live">${esc(j.text)}</pre>`; }
+                else { // ⏱ la barre suit le temps maximum (plus « presque fini » pendant des minutes) ; ■ Arrêter garde le texte déjà lu
+                    prog(true, j.limit ? Math.min(98, j.elapsed / j.limit * 100) : Math.min(95, j.elapsed * 2), (o.pageLabel ? o.pageLabel + ' · ' : '') + (stepLabel ? stepLabel + ' · ' : '') + i18n('Lecture approfondie… {n} s', {n: j.elapsed}) + (j.limit ? ' · ' + i18n('au plus {m} min', {m: minutes(j.limit)}) : ''), true); const out = box.querySelector('[data-txa-out]'); if (out && j.text) out.innerHTML = `<pre class="h-txa-live">${esc(j.text)}</pre>`; }
                 timer = setTimeout(() => poll(onDone, onFail), 900); return;
             }
             prog(false);
             box.querySelectorAll('[data-txa-read], [data-txa-pull]').forEach(x => { x.disabled = false; }); // jamais un bouton grisé pour rien
+            if (j.state === 'cancelled' && String(j.text || '').trim()) return onDone({...j, warn: j.warn || 'stopped'}); // ■ Arrêter : le texte déjà lu est gardé
             if (j.state === 'error' || j.state === 'cancelled') { // le message reste dans la fenêtre (une bulle passe trop vite)
-                const msg = j.state === 'cancelled' ? i18n('La lecture a été arrêtée.') : (j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.'));
+                const msg = j.state === 'cancelled' ? i18n('La lecture a été arrêtée.') : (j.error ? i18n(j.error, j.error_vars && typeof j.error_vars === 'object' ? j.error_vars : undefined) : i18n('La lecture approfondie n’a pas abouti.'));
                 const out = box.querySelector('[data-txa-out]'); if (out) out.innerHTML = notice('error', `${esc(msg)}<br><small>${esc(i18n('Modèle : {m} · {n} s', {m: j.model || '?', n: String(j.elapsed ?? '?')}))}${j.detail ? ` · ${esc(j.detail)}` : ''}</small>`);
                 onFail?.(); return toast(msg, 'error');
             }
@@ -193,7 +217,7 @@
                 : `<button type="button" class="button small secondary" data-txa-redup>↶ ${esc(i18n('Annuler'))}</button>`;
         }
         /** deepText : le texte lu, used : l'image envoyée (auto / mine / orig) ; alt : {mode, text} la lecture de l'image d'origine (« Essayer les deux ») */
-        function compare(deepText, used = 'orig', alt = null) {
+        function compare(deepText, used = 'orig', alt = null, warns = []) {
             const out = box.querySelector('[data-txa-out]'); const two = !alt && !!String(o.htrText || '').trim();
             const usedTag = m => `<small class="muted h-txa-imgused" data-txa-imgused="${esc(m)}">🖼 ${esc(i18n(IMG_USED[m] || IMG_USED.orig))}</small>`;
             const keepBtns = (key, many) => many && o.existing ? `<span class="h-txa-keep2"><button type="button" class="button small" data-txa-keep="${key}" data-txa-mode="replace">⇄ ${esc(i18n('Remplacer le texte'))}</button><button type="button" class="button small secondary" data-txa-keep="${key}" data-txa-mode="append">＋ ${esc(i18n('Ajouter à la suite'))}</button></span><small class="muted">${esc(i18n('Le texte d’avant reste dans 🕘 Versions.'))}</small>` : `<button type="button" class="button small${key === 'htr' ? ' secondary' : ''}" data-txa-keep="${key}">✓ ${esc(many ? i18n('Garder celle-ci') : i18n('Mettre dans le texte'))}</button>`;
@@ -201,6 +225,8 @@
                 ${two ? `<div><b>✍ ${esc(o.htrFrom === 'mine' ? i18n('Ton texte actuel') : i18n('Écriture à la main'))}</b><textarea data-txa-t="htr" spellcheck="false">${esc(o.htrText)}</textarea><button type="button" class="button small secondary" data-txa-keep="htr">${esc(o.htrFrom === 'mine' ? `✓ ${i18n('Garder mon texte')}` : `✓ ${i18n('Garder celle-ci')}`)}</button></div>` : ''}
                 ${alt ? `<div><b>🔬 ${esc(i18n('Image d’origine'))}</b><textarea data-txa-t="deep0" spellcheck="false">${esc(alt.text)}</textarea>${usedTag(alt.mode)}${keepBtns('deep0', true)}</div>` : ''}
                 <div><b>🔬 ${esc(alt ? i18n(used === 'mine' ? 'Avec ton réglage « Mieux voir »' : 'Image améliorée') : i18n('Lecture approfondie'))}</b><textarea data-txa-t="deep" spellcheck="false">${esc(deepText)}</textarea>${usedTag(used)}${keepBtns('deep', two || !!alt)}</div></div>`;
+            // 🔁 ⏱ ■ la lecture arrêtée avant la fin : le dire au-dessus des textes (le texte, lui, ne garde que ce qui a été lu)
+            if (warns.length) out.querySelector('h4').insertAdjacentHTML('afterend', `<div class="h-txa-warn" data-txa-warn>${warns.map(w => notice('warn', esc(w))).join('')}</div>`);
             if (o.onCompareAll) { out.insertAdjacentHTML('beforeend', `<p class="h-txa-all"><button type="button" class="button small secondary" data-txa-all>⚖️ ${esc(i18n('Comparer toutes les lectures, mot par mot'))}</button> <small class="muted">${esc(i18n('Chaque lecture (chaque modèle) est gardée : prends le meilleur de chacune.'))}</small></p>`); out.querySelector('[data-txa-all]').addEventListener('click', () => o.onCompareAll()); }
             paintRepeats(); out.querySelector('[data-txa-t="deep"]')?.addEventListener('input', () => paintRepeats());
             if (two || alt) wordDiff(out, two ? 'htr' : 'deep0', two ? (o.htrFrom === 'mine' ? '✍' : '✍') : '🔬');
@@ -221,6 +247,7 @@
         box.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;
             if (b.matches('[data-txa-recheck]')) return refresh();
+            if (b.matches('[data-txa-stop]')) { stopReq = true; b.disabled = true; if (job && job.state === 'running') post('tx_deep_cancel', {id: job.id}).catch(() => {}); return; } // ■ le texte déjà lu est gardé
             if (b.matches('[data-txa-ctx]')) { dlg.close(); return o.onCtx?.(); }
             if (b.matches('[data-txa-pull]')) {
                 try { const r = await post('tx_deep_pull', {model: pick()}); job = {id: r.result.id, state: 'running'}; b.disabled = true; prog(true, 2, i18n('Téléchargement du modèle…')); poll(() => { toast(i18n('La lecture approfondie est installée.')); refresh(); }); } catch (err) { toast(err.message, 'error'); }
@@ -229,24 +256,27 @@
             if (b.matches('[data-txa-readall]')) { const m = pick(); dlg.close(); o.all.run(m); return; }
             if (b.matches('[data-txa-read]')) { // 🖼 une lecture (l'image choisie), ou deux (« Essayer les deux » : l'origine puis l'améliorée)
                 const mode = imageMode(), runs = both ? ['orig', mode === 'orig' ? 'auto' : mode] : [mode], got = [];
-                b.disabled = true;
+                b.disabled = true; stopReq = false;
+                const lines = Number(o.expectedLines?.()) || 0; // 🔁 les lignes de la page, si l'Atelier les connaît (sinon : d'après la hauteur de l'image)
                 for (const [i, m] of runs.entries()) {
                     let img; try { img = await o.getImage(m); } catch (err) { b.disabled = false; stepLabel = ''; return toast(err.message, 'error'); }
                     stepLabel = runs.length > 1 ? i18n('Image {i} sur {n}', {i: i + 1, n: runs.length}) : '';
                     let ctxv = null; try { ctxv = o.context ? await o.context() : null; } catch (_) { ctxv = null; } // 🧠 ce que l'on sait déjà de l'acte (rien si « Lire sans »)
-                    const j = await new Promise(res => { post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img, ...(ctxv ? {context: ctxv} : {})}).then(r => { job = {id: r.result.id, state: 'running'}; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(res, () => res(null)); }, err => { toast(err.message, 'error'); res(null); }); });
+                    const j = await new Promise(res => { post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img, time_limit: timeLimit(), ...(lines ? {lines} : {}), ...(ctxv ? {context: ctxv} : {})}).then(r => { job = {id: r.result.id, state: 'running'}; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(res, () => res(null)); }, err => { toast(err.message, 'error'); res(null); }); });
                     if (!j || !box.isConnected) { b.disabled = false; stepLabel = ''; return; }
-                    got.push({mode: m, text: String(j.text || '')}); o.onReading?.(j.text, pick(), {img: m, hints: ctxv?.hints?.length || 0});
+                    got.push({mode: m, text: String(j.text || ''), warn: warnText(j)}); o.onReading?.(j.text, pick(), {img: m, hints: ctxv?.hints?.length || 0});
+                    if (stopReq) break; // ■ Arrêter : pas d'autre image
                 }
                 b.disabled = false; stepLabel = ''; const last = got[got.length - 1];
-                compare(last.text, last.mode, got.length > 1 ? got[0] : null);
+                compare(last.text, last.mode, got.length > 1 ? got[0] : null, got.map(g => g.warn ? (got.length > 1 ? `${i18n(IMG_USED[g.mode] || IMG_USED.orig)} — ${g.warn}` : g.warn) : '').filter(Boolean));
                 return;
             }
             if (b.matches('[data-txa-dedup]')) { const ta = box.querySelector('[data-txa-t="deep"]'); dedupBefore = ta.value; ta.value = dedup(ta.value); paintRepeats(); return; }
             if (b.matches('[data-txa-redup]')) { const ta = box.querySelector('[data-txa-t="deep"]'); if (dedupBefore != null) ta.value = dedupBefore; dedupBefore = null; paintRepeats(); return; }
             if (b.dataset.txaKeep) { const v = box.querySelector(`[data-txa-t="${b.dataset.txaKeep}"]`)?.value || ''; if (!v.trim()) return; o.onKeep?.(v, b.dataset.txaKeep, b.dataset.txaMode || 'append'); dlg.close(); }
         });
-        box.addEventListener('change', e => { if (e.target.name === 'txa_model') { pick(); refresh().then(() => { const d = box.querySelector('details.h-txa-settings'); if (d) d.open = true; }); }
+        box.addEventListener('change', e => { if (e.target.matches('[data-txa-limit]')) { try { localStorage.setItem(LIMIT_KEY, e.target.value); } catch (_) {} }
+            if (e.target.name === 'txa_model') { pick(); refresh().then(() => { const d = box.querySelector('details.h-txa-settings'); if (d) d.open = true; }); }
             if (e.target.name === 'txa_img') { try { localStorage.setItem(IMG_KEY, e.target.value); } catch (_) {} }
             if (e.target.matches('[data-txa-both]')) both = e.target.checked; });
         refresh();
@@ -454,5 +484,5 @@
         const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (/Ollama/.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/Ollama/g, i18n(srv.label));
         root.querySelectorAll('[title*="Ollama"]').forEach(el => { el.title = el.title.replace(/Ollama/g, i18n(srv.label)); });
     }
-    ext.txActe = {detectCrop, askCrop, lowNoticeHtml, openDeep, openFound, autoEnhance, imageMode, srvRename};
+    ext.txActe = {detectCrop, askCrop, lowNoticeHtml, openDeep, openFound, autoEnhance, imageMode, srvRename, timeLimit, warnText};
 })();

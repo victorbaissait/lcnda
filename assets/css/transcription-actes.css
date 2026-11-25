@@ -112,6 +112,21 @@
 .h-txa-pc{display:flex;flex-wrap:wrap;gap:2px 12px;width:100%;font-size:12px;color:var(--muted,#5b6170);padding-left:22px}
 .h-txa-more{margin-top:6px}
 .h-txa-more>summary{cursor:pointer;font-weight:600;padding:4px 0}
+/* 🖼 la rangée « Image » (et ⏱ « Temps maximum ») : à part de celle du modèle — libellé en haut, trait au-dessus, ses propres choix */
+.h-txa-grid{align-items:start}
+.h-txa-grid>.k{padding-top:4px;line-height:1.35}
+.h-txa-grid>.h-txa-sep{border-top:1px solid var(--line,#d9dce3);padding-top:10px;margin-top:4px}
+.h-txa-grid>.k.h-txa-sep{padding-top:14px}
+.h-txa-imgmode{display:grid;gap:4px;padding:6px 10px 8px!important;border:1px solid var(--line,#d9dce3);border-radius:8px;background:var(--soft-bg,#f6f7f9)}
+.h-txa-grid>.h-txa-imgmode.h-txa-sep{margin-top:10px;border-top:1px solid var(--line,#d9dce3)}
+.h-txa-grid>.k.h-txa-k-img{margin-top:10px}
+.h-txa-imgopt{display:flex;flex-wrap:wrap;gap:4px;align-items:baseline;cursor:pointer;padding:3px 0}
+.h-txa-models{min-width:0}
+.h-txa-models>.h-txa-model:first-child{padding-top:0}
+.h-txa-progrow{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between}
+.h-txa-progrow [hidden]{display:none}
+.h-txa-warn{margin:4px 0 8px}
+:root[data-theme="dark"] .h-txa-imgmode{background:#24272c}
 /* ═════ 🕘 la bande « Versions », 🔦 les mots sur l'image, 🧠 Aider l'IA, ❓ pourquoi l'acte (heritage-transcribe-contexte.js ; maquette transcription-versions-contexte.html) ═════ */
 .h-tx-vers{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:6px 8px 0;padding:6px 8px;border:1.5px dashed var(--line,#c9ced8);background:var(--soft-bg,#f1f2f4)}
 .h-tx-vers[hidden],.h-tx-vprev[hidden]{display:none}
