@@ -300,6 +300,7 @@
 
     /* ─────────── 🗞️ ce jour-là ─────────── */
     const memo = new Map();
+    window.addEventListener('lcnda:data-changed', () => memo.clear()); // une fiche modifiée (date, lieu, lien…) : ses blocs sont redemandés, pas repris de la mémoire
     function ask(action, q) { const k = action + JSON.stringify(q); if (!memo.has(k)) memo.set(k, api(action, q).catch(e => { memo.delete(k); return {ok: false, message: e.message}; })); return memo.get(k); }
     const EV_LEAD = {BIRT: 'Le jour de sa naissance ({d})', CHR: 'Le jour de son baptême ({d})', BAPM: 'Le jour de son baptême ({d})', MARR: 'Le jour de son mariage ({d})', DEAT: 'Le jour de son décès ({d})', BURI: 'Le jour de son inhumation ({d})'};
     const itemText = it => `${it.t}${it.subs?.length ? ` ${it.subs.slice(0, 3).join(' ; ')}` : ''}`.replace(/\s+/g, ' ').trim();

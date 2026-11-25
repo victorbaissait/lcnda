@@ -150,12 +150,12 @@ async function settle(p, max = 15000) {
         await new Promise(res => {
             let last = performance.now();
             const mo = new MutationObserver(() => { last = performance.now(); });
-            mo.observe(document.body, {subtree: true, childList: true, attributes: true, characterData: true});
+            mo.observe(document.body, {subtree: true, childList: true, characterData: true});
             const tick = () => {
                 const busy = (window.__glueFetches || 0) > 0 || document.querySelector('.is-loading, [aria-busy="true"], .loading-state');
-                if ((!busy && performance.now() - last > 300) || performance.now() - t0 > max) { mo.disconnect(); res(); } else requestAnimationFrame(tick);
+                if ((!busy && performance.now() - last > 300) || performance.now() - t0 > max) { mo.disconnect(); res(); } else setTimeout(tick, 50);
             };
-            requestAnimationFrame(tick);
+            setTimeout(tick, 50);
         });
     }, max);
 }

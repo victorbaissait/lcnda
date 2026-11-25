@@ -48,6 +48,7 @@
     const row = (icon, html, src, extra = '') => `<div class="hist-row mr-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const srcTxt = list => (list || []).map(s => link(s.url, s.mention || s.label) + (s.licence ? ` (${esc(s.licence)})` : '')).join(' · ');
     const memo = new Map();
+    window.addEventListener('lcnda:data-changed', () => memo.clear()); // une fiche modifiée (date, lieu, lien…) : ses blocs sont redemandés, pas repris de la mémoire
     function ask(action, q) { const k = action + JSON.stringify(q); if (!memo.has(k)) memo.set(k, api(action, q).catch(e => { memo.delete(k); return {ok: false, message: e.message}; })); return memo.get(k); }
     const offLine = what => `<p class="cplus-off mr-off">📴 ${esc(T('Pas de connexion à Internet : {what} s’afficheront quand tu seras connecté.', {what}))}</p>`;
     const he = P => (P.gender === 'female' ? T('Elle') : P.gender === 'male' ? T('Il') : esc(P.first || T('Cette personne')));

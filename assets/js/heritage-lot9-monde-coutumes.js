@@ -84,6 +84,7 @@
     const api = (a, q) => A().api(a, q);
     const post = (a, b) => A().api(a, {}, {method: 'POST', body: b}).then(r => r?.result || r);
     const memo = new Map();
+    W.addEventListener?.('lcnda:data-changed', () => memo.clear()); // une fiche modifiée (date, lieu, lien…) : ses blocs sont redemandés, pas repris de la mémoire
     function ask(action, q) { const k = action + JSON.stringify(q); if (!memo.has(k)) memo.set(k, api(action, q).catch(e => { memo.delete(k); return {ok: false, message: e.message}; })); return memo.get(k); }
 
     /* ═════════════ la vie d'une personne (depuis l9b_person) ═════════════ */
