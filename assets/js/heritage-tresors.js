@@ -18,6 +18,9 @@
 
     /* ═════════ Les aides communes ═════════ */
     let treeP = null, treeAt = 0;
+    // une écriture (date de naissance changée, lien ajouté, ↶ Annuler…) : l'arbre gardé en mémoire est relu au prochain usage
+    // (sinon « 🌌 Le ciel de sa naissance » de la fiche montrait encore l'ancienne date pendant 20 secondes)
+    window.addEventListener('lcnda:data-changed', () => { treeP = null; });
     const T = {
         esc, MONTHS, i18n, lang: LNG,
         /** 🌐 une phrase entière par sexe : g(p, 'Il est né.', 'Elle est née.', vars) — les deux textes sont des clés */

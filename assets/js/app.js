@@ -2763,7 +2763,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             searchInput.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();runSearch();}});
         }
         $('#person-phonetic').addEventListener('change',event=>{state.peoplePhonetic=event.target.checked;persistUiState();loadPeople();});
-        $('#person-kin-show').addEventListener('change',event=>{try{localStorage.setItem(KIN_SHOW_KEY,event.target.checked?'1':'0');}catch(_){}const list=$('#person-list');if(event.target.checked)paDecorateKin(list);else{$$('.pa-kin',list).forEach(x=>x.remove());$$('[data-pa-kin]',list).forEach(x=>delete x.dataset.paKin);}});// 🧭 éteint : on oublie aussi le repère « déjà décoré », sinon le rallumer ne remettait rien
+        $('#person-kin-show').addEventListener('change',event=>{try{localStorage.setItem(KIN_SHOW_KEY,event.target.checked?'1':'0');}catch(_){}[$('#person-list'),$('#workspace')].filter(Boolean).forEach(root=>{if(event.target.checked)paDecorateKin(root);else{$$('.pa-kin',root).forEach(x=>x.remove());$$('[data-pa-kin]',root).forEach(x=>delete x.dataset.paKin);}});});// 🧭 éteint : on oublie aussi le repère « déjà décoré », sinon le rallumer ne remettait rien ; la colonne ET la fiche ouverte (parents, enfants)
         $('#new-person').addEventListener('click', openNewPersonDialog);
         $('#pa-quick-family')?.addEventListener('click',()=>openQuickFamilyDialog());
     }
@@ -9132,6 +9132,8 @@ ${backupSectionHtml()}
     const paRootId=()=>Number(state.bootstrap?.startPersonId)||0;
     const paKinCache=new Map();let paKinRoot=0,paKinQueue=null;
     function paKinCacheFor(){const r=paRootId();if(r!==paKinRoot){paKinCache.clear();paKinRoot=r;}return paKinCache;}
+    // une écriture (lien ajouté ou retiré, fiche fusionnée, ↶ Annuler…) peut changer les liens : on les redemande au prochain affichage
+    window.addEventListener('lcnda:data-changed',()=>paKinCache.clear());
     async function paKinFetch(ids){
         const cache=paKinCacheFor(),want=[...new Set(ids.map(Number).filter(id=>id&&!cache.has(id)))];
         for(let i=0;i<want.length;i+=200){const part=want.slice(i,i+200);try{const r=await api('people_links',{ids:part.join(','),root:paRootId()});const links=r.links||{};part.forEach(id=>cache.set(id,links[id]||''));}catch(_){part.forEach(id=>cache.set(id,''));}}

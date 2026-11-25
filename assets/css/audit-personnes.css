@@ -13,7 +13,10 @@
 .pa-people-bar .ui-listbar-sort select { flex: 1 1 auto; min-width: 0; width: 100%; }
 .pa-people-toggles { display: flex; flex-wrap: wrap; gap: 4px 14px; }
 .person-list-item { position: relative; }
-.person-list-item .pa-row-more { margin-left: auto; align-self: center; padding: 0 6px; border-radius: 6px; line-height: 1.6; opacity: 0; color: var(--muted, #667); cursor: pointer; flex: none; }
+/* ⋯ dans le coin bas-droit, posé par-dessus : il ne prend plus une ligne à lui (la case reste basse sans « 🧭 Ton lien ») */
+.person-list-item .pa-row-more { position: absolute; right: 6px; bottom: 5px; padding: 0 6px; border-radius: 6px; line-height: 1.4; opacity: 0; color: var(--muted, #667); cursor: pointer; }
+.person-list-item.is-active .pa-row-more { color: inherit; }
+.person-list-item .person-list-copy { display: block; padding-right: 1.6em; }
 .person-list-item:hover .pa-row-more, .person-list-item:focus-visible .pa-row-more, .person-list-item.is-active .pa-row-more { opacity: 1; }
 .person-list-item .pa-row-more:hover { background: var(--hover, rgba(0, 0, 0, .06)); }
 @media (hover: none) { .person-list-item .pa-row-more { opacity: 1; } }
