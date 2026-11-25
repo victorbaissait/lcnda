@@ -99,6 +99,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/lot10-terre-gens.css?v=1">
     <link rel="stylesheet" href="assets/css/commune-reseau.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-objets-traces.css?v=1">
+    <link rel="stylesheet" href="assets/css/telech-d.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-c.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-b.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
@@ -1712,6 +1713,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lot10-voir-village.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-a.js?v=1" defer></script>
 <script src="assets/js/heritage-lot10-objets-traces.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-d.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-d-traduire.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-c.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-b-village.js?v=1" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=2" defer></script>

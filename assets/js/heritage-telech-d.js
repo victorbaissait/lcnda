@@ -135,7 +135,8 @@
         ['emigration', '📷 Photos de l’émigration', 'Pour une personne partie en Amérique : photos libres de la Bibliothèque du Congrès (Ellis Island, avant 1925).'],
         ['wiki', '📖 Wikipédia hors ligne', 'Sur la fiche d’une commune : garder l’article de Wikipédia entier pour le relire sans Internet.'],
         ['wikisource', '📚 Textes anciens sur la commune', 'Sur la fiche d’une commune : les textes de Wikisource qui en parlent.'],
-        ['latin', '📜 Vocabulaire latin (Wiktionnaire)', 'Les mots latins des registres, ajoutés à « 📖 Aide à la lecture » et dans Listes.']];
+        ['latin', '📜 Vocabulaire latin (Wiktionnaire)', 'Les mots latins des registres, ajoutés à « 📖 Aide à la lecture » et dans Listes.'],
+        ['traduire', '🌐 Traduire hors ligne', 'Le bouton « 🌐 Traduire hors ligne » dans l’atelier de transcription et sur les notes écrites dans une autre langue (rien n’est envoyé sur Internet).']];
     const settings = () => { let s = {}; try { s = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (_) { s = {}; } return {...Object.fromEntries(PARTS.map(p => [p[0], true])), ...s}; };
     const on = k => settings()[k] !== false;
     const saveSettings = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
