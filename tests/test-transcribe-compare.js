@@ -61,7 +61,7 @@ const DEEP2 = 'Aujourd’hui vingt-huit octobre mil huit cent treize\npar devant
     await t('les lectures gardées toutes seules : écriture à la main, OCR, lecture approfondie (une page, toutes les pages)', () => {
         assert.match(src, /keepReading\(\(j\.lines \|\| \[\]\)\.map\(l => l\.text \|\| ''\)\.join\('\\n'\), 'htr'/);
         assert.match(src, /keepReading\(lines\.map\(l => l\.text\.replace\(\/\\s\+\$\/, ''\)\)\.join\('\\n'\), 'ocr'/);
-        assert.match(src, /keepReading\(txt, 'deep', R\.model[,)]/); assert.match(src, /onReading: \(txt, model(?:, info)?\) => keepReading\(txt, 'deep', model[,)]/); // + ce que la lecture retient (🕘 la bande « Versions »)
+        assert.match(src, /keepReading\(txt, 'deep', R\.model[,)]/); assert.match(src, /onReading: \(txt, model(?:, info)?\) => (?:\{[^}]*?)?keepReading\(txt, 'deep', model[,)]/); // + ce que la lecture retient (🕘 la bande « Versions »)
         assert.match(fs.readFileSync(path.join(root, 'assets/js/heritage-transcribe-acte.js'), 'utf8'), /o\.onReading\?\.\(j\.text, pick\(\)[,)]/);
     });
 

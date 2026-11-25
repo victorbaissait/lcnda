@@ -216,7 +216,7 @@ echo json_encode(['ok' => 1]);`, {B1: BODY, D1: JSON.stringify({zones: OLD_ZONES
             const s2 = await st(); assert.equal(s2.body, was.body); assert.deepEqual(s2.zones, was.zones, '⌘Z : les zones exactement comme avant');
         });
         await t('5d. ↶ ↷ de l’Atelier : les zones reviennent exactement', async () => {
-            const was = await st(); await caret(await lineStart(1)); await p.keyboard.type('Q'); await sleep(700);
+            await sleep(700); const was = await st(); await caret(await lineStart(1)); await p.keyboard.type('Q'); // l'historique garde un état ~0,5 s après la dernière frappe await sleep(700);
             const mid = await st(); assert.equal(mid.marks[1][0], 'Q');
             await p.click(`${D} [data-tx-hist="undo"]`); await sleep(250); assert.deepEqual((await st()).zones, was.zones); assert.equal((await st()).body, was.body);
             await p.click(`${D} [data-tx-hist="redo"]`); await sleep(250); assert.deepEqual((await st()).zones, mid.zones);

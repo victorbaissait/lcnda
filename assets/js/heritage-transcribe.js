@@ -81,7 +81,8 @@
         const full = new Set(zones.filter(z => !SNAP_SKIP.includes(z.kind) && z.s - 1 <= oldEnd && p <= z.e + 1 && isFullLine(before, z)));
         const f = v => (v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, nowEnd)) : v);
         const lead = oldEnd === p && delta > 0 && (p === 0 || now[p - 1] === '\n') && !ins.includes('\n'); // écrit tout au début de la ligne
-        zones.forEach(z => { if (lead && z.s === p && z.e > z.s) z.e += delta; else { z.s = f(z.s); z.e = Math.max(z.s, f(z.e)); } });
+        const nl = oldEnd === p && delta > 0 ? ins.indexOf('\n') : -1; // un retour à la ligne écrit juste à la fin d'une zone : elle s'arrête avant
+        zones.forEach(z => { if (lead && z.s === p && z.e > z.s) z.e += delta; else if (nl >= 0 && z.e === p && z.e > z.s && z.s < p) z.e = p + nl; else { z.s = f(z.s); z.e = Math.max(z.s, f(z.e)); } });
         full.forEach(z => {
             const k = now.slice(z.s, z.e).search(/\S/); if (k < 0) return; const pos = z.s + k; // la 1re lettre de la zone : sa ligne
             const [ls, le] = lineBounds(now, pos); let a = ls, b = le;
