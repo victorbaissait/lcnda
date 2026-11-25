@@ -685,7 +685,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
             if (!in_array($calendar, ['', 'gregorian', 'julian', 'republican'], true)) { $line(3, '_CAL', $calendar); }
         }
         $parts = gedcom_place_parts($e);
-        $plac = $geneanet && !$ancestry ? echanges_geneanet_place($parts, $e) : gedcom_place_value($parts);
+        $plac = $ancestry ? echanges_ancestry_place($parts) : ($geneanet ? echanges_geneanet_place($parts, $e) : gedcom_place_value($parts));
         if ($plac !== '') {
             $line(2, 'PLAC', $plac);
             if (($e['latitude'] ?? null) !== null && ($e['longitude'] ?? null) !== null && $e['latitude'] !== '' && $e['longitude'] !== '') {
@@ -714,7 +714,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $line(1, 'LANG', $version === '7' ? 'fr' : 'French');
     $line(1, 'DATE', strtoupper(date('j M Y')));
     $line(1, 'PLAC');
-    $line(2, 'FORM', $geneanet && !$ancestry ? 'Town, Area code, County, Region, Country' : GEDCOM_PLACE_FORM);
+    $line(2, 'FORM', $ancestry ? 'City, County, State, Country' : ($geneanet ? 'Town, Area code, County, Region, Country' : GEDCOM_PLACE_FORM));
     if ($version !== '7') { $line(1, 'SUBM', '@U1@'); } // obligatoire en 5.5.1 (l'enregistrement est écrit à la fin)
     // balises propres à LCNDA, déclarées en GEDCOM 7 (HEAD.SCHMA), comme la norme le demande
     if ($version === '7') {

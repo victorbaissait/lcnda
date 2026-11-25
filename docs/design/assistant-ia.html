@@ -1,0 +1,446 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assistant IA</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:19px;margin:36px 0 6px}
+.wrap{max-width:1240px;margin:0 auto}
+.eyebrow{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 18px;font-size:14px;max-width:1100px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.three>div{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;font-size:13px}
+.three h4{margin:0 0 4px;font-size:13px;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.badge.violet{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+.badge.grey{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap;cursor:pointer}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.btn.red{border-color:var(--red);color:var(--red);box-shadow:none}
+.btn.green{border-color:var(--green);color:var(--green);box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid var(--line2);padding:5px 8px;font-size:13.5px;background:var(--paper);width:100%;min-height:30px;color:var(--ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper);cursor:pointer}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:720px}
+.mini{font-size:12px;color:var(--muted)}
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.win-bar .ey{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px;min-width:0}
+.win-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:2px solid var(--ink);flex-wrap:wrap}
+.sw{display:inline-block;width:34px;height:18px;border-radius:9px;background:var(--line2);position:relative;vertical-align:middle;flex:none;cursor:pointer}
+.sw:after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.sw.on{background:var(--green)}.sw.on:after{left:18px}
+.set{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+.set small{display:block;color:var(--muted);font-size:12px}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.red{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.pill.vio{border-color:var(--vio);background:var(--vio-bg);color:var(--vio)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.qs{background:var(--paper);border:2px solid var(--vio);box-shadow:6px 6px 0 rgba(105,41,196,.22);padding:14px 18px}
+.qs ol{margin:0;padding-left:22px}
+.qs li{margin:0 0 12px;font-size:13.5px}
+.qs li b.q{display:block;font-size:14px}
+.qs .opts{display:flex;gap:6px;flex-wrap:wrap;margin:5px 0}
+.qs .opts span{border:1.5px solid var(--line2);padding:2px 7px;font-size:12px;background:var(--grey-bg)}
+.qs .opts span.rec{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:700}
+.qs .why{font-size:12.5px;color:var(--muted)}
+.reuse{background:var(--paper);border:2px solid var(--green);box-shadow:6px 6px 0 rgba(26,127,55,.22);padding:12px 16px}
+.reuse ul{margin:0;padding-left:18px;font-size:13px}.reuse li{margin:5px 0}
+.reuse code{color:var(--green)}
+.topbar{display:flex;align-items:center;gap:10px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;flex-wrap:wrap;font:700 12.5px system-ui}
+.topbar .sp{flex:1}
+.topbar .who{border:1.5px solid var(--bar-ink);padding:2px 8px;font-weight:700}
+.topbar .on{background:var(--blue);padding:2px 8px}
+.av{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--vio);color:#fff;font:800 11px/24px system-ui;justify-content:center;flex:none}
+.av.b{background:var(--blue)}.av.g{background:var(--green)}.av.y{background:var(--yel);color:#111}.av.k{background:var(--ink);color:var(--paper)}
+.hid{color:var(--soft);font-style:italic}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.flow>div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px;font-size:12.5px}
+.flow>div b{display:block;font-size:13px;margin-bottom:2px}
+.flow>div .n{display:inline-block;background:var(--blue);color:#fff;font:800 11px system-ui;padding:1px 6px;margin-bottom:4px}
+.flow>div small{color:var(--muted)}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0}
+.toc a{border:1.5px solid var(--ink);background:var(--paper);padding:3px 8px;font:700 12px system-ui;color:var(--ink);text-decoration:none}
+.toc a:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+a{color:var(--blue)}
+@media (max-width:980px){.three{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+@media (max-width:760px){body{padding:14px 16px}.case{padding:12px}.flow{grid-template-columns:1fr}h1{font-size:21px}}
+
+/* — propre à cette maquette — */
+.chatwin{display:grid;grid-template-columns:minmax(0,1fr) 290px;border:2px solid var(--ink);background:var(--paper)}
+.chatwin>*{min-width:0}
+.chat{padding:12px;display:flex;flex-direction:column;gap:12px;background:var(--grey-bg)}
+.q{align-self:flex-end;max-width:80%;background:var(--blue);color:#fff;padding:8px 12px;font-size:13.5px;border:2px solid var(--blue)}
+.a{align-self:flex-start;max-width:92%;background:var(--paper);border:2px solid var(--ink);padding:10px 12px;font-size:13.5px;box-shadow:4px 4px 0 var(--shadow)}
+.a p{margin:0 0 8px}.a p:last-child{margin:0}
+.a ul{margin:4px 0 8px;padding-left:18px}.a li{margin:3px 0}
+.p-ref{display:inline-block;border:1.5px solid var(--blue);background:var(--blue-bg);color:var(--blue-ink);font:700 12px system-ui;padding:0 5px;text-decoration:none;white-space:nowrap}
+.s-ref{display:inline-block;border:1.5px solid var(--green);background:var(--green-bg);color:var(--green);font:800 10.5px system-ui;padding:0 4px;vertical-align:super;text-decoration:none;line-height:1.3}
+.guess{border-bottom:2px dotted var(--yel);background:var(--yel-bg)}
+.how{font-size:12px;color:var(--muted);border-top:1px dashed var(--line2);margin-top:8px;padding-top:6px}
+.how summary{cursor:pointer;font-weight:700}
+.how ol{margin:4px 0 0;padding-left:18px}
+.prompt{display:flex;gap:6px;padding:10px;border-top:2px solid var(--ink);background:var(--paper);flex-wrap:wrap}
+.prompt .input{flex:1 1 200px}
+.sugg{display:flex;gap:5px;flex-wrap:wrap;padding:0 10px 10px;background:var(--paper)}
+.sugg span{border:1.5px dashed var(--line2);font-size:12px;padding:2px 7px;color:var(--muted)}
+.cside{border-left:2px solid var(--ink);padding:10px 12px;font-size:12.5px}
+.cside h5{margin:0 0 6px;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.cside .blk{border-bottom:1px solid var(--line);padding:0 0 10px;margin:0 0 10px}
+.mode{display:flex;gap:6px;align-items:center;border:2px solid var(--green);background:var(--green-bg);color:var(--green);padding:5px 8px;font:800 12px system-ui}
+.mode.online{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.act{border:2px solid var(--vio);background:var(--vio-bg);padding:8px 10px;margin-top:8px;font-size:13px}
+.act b.t{color:var(--vio)}
+.act .row{margin-top:6px}
+.act[data-state="ok"]{border-color:var(--green);background:var(--green-bg)}
+.act[data-state="no"]{opacity:.5}
+.act .done{display:none}
+.act[data-state="ok"] .todo,.act[data-state="no"] .todo{display:none}
+.act[data-state="ok"] .done.ok,.act[data-state="no"] .done.no{display:flex}
+.gfiche{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;font-size:13px}
+.gfiche h4{margin:0;font-size:16px}
+.gaps{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.plan{list-style:none;margin:0;padding:0;font-size:13px}
+.plan li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);align-items:start}
+.plan small{display:block;color:var(--muted)}
+.plan .net{font:700 10.5px system-ui;border:1.5px solid var(--yel);color:var(--yel-ink);background:var(--yel-bg);padding:1px 5px;white-space:nowrap}
+.plan .loc{font:700 10.5px system-ui;border:1.5px solid var(--green);color:var(--green);background:var(--green-bg);padding:1px 5px;white-space:nowrap}
+.lead{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;font-size:13px;box-shadow:4px 4px 0 var(--shadow);margin-bottom:12px}
+.lead .lh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.lead .src{border-left:3px solid var(--green);background:var(--green-bg);padding:5px 8px;margin:6px 0;font-size:12.5px}
+.conf{display:inline-flex;align-items:center;gap:5px;font:800 11.5px system-ui}
+.conf i{display:inline-block;width:60px;height:7px;background:var(--line);position:relative}
+.conf i b{position:absolute;left:0;top:0;bottom:0;background:var(--green)}
+.conf.mid i b{background:var(--yel)}.conf.low i b{background:var(--red)}
+.cmp{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr) 22px;font-size:12.5px;border:1.5px solid var(--line2);margin:6px 0}
+.cmp>div{padding:4px 6px;border-bottom:1px solid var(--line)}
+.cmp .h{font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);background:var(--grey-bg)}
+.cmp .k{color:var(--muted)}.cmp .y{color:var(--green);font-weight:800}.cmp .m{color:var(--yel-ink);font-weight:800}.cmp .n{color:var(--red);font-weight:800}
+.dlg{border:2px solid var(--ink);background:var(--paper);box-shadow:8px 8px 0 rgba(0,0,0,.16);max-width:560px}
+.dlg .dh{padding:9px 12px;border-bottom:2px solid var(--ink);font-weight:800}
+.dlg .db{padding:12px;font-size:13px}
+.dlg .w{display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px;padding:5px 0;border-bottom:1px solid var(--line)}
+.models td small{display:block;color:var(--muted)}
+.models tr.rec td{background:var(--green-bg)}
+.models tr.no td{color:var(--soft)}
+.ram{display:flex;gap:4px;align-items:flex-end;height:46px;margin:6px 0}
+.ram i{display:block;width:26px;background:var(--line2)}
+.ram i.on{background:var(--green)}
+.send td:first-child{font-weight:700}
+.send .y{color:var(--green);font-weight:800}.send .n{color:var(--red);font-weight:800}.send .p{color:var(--yel-ink);font-weight:800}
+.peek{border:2px dashed var(--yel);background:var(--yel-bg);padding:10px 12px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;color:var(--ink);overflow-x:auto}
+.peek mark{background:var(--red-bg);color:var(--red);font-weight:700}
+.pipe{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:10px}
+.pipe>div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px;font-size:12.5px;position:relative}
+.pipe>div b{display:block;font-size:13px}
+.pipe>div .n{display:inline-block;background:var(--blue);color:#fff;font:800 11px system-ui;padding:1px 6px;margin-bottom:4px}
+.pipe>div.ai{border-color:var(--vio);background:var(--vio-bg)}
+.pipe>div.ai .n{background:var(--vio)}
+.pipe small{color:var(--muted)}
+.key{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.key .input{flex:1 1 200px;font-family:ui-monospace,Menlo,monospace;letter-spacing:.1em}
+@media (max-width:1000px){.chatwin{grid-template-columns:1fr}.cside{border-left:0;border-top:2px solid var(--ink)}.pipe{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.pipe{grid-template-columns:1fr}.q{max-width:92%}.a{max-width:100%}.plan li{grid-template-columns:22px minmax(0,1fr)}.plan li>span:last-child{grid-column:2}.cmp{grid-template-columns:84px minmax(0,1fr) minmax(0,1fr) 18px;font-size:12px}}
+</style></head><body><div class="wrap">
+
+<p class="eyebrow">Maquette · grosse fonction n°3 · rien n'est encore construit</p>
+<h1>🤖 L'assistant IA : parler à son arbre, et un « généalogiste IA » qui cherche des pistes</h1>
+<p class="sub">À la manière de Gramps Web, Odystoria, Vestigee ou FamilySearch — avec l'IA qui tourne sur ton ordinateur par défaut, et rien n'écrit dans l'arbre sans ton accord.</p>
+
+<div class="simple">
+ <p><b>Ce que c'est.</b> Deux choses. <b>① Une conversation</b> : tu poses une question en français ordinaire (« qui de mes ancêtres a vécu en Bretagne avant 1800 ? », « raconte la vie de Jeanne », « qu'est-ce qui cloche dans la branche Lavergne ? ») et l'assistant répond <b>en citant les fiches et les sources</b> : chaque nom est un lien, chaque fait renvoie à sa source. <b>② Un généalogiste IA</b> : tu lui donnes une fiche, il regarde ce qui manque, interroge les sources que l'app connaît déjà (Open Archives, Décès INSEE, Morts pour la France, Léonore, Où chercher…) et te rapporte des <b>pistes avec leurs preuves</b>. Il propose ; c'est toi qui ajoutes.</p>
+ <p><b>Pour qui.</b> Pour toi, quand tu veux une réponse sans construire une recherche ; quand tu bloques sur un ancêtre ; quand tu veux un premier récit à retoucher pour la famille.</p>
+ <p><b>Ce que ça change.</b> L'app sait déjà beaucoup (contrôle, trous, où chercher, biographies), mais il faut savoir où cliquer. L'assistant va chercher au bon endroit pour toi. Par défaut il utilise <b>l'IA locale</b> (Ollama) que l'app emploie déjà pour la lecture approfondie des actes : <b>rien ne quitte l'ordinateur</b>. En option, un service en ligne avec <b>ta</b> clé, et un avertissement clair sur ce qui part.</p>
+</div>
+<div class="three">
+ <div><h4>💬 Répond en citant</h4>Chaque personne est un lien vers sa fiche, chaque fait a sa source. Ce qui est supposé est souligné en jaune.</div>
+ <div><h4>🕵 Cherche des pistes</h4>Dans les bases que l'app sait déjà lire. Chaque piste a son lien vers l'original.</div>
+ <div><h4>✋ N'écrit jamais seul</h4>Une piste devient « ajouter ce décès ? » : un clic de toi, une source créée, ↶ possible.</div>
+</div>
+
+<nav class="toc"><a href="#comment">0. Comment ça marche</a><a href="#conv">1. La conversation</a><a href="#genea">2. Le généalogiste IA</a><a href="#valider">3. Valider une action</a><a href="#reglages">4. Réglages de l'IA</a><a href="#envoi">5. Ce qui part, ce qui reste</a><a href="#questions">Questions pour toi</a><a href="#existe">Ce qui existe déjà</a></nav>
+
+<!-- ═════════ 0 ═════════ -->
+<p class="part" id="comment">0 · Comment ça marche</p>
+<h2>L'IA ne lit pas ta base : l'app lui passe seulement ce qu'il faut</h2>
+<p class="sub">L'IA ne touche jamais au fichier de la généalogie. Elle demande à l'app des « outils » connus (chercher des personnes, lire une fiche, les ancêtres de…, le Contrôle, Où chercher…) ; l'app répond avec ses propres règles de vie privée ; l'IA rédige ; l'app vérifie que chaque fiche citée existe bien avant de t'afficher la réponse.</p>
+<div class="pipe">
+ <div><span class="n">1</span><b>Ta question</b><small>« Qui a vécu en Bretagne avant 1800 ? »</small></div>
+ <div class="ai"><span class="n">2</span><b>L'IA choisit des outils</b><small>chercher(lieu = Bretagne, avant 1800, ancêtres)</small></div>
+ <div><span class="n">3</span><b>L'app répond</b><small>lecture seule, vivants et fiches 🔒 retirés</small></div>
+ <div class="ai"><span class="n">4</span><b>L'IA rédige</b><small>avec des renvois [fiche 1234], [source 88]</small></div>
+ <div><span class="n">5</span><b>L'app vérifie</b><small>un renvoi inventé est retiré et signalé</small></div>
+</div>
+
+<!-- ═════════ 1 ═════════ -->
+<p class="part" id="conv">1 · La conversation</p>
+<h2>🤖 Assistant — une fenêtre à côté de l'arbre</h2>
+<p class="sub">On l'ouvre depuis la barre du haut ou depuis une fiche (« 🤖 Demander à propos de cette personne »). Les puces bleues ouvrent la fiche, les petites vertes ouvrent la source.</p>
+<div class="chatwin">
+ <div>
+  <div class="chat">
+   <div class="q">Qui de mes ancêtres a vécu en Bretagne avant 1800 ?</div>
+   <div class="a">
+    <p>J'ai trouvé <b>5 ancêtres</b> avec au moins un événement en Bretagne avant 1800 :</p>
+    <ul>
+     <li><a href="#" class="p-ref">Sosa 52 · Yves LE GOFF</a> né en 1741 à Plouguerneau (Finistère)<a href="#" class="s-ref">S1</a>, marié en 1766 à Lannilis<a href="#" class="s-ref">S2</a>.</li>
+     <li><a href="#" class="p-ref">Sosa 53 · Marie-Jeanne ABIVEN</a> née vers 1745 à Lannilis<a href="#" class="s-ref">S2</a>.</li>
+     <li><a href="#" class="p-ref">Sosa 26 · Hervé LE GOFF</a> né en 1772 à Lannilis<a href="#" class="s-ref">S3</a> ; il part pour Brest, puis Bordeaux où il se marie en 1801.</li>
+     <li><a href="#" class="p-ref">Sosa 104</a> et <a href="#" class="p-ref">Sosa 105</a> : les parents d'Yves, à Plouguerneau vers 1710–1720, <span class="guess">sans acte trouvé (lieu déduit du mariage de leur fils)</span>.</li>
+    </ul>
+    <p>Ils sont tous dans la branche de ta grand-mère paternelle, <a href="#" class="p-ref">Sosa 13 · Anne LE GOFF</a>.</p>
+    <details class="how"><summary>Comment j'ai trouvé (3 recherches dans ta base)</summary><ol><li>tes ancêtres Sosa (1 à 4095)</li><li>leurs événements dans les départements 22, 29, 35, 44, 56 avant 1800</li><li>les lieux sans département : comparés à la liste des communes</li></ol></details>
+   </div>
+   <div class="q">Raconte la vie d'Hervé.</div>
+   <div class="a">
+    <p><b>Hervé Le Goff</b> naît le 14 avril 1772 à Lannilis<a href="#" class="s-ref">S3</a>, troisième enfant d'Yves, laboureur, et de Marie-Jeanne Abiven. En 1791, on le retrouve <span class="guess">sans doute</span> mousse à Brest : un « Hervé Le Goff, de Lannilis, 19 ans » est inscrit sur un rôle d'équipage<a href="#" class="s-ref">S4</a>. Il épouse à Bordeaux, le 2 février 1801, Catherine Dupuy, fille d'un tonnelier<a href="#" class="s-ref">S5</a>…</p>
+    <p class="mini">Le jaune marque ce qui est supposé. Ce récit n'est pas enregistré : <span class="btn small">📖 Le mettre dans la biographie (à relire)</span></p>
+   </div>
+   <div class="q">Qu'est-ce qui cloche dans la branche Lavergne ?</div>
+   <div class="a">
+    <p>Trois choses, de la plus grave à la moins grave :</p>
+    <ul>
+     <li>🔴 <a href="#" class="p-ref">Pierre LAVERGNE (1801)</a> a un enfant né en 1847, deux ans après son décès en 1845. <a href="#">↗ dans le Contrôle</a></li>
+     <li>🟠 <a href="#" class="p-ref">Anne VIALLE</a> : aucun décès, et elle aurait 221 ans aujourd'hui. Piste : <span class="btn small">🕵 Lancer le généalogiste</span></li>
+     <li>🟡 Quatre « Jean Lavergne » nés entre 1770 et 1775 à Naves : peut-être des doublons. <a href="#">↗ Doublons</a></li>
+    </ul>
+    <div class="act" data-state="wait"><b class="t">Action proposée :</b> corriger la date de décès de Pierre en « après 1847 » et noter le doute ?
+     <div class="row todo"><span class="btn small green" data-act="ok">✓ Oui, avec une note</span><span class="btn small" data-act="no">Non</span><span class="btn small">Ouvrir la fiche</span></div>
+     <div class="row done ok"><span style="color:var(--green);font-weight:700">✓ Fait, noté dans le journal.</span><span class="btn small" data-act="wait">↶ Annuler</span></div>
+     <div class="row done no"><span>Laissé tel quel.</span><span class="btn small" data-act="wait">↶</span></div>
+    </div>
+   </div>
+  </div>
+  <div class="prompt"><div class="input">Pose ta question…</div><span class="btn blue">Envoyer</span></div>
+  <div class="sugg"><span>Qui est né le même jour que moi ?</span><span>Quels métiers revenaient le plus ?</span><span>Résume la branche maternelle</span><span>Écris une lettre aux AD de la Corrèze</span></div>
+ </div>
+ <div class="cside">
+  <div class="blk"><h5>Où tourne l'IA</h5><div class="mode">🖥 Sur cet ordinateur · Qwen3 8B</div><p class="mini" style="margin:6px 0 0">Rien ne quitte l'ordinateur. <a href="#reglages">Réglages</a></p></div>
+  <div class="blk"><h5>Sources citées</h5>
+   <p style="margin:0 0 4px"><span class="s-ref">S1</span> Baptême, Plouguerneau 1741, AD 29, 3 E 214/2</p>
+   <p style="margin:0 0 4px"><span class="s-ref">S2</span> Mariage Le Goff × Abiven, Lannilis 1766</p>
+   <p style="margin:0 0 4px"><span class="s-ref">S3</span> Baptême, Lannilis 1772</p>
+   <p style="margin:0 0 4px"><span class="s-ref">S4</span> Rôle d'équipage, Brest 1791 <span class="pill q">à vérifier</span></p>
+   <p style="margin:0"><span class="s-ref">S5</span> Mariage, Bordeaux an IX</p>
+  </div>
+  <div class="blk"><h5>Cette conversation</h5><p class="mini" style="margin:0">Gardée sur cet ordinateur, dans « 🤖 Mes conversations ». <span class="btn small ghost">🗑 Effacer</span></p></div>
+  <div><h5>Ce que l'assistant ne sait pas faire</h5><p class="mini" style="margin:0">Il ne voit pas les vivants ni les fiches 🔒. Il n'écrit rien sans un clic. Il peut se tromper : les puces et les sources sont là pour vérifier.</p></div>
+ </div>
+</div>
+
+<!-- ═════════ 2 ═════════ -->
+<p class="part" id="genea">2 · Le généalogiste IA</p>
+<h2>🕵 Depuis une fiche : « Cherche ce qui manque »</h2>
+<p class="sub">Il part des trous de la fiche, fait un plan, interroge les sources une par une (en montrant ce qu'il fait), puis classe les pistes. Les sources sur Internet sont marquées <span class="plan"><span class="net">🌐 Internet</span></span> : seuls le nom, les prénoms, les années et la commune partent, comme quand tu cliques toi-même dans « Où chercher ».</p>
+<div class="grid">
+<div>
+ <div class="gfiche"><h4>Anne VIALLE</h4><span class="mini">Sosa 17 · née vers 1805 à Naves · épouse de Pierre Lavergne · 5 enfants (1826–1847)</span>
+  <div class="gaps"><span class="pill red">décès manquant</span><span class="pill red">parents inconnus</span><span class="pill q">naissance « vers »</span></div></div>
+ <h3 style="font-size:15px;margin:16px 0 6px">Ce que j'ai fait</h3>
+ <ul class="plan">
+  <li><span>✓</span><span><b>Ta base</b> : fiche, enfants, mariage, notes<small>mariage en 1825 à Naves : « fille de Léonard et de Marguerite Borie » écrit dans la note — non relié</small></span><span class="loc">sur l'ordinateur</span></li>
+  <li><span>✓</span><span><b>Décès INSEE</b> (fichiers importés)<small>commence en 1970 : trop tard pour elle, sauté</small></span><span class="loc">sur l'ordinateur</span></li>
+  <li><span>✓</span><span><b>Morts pour la France, Léonore</b><small>pas concernée (femme, née 1805)</small></span><span class="loc">sur l'ordinateur</span></li>
+  <li><span>✓</span><span><b>Open Archives</b> « Vialle Anne, 1800–1810 »<small>0 résultat (peu de Corrèze indexée)</small></span><span class="net">🌐 Internet</span></li>
+  <li><span>✓</span><span><b>Tes transcriptions et dépouillements</b><small>« Anne Vialle, veuve Lavergne » marraine en 1858 à Naves</small></span><span class="loc">sur l'ordinateur</span></li>
+  <li><span>✓</span><span><b>Où chercher</b> : AD de la Corrèze, état civil en ligne<small>tables décennales de Naves 1853–1862 et 1863–1872</small></span><span class="loc">liens seulement</span></li>
+ </ul>
+</div>
+<div>
+ <div class="lead">
+  <div class="lh"><b>① Elle était vivante en 1858</b><span class="conf"><i><b style="width:85%"></b></i> forte</span></div>
+  <div class="src">📜 Ta transcription : baptême de Jean Lavergne, Naves, 3 mars 1858 — « marraine Anne Vialle veuve de Pierre Lavergne »</div>
+  <p class="mini" style="margin:4px 0">Donc décès <b>après le 3 mars 1858</b>, et Pierre était bien mort avant (ce qui confirme l'alerte du Contrôle).</p>
+  <div class="act" data-state="wait" style="margin-top:6px"><div class="row todo" style="margin:0"><span class="btn small green" data-act="ok">＋ Ajouter « décès après 1858 » (à vérifier)</span><span class="btn small" data-act="no">Ignorer</span></div><div class="row done ok" style="margin:0"><span style="color:var(--green);font-weight:700">✓ Ajouté, source reliée</span><span class="btn small" data-act="wait">↶</span></div><div class="row done no" style="margin:0"><span>Ignoré</span><span class="btn small" data-act="wait">↶</span></div></div>
+ </div>
+ <div class="lead">
+  <div class="lh"><b>② Où trouver son décès</b><span class="conf mid"><i><b style="width:55%"></b></i> à chercher</span></div>
+  <div class="src">🌍 AD Corrèze · Naves · tables décennales 1853–1862 et 1863–1872 <a href="#">↗ ouvrir</a></div>
+  <div class="row"><span class="btn small">🗓 Mettre dans le suivi des recherches</span><span class="btn small">🧭 Ajouter à la prochaine visite</span></div>
+ </div>
+ <div class="lead">
+  <div class="lh"><b>③ Ses parents sont peut-être dans une note</b><span class="conf mid"><i><b style="width:60%"></b></i> moyenne</span></div>
+  <div class="src">📝 Note du mariage de 1825 : « fille de Léonard et de Marguerite Borie »</div>
+  <div class="cmp"><div class="h">champ</div><div class="h">dans la note</div><div class="h">dans ta base</div><div class="h"></div>
+   <div class="k">Père</div><div>Léonard Vialle</div><div><a href="#">Léonard VIALLE</a> (1770, Naves)</div><div class="y">✓</div>
+   <div class="k">Mère</div><div>Marguerite Borie</div><div>— aucune fiche</div><div class="m">?</div></div>
+  <div class="act" data-state="wait" style="margin-top:6px"><div class="row todo" style="margin:0"><span class="btn small green" data-act="ok">＋ Relier à Léonard et créer Marguerite (à vérifier)</span><span class="btn small" data-act="no">Ignorer</span></div><div class="row done ok" style="margin:0"><span style="color:var(--green);font-weight:700">✓ Relié, lien marqué « supposé »</span><span class="btn small" data-act="wait">↶</span></div><div class="row done no" style="margin:0"><span>Ignoré</span><span class="btn small" data-act="wait">↶</span></div></div>
+ </div>
+ <p class="note">Tout ce qui est cherché est noté dans le 🗓 Journal des recherches (« ne pas chercher deux fois au même endroit »).</p>
+</div>
+</div>
+
+<!-- ═════════ 3 ═════════ -->
+<p class="part" id="valider">3 · Valider une action proposée</p>
+<h2>« Ajouter ce décès ? » — tu vois exactement ce qui sera écrit</h2>
+<div class="grid">
+<div class="dlg">
+ <div class="dh">＋ Ajouter à la fiche d'Anne VIALLE</div>
+ <div class="db">
+  <div class="w"><span>📅</span><span><b>Décès</b> : après le 3 mars 1858, Naves <span class="pill q">à vérifier</span></span></div>
+  <div class="w"><span>📚</span><span><b>Source</b> reliée : « Baptême de Jean Lavergne, Naves, 1858 » (ta transcription n° 412)</span></div>
+  <div class="w"><span>📝</span><span><b>Note</b> : « Proposé par l'assistant le 25/11/2026 : marraine en 1858, veuve. »</span></div>
+  <div class="w"><span>🗓</span><span><b>Journal des recherches</b> : tables décennales Naves 1853–1872 « à consulter »</span></div>
+  <p class="mini">Tu peux changer chaque ligne avant d'accepter. Après, « ↶ » enlève tout d'un coup.</p>
+ </div>
+ <div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn">✎ Changer d'abord</span><span class="btn blue">✓ Ajouter</span></div>
+</div>
+<div class="case">
+ <div class="head"><span class="tag">Les règles</span></div>
+ <h3>Ce que l'assistant a le droit de faire</h3>
+ <ul style="font-size:13px;padding-left:18px;margin:0">
+  <li>Lire, à travers les outils de l'app (jamais le fichier lui-même).</li>
+  <li>Proposer : ajouter un événement, une source, un lien de parenté <b>« supposé »</b>, une note, une ligne du journal des recherches.</li>
+  <li><b>Jamais</b> supprimer, fusionner, ni modifier une donnée qui a déjà une source, sans que tu ouvres toi-même l'outil concerné.</li>
+  <li>Tout ce qui vient de lui est marqué « à vérifier » et « proposé par l'assistant », pour qu'on le reconnaisse plus tard.</li>
+ </ul>
+</div>
+</div>
+
+<!-- ═════════ 4 ═════════ -->
+<p class="part" id="reglages">4 · Réglages de l'IA</p>
+<h2>Réglages → 🤖 Assistant IA</h2>
+<p class="sub">Choisis où tourne l'IA. Bascule entre les deux pour voir.</p>
+<div class="win">
+ <div class="win-bar"><b>🤖 Assistant IA</b><span class="seg" data-group="ia"><span class="on" data-v="loc">🖥 Sur cet ordinateur</span><span data-v="web">🌐 Service en ligne</span><span data-v="off">Éteint</span></span></div>
+ <div class="win-body">
+  <div data-pane="ia:loc">
+   <div class="grid">
+    <div>
+     <div class="msg ok"><b>Ollama est installé et répond</b> (le même que pour la lecture approfondie des actes). Ton ordinateur a <b>16 Go</b> de mémoire.</div>
+     <div class="ram" title="mémoire nécessaire"><i class="on" style="height:12px"></i><i class="on" style="height:22px"></i><i style="height:34px"></i><i style="height:46px"></i></div>
+     <div class="mini">8 Go · 16 Go · 32 Go · 64 Go — en vert : ce qui tient dans ton ordinateur</div>
+    </div>
+    <div class="scrollx"><table class="models"><thead><tr><th>Modèle</th><th>Mémoire</th><th>Taille</th><th></th></tr></thead><tbody>
+     <tr class="rec"><td><b>Qwen3-VL 8B</b> <span class="pill ok">conseillé</span><small>déjà installé pour les actes : rien à télécharger, sait aussi converser</small></td><td>16 Go</td><td>6,1 Go</td><td><span class="cb on"></span></td></tr>
+     <tr><td><b>Qwen3-VL 4B</b><small>pour un ordinateur modeste ; répond plus vite, raconte moins bien</small></td><td>8 Go</td><td>3,3 Go</td><td><span class="btn small">Télécharger</span></td></tr>
+     <tr class="no"><td><b>Mistral Small 3.2 (24B)</b><small>fort en français, mieux pour les récits</small></td><td>32 Go</td><td>15 Go</td><td class="mini">trop gros ici</td></tr>
+     <tr class="no"><td><b>Qwen3-VL 32B</b><small>le plus juste, pour les gros ordinateurs</small></td><td>64 Go</td><td>21 Go</td><td class="mini">trop gros ici</td></tr>
+    </tbody></table></div>
+   </div>
+   <div class="set"><span>Le généalogiste peut interroger Open Archives<small>nom, prénoms, années, commune partent vers openarch.nl, comme dans « Où chercher »</small></span><span class="sw on"></span></div>
+   <div class="set"><span>Garder les conversations<small>dans le dossier des données, jamais dans les sauvegardes partagées</small></span><span class="sw on"></span></div>
+   <p class="note">Sans Ollama : un bouton « Installer Ollama » ouvre ollama.com, comme pour la lecture approfondie. Un ordinateur de 8 Go marche, mais lentement (30 s à 1 min par réponse).</p>
+  </div>
+  <div data-pane="ia:web" hidden>
+   <div class="msg warn"><b>⚠ Avec un service en ligne, une partie de ta généalogie part sur Internet</b>, vers l'entreprise que tu choisis : les noms, dates et lieux des personnes <b>décédées</b> concernées par ta question, et ta question elle-même. Les vivants et les fiches 🔒 ne partent jamais. Cette entreprise a ses propres règles sur ce qu'elle garde. <a href="#envoi">Voir le détail</a></div>
+   <label class="lab">Service</label>
+   <div class="seg"><span class="on">Mistral (France)</span><span>Anthropic (Claude)</span><span>OpenAI</span><span>Autre, compatible</span></div>
+   <label class="lab">Ta clé personnelle</label>
+   <div class="key"><div class="input">sk-••••••••••••••••••••3f9a</div><span class="btn small">Coller</span><span class="btn small">Essayer</span><span class="btn small red">Retirer</span></div>
+   <p class="mini">La clé est <b>à toi</b> : tu la crées sur le site du service, c'est toi qui paies (quelques centimes par question). Elle est gardée dans le dossier des données (fichier à part, lisible par toi seul), <b>jamais dans la base, ni dans les sauvegardes, ni dans les exports, ni dans le code de l'app</b>. Seul le serveur PHP de l'app la lit ; la page ne la voit jamais.</p>
+   <div class="set"><span>Me montrer ce qui va partir avant chaque envoi<small>conseillé les premières fois</small></span><span class="sw on"></span></div>
+   <div class="set"><span>Envoyer aussi mes notes de recherche<small>désactivé : seulement noms, dates, lieux, métiers, sources</small></span><span class="sw"></span></div>
+   <div class="set"><span>Plafond par mois<small>l'assistant s'arrête et te prévient au-delà</small></span><span class="input" style="width:90px">5 €</span></div>
+  </div>
+  <div data-pane="ia:off" hidden><div class="msg">L'assistant est éteint : le bouton 🤖 disparaît de la barre du haut. Rien d'autre ne change dans l'app.</div></div>
+ </div>
+</div>
+
+<!-- ═════════ 5 ═════════ -->
+<p class="part" id="envoi">5 · Ce qui part, ce qui reste</p>
+<h2>Les règles, une fois pour toutes</h2>
+<div class="scrollx"><table class="send"><thead><tr><th></th><th>🖥 IA sur l'ordinateur</th><th>🌐 IA en ligne</th></tr></thead><tbody>
+ <tr><td>Vivants (déclarés ou probablement vivants)</td><td class="y">restent sur l'ordinateur</td><td class="n">jamais envoyés — remplacés par « personne vivante »</td></tr>
+ <tr><td>Fiches 🔒 confidentielles</td><td class="y">restent</td><td class="n">jamais envoyées</td></tr>
+ <tr><td>Noms, dates, lieux, métiers des décédés</td><td class="y">restent</td><td class="p">seulement ceux utiles à la question</td></tr>
+ <tr><td>Notes de recherche, transcriptions</td><td class="y">restent</td><td class="p">non, sauf si tu coches</td></tr>
+ <tr><td>Photos, images d'actes</td><td class="y">restent</td><td class="n">non</td></tr>
+ <tr><td>Ta clé</td><td>—</td><td class="p">envoyée seulement au service choisi, par le serveur de l'app</td></tr>
+ <tr><td>Recherche Open Archives du généalogiste</td><td colspan="2">nom, prénoms, années, commune → openarch.nl (comme aujourd'hui dans « Où chercher »), désactivable</td></tr>
+</tbody></table></div>
+<div class="grid" style="margin-top:16px">
+<div>
+ <h3 style="font-size:15px;margin:0 0 6px">« Voir ce qui va partir » (IA en ligne)</h3>
+ <div class="peek">Question : « Qu'est-ce qui cloche dans la branche Lavergne ? »
+Fiches envoyées (12) :
+ [1201] LAVERGNE Pierre, ° 1801 Naves, † 1845 Naves, cultivateur
+ [1202] VIALLE Anne, ° vers 1805 Naves
+ [1207] LAVERGNE Jean, ° 1847 Naves
+ [1210] <mark>personne vivante</mark>
+ …
+Alertes du Contrôle (3) : …</div>
+ <div class="row" style="margin-top:8px"><span class="btn ghost">Ne pas envoyer</span><span class="btn blue">Envoyer</span></div>
+</div>
+<div class="case">
+ <div class="head"><span class="tag">Journal des envois</span></div>
+ <h3>Ce qui est parti, et quand</h3>
+ <table><tbody>
+  <tr><td class="mini">25 nov. 10:14</td><td>Mistral · 12 fiches · 0 vivant</td></tr>
+  <tr><td class="mini">24 nov. 17:02</td><td>Mistral · 3 fiches · 0 vivant</td></tr>
+  <tr><td class="mini">24 nov. 16:40</td><td>openarch.nl · « Vialle Anne 1800–1810 »</td></tr>
+ </tbody></table>
+ <p class="note">Avec l'IA sur l'ordinateur, ce journal reste vide : rien ne sort.</p>
+</div>
+</div>
+
+<!-- ═════════ Questions ═════════ -->
+<p class="part" id="questions">Questions pour toi</p>
+<h2>Ce qu'il faut trancher avant de construire</h2>
+<div class="qs"><ol>
+ <li><b class="q">Proposer le service en ligne dès la première version ?</b><div class="opts"><span class="rec">non : d'abord l'IA locale seule, l'en-ligne ensuite ✓</span><span>oui, les deux tout de suite</span></div><span class="why">Recommandé : commencer en local. C'est fidèle à « rien n'est envoyé », et ça permet de régler la vie privée et les citations sans risque. L'option en ligne vient après, pour les ordinateurs trop modestes.</span></li>
+ <li><b class="q">Quels services en ligne accepter ?</b><div class="opts"><span class="rec">Mistral (France) + « compatible OpenAI » pour le reste ✓</span><span>une liste fermée de 3</span><span>n'importe quelle adresse</span></div><span class="why">Recommandé : un service européen en premier, plus un réglage générique pour qui veut un autre service. Pas d'adresse libre sans avertissement.</span></li>
+ <li><b class="q">Le modèle local : réutiliser celui de la lecture des actes ?</b><div class="opts"><span class="rec">oui, Qwen3-VL 8B par défaut ✓</span><span>un modèle texte à part</span></div><span class="why">Recommandé : oui, il est souvent déjà installé (6 Go). Un modèle texte plus fort (Mistral Small) en option pour les gros ordinateurs.</span></li>
+ <li><b class="q">Le généalogiste peut-il aller sur Internet tout seul ?</b><div class="opts"><span class="rec">oui pour Open Archives (déjà permis dans Où chercher), désactivable ✓</span><span>jamais, liens seulement</span></div><span class="why">Recommandé : oui pour les services que l'app interroge déjà ; pour les autres sites (AD, Geneanet…) il ne donne que des liens que tu ouvres toi-même.</span></li>
+ <li><b class="q">Jusqu'où vont les « actions proposées » ?</b><div class="opts"><span class="rec">ajouter seulement (événement, source, lien supposé, note) ✓</span><span>aussi corriger une donnée</span></div><span class="why">Recommandé : ajouter seulement. Corriger ou supprimer reste dans les outils habituels, où tu vois tout le contexte.</span></li>
+ <li><b class="q">Les récits écrits par l'IA : où les mettre ?</b><div class="opts"><span class="rec">dans une note « biographie à relire », jamais à la place de la biographie de l'app ✓</span><span>remplacer la biographie</span></div><span class="why">Recommandé : à côté. La biographie de l'app « n'invente rien » ; un récit d'IA peut broder.</span></li>
+ <li><b class="q">Garder l'historique des conversations ?</b><div class="opts"><span class="rec">oui, sur l'ordinateur, effaçable ✓</span><span>non, oublié à la fermeture</span></div><span class="why">Recommandé : oui, c'est utile pour reprendre une piste ; jamais dans les sauvegardes partagées.</span></li>
+</ol></div>
+
+<!-- ═════════ Existe ═════════ -->
+<p class="part" id="existe">Ce qui existe déjà dans l'app et sera réutilisé</p>
+<div class="reuse"><ul>
+ <li><b>IA locale</b> : Ollama et la liste des modèles avec leur mémoire nécessaire (<code>TX_DEEP_MODELS</code>, <code>tx_deep_status()</code> qui détecte Ollama et la mémoire, <code>tx_deep_http()</code> limité à l'ordinateur — <code>lib/transcription_actes.php</code>) ; l'installation guidée sur le modèle de <code>lib/htr_setup.php</code>.</li>
+ <li><b>Sources interrogées</b> : Open Archives (<code>lib/ou_chercher_openarch.php</code>), Décès INSEE (<code>lib/insee_remote.php</code>), Morts pour la France et Léonore (<code>lib/bases_officielles.php</code>), Où chercher et murs de brique (<code>lib/ou_chercher.php</code>), « Que manque-t-il ? » (<code>lib/research_gaps.php</code>), suggestions de recherche (<code>lib/suggestions.php</code>).</li>
+ <li><b>Ce qui cloche</b> : le ✅ Contrôle (<code>lib/controle.php</code>) et la liste unique des doutes (<code>lib/doutes.php</code>).</li>
+ <li><b>Récits</b> : la biographie écrite par l'app (<code>lib/biographie.php</code>) comme base factuelle.</li>
+ <li><b>Vie privée</b> : <code>gedcom_share_hidden()</code> pour retirer vivants et fiches 🔒 de tout ce qui est donné à l'IA.</li>
+ <li><b>Ajouter avec ↶</b> : « ＋ Ajouter comme source / … et un événement à vérifier » d'Open Archives et des bases officielles ; <code>log_change()</code> ; le 🗓 Journal des recherches (<code>lib/research_journal.php</code>).</li>
+ <li><b>Secrets hors de la base</b> : comme les jetons de « Publier en ligne » (<code>lib/website_publish.php</code> : fichier à part, droits 600, jamais vus par la page).</li>
+</ul></div>
+<p class="note" style="margin-bottom:40px">Maquette statique : les réponses sont écrites à la main. Les boutons d'action, le sélecteur des réglages et les commutateurs réagissent.</p>
+</div>
+<script>document.addEventListener('click',function(e){
+ var s=e.target.closest('.seg span');
+ if(s){var p=s.parentNode;p.querySelectorAll('span').forEach(function(x){x.classList.toggle('on',x===s)});
+  var g=p.getAttribute('data-group');if(g){document.querySelectorAll('[data-pane^="'+g+':"]').forEach(function(el){el.hidden=el.getAttribute('data-pane')!==g+':'+s.getAttribute('data-v')})}}
+ var sw=e.target.closest('.sw');if(sw)sw.classList.toggle('on');
+ var a=e.target.closest('[data-act]');if(a){var r=a.closest('[data-state]');if(r)r.setAttribute('data-state',a.getAttribute('data-act'))}
+ var t=e.target.closest('[data-toggle]');if(t){var el=document.getElementById(t.getAttribute('data-toggle'));if(el)el.hidden=!el.hidden}
+});
+</script>
+</body></html>

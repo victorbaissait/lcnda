@@ -756,3 +756,15 @@ function echanges_geneanet_place(array $parts, array $e): string
     if (gedcom_fold($country) === 'france') { $country = 'France'; }
     return implode(', ', array_map(static fn($p) => str_replace(',', ' ', gedcom_value($p)), [$town, $code, $parts['county'], $parts['state'], $country]));
 }
+
+/**
+ * Lieu pour Ancestry : « Lieu-dit, Commune, Département, Région, Pays », sans morceau vide (Ancestry rapproche ses lieux de cette
+ * façon : « Tulle, Corrèze, Nouvelle-Aquitaine, France ») ; en-tête « PLAC FORM City, County, State, Country ».
+ */
+function echanges_ancestry_place(array $parts): string
+{
+    $country = trim((string) ($parts['country'] ?? ''));
+    if (gedcom_fold($country) === 'france') { $country = 'France'; }
+    $bits = array_filter(array_map(static fn($p) => trim(str_replace(',', ' ', gedcom_value((string) $p))), [$parts['subdivision'] ?? '', $parts['town'] ?? '', $parts['county'] ?? '', $parts['state'] ?? '', $country]), static fn($p) => $p !== '');
+    return implode(', ', $bits);
+}

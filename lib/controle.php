@@ -16,11 +16,12 @@ declare(strict_types=1);
  *   tant que rien n'a changé (signature : nombres et dernières modifications des fiches, événements, familles, lieux).
  * - Lecture seule, sauf les corrections (controle_fix_date) et les exceptions.
  *
- * Le contrôle « commune qui n'existait pas encore à cette date » n'est pas fait : geo-fr.sqlite n'a que les communes
- * d'aujourd'hui, sans dates de création ni de fusion (il faudrait l'historique INSEE / Cassini comme nouveau référentiel).
+ * 🏛 « Commune qui n'existait pas encore ou plus à cette date » (sous-sorte anachro des 📍 Lieux) : lib/commune_histoire.php,
+ * d'après l'historique officiel des communes de l'INSEE depuis 1943 (livré avec l'app, « 🏛 Frontières anciennes »). Rien avant
+ * 1790 (paroisses), rien d'avant 1943 que le fichier ne connaît pas, marge de 10 ans pour une date approximative.
  */
 
-const CONTROLE_VERSION = 5; // à monter quand un contrôle change : le cache est refait
+const CONTROLE_VERSION = 6; // à monter quand un contrôle change : le cache est refait
 const CONTROLE_SORTS = ['dates', 'ages', 'parents', 'doublons', 'lieux'];
 const CONTROLE_LEVELS = ['red', 'orange', 'yellow'];
 
@@ -125,7 +126,9 @@ function controle_signature(PDO $pdo, array $th): string
     // 🐘 les comptes de toute la base (0,2 s à 200 000 fiches) relus tant que ces tables ne changent pas (lib/calc_cache.php)
     $row = function_exists('calc_cached') ? calc_cached($pdo, 'controle_sig', ['persons', 'events', 'families', 'family_children', 'places'], [], static fn() => controle_signature_row($pdo)) : controle_signature_row($pdo);
     unset($th['banner']);
-    return md5(json_encode([$row, $th, CONTROLE_VERSION]));
+    $ch = ''; // 🏛 le contrôle des communes de l'époque, allumé ou éteint (Réglages)
+    try { $ch = (string) ($pdo->query("SELECT value FROM app_settings WHERE key='genealogie-commune-histoire'")->fetchColumn() ?: ''); } catch (Throwable $_) {}
+    return md5(json_encode([$row, $th, CONTROLE_VERSION, $ch]));
 }
 function controle_signature_row(PDO $pdo): array
 {
@@ -724,6 +727,17 @@ function controle_compute(PDO $pdo, array $th): array
         }
     }
 
+    // 🏛 commune qui n'existait pas encore (créée après) ou plus (réunie avant) à la date de l'événement (lib/commune_histoire.php)
+    try {
+        if (!function_exists('ch_controle_alerts')) { require_once __DIR__ . '/commune_histoire.php'; }
+        $chPeople = static function (array $r) use ($P, $families): array {
+            $pid = (int) $r['person_id'];
+            if ($pid) { return isset($P[$pid]) ? [$pid] : []; }
+            return array_values(array_filter($families[(int) $r['family_id']] ?? [], static fn($x) => $x && isset($P[$x])));
+        };
+        foreach (ch_controle_alerts($pdo, $chPeople) as $a) { $add($a); }
+    } catch (Throwable $_) {}
+
     // ═══ 🧾 RECENSEMENT SOCFACE ═══ ce que lit l'IA comparé aux fiches reliées (🟡 / 🟠, jamais 🔴 : la machine peut se tromper)
     if (function_exists('socface_controle_alerts')) { foreach (socface_controle_alerts($pdo, $th) as $a) { $add($a); } }
 
@@ -818,7 +832,7 @@ function controle_sort_of_key(string $key): string
     return match (true) {
         in_array($k, ['dup'], true) => 'doublons',
         $k === 'socface' => 'socface',
-        in_array($k, ['place', 'journey', 'baptism-far', 'conflicting-naissance-place', 'conflicting-décès-place'], true) => 'lieux',
+        in_array($k, ['place', 'journey', 'baptism-far', 'commune-anachro', 'conflicting-naissance-place', 'conflicting-décès-place'], true) => 'lieux',
         in_array($k, ['old-parent', 'young-marriage', 'old-marriage', 'sosa-gap'], true) => 'ages',
         in_array($k, ['spouse-ancestor', 'animal-link', 'child-after-parent-death', 'close-births', 'same-year-siblings', 'before-marriage', 'sibling-span', 'multiple-parent-families', 'ghost-family', 'sosa-sex', 'young-parent'], true) => 'parents',
         default => 'dates',

@@ -1,0 +1,439 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Site familial avec comptes</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:19px;margin:36px 0 6px}
+.wrap{max-width:1240px;margin:0 auto}
+.eyebrow{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 18px;font-size:14px;max-width:1100px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.three>div{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;font-size:13px}
+.three h4{margin:0 0 4px;font-size:13px;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.badge.violet{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+.badge.grey{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap;cursor:pointer}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.btn.red{border-color:var(--red);color:var(--red);box-shadow:none}
+.btn.green{border-color:var(--green);color:var(--green);box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid var(--line2);padding:5px 8px;font-size:13.5px;background:var(--paper);width:100%;min-height:30px;color:var(--ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper);cursor:pointer}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:720px}
+.mini{font-size:12px;color:var(--muted)}
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.win-bar .ey{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px;min-width:0}
+.win-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:2px solid var(--ink);flex-wrap:wrap}
+.sw{display:inline-block;width:34px;height:18px;border-radius:9px;background:var(--line2);position:relative;vertical-align:middle;flex:none;cursor:pointer}
+.sw:after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.sw.on{background:var(--green)}.sw.on:after{left:18px}
+.set{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+.set small{display:block;color:var(--muted);font-size:12px}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.red{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.pill.vio{border-color:var(--vio);background:var(--vio-bg);color:var(--vio)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.qs{background:var(--paper);border:2px solid var(--vio);box-shadow:6px 6px 0 rgba(105,41,196,.22);padding:14px 18px}
+.qs ol{margin:0;padding-left:22px}
+.qs li{margin:0 0 12px;font-size:13.5px}
+.qs li b.q{display:block;font-size:14px}
+.qs .opts{display:flex;gap:6px;flex-wrap:wrap;margin:5px 0}
+.qs .opts span{border:1.5px solid var(--line2);padding:2px 7px;font-size:12px;background:var(--grey-bg)}
+.qs .opts span.rec{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:700}
+.qs .why{font-size:12.5px;color:var(--muted)}
+.reuse{background:var(--paper);border:2px solid var(--green);box-shadow:6px 6px 0 rgba(26,127,55,.22);padding:12px 16px}
+.reuse ul{margin:0;padding-left:18px;font-size:13px}.reuse li{margin:5px 0}
+.reuse code{color:var(--green)}
+.topbar{display:flex;align-items:center;gap:10px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;flex-wrap:wrap;font:700 12.5px system-ui}
+.topbar .sp{flex:1}
+.topbar .who{border:1.5px solid var(--bar-ink);padding:2px 8px;font-weight:700}
+.topbar .on{background:var(--blue);padding:2px 8px}
+.av{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--vio);color:#fff;font:800 11px/24px system-ui;justify-content:center;flex:none}
+.av.b{background:var(--blue)}.av.g{background:var(--green)}.av.y{background:var(--yel);color:#111}.av.k{background:var(--ink);color:var(--paper)}
+.hid{color:var(--soft);font-style:italic}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.flow>div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px;font-size:12.5px}
+.flow>div b{display:block;font-size:13px;margin-bottom:2px}
+.flow>div .n{display:inline-block;background:var(--blue);color:#fff;font:800 11px system-ui;padding:1px 6px;margin-bottom:4px}
+.flow>div small{color:var(--muted)}
+.toc{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0}
+.toc a{border:1.5px solid var(--ink);background:var(--paper);padding:3px 8px;font:700 12px system-ui;color:var(--ink);text-decoration:none}
+.toc a:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+a{color:var(--blue)}
+@media (max-width:980px){.three{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+@media (max-width:760px){body{padding:14px 16px}.case{padding:12px}.flow{grid-template-columns:1fr}h1{font-size:21px}}
+
+/* — propre à cette maquette — */
+.ways{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:12px}
+.way{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--shadow);padding:14px 16px;min-width:0}
+.way h3{margin:4px 0 6px;font-size:17px}
+.way ul{margin:6px 0 0;padding-left:18px;font-size:13px}.way li{margin:3px 0}
+.netd{border:1.5px solid var(--line2);background:var(--grey-bg);padding:8px;margin:8px 0}
+.netd svg{width:100%;height:auto;display:block}
+.netd text{fill:var(--ink);font:12px system-ui}.netd .m{fill:var(--muted);font-size:10.5px}
+.netd .bx{fill:var(--paper);stroke:var(--ink);stroke-width:2}.netd .bxb{fill:var(--blue-bg);stroke:var(--blue);stroke-width:2}.netd .bxg{fill:var(--green-bg);stroke:var(--green);stroke-width:2}
+.netd .ln{stroke:var(--ink);stroke-width:2;fill:none}.netd .lnb{stroke:var(--blue);stroke-width:2.5;fill:none;stroke-dasharray:6 4}
+.acc td .who{display:flex;gap:8px;align-items:center}
+.acc td small{display:block;color:var(--muted)}
+.rights{display:flex;gap:3px;flex-wrap:wrap}
+.rights span{font:700 11px system-ui;border:1.5px solid var(--line2);padding:2px 6px;color:var(--soft);white-space:nowrap}
+.rights span.on{border-color:var(--blue);background:var(--blue);color:#fff}
+.lvl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
+.lvl>div{border:2px solid var(--line2);padding:8px 10px;font-size:12.5px;background:var(--paper)}
+.lvl>div b{display:block;font-size:13.5px}
+.lvl>div.on{border-color:var(--blue);background:var(--blue-bg)}
+.fiche{border:2px solid var(--ink);background:var(--paper)}
+.fiche .fh{padding:10px 12px;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.fiche .fh h4{margin:0;font-size:17px}.fiche .fh small{display:block;color:var(--soft)}
+.fiche .fb{padding:10px 12px;font-size:13px}
+.ev{display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);align-items:center}
+.ev .k{font:700 11px system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.ev.edit{background:var(--yel-bg);outline:2px dashed var(--yel);outline-offset:-2px;padding:6px}
+.diff{font-size:13px}
+.diff .old{color:var(--red);text-decoration:line-through}
+.diff .new{color:var(--green);font-weight:700}
+.prop{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:6px 10px;padding:10px;border-bottom:1px solid var(--line);align-items:start}
+.prop .what small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.prop .acts{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.prop .done{display:none;font:700 12.5px system-ui}
+.prop[data-state="ok"]{background:var(--green-bg)}.prop[data-state="no"]{background:var(--grey-bg)}
+.prop[data-state="ok"] .acts,.prop[data-state="no"] .acts{display:none}
+.prop[data-state="ok"] .done.ok,.prop[data-state="no"] .done.no{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.prop[data-state="no"] .what{opacity:.55}
+.grp{padding:7px 10px;background:var(--grey-bg);border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px}
+.mx td,.mx th{text-align:center}.mx td:first-child,.mx th:first-child{text-align:left}
+.mx .y{color:var(--green);font-weight:800}.mx .n{color:var(--red);font-weight:800}.mx .p{color:var(--yel-ink);font-weight:800}
+.log li{display:grid;grid-template-columns:110px 26px minmax(0,1fr) auto;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);align-items:center;font-size:13px}
+.log{list-style:none;margin:0;padding:0}
+.log .d{font:700 11px system-ui;color:var(--soft)}
+.log small{display:block;color:var(--muted)}
+.inv{border:2px dashed var(--blue);background:var(--blue-bg);padding:10px 12px;font-size:13px;margin-top:10px}
+.inv code{font-size:13px;color:var(--blue-ink);font-weight:700}
+.phone{max-width:360px;border:9px solid #222;border-radius:24px;background:var(--paper);overflow:hidden;margin:0 auto}
+.phone .pt{background:var(--bar);color:var(--bar-ink);padding:7px 10px;font:700 12px system-ui;display:flex;justify-content:space-between}
+.phone .pb{padding:10px;font-size:13px}
+.steps{counter-reset:st;list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.steps>li{border:2px solid var(--ink);background:var(--paper);padding:9px 12px 9px 50px;position:relative;font-size:13px}
+.steps>li:before{counter-increment:st;content:counter(st);position:absolute;left:10px;top:9px;width:28px;height:28px;background:var(--blue);color:#fff;font:800 15px/28px system-ui;text-align:center}
+@media (max-width:900px){.ways{grid-template-columns:1fr}.lvl{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){
+ .ev{grid-template-columns:72px minmax(0,1fr)}.ev>*:nth-child(3){grid-column:2}
+ .prop{grid-template-columns:20px minmax(0,1fr)}.prop .acts,.prop .done{grid-column:2;justify-content:flex-start!important}
+ .log li{grid-template-columns:26px minmax(0,1fr)}.log li .d{grid-column:2;order:3}.log li>.btn{grid-column:2;justify-self:start;order:4}
+ .lvl{grid-template-columns:1fr}
+}
+</style></head><body><div class="wrap">
+
+<p class="eyebrow">Maquette · grosse fonction n°1 · rien n'est encore construit</p>
+<h1>👪 Le site familial : la famille regarde l'arbre et propose des ajouts</h1>
+<p class="sub">À la manière de TNG, HuMo-gen, webtrees ou Gramps Web — mais sans serveur obligatoire, et c'est toujours toi qui décides de ce qui entre dans l'arbre.</p>
+
+<div class="simple">
+ <p><b>Ce que c'est.</b> Tu donnes à des proches un <b>compte</b> (un nom et un mot de passe). Avec ce compte, ils ouvrent ton arbre depuis leur téléphone ou leur ordinateur, ils le lisent, et s'ils voient une erreur ou connaissent une date, ils <b>proposent</b> une correction, avec une photo d'acte s'ils en ont une.</p>
+ <p><b>Pour qui.</b> Pour toi, qui tiens l'arbre ; pour les cousins, oncles et tantes qui ont des souvenirs, des photos, des livrets de famille ; et éventuellement pour une personne de confiance qui tient avec toi une branche entière.</p>
+ <p><b>Ce que ça change.</b> Aujourd'hui, la famille peut <i>regarder</i> (réseau de la maison en lecture seule, copie « 📤 Partager avec la famille », site web publié). Demain, elle peut aussi <i>participer</i>. Chaque proposition arrive dans une file « 📨 Propositions en attente » : tu acceptes ou refuses ligne par ligne, et même après avoir accepté, <b>↶</b> remet l'ancien texte. Les vivants et les fiches confidentielles restent cachés à qui n'a pas le droit de les voir.</p>
+</div>
+<div class="three">
+ <div><h4>👁 Lire</h4>Voir l'arbre, les fiches, les photos choisies. Les vivants : cachés ou prénom seulement.</div>
+ <div><h4>✎ Proposer</h4>Lire, et proposer un ajout ou une correction. Rien n'entre sans ton accord.</div>
+ <div><h4>🌿 Modifier une branche</h4>Pour une personne de confiance : elle écrit directement dans « sa » branche ; tout est noté, tout s'annule.</div>
+</div>
+
+<nav class="toc"><a href="#deux">0. Deux façons</a><a href="#comptes">1. Comptes et droits</a><a href="#cousin">2. Un cousin propose</a><a href="#file">3. Propositions en attente</a><a href="#vivants">4. Vivants et confidentiel</a><a href="#journal">5. Journal</a><a href="#enligne">6. Installer en ligne</a><a href="#questions">Questions pour toi</a><a href="#existe">Ce qui existe déjà</a></nav>
+
+<!-- ═════════ 0 ═════════ -->
+<p class="part" id="deux">0 · Deux façons, la même app</p>
+<h2>À la maison, ou sur ton propre hébergement — jamais chez nous</h2>
+<p class="sub">Aucun serveur « LCNDA » au milieu : soit c'est ton ordinateur qui reçoit la famille (comme le mode réseau local d'aujourd'hui), soit c'est l'hébergement que <b>tu</b> loues (OVH, o2switch, Infomaniak…). L'app est en PHP : elle s'y installe telle quelle.</p>
+<div class="ways">
+ <div class="way">
+  <span class="badge re">s'appuie sur l'existant</span>
+  <h3>🏠 (a) Sur le réseau de la maison</h3>
+  <div class="netd"><svg viewBox="0 0 420 150" role="img" aria-label="L'ordinateur principal reçoit les téléphones et ordinateurs de la maison par le wifi">
+   <rect class="bxb" x="150" y="10" width="130" height="56"/><text x="215" y="34" text-anchor="middle">💻 Ton ordinateur</text><text class="m" x="215" y="52" text-anchor="middle">l'arbre (SQLite) + la porte du wifi</text>
+   <rect class="bx" x="10" y="98" width="110" height="42"/><text x="65" y="123" text-anchor="middle">📱 Paul (proposer)</text>
+   <rect class="bx" x="160" y="98" width="110" height="42"/><text x="215" y="123" text-anchor="middle">💻 Hélène (branche)</text>
+   <rect class="bx" x="310" y="98" width="100" height="42"/><text x="360" y="123" text-anchor="middle">📱 Lucas (lire)</text>
+   <path class="ln" d="M65 98 L180 66 M215 98 L215 66 M360 98 L250 66"/>
+   <text class="m" x="300" y="86">wifi de la maison seulement</text>
+  </svg></div>
+  <ul>
+   <li>Rien à installer ailleurs : l'app de bureau (Electron) ouvre la porte du wifi, comme aujourd'hui.</li>
+   <li>Les visiteurs ne peuvent venir que quand ton ordinateur est allumé et l'app ouverte.</li>
+   <li>Nouveau : un appareil accepté n'est plus seulement « 👁 lecture » ou « 📱 terrain », il est relié à un <b>compte</b> avec ses droits.</li>
+   <li>Idéal pour une cousinade, un repas de famille, les grands-parents qui passent.</li>
+  </ul>
+ </div>
+ <div class="way">
+  <span class="badge new">nouveau</span>
+  <h3>🌐 (b) En ligne, sur ton hébergement</h3>
+  <div class="netd"><svg viewBox="0 0 420 150" role="img" aria-label="Une copie de l'arbre sur ton hébergement reçoit la famille ; ton ordinateur relève les propositions">
+   <rect class="bxb" x="10" y="10" width="140" height="56"/><text x="80" y="34" text-anchor="middle">💻 Ton ordinateur</text><text class="m" x="80" y="52" text-anchor="middle">l'arbre de référence</text>
+   <rect class="bxg" x="250" y="10" width="160" height="56"/><text x="330" y="34" text-anchor="middle">🌐 Ton hébergement</text><text class="m" x="330" y="52" text-anchor="middle">famille.tondomaine.fr (HTTPS)</text>
+   <path class="lnb" d="M150 30 L250 30"/><text class="m" x="200" y="24" text-anchor="middle">publier ↦</text>
+   <path class="lnb" d="M250 50 L150 50"/><text class="m" x="200" y="64" text-anchor="middle">↤ relever</text>
+   <rect class="bx" x="230" y="100" width="90" height="40"/><text x="275" y="124" text-anchor="middle">📱 Paul</text>
+   <rect class="bx" x="330" y="100" width="80" height="40"/><text x="370" y="124" text-anchor="middle">💻 Lucas</text>
+   <path class="ln" d="M275 100 L310 66 M370 100 L350 66"/>
+   <text class="m" x="10" y="118">ton ordinateur peut être éteint :</text><text class="m" x="10" y="132">la famille consulte quand même</text>
+  </svg></div>
+  <ul>
+   <li>Tu loues un petit hébergement PHP (quelques euros par mois) ; l'app y installe une <b>copie</b> de l'arbre.</li>
+   <li>La famille consulte et propose à toute heure, même ton ordinateur éteint.</li>
+   <li>Ton ordinateur reste la référence : il <b>relève</b> les propositions, tu décides chez toi, puis il <b>republie</b>.</li>
+   <li>Les vivants et les fiches confidentielles <b>ne partent pas</b> sur l'hébergement, sauf si tu le choisis (voir §4).</li>
+  </ul>
+ </div>
+</div>
+<div class="scrollx" style="margin-top:16px"><table>
+ <thead><tr><th></th><th>🏠 Réseau de la maison</th><th>🌐 Ton hébergement</th></tr></thead>
+ <tbody>
+  <tr><td><b>Coût</b></td><td>rien</td><td>un hébergement PHP + un nom de domaine (≈ 3 à 8 € / mois)</td></tr>
+  <tr><td><b>Quand la famille peut venir</b></td><td>quand ton ordinateur est allumé, sur le même wifi</td><td>tout le temps, de partout</td></tr>
+  <tr><td><b>Où sont les données</b></td><td>seulement chez toi</td><td>une copie chez ton hébergeur (sans les vivants par défaut)</td></tr>
+  <tr><td><b>Comptes</b></td><td>appareil accepté + compte</td><td>adresse e-mail ou identifiant + mot de passe (+ code reçu, au choix)</td></tr>
+  <tr><td><b>Difficulté pour toi</b></td><td>un bouton</td><td>un assistant pas à pas (§6) ; une fois installé, « Publier / Relever » en un clic</td></tr>
+ </tbody></table></div>
+
+<!-- ═════════ 1 ═════════ -->
+<p class="part" id="comptes">1 · Gestion des comptes et des droits</p>
+<h2>Réglages → 👪 Site familial → Comptes</h2>
+<p class="sub">Un tableau simple : qui, ce qu'il peut faire, sur quelle partie de l'arbre, ce qu'il voit des vivants. Les droits se choisissent par niveaux, pas case par case.</p>
+<div class="grid">
+<div class="win wide">
+ <div class="win-bar"><span><span class="ey">Réglages · Site familial</span> <b>👪 Comptes de la famille</b></span><span class="row"><span class="mini">où :</span><span class="seg" data-group="ou"><span class="on" data-v="maison">🏠 maison</span><span data-v="ligne">🌐 en ligne</span></span><span class="btn blue small">＋ Inviter quelqu'un</span></span></div>
+ <div class="win-body scrollx">
+  <table class="acc"><thead><tr><th>Personne</th><th>Droits</th><th>Sur quelle partie</th><th>Vivants</th><th>Dernière visite</th><th></th></tr></thead>
+  <tbody>
+   <tr><td><span class="who"><span class="av k">M</span><span><b>Toi</b><small>propriétaire · cet ordinateur</small></span></span></td><td><div class="rights"><span class="on">tout</span></div></td><td>tout l'arbre</td><td>visibles</td><td>—</td><td></td></tr>
+   <tr><td><span class="who"><span class="av g">H</span><span><b>Hélène Martin</b><small>ta tante · 💻 portable d'Hélène</small></span></span></td><td><div class="rights"><span>lire</span><span>proposer</span><span class="on">modifier une branche</span></div></td><td>🌿 descendants de <b>Jean Martin</b> (1851)</td><td>prénom seulement</td><td>hier, 18 h 12</td><td><span class="btn small">Modifier</span></td></tr>
+   <tr><td><span class="who"><span class="av b">P</span><span><b>Paul Lavergne</b><small>cousin · 📱 téléphone de Paul</small></span></span></td><td><div class="rights"><span>lire</span><span class="on">proposer</span><span>modifier une branche</span></div></td><td>tout l'arbre</td><td>cachés</td><td>il y a 3 jours</td><td><span class="btn small">Modifier</span></td></tr>
+   <tr><td><span class="who"><span class="av y">L</span><span><b>Lucas</b><small>ton petit-fils · 📱</small></span></span></td><td><div class="rights"><span class="on">lire</span><span>proposer</span><span>modifier une branche</span></div></td><td>🌿 ancêtres de <b>toi</b> seulement</td><td>prénom seulement</td><td>le 2 novembre</td><td><span class="btn small">Modifier</span></td></tr>
+   <tr><td><span class="who"><span class="av">?</span><span><b>Invitation envoyée</b><small>pour « Odile (cousine Québec) »</small></span></span></td><td><div class="rights"><span>lire</span><span class="on">proposer</span></div></td><td>tout l'arbre</td><td>cachés</td><td><span class="pill q">pas encore venue</span></td><td><span class="btn small red">Retirer</span></td></tr>
+  </tbody></table>
+ </div>
+</div>
+
+<div class="case">
+ <div class="head"><span class="tag">Fenêtre « Modifier le compte de Paul »</span><span class="badge new">nouveau</span></div>
+ <h3>Ce que Paul peut faire</h3>
+ <div class="lvl">
+  <div><b>👁 Lire</b>voir seulement</div>
+  <div class="on"><b>✎ Proposer</b>lire + proposer, tu valides</div>
+  <div><b>🌿 Modifier une branche</b>écrit directement dans une branche</div>
+  <div><b>⚙ Gérer</b>comme toi (déconseillé)</div>
+ </div>
+ <label class="lab">Sur quelle partie de l'arbre</label>
+ <div class="seg"><span class="on">tout l'arbre</span><span>ancêtres de…</span><span>descendants de…</span><span>une liste (📋 Mes listes)</span></div>
+ <label class="lab">Les vivants</label>
+ <div class="seg"><span class="on">cachés</span><span>prénom seulement</span><span>visibles</span></div>
+ <p class="note">Les fiches marquées 🔒 confidentielles restent cachées, quel que soit le choix (sauf « ⚙ Gérer »).</p>
+ <div class="set"><span>Peut joindre des photos et documents<small>taille bornée, vérifiés comme les envois du téléphone</small></span><span class="sw on"></span></div>
+ <div class="set"><span>Peut voir les notes de recherche<small>tes notes personnelles restent à toi par défaut</small></span><span class="sw"></span></div>
+ <div class="set"><span>Peut télécharger un GEDCOM<small>avec les mêmes règles de vie privée que l'export « Pour partager »</small></span><span class="sw"></span></div>
+</div>
+
+<div class="case">
+ <div class="head"><span class="tag">Inviter quelqu'un</span><span class="badge new">nouveau</span></div>
+ <h3>Une invitation, sans mot de passe à dicter</h3>
+ <label class="lab">Son nom (pour toi)</label><div class="input">Odile (cousine Québec)</div>
+ <label class="lab">Ses droits</label><div class="seg"><span>👁 lire</span><span class="on">✎ proposer</span><span>🌿 une branche</span></div>
+ <div class="inv">
+  <b>🏠 À la maison :</b> elle scanne le code de l'écran « 🖧 Plusieurs ordinateurs », puis tape le code <code>482 913</code> : son appareil est relié à ce compte.<br><br>
+  <b>🌐 En ligne :</b> un lien à usage unique, valable 7 jours, qu'elle ouvre pour choisir son mot de passe : <code>https://famille.tondomaine.fr/invitation/k3J9…</code> <span class="btn small">Copier</span> <span class="btn small">✉ Écrire un e-mail</span>
+ </div>
+ <p class="note">L'app n'envoie aucun e-mail elle-même : elle prépare le message, tu l'envoies avec ta messagerie.</p>
+</div>
+</div>
+
+<!-- ═════════ 2 ═════════ -->
+<p class="part" id="cousin">2 · Ce que voit un cousin qui propose</p>
+<h2>Paul ouvre la fiche de son arrière-grand-père et corrige une date</h2>
+<p class="sub">Une page volontairement simple (pas toute l'app) : la fiche, l'arbre autour, et un bouton « ✎ Proposer une correction » à côté de chaque ligne. Sur téléphone, la même chose en colonne.</p>
+<div class="grid">
+<div class="win">
+ <div class="topbar"><span>👪 La famille Martin – Lavergne</span><span class="sp"></span><span class="on">Arbre</span><span>Chercher</span><span class="who">Paul · ✎ proposer</span></div>
+ <div class="fiche">
+  <div class="fh"><div><h4>Antoine Lavergne</h4><small>1879 – 1951 · cultivateur · arrière-grand-père de Paul</small></div><span class="btn small">✎ Proposer un ajout</span></div>
+  <div class="fb">
+   <div class="ev"><span class="k">Naissance</span><span>12 mars 1879, Naves (Corrèze)</span><span class="btn small ghost">✎</span></div>
+   <div class="ev edit"><span class="k">Décès</span><span>
+     <span class="diff"><span class="old">1950, Tulle</span> → <span class="new">4 février 1951, Naves</span></span>
+     <small class="mini" style="display:block">« C'est écrit sur le livret de famille de ma grand-mère. »</small>
+     <span class="mini">📎 livret-famille-p3.jpg (1,2 Mo)</span></span><span class="pill q">proposé</span></div>
+   <div class="ev"><span class="k">Mariage</span><span>1904, Naves, avec Marie Chassagne</span><span class="btn small ghost">✎</span></div>
+   <div class="ev"><span class="k">Enfants</span><span>Louis (1905–1977) · Jeanne (1908–1990) · <span class="hid">Personne vivante</span></span><span></span></div>
+  </div>
+  <div class="win-foot"><span class="mini" style="margin-right:auto">Ta proposition est envoyée à Marie. Tu verras ici si elle l'accepte.</span><span class="btn ghost">Annuler</span><span class="btn blue">Envoyer la proposition</span></div>
+ </div>
+</div>
+<div>
+ <div class="phone">
+  <div class="pt"><span>👪 Famille</span><span>Paul ✎</span></div>
+  <div class="pb">
+   <b>✎ Proposer un ajout à Antoine Lavergne</b>
+   <label class="lab">Qu'est-ce que tu veux ajouter ?</label>
+   <div class="seg"><span>un événement</span><span class="on">une photo</span><span>un enfant</span><span>un souvenir</span></div>
+   <label class="lab">La photo</label><div class="input">📷 Prendre une photo / choisir…</div>
+   <label class="lab">Ce qu'on y voit</label><div class="input">Antoine et Marie devant la ferme, vers 1925</div>
+   <label class="lab">D'où ça vient ?</label><div class="input">album de ma grand-mère Jeanne</div>
+   <p class="mini">Marie verra ta proposition avant qu'elle n'entre dans l'arbre.</p>
+   <span class="btn blue" style="width:100%;justify-content:center">Envoyer</span>
+  </div>
+ </div>
+ <div class="msg" style="margin-top:14px"><b>Mes propositions</b> (pour Paul) : 2 acceptées ✓ · 1 en attente ⏳ · 1 refusée ✕ <span class="mini">« Merci Paul ! L'acte dit 1950, je garde 1950 » — le petit mot que tu as laissé en refusant.</span></div>
+</div>
+</div>
+
+<!-- ═════════ 3 ═════════ -->
+<p class="part" id="file">3 · La file des propositions en attente</p>
+<h2>📨 Propositions en attente — tu décides ligne par ligne</h2>
+<p class="sub">Une ligne = un changement précis, avec l'ancien et le nouveau. Accepter écrit dans l'arbre (avec la source jointe), refuser laisse un petit mot facultatif. Après coup, <b>↶</b> défait exactement ce qui a été accepté. Essaie les boutons.</p>
+<div class="win">
+ <div class="win-bar"><b>📨 Propositions en attente <span class="pill blue">5</span></b><span class="row"><span class="seg"><span class="on">par personne qui propose</span><span>par fiche</span></span><span class="btn small">🌐 Relever celles du site en ligne</span></span></div>
+ <div class="grp"><span><span class="av b" style="vertical-align:middle">P</span> <b>Paul Lavergne</b> · 3 propositions · ✎ proposer</span><span class="row"><span class="btn small green">✓ Tout accepter de Paul</span></span></div>
+ <div class="prop" data-state="wait"><span>📅</span><div class="what"><b>Antoine Lavergne</b> — décès : <span class="diff"><span class="old">1950, Tulle</span> → <span class="new">4 février 1951, Naves</span></span><small>« C'est écrit sur le livret de famille de ma grand-mère. » · 📎 livret-famille-p3.jpg (deviendra la source) · il y a 2 jours</small></div>
+  <div><div class="acts"><span class="btn small green" data-act="ok">✓ Accepter</span><span class="btn small">✎ Accepter en changeant…</span><span class="btn small red" data-act="no">✕ Refuser</span></div><div class="done ok"><span style="color:var(--green)">✓ accepté, écrit dans l'arbre</span><span class="btn small" data-act="wait">↶ Annuler</span></div><div class="done no"><span>✕ refusé</span><span class="btn small" data-act="wait">↶</span></div></div></div>
+ <div class="prop" data-state="wait"><span>🖼</span><div class="what"><b>Antoine Lavergne</b> — nouvelle photo « Antoine et Marie devant la ferme, vers 1925 »<small>📎 photo-ferme.jpg · origine : album de Jeanne · sera reliée aux deux fiches</small></div>
+  <div><div class="acts"><span class="btn small green" data-act="ok">✓ Accepter</span><span class="btn small red" data-act="no">✕ Refuser</span></div><div class="done ok"><span style="color:var(--green)">✓ ajoutée</span><span class="btn small" data-act="wait">↶ Annuler</span></div><div class="done no"><span>✕ refusée</span><span class="btn small" data-act="wait">↶</span></div></div></div>
+ <div class="prop" data-state="wait"><span>👶</span><div class="what"><b>Louis Lavergne</b> — nouvel enfant : « Pierre Lavergne, né en 1931 à Naves »<small>⚠ Une fiche « Pierre Lavergne (1931) » existe peut-être déjà : <a href="#">la voir</a> · « Accepter » te demandera s'il faut relier ou créer</small></div>
+  <div><div class="acts"><span class="btn small green" data-act="ok">✓ Accepter…</span><span class="btn small red" data-act="no">✕ Refuser</span></div><div class="done ok"><span style="color:var(--green)">✓ relié à la fiche existante</span><span class="btn small" data-act="wait">↶ Annuler</span></div><div class="done no"><span>✕ refusé</span><span class="btn small" data-act="wait">↶</span></div></div></div>
+ <div class="grp"><span><span class="av">O</span> <b>Odile</b> · 2 propositions · ✎ proposer · <span class="pill q">en ligne</span></span><span></span></div>
+ <div class="prop" data-state="wait"><span>💬</span><div class="what"><b>Marie Chassagne</b> — souvenir : « Ma mère racontait qu'elle allait à pied au marché de Tulle chaque samedi… »<small>sera ajouté comme note « Souvenir d'Odile », avec sa date</small></div>
+  <div><div class="acts"><span class="btn small green" data-act="ok">✓ Accepter</span><span class="btn small red" data-act="no">✕ Refuser</span></div><div class="done ok"><span style="color:var(--green)">✓ note ajoutée</span><span class="btn small" data-act="wait">↶ Annuler</span></div><div class="done no"><span>✕ refusé</span><span class="btn small" data-act="wait">↶</span></div></div></div>
+ <div class="prop" data-state="wait"><span>✏️</span><div class="what"><b>Jeanne Lavergne</b> — prénom : <span class="diff"><span class="old">Jeanne</span> → <span class="new">Jeanne Marie</span></span><small>pas de source jointe</small></div>
+  <div><div class="acts"><span class="btn small green" data-act="ok">✓ Accepter</span><span class="btn small red" data-act="no">✕ Refuser</span></div><div class="done ok"><span style="color:var(--green)">✓ accepté</span><span class="btn small" data-act="wait">↶ Annuler</span></div><div class="done no"><span>✕ refusé</span><span class="btn small" data-act="wait">↶</span></div></div></div>
+</div>
+<p class="note">Si la fiche a changé entre-temps (toi ou Hélène), la ligne le dit : « ⚠ La date a été modifiée depuis la proposition : actuellement 1951 ». Rien n'est écrasé sans que tu le voies.</p>
+
+<!-- ═════════ 4 ═════════ -->
+<p class="part" id="vivants">4 · Vivants et fiches confidentielles</p>
+<h2>Qui voit quoi</h2>
+<p class="sub">Les mêmes règles que l'export « Pour partager » et que « 📤 Partager avec la famille » : un vivant (déclaré ou probablement vivant) et une fiche 🔒 confidentielle sont reconnus de la même façon partout.</p>
+<div class="scrollx"><table class="mx">
+ <thead><tr><th></th><th>👁 Lire</th><th>✎ Proposer</th><th>🌿 Modifier une branche</th><th>⚙ Gérer / toi</th></tr></thead>
+ <tbody>
+  <tr><td>Personnes décédées</td><td class="y">visibles</td><td class="y">visibles</td><td class="y">visibles</td><td class="y">visibles</td></tr>
+  <tr><td>Vivants (réglage du compte)</td><td class="p">cachés ou prénom</td><td class="p">cachés ou prénom</td><td class="p">au choix, dans sa branche</td><td class="y">visibles</td></tr>
+  <tr><td>Fiches 🔒 confidentielles</td><td class="n">jamais</td><td class="n">jamais</td><td class="n">jamais</td><td class="y">visibles</td></tr>
+  <tr><td>Photos où figure un vivant caché</td><td class="n">non</td><td class="n">non</td><td class="p">dans sa branche</td><td class="y">oui</td></tr>
+  <tr><td>Tes notes de recherche</td><td class="n">non</td><td class="p">si coché</td><td class="p">si coché</td><td class="y">oui</td></tr>
+  <tr><td>🌐 Envoyé sur l'hébergement en ligne</td><td colspan="4" style="text-align:left">Par défaut, <b>ni les vivants ni les fiches confidentielles ne quittent ton ordinateur</b> : l'hébergement ne peut pas montrer ce qu'il n'a pas. Option « envoyer les vivants pour les comptes qui ont le droit de les voir » : désactivée, avec un avertissement.</td></tr>
+ </tbody></table></div>
+<div class="msg warn"><b>Un vivant caché ne laisse pas de trou bizarre :</b> « Personne vivante » apparaît à sa place dans la liste des enfants, sans nom ni date, et ses propres enfants vivants ne sont pas montrés.</div>
+
+<!-- ═════════ 5 ═════════ -->
+<p class="part" id="journal">5 · Le journal : qui a fait quoi</p>
+<h2>📜 Journal du site familial</h2>
+<p class="sub">Le registre « Qui a vu quoi » et le journal des modifications existent déjà ; ils gagnent le nom du <b>compte</b> en plus de celui de l'appareil, et un filtre par personne.</p>
+<div class="win">
+ <div class="win-bar"><b>📜 Journal</b><span class="row"><span class="seg"><span class="on">tout</span><span>modifications</span><span>propositions</span><span>visites</span></span><span class="input" style="width:170px">Personne : toutes ▾</span></span></div>
+ <div class="win-body"><ul class="log">
+  <li><span class="d">auj. 10:42</span><span class="av k">M</span><span><b>Toi</b> as accepté la proposition de Paul : décès d'Antoine Lavergne → 4 février 1951, Naves<small>source « Livret de famille Lavergne (photo de Paul) » créée</small></span><span class="btn small">↶</span></li>
+  <li><span class="d">hier 18:12</span><span class="av g">H</span><span><b>Hélène</b> a modifié <b>Louise Martin</b> : métier « couturière » ajouté<small>branche « descendants de Jean Martin » · 💻 portable d'Hélène</small></span><span class="btn small">↶</span></li>
+  <li><span class="d">hier 18:05</span><span class="av g">H</span><span><b>Hélène</b> a essayé de modifier <b>Pierre Chassagne</b> : refusé, hors de sa branche</span><span></span></li>
+  <li><span class="d">22 nov.</span><span class="av b">P</span><span><b>Paul</b> a proposé 3 changements<small>📱 téléphone de Paul · réseau de la maison</small></span><span></span></li>
+  <li><span class="d">21 nov.</span><span class="av">O</span><span><b>Odile</b> a consulté 14 fiches<small>🌐 en ligne · relevé au dernier « Relever »</small></span><span></span></li>
+ </ul></div>
+</div>
+
+<!-- ═════════ 6 ═════════ -->
+<p class="part" id="enligne">6 · Installer en ligne sur ton hébergement</p>
+<h2>Un assistant : Réglages → 👪 Site familial → 🌐 En ligne</h2>
+<p class="sub">L'app sait déjà envoyer un site par FTPS (« 📤 Mon site web → Publier en ligne »). Ici, au lieu d'un site figé, elle envoie une petite version de l'app, en PHP, qui ne fait que : montrer l'arbre (sans vivants par défaut), gérer les comptes, recueillir les propositions.</p>
+<div class="grid">
+<ol class="steps">
+ <li><b>Ton hébergement</b> — adresse FTPS, identifiant, mot de passe (gardés hors de la base, comme pour le site web). L'app vérifie : PHP 8, SQLite, HTTPS.</li>
+ <li><b>Ce qui part</b> — tout l'arbre ou une branche ; vivants : non ; photos : celles cochées « publiables ». Résumé : « 2 418 personnes, 312 photos, 0 vivant, 0 fiche confidentielle ».</li>
+ <li><b>Ton mot de passe d'administrateur en ligne</b> — différent de celui de l'app, pour toi seule.</li>
+ <li><b>Envoyer</b> — l'app installe la version « site familial » et une copie de l'arbre. Elle vérifie que la page répond en HTTPS.</li>
+ <li><b>Ensuite</b> — deux boutons : <b>🌐 Publier</b> (envoie l'arbre à jour) et <b>📨 Relever</b> (rapporte propositions, nouveaux comptes et journal). Tu peux le faire à la main, ou chaque fois que tu ouvres l'app.</li>
+</ol>
+<div class="case">
+ <div class="head"><span class="tag">Sécurité en ligne</span></div>
+ <h3>Ce que fait la version en ligne pour se protéger</h3>
+ <ul style="font-size:13px;padding-left:18px;margin:0">
+  <li>HTTPS obligatoire ; mots de passe jamais gardés en clair (hachés) ; blocage après 5 essais ratés.</li>
+  <li>Aucune page d'administration en ligne pour changer l'arbre lui-même : <b>les décisions se prennent sur ton ordinateur</b>.</li>
+  <li>Les comptes « 🌿 Modifier une branche » écrivent en ligne dans une file à part ; au « Relever », leurs changements arrivent déjà acceptés, mais visibles et annulables (↶).</li>
+  <li>Pas de clé secrète dans le code : chaque installation fabrique ses propres secrets au premier lancement.</li>
+  <li>Bouton « ⛔ Fermer le site » : il ne répond plus qu'une page « fermé pour l'instant ».</li>
+ </ul>
+ <div class="msg warn">Une copie chez ton hébergeur, c'est une copie hors de chez toi. L'assistant le dit en toutes lettres avant le premier envoi.</div>
+</div>
+</div>
+
+<!-- ═════════ Questions ═════════ -->
+<p class="part" id="questions">Questions pour toi</p>
+<h2>Ce qu'il faut trancher avant de construire</h2>
+<div class="qs"><ol>
+ <li><b class="q">Par quoi commencer : la maison, ou en ligne ?</b><div class="opts"><span class="rec">🏠 maison d'abord ✓</span><span>🌐 en ligne d'abord</span><span>les deux ensemble</span></div><span class="why">Recommandé : la maison d'abord. La porte du wifi, les appareils acceptés et le registre existent déjà ; on ajoute les comptes et la file de propositions. La version en ligne vient ensuite, en réutilisant les mêmes écrans.</span></li>
+ <li><b class="q">En ligne, qui est la référence ?</b><div class="opts"><span class="rec">ton ordinateur, l'en-ligne est une copie + boîte aux lettres ✓</span><span>l'en-ligne devient la base principale</span></div><span class="why">Recommandé : ton ordinateur. C'est fidèle à « tout reste chez moi », il n'y a jamais deux arbres qui divergent, et une panne de l'hébergeur ne fait rien perdre.</span></li>
+ <li><b class="q">Le droit « 🌿 Modifier une branche » : on le propose ?</b><div class="opts"><span class="rec">oui, mais tout passe quand même dans le journal avec ↶ ✓</span><span>non, seulement « proposer »</span></div><span class="why">Recommandé : oui, pour une ou deux personnes de confiance (une tante qui tient sa branche). Sinon tu deviens le goulot pour tout.</span></li>
+ <li><b class="q">Les vivants peuvent-ils partir en ligne ?</b><div class="opts"><span class="rec">jamais, au moins dans la première version ✓</span><span>oui, pour les comptes qui ont le droit</span></div><span class="why">Recommandé : jamais au début. C'est la règle la plus simple à garantir (RGPD, vie privée des cousins vivants).</span></li>
+ <li><b class="q">Comment se connecte la famille en ligne ?</b><div class="opts"><span class="rec">lien d'invitation + mot de passe choisi ✓</span><span>+ code reçu par e-mail à chaque fois</span><span>compte Google / Apple</span></div><span class="why">Recommandé : invitation + mot de passe. Un code par e-mail obligerait l'hébergement à envoyer des e-mails (réglages en plus) ; une connexion Google/Apple ferait passer par un tiers.</span></li>
+ <li><b class="q">Une proposition peut-elle créer une nouvelle personne ?</b><div class="opts"><span class="rec">oui, avec la vérification « existe peut-être déjà » ✓</span><span>non, seulement compléter</span></div><span class="why">Recommandé : oui ; c'est souvent ce que la famille apporte (enfants, conjoints). La recherche de doublons de l'app sert de garde-fou.</span></li>
+ <li><b class="q">Prévenir des nouvelles propositions ?</b><div class="opts"><span class="rec">pastille sur la cloche de l'app ✓</span><span>e-mail depuis l'hébergement</span></div><span class="why">Recommandé : la cloche (rien ne part). L'e-mail pourra venir plus tard, en option.</span></li>
+</ol></div>
+
+<!-- ═════════ Existe ═════════ -->
+<p class="part" id="existe">Ce qui existe déjà dans l'app et sera réutilisé</p>
+<div class="reuse"><ul>
+ <li><b>🖧 Plusieurs ordinateurs</b> : la porte du wifi (<code>electron/lan-gate.js</code>), les appareils acceptés « 👁 lecture » et « 📱 terrain », leur jeton signé, et <code>lib/reseau_local.php</code> qui refuse les écritures aux invités : on y ajoute un compte relié à l'appareil et une petite liste d'écritures permises (« proposer »).</li>
+ <li><b>📥 À trier</b> (<code>lib/telephone_wifi.php</code>) : déjà une boîte où le téléphone dépose sans écrire dans l'arbre — même principe pour les propositions.</li>
+ <li><b>Vie privée</b> : <code>gedcom_share_hidden()</code> (<code>lib/gedcom.php</code>), utilisé par « 📤 Partager avec la famille » (<code>lib/family_share.php</code>) : vivants, probablement vivants, fiches confidentielles, photos où ils figurent.</li>
+ <li><b>Branches</b> : <code>h_ancestors()</code> / <code>h_descendants()</code> (<code>lib/heritage.php</code>) et « 📋 Mes listes » pour limiter un compte à une partie de l'arbre.</li>
+ <li><b>Journal et ↶</b> : <code>log_change()</code> (journal des modifications), la table <code>ro_undo</code> de <code>lib/recherche_outils.php</code>, le registre « Qui a vu quoi » (<code>access_log_add()</code>, <code>lib/verrou.php</code>, colonne « device »).</li>
+ <li><b>🔐 Mot de passe de la généalogie</b> (<code>lib/verrou.php</code>) et le mode consultation (<code>kiosk_blocks()</code>).</li>
+ <li><b>Envoi en ligne</b> : « 📤 Mon site web → Publier en ligne » en FTPS avec certificat vérifié, identifiants gardés hors de la base (<code>lib/website_publish.php</code>).</li>
+ <li><b>Doublons</b> : la recherche de doublons du ✅ Contrôle, pour « cette personne existe peut-être déjà ».</li>
+</ul></div>
+<p class="note" style="margin-bottom:40px">Maquette statique : les boutons ✓ / ✕ / ↶ de la file et les commutateurs réagissent, rien d'autre.</p>
+</div>
+<script>document.addEventListener('click',function(e){
+ var s=e.target.closest('.seg span');
+ if(s){var p=s.parentNode;p.querySelectorAll('span').forEach(function(x){x.classList.toggle('on',x===s)});
+  var g=p.getAttribute('data-group');if(g){document.querySelectorAll('[data-pane^="'+g+':"]').forEach(function(el){el.hidden=el.getAttribute('data-pane')!==g+':'+s.getAttribute('data-v')})}}
+ var sw=e.target.closest('.sw');if(sw)sw.classList.toggle('on');
+ var a=e.target.closest('[data-act]');if(a){var r=a.closest('[data-state]');if(r)r.setAttribute('data-state',a.getAttribute('data-act'))}
+ var t=e.target.closest('[data-toggle]');if(t){var el=document.getElementById(t.getAttribute('data-toggle'));if(el)el.hidden=!el.hidden}
+});
+</script>
+</body></html>
