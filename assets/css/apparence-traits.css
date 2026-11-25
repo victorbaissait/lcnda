@@ -4101,6 +4101,24 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .ld-install, :root .ld-install:is([data-lc-lines], [data-lc-lines] *) {border:1.5px dashed var(--line, rgba(0, 0, 0, .2) )}
 :root.lc-frame .ld-card, :root .ld-card:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line, rgba(0, 0, 0, .15) )}
 :root.lc-frame .ld-card:hover, :root .ld-card:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ld-card:focus-visible, :root .ld-card:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #055dff)}
+:root.lc-frame .ld-gps-v, :root .ld-gps-v:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ld-gps-act button, :root .ld-gps-act button:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ld-gps-act a, :root .ld-gps-act a:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line, rgba(0, 0, 0, .25) )}
+:root.lc-frame .ld-gps-act button:hover, :root .ld-gps-act button:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ld-gps-act a:hover, :root .ld-gps-act a:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #055dff)}
+:root[data-theme="dark"].lc-frame .ld-gps-act button, :root[data-theme="dark"] .ld-gps-act button:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .ld-gps-act a, :root[data-theme="dark"] .ld-gps-act a:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+/* donnees-maj.css */
+:root.lc-frame .dmaj-link, :root .dmaj-link:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .dmaj-rows, :root .dmaj-rows:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--border, rgba(127,127,127,.25) )}
+:root.lc-frame .dmaj-row, :root .dmaj-row:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--border, rgba(127,127,127,.18) )}
+:root.lc-frame .dmaj-row:first-child, :root .dmaj-row:first-child:is([data-lc-lines], [data-lc-lines] *) {border-top:0}
+:root.lc-frame .dmaj-icon, :root .dmaj-icon:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .dmaj-icon:hover, :root .dmaj-icon:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .dmaj-icon:focus-visible, :root .dmaj-icon:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--border, rgba(127,127,127,.35))}
+:root.lc-frame .dmaj-queue, :root .dmaj-queue:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed var(--border, rgba(127,127,127,.4) )}
+/* listes-personnes.css */
+:root.lc-frame .lp-chip, :root .lp-chip:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--blue-bright, #055dff)}
+:root.lc-frame .lp-chip.is-linked, :root .lp-chip.is-linked:is([data-lc-lines], [data-lc-lines] *) {border-style:solid}
+:root.lc-frame .lp-chip.is-many, :root .lp-chip.is-many:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
+:root.lc-frame .lp-act, :root .lp-act:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .lp-inbase.is-active, :root .lp-inbase.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright, #055dff)}
 /* metiers-rivieres.css */
 :root.lc-frame .mr-list li, :root .mr-list li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid color-mix(in srgb, currentColor 14%, transparent)}
 :root.lc-frame .mr-place .cplus-img, :root .mr-place .cplus-img:is([data-lc-lines], [data-lc-lines] *) {border:1px solid color-mix(in srgb, currentColor 14%, transparent)}

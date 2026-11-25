@@ -50488,6 +50488,7 @@
  "Réglages reçus": "Settings received",
  "Réglages remis à zéro": "Adjustments reset",
  "Réglages remis comme au départ": "Settings reset to default",
+ "Réglages remis comme avant l’ensemble « {name} ».": "Settings put back as they were before the set “{name}”.",
  "Réglages repris": "Settings taken over",
  "Réglages trop lourds pour être gardés (retire des formes faites d’une image).": "Settings too heavy to keep (remove shapes made from an image).",
  "Réglages trop lourds pour être gardés.": "Settings too large to be kept.",

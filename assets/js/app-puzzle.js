@@ -33,7 +33,7 @@
         const s = Math.floor(Math.max(0, Number(ms) || 0) / 1000), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = s % 60; return h ? `${h}:${p2(m)}:${p2(x)}` : `${p2(m)}:${p2(x)}`; };
 
     const TITLE = 'Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe';
-    const PREFS_KEY = 'lcnda_puzzle-prefs-v1';
+    const PREFS_KEY = 'lcnda-puzzle-prefs', OLD_PREFS_KEY = 'lcnda_puzzle-prefs-v1'; // « lcnda-… » : gardé par « Réglages enregistrés : toute l’app » (l'ancien nom est encore lu)
     const MAX_GAMES = 30, MIN_PIECES = 4, MAX_PIECES = 1000;
     const COUNTS = [12, 24, 48, 100, 150, 300, 500, 1000];
     const SAVE_QUIET_MS = 2500, SAVE_EVERY_MS = 10000; // enregistrement : 2,5 s après le dernier coup, au plus toutes les 10 s
@@ -45,7 +45,7 @@
         del(k) { try { localStorage.removeItem(k); } catch (_) {} },
     };
     const recordKey = meta => `${meta.image?.key || meta.image?.url || ''}|${meta.cols * meta.rows}`;
-    const prefs = () => ({count: 48, shape: 'jigsaw', rotate: false, model: true, ...(store.get(PREFS_KEY, {}) || {})});
+    const prefs = () => ({count: 48, shape: 'jigsaw', rotate: false, model: true, ...(store.get(PREFS_KEY, null) || store.get(OLD_PREFS_KEY, {}) || {})});
     const owns = id => /^puz-/.test(String(id || ''));
     const newId = () => `puz-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 

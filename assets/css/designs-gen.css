@@ -6613,6 +6613,19 @@
 :root[data-lc-density] .ld-cards{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ld-card{gap:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .ld-card{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ld-gps{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .ld-gps-act{gap:calc(4px * var(--lc-sp))}
+:root .ld-gps-act button:is([data-lc-r], [data-lc-r] *), :root .ld-gps-act a:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .ld-gps-act button,:root[data-lc-density] .ld-gps-act a{padding:1px calc(6px * var(--lc-sp))}
+/* listes-personnes.css */
+:root[data-lc-density] .lp-cell{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .lp-chip{padding:1px calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lp-act{padding:1px calc(5px * var(--lc-sp))}
+:root[data-lc-density] .lp-create-body{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lp-create-body label{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .lp-create-body label.lp-create-ev{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lp-person-links{padding-left:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .lp-person-links{gap:calc(6px * var(--lc-sp))}
 /* metiers-rivieres.css */
 :root[data-lc-density] .mr-block,:root[data-lc-density] .mr-hist{gap:calc(10px * var(--lc-sp))}
 /* terre-quotidien.css */

@@ -132,7 +132,7 @@
         'genealogie-accessibilite': v => ext.access?.clean ? reparse(ext.access.clean, v) : v,
         'genealogie-mode-simple': v => ext.modeSimple?.portable ? reparse(ext.modeSimple.portable, v) : null,
     };
-    const tidy = (k, v) => { const f = TIDY[k] || (isListKey(k) ? listValue : null); if (!f) return v; try { const out = f(v, k); return typeof out === 'string' && out.length <= 200000 ? out : null; } catch (_) { return null; } };
+    const tidy = (k, v) => { const f = TIDY[k] || (isListKey(k) || isLdKey(k) ? listValue : null); if (!f) return v; try { const out = f(v, k); return typeof out === 'string' && out.length <= 200000 ? out : null; } catch (_) { return null; } };
     const cleanWith = (ok, settings) => Object.fromEntries(Object.entries(settings || {}).slice(0, 3000).filter(([k, v]) => ok(k) && safeLayoutValue(k, v)).map(([k, v]) => [k, tidy(k, v)]).filter(([, v]) => v !== null));
     const cleanLayout = settings => cleanWith(isLayoutKey, settings);
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
@@ -142,8 +142,8 @@
         const frame = UI.presetsFrame({id: o.id, what: o.what, quietApply: true,
             list: () => o.list().map(p => ({name: p.name, date: [o.summary(p.settings), day(p), p.from ? `${o.from} ${p.from}` : ''].filter(Boolean).join(' · ')})),
             apply: i => { const p = o.list()[i]; return p ? o.apply(p) : false; },
-            save: name => { const list = o.list(), same = list.findIndex(p => p.name === name), entry = {name, saved: new Date().toISOString(), settings: o.current()}; if (same >= 0) list[same] = entry; else list.push(entry); return o.keep(list); },
-            replace: i => { const list = o.list(); list[i] = {...list[i], saved: new Date().toISOString(), settings: o.current()}; return o.keep(list); },
+            save: name => { const list = o.list(), same = list.findIndex(p => p.name === name), entry = {name, saved: new Date().toISOString(), settings: o.current(), ...(o.mark || {})}; if (same >= 0) list[same] = entry; else list.push(entry); return o.keep(list); },
+            replace: i => { const list = o.list(); list[i] = {...list[i], saved: new Date().toISOString(), settings: o.current(), ...(o.mark || {})}; return o.keep(list); },
             rename: (i, name) => { const list = o.list(); list[i] = {...list[i], name}; return o.keep(list); },
             duplicate: i => { const list = o.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, saved: new Date().toISOString()}); if (!o.keep(list)) return false; toast(i18n('Copie « {name} » créée.', {name})); },
             exportOne: i => { o.exportOne(o.list()[i]); return false; },
@@ -190,27 +190,89 @@
         'genealogie-dashboard-recent-people', 'genealogie-sosa-root', 'genealogie-sosa-root-name', 'genealogie-sosa-map', 'genealogie-daboville-root', 'genealogie-daboville-root-name', 'genealogie-daboville-map', 'genealogie-atelier-timers'];
     // (et pas non plus : un chemin de dossier de cet ordinateur, les fiches du Sosa multiple, les descriptions des médias de cette base,
     //  le nom de la personne qui relit, ni ce que l'app note toute seule : sections ouvertes, boutons et commandes des éditeurs)
-    ALL_SKIP.push('genealogie-auto-backup-settings', 'genealogie-sosa-multi', 'genealogie-media-alt', 'genealogie-layout-reviewer', 'genealogie-reglages-ouverts', 'genealogie-toolbar-defs', 'genealogie-editor-cmds');
+    ALL_SKIP.push('genealogie-auto-backup-settings', 'genealogie-sosa-multi', 'genealogie-media-alt', 'genealogie-layout-reviewer', 'genealogie-toolbar-defs', 'genealogie-editor-cmds');
     ALL_SKIP.push('genealogie-designs-presets'); // les « Ensembles prêts » des designs au choix et leurs réglages enregistrés : retirés (un vieux fichier qui les a s’applique sans eux)
     ALL_SKIP.push('genealogie-bg-photo'); // la photo du fond des pages (app-fond.js) : lourde, elle reste sur cet ordinateur (et un ensemble ne l’efface pas)
-    // des réglages gardés hors « genealogie-… » (sur cet ordinateur seulement) : Réordonner, Trésors, arbre décoré, citations,
-    // partage avec la famille, gabarits des décennales, voix du musée, éditeurs (dessin, montage, images en double, choix d’un média)
+    /* ═══ 📒 LE REGISTRE DES RÉGLAGES (« toute l’app », son fichier, son ↶ Annuler) — inventaire : docs/reglages-inventaire.md ═══
+     * La règle : TOUT ce que l'app garde dans localStorage sous « genealogie-… » ou « lcnda-… » est un réglage gardé par
+     * « Réglages enregistrés : toute l’app », sans rien à déclarer (un réglage ajouté demain y est d'office : ordre des listes,
+     * groupes cachés, colonnes, tris, sections repliées, favoris, raccourcis, cartes, Atelier…). Seules exceptions, ici avec leur raison :
+     * les secrets, ce qui est propre à cet ordinateur, l'état passager (brouillons, tâches, caches, dates, « déjà montré »),
+     * les données (parties, scores, calculs) et ce qui vise une fiche précise de la base (clés « …-<nombre> »).
+     * sessionStorage : jamais (passager par nature). Une clé sans ces préfixes : à déclarer dans ALL_EXTRA (gardée) ou ALL_OUTSIDE (pas
+     * gardée) — tests/test-reglages-tout.js passe tout assets/js au crible et échoue sur une clé que ce registre ne classe pas. */
+    ALL_SKIP.push(
+        'genealogie-settings-unsent', // la file d'envoi des réglages vers la base (app.js) : interne
+        'genealogie-artist-keys', // 🔑 secrets : jeton Discogs, clé TMDb (heritage-artist-import.js)
+        'genealogie-research-clock', 'genealogie-research-history', 'genealogie-atelier-wordbase', // le temps passé, l'historique des recherches, les mots du jour : des données
+        'genealogie-goose-games-v1', 'genealogie-goose-active-v1', // les parties en cours du jeu de l'oie : des données
+        'genealogie-donnees-maj-dernier', 'genealogie-donnees-file', // la date de la dernière mise à jour des données, la file des téléchargements : passager
+        'genealogie-dp-locks', 'genealogie-succ-me', 'genealogie-sosa-off', 'genealogie-dash-next-skip', // des fiches, pages ou suggestions précises de cette base
+        'genealogie-connexions-panier', 'genealogie-connexions-recents', 'genealogie-cx-put-recents', // le panier et ses derniers éléments (des fiches de cette base)
+        'genealogie-retouch-tip', 'genealogie-suivi-hint-closed'); // « déjà montré » (un ensemble ne les fait pas revenir)
+    // (« genealogie-reglages-ouverts », les sections ouvertes ou repliées des réglages, est désormais gardé : c'est un choix de mise en page)
+    const ALL_SKIP_RX = [
+        /-dl$/, // un téléchargement en cours (Météo, GOV, Élections, Bases officielles, Patrimoine, Prénoms, Histoire…) : passager
+        /^genealogie-tx-(cmp-)?draft-/, // les brouillons de lecture d'un acte (même « new ») : du contenu
+        /^genealogie-tx-pages-pliees-/, // les pages repliées d'UN acte (heritage-transcribe-blocs.js) : vise un acte précis, pas un réglage
+        /[-:]\d+$/, // une fiche, un acte, une carte précise de cette base (…-12, …:12)
+    ];
+    // « lcnda-… » : gardé aussi (Réordonner, groupes des Trésors, panneau de côté, cartes et calques, calculette, Atelier…), sauf :
+    const LCNDA_SKIP = [
+        'lcnda-settings-renamed-v1', // marque interne de la reprise des anciens noms (app.js)
+        'lcnda-designs-ui-v2', // copie des designs au choix pour index.php : refaite à partir de « genealogie-designs »
+        'lcnda-designs-ui-v1', 'lcnda-designs-open', 'lcnda-designs-prev-tab', // anciennes clés, retirées au démarrage
+        'lcnda-langue', 'lcnda-i18n-banner-closed', // la langue de CET ordinateur (avec le cookie lcnda_lang lu par le serveur) ; un ensemble reçu d'un cousin ne la change pas
+        'lcnda-mises-a-jour', // « Vérifier les mises à jour » : réglage de l'app installée sur cet ordinateur (Electron)
+        'lcnda-mode-simple-device', 'lcnda-mode-simple-local', // le mode simple « propre à cet appareil » : jamais ailleurs, par définition
+        'lcnda-signaler', 'lcnda-act-requester', 'lcnda-vault-owner', // une adresse e-mail, ton nom de signature : privés
+        'lcnda-jeux-famille-v1', 'lcnda-laby-games-v1', 'lcnda-bunker', 'lcnda-coloriage', // les parties et coloriages : des données
+        'lcnda-patiences-records', 'lcnda-jeux-plateau-records', 'lcnda-bunker-records', 'lcnda-tr-mystery', 'lcnda-aide-lecture-scores', // scores et records : des données
+        'lcnda-jeux-dos-image', // l'image du dos des cartes : lourde (comme la photo du fond)
+        'lcnda-calculette-ruban', 'lcnda-calculette-memoire', 'lcnda-calculette-widget', // les calculs faits : des données
+        'lcnda-journal-erreurs', 'lcnda-l10r-mots', 'lcnda-terrain-n', 'lcnda-graphs-ping', 'lcnda-faces-job', // journal, cache, compte, signal, tâche en cours
+        'lcnda-media-picker-recent', 'lcnda-mes-cartes-cur', 'lcnda-photomaps-current', // les derniers médias, la carte ouverte : des fiches de cette base
+        'lcnda-research-forms', // les formulaires de recherche remplis : des brouillons
+        'lcnda-succ-chrono', 'lcnda-succ-chrono-act', // le chronomètre des Successions en marche
+        'lcnda-premier-choice', 'lcnda-premier-go', 'lcnda-shape-one', 'lcnda-insee-checked', 'lcnda-insee-told', 'lcnda-ael-reminded', // premier lancement, « déjà montré », dates
+        'lcnda-sa-warned', 'lcnda-sd-warned', 'lcnda-vd-told', 'lcnda-offsite-warned'];
+    const LCNDA_SKIP_RX = [/^lcnda-relecture-/, /^lcnda-visite-/, /^lcnda-(roles|scene)-view:/]; // réponses d'une relecture, carnet d'une visite, vue d'UN projet
+    // une clé gardée hors des deux préfixes (aucune pour l'instant) ; et celles qui ne le sont pas, avec leur raison (le test les vérifie)
+    const ALL_EXTRA = [];
+    const ALL_OUTSIDE = {
+        'lcnda_puzzle-prefs-v1': 'ancien nom des réglages du puzzle, repris sous « lcnda-puzzle-prefs » (app-puzzle.js)',
+        'lcnda_puzzle-base-v2': 'les parties de puzzle : des données', 'lcnda_puzzle-pending-v2:': 'puzzle en cours : passager', 'lcnda_puzzle-list-v2:': 'les parties de puzzle : des données',
+    };
+    // l'ancien nom d'un réglage repris en « genealogie-… » (app.js, LCNDA_SETTING_RENAMES) n'est qu'un reflet du nouveau : gardé avec lui
     const ALL_LOCAL = ['lcnda-side-order', 'lcnda-tresors-order', 'lcnda-decor-tree', 'lcnda-cite-style', 'lcnda-layout-cite-style', 'lcnda-family-share', 'lcnda-decennale-gabarits',
         'lcnda-museum-voice-rate', 'lcnda-vx-smart', 'lcnda-vx-alignto', 'lcnda-mt-rush-sort', 'lcnda-imgdup-mode', 'lcnda-imgdup-sens', 'lcnda-media-picker-size'];
     // 🔍 le tri et l'affichage (Liste | Fiches) de chaque liste (barre H10, UI.sortOf / UI.viewOf) : sans la recherche tapée ni les filtres
     const isListKey = key => /^lcnda-(sort|view|listbar):[A-Za-z0-9_:.-]{1,120}$/.test(key);
     const isBarKey = key => key.startsWith('lcnda-listbar:');
+    // 📚 une liste de données (app-listes-donnees.js) : colonnes cachées, colonne GPS, tri, affichage, critères ; pas la recherche tapée
+    const isLdKey = key => /^lcnda-ld:[A-Za-z0-9_.-]{1,80}$/.test(key);
+    const isMergeKey = key => isBarKey(key) || isLdKey(key); // remis par-dessus ce qui est là (la recherche tapée reste), jamais effacés
     function listValue(v, key) {
+        if (isLdKey(key)) { const o = JSON.parse(v); if (!o || typeof o !== 'object' || Array.isArray(o)) return null; delete o.q; return JSON.stringify(o); }
         if (!isBarKey(key)) return key.startsWith('lcnda-view:') ? (v === 'cards' || v === 'list' ? v : null) : /^[A-Za-z0-9_.:-]{1,60}$/.test(v) ? v : null;
         const o = JSON.parse(v), out = {};
         if (typeof o?.sort === 'string' && /^[A-Za-z0-9_.:-]{1,60}$/.test(o.sort)) out.sort = o.sort;
         if (o?.view === 'cards' || o?.view === 'list') out.view = o.view;
         return Object.keys(out).length ? JSON.stringify(out) : null;
     }
-    const isAllKey = key => (/^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !/-\d+$/.test(key)) || isListKey(key) || ALL_LOCAL.includes(key);
+    /** la clé est-elle un réglage gardé par « toute l’app » ? (le registre ci-dessus) */
+    const isAllKey = key => typeof key === 'string' && (isListKey(key) || isLdKey(key) || ALL_LOCAL.includes(key) || ALL_EXTRA.includes(key)
+        || (/^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !ALL_SKIP_RX.some(rx => rx.test(key)))
+        || (/^lcnda-[A-Za-z0-9_.:-]{1,120}$/.test(key) && !LCNDA_SKIP.includes(key) && !LCNDA_SKIP_RX.some(rx => rx.test(key)) && !ALL_SKIP_RX.some(rx => rx.test(key))));
+    // un ensemble d'avant ce registre (sans « reg: 2 ») ne connaissait que « genealogie-… » et ces quelques « lcnda-… » : il n'efface pas les autres
+    const ALL_REG = 2;
+    const isAllKeyV1 = key => (/^genealogie-[a-z0-9-]{1,80}$/.test(key) || isListKey(key) || ALL_LOCAL.includes(key)) && isAllKey(key);
+    /** pourquoi une clé n'est pas gardée ('' si elle l'est) : pour le test et docs/reglages-inventaire.md */
+    const whyNot = key => isAllKey(key) ? '' : ALL_OUTSIDE[key] || (ALL_SKIP.includes(key) || LCNDA_SKIP.includes(key) ? 'listée' : 'hors registre');
+    ext.settingsRegistry = {isAllKey, whyNot, ALL_REG, skip: [...ALL_SKIP, ...LCNDA_SKIP], outside: {...ALL_OUTSIDE}, extra: [...ALL_EXTRA]};
     const MS_KEY = 'genealogie-mode-simple';
     /** un ensemble qui part dans un fichier (même enregistré avant ces précautions) : sans ce qui ne doit pas quitter cet ordinateur */
-    const portableAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k]) => isAllKey(k)).map(([k, v]) => [k, k === MS_KEY || isListKey(k) ? tidy(k, v) : v]).filter(([, v]) => typeof v === 'string'));
+    const portableAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k]) => isAllKey(k)).map(([k, v]) => [k, k === MS_KEY || isListKey(k) || isLdKey(k) ? tidy(k, v) : v]).filter(([, v]) => typeof v === 'string'));
     // 📈 mes graphiques et widgets sont rangés dans la base (lib/graphs.php) : l'ensemble en garde une copie sous leur
     // ancienne clé ; « Appliquer » les remet dans la base (sans effacer ceux faits depuis : ce sont des données)
     const GRAPHS_KEY = 'genealogie-custom-widgets';
@@ -218,11 +280,20 @@
         const settings = {};
         for (let i = 0; i < localStorage.length; i++) { const key = localStorage.key(i); if (key && isAllKey(key)) settings[key] = localStorage.getItem(key); }
         // le mode simple : sans le code de sortie (même haché), la personne qui regarde ni les photos cachées ; la liste : son tri et son affichage
-        Object.keys(settings).forEach(key => { if (key === MS_KEY || isListKey(key)) { const v = tidy(key, settings[key]); if (v === null) delete settings[key]; else settings[key] = v; } });
+        Object.keys(settings).forEach(key => { if (key === MS_KEY || isListKey(key) || isLdKey(key)) { const v = tidy(key, settings[key]); if (v === null) delete settings[key]; else settings[key] = v; } });
         const graphs = ext.customWidgetList?.();
         if (Array.isArray(graphs) && graphs.length) settings[GRAPHS_KEY] = JSON.stringify(graphs);
         return settings;
     }
+    /** ↶ Annuler un ensemble appliqué : tout ce que le registre garde, tel quel (le mode simple avec son code : rien ne quitte cet onglet) */
+    function snapshotAll() {
+        const settings = {};
+        for (const key of lsKeys()) if (isAllKey(key)) settings[key] = ls(key);
+        const graphs = ext.customWidgetList?.();
+        if (Array.isArray(graphs) && graphs.length) settings[GRAPHS_KEY] = JSON.stringify(graphs);
+        return settings;
+    }
+    const UNDO_KEY = 'lcnda-reglages-annuler'; // sessionStorage (cet onglet) : {name, phase: 'applied' | 'undone', settings}
     async function restoreGraphs(json) {
         let list = []; try { list = JSON.parse(json); } catch (_) { return; }
         list = (Array.isArray(list) ? list : []).filter(d => d && typeof d === 'object' && /^cw_[a-z0-9]{4,24}$/.test(String(d.id)));
@@ -232,10 +303,13 @@
     const saveAllProfiles = list => { try { localStorage.setItem(ALL_PROFILES_KEY, JSON.stringify(list)); return true; } catch (_) { toast(i18n('Trop de réglages enregistrés pour la place disponible : supprimes-en un.'), 'error'); return false; } };
     const allSummary = s => { const n = Object.keys(s).length; return `${n} réglage${n > 1 ? 's' : ''}`; };
     /** Remet un ensemble : ses réglages remplacent tous les réglages actuels (les autres reviennent à ceux de départ). */
-    async function applyAll(settings, {layoutOnly = false, keep = []} = {}) {
+    async function applyAll(settings, {layoutOnly = false, keep = [], reg = ALL_REG, name = '', undo = false} = {}) {
         // un fichier reçu : ce qui a été laissé de côté à l'import (illisible) n'efface rien ; une mise en page ne touche qu'à l'Apparence
         const release = holdAutoSave();
         const removed = [];
+        // ↶ Annuler : les réglages d'avant, gardés dans cet onglet ; après le rechargement, le message propose de les remettre
+        try { sessionStorage.setItem(UNDO_KEY, JSON.stringify(undo ? {name, phase: 'undone'} : {name, phase: 'applied', settings: snapshotAll()})); } catch (_) { try { sessionStorage.removeItem(UNDO_KEY); } catch (__) {} }
+        const known = reg >= ALL_REG ? isAllKey : isAllKeyV1; // un ensemble d'avant le registre n'efface pas ce qu'il ne connaissait pas
         if (!layoutOnly && typeof settings[GRAPHS_KEY] === 'string') {
             try { await restoreGraphs(settings[GRAPHS_KEY]); } catch (e) { release(); toast(i18n('Tes graphiques n’ont pas pu être remis : {err}', {err: e.message}), 'error'); return; }
         }
@@ -245,21 +319,36 @@
         const msNow = ls(MS_KEY);
         if (msNow && ext.modeSimple?.keepPrivate && (!layoutOnly) && !keep.includes(MS_KEY)) { try { settings = {...settings, [MS_KEY]: JSON.stringify(ext.modeSimple.keepPrivate(typeof settings[MS_KEY] === 'string' ? JSON.parse(settings[MS_KEY]) : {}, JSON.parse(msNow)))}; } catch (_) {} }
         // la barre d'une liste garde la recherche tapée et les filtres : seuls le tri et l'affichage sont remis (une liste absente ne bouge pas)
-        for (const key of lsKeys()) { if (key && key !== GRAPHS_KEY && isAllKey(key) && !isBarKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
+        for (const key of lsKeys()) { if (key && key !== GRAPHS_KEY && known(key) && !isMergeKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
         const set = {};
         Object.entries(settings).forEach(([key, value]) => {
             if (!isAllKey(key) || typeof value !== 'string') return;
-            if (isBarKey(key)) { let o = {}; try { o = JSON.parse(ls(key, '{}')) || {}; } catch (_) {} try { value = JSON.stringify({...o, ...JSON.parse(value)}); } catch (_) { return; } }
-            lsSet(key, value); if (!isListKey(key)) set[key] = value;
+            if (isMergeKey(key) && !undo) { let o = {}; try { o = JSON.parse(ls(key, '{}')) || {}; } catch (_) {} try { value = JSON.stringify({...o, ...JSON.parse(value)}); } catch (_) { return; } }
+            lsSet(key, value); if (/^genealogie-/.test(key)) set[key] = value; // (seuls les « genealogie-… » vont dans la base)
         });
         refreshEarly();
         try {
             const csrf = window.INSTALL_CSRF || S().csrf || '';
-            const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed.filter(k => !isListKey(k)), csrf})});
+            const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed.filter(k => /^genealogie-/.test(k)), csrf})});
             if (!r.ok) throw new Error();
         } catch (_) { release(); toast(i18n('La base n’a pas pu enregistrer ces réglages : réessaie.'), 'error'); return; }
         location.reload();
     }
+    // après le rechargement : « Ensemble … appliqué » avec ↶ Annuler (une fois), ou « remis comme avant »
+    (function offerUndoAfterApply() {
+        let u = null; try { u = JSON.parse(sessionStorage.getItem(UNDO_KEY) || 'null'); sessionStorage.removeItem(UNDO_KEY); } catch (_) { u = null; }
+        if (!u || typeof u !== 'object') return;
+        const name = String(u.name || '').slice(0, 60);
+        const show = () => {
+            if (!A()?.toast) return void setTimeout(show, 300);
+            if (u.phase === 'undone') return void toast(i18n('Réglages remis comme avant l’ensemble « {name} ».', {name}));
+            if (u.phase !== 'applied' || !u.settings || typeof u.settings !== 'object') return;
+            const msg = i18n('Ensemble « {name} » appliqué.', {name});
+            const undo = () => applyAll(u.settings, {name, undo: true});
+            if (A().undoToast) A().undoToast(msg, {undo, icon: '💾'}); else toast(msg);
+        };
+        if (document.readyState === 'complete') setTimeout(show, 600); else window.addEventListener('load', () => setTimeout(show, 600), {once: true});
+    })();
     // un fichier reçu : les mêmes précautions que pour une mise en page
     const cleanAll = settings => cleanWith(isAllKey, settings);
     ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">${i18n('TOUS LES RÉGLAGES')}</span><h3>💾 ${i18n('Réglages enregistrés : toute l’app')}</h3><p>${i18n('Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche), le code pour quitter le mode simple et la personne qui regarde, et ce qui est propre à cet ordinateur.')}</p></header>
@@ -267,15 +356,15 @@
     ext.afterDesign.push(() => {
         const box = document.getElementById('h-allsets'), slot = box?.querySelector('[data-presets-slot="allsets"]');
         if (!slot) return;
-        const fileOf = (name, saved, settings) => JSON.stringify({type: 'lcnda-reglages', version: 1, name, saved, settings}, null, 1);
+        const fileOf = (name, saved, settings, reg = ALL_REG) => JSON.stringify({type: 'lcnda-reglages', version: 1, reg: Number(reg) === ALL_REG ? ALL_REG : 1, name, saved, settings}, null, 1); // reg 2 : fait avec le registre (tout « lcnda-… » aussi)
         box.querySelector('[data-h-allset-export-now]').addEventListener('click', () => { downloadText(`reglages-lcnda-${new Date().toISOString().slice(0, 10)}.lcnda-reglages.json`, fileOf(i18n('Mes réglages'), new Date().toISOString(), currentAll())); toast(i18n('Fichier prêt : il s’importe ici, sur un autre ordinateur.')); });
         slot.replaceWith(profilesFrame({id: 'apparence-tous-les-reglages', key: ALL_PROFILES_KEY, what: i18n('tous les réglages de l’app'), from: i18n('reçu de'), removed: n => i18n('Ensemble « {name} » supprimé', {name: n}),
-            list: allProfiles, keep: saveAllProfiles, current: currentAll, summary: allSummary,
+            list: allProfiles, keep: saveAllProfiles, current: currentAll, summary: allSummary, mark: {reg: ALL_REG},
             apply: async p => {
                 if (!await A().confirmBox(i18n('Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.'), {title: i18n('Appliquer l’ensemble « {name} » ?', {name: p.name}), okLabel: i18n('Appliquer')})) return false;
-                toast(i18n('Ensemble « {name} » appliqué.', {name: p.name})); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []}); return false;
+                toast(i18n('Ensemble « {name} » appliqué.', {name: p.name})); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : [], reg: Number(p.reg) || 1, name: p.name}); return false;
             },
-            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings))); toast(i18n('Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ».')); },
+            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings), p.reg || 1)); toast(i18n('Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ».')); },
             importOne: async () => {
                 const text = await pickFile('.json,application/json');
                 if (text === null) return false;
@@ -285,7 +374,7 @@
                 const settings = cleanAll(data.settings), dropped = Object.keys(data.settings).filter(k => !(k in settings)).slice(0, 500), ignored = dropped.length;
                 const list = allProfiles(); let name = String(data.name).slice(0, 60) || i18n('Réglages importés');
                 if (list.some(p => p.name === name)) name = window.LCNDA_UI.freeName(name, list.map(p => p.name));
-                list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings, keep: dropped.filter(k => typeof k === 'string'), layoutOnly: data.type === 'lcnda-mise-en-page'});
+                list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings, keep: dropped.filter(k => typeof k === 'string'), layoutOnly: data.type === 'lcnda-mise-en-page', reg: Number(data.reg) === ALL_REG ? ALL_REG : 1});
                 if (!saveAllProfiles(list)) return false;
                 toast(i18n('Ensemble « {name} » importé : clique sur « Appliquer » pour l’utiliser.', {name}) + (ignored > 0 ? ' ' + (ignored > 1 ? i18n('({n} réglages illisibles laissés de côté)', {n: ignored}) : i18n('(1 réglage illisible laissé de côté)')) : ''));
             }}));

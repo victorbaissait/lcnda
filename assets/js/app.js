@@ -96,7 +96,7 @@
         if(!window.GENEALOGY_READY||!fromBase||typeof fromBase!=='object')return;
         let store;try{store=window.localStorage;store.length;}catch(_){return;}
         const UNSENT='genealogie-settings-unsent'; // envoyé en partant (keepalive) : peut arriver après le nouveau index.php → la page suivante le renvoie au lieu de le recouvrir
-        const LOCAL_ONLY=new Set(['genealogie-auto-backup-lock','genealogie-baissait-ui-v2','genealogie-last-route','genealogie-bg-photo',UNSENT]); // la photo du fond (app-fond.js) : lourde, elle reste sur cet ordinateur
+        const LOCAL_ONLY=new Set(['genealogie-auto-backup-lock','genealogie-baissait-ui-v2','genealogie-last-route','genealogie-bg-photo','genealogie-artist-keys',UNSENT]); // 🔑 genealogie-artist-keys : jetons personnels (Discogs, TMDb), jamais dans la base ni dans une sauvegarde // la photo du fond (app-fond.js) : lourde, elle reste sur cet ordinateur
         const synced=key=>typeof key==='string'&&/^genealogie-[a-z0-9-]{1,80}$/.test(key)&&!LOCAL_ONLY.has(key);
         const proto=Object.getPrototypeOf(store);
         const originalSet=proto.setItem,originalRemove=proto.removeItem;

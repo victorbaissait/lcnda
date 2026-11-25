@@ -1233,7 +1233,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=592" defer></script>
+<script src="assets/js/app.js?v=593" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1241,7 +1241,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-picker.js?v=29" defer></script>
 <script src="assets/js/app-media-picker.js?v=5" defer></script>
 <script src="assets/js/app-piece-archives.js?v=10" defer></script>
-<script src="assets/js/app-puzzle.js?v=10" defer></script>
+<script src="assets/js/app-puzzle.js?v=11" defer></script>
 <script src="assets/js/app-labyrinthe-core.js?v=1" defer></script>
 <script src="assets/js/app-labyrinthe.js?v=5" defer></script>
 <script src="assets/js/app-jeu-famille-logique.js?v=4" defer></script>
@@ -1407,7 +1407,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=54" defer></script>
 <script src="assets/js/heritage-dnd.js?v=14" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
-<script src="assets/js/heritage-studio.js?v=118" defer></script>
+<script src="assets/js/heritage-studio.js?v=119" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-retouch-fluidite.js?v=3" defer></script>
 <script src="assets/js/heritage-retouch-gomme.js?v=3" defer></script>

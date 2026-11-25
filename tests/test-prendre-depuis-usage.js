@@ -331,11 +331,11 @@ const t = async (name, fn) => {
             await p.setViewportSize({width: 1440, height: 900});
             await K('Escape');
         });
-        await t('U10b · base vide : chaque rubrique dit pourquoi c’est vide et quoi faire', async m => {
+        await t('U10b · base vide (une seule fiche) : chaque rubrique dit pourquoi c’est vide et quoi faire', async m => {
             const E = await start({empty: true});
             try {
                 await E.page.evaluate(() => window.LCNDA_EXT.connexions.openTake()); await E.page.waitForSelector(`${D}[open]`);
-                for (const k of ['person', 'event', 'act', 'media', 'source', 'note', 'place', 'recent', 'basket']) {
+                for (const k of ['event', 'act', 'media', 'source', 'note', 'place', 'recent', 'basket']) {
                     await E.page.click(`${D} [data-cx-tab="${k}"]`); await E.page.waitForFunction(x => (document.querySelector('.cx-take [data-cx-res]')?.dataset.cxShown || '').startsWith(x + '|'), k, {timeout: 15000});
                     assert.ok(await E.page.locator(`${D} .cx-empty .cx-empty-row button`).count(), k);
                 }
