@@ -105,7 +105,7 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
         for (const [f, key] of [['app.js', 'Activer la sauvegarde automatique'], ['app.js', 'Masquer les personnes vivantes dans GEDCOM'], ['app.js', 'data-hide-empty-identity ${'], ['app.js', 'data-online-side'], ['app.js', 'id="person-phonetic"'],
             ['index.php', 'id="lightbox-person-photo"'], ['index.php', 'id="lightbox-tags-visible-toggle"'], ['heritage-diagrams.js', "if (o.type === 'check')"], ['heritage-studio-av.js', 'data-mt-k="mute"'], ['heritage-vector.js', 'data-vx-p="dsnap"'],
             ['heritage-house.js', 'data-hs-f="showDims"'], ['heritage-vector-map.js', 'data-vm="kmgrid"'], ['app-chronologie.js', 'id="timeline-partners"'], ['heritage-photomaps.js', 'data-pm="track"'], ['heritage-layout.js', 'data-ly-set="lockRatio"'],
-            ['heritage-keynote.js', 'data-kn-k="bool"'], ['app-recherche.js', 'data-insee-auto'], ['heritage-pets.js', 'data-pp-own'], ['heritage-board-kit.js', 'data-bp-tc="header"']]) {
+            ['heritage-keynote.js', 'data-kn-k="bool"'], ['app-recherche.js', 'data-im-set-auto ${'], ['heritage-pets.js', 'data-pp-own'], ['heritage-board-kit.js', 'data-bp-tc="header"']]) {
             const k = key.startsWith('if (') ? '<label class="ui-toggle"><input type="checkbox" ${at}' : key;
             assert.match(kindOf(f, k), /\bui-toggle\b/, `${f} : ${key}`);
         }

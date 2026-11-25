@@ -1,6 +1,6 @@
 /* 🏰⛪ Fiches des édifices (assets/js/heritage-fiche-edifice.js) — maquette : docs/design/fiche-chateau-culte.html.
    Reprend .modal, .maintenance-panel / .cplus-panel, .button, .link-button ; les couleurs suivent le thème (clair / sombre). */
-.fe-dlg { width: min(720px, 96vw); max-width: 96vw; }
+.fe-dlg { width: var(--modal-m); max-width: none; }
 .fe-dlg .modal-body { padding: 0; }
 .fe-sheet { --fe-accent: #8a4b12; --fe-who: #7a1f5c; --fe-chip: rgba(127, 110, 80, .14); }
 :root[data-theme="dark"] .fe-sheet, :root[data-theme="dark"] .fe-panel, :root[data-theme="dark"] .fe-block, :root[data-theme="dark"] .fe-evline { --fe-accent: #e0a35c; --fe-who: #f0a8d8; --fe-chip: rgba(255, 240, 210, .1); }

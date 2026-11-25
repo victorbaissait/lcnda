@@ -43,10 +43,12 @@ async function main(out) {
     const env = { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_IIIF_DIR: site,
         LCNDA_KETOS_BIN: path.join(appRoot, 'tests/fixtures/fake-trainer.php'), LCNDA_QWEN_TRAIN_BIN: path.join(appRoot, 'tests/fixtures/fake-trainer.php'), FAKE_TRAIN_ARGS_LOG: argsLog, FAKE_TRAIN_SLEEP: '220',
         LCNDA_TEST_GPU: 'NVIDIA GeForce RTX 3060,12288', LCNDA_TEST_OS: 'linux' };
+    if (process.env.DROP) process.env.DROP.split(',').forEach(k => delete env[k]);
     const php = (code, extra = {}) => { const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: appRoot, encoding: 'utf8', env: { ...env, ...extra } }); if (r.status !== 0) throw new Error(r.stderr || r.stdout); return r.stdout; };
     /* ─── la base : un recueil de 3 vues, une photo isolée, des actes, des lignes relues de deux mains ; le faux site IIIF ─── */
     const seed = JSON.parse(php(String.raw`require 'lib/paths.php'; $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p = null;
 require 'lib/bootstrap.php'; require 'tests/api_functions.php'; require_once 'lib/recueils.php'; require_once 'lib/atelier_idees_data.php'; $pdo = db(); act_transcriptions_ensure($pdo);
+save_person($pdo, ['first_name' => 'Jean', 'last_name' => 'MAZAUD', 'gender' => 'male']); // une base commencée (sinon : l'écran du premier lancement)
 $img = function (string $name, int $w, int $h, int $bands, int $y0 = 40, int $step = 60) { $im = imagecreatetruecolor($w, $h); imagefill($im, 0, 0, imagecolorallocate($im, 236, 226, 200)); $ink = imagecolorallocate($im, 70, 50, 30);
     for ($b = 0; $b < $bands; $b++) { $y = $y0 + $b * $step; for ($x = 50; $x < $w - 60; $x += 7) { imagefilledrectangle($im, $x, $y + 10 + ($x % 5), $x + 3, $y + 30, $ink); } } imagepng($im, MEDIA_DIR . '/' . $name); };
 foreach (['reg1.png', 'reg2.png', 'reg3.png'] as $f) { $img($f, 1000, 520, 6); } $img('photo.png', 800, 300, 3); $img('train.png', 1000, 2000, 32, 20, 60);
@@ -96,8 +98,9 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
         const ctxB = await browser.newContext({ viewport: { width: 1440, height: 900 } });
         const p = await ctxB.newPage(); const errs = [];
         p.on('pageerror', e => errs.push(e.message));
+        p.on('response', r => { if (r.status() >= 400 && process.env.DEBUG) console.log('HTTP', r.status(), r.url().slice(0, 140)); });
         p.on('console', m => { if (m.type() === 'error' && process.env.DEBUG) console.log('console:', m.text()); });
-        await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.openActTranscriber && window.LCNDA_EXT?.txPlugins?.length >= 6 && window.LCNDA_EXT?.txActe, null, { timeout: 30000 }).catch(async e => { console.log(errs, await p.evaluate(() => ({ o: !!window.LCNDA_EXT?.openActTranscriber, n: window.LCNDA_EXT?.txPlugins?.length, a: !!window.LCNDA_EXT?.txActe }))); throw e; });
+        await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.openActTranscriber && window.LCNDA_EXT?.txPlugins?.length >= 5 && window.LCNDA_EXT?.txSearch && window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.txActe, null, { timeout: 30000 }).catch(async e => { console.log(errs, await p.evaluate(() => ({ o: !!window.LCNDA_EXT?.openActTranscriber, n: window.LCNDA_EXT?.txPlugins?.length, a: !!window.LCNDA_EXT?.txActe }))); throw e; });
         await p.evaluate(() => { try { ['genealogie-tx-regle', 'genealogie-tx-regle-force', 'genealogie-tx-search-near', 'genealogie-tx-mains'].forEach(k => localStorage.removeItem(k)); } catch (_) {} });
         const api = (a, q = {}) => p.evaluate(([x, y]) => window.LCNDA_APP.api(x, y), [a, q]);
         const apiPost = (a, b) => p.evaluate(([x, y]) => window.LCNDA_APP.api(x, {}, { method: 'POST', body: y }).then(r => ({ ok: true, r }), e => ({ ok: false, error: e.message })), [a, b]);
@@ -329,7 +332,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
 (async () => {
     if (!chromium) { console.log('Playwright absent : essai sauté.'); process.exit(0); }
     const out = {};
-    await main(out);
+    try { await main(out); } catch (e) { if (process.env.DEBUG) console.log(JSON.stringify(out, null, 1).slice(0, 6000)); throw e; }
     const S = out.seed;
     const checks = [
         ['📏 39 : le bouton 📏 dans la barre de l’image, éteint au départ', () => { assert.equal(out.regleBtn, true); assert.equal(out.regleOffBand, 'none'); }],

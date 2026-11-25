@@ -341,7 +341,7 @@ try {
     }
     if ($action === 'atelier_idees' || $action === 'atelier_idees_write') { // 📜 Atelier, idées 35 à 40 : registre, IIIF, recherche, deux couches, entraîner (lib/atelier_idees.php)
         require_once __DIR__ . '/lib/atelier_idees.php';
-        atelier_idees_dispatch($pdo, (string) $action, $isWrite, $payload);
+        txi_idees_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
     if (in_array($action, ['postcards', 'postcard_write'], true)) { // 🏞 cartes postales anciennes (lib/postcards.php)
         require_once __DIR__ . '/lib/postcards.php';

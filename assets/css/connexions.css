@@ -17,7 +17,7 @@
 .cx-panel-acts, .cx-imp-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .cx-hint, .cx-empty { font-size: 12px; margin: 6px 0 0; }
 .cx-panel-foot { margin-top: 6px; font-size: 12px; }
-.cx-modal { width: min(860px, calc(100vw - 32px)); }
+.cx-modal { width: var(--modal-m); }
 .cx-put, .cx-inv { width: min(560px, calc(100vw - 32px)); }
 .cx-body { display: flex; flex-direction: column; gap: 8px; }
 .cx-dq, .cx-q { width: 100%; }

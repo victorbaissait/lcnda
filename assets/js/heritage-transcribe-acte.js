@@ -129,7 +129,15 @@
         const ctxHtml = () => { if (o.setupOnly || !o.context) return ''; const n = o.ctxCount?.() || 0;
             return `<span class="k">🧠 ${esc(i18n('Aider l’IA'))}</span><span class="h-txa-ctx" data-txa-ctxline>${esc(n ? i18n(n > 1 ? '{n} indices cochés : l’IA s’en sert pour les mots douteux, sans rien inventer' : '{n} indice coché : l’IA s’en sert pour les mots douteux, sans rien inventer', {n}) : i18n('sans indices'))} ${o.onCtx ? `<button type="button" class="link-button" data-txa-ctx>${esc(i18n('Choisir…'))}</button>` : ''}</span>`; };
         const pick = () => { const r = box.querySelector('[name="txa_model"]:checked'); if (r) { model = r.value; try { localStorage.setItem(DEEP_KEY, model); } catch (_) {} } return model; };
+        /** 🖥 le serveur d'IA choisi dans Réglages → « 🤖 IA » (lib/ia_serveur.php) : s'il n'est pas Ollama, les messages le nomment */
+        let srv = null; const srvP = api('ia_srv_get').then(r => { srv = r; }, () => {});
+        function srvName(root) { // ext.txActe.srvName aussi (le menu « ✨ Lire ▾ » de l'Atelier)
+            if (!srv || !srv.kind || srv.kind === 'ollama' || !srv.label) return;
+            const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (/Ollama/.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/Ollama/g, i18n(srv.label));
+            root.querySelectorAll('a[href*="ollama.com"]').forEach(a => { if (srv.site) a.href = srv.site; });
+        }
         async function refresh() {
+            await srvP;
             box.innerHTML = UI().spinner ? UI().spinner(i18n('Recherche d’Ollama sur cet ordinateur…')) : '…';
             try { st = await api('tx_deep_status'); } catch (e) { box.innerHTML = notice('error', esc(e.message)); return; }
             const otherOk = tag => (st.others || []).some(m => m.tag === tag && m.vision);
@@ -151,6 +159,7 @@
                 <p class="ui-hint">${esc(i18n('« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms.'))}</p>`;
             // 📑 toutes les pages : la case ▤ « Relier les lignes à l'image » se choisit avant ; chaque page est lue l'une après l'autre dans l'Atelier
             if (ready && o.all) { const out = box.querySelector('[data-txa-out]'); out.innerHTML = '<div class="h-txa-cmp2 is-one" hidden></div>'; o.onCompare?.(out); }
+            srvName(box);
         }
         const prog = (on, pct, txt) => { const p = box.querySelector('[data-txa-prog]'); if (!p) return; p.hidden = !on; p.querySelector('i').style.width = `${Math.max(0, Math.min(100, pct))}%`; p.querySelector('[data-txa-progtxt]').textContent = txt || ''; };
         async function poll(onDone, onFail) {
@@ -437,5 +446,13 @@
         return dlg;
     }
 
-    ext.txActe = {detectCrop, askCrop, lowNoticeHtml, openDeep, openFound, autoEnhance, imageMode};
+    /** 🖥 le nom du serveur d'IA choisi (Réglages → 🤖 IA) à la place de « Ollama » dans un bout d'écran (rien si c'est Ollama) */
+    let srvCache = null;
+    async function srvRename(root) {
+        if (!root) return; if (!srvCache) srvCache = api('ia_srv_get').catch(() => null);
+        const srv = await srvCache; if (!srv || !srv.kind || srv.kind === 'ollama' || !srv.label) return;
+        const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (/Ollama/.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/Ollama/g, i18n(srv.label));
+        root.querySelectorAll('[title*="Ollama"]').forEach(el => { el.title = el.title.replace(/Ollama/g, i18n(srv.label)); });
+    }
+    ext.txActe = {detectCrop, askCrop, lowNoticeHtml, openDeep, openFound, autoEnhance, imageMode, srvRename};
 })();

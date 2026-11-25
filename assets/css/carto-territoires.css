@@ -1,7 +1,7 @@
 /* 🧩 Mes territoires (heritage-territoires.js) et 🗺 données sur les cartes (heritage-carto-donnees.js) */
-.ct-dialog{width:min(1180px,96vw);max-height:94vh;padding:0;border:var(--line);background:var(--card-bg,#fff);color:var(--ink,#080808);box-shadow:var(--shadow)}
+.ct-dialog{width:var(--modal-xl);max-height:94vh;padding:0;border:var(--line);background:var(--card-bg,#fff);color:var(--ink,#080808);box-shadow:var(--shadow)}
 .ct-dialog::backdrop{background:rgba(0,0,0,.35)}
-.ct-manage,.cd-dialog{width:min(720px,96vw)}
+.ct-manage,.cd-dialog{width:var(--modal-m)}
 .ct-shell{display:flex;flex-direction:column;max-height:94vh;margin:0}
 .ct-head{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line-color,#d6d6d6)}
 .ct-head h2{flex:1;margin:0;font-size:1.15em}

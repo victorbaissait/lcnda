@@ -97,6 +97,8 @@
 
     /* ═════════════ les filtres : pastilles → demande ═════════════ */
     const fieldOf = (d, key) => (d.fields || []).find(f => f.key === key) || {key, label: key, type: 'text'};
+    /** le titre d'une colonne : « Altitude (m) » — l'unité (f.unit) va dans la case des critères (K17), pas dans le libellé */
+    const flab = f => `${T(f.label)}${f.unit ? ` (${T(f.unit)})` : ''}`;
     const kindOf = f => (['number', 'year'].includes(f.type) ? 'range' : f.type === 'date' ? 'daterange' : ['enum', 'place', 'bool'].includes(f.type) ? f.type : 'text'); // daterange : « du 1er au 30 juin 1859 » (AAAA-MM-JJ)
     /* 🧩 filtres en plus, apportés par d'autres fichiers (ex. « Dans le territoire », heritage-territoires.js) :
        LCNDA_EXT.dataListFilters = [{id, icon?, label, options() → [{value, label}], prepare?(), test([lat, lon], value) → bool}] ;
@@ -123,7 +125,7 @@
     const PERIOD_MODES = () => [['in', T('en l’an')], ['within', T('entièrement entre')], ['overlap', T('qui touche la période')]];
     function critText(d, c) {
         if (c.kind === 'xf') { const x = xfOf(c.fid); return `${x?.icon || '🧩'} ${T(x?.label || c.fid)} : ${c.valueLabel || c.value}`; }
-        const f = fieldOf(d, c.key), l = T(f.label);
+        const f = fieldOf(d, c.key), l = flab(f);
         if (c.kind === 'daterange') { const dt = v => (v ? new Date(v + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) : ''); return c.from && c.to ? T('{l} : du {a} au {b}', {l, a: dt(c.from), b: dt(c.to)}) : c.from ? T('{l} : depuis le {a}', {l, a: dt(c.from)}) : T('{l} : jusqu’au {b}', {l, b: dt(c.to)}); }
         if (c.kind === 'range') return c.from !== '' && c.from != null && c.to !== '' && c.to != null ? `${l} : ${c.from} → ${c.to}` : c.from !== '' && c.from != null ? `${l} ≥ ${c.from}` : `${l} ≤ ${c.to}`;
         if (c.kind === 'enum') return `${l} : ${c.values.slice(0, 3).join(', ')}${c.values.length > 3 ? ` +${c.values.length - 3}` : ''}`;
@@ -306,7 +308,7 @@
     function paintTable(res) {
         const d = cur.d, st = cur.st, cs = cols(d, st), urls = urlFields(d);
         if (!cur.rows.length) { res.innerHTML = A().emptyState ? A().emptyState({icon: '🔎', text: T('Rien ne correspond à ces critères.'), hint: T('Retire un critère, élargis la période ou la distance.'), size: 'small'}) : esc(T('Rien ne correspond à ces critères.')); paintMore(); return; }
-        const head = cs.map(f => `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(T(f.label))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`).join('');
+        const head = cs.map(f => `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(flab(f))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`).join('');
         const body = cur.rows.map((r, i) => `<tr data-ld-row="${i}">${cs.map((f, j) => (j === 0 && d.open ? `<td><button type="button" class="table-link" data-ld-open="${i}">${esc(r[f.key] ?? '—')}</button></td>` : cellHtml(f, r))).join('')}${urls.length ? `<td class="ld-links">${urls.map(u => (r[u.key] ? `<a href="${esc(A().safeUrl ? A().safeUrl(r[u.key]) : r[u.key])}" target="_blank" rel="noopener" title="${esc(T(u.label))}">↗</a>` : '')).join(' ')}</td>` : ''}</tr>`).join('');
         res.innerHTML = `<div class="data-table-wrap ld-table-wrap"><table class="data-table ld-table"><thead><tr>${head}${urls.length ? '<th></th>' : ''}</tr></thead><tbody>${body}</tbody></table></div>`;
         paintMore();
@@ -358,7 +360,7 @@
         return (f.values || []).map(v => [String(v), null]);
     }
     async function openCrit(key, editIndex = -1) {
-        const d = cur.d, st = cur.st, f = fieldOf(d, key), kind = kindOf(f), old = editIndex >= 0 ? st.crit[editIndex] : null, lab = esc(T(f.label));
+        const d = cur.d, st = cur.st, f = fieldOf(d, key), kind = kindOf(f), old = editIndex >= 0 ? st.crit[editIndex] : null, lab = esc(T(f.label)), unitAttr = f.unit ? ` data-unit="${esc(T(f.unit))}"` : '';
         const done = c => { if (editIndex >= 0) st.crit.splice(editIndex, 1, c); else st.crit.push(c); rerun(); };
         if (kind === 'daterange') {
             editor(`<b>${lab}</b><div class="ld-ed-row"><label>${esc(T('du'))} <input name="from" type="date" value="${esc(old?.from ?? '')}"></label><label>${esc(T('au'))} <input name="to" type="date" value="${esc(old?.to ?? '')}"></label></div>`,
@@ -366,7 +368,7 @@
             return;
         }
         if (kind === 'range') {
-            editor(`<b>${lab}</b><div class="ld-ed-row"><label>${esc(T('de'))} <input name="from" type="number" inputmode="numeric" value="${esc(old?.from ?? '')}"></label><label>${esc(T('à'))} <input name="to" type="number" inputmode="numeric" value="${esc(old?.to ?? '')}"></label></div><small class="muted">${esc(T('Une seule case suffit : « de 1850 » = 1850 et après.'))}</small>`,
+            editor(`<b>${lab}</b><div class="ld-ed-row"><label>${esc(T('de'))} <input name="from" type="number" inputmode="numeric"${unitAttr} value="${esc(old?.from ?? '')}"></label><label>${esc(T('à'))} <input name="to" type="number" inputmode="numeric"${unitAttr} value="${esc(old?.to ?? '')}"></label></div><small class="muted">${esc(T('Une seule case suffit : « de 1850 » = 1850 et après.'))}</small>`,
                 form => { const a = form.elements.from.value.trim(), b = form.elements.to.value.trim(); if (!a && !b) { toast(T('Écris au moins un nombre.'), 'error'); return false; } done({key, kind, from: a === '' ? '' : Number(a), to: b === '' ? '' : Number(b)}); });
             return;
         }
@@ -395,7 +397,7 @@
         const d = cur.d, fs = (d.fields || []).filter(f => f.type !== 'url' && !f.hidden);
         const icon = f => ({year: '📅', date: '📅', number: '#', enum: '☰', place: '📍', bool: '☑'}[f.type] || '🔤');
         const xs = d.geo ? xfAll().filter(f => !f.needs || f.needs === 'geo') : [];
-        UI().menuAt?.(btn, [...fs.map(f => ({icon: icon(f), label: T(f.label), run: () => openCrit(f.key)})), xs.length ? '-' : null, ...xs.map(f => ({icon: f.icon || '🧩', label: T(f.label || f.id), run: () => openXf(f)}))], {title: T('Ajouter un critère')});
+        UI().menuAt?.(btn, [...fs.map(f => ({icon: icon(f), label: flab(f), run: () => openCrit(f.key)})), xs.length ? '-' : null, ...xs.map(f => ({icon: f.icon || '🧩', label: T(f.label || f.id), run: () => openXf(f)}))], {title: T('Ajouter un critère')});
     }
     async function openXf(x, editIndex = -1) {
         const st = cur.st, old = editIndex >= 0 ? st.crit[editIndex] : null;
@@ -440,7 +442,7 @@
         while (out.length < Math.min(total, EXPORT_MAX)) { const p = await fetchPage(d, st, out.length, 2000); total = p.total; if (!p.rows.length) break; out.push(...p.rows); }
         return out.slice(0, EXPORT_MAX);
     }
-    const table2d = rows => { const cs = [...cols(cur.d, cur.st), ...urlFields(cur.d)]; const val = (f, v) => (v == null ? '' : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : v); return [cs.map(f => T(f.label)), ...rows.map(r => cs.map(f => val(f, r[f.key])))]; };
+    const table2d = rows => { const cs = [...cols(cur.d, cur.st), ...urlFields(cur.d)]; const val = (f, v) => (v == null ? '' : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : v); return [cs.map(f => flab(f)), ...rows.map(r => cs.map(f => val(f, r[f.key])))]; };
     const critSummary = () => { const d = cur.d, st = cur.st; return [st.q ? `« ${st.q} »` : '', ...st.crit.map(c => critText(d, c)), st.period ? periodText(st.period) : '', st.near ? nearText(st.near) : ''].filter(Boolean).join(' · '); };
     async function exportCsv() {
         let rows; try { rows = await allRows(); } catch (e) { return toast(e.message, 'error'); }
@@ -549,11 +551,11 @@
     const BUILT_IN = [
         /* 🏘 Histoire du lieu (lib/histoire.php) */
         pack('hist_vendanges', {id: 'hist_vendanges', icon: '🍇', label: 'Dates des vendanges (27 régions)', group: 'Le monde', source: 'Daux et al. (2012), NOAA / WDS-Paleo', sourceUrl: 'https://www.ncei.noaa.gov/access/paleo-search/study/13194',
-            fields: [{key: 'region', label: 'Région viticole', type: 'enum'}, {key: 'year', label: 'Année', type: 'year'}, {key: 'date', label: 'Début des vendanges', type: 'date'}, {key: 'diff', label: 'Écart à la moyenne (jours)', type: 'number'}, {key: 'kind', label: 'Vendanges', type: 'enum'}],
+            fields: [{key: 'region', label: 'Région viticole', type: 'enum'}, {key: 'year', label: 'Année', type: 'year'}, {key: 'date', label: 'Début des vendanges', type: 'date'}, {key: 'diff', label: 'Écart à la moyenne', unit: 'jours', type: 'number'}, {key: 'kind', label: 'Vendanges', type: 'enum'}],
             period: r => [r.year, r.year], geo: geoLL, install: histInstall}),
         pack('hist_communes', {id: 'hist_communes', icon: '👥', label: 'Population des communes (1876 → 2023)', group: 'Le lieu', source: '©Insee, recensements de la population (Licence Ouverte)', sourceUrl: 'https://www.insee.fr/fr/statistiques/3698339',
             fields: [{key: 'commune', label: 'Commune', type: 'place'}, {key: 'dep', label: 'Département', type: 'enum'}, {key: 'code', label: 'Code Insee', type: 'text'}, {key: 'p1876', label: 'Habitants en 1876', type: 'number'}, {key: 'p1901', label: 'en 1901', type: 'number'},
-                {key: 'p1936', label: 'en 1936', type: 'number'}, {key: 'p1968', label: 'en 1968', type: 'number'}, {key: 'p1999', label: 'en 1999', type: 'number'}, {key: 'p2023', label: 'en 2023', type: 'number'}, {key: 'max', label: 'Le plus d’habitants', type: 'number'}, {key: 'evolution', label: 'Évolution 1876 → 2023 (%)', type: 'number'}],
+                {key: 'p1936', label: 'en 1936', type: 'number'}, {key: 'p1968', label: 'en 1968', type: 'number'}, {key: 'p1999', label: 'en 1999', type: 'number'}, {key: 'p2023', label: 'en 2023', type: 'number'}, {key: 'max', label: 'Le plus d’habitants', type: 'number'}, {key: 'evolution', label: 'Évolution 1876 → 2023', unit: '%', type: 'number'}],
             geo: geoLL, install: histInstall, open: r => { const st = A().state; if (!st || !r.code) return; st.hVillage = r.code; st.listType = 'villages'; A().setModule?.('listes'); ext.lists?.villages?.(++st.workspaceToken); }}),
         pack('hist_gares', {id: 'hist_gares', icon: '🚂', label: 'Gares et ouverture du train', group: 'Le lieu', source: 'Wikidata (CC0) ; R. Jeansoulin, Un siècle de gares (ODbL)', sourceUrl: 'https://www.data.gouv.fr/datasets/un-siecle-de-gares-du-reseau-ferroviaire-francais-en-service-fermees-ou-disparues',
             fields: [{key: 'name', label: 'Gare', type: 'text'}, {key: 'year', label: 'Ouverture', type: 'year'}, {key: 'code', label: 'Code Insee', type: 'text'}, {key: 'source', label: 'Source', type: 'enum'}],
@@ -587,11 +589,11 @@
         /* 🗳 Élections d'autrefois (seulement si l'interrupteur est mis) */
         pack('elections', {id: 'elections', icon: '🗳', label: 'Élections, commune par commune', group: 'Le lieu', source: 'Élections d’autrefois (voir Réglages)', enabled: () => !!ext.elections?.isOn?.(),
             fields: [{key: 'commune', label: 'Commune', type: 'place'}, {key: 'dep', label: 'Département', type: 'enum'}, {key: 'year', label: 'Année', type: 'year'}, {key: 'election', label: 'Élection', type: 'enum'}, {key: 'tour', label: 'Tour', type: 'number'},
-                {key: 'first', label: 'En tête', type: 'text'}, {key: 'inscrits', label: 'Inscrits', type: 'number'}, {key: 'votants', label: 'Votants', type: 'number'}, {key: 'participation', label: 'Participation (%)', type: 'number'}],
+                {key: 'first', label: 'En tête', type: 'text'}, {key: 'inscrits', label: 'Inscrits', type: 'number'}, {key: 'votants', label: 'Votants', type: 'number'}, {key: 'participation', label: 'Participation', unit: '%', type: 'number'}],
             period: r => [r.year, r.year], geo: geoLL, install: () => (ext.elections?.openSettings ? ext.elections.openSettings() : goSettings('elections'))}),
         /* 🌦 Stations météo des packs installés */
         pack('meteo_stations', {id: 'meteo_stations', icon: '🌦', label: 'Stations météo d’autrefois', group: 'Le lieu', source: 'Météo d’autrefois (packs installés)',
-            fields: [{key: 'name', label: 'Station', type: 'text'}, {key: 'country', label: 'Pays', type: 'enum'}, {key: 'from', label: 'Relevés depuis', type: 'year'}, {key: 'to', label: 'jusqu’à', type: 'year'}, {key: 'alt', label: 'Altitude (m)', type: 'number'}, {key: 'source', label: 'Source', type: 'enum'}, {key: 'pack', label: 'Pack', type: 'enum'}],
+            fields: [{key: 'name', label: 'Station', type: 'text'}, {key: 'country', label: 'Pays', type: 'enum'}, {key: 'from', label: 'Relevés depuis', type: 'year'}, {key: 'to', label: 'jusqu’à', type: 'year'}, {key: 'alt', label: 'Altitude', unit: 'm', type: 'number'}, {key: 'source', label: 'Source', type: 'enum'}, {key: 'pack', label: 'Pack', type: 'enum'}],
             period: r => [r.from, r.to], geo: geoLL, install: () => (ext.meteo?.openSettings ? ext.meteo.openSettings() : goSettings('meteo'))}),
 
         /* 🗺 Frontières : les pays et leurs périodes (heritage-monde-contexte.js, CShapes) */

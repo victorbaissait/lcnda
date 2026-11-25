@@ -907,7 +907,8 @@
             paintSoon(); peopleSoon();
         });
         let paintRaf = 0, peopleT = 0;
-        function paintSoon() { if (paintRaf) return; paintRaf = requestAnimationFrame(() => { paintRaf = 0; if (!dlg.isConnected) return; if (!findBar.hidden) findRun({keep: true}); else paintMirror(); }); }
+        function paintSoon() { if (area.value.length < 20000 && !paintRaf) { if (!findBar.hidden) findRun({keep: true}); else paintMirror(); return; } // un acte court : tout de suite (le miroir ne remplace que les lignes touchées)
+            if (paintRaf) return; paintRaf = requestAnimationFrame(() => { paintRaf = 0; if (!dlg.isConnected) return; if (!findBar.hidden) findRun({keep: true}); else paintMirror(); }); }
         function peopleSoon() { clearTimeout(peopleT); peopleT = setTimeout(() => { peopleT = 0; if (dlg.isConnected) paintPeople(); }, 500); }
         /* 16 (audit) : un seul historique. ⌘Z dans la case passe par celui de l'Atelier (texte, zones, personnes…), un pas par mot
          * (l'état d'avant chaque espace ou retour à la ligne tapé après un mot) ou par pause dans la frappe. */
@@ -2167,7 +2168,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         }
         function toggleRead(open) {
             const pn = $('[data-tx-readpanel]'), b = $('[data-tx-cmd="readmenu"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on);
-            if (!on) return; pn.querySelector('.h-tx-readopt:not(:disabled)')?.focus();
+            if (!on) return; pn.querySelector('.h-tx-readopt:not(:disabled)')?.focus(); ext.txActe?.srvRename?.(pn); // 🖥 le serveur d'IA choisi, s'il n'est pas Ollama
             paintPageRead();
             readStates().then(st => { if (!dlg.isConnected) return; pn.querySelectorAll('[data-tx-readst]').forEach(el => { const ok = st[el.dataset.txReadst];
                 el.innerHTML = UI.badge ? UI.badge(ok ? i18n('Installé') : i18n('À installer'), ok ? 'green' : 'yellow') : esc(ok ? i18n('Installé') : i18n('À installer')); el.dataset.state = ok ? 'ok' : 'todo'; }); });

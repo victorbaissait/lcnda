@@ -85,7 +85,7 @@
 /* Réglages → 🤖 IA */
 .aia-seg{display:flex;flex-wrap:wrap}
 .aia-models tr.is-big{opacity:.6}
-.aia-switch{align-items:flex-start;margin:.45rem 0}
+.aia-optline{align-items:flex-start;margin:.45rem 0}
 .aia-log{list-style:none;padding:0;margin:.3rem 0;display:grid;gap:.15rem;font-size:.9em;overflow-wrap:anywhere}
 .maintenance-panel.is-disabled{opacity:.7}
 @media (max-width:640px){

@@ -20,7 +20,7 @@
 .ts-hero-n { position: absolute; top: -.3em; right: -.35em; min-width: 1.3em; padding: 0 .25em; border-radius: 1em; font-size: .68em; line-height: 1.3em; text-align: center; background: var(--accent, #0066cc); color: #fff; }
 
 /* ⤢ le rapport */
-.ts-dialog { width: min(1100px, 96vw); max-height: 92vh; }
+.ts-dialog { width: var(--modal-l); max-height: 92vh; }
 .ts-dialog .modal-body, dialog.modal.ts-dialog > .modal-body { overflow: auto; padding: .9rem 1.4rem 1.1rem; box-sizing: border-box; }
 .ts-group > h3 { padding-top: .2rem; border-top: 1px solid var(--line-color, rgba(127, 127, 127, .3)); }
 .ts-group:first-of-type > h3 { border-top: 0; }
