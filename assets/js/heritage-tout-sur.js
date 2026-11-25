@@ -403,13 +403,18 @@
         const d = s.task.d;
         return `<li class="ts-sug${s.kept ? ' is-kept' : ''}" data-ts-i="${i}"><span class="ts-ico" aria-hidden="true">${esc(d.icon || '•')}</span><div class="ts-sug-t"><span class="ts-sum">${esc(s.summary)}</span>
             <small class="ts-meta">${esc(T(d.label))}${s.task.sub ? ` · ${esc(s.task.sub)}` : ''}${s.hints.length ? ` · <span class="ts-hint">${esc(s.hints.join(', '))}</span>` : ''}${s.sheet ? ` · <span class="ts-onsheet">${esc(T('déjà sur la fiche'))}</span>` : ''} ${srcLink(s.src)}</small></div>
-            ${actions && !RO() ? (s.kept ? `<span class="ts-kept">✓ ${esc(T('gardé'))}</span>` : `<span class="ts-acts"><button type="button" class="button small secondary" data-ts-keep="${i}" title="${esc(T('Le garder sur la fiche, et l’ajouter aussi à d’autres'))}">✓ ${esc(T('Garder'))}</button><button type="button" class="icon-button small" data-ts-nope="${i}" title="${esc(T('Pas utile : ne plus le proposer'))}" aria-label="${esc(T('Pas utile'))}">✗</button></span>`) : ''}</li>`;
+            ${actions && !RO() ? (s.kept ? `<span class="ts-kept">✓ ${esc(T('gardé'))}</span>` : `<span class="ts-acts"><button type="button" class="button small secondary" data-ts-keep="${i}" title="${esc(T('Le garder sur la fiche, et l’ajouter aussi à d’autres'))}">✓ ${esc(T('Garder'))}</button>${cxOn() ? `<button type="button" class="icon-button small" data-ts-cx="${i}" title="${esc(T('Mettre de côté dans le panier (pour en ranger plusieurs d’un coup)'))}" aria-label="${esc(T('Au panier'))}">🧺</button>` : ''}<button type="button" class="icon-button small" data-ts-nope="${i}" title="${esc(T('Pas utile : ne plus le proposer'))}" aria-label="${esc(T('Pas utile'))}">✗</button></span>`) : ''}</li>`;
     }
+    // 🧺 plusieurs suggestions à la fois : chacune au panier (avec sa source), puis « 📍 Mettre dans… » une enquête, une note… (heritage-connexions.js)
+    const cxOn = () => !!ext.connexions && ext.connexions.enabled?.() !== false;
+    const cxItem = (s, life) => ({kind: 'data', title: String(s.summary || '').slice(0, 200), value: [T(s.task?.d?.label || ''), s.task?.sub || ''].filter(Boolean).join(' · '),
+        origin: {kind: 'person', id: Number(life?.pid) || 0, person_id: Number(life?.pid) || 0, label: [T('Ce qui le concerne'), s.src?.label].filter(Boolean).join(' — '), url: s.src?.url || ''}});
     function bindLines(box, list, life, redraw) {
         // le second clic d'un double-clic (e.detail > 1) tombe sur la carte suivante, remontée sous la souris quand la première est cachée :
         // il ne compte pas (avant : double-clic sur « ✗ » de « 🌠 1812 : Chantonnay » → deux cartes cachées, deux « ✗ Caché »)
         box.querySelectorAll('[data-ts-keep]').forEach(b => b.addEventListener('click', e => { if (e.detail > 1) return; openKeep(list[Number(b.dataset.tsKeep)], life, redraw); }));
         box.querySelectorAll('[data-ts-nope]').forEach(b => b.addEventListener('click', e => { if (e.detail > 1) return; nope(list[Number(b.dataset.tsNope)], life, redraw); }));
+        box.querySelectorAll('[data-ts-cx]').forEach(b => b.addEventListener('click', e => { if (e.detail > 1) return; ext.connexions?.take?.([cxItem(list[Number(b.dataset.tsCx)], life)]); }));
         box.querySelectorAll('[data-ts-missing]').forEach(b => b.addEventListener('click', () => open({person: life.pid, focus: 'missing'})));
     }
 
