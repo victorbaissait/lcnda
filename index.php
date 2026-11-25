@@ -109,7 +109,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/chateaux-territoires.css?v=1">
     <link rel="stylesheet" href="assets/css/fiche-edifice.css?v=2">
     <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">
-    <link rel="stylesheet" href="assets/css/listes-donnees.css?v=2">
+    <link rel="stylesheet" href="assets/css/listes-donnees.css?v=3">
     <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
     <link rel="stylesheet" href="assets/css/lieux-patrimoine.css?v=1">
     <link rel="stylesheet" href="assets/css/commune-plus.css?v=1">
@@ -1231,7 +1231,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=591" defer></script>
+<script src="assets/js/app.js?v=592" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1330,14 +1330,15 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sidegroups.js?v=14" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
-<script src="assets/js/app-listes-donnees.js?v=6" defer></script>
+<script src="assets/js/app-listes-donnees.js?v=7" defer></script>
 <script src="assets/js/app-maintenance.js?v=68" defer></script>
 <script src="assets/js/app-recherche.js?v=35" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=2" defer></script>
 <script src="assets/js/app-graphiques.js?v=29" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
-<script src="assets/js/heritage.js?v=47" defer></script>
+<script src="assets/js/heritage.js?v=48" defer></script>
+<script src="assets/js/heritage-mini-carte.js?v=1" defer></script>
 <script src="assets/js/app-selection.js?v=3" defer></script>
 <script src="assets/js/app-sources-liste.js?v=3" defer></script>
 <script src="assets/js/heritage-tools.js?v=22" defer></script>

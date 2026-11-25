@@ -88,7 +88,7 @@
     const SAVED = 'genealogie-listes-donnees';
     const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
-    const blank = () => ({q: '', crit: [], period: null, near: null, sort: '', dir: 'asc', view: 'table'});
+    const blank = () => ({q: '', crit: [], period: null, near: null, sort: '', dir: 'asc', view: 'table', hide: [], gps: false});
     const stateOf = id => ({...blank(), ...(readJ('lcnda-ld:' + id, {}) || {})});
     const saveState = (id, st) => writeJ('lcnda-ld:' + id, st);
     const savedAll = () => { const v = readJ(SAVED, {}); return v && typeof v === 'object' && v.saved && typeof v.saved === 'object' ? v : {saved: {}}; };
@@ -226,7 +226,25 @@
     const ws = () => document.getElementById('workspace');
     const header = (d, extra = {}) => (UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')} · ${T(groupOf(d))}`, icon: d.icon || '📋', title: T(d.label), ...extra}) : `<h2>${esc(T(d.label))}</h2>`);
     const sourceLine = d => (d.source ? `<p class="ld-source muted"><small>${esc(T('Source :'))} ${d.sourceUrl ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener">${esc(d.source)}</a>` : esc(d.source)}</small></p>` : '');
-    const cols = (d, st) => [...(d.fields || []).filter(f => f.type !== 'url' && !f.hidden), ...(st.near ? [{key: '_km', label: T('Distance (km)'), type: 'number', dist: true}] : [])];
+    /** les colonnes : celles de la liste moins celles décochées dans « ⚙ Colonnes » (st.hide), + 📍 GPS (st.gps, listes avec positions), + Distance */
+    const cols = (d, st) => {
+        const base = (d.fields || []).filter(f => f.type !== 'url' && !f.hidden), hide = Array.isArray(st.hide) ? st.hide : [];
+        const shownF = base.filter(f => !hide.includes(f.key));
+        return [...(shownF.length ? shownF : base.slice(0, 1)), ...(st.gps && d.geo ? [{key: '_gps', label: T('📍 GPS'), gps: true}] : []), ...(st.near ? [{key: '_km', label: T('Distance (km)'), type: 'number', dist: true}] : [])];
+    };
+    /* 📍 GPS : « 48,3904 N · 4,4861 O » ; ⧉ copie « 48.3904, -4.4861 » (pour une appli GPS) */
+    const gpsNum = v => Math.abs(v).toLocaleString('fr-FR', {minimumFractionDigits: 4, maximumFractionDigits: 4});
+    const gpsText = g => `${T(g[0] >= 0 ? '{v} N' : '{v} S', {v: gpsNum(g[0])})} · ${T(g[1] >= 0 ? '{v} E' : '{v} O', {v: gpsNum(g[1])})}`;
+    const gpsPlain = g => `${Number(g[0].toFixed(6))}, ${Number(g[1].toFixed(6))}`;
+    const osmUrl = g => { const a = Number(g[0].toFixed(6)), b = Number(g[1].toFixed(6)); return `https://www.openstreetmap.org/?mlat=${a}&mlon=${b}#map=15/${a}/${b}`; };
+    function gpsCell(d, row, i) {
+        const g = geoOf(d, row); if (!g) return '<td class="muted">—</td>';
+        return `<td class="ld-gps-td"><span class="ld-gps"><button type="button" class="ld-gps-v" data-ld-gps-show="${i}" title="${esc(T('Les actions : copier, voir sur la carte, OpenStreetMap'))}">${esc(gpsText(g))}</button><span class="ld-gps-act"><button type="button" data-ld-gps-copy="${i}">⧉ ${esc(T('Copier'))}</button>${cur.d.geo ? `<button type="button" data-ld-gps-map="${i}">🗺 ${esc(T('Voir sur la carte'))}</button>` : ''}<a href="${esc(osmUrl(g))}" target="_blank" rel="noopener noreferrer">↗ OpenStreetMap</a></span></span></td>`;
+    }
+    async function copyText(text) {
+        try { await navigator.clipboard.writeText(text); return true; } catch (_) {}
+        try { const a = document.createElement('textarea'); a.value = text; a.setAttribute('readonly', ''); a.style.cssText = 'position:fixed;left:-9999px'; document.body.appendChild(a); a.select(); const ok = document.execCommand('copy'); a.remove(); return ok; } catch (_) { return false; }
+    }
     const urlFields = d => (d.fields || []).filter(f => f.type === 'url');
 
     /** la feuille de style (ajoutée une fois, si index.php ne l'a pas déjà) */
@@ -258,6 +276,7 @@
                 ${d.period ? `<button type="button" class="ui-listbar-btn" data-ld-period aria-haspopup="true">📅 ${esc(T('Période'))}</button>` : ''}
                 ${d.geo ? `<button type="button" class="ui-listbar-btn" data-ld-near aria-haspopup="true">📍 ${esc(T('Autour de…'))}</button>` : ''}
                 ${d.geo ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}"><button type="button" data-ld-view="table">${esc(T('Tableau'))}</button><button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button></span>` : ''}
+                <button type="button" class="ui-listbar-btn" data-ld-cols aria-haspopup="true" title="${esc(T('Choisir les colonnes du tableau'))}">⚙ ${esc(T('Colonnes'))}</button>
                 <button type="button" class="ui-listbar-btn" data-ld-save title="${esc(T('Garder ces critères sous un nom, pour les retrouver d’un clic'))}">★ ${esc(T('Enregistrer cette recherche'))}</button>
               </div>
               <div class="ld-editor" data-ld-editor hidden></div>
@@ -292,7 +311,7 @@
         let page;
         try { page = await fetchPage(d, st, 0, st.view === 'map' ? MAP_MAX : PAGE); } catch (e) { if (my === cur.seq) res.innerHTML = A().empty ? A().empty(e.message || T('Liste impossible à lire.'), {icon: '⛔'}) : esc(e.message); return; }
         if (my !== cur.seq) return;
-        cur.rows = page.rows; cur.total = page.total; cur.more = page.more;
+        cur.rows = page.rows; cur.total = page.total; cur.more = page.more; cur.zone = null;
         const c = ws()?.querySelector('[data-ld-count]'); if (c) c.textContent = countText();
         if (st.view === 'map' && d.geo) return paintMap(res);
         paintTable(res);
@@ -308,8 +327,8 @@
     function paintTable(res) {
         const d = cur.d, st = cur.st, cs = cols(d, st), urls = urlFields(d);
         if (!cur.rows.length) { res.innerHTML = A().emptyState ? A().emptyState({icon: '🔎', text: T('Rien ne correspond à ces critères.'), hint: T('Retire un critère, élargis la période ou la distance.'), size: 'small'}) : esc(T('Rien ne correspond à ces critères.')); paintMore(); return; }
-        const head = cs.map(f => `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(flab(f))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`).join('');
-        const body = cur.rows.map((r, i) => `<tr data-ld-row="${i}">${cs.map((f, j) => (j === 0 && d.open ? `<td><button type="button" class="table-link" data-ld-open="${i}">${esc(r[f.key] ?? '—')}</button></td>` : cellHtml(f, r))).join('')}${urls.length ? `<td class="ld-links">${urls.map(u => (r[u.key] ? `<a href="${esc(A().safeUrl ? A().safeUrl(r[u.key]) : r[u.key])}" target="_blank" rel="noopener" title="${esc(T(u.label))}">↗</a>` : '')).join(' ')}</td>` : ''}</tr>`).join('');
+        const head = cs.map(f => f.gps ? `<th>${esc(flab(f))}</th>` : `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(flab(f))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`).join('');
+        const body = cur.rows.map((r, i) => `<tr data-ld-row="${i}">${cs.map((f, j) => (f.gps ? gpsCell(d, r, i) : j === 0 && d.open ? `<td><button type="button" class="table-link" data-ld-open="${i}">${esc(r[f.key] ?? '—')}</button></td>` : cellHtml(f, r))).join('')}${urls.length ? `<td class="ld-links">${urls.map(u => (r[u.key] ? `<a href="${esc(A().safeUrl ? A().safeUrl(r[u.key]) : r[u.key])}" target="_blank" rel="noopener" title="${esc(T(u.label))}">↗</a>` : '')).join(' ')}</td>` : ''}</tr>`).join('');
         res.innerHTML = `<div class="data-table-wrap ld-table-wrap"><table class="data-table ld-table"><thead><tr>${head}${urls.length ? '<th></th>' : ''}</tr></thead><tbody>${body}</tbody></table></div>`;
         paintMore();
         try { ext.connexions?.listRowsPainted?.(res, cur.rows, {d, total: cur.total}); } catch (e) { console.error(e); } // 📥 cases « Tu choisis des lignes… » (heritage-connexions.js)
@@ -329,16 +348,83 @@
             res.querySelector(`[data-ld-row="${start}"] button, [data-ld-row="${start}"] td`)?.focus?.();
         } catch (e) { toast(e.message, 'error'); btn.disabled = false; }
     }
+    /* 🗺 la carte : zoom, déplacement, points regroupés (heritage-mini-carte.js) ; au plus MAP_MAX points, et on dit combien */
     function paintMap(res) {
-        const d = cur.d, pts = [], rows = [];
-        cur.rows.forEach(r => { const g = geoOf(d, r); if (g) { rows.push(r); const f = cols(d, cur.st)[0]; pts.push({lat: g[0], lon: g[1], label: String(r[f?.key] ?? ''), color: '#0066cc'}); } });
-        if (cur.st.near) pts.push({lat: cur.st.near.lat, lon: cur.st.near.lon, label: cur.st.near.title, color: '#d4380d', n: '★'});
-        const note = cur.total > cur.rows.length ? `<p class="muted"><small>${esc(T('La carte montre les {n} premières lignes : ajoute un critère pour voir le reste.', {n: nf(cur.rows.length)}))}</small></p>` : '';
+        const d = cur.d, st = cur.st, pts = [], rows = [], f = cols(d, st).find(c => !c.gps && !c.dist);
+        cur.rows.forEach(r => { const g = geoOf(d, r); if (g) { rows.push(r); pts.push({lat: g[0], lon: g[1], label: String(r[f?.key] ?? ''), color: '#0066cc'}); } });
+        if (st.near) pts.push({lat: st.near.lat, lon: st.near.lon, label: st.near.title, color: '#d4380d', n: '★'});
         if (!rows.length) { res.innerHTML = A().empty ? A().empty(T('Aucune de ces lignes n’a de position sur la carte.'), {icon: '🗺'}) : ''; paintMore(); return; }
-        res.innerHTML = `${ext.miniMap ? ext.miniMap(pts, [], {height: 520}) : `<p>${esc(T('La carte n’est pas chargée.'))}</p>`}${note}`;
+        const view = cur.mapView; cur.mapView = null;
+        const circles = st.near && Number(st.near.km) > 0 ? [{lat: st.near.lat, lon: st.near.lon, km: Number(st.near.km)}] : [];
+        res.innerHTML = `${ext.miniMap ? ext.miniMap(pts, [], {height: 520, view, circles, cluster: true}) : `<p>${esc(T('La carte n’est pas chargée.'))}</p>`}<div class="ld-map-note" data-ld-map-note aria-live="polite"></div>`;
         const marks = [...res.querySelectorAll('.h-map-point')];
-        marks.forEach((m, i) => { if (!rows[i]) return; m.style.cursor = d.open ? 'pointer' : ''; m.dataset.ldMapRow = String(i); if (d.open) m.addEventListener('click', () => { try { d.open(rows[i]); } catch (e) { toast(e.message, 'error'); } }); });
+        marks.forEach((m, i) => {
+            if (!rows[i]) return; m.dataset.ldMapRow = String(i);
+            if (!d.open) return;
+            m.style.cursor = 'pointer'; m.setAttribute('tabindex', '0'); m.setAttribute('role', 'button'); m.setAttribute('aria-label', T('Ouvrir : {name}', {name: pts[i].label || '—'}));
+            const go = () => { try { d.open(rows[i]); } catch (e) { toast(e.message, 'error'); } };
+            m.addEventListener('click', go); m.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+        });
+        const noPos = cur.rows.length - rows.length, capped = !cur.zone && (cur.more || cur.total > cur.rows.length);
+        const noteBox = res.querySelector('[data-ld-map-note]');
+        const paintNote = zoomedIn => {
+            if (!noteBox) return;
+            const shown = rows.length === 1 ? T('1 point sur la carte') : T('{n} points sur la carte', {n: nf(rows.length)});
+            const parts = [`<b>${esc(shown)}</b>`];
+            if (cur.zone) parts.push(esc(cur.zone.total > rows.length ? T('les {n} premiers de cette zone (il y en a {t})', {n: nf(rows.length), t: nf(cur.zone.total)}) : T('tous ceux de cette zone')));
+            else if (capped) parts.push(esc(T('sur {t} lignes : seulement les {n} premières sont placées.', {t: cur.more ? T('plus de {n}', {n: nf(cur.total)}) : nf(cur.total), n: nf(cur.rows.length)})));
+            if (noPos > 0) parts.push(esc(noPos === 1 ? T('1 ligne sans position') : T('{n} lignes sans position', {n: nf(noPos)})));
+            let act = '';
+            if (cur.zone) act = `<button type="button" class="button small secondary" data-ld-zone-reset>↺ ${esc(T('Toute la recherche'))}</button>`;
+            else if (capped) act = zoomedIn ? `<button type="button" class="button small" data-ld-zone>⤓ ${esc(T('Charger les points de cette zone'))}</button>` : `<small class="muted">${esc(T('Zoome sur une région pour charger ses points, ou ajoute un critère.'))}</small>`;
+            noteBox.innerHTML = `<span>${parts.join(' · ')}</span>${act}`;
+        };
+        paintNote(false);
+        res.querySelector('.h-map')?.addEventListener('minimap-view', e => { const z = e.detail || {}; paintNote(z.zoom > (z.fitZoom ?? 0) + 0.9); });
+        const ctl = ext.miniMapOf?.(res);
+        if (cur.mapFocus && ctl) { const g = cur.mapFocus, i = rows.findIndex(r => { const x = geoOf(d, r); return x && Math.abs(x[0] - g[0]) < 1e-9 && Math.abs(x[1] - g[1]) < 1e-9; }); if (marks[i]) { marks[i].focus({preventScroll: true}); } }
+        cur.mapFocus = null;
         paintMore();
+    }
+    /** « Charger les points de cette zone » : les lignes dont la position est dans le cadre de la carte (filtre sur place ; ou le serveur
+     *  cherche dans le cercle qui contient le cadre, et on garde ce qui est dans le cadre) */
+    async function loadZone(btn) {
+        const res = ws()?.querySelector('[data-ld-results]'), ctl = ext.miniMapOf?.(res), b = ctl?.bounds(); if (!b) return;
+        const d = cur.d, st = cur.st, view = ctl.getView(), my = cur.seq;
+        const inBox = g => { let lon = g[1]; while (lon < b.west) lon += 360; while (lon > b.east) lon -= 360; return g[0] >= b.south && g[0] <= b.north && lon <= b.east; };
+        btn.disabled = true; btn.textContent = T('On cherche…');
+        try {
+            let found;
+            if (!d.query) found = (await fetchPage(d, st, 0, MAP_MAX)).all.filter(r => { const g = geoOf(d, r); return g && inBox(g); });
+            else {
+                const lat = (b.north + b.south) / 2, lon = (b.west + b.east) / 2, r = Math.max(km(lat, lon, b.north, b.west), km(lat, lon, b.south, b.east), km(lat, lon, b.north, b.east), km(lat, lon, b.south, b.west));
+                if (r > 3000) { toast(T('Zoome encore un peu : la zone est trop grande.')); btn.disabled = false; paintMap(res); return; }
+                const zst = st.near ? st : {...st, near: {lat, lon, km: Math.ceil(r), title: ''}, sort: st.sort || ''};
+                const page = await fetchPage(d, zst, 0, MAP_MAX);
+                found = page.rows.filter(x => { const g = geoOf(d, x); return g && inBox(g); }).map(x => (st.near ? x : (({_km, ...o}) => o)(x)));
+                if (page.total > page.rows.length) found.truncated = page.total;
+            }
+            if (my !== cur.seq) return;
+            const total = found.truncated ? Math.max(found.length, found.truncated) : found.length;
+            cur.zone = {total}; cur.rows = found.slice(0, MAP_MAX); cur.mapView = view;
+            paintMap(res);
+        } catch (e) {
+            console.error(e); btn.disabled = false; btn.textContent = '⤓ ' + T('Charger les points de cette zone');
+            toast(T('Cette liste ne sait pas chercher dans une zone de la carte : ajoute plutôt un critère (📍 Autour de…).'), 'error');
+        }
+    }
+    /** ⚙ Colonnes : cocher celles à montrer (retenu avec la recherche de cette liste) ; 📍 GPS pour les listes avec positions */
+    function openCols() {
+        const d = cur.d, st = cur.st, base = (d.fields || []).filter(f => f.type !== 'url' && !f.hidden), hide = Array.isArray(st.hide) ? st.hide : [];
+        editor(`<b>⚙ ${esc(T('Colonnes'))}</b><div class="ld-ed-list ld-cols-list">${base.map(f => `<label class="checkbox-line"><input type="checkbox" name="c" value="${esc(f.key)}" ${hide.includes(f.key) ? '' : 'checked'}> ${esc(flab(f))}</label>`).join('')}
+            ${d.geo ? `<label class="checkbox-line"><input type="checkbox" name="gps" data-ld-col-gps ${st.gps ? 'checked' : ''}> ${esc(T('📍 GPS'))} <small class="muted">${esc(T('(latitude, longitude ; aussi dans l’export)'))}</small></label>` : ''}</div>`,
+        form => {
+            const on = [...form.querySelectorAll('input[name="c"]')].filter(i => i.checked).map(i => i.value);
+            if (!on.length) { toast(T('Garde au moins une colonne.'), 'error'); return false; }
+            st.hide = base.map(f => f.key).filter(k => !on.includes(k)); st.gps = !!form.querySelector('[data-ld-col-gps]')?.checked;
+            if (st.hide.includes(st.sort)) st.sort = '';
+            rerun();
+        });
     }
 
     /* ═════════════ les petites fenêtres : un critère, la période, autour d'un lieu ═════════════ */
@@ -443,7 +529,11 @@
         while (out.length < Math.min(total, EXPORT_MAX)) { const p = await fetchPage(d, st, out.length, 2000); total = p.total; if (!p.rows.length) break; out.push(...p.rows); }
         return out.slice(0, EXPORT_MAX);
     }
-    const table2d = rows => { const cs = [...cols(cur.d, cur.st), ...urlFields(cur.d)]; const val = (f, v) => (v == null ? '' : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : v); return [cs.map(f => flab(f)), ...rows.map(r => cs.map(f => val(f, r[f.key])))]; };
+    const table2d = rows => {
+        const d = cur.d, cs = [...cols(d, cur.st), ...urlFields(d)].flatMap(f => (f.gps ? [{key: '_lat', label: 'latitude', gi: 0}, {key: '_lon', label: 'longitude', gi: 1}] : [f])); // 📍 GPS → deux colonnes, en degrés décimaux (point)
+        const val = (f, v) => (v == null ? '' : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : v);
+        return [cs.map(f => (f.gi != null ? f.label : flab(f))), ...rows.map(r => cs.map(f => { if (f.gi == null) return val(f, r[f.key]); const g = geoOf(d, r); return g ? Number(g[f.gi].toFixed(6)) : ''; }))];
+    };
     const critSummary = () => { const d = cur.d, st = cur.st; return [st.q ? `« ${st.q} »` : '', ...st.crit.map(c => critText(d, c)), st.period ? periodText(st.period) : '', st.near ? nearText(st.near) : ''].filter(Boolean).join(' · '); };
     async function exportCsv() {
         let rows; try { rows = await allRows(); } catch (e) { return toast(e.message, 'error'); }
@@ -491,7 +581,12 @@
             if ((b = t.closest('[data-ld-send]'))) return sendRows(b);
             if (t.closest('[data-ld-print]')) return print();
             if ((b = t.closest('[data-ld-more]'))) return more(b);
-            if (t.closest('[data-ld-clear]')) { cur.st = {...blank(), view: cur.st.view}; if (q) q.value = ''; return rerun(); }
+            if (t.closest('[data-ld-clear]')) { cur.st = {...blank(), view: cur.st.view, hide: cur.st.hide, gps: cur.st.gps}; if (q) q.value = ''; return rerun(); }
+            if (t.closest('[data-ld-cols]')) return openCols();
+            if ((b = t.closest('[data-ld-zone]'))) return loadZone(b);
+            if (t.closest('[data-ld-zone-reset]')) return refresh();
+            if ((b = t.closest('[data-ld-gps-copy]'))) { const g = geoOf(d, cur.rows[Number(b.dataset.ldGpsCopy)] || {}); if (g) copyText(gpsPlain(g)).then(ok => toast(ok ? T('Coordonnées copiées : {v}', {v: gpsPlain(g)}) : T('Copie impossible : {v}', {v: gpsPlain(g)}), ok ? undefined : 'error')); return; }
+            if ((b = t.closest('[data-ld-gps-map]'))) { const g = geoOf(d, cur.rows[Number(b.dataset.ldGpsMap)] || {}); if (g) { cur.mapView = {lat: g[0], lon: g[1], zoom: 13}; cur.mapFocus = g; cur.st.view = 'map'; rerun(); } return; }
             if ((b = t.closest('[data-ld-chip]'))) {
                 const k = b.dataset.ldChip;
                 if (k === 'period') cur.st.period = null; else if (k === 'near') { cur.st.near = null; if (cur.st.sort === '_km') cur.st.sort = ''; } else cur.st.crit.splice(Number(k.slice(5)), 1);
@@ -499,7 +594,7 @@
             }
             if ((b = t.closest('[data-ld-sort]'))) { const k = b.dataset.ldSort; if (cur.st.sort === k) cur.st.dir = cur.st.dir === 'asc' ? 'desc' : 'asc'; else { cur.st.sort = k; cur.st.dir = 'asc'; } return rerun(); }
             if ((b = t.closest('[data-ld-open]'))) { const r = cur.rows[Number(b.dataset.ldOpen)]; if (r) { try { d.open(r); } catch (x) { toast(x.message, 'error'); } } return; }
-            if ((b = t.closest('[data-ld-saved-go]'))) { const s = savedOf(d.id)[Number(b.dataset.ldSavedGo)]; if (s) { cur.st = {...blank(), ...s.st, view: cur.st.view}; if (q) q.value = cur.st.q || ''; rerun(); } return; }
+            if ((b = t.closest('[data-ld-saved-go]'))) { const s = savedOf(d.id)[Number(b.dataset.ldSavedGo)]; if (s) { cur.st = {...blank(), ...s.st, view: cur.st.view, hide: cur.st.hide, gps: cur.st.gps}; if (q) q.value = cur.st.q || ''; rerun(); } return; }
             if ((b = t.closest('[data-ld-saved-x]'))) {
                 const s = savedOf(d.id)[Number(b.dataset.ldSavedX)]; if (!s) return;
                 const drop = () => setSaved(d.id, savedOf(d.id).filter(x => x.name !== s.name));

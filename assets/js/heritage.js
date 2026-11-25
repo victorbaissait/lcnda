@@ -261,13 +261,13 @@
      * Carte fixe : points {lat, lon, label, color, n} et trajets {coords:[[lat,lon]…], color, dashed, ocean}.
      * Les trajets « ocean » suivent le grand cercle.
      */
-    function miniMap(points = [], paths = [], {height = 360, emptyText = 'Rien à placer sur la carte (lieux sans coordonnées).'} = {}) {
+    function miniMap(points = [], paths = [], {height = 360, emptyText = 'Rien à placer sur la carte (lieux sans coordonnées).', view = null, circles = [], cluster} = {}) {
         const app = A();
         // En mer : le trajet qui ne passe que par la mer (sea-route.js) ; en attendant sa carte, le grand cercle
         const seaPath = p => window.LCNDA_SEA?.route(p.coords, p.year) || p.coords.slice(1).reduce((acc, c, i) => acc.concat(greatCircle(p.coords[i], c).slice(i ? 1 : 0)), []);
         // Carte terre / mer pas encore chargée : cette carte se redessine d'elle-même dès qu'elle l'est
         const mapId = paths.some(p => p.ocean) && window.LCNDA_SEA && !window.LCNDA_SEA.ready() ? 'h-map-' + Math.random().toString(36).slice(2, 9) : '';
-        if (mapId) window.LCNDA_SEA.onReady(() => { const el = document.getElementById(mapId); if (el) el.outerHTML = miniMap(points, paths, {height, emptyText}); });
+        if (mapId) window.LCNDA_SEA.onReady(() => { const el = document.getElementById(mapId); if (el) el.outerHTML = miniMap(points, paths, {height, emptyText, view, circles, cluster}); });
         const drawn = paths.map(p => ({...p, coords: p.ocean ? seaPath(p) : p.coords}))
             .filter(p => p.coords.length > 1);
         const all = [...points.filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon)).map(p => [p.lat, p.lon]), ...drawn.flatMap(p => p.coords)];
@@ -298,7 +298,9 @@
             const [x, y] = px([p.lat, p.lon]);
             return `<g class="h-map-point" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><title>${esc(p.label || '')}</title><circle r="${p.n ? 11 : 7}" fill="${esc(p.color || '#0066cc')}" stroke="#fff" stroke-width="2"/>${p.n ? `<text text-anchor="middle" dy="4" font-size="11" font-weight="700" fill="#fff">${esc(p.n)}</text>` : ''}${p.showLabel ? `<text x="12" y="-10" font-size="13" font-weight="700" class="h-map-label">${esc(p.label || '')}</text>` : ''}</g>`;
         }).join('');
-        return `<div class="person-map-stage h-map map-bg-${esc(bg)}"${mapId ? ` id="${mapId}"` : ''} style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}">${lines}${marks}</svg></div>`;
+        // 🗺 zoom, déplacement, regroupement, ◐ noir et blanc : la carte est « réveillée » par heritage-mini-carte.js dès qu'elle est dans la page
+        const mm = ext.miniMapEngine ? ext.miniMapEngine.register({points, paths: drawn, bg, view, circles, cluster}) : '';
+        return `<div class="person-map-stage h-map map-bg-${esc(bg)}"${mapId ? ` id="${mapId}"` : ''}${mm ? ` data-mm="${mm}"` : ''} style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">${lines}${marks}</svg></div>`;
     }
     /* ─── Blocs spéciaux de la fiche : cochés fiche par fiche, ou sur toutes les fiches (Apparence) ─── */
     const FLAG_BLOCKS = [['show_voyage_block', '🚢 Départs / émigration'], ['show_placement_block', '👶 Enfant placé'], ['show_heraldry_block', '🛡️ Noblesse / blason'], ['show_poilu_block', '🎖️ Poilu 14-18'], ['show_resistance_block', '✊ Résistant'], ['show_voter_block', '🗳️ Cartes d’électeur'], ['show_language_block', '🗣️ Langues']];

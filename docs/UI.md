@@ -173,6 +173,22 @@ bar.adoptSort(table._sortBar);           // reprend « Trier » (et « Liste | F
 - `UI.listMatch` pour garder les lignes d’après `bar.state` : `text(q, …textes)` (chaque mot, sans accents), `pick(v, ids, noms)` (un choix du menu de choix : par numéro, sinon par nom), `period(de, à, …années)`, `year(texte)`. Un filtre vide garde tout.
 - Liste tout à fait vide : pas de barre, la grande boîte K10 seule (avec son bouton) ; recherche ou filtres sans résultat : la barre reste, avec « 🔍 Aucun … ne correspond ».
 
+### Liste de choix commune : `UI.choiceList` (cases à cocher ou ronds, avec 🔍)
+
+Partout où l’on coche dans une liste qu’on peut chercher (Listes → données « + Ajouter un critère » d’un champ à choix, « Filtrer ▾ » au-delà de 8 choix, « 📚 Ajouter à un recueil… », « ＋ Ajouter des revues, livres… »). Styles : `ui.css` (« Listes de choix communes »). Test : `tests/test-choix-liste.js`.
+
+```js
+const cl = UI.choiceList({items: [['France', 1234, 'France'], {value: 'SE', n: 12, label: 'Suède', sub: '…', icon: '🇸🇪', text: 'mots en plus'}],
+    checked: ['France'], multiple: true, name: '', key: 'ld:pays:country',  // key : « par nombre / A → Z » retenu (localStorage genealogie-choix-tri)
+    search: true /* ou false, ou une case <input type="search"> déjà posée */, inputAttrs: 'data-lb-f="pays"', onChange: (valeurs, {value, checked}) => {}, onApply: () => {}});
+cl.values; cl.setFilter(it => it.fam === 'livre'); cl.setItems(items, cochés); cl.setChecked(['France']);
+```
+
+- Recherche sans accents ni majuscules, début du texte puis début d’un mot puis ailleurs, partie trouvée en `<mark>` ; « 3 choix sur 214 » (aria-live) ; « Aucun choix ne contient « xyz » » + « Effacer la recherche ».
+- Les cochés en haut sous « Cochés (N) », puis « Les autres » ; « Tout cocher les N affichés » (en cherchant, ou toujours avec `tickAll`) et « Tout décocher » (un seul `change` pour tout).
+- Clavier : ↓ entre dans la liste, ↑ ↓ s’y déplacent, Espace coche, Entrée coche le premier trouvé (s’il est seul : coché et appliqué — `onApply`, sinon le formulaire autour est envoyé), Échap vide la case puis ferme.
+- Longue liste montrée par morceaux de 150 : « + 1 200 autres : tape pour chercher » (un clic ou descendre en montre plus). Toute case cochée reste dans la page (`input:checked` marche toujours).
+
 ## C7 — Chargement et messages
 
 Ces trois-là rendent du **HTML** (texte échappé) :

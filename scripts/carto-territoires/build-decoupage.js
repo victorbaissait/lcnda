@@ -25,7 +25,7 @@ csv('v_commune_2025.csv').forEach(r => { if (r.TYPECOM !== 'COM' && r.COMPARENT)
 csv('v_mvt_commune_2025.csv').forEach(r => { if (r.TYPECOM_AV === 'COM' && r.COM_AV !== r.COM_AP && r.COM_AP && (!next[r.COM_AV] || r.DATE_EFF > next[r.COM_AV][1])) next[r.COM_AV] = [r.COM_AP, r.DATE_EFF]; });
 const succ = {};
 Object.keys(next).forEach(k => { if (now.has(k)) return; let x = k, guard = 0; while (!now.has(x) && guard++ < 20) x = next[x]?.[0] || parent[x] || x; if (now.has(x) && x !== k) succ[k] = x; });
-const out = {v: 1, succ, attr: 'INSEE, Code officiel géographique 2025', licence: 'Licence Ouverte / Open Licence (Etalab 2.0)', url: 'https://www.insee.fr/fr/information/8377252', dep, arr, can, c};
+const out = {v: 1, built: new Date().toISOString().slice(0, 10), succ, attr: 'INSEE, Code officiel géographique 2025', licence: 'Licence Ouverte / Open Licence (Etalab 2.0)', url: 'https://www.insee.fr/fr/information/8377252', dep, arr, can, c};
 const dest = path.join(__dirname, '../../assets/data/communes-decoupage.json.gz');
 fs.writeFileSync(dest, zlib.gzipSync(JSON.stringify(out), {level: 9}));
 console.log(`${Object.keys(c).length} communes, ${Object.keys(succ).length} anciennes, ${Object.keys(arr).length} arrondissements, ${Object.keys(can).length} cantons → ${dest} (${fs.statSync(dest).size} octets)`);

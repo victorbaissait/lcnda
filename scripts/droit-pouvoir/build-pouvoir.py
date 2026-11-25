@@ -242,7 +242,7 @@ def main():
     for dep, by in maires(deps).items():
         if not by:
             continue
-        total += write_gz(os.path.join(OUT, f'dp-maires-{dep}.json.gz'), {'v': 1, 'dep': dep, 'licence': 'CC0 1.0', 'm': by})
+        total += write_gz(os.path.join(OUT, f'dp-maires-{dep}.json.gz'), {'v': 1, 'built': TODAY, 'dep': dep, 'licence': 'CC0 1.0', 'm': by})
         idx[dep] = [len(by), sum(len(v) for v in by.values())]
     with open(os.path.join(OUT, 'dp-maires-index.json'), 'w', encoding='utf-8') as f:
         json.dump({'v': 1, 'built': TODAY, 'licence': 'CC0 1.0', 'deps': idx}, f, ensure_ascii=False, separators=(',', ':'))

@@ -485,7 +485,7 @@ function cx_fetch_url(array $d): array
 }
 
 /* ═════════════ « Déjà utilisé dans… » (fenêtre « Prendre depuis… ») : les enquêtes où ces éléments sont déjà rangés ═════════════
- * GET cx_used&kind=event&ids=1,2 → {used: {id: [{investigation_id, title, item_title}]}} ; un événement : la piste qui le relie ;
+ * GET cx_used&kind=event&ids=1,2 → {used: {id: [{investigation_id, title, item_title}]}} ; cx_used&kind=labels&investigation_id= → {labels: ['sorte|titre|valeur' (200 car.)]} ; un événement : la piste qui le relie ;
  * un média : les pièces de l'enquête ; le reste : les pièces des pistes (investigation_item_links). 200 numéros au plus. */
 function cx_used(PDO $pdo, array $q): array
 {
@@ -493,6 +493,12 @@ function cx_used(PDO $pdo, array $q): array
     $kind = (string) preg_replace('/[^a-z_]/', '', strtolower(cx_str($q['kind'] ?? '', 30)));
     $ids = array_slice(array_values(array_unique(array_filter(array_map('intval', explode(',', (string) ($q['ids'] ?? ''))), static fn(int $i): bool => $i > 0))), 0, 200);
     $out = [];
+    // une enquête : ce qui est déjà dans ses pistes, par titre et valeur (les lignes de liste, les infos précises n'ont pas de numéro)
+    $inv = safe_int($q['investigation_id'] ?? 0);
+    if ($inv && $kind === 'labels') {
+        $s = $pdo->prepare('SELECT l.entity_type, l.label, l.value FROM investigation_item_links l JOIN investigation_items i ON i.id=l.investigation_item_id WHERE i.investigation_id=? ORDER BY l.id DESC LIMIT 5000'); $s->execute([$inv]);
+        return ['labels' => array_map(static fn($r) => $r['entity_type'] . '|' . mb_substr((string) $r['label'], 0, 200) . '|' . mb_substr((string) $r['value'], 0, 200), $s->fetchAll(PDO::FETCH_ASSOC))];
+    }
     if ($kind === '' || !$ids) { return ['used' => (object) []]; }
     $in = implode(',', $ids);
     $sqls = ["SELECT l.entity_id AS id, v.id AS investigation_id, v.title, i.title AS item_title FROM investigation_item_links l JOIN investigation_items i ON i.id=l.investigation_item_id JOIN investigations v ON v.id=i.investigation_id WHERE l.entity_type=" . $pdo->quote($kind) . " AND l.entity_id IN ({$in})"];

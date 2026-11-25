@@ -4681,7 +4681,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     applyShortcutHints();
     function shortcutOsConflict(combo){return (OS_SHORTCUTS[SHORTCUT_PLATFORM]||{})[combo]||OS_SHORTCUTS.all[combo]||'';}
 
-    const isTypingTarget=el=>!!el&&(el.isContentEditable||(!!el.matches&&el.matches('textarea,select,input')&&!(el.matches('input')&&['checkbox','radio','button','submit','reset','range','color','file','image'].includes(el.type))));
+    const isTypingTarget=el=>!!el&&(el.isContentEditable||!!el.closest?.('.ui-choice-list')/* ↑ ↓ Espace : à la liste de choix (UI.choiceList) */||(!!el.matches&&el.matches('textarea,select,input')&&!(el.matches('input')&&['checkbox','radio','button','submit','reset','range','color','file','image'].includes(el.type))));
     const openModalDialog=()=>[...document.querySelectorAll('dialog[open]')].find(d=>d.id!=='lightbox'&&!d.classList.contains('find-bar'));
     function shortcutContextActive(ctx){
         const lightboxOpen=!!$('#lightbox')?.open,modal=openModalDialog(),active=document.activeElement;

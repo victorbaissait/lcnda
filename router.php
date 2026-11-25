@@ -172,6 +172,14 @@ if (in_array(strtolower($first), $blocked, true)) {
     return router_deny(404);
 }
 
+// 🗂 données mises à jour depuis Réglages → Données installées (lib/donnees_maj.php) : la version téléchargée, si elle existe
+if (str_starts_with($path, '/assets/data/')) {
+    require_once __DIR__ . '/lib/donnees_maj_route.php';
+    if (dmaj_route_serve($path)) {
+        return true;
+    }
+}
+
 $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 if ($ext === '') {
     return false; // « / » → index.php

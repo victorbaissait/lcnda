@@ -819,7 +819,11 @@
     }
     const viewOf = it => it._v || {ico: icon(it), extra: it.kind === 'set' ? [plural(setCount(it), T('ligne'))] : [], pills: [], fields: []};
     const sameText = (a, b) => { const x = fold(a).replace(/\W+/g, ' ').trim(), y = fold(b).replace(/\W+/g, ' ').trim(); return !y || x === y || x.startsWith(y) || y.startsWith(x); };
+    const labKey = it => `${it.kind}|${String(it.title || '').trim().slice(0, 200)}|${String(it.value || '').trim().slice(0, 200)}`;
+    /** ce qui est déjà dans les pistes de l'enquête (titre + valeur) : pour les lignes de liste et les infos sans numéro */
+    async function loadInvLabels(st) { const inv = Number(st.ctx?.investigation_id || 0); if (!inv || st.invLabels) return; try { st.invLabels = new Set((await api('cx_used', {kind: 'labels', investigation_id: inv})).labels || []); } catch (_) { st.invLabels = new Set(); } }
     function usedPill(st, it) {
+        if (!it.ref_id && st.invLabels?.has(labKey(it))) return ['ok', T('✓ déjà dans l’enquête')];
         const u = st.used.get(`${it.kind}:${it.ref_id}`) || []; if (!u.length) return null;
         const inv = Number(st.ctx?.investigation_id || 0);
         return u.some(x => x.investigation_id === inv) ? ['ok', T('✓ déjà dans l’enquête')] : ['', T(u.length > 1 ? 'utilisé dans {n} enquêtes' : 'utilisé dans 1 enquête', {n: u.length})];
@@ -1021,6 +1025,7 @@
                 return;
             }
             if (st.ctx?.investigation_id || ['event', 'act', 'media', 'source'].includes(st.tab)) await loadUsed(st, list);
+            await loadInvLabels(st);
         } catch (e) { if (mine()) res.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
         if (!mine()) return;
         res.removeAttribute('aria-busy');
@@ -1109,7 +1114,7 @@
             }
             if (!items.length) { out.innerHTML = `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">🔎</span><b>${esc(T('Rien trouvé pour ces critères.'))}</b><p>${esc(T('Essaie une autre date, un lieu voisin ou une distance plus grande.'))}</p></div>`; return; }
             out.innerHTML = `<h6 class="cx-step">3. ${esc(T('Les résultats'))}</h6><p class="cx-muted"><small>${esc(T('Coche une info précise, ou « ▦ Tout le tableau » (avec sa source) :'))}</small></p><div data-cx-dres></div>`;
-            const box = out.querySelector('[data-cx-dres]');
+            const box = out.querySelector('[data-cx-dres]'); await loadInvLabels(st);
             box.innerHTML = resultsHtml(st, items.sort((a, b) => (a.kind === 'set') - (b.kind === 'set')).map(x => (x.kind === 'set' ? {...x, title: `▦ ${T('Tout le tableau')} : ${x.title}`} : x)), {groups: false});
             bindResults(st, box);
             const set = st.results.find(x => x.kind === 'set'); if (set) previewItem(st, set);
@@ -1211,7 +1216,7 @@
             rowsBox.innerHTML = UI().spinner ? UI().spinner(T('On cherche…'), {inline: true}) : '…';
             let p; try { p = await E.fetchPage(d, s, 0, 200); } catch (err) { if (seq === st.lseq) rowsBox.innerHTML = `<p class="error">${esc(err.message)}</p>`; return; }
             if (seq !== st.lseq || !rowsBox.isConnected) return;
-            const items = p.rows.map(r => ldRowItem(d, s, r));
+            const items = p.rows.map(r => ldRowItem(d, s, r)); await loadInvLabels(st);
             cnt.textContent = p.more ? T('plus de {n} lignes', {n: nf(p.total)}) : plural(p.total, T('ligne'));
             rowsBox.innerHTML = items.length ? resultsHtml(st, items, {groups: false}) + (p.total > items.length ? `<p class="cx-muted cx-pad"><small>${esc(T('Les {a} premières lignes sur {b} : « ▦ Prendre tout le tableau » les prend toutes, ou ajoute un critère.', {a: nf(items.length), b: nf(p.total)}))}</small></p>` : '')
                 : `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">🔎</span><b>${esc(T('Rien ne correspond à ces critères.'))}</b><p>${esc(T('Retire un critère, élargis la période ou la distance (↗ Ouvrir la liste complète).'))}</p></div>`;

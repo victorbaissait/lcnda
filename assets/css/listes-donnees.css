@@ -47,3 +47,17 @@
   .ld-cards { grid-template-columns: 1fr; }
   .ld-table td { max-width: 200px; }
 }
+/* 🗺 la carte (heritage-mini-carte.js) : ce qu'elle montre, et « Charger les points de cette zone » */
+.ld-map-note { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin: 6px 0 0; font-size: 13px; }
+.ld-results .h-map-point[role="button"]:focus-visible circle { stroke: #111; stroke-width: 3.5; }
+/* 📍 GPS : les coordonnées, et au survol / au clavier : ⧉ Copier · 🗺 Voir sur la carte · ↗ OpenStreetMap */
+.ld-table td.ld-gps-td { max-width: none; overflow: visible; min-width: 13em; }
+.ld-gps-v { white-space: nowrap; }
+.ld-gps { position: relative; display: inline-flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.ld-gps-v { border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer; font-variant-numeric: tabular-nums; text-decoration: underline dotted; }
+.ld-gps-act { display: none; gap: 4px; flex-wrap: wrap; }
+.ld-gps:hover .ld-gps-act, .ld-gps:focus-within .ld-gps-act { display: inline-flex; }
+.ld-gps-act button, .ld-gps-act a { border: 1.5px solid var(--line, rgba(0, 0, 0, .25)); background: var(--card-bg, #fff); color: inherit; font: inherit; font-size: 12px; padding: 1px 6px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+.ld-gps-act button:hover, .ld-gps-act a:hover { border-color: var(--blue-bright, #055dff); }
+:root[data-theme="dark"] .ld-gps-act button, :root[data-theme="dark"] .ld-gps-act a { background: #1d1d1d; border-color: #555; }
+.ld-cols-list { max-height: 320px; }

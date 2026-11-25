@@ -10,7 +10,7 @@ seulement s'il paraît propre, et renvoie toujours à l'image de la page (le sca
   python3 build_rietstap.py vol01.txt vol02.txt OUT_DIR
 Sorties : OUT_DIR/cc-rietstap.json.gz (index : clé → lettre) et OUT_DIR/cc-rietstap-<lettre>.json.gz ({n: {clé: [[nom, pays, blason, tome, page_pdf, page_imprimée, propre]…]}}).
 """
-import gzip, json, os, re, sys, unicodedata
+import gzip, json, os, re, sys, time, unicodedata
 
 FILES = {1: "File:Armorial général - précédé d'un dictionnaire des Termes du blason (IA armorialgnra01rietuoft).pdf",
          2: "File:Armorial général - précédé d'un dictionnaire des Termes du blason (IA armorialgnra02rietuoft).pdf"}
@@ -82,7 +82,7 @@ def main(a, b, outdir):
     for k, rows in idx.items():
         by.setdefault(k[0] if k[0].isalpha() else '0', {})[k] = rows[:30]
     os.makedirs(outdir, exist_ok=True)
-    meta = {'v': 1, 'attr': 'J.-B. Rietstap, Armorial général, précédé d’un dictionnaire des termes du blason, 2e éd., Gouda, G. B. van Goor Zonen, 1884-1887',
+    meta = {'v': 1, 'built': time.strftime('%Y-%m-%d'), 'attr': 'J.-B. Rietstap, Armorial général, précédé d’un dictionnaire des termes du blason, 2e éd., Gouda, G. B. van Goor Zonen, 1884-1887',
             'licence': 'domaine public', 'scan': 'Internet Archive (University of Toronto) via Wikimedia Commons', 'files': FILES,
             'note': 'texte tiré de la reconnaissance automatique des scans (OCR) : des erreurs sont possibles, la page du scan fait foi',
             'letters': sorted(by), 'entries': len(entries), 'keys': len(idx)}
