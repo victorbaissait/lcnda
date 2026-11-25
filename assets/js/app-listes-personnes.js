@@ -8,7 +8,7 @@
  *     le nom déjà tapé), « ＋ Créer une fiche » (nom, et le rôle en événement : « Maire d’Ailleville (2014–2020) », cité avec la
  *     source de la liste et son lien ↗), « ✓ C'est bien lui », « ✗ Ce n'est pas lui » (retenu). Chaque fois ↶ Annuler.
  *  3. Le lien est gardé dans la base (table list_person_links, lib/listes_personnes.php) ; la fiche reçoit la source (titre de la
- *     liste, rôle, source et licence, ↗ lien) et « 🔎 Ce qui le concerne » montre la ligne (LCNDA_EXT.dataSources, id lpers_liens : lp_liens).
+ *     liste, rôle, source et licence, ↗ lien) et « 🔎 Ce qui le concerne » montre la ligne (LCNDA_EXT.dataSources : lpers_liens).
  *  4. Filtre « 👤 Seulement les noms présents dans ma base » : calculé ici, sur cet ordinateur (listes « load » : toutes les lignes ;
  *     listes du serveur de l'app : jusqu'à 10 000 lignes lues ; pas pour les listes en ligne).
  *  5. Rien ne part sur Internet : la base est lue une fois (lp_index), la comparaison se fait dans la page. Fiches confidentielles :
@@ -292,7 +292,7 @@
         const c = confOf(d);
         return {list: d.id, row_key: rowKey(d, row, c), list_label: T(d.label), role: roleOf(d, row, c), source: d.source || '', licence: licenceOf(d), url: rowUrl(d, row), summary: rowText(d, row), ...extra};
     }
-    const after = async (d, newPerson = false, pid = 0) => { if (newPerson) await loadIndex(true); await loadLinks(d.id, true); memo = new WeakMap(); scanCache.clear(); refreshTable(); if (pid) { try { ext.toutSur?.forget?.('lp_liens|p' + pid); } catch (_) {} } };
+    const after = async (d, newPerson = false, pid = 0) => { if (newPerson) await loadIndex(true); await loadLinks(d.id, true); memo = new WeakMap(); scanCache.clear(); refreshTable(); if (pid) { try { ext.toutSur?.forget?.('lpers_liens|p' + pid); } catch (_) {} } };
     async function linkTo(d, row, k, pid, name) {
         let r; try { r = await post({op: 'link', person_id: pid, ...payload(d, row, k)}); } catch (e) { toast(e.message, 'error'); return; }
         await after(d, false, pid);

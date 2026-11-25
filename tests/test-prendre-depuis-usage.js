@@ -21,12 +21,12 @@ const t = async (name, fn) => {
     if (ONLY && !ONLY.test(name)) return;
     const m = {clicks: 0, t0: Date.now(), notes: []}; t.m = m;
     try { await t.before?.(); await fn(m); report.push(`✓ ${name.split(' ')[0]} · ${m.clicks} clics/frappes · ${((Date.now() - m.t0) / 1000).toFixed(1)} s${m.notes.length ? ' · ' + m.notes.join(' ; ') : ''}`); console.log('✓ ' + name); }
-    catch (e) { fails++; report.push(`✗ ${name.split(' ')[0]}`); console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); }
+    catch (e) { fails++; if (process.env.PD_SHOT && t.page) await t.page.screenshot({path: `${process.env.PD_SHOT}/${name.split(' ')[0]}.png`}).catch(() => {}); report.push(`✗ ${name.split(' ')[0]}`); console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); }
 };
 
 (async () => {
     const B = await start({big: true});
-    const p = B.page, D = '.cx-take';
+    const p = B.page, D = '.cx-take'; t.page = p;
     const C = async (sel, o) => { t.m.clicks++; await p.click(sel, o); };
     const K = async key => { t.m.clicks++; await p.keyboard.press(key); };
     const F = async (sel, v) => { t.m.clicks++; await p.fill(sel, v); };

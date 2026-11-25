@@ -491,7 +491,8 @@
     let motsTimer = 0;
     async function renderMots(host, {q, year}) {
         if (year && !tabState.year) tabState.year = String(year);
-        const w = String(q || '').trim().split(/\s+/)[0] || '';
+        // un seul mot part sur Internet : une phrase (venue d’un autre onglet, « le jour de la Sainte-Blandine 1750 ») n’est pas cherchée
+        const words = String(q || '').trim().split(/\s+/).filter(Boolean), w = words.length === 1 ? words[0] : '';
         if (!w) { host.innerHTML = `${yearField(tabState)}<p class="cplus-lead">📚 ${esc(T('Écris un mot ancien (« bru », « ondoyer », « chartrier ») : son sens dans le Wiktionnaire et dans les dictionnaires anciens (Académie, Godefroy), en ligne.'))}</p>`; bindYear(host, () => renderMots(host, {q})); return; }
         host.innerHTML = `${yearField(tabState)}${motsKnownHtml(w)}<p class="muted">${esc(T('Recherche en ligne…'))}</p>`; bindYear(host, () => renderMots(host, {q}));
         clearTimeout(motsTimer);

@@ -1332,7 +1332,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sidegroups.js?v=14" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
-<script src="assets/js/app-listes-donnees.js?v=7" defer></script>
+<script src="assets/js/app-listes-donnees.js?v=8" defer></script>
 <script src="assets/js/app-listes-maj.js?v=1" defer></script>
 <script src="assets/js/app-listes-personnes.js?v=2" defer></script>
 <script src="assets/js/app-maintenance.js?v=68" defer></script>
@@ -1681,7 +1681,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lot8-ciel-metier.js?v=1" defer></script>
 <script src="assets/js/heritage-epoque-travail.js?v=1" defer></script>
 <script src="assets/js/heritage-lot9-monde-coutumes.js?v=2" defer></script>
-<script src="assets/js/heritage-lot10-regles-actes.js?v=1" defer></script>
+<script src="assets/js/heritage-lot10-regles-actes.js?v=2" defer></script>
 <script src="assets/js/heritage-lot10-terre-gens.js?v=4" defer></script>
 <script src="assets/js/heritage-lot8-soldats-noms.js?v=1" defer></script>
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=1" defer></script>

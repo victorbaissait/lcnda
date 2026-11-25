@@ -66,7 +66,7 @@ const rowsOfGz = b => JSON.parse(zlib.gunzipSync(b).toString('utf8')).rows.lengt
     for (const kind of ['complet', 'europe']) {
         const buf = fs.readFileSync(path.join(fx, `meteo-pack-${kind}.lcmeteo`)), n = 4, cut = [...Array(n + 1)].map((_, i) => Math.floor(buf.length * i / n));
         const parts = [...Array(n)].map((_, i) => { const name = `meteo-pack-${kind}.lcmeteo.00${i}`; fs.writeFileSync(path.join(site, name), buf.subarray(cut[i], cut[i + 1])); return {name, size: cut[i + 1] - cut[i]}; });
-        packs[kind] = {size: buf.length, sha256: sha(buf), built: '2026-11-24', parts};
+        packs[kind] = {size: buf.length, sha256: sha(buf), built: '2026-10-22', parts}; // la date des packs d'essai : installés, ils sont « à jour »
     }
     fs.writeFileSync(path.join(site, 'meteo-manifest.json'), JSON.stringify({version: '2026-11', packs}));
 
