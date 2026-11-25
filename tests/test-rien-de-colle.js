@@ -2,7 +2,8 @@
 /* 📐 Rien de collé : dans un cadre (bordure ou fond différent), un texte, un titre, un bouton ou un interrupteur ne touche
  * pas le bord intérieur (au moins 4 px d'écart) et ne déborde pas du cadre.
  * Pages rejouées : Réglages → 🏰 Lieux anciens (GOV), 🌦 Météo, 🗳 Élections, ADN, bases officielles, brevets…, fiche
- * d'une personne, « Tout ce qui le concerne », Listes de données, monographie d'un lieu ; à 1440 px et 390 px, clair et sombre.
+ * d'une personne, « Tout ce qui le concerne », Listes de données, monographie d'un lieu, 📥 « Prendre depuis… », 📍 « Mettre dans… »,
+ * 🧺 le panier en grand, 📎 « Insérer une info » ; à 1440 px et 390 px, clair et sombre.
  * La colonne de gauche (sideDetect), sur plusieurs onglets (Recherche, Listes, Réglages, Graphiques, Carte) : au moins 12 px entre
  * les cartes (ombre comprise) et la barre de défilement (place gardée : scrollbar-gutter), la dernière carte entière au-dessus du pied
  * (12 px), le pied et sa phrase grise (8 px sous les boutons, 12 px du bord), les textes alignés qu'ils aient une icône ou non
@@ -287,6 +288,14 @@ if (require.main === module) (async () => {
         // les pages de données ajoutées par les lots (prénoms, terre-mots, lot8, lot9, lot10…) quand elles sont là
         for (const k of ['histoire', 'bases_officielles', 'brevets_annuaires', 'insee_deces', 'adn_livres', 'wikidata_autour', 'terre_mots', 'lot8_monde_village', 'lot9_sons_enfance', 'lot10_voir_village', 'lieux_patrimoine', 'event_types', 'raccourcis', 'calendar_measures']) if (extra.tabs.includes(k)) pages.push([`Réglages → ${k}`, go.settings(k)]);
         if (extra.data) pages.push([`Listes de données → ${extra.data}`, go.liste(extra.data)]);
+        // 📥 « Prendre depuis… », 📍 « Mettre dans… », 🧺 le panier en grand, 📎 « Insérer une info » (heritage-connexions.js, app-inserer.js)
+        const cxClose = p => p.evaluate(() => window.LCNDA_EXT.insertInfo?.close?.());
+        pages.push(['📥 Prendre depuis… (Événements)', async p => { await cxClose(p); await closeDialogs(p); await p.evaluate(() => window.LCNDA_EXT.connexions.openTake({tab: 'event'})); await p.waitForSelector('dialog.cx-take [data-cx-res] .cx-rlist li, dialog.cx-take .cx-empty', {timeout: 20000}); await settle(p); return 'dialog.cx-take'; }]);
+        pages.push(['📥 Prendre depuis… (De l’extérieur)', async p => { await cxClose(p); await closeDialogs(p); await p.evaluate(() => window.LCNDA_EXT.connexions.openTake({tab: 'outside'})); await p.waitForSelector('dialog.cx-take .cx-card'); await settle(p); return 'dialog.cx-take'; }]);
+        pages.push(['📍 Mettre dans…', async p => { await cxClose(p); await closeDialogs(p); await p.evaluate(() => window.LCNDA_EXT.connexions.putInto([{kind: 'datum', title: 'Naissance — date', value: '3 février 1978'}])); await p.waitForSelector('dialog.cx-put .cx-dest'); await settle(p); return 'dialog.cx-put'; }]);
+        pages.push(['🧺 Le panier en grand', async p => { await cxClose(p); await closeDialogs(p); await p.evaluate(() => window.LCNDA_EXT.connexions.openBasketView()); await p.waitForSelector('dialog.cx-bview .cx-put-body'); await settle(p); return 'dialog.cx-bview'; }]);
+        pages.push(['📎 Insérer une info', async p => { await cxClose(p); await closeDialogs(p); await p.evaluate(() => { window.LCNDA_EXT.openDialog({title: 'Essai', body: '<textarea name="t" rows="4" style="width:100%"></textarea>', submitLabel: 'OK', onSubmit: () => true}); }); await p.waitForSelector('dialog[open] textarea[name="t"]');
+            await p.evaluate(() => window.LCNDA_EXT.insertInfo.open(document.querySelector('dialog[open] textarea[name="t"]'))); await p.waitForSelector('.cx-qi .cx-qi-r'); await settle(p); return '.cx-qi'; }]);
         await t('le détecteur voit bien un texte collé, un bouton qui touche le bord et un champ qui déborde (témoin)', async () => {
             const p = await newPage(browser, base);
             await go.settings('gov')(p);

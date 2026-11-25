@@ -36,7 +36,7 @@ const t = async (name, fn) => {
     const used = async (kind, ids) => (await B.api('cx_used', {kind, ids: ids.join(',')})).used || {};
     const inv = async () => B.api('investigation', {id: 1});
     const linksOf = async () => (await inv()).items.flatMap(i => i.links || []);
-    const closeAll = () => p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
+    const closeAll = () => p.evaluate(() => { window.LCNDA_EXT.insertInfo?.close?.(); document.querySelectorAll('dialog[open]').forEach(d => d.close()); });
     const openTake = async () => { await closeAll(); await B.openInv(1); await p.mouse.click(700, 300); await K('Control+Alt+O'); await p.waitForSelector(`${D}[open]`); };
     const waitDelivered = () => p.waitForFunction(() => !document.querySelector('.cx-take[open]'), null, {timeout: 15000}).then(() => sleep(800));
     const rowsOfList = () => p.waitForSelector(`${D} [data-cx-lrows] .cx-rlist li`, {timeout: 30000});
@@ -309,6 +309,35 @@ const t = async (name, fn) => {
             await p.waitForSelector('.cx-put[open] [data-cx-here="1"].is-on'); await C('.cx-put [data-cx-putgo]'); await sleep(1500);
             assert.ok((await linksOf()).some(l => /Vulaines/.test(l.label) && /Ouverture/.test(l.value))); assert.strictEqual((await basket()).items.length, 0);
             m.notes.push(`${m.clicks} gestes en tout (2 sur la liste, 3 plus tard)`);
+        });
+        await t('G4 · 📎 depuis une piste : « /gare vulaines » puis Entrée → « … — ouverture : 18xx [↗ …] » au curseur, la source gardée dans la piste', async m => {
+            await closeAll(); await B.openInv(1); await p.click('[data-edit-investigation-item="1"]'); await p.waitForSelector('#investigation-item-dialog[open] textarea[name="notes"]');
+            await p.fill('#investigation-item-dialog textarea[name="notes"]', ''); await p.focus('#investigation-item-dialog textarea[name="notes"]'); m.clicks = 0;
+            await p.keyboard.type('/gare vulaines'); m.clicks += 1; // la frappe compte pour 1
+            await p.waitForFunction(() => /Samoreau/.test(document.querySelector('.cx-qi .cx-qi-r.is-on')?.textContent || '') && /Ouverture/.test(document.querySelector('.cx-qi .cx-qi-r.is-on .cx-qi-ch button.is-on')?.textContent || ''), null, {timeout: 20000});
+            await K('Enter');
+            assert.match(await p.inputValue('#investigation-item-dialog textarea[name="notes"]'), /^Gare Vulaines-sur-Seine - Samoreau — ouverture : 18\d\d \[↗ /);
+            await sleep(1200); assert.ok(((await inv()).items.find(i => i.id === 1).links || []).some(l => /Vulaines/.test(l.label) && /Ouverture : 18\d\d/.test(l.value)));
+            m.notes.push(`la frappe + ${m.clicks - 1} touche`);
+            await p.keyboard.press('Escape'); await closeAll();
+        });
+        await t('G5 · 📎 depuis une note de l’Atelier : 5 infos mises de côté dans un nouveau panier (Maj+Entrée), puis dans une piste de l’enquête : en insérer 2', async m => {
+            await closeAll(); await B.go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0});
+            await p.evaluate(() => window.LCNDA_EXT.openDialog({title: 'Note de l’Atelier', body: '<textarea name="t" rows="6" style="width:100%"></textarea>', submitLabel: 'OK', onSubmit: () => true}));
+            await p.waitForSelector('dialog[open] textarea[name="t"]'); await p.focus('dialog[open] textarea[name="t"]'); m.clicks = 0;
+            await p.keyboard.type('/'); m.clicks++; await p.waitForSelector('.cx-qi [data-qi-bnew]');
+            await C('.cx-qi [data-qi-bnew]'); await p.keyboard.type('Pièces du mariage'); m.clicks++; await K('Enter');
+            await p.waitForFunction(() => /Pièces du mariage/.test(document.querySelector('.cx-qi [data-qi-bk]')?.textContent || ''), null, {timeout: 10000});
+            const grab = async (q, re) => { await p.fill('.cx-qi [data-qi-q]', q); m.clicks++; await p.waitForFunction(x => new RegExp(x).test(document.querySelector('.cx-qi .cx-qi-r.is-on')?.textContent || ''), re, {timeout: 20000}); await K('Shift+Enter'); await p.waitForFunction(n => new RegExp(`${n} mis de côté`).test(document.querySelector('.cx-qi [data-qi-bk]')?.textContent || ''), String(grab.n = (grab.n || 0) + 1), {timeout: 10000}); };
+            await grab('gare vulaines', 'Samoreau'); await grab('Treignac', 'Treignac'); await grab('Registres paroissiaux de Treignac', 'Registres'); await grab('Acte de baptême', 'baptême'); await grab('Eymoutiers', 'Eymoutiers');
+            const b = (await B.api('cx_basket', {all: 1})); const bk = b.baskets.find(x => x.name === 'Pièces du mariage'); assert.ok(bk && bk.count === 5, JSON.stringify(bk));
+            m.notes.push(`5 infos en ${m.clicks} gestes (sans quitter la note)`);
+            await K('Escape'); await closeAll();
+            await B.openInv(1); await p.click('[data-edit-investigation-item="1"]'); await p.waitForSelector('#investigation-item-dialog[open] textarea[name="notes"]');
+            await p.fill('#investigation-item-dialog textarea[name="notes"]', ''); await p.focus('#investigation-item-dialog textarea[name="notes"]');
+            for (const [q, re] of [['Eymoutiers', 'Eymoutiers'], ['baptême', 'baptême']]) { await p.keyboard.type('/'); await p.waitForSelector('.cx-qi'); await p.keyboard.type(q); await p.waitForFunction(x => new RegExp(x).test(document.querySelector('.cx-qi .cx-qi-r.is-on')?.textContent || ''), re, {timeout: 20000}); await p.keyboard.press('Enter'); await p.keyboard.press('Enter'); }
+            const v = await p.inputValue('#investigation-item-dialog textarea[name="notes"]'); assert.match(v, /Eymoutiers/); assert.match(v, /baptême/);
+            await closeAll();
         });
         await t('L1 · page d’une liste : « ☑ Choisir des lignes », 2 sur 5, Maj+clic pour une suite, « Prendre… » propose « les 2 cochées » ou « les 5 trouvées »', async m => {
             await clearBasket();

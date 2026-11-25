@@ -43,16 +43,16 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             await clickUndo(); assert.strictEqual(await p.inputValue('#investigation-item-dialog textarea[name="notes"]'), 'Le registre dit :\n');
             assert.ok(!((await B.api('investigation', {id: 1})).items.find(i => i.id === 1).links || []).some(l => /Vulaines/.test(l.label)));
         });
-        await t('2 · une note sur la fiche de Jean MAZAUD : ses événements d’abord ; ← → choisissent quoi insérer (la date seule)', async () => {
+        await t('2 · une note sur une fiche : ses événements d’abord ; ← → choisissent quoi insérer (la date seule)', async () => {
             await closeAll(); await B.go('personnes', {currentPersonId: 1}); await p.waitForSelector('[data-add-note-inline]', {timeout: 20000}); await p.click('[data-add-note-inline]');
             await p.waitForSelector('#note-dialog[open] textarea[name="body"]'); await p.focus('#note-dialog textarea[name="body"]');
+            const pid = Number(await p.evaluate(() => document.querySelector('#note-form').elements.person_id.value)); const pr = (await B.api('person', {id: pid})).person, who = `${pr.first_name} ${pr.last_name}`;
             await p.keyboard.type('/'); await p.waitForSelector(QI); await p.keyboard.type('Naissance');
-            await p.waitForFunction(() => /MAZAUD/.test(document.querySelector('.cx-qi .cx-qi-r.is-on')?.textContent || ''), null, {timeout: 15000});
-            assert.match(await p.textContent(`${QI} .cx-qi-r.is-on`), /Jean MAZAUD/, 'la personne de la fiche d’abord');
+            await p.waitForFunction(x => (document.querySelector('.cx-qi .cx-qi-r.is-on')?.textContent || '').includes(x), who, {timeout: 15000}); // la personne de la fiche d'abord
             const chips = await p.$$eval(`${QI} .cx-qi-r.is-on .cx-qi-ch button`, a => a.map(x => x.textContent));
             const k = chips.findIndex(x => /Date/.test(x)); assert.ok(k >= 0, chips.join('|')); for (let i = 0; i < k; i++) await p.keyboard.press('ArrowRight');
             await p.keyboard.press('Enter');
-            assert.match(await p.inputValue('#note-dialog textarea[name="body"]'), /— date : \d+ \w+ \d{4}|— date : \d{4}/);
+            assert.match(await p.inputValue('#note-dialog textarea[name="body"]'), /— date : \d+ \S+ \d{4}|— date : \d{4}/);
         });
         await t('3 · un champ d’une fenêtre quelconque (Tâche, rappel…) : 📎 sur le champ, parcourir une LISTE (→ « Gares », chercher, ←) et une CATÉGORIE (Ma base › Actes)', async () => {
             await closeAll();
@@ -66,8 +66,9 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             await p.keyboard.type('vulaines'); await p.waitForFunction(() => [...document.querySelectorAll('.cx-qi .cx-qi-r')].some(r => /Samoreau/.test(r.textContent)), null, {timeout: 15000});
             await p.keyboard.press('Backspace'); for (let i = 0; i < 8; i++) await p.keyboard.press('Backspace'); await p.keyboard.press('Backspace');
             await p.waitForFunction(() => !/Gares/.test(document.querySelector('.cx-qi [data-qi-crumb]')?.textContent || ''), null, {timeout: 5000});
-            await p.fill(`${QI} [data-qi-q]`, ''); await sleep(300);
+            await p.fill(`${QI} [data-qi-q]`, ''); await p.waitForFunction(() => [...document.querySelectorAll('.cx-qi .cx-qi-r')].some(r => /Ma base/.test(r.textContent)), null, {timeout: 15000});
             const ma = await p.$$eval(`${QI} .cx-qi-r`, a => a.findIndex(r => /Ma base/.test(r.textContent))); await p.evaluate(i => document.querySelectorAll('.cx-qi .cx-qi-r')[i].click(), ma);
+            await p.waitForFunction(() => /Ma base/.test(document.querySelector('.cx-qi [data-qi-crumb]')?.textContent || '') && [...document.querySelectorAll('.cx-qi .cx-qi-r')].some(r => /Actes/.test(r.textContent)), null, {timeout: 15000});
             const ac = await p.$$eval(`${QI} .cx-qi-r`, a => a.findIndex(r => /Actes/.test(r.textContent))); await p.evaluate(i => document.querySelectorAll('.cx-qi .cx-qi-r')[i].click(), ac);
             await p.waitForFunction(() => [...document.querySelectorAll('.cx-qi .cx-qi-r')].some(r => /Acte de baptême · Jean MAZAUD/.test(r.textContent)), null, {timeout: 15000});
             assert.match(await p.textContent(`${QI} [data-qi-crumb]`), /Ma base › 📜 Actes/);

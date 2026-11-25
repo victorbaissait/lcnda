@@ -320,7 +320,7 @@
         const msNow = ls(MS_KEY);
         if (msNow && ext.modeSimple?.keepPrivate && (!layoutOnly) && !keep.includes(MS_KEY)) { try { settings = {...settings, [MS_KEY]: JSON.stringify(ext.modeSimple.keepPrivate(typeof settings[MS_KEY] === 'string' ? JSON.parse(settings[MS_KEY]) : {}, JSON.parse(msNow)))}; } catch (_) {} }
         // la barre d'une liste garde la recherche tapée et les filtres : seuls le tri et l'affichage sont remis (une liste absente ne bouge pas)
-        for (const key of lsKeys()) { if (key && key !== GRAPHS_KEY && known(key) && !isMergeKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
+        for (const key of lsKeys()) { if (key && key !== GRAPHS_KEY && known(key) && (undo || !isMergeKey(key)) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
         const set = {};
         Object.entries(settings).forEach(([key, value]) => {
             if (!isAllKey(key) || typeof value !== 'string') return;

@@ -113,7 +113,9 @@ echo json_encode(['ok' => 1, 'treignac' => $treignac, 'wedding' => $wedding]);`]
     await page.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.connexions && window.LCNDA_EXT?.dataListsEngine, null, {timeout: 60000});
     const api = (a, q) => page.evaluate(([x, y]) => window.LCNDA_APP.api(x, y), [a, q || {}]);
     const go = async (module, extra = {}) => { await page.evaluate(([m, e]) => { const st = window.LCNDA_APP.state; Object.assign(st, e); window.LCNDA_APP.setModule(m); }, [module, extra]); await sleep(500); };
-    const openInv = async (id = 1) => { await go('enquetes', {enquetesTab: 'enquetes', currentInvestigationId: id, investigationFolderId: 0}); await page.waitForSelector('#workspace .investigation-detail', {timeout: 20000}); };
+    const openInv = async (id = 1) => { // (une 2e fois si l'écran d'avant gardait la main : un menu, une fenêtre)
+        for (let k = 0; k < 2; k++) { await page.evaluate(() => { document.querySelectorAll('.ui-actmenu').forEach(x => x.remove()); document.querySelectorAll('dialog[open]').forEach(d => d.close()); });
+            await go('enquetes', {enquetesTab: 'enquetes', currentInvestigationId: id, investigationFolderId: 0}); try { await page.waitForSelector('#workspace .investigation-detail', {timeout: k ? 20000 : 10000}); return; } catch (e) { if (k) throw e; } } };
     const stop = async () => { await browser.close(); proc.kill(); try { fs.rmSync(tmp, {recursive: true, force: true}); } catch (_) {} };
     return {page, ctx, browser, base, api, go, openInv, stop, errs, info, hasPack, tmp};
 }
