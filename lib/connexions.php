@@ -612,8 +612,11 @@ function cx_search(PDO $pdo, array $q): array
     // la base
     require_once __DIR__ . '/picker.php';
     $kinds = ['person', 'event', 'act', 'source', 'place', 'media'];
+    $pid = max(0, (int) ($q['person_id'] ?? 0)); // une note sur une fiche : ses événements d'abord
     foreach ($kinds as $k) {
-        try { $r = picker_search($pdo, ['kind' => $k, 'q' => $text, 'limit' => 4]); $its = $r['groups'][0]['items'] ?? [];
+        try { $its = [];
+            if ($pid && $k === 'event') { $r = picker_search($pdo, ['kind' => 'event', 'q' => $text, 'limit' => 4, 'person_id' => $pid]); $its = $r['groups'][0]['items'] ?? []; }
+            $r = picker_search($pdo, ['kind' => $k, 'q' => $text, 'limit' => 4]); $seen = array_column($its, 'id'); foreach ($r['groups'][0]['items'] ?? [] as $x) { if (!in_array($x['id'] ?? null, $seen, true)) { $its[] = $x; } }
             if (!$its && count($words) > 1) { $long = $words; usort($long, static fn($a, $b) => mb_strlen($b) <=> mb_strlen($a)); $r = picker_search($pdo, ['kind' => $k, 'q' => $long[0], 'limit' => 8]);
                 $its = array_values(array_filter($r['groups'][0]['items'] ?? [], static function ($it) use ($words, $fold) { $hay = $fold(implode(' ', array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $it))); foreach ($words as $w) { if (!str_contains($hay, $fold($w))) { return false; } } return true; })); }
             if ($its) { $out['base'][] = ['kind' => $k, 'items' => array_slice($its, 0, 4)]; } } catch (Throwable $_) {}
@@ -630,6 +633,8 @@ function cx_search(PDO $pdo, array $q): array
             $r = ld_query($pdo, $src, ['query' => json_encode(['q' => $long[0], 'limit' => 30])]);
             $rows = array_values(array_filter($r['rows'] ?? [], static function ($row) use ($words, $long, $fold, $src) { $hay = $fold($src . ' ' . implode(' ', array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $row)));
                 foreach ($words as $w) { if ($w === $long[0]) { continue; } $fw = rtrim($fold($w), 's'); if (!str_contains($hay, $fw)) { return false; } } return true; }));
+            // les lignes les plus remplies d'abord (une gare avec sa date d'ouverture avant la même sans date)
+            usort($rows, static fn($a, $b) => count(array_filter($b, static fn($v) => $v !== null && $v !== '')) <=> count(array_filter($a, static fn($v) => $v !== null && $v !== '')));
             if ($rows) { $out['lists'][] = ['src' => $src, 'rows' => array_slice($rows, 0, 3)]; }
         } catch (Throwable $_) {}
     }

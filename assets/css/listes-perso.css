@@ -1,0 +1,61 @@
+/* ＋ Créer ma liste (assets/js/app-listes-perso.js) : trois étapes aérées, rien collé aux bords ; 390 px ; mode sombre (variables --ui-*) */
+.lpx-page { --lpx-gap: 16px; max-width: 920px; }
+.lpx-steps { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; margin: 4px 0 20px; padding: 0; }
+.lpx-steps li { display: flex; align-items: center; gap: 8px; color: var(--ui-muted, #666); font-weight: 600; }
+.lpx-steps li span { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--ui-line, #e3e5ea); background: var(--ui-bg, #fff); color: var(--ui-muted, #666); font-size: .9rem; }
+.lpx-steps li.is-on { color: var(--ui-ink, #111); }
+.lpx-steps li.is-on span { border-color: var(--ui-blue, #055dff); background: var(--ui-blue, #055dff); color: #fff; }
+.lpx-steps li.is-done span { border-color: var(--ui-blue, #055dff); color: var(--ui-blue, #055dff); }
+.lpx-body, .lpx-dlg { display: grid; gap: var(--lpx-gap, 16px); }
+.lpx-import, .lpx-check, .lpx-create { display: grid; gap: 14px; min-width: 0; }
+.lpx-drop { display: grid; justify-items: center; gap: 8px; text-align: center; padding: 28px 18px; border: 2px dashed var(--ui-line, #cfd3da); border-radius: 14px; background: var(--ui-bg, #fff); color: var(--ui-ink, #111); cursor: pointer; transition: border-color .15s, background .15s; }
+.lpx-drop:hover, .lpx-drop:focus-visible, .lpx-drop.is-over { border-color: var(--ui-blue, #055dff); background: var(--ui-soft, #eaf1ff); outline: none; }
+.lpx-drop-ico { font-size: 2rem; line-height: 1; }
+.lpx-or { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--ui-muted, #666); font-size: .9rem; }
+.lpx-or::before, .lpx-or::after { content: ''; flex: 1; border-top: 1px solid var(--ui-line, #e3e5ea); }
+.lpx-field { display: grid; gap: 6px; min-width: 0; }
+.lpx-field > span { font-weight: 600; color: var(--ui-ink, #111); }
+.lpx-field input, .lpx-field textarea, .lpx-col select, .lpx-col input { width: 100%; min-width: 0; box-sizing: border-box; }
+.lpx-field textarea { min-height: 96px; resize: vertical; font-family: inherit; }
+.lpx-url { display: flex; gap: 8px; min-width: 0; }
+.lpx-url input { flex: 1 1 auto; }
+.lpx-row, .lpx-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.lpx-actions { justify-content: space-between; margin-top: 6px; }
+.lpx-msg { margin: 0; min-height: 1.2em; color: var(--ui-muted, #666); }
+.lpx-msg.is-error { color: #b3261e; font-weight: 600; }
+:root[data-theme="dark"] .lpx-msg.is-error { color: #ff8a80; }
+.lpx-note { margin: 0; padding: 10px 14px; border-radius: 10px; background: var(--ui-soft, #eaf1ff); color: var(--ui-ink, #111); }
+.lpx-sum { margin: 0; color: var(--ui-ink, #111); }
+.lpx-hint { margin: 0; }
+.lpx-headtog { display: flex; gap: 8px; align-items: center; }
+.lpx-cols { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.lpx-col { display: grid; gap: 6px; padding: 12px; border: 1px solid var(--ui-line, #e3e5ea); border-radius: 12px; background: var(--ui-bg, #fff); min-width: 0; }
+.lpx-col.is-skip { opacity: .55; }
+.lpx-col-lab { font-weight: 600; }
+.lpx-col-ex { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lpx-prev summary { cursor: pointer; font-weight: 600; margin-bottom: 8px; }
+.lpx-prev-wrap { overflow-x: auto; max-width: 100%; border: 1px solid var(--ui-line, #e3e5ea); border-radius: 10px; }
+.lpx-table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+.lpx-table th, .lpx-table td { padding: 6px 10px; border-bottom: 1px solid var(--ui-line, #e3e5ea); text-align: left; white-space: nowrap; max-width: 260px; overflow: hidden; text-overflow: ellipsis; color: var(--ui-ink, #111); }
+.lpx-table th { background: var(--ui-soft, #eaf1ff); }
+.lpx-namerow { display: flex; gap: 12px; align-items: flex-end; }
+.lpx-grow { flex: 1 1 auto; }
+.lpx-icon { width: 52px; height: 52px; flex: 0 0 52px; font-size: 1.6rem; border-radius: 12px; border: 1px solid var(--ui-line, #e3e5ea); background: var(--ui-bg, #fff); cursor: pointer; }
+.lpx-icon:hover, .lpx-icon:focus-visible { border-color: var(--ui-blue, #055dff); }
+.lpx-src { display: grid; gap: 12px; margin: 0; padding: 14px; border: 1px solid var(--ui-line, #e3e5ea); border-radius: 12px; min-width: 0; }
+.lpx-src legend { padding: 0 6px; font-weight: 700; color: var(--ui-ink, #111); }
+.lpx-progress { display: flex; gap: 10px; align-items: center; }
+.lpx-progress progress { flex: 1 1 auto; height: 10px; }
+.lpx-bar { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; margin: 4px 0 12px; padding: 10px 12px; border-radius: 12px; background: var(--ui-soft, #eaf1ff); }
+.lpx-bar-lab { font-weight: 700; color: var(--ui-ink, #111); margin-right: 4px; }
+.lpx-danger { color: #b3261e; }
+:root[data-theme="dark"] .lpx-danger { color: #ff8a80; }
+.lpx-cols-edit { grid-template-columns: 1fr; }
+.lpx-cols-edit .lpx-col { grid-template-columns: minmax(0, 1fr) minmax(0, 12em) auto; align-items: center; }
+.lpx-addrow { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+@media (max-width: 600px) {
+  .lpx-cols, .lpx-cols-edit .lpx-col { grid-template-columns: minmax(0, 1fr); }
+  .lpx-drop { padding: 22px 14px; }
+  .lpx-actions .button { flex: 1 1 auto; }
+  .lpx-bar .ui-listbar-btn { flex: 1 1 auto; }
+}

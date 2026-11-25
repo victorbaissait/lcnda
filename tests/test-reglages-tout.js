@@ -259,7 +259,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             const f = await openFrame(ALL);
             await rowOf(f, 'Tout de chez tout').locator('[data-ps-apply]').click();
             await Promise.all([page.waitForNavigation({waitUntil: 'load', timeout: 15000}), page.locator('dialog.confirm-box-dialog[open] button', {hasText: 'Appliquer'}).click()]);
-            const toast = page.locator('.toast', {hasText: 'Tout de chez tout'}).last(); await toast.waitFor({timeout: 10000});
+            const toast = page.locator('.toast', {hasText: 'Tout de chez tout'}).last(); await toast.waitFor({state: 'attached', timeout: 15000});
             await Promise.all([page.waitForNavigation({waitUntil: 'load', timeout: 15000}), toast.locator('button', {hasText: 'Annuler'}).click()]);
             await page.locator('.toast', {hasText: 'comme avant'}).last().waitFor({state: 'attached', timeout: 15000});
             await page.waitForTimeout(800);

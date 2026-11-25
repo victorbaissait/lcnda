@@ -39,7 +39,7 @@
     const nf = (n, d = 0) => (Number.isFinite(Number(n)) ? Number(n).toLocaleString('fr-FR', {maximumFractionDigits: d}) : '');
     const toast = (m, k) => A().toast?.(m, k);
     const kiosk = () => document.body.classList.contains('is-kiosk');
-    const GROUPS = [['La personne', '👤'], ['Le lieu', '📍'], ['Le monde', '🌍'], ['Chercher', '🔎']];
+    const GROUPS = [['Mes listes', '📒'], ['La personne', '👤'], ['Le lieu', '📍'], ['Le monde', '🌍'], ['Chercher', '🔎']]; // 📒 Mes listes : les listes faites soi-même (app-listes-perso.js)
     const PAGE = 100, MAP_MAX = 1500, EXPORT_MAX = 20000;
     const OVERVIEW = 'donnees';
 
@@ -287,6 +287,7 @@
             <div class="ld-more-host" data-ld-more-host></div></section>`;
         bindPage(host.querySelector('.ld-page'), d);
         try { ext.listesMaj?.header?.(host.querySelector('.ld-page'), d); } catch (e) { console.error(e); } // 🗂 « Données du … · ↻ Vérifier » (app-listes-maj.js)
+        try { ext.listesPerso?.listBar?.(host.querySelector('.ld-page'), d); } catch (e) { console.error(e); } // ＋ Ma liste : ✎ Modifier, ＋ Ajouter une ligne, ⤒ Remplacer… (app-listes-perso.js)
         try { ext.listesPersonnes?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, rerun}); } catch (e) { console.error(e); } // 👤 noms reliés aux fiches (app-listes-personnes.js)
         try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, rows: () => cur.rows, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
         paintSaved(); paintChips(); await refresh();

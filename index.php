@@ -1280,7 +1280,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=37" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=11" defer></script>
-<script src="assets/js/app-aide-lecture.js?v=4" defer></script>
+<script src="assets/js/app-aide-lecture.js?v=5" defer></script>
 <!-- aide-langues : une langue = un fichier (assets/js/aide-langues/README-format.md) -->
 <script src="assets/js/aide-langues/la.js?v=1" defer></script>
 <script src="assets/js/aide-langues/grc.js?v=1" defer></script>
@@ -1338,8 +1338,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
 <script src="assets/js/app-listes-donnees.js?v=9" defer></script>
-<script src="assets/js/app-listes-maj.js?v=1" defer></script>
+<script src="assets/js/app-listes-maj.js?v=2" defer></script>
 <script src="assets/js/app-listes-personnes.js?v=2" defer></script>
+<script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
+<script src="assets/js/app-listes-perso.js?v=1" defer></script>
 <script src="assets/js/app-maintenance.js?v=68" defer></script>
 <script src="assets/js/app-recherche.js?v=35" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=2" defer></script>

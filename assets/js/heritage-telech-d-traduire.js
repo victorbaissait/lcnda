@@ -212,7 +212,8 @@
         F.push({id: 'td_tr', icon: '🌐', theme: 'Outils installés', tab: 'telech_d', status: 'td_tr_status', info: 'td_tr_dl_info', pre: 'td_tr', finish: 'td_tr_pack_finish', body: k => ({kind: k}),
             source: 'Argos Translate (Argos Open Technologies) ; modèles de l’index d’Argos', licence: 'MIT ou CC0 (logiciel) ; licence écrite dans chaque modèle', url: 'https://github.com/argosopentech/argos-translate',
             installed: (s, k) => !!s?.langs?.[k]?.installed, built: (s, k) => s?.langs?.[k]?.built || '', size: (s, k) => s?.langs?.[k]?.size || 0, removable: () => false, online: (i, k) => i?.packs?.[k],
-            items: Object.entries(LANGS).map(([k, l]) => ({k, name: `Traduction ${l.toLowerCase()} → français`, what: 'Sur cet ordinateur, sans Internet (Argos Translate)', approx: (k === 'en' ? 1 : 2) * 95e6}))});
+            // seulement les langues déjà installées (l'installation se fait depuis l'atelier ou Réglages → 🧭 Mémoire et vieux papiers) : pas de lignes vides ici
+            itemsOf: st => Object.entries(LANGS).filter(([k]) => st?.langs?.[k]?.installed).map(([k, l]) => ({k, name: `Traduction ${l.toLowerCase()} → français`, what: 'Sur cet ordinateur, sans Internet (Argos Translate)', approx: (k === 'en' ? 1 : 2) * 95e6}))});
         return true;
     }
     if (!registerFamily()) { const t = setInterval(() => { if (registerFamily()) clearInterval(t); }, 1000); setTimeout(() => clearInterval(t), 30000); }

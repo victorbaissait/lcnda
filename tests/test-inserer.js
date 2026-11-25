@@ -10,11 +10,11 @@
 const assert = require('assert');
 const {start, sleep} = require('./prendre-depuis-seed.js');
 let fails = 0;
-const t = async (name, fn) => { try { await t.before?.(); await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
+const t = async (name, fn) => { try { await t.before?.(); await fn(); console.log('✓ ' + name); } catch (e) { fails++; if (process.env.PD_SHOT && t.page) await t.page.screenshot({path: `${process.env.PD_SHOT}/qi-${name.split(' ')[0]}.png`}).catch(() => {}); console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
 
 (async () => {
     const B = await start();
-    const p = B.page;
+    const p = B.page; t.page = p;
     const ROW = {name: 'Vulaines-sur-Seine - Samoreau', year: 1897, code: '77533', source: 'Wikidata', lat: 48.43055, lon: 2.75302};
     if (!B.hasPack) { // une ligne FABRIQUÉE (pas de pack « Histoire du lieu » ici)
         await B.ctx.route(/api\.php\?action=ld_status/, r => r.fulfill({contentType: 'application/json', body: JSON.stringify({installed: {hist_gares: true}})}));

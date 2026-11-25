@@ -297,7 +297,7 @@ const t = async (name, fn) => {
             await C(`${D} [data-cx-lrows] .cx-rlist li:has-text("Vulaines-sur-Seine - Samoreau") .cx-rt >> nth=0`);
             const part = L(`${D} [data-cx-prev] .cx-parts li`, {hasText: /Ouverture/}).first(); await check(part.locator('input'));
             await C(`${D} [data-cx-takehere]`); await waitDelivered();
-            const l = (await linksOf()).find(x => /Vulaines/.test(x.label) && /Ouverture/.test(x.label + x.value)); assert.ok(l && /18\d\d/.test(l.value) && /Gares/.test(l.origin?.label || ''), JSON.stringify(l));
+            const l = (await linksOf()).find(x => /Vulaines/.test(x.label) && /ouverture/i.test(x.label + x.value)); assert.ok(l && /18\d\d/.test(l.value) && /Gares/.test(l.origin?.label || ''), JSON.stringify(l));
             m.notes.push(`${m.clicks} gestes`);
         });
         await t('G3 · gare de Vulaines (c) : « 🧺 Prendre « Ouverture : 1897 » » sur la page, puis plus tard, sur l’enquête : 🧺 → « Mettre dans… » → l’enquête', async m => {

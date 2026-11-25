@@ -208,7 +208,7 @@
         'genealogie-goose-games-v1', 'genealogie-goose-active-v1', // les parties en cours du jeu de l'oie : des données
         'genealogie-donnees-maj-dernier', 'genealogie-donnees-file', // la date de la dernière mise à jour des données, la file des téléchargements : passager
         'genealogie-dp-locks', 'genealogie-succ-me', 'genealogie-sosa-off', 'genealogie-dash-next-skip', // des fiches, pages ou suggestions précises de cette base
-        'genealogie-connexions-panier', 'genealogie-connexions-recents', 'genealogie-cx-put-recents', // le panier et ses derniers éléments (des fiches de cette base)
+        'genealogie-connexions-panier', 'genealogie-connexions-recents', 'genealogie-cx-put-recents', 'genealogie-inserer-recents', // le panier et ses derniers éléments, les derniers insérés (des fiches de cette base)
         'genealogie-retouch-tip', 'genealogie-suivi-hint-closed'); // « déjà montré » (un ensemble ne les fait pas revenir)
     // (« genealogie-reglages-ouverts », les sections ouvertes ou repliées des réglages, est désormais gardé : c'est un choix de mise en page)
     const ALL_SKIP_RX = [
