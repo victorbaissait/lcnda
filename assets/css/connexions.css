@@ -364,3 +364,24 @@ dialog.cx-put { width: min(720px, 94vw); max-width: 94vw; height: min(680px, 90v
 :root[data-theme="dark"] .cx-ldsel .cx-muted { color: #b4b9c3; }
 :root[data-theme="dark"] .cx-ldsel .cx-b.is-sec { background: #1c1f24; color: #eceef2; border-color: #454b55; }
 :root[data-theme="dark"] .cx-ldsel .cx-b.is-ter { color: #a9c4ff; }
+/* 🧺 paniers nommés : le choix du panier, ses infos, la vue en grand (liste de courses) */
+.cx-bsw select { max-width: 100%; font: 700 13.5px system-ui, sans-serif; border: 1px solid var(--cx-line2, #c9ced8); border-radius: 8px; padding: 4px 8px; background: var(--cx-bg, #fff); color: var(--cx-ink, #111); }
+.cx-panel-head .cx-bsw { flex: 1; min-width: 0; }
+.cx-panel-head .cx-bsw select { width: 100%; }
+.cx-panel-foot { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+.cx-bmeta { font-size: 12px; color: var(--cx-mut, var(--muted)); }
+.cx-bview h2 .cx-bsw select { font-size: 16px; }
+.cx-blist { list-style: none; margin: 0; padding: 0; counter-reset: b; }
+.cx-blist li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 6px; border-top: 1px solid var(--cx-line); border-radius: 8px; }
+.cx-blist li:first-child { border-top: 0; }
+.cx-blist li.is-done .cx-t > b { text-decoration: line-through; color: var(--cx-mut); }
+.cx-blist li.is-drag { opacity: .5; }
+.cx-blist li:focus-within { background: var(--cx-hover); }
+.cx-blist .cx-t { gap: 2px; }
+.cx-blist .cx-t small { font-size: 12.5px; color: var(--cx-mut); }
+.cx-grip { cursor: grab; color: var(--cx-soft); padding-top: 2px; user-select: none; }
+.cx-vnote { margin-top: 4px; border: 1px dashed var(--cx-line2); border-radius: 6px; padding: 3px 7px; font-size: 12.5px; background: transparent; color: var(--cx-ink); width: 100%; max-width: 420px; }
+.cx-vnote:focus { border-style: solid; border-color: var(--cx-blue); outline: none; }
+.cx-bform { display: grid; gap: 10px; }
+.cx-bform label { display: grid; gap: 4px; }
+.cx-bform-row { display: flex; gap: 12px; }

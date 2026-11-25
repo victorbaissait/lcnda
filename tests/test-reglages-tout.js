@@ -45,7 +45,7 @@ function scanKeys() {
     (function walk(d) { for (const e of fs.readdirSync(d, {withFileTypes: true})) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (/\.js$/.test(e.name) && !/\.min\.js$/.test(e.name)) files.push(p); } })(path.join(root, 'assets/js'));
     const found = new Map(); // clé (ou « préfixe* ») → {store, files}
     const add = (key, store, f) => { const k = `${store}|${key}`; if (!found.has(k)) found.set(k, {key, store, files: new Set()}); found.get(k).files.add(path.relative(root, f)); };
-    const LIT = String.raw`(['"\`])([^'"\`$\n]{1,120})(?:\1(\s*\+)?|(\$\{))`; // 'clé', 'préfixe-' + x, `préfixe-${x}`
+    const LIT = (n = 1) => '([\'"`])([^\'"`$\\n]{1,120})(?:\\' + n + '(\\s*\\+)?|(\\$\\{))'; // 'clé', 'préfixe-' + x, `préfixe-${x}` (n : le numéro du groupe du guillemet)
     const named = n => /^[A-Z][A-Z0-9_]*$/.test(n) || /(KEY|Key|PREF|Pref|PREFIX|Prefix)/.test(n); // (pas « k », « key »… : trop de valeurs différentes)
     const keyLike = v => /^[A-Za-z]/.test(v) && /[-_:]/.test(v);
     for (const f of files) {
@@ -54,12 +54,12 @@ function scanKeys() {
         // const X = 'clé' (plusieurs valeurs possibles), pour retrouver localStorage.getItem(X)
         const consts = {};
         for (const m of src.matchAll(/\b([A-Za-z_$][\w$]*)\s*=\s*(['"`])([^'"`$\n]{1,120})(?:\2|(\$\{))/g)) if (named(m[1])) (consts[m[1]] = consts[m[1]] || new Set()).add(m[3] + (m[4] ? '*' : ''));
-        for (const m of src.matchAll(new RegExp(String.raw`\b(local|session)Storage\.(?:get|set|remove)Item\(\s*` + LIT, 'g'))) add(m[3] + (m[4] || m[5] ? '*' : ''), m[1], f);
+        for (const m of src.matchAll(new RegExp(String.raw`\b(local|session)Storage\.(?:get|set|remove)Item\(\s*` + LIT(2), 'g'))) add(m[3] + (m[4] || m[5] ? '*' : ''), m[1], f);
         for (const m of src.matchAll(/\b(local|session)Storage\.(?:get|set|remove)Item\(\s*([A-Za-z_$][\w$]*)\s*[,)+]/g)) for (const v of consts[m[2]] || []) if (keyLike(v)) add(v, m[1], f);
-        for (const m of src.matchAll(new RegExp(String.raw`(?<![\w.$])(?:${WRAPPERS.join('|')})\(\s*` + LIT, 'g'))) add(m[2] + (m[3] || m[4] ? '*' : ''), 'local', f);
+        for (const m of src.matchAll(new RegExp(String.raw`(?<![\w.$])(?:${WRAPPERS.join('|')})\(\s*` + LIT(), 'g'))) add(m[2] + (m[3] || m[4] ? '*' : ''), 'local', f);
         for (const m of src.matchAll(new RegExp(String.raw`(?<![\w.$])(?:${WRAPPERS.join('|')})\(\s*([A-Za-z_$][\w$]*)\s*[,)+]`, 'g'))) for (const v of consts[m[1]] || []) if (keyLike(v)) add(v, 'local', f);
         // les petits magasins des modules (store.get, ls.set, sess.get…) : seulement les clés « genealogie-… » / « lcnda-… » (leurs autres noms sont des sous-clés)
-        for (const m of src.matchAll(new RegExp(String.raw`\.(?:get|set|del|remove|getJSON|setJSON)\(\s*` + LIT, 'g'))) if (/^(genealogie|lcnda)[-_]/.test(m[2])) add(m[2] + (m[3] || m[4] ? '*' : ''), /\bsess\.$/.test(src.slice(Math.max(0, m.index - 5), m.index + 1)) ? 'session' : 'local', f);
+        for (const m of src.matchAll(new RegExp(String.raw`\.(?:get|set|del|remove|getJSON|setJSON)\(\s*` + LIT(), 'g'))) if (/^(genealogie|lcnda)[-_]/.test(m[2])) add(m[2] + (m[3] || m[4] ? '*' : ''), /\bsess\.$/.test(src.slice(Math.max(0, m.index - 5), m.index + 1)) ? 'session' : 'local', f);
         for (const m of src.matchAll(/\.(?:get|set|del|remove|getJSON|setJSON)\(\s*([A-Za-z_$][\w$]*)\s*[,)]/g)) for (const v of consts[m[1]] || []) if (/^(genealogie|lcnda)[-_]/.test(v)) add(v, 'local', f);
         // toute chaîne « genealogie-… » / « lcnda-… » nommée comme une clé (const XXX_KEY = '…') : aussi classée
         for (const m of src.matchAll(/\b[A-Z][A-Z0-9_]*(?:KEY|PREF|PREFIX)[A-Z0-9_]*\s*=\s*(['"`])((?:genealogie|lcnda)[-_][^'"`$\n]{1,100})(\$\{)?/g)) add(m[2] + (m[3] ? '*' : ''), 'local', f);
@@ -73,6 +73,7 @@ const REVIEWED_KEPT = {
     'genealogie-recent-fonts': 'les polices récentes : idem', 'genealogie-recent-icons': 'les icônes récentes : idem', 'genealogie-glyphs-recent': 'les caractères récents : idem',
     'lcnda-vx-recent-colors': 'les couleurs récentes du dessin : idem', 'genealogie-tresors-recent': 'les derniers trésors ouverts (noms d’outils, pas de fiche)',
     'lcnda-lot-derniere': 'la dernière recette des traitements par lot : un réglage', 'genealogie-retouch-side-closed': 'le panneau de la retouche replié : un choix de mise en page',
+    'genealogie-menu-own-last': '« Mettre mes onglets à la fin du menu » : un vrai choix',
     'lcnda-calculette-ouverte': 'la calculette ouverte ou non : un choix de mise en page', 'genealogie-tx-trouve-ouvert': '« Ce que l’app a trouvé » ouvert : un choix de mise en page',
     'lcnda-i18n-banner-closed': '(non gardé)', 'genealogie-goose-lists-v1': 'les listes de questions du jeu de l’oie faites par soi : comme des modèles',
     'genealogie-atelier-timers': '(non gardé)', 'genealogie-auto-backup-lock': '(non gardé)', 'genealogie-histoire-dl': '(non gardé)',
@@ -128,7 +129,7 @@ const REVIEWED_KEPT = {
     try { ({chromium} = require('playwright')); } catch (_) { try { ({chromium} = require('/opt/node22/lib/node_modules/playwright')); } catch (__) { chromium = null; } }
     let phpPath = null;
     try { const {findPhp, devBundledPhp} = require('../electron/php-server'); phpPath = findPhp([devBundledPhp()]); } catch (_) { phpPath = null; }
-    if (!chromium || !phpPath) { console.log('— navigateur : Playwright ou PHP absent, partie sautée'); finish(); return; }
+    if (!chromium || !phpPath || process.env.REGLAGES_SANS_NAVIGATEUR) { console.log('— navigateur : Playwright ou PHP absent (ou REGLAGES_SANS_NAVIGATEUR), partie sautée'); finish(); return; }
     const {phpRuntimeArgs} = require('../electron/php-server');
     const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
     const tmpAll = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-reglages-tout-'));

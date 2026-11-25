@@ -60,7 +60,7 @@
     const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const settings = () => ({...DEF, ...(readJ(KEY, {}) || {})});
     const enabled = () => settings().on !== false;
-    const curBasket = () => (settings().multi ? Number(readJ(CUR, 0)) || 0 : 0);
+    const curBasket = () => Number(readJ(CUR, 0)) || 0; // le panier en cours (le dernier utilisé ; 0 = le premier)
 
     /* ═════════════ les sortes ═════════════ */
     const KIND = {person: ['👤', 'Fiche'], event: ['📅', 'Événement'], act: ['📜', 'Acte'], source: ['🔖', 'Source'], media: ['🖼', 'Média'], note: ['📝', 'Note'], place: ['📍', 'Lieu'],
@@ -88,22 +88,25 @@
 
     /* ═════════════ 🧺 le panier ═════════════ */
     let count = null, basket = null, loading = null; // basket : {basket_id, baskets, items} chargé à la demande
+    let baskets = null; // la liste des paniers (nom, emoji, couleur, nombre, date) : lue avec le panier
+    const basketName = id => { const b = (baskets || []).find(x => Number(x.id) === Number(id)); return b && (baskets.length > 1 || b.name !== 'Mon panier') ? `${b.icon ? b.icon + ' ' : ''}${b.name}` : ''; };
     async function loadBasket(force = false) {
         if (basket && !force) return basket;
         if (loading && !force) return loading;
-        loading = api('cx_basket', {basket_id: curBasket()}).then(r => { basket = r; count = (r.items || []).length; paintPill(); return r; }).finally(() => { loading = null; });
+        loading = api('cx_basket', {basket_id: curBasket()}).then(r => { basket = r; baskets = r.baskets || baskets; count = (r.items || []).length; paintPill(); return r; }).finally(() => { loading = null; });
         return loading;
     }
     const setCountFrom = r => { if (r && r.count != null) { count = Number(r.count); paintPill(); } basket = null; };
-    async function take(items, {quiet = false, origin = null} = {}) {
+    async function take(items, {quiet = false, origin = null, basketId = null} = {}) {
         items = (items || []).filter(Boolean).map(it => (origin && !it.origin ? {...it, origin} : it));
         if (!items.length) return null;
         if (kiosk()) { toast(T('Mode consultation : rien ne peut être mis de côté.')); return null; }
+        if (basketId && Number(basketId) !== curBasket()) { writeJ(CUR, Number(basketId)); basket = null; count = null; } // le panier choisi devient celui en cours (retenu)
         const r = await post('basket_add', {basket_id: curBasket(), items});
         setCountFrom(r); remember(items);
         if (!quiet) {
-            const n = r.ids.length;
-            const msg = n ? T('🧺 {n} au panier', {n: plural(n, T('chose'), T('choses'))}) + (r.skipped ? ` ${T('({n} déjà dedans)', {n: r.skipped})}` : '') : T('Déjà dans le panier.');
+            const n = r.ids.length, bn = basketName(r.basket_id);
+            const msg = n ? (bn ? T('🧺 {n} dans « {b} »', {n: plural(n, T('chose'), T('choses')), b: bn}) : T('🧺 {n} au panier', {n: plural(n, T('chose'), T('choses'))})) + (r.skipped ? ` ${T('({n} déjà dedans)', {n: r.skipped})}` : '') : T('Déjà dans le panier.');
             if (n) undoToast(msg, {icon: '🧺', undo: async () => { setCountFrom(await post('basket_remove', {ids: r.ids})); refreshPanel(); }, redo: async () => { setCountFrom(await post('basket_add', {basket_id: r.basket_id, items})); refreshPanel(); }});
             else toast(msg);
         }
@@ -134,8 +137,9 @@
             pill.addEventListener('drop', e => { pill.classList.remove('is-over'); const txt = e.dataTransfer?.getData('text/plain'); if (txt && dragItems(e) === null) { e.preventDefault(); take([{kind: 'text', title: txt.slice(0, 120), value: txt.length > 120 ? txt : '', origin: screenOrigin()}]); } });
         }
         pill.hidden = false;
-        pill.innerHTML = `<span aria-hidden="true">🧺</span><b>${esc(nf(count))}</b>`;
-        pill.title = T('Le panier : {n} (cliquer pour l’ouvrir, glisser une chose dessus pour l’y mettre)', {n: plural(count, T('chose'), T('choses'))});
+        const cb = (baskets || []).find(x => Number(x.id) === (curBasket() || Number(baskets[0]?.id)));
+        pill.innerHTML = `<span aria-hidden="true">${esc(cb?.icon || '🧺')}</span><b>${esc(nf(count))}</b>`;
+        pill.title = T('Le panier : {n} (cliquer pour l’ouvrir, glisser une chose dessus pour l’y mettre)', {n: plural(count, T('chose'), T('choses'))}) + (cb && baskets.length > 1 ? ` — ${cb.name}` : '');
         pill.setAttribute('aria-label', T('Le panier : {n}', {n: plural(count, T('chose'), T('choses'))}));
     }
     const boot = () => { if (!enabled() || count != null) return; api('cx_count', {basket_id: curBasket()}).then(r => { if (count != null) return; count = Number(r.count) || 0; paintPill(); }) /* une prise faite entre-temps a déjà le bon nombre */.catch(() => {}); };
@@ -158,17 +162,15 @@
     }
     async function drawPanel(force = false) {
         const b = await loadBasket(force || !basket); if (!panel) return;
-        const items = b.items || [], multi = settings().multi;
-        const cur = (b.baskets || []).find(x => Number(x.id) === Number(b.basket_id));
-        panel.innerHTML = `<div class="cx-panel-head"><b>🧺 ${esc(multi && cur ? cur.name : T('Mon panier'))} (${nf(items.length)})</b>
-            ${multi ? `<select data-cx-bsel aria-label="${esc(T('Quel panier'))}">${(b.baskets || []).map(x => `<option value="${x.id}" ${Number(x.id) === Number(b.basket_id) ? 'selected' : ''}>${esc(`${x.name} (${x.count})`)}</option>`).join('')}<option value="new">＋ ${esc(T('Un nouveau panier…'))}</option></select>` : ''}
+        const items = b.items || [];
+        panel.innerHTML = `<div class="cx-panel-head">${basketSelect(b, 'data-cx-bsel')}
             <button type="button" class="icon-button" data-cx-close aria-label="${esc(T('Fermer'))}">×</button></div>
             ${items.length ? `<ul class="cx-plist">${items.map(it => `<li draggable="${settings().dnd ? 'true' : 'false'}" data-cx-bi="${it.id}"><span class="cx-ico" aria-hidden="true">${icon(it)}</span><span class="cx-t"><b>${esc(it.title)}</b>${it.kind === 'set' ? ` <small class="cx-n">${esc(plural(setCount(it), T('ligne')))}</small>` : ''}${it.value && it.kind !== 'set' ? `<small>${esc(String(it.value).slice(0, 140))}</small>` : ''}${it.origin?.label ? `<small class="muted">${esc(T('de :'))} ${esc(it.origin.label)}</small>` : ''}</span>
                 ${it.origin && (it.origin.open || it.origin.url || it.origin.id) ? `<button type="button" class="link-button" data-cx-go="${it.id}" title="${esc(T('Revenir là d’où ça vient'))}">↗</button>` : ''}<button type="button" class="icon-button small" data-cx-x="${it.id}" aria-label="${esc(T('Retirer du panier'))}" title="${esc(T('Retirer du panier'))}">×</button></li>`).join('')}</ul>
                 <div class="cx-panel-acts"><button type="button" class="button small" data-cx-put>📍 ${esc(T('Mettre dans…'))}</button><button type="button" class="button small secondary" data-cx-keep>⭐ ${esc(T('Garder comme liste'))}</button><button type="button" class="button small secondary danger" data-cx-clear>${esc(T('Tout retirer'))}</button></div>
                 ${settings().dnd ? `<p class="cx-hint muted">${esc(T('…ou glisse une ligne (ou tout le panier) sur l’écran ouvert.'))}</p>` : ''}`
             : `<p class="muted cx-empty">${esc(T('Le panier est vide. Coche des choses n’importe où (« 🧺 Au panier »), ou clic droit sur une date, un lieu, une phrase : « 🧺 Prendre… ».'))}</p>`}
-            ${multi ? `<div class="cx-panel-foot"><button type="button" class="link-button" data-cx-brename>✎ ${esc(T('Renommer'))}</button>${(b.baskets || []).length > 1 ? ` · <button type="button" class="link-button" data-cx-bdel>🗑 ${esc(T('Supprimer ce panier'))}</button>` : ''}</div>` : ''}`;
+            <div class="cx-panel-foot">${basketMeta(b)}<span class="cx-sp"></span><button type="button" class="link-button" data-cx-bfull>⛶ ${esc(T('Ouvrir en grand'))}</button> · <button type="button" class="link-button" data-cx-brename>✎ ${esc(T('Modifier'))}</button> · <button type="button" class="link-button" data-cx-bdup>⧉ ${esc(T('Dupliquer'))}</button>${(b.baskets || []).length > 1 ? ` · <button type="button" class="link-button" data-cx-bdel>🗑 ${esc(T('Supprimer ce panier'))}</button>` : ''}</div>`;
         bindPanel(items, b);
     }
     function bindPanel(items, b) {
@@ -182,20 +184,110 @@
             undoToast(T('Panier vidé ({n})', {n: plural(r.removed.length, T('chose'), T('choses'))}), {icon: '🧺', undo: async () => { setCountFrom(await post('basket_restore', {rows: r.removed})); refreshPanel(); }});
         });
         panel.querySelector('[data-cx-keep]')?.addEventListener('click', () => keepAsList(items, b));
-        panel.querySelector('[data-cx-bsel]')?.addEventListener('change', async e => {
-            let id = e.target.value;
-            if (id === 'new') { const name = await askText(T('Le nom du nouveau panier'), T('Panier {n}', {n: (b.baskets || []).length + 1})); if (!name) { drawPanel(true); return; } id = (await post('basket_new', {name})).id; }
-            writeJ(CUR, Number(id)); basket = null; count = null; await drawPanel(true);
-        });
-        panel.querySelector('[data-cx-brename]')?.addEventListener('click', async () => { const cur = (b.baskets || []).find(x => Number(x.id) === Number(b.basket_id)); const name = await askText(T('Renommer le panier'), cur?.name || ''); if (name) { await post('basket_rename', {basket_id: b.basket_id, name}); drawPanel(true); } });
-        panel.querySelector('[data-cx-bdel]')?.addEventListener('click', async () => {
-            const r = await post('basket_delete', {basket_id: b.basket_id}); writeJ(CUR, 0); basket = null; await drawPanel(true);
-            undoToast(T('Panier « {n} » supprimé', {n: r.basket.name}), {undo: async () => { await post('basket_undelete', {basket: r.basket, rows: r.rows}); writeJ(CUR, Number(r.basket.id)); basket = null; refreshPanel(); }});
-        });
+        panel.querySelector('[data-cx-bsel]')?.addEventListener('change', async e => { await switchBasket(e.target.value, b); drawPanel(true); });
+        panel.querySelector('[data-cx-brename]')?.addEventListener('click', async () => { await editBasket(b.basket_id); drawPanel(true); });
+        panel.querySelector('[data-cx-bdup]')?.addEventListener('click', async () => { await dupBasket(b.basket_id); drawPanel(true); });
+        panel.querySelector('[data-cx-bfull]')?.addEventListener('click', () => { panel.remove(); panel = null; openBasketView(); });
+        panel.querySelector('[data-cx-bdel]')?.addEventListener('click', async () => { await delBasket(b.basket_id); drawPanel(true); });
         panel.querySelectorAll('li[draggable="true"]').forEach(li => li.addEventListener('dragstart', e => {
             const one = byId(li.dataset.cxBi), list = e.altKey ? items : [one];
             startDrag(e, list, {fromBasket: true});
         }));
+    }
+    /* ═════════════ 🧺 les paniers nommés (« Mariage MAZAUD 1813 ») : choisir, créer, modifier, dupliquer, supprimer (↶), ouvrir en grand ═════════════ */
+    const bLabel = x => `${x.icon || '🧺'} ${x.name}`;
+    const shortWhen = s => { const d = new Date(String(s || '').replace(' ', 'T') + (String(s).includes('Z') ? '' : 'Z')); return Number.isFinite(d.getTime()) ? d.toLocaleDateString('fr-FR', {day: 'numeric', month: 'short'}) : ''; };
+    /** « 🧺 Mariage MAZAUD 1813 ▾ » : le panier en cours, les autres, « ＋ Nouveau panier… » */
+    const basketSelect = (b, attr) => `<label class="cx-bsw"><span class="cx-sr">${esc(T('Quel panier'))}</span><select ${attr} aria-label="${esc(T('Quel panier'))}">${(b.baskets || []).map(x => `<option value="${x.id}" ${Number(x.id) === Number(b.basket_id) ? 'selected' : ''}>${esc(`${bLabel(x)} (${nf(x.count)})`)}</option>`).join('')}<option value="new">＋ ${esc(T('Nouveau panier…'))}</option></select></label>`;
+    const basketMeta = b => { const x = (b.baskets || []).find(y => Number(y.id) === Number(b.basket_id)); if (!x) return ''; return `<span class="cx-bmeta">${esc(plural(x.count, T('élément'), T('éléments')))}${x.done ? ` · ${esc(T('{n} utilisés', {n: nf(x.done)}))}` : ''}${x.updated_at ? ` · ${esc(T('modifié le {d}', {d: shortWhen(x.updated_at)}))}` : ''}${x.note ? `<br><i>${esc(x.note)}</i>` : ''}</span>`; };
+    /** le formulaire d'un panier : nom, emoji, couleur, une ligne d'explication */
+    function basketForm(cur = {}) {
+        return new Promise(res => {
+            const v = {name: cur.name || '', icon: cur.icon || '🧺', color: cur.color || '', note: cur.note || ''};
+            if (!ext.openDialog) { const name = window.prompt(T('Le nom du panier'), v.name); res(name ? {...v, name} : null); return; }
+            let done = false;
+            ext.openDialog({eyebrow: '🧺', title: cur.id ? T('Modifier le panier') : T('Nouveau panier'), submitLabel: cur.id ? T('Enregistrer') : T('Créer le panier'),
+                body: `<div class="cx-bform"><label>${esc(T('Nom'))}<input name="name" maxlength="120" required value="${esc(v.name)}" placeholder="${esc(T('ex. Mariage MAZAUD 1813'))}"></label>
+                    <div class="cx-bform-row"><label>${esc(T('Emoji'))}<input name="icon" maxlength="8" value="${esc(v.icon)}" style="width:4em"></label><label>${esc(T('Couleur'))}<input type="color" name="color" value="${esc(v.color || '#055dff')}"></label></div>
+                    <label>${esc(T('Une ligne pour dire à quoi il sert (facultatif)'))}<input name="note" maxlength="300" value="${esc(v.note)}" placeholder="${esc(T('ex. les pièces pour la demande d’acte'))}"></label></div>`,
+                onSubmit: f => { done = true; res({name: f.elements.name.value.trim(), icon: f.elements.icon.value.trim(), color: f.elements.color.value, note: f.elements.note.value.trim()}); },
+                onOpen: d => d.addEventListener('close', () => { if (!done) res(null); })});
+        });
+    }
+    async function newBasket() { const v = await basketForm(); if (!v?.name) return 0; const r = await post('basket_new', v); baskets = r.baskets; writeJ(CUR, Number(r.id)); basket = null; count = 0; paintPill(); toast(T('🧺 Panier « {n} » créé : ce que tu prends y va maintenant.', {n: v.name})); return Number(r.id); }
+    async function switchBasket(id, b = null) {
+        if (id === 'new') return newBasket();
+        writeJ(CUR, Number(id)); basket = null; count = null; await loadBasket(true); return Number(id);
+    }
+    async function editBasket(id) {
+        const x = (baskets || (await loadBasket(true)).baskets || []).find(y => Number(y.id) === Number(id)); if (!x) return;
+        const v = await basketForm(x); if (!v?.name) return;
+        const r = await post('basket_edit', {basket_id: id, ...v}); baskets = r.baskets; basket = null;
+        undoToast(T('Panier « {n} » modifié', {n: v.name}), {icon: v.icon || '🧺', undo: async () => { const r2 = await post('basket_edit', {basket_id: id, ...r.before}); baskets = r2.baskets; basket = null; refreshPanel(); }});
+    }
+    async function dupBasket(id) {
+        const x = (baskets || []).find(y => Number(y.id) === Number(id));
+        const name = await askText(T('Le nom de la copie'), `${x?.name || T('Panier')} (${T('copie')})`); if (!name) return;
+        const r = await post('basket_duplicate', {basket_id: id, name}); baskets = r.baskets; writeJ(CUR, Number(r.id)); basket = null; count = null; await loadBasket(true);
+        undoToast(T('Panier « {n} » créé (copie)', {n: name}), {icon: '⧉', undo: async () => { await post('basket_delete', {basket_id: r.id}); writeJ(CUR, Number(id)); basket = null; await loadBasket(true); refreshPanel(); }});
+    }
+    async function delBasket(id) {
+        const r = await post('basket_delete', {basket_id: id}); baskets = r.baskets; writeJ(CUR, 0); basket = null; await loadBasket(true);
+        undoToast(T('Panier « {n} » supprimé', {n: r.basket.name}), {undo: async () => { await post('basket_undelete', {basket: r.basket, rows: r.rows}); writeJ(CUR, Number(r.basket.id)); basket = null; await loadBasket(true); refreshPanel(); }});
+    }
+    /** « Au panier » : dans lequel ? (plusieurs paniers : un petit menu, le dernier utilisé en premier) → id, ou null si annulé */
+    async function chooseBasket(anchor) {
+        const list = baskets || (await loadBasket(true)).baskets || [];
+        if (list.length < 2) return curBasket() || Number(list[0]?.id) || 0;
+        const cur = curBasket() || Number(list[0].id), ordered = [...list].sort((a, b) => (Number(b.id) === cur) - (Number(a.id) === cur));
+        return new Promise(res => { let done = false; UI().menuAt?.(anchor || document.body, [...ordered.map(x => ({icon: x.icon || '🧺', label: `${x.name} (${nf(x.count)})`, run: () => { done = true; res(Number(x.id)); }})), '-',
+            {icon: '＋', label: T('Nouveau panier…'), run: async () => { done = true; res(await newBasket() || null); }}], {title: T('Dans quel panier ?'), onClose: () => setTimeout(() => { if (!done) res(null); }, 50)}); });
+    }
+    /** ⛶ le panier en grand, comme une liste de courses : cocher « ✓ utilisé », une note par élément, l'ordre en glissant, « Mettre tout dans… » */
+    async function openBasketView() {
+        document.querySelector('dialog.cx-bview')?.close();
+        const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-put cx-bview'; dlg.dataset.noFoot = ''; dlg.setAttribute('aria-labelledby', 'cx-bview-h');
+        document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
+        const draw = async () => {
+            const b = await loadBasket(true), items = b.items || [], x = (b.baskets || []).find(y => Number(y.id) === Number(b.basket_id)) || {};
+            dlg.innerHTML = `<form method="dialog" class="cx-tk"><header class="cx-tk-head"${x.color ? ` style="box-shadow: inset 6px 0 0 ${esc(x.color)}"` : ''}><div class="cx-tk-ht"><span class="cx-eyebrow">🧺 ${esc(T('Panier'))}</span>
+                    <h2 id="cx-bview-h">${basketSelect(b, 'data-cx-vsel')}</h2><p class="cx-tk-say">${basketMeta(b)}</p></div>
+                    <button type="button" class="cx-b is-ter is-sm" data-cx-vedit>✎ ${esc(T('Modifier'))}</button><button type="button" class="cx-x" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></header>
+                <div class="cx-put-body">${items.length ? `<ol class="cx-blist">${items.map(it => `<li draggable="true" data-cx-vi="${it.id}" class="${Number(it.done) ? 'is-done' : ''}"><span class="cx-grip" aria-hidden="true" title="${esc(T('Glisser pour changer l’ordre'))}">⋮⋮</span>
+                        <label class="cx-chk"><input type="checkbox" data-cx-vdone ${Number(it.done) ? 'checked' : ''} aria-label="${esc(T('« {t} » utilisé', {t: it.title}))}"></label><span class="cx-ico" aria-hidden="true">${icon(it)}</span>
+                        <span class="cx-t"><b>${esc(it.title)}</b>${it.kind === 'set' ? `<small>${esc(plural(setCount(it), T('ligne')))}</small>` : it.value && !sameText(it.title, it.value) ? `<small>${esc(String(it.value).slice(0, 160))}</small>` : ''}${it.origin?.label ? `<small class="cx-muted">${esc(T('de :'))} ${esc(it.origin.label)}${it.origin.url ? ` · ${srcLink(it.origin.url)}` : ''}</small>` : ''}
+                        <input class="cx-vnote" data-cx-vnote value="${esc(it.note || '')}" placeholder="${esc(T('une note…'))}" aria-label="${esc(T('Note sur « {t} »', {t: it.title}))}"></span>
+                        ${Number(it.done) ? `<span class="cx-pl is-ok">✓ ${esc(T('utilisé'))}</span>` : ''}<button type="button" class="cx-sum-x" data-cx-vx aria-label="${esc(T('Retirer du panier'))}">×</button></li>`).join('')}</ol>`
+                    : `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">🧺</span><b>${esc(T('Le panier est vide'))}</b><p>${esc(T('Le panier garde des choses pour plus tard, d’un écran à l’autre. Coche des lignes n’importe où dans l’app, puis « 🧺 Garder dans le panier ».'))}</p></div>`}</div>
+                <footer class="cx-tk-foot"><div class="cx-cnt"><span class="cx-what">${esc(T('Coche « ✓ utilisé » au fur et à mesure ; glisse les lignes pour les ranger.'))}</span></div><div class="cx-acts">
+                    <button type="button" class="cx-b is-ter" data-cx-vdup>⧉ ${esc(T('Dupliquer'))}</button>${(b.baskets || []).length > 1 ? `<button type="button" class="cx-b is-ter" data-cx-vdel>🗑 ${esc(T('Supprimer ce panier'))}</button>` : ''}
+                    <button type="button" class="cx-b is-pri" data-cx-vput ${items.length ? '' : 'disabled'}><span>📍 ${esc(T('Mettre tout dans…'))}</span></button></div></footer></form>`;
+            const byId = id => items.find(y => Number(y.id) === Number(id));
+            dlg.querySelector('[data-cx-x]').addEventListener('click', () => dlg.close());
+            dlg.querySelector('[data-cx-vsel]').addEventListener('change', async e => { await switchBasket(e.target.value); draw(); });
+            dlg.querySelector('[data-cx-vedit]').addEventListener('click', async () => { await editBasket(b.basket_id); draw(); });
+            dlg.querySelector('[data-cx-vdup]').addEventListener('click', async () => { await dupBasket(b.basket_id); draw(); });
+            dlg.querySelector('[data-cx-vdel]')?.addEventListener('click', async () => { await delBasket(b.basket_id); draw(); });
+            dlg.querySelector('[data-cx-vput]').addEventListener('click', e => { dlg.close(); putInto(items, {anchor: e.currentTarget, fromBasket: true}); });
+            dlg.querySelectorAll('[data-cx-vi]').forEach(li => {
+                const it = byId(li.dataset.cxVi);
+                li.querySelector('[data-cx-vdone]').addEventListener('change', async e => { const r = await post('item_set', {id: it.id, done: e.target.checked}); undoToast(e.target.checked ? T('✓ « {t} » utilisé', {t: it.title}) : T('« {t} » à utiliser', {t: it.title}), {icon: '🧺', undo: async () => { await post('item_set', r.before); draw(); }}); draw(); });
+                li.querySelector('[data-cx-vnote]').addEventListener('change', async e => { const r = await post('item_set', {id: it.id, note: e.target.value}); undoToast(T('Note gardée'), {icon: '📝', undo: async () => { await post('item_set', r.before); draw(); }}); });
+                li.querySelector('[data-cx-vx]').addEventListener('click', async () => { await removeFromBasket([it.id]); draw(); });
+                li.addEventListener('dragstart', e => { if (e.target.closest('input')) return e.preventDefault(); dlg.dataset.drag = li.dataset.cxVi; li.classList.add('is-drag'); try { e.dataTransfer.setData('text/plain', it.title); e.dataTransfer.effectAllowed = 'move'; } catch (_) {} });
+                li.addEventListener('dragend', () => li.classList.remove('is-drag'));
+                li.addEventListener('dragover', e => { if (dlg.dataset.drag) { e.preventDefault(); } });
+                li.addEventListener('drop', async e => { const from = dlg.dataset.drag; delete dlg.dataset.drag; if (!from || from === li.dataset.cxVi) return; e.preventDefault(); e.stopPropagation();
+                    const ids = items.map(y => Number(y.id)).filter(y => y !== Number(from)), at = ids.indexOf(Number(li.dataset.cxVi)); ids.splice(at, 0, Number(from));
+                    const r = await post('item_order', {basket_id: b.basket_id, ids}); undoToast(T('Ordre changé'), {icon: '⇅', undo: async () => { await post('item_order', {basket_id: b.basket_id, ids: r.before}); draw(); }}); draw(); });
+                li.addEventListener('keydown', async e => { if (!e.altKey || !['ArrowUp', 'ArrowDown'].includes(e.key)) return; e.preventDefault(); // Alt+↑ / Alt+↓ : déplacer au clavier
+                    const ids = items.map(y => Number(y.id)), i = ids.indexOf(Number(it.id)), j = i + (e.key === 'ArrowUp' ? -1 : 1); if (j < 0 || j >= ids.length) return; [ids[i], ids[j]] = [ids[j], ids[i]];
+                    await post('item_order', {basket_id: b.basket_id, ids}); await draw(); dlg.querySelector(`[data-cx-vi="${it.id}"] [data-cx-vdone]`)?.focus(); });
+            });
+            refreshPanel();
+        };
+        await draw();
+        return dlg;
     }
     /** ⭐ Garder comme liste : les fiches dans « Mes listes » (une nouvelle liste) ; si plusieurs paniers : le panier garde son nom */
     async function keepAsList(items, b) {
@@ -740,7 +832,9 @@
         const picked = () => [...st.picked.values()].map(cleanIt);
         const need = () => { const p = picked(); if (!p.length) toast(T('Coche d’abord ce que tu prends.')); return p; };
         let busy = false; // un double-clic sur « Prendre » ne prend pas deux fois
-        dlg.querySelector('[data-cx-tobasket]').addEventListener('click', async () => { const p = need(); if (!p.length || busy) return; busy = true; dlg.close(); await take(p); });
+        dlg.querySelector('[data-cx-tobasket]').addEventListener('click', async e => { const p = need(); if (!p.length || busy) return; busy = true;
+            const id = await chooseBasket(e.currentTarget); if (id == null) { busy = false; return; } // plusieurs paniers : lequel ? (le dernier utilisé en premier)
+            dlg.close(); await take(p, {basketId: id}); });
         dlg.querySelector('[data-cx-toput]').addEventListener('click', e => { const p = need(); if (!p.length || busy) return; busy = true; dlg.close(); putInto(p, {anchor: e.currentTarget, fromBasket: p.every(x => x.id && st.fromBasket?.has(x.id))}); });
         dlg.querySelector('[data-cx-takehere]')?.addEventListener('click', async () => { const p = need(); if (!p.length || busy) return; busy = true; dlg.close(); await deliver(target, p, {here: true, ctx: st.ctx || null, fromBasket: p.some(x => x.id && st.fromBasket?.has(x.id)), original: p}); });
         dlg.addEventListener('keydown', e => { if (e.key === 'Escape' && dlg.classList.contains('is-sheet')) { e.preventDefault(); closeSheet(st); } else if (e.key === 'Escape' && dlg.classList.contains('is-railopen')) { e.preventDefault(); dlg.classList.remove('is-railopen'); } });
@@ -1000,6 +1094,12 @@
         dlg.classList.toggle('is-wide', st.tab === 'outside' || (st.tab === 'lists' && !st.list)); // De l'extérieur, la liste des listes : sans aperçu, toute la largeur
         if (!st.preview || st.preview.kind !== st.tab) previewItem(st, null);
         chips.innerHTML = special ? '' : chipsHtml(st); chips.hidden = !chips.innerHTML;
+        if (st.tab === 'basket') { // 🧺 quel panier, ＋ Nouveau panier…, ⛶ en grand
+            const b = await loadBasket(true); if (!st.dlg.isConnected) return;
+            chips.hidden = false; chips.innerHTML = `<span class="cx-cf">${basketSelect(b, 'data-cx-tbsel')}<button type="button" class="cx-b is-ter is-sm" data-cx-bview>⛶ ${esc(T('Ouvrir en grand'))}</button></span><span class="cx-sp"></span><span class="cx-ca">${basketMeta(b)}</span>`;
+            chips.querySelector('[data-cx-tbsel]').addEventListener('change', async e => { await switchBasket(e.target.value); drawTab(st); });
+            chips.querySelector('[data-cx-bview]').addEventListener('click', () => { st.dlg.close(); openBasketView(); });
+        }
         chips.querySelectorAll('[data-cx-chip]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cxChip; if (st.filters.has(k)) st.filters.delete(k); else st.filters.add(k); drawTab(st); }));
         chips.querySelectorAll('[data-cx-rank]').forEach(b => b.addEventListener('click', () => { st.rank = b.dataset.cxRank; drawTab(st); }));
         chips.querySelectorAll('[data-cx-mview]').forEach(b => b.addEventListener('click', () => { st.mview = b.dataset.cxMview; drawTab(st); }));
@@ -1598,5 +1698,5 @@
         }}});
     }
     ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
-        count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
+        openBasketView, chooseBasket, count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
 })();

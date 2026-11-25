@@ -241,6 +241,7 @@
     const ALL_EXTRA = [];
     const ALL_OUTSIDE = {
         'lcnda_puzzle-prefs-v1': 'ancien nom des réglages du puzzle, repris sous « lcnda-puzzle-prefs » (app-puzzle.js)',
+        'theme': 'pas une clé de l’app : un exemple de code dans l’aide-mémoire JavaScript du site web (heritage-site-web-cssjs-ref.js)',
         'lcnda_puzzle-base-v2': 'les parties de puzzle : des données', 'lcnda_puzzle-pending-v2:': 'puzzle en cours : passager', 'lcnda_puzzle-list-v2:': 'les parties de puzzle : des données',
     };
     // l'ancien nom d'un réglage repris en « genealogie-… » (app.js, LCNDA_SETTING_RENAMES) n'est qu'un reflet du nouveau : gardé avec lui
