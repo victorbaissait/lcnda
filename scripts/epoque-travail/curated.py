@@ -94,12 +94,12 @@ FLEAUX = [
 # 📷 dater une photo ancienne : (id, nom, page Wikipédia, [année du début, mots], [année de la fin, mots] ou None)
 #   les deux années sont LUES dans la phrase trouvée (la première année qui répond à la règle) ; sans phrase de fin, on dit « depuis … »
 PHOTOS = [
-    ('daguerreotype', 'Daguerréotype (image sur plaque de métal argenté, comme un miroir)', 'fr:Daguerréotype', (r'1839', r'Académie|présent|invention'), (r'18[56]\d', r'abandon|remplac|supplant|déclin|disparu|fin')),
+    ('daguerreotype', 'Daguerréotype (image sur plaque de métal argenté, comme un miroir)', 'fr:Daguerréotype', (r'1839', r'Académie|présent|invention'), None),
     ('calotype', 'Calotype (tirage sur papier, à partir d’un négatif papier)', 'fr:Calotype', (r'184[01]', r'Talbot|brevet|procédé'), None),
     ('ambrotype', 'Ambrotype (image sur verre, posée sur un fond noir)', 'fr:Ambrotype', (r'185\d', r'brevet|procédé|invent|Archer|Cutting'), (r'18[6-9]\d', r'remplac|abandon|supplant|déclin|fin')),
     ('ferrotype', 'Ferrotype (image sur une fine plaque de fer noircie)', 'fr:Ferrotype', (r'185\d', r'brevet|procédé|invent'), (r'19\d\d', r'jusqu|encore|fin|disparu')),
-    ('carte_visite', 'Carte de visite (petit tirage collé sur carton, environ 6 × 10 cm)', 'en:Carte de visite', (r'185\d', r'Disdéri|Disderi|patent'), (r'18[89]\d|190\d', r'declin|replac|popular|until|fad')),
-    ('cabinet', 'Photo « cabinet » (tirage plus grand sur carton, environ 11 × 17 cm)', 'en:Cabinet card', (r'186\d', r'introduc|adopt|first|became'), (r'19[0-2]\d', r'until|declin|replac|popular')),
+    ('carte_visite', 'Carte de visite (petit tirage collé sur un carton)', 'en:Carte de visite', (r'185\d', r'Disdéri|Disderi|patent'), None),
+    ('cabinet', 'Photo « cabinet » (tirage plus grand collé sur un carton)', 'en:Cabinet card', (r'186\d', r'introduc|adopt|first|became'), (r'19[0-2]\d', r'until|declin|replac|popular')),
     ('albumine', 'Tirage à l’albumine (couleur brun-sépia, papier très fin)', 'en:Albumen print', (r'1850', r'Blanquart|introduc|invent'), (r'18[89]\d|19[01]\d', r'until|replac|declin|dominant')),
     ('gelatino', 'Plaque sèche au gélatino-bromure (photos nettes, premiers instantanés)', 'fr:Gélatino-bromure d\'argent', (r'187\d', r'Maddox|procédé|invent|plaque'), None),
     ('carte_postale', 'Carte postale (photo imprimée ou tirée sur carte)', 'fr:Carte postale', (r'18[6-9]\d', r'première|France|apparition|illustrée'), None),

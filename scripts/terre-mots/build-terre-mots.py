@@ -311,6 +311,9 @@ def build_fruits():
     write('fruits', {'attr': 'Wikidata — variétés fruitières et potagères (pommes, poires, prunes, cerises, cépages…) dont le lieu d’origine (P1071), le lieu qui leur donne leur nom (P138) ou le nom lui-même renvoie à un lieu de France', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/', 'keys': keys, 'rows': compact(rows, keys)})
     return len(rows)
 
+# corrections relues à la main : la citation nomme une autre commune que la seule commune de ce nom exact
+FIX_AST = {'39516': ('c', '10209')}  # « Lusigny (sur Barse) … in Aube » : Lusigny-sur-Barse (Aube), pas Lusigny (Allier)
+
 def build_ciel():
     import fetch_jpl as J
     names = J.named()
@@ -335,6 +338,10 @@ def build_ciel():
                 ok = [h for h in cand if fold(DEP.get(dep_of(h[1]), '')) and fold(DEP.get(dep_of(h[1]), '')) in f]
                 cand = ok
         if not cand: continue
+        town = re.search(r'\b(town|city|village|commune|capital|community|municipality)\b', txt, re.I) and not re.search(r'\(b\. \d', txt)
+        dept = re.search(r'd[ée]partement|department', txt, re.I)
+        cand = [h for h in cand if (h[0] == 'c' and town) or (h[0] == 'd' and dept and not town)]
+        if num in FIX_AST: cand = [FIX_AST[num]]  # la citation désigne une autre commune que celle du même nom
         for kind, code in cand[:3]:
             places.append({'num': num, 'name': name, 'kind': kind, 'code': code, 'cit': txt, 'who': c['who'], 'date': c['date'], 'site': c['site']})
     # les cultivars (roses, dahlias…) nommés d'après un lieu ou une personne
