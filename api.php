@@ -2636,7 +2636,6 @@ function person_detail(PDO $pdo, int $id): never
     $familyRows = $families->fetchAll();
     // 🔒 lectures toutes terminées ici : les fonctions appelées plus bas (heritage_person_data…) peuvent créer une table ; avec une
     // lecture encore ouverte, SQLite refusait aussitôt cette écriture (« base occupée ») dès qu'un autre PHP du relais avait écrit entre-temps
-    $variantRows = $variants->fetchAll(); $hypothesisRows = $hypotheses->fetchAll(); $journalRows = $journal->fetchAll();
 
     $onlineSheets = $pdo->prepare('SELECT s.*, m.filename AS screenshot_filename, m.thumbnail AS screenshot_thumbnail, m.title AS screenshot_title FROM person_online_sheets s LEFT JOIN media m ON m.id=s.screenshot_media_id WHERE s.person_id=? ORDER BY s.updated_at DESC,s.id DESC');
     $onlineSheets->execute([$id]);
@@ -2664,7 +2663,7 @@ function person_detail(PDO $pdo, int $id): never
         'families' => $familyRows,
         'children' => $completion['_children'],
         'siblings' => $siblingRows,
-        'variants' => $variantRows,
+        'variants' => $variants->fetchAll(),
         'labels' => labels_for_entity($pdo,'person',$id),
         'notes' => $notesRows,
         'media' => $mediaRows,
@@ -2672,9 +2671,9 @@ function person_detail(PDO $pdo, int $id): never
         'sources' => $sourceRows,
         'investigations' => $investigationRows,
         'battues' => $battueRows,
-        'hypotheses' => $hypothesisRows,
+        'hypotheses' => $hypotheses->fetchAll(),
         'evidence' => $evidenceRows,
-        'researchJournal' => $journalRows,
+        'researchJournal' => $journal->fetchAll(),
         'census' => $census,
         'completion' => ['score'=>$completion['score'],'items'=>$completion['items']],
         'biography' => automatic_biography($person,$completion['_events'],$completion['_parents'],$completion['_partners'],$completion['_children']),
