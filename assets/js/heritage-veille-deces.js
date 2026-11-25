@@ -98,6 +98,7 @@
             const msg = action === 'yes' ? T('Décès ajouté à la fiche, avec la source INSEE.') : action === 'no' ? T('Noté : ce n’est pas la même personne. Cette piste ne reviendra pas.') : T('Piste remise dans les décès possibles.');
             if (action === 'undo') A().toast?.(msg, 'success'); else A().undoToast?.(msg, {undo: async () => { await post('vd_undo', {id}); await draw(); }});
             root.dispatchEvent?.(new CustomEvent('lcnda:data-changed'));
+            LIST = null; document.querySelectorAll(`[data-vd-card="${id}"]`).forEach(c => { if (c.closest('[data-vd-person]')) c.remove(); });
             await draw();
             STATUS = await get('vd_status').catch(() => STATUS); ls.set(TOLD, String(STATUS?.pending || 0));
         } catch (e) { A().toast?.(e.message, 'error'); }
@@ -164,6 +165,29 @@
         },
     };
 
+    /* la fiche d'une personne : « ⚰️ Décès possible » — seulement s'il y en a un (sinon rien du tout) */
+    let LIST = null;
+    const listOnce = () => (LIST ||= get('vd_list').catch(() => ({items: []})));
+    window.addEventListener('lcnda:data-changed', () => { LIST = null; });
+    async function fillPerson(host, pid) {
+        if (!enabled()) return false;
+        const L = await listOnce(); const mine = (L.items || []).filter(it => it.person.id === pid);
+        if (!mine.length) return false;
+        host.innerHTML = mine.map(it => cardHtml(it)).join('');
+        host.closest('section.card')?.removeAttribute('hidden');
+        return true;
+    }
+    ext.personBlocks = ext.personBlocks || {};
+    ext.personBlocks.veille_deces = (index, detail) => {
+        const p = detail?.person; if (!p?.id || p.kind === 'animal' || !enabled() || p.living_status === 'deceased') return '';
+        return A().card(index, T('⚰️ Décès possible'), '', `<div class="vd-block" data-vd-person="${Number(p.id)}"></div>`, 'span-12').replace(/^(\s*<section class="card[^"]*")/, '$1 hidden');
+    };
+    (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-vd-person]:not([data-vd-done])').forEach(h => { h.dataset.vdDone = '1'; fillPerson(h, Number(h.dataset.vdPerson)); }); });
+    /* à la demande (« 🧰 Données ») : les décès possibles d'une personne */
+    (ext.dataSources = ext.dataSources || []).push({id: 'veille_deces', icon: '⚰️', label: T('Décès possible (fichier INSEE)'), group: 'La personne', needs: ['person'],
+        installed: () => get('vd_status').then(s => !!s.insee?.installed).catch(() => false),
+        run: async (ctx, host) => { LIST = null; const id = Number(ctx.person?.id || ctx.person); if (!(await fillPerson(host, id))) host.innerHTML = `<p class="muted">${esc(T('Aucun décès possible pour cette personne dans le fichier INSEE installé.'))}</p>`; }});
+
     /* « Où chercher » : les avis de décès des journaux (liens seulement) — registre lu par heritage-ou-chercher.js */
     root.LCNDA_SO21 = root.LCNDA_SO21 || {
         SITES: OBIT.map(([key, label, domain]) => ({key, label, group: 'Avis de décès', icon: '🕯', country: 'France', domain, verified: false,
@@ -174,6 +198,8 @@
     function register() {
         const app = A(), tabs = app.defaultMaintenanceTabs;
         if (Array.isArray(tabs) && !tabs.some(t => t[0] === TAB[0])) { const i = tabs.findIndex(t => t[0] === 'import'); tabs.splice(i < 0 ? tabs.length : i + 1, 0, TAB); }
+        const B = app.defaultPersonBlocks;
+        if (Array.isArray(B) && !B.some(b => b[0] === 'veille_deces')) { B.splice(Math.min(2, B.length), 0, ['veille_deces', '⚰️ Décès possible']); if (app.defaultPersonBlockSpans) app.defaultPersonBlockSpans.veille_deces ||= '12'; }
         if (Array.isArray(app.defaultDashboardBlocks) && !app.defaultDashboardBlocks.some(x => x[0] === 'veille_deces')) {
             app.defaultDashboardBlocks.push(['veille_deces', '⚰️ Veille des décès']);
             if (app.defaultDashboardBlockSpans) app.defaultDashboardBlockSpans.veille_deces = '6';

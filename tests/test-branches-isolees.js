@@ -61,6 +61,12 @@ echo 'ok';`);
             await p.addScriptTag({url: base + 'assets/js/heritage-branches-isolees.js'});
         }
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
+        /** « ↶ Annuler » du message qui dit… (le plus récent) */
+        const undo = async re => {
+            await p.waitForFunction(src => [...document.querySelectorAll('.ui-toast, .toast')].some(x => new RegExp(src).test(x.textContent)), re.source, {timeout: 10000});
+            const h = await p.evaluateHandle(src => { const box = [...document.querySelectorAll('.ui-toast, .toast')].reverse().find(x => new RegExp(src).test(x.textContent)); return [...(box ? box.querySelectorAll('button') : [])].find(b => /Annuler/.test(b.textContent)); }, re.source);
+            await h.asElement().click();
+        };
         const post = (x, b) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, {}, {method: 'POST', body: z}).catch(e => ({error: e.message})), [x, b]);
 
         /* ═════════ 1. le serveur ═════════ */
@@ -106,21 +112,21 @@ echo 'ok';`);
             await p.click('[data-bis-ok="g:20"]');
             await p.waitForFunction(() => !document.querySelector('[data-bis-box] .bis-panel > .ctl-list [data-bis-key="g:20"]'), null, {timeout: 10000});
             assert.ok(await p.$('[data-bis-again="g:20"]'), 'dans « 🙈 écartés »');
-            await p.click('.ui-toast button:has-text("Annuler"), .toast button:has-text("Annuler")');
+            await undo(/Groupe écarté/);
             await p.waitForSelector('[data-bis-box] .bis-panel > .ctl-list [data-bis-key="g:20"]', {timeout: 10000});
         });
-        await t('« 🔗 Relier à… » : Paul LACOMBE est l’enfant de Jean MAZAUD → le groupe disparaît ; ↶ le fait revenir', async () => {
+        await t('« 🔗 Relier à… » : Antoine LACOMBE est l’enfant de Jean MAZAUD → le groupe disparaît ; ↶ le fait revenir', async () => {
             await p.evaluate(() => { window.LCNDA_PICKER = {openPicker: async () => ({id: 1, title: 'Jean MAZAUD'})}; });
             await p.click('[data-bis-link="g:10"]');
             await p.waitForSelector('dialog.bis-dialog select[name="who"]', {timeout: 10000});
-            await p.selectOption('dialog.bis-dialog select[name="who"]', '12');
+            await p.selectOption('dialog.bis-dialog select[name="who"]', '10');
             await p.selectOption('dialog.bis-dialog select[name="rel"]', 'child');
             await p.click('dialog.bis-dialog button[value="ok"]');
             await p.waitForFunction(() => !document.querySelector('[data-bis-key="g:10"]'), null, {timeout: 15000});
             const r = await api('isoles_list'); assert.strictEqual(r.main, 9); assert.ok(!r.groups.some(g => g.key === 'g:10'));
-            const link = JSON.parse(php(`$p=new PDO('sqlite:${path.join(tmp, 'genealogy.sqlite')}');echo json_encode($p->query("SELECT f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=12 AND (f.partner1_id=1 OR f.partner2_id=1)")->fetchAll(PDO::FETCH_ASSOC));`));
-            assert.strictEqual(link.length, 1, 'Jean MAZAUD est bien le parent de Paul LACOMBE');
-            await p.click('.ui-toast button:has-text("Annuler"), .toast button:has-text("Annuler")');
+            const link = JSON.parse(php(`$p=new PDO('sqlite:${path.join(tmp, 'genealogy.sqlite')}');echo json_encode($p->query("SELECT f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=10 AND (f.partner1_id=1 OR f.partner2_id=1)")->fetchAll(PDO::FETCH_ASSOC));`));
+            assert.strictEqual(link.length, 1, 'Jean MAZAUD est bien le parent d’Antoine LACOMBE');
+            await undo(/Lien ajouté/);
             await p.waitForSelector('[data-bis-key="g:10"]', {timeout: 15000});
         });
         await t('Réglages : éteindre le cadre (« genealogie-branches-isolees ») le retire du Contrôle', async () => {

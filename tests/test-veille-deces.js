@@ -196,6 +196,17 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const so = await p.evaluate(() => { const G = window.LCNDA_SO21; return {n: G.SITES.length, u: G.url('dansnoscoeurs', {first: 'Paul', last: 'MAZAUD', place: 'Brive-la-Gaillarde'}), rel: G.SITES[0].rel.from}; });
             assert.strictEqual(so.n, 4); assert.strictEqual(so.rel, 2000); assert.match(decodeURIComponent(so.u), /site:dansnoscoeurs\.fr "Paul MAZAUD" Brive-la-Gaillarde/);
         });
+        await t('la fiche de Pierre DURAND : le bloc « ⚰️ Décès possible » (rien sur une fiche sans piste) ; à la demande (dataSources)', async () => {
+            await p.evaluate(() => window.LCNDA_APP.openPersonById(3));
+            await p.waitForSelector('[data-vd-person="3"] [data-vd-card]', {timeout: 20000});
+            assert.match(await p.textContent('[data-vd-person="3"]'), /Décès possible : Pierre DURAND, né le 7 juillet 1980/);
+            assert.ok(await p.$('[data-vd-person="3"] [data-vd-yes]'));
+            await p.evaluate(() => window.LCNDA_APP.openPersonById(4));
+            await sleep(1500);
+            assert.strictEqual(await p.$('[data-vd-person="4"] [data-vd-card]'), null);
+            const ds = await p.evaluate(async () => { const s = window.LCNDA_EXT.dataSources.find(x => x.id === 'veille_deces'); const h = document.createElement('div'); await s.run({person: {id: 6}}, h); return [await s.installed(), h.textContent]; });
+            assert.strictEqual(ds[0], true); assert.match(ds[1], /Jean LACOMBE/);
+        });
         await t('pas d’erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true});
