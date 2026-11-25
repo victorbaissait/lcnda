@@ -4085,6 +4085,16 @@
 :root[data-lc-density] .h-txa-pc{gap:calc(2px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 :root[data-lc-density] .h-txa-pc{padding-left:calc(22px * var(--lc-sp))}
 :root[data-lc-density] .h-txa-more>summary{padding:calc(4px * var(--lc-sp)) 0}
+:root[data-lc-density] .h-txa-grid>.k{padding-top:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-txa-grid>.h-txa-sep{padding-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-txa-grid>.k.h-txa-sep{padding-top:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .h-txa-imgmode{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-txa-imgmode{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp)) calc(8px * var(--lc-sp)) !important}
+:root[data-lc-density] .h-txa-grid>.h-txa-imgmode.h-txa-sep{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-txa-grid>.k.h-txa-k-img{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-txa-imgopt{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-txa-imgopt{padding:calc(3px * var(--lc-sp)) 0}
+:root[data-lc-density] .h-txa-progrow{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-vers{gap:calc(5px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-vers{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root .h-tx-vers:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
@@ -4496,6 +4506,21 @@
 :root .toast.ui-toast:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
 :root[data-lc-density] .ui-toast-acts{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .ui-toast-btn{padding:calc(4px * var(--lc-sp)) calc(9px * var(--lc-sp)) !important}
+:root[data-lc-density] .ui-choice{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-bar{gap:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-sort{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-sort > button{padding:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp)) !important}
+:root[data-lc-density] .ui-choice-tools{gap:calc(2px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-link,:root[data-lc-density] .ui-choice-more{padding:calc(3px * var(--lc-sp)) 0 !important}
+:root[data-lc-density] .ui-choice-more{padding:calc(9px * var(--lc-sp)) calc(10px * var(--lc-sp)) !important}
+:root .ui-choice-list:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .ui-choice-opt{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-opt{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-opt.is-child{padding-left:calc(30px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-n{padding-left:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-h{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-empty{gap:calc(6px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ui-choice-empty{padding:calc(14px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-theme="dark"] .ui-card:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
 :root[data-theme="dark"] .ui-card:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
 @media (max-width: 480px){
@@ -4776,8 +4801,6 @@
 :root .rd-list:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .rd-item{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .rd-item{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
-:root[data-lc-density] .rd-picks{gap:calc(2px * var(--lc-sp))}
-:root[data-lc-density] .rd-q{margin-bottom:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-rhrow{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .ong-rhrow .ong-rh{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .ong-rhrow .ong-rh{padding:calc(2px * var(--lc-sp)) calc(4px * var(--lc-sp))}
@@ -6054,6 +6077,20 @@
 :root[data-lc-density] .h-tx-barwrap .h-tx-follow{padding:calc(3px * var(--lc-sp)) calc(9px * var(--lc-sp))}
 :root[data-lc-density] .h-txb-pick{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-txb-pick select{padding:calc(3px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pghd{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pghd{padding:0 calc(6px * var(--lc-sp)) 0 calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pghd button{padding:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pgact{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pgempty{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pgempty button{padding:calc(2px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pgcover{padding:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-place{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-place{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+@media (max-width:600px){
+  :root[data-lc-density] .h-tx-pghd{gap:calc(2px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-pghd button{padding:calc(2px * var(--lc-sp)) calc(7px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-place{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+}
 /* atelier-idees.css */
 :root[data-lc-density] .aip-pill{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .aip-pill{padding:calc(3px * var(--lc-sp)) calc(6px * var(--lc-sp)) calc(3px * var(--lc-sp)) calc(9px * var(--lc-sp))}
@@ -6290,27 +6327,16 @@
 :root .cx-dest:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root .cx-setmode:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .cx-setmode{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
-:root[data-lc-density] .cx-tabs{gap:calc(4px * var(--lc-sp))}
-:root[data-lc-density] .cx-tabs{padding-bottom:calc(4px * var(--lc-sp))}
-:root[data-lc-density] .cx-tabs button{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
-:root[data-lc-density] .cx-take-body{gap:calc(12px * var(--lc-sp))}
-:root[data-lc-density] .cx-prev{padding-left:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .cx-chk{padding-top:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .cx-dform,:root[data-lc-density] .cx-filt,:root[data-lc-density] .cx-roles{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .cx-ask{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .cx-ask{margin-bottom:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .cx-out{gap:calc(8px * var(--lc-sp))}
-:root[data-lc-density] .cx-ltake{gap:calc(8px * var(--lc-sp))}
-:root[data-lc-density] .cx-ltake{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
-:root .cx-ltake:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .cx-links{gap:calc(4px * var(--lc-sp))}
 :root .cx-drop:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root .cx-drop > div:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .cx-drop > div{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
 :root[data-lc-density] .cx-drop > div{gap:calc(4px * var(--lc-sp))}
-@media (max-width: 720px){
-  :root[data-lc-density] .cx-prev{padding:calc(8px * var(--lc-sp)) 0 0}
-}
 :root[data-lc-density] .cx-need{gap:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .cx-need{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .cx-need-yes,:root[data-lc-density] .cx-needs-pill{padding:1px calc(7px * var(--lc-sp))}
@@ -6332,6 +6358,113 @@
   :root[data-lc-density] .cx-sem-table tr{padding:calc(4px * var(--lc-sp)) 0}
   :root[data-lc-density] .cx-sem-table td{padding:calc(2px * var(--lc-sp)) calc(4px * var(--lc-sp))}
 }
+:root[data-lc-density] .cx-tk-head{gap:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .cx-tk-head{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .cx-destpill{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-destpill{padding:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-rail{padding:calc(12px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-rail button{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-rail button{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-rn.is-b{padding:0 calc(7px * var(--lc-sp))}
+:root[data-lc-density] .cx-tools{padding:calc(14px * var(--lc-sp)) calc(20px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-tools{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] dialog.cx-take .cx-srch input[type="search"],:root[data-lc-density] dialog.cx-put .cx-srch input[type="search"]{padding:calc(9px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(9px * var(--lc-sp)) calc(34px * var(--lc-sp))}
+:root[data-lc-density] .cx-chips{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-chip{padding:calc(4px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .cx-seg button{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-res{padding:calc(6px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .cx-pad{padding:calc(10px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .cx-gh{padding:calc(14px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-gh{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-gh.is-todo{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-rlist li{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-rlist li{padding:calc(10px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-chk{padding:calc(3px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-rt{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-rp{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-pl{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-pl{padding:calc(3px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-mgrid{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-mgrid{padding:calc(8px * var(--lc-sp))}
+:root .cx-take .cx-mgrid li:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cx-take .cx-mgrid li{padding:0 0 calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-mgrid li{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-mgrid .cx-chk{padding:calc(3px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-mgrid .cx-rt,:root[data-lc-density] .cx-take .cx-mgrid .cx-rp{padding:0 calc(9px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-prev{padding:calc(18px * var(--lc-sp)) calc(20px * var(--lc-sp))}
+:root[data-lc-density] .cx-dl{gap:calc(6px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-used{padding-left:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-parts li{padding:calc(2px * var(--lc-sp)) 0}
+:root[data-lc-density] .cx-sum li{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-sum li{padding:calc(6px * var(--lc-sp)) 0}
+:root[data-lc-density] .cx-sum-x{padding:0 calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-will{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-will{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-tk-foot{padding:calc(12px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .cx-tk-foot{gap:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .cx-cnt{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-acts{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-b{padding:calc(8px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root .cx-b.is-pri:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .cx-b.is-sec:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .cx-b.is-ter:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cx-b.is-sm{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-empty{padding:calc(34px * var(--lc-sp)) calc(22px * var(--lc-sp))}
+:root[data-lc-density] .cx-empty-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-empty-row{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-dform{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-ask{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-ask-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-ask-row input{padding:calc(8px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .cx-ex{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-lrow{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-lrow{padding:calc(10px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-lhead{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-lcrit,:root[data-lc-density] .cx-lacts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-understood{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-cards{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-cards{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-card{padding:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .cx-card{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-card .cx-gives{padding:calc(6px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .cx-card details[open]{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-ltake{gap:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .cx-ltake{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root .cx-ltake .cx-b.is-pri:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .cx-ltake .cx-b.is-sec:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .cx-ltake .cx-b.is-ter:is([data-lc-r], [data-lc-r] *), :root .cx-ltake .cx-x:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+@media (max-width: 640px){
+  :root[data-lc-density] .cx-tk-head{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .cx-quoi{padding:calc(8px * var(--lc-sp)) 0 0}
+  :root[data-lc-density] .cx-quoi button{padding:calc(9px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .cx-tools{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .cx-take .cx-res{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+  :root[data-lc-density] .cx-chips .cx-cf{gap:calc(6px * var(--lc-sp))}
+  :root[data-lc-density] .cx-chips .cx-cf{padding-bottom:calc(3px * var(--lc-sp))}
+  :root[data-lc-density] .cx-chips .cx-ca{gap:calc(6px * var(--lc-sp))}
+  :root[data-lc-density] .cx-take .cx-rlist li{gap:calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .cx-tk-foot{gap:calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .cx-tk-foot{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+  :root[data-lc-density] .cx-acts{gap:calc(6px * var(--lc-sp))}
+  :root[data-lc-density] .cx-take .cx-mgrid{gap:calc(8px * var(--lc-sp))}
+}
+:root[data-lc-density] .cx-put-body{padding:calc(14px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .cx-put-body{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-howcards{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-how{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-how{padding:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-how span{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-dlist{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-put .cx-dest{padding:calc(9px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-put .cx-dest{gap:calc(10px * var(--lc-sp))}
+@media (max-width: 640px){
+  :root[data-lc-density] .cx-put-body{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+}
+:root[data-lc-density] .cx-ldsel{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-ldsel{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-ldsel .cx-b{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root .cx-ldsel .cx-b.is-sec:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .cx-ldsel .cx-b.is-ter:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 /* comptes-famille.css */
 :root[data-lc-density] .cf-n{padding:0 calc(5px * var(--lc-sp))}
 :root[data-lc-density] .cf-table th,:root[data-lc-density] .cf-table td{padding:calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp))}

@@ -1294,78 +1294,119 @@
         if (rest.length && !preset.near && !preset.crit.some(c => c.kind === 'place')) preset.q = q.split(/\s+/).filter(w => rest.includes(fold(w).replace(/[’'.,;:!?()]/g, ''))).join(' ');
         return {id: d.id, preset};
     }
-    /** la barre « 🧺 Prendre… » de la page d'une liste (appelée par app-listes-donnees.js) ; venue de « Prendre depuis… » : le bandeau
-     *  « 📥 Tu choisis des lignes pour … », une case par ligne, « Prendre les N cochées », « Tout prendre (N) », « ← Revenir » */
-    let pageTake = null; // {L, bar, back}
+    /** la barre « 🧺 Prendre… » de la page d'une liste (appelée par app-listes-donnees.js).
+     *  « ☑ Choisir des lignes » (ou l'ouverture de « Prendre… ») : une case devant chaque ligne, Maj+clic pour une suite, « Tout cocher (N) »,
+     *  « × Désélectionner » ; « Prendre… » propose alors « les 2 cochées » ou « les 5 trouvées », et pour une longue liste « les 20 premières »
+     *  ou « de la ligne 10 à 30 » (dans l'ordre affiché). Les cases tiennent quand on trie ou qu'on voit les suivantes.
+     *  Venue de « Prendre depuis… » : le bandeau « 📥 Tu choisis des lignes pour … », « Prendre les N cochées », « Tout prendre (N) », « ← Revenir ». */
+    let pageTake = null; // {L, page, sel: Map(clé → ligne brute), on, last, bar, back}
+    const selKeyOf = (L, r) => pickKey(ldRowItem(L.d, L.state?.() || {}, r));
     function listBar(page, L) {
         if (!enabled() || !page) return;
         const send = page.querySelector('[data-ld-save]'); // dans la barre des critères (toujours visible)
         const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'ui-listbar-btn'; btn.dataset.ldTake = '';
         btn.textContent = `🧺 ${T('Prendre…')}`; btn.title = T('Mettre les lignes trouvées (avec leurs critères et leur source) au panier, ou dans une enquête, l’Atelier…');
-        if (send) send.after(btn); else page.querySelector('.ld-bar-row')?.prepend(btn);
+        const chooseBtn = document.createElement('button'); chooseBtn.type = 'button'; chooseBtn.className = 'ui-listbar-btn'; chooseBtn.dataset.ldChoose = ''; chooseBtn.setAttribute('aria-pressed', 'false');
+        chooseBtn.textContent = `☑ ${T('Choisir des lignes')}`; chooseBtn.title = T('Une case devant chaque ligne, pour n’en prendre qu’une partie (Maj+clic : une suite)');
+        if (send) send.after(btn, chooseBtn); else page.querySelector('.ld-bar-row')?.prepend(btn, chooseBtn);
+        const strip = document.createElement('div'); strip.className = 'cx-ldsel'; strip.hidden = true; strip.setAttribute('aria-live', 'polite');
+        page.querySelector('.ld-bar')?.after(strip);
         const back = listTake && listTake.id === L.d.id ? listTake : null;
-        pageTake = null;
+        const pt = pageTake = {L, page, sel: new Map(), on: false, last: -1, bar: null, back, strip, chooseBtn};
+        const setOn = on => { pt.on = on; chooseBtn.setAttribute('aria-pressed', String(on)); chooseBtn.classList.toggle('is-active', on); if (!on && !back) { page.querySelectorAll('.cx-ldck').forEach(x => x.remove()); } else repaintRows(); paintPageTake(); };
+        chooseBtn.addEventListener('click', () => setOn(!pt.on));
+        strip.addEventListener('click', e => {
+            if (e.target.closest('[data-cx-selall]')) { (L.rows?.() || []).forEach(r => pt.sel.set(selKeyOf(L, r), r)); syncSnap(); repaintRows(); paintPageTake(); }
+            if (e.target.closest('[data-cx-selnone]')) { pt.sel.clear(); syncSnap(); repaintRows(); paintPageTake(); }
+        });
         if (back?.target) {
-            btn.hidden = true; // un seul bouton pour prendre : celui du bandeau
+            btn.hidden = true; chooseBtn.hidden = true; // un seul bouton pour prendre : celui du bandeau
+            (back.snap.picked || []).forEach(([k, x]) => { if (x.kind === 'row' && x.data?.list === L.d.id) pt.sel.set(k, x._raw || x); });
             const dn = destName({ctx: back.ctx, target: back.target}).replace(/[«»"]/g, '').replace(/\s+/g, ' ').trim();
-            const bar = document.createElement('div'); bar.className = 'cx-ltake'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', T('Prendre des lignes'));
+            const bar = pt.bar = document.createElement('div'); bar.className = 'cx-ltake'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', T('Prendre des lignes'));
             bar.innerHTML = `<div class="cx-ltake-t"><b>📥 ${esc(T('Tu choisis des lignes pour {d}', {d: dn}))}</b><span>${esc(T('Coche les lignes, ou prends tout. Chaque ligne garde la liste comme source.'))}</span></div>
                 <button type="button" class="cx-b is-pri is-sm" data-cx-ltake-sel disabled></button><button type="button" class="cx-b is-sec is-sm" data-cx-ltake></button>
                 <button type="button" class="cx-b is-ter is-sm" data-cx-lback>← ${esc(T('Revenir à Prendre depuis…'))}</button><button type="button" class="cx-x" data-cx-lx aria-label="${esc(T('Fermer ce bandeau'))}">×</button>`;
             page.querySelector('.ld-bar')?.before(bar);
-            pageTake = {L, bar, back};
-            paintPageTake();
-            const done = () => { listTake = null; pageTake = null; bar.remove(); btn.hidden = false; page.querySelectorAll('.cx-ldck').forEach(x => x.remove()); };
+            const done = () => { listTake = null; bar.remove(); btn.hidden = false; chooseBtn.hidden = false; pt.back = null; setOn(false); };
             bar.querySelector('[data-cx-lx]').addEventListener('click', done);
             bar.querySelector('[data-cx-lback]').addEventListener('click', () => { const b = back; done(); backToTake(b.snap, b.target, b.ctx); });
             bar.querySelector('[data-cx-ltake]').addEventListener('click', async e => { e.currentTarget.disabled = true; const it = await listSet(L); if (!it) { e.currentTarget.disabled = false; return; } const r = await deliver(back.target, [it], {ctx: back.ctx}); if (r) done(); else e.currentTarget.disabled = false; });
             bar.querySelector('[data-cx-ltake-sel]').addEventListener('click', async e => {
-                const mine = new Map(back.snap.picked), rows = [...mine].filter(([, x]) => x.kind === 'row' && x.data?.list === L.d.id);
-                if (!rows.length) return; e.currentTarget.disabled = true;
-                const r = await deliver(back.target, rows.map(([, x]) => cleanIt(x)), {ctx: back.ctx});
+                const rows = pageSelItems(); if (!rows.length) return; e.currentTarget.disabled = true;
+                const r = await deliver(back.target, rows, {ctx: back.ctx});
                 if (!r) { e.currentTarget.disabled = false; return; }
-                rows.forEach(([k]) => mine.delete(k)); back.snap.picked = [...mine];
+                const keys = new Set([...pt.sel.keys()]); back.snap.picked = (back.snap.picked || []).filter(([k]) => !keys.has(k));
                 const b = back; done(); backToTake(b.snap, b.target, b.ctx);
             });
+            pt.on = true;
         }
+        paintPageTake();
         btn.addEventListener('click', async () => {
-            const n = L.total?.() || 0;
+            const n = L.total?.() || 0, c = pt.sel.size;
+            if (!pt.on) setOn(true); // les cases apparaissent : on peut n'en prendre qu'une partie
+            const part = async (a, b) => { let rows; try { rows = await L.allRows(); } catch (e) { toast(e.message, 'error'); return null; } return listSet(L, rows.slice(a, b), T('lignes {a} à {b}', {a: nf(a + 1), b: nf(Math.min(b, rows.length))})); };
+            const sub = (mk, label) => [
+                {icon: '▦', label: T('{w} au panier, comme un ensemble', {w: label}), run: async () => { const it = await mk(); if (it) take([it]); }},
+                {icon: '🧺', label: T('{w} au panier, ligne par ligne', {w: label}), run: async () => { const it = await mk(); if (it) take(explode(it)); }},
+                {icon: '📍', label: T('Mettre {w} dans…', {w: label.charAt(0).toLowerCase() + label.slice(1)}), run: async () => { const it = await mk(); if (it) putInto([it], {anchor: btn}); }}];
             UI().menuAt?.(btn, [
+                ...(c ? sub(() => listSet(L, [...pt.sel.values()], T('{n} lignes choisies', {n: nf(c)})), T(c > 1 ? 'Les {n} cochées' : 'La ligne cochée', {n: nf(c)})) : []),
+                ...(c ? ['-'] : []),
                 {icon: '▦', label: T('Tout au panier, comme un ensemble ({n} lignes)', {n: nf(n)}), run: async () => { const it = await listSet(L); if (it) take([it]); }},
                 n <= 300 ? {icon: '🧺', label: T('Au panier, ligne par ligne ({n})', {n: nf(n)}), run: async () => { const it = await listSet(L); if (it) take(explode(it)); }} : null,
-                {icon: '📍', label: T('Mettre dans…'), run: async () => { const it = await listSet(L); if (it) putInto([it], {anchor: btn}); }},
-            ].filter(Boolean), {title: T('Prendre les lignes trouvées')});
+                {icon: '📍', label: T('Mettre les {n} trouvées dans…', {n: nf(n)}), run: async () => { const it = await listSet(L); if (it) putInto([it], {anchor: btn}); }},
+                ...(n > 20 ? ['-', {icon: '⤒', label: T('Les 20 premières (dans l’ordre affiché) au panier'), run: async () => { const it = await part(0, 20); if (it) take([it]); }},
+                    {icon: '↔', label: T('De la ligne… à la ligne… (au panier)'), run: async () => {
+                        const v = await askText(T('Quelles lignes ? (ex. 10-30, dans l’ordre affiché)'), '1-20'); const m = String(v || '').match(/(\d+)\s*(?:-|–|à|a)\s*(\d+)/); if (!m) return;
+                        const a = Math.max(1, Math.min(Number(m[1]), Number(m[2]))), b = Math.max(Number(m[1]), Number(m[2])); const it = await part(a - 1, b); if (it) take([it]); }}] : []),
+            ].filter(Boolean), {title: c ? T('Prendre les {c} cochées ou les {n} trouvées', {c: nf(c), n: nf(n)}) : T('Prendre les lignes trouvées')});
         });
     }
-    function paintPageTake() {
-        const p = pageTake; if (!p?.bar?.isConnected) return;
-        const n = p.back.snap.picked.filter(([, x]) => x.kind === 'row' && x.data?.list === p.L.d.id).length, tot = p.L.total?.() || 0;
-        const sel = p.bar.querySelector('[data-cx-ltake-sel]'); sel.textContent = T(n > 1 ? 'Prendre les {n} cochées' : n ? 'Prendre la ligne cochée' : 'Prendre les lignes cochées', {n: nf(n)}); sel.disabled = !n;
-        p.bar.querySelector('[data-cx-ltake]').textContent = tot ? T('Tout prendre ({n})', {n: nf(tot)}) : T('Tout prendre');
+    /** les cases cochées → des éléments « ligne de liste » */
+    const pageSelItems = () => { const pt = pageTake; if (!pt) return []; const s = pt.L.state?.() || {}; return [...pt.sel.values()].map(r => (r && r.kind === 'row' ? cleanIt(r) : cleanIt(ldRowItem(pt.L.d, s, r)))); };
+    /** le bandeau de « Prendre depuis… » garde les cases (← Revenir) */
+    function syncSnap() {
+        const pt = pageTake; if (!pt?.back) return;
+        const s = pt.L.state?.() || {}, others = (pt.back.snap.picked || []).filter(([, x]) => !(x.kind === 'row' && x.data?.list === pt.L.d.id));
+        pt.back.snap.picked = [...others, ...[...pt.sel].map(([k, r]) => { const it = r && r.kind === 'row' ? r : {...ldRowItem(pt.L.d, s, r), _raw: r}; return [k, it]; })];
     }
-    /** la page a dessiné ses lignes : une case devant chacune (seulement pendant le bandeau) */
+    function paintPageTake() {
+        const pt = pageTake; if (!pt?.page?.isConnected) return;
+        const n = pt.sel.size, tot = pt.L.total?.() || 0, shown = (pt.L.rows?.() || []).length;
+        if (pt.strip) { pt.strip.hidden = !pt.on; pt.strip.innerHTML = pt.on ? `<b>${esc(n ? T(n > 1 ? '{n} cochées' : '{n} cochée', {n: nf(n)}) : T('Rien de coché'))}</b> <span class="cx-muted">${esc(T('Maj+clic : toute une suite'))}</span>
+            <button type="button" class="cx-b is-sec is-sm" data-cx-selall>☑ ${esc(T('Tout cocher ({n})', {n: nf(shown)}))}</button>${n ? `<button type="button" class="cx-b is-ter is-sm" data-cx-selnone>× ${esc(T('Désélectionner'))}</button>` : ''}` : ''; }
+        if (pt.bar?.isConnected) {
+            const sel = pt.bar.querySelector('[data-cx-ltake-sel]'); sel.textContent = T(n > 1 ? 'Prendre les {n} cochées' : n ? 'Prendre la ligne cochée' : 'Prendre les lignes cochées', {n: nf(n)}); sel.disabled = !n;
+            pt.bar.querySelector('[data-cx-ltake]').textContent = tot ? T('Tout prendre ({n})', {n: nf(tot)}) : T('Tout prendre');
+        }
+    }
+    const repaintRows = () => { const pt = pageTake; const res = pt?.page?.querySelector('[data-ld-results]'); if (res) { res.querySelectorAll('.cx-ldck').forEach(x => x.remove()); listRowsPainted(res, pt.L.rows?.() || [], {d: pt.L.d}); } };
+    /** la page a dessiné ses lignes : une case devant chacune (quand on choisit des lignes, ou pendant le bandeau) */
     function listRowsPainted(res, rows, {d} = {}) {
-        const p = pageTake; if (!p?.bar?.isConnected || !d || p.L.d.id !== d.id) return;
-        const s = p.L.state?.() || {}, keys = new Set(p.back.snap.picked.map(([k]) => k));
+        const pt = pageTake; if (!pt?.page?.isConnected || !d || pt.L.d.id !== d.id || !pt.on) return;
         const tr0 = res.querySelector('thead tr'); if (tr0 && !tr0.querySelector('.cx-ldck')) tr0.insertAdjacentHTML('afterbegin', `<th class="cx-ldck"><span class="cx-sr">${esc(T('Prendre'))}</span></th>`);
-        res.querySelectorAll('tbody tr[data-ld-row]').forEach(tr => {
+        const trs = [...res.querySelectorAll('tbody tr[data-ld-row]')];
+        trs.forEach(tr => {
             if (tr.querySelector('.cx-ldck')) return;
-            const r = rows[Number(tr.dataset.ldRow)]; if (!r) return;
-            const it = ldRowItem(d, s, r), k = pickKey(it), on = keys.has(k);
+            const i = Number(tr.dataset.ldRow), r = rows[i]; if (!r) return;
+            const k = selKeyOf(pt.L, r), on = pt.sel.has(k), title = ldRowItem(d, pt.L.state?.() || {}, r).title;
             tr.classList.toggle('is-on', on);
-            tr.insertAdjacentHTML('afterbegin', `<td class="cx-ldck"><input type="checkbox" ${on ? 'checked' : ''} aria-label="${esc(T('Prendre « {t} »', {t: it.title}))}"></td>`);
-            tr.querySelector('.cx-ldck input').addEventListener('change', e => {
-                const m = new Map(p.back.snap.picked); if (e.target.checked) m.set(k, it); else m.delete(k); p.back.snap.picked = [...m];
-                tr.classList.toggle('is-on', e.target.checked); paintPageTake();
+            tr.insertAdjacentHTML('afterbegin', `<td class="cx-ldck"><input type="checkbox" ${on ? 'checked' : ''} aria-label="${esc(T('Prendre « {t} »', {t: title}))}"></td>`);
+            tr.querySelector('.cx-ldck input').addEventListener('click', e => {
+                const val = e.target.checked, from = e.shiftKey && pt.last >= 0 ? Math.min(pt.last, i) : i, to = e.shiftKey && pt.last >= 0 ? Math.max(pt.last, i) : i;
+                for (let x = from; x <= to; x++) { const rr = rows[x]; if (!rr) continue; const kk = selKeyOf(pt.L, rr); if (val) pt.sel.set(kk, rr); else pt.sel.delete(kk);
+                    const t2 = res.querySelector(`tr[data-ld-row="${x}"]`); if (t2) { t2.classList.toggle('is-on', val); const cb = t2.querySelector('.cx-ldck input'); if (cb) cb.checked = val; } }
+                pt.last = i; syncSnap(); paintPageTake();
             });
         });
         paintPageTake();
     }
-    /** les lignes trouvées → un ensemble sourcé, qui garde sa demande (pour la relancer) */
-    async function listSet(L) {
-        let rows; try { rows = await L.allRows(); } catch (e) { toast(e.message, 'error'); return null; }
+    /** des lignes → un ensemble sourcé, qui garde sa demande (pour la relancer) ; rows : seulement celles-ci (cochées, les 20 premières…) */
+    async function listSet(L, only = null, part = '') {
+        let rows; if (only) rows = only; else { try { rows = await L.allRows(); } catch (e) { toast(e.message, 'error'); return null; } }
         if (!rows.length) { toast(T('Aucune ligne trouvée avec ces critères.')); return null; }
-        const t2 = L.table2d(rows.slice(0, 5000)), crit = L.critSummary(), d = L.d;
+        const t2 = L.table2d(rows.slice(0, 5000)), crit = [L.critSummary(), part].filter(Boolean).join(' · '), d = L.d;
         return {kind: 'set', title: `${d.icon || '📋'} ${T(d.label)}${crit ? ` — ${crit}` : ''}`, value: '',
             data: {icon: d.icon || '📋', columns: t2[0], rows: t2.slice(1), source: d.source || T(d.label), url: d.sourceUrl || '', criteria: crit, request: {list: d.id, state: L.state()}, taken: new Date().toISOString().slice(0, 10)},
             origin: {kind: 'list', id: d.id, label: `${T('Listes')} · ${T(d.label)}`, url: d.sourceUrl || '', open: {list: d.id, preset: L.state()}}};

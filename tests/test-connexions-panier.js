@@ -164,7 +164,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.click('#cx-pill'); await p.waitForSelector('.cx-panel [data-cx-put]');
             await p.click('.cx-panel [data-cx-put]'); await p.waitForSelector('.cx-put [data-cx-here="1"]');
             assert.match(await p.textContent('.cx-put [data-cx-here="1"]'), /Ici : l’enquête « Les parents de Jean MAZAUD »/);
-            await p.click('.cx-put [data-cx-here="1"]');
+            await p.click('.cx-put [data-cx-here="1"]'); await p.click('.cx-put [data-cx-putgo]');
             await p.waitForFunction(() => [...document.querySelectorAll('.cx-links')].some(x => /3 février 1978/.test(x.textContent)), null, {timeout: 15000});
             assert.strictEqual(await basketN(), 0);
             await clickUndo(); await sleep(600);
@@ -189,14 +189,14 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(await p.textContent('.cx-take [data-cx-n]'), /3 cochées/);
             assert.match(await p.textContent('.cx-take [data-cx-prev]'), /3 éléments choisis/); // plusieurs cases : le résumé à droite
             await p.click('.cx-take [data-cx-toput]'); await p.waitForSelector('.cx-put [data-cx-here="1"]');
-            const here = p.locator('.cx-put [data-cx-here="1"]', {hasText: 'note'}); await here.click();
+            const here = p.locator('.cx-put [data-cx-here="1"]', {hasText: 'note'}); await here.click(); await p.click('.cx-put [data-cx-putgo]'); // choisir, puis « Mettre dans … »
             await pollPage(async () => { const d = await window.LCNDA_APP.api('person', {id: 1}); return (d.notes || []).some(n => /DURAND/.test(n.body) && /Tulle/.test(n.body)); }, null, {timeout: 15000});
         });
         await t('… les 3 au panier → « 📍 Mettre dans » le Livre de famille (à la fin, avec la source) ; ↶ remet le livre comme avant', async () => {
             const items = [{kind: 'person', ref_id: 3, title: 'Pierre DURAND'}, {kind: 'place', ref_id: 2, title: 'Tulle'}, {kind: 'datum', title: 'Naissance — date', value: '3 février 1978', origin: {label: 'Fiche de Jean MAZAUD'}}];
             await p.evaluate(x => window.LCNDA_EXT.connexions.take(x), items); await sleep(400);
             await p.click('#cx-pill'); await p.click('.cx-panel [data-cx-put]'); await p.waitForSelector('.cx-put [data-cx-dest="book"]');
-            await p.click('.cx-put [data-cx-dest="book"]');
+            await p.click('.cx-put [data-cx-dest="book"]'); await p.click('.cx-put [data-cx-putgo]');
             await p.waitForFunction(() => /Pierre DURAND[\s\S]*Source : Fiche de Jean MAZAUD/.test((JSON.parse(localStorage.getItem('genealogie-family-book') || '{}').epilogue || '')), null, {timeout: 10000});
             assert.strictEqual(await basketN(), 0);
             await clickUndo();

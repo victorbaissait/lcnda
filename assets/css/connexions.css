@@ -352,3 +352,15 @@ dialog.cx-put { width: min(720px, 94vw); max-width: 94vw; height: min(680px, 90v
     .cx-put-body { padding: 12px 14px; }
     .cx-howcards { grid-template-columns: minmax(0, 1fr); }
 }
+/* ☑ Choisir des lignes (page d'une liste de données) : une bande discrète au-dessus du tableau */
+.cx-ldsel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 6px 0; padding: 6px 10px; border-radius: 10px; background: #eef4ff; color: #111; font-size: 13px; }
+.cx-ldsel[hidden] { display: none; }
+.cx-ldsel .cx-muted { color: #555; font-size: 12px; }
+.cx-ldsel .cx-b { border-radius: 8px; font: 700 12.5px system-ui, sans-serif; padding: 4px 10px; cursor: pointer; }
+.cx-ldsel .cx-b.is-sec { background: #fff; border: 1px solid #c9ced8; color: #111; }
+.cx-ldsel .cx-b.is-ter { background: none; border: 1px solid transparent; color: #055dff; }
+[data-ld-choose].is-active { background: var(--blue-soft, #eaf2ff); border-color: var(--blue, #055dff); }
+:root[data-theme="dark"] .cx-ldsel { background: #18233a; color: #eceef2; }
+:root[data-theme="dark"] .cx-ldsel .cx-muted { color: #b4b9c3; }
+:root[data-theme="dark"] .cx-ldsel .cx-b.is-sec { background: #1c1f24; color: #eceef2; border-color: #454b55; }
+:root[data-theme="dark"] .cx-ldsel .cx-b.is-ter { color: #a9c4ff; }

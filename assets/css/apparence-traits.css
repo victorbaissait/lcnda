@@ -1740,7 +1740,6 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-pr-arts ol.is-moments li, :root .h-pr-arts ol.is-moments li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #ddd)}
 :root.lc-frame .h-pr-tc, :root .h-pr-tc:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #ccc)}
 :root.lc-frame .h-pr-ancv, :root .h-pr-ancv:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #ccc)}
-:root.lc-frame .h-pr-pick, :root .h-pr-pick:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #ddd)}
 :root.lc-frame .h-rt-levels, :root .h-rt-levels:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line, #ddd)}
 :root.lc-frame .h-rt-actlist li, :root .h-rt-actlist li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #ddd)}
 :root.lc-frame .h-rt-bpick, :root .h-rt-bpick:is([data-lc-lines], [data-lc-lines] *) {border:2px solid transparent}
@@ -2584,6 +2583,9 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-tf .h-tf-fields .icon-button:hover, :root .h-tf .h-tf-fields .icon-button:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tf .h-tf-item .icon-button:hover, :root .h-tf .h-tf-item .icon-button:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#c9ced8}
 :root.lc-frame .h-tx-barwrap>:first-child, :root .h-tx-barwrap>:first-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0 !important}
 :root.lc-frame .h-txa-model, :root .h-txa-model:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px dashed var(--line,#e3e3e3)}
+:root.lc-frame .h-txa-grid>.h-txa-sep, :root .h-txa-grid>.h-txa-sep:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line,#d9dce3)}
+:root.lc-frame .h-txa-imgmode, :root .h-txa-imgmode:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#d9dce3)}
+:root.lc-frame .h-txa-grid>.h-txa-imgmode.h-txa-sep, :root .h-txa-grid>.h-txa-imgmode.h-txa-sep:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line,#d9dce3)}
 :root.lc-frame .h-tx-vers, :root .h-tx-vers:is([data-lc-lines], [data-lc-lines] *) {border:1.5px dashed var(--line,#c9ced8)}
 :root.lc-frame .h-tx-chip2, :root .h-tx-chip2:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#c9ced8)}
 :root.lc-frame .h-tx-chip2.is-ai, :root .h-tx-chip2.is-ai:is([data-lc-lines], [data-lc-lines] *) {border-color:#6929c4}
@@ -2894,6 +2896,12 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .toast-region[popover], :root .toast-region[popover]:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .toast.ui-toast, :root .toast.ui-toast:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .ui-toast-btn, :root .ui-toast-btn:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #fff !important}
+:root.lc-frame .ui-choice-sort > button, :root .ui-choice-sort > button:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--ui-line) !important}
+:root.lc-frame .ui-choice-sort > button[aria-pressed="true"], :root .ui-choice-sort > button[aria-pressed="true"]:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--ui-blue) !important}
+:root.lc-frame .ui-choice-link, :root .ui-choice-link:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ui-choice-more, :root .ui-choice-more:is([data-lc-lines], [data-lc-lines] *) {border:0 !important}
+:root.lc-frame .ui-choice-list, :root .ui-choice-list:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--ui-line)}
+:root.lc-frame .ui-choice-opt, :root .ui-choice-opt:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid transparent}
+:root.lc-frame .ui-choice-h, :root .ui-choice-h:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--ui-line)}
 :root[data-theme="dark"].lc-frame .ui-listbar-chip, :root[data-theme="dark"] .ui-listbar-chip:is([data-lc-lines], [data-lc-lines] *) {border-color:#3d7dff !important}
 :root[data-theme="dark"].lc-frame .ui-listbar-btn, :root[data-theme="dark"] .ui-listbar-btn:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .ui-listbar select, :root[data-theme="dark"] .ui-listbar select:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .ui-listbar-menu select, :root[data-theme="dark"] .ui-listbar-menu select:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .ui-listbar-in, :root[data-theme="dark"] .ui-listbar-in:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color) !important}
 :root[data-theme="dark"].lc-frame .ui-listbar-menu, :root[data-theme="dark"] .ui-listbar-menu:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
@@ -3758,6 +3766,19 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-tx-cpanel, :root[data-theme="dark"] .h-tx-cpanel:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-zcpop, :root[data-theme="dark"] .h-tx-zcpop:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-cpanel.is-pin .h-tx-ch[aria-pressed=true], :root[data-theme="dark"] .h-tx-cpanel.is-pin .h-tx-ch[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#5b93ff}
 :root[data-theme="dark"].lc-frame .h-tx-zcpop button[aria-pressed=true], :root[data-theme="dark"] .h-tx-zcpop button[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#5b93ff}
+:root.lc-frame .h-tx-pghd, :root .h-tx-pghd:is([data-lc-lines], [data-lc-lines] *) {border-top:2px solid #b7c6dc;border-bottom:1px solid #dde3ec}
+:root.lc-frame .h-tx-pghd.is-on, :root .h-tx-pghd.is-on:is([data-lc-lines], [data-lc-lines] *) {border-top-color:#1473e6}
+:root.lc-frame .h-tx-pghd button, :root .h-tx-pghd button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .h-tx-pghd.is-fold, :root .h-tx-pghd.is-fold:is([data-lc-lines], [data-lc-lines] *) {border-top-color:#c9bf9e}
+:root.lc-frame .h-tx-pgempty button, :root .h-tx-pgempty button:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed #9db6d8}
+:root.lc-frame .h-tx-pgcover, :root .h-tx-pgcover:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e2ddcc}
+:root.lc-frame .h-tx-place, :root .h-tx-place:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #b9d3f5}
+:root[data-theme="dark"].lc-frame .h-tx-pghd, :root[data-theme="dark"] .h-tx-pghd:is([data-lc-lines], [data-lc-lines] *) {border-top-color:#4b5a70;border-bottom-color:#363c46}
+:root[data-theme="dark"].lc-frame .h-tx-pghd.is-on, :root[data-theme="dark"] .h-tx-pghd.is-on:is([data-lc-lines], [data-lc-lines] *) {border-top-color:#5aa0ff}
+:root[data-theme="dark"].lc-frame .h-tx-pghd.is-fold, :root[data-theme="dark"] .h-tx-pghd.is-fold:is([data-lc-lines], [data-lc-lines] *) {border-top-color:#7a6e4d}
+:root[data-theme="dark"].lc-frame .h-tx-pgempty button, :root[data-theme="dark"] .h-tx-pgempty button:is([data-lc-lines], [data-lc-lines] *) {border-color:#4b6a95}
+:root[data-theme="dark"].lc-frame .h-tx-pgcover, :root[data-theme="dark"] .h-tx-pgcover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-place, :root[data-theme="dark"] .h-tx-place:is([data-lc-lines], [data-lc-lines] *) {border-color:#36557f}
 /* atelier-idees.css */
 :root.lc-frame .aip-pill-x, :root .aip-pill-x:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .ais-strip, :root .ais-strip:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#eceef2)}
@@ -3880,14 +3901,9 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .cx-dest, :root .cx-dest:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
 :root.lc-frame .cx-dest:hover, :root .cx-dest:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .cx-dest:focus-visible, :root .cx-dest:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
 :root.lc-frame .cx-setmode, :root .cx-setmode:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
-:root.lc-frame .cx-tabs button, :root .cx-tabs button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
-:root.lc-frame .cx-tabs button[aria-selected="true"], :root .cx-tabs button[aria-selected="true"]:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
-:root.lc-frame .cx-prev, :root .cx-prev:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid var(--line-color)}
 :root.lc-frame .cx-rt, :root .cx-rt:is([data-lc-lines], [data-lc-lines] *) {border:0}
-:root.lc-frame .cx-ltake, :root .cx-ltake:is([data-lc-lines], [data-lc-lines] *) {border:2px dashed var(--blue)}
 :root.lc-frame .cx-drop, :root .cx-drop:is([data-lc-lines], [data-lc-lines] *) {border:3px solid var(--blue)}
 :root.lc-frame .cx-drop > div, :root .cx-drop > div:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--blue)}
-:root.lc-frame .cx-prev, :root .cx-prev:is([data-lc-lines], [data-lc-lines] *) {border-left:0;border-top:1px solid var(--line-color)}
 :root.lc-frame .cx-need, :root .cx-need:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #d4a800}
 :root.lc-frame .cx-need.is-done, :root .cx-need.is-done:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#1a7f37}
 :root.lc-frame .cx-need-yes, :root .cx-need-yes:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .cx-needs-pill, :root .cx-needs-pill:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #1a7f37}
@@ -3906,6 +3922,61 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .cx-sem-table td, :root .cx-sem-table td:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root[data-theme="dark"].lc-frame .cx-need-yes, :root[data-theme="dark"] .cx-need-yes:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cx-needs-pill, :root[data-theme="dark"] .cx-needs-pill:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cx-ans-tag.is-yes, :root[data-theme="dark"] .cx-ans-tag.is-yes:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cx-who.is-yes, :root[data-theme="dark"] .cx-who.is-yes:is([data-lc-lines], [data-lc-lines] *) {border-color:#4cc070}
 :root[data-theme="dark"].lc-frame .cx-ans-tag.is-find, :root[data-theme="dark"] .cx-ans-tag.is-find:is([data-lc-lines], [data-lc-lines] *) {border-color:#5b93ff}
+:root.lc-frame dialog.cx-take, :root dialog.cx-take:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame dialog.cx-put, :root dialog.cx-put:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-tk-head, :root .cx-tk-head:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--cx-line)}
+:root.lc-frame .cx-x, :root .cx-x:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .cx-rail, :root .cx-rail:is([data-lc-lines], [data-lc-lines] *) {border-right:1px solid var(--cx-line)}
+:root.lc-frame .cx-rail button, :root .cx-rail button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-tools, :root .cx-tools:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--cx-line)}
+:root.lc-frame dialog.cx-take .cx-srch input[type="search"], :root dialog.cx-take .cx-srch input[type="search"]:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame dialog.cx-put .cx-srch input[type="search"], :root dialog.cx-put .cx-srch input[type="search"]:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame dialog.cx-take .cx-srch input[type="search"]:focus, :root dialog.cx-take .cx-srch input[type="search"]:focus:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame dialog.cx-put .cx-srch input[type="search"]:focus, :root dialog.cx-put .cx-srch input[type="search"]:focus:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--cx-blue)}
+:root.lc-frame .cx-chip, :root .cx-chip:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-chip[aria-pressed="true"], :root .cx-chip[aria-pressed="true"]:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .cx-chip.is-on, :root .cx-chip.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--cx-blue)}
+:root.lc-frame .cx-seg, :root .cx-seg:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-seg button, :root .cx-seg button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-seg button + button, :root .cx-seg button + button:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid var(--cx-line2)}
+:root.lc-frame .cx-gh.is-todo, :root .cx-gh.is-todo:is([data-lc-lines], [data-lc-lines] *) {border-top:1px dashed var(--cx-line2)}
+:root.lc-frame .cx-take .cx-rlist li, :root .cx-take .cx-rlist li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent;border-bottom:0}
+:root.lc-frame .cx-take .cx-rlist li + li, :root .cx-take .cx-rlist li + li:is([data-lc-lines], [data-lc-lines] *) {border-top-color:var(--cx-line)}
+:root.lc-frame .cx-take .cx-rlist li.is-focus, :root .cx-take .cx-rlist li.is-focus:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--cx-blue)}
+:root.lc-frame .cx-th, :root .cx-th:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-take .cx-mgrid li, :root .cx-take .cx-mgrid li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line)}
+:root.lc-frame .cx-take .cx-mgrid li + li, :root .cx-take .cx-mgrid li + li:is([data-lc-lines], [data-lc-lines] *) {border-top-color:var(--cx-line)}
+:root.lc-frame .cx-take .cx-mgrid li.is-on, :root .cx-take .cx-mgrid li.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--cx-blue)}
+:root.lc-frame .cx-take .cx-mgrid .cx-th, :root .cx-take .cx-mgrid .cx-th:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-gut, :root .cx-gut:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid var(--cx-line)}
+:root.lc-frame .cx-take .cx-prev, :root .cx-take .cx-prev:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-take .cx-parts li, :root .cx-take .cx-parts li:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-sum li, :root .cx-sum li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--cx-line)}
+:root.lc-frame .cx-sum-x, :root .cx-sum-x:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-tk-foot, :root .cx-tk-foot:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--cx-line2)}
+:root.lc-frame .cx-b.is-pri, :root .cx-b.is-pri:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-blue)}
+:root.lc-frame .cx-b.is-sec, :root .cx-b.is-sec:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-b.is-ter, :root .cx-b.is-ter:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .cx-ask-row input, :root .cx-ask-row input:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-lrow, :root .cx-lrow:is([data-lc-lines], [data-lc-lines] *) {border:0;border-top:1px solid var(--cx-line)}
+:root.lc-frame .cx-card, :root .cx-card:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-ltake, :root .cx-ltake:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-blue)}
+:root.lc-frame .cx-ltake .cx-b.is-pri, :root .cx-ltake .cx-b.is-pri:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-blue)}
+:root.lc-frame .cx-ltake .cx-b.is-sec, :root .cx-ltake .cx-b.is-sec:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root.lc-frame .cx-ltake .cx-b.is-ter, :root .cx-ltake .cx-b.is-ter:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .cx-ltake .cx-x, :root .cx-ltake .cx-x:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root[data-theme="dark"].lc-frame .cx-ltake .cx-b.is-sec, :root[data-theme="dark"] .cx-ltake .cx-b.is-sec:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .cx-take.is-sheet .cx-prev, :root .cx-take.is-sheet .cx-prev:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid var(--cx-line2)}
+:root.lc-frame dialog.cx-take, :root dialog.cx-take:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-rail, :root .cx-rail:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-quoi button, :root .cx-quoi button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-take.is-sheet .cx-prev, :root .cx-take.is-sheet .cx-prev:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-howto, :root .cx-howto:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-how, :root .cx-how:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2)}
+:root.lc-frame .cx-how:has(input:checked), :root .cx-how:has(input:checked):is([data-lc-lines], [data-lc-lines] *) {border-color:var(--cx-blue)}
+:root.lc-frame .cx-put .cx-dest, :root .cx-put .cx-dest:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .cx-put .cx-dest:hover, :root .cx-put .cx-dest:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:transparent}
+:root.lc-frame .cx-put .cx-dest.is-on, :root .cx-put .cx-dest.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--cx-blue)}
+:root.lc-frame dialog.cx-put, :root dialog.cx-put:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-ldsel .cx-b.is-sec, :root .cx-ldsel .cx-b.is-sec:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root.lc-frame .cx-ldsel .cx-b.is-ter, :root .cx-ldsel .cx-b.is-ter:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame [data-ld-choose].is-active, :root [data-ld-choose].is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue, #055dff)}
+:root[data-theme="dark"].lc-frame .cx-ldsel .cx-b.is-sec, :root[data-theme="dark"] .cx-ldsel .cx-b.is-sec:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 /* assistant-ia.css */
 :root.lc-frame .aia-panel, :root .aia-panel:is([data-lc-lines], [data-lc-lines] *) {border-left:2px solid var(--ink,#111)}
 :root.lc-frame .aia-head, :root .aia-head:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#e5e5e5)}

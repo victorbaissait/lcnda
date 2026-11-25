@@ -1,0 +1,13 @@
+fr ¦ en ¦ es ¦ de ¦ it ¦ pt ¦ pl ¦ nl
+# ═════ La liste de choix commune (UI.choiceList, app-ui.js) : filtres « Pays », « Filtrer ▾ », recueils… ═════
+=choix ¦ choice|choices ¦ opción|opciones ¦ Option|Optionen ¦ scelta|scelte ¦ opção|opções ¦ opcja|opcje|opcji ¦ keuze|keuzes
+{n} choix sur {total} ¦ {n} of {total} choices ¦ {n} de {total} opciones ¦ {n} von {total} Optionen ¦ {n} scelte su {total} ¦ {n} de {total} opções ¦ {n} z {total} opcji ¦ {n} van {total} keuzes
+par nombre ¦ by count ¦ por número ¦ nach Anzahl ¦ per numero ¦ por número ¦ według liczby ¦ op aantal
+Choix ¦ Choices ¦ Opciones ¦ Optionen ¦ Scelte ¦ Opções ¦ Opcje ¦ Keuzes
+Tout cocher les {n} affichés ¦ Tick the {n} shown ¦ Marcar las {n} mostradas ¦ Die {n} angezeigten ankreuzen ¦ Spunta le {n} mostrate ¦ Marcar as {n} mostradas ¦ Zaznacz {n} widocznych ¦ De {n} getoonde aanvinken
+Cochés ({n}) ¦ Ticked ({n}) ¦ Marcadas ({n}) ¦ Angekreuzt ({n}) ¦ Spuntate ({n}) ¦ Marcadas ({n}) ¦ Zaznaczone ({n}) ¦ Aangevinkt ({n})
+Les autres ¦ The others ¦ Las demás ¦ Die anderen ¦ Le altre ¦ As restantes ¦ Pozostałe ¦ De andere
+Montrer les suivants ¦ Show the next ones ¦ Mostrar las siguientes ¦ Die nächsten zeigen ¦ Mostra le successive ¦ Mostrar as seguintes ¦ Pokaż następne ¦ De volgende tonen
++ {n} autres : tape pour chercher ¦ + {n} more: type to search ¦ + {n} más: escribe para buscar ¦ + {n} weitere: tippen zum Suchen ¦ + altre {n}: scrivi per cercare ¦ + {n} outras: escreve para procurar ¦ + {n} więcej: pisz, aby szukać ¦ + {n} meer: typ om te zoeken
+Aucun choix ne contient « {q} » ¦ No choice contains “{q}” ¦ Ninguna opción contiene «{q}» ¦ Keine Option enthält „{q}“ ¦ Nessuna scelta contiene «{q}» ¦ Nenhuma opção contém «{q}» ¦ Żadna opcja nie zawiera „{q}” ¦ Geen keuze bevat ‘{q}’
+Entrée : cocher le premier choix trouvé · ↓ : aller dans la liste · Échap : vider ¦ Enter: tick the first match · ↓: go into the list · Esc: clear ¦ Intro: marcar la primera encontrada · ↓: ir a la lista · Esc: vaciar ¦ Eingabe: den ersten Treffer ankreuzen · ↓: in die Liste · Esc: leeren ¦ Invio: spunta la prima trovata · ↓: vai nell’elenco · Esc: svuota ¦ Enter: marcar a primeira encontrada · ↓: ir para a lista · Esc: limpar ¦ Enter: zaznacz pierwszy wynik · ↓: przejdź do listy · Esc: wyczyść ¦ Enter: eerste treffer aanvinken · ↓: naar de lijst · Esc: wissen

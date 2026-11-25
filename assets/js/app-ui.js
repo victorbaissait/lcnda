@@ -1308,12 +1308,14 @@
     }
     UI.scan = (root = document) => scan(root);
     UI.enhance = el => enhanceOne(el);
-    let queued = new Set(), timer = 0;
+    let queued = new Set(), timer = 0, since = 0;
+    // une page qui bouge sans arrêt (horloge, widgets du tableau de bord) ne doit pas retarder les cases : au plus 300 ms d'attente
     new MutationObserver(list => {
         list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1 && !n.classList?.contains('ui-pop')) queued.add(n); }));
         if (!queued.size) return;
+        const now = Date.now(); if (!timer) since = now;
         clearTimeout(timer);
-        timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (n.isConnected) scan(n); }); }, 30);
+        timer = setTimeout(() => { timer = 0; const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (n.isConnected) scan(n); }); }, now - since > 300 ? 0 : 30);
     }).observe(document.documentElement, {childList: true, subtree: true});
     /* ═════ 🕘 Historique unifié « ↶ » ═════
      * Chaque message « ↶ Annuler » de l'app s'inscrit dans l'historique de la séance (libellé, heure, fait / annulé) :
