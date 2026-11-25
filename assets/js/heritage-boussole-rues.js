@@ -266,7 +266,7 @@
     async function decl(lat, lon, year) { const [G, I] = await loadField(); return declination(G, I, lat, lon, year); }
 
     /* ─────────── 🧭 les phrases et la source ─────────── */
-    const FIELD_SRC = () => srcLine(`${esc(T('Calcul fait ici avec le modèle gufm1 (Jackson, Jonkers et Walker, 2000 : bâti sur les relevés des marins et des observatoires — plus de 83 000 mesures rien qu’avant 1800 —, 1590-1990) puis l’IGRF-14 (depuis 1900). Précision : environ un demi-degré à un degré avant 1800.'))}
+    const FIELD_SRC = () => srcLine(`${esc(T('Calcul fait ici avec le modèle gufm1 (Jackson, Jonkers et Walker, 2000 : bâti sur les relevés des marins et des observatoires — plus de 83 000 mesures rien qu’avant 1800 —, 1590-1990) puis l’IGRF-14 (depuis 1900). Précision : environ un demi-degré à un degré avant 1800.'))} ${esc(T('gufm1 : aucun texte de licence trouvé ; modèle diffusé librement par ses auteurs, retiré sur simple demande.'))}
         ${link('https://doi.org/10.1098/rsta.2000.0569', T('gufm1 ↗'))} · ${link('https://www.ncei.noaa.gov/products/international-geomagnetic-reference-field', T('IGRF ↗'))} · ${link('https://www.ngdc.noaa.gov/geomag/faqgeom.shtml', T('NOAA : modèles historiques ↗'))}`);
     const WHY = () => T('Le nord de la boussole (le nord magnétique) n’est pas le vrai nord (le pôle) : l’écart change d’un lieu à l’autre et d’un siècle à l’autre, parce que le champ magnétique de la Terre bouge lentement.');
     function needle(d, size = 46) {
@@ -655,7 +655,7 @@
         const tg = ([k, label, sub]) => `<label class="checkbox-line cplus-tg" data-br-tg="${k}"><input type="checkbox" ${s[k] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
         const sz = about.sizes || {};
         const rows = [
-            [link('https://doi.org/10.1098/rsta.2000.0569', 'gufm1 — Jackson, Jonkers et Walker (2000)'), T('Le champ magnétique de 1590 à 1990 (relevés des marins et des observatoires)'), T('dans l’app ({s})', {s: fmtSize(sz.gufm1 || 38000)}), T('modèle publié, fichier diffusé librement par les auteurs'), T('Jackson et al., Phil. Trans. R. Soc. A 358 (2000)')],
+            [link('https://doi.org/10.1098/rsta.2000.0569', 'gufm1 — Jackson, Jonkers et Walker (2000)'), T('Le champ magnétique de 1590 à 1990 (relevés des marins et des observatoires)'), T('dans l’app ({s})', {s: fmtSize(sz.gufm1 || 38000)}), T('modèle publié, fichier diffusé librement par les auteurs') + ' — ' + T('aucun texte de licence trouvé : retiré sur simple demande des auteurs'), T('Jackson et al., Phil. Trans. R. Soc. A 358 (2000)')],
             [link('https://www.ncei.noaa.gov/products/international-geomagnetic-reference-field', 'IGRF-14 (IAGA)'), T('Le champ magnétique depuis 1900'), T('dans l’app ({s})', {s: fmtSize(sz.igrf || 7000)}), T('données publiques (NOAA NCEI)'), 'IAGA, IGRF-14'],
             [link('https://opendata.paris.fr/explore/dataset/denominations-des-voies-caduques/', T('Ville de Paris — nomenclature des voies')), T('Rues de Paris : nom, date du nom, anciens noms'), T('dans l’app ({s})', {s: fmtSize(sz.paris || 800000)}), 'ODbL 1.0', T('Ville de Paris')],
             [link('https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Citation_et_r%C3%A9utilisation_du_contenu_de_Wikip%C3%A9dia', T('Wikipédia en français, en ligne')), T('Les événements d’un jour, d’un mois, d’une année'), T('en ligne, gardé'), 'CC BY-SA 4.0', T('les contributeurs de Wikipédia, lien vers la page')]];

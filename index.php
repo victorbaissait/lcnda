@@ -1659,7 +1659,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-metiers-rivieres.js?v=3" defer></script>
 <script src="assets/js/heritage-histoire-autour.js?v=1" defer></script>
 <script src="assets/js/heritage-commune-culture.js?v=2" defer></script>
-<script src="assets/js/heritage-boussole-rues.js?v=2" defer></script>
+<script src="assets/js/heritage-boussole-rues.js?v=3" defer></script>
 <script src="assets/js/heritage-droit-pouvoir.js?v=1" defer></script>
 <script src="assets/js/heritage-brevets-annuaires.js?v=1" defer></script>
 <script src="assets/js/heritage-pays-memoire.js?v=1" defer></script>
