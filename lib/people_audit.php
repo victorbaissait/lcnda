@@ -98,7 +98,8 @@ function pa_blood_link(PDO $pdo, int $id, int $root, ?array $rootAnc = null): ?a
     if ($best['b'] >= 1) {
         $sides = [];
         foreach (pa_parent_map($pdo)[$root] ?? [] as $p) { $pa = pa_ancestors($pdo, $p); foreach ($commons as $c) { if (isset($pa[$c])) { $sides[$p] = true; break; } } }
-        if (count($sides) === 1) { $via = (int) array_key_first($sides); }
+        // « par » seulement quand le lien passe par une autre personne : sur la fiche de la mère, pas « mère · par (elle-même) »
+        if (count($sides) === 1 && (int) array_key_first($sides) !== $id) { $via = (int) array_key_first($sides); }
     } elseif ($best['a'] >= 2) {
         $pm = pa_parent_map($pdo); $cur = $id; $guard = 0;
         while ($guard++ < 60) { $up = null; foreach ($pm[$cur] ?? [] as $p) { $anc = pa_ancestors($pdo, $p); if (isset($anc[$root])) { $up = $p; break; } } if (!$up || $up === $root) { break; } $cur = $up; }

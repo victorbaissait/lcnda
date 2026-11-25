@@ -235,6 +235,8 @@
         renderPage.draw = draw;
     }
     function bindPage(ws, token) {
+        // #workspace reste le même d'une page à l'autre : un seul écouteur (sinon, après 3 visites, « Comparer » ouvrait 3 fenêtres)
+        if (ws.__ctlBound) return; ws.__ctlBound = true;
         const redraw = () => renderPage.draw?.();
         ws.addEventListener('click', async e => {
             const t = e.target.closest('button'); if (!t || !ws.contains(t)) return;

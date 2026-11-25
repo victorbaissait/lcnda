@@ -22,7 +22,8 @@ const appRoot = path.resolve(__dirname, '..');
 const js = f => fs.readFileSync(path.join(appRoot, 'assets/js', f), 'utf8');
 const php = f => fs.readFileSync(path.join(appRoot, f), 'utf8');
 let failed = 0, count = 0;
-const t = async (name, fn) => { try { await fn(); count++; console.log('✓', name); } catch (e) { failed++; console.error('✗', name, '\n ', e && e.stack || e); } };
+const only = process.env.CHAOS_ONLY ? new RegExp(process.env.CHAOS_ONLY) : null; // CHAOS_ONLY=3g : rejouer un seul cas
+const t = async (name, fn) => { if (only && !only.test(name)) return; try { await fn(); count++; console.log('✓', name); } catch (e) { failed++; console.error('✗', name, '\n ', e && e.stack || e); } };
 const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`); process.exit(failed ? 1 : 0); };
 
 (async () => {
@@ -64,9 +65,11 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
         $F($g, $h, [$i, $j], '2 septembre 1908', 1908, $limoges);
         $pdo->prepare('UPDATE persons SET is_start=1 WHERE id=?')->execute([$i]);
         $pdo->prepare('INSERT INTO notes(entity_type,entity_id,title,body) VALUES(?,?,?,?)')->execute(['person', $a, 'Métier', 'Tisserand à Tulle.']);
+        $chant = $PL('Chantonnay', 'Vendée'); $pdo->prepare('UPDATE places SET latitude=?, longitude=? WHERE id=?')->execute([46.6833, 1.05, $chant]); // la météorite de 1812 (🌠)
+        $k = $P('Jacques', 'BOUTIN', 'male'); $E($k, 'BIRT', '2 avril 1795', 1795, $chant); $E($k, 'DEAT', '7 mai 1860', 1860, $chant);
         file_put_contents(MEDIA_DIR.'/portrait.png', base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='));
         $pdo->exec("INSERT INTO media(source_type,title,media_type,filename) VALUES('local','Portrait d’Henri','image','portrait.png')"); $pdo->prepare('INSERT INTO media_links(media_id,entity_type,entity_id) VALUES(?,?,?)')->execute([(int) $pdo->lastInsertId(), 'person', $g]);
-        echo json_encode(['odette' => $j, 'jean' => $c, 'paul' => $i, 'henri' => $g, 'n' => (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn()]);`));
+        echo json_encode(['odette' => $j, 'jean' => $c, 'paul' => $i, 'henri' => $g, 'suzanne' => $h, 'jacques' => $k, 'n' => (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn()]);`));
     const tables = () => JSON.parse(runPhp(String.raw`$p = new PDO('sqlite:'.getenv('GENEALOGY_DATA_DIR').'/genealogy.sqlite'); echo json_encode(['act' => (int) $p->query("SELECT count(*) FROM sqlite_master WHERE name='act_transcriptions'")->fetchColumn()]);`));
     assert.equal(tables().act, 0, 'la table des transcriptions n’existe pas encore (elle se crée à la première lecture d’une fiche)');
 
@@ -102,12 +105,17 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
             const open = async (hash) => {
                 const page = await ctx.newPage(); page.errs = []; page.toasts = []; page.posts = [];
                 page.on('pageerror', e => page.errs.push(e.message));
+                page.inflight = 0; page.on('request', () => page.inflight++); for (const ev of ['requestfinished', 'requestfailed']) page.on(ev, () => page.inflight--);
                 page.on('request', q => { const m = q.url().match(/action=([a-z_]+)/); if (m && q.method() === 'POST' && m[1] !== 'save_settings') page.posts.push(m[1]); });
-                await page.goto(base + hash); await page.waitForFunction(() => window.LCNDA_APP?.state?.csrf);
+                await page.goto(base + hash, { timeout: 180000 }); await page.waitForFunction(() => window.LCNDA_APP?.state?.csrf, null, { timeout: 180000 }); // machine chargée : on attend
                 await page.evaluate(() => { const seen = new WeakSet(); new MutationObserver(() => document.querySelectorAll('.ui-toast').forEach(n => { if (seen.has(n)) return; seen.add(n); (window.__toasts ||= []).push((n.classList.contains('error') ? 'ERREUR ' : '') + n.querySelector('.ui-toast-text')?.textContent); })).observe(document.body, { subtree: true, childList: true }); });
                 return page;
             };
             const toasts = p => p.evaluate(() => window.__toasts || []);
+            // le réseau s'est tu depuis « ms » (rien en cours) : une seconde fenêtre attendait sa réponse du serveur ; machine lente = on attend plus
+            const quiet = async (p, ms = 800) => { let since = Date.now(); const end = Date.now() + 90000; while (Date.now() < end) { if (p.inflight > 0) since = Date.now(); else if (Date.now() - since >= ms) return; await p.waitForTimeout(50); } };
+            const nOpen = (p, sel) => p.evaluate(s => document.querySelectorAll(s).length, sel);
+            const titled = (p, re) => p.evaluate(src => [...document.querySelectorAll('dialog[open]')].filter(d => new RegExp(src).test(d.querySelector('h2')?.textContent || '')).length, re.source);
             const sql = q => JSON.parse(runPhp(`$p = new PDO('sqlite:'.getenv('GENEALOGY_DATA_DIR').'/genealogy.sqlite'); echo json_encode($p->query(${JSON.stringify(q)})->fetchAll(PDO::FETCH_NUM));`));
             const editBtn = '[aria-label="Modifier l’identité"]';
 
@@ -164,6 +172,77 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
                     assert.equal(await page.evaluate(() => document.querySelectorAll('dialog.bl-dlg[open]').length), 1, sel);
                     await page.evaluate(() => document.querySelectorAll('dialog.bl-dlg').forEach(d => { d.close(); d.remove(); }));
                 }
+                assert.deepEqual(page.errs, []);
+                await page.close();
+            });
+
+            await t('3d. double-clic sur 📝 « Écrire sur cette personne » : un seul traitement de texte', async () => {
+                const page = await open(`#personnes/${ids.henri}`); const b = page.locator('[data-wp-write]').first(); await b.waitFor({ timeout: 60000 });
+                await b.dblclick();
+                await page.waitForFunction(() => document.querySelector('dialog.wp-dlg[open]'), null, { timeout: 60000 });
+                await quiet(page);
+                assert.equal(await nOpen(page, 'dialog.wp-dlg[open]'), 1);
+                assert.deepEqual(page.errs, []);
+                await page.close();
+            });
+
+            await t('3e. ✨ « Récit d’une vie » : un clic = la seule fenêtre des choix (pas de diaporama vide derrière) ; double-clic = une seule ; « Créer » = un seul diaporama', async () => {
+                const page = await open(`#personnes/${ids.henri}`); const b = page.locator('[data-ss-story-person]').first(); await b.waitFor({ timeout: 60000 });
+                await b.click();
+                await page.waitForFunction(() => [...document.querySelectorAll('dialog[open] h2')].some(h => /Récit d’une vie/.test(h.textContent)), null, { timeout: 60000 });
+                await quiet(page);
+                assert.equal(await titled(page, /Récit d’une vie/), 1); assert.equal(await nOpen(page, 'dialog.h-ss-dlg'), 0, 'un simple clic : pas de diaporama vide derrière les choix');
+                await page.locator('dialog[open]').last().getByRole('button', { name: 'Annuler' }).click();
+                await page.waitForFunction(() => !document.querySelector('dialog[open]'), null, { timeout: 30000 });
+                assert.equal(await nOpen(page, 'dialog.h-ss-dlg'), 0, '« Annuler » ne laisse rien');
+                await b.dblclick();
+                await page.waitForFunction(() => [...document.querySelectorAll('dialog[open] h2')].some(h => /Récit d’une vie/.test(h.textContent)), null, { timeout: 60000 });
+                await quiet(page);
+                assert.equal(await titled(page, /Récit d’une vie/), 1, 'double-clic : une seule fenêtre des choix'); assert.equal(await nOpen(page, 'dialog.h-ss-dlg'), 0);
+                await page.locator('dialog[open]').last().getByRole('button', { name: 'Créer le récit' }).click();
+                await page.waitForFunction(() => document.querySelectorAll('dialog.h-ss-dlg[open] [data-ss-slides] .h-ss-item').length, null, { timeout: 90000 });
+                await quiet(page);
+                assert.equal(await nOpen(page, 'dialog[open]'), 1, 'le diaporama seul'); assert.equal(await nOpen(page, 'dialog.h-ss-dlg'), 1);
+                assert.match(await page.locator('dialog.h-ss-dlg [data-ss-name]').inputValue(), /Récit d’une vie — Henri MAZAUD/);
+                assert.deepEqual(page.errs, []);
+                await page.close();
+            });
+
+            await t('3f. 🧭 Ton lien sur la fiche de la mère / du père : « mère », sans « par » elle-même ; « par » reste pour la grand-mère', async () => {
+                const page = await open(`#personnes/${ids.suzanne}`);
+                const kin = id => page.waitForFunction(i => document.querySelector(`[data-pa-kin-head="${i}"]`)?.textContent.trim(), id, { timeout: 60000 }).then(h => h.jsonValue());
+                const mere = await kin(ids.suzanne); assert.match(mere, /mère/); assert.doesNotMatch(mere, /par /, mere);
+                await page.evaluate(id => window.LCNDA_APP.openPersonById(id), ids.henri);
+                const pere = await kin(ids.henri); assert.match(pere, /père/); assert.doesNotMatch(pere, /par /, pere);
+                const r = await page.evaluate(ids => window.LCNDA_APP.api('people_links', { ids: ids.join(','), root: 0 }), [ids.suzanne, ids.henri, ids.jean]);
+                assert.deepEqual([r.links[ids.suzanne], r.links[ids.henri]], ['mère', 'père']);
+                const pl = await page.evaluate(id => window.LCNDA_APP.api('person_link', { id, root: 0 }), ids.jean);
+                assert.equal(pl.link.label, 'arrière-grand-père'); assert.equal(pl.link.via?.name, 'Henri MAZAUD', 'par le père : une vraie information');
+                assert.deepEqual(page.errs, []);
+                await page.close();
+            });
+
+            await t('3g. double-clic sur « ✗ » d’une carte 🌠 (Ce qui le concerne) : une seule carte cachée, une seule fenêtre', async () => {
+                const page = await open(`#personnes/${ids.jacques}`);
+                const card = page.locator('[data-ts-block] li.ts-sug').filter({ hasText: /1812/ }).filter({ hasText: /Chantonnay/ }).filter({ has: page.locator('.ts-ico', { hasText: '🌠' }) });
+                const nope = card.locator('[data-ts-nope]').first(); await nope.waitFor({ timeout: 90000 });
+                await quiet(page);
+                const before = await page.evaluate(() => document.querySelectorAll('[data-ts-block] li.ts-sug').length), sum = (await card.first().locator('.ts-sum').textContent()).trim();
+                await nope.scrollIntoViewIfNeeded(); await nope.dblclick();
+                await quiet(page);
+                const after = await page.evaluate(() => ({ n: document.querySelectorAll('[data-ts-block] li.ts-sug').length, dlg: document.querySelectorAll('dialog[open]').length, t: (window.__toasts || []).filter(x => /Caché/.test(x)).length, chant: [...document.querySelectorAll('[data-ts-block] li.ts-sug .ts-sum')].map(x => x.textContent.trim()) }));
+                after.chant = after.chant.includes(sum) ? sum : false;
+                assert.equal(after.chant, false, 'la carte 🌠 est cachée'); assert.equal(after.dlg, 0, 'aucune fenêtre'); assert.equal(after.t, 1, 'une seule « ✗ Caché »'); assert.equal(after.n, before - 1, 'une seule carte en moins');
+                assert.deepEqual(page.errs, []);
+                await page.close();
+            });
+
+            await t('3h. double-clic sur « 🔗 Relier un recueil » (aucun recueil) : une seule question « Aucun recueil »', async () => {
+                const page = await open(`#personnes/${ids.henri}`); const b = page.locator('[data-rc-attach]').first(); await b.waitFor({ timeout: 90000 });
+                await b.scrollIntoViewIfNeeded(); await b.dblclick();
+                await page.waitForFunction(() => [...document.querySelectorAll('dialog[open]')].some(d => /Aucun recueil/.test(d.textContent)), null, { timeout: 60000 });
+                await quiet(page);
+                assert.equal(await page.evaluate(() => [...document.querySelectorAll('dialog[open]')].filter(d => /Aucun recueil/.test(d.textContent)).length), 1);
                 assert.deepEqual(page.errs, []);
                 await page.close();
             });

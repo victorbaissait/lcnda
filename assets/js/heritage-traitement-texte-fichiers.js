@@ -260,7 +260,9 @@
     }
     tools.chooseTemplate = chooseTemplate;
     /** depuis une fiche : « 📝 Écrire sur cette personne » (la biographie F5 déjà posée) */
-    tools.writeAbout = async (pid, ctx = {}) => { try { const t = tools.TEMPLATES.find(x => x.key === 'recit'); const html = await t.html(pid); const ppl = await api('textdoc_people', {ids: String(pid)}).catch(() => ({people: {}})); return openDoc({...ctx, data: dataOf(html, {tpl: 'recit'}), name: i18n('Récit — {name}', {name: ppl.people?.[pid]?.name || i18n('un ancêtre')})}); } catch (e) { toast(e.message, 'error'); } };
+    // double-clic sur 📝 : un seul traitement de texte (avant : deux, empilés, tous deux « modifié »)
+    tools.writeAbout = (pid, ctx = {}) => A().once(`wp-write:${Number(pid)}`, () => writeAboutNow(pid, ctx));
+    const writeAboutNow = async (pid, ctx = {}) => { try { const t = tools.TEMPLATES.find(x => x.key === 'recit'); const html = await t.html(pid); const ppl = await api('textdoc_people', {ids: String(pid)}).catch(() => ({people: {}})); return openDoc({...ctx, data: dataOf(html, {tpl: 'recit'}), name: i18n('Récit — {name}', {name: ppl.people?.[pid]?.name || i18n('un ancêtre')})}); } catch (e) { toast(e.message, 'error'); } };
 
     /* ═════════ ⤒ Importer (K13) : un nouveau document fait du fichier ═════════ */
     async function readAny(file) {

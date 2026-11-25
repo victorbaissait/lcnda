@@ -808,6 +808,19 @@
     }
 
     ext.openSlideshow = open;
+    /** ✨ Récit d'une vie depuis une fiche (ou la liste) : d'abord ses choix, puis le diaporama déjà rempli. Une seule fenêtre à la fois
+     *  (avant : le diaporama vide s'ouvrait derrière les choix et restait là après « Annuler » ; un double-clic en ouvrait deux de chaque). */
+    function storyThenOpen(ctx = {}) {
+        return A().once('ss-story', async () => {
+            const o = await storyOptions({pid: Number(ctx.personId) || 0}); if (!o) return null;
+            let st; try { st = await lifeStory(o); } catch (e) { toast(e.message, 'error'); return null; }
+            if (!st.show.slides.length) { toast('Rien à raconter pour cette personne.', 'error'); return null; }
+            const r = await open({...ctx, preset: {show: st.show, name: st.name}});
+            toast(`✨ ${plural(st.count, 'diapositive')} : chaque texte vient de la fiche. Tout reste modifiable.`);
+            return r;
+        });
+    }
+    ext.storyThenOpen = storyThenOpen;
     ext.slideshowInternals = {makeEngine, mapBackground, whenOf, fullDate};
     ext.editToolsExtra = ext.editToolsExtra || [];
     /** ⤒ Rouvrir un diaporama exporté (« 💾 Fichier », type lcnda-diaporama) : il s'ouvre dans l'éditeur, tel quel (cartes animées,
@@ -841,7 +854,7 @@
         rename: (id, name) => post('rename_slideshow', {id, name}),
         remove: id => post('delete_slideshow', {id}), createLabel: '＋ Nouveau',
         extra: '<button type="button" class="button secondary" data-et-x="story" title="Les photos, les lieux et la vie d’une personne, en diaporama tout fait">✨ Récit d’une vie</button><button type="button" class="button secondary" data-et-x="kimport" title="PowerPoint (.pptx), OpenDocument (.odp), PDF, images, Markdown, texte, JSON">⤒ Importer une présentation</button><button type="button" class="button secondary" data-et-x="ssimport" title="Un fichier de diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier)">⤒ Importer un diaporama</button>',
-        onExtra: (k, again) => { if (k === 'ssimport') return importShowFile(again); if (k === 'story') open({story: true, onSaved: again, onClose: again}); if (k === 'kimport') ext.importPresentation ? ext.importPresentation({onSaved: again, onClose: again}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); }});
+        onExtra: (k, again) => { if (k === 'ssimport') return importShowFile(again); if (k === 'story') storyThenOpen({onSaved: again, onClose: again}); if (k === 'kimport') ext.importPresentation ? ext.importPresentation({onSaved: again, onClose: again}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); }});
 
     /* ✨ sur la fiche d'une personne : un bouton dans la rangée du haut (ext.afterPerson, sans toucher app.js) */
     ext.afterPerson = ext.afterPerson || [];
@@ -851,5 +864,5 @@
         row.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action h-ss-storybtn" data-ss-story-person="${Number(p.id)}" title="${esc(i18n('✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche'))}" aria-label="${esc(i18n('Récit d’une vie en diaporama'))}">✨</button>`);
     });
     injectCss();
-    document.addEventListener('click', e => { const b = e.target.closest?.('[data-ss-story-person]'); if (!b) return; e.preventDefault(); open({story: true, personId: Number(b.dataset.ssStoryPerson)}); });
+    document.addEventListener('click', e => { const b = e.target.closest?.('[data-ss-story-person]'); if (!b) return; e.preventDefault(); storyThenOpen({personId: Number(b.dataset.ssStoryPerson)}); });
 })();

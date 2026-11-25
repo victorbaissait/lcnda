@@ -11,7 +11,9 @@
  *     20 secondes, heritage-tresors.js) ;
  *  5. blocs « contexte » de la fiche (🧭 boussole, 🌍 monde et coutumes, ⛰️ terre et gens, 🪨 terre et mots,
  *     🏷️ nom et villages, 🌊 rivières, 🌾 terroir) : la naissance déplacée (date, lieu), ils montraient encore
- *     l'ancienne (réponses gardées en mémoire par personne).
+ *     l'ancienne (réponses gardées en mémoire par personne) ;
+ *  6. ✅ Contrôle de la base : chaque visite ajoutait un écouteur de clics à #workspace : après 3 visites, « Comparer »
+ *     ouvrait 3 fenêtres l'une sur l'autre (heritage-controle.js).
  *   node tests/test-interrupteurs-aller-retour.js */
 'use strict';
 const assert = require('assert');
@@ -50,6 +52,8 @@ $I['pierre'] = $per('Pierre', 'MAZAUD', 'male', [['BIRT', '1920', $tulle]]);
 $I['marie'] = $per('Marie', 'DURAND', 'female', [['BIRT', '1925', $paris]]);
 $I['jean'] = $per('Jean', 'MAZAUD', 'male', [['BIRT', '1950', $tulle]]);
 $I['henri'] = $per('Henri', 'DURAND', 'male', [['BIRT', '1888', $paris]]);
+// un doublon possible de Jean (même nom, même naissance) : une alerte « Comparer » dans ✅ Contrôle de la base
+$I['jean2'] = $per('Jean', 'MAZAUD', 'male', [['BIRT', '1950', $tulle]]);
 $pdo->exec('UPDATE persons SET is_start=1 WHERE id=' . $I['jean']);
 $fam($I['louis'], $I['anne'], [$I['pierre']]);
 $fam($I['pierre'], $I['marie'], [$I['jean']]);
@@ -72,7 +76,8 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
     // la feuille de style des ajouts de Personnes (le <link> est posé dans index.php par la personne qui intègre)
     const css = fs.readFileSync(path.join(root, 'assets/css/audit-personnes.css'), 'utf8');
     const ctx = await browser.newContext({viewport: {width: 1440, height: 900}});
-    await ctx.route(/tile\.|openstreetmap|arcgisonline|ign\.fr|carto/, r => r.fulfill({status: 200, contentType: 'image/png', body: PNG}));
+    // les tuiles des cartes (hors de l'app) : une image vide ; jamais les fichiers de l'app (heritage-carto-…js)
+    await ctx.route(u => { const h = new URL(u).hostname; return h !== '127.0.0.1' && /tile|openstreetmap|arcgisonline|ign\.fr|carto/.test(h); }, r => r.fulfill({status: 200, contentType: 'image/png', body: PNG}));
     await ctx.route(url => new URL(url).pathname === '/' || /index\.php$/.test(new URL(url).pathname), async route => {
         const r = await route.fetch(); let body = await r.text();
         if (!/audit-personnes\.css/.test(body)) body = body.replace('</head>', `<style id="ar-test-css">${css}</style></head>`);
@@ -124,7 +129,7 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
             // la fiche redessinée sur place, comme après « Enregistrer » dans la fenêtre d'un événement (le bloc d'avant est marqué)
             const sky = async () => {
                 await p.evaluate(i => { document.querySelectorAll(`[data-sky-block="${i}"]`).forEach(b => { b.dataset.old = '1'; }); window.LCNDA_APP.openPersonById(i); }, ID.louis);
-                await p.waitForFunction(i => document.querySelector(`[data-sky-block="${i}"]:not([data-old]) [data-sky-txt]`)?.textContent, ID.louis, {timeout: 20000});
+                await p.waitForFunction(i => document.querySelector(`[data-sky-block="${i}"]:not([data-old]) [data-sky-txt]`)?.textContent, ID.louis, {timeout: 60000});
                 return p.evaluate(i => ({txt: document.querySelector(`[data-sky-block="${i}"]:not([data-old]) [data-sky-txt]`).textContent}), ID.louis);
             };
             const before = await sky();
@@ -144,7 +149,7 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
         await t('🧭🌍⛰️🪨🏷️🌊🌾 les blocs « contexte » de la fiche suivent la naissance déplacée (1790, Paris)', async () => {
             // (la naissance de Louis a été changée à l'essai précédent) : sa fiche redessinée après l'enregistrement
             await p.evaluate(i => { document.querySelectorAll(`[data-br-person="${i}"]`).forEach(b => { b.dataset.old = '1'; }); window.LCNDA_APP.openPersonById(i); }, ID.louis);
-            await p.waitForFunction(i => document.querySelector(`[data-br-person="${i}"]:not([data-old])`), ID.louis, {timeout: 20000});
+            await p.waitForFunction(i => document.querySelector(`[data-br-person="${i}"]:not([data-old])`), ID.louis, {timeout: 60000}); // fiche lourde (près de 70 blocs) : le temps qu'il faut
             const host = (sel, re) => p.waitForFunction(([s, r]) => new RegExp(r).test(document.querySelector(s)?.innerText || ''), [sel, re], {timeout: 30000}).then(() => true, () => false);
             const text = sel => p.evaluate(s => (document.querySelector(s)?.innerText || '(absent)').replace(/\s+/g, ' ').slice(0, 300), sel);
             const want = [
@@ -185,6 +190,16 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_APP.setModule('carte'));
             await p.waitForFunction(i => document.querySelector(`#pp-layer [data-pp-pin="${i}"]`), ID.m2, {timeout: 20000}).catch(() => {});
             assert.deepEqual(await pins(), [ID.m1, ID.m2].sort(), 'la vue de Paris doit être sur la Carte');
+        });
+
+        await t('✅ Contrôle de la base : revenu 3 fois sur la page, « Comparer » n’ouvre qu’une fenêtre', async () => {
+            const go = async () => { await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'controle'; A.setModule('maintenance'); }); await p.waitForSelector('#workspace [data-ctl-compare]', {timeout: 30000}); };
+            for (let k = 0; k < 3; k++) { await go(); await p.evaluate(() => window.LCNDA_APP.setModule('dashboard')); await sleep(600); }
+            await go();
+            await p.evaluate(() => document.querySelector('#workspace [data-ctl-compare]').click());
+            await p.waitForSelector('dialog[open]', {timeout: 15000}); await sleep(2500);
+            assert.equal(await p.evaluate(() => document.querySelectorAll('dialog[open]').length), 1, 'une seule fenêtre « Comparer »');
+            await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
         });
 
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs.filter(e => !/ResizeObserver/.test(e)), []); });

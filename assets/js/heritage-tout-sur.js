@@ -404,8 +404,10 @@
             ${actions && !RO() ? (s.kept ? `<span class="ts-kept">✓ ${esc(T('gardé'))}</span>` : `<span class="ts-acts"><button type="button" class="button small secondary" data-ts-keep="${i}" title="${esc(T('Le garder sur la fiche, et l’ajouter aussi à d’autres'))}">✓ ${esc(T('Garder'))}</button><button type="button" class="icon-button small" data-ts-nope="${i}" title="${esc(T('Pas utile : ne plus le proposer'))}" aria-label="${esc(T('Pas utile'))}">✗</button></span>`) : ''}</li>`;
     }
     function bindLines(box, list, life, redraw) {
-        box.querySelectorAll('[data-ts-keep]').forEach(b => b.addEventListener('click', () => openKeep(list[Number(b.dataset.tsKeep)], life, redraw)));
-        box.querySelectorAll('[data-ts-nope]').forEach(b => b.addEventListener('click', () => nope(list[Number(b.dataset.tsNope)], life, redraw)));
+        // le second clic d'un double-clic (e.detail > 1) tombe sur la carte suivante, remontée sous la souris quand la première est cachée :
+        // il ne compte pas (avant : double-clic sur « ✗ » de « 🌠 1812 : Chantonnay » → deux cartes cachées, deux « ✗ Caché »)
+        box.querySelectorAll('[data-ts-keep]').forEach(b => b.addEventListener('click', e => { if (e.detail > 1) return; openKeep(list[Number(b.dataset.tsKeep)], life, redraw); }));
+        box.querySelectorAll('[data-ts-nope]').forEach(b => b.addEventListener('click', e => { if (e.detail > 1) return; nope(list[Number(b.dataset.tsNope)], life, redraw); }));
         box.querySelectorAll('[data-ts-missing]').forEach(b => b.addEventListener('click', () => open({person: life.pid, focus: 'missing'})));
     }
 

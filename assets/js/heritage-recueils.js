@@ -869,7 +869,9 @@
             <button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">🔗 Relier un recueil</button></div>`;
     }
     /** Fenêtre « Relier un recueil » depuis une fiche, un village… */
-    ext.recueilAttachDialog = async (type, key, after, {folderId = null, folders = null} = {}) => {
+    // double-clic sur « 🔗 Relier un recueil » : une seule question / une seule fenêtre (avant : deux fois « Aucun recueil »)
+    ext.recueilAttachDialog = (type, key, after, o = {}) => A().once(`rc-attach:${type}:${key}`, () => attachDialogNow(type, key, after, o));
+    const attachDialogNow = async (type, key, after, {folderId = null, folders = null} = {}) => {
         if (type === 'investigation' && !folders) { const host = document.querySelector(`[data-rc-host][data-rc-type="investigation"][data-rc-key="${CSS.escape(String(key))}"]`); try { folders = JSON.parse(host?.dataset.rcFolders || '[]'); } catch (_) { folders = []; } }
         const list = (await get('recueils').catch(() => ({recueils: []}))).recueils || [];
         if (!list.length) { if (await A().confirmBox('Pas encore de recueil. En créer un maintenant (Listes › Recueils) ?', {title: 'Aucun recueil', okLabel: 'Créer un recueil'})) { S().listType = 'recueils'; Object.assign(st(), {id: 0}); A().setModule('listes'); } return; }
