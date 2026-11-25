@@ -1,7 +1,7 @@
 /* LCNDA — 🖥 Le serveur d'IA locale (serveur : lib/ia_serveur.php ; essai : tests/test-ia-unsloth.js).
  * Réglages → « 🤖 IA » : Ollama (conseillé, par défaut) / Unsloth / autre serveur compatible OpenAI (LM Studio, llama.cpp, Jan…),
  * l'adresse (sur cet ordinateur seulement), une clé d'API locale facultative (Unsloth Studio : « sk-unsloth-… »),
- * « ↻ Tester la connexion », « 🔎 Chercher sur cet ordinateur » (les ports habituels), la liste des modèles du serveur,
+ * « ↻ Tester la connexion », « 🔍 Chercher sur cet ordinateur » (les ports habituels), la liste des modèles du serveur,
  * et « ⓘ Ollama ou Unsloth ? » (une fenêtre qui explique, en mots simples).
  * Le choix est rangé sur l'ordinateur (DATA_DIR commun, genealogie-ia-serveur.json), jamais la clé dans le navigateur.
  * Pour d'autres fichiers : LCNDA_EXT.iaServeur.mount(hôte, {onChange}) · .explain()

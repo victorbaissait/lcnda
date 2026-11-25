@@ -118,9 +118,10 @@
 :root[data-theme="dark"] .h-tx-sel-frame{stroke:#5aa2ff}
 :root[data-theme="dark"] .h-tx-tools .h-tx-zoomlab[data-fit=width] b,:root[data-theme="dark"] .h-tx-tools .h-tx-zoomlab[data-fit=real] b{color:#7db6ff}
 /* le message d'état ne doit pas faire passer la barre du haut à la ligne (l'image changerait de taille à chaque message) */
-.h-tx-top .h-tx-status{flex:0 1 110px;width:110px;min-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+/* 11 (audit) : en haut, seulement l'état de l'enregistrement (court, ne se coupe pas) ; les messages vont dans la barre du bas */
+.h-tx-top .h-tx-status{flex:0 0 auto;min-width:0;white-space:nowrap;text-align:right;font-size:12px}
+.h-tx-top .h-tx-status:empty{display:none}
 .h-tx-top [data-tx=date_text],.h-tx-top [data-tx=place],.h-tx-top [data-tx=source]{flex:0 1 150px;min-width:80px}
-.h-tx-top [data-tx-state]{flex:0 0 auto}
 /* Listes → Transcriptions d'actes : les premières lignes du texte sur la fiche */
 .h-atl .ui-card small:has(.h-atl-text){white-space:normal;overflow:visible;text-overflow:clip}
 .h-atl-text{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;font:italic 13px/1.4 Georgia,"Times New Roman",serif;color:inherit;margin:2px 0}
@@ -152,16 +153,13 @@
 .h-tx-step.is-active b{font-weight:800}
 .h-tx-step:focus-visible{outline:2px solid #1473e6;outline-offset:-2px}
 .h-tx-flow .h-tx-stepbody{border-bottom:0;min-height:36px}
-.h-tx-pane{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap;min-width:0;padding:2px 4px;border-radius:8px}
-.h-tx-pane.is-shown{background:#eef4ff;box-shadow:inset 0 0 0 1px #b9d0ff}
-.h-tx-pane .h-tx-panehint{display:none}.h-tx-pane.is-shown[data-tx-pane=read] .h-tx-panehint{display:inline}
-:root[data-theme="dark"] .h-tx-pane.is-shown{background:#18233a;box-shadow:inset 0 0 0 1px #2f4a7a}
-@media (max-width:700px){.h-tx-dlg .h-tx-pane:not(.is-shown){display:none}}
-.h-tx-pane[hidden],.h-tx-stepnext[hidden]{display:none}
+/* 14 (audit ; maquette atelier-etapes.html) : la frise est un vrai jeu d'onglets — seuls les boutons de l'étape choisie, sur ordinateur aussi */
+.h-tx-pane{display:flex;align-items:center;gap:4px 6px;flex-wrap:wrap;min-width:0;flex:1 1 auto}
+.h-tx-dlg .h-tx-pane:not(.is-shown),.h-tx-pane[hidden],.h-tx-stepnext[hidden]{display:none}
+.h-tx-pane>.spacer{flex:1 1 8px}
 .h-tx-panehint{font-size:12px;min-width:0}
 .h-tx-tools .h-tx-stepnext{font-weight:600}
-.h-tx-addbar{flex:none;display:flex;align-items:center;justify-content:space-between;gap:6px 10px;flex-wrap:wrap;padding:6px 10px;border-top:2px solid #1473e6;background:#eef4ff;font-size:12.5px}
-.h-tx-addinfo{min-width:0;flex:1 1 180px}
+.h-tx-addinfo{min-width:0;font-size:12px;color:#6e6e73}
 :root[data-theme="dark"] .h-tx-flow,:root[data-theme="dark"] .h-tx-steps{background-color:#24272c;border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-step{border-right-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-step i{border-color:#8e9299;color:#c7c9cd}
@@ -170,7 +168,6 @@
 :root[data-theme="dark"] .h-tx-step.is-cur i{background:#1473e6;border-color:#1473e6;color:#fff}
 :root[data-theme="dark"] .h-tx-step:hover{background:#2c3036}
 :root[data-theme="dark"] .h-tx-step.is-active{background:#18233a;border-bottom-color:#5b93ff}
-:root[data-theme="dark"] .h-tx-addbar{background:#18233a;border-top-color:#5b93ff}
 /* ─── 📱 téléphone (décision 4) : trois onglets Image / Texte / Personnes, un seul à la fois, en grand ─── */
 .h-tx-ptabs{display:none}
 .h-tx-pcount:empty{display:none}
@@ -265,19 +262,19 @@
 :root[data-theme="dark"] .h-tx-mirror .h-tx-hit.is-cur{background:#a35a00;box-shadow:0 0 0 2px #ffb347}
 :root[data-theme="dark"] .h-tx-keys td{border-color:#3a3f46}
 /* ─── avancement : l'état de l'acte et ce qui reste (un clic va au premier endroit) ─── */
-.h-tx-prog{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;padding:4px 8px 6px;font-size:12px}
+.h-tx-prog{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding:5px 8px;font-size:12px;border-bottom:1px solid #e3e3e8}
 .h-tx-prog:empty{display:none}
 .h-tx-prog button{font:inherit;color:inherit;cursor:pointer}
-.h-tx-pstate{border:0;background:none;padding:0 2px}
+.h-tx-stepbody .h-tx-pchip{border:1px solid #d6d6db;background:#fff;border-radius:12px;padding:1px 8px;white-space:nowrap;font-size:12px}
 .h-tx-pchip{border:1px solid #d6d6db;background:#fff;border-radius:12px;padding:1px 8px;white-space:nowrap}
-.h-tx-pchip.is-warn{border-color:#e0b93a;background:#fff8d6;color:#7a5d00}
-.h-tx-pchip.is-ok{color:#1a7f37;border-color:#b7dfc2;background:#eaf6ee}
+.h-tx-stepbody .h-tx-pchip.is-warn,.h-tx-pchip.is-warn{border-color:#e0b93a;background:#fff8d6;color:#7a5d00}
+.h-tx-stepbody .h-tx-pchip.is-ok,.h-tx-pchip.is-ok{color:#1a7f37;border-color:#b7dfc2;background:#eaf6ee}
 .h-tx-pchip:hover{border-color:#1473e6}
 .h-tx-prog .button{padding:2px 10px;min-height:0}
-@media (max-width:700px){.h-tx-dlg .h-tx-prog .h-tx-pchip.is-ok{display:none}.h-tx-dlg .h-tx-prog{padding:2px 8px 4px}}
-:root[data-theme="dark"] .h-tx-pchip{background:#2c3036;border-color:#3a3f46}
-:root[data-theme="dark"] .h-tx-pchip.is-warn{background:#2c2612;border-color:#8a6d1c;color:#f0d276}
-:root[data-theme="dark"] .h-tx-pchip.is-ok{background:#15281c;border-color:#2b5a3a;color:#4cc070}
+@media (max-width:700px){.h-tx-dlg .h-tx-stepbody .h-tx-pchip.is-ok{display:none}.h-tx-dlg .h-tx-prog{padding:3px 8px}}
+:root[data-theme="dark"] .h-tx-pchip,:root[data-theme="dark"] .h-tx-stepbody .h-tx-pchip{background:#2c3036;border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-pchip.is-warn,:root[data-theme="dark"] .h-tx-stepbody .h-tx-pchip.is-warn{background:#2c2612;border-color:#8a6d1c;color:#f0d276}
+:root[data-theme="dark"] .h-tx-pchip.is-ok,:root[data-theme="dark"] .h-tx-stepbody .h-tx-pchip.is-ok{background:#15281c;border-color:#2b5a3a;color:#4cc070}
 /* ─── abréviations connues : soulignées en pointillé ; leur sens dans une bulle ─── */
 .h-tx-mirror .h-tx-ab{border-bottom:2px dotted #1473e6}
 .h-tx-abtip{position:absolute;z-index:6;max-width:min(340px,calc(100% - 8px));background:#fff8d6;color:#1d1d1f;border:2px solid #1d1d1f;border-radius:6px;box-shadow:4px 4px 0 rgba(0,0,0,.12);padding:7px 10px;font:13px/1.45 system-ui,sans-serif;display:block}
@@ -406,4 +403,122 @@
     .h-tx-dlg .h-tx[data-ptab=text] .h-tx-left :is(.h-tx-barwrap,.h-tx-pages,.h-tx-zonebar){display:none}
     .h-tx-dlg .h-tx[data-ptab=text] .h-tx-left .h-tx-stage{flex:1 1 auto;min-height:0}
     :root[data-theme="dark"] .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-left{border-bottom-color:#4a4a4f}
+}
+/* ═════ Atelier par étapes (maquette docs/design/atelier-etapes.html ; points 11, 13, 14, 15, 23, 24 et 33 de l'audit) ═════ */
+/* l'état de l'acte, à un seul endroit, à côté de la frise ; « Étape suivante › » */
+.h-tx-statelab{color:#6e6e73;font-weight:600;white-space:nowrap}
+.h-tx-states{display:inline-flex;flex-wrap:wrap;border:1px solid #d0d0d6;border-radius:8px;overflow:hidden;background:#fff}
+.h-tx-prog .h-tx-states button{border:0;border-left:1px solid #d0d0d6;background:none;padding:2px 10px;min-height:24px;font-size:12px;white-space:nowrap}
+.h-tx-prog .h-tx-states button:first-child{border-left:0}
+.h-tx-prog .h-tx-states button:hover{background:#f5f8ff}
+.h-tx-prog .h-tx-states button.is-on{background:#1473e6;color:#fff;font-weight:700}
+.h-tx-prog .h-tx-states button.is-on.is-checked{background:#3b5bdb}.h-tx-prog .h-tx-states button.is-on.is-done{background:#1a7f37}.h-tx-prog .h-tx-states button.is-on.is-todo{background:#6e6e73}
+.h-tx-states button:focus-visible,.h-tx-favs button:focus-visible,.h-tx-cpanel button:focus-visible{outline:2px solid #1473e6;outline-offset:1px;position:relative;z-index:1}
+.h-tx-prog .spacer{flex:1}
+.h-tx-prog .h-tx-stepnext{border:1px solid #d0d0d6;background:#fff;border-radius:6px;padding:2px 10px;font-weight:600}
+.h-tx-prog .h-tx-stepnext:hover{border-color:#1473e6}
+.h-tx-stepbody{min-height:38px}
+.h-tx-stepbody .h-tx-pinfo{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px 6px}
+.h-tx-stepbody .h-tx-pinfo:empty{display:none}
+.h-tx-step.is-half i{border-color:#d4a800;color:#7a5d00;background:#fff8d6}
+/* 👁 Corriger : « ✓ J'ai relu » ; « ✓ Tout est relu » */
+.h-tx-stepbody .button.small.h-tx-relu{padding:2px 10px;min-height:0;font-weight:700}
+.h-tx-stepbody .button.small.h-tx-relu.is-done{background:#1a7f37;border-color:#1a7f37;color:#fff}
+.h-tx-reludone{color:#1a7f37;font-weight:700;white-space:nowrap}
+/* ſ la barre des caractères : favoris + « ＋ » ; le panneau de tous les caractères (📌 pour choisir ses favoris) */
+.h-tx-dlg .h-tx-chars{position:relative;display:flex;align-items:center;gap:8px;flex-wrap:nowrap;padding:4px 8px;z-index:4}
+.h-tx-favs{display:flex;flex-wrap:wrap;gap:3px;min-width:0}
+.h-tx-dlg .h-tx-chars .h-tx-ch{min-width:26px;padding:1px 6px}
+.h-tx-dlg .h-tx-chars .h-tx-ch.is-wide{font:12px system-ui,sans-serif;padding:2px 6px}
+.h-tx-dlg .h-tx-chars .h-tx-charplus{font:700 14px system-ui,sans-serif;color:#1473e6;border-style:dashed}
+.h-tx-chars.is-open .h-tx-charplus{background:#1473e6;color:#fff;border-style:solid;border-color:#1473e6}
+.h-tx-charkbd{font-size:11px;white-space:nowrap;margin-left:auto}
+.h-tx-cpanel{position:absolute;left:8px;right:8px;top:calc(100% + 2px);z-index:30;max-height:min(60vh,420px);overflow:auto;background:#fff;border:1px solid #d6d6db;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.22);padding:8px 12px 12px}
+.h-tx-cpanel[hidden]{display:none}
+.h-tx-cptop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.h-tx-cptop .spacer{flex:1}
+.h-tx-cptop .button.small{padding:2px 10px;min-height:0}
+.h-tx-cpanel h4{margin:10px 0 4px;font:700 11px system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6e6e73}
+.h-tx-cphint{margin:6px 0 0;font-size:12px}
+.h-tx-cgrp{display:flex;flex-wrap:wrap;gap:4px}
+.h-tx-dlg .h-tx-cpanel .h-tx-ch{position:relative;min-width:32px;min-height:30px;font:16px Georgia,serif}
+.h-tx-dlg .h-tx-cpanel .h-tx-ch.is-wide{font:12px system-ui,sans-serif}
+.h-tx-cpanel .h-tx-ch.is-pinned::after{content:'📌';position:absolute;right:-5px;top:-7px;font-size:10px;line-height:1}
+.h-tx-cpanel.is-pin .h-tx-ch[aria-pressed=true]{border-color:#1473e6;background:#eef4ff}
+.h-tx-cpanel.is-pin{box-shadow:0 12px 32px rgba(0,0,0,.22),inset 0 0 0 2px #1473e6}
+/* 🧾 « Ce que l'app a trouvé » repliable : une ligne quand il est fermé ; la case du texte prend la place */
+.h-tx-foundhead{flex:none;display:flex;align-items:center;gap:8px;width:100%;min-width:0;border:0;border-top:1px solid #e3e3e8;background:#fff;padding:6px 12px;font:600 12.5px system-ui,sans-serif;color:inherit;cursor:pointer;text-align:left}
+.h-tx-foundhead[hidden]{display:none}
+.h-tx-foundhead:hover{background:#f5f8ff}
+.h-tx-foundhead:focus-visible{outline:2px solid #1473e6;outline-offset:-2px}
+.h-tx-foundt{white-space:nowrap}
+.h-tx-foundsum{flex:1 1 auto;min-width:0;font-weight:400;color:#6e6e73;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-tx-foundcar{margin-left:auto;color:#6e6e73}
+.h-tx-foundhead+.h-tx-found{border-top:0}
+.h-tx-dlg .h-tx-found.is-folded{display:none}
+.h-tx-dlg .h-tx-found.is-small{flex:0 1 24%;min-height:90px;max-height:220px}
+/* 👁 Corriger : un rond ○ devant chaque ligne (✓ relue) ; un clic dans la marge la coche */
+.h-tx-dlg .h-tx-editor.has-rv textarea,.h-tx-dlg .h-tx-editor.has-rv .h-tx-mirror{padding-left:36px}
+.h-tx-dlg .h-tx-editor.has-ln.has-rv textarea,.h-tx-dlg .h-tx-editor.has-ln.has-rv .h-tx-mirror{padding-left:68px}
+.h-tx-editor.has-rv::after{content:'';position:absolute;left:0;top:0;bottom:0;width:30px;border-right:1px solid #ececf0;pointer-events:none;z-index:1}
+.h-tx-editor.has-ln.has-rv::after{left:36px;width:26px}
+.h-tx-ln.no-n::before{content:none}
+.h-tx-editor.has-rv .h-tx-ln.is-tk::after{content:'○';position:absolute;left:6px;width:20px;text-align:center;font-family:system-ui,sans-serif;font-weight:700;color:#8e8e93}
+.h-tx-editor.has-ln.has-rv .h-tx-ln.is-tk::after{left:40px}
+.h-tx-editor.has-rv .h-tx-ln.is-rv::after{content:'✓';color:#1a7f37}
+.h-tx-editor textarea[data-gut]{cursor:pointer}
+/* 24 : la couleur de la zone : une pastille et son nom ; 8 couleurs au choix */
+.h-tx-zcw{position:relative;display:inline-flex;align-items:center;gap:5px}
+.h-tx-zclab{font-size:12px}
+.h-tx-zcbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid #d0d0d6;background:#fff;border-radius:6px;padding:2px 8px;cursor:pointer;font:inherit;font-size:12.5px;color:inherit;white-space:nowrap}
+.h-tx-zcbtn:hover{border-color:#1473e6}
+.h-tx-sw{display:inline-block;flex:none;width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.28)}
+.h-tx-zcpop{position:absolute;left:0;bottom:calc(100% + 6px);z-index:30;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;width:250px;max-width:calc(100vw - 24px);padding:6px;background:#fff;border:1px solid #d6d6db;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.22)}
+.h-tx-zcpop[hidden]{display:none}
+.h-tx-zcpop button{display:flex;align-items:center;gap:8px;border:1px solid transparent;background:none;border-radius:6px;padding:5px 8px;cursor:pointer;font:inherit;font-size:13px;color:inherit;text-align:left}
+.h-tx-zcpop button:hover,.h-tx-zcpop button:focus-visible{background:#f0f5ff}
+.h-tx-zcpop button[aria-pressed=true]{border-color:#1473e6;font-weight:700}
+/* 🎯 Suivre la ligne (barre de l'image) */
+.h-tx-barwrap .h-tx-follow{margin:3px 8px 3px auto;border:1px solid #d6d6db;background:#fff;border-radius:6px;padding:3px 9px;cursor:pointer;font:inherit;font-size:12.5px;color:inherit;white-space:nowrap}
+.h-tx-barwrap .h-tx-follow:hover{border-color:#1473e6}
+.h-tx-barwrap .h-tx-follow.is-active{background:#1473e6;border-color:#1473e6;color:#fff;font-weight:600}
+/* 11 : les messages et les consignes de l'étape, dans la barre du bas (toute la largeur) */
+.h-tx-say{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.h-tx-say:empty{display:none}
+.h-tx-say:not(:empty)+.ed-status-help{display:none}
+.h-tx-dlg .ed-status .ed-status-help{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* sombre */
+:root[data-theme="dark"] .h-tx-statelab,:root[data-theme="dark"] .h-tx-addinfo,:root[data-theme="dark"] .h-tx-foundsum,:root[data-theme="dark"] .h-tx-foundcar,:root[data-theme="dark"] .h-tx-cpanel h4{color:#a1a1a6}
+:root[data-theme="dark"] .h-tx-states,:root[data-theme="dark"] .h-tx-prog .h-tx-stepnext,:root[data-theme="dark"] .h-tx-zcbtn,:root[data-theme="dark"] .h-tx-barwrap .h-tx-follow{background:#2c3036;border-color:#3a3f46;color:#e6e6e6}
+:root[data-theme="dark"] .h-tx-prog .h-tx-states button{border-color:#3a3f46;color:#e6e6e6}
+:root[data-theme="dark"] .h-tx-prog .h-tx-states button:hover{background:#2f3a4a}
+:root[data-theme="dark"] .h-tx-prog .h-tx-states button.is-on{color:#fff}
+:root[data-theme="dark"] .h-tx-prog{border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-barwrap .h-tx-follow.is-active{background:#1473e6;border-color:#1473e6;color:#fff}
+:root[data-theme="dark"] .h-tx-step.is-half i{background:#2c2612;border-color:#c9a400;color:#f0d276}
+:root[data-theme="dark"] .h-tx-reludone{color:#4cc070}
+:root[data-theme="dark"] .h-tx-foundhead{background:#24272c;border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-foundhead:hover{background:#2c3036}
+:root[data-theme="dark"] .h-tx-cpanel,:root[data-theme="dark"] .h-tx-zcpop{background:#24272c;border-color:#3a3f46;box-shadow:0 12px 32px rgba(0,0,0,.6)}
+:root[data-theme="dark"] .h-tx-cpanel.is-pin{box-shadow:0 12px 32px rgba(0,0,0,.6),inset 0 0 0 2px #5b93ff}
+:root[data-theme="dark"] .h-tx-cpanel.is-pin .h-tx-ch[aria-pressed=true]{background:#18233a;border-color:#5b93ff}
+:root[data-theme="dark"] .h-tx-zcpop button:hover,:root[data-theme="dark"] .h-tx-zcpop button:focus-visible{background:#2f3a4a}
+:root[data-theme="dark"] .h-tx-zcpop button[aria-pressed=true]{border-color:#5b93ff}
+:root[data-theme="dark"] .h-tx-dlg .h-tx-chars .h-tx-charplus{color:#7db6ff}
+:root[data-theme="dark"] .h-tx-chars.is-open .h-tx-charplus{background:#1473e6;color:#fff}
+:root[data-theme="dark"] .h-tx-editor.has-rv::after{border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-editor.has-rv .h-tx-ln.is-tk::after{color:#8e9299}
+:root[data-theme="dark"] .h-tx-editor.has-rv .h-tx-ln.is-rv::after{color:#4cc070}
+/* 📱 téléphone : les onglets Image / Texte / Personnes restent ; le panneau « ＋ » s'ouvre par le bas ; les messages au-dessus du bas de l'écran */
+@media (max-width:700px){
+    .h-tx-charkbd,.h-tx-statelab{display:none}
+    .h-tx-dlg .h-tx-chars .h-tx-favs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+    .h-tx-cpanel{position:fixed;left:0;right:0;top:auto;bottom:0;max-height:58vh;border-radius:14px 14px 0 0;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+    .h-tx-dlg .h-tx-cpanel .h-tx-ch{min-width:40px;min-height:40px}
+    .h-tx-dlg .h-tx[data-ptab=people] .h-tx-found.is-folded{display:block}
+    .h-tx-dlg .h-tx-foundhead{display:none}
+    .h-tx-dlg .h-tx[data-ptab=text] .ed-status:has(.h-tx-say:not(:empty)){display:flex!important}
+    .h-tx-dlg .h-tx[data-ptab=text] .ed-status :is(.ed-status-where,.ed-status-right,.ed-status-help){display:none}
+    .h-tx-prog .h-tx-stepnextl{display:none}
+    .h-tx-barwrap .h-tx-follow{margin-left:8px}
 }

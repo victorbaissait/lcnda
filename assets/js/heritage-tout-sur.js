@@ -17,7 +17,7 @@
  *     quelque chose », ↻ Relancer, 🖨 Imprimer, 📤 Envoyer vers…, ＋ Ajouter comme note (↶), « Sur sa fiche, caché » et
  *     « ⤓ Pas encore installé » (seulement ce qui compte pour lui : pays, époque), « ⤓ Installer », « ⤓ Tout installer (N Mo) ».
  *  4. 📍 « Ce qui concerne ce lieu » (bouton sur la fiche d'un village et la monographie) et 📅 « Cette année-là ».
- *  5. 🧰 Listes → Données → « 🔎 Chercher dans toutes les données » : une personne, un lieu, une année (ou plusieurs), chaque
+ *  5. 🧰 Listes → Données → « 🔍 Chercher dans toutes les données » : une personne, un lieu, une année (ou plusieurs), chaque
  *     source utilisable, une ou toutes.
  *  6. 📊 Widget du tableau de bord « 🔎 Ce qui le/la concerne » (personne choisie, de départ, ou un ancêtre au hasard chaque jour).
  * Mode consultation : pas d'installation ni d'écriture. Essai : tests/test-tout-sur.js
@@ -427,7 +427,7 @@
     };
     const boot = () => {
         const B = A().defaultPersonBlocks; if (Array.isArray(B) && !B.some(b => b[0] === BLOCK[0])) { let i = B.findIndex(b => b[0] === 'world'); if (i < 0) i = B.findIndex(b => b[0] === 'histoire'); B.splice(i < 0 ? B.length : i, 0, [...BLOCK]); }
-        const L = A().defaultListTypes; if (Array.isArray(L) && !L.some(x => x[0] === TOOL)) L.push([TOOL, '90b', T('🔎 Chercher dans toutes les données')]);
+        const L = A().defaultListTypes; if (Array.isArray(L) && !L.some(x => x[0] === TOOL)) L.push([TOOL, '90b', T('🔍 Chercher dans toutes les données')]);
         ext.lists = ext.lists || {}; ext.lists[TOOL] = token => renderTool(token);
         ext.dataToolKeys = ext.dataToolKeys || []; if (!ext.dataToolKeys.includes(TOOL)) ext.dataToolKeys.push(TOOL);
         const G = (ext.listGroupDefaults || []).find(g => g[0] === 'g_data'); if (G && Array.isArray(G[3]) && !G[3].includes(TOOL)) G[3].splice(Math.min(1, G[3].length), 0, TOOL);
@@ -623,7 +623,7 @@
     let pending = 0;
     new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; try { placeButtons(); } catch (e) { console.error(e); } }); }).observe(document.documentElement, {childList: true, subtree: true});
 
-    /* ═════════════ 🧰 Listes → Données → « 🔎 Chercher dans toutes les données » ═════════════ */
+    /* ═════════════ 🧰 Listes → Données → « 🔍 Chercher dans toutes les données » ═════════════ */
     const TOOL_KEY = 'genealogie-tout-sur-outil';
     async function renderTool(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;

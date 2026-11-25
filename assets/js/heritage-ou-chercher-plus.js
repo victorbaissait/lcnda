@@ -88,7 +88,7 @@
             <label><span>${esc(i18n('Lieu'))}</span><select name="place">${opt('', i18n('Partout'), f.place)}${places.map(p => opt(p, p, f.place)).join('')}</select></label>
             <label><span>${esc(i18n('Le nom'))}</span><select name="how">${HOW.map(([v, l]) => opt(v, i18n(l), f.how)).join('')}</select></label>
             <label><span>${esc(i18n('Dans le même acte'))}</span><select name="with">${opt('', i18n('Personne d’autre'), f.with)}${kin.spouse ? opt('spouse', i18n('Son conjoint : {name}', {name: kin.spouse}), f.with) : ''}${kin.father ? opt('father', i18n('Son père : {name}', {name: kin.father}), f.with) : ''}${kin.mother ? opt('mother', i18n('Sa mère : {name}', {name: kin.mother}), f.with) : ''}</select></label>
-            <div class="ouc-oa-go"><button type="submit" class="button" data-oa-go ${st.loading ? 'disabled' : ''}>${esc(st.loading ? i18n('Je cherche…') : i18n('🔎 Chercher dans Open Archives'))}</button></div></form>`;
+            <div class="ouc-oa-go"><button type="submit" class="button" data-oa-go ${st.loading ? 'disabled' : ''}>${esc(st.loading ? i18n('Je cherche…') : i18n('🔍 Chercher dans Open Archives'))}</button></div></form>`;
     }
     function recHtml(st, x) {
         const rec = st.rec[x.key];

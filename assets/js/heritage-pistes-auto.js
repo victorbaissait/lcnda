@@ -162,7 +162,7 @@
         ws.innerHTML = `<section class="page pst-page" data-pst-host>${head}
             <section class="maintenance-panel pst-launch"><h3>${esc(T('Chercher des pistes'))}</h3>
                 <div class="pst-launch-row"><label>${esc(T('Pour'))} <select data-pst-scope>${scopes.map(([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`).join('')}</select></label>
-                <button type="button" class="button" data-pst-start>${esc(T('🔎 Chercher des pistes'))}</button></div>
+                <button type="button" class="button" data-pst-start>${esc(T('🔍 Chercher des pistes'))}</button></div>
                 <div class="pst-srcs">${srcBox}</div>
                 <p class="muted"><small>${esc(T('La recherche continue pendant que tu travailles ailleurs dans l’app (une question à Open Archives toutes les 2 secondes au plus, comme le site le demande ; les réponses sont gardées 30 jours). Rien n’est envoyé pour une personne vivante, une fiche confidentielle, ou quelqu’un né il y a moins de 100 ans sans date de décès.'))}</small></p>
                 <div data-pst-jobhost></div></section>
@@ -183,7 +183,7 @@
             host.querySelector('[data-pst-pills]').innerHTML = [['new', T('À vérifier'), c.new], ['added', T('Rattachées'), c.added], ['no', T('Écartées'), c.no]]
                 .map(([k, l, n]) => `<button type="button" data-pst-status="${k}" class="${f.status === k ? 'is-active' : ''}">${esc(l)} <span class="ctl-n">(${fmt(n)})</span></button>`).join('');
             const L = host.querySelector('[data-pst-list]');
-            L.innerHTML = r.rows.length ? r.rows.map(x => rowHtml(x)).join('') : emptyLine(f.status === 'new' ? T('Aucune piste à vérifier') : T('Rien ici'), '🔎', f.status === 'new' ? T('Lance « 🔎 Chercher des pistes » : les actes qui ressemblent à tes fiches viendront ici.') : '');
+            L.innerHTML = r.rows.length ? r.rows.map(x => rowHtml(x)).join('') : emptyLine(f.status === 'new' ? T('Aucune piste à vérifier') : T('Rien ici'), '🔎', f.status === 'new' ? T('Lance « 🔍 Chercher des pistes » : les actes qui ressemblent à tes fiches viendront ici.') : '');
             const more = host.querySelector('[data-pst-more]'); more.innerHTML = '';
             if (r.total > r.rows.length) { const b = document.createElement('button'); b.type = 'button'; b.className = 'button secondary'; b.textContent = T('Voir {n} de plus', {n: Math.min(50, r.total - r.rows.length)}); b.onclick = () => { shown += 50; draw(); }; more.appendChild(b); }
         };

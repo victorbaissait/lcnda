@@ -263,7 +263,7 @@
                 <div><div class="fe-eyebrow">${esc(eyebrow)}</div><h3>${esc(s.name)}</h3>
                 ${chips.length ? `<div class="fe-chips">${chips.map(([c, u]) => `<span class="fe-chip">${esc(c)}${u ? ` ${src(u, '↗')}` : ''}</span>`).join('')}</div>` : ''}
                 <small class="muted">${esc(where.join(' · '))}${links.length ? ` · ${links.join(' · ')}` : ''}</small></div></div>
-            ${edit ? `<p class="fe-tools"><button type="button" class="button small secondary" data-fe-edit>${esc(T('✏️ Modifier'))}</button><span data-fe-x="refresh"></span>${s.lat != null ? `<button type="button" class="button small secondary" data-fe-map="${s.lat},${s.lon}">${esc(T('🗺 Voir sur la carte'))}</button>` : ''}<button type="button" class="button small secondary" data-fe-del>${esc(T('🗑 Supprimer'))}</button></p>` : ''}
+            ${edit ? `<p class="fe-tools"><button type="button" class="button small secondary" data-fe-edit>${esc(T('✎ Modifier'))}</button><span data-fe-x="refresh"></span>${s.lat != null ? `<button type="button" class="button small secondary" data-fe-map="${s.lat},${s.lon}">${esc(T('🗺 Voir sur la carte'))}</button>` : ''}<button type="button" class="button small secondary" data-fe-del>${esc(T('🗑 Supprimer'))}</button></p>` : ''}
             <section class="fe-sec"><h4>${esc(T('📜 Son histoire'))}</h4><div data-fe-x="history">${s.history ? `<p>${esc(s.history)}</p><small class="muted">${esc(T('(ta saisie)'))}</small>` : ''}</div>${s.notes ? `<p class="fe-note"><b>${esc(T('Ta note :'))}</b> ${esc(s.notes)}</p>` : ''}</section>
             <section class="fe-sec"><h4>${esc(T(g.people))}</h4>${D.people.length ? `<ul class="fe-l">${peopleRows}</ul>` : ''}<div data-fe-x="people"></div>
                 ${edit ? `<p><button type="button" class="button small secondary" data-fe-padd>${esc(T('＋ Ajouter'))}</button></p>` : ''}</section>
@@ -276,7 +276,7 @@
             <section class="fe-sec"><h4>${esc(T(g.regTitle))}</h4>${D.registers.length ? `<ul class="fe-l">${regRows}</ul>` : ''}<div data-fe-x="registers"></div>
                 ${edit ? `<p><button type="button" class="button small secondary" data-fe-radd>${esc(T('＋ Ajouter des registres'))}</button></p>` : ''}</section>
             <section class="fe-sec" data-fe-x="objects" hidden></section>
-            <section class="fe-sec"><h4>${esc(T('🖼 Photos et plans'))}</h4>${s.image ? `<figure class="fe-fig"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 640))}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()"></a><figcaption>${esc(s.image)} · ${link(fileUrl(s.image), T('↗ auteur et licence'))}</figcaption></figure>` : `<p class="muted">${esc(T('Pas encore d’image. « ✏️ Modifier » → une image de Wikimedia Commons (son nom de fichier) : l’auteur et la licence restent sur sa page.'))}</p>`}</section>
+            <section class="fe-sec"><h4>${esc(T('🖼 Photos et plans'))}</h4>${s.image ? `<figure class="fe-fig"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 640))}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()"></a><figcaption>${esc(s.image)} · ${link(fileUrl(s.image), T('↗ auteur et licence'))}</figcaption></figure>` : `<p class="muted">${esc(T('Pas encore d’image. « ✎ Modifier » → une image de Wikimedia Commons (son nom de fichier) : l’auteur et la licence restent sur sa page.'))}</p>`}</section>
             ${s.lat != null ? `<section class="fe-sec"><h4>${esc(T('🗺 Sur la carte'))}</h4>${miniMap(s)}</section>` : ''}
             <section class="fe-sec"><h4>${esc(T('📑 Sources'))}</h4>${sources.length ? `<ul class="fe-src-list">${sources.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}<div data-fe-x="sources"></div><p class="muted">${esc(T('Ce que tu as écrit toi-même est marqué « ta saisie ». Tes sources se citent comme partout dans l’app, sur les actes.'))}</p></section>
         </article>`;
@@ -319,7 +319,7 @@
             }
         }
         const h = slot('history'); if (h) h.insertAdjacentHTML('afterbegin', hist.join(''));
-        if (h && !h.innerHTML.trim()) h.innerHTML = `<p class="muted">${esc(T('Rien encore. « ✏️ Modifier » pour écrire son histoire.'))}</p>`;
+        if (h && !h.innerHTML.trim()) h.innerHTML = `<p class="muted">${esc(T('Rien encore. « ✎ Modifier » pour écrire son histoire.'))}</p>`;
         /* 👑 / 👤 les personnes proposées : propriétaires Wikidata (P127), seigneurs de la commune, métiers de l'arbre */
         const have = new Set(D.people.map(p => fold(p.person_name || p.name)));
         const sug = [];

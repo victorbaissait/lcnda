@@ -1,12 +1,12 @@
 /* LCNDA — 🎖️ Morts pour la France 1914–1918 et 🏅 Légion d'honneur (base Léonore)
  * (serveur : lib/bases_officielles.php ; bases : scripts/bases-officielles/build-bases.py, .github/workflows/bases-officielles.yml).
  *  · Réglages → 🎖️ Bases officielles : chaque base, sa taille, « ⤓ Installer » (par tranches, pause, reprise même après avoir
- *    fermé l'app, vérifiée avant d'être rangée ; ↶ Annuler), « 🗑 Supprimer » (↶ Annuler), « 🔎 Chercher dans la base »,
+ *    fermé l'app, vérifiée avant d'être rangée ; ↶ Annuler), « 🗑 Supprimer » (↶ Annuler), « 🔍 Chercher dans la base »,
  *    « À propos des données » (sources, licences, ce qui manque).
  *  · fiche : un petit encadré sous la barre de la famille, seulement s'il y a quelque chose à dire :
  *    « 🎖️ Peut-être dans Morts pour la France » / « 🏅 Peut-être dans la Léonore » (la fiche trouvée, ↗ en ligne,
  *    « ＋ Ajouter comme source (à vérifier) », ↶ Annuler), ou une offre discrète « ⤓ Installer la base … » (✕ : plus proposé).
- *  · « 🔎 Chercher dans la base » : une page de recherche par nom (Réglages → 🎖️ Bases officielles → Chercher).
+ *  · « 🔍 Chercher dans la base » : une page de recherche par nom (Réglages → 🎖️ Bases officielles → Chercher).
  *  · pour « Où chercher » : LCNDA_EXT.officialBases.suggest(person) → Promise de lignes (voir plus bas).
  * Réglage : localStorage['genealogie-bases-officielles'] = {dismiss: {mpf, leonore}} ; téléchargement en cours :
  * localStorage['genealogie-bases-officielles-dl'] = {mpf: id, leonore: id}. Fiche verrouillée, mode consultation : lecture seule.

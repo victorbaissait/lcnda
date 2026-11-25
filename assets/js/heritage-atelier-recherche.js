@@ -3,7 +3,7 @@
  * Pas de nouveau champ : la case « Chercher… » de Listes → « 📜 Transcriptions d'actes » montre aussi, au-dessus de la liste, les
  * LIGNES trouvées : le morceau d'image de la ligne (sa zone), le mot surligné, la date et la commune de l'acte ; un clic ouvre
  * l'Atelier sur cette ligne (curseur sur le mot, la bande de la ligne marquée, la 📏 règle si elle est allumée). Dans l'Atelier :
- * Édition → « 🔎 Chercher dans tous les actes… ». Les résultats exacts d'abord ; les variantes (Mazeaud, Mazaut…) à un clic,
+ * Édition → « 🔍 Chercher dans tous les actes… ». Les résultats exacts d'abord ; les variantes (Mazeaud, Mazaut…) à un clic,
  * dans un cadre pointillé. Avec 🔤 38, la recherche regarde aussi le texte modernisé. 🔮 « Bientôt » : les pages pas encore transcrites.
  * Réglage : genealogie-tx-search-near ('1' : orthographes voisines). Serveur : lib/atelier_idees.php (search, thumb).
  */
@@ -76,7 +76,7 @@
     }
     if (!hookList()) { let k = 0; const tm = setInterval(() => { if (hookList() || ++k > 120) clearInterval(tm); }, 250); }
 
-    /* ─── dans l'Atelier : Édition → 🔎 Chercher dans tous les actes… ─── */
+    /* ─── dans l'Atelier : Édition → 🔍 Chercher dans tous les actes… ─── */
     function openInAtelier(plug) {
         const P = panel({compact: true, onOpen: h => { dg.close(); if (h.act_id === plug.t.id && h.goto?.e > h.goto?.s) return plug.gotoRange(h.goto.s, h.goto.e); plug.switchTo({id: h.act_id, goto: h.goto?.e > h.goto?.s ? h.goto : null}); }});
         const dg = document.createElement('dialog'); dg.className = 'modal air-dlg';

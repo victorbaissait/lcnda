@@ -641,7 +641,7 @@
         const tabs = TABS.filter(([k]) => !target?.kinds || ['basket', 'recent', 'data', 'lists', 'outside'].includes(k) || target.kinds.includes(k));
         dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">📥 ${esc(T('PRENDRE DEPUIS…'))}</span><h2>${esc(target ? st.ctx?.label || T(target.label) : T('Prendre depuis…'))}</h2></div><button type="button" class="icon-button" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></div>
             <div class="cx-tabs" role="tablist">${tabs.map(([k, i, l]) => `<button type="button" role="tab" data-cx-tab="${k}">${i} ${esc(T(l))}${k === 'basket' && count ? ` <small>${nf(count)}</small>` : ''}</button>`).join('')}</div>
-            <div class="cx-take-body"><div class="cx-left"><input type="search" class="cx-q" data-cx-q placeholder="${esc(T('🔎 Chercher…'))}" aria-label="${esc(T('Chercher'))}"><div class="cx-res" data-cx-res></div></div><div class="cx-prev" data-cx-prev></div></div>
+            <div class="cx-take-body"><div class="cx-left"><input type="search" class="cx-q" data-cx-q placeholder="${esc(T('🔍 Chercher…'))}" aria-label="${esc(T('Chercher'))}"><div class="cx-res" data-cx-res></div></div><div class="cx-prev" data-cx-prev></div></div>
             <div class="modal-actions cx-take-foot"><span data-cx-n class="cx-n"></span><span class="spacer"></span>
                 <button type="button" class="button secondary" data-cx-tobasket>🧺 ${esc(T('Au panier'))}</button>
                 <button type="button" class="button secondary" data-cx-toput>📍 ${esc(T('Mettre dans…'))}</button>
