@@ -125,3 +125,4 @@ Thumbs.db
 
 # fichiers d’essai des tests (GEDCOM, zip, photos inventés) : toujours enregistrés
 !/tests/fixtures/**
+/wikidata-sortie/

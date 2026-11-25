@@ -1318,7 +1318,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=66" defer></script>
 <script src="assets/js/app-listes-donnees.js?v=2" defer></script>
-<script src="assets/js/app-maintenance.js?v=67" defer></script>
+<script src="assets/js/app-maintenance.js?v=68" defer></script>
 <script src="assets/js/app-recherche.js?v=35" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=2" defer></script>
 <script src="assets/js/app-graphiques.js?v=29" defer></script>
@@ -1673,6 +1673,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/plus-famille-relecture.js?v=1" defer></script>
 <script src="assets/js/plus-famille-latin.js?v=2" defer></script>
 <script src="assets/js/heritage-wikidata.js?v=2" defer></script>
+<script src="assets/js/heritage-wikidata-autour.js?v=1" defer></script>
 <script src="assets/js/app-imports-plus-core.js?v=2" defer></script>
 <script src="assets/js/heritage-imports-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-photos-import.js?v=2" defer></script>
