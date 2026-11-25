@@ -121,12 +121,16 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
         });
 
         await t('🌌 Le ciel de sa naissance suit la date de naissance changée', async () => {
-            const sky = async () => { await openPerson(ID.louis); await p.waitForFunction(i => document.querySelector(`[data-sky-block="${i}"] [data-sky-txt]`)?.textContent, ID.louis, {timeout: 20000}); return p.evaluate(i => ({txt: document.querySelector(`[data-sky-block="${i}"] [data-sky-txt]`).textContent, moon: document.querySelector(`[data-sky-block="${i}"]`)?.textContent}), ID.louis); };
+            // la fiche redessinée sur place, comme après « Enregistrer » dans la fenêtre d'un événement (le bloc d'avant est marqué)
+            const sky = async () => {
+                await p.evaluate(i => { document.querySelectorAll(`[data-sky-block="${i}"]`).forEach(b => { b.dataset.old = '1'; }); window.LCNDA_APP.openPersonById(i); }, ID.louis);
+                await p.waitForFunction(i => document.querySelector(`[data-sky-block="${i}"]:not([data-old]) [data-sky-txt]`)?.textContent, ID.louis, {timeout: 20000});
+                return p.evaluate(i => ({txt: document.querySelector(`[data-sky-block="${i}"]:not([data-old]) [data-sky-txt]`).textContent}), ID.louis);
+            };
             const before = await sky();
             assert.match(before.txt, /pleine lune/);
             const d = await api('person', {id: ID.louis}); const ev = d.events.find(e => (e.gedcom_tag || e.tag) === 'BIRT');
             const r = await post('save_event', {...ev, date_text: '1790', year: 1790, place_id: ID.paris}); assert.ok(!r.error, r.error);
-            await p.evaluate(() => window.LCNDA_APP.setModule('dashboard')); await sleep(800);
             const after = await sky();
             assert.match(after.txt, /lune gibbeuse décroissante/, `ciel encore celui de 1890 : ${after.txt}`);
         });
@@ -161,7 +165,9 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(i => window.LCNDA_EXT.placePhotos.open(i), ID.m2);
             await p.click('.pp-dlg [data-pp-new]'); await p.waitForSelector('.pp-gform .pk-input');
             await p.fill('.pp-gform .pk-input', 'Paris');
-            await p.waitForSelector('.pp-gform .pk-list [role=option]', {timeout: 10000}); await p.click('.pp-gform .pk-list [role=option]');
+            await p.waitForSelector('.pp-gform .pk-list [role=option]', {state: 'attached', timeout: 10000});
+            await (await p.$('.pp-gform .pk-list [role=option]')).click({force: true});
+            await p.waitForFunction(() => document.querySelector('.pp-gform [name=place_id]')?.value, null, {timeout: 5000});
             await p.click('.pp-gform [data-pp-gsave]');
             await p.waitForFunction(() => document.querySelector('.pp-dlg .pp-guess.is-retained'), null, {timeout: 10000});
             await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));

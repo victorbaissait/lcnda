@@ -270,6 +270,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             assert.deepEqual((await heads()).map(h => h[0]), ['quiz', 'memory', 'timeline', 'morpion'], 'dans l’ordre du menu « Jeu ▾ »');
             assert.deepEqual((await heads()).find(h => h[0] === 'morpion'), ['morpion', '2', 'true'], 'les deux morpions ensemble');
             assert.deepEqual(await page.$$eval('[data-jeu-group="morpion"] [data-jf-open]', l => l.length), 2);
+            if (shots) await page.screenshot({path: path.join(shots, 'colonne-par-type.png'), fullPage: true});
             // plier un type : il reste plié après un nouveau dessin de la colonne
             await page.click('[data-jeu-fold="morpion"]');
             assert.equal(await page.getAttribute('[data-jeu-fold="morpion"]', 'aria-expanded'), 'false');
@@ -317,6 +318,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             await page.click('[data-jfb="photo"]'); await page.waitForFunction(() => document.querySelector('[data-jfb-prev]')?.dataset.back === 'image');
             p = await prev(); assert.match(p.img, /media\/ferme\.png/); assert.equal((await pref()).back, 'photo'); assert.equal((await pref()).backMedia.id, okId);
             assert.match(await page.textContent('[data-jfb-more]'), /La ferme/);
+            if (shots) await page.screenshot({path: path.join(shots, 'dos-photo.png'), fullPage: true});
             // 📁 une image de l'ordinateur : réduite et gardée dans ce navigateur ; un fichier qui n'est pas une image est refusé
             await page.setInputFiles('[data-jfb-file]', {name: 'notes.txt', mimeType: 'text/plain', buffer: Buffer.from('bonjour')});
             await page.waitForSelector('.ui-toast-text:has-text("pas une image")'); assert.equal((await pref()).back, 'photo');
@@ -341,7 +343,8 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             await page.click('#jf-setup-form [type=submit]'); await page.waitForSelector('[data-jf-play] .jfp[data-back="image"] .pc-card.is-back');
             const look = () => page.$eval('.jfp .pc-card.is-back', el => { const cs = getComputedStyle(el); return {img: cs.backgroundImage, size: cs.backgroundSize, shadow: cs.boxShadow}; });
             let l = await look(); assert.match(l.img, /data:image\/jpeg/); assert.match(l.img, /^url\("data:image\/jpeg/, 'l’image en premier'); assert.equal(l.size.split(',')[0].trim(), 'cover', 'recadrée (cover)'); assert.match(l.shadow, /rgb\(255, 255, 255\).*inset|inset.*rgb\(255, 255, 255\)/);
-            await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; }); l = await look(); assert.match(l.img, /data:image\/jpeg/); assert.match(l.shadow, /rgb\(255, 255, 255\)/);
+            if (shots) await page.screenshot({path: path.join(shots, 'dos-partie.png'), fullPage: true});
+            await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; }); l = await look(); if (shots) await page.screenshot({path: path.join(shots, 'dos-partie-sombre.png'), fullPage: true}); assert.match(l.img, /data:image\/jpeg/); assert.match(l.shadow, /rgb\(255, 255, 255\)/);
             await page.evaluate(() => { delete document.documentElement.dataset.theme; });
             assert.equal((await games())[0].cfg.back, 'fichier');
             // retenu : la préparation suivante repart de ce dos ; les jeux de cartes à plusieurs ont le même réglage
