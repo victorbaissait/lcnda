@@ -1,4 +1,4 @@
-/* LCNDA — ➕ Recueils, les idées en plus (maquette docs/design/registres-etat-fonds.html, partie 9 ; serveur : lib/recueil_plus.php).
+/* LCNDA — ＋ Recueils, les idées en plus (maquette docs/design/registres-etat-fonds.html, partie 9 ; serveur : lib/recueil_plus.php).
  *  - 👥 « Confier à… » : des pages confiées à quelqu'un (une association qui se répartit un registre) ; « Pages de : … » dans l'onglet État ;
  *  - 📈 l'avancement dans le temps : la courbe (transcrites, relues), l'estimation « au rythme des 30 derniers jours, fini vers… »,
  *    l'objectif (« fini pour le … » : en avance, en retard) ;

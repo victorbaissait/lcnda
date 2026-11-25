@@ -1518,6 +1518,7 @@
  "{n} à toi": "{n} van jou",
  "{n} à transcrire": "{n} te transcriberen",
  "{n} à vérifier": "{n} te controleren",
+ "{n} à vérifier à la main (pas sûr)": "{n} met de hand te controleren (niet zeker)",
  "{n} absentes": "{n} ontbrekend",
  "{n} acte(s) de la commune dont l’adresse parle de cet édifice.": "{n} akte(n) van de gemeente waarvan het adres dit gebouw noemt.",
  "{n} acte(s) relié(s) à la fiche.": "{n} akte(n) gekoppeld aan de fiche.",
@@ -1947,6 +1948,7 @@
  "{n} ligne laissée de côté : ce ne sont pas des recensements.": "{n} regel overgeslagen: het is geen telling.",
  "{n} ligne lue (à relire)": "{n} regel gelezen (na te lezen)",
  "{n} ligne prise dans l’app.": "{n} rij uit de app gehaald.",
+ "{n} ligne recalée sur le texte": "{n} regel opnieuw uitgelijnd op de tekst",
  "{n} ligne repérée puis comblée": {
   "one": "{n} lijn gevonden en opgevuld",
   "other": "{n} lijnen gevonden en opgevuld"
@@ -1969,6 +1971,7 @@
  "{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données.": "{n} rijen uit de stamboom: je kunt ze verbeteren in het tabblad Gegevens.",
  "{n} lignes prises dans l’arbre.": "{n} rijen uit de stamboom gehaald.",
  "{n} lignes prises dans ta base.": "{n} regels uit je database.",
+ "{n} lignes recalées sur le texte": "{n} regels opnieuw uitgelijnd op de tekst",
  "{n} lignes repérées puis comblées": {
   "one": "{n} lijn gevonden en opgevuld",
   "other": "{n} lijnen gevonden en opgevuld"
@@ -12560,6 +12563,7 @@
  "Aucune vue enregistrée pour l’instant": "Nog geen opgeslagen weergave",
  "Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ».": "Nog geen weergave: kies de profielen, dan ‘💾 Weergave opslaan’.",
  "Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ».": "Nog geen weergave: stel de tijdlijn in, dan ‘💾 Weergave opslaan’.",
+ "Aucune zone recalée : {n} à vérifier à la main (pas sûr)": "Geen zone opnieuw uitgelijnd: {n} met de hand te controleren (niet zeker)",
  "Aucune. La langue d’un acte se note dans la fenêtre de l’événement ; celle d’un document dans sa transcription (Listes → Noms cités).": "Geen. De taal van een akte noteer je in het venster van de gebeurtenis; die van een document in de transcriptie (Lijsten → Genoemde namen).",
  "aucune|personne": "niemand",
  "Audios": "Audio",
@@ -37972,6 +37976,7 @@
  "Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format.": "Ogen horizontaal, altijd op dezelfde hoogte: alle zo gemaakte portretten hebben hetzelfde formaat.",
  "Les zones et leurs chiffres": "De zones en hun getallen",
  "Les zones hachurées seront coupées ({what}).": "De gearceerde stukken worden weggeknipt ({what}).",
+ "Les zones sont déjà calées sur les lignes du texte.": "De zones zijn al uitgelijnd op de regels van de tekst.",
  "Lesquels": "Welke",
  "Lessive au lavoir": "Was bij het washuis",
  "Lessiveuse": "Wasketel",
@@ -49163,6 +49168,7 @@
  "Recadrer sur le texte": "Bijsnijden tot de tekst",
  "Recadrer sur le texte ?": "Bijsnijden tot de tekst?",
  "Recadrer, éclaircir, redresser une photo.": "Een foto bijsnijden, lichter maken, rechtzetten.",
+ "Recaler les zones sur les lignes": "Zones opnieuw uitlijnen op de regels",
  "Recensement": "Volkstelling",
  "Recensement (année)": "Telling (jaar)",
  "Recensement {yr}": "Volkstelling {yr}",

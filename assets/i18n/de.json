@@ -1518,6 +1518,7 @@
  "{n} à toi": "{n} eigene",
  "{n} à transcrire": "{n} zu transkribieren",
  "{n} à vérifier": "{n} zu prüfen",
+ "{n} à vérifier à la main (pas sûr)": "{n} von Hand zu prüfen (nicht sicher)",
  "{n} absentes": "{n} fehlend",
  "{n} acte(s) de la commune dont l’adresse parle de cet édifice.": "{n} Urkunde(n) der Gemeinde, deren Adresse dieses Gebäude nennt.",
  "{n} acte(s) relié(s) à la fiche.": "{n} Urkunde(n) mit dem Eintrag verknüpft.",
@@ -1947,6 +1948,7 @@
  "{n} ligne laissée de côté : ce ne sont pas des recensements.": "{n} Zeile übergangen: Das ist keine Volkszählung.",
  "{n} ligne lue (à relire)": "{n} Zeile gelesen (zu prüfen)",
  "{n} ligne prise dans l’app.": "{n} Zeile aus der App übernommen.",
+ "{n} ligne recalée sur le texte": "{n} Zeile am Text neu ausgerichtet",
  "{n} ligne repérée puis comblée": {
   "one": "{n} Linie gefunden und gefüllt",
   "other": "{n} Linien gefunden und gefüllt"
@@ -1969,6 +1971,7 @@
  "{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données.": "{n} Zeilen aus dem Stammbaum übernommen: du kannst sie im Tab Daten korrigieren.",
  "{n} lignes prises dans l’arbre.": "{n} Zeilen aus dem Stammbaum übernommen.",
  "{n} lignes prises dans ta base.": "{n} Zeilen aus deiner Datenbank.",
+ "{n} lignes recalées sur le texte": "{n} Zeilen am Text neu ausgerichtet",
  "{n} lignes repérées puis comblées": {
   "one": "{n} Linie gefunden und gefüllt",
   "other": "{n} Linien gefunden und gefüllt"
@@ -12560,6 +12563,7 @@
  "Aucune vue enregistrée pour l’instant": "Noch keine gespeicherte Ansicht",
  "Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ».": "Noch keine Ansicht: Wähle die Einträge, dann „💾 Ansicht speichern“.",
  "Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ».": "Noch keine Ansicht: Stell die Zeitleiste ein, dann „💾 Ansicht speichern“.",
+ "Aucune zone recalée : {n} à vérifier à la main (pas sûr)": "Keine Zone neu ausgerichtet: {n} von Hand zu prüfen (nicht sicher)",
  "Aucune. La langue d’un acte se note dans la fenêtre de l’événement ; celle d’un document dans sa transcription (Listes → Noms cités).": "Keine. Die Sprache einer Urkunde wird im Ereignisfenster notiert, die eines Dokuments in seiner Abschrift (Listen → Genannte Namen).",
  "aucune|personne": "niemand",
  "Audios": "Audios",
@@ -37972,6 +37976,7 @@
  "Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format.": "Augen waagerecht, immer auf derselben Höhe: Alle so gemachten Porträts haben dasselbe Format.",
  "Les zones et leurs chiffres": "Die Bereiche und ihre Zahlen",
  "Les zones hachurées seront coupées ({what}).": "Die schraffierten Bereiche werden abgeschnitten ({what}).",
+ "Les zones sont déjà calées sur les lignes du texte.": "Die Zonen sind bereits an den Textzeilen ausgerichtet.",
  "Lesquels": "Welche",
  "Lessive au lavoir": "Wäsche am Waschhaus",
  "Lessiveuse": "Waschkessel",
@@ -49163,6 +49168,7 @@
  "Recadrer sur le texte": "Auf den Text zuschneiden",
  "Recadrer sur le texte ?": "Auf den Text zuschneiden?",
  "Recadrer, éclaircir, redresser une photo.": "Ein Foto zuschneiden, aufhellen, geraderichten.",
+ "Recaler les zones sur les lignes": "Zonen an den Zeilen neu ausrichten",
  "Recensement": "Volkszählung",
  "Recensement (année)": "Zählung (Jahr)",
  "Recensement {yr}": "Volkszählung {yr}",

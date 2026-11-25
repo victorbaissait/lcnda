@@ -1518,6 +1518,7 @@
  "{n} à toi": "{n} of your own",
  "{n} à transcrire": "{n} to transcribe",
  "{n} à vérifier": "{n} to check",
+ "{n} à vérifier à la main (pas sûr)": "{n} to check by hand (not sure)",
  "{n} absentes": "{n} absent",
  "{n} acte(s) de la commune dont l’adresse parle de cet édifice.": "{n} record(s) from the municipality whose address mentions this building.",
  "{n} acte(s) relié(s) à la fiche.": "{n} record(s) linked to the record card.",
@@ -1947,6 +1948,7 @@
  "{n} ligne laissée de côté : ce ne sont pas des recensements.": "{n} line set aside: it isn’t a census.",
  "{n} ligne lue (à relire)": "{n} line read (to check)",
  "{n} ligne prise dans l’app.": "{n} row taken from the app.",
+ "{n} ligne recalée sur le texte": "{n} line realigned with the text",
  "{n} ligne repérée puis comblée": {
   "one": "{n} line found then filled",
   "other": "{n} lines found then filled"
@@ -1969,6 +1971,7 @@
  "{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données.": "{n} rows taken from the tree: you can correct them in the Data tab.",
  "{n} lignes prises dans l’arbre.": "{n} rows taken from the tree.",
  "{n} lignes prises dans ta base.": "{n} rows taken from your database.",
+ "{n} lignes recalées sur le texte": "{n} lines realigned with the text",
  "{n} lignes repérées puis comblées": {
   "one": "{n} line found then filled",
   "other": "{n} lines found then filled"
@@ -12560,6 +12563,7 @@
  "Aucune vue enregistrée pour l’instant": "No saved view yet",
  "Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ».": "No view yet: choose the records, then “💾 Save the view”.",
  "Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ».": "No view yet: set up the timeline, then “💾 Save the view”.",
+ "Aucune zone recalée : {n} à vérifier à la main (pas sûr)": "No area realigned: {n} to check by hand (not sure)",
  "Aucune. La langue d’un acte se note dans la fenêtre de l’événement ; celle d’un document dans sa transcription (Listes → Noms cités).": "None. A record’s language is noted in the event window; a document’s in its transcription (Lists → Names mentioned).",
  "aucune|personne": "nobody",
  "Audios": "Audio",
@@ -37972,6 +37976,7 @@
  "Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format.": "Eyes level, always at the same height: all portraits made this way have the same format.",
  "Les zones et leurs chiffres": "The areas and their figures",
  "Les zones hachurées seront coupées ({what}).": "The hatched areas will be cut ({what}).",
+ "Les zones sont déjà calées sur les lignes du texte.": "The areas are already aligned with the lines of the text.",
  "Lesquels": "Which ones",
  "Lessive au lavoir": "Washing at the wash house",
  "Lessiveuse": "Laundry boiler",
@@ -49163,6 +49168,7 @@
  "Recadrer sur le texte": "Crop to the text",
  "Recadrer sur le texte ?": "Crop to the text?",
  "Recadrer, éclaircir, redresser une photo.": "Crop, brighten, straighten a photo.",
+ "Recaler les zones sur les lignes": "Realign the areas with the lines",
  "Recensement": "Census",
  "Recensement (année)": "Census (year)",
  "Recensement {yr}": "Census {yr}",
