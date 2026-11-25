@@ -204,7 +204,7 @@
         }
         const f = g.list[0].r;
         const lead = g.buried ? T('{e} repose sans doute à la {n} ({c}).', {e: cap(he(P)), n: `<b>${esc(f.n)}</b>`, c: esc(f.commune || f.country)})
-            : T('{e} est mort{x} à {p} en {y} : {n} à moins de 25 km. Les soldats tombés là y reposent souvent : {l}.', {e: cap(he(P)), x: P?.gender === 'female' ? 'e' : '', p: esc(g.at.place || g.at.name || ''), y: String(W.year),
+            : T(P?.gender === 'female' ? '{e} est morte à {p} en {y} : {n} à moins de 25 km. Les soldats tombés là y reposent souvent : {l}.' : '{e} est mort à {p} en {y} : {n} à moins de 25 km. Les soldats tombés là y reposent souvent : {l}.', {e: cap(he(P)), p: esc(g.at.place || g.at.name || ''), y: String(W.year),
                 n: g.list.length === 1 ? T('une nécropole') : T('{k} nécropoles et cimetières de guerre', {k: String(g.list.length)}), l: g.list.slice(0, 2).map(x => `<b>${esc(x.r.n)}</b> (${esc(kmTxt(x.km))})`).join(', ')});
         const mpfTxt = mpf ? `<p class="muted">${esc(T('Fiche « Morts pour la France » qui lui ressemble : mort à {p} le {d}.', {p: mpf.lieu_deces, d: mpf.deces || '?'}))}</p>` : '';
         return row('⚱️', `${lead} ${srcLink(f.mgw || wd(f.q))}`, SRC.necro(), more(`${mpfTxt}<ul class="hist-ul td-ul">${g.list.map(necroLi).join('')}</ul>${hyp(T('Une piste : la tombe exacte est dans la base « Sépultures de guerre » de Mémoire des hommes (ministère des Armées), et sur la fiche de la nécropole (MémorialGenWeb). Beaucoup de soldats ont été rendus à leur famille en 1921-1923.'))} ${link(MDH_SEP, T('↗ Sépultures de guerre (Mémoire des hommes)'))}`, g.list.length));
@@ -268,7 +268,7 @@
         if (y && y > 1930) return '';
         const res = await ask('td_loc', {kind: 'ellis', from, to, pid: life.person?.id || 0});
         if (!res?.ok || !res.items?.length) return '';
-        const lead = T('Parti{x} en Amérique ({p}) : ce que voyaient les émigrants à leur arrivée, photos libres de la Bibliothèque du Congrès ({a}–{b}).', {x: life.person?.gender === 'female' ? 'e' : '', p: esc(E.place || E.country), a: String(from), b: String(to)});
+        const lead = T(life.person?.gender === 'female' ? 'Partie en Amérique ({p}) : ce que voyaient les émigrants à leur arrivée, photos libres de la Bibliothèque du Congrès ({a}–{b}).' : 'Parti en Amérique ({p}) : ce que voyaient les émigrants à leur arrivée, photos libres de la Bibliothèque du Congrès ({a}–{b}).', {p: esc(E.place || E.country), a: String(from), b: String(to)});
         return row('📷', `${lead} ${srcLink(res.search)}`, SRC.loc(), more(`${thumbs(res.items)}${hyp(T('Les images restent sur loc.gov ; seules celles marquées « No known restrictions » (aucune restriction connue) sont montrées. Les listes de passagers d’Ellis Island sont sur le site de la fondation (lien dans « Où chercher »).'))}`, res.items.length));
     }
 

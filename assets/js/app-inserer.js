@@ -101,9 +101,10 @@
         if (!live() && !onPick) return; close();
         const saved = el.matches('textarea') ? {start: el.selectionStart, end: el.selectionEnd} : (() => { const s = getSelection(); return s.rangeCount ? {range: s.getRangeAt(0).cloneRange()} : {}; })();
         const ctx = ctxOf(el);
-        pop = {el, trigger, saved, ctx, onPick, path: [], q: '', results: [], i: 0, ticked: new Map(), seq: 0};
+        pop = {el, trigger, saved, ctx, onPick, path: [], q: '', results: [], i: 0, ticked: new Map(), seq: 0, bk: null, basket: 0, added: new Set()};
         const box = pop.box = document.createElement('div'); box.className = 'cx-qi'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', T('Insérer une info'));
         box.innerHTML = `<div class="cx-qi-top"><span class="cx-qi-crumb" data-qi-crumb></span></div>
+            <div class="cx-qi-bk" data-qi-bk></div>
             <div class="cx-qi-srch"><input type="text" data-qi-q role="combobox" aria-expanded="true" aria-controls="cx-qi-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="${esc(T('Une personne, une date, une gare, une comète, une liste…'))}"></div>
             <div class="cx-qi-list" id="cx-qi-list" role="listbox" data-qi-list></div>
             <div class="cx-qi-foot">${esc(T('↑↓ choisir · → entrer ou quoi insérer · ← revenir · Espace cocher · Entrée insérer · Échap'))}</div>`;
@@ -112,6 +113,8 @@
         box.style.width = `${W}px`; box.style.left = `${Math.max(12, Math.min(innerWidth - W - 12, r.left))}px`;
         const below = (r.bottom || r.top + 18) + 6; box.style.top = `${below + 320 > innerHeight && r.top > 340 ? Math.max(12, r.top - 330) : Math.min(below, innerHeight - 200)}px`;
         const q = box.querySelector('[data-qi-q]');
+        loadBaskets().then(paintBk);
+        box.querySelector('[data-qi-bk]').addEventListener('click', e => { if (e.target.closest('[data-qi-bsel]')) return pickBasket(e.target.closest('[data-qi-bsel]')); if (e.target.closest('[data-qi-bnew]')) return newBasketInline(); if (e.target.closest('[data-qi-ball]')) return toBasket(); });
         q.addEventListener('input', () => { pop.q = q.value; schedule(); });
         q.addEventListener('keydown', onKey);
         box.addEventListener('mousedown', e => { if (!e.target.closest('input')) e.preventDefault(); });
@@ -131,12 +134,13 @@
         if (e.key === 'ArrowRight' || (e.key === 'Tab' && !e.shiftKey)) { if (!res) return; e.preventDefault(); if (res.enter) return enter(res); if (res.choices?.length > 1) { res.c = ((res.c || 0) + 1) % res.choices.length; paint(); } return; }
         if (e.key === 'ArrowLeft' || (e.key === 'Tab' && e.shiftKey)) { if (res?.choices?.length > 1 && (res.c || 0) > 0) { e.preventDefault(); res.c--; return paint(); } if (pop.path.length && (e.key === 'Tab' || e.target.selectionStart === 0)) { e.preventDefault(); return goBack(); } return; }
         if (e.key === 'Backspace' && !e.target.value && pop.path.length) { e.preventDefault(); return goBack(); }
-        if (e.key === ' ' && res?.row && (e.ctrlKey || e.metaKey || !e.target.value || e.altKey)) { e.preventDefault(); return tick(); }
+        if (e.key === ' ' && res?.item && (e.ctrlKey || e.metaKey || !e.target.value || e.altKey || res.row)) { if (res.row || e.ctrlKey || e.metaKey || e.altKey || !e.target.value) { e.preventDefault(); return tick(); } }
+        if (e.key === 'Enter' && (e.shiftKey || e.metaKey || e.ctrlKey)) { e.preventDefault(); return toBasket(); } // 🧺 au panier au lieu d'insérer (on reste ici)
         if (e.key === 'Enter') { e.preventDefault(); if (res) act(); }
     }
     function enter(res) { pop.path.push({id: res.enter, label: res.label, icon: res.icon, q: pop.q}); pop.q = ''; pop.box.querySelector('[data-qi-q]').value = ''; pop.i = 0; draw(); }
     function goBack() { const p = pop.path.pop(); pop.q = p?.q || ''; pop.box.querySelector('[data-qi-q]').value = pop.q; pop.i = 0; draw(); }
-    function tick() { const res = pop.results[pop.i]; if (!res?.row) return; const k = K().pickKey(res.item); if (pop.ticked.has(k)) pop.ticked.delete(k); else pop.ticked.set(k, res); draw(); }
+    function tick() { const res = pop.results[pop.i]; if (!res?.item) return; const k = K().pickKey(res.item); if (pop.ticked.has(k)) pop.ticked.delete(k); else pop.ticked.set(k, res); paintBk(); draw(); }
 
     /* ═════════ chercher : tout à la fois (racine), dans une catégorie, dans une liste ═════════ */
     const recents = () => readJ(REC, []) || [];
@@ -152,7 +156,12 @@
     const PICK_KINDS = ['person', 'event', 'act', 'source', 'place', 'media'];
     async function searchRoot(q, seq) {
         const words = fold(q).split(/[^a-z0-9-]+/).filter(w => w.length > 1), out = [];
-        if (!q.trim()) return CATS().map(c => ({enter: c.id, icon: c.icon, label: c.label, sub: c.kids ? T('{n} rubriques', {n: nf(c.kids.length)}) : '', group: T('Parcourir')}));
+        if (!q.trim()) { // 🧺 ce qui a été mis de côté pour ICI d'abord (un par un, ou tout d'un coup), puis parcourir
+            await loadBaskets(); const ici = iciItems(); const head = [];
+            if (ici.length > 1) head.push({many: ici, icon: '▦', label: T('Insérer les {n}', {n: nf(ici.length)}), sub: T('en liste à puces, chacun avec sa source'), choices: [{kind: 'bullets', label: T('en liste à puces')}], c: 0, group: T('🧺 Mis de côté pour ici')});
+            ici.slice(0, 10).forEach(it => head.push({...asRes(it), group: T('🧺 Mis de côté pour ici')}));
+            return [...head, ...tickedRes(), ...CATS().map(c => ({enter: c.id, icon: c.icon, label: c.label, sub: c.kids ? T('{n} rubriques', {n: nf(c.kids.length)}) : '', group: T('Parcourir')}))];
+        }
         const ctx = pop.ctx, lists = K().listsAll?.() || [];
         const srv = api('cx_search', {q, person_id: ctx.person_id || 0}).catch(() => ({base: [], lists: [], basket: []}));
         // les listes du navigateur (sans serveur) dont le nom ressemble à un mot tapé : on y cherche le mot le plus long
@@ -170,8 +179,9 @@
         loc.forEach((rows, k) => rows.forEach(it => out.push({...asRes(it), group: `${local[k].icon || '📋'} ${T(local[k].label)}`, src: local[k]})));
         PICK_KINDS.concat('note').forEach(k => (byKind.get(k) || []).forEach(it => out.push({...asRes(it), group: T(CX().KIND?.[k]?.[1] ? `${CX().KIND[k][1]}s` : k)})));
         (r.basket || []).forEach(it => out.push({...asRes(it), group: T('Panier')}));
-        // des éléments d'abord (8 au plus), puis l'ensemble demandé, les listes et les catégories dont le nom correspond
-        const items = out.slice(0, 8);
+        // des éléments d'abord (8 au plus ; ce qui est mis de côté pour ici en premier), puis l'ensemble demandé, les listes et les catégories
+        const iciKeys = new Set(iciItems().map(x => `${x.title}|${x.value}`)); out.sort((a, b) => (iciKeys.has(`${b.item?.title}|${b.item?.value}`) ? 1 : 0) - (iciKeys.has(`${a.item?.title}|${a.item?.value}`) ? 1 : 0));
+        const items = [...tickedRes(), ...out.slice(0, 8)];
         if (asked?.id) { const d = lists.find(x => x.id === asked.id); if (d) items.push({set: {d, s: {q: '', crit: [], period: null, near: null, ...asked.preset}}, icon: '▦', label: T('L’ensemble : {l}', {l: [T(d.label), ...(K().ldCrit?.(d, {q: '', crit: [], ...asked.preset}) || [])].join(' — ')}), sub: T('en tableau, en liste à puces ou en lien'), choices: setChoices(), c: 0, group: T('Ensembles')}); }
         lists.filter(d => words.some(w => w.length > 2 && fold(d.label).split(/[^a-z]+/).some(l => l.length > 3 && (l.startsWith(w.replace(/s$/, '')) || w.replace(/s$/, '').startsWith(l.replace(/s$/, '')))))).slice(0, 3)
             .forEach(d => items.push({enter: `list:${d.id}`, icon: '📋', label: T('Liste : {l}', {l: T(d.label)}), sub: T('→ pour l’ouvrir ici'), group: T('Listes')}));
@@ -194,9 +204,9 @@
             const d = cat.list, s = {q, crit: [], period: null, near: null, sort: '', dir: 'asc'};
             const p = await ext.dataListsEngine.fetchPage(d, s, 0, 40); if (seq !== pop?.seq) return null;
             const rows = p.rows.map(r => ({...asRes(K().ldRowItem(d, s, r)), row: true, src: d, group: `${d.icon || '📋'} ${T(d.label)}`}));
-            const n = pop.ticked.size;
+            const n = [...pop.ticked.values()].filter(x => x.row).length;
             const head = [{set: {d, s, total: p.total}, icon: '▦', label: T('L’ensemble ({n} lignes)', {n: nf(p.total)}), sub: T('en tableau, en liste à puces ou en lien · une ligne de source'), choices: setChoices(), c: 0, group: T('Ensembles')}];
-            if (n) head.unshift({ticked: true, icon: '☑', label: T('Les {n} lignes cochées', {n: nf(n)}), sub: T('en tableau, en liste à puces ou en lien'), choices: setChoices(), c: 1, group: T('Ensembles')});
+            if (n) head.unshift({ticked: true, rowsOnly: true, icon: '☑', label: T('Les {n} lignes cochées', {n: nf(n)}), sub: T('en tableau, en liste à puces ou en lien'), choices: setChoices(), c: 1, group: T('Ensembles')});
             return [...head, ...rows];
         }
         return [];
@@ -212,9 +222,9 @@
     }
     function paint() {
         if (!pop) return; const list = pop.box.querySelector('[data-qi-list]'); let g = '';
-        list.innerHTML = pop.results.length ? pop.results.map((r, i) => { const head = r.group && r.group !== g ? `<div class="cx-qi-g">${esc((g = r.group))}</div>` : ''; const on = i === pop.i, tk = r.row && pop.ticked.has(K().pickKey(r.item));
-            return `${head}<div class="cx-qi-r${on ? ' is-on' : ''}" role="option" aria-selected="${on}" id="cx-qi-o${i}" data-qi-i="${i}">${r.row ? `<span class="cx-qi-tk" data-qi-tick aria-hidden="true">${tk ? '☑' : '☐'}</span>` : ''}<span class="cx-qi-ic" aria-hidden="true">${esc(r.icon || '•')}</span>
-                <span class="cx-qi-t"><b>${esc(r.label)}</b>${r.sub ? `<small>${esc(r.sub)}</small>` : ''}${on && r.choices?.length ? `<span class="cx-qi-ch">${r.choices.map((c, k) => `<button type="button" class="${k === (r.c || 0) ? 'is-on' : ''}" data-qi-c="${k}" tabindex="-1">${esc(c.label)}</button>`).join('')}</span>` : ''}</span>${r.enter ? '<span class="cx-qi-go" aria-hidden="true">›</span>' : ''}</div>`; }).join('')
+        list.innerHTML = pop.results.length ? pop.results.map((r, i) => { const head = r.group && r.group !== g ? `<div class="cx-qi-g">${esc((g = r.group))}</div>` : ''; const on = i === pop.i, tk = !!r.item && pop.ticked.has(K().pickKey(r.item));
+            return `${head}<div class="cx-qi-r${on ? ' is-on' : ''}" role="option" aria-selected="${on}" id="cx-qi-o${i}" data-qi-i="${i}">${r.row || tk ? `<span class="cx-qi-tk" data-qi-tick aria-hidden="true">${tk ? '☑' : '☐'}</span>` : ''}<span class="cx-qi-ic" aria-hidden="true">${esc(r.icon || '•')}</span>
+                <span class="cx-qi-t"><b>${esc(r.label)}</b>${r.sub ? `<small>${esc(r.sub)}</small>` : ''}${on && r.choices?.length ? `<span class="cx-qi-ch">${r.choices.map((c, k) => `<button type="button" class="${k === (r.c || 0) ? 'is-on' : ''}" data-qi-c="${k}" tabindex="-1">${esc(c.label)}</button>`).join('')}</span>` : ''}</span>${r.item && pop.added.has(K().pickKey(r.item)) ? '<span class="cx-qi-in" title="🧺">🧺✓</span>' : ''}${r.enter ? '<span class="cx-qi-go" aria-hidden="true">›</span>' : ''}</div>`; }).join('')
             : `<p class="cx-qi-none">${esc(pop.q ? T('Rien pour « {q} ». Essaie un seul mot, ou parcours : ← puis une catégorie.', {q: pop.q}) : T('Tape un nom, une date, une gare, une comète…'))}</p>`;
         pop.box.querySelector('[data-qi-q]').setAttribute('aria-activedescendant', pop.results.length ? `cx-qi-o${pop.i}` : '');
         list.querySelector('.is-on')?.scrollIntoView?.({block: 'nearest'});
@@ -227,9 +237,14 @@
         if (res.enter) return enter(res);
         let text = '', items = [], html = '';
         const choice = res.choices?.[res.c || 0] || {kind: 'whole'};
-        if (res.set || res.ticked) {
+        if (res.many || res.tickedAll) {
+            const its = res.many || [...pop.ticked.values()].map(x => x.item);
+            const line = it => `${K().itemLine ? K().itemLine(it) : it.title}${it.origin?.label ? ` [↗ ${srcShort(it.origin)}]` : ''}`;
+            text = its.map(it => `• ${line(it)}`).join('\n'); html = `<ul>${its.map(it => `<li>${esc(K().itemLine ? K().itemLine(it) : it.title)}${it.origin?.url ? ` <a href="${esc(it.origin.url)}" target="_blank" rel="noopener" class="cx-qi-src">[↗ ${esc(srcShort(it.origin))}]</a>` : it.origin?.label ? ` [↗ ${esc(srcShort(it.origin))}]` : ''}</li>`).join('')}</ul>`;
+            items = its.map(it => K().cleanIt(it));
+        } else if (res.set || (res.ticked && !res.tickedAll)) {
             let d, s, rows, title;
-            if (res.ticked) { const t = [...pop.ticked.values()]; d = t[0].src; s = {}; rows = t.map(x => x.item); title = `${T(d.label)} — ${T('{n} lignes choisies', {n: nf(rows.length)})}`; }
+            if (res.ticked) { const t = [...pop.ticked.values()].filter(x => x.row); d = t[0].src; s = {}; rows = t.map(x => x.item); title = `${T(d.label)} — ${T('{n} lignes choisies', {n: nf(rows.length)})}`; }
             else { d = res.set.d; s = res.set.s; const raw = await K().ldAll(d, s, 500); rows = raw.map(r => K().ldRowItem(d, s, r)); title = [T(d.label), ...(K().ldCrit?.(d, s) || [])].join(' — '); }
             if (!rows.length) return A().toast?.(T('Aucune ligne trouvée avec ces critères.'));
             const cols = rows[0].data.columns, src = `${T('Source :')} ${d.source || T(d.label)}${d.sourceUrl ? ` ${d.sourceUrl}` : ''}`;
@@ -270,6 +285,45 @@
         let undoCite = null; try { undoCite = items.length && ctx.host?.cite ? await ctx.host.cite(el, items, ctx) : null; } catch (e) { A().toast?.(e.message, 'error'); }
         const msg = undoCite ? T('📎 Inséré, et la source est gardée dans la piste') : T('📎 Inséré, avec sa source');
         (A().undoToast || ((m) => A().toast?.(m)))(msg, {icon: '📎', undo: async () => { undoText(); await undoCite?.(); }});
+    }
+
+    /* ═════════ 🧺 mettre de côté depuis la petite fenêtre (Maj+Entrée), et reprendre ce qui est mis de côté pour ICI ═════════ */
+    const post = b => A().api('cx_write', {}, {method: 'POST', body: b}).then(r => r?.result ?? r);
+    async function loadBaskets() { if (!pop) return null; try { pop.bk = await api('cx_basket', {all: 1}); } catch (_) { pop.bk = {baskets: [], items: []}; }
+        if (!pop.basket) { const ici = iciBaskets(); pop.basket = Number(ici[0]?.id) || Number(readJ('genealogie-connexions-panier', 0)) || Number(pop.bk.basket_id) || 0; } return pop.bk; }
+    /** les paniers qui vont d'habitude ICI (cette enquête, cette fiche…) */
+    const iciBaskets = () => { const c = pop?.ctx || {}; return (pop?.bk?.baskets || []).filter(b => (b.dests || []).some(d => (c.investigation_id && Number(d.ctx?.investigation_id) === Number(c.investigation_id)) || (c.person_id && Number(d.ctx?.person_id) === Number(c.person_id)))); };
+    const iciItems = () => { const ids = new Set(iciBaskets().map(b => Number(b.id))); return (pop?.bk?.items || []).filter(it => ids.has(Number(it.basket_id))); };
+    const tickedRes = () => { const its = [...(pop?.ticked.values() || [])].filter(x => !x.row); return its.length ? [{tickedAll: true, icon: '☑', label: T('Les {n} cochés', {n: nf(its.length)}), sub: T('Entrée : les insérer · Maj+Entrée : au panier'), choices: [{kind: 'bullets', label: T('en liste à puces')}], c: 0, group: T('Cochés')}] : []; };
+    function paintBk() {
+        if (!pop) return; const host = pop.box.querySelector('[data-qi-bk]'), b = (pop.bk?.baskets || []).find(x => Number(x.id) === Number(pop.basket)), n = pop.ticked.size;
+        host.innerHTML = `<span class="cx-qi-muted">${esc(T('Maj+Entrée : au panier'))}</span><button type="button" class="cx-qi-chipb" data-qi-bsel title="${esc(T('Dans quel panier'))}">🧺 ${esc(b ? (b.path || [b.name]).join(' › ') : T('Mon panier'))} ▾</button><button type="button" class="cx-qi-chipb" data-qi-bnew>＋ ${esc(T('Nouveau panier'))}</button>${n ? `<button type="button" class="cx-qi-chipb is-pri" data-qi-ball>🧺 ${esc(T('Tout au panier ({n})', {n: nf(n)}))}</button>` : ''}${pop.added.size ? `<span class="cx-qi-ok">✓ ${esc(T('{n} mis de côté', {n: nf(pop.added.size)}))}</span>` : ''}`;
+    }
+    function pickBasket(anchor) {
+        const all = pop.bk?.baskets || [], ici = iciBaskets(), cur = Number(readJ('genealogie-connexions-panier', 0));
+        const row = (x, tag) => ({icon: x.icon || '🧺', label: `${(x.path || [x.name]).join(' › ')} (${nf(x.count)})${tag ? ` · ${tag}` : ''}`, run: () => { pop.basket = Number(x.id); paintBk(); }});
+        UI().menuAt?.(anchor, [...ici.map(x => row(x, T('ici'))), ...all.filter(x => !ici.includes(x) && Number(x.id) === cur).map(x => row(x, T('récent'))), '-', ...all.filter(x => !ici.includes(x) && Number(x.id) !== cur).map(x => row(x))], {title: T('Dans quel panier ?')});
+    }
+    /** ＋ Nouveau panier : le nom tapé ici même ; il va d'habitude ICI (cette enquête…) */
+    function newBasketInline() {
+        const host = pop.box.querySelector('[data-qi-bk]');
+        host.innerHTML = `<input type="text" data-qi-bname placeholder="${esc(T('Le nom du panier, puis Entrée'))}" aria-label="${esc(T('Le nom du nouveau panier'))}">`;
+        const inp = host.querySelector('input'); inp.focus();
+        inp.addEventListener('keydown', async e => {
+            if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); paintBk(); pop.box.querySelector('[data-qi-q]').focus(); return; }
+            if (e.key !== 'Enter' || !inp.value.trim()) return; e.preventDefault();
+            const c = pop.ctx, dests = c.investigation_id ? [{id: 'investigation', label: T('l’enquête'), ctx: {investigation_id: c.investigation_id, item_id: c.item_id || 0, mode: 'one'}}] : [];
+            const r = await post({op: 'basket_new', name: inp.value.trim(), dests}); writeJ('genealogie-connexions-panier', Number(r.id)); pop.basket = Number(r.id); await loadBaskets(); paintBk();
+            A().toast?.(T('🧺 Panier « {n} » créé : Maj+Entrée y met ce que tu choisis.', {n: inp.value.trim()})); pop.box.querySelector('[data-qi-q]').focus();
+        });
+    }
+    async function toBasket() {
+        if (!pop) return; const res = pop.results[pop.i], its = pop.ticked.size ? [...pop.ticked.values()].map(x => x.item) : res?.item ? [res.item] : [];
+        if (!its.length) return;
+        const items = its.map(it => K().cleanIt(it)), r = await post({op: 'basket_add', basket_id: pop.basket || 0, items});
+        its.forEach(it => pop.added.add(K().pickKey(it))); pop.ticked.clear(); CX().refresh?.();
+        A().toast?.(r.ids?.length ? T('🧺 {n} mis de côté', {n: nf(r.ids.length)}) : T('Déjà dans le panier.'));
+        await loadBaskets(); paintBk(); paint();
     }
 
     /* ═════════ réglages (dans 🧺 Panier et connexions) ═════════ */

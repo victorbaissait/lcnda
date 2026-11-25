@@ -451,3 +451,10 @@ dialog.cx-put { width: min(720px, 94vw); max-width: 94vw; height: min(680px, 90v
 .cx-qi-chip { display: inline-block; padding: 0 8px; border-radius: 999px; background: #eef4ff; color: #1a3d8f; text-decoration: none; }
 .cx-everywhere { align-self: flex-start; margin-top: 2px; }
 @media (max-width: 640px) { .cx-everywhere { display: none; } }
+.cx-qi-bk { display: flex; gap: 6px 8px; align-items: center; flex-wrap: wrap; padding: 2px 16px 6px; font-size: 12px; }
+.cx-qi-bk input { flex: 1; min-width: 0; border: 1px solid #c9ced8; border-radius: 8px; padding: 5px 10px; font: 13px system-ui, sans-serif; background: var(--q-bg); color: var(--q-ink); }
+.cx-qi-chipb { border: 1px solid #c9ced8; background: var(--q-bg); color: var(--q-ink); border-radius: 999px; padding: 3px 10px; font: 600 12px system-ui, sans-serif; cursor: pointer; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cx-qi-chipb.is-pri { background: var(--q-blue); border-color: var(--q-blue); color: #fff; }
+.cx-qi-muted { color: var(--q-mut); }
+.cx-qi-ok { color: #1a7f37; font-weight: 700; }
+.cx-qi-in { flex: none; font-size: 12px; color: #1a7f37; }

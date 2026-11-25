@@ -143,7 +143,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(stub, 'la liste hist_vendanges existe (app-listes-donnees.js)');
             const [n, html, txt] = await into('placeInto', {id: 1, name: 'Confracourt', ...CONFRACOURT});
             assert.ok(n >= 3, txt); assert.deepStrictEqual(await p.evaluate(() => window.__tbQ[0].near), {...CONFRACOURT, km: 150}); assert.match(txt, /Calvaires et croix de chemin à moins de 3 km/); assert.match(txt, /Lavoirs, puits et fontaines à moins de 3 km/);
-            assert.match(txt, /Les vendanges \(Lorraine du Sud, série à 35 km\) : d’habitude vers le 30 septembre ; dates connues de 1801 à 1802/); assert.match(txt, /pack « Histoire du lieu »/); assert.match(html, /▸ plus/); assert.match(txt, /Wikidata \(CC0\)/); assert.match(html, /tb-links/);
+            assert.match(txt, /Les vendanges \(Lorraine du Sud, série à 35 km\) : d’habitude vers le 6 octobre ; dates connues de 1801 à 1802/); assert.match(txt, /pack « Histoire du lieu »/); assert.match(html, /▸ plus/); assert.match(txt, /Wikidata \(CC0\)/); assert.match(html, /tb-links/);
             assert.match(html, /https:\/\/www\.wikidata\.org\/wiki\/Q\d+/); assert.match(txt, /arriveront avec la mise à jour des données/);
             const none = await into('placeInto', {id: 0, name: '', lat: null, lon: null});
             assert.deepStrictEqual(none.slice(0, 2), [0, '']);
