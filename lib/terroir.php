@@ -83,6 +83,7 @@ function tr_cache_get(string $key): ?array
 }
 function tr_cache_put(string $key, array $data): void
 {
+    if (defined('TR_NO_CACHE')) { return; } // scripts/terroir/build-prenoms.php : rien dans le cache de l'utilisateur
     $d = tr_cache_dir(true);
     @file_put_contents($d . '/' . sha1($key) . '.json', json_encode(['key' => $key, 'at' => time(), 'data' => $data], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
 }

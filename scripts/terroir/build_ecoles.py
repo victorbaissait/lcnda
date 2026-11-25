@@ -24,15 +24,20 @@ KIND_LABEL = {'seminaire': 'Séminaire', 'normale': 'École normale', 'universit
 def main():
     C = communes()
     classes = sorted({qid(r['t']) for r in wm.sparql('SELECT DISTINCT ?t WHERE { ?t wdt:P279* wd:Q2385804 . }', 'ecoles-classes', gap=1)}, key=lambda x: int(x[1:]))
+    CL = set(classes) | {'Q20860083', 'Q1244442', 'Q48747650', 'Q3591580', 'Q108037689'}  # établissement scolaire (code UAI), bâtiment scolaire, cité scolaire, EPLE, lycée-collège : hors de l'arbre de Q2385804
     S = {}
-    for hop in ('wdt:P131', 'wdt:P131/wdt:P131'):
-        for i in range(0, len(classes), 250):
-            part = classes[i:i + 250]
-            q = ('SELECT ?s ?t ?insee WHERE { VALUES ?t { ' + ' '.join('wd:' + x for x in part) + ' } ?s wdt:P31 ?t . ?s ' + hop + ' ?c . ?c wdt:P374 ?insee . }')
-            for r in wm.sparql(q, 'ecoles-' + ('a' if hop == 'wdt:P131' else 'b') + hashlib.sha1(' '.join(part).encode()).hexdigest()[:12], gap=5):
+    deps = sorted({i[:3] if i.startswith('97') else i[:2] for i in C})
+    for dep in deps:  # département par département (une seule grosse requête dépasse le temps permis)
+        for hop in ('a', 'b'):
+            path = 'wdt:P131' if hop == 'a' else 'wdt:P131/wdt:P131'
+            q = ('SELECT ?s ?t ?insee WHERE { ?c wdt:P374 ?insee . FILTER(STRSTARTS(?insee, "' + dep + '")) ?s ' + path + ' ?c . ?s wdt:P31 ?t . }')
+            for r in wm.sparql(q, 'ecoles-dep-' + hop + '-' + dep, gap=4):
+                t = qid(r['t'])
+                if t not in CL or r['insee'] not in C: continue
                 o = S.setdefault(qid(r['s']), {'t': set(), 'insee': ''})
-                o['t'].add(qid(r['t']))
-                if r['insee'] in C and not o['insee']: o['insee'] = r['insee']  # la commune directe d'abord (premier passage)
+                o['t'].add(t)
+                if not o['insee']: o['insee'] = r['insee']  # la commune directe d'abord (premier passage)
+        print(' ', dep, len(S), flush=True)
     S = {k: v for k, v in S.items() if v['insee']}
     print('établissements dans une commune :', len(S), flush=True)
     ids = sorted(S, key=lambda x: int(x[1:]))

@@ -167,8 +167,9 @@
     async function fillPerson(host) {
         const pid = Number(host.dataset.baPerson), locked = host.dataset.baLocked === '1';
         let d; try { d = await personData(pid); } catch (_) { host.hidden = true; const c0 = cardOf(host); if (c0) c0.hidden = true; return; }
-        if (!host.isConnected) return;
-        if (!d.installed && d.could && DL.online === undefined) loadInfo().then(() => { if (host.isConnected) fillPerson(host); });
+        const free = host.dataset.baOnly === '1'; // l'hôte de « 🔎 Ce qui le concerne » : rempli même hors de la page
+        if (!host.isConnected && !free) return;
+        if (!d.installed && d.could && DL.online === undefined && !free) loadInfo().then(() => { if (host.isConnected) fillPerson(host); });
         const html = blockHtml(d, locked, {showNo: host.dataset.baShowNo === '1', only: host.dataset.baOnly === '1', noOffer: host.dataset.baNoOffer === '1'});
         host.innerHTML = html; host.hidden = !html;
         const c = cardOf(host); if (c) c.hidden = !html;
