@@ -364,8 +364,12 @@
     ext.maintenance = ext.maintenance || {};
     ext.maintenance[TAB[0]] = token => drawSettings(token);
     function register() {
-        const tabs = A().defaultMaintenanceTabs; if (!Array.isArray(tabs)) return false;
-        if (!tabs.some(t => t[0] === TAB[0])) tabs.push(TAB);
+        const app = A(), tabs = app.defaultMaintenanceTabs; if (!Array.isArray(tabs)) return false;
+        if (!tabs.some(t => t[0] === TAB[0])) { const i = tabs.findIndex(t => t[0] === 'lot10_voir_village'); tabs.splice(i < 0 ? tabs.length : i + 1, 0, TAB); }
+        // le bloc de fiche : juste après « 🖼️ Son village comme il le voyait » (lot 10), sinon après le monde autour
+        const B = app.defaultPersonBlocks;
+        if (Array.isArray(B) && !B.some(b => b[0] === BLOCK[0])) { let i = B.findIndex(b => b[0] === 'l10v_village'); if (i < 0) i = B.findIndex(b => b[0] === 'world'); B.splice(i < 0 ? B.length : i + 1, 0, [...BLOCK]); }
+        if (app.defaultPersonBlockSpans) app.defaultPersonBlockSpans[BLOCK[0]] ||= '12';
         return true;
     }
     if (!register()) W.document.addEventListener('DOMContentLoaded', () => { if (!register()) setTimeout(register, 600); }, {once: true});

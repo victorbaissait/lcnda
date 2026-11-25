@@ -71,8 +71,8 @@
         CAT = all.map(e => {
             const c = L.fromJd(e.jd), g = bestPoint(e), solar = e.kind === 'solar';
             const tot = !solar && e.contacts.u2 ? (e.contacts.u3 - e.contacts.u2) * 86400 : 0;
-            const where = solar ? (e.central ? T('bande centrale vers {z} ({a}, {o})', {z: zoneOf(...g), a: latText(g[0]), o: lonText(g[1])}) : T('maximum vers {z} ({a}, {o})', {z: zoneOf(...g), a: latText(g[0]), o: lonText(g[1])}))
-                : T('la moitié de la Terre où il fait nuit, centrée sur {z}', {z: zoneOf(...g)});
+            const where = solar ? (e.central ? T('centrale ; au plus fort : {z} ({a}, {o})', {z: zoneOf(...g), a: latText(g[0]), o: lonText(g[1])}) : T('partielle partout ; au plus fort : {z} ({a}, {o})', {z: zoneOf(...g), a: latText(g[0]), o: lonText(g[1])}))
+                : T('la moitié de la Terre où il fait nuit ; au centre : {z}', {z: zoneOf(...g)});
             return {_e: e, _jd: e.jd, _lat: g[0], _lon: g[1], id: e.id,
                 date: dateText(c), year: c.y, body: solar ? T('Soleil') : T('Lune'), type: T(TYPES[e.type] || e.type),
                 mag: solar ? (e.mag != null ? Math.round(e.mag * 1000) / 1000 : null) : Math.round((e.type === 'penumbral' ? e.magPen : e.magUmb) * 1000) / 1000,

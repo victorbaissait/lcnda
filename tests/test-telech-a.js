@@ -82,14 +82,14 @@ const [TX, TY] = tileOf(49.419, 0.233, 14);
     await t('PHP : couleurs → postes CORINE (palette officielle, bords lissés écartés) ; une tuile MVT lue et dessinée en SVG (zoom 14 et agrandie au 15)', async () => {
         const r = php(String.raw`require 'lib/paths.php'; require 'lib/bootstrap.php'; require 'lib/telech_a.php';
 $L = ta_mvt_decode(base64_decode('${TILE.toString('base64')}'));
-$s14 = ta_osm_svg($L, 1, 0, 0, 14); $s15 = ta_osm_svg($L, 2, 1, 1, 15);
+$s14 = ta_osm_svg($L, 1, 0, 0, 14); $s15 = ta_osm_svg($L, 2, 0, 1, 15);
 echo json_encode([ta_clc_code(0xe6, 0x00, 0x4d, 0), ta_clc_code(0x00, 0xa6, 0x00, 0), ta_clc_code(0xe6, 0xf2, 0xff, 0), ta_clc_code(0x55, 0x55, 0x55, 0), ta_clc_code(0xff, 0, 0, 120),
   array_keys($L), $L['place']['features'][0]['props'], count($L['water']['features'][0]['geom'][0]), str_contains($s14, '#aad3df'), str_contains($s14, '>Honfleur<'), str_contains($s14, '#fcd6a4'), str_contains($s15, '>Honfleur<'),
   ta_clc_groups([112 => 10, 231 => 30, 311 => 60])]);`, {GENEALOGY_DATA_DIR: fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-ta-php-'))});
         const j = JSON.parse((r.stdout || '').trim().split('\n').pop() || 'null'); assert.ok(j, r.stderr || r.stdout);
         assert.deepStrictEqual(j.slice(0, 5), [111, 312, 523, 0, 0]);
         assert.deepStrictEqual(j[5], ['water', 'transportation', 'place']); assert.deepStrictEqual(j[6], {class: 'town', name: 'Honfleur'}); assert.strictEqual(j[7], 5);
-        assert.deepStrictEqual(j.slice(8, 12), [true, true, true, false], 'au zoom 15, le quart bas-droit ne contient pas le nom (il est au milieu de la tuile 14)');
+        assert.deepStrictEqual(j.slice(8, 12), [true, true, true, false], 'au zoom 15, le quart bas-gauche ne contient pas le nom (il est à droite du milieu de la tuile 14)');
         assert.deepStrictEqual(j[12], {bois: 60, pres: 30, urbain: 10});
     });
 
@@ -196,6 +196,8 @@ echo json_encode(['ok' => 1]);`, env);
             await p.waitForSelector(sel, {timeout: 20000});
             assert.match(await p.textContent(sel), /Carte hors ligne · Basse-Normandie.*ODbL/s);
             await p.click(`${sel} [data-dmaj-do="get"]`);
+            await p.waitForSelector('.confirm-box-dialog [data-cb-ok]', {timeout: 30000}); // « Télécharger ? » : taille, source et licence dites avant
+            assert.match(await p.textContent('.confirm-box-dialog'), /ODbL/); await p.click('.confirm-box-dialog [data-cb-ok]');
             await p.waitForSelector(`${sel}[data-dmaj-state="ok"]`, {timeout: 30000});
             const s2 = await api('telech_a_osm_status'); assert.strictEqual(s2.packs['basse-normandie'].label, 'Basse-Normandie'); assert.strictEqual(s2.packs['basse-normandie'].size, mbBytes.length);
         });

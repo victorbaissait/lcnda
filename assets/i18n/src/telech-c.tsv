@@ -12,10 +12,7 @@ CC BY 4.0 ; fichier ouvert ici par toi, le {d} ¦ CC BY 4.0; file opened here by
 CC BY 4.0 ; fichier ouvert ici par toi ¦ CC BY 4.0; file opened here by you ¦ CC BY 4.0; archivo abierto aquí por ti ¦ CC BY 4.0; Datei hier von dir geöffnet ¦ CC BY 4.0; file aperto qui da te ¦ CC BY 4.0; ficheiro aberto aqui por ti ¦ CC BY 4.0; plik otwarty tutaj przez ciebie ¦ CC BY 4.0; bestand hier door jou geopend
 table de génération ¦ cohort table ¦ tabla por generación ¦ Generationentafel ¦ tavola per generazione ¦ tábua por geração ¦ tablica dla pokolenia ¦ generatietafel
 table du moment de {y} ¦ period table of {y} ¦ tabla del momento de {y} ¦ Periodentafel von {y} ¦ tavola del momento del {y} ¦ tábua do momento de {y} ¦ tablica bieżąca z {y} ¦ periodetafel van {y}
-par génération ¦ by cohort ¦ por generación ¦ nach Generation ¦ per generazione ¦ por geração ¦ dla pokolenia ¦ per generatie
 du moment ¦ period ¦ del momento ¦ Periode ¦ del momento ¦ do momento ¦ bieżąca ¦ periode
-femmes ¦ women ¦ mujeres ¦ Frauen ¦ donne ¦ mulheres ¦ kobiety ¦ vrouwen
-hommes ¦ men ¦ hombres ¦ Männer ¦ uomini ¦ homens ¦ mężczyźni ¦ mannen
 ensemble ¦ both sexes ¦ ambos sexos ¦ beide Geschlechter ¦ entrambi i sessi ¦ ambos os sexos ¦ obie płcie ¦ beide geslachten
 Sur 100 enfants nés en {y} ({c}), {l}. ¦ Out of 100 children born in {y} ({c}), {l}. ¦ De 100 niños nacidos en {y} ({c}), {l}. ¦ Von 100 Kindern, die {y} geboren wurden ({c}), {l}. ¦ Su 100 bambini nati nel {y} ({c}), {l}. ¦ Em 100 crianças nascidas em {y} ({c}), {l}. ¦ Ze 100 dzieci urodzonych w {y} ({c}): {l}. ¦ Van 100 kinderen geboren in {y} ({c}): {l}.
 {n} fêtaient leurs {a} ans ¦ {n} reached their {a}th birthday ¦ {n} cumplían {a} años ¦ erlebten {n} ihren {a}. Geburtstag ¦ {n} compivano {a} anni ¦ {n} faziam {a} anos ¦ {n} dożywało {a} lat ¦ {n} werden {a} jaar
@@ -118,4 +115,3 @@ Salaires et prix (SGF) ¦ Wages and prices (SGF) ¦ Salarios y precios (SGF) ¦ 
 pas de série ouverte trouvée ¦ no open series found ¦ ninguna serie abierta encontrada ¦ keine offene Reihe gefunden ¦ nessuna serie aperta trovata ¦ nenhuma série aberta encontrada ¦ nie znaleziono otwartej serii ¦ geen open reeks gevonden
 prix et salaires sourcés ¦ sourced prices and wages ¦ precios y salarios con fuente ¦ belegte Preise und Löhne ¦ prezzi e salari con fonte ¦ preços e salários com fonte ¦ ceny i płace ze źródłami ¦ prijzen en lonen met bron
 Convertisseur franc → euro (Insee) ¦ Franc → euro converter (Insee) ¦ Conversor franco → euro (Insee) ¦ Umrechner Franc → Euro (Insee) ¦ Convertitore franco → euro (Insee) ¦ Conversor franco → euro (Insee) ¦ Przelicznik frank → euro (Insee) ¦ Omrekening frank → euro (Insee)
-Ici ¦ Here ¦ Aquí ¦ Hier ¦ Qui ¦ Aqui ¦ Tutaj ¦ Hier

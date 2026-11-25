@@ -197,7 +197,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
         'lcnda-ld:hist_gares': JSON.stringify({q: 'tulle', crit: [], sort: 'name', dir: 'desc', view: 'table', hide: ['code'], gps: true}), // liste de données : colonne GPS, colonne cachée
     };
     // ce qui ne doit ni partir ni être effacé
-    const PRIVATE = {'genealogie-artist-keys': JSON.stringify({discogs: 'JETON-SECRET-123'}), 'lcnda-langue': 'fr', 'genealogie-tx-draft-new': 'mon brouillon', 'lcnda-journal-erreurs': '[]', 'lcnda-mode-simple-device': JSON.stringify({start: true})};
+    const PRIVATE = {'genealogie-artist-keys': JSON.stringify({discogs: 'JETON-SECRET-123'}), 'lcnda-langue': 'fr', 'genealogie-tx-draft-new': 'mon brouillon', 'lcnda-journal-erreurs': '[]', 'lcnda-mode-simple-device': JSON.stringify({start: false})};
     const lsAll = () => page.evaluate(ks => Object.fromEntries(ks.map(k => [k, localStorage.getItem(k)])), [...Object.keys(MINE), ...Object.keys(PRIVATE), 'genealogie-side-order', 'genealogie-dashboard-blocks', 'genealogie-design', 'lcnda-photomaps-shape']);
     const setLs = obj => page.evaluate(o => { for (const [k, v] of Object.entries(o)) { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } }, obj);
     const resetServer = keys => page.evaluate(async ks => {
