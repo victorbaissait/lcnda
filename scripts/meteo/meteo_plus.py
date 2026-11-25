@@ -14,8 +14,9 @@ Pas fabriqué : E-OBS (insitu-gridded-observations-europe). Sa licence (« E-OBS
 
 Tout se demande au Climate Data Store (clé dans ~/.cdsapirc, la même pour le serveur EWDS de GloFAS ; les conditions de chaque
 jeu doivent être acceptées une fois sur le site, onglet « Download »). Les demandes sont découpées en MORCEAUX :
-  - un mois par demande (les jeux en grille), une année (les relevés in situ) ;
-  - si Copernicus répond « Request too large » / « cost limits exceeded », le morceau est recoupé en deux, puis encore en deux… ;
+  - une année par demande (ERA5-Land, UTCI, GloFAS, relevés in situ), un mois (CERRA : toute l'Europe, sans découpe par zone) ;
+  - si Copernicus répond « Request too large » / « cost limits exceeded », le morceau est recoupé en deux (mois 1–6 et 7–12,
+    puis 1–3…, puis les jours d'un mois), et ainsi de suite ;
   - chaque morceau fini est réduit tout de suite (quelques valeurs par carreau et par jour) et rangé dans la base de travail :
     le fichier téléchargé est effacé (le cache de GitHub reste petit) ; une coupure (6 h de GitHub) reprend au morceau suivant.
 Les noms des champs de chaque demande sont relus dans le formulaire officiel du CDS (…/api/retrieve/v1/processes/<jeu>) quand
@@ -82,7 +83,7 @@ def conv(kind, v):
 # décalage 1 : la valeur datée 0 h du jour J est celle de la veille (cumuls d'ERA5-Land, débits de GloFAS) → rangée au jour J-1.
 SPECS = {
     'plus-neige': dict(
-        title='Neige et températures fines (ERA5-Land)', source='era5land', first=1950, server='cds', area=BOX_4, next_day=True,
+        title='Neige et températures fines (ERA5-Land)', source='era5land', first=1950, server='cds', area=BOX_4, next_day=True, chunk='year',
         requests=[
             dict(name='neige', dataset='reanalysis-era5-land',
                  req={'variable': ['snow_depth', 'snowfall'], 'time': ['00:00'], 'data_format': 'netcdf', 'download_format': 'unarchived'},
@@ -95,13 +96,13 @@ SPECS = {
                  cols=[(('t2m', '2m_temperature'), 'TX', 'max', 0, 'K10')]),
         ], order=['TN', 'TX', 'SH', 'SF']),
     'plus-ressenti': dict(
-        title='Ressenti thermique (UTCI, ERA5-HEAT)', source='utci', first=1940, server='cds', area=BOX_4,
+        title='Ressenti thermique (UTCI, ERA5-HEAT)', source='utci', first=1940, server='cds', area=BOX_4, chunk='year',
         requests=[dict(name='utci', dataset='derived-utci-historical',
                        req={'variable': ['universal_thermal_climate_index'], 'version': '1_1', 'product_type': 'consolidated_dataset'},
                        cols=[(('utci',), 'UX', 'max', 0, 'K10'), (('utci',), 'UN', 'min', 0, 'K10')])],
         order=['UX', 'UN']),
     'plus-rivieres': dict(
-        title='Débit des rivières (GloFAS)', source='glofas', first=1979, server='ewds', area=BOX_4, next_day=True, rivers=True,
+        title='Débit des rivières (GloFAS)', source='glofas', first=1979, server='ewds', area=BOX_4, next_day=True, rivers=True, chunk='year',
         requests=[dict(name='debit', dataset='cems-glofas-historical',
                        req={'system_version': ['version_4_0'], 'hydrological_model': ['lisflood'], 'product_type': ['consolidated'],
                             'variable': ['river_discharge_in_the_last_24_hours'], 'data_format': 'netcdf', 'download_format': 'unarchived'},
@@ -109,7 +110,7 @@ SPECS = {
                        cols=[(('dis24', 'avg_dis', 'dis', 'river_discharge_in_the_last_24_hours'), 'QL', 'mean', 1, 'logq')])],
         order=['QL']),
     'plus-cerra': dict(
-        title='Températures très fines (CERRA)', source='cerra', first=1985, server='cds', area=None,  # grille de Lambert : pas de découpe par zone
+        title='Températures très fines (CERRA)', source='cerra', first=1985, server='cds', area=None, chunk='month',  # grille de Lambert : pas de découpe par zone
         requests=[dict(name='t2m', dataset='reanalysis-cerra-single-levels',
                        req={'variable': ['2m_temperature'], 'level_type': 'surface_or_atmosphere', 'data_type': ['reanalysis'], 'product_type': 'analysis',
                             'time': [f'{h:02d}:00' for h in range(0, 24, 3)], 'data_format': 'netcdf'},
@@ -339,10 +340,14 @@ def month_days(y, m):
     return (datetime.date(y + (m == 12), m % 12 + 1, 1) - datetime.timedelta(days=1)).day
 
 
-def chunks_of(y, months=None):
-    """les morceaux d'une année : un par mois → (étiquette, mois, [jours])"""
+def chunks_of(y, size='month', months=None):
+    """les morceaux d'une année → (étiquette, [mois], [jours]) : l'année entière d'un coup (recoupée si Copernicus la refuse),
+    ou un mois par demande"""
+    if size == 'year' and not months:
+        yield f'{y}', list(range(1, 13)), DAYS
+        return
     for m in (months or range(1, 13)):
-        yield f'{y}-{m:02d}', m, [f'{d:02d}' for d in range(1, month_days(y, m) + 1)]
+        yield f'{y}-{m:02d}', [m], [f'{d:02d}' for d in range(1, month_days(y, m) + 1)]
 
 
 # ═══════════════════════ Fabriquer un pack en grille ═══════════════════════
@@ -359,12 +364,14 @@ class GridBuilder:
         self.nc = netCDF4
 
     # — un morceau : télécharger (en recoupant s'il est trop gros), réduire, effacer le fichier —
-    def fetch(self, r, y, m, days, label):
+    def fetch(self, r, y, months, days, label):
+        """un morceau (une année, ou des mois, ou des jours d'un mois) : télécharger — trop gros → recoupé en deux —, réduire,
+        effacer le fichier"""
         step = f"{r['name']}:{label}"
         if self.w.done(step):
             return
         req = dict(r['req'])
-        req.update({'year': [str(y)], 'month': [f'{m:02d}'], 'day': days})
+        req.update({'year': [str(y)], 'month': [f'{m:02d}' for m in months], 'day': days})
         if self.spec.get('area'):
             req['area'] = list(self.spec['area'])
         target = os.path.join(self.dl, f"{self.kind}-{r['name']}-{label}.nc")
@@ -373,19 +380,23 @@ class GridBuilder:
             try:
                 self.cds.retrieve(r['dataset'], req, target + '.part', r.get('hint'))
             except TooLarge:
-                if len(days) <= 1:
+                if len(months) > 1:  # d'abord par mois : 1–6 et 7–12, puis 1–3…
+                    h = len(months) // 2
+                    parts = [(months[:h], days, f'{y}-m{months[0]:02d}-{months[h - 1]:02d}'), (months[h:], days, f'{y}-m{months[h]:02d}-{months[-1]:02d}')]
+                elif len(days) > 1:  # puis par jours
+                    h = len(days) // 2
+                    parts = [(months, days[:h], f'{y}-{months[0]:02d}-{days[0]}-{days[h - 1]}'), (months, days[h:], f'{y}-{months[0]:02d}-{days[h]}-{days[-1]}')]
+                else:
                     raise Stop(f'Copernicus refuse même un seul jour ({r["dataset"]} {label}) : « Request too large ». Réduis la zone (area) dans scripts/meteo/meteo_plus.py.')
-                half = len(days) // 2
                 self.say(f'     ↳ « trop gros » pour Copernicus : {label} est recoupé en deux')
-                for part in (days[:half], days[half:]):
-                    self.fetch(r, y, m, part, f'{y}-{m:02d}-{part[0]}-{part[-1]}')
+                for ms, ds_, lab in parts:
+                    self.fetch(r, y, ms, ds_, lab)
                 self.w.mark(step)
                 return
             os.replace(target + '.part', target)
         self.reduce(r, target, label)
         self.w.mark(step)
-        tmp = target + '.d'
-        shutil.rmtree(tmp, ignore_errors=True)
+        shutil.rmtree(target + '.d', ignore_errors=True)
         os.remove(target)
 
     def keep_points(self, la, lo):
@@ -398,10 +409,12 @@ class GridBuilder:
         return np.argwhere(mask)
 
     def reduce(self, r, path, label):
+        """le fichier reçu → pour chaque carreau gardé et chaque jour, la valeur réduite (min., max., première, moyenne) ;
+        tableaux numpy (un par colonne et par jour) : une année de GloFAS (≈ 40 000 points) tient en ≈ 100 Mo"""
         import numpy as np
         files = [f for f in unpack(path, path + '.d') if not f.lower().endswith(('.json', '.txt', '.pdf'))]
-        acc = {}  # (colonne) → {date: {point: [valeurs]}}
-        pts = None
+        acc = {}  # colonne → {date: [valeurs (np), nombre (np)]}
+        pts = coords = la = lo = None
         for fp in files:
             ds = self.nc.Dataset(fp)
             try:
@@ -409,7 +422,7 @@ class GridBuilder:
                 la, lo = nc_latlon(ds)
                 if pts is None:
                     pts = self.keep_points(la, lo)
-                    flat = [tuple(p) for p in pts]
+                    coords = [(float(la[a, b]), float(lo[a, b])) for a, b in pts]
                 for names, col, agg, shift, cv in r['cols']:
                     v = nc_find(ds, names)
                     for t, when in enumerate(times):
@@ -417,30 +430,50 @@ class GridBuilder:
                         arr = np.ma.filled(np.ma.asarray(v[t]).astype(float), np.nan).squeeze()
                         if arr.ndim != 2:
                             arr = arr.reshape(la.shape)
-                        vals = arr[pts[:, 0], pts[:, 1]] if len(pts) else np.array([])
-                        slot = acc.setdefault(col, {}).setdefault(day, [[] for _ in flat])
-                        for i, x in enumerate(vals):
-                            if not math.isnan(x):
-                                slot[i].append(float(x))
-                coords = [(float(la[a, b]), float(lo[a, b])) for a, b in flat]
+                        vals = arr[pts[:, 0], pts[:, 1]] if len(pts) else np.zeros(0)
+                        ok = ~np.isnan(vals)
+                        slot = acc.setdefault(col, {}).get(day)
+                        if slot is None:
+                            acc[col][day] = [np.where(ok, vals, np.nan), ok.astype(np.int32)]
+                            continue
+                        cur, n = slot
+                        if agg == 'min':
+                            slot[0] = np.fmin(cur, vals)
+                        elif agg == 'max':
+                            slot[0] = np.fmax(cur, vals)
+                        elif agg == 'mean':
+                            slot[0] = np.where(ok, np.nan_to_num(cur) + vals, cur)
+                        else:  # 'first' : la première valeur connue
+                            slot[0] = np.where(np.isnan(cur), vals, cur)
+                        slot[1] = n + ok
             finally:
                 ds.close()
-        if not acc:
+        if not acc or coords is None:
             return
         aggs = {col: (agg, cv) for _, col, agg, _, cv in r['cols']}
+        for col, (agg, _) in aggs.items():
+            if agg == 'mean':
+                for day, slot in acc.get(col, {}).items():
+                    slot[0] = np.where(slot[1] > 0, slot[0] / np.maximum(slot[1], 1), np.nan)
         # les points : un carreau par point qui a au moins une valeur
-        first_year_rivers = self.spec.get('rivers') and not self.w.done('cellules-fixees')
+        rivers = self.spec.get('rivers')
+        first_year_rivers = rivers and not self.w.done('cellules-fixees')
+        total = np.zeros(len(coords))
+        count = np.zeros(len(coords))
+        for col in acc:
+            for day, (vals, n) in acc[col].items():
+                total += np.nan_to_num(vals)
+                count += ~np.isnan(vals)
         ids = {}
         for i, (lat, lon) in enumerate(coords):
-            has = [x for col in acc for d in acc[col] for x in acc[col][d][i]]
-            if not has:
+            if not count[i]:
                 continue
-            if self.spec.get('rivers') and first_year_rivers and sum(has) / len(has) < GLOFAS_QFIRST:
+            if first_year_rivers and total[i] / count[i] < GLOFAS_QFIRST:
                 continue
             alt = None
             if self.static is not None:
                 alt = self.static['alt'][tuple(pts[i])]
-            gid = self.w.cell(self.spec['source'], lat, lon, self.step_of(la, lo), alt, create=not (self.spec.get('rivers') and not first_year_rivers))
+            gid = self.w.cell(self.spec['source'], lat, lon, self.step_of(la, lo), alt, create=not (rivers and not first_year_rivers))
             if gid:
                 ids[i] = gid
         # rangé par année (un morceau peut toucher la fin de l'année d'avant : décalage d'un jour)
@@ -448,23 +481,22 @@ class GridBuilder:
         for col, days in acc.items():
             for d in days:
                 by_year.setdefault(d.year, set()).add(d)
+        order = [c for c in self.spec['order'] if c in aggs]
         for yy, dset in by_year.items():
             d0, d1 = min(dset), max(dset)
             j0 = (d0 - datetime.date(yy, 1, 1)).days
             n = (d1 - d0).days + 1
+            mats = {}  # colonne → matrice (jours × points), déjà convertie
+            for col in order:
+                agg, cv = aggs[col]
+                m = np.full((n, len(coords)), np.nan)
+                for k in range(n):
+                    slot = acc.get(col, {}).get(d0 + datetime.timedelta(days=k))
+                    if slot is not None:
+                        m[k] = slot[0]
+                mats[col] = (m, cv)
             for i, gid in ids.items():
-                cols = []
-                for col in [c for c in self.spec['order'] if c in aggs]:
-                    agg, cv = aggs[col]
-                    series = []
-                    for k in range(n):
-                        xs = acc.get(col, {}).get(d0 + datetime.timedelta(days=k), [[]] * len(coords))[i]
-                        if not xs:
-                            series.append(None)
-                            continue
-                        val = {'min': min, 'max': max, 'first': lambda a: a[0], 'mean': lambda a: sum(a) / len(a)}[agg](xs)
-                        series.append(conv(cv, val))
-                    cols.append((col, series))
+                cols = [(col, [conv(cv, float(x)) if not math.isnan(x) else None for x in m[:, i]]) for col, (m, cv) in mats.items()]
                 self.w.db.execute('INSERT OR REPLACE INTO morceaux(annee, grid_id, cle, j0, blob) VALUES(?,?,?,?,?)', (yy, gid, f"{r['name']}:{label}", j0, F.encode(cols)))
         self.w.db.commit()
 
@@ -552,13 +584,14 @@ class GridBuilder:
             if self.w.done(f'annee-{y}'):
                 continue
             months = [1] if self.test else None
-            for label, m, days in chunks_of(y, months):
+            size = self.spec.get('chunk', 'month')
+            for label, ms, days in chunks_of(y, size, months):
                 for r in self.spec['requests']:
-                    self.fetch(r, y, m, days, label)
+                    self.fetch(r, y, ms, days, label)
             if self.spec.get('next_day') and y < datetime.date.today().year - 1 and not self.test:  # la valeur du 31 décembre arrive avec le 1er janvier suivant
-                for label, m, days in chunks_of(y + 1, [1]):
+                for label, ms, days in list(chunks_of(y + 1, size))[:1]:
                     for r in self.spec['requests']:
-                        self.fetch(r, y + 1, m, days, label)
+                        self.fetch(r, y + 1, ms, days, label)
             self.assemble(y)
         # le 31 décembre de l'année d'avant la première (arrivé avec le 1er janvier) : rien à en faire
         self.w.db.execute('DELETE FROM morceaux WHERE annee<?', (y0,))
