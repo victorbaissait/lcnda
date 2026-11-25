@@ -5,7 +5,7 @@ Téléchargements gardés dans un cache (une fois), à petit pas ; écriture des
 """
 import gzip, hashlib, json, os, time, urllib.error, urllib.parse, urllib.request
 
-UA = 'LCNDA-data-builder/1.0 (genealogy app; offline data build)'
+UA = 'LCNDA-lot8-builder/1.0 (genealogy desktop app; one-off data build)'
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 OUT = os.path.join(ROOT, 'assets', 'data')
 CACHE = os.environ.get('L8_CACHE') or os.path.join(ROOT, 'scripts', 'lot8-ciel-metier', '.cache')
