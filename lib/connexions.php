@@ -18,7 +18,7 @@ declare(strict_types=1);
  *  - cx_links(id, a_type, a_id, b_type, b_id)              courrier → piste, rappel → enquête ou piste.
  *
  * GET  cx_count | cx_basket&basket_id= | cx_person_investigations&person_id= | cx_links&a_type=&a_id= (ou b_type/b_id)
- *      | cx_item_links&item_id= | cx_notes&q=
+ *      | cx_item_links&item_id= | cx_notes&q= | cx_used&kind=&ids= (« Déjà utilisé dans… »)
  * POST cx_write {op: basket_add | basket_remove | basket_restore | basket_clear | basket_new | basket_rename | basket_delete
  *      | basket_undelete | inv_receive | inv_receive_undo | link_add | link_remove | item_link_remove | item_link_restore
  *      | reminder_add | to_mylist}
@@ -484,6 +484,31 @@ function cx_fetch_url(array $d): array
     return ['name' => $name, 'url' => $url, 'type' => $type, 'base64' => base64_encode($body), 'size' => strlen($body), 'at' => date('Y-m-d')];
 }
 
+/* ═════════════ « Déjà utilisé dans… » (fenêtre « Prendre depuis… ») : les enquêtes où ces éléments sont déjà rangés ═════════════
+ * GET cx_used&kind=event&ids=1,2 → {used: {id: [{investigation_id, title, item_title}]}} ; un événement : la piste qui le relie ;
+ * un média : les pièces de l'enquête ; le reste : les pièces des pistes (investigation_item_links). 200 numéros au plus. */
+function cx_used(PDO $pdo, array $q): array
+{
+    cx_schema($pdo);
+    $kind = (string) preg_replace('/[^a-z_]/', '', strtolower(cx_str($q['kind'] ?? '', 30)));
+    $ids = array_slice(array_values(array_unique(array_filter(array_map('intval', explode(',', (string) ($q['ids'] ?? ''))), static fn(int $i): bool => $i > 0))), 0, 200);
+    $out = [];
+    if ($kind === '' || !$ids) { return ['used' => (object) []]; }
+    $in = implode(',', $ids);
+    $sqls = ["SELECT l.entity_id AS id, v.id AS investigation_id, v.title, i.title AS item_title FROM investigation_item_links l JOIN investigation_items i ON i.id=l.investigation_item_id JOIN investigations v ON v.id=i.investigation_id WHERE l.entity_type=" . $pdo->quote($kind) . " AND l.entity_id IN ({$in})"];
+    if ($kind === 'event') { $sqls[] = "SELECT i.linked_event_id AS id, v.id AS investigation_id, v.title, i.title AS item_title FROM investigation_items i JOIN investigations v ON v.id=i.investigation_id WHERE i.linked_event_id IN ({$in})"; }
+    if ($kind === 'media') { $sqls[] = "SELECT m.media_id AS id, v.id AS investigation_id, v.title, '' AS item_title FROM investigation_media m JOIN investigations v ON v.id=m.investigation_id WHERE m.media_id IN ({$in})"; }
+    foreach ($sqls as $sql) {
+        try { $rows = $pdo->query($sql . ' LIMIT 1000')->fetchAll(PDO::FETCH_ASSOC); } catch (Throwable $_) { continue; } // une ancienne base : colonne absente
+        foreach ($rows as $r) {
+            $k = (int) $r['id']; $iv = (int) $r['investigation_id'];
+            if (in_array($iv, array_column($out[$k] ?? [], 'investigation_id'), true)) { continue; }
+            $out[$k][] = ['investigation_id' => $iv, 'title' => (string) $r['title'], 'item_title' => (string) $r['item_title']];
+        }
+    }
+    return ['used' => (object) $out];
+}
+
 /* ═════════════ aiguillage ═════════════ */
 function cx_api_get(PDO $pdo, string $action, array $q): array
 {
@@ -494,6 +519,7 @@ function cx_api_get(PDO $pdo, string $action, array $q): array
         'cx_links' => cx_links($pdo, $q),
         'cx_item_links' => ['links' => cx_item_links($pdo, safe_int($q['item_id'] ?? 0))],
         'cx_notes' => cx_notes($pdo, $q),
+        'cx_used' => cx_used($pdo, $q),
         default => cxn_api_get($pdo, $action, $q) ?? throw new LcndaBadInput('Action inconnue.'), // 🧩 les besoins (lib/connexions_besoins.php)
     };
 }

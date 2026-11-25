@@ -266,7 +266,7 @@
             <div class="ld-results" data-ld-results></div>
             <div class="ld-more-host" data-ld-more-host></div></section>`;
         bindPage(host.querySelector('.ld-page'), d);
-        try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
+        try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, rows: () => cur.rows, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
         paintSaved(); paintChips(); await refresh();
     }
 
@@ -312,6 +312,7 @@
         const body = cur.rows.map((r, i) => `<tr data-ld-row="${i}">${cs.map((f, j) => (j === 0 && d.open ? `<td><button type="button" class="table-link" data-ld-open="${i}">${esc(r[f.key] ?? '—')}</button></td>` : cellHtml(f, r))).join('')}${urls.length ? `<td class="ld-links">${urls.map(u => (r[u.key] ? `<a href="${esc(A().safeUrl ? A().safeUrl(r[u.key]) : r[u.key])}" target="_blank" rel="noopener" title="${esc(T(u.label))}">↗</a>` : '')).join(' ')}</td>` : ''}</tr>`).join('');
         res.innerHTML = `<div class="data-table-wrap ld-table-wrap"><table class="data-table ld-table"><thead><tr>${head}${urls.length ? '<th></th>' : ''}</tr></thead><tbody>${body}</tbody></table></div>`;
         paintMore();
+        try { ext.connexions?.listRowsPainted?.(res, cur.rows, {d, total: cur.total}); } catch (e) { console.error(e); } // 📥 cases « Tu choisis des lignes… » (heritage-connexions.js)
     }
     function paintMore() {
         const host = ws()?.querySelector('[data-ld-more-host]'); if (!host) return;

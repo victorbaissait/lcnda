@@ -85,7 +85,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/terre-mots.css?v=1">
     <link rel="stylesheet" href="assets/css/veille-synchro.css?v=1">
     <link rel="stylesheet" href="assets/css/pistes-branches-celebres.css?v=1">
-    <link rel="stylesheet" href="assets/css/connexions.css?v=3">
+    <link rel="stylesheet" href="assets/css/connexions.css?v=4">
     <link rel="stylesheet" href="assets/css/assistant-ia.css?v=3">
     <link rel="stylesheet" href="assets/css/comptes-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/rapports.css?v=1">
@@ -1330,7 +1330,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sidegroups.js?v=14" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
-<script src="assets/js/app-listes-donnees.js?v=4" defer></script>
+<script src="assets/js/app-listes-donnees.js?v=5" defer></script>
 <script src="assets/js/app-maintenance.js?v=68" defer></script>
 <script src="assets/js/app-recherche.js?v=35" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=2" defer></script>
@@ -1687,7 +1687,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=2" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
-<script src="assets/js/heritage-connexions.js?v=3" defer></script>
+<script src="assets/js/heritage-connexions.js?v=4" defer></script>
 <script src="assets/js/heritage-connexions-besoins.js?v=2" defer></script><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>

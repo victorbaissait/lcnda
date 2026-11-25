@@ -281,13 +281,17 @@ function picker_events(PDO $pdo, string $q, int $offset, int $limit, array $opts
     $where = picker_text_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params);
     // filter.person_id : les événements d'une personne et de ses couples (⏳ Une journée dans la vie de…)
     if (!empty($opts['person_id'])) { $pid = (int) $opts['person_id']; $where = "({$where}) AND (e.person_id={$pid} OR f.partner1_id={$pid} OR f.partner2_id={$pid})"; }
-    [$total, $rows] = picker_page($pdo, "SELECT e.id, e.title, e.date_text, e.year, t.label, pl.name AS place, e.scope, {$who} AS who, {$couple} AS couple",
+    $src = picker_table_exists($pdo, 'source_links') ? "(SELECT count(*) FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id)" : '0'; // 📥 « Prendre depuis… » : nombre de sources
+    [$total, $rows] = picker_page($pdo, "SELECT e.id, e.title, e.date_text, e.year, t.label, t.gedcom_tag AS tag, pl.name AS place, e.scope, e.person_id, {$who} AS who, {$couple} AS couple, {$src} AS n_src",
         "FROM events e LEFT JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id WHERE {$where}",
         'e.year IS NULL, e.year, e.id', $params, $offset, $limit);
     return ['total' => $total, 'items' => array_map(static fn($r) => [
         'kind' => 'event', 'id' => (int) $r['id'], 'title' => trim((string) ($r['title'] ?: $r['label'] ?: 'Événement')),
         'meta' => implode(' · ', array_filter([trim((string) ($r['scope'] === 'family' ? $r['couple'] : $r['who'])), trim((string) $r['date_text']), trim((string) $r['place'])])),
         'badge' => $r['year'] ? (string) $r['year'] : '', 'badge_style' => '', 'group' => 'event', 'icon' => '📅', 'short' => (string) ($r['year'] ?? ''),
+        // 📥 « Prendre depuis… » : chaque morceau à part (qui, quand, où, sorte, sources)
+        'who' => trim((string) ($r['scope'] === 'family' ? $r['couple'] : $r['who'])), 'date_text' => trim((string) $r['date_text']), 'place' => trim((string) $r['place']),
+        'type' => trim((string) $r['label']), 'tag' => (string) ($r['tag'] ?? ''), 'person_id' => (int) ($r['person_id'] ?? 0), 'year' => $r['year'] ? (int) $r['year'] : null, 'sources' => (int) $r['n_src'],
     ], $rows)];
 }
 
