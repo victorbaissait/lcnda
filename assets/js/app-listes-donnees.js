@@ -77,7 +77,7 @@
             const row = L.find(x => x[0] === k); if (row) row[2] = lab; else L.push([k, '91', lab]);
             ext.lists[k] = token => renderList(d, token);
         }
-        if (G) G[3].splice(0, G[3].length, OVERVIEW, ...ds.map(keyOf));
+        if (G) G[3].splice(0, G[3].length, OVERVIEW, ...(ext.dataToolKeys || []).filter(k => ext.lists?.[k]), ...ds.map(keyOf)); // ext.dataToolKeys : les outils sur toutes les données (heritage-tout-sur.js)
         const st = app.state;
         if (repaint && st?.module === 'listes') { try { app.renderSidebar?.(); } catch (_) {} }
     }
