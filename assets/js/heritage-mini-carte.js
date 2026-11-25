@@ -47,7 +47,7 @@
     function register(cfg) {
         const id = 'mm' + (++seq).toString(36) + Math.random().toString(36).slice(2, 6);
         pending.set(id, {...cfg, t: Date.now()});
-        if (pending.size > 300) pending.delete(pending.keys().next().value);
+        if (pending.size > 60) pending.delete(pending.keys().next().value);
         watch(); return id;
     }
     function watch() {
@@ -56,11 +56,18 @@
     }
     function later() { if (queued) return; queued = true; Promise.resolve().then(() => { queued = false; scan(document); }); }
     function scan(root) {
-        for (const [id, cfg] of [...pending]) {
-            const el = root.querySelector?.(`[data-mm="${id}"]`) || (root.matches?.(`[data-mm="${id}"]`) ? root : null);
-            if (el && el.isConnected) { pending.delete(id); try { el.__mm = new MiniMap(el, cfg); } catch (e) { console.error(e); } }
-            else if (Date.now() - cfg.t > 120000) pending.delete(id);
+        if (!pending.size) { if (mo) { mo.disconnect(); mo = null; } return; }
+        // une seule recherche dans la page, quel que soit le nombre de cartes en attente
+        const els = [...(root.querySelectorAll?.('[data-mm]:not([data-mm-ready])') || [])];
+        if (root.matches?.('[data-mm]:not([data-mm-ready])')) els.push(root);
+        for (const el of els) {
+            const cfg = pending.get(el.dataset.mm);
+            if (!cfg || !el.isConnected) continue;
+            pending.delete(el.dataset.mm);
+            try { el.__mm = new MiniMap(el, cfg); } catch (e) { console.error(e); }
         }
+        const now = Date.now();
+        for (const [id, cfg] of pending) if (now - cfg.t > 20000) pending.delete(id); // jamais mise dans la page : oubliée
         if (!pending.size && mo) { mo.disconnect(); mo = null; }
     }
     function miniMapOf(el) {
