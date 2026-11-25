@@ -449,7 +449,7 @@
                 <div class="page-actions"><button type="button" class="button secondary" data-tm-clear ${about.cache?.count ? '' : 'disabled'}>${esc(T('🗑 Effacer les réponses gardées'))}</button></div></div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3><div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Source'))}</th><th>${esc(T('Ce qu’elle donne'))}</th><th>${esc(T('Où'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Mention'))}</th></tr></thead><tbody>${rows}</tbody></table></div>
                 <p class="muted">${esc(T('Ce qui part sur Internet : seulement le prénom et le nom d’une personne décédée, pour les homonymes (jamais pour une fiche confidentielle ou une personne vivante), et le numéro d’un astéroïde. Tout le reste est dans l’app.'))}</p>
-                <p class="muted">${esc(T('Pas encore là : les noms régionaux d’OpenStreetMap (service injoignable le jour de la fabrication) ; peu de mesures de pays sont données par les sources libres.'))}</p></div></section>`;
+                <p class="muted">${esc(T('Pas encore là : les noms régionaux d’OpenStreetMap (service injoignable le jour de la fabrication) ; les mots du coin d’une partie des régions seulement (le Wiktionnaire limitait les demandes) ; peu de mesures de pays sont données par les sources libres.'))}</p></div></section>`;
     }
     ext.maintenance = ext.maintenance || {};
     ext.maintenance[TAB[0]] = token => drawSettings(token);
