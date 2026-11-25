@@ -5262,3 +5262,6 @@ html:not([lang="fr"]) .dashboard-widget-catalog-item strong,html:not([lang="fr"]
 /* ☑ tout un groupe de listes d’un coup (app-sidegroups.js) */
 .mt-gvis { display: inline-flex; align-items: center; flex: 0 0 auto; margin-right: 4px; cursor: pointer; }
 .mt-gvis input { width: 18px; height: 18px; margin: 0; cursor: pointer; }
+
+/* « hidden » gagne toujours : des règles comme .checkbox-line{display:flex!important} (même poids, plus loin) l'emportaient sur [hidden]{display:none!important} — les listes de choix filtrées (« Chercher un choix… ») ne se filtraient plus */
+[hidden][hidden] { display: none !important; }
