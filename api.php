@@ -718,6 +718,7 @@ try {
         'press_ads' => json_response(press_ads_all($pdo)),
         'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),
         'biography' => json_response(bio_get($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 📖 lib/biographie.php
+        'bio_living_mentions' => json_response(bio_living_mentions($pdo)), // 🔒 récits écrits à la main qui nomment un vivant (avertissement du livre)
         'biography_day' => json_response(bio_day($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // ⏳ Une journée dans la vie de… (lib/biographie_journee.php)
         'biography_day_events' => json_response(['events' => bio_day_events($pdo, safe_int($_GET['id'] ?? 0))]), // ⏳ les dates proposées
         'world_around' => json_response(world_around($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 🌍 lib/monde_autour.php

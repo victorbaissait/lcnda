@@ -435,6 +435,53 @@ function bio_text_for(PDO $pdo, int $id): string
     return bio_generate($pdo, $id, $o)['text'];
 }
 
+/**
+ * 🔒 GET bio_living_mentions : les récits écrits à la main (« ta version ») qui nomment une personne vivante, probablement
+ * vivante (statut inconnu, née il y a moins de 100 ans, sans décès) ou confidentielle. Le livre de famille prévient avant
+ * l'export : le texte écrit à la main sort tel quel. Rien n'est modifié.
+ */
+function bio_living_mentions(PDO $pdo): array
+{
+    $norm = static function (string $t): string {
+        $t = mb_strtolower($t);
+        if (class_exists('Normalizer')) { $t = (string) preg_replace('/\p{Mn}+/u', '', (string) Normalizer::normalize($t, Normalizer::FORM_D)); }
+        return ' ' . trim((string) preg_replace('/[^\p{L}\p{N}]+/u', ' ', $t)) . ' ';
+    };
+    $rows = $pdo->query("SELECT b.person_id, b.text FROM person_biographies b WHERE TRIM(b.text) <> ''")->fetchAll(PDO::FETCH_ASSOC);
+    if (!$rows) { return ['items' => []]; }
+    $people = [];
+    foreach ($pdo->query(person_select())->fetchAll(PDO::FETCH_ASSOC) as $p) { $people[(int) $p['id']] = $p; }
+    $now = (int) date('Y');
+    $hidden = [];
+    foreach ($people as $id => $p) {
+        $birth = isset($p['birth_year']) && $p['birth_year'] !== null && $p['birth_year'] !== '' ? (int) $p['birth_year'] : null;
+        $status = (string) ($p['living_status'] ?? '');
+        $living = $status === 'living' || (in_array($status, ['', 'unknown'], true) && $birth && $birth > $now - 100 && empty($p['death_year']));
+        if (!$living && (int) ($p['is_private'] ?? 0) !== 1) { continue; }
+        $first = trim((string) ($p['first_name'] ?? '')); $last = trim((string) ($p['last_name'] ?? ''));
+        if ($first === '' || $last === '') { continue; }
+        $first1 = preg_split('/\s+/u', $first)[0];
+        $hidden[$id] = ['name' => trim($first . ' ' . $last), 'why' => $living ? 'vivante' : 'confidentielle',
+            'keys' => array_unique([$norm($first1 . ' ' . $last), $norm($last . ' ' . $first1), $norm($first . ' ' . $last)])];
+    }
+    $items = [];
+    foreach ($rows as $r) {
+        $pid = (int) $r['person_id'];
+        if (isset($hidden[$pid])) { continue; } // la fiche elle-même n'est pas dans le livre
+        $txt = $norm((string) $r['text']);
+        $found = [];
+        foreach ($hidden as $hid => $h) {
+            if ($hid === $pid) { continue; }
+            foreach ($h['keys'] as $k) { if (trim($k) !== '' && str_contains($txt, $k)) { $found[] = ['id' => $hid, 'name' => $h['name'], 'why' => $h['why']]; break; } }
+        }
+        if ($found) {
+            $p = $people[$pid] ?? [];
+            $items[] = ['person_id' => $pid, 'person' => trim(($p['first_name'] ?? '') . ' ' . ($p['last_name'] ?? '')), 'mentions' => $found];
+        }
+    }
+    return ['items' => $items];
+}
+
 /** Les tables de 📖 la biographie, 🌍 du monde autour et 🛠️ des métiers anciens (migration de lib/migrations.php) */
 function recits_schema(PDO $pdo): void
 {

@@ -11,6 +11,8 @@
  *    Cadre du haut montré ou masqué (fiche épurée), les boutons carrés rangés, montrés ou cachés, sur 1 ou 2 colonnes,
  *    le lien « 🧩 Cette personne était… » en bouton carré ou en bas des badges.
  *    localStorage['genealogie-person-header'] = {frame: 'show'|'hide', order: [...], hidden: [...], cols: 1|2, pf: 'button'|'badges'}
+ *    + on: ['m_<action>'] (actions du menu ⋯ montrées en bouton, cachées au départ), names: {'m_<action>': [icône, nom]} ;
+ *    order mêle les boutons et les actions du menu. Ancien réglage sans « on » : rien ne change (⋯ ne se cache plus : il reste tant qu'il a une action).
  * 3. Boutons en haut à droite (Réglages → Apparence → « Boutons en haut à droite ») : ordre et boutons montrés.
  *    localStorage['genealogie-topbar-buttons'] = {order: [...], hidden: [...]} (🧮 et 🧓 : leur propre réglage)
  * Les clés suivent la base et les « 💾 Réglages enregistrés » (comme tous les réglages « genealogie-* »).

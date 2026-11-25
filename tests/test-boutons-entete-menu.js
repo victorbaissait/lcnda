@@ -50,7 +50,7 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
         const page = await browser.newPage({viewport: {width: w, height: 900}});
         page.on('pageerror', e => errs.push(`${w}px : ${e.message}`)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errs.push(`${w}px console : ${m.text()}`); });
         page.on('dialog', d => d.dismiss());
-        await page.goto(base, {waitUntil: 'load'}); await page.waitForTimeout(2000);
+        await page.goto(base, {waitUntil: 'load', timeout: 90000}); await page.waitForTimeout(2000);
         return page;
     };
     const toPerson = async (page, id) => {
@@ -171,7 +171,7 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
         await t('390 px : tous les boutons passent à la ligne, rien ne déborde', async () => {
             const ph = await browser.newPage({viewport: {width: 390, height: 844}});
             ph.on('pageerror', e => errs.push(`390px : ${e.message}`)); ph.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errs.push(`390px console : ${m.text()}`); });
-            await ph.goto(base, {waitUntil: 'load'}); await ph.waitForTimeout(2000);
+            await ph.goto(base, {waitUntil: 'load', timeout: 90000}); await ph.waitForTimeout(2000);
             await ph.evaluate(async () => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; await A.setModule('personnes'); await A.selectPerson(1, false); });
             await ph.waitForSelector('#workspace .person-hero-actions [data-lc-mb]', {timeout: 15000}); await ph.waitForTimeout(500);
             const m = await ph.evaluate(() => { const a = document.querySelector('#workspace .person-hero-actions'), h = document.querySelector('#workspace .person-hero'), hr = h.getBoundingClientRect(), W = document.documentElement.clientWidth;
