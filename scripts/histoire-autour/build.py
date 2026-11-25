@@ -232,9 +232,9 @@ out tags;'''
         keep.append(r)
     print(f'🐚 {len(keep)} relations nommées', flush=True)
     rows = []
-    for k, b in enumerate(batches([r['id'] for r in keep], 40)):
+    for k, b in enumerate(batches([r['id'] for r in keep], 8)):  # petits lots : les gros (40) faisaient 502/504 sur les serveurs publics
         ids = ','.join(str(i) for i in b)
-        res = overpass(cache, f'compostelle-geom{k}', f'[out:json][timeout:800];relation(id:{ids});out geom;')
+        res = overpass(cache, f'compostelle-geom8-{k}', f'[out:json][timeout:800];relation(id:{ids});out geom;')
         for r in res['elements']:
             t = r.get('tags', {})
             lines = []

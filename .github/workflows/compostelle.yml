@@ -24,7 +24,7 @@ jobs:
     # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
     if: github.event_name != 'push'
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,7 +32,14 @@ jobs:
           python-version: '3.12'
       - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
         run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les morceaux déjà téléchargés
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/ha-cache
+          key: compostelle-${{ github.run_id }}
+          restore-keys: compostelle-
       - name: Fabriquer les chemins (Overpass, plusieurs essais)
+        timeout-minutes: 280
         run: |
           for i in 1 2 3 4 5; do
             python3 scripts/histoire-autour/build.py --cache "$RUNNER_TEMP/ha-cache" --only compostelle && break
@@ -40,6 +47,12 @@ jobs:
           done
           test -s assets/data/ha-compostelle.json.gz
           ls -l assets/data/ha-compostelle.json.gz
+      - name: Garder les morceaux téléchargés pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/ha-cache
+          key: compostelle-${{ github.run_id }}
       - name: Enregistrer dans la branche
         run: |
           git config user.name "github-actions[bot]"
