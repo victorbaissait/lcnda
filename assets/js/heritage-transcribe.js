@@ -65,7 +65,39 @@
         });
         return {fixes, left};
     }
-    ext.txSnap = {normBody, textLinesOf, snapZones}; // pour les essais (tests/test-zones-recalees.js)
+    /* ─── 🧲 les zones de ligne suivent ce qu'on écrit : une zone qui couvrait toute sa ligne la couvre encore après la modification
+     * (une lettre au début ou à la fin de la ligne, la 1re lettre effacée, un collage sur le début, Entrée au milieu : la zone garde la
+     * 1re partie ; Retour arrière au début d'une ligne : les deux zones se partagent la ligne ; le contraire les remet comme avant). ─── */
+    const lineBounds = (text, pos) => { const ls = text.lastIndexOf('\n', pos - 1) + 1; let le = text.indexOf('\n', pos); if (le < 0) le = text.length; return [ls, le]; };
+    /** la zone couvre exactement le texte de sa ligne (sans les blancs du bord) */
+    function isFullLine(text, z) {
+        if (!(z.e > z.s) || z.e > text.length || text.slice(z.s, z.e).includes('\n')) return false;
+        const [ls, le] = lineBounds(text, z.s), raw = text.slice(ls, le), lead = raw.length - raw.trimStart().length;
+        return z.s === ls + lead && z.e === ls + lead + raw.trim().length;
+    }
+    /** before → now (un seul morceau changé : [p, oldEnd) de before devient [p, oldEnd + delta) de now) : les zones suivent */
+    function followEdit(before, now, zones, {p, oldEnd, delta}) {
+        const nowEnd = oldEnd + delta, ins = now.slice(p, nowEnd);
+        const full = new Set(zones.filter(z => !SNAP_SKIP.includes(z.kind) && z.s - 1 <= oldEnd && p <= z.e + 1 && isFullLine(before, z)));
+        const f = v => (v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, nowEnd)) : v);
+        const lead = oldEnd === p && delta > 0 && (p === 0 || now[p - 1] === '\n') && !ins.includes('\n'); // écrit tout au début de la ligne
+        zones.forEach(z => { if (lead && z.s === p && z.e > z.s) z.e += delta; else { z.s = f(z.s); z.e = Math.max(z.s, f(z.e)); } });
+        full.forEach(z => {
+            const k = now.slice(z.s, z.e).search(/\S/); if (k < 0) return; const pos = z.s + k; // la 1re lettre de la zone : sa ligne
+            const [ls, le] = lineBounds(now, pos); let a = ls, b = le;
+            full.forEach(o => { if (o === z || !(o.e > o.s) || o.e <= ls || o.s >= le) return; if (o.s >= pos) b = Math.min(b, o.s); else if (o.e <= pos) a = Math.max(a, o.e); }); // une autre zone de ligne sur la même ligne (deux lignes jointes)
+            while (a < b && /\s/.test(now[a])) a++; while (b > a && /\s/.test(now[b - 1])) b--;
+            if (b > a) { z.s = a; z.e = b; }
+        });
+        return zones;
+    }
+    /** le morceau changé entre deux textes : {p, oldEnd, delta} */
+    function diffOf(before, now) {
+        let p = 0; while (p < before.length && p < now.length && before[p] === now[p]) p++;
+        let q = 0; while (q < before.length - p && q < now.length - p && before[before.length - 1 - q] === now[now.length - 1 - q]) q++;
+        return {p, q, oldEnd: before.length - q, delta: now.length - before.length};
+    }
+    ext.txSnap = {normBody, textLinesOf, snapZones, followEdit, diffOf, isFullLine}; // pour les essais (tests/test-zones-recalees.js)
     let deepRun = null; // 📑 « 🔬 Lecture approfondie » sur toutes les pages : la lecture en cours (elle suit l'Atelier d'un acte à l'autre, un texte par page)
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
     const TXX = () => ext.txXml; // 🧾 ALTO / 📄 PAGE et les sortes de zone (heritage-transcribe-xml.js)
@@ -739,13 +771,9 @@
         /** garder les liens quand on écrit : les passages après la modification se décalent */
         let before = area.value;
         area.addEventListener('input', () => {
-            const now = area.value; let p = 0; while (p < before.length && p < now.length && before[p] === now[p]) p++;
-            let q = 0; while (q < before.length - p && q < now.length - p && before[before.length - 1 - q] === now[now.length - 1 - q]) q++;
-            const oldEnd = before.length - q, delta = now.length - before.length;
+            const now = area.value, dd = diffOf(before, now), {p, q, oldEnd, delta} = dd;
             const shift = r => { const f = v => v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, p + (now.length - q - p))) : v; r.s = f(r.s); r.e = Math.max(r.s, f(r.e)); };
-            // 🧲 une lettre écrite tout au début d'une ligne reliée (sans retour à la ligne) : la zone la garde (avant, elle partait d'un cran)
-            const lead = oldEnd === p && delta > 0 && (p === 0 || now[p - 1] === '\n') && !now.slice(p, p + delta).includes('\n');
-            t.data.zones.forEach(z => { if (lead && z.s === p && z.e > z.s) z.e += delta; else shift(z); }); t.data.people.forEach(shift); found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
+            followEdit(before, now, t.data.zones, dd); t.data.people.forEach(shift); // 🧲 les zones de ligne restent sur toute leur ligne found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
             txFix.forEach(shift); txFix = txFix.filter(f => now.slice(f.s, f.e) === f.word); if (txFixOn) { clearTimeout(txFixT); txFixT = setTimeout(() => runFix({quiet: true}), 900); }
             before = now; t.body = now; touch(); if (!findBar.hidden) findRun({keep: true}); paintMirror(); paintPeople();
         });
