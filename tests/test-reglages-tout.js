@@ -45,17 +45,22 @@ function scanKeys() {
     (function walk(d) { for (const e of fs.readdirSync(d, {withFileTypes: true})) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (/\.js$/.test(e.name) && !/\.min\.js$/.test(e.name)) files.push(p); } })(path.join(root, 'assets/js'));
     const found = new Map(); // clé (ou « préfixe* ») → {store, files}
     const add = (key, store, f) => { const k = `${store}|${key}`; if (!found.has(k)) found.set(k, {key, store, files: new Set()}); found.get(k).files.add(path.relative(root, f)); };
-    const LIT = String.raw`(['"\`])([^'"\`$\n]{1,120}?)(\$\{|\1\s*\+)?`;
+    const LIT = String.raw`(['"\`])([^'"\`$\n]{1,120})(?:\1(\s*\+)?|(\$\{))`; // 'clé', 'préfixe-' + x, `préfixe-${x}`
+    const named = n => /^[A-Z][A-Z0-9_]*$/.test(n) || /(KEY|Key|PREF|Pref|PREFIX|Prefix)/.test(n); // (pas « k », « key »… : trop de valeurs différentes)
+    const keyLike = v => /^[A-Za-z]/.test(v) && /[-_:]/.test(v);
     for (const f of files) {
         const src = fs.readFileSync(f, 'utf8');
         if (src.length > 3e6) continue;
         // const X = 'clé' (plusieurs valeurs possibles), pour retrouver localStorage.getItem(X)
         const consts = {};
-        for (const m of src.matchAll(/\b([A-Za-z_$][\w$]*)\s*=\s*(['"`])([^'"`$\n]{1,120})(\$\{)?\2?/g)) (consts[m[1]] = consts[m[1]] || new Set()).add(m[3] + (m[4] ? '*' : ''));
-        for (const m of src.matchAll(new RegExp(String.raw`\b(local|session)Storage\.(?:get|set|remove)Item\(\s*` + LIT, 'g'))) add(m[3] + (m[4] ? '*' : ''), m[1], f);
-        for (const m of src.matchAll(/\b(local|session)Storage\.(?:get|set|remove)Item\(\s*([A-Za-z_$][\w$]*)\s*[,)+]/g)) for (const v of consts[m[2]] || []) if (/^[A-Za-z]/.test(v) && /[-_:]/.test(v)) add(v, m[1], f);
-        for (const m of src.matchAll(new RegExp(String.raw`(?<![\w.$])(?:${WRAPPERS.join('|')})\(\s*` + LIT, 'g'))) add(m[2] + (m[3] ? '*' : ''), 'local', f);
-        for (const m of src.matchAll(new RegExp(String.raw`(?<![\w.$])(?:${WRAPPERS.join('|')})\(\s*([A-Za-z_$][\w$]*)\s*[,)+]`, 'g'))) for (const v of consts[m[1]] || []) if (/^[A-Za-z]/.test(v) && /[-_:]/.test(v)) add(v, 'local', f);
+        for (const m of src.matchAll(/\b([A-Za-z_$][\w$]*)\s*=\s*(['"`])([^'"`$\n]{1,120})(?:\2|(\$\{))/g)) if (named(m[1])) (consts[m[1]] = consts[m[1]] || new Set()).add(m[3] + (m[4] ? '*' : ''));
+        for (const m of src.matchAll(new RegExp(String.raw`\b(local|session)Storage\.(?:get|set|remove)Item\(\s*` + LIT, 'g'))) add(m[3] + (m[4] || m[5] ? '*' : ''), m[1], f);
+        for (const m of src.matchAll(/\b(local|session)Storage\.(?:get|set|remove)Item\(\s*([A-Za-z_$][\w$]*)\s*[,)+]/g)) for (const v of consts[m[2]] || []) if (keyLike(v)) add(v, m[1], f);
+        for (const m of src.matchAll(new RegExp(String.raw`(?<![\w.$])(?:${WRAPPERS.join('|')})\(\s*` + LIT, 'g'))) add(m[2] + (m[3] || m[4] ? '*' : ''), 'local', f);
+        for (const m of src.matchAll(new RegExp(String.raw`(?<![\w.$])(?:${WRAPPERS.join('|')})\(\s*([A-Za-z_$][\w$]*)\s*[,)+]`, 'g'))) for (const v of consts[m[1]] || []) if (keyLike(v)) add(v, 'local', f);
+        // les petits magasins des modules (store.get, ls.set, sess.get…) : seulement les clés « genealogie-… » / « lcnda-… » (leurs autres noms sont des sous-clés)
+        for (const m of src.matchAll(new RegExp(String.raw`\.(?:get|set|del|remove|getJSON|setJSON)\(\s*` + LIT, 'g'))) if (/^(genealogie|lcnda)[-_]/.test(m[2])) add(m[2] + (m[3] || m[4] ? '*' : ''), /\bsess\.$/.test(src.slice(Math.max(0, m.index - 5), m.index + 1)) ? 'session' : 'local', f);
+        for (const m of src.matchAll(/\.(?:get|set|del|remove|getJSON|setJSON)\(\s*([A-Za-z_$][\w$]*)\s*[,)]/g)) for (const v of consts[m[1]] || []) if (/^(genealogie|lcnda)[-_]/.test(v)) add(v, 'local', f);
         // toute chaîne « genealogie-… » / « lcnda-… » nommée comme une clé (const XXX_KEY = '…') : aussi classée
         for (const m of src.matchAll(/\b[A-Z][A-Z0-9_]*(?:KEY|PREF|PREFIX)[A-Z0-9_]*\s*=\s*(['"`])((?:genealogie|lcnda)[-_][^'"`$\n]{1,100})(\$\{)?/g)) add(m[2] + (m[3] ? '*' : ''), 'local', f);
     }
