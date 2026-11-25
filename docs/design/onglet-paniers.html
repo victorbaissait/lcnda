@@ -1,0 +1,879 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>L’onglet Paniers</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sep1:#c8b79a;--sep2:#e9dcc3;--hover:#f6f8fc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sep1:#5a4f3d;--sep2:#3a3328;--hover:#22262d}}
+:root[data-theme="dark"]{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sep1:#5a4f3d;--sep2:#3a3328;--hover:#22262d}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45;overflow-wrap:anywhere}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:34px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1384px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:14px 18px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.theme{position:fixed;top:10px;right:10px;z-index:50;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:700 12px system-ui;padding:5px 9px;cursor:pointer}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.mini{font-size:12px;color:var(--muted)}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.changes{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 22px}
+.changes li{background:var(--paper);border:1.5px solid var(--line2);padding:10px 14px;font-size:13.5px;min-width:0}
+.changes li small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.qq{background:var(--paper);border:2px solid var(--ink);padding:14px 16px;margin:12px 0;box-shadow:4px 4px 0 var(--shadow);max-width:1000px}
+.qq h3{margin:0 0 6px;font-size:15px}
+.qq .opt{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:4px 0}
+.qq .reco{font-size:13px;margin-top:8px;border-left:4px solid var(--green);background:var(--green-bg);padding:7px 11px}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;margin-top:2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.demo-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px;font-size:13px}
+.demo-bar .lab{font:800 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.demo-bar button{border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:700 12.5px system-ui;padding:5px 10px;cursor:pointer;box-shadow:3px 3px 0 var(--shadow)}
+.stage{background:repeating-linear-gradient(135deg,var(--grey-bg) 0 14px,var(--bg) 14px 28px);border:2px solid var(--ink);padding:26px;display:flex;justify-content:center}
+.stage.phone{padding:18px 0;background:var(--bg);border:0;gap:28px;flex-wrap:wrap}
+.phoneframe{width:390px;max-width:100%;border:10px solid var(--bar);border-radius:34px;background:var(--bar);overflow:hidden;box-shadow:6px 6px 0 var(--shadow)}
+.phoneframe .notch{height:22px;color:var(--bar-ink);font:700 11px system-ui;display:flex;justify-content:space-between;padding:3px 16px 0}
+.b{display:inline-flex;align-items:center;gap:6px;border-radius:9px;font:700 13px system-ui;padding:7px 13px;cursor:pointer;white-space:nowrap;line-height:1.2}
+.b.pri{background:var(--blue);color:#fff;border:1px solid var(--blue)}
+.b.pri:disabled{opacity:.45;cursor:not-allowed}
+.b.sec{background:var(--paper);color:var(--ink);border:1px solid var(--line2)}
+.b.sec:hover{background:var(--hover)}
+.b.ter{background:none;border:1px solid transparent;color:var(--blue)}
+.b.ter:hover{background:var(--blue-bg)}
+.b.sm{padding:5px 10px;font-size:12.5px}
+.b.wrap{white-space:normal;text-align:left}
+.pill{display:inline-flex;gap:4px;align-items:center;font:700 11px/1.2 system-ui;padding:3px 8px;border-radius:999px;background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{background:var(--green-bg);color:var(--green)}
+.pill.q{background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{background:var(--blue-bg);color:var(--blue-ink)}
+.pill.red{background:var(--red-bg);color:var(--red)}
+.pill.vio{background:var(--vio-bg);color:var(--vio)}
+a.alink,.src a{color:var(--blue);text-decoration:none;font-weight:600}
+a.alink:hover,.src a:hover{text-decoration:underline}
+
+/* ═════════ Réglages (partie 1) ═════════ */
+.setgrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line2);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.08);padding:18px 22px;min-width:0}
+.panel h4{margin:0 0 2px;font-size:15px}
+.panel .ghd{font:800 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:14px 0 2px}
+.panel .gsub{font-size:12.5px;color:var(--muted);margin:0 0 8px}
+.srow{display:flex;gap:12px;align-items:flex-start;padding:9px 10px;border-radius:10px;border:1px solid transparent}
+.srow+.srow{border-top-color:var(--line)}
+.srow input{width:18px;height:18px;accent-color:var(--blue);margin:2px 0 0;flex:none}
+.srow .st{flex:1;min-width:0;font-size:13.5px}
+.srow .st small{display:block;color:var(--muted);font-size:12.5px}
+.srow.new{background:var(--blue-bg);border-color:var(--blue)}
+.srow.sub2{padding-left:40px}
+
+/* ═════════ l'onglet ═════════ */
+.appwrap{width:min(1300px,100%);container-type:inline-size;container-name:tab}
+.tabui{position:relative;background:var(--paper);color:var(--ink);border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.16);display:flex;flex-direction:column;height:900px;overflow:hidden;font-size:13.5px}
+.phoneframe .tabui{height:820px;border-radius:18px 18px 0 0;border:0}
+.appbar{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:9px 18px;font:600 13px system-ui;flex-wrap:nowrap;min-width:0}
+.appbar .logo{font-weight:800;letter-spacing:.06em;margin-right:10px}
+.appbar nav{display:flex;gap:4px;min-width:0;overflow:hidden;flex:1}
+.appbar nav span{padding:4px 10px;border-radius:7px;opacity:.75;white-space:nowrap}
+.appbar nav span.on{background:rgba(255,255,255,.16);opacity:1;font-weight:800}
+.appbar .gear{opacity:.8}
+.tb{display:flex;align-items:center;gap:12px 14px;padding:16px 24px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tb h3{margin:0;font-size:18px;white-space:nowrap}
+.smart{flex:1 1 360px;min-width:0;display:flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:10px;background:var(--grey-bg);color:var(--muted);font:500 14px system-ui;padding:9px 14px;cursor:pointer;text-align:left}
+.smart:hover{border-color:var(--blue);color:var(--ink)}
+.smart b{color:var(--ink)}
+.tbb{display:flex;gap:8px;flex-wrap:wrap}
+.crumbbtn{display:none}
+/* idées en haut */
+.strip{border-bottom:1px solid var(--line);padding:12px 24px;background:linear-gradient(var(--yel-bg),var(--paper))}
+.strip:empty{display:none}
+.striph{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap}
+.tgl{border:0;background:none;color:var(--ink);font:800 13.5px system-ui;cursor:pointer;padding:3px 0;display:inline-flex;gap:6px;align-items:center}
+.tgl .nb{background:var(--yel);color:#000;border-radius:999px;padding:0 7px;font-size:11.5px}
+.striph .mini{flex:1 1 260px}
+.sgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+.sg{background:var(--paper);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.sgt{display:flex;gap:10px;align-items:flex-start}
+.sgt .ico{font-size:18px;line-height:1.2}
+.sgt b{display:block;font-size:13.5px}
+.sgt small{display:block;color:var(--muted);font-size:12.5px}
+.why{margin:0;font-size:12px;color:var(--soft)}
+.why i{font-style:normal;color:var(--muted)}
+.sga{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.stripoff{display:flex;justify-content:flex-end}
+.more{border:0;background:none;color:var(--blue);font:600 12.5px system-ui;cursor:pointer;padding:6px 0 0}
+/* corps */
+.bd{flex:1;min-height:0;display:grid;grid-template-columns:300px minmax(0,1fr)}
+.tree{border-right:1px solid var(--line);background:var(--grey-bg);overflow:auto;padding:16px 14px 18px}
+.treeh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:0 6px 8px;flex-wrap:wrap}
+.tlist,.tlist ul{list-style:none;margin:0;padding:0}
+.tr{display:flex;align-items:center;gap:6px;padding:6px 8px 6px calc(6px + var(--d,0) * 16px);border-radius:8px;cursor:pointer;border:1px solid transparent;user-select:none}
+.tr:hover{background:var(--hover)}
+.tr.sel{background:var(--paper);color:var(--blue-ink);font-weight:700;box-shadow:inset 3px 0 0 var(--blue),0 1px 2px rgba(0,0,0,.06)}
+.tr.f .nm{font-weight:700}
+.tr.drop{border-color:var(--blue);background:var(--blue-bg)}
+.tr .tw{border:0;background:none;color:var(--soft);width:18px;padding:0;cursor:pointer;font-size:12px;flex:none}
+.tr .tw0{width:18px;flex:none}
+.tr .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr .n{font-size:11.5px;color:var(--soft);font-weight:600}
+.tnote{margin:14px 6px 0;line-height:1.4}
+.tclose{display:none}
+.main{display:flex;flex-direction:column;min-width:0;min-height:0}
+.mscroll{flex:1;min-height:0;overflow:auto;padding:20px 26px 24px}
+.mfoot{border-top:1px solid var(--line2);padding:12px 26px 14px;display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap;background:var(--paper)}
+.mfoot:empty{display:none}
+.mfoot .cnt{flex:1 1 220px;min-width:0;font-size:13px}
+.mfoot .cnt b{display:block;font-size:14px}
+.mfoot select,.mfoot input[type=text],.fld{border:1px solid var(--line2);border-radius:9px;padding:7px 10px;font:13.5px system-ui;color:var(--ink);background:var(--paper);min-width:0;max-width:100%}
+/* en-tête du panier */
+.crumbs{font-size:12.5px;color:var(--soft);margin-bottom:4px}
+.bh h3{margin:0;font-size:20px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.bh h3 .cnt{font:500 13px system-ui;color:var(--muted)}
+.bh h3 [contenteditable]{outline:2px solid var(--blue);border-radius:4px;padding:0 4px}
+.dests{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
+.dests .lab{font-size:12.5px;color:var(--soft);margin-right:2px}
+.dest{display:inline-flex;gap:4px;align-items:center;background:var(--blue-bg);color:var(--blue-ink);border-radius:999px;padding:3px 11px;font-weight:700;font-size:12.5px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0;position:relative}
+.qline{margin:12px 0 0;font-size:12.5px;color:var(--muted);background:var(--grey-bg);border-radius:10px;padding:8px 12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.menu{position:absolute;z-index:8;top:100%;margin-top:6px;background:var(--paper);border:1px solid var(--line2);border-radius:12px;box-shadow:0 14px 36px rgba(0,0,0,.2);padding:8px;min-width:260px;max-width:calc(100% - 4px)}
+.menu button{display:flex;width:100%;gap:8px;align-items:center;border:0;background:none;color:var(--ink);font:500 13.5px system-ui;padding:8px 10px;border-radius:8px;cursor:pointer;text-align:left}
+.menu button:hover{background:var(--hover)}
+.menu button small{color:var(--soft);margin-left:auto;font-size:11.5px}
+.menu hr{border:0;border-top:1px solid var(--line);margin:6px 4px}
+.menu .mh{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);padding:6px 10px 2px}
+/* idées du panier */
+.bs{margin:18px 0 0;border:1px dashed var(--yel);background:var(--yel-bg);border-radius:12px;padding:12px 14px}
+.bs h5{margin:0 0 6px;font-size:13px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.bs h5 .sp{flex:1}
+.bsr{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid rgba(0,0,0,.06);flex-wrap:wrap}
+.bsr:first-of-type{border-top:0}
+.bsr .t{flex:1 1 240px;min-width:0}
+.bsr .t small{display:block;color:var(--muted);font-size:12px}
+/* recherche dans le panier */
+.bfind{display:flex;gap:10px;align-items:center;margin:18px 0 4px;flex-wrap:wrap}
+.srch{position:relative;flex:1 1 260px;min-width:0}
+.srch:before{content:"🔍";position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;opacity:.65;pointer-events:none}
+.srch input{width:100%;border:1px solid var(--line2);border-radius:9px;background:var(--paper);color:var(--ink);font:14px system-ui;padding:8px 12px 8px 34px}
+.srch input:focus,.ssin input:focus{outline:2px solid var(--blue);outline-offset:0;border-color:var(--blue)}
+/* les éléments */
+.items{list-style:none;margin:8px 0 0;padding:0}
+.it{display:flex;gap:12px;align-items:flex-start;padding:12px 10px;border-radius:10px;border:1px solid transparent}
+.it+.it{border-top-color:var(--line)}
+.it:hover{background:var(--hover)}
+.it.done .itx b{color:var(--muted)}
+.it.on{background:var(--blue-bg)}
+.it.dragging{opacity:.4}
+.it.over{box-shadow:inset 0 3px 0 var(--blue)}
+.grip{cursor:grab;color:var(--soft);letter-spacing:-2px;padding-top:2px;flex:none}
+.it .ico{font-size:18px;line-height:1.25;flex:none}
+.it .pk{flex:none;padding-top:2px}
+.it .pk input,.fr input,.fi input,.gh2 input{width:18px;height:18px;accent-color:var(--blue);margin:0;cursor:pointer}
+.itx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.itx b{font-size:14px}
+.itx small{font-size:12.5px;color:var(--muted)}
+.src{font-size:12px;color:var(--soft)}
+.src .lic{color:var(--soft)}
+.note-in{margin-top:5px;border:1px dashed var(--line2);border-radius:7px;background:transparent;color:var(--ink);font:12.5px system-ui;padding:4px 8px;width:min(420px,100%)}
+.note-in:focus{border-style:solid;border-color:var(--blue);outline:0}
+.ir{display:flex;gap:6px;align-items:center;flex:none}
+.used{display:inline-flex;gap:5px;align-items:center;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap;border:1px solid var(--line2);border-radius:999px;padding:3px 9px}
+.used input{accent-color:var(--green);margin:0}
+.used.on{background:var(--green-bg);color:var(--green);border-color:transparent;font-weight:700}
+.mv{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden}
+.mv button,.xb{border:0;background:var(--paper);color:var(--muted);cursor:pointer;font-size:13px;padding:3px 8px}
+.mv button+button{border-left:1px solid var(--line2)}
+.xb{border-radius:8px;font-size:17px;line-height:1}
+.xb:hover,.mv button:hover{color:var(--ink);background:var(--hover)}
+.empty{padding:28px 16px;text-align:center;color:var(--muted);font-size:13.5px}
+/* dossier */
+.ftree,.ftree ul{list-style:none;margin:0;padding:0}
+.fr,.fi{display:flex;gap:10px;align-items:center;padding:8px 10px 8px calc(10px + var(--d,0) * 22px);border-top:1px solid var(--line);flex-wrap:wrap}
+.fi{font-size:13px;color:var(--muted);cursor:pointer;border-top:0;padding-top:4px;padding-bottom:4px}
+.fr .lnk{border:0;background:none;color:var(--ink);font:700 14px system-ui;cursor:pointer;padding:0;text-align:left}
+.fr .lnk:hover{color:var(--blue)}
+.fr .mini{margin-left:auto}
+/* recherche intelligente */
+.ssh h3{margin:0 0 4px;font-size:19px}
+.ssh p{margin:0;color:var(--muted);max-width:760px}
+.ssin{display:flex;gap:10px;margin:16px 0 8px;flex-wrap:wrap}
+.ssin input{flex:1 1 300px;min-width:0;border:1px solid var(--line2);border-radius:10px;background:var(--paper);color:var(--ink);font:15px system-ui;padding:10px 14px}
+.ex{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--soft)}
+.chip{border:1px solid var(--line2);background:var(--paper);color:var(--ink);border-radius:999px;font:500 12.5px system-ui;padding:4px 11px;cursor:pointer;text-align:left}
+.chip[aria-pressed="true"]{background:var(--blue-bg);border-color:var(--blue);color:var(--blue-ink);font-weight:700}
+.chip[aria-pressed="false"]{color:var(--soft);text-decoration:line-through}
+.chip.fixed{cursor:default;background:var(--grey-bg)}
+.chip.off{color:var(--soft);font-style:italic;cursor:default}
+.box{border-radius:12px;padding:14px 16px;margin:16px 0 0}
+.box h4{margin:0 0 8px;font-size:14px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.box h4 small{font:500 12px system-ui;color:var(--muted)}
+.und{background:var(--blue-bg);border:1px solid rgba(5,93,255,.25)}
+.crow{display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px 12px;padding:8px 0;border-top:1px solid rgba(5,93,255,.15);align-items:start}
+.crow:first-of-type{border-top:0}
+.crow .cl{font:800 11px system-ui;letter-spacing:.07em;text-transform:uppercase;color:var(--blue-ink);padding-top:6px}
+.cv{display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-width:0}
+.cv small{color:var(--muted);font-size:12px}
+.num{width:66px;border:1px solid var(--line2);border-radius:8px;padding:4px 6px;font:13px system-ui;color:var(--ink);background:var(--paper)}
+.rad{display:inline-flex;align-items:center;border:1px solid var(--blue);border-radius:999px;overflow:hidden;background:var(--paper)}
+.rad button{border:0;background:none;color:var(--blue-ink);font:800 14px system-ui;padding:3px 10px;cursor:pointer}
+.rad span{font:700 12.5px system-ui;color:var(--blue-ink);padding:0 4px}
+.nope{background:var(--yel-bg);border:1px solid rgba(212,168,0,.35)}
+.nope ul,.miss ul{margin:0;padding-left:18px;font-size:13px}
+.nope li,.miss li{margin:3px 0}
+.miss{background:var(--grey-bg);border:1px solid var(--line2)}
+.miss li{display:flex;gap:8px 12px;align-items:center;flex-wrap:wrap;list-style:none;margin-left:-18px;padding:4px 0}
+.miss li span{flex:1 1 260px;min-width:0}
+.res{border:1px solid var(--line2)}
+.grp{margin:10px 0 0}
+.gh2{display:flex;gap:10px;align-items:center;padding:8px 6px;border-bottom:1px solid var(--line);cursor:pointer;flex-wrap:wrap}
+.gh2 b{font-size:13.5px}
+.gh2 .c{font-size:12px;color:var(--soft)}
+.gh2 code{margin-left:auto}
+.rl{list-style:none;margin:0;padding:0}
+.rr{display:flex;gap:12px;align-items:flex-start;padding:9px 6px 9px 34px;border-bottom:1px solid var(--line)}
+.rr.ex .rtx{opacity:.45}
+.rr.ex .rtx b{text-decoration:line-through}
+.yn{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden;flex:none}
+.yn button{border:0;background:var(--paper);color:var(--soft);font:800 13px system-ui;padding:3px 9px;cursor:pointer}
+.yn button+button{border-left:1px solid var(--line2)}
+.yn button.y[aria-pressed="true"]{background:var(--green);color:#fff}
+.yn button.n[aria-pressed="true"]{background:var(--red);color:#fff}
+.rr .ico{font-size:17px;line-height:1.25;flex:none}
+.rtx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.rtx b{font-size:13.5px}
+.rtx small{font-size:12.5px;color:var(--muted)}
+.gempty{padding:8px 6px 8px 34px;font-size:12.5px;color:var(--muted);border-bottom:1px solid var(--line)}
+/* dialogue intérieur */
+.ovl{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:20;display:flex;align-items:center;justify-content:center;padding:20px}
+.ovl[hidden]{display:none}
+.dlg{background:var(--paper);color:var(--ink);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);width:min(620px,100%);max-height:100%;overflow:auto;padding:20px 24px}
+.dlg h4{margin:0 0 6px;font-size:17px}
+.dlg p{margin:0 0 10px;color:var(--muted)}
+.dlg .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;justify-content:flex-end}
+.dlg .sum{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.dlg .shl{list-style:none;margin:6px 0 0;padding:0;font-size:13px}
+.dlg .shl li{display:flex;gap:10px;align-items:flex-start;padding:7px 4px;border-top:1px solid var(--line)}
+.dlg .shl li .t{flex:1;min-width:0}
+.dlg .shl li .t small{display:block;color:var(--muted);font-size:12px}
+.dlg .shl input{width:17px;height:17px;accent-color:var(--blue);margin:1px 0 0;flex:none}
+.dlg .shl li.lock{opacity:.6}
+.dlg .lh{font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:14px 0 2px}
+.dlg pre{background:var(--grey-bg);border-radius:8px;padding:10px 12px;font:11.5px ui-monospace,Menlo,monospace;color:var(--muted);white-space:pre-wrap;margin:8px 0 0}
+.dlg label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);flex:1 1 200px;min-width:0}
+.dlg .flds{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.toast{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:var(--bar);color:var(--bar-ink);border-left:5px solid var(--green);border-radius:8px;padding:10px 14px;font-size:13px;max-width:calc(100% - 40px);box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:30}
+.toast[hidden]{display:none}
+
+/* ═════════ téléphone ═════════ */
+@container tab (max-width:720px){
+ .appbar{padding:8px 14px}
+ .appbar nav span:not(.on){display:none}
+ .tb{padding:12px 16px 10px;gap:10px}
+ .tb h3{font-size:16px;flex:1}
+ .smart{order:3;flex:1 1 100%;font-size:13.5px}
+ .crumbbtn{display:flex;order:4;flex:1 1 100%;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:9px;background:var(--paper);color:var(--ink);font:700 13.5px system-ui;padding:9px 12px;cursor:pointer;text-align:left}
+ .crumbbtn span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .strip{padding:10px 16px}
+ .striph .mini{display:none}
+ .sgrid{grid-template-columns:minmax(0,1fr)}
+ .bd{grid-template-columns:minmax(0,1fr);position:relative}
+ .tree{display:none;position:absolute;inset:0 0 auto 0;max-height:100%;z-index:9;border-right:0;border-bottom:1px solid var(--line2);box-shadow:0 14px 30px rgba(0,0,0,.25);padding:14px 14px 16px}
+ .tabui.treeopen .tree{display:block}
+ .tclose{display:inline-flex}
+ .mscroll{padding:14px 16px 18px}
+ .mfoot{padding:10px 16px 12px}
+ .mfoot .b{flex:1 1 auto;justify-content:center}
+ .bh h3{font-size:17px}
+ .it{flex-wrap:wrap;gap:8px 10px;padding:10px 6px}
+ .grip{display:none}
+ .itx{flex:1 1 calc(100% - 40px)}
+ .ir{width:100%;justify-content:flex-end}
+ .crow{grid-template-columns:minmax(0,1fr);gap:4px}
+ .crow .cl{padding-top:0}
+ .rr{padding-left:6px}
+ .gempty{padding-left:6px}
+ .gh2 code{display:none}
+ .acts .b.opt{display:none}
+ .ovl{padding:12px}
+ .dlg{padding:16px 16px}
+}
+@media (max-width:980px){.setgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:820px){body{padding:14px}.changes{grid-template-columns:minmax(0,1fr)}.stage{padding:10px}.tabui{height:860px}}
+@media (max-width:420px){.stage.phone .phoneframe{border-width:6px;border-radius:24px}}
+</style></head><body>
+<button class="theme" type="button" id="theme">◐ clair / sombre</button>
+<div class="wrap">
+
+<h1>🧺 L’onglet « Paniers », en clair</h1>
+<p class="sub">Une maquette qui se clique, pour valider ce que j’ai compris de ta demande. Construite d’après le code actuel des paniers (<code>lib/connexions.php</code>, <code>assets/js/heritage-connexions.js</code> — 📁 dossiers sans fin de profondeur qui contiennent des 🧺 paniers, destinations habituelles, envoi d’une partie avec cases à trois états), du catalogue des onglets cachés (<code>app-onglets-plus.js</code>), des listes installables (<code>LCNDA_EXT.dataLists</code>) et de « Dis ce qu’il te faut » (<code>parseAsk</code>). Noms de personnes inventés ; le château de Rochefière, les dates et les distances aussi (exemples de maquette, à vérifier par les vraies listes).</p>
+
+<div class="simple">
+<p><b>En bref.</b> Aujourd’hui, les paniers vivent dans la pastille 🧺 et une fenêtre « ⛶ en grand ». On ajoute <b>un onglet « 🧺 Paniers »</b>, caché au départ, qu’on allume dans <i>Réglages → Onglets en plus → 1 · Des parties de l’app, cachées au départ</i>.</p>
+<p><b>Dedans :</b> à gauche l’arbre des 📁 dossiers et 🧺 paniers (on glisse pour ranger) ; à droite le panier ouvert, comme une liste (sources ↗, licence, « ✓ utilisé », note, ordre) avec ses destinations « → … ». En haut, <b>des idées</b> de choses à y mettre (repliables, masquables) et <b>« 🔍 Créer un panier par une recherche… »</b> : tu écris une phrase, je montre ce que j’ai compris en pastilles modifiables, ce que je n’ai pas compris, ce qui manque ; tu gardes ✓ ou écartes ✗ chaque résultat ; puis « Créer le panier « … » (N éléments) » dans le dossier choisi.</p>
+<p><b>Et aussi :</b> chercher <i>dans</i> un panier puis ne prendre qu’une partie de ce qu’on a trouvé, dupliquer (tout ou les cochés), <b>⇪ partager</b> un panier de données publiques (un petit fichier, sans rien de personnel) et <b>⇩ récupérer</b> celui d’un autre.</p>
+</div>
+
+<div class="toc"><a href="#p1"><b>1</b>Où on l’allume</a><a href="#p2"><b>2</b>L’onglet (ordinateur)</a><a href="#p3"><b>3</b>Sur téléphone</a><a href="#p4"><b>4</b>Ce qui change</a><a href="#p5"><b>5</b>Questions</a></div>
+
+<!-- ═════════════ 1 ═════════════ -->
+<div class="part" id="p1">Partie 1</div><h2>Où on l’allume : Réglages</h2>
+<p class="sub">L’onglet rejoint les parties de l’app cachées au départ (comme 📄 Documents ou 📒 Fiches). Les idées ont leur propre réglage, dans <i>Réglages → Connexions → Paniers</i>.</p>
+<div class="setgrid">
+<div class="panel"><h4>＋ Onglets en plus</h4><p class="gsub">Coche ce que tu veux voir dans le menu.</p>
+<div class="ghd">1 · Des parties de l’app, cachées au départ</div><p class="gsub">Elles existent déjà : cocher les montre dans le menu.</p>
+<div class="srow"><input type="checkbox" aria-label="Documents"><span class="st">📄 <b>Documents</b><small>Tes photos, actes, lettres de A à Z, rangés en dossiers.</small></span></div>
+<div class="srow"><input type="checkbox" aria-label="Trésors de famille"><span class="st">✨ <b>Trésors de famille</b><small>Lettres à ouvrir plus tard, recettes, musée de famille.</small></span></div>
+<div class="srow"><input type="checkbox" checked aria-label="Fiches"><span class="st">📒 <b>Fiches</b><small>Fiches thématiques : un métier, une guerre, un village.</small></span></div>
+<div class="srow new"><input type="checkbox" id="setpan" aria-label="Paniers"><span class="st">🧺 <b>Paniers</b> <span class="pill blue">nouveau</span><small>Tes paniers rangés en dossiers, des idées à y mettre, et une recherche qui crée un panier. La pastille 🧺 reste là, même onglet éteint.</small></span></div>
+<div class="srow"><input type="checkbox" aria-label="ADN"><span class="st">🧬 <b>ADN</b><small>Tes correspondances ADN et leurs liens.</small></span></div>
+<p class="note">Dans le code : une ligne <code>{k: 'paniers', g: 1, icon: '🧺', module: 'paniers', …}</code> dans <code>CATALOG</code> et <code>'paniers'</code> dans <code>FLAGGED</code> (caché tant que son repère n’est pas posé).</p>
+</div>
+<div class="panel"><h4>🔌 Connexions → Paniers</h4><p class="gsub">Les idées ne sont que des propositions : rien n’entre dans un panier sans ton clic.</p>
+<div class="srow"><input type="checkbox" checked id="setsug" aria-label="Montrer des idées"><span class="st"><b>💡 Montrer des idées de choses à mettre dans mes paniers</b></span></div>
+<div class="srow sub2"><input type="checkbox" checked aria-label="En haut de l’onglet"><span class="st">en haut de l’onglet Paniers</span></div>
+<div class="srow sub2"><input type="checkbox" checked aria-label="Dans chaque panier"><span class="st">dans chaque panier ouvert</span></div>
+<div class="srow sub2"><input type="checkbox" aria-label="Dans la pastille"><span class="st">dans la pastille 🧺 (une ligne « 💡 2 idées »)</span></div>
+<div class="ghd">Les idées viennent de</div>
+<div class="srow"><input type="checkbox" checked aria-label="Arbre"><span class="st">ton arbre (personnes, actes, témoins, transcriptions)</span></div>
+<div class="srow"><input type="checkbox" checked aria-label="Noms"><span class="st">le nom et les destinations de chaque panier</span></div>
+<div class="srow"><input type="checkbox" checked aria-label="Lieux"><span class="st">les lieux et les dates de ce qui est déjà dedans</span></div>
+<div class="srow"><input type="checkbox" checked aria-label="Listes"><span class="st">les listes installées (jamais Internet sans te le dire)</span></div>
+</div>
+</div>
+
+<!-- ═════════════ 2 ═════════════ -->
+<div class="part" id="p2">Partie 2</div><h2>L’onglet sur ordinateur (1440 px)</h2>
+<p class="sub">Tout se clique : l’arbre (▸/▾, glisser un panier sur un dossier, un élément sur un panier), les idées (＋ / ✕ / Masquer), « ☑ Une partie… », « 🔎 Chercher dans ce panier », « ⧉ Dupliquer », « ⇪ Partager », « ⇩ Récupérer un panier », et la recherche qui crée un panier (pastilles modifiables, ✓/✗, « ⤓ l’installer »).</p>
+<div class="demo-bar"><span class="lab">Essayer</span>
+<button type="button" data-d="ss:mil">🔍 « Militaire à 4 km du château »</button>
+<button type="button" data-d="ss:voir">🔍 « Ce qu’a pu voir Jean MAZAUD »</button>
+<button type="button" data-d="ss:nais">🔍 « Naissances LACOMBE »</button>
+<button type="button" data-d="sel:f1">📁 Un dossier, envoi en partie</button>
+<button type="button" data-d="find">🔎 Chercher dans un panier</button>
+<button type="button" data-d="share">⇪ Partager</button>
+<button type="button" data-d="import">⇩ Récupérer</button>
+<button type="button" data-d="last">⚠ Le dernier panier d’un dossier</button>
+</div>
+<div class="stage"><div class="appwrap" id="desk"></div></div>
+
+<!-- ═════════════ 3 ═════════════ -->
+<div class="part" id="p3">Partie 3</div><h2>Sur téléphone (390 px)</h2>
+<p class="sub">L’arbre devient un bouton « 📂 Famille MAZAUD › 💍 Mariage… ▾ » qui le déroule par-dessus. Les idées passent en une colonne (2 visibles, « voir les autres »). Chaque élément tient sur toute la largeur ; « ✓ utilisé », ↑ ↓ et × passent dessous. À droite : la recherche qui crée un panier, ouverte.</p>
+<div class="stage phone">
+<div class="phoneframe"><div class="notch"><span>9:41</span><span>●●● ▮</span></div><div class="appwrap" id="phone"></div></div>
+<div class="phoneframe"><div class="notch"><span>9:41</span><span>●●● ▮</span></div><div class="appwrap" id="phone2"></div></div>
+</div>
+
+<!-- ═════════════ 4 ═════════════ -->
+<div class="part" id="p4">Partie 4</div><h2>Ce qui change</h2>
+<ul class="changes">
+<li><b>Un onglet « 🧺 Paniers »</b>, caché au départ, dans « 1 · Des parties de l’app, cachées au départ ».<small>La pastille 🧺 et « Prendre depuis… » restent ; l’onglet est la vue en grand, qui remplace la fenêtre « ⛶ ».</small></li>
+<li><b>📁 Dossiers et 🧺 paniers</b> : les dossiers s’emboîtent sans fin, ne contiennent que des dossiers et des paniers ; seuls les paniers contiennent des éléments.<small>Règle : un dossier garde toujours au moins un panier (un nouveau dossier naît avec « Nouveau panier » ; retirer le dernier demande quoi faire).</small></li>
+<li><b>À gauche l’arbre, à droite le panier en liste</b> : icône, titre, détail, source ↗ et licence, « ✓ utilisé », note, ⋮⋮ / ↑ ↓ pour l’ordre, × pour retirer.<small>Glisser un élément sur un panier de l’arbre l’y déplace ; un panier sur un dossier l’y range.</small></li>
+<li><b>L’en-tête dit où va le panier</b> : « Va d’habitude vers → 🔎 Enquête … · → 📚 Atelier … » et « 📍 Mettre tout dans… » (les destinations en premier).<small>Puis ☑ Une partie… (cases à trois états, aussi pour un dossier entier), ✎ Renommer, ⧉ Dupliquer, ⇪ Partager, ⋯.</small></li>
+<li><b>💡 Des idées</b> : en haut de l’onglet (pour tous les paniers) et dans chaque panier (pour lui). Chacune dit <i>pourquoi</i> (« la date du mariage dans ton arbre · le nom du panier »).<small>＋ pour l’ajouter, ✕ « Pas utile » (on ne la revoit plus), « Masquer les suggestions » (= le réglage).</small></li>
+<li><b>🔍 Créer un panier par une recherche</b> : une phrase → plusieurs listes à la fois (pas une seule comme « Dis ce qu’il te faut » aujourd’hui).<small>Pastilles Qui · Quand / âge · Où + rayon · Quoi · Sources, toutes modifiables ; « Ce que je n’ai pas compris » ; « la liste X n’est pas installée — ⤓ l’installer » ; ✓/✗ par élément et par groupe ; « Créer le panier « … » (N) » dans un dossier, ou « ＋ Ajouter à un panier existant ».</small></li>
+<li><b>Les listes utilisées</b> (déjà dans l’app) : <code>cht_chateaux</code>, <code>lp_merimee</code>, <code>ha_batailles</code>, <code>l8b_regiments_ville</code>, <code>pm_monuments</code>, <code>guerres</code> ; <code>il-a-pu-voir</code>, <code>ciel_cometes</code>, <code>l8a_ciels</code>, les éclipses de <code>heritage-lune.js</code>, <code>hist_seismes</code>, <code>l10t_volcans</code>, <code>hist_crues</code>, <code>l8a_maree</code>, <code>meteo_jour</code>.<small>Manque : une liste des tempêtes anciennes (dit honnêtement dans « pas compris »).</small></li>
+<li><b>Le panier se souvient de sa recherche</b> : « 🔍 Créé par la recherche « … » · ↻ Refaire » propose seulement les nouveautés, à valider.</li>
+<li><b>🔎 Chercher dans un panier</b> puis cocher parmi les trouvés : « Prendre / Mettre dans / Dupliquer les 2 cochés parmi les 7 trouvés ».</li>
+<li><b>⧉ Dupliquer</b> : tout le panier, ou « les 4 cochés dans un nouveau panier ».</li>
+<li><b>⇪ Partager / ⇩ Récupérer</b> un panier de données publiques : un fichier <code>.lcnda-panier</code> (JSON : titres, dates, lieux, sources, liens, licences).<small>L’app retire tout ce qui vient de ton arbre (personnes, actes, notes, médias) sauf accord explicite, et jamais une personne vivante ou confidentielle. À l’arrivée : aperçu ✓/✗, dossier au choix, doublons sautés. Option « Envoyer à un compte du site familial » si les comptes famille existent.</small></li>
+<li><b>Dans la base</b> : <code>cx_baskets</code> gagne une sorte (<code>kind</code> : dossier ou panier) et la requête qui l’a créé (<code>query_json</code>) ; les éléments, une marque « public » calculée à l’envoi.</li>
+</ul>
+
+<!-- ═════════════ 5 ═════════════ -->
+<div class="part" id="p5">Partie 5</div><h2>Questions pour toi</h2>
+<div class="qq"><h3>1. Où montrer les idées ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>En haut de l’onglet (toutes) et dans chaque panier ouvert (les siennes)</b>, repliables ; « Masquer les suggestions » éteint les deux (réglage).</span></div>
+<div class="opt"><span class="cb"></span><span>Seulement dans le panier ouvert.</span></div>
+<div class="opt"><span class="cb"></span><span>Aussi dans la pastille 🧺, partout dans l’app.</span></div>
+<div class="reco">Ma recommandation : <b>onglet + panier</b>, pas la pastille (trop envahissant). Une idée écartée par « ✕ Pas utile » ne revient pas.</div></div>
+<div class="qq"><h3>2. La recherche peut-elle aussi AJOUTER à un panier existant ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Oui, en second bouton</b> : « Créer le panier « … » » (principal) ou « ＋ Ajouter à « … » » ; les éléments déjà dedans sont sautés (« 2 déjà dedans »).</span></div>
+<div class="opt"><span class="cb"></span><span>Non, elle crée toujours un nouveau panier (on fusionne ensuite par glisser).</span></div>
+<div class="reco">Ma recommandation : <b>oui, en second</b> — et depuis un panier ouvert, « ↻ Refaire la recherche » ajoute à ce panier-là.</div></div>
+<div class="qq"><h3>3. Que se passe-t-il quand un dossier perd son dernier panier ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>On demande</b> : « Supprimer aussi le dossier » (proposé en premier, avec ↶) · « Y laisser un panier vide « À trier » » · « Annuler ».</span></div>
+<div class="opt"><span class="cb"></span><span>Le dossier disparaît sans demander (↶ Annuler dans le message).</span></div>
+<div class="opt"><span class="cb"></span><span>Un panier vide « À trier » est créé sans demander.</span></div>
+<div class="reco">Ma recommandation : <b>demander</b> (essaie « ⚠ Le dernier panier d’un dossier » au-dessus de la maquette). Ça n’arrive pas souvent, et un dossier vide qui disparaît en silence surprend.</div></div>
+<div class="qq"><h3>4. Partager un panier : que met-on dans le fichier par défaut ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Seulement les données publiques</b> (lignes de listes, événements du monde, monuments, météo…) avec sources et licences ; ce qui vient de ton arbre est décoché, et on peut le cocher une à une ; <b>jamais</b> une personne vivante ou confidentielle.</span></div>
+<div class="opt"><span class="cb"></span><span>Tout, avec un avertissement.</span></div>
+<div class="opt"><span class="cb"></span><span>Seulement le public, sans possibilité d’ajouter quoi que ce soit de son arbre.</span></div>
+<div class="reco">Ma recommandation : <b>public par défaut, le personnel à cocher une à une</b>, les vivants et confidentiels bloqués ; envoi en fichier, et par le site familial seulement s’il existe.</div></div>
+<div class="qq"><h3>5. Un panier créé par une recherche : figé ou qui se met à jour seul ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Figé, mais il garde sa recherche</b> : « ↻ Refaire » montre les nouveautés à valider (✓/✗).</span></div>
+<div class="opt"><span class="cb"></span><span>Vivant : il se remplit seul quand une liste ou l’arbre change.</span></div>
+<div class="reco">Ma recommandation : <b>figé + ↻ Refaire</b> : un panier ne change jamais sans toi, comme le reste de l’app.</div></div>
+
+<p class="note">Fichier : <code>docs/design/onglet-paniers.html</code> · même allure et mêmes couleurs que <code>prendre-depuis.html</code>, clair et sombre.</p>
+</div>
+
+<script>
+(function(){
+'use strict';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fold=s=>String(s||'').toLowerCase().normalize('NFD').replace(/\p{M}/gu,'');
+const clone=x=>JSON.parse(JSON.stringify(x));
+let uid=1000;const nid=p=>p+(uid++);
+
+/* les sources : nom, licence, lien ; perso = vient de ton arbre */
+const SRC={
+ arbre:{n:'Ton arbre',lic:'tes données',url:'',perso:1},
+ med:{n:'Tes médias',lic:'tes données',url:'',perso:1},
+ note:{n:'Tes notes',lic:'tes données',url:'',perso:1},
+ ad19:{n:'AD de la Corrèze, registres paroissiaux',lic:'réutilisation libre',url:'https://archives.correze.fr/'},
+ notaire:{n:'Minutes de Me DURAND, notaire (AD Corrèze)',lic:'réutilisation libre',url:'https://archives.correze.fr/'},
+ mat:{n:'Registres matricules (AD Corrèze)',lic:'réutilisation libre',url:'https://archives.correze.fr/'},
+ meteo:{n:'Météo d’autrefois (pack Limousin)',lic:'Licence Ouverte 2.0',url:'https://meteo.data.gouv.fr/'},
+ wp:{n:'Wikipédia',lic:'CC BY-SA 4.0',url:'https://fr.wikipedia.org/'},
+ wd:{n:'Wikidata',lic:'CC0',url:'https://www.wikidata.org/'},
+ chat:{n:'Châteaux d’Europe (Wikidata)',lic:'CC0',url:'https://www.wikidata.org/'},
+ mer:{n:'Mérimée (POP, ministère de la Culture)',lic:'Licence Ouverte',url:'https://pop.culture.gouv.fr/'},
+ epica:{n:'Séismes d’Europe, EPICA (INGV)',lic:'CC BY 4.0',url:'https://emidius.mi.ingv.it/'},
+ bdhi:{n:'Inondations historiques (BDHI)',lic:'Licence Ouverte',url:'https://bdhi.developpement-durable.gouv.fr/'},
+ lune:{n:'Calcul de l’app (Lune et éclipses)',lic:'calculé',url:''},
+ noaa:{n:'NOAA, volcans',lic:'domaine public',url:'https://www.ngdc.noaa.gov/'},
+ mdg:{n:'Morts des guerres (Mémoire des hommes)',lic:'Licence Ouverte',url:'https://www.memoiredeshommes.sga.defense.gouv.fr/'},
+ rel:{n:'Relevés de la Corrèze (liste à installer)',lic:'CC BY',url:'https://www.data.gouv.fr/'}
+};
+const srcHtml=(k,ref)=>{const s=SRC[k];if(!s)return'';return `<span class="src">Source : ${s.url?`<a href="${s.url}" target="_blank" rel="noopener">${esc(s.n)} ↗</a>`:esc(s.n)}${ref?` · ${esc(ref)}`:''} · <span class="lic">${esc(s.lic)}</span></span>`;};
+
+const I=(i,t,s,src,o)=>Object.assign({id:nid('i'),i,t,s,src,done:false,note:''},o||{});
+const NODES=[
+ {id:'f1',type:'f',p:'',name:'Famille MAZAUD'},
+ {id:'b1',type:'b',p:'f1',name:'Mariage MAZAUD × LACOMBE 1826',icon:'💍',dests:['🔎 Enquête « Le mariage de 1826 »','📚 Atelier « Livre MAZAUD », chap. 3'],items:[
+  I('📜','Acte de mariage, Treignac, 14 juin 1826','Jean MAZAUD et Marie LACOMBE · transcrit','ad19',{ref:'5 Mi 123, vue 45',done:true,note:'Témoins à identifier',perso:1}),
+  I('👤','Jean MAZAUD (1801–1871)','cultivateur au Bourg, fils de Léonard et de Catherine DURAND','arbre',{done:true}),
+  I('👤','Marie LACOMBE (1804–1880)','fille de Pierre LACOMBE et de Jeanne DURAND','arbre'),
+  I('📅','Contrat de mariage, 2 juin 1826','devant Me DURAND, notaire à Treignac','notaire',{ref:'3 E 456',perso:1}),
+  I('🖼','Photo de la maison MAZAUD au Bourg (vers 1900)','carte postale scannée','med'),
+  I('⛪','Église de Treignac','lieu du mariage · inscrite aux monuments historiques','mer'),
+  I('📋','Prix du blé au marché de Treignac, 1826','une ligne de la liste « Prix et mesures »','wp',{ref:'liste « Prix et mesures »'})
+ ]},
+ {id:'f2',type:'f',p:'f1',name:'Jean MAZAUD (1801–1871)'},
+ {id:'b2',type:'b',p:'f2',name:'Ce qu’il a pu voir enfant',icon:'☄️',dests:['📒 Fiche « Jean MAZAUD, une vie »'],query:'ce qu’a pu voir Jean MAZAUD entre 10 et 12 ans dans le ciel, la mer ou sur terre',items:[
+  I('☄️','Grande comète de 1811','visible à l’œil nu jusqu’en janvier 1812 · il avait 10 ans','wp'),
+  I('🌅','Couchers de soleil rouges (Soufrière de Saint-Vincent, 1812)','ciels étranges','wp'),
+  I('🌊','Crue de la Vézère à Treignac, janvier 1813','il avait 11 ans','bdhi')
+ ]},
+ {id:'f3',type:'f',p:'f2',name:'Service militaire'},
+ {id:'b3',type:'b',p:'f3',name:'Conscription 1821',icon:'🎖️',dests:['⚖️ Dossier de preuve « Jean MAZAUD »'],items:[
+  I('📜','Tableau de recensement de la classe 1821, canton de Treignac','Jean MAZAUD, n° 37','mat',{perso:1}),
+  I('📝','Note : « exempté ? frère aîné au service »','à vérifier','note')
+ ]},
+ {id:'f4',type:'f',p:'',name:'Treignac'},
+ {id:'b4',type:'b',p:'f4',name:'Naissances LACOMBE 1780–1800',icon:'👶',dests:['🔎 Enquête « Les LACOMBE de Treignac »'],items:[
+  I('👶','Pierre LACOMBE, né le 2 févr. 1784','Treignac · parrain Pierre DURAND','arbre'),
+  I('👶','Marie LACOMBE, née le 9 mai 1786','Treignac','arbre'),
+  I('📜','Baptême d’Antoine LA COMBE, 3 déc. 1797','acte pas encore relié','ad19',{ref:'GG 12, vue 210',perso:1})
+ ]},
+ {id:'b5',type:'b',p:'f4',name:'Château de Rochefière',icon:'🏰',dests:['📒 Fiche d’édifice « Rochefière »'],items:[
+  I('🏰','Château de Rochefière','Treignac · tour du XVe siècle','chat'),
+  I('🏛','Tour de Rochefière, inscrite MH (1931)','notice Mérimée','mer'),
+  I('⚔️','Siège de Rochefière (1569)','guerres de Religion · 0 km','wp'),
+  I('🪦','Monument aux morts de Treignac (1921)','3,2 km','wd'),
+  I('🌦','Hiver 1879–1880, la Vézère gelée','Météo d’autrefois','meteo'),
+  I('🗺','Cadastre napoléonien, section B (1825)','plan du château et des terres','ad19',{ref:'3 P 270'}),
+  I('🪦','Monument aux morts de Rilhac-Treignac','3,9 km','wd')
+ ]},
+ {id:'b6',type:'b',p:'',name:'Pêle-mêle',icon:'🧺',dests:[],items:[
+  I('👤','Sophie DURAND (née en 1962)','cousine vivante · adresse dans le Répertoire','arbre',{vivant:1}),
+  I('📋','Les gares de la Corrèze (34 lignes)','un tableau, avec ses critères','wd',{ref:'liste « Gares »'})
+ ]}
+];
+const SUGG=[
+ {id:'s1',to:'b4',i:'📜',t:'3 actes de Treignac pas encore dans un panier',s:'baptêmes de 1784, 1791 et 1797, reliés à des LACOMBE',why:'le lieu <i>Treignac</i> · le dossier <i>Treignac</i> · le nom du panier',add:[['📜','Baptême de Pierre LACOMBE, 2 févr. 1784','parrain Pierre DURAND','ad19'],['📜','Baptême de Jeanne LACOMBES, 14 août 1791','variante du nom','ad19'],['📜','Sépulture de François LACOMBE, 1797','acte voisin','ad19']]},
+ {id:'s2',to:'b1',i:'🌦',t:'La météo du jour du mariage',s:'14 juin 1826 à Treignac (station de Limoges, 75 km)',why:'la <i>date du mariage</i> dans ton arbre · le nom du panier',add:[['🌦','Météo du 14 juin 1826 (Limoges) : 24 °C, sec','Météo d’autrefois','meteo']]},
+ {id:'s3',to:'b1',i:'👥',t:'Les témoins de ce mariage',s:'Pierre DURAND et Antoine MAZAUD, lus dans la transcription',why:'la <i>transcription</i> de l’acte de mariage',add:[['👤','Pierre DURAND (1780–1845), témoin','tisserand, oncle de la mariée','arbre'],['👤','Antoine MAZAUD (1798–1860), témoin','frère du marié','arbre']]},
+ {id:'s4',to:'b3',i:'🎖️',t:'Le registre matricule de Jean MAZAUD',s:'classe 1821, Tulle',why:'la destination <i>dossier de preuve</i> · le nom du panier',add:[['🎖️','Registre matricule, classe 1821, n° 512','Tulle','mat']]},
+ {id:'s5',to:'b2',i:'🌋',t:'1816, « l’année sans été » (Tambora)',s:'Jean avait 14 ans : juste après la période du panier',why:'sa <i>date de naissance</i> · la recherche qui a créé le panier',add:[['🌋','1816, l’année sans été (éruption du Tambora, 1815)','récoltes perdues en Limousin','noaa']]},
+ {id:'s6',to:'b5',i:'🪦',t:'Les monuments aux morts à moins de 5 km',s:'Treignac et Rilhac-Treignac, déjà dans le panier ; Soudaine (6,1 km) non',why:'le nom du panier <i>Château…</i> · les lieux',add:[['🪦','Monument aux morts de Soudaine-Lavinadière','6,1 km','wd']]}
+];
+
+/* ═════════ la recherche qui crée un panier ═════════ */
+const R=(g,c,i,t,s,src,o)=>Object.assign({id:nid('r'),g,c,i,t,s,src},o||{});
+const BIRTH=1801+285/365; // Jean MAZAUD, né le 12 oct. 1801
+const SS={
+ mil:{q:'les événements militaires à 4 km autour du château de Rochefière',name:'Militaire autour de Rochefière',icon:'⚔️',folder:'f4',radius:4,
+  cats:[['bat','⚔️ batailles et sièges'],['reg','🎖️ régiments, gardes'],['cas','🪖 casernes, fortifications'],['mon','🪦 monuments aux morts'],['mdg','🕯 morts des guerres']],
+  groups:[['bat','⚔️ Batailles et sièges','ha_batailles'],['reg','🎖️ Régiments casernés, gardes nationales','l8b_regiments_ville'],['cas','🪖 Casernes et fortifications','lp_merimee · cht_chateaux'],['mon','🪦 Monuments aux morts','pm_monuments'],['mdg','🕯 Morts des guerres nés tout près','guerres']],
+  rows:[R('bat','bat','⚔️','Siège de Rochefière (1569)','guerres de Religion','wp',{km:0}),R('bat','bat','⚔️','Combat du pont de Treignac (1652)','la Fronde','wp',{km:2.9}),R('bat','bat','⚔️','Embuscade de la Croix-Blanche (1944)','Libération','wp',{km:6.5}),
+   R('reg','reg','🎖️','Garde nationale de Treignac (1790–1795)','1 bataillon','wp',{km:2.8}),R('reg','reg','🎖️','Dépôt du 100e régiment d’infanterie','Tulle','wp',{km:38}),
+   R('cas','cas','🏛','Tour de défense de Rochefière, inscrite MH','le château lui-même','mer',{km:0}),R('cas','cas','🪖','Ancienne caserne de gendarmerie','Treignac','mer',{km:2.7}),
+   R('mon','mon','🪦','Monument aux morts de Treignac (1921)','42 noms','wd',{km:3.2}),R('mon','mon','🪦','Monument aux morts de Rilhac-Treignac','18 noms','wd',{km:3.9}),R('mon','mon','🪦','Monument aux morts de Soudaine-Lavinadière','11 noms','wd',{km:6.1}),
+   R('mdg','mdg','🕯','Jean DURAND (1890–1915), né à Treignac','mort pour la France, Argonne','mdg',{km:3.1,need:'mdg'}),R('mdg','mdg','🕯','11 autres soldats nés à moins de 4 km','un tableau, avec ses critères','mdg',{km:3.5,need:'mdg'})],
+  miss:[{id:'mdg',t:'La liste « 🕯 Morts des guerres » n’est pas installée.',d:'Elle ajouterait les soldats nés près du château.',size:'14 Mo'}],
+  nope:['« autour du château » : j’ai pris <b>le château</b> comme centre, pas le bourg de Treignac (2,8 km plus loin).','« événements militaires » : je n’ai pas de liste des combats de maquis (1943–1944) ; ils peuvent manquer, sauf s’ils sont dans Wikipédia.']},
+ voir:{q:'ce qu’a pu voir Jean MAZAUD entre 10 et 12 ans dans le ciel, la mer ou sur terre',name:'Ce que Jean MAZAUD a pu voir à 10–12 ans',icon:'☄️',folder:'f2',a1:10,a2:12,
+  cats:[['com','☄️ comètes'],['aur','🌌 aurores'],['ecl','🌒 éclipses'],['cie','🌅 ciels étranges'],['sei','🌍 séismes'],['vol','🌋 éruptions'],['inn','🌊 inondations, crues'],['mar','🌊 grandes marées'],['met','🌦 météo']],
+  groups:[['com','Ciel · ☄️ comètes','ciel_cometes · il-a-pu-voir'],['aur','Ciel · 🌌 aurores','ciel_cometes'],['ecl','Ciel · 🌒 éclipses','heritage-lune'],['cie','Ciel · 🌅 ciels étranges','l8a_ciels'],['sei','Terre · 🌍 séismes','hist_seismes'],['vol','Terre · 🌋 éruptions','l10t_volcans'],['inn','Eau · 🌊 inondations, crues','hist_crues · mr_riviere'],['mar','Mer · 🌊 grandes marées','l8a_maree'],['met','Air · 🌦 météo','meteo_jour']],
+  empty:{aur:'Aucune aurore notée en France ces années-là.',sei:'Aucun séisme ressenti à moins de 150 km de Treignac (EPICA).',mar:'Treignac est à 190 km de la mer : pas de marée à voir. (Était-il ailleurs ? Ajoute un lieu.)'},
+  rows:[R('com','com','☄️','Grande comète de 1811','queue immense en octobre 1811, visible jusqu’en janvier 1812','wp',{y:1811.8}),R('com','com','☄️','Comète Pons-Brooks (1812)','à peine visible à l’œil nu, sept. 1812','wp',{y:1812.7}),
+   R('ecl','ecl','🌒','Éclipse de Lune, été 1813','visible de Treignac (calculée)','lune',{y:1813.5}),
+   R('cie','cie','🌅','Couchers de soleil rouges (Soufrière de Saint-Vincent, 1812)','poussières de l’éruption','wp',{y:1812.4}),R('cie','cie','🌅','1816, l’année sans été (Tambora)','il avait 14 ans','wp',{y:1816.4}),
+   R('vol','vol','🌋','Éruption du Tambora (avril 1815)','il avait 13 ans ; rien vu, mais l’été 1816…','noaa',{y:1815.3}),
+   R('inn','inn','🌊','Crue de la Vézère à Treignac, janvier 1813','le pont emporté','bdhi',{y:1813.05}),
+   R('met','met','🌦','Hiver 1812–1813 très froid (Limoges)','−15 °C en janvier','meteo',{y:1813.0,need:'meteo'}),R('met','met','🌦','Grêle sur le canton, juillet 1812','récoltes perdues','meteo',{y:1812.55,need:'meteo'})],
+  miss:[{id:'meteo',t:'Le pack « 🌦 Météo d’autrefois — Limousin 1800–1850 » n’est pas installé.',d:'Il ajouterait les hivers et les orages de ces années-là.',size:'6 Mo'}],
+  nope:['« sur terre » : j’ai compris séismes, éruptions et inondations. Les <b>tempêtes</b> : il n’y a pas encore de liste des tempêtes anciennes dans l’app.','« entre 10 et 12 ans » : du jour de ses 10 ans (12 oct. 1811) à la veille de ses 13 ans (11 oct. 1814).','Ses lieux à cet âge viennent de ton arbre : <b>Treignac</b> seulement (né là, marié là en 1826). S’il a vécu ailleurs, ajoute le lieu.']},
+ nais:{q:'les naissances de la famille LACOMBE à Treignac entre 1780 et 1800',name:'Naissances LACOMBE à Treignac 1780–1800',icon:'👶',folder:'f4',y1:1780,y2:1800,
+  cats:[['nai','👶 naissances, baptêmes'],['ond','💧 ondoiements'],['mne','🕊 mort-nés']],
+  groups:[['arbre','👤 Dans ton arbre','personnes'],['acte','📜 Actes pas encore reliés','actes'],['rel','📋 Relevés de la Corrèze','releves_19']],
+  rows:[R('arbre','nai','👶','Pierre LACOMBE, né le 2 févr. 1784','Treignac · fils de Jean et de Marguerite DURAND','arbre',{y:1784}),R('arbre','nai','👶','Marie LACOMBE, née le 9 mai 1786','Treignac','arbre',{y:1786}),
+   R('arbre','nai','👶','Jeanne LACOMBES, née le 14 août 1791','Treignac · variante du nom','arbre',{y:1791,v:1}),R('arbre','nai','👶','Léonard LACOMBE, né le 21 mars 1802','Treignac','arbre',{y:1802}),
+   R('acte','nai','📜','Baptême d’Antoine LA COMBE, 3 déc. 1797','Treignac · variante du nom','ad19',{y:1797,v:1}),R('acte','ond','💧','Ondoiement d’un enfant LACOMBE, 1793','Treignac','ad19',{y:1793}),
+   R('acte','nai','📜','Baptême de Catherine LACOMBE, 1795','Rilhac-Treignac (commune voisine)','ad19',{y:1795,vois:1}),
+   R('rel','nai','📋','Baptême de Guillaume LACOMBE, 1782','relevé collaboratif','rel',{y:1782,need:'rel'})],
+  miss:[{id:'rel',t:'La liste « 📋 Relevés de la Corrèze » n’est pas installée.',d:'Des baptêmes relevés par d’autres, avec la vue de l’acte.',size:'22 Mo'}],
+  nope:['« la famille LACOMBE » : j’ai pris le <b>nom</b> LACOMBE et ses variantes, pas les enfants des filles LACOMBE (ils portent un autre nom).']}
+};
+const SSKEYS=['mil','voir','nais'];
+function parse(q){const f=fold(q);if(/milit|bataill|caserne|regiment|guerre/.test(f))return'mil';if(/pu voir|ciel|comete|eclipse|aurore/.test(f))return'voir';if(/naissance|bapteme|nes /.test(f))return'nais';return null;}
+const yearTxt=y=>{const yr=Math.floor(y),m=Math.round((y-yr)*12);return ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'][Math.min(11,m)]+' '+yr;};
+
+/* ═════════ l'onglet ═════════ */
+function mount(root,o){
+ o=o||{};
+ const st={nodes:clone(NODES),sugg:clone(SUGG),sel:o.sel||'b1',closed:new Set(),showSugg:true,stripOpen:true,stripAll:!o.phone,view:'basket',pick:false,picked:new Set(),find:'',s:null,menu:null};
+ root.innerHTML=`<div class="tabui">
+  <div class="appbar"><span class="logo">LCNDA</span><nav><span>🌳 Arbre</span><span>👤 Personnes</span><span>🔎 Enquêtes</span><span>📋 Listes</span><span>📒 Fiches</span><span class="on">🧺 Paniers</span></nav><span class="gear">⚙️</span></div>
+  <div class="tb"><h3>🧺 Paniers</h3>
+   <button type="button" class="smart" data-a="search"><span>🔍</span><span><b>Créer un panier par une recherche…</b> <span class="mini">ex. « ce qu’a pu voir Jean MAZAUD à 10 ans »</span></span></button>
+   <div class="tbb"><button type="button" class="b sec sm" data-a="newf">＋ Dossier</button><button type="button" class="b sec sm" data-a="newb">＋ Panier</button><button type="button" class="b ter sm" data-a="import" title="Ouvrir un fichier .lcnda-panier">⇩ Récupérer</button></div>
+   <button type="button" class="crumbbtn" data-a="tree"><span></span><b aria-hidden="true">▾</b></button>
+  </div>
+  <div class="strip"></div>
+  <div class="bd"><aside class="tree" aria-label="Dossiers et paniers"></aside><div class="main"><div class="mscroll"></div><div class="mfoot"></div></div></div>
+  <div class="ovl" hidden></div><div class="toast" hidden role="status"></div></div>`;
+ const ui=root.querySelector('.tabui');
+ const $=s=>root.querySelector(s);
+ const node=id=>st.nodes.find(n=>n.id===id);
+ const kids=id=>st.nodes.filter(n=>n.p===id);
+ const sub=id=>{const out=[];const w=x=>kids(x).forEach(k=>{out.push(k);w(k.id);});w(id);return out;};
+ const basketsIn=id=>sub(id).filter(x=>x.type==='b');
+ const count=n=>n.type==='b'?n.items.length:basketsIn(n.id).reduce((a,b)=>a+b.items.length,0);
+ const path=id=>{const out=[];let n=node(id);while(n){out.unshift(n);n=node(n.p);}return out;};
+ const depth=id=>path(id).length-1;
+ const label=n=>`${n.type==='f'?'📁':n.icon||'🧺'} ${n.name}`;
+ const folders=()=>st.nodes.filter(n=>n.type==='f');
+ const folderOpts=sel=>`<option value="">(à la racine, sans dossier)</option>${folders().map(f=>`<option value="${f.id}"${f.id===sel?' selected':''}>${' '.repeat(depth(f.id))}📁 ${esc(f.name)}</option>`).join('')}`;
+ const basketOpts=sel=>st.nodes.filter(n=>n.type==='b').map(b=>`<option value="${b.id}"${b.id===sel?' selected':''}>${esc(path(b.id).map(x=>x.name).join(' › '))}</option>`).join('');
+ let tt=null;
+ function toast(m){const t=$('.toast');t.innerHTML=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,3800);}
+ function dlg(html,bind){const ov=$('.ovl');ov.innerHTML=`<div class="dlg" role="dialog" aria-modal="true">${html}</div>`;ov.hidden=false;ov.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>ov.hidden=true);bind&&bind(ov.querySelector('.dlg'));}
+ const closeDlg=()=>{$('.ovl').hidden=true;};
+
+ /* ── arbre ── */
+ function paintTree(){
+  const row=n=>{const isF=n.type==='f',open=!st.closed.has(n.id);
+   return `<li role="treeitem"${isF?` aria-expanded="${open}"`:''}><div class="tr ${isF?'f':'b'}${st.sel===n.id&&st.view!=='search'?' sel':''}" draggable="true" data-id="${n.id}" style="--d:${depth(n.id)}">
+    ${isF?`<button type="button" class="tw" data-tw="${n.id}" aria-label="${open?'Replier':'Déplier'}">${open?'▾':'▸'}</button>`:'<span class="tw0"></span>'}
+    <span aria-hidden="true">${isF?(open?'📂':'📁'):esc(n.icon||'🧺')}</span><span class="nm">${esc(n.name)}</span><span class="n">${count(n)}</span></div>
+    ${isF&&open?`<ul role="group">${kids(n.id).map(row).join('')}</ul>`:''}</li>`;};
+  const nb=st.nodes.filter(n=>n.type==='b').length,nf=folders().length;
+  $('.tree').innerHTML=`<div class="treeh"><b>Mes paniers</b><span class="mini">${nb} paniers · ${nf} dossiers</span><button type="button" class="b ter sm tclose" data-a="tree">✕ Fermer</button></div>
+   <ul class="tlist" role="tree">${kids('').map(row).join('')}</ul>
+   <p class="mini tnote">⋮⋮ Glisse un panier sur un dossier pour l’y ranger, un élément sur un panier pour l’y mettre. Un dossier garde toujours au moins un panier.</p>`;
+  const cur=node(st.sel);
+  $('.crumbbtn span').textContent=st.view==='search'?'🔍 Nouvelle recherche':cur?path(cur.id).map((x,i,a)=>i===a.length-1?label(x):(x.type==='f'?'📂 ':'')+x.name).join(' › '):'Mes paniers';
+ }
+ /* ── idées en haut ── */
+ const sCard=s=>`<div class="sg"><div class="sgt"><span class="ico" aria-hidden="true">${s.i}</span><div><b>${esc(s.t)}</b><small>${esc(s.s)}</small></div></div>
+  <p class="why">Pourquoi : ${s.why}</p><div class="sga"><button type="button" class="b pri sm wrap" data-sadd="${s.id}">＋ Dans « ${esc(node(s.to)?.name||'?')} »</button><button type="button" class="b ter sm" data-sno="${s.id}">✕ Pas utile</button></div></div>`;
+ function paintStrip(){
+  const el=$('.strip');
+  if(!st.showSugg){el.innerHTML='';return;}
+  const list=st.sugg,shown=st.stripAll?list:list.slice(0,2);
+  el.innerHTML=`<div class="striph"><button type="button" class="tgl" data-a="strip" aria-expanded="${st.stripOpen}">${st.stripOpen?'▾':'▸'} 💡 Des idées pour tes paniers <span class="nb">${list.length}</span></button>
+   <span class="mini">d’après ton arbre, les noms et destinations de tes paniers, les lieux et les dates</span>
+   <button type="button" class="b ter sm" data-a="sugg-off">Masquer les suggestions</button></div>
+   ${st.stripOpen?(list.length?`<div class="sgrid">${shown.map(sCard).join('')}</div>${shown.length<list.length?`<button type="button" class="more" data-a="stripall">Voir les ${list.length-shown.length} autres idées</button>`:''}`:'<p class="mini">Plus d’idée pour l’instant.</p>'):''}`;
+ }
+ /* ── zone principale ── */
+ function paintMain(){
+  st.menu=null;
+  if(st.view==='search')return paintSearch();
+  const n=node(st.sel);
+  if(!n){$('.mscroll').innerHTML='<div class="empty">Choisis un panier à gauche.</div>';$('.mfoot').innerHTML='';return;}
+  n.type==='b'?paintBasket(n):paintFolder(n);
+ }
+ const crumbs=n=>{const p=path(n.id).slice(0,-1);return p.length?`<div class="crumbs">${p.map(x=>'📂 '+esc(x.name)).join(' › ')} ›</div>`:'<div class="crumbs">À la racine</div>';};
+ function visibleItems(n){const f=fold(st.find).trim();return f?n.items.filter(it=>fold([it.t,it.s,it.note,SRC[it.src]?.n].join(' ')).includes(f)):n.items;}
+ function paintBasket(n){
+  const used=n.items.filter(i=>i.done).length,vis=visibleItems(n),bs=st.showSugg?st.sugg.filter(s=>s.to===n.id):[];
+  $('.mscroll').innerHTML=`<div class="bh">${crumbs(n)}
+   <h3><span aria-hidden="true">${esc(n.icon||'🧺')}</span><span class="bn">${esc(n.name)}</span><span class="cnt">${n.items.length} élément${n.items.length>1?'s':''} · ${used} utilisé${used>1?'s':''}</span></h3>
+   <div class="dests"><span class="lab">Va d’habitude vers</span>${n.dests.length?n.dests.map(d=>`<span class="dest">→ ${esc(d)}</span>`).join(''):'<span class="mini">nulle part encore</span>'}<button type="button" class="b ter sm" data-a="dests">✎ ${n.dests.length?'changer':'choisir'}</button></div>
+   <div class="acts"><button type="button" class="b pri sm" data-a="putall">📍 Mettre tout dans…</button><button type="button" class="b sec sm" data-a="pick" aria-pressed="${st.pick}">☑ Une partie…</button><button type="button" class="b sec sm" data-a="rename">✎ Renommer</button><button type="button" class="b sec sm" data-a="dup">⧉ Dupliquer ▾</button><button type="button" class="b sec sm" data-a="share">⇪ Partager</button><button type="button" class="b sec sm" data-a="more" aria-label="Autres actions">⋯</button></div>
+   ${n.query?`<div class="qline">🔍 Créé par la recherche « ${esc(n.query)} » <button type="button" class="b ter sm" data-a="redo">↻ Refaire (nouveautés à valider)</button></div>`:''}</div>
+   ${bs.length?`<section class="bs"><h5>💡 Pour ce panier <span class="mini">${bs.length} idée${bs.length>1?'s':''}</span><span class="sp"></span><button type="button" class="b ter sm" data-a="sugg-off">Masquer les suggestions</button></h5>${bs.map(s=>`<div class="bsr"><span aria-hidden="true">${s.i}</span><div class="t"><b>${esc(s.t)}</b><small>${esc(s.s)} — pourquoi : ${s.why}</small></div><button type="button" class="b pri sm" data-sadd="${s.id}">＋ Ajouter</button><button type="button" class="b ter sm" data-sno="${s.id}">✕</button></div>`).join('')}</section>`:''}
+   <div class="bfind"><label class="srch"><span class="mini" style="position:absolute;left:-9999px">Chercher dans ce panier</span><input type="search" data-find value="${esc(st.find)}" placeholder="Chercher dans ce panier : un nom, une date, une source…"></label>
+    <span class="mini" data-findn>${st.find?`${vis.length} trouvé${vis.length>1?'s':''} sur ${n.items.length}`:''}</span></div>
+   <ol class="items">${vis.map(it=>itemHtml(it,n)).join('')||`<li class="empty">${st.find?'Rien ne correspond dans ce panier.':'Vide : glisse des éléments ici, ou prends une idée au-dessus.'}</li>`}</ol>`;
+  paintFoot(n);
+ }
+ function itemHtml(it,n){const on=st.picked.has(it.id);
+  return `<li class="it${it.done?' done':''}${st.pick&&on?' on':''}" draggable="true" data-iid="${it.id}">
+   <span class="grip" aria-hidden="true" title="Glisser pour changer l’ordre ou le panier">⋮⋮</span>
+   ${st.pick?`<label class="pk"><input type="checkbox" data-pi="${it.id}"${on?' checked':''} aria-label="Choisir « ${esc(it.t)} »"></label>`:''}
+   <span class="ico" aria-hidden="true">${it.i}</span>
+   <div class="itx"><b>${esc(it.t)}</b>${it.s?`<small>${esc(it.s)}</small>`:''}${srcHtml(it.src,it.ref)}
+    <input class="note-in" data-note="${it.id}" value="${esc(it.note)}" placeholder="une note…" aria-label="Note sur « ${esc(it.t)} »"></div>
+   <div class="ir"><label class="used${it.done?' on':''}"><input type="checkbox" data-done="${it.id}"${it.done?' checked':''}> ✓ utilisé</label>
+    <span class="mv"><button type="button" data-up="${it.id}" aria-label="Monter">↑</button><button type="button" data-dn="${it.id}" aria-label="Descendre">↓</button></span>
+    <button type="button" class="xb" data-x="${it.id}" aria-label="Retirer du panier">×</button></div></li>`;}
+ function paintFoot(n){
+  const f=$('.mfoot');
+  if(!st.pick){f.innerHTML='';return;}
+  const vis=n.type==='b'?visibleItems(n):null,k=st.picked.size;
+  const among=n.type==='b'&&st.find?` parmi les ${vis.length} trouvés`:'';
+  f.innerHTML=`<div class="cnt"><b>${k} coché${k>1?'s':''}${among}</b>${n.type==='b'&&vis.length?`<button type="button" class="b ter sm" data-a="pickall" style="padding-left:0">☑ Tout cocher${st.find?' (les trouvés)':''}</button>`:''}</div>
+   <button type="button" class="b sec sm" data-a="dupsel"${k?'':' disabled'}>⧉ Dupliquer les ${k} cochés</button>
+   <button type="button" class="b sec sm" data-a="takesel"${k?'':' disabled'}>📥 Prendre les ${k}</button>
+   <button type="button" class="b pri sm" data-a="putsel"${k?'':' disabled'}>📍 Mettre les ${k} dans…</button>
+   <button type="button" class="b ter sm" data-a="pick">Annuler</button>`;
+ }
+ /* dossier : vue d'ensemble et envoi d'une partie (cases à trois états) */
+ const allItems=id=>{const n=node(id);return n.type==='b'?n.items.map(i=>i.id):basketsIn(id).flatMap(b=>b.items.map(i=>i.id));};
+ const tri=ids=>{const k=ids.filter(i=>st.picked.has(i)).length;return k===0?'none':k===ids.length?'all':'some';};
+ function ftree(id,d){return kids(id).map(k=>{const ids=allItems(k.id),t=tri(ids);
+  return `<li><div class="fr" style="--d:${d}">${st.pick?`<input type="checkbox" data-pt="${k.id}"${t==='all'?' checked':''} data-mixed="${t==='some'?1:0}" aria-label="Tout « ${esc(k.name)} »">`:''}
+   <span aria-hidden="true">${k.type==='f'?'📁':esc(k.icon||'🧺')}</span><button type="button" class="lnk" data-open="${k.id}">${esc(k.name)}</button>
+   <span class="mini">${ids.length} él.${k.dests&&k.dests.length?' · → '+esc(k.dests[0]):''}</span></div>
+   ${k.type==='f'?`<ul>${ftree(k.id,d+1)}</ul>`:st.pick?`<ul>${k.items.map(it=>`<li><label class="fi" style="--d:${d+1}"><input type="checkbox" data-pi="${it.id}"${st.picked.has(it.id)?' checked':''}> ${it.i} ${esc(it.t)}</label></li>`).join('')}</ul>`:''}</li>`;}).join('');}
+ function paintFolder(n){
+  const nb=basketsIn(n.id).length,ni=count(n);
+  $('.mscroll').innerHTML=`<div class="bh">${crumbs(n)}<h3><span aria-hidden="true">📂</span><span class="bn">${esc(n.name)}</span><span class="cnt">${nb} panier${nb>1?'s':''} · ${ni} éléments</span></h3>
+   <div class="acts"><button type="button" class="b pri sm" data-a="pick" aria-pressed="${st.pick}">📍 Mettre une partie dans…</button><button type="button" class="b sec sm" data-a="newb">＋ Panier ici</button><button type="button" class="b sec sm" data-a="newf">＋ Sous-dossier</button><button type="button" class="b sec sm" data-a="rename">✎ Renommer</button><button type="button" class="b sec sm" data-a="more" aria-label="Autres actions">⋯</button></div>
+   ${st.pick?'<p class="mini" style="margin:12px 0 0">Coche un dossier (tout ce qu’il contient), un panier ou des éléments. Une case à moitié pleine = une partie seulement. Chaque élément va vers les destinations de son panier, sauf si tu en choisis une autre.</p>':''}</div>
+   <ul class="ftree" style="margin-top:14px">${ftree(n.id,0)}</ul>`;
+  root.querySelectorAll('[data-mixed="1"]').forEach(c=>c.indeterminate=true);
+  paintFoot(n);
+ }
+ /* ── recherche qui crée un panier ── */
+ function rowsOf(d,s){return d.rows.filter(r=>{
+  if(r.need&&!s.installed.has(r.need))return false;
+  if(s.catsOff.has(r.c)||s.srcOff.has(r.src))return false;
+  if(s.key==='mil'&&r.km>s.radius)return false;
+  if(s.key==='voir'&&(r.y<BIRTH+s.a1||r.y>=BIRTH+s.a2+1))return false;
+  if(s.key==='nais'&&(r.y<s.y1||r.y>s.y2||(r.v&&!s.variants)||(r.vois&&!s.voisines)))return false;
+  return true;});}
+ function startSearch(key,q){
+  const d=SS[key];
+  st.s={key,q:q??(d?d.q:''),ex:new Set(),catsOff:new Set(),srcOff:new Set(),installed:new Set(),radius:d?.radius,a1:d?.a1,a2:d?.a2,y1:d?.y1,y2:d?.y2,variants:true,voisines:false,name:d?.name||'',folder:d?.folder||'',addTo:'',crit:[]};
+ }
+ function critHtml(d,s){
+  const C=(lab,v)=>`<div class="crow"><span class="cl">${lab}</span><div class="cv">${v}</div></div>`;
+  const tg=(attr,on,t)=>`<button type="button" class="chip" ${attr} aria-pressed="${on}">${t}</button>`;
+  let qui,quand,ou;
+  if(s.key==='mil'){qui='<span class="chip off">personne en particulier</span>';quand='<span class="chip fixed">toutes les époques</span>';
+   ou=`<span class="chip fixed">🏰 château de Rochefière (Treignac) · <a href="https://www.wikidata.org/" target="_blank" rel="noopener" class="alink">Châteaux d’Europe ↗</a></span><span class="rad"><button type="button" data-rad="-1" aria-label="Rayon plus petit">−</button><span>${s.radius} km</span><button type="button" data-rad="1" aria-label="Rayon plus grand">＋</button></span>`;}
+  if(s.key==='voir'){qui='<span class="chip fixed">👤 Jean MAZAUD (1801–1871)</span><small>né le 12 oct. 1801 à Treignac</small>';
+   quand=`<span class="chip fixed">âge <input class="num" type="number" min="0" max="90" value="${s.a1}" data-age="a1" aria-label="Âge de début"> à <input class="num" type="number" min="0" max="90" value="${s.a2}" data-age="a2" aria-label="Âge de fin"> ans</span><small data-agetxt>= ${yearTxt(BIRTH+s.a1)} → ${yearTxt(BIRTH+s.a2+1)}</small>`;
+   ou='<span class="chip fixed">📍 ses lieux de vie à cet âge : Treignac</span><small>ciel : ce qui se voyait de là · séismes : 150 km · crues : la commune et sa rivière</small>';}
+  if(s.key==='nais'){qui=`<span class="chip fixed">👪 nom LACOMBE</span>${tg('data-tg="variants"',s.variants,'＋ variantes : LACOMBES, LA COMBE')}`;
+   quand=`<span class="chip fixed">de <input class="num" type="number" value="${s.y1}" data-yr="y1" aria-label="De l’année"> à <input class="num" type="number" value="${s.y2}" data-yr="y2" aria-label="À l’année"></span>`;
+   ou=`<span class="chip fixed">📍 Treignac (commune)</span>${tg('data-tg="voisines"',s.voisines,'＋ communes voisines')}`;}
+  const srcs=[...new Set(d.rows.filter(r=>!r.need||s.installed.has(r.need)).map(r=>r.src))];
+  return C('Qui',qui)+C('Quand / âge',quand)+C('Où + rayon',ou)+C('Quoi',d.cats.map(([k,t])=>tg(`data-cat="${k}"`,!s.catsOff.has(k),t)).join(''))
+   +C('Sources',srcs.map(k=>tg(`data-src="${k}"`,!s.srcOff.has(k),esc(SRC[k].n)+' · '+esc(SRC[k].lic))).join(''))
+   +(s.crit.length?C('Aussi',s.crit.map(t=>`<span class="chip fixed">${esc(t)}</span>`).join('')):'')
+   +`<div class="crow"><span class="cl"></span><div class="cv" style="position:relative"><button type="button" class="b ter sm" data-a="addcrit">＋ Un autre critère…</button></div></div>`;
+ }
+ function resHtml(d,s){
+  const vis=rowsOf(d,s);
+  return d.groups.map(([g,lab,list])=>{
+   if(s.catsOff.has(g))return'';
+   const rows=vis.filter(r=>r.g===g);
+   const needs=d.rows.filter(r=>r.g===g&&r.need&&!s.installed.has(r.need));
+   if(!rows.length){const e=d.empty&&d.empty[g];if(e)return `<div class="grp"><div class="gh2"><b>${lab}</b><span class="c">rien</span><code>${esc(list)}</code></div><div class="gempty">${esc(e)}</div></div>`;
+    if(needs.length)return'';return `<div class="grp"><div class="gh2"><b>${lab}</b><span class="c">rien avec ces critères</span><code>${esc(list)}</code></div></div>`;}
+   const k=rows.filter(r=>!s.ex.has(r.id)).length,t=k===rows.length?'all':k?'some':'none';
+   return `<div class="grp"><label class="gh2"><input type="checkbox" data-gk="${g}"${t==='all'?' checked':''} data-mixed="${t==='some'?1:0}" aria-label="Tout le groupe"><b>${lab}</b><span class="c">${k} gardé${k>1?'s':''} sur ${rows.length}</span><code>${esc(list)}</code></label>
+    <ul class="rl">${rows.map(r=>{const x=s.ex.has(r.id);return `<li class="rr${x?' ex':''}"><span class="yn"><button type="button" class="y" data-y="${r.id}" aria-pressed="${!x}" aria-label="Garder">✓</button><button type="button" class="n" data-n="${r.id}" aria-pressed="${x}" aria-label="Laisser de côté">✗</button></span>
+     <span class="ico" aria-hidden="true">${r.i}</span><div class="rtx"><b>${esc(r.t)}</b><small>${esc(r.s)}${r.km!=null?` · ${String(r.km).replace('.',',')} km`:''}</small>${srcHtml(r.src)}</div></li>`;}).join('')}</ul></div>`;
+  }).join('');
+ }
+ const kept=(d,s)=>rowsOf(d,s).filter(r=>!s.ex.has(r.id));
+ function paintSearch(){
+  const s=st.s||(startSearch(null,''),st.s),d=SS[s.key];
+  $('.mscroll').innerHTML=`<div class="ssh"><button type="button" class="b ter sm" data-a="back" style="padding-left:0">← Revenir aux paniers</button>
+   <h3>🔍 Créer un panier par une recherche</h3><p>Écris ce que tu cherches, comme tu le dirais. Je montre ce que j’ai compris ; tu changes ce qui ne va pas, tu enlèves ce que tu ne veux pas. Rien n’est créé avant ton accord.</p></div>
+   <div class="ssin"><input type="search" data-ssq value="${esc(s.q)}" placeholder="ex. les naissances de la famille LACOMBE à Treignac entre 1780 et 1800" aria-label="Ta recherche"><button type="button" class="b pri" data-a="parse">Comprendre</button></div>
+   <div class="ex"><span>Par exemple :</span>${SSKEYS.map(k=>`<button type="button" class="chip" data-ex="${k}">${esc(SS[k].q)}</button>`).join('')}</div>
+   ${d?`<section class="box und"><h4>✅ Ce que j’ai compris <small>clique une pastille pour l’enlever ou la remettre ; change les nombres</small></h4>${critHtml(d,s)}</section>
+   <section class="box nope"><h4>🤔 Ce que je n’ai pas compris (ou pas pu faire)</h4><ul>${d.nope.map(x=>`<li>${x}</li>`).join('')}</ul></section>
+   ${d.miss.some(m=>!s.installed.has(m.id))?`<section class="box miss"><h4>⤓ Il manque des listes</h4><ul>${d.miss.filter(m=>!s.installed.has(m.id)).map(m=>`<li><span>${esc(m.t)} <span class="mini">${esc(m.d)}</span></span><button type="button" class="b sec sm" data-inst="${m.id}">⤓ L’installer (${m.size})</button></li>`).join('')}</ul></section>`:''}
+   <section class="box res"><h4>🧺 Ce que je mettrais dans le panier <small>✓ garder · ✗ laisser de côté · la case du groupe fait tout le groupe</small></h4><div data-res>${resHtml(d,s)}</div></section>`
+   :(s.q?`<section class="box nope"><h4>🤔 Je n’ai pas compris « ${esc(s.q)} »</h4><ul><li>Je reconnais : une personne de ton arbre, un âge ou des dates, un lieu et un rayon (« à 4 km de… »), et des sortes de choses (naissances, batailles, comètes, crues, monuments…).</li><li>Essaie un des exemples ci-dessus, puis change les pastilles.</li></ul></section>`:'')}`;
+  root.querySelectorAll('[data-mixed="1"]').forEach(c=>c.indeterminate=true);
+  paintSearchFoot();
+ }
+ function paintSearchFoot(){
+  const s=st.s,d=SS[s?.key],f=$('.mfoot');
+  if(!d){f.innerHTML='';return;}
+  const n=kept(d,s).length;
+  f.innerHTML=`<div class="cnt"><b data-kn>${n} élément${n>1?'s':''} gardé${n>1?'s':''}</b><span class="mini">avec leurs sources, liens et licences, et la recherche (pour ↻ Refaire)</span></div>
+   <input type="text" data-ssname value="${esc(s.name)}" aria-label="Nom du panier" style="flex:1 1 220px">
+   <select data-ssfold aria-label="Dans quel dossier">${folderOpts(s.folder)}</select>
+   <button type="button" class="b pri" data-a="create"${n?'':' disabled'}>Créer le panier « ${esc(s.name)} » (${n})</button>
+   <button type="button" class="b ter sm" data-a="addexist"${n?'':' disabled'}>ou ＋ Ajouter à un panier existant…</button>`;
+ }
+ function refreshRes(){const s=st.s,d=SS[s.key];const h=$('[data-res]');if(h)h.innerHTML=resHtml(d,s);root.querySelectorAll('[data-res] [data-mixed="1"]').forEach(c=>c.indeterminate=true);paintSearchFoot();const at=$('[data-agetxt]');if(at)at.textContent=`= ${yearTxt(BIRTH+s.a1)} → ${yearTxt(BIRTH+s.a2+1)}`;}
+
+ function paintAll(){paintTree();paintStrip();paintMain();}
+ function select(id){st.sel=id;st.view='basket';st.pick=false;st.picked.clear();st.find='';ui.classList.remove('treeopen');paintAll();}
+
+ /* ── la règle : un dossier garde au moins un panier ── */
+ function emptied(oldP){let f=node(oldP),top=null;while(f){if(!basketsIn(f.id).length)top=f;f=node(f.p);}return top;}
+ function guard(oldP,undo,done){const f=emptied(oldP);if(!f){done&&done();return;}
+  dlg(`<h4>Le dossier « ${esc(f.name)} » n’aurait plus de panier</h4><p>Un dossier garde toujours au moins un panier. Que veux-tu faire ?</p>
+   <div class="row"><button type="button" class="b ter" data-k="cancel">Annuler</button><button type="button" class="b sec" data-k="keep">Y laisser un panier vide « À trier »</button><button type="button" class="b pri" data-k="del">Supprimer aussi le dossier</button></div>`,el=>{
+   el.querySelector('[data-k=cancel]').onclick=()=>{undo();closeDlg();paintAll();};
+   el.querySelector('[data-k=keep]').onclick=()=>{st.nodes.push({id:nid('b'),type:'b',p:f.id,name:'À trier',icon:'🧺',dests:[],items:[]});closeDlg();paintAll();toast(`🧺 Panier vide « À trier » laissé dans 📁 ${esc(f.name)}.`);done&&done();};
+   el.querySelector('[data-k=del]').onclick=()=>{const gone=new Set([f.id,...sub(f.id).map(x=>x.id)]);st.nodes=st.nodes.filter(x=>!gone.has(x.id));if(gone.has(st.sel))st.sel=st.nodes.find(x=>x.type==='b').id;closeDlg();paintAll();toast(`📁 Dossier « ${esc(f.name)} » supprimé. <u>↶ Annuler</u>`);done&&done();};
+  });}
+ function moveNode(id,to){const n=node(id);if(!n||n.p===to||id===to)return;if(n.type==='f'&&sub(id).some(x=>x.id===to))return toast('Un dossier ne peut pas aller dans lui-même.');
+  const old=n.p;n.p=to;paintAll();guard(old,()=>{n.p=old;},()=>{});toast(`${label(n)} rangé dans ${to?'📁 '+esc(node(to).name):'la racine'}.`);}
+ function moveItem(iid,to){const from=st.nodes.find(b=>b.type==='b'&&b.items.some(i=>i.id===iid));const b=node(to);if(!from||!b||b.type!=='b'||from===b)return;const it=from.items.find(i=>i.id===iid);from.items=from.items.filter(i=>i!==it);b.items.push(it);paintAll();toast(`« ${esc(it.t)} » mis dans 🧺 ${esc(b.name)}.`);}
+
+ /* ── partager / récupérer ── */
+ function openShare(n){
+  const pub=n.items.filter(i=>!SRC[i.src]?.perso&&!i.perso&&!i.vivant),per=n.items.filter(i=>(SRC[i.src]?.perso||i.perso)&&!i.vivant),viv=n.items.filter(i=>i.vivant);
+  const incl=new Set();
+  const draw=el=>{const k=pub.length+incl.size;
+   el.innerHTML=`<h4>⇪ Partager « ${esc(n.name)} »</h4><p>Un petit fichier <code>.lcnda-panier</code> que quelqu’un d’autre récupère dans son app. Il ne contient que des données publiques, avec leurs sources, liens et licences.</p>
+    <div class="sum"><span class="pill ok">${k} élément${k>1?'s':''} partagé${k>1?'s':''}</span><span class="pill q">${per.length-incl.size} élément${per.length-incl.size>1?'s':''} personnel${per.length-incl.size>1?'s':''} retiré${per.length-incl.size>1?'s':''}</span>${viv.length?`<span class="pill red">${viv.length} jamais (personne vivante ou confidentielle)</span>`:''}</div>
+    <div class="lh">Publics : partagés</div><ul class="shl">${pub.map(i=>`<li><input type="checkbox" checked disabled aria-label="Partagé"><span>${i.i}</span><span class="t">${esc(i.t)}<small>${esc(SRC[i.src].n)} · ${esc(SRC[i.src].lic)}</small></span></li>`).join('')||'<li class="mini">aucun</li>'}</ul>
+    ${per.length?`<div class="lh">De ton arbre : retirés, sauf si tu les coches</div><ul class="shl">${per.map(i=>`<li><input type="checkbox" data-inc="${i.id}"${incl.has(i.id)?' checked':''} aria-label="Partager quand même"><span>${i.i}</span><span class="t">${esc(i.t)}<small>${esc(SRC[i.src].n)} — personnes, actes, notes ou médias de ton arbre</small></span></li>`).join('')}</ul>`:''}
+    ${viv.length?`<div class="lh">Jamais partagés</div><ul class="shl">${viv.map(i=>`<li class="lock"><input type="checkbox" disabled aria-label="Bloqué"><span>🔒</span><span class="t">${esc(i.t)}<small>personne vivante : bloqué, toujours</small></span></li>`).join('')}</ul>`:''}
+    <details><summary class="mini">Voir ce que contient le fichier</summary><pre>{ "lcnda-panier": 1, "nom": "${esc(n.name)}",
+  "elements": [ { "titre": "${esc(pub[0]?.t||'…')}", "source": "${esc(pub[0]?SRC[pub[0].src].n:'')}",
+    "lien": "${esc(pub[0]?SRC[pub[0].src].url:'')}", "licence": "${esc(pub[0]?SRC[pub[0].src].lic:'')}" }, … ],
+  "sans": "aucune donnée personnelle" }</pre></details>
+    <div class="flds"><label class="f">Envoyer à un compte du site familial <select class="fld" data-acc><option value="">— non, seulement le fichier —</option><option>Paul LACOMBE (cousin)</option><option>Hélène DURAND (tante)</option></select></label></div>
+    <p class="mini" style="margin-top:6px">(proposé seulement si le site familial a des comptes famille)</p>
+    <div class="row"><button type="button" class="b ter" data-close>Annuler</button><button type="button" class="b pri" data-go${k?'':' disabled'}>⤓ Enregistrer le fichier (${k})</button></div>`;
+   el.querySelectorAll('[data-inc]').forEach(c=>c.onchange=()=>{c.checked?incl.add(c.dataset.inc):incl.delete(c.dataset.inc);draw(el);});
+   el.querySelector('[data-close]').onclick=closeDlg;
+   const acc=el.querySelector('[data-acc]'),go=el.querySelector('[data-go]');acc.onchange=()=>{go.textContent=acc.value?`✉ Envoyer à ${acc.value} (${k})`:`⤓ Enregistrer le fichier (${k})`;};
+   go.onclick=()=>{closeDlg();toast(acc.value?`✉ Panier envoyé à ${esc(acc.value)} : ${k} éléments publics, ${per.length-incl.size+viv.length} retirés.`:`⤓ « ${esc(n.name)}.lcnda-panier » enregistré : ${k} éléments publics, ${per.length-incl.size+viv.length} retirés.`);};
+  };
+  dlg('',draw);
+ }
+ function openImport(){
+  const rows=[['⚔️','Combat du pont de Treignac (1652)','Wikipédia · CC BY-SA 4.0',0],['🪦','Monument aux morts de Treignac (1921)','Wikidata · CC0','b5'],['🏛','Tour de Rochefière, inscrite MH (1931)','Mérimée · Licence Ouverte','b5'],['🌊','Crue de la Vézère, février 1872','BDHI · Licence Ouverte',0],['⛪','Chapelle Saint-Roch de Treignac','Mérimée · Licence Ouverte',0]].map((r,i)=>({id:'m'+i,i:r[0],t:r[1],s:r[2],dup:r[3]}));
+  const ex=new Set(rows.filter(r=>r.dup).map(r=>r.id));let fold='f4';
+  const draw=el=>{const k=rows.length-ex.size;
+   el.innerHTML=`<h4>⇩ Récupérer un panier</h4><p>Fichier : <b>Treignac-histoire.lcnda-panier</b> · reçu de <b>Paul LACOMBE</b> par le site familial · 5 éléments publics. Rien n’est créé avant « Créer ».</p>
+    <ul class="shl">${rows.map(r=>`<li><span class="yn"><button type="button" class="y" data-y="${r.id}" aria-pressed="${!ex.has(r.id)}" aria-label="Garder">✓</button><button type="button" class="n" data-n="${r.id}" aria-pressed="${ex.has(r.id)}" aria-label="Laisser">✗</button></span><span>${r.i}</span><span class="t">${esc(r.t)}<small>${esc(r.s)}${r.dup?` · <b>déjà dans 🧺 ${esc(node(r.dup)?.name||'')}</b> : sauté`:''}</small></span></li>`).join('')}</ul>
+    <div class="flds"><label class="f">Nom du panier<input class="fld" data-nm value="Treignac, histoire (de Paul)"></label><label class="f">Dans le dossier<select class="fld" data-fo>${folderOpts(fold)}</select></label></div>
+    <p class="mini" style="margin-top:8px">Le fichier ne contient que des données publiques ; rien n’y est exécuté ; sources, liens et licences sont gardés.</p>
+    <div class="row"><button type="button" class="b ter" data-close>Annuler</button><button type="button" class="b pri" data-go${k?'':' disabled'}>Créer le panier (${k} élément${k>1?'s':''})</button></div>`;
+   el.querySelectorAll('[data-y]').forEach(b=>b.onclick=()=>{ex.delete(b.dataset.y);draw(el);});
+   el.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{ex.add(b.dataset.n);draw(el);});
+   el.querySelector('[data-fo]').onchange=e=>fold=e.target.value;
+   el.querySelector('[data-close]').onclick=closeDlg;
+   el.querySelector('[data-go]').onclick=()=>{const id=nid('b');st.nodes.push({id,type:'b',p:fold,name:el.querySelector('[data-nm]').value||'Panier récupéré',icon:'📦',dests:[],items:rows.filter(r=>!ex.has(r.id)).map(r=>I(r.i,r.t,'récupéré de Paul LACOMBE',r.t.includes('Monument')?'wd':r.t.includes('Crue')?'bdhi':r.i==='⚔️'?'wp':'mer'))});closeDlg();select(id);toast(`📦 Panier récupéré : ${k} éléments, ${ex.size} laissés ou déjà là.`);};
+  };
+  dlg('',draw);
+ }
+ function newBasketFrom(n,items,name){const id=nid('b');st.nodes.splice(st.nodes.indexOf(n)+1,0,{id,type:'b',p:n.p,name,icon:n.icon,dests:clone(n.dests),items:items.map(i=>Object.assign(clone(i),{id:nid('i')}))});return id;}
+ function menu(btn,html,bind){root.querySelectorAll('.menu').forEach(m=>m.remove());const m=document.createElement('div');m.className='menu';m.innerHTML=html;const box=btn.closest('.acts,.cv');box.appendChild(m);const r=btn.offsetLeft;m.style.left=Math.max(0,Math.min(r,box.clientWidth-m.offsetWidth))+'px';bind(m);setTimeout(()=>document.addEventListener('click',function h(e){if(!m.contains(e.target)){m.remove();document.removeEventListener('click',h);}}),0);}
+
+ /* ── clics ── */
+ root.addEventListener('click',e=>{
+  const t=e.target.closest('button,[data-id],input,label');if(!t||!root.contains(t))return;
+  if(t.dataset.tw){st.closed.has(t.dataset.tw)?st.closed.delete(t.dataset.tw):st.closed.add(t.dataset.tw);paintTree();return;}
+  if(t.dataset.id&&t.classList.contains('tr')){select(t.dataset.id);return;}
+  if(t.dataset.open){select(t.dataset.open);return;}
+  if(t.dataset.sadd){const s=st.sugg.find(x=>x.id===t.dataset.sadd),b=node(s.to);s.add.forEach(a=>b.items.push(I(a[0],a[1],a[2],a[3])));st.sugg=st.sugg.filter(x=>x!==s);paintAll();toast(`＋ ${s.add.length} élément${s.add.length>1?'s':''} dans 🧺 ${esc(b.name)}. <u>↶ Annuler</u>`);return;}
+  if(t.dataset.sno){st.sugg=st.sugg.filter(x=>x.id!==t.dataset.sno);paintAll();toast('Idée écartée : elle ne reviendra pas.');return;}
+  const n=node(st.sel);
+  if(t.dataset.x){n.items=n.items.filter(i=>i.id!==t.dataset.x);paintAll();toast('Retiré du panier. <u>↶ Annuler</u>');return;}
+  if(t.dataset.up||t.dataset.dn){const id=t.dataset.up||t.dataset.dn,i=n.items.findIndex(x=>x.id===id),j=i+(t.dataset.up?-1:1);if(j>=0&&j<n.items.length){[n.items[i],n.items[j]]=[n.items[j],n.items[i]];paintMain();}return;}
+  if(t.dataset.ex){startSearch(t.dataset.ex);paintSearch();return;}
+  if(t.dataset.rad){const v=[1,2,3,4,5,7,10,15,25,50],i=v.indexOf(st.s.radius);st.s.radius=v[Math.max(0,Math.min(v.length-1,i+Number(t.dataset.rad)))];t.parentNode.querySelector('span').textContent=st.s.radius+' km';refreshRes();return;}
+  if(t.dataset.cat){const s=st.s;s.catsOff.has(t.dataset.cat)?s.catsOff.delete(t.dataset.cat):s.catsOff.add(t.dataset.cat);t.setAttribute('aria-pressed',!s.catsOff.has(t.dataset.cat));refreshRes();return;}
+  if(t.dataset.src){const s=st.s;s.srcOff.has(t.dataset.src)?s.srcOff.delete(t.dataset.src):s.srcOff.add(t.dataset.src);t.setAttribute('aria-pressed',!s.srcOff.has(t.dataset.src));refreshRes();return;}
+  if(t.dataset.tg){st.s[t.dataset.tg]=!st.s[t.dataset.tg];t.setAttribute('aria-pressed',st.s[t.dataset.tg]);refreshRes();return;}
+  if(t.dataset.y&&st.view==='search'){st.s.ex.delete(t.dataset.y);refreshRes();return;}
+  if(t.dataset.n&&st.view==='search'){st.s.ex.add(t.dataset.n);refreshRes();return;}
+  if(t.dataset.inst){st.s.installed.add(t.dataset.inst);paintSearch();toast('⤓ Liste installée : ses résultats sont ajoutés (à valider).');return;}
+  const a=t.dataset.a;if(!a)return;
+  switch(a){
+   case'tree':ui.classList.toggle('treeopen');break;
+   case'strip':st.stripOpen=!st.stripOpen;paintStrip();break;
+   case'stripall':st.stripAll=true;paintStrip();break;
+   case'sugg-off':st.showSugg=false;paintAll();toast('💡 Suggestions masquées. Pour les revoir : Réglages → Connexions → Paniers, ou ⋯ → Montrer les idées.');break;
+   case'search':st.view='search';st.pick=false;if(!st.s)startSearch(null,'');ui.classList.remove('treeopen');paintAll();setTimeout(()=>{const i=$('[data-ssq]');i&&!o.noFocus&&i.focus({preventScroll:true});},0);break;
+   case'back':st.view='basket';paintAll();break;
+   case'parse':{const q=$('[data-ssq]').value.trim();startSearch(parse(q),q);paintSearch();break;}
+   case'newf':{const id=nid('f'),b=nid('b'),p=n?(n.type==='f'?n.id:n.p):'';st.nodes.push({id,type:'f',p,name:'Nouveau dossier'},{id:b,type:'b',p:id,name:'Nouveau panier',icon:'🧺',dests:[],items:[]});select(b);toast('📁 Nouveau dossier, avec son premier panier (un dossier en garde toujours au moins un).');break;}
+   case'newb':{const id=nid('b'),p=n?(n.type==='f'?n.id:n.p):'';st.nodes.push({id,type:'b',p,name:'Nouveau panier',icon:'🧺',dests:[],items:[]});select(id);break;}
+   case'import':openImport();break;
+   case'share':openShare(n);break;
+   case'pick':st.pick=!st.pick;st.picked.clear();paintMain();break;
+   case'pickall':visibleItems(n).forEach(i=>st.picked.add(i.id));paintMain();break;
+   case'putall':menu(t,`<div class="mh">Ses destinations habituelles</div>${n.dests.map((d,i)=>`<button type="button" data-d="${i}">→ ${esc(d)}${i===0?'<small>d’habitude</small>':''}</button>`).join('')||'<p class="mini" style="padding:4px 10px">aucune encore</p>'}<hr><button type="button" data-d="x">📍 Ailleurs… (une enquête, une fiche, l’Atelier…)</button>`,m=>m.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{m.remove();toast(`📍 ${n.items.length} éléments mis ${b.dataset.d==='x'?'ailleurs':'dans '+esc(n.dests[b.dataset.d])}. Le panier les garde (✓ utilisé).`);n.items.forEach(i=>i.done=true);paintMain();}));break;
+   case'putsel':case'takesel':{const k=st.picked.size;const ids=[...st.picked];st.nodes.forEach(b=>b.type==='b'&&b.items.forEach(i=>{if(ids.includes(i.id))i.done=true;}));st.pick=false;st.picked.clear();paintAll();toast(a==='putsel'?`📍 ${k} éléments mis dans leurs destinations habituelles. Les autres restent au panier.`:`📥 ${k} éléments pris pour l’écran ouvert.`);break;}
+   case'dupsel':{const ids=[...st.picked],items=n.type==='b'?n.items.filter(i=>ids.includes(i.id)):basketsIn(n.id).flatMap(b=>b.items).filter(i=>ids.includes(i.id));const base=n.type==='b'?n:basketsIn(n.id)[0];const id=newBasketFrom(base,items,`${n.name} (${items.length} choisis)`);select(id);toast(`⧉ Les ${items.length} cochés copiés dans un nouveau panier.`);break;}
+   case'dup':menu(t,`<button type="button" data-k="all">⧉ Tout le panier <small>${n.items.length}</small></button><button type="button" data-k="some">☑ Seulement les cochés… <small>coche puis « Dupliquer »</small></button>`,m=>{m.querySelector('[data-k=all]').onclick=()=>{m.remove();const id=newBasketFrom(n,n.items,n.name+' (copie)');select(id);toast('⧉ Panier dupliqué, juste en dessous.');};m.querySelector('[data-k=some]').onclick=()=>{m.remove();st.pick=true;st.picked.clear();paintMain();};});break;
+   case'rename':{const el=$('.bn');el.contentEditable='true';el.focus();const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);const fin=()=>{el.contentEditable='false';n.name=el.textContent.trim()||n.name;paintTree();};el.onblur=fin;el.onkeydown=ev=>{if(ev.key==='Enter'){ev.preventDefault();el.blur();}};break;}
+   case'dests':toast('Le choix des destinations s’ouvrirait (enquête, fiche, Atelier, dossier de preuve…), plusieurs possibles.');break;
+   case'redo':toast('↻ 1 nouveauté trouvée (« 1816, l’année sans été ») : à valider ✓/✗ avant d’entrer.');break;
+   case'more':menu(t,`<button type="button" data-k="mv">📁 Déplacer dans un dossier…</button><button type="button" data-k="list">📋 Garder comme liste</button><button type="button" data-k="exp">⤓ Exporter (CSV, PDF)</button>${st.showSugg?'':'<button type="button" data-k="sug">💡 Montrer les idées</button>'}<hr><button type="button" data-k="empty">Vider</button><button type="button" data-k="del" style="color:var(--red)">🗑 Supprimer ${n.type==='f'?'le dossier':'le panier'}</button>`,m=>m.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{m.remove();const k=b.dataset.k;
+     if(k==='sug'){st.showSugg=true;paintAll();return;}
+     if(k==='del'){const old=n.p,idx=st.nodes.indexOf(n),gone=[n,...(n.type==='f'?sub(n.id):[])];st.nodes=st.nodes.filter(x=>!gone.includes(x));const next=st.nodes.find(x=>x.type==='b');const cur=st.sel;st.sel=next.id;paintAll();guard(old,()=>{st.nodes.splice(idx,0,...gone);st.sel=cur;},()=>{});toast(`🗑 « ${esc(n.name)} » supprimé. <u>↶ Annuler</u>`);return;}
+     if(k==='empty'){n.items&&(n.items=[]);paintAll();return;}
+     toast(b.textContent+' : s’ouvrirait ici.');}));break;
+   case'addcrit':menu(t,`<div class="mh">Qui</div><button type="button" data-c="ses ascendants sur 4 générations">ses ascendants, descendants (N générations)</button><button type="button" data-c="rôle : témoin ou parrain">un rôle : témoin, parrain, notaire…</button><button type="button" data-c="métier : tisserand">un métier</button><div class="mh">Quand</div><button type="button" data-c="saison : hiver">une saison, un mois</button><button type="button" data-c="± 3 jours autour du mariage">± N jours autour d’un événement</button><div class="mh">Où</div><button type="button" data-c="le long de la Vézère">le long d’une rivière</button><button type="button" data-c="département : Corrèze (19)">un département, un pays</button><div class="mh">Autre</div><button type="button" data-c="pas déjà dans un panier">pas déjà dans un panier</button><button type="button" data-c="licences libres seulement">licences libres seulement</button><button type="button" data-c="avec une image">avec une image</button>`,m=>m.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{m.remove();st.s.crit.push(b.dataset.c);paintSearch();}));break;
+   case'create':{const s=st.s,d=SS[s.key],items=kept(d,s).map(r=>I(r.i,r.t,r.s+(r.km!=null?` · ${String(r.km).replace('.',',')} km`:''),r.src));const id=nid('b');st.nodes.push({id,type:'b',p:s.folder,name:s.name||'Panier',icon:d.icon,dests:[],query:s.q,items});if(s.folder)st.closed.delete(s.folder);st.s=null;select(id);toast(`🧺 Panier « ${esc(node(id).name)} » créé ${s.folder?'dans 📁 '+esc(node(s.folder).name):'à la racine'} : ${items.length} éléments.`);break;}
+   case'addexist':{const s=st.s,d=SS[s.key];dlg(`<h4>＋ Ajouter à un panier existant</h4><p>Les éléments déjà dedans (même titre, même source) sont sautés.</p><div class="flds"><label class="f">Quel panier<select class="fld" data-to>${basketOpts('b5')}</select></label></div><div class="row"><button type="button" class="b ter" data-close>Annuler</button><button type="button" class="b pri" data-go>＋ Ajouter</button></div>`,el=>{el.querySelector('[data-go]').onclick=()=>{const b=node(el.querySelector('[data-to]').value);let add=0,skip=0;kept(d,s).forEach(r=>{if(b.items.some(i=>i.t===r.t)){skip++;return;}b.items.push(I(r.i,r.t,r.s,r.src));add++;});closeDlg();st.s=null;select(b.id);toast(`＋ ${add} ajoutés à « ${esc(b.name)} »${skip?` · ${skip} déjà dedans, sautés`:''}.`);};});break;}
+  }
+ });
+ root.addEventListener('change',e=>{const t=e.target;
+  if(t.dataset.done){const it=node(st.sel).items.find(i=>i.id===t.dataset.done);it.done=t.checked;paintMain();return;}
+  if(t.dataset.pi){t.checked?st.picked.add(t.dataset.pi):st.picked.delete(t.dataset.pi);paintMain();return;}
+  if(t.dataset.pt){const ids=allItems(t.dataset.pt),all=tri(ids)==='all';ids.forEach(i=>all?st.picked.delete(i):st.picked.add(i));paintMain();return;}
+  if(t.dataset.gk){const s=st.s,rows=rowsOf(SS[s.key],s).filter(r=>r.g===t.dataset.gk),all=rows.every(r=>!s.ex.has(r.id));rows.forEach(r=>all?s.ex.add(r.id):s.ex.delete(r.id));refreshRes();return;}
+  if(t.dataset.ssfold!==undefined){st.s.folder=t.value;return;}
+ });
+ root.addEventListener('input',e=>{const t=e.target;
+  if(t.dataset.note){const it=node(st.sel).items.find(i=>i.id===t.dataset.note);it.note=t.value;return;}
+  if(t.dataset.age){const v=Number(t.value);if(Number.isFinite(v)){st.s[t.dataset.age]=v;refreshRes();}return;}
+  if(t.dataset.yr){const v=Number(t.value);if(v>1000){st.s[t.dataset.yr]=v;refreshRes();}return;}
+  if(t.dataset.ssname!==undefined){st.s.name=t.value;const b=$('[data-a=create]');if(b)b.textContent=`Créer le panier « ${t.value} » (${kept(SS[st.s.key],st.s).length})`;return;}
+  if(t.dataset.find!==undefined){st.find=t.value;const pos=t.selectionStart;paintMain();const i=$('[data-find]');i.focus();i.setSelectionRange(pos,pos);return;}
+ });
+ root.addEventListener('keydown',e=>{if(e.target.dataset&&e.target.dataset.ssq!==undefined&&e.key==='Enter'){e.preventDefault();const q=e.target.value.trim();startSearch(parse(q),q);paintSearch();}});
+ /* glisser */
+ let drag=null;
+ root.addEventListener('dragstart',e=>{const it=e.target.closest('.it'),tr=e.target.closest('.tr');if(it){drag={k:'i',id:it.dataset.iid};it.classList.add('dragging');}else if(tr){drag={k:'n',id:tr.dataset.id};}else return;e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',drag.id);}catch(_){}});
+ root.addEventListener('dragend',()=>{drag=null;root.querySelectorAll('.dragging,.drop,.over').forEach(x=>x.classList.remove('dragging','drop','over'));});
+ root.addEventListener('dragover',e=>{if(!drag)return;const tr=e.target.closest('.tr'),it=e.target.closest('.it');
+  if(tr){const n=node(tr.dataset.id);if((drag.k==='n'&&n.type==='f')||(drag.k==='i'&&n.type==='b')){e.preventDefault();root.querySelectorAll('.drop').forEach(x=>x.classList.remove('drop'));tr.classList.add('drop');}}
+  else if(it&&drag.k==='i'){e.preventDefault();root.querySelectorAll('.over').forEach(x=>x.classList.remove('over'));it.classList.add('over');}});
+ root.addEventListener('drop',e=>{if(!drag)return;e.preventDefault();const tr=e.target.closest('.tr'),it=e.target.closest('.it'),d=drag;drag=null;
+  if(tr){d.k==='n'?moveNode(d.id,tr.dataset.id):moveItem(d.id,tr.dataset.id);return;}
+  if(it&&d.k==='i'){const n=node(st.sel),a=n.items.findIndex(x=>x.id===d.id),b=n.items.findIndex(x=>x.id===it.dataset.iid);if(a<0||b<0||a===b)return;const [m]=n.items.splice(a,1);n.items.splice(b,0,m);paintMain();}});
+
+ paintAll();
+ return {
+  search(k){st.view='search';startSearch(k);paintAll();root.querySelector('.tabui').scrollIntoView({behavior:'smooth',block:'start'});},
+  sel(id){select(id);if(node(id).type==='f'){st.pick=true;const b=basketsIn(id)[0];b.items.forEach(i=>st.picked.add(i.id));const b2=basketsIn(id)[1];b2&&st.picked.add(b2.items[0].id);paintMain();}},
+  find(){select('b5');st.find='monument';st.pick=true;paintMain();st.picked.add(node('b5').items.find(i=>/Treignac \(/.test(i.t)).id);st.picked.add(node('b5').items.find(i=>/Rilhac/.test(i.t)).id);paintMain();},
+  share(){select('b1');openShare(node('b1'));},
+  import(){openImport();},
+  last(){select('b3');moveNode('b3','f4');}
+ };
+}
+const desk=mount(document.getElementById('desk'),{});
+mount(document.getElementById('phone'),{phone:true});
+const p2=mount(document.getElementById('phone2'),{phone:true,noFocus:true});p2.search('voir');
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.d.split(':');if(k==='ss')desk.search(v);else if(k==='sel')desk.sel(v);else desk[k]();document.getElementById('desk').scrollIntoView({behavior:'smooth',block:'start'});});
+document.getElementById('theme').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';};
+})();
+</script>
+</body></html>

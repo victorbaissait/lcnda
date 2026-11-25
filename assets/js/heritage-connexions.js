@@ -403,7 +403,7 @@
     const setMixed = host => host.querySelectorAll('[data-mixed]').forEach(c => { c.indeterminate = c.dataset.mixed === '1'; });
     /** l'arbre de tous les paniers : 📁 dossiers › 🧺 paniers › éléments (pour « Prendre depuis… → Panier ») ; cases à trois états */
     function basketTreeHtml(st, list) {
-        const all = st.bk, idx = new Map(list.map((x, i) => [x, i])), closed = st.closed || (st.closed = new Set());
+        st.results = list; const all = st.bk, idx = new Map(list.map((x, i) => [x, i])), closed = st.closed || (st.closed = new Set());
         const itemsOf = bid => list.filter(x => Number(x.basket_id) === Number(bid));
         const bNode = (x, d) => { const its = itemsOf(x.id), open = !closed.has(`b${x.id}`), cur = Number(x.id) === Number(all.basket_id);
             return `<section class="cx-tnode" style="--d:${d}"><div class="cx-thead${cur ? ' is-cur' : ''}" draggable="true" data-cx-tb="${x.id}"><button type="button" class="cx-tw2" data-cx-tog="b${x.id}" aria-expanded="${open}" aria-label="${esc(open ? T('Replier') : T('Déplier'))}">${open ? '▾' : '▸'}</button>

@@ -5,7 +5,7 @@
  *  3. Serveur et écran (php -S + Playwright, base temporaire) : rien ne part sur Internet (GENEALOGY_TEST=1 + LCNDA_TEST_TELECHA_DIR).
  *     Les tuiles CORINE sont VRAIES : enregistrées le 2026-11-25 autour d'Honfleur (Calvados) — tests/fixtures/telech-a.json.gz.
  *     Le pack OpenStreetMap hors ligne est un petit MBTiles fabriqué ici (une tuile : la mer, une route, « Honfleur »).
- *  Fiches : Jean MAZAUD (1840–1915, Honfleur, carrier), Paul DURAND (vivant, Honfleur).
+ *  Fiches : Jean MAZAUD (1840–1915, Honfleur), Paul DURAND (vivant, Honfleur).
  *   node tests/test-telech-a.js */
 'use strict';
 const assert = require('assert');
@@ -177,7 +177,7 @@ echo json_encode(['ok' => 1]);`, env);
             assert.ok(await p.$$eval('#ta-test .ta-before img', l => l.every(i => /TILEMATRIX=15&/.test(i.src) && i.style.width === '512px')));
             await p.evaluate(() => document.getElementById('ta-test').remove());
         });
-        await t('fiche de Jean MAZAUD (1840–1915, carrier, Honfleur) : le rideau « carte de 1850 », le paysage ; Paul DURAND (vivant) : rien, rien ne part', async () => {
+        await t('fiche de Jean MAZAUD (1840–1915, Honfleur) : le rideau « carte de 1850 », le paysage ; Paul DURAND (vivant) : rien, rien ne part', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-ta-person="1"] .ta-row', {timeout: 30000});
             const txt = await p.textContent('[data-ta-person="1"]');

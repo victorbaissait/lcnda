@@ -177,6 +177,7 @@
     const hyp = t => `<small class="muted hist-hyp">${esc(t)}</small>`;
     const emptyLine = (t, icon = 'ℹ️') => (A().empty ? A().empty(t, {icon}) : `<p class="muted">${esc(t)}</p>`);
     const he = P => (P?.gender === 'female' ? T('elle') : T('il'));
+    const cap = s => String(s || '').charAt(0).toUpperCase() + String(s || '').slice(1);
 
     /* ─────────── chargement (une fois, à la demande) ─────────── */
     async function readMaybeGz(r) {
@@ -235,7 +236,7 @@
         const D = await loadDeaths().catch(() => null); if (!D) return '';
         const where = depOfLife(life); const r = sgfRow(D, where?.dep); if (!r) return '';
         const list = choleraInLife(D, r, num(P.birth), num(P.death)).filter(x => x.pct >= 5);
-        return choleraHtml(D, r, list, {he: he(P)});
+        return choleraHtml(D, r, list, {he: cap(he(P))});
     }
     const srcHmd = t => `${link(LINKS.hmd(), 'Human Mortality Database')} (${esc(T('CC BY 4.0 ; fichier ouvert ici par toi, le {d}', {d: t.added || ''}))})`;
     function survieForPerson(life) {
@@ -247,12 +248,11 @@
         const pick = s.ages.filter(x => [1, 20, 60].includes(x.age));
         if (!pick.length) return '';
         const t = s.table, kindTxt = t.kind === 'cohort' ? T('table de génération') : T('table du moment de {y}', {y: String(b)});
-        const lead = T('Sur 100 enfants nés en {y} ({c}), {l}.', {y: String(b), c: esc(t.country), l: pick.map(x => T('{n} fêtaient leurs {a} ans', {n: String(x.per100), a: String(x.age)})).join(', ')});
+        const lead = T('Sur 100 enfants nés en {y} ({c}), {l}.', {y: String(b), c: esc(t.country), l: pick.map(x => T(x.age === 1 ? '{n} atteignaient 1 an' : '{n} atteignaient {a} ans', {n: String(x.per100), a: String(x.age)})).join(', ')});
         const age = num(P.death) !== null ? num(P.death) - b : null;
         const own = age !== null && age >= 0 && age <= 110 && s.at(age) !== null ? T('{e} a vécu {a} ans : {n} sur 100 de sa génération sont allés aussi loin.', {e: cap(he(P)), a: String(age), n: String(s.at(age))}) : '';
         return row('🧮', `${lead} ${own} ${srcLink(LINKS.hmd())}`, srcHmd(t), more(`<ul class="hist-ul tc-ul">${s.ages.map(x => `<li>${esc(T('{a} ans : {n} sur 100', {a: String(x.age), n: String(x.per100)}))}</li>`).join('')}</ul>${s.e0 !== null && s.e0 !== undefined ? `<p>${esc(T('Espérance de vie à la naissance : {e} ans.', {e: s.e0.toLocaleString('fr-FR', {maximumFractionDigits: 1})}))}</p>` : ''}${hyp(T('{k}, {s}. Une table « du moment » suppose que les risques de mourir de cette année-là restent les mêmes toute la vie ; une table « par génération » suit vraiment les enfants nés cette année-là.', {k: kindTxt, s: T({F: 'femmes', M: 'hommes', T: 'ensemble'}[t.sex])}))}`));
     }
-    const cap = s => String(s || '').charAt(0).toUpperCase() + String(s || '').slice(1);
     function fecondForPerson(life) {
         const P = life.person; const ts = tables().filter(t => t.db === 'hfd' && t.measure === 'tfr' && t.by === 'year'); if (!ts.length) return '';
         const t = ts.find(x => isFrance(x.country)) || ts[0];

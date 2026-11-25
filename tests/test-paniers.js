@@ -22,7 +22,7 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
     const bByName = async n => (await tree()).baskets.find(x => x.name === n);
     const fByName = async n => (await tree()).folders.find(x => x.name === n);
     const closeAll = () => p.evaluate(() => { document.querySelectorAll('dialog[open]').forEach(d => d.close()); document.querySelectorAll('.cx-panel, .ui-actmenu').forEach(x => x.remove()); });
-    const clickUndo = async () => { const u = p.locator('.toast button', {hasText: '↶'}).last(); await u.waitFor({timeout: 8000}); await u.click(); await sleep(700); };
+    const clickUndo = async (what = null) => { const u = (what ? p.locator('.toast', {hasText: what}).last().locator('button', {hasText: '↶'}) : p.locator('.toast button', {hasText: '↶'}).last()); await u.waitFor({timeout: 10000}); await u.click(); await sleep(1200); };
     const setCur = id => p.evaluate(x => localStorage.setItem('genealogie-connexions-panier', String(x)), id);
     const view = async () => { await closeAll(); await p.evaluate(() => window.LCNDA_EXT.connexions.openBasketView()); await p.waitForSelector('dialog.cx-bview[open] .cx-put-body'); };
     const takeBasket = async () => { await closeAll(); await p.evaluate(() => window.LCNDA_EXT.connexions.openTake({tab: 'basket'})); await p.waitForSelector('.cx-take [data-cx-ttree]', {timeout: 15000}); };
@@ -31,6 +31,7 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
     let fam, mar, tem, cad;
     try {
         await t('serveur : 📁 Famille MAZAUD › 📁 Mariage 1813 › 🧺 Témoins ; un dossier neuf vient avec son « Nouveau panier » ; comptes et fil', async () => {
+            await cx('basket_new', {name: 'Mon panier'}); // un panier tout en haut (sinon « il reste au moins un panier » empêche de tout supprimer)
             const f1 = await cx('folder_new', {name: 'Famille MAZAUD', icon: '👪', basket_name: 'Cadastre'}); fam = f1.id; cad = f1.basket_id;
             const f2 = await cx('folder_new', {name: 'Mariage 1813', parent_id: fam, basket_name: 'Témoins'}); mar = f2.id; tem = f2.basket_id;
             await cx('basket_add', {basket_id: cad, items: [{kind: 'datum', title: 'Moulin de Treignac', value: '1790'}]});
@@ -74,7 +75,7 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             await p.locator('.cx-bview [data-cx-vi]', {hasText: 'Jacques DURAND'}).locator('[data-cx-vnote]').fill('témoin de l’époux'); await p.keyboard.press('Tab'); await sleep(600);
             const its = (await B.api('cx_basket', {basket_id: tem})).items;
             assert.strictEqual(Number(its.find(x => x.title === 'Pierre LACOMBE').done), 1); assert.strictEqual(its.find(x => x.title === 'Jacques DURAND').note, 'témoin de l’époux');
-            await clickUndo(); assert.strictEqual((await B.api('cx_basket', {basket_id: tem})).items.find(x => x.title === 'Jacques DURAND').note, '');
+            await clickUndo('Note gardée'); assert.strictEqual((await B.api('cx_basket', {basket_id: tem})).items.find(x => x.title === 'Jacques DURAND').note, '');
             assert.match(await p.textContent('.cx-bview .cx-tk-say'), /1 utilisés|1 utilisé/);
         });
         await t('glisser un panier dans un dossier ; le dernier panier sorti d’un dossier → « supprimer aussi le dossier ? » (↶ remet tout)', async () => {
@@ -83,8 +84,9 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             await p.waitForSelector('dialog[open] [name="cx-choice"]', {timeout: 10000});
             assert.match(await p.textContent('dialog[open]:last-of-type'), /n’a plus de panier/);
             await p.check('dialog[open] [name="cx-choice"][value="del"]'); await p.click('dialog[open] button[type="submit"]'); await sleep(1200);
+            await p.waitForSelector('.toast:has-text("rangé dans")', {timeout: 10000});
             assert.strictEqual((await bByName('Témoins')).folder_id, fam); assert.ok(!(await fByName('Mariage 1813')), 'le dossier vide est supprimé');
-            await clickUndo();
+            await clickUndo('rangé dans');
             assert.strictEqual((await bByName('Témoins')).folder_id, mar); assert.ok(await fByName('Mariage 1813'));
         });
         await t('les destinations habituelles (l’enquête « testenquête » + le Livre de famille) : choisies d’avance dans « Mettre dans… »', async () => {
@@ -110,8 +112,8 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
         });
         await t('« ☑ Choisir… » dans la vue : Tout / Rien, « Mettre le coché dans… »', async () => {
             await setCur(cad); await view(); await p.click('.cx-bview [data-cx-vpick]');
-            await p.click('.cx-bview [data-cx-pall2]'); assert.match(await p.textContent('.cx-bview [data-cx-vputsel]'), /Mettre le coché dans/);
-            await p.click('.cx-bview [data-cx-pnone]'); assert.ok(await p.locator('.cx-bview [data-cx-vputsel]').isDisabled());
+            await p.click('.cx-bview [data-cx-pall2]'); await p.waitForSelector('.cx-bview [data-cx-vputsel]:not([disabled])'); assert.match(await p.textContent('.cx-bview [data-cx-vputsel]'), /Mettre le coché dans/);
+            await p.click('.cx-bview [data-cx-pnone]'); await p.waitForSelector('.cx-bview [data-cx-vputsel][disabled]');
         });
         await t('de l’air : aucun bouton ni champ à moins de 12 px des bords (vue du panier, « Mettre dans… », « Prendre depuis… »)', async () => {
             await view(); assert.deepStrictEqual(await padOk('dialog.cx-bview'), []);

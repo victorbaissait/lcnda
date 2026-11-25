@@ -173,7 +173,7 @@
                 : T('{a} de marais ou de tourbières à moins de 3 km de {c}.', {c, a: haTxt(Math.max(S.marsh.a, S.marsh.b))});
             rows += row('💧', t, SRC.clc(), hyp(T('Les marais asséchés plus tôt (XIXᵉ siècle, remembrement) se voient sur la carte d’État-major : ouvre le rideau « carte de 1850 ↔ aujourd’hui ».')), ' data-ta-part="marais"');
         }
-        if (opts.carrier && S.quarry > 0) rows += row('⛏', esc(T('Une carrière ou une mine à ciel ouvert à moins de 3 km ({h} d’après CORINE) : peut-être là où il a travaillé.', {h: haTxt(S.quarry)})), SRC.clc(), '', ' data-ta-part="carriere"');
+        if (opts.carrier && S.quarry > 0) rows += row('⛏', esc(T('Une carrière ou une mine à ciel ouvert à moins de 3 km ({h} d’après CORINE) : un lieu de travail possible.', {h: haTxt(S.quarry)})), SRC.clc(), '', ' data-ta-part="carriere"');
         return rows;
     }
 
@@ -226,7 +226,7 @@
         const R = on('paysage') ? await ask('telech_a_clc', {lat: ll.lat, lon: ll.lon, name: home.name || '', pid: id}) : await ask('telech_a_clc', {lat: ll.lat, lon: ll.lon, pid: id, cached_only: 1});
         if (R?.private || !host.isConnected) { host.innerHTML = ''; return 0; }
         const pair = pairFor(from, to);
-        const lead = pair === 'etatmajor' ? T('{c} comme {he} l’a connu : la carte d’État-major (vers 1850) sous le plan d’aujourd’hui, avec un rideau à faire glisser.', {c: esc(home.name), he: life.person?.gender === 'female' ? T('elle') : T('il')})
+        const lead = pair === 'etatmajor' ? (life.person?.gender === 'female' ? T('{c} comme elle l’a connu : la carte d’État-major (vers 1850) sous le plan d’aujourd’hui, avec un rideau à faire glisser.', {c: esc(home.name)}) : T('{c} comme il l’a connu : la carte d’État-major (vers 1850) sous le plan d’aujourd’hui, avec un rideau à faire glisser.', {c: esc(home.name)}))
             : T('{c} vu d’avion vers 1950 et aujourd’hui, avec un rideau à faire glisser.', {c: esc(home.name)});
         const html = [on('avantapres') ? swipeRow(ll, home.name, pair, lead) : '', on('paysage') ? paysageHtml(R, home.name, {carrier}) : ''].filter(Boolean);
         host.innerHTML = html.length ? `<div class="hist-life ta-life">${html.join('')}</div>` : '';
