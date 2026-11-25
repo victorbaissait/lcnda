@@ -170,9 +170,9 @@
     });
 
     /* ─────────── ⛶ en grand ─────────── */
-    let bigDlg = null, bigFilter = 'all', bigCfg = null;
+    let bigDlg = null, bigFilter = 'all', bigCfg = null, bigTab = 'todo'; // bigTab : 🗓 à faire | 🧩 ce qui manque (heritage-connexions-besoins.js)
     function drawBig() {
-        if (!bigDlg || !LAST) return;
+        if (!bigDlg || !LAST || bigTab === 'needs') return;
         const {items, done} = visible(LAST, bigCfg);
         const n = k => k === 'all' ? items.length + done.length : k === 'fait' ? done.length : items.filter(i => i.sort === k).length;
         const pills = ['all', ...bigCfg.order.filter(k => !bigCfg.hidden.includes(k))].filter(k => k === 'all' || n(k));
@@ -181,13 +181,15 @@
         bigDlg.querySelector('[data-msr-horizon]').innerHTML = [['today', 'Aujourd’hui'], ['week', 'Cette semaine']].map(([v, l]) => `<button type="button" class="${bigCfg.horizon === v ? 'is-active' : ''}" data-msr-hz="${v}">${l}</button>`).join('');
         bigDlg.querySelector('[data-msr-body]').innerHTML = bodyHtml(LAST, bigCfg, {big: true, filter: bigFilter});
     }
-    async function openBig(widgetId) {
+    async function openBig(widgetId, {tab = 'todo'} = {}) {
         const w = (A().dashboardBlockSettings?.().widgets || []).find(x => x.id === widgetId) || {config: {}};
-        bigCfg = cfgOf(w); bigFilter = 'all';
+        const NX = ext.cxNeeds?.enabled?.() ? ext.cxNeeds : null;
+        bigCfg = cfgOf(w); bigFilter = 'all'; bigTab = NX && tab === 'needs' ? 'needs' : 'todo';
         bigDlg?.close();
         const dlg = bigDlg = document.createElement('dialog');
         dlg.className = 'modal modal-xl msr-big'; dlg.dataset.ownClose = '1';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">TABLEAU DE BORD · EN GRAND</span><h2>🗓 Ma semaine de recherche</h2><p class="muted">Ce qu’il y a à faire, le plus urgent d’abord. ✓ quand c’est fait, ⏭ pour reporter : « ↶ Annuler » en bas à gauche si tu te trompes.</p></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            ${NX ? `<div class="segmented msr-tabs" role="tablist" data-msr-tabs><button type="button" role="tab" data-msr-tab="todo">🗓 ${esc(i18n('À faire'))}</button><button type="button" role="tab" data-msr-tab="needs">🧩 ${esc(i18n('Ce qui manque'))}</button></div>` : ''}
             <div class="msr-big-bar"><div class="segmented" role="tablist" data-msr-horizon></div><div class="ui-filters msr-filters" role="tablist" data-msr-filters></div></div>
             <div class="msr-big-body" data-msr-body data-msr-big-body>${UI().spinner ? UI().spinner('Ta semaine…') : '…'}</div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-x>Fermer</button></div>`;
@@ -197,10 +199,19 @@
             if (e.target.closest('[data-x]')) return dlg.close();
             const f = e.target.closest('[data-msr-filter]'); if (f) { bigFilter = f.dataset.msrFilter; drawBig(); return; }
             const h = e.target.closest('[data-msr-hz]'); if (h) { bigCfg = {...bigCfg, horizon: h.dataset.msrHz}; drawBig(); }
+            const tb = e.target.closest('[data-msr-tab]'); if (tb) { bigTab = tb.dataset.msrTab; paintTab(); }
         });
+        const paintTab = () => { // 🧩 « Ce qui manque » : le tableau central des besoins (heritage-connexions-besoins.js)
+            dlg.querySelectorAll('[data-msr-tab]').forEach(b => { const on = b.dataset.msrTab === bigTab; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); });
+            dlg.querySelector('.msr-big-bar').hidden = bigTab === 'needs';
+            const body = dlg.querySelector('[data-msr-body]');
+            if (bigTab === 'needs') { delete body.dataset.cxSemBound; body.replaceWith(body.cloneNode(false)); ext.cxNeeds.semaineHtml(dlg.querySelector('[data-msr-body]'), {reload: true}); }
+            else { const b2 = dlg.querySelector('[data-msr-body]'); if (b2.dataset.cxSemBound) { const fresh = b2.cloneNode(false); delete fresh.dataset.cxSemBound; b2.replaceWith(fresh); } drawBig(); }
+        };
         dlg.addEventListener('keydown', e => { if (e.key === 'Tab' && e.target.closest?.('[data-msr-filters]')) { const bs = [...dlg.querySelectorAll('[data-msr-filter]')], i = bs.findIndex(b => b.dataset.msrFilter === bigFilter); if (bs.length > 1) { e.preventDefault(); bigFilter = bs[(i + (e.shiftKey ? bs.length - 1 : 1)) % bs.length].dataset.msrFilter; drawBig(); dlg.querySelector(`[data-msr-filter="${bigFilter}"]`)?.focus(); } } });
         dlg.showModal();
-        try { await load(); } catch (err) { dlg.querySelector('[data-msr-body]').innerHTML = UI().notice ? UI().notice('error', err.message) : esc(err.message); return; }
+        if (NX) paintTab();
+        try { await load(); } catch (err) { if (bigTab !== 'needs') dlg.querySelector('[data-msr-body]').innerHTML = UI().notice ? UI().notice('error', err.message) : esc(err.message); return; }
         drawBig();
     }
 
@@ -280,5 +291,5 @@
         ], {title: it.title});
     }, true);
 
-    ext.semaine = {load, refresh, openBig, bodyHtml, cfgOf, visible, SORTS, ORDER}; // pour les tests
+    ext.semaine = {load, refresh, openBig, openNeeds: () => openBig('', {tab: 'needs'}), bodyHtml, cfgOf, visible, SORTS, ORDER}; // pour les tests
 })();

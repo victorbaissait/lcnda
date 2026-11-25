@@ -92,6 +92,7 @@
         if (load().accent) form.dataset.accentSet = '1';
         const persist = () => save(read(form));
         form.addEventListener('input', persist); form.addEventListener('change', persist);
+        ext.cxNeeds?.bookHint?.(form); // 🧩 « il me manque… » : une ligne repliée sous la branche (heritage-connexions-besoins.js)
         form.elements.accent.addEventListener('input', () => { form.dataset.accentSet = '1'; persist(); });
         form.addEventListener('click', async e => {
             const mv = e.target.closest('[data-book-move]');

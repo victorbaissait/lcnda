@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 /*
  * 🔌 Connexions : 🧺 le panier, 📍 « Mettre dans… », les pistes à plusieurs pièces, les liens courrier / rappel ↔ enquête.
- * Interface : assets/js/heritage-connexions.js (maquette validée docs/design/connexions-besoins.html, étapes 1 et 2).
+ * Interface : assets/js/heritage-connexions.js (maquette validée docs/design/connexions-besoins.html, étapes 1 et 2) ;
+ * les besoins (étapes 3 et 4) : lib/connexions_besoins.php et assets/js/heritage-connexions-besoins.js.
  *
  * Tables (créées à la première demande, dans la base : elles suivent la sauvegarde, la synchro et l'export comme les autres) :
  *  - cx_baskets(id, name)                                  un ou plusieurs paniers (réglage « genealogie-connexions »)
@@ -22,6 +23,8 @@ declare(strict_types=1);
  *      | basket_undelete | inv_receive | inv_receive_undo | link_add | link_remove | item_link_remove | item_link_restore
  *      | reminder_add | to_mylist}
  */
+
+require_once __DIR__ . '/connexions_besoins.php'; // 🧩 les besoins (étapes 3 et 4) et 🗺 « Mettre dans… » une carte
 
 const CX_KINDS = ['person', 'event', 'source', 'media', 'note', 'place', 'investigation', 'act', 'datum', 'text', 'row', 'data', 'set', 'citation', 'digest', 'courrier', 'reminder', 'atelier'];
 const CX_LINK_TYPES = ['courrier', 'reminder', 'investigation', 'investigation_item', 'atelier_item', 'note', 'media'];
@@ -491,7 +494,7 @@ function cx_api_get(PDO $pdo, string $action, array $q): array
         'cx_links' => cx_links($pdo, $q),
         'cx_item_links' => ['links' => cx_item_links($pdo, safe_int($q['item_id'] ?? 0))],
         'cx_notes' => cx_notes($pdo, $q),
-        default => throw new LcndaBadInput('Action inconnue.'),
+        default => cxn_api_get($pdo, $action, $q) ?? throw new LcndaBadInput('Action inconnue.'), // 🧩 les besoins (lib/connexions_besoins.php)
     };
 }
 
@@ -529,6 +532,6 @@ function cx_api_post(PDO $pdo, array $d): array
         'reminder_add' => cx_reminder_add($pdo, $d),
         'to_mylist' => cx_to_mylist($pdo, $d),
         'fetch_url' => cx_fetch_url($d),
-        default => throw new LcndaBadInput('Opération inconnue.'),
+        default => cxn_api_post($pdo, $op, $d) ?? throw new LcndaBadInput('Opération inconnue.'), // 🧩 les besoins, 🗺 la carte (lib/connexions_besoins.php)
     };
 }

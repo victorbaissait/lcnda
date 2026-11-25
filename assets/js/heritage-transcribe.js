@@ -592,8 +592,8 @@
         let txFix = [], txFixOn = false, txFixT = 0; const txFixUndo = [], txKept = new Set();
         /* ce qu'on dessine dans le texte, par-dessus les couleurs des lignes : 🔍 les résultats de la recherche, 🪄 les corrections proposées,
          * les abréviations connues (soulignées en pointillé) ; un mot coupé par le bord d'une zone : marqué des deux côtés */
-        let findHits = [], findCur = -1, abbrevs = [];
-        const decos = () => [...findHits.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hit${i === findCur ? ' is-cur' : ''}">`, c: '</span>', w: 0})),
+        let findHits = [], findCur = -1, abbrevs = [], hintW = [];
+        const decos = () => [...hintW.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hintw" data-hw="${i}">`, c: '</span>', w: 3})),...findHits.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hit${i === findCur ? ' is-cur' : ''}">`, c: '</span>', w: 0})),
             ...txFix.map(f => ({s: f.s, e: f.e, o: `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">`, c: '</u>', w: 1})),
             ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab${f.amount ? ' is-amount' : ''}" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
         let curDecos = [];
@@ -649,6 +649,7 @@
             const text = area.value, marks = []; abbrevs = TV.abbrevOn?.() && window.LCNDA_AIDE_LECTURE?.abbrevs ? window.LCNDA_AIDE_LECTURE.abbrevs(text, aideLang($('[data-tx-lang]')?.value || '')) : [];
             // 💰📏 les sommes et les mesures anciennes (app-montants-core.js) : soulignées comme les abréviations, leur valeur au survol
             if (TV.amountsOn?.() && window.LCNDA_MONTANTS) { const am = window.LCNDA_MONTANTS.scan(text).filter(h => !abbrevs.some(a => h.s < a.e && h.e > a.s)); abbrevs = [...abbrevs, ...am.map(h => ({s: h.s, e: h.e, word: h.raw, amount: h}))].sort((x, y) => x.s - y.s); }
+            hintW = Number(t.data.hinted) > 0 && ext.txCtx?.doubtWords ? ext.txCtx.doubtWords(text) : []; // 🧠 les mots [?] d'une lecture faite avec des indices
             curDecos = decos();
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
             found.forEach(f => marks.push({s: f.s, e: f.e, cls: `is-${f.type}`}));
@@ -718,6 +719,10 @@
             return {x: x1, y: y1, w: x2 - x1, h: y2 - y1};
         }
         const setGeom = (z, R) => Object.assign(z, {x: Math.round(R.x), y: Math.round(R.y), w: Math.round(R.w), h: Math.round(R.h)});
+        /** le curseur au début du mot, dans le texte (le mot montré dans la barre d'état) */
+        const caretTo = w => { if (phone()) showPtab('text', false); area.focus({preventScroll: true}); area.setSelectionRange(w.s, w.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, w.s).split('\n').length;
+            if ((lines - 1) * lineH < area.scrollTop || (lines + 1) * lineH > area.scrollTop + area.clientHeight) { area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; }
+            dlg.dataset.txCaret = String(w.s); status(i18n('Curseur sur « {w} »', {w: w.word})); };
         const pickZone = (id, {showText = true} = {}) => { const z = t.data.zones.find(q => q.id === id); if (!z) return null; if (selZone !== id) { selZone = id; drawZones(); } if (showText) selectText(z, false); stage.focus({preventScroll: true}); return z; };
         svg.addEventListener('pointerdown', e => {
             if (!imgW) return;
@@ -755,7 +760,11 @@
         const endPointer = e => {
             pointers.delete(e.pointerId); if (pinch) { if (pointers.size < 2) pinch = null; drag = null; return; }
             const d = drag; drag = null; delete stage.dataset.drag; $('[data-tx-draw]').hidden = true; if (!d) return;
-            if (d.pan) { if (d.pick && e.type !== 'pointercancel' && Math.hypot(e.clientX - d.sx, e.clientY - d.sy) < 5) pickZone(d.pick); return; }
+            if (d.pan) { if (e.type === 'pointercancel' || Math.hypot(e.clientX - d.sx, e.clientY - d.sy) >= 5) return;
+                // un clic sur un mot de la ligne déjà choisie (ou à côté d'une ligne) : le curseur va sur ce mot dans le texte ; sinon le clic choisit la ligne, comme avant
+                const w = (!d.pick || d.pick === selZone) && ext.txCtx?.wordAt ? ext.txCtx.wordAt(area.value, t.data.zones.filter(onHere), ...toImg(e)) : null;
+                if (w) { if (w.zone !== selZone) { selZone = w.zone; drawZones(); } caretTo(w); return; }
+                if (d.pick) pickZone(d.pick); return; }
             if (d.edit) { if (d.moved && e.type !== 'pointercancel') { hist.undo.push(d.before); hist.redo = []; touch(); drawZones(); status(d.edit === 'move' ? i18n('Zone déplacée (⌘Z pour annuler)') : i18n('Zone redimensionnée (⌘Z pour annuler)')); } else if (d.moved) { Object.assign(d.z, d.orig); drawZones(); } return; }
             if (!d.zone || e.type === 'pointercancel') return;
             const x = clamp(Math.min(d.x0, d.x1), 0, imgW), y = clamp(Math.min(d.y0, d.y1), 0, imgH), w = Math.min(imgW - x, Math.abs(d.x1 - d.x0)), h = Math.min(imgH - y, Math.abs(d.y1 - d.y0));
@@ -943,6 +952,7 @@
             post('save_act_transcription_version', {act_id: t.id, ...v}).then(() => VS?.soon(), () => {});
         }
         const readsWaiting = [];
+        let lastHints = 0; // 🧠 le nombre d'indices de la dernière lecture approfondie
         const flushReads = () => { if (!t.id) return; readsWaiting.splice(0).forEach(v => post('save_act_transcription_version', {act_id: t.id, ...v}).then(() => VS?.soon(), () => {})); VS?.soon(); };
         /** l'image envoyée à la lecture rapide et à l'OCR : améliorée (« Mieux voir ») ou d'origine */
         const readImg = () => (useEnh() && viewChanged() ? 'mine' : 'orig');
@@ -953,8 +963,10 @@
             use: async v => { // ✓ Utiliser cette version : elle devient « Ma version » ; l'ancienne est gardée (🕘), ↶ Annuler
                 let x; try { x = await api('act_transcription_version', {id: v.id}); } catch (e) { return toast(e.message, 'error'); }
                 versionBefore('Avant « Utiliser cette version »');
-                const was = snapText(), to = {body: x.body, zones: x.data?.zones || [], people: x.data?.people || [], reviewed: x.data?.reviewed || []}; putText(to); status(i18n('Version mise dans le texte (à relire)'));
-                A().undoToast?.(i18n('« {x} » est maintenant ta version (l’ancienne est gardée dans 🕘 Versions)', {x: ext.txCtx.chipOf(v)[1]}), {undo: () => putText(was), redo: () => putText(to), icon: '🕘'}); },
+                const was = snapText(), to = {body: x.body, zones: x.data?.zones || [], people: x.data?.people || [], reviewed: x.data?.reviewed || []};
+                const hWas = Number(t.data.hinted) || 0, hTo = Number(x.data?.meta?.hints) || 0, put = (o, h) => { t.data.hinted = h; putText(o); }; // 🧠 les mots [?] de cette lecture : « lu avec un indice »
+                put(to, hTo); status(i18n('Version mise dans le texte (à relire)'));
+                A().undoToast?.(i18n('« {x} » est maintenant ta version (l’ancienne est gardée dans 🕘 Versions)', {x: ext.txCtx.chipOf(v)[1]}), {undo: () => put(was, hWas), redo: () => put(to, hTo), icon: '🕘'}); },
             compare: v => openCompare([v.id]),
             duplicate: async v => { // ⧉ garder une copie de la version affichée (ou de ma version)
                 if (!t.id) { await save(); if (!t.id) return; }
@@ -1077,10 +1089,20 @@
         }
         function hideAb() { abShown = -1; abTip.hidden = true; delete dlg.dataset.txAb; }
         let abRaf = 0;
-        area.addEventListener('mousemove', e => { if (!abbrevs.length) return; cancelAnimationFrame(abRaf); abRaf = requestAnimationFrame(() => { const i = abAt(e.clientX, e.clientY); if (i >= 0) showAb(i); else if (!abTip.hidden) { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); } }); });
+        /* 🧠 un mot [?] lu avec un indice de « Aider l'IA » : la bulle « lu avec un indice » (la même que celle des abréviations) */
+        const hwAt = (x, y) => { let hit = -1; mirror.querySelectorAll('.h-tx-hintw').forEach(sp => { if (hit >= 0) return; for (const r of sp.getClientRects()) if (x >= r.left && x <= r.right && y >= r.top - 2 && y <= r.bottom + 2) { hit = Number(sp.dataset.hw); return; } }); return hit; };
+        function showHint(i) {
+            const w = hintW[i], sp = mirror.querySelector(`.h-tx-hintw[data-hw="${i}"]`); if (!w || !sp) return hideAb(); clearTimeout(abHide);
+            if (abShown === 1e6 + i && !abTip.hidden) return; abShown = 1e6 + i;
+            abTip.innerHTML = `<b>🧠 ${esc(i18n('lu avec un indice'))}</b> <span data-i18n-off>« ${esc(w.word)} »</span><small>${esc(i18n('L’IA a lu ce mot en s’aidant d’un indice de « Aider l’IA » : vérifie-le sur l’image.'))}</small>`;
+            abTip.hidden = false; const ed = $('[data-tx-editor]').getBoundingClientRect(), r = sp.getClientRects()[0] || sp.getBoundingClientRect(), tw = abTip.offsetWidth, th = abTip.offsetHeight;
+            const left = Math.max(4, Math.min(ed.width - tw - 4, r.left - ed.left)), below = r.bottom - ed.top + 4; abTip.style.left = `${left}px`; abTip.style.top = `${below + th > ed.height ? Math.max(4, r.top - ed.top - th - 4) : below}px`;
+            dlg.dataset.txAb = w.word;
+        }
+        area.addEventListener('mousemove', e => { if (!abbrevs.length && !hintW.length) return; cancelAnimationFrame(abRaf); abRaf = requestAnimationFrame(() => { const i = abbrevs.length ? abAt(e.clientX, e.clientY) : -1; if (i >= 0) return showAb(i); const h = hintW.length ? hwAt(e.clientX, e.clientY) : -1; if (h >= 0) return showHint(h); if (!abTip.hidden) { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); } }); });
         area.addEventListener('mouseleave', () => { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); });
         abTip.addEventListener('mouseenter', () => clearTimeout(abHide)); abTip.addEventListener('mouseleave', () => { abHide = setTimeout(hideAb, 250); });
-        abTip.addEventListener('click', e => { if (!e.target.closest('[data-tx-abopen]')) return; const a = abbrevs[abShown]; hideAb(); if (a?.amount) { const x = amountInfo(a.amount); if (x) ext.autrefois?.open({tab: x.convert.tab, value: x.convert.value, year: x.convert.year}); return; } if (a) ext.readingAid?.open({q: String(a.item.t).split(',')[0].trim(), lang: aideLang($('[data-tx-lang]').value)}); });
+        abTip.addEventListener('click', e => { if (!e.target.closest('[data-tx-abopen]')) return; const a = abShown < 1e6 ? abbrevs[abShown] : null; hideAb(); if (a?.amount) { const x = amountInfo(a.amount); if (x) ext.autrefois?.open({tab: x.convert.tab, value: x.convert.value, year: x.convert.year}); return; } if (a) ext.readingAid?.open({q: String(a.item.t).split(',')[0].trim(), lang: aideLang($('[data-tx-lang]').value)}); });
         // au toucher (ou un clic) : le mot touché montre sa bulle (sauf s'il a une correction proposée : son menu passe d'abord)
         area.addEventListener('click', () => { if (!abbrevs.length || area.selectionStart !== area.selectionEnd) return hideAb(); const c = area.selectionStart; if (txFix.some(f => c >= f.s && c <= f.e)) return; const i = abbrevs.findIndex(a => c >= a.s && c <= a.e); if (i >= 0) showAb(i); else hideAb(); });
         area.addEventListener('input', hideAb); area.addEventListener('scroll', hideAb);
@@ -1465,12 +1487,13 @@
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
             const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
             const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), onReading: (txt, model, info) => keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}), context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), onReading: (txt, model, info) => { lastHints = Number(info?.hints) || 0; keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}); }, context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
                 existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
                 onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
                     if (mode === 'replace') versionBefore('Avant « Remplacer par la lecture approfondie »'); // l'ancien texte reste dans 🕘 Versions
                     const put = mode === 'replace' ? replaceRead(text.trim() + '\n') : appendRead(text.trim() + '\n'), start = put.s;
+                    if (from !== 'htr') t.data.hinted = mode === 'replace' ? lastHints : Math.max(Number(t.data.hinted) || 0, lastHints); // 🧠 lue avec des indices : ses mots [?] le disent au survol
                     before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect();
                     if (LG()?.linkOn()) linkLines({s: start, e: put.e, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide
                     if (fixOn()) runFix({quiet: true}); }}); // 🪄 les corrections proposées aussi sur ce texte
@@ -1512,7 +1535,7 @@
             if (R.stop || !dlg.isConnected) return deepAllEnd(true);
             if (err) { toast(err, 'error'); return deepAllEnd(true); }
             if (txt.trim()) keepReading(txt, 'deep', R.model, {img: ext.txActe?.imageMode?.() || 'auto', hints: R.ctx?.hints?.length || 0, part: 'page'}); // ⚖️
-            if (txt.trim()) { const put = appendRead(txt.trim() + '\n'); before = area.value; t.body = area.value; touch(); paintMirror();
+            if (txt.trim()) { if (R.ctx?.hints?.length) t.data.hinted = Math.max(Number(t.data.hinted) || 0, R.ctx.hints.length); const put = appendRead(txt.trim() + '\n'); before = area.value; t.body = area.value; touch(); paintMirror();
                 if (LG()?.linkOn()) await linkLines({s: put.s, e: put.e, box: b || null, src: 'deep'}); // ▤ une zone par ligne, sur l'image de cette page
                 if (fixOn()) runFix({quiet: true}); } // 🪄
             R.left.shift(); R.done++;
@@ -1644,7 +1667,9 @@
             try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`); flushReads();
                 // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé)
                 if (typeof r.result.body === 'string' && r.result.body !== t.body) { snap(); area.value = r.result.body; before = area.value; t.body = area.value; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
-                docNote(); VS?.soon(); ctx.onSaved?.(t.id); }
+                docNote(); VS?.soon(); ctx.onSaved?.(t.id);
+                // 🧩 un acte enregistré peut répondre à ce qui manque à une enquête (heritage-connexions-besoins.js : un message seulement si c'est presque sûr, une fois)
+                ext.cxNeeds?.announce?.({kind: 'act', ref_id: t.id, what: t.kind, person_ids: (t.data.people || []).map(p => Number(p.person_id) || 0).filter(Boolean), names: (t.data.people || []).map(p => p.name).filter(Boolean), date: t.date_text, place: t.place, title: t.title, text: String(t.body || '').slice(0, 4000)}); }
             catch (e) { status(''); toast(e.message, 'error'); }
         }
         /** L1 : la fenêtre « Imprimer » commune — image et texte côte à côte, l'un puis l'autre, ou le texte seul ; image améliorée ; personnes et rôles */

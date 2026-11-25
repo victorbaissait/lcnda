@@ -271,7 +271,8 @@
         const drawn = paths.map(p => ({...p, coords: p.ocean ? seaPath(p) : p.coords}))
             .filter(p => p.coords.length > 1);
         const all = [...points.filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon)).map(p => [p.lat, p.lon]), ...drawn.flatMap(p => p.coords)];
-        if (!all.length) return `<div class="person-map-stage person-map-empty h-map-empty">${empty(emptyText)}</div>`;
+        // 🧩 ce qui manque à la carte (docs/design/connexions-besoins.html) : au lieu de se taire, elle propose de placer les lieux
+        if (!all.length) return `<div class="person-map-stage person-map-empty h-map-empty">${empty(emptyText, ext.lieuxAPlacer && !document.body.classList.contains('is-kiosk') ? {action: {label: i18n('📍 Placer les lieux sans position…'), attrs: 'data-lap-open=""'}} : undefined)}</div>`;
         const width = 1000, pad = 90;
         let zoom = 2;
         for (let z = 13; z >= 1; z--) {

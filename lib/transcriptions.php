@@ -326,7 +326,8 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     if ($rs && in_array($rs['k'] ?? '', ACT_REASONS, true)) { $reason = ['k' => $rs['k'], 't' => mb_substr(safe_text(is_scalar($rs['t'] ?? '') ? (string) ($rs['t'] ?? '') : ''), 0, 300)] + (!empty($rs['auto']) ? ['auto' => true] : []); }
     // 🧠 « Aider l'IA » : en quelques mots, de quoi parle l'acte
     $about = mb_substr(safe_text(is_string($data['about'] ?? null) ? $data['about'] : ''), 0, 600);
-    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($reason ? ['reason' => $reason] : []) + ($about !== '' ? ['about' => $about] : []) + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($pageViews ? ['pageViews' => $pageViews] : []) + ($gabarit ? ['gabarit' => $gabarit] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($reason ? ['reason' => $reason] : []) + ($about !== '' ? ['about' => $about] : []) + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($pageViews ? ['pageViews' => $pageViews] : []) + ($gabarit ? ['gabarit' => $gabarit] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : [])
+        + (safe_int($data['hinted'] ?? 0) > 0 ? ['hinted' => min(99, safe_int($data['hinted']))] : []); // 🧠 le texte vient d'une lecture faite avec N indices de « Aider l'IA » (ses mots [?] : « lu avec un indice »)
 }
 
 function save_act_transcription(PDO $pdo, array $data): array

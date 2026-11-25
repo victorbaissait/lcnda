@@ -10,6 +10,8 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *     la couleur choisie, retenue (genealogie-htr-word-color) ;
  *  3. 🧠 « Aider l'IA » : indices de la base (mariage connu, façons d'écrire, lieux cochés ; parents, métiers décochés), le texte envoyé
  *     montré tel quel, et ce même texte dans la consigne reçue par le (faux) Ollama, avec la règle « ne rien inventer » ;
+ *  5. 🧠 un mot [?] d'une lecture faite avec des indices : « lu avec un indice » (aperçu de la version, bulle dans le texte) ;
+ *     🖱 un clic sur un mot de l'image (ligne déjà choisie) met le curseur sur ce mot dans le texte ;
  *  4. ❓ acte de notoriété : « Pourquoi cet acte a été fait » pré-rempli par « 🧭 Repérer » (à vérifier), choisi à la main, gardé avec l'acte,
  *     montré dans le 🧩 Gabarit, sur la fiche de la personne reliée et sur la page du document.
  * Personnes fictives (MAZAUD, LACOMBE, DURAND). Non vérifié ici : le vrai modèle (son texte est imité).
@@ -166,6 +168,7 @@ echo json_encode(['g' => $g, 'c' => $c]);`, { TX_BODY: BODY, TX_ZONES: JSON.stri
         const aiId = out.list1.find(v => /^deep:/.test(v.source))?.id;
         await p.click(`dialog.h-tx-dlg [data-tx-v="${aiId}"]`);
         await p.waitForSelector('dialog.h-tx-dlg [data-tx-vprev] [data-tx-vuse]', { timeout: 10000 });
+        out.prevHint = await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-vprev] .h-tx-doubt')].map(x => x.title));
         out.prev = await p.evaluate(() => { const v = document.querySelector('dialog.h-tx-dlg [data-tx-vprev]'); return { hidden: v.hidden, ro: v.querySelector('[data-tx-vro]').textContent, doubt: v.querySelectorAll('.h-tx-doubt').length, btns: [...v.querySelectorAll('button')].map(b => b.textContent.trim()), meta: v.querySelector('.h-tx-vmeta').textContent, dim: document.querySelector('dialog.h-tx-dlg [data-tx-editor]').classList.contains('is-dim') }; });
         await shot('versions.png');
         // ⚖️ Comparer avec ma version : la fenêtre déjà là, ces deux lectures cochées
@@ -187,9 +190,25 @@ echo json_encode(['g' => $g, 'c' => $c]);`, { TX_BODY: BODY, TX_ZONES: JSON.stri
         await p.waitForSelector('dialog.h-tx-dlg [data-tx-vprev] [data-tx-vuse]', { timeout: 10000 });
         await p.click('dialog.h-tx-dlg [data-tx-vuse]'); await sleep(900);
         out.textUsed = await textNow();
+        // 🧠 un mot [?] d'une lecture faite avec des indices : « lu avec un indice » au survol
+        out.hintW = await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg .h-tx-mirror .h-tx-hintw')].map(x => x.textContent));
+        const hw = await p.evaluate(() => { const r = document.querySelector('dialog.h-tx-dlg .h-tx-mirror .h-tx-hintw')?.getClientRects()[0]; return r ? {x: r.left + r.width / 2, y: r.top + r.height / 2} : null; });
+        if (hw) { await p.mouse.move(hw.x, hw.y); await sleep(120); await p.mouse.move(hw.x + 1, hw.y); await sleep(300); }
+        out.hintTip = await p.evaluate(() => { const tip = document.querySelector('dialog.h-tx-dlg [data-tx-abtip]'); return tip && !tip.hidden ? tip.textContent : ''; });
         out.prevClosed = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-vprev]').hidden && !document.querySelector('dialog.h-tx-dlg [data-tx-editor]').classList.contains('is-dim'));
         out.useUndo = await p.evaluate(() => { const tt = [...document.querySelectorAll('.ui-toast')].filter(x => /maintenant ta version/.test(x.textContent)).at(-1); const b = tt && [...tt.querySelectorAll('button')].find(x => /Annuler/.test(x.textContent)); b?.click(); return !!b; }); await sleep(500);
         out.textUndone = await textNow();
+        out.hintAfterUndo = await p.evaluate(() => document.querySelectorAll('dialog.h-tx-dlg .h-tx-mirror .h-tx-hintw').length);
+        // 🖱 un clic sur un mot de l'image (la ligne déjà choisie) : le curseur va sur ce mot dans le texte (exact avec la place des mots, ≈ sinon)
+        await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-tool="pan"]')?.click()); await sleep(300);
+        const zoneAt = (zi, frac) => p.evaluate(([y, f]) => { const r = [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-zones] rect')].find(x => +x.getAttribute('y') === y); if (!r) return null; const b = r.getBoundingClientRect(); return {x: b.x + b.width * f, y: b.y + b.height / 2}; }, [ZONES[zi].y, frac]);
+        const clickWord = async (zi, frac) => { let at = await zoneAt(zi, frac); if (!at) return null;
+            await p.mouse.click(at.x, at.y); await sleep(900); // 1er clic : la ligne est choisie (comme avant) ; l'image glisse jusqu'à elle
+            const first = await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); return a.value.slice(a.selectionStart, a.selectionEnd); });
+            at = await zoneAt(zi, frac); await p.mouse.click(at.x, at.y); await sleep(250); // 2e clic : le curseur sur le mot
+            return {first, caret: await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); return {s: a.selectionStart, e: a.selectionEnd, focus: document.activeElement === a}; })}; };
+        { const z = ZONES[3], w = z.wb[2]; out.clickExact = await clickWord(3, ((w[2] + w[3]) / 2 - z.x) / z.w); out.clickExactWant = BODY.indexOf('village'); }
+        { const z = ZONES[2], l = LINES[2], i = l.indexOf('cultivateur'); out.clickEst = await clickWord(2, (i + 5) / l.length); out.clickEstWant = BODY.indexOf('cultivateur'); }
         await sleep(600); out.strip2 = await strip();
         out.list2 = (await api('act_transcription_versions', { act_id: 1 })).items;
 
@@ -270,6 +289,14 @@ echo json_encode(['g' => $g, 'c' => $c]);`, { TX_BODY: BODY, TX_ZONES: JSON.stri
         ['🕘 « ✓ Utiliser cette version » : elle devient ma version (l’ancienne gardée), ↶ Annuler remet l’ancienne', () => {
             assert.equal(out.textBefore, BODY); assert.match(out.textUsed, /Gaspard Mazand \[\?\]/); assert.equal(out.prevClosed, true); assert.equal(out.useUndo, true); assert.equal(out.textUndone, BODY);
             assert.ok(out.list2.some(v => v.auto && v.label === 'Avant « Utiliser cette version »' && v.body === undefined)); }],
+        ['🧠 l’aperçu d’une lecture faite avec des indices : son mot douteux dit « lu avec un indice »', () => {
+            assert.equal(out.prevHint.length, 1); assert.match(out.prevHint[0], /🧠 lu avec un indice/); }],
+        ['🧠 dans le texte : le mot [?] de la lecture gardée est souligné, sa bulle dit « lu avec un indice » ; ↶ Annuler l’enlève', () => {
+            assert.deepEqual(out.hintW, ['Mazand']); assert.match(out.hintTip, /🧠 lu avec un indice/); assert.match(out.hintTip, /Mazand/); assert.equal(out.hintAfterUndo, 0); }],
+        ['🖱 un clic sur un mot de l’image (ligne déjà choisie) met le curseur sur ce mot dans le texte : exact avec la place des mots, ≈ sinon', () => {
+            assert.ok(out.clickExact, 'la zone de la ligne 4'); assert.equal(out.clickExact.first, LINES[3], '1er clic : la ligne choisie, comme avant');
+            assert.deepEqual([out.clickExact.caret.s, out.clickExact.caret.e, out.clickExact.caret.focus], [out.clickExactWant, out.clickExactWant, true]);
+            assert.ok(out.clickEst); assert.deepEqual([out.clickEst.caret.s, out.clickEst.caret.e], [out.clickEstWant, out.clickEstWant]); }],
         ['🕘 la bande reste courte : les versions automatiques dans « ⋯ N autres »', () => {
             const more = out.strip2.chips.find(c => c.id === 'more'); assert.ok(more, JSON.stringify(out.strip2.chips)); assert.ok(out.strip2.chips.length <= 7);
             assert.ok(out.list2.filter(v => v.auto).length >= 1); assert.equal(out.strip2.chips.filter(c => c.id !== 'me' && c.id !== 'more').length, out.list2.filter(v => !v.auto).length); }],

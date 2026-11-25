@@ -8,6 +8,8 @@
  *  3. 🧠 « Aider l'IA » : titre, de quoi parle l'acte, personnes reliées, indices de la base (cochés au départ : l'événement, les noms, les lieux) ;
  *     le texte envoyé se voit tel quel (le serveur le compose : tx_deep_prompt, lib/transcription_actes.php).
  *  4. ❓ acte de notoriété : « Pourquoi cet acte a été fait » (data.reason = {k, t, auto}), pré-rempli par « 🧭 Repérer ».
+ *  5. 🧠 « lu avec un indice » : les mots [?] d'une lecture faite avec des indices (data.hinted, meta.hints) ; 🖱 wordAt : un clic sur un mot
+ *     de l'image → le mot le plus proche dans le texte (heritage-transcribe.js y met le curseur, au 2e clic sur la ligne choisie).
  * Les données : act_transcription_versions (data.meta), act_transcriptions.data_json (reason, about, zones[].wb). Essai : tests/test-transcription-versions-contexte.js.
  */
 (() => {
@@ -84,6 +86,33 @@
         }
         return out;
     }
+    /**
+     * l'inverse : un clic sur l'image (x, y en pixels de l'image) → le mot le plus proche dans le texte {s, e, word} | null.
+     * La zone de la ligne sous le clic (ou la plus proche, à moins d'une demi-hauteur de ligne) ; dans la ligne, la place exacte des
+     * mots si la lecture l'a donnée (wb), sinon ≈ d'après la place des lettres (comme wordBoxes).
+     */
+    function wordAt(text, zones, x, y) {
+        text = String(text || '');
+        const lines = (zones || []).filter(q => q.e > q.s && q.w > 0 && q.h > 0 && q.e <= text.length);
+        const dist = q => { const dx = x < q.x ? q.x - x : x > q.x + q.w ? x - q.x - q.w : 0, dy = y < q.y ? q.y - y : y > q.y + q.h ? y - q.y - q.h : 0; return Math.hypot(dx, dy); };
+        const z = lines.map(q => [q, dist(q), q.w * q.h]).filter(([q, d]) => d <= q.h / 2).sort((a, b) => a[1] - b[1] || a[2] - b[2])[0]?.[0];
+        if (!z) return null;
+        const zt = text.slice(z.s, z.e), words = []; const rx = /\S+/g; let m;
+        while ((m = rx.exec(zt))) { if (/^\[(?:\?|illisible)\]$/.test(m[0])) continue; words.push({s: z.s + m.index, e: z.s + m.index + m[0].length}); }
+        if (!words.length) return null;
+        let best = null;
+        if (Array.isArray(z.wb) && z.wb.length && Number(z.wl) === zt.length) {
+            const wb = z.wb.map(w => ({s: z.s + w[0], e: z.s + w[1], d: x < w[2] ? w[2] - x : x > w[3] ? x - w[3] : 0})).sort((a, b) => a.d - b.d)[0];
+            if (wb) best = words.find(w => w.s < wb.e && wb.s < w.e) || null;
+        }
+        if (!best) { // ≈ la lettre sous le clic, puis le mot qui la contient (ou le plus proche)
+            const lead = zt.length - zt.replace(/^\s+/, '').length, core = Math.max(1, zt.trim().length);
+            const at = z.s + lead + clamp((x - z.x) / z.w, 0, 1) * core;
+            best = words.map(w => ({...w, d: at < w.s ? w.s - at : at > w.e ? at - w.e : 0})).sort((a, b) => a.d - b.d)[0];
+        }
+        const word = text.slice(best.s, best.e).replace(/[,.;:!?»«"]+$/, '');
+        return {s: best.s, e: best.s + Math.max(1, word.length), word, zone: z.id};
+    }
     /** les mots lus à la main → wb (début, fin dans le texte de la ligne ; x de l'image) ; null si une boîte manque */
     function wordsOfLine(words, ox = 0) {
         const out = []; let at = 0;
@@ -119,8 +148,16 @@
         if (m.from) out.push(`⧉ ${i18n('depuis {x}', {x: m.from})}`);
         return out;
     }
-    /** le texte en lecture seule : les mots douteux [?] soulignés */
-    const roHtml = body => esc(body).replace(/(\S+)\s?\[\?\]/g, '<span class="h-tx-doubt">$1</span>').replace(/\[illisible\]/g, '<span class="h-tx-doubt">[illisible]</span>').replace(/\n/g, '<br>');
+    /** 🧠 la bulle d'un mot douteux [?] d'une lecture faite avec des indices de « Aider l'IA » */
+    const hintTitle = () => `🧠 ${i18n('lu avec un indice')} — ${i18n('L’IA a lu ce mot en s’aidant d’un indice de « Aider l’IA » : vérifie-le sur l’image.')}`;
+    /** les mots marqués [?] → [{s, e, word}] (le mot, sans la marque) */
+    function doubtWords(text) {
+        const out = [], rx = /(\S+?)\s?\[\?\]/g; let m;
+        while ((m = rx.exec(String(text || '')))) { const w = m[1].replace(/[,.;:!?»«"’']+$/, '') || m[1]; out.push({s: m.index, e: m.index + w.length, word: w}); }
+        return out;
+    }
+    /** le texte en lecture seule : les mots douteux [?] soulignés ; hinted : la lecture s'est aidée d'indices (la bulle « 🧠 lu avec un indice ») */
+    const roHtml = (body, hinted = 0) => esc(body).replace(/(\S+)\s?\[\?\]/g, hinted ? `<span class="h-tx-doubt is-hint" title="${esc(hintTitle())}">$1</span>` : '<span class="h-tx-doubt">$1</span>').replace(/\[illisible\]/g, '<span class="h-tx-doubt">[illisible]</span>').replace(/\n/g, '<br>');
     const MAX_CHIPS = 4;
     /**
      * host : la bande ; o = {list(), body(id) → {body}, use(v), compare(v), duplicate(v | null), rename(v), openAll(), dim(on)}.
@@ -144,7 +181,7 @@
             const [ic, n, , kind] = chipOf(v);
             prev.innerHTML = `<div class="h-tx-vhead"><b>${ic} <span data-i18n-off>${esc(n)}</span></b> <span class="muted">— ${esc(i18n('lecture seule'))}</span></div>
                 <div class="h-tx-vmeta">${metaLines(v).map(s => `<span class="ui-badge is-grey">${esc(s)}</span>`).join('')}</div>
-                <div class="h-tx-vro" data-tx-vro>${roHtml(x.body || '')}</div>
+                <div class="h-tx-vro" data-tx-vro>${roHtml(x.body || '', Number(x.data?.meta?.hints || v.meta?.hints) || 0)}</div>
                 <div class="h-tx-vbtns"><button type="button" class="button small" data-tx-vuse>✓ ${esc(i18n('Utiliser cette version'))}</button><button type="button" class="button small secondary" data-tx-vcmp>⚖️ ${esc(i18n('Comparer avec ma version'))}</button>${kind !== 'read' ? `<button type="button" class="button small secondary" data-tx-vren>✎ ${esc(i18n('Renommer'))}</button>` : ''}<button type="button" class="button small secondary" data-tx-vclose>× ${esc(i18n('Fermer'))}</button></div>`;
         }
         function close() { if (!open && prev.hidden) return; open = null; prev.hidden = true; prev.innerHTML = ''; o.dim?.(false); paint(); }
@@ -218,6 +255,6 @@
         return dlg;
     }
 
-    ext.txCtx = {REASONS, reasonOf, reasonGuess, reasonHtml, whyHtml, reasonHint, WCOL_KEY, WORD_COLORS, wordColor, setWordColor, wordColorHtml, wordBoxes, wordsOfLine,
+    ext.txCtx = {REASONS, reasonOf, reasonGuess, reasonHtml, whyHtml, reasonHint, WCOL_KEY, WORD_COLORS, wordColor, setWordColor, wordColorHtml, wordBoxes, wordsOfLine, wordAt, doubtWords, hintTitle, roHtml,
         chipOf, metaLines, versionsStrip, openAide, contextOf, checkedCount, hintsOf};
 })();

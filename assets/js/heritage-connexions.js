@@ -21,7 +21,7 @@
  *      here: () => ctx | null,                                   // l'écran ouvert sait recevoir : {…, label: 'Ici : …'}
  *      choose: async (items, anchor) => ctx | null,              // sinon : choisir où (une fenêtre, un menu)
  *      explain: (items, ctx) => 'la photo sur la piste vidéo',   // « ce que ça fera », écrit par l'outil, une fois
- *      receive: async (items, ctx) => ({message, undo, redo}),   // ranger ; undo = « ↶ Annuler »
+ *      receive: async (items, ctx) => ({message, undo, redo, left}), // ranger ; undo = « ↶ Annuler » ; left = ce qui n'a pas pu être pris (reste dans le panier)
  *    });
  *  2. Ce qu'un outil sait FOURNIR à « Prendre depuis… » (onglet « 🧰 Données ») : une info précise pour une date, un lieu…
  *    (LCNDA_EXT.pickSources = LCNDA_EXT.pickSources || []).push({
@@ -301,9 +301,10 @@
             if (!ctx) return null;
             const r = await t.receive(acc, ctx) || {};
             let removed = null;
-            const doneIds = fromBasket ? (original || items).filter(x => x.id && (acc.includes(x) || acc.some(a => a._from === x.id))).map(x => x.id) : [];
+            const kept = new Set(r.left || []); // ce que l'outil n'a pas pu prendre (une carte : ce qui n'a pas de position) reste dans le panier
+            const doneIds = fromBasket ? (original || items).filter(x => x.id && !kept.has(x) && (acc.includes(x) || acc.some(a => a._from === x.id && !kept.has(a)))).map(x => x.id) : [];
             if (doneIds.length) { removed = await post('basket_remove', {ids: doneIds}); setCountFrom(removed); refreshPanel(); }
-            const left = items.length - acc.length;
+            const left = items.length - acc.length + (fromBasket ? kept.size : 0);
             const msg = (r.message || T('Rangé : {n}', {n: plural(acc.length, T('chose'), T('choses'))})) + (left ? ` ${T('({n} reste dans le panier)', {n: left})}` : '');
             undoToast(msg, {icon: t.icon, undo: (r.undo || removed?.removed?.length) ? async () => { await r.undo?.(); if (removed?.removed?.length) { setCountFrom(await post('basket_restore', {rows: removed.removed})); refreshPanel(); } r.after?.(); } : null, redo: r.redo});
             r.after?.();
@@ -616,7 +617,7 @@
         if (!enabled() || kiosk()) return [];
         const out = ['-', {icon: '📥', label: T('Prendre depuis…'), shortcut: shortcutText(), run: () => openTake()}];
         if (count) out.push({icon: '🧺', label: T('Vider le panier ici ({n})', {n: nf(count)}), run: () => emptyHere()});
-        return out;
+        return [...out, ...(ext.cxNeeds?.addMenuItems?.() || [])]; // 🧩 « Un besoin… » (heritage-connexions-besoins.js)
     }
     /** « 🧺 Vider le panier ici » : tout ce que l'écran ouvert sait prendre */
     async function emptyHere() {
@@ -1008,7 +1009,8 @@
                 <p class="muted"><small>${esc(T('Le panier est gardé dans la base : il te suit sur un autre ordinateur et dans les sauvegardes.'))}</small></p></div>
             <div class="maintenance-panel"><h3>${esc(T('Prendre et déposer'))}</h3>${tg('ctx', 'Clic droit : « 🧺 Prendre… » une date, un lieu, une phrase', 'Sur une fiche, une note, une transcription, une enquête… ; un texte choisi à la souris aussi.')}${tg('dnd', 'Glisser du panier sur l’écran ouvert', 'Un cadre bleu dit ce qui va se passer avant qu’on lâche.')}</div>
             <div class="maintenance-panel"><h3>${esc(T('Raccourci clavier'))}</h3><p>📥 ${esc(T('Prendre depuis…'))} : <b>${esc(combo || T('aucun'))}</b> · <button type="button" class="link-button" data-cx-keys>${esc(T('Changer dans Raccourcis clavier'))}</button></p>
-                <p class="muted"><small>${esc(T('⇧⌘O était déjà pris (écran divisé) : le raccourci de départ est ⌥⌘O (Ctrl+Alt+O sous Windows et Linux).'))}</small></p></div></section>`;
+                <p class="muted"><small>${esc(T('⇧⌘O était déjà pris (écran divisé) : le raccourci de départ est ⌥⌘O (Ctrl+Alt+O sous Windows et Linux).'))}</small></p></div>${ext.cxNeeds?.settingsHtml?.() || ''}</section>`;
+        ext.cxNeeds?.bindSettings?.(ws); // 🧩 les besoins (heritage-connexions-besoins.js)
         ws.querySelectorAll('[data-cx-tg]').forEach(el => { const inp = el.matches('input') ? el : el.querySelector('input'); (inp || el).addEventListener('change', e => { const k = el.dataset.cxTg; const v = !!(e.target.checked ?? inp?.checked); saveSettings({...settings(), [k]: v}, v ? T('Activé') : T('Éteint')); if (k === 'on' && v && count == null) boot(); }); });
         ws.querySelectorAll('[name="cx-multi"]').forEach(r => r.addEventListener('change', e => { writeJ(CUR, 0); basket = null; saveSettings({...settings(), multi: e.target.value === '1'}, e.target.value === '1' ? T('Plusieurs paniers') : T('Un seul panier')); }));
         ws.querySelector('[data-cx-keys]')?.addEventListener('click', () => { st.maintenanceTab = 'raccourcis'; A().persistUiState?.(); A().setModule?.('maintenance'); });
@@ -1071,6 +1073,6 @@
             undoToast(T('📮 Réponse rangée dans la piste « {p} »', {p: l.b_label || ''}), {undo: async () => { await post('inv_receive_undo', r); }});
         }}});
     }
-    ext.connexions = {courrierReplied, leadTarget, pisteDest, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
+    ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
         count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
 })();

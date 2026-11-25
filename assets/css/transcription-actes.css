@@ -152,3 +152,7 @@
 @media (max-width:700px){.h-tx-chip2 small{display:none}.h-tx-dlg .h-tx[data-ptab=people] :is(.h-tx-vers,.h-tx-vprev,.h-tx-why){display:none!important}}
 .h-tx-readpanel .h-tx-readia{display:block;text-align:left;padding:6px;font-weight:600}
 @media (max-width:700px){.h-tx-top .h-tx-iabtn{display:none}} /* sur téléphone : « 🧠 Aider l'IA » reste dans « ✨ Lire ▾ » et l'étape Corriger */
+/* 🧠 un mot [?] lu avec un indice de « Aider l'IA » : souligné en violet pointillé, sa bulle au survol (heritage-transcribe.js) */
+.h-tx-mirror .h-tx-hintw{border-bottom:2px dotted #6929c4}
+:root[data-theme="dark"] .h-tx-mirror .h-tx-hintw{border-bottom-color:#b48cff}
+.h-tx-doubt.is-hint{text-decoration-color:#6929c4;cursor:help}

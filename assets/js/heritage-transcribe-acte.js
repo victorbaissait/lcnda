@@ -404,6 +404,8 @@
             const parts = [plural((res.created || 0) + (res.linked || 0), 'fiche', 'fiches')]; if (res.events) parts.push(plural(res.events, 'événement ajouté', 'événements ajoutés')); if (res.source_id) parts.push(plural(1, 'source', 'sources'));
             const kept = ex.people.map(p => { const s = st.people.get(p.key); return {name: upName(p), role: p.role, person_id: res.map?.[p.key] || 0, s: p.s, e: p.e, action: s.action}; });
             ctx.onApplied?.({result: res, people: kept, source: src});
+            // 🧩 cet acte répond-il à ce qui manque à une enquête ? (un seul message, réglable ; jamais rangé tout seul — heritage-connexions-besoins.js)
+            if (ctx.transcriptionId) ext.cxNeeds?.announce?.({kind: 'act', ref_id: ctx.transcriptionId, what: ex.kind, person_ids: kept.map(p => p.person_id).filter(Boolean), names: kept.map(p => p.name), year: ex.year || '', date: ex.date?.label || '', place: placeName || ex.place || '', title: ctx.title || src.act || ''});
             let undone = false;
             (A().undoToast || toast)(i18n('✓ Acte ajouté : {what}', {what: parts.join(', ')}), {undo: async () => { if (undone) return {already: true}; await post('act_import_undo', {token: res.undo}); undone = true; ctx.onUndone?.(); }});
             if (res.skipped?.length) toast(i18n('Déjà d’autres parents, lien non fait : {names}', {names: res.skipped.join(', ')}));
