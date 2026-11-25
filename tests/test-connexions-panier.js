@@ -112,7 +112,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await post('link_event_to_investigation_item', {item_id: 1, event_id: 1, person_label: 'Jean MAZAUD'});
             const r = await post('link_event_to_investigation_item', {item_id: 1, event_id: 2, person_label: 'Jean MAZAUD'});
             assert.ok(r.added_link_id > 0, JSON.stringify(r)); assert.strictEqual(r.linked_event_id, 1);
-            const d = await api('investigation', {id: 1}), it = d.items.find(x => x.id === 1);
+            const d = await api('investigation', {id: 1}); assert.ok(d.items, JSON.stringify(d).slice(0, 400)); const it = d.items.find(x => x.id === 1);
             assert.strictEqual(Number(it.linked_event_id), 1); assert.ok(it.links.some(l => l.entity_type === 'event' && l.entity_id === 2 && /(Baptême|Bapt)/.test(l.label)), JSON.stringify(it.links));
             assert.strictEqual((await post('link_event_to_investigation_item', {item_id: 1, event_id: 2})).added_link_id, 0, 'pas deux fois');
         });
