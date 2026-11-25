@@ -21,7 +21,7 @@
 
 /* ⤢ le rapport */
 .ts-dialog { width: min(1100px, 96vw); max-height: 92vh; }
-.ts-dialog .modal-body { overflow: auto; padding: .8rem 1.25rem 1rem; }
+.ts-dialog .modal-body, dialog.modal.ts-dialog > .modal-body { overflow: auto; padding: .9rem 1.4rem 1.1rem; box-sizing: border-box; }
 .ts-group > h3 { padding-top: .2rem; border-top: 1px solid var(--line-color, rgba(127, 127, 127, .3)); }
 .ts-group:first-of-type > h3 { border-top: 0; }
 .ts-top { display: grid; gap: .4rem; margin-bottom: .6rem; }
