@@ -5,7 +5,7 @@ UA = 'LCNDA-genealogie-data-build/1.0 (open-data build script)'
 CACHE = os.environ.get('L10_CACHE', os.path.join(os.path.dirname(__file__), 'cache'))
 os.makedirs(CACHE, exist_ok=True)
 _last = [0.0]
-def get(url, pause=1.0, tries=6, binary=False, headers=None):
+def get(url, pause=1.0, tries=4, binary=False, headers=None):
     key = os.path.join(CACHE, hashlib.sha1(url.encode()).hexdigest())
     if os.path.exists(key):
         with open(key, 'rb') as f: data = f.read()
@@ -16,7 +16,7 @@ def get(url, pause=1.0, tries=6, binary=False, headers=None):
         _last[0] = time.time()
         req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept-Encoding': 'identity', **(headers or {})})
         try:
-            with urllib.request.urlopen(req, timeout=60) as r: data = r.read()
+            with urllib.request.urlopen(req, timeout=30) as r: data = r.read()
             with open(key, 'wb') as f: f.write(data)
             return data if binary else data.decode('utf-8', 'replace')
         except urllib.error.HTTPError as e:
