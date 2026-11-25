@@ -31,10 +31,13 @@ const GEDCOM_PERSON_ATTRIBUTE_TAGS = ['CAST', 'DSCR', 'EDUC', 'IDNO', 'NATI', 'N
     'RESI', 'SSN', 'TITL', 'FACT'];
 const GEDCOM_FAMILY_EVENT_TAGS = ['ANUL', 'CENS', 'DIV', 'DIVF', 'ENGA', 'MARB', 'MARC', 'MARR', 'MARL', 'MARS', 'RESI'];
 
+/** Balises propres à LCNDA écrites à l'export, déclarées dans HEAD.SCHMA en GEDCOM 7. */
+const GEDCOM_LCNDA_TAGS = ['_ROOT', '_TITL', '_CAL', '_COLR', '_DATE', '_FREL', '_MREL', '_KIND', '_PET', '_LABEL', '_MIDN', '_QUAL', '_TYPE', '_WWW'];
+
 /** Balises de structure, jamais lues comme des événements. */
 const GEDCOM_STRUCTURAL_TAGS = ['NAME', 'SEX', 'FAMC', 'FAMS', 'NOTE', 'SOUR', 'OBJE', 'CHAN', 'CREA', 'RIN', 'REFN',
     'RFN', 'AFN', 'UID', 'ASSO', 'ALIA', 'ANCI', 'DESI', 'SUBM', 'HUSB', 'WIFE', 'CHIL', 'NCHI', 'RESN', 'SLGS', 'SLGC',
-    'BAPL', 'CONL', 'ENDL', 'INIL', '_CREA', '_UID', '_GUID', '_FIL', '_UST', '_UPD', '_PRIM', '_FREL', '_MREL',
+    'BAPL', 'CONL', 'ENDL', 'INIL', 'NO', 'SNOTE', 'SDATE', 'CROP', 'MIME', 'LANG', 'TRAN', 'PHRASE', '_ROOT', '_HOME', '_HME', '_SOSA', '_SOSAN', '_SOSADABOVILLE', '_WWW', '_CREA', '_UID', '_GUID', '_FIL', '_UST', '_UPD', '_PRIM', '_FREL', '_MREL',
     '_FSFTID', '_TIME', '_STAT', '_KIND', '_PET', '_LABEL', '_TITL', '_CAL', '_COLR',
     // Ancestry, MyHeritage, Gramps… : identifiants, photos, étiquettes, liens (lus à part, jamais comme des événements)
     '_APID', '_MTTAG', '_PHOTO', '_MARNM', '_CUTOUT', '_PERSONALPHOTO', '_PARENTPHOTO', '_PHOTO_RIN', '_PARENTRIN', '_FILESIZE',
@@ -136,7 +139,7 @@ function gedcom_date_core_to_text(string $core): string
         $name = $month === false ? '' : ($month === 12 ? ((int) $m[1] > 1 ? 'jours complémentaires' : 'jour complémentaire') : GEDCOM_FR_REPUBLICAN_MONTHS[$month]);
         return trim(($m[1] !== '' ? (int) $m[1] . ' ' : '') . ($name !== '' ? $name . ' ' : '') . 'an ' . gedcom_roman((int) $m[3]));
     }
-    if (preg_match('/^(?:(\d{1,2})\s+)?(?:([A-Z]{3,4})\s+)?(-?\d{1,4})(\/\d{1,2})?(\s+B\.?C\.?)?$/i', $core, $m)) {
+    if (preg_match('/^(?:(\d{1,2})\s+)?(?:([A-Z]{3,4})\s+)?(-?\d{1,4})(\/\d{1,2})?(\s+(?:B\.?C\.?E?|BCE))?$/i', $core, $m)) { // « B.C. » (5.5.1), « BCE » (7)
         $month = $m[2] !== '' ? array_search(strtoupper($m[2]), GEDCOM_MONTHS, true) : false;
         if ($m[2] !== '' && $month === false) { return $core; }
         return trim(($m[1] !== '' ? (int) $m[1] . ' ' : '') . ($month !== false ? GEDCOM_FR_MONTHS[$month] . ' ' : '') . $m[3] . ($m[4] ?? '') . (!empty($m[5]) ? ' av. J.-C.' : ''));
@@ -466,16 +469,19 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         }
     };
 
-    $line(0, 'HEAD');
-    $line(1, 'SOUR', 'LCNDA');
-    $line(2, 'NAME', 'Le Carnet numérique des ancêtres');
-    $line(1, 'GEDC');
-    $line(2, 'VERS', $version === '7' ? '7.0' : '5.5.1');
-    if ($version !== '7') { $line(2, 'FORM', 'LINEAGE-LINKED'); $line(1, 'CHAR', 'UTF-8'); }
-    $line(1, 'LANG', $version === '7' ? 'fr' : 'French');
-    $line(1, 'DATE', strtoupper(date('j M Y')));
-    $line(1, 'PLAC');
-    $line(2, 'FORM', $geneanet ? 'Town, Area code, County, Region, Country' : GEDCOM_PLACE_FORM);
+    // Date d'un événement, d'un média… : en GEDCOM 7, ce que sa grammaire n'a plus (texte libre « (…) », INT, double année
+    // « 1700/01 », « B.C. ») passe dans PHRASE, sous une date vide ou simplifiée
+    $writeDate = static function (int $level, string $tag, string $date) use ($line, $version): void {
+        if ($version !== '7') { $line($level, $tag, $date); return; }
+        $phrase = '';
+        if (preg_match('/^\((.*)\)$/s', $date, $m)) { [$date, $phrase] = ['', trim($m[1])]; }
+        elseif (preg_match('/^INT\s+(.+?)\s*\((.*)\)$/s', $date, $m)) { [$date, $phrase] = [trim($m[1]), trim($m[2])]; }
+        if (preg_match('/\d\/\d{1,2}\b/', $date)) { $phrase = $phrase !== '' ? $phrase : gedcom_date_to_text($date); $date = preg_replace('/(\d)\/\d{1,2}\b/', '$1', $date) ?? $date; }
+        $date = preg_replace('/\s*B\.?C\.?$/', ' BCE', $date) ?? $date;
+        $date = preg_replace('/\b(BEF|AFT|ABT|CAL|EST|BET|AND|FROM|TO)\.?\s+/', '$1 ', $date) ?? $date;
+        $line($level, $tag, $date);
+        if ($phrase !== '') { $line($level + 1, 'PHRASE', $phrase); }
+    };
 
     $includeNotes = export_option_enabled('include_notes', true);
     $includeTr = $sink !== null ? !empty($sink['transcriptions'] ?? true) : export_option_enabled('include_transcriptions', true); // 📄 « Transcriptions des documents » (cochée)
@@ -652,7 +658,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
             $line($level + 2, 'TITL', (string) ($m['title'] ?: ($m['document_title'] ?: 'Document')));
         }
     };
-    $writeEvent = static function (array $e, string $scope) use ($line, $text, $writeNotes, $writeCitations, $writeMedia, $writeLabels, $includeNotes, $version, $geneanet): void {
+    $writeEvent = static function (array $e, string $scope) use ($line, $text, $writeDate, $writeNotes, $writeCitations, $writeMedia, $writeLabels, $includeNotes, $version, $geneanet): void {
         $tag = strtoupper(trim((string) ($e['gedcom_tag'] ?? '')));
         $standard = $scope === 'person' ? array_merge(GEDCOM_PERSON_EVENT_TAGS, GEDCOM_PERSON_ATTRIBUTE_TAGS) : GEDCOM_FAMILY_EVENT_TAGS;
         $isAttribute = in_array($tag, GEDCOM_PERSON_ATTRIBUTE_TAGS, true);
@@ -664,11 +670,12 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         } else {
             $line(1, $tag, $isAttribute ? $title : '');
             if (!$isAttribute && $title !== '') { $line(2, '_TITL', $title); }
+            if (in_array($tag, ['FACT', 'IDNO'], true)) { $line(2, 'TYPE', (string) ($e['type_label'] ?: 'Fait')); } // TYPE obligatoire
         }
         $calendar = (string) ($e['date_calendar'] ?? 'gregorian');
         $date = trim((string) ($e['date_text'] ?? '')) !== '' ? gedcom_date_out((string) $e['date_text'], $calendar, $version) : (string) ($e['year'] ?? '');
         if ($date !== '') {
-            $line(2, 'DATE', $date);
+            $writeDate(2, 'DATE', $date);
             // calendrier sans escape GEDCOM (musulman, juif…) : gardé pour le retour dans LCNDA
             if (!in_array($calendar, ['', 'gregorian', 'julian', 'republican'], true)) { $line(3, '_CAL', $calendar); }
         }
@@ -693,6 +700,25 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         $writeLabels(2, 'event:' . (int) $e['id']);
     };
 
+    $line(0, 'HEAD');
+    $line(1, 'SOUR', 'LCNDA');
+    $line(2, 'NAME', 'Le Carnet numérique des ancêtres');
+    $line(1, 'GEDC');
+    $line(2, 'VERS', $version === '7' ? '7.0' : '5.5.1');
+    if ($version !== '7') { $line(2, 'FORM', 'LINEAGE-LINKED'); $line(1, 'CHAR', 'UTF-8'); }
+    $line(1, 'LANG', $version === '7' ? 'fr' : 'French');
+    $line(1, 'DATE', strtoupper(date('j M Y')));
+    $line(1, 'PLAC');
+    $line(2, 'FORM', $geneanet ? 'Town, Area code, County, Region, Country' : GEDCOM_PLACE_FORM);
+    if ($version !== '7') { $line(1, 'SUBM', '@U1@'); } // obligatoire en 5.5.1 (l'enregistrement est écrit à la fin)
+    // balises propres à LCNDA, déclarées en GEDCOM 7 (HEAD.SCHMA), comme la norme le demande
+    if ($version === '7') {
+        $line(1, 'SCHMA');
+        foreach (GEDCOM_LCNDA_TAGS as $t) { $line(2, 'TAG', $t . ' https://github.com/victorbaissait/lcnda#gedcom-' . strtolower(substr($t, 1))); }
+    }
+    // la personne de départ (Sosa 1) : « 1 _ROOT @I…@ », comme Family Historian ; relue à l'import (aller-retour)
+    $rootId = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn();
+    if ($rootId && isset($visible[$rootId])) { $line(1, '_ROOT', '@I' . $rootId . '@'); }
     $healthRows = $sink === null && !$geneanet && export_option_enabled('health', false) && function_exists('sante_gedcom_rows') ? sante_gedcom_rows($pdo) : []; // 🩺 jamais sans la case
     unset($eventPerson, $eventFamily, $exported);
     $eventsByPerson = []; $chunkEnd = -1;
@@ -714,11 +740,11 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
             foreach (array_keys($famsBySpouse[$pid] ?? []) as $famId) { $line(1, 'FAMS', '@F' . $famId . '@'); }
             continue;
         }
-        $writeName = static function (array $n, ?string $type, ?string $lcndaType) use ($line): void {
+        $writeName = static function (array $n, ?string $type, ?string $lcndaType) use ($line, $version): void {
             $given = trim(implode(' ', array_filter([trim((string) ($n['first_name'] ?? '')), trim((string) ($n['middle_name'] ?? ''))])));
             $surname = trim((string) ($n['last_name'] ?? ''));
             $line(1, 'NAME', trim($given . ' /' . $surname . '/ ' . trim((string) ($n['suffix'] ?? ''))));
-            if ($type !== null) { $line(2, 'TYPE', $type); }
+            if ($type !== null) { $line(2, 'TYPE', $version === '7' ? strtoupper($type) : $type); } // GEDCOM 7 : AKA, MARRIED
             if ($lcndaType !== null) { $line(2, '_TYPE', $lcndaType); }
             if (trim((string) ($n['prefix'] ?? '')) !== '') { $line(2, 'NPFX', (string) $n['prefix']); }
             if ($given !== '') { $line(2, 'GIVN', $given); }
@@ -757,13 +783,13 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         foreach ($healthRows[$pid] ?? [] as $h) {
             $line(1, 'EVEN', (string) $h['label']);
             $line(2, 'TYPE', match ($h['kind']) { 'handicap' => 'Handicap', 'deces' => 'Cause de décès', 'epidemie' => 'Épidémie traversée', 'autre' => 'Santé', default => 'Maladie' });
-            if (trim((string) $h['date_text']) !== '') { $line(2, 'DATE', gedcom_date_out((string) $h['date_text'], 'gregorian', $version)); }
+            if (trim((string) $h['date_text']) !== '') { $writeDate(2, 'DATE', gedcom_date_out((string) $h['date_text'], 'gregorian', $version)); }
             if (trim((string) $h['note']) !== '' || $h['to_check']) { $text(2, 'NOTE', trim(($h['to_check'] ? '(à vérifier) ' : '') . (string) $h['note'])); }
         }
         foreach ($famcByChild[$pid] ?? [] as $famId => $c) {
             $line(1, 'FAMC', '@F' . $famId . '@');
             $r1 = (string) ($c['relation_to_partner1'] ?? 'biological'); $r2 = (string) ($c['relation_to_partner2'] ?? 'biological');
-            if ($r1 === $r2 && in_array($r1, ['adopted', 'foster'], true)) { $line(2, 'PEDI', $r1); }
+            if ($r1 === $r2 && in_array($r1, ['adopted', 'foster'], true)) { $line(2, 'PEDI', $version === '7' ? strtoupper($r1) : $r1); } // GEDCOM 7 : ADOPTED, FOSTER
         }
         foreach (array_keys($famsBySpouse[$pid] ?? []) as $famId) { $line(1, 'FAMS', '@F' . $famId . '@'); }
         $writeNotes(1, 'person:' . $pid);
@@ -809,7 +835,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         if (trim((string) ($s['author'] ?? '')) !== '') { $line(1, 'AUTH', (string) $s['author']); }
         if (trim((string) ($s['publication'] ?? '')) !== '') { $line(1, 'PUBL', (string) $s['publication']); }
         if (trim((string) ($s['text'] ?? '')) !== '') { $text(1, 'TEXT', (string) $s['text']); }
-        if (trim((string) ($s['url'] ?? '')) !== '') { $line(1, 'WWW', (string) $s['url']); }
+        if (trim((string) ($s['url'] ?? '')) !== '') { $line(1, $version === '7' ? '_WWW' : 'WWW', (string) $s['url']); } // GEDCOM 7 : pas de WWW dans une source
         if (trim((string) ($s['source_type'] ?? '')) !== '') { $line(1, '_TYPE', (string) $s['source_type']); }
         $agency = trim((string) ($s['agency'] ?? ''));
         if ($agency !== '') { $line(1, 'REPO', '@R' . $repos[gedcom_fold($agency)]['id'] . '@'); }
@@ -822,21 +848,22 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     }
     foreach ($geneanet ? [] : $media as $id => $m) {
         $line(0, '@M' . $id . '@', 'OBJE');
-        $file = trim((string) ($m['filename'] ?? ''));
-        if ($file !== '') {
-            // paquet GedZip : chemin relatif dans l'archive (« media/… »), encodé comme une adresse
-            $line(1, 'FILE', $mediaPrefix !== '' ? $mediaPrefix . rawurlencode(basename($file)) : $file);
-            $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-            // GEDCOM 7 : FORM est le type du fichier (« image/jpeg ») ; 5.5.1 : l'extension
-            if ($ext !== '') { $line(2, 'FORM', $version === '7' && function_exists('echanges_mime') ? echanges_mime($ext) : $ext); }
-        }
-        $line(1, 'TITL', (string) ($m['title'] ?: ($m['document_title'] ?: 'Média')));
-        if (trim((string) ($m['date_text'] ?? '')) !== '') { $line(1, 'DATE', gedcom_date_from_text((string) $m['date_text'])); }
+        // FILE (avec FORM) est obligatoire ; TITL va sous FILE (5.5.1 et 7) ; la date du média est une balise de LCNDA
+        $file = trim((string) ($m['filename'] ?? '')); $url = trim((string) ($m['document_url'] ?? ''));
+        $isUrl = $file === '' && preg_match('#^https?://\S+$#i', $url);
+        $line(1, 'FILE', $file !== '' ? ($mediaPrefix !== '' ? $mediaPrefix . rawurlencode(basename($file)) : $file) : ($isUrl ? $url : 'media-sans-fichier'));
+        $ext = strtolower(pathinfo($file !== '' ? $file : (string) parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
+        // GEDCOM 7 : FORM est le type du fichier (« image/jpeg ») ; 5.5.1 : l'extension
+        if ($version === '7') { $line(2, 'FORM', $ext !== '' && function_exists('echanges_mime') ? echanges_mime($ext) : ($isUrl ? 'text/html' : 'application/octet-stream')); }
+        else { $line(2, 'FORM', $ext !== '' ? $ext : ($isUrl ? 'url' : 'unknown')); }
+        $line(2, 'TITL', (string) ($m['title'] ?: ($m['document_title'] ?: 'Média')));
+        if (trim((string) ($m['date_text'] ?? '')) !== '') { $line(1, '_DATE', gedcom_date_from_text((string) $m['date_text'])); }
         if ($includeNotes && trim((string) ($m['description'] ?? '')) !== '') { $text(1, 'NOTE', (string) $m['description']); }
         // 📄 un seul texte par document (celui de l'Atelier de transcription) : il part dans le média, lu par les autres logiciels
         if ($includeTr && trim((string) ($m['transcription'] ?? '')) !== '') { $text(1, 'NOTE', (string) $m['transcription']); }
         $writeNotes(1, 'media:' . $id);
     }
+    if ($version !== '7') { $line(0, '@U1@', 'SUBM'); $line(1, 'NAME', 'LCNDA'); }
     $line(0, 'TRLR');
     if ($sink !== null) { $sink['media'] = $geneanet ? [] : $media; $sink['media_private'] = count($skippedPrivate ?? []); $sink['persons'] = count($persons); return; }
     fclose($out);
@@ -990,15 +1017,20 @@ function gedimport_real_media_type(string $path): bool
 
 function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = null, bool $fromDisk = false): array
 {
-    $hadStart = (int) $pdo->query('SELECT COUNT(*) FROM persons WHERE is_start=1')->fetchColumn();
+    $personsBefore = (int) $pdo->query('SELECT COUNT(*) FROM persons')->fetchColumn(); // pour la personne de départ (Sosa 1), à la fin
     $content = file_get_contents($path);
     if ($content === false) { throw new RuntimeException('Lecture du fichier GEDCOM impossible'); }
     $anselLatin1 = !mb_check_encoding($content, 'UTF-8') && gedcom_detect_encoding($content) === GEDCOM_ANSEL_LATIN1;
     $content = gedcom_text_to_utf8($content);
+    // caractères de contrôle (octet nul d'un fichier abîmé, fin de fichier DOS « ^Z »…) : retirés, ils casseraient la recherche
+    $content = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/', '', $content) ?? $content;
     if (!preg_match('/^\s*0\s+HEAD\b/m', $content) && !preg_match('/^\s*0\s+@[^@]+@\s+INDI\b/m', $content)) {
         throw new RuntimeException('Ce fichier n’est pas un GEDCOM : aucune personne ni en-tête « HEAD » trouvé.');
     }
-    $records = gedimport_parse($content);
+    $records = gedimport_parse($content, $parseInfo);
+    // GEDCOM 7 : une note partagée citée sous une fiche (« 1 SNOTE @N1@ ») se lit comme une note qui renvoie à un enregistrement
+    $snote = static function (stdClass $n) use (&$snote): void { foreach ($n->children as $c) { if ($c->tag === 'SNOTE') { $c->tag = 'NOTE'; } if ($c->children) { $snote($c); } } };
+    foreach ($records as $rec) { $snote($rec); }
     $byXref = [];
     foreach ($records as $rec) { if ($rec->xref) { $byXref[$rec->xref] = $rec; } }
     $placeForm = [];
@@ -1009,7 +1041,14 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
     }
     if (!$placeForm && function_exists('gedcom_producer') && in_array(gedcom_producer($content)['producer'], ['gramps', 'ancestry', 'myheritage', 'familysearch', 'ftm'], true)) { $placeForm = ['__right__']; }
     $unescape = static fn(string $v): string => str_replace('@@', '@', $v);
-    $textOf = static fn(stdClass $n): string => trim(gedcom_rtf_to_text($unescape(gedimport_text($n))));
+    // GEDCOM 7 : une note en HTML (« 2 MIME text/html ») est remise en texte simple
+    $textOf = static function (stdClass $n) use ($unescape): string {
+        $t = gedcom_rtf_to_text($unescape(gedimport_text($n)));
+        if (($mime = gedimport_child($n, 'MIME')) && stripos($mime->value, 'html') !== false) {
+            $t = html_entity_decode(strip_tags(preg_replace('#<br\s*/?>|</p>#i', "\n", $t) ?? $t), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        }
+        return trim($t);
+    };
     $noteText = static function (stdClass $n) use ($byXref, $textOf): string {
         $v = trim($n->value);
         if (preg_match('/^@([^@]+)@$/', $v, $m)) { return isset($byXref[$m[1]]) ? $textOf($byXref[$m[1]]) : ''; }
@@ -1021,6 +1060,10 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
     $stats = ['persons' => 0, 'families' => 0, 'children_links' => 0, 'events' => 0, 'marriages' => 0, 'notes' => 0,
         'sources' => 0, 'citations' => 0, 'name_variants' => 0, 'media' => 0, 'media_missing' => 0, 'labels' => 0, 'animals' => 0,
         'loops_skipped' => 0, 'witnesses' => 0, 'media_links' => 0, 'portraits' => 0, 'warnings' => $anselLatin1 ? [GEDCOM_ANSEL_LATIN1_WARNING] : []];
+    // lignes abîmées : réparées ou laissées de côté, et dit
+    if ($parseInfo['joined'] ?? 0) { $stats['warnings'][] = ($parseInfo['joined'] > 1 ? $parseInfo['joined'] . ' lignes sans numéro de niveau (retours à la ligne dans un texte) ont été ajoutées' : '1 ligne sans numéro de niveau (retour à la ligne dans un texte) a été ajoutée') . ' au texte juste au-dessus.'; }
+    if ($parseInfo['relevelled'] ?? 0) { $stats['warnings'][] = ($parseInfo['relevelled'] > 1 ? $parseInfo['relevelled'] . ' lignes avaient' : '1 ligne avait') . ' un niveau qui saute (par exemple de 1 à 3) : rattachée' . ($parseInfo['relevelled'] > 1 ? 's' : '') . ' à la ligne du dessus.'; }
+    if ($parseInfo['skipped'] ?? 0) { $stats['warnings'][] = ($parseInfo['skipped'] > 1 ? $parseInfo['skipped'] . ' lignes illisibles ont été laissées' : '1 ligne illisible a été laissée') . ' de côté (pas au format GEDCOM « niveau balise valeur »).'; }
     // logiciel d'origine (Ancestry, MyHeritage, Gramps…) : dit dans le résumé ; ses particularités sont lues plus bas
     if (function_exists('gedcom_producer')) { $stats += gedcom_producer($content); }
     // Titre d'une note (balise _TITL écrite par LCNDA) et son texte sans ce titre répété en 1re ligne
@@ -1077,7 +1120,7 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
             $agency = preg_match('/^@([^@]+)@$/', $rv, $m) && isset($byXref[$m[1]]) ? (($nm = gedimport_child($byXref[$m[1]], 'NAME')) ? trim($nm->value) : '') : $rv;
         }
         $text = trim(implode("\n\n", array_filter([$get('TEXT'), ...array_map($noteText, gedimport_children($rec, 'NOTE'))])));
-        $url = $get('WWW') ?: ($get('_URL') ?: $get('URL'));
+        $url = $get('WWW') ?: ($get('_WWW') ?: ($get('_URL') ?: $get('URL')));
         $insertSource->execute([null, $get('TITL') ?: ($get('ABBR') ?: 'Source sans titre'), $get('AUTH'), $agency, $get('PUBL'), $url, $text, $get('_TYPE')]);
         $sourceMap[$rec->xref] = (int) $pdo->lastInsertId();
         $stats['sources']++;
@@ -1167,7 +1210,7 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         }
         $title = ($t = gedimport_child($obje, 'TITL')) ? $textOf($t) : (($fileNode && ($t = gedimport_child($fileNode, 'TITL'))) ? $textOf($t) : '');
         $description = trim(implode("\n\n", array_map($noteText, gedimport_children($obje, 'NOTE'))));
-        $date = ($d = gedimport_child($obje, 'DATE')) ? gedcom_date_to_text($d->value) : '';
+        $date = ($d = gedimport_child($obje, 'DATE') ?: gedimport_child($obje, '_DATE')) ? gedcom_date_to_text($d->value) : '';
         $ext = strtolower(pathinfo($stored, PATHINFO_EXTENSION));
         $type = match (true) { in_array($ext, ['pdf'], true) => 'pdf', in_array($ext, ['mp3', 'm4a', 'wav', 'aif', 'aiff', 'aifc', 'ogg'], true) => 'audio', in_array($ext, ['mp4', 'mov', 'webm'], true) => 'video', default => 'image' };
         $insertMedia->execute([$title, $description, $type, $stored, '', $date]);
@@ -1290,10 +1333,12 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $type = ($t = gedimport_child($c, 'TYPE')) ? trim($textOf($t)) : '';
         // types écrits en anglais par Gramps, Ancestry, MyHeritage (« Military Service », « Degree »…) : en français
         if ($type !== '' && function_exists('gramps_event_labels')) { $type = gramps_event_labels()[$type] ?? (gramps_event_labels()[ucwords(strtolower($type))] ?? $type); }
-        $typeId = gedcom_event_type_id($pdo, $typeCache, $scope, $c->tag, $c->tag === 'EVEN' || !in_array($c->tag, array_merge(GEDCOM_PERSON_EVENT_TAGS, GEDCOM_PERSON_ATTRIBUTE_TAGS, GEDCOM_FAMILY_EVENT_TAGS), true) ? $type : '');
+        $typeId = gedcom_event_type_id($pdo, $typeCache, $scope, $c->tag, in_array($c->tag, ['EVEN', 'FACT'], true) || !in_array($c->tag, array_merge(GEDCOM_PERSON_EVENT_TAGS, GEDCOM_PERSON_ATTRIBUTE_TAGS, GEDCOM_FAMILY_EVENT_TAGS), true) ? $type : ''); // FACT : son TYPE est son nom (« Couleur préférée »)
         $dateNode = gedimport_child($c, 'DATE');
         $dateRaw = $dateNode ? trim($dateNode->value) : '';
         $date = gedcom_date_to_text($dateRaw);
+        // GEDCOM 7 : date en clair dans PHRASE (« 2 DATE » vide, « 3 PHRASE vers la Noël 1850 »)
+        if ($dateNode && ($ph = gedimport_child($dateNode, 'PHRASE')) && trim($ph->value) !== '' && ($dateRaw === '' || preg_match('/\/\d/', gedcom_date_to_text($ph->value)))) { $date = trim($unescape($ph->value)); }
         // calendrier : escape GEDCOM (@#DJULIAN@, @#DFRENCH R@…) ou _CAL écrit par LCNDA
         $calendar = ($cal = $dateNode ? gedimport_child($dateNode, '_CAL') : null) ? strtolower(trim($cal->value)) : gedcom_date_calendar($dateRaw);
         if (!in_array($calendar, ['gregorian', 'julian', 'republican', 'islamic', 'hebrew'], true)) { $calendar = 'gregorian'; }
@@ -1486,71 +1531,89 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $stats['media_links'] += count($links); $stats['notes']++;
     }
     $pdo->exec("UPDATE persons SET living_status='deceased' WHERE living_status='unknown' AND id IN (SELECT e.person_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('DEAT','BURI','CREM'))");
-    // personne de départ (Sosa 1) : si la base n'en avait pas, celle que le fichier désigne, sinon celle qui a le plus d'ancêtres
-    if ($hadStart === 0 && ($pick = gedimport_pick_start($records, $byXref, $personMap))) {
-        $pdo->prepare('UPDATE persons SET is_start=CASE WHEN id=? THEN 1 ELSE 0 END')->execute([$pick['pid']]);
-        $stats['start_person'] = ['id' => $pick['pid'], 'name' => $firstName[$pick['xref']] ?? '', 'why' => $pick['why']];
+    // personne de départ (Sosa 1) : dans une base vide, celle que le fichier désigne (en-tête, numéro Sosa 1), sinon celle
+    // qui a le plus d'ancêtres, sinon la première ; dans une base qui avait déjà des fiches, celle d'avant est gardée (et la
+    // personne n°1 du fichier est proposée, si elle est autre)
+    if ($personMap) {
+        $pick = gedimport_pick_start($records, $byXref, $personMap);
+        $label = static function (int $id) use ($pdo): string {
+            $s = $pdo->prepare("SELECT trim(COALESCE(first_name,'')||' '||upper(COALESCE(last_name,''))) FROM persons WHERE id=?"); $s->execute([$id]);
+            return trim((string) $s->fetchColumn()) ?: 'sans nom';
+        };
+        if ($personsBefore === 0) {
+            $pick ??= ['pid' => (int) reset($personMap), 'why' => 'first'];
+            $pdo->prepare('UPDATE persons SET is_start=CASE WHEN id=? THEN 1 ELSE 0 END WHERE is_start=1 OR id=?')->execute([$pick['pid'], $pick['pid']]);
+            $stats['start_person'] = ['id' => $pick['pid'], 'name' => $label($pick['pid']), 'why' => $pick['why']];
+        } else {
+            $kept = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn();
+            if ($kept) { $stats['start_kept'] = ['id' => $kept, 'name' => $label($kept)]; }
+            // le même fichier importé deux fois : sa personne n°1 est le double de celle de la base, rien à proposer
+            if ($pick && $pick['why'] !== 'first' && $pick['pid'] !== $kept && $label($pick['pid']) !== ($stats['start_kept']['name'] ?? '')) { $stats['start_suggested'] = ['id' => $pick['pid'], 'name' => $label($pick['pid']), 'why' => $pick['why']]; }
+        }
     }
     gedimport_rebuild_search($pdo);
     return ['format' => 'gedcom'] + $stats;
 }
 
 /**
- * La personne de départ (Sosa 1) d'un fichier GEDCOM : 1) désignée dans l'en-tête (_ROOT, _HOME, _HME, _MASTER, _ROOTPERSON,
- * _PRINCIPAL, _DECUJUS) ; 2) la fiche dont le numéro Sosa vaut 1 (SOSA, _SOSA, _SOSA_NUMBER, _SOSANUM, _SOSA_DAG,
- * _NUMSOSA) ; 3) sinon, parmi les fiches sans enfant, celle qui a le plus d'ancêtres dans le fichier (à égalité : la plus
- * jeune, puis la première du fichier). Geneanet, par exemple, met le père avant la personne : prendre « la première
- * fiche » faisait du père le Sosa 1.
+ * La personne de départ (Sosa 1) d'un fichier GEDCOM, ou null :
+ *  1) désignée dans l'en-tête : « 1 _ROOT @I1@ » (Family Historian, et LCNDA à l'export), « 1 _HOME @I1@ » (Ahnenblatt),
+ *     « 1 _HME @I1@ » (GEDitCOM) ;
+ *  2) la fiche dont le numéro Sosa vaut 1 : « 1 _SOSA 1 », « 1 _SOSAN 00001+ », « 1 _SOSADABOVILLE 1 G1 » (Ancestris) ;
+ *  3) sinon, parmi les fiches sans enfant, celle qui a le plus d'ancêtres dans le fichier ; à égalité, la première du
+ *     fichier (sur Geneanet, le propriétaire de l'arbre vient avant ses frères et sœurs, pas forcément le plus jeune).
+ * Geneanet (export GeneWeb) n'écrit aucune marque et met souvent le père avant la personne : prendre « la première
+ * fiche » faisait du père le Sosa 1 (ticket #7).
+ * Une marque qui désigne une famille ou une fiche absente est ignorée.
  */
 function gedimport_pick_start(array $records, array $byXref, array $personMap): ?array
 {
     $ok = static fn(string $x) => $x !== '' && isset($personMap[$x]);
+    $ptr = static fn(stdClass $n): string => preg_match('/^\s*@([^@]+)@\s*$/', (string) $n->value, $m) ? $m[1] : '';
     foreach ($records as $rec) {
         if ($rec->tag !== 'HEAD') { continue; }
-        foreach (['_ROOT', '_HOME', '_HME', '_MASTER', '_ROOTPERSON', '_PRINCIPAL', '_DECUJUS', '_START'] as $t) {
-            $n = gedimport_child($rec, $t);
-            $x = $n ? trim($n->value, '@ ') : '';
-            if ($ok($x)) { return ['xref' => $x, 'pid' => $personMap[$x], 'why' => 'header']; }
+        foreach (['_ROOT', '_HOME', '_HME'] as $t) {
+            foreach (gedimport_children($rec, $t) as $n) { $x = $ptr($n); if ($ok($x)) { return ['xref' => $x, 'pid' => $personMap[$x], 'why' => 'header']; } }
         }
     }
     foreach ($records as $rec) {
-        if ($rec->tag !== 'INDI' || !$ok((string) $rec->xref)) { continue; }
-        foreach (['SOSA', '_SOSA', '_SOSA_NUMBER', '_SOSANUM', '_SOSA_DAG', '_NUMSOSA'] as $t) {
+        if ($rec->tag !== 'INDI' || !$ok((string) $rec->xref) || $personMap[$rec->xref] !== ($rec->lcPid ?? $personMap[$rec->xref])) { continue; }
+        foreach (['_SOSA', 'SOSA', '_SOSAN', '_SOSADABOVILLE'] as $t) {
             $n = gedimport_child($rec, $t);
-            if ($n && preg_match('/^\s*1\s*$/', (string) $n->value)) { return ['xref' => $rec->xref, 'pid' => $personMap[$rec->xref], 'why' => 'sosa']; }
+            if ($n && preg_match('/^\s*0*1[+\-]?(\s|$)/', (string) $n->value)) { return ['xref' => $rec->xref, 'pid' => $personMap[$rec->xref], 'why' => 'sosa']; }
         }
     }
-    // parents d'une fiche (par ses FAMC), et fiches qui ont des enfants (par leurs FAMS avec CHIL)
+    // parents de chaque fiche (par les CHIL des familles et par les FAMC des fiches), et fiches qui ont des enfants
     $parents = []; $hasChild = [];
-    foreach ($records as $rec) {
-        if ($rec->tag !== 'FAM') { continue; }
+    $add = static function (string $kid, array $hw) use (&$parents, &$hasChild): void {
+        foreach ($hw as $x) { if ($x !== $kid && !in_array($x, $parents[$kid] ?? [], true)) { $parents[$kid][] = $x; $hasChild[$x] = true; } }
+    };
+    $couple = static function (stdClass $fam) use ($ok, $ptr): array {
         $hw = [];
-        foreach (['HUSB', 'WIFE'] as $t) { foreach (gedimport_children($rec, $t) as $n) { $x = trim($n->value, '@ '); if ($ok($x)) { $hw[] = $x; } } }
-        $kids = array_filter(array_map(static fn($n) => trim($n->value, '@ '), gedimport_children($rec, 'CHIL')), $ok);
-        foreach ($kids as $k) { $parents[$k] = array_merge($parents[$k] ?? [], $hw); }
-        if ($kids) { foreach ($hw as $x) { $hasChild[$x] = true; } }
-    }
+        foreach ($fam->children as $c) { if (($c->tag === 'HUSB' || $c->tag === 'WIFE') && $ok($x = $ptr($c))) { $hw[] = $x; } }
+        return $hw;
+    };
     foreach ($records as $rec) {
-        if ($rec->tag !== 'INDI' || !$ok((string) $rec->xref)) { continue; }
-        foreach (gedimport_children($rec, 'FAMC') as $f) {
-            $fam = $byXref[trim($f->value, '@ ')] ?? null;
-            if (!$fam) { continue; }
-            foreach (['HUSB', 'WIFE'] as $t) { foreach (gedimport_children($fam, $t) as $n) { $x = trim($n->value, '@ '); if ($ok($x) && !in_array($x, $parents[$rec->xref] ?? [], true)) { $parents[$rec->xref][] = $x; } } }
+        if ($rec->tag === 'FAM') {
+            $hw = $couple($rec);
+            foreach ($rec->children as $c) { if ($c->tag === 'CHIL' && $ok($k = $ptr($c))) { $add($k, $hw); } }
+        } elseif ($rec->tag === 'INDI' && $ok((string) $rec->xref)) {
+            foreach ($rec->children as $c) { if ($c->tag === 'FAMC' && ($fam = $byXref[$ptr($c)] ?? null) && $fam->tag === 'FAM') { $add($rec->xref, $couple($fam)); } }
         }
     }
-    $birthYear = static function (stdClass $rec): int {
-        $b = gedimport_child($rec, 'BIRT'); $d = $b ? gedimport_child($b, 'DATE') : null;
-        return $d && preg_match('/(\d{3,4})\s*$/', (string) $d->value, $m) ? (int) $m[1] : 0;
-    };
-    $best = null;
+    if (!$parents) { return null; }
+    // 🐘 un budget de pas : sur un très gros fichier (beaucoup de fiches sans enfant, des lignées très longues), la recherche
+    // s'arrête avec la meilleure trouvée jusque-là
+    $best = null; $budget = 4_000_000;
     foreach ($records as $i => $rec) {
-        if ($rec->tag !== 'INDI' || !$ok((string) $rec->xref) || isset($hasChild[$rec->xref])) { continue; }
-        $seen = []; $todo = $parents[$rec->xref] ?? [];
-        while ($todo && count($seen) < 20000) { $x = array_pop($todo); if (isset($seen[$x])) { continue; } $seen[$x] = true; foreach ($parents[$x] ?? [] as $y) { $todo[] = $y; } }
-        $key = [count($seen), $birthYear($rec), -$i];
+        if ($rec->tag !== 'INDI' || !$ok((string) $rec->xref) || isset($hasChild[$rec->xref]) || !isset($parents[$rec->xref])) { continue; }
+        $seen = []; $todo = $parents[$rec->xref];
+        while ($todo && $budget-- > 0) { $x = array_pop($todo); if (isset($seen[$x])) { continue; } $seen[$x] = true; foreach ($parents[$x] ?? [] as $y) { if (!isset($seen[$y])) { $todo[] = $y; } } }
+        $key = [count($seen), -$i];
         if (!$best || $key > $best['key']) { $best = ['key' => $key, 'xref' => $rec->xref]; }
+        if ($budget <= 0) { break; }
     }
-    return $best && $best['key'][0] > 0 ? ['xref' => $best['xref'], 'pid' => $personMap[$best['xref']], 'why' => 'ancestors'] : null;
+    return $best ? ['xref' => $best['xref'], 'pid' => $personMap[$best['xref']], 'why' => 'ancestors'] : null;
 }
 
 /**

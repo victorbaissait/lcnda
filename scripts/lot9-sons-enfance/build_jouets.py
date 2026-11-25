@@ -39,6 +39,10 @@ for d in range(1850, 1970, 10):
         files += members(sc[9:], 'file', 60)
     if not files: continue
     ms = [m for m in meta(list(dict.fromkeys(files))) if FREE.search(m['lic'] or '') and m['thumb']]
+    # les réclames de journaux (« Ad for », « … Company », « Furniture ») ne montrent pas bien les jouets : écartées ;
+    # les images de France d'abord (France, Paris, français, jouet, poupée)
+    ms = [m for m in ms if not re.search(r'\b(ad for|advertisement|company|furniture|brothers|department|tire)\b|\bad\b', (m['t'] + ' ' + m['file']).lower())]
+    ms.sort(key=lambda m: 0 if re.search(r'france|paris|fran[cç]ais|jouet|poup[ée]e|musée', (m['t'] + ' ' + m['desc'] + ' ' + m['file']).lower()) else 1)
     # de la variété : on écarte les quasi-doublons de nom
     seen, keep = set(), []
     for m in ms:

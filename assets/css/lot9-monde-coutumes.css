@@ -1,0 +1,27 @@
+/* 🌍 Le monde et les coutumes de son temps (assets/js/heritage-lot9-monde-coutumes.js) — reprend l'allure de « Son terroir » et
+ * « Autour du village » (terroir.css, commune-plus.css : .tr-*, .cplus-*) et des lignes de « Droit et pouvoir » (.dp-line) ; clair et
+ * sombre : couleurs prises du texte (currentColor). */
+.l9-place{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1rem;margin:1rem 0}
+.l9-place:empty{display:none}
+.l9-src{margin:.6rem 0 0;font-size:.82em;opacity:.78}
+.l9-more summary,.l9-quote summary,.l9-langues summary{cursor:pointer;margin:.35rem 0}
+.l9-quote{margin:.25rem 0}
+.l9-quote blockquote,.l9-bq{margin:.3rem 0 .3rem .2rem;padding:.3rem .7rem;border-left:3px solid color-mix(in srgb,currentColor 25%,transparent);font-style:italic;opacity:.92}
+.l9-bq small{font-style:normal}
+.l9-facts{margin:.3rem 0;padding-left:1.1rem;display:grid;gap:.35rem}
+.l9-srcs{list-style:none;margin:.4rem 0 0;padding:0;opacity:.8}
+.l9-list li{display:flex;gap:.55rem;align-items:flex-start;margin:.35rem 0}
+.l9-journaux{list-style:none;margin:.2rem 0;padding:0;display:grid;gap:.3rem}
+.l9-journaux li small{display:block;opacity:.82}
+.l9-cols{columns:3 12rem;margin:.4rem 0;padding-left:1rem}
+.l9-cols li{break-inside:avoid;margin:.1rem 0}
+.l9-strip{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.3rem}
+.l9-strip .tr-photo{flex:0 0 120px}
+.l9-deco + .l9-deco{margin-top:.7rem}
+.l9-these.is-no{opacity:.6}
+.l9-these .page-actions{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.25rem}
+.l9-panel-lang{grid-column:1/-1}
+.l9-dialog{max-height:70vh;overflow:auto}
+.l9-dlg{max-width:min(900px,96vw)}
+@media (max-width:640px){.l9-cols{columns:1}}
+@media print{.l9-more[open] summary,.l9-quote summary{display:none}.l9-these .page-actions{display:none}}

@@ -8,7 +8,7 @@ CACHE = os.environ.get('LCNDA_L9B_CACHE') or os.path.join(os.getcwd(), '.cache-l
 os.makedirs(CACHE, exist_ok=True)
 
 
-def get(url, params=None, data=None, accept='*/*', tries=8, binary=False, refresh=False):
+def get(url, params=None, data=None, accept='*/*', tries=14, binary=False, refresh=False):
     if params:
         url = url + ('&' if '?' in url else '?') + urllib.parse.urlencode(params)
     key = hashlib.sha1((url + '|' + (data or '')).encode()).hexdigest()
@@ -31,7 +31,7 @@ def get(url, params=None, data=None, accept='*/*', tries=8, binary=False, refres
             return b if binary else b.decode('utf-8', 'replace')
         except Exception as e:  # noqa
             code = getattr(e, 'code', None)
-            if code in (400, 404):
+            if code in (400, 404, 414):
                 raise
             print('  … nouvel essai', i + 1, url[:120], e)
             time.sleep(wait)

@@ -239,6 +239,24 @@ function backup_bounded_copy($in, $out, int $declared)
     return $copied;
 }
 
+/**
+ * Copie un fichier d'une archive reçue (.zip) vers $dest, borné : refusé s'il est démesuré une fois ouvert (plus de $max
+ * octets) ou anormalement compressé (bombe zip : plus de 50 Mo et 100 fois sa taille dans l'archive), et arrêté s'il
+ * dépasse la taille annoncée. Renvoie '' si tout va bien, sinon la phrase à montrer.
+ */
+function zip_entry_copy_bounded(ZipArchive $zip, string $entry, string $dest, int $max): string
+{
+    $st = $zip->statName($entry);
+    if (!$st) { return 'Lecture impossible dans l’archive.'; }
+    $size = (int) ($st['size'] ?? 0); $packed = max(1, (int) ($st['comp_size'] ?? 0));
+    if ($size > $max) { return 'Le fichier « ' . basename($entry) . ' » est trop gros une fois ouvert (plus de ' . intdiv($max, 1048576) . ' Mo) : il n’est pas ouvert.'; }
+    if ($size > 50 * 1048576 && $size / $packed > 100) { return 'Cette archive contient un fichier anormal (« ' . basename($entry) . ' ») : elle n’est pas ouverte.'; }
+    $in = $zip->getStream($entry); $out = @fopen($dest, 'wb');
+    $copied = ($in && $out) ? backup_bounded_copy($in, $out, $size) : false;
+    if ($in) { fclose($in); } if ($out) { fclose($out); }
+    return $copied === false ? 'Lecture impossible dans l’archive (fichier abîmé ou plus gros qu’annoncé).' : '';
+}
+
 function restore_package_upload(array $file): never
 {
     @set_time_limit(0);

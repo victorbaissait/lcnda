@@ -12,22 +12,37 @@ import l8b_net as N
 CLASSES = ['Q15632617', 'Q3658341', 'Q95074', 'Q15773347', 'Q15711870', 'Q17624054']
 LANG = 'SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en,mul,it,es,de". }'
 
-RANGES = [(0, 1000000), (1000000, 10000000), (10000000, 30000000), (30000000, 60000000), (60000000, 90000000), (90000000, 110000000), (110000000, 125000000), (125000000, 200000000)]
+RANGES = [(0, 1000000), (1000000, 4000000), (4000000, 10000000), (10000000, 20000000), (20000000, 30000000), (30000000, 45000000), (45000000, 60000000), (60000000, 75000000), (75000000, 90000000), (90000000, 100000000), (100000000, 110000000), (110000000, 118000000), (118000000, 125000000), (125000000, 200000000)]
 
 def fiction():
     rows = []
     for c in CLASSES:
         for lo, hi in RANGES:
-            q = f'''SELECT ?ch ?chLabel ?fn ?fnLabel ?work ?workLabel ?auth ?authLabel ?cre ?creLabel ?wdate WHERE {{
+            q = f'''SELECT ?ch ?fn ?work ?auth ?cre ?wdate WHERE {{
               ?ch wdt:P31 wd:{c}; wdt:P734 ?fn.
               BIND(xsd:integer(STRAFTER(STR(?ch), "/Q")) AS ?n) FILTER(?n >= {lo} && ?n < {hi})
               OPTIONAL {{ ?ch wdt:P1441 ?work. OPTIONAL {{ ?work wdt:P50 ?auth }} OPTIONAL {{ ?work wdt:P577 ?wdate }} }}
-              OPTIONAL {{ ?ch wdt:P170 ?cre }}
-              {LANG} }}'''
+              OPTIONAL {{ ?ch wdt:P170 ?cre }} }}'''
             r = N.sparql(q)
             print(c, lo, len(r), file=sys.stderr)
             rows += [{k: v['value'] for k, v in x.items()} for x in r]
     return rows
+
+def labels(qids):
+    """{Q: {fr, en, mul, native}} par paquets de 300"""
+    out = {}
+    qids = sorted(set(qids))
+    for i in range(0, len(qids), 300):
+        vals = ' '.join('wd:' + q for q in qids[i:i + 300])
+        r = N.sparql(f'''SELECT ?x ?l ?nat WHERE {{ VALUES ?x {{ {vals} }}
+            OPTIONAL {{ ?x rdfs:label ?l FILTER(LANG(?l) IN ("fr", "en", "mul", "it", "es", "de")) }} OPTIONAL {{ ?x wdt:P1705 ?nat }} }}''')
+        for x in r:
+            q = x['x']['value'].rsplit('/', 1)[-1]
+            d = out.setdefault(q, {})
+            if 'l' in x: d.setdefault(x['l'].get('xml:lang', ''), x['l']['value'])
+            if 'nat' in x: d.setdefault('native', x['nat']['value'])
+        print('  libellés', i + 300, '/', len(qids), file=sys.stderr)
+    return out
 
 def variants():
     out = []
@@ -42,5 +57,7 @@ def variants():
     return out
 
 if __name__ == '__main__':
-    data = {'fiction': fiction(), 'variants': variants()}
+    fic = fiction()
+    ids = {v.rsplit('/', 1)[-1] for r in fic for k, v in r.items() if k != 'wdate' and v.startswith('http')}
+    data = {'fiction': fic, 'labels': labels(ids), 'variants': variants()}
     json.dump(data, open(sys.argv[1], 'w'), ensure_ascii=False)

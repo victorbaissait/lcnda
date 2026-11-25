@@ -46,8 +46,6 @@ SONGS = [
     ['La Chanson de Craonne', 1917, ['Charles Sablon'], 'Bonsoir m\'amour Sablon'],
     ['Le Clairon (chanson)', 1873, ['Paul Déroulède', 'Émile André'], 'Le clairon Déroulède'],
     ['La Coupo Santo', 1867, ['Frédéric Mistral'], 'Coupo santo'],
-    ['Le Temps du muguet', 1959, [], ''],
-    ['Le Chant des marins', 1840, [], ''],
     ['Le Credo du paysan', 1890, ['Gustave Goublier', 'Gabriel Lafforêt'], 'Credo du paysan Goublier'],
     ['La Tonkinoise', 1906, ['Vincent Scotto', 'Henri Christiné'], 'Tonkinoise Scotto'],
     ['Quand l\'amour meurt', 1904, ['Octave Crémieux', 'Georges Millandy'], 'Quand l\'amour meurt Crémieux'],
@@ -67,7 +65,6 @@ SONGS = [
     ['Sur le pont d\'Avignon', 1846, [], 'Sur le pont d\'Avignon'],
     ['Le Petit Navire', 1840, [], 'Petit navire'],
     ['Auprès de ma blonde', 1704, [], 'Auprès de ma blonde'],
-    ['Le Roi Renaud', 1800, [], ''],
     ['Il était une bergère', 1780, [], 'Il était une bergère'],
     ['Ah ! vous dirai-je, maman', 1761, [], 'Ah vous dirai-je maman'],
     ['Minuit, chrétiens', 1847, ['Adolphe Adam', 'Placide Cappeau'], 'Minuit chrétiens Adam'],
@@ -95,8 +92,12 @@ def death(title):
     return y, w['q']
 
 
+fold = lambda s: re.sub(r'[\u0300-\u036f]', '', __import__('unicodedata').normalize('NFD', s or '')).lower().strip()
+
+
 def sentence(text, y):
     for s in re.split(r'(?<=[.!?])\s+', text.replace('\n', ' ')):
+        s = re.sub(r'^[^\[]{0,40}\]\s*', '', s)
         if str(y) in s: return s.strip()[:400]
     return ''
 
@@ -110,6 +111,10 @@ def imslp(query, authors):
     for h in hits:
         t = h['title']
         if t.startswith('Category:') or not all(w in t.lower() for w in words[:1]): continue
+        # la page doit être la chanson elle-même : son compositeur (entre parenthèses) est un des auteurs, ou « Traditional »
+        comp = fold((re.search(r'\(([^,()]+),', t) or re.search(r'\(([^()]+)\)', t) or [None, ''])[1])
+        names = [fold(a.split(' (')[0]).split()[-1] for a in authors]
+        if not (comp and (any(n == comp or n in comp for n in names) or (not authors and re.search(r'tradition|anonym', comp)))): continue
         u2 = 'https://imslp.org/api.php?' + urllib.parse.urlencode({'action': 'query', 'titles': t, 'prop': 'revisions', 'rvprop': 'content', 'format': 'json'})
         page = list(jget(u2)['query']['pages'].values())[0]
         txt = page['revisions'][0]['*']
@@ -128,6 +133,21 @@ for title, y, authors, iq in SONGS:
     w = wp(title)
     if not w: skipped.append([title, 'pas d’article Wikipédia']); continue
     s = sentence(w['text'], y)
+    yk = 'wikipedia'
+    if not s:
+        # l'année n'est pas dans l'introduction de Wikipédia : celle de Wikidata (P571 création, P577 publication), sinon on écarte
+        yk = 'wikidata'
+        try:
+            ent = list(jget(f'https://www.wikidata.org/wiki/Special:EntityData/{w["q"]}.json')['entities'].values())[0] if w['q'] else {}
+            yy = None
+            for pr in ('P577', 'P571'):
+                for c in ent.get('claims', {}).get(pr, []):
+                    try: yy = int(c['mainsnak']['datavalue']['value']['time'][1:5]); break
+                    except Exception: pass
+                if yy: break
+        except Exception: yy = None
+        if not yy: skipped.append([title, 'année introuvable dans Wikipédia et Wikidata']); continue
+        y = yy
     dd = []
     ok = True
     for a in authors:
@@ -136,7 +156,7 @@ for title, y, authors, iq in SONGS:
         if d is None or d > LIMIT: ok = False
     if not ok: skipped.append([title, 'auteur mort après %d ou date inconnue : %s' % (LIMIT, dd)]); continue
     sc = imslp(iq, authors)
-    rows.append({'t': w['title'], 'y': y, 'q': w['q'], 'wp': 'https://fr.wikipedia.org/wiki/' + urllib.parse.quote(w['title'].replace(' ', '_')), 'sentence': s,
+    rows.append({'t': w['title'], 'y': y, 'yk': yk, 'q': w['q'], 'wp': 'https://fr.wikipedia.org/wiki/' + urllib.parse.quote(w['title'].replace(' ', '_')), 'sentence': s,
                  'authors': [[n, d] for n, d, q in dd], 'trad': not authors, 'score': sc})
     print(y, w['title'], 'IMSLP' if sc else '-', '|', s[:80])
 print(len(rows), 'gardées ;', len(skipped), 'écartées')

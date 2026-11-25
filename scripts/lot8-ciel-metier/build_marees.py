@@ -13,10 +13,12 @@ Méthode : moindres carrés sur 19 ans (cycle nodal) de hauteurs horaires, 37 co
 Schureman (mêmes formules que assets/js/heritage-lot8-ciel-metier.js, qui recalcule la marée d'un jour avec ces constantes).
 Vérification : on prédit une année ancienne tenue à part et on compare les heures des pleines mers aux mesures.
 
-Usage : python3 -I build_marees.py <dossier des csv UHSLC> <ne_10m_coastline.geojson> <sortie.json>
+Usage : python3 -I build_marees.py <dossier des csv UHSLC> <ne_10m_coastline.geojson> [<copie .json>]  → assets/data/l8a-marees.json.gz
 """
 import csv, json, math, os, sys, datetime as dt
 import numpy as np
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import l8common as C
 
 # station : (fichier, nom affiché, pays, lat, lon, première/dernière année de l'ajustement, année de contrôle, jeu)
 STATIONS = [
@@ -214,7 +216,8 @@ def main(src, coast_path, out_path):
         check = None
         years = sorted(set(np.floor(y).astype(int)))
         old = [yy for yy in years if yy < first and ((np.floor(y) == yy).sum() > 24 * 300)]
-        cy = old[0] if old else years[0]
+        full = [yy for yy in years if (np.floor(y) == yy).sum() > 24 * 200]
+        cy = old[0] if old else (full[len(full) // 2] if full else years[0])
         m = np.floor(y) == cy
         if m.sum() > 24 * 200:
             obs = highs(jd[m], z[m])
@@ -246,9 +249,10 @@ def main(src, coast_path, out_path):
             'note': 'Heures en temps universel ; l’app les donne en heure solaire du lieu. Estimation par le calcul (la météo, le vent et la pression changent la marée réelle).',
             'radius_km': RADIUS_KM, 'coast_km': COAST_KM,
             'constituents': [[c[0], *c[1:8], c[8]] for c in CONST], 'stations': stations}
-    with open(out_path, 'w') as fh: json.dump(data, fh, ensure_ascii=False, separators=(',', ':'))
-    print('écrit', out_path, os.path.getsize(out_path))
+    if out_path:
+        with open(out_path, 'w') as fh: json.dump(data, fh, ensure_ascii=False, separators=(',', ':'))
+    C.write('l8a-marees.json.gz', data)
 
 
 if __name__ == '__main__':
-    main(*sys.argv[1:4])
+    main(*(sys.argv[1:4] + [None] * (3 - len(sys.argv[1:4]))))

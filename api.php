@@ -816,7 +816,7 @@ try {
         'tr_place', 'tr_person', 'tr_nom', 'tr_base_names', 'tr_list', 'tr_credit', 'tr_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/terroir.php'; try { json_response(tr_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌾 Son terroir (lib/terroir.php) : AOC, races, coiffes, écoles livrées ; sens des prénoms (Wiktionnaire) livré + en ligne, gardé
         'br_person', 'br_places', 'br_day', 'br_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/boussole_rues.php'; try { json_response(br_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🧭🗞️📍 Boussole, jours et rues (lib/boussole_rues.php) : sans réseau, sauf br_day (Wikipédia, gardé)
         'l8b_person', 'l8b_tree' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot8_soldats_noms.php'; try { json_response(l8b_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🎖️ Soldats et noms (lib/lot8_soldats_noms.php) : lecture seule
-        'l8a_homonyms', 'l8a_maps' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot8_ciel_metier.php'; try { json_response(l8a_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌍🗺️ Lot 8 : villes du monde au même nom (GeoNames local), vieux plans (Commons, gardés en cache)
+        'l8a_homonyms', 'l8a_homonyms_base', 'l8a_maps' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot8_ciel_metier.php'; try { json_response(l8a_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌍🗺️ Lot 8 : villes du monde au même nom (GeoNames local), vieux plans (Commons, gardés en cache)
         'l9a_eu', 'l9a_gbif', 'l9a_xc', 'l9a_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot9_sons_enfance.php'; try { json_response(l9a_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🔊💌📷🐦🌼 Sons et enfance : Europeana, GBIF, xeno-canto en ligne, gardés
         'cplus_cemeteries', 'cplus_images', 'cplus_church', 'cplus_newspapers', 'cplus_about', 'cplus_list' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/commune_plus.php'; try { json_response(cplus_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🪦🖼️⛪📰 Autour du village (lib/commune_plus.php) : en ligne à la demande, gardé sur l'ordinateur
         'frontieres_status' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_status($pdo)); })(), // 🏛 Frontières anciennes : installé ? tailles, empreintes
@@ -5784,16 +5784,12 @@ function insee_deces_import(PDO $pdo): never
             if (preg_match('/\.(csv|txt)$/i', $name)) { $entryName = $name; break; }
         }
         if ($entryName === '') { $zip->close(); json_response(['error' => 'Aucun fichier .csv ou .txt trouvé dans le ZIP'], 422); }
-        $stream = $zip->getStream($entryName);
-        if (!$stream) { $zip->close(); json_response(['error' => 'Lecture du fichier INSEE dans le ZIP impossible'], 422); }
         $cleanupPath = tempnam(sys_get_temp_dir(), 'insee-deces-') ?: '';
-        if ($cleanupPath === '') { fclose($stream); $zip->close(); json_response(['error' => 'Création du fichier temporaire impossible'], 500); }
-        $out = fopen($cleanupPath, 'wb');
-        if (!$out) { fclose($stream); $zip->close(); @unlink($cleanupPath); json_response(['error' => 'Écriture du fichier temporaire impossible'], 500); }
-        stream_copy_to_stream($stream, $out);
-        fclose($out);
-        fclose($stream);
+        if ($cleanupPath === '') { $zip->close(); json_response(['error' => 'Création du fichier temporaire impossible'], 500); }
+        // borné : une « bombe zip » n'est jamais ouverte en entier (un fichier annuel de l'INSEE fait moins de 300 Mo)
+        $why = zip_entry_copy_bounded($zip, $entryName, $cleanupPath, 4096 * 1048576);
         $zip->close();
+        if ($why !== '') { @unlink($cleanupPath); json_response(['error' => 'Fichier INSEE : ' . $why], 422); }
         // fichier en positions fixes (.txt de data.gouv.fr) : converti en CSV comme un .txt téléchargé
         if (preg_match('/\.txt$/i', $entryName)) {
             try { $csvPath = insee_fixed_width_to_csv($cleanupPath); } catch (Throwable $e) { @unlink($cleanupPath); json_response(['error' => 'Lecture du fichier INSEE impossible : ' . $e->getMessage()], 422); }
@@ -5823,6 +5819,8 @@ function insee_deces_import(PDO $pdo): never
         }
     }
 
+    // « Texte Unicode » d'Excel ou du Bloc-notes (UTF-16) : relu en UTF-8, sinon chaque lettre serait suivie d'un octet nul
+    if (($utf8Path = text_file_utf16_to_utf8($tmpPath)) !== '') { if ($cleanupPath !== '') @unlink($cleanupPath); $cleanupPath = $utf8Path; $tmpPath = $utf8Path; }
     $handle = fopen($tmpPath, 'r');
     if (!$handle) { if ($cleanupPath !== '') @unlink($cleanupPath); json_response(['error' => 'Lecture du fichier impossible'], 500); }
 
@@ -5890,9 +5888,12 @@ function insee_deces_import(PDO $pdo): never
         // ligne lue ci-dessus est en réalité déjà une ligne de données. On retente en supposant l'ordre
         // standard des colonnes du fichier des personnes décédées, et on relit le fichier depuis le début
         // pour ne pas perdre cette première ligne.
-        if (count($headers) >= 8) {
-            $looksLikeCompactOldFile = count($headers) >= 10
-                && (str_contains((string)($headers[0] ?? ''), '*') || in_array(trim((string)($headers[1] ?? '')), ['1', '2', 'M', 'F'], true));
+        $looksLikeCompactOldFile = count($headers) >= 10
+            && (str_contains((string)($headers[0] ?? ''), '*') || in_array(trim((string)($headers[1] ?? '')), ['1', '2', 'M', 'F'], true));
+        // sans en-tête, la première ligne doit ressembler à une ligne de l'INSEE (une date de décès AAAAMMJJ à sa place) :
+        // sinon n'importe quel tableau (10 000 colonnes, autre fichier) serait pris pour une liste de décès
+        $deathAt = $looksLikeCompactOldFile ? 6 : 7;
+        if (count($headers) >= 8 && count($headers) <= 40 && preg_match('/^\d{4}(\d{2}){0,2}$/', trim((string)($headers[$deathAt] ?? ''), " \"\r\n"))) {
             $columnIndex = $looksLikeCompactOldFile ? [
                 'nomprenom' => 0,
                 'sexe' => 1,
@@ -5940,7 +5941,9 @@ function insee_deces_import(PDO $pdo): never
 
     $get = static function (array $row, ?int $index): string {
         if ($index === null || !isset($row[$index])) return '';
-        return trim((string)$row[$index]);
+        $v = trim((string)$row[$index]);
+        // fichier enregistré en Windows-1252 (Excel) : les accents relus, sinon la recherche ne pourrait plus renvoyer ces lignes
+        return mb_check_encoding($v, 'UTF-8') ? $v : mb_convert_encoding($v, 'UTF-8', 'Windows-1252');
     };
     $extractYear = static function (string $date): ?int {
         $digits = preg_replace('/\D/', '', $date) ?? '';
@@ -6014,6 +6017,8 @@ function insee_deces_import(PDO $pdo): never
             $inserted++;
             if ($inserted % 2000 === 0) { $pdo->commit(); $pdo->beginTransaction(); }
         }
+        // pas une seule date de décès lisible : ce n'est pas le fichier des décès (texte quelconque, mauvais tableau)
+        if ($inserted > 0 && $maxAnneeDeces === null) { throw new LcndaBadInput("Aucune date de décès lisible dans ce fichier : il ne ressemble pas au fichier des personnes décédées de l'INSEE. Rien n'a été importé."); }
         $pdo->prepare("UPDATE insee_deces_imports SET row_count=?, inserted_count=?, max_annee_deces=?, min_annee_deces=?, file_hash=? WHERE id=?")
             ->execute([$rowCount, $inserted, $maxAnneeDeces, $minAnneeDeces, $fileHash, $importId]);
         $pdo->commit();
@@ -6025,7 +6030,7 @@ function insee_deces_import(PDO $pdo): never
         $inseeDone = true;
         fclose($handle);
         if ($cleanupPath !== '') @unlink($cleanupPath);
-        json_response(['error' => 'Import interrompu : ' . $e->getMessage()], 500);
+        json_response(['error' => $e instanceof LcndaBadInput ? $e->getMessage() : 'Import interrompu : ' . $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 500);
     }
     fclose($handle);
     if ($cleanupPath !== '') @unlink($cleanupPath);
@@ -7697,8 +7702,19 @@ function import_package(PDO $pdo, ?array $file): never
     // un GEDCOM est lu en entier : 🐘 environ 16 fois sa taille en mémoire (200 000 fiches, 128 Mo : 2 Go) ; au moins 4 Go, 8 Go au plus
     memory_at_least((int) min(8192, max(4096, ceil((float) @filesize((string) $file['tmp_name']) / 1048576 * 20))));
 
-    $receipt = import_receipt_begin($pdo); // ce que l'import ajoute : pour « ↶ Annuler » (lib/imports.php)
-    $pdo->beginTransaction();
+    // verrou d'écriture pris tout de suite : deux imports lancés ensemble (double clic, deux onglets) passent l'un après l'autre,
+    // et ce que l'import ajoute (pour « ↶ Annuler », lib/imports.php) est compté sous ce verrou : jamais les fiches de l'autre
+    begin_write_transaction($pdo);
+    // le fichier en attente est pris (renommé) sous ce verrou : un second « Importer » du même fichier est refusé
+    $pendingPath = '';
+    if (!empty($file['pending'])) {
+        $pendingPath = (string) $file['tmp_name'];
+        $claimed = (string) preg_replace('/(\.[A-Za-z0-9]+)$/', '.en-cours$1', $pendingPath);
+        if (!@rename($pendingPath, $claimed)) { $pdo->rollBack(); json_response(['error' => 'Ce fichier vient déjà d’être importé (double clic ?) : regarde la liste des personnes avant de recommencer.'], 409); }
+        $file['tmp_name'] = $claimed;
+    }
+    $receipt = import_receipt_begin($pdo);
+    $ranges = null;
     try {
         calc_gen_suspend($pdo); // 🐘 pas de déclencheur par ligne pendant l'import (lib/calc_cache.php) ; remis avant la fin
         if ($ext === 'gramps' || $ext === 'gpkg') {
@@ -7708,7 +7724,7 @@ function import_package(PDO $pdo, ?array $file): never
             // Fichier lu sur place : les médias cités par un chemin relatif sont cherchés à côté du .ged.
             $stats = import_gedcom_into_db($pdo, $file['tmp_name'], !empty($file['local']) ? dirname($file['tmp_name']) : null, !empty($file['local']));
         } elseif (in_array($ext, ['hmw', 'heredis'], true)) {
-            $stats = heredis_import_into_db($pdo, $file['tmp_name']);
+            $stats = heredis_import_into_db($pdo, $file['tmp_name'], !empty($file['local'])); // envoyé : rien n'est cherché ailleurs sur l'ordinateur
         } elseif ($ext === 'mftpkg') {
             $stats = import_mftpkg_into_db($pdo, $file['tmp_name']);
         } elseif (in_array($ext, ['zip', 'gdz'], true)) {
@@ -7717,9 +7733,11 @@ function import_package(PDO $pdo, ?array $file): never
             throw new RuntimeException("Format non supporté pour l'import direct : .{$ext}");
         }
         calc_gen_resume($pdo);
+        $ranges = import_receipt_ranges($pdo, $receipt);
         $pdo->commit();
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        if ($pendingPath !== '') { @rename((string) $file['tmp_name'], $pendingPath); } // import raté : le fichier reste en attente
         throw $e;
     }
     $pdo->exec('ANALYZE');
@@ -7727,8 +7745,8 @@ function import_package(PDO $pdo, ?array $file): never
     // première recherche qui suit (200 000 fiches importées : 10 s d'attente dans la liste des personnes)
     if (function_exists('rfr_refresh')) { try { rfr_refresh($pdo, true); } catch (Throwable) {} }
     $undo = '';
-    try { $undo = import_receipt_save($pdo, 'tree', $receipt, ['label' => (string) $file['name']]); } catch (Throwable) {}
-    if (!empty($file['pending'])) { @unlink($file['tmp_name']); @unlink($file['tmp_name'] . '.json'); }
+    try { $undo = import_receipt_save($pdo, 'tree', $receipt, ['label' => (string) $file['name']], $ranges); } catch (Throwable) {}
+    if ($pendingPath !== '') { @unlink($file['tmp_name']); @unlink($pendingPath . '.json'); }
     try { log_change($pdo, 'meta', 0, 'create', 'Import de « ' . mb_substr((string) $file['name'], 0, 120) . ' » : ' . (int) ($stats['persons'] ?? $stats['personnes'] ?? 0) . ' personne(s)'); } catch (Throwable) {}
 
     json_response([
@@ -7757,18 +7775,35 @@ class GedNode extends stdClass
     public $children;
 }
 
-function gedimport_parse(string $text): array
+/**
+ * $info (facultatif) dit ce qui a été réparé ou laissé de côté : « joined » (ligne sans niveau, comme un retour à la ligne
+ * tapé dans une note : ajoutée au texte d'avant), « relevelled » (niveau qui saute, 1 → 3 : rattachée au niveau du
+ * dessus), « skipped » (ligne illisible).
+ */
+function gedimport_parse(string $text, ?array &$info = null): array
 {
     $root = [];
     $stack = [];
+    $info = ['joined' => 0, 'relevelled' => 0, 'skipped' => 0];
+    $last = null;
+    $textTags = ['NOTE' => 1, 'SNOTE' => 1, 'TEXT' => 1, 'CONT' => 1, 'CONC' => 1, 'PAGE' => 1, 'TITL' => 1, 'AUTH' => 1, 'PUBL' => 1];
     $tags = []; $vals = []; // une seule copie de chaque balise (NAME, DATE, PLAC…) et de chaque valeur courte
     // les lignes une à une (plus de tableau de toutes les lignes) : strtok rend les suites de caractères entre deux fins de
     // ligne (\r, \n), c'est-à-dire exactement les lignes non vides du découpage d'avant (les lignes vides étaient sautées)
     for ($raw = strtok($text, "\r\n"); $raw !== false; $raw = strtok("\r\n")) {
         // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
         if (trim($raw) === '') { continue; }
-        if (!preg_match('/^(\d+)\s(@[^@]+@\s)?([A-Za-z0-9_]+)\s?(.*)$/', $raw, $m)) { continue; }
+        // espaces avant le niveau, et plusieurs espaces entre niveau, identifiant et balise : tolérés (GEDCOM 5.5)
+        if (!preg_match('/^\s*(\d{1,3})\s+(@[^@\s][^@]*@\s+)?([A-Za-z0-9_]+)(?:\s(.*))?$/s', $raw, $m)) {
+            if ($last !== null && isset($textTags[$last->tag])) { $last->value .= "\n" . rtrim($raw); $info['joined']++; } else { $info['skipped']++; }
+            continue;
+        }
+        $m[4] ??= '';
         $level = (int) $m[1];
+        if ($level > 0 && !isset($stack[$level - 1])) {
+            if (!$stack) { $info['skipped']++; continue; } // avant tout enregistrement « 0 »
+            $level = count($stack); $info['relevelled']++;
+        }
         $node = new GedNode();
         $node->level = $level;
         $node->xref = $m[2] !== '' ? trim($m[2], "@ ") : null;
@@ -7786,6 +7821,7 @@ function gedimport_parse(string $text): array
         }
         $stack[$level] = $node;
         $stack = array_slice($stack, 0, $level + 1);
+        $last = $node;
     }
     return $root;
 }
@@ -8031,7 +8067,7 @@ function import_zip_package_into_db(PDO $pdo, string $zipPath): array
             foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmpDir, FilesystemIterator::SKIP_DOTS)) as $f) {
                 if ($f->isFile() && preg_match('/\.heredis$/i', $f->getFilename())) { $found = $f->getPath(); break; }
             }
-            return heredis_import_into_db($pdo, (string) $found);
+            return heredis_import_into_db($pdo, (string) $found, false); // archive reçue : médias pris dans l'archive seulement
         } finally {
             mft_delete_directory($tmpDir);
         }
@@ -8328,6 +8364,9 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
                 foreach ([[$original, $originalName], [$thumb, $thumbName]] as [$relative, $name]) {
                     if ($relative === '' || $name === '') { continue; }
                     $from = $resourcesDir ? rtrim($resourcesDir, '/') . '/' . ltrim($relative, '/') : '';
+                    // jamais un fichier pris hors du dossier « resources » du paquet (« ../../ », lien) : rien de l'ordinateur ne sort ainsi
+                    $real = $from !== '' ? realpath($from) : false; $root = $resourcesDir ? realpath($resourcesDir) : false;
+                    if ($real === false || $root === false || !str_starts_with($real, rtrim($root, '/\\') . DIRECTORY_SEPARATOR)) { $from = ''; }
                     $to = $mediaDir . '/' . $name;
                     if ($from !== '' && is_file($from) && !is_file($to)) { copy($from, $to); }
                     if ($relative === $original && !is_file($to)) { $mediaMissing++; }
@@ -8553,11 +8592,12 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
             'source_version' => 'MacFamilyTree (paquet uploadé)',
         ] as $key => $value) { $meta->execute([$key, $value]); }
 
-        $dst->exec("INSERT INTO saved_views(module,name,config_json,sort_order) VALUES
-            ('graph','Ascendants — 4 générations','{\"mode\":\"ancestors\",\"depth\":4}',10),
-            ('graph','Descendants — 3 générations','{\"mode\":\"descendants\",\"depth\":3}',20),
-            ('map','Naissances','{\"event\":\"BIRT\",\"display\":\"markers\"}',10),
-            ('map','Carte thermique','{\"event\":\"all\",\"display\":\"heat\"}',20)");
+        // vues de départ : une seule fois (un second paquet importé ne les ajoute pas de nouveau)
+        $addView = $dst->prepare('INSERT INTO saved_views(module,name,config_json,sort_order) SELECT ?,?,?,? WHERE NOT EXISTS (SELECT 1 FROM saved_views WHERE module=? AND name=?)');
+        foreach ([['graph', 'Ascendants — 4 générations', '{"mode":"ancestors","depth":4}', 10], ['graph', 'Descendants — 3 générations', '{"mode":"descendants","depth":3}', 20],
+                  ['map', 'Naissances', '{"event":"BIRT","display":"markers"}', 10], ['map', 'Carte thermique', '{"event":"all","display":"heat"}', 20]] as [$vm, $vn, $vc, $vo]) {
+            $addView->execute([$vm, $vn, $vc, $vo, $vm, $vn]);
+        }
 
         $dst->exec('PRAGMA foreign_keys = ON');
 
@@ -8574,6 +8614,12 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
             'media' => count($mediaMap),
             'media_missing' => $mediaMissing,
         ];
+    } catch (PDOException $e) {
+        // base du paquet abîmée ou d'un autre modèle (table ou colonne absente) : une phrase claire au lieu d'une « erreur de la base »
+        if (preg_match('/no such (table|column)|not a database|malformed|file is encrypted/i', $e->getMessage())) {
+            throw new RuntimeException('Ce paquet MacFamilyTree ne se lit pas (base abîmée, ou version de MacFamilyTree que l’app ne connaît pas). Dans MacFamilyTree, exporte-le en GEDCOM, puis importe le fichier .ged.');
+        }
+        throw $e;
     } finally {
         $src = null;
         if ($tmpDir !== null) { mft_delete_directory($tmpDir); }

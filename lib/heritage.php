@@ -1492,13 +1492,17 @@ function insee_prenoms_import(PDO $pdo, ?array $file): never
         if ($entry === null) { for ($i = 0; $i < $zip->numFiles; $i++) { $n = (string) $zip->getNameIndex($i); if (preg_match('/\.(csv|txt)$/i', $n)) { $entry = $n; break; } } }
         if ($entry === null) { json_response(['error' => 'Aucun fichier CSV dans ce ZIP.'], 422); }
         $tmpCsv = tempnam(sys_get_temp_dir(), 'prenoms');
-        file_put_contents($tmpCsv, $zip->getFromName($entry));
+        // borné : une « bombe zip » n'est jamais ouverte en entier (le fichier national fait environ 40 Mo)
+        $why = zip_entry_copy_bounded($zip, $entry, $tmpCsv, 1024 * 1048576);
         $zip->close();
+        if ($why !== '') { @unlink($tmpCsv); json_response(['error' => $why], 422); }
         $path = $tmpCsv;
     }
+    if (($conv = text_file_utf16_to_utf8($path)) !== '') { if ($tmpCsv) { @unlink($tmpCsv); } $tmpCsv = $conv; $path = $conv; } // « Texte Unicode » (UTF-16)
     $fh = fopen($path, 'rb');
     $first = (string) fgets($fh);
-    $first = preg_replace('/^\xEF\xBB\xBF/', '', $first);
+    $first = (string) preg_replace('/^\xEF\xBB\xBF/', '', $first);
+    if (!mb_check_encoding($first, 'UTF-8')) { $first = mb_convert_encoding($first, 'UTF-8', 'Windows-1252'); } // n'importe quel octet : jamais d'erreur interne
     $sep = substr_count($first, ';') >= substr_count($first, ',') ? ';' : ',';
     $cols = array_map(static fn($c) => strtolower(ascii_fold(trim($c, " \"\r\n"))), explode($sep, $first));
     $find = static function (array $names) use ($cols): ?int { foreach ($cols as $i => $c) { if (in_array($c, $names, true)) { return $i; } } return null; };

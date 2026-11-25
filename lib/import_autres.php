@@ -108,6 +108,11 @@ function rootsmagic_open(string $path): PDO
     foreach (['persontable', 'nametable', 'familytable', 'eventtable'] as $t) {
         if (!in_array($t, $tables, true)) { throw new RuntimeException('Ce fichier n’est pas une base RootsMagic : la table ' . $t . ' manque.'); }
     }
+    // les tables sont là, mais leurs colonnes aussi ? (une base quelconque aux mêmes noms de tables n'est pas lue)
+    foreach (['PersonTable' => 'personid', 'NameTable' => 'ownerid', 'FamilyTable' => 'familyid', 'EventTable' => 'ownerid'] as $t => $col) {
+        $cols = array_map(static fn($c) => strtolower((string) $c['name']), $pdo->query('PRAGMA table_info("' . $t . '")')->fetchAll());
+        if (!in_array($col, $cols, true)) { throw new RuntimeException('Ce fichier n’est pas une base RootsMagic lisible : la table ' . $t . ' n’a pas ses colonnes habituelles.'); }
+    }
     return $pdo;
 }
 

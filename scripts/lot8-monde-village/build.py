@@ -54,7 +54,7 @@ def save(name, obj):
     print(f'{name}: {len(obj.get("rows", []))} lignes, {os.path.getsize(p)} octets')
 def table(fields, rows): return {'fields': fields, 'rows': [[r.get(k) for k in fields] for r in rows]}
 def wpapi(params):
-    return json.loads(wm.get('https://fr.wikipedia.org/w/api.php?' + urllib.parse.urlencode({**params, 'format': 'json', 'formatversion': '2'}), gap=1.0))
+    return json.loads(wm.get('https://fr.wikipedia.org/w/api.php?' + urllib.parse.urlencode({**params, 'format': 'json', 'formatversion': '2'}), gap=float(os.environ.get('L8C_WP_GAP', '3'))))
 
 # pays (lieux des premières) : on garde l'Europe, l'Amérique du Nord (Metropolitan Opera…) étant hors sujet pour la vie d'un ancêtre
 EUROPE = {'Q142': 'France', 'Q38': 'Italie', 'Q183': 'Allemagne', 'Q40': 'Autriche', 'Q145': 'Royaume-Uni', 'Q29': 'Espagne', 'Q31': 'Belgique',
@@ -239,7 +239,8 @@ def build_seigneurs():
 
 def build_eglises():
     # l'église de la commune (Q24398318 : édifice religieux et sous-classes) : détruite (P5816) ou avec une date de fin (P576)
-    q1 = 'SELECT DISTINCT ?x WHERE { ?x wdt:P17 wd:Q142 ; wdt:P5816 ?st . VALUES ?st { wd:Q56556915 wd:Q60539160 } ?x wdt:P31/wdt:P279* wd:Q24398318 . }'
+    # (sans P279* : trop lourd pour le service ; la sorte est vérifiée plus bas, d'après le libellé de la classe)
+    q1 = 'SELECT DISTINCT ?x WHERE { VALUES ?st { wd:Q56556915 wd:Q60539160 } ?x wdt:P5816 ?st ; wdt:P17 wd:Q142 . }'
     q2 = '''SELECT DISTINCT ?x WHERE { VALUES ?k0 { wd:Q16970 wd:Q108325 wd:Q160742 wd:Q2750108 wd:Q44613 wd:Q2977 wd:Q1088552 wd:Q317557 wd:Q120560 wd:Q56242215 wd:Q1129743 wd:Q34627 wd:Q15823129 wd:Q1370598 }
     ?x wdt:P31 ?k0 ; wdt:P17 wd:Q142 ; wdt:P576 ?end0 . }'''
     ids = sorted({qid(r['x']) for r in sparql(q1, 'egl1') + sparql(q2, 'egl2')}, key=lambda s: int(s[1:]))
@@ -270,7 +271,8 @@ def build_eglises():
         s = ' '.join(ks).lower()
         for w, v in [('cathédrale', 'cathédrale'), ('basilique', 'basilique'), ('collégiale', 'collégiale'), ('abbaye', 'abbaye'), ('prieuré', 'prieuré'),
                      ('couvent', 'couvent'), ('monastère', 'monastère'), ('commanderie', 'commanderie'), ('chapelle', 'chapelle'), ('synagogue', 'synagogue'),
-                     ('temple', 'temple'), ('mosquée', 'mosquée'), ('église', 'église'), ('croix', 'croix'), ('calvaire', 'calvaire')]:
+                     ('temple', 'temple'), ('mosquée', 'mosquée'), ('église', 'église'), ('sanctuaire', 'chapelle'), ('ermitage', 'chapelle'), ('oratoire', 'chapelle'),
+                     ('croix', 'croix'), ('calvaire', 'calvaire')]:
             if w in s: return v
         return 'édifice religieux'
     out = []
@@ -279,7 +281,7 @@ def build_eglises():
         la, lo = point(x.pop('coord'))
         st = 'detruit' if 'Q56556915' in x['st'] else 'partiel' if 'Q60539160' in x['st'] else 'fin'
         k = kind(x.pop('kinds'))
-        if k in ('croix', 'calvaire'): continue
+        if k in ('croix', 'calvaire', 'édifice religieux'): continue
         out.append({**x, 'k': k, 'st': st, 'commune': C[x['ins']][0], 'lat': la, 'lon': lo, 'exact': 1 if la is not None else 0,
                     **({'lat': C[x['ins']][1], 'lon': C[x['ins']][2]} if la is None else {})})
     out.sort(key=lambda r: (r['ins'], r['y1'] or 0))
@@ -378,23 +380,23 @@ EXPOS = [
     ('Exposition universelle de 1900', 1900, 1900, 'Paris', '75056', 'universelle', r'trottoir roulant|Grand Palais|Petit Palais|métro|pont Alexandre'),
     ('Exposition internationale des arts décoratifs et industriels modernes', 1925, 1925, 'Paris', '75056', 'internationale', r'Art déco|arts décoratifs|pavillon'),
     ('Exposition coloniale internationale', 1931, 1931, 'Paris', '75056', 'coloniale', r'bois de Vincennes|Angkor|zoo|pavillon|colonies'),
-    ('Exposition spécialisée de 1937', 1937, 1937, 'Paris', '75056', 'internationale', r'Guernica|palais de Chaillot|pavillon|Trocadéro'),
-    ('Exposition universelle, internationale et coloniale de Lyon (1894)', 1894, 1894, 'Lyon', '69123', 'universelle', r'parc de la Tête-d.Or|Sadi Carnot|dôme|coloniale'),
-    ('Exposition internationale urbaine de Lyon', 1914, 1914, 'Lyon', '69123', 'internationale', r'Tony Garnier|Gerland|halle|guerre'),
-    ('Exposition universelle de Bordeaux de 1895', 1895, 1895, 'Bordeaux', '33063', 'universelle', r'Quinconces|pavillon|vin'),
-    ('Exposition maritime internationale de Bordeaux', 1907, 1907, 'Bordeaux', '33063', 'internationale', r'Quinconces|maritime|pavillon'),
+    ('Exposition universelle internationale de Lyon de 1872', 1872, 1872, 'Lyon', '69123', 'universelle', r'parc de la Tête-d.Or|pavillon|soie'),
+    ('Exposition universelle, internationale et coloniale de Lyon', 1894, 1894, 'Lyon', '69123', 'universelle', r'parc de la Tête-d.Or|Sadi Carnot|dôme|coloniale'),
+    ('Exposition internationale de Nice', 1884, 1884, 'Nice', '06088', 'internationale', r'pavillon|palais|Nice'),
+    ('Exposition internationale urbaine de Lyon de 1914', 1914, 1914, 'Lyon', '69123', 'internationale', r'Tony Garnier|Gerland|halle|guerre'),
+    ('Exposition maritime internationale de 1907', 1907, 1907, 'Bordeaux', '33063', 'internationale', r'Quinconces|maritime|pavillon'),
     ('Exposition coloniale de Marseille (1906)', 1906, 1906, 'Marseille', '13055', 'coloniale', r'parc|pavillon|colonies'),
     ('Exposition coloniale de Marseille (1922)', 1922, 1922, 'Marseille', '13055', 'coloniale', r'parc Chanot|pavillon|Angkor|colonies'),
-    ('Exposition internationale du Nord de la France', 1911, 1911, 'Roubaix', '59512', 'internationale', r'parc Barbieux|pavillon|textile'),
-    ('Exposition internationale de l\'Est de la France', 1909, 1909, 'Nancy', '54395', 'internationale', r'parc Sainte-Marie|École de Nancy|pavillon'),
+    ('Exposition internationale du Nord de la France de 1911', 1911, 1911, 'Roubaix', '59512', 'internationale', r'parc Barbieux|pavillon|textile'),
+    ('Exposition internationale de l\'Est de la France de 1909', 1909, 1909, 'Nancy', '54395', 'internationale', r'parc Sainte-Marie|École de Nancy|pavillon'),
     ('Exposition universelle de 1937', 1937, 1937, 'Paris', '75056', 'internationale', r'Guernica|palais de Chaillot|pavillon'),
     ('Exposition universelle de Lille (1902)', 1902, 1902, 'Lille', '59350', 'universelle', r'pavillon|Lille'),
-    ('Exposition internationale de la houille blanche et du tourisme', 1925, 1925, 'Grenoble', '38185', 'internationale', r'houille blanche|tour Perret|parc'),
+    ('Exposition internationale de la houille blanche de 1925', 1925, 1925, 'Grenoble', '38185', 'internationale', r'houille blanche|tour Perret|parc'),
     ('Exposition internationale de Rouen', 1896, 1896, 'Rouen', '76540', 'internationale', r'pavillon|Rouen'),
     ('Exposition nationale et coloniale de Rouen', 1896, 1896, 'Rouen', '76540', 'coloniale', r'pavillon|colonies'),
-    ('Exposition universelle d\'Anvers (1885)', 1885, 1885, 'Anvers', '', 'universelle', r'pavillon'),
-    ('Exposition universelle de 1910', 1910, 1910, 'Bruxelles', '', 'universelle', r'incendie|pavillon'),
-    ('Exposition universelle de 1958', 1958, 1958, 'Bruxelles', '', 'universelle', r'Atomium'),
+    ('Exposition universelle de 1885', 1885, 1885, 'Anvers', '', 'universelle', r'pavillon'),
+    ('Exposition universelle de Bruxelles de 1910', 1910, 1910, 'Bruxelles', '', 'universelle', r'incendie|pavillon'),
+    ('Exposition universelle de Bruxelles de 1958', 1958, 1958, 'Bruxelles', '', 'universelle', r'Atomium'),
     ('Exposition universelle de 1851', 1851, 1851, 'Londres', '', 'universelle', r'Crystal Palace'),
 ]
 
@@ -485,11 +487,17 @@ def build_dates():
                 y = int(d[:4])
                 # le jour doit tomber l'année que dit la liste (début, fin, ou l'année même) : sinon ce n'est pas le même événement
                 if what == 'fin' and y == (e.get('to') or e['from']) or what != 'fin' and y == e['from']: cand.append((p, what, d))
+        # un événement qui a un début ou une fin : on garde ceux-là (le « jour » d'un tel élément est souvent une autre date)
+        if any(w != 'jour' for _, w, _ in cand): cand = [c for c in cand if c[1] != 'jour']
         seenw = set()
         for p, what, d in cand:
             if what in seenw: continue
             seenw.add(what)
             rows.append({'id': e['id'], 'd': d, 'w': what, 'p': p, 'q': q, 'page': page})
+        # « (le début) » / « (la fin) » n'a de sens que pour une période qui a les deux
+        if not ({'debut', 'fin'} <= seenw):
+            for r in rows:
+                if r['id'] == e['id']: r['w'] = 'jour'
     rows.sort(key=lambda r: r['d'])
     save('dates', {**WD, 'source': 'Wikidata ; Wikipédia (fr)', 'what': 'Le jour exact des événements de « Le monde autour » (assets/data/monde-autour.json) : article de Wikipédia → élément Wikidata → date à la précision du jour (P585 date, P580 début, P582 fin, P571 création, P1619 ouverture). Calendrier grégorien seulement.',
                    'props': {'P585': 'date', 'P580': 'date de début', 'P582': 'date de fin', 'P571': 'date de création', 'P1619': 'date d’ouverture', 'P577': 'date de publication', 'P5444': 'date de signature'},

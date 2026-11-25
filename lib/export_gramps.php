@@ -152,6 +152,9 @@ function export_gramps(PDO $pdo, ?array &$capture = null): void
         foreach (array_keys($d['children'][$fid] ?? []) as $c) { $childOf[$c][] = $fid; }
     }
     $w->startElement('people');
+    // personne de départ (Sosa 1) : la « personne de référence » de Gramps, relue à l'import
+    $homeId = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn();
+    if ($homeId && isset($d['persons'][$homeId])) { $w->writeAttribute('home', '_I' . $homeId); }
     foreach ($d['persons'] as $pid => $p) {
         $w->startElement('person');
         foreach ($obj('_I' . $pid, 'I' . $pid, isset($d['hidden'][$pid]) ? ['priv' => '1'] : []) as $k => $v) { $w->writeAttribute($k, $v); }

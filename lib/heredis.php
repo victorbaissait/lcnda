@@ -70,9 +70,15 @@ function is_heredis_path(string $path): bool
     return $ext === 'heredis';
 }
 
-function heredis_import_into_db(PDO $pdo, string $path): array
+/**
+ * $trusted : le fichier a été choisi sur l'ordinateur (application de bureau). Sinon (fichier envoyé, archive reçue), un
+ * média n'est pris que dans le dossier « Media » du paquet : jamais par son chemin d'origine (FilePath), qui pourrait
+ * désigner n'importe quel fichier de l'ordinateur.
+ */
+function heredis_import_into_db(PDO $pdo, string $path, bool $trusted = true): array
 {
     [$dbFile, $packageDir] = heredis_locate($path);
+    if (!$trusted && is_file($path)) { $packageDir = null; } // un .heredis seul, envoyé : pas de dossier « Media » à côté
     try {
         $src = new PDO('sqlite:file:' . rawurlencode($dbFile) . '?mode=ro&immutable=1', null, null,
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
@@ -84,7 +90,9 @@ function heredis_import_into_db(PDO $pdo, string $path): array
         if (!in_array($t, $tables, true)) { throw new RuntimeException('Fichier Hérédis non reconnu (table « ' . $t . ' » absente). Les fichiers Hérédis antérieurs à 2019 doivent être exportés en GEDCOM.'); }
     }
     $has = static fn(string $t): bool => in_array($t, $tables, true);
-    $rows = static fn(string $sql): array => $src->query($sql)->fetchAll();
+    // une table d'Hérédis sans ses colonnes (fichier abîmé, autre base aux mêmes noms de tables) : une phrase claire, rien n'entre
+    $unreadable = 'Ce fichier Hérédis ne se lit pas (fichier abîmé, ou version d’Hérédis que l’app ne connaît pas). Dans Hérédis, exporte-le en GEDCOM, puis importe le fichier .ged.';
+    $rows = static function (string $sql) use ($src, $unreadable): array { try { return $src->query($sql)->fetchAll(); } catch (PDOException) { throw new RuntimeException($unreadable); } };
     $txt = static fn($v): string => trim((string) ($v ?? ''));
 
     $stats = ['format' => 'heredis', 'persons' => 0, 'families' => 0, 'events' => 0, 'notes' => 0, 'sources' => 0,
@@ -167,8 +175,9 @@ function heredis_import_into_db(PDO $pdo, string $path): array
     }
     // Personne de départ (de cujus)
     if ($has('NumerosSosa')) {
-        $deCujus = (int) ($src->query('SELECT XrefDeCujus FROM NumerosSosa LIMIT 1')->fetchColumn() ?: 0);
-        if (isset($personMap[$deCujus])) { $pdo->prepare('UPDATE persons SET is_start=CASE WHEN id=? THEN 1 ELSE 0 END')->execute([$personMap[$deCujus]]); }
+        try { $deCujus = (int) ($src->query('SELECT XrefDeCujus FROM NumerosSosa LIMIT 1')->fetchColumn() ?: 0); } catch (PDOException) { $deCujus = 0; }
+        // seulement si la généalogie n'a pas déjà sa personne de départ : un arbre importé à côté ne la change jamais (et « ↶ Annuler » ne la rendrait pas)
+        if (isset($personMap[$deCujus])) { $pdo->prepare('UPDATE persons SET is_start=1 WHERE id=? AND NOT EXISTS (SELECT 1 FROM persons WHERE is_start=1)')->execute([$personMap[$deCujus]]); }
     }
 
     // Unions et enfants
@@ -303,9 +312,9 @@ function heredis_import_into_db(PDO $pdo, string $path): array
         if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
         $insertMedia = $pdo->prepare('INSERT INTO media(title,description,media_type,filename,thumbnail,date_text) VALUES(?,?,?,?,?,?)');
         foreach ($rows('SELECT * FROM Medias') as $m) {
-            $candidates = heredis_list_dir($packageDir . '/Media/#' . (int) $m['CodeID']);
-            $candidates = array_values(array_filter($candidates, 'is_file'));
-            $from = $candidates[0] ?? (is_file((string) $m['FilePath']) ? (string) $m['FilePath'] : null);
+            $candidates = $packageDir !== null ? heredis_list_dir($packageDir . '/Media/#' . (int) $m['CodeID']) : [];
+            $candidates = array_values(array_filter($candidates, static fn($f) => is_file($f) && !is_link($f)));
+            $from = $candidates[0] ?? ($trusted && is_file((string) $m['FilePath']) ? (string) $m['FilePath'] : null);
             $name = $txt($m['FileName']) ?: basename((string) $m['FilePath']);
             $ext = strtolower(pathinfo($from ?? $name, PATHINFO_EXTENSION));
             $stored = '';

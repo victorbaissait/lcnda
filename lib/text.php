@@ -171,3 +171,18 @@ function fold_like_args(string $word): array
     [$raw, $fold, $loose] = fold_like_params($word);
     return [$raw, $fold, $loose, $fold];
 }
+
+/**
+ * Un fichier texte reçu en UTF-16 (marque FF FE ou FE FF au début : « Texte Unicode » d'Excel, Bloc-notes de Windows) :
+ * copié en UTF-8 dans un fichier temporaire, dont le chemin est renvoyé (à effacer ensuite). Sinon '' (fichier lu tel quel).
+ */
+function text_file_utf16_to_utf8(string $path): string
+{
+    $h = @fopen($path, 'rb'); $bom = $h ? (string) fread($h, 2) : ''; if ($h) { fclose($h); }
+    if ($bom !== "\xFF\xFE" && $bom !== "\xFE\xFF") { return ''; }
+    $raw = (string) @file_get_contents($path);
+    $utf8 = (string) @mb_convert_encoding(substr($raw, 2), 'UTF-8', $bom === "\xFF\xFE" ? 'UTF-16LE' : 'UTF-16BE');
+    $out = tempnam(sys_get_temp_dir(), 'utf8-');
+    if ($out === false || file_put_contents($out, $utf8) === false) { return ''; }
+    return $out;
+}

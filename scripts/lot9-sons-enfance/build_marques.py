@@ -18,7 +18,7 @@ ITEMS = [
     ['Amora', 'Amora', 'aliment'], ['Maille', 'Maille (entreprise)', 'aliment'], ['Bonduelle', 'Bonduelle', 'aliment'], ['Viandox', 'Viandox', 'aliment'],
     ['Babybel', 'Babybel', 'aliment'], ['Boursin', 'Boursin', 'aliment'], ['Carambar', 'Carambar', 'aliment'], ['Malabar', 'Malabar (confiserie)', 'aliment'],
     ['La Pie qui chante', 'La Pie qui chante', 'aliment'], ['Blédina', 'Blédina', 'aliment'], ['Phosphatine', 'Phosphatine', 'aliment'], ['Benenuts', 'Bénénuts', 'aliment'],
-    ['Pernod', 'Pernod (entreprise)', 'boisson'], ['Ricard', 'Ricard (entreprise)', 'boisson'], ['Dubonnet', 'Dubonnet', 'boisson'], ['Byrrh', 'Byrrh', 'boisson'],
+    ['Pernod', 'Pernod (entreprise)', 'boisson'], ['Ricard', 'Ricard (entreprise)', 'boisson'], ['Byrrh', 'Byrrh', 'boisson'],
     ['Suze', 'Suze (apéritif)', 'boisson'], ['Lillet', 'Lillet', 'boisson'], ['Picon', 'Picon (boisson)', 'boisson'], ['Saint-Raphaël', 'Saint-Raphaël (apéritif)', 'boisson'],
     ['Perrier', 'Perrier (eau)', 'boisson'], ['Évian', 'Évian (eau minérale)', 'boisson'], ['Vittel', 'Vittel (eau minérale)', 'boisson'], ['Badoit', 'Badoit', 'boisson'],
     ['Orangina', 'Orangina', 'boisson'], ['Pschitt', 'Pschitt', 'boisson'], ['Ricqlès', 'Ricqlès', 'boisson'], ['Kronenbourg', 'Kronenbourg', 'boisson'],
@@ -85,8 +85,16 @@ for name, title, kind in ITEMS:
     w = wp(title)
     if not w or not w['q']: skipped.append([name, 'pas d’article Wikipédia (%s)' % title]); continue
     ent = list(jget(f'https://www.wikidata.org/wiki/Special:EntityData/{w["q"]}.json')['entities'].values())[0]
-    y, pr = claim_year(ent, ['P571', 'P577', 'P2754', 'P729', 'P580', 'P1619'])
-    if not y: skipped.append([name, 'pas d’année dans Wikidata (%s)' % w['q']]); continue
+    veh = kind in ('voiture', 'deux-roues')
+    y, pr = claim_year(ent, ['P571', 'P577', 'P2754', 'P729', 'P1619'] + (['P580'] if veh else []))
+    sent = sentence(w['text'], y) if y else ''
+    if not sent and not (y and veh and pr in ('P2754', 'P729', 'P580')):
+        # l'année doit être confirmée par la phrase de Wikipédia ; sinon la phrase de l'introduction qui dit la naissance
+        m = None
+        for st in re.split(r'(?<=[.!?])\s+', w['text'].replace('\n', ' ')):
+            m = re.search(r'(fond|cré|lanc|commercialis|produit|fabriqu|sorti|présent|apparu|inventé|déposé)\w*\s+(?:\S+\s+){0,3}?(?:en |de |depuis |dès |entre |le |à partir de )(?:\d{1,2}(?:er)? )?(?:janvier |février |mars |avril |mai |juin |juillet |août |septembre |octobre |novembre |décembre )?(1[89]\d\d)\b', st, re.I)
+            if m: sent = st.strip()[:400]; y, pr = int(m.group(2)), 'wikipedia'; break
+        if not m: skipped.append([name, 'année non confirmée par Wikipédia (%s)' % w['q']]); continue
     img = None
     for pp in ('P18', 'P154'):
         cl = ent.get('claims', {}).get(pp, [])
@@ -96,7 +104,7 @@ for name, title, kind in ITEMS:
                 if FREE.search(m['lic'] or '') and m['thumb']: img = m; break
             except Exception as e: print('! image', name, e)
     lab = (ent.get('labels', {}).get('fr') or {}).get('value') or name
-    r = {'n': lab, 'k': kind, 'y': y, 'p': pr, 'q': w['q'], 'wp': 'https://fr.wikipedia.org/wiki/' + urllib.parse.quote(w['title'].replace(' ', '_')), 'sentence': sentence(w['text'], y)}
+    r = {'n': lab, 'k': kind, 'y': y, 'p': pr, 'q': w['q'], 'wp': 'https://fr.wikipedia.org/wiki/' + urllib.parse.quote(w['title'].replace(' ', '_')), 'sentence': sent}
     if img: r['img'] = img
     rows.append(r)
     print(y, pr, lab, kind, 'img' if img else '-', '|', r['sentence'][:70])

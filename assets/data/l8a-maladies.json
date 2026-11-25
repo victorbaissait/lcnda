@@ -1,0 +1,109 @@
+{
+"title": "Les maladies de certains métiers",
+"version": 1,
+"checked": "2026-11-25",
+"licence": "CC BY-SA 4.0 (citations de Wikipédia)",
+"licence_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
+"source": "Wikipédia en français (une phrase exacte par maladie)",
+"url": "https://fr.wikipedia.org/wiki/Maladie_professionnelle",
+"note": "Risques connus de certains métiers, d’après l’article cité ; jobs = les métiers concernés (sans accents). Ce n’est jamais un diagnostic.",
+"skipped": {},
+"rows": [
+{
+"id": "phosphore",
+"disease": "Nécrose phosphorée de la mâchoire",
+"trades": "allumettiers",
+"jobs": "allumett",
+"from": 1800,
+"to": 1910,
+"what": "les ouvriers respiraient les vapeurs du phosphore blanc des allumettes, qui pouvaient abîmer la mâchoire ; on l’a interdit au début du XXe siècle.",
+"quote": "La cause de la maladie était une exposition prolongée à la vapeur de phosphore blanc (parfois aussi appelé phosphore jaune), historiquement utilisé dans la fabrication d'allumettes.",
+"title": "Wikipédia — Phosphonécrose",
+"url": "https://fr.wikipedia.org/wiki/Phosphon%C3%A9crose"
+},
+{
+"id": "silicose",
+"disease": "Silicose",
+"trades": "mineurs, carriers, tailleurs de pierre, porcelainiers",
+"jobs": "mineur|houilleur|carrier|tailleur de pierre|perreyeur|ardoisier|porcelain|sableur|piqueur|tunnel|marbrier|granit",
+"from": 1800,
+"to": 2000,
+"what": "la poussière de pierre (la silice) était connue pour user les poumons : c’est la silicose.",
+"quote": "La silicose est une maladie pulmonaire provoquée par l'inhalation de particules de poussières de silice (silice cristalline) dans les mines, les carrières, les percements de tunnel ou les chantiers du bâtiment et des travaux publics (sablage, grenaillage, cassage, meulage ou sciage de bétons, mortiers, taille ou découpe de pierres siliceuses, brique.",
+"title": "Wikipédia — Silicose",
+"url": "https://fr.wikipedia.org/wiki/Silicose"
+},
+{
+"id": "ceruse",
+"disease": "Saturnisme (plomb de la céruse)",
+"trades": "peintres en bâtiment, fabricants de céruse",
+"jobs": "peintre|badigeon|ceruse|vitrier|plombier",
+"from": 1800,
+"to": 1950,
+"what": "la céruse, une peinture blanche au plomb, était connue pour empoisonner peu à peu ceux qui la fabriquaient et ceux qui l’appliquaient.",
+"quote": "Sa teneur en plomb la rendait en effet toxique tant pour les ouvriers qui la fabriquaient, problème dénoncé au moins depuis le XIXe siècle et pour les peintres qui l'appliquaient, que pour les enfants qui sont en contact avec les poussières ou écailles issues de cette peinture toxique.",
+"title": "Wikipédia — Céruse",
+"url": "https://fr.wikipedia.org/wiki/C%C3%A9ruse"
+},
+{
+"id": "ankylostome",
+"disease": "Ankylostomose (« anémie des mineurs »)",
+"trades": "mineurs, ouvriers des tunnels, briquetiers",
+"jobs": "mineur|houilleur|briquetier|tuilier|terrassier|tunnel",
+"from": 1850,
+"to": 1950,
+"what": "un petit ver des galeries humides donnait à certains l’« anémie des mineurs », qu’on appelait aussi anémie des tunnels ou des briquetiers.",
+"quote": "L'ankylostomiase, ou ankylostomose est également appelée helminthiase, anémie des mineurs, anémie des tunnels, anémie des briquetiers, chlorose égyptienne, en Allemagne Wurmkrankheit, et aux États-Unis Wakana disease.",
+"title": "Wikipédia — Ankylostomose",
+"url": "https://fr.wikipedia.org/wiki/Ankylostomose"
+},
+{
+"id": "charbon",
+"disease": "Maladie du charbon",
+"trades": "ouvriers de la laine, tanneurs, perruquiers, équarrisseurs",
+"jobs": "lain|cardeu|peigneu|trieu?r de laine|tanneu?r|megissi|corroyeu|perruqu|equarriss|chamoise|pelletier",
+"from": 1700,
+"to": 1950,
+"what": "on travaillait des laines, des peaux ou des crins qui pouvaient porter la maladie du charbon.",
+"quote": "Au XVIIIe siècle, la maladie fait des ravages, entre autres, chez les ouvriers de la laine et les artisans perruquiers qui travaillent des produits animaux importés (peaux et crins).",
+"title": "Wikipédia — Maladie du charbon",
+"url": "https://fr.wikipedia.org/wiki/Maladie_du_charbon"
+},
+{
+"id": "farine",
+"disease": "Asthme du boulanger (farine)",
+"trades": "boulangers, pâtissiers",
+"jobs": "boulang|patissi|fournier|mitron|meunier",
+"from": 1700,
+"to": 2100,
+"what": "la poussière de farine donne de l’asthme à certains : aujourd’hui encore, les boulangeries sont parmi les métiers les plus touchés.",
+"quote": "Par exemple, en France, les industries les plus touchées sont, par ordre d'importance, les boulangeries et les pâtisseries, l'industrie automobile et les coiffeurs.",
+"title": "Wikipédia — Asthme professionnel",
+"url": "https://fr.wikipedia.org/wiki/Asthme_professionnel"
+},
+{
+"id": "mercure",
+"disease": "Intoxication au mercure (chapeliers)",
+"trades": "chapeliers, feutriers",
+"jobs": "chapeli|feutri",
+"from": 1700,
+"to": 1950,
+"what": "on traitait les feutres des chapeaux avec du mercure, connu pour empoisonner peu à peu ceux qui le respiraient.",
+"quote": "Des solutions de nitrate de mercure ont servi à préserver et traiter les peaux et feutres en vue de la fabrication de chapeaux.",
+"title": "Wikipédia — Intoxication au mercure",
+"url": "https://fr.wikipedia.org/wiki/Intoxication_au_mercure"
+},
+{
+"id": "plomb",
+"disease": "Saturnisme (plomb)",
+"trades": "fondeurs de plomb, verriers des vitraux, potiers d’étain",
+"jobs": "fondeur de plomb|plombier|vitrail|vitrier|verrier|potier d.etain|etameu?r|mineur de plomb",
+"from": 1700,
+"to": 1950,
+"what": "le plomb, manié tous les jours, était connu pour empoisonner peu à peu ceux qui le travaillaient : c’est le saturnisme, décrit par un médecin en 1839.",
+"quote": "En 1839, Tanquerel des Planches fait une première description clinique précise du saturnisme aigu, ce qui n'empêchera pas cette maladie de continuer à sévir, principalement chez des mineurs et ouvriers de la métallurgie du plomb, chez les utilisateurs de vaisselle de plomb ou de mauvais étain, les ouvriers sertissant au plomb les vitraux ou utilisant la céruse de plomb.",
+"title": "Wikipédia — Saturnisme",
+"url": "https://fr.wikipedia.org/wiki/Saturnisme"
+}
+]
+}

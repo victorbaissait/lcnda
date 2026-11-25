@@ -9,6 +9,7 @@ declare(strict_types=1);
  *     world_reference() : GeoNames, CC BY 4.0, https://www.geonames.org) : les lieux habités (codes PPL…) portant
  *     exactement le même nom, dans un autre pays que la commune. Rien ne part sur Internet.
  *       GET l8a_homonyms&name=Tulle&country=France&lat=&lon=  → {ok, items: [{name, state, country, cc, lat, lon, population, url}], total}
+ *       GET l8a_homonyms_base → {ok, rows} : les homonymes de tous les lieux de la base (pour Listes → Données)
  *  2. 🗺️ Les vieux plans de sa ville — Wikimedia Commons, EN LIGNE à la demande puis gardé sur l'ordinateur (le même cache et les
  *     mêmes outils que « Autour du village », lib/commune_plus.php) : dans la catégorie Commons de la commune (Wikidata P373),
  *     les sous-catégories de cartes et plans (« Old maps of … », « Maps of … », « Plans of … », « Cadastral maps of … »…) ;
@@ -54,6 +55,25 @@ function l8a_homonyms(array $q): array
     }
     return ['ok' => true, 'name' => $name, 'own' => $own, 'total' => count($items), 'items' => array_slice($items, 0, 60),
         'source' => ['label' => 'GeoNames', 'licence' => 'CC BY 4.0', 'url' => 'https://www.geonames.org/']];
+}
+
+/** 🌍 pour la liste (Listes → Données) : les lieux de la base qui ont un homonyme dans un autre pays */
+function l8a_homonyms_base(PDO $pdo): array
+{
+    $world = world_reference();
+    if (!$world) { return ['ok' => false, 'unavailable' => true, 'rows' => [], 'message' => 'Le répertoire des villes du monde n’est pas prêt sur cet ordinateur : réessaie dans une minute.']; }
+    $rows = []; $seen = [];
+    $places = $pdo->query("SELECT id, name, country, latitude, longitude FROM places WHERE TRIM(COALESCE(name,'')) <> '' ORDER BY id LIMIT 3000")->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($places as $p) {
+        $name = trim((string) preg_replace('/\s*\(.*$|,.*$/u', '', (string) $p['name']));
+        $k = world_search_key($name) . '|' . mb_strtolower((string) $p['country']);
+        if ($name === '' || isset($seen[$k])) { continue; }
+        $seen[$k] = true;
+        $r = l8a_homonyms(['name' => $name, 'country' => (string) $p['country'], 'lat' => $p['latitude'], 'lon' => $p['longitude']]);
+        foreach (array_slice($r['items'] ?? [], 0, 10) as $it) { $rows[] = ['commune' => $name, 'place_id' => (int) $p['id']] + $it; }
+        if (count($rows) > 5000) { break; }
+    }
+    return ['ok' => true, 'rows' => $rows, 'source' => ['label' => 'GeoNames', 'licence' => 'CC BY 4.0', 'url' => 'https://www.geonames.org/']];
 }
 
 function l8a_km(float $a, float $b, float $c, float $d): float
@@ -128,6 +148,7 @@ function l8a_api_get(PDO $pdo, string $action, array $q): array
 {
     return match ($action) {
         'l8a_homonyms' => l8a_homonyms($q),
+        'l8a_homonyms_base' => l8a_homonyms_base($pdo),
         'l8a_maps' => l8a_maps($pdo, $q),
         default => throw new LcndaBadInput('Action inconnue.'),
     };

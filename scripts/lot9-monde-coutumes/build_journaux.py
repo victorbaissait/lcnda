@@ -16,7 +16,7 @@ Q = '''SELECT ?s ?t ?pl ?fy ?ly ?fr ?er WHERE {
   OPTIONAL { ?s <http://data.bnf.fr/ontology/bnf-onto/firstYear> ?fy }
   OPTIONAL { ?s <http://data.bnf.fr/ontology/bnf-onto/lastYear> ?ly }
   OPTIONAL { ?s <http://rdvocab.info/Elements/frequency> ?fr }
-  OPTIONAL { ?s <http://rdvocab.info/Elements/electronicReproduction> ?er }
+  OPTIONAL { ?s <http://rdvocab.info/RDARelationshipsWEMI/electronicReproduction> ?er }
 } LIMIT 10000'''
 
 def part(prefix):
@@ -58,11 +58,23 @@ byname = {}
 for insee, v in cc.items():
     byname.setdefault(fold(v[0]), []).append(insee)
 # les anciens noms courants (« Saint-Malo » etc. sont déjà là) ; on retire la précision entre parenthèses ou après une virgule
+# les noms anciens ou courts des villes de presse (nom écrit par la BnF → nom de la commune aujourd'hui)
+ALIAS = {'cette': 'sete', 'alais': 'ales', 'havre': 'le havre', 'nizza': 'nice', 'marsiglia': 'marseille', 'chalons sur marne': 'chalons en champagne', 'saint servan': 'saint malo',
+         'malo les bains': 'dunkerque', 'flers de l orne': 'flers', 'verdun sur meuse': 'verdun', 'cosne': 'cosne cours sur loire', 'bourg': 'bourg en bresse', 'lons le saunier': 'lons le saunier'}
+prefix = {}
+for k, v in byname.items():
+    parts = k.split(' ')
+    for n in range(1, len(parts)):
+        prefix.setdefault(' '.join(parts[:n]), set()).update(v)
 nomatch = 0
 for r in rows.values():
     p = r.get('p', '')
-    base = re.split(r'[\[(,;:]| et ', p)[0].strip() if p else ''
-    ins = byname.get(fold(base), []) if base else []
+    base = re.sub(r'^\[?\s*(a|à)\s+', '', p.strip('[] ').strip(), flags=re.I) if p else ''
+    base = re.split(r'[\[\](,;:]| et ', base)[0].strip()
+    fb = ALIAS.get(fold(base), fold(base))
+    ins = byname.get(fb, []) if base else []
+    if not ins and base and len(prefix.get(fb, ())) == 1:
+        ins = sorted(prefix[fb])
     if not ins and base:
         ins = byname.get(fold(re.sub(r'^(le|la|les|l)\s+', '', fold(base))), [])
     if ins:

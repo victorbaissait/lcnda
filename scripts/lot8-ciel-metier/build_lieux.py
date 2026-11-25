@@ -69,13 +69,17 @@ def main(csv_path=None):
         OPTIONAL { ?i wdt:P17 ?cn } OPTIONAL { ?i wdt:P131 ?com . ?com rdfs:label ?coml FILTER(lang(?coml)="fr") }
         OPTIONAL { ?i wdt:P571 ?inc } OPTIONAL { ?wp schema:about ?i ; schema:isPartOf <https://fr.wikipedia.org/> } }''')
     print('jardins remarquables', len(jr))
-    cn = ' '.join('wd:' + q for q in COUNTRIES)
-    hist = rows_of(f'''SELECT ?i ?lab ?en ?co ?cn ?coml ?inc ?wp ?k WHERE {{
-        VALUES ?t {{ wd:Q1107656 wd:Q22698 wd:Q167346 wd:Q2244893 wd:Q3215290 wd:Q15077303 wd:Q1052563 }} VALUES ?cn {{ {cn} }} BIND("hist" AS ?k) hint:Query hint:optimizer "None" .
-        ?i wdt:P31 ?t ; wdt:P17 ?cn ; wdt:P1435 ?d ; wdt:P625 ?co .
-        OPTIONAL {{ ?i rdfs:label ?lab FILTER(lang(?lab)="fr") }} OPTIONAL {{ ?i rdfs:label ?en FILTER(lang(?en)="en") }}
-        OPTIONAL {{ ?i wdt:P131 ?com . ?com rdfs:label ?coml FILTER(lang(?coml)="fr") }}
-        OPTIONAL {{ ?i wdt:P571 ?inc }} OPTIONAL {{ ?wp schema:about ?i ; schema:isPartOf <https://fr.wikipedia.org/> }} }}''')
+    hist, failed = [], []
+    for cq in COUNTRIES:  # un pays à la fois : la requête de toute l'Europe dépasse le temps permis par le serveur
+        try:
+            hist += rows_of(f'''SELECT ?i ?lab ?en ?co ?cn ?coml ?inc ?wp ?k WHERE {{
+                VALUES ?t {{ wd:Q1107656 wd:Q22698 wd:Q167346 wd:Q2244893 wd:Q3215290 wd:Q15077303 wd:Q1052563 }} BIND(wd:{cq} AS ?cn) BIND("hist" AS ?k) hint:Query hint:optimizer "None" .
+                ?i wdt:P31 ?t . ?i wdt:P17 ?cn . ?i wdt:P1435 ?d . ?i wdt:P625 ?co .
+                OPTIONAL {{ ?i rdfs:label ?lab FILTER(lang(?lab)="fr") }} OPTIONAL {{ ?i rdfs:label ?en FILTER(lang(?en)="en") }}
+                OPTIONAL {{ ?i wdt:P131 ?com . ?com rdfs:label ?coml FILTER(lang(?coml)="fr") }}
+                OPTIONAL {{ ?i wdt:P571 ?inc }} OPTIONAL {{ ?wp schema:about ?i ; schema:isPartOf <https://fr.wikipedia.org/> }} }}''')
+        except Exception as e:
+            failed.append(COUNTRIES[cq]); print('  pays sauté', COUNTRIES[cq], e)
     print('parcs et jardins protégés', len(hist))
     by = {}
     for r in jr + hist:
@@ -94,6 +98,7 @@ def main(csv_path=None):
                                     'source': 'Wikidata : label « Jardin remarquable » (Q498842, ministère de la Culture) et parcs et jardins protégés (P1435) de France et d’Europe',
                                     'url': 'https://www.wikidata.org/wiki/Q498842', 'licence': 'CC0',
                                     'official': {'label': 'Ministère de la Culture, Liste des jardins remarquables (Licence Ouverte 2.0)', 'url': 'https://www.data.gouv.fr/fr/datasets/5ee2fe1cba88d5c5a1179ef2/', 'rows': len(mc)},
+                                    'missing': failed,
                                     'note': 'kind : jr = label « Jardin remarquable » ; hist = parc ou jardin protégé (monument historique, Registered Park and Garden…). y = date de création écrite dans Wikidata.',
                                     'fields': ['q', 'n', 'lat', 'lon', 'cc', 'com', 'y', 'wp', 'kind'], 'rows': rows})
 

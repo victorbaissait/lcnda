@@ -98,8 +98,8 @@ def main():
             OPTIONAL {{ ?w rdfs:label ?wl FILTER(lang(?wl)="fr") }} ?w wikibase:sitelinks ?sl }}''')
         for r in rows:
             o = occ[C.qid(r['o'])]
-            y = int(r['inc'][:5].lstrip('+')) if r.get('inc') and re.match(r'^[+-]?\d{4}', r['inc']) else None
-            dy = int(r['death'][:5].lstrip('+')) if r.get('death') and re.match(r'^[+-]?\d{4}', r['death']) else None
+            yr = lambda v: int(re.match(r'^\+?(-?\d{1,4})', v).group(1)) if v and re.match(r'^\+?-?\d{1,4}', v) else None
+            y, dy = yr(r.get('inc')), yr(r.get('death'))
             if not ((y is not None and y <= 1925) or (dy is not None and dy <= 1955)): continue
             w = C.qid(r['w'])
             if any(x['q'] == w for x in o['art']): continue

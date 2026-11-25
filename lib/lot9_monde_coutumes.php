@@ -92,7 +92,7 @@ function l9b_fold(string $s): string
 /* ═════════════════════ la fiche : son contexte ═════════════════════ */
 
 const L9B_KIND = ['BIRT' => 'birth', 'CHR' => 'bapt', 'BAPM' => 'bapt', 'MARR' => 'marriage', 'MRCI' => 'marriage', 'MRRE' => 'marriage', 'DEAT' => 'death', 'BURI' => 'burial',
-    'RESI' => 'resi', 'CENS' => 'resi', 'OCCU' => 'occu', '_MILT' => 'mili', 'GRAD' => 'grad', '_DEG' => 'grad', 'EDUC' => 'educ'];
+    'RESI' => 'resi', 'CENS' => 'resi', 'OCCU' => 'occu', '_MILT' => 'mili', 'MISE' => 'mili', 'MIIN' => 'mili', 'MIDE' => 'mili', 'MIAW' => 'deco', 'GRAD' => 'grad', '_DEG' => 'grad', 'EDUC' => 'educ'];
 
 function l9b_place_row(array $e): ?array
 {

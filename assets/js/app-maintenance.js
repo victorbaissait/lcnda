@@ -606,13 +606,49 @@
                 const st=res.stats||{};window.LCNDA_APP.clearLineageCache?.();await reloadBootstrap();
                 const warns=[...(Number(st.loops_skipped)?[`${n(st.loops_skipped,'lien familial impossible ignoré','liens familiaux impossibles ignorés')}`]:[]),...(Number(st.media_missing)?[i18n('{n} (la fiche existe, sans le fichier)',{n:n(st.media_missing,'média introuvable','médias introuvables')})]:[]),...(Array.isArray(st.warnings)?st.warnings.slice(0,8).map(String):[])];
                 const box=$('#import-tree-result');
-                if(box)box.innerHTML=`${UI.notice('ok',i18n('Import de « {name} » : {list}.',{name:an.data.name,list:[n(st.persons,'personne'),st.families?n(st.families,'famille'):'',st.events?n(st.events,'événement'):'',st.media?n(st.media,'média'):'',st.media_links?n(st.media_links,'média en ligne gardé comme lien','médias en ligne gardés comme liens'):'',st.witnesses?n(st.witnesses,'témoin relié','témoins reliés'):''].filter(Boolean).join(', ')}))}${warns.map(w=>UI.notice('warn',w)).join('')}`;
+                if(box){box.innerHTML=`${UI.notice('ok',i18n('Import de « {name} » : {list}.',{name:an.data.name,list:[n(st.persons,'personne'),st.families?n(st.families,'famille'):'',st.events?n(st.events,'événement'):'',st.media?n(st.media,'média'):'',st.media_links?n(st.media_links,'média en ligne gardé comme lien','médias en ligne gardés comme liens'):'',st.witnesses?n(st.witnesses,'témoin relié','témoins reliés'):''].filter(Boolean).join(', ')}))}<div data-import-start></div>${warns.map(w=>UI.notice('warn',w)).join('')}`;startPersonNotice(box.querySelector('[data-import-start]'),st);}
                 const msg=`${n(st.persons,'personne importée','personnes importées')}${st.producer_label?` (${st.producer_label})`:''}.`;
                 if(!res.undo)return {message:msg};
                 return {message:msg,undo:async()=>{await api('import_undo',{},{method:'POST',body:{token:res.undo}});window.LCNDA_APP.clearLineageCache?.();await reloadBootstrap();if(box)box.innerHTML=UI.notice('info',i18n('Import de « {name} » annulé : tout ce qu’il avait ajouté a été retiré.',{name:an.data.name}));}};
             }});
     }
-    window.LCNDA_APP=window.LCNDA_APP||{};window.LCNDA_APP.importTree=openTreeImport;
+    /** ⭐ Après un import : qui est la personne n°1 (Sosa 1, de cujus) et pourquoi ; « Changer… » (avec ↶), ou, si la base
+     *  avait déjà la sienne (gardée), la personne n°1 que le fichier désigne, à prendre en un clic (ticket #7). */
+    function startPersonNotice(slot,st){
+        if(!slot||!(st.start_person||st.start_kept))return;
+        const UI=window.LCNDA_UI;
+        const WHY={header:'le fichier la désigne comme personne de départ',sosa:'elle porte le numéro Sosa 1 dans le fichier',ancestors:'c’est elle qui a le plus d’ancêtres dans le fichier',first:'c’est la première fiche du fichier (il n’a aucun lien de famille)'};
+        let cur={id:Number((st.start_person||st.start_kept).id),name:String((st.start_person||st.start_kept).name||'')};
+        const sug=st.start_suggested&&Number(st.start_suggested.id)!==cur.id?{id:Number(st.start_suggested.id),name:String(st.start_suggested.name||''),why:st.start_suggested.why}:null;
+        let first=true;
+        const paint=()=>{
+            const line=first&&st.start_person?i18n('⭐ Personne n°1 (Sosa 1) : <b>{name}</b> — {why}.',{name:escapeHtml(cur.name),why:escapeHtml(WHY[st.start_person.why]||'')})
+                :first?i18n('⭐ Ta base avait déjà sa personne n°1 (Sosa 1) : <b>{name}</b>. Elle est gardée.',{name:escapeHtml(cur.name)})
+                :i18n('⭐ Personne n°1 (Sosa 1) : <b>{name}</b>.',{name:escapeHtml(cur.name)});
+            const offer=sug&&sug.id!==cur.id?` ${i18n('Le fichier désigne plutôt <b>{name}</b> ({why}).',{name:escapeHtml(sug.name),why:escapeHtml(WHY[sug.why]||'')})} <button type="button" class="button small secondary" data-start-use>${escapeHtml(i18n('Prendre {name}',{name:sug.name}))}</button>`:'';
+            slot.innerHTML=UI.notice('info','');const span=slot.querySelector('.ui-notice > span:last-child')||slot; // UI.notice échappe : le texte (déjà échappé) et les boutons mis après
+            span.innerHTML=`${line}${offer} <button type="button" class="button small secondary" data-start-change>${escapeHtml(i18n('Changer…'))}</button>`;
+            slot.querySelector('[data-start-use]')?.addEventListener('click',()=>use(sug));
+            slot.querySelector('[data-start-change]')?.addEventListener('click',choose);
+        };
+        const apply=async who=>{await api('set_start_person',{},{method:'POST',body:{person_id:who.id}});await window.LCNDA_APP.useStartPerson?.(who.id);UI.settingsRebase?.();await reloadBootstrap();cur=who;first=false;paint();};
+        const use=async who=>{
+            const before={...cur};
+            try{await apply(who);}catch(error){toast(error.message,'error');return;}
+            const u=window.LCNDA_APP.undoToast;const msg=i18n('Personne n°1 (Sosa 1) : {name}',{name:who.name});
+            if(u)u(msg,{undo:async()=>{await apply(before);}});else toast(msg);
+        };
+        const choose=()=>{
+            const open=window.LCNDA_EXT?.openDialog,PK=window.LCNDA_PICKER;if(!open||!PK)return;
+            let picked='';
+            open({eyebrow:'SOSA 1',title:i18n('Qui est la personne n°1 ?'),submitLabel:i18n('Choisir'),
+                body:`<p class="muted">${i18n('La personne n°1 (le de cujus) : son père a le n°2, sa mère le n°3… C’est souvent toi.')}</p><div><span class="pk-lab">${i18n('Personne')}</span>${PK.pickerField({name:'start_pick',kind:'person',allowCreate:false})}</div>`,
+                onOpen:d=>{d.addEventListener('picker-change',e=>{picked=e.detail.item?.title||'';});setTimeout(()=>d.querySelector('.pk-input')?.focus(),30);},
+                onSubmit:f=>{const id=Number(f.elements.start_pick?.value)||0;if(!id)return UI.fail(f.elements.start_pick,i18n('Choisis une personne dans la liste.'));if(id!==cur.id)use({id,name:picked||i18n('Personne #{n}',{n:String(id)})});}});
+        };
+        paint();
+    }
+    window.LCNDA_APP=window.LCNDA_APP||{};window.LCNDA_APP.importTree=openTreeImport;window.LCNDA_APP.startPersonNotice=startPersonNotice;
     async function renderImportTools(token=++state.workspaceToken){const [data,dbProfiles]=await Promise.all([api('deed_preview'),api('database_profiles')]);if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='import')return;$('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({title:i18n(`Importer des données`),help:`Analyse et import depuis GEDCOM, JSON, CSV, SQLite. Chaque format est analysé avant toute modification de la base.`})}
 
 <section class="maintenance-panel" id="import-tree-panel">

@@ -117,6 +117,15 @@ def sejours():
         o = OCC[qid(val(b, 'occ'))]
         if o not in r['occ']:
             r['occ'].append(o)
+    # une rue, une maison, un quartier sans code INSEE : la commune dont le centre est à moins de 4 km (Paris pour la place des Vosges)
+    import gzip, json
+    cc = json.load(gzip.open(os.path.join(common.ROOT, 'assets/data/cc-communes.json.gz')))['c']
+    pts = [(i, v[1], v[2]) for i, v in cc.items() if v[1] is not None]
+    for r in rows.values():
+        if not r['insee'] and 'lat' in r:
+            best = min(pts, key=lambda x: (x[1] - r['lat']) ** 2 + ((x[2] - r['lon']) * 0.7) ** 2)
+            if ((best[1] - r['lat']) ** 2 + ((best[2] - r['lon']) * 0.7) ** 2) ** .5 * 111 <= 4:
+                r['insee'] = best[0]; r['com'] = cc[best[0]][0]
     out = sorted(rows.values(), key=lambda r: (r['s'], r['n']))
     common.write_gz('l9b-sejours.json.gz', {'v': 1, 'src': 'Wikidata (CC0) : « résidence » (P551) avec sa date (P580 début, P582 fin, ou P585), lieux en France (P17 = Q142)', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/wiki/Property:P551', 'occ': OCC, 'rows': out})
     print('sejours', len(out))

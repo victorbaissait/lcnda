@@ -209,6 +209,9 @@
         return p;
     };
     UI.autoSavePage = () => page; // pour les essais (tests/test-harmo-pages.js)
+    /** UI.settingsRebase() : une page vient de changer elle-même des réglages et l’a déjà dit (avec son « ↶ Annuler ») :
+     *  ce qu’elle a écrit devient le point de départ, pas de second « Réglage changé » (⭐ Sosa 1 après un import) */
+    UI.settingsRebase = () => { const p = fresh(); if (p.key) p.base = snap(); };
     /** UI.savedStatus pour une page : « ✓ Enregistré » à droite du titre */
     UI.pageSaved = (state = 'saved') => {
         const acts = document.querySelector('#workspace .page-header .page-actions'); if (!acts) return;

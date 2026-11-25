@@ -24,7 +24,8 @@
     const A = () => W.LCNDA_APP || {};
     const UI = () => W.LCNDA_UI || {};
     const ext = W.LCNDA_EXT = W.LCNDA_EXT || {};
-    const T = (s, v) => (W.LCNDA_I18N ? W.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? String(v[k]) : m)));
+    // les nombres passent en texte (« 1880 », pas « 1 880 ») : les grands nombres sont déjà mis en forme par nf()
+    const T = (s, v0) => { const v = v0 && Object.fromEntries(Object.entries(v0).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return W.LCNDA_I18N ? W.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? String(v[k]) : m)); };
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
     const nf = (n, d = 0) => Number(n).toLocaleString('fr-FR', {maximumFractionDigits: d, minimumFractionDigits: d});
@@ -186,9 +187,10 @@
 
     /* ═════════════ 🖋️ les célébrités de passage ═════════════ */
     const occTxt = r => listFr((r.occ || []).slice(0, 2).map(o => T(o)));
+    const plTxt = r => (r.com ? T('{l}, à {c}', {l: r.pl, c: r.com}) : T('à {c}', {c: r.pl}));
     const sejourWhen = r => (r.e && yOf(r.e) !== yOf(r.s) ? T('de {a} à {b}', {a: yOf(r.s), b: yOf(r.e)}) : T('en {y}', {y: yOf(r.s)}));
     const sejourRow = r => `<li class="tr-item"><div><span>🖋️ <b>${esc(r.n)}</b> <small class="muted">${esc(occTxt(r))}</small></span>
-        <small>${esc(T('habite à {p} {w}', {p: r.pl, w: sejourWhen(r)}))}${r.by ? ` <span class="muted">(${esc(T('né·e en {y}', {y: r.by}))})</span>` : ''}</small>
+        <small>${esc(T('habite {p} {w}', {p: plTxt(r), w: sejourWhen(r)}))}${r.by ? ` <span class="muted">(${esc(T('né·e en {y}', {y: r.by}))})</span>` : ''}</small>
         <small>${r.wp ? `${link(r.wp, T('Wikipédia ↗'))} · ` : ''}${link(`https://www.wikidata.org/wiki/${r.q}`, T('Wikidata ↗'))}</small></div></li>`;
     const sejoursAt = (D, insee) => (D && insee ? D.rows.filter(r => r.insee === insee) : []);
     function sejoursPerson(D, L) {
@@ -201,7 +203,7 @@
         if (!out.length) return '';
         out.sort((a, b) => a.at - b.at);
         const f = out[0];
-        const lead = T('{n} ({o}) habite à {p} {w} : {a}.', {n: f.n, o: occTxt(f), p: f.pl, w: sejourWhen(f), a: ageTxt(L.fem, f.at - L.by)});
+        const lead = T('{n} ({o}) habite {p} {w} : {a}.', {n: f.n, o: occTxt(f), p: plTxt(f), w: sejourWhen(f), a: ageTxt(L.fem, f.at - L.by)});
         return `<p class="cplus-lead">🖋️ ${esc(lead)}</p>${out.length > 1 ? more(`<ul class="tr-list">${out.slice(1).map(sejourRow).join('')}</ul>`, out.length - 1) : ''}
             ${srcLine('Wikidata', 'CC0 1.0', 'https://www.wikidata.org/wiki/Property:P551', ` · <small>${esc(T('« résidence » avec une date sur Wikidata'))}</small>`)}`;
     }
@@ -256,7 +258,7 @@
     const C = () => load('coutumes');
     const allText = P => (P?.texts || []).concat((P?.jobs || []).map(j => j.text)).join('\n');
     // 🛠️
-    const COMP_NAME = /\b([A-ZÉ][a-zéèêëàâîïôûç]+)[- ](la|le|l’|l')[- ]?([A-ZÉ][a-zéèêëàâîïôûç]+)\b/;
+    const COMP_NAME = /(?<!\p{L})(\p{Lu}\p{Ll}+)[- ](la|le|l’|l')[- ]?(\p{Lu}\p{Ll}+)(?!\p{L})/u;
     function compagnonsHtml(Cc, P, L) {
         const K = Cc?.compagnons; if (!K) return '';
         const txt = allText(P), f = ' ' + fold(txt) + ' ';
@@ -274,7 +276,7 @@
     // 🎖️
     function decoFound(Cc, P) {
         const D = Cc?.decorations || []; const f = ' ' + fold(allText(P)) + ' ';
-        return D.filter(d => d.match.some(m => new RegExp(`\\b${m}\\b`).test(f)));
+        return D.filter(d => d.match.some(m => f.includes(` ${m} `)) && !(d.not || []).some(m => f.includes(` ${m} `)));
     }
     const decoFig = d => (d.image ? `<figure class="tr-photo is-small"><a href="${esc(d.image.page)}" target="_blank" rel="noopener noreferrer"><img loading="lazy" alt="${esc(T(d.n))}" src="${esc(d.image.thumb)}" onerror="this.closest('figure').remove()"></a>
         <figcaption>${d.image.author ? `${esc(d.image.author)} · ` : ''}${d.image.licence_url ? link(d.image.licence_url, d.image.licence) : esc(d.image.licence || '')} · ${link(d.image.page, T('Commons ↗'))}</figcaption></figure>` : '');
@@ -394,12 +396,12 @@
     }
     function uniformesHtml(U, P, L, only = null) {
         const s = only || soldierOf(P, L); if (!U || !s) return '';
-        const near = U.rows.filter(r => s.year >= r.from - 3 && s.year <= r.to + 3);
+        const near = U.rows.filter(r => Math.abs(r.y - s.year) <= 12).sort((a, b) => Math.abs(a.y - s.year) - Math.abs(b.y - s.year));
         let list = near.filter(r => s.arm && r.arm === s.arm); if (list.length < 3) list = list.concat(near.filter(r => !list.includes(r) && (!s.arm || r.arm === '' || r.arm === s.arm)));
         list = list.slice(0, 8); if (!list.length) return '';
         const lead = s.arm ? T('Les uniformes de son époque ({y}, {a}) :', {y: s.year, a: T(s.arm)}) : T('Les uniformes de son époque ({y}) :', {y: s.year});
         return `<p class="cplus-lead">👕 ${esc(lead)}</p><div class="tr-gallery l9-strip">${list.map(r => `<figure class="tr-photo is-small"><a href="${esc(r.page)}" target="_blank" rel="noopener noreferrer"><img loading="lazy" alt="${esc(r.title)}" src="${esc(r.thumb)}" onerror="this.closest('figure').remove()"></a>
-            <figcaption>${esc(r.title)}${r.date ? ` · ${esc(r.date)}` : ''}<br>${r.author ? `${esc(r.author)} · ` : ''}${r.licence_url ? link(r.licence_url, r.licence) : esc(r.licence)} · ${link(r.page, T('Commons ↗'))}</figcaption></figure>`).join('')}</div>
+            <figcaption>${esc(r.title)}<br>${r.author ? `${esc(r.author)} · ` : ''}${r.licence_url ? link(r.licence_url, r.licence) : esc(r.licence)} · ${link(r.page, T('Commons ↗'))}</figcaption></figure>`).join('')}</div>
             <p class="muted"><small>${esc(T('Compare avec une photo de famille : la coupe de la veste, le képi ou le shako, les boutons aident à la dater.'))}</small></p>${srcLine(U.src.label, U.src.licence, U.src.url)}`;
     }
 
@@ -502,8 +504,8 @@
         const {out} = await personParts(P, want);
         host.innerHTML = PERSON_ORDER.map(k => (k === 'these' ? (want('these') ? '<div class="tr-line l9-line" data-l9-line="these"></div>' : '') : line(k, out[k]))).join('');
         const card = host.closest?.('section.card');
-        const show = () => { host.querySelectorAll('.l9-line').forEach(l => { if (!l.textContent.trim()) l.remove(); }); if (card) card.hidden = !host.querySelector('.l9-line'); };
-        show();
+        const show = (keep = '') => { host.querySelectorAll('.l9-line').forEach(l => { if (!l.textContent.trim() && l.dataset.l9Line !== keep) l.remove(); }); if (card) card.hidden = !host.querySelector('.l9-line:not(:empty)'); };
+        show('these');
         const th = host.querySelector('[data-l9-line="these"]');
         if (th) { await theseInto(th, id); show(); }
         return P;
@@ -690,8 +692,8 @@
             fields: [{key: 'name', label: T('Sommet'), type: 'text'}, {key: 'year', label: T('Première ascension'), type: 'year'}, {key: 'date', label: T('Date'), type: 'text'}, {key: 'alt', label: T('Altitude (m)'), type: 'number'}, {key: 'who', label: T('Par'), type: 'text'}, {key: 'url', label: T('Source (Wikidata)'), type: 'url'}, {key: 'wp', label: 'Wikipédia', type: 'url'}],
             period: r => [r.year, r.year], geo: r => [r.lat, r.lon], open: r => openUrl(r.wp || r.url)},
         {id: 'l9_sejours', icon: '🖋️', label: T('Célébrités de passage (résidences datées)'), group: 'Le lieu', source: 'Wikidata (CC0)', sourceUrl: 'https://www.wikidata.org/wiki/Property:P551', enabled: () => on('sejours'),
-            load: () => rowsOf('sejours', D => D.rows.map(r => ({name: r.n, occ: (r.occ || []).map(T).join(', '), commune: r.pl, insee: r.insee, from: yOf(r.s), to: yOf(r.e) || yOf(r.s), lat: r.lat, lon: r.lon, url: `https://www.wikidata.org/wiki/${r.q}`, wp: r.wp}))),
-            fields: [{key: 'name', label: T('Personnalité'), type: 'text'}, {key: 'occ', label: T('Métier'), type: 'text'}, {key: 'commune', label: T('Commune'), type: 'place'}, {key: 'from', label: T('De'), type: 'year'}, {key: 'to', label: T('À'), type: 'year'}, {key: 'url', label: T('Source (Wikidata)'), type: 'url'}, {key: 'wp', label: 'Wikipédia', type: 'url'}],
+            load: () => rowsOf('sejours', D => D.rows.map(r => ({name: r.n, occ: (r.occ || []).map(T).join(', '), commune: r.com || r.pl, where: r.pl, insee: r.insee, from: yOf(r.s), to: yOf(r.e) || yOf(r.s), lat: r.lat, lon: r.lon, url: `https://www.wikidata.org/wiki/${r.q}`, wp: r.wp}))),
+            fields: [{key: 'name', label: T('Personnalité'), type: 'text'}, {key: 'occ', label: T('Métier'), type: 'text'}, {key: 'commune', label: T('Commune'), type: 'place'}, {key: 'where', label: T('Lieu'), type: 'text'}, {key: 'from', label: T('De'), type: 'year'}, {key: 'to', label: T('À'), type: 'year'}, {key: 'url', label: T('Source (Wikidata)'), type: 'url'}, {key: 'wp', label: 'Wikipédia', type: 'url'}],
             period: r => [r.from, r.to], geo: r => (r.lat != null ? [r.lat, r.lon] : null), open: r => openUrl(r.wp || r.url)},
         {id: 'l9_voyages', icon: '🐎', label: T('Grands voyages : les étapes'), group: 'Le monde', source: T('Wikipédia (CC BY-SA 4.0)'), sourceUrl: 'https://fr.wikipedia.org/wiki/Route_Napol%C3%A9on', enabled: () => on('voyages'),
             load: () => rowsOf('voyages', D => D.trips.flatMap(t => t.stops.map(s => ({trip: T(t.title), who: T(t.who), commune: s.n, insee: s.insee, date: s.d, year: yOf(s.d), lat: s.lat, lon: s.lon, url: s.url || t.src.url})))),
@@ -706,9 +708,9 @@
             fields: [{key: 'name', label: T('Décoration'), type: 'text'}, {key: 'year', label: T('Créée'), type: 'year'}, {key: 'who', label: T('Pour qui'), type: 'text'}, {key: 'quote', label: T('Phrase de la source'), type: 'text'}, {key: 'image', label: T('Image (auteur et licence sur sa page)'), type: 'url'}, {key: 'url', label: T('Source'), type: 'url'}],
             period: r => [r.year, null], open: r => openUrl(r.url)},
         {id: 'l9_uniformes', icon: '👕', label: T('Uniformes d’autrefois (gravures)'), group: 'La personne', source: T('Wikimedia Commons (licence de chaque image)'), sourceUrl: 'https://commons.wikimedia.org/', enabled: () => on('uniformes'),
-            load: () => rowsOf('uniformes', D => D.rows.map(r => ({name: r.title, from: r.from, to: r.to, arm: T(r.arm || 'divers'), date: r.date || '', credit: `${r.author ? `${r.author} · ` : ''}${r.licence}`, url: r.page}))),
-            fields: [{key: 'name', label: T('Gravure'), type: 'text'}, {key: 'from', label: T('De'), type: 'year'}, {key: 'to', label: T('À'), type: 'year'}, {key: 'arm', label: T('Arme'), type: 'enum'}, {key: 'date', label: T('Date de l’image'), type: 'text'}, {key: 'credit', label: T('Auteur et licence'), type: 'text'}, {key: 'url', label: T('Source (Commons)'), type: 'url'}],
-            period: r => [r.from, r.to], open: r => openUrl(r.url)},
+            load: () => rowsOf('uniformes', D => D.rows.map(r => ({name: r.title, year: r.y, arm: T(r.arm || 'divers'), credit: `${r.author ? `${r.author} · ` : ''}${r.licence}`, url: r.page}))),
+            fields: [{key: 'name', label: T('Gravure'), type: 'text'}, {key: 'year', label: T('Uniforme de'), type: 'year'}, {key: 'arm', label: T('Arme'), type: 'enum'}, {key: 'credit', label: T('Auteur et licence'), type: 'text'}, {key: 'url', label: T('Source (Commons)'), type: 'url'}],
+            period: r => [r.year, r.year], open: r => openUrl(r.url)},
         {id: 'l9_villes', icon: '🚧', label: T('Octroi et éclairage des villes'), group: 'Le lieu', source: T('Wikipédia (CC BY-SA 4.0)'), sourceUrl: 'https://fr.wikipedia.org/wiki/Octroi', enabled: () => on('octroi') || on('eclairage'),
             load: () => rowsOf('coutumes', D => [...(D.octroi?.cities || []).map(c => ({what: T('🚧 octroi'), commune: c.n, insee: c.insee, year: c.y || null, text: T(c.t), quote: c.q, url: c.url})),
                 ...(D.eclairage?.cities || []).flatMap(c => c.facts.map(f => ({what: T('🕯️ éclairage'), commune: c.n, insee: c.insee, year: f.y, text: T(f.t), quote: f.q, url: f.url})))]),

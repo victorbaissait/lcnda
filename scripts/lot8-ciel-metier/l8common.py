@@ -9,11 +9,11 @@ UA = 'LCNDA-lot8-builder/1.0 (genealogy desktop app; one-off data build)'
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 OUT = os.path.join(ROOT, 'assets', 'data')
 CACHE = os.environ.get('L8_CACHE') or os.path.join(ROOT, 'scripts', 'lot8-ciel-metier', '.cache')
-PACE = {'query.wikidata.org': 4, 'www.wikidata.org': 1.5, 'commons.wikimedia.org': 1.5, 'fr.wikipedia.org': 1.5, 'en.wikipedia.org': 1.5, 'archive.org': 2, 'fr.wikisource.org': 1.5}
+PACE = {'query.wikidata.org': 4, 'www.wikidata.org': 1.5, 'commons.wikimedia.org': 5, 'fr.wikipedia.org': 1.5, 'en.wikipedia.org': 1.5, 'archive.org': 2, 'fr.wikisource.org': 1.5}
 _last = {}
 
 
-def http(url, data=None, headers=None, timeout=300, tries=6):
+def http(url, data=None, headers=None, timeout=300, tries=int(os.environ.get("L8_TRIES", "6"))):
     h = {'User-Agent': UA}
     h.update(headers or {})
     host = urllib.parse.urlparse(url).hostname
@@ -87,7 +87,7 @@ def commons_info(files):
             m = ii.get('extmetadata', {})
             val = lambda k: strip_html(m.get(k, {}).get('value', ''))
             title = p['title'][5:]
-            out[norm.get(p['title'], p['title'])[5:]] = out[title] = {'thumb': ii.get('thumburl', ''), 'page': ii.get('descriptionurl', ''), 'artist': val('Artist')[:120], 'lic': val('LicenseShortName'),
+            out[norm.get(p['title'], p['title'])[5:]] = out[title] = {'thumb': ii.get('thumburl', '').split('?utm_')[0], 'page': ii.get('descriptionurl', ''), 'artist': val('Artist')[:120], 'lic': val('LicenseShortName'),
                                                                        'lic_url': val('LicenseUrl'), 'date': val('DateTimeOriginal')[:40], 'w': ii.get('thumbwidth'), 'h': ii.get('thumbheight')}
     return out
 
