@@ -8,7 +8,7 @@
  *     le nom déjà tapé), « ＋ Créer une fiche » (nom, et le rôle en événement : « Maire d’Ailleville (2014–2020) », cité avec la
  *     source de la liste et son lien ↗), « ✓ C'est bien lui », « ✗ Ce n'est pas lui » (retenu). Chaque fois ↶ Annuler.
  *  3. Le lien est gardé dans la base (table list_person_links, lib/listes_personnes.php) ; la fiche reçoit la source (titre de la
- *     liste, rôle, source et licence, ↗ lien) et « 🔎 Ce qui le concerne » montre la ligne (LCNDA_EXT.dataSources : lp_liens).
+ *     liste, rôle, source et licence, ↗ lien) et « 🔎 Ce qui le concerne » montre la ligne (LCNDA_EXT.dataSources, id lpers_liens : lp_liens).
  *  4. Filtre « 👤 Seulement les noms présents dans ma base » : calculé ici, sur cet ordinateur (listes « load » : toutes les lignes ;
  *     listes du serveur de l'app : jusqu'à 10 000 lignes lues ; pas pour les listes en ligne).
  *  5. Rien ne part sur Internet : la base est lue une fois (lp_index), la comparaison se fait dans la page. Fiches confidentielles :
@@ -136,7 +136,7 @@
     function rowKey(d, row, c = confOf(d)) {
         let k = hashCache.get(row); if (k) return k;
         if (row.id != null && row.id !== '' && d.id.startsWith('bo_')) k = `id:${row.id}`;
-        else { const vals = (d.fields || []).map(f => row[f.key] ?? '').join('|'); const nm = String(row[c?.name || c?.last || (c?.also || [])[0]] ?? '').slice(0, 60); k = `${fold(nm).replace(/\s+/g, ' ').trim()}#${djb(fold(vals))}`; }
+        else { const vals = (d.fields || []).map(f => row[f.key] ?? '').join('|'); k = `${keyName(row[c?.name || c?.last || (c?.also || [])[0]])}#${djb(fold(vals))}`; }
         hashCache.set(row, k); return k;
     }
 
@@ -191,10 +191,25 @@
         return s;
     }
     let memo = new WeakMap(); // ligne → résultat (relu quand la base ou les liens changent)
+    const NONE = Object.freeze({cells: {}, any: false, key: ''});
+    const ffold = s => { s = String(s ?? '').toLowerCase(); return /[^\x00-\x7f]/.test(s) ? s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/æ/g, 'ae').replace(/œ/g, 'oe') : s; };
+    const keyName = (nm) => fold(String(nm ?? '').slice(0, 60)).replace(/\s+/g, ' ').trim();
+    /** vite : un nom de famille de la base dans la case ? (ou la ligne a-t-elle un lien, un « pas lui » ?) */
+    function quickHit(d, row, c) {
+        const L = LINKS.get(d.id);
+        if (L?.byKey.size) { if (!L.names) L.names = new Set([...L.byKey.keys()].map(k => k.split('#')[0])); if (L.names.has(keyName(row[c.name || c.last || (c.also || [])[0]])) || (row.id != null && L.names.has(`id:${row.id}`))) return true; }
+        for (const k of cellKeys(c)) {
+            const v = row[k]; if (v == null || v === '') continue;
+            const t = ffold(v).split(/[^a-z0-9]+/).filter(Boolean);
+            for (let i = 0; i < t.length; i++) { let j = ''; for (let e = i; e < t.length; e++) { j += t[e]; if (IDX.bySur.has(j.replace(/(.)\1+/g, '$1'))) return true; } }
+        }
+        return false;
+    }
     /** pour une ligne : {cells: {champ: {cands: [{p, score}], linked: [link], key}}, any} */
     function matchRow(d, row) {
         const c = confOf(d); if (!c || !IDX) return null;
         const m = memo.get(row); if (m) return m;
+        if (!quickHit(d, row, c)) { memo.set(row, NONE); return NONE; } // la plupart des lignes : aucun nom de la base, rien de relié
         const key = rowKey(d, row, c), L = LINKS.get(d.id)?.byKey.get(key);
         const per = c.period ? (() => { try { return c.period(row) || []; } catch (_) { return []; } })() : [];
         const ctx = {born: yr(c.born?.(row)), died: yr(c.died?.(row)), from: yr(per[0]), to: yr(per[1]), place: c.place ? c.place(row) : null, dated: !!c.dated};
@@ -422,7 +437,7 @@
     };
 
     /* ═════════════ 🔎 « Ce qui le concerne » : les lignes reliées à la fiche ═════════════ */
-    (ext.dataSources = ext.dataSources || []).push({id: 'lp_liens', icon: '🔗', label: 'Les listes où on l’a relié(e)', group: 'La personne', needs: ['person'], online: false, installed: () => true,
+    (ext.dataSources = ext.dataSources || []).push({id: 'lpers_liens', icon: '🔗', label: 'Les listes où on l’a relié(e)', group: 'La personne', needs: ['person'], online: false, installed: () => true,
         run: async (ctx, host) => {
             const pid = Number(ctx?.person?.id ?? ctx?.person ?? 0); if (!pid || !host) return false;
             let r; try { r = await api('lp_person', {person_id: pid}); } catch (_) { return false; }

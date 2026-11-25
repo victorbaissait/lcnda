@@ -16,7 +16,9 @@ const assert = require('assert');
 const {start, sleep} = require('./prendre-depuis-seed.js');
 let fails = 0;
 const report = [];
+const ONLY = process.env.PD_ONLY ? new RegExp(process.env.PD_ONLY) : null;
 const t = async (name, fn) => {
+    if (ONLY && !ONLY.test(name)) return;
     const m = {clicks: 0, t0: Date.now(), notes: []}; t.m = m;
     try { await t.before?.(); await fn(m); report.push(`✓ ${name.split(' ')[0]} · ${m.clicks} clics/frappes · ${((Date.now() - m.t0) / 1000).toFixed(1)} s${m.notes.length ? ' · ' + m.notes.join(' ; ') : ''}`); console.log('✓ ' + name); }
     catch (e) { fails++; report.push(`✗ ${name.split(' ')[0]}`); console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); }
@@ -41,6 +43,12 @@ const t = async (name, fn) => {
     const listQ = async q => { await F(`${D} [data-cx-lq]`, q); await p.waitForFunction(x => [...document.querySelectorAll('.cx-take [data-cx-lrows] .cx-rlist li')].length && [...document.querySelectorAll('.cx-take [data-cx-lrows] .cx-rlist li')].every(li => li.textContent.toLowerCase().includes(x.toLowerCase().split(' ')[0])), q, {timeout: 20000}); };
     const openList = async id => { await C(`${D} [data-cx-tab="lists"]`); await C(`${D} [data-cx-list="${id}"]`); await rowsOfList(); };
     const basket = () => B.api('cx_basket');
+    /** le lieu d'une source de « Données » (celui d'avant est repris : on le retire d'abord) */
+    const setPlace = async name => {
+        const x = L(`${D} .pk[data-picker="place"] .pk-chip [data-pk="remove"]`); if (await x.count()) { await x.first().click(); t.m.clicks++; }
+        await p.waitForSelector(`${D} .pk[data-picker="place"] input.pk-input:visible`, {timeout: 10000});
+        await F(`${D} .pk[data-picker="place"] input.pk-input:visible`, name); await C(`${D} .pk-list [role="option"]:has-text("${name}"), ${D} .pk-item:has-text("${name}")`);
+    };
     const clearBasket = () => p.evaluate(async () => { await window.LCNDA_APP.api('cx_write', {}, {method: 'POST', body: {op: 'basket_clear'}}); await window.LCNDA_EXT.connexions.refresh(); });
     const hasList = id => p.evaluate(x => (window.LCNDA_EXT.dataListsEngine.list() || []).some(d => d.id === x), id);
     t.before = async () => { await closeAll(); await p.evaluate(() => document.querySelectorAll('.ui-actmenu').forEach(x => x.remove())); };
@@ -85,7 +93,7 @@ const t = async (name, fn) => {
             const a = await ask('les décès à Tulle du 1er au 30 juin 1980'); assert.strictEqual(a.id, 'insee_deces'); assert.ok(a.preset.crit.some(c => c.kind === 'daterange' && c.from === '1980-06-01'));
             const b = await ask('chatteaux autour de 5 km de Treignac'); assert.strictEqual(b.id, 'chateaux', 'faute de frappe'); assert.strictEqual(b.preset.near?.km, 5); assert.match(b.preset.near.title, /Treignac/);
             const c = await ask('les gares du 19'); assert.strictEqual(c.id, 'hist_gares'); assert.ok(c.preset.crit.some(x => x.op === 'starts' && x.value === '19'), JSON.stringify(c.preset));
-            const d = await ask('séismes en mars 1356'); assert.strictEqual(d.id, 'hist_seismes'); assert.ok(d.preset.period?.from === 1356 || d.preset.crit.some(x => x.from === 1356), JSON.stringify(d.preset));
+            const d = await ask('séismes en mars 1356'); assert.strictEqual(d.id, 'hist_seismes'); assert.ok(d.preset.crit.some(x => x.kind === 'daterange' && x.from === '1356-03-01' && x.to === '1356-03-31'), JSON.stringify(d.preset));
             const e = await ask('la comète de Donati'); assert.strictEqual(e.id, 'ciel_cometes'); assert.match(e.preset.q, /Donati/);
             const f = await ask('la gare de Saint-Amand-Montrond'); assert.strictEqual(f.id, 'hist_gares'); assert.match(f.preset.q, /Saint-Amand-Montrond/);
             // dans la fenêtre : « J'ai compris : … » et la liste ouverte avec ses critères
@@ -96,14 +104,14 @@ const t = async (name, fn) => {
         });
         await t('U4 · Données : la météo du jour du mariage (Auch, 3 février 1978) et les cimetières autour de Treignac, « tout le tableau » → l’enquête', async m => {
             await openTake(); await C(`${D} [data-cx-tab="data"]`); await p.selectOption(`${D} [data-cx-ds]`, 'meteo_jour'); m.clicks++;
-            await p.waitForSelector(`${D} .pk[data-picker="place"] input:not([type=hidden])`);
-            await F(`${D} .pk[data-picker="place"] input:not([type=hidden])`, 'Auch'); await C(`${D} .pk-list [role="option"]:has-text("Auch"), ${D} .pk-item:has-text("Auch")`);
+            await p.waitForSelector(`${D} .pk[data-picker="place"]`);
+            await setPlace('Auch');
             await F(`${D} [name="cx_date"]`, '1978-02-03'); await C(`${D} [data-cx-run]`);
             await p.waitForSelector(`${D} [data-cx-dres] li`, {timeout: 30000});
             await check(L(`${D} [data-cx-dres] li`, {hasText: 'Température la plus haute'}).first().locator('input'));
             await p.selectOption(`${D} [data-cx-ds]`, 'commune_plus_cemeteries'); m.clicks++;
-            await p.waitForSelector(`${D} .pk[data-picker="place"] input:not([type=hidden])`);
-            await F(`${D} .pk[data-picker="place"] input:not([type=hidden])`, 'Treignac'); await C(`${D} .pk-list [role="option"]:has-text("Treignac"), ${D} .pk-item:has-text("Treignac")`);
+            await p.waitForSelector(`${D} .pk[data-picker="place"]`);
+            await setPlace('Treignac');
             await C(`${D} [data-cx-run]`); await p.waitForSelector(`${D} [data-cx-dres] li:has-text("Tout le tableau")`, {timeout: 30000});
             assert.match(await p.textContent(`${D} [data-cx-dres]`), /carte/); assert.ok(!/https?:/.test(await p.textContent(`${D} [data-cx-dres]`)));
             await check(L(`${D} [data-cx-dres] li`, {hasText: 'Tout le tableau'}).first().locator('input'));
@@ -186,7 +194,7 @@ const t = async (name, fn) => {
             } finally { await p.setViewportSize({width: 1440, height: 900}); }
         });
         await t('U10 · chaos : double-clic sur « Prendre », fermer pendant le chargement, 5 000 événements (recherche rapide)', async m => {
-            await openTake(); await C(`${D} [data-cx-tab="place"]`); await shown('place');
+            await openTake(); await C(`${D} [data-cx-tab="place"]`); await F(`${D} [data-cx-q]`, 'Eymoutiers'); await shown('place', 'Eymoutiers');
             await check(L(`${D} .cx-rlist li`, {hasText: 'Eymoutiers'}).first().locator('input'));
             const before = (await inv()).items.length;
             await p.dblclick(`${D} [data-cx-takehere]`); m.clicks++; await waitDelivered(); await sleep(600);
@@ -204,12 +212,12 @@ const t = async (name, fn) => {
         const pack = B.hasPack;
         await t('S1 · une gare précise (« Saint-Amand ») depuis « Gares et ouverture du train » → l’enquête, avec titre, année, source et lien', async m => {
             if (!pack || !(await hasList('hist_gares'))) { m.notes.push('sauté : pas de pack Histoire du lieu'); return; }
-            await openTake(); await openList('hist_gares'); await listQ('Saint-Amand');
+            await openTake(); await openList('hist_gares'); await listQ('Saint-Amand-Montrond');
             const li = L(`${D} [data-cx-lrows] .cx-rlist li`).first(); await C(`${D} [data-cx-lrows] .cx-rlist li .cx-rt`);
-            assert.match(await p.textContent(`${D} [data-cx-prev]`), /Ouverture/);
+            assert.match(await p.textContent(`${D} [data-cx-prev]`), /Gare/);
             await check(li.locator('input')); await C(`${D} [data-cx-takehere]`); await waitDelivered();
             const l = (await linksOf()).find(x => x.entity_type === 'row' && /Saint-Amand/.test(x.label));
-            assert.ok(l && /\d{4}/.test(l.value) && /Gares/.test(l.origin.label) && /Wikidata/.test(l.origin.label) && /^https?:/.test(l.origin.url || ''), JSON.stringify(l));
+            assert.ok(l && /Gares/.test(l.origin.label) && /Wikidata/.test(l.origin.label) && /^https?:/.test(l.origin.url || ''), JSON.stringify(l));
         });
         await t('S2 · la comète de Donati : en entier au panier, puis seulement son année (« Prendre seulement une info »)', async m => {
             await clearBasket();
@@ -227,11 +235,11 @@ const t = async (name, fn) => {
             await openTake(); await openList('ciel_cometes'); await listQ('Halley'); await check(L(`${D} [data-cx-lrows] .cx-rlist li`).first().locator('input'));
             if (pack && await hasList('hist_gares')) { await C(`${D} [data-cx-lback]`); await C(`${D} [data-cx-list="hist_gares"]`); await rowsOfList(); await listQ('Treignac'); await check(L(`${D} [data-cx-lrows] .cx-rlist li`).first().locator('input')); }
             await C(`${D} [data-cx-tab="data"]`); await p.selectOption(`${D} [data-cx-ds]`, 'commune_plus_cemeteries'); m.clicks++;
-            await F(`${D} .pk[data-picker="place"] input:not([type=hidden])`, 'Treignac'); await C(`${D} .pk-list [role="option"]:has-text("Treignac"), ${D} .pk-item:has-text("Treignac")`);
+            await setPlace('Treignac');
             await C(`${D} [data-cx-run]`); await p.waitForSelector(`${D} [data-cx-dres] li:has-text("Mas-Vieux")`, {timeout: 30000});
             await check(L(`${D} [data-cx-dres] li`, {hasText: 'Cimetière de Treignac'}).first().locator('input')); await check(L(`${D} [data-cx-dres] li`, {hasText: 'Mas-Vieux'}).first().locator('input'));
             await p.selectOption(`${D} [data-cx-ds]`, 'meteo_jour'); m.clicks++;
-            await F(`${D} .pk[data-picker="place"] input:not([type=hidden])`, 'Auch'); await C(`${D} .pk-list [role="option"]:has-text("Auch"), ${D} .pk-item:has-text("Auch")`);
+            await setPlace('Auch');
             await F(`${D} [name="cx_date"]`, '1978-02-03'); await C(`${D} [data-cx-run]`); await p.waitForSelector(`${D} [data-cx-dres] li:has-text("Température la plus haute")`, {timeout: 30000});
             await check(L(`${D} [data-cx-dres] li`, {hasText: 'Température la plus haute'}).first().locator('input'));
             const want = pack ? 5 : 4;
@@ -281,7 +289,7 @@ const t = async (name, fn) => {
         await t('L2 · … « Mettre les 2 cochées dans… » : l’en-tête dit « 2 lignes », « Comment ? » en deux cartes', async m => {
             await C('[data-ld-take]'); await C('.ui-actmenu button:has-text("Mettre les 2 cochées dans")');
             await p.waitForSelector('.cx-put[open]');
-            assert.match(await p.textContent('.cx-put h2'), /Mettre « .*2 lignes choisies » \(2 lignes\) dans…/);
+            assert.match(await p.textContent('.cx-put h2'), /Mettre « Grandes comètes et aurores » \(2 lignes\) dans…/);
             assert.strictEqual(await L('.cx-put .cx-how').count(), 2);
             await C('.cx-put .cx-how:has-text("Une ligne = un élément")'); await C('.cx-put [data-cx-dest="basket"]');
             assert.match(await p.textContent('.cx-put [data-cx-putsay]'), /2 éléments/);

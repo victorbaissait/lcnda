@@ -96,8 +96,16 @@
             const walk = v => { if (typeof v === 'number') { const a = arcs[v < 0 ? ~v : v]; if (a && !g.__skip) a.n++; else if (a) a.skipN = (a.skipN || 0) + 1; } else if (Array.isArray(v)) v.forEach(walk); };
             walk(g.arcs);
             const p = g.properties || {};
-            if (p.n && Array.isArray(p.l) && !g.__skip) labels.push({n: p.n, x: nX(p.l[0]), y: nY(p.l[1])});
+            if (p.n && !g.__skip) {
+                // la taille de la zone (les plus grandes communes nommées d'abord) ; sans point d'étiquette : le milieu de son cadre
+                let x0 = 1 / 0, y0 = 1 / 0, x1 = -1 / 0, y1 = -1 / 0;
+                const box = v => { if (typeof v === 'number') { const a = arcs[v < 0 ? ~v : v]; if (a) { x0 = Math.min(x0, a.b[0]); y0 = Math.min(y0, a.b[1]); x1 = Math.max(x1, a.b[2]); y1 = Math.max(y1, a.b[3]); } } else if (Array.isArray(v)) v.forEach(box); };
+                box(g.arcs);
+                const l = Array.isArray(p.l) ? [nX(p.l[0]), nY(p.l[1])] : (Number.isFinite(x0) ? [(x0 + x1) / 2, (y0 + y1) / 2] : null);
+                if (l) labels.push({n: p.n, x: l[0], y: l[1], s: Number.isFinite(x0) ? (x1 - x0) * (y1 - y0) : 0});
+            }
         }));
+        labels.sort((a, b) => b.s - a.s);
         return {arcs, labels};
     }
     const LAYERS = {
@@ -134,7 +142,7 @@
         if (z >= 4.5 && inEurope) out.push(['nuts2', 'inner', 'mm-nb-reg']);
         if (z >= 4.5 && inFrance) out.push(['frReg', 'inner', 'mm-nb-reg']);
         if (z >= 6 && inFrance) out.push(['frDep', 'inner', 'mm-nb-dep']);
-        if (z >= 9 && inFrance) out.push(['frCom', z >= 10 ? 'inner' : 'none', 'mm-nb-com', true]);
+        if (z >= 9 && inFrance) out.push(['frCom', z >= 10 ? 'all' : 'none', 'mm-nb-com', true]);
         return out;
     }
 
@@ -149,7 +157,7 @@
 .mm-tiles .person-map-tile{max-width:none;max-height:none}
 .mm-vec{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;pointer-events:none;transform-origin:0 0;color:#111;background:#fff}
 .mm-vec .mm-nb-world{fill:none;stroke:currentColor;stroke-width:.8;stroke-linejoin:round}
-.mm-vec .mm-nb-coast{stroke-width:1.15}
+.mm-vec .mm-nb-world.mm-nb-coast{stroke-width:1.15}
 .mm-vec .mm-nb-reg{fill:none;stroke:currentColor;stroke-width:.6;stroke-dasharray:5 3}
 .mm-vec .mm-nb-dep{fill:none;stroke:currentColor;stroke-width:.45;opacity:.85}
 .mm-vec .mm-nb-com{fill:none;stroke:currentColor;stroke-width:.3;opacity:.55}

@@ -286,6 +286,7 @@
             <div class="ld-results" data-ld-results></div>
             <div class="ld-more-host" data-ld-more-host></div></section>`;
         bindPage(host.querySelector('.ld-page'), d);
+        try { ext.listesMaj?.header?.(host.querySelector('.ld-page'), d); } catch (e) { console.error(e); } // 🗂 « Données du … · ↻ Vérifier » (app-listes-maj.js)
         try { ext.listesPersonnes?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, rerun}); } catch (e) { console.error(e); } // 👤 noms reliés aux fiches (app-listes-personnes.js)
         try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, rows: () => cur.rows, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
         paintSaved(); paintChips(); await refresh();
@@ -359,7 +360,7 @@
         if (!rows.length) { res.innerHTML = A().empty ? A().empty(T('Aucune de ces lignes n’a de position sur la carte.'), {icon: '🗺'}) : ''; paintMore(); return; }
         const view = cur.mapView; cur.mapView = null;
         const circles = st.near && Number(st.near.km) > 0 ? [{lat: st.near.lat, lon: st.near.lon, km: Number(st.near.km)}] : [];
-        res.innerHTML = `${ext.miniMap ? ext.miniMap(pts, [], {height: 520, view, circles, cluster: true}) : `<p>${esc(T('La carte n’est pas chargée.'))}</p>`}<div class="ld-map-note" data-ld-map-note aria-live="polite"></div>`;
+        res.innerHTML = `${ext.miniMap ? ext.miniMap(pts, [], {height: 520, view, circles}) : `<p>${esc(T('La carte n’est pas chargée.'))}</p>`}<div class="ld-map-note" data-ld-map-note aria-live="polite"></div>`;
         const marks = [...res.querySelectorAll('.h-map-point')];
         marks.forEach((m, i) => {
             if (!rows[i]) return; m.dataset.ldMapRow = String(i);
@@ -394,7 +395,7 @@
     async function loadZone(btn) {
         const res = ws()?.querySelector('[data-ld-results]'), ctl = ext.miniMapOf?.(res), b = ctl?.bounds(); if (!b) return;
         const d = cur.d, st = cur.st, view = ctl.getView(), my = cur.seq;
-        const inBox = g => { let lon = g[1]; while (lon < b.west) lon += 360; while (lon > b.east) lon -= 360; return g[0] >= b.south && g[0] <= b.north && lon <= b.east; };
+        const inBox = g => { let lon = g[1]; while (lon < b.west) lon += 360; while (lon >= b.west + 360) lon -= 360; return g[0] >= b.south && g[0] <= b.north && lon <= b.east; };
         btn.disabled = true; btn.textContent = T('On cherche…');
         try {
             let found;

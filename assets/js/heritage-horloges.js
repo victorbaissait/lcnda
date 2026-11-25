@@ -58,7 +58,7 @@
         ['Montevideo', 'America/Montevideo', 'Uruguay', -34.9, -56.16], ['Asunción', 'America/Asuncion', 'Paraguay', -25.26, -57.58], ['São Paulo', 'America/Sao_Paulo', 'Brésil', -23.55, -46.63], ['Rio de Janeiro', 'America/Sao_Paulo', 'Brésil', -22.91, -43.17],
         ['Manaus', 'America/Manaus', 'Brésil', -3.12, -60.02], ['Alger', 'Africa/Algiers', 'Algérie', 36.75, 3.06], ['Oran', 'Africa/Algiers', 'Algérie', 35.7, -.63], ['Constantine', 'Africa/Algiers', 'Algérie', 36.37, 6.61],
         ['Tunis', 'Africa/Tunis', 'Tunisie', 36.81, 10.18], ['Casablanca', 'Africa/Casablanca', 'Maroc', 33.57, -7.59], ['Rabat', 'Africa/Casablanca', 'Maroc', 34.02, -6.84], ['Tripoli', 'Africa/Tripoli', 'Libye', 32.89, 13.19],
-        ['Dakar', 'Africa/Dakar', 'Sénégal', 14.72, -17.47], ['Saint-Louis du Sénégal', 'Africa/Dakar', 'Sénégal', 16.03, -16.49], ['Bamako', 'Africa/Bamako', 'Mali', 12.64, -8], ['Abidjan', 'Africa/Abidjan', 'Côte d’Ivoire', 5.36, -4.01],
+        ['Dakar', 'Africa/Dakar', 'Sénégal', 14.72, -17.47], ['Saint-Louis du Sénégal', 'Africa/Dakar', 'Sénégal', 16.03, -16.49], ['Bamako', 'Africa/Bamako', 'Mali', 12.64, -8], ['Abidjan', 'Africa/Abidjan', 'Côte d’Ivoire', 5.36, -4.01], ['Accra', 'Africa/Accra', 'Ghana', 5.6, -.19],
         ['Ouagadougou', 'Africa/Ouagadougou', 'Burkina Faso', 12.37, -1.52], ['Niamey', 'Africa/Niamey', 'Niger', 13.51, 2.11], ['Lomé', 'Africa/Lome', 'Togo', 6.13, 1.22], ['Cotonou', 'Africa/Porto-Novo', 'Bénin', 6.37, 2.39],
         ['Lagos', 'Africa/Lagos', 'Nigeria', 6.52, 3.38], ['Douala', 'Africa/Douala', 'Cameroun', 4.05, 9.77], ['Libreville', 'Africa/Libreville', 'Gabon', .42, 9.47], ['Brazzaville', 'Africa/Brazzaville', 'Congo', -4.26, 15.24],
         ['Kinshasa', 'Africa/Kinshasa', 'RD Congo', -4.44, 15.27], ['Addis-Abeba', 'Africa/Addis_Ababa', 'Éthiopie', 9.03, 38.74], ['Nairobi', 'Africa/Nairobi', 'Kenya', -1.29, 36.82], ['Djibouti', 'Africa/Djibouti', 'Djibouti', 11.59, 43.15],
@@ -101,7 +101,59 @@
         return `<svg viewBox="0 0 100 100" class="hz-svg" role="img" aria-label="${pad(p.h)}:${pad(p.mi)}">${shapeEl} fill="${c.face}" stroke="${c.ring}" stroke-width="2.5"/>${marks}
             ${hand(ah, 22, 4, c.hands)}${hand(am, 33, 2.6, c.hands)}${c.seconds ? hand(as, 37, 1, c.second, 9) : ''}<circle cx="50" cy="50" r="2.6" fill="${c.seconds ? c.second : c.hands}"/></svg>`;
     }
-    const api = {CITIES, partsAt, offsetOf, sunUp, clockSvg, SET, tzOf: (...a) => tzOf(...a), COUNTRY_TZ: null};
+
+    /* ── 🏷 les étiquettes des villes sur la carte : jamais l'une sur l'autre ──
+     * groupCities : des villes voisines (moins de `dist`) qui ont la même heure → une seule étiquette (« Montréal · New York 17:26 », dans l'ordre de la liste) ;
+     * placeLabels : chaque étiquette essaie 8 places autour de son point (droite, gauche, dessus, dessous, diagonales) ; si toutes
+     * touchent une autre étiquette ou un autre point, elle part en colonne à côté, reliée à son point par un trait fin. Tout reste dans la carte. */
+    function groupCities(pts, dist) {
+        const up = pts.map((_, i) => i), f = i => (up[i] === i ? i : (up[i] = f(up[i])));
+        pts.forEach((a, i) => pts.forEach((b, j) => { if (j > i && a.time === b.time && Math.hypot(a.x - b.x, a.y - b.y) < dist) up[f(j)] = f(i); }));
+        const m = new Map(); pts.forEach((p, i) => { const k = f(i); if (!m.has(k)) m.set(k, []); m.get(k).push(i); });
+        // dans l'ordre de la liste de l'utilisateur, 4 noms au plus par étiquette
+        return [...m.values()].flatMap(ix => Array.from({length: Math.ceil(ix.length / 4)}, (_, k) => ix.slice(k * 4, k * 4 + 4)));
+    }
+    function placeLabels(items, o = {}) {
+        const W = o.W ?? 960, H = o.H ?? 470, r = o.r ?? 4, g = o.gap ?? 3, pad = o.pad ?? 2;
+        const inter = (a, b) => Math.max(0, Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x)) * Math.max(0, Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y));
+        const dotBox = d => ({x: d.x - r - 1, y: d.y - r - 1, w: 2 * r + 2, h: 2 * r + 2});
+        const dots = items.flatMap(it => it.dots).map(dotBox), placed = [], leaders = [];
+        const clamp = b => ({...b, x: Math.min(Math.max(b.x, pad), W - pad - b.w), y: Math.min(Math.max(b.y, pad), H - pad - b.h)});
+        // un trait (a → b) qui traverse une boîte ? (quelques points le long du trait)
+        const crosses = (a, b, box) => { for (let k = 1; k < 12; k++) { const x = a.x + (b.x - a.x) * k / 12, y = a.y + (b.y - a.y) * k / 12; if (x > box.x && x < box.x + box.w && y > box.y && y < box.y + box.h) return true; } return false; };
+        const cost = (b, own) => dots.reduce((s, d, i) => s + (own.includes(i) ? 0 : inter(b, d)), 0) + placed.reduce((s, p) => s + inter(b, p) * 4, 0) + leaders.reduce((s, l) => s + (crosses(l.a, l.b, b) ? 50 : 0), 0);
+        const near = (b, d) => ({x: Math.min(Math.max(d.x, b.x), b.x + b.w), y: Math.min(Math.max(d.y, b.y), b.y + b.h)});
+        let first = 0; const ownOf = items.map(it => it.dots.map(() => first++));
+        // les plus serrées d'abord (le plus de voisins proches)
+        const crowd = it => items.reduce((s, o2) => s + (o2 !== it && Math.hypot(o2.dots[0].x - it.dots[0].x, o2.dots[0].y - it.dots[0].y) < (it.w + o2.w) ? 1 : 0), 0);
+        const order = items.map((it, i) => [i, crowd(it)]).sort((a, b) => b[1] - a[1] || items[a[0]].dots[0].y - items[b[0]].dots[0].y).map(x => x[0]);
+        const out = new Array(items.length);
+        order.forEach(i => {
+            const it = items[i], {w, h} = it, own = ownOf[i];
+            const x1 = Math.min(...it.dots.map(d => d.x)) - r, x2 = Math.max(...it.dots.map(d => d.x)) + r, y1 = Math.min(...it.dots.map(d => d.y)) - r, y2 = Math.max(...it.dots.map(d => d.y)) + r, cx = (x1 + x2) / 2, cy = (y1 + y2) / 2;
+            const cands = [[x2 + g, cy - h / 2], [x1 - g - w, cy - h / 2], [cx - w / 2, y1 - g - h], [cx - w / 2, y2 + g], [x2 + g * .5, y1 - h], [x1 - w - g * .5, y1 - h], [x2 + g * .5, y2], [x1 - w - g * .5, y2]]
+                .map(([x, y]) => { const b = clamp({x, y, w, h}); return Math.hypot(b.x - x, b.y - y) <= Math.max(h, w / 2) ? b : null; }).filter(Boolean);
+            let best = cands.find(b => cost(b, own) === 0);
+            let stacked = false;
+            if (!best) {
+                // 🗂 en colonne à côté : la place libre la plus proche, avec un trait fin jusqu'au point
+                stacked = true; const step = h * 1.15, list = [];
+                for (let k = 1; k <= 14; k++) for (const s of [1, -1]) for (let j = -8; j <= 8; j++) {
+                    const b = clamp({x: s > 0 ? x2 + g + k * h * .9 : x1 - g - w - k * h * .9, y: cy - h / 2 + j * step, w, h});
+                    list.push([Math.hypot(b.x + w / 2 - cx, b.y + h / 2 - cy), b]);
+                }
+                list.sort((a, b) => a[0] - b[0]);
+                const ok = b => { if (cost(b, own) > 0) return false; const tip = near(b, {x: cx, y: cy}); return !placed.some(p => crosses({x: cx, y: cy}, tip, p)) && !dots.some((d, di) => !own.includes(di) && crosses({x: cx, y: cy}, tip, d)); };
+                best = (list.find(([, b]) => ok(b)) || list.reduce((m, c) => (cost(c[1], own) < cost(m[1], own) ? c : m)))[1];
+            }
+            placed.push(best);
+            const res = {...best, stacked};
+            if (stacked) { const tip = near(best, {x: cx, y: cy}), from = it.dots.reduce((m, d) => (Math.hypot(d.x - tip.x, d.y - tip.y) < Math.hypot(m.x - tip.x, m.y - tip.y) ? d : m)); res.leader = {x1: from.x, y1: from.y, x2: tip.x, y2: tip.y}; leaders.push({a: from, b: tip}); }
+            out[i] = res;
+        });
+        return out;
+    }
+    const api = {groupCities, placeLabels, CITIES, partsAt, offsetOf, sunUp, clockSvg, SET, tzOf: (...a) => tzOf(...a), COUNTRY_TZ: null};
     if (typeof module === 'object' && module.exports) { module.exports = api; return; }
 
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {}, A = () => root.LCNDA_APP;
@@ -285,7 +337,9 @@
         const clips = clipDefs;
         const bands = mode === 'real' ? '' : Array.from({length: 25}, (_, i) => { const x0 = X(-187.5 + i * 15), off = i - 12; return `<rect x="${x0.toFixed(1)}" y="0" width="${(W / 24).toFixed(1)}" height="${H}" class="${i % 2 ? 'hz-b1' : 'hz-b2'}"/><text x="${Math.min(W - 10, Math.max(10, x0 + W / 48)).toFixed(1)}" y="14" class="hz-bl">${off > 0 ? '+' : ''}${off}</text>`; }).join('');
         let night = ''; for (let lon = -180; lon < 180; lon += 2) { let y0 = null; for (let lat = 88; lat >= -90; lat -= 2) { const n = sunUp(lat, lon + 1, t) === false; if (n && y0 === null) y0 = lat; if ((!n || lat === -90) && y0 !== null) { night += `M${X(lon).toFixed(1)} ${Y(y0).toFixed(1)}h${(W / 180 + .8).toFixed(1)}V${Y(n ? lat - 2 : lat).toFixed(1)}h-${(W / 180 + .8).toFixed(1)}Z`; y0 = null; } } }
-        const dots = cities.filter(c => Number.isFinite(c.lat)).map(c => { const p = partsAt(c.tz, t); return `<g class="hz-dot"><circle cx="${X(c.lon).toFixed(1)}" cy="${Y(c.lat).toFixed(1)}" r="4"/><text x="${(X(c.lon) + (X(c.lon) > W - 150 ? -6 : 6)).toFixed(1)}" y="${(Y(c.lat) + 4).toFixed(1)}" text-anchor="${X(c.lon) > W - 150 ? 'end' : 'start'}">${esc(c.name)} ${pad(p.h)}:${pad(p.mi)}</text></g>`; }).join('');
+        // les villes : un point chacune ; les étiquettes sont posées après coup (layoutMap), selon la largeur à l'écran
+        const dots = cities.filter(c => Number.isFinite(c.lat) && Number.isFinite(c.lon)).map((c, i) => { const p = partsAt(c.tz, t), tm = `${pad(p.h)}:${pad(p.mi)}`;
+            return `<g class="hz-dot" tabindex="0" data-hz-ci="${i}" data-hz-name="${esc(c.name)}" data-hz-time="${tm}" aria-label="${esc(c.name)} ${tm}"><title>${esc(c.name)} ${tm}</title><circle cx="${X(c.lon).toFixed(1)}" cy="${Y(c.lat).toFixed(1)}" r="4"/></g>`; }).join('');
         const fmtOff = o => `${o >= 0 ? '+' : '−'}${Math.floor(Math.abs(o) / 60)}${Math.abs(o) % 60 ? ':' + pad(Math.abs(o) % 60) : ''}`;
         const legend = mode === 'real' ? `<div class="hz-legend">${[...used.keys()].sort((a, b) => a - b).map(o => `<button type="button" class="hz-leg" data-hz-leg="${o}" title="${esc(T('Changer sa couleur'))}"><i style="background:${offColor(o, CP)}"></i>UTC${fmtOff(o)}</button>`).join('')}<button type="button" class="button small secondary" data-hz-colors data-hz-used="${[...used.keys()].join(',')}">🎨 ${esc(T('Couleurs des fuseaux'))}</button></div>` : '';
         const seg = `<div class="segmented hz-mapmode">${[['real', T('Par pays et régions (heure légale)')], ['bands', T('Fuseaux théoriques (bandes de 15°)')]].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-hz-mapmode="${k}" aria-pressed="${mode === k}">${esc(l)}</button>`).join('')}</div>`;
@@ -294,11 +348,44 @@
         const table = mode === 'real' && who.size ? `<details class="hz-who" data-hz-who ${ls.get(WHO_KEY, false) ? 'open' : ''}><summary>📋 ${esc(T('Quels pays et régions pour chaque fuseau'))} <small class="muted">${esc(T('{n} fuseaux', {n: String(who.size)}))}</small></summary>
             <input type="search" class="hz-who-q" data-hz-who-q placeholder="${esc(T('Chercher un pays, une région, un fuseau…'))}">
             <div class="hz-who-list">${[...who.keys()].sort((x, y) => x - y).map(o => `<section data-hz-who-off="${o}"><h4><i style="background:${offColor(o, CP)}"></i>${esc(fmtOffset(o))}</h4><p>${[...who.get(o).keys()].sort(coll.compare).map(n => `<span data-hz-who-n="${esc(n.toLowerCase())}">${esc(n)}</span>`).join('')}</p></section>`).join('')}</div></details>` : '';
-        return `${seg}<svg viewBox="0 0 ${W} ${H}" class="hz-map is-${mode}" role="img" aria-label="${esc(T('Carte des fuseaux horaires'))}"><defs>${clips}</defs><rect width="${W}" height="${H}" class="hz-sea"/>${bands}<g class="hz-land">${land}</g><path class="hz-night" d="${night}"/>${dots}</svg>${legend}${table}
+        return `${seg}<svg viewBox="0 0 ${W} ${H}" class="hz-map is-${mode}" role="img" aria-label="${esc(T('Carte des fuseaux horaires'))}"><defs>${clips}</defs><rect width="${W}" height="${H}" class="hz-sea"/>${bands}<g class="hz-land">${land}</g><path class="hz-night" d="${night}"/><g class="hz-dots">${dots}</g><g class="hz-leaders"></g><g class="hz-labels"></g></svg><ul class="hz-citykey" data-hz-citykey hidden></ul>${legend}${table}
             <p class="muted hz-note">${esc(mode === 'real' ? T('Chaque pays à son heure légale d’aujourd’hui (heure d’été comprise) ; les grands pays sont découpés par régions, de façon approchée. Survole un pays pour son fuseau.') : T('Les bandes montrent les fuseaux théoriques (15° chacun) ; l’heure réelle de chaque pays peut en différer (heure légale, heure d’été).'))}</p>`;
     }
 
     /* ── 🔁 comparer : à telle heure ici, quelle heure ailleurs ── */
+    /** 🏷 pose les étiquettes des villes selon la largeur réelle de la carte (refait quand la fenêtre change de taille) ;
+     *  en dessous de 560 px : des numéros sur la carte et la liste des villes en dessous */
+    const NARROW_PX = 560;
+    let measureCtx = null;
+    const textW = (s, px) => { try { measureCtx = measureCtx || document.createElement('canvas').getContext('2d'); measureCtx.font = `600 ${px}px system-ui, sans-serif`; return measureCtx.measureText(s).width; } catch (_) { return String(s).length * px * .6; } };
+    function layoutMap(svg) {
+        if (!svg?.isConnected) return;
+        const vb = (svg.getAttribute('viewBox') || '').split(/\s+/).map(Number), W = vb[2], H = vb[3], px = svg.getBoundingClientRect().width; if (!px || !W) return;
+        const k = W / px, narrow = px < NARROW_PX, fpx = narrow ? 11 : 12;
+        svg.dataset.hzPx = String(Math.round(px)); svg.classList.toggle('is-narrow', narrow);
+        const els = [...svg.querySelectorAll('.hz-dot')], rDot = (narrow ? 4.5 : 4) * k;
+        const pts = els.map(el => { const c = el.querySelector('circle'); c.setAttribute('r', rDot.toFixed(2)); return {x: Number(c.getAttribute('cx')), y: Number(c.getAttribute('cy')), name: el.dataset.hzName, time: el.dataset.hzTime}; });
+        // les voisines à la même heure ensemble ; numérotées d'ouest en est
+        const groups = groupCities(pts, 22 * k).sort((a, b) => pts[a[0]].x - pts[b[0]].x);
+        const items = groups.map((ix, gi) => { const full = `${ix.map(i => pts[i].name).join(' · ')} ${pts[ix[0]].time}`, txt = narrow ? String(gi + 1) : full;
+            return {txt, full, ix, w: (textW(txt, fpx) + (narrow ? 7 : 9)) * k, h: (fpx + 6) * k, dots: ix.map(i => pts[i])}; });
+        const pos = placeLabels(items, {W, H, r: rDot, gap: 3 * k, pad: 2 * k});
+        groups.forEach((ix, gi) => ix.forEach(i => { els[i].dataset.hzG = String(gi); }));
+        svg.querySelector('.hz-leaders').innerHTML = pos.map((b, gi) => b.leader ? `<line class="hz-leader" data-hz-g="${gi}" x1="${b.leader.x1.toFixed(1)}" y1="${b.leader.y1.toFixed(1)}" x2="${b.leader.x2.toFixed(1)}" y2="${b.leader.y2.toFixed(1)}"/>` : '').join('');
+        const labs = svg.querySelector('.hz-labels'); labs.style.fontSize = (fpx * k).toFixed(2) + 'px';
+        labs.innerHTML = pos.map((b, gi) => `<g class="hz-lab${b.stacked ? ' is-stacked' : ''}" data-hz-g="${gi}"><rect x="${b.x.toFixed(1)}" y="${b.y.toFixed(1)}" width="${b.w.toFixed(1)}" height="${b.h.toFixed(1)}" rx="${(3 * k).toFixed(1)}"/><text x="${(b.x + b.w / 2).toFixed(1)}" y="${(b.y + b.h / 2).toFixed(1)}">${esc(items[gi].txt)}</text></g>`).join('');
+        const key = svg.parentNode?.querySelector('[data-hz-citykey]');
+        if (key) { key.hidden = !narrow; key.innerHTML = narrow ? items.map((it, gi) => `<li data-hz-g="${gi}" tabindex="0"><b>${gi + 1}</b> ${esc(it.full)}</li>`).join('') : ''; }
+        if (!svg.dataset.hzWired) {
+            svg.dataset.hzWired = '1';
+            const hl = g => { const box = svg.parentNode || svg; box.querySelectorAll('.is-hl').forEach(x => x.classList.remove('is-hl')); if (g == null) return;
+                box.querySelectorAll(`[data-hz-g="${g}"]`).forEach(x => x.classList.add('is-hl')); const lab = svg.querySelector(`.hz-lab[data-hz-g="${g}"]`); lab?.parentNode.appendChild(lab); };
+            const on = e => { const x = e.target.closest?.('[data-hz-g]'); hl(x ? x.dataset.hzG : null); };
+            for (const el of [svg, key].filter(Boolean)) { el.addEventListener('pointerover', on); el.addEventListener('focusin', on); el.addEventListener('pointerleave', () => hl(null)); el.addEventListener('focusout', () => hl(null)); }
+            if (typeof ResizeObserver === 'function') { const ro = new ResizeObserver(() => { if (!svg.isConnected) return ro.disconnect(); const w = Math.round(svg.getBoundingClientRect().width); if (w && Math.abs(w - Number(svg.dataset.hzPx || 0)) > 1) layoutMap(svg); }); ro.observe(svg); }
+        }
+    }
+
     function compareHtml(cities, h) {
         const t0 = new Date(); const here = partsAt(HERE), base = Date.now() + ((h - here.h) * 60 - here.mi) * 60000 - here.s * 1000;
         return `<table class="hz-cmp"><thead><tr><th>${esc(T('Ville'))}</th>${Array.from({length: 24}, (_, k) => `<th class="${k === h ? 'is-on' : ''}">${k}</th>`).join('')}</tr></thead><tbody>${cities.map(c => {
@@ -353,6 +440,7 @@
             <div class="segmented hz-views" role="tablist">${views.map(([k, l]) => `<button type="button" class="${view === k ? 'is-active' : ''}" data-hz-view="${k}" aria-pressed="${view === k}">${esc(l)}</button>`).join('')}</div>
             <div class="hz-body" data-hz-body>${body}</div></section>`;
         startTick();
+        ws.querySelectorAll('.hz-map').forEach(layoutMap);
         ws.querySelector('[data-hz-who-q]')?.addEventListener('input', e => { const q = e.target.value.trim().toLowerCase(); ws.querySelectorAll('[data-hz-who-off]').forEach(sec => { let any = false; sec.querySelectorAll('[data-hz-who-n]').forEach(x => { const on = !q || x.dataset.hzWhoN.includes(q) || sec.querySelector('h4').textContent.toLowerCase().includes(q); x.hidden = !on; if (on) any = true; }); sec.hidden = !any; }); });
         const again = () => render(A().state?.workspaceToken);
         ws.querySelector('.hz-page').addEventListener('click', e => {
@@ -447,7 +535,7 @@
         return true;
     };
     if (!reg()) document.addEventListener('DOMContentLoaded', reg);
-    ext.horloges = {...api, PALETTES, colorPrefs, offColor, colorsDialog, mine, styleOf, clocksHtml, mapHtml, compareHtml, addDialog, styleDialog, render, HERE};
+    ext.horloges = {...api, PALETTES, colorPrefs, offColor, colorsDialog, mine, styleOf, clocksHtml, mapHtml, layoutMap, compareHtml, addDialog, styleDialog, render, HERE};
     if (!document.getElementById('hz-css')) { const s = document.createElement('style'); s.id = 'hz-css'; s.textContent = `
 .hz-views{margin:0 0 14px}.hz-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
 .hz-item{border:2px solid var(--ink,#111);background:var(--surface,#fff);padding:10px;display:grid;gap:6px}.hz-item-act{display:flex;gap:4px;justify-content:flex-end}
@@ -463,7 +551,10 @@
 .hz-land path{fill:#f1eee6;stroke:#b9b2a2;stroke-width:.4}.hz-map.is-real .hz-land path{stroke:#ffffff;stroke-width:.35}.hz-mapmode{margin:0 0 8px}
 .hz-legend{display:flex;flex-wrap:wrap;gap:4px 10px;margin:6px 0 0;font-size:12px;align-items:center}.hz-leg{display:inline-flex;align-items:center;gap:4px;border:0;background:none;padding:2px;cursor:pointer;font:inherit;color:inherit;min-height:0}.hz-leg:hover{outline:1.5px solid var(--accent,#055dff)}
 .hz-colors{width:min(900px,96vw)}.hz-pals{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}.hz-pal{display:grid;gap:4px;text-align:left;border:2px solid var(--line,#c9ced8);background:var(--surface,#fff);padding:6px 8px;cursor:pointer;font:600 13px system-ui}.hz-pal.is-on{border-color:var(--accent,#055dff);box-shadow:inset 0 0 0 1px var(--accent,#055dff)}
-.hz-pal-sw{display:flex;height:14px}.hz-pal-sw i{flex:1}.hz-offs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.hz-off{display:flex;align-items:center;gap:6px;font-size:13px;border:1px solid var(--line,#e4e6ea);padding:3px 6px}.hz-off.is-used{font-weight:800}.hz-off.is-own{border-color:var(--accent,#055dff)}.hz-off input{width:34px;height:24px;padding:0}.hz-atlas{display:flex;gap:8px;align-items:center}.hz-legend i{width:14px;height:10px;display:inline-block;border:1px solid rgba(0,0,0,.2)}.hz-night{fill:rgba(20,25,45,.32)}.hz-dot circle{fill:#c0392b;stroke:#fff;stroke-width:1.5}.hz-dot text{font:600 11px system-ui;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:3px}
+.hz-pal-sw{display:flex;height:14px}.hz-pal-sw i{flex:1}.hz-offs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.hz-off{display:flex;align-items:center;gap:6px;font-size:13px;border:1px solid var(--line,#e4e6ea);padding:3px 6px}.hz-off.is-used{font-weight:800}.hz-off.is-own{border-color:var(--accent,#055dff)}.hz-off input{width:34px;height:24px;padding:0}.hz-atlas{display:flex;gap:8px;align-items:center}.hz-legend i{width:14px;height:10px;display:inline-block;border:1px solid rgba(0,0,0,.2)}.hz-night{fill:rgba(20,25,45,.32)}.hz-dot{cursor:default;outline:none}.hz-dot circle{fill:#c0392b;stroke:#fff;stroke-width:1.5px;vector-effect:non-scaling-stroke}.hz-dot.is-hl circle,.hz-dot:focus-visible circle{stroke:var(--accent,#055dff);stroke-width:3px}
+.hz-lab rect{fill:rgba(255,255,255,.93);stroke:rgba(17,17,17,.35);stroke-width:1px;vector-effect:non-scaling-stroke}.hz-lab text{font-family:system-ui,sans-serif;font-weight:600;fill:#111;text-anchor:middle;dominant-baseline:central}
+.hz-lab.is-hl rect{fill:#fff;stroke:var(--accent,#055dff);stroke-width:2px}.hz-leader{stroke:#333;stroke-width:1px;vector-effect:non-scaling-stroke;opacity:.8}.hz-leader.is-hl{stroke:var(--accent,#055dff);stroke-width:2px;opacity:1}
+.hz-citykey{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px}.hz-citykey[hidden]{display:none}.hz-citykey li{display:inline-flex;align-items:center;gap:5px}.hz-citykey b{display:inline-grid;place-items:center;min-width:18px;height:18px;border:1px solid rgba(17,17,17,.35);border-radius:4px;font-size:11px;background:#fff}.hz-citykey li.is-hl b{border-color:var(--accent,#055dff);outline:1px solid var(--accent,#055dff)}
 .hz-note{font-size:12.5px;margin:6px 0 0}
 .hz-who{margin:10px 0 0;border:2px solid var(--ink,#111);background:var(--surface,#fff);padding:8px 12px}.hz-who summary{cursor:pointer;font-weight:800}.hz-who-q{width:100%;margin:8px 0}
 .hz-who-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:6px 18px;max-height:420px;overflow:auto}.hz-who-list h4{margin:6px 0 2px;display:flex;align-items:center;gap:6px;font-size:13px}.hz-who-list h4 i{width:14px;height:10px;border:1px solid rgba(0,0,0,.2)}.hz-who-list p{margin:0;font-size:12.5px;line-height:1.45}

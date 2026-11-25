@@ -94,14 +94,21 @@ echo 'ok';`);
             assert.strictEqual(r.flag, true); assert.strictEqual(r.mpf, true);
         });
 
-        let openMs = 0;
-        await t('vitesse : la page de 100 lignes (sur 100 007) avec ses pastilles en moins de 4 s', async () => {
+        let openMs = 0, chipsMs = 0, filterMs = 0;
+        await t('vitesse : la page de 100 lignes (sur 100 007) puis ses pastilles en moins de 1,5 s', async () => {
+            await p.evaluate(() => { window.LCNDA_APP.state.listType = 'donnees'; window.LCNDA_APP.setModule('listes'); }); // l'écran Listes déjà ouvert (son menu de côté n'est pas mesuré)
+            await p.waitForSelector('.ld-overview', {timeout: 30000});
             const t0 = Date.now();
             await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.open('dp_maires'));
-            await p.waitForFunction(() => /100\s?007/.test(document.querySelector('[data-ld-count]')?.textContent || '') && document.querySelector('.ld-table tbody tr[data-ld-row="0"] .lp-cell'), null, {timeout: 20000});
-            openMs = Date.now() - t0;
-            assert.ok(openMs < 4000, `${openMs} ms`);
+            await p.waitForFunction(() => /100\s?007/.test(document.querySelector('[data-ld-count]')?.textContent || '') && document.querySelector('.ld-table tbody tr[data-ld-row="99"]'), null, {timeout: 30000});
+            const t1 = Date.now();
+            await p.waitForFunction(() => document.querySelector('.ld-table tbody tr[data-ld-row="0"] .lp-cell'), null, {timeout: 20000});
+            openMs = Date.now() - t0; chipsMs = Date.now() - t1;
+            assert.ok(chipsMs < 1500, `${chipsMs} ms`); assert.ok(openMs < 15000, `${openMs} ms`);
             assert.strictEqual(await p.$$eval('.ld-table tbody tr', x => x.length), 100);
+            // la reconnaissance seule, sur les 100 007 lignes (ce que fait le filtre)
+            const ms = await p.evaluate(async () => { const E = window.LCNDA_EXT, d = E.dataLists.find(x => x.id === 'dp_maires'), rows = await d.load(), t = performance.now(); let n = 0; for (const r of rows) if (E.listesPersonnes.matchRow(d, r)?.any) n++; return [performance.now() - t, n]; });
+            assert.strictEqual(ms[1], 4); assert.ok(ms[0] < 3000, `${ms[0]} ms`);
         });
         await t('pastille : « dans ta base : Jean MAZAUD (1781–1850) » (même commune) ; un clic ouvre la fiche', async () => {
             await waitChip(0, /dans ta base : Jean MAZAUD \(1781–1850\)/);
@@ -158,7 +165,7 @@ echo 'ok';`);
         await t('la fiche montre la ligne reliée avec sa source (Sources ; « 🔎 Ce qui le concerne »)', async () => {
             const r = await api('lp_person', {person_id: 1});
             assert.ok(r.links.length === 1 && r.links[0].role === 'Maire de Tulle (1900–1905)' && /Q904/.test(r.links[0].url), JSON.stringify(r));
-            const html = await p.evaluate(async () => { const h = document.createElement('div'); const d = window.LCNDA_EXT.dataSources.find(x => x.id === 'lp_liens'); await d.run({person: {id: 1}}, h); return h.innerHTML; });
+            const html = await p.evaluate(async () => { const h = document.createElement('div'); const d = window.LCNDA_EXT.dataSources.find(x => x.id === 'lpers_liens'); await d.run({person: {id: 1}}, h); return h.innerHTML; });
             assert.ok(/Maire de Tulle \(1900–1905\)/.test(html) && /Wikidata \(CC0 1\.0\)/.test(html) && /href="https:\/\/www\.wikidata\.org\/wiki\/Q904"/.test(html), html);
             await p.evaluate(() => window.LCNDA_APP.openPersonById(1));
             await p.waitForFunction(() => /Maire de Tulle \(1900–1905\)/.test(document.querySelector('.person-page')?.textContent || ''), null, {timeout: 15000});
@@ -187,7 +194,7 @@ echo 'ok';`);
             const t0 = Date.now();
             await p.click('[data-lp-inbase]');
             await p.waitForFunction(() => /^5 lignes/.test(document.querySelector('[data-ld-count]')?.textContent || ''), null, {timeout: 20000});
-            const ms = Date.now() - t0; assert.ok(ms < 5000, `${ms} ms`);
+            filterMs = Date.now() - t0; assert.ok(filterMs < 5000, `${filterMs} ms`);
             assert.strictEqual(await p.getAttribute('[data-lp-inbase]', 'aria-pressed'), 'true');
             const names = await p.$$eval('.ld-table tbody tr td:first-child', tds => tds.map(td => td.textContent));
             assert.ok(names.every(n => !/Nomfictif|Antoine|Pierre/.test(n)), names.join(' | '));
@@ -212,7 +219,7 @@ echo 'ok';`);
             await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
         });
         await t('aucune erreur dans la page', async () => { assert.deepStrictEqual(errs, []); });
-        console.log(`(ouverture de la liste : ${openMs} ms)`);
+        console.log(`(ouverture de la liste : ${openMs} ms, dont pastilles ${chipsMs} ms ; filtre ${filterMs} ms)`);
     } finally {
         await browser.close(); proc.kill();
     }

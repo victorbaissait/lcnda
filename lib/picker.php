@@ -272,6 +272,17 @@ function picker_text_where(array $columns, string $q, array &$params, string $pr
     return '(' . implode(' OR ', $parts) . ')';
 }
 
+/** Plusieurs mots (« LACOMBE Chamberet », « naissance Treignac ») : chaque mot doit se trouver dans une des colonnes (pas forcément la même).
+ *  Un seul mot : comme picker_text_where. */
+function picker_words_where(array $columns, string $q, array &$params, string $prefix = 'w'): string
+{
+    $words = array_values(array_filter(preg_split('/\s+/u', trim($q)) ?: [], static fn($w) => $w !== ''));
+    if (count($words) < 2 || picker_ids()) { return picker_text_where($columns, $q, $params, $prefix); }
+    $all = [];
+    foreach (array_slice($words, 0, 6) as $i => $w) { $all[] = picker_text_where($columns, $w, $params, $prefix . $i); }
+    return '(' . implode(' AND ', $all) . ')';
+}
+
 // ─── 📅 Événements ──────────────────────────────────────────────────────────
 /** Un événement : son titre (ou sa sorte), la personne ou le couple, la date et le lieu ; on cherche aussi par nom de la personne */
 function picker_events(PDO $pdo, string $q, int $offset, int $limit, array $opts = []): array
@@ -279,7 +290,7 @@ function picker_events(PDO $pdo, string $q, int $offset, int $limit, array $opts
     $params = [];
     $who = "COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')";
     $couple = "COALESCE(p1.first_name,'') || ' ' || COALESCE(p1.last_name,'') || ' et ' || COALESCE(p2.first_name,'') || ' ' || COALESCE(p2.last_name,'')";
-    $where = picker_text_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params);
+    $where = picker_words_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params); // « LACOMBE Chamberet » : chaque mot quelque part
     // filter.person_id : les événements d'une personne et de ses couples (⏳ Une journée dans la vie de…)
     if (!empty($opts['person_id'])) { $pid = (int) $opts['person_id']; $where = "({$where}) AND (e.person_id={$pid} OR f.partner1_id={$pid} OR f.partner2_id={$pid})"; }
     if (!empty($opts['year_from']) && !empty($opts['year_to'])) { $where = "({$where}) AND e.year BETWEEN " . (int) $opts['year_from'] . ' AND ' . (int) $opts['year_to']; } // « Treignac 1780-1800 »

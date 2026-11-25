@@ -267,7 +267,8 @@
         if (!items.length) return toast(T('Rien à mettre.'));
         if (kiosk()) return toast(T('Mode consultation : rien ne peut être modifié.'));
         const sets = items.filter(x => x.kind === 'set'), nRows = sets.reduce((n, x) => n + setCount(x), 0);
-        const what = items.length === 1 ? `« ${String(items[0].title || '').replace(/^[\p{Extended_Pictographic}\uFE0F\u200D\s]+/u, '').slice(0, 80)} »${sets.length ? ` (${plural(nRows, T('ligne'))})` : ''}` : plural(items.length, T('élément'), T('éléments'));
+        const name1 = String(items[0].title || '').replace(/^[\p{Extended_Pictographic}\uFE0F\u200D\s]+/u, ''), short = sets.length ? name1.split(' — ')[0] : name1; // un ensemble : le nom de la liste (les critères sont dans « Comment ? »)
+        const what = items.length === 1 ? `« ${short.length > 80 ? short.slice(0, 79) + '…' : short} »${sets.length ? ` (${plural(nRows, T('ligne'))})` : ''}` : plural(items.length, T('élément'), T('éléments'));
         const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-put'; dlg.dataset.noFoot = ''; dlg.setAttribute('aria-labelledby', 'cx-put-h');
         let sel = null; // {id, here}
         const asRows = () => dlg.querySelector('[name="cx-setmode"]:checked')?.value === 'rows';
@@ -996,7 +997,7 @@
         const special = ['data', 'lists', 'outside'].includes(st.tab);
         srch.hidden = special; q.hidden = special; // le champ est vraiment retiré là où il ne sert pas (Listes, Données, De l'extérieur)
         q.placeholder = T(HINT[st.tab] || 'Chercher…');
-        dlg.classList.toggle('is-wide', special); // Données, Listes, De l'extérieur : sans aperçu, toute la largeur
+        dlg.classList.toggle('is-wide', st.tab === 'outside' || (st.tab === 'lists' && !st.list)); // De l'extérieur, la liste des listes : sans aperçu, toute la largeur
         if (!st.preview || st.preview.kind !== st.tab) previewItem(st, null);
         chips.innerHTML = special ? '' : chipsHtml(st); chips.hidden = !chips.innerHTML;
         chips.querySelectorAll('[data-cx-chip]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cxChip; if (st.filters.has(k)) st.filters.delete(k); else st.filters.add(k); drawTab(st); }));
@@ -1124,7 +1125,8 @@
     /** le texte d'un résultat affiché → ses lignes (une info chacune, avec son lien ↗ s'il y en a un) */
     function linesOf(host) {
         const skip = '.muted small, script, style, button, [hidden], .ui-spinner, .skeleton';
-        const blocks = [...host.querySelectorAll('li, tr, p, dd, .wx-norm, .hist-life > div, [class*="-line"], [class*="-row"]')].filter(b => !b.closest(skip) && !b.querySelector('li, tr, p, dd'));
+        let blocks = [...host.querySelectorAll('li, tr, p, dd, .wx-norm, .hist-life > div, [class*="-line"], [class*="-row"]')].filter(b => !b.closest(skip) && !b.querySelector('li, tr, p, dd'));
+        const items = blocks.filter(b => b.matches('li, tr')); if (items.length >= 2) blocks = items; // une liste (des cimetières…) : ses lignes, pas la phrase d'introduction ni la source
         const out = [], seen = new Set();
         (blocks.length ? blocks : [host]).forEach(b => {
             const c = b.cloneNode(true); c.querySelectorAll('button, script, style').forEach(x => x.remove());
@@ -1262,12 +1264,13 @@
     const near1 = (a, b) => { if (Math.abs(a.length - b.length) > 1 || a.length < 5) return false; let i = 0; while (i < a.length && a[i] === b[i]) i++; return a.slice(i + 1) === b.slice(i + 1) || a.slice(i + 1) === b.slice(i) || a.slice(i) === b.slice(i + 1); };
     const STOP = new Set('les la le l des de du d un une a au aux en et ou dans sur pour avec autour pres km rayon moins plus entre mois annee annees jour vers commune ville village departement dep me il faut je veux cherche trouve tous toutes tout liste the of'.split(' '));
     async function parseAsk(q, lists) {
+        lists = (lists || []).filter(x => x && !x.link); // les listes qui ouvrent un autre écran ne se prennent pas d'ici
         const f = fold(q).replace(/[’']/g, ' ').replace(/\s+/g, ' ');
         const words = f.split(/[^a-z0-9-]+/).filter(Boolean);
         let d = null, used = new Set();
         for (const [re, ids] of SYN) { const m = f.match(re); if (m) { d = lists.find(x => ids.includes(x.id)); if (d) { used.add(m[0]); break; } } }
         if (!d) { // les mots du nom de la liste, au pluriel ou non, avec une faute de frappe permise
-            const score = x => { const lw = fold(x.label).split(/[^a-z]+/).filter(w => w.length > 3).map(w => w.replace(/s$/, '')); let n = 0; words.forEach(w => { const w1 = w.replace(/s$/, ''); if (lw.some(l => l === w1 || (w1.length > 4 && (l.startsWith(w1) || w1.startsWith(l))) || near1(l, w1))) { n++; used.add(w); } }); return n; };
+            const score = x => { const lw = fold(x.label).split(/[^a-z]+/).filter(w => w.length > 3).map(w => w.replace(/s$/, '')); let n = 0; words.forEach(w => { if (STOP.has(w)) return; const w1 = w.replace(/s$/, ''); if (lw.some(l => l === w1 || (w1.length > 4 && (l.startsWith(w1) || w1.startsWith(l))) || near1(l, w1))) { n++; used.add(w); } }); return n; };
             d = lists.map(x => ({x, n: score(x)})).sort((a, b) => b.n - a.n).find(z => z.n)?.x || null;
             if (d) { used = new Set(); const lw = fold(d.label).split(/[^a-z]+/).filter(w => w.length > 3).map(w => w.replace(/s$/, '')); words.forEach(w => { const w1 = w.replace(/s$/, ''); if (lw.some(l => l === w1 || (w1.length > 4 && (l.startsWith(w1) || w1.startsWith(l))) || near1(l, w1))) used.add(w); }); }
         }

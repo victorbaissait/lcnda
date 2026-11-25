@@ -33,6 +33,24 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
         assert.match(svg, /<polygon/); assert.match(svg, />XII</); assert.match(svg, /aria-label="03:00"/); assert.strictEqual((svg.match(/<line [^>]*transform/g) || []).length, 2, 'heures et minutes, pas de trotteuse');
     });
 
+    await t('🏷 les étiquettes de la carte : jamais l’une sur l’autre, dans la carte, en colonne avec un trait si c’est trop serré', () => {
+        const X = lon => (lon + 180) / 360 * 960, Y = lat => (90 - lat) / 180 * 470;
+        const ov = (a, b) => Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x) > .01 && Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y) > .01;
+        // l'Europe de l'Ouest bien serrée : 12 villes à moins de 10° les unes des autres, de grandes étiquettes
+        const eu = ['Paris', 'Bruxelles', 'Londres', 'Amsterdam', 'Luxembourg', 'Genève', 'Francfort', 'Lyon', 'Lille', 'Berne', 'Cologne', 'Strasbourg'].map(n => H.CITIES.find(c => c[0] === n));
+        const items = eu.map(c => ({dots: [{x: X(c[4]), y: Y(c[3])}], w: 70, h: 15}));
+        const pos = H.placeLabels(items, {W: 960, H: 470, r: 4});
+        pos.forEach((a, i) => pos.forEach((b, j) => { if (j > i) assert.ok(!ov(a, b), `${eu[i][0]} / ${eu[j][0]} se chevauchent`); }));
+        pos.forEach((b, i) => { assert.ok(b.x >= 0 && b.y >= 0 && b.x + b.w <= 960 && b.y + b.h <= 470, eu[i][0] + ' hors de la carte'); items.forEach((it, j) => { if (j !== i) assert.ok(!ov(b, {x: it.dots[0].x - 4, y: it.dots[0].y - 4, w: 8, h: 8}), `${eu[i][0]} cache le point de ${eu[j][0]}`); }); });
+        const st = pos.filter(b => b.stacked); assert.ok(st.length >= 2, 'des étiquettes en colonne'); assert.ok(st.every(b => b.leader && Number.isFinite(b.leader.x1 + b.leader.y2)), 'chacune avec son trait');
+        // tout près du bord : l'étiquette reste dans la carte
+        const edge = H.placeLabels([{dots: [{x: 955, y: 3}], w: 120, h: 15}, {dots: [{x: 2, y: 466}], w: 120, h: 15}], {W: 960, H: 470});
+        edge.forEach(b => assert.ok(b.x >= 0 && b.y >= 0 && b.x + b.w <= 960 && b.y + b.h <= 470));
+        // la même heure, tout près → ensemble ; pas la même heure → séparées
+        const g = H.groupCities([{x: 0, y: 0, time: '17:26'}, {x: 5, y: 4, time: '17:26'}, {x: 6, y: 0, time: '18:26'}, {x: 300, y: 0, time: '17:26'}], 20);
+        assert.deepStrictEqual(g.map(x => x.join(',')).sort(), ['0,1', '2', '3']);
+    });
+
     const phpPath = findPhp([devBundledPhp()]) || 'php';
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-hz-'));
     fs.mkdirSync(path.join(tmp, 'media'));
@@ -116,6 +134,71 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-horloges-carte')), '"bands"');
             await p.click('.hz-page [data-hz-mapmode="real"]'); await p.waitForSelector('.hz-map.is-real');
             await p.click('.hz-page [data-hz-view="clocks"]');
+        });
+        // 🏷 les villes proches sur la carte : Abidjan, Accra, Cotonou, Lagos ; Montréal et New York ; Paris, Bruxelles, Londres
+        const CLOSE = ['Abidjan', 'Accra', 'Cotonou', 'Lagos', 'Montréal', 'New York', 'Paris', 'Bruxelles', 'Londres', 'Tokyo', 'Moscou'];
+        const checkLabels = async (pg, what) => {
+            const r = await pg.evaluate(() => {
+                const svg = document.querySelector('.hz-map'), m = svg.getBoundingClientRect(), bx = e => { const b = e.getBoundingClientRect(); return {x: b.left, y: b.top, w: b.width, h: b.height}; };
+                return {m: {x: m.left, y: m.top, w: m.width, h: m.height}, labs: [...svg.querySelectorAll('.hz-lab')].map(l => ({g: l.dataset.hzG, txt: l.textContent, st: l.classList.contains('is-stacked'), ...bx(l.querySelector('rect'))})),
+                    dots: [...svg.querySelectorAll('.hz-dot')].map(d => ({g: d.dataset.hzG, ...bx(d.querySelector('circle'))})), leaders: [...svg.querySelectorAll('.hz-leader')].map(l => l.dataset.hzG),
+                    over: getComputedStyle(svg.querySelector('.hz-labels')).display !== 'none' && [...svg.children].indexOf(svg.querySelector('.hz-labels')) > [...svg.children].indexOf(svg.querySelector('.hz-night'))};
+            });
+            const ov = (a, b) => Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x) > .5 && Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y) > .5;
+            assert.ok(r.labs.length >= 6, what + ' : des étiquettes');
+            r.labs.forEach((a, i) => r.labs.forEach((b, j) => { if (j > i) assert.ok(!ov(a, b), `${what} : « ${a.txt} » et « ${b.txt} » se chevauchent`); }));
+            r.labs.forEach(a => { assert.ok(a.x >= r.m.x - .5 && a.y >= r.m.y - .5 && a.x + a.w <= r.m.x + r.m.w + .5 && a.y + a.h <= r.m.y + r.m.h + .5, `${what} : « ${a.txt} » sort de la carte`);
+                r.dots.forEach(d => { if (d.g !== a.g) assert.ok(!ov(a, d), `${what} : « ${a.txt} » cache un autre point`); }); });
+            r.labs.filter(a => a.st).forEach(a => assert.ok(r.leaders.includes(a.g), `${what} : « ${a.txt} » en colonne a son trait`));
+            assert.ok(r.over, what + ' : les étiquettes au-dessus de la nuit');
+            return r;
+        };
+        await t('🏷 la carte des fuseaux : des villes proches, aucune étiquette l’une sur l’autre (heure légale et fuseaux théoriques), le survol', async () => {
+            const saved = await p.evaluate(() => [localStorage.getItem('genealogie-horloges'), localStorage.getItem('genealogie-horloges-vue')]);
+            await p.evaluate(names => { const H = window.LCNDA_EXT.horloges; localStorage.setItem('genealogie-horloges', JSON.stringify(names.map((n, i) => { const c = H.CITIES.find(x => x[0] === n); return {id: 'k' + i, name: n, tz: c[1], lat: c[3], lon: c[4]}; }))); localStorage.setItem('genealogie-horloges-vue', '"map"'); }, CLOSE);
+            await open(); await p.waitForSelector('.hz-map .hz-lab', {timeout: 15000});
+            for (const mode of ['real', 'bands']) {
+                await p.click(`.hz-page [data-hz-mapmode="${mode}"]`); await p.waitForSelector(`.hz-map.is-${mode} .hz-lab`);
+                const r = await checkLabels(p, mode);
+                const txt = r.labs.map(a => a.txt);
+                assert.ok(txt.some(x => /^Montréal · New York \d\d:\d\d$/.test(x)), 'Montréal et New York ensemble : ' + txt.join(' | '));
+                assert.ok(txt.some(x => /Cotonou · Lagos \d\d:\d\d/.test(x)) && txt.some(x => /Abidjan · Accra \d\d:\d\d/.test(x)) && txt.some(x => /Paris · Bruxelles \d\d:\d\d/.test(x)) && txt.some(x => /^Londres \d\d:\d\d$/.test(x)), txt.join(' | '));
+                assert.strictEqual(await p.evaluate(() => document.querySelector('[data-hz-citykey]').hidden), true, 'pas de liste numérotée sur grand écran');
+            }
+            // survoler (ou atteindre au clavier) un point → son étiquette ressort
+            await p.focus('.hz-map .hz-dot[data-hz-name="Tokyo"]');
+            assert.ok(await p.evaluate(() => { const g = document.querySelector('.hz-dot[data-hz-name="Tokyo"]').dataset.hzG, l = document.querySelector(`.hz-lab[data-hz-g="${g}"]`); return l.classList.contains('is-hl') && /Tokyo/.test(l.textContent) && l === l.parentNode.lastElementChild; }));
+            await p.hover('.hz-map .hz-dot[data-hz-name="Paris"] circle');
+            assert.ok(await p.evaluate(() => { const l = document.querySelector('.hz-lab.is-hl'); return l && /Paris/.test(l.textContent) && document.querySelectorAll('.hz-lab.is-hl').length === 1; }));
+            // une ville de plus, tout près (Lomé) : les étiquettes se replacent
+            await p.evaluate(() => { const H = window.LCNDA_EXT.horloges, l = H.mine(); localStorage.setItem('genealogie-horloges', JSON.stringify([...l, {id: 'lome', name: 'Lomé', tz: 'Africa/Lome', lat: 6.13, lon: 1.22}])); return H.render(window.LCNDA_APP.state.workspaceToken); });
+            await p.waitForFunction(() => [...document.querySelectorAll('.hz-map .hz-lab')].some(l => /Lomé/.test(l.textContent)));
+            await checkLabels(p, 'avec Lomé');
+            // la fenêtre rétrécit : numéros et liste en dessous, sans relancer la page
+            await p.setViewportSize({width: 390, height: 844}); await p.waitForFunction(() => document.querySelector('.hz-map.is-narrow') && !document.querySelector('[data-hz-citykey]').hidden, null, {timeout: 5000});
+            await checkLabels(p, '390 px (redimensionné)');
+            await p.setViewportSize({width: 1440, height: 900}); await p.waitForFunction(() => !document.querySelector('.hz-map.is-narrow'), null, {timeout: 5000});
+            await p.click('.hz-page [data-hz-mapmode="real"]');
+            // remis comme avant (les 4 villes, la vue horloges) pour la suite
+            await p.evaluate(([l, v]) => { if (l === null) localStorage.removeItem('genealogie-horloges'); else localStorage.setItem('genealogie-horloges', l); localStorage.setItem('genealogie-horloges-vue', v || '"clocks"'); }, saved);
+            await p.click('.hz-page [data-hz-view="clocks"]'); await p.waitForSelector('.hz-page .hz-clock');
+        });
+        await t('🏷 sur un téléphone (390 px) : des numéros sur la carte, la liste des villes en dessous', async () => {
+            const ctx = await browser.newContext({viewport: {width: 390, height: 844}, timezoneId: 'Europe/Paris'});
+            const m = await ctx.newPage(); m.on('pageerror', e => errs.push(e.message));
+            await m.goto(base); await m.waitForFunction(() => window.LCNDA_EXT?.horloges && window.LCNDA_APP?.state?.csrf, null, {timeout: 30000});
+            await m.evaluate(names => { const H = window.LCNDA_EXT.horloges; localStorage.setItem('genealogie-horloges-vue', '"map"'); localStorage.setItem('genealogie-horloges', JSON.stringify(names.map((n, i) => { const c = H.CITIES.find(x => x[0] === n); return {id: 'k' + i, name: n, tz: c[1], lat: c[3], lon: c[4]}; }))); const A = window.LCNDA_APP; A.state.listType = 'world_clocks'; A.setModule('listes'); }, CLOSE);
+            await m.waitForSelector('.hz-map.is-narrow .hz-lab', {timeout: 15000});
+            for (const mode of ['real', 'bands']) {
+                await m.click(`.hz-page [data-hz-mapmode="${mode}"]`); await m.waitForSelector(`.hz-map.is-${mode}.is-narrow .hz-lab`);
+                const r = await checkLabels(m, '390 px ' + mode);
+                assert.ok(r.labs.every(a => /^\d+$/.test(a.txt)), 'des numéros : ' + r.labs.map(a => a.txt).join(','));
+                const key = await m.evaluate(() => [...document.querySelectorAll('[data-hz-citykey] li')].map(li => li.textContent.trim()));
+                assert.strictEqual(key.length, r.labs.length, 'un numéro = une ligne de la liste');
+                assert.ok(key.some(x => /^\d+ Montréal · New York \d\d:\d\d$/.test(x)) && key.some(x => /Tokyo/.test(x)), key.join(' | '));
+                assert.ok(await m.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'pas de défilement de côté');
+            }
+            await ctx.close();
         });
         await t('🎨 Style : préréglage « Numérique » (chiffres seuls), enregistré, ↶ Annuler', async () => {
             await p.click('.hz-page [data-hz-style-open]'); await p.waitForSelector('.hz-style [data-hz-preset]');

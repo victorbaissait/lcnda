@@ -1,0 +1,44 @@
+/* 🗂 Données installées : la ligne « Données du … · ↻ Vérifier » des listes, et Réglages → 🗂 Données (app-listes-maj.js) */
+.dmaj-line { margin: -.2rem 0 .6rem; }
+.dmaj-line small { font-size: .82rem; }
+.dmaj-link { background: none; border: 0; padding: 0; color: var(--accent, var(--primary, #2b6cb0)); cursor: pointer; font: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.dmaj-link:disabled { opacity: .5; cursor: default; }
+.dmaj-res { margin-top: .35rem; padding: .5rem .7rem; border-radius: 8px; background: var(--surface-2, rgba(127,127,127,.08)); font-size: .9rem; }
+.dmaj-res p { margin: .15rem 0; }
+.dmaj-ok { color: var(--success, #2f7d32); }
+.dmaj-new { font-weight: 600; }
+.dmaj-off { color: var(--warning, #a15c00); margin: .3rem 0; }
+.dmaj-page .dmaj-top { display: grid; gap: .5rem; padding: .8rem 1rem; margin-bottom: .8rem; }
+.dmaj-sum { margin: 0; }
+.dmaj-acts { display: flex; flex-wrap: wrap; gap: .4rem; }
+.dmaj-filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .4rem 0 .8rem; }
+.dmaj-filters .segmented button.is-active { font-weight: 700; }
+.dmaj-q { flex: 1 1 14rem; max-width: 22rem; }
+.dmaj-group { margin: .6rem 0 1rem; }
+.dmaj-group h3 { font-size: 1rem; margin: .3rem 0; display: inline-block; }
+.dmaj-group > summary { cursor: pointer; }
+.dmaj-rows { border: 1px solid var(--border, rgba(127,127,127,.25)); border-radius: 10px; overflow: hidden; }
+.dmaj-row { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr) auto auto; gap: .6rem; align-items: center; padding: .45rem .7rem; border-top: 1px solid var(--border, rgba(127,127,127,.18)); }
+.dmaj-row:first-child { border-top: 0; }
+.dmaj-ico { font-size: 1.15rem; text-align: center; }
+.dmaj-name { line-height: 1.3; }
+.dmaj-name .dmaj-link { color: inherit; font-weight: 600; text-decoration: none; }
+.dmaj-name .dmaj-link:hover { text-decoration: underline; }
+.dmaj-meta small { font-size: .78rem; }
+.dmaj-state { font-size: .8rem; white-space: nowrap; color: var(--muted, #666); }
+.dmaj-row.is-ok .dmaj-state { color: var(--success, #2f7d32); }
+.dmaj-row.is-update .dmaj-state { color: var(--accent, #2b6cb0); font-weight: 600; }
+.dmaj-act { display: flex; gap: .3rem; align-items: center; justify-content: flex-end; min-width: 7rem; }
+.dmaj-icon { background: none; border: 1px solid transparent; border-radius: 6px; padding: .15rem .35rem; cursor: pointer; opacity: .65; }
+.dmaj-icon:hover, .dmaj-icon:focus-visible { opacity: 1; border-color: var(--border, rgba(127,127,127,.35)); }
+.dmaj-prog { height: 4px; background: var(--border, rgba(127,127,127,.2)); border-radius: 2px; margin-top: .3rem; overflow: hidden; }
+.dmaj-prog i { display: block; height: 100%; width: 0; background: var(--accent, #2b6cb0); transition: width .3s; }
+.dmaj-queue { border: 1px dashed var(--border, rgba(127,127,127,.4)); border-radius: 8px; padding: .5rem .7rem; }
+.dmaj-qhead { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.dmaj-qacts { margin-left: auto; display: flex; gap: .3rem; }
+.dmaj-queue ol { margin: .4rem 0 0; padding-left: 1.3rem; font-size: .88rem; }
+.dmaj-queue li[data-dmaj-qstate="run"] { font-weight: 600; }
+@media (max-width: 640px) {
+  .dmaj-row { grid-template-columns: 1.5rem minmax(0, 1fr); }
+  .dmaj-state, .dmaj-act { grid-column: 2; justify-content: flex-start; }
+}

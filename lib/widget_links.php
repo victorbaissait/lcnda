@@ -117,7 +117,7 @@ function picker_wl_acts(PDO $pdo, string $q, int $offset, int $limit): array
 {
     if (!picker_table_exists($pdo, 'act_transcriptions')) { return ['total' => 0, 'items' => []]; }
     $params = [];
-    $where = picker_text_where(['t.title', 't.place', 't.date_text', 't.source'], $q, $params);
+    $where = function_exists('picker_words_where') ? picker_words_where(['t.title', 't.place', 't.date_text', 't.source'], $q, $params) : picker_text_where(['t.title', 't.place', 't.date_text', 't.source'], $q, $params);
     $json = static fn(string $path): string => "CASE WHEN json_valid(t.data_json) THEN json_extract(t.data_json, '{$path}') END";
     [$total, $rows] = picker_page($pdo, 'SELECT t.id, t.title, t.kind, t.date_text, t.place, t.source, t.media_id, t.created_at, length(trim(t.body)) AS body_len, ' . $json('$.status') . ' AS status, '
         . 'json_array_length(' . "CASE WHEN json_valid(t.data_json) AND json_type(t.data_json, '$.people')='array' THEN json_extract(t.data_json, '$.people') ELSE '[]' END" . ') AS n_people, m.filename, m.thumbnail',
