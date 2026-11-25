@@ -117,7 +117,8 @@ echo json_encode($ids + ['inv' => $inv, 'inv2' => $inv2, 'bat' => $bat, 'media' 
             await p.click('#sidebar-content .ui-viewtoggle [data-view="list"]').catch(() => {}); // « Liste » (et non « Fiches »)
             assert.strictEqual(await p.$('#investigation-search-button'), null, 'plus de ⌕');
             assert.ok(await p.$('#sidebar-content .ui-listbar-fbtn') && await p.$('#sidebar-content .ui-viewtoggle') && await p.$('#sidebar-content .ui-sortbar-sort select'));
-            await p.waitForSelector('#workspace [data-open-investigation]');
+            // « Liste » redessine la page après une requête : attendre le tableau (et non les vignettes d'avant)
+            await p.waitForSelector('#workspace tr[data-enq-row]');
             assert.strictEqual(await p.$$eval('#workspace tr[data-enq-row]', r => r.length), 2);
             await p.evaluate(() => document.querySelector('#sidebar-content .ui-listbar').setFilter('status', 'paused'));
             await p.waitForFunction(() => document.querySelectorAll('#workspace tr[data-enq-row]').length === 1);

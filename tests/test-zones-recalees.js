@@ -173,6 +173,60 @@ echo json_encode(['ok' => 1]);`, {B1: BODY, D1: JSON.stringify({zones: OLD_ZONES
             const s2 = await st(); assert.equal(s2.body.split('\n')[1], ''); assert.equal(s2.marks[1], 'X' + LINES[1]);
         });
 
+        /* ─── 5. les zones de ligne suivent ce qu'on écrit : la bande couvre toujours tout le texte de la ligne ─── */
+        const caret = (a, b = a) => p.evaluate(([x, y]) => { const el = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); el.focus(); el.setSelectionRange(x, y); }, [a, b]);
+        const lineStart = async i => (await st()).body.split('\n').slice(0, i).reduce((n, l) => n + l.length + 1, 0);
+        const lineEnd = async i => (await lineStart(i)) + (await st()).body.split('\n')[i].length;
+        /** chaque zone : exactement le texte (sans les blancs du bord) de la ligne où elle commence */
+        const bandsWhole = async (msg, ids = ['c0', 'c1', 'c2']) => { const s = await st();
+            ids.forEach(id => { const z = s.zones.find(q => q.id === id); const ls = s.body.lastIndexOf('\n', z.s - 1) + 1, le = s.body.indexOf('\n', z.s) < 0 ? s.body.length : s.body.indexOf('\n', z.s);
+                assert.equal(s.body.slice(z.s, z.e), s.body.slice(ls, le).trim(), `${msg} : la zone ${id} couvre toute sa ligne`); }); return s; };
+        await t('5. écrire au début / à la fin, effacer la 1re lettre, coller sur le début : la bande couvre toute la ligne', async () => {
+            await openTx(3); await bandsWhole('à l’ouverture');
+            await caret(await lineStart(1)); await p.keyboard.type('Le '); await sleep(150);
+            let s = await bandsWhole('écrit au début'); assert.ok(s.marks[1].startsWith('Le Aujourd'), s.marks[1]);
+            await caret(await lineEnd(1)); await p.keyboard.type(' et'); await sleep(150);
+            s = await bandsWhole('écrit à la fin'); assert.ok(s.marks[1].endsWith('publication') || s.marks[1].endsWith(' et'), s.marks[1]);
+            assert.ok(s.marks[1].endsWith(' et'), 'la fin écrite est dans la bande : ' + s.marks[1]);
+            await caret(await lineStart(1)); await p.keyboard.press('Delete'); await sleep(150);
+            s = await bandsWhole('1re lettre effacée'); assert.ok(s.marks[1].startsWith('e Aujourd'), s.marks[1]);
+            await caret(await lineStart(1), (await lineStart(1)) + 2); await p.keyboard.insertText('Ce jour, '); await sleep(150);
+            s = await bandsWhole('collé sur le début'); assert.ok(s.marks[1].startsWith('Ce jour, Aujourd'), s.marks[1]);
+            await caret(await lineStart(2)); await p.keyboard.type('»'); await sleep(150); await bandsWhole('écrit au début de la dernière ligne');
+        });
+        await t('5b. Entrée au milieu d’une ligne : la zone garde la 1re partie ; ⌘Z dans la case la remet sur toute la ligne', async () => {
+            const was = (await st()).zones, at = (await lineStart(1)) + 8;
+            await caret(at); await p.keyboard.press('Enter'); await sleep(150);
+            const s = await st(), z = s.zones.find(q => q.id === 'c1');
+            assert.equal(s.body.slice(z.s, z.e), s.body.split('\n')[1].trim(), 'la 1re partie seulement');
+            assert.deepEqual(s.zones.find(q => q.id === 'c2'), {...was.find(q => q.id === 'c2'), s: was.find(q => q.id === 'c2').s + 1, e: was.find(q => q.id === 'c2').e + 1}, 'la ligne suivante se décale');
+            await p.keyboard.press('Control+z'); await sleep(250);
+            assert.deepEqual((await st()).zones, was, 'annuler dans la case remet les zones exactement');
+            await bandsWhole('après ⌘Z');
+        });
+        await t('5c. Retour arrière au début d’une ligne (deux lignes jointes) : les deux zones se partagent la ligne ; ⌘Z les remet', async () => {
+            const was = await st();
+            await caret(await lineStart(2)); await p.keyboard.press('Backspace'); await sleep(150);
+            const s = await st(), z1 = s.zones.find(q => q.id === 'c1'), z2 = s.zones.find(q => q.id === 'c2');
+            assert.equal(s.body.split('\n').length, was.body.split('\n').length - 1);
+            assert.ok(z1.e <= z2.s && z2.s - z1.e <= 1, 'côte à côte');
+            const ls = s.body.lastIndexOf('\n', z1.s - 1) + 1, le = s.body.indexOf('\n', z1.s) < 0 ? s.body.length : s.body.indexOf('\n', z1.s);
+            assert.equal(z1.s, ls); assert.equal(z2.e, le, 'les deux zones couvrent toute la ligne jointe');
+            await p.keyboard.press('Control+z'); await sleep(250);
+            const s2 = await st(); assert.equal(s2.body, was.body); assert.deepEqual(s2.zones, was.zones, '⌘Z : les zones exactement comme avant');
+        });
+        await t('5d. ↶ ↷ de l’Atelier : les zones reviennent exactement', async () => {
+            const was = await st(); await caret(await lineStart(1)); await p.keyboard.type('Q'); await sleep(700);
+            const mid = await st(); assert.equal(mid.marks[1][0], 'Q');
+            await p.click(`${D} [data-tx-hist="undo"]`); await sleep(250); assert.deepEqual((await st()).zones, was.zones); assert.equal((await st()).body, was.body);
+            await p.click(`${D} [data-tx-hist="redo"]`); await sleep(250); assert.deepEqual((await st()).zones, mid.zones);
+        });
+        await t('5e. une zone sur un mot ou sur deux lignes : elle suit sans s’étendre à toute la ligne', async () => {
+            const r = await p.evaluate(() => { const X = window.LCNDA_EXT.txSnap, b = 'abc def ghi\njkl', n = 'abc def ghiZ\njkl', z = [{id: 'w', s: 4, e: 7}, {id: 'm', s: 0, e: 15}];
+                return X.followEdit(b, n, z, X.diffOf(b, n)).map(q => [q.id, q.s, q.e]); });
+            assert.deepEqual(r, [['w', 4, 7], ['m', 0, 16]]);
+        });
+
         await closeAtelier();
         assert.deepEqual(errs, [], 'erreurs de la page : ' + errs.join(' | '));
     } catch (e) { fails++; console.log('✗ ' + (e.stack || e)); }
