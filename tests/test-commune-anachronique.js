@@ -126,7 +126,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const src = await p.$$eval('.ctl-row a[target="_blank"][rel~="noopener"]', as => as.map(a => a.href));
             assert.ok(src.length >= 3 && src.every(h => h.startsWith('https://www.insee.fr/')), src.join(' '));
             const i = await p.$$eval('.ctl-row', els => els.findIndex(e => /Graves n’existait plus/.test(e.textContent)));
-            await p.click(`.ctl-row:nth-of-type(${i + 1}) [data-ctl-custom]`).catch(async () => { await (await p.$$('.ctl-row'))[i].$('[data-ctl-custom]').then(b => b.click()); });
+            await p.locator('.ctl-row').nth(i).locator('[data-ctl-custom]').click(); // la i-ème ligne « .ctl-row » (nth-of-type compterait aussi les autres éléments de la liste)
             await p.waitForSelector('dialog.ch-modal[open]');
             assert.match(await p.textContent('dialog.ch-modal'), /Graves-Saint-Amant/);
             await p.click('dialog.ch-modal [data-ch-ok]');
