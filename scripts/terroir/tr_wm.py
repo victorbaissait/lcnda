@@ -12,7 +12,7 @@ def _wait(host, gap):
     if t > 0: time.sleep(t)
     _last[host] = time.time()
 
-def get(url, data=None, accept='application/json', gap=1.5, key=None, tries=12):
+def get(url, data=None, accept='application/json', gap=1.5, key=None, tries=40):
     os.makedirs(RAW, exist_ok=True)
     k = key or hashlib.sha1((url + '|' + (data or '')).encode()).hexdigest()
     f = os.path.join(RAW, k)
@@ -36,7 +36,7 @@ def get(url, data=None, accept='application/json', gap=1.5, key=None, tries=12):
                 print('  réponse non JSON ou coupée, on attend', file=sys.stderr)
         except Exception as e:
             print(f'  {host}: {e} — essai {i + 1}', file=sys.stderr)
-        time.sleep(min(120, 20 * (i + 1)))
+        time.sleep(min(180, 20 * (i + 1)))
     raise RuntimeError('échec ' + url)
 
 def sparql(q, key, gap=65):

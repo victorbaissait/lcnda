@@ -42,10 +42,10 @@ def main():
     for i in range(0, len(keys), 80):
         part = keys[i:i + 80]
         vals = ' '.join(f'"{esc(k)}"@fr' for k in part)
-        cands += C.sparql(f'''SELECT ?i ?l ?sl ?how ?c WHERE {{ VALUES ?l {{ {vals} }}
-            {{ ?i rdfs:label ?l . BIND("label" AS ?how) }}
-            UNION {{ ?i skos:altLabel ?l . BIND("alias" AS ?how) }}
-            ?i wdt:P31 ?c ; wikibase:sitelinks ?sl }}''')
+        for prop, how in (('rdfs:label', 'label'), ('skos:altLabel', 'alias')):
+            # « optimizer None » : les libellés d'abord (sinon le serveur parcourt tout et répond trop tard)
+            cands += [{**r, 'how': how} for r in C.sparql(f'''SELECT ?i ?l ?sl ?c WHERE {{ VALUES ?l {{ {vals} }} hint:Query hint:optimizer "None" .
+                ?i {prop} ?l . ?i wdt:P31 ?c . ?i wikibase:sitelinks ?sl }}''')]
         print(f'… {i + len(part)}/{len(keys)} libellés, {len(cands)} candidats', flush=True)
     # les classes des candidats qui sont des métiers (sous-classes de « occupation », Q12737077)
     classes = sorted({C.qid(r['c']) for r in cands})

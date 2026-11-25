@@ -188,6 +188,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TM
             const sol = await p.textContent('[data-tm-part="sol"]');
             assert.match(sol, /m d’altitude/); assert.match(sol, /CC BY 4\.0/); assert.match(sol, /↗ source/);
             assert.ok(await p.$$eval('[data-tm-part="sol"] a[target="_blank"][rel*="noopener"]', a => a.length >= 2));
+            if (process.env.TM_SHOT) await p.screenshot({path: path.join(process.env.TM_SHOT, 'village.png'), fullPage: true});
         });
         await t('fiche de MAZAUD : « 🪨 Terre et mots de son pays » — sol, nom régional, affaire de son époque (prudente)', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
@@ -195,6 +196,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TM
             const txt = await p.textContent('[data-pblock="terre_mots"]');
             assert.match(txt, /Terre et mots de son pays/); assert.match(txt, /🪨 Sous /); assert.match(txt, /rien ne la relie à ta famille/);
             assert.ok(txt.includes(aff.n));
+            if (process.env.TM_SHOT) await (await p.$('[data-pblock="terre_mots"]')).screenshot({path: path.join(process.env.TM_SHOT, 'personne.png')});
         });
         await t('fiche de DURAND : « 👥 Ne pas confondre avec… » (lu en ligne puis gardé) et 🌟 l’astéroïde de son village', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });

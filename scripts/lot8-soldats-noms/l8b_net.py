@@ -78,8 +78,8 @@ def wikitexts(titles, lang='fr'):
     """{titre demandé: {title, q, text, revid}} — 40 pages par requête, redirections suivies."""
     out = {}
     titles = list(dict.fromkeys(titles))
-    for i in range(0, len(titles), 40):
-        chunk = titles[i:i + 40]
+    for i in range(0, len(titles), 50):
+        chunk = titles[i:i + 50]
         r = wp({'action': 'query', 'prop': 'revisions|pageprops', 'rvprop': 'content|ids', 'rvslots': 'main', 'ppprop': 'wikibase_item', 'titles': '|'.join(chunk), 'redirects': 1}, lang)
         q = r.get('query', {})
         back = {}

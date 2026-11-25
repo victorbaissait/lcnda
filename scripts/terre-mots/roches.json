@@ -1,0 +1,10 @@
+{
+  "attr": "Wikipédia en français — une phrase recopiée telle quelle de l’article de chaque roche (choisie à la main dans le texte lu par fetch_roches.py)",
+  "licence": "CC BY-SA 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
+  "keys": ["fam", "sentence", "page", "rev"],
+  "rows": [
+    ["granite", "C'est un matériau résistant très utilisé en construction, dallage, décoration, sculpture, sous l'appellation granit.", "Granite", 239757706],
+    ["gabbro", "Il peut être utilisé comme source de métaux ou comme pierre de taille.", "Gabbro", 236550800]
+  ]
+}

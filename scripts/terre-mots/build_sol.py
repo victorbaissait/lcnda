@@ -92,7 +92,7 @@ def main():
                + '|'.join(f'{p[2]:.5f}' for p in part) + '&lat=' + '|'.join(f'{p[1]:.5f}' for p in part))
         j = json.loads(wm.get(url, gap=0.3))
         for p, z in zip(part, j.get('elevations', [])):
-            if isinstance(z, (int, float)) and z > -1000: alt[p[0]] = round(z)
+            if isinstance(z, (int, float)) and -10 < z < 4900: alt[p[0]] = round(z)  # centre en mer (communes du littoral) : pas d'altitude
         if i % 5000 == 0: print('altitude', i, flush=True)
     out = {}
     for insee in C:

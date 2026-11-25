@@ -197,7 +197,7 @@ def build_sundials():
         rows.append({'q': q, 'insee': insee, 'lat': la, 'lon': lo, 'img': urllib.parse.unquote((o.get('img') or '').rsplit('/', 1)[-1]).replace('_', ' '),
                      'motto': ' / '.join(sorted(o['motto'])), 'ins': ' / '.join(sorted(o['ins'] - o['motto'])), 's': year(o.get('inc', '')), 'mh': o.get('mh', '')})
     labels([r['q'] for r in rows])
-    for r in rows: r['n'] = lab(r['q']); r['d'] = (LAB.get(r['q']) or {}).get('desc', ''); r['wp'] = wp(r['q'])
+    for r in rows: r['n'] = lab(r['q']) or 'cadran solaire'; r['d'] = (LAB.get(r['q']) or {}).get('desc', ''); r['wp'] = wp(r['q'])  # sans nom : la sorte (Q80793)
     keys = ['q', 'n', 'd', 'insee', 'lat', 'lon', 's', 'motto', 'ins', 'img', 'mh', 'wp']
     write('cadrans', {'attr': 'Wikidata — cadrans solaires (Q80793) en France : devise (P1451), inscription (P1684), date, image (Wikimedia Commons)', 'licence': 'CC0 1.0 (images : licence propre à chaque fichier)', 'url': 'https://www.wikidata.org/', 'keys': keys, 'rows': compact(rows, keys)})
     return len(rows)

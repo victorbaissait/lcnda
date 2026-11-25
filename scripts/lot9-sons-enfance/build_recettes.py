@@ -46,15 +46,19 @@ def parse(title):
 
 
 def text(s):
-    return re.sub(r'\s+', ' ', H.unescape(re.sub(r'<[^>]+>', '', s))).strip()
+    return re.sub(r'\s+', ' ', H.unescape(re.sub(r'<[^>]+>', '', s))).replace('ſ', 's').replace('′', '’').strip()
 
 
 def recipes(title, h):
     """[(titre, page imprimée, page du scan, texte)] : les paragraphes qui commencent par un titre en gras"""
     out = []
     marks = [(m.start(), m.group(1), m.group(2)) for m in re.finditer(r'class="pagenum ws-pagenum" id="([^"]+)" title="([^"]+)"', h)]
-    paras = list(re.finditer(r'<p>\s*<b>(.{3,90}?)</b>(.*?)</p>((?:\s*<p>(?!\s*<b>).*?</p>){0,4})', h, re.S))
-    for m in paras:
+    paras = [(m, '') for m in re.finditer(r'<p>\s*<b>(.{3,90}?)</b>(.*?)</p>((?:\s*<p>(?!\s*<b>).*?</p>){0,4})', h, re.S)]
+    # Menon : un titre <h4 id="…"> puis les paragraphes
+    paras += [(m, m.group(2)) for m in re.finditer(r'<h([4-6]) id="([^"]+)"[^>]*>(.{3,200}?)</h\1>((?:\s*<(?:p|ul)>.*?</(?:p|ul)>){1,6})', h, re.S)]
+    paras.sort(key=lambda x: x[0].start())
+    for m, hid in paras:
+        if hid: m = type('M', (), {'group': (lambda self, i, mm=m: {1: mm.group(3), 2: mm.group(4), 3: ''}[i]), 'start': (lambda self, mm=m: mm.start())})()
         t = text(m.group(1)).rstrip('.: —')
         if not t or t.isupper() or len(t) < 4: continue
         body = text(m.group(2) + ' ' + m.group(3)).lstrip('—–- .')
@@ -62,7 +66,7 @@ def recipes(title, h):
         before = [x for x in marks if x[0] < m.start()]
         pg = before[-1] if before else (marks[0] if marks else None)
         # le numéro de page qui précède le texte est la page d'avant : la recette commence sur la suivante
-        out.append((t, pg[1] if pg else '', pg[2] if pg else '', body[:1500]))
+        out.append((t, pg[1] if pg else '', pg[2] if pg else '', body[:1500], hid))
     return out
 
 
@@ -76,13 +80,13 @@ for b in BOOKS:
         y = re.search(r'class="ws-year">(\d{4})', h)
         if y and not b.get('ed'): b['ed'] = int(y.group(1))
         per = {}
-        for name, pnum, pscan, body in recipes(t, h):
+        for name, pnum, pscan, body, hid in recipes(t, h):
             f = fold(name)
             k = next((w for w in WANT if w.strip() in f), None)
             if not k: continue
             if per.get(k, 0) >= 2: continue
             per[k] = per.get(k, 0) + 1
-            anchor = ('#' + urllib.parse.quote(pnum)) if pnum else ''
+            anchor = ('#' + urllib.parse.quote(H.unescape(hid))) if hid else ('#' + urllib.parse.quote(pnum)) if pnum else ''
             rows.append({'b': b['id'], 'n': name, 'k': k.strip(), 'url': WS + '/wiki/' + urllib.parse.quote(t.replace(' ', '_')) + anchor,
                          'page': pnum, 'scan': WS + '/wiki/' + urllib.parse.quote(pscan.replace(' ', '_')) if pscan else '', 'text': body})
             got += 1

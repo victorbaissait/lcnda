@@ -21,7 +21,7 @@
     const hm = min => { let m = Math.round(min); m = ((m % 1440) + 1440) % 1440; return `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
     /** midi au cadran solaire d'un lieu → l'heure de Paris (avant 1891) et nos montres d'aujourd'hui (heure d'hiver UTC+1, d'été UTC+2), en moyenne sur l'année */
     function sundialNoon(lon) {
-        const L = Number(lon); if (!Number.isFinite(L)) return null;
+        if (lon === null || lon === undefined || lon === '') return null; const L = Number(lon); if (!Number.isFinite(L)) return null;
         const utc = 720 - L * 4;
         return {paris: hm(utc + PARIS_LON * 4), winter: hm(utc + 60), summer: hm(utc + 120), diffParis: Math.round((L - PARIS_LON) * 4)};
     }

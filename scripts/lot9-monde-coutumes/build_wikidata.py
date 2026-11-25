@@ -80,9 +80,10 @@ OCC = {'Q36180': 'écrivain', 'Q49757': 'poète', 'Q6625963': 'romancier', 'Q214
        'Q1622272': 'universitaire', 'Q177220': 'chanteur', 'Q33999': 'acteur', 'Q11774202': 'essayiste', 'Q1930187': 'journaliste', 'Q169470': 'physicien', 'Q593644': 'chimiste'}
 
 def sejours():
-    vals = ' '.join('wd:' + k for k in OCC)
-    q = '''SELECT ?p ?pLabel ?occ ?loc ?locLabel ?insee ?c ?s ?sp ?e ?ep ?t ?tp ?birth ?wp WHERE {
-      VALUES ?occ { %s }
+    rows = {}
+    for occ in OCC:
+      q = '''SELECT ?p ?pLabel ?occ ?loc ?locLabel ?insee ?c ?s ?sp ?e ?ep ?t ?tp ?birth ?wp WHERE {
+      BIND(wd:%s AS ?occ)
       ?p wdt:P106 ?occ.
       ?p p:P551 ?st. ?st ps:P551 ?loc.
       { ?st pqv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp]. } UNION { ?st pqv:P585 [wikibase:timeValue ?t; wikibase:timePrecision ?tp]. }
@@ -93,9 +94,13 @@ def sejours():
       OPTIONAL { ?p wdt:P569 ?birth. }
       OPTIONAL { ?wp schema:about ?p; schema:isPartOf <https://fr.wikipedia.org/>. }
       SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
-    }''' % vals
-    rows = {}
-    for b in common.sparql(q):
+    }''' % occ
+      try:
+        res = common.sparql(q)
+      except Exception as e:  # noqa : une occupation trop lourde pour le service : on la saute (dit dans le journal)
+        print('  sauté', occ, e); res = []
+      print('  ', OCC[occ], len(res), flush=True)
+      for b in res:
         pq = qid(val(b, 'p')); lq = qid(val(b, 'loc'))
         s = iso(val(b, 's'), val(b, 'sp')) or iso(val(b, 't'), val(b, 'tp'))
         if not s:

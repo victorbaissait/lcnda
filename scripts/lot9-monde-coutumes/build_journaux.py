@@ -8,20 +8,25 @@ import common
 
 EP = 'https://data.bnf.fr/sparql'
 rows = {}
-off = 0
-while True:
-    q = '''SELECT ?s ?t ?pl ?fy ?ly ?fr ?er WHERE {
-      ?s a <http://purl.org/ontology/bibo/Periodical> . ?s <http://www.w3.org/2002/07/owl#sameAs> ?pla .
-      FILTER(STRSTARTS(STR(?pla), "http://presselocaleancienne"))
-      ?s <http://purl.org/dc/terms/title> ?t .
-      OPTIONAL { ?s <http://rdvocab.info/Elements/placeOfPublication> ?pl }
-      OPTIONAL { ?s <http://data.bnf.fr/ontology/bnf-onto/firstYear> ?fy }
-      OPTIONAL { ?s <http://data.bnf.fr/ontology/bnf-onto/lastYear> ?ly }
-      OPTIONAL { ?s <http://rdvocab.info/Elements/frequency> ?fr }
-      OPTIONAL { ?s <http://rdvocab.info/Elements/electronicReproduction> ?er }
-    } ORDER BY ?s LIMIT 10000 OFFSET %d''' % off
-    j = common.get_json(EP, {'query': q, 'format': 'application/json'})
+Q = '''SELECT ?s ?t ?pl ?fy ?ly ?fr ?er WHERE {
+  ?s a <http://purl.org/ontology/bibo/Periodical> . ?s <http://www.w3.org/2002/07/owl#sameAs> ?pla .
+  FILTER(STRSTARTS(STR(?pla), "http://presselocaleancienne")) FILTER(STRSTARTS(STR(?s), "http://data.bnf.fr/ark:/12148/%s"))
+  ?s <http://purl.org/dc/terms/title> ?t .
+  OPTIONAL { ?s <http://rdvocab.info/Elements/placeOfPublication> ?pl }
+  OPTIONAL { ?s <http://data.bnf.fr/ontology/bnf-onto/firstYear> ?fy }
+  OPTIONAL { ?s <http://data.bnf.fr/ontology/bnf-onto/lastYear> ?ly }
+  OPTIONAL { ?s <http://rdvocab.info/Elements/frequency> ?fr }
+  OPTIONAL { ?s <http://rdvocab.info/Elements/electronicReproduction> ?er }
+} LIMIT 10000'''
+
+def part(prefix):
+    """les titres dont l'ark commence par `prefix` ; une tranche pleine (10 000 lignes) est recoupée en 10"""
+    j = common.get_json(EP, {'query': Q % prefix, 'format': 'application/json'})
     b = j['results']['bindings']
+    if len(b) >= 10000:
+        for d in '0123456789bcdfghjkmnpqrstvwxz':
+            part(prefix + d)
+        return
     for x in b:
         ark = re.search(r'ark:/12148/(cb\w+)', x['s']['value']).group(1)
         r = rows.setdefault(ark, {'a': ark, 't': x['t']['value'].strip()})
@@ -37,10 +42,10 @@ while True:
                     pass
         if 'er' in x and 'gallica' in x['er']['value']:
             r['g'] = 1
-    print('offset', off, len(b), len(rows))
-    if len(b) < 10000:
-        break
-    off += 10000
+    print(prefix, len(b), len(rows), flush=True)
+
+for p in ['cb3' + d for d in '0123456789'] + ['cb4' + d for d in '0123456789']:
+    part(p)
 
 def fold(s):
     s = unicodedata.normalize('NFD', s.lower())
