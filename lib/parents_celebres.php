@@ -189,7 +189,7 @@ function pcel_wt_connect(PDO $pdo, string $a, string $b, bool &$net): ?array
         if ($dir !== '') {
             @file_put_contents($dir . '/calls.log', 'getConnections ' . $a . ',' . $b . "\n", FILE_APPEND);
             $f = $dir . '/wt-' . preg_replace('/[^A-Za-z0-9_-]/', '', $a) . '-' . preg_replace('/[^A-Za-z0-9_-]/', '', $b) . '.json';
-            if (!is_file($f)) { throw new RuntimeException(i18n_t('Pas de connexion à WikiTree pour le moment.')); }
+            if (!is_file($f)) { if (is_file($dir . '/online')) { return [['status' => '', 'path' => [], 'pathLength' => 0]]; } throw new RuntimeException(i18n_t('Pas de connexion à WikiTree pour le moment.')); }
             return json_decode((string) file_get_contents($f), true) ?: [];
         }
         return pcel_http(PC_WT_API . '?' . http_build_query(['action' => 'getConnections', 'keys' => $a . ',' . $b, 'appId' => PC_APPID, 'relation' => 0, 'fields' => 'Id,Name,FirstName,LastNameAtBirth,BirthDate,DeathDate']));
@@ -347,7 +347,7 @@ function pcel_step_bfs(PDO $pdo, array &$job, bool &$net): void
             if (!$e || !empty($e['missing'])) { continue; }
             $st['counts']['done']++;
             [$p, , $lvl] = $st['seen'][$q];
-            if ($e['sitelinks'] >= $st['famous'] && $e['human'] !== false) { pcel_found_save($pdo, $st['seen'], $q, $e, $E); $st['counts']['found']++; }
+            if ($e['sitelinks'] >= $st['famous'] && $e['human']) { pcel_found_save($pdo, $st['seen'], $q, $e, $E); $st['counts']['found']++; }
             if ($lvl >= $st['max_depth'] || count($st['seen']) >= PC_MAX_NODES) { continue; }
             foreach ($e['rel'] as $prop => $list) {
                 foreach ($list as $y) { if (!isset($st['seen'][$y]) && count($st['seen']) < PC_MAX_NODES) { $st['seen'][$y] = [$q, $prop, $lvl + 1]; } }

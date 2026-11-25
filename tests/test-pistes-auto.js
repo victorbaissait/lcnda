@@ -16,7 +16,7 @@ const net = require('net');
 const {spawn, spawnSync} = require('child_process');
 const root = path.join(__dirname, '..');
 let fails = 0;
-const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 6).join('\n  ')); } };
+const t = async (name, fn) => { const t0 = Date.now(); try { await fn(); console.log('✓ ' + name + (process.env.PST_TIME ? ` (${Date.now() - t0} ms)` : '')); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 6).join('\n  ')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const FX = path.join(__dirname, 'fixtures/pistes-auto');
 
@@ -81,7 +81,7 @@ echo 'ok';`);
             first = await runAll(s.job.id);
             assert.strictEqual(first.r.job.status, 'done'); assert.strictEqual(first.r.job.pos, 8);
             const net = first.r.job.counts.net;
-            assert.ok(net >= 5, `${net} questions`); assert.ok(first.waits.filter(w => w >= 2000).length >= net - 1, 'une attente après chaque question réseau');
+            assert.ok(net >= 5, `${net} questions`); assert.ok(first.waits.filter(w => w >= 2000).length >= net - 1, `une attente après chaque question réseau : ${JSON.stringify(first.waits)} net=${net}`);
             assert.strictEqual(first.r.job.counts.private, 3, 'Paul (vivant), Anne (confidentielle), Louis (né en 1950, sans décès)');
         });
         await t('rien n’est envoyé pour une personne vivante, confidentielle ou peut-être vivante ; un nom et une période seulement', async () => {
@@ -170,13 +170,13 @@ echo 'ok';`);
             const n0 = await p.$$eval('[data-pst-list] .pst-row', r => r.length);
             const id = await p.getAttribute('[data-pst-list] .pst-row [data-pst-no]', 'data-pst-no');
             await p.click(`[data-pst-no="${id}"]`);
-            await sleep(1500); console.log('DEBUG', await p.evaluate(async () => { const h = document.querySelector('[data-pst-host]'); const out = [typeof h.__pstRedraw, [...document.querySelectorAll('[data-pst-host]')].map(x => x.className + '<' + x.parentNode.id + '/' + x.parentNode.className).join(' ; '), document.querySelectorAll('[data-pst-row="1"]').length, document.querySelector('[data-pst-row="1"]').closest('[data-pst-host]').className]; try { await h.__pstRedraw(); } catch (e) { out.push('ERR ' + e.message); } out.push(document.querySelectorAll('[data-pst-row="1"]').length); return out.join(' '); }));
-            await p.waitForFunction(i => !document.querySelector(`[data-pst-row="${i}"]`), id, {timeout: 10000});
+            await p.waitForFunction(i => !document.querySelector(`[data-pst-list] [data-pst-row="${i}"]`), id, {timeout: 10000});
             await undo(/Piste écartée/);
-            await p.waitForSelector(`[data-pst-row="${id}"]`, {timeout: 10000});
+            await p.waitForSelector(`[data-pst-list] [data-pst-row="${id}"]`, {timeout: 10000});
             assert.strictEqual(await p.$$eval('[data-pst-list] .pst-row', r => r.length), n0);
         });
         await t('« 🔎 Chercher des pistes » (ancêtres Sosa) : barre d’avancée, ⏸ Pause, ▶ Reprendre, jusqu’au bout', async () => {
+            q('SELECT 1'); php(`$p=new PDO('sqlite:${path.join(tmp, 'genealogy.sqlite')}');$p->exec('DELETE FROM ouc_oa_cache');`); // sans le cache : une question par pas, ~2 s entre deux
             await p.selectOption('[data-pst-scope]', 'sosa');
             await p.click('[data-pst-start]');
             await p.waitForSelector('[data-pst-job] .pst-bar', {timeout: 10000});
