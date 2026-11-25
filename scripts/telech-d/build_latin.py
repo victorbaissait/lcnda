@@ -93,11 +93,11 @@ def parse(title, text):
         for line in body.splitlines():
             if re.match(r'^#(?![*:#])', line):
                 raw = line[1:]
-                ofm = re.search(r'de\s+\[\[([^\]|#]+)', raw) if h.group(2) else None
+                ofm = re.search(r'de\s+(?:\[\[|\{\{(?:lien|l)\|)([^\]|#}]+)', raw) if h.group(2) else None
                 if ofm and not of:
                     of = ofm.group(1).strip()
                 d = clean(raw)
-                if d and len(defs) < 2:
+                if d and re.search(r'\w{2}', d) and len(defs) < 2:
                     defs.append(d[:160])
         if defs:
             out.append({'pos': POS[pos], 'flex': bool(h.group(2)), 'defs': defs, 'of': of})
