@@ -30,6 +30,12 @@
 .ts-prog-bar i { display: block; height: 100%; background: var(--accent, #0066cc); transition: width .2s; }
 .ts-prog-bar.is-done { visibility: hidden; }
 .ts-tools { display: flex; flex-wrap: wrap; gap: .35rem; }
+.ts-filter { display: grid; gap: .45rem; margin-top: .2rem; }
+.ts-q { width: 100%; max-width: 32rem; box-sizing: border-box; }
+.ts-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+.ts-chip small { opacity: .75; margin-left: .15em; }
+.ts-none { margin: .6rem 0; }
+.ts-report .is-filtered { display: none !important; }
 .ts-group { margin: 1rem 0; }
 .ts-group > h3 { margin: 0 0 .5rem; }
 /* chaque résultat est une vraie carte, bien séparée : bord du thème, en-tête teinté, ombre ; les cartes s'empilent en colonnes

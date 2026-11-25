@@ -497,7 +497,9 @@
         const title = life ? (life.female ? T('Tout ce qui concerne {n}', {n: life.name}) : T('Tout ce qui concerne {n}', {n: life.name})) : subject.place && subject.year ? T('{p} en {y}', {p: subject.place.name, y: String(subject.year)}) : subject.place ? T('Tout ce qui concerne {p}', {p: subject.place.name}) : T('Cette année-là : {y}', {y: String(subject.year)});
         host.innerHTML = `<div class="ts-report" data-ts-report><div class="ts-top"><p class="ts-count" data-ts-count>${esc(T('{n} données à regarder…', {n: String(tasks.length)}))}</p><div class="ts-prog-bar"><i data-ts-bar style="width:0"></i></div>
             <div class="ts-tools"><button type="button" class="button small secondary" data-ts-rerun>↻ ${esc(T('Relancer'))}</button><button type="button" class="button small secondary" data-ts-print>🖨 ${esc(T('Imprimer'))}</button>
-            ${ext.sendTo ? `<button type="button" class="button small secondary" data-ts-send>📤 ${esc(T('Envoyer vers…'))}</button>` : ''}${life && !RO() ? `<button type="button" class="button small secondary" data-ts-note>＋ ${esc(T('Ajouter comme note'))}</button>` : ''}</div></div>
+            ${ext.sendTo ? `<button type="button" class="button small secondary" data-ts-send>📤 ${esc(T('Envoyer vers…'))}</button>` : ''}${life && !RO() ? `<button type="button" class="button small secondary" data-ts-note>＋ ${esc(T('Ajouter comme note'))}</button>` : ''}</div>
+            <div class="ts-filter"><input type="search" class="ts-q" data-ts-q placeholder="${esc(T('🔍 Chercher dans les résultats…'))}" aria-label="${esc(T('Chercher dans les résultats'))}">
+            <div class="ts-chips" data-ts-chips role="group" aria-label="${esc(T('Catégories'))}"></div></div><p class="ts-none muted" data-ts-none hidden></p></div>
             ${GROUPS.map(([g, ic, lab]) => `<section class="ts-group" data-ts-group="${g}" hidden><h3>${ic} ${esc(T(g === 'places' && !life ? 'Le lieu' : g === 'era' && !life ? 'L’époque' : lab))}</h3><div class="ts-cards"></div></section>`).join('')}
             <div data-ts-hidden></div><div data-ts-miss></div></div>`;
         host.dataset.tsTitle = title;
@@ -509,7 +511,35 @@
                 mine.forEach(s => { const b = box.querySelector(`[data-ts-body="${sug.indexOf(s)}"]`); if (!b) return; if (!s.host.isConnected || s.host.parentElement === parking) b.appendChild(s.host); else b.appendChild(s.host.cloneNode(true)); }); });
             if (life) bindLines(host.querySelector('[data-ts-report]'), sug, life, paint);
             host.__ts = {sug: list, life, title};
+            chips(list); filter();
         };
+        /* 🔍 recherche dans les résultats + catégories (« Tout » puis une par groupe qui a trouvé quelque chose) */
+        const F = {q: '', g: 'all'};
+        const norm = v => String(v || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const groupLabel = (g, lab) => T(g === 'places' && !life ? 'Le lieu' : g === 'era' && !life ? 'L’époque' : lab);
+        const chips = list => {
+            const box = host.querySelector('[data-ts-chips]'); if (!box) return;
+            const present = GROUPS.filter(([g]) => list.some(s => s.task.group === g));
+            if (F.g !== 'all' && !present.some(([g]) => g === F.g)) F.g = 'all';
+            const btn = (g, label, n) => `<button type="button" class="button small ${F.g === g ? '' : 'secondary'} ts-chip" data-ts-chip="${esc(g)}" aria-pressed="${F.g === g}">${label}${n !== null ? ` <small>${n}</small>` : ''}</button>`;
+            box.innerHTML = btn('all', esc(T('Tout')), list.length) + present.map(([g, ic, lab]) => btn(g, `${ic} ${esc(groupLabel(g, lab))}`, list.filter(s => s.task.group === g).length)).join('');
+        };
+        const filter = () => {
+            const q = norm(F.q.trim());
+            let shown = 0;
+            GROUPS.forEach(([g]) => {
+                const sec = host.querySelector(`[data-ts-group="${g}"]`); if (!sec) return;
+                let n = 0;
+                sec.querySelectorAll('.ts-res').forEach(card => { const ok = (F.g === 'all' || F.g === g) && (!q || norm(card.textContent).includes(q)); card.classList.toggle('is-filtered', !ok); if (ok) n++; });
+                sec.classList.toggle('is-filtered', !n); shown += n;
+            });
+            const other = F.g !== 'all' || !!q;
+            host.querySelectorAll('[data-ts-hidden], [data-ts-miss]').forEach(x => x.classList.toggle('is-filtered', other));
+            const none = host.querySelector('[data-ts-none]');
+            if (none) { none.hidden = !(other && !shown); none.textContent = q ? T('Rien ne correspond à « {q} ».', {q: F.q.trim()}) : T('Rien dans cette catégorie.'); }
+        };
+        host.querySelector('[data-ts-q]').addEventListener('input', e => { F.q = e.target.value; filter(); });
+        host.querySelector('[data-ts-chips]').addEventListener('click', e => { const b = e.target.closest('[data-ts-chip]'); if (!b) return; F.g = b.dataset.tsChip; chips(host.__ts?.sug || []); filter(); });
         const counter = (n) => { const c = host.querySelector('[data-ts-count]'); if (c) c.textContent = n < tasks.length ? T('{d}/{n} données regardées…', {d: String(n), n: String(tasks.length)}) : T('{n} données regardées, {f} ont trouvé quelque chose', {n: String(tasks.length), f: String(found)}); const bar = host.querySelector('[data-ts-bar]'); if (bar) bar.style.width = `${tasks.length ? Math.round(n / tasks.length * 100) : 100}%`; };
         counter(0);
         const go = async force => {

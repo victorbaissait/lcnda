@@ -149,6 +149,21 @@ echo json_encode(['ok' => 1, 'even' => $t('EVEN')]);`], {cwd: root, encoding: 'u
             const groups = await p.$$eval('.ts-dialog [data-ts-group]:not([hidden]) h3', x => x.map(h => h.textContent));
             assert.ok(groups.some(g => /La personne/.test(g)) && groups.some(g => /Ses lieux/.test(g)) && groups.some(g => /Son époque/.test(g)), groups.join());
             assert.ok(await p.evaluate(() => [...document.querySelectorAll('.ts-dialog .ts-res')].every(r => r.querySelector('.ts-src'))));
+            // 🔍 recherche et catégories : « Tout » d'abord, puis une par groupe ; un mot cache les cartes qui ne le contiennent pas
+            const chipsTxt = await p.$$eval('.ts-dialog [data-ts-chip]', x => x.map(b => b.dataset.tsChip));
+            assert.equal(chipsTxt[0], 'all'); assert.ok(chipsTxt.length >= 2, chipsTxt.join(','));
+            const vis = () => p.$$eval('.ts-dialog .ts-res', x => x.filter(r => r.offsetParent !== null).length);
+            const all = await vis();
+            await p.fill('.ts-dialog [data-ts-q]', 'Limoges'); await p.waitForTimeout(200);
+            const few = await vis(); assert.ok(few > 0 && few < all, `recherche : ${few} / ${all}`);
+            assert.ok(await p.$$eval('.ts-dialog .ts-res', x => x.filter(r => r.offsetParent !== null).every(r => /limoges/i.test(r.textContent))));
+            await p.fill('.ts-dialog [data-ts-q]', 'zzzqqq'); await p.waitForTimeout(200);
+            assert.equal(await vis(), 0); assert.match(await p.textContent('.ts-dialog [data-ts-none]'), /Rien ne correspond/);
+            await p.fill('.ts-dialog [data-ts-q]', ''); await p.waitForTimeout(200); assert.equal(await vis(), all);
+            await p.click(`.ts-dialog [data-ts-chip="${chipsTxt[1]}"]`); await p.waitForTimeout(200);
+            assert.ok(await p.$$eval(`.ts-dialog [data-ts-group]`, (x, g) => x.every(s => s.offsetParent === null || s.dataset.tsGroup === g), chipsTxt[1]), 'une seule catégorie montrée');
+            if (process.env.TS_SHOT) await p.screenshot({path: require('path').join(process.env.TS_SHOT, 'tout-voir-categorie.png')});
+            await p.click('.ts-dialog [data-ts-chip="all"]'); await p.waitForTimeout(200); assert.equal(await vis(), all);
             await p.waitForSelector('.ts-dialog [data-ts-missing-box]', {timeout: 20000});
             const miss = await p.textContent('.ts-dialog [data-ts-missing-box]');
             assert.match(miss, /Morts pour la France/); assert.match(miss, /né en 1890 en France/); assert.match(miss, /Faux pack/);
