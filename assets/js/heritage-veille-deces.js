@@ -1,0 +1,193 @@
+/* LCNDA — ⚰️ Veille des décès (serveur : lib/veille_deces.php ; style : assets/css/veille-synchro.css).
+ * Les fiches « vivantes » ou au statut inconnu, nées il y a moins de 110 ans, comparées au fichier des personnes décédées de l'INSEE
+ * INSTALLÉ sur l'ordinateur (Recherche → Décès INSEE). Rien n'est envoyé sur Internet.
+ *  - à l'ouverture de l'app puis toutes les 30 minutes : si un nouveau fichier INSEE est arrivé, la comparaison se fait (vd_auto) ;
+ *    s'il y a de nouveaux décès possibles, un message « ⚰️ … » avec « Voir » ;
+ *  - Réglages → « ⚰️ Veille des décès » : interrupteur (clé genealogie-veille-deces ; allumé par défaut seulement si la base INSEE
+ *    est installée), « Vérifier maintenant », chaque décès possible : « ✓ C'est elle : ajouter le décès (source INSEE) » /
+ *    « ✗ Ce n'est pas elle » (retenu), ↶ Annuler ; les pistes écartées (▸ plus) ;
+ *  - widget du tableau de bord « ⚰️ Veille des décès » ;
+ *  - « Où chercher » : liens de recherche vers les avis de décès des journaux (libramemoria, dansnoscoeurs, avis-de-deces…) :
+ *    ce ne sont PAS des données ouvertes, rien n'est récupéré, seulement un lien que la personne ouvre elle-même.
+ * Pour d'autres fichiers : LCNDA_EXT.veilleDeces. Essai : tests/test-veille-deces.js
+ */
+(function (root) {
+    'use strict';
+    const T = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? String(v[k]) : m)));
+    const escRaw = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+
+    /* ═════ calculs sans écran (aussi pour Node) ═════ */
+    /** la phrase d'un décès possible : « Décès possible : Jeanne LACOMBE, née le 12 mars 1935 à Tulle (19), décédée le … à … » */
+    function sentence(it) {
+        const f = it.person?.gender === 'female' || it.insee?.sexe === '2' || it.insee?.sexe === 'F';
+        const name = it.person?.name || `${it.insee?.prenoms || ''} ${it.insee?.nom || ''}`.trim();
+        const born = it.insee?.naissance ? T(f ? 'née le {d}' : 'né le {d}', {d: it.insee.naissance}) + (it.insee.lieu_naissance ? ' ' + T('à {p}', {p: it.insee.lieu_naissance}) : '') : '';
+        const died = it.insee?.deces ? T(f ? 'décédée le {d}' : 'décédé le {d}', {d: it.insee.deces}) + (it.insee.lieu_deces ? ' ' + T('à {p}', {p: it.insee.lieu_deces}) : '') : '';
+        return T('Décès possible : {who}', {who: [name, born, died].filter(Boolean).join(', ')});
+    }
+    const yesLabel = it => (it.person?.gender === 'female' ? T('✓ C’est elle : ajouter le décès (source INSEE)') : it.person?.gender === 'male' ? T('✓ C’est lui : ajouter le décès (source INSEE)') : T('✓ C’est cette personne : ajouter le décès (source INSEE)'));
+    const noLabel = it => (it.person?.gender === 'female' ? T('✗ Ce n’est pas elle') : it.person?.gender === 'male' ? T('✗ Ce n’est pas lui') : T('✗ Ce n’est pas cette personne'));
+    /** les avis de décès des journaux : seulement des liens de recherche (pas de données ouvertes) */
+    const OBIT = [
+        ['libramemoria', 'Libra Memoria (avis de décès des journaux régionaux)', 'libramemoria.com'],
+        ['dansnoscoeurs', 'Dans nos cœurs (avis de décès)', 'dansnoscoeurs.fr'],
+        ['avisdedeces', 'Avis-de-deces.net', 'avis-de-deces.net'],
+        ['inmemori', 'InMemori (pages de souvenir)', 'inmemori.com'],
+    ];
+    function obitUrl(domain, p) {
+        const name = [p.first, p.last].filter(Boolean).join(' ').trim() || String(p.name || '').trim();
+        const commune = String(p.place || '').split(/[,(]/)[0].trim();
+        return `https://www.google.com/search?q=${encodeURIComponent(`site:${domain} "${name}"${commune ? ` ${commune}` : ''}`)}`;
+    }
+    const core = {sentence, yesLabel, noLabel, obitUrl, OBIT};
+    if (typeof module !== 'undefined' && module.exports) { module.exports = core; return; }
+
+    /* ═════ l'écran ═════ */
+    const A = () => root.LCNDA_APP || {};
+    const UI = () => root.LCNDA_UI || {};
+    const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
+    const esc = v => (A().escapeHtml ? A().escapeHtml(String(v ?? '')) : escRaw(v));
+    const get = (a, q) => A().api(a, q || {});
+    const post = (a, b) => A().api(a, {}, {method: 'POST', body: b || {}}).then(r => r.result || r);
+    const KEY = 'genealogie-veille-deces', TOLD = 'lcnda-vd-told';
+    const TAB = ['veille_deces', '08b', '⚰️ Veille des décès'];
+    const ls = {get: (k, d = null) => { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (_) { return d; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} }};
+    const kiosk = () => document.body?.classList.contains('is-kiosk');
+    const plural = (n, a, b) => (A().plural ? A().plural(n, a, b) : `${n} ${n > 1 ? (b || a + 's') : a}`);
+    let STATUS = null;
+    const enabled = (st = STATUS) => { const v = ls.get(KEY); return v === null ? !!st?.insee?.installed : v === '1'; };
+    const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+
+    async function refresh({auto = true} = {}) {
+        try { STATUS = await get('vd_status'); } catch (_) { return null; }
+        if (auto && enabled() && !kiosk() && STATUS.insee?.installed && (STATUS.new_file || !STATUS.last_run)) {
+            try { STATUS = await post('vd_auto'); } catch (_) {}
+        }
+        tell();
+        return STATUS;
+    }
+    /** un message quand il y a plus de décès possibles qu'au dernier message */
+    function tell() {
+        if (!STATUS || !enabled()) return;
+        const n = Number(STATUS.pending || 0), told = Number(ls.get(TOLD, '0'));
+        if (n > told) {
+            A().toast?.(T('⚰️ Veille des décès : {n} dans ton arbre (fichier INSEE, comparé sur l’ordinateur).', {n: plural(n, 'décès possible', 'décès possibles')}), '', {duration: 12000, action: {label: T('Voir'), run: open}});
+        }
+        ls.set(TOLD, String(n));
+    }
+    function open() { const st = A().state; if (!st) return; st.maintenanceTab = TAB[0]; A().persistUiState?.(); A().setModule?.('maintenance'); }
+
+    function cardHtml(it, mode = 'new') {
+        const d = it.detail || {};
+        const why = [d.name === 1 ? T('même nom') : d.near ? T('nom proche') : d.name ? T('nom composé') : '', d.first === 1 ? T('même prénom') : d.first ? T('prénom proche') : '',
+            d.birth === 'day' ? T('même date de naissance') : d.birth === 'month' ? T('même mois de naissance') : d.birth === 'year' ? T('même année de naissance') : d.birth === 'near' ? T('naissance à un an près') : '',
+            d.place === 1 ? T('même lieu de naissance') : d.place === 0.5 ? T('même département de naissance') : ''].filter(Boolean);
+        const mine = [it.person.birth ? T('naissance : {d}', {d: it.person.birth}) : '', it.person.birth_place].filter(Boolean).join(', ');
+        const acts = mode === 'new' ? `<button type="button" class="button small" data-vd-yes="${it.id}">${esc(yesLabel(it))}</button><button type="button" class="button small secondary" data-vd-no="${it.id}">${esc(noLabel(it))}</button>`
+            : `<button type="button" class="button small secondary" data-vd-undo="${it.id}">${esc(T('↶ Remettre dans les décès possibles'))}</button>`;
+        return `<article class="vd-card" data-vd-card="${it.id}">
+            <p class="vd-sentence"><b>${esc(sentence(it))}</b> <span class="vd-src">(${link(it.insee.url, T('INSEE, Licence Ouverte'))}) ${link(it.source.url, T('↗ source'))}</span></p>
+            <p class="muted vd-mine">${esc(T('Ta fiche :'))} <button type="button" class="table-link" data-open-person="${it.person.id}">${esc(it.person.name)}</button>${mine ? ` — ${esc(mine)}` : ''}</p>
+            <p class="vd-why"><span class="ui-badge">${esc(T('{n} % de ressemblance', {n: it.score}))}</span> ${esc(why.join(' · '))}${it.insee.acte ? ` · ${esc(T('acte n° {n}', {n: it.insee.acte}))}` : ''}</p>
+            <div class="page-actions vd-acts">${acts}</div></article>`;
+    }
+
+    async function decide(id, action) {
+        try {
+            await post(action === 'yes' ? 'vd_confirm' : action === 'no' ? 'vd_not_same' : 'vd_undo', {id});
+            const msg = action === 'yes' ? T('Décès ajouté à la fiche, avec la source INSEE.') : action === 'no' ? T('Noté : ce n’est pas la même personne. Cette piste ne reviendra pas.') : T('Piste remise dans les décès possibles.');
+            if (action === 'undo') A().toast?.(msg, 'success'); else A().undoToast?.(msg, {undo: async () => { await post('vd_undo', {id}); await draw(); }});
+            root.dispatchEvent?.(new CustomEvent('lcnda:data-changed'));
+            await draw();
+            STATUS = await get('vd_status').catch(() => STATUS); ls.set(TOLD, String(STATUS?.pending || 0));
+        } catch (e) { A().toast?.(e.message, 'error'); }
+    }
+
+    async function draw(token) {
+        const ws = document.getElementById('workspace'); if (!ws) return;
+        if (A().state?.maintenanceTab !== TAB[0] && token === undefined && !ws.querySelector('[data-vd-page]')) return;
+        let list = {items: []}, gone = {items: []};
+        try { [list, gone] = await Promise.all([get('vd_list'), get('vd_dismissed')]); STATUS = list; } catch (e) { ws.innerHTML = `<section class="page"><p class="h-offsite-sentence is-warn">${esc(e.message)}</p></section>`; return; }
+        if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
+        const st = list, ins = st.insee || {};
+        const on = enabled(st);
+        const head = UI().pageHeader ? UI().pageHeader({title: T('Veille des décès'), icon: '⚰️', where: T('Réglages · Données'), help: esc(T('Les personnes de ton arbre qu’on croit vivantes, comparées au fichier des décès de l’INSEE installé sur ton ordinateur.'))}) : `<h2>${esc(TAB[2])}</h2>`;
+        const insLine = ins.installed ? T('Fichier des décès de l’INSEE installé : décès de {a} à {b}.', {a: ins.from || '?', b: ins.to || '?'}) : T('Le fichier des décès de l’INSEE n’est pas installé : installe-le dans Recherche → Décès INSEE (bouton « ⤓ Tout installer »). Sans lui, la veille ne peut rien comparer.');
+        const lastLine = st.last_run ? T('Dernière comparaison : {d}. Fiches surveillées : {n}.', {d: (UI().when ? UI().when(st.last_run) : esc(String(st.last_run).slice(0, 16))), n: st.watched}) : T('Fiches surveillées : {n}.', {n: st.watched});
+        ws.innerHTML = `<section class="page vd-page" data-vd-page>${head}
+            <div class="maintenance-panel"><label class="checkbox-line cplus-tg"><input type="checkbox" data-vd-toggle ${on ? 'checked' : ''}><span><b>${esc(T('Surveiller les décès des personnes vivantes de mon arbre'))}</b><br><small class="muted">${esc(T('Quand un nouveau fichier des décès arrive (vérifié chaque jour dans Décès INSEE), l’app compare les fiches « vivantes » ou au statut inconnu, nées il y a moins de 110 ans : nom de naissance, prénoms, date et lieu de naissance. Rien n’est envoyé sur Internet : tout est comparé sur l’ordinateur.'))}</small></span></label>
+                <p>${esc(insLine)}</p><p class="muted">${lastLine}</p>
+                <div class="page-actions"><button type="button" class="button secondary" data-vd-run ${ins.installed && !kiosk() ? '' : 'disabled'}>${esc(T('🔎 Vérifier maintenant (tout le fichier)'))}</button></div></div>
+            <div class="maintenance-panel"><h3>${esc(T('Décès possibles'))} ${list.items.length ? `<span class="ui-badge">${list.items.length}</span>` : ''}</h3>
+                ${list.items.length ? list.items.map(it => cardHtml(it)).join('') : `<p class="muted">${esc(ins.installed ? T('Aucun décès possible pour l’instant.') : T('Rien à montrer tant que le fichier INSEE n’est pas installé.'))}</p>`}
+                ${gone.items.length ? `<details class="cplus-more"><summary>${esc(T('▸ Pistes écartées ({n})', {n: gone.items.length}))}</summary>${gone.items.map(it => cardHtml(it, 'gone')).join('')}</details>` : ''}</div>
+            <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3>
+                <p>${esc(T('Source :'))} ${link(st.source?.url || 'https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/', T('Fichier des personnes décédées (INSEE), data.gouv.fr'))} — ${link(st.source?.licence_url || 'https://www.etalab.gouv.fr/licence-ouverte-open-licence/', st.source?.licence || 'Licence Ouverte 2.0 (Etalab)')}. ${esc(T('Chaque décès ajouté porte cette source et le numéro de l’acte ; « ↗ » ouvre la recherche de la personne dans matchID, le moteur libre du même fichier.'))}</p>
+                <p class="muted">${esc(T('Les avis de décès des journaux et des sites (Libra Memoria, Dans nos cœurs, Avis-de-deces…) ne sont pas des données ouvertes : l’app ne les lit pas. Elle propose seulement des liens de recherche dans « Où chercher » d’une personne.'))}</p></div></section>`;
+        if (!A().escapeHtml) return;
+        A().bindTableLinks?.();
+    }
+    document.addEventListener('click', e => {
+        const t = e.target.closest?.('[data-vd-yes],[data-vd-no],[data-vd-undo],[data-vd-run],[data-vd-open]'); if (!t) return;
+        if (t.matches('[data-vd-open]')) { e.preventDefault(); return open(); }
+        if (kiosk()) return;
+        if (t.matches('[data-vd-run]')) {
+            t.disabled = true; t.textContent = T('Comparaison en cours…');
+            post('vd_run', {full: 1}).then(r => { A().toast?.(r.found ? T('{n} trouvé(s).', {n: plural(r.found, 'nouveau décès possible', 'nouveaux décès possibles')}) : T('Rien de nouveau : aucun décès possible de plus.'), 'success'); ls.set(TOLD, String(r.pending || 0)); return draw(); })
+                .catch(err => { A().toast?.(err.message, 'error'); t.disabled = false; });
+            return;
+        }
+        t.disabled = true;
+        const id = Number(t.dataset.vdYes || t.dataset.vdNo || t.dataset.vdUndo);
+        decide(id, t.matches('[data-vd-yes]') ? 'yes' : t.matches('[data-vd-no]') ? 'no' : 'undo');
+    });
+    document.addEventListener('change', e => {
+        if (!e.target.matches?.('[data-vd-toggle]')) return;
+        const on = e.target.checked; ls.set(KEY, on ? '1' : '0');
+        A().undoToast?.(on ? T('Veille des décès allumée.') : T('Veille des décès éteinte.'), {undo: () => { ls.set(KEY, on ? '0' : '1'); draw(); }});
+        if (on) refresh();
+    });
+
+    ext.maintenance = ext.maintenance || {};
+    ext.maintenance[TAB[0]] = token => draw(token);
+
+    /* widget du tableau de bord */
+    ext.dashboard = ext.dashboard || {};
+    ext.dashboard.veille_deces = {
+        load: () => get('vd_list').catch(() => null),
+        render: (index, widget, span, d) => {
+            const n = d?.items?.length || 0;
+            const body = !d ? `<p class="muted">${esc(T('La veille n’a pas pu être lue.'))}</p>` : !d.insee?.installed ? `<p class="muted">${esc(T('Installe le fichier des décès de l’INSEE (Recherche → Décès INSEE) pour surveiller les décès des personnes vivantes de ton arbre.'))}</p>`
+                : n ? `<ul class="vd-w-list">${d.items.slice(0, 3).map(it => `<li>${esc(sentence(it))}</li>`).join('')}</ul>` : `<p class="muted">${esc(T('Aucun décès possible pour l’instant.'))}</p>`;
+            const html = `<div class="vd-widget">${body}<p class="cplus-src">${esc(T('Source :'))} ${link('https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/', 'INSEE')} — Licence Ouverte</p></div>`;
+            return A().card ? A().card(index, `⚰️ ${T('Veille des décès')}`, n || '', html, span, `<button type="button" class="button small secondary" data-vd-open>${esc(T('Voir'))}</button>`) : html;
+        },
+    };
+
+    /* « Où chercher » : les avis de décès des journaux (liens seulement) — registre lu par heritage-ou-chercher.js */
+    root.LCNDA_SO21 = root.LCNDA_SO21 || {
+        SITES: OBIT.map(([key, label, domain]) => ({key, label, group: 'Avis de décès', icon: '🕯', country: 'France', domain, verified: false,
+            rel: {countries: ['fr'], from: 2000, missing: ['death'], base: 0.7, why: () => T('Décès récent possible : les avis de décès des journaux (lien de recherche, rien n’est récupéré)')}})),
+        url: (key, p) => { const s = OBIT.find(o => o[0] === key); return s ? obitUrl(s[2], p || {}) : ''; },
+    };
+
+    function register() {
+        const app = A(), tabs = app.defaultMaintenanceTabs;
+        if (Array.isArray(tabs) && !tabs.some(t => t[0] === TAB[0])) { const i = tabs.findIndex(t => t[0] === 'import'); tabs.splice(i < 0 ? tabs.length : i + 1, 0, TAB); }
+        if (Array.isArray(app.defaultDashboardBlocks) && !app.defaultDashboardBlocks.some(x => x[0] === 'veille_deces')) {
+            app.defaultDashboardBlocks.push(['veille_deces', '⚰️ Veille des décès']);
+            if (app.defaultDashboardBlockSpans) app.defaultDashboardBlockSpans.veille_deces = '6';
+            if (app.dashboardWidgetInfo) app.dashboardWidgetInfo.veille_deces = T('Les décès possibles des personnes vivantes de ton arbre, trouvés dans le fichier des décès de l’INSEE installé sur l’ordinateur.');
+        }
+        return !!tabs;
+    }
+    if (!register()) document.addEventListener('DOMContentLoaded', register, {once: true});
+    // au démarrage, puis toutes les 30 minutes (un nouveau fichier INSEE peut avoir été installé entre-temps)
+    (function boot(n = 0) {
+        if (!A().state?.csrf) { if (n < 120) setTimeout(() => boot(n + 1), 500); return; }
+        setTimeout(() => refresh(), 4000);
+        setInterval(() => refresh(), 30 * 60 * 1000);
+    })();
+
+    ext.veilleDeces = {...core, refresh, open, draw, enabled, status: () => STATUS};
+})(typeof window !== 'undefined' ? window : globalThis);

@@ -567,7 +567,10 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         return $by;
     };
     // Cible d'une note, d'une citation ou d'un média appartenant à une personne masquée : jamais exportée
-    $secret = static fn(string $type, int $id): bool => ($type === 'person' && isset($hidden[$id])) || ($type === 'event' && isset($hiddenEvent[$id])) || ($type === 'family' && isset($hiddenFamily[$id]));
+    // 🤝 Son réseau (lib/relations_reseau.php) : les relations entre deux fiches écrites (jamais une fiche cachée ni absente du fichier)
+    if (!function_exists('rs_export_rows')) { require_once __DIR__ . '/relations_reseau.php'; }
+    [$relationsByPerson, $hiddenRelation] = function_exists('rs_export_rows') ? rs_export_rows($pdo, $visible, $hidden, $share) : [[], []];
+    $secret = static fn(string $type, int $id): bool => ($type === 'person' && isset($hidden[$id])) || ($type === 'event' && isset($hiddenEvent[$id])) || ($type === 'family' && isset($hiddenFamily[$id])) || ($type === 'relation' && isset($hiddenRelation[$id]));
     $notesByTarget = [];
     if ($includeNotes) {
         foreach ($pdo->query('SELECT entity_type,entity_id,title,body FROM notes ORDER BY id') as $n) {
@@ -797,6 +800,22 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
             if ($r1 === $r2 && in_array($r1, ['adopted', 'foster'], true)) { $line(2, 'PEDI', $version === '7' ? strtoupper($r1) : $r1); } // GEDCOM 7 : ADOPTED, FOSTER
         }
         foreach (array_keys($famsBySpouse[$pid] ?? []) as $famId) { $line(1, 'FAMS', '@F' . $famId . '@'); }
+        // 🤝 relations hors famille : 5.5.1 ASSO + RELA ; 7 ASSO + ROLE (+ PHRASE), un nom sans fiche = ASSO @VOID@ + PHRASE (5.5.1 : une note)
+        foreach ($relationsByPerson[$pid] ?? [] as $rl) {
+            $relLabel = rs_label((string) $rl['rel_type'], '', (string) $rl['rel_label']);
+            $relNote = rs_gedcom_note($rl, trim((string) ($rl['place_name'] ?? '')));
+            if ($rl['other_id'] === null) {
+                if ($version !== '7') { if ($includeNotes) { $text(1, 'NOTE', 'Réseau — ' . $relLabel . ' : ' . trim((string) $rl['other_name']) . ($relNote !== '' ? "\n" . $relNote : '')); } continue; }
+                $line(1, 'ASSO', '@VOID@'); $line(2, 'PHRASE', trim((string) $rl['other_name']));
+            } else { $line(1, 'ASSO', '@I' . (int) $rl['other_id'] . '@'); }
+            if ($version === '7') {
+                $role7 = rs_types()[(string) $rl['rel_type']][4] ?? 'OTHER';
+                $line(2, 'ROLE', $role7);
+                if ($role7 === 'OTHER') { $line(3, 'PHRASE', $relLabel); }
+            } else { $line(2, 'RELA', $relLabel); }
+            if ($relNote !== '') { $text(2, 'NOTE', $relNote); }
+            $writeCitations(2, 'relation:' . (int) $rl['id']);
+        }
         $writeNotes(1, 'person:' . $pid);
         $writeCitations(1, 'person:' . $pid);
         $writeMedia(1, 'person:' . $pid);
@@ -1398,17 +1417,30 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
             }
         }
         if ($nati !== '' || $dscr !== '') { $pdo->prepare('UPDATE persons SET nationality=?,physical_description=? WHERE id=?')->execute([$nati, $dscr, $pid]); }
-        // liens avec d'autres personnes (ASSO au niveau de la fiche) : parrain / marraine → témoin du baptême s'il existe, sinon une note
+        // liens avec d'autres personnes (ASSO au niveau de la fiche) : parrain / marraine → témoin du baptême s'il existe ; sinon
+        // une vraie relation (🤝 Son réseau, lib/relations_reseau.php : sorte, dates et lieu relus dans la note, sources) ;
+        // GEDCOM 7 « ASSO @VOID@ + PHRASE » : une relation avec un nom sans fiche
         $assoNote = [];
+        if (!function_exists('rs_import_asso')) { require_once __DIR__ . '/relations_reseau.php'; }
         foreach (gedimport_children($rec, 'ASSO') as $as) {
-            $wid = $personMap[trim($as->value, '@ ')] ?? null;
-            if (!$wid || $wid === $pid) { continue; }
-            $role = ($r = gedimport_child($as, 'RELA') ?: gedimport_child($as, 'ROLE')) ? $roleFr($r->value) : 'Relation';
+            $ptr = trim($as->value, '@ ');
+            $wid = $personMap[$ptr] ?? null;
+            $rn = gedimport_child($as, 'RELA') ?: gedimport_child($as, 'ROLE');
+            $rawRole = $rn ? trim($unescape($rn->value === 'OTHER' && ($ph = gedimport_child($rn, 'PHRASE')) ? $ph->value : $rn->value)) : '';
+            $asNote = implode("\n", array_filter(array_map(static function ($n) use ($noteParts) { [$t, $b] = $noteParts($n); return trim(($t !== '' ? $t . "\n" : '') . $b); }, gedimport_children($as, 'NOTE'))));
+            if (!$wid) {
+                $free = strtoupper($ptr) === 'VOID' && ($ph = gedimport_child($as, 'PHRASE')) ? trim($unescape($ph->value)) : '';
+                if ($free !== '' && function_exists('rs_import_asso') && ($rid = rs_import_asso($pdo, $pid, null, $free, $rawRole, $asNote))) { $cite($as, 'relation', $rid); $stats['relations'] = ($stats['relations'] ?? 0) + 1; }
+                continue;
+            }
+            if ($wid === $pid) { continue; }
+            $role = $rawRole !== '' ? $roleFr($rawRole) : 'Relation';
             $bapt = null;
             if (preg_match('/parrain|marraine/i', $role)) {
                 $q = $pdo->prepare("SELECT e.id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=? AND t.gedcom_tag IN ('BAPM','CHR') ORDER BY e.id LIMIT 1"); $q->execute([$pid]); $bapt = $q->fetchColumn() ?: null;
             }
             if ($bapt) { $insertWitness->execute([(int) $bapt, $wid, $role, 0]); $stats['witnesses']++; }
+            elseif (function_exists('rs_import_asso')) { if ($rid = rs_import_asso($pdo, $pid, (int) $wid, '', $rawRole, $asNote)) { $cite($as, 'relation', $rid); $stats['relations'] = ($stats['relations'] ?? 0) + 1; } }
             else { $nm = $pdo->prepare("SELECT trim(coalesce(first_name,'')||' '||upper(coalesce(last_name,''))) FROM persons WHERE id=?"); $nm->execute([$wid]); $assoNote[] = $role . ' : ' . ($nm->fetchColumn() ?: '?') . ' (fiche n° ' . $wid . ')'; }
         }
         if ($assoNote) { $insertNote->execute(['person', $pid, 'Liens avec d’autres personnes', implode("\n", $assoNote)]); $stats['notes']++; }
