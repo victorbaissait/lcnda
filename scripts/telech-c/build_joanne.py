@@ -121,6 +121,15 @@ def main():
         kept += 1
     print(f'{len(entries)} débuts d’article, {kept} articles de communes gardés')
     missing = [w for w in WITNESS if not any(fold(r['n']) == fold(w[0]) for r in by_dep.get(w[1], []))]
+    if missing:  # diagnostic dans le journal : comment les communes témoins apparaissent dans le texte
+        for w in missing:
+            hits = [ln for _, ln in lines if fold(w[0]) in fold(ln)][:4]
+            print(f'— témoin {w[0]} ({w[1]}) : {len(hits)} ligne(s) contenant le nom')
+            for h in hits:
+                print('   ', h[:260])
+            near = [r for r in sum(by_dep.values(), []) if fold(w[0]) in fold(r['n'])][:3]
+            for r in near:
+                print('    gardé sous', repr(r['n']), r['dep1869'], '|', r['t'][:160])
     if kept < 8000 or len(missing) > 1:
         sys.exit(f'trop peu d’articles reconnus ({kept}) ou communes témoins absentes : {missing} — rien n’est écrit')
     os.makedirs(out, exist_ok=True)
