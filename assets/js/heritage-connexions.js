@@ -652,7 +652,7 @@
         const st = takeState = {tab: restore?.tab || tab || (count ? 'basket' : 'person'), q: restore?.q || '', picked: new Map(restore?.picked || []), results: [], target, ctx: ctx || (target ? hereOf(target) : null),
             preview: null, filters: new Set(), rank: 'date', mview: 'list', list: restore?.list || null, used: new Map(), back: restore?.back || null};
         const dn = target ? destName(st) : '';
-        const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-take'; dlg.setAttribute('aria-labelledby', 'cx-take-h');
+        const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-take'; dlg.dataset.noFoot = ''; dlg.setAttribute('aria-labelledby', 'cx-take-h'); // le pied est le sien (pas de « Fermer » ajouté)
         const split = Number(readJ(SPLIT, 0)) || 0; if (split) dlg.style.setProperty('--cx-pw', `${split}px`);
         dlg.innerHTML = `<form method="dialog" class="cx-tk">
             <header class="cx-tk-head"><div class="cx-tk-ht"><span class="cx-eyebrow">📥 ${esc(T('Prendre depuis…'))}</span>
@@ -783,7 +783,7 @@
         const t2 = it.kind === 'event' ? [v.date, v.place].filter(Boolean).join(' · ') : line2.length ? line2.join(' · ') : '';
         const t3 = [...(v.extra || [])].filter(Boolean).join(' · ') || (!t2 && it.value && it.kind !== 'set' && !sameText(it.title, it.value) ? String(it.value).slice(0, 160) : '');
         const pills = [...(v.pills || []), up].filter(Boolean);
-        const th = v.thumb ? `<span class="cx-th"><img src="${esc(v.thumb)}" alt="" loading="lazy" decoding="async"></span>` : (['media', 'act'].includes(it.kind) ? `<span class="cx-th is-none" aria-hidden="true">${v.ico || ''}</span>` : '');
+        const th = v.thumb ? `<span class="cx-th"><img src="${esc(v.thumb)}" alt="" loading="lazy" decoding="async"></span>` : (['media', 'act'].includes(it.kind) ? '<span class="cx-th is-none" aria-hidden="true"></span>' : '');
         const lbl = `${it.title}${t2 ? ` — ${t2}` : ''}`;
         return `<li data-cx-r="${i}" class="cx-row${on ? ' is-on' : ''}${v.todo ? ' is-todo' : ''}"><label class="cx-chk"><input type="checkbox" data-cx-ri="${i}" ${on ? 'checked' : ''} aria-label="${esc(T('Prendre « {t} »', {t: lbl.slice(0, 120)}))}"></label>${th}
             <button type="button" class="cx-rt" data-cx-see="${i}" aria-describedby="cx-hint-space"><span class="cx-t1">${st.mview === 'grid' && it.kind === 'media' ? '' : `<span class="cx-ico" aria-hidden="true">${esc(v.ico || icon(it))}</span>`}${esc(it.title)}</span>${t2 ? `<span class="cx-t2">${esc(t2)}</span>` : ''}${t3 ? `<span class="cx-t3">${esc(t3)}</span>` : ''}</button>
@@ -975,7 +975,7 @@
         if (st.target?.kinds) list = list.filter(x => st.target.kinds.includes(x.kind) || x.kind === 'set');
         const shown = applyFilters(st, list);
         res.innerHTML = shown.length ? resultsHtml(st, shown) + (st.more ? `<p class="cx-muted cx-pad"><small>${esc(T('Les {n} premiers seulement : précise la recherche (un nom, une commune, une période comme 1780-1800).', {n: nf(list.length)}))}</small></p>` : '') : emptyHtml(st, list.length ? 'filter' : st.q ? 'search' : ['basket', 'recent'].includes(st.tab) ? st.tab : 'none');
-        res.scrollTop = 0; bindResults(st, res); bindEmpty(st, res);
+        res.scrollTop = 0; res.dataset.cxShown = `${st.tab}|${st.q}|${[...st.filters].join(',')}|${st.rank}`; bindResults(st, res); bindEmpty(st, res); // data-cx-shown : ce qui est affiché (pour les essais)
         if (st.picked.size >= 2 && !st.preview) drawSummary(st);
     }
 

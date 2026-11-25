@@ -141,8 +141,8 @@ dialog.cx-take { --cx-bg: #fff; --cx-ink: #111; --cx-mut: #555; --cx-soft: #6b72
 .cx-take.is-wide .cx-tools { display: none; }
 .cx-srch { position: relative; }
 .cx-srch::before { content: "🔍"; position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: .65; pointer-events: none; }
-.cx-take .cx-srch input { width: 100%; border: 1px solid var(--cx-line2); border-radius: 9px; background: var(--cx-bg); color: var(--cx-ink); font: 14px system-ui, sans-serif; padding: 9px 12px 9px 34px; box-shadow: none; background-image: none; }
-.cx-take .cx-srch input:focus { outline: 2px solid var(--cx-blue); outline-offset: 0; border-color: var(--cx-blue); }
+dialog.cx-take .cx-srch input[type="search"] { width: 100%; border: 1px solid var(--cx-line2); border-radius: 9px; background: var(--cx-bg); color: var(--cx-ink); font: 14px system-ui, sans-serif; padding: 9px 12px 9px 34px; box-shadow: none; background-image: none; }
+dialog.cx-take .cx-srch input[type="search"]:focus { outline: 2px solid var(--cx-blue); outline-offset: 0; border-color: var(--cx-blue); }
 .cx-chips { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .cx-cf, .cx-ca { display: contents; }
 .cx-sp { flex: 1; }
