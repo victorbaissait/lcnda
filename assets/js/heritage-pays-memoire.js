@@ -19,7 +19,8 @@
  */
 (function (root) {
     'use strict';
-    const T = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
+    // les nombres passent en texte : une année reste « 1907 » (pas « 1 907 »)
+    const T = (s, v0) => { const v = v0 && Object.fromEntries(Object.entries(v0).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)); };
 
     /* ═════════════ le calcul (sans écran : aussi pour Node) ═════════════ */
     const fold = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
@@ -408,7 +409,7 @@
     const SO40_SITES = [
         {key: 'polytechnique', group: 'ecoles', country: 'France', icon: '🎓', label: 'École polytechnique — bibliothèque (registres matricules des élèves, « famille polytechnicienne »)', home: 'https://www.polytechnique.edu/', years: [1794, 1950], copy: 'name',
             rel: {countries: ['fr'], from: 1794, to: 1990, base: 0.6, profiles: ['officer', 'inventor'], why: () => T('Ingénieur ou officier ? Les registres des élèves de l’École polytechnique (depuis 1794) se consultent à sa bibliothèque')}},
-        {key: 'saint_cyr', group: 'ecoles', country: 'France', icon: '⚔️', label: 'Saint-Cyr — École spéciale militaire (registres des élèves officiers)', home: 'https://www.st-cyr.terre.defense.gouv.fr/', years: [1802, 1950], copy: 'name',
+        {key: 'saint_cyr', group: 'ecoles', country: 'France', icon: '⚔️', label: 'Saint-Cyr — École spéciale militaire (registres des élèves officiers)', home: 'http://www.st-cyr.terre.defense.gouv.fr/', years: [1802, 1950], copy: 'name',
             rel: {countries: ['fr'], from: 1802, to: 1990, base: 0.6, profiles: ['officer'], require: ['profile'], why: () => T('Officier ? Les registres des élèves de Saint-Cyr (depuis 1802) : au Service historique de la Défense')}},
         {key: 'ens', group: 'ecoles', country: 'France', icon: '📚', label: 'École normale supérieure — archives et annuaire des anciens élèves', home: 'https://www.ens.psl.eu/', years: [1794, 1950], copy: 'name',
             rel: {countries: ['fr'], from: 1794, to: 1990, base: 0.4, why: () => T('Professeur ou savant ? Les archives de l’École normale supérieure gardent les dossiers des élèves')}},
