@@ -62,7 +62,7 @@
     const listeners = new Set();
     let statusCache = null;
     const status = (force = false) => { if (!statusCache || force) statusCache = api('ba_status').catch(() => ({installed: false})); return statusCache; };
-    const changed = () => { personCache.clear(); statusCache = null; listeners.forEach(fn => { try { fn(); } catch (e) { console.error(e); } }); };
+    const changed = () => { personCache.clear(); statusCache = null; try { ext.toutSur?.forget?.('ba_'); } catch (_) {} listeners.forEach(fn => { try { fn(); } catch (e) { console.error(e); } }); };
     function paint() {
         const r = DL.run; if (!r) return;
         document.querySelectorAll('[data-ba-prog]').forEach(el => { const i = el.querySelector('i'); if (i) i.style.width = `${pct(r.received, r.size)}%`; const t = el.querySelector('small'); if (t) t.textContent = `${pct(r.received, r.size)} % · ${fmtSize(r.received)} ${i18n('sur')} ${fmtSize(r.size)}`; });
@@ -188,7 +188,7 @@
         document.querySelectorAll('#workspace .ba-person[data-ba-card]').forEach(h => { const c = cardOf(h); if (c) c.hidden = true; fillPerson(h); });
     });
     listeners.add(() => document.querySelectorAll('.ba-person[data-ba-person]').forEach(fillPerson));
-    const refreshPerson = pid => { personCache.delete(pid); document.querySelectorAll(`.ba-person[data-ba-person="${pid}"]`).forEach(fillPerson); };
+    const refreshPerson = pid => { personCache.delete(pid); try { ext.toutSur?.forget?.('ba_annuaires|p' + pid); } catch (_) {} document.querySelectorAll(`.ba-person[data-ba-person="${pid}"]`).forEach(fillPerson); };
 
     async function sayYes(btn) {
         const host = btn.closest('[data-ba-person]'); if (!host) return;

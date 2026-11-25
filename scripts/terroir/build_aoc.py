@@ -22,7 +22,8 @@ URLS = {'aoc': 'https://static.data.gouv.fr/resources/aires-geographiques-des-ao
 # la sorte de produit : d'abord le type Wikidata, sinon les mots du nom
 WD_CAT = {'vin': {'Q282', 'Q1827', 'Q10210', 'Q12979', 'Q80114014', 'Q630531', 'Q10750129', 'Q22715', 'Q2140699', 'Q156362', 'Q3558198', 'Q1565828', 'Q154'},
           'fromage': {'Q10943', 'Q2223649'}, 'spiritueux': {'Q284', 'Q170582'}, 'olive': {'Q93165', 'Q12179886'}}
-WORDS = [('spiritueux', r'eau[x]?-de-vie|cognac|armagnac|calvados|\bmarc\b|\bfine\b|whisky|rhum|liqueur|pommeau|génépi|absinthe|kirsch|pineau|floc|macvin|ratafia|vermouth|\bgin\b|genièvre|brandy|pastis|quetsch'),
+WORDS = [('vin', r'vin de liqueur|vin doux'),
+         ('spiritueux', r'eau[x]?-de-vie|cognac|armagnac|calvados|^marc\b|\bmarc d|^fine\b|\bfine (champagne|bordeaux|bourgogne|faugères)|whisky|rhum|liqueur|pommeau|génépi|absinthe|kirsch|pineau|floc|macvin|ratafia|vermouth|\bgin\b|genièvre|brandy|pastis|quetsch'),
          ('cidre', r'\bcidre|poiré'),
          ('vin', r'\brouge\b|\bblanc\b|\brosé\b|\bvins?\b|mousseux|crémant|primeur|clairet|vendanges|\bgris\b|pétillant|liquoreux|\bmoelleux\b|grand cru|premier cru|\bvillages\b|\bsur lie\b|grains nobles|cru du beaujolais|dénomination de climat|\bmuscat|\broussette\b|méthode ancestrale|\bambré\b|hors d.âge|avec sucres|\bsec\b|klevener'),
          ('fromage', r'\bfromage|\btomm?e\b|\bbleu\b|\bbrie\b|camembert|roquefort|^comté$|reblochon|munster|époisses|mont d.or|ossau|beaufort|^cantal$|^salers$|^laguiole$|saint-nectaire|morbier|maroilles|chaource|^langres$|neufchâtel|pélardon|picodon|rocamadour|valençay|selles-sur-cher|chabichou|crottin|^banon$|abondance|emmental|raclette|livarot|pont-l.évêque|brocciu|fourme|gruyère|^mâconnais$|sainte-maure|pouligny|brousse|rigotte|mothais|chavignol|brillat|cancoillotte|saint-marcellin|soumaintrain|chevrotin|tome fraîche'),
@@ -94,6 +95,9 @@ def main(src):
             for text in [p['name'].lower() for p in ps if p['name'] != a['name']] + [a['name'].lower()]:
                 cat = next((c for c, rx in WORDS[:-1] if re.search(rx, text)), '')
                 if cat: break
+            # les appellations AOC numérotées jusqu'à 1332 par l'INAO sont des vins (les fromages commencent à 1438, les cidres et
+            # eaux-de-vie vers 1333-1363) : pour celles dont le nom ne dit rien (« Saint-Emilion », « Pomerol »)
+            if not cat and a['sign'].upper() == 'AOC' and int(ida) <= 1332: cat = 'vin'
             cat = cat or 'autre'
         w = next((WD[p['id']] for p in ps if p['id'] in WD and (WD[p['id']]['img'] or WD[p['id']]['wp'])), None) or next((WD[p['id']] for p in ps if p['id'] in WD), None)
         names = list(dict.fromkeys(p['name'] for p in ps if p['name'] and p['name'] != a['name']))
