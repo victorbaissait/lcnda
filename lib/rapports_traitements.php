@@ -169,7 +169,8 @@ function rt_report_rows(PDO $pdo, array $raw): array
     if ($start !== null) { $set = array_flip($start); $rows = array_values(array_filter($rows, static fn($r) => (bool) array_filter($r['people'] ?? [], static fn($p) => isset($set[(int) $p['id']])))); }
     // 🔒 vie privée : comme l'export « Pour partager » ; « garder les vivants » seulement pour soi, jamais en mode confidentialité
     $privacyMode = function_exists('export_privacy_enabled') && export_privacy_enabled();
-    $keep = $d['privacy']['keep_living'] && !$privacyMode;
+    $kiosk = function_exists('kiosk_state') && !empty(kiosk_state()['on']); // 🔒 mode consultation : jamais les vivants
+    $keep = $d['privacy']['keep_living'] && !$privacyMode && !$kiosk;
     $removed = ['living' => 0, 'private' => 0];
     if (!$keep) {
         $hidden = rt_hidden($pdo);
@@ -345,7 +346,9 @@ function rt_rules_from_names(PDO $pdo, array $rules, array &$missing): array
             } elseif ($f === 'label' && is_array($v)) {
                 $q = $pdo->prepare('SELECT id FROM labels WHERE name=? COLLATE NOCASE'); $q->execute([mb_substr(safe_text($v['name'] ?? ''), 0, 80)]);
                 $id = (int) $q->fetchColumn();
-                if ($id) { $ids[] = $id; } else { $missing[] = 'étiquette « ' . mb_substr((string) ($v['name'] ?? '?'), 0, 60) . ' »'; }
+                $name = mb_substr(safe_text($v['name'] ?? ''), 0, 80);
+                if (!$id && $name !== '') { $pdo->prepare('INSERT INTO labels(name, color) VALUES(?,?)')->execute([$name, preg_match('/^#[0-9a-f]{6}$/i', (string) ($v['color'] ?? '')) ? $v['color'] : '#0066cc']); $id = (int) $pdo->lastInsertId(); } // étiquette absente : créée, comme pour « Mes listes »
+                if ($id) { $ids[] = $id; }
             } elseif (is_int($v) && $f === 'birth_month') { $ids[] = $v; }
         }
         $rules[$i]['values'] = $ids;
@@ -370,41 +373,48 @@ function rt_validate_file(mixed $pkg): array
 {
     if (!is_array($pkg) || ($pkg['type'] ?? '') !== RT_FILE_TYPE) { throw new LcndaBadInput('Ce fichier n’est pas un rapport LCNDA (.lcnda-rapport).'); }
     if ((int) ($pkg['version'] ?? 0) !== 1) { throw new LcndaBadInput('Ce rapport vient d’une version de LCNDA que celle-ci ne connaît pas.'); }
-    $allowed = [
-        '' => ['type', 'version', 'kind', 'name', 'icon', 'description', 'definition'],
-        'definition' => ['source', 'match', 'rules', 'start', 'columns', 'sort', 'group', 'layout', 'privacy', 'steps', 'who'],
-        'rule' => ['field', 'value', 'from', 'to', 'values', 'not', 'date_from', 'date_to', 'km'],
-        'value' => ['tag', 'label', 'name', 'color'],
-        'start' => ['search', 'list'], 'sort' => ['col', 'dir'], 'group' => ['col', 'page_break', 'subtotal', 'total', 'agg'], 'agg' => ['col', 'fn'],
-        'layout' => ['title', 'subtitle', 'header', 'footer', 'orientation', 'paper', 'font', 'color_nosource', 'date', 'numbers'], 'privacy' => ['keep_living'],
-        'step' => ['op', 'params'], 'params' => ['find', 'replace', 'word', 'case', 'mode', 'value', 'contains', 'country', 'field', 'spaces', 'punct', 'empty', 'before_after', 'name', 'fields'],
-        'who' => ['mode', 'match', 'rules', 'list', 'search'],
-    ];
+    // ce qu'un fichier peut contenir : 'S' = un texte, un nombre, oui/non ; ['o' => [...]] = des réglages nommés ; ['l' => …] = une liste
+    $S = 'S';
+    $value = ['any' => [$S, ['o' => ['tag' => $S, 'label' => $S, 'name' => $S, 'color' => $S]]]];
+    $rule = ['o' => ['field' => $S, 'value' => $S, 'from' => $S, 'to' => $S, 'not' => $S, 'date_from' => $S, 'date_to' => $S, 'km' => $S, 'values' => ['l' => $value]]];
+    $schema = ['o' => ['type' => $S, 'version' => $S, 'kind' => $S, 'name' => $S, 'icon' => $S, 'description' => $S, 'definition' => ['o' => [
+        'source' => $S, 'match' => $S, 'rules' => ['l' => $rule], 'start' => ['o' => ['search' => $S, 'list' => $S]], 'columns' => ['l' => $S],
+        'sort' => ['l' => ['o' => ['col' => $S, 'dir' => $S]]],
+        'group' => ['o' => ['col' => $S, 'page_break' => $S, 'subtotal' => $S, 'total' => $S, 'agg' => ['o' => ['col' => $S, 'fn' => $S]]]],
+        'layout' => ['o' => array_fill_keys(['title', 'subtitle', 'header', 'footer', 'orientation', 'paper', 'font', 'color_nosource', 'date', 'numbers'], $S)],
+        'privacy' => ['o' => ['keep_living' => $S]],
+        'steps' => ['l' => ['o' => ['op' => $S, 'params' => ['o' => array_fill_keys(['find', 'replace', 'word', 'case', 'mode', 'value', 'contains', 'country', 'field', 'spaces', 'punct', 'empty', 'before_after', 'name'], $S)]]]],
+        'who' => ['o' => ['mode' => $S, 'match' => $S, 'rules' => ['l' => $rule], 'list' => $S, 'search' => $S]],
+    ]]]];
     $bad = static function (string $why): never { throw new LcndaBadInput('Fichier refusé : ' . $why . ' Un rapport ne contient que des réglages, jamais de code.'); };
-    $walk = static function ($v, string $ctx, int $depth) use (&$walk, $allowed, $bad): void {
-        if ($depth > 8) { $bad('trop d’imbrications.'); }
-        if (is_string($v)) {
-            if (mb_strlen($v) > 2000) { $bad('un texte est trop long.'); }
-            if (preg_match('/<\s*\/?\s*[a-z!?]|javascript\s*:|vbscript\s*:|data\s*:\s*text\/html|\bon[a-z]+\s*=|\{\{|<%|\beval\s*\(|\bfunction\s*\(|=>/iu', $v)) { $bad('il contient du HTML ou du code (« ' . mb_substr($v, 0, 40) . ' »).'); }
+    $count = 0;
+    $walk = static function ($v, $spec, int $depth) use (&$walk, &$count, $bad): void {
+        if (++$count > 5000 || $depth > 8) { $bad('il est trop compliqué.'); }
+        if (is_array($spec) && isset($spec['any'])) {
+            foreach ($spec['any'] as $alt) { if (($alt === 'S') === !is_array($v)) { $walk($v, $alt, $depth); return; } }
+            $bad('valeur inattendue.');
+        }
+        if ($spec === 'S') {
+            if (is_array($v)) { $bad('un réglage simple contient une liste.'); }
+            if (is_string($v)) {
+                if (mb_strlen($v) > 2000) { $bad('un texte est trop long.'); }
+                if (preg_match('/<\s*\/?\s*[a-z!?]|javascript\s*:|vbscript\s*:|data\s*:\s*text\/html|\bon[a-z]+\s*=|\{\{|<%|\beval\s*\(|\bfunction\s*\(|=>|`/iu', $v)) { $bad('il contient du HTML ou du code (« ' . mb_substr($v, 0, 40) . ' »).'); }
+            } elseif (!is_int($v) && !is_float($v) && !is_bool($v) && $v !== null) { $bad('valeur inconnue.'); }
             return;
         }
-        if (is_int($v) || is_float($v) || is_bool($v) || $v === null) { return; }
-        if (!is_array($v)) { $bad('valeur inconnue.'); }
-        if (count($v) > 500) { $bad('trop d’éléments.'); }
-        $isList = array_is_list($v);
-        $childCtx = ['rules' => 'rule', 'values' => 'value', 'sort' => 'sort', 'steps' => 'step', 'columns' => 'col', 'fields' => 'col'][$ctx] ?? null;
+        if (!is_array($v)) { $bad('un groupe de réglages est mal formé.'); }
+        if (isset($spec['l'])) {
+            if (!array_is_list($v) || count($v) > 500) { $bad('une liste est mal formée.'); }
+            foreach ($v as $x) { $walk($x, $spec['l'], $depth + 1); }
+            return;
+        }
+        if ($v !== [] && array_is_list($v)) { $bad('un groupe de réglages est mal formé.'); }
         foreach ($v as $k => $x) {
-            if ($isList && $childCtx !== null) { $walk($x, $childCtx, $depth + 1); continue; }
-            if ($isList && in_array($ctx, ['col', 'value'], true)) { $walk($x, $ctx, $depth + 1); continue; }
-            $keys = $allowed[$ctx] ?? null;
-            if ($keys === null || !in_array((string) $k, $keys, true)) { $bad('réglage inconnu « ' . mb_substr((string) $k, 0, 40) . ' ».'); }
-            $walk($x, in_array((string) $k, ['definition', 'start', 'group', 'agg', 'layout', 'privacy', 'params', 'who'], true) ? (string) $k : (in_array((string) $k, ['rules', 'values', 'sort', 'steps', 'columns', 'fields'], true) ? (string) $k : 'leaf'), $depth + 1);
+            if (!isset($spec['o'][(string) $k])) { $bad('réglage inconnu « ' . mb_substr((string) $k, 0, 40) . ' ».'); }
+            $walk($x, $spec['o'][(string) $k], $depth + 1);
         }
     };
-    // les listes : 'rules' → chaque élément est une règle, 'values' → des valeurs, etc. ; une feuille n'a pas de clés
-    $allowed['leaf'] = [];
-    $allowed['rules'] = []; $allowed['values'] = []; $allowed['sort'] = []; $allowed['steps'] = []; $allowed['columns'] = []; $allowed['fields'] = [];
-    $walk($pkg, '', 0);
+    $walk($pkg, $schema, 0);
     if (!in_array($pkg['kind'] ?? '', RT_KINDS, true)) { $bad('sorte inconnue.'); }
     if (!is_array($pkg['definition'] ?? null)) { $bad('réglages absents.'); }
     return $pkg;
@@ -609,23 +619,31 @@ function rt_step_candidates(PDO $pdo, array $step, ?array $ids): array
             }
             break;
         case 'place_merge':
-            $norm = static fn($s) => preg_replace('/[\s\-’\']+/u', ' ', mb_strtolower(trim((string) $s)));
-            $groups = [];
+            // même nom (majuscules, tirets, espaces mis à part) et même département ; un lieu sans département rejoint le seul
+            // département connu pour ce nom (s'il y en a plusieurs, on ne devine pas) ; deux lieux à plus de 10 km : jamais
+            $norm = static fn($s) => trim((string) preg_replace('/[\s\-’\']+/u', ' ', mb_strtolower(trim((string) $s))));
+            $byName = [];
             foreach ($pdo->query('SELECT p.id, p.name, p.county, p.country, p.latitude, p.longitude, (SELECT count(*) FROM events e WHERE e.place_id=p.id) AS n FROM places p WHERE trim(COALESCE(p.name,\'\'))<>\'\' ORDER BY p.id')->fetchAll(PDO::FETCH_ASSOC) as $r) {
-                $groups[$norm($r['name']) . '|' . $norm($r['county'])][] = $r;
+                $byName[$norm($r['name'])][] = $r;
             }
             $scope = null;
             if ($ids !== null) { $scope = array_flip(array_map('intval', $pdo->query(rt_places_sql($ids))->fetchAll(PDO::FETCH_COLUMN))); }
-            foreach ($groups as $g) {
-                if (count($g) < 2) { continue; }
-                usort($g, static fn($a, $b) => ((int) $b['n'] <=> (int) $a['n']) ?: ((int) $a['id'] <=> (int) $b['id']));
-                $target = $g[0];
-                foreach (array_slice($g, 1) as $r) {
+            $best = static function (array $g) { usort($g, static fn($a, $b) => ((int) $b['n'] <=> (int) $a['n']) ?: ((int) $a['id'] <=> (int) $b['id'])); return $g[0]; };
+            foreach ($byName as $all) {
+                if (count($all) < 2) { continue; }
+                $byCounty = [];
+                foreach ($all as $r) { $byCounty[$norm($r['county'])][] = $r; }
+                $withCounty = array_diff_key($byCounty, ['' => 1]);
+                $targets = [];
+                foreach ($byCounty as $ck => $g) { $targets[$ck] = $ck === '' && count($withCounty) === 1 ? $best(reset($withCounty)) : $best($g); }
+                foreach ($all as $r) {
+                    $target = $targets[$norm($r['county'])];
+                    if ((int) $target['id'] === (int) $r['id']) { continue; }
                     if ($scope !== null && !isset($scope[(int) $r['id']])) { continue; }
                     $ca = $norm($r['country']); $cb = $norm($target['country']);
                     if ($ca !== '' && $cb !== '' && $ca !== $cb) { continue; }
                     if ($r['latitude'] !== null && $target['latitude'] !== null && rt_km((float) $r['latitude'], (float) $r['longitude'], (float) $target['latitude'], (float) $target['longitude']) > 10) { continue; } // deux villages du même nom
-                    $out[] = ['key' => 'places:merge:' . $r['id'], 'what' => 'place', 'place' => $r, 'cells' => [], 'merge_into' => (int) $target['id'],
+                    $out[] = ['key' => 'places:merge:' . $r['id'], 'what' => 'place', 'place' => $r, 'cells' => [], 'merge_into' => (int) $target['id'], 'note' => 'fusion',
                         'show_after' => (string) $target['name'] . ($target['county'] ? ' (' . $target['county'] . ')' : '') . ' · n° ' . $target['id']];
                 }
             }
@@ -749,7 +767,7 @@ function rt_run(PDO $pdo, array $recipe, array $skip): array
             } elseif (isset($c['label'])) {
                 if (!$labelId) {
                     $lq = $pdo->prepare('SELECT id FROM labels WHERE name=? COLLATE NOCASE'); $lq->execute([$c['label']]); $labelId = (int) $lq->fetchColumn();
-                    if (!$labelId) { $pdo->prepare('INSERT INTO labels(name, color) VALUES(?, ?)')->execute([$c['label'], '#6929c4']); $labelId = (int) $pdo->lastInsertId(); $undo['created_labels'][] = $labelId; }
+                    if (!$labelId) { $pdo->prepare('INSERT INTO labels(name, color) VALUES(?, ?)')->execute([$c['label'], '#6929c4']); $labelId = (int) $pdo->lastInsertId(); $undo['created_labels'][] = ['id' => $labelId, 'name' => $c['label'], 'color' => '#6929c4']; }
                 }
                 $ins = $pdo->prepare("INSERT OR IGNORE INTO label_links(label_id, entity_type, entity_id) VALUES(?, 'person', ?)"); $ins->execute([$labelId, (int) $c['person_id']]);
                 if ($ins->rowCount()) { $undo['label_links'][] = [$labelId, (int) $c['person_id']]; $stats['labels']++; }
@@ -831,7 +849,7 @@ function rt_undo(PDO $pdo, array $data): array
     foreach (array_reverse($p['changes'] ?? []) as $c) { $done = ro_set_if($pdo, (string) $c['t'], (string) $c['c'], (int) $c['id'], $c['after'], $c['before']); $n += $done; if (!$done) { $kept++; } }
     $del = $pdo->prepare("DELETE FROM label_links WHERE label_id=? AND entity_type='person' AND entity_id=?");
     foreach ($p['label_links'] ?? [] as [$lid, $pid]) { $del->execute([(int) $lid, (int) $pid]); $n += $del->rowCount(); }
-    foreach ($p['created_labels'] ?? [] as $lid) { $c = $pdo->prepare('SELECT count(*) FROM label_links WHERE label_id=?'); $c->execute([(int) $lid]); if (!(int) $c->fetchColumn()) { $pdo->prepare('DELETE FROM labels WHERE id=?')->execute([(int) $lid]); } }
+    foreach ($p['created_labels'] ?? [] as $l) { $c = $pdo->prepare('SELECT count(*) FROM label_links WHERE label_id=?'); $c->execute([(int) $l['id']]); if (!(int) $c->fetchColumn()) { $pdo->prepare('DELETE FROM labels WHERE id=?')->execute([(int) $l['id']]); } }
     $pdo->prepare('UPDATE ro_undo SET undone=1 WHERE id=?')->execute([(int) $row['id']]);
     log_change($pdo, 'ro_undo', (int) $row['id'], 'restore', 'Annulé : ' . $row['summary'], null, ['count' => $n, 'kept' => $kept]);
     return ['undone' => $n, 'kept' => $kept];
@@ -846,7 +864,7 @@ function rt_redo(PDO $pdo, array $data): array
     $p = $row['payload']; $n = 0;
     foreach ($p['changes'] ?? [] as $c) { $n += ro_set_if($pdo, (string) $c['t'], (string) $c['c'], (int) $c['id'], $c['before'], $c['after']); }
     foreach ($p['deleted_places'] ?? [] as $snap) { $pdo->prepare('DELETE FROM places WHERE id=? AND NOT EXISTS (SELECT 1 FROM events WHERE place_id=?)')->execute([(int) $snap['id'], (int) $snap['id']]); }
-    foreach ($p['created_labels'] ?? [] as $lid) { /* l'étiquette revient avec ses liens */ }
+    foreach ($p['created_labels'] ?? [] as $l) { $pdo->prepare('INSERT OR IGNORE INTO labels(id, name, color) VALUES(?,?,?)')->execute([(int) $l['id'], (string) $l['name'], (string) $l['color']]); } // l'étiquette revient avec ses liens
     $ins = $pdo->prepare("INSERT OR IGNORE INTO label_links(label_id, entity_type, entity_id) VALUES(?, 'person', ?)");
     foreach ($p['label_links'] ?? [] as [$lid, $pid]) {
         $ex = $pdo->prepare('SELECT 1 FROM labels WHERE id=?'); $ex->execute([(int) $lid]);

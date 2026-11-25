@@ -84,6 +84,7 @@
         // une ligne qui s'ouvre d'un clic (data-…-open) sans bouton « Ouvrir »
         const opener = [...row.attributes].some(a => /^data-[a-z-]*open$/.test(a.name)) || row.matches('.is-click, [role="button"], [data-open]');
         if (opener && !items.some(i => /^ouvrir$/i.test(i.label))) items.unshift({icon: '↗', label: 'Ouvrir', run: () => row.click()});
+        if (UI._ctxExtras?.length) items = [...items, '-', ...UI._ctxExtras]; // 🧺 « Prendre « … » » (heritage-connexions.js)
         items = items.filter((it, i, arr) => it !== '-' || (i > 0 && i < arr.length - 1));
         if (!items.filter(i => i !== '-').length) return false;
         const title = clean(row.querySelector('.table-link, strong, b, h3, h4, .ui-row-name, .ui-card-name')?.textContent || '').slice(0, 50);
@@ -132,7 +133,15 @@
         if (e.defaultPrevented || e.shiftKey) return; // l'outil a son propre menu, ou Maj : celui du navigateur
         const t = e.target; if (!(t instanceof Element)) return;
         if (t.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"], [data-ctx-off], .leaflet-container, video, audio, iframe, .ui-actmenu, .k-tip')) return;
-        if (window.getSelection?.()?.toString()) return; // du texte choisi : copier avec le menu du navigateur
+        // 🧺 « Prendre « … » » (heritage-connexions.js) : une info précise sous la souris, ou le texte choisi
+        const extras = (UI.ctxExtras || []).flatMap(f => { try { return f(e) || []; } catch (_) { return []; } });
+        if (window.getSelection?.()?.toString()) { // du texte choisi : copier (comme le menu du navigateur) et le prendre
+            if (!extras.length) return;
+            const txt = window.getSelection().toString();
+            UI.menuAt({x: e.clientX, y: e.clientY}, [{icon: '⧉', label: i18n('Copier'), run: () => { try { navigator.clipboard.writeText(txt); } catch (_) { document.execCommand('copy'); } }}, '-', ...extras], {});
+            e.preventDefault(); return;
+        }
+        UI._ctxExtras = extras;
         const at = {x: e.clientX, y: e.clientY};
         // dans un éditeur
         const stage = t.closest(ED_STAGE);
@@ -144,10 +153,12 @@
             setTimeout(() => { const items = editorItems(dlg); if (items.some(i => i !== '-')) UI.menuAt(at, items); }, obj ? 30 : 0);
             return;
         }
-        const row = t.closest(ROW); if (!row || row.closest('thead')) return;
+        const row = t.closest(ROW);
+        const alone = () => { if (extras.length) { UI.menuAt(at, extras, {}); e.preventDefault(); } };
+        if (!row || row.closest('thead')) return alone();
         // les lignes d'un tableau à remplir (cases, menus) ne sont pas des lignes de liste
-        if (row.matches('tr') && row.querySelector('input:not([type=checkbox]):not([type=radio]), textarea, select')) return;
-        if (rowMenu(row, at)) e.preventDefault();
+        if (row.matches('tr') && row.querySelector('input:not([type=checkbox]):not([type=radio]), textarea, select')) return alone();
+        if (rowMenu(row, at)) e.preventDefault(); else alone();
     });
 
     /* ═════════════ K13 🖨 Imprimer et ⤒ Importer : une fenêtre chacun, partout la même ═════════════ */

@@ -299,6 +299,10 @@ try {
         require_once __DIR__ . '/lib/telephone_wifi.php';
         tw_inbox_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['fc_state', 'fc_props', 'fc_journal', 'fc_count', 'fc_prop_file', 'fc_publish_preview', 'fc_publish_export', 'fc_write'], true)) { // 👪 site familial : comptes, 📨 propositions, 📜 journal, 🌐 publier / relever (lib/comptes_famille.php)
+        require_once __DIR__ . '/lib/comptes_famille.php';
+        fc_owner_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['qp_list', 'qp_get', 'qp_templates', 'qp_write'], true)) { // 💬 questions aux proches (lib/questions_proches.php)
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);
@@ -447,6 +451,11 @@ try {
     if (in_array($action, TX_DEEP_ACTIONS, true)) { // 🔍 lecture approfondie (lib/transcription_actes.php) : rien n'est écrit dans la base
         tx_deep_dispatch((string) $action, $isWrite, $payload);
     }
+    if (is_string($action) && str_starts_with($action, 'aia_')) { // 🤖 Assistant IA (lib/assistant_ia.php) : IA locale (Ollama), pas à pas, hors de la transaction commune ; n'ajoute qu'après un clic
+        require_once __DIR__ . '/lib/assistant_ia.php';
+        try { json_response($isWrite ? aia_api_post($pdo, $action, is_array($payload) ? $payload : []) : aia_api_get($pdo, $action, $_GET)); }
+        catch (Throwable $e) { json_response(['error' => readable_error_message($e)], $e instanceof LcndaBadInput ? 422 : 502); }
+    }
     if (!$isWrite && $action === 'htr_read_job') {
         try { json_response(htr_read_job(safe_text($_GET['id'] ?? ''))); } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
     }
@@ -470,6 +479,7 @@ try {
         require_once __DIR__ . '/lib/recherche_outils.php';
         ro_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []);
     }
+    if (is_string($action) && str_starts_with($action, 'rt_')) { require_once __DIR__ . '/lib/rapports_traitements.php'; rt_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📊 Mes rapports, 🧰 Traitements en lot (lib/rapports_traitements.php)
     // Fusion de l'arbre d'un cousin : hors de la transaction générale (copie de sécurité VACUUM INTO d'abord)
     if ($isWrite && $action === 'merge_gedcom_analyse') {
         merge_gedcom_analyse($pdo, $_FILES['file'] ?? null);
@@ -507,6 +517,7 @@ try {
     if ($isWrite && preg_match('/^bo_(dl|pack)_/', (string) $action)) { require_once __DIR__ . '/lib/bases_officielles.php'; try { json_response(bo_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🎖️🏅 Bases officielles : installer / retirer une base (fichiers à part : lib/bases_officielles.php)
     if ($isWrite && in_array($action, ['vd_run', 'vd_auto', 'vd_confirm', 'vd_not_same', 'vd_undo'], true)) { require_once __DIR__ . '/lib/veille_deces.php'; try { json_response(vd_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 500); } } // ⚰️ Veille des décès (lib/veille_deces.php)
     if ($isWrite && in_array($action, ['enligne_receive', 'enligne_sent', 'enligne_sent_undo', 'enligne_apply', 'enligne_dismiss', 'enligne_undo', 'enligne_settings'], true)) { require_once __DIR__ . '/lib/arbres_en_ligne.php'; try { json_response(ael_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 500); } } // 🌐 Mes arbres en ligne : Ancestry, Geneanet (lib/arbres_en_ligne.php)
+    if ($isWrite && $action === 'cx_write') { require_once __DIR__ . '/lib/connexions.php'; try { json_response(cx_api_post($pdo, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🧺 Panier et connexions (lib/connexions.php)
     if ($isWrite && in_array($action, ['tm_cache_clear', 'tm_cache_restore'], true)) { require_once __DIR__ . '/lib/terre_mots.php'; try { json_response(tm_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🪨🗣️💬 Terre et mots du village (lib/terre_mots.php)
     if ($isWrite && in_array($action, ['cc_cache_clear', 'cc_cache_restore'], true)) { require_once __DIR__ . '/lib/commune_culture.php'; try { json_response(cc_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🎬📜🛡️🏷️🍲 Le village dans la culture (lib/commune_culture.php)
     if ($isWrite && in_array($action, ['l9b_these_add', 'l9b_these_undo', 'l9b_these_mark', 'l9b_cache_clear', 'l9b_cache_restore'], true)) { require_once __DIR__ . '/lib/lot9_monde_coutumes.php'; try { json_response(l9b_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🌍 Monde et coutumes (lot 9) : ✓ C'est lui / ✗ Pas lui (thèse), réponses gardées
@@ -827,6 +838,7 @@ try {
         'dp_places' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/droit_pouvoir.php'; try { json_response(dp_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ⚖️🎩🏛️ Droit et pouvoir : code INSEE des lieux (lib/droit_pouvoir.php)
         'vd_status', 'vd_list', 'vd_dismissed' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/veille_deces.php'; try { json_response(vd_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // ⚰️ Veille des décès
         'enligne_status', 'enligne_changes', 'enligne_lines' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/arbres_en_ligne.php'; try { json_response(ael_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌐 Mes arbres en ligne
+        'cx_count', 'cx_basket', 'cx_person_investigations', 'cx_links', 'cx_item_links', 'cx_notes' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/connexions.php'; try { json_response(cx_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🧺 Panier et connexions (lib/connexions.php)
         'tm_place', 'tm_person', 'tm_homonymes', 'tm_asteroid', 'tm_list', 'tm_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/terre_mots.php'; try { json_response(tm_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🪨🗣️💬 Terre et mots du village (lib/terre_mots.php) : données livrées + homonymes en ligne, gardé
         'cc_place', 'cc_wiki', 'cc_person', 'cc_rues', 'cc_credit', 'cc_list', 'cc_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/commune_culture.php'; try { json_response(cc_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🎬📜🛡️🏷️🍲 Le village dans la culture (lib/commune_culture.php) : données livrées + en ligne à la demande, gardé
         'l9b_person', 'l9b_place', 'l9b_these', 'l9b_langues', 'l9b_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/lot9_monde_coutumes.php'; try { json_response(l9b_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🌍 Monde et coutumes (lot 9) : contexte d'une fiche, 🎓 thèse (Sudoc, theses.fr) et 🌐 noms en toutes langues (Wikidata), en ligne et gardés
@@ -1077,6 +1089,7 @@ function site_defaults_allowed_keys(): array
     // même liste que SITE_DEFAULT_KEYS (assets/js/app.js) : une clé absente d'ici est jetée sans rien dire
     return [
         'genealogie-meteo', // 🌦 Météo d’autrefois
+        'genealogie-connexions', // 🧺 Panier et connexions (heritage-connexions.js)
         'genealogie-elections', // 🗳 Élections d’autrefois
         'genealogie-gov', // 🏰 Lieux anciens GOV
         'genealogie-menu-names',
@@ -8854,6 +8867,7 @@ function investigation_detail(PDO $pdo,int $id): never
         }
     }
     unset($itemRow);
+    require_once __DIR__.'/lib/connexions.php';$cxLinks=cx_investigation_links($pdo,$id);foreach($itemRows as &$itemRow){$itemRow['links']=$cxLinks[(int)$itemRow['id']]??[];}unset($itemRow); // 🧺 plusieurs pièces par piste (lib/connexions.php)
     $media=$pdo->prepare("SELECT im.id AS link_id,im.verdict,im.reason,im.folder_id,m.*,
         (SELECT group_concat(imi.investigation_item_id) FROM investigation_media_items imi WHERE imi.investigation_media_id=im.id) AS item_ids,
         (SELECT group_concat(ii.title,'|') FROM investigation_media_items imi JOIN investigation_items ii ON ii.id=imi.investigation_item_id WHERE imi.investigation_media_id=im.id) AS item_titles
@@ -12627,6 +12641,7 @@ function link_event_to_investigation_item(PDO $pdo,array $data): array
     }
     if($eventPersonLabel==='')$eventPersonLabel=$personLabel;
     if($eventPersonLabel!=='')$label=$eventPersonLabel.' — '.$label;
+    if((int)($old['linked_event_id']??0)>0&&(int)$old['linked_event_id']!==$eventId&&empty($data['replace'])){require_once __DIR__.'/lib/connexions.php';$lid=cx_add_event_to_item($pdo,$itemId,$eventId);$pdo->prepare('UPDATE investigations SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$old['investigation_id']]);log_change($pdo,'investigation_item',$itemId,'update','Événement ajouté à la piste « '.($old['title']??'#'.$itemId).' » : '.$label,null,['id'=>$itemId,'link_id'=>$lid,'event_id'=>$eventId]);return ['id'=>$itemId,'linked_event_id'=>(int)$old['linked_event_id'],'added_link_id'=>$lid,'linked_event_label'=>$label];} // 🧺 une piste tient plusieurs événements : le 2e s'ajoute (lib/connexions.php)
     $pdo->prepare('UPDATE investigation_items SET linked_event_id=?,linked_event_label=? WHERE id=?')->execute([$eventId,$label,$itemId]);
     $pdo->prepare('UPDATE investigations SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$old['investigation_id']]);
     log_change($pdo,'investigation_item',$itemId,'update','Événement lié à la piste « '.($old['title']??'#'.$itemId).' » : '.$label,$old,['id'=>$itemId,'linked_event_id'=>$eventId,'linked_event_label'=>$label]);

@@ -97,7 +97,7 @@
 
     /* ═════════════ les filtres : pastilles → demande ═════════════ */
     const fieldOf = (d, key) => (d.fields || []).find(f => f.key === key) || {key, label: key, type: 'text'};
-    const kindOf = f => (['number', 'year'].includes(f.type) ? 'range' : ['enum', 'place', 'bool'].includes(f.type) ? f.type : 'text');
+    const kindOf = f => (['number', 'year'].includes(f.type) ? 'range' : f.type === 'date' ? 'daterange' : ['enum', 'place', 'bool'].includes(f.type) ? f.type : 'text'); // daterange : « du 1er au 30 juin 1859 » (AAAA-MM-JJ)
     /* 🧩 filtres en plus, apportés par d'autres fichiers (ex. « Dans le territoire », heritage-territoires.js) :
        LCNDA_EXT.dataListFilters = [{id, icon?, label, options() → [{value, label}], prepare?(), test([lat, lon], value) → bool}] ;
        offerts pour toute liste qui a geo() ; vérifiés ici, dans le navigateur (pas par le serveur). */
@@ -112,6 +112,7 @@
     }
     function critFilters(c) {
         if (c.kind === 'xf') return [];
+        if (c.kind === 'daterange') return [c.from ? {key: c.key, op: 'gte', value: String(c.from)} : null, c.to ? {key: c.key, op: 'lte', value: String(c.to)} : null].filter(Boolean);
         if (c.kind === 'range') return [c.from !== '' && c.from != null ? {key: c.key, op: 'gte', value: Number(c.from)} : null, c.to !== '' && c.to != null ? {key: c.key, op: 'lte', value: Number(c.to)} : null].filter(Boolean);
         if (c.kind === 'enum') return c.values?.length ? [{key: c.key, op: 'in', value: c.values}] : [];
         if (c.kind === 'bool') return [{key: c.key, op: c.value ? 'true' : 'false'}];
@@ -123,6 +124,7 @@
     function critText(d, c) {
         if (c.kind === 'xf') { const x = xfOf(c.fid); return `${x?.icon || '🧩'} ${T(x?.label || c.fid)} : ${c.valueLabel || c.value}`; }
         const f = fieldOf(d, c.key), l = T(f.label);
+        if (c.kind === 'daterange') { const dt = v => (v ? new Date(v + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) : ''); return c.from && c.to ? T('{l} : du {a} au {b}', {l, a: dt(c.from), b: dt(c.to)}) : c.from ? T('{l} : depuis le {a}', {l, a: dt(c.from)}) : T('{l} : jusqu’au {b}', {l, b: dt(c.to)}); }
         if (c.kind === 'range') return c.from !== '' && c.from != null && c.to !== '' && c.to != null ? `${l} : ${c.from} → ${c.to}` : c.from !== '' && c.from != null ? `${l} ≥ ${c.from}` : `${l} ≤ ${c.to}`;
         if (c.kind === 'enum') return `${l} : ${c.values.slice(0, 3).join(', ')}${c.values.length > 3 ? ` +${c.values.length - 3}` : ''}`;
         if (c.kind === 'bool') return `${l} : ${c.value ? T('oui') : T('non')}`;
@@ -147,6 +149,7 @@
         const x = row[f.key], v = f.value;
         if (f.op === 'in' || Array.isArray(v)) { const set = (Array.isArray(v) ? v : [v]).map(y => fold(y)); return set.includes(fold(x)); }
         const isNum = x !== null && x !== '' && x !== undefined && Number.isFinite(Number(x));
+        if ((f.op === 'gte' || f.op === 'lte') && typeof v === 'string' && /^-?\d{4}-\d{2}/.test(v)) { const xs = String(x ?? '').slice(0, 10); if (!/^-?\d{4}/.test(xs)) return false; return f.op === 'gte' ? xs >= v.slice(0, xs.length) : xs.slice(0, v.length) <= v; } // une date AAAA-MM-JJ
         switch (f.op) {
             case 'eq': return isNum && Number.isFinite(Number(v)) ? Number(x) === Number(v) : fold(x) === fold(v);
             case 'gte': return isNum && Number(x) >= Number(v);
@@ -261,6 +264,7 @@
             <div class="ld-results" data-ld-results></div>
             <div class="ld-more-host" data-ld-more-host></div></section>`;
         bindPage(host.querySelector('.ld-page'), d);
+        try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
         paintSaved(); paintChips(); await refresh();
     }
 
@@ -356,6 +360,11 @@
     async function openCrit(key, editIndex = -1) {
         const d = cur.d, st = cur.st, f = fieldOf(d, key), kind = kindOf(f), old = editIndex >= 0 ? st.crit[editIndex] : null, lab = esc(T(f.label));
         const done = c => { if (editIndex >= 0) st.crit.splice(editIndex, 1, c); else st.crit.push(c); rerun(); };
+        if (kind === 'daterange') {
+            editor(`<b>${lab}</b><div class="ld-ed-row"><label>${esc(T('du'))} <input name="from" type="date" value="${esc(old?.from ?? '')}"></label><label>${esc(T('au'))} <input name="to" type="date" value="${esc(old?.to ?? '')}"></label></div>`,
+                form => { const a = form.elements.from.value, b = form.elements.to.value; if (!a && !b) { toast(T('Choisis au moins une date.'), 'error'); return false; } done({key, kind, from: a, to: b}); });
+            return;
+        }
         if (kind === 'range') {
             editor(`<b>${lab}</b><div class="ld-ed-row"><label>${esc(T('de'))} <input name="from" type="number" inputmode="numeric" value="${esc(old?.from ?? '')}"></label><label>${esc(T('à'))} <input name="to" type="number" inputmode="numeric" value="${esc(old?.to ?? '')}"></label></div><small class="muted">${esc(T('Une seule case suffit : « de 1850 » = 1850 et après.'))}</small>`,
                 form => { const a = form.elements.from.value.trim(), b = form.elements.to.value.trim(); if (!a && !b) { toast(T('Écris au moins un nombre.'), 'error'); return false; } done({key, kind, from: a === '' ? '' : Number(a), to: b === '' ? '' : Number(b)}); });
@@ -384,7 +393,7 @@
     }
     function openAdd(btn) {
         const d = cur.d, fs = (d.fields || []).filter(f => f.type !== 'url' && !f.hidden);
-        const icon = f => ({year: '📅', number: '#', enum: '☰', place: '📍', bool: '☑'}[f.type] || '🔤');
+        const icon = f => ({year: '📅', date: '📅', number: '#', enum: '☰', place: '📍', bool: '☑'}[f.type] || '🔤');
         const xs = d.geo ? xfAll().filter(f => !f.needs || f.needs === 'geo') : [];
         UI().menuAt?.(btn, [...fs.map(f => ({icon: icon(f), label: T(f.label), run: () => openCrit(f.key)})), xs.length ? '-' : null, ...xs.map(f => ({icon: f.icon || '🧩', label: T(f.label || f.id), run: () => openXf(f)}))], {title: T('Ajouter un critère')});
     }
@@ -520,7 +529,7 @@
         if (st.module === 'listes') { app.renderSidebar?.(); ext.lists[k]?.(++st.workspaceToken); } else app.setModule?.('listes');
     }
     /** ouvrir une liste de données d'ailleurs, déjà filtrée : LCNDA_EXT.dataListsEngine.open('hist_gares', {near: {lat, lon, km, title}}) */
-    ext.dataListsEngine = {open: (id, preset) => { const d = all().find(x => x.id === id); if (d) openKey(d.link ? null : keyOf(d), preset); }, keyOf, list: () => all(), applyLocal: localFilter, buildQuery};
+    ext.dataListsEngine = {open: (id, preset) => { const d = all().find(x => x.id === id); if (d) openKey(d.link ? null : keyOf(d), preset); }, keyOf, list: () => all(), applyLocal: localFilter, fetchPage, stateOf, critText, periodText, nearText, buildQuery};
 
     /* ═════════════════════════════════════════════════════════════════════════════════════════
      * Les données déjà dans l'app (packs, fichiers livrés) : leurs listes, sans toucher à leurs fichiers.
@@ -620,6 +629,35 @@
         ...[['world_events', '🌍', 'Le monde autour (événements)', 'Le monde'], ['historical_context', '🦠', 'Épidémies, guerres, hivers', 'Le monde'], ['grands_mouvements', '🚶', 'Ta famille dans les grands mouvements', 'Le monde'],
             ['pays_chiffres', '🌍', 'Les pays de ta famille en chiffres', 'Le monde'], ['lune_eclipses', '🌒', 'Éclipses vues par la famille', 'Le monde']]
             .map(([k, icon, label, group]) => ({id: 'link_' + k, icon, label, group, link: () => { const st = A().state; if (!st) return; st.listType = k; if (st.module === 'listes') { A().renderSidebar?.(); A().renderList?.(); } else A().setModule?.('listes'); }})),
+        /* ⚰️ les décès INSEE installés, avec les critères du moteur (commune, nom, du… au…) : GET insee_search, 200 lignes à la fois */
+        {id: 'insee_deces', icon: '⚰️', label: 'Décès INSEE (fichier installé)', group: 'La personne', source: 'Insee, fichier des personnes décédées (Licence Ouverte 2.0)', sourceUrl: 'https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/',
+            installed: async () => { try { const r = await api('insee_stats'); return Number(r.count ?? r.total ?? 0) > 0; } catch (_) { return false; } }, install: () => { const st = A().state; if (!st) return; st.researchKind = 'insee'; A().persistUiState?.(); A().setModule?.('recherche'); },
+            fields: [{key: 'nom', label: 'Nom', type: 'text'}, {key: 'prenoms', label: 'Prénoms', type: 'text'}, {key: 'sexe', label: 'Sexe', type: 'enum', values: ['M', 'F']}, {key: 'naissance', label: 'Naissance', type: 'date'}, {key: 'commune_naissance', label: 'Lieu de naissance', type: 'place'},
+                {key: 'deces', label: 'Décès', type: 'date'}, {key: 'annee', label: 'Année du décès', type: 'year'}, {key: 'commune_deces', label: 'Commune du décès', type: 'place'}, {key: 'code_deces', label: 'Code INSEE du lieu', type: 'text'}, {key: 'acte', label: 'N° d’acte', type: 'text'}],
+            period: r => [r.annee, r.annee],
+            query: async query => {
+                const iso = v => (/^\d{8}$/.test(String(v || '')) ? `${String(v).slice(0, 4)}-${String(v).slice(4, 6)}-${String(v).slice(6, 8)}` : String(v || ''));
+                const p = {limit: 200}, post = [];
+                if (query.q) p.nom = query.q;
+                for (const f of query.filters || []) {
+                    const v = Array.isArray(f.value) ? f.value[0] : f.value;
+                    if (f.key === 'nom' && v) p.nom = v; else if (f.key === 'prenoms' && v) p.prenom = v; else if (f.key === 'commune_deces' && v) p.commune_deces = v; else if (f.key === 'commune_naissance' && v) p.commune_naissance = v; else if (f.key === 'sexe' && v) p.sexe = v;
+                    else if (f.key === 'code_deces' && v) p.departement = String(v).slice(0, 2);
+                    if ((f.key === 'deces' || f.key === 'annee') && (f.op === 'gte' || f.op === 'lte')) { const y = parseInt(String(v), 10); if (y) p[f.op === 'gte' ? 'death_year_from' : 'death_year_to'] = y; }
+                    post.push(f);
+                }
+                if (query.years) { p.death_year_from = query.years.from; p.death_year_to = query.years.to; }
+                const out = []; let total = Infinity;
+                for (let off = 0; off < Math.min(total, 5000); off += 200) {
+                    const r = await api('insee_search', {...p, offset: off}); if (r.no_criteria) return {rows: [], total: 0};
+                    total = Number(r.total || 0);
+                    (r.rows || []).forEach(x => out.push({nom: x.nom, prenoms: x.prenoms || x.prenom, sexe: x.sexe === '1' ? 'M' : x.sexe === '2' ? 'F' : x.sexe, naissance: iso(x.date_naissance), commune_naissance: x.commune_naissance, deces: iso(x.date_deces), annee: Number(x.annee_deces) || null, commune_deces: x.commune_deces, code_deces: x.code_lieu_deces, acte: x.numero_acte_deces}));
+                    if (!r.has_more) break;
+                }
+                const loc = ext.dataListsEngine?.applyLocal ? out.filter(r => post.every(f => ext.dataListsEngine.applyLocal({fields: [{key: f.key}]}, [r], {q: '', crit: [{key: f.key, kind: f.op === 'gte' || f.op === 'lte' ? (typeof f.value === 'string' ? 'daterange' : 'range') : 'text', op: f.op, value: f.value, from: f.op === 'gte' ? f.value : '', to: f.op === 'lte' ? f.value : ''}]}).length)) : out;
+                const off = query.offset || 0, lim = query.limit || 100;
+                return {rows: loc.slice(off, off + lim), total: loc.length};
+            }},
         {id: 'link_insee', icon: '⚰️', label: 'Décès INSEE (1970 → aujourd’hui)', group: 'Chercher', link: () => { const st = A().state; if (!st) return; st.researchKind = 'insee'; A().persistUiState?.(); A().setModule?.('recherche'); }},
         {id: 'link_bo_search', icon: '🔎', label: 'Chercher un nom dans les bases officielles', group: 'Chercher', enabled: () => !!ext.officialBases?.openSearch, link: () => ext.officialBases.openSearch('mpf')},
         {id: 'link_gov_search', icon: '🏰', label: 'Trouver un lieu ancien (GOV)', group: 'Chercher', enabled: () => !!ext.gov?.openSearch, link: () => ext.gov.openSearch('')},

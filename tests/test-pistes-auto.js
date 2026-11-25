@@ -216,7 +216,7 @@ echo 'ok';`);
             await p.waitForSelector('#workspace [data-pblock]', {timeout: 20000}); await sleep(800);
             await p.evaluate(() => { document.getElementById('workspace').insertAdjacentHTML('beforeend', '<i id="pst-old"></i>'); window.LCNDA_APP.openPersonById(1); });
             await p.waitForFunction(() => !document.getElementById('pst-old') && document.querySelector('#workspace [data-pblock]'), null, {timeout: 20000}); await sleep(800);
-            assert.strictEqual(await p.$$eval('[data-pst-person-block="1"]', x => x.length), 0);
+            assert.strictEqual(await p.$$eval('[data-pblock="pistes_auto"], [data-pst-person-block="1"]', x => x.filter(e => e.offsetParent !== null).length), 0, 'ni le bloc, ni (visible) dans « Ce qui le concerne »');
             await p.evaluate(() => localStorage.removeItem('genealogie-pistes-auto'));
         });
         await t('pas d’erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });

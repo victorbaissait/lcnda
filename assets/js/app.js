@@ -350,6 +350,7 @@
     const SITE_DEFAULTS_APPLIED_KEY = 'genealogie-site-defaults-applied';
     const SITE_DEFAULT_KEYS = [
         'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden','genealogie-menu-names','genealogie-menu-icons','genealogie-lightbox-sections','genealogie-calendar-choices','genealogie-diagram-kinds','genealogie-house-snap','genealogie-house-lib','genealogie-decor-tree','genealogie-decor-tree-formats','genealogie-decor-tree-styles','genealogie-edit-tools-order','genealogie-maintenance-groups','genealogie-list-groups','genealogie-mylists-order','genealogie-keynote-prefs','genealogie-vector-map-palette',
+        'genealogie-connexions', // 🧺 Panier et connexions (heritage-connexions.js)
         'genealogie-list-order','genealogie-list-hidden','genealogie-tresors-order','genealogie-map-order','genealogie-map-hidden','genealogie-maintenance-order','genealogie-board-prefs','genealogie-board-prefs-sets',
         'genealogie-graph-diagram-order','genealogie-graph-diagram-hidden','genealogie-graph-stats-order','genealogie-graph-stats-hidden','genealogie-side-folders',
         'genealogie-research-kind-order','genealogie-research-kind-hidden', // 🔎 Recherche → ordre et types cachés de « Type de recherche » (app-recherche.js)
@@ -4558,6 +4559,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         sc('calculator','move','Ouvrir ou fermer la calculette 🧮','Mod+Shift+Y','any',()=>window.LCNDA_EXT?.calculator?.toggle?.(),{menu:true}),
         sc('settings','move','Ouvrir les réglages (Apparence)','Mod+,','global',()=>{state.maintenanceTab='design';setModule('maintenance');},{menu:true}),
         sc('help','move','Afficher la liste des raccourcis','F1','any',()=>openShortcutHelp(),{menu:true}),
+        // 📥 « Prendre depuis… » (heritage-connexions.js) : ⇧⌘O est déjà pris (écran divisé), donc ⌥⌘O / Ctrl+Alt+O, libre partout
+        sc('take_from','move','📥 Prendre depuis… (fiches, actes, sources, données, panier)','Mod+Alt+O','global',()=>window.LCNDA_EXT?.connexions?.openTake?.(),{menu:true,when:()=>window.LCNDA_EXT?.connexions?.enabled?.()!==false}),
         sc('edit_person','person','Modifier la fiche ouverte','Mod+E','person',()=>{if(personIsLocked())return toast('Cette fiche est verrouillée.','error');openPersonDialog(state.currentPerson);},{noTyping:true,menu:true}),
         sc('new_person','person','Nouveau… dans l’onglet ouvert (une personne dans Personnes)','Mod+Shift+N','global',()=>runTabShortcut('new'),{menu:true}),
         sc('bookmark','person','Ajouter ou retirer des signets','Mod+D','person',()=>togglePersonBookmark(),{menu:true}),
@@ -9448,6 +9451,7 @@ ${backupSectionHtml()}
         // ce que l'app prend même quand un outil est ouvert : les raccourcis du menu de l'application (⌘/Ctrl ou F…) et ceux qui marchent partout
         // pour le widget « Raccourcis » (heritage-shortcuts.js) : les commandes et leur lancement (« ＋ Nouvelle personne », « Sauvegarde »…)
         commands:()=>SHORTCUT_DEFS.map(d=>({id:d.id,group:d.group,label:d.label,ctx:d.ctx})),run:id=>runShortcutCommand(String(id||'')),
+        hint:id=>shortcutHintText(String(id||'')),comboOf:id=>{const d=SHORTCUT_DEFS.find(x=>x.id===id);return d?shortcutFor(d):'';}, // 🧺 « Prendre depuis… ⌥⌘O » (heritage-connexions.js)
         appConflict:c=>SHORTCUT_DEFS.filter(d=>{const k=shortcutFor(d);return k&&k===c&&((d.menu&&!d.noTyping&&(shortcutHasMod(k)||shortcutIsFKey(k)))||d.ctx==='any');}).map(d=>d.label)};
     init();
 })();

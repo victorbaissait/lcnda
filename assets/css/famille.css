@@ -1,0 +1,71 @@
+/* LCNDA — 👪 La page de la famille (assets/js/app-famille.js, famille.php). Ordinateur et téléphone : une colonne sous 640 px. */
+:root { --fam-bg: #f4f5f7; --fam-paper: #fff; --fam-ink: #111; --fam-muted: #555; --fam-line: #d9dde4; --fam-blue: #055dff; --fam-blue-bg: #eef4ff; --fam-red: #c62828; --fam-yel-bg: #fff8d6; --fam-yel-ink: #7a5d00; --fam-green: #1a7f37; }
+@media (prefers-color-scheme: dark) { :root { --fam-bg: #121417; --fam-paper: #1c1f24; --fam-ink: #eceef2; --fam-muted: #b4b9c3; --fam-line: #3a3f48; --fam-blue: #5b93ff; --fam-blue-bg: #18233a; --fam-red: #ff6b6b; --fam-yel-bg: #2c2612; --fam-yel-ink: #f0d276; --fam-green: #4cc070; } }
+* { box-sizing: border-box; }
+.fam-body { margin: 0; background: var(--fam-bg); color: var(--fam-ink); font: 16px/1.5 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.fam { max-width: 980px; margin: 0 auto; padding: 12px 16px 80px; }
+.fam-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 8px 0 12px; border-bottom: 2px solid var(--fam-ink); margin-bottom: 16px; }
+.fam-brand { color: inherit; text-decoration: none; font-size: 18px; }
+.fam-search { display: flex; gap: 6px; flex: 1 1 260px; min-width: 0; }
+.fam-search input { flex: 1; min-width: 0; }
+.fam-me { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 14px; }
+.fam-who { color: var(--fam-muted); }
+.fam-card { background: var(--fam-paper); border: 2px solid var(--fam-ink); padding: 16px 18px; margin: 0 0 16px; max-width: 100%; overflow-wrap: anywhere; }
+.fam-card h1 { font-size: 24px; margin: 0 0 4px; }
+.fam-card h2 { font-size: 17px; margin: 20px 0 8px; }
+.fam-card h3 { font-size: 16px; margin: 0 0 8px; }
+.fam-lead, .fam-muted, .fam-years, .fam-sum { color: var(--fam-muted); }
+.fam-years { margin: 0 0 12px; }
+.fam-form { display: grid; gap: 10px; max-width: 520px; }
+.fam-form label { display: grid; gap: 4px; font-weight: 600; font-size: 14px; }
+input, textarea, select, button { font: inherit; color: inherit; }
+input, textarea, select { width: 100%; padding: 9px 10px; border: 1.5px solid var(--fam-line); background: var(--fam-paper); border-radius: 4px; min-height: 44px; }
+textarea { min-height: 70px; }
+input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--fam-blue); outline-offset: 2px; }
+button { cursor: pointer; }
+.fam-button { background: var(--fam-blue); color: #fff; border: 0; padding: 10px 16px; border-radius: 4px; font-weight: 700; min-height: 44px; }
+.fam-search button { background: var(--fam-paper); border: 1.5px solid var(--fam-ink); padding: 0 12px; border-radius: 4px; }
+.fam-link { background: none; border: 0; color: var(--fam-blue); text-decoration: underline; padding: 6px 2px; min-height: 36px; }
+.fam-msg { color: var(--fam-red); min-height: 1.2em; margin: 0; }
+.fam-err { color: var(--fam-red); }
+.fam-hint { background: var(--fam-blue-bg); padding: 8px 10px; font-size: 14px; margin: 8px 0; }
+.fam-warn { background: var(--fam-yel-bg); color: var(--fam-yel-ink); padding: 8px 10px; font-size: 14px; }
+.fam-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; align-items: center; margin: 8px 0; }
+.fam-person .fam-actions { justify-content: flex-start; }
+.fam-facts { width: 100%; border-collapse: collapse; margin: 8px 0; }
+.fam-facts th { text-align: left; width: 32%; font-weight: 600; color: var(--fam-muted); }
+.fam-facts th, .fam-facts td { padding: 8px 6px; border-bottom: 1px solid var(--fam-line); vertical-align: top; }
+.fam-act { width: 48px; text-align: right; }
+.fam-pen { width: 40px; height: 40px; border: 1.5px solid var(--fam-line); background: var(--fam-paper); border-radius: 4px; }
+.fam-editor { border-top: 2px dashed var(--fam-line); padding-top: 12px; margin-top: 8px; max-width: 640px; }
+.fam-choices { display: flex; flex-wrap: wrap; gap: 6px; }
+.fam-choices button { border: 1.5px solid var(--fam-ink); background: var(--fam-paper); padding: 8px 12px; border-radius: 999px; min-height: 40px; }
+.fam-choices button.is-on { background: var(--fam-ink); color: var(--fam-paper); }
+.fam-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fam-k { display: inline-block; min-width: 88px; color: var(--fam-muted); font-size: 14px; }
+.fam-couple { padding: 6px 0; border-bottom: 1px solid var(--fam-line); }
+.fam-chip { display: inline-block; margin: 2px 4px 2px 0; padding: 3px 8px; border: 1.5px solid var(--fam-line); border-radius: 999px; color: inherit; text-decoration: none; }
+a.fam-chip:hover { border-color: var(--fam-blue); }
+.fam-chip.is-living { color: var(--fam-muted); font-style: italic; }
+.fam-photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.fam-photos figure { margin: 0; }
+.fam-photos img { width: 100%; height: 140px; object-fit: cover; border: 1px solid var(--fam-line); background: var(--fam-bg); }
+.fam-photos figcaption { font-size: 13px; color: var(--fam-muted); }
+.fam-note { background: var(--fam-bg); padding: 8px 10px; border-left: 3px solid var(--fam-line); white-space: normal; }
+.fam-results, .fam-mine, .fam-ev { list-style: none; padding: 0; margin: 0; }
+.fam-results li, .fam-ev li { padding: 4px 0; }
+.fam-mine li { display: grid; grid-template-columns: 28px 1fr auto; gap: 8px; align-items: start; padding: 8px 0; border-bottom: 1px solid var(--fam-line); }
+.fam-mine .is-acceptee .fam-st { color: var(--fam-green); }
+.fam-mine .is-refusee .fam-st { color: var(--fam-red); }
+.fam-toast { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); max-width: calc(100% - 32px); background: #111; color: #fff; padding: 10px 14px; border-radius: 6px; display: flex; gap: 12px; align-items: center; z-index: 10; box-shadow: 0 4px 16px rgba(0, 0, 0, .25); }
+.fam-toast[hidden] { display: none; }
+.fam-toast.is-error { background: var(--fam-red); }
+.fam-toast button { background: none; border: 1.5px solid #fff; color: #fff; border-radius: 4px; padding: 4px 10px; min-height: 36px; }
+@media (max-width: 640px) {
+  .fam { padding: 8px 16px 80px; }
+  .fam-card { padding: 12px; }
+  .fam-two { grid-template-columns: 1fr; }
+  .fam-facts th { width: 38%; }
+  .fam-mine li { grid-template-columns: 24px 1fr; }
+  .fam-mine li > button { grid-column: 2; justify-self: start; }
+}

@@ -279,7 +279,7 @@
     /* ═════════ enregistrement (listes, tableau de bord, fiche, Réglages, registre commun) ═════════ */
     ext.lists = ext.lists || {};
     ext.lists[LIST] = token => renderList(token);
-    (ext.dataSources = ext.dataSources || []).push({id: 'pistes_auto', icon: '🔎', label: T('Pistes à vérifier (actes qui lui ressemblent)'), group: 'Chercher', needs: ['person'], installed: () => true,
+    (ext.dataSources = ext.dataSources || []).push({id: 'pistes_auto', icon: '🔎', label: T('Pistes à vérifier (actes qui lui ressemblent)'), group: 'Chercher', needs: ['person'], installed: () => true, enabled: () => settings().block,
         run: async (ctx, host) => { const id = Number(ctx.person?.id || ctx.person) || 0; if (!id) { host.innerHTML = emptyLine(T('Choisis une personne.')); return; } host.innerHTML = `<div data-pst-host data-pst-person-block="${id}"></div>`; await fillPerson(host.firstElementChild); if (!host.textContent.trim()) host.innerHTML = emptyLine(T('Aucune piste pour cette personne : lance une recherche dans Listes → Pistes à vérifier.')); }});
     function register() {
         const app = A(); if (!app.defaultListTypes) return false;

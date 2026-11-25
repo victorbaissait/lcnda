@@ -436,6 +436,51 @@ function cx_to_mylist(PDO $pdo, array $d): array
     return ['person_ids' => $ids];
 }
 
+/* ═════════════ 📂 De l'extérieur : un FICHIER de données à une adresse donnée par l'utilisateur ═════════════
+ * Téléchargé seulement après son clic, une fois, sans suivre de lien dans la page (pas de « scraping ») ; adresse publique
+ * seulement (link_safe_resolve : ni 127.0.0.1 ni le réseau de la maison), 10 Mo au plus, une page web (HTML) est refusée.
+ * Essai sans réseau : GENEALOGY_TEST=1 + LCNDA_TEST_CX_DIR (le fichier du même nom que la fin de l'adresse). */
+function cx_fetch_url(array $d): array
+{
+    $url = cx_str($d['url'] ?? '', 2000);
+    if (!preg_match('#^https?://#i', $url)) { throw new LcndaBadInput('Donne une adresse qui commence par https://'); }
+    $max = 10 * 1024 * 1024;
+    $name = basename((string) parse_url($url, PHP_URL_PATH)) ?: 'donnees';
+    $dir = (string) getenv('LCNDA_TEST_CX_DIR');
+    if (getenv('GENEALOGY_TEST') === '1' && $dir !== '') {
+        $f = $dir . '/' . preg_replace('/[^A-Za-z0-9._-]/', '_', $name);
+        if (!is_file($f)) { throw new RuntimeException('Pas de réponse de cette adresse.'); }
+        $body = (string) file_get_contents($f); $type = str_ends_with($name, '.json') ? 'application/json' : 'text/csv';
+    } else {
+        if (!function_exists('link_safe_resolve')) { require_once __DIR__ . '/collections.php'; }
+        if (!function_exists('curl_init')) { throw new RuntimeException('Téléchargement impossible : PHP n’a pas l’extension curl.'); }
+        $body = ''; $type = '';
+        for ($hop = 0; ; $hop++) {
+            if ($hop > 5) { throw new RuntimeException('Trop de redirections.'); }
+            $resolve = link_safe_resolve($url);
+            if ($resolve === null) { throw new LcndaBadInput('Adresse refusée : seulement une adresse publique en http ou https.'); }
+            $body = ''; $too = false;
+            $ch = curl_init($url);
+            curl_setopt_array($ch, ($resolve !== '' ? [CURLOPT_RESOLVE => [$resolve]] : []) + [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_CONNECTTIMEOUT => 15, CURLOPT_TIMEOUT => 60,
+                CURLOPT_PROTOCOLS => CURLPROTO_HTTPS | CURLPROTO_HTTP, CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, fichier de donnees)',
+                CURLOPT_WRITEFUNCTION => function ($c, $chunk) use (&$body, &$too, $max) { $body .= $chunk; if (strlen($body) > $max) { $too = true; return 0; } return strlen($chunk); }] + (function_exists('lcnda_curl_tls') ? lcnda_curl_tls() : []));
+            curl_exec($ch);
+            $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE); $loc = (string) (curl_getinfo($ch, CURLINFO_REDIRECT_URL) ?: ''); $type = (string) curl_getinfo($ch, CURLINFO_CONTENT_TYPE); $err = curl_errno($ch) ? curl_strerror(curl_errno($ch)) : '';
+            unset($ch);
+            if ($too) { throw new LcndaBadInput('Fichier trop gros (plus de 10 Mo).'); }
+            if (in_array($code, [301, 302, 303, 307, 308], true) && $loc !== '') { $url = function_exists('link_absolute_url') ? link_absolute_url($url, $loc) : $loc; continue; }
+            if ($code < 200 || $code >= 300) { throw new RuntimeException($err !== '' ? 'Pas de connexion : ' . $err : 'Le serveur répond ' . $code . '.'); }
+            break;
+        }
+    }
+    $head = strtolower(ltrim(substr($body, 0, 300)));
+    if (str_contains(strtolower($type), 'text/html') || str_starts_with($head, '<!doctype html') || str_starts_with($head, '<html')) {
+        throw new LcndaBadInput('C’est une page web, pas un fichier de données : donne l’adresse du fichier lui-même (.csv, .json…).');
+    }
+    if (preg_match('/[\x00-\x08\x0E-\x1F]/', substr($body, 0, 2000)) && !str_starts_with($body, "PK")) { throw new LcndaBadInput('Ce fichier n’est pas un tableau lisible (CSV, TSV, JSON, XLSX, ODS).'); }
+    return ['name' => $name, 'url' => $url, 'type' => $type, 'base64' => base64_encode($body), 'size' => strlen($body), 'at' => date('Y-m-d')];
+}
+
 /* ═════════════ aiguillage ═════════════ */
 function cx_api_get(PDO $pdo, string $action, array $q): array
 {
@@ -483,6 +528,7 @@ function cx_api_post(PDO $pdo, array $d): array
         'link_remove' => cx_link_remove($pdo, $d),
         'reminder_add' => cx_reminder_add($pdo, $d),
         'to_mylist' => cx_to_mylist($pdo, $d),
+        'fetch_url' => cx_fetch_url($d),
         default => throw new LcndaBadInput('Opération inconnue.'),
     };
 }

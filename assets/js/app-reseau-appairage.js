@@ -60,7 +60,7 @@
             clearInterval(timer);
             if (j.state === 'accepte') {
                 root.innerHTML = `<section class="lan-card"><div class="lan-ico" aria-hidden="true">✓</div><h1>${esc(t('Accepté'))}</h1><p class="lan-lead">${esc(t('Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici.'))}</p></section>`;
-                setTimeout(() => location.replace(cfg.terrain ? '/terrain' : '/'), 900);
+                setTimeout(() => location.replace(cfg.terrain ? '/terrain' : cfg.famille ? '/famille.php' + location.hash : '/'), 900); // 👪 l'invitation (#inv=…) reste dans l'adresse, jamais envoyée au serveur
                 return;
             }
             step1(j.state === 'refuse' ? t('Demande refusée.') : t('La demande a expiré (2 minutes sans réponse). Recommence.'));

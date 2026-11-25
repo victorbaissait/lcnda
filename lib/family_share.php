@@ -296,7 +296,7 @@ function family_share_build(PDO $pdo, array $o): array
         'people' => array_values($people), 'fams' => $fams, 'media' => $media,
         'counts' => ['people' => $sum['people'], 'living_hidden' => $sum['living_hidden'] + $sum['living_first'], 'private' => $sum['private_removed']]];
     if ($rv) { $data['review'] = ['t' => $rv['token'], 'n' => $rvCount, 'title' => $rv['title']]; $sum['review_facts'] = $rvCount; }
-    return ['data' => $data, 'files' => $files, 'summary' => $sum, 'forbidden' => $forbidden];
+    return ['data' => $data, 'files' => $files, 'summary' => $sum, 'forbidden' => $forbidden, 'num' => $num]; // num : numéro de la copie de chaque fiche (gardé sur l'ordinateur : 👪 Relever, lib/comptes_famille_en_ligne.php)
 }
 
 /** Dernière vérification : rien de caché dans le paquet ; sinon une erreur et rien n'est envoyé. */

@@ -150,6 +150,7 @@ echo 'ok';`);
             assert.match(txt, /à vérifier : ces arbres sont collaboratifs/i); assert.match(txt, /CC0 1\.0/);
             assert.ok(await p.$$eval('.pc-page a[target="_blank"][rel*="noopener"]', a => a.some(x => /wikidata\.org\/wiki\/Q9000002#P22/.test(x.href))));
             assert.match(await p.textContent('[data-pc-props]'), /Maria LACOMBE/);
+            await sleep(800); // la liste a fini de se dessiner
             await p.click('[data-pc-yes="3|Q9000003"]');
             await p.waitForFunction(() => /Fiche reliée à Wikidata/.test([...document.querySelectorAll('.ui-toast, .toast')].map(x => x.textContent).join(' ')), null, {timeout: 10000});
             assert.strictEqual(q('SELECT wikidata_id FROM persons WHERE id=3')[0].wikidata_id, 'Q9000003');

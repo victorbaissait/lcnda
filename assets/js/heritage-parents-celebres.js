@@ -178,7 +178,7 @@
     ext.pistesSettings.push({id: 'celebres', title: T('⭐ Parents célèbres'), key: KEY, items: [['block', T('Sur la fiche : « Parent éloigné de… »'), true], ['wikitree', T('Chercher aussi dans WikiTree (API officielle, Connection Finder) — éteint au départ : ses conditions n’ont pas pu être relues'), false]]});
     ext.lists = ext.lists || {};
     ext.lists[LIST] = token => renderList(token);
-    (ext.dataSources = ext.dataSources || []).push({id: 'parents_celebres', icon: '⭐', label: T('Ses parents célèbres'), group: 'La personne', needs: ['person'], installed: () => true,
+    (ext.dataSources = ext.dataSources || []).push({id: 'parents_celebres', icon: '⭐', label: T('Ses parents célèbres'), group: 'La personne', needs: ['person'], installed: () => true, enabled: () => settings().block,
         run: async (ctx, host) => { const id = Number(ctx.person?.id || ctx.person) || 0; if (!id) { host.innerHTML = emptyLine(T('Choisis une personne.')); return; } host.innerHTML = `<div data-pc-person-block="${id}"></div>`; await fillPerson(host.firstElementChild); if (!host.textContent.trim()) host.innerHTML = emptyLine(T('Aucun parent célèbre connu pour cette personne.')); }});
     function register() {
         const app = A(); if (!app.defaultListTypes) return false;

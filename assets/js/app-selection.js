@@ -39,7 +39,9 @@
         const bar = document.createElement('div');
         bar.className = 'sel-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', T('Sélection'));
         const rows = () => [...host.querySelectorAll(rowSel)].filter(r => !r.hidden);
-        const actions = () => (o.actions || []).filter(a => a && !(a.edit && kiosk()));
+        // 🧺 « Au panier » et 📍 « Mettre dans… » (heritage-connexions.js) : ajoutées à chaque barre ; kind = la sorte des lignes (person, event, note, source, media…)
+        if (!o.kind) o.kind = (o.actions || []).find(a => a && a._kind)?._kind || '';
+        const actions = () => [...(o.actions || []), ...(selectionBar.extraActions || []).flatMap(f => { try { return f(o) || []; } catch (_) { return []; } })].filter(a => a && !(a.edit && kiosk()));
         function paint() {
             const n = set.size, all = rows(), on = all.filter(r => set.has(String(idOf(r)))).length;
             const acts = actions();
@@ -101,7 +103,7 @@
         });
     }
     function labelAction(type = 'person', {after} = {}) {
-        return {id: 'label', icon: '🏷', label: T('Étiqueter'), help: T('Poser une étiquette sur toutes les lignes cochées'), edit: true, run: async ids => {
+        return {id: 'label', _kind: type, icon: '🏷', label: T('Étiqueter'), help: T('Poser une étiquette sur toutes les lignes cochées'), edit: true, run: async ids => {
             let labels = []; try { labels = (await A().api('labels')).labels || []; } catch (_) {}
             const v = await pickDialog({eyebrow: T('ÉTIQUETER'), title: T('Une étiquette pour {n}', {n: plural(ids.length, T('ligne cochée'), T('lignes cochées'))}), submitLabel: T('Étiqueter'),
                 body: `<div class="form-grid one-column">${labels.length ? `<label>${esc(T('Étiquette existante'))}<select name="label_id"><option value="">${esc(T('— Une nouvelle —'))}</option>${labels.map(l => `<option value="${l.id}">${esc(l.name)}</option>`).join('')}</select></label>` : ''}<label>${esc(T('Ou une nouvelle étiquette'))}<input name="label_name" maxlength="100" placeholder="${esc(T('ex. À vérifier aux archives'))}"></label></div>`});
@@ -114,7 +116,7 @@
         }};
     }
     function myListAction({after} = {}) {
-        return {id: 'mylist', icon: '★', label: T('Ajouter à Mes listes'), help: T('Ajouter les fiches cochées à une de « Mes listes »'), edit: true, run: async ids => {
+        return {id: 'mylist', _kind: 'person', icon: '★', label: T('Ajouter à Mes listes'), help: T('Ajouter les fiches cochées à une de « Mes listes »'), edit: true, run: async ids => {
             let lists = []; try { lists = ((await A().api('my_lists')).lists || []).filter(l => l.source === 'persons'); } catch (_) {}
             if (!lists.length) { toast(T('Aucune de « Mes listes » ne contient des personnes : crée-en une dans Listes → Mes listes.')); return; }
             const v = await pickDialog({eyebrow: T('MES LISTES'), title: T('Ajouter {n} à une liste', {n: plural(ids.length, T('fiche'))}), submitLabel: T('Ajouter'),

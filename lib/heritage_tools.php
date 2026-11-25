@@ -98,6 +98,7 @@ function private_events_shadow(PDO $pdo): bool
             'evidence_records' => "SELECT * FROM main.evidence_records WHERE event_id IS NULL OR event_id NOT IN $priv",
             'hypotheses' => "SELECT * FROM main.hypotheses WHERE event_id IS NULL OR event_id NOT IN $priv",
             'investigation_items' => "SELECT * FROM main.investigation_items WHERE COALESCE(linked_event_id,0) NOT IN $priv",
+            'investigation_item_links' => "SELECT * FROM main.investigation_item_links WHERE $notPriv", // 🧺 les pièces d'une piste (lib/connexions.php)
         ];
         foreach ($views as $t => $sql) {
             if (!$has($t)) { continue; }

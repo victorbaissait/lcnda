@@ -55,7 +55,8 @@ const LAN_GUEST_WRITES = ['glock_unlock', 'glock_lock_now', 'glock_touch', 'save
 /** Lectures réservées à l'ordinateur principal, en plus de celles du mode consultation (kiosk_blocks) */
 const LAN_GUEST_BLOCKED_READS = ['access_log', 'access_log_csv', 'autobackup_close', 'autobackup_tick', 'autobackup_check', 'lan_note', 'database_profiles',
     'export_sqlite', 'export_full_backup', 'website_live', 'website_live_rev', 'desk_widget_page', 'desk_widget_file',
-    'inbox_list', 'inbox_count', 'inbox_file', 'inbox_settings']; // 📥 À trier : seulement sur l'ordinateur principal (lib/telephone_wifi.php)
+    'inbox_list', 'inbox_count', 'inbox_file', 'inbox_settings', // 📥 À trier : seulement sur l'ordinateur principal (lib/telephone_wifi.php)
+    'fc_state', 'fc_props', 'fc_journal', 'fc_count', 'fc_prop_file', 'fc_publish_preview', 'fc_publish_export']; // 👪 site familial : comptes, file, journal (lib/comptes_famille.php)
 
 function lan_refuse(int $status, string $error, array $extra = []): bool
 {
@@ -95,6 +96,15 @@ function lan_guest_route(string $path): bool
         }
     }
     if ($terrain) { return false; } // /terrain.php : ses six actions, chacune vérifiée là (méthode, CSRF, mot de passe, fichier)
+    // 👪 Le site familial (lib/comptes_famille.php) : /famille.php fait ses propres vérifications (liste blanche, CSRF, compte, droits).
+    // Un appareil relié à un compte (ou tout appareil sans compte, réglage) ne joint QUE cette page et les fichiers de l'app.
+    if ($lower === '/famille.php') { return false; }
+    require_once __DIR__ . '/comptes_famille.php';
+    if (fc_device_famille_only((string) $d['id'])) {
+        if ($read && ($lower === '/' || $lower === '/index.php')) { header('Location: /famille.php', true, 302); header('Cache-Control: no-store'); return true; }
+        if ($read && str_starts_with($lower, '/assets/')) { return false; } // le code de l'app (aucune donnée de la généalogie)
+        return lan_refuse(403, 'Cet appareil passe par la page de la famille : 👪 /famille.php.', ['lan_famille' => true]);
+    }
     if (in_array($lower, ['/telecharger.php', '/upload.php'], true)) {
         return lan_refuse(423, 'Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal.');
     }
