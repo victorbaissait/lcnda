@@ -95,6 +95,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/boussole-rues.css?v=1">
     <link rel="stylesheet" href="assets/css/commune-culture.css?v=1">
     <link rel="stylesheet" href="assets/css/chateaux-territoires.css?v=1">
+    <link rel="stylesheet" href="assets/css/fiche-edifice.css?v=1">
     <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">
     <link rel="stylesheet" href="assets/css/listes-donnees.css?v=1">
     <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
@@ -1661,6 +1662,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
 <script src="assets/js/heritage-chateaux-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-lot8-monde-village.js?v=1" defer></script>
+<script src="assets/js/heritage-fiche-edifice.js?v=1" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>
 <script src="assets/js/heritage-suivi-audit.js?v=1" defer></script>
