@@ -28,7 +28,9 @@
 
     const SORTS = {dates: ['📅', 'Dates'], ages: ['🎂', 'Âges'], parents: ['👪', 'Parents'], doublons: ['👥', 'Doublons'], lieux: ['📍', 'Lieux'], socface: ['🧾', 'Recensement SocFace']};
     const LEVELS = {red: ['🔴', 'Impossible'], orange: ['🟠', 'À vérifier'], yellow: ['🟡', 'Curieux']};
-    const SUBS = {misplaced: 'Lieux mal placés', journeys: 'Voyages impossibles', baptism: 'Baptême loin', conflicting: 'Lieux contradictoires'};
+    const SUBS = {misplaced: 'Lieux mal placés', journeys: 'Voyages impossibles', baptism: 'Baptême loin', conflicting: 'Lieux contradictoires', anachro: 'Commune pas encore ou plus là'};
+    /** actions propres à une sorte d'alerte, ajoutées par d'autres fichiers : {match(a), html(a, i) → boutons, run(a, after)} (🏛 heritage-commune-histoire.js) */
+    const customAct = a => a && (ext.controleActions || []).find(x => { try { return x.match(a); } catch (_) { return false; } });
     const FKEY = 'lcnda-controle-filtres';
     const filt = () => ({sort: 'all', level: '', sub: '', ...ls(FKEY, {})});
     const setFilt = o => lsSet(FKEY, {...filt(), ...o});
@@ -50,6 +52,7 @@
         'misplaced': 'une commune homonyme d’un autre département, ou des coordonnées inversées.',
         'journey': 'deux homonymes confondus dans une seule fiche.',
         'baptism-far': 'une commune homonyme d’un autre département.',
+        'commune-anachro': 'le nom de la commune d’aujourd’hui mis pour un acte plus ancien, ou une commune homonyme. Regarde le nom écrit sur l’acte.',
         'sosa-sex': 'le sexe de la fiche mal saisi, ou la personne mise à la mauvaise place dans l’arbre.',
         'burial-before-death': 'les deux dates inversées.',
         'reversed-range': 'les deux années écrites dans le mauvais ordre : « entre 1800 et 1900 ».',
@@ -65,7 +68,7 @@
     /** Raisons proposées dans « Ce n'est pas une erreur », selon la sorte */
     const REASONS = {
         common: ['J’ai vérifié dans l’acte : c’est bien ça', 'C’est rare, mais c’est vrai (cas connu dans la famille)', 'La date est approximative (« vers… »)'],
-        doublons: ['Ce sont deux personnes différentes'], lieux: ['Le lieu est juste'], socface: ['J’ai regardé l’image : ma fiche est juste, SocFace a mal lu', 'Ce n’est pas la même personne (homonyme)', 'L’âge déclaré au recensement était approximatif'], journeys: ['Ce sont bien les mêmes dates et lieux'], parents: ['Enfant posthume'], ages: ['Remariage tardif'],
+        doublons: ['Ce sont deux personnes différentes'], lieux: ['Le lieu est juste', 'Je garde exprès le nom de la commune d’aujourd’hui'], socface: ['J’ai regardé l’image : ma fiche est juste, SocFace a mal lu', 'Ce n’est pas la même personne (homonyme)', 'L’âge déclaré au recensement était approximatif'], journeys: ['Ce sont bien les mêmes dates et lieux'], parents: ['Enfant posthume'], ages: ['Remariage tardif'],
     };
 
     /* ─── petits morceaux ─── */
@@ -149,7 +152,8 @@
         const [ic] = levelOf(a.level);
         const ppl = a.people.map(id => personChip(DATA.people[id])).join('');
         const checks = a.checks ? `<div class="ctl-checks">${a.checks.map(([k, t]) => `<span class="ctl-check is-${k === 'ok' ? 'ok' : k === 'no' ? 'no' : 'q'}">${k === 'ok' ? '✓' : k === 'no' ? '✗' : '?'} ${esc(t)}</span>`).join('')}</div>` : '';
-        const fixBtn = a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-compare="${i}">⚖️ Comparer</button>`
+        const fixBtn = customAct(a) ? customAct(a).html(a, i)
+            : a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-compare="${i}">⚖️ Comparer</button>`
             : a.check === 'misplaced' ? `<button type="button" class="button small secondary" data-ctl-place="${i}">✎ ${a.suggest ? 'Corriger' : 'Placer sur la carte'}</button>`
             : a.fix?.event_id ? `<button type="button" class="button small secondary" data-ctl-fix="${i}">✎ Corriger</button>`
             : a.socface?.census_id && window.LCNDA_EXT?.socface ? `<button type="button" class="button small secondary" data-sf-verify-census="${Number(a.socface.census_id)}" data-sf-member="${Number(a.socface.member_id)}">🔍 Vérifier la ligne</button>${a.socface.image_url ? `<a class="button small secondary" href="${esc(a.socface.image_url)}" target="_blank" rel="noopener noreferrer">${esc(window.LCNDA_SOCFACE?.imageLabel ? window.LCNDA_SOCFACE.imageLabel(a.socface.image_url) : '🖼 Image ↗')}</a>` : ''}${a.people[0] ? `<button type="button" class="button small secondary" data-open-person="${a.people[0]}">↗ Fiche</button>` : ''}`
@@ -251,6 +255,7 @@
             if (d.ctlRefresh !== undefined) return ext.maintenance.controle(++S().workspaceToken, {fresh: true});
             if (d.ctlStats !== undefined) { S().graphStatsType = 'family_averages'; S().graphMode = 'stats'; return A().setModule('graphiques'); }
             if (d.ctlFix !== undefined) return correct(current[Number(d.ctlFix)]);
+            if (d.ctlCustom !== undefined) { const a = current[Number(d.ctlCustom)]; return customAct(a)?.run(a, () => ext.maintenance.controle(++S().workspaceToken, {keep: true})); }
             if (d.ctlPlace !== undefined) return fixPlace(current[Number(d.ctlPlace)], () => ext.maintenance.controle(++S().workspaceToken, {keep: true}));
             if (d.ctlCompare !== undefined) { const a = current[Number(d.ctlCompare)]; return compare(a.people[0], a.people[1]); }
             if (d.ctlEcompare !== undefined) { const x = current[Number(d.ctlEcompare)]; return compare(x.people[0], x.people[1]); }
@@ -425,7 +430,7 @@
             inp.addEventListener('change', save);
         });
         function act(k) {
-            if (k === 'c') { const first = ws.querySelector('[data-ctl-date]'); if (first) { first.focus(); first.select(); return; } if (a.sort === 'doublons') return compare(a.people[0], a.people[1]); if (a.check === 'misplaced') return fixPlace(a, after); return correct(a); }
+            if (k === 'c') { if (customAct(a)) return customAct(a).run(a, after); const first = ws.querySelector('[data-ctl-date]'); if (first) { first.focus(); first.select(); return; } if (a.sort === 'doublons') return compare(a.people[0], a.people[1]); if (a.check === 'misplaced') return fixPlace(a, after); return correct(a); }
             if (k === 'n') return dismiss(a, async () => { oneStats.dismissed++; await after(); });
             if (k === 'l') { later.add(a.key); oneQueue.splice(oneIdx, 1); oneQueue.push(a.key); oneStats.later++; return renderOne(S().workspaceToken); }
             if (k === 'p' && oneIdx > 0) { oneIdx--; return renderOne(S().workspaceToken); }
@@ -520,7 +525,7 @@
         const n = list.length, lv = counts(list).levels;
         const box = document.createElement('section'); box.className = 'ctl-banner'; box.dataset.ctlBanner = String(pid);
         box.innerHTML = `<div class="ctl-banner-head"><span>⚠️ <b>${plural(n, 'chose à vérifier', 'choses à vérifier')}</b></span>${Object.entries(LEVELS).filter(([k]) => lv[k]).map(([k, [ic]]) => `<span class="ctl-banner-n is-${k}">${ic} ${lv[k]}</span>`).join('')}<span class="spacer"></span><button type="button" class="button small secondary" data-ctl-b-toggle aria-expanded="false">Voir ▾</button></div>
-            <div class="ctl-banner-body" hidden>${list.map((a, i) => `<div class="ctl-banner-row"><span>${levelOf(a.level)[0]} ${esc(a.view || a.title)}</span><span class="ctl-banner-acts">${a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-b-cmp="${i}">⚖️ Comparer</button>` : a.fix?.event_id ? `<button type="button" class="button small secondary" data-ctl-b-fix="${i}">✎ Corriger</button>` : ''}<button type="button" class="button small secondary" data-ctl-b-dis="${i}">Pas une erreur</button></span></div>`).join('')}
+            <div class="ctl-banner-body" hidden>${list.map((a, i) => `<div class="ctl-banner-row"><span>${levelOf(a.level)[0]} ${esc(a.view || a.title)}</span><span class="ctl-banner-acts">${customAct(a) ? customAct(a).html(a, i).replace(/data-ctl-custom=/g, 'data-ctl-b-custom=') : a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-b-cmp="${i}">⚖️ Comparer</button>` : a.fix?.event_id ? `<button type="button" class="button small secondary" data-ctl-b-fix="${i}">✎ Corriger</button>` : ''}<button type="button" class="button small secondary" data-ctl-b-dis="${i}">Pas une erreur</button></span></div>`).join('')}
             <button type="button" class="link-button ctl-banner-all" data-ctl-b-all>Tout voir dans « ✅ Contrôle de la base » →</button></div>`;
         hero.after(box);
         const rerender = () => A().selectPerson?.(pid);
@@ -528,6 +533,7 @@
             const b = e.target.closest('button'); if (!b) return;
             if (b.dataset.ctlBToggle !== undefined) { const body = box.querySelector('.ctl-banner-body'); body.hidden = !body.hidden; b.textContent = body.hidden ? 'Voir ▾' : 'Masquer ▴'; b.setAttribute('aria-expanded', String(!body.hidden)); return; }
             if (b.dataset.ctlBFix !== undefined) return correct(list[Number(b.dataset.ctlBFix)]);
+            if (b.dataset.ctlBCustom !== undefined) { const a = list[Number(b.dataset.ctlBCustom)]; return customAct(a)?.run(a, rerender); }
             if (b.dataset.ctlBCmp !== undefined) { const a = list[Number(b.dataset.ctlBCmp)]; return compare(a.people[0], a.people[1]); }
             if (b.dataset.ctlBDis !== undefined) return dismiss(list[Number(b.dataset.ctlBDis)], rerender);
             if (b.dataset.ctlBAll !== undefined) { try { const k = 'lcnda-listbar:maintenance:controle', st = ls(k, {}) || {}; lsSet(k, {...st, q: nm(d.people[pid] || detail.person)}); } catch (_) {} goControle({sort: 'all'}); }

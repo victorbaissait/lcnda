@@ -802,7 +802,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         foreach (array_keys($famsBySpouse[$pid] ?? []) as $famId) { $line(1, 'FAMS', '@F' . $famId . '@'); }
         // 🤝 relations hors famille : 5.5.1 ASSO + RELA ; 7 ASSO + ROLE (+ PHRASE), un nom sans fiche = ASSO @VOID@ + PHRASE (5.5.1 : une note)
         foreach ($relationsByPerson[$pid] ?? [] as $rl) {
-            $relLabel = rs_label((string) $rl['rel_type'], '', (string) $rl['rel_label']);
+            $relLabel = rs_label((string) $rl['rel_type'], '', (string) $rl['rel_label']) . ((string) $rl['rel_type'] === 'parrain' ? ' (hors acte)' : ''); // « hors acte » : relu comme relation, pas comme témoin du baptême
             $relNote = rs_gedcom_note($rl, trim((string) ($rl['place_name'] ?? '')));
             if ($rl['other_id'] === null) {
                 if ($version !== '7') { if ($includeNotes) { $text(1, 'NOTE', 'Réseau — ' . $relLabel . ' : ' . trim((string) $rl['other_name']) . ($relNote !== '' ? "\n" . $relNote : '')); } continue; }
@@ -1436,7 +1436,7 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
             if ($wid === $pid) { continue; }
             $role = $rawRole !== '' ? $roleFr($rawRole) : 'Relation';
             $bapt = null;
-            if (preg_match('/parrain|marraine/i', $role)) {
+            if (preg_match('/parrain|marraine/i', $role) && !preg_match('/hors acte/i', $role)) {
                 $q = $pdo->prepare("SELECT e.id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=? AND t.gedcom_tag IN ('BAPM','CHR') ORDER BY e.id LIMIT 1"); $q->execute([$pid]); $bapt = $q->fetchColumn() ?: null;
             }
             if ($bapt) { $insertWitness->execute([(int) $bapt, $wid, $role, 0]); $stats['witnesses']++; }

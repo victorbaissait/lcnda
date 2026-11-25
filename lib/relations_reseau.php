@@ -12,8 +12,8 @@ declare(strict_types=1);
  * Une relation est gardée UNE fois : person_id → other_id, rel_type = le rôle de l'autre pour la personne (« Pierre est son
  * employeur ») ; l'autre fiche la montre à l'envers (« Jean est son employé »), toute seule.
  *
- * GEDCOM (lib/gedcom.php) : 5.5.1 « 1 ASSO @I2@ / 2 RELA Employeur » ; 7 « 1 ASSO @I2@ / 2 ROLE FRIEND|NGHBR|GODP|OTHER
- * (3 PHRASE …) », un nom libre « 1 ASSO @VOID@ / 2 PHRASE Jean MARTIN » (en 5.5.1 : une note) ; dates et lieu dans la NOTE
+ * GEDCOM (lib/gedcom.php) : 5.5.1 « 1 ASSO @I2@ / 2 RELA Employeur » ; 7 « 1 ASSO @I2@ / 2 ROLE FRIEND|NGHBR|OTHER
+ * (3 PHRASE …, « Parrain ou marraine (hors acte) » pour ne pas devenir témoin du baptême) », un nom libre « 1 ASSO @VOID@ / 2 PHRASE Jean MARTIN » (en 5.5.1 : une note) ; dates et lieu dans la NOTE
  * (« Dates : … », « Lieu : … »), relues à l'import ; sources en SOUR. Jamais une personne vivante ou confidentielle cachée
  * par l'export (ni la relation, ni ses sources).
  *
@@ -41,7 +41,7 @@ function rs_types(): array
         'compagnon_armes' => [['Compagnon d’armes', 'Compagne d’armes', 'Compagnon d’armes'], 'compagnon_armes', '🎖️', 'Travail', 'OTHER'],
         'tuteur' => [['Tuteur', 'Tutrice', 'Tuteur ou tutrice'], 'pupille', '⚖️', 'Protection', 'OTHER'],
         'pupille' => [['Pupille', 'Pupille', 'Pupille'], 'tuteur', '⚖️', 'Protection', 'OTHER'],
-        'parrain' => [['Parrain', 'Marraine', 'Parrain ou marraine'], 'filleul', '🕊️', 'Protection', 'GODP'],
+        'parrain' => [['Parrain', 'Marraine', 'Parrain ou marraine'], 'filleul', '🕊️', 'Protection', 'OTHER'], // GODP serait relu comme témoin du baptême
         'filleul' => [['Filleul', 'Filleule', 'Filleul ou filleule'], 'parrain', '🕊️', 'Protection', 'OTHER'],
         'nourrice' => [['Nourricier', 'Nourrice', 'Nourrice'], 'nourrisson', '🍼', 'Protection', 'OTHER'],
         'nourrisson' => [['Nourrisson', 'Nourrissonne', 'Nourrisson'], 'nourrice', '🍼', 'Protection', 'OTHER'],
@@ -79,7 +79,7 @@ function rs_type_from_role(string $role): array
         'apprentice' => 'apprenti', 'apprenti' => 'apprenti', 'apprentie' => 'apprenti', 'maitre d apprentissage' => 'maitre_apprentissage',
         'comrade' => 'compagnon_armes', 'brother in arms' => 'compagnon_armes', 'compagnon d armes' => 'compagnon_armes',
         'guardian' => 'tuteur', 'tuteur' => 'tuteur', 'tutrice' => 'tuteur', 'ward' => 'pupille', 'pupille' => 'pupille',
-        'godfather' => 'parrain', 'godmother' => 'parrain', 'godparent' => 'parrain', 'godp' => 'parrain', 'parrain' => 'parrain', 'marraine' => 'parrain', 'parrain ou marraine' => 'parrain',
+        'godfather' => 'parrain', 'godmother' => 'parrain', 'godparent' => 'parrain', 'godp' => 'parrain', 'parrain' => 'parrain', 'marraine' => 'parrain', 'parrain ou marraine' => 'parrain', 'parrain hors acte' => 'parrain', 'marraine hors acte' => 'parrain', 'parrain ou marraine hors acte' => 'parrain',
         'godchild' => 'filleul', 'godson' => 'filleul', 'goddaughter' => 'filleul', 'filleul' => 'filleul', 'filleule' => 'filleul',
         'nurse' => 'nourrice', 'wet nurse' => 'nourrice', 'nourrice' => 'nourrice', 'nourricier' => 'nourrice', 'nursling' => 'nourrisson', 'nourrisson' => 'nourrisson',
         'tres proche' => 'proche', 'close' => 'proche', 'en conflit' => 'conflit', 'conflict' => 'conflit', 'eloigne' => 'distance', 'eloignee' => 'distance', 'lien distant' => 'distance', 'distant' => 'distance',
@@ -94,8 +94,8 @@ function rs_schema(PDO $pdo): void
     if ($done) { return; }
     $pdo->exec("CREATE TABLE IF NOT EXISTS person_relations (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        person_id INTEGER NOT NULL,
-        other_id INTEGER,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        other_id INTEGER REFERENCES persons(id) ON DELETE CASCADE,
         other_name TEXT NOT NULL DEFAULT '',
         rel_type TEXT NOT NULL DEFAULT 'autre',
         rel_label TEXT NOT NULL DEFAULT '',
@@ -103,7 +103,7 @@ function rs_schema(PDO $pdo): void
         date_to TEXT NOT NULL DEFAULT '',
         year_from INTEGER,
         year_to INTEGER,
-        place_id INTEGER,
+        place_id INTEGER REFERENCES places(id) ON DELETE SET NULL,
         note TEXT NOT NULL DEFAULT '',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP

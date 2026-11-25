@@ -484,7 +484,7 @@ try {
         export_full_backup($pdo, (string) ($payload['password'] ?? ''));
     }
     // 🏛 commune de l'époque (lib/commune_histoire.php) et 🤝 Son réseau (lib/relations_reseau.php)
-    if ($isWrite && in_array($action, ['commune_hist_fix', 'commune_hist_setting'], true)) { require_once __DIR__ . '/lib/commune_histoire.php'; try { json_response(ch_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } }
+    if ($isWrite && in_array($action, ['commune_hist_fix', 'commune_hist_place', 'commune_hist_setting'], true)) { require_once __DIR__ . '/lib/commune_histoire.php'; try { json_response(ch_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } }
     if ($isWrite && in_array($action, ['reseau_save', 'reseau_delete', 'reseau_restore', 'reseau_settings_save'], true)) { require_once __DIR__ . '/lib/relations_reseau.php'; try { json_response(rs_api_post($pdo, (string) $action, is_array($payload) ? $payload : [])); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } }
     // 🏛 Frontières anciennes : télécharger une fois l'historique des communes de l'INSEE, le retirer, le remettre (lib/cartes_plus.php)
     if ($isWrite && in_array($action, ['frontieres_download', 'frontieres_remove', 'frontieres_restore', 'frontieres_apply'], true)) {

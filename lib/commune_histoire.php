@@ -20,7 +20,7 @@ declare(strict_types=1);
  * jamais été celui d'une commune (lieu-dit, hameau) n'est jamais contrôlé ; un simple changement de nom n'est pas une erreur.
  *
  * API : GET commune_hist_event (&event_id), commune_hist_check (&place_id&date_text), commune_hist_about ;
- *       POST commune_hist_fix ({event_id, code, name} ou {event_id, place_id} pour « ↶ Annuler »), commune_hist_setting.
+ *       POST commune_hist_fix ({event_id, code, name} ou {event_id, place_id} pour « ↶ Annuler »), commune_hist_place, commune_hist_setting.
  * Essai : tests/test-commune-anachronique.js
  */
 
@@ -414,6 +414,15 @@ function ch_api_get(PDO $pdo, string $action, array $q): array
 function ch_api_post(PDO $pdo, string $action, array $data): array
 {
     if ($action === 'commune_hist_fix') { return ch_fix($pdo, $data); }
+    if ($action === 'commune_hist_place') { // la fenêtre de l'événement : le lieu de la commune d'alors (trouvé ou créé), choisi dans la case Lieu
+        $code = (string) ($data['code'] ?? ''); $name = trim((string) ($data['name'] ?? ''));
+        $idx = ch_index();
+        if (!$idx || !isset($idx['rows'][$code]) || $name === '' || mb_strlen($name) > 120) { throw new RuntimeException('Commune inconnue.'); }
+        $like = [];
+        if ((int) ($data['like_place_id'] ?? 0)) { $q = $pdo->prepare('SELECT * FROM places WHERE id=?'); $q->execute([(int) $data['like_place_id']]); $like = $q->fetch(PDO::FETCH_ASSOC) ?: []; }
+        $r = ch_place_for($pdo, $code, $name, $like);
+        return ['place_id' => $r['id'], 'name' => $name, 'created' => $r['created']];
+    }
     if ($action === 'commune_hist_setting') {
         $before = ht_setting($pdo, CH_SETTING, ['controle' => true]);
         $new = ['controle' => !empty($data['controle']) && $data['controle'] !== '0' && $data['controle'] !== 'false'];

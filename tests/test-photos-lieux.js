@@ -66,7 +66,7 @@ const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR
         if (!pw) { console.log('  – navigateur : sauté (Playwright absent)'); return; }
         browser = await pw.chromium.launch();
         const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-        await ctx.route(/tile\.openstreetmap|tile\.|arcgisonline|ign\.fr|stamen|carto|opentopomap/, r => r.fulfill({ status: 200, contentType: 'image/png', body: PNG }));
+        await ctx.route(u => !String(u).startsWith(base) && /tile\.openstreetmap|tile\.|arcgisonline|ign\.fr|stamen|carto|opentopomap/.test(String(u)), r => r.fulfill({ status: 200, contentType: 'image/png', body: PNG }));
         await ctx.route(/cdn\.jsdelivr\.net|unpkg\.com/, r => r.abort());
         const outside = []; ctx.on('request', r => { const u = r.url(); if (!u.startsWith(base) && !/^data:|^blob:/.test(u) && !/tile|arcgis|ign\.fr|carto|stamen|jsdelivr|unpkg|fonts\.g/.test(u)) outside.push(u); });
         const page = await ctx.newPage();
