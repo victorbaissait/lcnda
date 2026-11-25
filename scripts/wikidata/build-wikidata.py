@@ -363,9 +363,14 @@ def step_oldnames(w):
           OPTIONAL {{ ?pl rdfs:label ?len . FILTER(LANG(?len) = "en") }}
         }} GROUP BY ?pl ?name ?s ?e'''
         r = w.ask(q, f'old-{cls}')
-        if r is None:
-            log(f'  ⚠ anciens noms {cls} : trop long, abandonné')
-            continue
+        if r is None:  # trop gros (les communes de France) : en dix morceaux, par le dernier chiffre du numéro
+            r = []
+            for d in range(10):
+                part = w.ask(q.replace(f'?pl wdt:P31 wd:{cls} ;', f'?pl wdt:P31 wd:{cls} . FILTER(STRENDS(STR(?pl), "{d}")) ?pl'), f'old-{cls}-{d}')
+                if part is None:
+                    log(f'  ⚠ anciens noms {cls} chiffre {d} : trop long, abandonné')
+                    continue
+                r += part
         log(f'  anciens noms {cls} : {len(r)}')
         rows += r
     return rows

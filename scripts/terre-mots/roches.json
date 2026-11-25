@@ -2,9 +2,102 @@
   "attr": "Wikipédia en français — une phrase recopiée telle quelle de l’article de chaque roche (choisie à la main dans le texte lu par fetch_roches.py)",
   "licence": "CC BY-SA 4.0",
   "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
-  "keys": ["fam", "sentence", "page", "rev"],
+  "keys": [
+    "fam",
+    "sentence",
+    "page",
+    "rev"
+  ],
   "rows": [
-    ["granite", "C'est un matériau résistant très utilisé en construction, dallage, décoration, sculpture, sous l'appellation granit.", "Granite", 239757706],
-    ["gabbro", "Il peut être utilisé comme source de métaux ou comme pierre de taille.", "Gabbro", 236550800]
+    [
+      "granite",
+      "C'est un matériau résistant très utilisé en construction, dallage, décoration, sculpture, sous l'appellation granit.",
+      "Granite",
+      239757706
+    ],
+    [
+      "gabbro",
+      "Il peut être utilisé comme source de métaux ou comme pierre de taille.",
+      "Gabbro",
+      236550800
+    ],
+    [
+      "schiste",
+      "Outre l'emploi de l'ardoise comme matériau de couverture ou de bardage, le schiste est utilisé comme moellon en maçonnerie (voir par exemple le château d'Angers).",
+      "Schiste",
+      240659946
+    ],
+    [
+      "marbre",
+      "Comme matériau de décoration, le marbre découpé sous forme de dalles est principalement utilisée pour le revêtement de murs et de sols intérieurs ou extérieurs.",
+      "Marbre",
+      239760455
+    ],
+    [
+      "quartzite",
+      "Il est utilisé pour son excellente résistance à l'abrasion en couche de roulement (béton bitumineux et enduits) pour les chaussées, ainsi que pour la stabilisation des infrastructures ferroviaires (ballast).",
+      "Quartzite",
+      240223270
+    ],
+    [
+      "calcaire",
+      "Le calcaire calciné produit de la chaux dont les usages sont multiples.",
+      "Calcaire",
+      241286999
+    ],
+    [
+      "dolomie",
+      "La végétation sur sol dolomitique se caractérise par la présence de plantes calcicoles comme le ciste de Montpellier dans le sud de la France.",
+      "Dolomie",
+      238803436
+    ],
+    [
+      "craie",
+      "La craie et la marne sont aussi un des plus importants amendements agricoles, c'est un apport alcalin pour les champs afin d'améliorer les terres trop acides : c'est la pratique du marnage ou chaulage, qui a permis la conquête et la fertilisation de nombreuses terres cultivables.",
+      "Craie",
+      240799852
+    ],
+    [
+      "gres",
+      "Les grès sont souvent d'excellentes pierres de construction, le plus souvent non gélives.",
+      "Grès (géologie)",
+      240287301
+    ],
+    [
+      "conglomerat",
+      "En pétrographie, un conglomérat est une roche détritique (issue de la dégradation mécanique d'autres roches) composée de morceaux discernables liés entre eux par un ciment naturel.",
+      "Conglomérat (géologie)",
+      239053495
+    ],
+    [
+      "argile",
+      "La terre argileuse est lourde et compacte, résistante et difficile à labourer, se durcissant en croûtes épaisses parfois craquelées lors des sécheresses.",
+      "Argile",
+      241217053
+    ],
+    [
+      "sable",
+      "Les alluvions peuvent constituer des plaines alluviales très fertiles.",
+      "Alluvion",
+      241223707
+    ],
+    [
+      "volcan",
+      "Les basaltes sont utilisés dans la construction et dans la statuaire.",
+      "Basalte",
+      240265654
+    ],
+    [
+      "tourbe",
+      "La tourbe a longtemps pu servir de matériau de construction dans les régions où le bois fait défaut.",
+      "Tourbe",
+      240337996
+    ],
+    [
+      "gypse",
+      "Cet usage technique n'est pas isolé : de nombreuses sources antiques attestent l'emploi du gypse comme matériau de construction et de décoration à l'air libre, assez commun dans les régions arides.",
+      "Gypse",
+      241159232
+    ]
   ]
 }

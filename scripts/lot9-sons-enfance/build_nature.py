@@ -7,7 +7,7 @@ puis, pour les oiseaux, un chant sur xeno-canto (avec la clé gratuite de l'util
 Sortie : assets/data/l9a-nature.json.gz
 """
 import re, urllib.parse
-from common import jget, sparql, write, today
+from common import jget, write, today
 
 BIRDS = [  # [latin, français, milieu]
     ['Erithacus rubecula', 'Rouge-gorge familier', 'jardins, haies'], ['Turdus merula', 'Merle noir', 'jardins, haies'], ['Parus major', 'Mésange charbonnière', 'jardins, bois'],
@@ -20,7 +20,7 @@ BIRDS = [  # [latin, français, milieu]
     ['Luscinia megarhynchos', 'Rossignol philomèle', 'haies, bosquets'], ['Sylvia atricapilla', 'Fauvette à tête noire', 'haies, jardins'], ['Phylloscopus collybita', 'Pouillot véloce', 'bois'],
     ['Oriolus oriolus', 'Loriot d’Europe', 'peupleraies, bois'], ['Sturnus vulgaris', 'Étourneau sansonnet', 'prés, villages'], ['Pica pica', 'Pie bavarde', 'villages, champs'],
     ['Garrulus glandarius', 'Geai des chênes', 'bois'], ['Corvus corone', 'Corneille noire', 'champs'], ['Corvus monedula', 'Choucas des tours', 'clochers, falaises'],
-    ['Carduelis carduelis', 'Chardonneret élégant', 'vergers, friches'], ['Linaria cannabina', 'Linotte mélodieuse', 'landes, friches'], ['Chloris chloris', 'Verdier d’Europe', 'jardins'],
+    ['Carduelis carduelis', 'Chardonneret élégant', 'vergers, friches'], ['Linaria cannabina', 'Linotte mélodieuse', 'landes, friches'], ['Carduelis chloris', 'Verdier d’Europe', 'jardins'],
     ['Serinus serinus', 'Serin cini', 'villages, jardins'], ['Emberiza citrinella', 'Bruant jaune', 'haies, champs'], ['Emberiza cirlus', 'Bruant zizi', 'haies, vignes'],
     ['Motacilla alba', 'Bergeronnette grise', 'fermes, rivières'], ['Upupa epops', 'Huppe fasciée', 'vergers, prés'], ['Merops apiaster', 'Guêpier d’Europe', 'rivières, sablières'],
     ['Alcedo atthis', 'Martin-pêcheur d’Europe', 'rivières, étangs'], ['Ardea cinerea', 'Héron cendré', 'rivières, étangs'], ['Gallinula chloropus', 'Gallinule poule-d’eau', 'étangs, mares'],
@@ -84,17 +84,24 @@ def build(lst, extra_keys):
         k, can = gbif_key(it[0])
         if not k: print('! GBIF', it[0]); continue
         rows.append({'sci': it[0], 'fr': it[1], 'mil': it[2], **({'mois': it[3]} if len(it) > 3 else {}), 'key': int(k)})
-    keys = ' '.join(f'"{r["key"]}"' for r in rows)
-    res = sparql('SELECT ?t ?k ?img ?fr WHERE { VALUES ?k { %s } ?t wdt:P846 ?k . OPTIONAL { ?t wdt:P18 ?img } OPTIONAL { ?a schema:about ?t ; schema:isPartOf <https://fr.wikipedia.org/> ; schema:name ?fr } }' % keys)
-    by = {}
-    for x in res: by.setdefault(x['k']['value'], x)
-    files = []
+    # Wikidata : l'élément de chaque clé GBIF (P846), par la recherche du site (plus sûre que le service SPARQL, souvent saturé)
+    qid = {}
     for r in rows:
-        x = by.get(str(r['key']))
-        if not x: continue
-        r['q'] = x['t']['value'].rsplit('/', 1)[1]
-        if 'fr' in x: r['wp'] = 'https://fr.wikipedia.org/wiki/' + urllib.parse.quote(x['fr']['value'].replace(' ', '_'))
-        if 'img' in x: r['_f'] = urllib.parse.unquote(x['img']['value'].rsplit('/', 1)[1]); files.append(r['_f'])
+        u = 'https://www.wikidata.org/w/api.php?' + urllib.parse.urlencode({'action': 'query', 'list': 'search', 'srsearch': f'haswbstatement:P846={r["key"]}', 'srlimit': 1, 'format': 'json'})
+        h = jget(u)['query']['search']
+        if h: qid[h[0]['title']] = r
+    files = []
+    ids = list(qid)
+    for i in range(0, len(ids), 50):
+        u = 'https://www.wikidata.org/w/api.php?' + urllib.parse.urlencode({'action': 'wbgetentities', 'ids': '|'.join(ids[i:i + 50]), 'props': 'claims|sitelinks', 'sitefilter': 'frwiki', 'format': 'json'})
+        for q, e in jget(u).get('entities', {}).items():
+            r = qid.get(q)
+            if not r: continue
+            r['q'] = q
+            fr = (e.get('sitelinks') or {}).get('frwiki', {}).get('title')
+            if fr: r['wp'] = 'https://fr.wikipedia.org/wiki/' + urllib.parse.quote(fr.replace(' ', '_'))
+            try: r['_f'] = e['claims']['P18'][0]['mainsnak']['datavalue']['value']; files.append(r['_f'])
+            except Exception: pass
     meta = commons(files)
     for r in rows:
         f = r.pop('_f', None)

@@ -681,7 +681,7 @@
 
     /* ═════════════ 🧰 Listes → Données ═════════════ */
     const openUrl = u => { if (u) W.open?.(u, '_blank', 'noopener'); };
-    const rowsOf = async (name, map) => { const D = await load(name); return map(D); };
+    const rowsOf = async (name, map) => { const D = await tryLoad(name); return D ? map(D) : []; };
     (ext.dataLists = ext.dataLists || []).push(
         {id: 'l9_etoiles', icon: '✨', label: T('Étoiles nouvelles visibles à l’œil nu'), group: 'Le monde', source: T('Wikipédia (CC BY-SA 4.0)'), sourceUrl: 'https://en.wikipedia.org/wiki/List_of_novae_in_the_Milky_Way', enabled: () => on('etoiles'),
             load: () => rowsOf('etoiles', D => D.rows.map(r => ({name: T(r.n), year: r.y, date: r.d, kind: T(r.kind === 'supernova' ? 'supernova' : 'nova'), mag: r.mag, con: T(r.con), url: r.wp || r.src}))),

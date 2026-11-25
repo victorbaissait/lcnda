@@ -400,19 +400,58 @@ EXPOS = [
     ('Exposition universelle de 1851', 1851, 1851, 'Londres', '', 'universelle', r'Crystal Palace'),
 ]
 
+# le choix de la phrase (copiée telle quelle) : « vis » = la phrase des visiteurs (None = aucune phrase sûre) ; « num » = False quand la
+# phrase donne une fourchette (on ne montre pas un seul chiffre) ; « hi » = ce qu'on y a vu, par ordre de préférence
+CURATE = {
+    'Exposition universelle de 1851': {'hi': [r'Crystal Palace']},
+    'Exposition universelle de 1855': {'vis': r'a reçu 5 162 330 visiteurs', 'hi': [r'Pour accueillir l.Exposition on construit']},
+    'Exposition universelle de 1867': {'vis': r'plus de dix millions de visiteurs', 'hi': [r'ascenseur à frein']},
+    'Exposition universelle de 1878': {'vis': None, 'hi': [r'tête de la statue de la Liberté']},
+    'Exposition universelle de 1889': {'vis': None, 'hi': [r'la tour Eiffel est construite', r'galerie des Machines']},
+    'Exposition universelle de 1900': {'vis': r'accueille 50,8 millions de visiteurs', 'hi': [r'trottoir roulant à deux vitesses', r'Petit Palais et le Grand Palais']},
+    'Exposition nationale et coloniale de Rouen': {'vis': r'600 000 visiteurs'},
+    'Exposition coloniale de Marseille (1906)': {'vis': None, 'hi': [r'futur parc Chanot']},
+    'Exposition maritime internationale de 1907': {'vis': None, 'hi': [r'Au centre de la place des Quinconces']},
+    'Exposition internationale de l\'Est de la France de 1909': {'vis': r'plus de deux millions de visiteurs', 'hi': [r'histoire de l.École de Nancy']},
+    'Exposition internationale du Nord de la France de 1911': {'vis': r'Elle attire entre', 'num': False, 'hi': [r'Parc Barbieux']},
+    'Exposition internationale urbaine de Lyon de 1914': {'vis': None, 'hi': [r'Grand Hall des abattoirs de Tony Garnier', r'Tony Garnier']},
+    'Exposition coloniale de Marseille (1922)': {'vis': r'estimé à plus de trois millions', 'hi': [r'reproduction du temple d.Angkor']},
+    'Exposition internationale des arts décoratifs et industriels modernes': {'vis': None, 'hi': [r'portes monumentales']},
+    'Exposition coloniale internationale': {'vis': r'Elle reçoit huit millions de visiteurs', 'hi': [r'temple principal d.Angkor']},
+    'Exposition universelle de 1937': {'vis': None, 'hi': [r'deux pavillons principaux', r'Guernica']},
+    'Exposition universelle de Bruxelles de 1910': {'vis': r'13 millions de visiteurs'},
+}
+WORDS = {'un': 1, 'une': 1, 'deux': 2, 'trois': 3, 'quatre': 4, 'cinq': 5, 'six': 6, 'sept': 7, 'huit': 8, 'neuf': 9, 'dix': 10, 'douze': 12, 'quinze': 15, 'vingt': 20, 'trente': 30, 'quarante': 40, 'cinquante': 50}
 SENT = re.compile(r'(?<=[.!?])\s+(?=[A-ZÀ-ÖØ-Ý«"0-9])')
-def sentences(txt): return [s.strip() for s in SENT.split(re.sub(r'\s+', ' ', txt or '')) if s.strip()]
-def visitors_of(sents):
-    for s in sents:
-        m = re.search(r'(\d[\d\s  ,.]*)\s*(millions?|million)?\s*(de\s+)?(visiteurs|entrées)', s)
-        if m:
-            raw = m.group(1).strip().replace(' ', ' ').replace('\xa0', ' ')
-            n = None
-            try:
-                if m.group(2): n = float(raw.replace(',', '.').replace(' ', '')) * 1e6
-                else: n = float(raw.replace(' ', '').replace('.', '').replace(',', '.'))
-            except ValueError: n = None
-            if n and n >= 10000: return s, int(n)
+def sentences(txt):
+    txt = re.sub(r'=+[^=\n]+=+', '\n', txt or '')                  # les titres de section « == Notes == »
+    out = []
+    for para in txt.split('\n'):
+        out += [s.strip() for s in SENT.split(re.sub(r'\s+', ' ', para)) if s.strip()]
+    return out
+def number_in(s):
+    """le nombre de visiteurs écrit dans la phrase, juste devant « visiteurs », « entrées » ou « personnes » :
+    « 2 140 372 exactement », « 5 162 330 visiteurs », « 50,8 millions de visiteurs », « huit millions de visiteurs »"""
+    s2 = s.replace('\u202f', ' ').replace('\xa0', ' ')
+    W = r"\s*(?:de\s+|d['’])?(?:visiteurs|entrées|personnes)"
+    m = re.search(r'\((\d{1,3}(?:[ ]\d{3})+) exactement\)', s2)
+    if m: return int(m.group(1).replace(' ', ''))
+    m = re.search(r'(\d{1,3}(?:[ ]\d{3})+|\d{5,})\s*(?:visiteurs|entrées|personnes)', s2)
+    if m: return int(m.group(1).replace(' ', ''))
+    m = re.search(r'(\d+(?:,\d+)?)\s*millions?' + W, s2)
+    if m: return int(float(m.group(1).replace(',', '.')) * 1e6)
+    m = re.search(r'\b(' + '|'.join(WORDS) + r')\s+millions?' + W, s2, re.I)
+    if m: return WORDS[m.group(1).lower()] * 1000000
+    return None
+def visitors_of(sents, cur):
+    if 'vis' in cur:
+        if cur['vis'] is None: return '', None
+        s = next((x for x in sents if re.search(cur['vis'], x)), '')
+        return s, (number_in(s) if s and cur.get('num', True) else None)
+    for s in sents:   # sans choix : la première phrase qui parle de visiteurs avec un nombre
+        if re.search(r'visiteurs|entrées', s) and len(s) < 350:
+            n = number_in(s)
+            if n and n >= 100000: return s, n
     return '', None
 
 def build_expos():
@@ -429,19 +468,23 @@ def build_expos():
         e = full.get(t)
         if not e or e['title'] in seen: continue
         seen.add(e['title'])
-        ss = sentences(e['text'])
+        ss = [x for x in sentences(e['text']) if len(x) >= 20]
         if not ss: continue
-        vs, vn = visitors_of(ss)
-        hi = next((s for s in ss if re.search(rx, s, re.I) and s != vs and len(s) < 400), '')
+        cur = CURATE.get(e['title'], {})
+        vs, vn = visitors_of(ss, cur)
+        hi = ''
+        for h in cur.get('hi', [rx]):
+            hi = next((x for x in ss if re.search(h, x, re.I) and x != vs and len(x) < 400), '')
+            if hi: break
         intro = ss[0] if len(ss[0]) < 500 else ss[0][:500]
-        # les dates exactes : dans la première phrase (« du 15 avril au 12 novembre 1900 »)
-        m = re.search(r'du (\d{1,2}(?:er)?\s+\w+)(?:\s+(\d{4}))?\s+au\s+(\d{1,2}(?:er)?\s+\w+\s+\d{4})', ' '.join(ss[:4]))
+        # les dates exactes : dans les premières phrases (« du 15 avril au 12 novembre 1900 »)
+        m = re.search(r'du (\d{1,2}(?:er)?\s+\w+)(?:\s+(\d{4}))?\s+au\s+(\d{1,2}(?:er)?\s+\w+\s+(\d{4}))', ' '.join(ss[:4]))
+        when = f'du {m.group(1)}{(" " + m.group(2)) if m.group(2) else ""} au {m.group(3)}' if m and int(m.group(4)) == y2 else ''
         out.append({'id': re.sub(r'[^a-z0-9]+', '-', e['title'].lower())[:50].strip('-'), 'n': e['title'], 'y': y, 'y2': y2, 'city': city, 'ins': ins,
                     'lat': C[ins][1] if ins in C else None, 'lon': C[ins][2] if ins in C else None, 'k': kind, 'fr': 1 if ins else 0,
-                    'when': f'du {m.group(1)}{(" " + m.group(2)) if m.group(2) else ""} au {m.group(3)}' if m else '',
-                    'visitors': vn, 'visitors_sentence': vs, 'highlight': hi, 'intro': intro, 'url': e['url'], 'q': e['q']})
+                    'when': when, 'visitors': vn, 'visitors_sentence': vs, 'highlight': hi, 'intro': intro, 'url': e['url'], 'q': e['q']})
     out.sort(key=lambda r: r['y'])
-    save('expos', {**WP, 'what': 'Expositions universelles, internationales et coloniales (liste choisie pour LCNDA) ; le nombre de visiteurs et ce qu’on y a vu sont copiés de la phrase de l’article de Wikipédia en français',
+    save('expos', {**WP, 'what': 'Expositions universelles, internationales et coloniales (liste choisie pour LCNDA) ; le nombre de visiteurs et ce qu’on y a vu sont copiés de la phrase de l’article de Wikipédia en français (la phrase est choisie à la main, le chiffre est lu dans la phrase)',
                    'rows': out})
 
 def build_dates():

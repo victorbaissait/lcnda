@@ -249,7 +249,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const pp = await p.evaluate(async () => { const h = document.createElement('div'); const ok = await window.LCNDA_EXT.dataSources.find(d => d.id === 'l9_planete').run({person: {id: 1}}, h); return {ok, t: h.textContent}; });
             assert.strictEqual(pp.ok, true); assert.match(pp.t, /À sa naissance \(1800\)/);
             const L = await p.evaluate(async () => Promise.all((window.LCNDA_EXT.dataLists || []).filter(d => /^l9_/.test(d.id) && d.id !== 'l9_gabelle').map(async d => { const rows = await d.load(); return {id: d.id, n: rows.length, src: !!d.source, urls: d.fields.some(f => f.type === 'url')}; })));
-            assert.ok(L.length >= 9 && L.every(x => x.src && x.urls && x.n > 0), JSON.stringify(L));
+            assert.ok(L.length >= 9 && L.every(x => x.src && x.urls && (x.n > 0 || (x.id === 'l9_uniformes' && !UN))), JSON.stringify(L));
             const layer = await p.evaluate(async () => { const s = window.LCNDA_EXT.mapLayerSources.find(x => x.id === 'l9_gabelle'); const r = await s.run({bbox: [1.5, 45, 2.2, 45.5], max: 500}); return {n: r.features.length, labels: [...new Set(r.features.map(f => f.label))], src: r.source}; });
             assert.ok(layer.n > 10 && layer.labels.includes('pays rédimé') && /CC BY-SA/.test(layer.src), JSON.stringify(layer));
         });

@@ -7659,7 +7659,7 @@ function import_analyse(PDO $pdo): never
                 'fusion_needed'=>$existingPersons>0,
             ]);
         }catch(Throwable $e){
-            json_response(['error'=>'Impossible d\'ouvrir la base SQLite : '.$e->getMessage()],422);
+            json_response(['error'=>'Ce fichier n’est pas une base SQLite lisible : il est abîmé, ou c’est un autre format renommé en .'.$ext.'.'],422); // jamais le message brut de SQLite
         }
     }
 

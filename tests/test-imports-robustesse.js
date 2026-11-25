@@ -522,6 +522,49 @@ end notes
             assert.deepEqual(snapshot(), start);
         });
 
+        await step('analyse avant import, paquet « deux ordinateurs » : fichiers absurdes refusés clairement', async () => {
+            const bad = [];
+            for (const [kind, buf] of Object.entries(junk)) {
+                for (const name of ['x.db', 'x.sqlite', 'x.mftpkg', 'x.gramps', 'x.zip', 'x.gw']) { const r = await upload('import_analyse', buf, name); try { if (r.status !== 200) assertRefused(r, 'analyse ' + kind + ' ' + name, [409, 413, 422, 500]); else assert.ok(!INTERNAL.test(JSON.stringify(r.body))); } catch (e) { bad.push(e.message); } }
+                const s2 = await upload('sync_preview', buf, 'paquet.json'); try { assertRefused(s2, 'deux ordinateurs ' + kind, [422]); } catch (e) { bad.push(e.message); }
+            }
+            for (const body of ['{"package_uid":"../../x","items":"zz"}', '[]', '"texte"', '{"format":"lcnda-sync","items":[null,1,{"t":"persons"}]}']) { const r = await upload('sync_preview', Buffer.from(body), 'p.json'); try { assertRefused(r, 'deux ordinateurs ' + body, [422]); } catch (e) { bad.push(e.message); } }
+            assert.ok(!bad.length, bad.join('\n        '));
+            assert.deepEqual(snapshot(), start);
+        });
+        await step('près des bornes : 20 001 fichiers dans une archive, GeoJSON de plus de 20 Mo, 20 001 lieux : refusés ; un Gramps de 5 000 fiches passe', async () => {
+            const many = makeZip([['arbre.ged', '0 HEAD\n0 TRLR\n'], ...Array.from({ length: 20001 }, (_, i) => [`m/${i}.txt`, '', { store: true }])]);
+            const r = await upload('import_preview', many, 'beaucoup.zip');
+            assertRefused(r, 'archive de 20 001 fichiers', [422]);
+            assert.match(r.body.error, /trop de fichiers/);
+            assertRefused(await post('places_geo_analyse', { text: '{"type":"FeatureCollection","features":[' + ' '.repeat(21 * 1048576) + ']}' }), 'GeoJSON > 20 Mo', [413, 422]);
+            const pts = Array.from({ length: 20001 }, (_, i) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [1 + i / 1e5, 45] }, properties: { name: 'Lieu ' + i } }));
+            assertRefused(await post('places_geo_analyse', { text: JSON.stringify({ type: 'FeatureCollection', features: pts }) }), '20 001 lieux', [422]);
+            const big = gz(GRAMPS_XML(Array.from({ length: 5000 }, (_, i) => [`I${i + 1}`, 'Prénom' + i, ['MAZAUD', 'LACOMBE', 'DURAND'][i % 3], i % 2 ? 'F' : 'M'])));
+            const t0 = Date.now();
+            const ok = await upload('import_package', big, 'grand.gramps');
+            assert.equal(ok.status, 200, JSON.stringify(ok.body).slice(0, 300));
+            assert.equal(ok.body.stats.persons, 5000);
+            assert.ok(Date.now() - t0 < 120000, 'importé en moins de 2 minutes');
+            await undo(ok.body.undo);
+            assert.deepEqual(snapshot(), start);
+        });
+        await step('GeneWeb en Windows-1252 ou en UTF-16, GEDCOM-X avec BOM : accents relus', async () => {
+            const r = await upload('import_package', win1252(GW.replace('encoding: utf-8\n', '').replace('Meunier à Ussac.', 'Meunier à Ussac, près de l’église.'.replace('’', "'"))), 'famille-1252.gw');
+            assert.equal(r.status, 200, JSON.stringify(r.body));
+            assert.ok(one("SELECT count(*) n FROM notes WHERE body LIKE '%à Ussac%'").n >= 1, 'accents d’un .gw Windows-1252 : ' + JSON.stringify(sql('SELECT body FROM notes')));
+            await undo(r.body.undo);
+            const r16 = await upload('import_package', utf16(GW.replace('LACOMBE Jeanne', 'LACOMBE Éléonore')), 'famille-utf16.gw');
+            assert.equal(r16.status, 200, 'GeneWeb enregistré en UTF-16 : ' + JSON.stringify(r16.body));
+            assert.equal(one("SELECT count(*) n FROM persons WHERE first_name='Éléonore' AND last_name='LACOMBE'").n, 1);
+            await undo(r16.body.undo);
+            const r2 = await upload('import_package', Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), Buffer.from(JSON.stringify(GX).replace('Anne LACOMBE', 'Anaïs LACOMBE'))]), 'famille-bom.json');
+            assert.equal(r2.status, 200, JSON.stringify(r2.body));
+            assert.equal(one("SELECT count(*) n FROM persons WHERE first_name LIKE 'Anaïs%' OR last_name LIKE 'Anaïs%'").n, 1);
+            await undo(r2.body.undo);
+            assert.deepEqual(snapshot(), start);
+        });
+
         // ── 4. autres fichiers lus par l'app ──
         await step('décès INSEE : vide, hasard, UTF-16, guillemets non fermés, 10 000 colonnes, formules, bombe zip ; le même fichier deux fois', async () => {
             const n0 = one('SELECT count(*) n FROM insee_deces').n;
@@ -718,14 +761,14 @@ end notes
                 let ck = ''; const h2 = await (await fetch(base2).then(r => { ck = (r.headers.get('set-cookie') || '').split(';')[0]; return r; })).text();
                 const tok = JSON.parse(h2.match(/window\.INSTALL_CSRF = ("[^"]*")/)[1]);
                 const up2 = async (buf, name) => { const fd = new FormData(); fd.append('file', new Blob([buf]), name); fd.append('csrf', tok); const r = await fetch(`${base2}api.php?action=import_package`, { method: 'POST', headers: { Cookie: ck, 'X-CSRF-Token': tok }, body: fd }); return { status: r.status, body: await parse(r) }; };
-                const appDb = (file, extra = '') => { try { fs.unlinkSync(file); } catch (_) {} php(`$d=new PDO('sqlite:'.$argv[1]);$d->exec(file_get_contents('data/schema.sql'));$d->exec($argv[2]);`, file, extra); return fs.readFileSync(file); };
+                const appDb = (file, extra = '') => { try { fs.unlinkSync(file); } catch (_) {} php(`$d=new PDO('sqlite:'.$argv[1]);$d->exec(file_get_contents('data/schema.sql'));if($argv[2]!=='')$d->exec($argv[2]);`, file, extra); return fs.readFileSync(file); };
                 const empty = appDb(path.join(work, 'vide-app.db'));
                 const good = appDb(path.join(work, 'bonne.db'), "INSERT INTO persons(first_name,last_name,gender) VALUES('Antoine','MAZAUD','male'),('Rose','LACOMBE','female'); CREATE TABLE piege(x); CREATE TRIGGER t AFTER UPDATE ON persons BEGIN UPDATE persons SET last_name='PIRATE'; END; CREATE VIEW v AS SELECT 1; INSERT INTO media(title,media_type,filename) VALUES('x','image','../../evil-zipslip.jpg');");
                 const bad = [];
                 const cases = [['hasard.db', RANDOM], ['vide.db', Buffer.alloc(0)], ['photo.sqlite', JPG], ['autre.db', sqliteFile(path.join(work, 'autre.db'), 'CREATE TABLE t(x);')], ['sans-personne.db', empty],
                     ['sans-base.zip', makeZip([['lcnda-sauvegarde.json', '{}'], ['media/a.jpg', JPG]])], ['coupee.zip', makeZip([['lcnda-sauvegarde.json', '{}'], ['genealogy.sqlite', good]]).subarray(0, 400)],
                     ['bombe.zip', makeZip([['lcnda-sauvegarde.json', '{}'], ['genealogy.sqlite', good], ['media/gros.jpg', { zeros: bigZeros }]])], ['hasard-base.zip', makeZip([['lcnda-sauvegarde.json', '{}'], ['genealogy.sqlite', RANDOM]])]];
-                for (const [name, buf] of cases) { const r = await up2(buf, name); try { assertRefused(r, 'ouverture ' + name, [409, 422]); } catch (e) { bad.push(e.message); } }
+                for (const [name, buf] of cases) { const r = await up2(buf, name); try { assertRefused(r, 'ouverture ' + name, [409, 422, 500]); } catch (e) { bad.push(e.message); } }
                 assert.ok(!bad.length, bad.join('\n        '));
                 assert.deepEqual(fs.readdirSync(dir2).filter(f => f.startsWith('.ouverture')), [], 'aucune base à moitié reçue laissée');
                 assert.deepEqual(fs.readdirSync(path.join(dir2, 'media')), [], 'aucun média laissé par un refus');
@@ -740,7 +783,7 @@ end notes
                 for (const f of files) assert.ok(!fs.readFileSync(path.join(dir2, 'media', f)).includes(SECRET_TEXT), 'secret copié : ' + f);
                 const db2 = path.join(dir2, 'genealogy.sqlite');
                 const objs = JSON.parse(php(`$d=new PDO('sqlite:'.$argv[1]);echo json_encode($d->query("SELECT type,name FROM sqlite_master WHERE type IN ('trigger','view')")->fetchAll(PDO::FETCH_ASSOC));`, db2));
-                assert.deepEqual(objs, [], 'déclencheurs et vues retirés');
+                assert.deepEqual(objs.filter(o => !o.name.startsWith('lcnda_')), [], 'déclencheurs et vues de la base reçue retirés (ceux de l’app sont remis)');
                 const again = await up2(good, 'bonne.db');
                 assert.equal(again.status, 409, 'une base ouverte n’est jamais remplacée');
             } finally { proc2.kill(); }

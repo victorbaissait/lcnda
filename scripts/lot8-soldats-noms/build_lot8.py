@@ -186,13 +186,10 @@ def nationalite(X, more, out):
         raise SystemExit('citation du JORF introuvable')
     quotes['jorf'] = {'title': 'data.gouv.fr, « JORF : les données de l’édition Lois et décrets du Journal officiel » (ne sont pas reproduits, pour la vie privée)', 'url': jorf['page'], 'quote': q, 'licence': jorf.get('license')}
     fr = more.get('fr', {})
-    for t, rx in [('Croix-Rouge française', r"[^.]*hôpitaux auxiliaires[^.]*\."), ('Union des femmes de France', r"[^.]*hôpita[^.]*(?:1914|guerre)[^.]*\."), ('Service de santé des armées', r"[^.]*(?:1914|Grande Guerre|Première Guerre)[^.]*hôpita[^.]*\.")]:
-        if t in fr:
-            X.raw[t] = fr[t]
-            m = re.search(rx, X.plain(t))
-            if m and 30 < len(m.group(0)) < 500:
-                quotes['hopital'] = X.src(t, m.group(0).strip())
-                break
+    for t in ['Union des femmes de France', 'Optant']:
+        X.raw[t] = fr[t]
+    quotes['hopital'] = X.src('Union des femmes de France', "l'association, au titre d'une des trois sociétés d'assistances, peut créer des hôpitaux auxiliaires destinés à recevoir des malades et blessés de l'armée")
+    quotes['optant'] = X.src('Optant', "Un optant est un Lorrain ou un Alsacien qui a choisi de rester Français soit en restant en France non annexée soit en quittant les territoires cédés par la France en 1871")
     write_json(os.path.join(out, 'l8b-nationalite.json'), {'v': 1, 'built': BUILT, 'source': 'Wikipédia (citations) : traité de Turin, Alsace-Lorraine, Nationalité française, sénatus-consulte de 1865, loi de 1927',
         'source_url': rows[0]['src']['url'], 'licence': WP_LIC, 'licence_url': WP_LIC_URL, 'count': len(rows), 'rows': rows, 'quotes': quotes})
 

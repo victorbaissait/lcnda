@@ -202,7 +202,7 @@
             if (!cat && !days.length && !month) continue;
             const sameDay = !!(r && days.some(x => x.mo === r.mo && x.d === r.d));
             const inPeriod = by !== null && by >= 1792 && by <= 1810;
-            out.push({name: w, cat, days, month, sameDay, inPeriod, strong: sameDay || (inPeriod && (!!cat || !!month))});
+            out.push({name: w, cat, days, month, sameDay, inPeriod, strong: sameDay || (inPeriod && !!month)});
         }
         return out;
     }
@@ -447,7 +447,7 @@
         const day = h.days[0];
         if (h.sameDay) lead = T('Son prénom {n} est le nom du jour de sa naissance dans le calendrier républicain ({d}).', {n: `<b>${esc(h.name)}</b>`, d: esc(repDay(day.mo, day.d))});
         else if (h.month) lead = T('Son prénom {n} est un nom de mois du calendrier républicain.', {n: `<b>${esc(h.name)}</b>`});
-        else if (h.cat) lead = T('{n} est un prénom révolutionnaire.', {n: `<b>${esc(h.name)}</b>`});
+        else if (h.cat) lead = T('{n} est dans la liste des prénoms révolutionnaires de Wikipédia : un prénom peut-être choisi sous la Révolution.', {n: `<b>${esc(h.name)}</b>`});
         else lead = T('{n} est aussi le nom d’un jour du calendrier républicain ({d}) : un prénom peut-être choisi sous la Révolution.', {n: `<b>${esc(h.name)}</b>`, d: esc(repDay(day.mo, day.d))});
         const li = shown.map(x => `<li><b>${esc(x.name)}</b> : ${[x.days.length ? T('jour du calendrier républicain ({d})', {d: x.days.map(y => repDay(y.mo, y.d)).join(', ')}) : '', x.cat ? `${esc(T('prénom révolutionnaire'))} ${link(wpUrl(x.cat.link), '↗')}` : '', x.month ? T('mois du calendrier républicain') : ''].filter(Boolean).join(' · ')}</li>`).join('');
         return row('🇫🇷', lead, srcLink(P.src), more(`<ul class="hist-ul">${li}</ul>${quote(P.src)}`), 'prenoms');
@@ -491,7 +491,8 @@
         const list = nationalityFor(life, N); if (!list.length) return '';
         const x = list[0], r = x.rule;
         const lead = T(r.lead, {p: esc(x.at.place || ''), y: x.at.year ?? ''});
-        const li = list.map(y => `<li><b>${esc(T(y.rule.title))}</b> — ${esc(T(y.rule.rule))}${quote(y.rule.src)}<small class="hist-src">${srcLink(y.rule.src)}</small>${y.rule.see ? `<small class="muted"> ${esc(T(y.rule.see))}</small>` : ''}</li>`).join('');
+        const opt = r2 => (r2.search === 'optants' ? `${quote(N.quotes?.optant)}<small class="hist-src">${srcLink(N.quotes?.optant)}</small><p class="l8b-links">${link(`https://francearchives.gouv.fr/fr/search?q=${encodeURIComponent(`optants ${life.person.last || ''}`.trim())}`, T('🏛 Chercher son nom dans les listes d’optants (FranceArchives) ↗'))}</p>` : '');
+        const li = list.map(y => `<li><b>${esc(T(y.rule.title))}</b> — ${esc(T(y.rule.rule))}${quote(y.rule.src)}<small class="hist-src">${srcLink(y.rule.src)}</small>${y.rule.see ? `<small class="muted"> ${esc(T(y.rule.see))}</small>` : ''}${opt(y.rule)}</li>`).join('');
         const dp = ext.droitPouvoir ? `<p class="muted">${esc(T('Les lois générales de la nationalité (1889, femmes mariées…) sont dans le bloc « ⚖️ Ce que la loi disait ».'))}</p>` : '';
         return row(r.icon || '🛂', lead, srcLink(r.src), more(`<ul class="hist-ul">${li}</ul>${dp}`, list.length > 1 ? list.length : null), 'nationalite');
     }
