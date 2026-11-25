@@ -41,7 +41,8 @@ function cx_schema(PDO $pdo): void
     // 🧺 paniers nommés (« Mariage MAZAUD 1813 ») : un emoji, une couleur, une ligne d'explication ; chaque élément : « ✓ utilisé » et une note
     $has = static fn(string $t): array => array_column($pdo->query("PRAGMA table_info($t)")->fetchAll(PDO::FETCH_ASSOC), 'name');
     $bc = $has('cx_baskets');
-    foreach (['icon' => "TEXT NOT NULL DEFAULT ''", 'color' => "TEXT NOT NULL DEFAULT ''", 'note' => "TEXT NOT NULL DEFAULT ''"] as $c => $def) { if (!in_array($c, $bc, true)) { try { $pdo->exec("ALTER TABLE cx_baskets ADD COLUMN $c $def"); } catch (Throwable $_) {} } }
+    // 🗂 des paniers dans des paniers (parent_id, sans fin de profondeur, jamais de boucle) ; où va ce panier d'habitude (dests_json)
+    foreach (['icon' => "TEXT NOT NULL DEFAULT ''", 'color' => "TEXT NOT NULL DEFAULT ''", 'note' => "TEXT NOT NULL DEFAULT ''", 'parent_id' => 'INTEGER NOT NULL DEFAULT 0', 'dests_json' => "TEXT NOT NULL DEFAULT ''"] as $c => $def) { if (!in_array($c, $bc, true)) { try { $pdo->exec("ALTER TABLE cx_baskets ADD COLUMN $c $def"); } catch (Throwable $_) {} } }
     $ic = $has('cx_basket_items');
     foreach (['done' => 'INTEGER NOT NULL DEFAULT 0', 'note' => "TEXT NOT NULL DEFAULT ''"] as $c => $def) { if (!in_array($c, $ic, true)) { try { $pdo->exec("ALTER TABLE cx_basket_items ADD COLUMN $c $def"); } catch (Throwable $_) {} } }
     $pdo->exec("CREATE TABLE IF NOT EXISTS investigation_item_links (id INTEGER PRIMARY KEY AUTOINCREMENT, investigation_item_id INTEGER NOT NULL, entity_type TEXT NOT NULL DEFAULT 'datum', entity_id INTEGER NOT NULL DEFAULT 0,
@@ -113,8 +114,46 @@ function cx_basket_id(PDO $pdo, mixed $v): int
 function cx_baskets(PDO $pdo): array
 {
     cx_schema($pdo);
-    return array_map(static fn($b) => ['id' => (int) $b['id'], 'name' => (string) $b['name'], 'count' => (int) $b['n'], 'done' => (int) $b['d'], 'icon' => (string) ($b['icon'] ?? ''), 'color' => (string) ($b['color'] ?? ''), 'note' => (string) ($b['note'] ?? ''), 'updated_at' => (string) $b['updated_at']],
-        $pdo->query('SELECT b.*, (SELECT count(*) FROM cx_basket_items i WHERE i.basket_id=b.id) AS n, (SELECT count(*) FROM cx_basket_items i WHERE i.basket_id=b.id AND i.done=1) AS d FROM cx_baskets b ORDER BY b.id')->fetchAll(PDO::FETCH_ASSOC));
+    $rows = $pdo->query('SELECT b.*, (SELECT count(*) FROM cx_basket_items i WHERE i.basket_id=b.id) AS n, (SELECT count(*) FROM cx_basket_items i WHERE i.basket_id=b.id AND i.done=1) AS d FROM cx_baskets b ORDER BY b.name COLLATE NOCASE, b.id')->fetchAll(PDO::FETCH_ASSOC);
+    $by = []; foreach ($rows as $r) { $by[(int) $r['id']] = $r; }
+    $kids = []; foreach ($rows as $r) { $p = (int) ($r['parent_id'] ?? 0); if ($p && isset($by[$p])) { $kids[$p][] = (int) $r['id']; } }
+    $total = static function (int $id, array $seen = []) use (&$total, $by, $kids): int { if (isset($seen[$id])) { return 0; } $seen[$id] = 1; $n = (int) $by[$id]['n']; foreach ($kids[$id] ?? [] as $k) { $n += $total($k, $seen); } return $n; };
+    $path = static function (int $id) use ($by): array { $out = []; $seen = []; while ($id && isset($by[$id]) && !isset($seen[$id])) { $seen[$id] = 1; array_unshift($out, (string) $by[$id]['name']); $p = (int) ($by[$id]['parent_id'] ?? 0); $id = isset($by[$p]) ? $p : 0; } return $out; };
+    // l'ordre de l'arbre : chaque panier suivi de ses sous-paniers
+    $order = []; $walk = static function (int $id) use (&$walk, &$order, $kids): void { if (in_array($id, $order, true)) { return; } $order[] = $id; foreach ($kids[$id] ?? [] as $k) { $walk($k); } };
+    foreach ($rows as $r) { $p = (int) ($r['parent_id'] ?? 0); if (!$p || !isset($by[$p])) { $walk((int) $r['id']); } }
+    foreach ($rows as $r) { if (!in_array((int) $r['id'], $order, true)) { $walk((int) $r['id']); } } // une boucle d'une vieille base : quand même listé
+    return array_map(static function (int $id) use ($by, $total, $path) { $b = $by[$id]; $pa = $path($id);
+        return ['id' => $id, 'name' => (string) $b['name'], 'count' => (int) $b['n'], 'total' => $total($id), 'done' => (int) $b['d'], 'icon' => (string) ($b['icon'] ?? ''), 'color' => (string) ($b['color'] ?? ''), 'note' => (string) ($b['note'] ?? ''),
+            'updated_at' => (string) $b['updated_at'], 'parent_id' => (int) ($b['parent_id'] ?? 0), 'path' => $pa, 'depth' => count($pa) - 1, 'dests' => json_decode((string) ($b['dests_json'] ?? ''), true) ?: []]; }, $order);
+}
+
+/** les sous-paniers d'un panier (tous les niveaux), lui compris */
+function cx_basket_tree_ids(PDO $pdo, int $id): array
+{
+    $all = $pdo->query('SELECT id, parent_id FROM cx_baskets')->fetchAll(PDO::FETCH_ASSOC); $out = [$id]; $grew = true;
+    while ($grew) { $grew = false; foreach ($all as $r) { if (in_array((int) $r['parent_id'], $out, true) && !in_array((int) $r['id'], $out, true)) { $out[] = (int) $r['id']; $grew = true; } } }
+    return $out;
+}
+
+/** mettre un panier dans un autre : jamais dans lui-même ni dans un de ses sous-paniers (pas de boucle) */
+function cx_basket_parent_ok(PDO $pdo, int $id, int $parent): int
+{
+    if (!$parent) { return 0; }
+    $s = $pdo->prepare('SELECT id FROM cx_baskets WHERE id=?'); $s->execute([$parent]); if (!$s->fetchColumn()) { throw new LcndaBadInput('Panier introuvable.'); }
+    if ($id && in_array($parent, cx_basket_tree_ids($pdo, $id), true)) { throw new LcndaBadInput('Un panier ne peut pas aller dans lui-même ni dans un de ses sous-paniers.'); }
+    return $parent;
+}
+/** où va ce panier d'habitude : [{id, label, ctx}] (12 au plus) */
+function cx_dests_json(mixed $v): string
+{
+    $out = [];
+    foreach (array_slice(is_array($v) ? $v : [], 0, 12) as $x) {
+        if (!is_array($x) || !preg_match('/^[a-z0-9_]{1,40}$/', (string) ($x['id'] ?? ''))) { continue; }
+        $ctx = is_array($x['ctx'] ?? null) ? array_filter($x['ctx'], static fn($y) => is_scalar($y)) : null;
+        $out[] = ['id' => (string) $x['id'], 'label' => cx_str($x['label'] ?? '', 160)] + ($ctx ? ['ctx' => array_map(static fn($y) => is_string($y) ? mb_substr($y, 0, 300) : $y, $ctx)] : []);
+    }
+    return $out ? json_encode($out, JSON_UNESCAPED_UNICODE) : '';
 }
 
 /** GET cx_count : le nombre d'éléments (pour la pastille), sans rien créer si la table n'existe pas encore */
@@ -132,7 +171,9 @@ function cx_count(PDO $pdo, array $q): array
 function cx_basket(PDO $pdo, array $q): array
 {
     $bid = cx_basket_id($pdo, $q['basket_id'] ?? 0);
-    $s = $pdo->prepare('SELECT * FROM cx_basket_items WHERE basket_id=? ORDER BY position, id'); $s->execute([$bid]);
+    // tree=1 : aussi les éléments des sous-paniers (chacun avec son basket_id)
+    $ids = (string) ($q['tree'] ?? '') === '1' ? cx_basket_tree_ids($pdo, $bid) : [$bid];
+    $s = $pdo->prepare('SELECT * FROM cx_basket_items WHERE basket_id IN (' . implode(',', array_map('intval', $ids)) . ') ORDER BY basket_id<>?, position, id'); $s->execute([$bid]);
     return ['basket_id' => $bid, 'baskets' => cx_baskets($pdo), 'items' => array_map('cx_row_out', $s->fetchAll(PDO::FETCH_ASSOC))];
 }
 
@@ -548,10 +589,13 @@ function cx_api_post(PDO $pdo, array $d): array
         'basket_remove' => cx_basket_remove($pdo, $d),
         'basket_clear' => cx_basket_remove($pdo, $d, true),
         'basket_restore' => cx_basket_restore($pdo, $d),
-        'basket_new' => (static function () use ($pdo, $d) { cx_schema($pdo); $pdo->prepare('INSERT INTO cx_baskets(name, icon, color, note) VALUES(?,?,?,?)')->execute([cx_str($d['name'] ?? '', 120) ?: 'Panier', cx_str($d['icon'] ?? '', 16), cx_color($d['color'] ?? ''), cx_str($d['note'] ?? '', 300)]); return ['id' => (int) $pdo->lastInsertId(), 'baskets' => cx_baskets($pdo)]; })(),
+        'basket_new' => (static function () use ($pdo, $d) { cx_schema($pdo); $pdo->prepare('INSERT INTO cx_baskets(name, icon, color, note, parent_id, dests_json) VALUES(?,?,?,?,?,?)')->execute([cx_str($d['name'] ?? '', 120) ?: 'Panier', cx_str($d['icon'] ?? '', 16), cx_color($d['color'] ?? ''), cx_str($d['note'] ?? '', 300), cx_basket_parent_ok($pdo, 0, safe_int($d['parent_id'] ?? 0)), cx_dests_json($d['dests'] ?? null)]); return ['id' => (int) $pdo->lastInsertId(), 'baskets' => cx_baskets($pdo)]; })(),
         // ✎ nom, emoji, couleur, une ligne ; → l'avant (pour ↶)
-        'basket_edit' => (static function () use ($pdo, $d) { cx_schema($pdo); $id = cx_basket_id($pdo, $d['basket_id'] ?? 0); $s = $pdo->prepare('SELECT name, icon, color, note FROM cx_baskets WHERE id=?'); $s->execute([$id]); $before = $s->fetch(PDO::FETCH_ASSOC);
-            $pdo->prepare('UPDATE cx_baskets SET name=?, icon=?, color=?, note=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([cx_str($d['name'] ?? '', 120) ?: 'Panier', cx_str($d['icon'] ?? '', 16), cx_color($d['color'] ?? ''), cx_str($d['note'] ?? '', 300), $id]);
+        'basket_edit' => (static function () use ($pdo, $d) { cx_schema($pdo); $id = cx_basket_id($pdo, $d['basket_id'] ?? 0); $s = $pdo->prepare('SELECT name, icon, color, note, parent_id, dests_json FROM cx_baskets WHERE id=?'); $s->execute([$id]); $before = $s->fetch(PDO::FETCH_ASSOC);
+            $before['dests'] = json_decode((string) $before['dests_json'], true) ?: []; unset($before['dests_json']);
+            $parent = array_key_exists('parent_id', $d) ? cx_basket_parent_ok($pdo, $id, safe_int($d['parent_id'])) : (int) $before['parent_id'];
+            $dests = array_key_exists('dests', $d) ? cx_dests_json($d['dests']) : json_encode($before['dests'] ?: null);
+            $pdo->prepare('UPDATE cx_baskets SET name=?, icon=?, color=?, note=?, parent_id=?, dests_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([cx_str($d['name'] ?? '', 120) ?: 'Panier', cx_str($d['icon'] ?? '', 16), cx_color($d['color'] ?? ''), cx_str($d['note'] ?? '', 300), $parent, $dests === 'null' ? '' : $dests, $id]);
             return ['basket_id' => $id, 'before' => $before, 'baskets' => cx_baskets($pdo)]; })(),
         // ⧉ dupliquer : un nouveau panier avec les mêmes éléments
         'basket_duplicate' => (static function () use ($pdo, $d) { cx_schema($pdo); $id = cx_basket_id($pdo, $d['basket_id'] ?? 0); $s = $pdo->prepare('SELECT * FROM cx_baskets WHERE id=?'); $s->execute([$id]); $b = $s->fetch(PDO::FETCH_ASSOC);
@@ -571,18 +615,44 @@ function cx_api_post(PDO $pdo, array $d): array
             $u = $pdo->prepare('UPDATE cx_basket_items SET position=? WHERE id=? AND basket_id=?'); foreach ($ids as $i => $id) { $u->execute([$i + 1, $id, $bid]); }
             return ['before' => $before]; })(),
         'basket_rename' => (static function () use ($pdo, $d) { $pdo->prepare('UPDATE cx_baskets SET name=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([cx_str($d['name'] ?? '', 120) ?: 'Panier', safe_int($d['basket_id'] ?? 0)]); return ['baskets' => cx_baskets($pdo)]; })(),
+        // 🗂 un panier dans un autre (parent_id 0 : tout en haut) ; jamais de boucle → l'avant (pour ↶)
+        'basket_move' => (static function () use ($pdo, $d) { cx_schema($pdo); $id = safe_int($d['basket_id'] ?? 0); $s = $pdo->prepare('SELECT parent_id FROM cx_baskets WHERE id=?'); $s->execute([$id]); $before = $s->fetchColumn();
+            if ($before === false) { throw new LcndaBadInput('Panier introuvable.'); }
+            $pdo->prepare('UPDATE cx_baskets SET parent_id=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([cx_basket_parent_ok($pdo, $id, safe_int($d['parent_id'] ?? 0)), $id]);
+            return ['before' => ['basket_id' => $id, 'parent_id' => (int) $before], 'baskets' => cx_baskets($pdo)]; })(),
+        // des éléments vers un autre panier → l'avant (pour ↶)
+        'item_move' => (static function () use ($pdo, $d) { cx_schema($pdo); $to = cx_basket_id($pdo, $d['basket_id'] ?? 0);
+            $ids = array_values(array_filter(array_map('intval', array_slice(is_array($d['ids'] ?? null) ? $d['ids'] : [], 0, 1000)))); if (!$ids) { return ['before' => []]; }
+            $s = $pdo->prepare('SELECT id, basket_id FROM cx_basket_items WHERE id IN (' . implode(',', $ids) . ')'); $s->execute(); $before = $s->fetchAll(PDO::FETCH_ASSOC);
+            $pos = (int) $pdo->query('SELECT COALESCE(max(position),0) FROM cx_basket_items WHERE basket_id=' . $to)->fetchColumn();
+            $u = $pdo->prepare('UPDATE cx_basket_items SET basket_id=?, position=? WHERE id=?'); foreach ($ids as $id) { $u->execute([$to, ++$pos, $id]); }
+            if (!empty($d['restore'])) { $u2 = $pdo->prepare('UPDATE cx_basket_items SET basket_id=? WHERE id=?'); foreach (is_array($d['restore']) ? $d['restore'] : [] as $r) { if (is_array($r)) { $u2->execute([safe_int($r['basket_id'] ?? 0), safe_int($r['id'] ?? 0)]); } } }
+            $pdo->prepare('UPDATE cx_baskets SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$to]);
+            return ['before' => array_map(static fn($r) => ['id' => (int) $r['id'], 'basket_id' => (int) $r['basket_id']], $before), 'baskets' => cx_baskets($pdo)]; })(),
+        'item_unmove' => (static function () use ($pdo, $d) { cx_schema($pdo); $u = $pdo->prepare('UPDATE cx_basket_items SET basket_id=? WHERE id=?'); foreach (array_slice(is_array($d['before'] ?? null) ? $d['before'] : [], 0, 1000) as $r) { if (is_array($r)) { $u->execute([safe_int($r['basket_id'] ?? 0), safe_int($r['id'] ?? 0)]); } } return ['baskets' => cx_baskets($pdo)]; })(),
+        // 🗑 supprimer un panier ; ses sous-paniers : mode 'up' (remontent d'un niveau) ou 'all' (supprimés aussi) → tout pour ↶
         'basket_delete' => (static function () use ($pdo, $d) {
+            cx_schema($pdo);
             $id = safe_int($d['basket_id'] ?? 0);
             $s = $pdo->prepare('SELECT * FROM cx_baskets WHERE id=?'); $s->execute([$id]); $b = $s->fetch(PDO::FETCH_ASSOC);
             if (!$b) { throw new LcndaBadInput('Panier introuvable.'); }
-            if ((int) $pdo->query('SELECT count(*) FROM cx_baskets')->fetchColumn() < 2) { throw new LcndaBadInput('Il reste au moins un panier.'); }
-            $s = $pdo->prepare('SELECT * FROM cx_basket_items WHERE basket_id=?'); $s->execute([$id]); $rows = $s->fetchAll(PDO::FETCH_ASSOC);
-            $pdo->prepare('DELETE FROM cx_basket_items WHERE basket_id=?')->execute([$id]); $pdo->prepare('DELETE FROM cx_baskets WHERE id=?')->execute([$id]);
-            return ['basket' => $b, 'rows' => $rows, 'baskets' => cx_baskets($pdo)];
+            $ids = ($d['mode'] ?? '') === 'all' ? cx_basket_tree_ids($pdo, $id) : [$id];
+            if ((int) $pdo->query('SELECT count(*) FROM cx_baskets')->fetchColumn() - count($ids) < 1) { throw new LcndaBadInput('Il reste au moins un panier.'); }
+            $in = implode(',', $ids);
+            $all = $pdo->query("SELECT * FROM cx_baskets WHERE id IN ($in)")->fetchAll(PDO::FETCH_ASSOC);
+            $rows = $pdo->query("SELECT * FROM cx_basket_items WHERE basket_id IN ($in)")->fetchAll(PDO::FETCH_ASSOC);
+            $moved = array_map('intval', $pdo->query("SELECT id FROM cx_baskets WHERE parent_id=$id AND id NOT IN ($in)")->fetchAll(PDO::FETCH_COLUMN));
+            if ($moved) { $pdo->prepare('UPDATE cx_baskets SET parent_id=? WHERE id IN (' . implode(',', $moved) . ')')->execute([(int) $b['parent_id']]); }
+            $pdo->exec("DELETE FROM cx_basket_items WHERE basket_id IN ($in)"); $pdo->exec("DELETE FROM cx_baskets WHERE id IN ($in)");
+            return ['basket' => $b, 'baskets_removed' => $all, 'moved' => $moved, 'rows' => $rows, 'baskets' => cx_baskets($pdo)];
         })(),
         'basket_undelete' => (static function () use ($pdo, $d) {
             $b = is_array($d['basket'] ?? null) ? $d['basket'] : [];
-            cx_schema($pdo); $pdo->prepare('INSERT OR IGNORE INTO cx_baskets(id, name, icon, color, note) VALUES(?,?,?,?,?)')->execute([safe_int($b['id'] ?? 0) ?: null, cx_str($b['name'] ?? '', 120) ?: 'Panier', cx_str($b['icon'] ?? '', 16), cx_color($b['color'] ?? ''), cx_str($b['note'] ?? '', 300)]);
+            cx_schema($pdo); $ins = $pdo->prepare('INSERT OR IGNORE INTO cx_baskets(id, name, icon, color, note, parent_id, dests_json) VALUES(?,?,?,?,?,?,?)');
+            $list = is_array($d['baskets_removed'] ?? null) ? $d['baskets_removed'] : [$b];
+            foreach (array_slice($list, 0, 500) as $x) { if (!is_array($x)) { continue; } $ins->execute([safe_int($x['id'] ?? 0) ?: null, cx_str($x['name'] ?? '', 120) ?: 'Panier', cx_str($x['icon'] ?? '', 16), cx_color($x['color'] ?? ''), cx_str($x['note'] ?? '', 300), safe_int($x['parent_id'] ?? 0), cx_dests_json(json_decode((string) ($x['dests_json'] ?? ''), true))]); }
+            $moved = array_values(array_filter(array_map('intval', is_array($d['moved'] ?? null) ? $d['moved'] : [])));
+            if ($moved) { $pdo->prepare('UPDATE cx_baskets SET parent_id=? WHERE id IN (' . implode(',', $moved) . ')')->execute([safe_int($b['id'] ?? 0)]); }
             return cx_basket_restore($pdo, ['rows' => $d['rows'] ?? []]) + ['baskets' => cx_baskets($pdo)];
         })(),
         'inv_receive' => cx_inv_receive($pdo, $d),
