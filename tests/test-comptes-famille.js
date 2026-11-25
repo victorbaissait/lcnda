@@ -55,14 +55,14 @@ function multipart(fields = {}, files = []) {
         assert.match(lib, /const FC_GUEST_ACTIONS = \['state' => 'GET', 'join' => 'POST', 'login' => 'POST', 'logout' => 'POST', 'search' => 'GET', 'person' => 'GET', 'media' => 'GET',\s*'similar' => 'GET', 'mine' => 'GET', 'propose' => 'POST', 'withdraw' => 'POST', 'edit' => 'POST', 'edit_undo' => 'POST'\];/);
         assert.match(lib, /if \(!isset\(FC_GUEST_ACTIONS\[\$action\]\)\) \{ fc_json\(\['error' => 'Refusé\.'\], 403\); \}/);
         assert.match(lib, /if \(\$method === 'POST'\) \{ verify_csrf\(/);
-        assert.match(lib, /password_hash\(fc_prehash\(\$pw\), PASSWORD_DEFAULT\)/);
+        assert.match(lib, /password_hash\(\$p, PASSWORD_ARGON2ID\)/); assert.match(lib, /PASSWORD_BCRYPT, \['cost' => 12\]/);
         assert.match(read('famille.php'), /session_name\('lcnda_famille'\);\s*require __DIR__ \. '\/lib\/bootstrap\.php';/);
         const rl = read('lib/reseau_local.php');
         assert.match(rl, /if \(fc_device_famille_only\(\(string\) \$d\['id'\]\)\) \{/);
         assert.match(rl, /'fc_state', 'fc_props', 'fc_journal', 'fc_count', 'fc_prop_file', 'fc_publish_preview', 'fc_publish_export'\]/);
         assert.match(rl, /const LAN_GUEST_WRITES = \['glock_unlock', 'glock_lock_now', 'glock_touch', 'save_settings'\];/, 'les écritures d’un invité dans api.php : inchangées');
         assert.match(lib, /if \(function_exists\('lan_device'\) && lan_device\(\)\) \{ json_response\(/, 'défense en profondeur : les actions de l’ordinateur principal refusent un appareil invité');
-        assert.match(lib, /const FC_DUMMY_HASH = '\$2y\$10\$[A-Za-z0-9.\/]{53}';/, 'identifiant inconnu : une vraie empreinte, le même temps de calcul');
+        assert.match(lib, /fc_pw_hash\(\$pw\) === '' && false/, 'identifiant inconnu : le même temps de calcul');
     });
 
     const phpPath = findPhp([devBundledPhp()]);
@@ -210,7 +210,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             assert.equal(r.status, 200, r.text()); assert.equal(r.json().login, acc.odile.login);
             const st = await O.state(); assert.equal(st.json().logged, true); assert.equal(st.json().account.role, 'proposer');
             const h = sql('SELECT pw_hash FROM fc_accounts WHERE id=?', acc.odile.id)[0].pw_hash;
-            assert.ok(h.startsWith('$2y$') || h.startsWith('$argon'), h); assert.ok(!h.includes('Odile-Mot'));
+            assert.ok(h.startsWith('$2y$12$') || h.startsWith('$argon2id$'), h); assert.ok(!h.includes('Odile-Mot'));
             await X.state();
             r = await X.post('join', { token: inv.odile.token, password: 'Autre-Mot-2026', password2: 'Autre-Mot-2026' }); assert.equal(r.status, 403, 'une seule fois');
         });

@@ -4559,7 +4559,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         sc('calculator','move','Ouvrir ou fermer la calculette 🧮','Mod+Shift+Y','any',()=>window.LCNDA_EXT?.calculator?.toggle?.(),{menu:true}),
         sc('settings','move','Ouvrir les réglages (Apparence)','Mod+,','global',()=>{state.maintenanceTab='design';setModule('maintenance');},{menu:true}),
         sc('help','move','Afficher la liste des raccourcis','F1','any',()=>openShortcutHelp(),{menu:true}),
-        // 📥 « Prendre depuis… » (heritage-connexions.js) : ⇧⌘O est déjà pris (écran divisé), donc ⌥⌘O / Ctrl+Alt+O, libre partout
+        // 📥 « Prendre depuis… » (heritage-connexions.js) : ⇧⌘O est déjà pris (écran divisé), donc ⌥⌘O (Ctrl+Alt+O sous Windows et Linux), libre partout
         sc('take_from','move','📥 Prendre depuis… (fiches, actes, sources, données, panier)','Mod+Alt+O','global',()=>window.LCNDA_EXT?.connexions?.openTake?.(),{menu:true,when:()=>window.LCNDA_EXT?.connexions?.enabled?.()!==false}),
         sc('edit_person','person','Modifier la fiche ouverte','Mod+E','person',()=>{if(personIsLocked())return toast('Cette fiche est verrouillée.','error');openPersonDialog(state.currentPerson);},{noTyping:true,menu:true}),
         sc('new_person','person','Nouveau… dans l’onglet ouvert (une personne dans Personnes)','Mod+Shift+N','global',()=>runTabShortcut('new'),{menu:true}),

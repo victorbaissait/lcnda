@@ -62,8 +62,6 @@ const FC_FIELD_LABELS = ['first_name' => 'Prénom', 'last_name' => 'Nom', 'occup
 const FC_KINDS = ['fait', 'note', 'photo', 'personne'];
 const FC_RELATIONS = ['enfant', 'conjoint', 'parent'];
 const FC_ERR_LOGIN = 'Identifiant ou mot de passe incorrect.';
-/** une vraie empreinte bcrypt (d'un mot de passe tiré au hasard, oublié) : un identifiant inconnu coûte le même calcul */
-const FC_DUMMY_HASH = '$2y$10$AkrfeRI6XLNypaxp.BLKxO0QhOPoE4ygGT4wZDHn/r5jmetQkbai.';
 
 final class FcRefuse extends RuntimeException
 {
@@ -159,7 +157,13 @@ function fc_login_norm(mixed $v): string
 }
 function fc_pw(mixed $v): string { return is_string($v) ? $v : ''; }
 function fc_prehash(string $pw): string { return base64_encode(hash('sha384', "lcnda-famille\0" . $pw, true)); }
-function fc_pw_hash(string $pw): string { return password_hash(fc_prehash($pw), PASSWORD_DEFAULT); }
+/** Comme le mot de passe de la généalogie (lib/verrou.php) : Argon2id, sinon bcrypt coût 12, après une empreinte SHA-384. */
+function fc_pw_hash(string $pw): string
+{
+    $p = fc_prehash($pw);
+    if (defined('PASSWORD_ARGON2ID')) { try { return password_hash($p, PASSWORD_ARGON2ID); } catch (Throwable $_) {} }
+    return password_hash($p, PASSWORD_BCRYPT, ['cost' => 12]);
+}
 function fc_pw_ok(string $pw, string $hash): bool { return $hash !== '' && password_verify(fc_prehash($pw), $hash); }
 function fc_pw_check_new(string $pw, string $again): void
 {
@@ -633,7 +637,8 @@ function fc_guest_login(PDO $pdo, array $dev, array $p): never
     if ($w = fc_tries_wait($pdo, $keys)) { fc_tries_refuse($w); }
     $pw = fc_pw($p['password'] ?? null);
     // même calcul pour un identifiant inconnu (on n'apprend pas qu'il n'existe pas)
-    $ok = fc_pw_ok($pw, $a ? (string) $a['pw_hash'] : FC_DUMMY_HASH) && $a !== null && strlen($pw) <= 1024;
+    // un identifiant inconnu coûte le même calcul (une empreinte fabriquée puis jetée) : on n'apprend pas qu'il n'existe pas
+    $ok = $a !== null && strlen($pw) <= 1024 ? fc_pw_ok($pw, (string) $a['pw_hash']) : (fc_pw_hash($pw) === '' && false);
     if (!$ok) {
         fc_tries_fail($pdo, $keys);
         if ($a) { fc_journal_add($pdo, $a, 'echec', 0, '', 'mot de passe incorrect'); }

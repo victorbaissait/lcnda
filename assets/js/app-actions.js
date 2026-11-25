@@ -78,7 +78,7 @@
         const d = [...row.querySelectorAll(MORE_DETAILS)].find(x => x.closest(ROW) === row);
         const more = [...row.querySelectorAll('button')].find(b => isMoreBtn(b) && b.closest(ROW) === row && visible(b));
         const btns = [...row.querySelectorAll('button, a[href]')].filter(b => b.closest(ROW) === row && !b.closest('summary, details:not([open]) > :not(summary)') && !isMoreBtn(b) && !b.matches(NOT_ITEM) && visible(b));
-        if (more) { UI._menuPoint = {x: at.x, y: at.y, t: Date.now()}; more.click(); if (UI._menuPoint) UI._menuPoint = null; return true; }
+        if (more) { UI._menuPoint = {x: at.x, y: at.y, t: Date.now(), extras: UI._ctxExtras || []}; more.click(); if (UI._menuPoint) UI._menuPoint = null; return true; }
         let items = itemsOf(btns);
         if (d) { const extra = detailsItems(d); const have = new Set(items.map(i => i.label.toLowerCase())); items = [...items, '-', ...extra.filter(i => !have.has(i.label.toLowerCase()))]; }
         // une ligne qui s'ouvre d'un clic (data-…-open) sans bouton « Ouvrir »

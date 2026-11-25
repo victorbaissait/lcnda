@@ -251,7 +251,7 @@
         /* K14 — le même menu partout : sous un bouton « ⋯ », ou à l'endroit de la souris (clic droit : at = {x, y}, ou anchor = {x, y}).
            items : [{icon, label, help, shortcut, danger, disabled, run}] ; '-' ou null = un trait ; Supprimer (danger) toujours en bas, en rouge. */
         if (anchor && !(anchor instanceof Element)) { at = anchor; anchor = null; }
-        if (!at && UI._menuPoint && Date.now() - UI._menuPoint.t < 800) at = UI._menuPoint; // ⋯ ouvert par un clic droit sur sa ligne
+        if (!at && UI._menuPoint && Date.now() - UI._menuPoint.t < 800) { at = UI._menuPoint; if (UI._menuPoint.extras?.length) items = [...items, '-', ...UI._menuPoint.extras]; } // ⋯ ouvert par un clic droit sur sa ligne (+ 🧺 « Prendre « … » », heritage-connexions.js)
         UI._menuPoint = null;
         if (anchor && !at && openPop && openPop.el._uiFor === anchor) { closePop(); return null; }
         let ghost = null;

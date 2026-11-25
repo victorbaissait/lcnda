@@ -4,7 +4,7 @@
  * Rien n'est calculé au repos : le nombre d'éléments du panier est lu une fois (GET cx_count, après l'affichage), le panier
  * lui-même seulement quand on l'ouvre ; les fenêtres ne cherchent que quand on les ouvre. Rien n'est rangé tout seul :
  * toujours un clic, avec « ↶ Annuler ». Réglages → « 🧺 Panier et connexions » (clé genealogie-connexions) : tout éteindre,
- * un ou plusieurs paniers, clic droit, glisser. Raccourci : ⌥⌘O / Ctrl+Alt+O (« take_from », Réglages → Raccourcis clavier ;
+ * un ou plusieurs paniers, clic droit, glisser. Raccourci : ⌥⌘O (Ctrl+Alt+O sous Windows et Linux ; « take_from », Réglages → Raccourcis clavier ;
  * ⇧⌘O était déjà pris par « Écran divisé : côte à côte ou en haut et en bas »).
  *
  * ─── Comment un module s'inscrit ───────────────────────────────────────────────────────────────────────────────────────
@@ -293,9 +293,9 @@
         draw();
     }
     /** ranger dans une destination ; ce qui a été pris du panier en sort (le reste y reste), un seul « ↶ Annuler » */
-    async function deliver(t, items, {here = false, anchor = null, fromBasket = false, original = null} = {}) {
+    async function deliver(t, items, {here = false, anchor = null, fromBasket = false, original = null, ctx: given = null} = {}) {
         const acc = accepted(t, items);
-        let ctx = here ? hereOf(t) : null;
+        let ctx = given || (here ? hereOf(t) : null);
         try {
             if (!ctx) ctx = t.choose ? await t.choose(acc, anchor) : (hereOf(t) || {});
             if (!ctx) return null;
@@ -365,13 +365,13 @@
             dlg.addEventListener('close', () => { dlg.remove(); if (!answered) { answered = true; res(null); } });
             dlg.querySelector('[data-cx-x]').addEventListener('click', () => answer(null)); dlg.querySelector('[data-cx-cancel]').addEventListener('click', () => answer(null));
             const f = dlg.querySelector('form');
-            const items0 = () => { const sel = f.elements.inv?.value, inv = list.find(i => String(i.id) === sel), s = f.elements.item; f.querySelector('[data-cx-newl]').hidden = sel !== 'new'; if (!s) return;
+            const items0 = () => { const sel = f.elements.inv?.value, inv = list.find(i => String(i.id) === sel), s = f.querySelector('select[name="item"]'); f.querySelector('[data-cx-newl]').hidden = sel !== 'new'; if (!s) return;
                 s.innerHTML = opt(0, items.length > 1 ? T('＋ Une nouvelle piste pour tout') : T('＋ Une nouvelle piste'), true) + (items.length > 1 ? opt('each', T('＋ Une nouvelle piste pour chaque élément'), false) : '') + (inv?.items || []).map(x => opt(x.id, `📌 ${x.title}`, false)).join(''); };
             if (!multiple) { f.elements.inv.addEventListener('change', items0); items0(); }
             f.addEventListener('submit', e => {
                 e.preventDefault();
                 if (multiple) return answer({ids: [...f.querySelectorAll('[name="inv"]:checked')].map(x => Number(x.value)), list});
-                const sel = f.elements.inv.value, it = f.elements.item?.value || '0';
+                const sel = f.elements.inv.value, it = f.querySelector('select[name="item"]')?.value || '0';
                 if (!sel) return;
                 answer(sel === 'new' ? {create: true, title: f.elements.newtitle.value.trim() || newTitle, person_id: personId} : {investigation_id: Number(sel), title: list.find(i => String(i.id) === sel)?.title || '', item_id: it === 'each' ? 0 : Number(it) || 0, mode: it === 'each' ? 'each' : 'one'});
             });
@@ -588,6 +588,8 @@
         if (target.closest('.cx-panel, .cx-modal, .ui-actmenu, input, textarea, select, button, [contenteditable="true"]')) return null;
         const sel = window.getSelection?.(), stext = sel && !sel.isCollapsed ? sel.toString().replace(/\s+/g, ' ').trim() : '';
         let text = stext, el = target, kind = 'text';
+        const own = [...(target.childNodes || [])].filter(n => n.nodeType === 3).map(n => n.textContent).join(' ').replace(/\s+/g, ' ').trim();
+        if (!text && own.length >= 2 && own.length <= 160) { text = own; kind = 'datum'; } // le texte de l'élément lui-même (« 3 février 1978 », sans l'âge en petit)
         if (!text) {
             for (let n = target; n && n !== zone; n = n.parentElement) { const t = (n.innerText || n.textContent || '').replace(/\s+/g, ' ').trim(); if (t && t.length <= 160) { el = n; text = t; } if (!t || t.length > 160) break; }
             kind = 'datum';
@@ -854,7 +856,7 @@
             const pl = await placeByName(name); if (pl?.lat != null) preset.near = {lat: pl.lat, lon: pl.lon, km, title: String(pl.title || name).replace(/\s*\(.*\)$/, '')};
         } else {
             const m = f.match(/ (?:a|dans|sur la commune de) ([a-z][a-z' -]+?)(?: du | de \d| en | entre | au |$)/);
-            const placeField = fields.find(x => x.type === 'place' && /deces|commune/.test(fold(x.key))) || fields.find(x => x.type === 'place');
+            const placeField = fields.find(x => x.type === 'place' && /deces/.test(fold(x.key))) || fields.find(x => x.type === 'place' && /commune/.test(fold(x.key))) || fields.find(x => x.type === 'place');
             if (m && placeField) { const words = q.slice(f.indexOf(m[1])).split(/\s+/).slice(0, m[1].trim().split(/\s+/).length).join(' '); preset.crit.push({key: placeField.key, kind: 'place', value: words.replace(/^(.)/, c => c.toUpperCase())}); }
         }
         return {id: d.id, preset};
@@ -872,7 +874,7 @@
             bar.innerHTML = `<span>📥 ${esc(T('Prendre depuis cette liste pour « {t} » : choisis les critères, puis', {t: back.ctx?.label || T(back.target.label)}))}</span><button type="button" class="button small" data-cx-ltake>📥 ${esc(T('Tout prendre'))}</button><button type="button" class="link-button" data-cx-lx>✕</button>`;
             page.querySelector('.ld-bar')?.before(bar);
             bar.querySelector('[data-cx-lx]').addEventListener('click', () => { listTake = null; bar.remove(); });
-            bar.querySelector('[data-cx-ltake]').addEventListener('click', async () => { const it = await listSet(L); if (!it) return; const r = await deliver(back.target, [it], {}); if (r) { listTake = null; bar.remove(); } });
+            bar.querySelector('[data-cx-ltake]').addEventListener('click', async () => { const it = await listSet(L); if (!it) return; const r = await deliver(back.target, [it], {ctx: back.ctx}); if (r) { listTake = null; bar.remove(); } });
         }
         btn.addEventListener('click', async () => {
             const n = L.total?.() || 0;

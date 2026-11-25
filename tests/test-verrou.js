@@ -50,7 +50,13 @@ const finish = () => { if (failed) { console.error(`\n${failed} test(s) en éche
         const ro = read('router.php'); assert.ok(ro.indexOf('glock_request_blocked()') > 0 && ro.indexOf('glock_request_blocked()') < ro.indexOf('return router_serve_media'));
         // tous les fichiers PHP qu'on peut appeler : ceux de la racine (router.php refuse lib/, data/…) ; les deux pages de présentation n'ont aucun code PHP
         const roots = fs.readdirSync(appRoot).filter(f => f.endsWith('.php')).sort();
-        assert.deepEqual(roots, ['api.php', 'carnet-numerique-des-ancetres-en.php', 'carnet-numerique-des-ancetres.php', 'index.php', 'router.php', 'telecharger.php', 'terrain.php', 'upload.php'], 'inventaire des points d’entrée à revoir');
+        assert.deepEqual(roots, ['api.php', 'carnet-numerique-des-ancetres-en.php', 'carnet-numerique-des-ancetres.php', 'famille.php', 'index.php', 'router.php', 'telecharger.php', 'terrain.php', 'upload.php'], 'inventaire des points d’entrée à revoir');
+        // 👪 famille.php (site familial) : appareil invité signé exigé (jamais la fenêtre principale), liste blanche d'actions, CSRF, et un compte
+        // (identifiant + mot de passe choisi) au lieu du mot de passe de la généalogie ; la généalogie doit en avoir un (lib/reseau_local.php) — essais complets : tests/test-comptes-famille.js
+        const fc = read('lib/comptes_famille.php'), fm = fc.slice(fc.indexOf('function fc_guest_main'), fc.indexOf('\nfunction ', fc.indexOf('function fc_guest_main') + 10));
+        assert.match(read('famille.php'), /fc_guest_main\(\)/);
+        assert.ok(fm.indexOf('fc_device()') >= 0 && fm.indexOf('fc_device()') < fm.indexOf('db()'), 'appareil avant la base');
+        assert.match(fm, /FC_GUEST_ACTIONS\[\$action\]/); assert.match(fm, /verify_csrf\(/); assert.match(fm, /fc_current\(\$pdo, \$dev\)/);
         // 📱 terrain.php (téléphone par le wifi) : jeton d'appareil exigé, liste blanche d'actions, et son propre verrou de la généalogie (mot de passe redemandé, 423) — essais complets : tests/test-telephone-wifi-securite.js
         const tw = read('lib/telephone_wifi.php'), main = tw.slice(tw.indexOf('function tw_phone_main'), tw.indexOf('\nfunction ', tw.indexOf('function tw_phone_main') + 10));
         assert.match(read('terrain.php'), /tw_phone_main\(\)/);

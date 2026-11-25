@@ -85,6 +85,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/veille-synchro.css?v=1">
     <link rel="stylesheet" href="assets/css/pistes-branches-celebres.css?v=1">
     <link rel="stylesheet" href="assets/css/assistant-ia.css?v=1">
+    <link rel="stylesheet" href="assets/css/comptes-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-monde-village.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-voir-village.css?v=1">
     <link rel="stylesheet" href="assets/css/lot9-sons-enfance.css?v=1">
@@ -1706,6 +1707,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=2" defer></script>
 <script src="assets/js/app-a-trier.js?v=1" defer></script>
+<script src="assets/js/heritage-comptes-famille.js?v=1" defer></script>
 <script src="assets/js/app-htr-correction.js?v=2" defer></script>
 <script src="assets/js/app-lignes-alignement.js?v=2" defer></script>
 <script>
