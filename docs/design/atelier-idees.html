@@ -1,0 +1,430 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atelier : six idées</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--parch:#efe3c6;--parch-ink:#3b2b14;--dim:rgba(20,14,4,.62)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--parch:#d9c9a3;--dim:rgba(0,0,0,.66)}}
+:root[data-theme="dark"]{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--parch:#d9c9a3;--dim:rgba(0,0,0,.66)}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45;overflow-wrap:anywhere}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:34px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle;color:var(--ink)}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.s{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.m{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.badge.g{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px 26px;align-items:start}
+.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0;font-size:13.5px}
+.case h3{margin:0 0 8px;font-size:16px}
+.case ul{margin:0 0 10px;padding-left:18px}.case li{margin:0 0 5px}
+.lo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin:10px 0 0}
+.lo div{border:1.5px solid var(--line2);padding:7px 9px;font-size:12.5px}
+.lo div b{display:block;font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.lo .here{border-color:var(--green);background:var(--green-bg)}.lo .here b{color:var(--green)}
+.lo .net{border-color:var(--yel);background:var(--yel-bg)}.lo .net b{color:var(--yel-ink)}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:10px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap;cursor:pointer}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.btn.on{background:var(--ink);color:var(--paper)}
+.btn[disabled]{opacity:.45;cursor:default}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.input{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;background:var(--paper);min-height:30px;display:flex;align-items:center;color:var(--ink);min-width:0;flex:1}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.vio{border-color:var(--vio);background:var(--vio-bg);color:var(--vio)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.screen{border:2px solid var(--ink);background:var(--paper);min-width:0;box-shadow:6px 6px 0 var(--shadow)}
+.screen .bar{background:var(--bar);color:var(--bar-ink);padding:7px 12px;font:700 13px system-ui;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.screen .bar .f{background:#2a2d33;border:1px solid #444;padding:3px 8px;font-weight:500;font-size:12px;color:#eee;min-width:0}
+.screen .bar .sp{flex:1}
+.screen .bar .nav{border:1px solid #666;background:#22252b;color:#fff;padding:3px 8px;font:700 12px system-ui;cursor:pointer}
+.screen .bar .nav.hi{background:var(--blue);border-color:var(--blue)}
+.screen .bd{padding:12px}
+.img{width:100%;height:auto;display:block;border:1.5px solid var(--line2)}
+.ed{border:1.5px solid var(--line2);font:13.5px/1.75 Georgia,serif;padding:6px 0;background:var(--paper)}
+.ed .l{display:flex;align-items:flex-start;padding-right:8px;cursor:pointer}
+.ed .l .n{flex:none;width:34px;text-align:right;padding-right:8px;font:11px/2.1 ui-monospace,monospace;color:var(--soft);border-left:4px solid var(--c)}
+.ed .l .t{flex:1;min-width:0}
+.ed .l.cur{background:color-mix(in srgb,var(--c) 14%,transparent)}
+.tx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.tx>*{min-width:0}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{text-align:left;font:800 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);border-bottom:2px solid var(--ink);padding:5px 6px}
+.tbl td{border-bottom:1px solid var(--line);padding:7px 6px;vertical-align:top}
+.prog{height:9px;background:var(--grey-bg);border:1.5px solid var(--line2);position:relative;min-width:60px}
+.prog i{position:absolute;inset:0 auto 0 0;background:var(--green)}
+.prog.y i{background:var(--yel)}
+.acc{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 8px;align-items:center;font-size:12.5px;margin-top:6px}
+.acc .prog{height:14px}
+.res{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line2);padding:7px 8px;margin:6px 0;cursor:pointer;background:var(--paper);width:100%;text-align:left;color:var(--ink);font:inherit}
+.res:hover{border-color:var(--blue)}
+.res svg{flex:none;width:200px;max-width:45%;height:auto;border:1px solid var(--line2)}
+.res .w{flex:1;min-width:0;font-size:12.5px}
+.res .w b{display:block;font-size:13px}
+.res.var{border-style:dashed}
+mark{background:#ffe066;color:#000;padding:0 1px}
+.ab{border-bottom:1.5px dotted var(--vio);color:var(--vio)}
+.tabs{display:inline-flex;border:2px solid var(--ink)}
+.tabs button{border:0;background:var(--paper);color:var(--ink);font:700 12.5px system-ui;padding:5px 10px;cursor:pointer}
+.tabs button+button{border-left:2px solid var(--ink)}
+.tabs button.on{background:var(--ink);color:var(--paper)}
+.layer{border:1.5px solid var(--line2);padding:8px 10px;font:14px/1.75 Georgia,serif;min-width:0}
+.layer h4{margin:0 0 4px;font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.thumbs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 6px}
+.thumbs span{flex:none;width:54px;height:70px;border:1.5px solid var(--line2);background:var(--parch);display:flex;align-items:flex-end;justify-content:center;font:700 10px system-ui;color:var(--parch-ink);padding-bottom:3px}
+.thumbs span.on{border:3px solid var(--blue)}
+.fld{display:grid;grid-template-columns:110px minmax(0,1fr);gap:5px 8px;font-size:12.5px;align-items:center;margin-top:8px}
+.fld .lab{color:var(--soft);font-weight:700}
+.fld .v{border:1.5px solid var(--line2);padding:3px 7px;min-width:0}
+.fld .v.auto{border-color:var(--green);background:var(--green-bg)}
+.carry{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.qq{background:var(--paper);border:2px solid var(--ink);padding:12px 14px;margin:12px 0;box-shadow:4px 4px 0 var(--shadow);max-width:1000px}
+.qq h3{margin:0 0 6px;font-size:15px}
+.qq .opt{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:4px 0}
+.qq .reco{font-size:13px;margin-top:8px;border-left:4px solid var(--green);background:var(--green-bg);padding:6px 10px}
+.order{counter-reset:o;list-style:none;padding:0;margin:0;max-width:1000px}
+.order li{counter-increment:o;display:flex;gap:10px;align-items:flex-start;background:var(--paper);border:2px solid var(--ink);padding:9px 12px;margin:0 0 8px;font-size:13.5px}
+.order li::before{content:counter(o);flex:none;width:26px;height:26px;background:var(--blue);color:#fff;font:800 14px/26px system-ui;text-align:center}
+.order li span{min-width:0}
+.kbd{font:700 11px ui-monospace,monospace;border:1.5px solid var(--line2);border-bottom-width:3px;padding:0 5px;background:var(--grey-bg)}
+.soon{opacity:.6}
+@media (max-width:820px){.grid,.tx,.lo{grid-template-columns:minmax(0,1fr)}body{padding:16px}.res svg{max-width:40%}.fld{grid-template-columns:90px minmax(0,1fr)}.tbl .hide-s{display:none}}
+</style></head><body><div class="wrap">
+
+<h1>📜 Atelier de transcription : six idées approuvées (35 à 40)</h1>
+<p class="sub">Maquette à valider avant de coder. Chaque idée : à quoi elle ressemble, comment elle marche, ce qui reste sur l'ordinateur et ce qui passe par Internet, et l'effort. Les éléments ajoutés restent discrets : un bouton ou une petite bande, le reste s'ouvre à la demande. Noms inventés (MAZAUD, LACOMBE, DURAND).</p>
+
+<div class="simple">
+<p><b>En bref :</b></p>
+<p>🎓 <b>35. Entraîner sur mes lignes relues</b> : la lecture rapide (Kraken) apprend la main d'un curé ou d'un notaire à partir des lignes déjà relues. Tout sur l'ordinateur.</p>
+<p>🔎 <b>36. Chercher dans toutes les transcriptions</b> : « MAZAUD » → chaque résultat montre le morceau d'image de sa ligne ; un clic ouvre l'acte à cette ligne.</p>
+<p>⏭ <b>37. Acte suivant / Vue suivante</b> : dans la barre de l'Atelier ; la commune, les années, la cote et la main sont reprises.</p>
+<p>🔤 <b>38. Texte fidèle et texte modernisé</b> : deux couches, le texte fidèle reste la référence.</p>
+<p>📏 <b>39. Règle de lecture</b> : une bande qui suit la ligne en cours sur l'image et assombrit le reste.</p>
+<p>🌐 <b>40. Ouvrir une vue des Archives (IIIF)</b> : coller l'adresse officielle, choisir la vue, seule cette image est téléchargée, avec « ↗ source » et la cote.</p>
+</div>
+
+<div class="toc"><a href="#i35"><b>35</b>🎓 Entraîner</a><a href="#i36"><b>36</b>🔎 Chercher</a><a href="#i37"><b>37</b>⏭ Suivant</a><a href="#i38"><b>38</b>🔤 Deux couches</a><a href="#i39"><b>39</b>📏 Règle</a><a href="#i40"><b>40</b>🌐 IIIF</a><a href="#q"><b>?</b>Questions et ordre</a></div>
+
+<!-- ═════════════ 35 ═════════════ -->
+<div class="part" id="i35">Idée 35 <span class="badge g">gros</span></div><h2>🎓 « Entraîner sur mes lignes relues »</h2>
+<p class="sub">Une fenêtre ouverte depuis « ✍ Écriture à la main → 🎓 Entraîner… » (et une phrase discrète après une relecture : « 214 lignes relues de cette main : tu peux entraîner la lecture »). Clique une main pour voir son détail.</p>
+<div class="grid">
+  <div class="screen">
+    <div class="bar">🎓 Entraîner la lecture sur mes lignes relues<span class="sp"></span><span class="mini" style="color:#aaa">💻 sur cet ordinateur</span></div>
+    <div class="bd">
+      <table class="tbl" id="hands">
+        <thead><tr><th>Main</th><th class="hide-s">Registre</th><th>Lignes relues</th><th></th></tr></thead>
+        <tbody>
+        <tr data-h="0" style="cursor:pointer;background:var(--blue-bg)"><td><b>Curé J. LACOMBE</b></td><td class="hide-s">BMS Treignac 1780-1792</td><td><b>214</b> / 150 conseillées<div class="prog"><i style="width:100%"></i></div></td><td><span class="pill ok">✓ prêt</span></td></tr>
+        <tr data-h="1" style="cursor:pointer"><td><b>Notaire P. DURAND</b></td><td class="hide-s">3 E 1234 (1801-1810)</td><td><b>62</b> / 150 conseillées<div class="prog y"><i style="width:41%"></i></div></td><td><span class="pill q">encore 88</span></td></tr>
+        <tr data-h="2" style="cursor:pointer"><td><b>Main inconnue</b></td><td class="hide-s">NMD Chamberet 1823</td><td><b>9</b></td><td><span class="pill">« Main » à remplir</span></td></tr>
+        </tbody>
+      </table>
+      <div id="handDetail" style="margin-top:12px"></div>
+    </div>
+  </div>
+  <div class="case"><h3>Comment ça marche</h3>
+    <ul>
+      <li>Une ligne <b>relue</b> (👁 Relire ligne à ligne, déjà gardé avec l'acte) = sa zone sur l'image + son texte juste. Les lignes sont regroupées par <b>main</b> (nouveau champ court de l'acte, repris d'un acte à l'autre, voir 37) et par registre.</li>
+      <li>À partir de <b>150 lignes</b> conseillées (on peut essayer dès 50), « 🎓 Entraîner » affine le modèle de lecture actuel sur ces lignes. <b>1 ligne sur 10 est mise de côté</b> et jamais montrée pendant l'entraînement : elle sert à mesurer avant / après.</li>
+      <li>L'avancée se voit (passe 7 / 30, temps restant), on peut arrêter : le meilleur état atteint est gardé. Le modèle obtenu s'appelle « Main du curé LACOMBE ».</li>
+      <li>On choisit ensuite <b>quel modèle lire pour chaque registre</b> ; « ✨ Lire l'acte » l'utilise tout seul. Le modèle de départ reste toujours là.</li>
+    </ul>
+    <div class="lo"><div class="here"><b>Sur l'ordinateur</b>Les images, les lignes, l'entraînement (Kraken, déjà installé pour la lecture rapide), le modèle obtenu.</div><div class="net"><b>Par Internet</b>Rien. (Le modèle de départ est déjà téléchargé.)</div></div>
+    <p class="note">Côté code : <code>ketos train</code> (fine-tune depuis le <code>.mlmodel</code> installé), les lignes extraites des zones et de <code>data.reviewed</code>, en tâche de fond comme l'installation (<code>lib/htr_setup.php</code>). Long sur un ordinateur sans carte graphique : 20 min à 1 h pour 200 lignes, à dire avant de lancer.</p>
+  </div>
+</div>
+
+<!-- ═════════════ 36 ═════════════ -->
+<div class="part" id="i36">Idée 36 <span class="badge m">moyen</span></div><h2>🔎 Chercher dans toutes les transcriptions, avec la ligne sur l'image</h2>
+<p class="sub">Un champ en haut de « Transcriptions d'actes ». Coche « ≈ orthographes voisines » pour voir les variantes ; clique un résultat.</p>
+<div class="grid">
+  <div class="screen">
+    <div class="bar">📜 Transcriptions d'actes<span class="sp"></span><span class="f">128 actes · 3 410 lignes</span></div>
+    <div class="bd">
+      <div class="row"><span class="input">🔎 MAZAUD</span><button type="button" class="btn small" id="fuzzy"><span class="cb" id="fuzzyCb"></span> ≈ orthographes voisines</button></div>
+      <p class="mini" id="resCount" style="margin:8px 0 2px">3 lignes dans 3 actes</p>
+      <div id="results">
+        <button type="button" class="res" data-go="Baptême de Jean MAZAUD · ligne 3"><svg viewBox="0 0 300 40" aria-hidden="true"><rect width="300" height="40" fill="var(--parch)"/><rect x="104" y="6" width="74" height="28" fill="rgba(255,224,102,.55)" stroke="#d4a800" stroke-width="2"/><text x="8" y="27" font-family="'Brush Script MT','Segoe Script',cursive" font-style="italic" font-size="19" fill="var(--parch-ink)">fils de Pierre Mazaud et de</text></svg><span class="w"><b>Baptême de Jean MAZAUD</b>12 nov. 1787 · Treignac · ligne 3<br>« fils légitime de Pierre <mark>Mazaud</mark> et de… »</span></button>
+        <button type="button" class="res" data-go="Acte de notoriété de Gaspard MAZAUD · ligne 3"><svg viewBox="0 0 300 40" aria-hidden="true"><rect width="300" height="40" fill="var(--parch)"/><rect x="146" y="6" width="76" height="28" fill="rgba(255,224,102,.55)" stroke="#d4a800" stroke-width="2"/><text x="8" y="27" font-family="'Brush Script MT','Segoe Script',cursive" font-style="italic" font-size="19" fill="var(--parch-ink)">a comparu Gaspard Mazaud,</text></svg><span class="w"><b>Acte de notoriété de Gaspard MAZAUD</b>12 oct. 1813 · Treignac · ligne 3<br>« a comparu Gaspard <mark>Mazaud</mark>, cultivateur »</span></button>
+        <button type="button" class="res" data-go="Mariage DURAND × LACOMBE · ligne 9"><svg viewBox="0 0 300 40" aria-hidden="true"><rect width="300" height="40" fill="var(--parch)"/><rect x="118" y="6" width="74" height="28" fill="rgba(255,224,102,.55)" stroke="#d4a800" stroke-width="2"/><text x="8" y="27" font-family="'Brush Script MT','Segoe Script',cursive" font-style="italic" font-size="19" fill="var(--parch-ink)">témoins Léonard Mazaud oncle</text></svg><span class="w"><b>Mariage DURAND × LACOMBE</b>3 févr. 1822 · Chamberet · ligne 9<br>« témoins Léonard <mark>Mazaud</mark>, oncle… »</span></button>
+        <div id="variants" hidden>
+          <button type="button" class="res var" data-go="Sépulture d'Anne MAZEAUD · ligne 2"><svg viewBox="0 0 300 40" aria-hidden="true"><rect width="300" height="40" fill="var(--parch)"/><rect x="98" y="6" width="84" height="28" fill="rgba(255,224,102,.35)" stroke="#d4a800" stroke-width="2" stroke-dasharray="4 3"/><text x="8" y="27" font-family="'Brush Script MT','Segoe Script',cursive" font-style="italic" font-size="19" fill="var(--parch-ink)">a été inhumée Anne Mazeaud</text></svg><span class="w"><b>Sépulture d'Anne MAZEAUD</b>4 mars 1789 · Treignac · ligne 2<br>« Anne <mark>Mazeaud</mark> » <span class="pill">≈ Mazeaud</span></span></button>
+          <button type="button" class="res var" data-go="Baptême de Marie LACOMBE · ligne 6"><svg viewBox="0 0 300 40" aria-hidden="true"><rect width="300" height="40" fill="var(--parch)"/><rect x="118" y="6" width="72" height="28" fill="rgba(255,224,102,.35)" stroke="#d4a800" stroke-width="2" stroke-dasharray="4 3"/><text x="8" y="27" font-family="'Brush Script MT','Segoe Script',cursive" font-style="italic" font-size="19" fill="var(--parch-ink)">marraine Jeanne Mazaut sa</text></svg><span class="w"><b>Baptême de Marie LACOMBE</b>21 juil. 1790 · Treignac · ligne 6<br>« Jeanne <mark>Mazaut</mark> » <span class="pill">≈ Mazaut</span></span></button>
+        </div>
+      </div>
+      <div class="msg" id="goMsg" hidden></div>
+      <p class="mini soon" style="margin:10px 0 0">🔮 <b>Bientôt</b> : chercher aussi dans les pages <b>pas encore transcrites</b> (repérage du mot sur l'image). <span class="badge have">bientôt</span></p>
+    </div>
+  </div>
+  <div class="case"><h3>Comment ça marche</h3>
+    <ul>
+      <li>À chaque enregistrement, le texte de l'acte est rangé <b>ligne par ligne</b> dans un index de recherche (avec le numéro de ligne et sa zone, le lien ligne ↔ zone existe déjà).</li>
+      <li>Chaque résultat montre <b>le morceau d'image de la ligne</b> (recadré dans la zone, mis en petite vignette), le mot surligné, la date et la commune de l'acte.</li>
+      <li>Un clic ouvre l'Atelier <b>sur cette ligne</b> : curseur sur le mot, la bande de la ligne marquée sur l'image (et la règle de lecture, idée 39, si elle est allumée).</li>
+      <li><b>≈ orthographes voisines</b> : Mazaud, Mazeaud, Mazaut, Masaud… (mêmes rapprochements que 🪄 Corrections : u/n, s/z, -aud/-eaud/-aut). Les variantes ont un cadre pointillé. Avec l'idée 38, la recherche regarde aussi le texte modernisé.</li>
+    </ul>
+    <div class="lo"><div class="here"><b>Sur l'ordinateur</b>Tout : l'index (SQLite FTS5, déjà utilisé pour chercher les personnes), les vignettes.</div><div class="net"><b>Par Internet</b>Rien.</div></div>
+    <p class="note">« Bientôt » : le repérage de mots sur des pages non transcrites demande une lecture préalable de toute la page (Kraken ou IA) ; à prévoir après l'idée 35.</p>
+  </div>
+</div>
+
+<!-- ═════════════ 37 ═════════════ -->
+<div class="part" id="i37">Idée 37 <span class="badge m">moyen</span></div><h2>⏭ « Acte suivant » et « Vue suivante » du même registre</h2>
+<p class="sub">Deux boutons de plus dans la barre de l'Atelier, seulement quand l'acte vient d'un registre ou d'un recueil. Clique « Acte suivant » ou « Vue suivante → ».</p>
+<div class="grid">
+  <div class="screen">
+    <div class="bar">📜 <span class="f" id="navTitle">Baptême de Jean MAZAUD</span><span class="f">BMS Treignac · vue <b id="navVue">139</b> / 268 · acte <b id="navActe">2</b></span><span class="sp"></span>
+      <button type="button" class="nav" id="navPrev" title="Acte précédent">◀</button><button type="button" class="nav hi" id="navNext">➕ Acte suivant</button><button type="button" class="nav" id="navView">Vue suivante →</button></div>
+    <div class="bd">
+      <div class="tx">
+        <svg class="img" viewBox="0 0 300 240" role="img" aria-label="Vue du registre avec les zones des actes">
+          <rect width="300" height="240" fill="var(--parch)"/>
+          <g id="navZones" fill="none" stroke-width="2"><rect x="12" y="10" width="276" height="62" stroke="#2f9e44"/><rect x="12" y="78" width="276" height="70" stroke="#e8590c" stroke-width="3.5"/></g>
+          <rect id="navNew" x="12" y="154" width="276" height="74" fill="rgba(5,93,255,.12)" stroke="#055dff" stroke-width="2" stroke-dasharray="6 4" opacity="0"/>
+          <g font-family="'Brush Script MT','Segoe Script',cursive" font-style="italic" font-size="14" fill="var(--parch-ink)"><text x="20" y="32">Le neuf novembre a été baptisé…</text><text x="20" y="52">signé Lacombe curé</text><text x="20" y="100">Le douze du mois de 9bre a été bap.</text><text x="20" y="120">Jean fils lég. de Pierre Mazaud…</text><text x="20" y="176">Le quinze dud. mois a été inhumé…</text><text x="20" y="196">Léonard Durand âgé de…</text></g>
+          <text id="navNewLab" x="20" y="222" font-family="system-ui" font-size="11" font-weight="700" fill="#055dff" opacity="0">nouvel acte : sous la dernière zone</text>
+        </svg>
+        <div>
+          <div class="fld">
+            <span class="lab">Commune</span><span class="v auto">Treignac</span>
+            <span class="lab">Registre</span><span class="v auto">BMS 1780-1792</span>
+            <span class="lab">Cote</span><span class="v auto">3 E 271/4</span>
+            <span class="lab">Vue</span><span class="v auto" id="fVue">139 / 268</span>
+            <span class="lab">Main</span><span class="v auto">Curé J. LACOMBE</span>
+            <span class="lab">Type</span><span class="v" id="fType">Baptême</span>
+            <span class="lab">Date</span><span class="v" id="fDate">12 nov. 1787</span>
+          </div>
+          <p class="mini" style="margin:8px 0 0"><span class="pill ok">vert</span> = repris du registre.</p>
+        </div>
+      </div>
+      <div class="msg" id="navMsg">Les champs en vert sont ceux du registre : ils seront repris par « Acte suivant » et « Vue suivante ».</div>
+    </div>
+  </div>
+  <div class="case"><h3>Comment ça marche</h3>
+    <ul>
+      <li><b>➕ Acte suivant</b> (même vue) : crée l'acte d'après, prêt à tracer sa zone <b>sous la dernière zone</b>. Repris : commune, registre, cote, vue, main, langue. Proposé : le même type et l'année (le jour reste vide).</li>
+      <li><b>Vue suivante →</b> : même registre, vue + 1. L'image vient de la page suivante du recueil ; si le recueil vient d'un manifeste IIIF (idée 40), elle est téléchargée à ce moment-là.</li>
+      <li><b>◀</b> revient à l'acte d'avant, sans rien perdre (enregistrement automatique déjà là). Raccourcis : <span class="kbd">Alt</span>+<span class="kbd">→</span> acte suivant, <span class="kbd">Alt</span>+<span class="kbd">⇧</span>+<span class="kbd">→</span> vue suivante.</li>
+      <li>Si l'acte n'a pas de registre (photo isolée), les boutons ne s'affichent pas : rien de plus à l'écran.</li>
+    </ul>
+    <div class="lo"><div class="here"><b>Sur l'ordinateur</b>Tout, quand les vues sont déjà dans le recueil.</div><div class="net"><b>Par Internet</b>Seulement l'image de la vue suivante, si le registre vient d'une adresse IIIF.</div></div>
+    <p class="note">On s'appuie sur ce qui existe : la reconnaissance de la source (commune, registre, années, cote, vue n / N : <code>sourceGuess()</code> dans <code>heritage-transcribe-acte-core.js</code>) et les recueils (une vue par page).</p>
+  </div>
+</div>
+
+<!-- ═════════════ 38 ═════════════ -->
+<div class="part" id="i38">Idée 38 <span class="badge m">moyen</span></div><h2>🔤 Deux couches de texte : fidèle et modernisée</h2>
+<p class="sub">Un petit sélecteur au-dessus du texte. Essaie les trois positions. Le texte fidèle reste la référence ; la version modernisée est une aide.</p>
+<div class="grid">
+  <div class="screen">
+    <div class="bar">📜 <span class="f">Baptême de Jean MAZAUD</span><span class="f">12 nov. 1787</span><span class="sp"></span><span class="mini" style="color:#aaa">✓ Enregistré</span></div>
+    <div class="bd">
+      <div class="row" style="margin-bottom:10px"><div class="tabs" id="layTabs"><button type="button" class="on" data-l="f">📜 Fidèle</button><button type="button" data-l="m">🔤 Modernisée</button><button type="button" data-l="b">◫ Côte à côte</button></div></div>
+      <div class="tx" id="layers">
+        <div class="layer" id="layF"><h4>📜 Fidèle <span class="pill blue">référence</span></h4>L'an mil ſept cent quatre vingt ſept et le douze du mois de 9<sup>bre</sup> a été bap. Jean fils lég. de Pierre Mazaud lab<sup>r</sup> et de Marie Lacombe ſa f<sup>e</sup>, parrain Jean Durand, marraine Anne Mazaud qui n'ont ſceu ſigner.</div>
+        <div class="layer" id="layM" hidden><h4>🔤 Modernisée <span class="pill vio">🤖 proposée · relue</span></h4>L'an mille sept cent quatre-vingt-sept, le douze du mois de <span class="ab" title="9bre">novembre</span>, a été <span class="ab" title="bap.">baptisé</span> Jean, fils <span class="ab" title="lég.">légitime</span> de Pierre MAZAUD, <span class="ab" title="labr">laboureur</span>, et de Marie LACOMBE, sa <span class="ab" title="fe">femme</span> ; parrain Jean DURAND, marraine Anne MAZAUD, qui n'ont su signer.</div>
+      </div>
+      <div class="row" id="layActions" style="margin-top:10px"><span class="btn small">📖 Développer les abréviations</span><span class="btn small">🤖 Proposer la version modernisée</span></div>
+      <p class="mini" style="margin:8px 0 0">Mots en violet pointillé = développés ou modernisés ; le survol montre la forme d'origine.</p>
+    </div>
+  </div>
+  <div class="case"><h3>Comment ça marche</h3>
+    <ul>
+      <li><b>Fidèle</b> = le texte tel qu'écrit (ſ, 9<sup>bre</sup>, abréviations) : c'est le texte de l'acte aujourd'hui, il ne change pas.</li>
+      <li><b>Modernisée</b> = orthographe actuelle, abréviations développées, noms en capitales. Deux façons de la remplir : <b>📖 Développer les abréviations</b> (sans IA, avec la liste de l'Aide à la lecture) ou <b>🤖 Proposer</b> (l'IA locale, la même que la lecture approfondie). Toujours une <b>proposition</b> à relire.</li>
+      <li><b>Côte à côte</b> : ligne pour ligne, pour vérifier. Si le texte fidèle change ensuite, la ligne modernisée correspondante est marquée « à revoir ».</li>
+      <li>La recherche (idée 36) regarde les deux ; l'export et la citation gardent le fidèle.</li>
+    </ul>
+    <div class="lo"><div class="here"><b>Sur l'ordinateur</b>Les deux textes, le développement des abréviations, l'IA locale (Ollama, déjà utilisée pour la lecture approfondie).</div><div class="net"><b>Par Internet</b>Rien. (Seulement si l'utilisateur a choisi lui-même une IA en ligne dans les réglages.)</div></div>
+  </div>
+</div>
+
+<!-- ═════════════ 39 ═════════════ -->
+<div class="part" id="i39">Idée 39 <span class="badge s">petit</span></div><h2>📏 Règle de lecture qui suit la ligne</h2>
+<p class="sub">Un bouton 📏 dans la barre de l'image. Clique une ligne du texte, ou mets le curseur sur l'image et utilise <span class="kbd">↑</span> <span class="kbd">↓</span> : la bande suit.</p>
+<div class="grid">
+  <div class="screen">
+    <div class="bar">📜 <span class="f">Mariage DURAND × LACOMBE</span><span class="sp"></span><span class="f">💾 Enregistrer</span></div>
+    <div class="bd">
+      <div class="row mini" style="margin-bottom:6px"><span class="pill">✋</span><span class="pill">▭ Zone</span><span class="pill">🔍</span><span class="pill">🎚️ Mieux voir</span><button type="button" class="btn small on" id="rulerBtn" aria-pressed="true">📏 Règle</button><span>assombrir <span class="pill">━━●━</span></span></div>
+      <div class="tx">
+        <svg class="img" id="rulerImg" tabindex="0" viewBox="0 0 400 300" role="img" aria-label="Image de l'acte avec la règle de lecture ; flèches haut et bas pour la déplacer">
+          <rect width="400" height="300" fill="var(--parch)"/>
+          <g font-family="'Brush Script MT','Segoe Script',cursive" font-style="italic" font-size="17" fill="var(--parch-ink)">
+            <text x="16" y="36">L'an mil huit cent vingt deux le trois</text>
+            <text x="16" y="76">février, devant nous maire de Chamberet</text>
+            <text x="16" y="116">ont comparu Léonard Durand, tisserand,</text>
+            <text x="16" y="156">fils majeur de feu Jean Durand et de</text>
+            <text x="16" y="196">Anne Mazaud, et Marie Lacombe, fille</text>
+            <text x="16" y="236">mineure de Pierre Lacombe et de…</text>
+          </g>
+          <path id="rulerDim" fill="var(--dim)" fill-rule="evenodd" d=""/>
+          <rect id="rulerBand" x="2" y="0" width="396" height="38" fill="none" stroke="#055dff" stroke-width="2"/>
+        </svg>
+        <div class="ed" id="rulerEd"></div>
+      </div>
+    </div>
+  </div>
+  <div class="case"><h3>Comment ça marche</h3>
+    <ul>
+      <li>Allumée, la règle <b>assombrit toute l'image sauf la ligne en cours</b> (sa zone, un peu agrandie en haut et en bas pour voir les jambages).</li>
+      <li>Elle <b>suit le curseur du texte</b> : Entrée en fin de ligne → elle descend. Sur l'image, <span class="kbd">↑</span> <span class="kbd">↓</span> la déplacent et mettent le curseur sur la ligne correspondante.</li>
+      <li>Ligne sans zone : la règle prend la hauteur de la ligne d'avant et se pose juste dessous ; on peut la faire glisser.</li>
+      <li>Réglages : la force de l'assombrissement ; allumée ou non est retenu. Marche aussi dans 👁 Relire ligne à ligne et sur téléphone (onglet 🖼️ Image).</li>
+    </ul>
+    <div class="lo"><div class="here"><b>Sur l'ordinateur</b>Tout (un calque sur l'image).</div><div class="net"><b>Par Internet</b>Rien.</div></div>
+    <p class="note">Aujourd'hui la bande de la ligne du curseur est déjà mise en avant ; la règle ajoute seulement le voile autour.</p>
+  </div>
+</div>
+
+<!-- ═════════════ 40 ═════════════ -->
+<div class="part" id="i40">Idée 40 <span class="badge m">petit à moyen</span></div><h2>🌐 Ouvrir directement une vue des Archives (IIIF)</h2>
+<p class="sub">Dans « Nouvel acte » et dans le choix d'image de l'Atelier : « 🌐 Depuis une adresse IIIF… ». Clique une vignette pour choisir la vue.</p>
+<div class="grid">
+  <div class="screen">
+    <div class="bar">🌐 Ouvrir une vue des Archives (IIIF)<span class="sp"></span><span class="f">×</span></div>
+    <div class="bd">
+      <div class="row"><span class="input" style="font:12px ui-monospace,monospace">https://archives.exemple.fr/iiif/3E271-4/manifest.json</span><span class="btn small blue">Lire</span></div>
+      <div class="msg ok"><b>BMS Treignac 1780-1792</b> · 268 vues<br><span class="mini">Archives départementales (exemple) · cote 3 E 271/4 · Licence : <b>Licence Ouverte</b>, mention « Archives départementales (exemple), 3 E 271/4 » demandée.</span></div>
+      <div class="row" style="justify-content:space-between"><span class="mini">Vue : <b id="iiifV">139</b> / 268</span><span class="row"><span class="btn small ghost" id="iiifPrev">◀</span><span class="input" style="flex:none;width:64px;justify-content:center" id="iiifIn">139</span><span class="btn small ghost" id="iiifNext">▶</span></span></div>
+      <div class="thumbs" id="thumbs"></div>
+      <div class="row"><span class="btn blue">⬇ Ouvrir cette vue seulement <span class="mini" style="color:#dfe8ff">(≈ 2 Mo)</span></span><span class="btn ghost small">Tout le registre → recueil</span></div>
+      <div class="fld">
+        <span class="lab">Source</span><span class="v auto">AD (exemple) · BMS Treignac 1780-1792 <a href="#i40" style="color:var(--blue)">↗ source</a></span>
+        <span class="lab">Cote</span><span class="v auto">3 E 271/4</span>
+        <span class="lab">Vue</span><span class="v auto" id="iiifFV">139 / 268</span>
+        <span class="lab">Licence</span><span class="v auto">Licence Ouverte · mention gardée</span>
+      </div>
+    </div>
+  </div>
+  <div class="case"><h3>Comment ça marche</h3>
+    <ul>
+      <li>On <b>colle l'adresse</b> d'un manifeste IIIF (ou d'une seule image IIIF) donnée par le site des Archives (bouton « IIIF » ou « Partager » de leur visionneuse).</li>
+      <li>L'app lit le titre, le nombre de vues, la cote et <b>la licence / mention</b> que le manifeste déclare ; on choisit la vue (vignettes à petite taille).</li>
+      <li><b>Seule la vue choisie</b> est téléchargée, en bonne résolution, dans les Médias ; l'acte reçoit la source, la cote, la vue n / N et le lien <b>↗ source</b> (la page officielle). La mention de licence est gardée avec l'image.</li>
+      <li>Puis « Vue suivante → » (idée 37) télécharge la suivante, une à la fois. « Tout le registre » reste l'outil des recueils, déjà là.</li>
+    </ul>
+    <div class="msg warn"><b>Respect des Archives</b> : seulement l'adresse que l'utilisateur colle, jamais de parcours de leur site ni de téléchargement en masse caché ; une vue par clic, au rythme de la lecture. Si l'adresse n'est pas IIIF : « Télécharge la vue depuis le site des Archives, puis ajoute-la ». Si la licence interdit la réutilisation, on le dit avant d'ouvrir.</div>
+    <div class="lo"><div class="here"><b>Sur l'ordinateur</b>L'image téléchargée, la source, la transcription.</div><div class="net"><b>Par Internet</b>Le manifeste, les petites vignettes, puis la vue choisie, depuis l'adresse officielle collée. Rien n'est envoyé.</div></div>
+    <p class="note">Presque tout existe : <code>lib/recueil_iiif.php</code> (lecture du manifeste, adresses publiques seulement, tailles bornées) et <code>heritage-recueil-iiif.js</code>. Il reste à l'ouvrir pour une seule vue depuis l'Atelier et à remplir la source.</p>
+  </div>
+</div>
+
+<!-- ═════════════ Questions ═════════════ -->
+<div class="part" id="q">Questions</div><h2>À décider</h2>
+<div class="qq"><h3>1. 🎓 Le modèle entraîné : pour quel registre ?</h3>
+  <div class="opt"><span class="cb on"></span><span><b>A.</b> Choisi par registre (la main du curé LACOMBE pour les BMS de Treignac), le modèle de départ partout ailleurs.</span></div>
+  <div class="opt"><span class="cb"></span><span><b>B.</b> Le dernier modèle entraîné devient celui de toutes les lectures.</span></div>
+  <div class="reco">Conseillé : A. Un modèle affiné sur une main lit souvent moins bien les autres.</div></div>
+<div class="qq"><h3>2. 🔤 Quel texte pour « Ajouter à la généalogie » ?</h3>
+  <div class="opt"><span class="cb on"></span><span><b>A.</b> Le modernisé s'il existe (noms et métiers développés), sinon le fidèle ; la citation de la source garde le fidèle.</span></div>
+  <div class="opt"><span class="cb"></span><span><b>B.</b> Toujours le fidèle.</span></div>
+  <div class="reco">Conseillé : A.</div></div>
+<div class="qq"><h3>3. 🔎 Les orthographes voisines : allumées au départ ?</h3>
+  <div class="opt"><span class="cb"></span><span><b>A.</b> Oui, toujours.</span></div>
+  <div class="opt"><span class="cb on"></span><span><b>B.</b> Non, un clic sur « ≈ orthographes voisines », retenu ensuite.</span></div>
+  <div class="reco">Conseillé : B. Les résultats exacts d'abord ; les variantes à un clic, bien distinguées.</div></div>
+<div class="qq"><h3>4. ⏭ « Vue suivante » sur un registre IIIF : télécharger tout de suite ?</h3>
+  <div class="opt"><span class="cb on"></span><span><b>A.</b> Oui, une vue à la fois au clic (le manifeste est déjà connu).</span></div>
+  <div class="opt"><span class="cb"></span><span><b>B.</b> Demander à chaque fois.</span></div>
+  <div class="reco">Conseillé : A. Une seule image par clic, c'est le rythme normal de lecture.</div></div>
+
+<div class="part">Ordre proposé</div><h2>Dans quel ordre les faire</h2>
+<ol class="order">
+  <li><span><b>📏 39. Règle de lecture</b> <span class="badge s">petit</span> : utile tout de suite, aucun risque.</span></li>
+  <li><span><b>⏭ 37. Acte suivant / Vue suivante</b> <span class="badge m">moyen</span> : accélère la saisie d'un registre ; apporte le champ « Main » dont 35 a besoin.</span></li>
+  <li><span><b>🌐 40. Vue IIIF</b> <span class="badge m">petit à moyen</span> : réutilise l'import des recueils ; se branche sur « Vue suivante ».</span></li>
+  <li><span><b>🔎 36. Recherche plein texte</b> <span class="badge m">moyen</span> : prend de la valeur à mesure que les actes s'accumulent.</span></li>
+  <li><span><b>🔤 38. Fidèle / modernisée</b> <span class="badge m">moyen</span> : enrichit ensuite la recherche.</span></li>
+  <li><span><b>🎓 35. Entraîner sur mes lignes relues</b> <span class="badge g">gros</span> : en dernier, quand des mains ont assez de lignes relues (grâce à 37 et à la relecture).</span></li>
+</ol>
+
+</div>
+<script>
+(function(){
+  'use strict';
+  function $(id){return document.getElementById(id);}
+
+  /* 35 : détail d'une main */
+  var H=[
+    '<div class="msg ok"><b>Curé J. LACOMBE</b> · 214 lignes relues (21 mises de côté pour mesurer)</div>'+
+    '<div class="acc"><span>Avant</span><div class="prog y"><i style="width:81%"></i></div><b>81 %</b><span>Après</span><div class="prog"><i style="width:94%"></i></div><b>94 %</b></div>'+
+    '<p class="mini" style="margin:4px 0 8px">Caractères justes sur les 21 lignes mises de côté. Entraînement : passe 30 / 30 · 38 min · terminé.</p>'+
+    '<div class="row"><span class="mini">Lire « BMS Treignac 1780-1792 » avec :</span><span class="pill ok">🎓 Main du curé LACOMBE</span><span class="pill">modèle de départ</span></div>'+
+    '<div class="row" style="margin-top:8px"><span class="btn small">⚖️ Voir 5 lignes avant / après</span><span class="btn small ghost">🗑 Oublier ce modèle</span></div>',
+    '<div class="msg warn"><b>Notaire P. DURAND</b> · 62 lignes relues : encore environ 88 pour un bon résultat.</div>'+
+    '<div class="row"><span class="btn small">👁 Relire des lignes de ce registre</span><span class="btn small ghost">🎓 Essayer quand même</span></div>',
+    '<div class="msg">9 lignes relues sans « Main ». Indique qui a écrit (curé, notaire, greffier) dans l\'en-tête de l\'acte pour les regrouper.</div>'
+  ];
+  var hands=$('hands');
+  function showHand(i){hands.querySelectorAll('tbody tr').forEach(function(r){r.style.background=(+r.dataset.h===i)?'var(--blue-bg)':'';});$('handDetail').innerHTML=H[i];}
+  hands.addEventListener('click',function(e){var r=e.target.closest('tr[data-h]');if(r)showHand(+r.dataset.h);});
+  showHand(0);
+
+  /* 36 : orthographes voisines + clic */
+  var fz=false;
+  $('fuzzy').addEventListener('click',function(){fz=!fz;$('fuzzyCb').classList.toggle('on',fz);$('variants').hidden=!fz;$('resCount').textContent=fz?'5 lignes dans 5 actes (dont 2 ≈ variantes)':'3 lignes dans 3 actes';});
+  $('results').addEventListener('click',function(e){var b=e.target.closest('.res');if(!b)return;var m=$('goMsg');m.hidden=false;m.innerHTML='→ Ouvre l\'Atelier : <b>'+b.dataset.go+'</b>, curseur sur le mot, la ligne marquée sur l\'image.';});
+
+  /* 37 : acte suivant / vue suivante */
+  var vue=139,acte=2,isNew=false;
+  function nav(){ $('navVue').textContent=vue;$('navActe').textContent=acte;$('fVue').textContent=vue+' / 268';
+    $('navNew').setAttribute('opacity',isNew?'1':'0');$('navNewLab').setAttribute('opacity',isNew?'1':'0');
+    $('navTitle').textContent=isNew?'Nouvel acte (sans titre)':'Baptême de Jean MAZAUD';
+    $('fType').textContent=isNew?'Baptême ?':'Baptême';$('fDate').textContent=isNew?'… 1787':'12 nov. 1787'; }
+  $('navNext').addEventListener('click',function(){acte++;isNew=true;nav();$('navMsg').innerHTML='➕ <b>Acte '+acte+' de la vue '+vue+'</b> : trace sa zone dans le cadre bleu. Repris : commune, registre, cote, vue, main. Proposé : type et année.';});
+  $('navView').addEventListener('click',function(){vue++;acte=1;isNew=true;nav();$('navMsg').innerHTML='→ <b>Vue '+vue+' / 268</b> : image suivante du recueil (téléchargée depuis l\'adresse IIIF si besoin). Les mêmes champs sont repris.';});
+  $('navPrev').addEventListener('click',function(){vue=139;acte=2;isNew=false;nav();$('navMsg').textContent='◀ Retour à l\'acte d\'avant ; rien n\'est perdu.';});
+
+  /* 38 : couches */
+  $('layTabs').addEventListener('click',function(e){var b=e.target.closest('button[data-l]');if(!b)return;var l=b.dataset.l;
+    $('layTabs').querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});
+    $('layF').hidden=(l==='m');$('layM').hidden=(l==='f');
+    $('layers').style.gridTemplateColumns=(l==='b')?'':'minmax(0,1fr)';});
+  $('layers').style.gridTemplateColumns='minmax(0,1fr)';
+
+  /* 39 : règle de lecture */
+  var L=['L\'an mil huit cent vingt deux le trois','février, devant nous maire de Chamberet','ont comparu Léonard Durand, tisserand,','fils majeur de feu Jean Durand et de','Anne Mazaud, et Marie Lacombe, fille','mineure de Pierre Lacombe et de…'];
+  var C=['#e8590c','#2f9e44','#1971c2','#9c36b5','#c2255c','#0c8599'];
+  var ed=$('rulerEd'),cur=2,on=true;
+  ed.innerHTML=L.map(function(t,i){return '<div class="l" data-i="'+i+'" style="--c:'+C[i]+'"><span class="n">'+(i+1)+'</span><span class="t">'+t+'</span></div>';}).join('');
+  function ruler(){var y=12+cur*40,h=36;
+    $('rulerDim').setAttribute('d',on?('M0 0H400V300H0Z M0 '+y+'H400V'+(y+h)+'H0Z'):'');
+    $('rulerBand').setAttribute('y',y);$('rulerBand').setAttribute('height',h);$('rulerBand').style.display=on?'':'none';
+    ed.querySelectorAll('.l').forEach(function(d){d.classList.toggle('cur',+d.dataset.i===cur);});}
+  ed.addEventListener('click',function(e){var d=e.target.closest('.l');if(d){cur=+d.dataset.i;ruler();}});
+  $('rulerImg').addEventListener('keydown',function(e){if(e.key==='ArrowDown'){cur=Math.min(L.length-1,cur+1);ruler();e.preventDefault();}else if(e.key==='ArrowUp'){cur=Math.max(0,cur-1);ruler();e.preventDefault();}});
+  $('rulerImg').addEventListener('click',function(e){var r=this.getBoundingClientRect(),y=(e.clientY-r.top)/r.height*300;cur=Math.max(0,Math.min(L.length-1,Math.floor((y-12)/40)));ruler();this.focus();});
+  $('rulerBtn').addEventListener('click',function(){on=!on;this.classList.toggle('on',on);this.setAttribute('aria-pressed',String(on));ruler();});
+  ruler();
+
+  /* 40 : choix de la vue */
+  var v=139,th=$('thumbs');
+  function views(){var s='';for(var i=v-3;i<=v+3;i++){s+='<span data-v="'+i+'"'+(i===v?' class="on"':'')+'>'+i+'</span>';}th.innerHTML=s;
+    $('iiifV').textContent=v;$('iiifIn').textContent=v;$('iiifFV').textContent=v+' / 268';}
+  th.addEventListener('click',function(e){var s=e.target.closest('span[data-v]');if(s){v=+s.dataset.v;views();}});
+  $('iiifPrev').addEventListener('click',function(){if(v>1){v--;views();}});
+  $('iiifNext').addEventListener('click',function(){if(v<268){v++;views();}});
+  views();
+})();
+</script>
+</body></html>
