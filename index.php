@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=282">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
-    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=8">
+    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=9">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -1571,8 +1571,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-pages.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-compare.js?v=3" defer></script>
 <script src="assets/js/heritage-transcribe-xml.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe-contexte.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=81" defer></script>
+<script src="assets/js/heritage-transcribe-contexte.js?v=2" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=82" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=7" defer></script>

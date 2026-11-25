@@ -150,3 +150,5 @@
 .h-ia-sent summary{cursor:pointer;font-weight:600;margin-top:8px}
 .h-txa-ctx{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
 @media (max-width:700px){.h-tx-chip2 small{display:none}.h-tx-dlg .h-tx[data-ptab=people] :is(.h-tx-vers,.h-tx-vprev,.h-tx-why){display:none!important}}
+.h-tx-readpanel .h-tx-readia{display:block;text-align:left;padding:6px;font-weight:600}
+@media (max-width:700px){.h-tx-top .h-tx-iabtn{display:none}} /* sur téléphone : « 🧠 Aider l'IA » reste dans « ✨ Lire ▾ » et l'étape Corriger */
