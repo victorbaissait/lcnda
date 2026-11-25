@@ -3,6 +3,10 @@
  * pas le bord intérieur (au moins 4 px d'écart) et ne déborde pas du cadre.
  * Pages rejouées : Réglages → 🏰 Lieux anciens (GOV), 🌦 Météo, 🗳 Élections, ADN, bases officielles, brevets…, fiche
  * d'une personne, « Tout ce qui le concerne », Listes de données, monographie d'un lieu ; à 1440 px et 390 px, clair et sombre.
+ * La colonne de gauche (sideDetect), sur plusieurs onglets (Recherche, Listes, Réglages, Graphiques, Carte) : au moins 12 px entre
+ * les cartes (ombre comprise) et la barre de défilement (place gardée : scrollbar-gutter), la dernière carte entière au-dessus du pied
+ * (12 px), le pied et sa phrase grise (8 px sous les boutons, 12 px du bord), les textes alignés qu'ils aient une icône ou non
+ * (icône dans sa colonne, 8 px avant le texte).
  *   node tests/test-rien-de-colle.js
  * Le module exporte aussi le détecteur (detect) et le démarrage (start) pour une chasse plus large (toutes les pages). */
 'use strict';
@@ -200,7 +204,62 @@ const go = {
 
 async function scan(p, rootSel) { return p.evaluate(detect, {root: rootSel, min: 4}); }
 
-module.exports = {detect, start, settle, newPage, go, scan, closeDialogs};
+/* ═════════ La colonne de gauche (dans la page) : l'espacement réglementaire ═════════ */
+function sideDetect() {
+    const out = [], box = document.querySelector('#sidebar-content'); if (!box || !box.offsetParent) return ['pas de colonne'];
+    const cs = getComputedStyle(box), br = box.getBoundingClientRect();
+    if (box.scrollHeight > box.clientHeight + 1 && !/stable/.test(cs.scrollbarGutter)) out.push(`scrollbar-gutter : ${cs.scrollbarGutter} (la place de la barre n'est pas gardée)`);
+    // le bord gauche de la barre : à droite de la zone utile ; une barre « par-dessus » (sans place) : 12 px comptés en plus
+    const overlay = box.offsetWidth - box.clientWidth - box.clientLeft * 2 < 1;
+    const barLeft = br.left + box.clientLeft + box.clientWidth - (overlay ? 12 : 0);
+    const shadow = el => { const m = getComputedStyle(el).boxShadow; if (!m || m === 'none') return [0, 0]; const px = (m.match(/-?[\d.]+px/g) || []).map(parseFloat); return [Math.max(0, px[0] || 0), Math.max(0, px[1] || 0)]; };
+    const cards = [...box.querySelectorAll('.side-menu-item, .saved-item, .person-list-item')].filter(el => el.offsetParent && el.getBoundingClientRect().width > 40);
+    for (const el of cards) {
+        const r = el.getBoundingClientRect(), [sx] = shadow(el), gap = barLeft - (r.right + sx);
+        if (gap < 12 - 0.5) { out.push(`carte « ${el.textContent.trim().slice(0, 30)} » : ${Math.round(gap * 10) / 10} px avant la barre de défilement (12 attendus)`); break; }
+    }
+    // la dernière carte : entière au-dessus du pied, ombre comprise, avec 12 px
+    if (cards.length) {
+        const keep = box.scrollTop; box.scrollTop = box.scrollHeight;
+        const last = cards[cards.length - 1], r = last.getBoundingClientRect(), [, sy] = shadow(last), bottom = br.top + box.clientTop + box.clientHeight;
+        const vis = [...box.children].filter(x => x.offsetParent && x.getBoundingClientRect().height > 0), lowest = Math.max(...vis.map(x => x.getBoundingClientRect().bottom));
+        if (lowest <= r.bottom + 1 && bottom - (r.bottom + sy) < 12 - 0.5) out.push(`la dernière carte « ${last.textContent.trim().slice(0, 30)} » : ${Math.round((bottom - r.bottom - sy) * 10) / 10} px au-dessus du pied (12 attendus)`);
+        box.scrollTop = keep;
+    }
+    // les textes alignés : une icône → toutes les cartes ont leur colonne d'icône, et le texte commence au même endroit
+    const items = cards.filter(el => el.classList.contains('side-menu-item') && el.querySelector(':scope > .side-number'));
+    const ICO = /^\s*(?:\p{Extended_Pictographic}|\p{Regional_Indicator})/u;
+    const withIco = items.filter(el => el.querySelector(':scope > .side-ico:not(:empty)') || [...el.childNodes].some(n => n.nodeType === 3 && ICO.test(n.nodeValue)));
+    if (withIco.length) {
+        const lefts = [];
+        for (const el of items) {
+            const ico = el.querySelector(':scope > .side-ico'), lab = el.querySelector(':scope > .side-label');
+            if (!ico || !lab) { out.push(`carte « ${el.textContent.trim().slice(0, 30)} » : l'icône n'est pas dans sa colonne`); continue; }
+            const g = lab.getBoundingClientRect().left - ico.getBoundingClientRect().right;
+            if (Math.abs(g - 8) > 1.5) out.push(`carte « ${el.textContent.trim().slice(0, 30)} » : ${Math.round(g * 10) / 10} px entre l'icône et le texte (8 attendus)`);
+            lefts.push([lab.getBoundingClientRect().left - el.getBoundingClientRect().left, el.textContent.trim().slice(0, 30)]);
+        }
+        const min = Math.min(...lefts.map(x => x[0])), max = Math.max(...lefts.map(x => x[0]));
+        if (lefts.length && max - min > 1.5) out.push(`les textes ne commencent pas au même endroit : de ${Math.round(min)} à ${Math.round(max)} px (« ${lefts.find(x => x[0] === max)[1]} »)`);
+    }
+    // le pied : ses marges, et la phrase grise sous les boutons
+    const foot = document.querySelector('#sidebar-footer');
+    if (foot && foot.offsetParent && foot.getBoundingClientRect().height > 4) {
+        const fr = foot.getBoundingClientRect(), fs = getComputedStyle(foot);
+        if (parseFloat(fs.paddingLeft) < 12 || parseFloat(fs.paddingRight) < 12 || parseFloat(fs.paddingTop) < 8 || parseFloat(fs.paddingBottom) < 8) out.push(`pied : marges ${fs.padding} (12 px sur les côtés, 8 en haut et en bas au moins)`);
+        const kids = [...foot.children].filter(x => x.getBoundingClientRect().height > 0 && getComputedStyle(x).display !== 'none');
+        for (let i = 1; i < kids.length; i++) {
+            const a = kids[i - 1].getBoundingClientRect(), b = kids[i].getBoundingClientRect();
+            if (b.top - a.bottom < 8 - 0.5) out.push(`pied : « ${kids[i].textContent.trim().slice(0, 30)} » à ${Math.round((b.top - a.bottom) * 10) / 10} px sous « ${kids[i - 1].textContent.trim().slice(0, 20)} » (8 attendus)`);
+        }
+        for (const k of kids) { const r = k.getBoundingClientRect(); if (r.left - fr.left < 12 - 0.5) out.push(`pied : « ${k.textContent.trim().slice(0, 30)} » à ${Math.round(r.left - fr.left)} px du bord gauche (12 attendus)`); }
+    }
+    return out;
+}
+const sideTabs = ['recherche', 'listes', 'maintenance', 'graphiques', 'carte'];
+
+
+module.exports = {detect, sideDetect, start, settle, newPage, go, scan, closeDialogs};
 
 /* ═════════ Le test ═════════ */
 if (require.main === module) (async () => {
@@ -238,6 +297,24 @@ if (require.main === module) (async () => {
             assert.ok(found.some(f => f.kind === 'champ' && f.bad.some(b => b.kind === 'deborde')), JSON.stringify(found));
             await p.context().close();
         });
+        await t('le détecteur de la colonne voit une carte collée à la barre, une phrase collée sous les boutons et des textes décalés (témoin)', async () => {
+            const p = await newPage(browser, base);
+            await go.module('recherche')(p);
+            const found = await p.evaluate(src => {
+                const box = document.querySelector('#sidebar-content'), foot = document.querySelector('#sidebar-footer');
+                box.style.setProperty('padding-right', '2px', 'important'); box.style.setProperty('scrollbar-gutter', 'auto', 'important');
+                foot.insertAdjacentHTML('beforeend', '<small data-temoin style="display:block;margin-top:0!important">Phrase collée</small>');
+                const it = box.querySelector('.side-menu-item .side-ico:not(:empty)')?.parentElement; it?.querySelector('.side-ico')?.style.setProperty('margin-right', '6px');
+                const r = (0, eval)('(' + src + ')')();
+                box.style.removeProperty('padding-right'); box.style.removeProperty('scrollbar-gutter'); foot.querySelector('[data-temoin]').remove(); it?.querySelector('.side-ico')?.style.removeProperty('margin-right');
+                return r;
+            }, sideDetect.toString());
+            assert.ok(found.some(f => /avant la barre de défilement/.test(f)), JSON.stringify(found));
+            assert.ok(found.some(f => /Phrase collée/.test(f)), JSON.stringify(found));
+            assert.ok(found.some(f => /entre l'icône et le texte|pas au même endroit/.test(f)), JSON.stringify(found));
+            assert.deepStrictEqual(await p.evaluate(sideDetect), [], 'remis en place : plus rien');
+            await p.context().close();
+        });
         for (const [w, dark] of [[1440, false], [390, false], [1440, true], [390, true]]) {
             const p = await newPage(browser, base, {width: w, dark});
             for (const [name, fn] of pages) {
@@ -245,6 +322,13 @@ if (require.main === module) (async () => {
                     const rootSel = await fn(p);
                     const found = await scan(p, rootSel);
                     assert.deepStrictEqual(found.map(f => `${f.bad.map(b => `${b.kind} ${b.side} ${b.gap}px`).join(', ')} — ${f.kind} « ${f.label} » (${f.item}) dans ${f.box}`), []);
+                });
+            }
+            for (const m of sideTabs) {
+                await t(`colonne de gauche (${m}) — ${w} px${dark ? ', sombre' : ''} : 12 px avant la barre de défilement, dernière carte au-dessus du pied, pied espacé, textes alignés`, async () => {
+                    await go.module(m)(p);
+                    await p.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
+                    assert.deepStrictEqual(await p.evaluate(sideDetect), []);
                 });
             }
             assert.deepStrictEqual(p.errs, []);

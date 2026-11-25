@@ -188,7 +188,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             });
             assert.ok(r.rows > 4000 && r.src, JSON.stringify(r).slice(0, 200)); assert.ok(r.y1832.deaths === 53382 && r.y1832.vs >= 60, JSON.stringify(r.y1832));
             assert.strictEqual(r.mono[0], true); assert.match(r.mono[1], /Allanche dans les livres d’époque/);
-            assert.match(r.ds, /1832/); assert.strictEqual(r.links, 6); assert.ok(r.block && r.tab);
+            assert.match(r.ds, /En 1832, année du choléra, Aisne/); assert.strictEqual(r.links, 6); assert.ok(r.block && r.tab);
             const ts = fs.readFileSync(path.join(root, 'assets/js/heritage-tout-sur.js'), 'utf8'); assert.match(ts, /\[\/\^tc_p_\/, 'telech_c'\]/);
             const man = JSON.parse(fs.readFileSync(path.join(root, 'assets/data/manifest.json'), 'utf8')); assert.ok(man.packs['tc-sgf-deces']?.licence && man.packs['tc-sgf-deces'].script === 'scripts/telech-c', 'Réglages → 🗂 Données');
         });
