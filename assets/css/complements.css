@@ -55,6 +55,8 @@ details.ui-card-more.compl-dt-more .ui-ph-menu { top: calc(100% + 6px); bottom: 
 :root[data-theme="dark"] .compl-dtw-n { background: var(--surface, #242427); }
 :root[data-theme="dark"] .compl-dtw-n.is-orange b { color: #f0a34a; }
 :root[data-theme="dark"] .compl-dtw-n.is-yellow b { color: #e8c547; }
+:root[data-theme="dark"] .compl-dtw-n.is-red b { color: #ff7b7b; } /* le rouge clair se lit sur le fond sombre (#c92a2a : contraste 2,8) */
+.compl-dtw-n { min-width: 0; overflow-wrap: anywhere; hyphens: auto; } /* « impossibles » ne dépasse plus de sa case */
 @media (max-width: 600px) {
     .compl-ce-gr { flex-direction: column; align-items: stretch; }
     .compl-dtw-n b { font-size: 1.25rem; }
