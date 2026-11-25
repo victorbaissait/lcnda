@@ -109,7 +109,7 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             await page.click('#lc-hh-order [data-order-key="m_carte-de-sa-vie"] [data-hh-show]'); await page.waitForTimeout(900);
             assert.deepEqual((await cfg(page)).on, ['m_carte-de-sa-vie']);
         });
-        await t('glisser (Alt + ↑) « Carte de sa vie » en premier', async () => {
+        await t('monter « Carte de sa vie » en premier (Alt + ↑, ou les boutons ↑ de la ligne)', async () => {
             const n = (await rows(page)).findIndex(x => x.k === 'm_carte-de-sa-vie');
             for (let i = 0; i < n; i++) { await page.focus('#lc-hh-order [data-order-key="m_carte-de-sa-vie"] .order-grip').catch(() => {}); await page.keyboard.press('Alt+ArrowUp'); await page.waitForTimeout(150); }
             await page.waitForTimeout(500);
@@ -180,7 +180,7 @@ echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
             assert.ok(m.over <= 0, `la page déborde de ${m.over} px`);
             assert.ok(m.right <= Math.min(m.hero, m.W) + 1 && m.left >= 0, `boutons hors du cadre : ${JSON.stringify(m)}`);
             assert.ok(m.lines >= 2, 'sur plusieurs lignes');
-            if (shots) await ph.screenshot({path: path.join(shots, 'fiche-390.png')});
+            if (shots) { await ph.locator('#workspace .person-hero').scrollIntoViewIfNeeded(); await ph.screenshot({path: path.join(shots, 'fiche-390.png')}); }
             await ph.close();
         });
         await t('aucune erreur dans la console', () => { assert.deepEqual(errs, []); });

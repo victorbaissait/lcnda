@@ -1224,7 +1224,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
 <script src="assets/js/app.js?v=582" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
-<script src="assets/js/app-verrou.js?v=6" defer></script>
+<script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
 <script src="assets/js/app-indicateurs.js?v=2" defer></script>
 <script src="assets/js/app-picker.js?v=29" defer></script>
@@ -1259,7 +1259,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-comparaison.js?v=10" defer></script>
 <script src="assets/js/app-carte.js?v=17" defer></script>
 <script src="assets/js/app-enquetes.js?v=15" defer></script>
-<script src="assets/js/app-tableau-de-bord.js?v=25" defer></script>
+<script src="assets/js/app-tableau-de-bord.js?v=26" defer></script>
 <script src="assets/js/app-chrono-recherche.js?v=1" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=34" defer></script>
@@ -1348,11 +1348,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueil-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-verif.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-iiif.js?v=1" defer></script>
-<script src="assets/js/heritage-recueil-etat.js?v=7" defer></script>
+<script src="assets/js/heritage-recueil-etat.js?v=8" defer></script>
 <script src="assets/js/heritage-recueil-sommaire.js?v=3" defer></script>
 <script src="assets/js/heritage-recueil-index.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-fiche.js?v=2" defer></script>
-<script src="assets/js/heritage-recueil-fonds.js?v=5" defer></script>
+<script src="assets/js/heritage-recueil-fonds.js?v=6" defer></script>
 <script src="assets/js/heritage-recueils.js?v=35" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=31" defer></script>
 <script src="assets/js/heritage-decennales.js?v=4" defer></script>
@@ -1536,7 +1536,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-successoral-dossiers.js?v=9" defer></script>
 <script src="assets/js/heritage-successoral-outils.js?v=3" defer></script>
 <script src="assets/js/heritage-successoral-plus2.js?v=6" defer></script>
-<script src="assets/js/heritage-successoral-plus2b.js?v=3" defer></script>
+<script src="assets/js/heritage-successoral-plus2b.js?v=4" defer></script>
 <script src="assets/js/heritage-successoral-droit-core.js?v=2" defer></script>
 <script src="assets/js/heritage-successoral-droit.js?v=2" defer></script>
 <script src="assets/js/heritage-successoral-audit.js?v=1" defer></script>
