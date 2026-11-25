@@ -10,6 +10,8 @@
  *     restore(v)        : async → {undo} — remet cette version ; le message H7 « ↶ Annuler » est fait ici
  *     rename(v, nom), copy(v), exportOne(v), remove(v) → {undo} ou {undo, commit} (commit = suppression pour de bon, faite
  *       quand le message disparaît sans « Annuler »), saveNow(), actions : [{icon, label, run(v), when(v)}] en plus.
+ *     removeMany(vs) → {undo} : 🗑 plusieurs versions cochées d'un coup, une seule « ↶ Annuler » (on peut alors en cocher plus de deux ;
+ *       la comparaison se fait toujours à deux).
  *   Une action absente n'est pas proposée. UI.versionsDiff(a, b) et UI.versionsGroup(date) servent aussi aux tests (Node).
  */
 (() => {
@@ -20,6 +22,7 @@
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const plural = (n, w) => (A().plural ? A().plural(n, w) : `${n} ${w}${n > 1 ? 's' : ''}`);
     const toast = (m, k, o) => (A().toast ? A().toast(m, k, o) : console.info(m));
+    const T = (s, v) => (root.LCNDA_I18N?.t ? root.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s));
 
     /* ═════ Ranger par Aujourd’hui · Cette semaine · Plus ancien ═════ */
     function groupOf(d, now = new Date()) {
@@ -120,7 +123,9 @@
             let h = o.now === false ? '' : rowHtml(null);
             GROUPS.forEach(([g, label]) => { const part = list.filter(v => groupOf(v.created_at) === g); if (part.length) h += `<div class="ui-vers-grp">${label}</div>${part.map(rowHtml).join('')}`; });
             if (!list.length) h += A().empty ? A().empty(filter === 'all' ? 'Pas encore de version.' : filter === 'named' ? 'Aucune version nommée.' : 'Aucune version automatique.', {icon: '🕘', ...(o.saveNow && filter !== 'auto' ? {action: {label: '＋ Enregistrer la version actuelle', attrs: 'data-vers-save'}} : {})}) : '<p class="empty-line">Pas encore de version.</p>';
-            else if (o.preview) h += `<p class="ui-vers-hint">${checked.length === 1 ? 'Coche une deuxième version pour comparer.' : 'Coche deux versions pour les comparer.'}</p>`;
+            else if (o.preview) h += `<p class="ui-vers-hint">${checked.length === 1 ? 'Coche une deuxième version pour comparer.' : checked.length > 2 ? esc(T('{n} versions cochées : on en compare deux à la fois.', {n: String(checked.length)})) : 'Coche deux versions pour les comparer.'}</p>`;
+            const many = o.removeMany ? checked.filter(id => id !== 'now' && byId(id) && !byId(id).locked) : [];
+            if (many.length > 1) h += `<p class="ui-vers-hint ui-vers-many"><button type="button" class="button small secondary is-danger" data-vers-delmany title="${esc(T('On peut encore l’annuler juste après.'))}">🗑 ${esc(T('Supprimer les {n} versions cochées', {n: String(many.length)}))}</button></p>`;
             $('[data-vers-list]').innerHTML = h;
             // une ligne utile qui demande du temps (taille en pixels, durée…) : remplie ensuite
             list.forEach(v => { if (typeof v.infoAsync !== 'function' || v.info) return; Promise.resolve(v.infoAsync()).then(t => { if (!t || closed) return; v.info = t; const el = dlg.querySelector(`[data-vers-info="${CSS.escape(String(v.id))}"]`); if (el) el.innerHTML = [when(v.created_at), v.by ? esc(v.by) : '', esc(t)].filter(Boolean).join(' · '); }).catch(() => {}); });
@@ -266,6 +271,19 @@
                 }
             } catch (e) { toast(e.message || String(e), 'error'); }
         }
+        let removingMany = false;
+        async function doRemoveMany() {
+            const vs = checked.filter(id => id !== 'now').map(byId).filter(v => v && !v.locked); if (vs.length < 2 || removingMany) return;
+            removingMany = true;
+            try {
+                const r = (await o.removeMany(vs)) || {}, gone = new Set(vs.map(v => String(v.id)));
+                if (gone.has(cur)) cur = null;
+                checked = checked.filter(x => !gone.has(x));
+                await changed();
+                const msg = T('{n} versions supprimées', {n: String(vs.length)});
+                if (A().undoToast) A().undoToast(msg, {undo: r.undo ? async () => { await r.undo(); if (!closed) await changed(); } : null, icon: '🗑'}); else toast(msg);
+            } catch (e) { toast(e.message || String(e), 'error'); } finally { removingMany = false; }
+        }
         const run = async (fn, ...a) => { try { const r = await fn(...a); return r; } catch (e) { toast(e.message || String(e), 'error'); return null; } };
         function more(btn, v, e = null) { // ⋯ et clic droit (K14) : le même menu de l'app
             const items = [
@@ -282,6 +300,7 @@
             if (t.closest('[data-vers-close]')) return dlg.close();
             const f = t.closest('[data-vers-filter]'); if (f) { filter = f.dataset.versFilter; paintFilters(); keepScroll(paintList); return; }
             if (t.closest('[data-vers-save]')) { await run(o.saveNow); return changed(); }
+            if (t.closest('[data-vers-delmany]')) return doRemoveMany();
             if (t.closest('[data-vers-uncheck]')) { checked = []; keepScroll(paintList); return paintCompare(); }
             if (t.closest('.ui-vers-cb')) return; // la case : « change » s'en charge
             const row = t.closest('[data-vers-row]'); if (row) return select(row.dataset.versRow);
@@ -298,7 +317,7 @@
             const c = e.target.closest('[data-vers-check]'); if (!c) return;
             const id = c.dataset.versCheck;
             checked = checked.filter(x => x !== id); if (c.checked) checked.push(id);
-            if (checked.length > 2) checked = checked.slice(-2); // la plus ancienne coche part
+            if (checked.length > 2 && !o.removeMany) checked = checked.slice(-2); // la plus ancienne coche part (🗑 plusieurs d'un coup : toutes restent)
             keepScroll(paintList); paintCompare();
         });
         dlg.addEventListener('contextmenu', e => { const row = e.target.closest('[data-vers-row]'); const v = row && byId(row.dataset.versRow); if (!v || e.shiftKey) return; e.preventDefault(); cur = String(v.id); keepScroll(paintList); paintPane(); more(null, v, e); }); // more(…, e) ouvre UI.contextMenu

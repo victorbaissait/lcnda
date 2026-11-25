@@ -17,6 +17,55 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    /* ─── 🧲 les zones reliées aux lignes du texte : décalées de quelques caractères sur les anciennes transcriptions.
+     * La cause : la case du texte était remplie par du HTML (<textarea>texte</textarea>), qui mange le saut de ligne du tout début
+     * (et change \r\n en \n) : un texte qui commençait par une ligne vide perdait 1 caractère, et toutes les zones (posées sur le
+     * texte enregistré) commençaient un caractère trop tard, à chaque ligne. La case est maintenant remplie par .value, et le texte
+     * \r\n ramené à \n avec ses zones (normBody). snapZones recale les zones déjà abîmées sur les lignes du texte. ─── */
+    /** \r\n et \r → \n ; les passages (zones, personnes…) de chaque liste suivent. Rend le texte. */
+    function normBody(body, lists = []) {
+        body = String(body ?? ''); if (!body.includes('\r')) return body;
+        const map = new Array(body.length + 1); let out = '';
+        for (let i = 0; i < body.length; i++) { map[i] = out.length; if (body[i] === '\r') { if (body[i + 1] !== '\n') out += '\n'; } else out += body[i]; }
+        map[body.length] = out.length;
+        const at = v => map[clamp(Math.round(Number(v) || 0), 0, body.length)];
+        lists.forEach(list => (list || []).forEach(r => { if (r && r.s != null && r.e != null) { r.s = at(r.s); r.e = Math.max(r.s, at(r.e)); } }));
+        return out;
+    }
+    const PAGE_MARK = /^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/u, SNAP_MAX = 3, SNAP_SKIP = ['sign', 'note', 'skip'];
+    /** les lignes du texte (sans les blancs du bord, sans les lignes vides ni les repères « — page 2 — ») : [{s, e}] */
+    function textLinesOf(text) {
+        const out = []; let pos = 0;
+        for (const raw of String(text ?? '').split('\n')) { const s = pos; pos += raw.length + 1; const body = raw.trim(); if (!body || PAGE_MARK.test(raw)) continue; const lead = raw.length - raw.trimStart().length; out.push({s: s + lead, e: s + lead + body.length}); }
+        return out;
+    }
+    /**
+     * Les zones reliées à une ligne du texte dont le passage déborde ou s'arrête à quelques caractères des bords de la ligne :
+     * {fixes: [{i, id, s, e}] (i : la place de la zone dans la liste ; le passage recalé sur la ligne), left: n (sans doute décalées, mais pas sûr : laissées)}.
+     * Jamais touchées : les zones sans texte, les signatures / notes / « à ne pas lire », les zones de plusieurs lignes, celles d'un
+     * mot ou d'un passage dans la ligne. startOnly : seulement les zones dont le début est décalé (le défaut des anciennes transcriptions).
+     */
+    function snapZones(text, zones, {startOnly = false} = {}) {
+        text = String(text ?? ''); const lines = textLinesOf(text), fixes = [], key = l => `${l.s}:${l.e}`;
+        const taken = new Set((zones || []).filter(z => lines.some(l => l.s === z.s && l.e === z.e)).map(z => `${z.s}:${z.e}`));
+        let left = 0;
+        (zones || []).forEach(z => {
+            if (!z || !(z.e > z.s) || SNAP_SKIP.includes(z.kind) || taken.has(`${z.s}:${z.e}`)) return;
+            const ov = lines.map(l => ({l, n: Math.min(z.e, l.e) - Math.max(z.s, l.s)})).filter(o => o.n > 0).sort((a, b) => b.n - a.n);
+            if (!ov.length) return;
+            if (ov.length > 1 && ov[1].n > SNAP_MAX) return; // plusieurs lignes : voulu
+            const b = ov[0].l, ds = z.s - b.s, de = z.e - b.e, len = b.e - b.s;
+            if (z.s <= b.s && z.e >= b.e && !text.slice(z.s, z.e).trim().replace(text.slice(b.s, b.e), '')) return; // la ligne et des blancs autour : juste
+            if (Math.abs(ds) > 2 * SNAP_MAX || Math.abs(de) > 2 * SNAP_MAX) return; // un mot, un passage dans la ligne : pas une zone de ligne
+            if (startOnly && !ds) return;
+            const lim = Math.min(SNAP_MAX, Math.floor(len / 8)), shifted = ds === de && Math.abs(ds) <= SNAP_MAX;
+            const ok = (shifted || (Math.abs(ds) <= lim && Math.abs(de) <= lim)) && ov[0].n >= len * .6 && !taken.has(key(b));
+            if (!ok) { left++; return; }
+            taken.add(key(b)); fixes.push({i: zones.indexOf(z), id: z.id, s: b.s, e: b.e});
+        });
+        return {fixes, left};
+    }
+    ext.txSnap = {normBody, textLinesOf, snapZones}; // pour les essais (tests/test-zones-recalees.js)
     let deepRun = null; // 📑 « 🔬 Lecture approfondie » sur toutes les pages : la lecture en cours (elle suit l'Atelier d'un acte à l'autre, un texte par page)
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
     const TXX = () => ext.txXml; // 🧾 ALTO / 📄 PAGE et les sortes de zone (heritage-transcribe-xml.js)
@@ -229,6 +278,8 @@
         if (!ctx.id && ctx.mediaId) { try { const o = await api('act_page_owner', {media_id: ctx.mediaId}); if (o?.id) ctx = {...ctx, id: Number(o.id), page: Number(ctx.mediaId)}; } catch (_) {} } // 📑
         if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = TV.viewOf(r.data?.view); if (!['todo', 'doing', 'checked', 'done'].includes(t.data.status)) t.data.status = String(t.body || '').trim() ? 'doing' : 'todo'; } catch (e) { return toast(e.message, 'error'); } }
         else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = fileLikeTitle(ctx.title, ctx.filename) ? '' : (ctx.title || ''); t.body = ctx.text || ''; if (KINDS.some(k => k[0] === ctx.kind)) t.kind = ctx.kind; } // kind : ex. « lettre » pour le dos d'une carte postale
+        t.data.zones = Array.isArray(t.data.zones) ? t.data.zones : []; t.data.people = Array.isArray(t.data.people) ? t.data.people : [];
+        t.body = normBody(t.body, [t.data.zones, t.data.people]); // 🧲 \r\n → \n : la case le ferait de toute façon, les zones suivent
         let dirty = false, tool = 'pan', fitMode = 'page', fitOn = true, zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
         let flowView = '', flowCur = '', flowT = 0, fixCount = null, fixCountFor = ''; // la frise (plus bas)
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-tx-dlg';
@@ -268,6 +319,7 @@
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'transcribe', true); dlg.showModal();
         dlg.txApi = {get: () => t, touch: () => touch()}; // 🌐 « Traduire » (plus-famille-latin.js) : garder la traduction dans la transcription (t.data.translation) // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const $ = s => dlg.querySelector(s), area = $('[data-tx-body]'), mirror = $('[data-tx-mirror]'), svg = $('[data-tx-svg]'), world = $('[data-tx-world]'), img = $('[data-tx-img]'), stage = $('[data-tx-stage]');
+        area.value = t.body; // 🧲 le HTML d'une <textarea> mange le saut de ligne du tout début : sans ceci, toutes les zones commençaient 1 caractère trop tard
         const UI = window.LCNDA_UI || {}, STATES = {'modifié': 'dirty', '✓ Enregistré': 'saved', 'Enregistrement…': 'saving'};
         const status = s => { const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
         let commitT = 0, HX = null, txBar = null; // E1 : un vrai historique ↶ ↷ (texte, zones, personnes, réglages de l'image, fiche de l'acte) ; K18 : la barre du bas
@@ -690,7 +742,9 @@
             let q = 0; while (q < before.length - p && q < now.length - p && before[before.length - 1 - q] === now[now.length - 1 - q]) q++;
             const oldEnd = before.length - q, delta = now.length - before.length;
             const shift = r => { const f = v => v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, p + (now.length - q - p))) : v; r.s = f(r.s); r.e = Math.max(r.s, f(r.e)); };
-            t.data.zones.forEach(shift); t.data.people.forEach(shift); found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
+            // 🧲 une lettre écrite tout au début d'une ligne reliée (sans retour à la ligne) : la zone la garde (avant, elle partait d'un cran)
+            const lead = oldEnd === p && delta > 0 && (p === 0 || now[p - 1] === '\n') && !now.slice(p, p + delta).includes('\n');
+            t.data.zones.forEach(z => { if (lead && z.s === p && z.e > z.s) z.e += delta; else shift(z); }); t.data.people.forEach(shift); found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
             txFix.forEach(shift); txFix = txFix.filter(f => now.slice(f.s, f.e) === f.word); if (txFixOn) { clearTimeout(txFixT); txFixT = setTimeout(() => runFix({quiet: true}), 900); }
             before = now; t.body = now; touch(); if (!findBar.hidden) findRun({keep: true}); paintMirror(); paintPeople();
         });
@@ -1941,6 +1995,20 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
                 dirty = true; status(i18n('modifié')); drawZones(); paintMirror(); paintPeople(); },
             onChange: h => { $('[data-tx-hist="undo"]').disabled = !h.canUndo(); $('[data-tx-hist="redo"]').disabled = !h.canRedo(); }});
         HX?.reset();
+        /** 🧲 recaler sur les lignes du texte les zones décalées de quelques caractères ; auto (à l'ouverture) : seulement si c'est sûr
+         *  (au moins 2 zones dont le début est décalé, comme sur les anciennes transcriptions) ; « ↶ Annuler » remet les zones d'avant */
+        function snapToLines({auto = false} = {}) {
+            const r = snapZones(area.value, t.data.zones, {startOnly: auto});
+            dlg.dataset.txSnap = JSON.stringify({fixed: auto && r.fixes.length < 2 ? 0 : r.fixes.length, left: r.left, auto}); // pour les essais
+            if (auto && r.fixes.length < 2) return r;
+            if (!r.fixes.length) { toast(r.left ? i18n('Aucune zone recalée : {n} à vérifier à la main (pas sûr)', {n: r.left}) : i18n('Les zones sont déjà calées sur les lignes du texte.')); return r; }
+            const prev = cloneZones(); snap(); r.fixes.forEach(f => { const z = t.data.zones[f.i]; if (z) { z.s = f.s; z.e = f.e; } }); touch(); drawZones(); const next = cloneZones();
+            const put = list => () => { snap(); t.data.zones = list.map(z => ({...z})); if (!t.data.zones.some(z => z.id === selZone)) selZone = null; touch(); drawZones(); };
+            const msg = [i18n(r.fixes.length > 1 ? '{n} lignes recalées sur le texte' : '{n} ligne recalée sur le texte', {n: r.fixes.length}), r.left ? i18n('{n} à vérifier à la main (pas sûr)', {n: r.left}) : ''].filter(Boolean).join(' · ');
+            status(msg); (A().undoToast || toast)(msg, {undo: put(prev), redo: put(next), icon: '🧲'});
+            return r;
+        }
+        if (dlg.isConnected && t.data.zones.length) snapToLines({auto: true});
         dlg.addEventListener('click', e => { const hb = e.target.closest('[data-tx-hist]'); if (hb) undoZones(hb.dataset.txHist === 'redo'); });
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
         /* ═════ 🔗 Liens avec les autres outils (maquette docs/design/outils-liens.html) : 📤 Envoyer vers…, 📝 Traitement de texte,
@@ -2004,7 +2072,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             ext.retouchMedia ? {icon: '🎚️', label: i18n('Éclaircir / restaurer l’image'), disabled: !curMedia(), run: retouchImage} : null].filter(Boolean);
         UI.editorMenus?.($('[data-tx-menus]'), {
             Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', ...(fichierLinks().length ? [...fichierLinks(), '-'] : []), {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, {icon: '⚖️', label: `${i18n('Comparer les lectures')}…`, run: () => openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
-            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🔍', label: `${i18n('Chercher et remplacer')}…`, shortcut: '⌘F', run: () => openFind(true)}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}],
+            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🔍', label: `${i18n('Chercher et remplacer')}…`, shortcut: '⌘F', run: () => openFind(true)}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}, '-', {icon: '🧲', label: i18n('Recaler les zones sur les lignes'), disabled: !t.data.zones.some(z => z.e > z.s), run: () => snapToLines()}],
             // K1 : les lectures, Repérer et « Ajouter à la généalogie » sont des outils (plus dans Édition) ; un symbole = une action (K11)
             Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: i18n('Loupe'), shortcut: 'L', run: cmdOf('loupe')}, '-',
                 {icon: '✍️', label: i18n('Lire l’écriture à la main (rapide)'), run: cmdOf('htr')}, {icon: '🖨', label: i18n('Lire un texte imprimé'), run: cmdOf('ocr')}, {icon: '🔬', label: `${i18n('Lecture approfondie (IA)')}…`, run: cmdOf('deep')}, {icon: '▤', label: i18n('Relier les lignes à l’image'), run: cmdOf('lines')}, '-',

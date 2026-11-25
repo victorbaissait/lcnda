@@ -122,6 +122,40 @@ function restore_act_transcription_version(PDO $pdo, array $data): array
     return save_act_transcription_version($pdo, ['act_id' => $v['act_id'] ?? 0, 'label' => $v['label'] ?? '', 'body' => $v['body'] ?? '', 'data' => $v['data'] ?? [], 'auto' => !empty($v['auto']), 'source' => (string) ($v['source'] ?? ''), 'restore_id' => $v['id'] ?? 0, 'created_at' => $v['created_at'] ?? null]);
 }
 
+/**
+ * 🗑 plusieurs versions d'un coup (la bande « Versions », l'aperçu d'une version, la fenêtre 🕘 Versions avec plusieurs cochées) :
+ * ids → toutes supprimées ou aucune ; renvoie chaque version entière (même id, texte, données, date) pour ↶ Annuler
+ * (restore_act_transcription_versions). « Ma version (actuelle) » n'est pas une version : c'est le texte de l'acte, elle ne se supprime pas ici.
+ */
+function delete_act_transcription_versions(PDO $pdo, array $data): array
+{
+    act_transcriptions_ensure($pdo);
+    $ids = array_values(array_unique(array_filter(array_map('safe_int', is_array($data['ids'] ?? null) ? array_slice($data['ids'], 0, 500) : []), static fn($i) => $i > 0)));
+    if (!$ids) { throw new LcndaBadInput('Choisis au moins une version à supprimer.'); }
+    $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
+    try {
+        $versions = array_map(static fn($id) => act_transcription_version($pdo, $id), $ids); // une version introuvable : rien n'est supprimé
+        $del = $pdo->prepare('DELETE FROM act_transcription_versions WHERE id=?');
+        foreach ($versions as $v) { $del->execute([$v['id']]); }
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+    return ['ids' => array_column($versions, 'id'), 'versions' => $versions];
+}
+
+/** ↶ Annuler d'une suppression de plusieurs versions : chacune revient avec son id et sa date (si l'id est encore libre) */
+function restore_act_transcription_versions(PDO $pdo, array $data): array
+{
+    $list = is_array($data['versions'] ?? null) ? array_slice(array_values($data['versions']), 0, 500) : [];
+    if (!$list) { throw new LcndaBadInput('Rien à remettre.'); }
+    $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
+    try {
+        $ids = [];
+        foreach (array_reverse($list) as $v) { $ids[] = restore_act_transcription_version($pdo, ['version' => is_array($v) ? $v : []])['id']; } // les plus anciennes d'abord (les automatiques gardées restent les dernières)
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+    return ['ids' => $ids];
+}
+
 function rename_act_transcription_version(PDO $pdo, array $data): array
 {
     $old = act_transcription_version($pdo, safe_int($data['id'] ?? 0));

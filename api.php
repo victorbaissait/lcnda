@@ -10344,6 +10344,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_act_transcription_version' => save_act_transcription_version($pdo,$data), // 🕘 Versions du texte d'un acte
             'delete_act_transcription_version' => delete_act_transcription_version($pdo,$data),
             'restore_act_transcription_version' => restore_act_transcription_version($pdo,$data),
+            'delete_act_transcription_versions' => delete_act_transcription_versions($pdo,$data), // 🗑 plusieurs d'un coup (une seule ↶ Annuler)
+            'restore_act_transcription_versions' => restore_act_transcription_versions($pdo,$data),
             'rename_act_transcription_version' => rename_act_transcription_version($pdo,$data),
             'doc_link_save' => doc_link_save($pdo,$data), // 🔗 lier deux documents (ou changer la raison)
             'doc_link_delete' => doc_link_delete($pdo,$data), // 🔗 retirer un lien (↶ Annuler : doc_link_save avec ce qui est renvoyé)
