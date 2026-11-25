@@ -167,6 +167,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=43" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
+    <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
     for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
@@ -1332,7 +1333,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-pages.js?v=17" defer></script>
 <script src="assets/js/app-access.js?v=20" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
-<script src="assets/js/app-sidegroups.js?v=14" defer></script>
+<script src="assets/js/app-sidegroups.js?v=15" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
 <script src="assets/js/app-listes-donnees.js?v=9" defer></script>

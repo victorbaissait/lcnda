@@ -268,6 +268,48 @@ const t = async (name, fn) => {
                 assert.match(await p.textContent(`${D} [data-cx-lrows]`), /Saint-Amand/); }
             m.notes.push(`${m.clicks} gestes pour trouver une ligne précise`);
         });
+        // 🚂 « la date d'ouverture de la gare de Vulaines-sur-Seine–Samoreau, et l'envoyer quelque part » (3 chemins ; sans le pack : une ligne FABRIQUÉE)
+        if (!pack) {
+            const ROW = {name: 'Vulaines-sur-Seine - Samoreau', year: 1897, code: '77533', source: 'Wikidata', lat: 48.43055, lon: 2.75302};
+            await B.ctx.route(/api\.php\?action=ld_status/, r => r.fulfill({contentType: 'application/json', body: JSON.stringify({installed: {hist_gares: true}})}));
+            await B.ctx.route(/api\.php\?action=ld_query/, r => { const u = new URL(r.request().url()); let q = {}; try { q = JSON.parse(u.searchParams.get('query') || '{}'); } catch (_) {}
+                const ok = !q.q || /vulaines|samoreau/i.test(q.q); r.fulfill({contentType: 'application/json', body: JSON.stringify({rows: ok ? [ROW] : [], total: ok ? 1 : 0})}); });
+            await p.reload(); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.connexions && window.LCNDA_EXT?.dataListsEngine, null, {timeout: 60000});
+        }
+        const gareRow = () => L('.ld-table tbody tr', {hasText: 'Vulaines-sur-Seine - Samoreau'}).filter({hasText: /18\d\d/}).first();
+        const yearCell = async () => { const tr = gareRow(); await tr.waitFor({timeout: 30000}); const n = await tr.locator('td').count(); for (let i = 0; i < n; i++) if (/^\s*18\d\d\s*$/.test(await tr.locator('td').nth(i).innerText())) return tr.locator('td').nth(i); throw new Error('pas de case « Ouverture »'); };
+        const isGare = x => /Vulaines-sur-Seine - Samoreau/.test(x.title) && /^Ouverture : 18\d\d$/.test(x.value) && /Gares et ouverture du train/.test(x.origin?.label || '') && /ODbL|CC0/.test(x.origin?.label || '') && /^https?:/.test(x.origin?.url || '');
+        await t('G1 · gare de Vulaines (a) : page Listes → chercher « vulaines » → clic sur l’année → « Mettre « Ouverture : 1897 » dans… » → le panier (≤ 4 gestes)', async m => {
+            await clearBasket(); await p.evaluate(() => localStorage.setItem('genealogie-cx-put-recents', JSON.stringify(['basket'])));
+            await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.open('hist_gares', {q: '', crit: [], period: null, near: null}));
+            await p.waitForSelector('.ld-page[data-ld-page="hist_gares"] [data-ld-q]', {timeout: 30000});
+            m.clicks = 0; const t0 = Date.now();
+            await F('[data-ld-q]', 'vulaines'); const cell = await yearCell(); await cell.click(); m.clicks++;
+            await C('.ui-actmenu button:has-text("Mettre « Ouverture")'); await p.waitForSelector('.cx-put[open] [data-cx-dest="basket"].is-on');
+            await C('.cx-put [data-cx-putgo]'); await sleep(800);
+            const b = (await basket()).items; assert.ok(b.some(isGare), JSON.stringify(b).slice(0, 400));
+            assert.ok(m.clicks <= 4, m.clicks + ' gestes'); m.notes.push(`${m.clicks} gestes, ${((Date.now() - t0) / 1000).toFixed(1)} s ; clic droit sur la ligne : chaque info proposée`);
+            await cell.click({button: 'right'}); await p.waitForSelector('.ui-actmenu'); assert.match(await p.textContent('.ui-actmenu'), /Prendre seulement « Code Insee : 77533 »/); await p.keyboard.press('Escape');
+        });
+        await t('G2 · gare de Vulaines (b) : depuis l’enquête, « Prendre depuis… » → Listes → Gares → « vulaines » → la ligne → seulement « Ouverture » → Prendre', async m => {
+            await openTake(); m.clicks = 0;
+            await openList('hist_gares'); await listQ('vulaines');
+            await C(`${D} [data-cx-lrows] .cx-rlist li:has-text("Vulaines-sur-Seine - Samoreau") .cx-rt >> nth=0`);
+            const part = L(`${D} [data-cx-prev] .cx-parts li`, {hasText: /Ouverture/}).first(); await check(part.locator('input'));
+            await C(`${D} [data-cx-takehere]`); await waitDelivered();
+            const l = (await linksOf()).find(x => /Vulaines/.test(x.label) && /Ouverture/.test(x.label + x.value)); assert.ok(l && /18\d\d/.test(l.value) && /Gares/.test(l.origin?.label || ''), JSON.stringify(l));
+            m.notes.push(`${m.clicks} gestes`);
+        });
+        await t('G3 · gare de Vulaines (c) : « 🧺 Prendre « Ouverture : 1897 » » sur la page, puis plus tard, sur l’enquête : 🧺 → « Mettre dans… » → l’enquête', async m => {
+            await clearBasket(); await closeAll();
+            await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.open('hist_gares', {q: 'vulaines', crit: [], period: null, near: null}));
+            m.clicks = 0; const cell = await yearCell(); await cell.click(); m.clicks++; await C('.ui-actmenu button:has-text("Prendre « Ouverture")'); await sleep(800);
+            assert.ok((await basket()).items.some(isGare));
+            await B.openInv(1); await p.waitForSelector('#cx-pill:not([hidden])'); await C('#cx-pill'); await C('.cx-panel [data-cx-put]');
+            await p.waitForSelector('.cx-put[open] [data-cx-here="1"].is-on'); await C('.cx-put [data-cx-putgo]'); await sleep(1500);
+            assert.ok((await linksOf()).some(l => /Vulaines/.test(l.label) && /Ouverture/.test(l.value))); assert.strictEqual((await basket()).items.length, 0);
+            m.notes.push(`${m.clicks} gestes en tout (2 sur la liste, 3 plus tard)`);
+        });
         await t('L1 · page d’une liste : « ☑ Choisir des lignes », 2 sur 5, Maj+clic pour une suite, « Prendre… » propose « les 2 cochées » ou « les 5 trouvées »', async m => {
             await clearBasket();
             await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.open('ciel_cometes', {q: 'comète', crit: [], period: {mode: 'overlap', from: 1800, to: 1910}, near: null}));

@@ -439,48 +439,58 @@ const SRC={
 };
 const srcHtml=(k,ref)=>{const s=SRC[k];if(!s)return'';return `<span class="src">Source : ${s.url?`<a href="${s.url}" target="_blank" rel="noopener">${esc(s.n)} ↗</a>`:esc(s.n)}${ref?` · ${esc(ref)}`:''} · <span class="lic">${esc(s.lic)}</span></span>`;};
 
-const I=(i,t,s,src,o)=>Object.assign({id:nid('i'),i,t,s,src,done:false,note:''},o||{});
+const I=(i,t,s,src,o)=>Object.assign({id:nid('i'),i,t,s,src,stt:'trouve',note:'',c:CAT_OF[i]||'donnee',add:uid},o||{});
+const CAT_OF={'📜':'acte','📅':'evt','👤':'pers','👶':'pers','🖼':'media','⛪':'lieu','🏰':'lieu','🏛':'lieu','🪦':'lieu','📍':'lieu','🗺':'media','📋':'donnee','🌦':'donnee','☄️':'evt','🌅':'evt','🌊':'evt','🌋':'evt','⚔️':'evt','🎖️':'acte','📝':'note','📒':'fiche','🌒':'evt','💧':'acte','🕯':'pers','🪖':'lieu'};
 const NODES=[
  {id:'f1',type:'f',p:'',name:'Famille MAZAUD'},
- {id:'b1',type:'b',p:'f1',name:'Mariage MAZAUD × LACOMBE 1826',icon:'💍',dests:['🔎 Enquête « Le mariage de 1826 »','📚 Atelier « Livre MAZAUD », chap. 3'],items:[
-  I('📜','Acte de mariage, Treignac, 14 juin 1826','Jean MAZAUD et Marie LACOMBE · transcrit','ad19',{ref:'5 Mi 123, vue 45',done:true,note:'Témoins à identifier',perso:1}),
-  I('👤','Jean MAZAUD (1801–1871)','cultivateur au Bourg, fils de Léonard et de Catherine DURAND','arbre',{done:true}),
-  I('👤','Marie LACOMBE (1804–1880)','fille de Pierre LACOMBE et de Jeanne DURAND','arbre'),
-  I('📅','Contrat de mariage, 2 juin 1826','devant Me DURAND, notaire à Treignac','notaire',{ref:'3 E 456',perso:1}),
-  I('🖼','Photo de la maison MAZAUD au Bourg (vers 1900)','carte postale scannée','med'),
-  I('⛪','Église de Treignac','lieu du mariage · inscrite aux monuments historiques','mer'),
-  I('📋','Prix du blé au marché de Treignac, 1826','une ligne de la liste « Prix et mesures »','wp',{ref:'liste « Prix et mesures »'})
+ {id:'b1',type:'b',p:'f1',name:'Mariage MAZAUD × LACOMBE 1826',icon:'💍',cover:'linear-gradient(135deg,#e9dcc3,#c8b79a)',pin:true,tags:[['famille','#1a7f37'],['à finir','#d4a800']],due:'2026-12-15',remind:true,dests:['🔎 Enquête « Le mariage de 1826 »','📚 Atelier « Livre MAZAUD », chap. 3'],
+  sort:{k:'main',then:'',dir:1},view:'liste',
+  hist:['aujourd’hui 10:42 — « Prix du blé… » ajouté (depuis Listes)','aujourd’hui 10:40 — 2 éléments rangés par glisser','hier — « Contrat de mariage » : statut « vérifié »','12 nov. — panier renommé (« Mariage 1826 » → « Mariage MAZAUD × LACOMBE 1826 »)','10 nov. — panier créé'],
+  items:[
+  I('📜','Acte de mariage, Treignac, 14 juin 1826','Jean MAZAUD et Marie LACOMBE · transcrit','ad19',{ref:'5 Mi 123, vue 45',stt:'utilise',note:'Témoins à identifier',perso:1,y:1826.45,pl:'Treignac',dep:'Corrèze (19)',who:'Jean MAZAUD'}),
+  I('👤','Jean MAZAUD (1801–1871)','cultivateur au Bourg, fils de Léonard et de Catherine DURAND','arbre',{stt:'utilise',y:1801.78,pl:'Treignac',dep:'Corrèze (19)',who:'Jean MAZAUD'}),
+  I('👤','Marie LACOMBE (1804–1880)','fille de Pierre LACOMBE et de Jeanne DURAND','arbre',{y:1804.3,pl:'Treignac',dep:'Corrèze (19)',who:'Marie LACOMBE'}),
+  I('📅','Contrat de mariage, 2 juin 1826','devant Me DURAND, notaire à Treignac','notaire',{ref:'3 E 456',stt:'verifie',perso:1,y:1826.42,pl:'Treignac',dep:'Corrèze (19)',who:'Jean MAZAUD'}),
+  I('📜','Publication des bans, mai 1826','pas encore trouvée','ad19',{ref:'5 Mi 123',stt:'demander',perso:1,y:1826.38,pl:'Rilhac-Treignac',dep:'Corrèze (19)',who:'Marie LACOMBE'}),
+  I('🖼','Photo de la maison MAZAUD au Bourg (vers 1900)','carte postale scannée · 2,4 Mo','med',{y:1900,pl:'Treignac',dep:'Corrèze (19)',who:'Jean MAZAUD',size:2400}),
+  I('⛪','Église de Treignac','lieu du mariage · inscrite aux monuments historiques','mer',{pl:'Treignac',dep:'Corrèze (19)'}),
+  I('📋','Prix du blé au marché de Limoges, 1826','une ligne de la liste « Prix et mesures »','wp',{ref:'liste « Prix et mesures »',stt:'chercher',y:1826,pl:'Limoges',dep:'Haute-Vienne (87)'})
  ]},
  {id:'f2',type:'f',p:'f1',name:'Jean MAZAUD (1801–1871)'},
- {id:'b2',type:'b',p:'f2',name:'Ce qu’il a pu voir enfant',icon:'☄️',dests:['📒 Fiche « Jean MAZAUD, une vie »'],query:'ce qu’a pu voir Jean MAZAUD entre 10 et 12 ans dans le ciel, la mer ou sur terre',items:[
-  I('☄️','Grande comète de 1811','visible à l’œil nu jusqu’en janvier 1812 · il avait 10 ans','wp'),
-  I('🌅','Couchers de soleil rouges (Soufrière de Saint-Vincent, 1812)','ciels étranges','wp'),
-  I('🌊','Crue de la Vézère à Treignac, janvier 1813','il avait 11 ans','bdhi')
+ {id:'b2',type:'b',p:'f2',name:'Ce qu’il a pu voir enfant',icon:'☄️',dests:['📒 Fiche « Jean MAZAUD, une vie »'],query:'ce qu’a pu voir Jean MAZAUD entre 10 et 12 ans dans le ciel, la mer ou sur terre',
+  live:{mode:'ask',news:[['🌒','Éclipse partielle de Soleil, 1814','calculée pour Treignac','lune'],['🌦','Hiver 1812–1813 très froid (Limoges)','pack météo installé hier','meteo']]},items:[
+  I('☄️','Grande comète de 1811','visible à l’œil nu jusqu’en janvier 1812 · il avait 10 ans','wp',{y:1811.8,pl:'Treignac'}),
+  I('🌅','Couchers de soleil rouges (Soufrière de Saint-Vincent, 1812)','ciels étranges','wp',{y:1812.4}),
+  I('🌊','Crue de la Vézère à Treignac, janvier 1813','il avait 11 ans','bdhi',{y:1813.05,pl:'Treignac',dep:'Corrèze (19)'})
  ]},
  {id:'f3',type:'f',p:'f2',name:'Service militaire'},
  {id:'b3',type:'b',p:'f3',name:'Conscription 1821',icon:'🎖️',dests:['⚖️ Dossier de preuve « Jean MAZAUD »'],items:[
-  I('📜','Tableau de recensement de la classe 1821, canton de Treignac','Jean MAZAUD, n° 37','mat',{perso:1}),
-  I('📝','Note : « exempté ? frère aîné au service »','à vérifier','note')
+  I('📜','Tableau de recensement de la classe 1821, canton de Treignac','Jean MAZAUD, n° 37','mat',{ref:'1 R 34',perso:1,y:1821,pl:'Tulle',dep:'Corrèze (19)',who:'Jean MAZAUD'}),
+  I('📝','Note : « exempté ? frère aîné au service »','à vérifier','note',{stt:'revoir',who:'Jean MAZAUD'})
  ]},
  {id:'f4',type:'f',p:'',name:'Treignac'},
- {id:'b4',type:'b',p:'f4',name:'Naissances LACOMBE 1780–1800',icon:'👶',dests:['🔎 Enquête « Les LACOMBE de Treignac »'],items:[
-  I('👶','Pierre LACOMBE, né le 2 févr. 1784','Treignac · parrain Pierre DURAND','arbre'),
-  I('👶','Marie LACOMBE, née le 9 mai 1786','Treignac','arbre'),
-  I('📜','Baptême d’Antoine LA COMBE, 3 déc. 1797','acte pas encore relié','ad19',{ref:'GG 12, vue 210',perso:1})
+ {id:'b4',type:'b',p:'f4',name:'Naissances LACOMBE 1780–1800',icon:'👶',tags:[['famille','#1a7f37']],dests:['🔎 Enquête « Les LACOMBE de Treignac »'],items:[
+  I('👶','Pierre LACOMBE, né le 2 févr. 1784','Treignac · parrain Pierre DURAND','arbre',{y:1784.1,pl:'Treignac',who:'Pierre LACOMBE'}),
+  I('👶','Marie LACOMBE, née le 9 mai 1786','Treignac','arbre',{y:1786.35,pl:'Treignac',who:'Marie LACOMBE'}),
+  I('📜','Baptême d’Antoine LA COMBE, 3 déc. 1797','acte pas encore relié','ad19',{ref:'GG 12, vue 210',perso:1,y:1797.9,pl:'Treignac',stt:'chercher'})
  ]},
- {id:'b5',type:'b',p:'f4',name:'Château de Rochefière',icon:'🏰',dests:['📒 Fiche d’édifice « Rochefière »'],items:[
-  I('🏰','Château de Rochefière','Treignac · tour du XVe siècle','chat'),
-  I('🏛','Tour de Rochefière, inscrite MH (1931)','notice Mérimée','mer'),
-  I('⚔️','Siège de Rochefière (1569)','guerres de Religion · 0 km','wp'),
-  I('🪦','Monument aux morts de Treignac (1921)','3,2 km','wd'),
-  I('🌦','Hiver 1879–1880, la Vézère gelée','Météo d’autrefois','meteo'),
-  I('🗺','Cadastre napoléonien, section B (1825)','plan du château et des terres','ad19',{ref:'3 P 270'}),
-  I('🪦','Monument aux morts de Rilhac-Treignac','3,9 km','wd')
+ {id:'b5',type:'b',p:'f4',name:'Château de Rochefière',icon:'🏰',cover:'linear-gradient(160deg,#a8c3d8,#d9cfb5)',pin:true,tags:[['patrimoine','#6929c4']],place:'château de Rochefière',dests:['📒 Fiche d’édifice « Rochefière »'],sort:{k:'cat',then:'date',dir:1},items:[
+  I('🏰','Château de Rochefière','Treignac · tour du XVe siècle','chat',{pl:'Treignac',dep:'Corrèze (19)',km:0}),
+  I('🏛','Tour de Rochefière, inscrite MH (1931)','notice Mérimée','mer',{y:1931,pl:'Treignac',dep:'Corrèze (19)',km:0}),
+  I('⚔️','Siège de Rochefière (1569)','guerres de Religion','wp',{y:1569,pl:'Treignac',dep:'Corrèze (19)',km:0}),
+  I('🪦','Monument aux morts de Treignac (1921)','42 noms','wd',{y:1921,pl:'Treignac',dep:'Corrèze (19)',km:3.2}),
+  I('🌦','Hiver 1879–1880, la Vézère gelée','Météo d’autrefois','meteo',{y:1880,pl:'Treignac',dep:'Corrèze (19)',km:2.8}),
+  I('🗺','Cadastre napoléonien, section B (1825)','plan du château et des terres · 8,1 Mo','ad19',{ref:'3 P 270',y:1825,pl:'Treignac',dep:'Corrèze (19)',km:0,size:8100,stt:'demander'}),
+  I('🪦','Monument aux morts de Rilhac-Treignac','18 noms','wd',{y:1920,pl:'Rilhac-Treignac',dep:'Corrèze (19)',km:3.9}),
+  I('⚔️','Combat du pont de Treignac (1652)','la Fronde','wp',{y:1652,pl:'Treignac',dep:'Corrèze (19)',km:2.9}),
+  I('🪦','Monument aux morts de Soudaine-Lavinadière','11 noms','wd',{y:1922,pl:'Soudaine-Lavinadière',dep:'Corrèze (19)',km:6.1})
  ]},
  {id:'b6',type:'b',p:'',name:'Pêle-mêle',icon:'🧺',dests:[],items:[
-  I('👤','Sophie DURAND (née en 1962)','cousine vivante · adresse dans le Répertoire','arbre',{vivant:1}),
+  I('👤','Sophie DURAND (née en 1962)','cousine vivante · adresse dans le Répertoire','arbre',{vivant:1,who:'Sophie DURAND'}),
+  I('🪦','Monument aux morts de Treignac (1921)','pris depuis la fiche de la commune','wd',{y:1921,pl:'Treignac'}),
   I('📋','Les gares de la Corrèze (34 lignes)','un tableau, avec ses critères','wd',{ref:'liste « Gares »'})
- ]}
+ ]},
+ {id:'b7',type:'b',p:'f1',name:'Recensement 1836 (fini)',icon:'📋',arch:true,dests:['🔎 Enquête « Le mariage de 1826 »'],items:[I('📋','Recensement de Treignac, 1836, le Bourg','8 MAZAUD','ad19',{ref:'6 M 412',y:1836,stt:'utilise'})]}
 ];
 const SUGG=[
  {id:'s1',to:'b4',i:'📜',t:'3 actes de Treignac pas encore dans un panier',s:'baptêmes de 1784, 1791 et 1797, reliés à des LACOMBE',why:'le lieu <i>Treignac</i> · le dossier <i>Treignac</i> · le nom du panier',add:[['📜','Baptême de Pierre LACOMBE, 2 févr. 1784','parrain Pierre DURAND','ad19'],['📜','Baptême de Jeanne LACOMBES, 14 août 1791','variante du nom','ad19'],['📜','Sépulture de François LACOMBE, 1797','acte voisin','ad19']]},
@@ -532,10 +542,18 @@ const SSKEYS=['mil','voir','nais'];
 function parse(q){const f=fold(q);if(/milit|bataill|caserne|regiment|guerre/.test(f))return'mil';if(/pu voir|ciel|comete|eclipse|aurore/.test(f))return'voir';if(/naissance|bapteme|nes /.test(f))return'nais';return null;}
 const yearTxt=y=>{const yr=Math.floor(y),m=Math.round((y-yr)*12);return ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'][Math.min(11,m)]+' '+yr;};
 
+/* ═════════ ranger un panier : un seul « Ranger ▾ » ═════════ */
+const CATS=[['fiche','📒 Fiches'],['evt','📅 Événements'],['acte','📜 Actes'],['pers','👤 Personnes'],['media','🖼 Médias'],['lieu','📍 Lieux et édifices'],['donnee','📋 Données'],['note','📝 Notes']];
+const SORTS=[['main','À la main'],['nom','Nom A→Z'],['cat','Catégorie'],['date','Date de l’élément'],['ajout','Date d’ajout'],['lieu','Lieu (commune, département)'],['pers','Personne concernée'],['src','Source, liste d’origine'],['dist','Distance au lieu du panier'],['used','Utilisé / pas encore'],['taille','Taille (médias)']];
+const KEY={nom:i=>fold(i.t),cat:i=>CATS.findIndex(c=>c[0]===i.c),date:i=>i.y??9999,ajout:i=>i.add,lieu:i=>fold((i.dep||'~')+(i.pl||'~')),pers:i=>fold(i.who||'~'),src:i=>fold(SRC[i.src]?.n||''),dist:i=>i.km??9999,used:i=>i.stt==='utilise'?0:1,taille:i=>i.size??-1};
+const GROUP={cat:i=>(CATS.find(c=>c[0]===i.c)||CATS[6])[1],lieu:i=>i.pl?`📍 ${i.pl}${i.dep?' · '+i.dep:''}`:'Sans lieu',pers:i=>i.who?`👤 ${i.who}`:'Personne en particulier',src:i=>SRC[i.src]?.n||'?',used:i=>i.stt==='utilise'?'✓ Utilisés':'Pas encore utilisés'};
+const STT=[['chercher','🔍 à chercher'],['demander','✉ à demander'],['trouve','📌 trouvé'],['verifie','☑ vérifié'],['utilise','✓ utilisé'],['revoir','↺ à revoir']];
+const GEO={'Treignac':[48,52],'Rilhac-Treignac':[66,30],'Soudaine-Lavinadière':[24,28],'Limoges':[14,10],'Tulle':[70,86]};
+
 /* ═════════ l'onglet ═════════ */
 function mount(root,o){
  o=o||{};
- const st={nodes:clone(NODES),sugg:clone(SUGG),sel:o.sel||'b1',closed:new Set(),showSugg:true,stripOpen:true,stripAll:!o.phone,view:'basket',pick:false,picked:new Set(),find:'',s:null,menu:null};
+ const st={nodes:clone(NODES),sugg:clone(SUGG),sel:o.sel||'b1',closed:new Set(),showSugg:true,stripOpen:true,stripAll:!o.phone,view:'basket',pick:false,picked:new Set(),find:'',s:null,menu:null,newsEx:new Set(),gclosed:new Set(),archOpen:false};
  root.innerHTML=`<div class="tabui">
   <div class="appbar"><span class="logo">LCNDA</span><nav><span>🌳 Arbre</span><span>👤 Personnes</span><span>🔎 Enquêtes</span><span>📋 Listes</span><span>📒 Fiches</span><span class="on">🧺 Paniers</span></nav><span class="gear">⚙️</span></div>
   <div class="tb"><h3>🧺 Paniers</h3>
@@ -566,14 +584,18 @@ function mount(root,o){
 
  /* ── arbre ── */
  function paintTree(){
+  const dot=n=>n.tags&&n.tags.length?`<span class="tdot" style="background:${n.tags[0][1]}" aria-hidden="true"></span>`:'';
+  const badge=n=>n.live&&n.live.news.length&&n.live.mode==='ask'?`<span class="pill blue" title="Nouveautés de sa recherche, à valider">+${n.live.news.length}</span>`:'';
+  const line=(n,d,cls='')=>{const isF=n.type==='f',open=!st.closed.has(n.id);return `<div class="tr ${isF?'f':'b'}${cls}${st.sel===n.id&&st.view!=='search'&&!cls?' sel':''}" ${cls?'':'draggable="true" '}data-id="${n.id}" style="--d:${d}">
+    ${isF&&!cls?`<button type="button" class="tw" data-tw="${n.id}" aria-label="${open?'Replier':'Déplier'}">${open?'▾':'▸'}</button>`:'<span class="tw0"></span>'}
+    <span aria-hidden="true">${isF?(open?'📂':'📁'):esc(n.icon||'🧺')}</span><span class="nm">${esc(n.name)}</span>${dot(n)}${badge(n)}<span class="n">${count(n)}</span></div>`;};
   const row=n=>{const isF=n.type==='f',open=!st.closed.has(n.id);
-   return `<li role="treeitem"${isF?` aria-expanded="${open}"`:''}><div class="tr ${isF?'f':'b'}${st.sel===n.id&&st.view!=='search'?' sel':''}" draggable="true" data-id="${n.id}" style="--d:${depth(n.id)}">
-    ${isF?`<button type="button" class="tw" data-tw="${n.id}" aria-label="${open?'Replier':'Déplier'}">${open?'▾':'▸'}</button>`:'<span class="tw0"></span>'}
-    <span aria-hidden="true">${isF?(open?'📂':'📁'):esc(n.icon||'🧺')}</span><span class="nm">${esc(n.name)}</span><span class="n">${count(n)}</span></div>
-    ${isF&&open?`<ul role="group">${kids(n.id).map(row).join('')}</ul>`:''}</li>`;};
-  const nb=st.nodes.filter(n=>n.type==='b').length,nf=folders().length;
+   return `<li role="treeitem"${isF?` aria-expanded="${open}"`:''}>${line(n,depth(n.id))}${isF&&open?`<ul role="group">${kids(n.id).filter(k=>!k.arch).map(row).join('')}</ul>`:''}</li>`;};
+  const nb=st.nodes.filter(n=>n.type==='b'&&!n.arch).length,nf=folders().length,pins=st.nodes.filter(n=>n.pin&&!n.arch),arch=st.nodes.filter(n=>n.arch);
   $('.tree').innerHTML=`<div class="treeh"><b>Mes paniers</b><span class="mini">${nb} paniers · ${nf} dossiers</span><button type="button" class="b ter sm tclose" data-a="tree">✕ Fermer</button></div>
-   <ul class="tlist" role="tree">${kids('').map(row).join('')}</ul>
+   ${pins.length?`<div class="tsec">★ Épinglés</div><ul class="tlist">${pins.map(n=>`<li>${line(n,0,' pinr')}</li>`).join('')}</ul><div class="tsec">Tous</div>`:''}
+   <ul class="tlist" role="tree">${kids('').filter(k=>!k.arch).map(row).join('')}</ul>
+   ${arch.length?`<button type="button" class="tsec tarch" data-a="archopen" aria-expanded="${!!st.archOpen}">${st.archOpen?'▾':'▸'} 🗄 Archivés (${arch.length})</button>${st.archOpen?`<ul class="tlist">${arch.map(n=>`<li>${line(n,0,' archr')}</li>`).join('')}</ul>`:''}`:''}
    <p class="mini tnote">⋮⋮ Glisse un panier sur un dossier pour l’y ranger, un élément sur un panier pour l’y mettre. Un dossier garde toujours au moins un panier.</p>`;
   const cur=node(st.sel);
   $('.crumbbtn span').textContent=st.view==='search'?'🔍 Nouvelle recherche':cur?path(cur.id).map((x,i,a)=>i===a.length-1?label(x):(x.type==='f'?'📂 ':'')+x.name).join(' › '):'Mes paniers';
@@ -599,29 +621,60 @@ function mount(root,o){
   n.type==='b'?paintBasket(n):paintFolder(n);
  }
  const crumbs=n=>{const p=path(n.id).slice(0,-1);return p.length?`<div class="crumbs">${p.map(x=>'📂 '+esc(x.name)).join(' › ')} ›</div>`:'<div class="crumbs">À la racine</div>';};
- function visibleItems(n){const f=fold(st.find).trim();return f?n.items.filter(it=>fold([it.t,it.s,it.note,SRC[it.src]?.n].join(' ')).includes(f)):n.items;}
+ function visibleItems(n){const f=fold(st.find).trim();return f?n.items.filter(it=>fold([it.t,it.s,it.note,it.pl,it.who,SRC[it.src]?.n].join(' ')).includes(f)):n.items;}
+ const sortOf=n=>n.sort||(n.sort={k:'main',then:'',dir:1});
+ const sortLabel=n=>{const s=sortOf(n),L=k=>SORTS.find(x=>x[0]===k)[1];return s.k==='main'?'À la main':`${L(s.k)}${s.then?', puis '+L(s.then):''} ${s.dir>0?'↑':'↓'}`;};
+ function arranged(n,vis){const s=sortOf(n);if(s.k==='main')return [{key:'',items:vis}];
+  const cmp=k=>(a,b)=>{const x=KEY[k](a),y=KEY[k](b);return (x<y?-1:x>y?1:0)*s.dir;};
+  const arr=[...vis].sort((a,b)=>cmp(s.k)(a,b)||(s.then?cmp(s.then)(a,b):0));
+  if(!GROUP[s.k])return [{key:'',items:arr}];
+  const out=[];arr.forEach(i=>{const g=GROUP[s.k](i);let b=out.find(x=>x.key===g);if(!b)out.push(b={key:g,items:[]});b.items.push(i);});return out;}
+ function summary(n){const ys=n.items.map(i=>i.y).filter(Boolean),pl=new Set(n.items.map(i=>i.pl).filter(Boolean)),sr=new Set(n.items.map(i=>i.src)),u=n.items.filter(i=>i.stt==='utilise').length;
+  return [`${n.items.length} élément${n.items.length>1?'s':''}`,ys.length?`${Math.floor(Math.min(...ys))}–${Math.floor(Math.max(...ys))}`:'',pl.size?`${pl.size} commune${pl.size>1?'s':''}`:'',`${sr.size} source${sr.size>1?'s':''}`,`${u} utilisé${u>1?'s':''}`].filter(Boolean).join(' · ');}
+ const dueTxt=d=>{const [y,m,j]=d.split('-').map(Number);return `${j} ${['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'][m-1]} ${y}`;};
+ function liveHtml(n){const L=n.live;if(!L)return n.query?`<div class="qline">🔍 Créé par la recherche « ${esc(n.query)} » <button type="button" class="b ter sm" data-a="redo">↻ Refaire (nouveautés à valider)</button></div>`:'';
+  const k=L.news.filter((x,i)=>!st.newsEx.has(n.id+i)).length;
+  return `<div class="live"><div>🔄 <b>Panier vivant</b> : il garde sa recherche « ${esc(n.query)} » et la refait chaque semaine (ton arbre et les listes installées).</div>
+   <div class="lmode"><span class="mini">Quand il y a du nouveau :</span><span class="seg"><button type="button" data-live="ask" aria-pressed="${L.mode==='ask'}">Me demander d’abord</button><button type="button" data-live="auto" aria-pressed="${L.mode==='auto'}">Ajouter tout seul</button></span></div>
+   ${L.news.length&&L.mode==='ask'?`<div class="news"><b>+${L.news.length} nouveaux à valider</b><ul class="rl">${L.news.map((x,i)=>{const ex=st.newsEx.has(n.id+i);return `<li class="rr${ex?' ex':''}" style="padding-left:6px"><span class="yn"><button type="button" class="y" data-nwy="${i}" aria-pressed="${!ex}" aria-label="Garder">✓</button><button type="button" class="n" data-nwn="${i}" aria-pressed="${ex}" aria-label="Laisser">✗</button></span><span class="ico" aria-hidden="true">${x[0]}</span><div class="rtx"><b>${esc(x[1])}</b><small>${esc(x[2])}</small>${srcHtml(x[3])}</div></li>`;}).join('')}</ul>
+   <div class="sga" style="margin-top:8px"><button type="button" class="b pri sm" data-a="newsok"${k?'':' disabled'}>＋ Ajouter les ${k} gardés</button><button type="button" class="b ter sm" data-a="newsno">Tout écarter</button></div></div>`:''}</div>`;}
  function paintBasket(n){
-  const used=n.items.filter(i=>i.done).length,vis=visibleItems(n),bs=st.showSugg?st.sugg.filter(s=>s.to===n.id):[];
+  const vis=visibleItems(n),bs=st.showSugg?st.sugg.filter(s=>s.to===n.id):[],s=sortOf(n),v=n.view||'liste';
+  const dups=new Map();st.nodes.forEach(b=>b.type==='b'&&b!==n&&b.items.forEach(i=>{const k=fold(i.t);dups.set(k,[...(dups.get(k)||[]),b.name]);}));
   $('.mscroll').innerHTML=`<div class="bh">${crumbs(n)}
-   <h3><span aria-hidden="true">${esc(n.icon||'🧺')}</span><span class="bn">${esc(n.name)}</span><span class="cnt">${n.items.length} élément${n.items.length>1?'s':''} · ${used} utilisé${used>1?'s':''}</span></h3>
+   ${n.arch?`<div class="qline">🗄 Panier archivé (fini) : il ne s’affiche plus dans l’arbre ni dans « Prendre depuis… ». <button type="button" class="b ter sm" data-a="unarch">Désarchiver</button></div>`:''}
+   <div class="bhead">${n.cover?`<span class="cover" style="background:${n.cover}" aria-hidden="true"></span>`:''}<div class="bht">
+    <h3><span aria-hidden="true">${esc(n.icon||'🧺')}</span><span class="bn">${esc(n.name)}</span><button type="button" class="pinb" data-a="pin" aria-pressed="${!!n.pin}" title="${n.pin?'Désépingler':'Épingler en haut de l’arbre'}">${n.pin?'★':'☆'}</button></h3>
+    <p class="summ">${summary(n)}</p>
+    ${(n.tags||[]).length||n.due?`<div class="meta">${(n.tags||[]).map(t=>`<span class="tag"><i style="background:${t[1]}"></i>${esc(t[0])}</span>`).join('')}${n.due?`<button type="button" class="tag due" data-a="due">⏰ pour le ${dueTxt(n.due)}${n.remind?' · rappel la veille':''}</button>`:''}</div>`:''}
+   </div></div>
    <div class="dests"><span class="lab">Va d’habitude vers</span>${n.dests.length?n.dests.map(d=>`<span class="dest">→ ${esc(d)}</span>`).join(''):'<span class="mini">nulle part encore</span>'}<button type="button" class="b ter sm" data-a="dests">✎ ${n.dests.length?'changer':'choisir'}</button></div>
-   <div class="acts"><button type="button" class="b pri sm" data-a="putall">📍 Mettre tout dans…</button><button type="button" class="b sec sm" data-a="pick" aria-pressed="${st.pick}">☑ Une partie…</button><button type="button" class="b sec sm" data-a="rename">✎ Renommer</button><button type="button" class="b sec sm" data-a="dup">⧉ Dupliquer ▾</button><button type="button" class="b sec sm" data-a="share">⇪ Partager</button><button type="button" class="b sec sm" data-a="more" aria-label="Autres actions">⋯</button></div>
-   ${n.query?`<div class="qline">🔍 Créé par la recherche « ${esc(n.query)} » <button type="button" class="b ter sm" data-a="redo">↻ Refaire (nouveautés à valider)</button></div>`:''}</div>
-   ${bs.length?`<section class="bs"><h5>💡 Pour ce panier <span class="mini">${bs.length} idée${bs.length>1?'s':''}</span><span class="sp"></span><button type="button" class="b ter sm" data-a="sugg-off">Masquer les suggestions</button></h5>${bs.map(s=>`<div class="bsr"><span aria-hidden="true">${s.i}</span><div class="t"><b>${esc(s.t)}</b><small>${esc(s.s)} — pourquoi : ${s.why}</small></div><button type="button" class="b pri sm" data-sadd="${s.id}">＋ Ajouter</button><button type="button" class="b ter sm" data-sno="${s.id}">✕</button></div>`).join('')}</section>`:''}
-   <div class="bfind"><label class="srch"><span class="mini" style="position:absolute;left:-9999px">Chercher dans ce panier</span><input type="search" data-find value="${esc(st.find)}" placeholder="Chercher dans ce panier : un nom, une date, une source…"></label>
-    <span class="mini" data-findn>${st.find?`${vis.length} trouvé${vis.length>1?'s':''} sur ${n.items.length}`:''}</span></div>
-   <ol class="items">${vis.map(it=>itemHtml(it,n)).join('')||`<li class="empty">${st.find?'Rien ne correspond dans ce panier.':'Vide : glisse des éléments ici, ou prends une idée au-dessus.'}</li>`}</ol>`;
+   <div class="acts"><button type="button" class="b pri sm" data-a="putall">📍 Mettre tout dans…</button><button type="button" class="b sec sm" data-a="pick" aria-pressed="${st.pick}">☑ Une partie…</button><button type="button" class="b sec sm opt" data-a="rename">✎ Renommer</button><button type="button" class="b sec sm" data-a="dup">⧉ Dupliquer ▾</button><button type="button" class="b sec sm opt" data-a="share">⇪ Partager</button><button type="button" class="b sec sm" data-a="more" aria-label="Autres actions">⋯</button></div>
+   ${liveHtml(n)}</div>
+   ${bs.length||st.showSugg?`<section class="bs"><h5>💡 Pour ce panier <span class="mini">${bs.length?bs.length+' idée'+(bs.length>1?'s':''):'pas d’idée pour l’instant'}</span><span class="sp"></span><button type="button" class="b ter sm" data-a="missing">🔎 Qu’est-ce qui manque ?</button><button type="button" class="b ter sm" data-a="sugg-off">Masquer les suggestions</button></h5>${bs.map(s=>`<div class="bsr"><span aria-hidden="true">${s.i}</span><div class="t"><b>${esc(s.t)}</b><small>${esc(s.s)} — pourquoi : ${s.why}</small></div><button type="button" class="b pri sm" data-sadd="${s.id}">＋ Ajouter</button><button type="button" class="b ter sm" data-sno="${s.id}">✕</button></div>`).join('')}</section>`:''}
+   <div class="ltools"><label class="srch"><span class="sr">Chercher dans ce panier</span><input type="search" data-find value="${esc(st.find)}" placeholder="Chercher dans ce panier…"></label>
+    <button type="button" class="b sec sm" data-a="sortmenu" aria-haspopup="true">↕ Ranger : ${esc(sortLabel(n))} ▾</button>${s.k!=='main'?`<button type="button" class="b ter sm" data-a="manual">↶ Mon ordre à la main</button>`:''}
+    <span class="seg" role="group" aria-label="Voir comme">${[['liste','☰ Liste'],['carte','🗺 Carte'],['frise','⏳ Frise']].map(([k,t])=>`<button type="button" data-view="${k}" aria-pressed="${v===k}">${t}</button>`).join('')}</span></div>
+   <p class="mini" data-findn style="margin:6px 2px 0">${st.find?`${vis.length} trouvé${vis.length>1?'s':''} sur ${n.items.length} — coche avec « ☑ Une partie… » pour n’en prendre que certains`:s.k==='main'?'Ton ordre à la main : ⋮⋮ glisser ou ↑ ↓.':'Rangé pour la vue seulement : ton ordre à la main est gardé.'}</p>
+   ${v==='carte'?mapHtml(vis):v==='frise'?friseHtml(vis):`<ol class="items">${arranged(n,vis).map(g=>{const gk=n.id+'|'+g.key,cl=st.gclosed.has(gk);return (g.key?`<li class="ghd"><button type="button" data-gf="${esc(gk)}" aria-expanded="${!cl}">${cl?'▸':'▾'} ${esc(g.key)} <span>${g.items.length}</span></button></li>`:'')+(cl?'':g.items.map(it=>itemHtml(it,n,s.k==='main',dups.get(fold(it.t)))).join(''));}).join('')||`<li class="empty">${st.find?'Rien ne correspond dans ce panier.':'Vide : glisse des éléments ici, ou prends une idée au-dessus.'}</li>`}</ol>`}`;
   paintFoot(n);
  }
- function itemHtml(it,n){const on=st.picked.has(it.id);
-  return `<li class="it${it.done?' done':''}${st.pick&&on?' on':''}" draggable="true" data-iid="${it.id}">
-   <span class="grip" aria-hidden="true" title="Glisser pour changer l’ordre ou le panier">⋮⋮</span>
+ function mapHtml(vis){const by=new Map(),none=[];vis.forEach(i=>i.pl&&GEO[i.pl]?by.set(i.pl,[...(by.get(i.pl)||[]),i]):none.push(i));
+  return `<div class="map" role="img" aria-label="Carte des éléments du panier"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M5,70 C25,60 35,62 50,50 S75,35 95,30" fill="none" stroke="var(--blue)" stroke-width=".8" opacity=".5"/></svg>
+   ${[...by].map(([p,its])=>`<button type="button" class="mpin" style="left:${GEO[p][0]}%;top:${GEO[p][1]}%" data-pin="${esc(p)}" title="${its.map(i=>esc(i.t)).join(' · ')}"><b>${its.length}</b> ${esc(p)}</button>`).join('')}<span class="mini maplab">Vézère</span></div>
+   <p class="mini" style="margin:8px 2px 0">${none.length?`Sans lieu : ${none.length} élément${none.length>1?'s':''} (${none.map(i=>esc(i.t)).slice(0,2).join(', ')}${none.length>2?'…':''}).`:'Tous les éléments ont un lieu.'} Toucher un point montre ses éléments.</p>`;}
+ function friseHtml(vis){const d=vis.filter(i=>i.y).sort((a,b)=>a.y-b.y),nd=vis.length-d.length;
+  return `<ol class="frise">${d.map(i=>`<li><span class="yr">${Math.floor(i.y)}</span><span class="fdot" aria-hidden="true"></span><span class="ft">${i.i} ${esc(i.t)}</span></li>`).join('')}</ol><p class="mini" style="margin:8px 2px 0">${nd?`Sans date : ${nd} élément${nd>1?'s':''}.`:''}</p>`;}
+ function itemHtml(it,n,manual,dup){const on=st.picked.has(it.id),S=STT.find(x=>x[0]===it.stt)||STT[2];
+  return `<li class="it${it.stt==='utilise'?' done':''}${st.pick&&on?' on':''}"${manual?' draggable="true"':''} data-iid="${it.id}">
+   ${manual?'<span class="grip" aria-hidden="true" title="Glisser pour changer l’ordre ou le panier">⋮⋮</span>':''}
    ${st.pick?`<label class="pk"><input type="checkbox" data-pi="${it.id}"${on?' checked':''} aria-label="Choisir « ${esc(it.t)} »"></label>`:''}
    <span class="ico" aria-hidden="true">${it.i}</span>
    <div class="itx"><b>${esc(it.t)}</b>${it.s?`<small>${esc(it.s)}</small>`:''}${srcHtml(it.src,it.ref)}
+    ${dup?`<span><span class="pill q" title="Le même élément est dans un autre panier">⧉ aussi dans « ${esc(dup[0])} »${dup.length>1?' +'+(dup.length-1):''}</span></span>`:''}
     <input class="note-in" data-note="${it.id}" value="${esc(it.note)}" placeholder="une note…" aria-label="Note sur « ${esc(it.t)} »"></div>
-   <div class="ir"><label class="used${it.done?' on':''}"><input type="checkbox" data-done="${it.id}"${it.done?' checked':''}> ✓ utilisé</label>
-    <span class="mv"><button type="button" data-up="${it.id}" aria-label="Monter">↑</button><button type="button" data-dn="${it.id}" aria-label="Descendre">↓</button></span>
+   <div class="ir"><button type="button" class="stt s-${S[0]}" data-stt="${it.id}" title="Cliquer : statut suivant (à chercher → à demander → trouvé → vérifié → utilisé → à revoir)">${S[1]}</button>
+    ${manual?`<span class="mv"><button type="button" data-up="${it.id}" aria-label="Monter">↑</button><button type="button" data-dn="${it.id}" aria-label="Descendre">↓</button></span>`:''}
     <button type="button" class="xb" data-x="${it.id}" aria-label="Retirer du panier">×</button></div></li>`;}
  function paintFoot(n){
   const f=$('.mfoot');
@@ -780,7 +833,7 @@ function mount(root,o){
   dlg('',draw);
  }
  function newBasketFrom(n,items,name){const id=nid('b');st.nodes.splice(st.nodes.indexOf(n)+1,0,{id,type:'b',p:n.p,name,icon:n.icon,dests:clone(n.dests),items:items.map(i=>Object.assign(clone(i),{id:nid('i')}))});return id;}
- function menu(btn,html,bind){root.querySelectorAll('.menu').forEach(m=>m.remove());const m=document.createElement('div');m.className='menu';m.innerHTML=html;const box=btn.closest('.acts,.cv');box.appendChild(m);const r=btn.offsetLeft;m.style.left=Math.max(0,Math.min(r,box.clientWidth-m.offsetWidth))+'px';bind(m);setTimeout(()=>document.addEventListener('click',function h(e){if(!m.contains(e.target)){m.remove();document.removeEventListener('click',h);}}),0);}
+ function menu(btn,html,bind){root.querySelectorAll('.menu').forEach(m=>m.remove());const m=document.createElement('div');m.className='menu';m.innerHTML=html;const box=btn.closest('.acts,.cv,.ltools');box.appendChild(m);const r=btn.offsetLeft;m.style.left=Math.max(0,Math.min(r,box.clientWidth-m.offsetWidth))+'px';bind(m);setTimeout(()=>document.addEventListener('click',function h(e){if(!m.contains(e.target)){m.remove();document.removeEventListener('click',h);}}),0);}
 
  /* ── clics ── */
  root.addEventListener('click',e=>{
@@ -816,8 +869,8 @@ function mount(root,o){
    case'share':openShare(n);break;
    case'pick':st.pick=!st.pick;st.picked.clear();paintMain();break;
    case'pickall':visibleItems(n).forEach(i=>st.picked.add(i.id));paintMain();break;
-   case'putall':menu(t,`<div class="mh">Ses destinations habituelles</div>${n.dests.map((d,i)=>`<button type="button" data-d="${i}">→ ${esc(d)}${i===0?'<small>d’habitude</small>':''}</button>`).join('')||'<p class="mini" style="padding:4px 10px">aucune encore</p>'}<hr><button type="button" data-d="x">📍 Ailleurs… (une enquête, une fiche, l’Atelier…)</button>`,m=>m.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{m.remove();toast(`📍 ${n.items.length} éléments mis ${b.dataset.d==='x'?'ailleurs':'dans '+esc(n.dests[b.dataset.d])}. Le panier les garde (✓ utilisé).`);n.items.forEach(i=>i.done=true);paintMain();}));break;
-   case'putsel':case'takesel':{const k=st.picked.size;const ids=[...st.picked];st.nodes.forEach(b=>b.type==='b'&&b.items.forEach(i=>{if(ids.includes(i.id))i.done=true;}));st.pick=false;st.picked.clear();paintAll();toast(a==='putsel'?`📍 ${k} éléments mis dans leurs destinations habituelles. Les autres restent au panier.`:`📥 ${k} éléments pris pour l’écran ouvert.`);break;}
+   case'putall':menu(t,`<div class="mh">Ses destinations habituelles</div>${n.dests.map((d,i)=>`<button type="button" data-d="${i}">→ ${esc(d)}${i===0?'<small>d’habitude</small>':''}</button>`).join('')||'<p class="mini" style="padding:4px 10px">aucune encore</p>'}<hr><button type="button" data-d="x">📍 Ailleurs… (une enquête, une fiche, l’Atelier…)</button>`,m=>m.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{m.remove();toast(`📍 ${n.items.length} éléments mis ${b.dataset.d==='x'?'ailleurs':'dans '+esc(n.dests[b.dataset.d])}. Le panier les garde (✓ utilisé).`);n.items.forEach(i=>i.stt='utilise');paintAll();}));break;
+   case'putsel':case'takesel':{const k=st.picked.size;const ids=[...st.picked];st.nodes.forEach(b=>b.type==='b'&&b.items.forEach(i=>{if(ids.includes(i.id))i.stt='utilise';}));st.pick=false;st.picked.clear();paintAll();toast(a==='putsel'?`📍 ${k} éléments mis dans leurs destinations habituelles. Les autres restent au panier.`:`📥 ${k} éléments pris pour l’écran ouvert.`);break;}
    case'dupsel':{const ids=[...st.picked],items=n.type==='b'?n.items.filter(i=>ids.includes(i.id)):basketsIn(n.id).flatMap(b=>b.items).filter(i=>ids.includes(i.id));const base=n.type==='b'?n:basketsIn(n.id)[0];const id=newBasketFrom(base,items,`${n.name} (${items.length} choisis)`);select(id);toast(`⧉ Les ${items.length} cochés copiés dans un nouveau panier.`);break;}
    case'dup':menu(t,`<button type="button" data-k="all">⧉ Tout le panier <small>${n.items.length}</small></button><button type="button" data-k="some">☑ Seulement les cochés… <small>coche puis « Dupliquer »</small></button>`,m=>{m.querySelector('[data-k=all]').onclick=()=>{m.remove();const id=newBasketFrom(n,n.items,n.name+' (copie)');select(id);toast('⧉ Panier dupliqué, juste en dessous.');};m.querySelector('[data-k=some]').onclick=()=>{m.remove();st.pick=true;st.picked.clear();paintMain();};});break;
    case'rename':{const el=$('.bn');el.contentEditable='true';el.focus();const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);const fin=()=>{el.contentEditable='false';n.name=el.textContent.trim()||n.name;paintTree();};el.onblur=fin;el.onkeydown=ev=>{if(ev.key==='Enter'){ev.preventDefault();el.blur();}};break;}
@@ -834,7 +887,6 @@ function mount(root,o){
   }
  });
  root.addEventListener('change',e=>{const t=e.target;
-  if(t.dataset.done){const it=node(st.sel).items.find(i=>i.id===t.dataset.done);it.done=t.checked;paintMain();return;}
   if(t.dataset.pi){t.checked?st.picked.add(t.dataset.pi):st.picked.delete(t.dataset.pi);paintMain();return;}
   if(t.dataset.pt){const ids=allItems(t.dataset.pt),all=tri(ids)==='all';ids.forEach(i=>all?st.picked.delete(i):st.picked.add(i));paintMain();return;}
   if(t.dataset.gk){const s=st.s,rows=rowsOf(SS[s.key],s).filter(r=>r.g===t.dataset.gk),all=rows.every(r=>!s.ex.has(r.id));rows.forEach(r=>all?s.ex.add(r.id):s.ex.delete(r.id));refreshRes();return;}

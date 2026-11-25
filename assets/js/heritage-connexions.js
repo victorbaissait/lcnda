@@ -1496,6 +1496,7 @@
             rowsBox.innerHTML = items.length ? resultsHtml(st, items, {groups: false}) + (p.total > items.length ? `<p class="cx-muted cx-pad"><small>${esc(T('Les {a} premières lignes sur {b} : « ▦ Prendre tout le tableau » les prend toutes, ou ajoute un critère.', {a: nf(items.length), b: nf(p.total)}))}</small></p>` : '')
                 : `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">🔎</span><b>${esc(T('Rien ne correspond à ces critères.'))}</b><p>${esc(T('Retire un critère, élargis la période ou la distance (↗ Ouvrir la liste complète).'))}</p></div>`;
             bindResults(st, rowsBox);
+            if (items.length === 1) { rowsBox.querySelector('li')?.classList.add('is-focus'); previewItem(st, items[0]); } // une seule ligne : on la montre tout de suite (« Prendre seulement une info » à droite)
         };
         await paintRows();
     }
@@ -1623,6 +1624,10 @@
             pt.on = true;
         }
         paintPageTake();
+        // une case du tableau : « Prendre cette info » (un clic) ; clic droit sur une ligne : chaque info, ou toute la ligne
+        const results = page.querySelector('[data-ld-results]');
+        results?.addEventListener('click', e => { if (e.target.closest('a, button, input, select, textarea, label, .cx-ldck, .ld-links') || window.getSelection?.()?.toString()) return; const td = e.target.closest('tbody td'); if (td) cellMenu(L, td, {x: e.clientX, y: e.clientY}); });
+        results?.addEventListener('contextmenu', e => { const td = e.target.closest('tbody td'); if (!td || e.target.closest('a, input')) return; e.preventDefault(); e.stopPropagation(); cellMenu(L, td, {x: e.clientX, y: e.clientY}, true); });
         btn.addEventListener('click', async () => {
             const n = L.total?.() || 0, c = pt.sel.size;
             if (!pt.on) setOn(true); // les cases apparaissent : on peut n'en prendre qu'une partie
@@ -1643,6 +1648,22 @@
                         const a = Math.max(1, Math.min(Number(m[1]), Number(m[2]))), b = Math.max(Number(m[1]), Number(m[2])); const it = await part(a - 1, b); if (it) take([it]); }}] : []),
             ].filter(Boolean), {title: c ? T('Prendre les {c} cochées ou les {n} trouvées', {c: nf(c), n: nf(n)}) : T('Prendre les lignes trouvées')});
         });
+    }
+    /** une case d'une liste → une info précise : « Gare Vulaines-sur-Seine - Samoreau » — « Ouverture : 1897 », avec la liste comme source (et sa licence, son lien ↗) */
+    function cellInfo(L, td) {
+        const tr = td.closest('tr[data-ld-row]'), r = (L.rows?.() || [])[Number(tr?.dataset.ldRow)]; if (!r) return null;
+        const it = ldRowItem(L.d, L.state?.() || {}, r), F = it._v.fields || [];
+        const tds = [...tr.children].filter(x => !x.classList.contains('cx-ldck')), ths = [...(tr.closest('table')?.querySelectorAll('thead th') || [])].filter(x => !x.classList.contains('cx-ldck'));
+        const head = (ths[tds.indexOf(td)]?.textContent || '').replace(/[↑↓]/g, '').trim();
+        const f = F.find(([h]) => h === head) || null, lead = F[0]?.[0] ? `${F[0][0]} ${it.title}` : it.title;
+        const part = ([h, v]) => ({kind: 'datum', title: lead.slice(0, 200), value: `${h} : ${v}`, ref_id: 0, data: {list: L.d.id, field: h, row: it.data.row, columns: it.data.columns}, origin: it.origin});
+        return {it: cleanIt(it), f: f && f[1] && f !== F[0] ? part(f) : null, parts: F.slice(1).filter(([, v]) => v).map(part)};
+    }
+    function cellMenu(L, td, at, whole = false) {
+        const c = cellInfo(L, td); if (!c) return;
+        const one = !whole && c.f ? [{icon: '🧺', label: T('Prendre « {t} »', {t: c.f.value}), run: () => take([c.f])}, {icon: '📍', label: T('Mettre « {t} » dans…', {t: c.f.value}), run: () => putInto([c.f])}, '-'] : [];
+        const others = whole || !c.f ? c.parts.map(x => ({icon: '✳️', label: T('Prendre seulement « {t} »', {t: x.value}), run: () => take([x])})) : [];
+        UI().menuAt?.(at, [...one, ...others, ...(others.length ? ['-'] : []), {icon: '🧺', label: T('Toute la ligne au panier'), run: () => take([c.it])}, {icon: '📍', label: T('Mettre toute la ligne dans…'), run: () => putInto([c.it])}], {title: c.it.title});
     }
     /** les cases cochées → des éléments « ligne de liste » */
     const pageSelItems = () => { const pt = pageTake; if (!pt) return []; const s = pt.L.state?.() || {}; return [...pt.sel.values()].map(r => (r && r.kind === 'row' ? cleanIt(r) : cleanIt(ldRowItem(pt.L.d, s, r)))); };

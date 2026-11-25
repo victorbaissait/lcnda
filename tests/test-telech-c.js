@@ -40,7 +40,7 @@ function hmdText(kind, sexWord, years) {
     }
     return out.join('\n');
 }
-const HFD = 'France, Total fertility rate\tLast modified: 01.01.2026;  Methods Protocol: v. 2 (2023)\n\n  Year      TFR\n  1946   2.9873\n  1950   2.9300\n';
+const HFD = 'France, Total fertility rate\tLast modified: 01.01.2026;  Methods Protocol: v. 2 (2023)\n\n  Year      TFR\n  1946   2.9873\n  1950   2.9300\n  1990   1.7700\n';
 
 (async () => {
     /* ═════════ 1. le fichier et le calcul ═════════ */
@@ -153,7 +153,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const none = await into('placeInto', {id: 0, name: ''}); assert.strictEqual(none[0], 0);
             const abroad = await into('placeInto', {id: 9, name: 'Roma', country: 'Italie'}, {parts: ['cholera']}); assert.strictEqual(abroad[0], 0);
         });
-        await t('Réglages → 📊 La vie en chiffres : un sujet s’éteint (↶) ; une table HMD et une HFD ouvertes → 🧮 et 👶 sur la fiche ; retirer (↶)', async () => {
+        await t('Réglages → 📊 La vie en chiffres : un sujet s’éteint (↶) ; une table HMD et une HFD ouvertes → 🧮 (Jean) et 👶 (Rose) sur la fiche ; retirer (↶)', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'telech_c'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-tc-settings-page] table tbody tr', {timeout: 20000});
             const txt = await p.textContent('[data-tc-settings-page]');
@@ -166,7 +166,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.setInputFiles('[data-tc-file]', [hmdFile, hfdFile, badFile]); await sleep(800);
             assert.strictEqual(await p.$$eval('[data-tc-tables] li', l => l.length), 2);
             const [n, , ptxt] = await into('personInto', 1);
-            assert.strictEqual(n, 3, ptxt); assert.match(ptxt, /Sur 100 enfants nés en 1820 \(France\), 80 atteignaient 1 an, \d+ atteignaient 20 ans/); assert.match(ptxt, /Il a vécu 40 ans : \d+ sur 100 de sa génération/);
+            assert.strictEqual(n, 2, ptxt); assert.match(ptxt, /1 an : 80 sur 100/); assert.match(ptxt, /Sur 100 enfants nés en 1820 \(France\), 80 atteignaient 1 an, \d+ atteignaient 20 ans/); assert.match(ptxt, /Il a vécu 40 ans : \d+ sur 100 de sa génération/);
+            const [n2, , rtxt] = await into('personInto', 2); // Rose, née en 1990 : seulement 👶 (le chiffre d'essai de 1990)
+            assert.strictEqual(n2, 1, rtxt); assert.match(rtxt, /En 1990, l’année de sa naissance, une femme avait en moyenne 1,77 enfants \(France\)/);
             await p.click('[data-tc-del]'); await sleep(200); assert.strictEqual(await p.evaluate(() => window.LCNDA_EXT.telechC.tables().length), 1);
             await p.locator('button:has-text("↶ Annuler")').last().click({timeout: 5000}); await sleep(300);
             assert.strictEqual(await p.evaluate(() => window.LCNDA_EXT.telechC.tables().length), 2);

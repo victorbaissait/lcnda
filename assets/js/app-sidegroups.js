@@ -144,4 +144,46 @@
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-sg-open]'); if (!b) return; inst[b.closest('[data-sg-panel]')?.dataset.sgPanel]?.openDialog(); });
     make.instances = inst; make.refreshPanels = refreshPanels;
     window.LCNDA_SIDEGROUPS = make;
+
+    /* 📐 La colonne de gauche, sur toutes les pages : l'icône de tête dans sa propre colonne (span.side-ico, 8 px avant le texte),
+       une colonne vide pour les lignes sans icône — les textes commencent tous au même endroit ; une barre de défilement
+       « par-dessus » (téléphone, macOS) → data-overlay-scroll : plus de marge à droite (app.css « l'espacement de la colonne »).
+       Fait après le filet de traduction (rAF) : le texte est déjà dans sa langue ; textContent ne change pas (l'espace reste). */
+    const ICO = /^(\s*)((?:\p{Extended_Pictographic}|\p{Regional_Indicator})(?:️|⃣|[\u{1F3FB}-\u{1F3FF}]|‍(?:\p{Extended_Pictographic}|\p{Regional_Indicator})|\p{Regional_Indicator})*)(\s+)/u;
+    function sideIcons(box) {
+        const items = [...box.querySelectorAll('.side-menu-item')];
+        const plan = items.map(b => {
+            if (b.dataset.sideIco && b.querySelector(':scope > .side-ico')) return {b, done: true, has: b.dataset.sideIco === 'ico'};
+            const nodes = [...b.childNodes], i = nodes.findIndex(n => !(n.nodeType === 1 && n.classList.contains('side-number')) && !(n.nodeType === 3 && !n.nodeValue.trim()));
+            const first = nodes[i]; if (!first || first.nodeType !== 3) return {b, skip: true};
+            const m = first.nodeValue.match(ICO);
+            return {b, first, m, has: !!m};
+        });
+        if (!plan.some(p => p.has)) return;
+        for (const p of plan) {
+            if (p.done || p.skip) continue;
+            const ico = document.createElement('span'); ico.className = 'side-ico'; ico.setAttribute('aria-hidden', 'true');
+            const lab = document.createElement('span'); lab.className = 'side-label';
+            let n = p.first;
+            if (p.m) { ico.textContent = p.m[2]; n.nodeValue = n.nodeValue.slice(p.m[0].length); }
+            p.b.insertBefore(ico, n);
+            if (p.m) p.b.insertBefore(document.createTextNode(p.m[3]), n); // l'espace d'origine : textContent ne change pas
+            p.b.insertBefore(lab, n);
+            while (n) { const next = n.nextSibling; lab.appendChild(n); n = next; }
+            p.b.dataset.sideIco = p.m ? 'ico' : 'none'; p.b.classList.add('has-side-ico');
+        }
+    }
+    function overlayScroll(box) {
+        const over = box.scrollHeight > box.clientHeight + 1 && box.offsetWidth - box.clientWidth - (parseFloat(getComputedStyle(box).borderLeftWidth) || 0) - (parseFloat(getComputedStyle(box).borderRightWidth) || 0) < 1;
+        if (over !== box.hasAttribute('data-overlay-scroll')) box.toggleAttribute('data-overlay-scroll', over);
+    }
+    const sideWatch = () => {
+        const box = document.getElementById('sidebar-content'); if (!box) return setTimeout(sideWatch, 300);
+        let raf = 0;
+        const run = () => { raf = 0; try { sideIcons(box); overlayScroll(box); } catch (e) { console.error(e); } };
+        new MutationObserver(() => { if (!raf) raf = requestAnimationFrame(run); }).observe(box, {childList: true, subtree: true});
+        if (typeof ResizeObserver === 'function') new ResizeObserver(() => { if (!raf) raf = requestAnimationFrame(run); }).observe(box);
+        run();
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sideWatch); else sideWatch();
 })();

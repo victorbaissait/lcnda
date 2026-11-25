@@ -44,8 +44,8 @@
     function depOf(place) {
         if (!place) return null;
         const ins = String(place.insee || '').trim().toUpperCase();
-        if (/^(2A|2B|\d{2})\d{3}$/.test(ins)) return ins.slice(0, 2);
         if (/^97\d{3}$/.test(ins)) return null;
+        if (/^(2A|2B|\d{2})\d{3}$/.test(ins)) return ins.slice(0, 2);
         const country = fold(place.country || '');
         if (country && !/^(france|fr|fra)$/.test(country)) return null;
         const parts = [place.county, place.state, ...String(place.full || place.place_full || '').split(',')].map(fold).filter(Boolean);
@@ -221,15 +221,15 @@
         return e ? {dep: depOf({insee: e.insee, country: e.country, full: e.place_full}), place: e.place} : null;
     }
     const SRC_SGF = D => `${link(D?.url || 'https://www.insee.fr/fr/statistiques/2659665?sommaire=2591397', 'Insee — Statistique générale de la France, mouvement de la population')} (${esc(T('Licence Ouverte 2.0, « Source : Insee »'))})`;
-    function choleraHtml(D, row, list, who) {
+    function choleraHtml(D, dr, list, who) {
         if (!list.length) return '';
         const top = list.slice().sort((a, b) => b.ratio - a.ratio)[0];
         const word = top.pct >= 0 ? T('{p} % de décès en plus', {p: String(top.pct)}) : T('{p} % de décès en moins', {p: String(-top.pct)});
         const lead = who
-            ? T('En {y}, année du choléra, {d} a compté {n} décès : {w} que les années voisines. {e} avait {a} ans.', {y: String(top.year), d: `<b>${esc(row.n)}</b>`, n: nf(top.n), w: word, e: esc(who.he), a: String(top.age)})
-            : T('En {y}, année du choléra, {d} a compté {n} décès : {w} que les années voisines.', {y: String(top.year), d: `<b>${esc(row.n)}</b>`, n: nf(top.n), w: word});
+            ? T('En {y}, année du choléra, {d} a compté {n} décès : {w} que les années voisines. {e} avait {a} ans.', {y: String(top.year), d: `<b>${esc(dr.n)}</b>`, n: nf(top.n), w: word, e: esc(who.he), a: String(top.age)})
+            : T('En {y}, année du choléra, {d} a compté {n} décès : {w} que les années voisines.', {y: String(top.year), d: `<b>${esc(dr.n)}</b>`, n: nf(top.n), w: word});
         const li = x => `<li>${esc(T('{y} : {n} décès, moyenne des années {b} : {m} ({p})', {y: String(x.year), n: nf(x.n), b: x.baseYears.join(', '), m: nf(x.mean), p: `${x.pct >= 0 ? '+' : ''}${x.pct} %`}))}</li>`;
-        return row('⚰️', `${lead} ${srcLink(D.url)}`, SRC_SGF(D), more(`<ul class="hist-ul tc-ul">${list.map(li).join('')}</ul>${hyp(T('Les tableaux donnent tous les décès de l’année, sans leur cause : l’écart avec les années voisines donne l’ampleur de la crise, pas le nombre exact de morts du choléra. Département d’alors : {d}.', {d: row.n}))}`, list.length));
+        return row('⚰️', `${lead} ${srcLink(D.url)}`, SRC_SGF(D), more(`<ul class="hist-ul tc-ul">${list.map(li).join('')}</ul>${hyp(T('Les tableaux donnent tous les décès de l’année, sans leur cause : l’écart avec les années voisines donne l’ampleur de la crise, pas le nombre exact de morts du choléra. Département d’alors : {d}.', {d: dr.n}))}`, list.length));
     }
     async function choleraForPerson(life) {
         const P = life.person; if (num(P.birth) === null) return '';
@@ -251,7 +251,7 @@
         const lead = T('Sur 100 enfants nés en {y} ({c}), {l}.', {y: String(b), c: esc(t.country), l: pick.map(x => T(x.age === 1 ? '{n} atteignaient 1 an' : '{n} atteignaient {a} ans', {n: String(x.per100), a: String(x.age)})).join(', ')});
         const age = num(P.death) !== null ? num(P.death) - b : null;
         const own = age !== null && age >= 0 && age <= 110 && s.at(age) !== null ? T('{e} a vécu {a} ans : {n} sur 100 de sa génération sont allés aussi loin.', {e: cap(he(P)), a: String(age), n: String(s.at(age))}) : '';
-        return row('🧮', `${lead} ${own} ${srcLink(LINKS.hmd())}`, srcHmd(t), more(`<ul class="hist-ul tc-ul">${s.ages.map(x => `<li>${esc(T('{a} ans : {n} sur 100', {a: String(x.age), n: String(x.per100)}))}</li>`).join('')}</ul>${s.e0 !== null && s.e0 !== undefined ? `<p>${esc(T('Espérance de vie à la naissance : {e} ans.', {e: s.e0.toLocaleString('fr-FR', {maximumFractionDigits: 1})}))}</p>` : ''}${hyp(T('{k}, {s}. Une table « du moment » suppose que les risques de mourir de cette année-là restent les mêmes toute la vie ; une table « par génération » suit vraiment les enfants nés cette année-là.', {k: kindTxt, s: T({F: 'femmes', M: 'hommes', T: 'ensemble'}[t.sex])}))}`));
+        return row('🧮', `${lead} ${own} ${srcLink(LINKS.hmd())}`, srcHmd(t), more(`<ul class="hist-ul tc-ul">${s.ages.map(x => `<li>${esc(T(x.age === 1 ? '1 an : {n} sur 100' : '{a} ans : {n} sur 100', {a: String(x.age), n: String(x.per100)}))}</li>`).join('')}</ul>${s.e0 !== null && s.e0 !== undefined ? `<p>${esc(T('Espérance de vie à la naissance : {e} ans.', {e: s.e0.toLocaleString('fr-FR', {maximumFractionDigits: 1})}))}</p>` : ''}${hyp(T('{k}, {s}. Une table « du moment » suppose que les risques de mourir de cette année-là restent les mêmes toute la vie ; une table « par génération » suit vraiment les enfants nés cette année-là.', {k: kindTxt, s: T({F: 'femmes', M: 'hommes', T: 'ensemble'}[t.sex])}))}`));
     }
     function fecondForPerson(life) {
         const P = life.person; const ts = tables().filter(t => t.db === 'hfd' && t.measure === 'tfr' && t.by === 'year'); if (!ts.length) return '';
