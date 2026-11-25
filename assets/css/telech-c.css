@@ -1,0 +1,8 @@
+/* LCNDA — 📊 La vie en chiffres / 📚 la commune dans les livres d'époque (assets/js/heritage-telech-c.js) : le reste vient de histoire.css (hist-row…) et commune-plus.css */
+.tc-life { display: grid; gap: 12px; }
+.tc-ul li { margin-bottom: 6px; }
+.tc-quote { margin: 4px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; white-space: pre-line; overflow-wrap: anywhere; }
+.tc-src-link { font-size: 12px; white-space: nowrap; }
+.tc-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.tc-settings [data-tc-tables] button { margin-left: 6px; }
+@media print { .tc-more:not([open]) { display: none; } }

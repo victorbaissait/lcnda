@@ -1,0 +1,20 @@
+/* 🗺 Le village tel qu'il était (lot A) — assets/js/heritage-telech-a.js. Les lignes reprennent le style des blocs voisins (hist-row, l10v-more). */
+.ta-swipe-wrap{margin:6px 0 2px;max-width:100%}
+.ta-swipe{--ta-pos:50%;position:relative;width:520px;max-width:100%;height:300px;overflow:hidden;border:1px solid var(--line,#c9ced8);border-radius:6px;background:#e6ecf0;touch-action:pan-y}
+.ta-layer{position:absolute;inset:0;overflow:hidden}
+.ta-layer img{position:absolute;max-width:none;user-select:none;pointer-events:none}
+.ta-before{clip-path:inset(0 calc(100% - var(--ta-pos)) 0 0)}
+.ta-bar{position:absolute;top:0;bottom:0;left:var(--ta-pos);width:3px;margin-left:-1px;background:#fff;box-shadow:0 0 3px rgba(0,0,0,.6);pointer-events:none;z-index:2}
+.ta-pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#d40000;font-weight:700;font-size:20px;text-shadow:0 0 3px #fff;pointer-events:none;z-index:2}
+.ta-lab{position:absolute;top:6px;z-index:3;font:600 12px/1.2 system-ui,sans-serif;background:rgba(255,255,255,.88);color:#222;padding:2px 6px;border-radius:3px;pointer-events:none}
+.ta-lab-a{left:6px}.ta-lab-b{right:6px}
+.ta-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:4}
+.ta-range:focus-visible{opacity:.25}
+.ta-tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.ta-legend{display:inline-flex;flex-wrap:wrap;gap:4px 10px;font-size:12px}
+.ta-legend i{display:inline-block;width:11px;height:11px;margin-right:3px;border:1px solid rgba(0,0,0,.25);vertical-align:-1px}
+.ta-table{max-width:420px}.ta-table td:not(:first-child),.ta-table th:not(:first-child){text-align:right}
+.ta-attr{position:absolute;right:4px;bottom:16px;z-index:7;max-width:calc(100% - 8px);font:11px/1.3 system-ui,sans-serif;background:rgba(255,255,255,.82);color:#333;padding:1px 5px;border-radius:3px;text-align:right}
+.ta-attr a{color:inherit}
+@media (max-width:600px){.ta-swipe{height:240px}}
+@media print{.ta-range,.ta-tools button{display:none}}

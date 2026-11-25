@@ -1,0 +1,57 @@
+# 📖 Le dictionnaire de Joanne (1869) : fabriquer assets/data/tc-joanne/<département>.json.gz (l'article de chaque commune, texte
+# OCR d'Internet Archive, domaine public) avec scripts/telech-c/build_joanne.py, puis l'enregistrer dans la branche lancée.
+# Les serveurs de fichiers d'Internet Archive ne sont pas joignables depuis l'atelier de développement : la fabrication se fait ici.
+# Le script s'arrête sans rien écrire si trop peu d'articles sont reconnus (voir son en-tête).
+#
+# Lancer : onglet « Actions » → « Dictionnaire de Joanne (1869) » → « Run workflow ».
+
+name: Dictionnaire de Joanne (1869)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-c-joanne.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-c-joanne
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Fabriquer les articles (Internet Archive, plusieurs essais)
+        timeout-minutes: 50
+        run: |
+          for i in 1 2 3; do
+            python3 -I scripts/telech-c/build_joanne.py "$RUNNER_TEMP/joanne-cache" && break
+            echo "essai $i raté, nouvel essai dans 60 s"; sleep 60
+          done
+          test -s assets/data/tc-joanne/15.json.gz
+          du -sh assets/data/tc-joanne
+      - name: Mettre à jour le sommaire des données (Réglages → 🗂 Données)
+        run: node scripts/donnees-manifest.js --branch "$GITHUB_REF_NAME"
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/tc-joanne assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Dictionnaire de Joanne (1869) : articles des communes (domaine public) fabriqués sur GitHub"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done

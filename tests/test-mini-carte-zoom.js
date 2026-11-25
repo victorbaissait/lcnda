@@ -59,7 +59,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const d = document.createElement('div'); d.id = 'mm-test';
             d.style.cssText = `position:fixed;left:20px;top:20px;z-index:99999;background:#fff;width:${o.width || 1000}px`;
             if (o.css) { const s = document.createElement('style'); s.textContent = o.css; d.appendChild(s); }
-            const box = document.createElement('div'); box.innerHTML = window.LCNDA_EXT.miniMap(pts, o.paths || [], {height: o.height || 520, circles: o.circles || [], cluster: o.cluster});
+            const box = document.createElement('div'); box.innerHTML = window.LCNDA_EXT.miniMap(pts, o.paths || [], {height: o.height || 520, circles: o.circles || [], cluster: o.cluster, interactive: o.interactive});
             d.appendChild(box); document.body.appendChild(d);
         }, [pts, o]).then(() => p.waitForSelector('#mm-test [data-mm-ready]'));
         const view = () => p.evaluate(() => { const v = window.LCNDA_EXT.miniMapOf(document.querySelector('#mm-test .h-map')).view; return {...v}; });
@@ -96,6 +96,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                 const band = await p.$eval('#mm-test .h-map', st => { const tiles = [...st.querySelectorAll('.mm-tiles img')].filter(i => i.style.zIndex === '1').map(i => i.getBoundingClientRect()); const b = st.getBoundingClientRect(); return [Math.min(...tiles.map(r => r.top)) - b.top - st.clientTop, b.bottom - st.clientTop - Math.max(...tiles.map(r => r.bottom))]; });
                 assert.ok(band[0] <= 0.5 && band[1] <= 0.5, 'bande vide : ' + band.join(','));
             }
+            // dans un outil qui a ses propres gestes (Tableaux) : pas de boutons ni de gestes, mais les points restent bien posés,
+            // même dans une boîte forcée à une autre hauteur que celle demandée
+            await mount(CITIES, {interactive: false, css: '#mm-test .person-map-stage{height:300px!important;aspect-ratio:auto!important}'});
+            assert.ok(!(await p.$('#mm-test .mm-ctl')), 'pas de boutons');
+            const cs = await centers();
+            for (let i = 0; i < CITIES.length; i++) { const e = await expected(CITIES[i].lat, CITIES[i].lon); assert.ok(Math.abs(cs[i][0] - e[0]) < 1.5 && Math.abs(cs[i][1] - e[1]) < 1.5, `${CITIES[i].label} (boîte forcée) : ${cs[i]} / ${e}`); }
+            await mount(CITIES);
             // un point connu au pixel attendu, calculé à la main : Brest au centre d'une carte centrée sur Brest
             await p.evaluate(() => window.LCNDA_EXT.miniMapOf(document.querySelector('#mm-test .h-map')).setView(48.39, -4.49, 7, true));
             const b = await stageBox(), c = await centers();

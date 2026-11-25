@@ -194,45 +194,64 @@
             startDrag(e, list, {fromBasket: true});
         }));
     }
-    /* ═════════════ 🧺 les paniers nommés (« Mariage MAZAUD 1813 »), rangés les uns dans les autres comme des dossiers ═════════════
-     * Choisir, créer, modifier (nom, emoji, couleur, une ligne, « dans quel panier », « où il va d'habitude »), dupliquer, supprimer (↶),
-     * ouvrir en grand : l'arbre (▸/▾), « ✓ utilisé », une note par élément, glisser pour ranger, « ☑ Choisir… » une partie (cases à trois états). */
+    /* ═════════════ 🧺 les paniers nommés (« Mariage MAZAUD 1813 »), rangés dans des 📁 dossiers (dossier › sous-dossier › …) ═════════════
+     * Un panier contient des éléments ; un dossier contient des paniers et des sous-dossiers, et toujours au moins un panier quelque part dedans
+     * (un nouveau dossier vient avec « Nouveau panier » ; vider un dossier de son dernier panier propose de le supprimer, avec ↶).
+     * Pour l'écran « Paniers » à venir : LCNDA_EXT.cxBaskets = {tree, items, create, createFolder, edit, editFolder, move, moveFolder, remove, removeFolder, moveItems}. */
+    let folders = null;
+    const ICI = () => new RegExp(`^\\s*${T('Ici')}\\s*:\\s*`, 'i');
     const bLabel = x => `${x.icon || '🧺'} ${x.name}`;
     const shortWhen = s => { const d = new Date(String(s || '').replace(' ', 'T') + (String(s).includes('Z') ? '' : 'Z')); return Number.isFinite(d.getTime()) ? d.toLocaleDateString('fr-FR', {day: 'numeric', month: 'short'}) : ''; };
     const bOf = (b, id) => (b?.baskets || baskets || []).find(y => Number(y.id) === Number(id)) || null;
-    const kidsOf = (list, id) => (list || []).filter(x => Number(x.parent_id) === Number(id));
-    const treeIds = (list, id) => { const out = [Number(id)]; for (let k = 0; k < out.length; k++) kidsOf(list, out[k]).forEach(x => { if (!out.includes(Number(x.id))) out.push(Number(x.id)); }); return out; };
-    /** « 🧺 Mariage MAZAUD 1813 ▾ » : tous les paniers, en arbre, et « ＋ Nouveau panier… » */
-    const basketSelect = (b, attr) => `<label class="cx-bsw"><span class="cx-sr">${esc(T('Quel panier'))}</span><select ${attr} aria-label="${esc(T('Quel panier'))}">${(b.baskets || []).map(x => `<option value="${x.id}" ${Number(x.id) === Number(b.basket_id) ? 'selected' : ''}>${esc(`${' '.repeat(Math.max(0, x.depth || 0))}${bLabel(x)} (${nf(x.total ?? x.count)})`)}</option>`).join('')}<option value="new">＋ ${esc(T('Nouveau panier…'))}</option></select></label>`;
-    const destLine = x => ((x?.dests || []).length ? `→ ${x.dests.map(d => String(d.label || '').replace(new RegExp(`^\\s*${T('Ici')}\\s*:\\s*`, 'i'), '')).join(' · ')}` : '');
+    const fOf = id => (folders || []).find(y => Number(y.id) === Number(id)) || null;
+    const fKids = id => (folders || []).filter(x => Number(x.parent_id) === Number(id));
+    const fTree = id => { const out = [Number(id)]; for (let k = 0; k < out.length; k++) fKids(out[k]).forEach(x => { if (!out.includes(Number(x.id))) out.push(Number(x.id)); }); return out; };
+    const crumbs = x => { if (!x) return ''; const f = fOf(x.folder_id); return [...(f ? f.path.map(n => `📁 ${n}`) : []), bLabel(x)].join(' › '); };
+    const keepTree = r => { if (r?.baskets) baskets = r.baskets; if (r?.folders) folders = r.folders; return r; };
+    /** « 🧺 Mariage MAZAUD 1813 ▾ » : les paniers rangés par dossier, « ＋ Nouveau panier… », « ＋ Nouveau dossier… » */
+    const basketSelect = (b, attr) => { const list = b.baskets || [], top = list.filter(x => !Number(x.folder_id)), opt = x => `<option value="${x.id}" ${Number(x.id) === Number(b.basket_id) ? 'selected' : ''}>${esc(`${bLabel(x)} (${nf(x.count)})`)}</option>`;
+        return `<label class="cx-bsw"><span class="cx-sr">${esc(T('Quel panier'))}</span><select ${attr} aria-label="${esc(T('Quel panier'))}">${top.map(opt).join('')}${(b.folders || folders || []).map(f => { const its = list.filter(x => Number(x.folder_id) === Number(f.id)); return its.length ? `<optgroup label="${esc(f.path.map(n => `📁 ${n}`).join(' › '))}">${its.map(opt).join('')}</optgroup>` : ''; }).join('')}
+            <option value="new">＋ ${esc(T('Nouveau panier…'))}</option><option value="newfolder">＋ ${esc(T('Nouveau dossier…'))}</option></select></label>`; };
+    const destLine = x => ((x?.dests || []).length ? `→ ${x.dests.map(d => String(d.label || '').replace(ICI(), '')).join(' · ')}` : '');
     const basketMeta = b => { const x = bOf(b, b.basket_id); if (!x) return '';
-        const sub = (x.total ?? x.count) - x.count;
-        return `<span class="cx-bmeta">${(x.path || []).length > 1 ? `<span class="cx-crumbs">${x.path.map(esc).join(' › ')}</span><br>` : ''}${esc(sub ? T('{n} dont {k} dans les sous-paniers', {n: plural(x.total, T('élément'), T('éléments')), k: nf(sub)}) : plural(x.count, T('élément'), T('éléments')))}${x.done ? ` · ${esc(T('{n} utilisés', {n: nf(x.done)}))}` : ''}${x.updated_at ? ` · ${esc(T('modifié le {d}', {d: shortWhen(x.updated_at)}))}` : ''}${x.note ? `<br><i>${esc(x.note)}</i>` : ''}${destLine(x) ? `<br><span class="cx-dests-line">${esc(destLine(x))}</span>` : ''}</span>`; };
-    /** le formulaire d'un panier : nom, emoji, couleur, une ligne, dans quel panier, où il va d'habitude */
+        return `<span class="cx-bmeta">${Number(x.folder_id) ? `<span class="cx-crumbs">${esc(crumbs(x))}</span><br>` : ''}${esc(plural(x.count, T('élément'), T('éléments')))}${x.done ? ` · ${esc(T('{n} utilisés', {n: nf(x.done)}))}` : ''}${x.updated_at ? ` · ${esc(T('modifié le {d}', {d: shortWhen(x.updated_at)}))}` : ''}${x.note ? `<br><i>${esc(x.note)}</i>` : ''}${destLine(x) ? `<br><span class="cx-dests-line">${esc(destLine(x))}</span>` : ''}</span>`; };
+    const folderOptions = (sel, banned = []) => `<option value="0">${esc(T('— tout en haut —'))}</option>${(folders || []).filter(f => !banned.includes(Number(f.id))).map(f => `<option value="${f.id}" ${Number(f.id) === Number(sel) ? 'selected' : ''}>${esc(`${' '.repeat(f.depth || 0)}📁 ${f.name}`)}</option>`).join('')}`;
+    /** le formulaire d'un panier : nom, emoji, couleur, une ligne, dans quel dossier, où il va d'habitude */
     function basketForm(cur = {}) {
         return new Promise(res => {
-            const v = {name: cur.name || '', icon: cur.icon || '🧺', color: cur.color || '', note: cur.note || '', parent_id: Number(cur.parent_id || 0), dests: cur.dests || []};
+            const v = {name: cur.name || '', icon: cur.icon || '🧺', color: cur.color || '', note: cur.note || '', folder_id: Number(cur.folder_id || 0), dests: cur.dests || []};
             if (!ext.openDialog) { const name = window.prompt(T('Le nom du panier'), v.name); res(name ? {...v, name} : null); return; }
-            const list = baskets || [], banned = cur.id ? treeIds(list, cur.id) : [];
-            // les destinations : l'écran ouvert (une enquête précise…) et les outils
-            const opts = [], seen = new Set();
-            DT.filter(t => t.id !== 'basket' && (!t.enabled || t.enabled() !== false)).forEach(t => { const h = hereOf(t); if (h) { const k = `${t.id}|${JSON.stringify(h)}`; if (!seen.has(k)) { seen.add(k); opts.push({id: t.id, label: String(h.label || T(t.label)), ctx: h}); } } });
-            v.dests.forEach(d => { const k = `${d.id}|${JSON.stringify(d.ctx || null)}`; if (!seen.has(k)) { seen.add(k); opts.push(d); } });
-            DT.filter(t => t.id !== 'basket' && (!t.enabled || t.enabled() !== false)).forEach(t => { const k = `${t.id}|null`; if (!seen.has(k)) { seen.add(k); opts.push({id: t.id, label: T(t.label)}); } });
+            // les destinations : l'écran ouvert (une enquête précise…), celles déjà choisies, puis les outils
+            const opts = [], seen = new Set(), add = d => { const k = `${d.id}|${JSON.stringify(d.ctx || null)}`; if (!seen.has(k)) { seen.add(k); opts.push(d); } };
+            const tools = DT.filter(t => t.id !== 'basket' && (!t.enabled || t.enabled() !== false));
+            tools.forEach(t => { const h = hereOf(t); if (h) add({id: t.id, label: String(h.label || T(t.label)), ctx: h}); });
+            v.dests.forEach(add); tools.forEach(t => add({id: t.id, label: T(t.label)}));
             const on = d => v.dests.some(x => x.id === d.id && JSON.stringify(x.ctx || null) === JSON.stringify(d.ctx || null));
             let done = false;
             ext.openDialog({eyebrow: '🧺', title: cur.id ? T('Modifier le panier') : T('Nouveau panier'), submitLabel: cur.id ? T('Enregistrer') : T('Créer le panier'),
                 body: `<div class="cx-bform"><label>${esc(T('Nom'))}<input name="name" maxlength="120" required value="${esc(v.name)}" placeholder="${esc(T('ex. Mariage MAZAUD 1813'))}"></label>
                     <div class="cx-bform-row"><label>${esc(T('Emoji'))}<input name="icon" maxlength="8" value="${esc(v.icon)}" style="width:4em"></label><label>${esc(T('Couleur'))}<input type="color" name="color" value="${esc(v.color || '#055dff')}"></label>
-                    <label class="cx-grow">${esc(T('Dans le panier'))}<select name="parent"><option value="0">${esc(T('— tout en haut —'))}</option>${list.filter(x => !banned.includes(Number(x.id))).map(x => `<option value="${x.id}" ${Number(x.id) === v.parent_id ? 'selected' : ''}>${esc(`${' '.repeat(x.depth || 0)}${bLabel(x)}`)}</option>`).join('')}</select></label></div>
+                    <label class="cx-grow">${esc(T('Dans le dossier'))}<select name="folder">${folderOptions(v.folder_id)}</select></label></div>
                     <label>${esc(T('Une ligne pour dire à quoi il sert (facultatif)'))}<input name="note" maxlength="300" value="${esc(v.note)}" placeholder="${esc(T('ex. les pièces pour la demande d’acte'))}"></label>
-                    <fieldset class="cx-bdests"><legend>${esc(T('Ce panier va d’habitude dans (« Mettre dans… » les choisit d’avance)'))}</legend>${opts.map((d, k) => `<label class="checkbox-line"><input type="checkbox" name="dest" value="${k}" ${on(d) ? 'checked' : ''}> ${esc(String(d.label).replace(new RegExp(`^\\s*${T('Ici')}\\s*:\\s*`, 'i'), ''))}</label>`).join('')}</fieldset></div>`,
-                onSubmit: f => { done = true; res({name: f.elements.name.value.trim(), icon: f.elements.icon.value.trim(), color: f.elements.color.value, note: f.elements.note.value.trim(), parent_id: Number(f.elements.parent.value) || 0,
-                    dests: [...f.querySelectorAll('[name="dest"]:checked')].map(c => opts[Number(c.value)]).map(d => ({id: d.id, label: String(d.label).replace(new RegExp(`^\\s*${T('Ici')}\\s*:\\s*`, 'i'), ''), ...(d.ctx ? {ctx: d.ctx} : {})}))}); },
+                    <fieldset class="cx-bdests"><legend>${esc(T('Ce panier va d’habitude dans (« Mettre dans… » les choisit d’avance)'))}</legend>${opts.map((d, k) => `<label class="checkbox-line"><input type="checkbox" name="dest" value="${k}" ${on(d) ? 'checked' : ''}> ${esc(String(d.label).replace(ICI(), ''))}</label>`).join('')}</fieldset></div>`,
+                onSubmit: f => { done = true; res({name: f.elements.name.value.trim(), icon: f.elements.icon.value.trim(), color: f.elements.color.value, note: f.elements.note.value.trim(), folder_id: Number(f.elements.folder.value) || 0,
+                    dests: [...f.querySelectorAll('[name="dest"]:checked')].map(c => opts[Number(c.value)]).map(d => ({id: d.id, label: String(d.label).replace(ICI(), ''), ...(d.ctx ? {ctx: d.ctx} : {})}))}); },
                 onOpen: d => d.addEventListener('close', () => { if (!done) res(null); })});
         });
     }
-    /** une question à quelques réponses (un bouton chacune) → la clé, ou null */
+    function folderForm(cur = {}) {
+        return new Promise(res => {
+            if (!ext.openDialog) { const name = window.prompt(T('Le nom du dossier'), cur.name || ''); res(name ? {name, icon: '', parent_id: Number(cur.parent_id || 0)} : null); return; }
+            let done = false;
+            ext.openDialog({eyebrow: '📁', title: cur.id ? T('Modifier le dossier') : T('Nouveau dossier'), submitLabel: cur.id ? T('Enregistrer') : T('Créer le dossier'),
+                body: `<div class="cx-bform"><label>${esc(T('Nom'))}<input name="name" maxlength="120" required value="${esc(cur.name || '')}" placeholder="${esc(T('ex. Famille MAZAUD'))}"></label>
+                    <div class="cx-bform-row"><label>${esc(T('Emoji'))}<input name="icon" maxlength="8" value="${esc(cur.icon || '📁')}" style="width:4em"></label>${cur.id ? '' : `<label class="cx-grow">${esc(T('Dans le dossier'))}<select name="parent">${folderOptions(cur.parent_id || 0)}</select></label>`}</div>
+                    ${cur.id ? '' : `<label>${esc(T('Son premier panier'))}<input name="bname" maxlength="120" value="${esc(T('Nouveau panier'))}"></label><p class="cx-muted"><small>${esc(T('Un dossier contient toujours au moins un panier.'))}</small></p>`}</div>`,
+                onSubmit: f => { done = true; res({name: f.elements.name.value.trim(), icon: f.elements.icon.value.trim(), parent_id: Number(f.elements.parent?.value || cur.parent_id || 0), basket_name: f.elements.bname?.value.trim() || ''}); },
+                onOpen: d => d.addEventListener('close', () => { if (!done) res(null); })});
+        });
+    }
+    /** une question à quelques réponses (une carte chacune) → la clé, ou null */
     function askChoice(title, text, choices) {
         return new Promise(res => {
             if (!ext.openDialog) { res(choices[0]?.[0] ?? null); return; }
@@ -241,142 +260,194 @@
                 onSubmit: f => { val = f.querySelector('[name="cx-choice"]:checked')?.value ?? null; }, onOpen: d => d.addEventListener('close', () => res(val))});
         });
     }
-    async function newBasket(parent = 0) { const v = await basketForm({parent_id: parent}); if (!v?.name) return 0; const r = await post('basket_new', v); baskets = r.baskets; writeJ(CUR, Number(r.id)); basket = null; count = 0; paintPill(); toast(T('🧺 Panier « {n} » créé : ce que tu prends y va maintenant.', {n: v.name})); return Number(r.id); }
+    const loadTree = async () => keepTree(await api('cx_basket', {basket_id: curBasket()}));
+    async function newBasket(folder = 0) { if (!folders) await loadTree(); const v = await basketForm({folder_id: folder}); if (!v?.name) return 0; const r = keepTree(await post('basket_new', v)); writeJ(CUR, Number(r.id)); basket = null; count = 0; paintPill(); toast(T('🧺 Panier « {n} » créé : ce que tu prends y va maintenant.', {n: v.name})); return Number(r.id); }
+    async function newFolder(parent = 0) {
+        if (!folders) await loadTree(); const v = await folderForm({parent_id: parent}); if (!v?.name) return 0;
+        const r = keepTree(await post('folder_new', v)); writeJ(CUR, Number(r.basket_id)); basket = null; count = 0; paintPill();
+        undoToast(T('📁 Dossier « {n} » créé, avec son panier « {b} »', {n: v.name, b: bOf(null, r.basket_id)?.name || ''}), {icon: '📁', undo: async () => { await post('folder_delete', {folder_id: r.id, mode: 'all'}).catch(() => {}); writeJ(CUR, 0); basket = null; await loadTree(); refreshPanel(); }});
+        return Number(r.basket_id);
+    }
     async function switchBasket(id) {
-        if (id === 'new') return newBasket();
+        if (id === 'new') return newBasket(); if (id === 'newfolder') return newFolder();
         writeJ(CUR, Number(id)); basket = null; count = null; await loadBasket(true); return Number(id);
     }
+    /** un dossier n'a plus de panier : le supprimer aussi ? (un seul ↶ avec ce qui vient d'être fait) */
+    async function askEmptied(emptied, undoFirst) {
+        const rs = [];
+        for (const f of emptied || []) {
+            if (!fOf(f.id)) continue;
+            const a = await askChoice(T('Le dossier « {n} » n’a plus de panier', {n: f.name}), T('Un dossier contient toujours au moins un panier. Que faire ?'),
+                [['del', T('Supprimer aussi le dossier « {n} »', {n: f.name})], ['new', T('Le garder, avec un « Nouveau panier » dedans')]]);
+            if (a === 'del') rs.push(keepTree(await post('folder_delete', {folder_id: f.id, mode: 'all'})));
+            else { const r = keepTree(await post('basket_new', {name: T('Nouveau panier'), folder_id: f.id})); rs.push({made: r.id}); }
+        }
+        return async () => { for (const r of rs.reverse()) { if (r.made) await post('basket_delete', {basket_id: r.made}).catch(() => {}); else await post('folder_undelete', r); } await undoFirst?.(); };
+    }
     async function editBasket(id) {
-        if (!baskets) await loadBasket(true);
+        if (!folders) await loadTree();
         const x = bOf(null, id); if (!x) return;
         const v = await basketForm(x); if (!v?.name) return;
-        try { const r = await post('basket_edit', {basket_id: id, ...v}); baskets = r.baskets; basket = null;
-            undoToast(T('Panier « {n} » modifié', {n: v.name}), {icon: v.icon || '🧺', undo: async () => { const r2 = await post('basket_edit', {basket_id: id, ...r.before}); baskets = r2.baskets; basket = null; refreshPanel(); }}); }
+        try { const r = keepTree(await post('basket_edit', {basket_id: id, ...v})); basket = null;
+            const undo = await askEmptied(r.emptied, async () => { keepTree(await post('basket_edit', {basket_id: id, ...r.before})); basket = null; });
+            undoToast(T('Panier « {n} » modifié', {n: v.name}), {icon: v.icon || '🧺', undo: async () => { await undo(); await loadTree(); refreshPanel(); }}); }
         catch (e) { toast(e.message, 'error'); }
+    }
+    async function editFolder(id) {
+        const f = fOf(id); if (!f) return; const v = await folderForm(f); if (!v?.name) return;
+        const r = keepTree(await post('folder_edit', {folder_id: id, name: v.name, icon: v.icon}));
+        undoToast(T('Dossier « {n} » modifié', {n: v.name}), {icon: '📁', undo: async () => { keepTree(await post('folder_edit', r.before)); refreshPanel(); }});
     }
     async function dupBasket(id) {
         const x = bOf(null, id);
         const name = await askText(T('Le nom de la copie'), `${x?.name || T('Panier')} (${T('copie')})`); if (!name) return;
-        const r = await post('basket_duplicate', {basket_id: id, name}); baskets = r.baskets; writeJ(CUR, Number(r.id)); basket = null; count = null; await loadBasket(true);
+        const r = keepTree(await post('basket_duplicate', {basket_id: id, name})); writeJ(CUR, Number(r.id)); basket = null; count = null; await loadBasket(true);
         undoToast(T('Panier « {n} » créé (copie)', {n: name}), {icon: '⧉', undo: async () => { await post('basket_delete', {basket_id: r.id}); writeJ(CUR, Number(id)); basket = null; await loadBasket(true); refreshPanel(); }});
     }
     async function delBasket(id) {
-        if (!baskets) await loadBasket(true);
-        let mode = 'up';
-        if (kidsOf(baskets, id).length) { mode = await askChoice(T('Supprimer « {n} »', {n: bOf(null, id)?.name || ''}), T('Ce panier contient d’autres paniers. Que faire d’eux ?'),
-            [['up', T('Les garder : ils remontent d’un niveau'), T('seul ce panier et ses éléments à lui sont supprimés')], ['all', T('Tout supprimer'), T('ce panier, ses sous-paniers et tout ce qu’ils contiennent')]]); if (!mode) return; }
-        try { const r = await post('basket_delete', {basket_id: id, mode}); baskets = r.baskets; writeJ(CUR, Number(r.basket.parent_id) || 0); basket = null; await loadBasket(true);
-            undoToast(T('Panier « {n} » supprimé', {n: r.basket.name}), {undo: async () => { await post('basket_undelete', {basket: r.basket, baskets_removed: r.baskets_removed, moved: r.moved, rows: r.rows}); writeJ(CUR, Number(r.basket.id)); basket = null; await loadBasket(true); refreshPanel(); }}); }
+        try { const r = keepTree(await post('basket_delete', {basket_id: id})); writeJ(CUR, 0); basket = null; await loadBasket(true);
+            const undo = await askEmptied(r.emptied, async () => { await post('basket_undelete', {basket: r.basket, rows: r.rows}); writeJ(CUR, Number(r.basket.id)); });
+            undoToast(T('Panier « {n} » supprimé', {n: r.basket.name}), {undo: async () => { await undo(); basket = null; await loadBasket(true); refreshPanel(); }}); }
         catch (e) { toast(e.message, 'error'); }
     }
-    async function moveBasket(id, parent) {
-        try { const r = await post('basket_move', {basket_id: id, parent_id: parent}); baskets = r.baskets; basket = null;
-            undoToast(T('« {n} » rangé dans « {p} »', {n: bOf(null, id)?.name || '', p: parent ? bOf(null, parent)?.name || '' : T('tout en haut')}), {icon: '🗂', undo: async () => { const r2 = await post('basket_move', r.before); baskets = r2.baskets; basket = null; refreshPanel(); }});
+    async function delFolder(id) {
+        const f = fOf(id); if (!f) return;
+        const mode = await askChoice(T('Supprimer le dossier « {n} »', {n: f.name}), T('Il contient {n}. Que faire de ce qu’il contient ?', {n: plural(f.baskets, T('panier'), T('paniers'))}),
+            [['up', T('Le garder : paniers et sous-dossiers remontent d’un niveau')], ['all', T('Tout supprimer'), T('le dossier, ses sous-dossiers, leurs paniers et tout ce qu’ils contiennent')]]); if (!mode) return;
+        try { const r = keepTree(await post('folder_delete', {folder_id: id, mode})); basket = null; if (r.baskets_removed?.some(b => Number(b.id) === curBasket())) writeJ(CUR, 0); await loadBasket(true);
+            undoToast(T('Dossier « {n} » supprimé', {n: f.name}), {icon: '📁', undo: async () => { keepTree(await post('folder_undelete', r)); basket = null; await loadBasket(true); refreshPanel(); }}); }
+        catch (e) { toast(e.message, 'error'); }
+    }
+    async function moveBasket(id, folder) {
+        try { const r = keepTree(await post('basket_move', {basket_id: id, folder_id: folder})); basket = null;
+            const undo = await askEmptied(r.emptied, async () => keepTree(await post('basket_move', r.before)));
+            undoToast(T('« {n} » rangé dans « {p} »', {n: bOf(null, id)?.name || '', p: folder ? fOf(folder)?.name || '' : T('tout en haut')}), {icon: '📁', undo: async () => { await undo(); await loadTree(); refreshPanel(); }});
+            return true; } catch (e) { toast(e.message, 'error'); return false; }
+    }
+    async function moveFolder(id, parent) {
+        try { const r = keepTree(await post('folder_move', {folder_id: id, parent_id: parent}));
+            undoToast(T('« {n} » rangé dans « {p} »', {n: fOf(id)?.name || '', p: parent ? fOf(parent)?.name || '' : T('tout en haut')}), {icon: '📁', undo: async () => { keepTree(await post('folder_move', r.before)); refreshPanel(); }});
             return true; } catch (e) { toast(e.message, 'error'); return false; }
     }
     async function moveItems(ids, to) {
-        const r = await post('item_move', {ids, basket_id: to}); baskets = r.baskets; basket = null; count = null;
-        undoToast(T('{n} rangés dans « {p} »', {n: plural(ids.length, T('élément'), T('éléments')), p: bOf(null, to)?.name || ''}), {icon: '🗂', undo: async () => { const r2 = await post('item_unmove', {before: r.before}); baskets = r2.baskets; basket = null; refreshPanel(); }});
+        const r = keepTree(await post('item_move', {ids, basket_id: to})); basket = null; count = null;
+        undoToast(T('{n} rangés dans « {p} »', {n: plural(ids.length, T('élément'), T('éléments')), p: bOf(null, to)?.name || ''}), {icon: '🧺', undo: async () => { keepTree(await post('item_unmove', {before: r.before})); basket = null; refreshPanel(); }});
     }
     /** « Au panier » : dans lequel ? (plusieurs paniers : un petit menu, le dernier utilisé en premier) → id, ou null si annulé */
     async function chooseBasket(anchor) {
-        const list = (await loadBasket(true)).baskets || baskets || [];
-        const cur = Number(basket?.basket_id) || curBasket();
+        const b = keepTree(await loadBasket(true)), list = b.baskets || baskets || [];
+        const cur = Number(b.basket_id) || curBasket();
         if (list.length < 2) return cur || Number(list[0]?.id) || 0;
-        const ordered = [...list].sort((a, b) => (Number(b.id) === cur) - (Number(a.id) === cur));
-        return new Promise(res => { let done = false; UI().menuAt?.(anchor || document.body, [...ordered.map(x => ({icon: x.icon || '🧺', label: `${(x.path || [x.name]).join(' › ')} (${nf(x.count)})`, run: () => { done = true; res(Number(x.id)); }})), '-',
-            {icon: '＋', label: T('Nouveau panier…'), run: async () => { done = true; res(await newBasket() || null); }}], {title: T('Dans quel panier ?'), onClose: () => setTimeout(() => { if (!done) res(null); }, 50)}); });
+        const ordered = [...list].sort((a, c) => (Number(c.id) === cur) - (Number(a.id) === cur));
+        return new Promise(res => { let done = false; UI().menuAt?.(anchor || document.body, [...ordered.map(x => ({icon: x.icon || '🧺', label: `${crumbs(x).replace(/^\S+\s/u, '')} (${nf(x.count)})`, run: () => { done = true; res(Number(x.id)); }})), '-',
+            {icon: '＋', label: T('Nouveau panier…'), run: async () => { done = true; res(await newBasket() || null); }}, {icon: '📁', label: T('Nouveau dossier…'), run: async () => { done = true; res(await newFolder() || null); }}], {title: T('Dans quel panier ?'), onClose: () => setTimeout(() => { if (!done) res(null); }, 50)}); });
     }
-    /** l'arbre d'un panier : ses éléments puis ses sous-paniers (▸/▾), tous niveaux. o.pick : cases « prendre » (trois états pour un panier) */
-    function treeHtml(b, items, o = {}) {
-        const list = b.baskets || [], root = Number(b.basket_id), byB = new Map();
-        items.forEach(it => { const k = Number(it.basket_id || root); byB.set(k, [...(byB.get(k) || []), it]); });
-        const row = it => `<li draggable="true" data-cx-vi="${it.id}" class="cx-bitem${Number(it.done) ? ' is-done' : ''}"><span class="cx-grip" aria-hidden="true" title="${esc(T('Glisser pour changer l’ordre ou le panier'))}">⋮⋮</span>
-            ${o.pick ? `<label class="cx-chk"><input type="checkbox" data-cx-pk="${it.id}" ${o.picked?.has(Number(it.id)) ? 'checked' : ''} aria-label="${esc(T('Prendre « {t} »', {t: it.title}))}"></label>` : `<label class="cx-chk" title="${esc(T('✓ utilisé'))}"><input type="checkbox" data-cx-vdone ${Number(it.done) ? 'checked' : ''} aria-label="${esc(T('« {t} » utilisé', {t: it.title}))}"></label>`}<span class="cx-ico" aria-hidden="true">${icon(it)}</span>
-            <span class="cx-t"><b>${esc(it.title)}</b>${it.kind === 'set' ? `<small>${esc(plural(setCount(it), T('ligne')))}</small>` : it.value && !sameText(it.title, it.value) ? `<small>${esc(String(it.value).slice(0, 160))}</small>` : ''}${it.origin?.label ? `<small class="cx-muted">${esc(T('de :'))} ${esc(it.origin.label)}${it.origin.url ? ` · ${srcLink(it.origin.url)}` : ''}</small>` : ''}
-            ${o.pick ? '' : `<input class="cx-vnote" data-cx-vnote value="${esc(it.note || '')}" placeholder="${esc(T('une note…'))}" aria-label="${esc(T('Note sur « {t} »', {t: it.title}))}">`}</span>
-            ${Number(it.done) && !o.pick ? `<span class="cx-pl is-ok">✓ ${esc(T('utilisé'))}</span>` : ''}${o.pick ? '' : `<button type="button" class="cx-sum-x" data-cx-vx aria-label="${esc(T('Retirer du panier'))}">×</button>`}</li>`;
-        const node = (id, depth) => {
-            const x = bOf(b, id), its = byB.get(Number(id)) || [], kids = kidsOf(list, id), open = !o.closed?.has(Number(id));
-            const inner = `${its.length ? `<ol class="cx-blist">${its.map(row).join('')}</ol>` : ''}${kids.map(k => node(k.id, depth + 1)).join('')}`;
-            if (depth === 0) return inner || '';
-            const all = treeIds(list, id).flatMap(k => byB.get(k) || []), nOn = o.pick ? all.filter(it => o.picked.has(Number(it.id))).length : 0;
-            return `<section class="cx-bnode" data-cx-bn="${id}" style="--d:${depth}"><div class="cx-bhead" draggable="true" data-cx-bh="${id}">
-                <button type="button" class="cx-tw2" data-cx-btog="${id}" aria-expanded="${open}" aria-label="${esc(open ? T('Replier') : T('Déplier'))}">${open ? '▾' : '▸'}</button>
-                ${o.pick ? `<input type="checkbox" data-cx-pkb="${id}" ${all.length && nOn === all.length ? 'checked' : ''} data-mixed="${nOn > 0 && nOn < all.length ? 1 : 0}" aria-label="${esc(T('Prendre tout « {n} »', {n: x?.name || ''}))}">` : ''}
-                <span class="cx-ico" aria-hidden="true"${x?.color ? ` style="color:${esc(x.color)}"` : ''}>${esc(x?.icon || '🧺')}</span><b>${esc(x?.name || '')}</b><span class="cx-bmeta">${esc(plural(x?.total ?? its.length, T('élément'), T('éléments')))}${destLine(x) ? ` · ${esc(destLine(x))}` : ''}</span></div>
-                <div class="cx-bbody"${open ? '' : ' hidden'}>${inner || `<p class="cx-muted cx-bempty"><small>${esc(T('Vide : glisse des éléments ici.'))}</small></p>`}</div></section>`;
-        };
-        return node(root, 0);
-    }
-    const setMixed = host => host.querySelectorAll('[data-mixed]').forEach(c => { c.indeterminate = c.dataset.mixed === '1'; });
-    /** ⛶ le panier en grand, comme une liste de courses (avec ses sous-paniers) ; « ☑ Choisir… » pour n'en mettre qu'une partie */
+    /** ⛶ un panier en grand, comme une liste de courses : « ✓ utilisé », une note par élément, l'ordre en glissant ; « ☑ Choisir… » une partie */
     async function openBasketView() {
         document.querySelector('dialog.cx-bview')?.close();
         const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-put cx-bview'; dlg.dataset.noFoot = ''; dlg.setAttribute('aria-labelledby', 'cx-bview-h');
         document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
-        const vs = {pick: false, picked: new Set(), closed: new Set()};
+        const vs = {pick: false, picked: new Set()};
         const draw = async () => {
-            const b = await api('cx_basket', {basket_id: curBasket(), tree: 1}); basket = null; baskets = b.baskets; if (!dlg.isConnected) return;
-            const items = b.items || [], x = bOf(b, b.basket_id) || {}, own = items.filter(it => Number(it.basket_id) === Number(b.basket_id));
-            const sel = items.filter(it => vs.picked.has(Number(it.id)));
+            const b = keepTree(await api('cx_basket', {basket_id: curBasket()})); basket = null; if (!dlg.isConnected) return;
+            const items = b.items || [], x = bOf(b, b.basket_id) || {}, sel = items.filter(it => vs.picked.has(Number(it.id))), nOn = sel.length;
+            const row = it => `<li draggable="true" data-cx-vi="${it.id}" class="cx-bitem${Number(it.done) ? ' is-done' : ''}"><span class="cx-grip" aria-hidden="true" title="${esc(T('Glisser pour changer l’ordre'))}">⋮⋮</span>
+                ${vs.pick ? `<label class="cx-chk"><input type="checkbox" data-cx-pk="${it.id}" ${vs.picked.has(Number(it.id)) ? 'checked' : ''} aria-label="${esc(T('Prendre « {t} »', {t: it.title}))}"></label>` : `<label class="cx-chk" title="${esc(T('✓ utilisé'))}"><input type="checkbox" data-cx-vdone ${Number(it.done) ? 'checked' : ''} aria-label="${esc(T('« {t} » utilisé', {t: it.title}))}"></label>`}<span class="cx-ico" aria-hidden="true">${icon(it)}</span>
+                <span class="cx-t"><b>${esc(it.title)}</b>${it.kind === 'set' ? `<small>${esc(plural(setCount(it), T('ligne')))}</small>` : it.value && !sameText(it.title, it.value) ? `<small>${esc(String(it.value).slice(0, 160))}</small>` : ''}${it.origin?.label ? `<small class="cx-muted">${esc(T('de :'))} ${esc(it.origin.label)}${it.origin.url ? ` · ${srcLink(it.origin.url)}` : ''}</small>` : ''}
+                ${vs.pick ? '' : `<input class="cx-vnote" data-cx-vnote value="${esc(it.note || '')}" placeholder="${esc(T('une note…'))}" aria-label="${esc(T('Note sur « {t} »', {t: it.title}))}">`}</span>
+                ${Number(it.done) && !vs.pick ? `<span class="cx-pl is-ok">✓ ${esc(T('utilisé'))}</span>` : ''}${vs.pick ? '' : `<button type="button" class="cx-sum-x" data-cx-vx aria-label="${esc(T('Retirer du panier'))}">×</button>`}</li>`;
             const html = `<form method="dialog" class="cx-tk"><header class="cx-tk-head"${x.color ? ` style="box-shadow: inset 6px 0 0 ${esc(x.color)}"` : ''}><div class="cx-tk-ht"><span class="cx-eyebrow">🧺 ${esc(T('Panier'))}</span>
                     <h2 id="cx-bview-h">${basketSelect(b, 'data-cx-vsel')}</h2><p class="cx-tk-say">${basketMeta(b)}</p></div>
                     <button type="button" class="cx-b is-ter is-sm" data-cx-vedit>✎ ${esc(T('Modifier'))}</button><button type="button" class="cx-x" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></header>
-                <div class="cx-put-body cx-btree" data-cx-btree>${vs.pick ? `<div class="cx-pickbar"><b>${esc(T('Coche ce que tu mets : des éléments, ou des sous-paniers entiers.'))}</b><button type="button" class="cx-b is-sec is-sm" data-cx-pall>☑ ${esc(T('Tout'))}</button><button type="button" class="cx-b is-ter is-sm" data-cx-pnone>${esc(T('Rien'))}</button></div>` : ''}
-                    ${items.length || kidsOf(b.baskets, b.basket_id).length ? treeHtml(b, items, vs) : `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">🧺</span><b>${esc(T('Le panier est vide'))}</b><p>${esc(T('Le panier garde des choses pour plus tard, d’un écran à l’autre. Coche des lignes n’importe où dans l’app, puis « 🧺 Garder dans le panier ».'))}</p></div>`}
-                    <p><button type="button" class="cx-b is-ter is-sm" data-cx-vsub>＋ ${esc(T('Un sous-panier…'))}</button></p></div>
-                <footer class="cx-tk-foot"><div class="cx-cnt"><span class="cx-what">${esc(vs.pick ? T('{n} sur {t}', {n: plural(sel.length, T('élément coché'), T('éléments cochés')), t: nf(items.length)}) : T('Coche « ✓ utilisé » au fur et à mesure ; glisse une ligne ou un sous-panier pour le ranger ailleurs.'))}</span></div><div class="cx-acts">
-                    ${vs.pick ? `<button type="button" class="cx-b is-ter" data-cx-vpick>${esc(T('Annuler le choix'))}</button><button type="button" class="cx-b is-pri" data-cx-vputsel ${sel.length ? '' : 'disabled'}><span>📍 ${esc(T(sel.length > 1 ? 'Mettre les {n} cochés dans…' : 'Mettre le coché dans…', {n: nf(sel.length)}))}</span></button>`
+                <div class="cx-put-body">${vs.pick ? `<div class="cx-pickbar"><input type="checkbox" data-cx-pall data-mixed="${nOn && nOn < items.length ? 1 : 0}" ${items.length && nOn === items.length ? 'checked' : ''} aria-label="${esc(T('Tout'))}"><b>${esc(T('Coche ce que tu mets dans…'))}</b><button type="button" class="cx-b is-sec is-sm" data-cx-pall2>☑ ${esc(T('Tout'))}</button><button type="button" class="cx-b is-ter is-sm" data-cx-pnone>${esc(T('Rien'))}</button></div>` : ''}
+                    ${items.length ? `<ol class="cx-blist">${items.map(row).join('')}</ol>` : `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">🧺</span><b>${esc(T('Le panier est vide'))}</b><p>${esc(T('Le panier garde des choses pour plus tard, d’un écran à l’autre. Coche des lignes n’importe où dans l’app, puis « 🧺 Garder dans le panier ».'))}</p></div>`}</div>
+                <footer class="cx-tk-foot"><div class="cx-cnt"><span class="cx-what">${esc(vs.pick ? T('{n} sur {t}', {n: plural(nOn, T('élément coché'), T('éléments cochés')), t: nf(items.length)}) : T('Coche « ✓ utilisé » au fur et à mesure ; glisse les lignes pour les ranger.'))}</span></div><div class="cx-acts">
+                    ${vs.pick ? `<button type="button" class="cx-b is-ter" data-cx-vpick>${esc(T('Annuler le choix'))}</button><button type="button" class="cx-b is-pri" data-cx-vputsel ${nOn ? '' : 'disabled'}><span>📍 ${esc(T(nOn > 1 ? 'Mettre les {n} cochés dans…' : 'Mettre le coché dans…', {n: nf(nOn)}))}</span></button>`
                     : `<button type="button" class="cx-b is-ter" data-cx-vdup>⧉ ${esc(T('Dupliquer'))}</button>${(b.baskets || []).length > 1 ? `<button type="button" class="cx-b is-ter" data-cx-vdel>🗑 ${esc(T('Supprimer'))}</button>` : ''}<button type="button" class="cx-b is-sec" data-cx-vpick ${items.length ? '' : 'disabled'}>☑ ${esc(T('Choisir…'))}</button>
                     <button type="button" class="cx-b is-pri" data-cx-vput ${items.length ? '' : 'disabled'}><span>📍 ${esc(T('Mettre tout dans…'))}</span></button>`}</div></footer></form>`;
             // seul le formulaire est redessiné : un message « ↶ Annuler » posé dans la fenêtre reste là
             const tpl = document.createElement('template'); tpl.innerHTML = html; const old = dlg.querySelector(':scope > form'); if (old) old.replaceWith(tpl.content.firstElementChild); else dlg.prepend(tpl.content.firstElementChild);
             setMixed(dlg);
-            const byId = id => items.find(y => Number(y.id) === Number(id)), q = sl => dlg.querySelector(sl);
-            const dests = x.dests || [];
+            const byId = id => items.find(y => Number(y.id) === Number(id)), q = sl => dlg.querySelector(sl), dests = x.dests || [];
             q('[data-cx-x]').addEventListener('click', () => dlg.close());
             q('[data-cx-vsel]').addEventListener('change', async e => { await switchBasket(e.target.value); vs.picked.clear(); draw(); });
             q('[data-cx-vedit]').addEventListener('click', async () => { await editBasket(b.basket_id); draw(); });
-            q('[data-cx-vsub]').addEventListener('click', async () => { const cur = Number(b.basket_id); const id = await newBasket(cur); if (id) writeJ(CUR, cur); draw(); });
             q('[data-cx-vdup]')?.addEventListener('click', async () => { await dupBasket(b.basket_id); draw(); });
             q('[data-cx-vdel]')?.addEventListener('click', async () => { await delBasket(b.basket_id); draw(); });
             dlg.querySelectorAll('[data-cx-vpick]').forEach(bt => bt.addEventListener('click', () => { vs.pick = !vs.pick; vs.picked.clear(); draw(); }));
             q('[data-cx-vput]')?.addEventListener('click', e => { dlg.close(); putInto(items, {anchor: e.currentTarget, fromBasket: true, dests}); });
             q('[data-cx-vputsel]')?.addEventListener('click', e => { dlg.close(); putInto(sel, {anchor: e.currentTarget, fromBasket: true, dests}); });
-            q('[data-cx-pall]')?.addEventListener('click', () => { items.forEach(it => vs.picked.add(Number(it.id))); draw(); });
-            q('[data-cx-pnone]')?.addEventListener('click', () => { vs.picked.clear(); draw(); });
+            const all = on => { items.forEach(it => (on ? vs.picked.add(Number(it.id)) : vs.picked.delete(Number(it.id)))); draw(); };
+            q('[data-cx-pall]')?.addEventListener('change', e => all(e.target.checked)); q('[data-cx-pall2]')?.addEventListener('click', () => all(true)); q('[data-cx-pnone]')?.addEventListener('click', () => all(false));
             dlg.querySelectorAll('[data-cx-pk]').forEach(c => c.addEventListener('change', () => { const id = Number(c.dataset.cxPk); if (c.checked) vs.picked.add(id); else vs.picked.delete(id); draw(); }));
-            dlg.querySelectorAll('[data-cx-pkb]').forEach(c => c.addEventListener('change', () => { const ids = treeIds(b.baskets, c.dataset.cxPkb); items.filter(it => ids.includes(Number(it.basket_id))).forEach(it => (c.checked ? vs.picked.add(Number(it.id)) : vs.picked.delete(Number(it.id)))); draw(); }));
-            dlg.querySelectorAll('[data-cx-btog]').forEach(t => t.addEventListener('click', () => { const id = Number(t.dataset.cxBtog); if (vs.closed.has(id)) vs.closed.delete(id); else vs.closed.add(id); draw(); }));
-            // glisser : un élément sur un sous-panier (ou sur un autre élément : l'ordre) ; un sous-panier sur un autre
-            const drop = async (e, target) => {
-                const d = dlg.dataset.drag || ''; delete dlg.dataset.drag; if (!d) return; e.preventDefault(); e.stopPropagation();
-                const [kind, id] = d.split(':'), toB = target.closest('[data-cx-bn]')?.dataset.cxBn || b.basket_id, toItem = target.closest('[data-cx-vi]');
-                if (kind === 'b') { if (Number(id) !== Number(toB)) await moveBasket(Number(id), Number(toB)); }
-                else if (toItem && Number(byId(toItem.dataset.cxVi)?.basket_id) === Number(byId(id)?.basket_id) && !target.closest('[data-cx-bh]')) {
-                    const same = items.filter(y => Number(y.basket_id) === Number(byId(id).basket_id)).map(y => Number(y.id)).filter(y => y !== Number(id)); same.splice(same.indexOf(Number(toItem.dataset.cxVi)), 0, Number(id));
-                    const r = await post('item_order', {basket_id: byId(id).basket_id, ids: same}); undoToast(T('Ordre changé'), {icon: '⇅', undo: async () => { await post('item_order', {basket_id: byId(id).basket_id, ids: r.before}); draw(); }});
-                } else if (Number(byId(id)?.basket_id) !== Number(toB)) await moveItems([Number(id)], Number(toB));
-                draw();
-            };
-            dlg.querySelectorAll('[data-cx-vi]').forEach(li => li.addEventListener('dragstart', e => { if (e.target.closest?.('input')) return; e.stopPropagation(); dlg.dataset.drag = `i:${li.dataset.cxVi}`; li.classList.add('is-drag'); try { e.dataTransfer.setData('text/plain', byId(li.dataset.cxVi)?.title || ''); e.dataTransfer.effectAllowed = 'move'; } catch (_) {} }));
-            dlg.querySelectorAll('[data-cx-bh]').forEach(h => h.addEventListener('dragstart', e => { e.stopPropagation(); dlg.dataset.drag = `b:${h.dataset.cxBh}`; try { e.dataTransfer.setData('text/plain', 'b'); e.dataTransfer.effectAllowed = 'move'; } catch (_) {} }));
-            dlg.querySelectorAll('[data-cx-vi], [data-cx-bh], [data-cx-btree]').forEach(z => { z.addEventListener('dragover', e => { if (dlg.dataset.drag) { e.preventDefault(); z.classList.add('is-over'); } }); z.addEventListener('dragleave', () => z.classList.remove('is-over')); z.addEventListener('drop', e => { z.classList.remove('is-over'); drop(e, e.target.closest('[data-cx-vi], [data-cx-bh]') || z); }); });
             dlg.querySelectorAll('[data-cx-vi]').forEach(li => {
                 const it = byId(li.dataset.cxVi);
                 li.querySelector('[data-cx-vdone]')?.addEventListener('change', async e => { const r = await post('item_set', {id: it.id, done: e.target.checked}); undoToast(e.target.checked ? T('✓ « {t} » utilisé', {t: it.title}) : T('« {t} » à utiliser', {t: it.title}), {icon: '🧺', undo: async () => { await post('item_set', r.before); draw(); }}); draw(); });
                 li.querySelector('[data-cx-vnote]')?.addEventListener('change', async e => { const r = await post('item_set', {id: it.id, note: e.target.value}); undoToast(T('Note gardée'), {icon: '📝', undo: async () => { await post('item_set', r.before); draw(); }}); });
                 li.querySelector('[data-cx-vx]')?.addEventListener('click', async () => { await removeFromBasket([it.id]); draw(); });
+                li.addEventListener('dragstart', e => { if (e.target.closest?.('input')) return; dlg.dataset.drag = li.dataset.cxVi; li.classList.add('is-drag'); try { e.dataTransfer.setData('text/plain', it.title); e.dataTransfer.effectAllowed = 'move'; } catch (_) {} });
+                li.addEventListener('dragend', () => li.classList.remove('is-drag'));
+                li.addEventListener('dragover', e => { if (dlg.dataset.drag) e.preventDefault(); });
+                li.addEventListener('drop', async e => { const from = dlg.dataset.drag; delete dlg.dataset.drag; if (!from || from === li.dataset.cxVi) return; e.preventDefault(); e.stopPropagation();
+                    const ids = items.map(y => Number(y.id)).filter(y => y !== Number(from)); ids.splice(ids.indexOf(Number(li.dataset.cxVi)), 0, Number(from));
+                    const r = await post('item_order', {basket_id: b.basket_id, ids}); undoToast(T('Ordre changé'), {icon: '⇅', undo: async () => { await post('item_order', {basket_id: b.basket_id, ids: r.before}); draw(); }}); draw(); });
                 li.addEventListener('keydown', async e => { if (!e.altKey || !['ArrowUp', 'ArrowDown'].includes(e.key)) return; e.preventDefault(); // Alt+↑ / Alt+↓ : déplacer au clavier
-                    const ids = items.filter(y => Number(y.basket_id) === Number(it.basket_id)).map(y => Number(y.id)), i = ids.indexOf(Number(it.id)), j = i + (e.key === 'ArrowUp' ? -1 : 1); if (j < 0 || j >= ids.length) return; [ids[i], ids[j]] = [ids[j], ids[i]];
-                    await post('item_order', {basket_id: it.basket_id, ids}); await draw(); dlg.querySelector(`[data-cx-vi="${it.id}"] input`)?.focus(); });
+                    const ids = items.map(y => Number(y.id)), i = ids.indexOf(Number(it.id)), j = i + (e.key === 'ArrowUp' ? -1 : 1); if (j < 0 || j >= ids.length) return; [ids[i], ids[j]] = [ids[j], ids[i]];
+                    await post('item_order', {basket_id: b.basket_id, ids}); await draw(); dlg.querySelector(`[data-cx-vi="${it.id}"] input`)?.focus(); });
             });
-            refreshPanel(); void own;
+            refreshPanel();
         };
         await draw();
         return dlg;
     }
+    const setMixed = host => host.querySelectorAll('[data-mixed]').forEach(c => { c.indeterminate = c.dataset.mixed === '1'; });
+    /** l'arbre de tous les paniers : 📁 dossiers › 🧺 paniers › éléments (pour « Prendre depuis… → Panier ») ; cases à trois états */
+    function basketTreeHtml(st, list) {
+        const all = st.bk, idx = new Map(list.map((x, i) => [x, i])), closed = st.closed || (st.closed = new Set());
+        const itemsOf = bid => list.filter(x => Number(x.basket_id) === Number(bid));
+        const bNode = (x, d) => { const its = itemsOf(x.id), open = !closed.has(`b${x.id}`), cur = Number(x.id) === Number(all.basket_id);
+            return `<section class="cx-tnode" style="--d:${d}"><div class="cx-thead${cur ? ' is-cur' : ''}" draggable="true" data-cx-tb="${x.id}"><button type="button" class="cx-tw2" data-cx-tog="b${x.id}" aria-expanded="${open}" aria-label="${esc(open ? T('Replier') : T('Déplier'))}">${open ? '▾' : '▸'}</button>
+                <input type="checkbox" data-cx-grp="b${x.id}" aria-label="${esc(T('Prendre tout « {n} »', {n: x.name}))}" ${its.length ? '' : 'disabled'}><span aria-hidden="true">${esc(x.icon || '🧺')}</span><b>${esc(x.name)}</b><span class="cx-bmeta">${esc(plural(its.length, T('élément'), T('éléments')))}${destLine(x) ? ` · ${esc(destLine(x))}` : ''}</span></div>
+                ${open && its.length ? `<ul class="cx-rlist">${its.map(y => rowHtml(st, y, idx.get(y))).join('')}</ul>` : ''}</section>`; };
+        const fNode = (f, d) => { const open = !closed.has(`f${f.id}`), bs = (all.baskets || []).filter(x => Number(x.folder_id) === Number(f.id));
+            return `<section class="cx-tnode is-folder" style="--d:${d}"><div class="cx-thead" draggable="true" data-cx-tf="${f.id}"><button type="button" class="cx-tw2" data-cx-tog="f${f.id}" aria-expanded="${open}" aria-label="${esc(open ? T('Replier') : T('Déplier'))}">${open ? '▾' : '▸'}</button>
+                <input type="checkbox" data-cx-grp="f${f.id}" aria-label="${esc(T('Prendre tout « {n} »', {n: f.name}))}"><span aria-hidden="true">${esc(f.icon || '📁')}</span><b>${esc(f.name)}</b><span class="cx-bmeta">${esc(plural(f.baskets, T('panier'), T('paniers')))} · ${esc(plural(f.total, T('élément'), T('éléments')))}</span>
+                <button type="button" class="cx-b is-ter is-sm" data-cx-fmenu="${f.id}" aria-label="${esc(T('Dossier « {n} » : plus…', {n: f.name}))}">⋯</button></div>
+                ${open ? `${fKids(f.id).map(k => fNode(k, d + 1)).join('')}${bs.map(x => bNode(x, d + 1)).join('')}` : ''}</section>`; };
+        return `<div class="cx-ttree" data-cx-ttree>${(all.folders || []).filter(f => !Number(f.parent_id)).map(f => fNode(f, 0)).join('')}${(all.baskets || []).filter(x => !Number(x.folder_id)).map(x => bNode(x, 0)).join('')}</div><p class="cx-sr" id="cx-hint-space">${esc(T('Espace ou double-clic : cocher'))}</p>`;
+    }
+    const grpItems = (st, k) => { const id = Number(k.slice(1)); const bids = k[0] === 'b' ? [id] : (st.bk.baskets || []).filter(x => fTree(id).includes(Number(x.folder_id))).map(x => Number(x.id)); return st.results.filter(y => bids.includes(Number(y.basket_id))); };
+    function paintGroups(st, res) {
+        res.querySelectorAll('[data-cx-grp]').forEach(c => { const all = grpItems(st, c.dataset.cxGrp), n = all.filter(y => st.picked.has(pickKey(y))).length;
+            c.checked = !!all.length && n === all.length; c.indeterminate = n > 0 && n < all.length; });
+    }
+    function bindBasketTree(st, res) {
+        paintGroups(st, res);
+        res.querySelectorAll('[data-cx-grp]').forEach(c => c.addEventListener('change', () => { // un dossier ou un panier entier (cases à trois états)
+            grpItems(st, c.dataset.cxGrp).forEach(it => { togglePick(st, it, c.checked); const cb = res.querySelector(`[data-cx-ri="${st.results.indexOf(it)}"]`); if (cb) { cb.checked = c.checked; cb.closest('li')?.classList.toggle('is-on', c.checked); } });
+            if (st.picked.size >= 2) st.preview = null; paintCount(st); paintGroups(st, res); }));
+        res.addEventListener('change', e => { if (e.target.matches('[data-cx-ri]')) paintGroups(st, res); });
+        res.querySelectorAll('[data-cx-tog]').forEach(t => t.addEventListener('click', () => { const k = t.dataset.cxTog; if (st.closed.has(k)) st.closed.delete(k); else st.closed.add(k); drawTab(st); }));
+        res.querySelectorAll('[data-cx-fmenu]').forEach(bt => bt.addEventListener('click', () => { const id = Number(bt.dataset.cxFmenu); UI().menuAt?.(bt, [
+            {icon: '🧺', label: T('Un nouveau panier dans ce dossier…'), run: async () => { await newBasket(id); drawTab(st); }}, {icon: '📁', label: T('Un sous-dossier…'), run: async () => { await newFolder(id); drawTab(st); }},
+            {icon: '✎', label: T('Renommer…'), run: async () => { await editFolder(id); drawTab(st); }}, {icon: '🗑', label: T('Supprimer le dossier…'), run: async () => { await delFolder(id); drawTab(st); }}], {title: `📁 ${fOf(id)?.name || ''}`}); }));
+        // glisser : un panier ou un dossier sur un dossier (ou tout en haut) ; un élément sur un panier
+        const drop = async (e, z) => { const d = res.dataset.drag || ''; delete res.dataset.drag; if (!d) return; e.preventDefault(); e.stopPropagation();
+            const [k, id] = d.split(':'), toF = z?.dataset.cxTf, toB = z?.dataset.cxTb;
+            if (k === 'b' && toF !== undefined) await moveBasket(Number(id), Number(toF)); else if (k === 'b' && !z) await moveBasket(Number(id), 0);
+            else if (k === 'f' && toF !== undefined && toF !== id) await moveFolder(Number(id), Number(toF)); else if (k === 'f' && !z) await moveFolder(Number(id), 0);
+            else if (k === 'i' && toB !== undefined) await moveItems([Number(id)], Number(toB));
+            drawTab(st); };
+        res.querySelectorAll('[data-cx-tb], [data-cx-tf]').forEach(h => h.addEventListener('dragstart', e => { e.stopPropagation(); res.dataset.drag = h.dataset.cxTb !== undefined ? `b:${h.dataset.cxTb}` : `f:${h.dataset.cxTf}`; try { e.dataTransfer.setData('text/plain', h.textContent.trim()); e.dataTransfer.effectAllowed = 'move'; } catch (_) {} }));
+        res.querySelectorAll('.cx-ttree li[data-cx-r]').forEach(li => { li.draggable = true; li.addEventListener('dragstart', e => { const it = st.results[Number(li.dataset.cxR)]; if (!it?.id) return; e.stopPropagation(); res.dataset.drag = `i:${it.id}`; try { e.dataTransfer.setData('text/plain', it.title); } catch (_) {} }); });
+        res.querySelectorAll('[data-cx-tb], [data-cx-tf]').forEach(z => { z.addEventListener('dragover', e => { if (res.dataset.drag) { e.preventDefault(); z.classList.add('is-over'); } }); z.addEventListener('dragleave', () => z.classList.remove('is-over')); z.addEventListener('drop', e => { z.classList.remove('is-over'); drop(e, z); }); });
+        res.querySelector('[data-cx-ttree]')?.addEventListener('dragover', e => { if (res.dataset.drag) e.preventDefault(); });
+        res.querySelector('[data-cx-ttree]')?.addEventListener('drop', e => { if (!e.target.closest('[data-cx-tb], [data-cx-tf]')) drop(e, null); });
+    }
+    /** pour l'écran « Paniers » à venir (même modèle, mêmes ↶) */
+    ext.cxBaskets = {tree: async () => { const r = await loadTree(); return {baskets: r.baskets, folders: r.folders, current: Number(r.basket_id)}; }, items: async id => (await api('cx_basket', {basket_id: id})).items || [],
+        create: async (o = {}) => keepTree(await post('basket_new', o)), createFolder: async (o = {}) => keepTree(await post('folder_new', o)), edit: async (id, o) => keepTree(await post('basket_edit', {basket_id: id, ...o})), editFolder: async (id, o) => keepTree(await post('folder_edit', {folder_id: id, ...o})),
+        move: (id, folder) => moveBasket(id, folder), moveFolder: (id, parent) => moveFolder(id, parent), remove: id => delBasket(id), removeFolder: id => delFolder(id), moveItems: (ids, to) => moveItems(ids, to), choose: chooseBasket, open: openBasketView};
     /** ⭐ Garder comme liste : les fiches dans « Mes listes » (une nouvelle liste) ; si plusieurs paniers : le panier garde son nom */
     async function keepAsList(items, b) {
         const persons = items.filter(x => x.kind === 'person' && x.ref_id);
@@ -1181,17 +1252,6 @@
         }));
     }
 
-    /** le panier et ses sous-paniers : un groupe par sous-panier (chemin « Famille › Mariage 1813 »), une case à trois états pour le prendre entier */
-    function basketTreeResults(st, list) {
-        st.results = list; const b = st.bk, idx = new Map(list.map((x, i) => [x, i]));
-        return treeIds(b.baskets, b.basket_id).map(id => { const its = list.filter(x => Number(x.basket_id || b.basket_id) === id); const x = bOf(b, id); const sub = treeIds(b.baskets, id);
-            const all = list.filter(y => sub.includes(Number(y.basket_id))); if (!all.length) return '';
-            return `<h6 class="cx-gh cx-bgh" style="--d:${Math.max(0, (x?.depth || 0) - (bOf(b, b.basket_id)?.depth || 0))}"><input type="checkbox" data-cx-grp="${id}" aria-label="${esc(T('Prendre tout « {n} »', {n: x?.name || ''}))}"> ${esc(x?.icon || '🧺')} ${esc((x?.path || [x?.name || '']).join(' › '))} <span>${nf(all.length)}</span></h6>${its.length ? `<ul class="cx-rlist">${its.map(y => rowHtml(st, y, idx.get(y))).join('')}</ul>` : ''}`; }).join('') + `<p class="cx-sr" id="cx-hint-space">${esc(T('Espace ou double-clic : cocher'))}</p>`;
-    }
-    function paintGroups(st, res) {
-        res.querySelectorAll('[data-cx-grp]').forEach(c => { const ids = treeIds(st.bk.baskets, c.dataset.cxGrp), all = st.results.filter(y => ids.includes(Number(y.basket_id))), n = all.filter(y => st.picked.has(pickKey(y))).length;
-            c.checked = !!all.length && n === all.length; c.indeterminate = n > 0 && n < all.length; });
-    }
     async function drawTab(st) {
         const dlg = st.dlg; dlg.querySelectorAll('[data-cx-tab]').forEach(b => { const on = b.dataset.cxTab === st.tab; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
         const tab = TABS.find(([k]) => k === st.tab) || TABS[0];
@@ -1205,7 +1265,9 @@
         chips.innerHTML = special ? '' : chipsHtml(st); chips.hidden = !chips.innerHTML;
         if (st.tab === 'basket') { // 🧺 quel panier, ＋ Nouveau panier…, ⛶ en grand
             const b = await loadBasket(true); if (!st.dlg.isConnected) return;
-            chips.hidden = false; chips.innerHTML = `<span class="cx-cf">${basketSelect(b, 'data-cx-tbsel')}<button type="button" class="cx-b is-ter is-sm" data-cx-bview>⛶ ${esc(T('Ouvrir en grand'))}</button></span><span class="cx-sp"></span><span class="cx-ca">${basketMeta(b)}</span>`;
+            chips.hidden = false; chips.innerHTML = `<span class="cx-cf">${basketSelect(b, 'data-cx-tbsel')}<button type="button" class="cx-b is-ter is-sm" data-cx-bview>⛶ ${esc(T('Ouvrir en grand'))}</button><button type="button" class="cx-b is-ter is-sm" data-cx-bnew>＋ ${esc(T('Panier'))}</button><button type="button" class="cx-b is-ter is-sm" data-cx-fnew>＋ 📁 ${esc(T('Dossier'))}</button></span><span class="cx-sp"></span><span class="cx-ca">${basketMeta(b)}</span>`;
+            chips.querySelector('[data-cx-bnew]').addEventListener('click', async () => { await newBasket(); drawTab(st); });
+            chips.querySelector('[data-cx-fnew]').addEventListener('click', async () => { await newFolder(); drawTab(st); });
             chips.querySelector('[data-cx-tbsel]').addEventListener('change', async e => { await switchBasket(e.target.value); drawTab(st); });
             chips.querySelector('[data-cx-bview]').addEventListener('click', () => { st.dlg.close(); openBasketView(); });
         }
@@ -1217,7 +1279,7 @@
         else res.setAttribute('aria-busy', 'true');
         let list = []; st.more = false;
         try {
-            if (st.tab === 'basket') { const b = st.bk = await api('cx_basket', {basket_id: curBasket(), tree: 1}); baskets = b.baskets; list = (b.items || []).filter(x => !st.q || fold(itemLine(x)).includes(fold(st.q))); st.fromBasket = new Set(list.map(x => x.id)); }
+            if (st.tab === 'basket') { const b = st.bk = keepTree(await api('cx_basket', {basket_id: curBasket(), all: (baskets || []).length > 1 || (folders || []).length ? 1 : 0})); if ((b.baskets || []).length > 1 && !b.items.some(x => Number(x.basket_id) !== Number(b.basket_id))) Object.assign(b, keepTree(await api('cx_basket', {basket_id: curBasket(), all: 1}))); list = (b.items || []).filter(x => !st.q || fold(itemLine(x)).includes(fold(st.q))); st.fromBasket = new Set(list.map(x => x.id)); }
             else if (st.tab === 'recent') list = (readJ(RECENT, []) || []).filter(x => !st.q || fold(itemLine(x)).includes(fold(st.q)));
             else if (st.tab === 'note') { const r = await api('cx_notes', {q: st.q}); list = (r.items || []).map(n => ({kind: 'note', ref_id: Number(n.id), title: n.title || String(n.body || '').slice(0, 80), value: String(n.body || '').slice(0, 600), _v: {ico: '📝', who: n.person_name || '', extra: [String(n.body || '').replace(/\s+/g, ' ').slice(0, 140)], pills: [], fields: [[T('Fiche'), n.person_name || ''], [T('Texte'), String(n.body || '').slice(0, 600)]]}, origin: n.person_name ? {kind: 'person', id: Number(n.entity_id), person_id: Number(n.entity_id), label: T('Fiche de {n}', {n: n.person_name})} : null})); }
             else if (['person', 'event', 'act', 'source', 'media', 'place'].includes(st.tab)) {
@@ -1241,10 +1303,9 @@
         res.removeAttribute('aria-busy');
         if (st.target?.kinds) list = list.filter(x => st.target.kinds.includes(x.kind) || x.kind === 'set');
         const shown = applyFilters(st, list);
-        res.innerHTML = shown.length && st.tab === 'basket' && st.bk && (st.bk.baskets || []).some(x => Number(x.parent_id) === Number(st.bk.basket_id)) ? basketTreeResults(st, shown) : shown.length ? resultsHtml(st, shown) + (st.more ? `<p class="cx-muted cx-pad"><small>${esc(T('Les {n} premiers seulement : précise la recherche (un nom, une commune, une période comme 1780-1800).', {n: nf(list.length)}))}</small></p>` : '') : emptyHtml(st, list.length ? 'filter' : st.q ? 'search' : ['basket', 'recent'].includes(st.tab) ? st.tab : 'none');
-        if (st.tab === 'basket') { setMixed(res); res.querySelectorAll('[data-cx-grp]').forEach(c => c.addEventListener('change', () => { // un sous-panier entier (cases à trois états)
-            const ids = treeIds(st.bk.baskets, c.dataset.cxGrp); st.results.forEach((it, i) => { if (ids.includes(Number(it.basket_id))) { togglePick(st, it, c.checked); const cb = res.querySelector(`[data-cx-ri="${i}"]`); if (cb) { cb.checked = c.checked; cb.closest('li')?.classList.toggle('is-on', c.checked); } } });
-            if (st.picked.size >= 2) st.preview = null; paintCount(st); paintGroups(st, res); })); res.addEventListener('change', e => { if (e.target.matches('[data-cx-ri]')) paintGroups(st, res); }); }
+        const tree = st.tab === 'basket' && st.bk && ((st.bk.baskets || []).length > 1 || (st.bk.folders || []).length);
+        res.innerHTML = tree && list.length ? basketTreeHtml(st, shown) : shown.length ? resultsHtml(st, shown) + (st.more ? `<p class="cx-muted cx-pad"><small>${esc(T('Les {n} premiers seulement : précise la recherche (un nom, une commune, une période comme 1780-1800).', {n: nf(list.length)}))}</small></p>` : '') : emptyHtml(st, list.length ? 'filter' : st.q ? 'search' : ['basket', 'recent'].includes(st.tab) ? st.tab : 'none');
+        if (tree && list.length) bindBasketTree(st, res);
         res.scrollTop = 0; res.dataset.cxShown = `${st.tab}|${st.q}|${[...st.filters].join(',')}|${st.rank}`; bindResults(st, res); bindEmpty(st, res); // data-cx-shown : ce qui est affiché (pour les essais)
         if (st.picked.size >= 2 && !st.preview) drawSummary(st);
     }

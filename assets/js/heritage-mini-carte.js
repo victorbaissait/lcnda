@@ -40,6 +40,7 @@
     const latOf = y => 180 / Math.PI * Math.atan(Math.sinh(Math.PI * (1 - 2 * y)));
     const nbOn = () => { try { return localStorage.getItem(NB_KEY) === '1'; } catch (_) { return false; } };
     const setNb = on => { try { localStorage.setItem(NB_KEY, on ? '1' : '0'); } catch (_) {} };
+    const clusterR = n => Math.round(12 + Math.min(11, Math.log2(n) * 1.9)); // rayon d'une pastille « 42 »
     const near = (x, c) => x + Math.round(c - x); // la copie du monde la plus proche du centre (le Pacifique d'un seul tenant)
 
     /* ───── les cartes écrites par heritage.js, réveillées quand elles arrivent dans la page ───── */
@@ -148,7 +149,7 @@
         const out = [[z < 3 ? 'world110' : 'world50', 'all', 'mm-nb-world']];
         if (z >= 4.5 && inEurope) out.push(['nuts2', 'inner', 'mm-nb-reg']);
         if (z >= 4.5 && inFrance) out.push(['frReg', 'inner', 'mm-nb-reg']);
-        if (z >= 6 && inFrance) out.push(['frDep', 'inner', 'mm-nb-dep']);
+        if (z >= 6 && inFrance) out.push(['frDep', 'all', 'mm-nb-dep']); // avec la côte française, plus fine que celle du monde
         if (z >= 9 && inFrance) out.push(['frCom', z >= 10 ? 'all' : 'none', 'mm-nb-com', true]);
         return out;
     }
@@ -164,7 +165,8 @@
 .mm-tiles .person-map-tile{max-width:none;max-height:none}
 .mm-vec{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;pointer-events:none;transform-origin:0 0;color:#111;background:#fff}
 .mm-vec .mm-nb-world{fill:none;stroke:currentColor;stroke-width:.8;stroke-linejoin:round}
-.mm-vec .mm-nb-world.mm-nb-coast{stroke-width:1.15}
+.mm-vec .mm-nb-world.mm-nb-coast,.mm-vec .mm-nb-dep.mm-nb-coast{stroke-width:1.15;opacity:1}
+.person-map-stage.mm-nb>.lfc-attr{display:none}
 .mm-vec .mm-nb-reg{fill:none;stroke:currentColor;stroke-width:.6;stroke-dasharray:5 3}
 .mm-vec .mm-nb-dep{fill:none;stroke:currentColor;stroke-width:.45;opacity:.85}
 .mm-vec .mm-nb-com{fill:none;stroke:currentColor;stroke-width:.3;opacity:.55}
@@ -324,7 +326,19 @@
             if (this.clusterOn && v.z < CLUSTER_OFF_Z) {
                 const cells = new Map();
                 vis.forEach(p => { const k = Math.floor(p.sx / CLUSTER_CELL) + ':' + Math.floor(p.sy / CLUSTER_CELL); let c = cells.get(k); if (!c) cells.set(k, c = []); c.push(p); });
-                cells.forEach(list => { if (list.length < 2) return; groups.push(list); list.forEach(p => { if (p.g) p.g.style.display = 'none'; }); });
+                // puis les groupes qui se touchent (de part et d'autre d'un bord de case) n'en font plus qu'un
+                let gs = [...cells.values()].map(list => ({list, x: list.reduce((a, p) => a + p.sx, 0) / list.length, y: list.reduce((a, p) => a + p.sy, 0) / list.length}));
+                for (let pass = 0, merged = true; merged && pass < 6; pass++) {
+                    merged = false;
+                    for (let i = 0; i < gs.length; i++) for (let j = i + 1; j < gs.length; j++) {
+                        const a = gs[i], b = gs[j], ra = a.list.length > 1 ? clusterR(a.list.length) : 8, rb = b.list.length > 1 ? clusterR(b.list.length) : 8;
+                        if ((a.list.length > 1 || b.list.length > 1) && Math.hypot(a.x - b.x, a.y - b.y) < ra + rb + 2) {
+                            const n = a.list.length + b.list.length; a.x = (a.x * a.list.length + b.x * b.list.length) / n; a.y = (a.y * a.list.length + b.y * b.list.length) / n;
+                            a.list = a.list.concat(b.list); gs.splice(j, 1); j--; merged = true;
+                        }
+                    }
+                }
+                gs.forEach(({list}) => { if (list.length < 2) return; groups.push(list); list.forEach(p => { if (p.g) p.g.style.display = 'none'; }); });
             }
             this.drawClusters(groups);
             // trajets et cercles
@@ -348,7 +362,7 @@
                 g.style.display = ''; g.__pts = list;
                 g.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
                 g.setAttribute('data-count', String(list.length));
-                g.firstChild.setAttribute('r', String(Math.round(13 + Math.min(14, Math.log2(list.length) * 2.6))));
+                g.firstChild.setAttribute('r', String(clusterR(list.length)));
                 const color = list[0].color; g.firstChild.style.fill = list.every(p => p.color === color) && color ? color : '';
                 g.lastChild.textContent = list.length > 999 ? Math.round(list.length / 100) / 10 + 'k' : String(list.length);
                 g.setAttribute('aria-label', T('{n} points ici — zoomer pour les séparer', {n: nf(list.length)}));
@@ -433,6 +447,8 @@
             const vx0 = v.cx - spanX / 2 - 4 / S, vx1 = v.cx + spanX / 2 + 4 / S, vy0 = v.cy - spanY / 2 - 4 / S, vy1 = v.cy + spanY / 2 + 4 / S;
             const tol = 0.7 / S;
             let out = '', missing = false; const used = new Set();
+            // la côte de France vient des départements (plus fine) : celle du monde est alors laissée de côté
+            const frBox = ls.some(l => l[0] === 'frDep') && layer('frDep').ready && layer('frDep').data ? [nX(-5.3), nY(51.2), nX(9.7), nY(41.2)] : null;
             for (const [key, which, cls, towns] of ls) {
                 const e = layer(key);
                 if (!e.ready) { missing = true; e.p.then(() => { if (this.nb && this.el.isConnected) this.drawVec(); }); continue; }
@@ -443,6 +459,7 @@
                     for (const a of e.data.arcs) {
                         if (which === 'inner' && a.n < 2) continue;
                         if (!a.n) continue;
+                        if (frBox && cls === 'mm-nb-world' && a.n < 2 && a.b[0] >= frBox[0] && a.b[2] <= frBox[2] && a.b[1] >= frBox[1] && a.b[3] <= frBox[3]) continue;
                         const b = a.b; if (b[3] < vy0 || b[1] > vy1) continue;
                         for (let k = Math.ceil(vx0 - b[2]); k <= Math.floor(vx1 - b[0]); k++) { // copies du monde visibles
                             let s = '', lx = 1e9, ly = 1e9; const c = a.c, m = c.length;

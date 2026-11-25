@@ -17,8 +17,8 @@ declare(strict_types=1);
  *    Licence : ODbL 1.0, « © les contributeurs d'OpenStreetMap » ; schéma OpenMapTiles (CC BY 4.0).
  * GET  telech_a_clc&lat=&lon=[&pid=][&cached_only=1] · telech_a_list · telech_a_about · telech_a_osm_status · telech_a_osm_dl_info
  *      telech_a_osm_dl_resume&id= · telech_a_osm_tile&z=&x=&y=
- * POST telech_a_osm_dl_start {key} · _dl_step {id} · _dl_cancel {id} · telech_a_osm_pack_finish {id} · telech_a_osm_pack_undo {key}
- *      telech_a_osm_pack_remove {key} · telech_a_osm_pack_restore {key} · telech_a_cache_clear
+ * POST telech_a_cache_clear · telech_a_cache_restore · telech_a_osm_dl_start {key} · _dl_step {id} · _dl_cancel {id} · telech_a_osm_pack_finish {id} · telech_a_osm_pack_undo {key}
+ *      telech_a_osm_pack_remove {key} · telech_a_osm_pack_restore {key}
  * Essais : GENEALOGY_TEST=1 + LCNDA_TEST_TELECHA_DIR (un fichier <étape> par appel ; absent = hors ligne ; le pack OSM : ses fichiers).
  */
 
@@ -216,10 +216,18 @@ function telech_a_list(): array
     usort($rows, static fn($x, $y) => strcmp($x['name'], $y['name']));
     return ['rows' => $rows];
 }
+/** oublie les réponses gardées (mises de côté pour ↶ Annuler) */
 function telech_a_cache_clear(): array
 {
-    $n = 0; foreach (glob(ta_dir('cache') . '/*.json') ?: [] as $f) { if (@unlink($f)) { $n++; } }
+    $bin = ta_dir('cache-oublie', true); foreach (glob($bin . '/*.json') ?: [] as $f) { @unlink($f); }
+    $n = 0; foreach (glob(ta_dir('cache') . '/*.json') ?: [] as $f) { if (@rename($f, $bin . '/' . basename($f))) { $n++; } }
     return ['ok' => true, 'removed' => $n];
+}
+function telech_a_cache_restore(): array
+{
+    $n = 0; $dir = ta_dir('cache', true);
+    foreach (glob(ta_dir('cache-oublie') . '/*.json') ?: [] as $f) { if (!is_file($dir . '/' . basename($f)) && @rename($f, $dir . '/' . basename($f))) { $n++; } }
+    return ['ok' => true, 'restored' => $n];
 }
 
 /* ═════════════════════ 🗺 OpenStreetMap hors ligne : le pack ═════════════════════ */
@@ -627,6 +635,7 @@ function telech_a_api_post(string $action, array $d): array
         'telech_a_osm_pack_remove' => telech_a_osm_pack_remove($d),
         'telech_a_osm_pack_restore' => telech_a_osm_pack_restore($d),
         'telech_a_cache_clear' => telech_a_cache_clear(),
+        'telech_a_cache_restore' => telech_a_cache_restore(),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }

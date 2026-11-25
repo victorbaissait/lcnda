@@ -1,0 +1,9 @@
+/* LCNDA — 🐑 La vie du village et la nature (assets/js/heritage-telech-b-village.js) : le reste vient de histoire.css (hist-row…) et commune-plus.css */
+.tb-life { display: grid; gap: 12px; }
+.tb-ul li { margin-bottom: 5px; }
+.tb-cols { columns: 3 11em; column-gap: 1.5em; }
+.tb-src-link { font-size: 12px; white-space: nowrap; }
+.tb-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.tb-links { margin-top: 10px; }
+@media (max-width: 600px) { .tb-cols { columns: 2 9em; } }
+@media print { .tb-more:not([open]) { display: none; } }

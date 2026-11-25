@@ -402,23 +402,23 @@
         {id: 'tc_liens', icon: '🔗', label: T('Menus, catalogues, horaires de trains d’époque (liens)'), group: 'Chercher', needs: [], installed: () => true, run: (ctx, host) => { host.innerHTML = linksHtml(); return true; }});
 
     /* ─────────── ⚙️ Réglages → 📊 La vie en chiffres ─────────── */
-    const ABOUT = [
-        // [n°, sujet, ce qui existait, verdict licence, où]
-        ['28', 'Joanne, Dictionnaire géographique (1869 ; 1890-1905)', 'rien', 'Domaine public (A. Joanne † 1881, P. Joanne † 1922). Scan Internet Archive « NOT_IN_COPYRIGHT ». Édition 1890-1905 : Gallica (réutilisation non commerciale) → lien.', 'article de la commune (pack tc-joanne, fabriqué sur GitHub) ; sinon lien « chercher dans le livre »'],
-        ['29', 'Statistiques des préfets (an IX – XIII)', 'rien', 'Domaine public ; scans Internet Archive et Gallica → liens. Les chiffres de ces années (décès de l’an IX à l’an XIV) sont dans la série SGF de l’Insee.', 'lien par département + série des décès'],
-        ['30', 'Guides Joanne / Baedeker', 'rien', 'Domaine public ; texte sur Internet Archive → recherche dans le texte.', 'lien par commune'],
-        ['31', 'Indicateur Chaix', 'le temps de voyage (gares, Wikidata) dans « 🌍 Le monde autour »', 'Livret Chaix 1869 sur Internet Archive ; Gallica → liens.', 'liens'],
-        ['32', 'Catalogues Manufrance', 'prix sourcés (prix-reference, prix-europe)', 'Pas de transcription ouverte trouvée → lien Gallica.', 'lien'],
-        ['33', 'Tarifs postaux', 'oui : « ✉️ Le prix d’un timbre » (tq-timbre, Wikipédia CC BY-SA)', '—', 'déjà dans l’app'],
-        ['34', 'Menus NYPL « What’s on the menu? »', 'rien', 'Licence des données non vérifiable (site injoignable, pas de texte officiel trouvé) → lien.', 'lien'],
-        ['35', 'Livres de cuisine Belle Époque', 'oui : recettes (l9a-recettes, Wikisource / Internet Archive)', '—', 'déjà dans l’app'],
-        ['36', 'Human Mortality Database', 'espérance de vie Insee depuis 1994 ; FHMD par département', 'CC BY 4.0, mais compte obligatoire → la personne ouvre son fichier ici (rien n’est envoyé).', 'fiche : « 🧮 Ses chances de vivre jusqu’à… »'],
-        ['37', 'Human Fertility Database', 'moyennes françaises (moyennes-france)', 'CC BY 4.0, compte obligatoire → même chose.', 'fiche : « 👶 Le nombre d’enfants par femme »'],
-        ['38', 'Taille des conscrits par département', 'taille moyenne par pays (Clio-Infra, CC0)', 'Aucun jeu ouvert par département trouvé → rien de plus.', '—'],
-        ['39', 'Choléra 1832 / 1849 / 1854', 'les épidémies dans les événements (monde-autour)', 'Insee, SGF : Licence Ouverte 2.0.', 'fiche, village, monographie, Listes'],
-        ['40', 'Noms de famille 1891-1990', 'lien Géopatronyme (sources-ouvertes-4)', 'Fichier Insee non diffusé en données ouvertes → lien existant.', 'déjà dans l’app'],
-        ['41', 'Salaires et prix (SGF)', 'prix et salaires sourcés, SMIC', 'Pas de série SGF ouverte des salaires trouvée sur insee.fr → rien de plus.', 'déjà dans l’app'],
-        ['42', 'Convertisseur franc → euro Insee', 'oui : 🪙 Convertisseur d’autrefois (source Insee citée)', '—', 'déjà dans l’app']];
+    const ABOUT = [ // [sujet, ce qu’on en fait, licence lue, où] — le détail et les citations des licences : docs/telechargements-lot-c.md
+        ['Joanne, dictionnaire géographique (1869)', 'fait ici', 'Domaine public', 'village, monographie'],
+        ['Joanne, dictionnaire (1890-1905)', 'lien seulement', 'Gallica : réutilisation non commerciale', 'village, monographie'],
+        ['Statistiques des préfets (an IX – XIII)', 'lien seulement', 'Domaine public', 'village, monographie'],
+        ['Guides Joanne et Baedeker', 'lien seulement', 'Domaine public', 'village, monographie'],
+        ['Indicateur Chaix', 'lien seulement', 'Domaine public', 'à la demande'],
+        ['Catalogues Manufrance', 'lien seulement', 'Gallica : réutilisation non commerciale', 'à la demande'],
+        ['Tarifs postaux', 'déjà dans l’app', 'CC BY-SA 4.0', '✉️ Vie de tous les jours'],
+        ['Menus de la NYPL', 'lien seulement', 'pas vérifiable', 'à la demande'],
+        ['Livres de cuisine Belle Époque', 'déjà dans l’app', 'Domaine public', '🌍 Monde et coutumes'],
+        ['Human Mortality Database', 'fait ici', 'CC BY 4.0 (compte obligatoire)', 'fiche d’une personne'],
+        ['Human Fertility Database', 'fait ici', 'CC BY 4.0 (compte obligatoire)', 'fiche d’une personne'],
+        ['Taille des conscrits par département', 'rien de plus', 'pas de jeu ouvert trouvé', '—'],
+        ['Choléra 1832, 1849, 1854', 'fait ici', 'Licence Ouverte 2.0', 'fiche, village, monographie, Listes'],
+        ['Noms de famille 1891-1990', 'déjà dans l’app', 'pas de fichier ouvert', 'lien Géopatronyme'],
+        ['Salaires et prix (SGF)', 'déjà dans l’app', 'pas de série ouverte trouvée', 'prix et salaires sourcés'],
+        ['Convertisseur franc → euro (Insee)', 'déjà dans l’app', 'Licence Ouverte 2.0', '🪙 Convertisseur d’autrefois']];
     function drawSettings(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
@@ -434,8 +434,8 @@
                 ${ts.length ? `<ul class="hist-ul tc-ul" data-tc-tables>${ts.map(tRow).join('')}</ul>` : `<p class="muted">${esc(T('Aucune table ouverte.'))}</p>`}</div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3>
                 <p class="muted">${esc(T('Pour chaque idée : ce que l’app avait déjà, la licence lue sur le site officiel (le 2026-11-25), et ce qui en est fait. Le détail : docs/telechargements-lot-c.md.'))}</p>
-                <div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Sujet'))}</th><th>${esc(T('Déjà dans l’app'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Où'))}</th></tr></thead><tbody>
-                ${ABOUT.map(([, a, b, c, d]) => `<tr><td>${esc(T(a))}</td><td>${esc(T(b))}</td><td>${esc(T(c))}</td><td>${esc(T(d))}</td></tr>`).join('')}</tbody></table></div>
+                <div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Sujet'))}</th><th>${esc(T('Ici'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Où'))}</th></tr></thead><tbody>
+                ${ABOUT.map(([a, b, c, d]) => `<tr><td>${esc(T(a))}</td><td>${esc(T(b))}</td><td>${esc(T(c))}</td><td>${esc(T(d))}</td></tr>`).join('')}</tbody></table></div>
                 <p class="muted">${esc(T('Rien de personnel ne part sur Internet : les liens s’ouvrent seulement quand tu cliques ; les tables HMD / HFD restent dans ce navigateur.'))}</p></div></section>`;
     }
     document.addEventListener('change', async e => {
