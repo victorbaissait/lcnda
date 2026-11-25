@@ -88,7 +88,7 @@ def main():
         if lab in RL and len(R2D[RL[lab]]) <= 6: return 'region', sorted(R2D[RL[lab]]), None
         if lab in DEP_BY_NAME: return 'dep', [DEP_BY_NAME[lab]], None
         if depth == 0:
-            for p in (('P2341', 'P131') if wm.ids(e, 'P31') and not set(wm.ids(e, 'P31')) & {'Q36784', 'Q209495', 'Q1620908', 'Q3502482'} else ()):
+            for p in (('P2341', 'P131') if not set(wm.ids(e, 'P31')) & {'Q36784', 'Q209495', 'Q1620908', 'Q3502482'} else ()):
                 for l in wm.ids(e, p):
                     if l in ('Q142', 'Q90'): continue
                     r = where(l, 1)
@@ -130,7 +130,8 @@ def main():
         en = re.sub(r'^Category:Traditional cloth(?:ing|es) of ', '', c)
         t = topic.get(c) or (NQ.get(en) or (0, None))[1]
         lvl, deps, pt = where(t) if t else ('', [], None)
-        region_name = wm.label(T.get(t), ('fr',)) if t else ''
+        orig = [o for o in (wm.ids(T.get(t), 'P2341') if t else []) if wm.claims(T.get(o), 'P625')]  # un costume « originaire de » : le nom de la région (un lieu, pas un peuple)
+        region_name = wm.label(T.get(orig[0]), ('fr',)) if orig and T.get(orig[0]) else (wm.label(T.get(t), ('fr',)) if t else '')
         region_name = region_name or en
         if not deps and not pt:
             # le nom de la région écrit dans la catégorie (« Traditional clothing of Normandy ») : département ou région de ce nom
@@ -141,6 +142,7 @@ def main():
         for s in sub[c]:
             n = name_of(s)
             if not n: continue  # pas d'élément Wikidata en français : on ne montre pas un nom anglais
+            if not re.search(r'coiffe|costume|bonnet|chapeau|béret|tablier|gilet|robe|châle|sabot|habit|jupe|vêtement|veste|kabig|bragou|cape|capuche|dentelle|fichu|marmotte|cornette', n, re.I): continue
             tq = topic.get(s); d = (T.get(tq) or {}).get('descriptions', {}).get('fr', {})
             it = {'n': n, 'q': tq, 'cat': s[9:]}
             if isinstance(d, dict) and d.get('value'): it['d'] = d['value'][:140]
@@ -157,6 +159,35 @@ def main():
         if deps: row['deps'] = deps
         if pt: row['lat'], row['lon'] = pt
         rows.append(row)
+    # les coiffes et costumes de Wikidata « originaires de » (P2341) un lieu de France précis (pas la France entière, pas Paris)
+    cand = wm.sparql('SELECT ?i ?t ?loc WHERE { ?i wdt:P2341 ?loc . ?loc wdt:P17 wd:Q142 . ?i wdt:P31|wdt:P279 ?t . }', 'coiffes-p2341', gap=1)
+    tys = sorted({qid(r['t']) for r in cand}, key=lambda x: int(x[1:]))
+    ok = set()
+    for i in range(0, len(tys), 700):
+        part = tys[i:i + 700]
+        ok |= {qid(r['t']) for r in wm.sparql('SELECT DISTINCT ?t WHERE { VALUES ?t { ' + ' '.join('wd:' + x for x in part) + ' } VALUES ?r { wd:Q11460 wd:Q14952 wd:Q3172759 } ?t wdt:P279* ?r . }', 'cloth-' + hashlib.sha1(' '.join(part).encode()).hexdigest()[:12], gap=5)}
+    W = {}
+    for r in cand:
+        if qid(r['t']) in ok and qid(r['loc']) not in ('Q142', 'Q90'): W.setdefault(qid(r['i']), set()).add(qid(r['loc']))
+    W = {k: v for k, v in W.items() if k not in {it.get('q') for r in rows for it in r['items']}}
+    WE = wm.entities(sorted(W) + sorted({l for v in W.values() for l in v} - set(T)), props='claims|labels|descriptions', languages='fr')
+    T.update(WE)
+    for q, locs in W.items():
+        e = T.get(q) or {}; n = wm.label(e, ('fr',))
+        if not n: continue
+        loc = sorted(locs)[0]; lvl, deps, pt = where(loc)
+        if not deps and not (pt and 41 < pt[0] < 51.5 and -5.5 < pt[1] < 10): continue  # la France d'Europe, ou un département connu
+        d = e.get('descriptions', {}).get('fr', {})
+        it = {'n': n, 'q': q, 'cat': next((c for c in wm.claims(e, 'P373') if isinstance(c, str)), '')}
+        if isinstance(d, dict) and d.get('value'): it['d'] = d['value'][:140]
+        im = next((x for x in wm.claims(e, 'P18') if isinstance(x, str)), '')
+        if im: it['img'] = im; want.append('File:' + im)
+        row = {'r': wm.label(T.get(loc), ('fr',)) or n, 'cat': it['cat'] and 'Category:' + it['cat'] or '', 'q': loc, 'lvl': lvl, 'items': [it], 'photos': []}
+        row['cat'] = row['cat'][9:] if row['cat'] else ''
+        if deps: row['deps'] = deps
+        if pt: row['lat'], row['lon'] = pt
+        rows.append(row)
+        print('  Wikidata :', n, '→', row['r'], deps or pt, flush=True)
     merged = {}  # « Normandy » et « Normandie » : une seule région
     for r in rows:
         k = fold(r['r'])

@@ -41,6 +41,18 @@ foreach (array_chunk($names, 40) as $i => $chunk) {
     fwrite(STDERR, sprintf("  %d/%d : %d trouvés\n", min(count($names), ($i + 1) * 40), count($names), count($n)));
     if (getenv('LCNDA_TR_RECORD_DIR') === false || !is_file(getenv('LCNDA_TR_RECORD_DIR') . '/wikt_rev_' . substr(sha1('prenom|' . implode('|', $chunk)), 0, 10) . '.json')) { sleep(3); }
 }
+// la liste Insee écrit souvent sans accent la majuscule (« EMILE ») : on essaie aussi « Émile », « Élisabeth »…
+$retry = array_values(array_filter($none, static fn($w) => str_starts_with($w, 'E')));
+foreach (array_chunk($retry, 40) as $chunk) {
+    $acc = array_map(static fn($w) => 'É' . mb_substr($w, 1), $chunk);
+    for ($try = 0; ; $try++) {
+        try { $res = tr_wikt_fetch($acc, 'prenom'); break; }
+        catch (Throwable $e) { if ($try >= 30) { throw $e; } fwrite(STDERR, '  ' . $e->getMessage() . " — on attend\n"); sleep(min(180, 30 * ($try + 1))); }
+    }
+    foreach ($chunk as $i => $w) { $r = $res[$acc[$i]] ?? null; if ($r && !empty($r['text'])) { $n[$r['title']] = $r['text']; $none = array_values(array_diff($none, [$w])); } }
+    sleep(3);
+}
+fwrite(STDERR, count($n) . " avec les accents\n");
 ksort($n);
 $data = ['v' => 1, 'built' => date('Y-m-d'), 'attr' => 'Wiktionnaire (fr.wiktionary.org), partie « Étymologie » des articles, sens « Prénom » ; liste des prénoms : Insee, Fichier des prénoms (édition 2024)',
     'licence' => 'CC BY-SA 4.0 (Wiktionnaire, les contributeurs du Wiktionnaire) ; Licence Ouverte 2.0 (Insee, liste)', 'url' => 'https://fr.wiktionary.org/', 'n' => $n, 'none' => $none];

@@ -222,20 +222,23 @@ function tr_coiffes_for(string $insee, string $dep, ?float $lat, ?float $lon): a
         $rank = tr_rank_place($r, $insee, $dep, $lat, $lon); if ($rank === null) { continue; }
         $out[] = tr_coiffe_row($r) + ['rank' => $rank];
     }
-    usort($out, static fn($a, $b) => [$a['rank'], count($b['items'])] <=> [$b['rank'], count($a['items'])]);
+    // une coiffe nommée d'abord, puis la plus locale (un pays tout proche, le département, la région)
+    $k = static fn($r) => [$r['items'] ? 0 : 1, $r['rank'] === 3 ? 0 : $r['rank'] + 1];
+    usort($out, static fn($a, $b) => $k($a) <=> $k($b));
     return $out;
 }
 function tr_photo(array $p): array
 {
-    return ['file' => $p['f'], 'thumb' => tr_thumb((string) $p['f'], 220), 'page' => tr_file_page((string) $p['f']), 'author' => (string) ($p['a'] ?? ''), 'licence' => (string) ($p['l'] ?? ''), 'licence_url' => (string) ($p['u'] ?? ''), 'date' => (string) ($p['d'] ?? '')];
+    return ['file' => $p['f'], 'thumb' => tr_thumb((string) $p['f'], 220), 'page' => tr_file_page((string) $p['f']), 'author' => (string) ($p['a'] ?? ''), 'licence' => (string) ($p['l'] ?? ''), 'licence_url' => (string) ($p['u'] ?? ''), 'date' => preg_match('/\b(1[5-9]\d\d|20\d\d)\b/', (string) ($p['d'] ?? ''), $m) ? $m[1] : ''];
 }
 function tr_coiffe_row(array $r): array
 {
     $items = array_map(static fn($it) => ['name' => $it['n'], 'qid' => (string) ($it['q'] ?? ''), 'url' => tr_wd((string) ($it['q'] ?? '')), 'desc' => (string) ($it['d'] ?? ''),
-        'category' => 'https://commons.wikimedia.org/wiki/Category:' . rawurlencode(str_replace(' ', '_', (string) $it['cat'])),
+        'category' => (string) $it['cat'] !== '' ? 'https://commons.wikimedia.org/wiki/Category:' . rawurlencode(str_replace(' ', '_', (string) $it['cat'])) : tr_wd((string) ($it['q'] ?? '')),
         'photo' => !empty($it['img']) && !empty($it['cr']) ? tr_photo(['f' => $it['img']] + $it['cr']) : null], $r['items'] ?? []);
     $deps = array_values(array_map(static fn($d) => (string) (cc_departements()[$d] ?? $d), $r['deps'] ?? []));
-    return ['region' => $r['r'], 'qid' => (string) ($r['q'] ?? ''), 'url' => tr_wd((string) ($r['q'] ?? '')), 'category' => 'https://commons.wikimedia.org/wiki/Category:' . rawurlencode(str_replace(' ', '_', (string) $r['cat'])),
+    return ['region' => $r['r'], 'qid' => (string) ($r['q'] ?? ''), 'url' => tr_wd((string) ($r['q'] ?? '')),
+        'category' => (string) $r['cat'] !== '' ? 'https://commons.wikimedia.org/wiki/Category:' . rawurlencode(str_replace(' ', '_', (string) $r['cat'])) : tr_wd((string) ($r['q'] ?? '')),
         'level' => (string) ($r['lvl'] ?? ''), 'deps' => $r['deps'] ?? [], 'dep_names' => implode(', ', $deps), 'lat' => $r['lat'] ?? null, 'lon' => $r['lon'] ?? null,
         'items' => $items, 'photos' => array_map('tr_photo', $r['photos'] ?? [])];
 }

@@ -4,7 +4,8 @@
 .tr-place:empty{display:none}
 .tr-src{margin:.6rem 0 0;font-size:.82em;opacity:.78}
 .tr-note{margin:.3rem 0 0}
-.tr-more summary{cursor:pointer;margin:.4rem 0}
+.tr-more summary{cursor:pointer;margin:.4rem 0;list-style:none}
+.tr-more summary::-webkit-details-marker{display:none}
 .tr-list,.tr-names{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
 .tr-names li{line-height:1.4}
 .tr-item{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem .6rem;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:10px}

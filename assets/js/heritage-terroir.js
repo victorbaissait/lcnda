@@ -95,7 +95,8 @@
         oie: 'L’oie de son pays', canard: 'Le canard de son pays', dindon: 'Le dindon de son pays', ane: 'L’âne de son pays', chien: 'Le chien de son pays'};
     const SP_ART = {bovin: 'la', cheval: 'le', mouton: 'la', chevre: 'la', porc: 'le', poule: 'la', oie: 'l’', canard: 'le', dindon: 'le', ane: 'l’', chien: 'le'};
     /** « la Salers », mais « Poule de Houdan » (le nom dit déjà l'espèce) */
-    const breedName = r => (/^(poule|oie|canard|dindon|âne|ane|baudet|chèvre|chevre|chien|berger|braque|bouledogue|mouton|brebis|race|porc|cochon|cheval|trait|bidet|taureau|bœuf|boeuf|vache|coq|griffon|basset|épagneul|lévrier|dogue|bleu|bleue|petit|grand)\b/i.test(r.name) ? r.name : `${T(SP_ART[r.species] || 'la')}${SP_ART[r.species] === 'l’' ? '' : ' '}${r.name}`);
+    const breedName = r => { if (/^(poule|oie|canard|dindon|âne|ane|baudet|chèvre|chevre|chien|berger|braque|bouledogue|mouton|brebis|race|porc|cochon|cheval|trait|bidet|taureau|bœuf|boeuf|vache|coq|griffon|basset|épagneul|lévrier|dogue|bleu|bleue|petit|grand)\b/i.test(r.name)) return r.name;
+        const art = SP_ART[r.species] || 'la'; return /^[aeiouyàâéèêëîïôöûüœh]/i.test(r.name) || art === 'l’' ? `${T('l’')}${r.name}` : `${T(art)} ${r.name}`; };
     function raceRow(r) {
         const where = r.origin ? T('origine : {o}', {o: r.origin}) : (r.country_names ? T('pays : {c}', {c: r.country_names}) : '');
         return `<li class="tr-item">${thumb(r.thumb, r.image_page, r.name)}<div><span>${esc(r.icon)} <b>${esc(r.name)}</b> <small class="muted">${esc(T(SP[r.species] || ''))}</small></span>${r.desc ? `<small>${esc(r.desc)}</small>` : ''}
@@ -124,7 +125,8 @@
         return `<div class="tr-coiffe">${ph ? photoFig(ph) : ''}<div><p class="cplus-lead">👒 ${esc(l)}</p>
             ${items || photos.length > 1 ? more(`${items ? `<ul class="tr-names">${items}</ul>` : ''}<div class="tr-gallery">${photos.slice(1, 9).map(p => photoFig(p, 'is-small')).join('')}</div>
             <p class="muted tr-note"><small>${esc(T('Les coiffes changeaient d’un village à l’autre et d’une époque à l’autre : compare avec tes photos de famille pour les dater.'))}</small></p>`, (c.items?.length || 0) + Math.max(0, photos.length - 1)) : ''}
-            ${srcLine(T('Wikimedia Commons, « {c} »', {c: decodeURIComponent(c.category.split('Category:')[1] || '').replace(/_/g, ' ')}), T('licence propre à chaque photo'), c.category, ` · <small>${esc(T('noms : Wikidata'))}</small>`)}</div></div>`;
+            ${/Category:/.test(c.category) ? srcLine(T('Wikimedia Commons, « {c} »', {c: decodeURIComponent(c.category.split('Category:')[1] || '').replace(/_/g, ' ')}), T('licence propre à chaque photo'), c.category, ` · <small>${esc(T('noms : Wikidata'))}</small>`)
+                : srcLine('Wikidata', 'CC0 1.0', c.category, ` · <small>${esc(T('photo : Wikimedia Commons, licence propre à chaque photo'))}</small>`)}</div></div>`;
     }
 
     /* ═════════ 🏫 écoles ═════════ */
