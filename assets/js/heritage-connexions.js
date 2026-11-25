@@ -255,42 +255,89 @@
     const targetsFor = items => DT.filter(t => t && t.id && (!t.enabled || t.enabled() !== false) && accepted(t, items).length);
     const hereOf = t => { try { return t.here?.() || null; } catch (_) { return null; } };
 
+    /* 📍 « Mettre dans… » (dans l'esprit de « Prendre depuis… ») : en-tête qui dit quoi, « Comment ? » en deux cartes (seulement pour
+     * un ensemble), une recherche, les destinations rangées (Récemment utilisées · Ma recherche · Écrire et montrer · Ranger), chacune avec
+     * « ce que ça donne » ; on choisit, puis « Mettre dans … » en bas (double-clic ou Entrée : tout de suite). La dernière est retenue. */
+    const PUT_RECENT = 'genealogie-cx-put-recents';
+    const PUT_SECT = [['recent', 'Récemment utilisées'], ['search', 'Ma recherche (enquêtes, notes, rappels)'], ['write', 'Écrire et montrer'], ['store', 'Ranger']];
+    const sectOf = t => ({investigation: 'search', note: 'search', reminder: 'search', atelier: 'write', book: 'write', montage: 'write', send_textdoc: 'write', send_keynote: 'write', send_site: 'write', basket: 'store', send_sheet: 'store', map: 'store', mylist: 'store'}[t.id]
+        || ({Chercher: 'search', Créer: 'write', Ranger: 'store'}[t.group] || 'store'));
     async function putInto(items, {anchor = null, fromBasket = false, only = null} = {}) {
         items = (items || []).filter(Boolean);
         if (!items.length) return toast(T('Rien à mettre.'));
         if (kiosk()) return toast(T('Mode consultation : rien ne peut être modifié.'));
-        const sets = items.filter(x => x.kind === 'set');
-        const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-put';
+        const sets = items.filter(x => x.kind === 'set'), nRows = sets.reduce((n, x) => n + setCount(x), 0);
+        const what = items.length === 1 ? `« ${String(items[0].title || '').replace(/^[\p{Extended_Pictographic}\uFE0F\u200D\s]+/u, '').slice(0, 80)} »${sets.length ? ` (${plural(nRows, T('ligne'))})` : ''}` : plural(items.length, T('élément'), T('éléments'));
+        const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-put'; dlg.dataset.noFoot = ''; dlg.setAttribute('aria-labelledby', 'cx-put-h');
+        let sel = null; // {id, here}
+        const asRows = () => dlg.querySelector('[name="cx-setmode"]:checked')?.value === 'rows';
+        const its = () => (asRows() ? items.flatMap(explode) : items);
+        const recent = () => (readJ(PUT_RECENT, []) || []).filter(x => typeof x === 'string');
+        const row = (t, h, its2) => { const acc = accepted(t, its2), ctx = h ? hereOf(t) : null; let ex = ''; try { ex = t.explain?.(acc, ctx) || ''; } catch (_) {}
+            const part = acc.length < its2.length ? T('{a} sur {b} iront là ; le reste reste dans le panier.', {a: acc.length, b: its2.length}) : '';
+            const on = sel && sel.id === t.id && sel.here === h;
+            return `<button type="button" class="cx-dest${on ? ' is-on' : ''}" role="option" aria-selected="${on}" data-cx-dest="${esc(t.id)}" data-cx-here="${h ? 1 : 0}"><span class="cx-ico" aria-hidden="true">${esc(t.icon || '•')}</span><span class="cx-t"><b>${esc(h ? String(ctx?.label || T('Ici')) : T(t.label))}</b><small>${esc(ex ? T('Ça donne : {x}', {x: ex}) : T(t.label))}</small>${part ? `<small class="cx-part">${esc(part)}</small>` : ''}</span></button>`; };
         const draw = () => {
-            const asRows = dlg.querySelector('[name="cx-setmode"]:checked')?.value === 'rows';
-            const its = asRows ? items.flatMap(explode) : items;
-            const list = targetsFor(its).filter(t => !only || only.includes(t.id));
-            const here = list.filter(t => hereOf(t)), rest = list.filter(t => !hereOf(t));
-            const row = (t, h) => { const acc = accepted(t, its), ctx = h ? hereOf(t) : null; let ex = ''; try { ex = t.explain?.(acc, ctx) || ''; } catch (_) {}
-                const part = acc.length < its.length ? T('{a} sur {b} iront là ; le reste reste dans le panier.', {a: acc.length, b: its.length}) : '';
-                return `<button type="button" class="cx-dest" data-cx-dest="${esc(t.id)}" data-cx-here="${h ? 1 : 0}"><span class="cx-ico" aria-hidden="true">${esc(t.icon || '•')}</span><span class="cx-t"><b>${esc(h ? (ctx?.label || T('Ici')) : T(t.label))}</b>${ex ? `<small>${esc(ex)}</small>` : ''}${part ? `<small class="cx-part">${esc(part)}</small>` : ''}</span></button>`; };
-            dlg.querySelector('[data-cx-dests]').innerHTML = (here.length ? `<h4>${esc(T('Ici, l’écran ouvert'))}</h4>${here.map(t => row(t, true)).join('')}` : '')
-                + `<h4>${esc(T('Partout ailleurs'))}</h4>${rest.concat(here).map(t => row(t, false)).join('') || `<p class="muted">${esc(T('Aucun outil ne peut recevoir ça pour l’instant.'))}</p>`}`;
-            filter();
+            const list0 = its(), list = targetsFor(list0).filter(t => !only || only.includes(t.id));
+            const here = list.filter(t => hereOf(t)), rec = recent().map(id => list.find(t => t.id === id)).filter(Boolean).slice(0, 3);
+            const block = (title, html) => (html ? `<h4 class="cx-sect">${esc(title)}</h4><div class="cx-dlist" role="listbox" aria-label="${esc(title)}">${html}</div>` : '');
+            dlg.querySelector('[data-cx-dests]').innerHTML = (here.length ? block(T('Ici, l’écran ouvert'), here.map(t => row(t, true, list0)).join('')) : '')
+                + block(T('Récemment utilisées'), rec.map(t => row(t, false, list0)).join(''))
+                + PUT_SECT.slice(1).map(([k, l]) => block(T(l), list.filter(t => sectOf(t) === k && !rec.includes(t)).map(t => row(t, false, list0)).join(''))).join('')
+                || `<p class="cx-muted">${esc(T('Aucun outil ne peut recevoir ça pour l’instant.'))}</p>`;
+            filter(); paintGo();
         };
-        const filter = () => { const q = fold(dlg.querySelector('[data-cx-dq]').value); dlg.querySelectorAll('[data-cx-dest]').forEach(b => { b.hidden = !!q && !fold(b.textContent).includes(q); }); };
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">📍 ${esc(T('METTRE DANS…'))}</span><h2>${esc(T('Mettre dans… ({n})', {n: plural(items.length, T('chose'), T('choses'))}))}</h2></div><button type="button" class="icon-button" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></div>
-            <div class="cx-body">${sets.length ? `<fieldset class="cx-setmode"><legend>${esc(T('Les ensembles ({n} lignes) :', {n: nf(sets.reduce((n, s) => n + setCount(s), 0))}))}</legend><label class="checkbox-line"><input type="radio" name="cx-setmode" value="table" checked> ${esc(T('un tableau avec sa source (1 élément)'))}</label><label class="checkbox-line"><input type="radio" name="cx-setmode" value="rows"> ${esc(T('des éléments séparés (une ligne chacun)'))}</label></fieldset>` : ''}
-            <input type="search" class="cx-dq" data-cx-dq placeholder="${esc(T('🔎 chercher une destination…'))}" aria-label="${esc(T('Chercher une destination'))}"><div class="cx-dests" data-cx-dests></div></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="submit" class="button secondary">${esc(T('Annuler'))}</button></div></form>`;
+        const filter = () => { const q = fold(dlg.querySelector('[data-cx-dq]').value); dlg.querySelectorAll('[data-cx-dest]').forEach(b => { b.hidden = !!q && !fold(b.textContent).includes(q); });
+            dlg.querySelectorAll('.cx-dlist').forEach(l => { const any = [...l.children].some(b => !b.hidden); l.hidden = !any; l.previousElementSibling.hidden = !any; }); };
+        const paintGo = () => {
+            const go = dlg.querySelector('[data-cx-putgo]'), say = dlg.querySelector('[data-cx-putsay]'), t = sel && DT.find(x => x.id === sel.id);
+            go.disabled = !t;
+            if (!t) { go.querySelector('span').textContent = `📍 ${T('Mettre dans…')}`; say.textContent = T('Choisis où les mettre.'); return; }
+            const ctx = sel.here ? hereOf(t) : null, acc = accepted(t, its()); let ex = ''; try { ex = t.explain?.(acc, ctx) || ''; } catch (_) {}
+            const name = sel.here ? String(ctx?.label || T('Ici')).replace(new RegExp(`^\\s*${T('Ici')}\\s*:\\s*`, 'i'), '') : T(t.label).replace(/…$/, '');
+            go.querySelector('span').textContent = `${t.icon || '📍'} ${T('Mettre dans {d}', {d: name})}`;
+            say.textContent = [plural(acc.length, T('élément'), T('éléments')), ex].filter(Boolean).join(' → ');
+        };
+        const lineN = nf(nRows);
+        dlg.innerHTML = `<form method="dialog" class="cx-tk">
+            <header class="cx-tk-head"><div class="cx-tk-ht"><span class="cx-eyebrow">📍 ${esc(T('Mettre dans…'))}</span><h2 id="cx-put-h">${esc(T('Mettre {w} dans…', {w: what}))}</h2>
+                <p class="cx-tk-say">${esc(T('Choisis où les mettre : chaque élément garde d’où il vient. Rien n’est rangé avant ton clic, et « ↶ Annuler » est proposé.'))}</p></div>
+                <button type="button" class="cx-x" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></header>
+            <div class="cx-put-body">
+                ${sets.length ? `<fieldset class="cx-howto"><legend>${esc(T('Comment ?'))}</legend><div class="cx-howcards">
+                    <label class="cx-how"><input type="radio" name="cx-setmode" value="table" checked><span><b>▦ ${esc(T('Un seul tableau avec sa source'))}</b><small>${esc(T('1 élément, ses {n} lignes et d’où elles viennent', {n: lineN}))}</small></span></label>
+                    <label class="cx-how"><input type="radio" name="cx-setmode" value="rows"><span><b>≡ ${esc(T('Une ligne = un élément'))}</b><small>${esc(T('{n} éléments séparés, chacun avec la source', {n: lineN}))}</small></span></label></div></fieldset>` : ''}
+                <div class="cx-srch"><input type="search" class="cx-dq" data-cx-dq placeholder="${esc(T('Chercher une destination (enquête, note, Atelier…)'))}" aria-label="${esc(T('Chercher une destination'))}" autocomplete="off"></div>
+                <div class="cx-dests" data-cx-dests></div></div>
+            <footer class="cx-tk-foot"><div class="cx-cnt"><span class="cx-what" data-cx-putsay aria-live="polite"></span></div>
+                <div class="cx-acts"><button type="submit" class="cx-b is-ter" value="cancel">${esc(T('Annuler'))}</button><button type="button" class="cx-b is-pri" data-cx-putgo disabled><span></span></button></div></footer></form>`;
         document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
         dlg.querySelector('[data-cx-x]').addEventListener('click', () => dlg.close());
         dlg.querySelector('[data-cx-dq]').addEventListener('input', filter);
+        dlg.querySelector('[data-cx-dq]').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); const b = [...dlg.querySelectorAll('[data-cx-dest]')].find(x => !x.hidden); if (b) { pick(b); b.focus(); } } if (e.key === 'ArrowDown') { e.preventDefault(); [...dlg.querySelectorAll('[data-cx-dest]')].find(x => !x.hidden)?.focus(); } });
         dlg.querySelectorAll('[name="cx-setmode"]').forEach(r => r.addEventListener('change', draw));
-        dlg.querySelector('[data-cx-dests]').addEventListener('click', async e => {
-            const b = e.target.closest('[data-cx-dest]'); if (!b) return;
-            const t = DT.find(x => x.id === b.dataset.cxDest); if (!t) return;
-            const asRows = dlg.querySelector('[name="cx-setmode"]:checked')?.value === 'rows';
-            const its = asRows ? items.flatMap(explode) : items;
+        const pick = b => { sel = {id: b.dataset.cxDest, here: b.dataset.cxHere === '1'}; dlg.querySelectorAll('[data-cx-dest]').forEach(x => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', String(on)); }); paintGo(); };
+        let busy = false;
+        const go = async () => {
+            const t = sel && DT.find(x => x.id === sel.id); if (!t || busy) return; busy = true;
+            const list = its(); writeJ(PUT_RECENT, [t.id, ...recent().filter(x => x !== t.id)].slice(0, 6));
             dlg.close();
-            await deliver(t, its, {here: b.dataset.cxHere === '1', anchor, fromBasket, original: items});
+            await deliver(t, list, {here: sel.here, anchor, fromBasket, original: items});
+        };
+        const box = dlg.querySelector('[data-cx-dests]');
+        box.addEventListener('click', e => { const b = e.target.closest('[data-cx-dest]'); if (b) pick(b); });
+        box.addEventListener('dblclick', e => { const b = e.target.closest('[data-cx-dest]'); if (b) { pick(b); go(); } });
+        box.addEventListener('keydown', e => {
+            const b = e.target.closest('[data-cx-dest]'); if (!b) return;
+            if (e.key === 'Enter') { e.preventDefault(); pick(b); go(); }
+            else if (e.key === ' ') { e.preventDefault(); pick(b); }
+            else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const all = [...box.querySelectorAll('[data-cx-dest]')].filter(x => !x.hidden), k = all.indexOf(b) + (e.key === 'ArrowDown' ? 1 : -1); if (all[k]) all[k].focus(); else if (k < 0) dlg.querySelector('[data-cx-dq]').focus(); }
         });
+        dlg.querySelector('[data-cx-putgo]').addEventListener('click', go);
         draw();
+        const last = recent()[0], hb = box.querySelector('[data-cx-here="1"]') || (last && box.querySelector(`[data-cx-dest="${CSS.escape(last)}"]`));
+        if (hb) pick(hb); // l'écran ouvert, sinon la dernière destination : déjà choisie (un clic pour mettre)
+        dlg.querySelector('[data-cx-dq]').focus();
     }
     /** ranger dans une destination ; ce qui a été pris du panier en sort (le reste y reste), un seul « ↶ Annuler » */
     async function deliver(t, items, {here = false, anchor = null, fromBasket = false, original = null, ctx: given = null} = {}) {

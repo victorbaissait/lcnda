@@ -18,7 +18,7 @@
 .cx-hint, .cx-empty { font-size: 12px; margin: 6px 0 0; }
 .cx-panel-foot { margin-top: 6px; font-size: 12px; }
 .cx-modal { width: var(--modal-m); }
-.cx-put, .cx-inv { width: min(560px, calc(100vw - 32px)); }
+.cx-inv { width: min(560px, calc(100vw - 32px)); }
 .cx-body { display: flex; flex-direction: column; gap: 8px; }
 .cx-dq, .cx-q { width: 100%; }
 .cx-dests h4 { margin: 10px 0 4px; font-size: 12px; text-transform: uppercase; color: var(--muted); }
@@ -109,13 +109,13 @@
 
 /* ═════════ 📥 « Prendre depuis… » (maquette validée docs/design/prendre-depuis.html) : une colonne en-tête · corps · pied ;
  * seule la liste défile ; boutons légers (coins arrondis, bordure fine, pas d'ombre décalée) ; le reste de l'app ne bouge pas ═════════ */
-dialog.cx-take { --cx-bg: #fff; --cx-ink: #111; --cx-mut: #555; --cx-soft: #6b7280; --cx-line: #eceef2; --cx-line2: #c9ced8; --cx-blue: #055dff; --cx-blue-bg: #eef4ff; --cx-blue-ink: #1a3d8f;
+dialog.cx-take, dialog.cx-put { --cx-bg: #fff; --cx-ink: #111; --cx-mut: #555; --cx-soft: #6b7280; --cx-line: #eceef2; --cx-line2: #c9ced8; --cx-blue: #055dff; --cx-blue-bg: #eef4ff; --cx-blue-ink: #1a3d8f;
     --cx-green: #1a7f37; --cx-green-bg: #eaf6ee; --cx-yel-bg: #fff8d6; --cx-yel-ink: #7a5d00; --cx-red: #c62828; --cx-red-bg: #fdecec; --cx-grey: #f1f2f4; --cx-hover: #f6f8fc; --cx-pw: 340px;
     width: min(1200px, 94vw); max-width: 94vw; height: min(720px, 90vh); max-height: 90vh; overflow: hidden; border: 1px solid var(--cx-line2); border-radius: 14px; box-shadow: 0 18px 50px rgba(0, 0, 0, .25); background: var(--cx-bg); color: var(--cx-ink); padding: 0; }
-:root[data-theme="dark"] .cx-take { --cx-bg: #1c1f24; --cx-ink: #eceef2; --cx-mut: #b4b9c3; --cx-soft: #9aa0aa; --cx-line: #2c3038; --cx-line2: #454b55; --cx-blue: #5b93ff; --cx-blue-bg: #18233a; --cx-blue-ink: #a9c4ff;
+:root[data-theme="dark"] .cx-take, :root[data-theme="dark"] .cx-put { --cx-bg: #1c1f24; --cx-ink: #eceef2; --cx-mut: #b4b9c3; --cx-soft: #9aa0aa; --cx-line: #2c3038; --cx-line2: #454b55; --cx-blue: #5b93ff; --cx-blue-bg: #18233a; --cx-blue-ink: #a9c4ff;
     --cx-green: #4cc070; --cx-green-bg: #15281c; --cx-yel-bg: #2c2612; --cx-yel-ink: #f0d276; --cx-red: #ff6b6b; --cx-red-bg: #331a1a; --cx-grey: #262a31; --cx-hover: #22262d; background: var(--cx-bg); }
-.cx-take [hidden] { display: none !important; }
-.cx-take .cx-tk { height: 100%; display: flex; flex-direction: column; margin: 0; min-height: 0; }
+.cx-take [hidden], .cx-put [hidden] { display: none !important; }
+.cx-take .cx-tk, .cx-put .cx-tk { height: 100%; display: flex; flex-direction: column; margin: 0; min-height: 0; }
 .cx-tk-head { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px 14px; border-bottom: 1px solid var(--cx-line); }
 .cx-tk-ht { flex: 1; min-width: 0; }
 .cx-eyebrow { font: 800 11px system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--cx-blue); }
@@ -141,8 +141,8 @@ dialog.cx-take { --cx-bg: #fff; --cx-ink: #111; --cx-mut: #555; --cx-soft: #6b72
 .cx-take.is-wide .cx-tools { display: none; }
 .cx-srch { position: relative; }
 .cx-srch::before { content: "🔍"; position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: .65; pointer-events: none; }
-dialog.cx-take .cx-srch input[type="search"] { width: 100%; border: 1px solid var(--cx-line2); border-radius: 9px; background: var(--cx-bg); color: var(--cx-ink); font: 14px system-ui, sans-serif; padding: 9px 12px 9px 34px; box-shadow: none; background-image: none; }
-dialog.cx-take .cx-srch input[type="search"]:focus { outline: 2px solid var(--cx-blue); outline-offset: 0; border-color: var(--cx-blue); }
+dialog.cx-take .cx-srch input[type="search"], dialog.cx-put .cx-srch input[type="search"] { width: 100%; border: 1px solid var(--cx-line2); border-radius: 9px; background: var(--cx-bg); color: var(--cx-ink); font: 14px system-ui, sans-serif; padding: 9px 12px 9px 34px; box-shadow: none; background-image: none; }
+dialog.cx-take .cx-srch input[type="search"]:focus, dialog.cx-put .cx-srch input[type="search"]:focus { outline: 2px solid var(--cx-blue); outline-offset: 0; border-color: var(--cx-blue); }
 .cx-chips { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .cx-cf, .cx-ca { display: contents; }
 .cx-sp { flex: 1; }
@@ -325,3 +325,30 @@ dialog.cx-take .cx-srch input[type="search"]:focus { outline: 2px solid var(--cx
     .cx-cards { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: no-preference) { .cx-take .cx-rlist li { transition: background-color .12s; } }
+
+/* 📍 « Mettre dans… » : même famille que « Prendre depuis… » (plus étroite, une seule colonne) */
+dialog.cx-put { width: min(720px, 94vw); max-width: 94vw; height: min(680px, 90vh); }
+.cx-put-body { flex: 1; min-height: 0; overflow: auto; padding: 14px 22px 16px; display: flex; flex-direction: column; gap: 12px; overscroll-behavior: contain; }
+.cx-howto { border: 0; margin: 0; padding: 0; }
+.cx-howto legend { font: 800 11px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--cx-soft); margin-bottom: 6px; padding: 0; }
+.cx-howcards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.cx-how { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--cx-line2); border-radius: 12px; padding: 12px; cursor: pointer; background: var(--cx-bg); }
+.cx-how:has(input:checked) { border-color: var(--cx-blue); background: var(--cx-blue-bg); }
+.cx-how input { margin-top: 3px; accent-color: var(--cx-blue); }
+.cx-how span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cx-how small { color: var(--cx-mut); font-size: 12.5px; }
+.cx-put .cx-dests h4.cx-sect { margin: 10px 2px 4px; font-size: 10.5px; }
+.cx-dlist { display: flex; flex-direction: column; gap: 2px; }
+.cx-put .cx-dest { border: 1px solid transparent; border-radius: 10px; padding: 9px 10px; margin: 0; gap: 10px; background: none; color: var(--cx-ink); }
+.cx-put .cx-dest:hover { background: var(--cx-hover); border-color: transparent; }
+.cx-put .cx-dest:focus-visible { outline: 2px solid var(--cx-blue); outline-offset: 0; }
+.cx-put .cx-dest.is-on { background: var(--cx-blue-bg); border-color: var(--cx-blue); }
+.cx-put .cx-dest .cx-ico { font-size: 18px; width: 1.6em; }
+.cx-put .cx-dest small { color: var(--cx-mut); font-size: 12.5px; }
+.cx-put .cx-tk-foot .cx-b.is-pri span { white-space: normal; }
+:root[data-theme="dark"] .cx-put .cx-dest:hover { background: var(--cx-hover); }
+@media (max-width: 640px) {
+    dialog.cx-put { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0; margin: 0; border: 0; }
+    .cx-put-body { padding: 12px 14px; }
+    .cx-howcards { grid-template-columns: minmax(0, 1fr); }
+}

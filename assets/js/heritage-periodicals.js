@@ -626,13 +626,15 @@
         const rows = [...D.issues.map(i => ({key: 'issue:' + i.id, fam: famOf(i), label: issueName(i), sub: [i.data?.creators, i.date_text].filter(Boolean).join(' · ')})),
             ...D.articles.map(a => { const i = issueOf(a); return {key: 'article:' + a.id, fam: famOf(a), label: (timed(famOf(a)) && a.pages ? `⏱ ${a.pages} — ` : '') + a.title, sub: `dans ${i ? issueName(i) : '?'}${a.authors ? ' · ' + a.authors : ''}`, child: true}; })];
         ext.openDialog({eyebrow: 'ATELIER', title: '＋ Ajouter des revues, livres, documentaires', wide: true, submitLabel: 'Ajouter au projet',
-            body: `<div class="h-pr-pickbar"><input type="search" data-pk-q placeholder="Chercher…"><select data-pk-fam><option value="">Tout</option>${allFams().map(k => `<option value="${esc(k)}">${Wf(k).ic} ${esc(Wf(k).items)}</option>`).join('')}</select><button type="button" class="link-button" data-pk-all>tout cocher (affichés)</button></div>
-                <div class="h-pr-pick">${rows.map(r => `<label class="checkbox-line ${r.child ? 'is-child' : ''}" data-fam="${r.fam}"><input type="checkbox" value="${r.key}"> ${Wf(r.fam).ic} <span><b>${esc(r.label)}</b> <small class="muted">${esc(r.sub)}</small></span></label>`).join('')}</div>`,
+            body: `<div class="h-pr-pickbar"><input type="search" data-pk-q placeholder="Chercher…"><select data-pk-fam><option value="">Tout</option>${allFams().map(k => `<option value="${esc(k)}">${Wf(k).ic} ${esc(Wf(k).items)}</option>`).join('')}</select></div>
+                <div class="h-pr-pick" data-pk-list></div>`,
             onOpen: dl => {
-                const q = dl.querySelector('[data-pk-q]'), fam = dl.querySelector('[data-pk-fam]');
-                const filt = () => dl.querySelectorAll('.h-pr-pick label').forEach(l => { l.hidden = (fam.value && l.dataset.fam !== fam.value) || !l.textContent.toLowerCase().includes(q.value.trim().toLowerCase()); });
-                q.addEventListener('input', filt); fam.addEventListener('change', filt);
-                dl.querySelector('[data-pk-all]').addEventListener('click', () => dl.querySelectorAll('.h-pr-pick label:not([hidden]) input').forEach(c => { c.checked = true; }));
+                // la liste de choix commune (app-ui.js) : 🔍 sans accents, cochés en haut, « Tout cocher les N affichés », + le tri par famille à côté
+                const fam = dl.querySelector('[data-pk-fam]');
+                const cl = window.LCNDA_UI.choiceList({items: rows.map(r => ({value: r.key, icon: Wf(r.fam).ic, label: r.label, sub: r.sub, fam: r.fam, cls: r.child ? 'is-child' : '', attrs: `data-fam="${esc(r.fam)}"`})),
+                    multiple: true, label: 'Revues, livres, documentaires', search: dl.querySelector('[data-pk-q]'), tickAll: true});
+                dl.querySelector('[data-pk-list]').appendChild(cl);
+                fam.addEventListener('change', () => cl.setFilter(fam.value ? it => it.fam === fam.value : null));
             },
             onSubmit: async form => {
                 const items = [...form.querySelectorAll('.h-pr-pick input:checked')].map(c => { const [type, id] = c.value.split(':'); return {type, id: Number(id)}; });

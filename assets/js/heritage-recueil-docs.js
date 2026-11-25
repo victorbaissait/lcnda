@@ -66,14 +66,16 @@
         if (!docs.length) return toast(T('Choisis au moins un document.'), 'error');
         let list = []; try { list = (await A().api('recueils')).recueils || []; } catch (e) { return toast(e.message, 'error'); }
         if (!list.length) return create(docs, {onDone});
-        const one = r => `<label class="checkbox-line rd-pick" data-rd-row="${esc((r.title + ' ' + (r.reference || '') + ' ' + (r.place_text || '')).toLowerCase())}"><input type="radio" name="rid" value="${r.id}"> <span>${esc(r.icon || '📚')} <b>${esc(r.title)}</b>${r.reference || r.date_text ? ` <small class="muted">${esc([r.reference, r.date_text].filter(Boolean).join(' · '))}</small>` : ''} <small class="muted">· ${esc(A().plural ? A().plural(r.pages, 'page', 'pages') : String(r.pages))}</small></span></label>`;
         ext.openDialog({eyebrow: T('📚 RECUEIL'), title: docs.length > 1 ? T('Ajouter {x} à un recueil', {x: A().plural ? A().plural(docs.length, 'document', 'documents') : String(docs.length)}) : T('Ajouter « {t} » à un recueil', {t: String(docs[0].title || '').slice(0, 60)}), submitLabel: T('Ajouter'),
             body: `<p class="muted">${esc(T('Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis.'))}</p>
-                ${list.length > 6 ? `<input type="search" class="rd-q" data-rd-q placeholder="${esc(T('Chercher un recueil…'))}" aria-label="${esc(T('Chercher un recueil…'))}">` : ''}
-                <div class="rd-picks" role="radiogroup" aria-label="${esc(T('Recueil'))}">${list.map(one).join('')}</div>
+                <div class="rd-picks" data-rd-picks></div>
                 <p><button type="button" class="button small secondary" data-rd-new>＋ ${esc(T('Nouveau recueil avec ces documents…'))}</button></p>`,
             onOpen: d => {
-                d.querySelector('[data-rd-q]')?.addEventListener('input', e => { const q = e.target.value.trim().toLowerCase(); d.querySelectorAll('[data-rd-row]').forEach(x => { x.hidden = !!q && !x.dataset.rdRow.includes(q); }); });
+                // la liste de choix commune (app-ui.js) : un rond par recueil ; 🔍 (titre, cote, lieu) dès 7 recueils
+                const UIc = window.LCNDA_UI;
+                const items = list.map(r => ({value: r.id, icon: r.icon || '📚', label: r.title, text: `${r.reference || ''} ${r.place_text || ''}`, cls: 'rd-pick',
+                    sub: [r.reference, r.date_text, A().plural ? A().plural(r.pages, 'page', 'pages') : String(r.pages)].filter(Boolean).join(' · ')}));
+                d.querySelector('[data-rd-picks]').appendChild(UIc.choiceList({items, multiple: false, name: 'rid', label: T('Recueil'), search: list.length > 6, placeholder: T('Chercher un recueil…')}));
                 d.querySelector('[data-rd-new]').addEventListener('click', () => { d.close(); create(docs, {onDone}); });
             },
             onSubmit: async form => {
