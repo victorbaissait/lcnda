@@ -33,7 +33,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-preuve-'));
     const dir = path.join(tmp, 'a');
     fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
-    const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+    const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
     // 1 Luc (racine) ← 2 Jean MARTIN + 3 Marie BORIE ; 2 ← 4 Pierre MARTIN + 5 Anne DUFOUR ; 3 ← 6 Paul BORIE + 7 Rose LAFON ; 8 Louis, frère de Jean, sans source
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

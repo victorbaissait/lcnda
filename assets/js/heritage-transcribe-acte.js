@@ -139,10 +139,13 @@
                 : !st.installed ? notice('info', `<b>${esc(i18n('Ollama n’est pas encore sur cet ordinateur.'))}</b> ${esc(i18n('Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ».'))}`)
                 : !st.running ? notice('warn', `<b>${esc(i18n('Ollama est installé mais ne tourne pas.'))}</b> ${esc(i18n('Lance l’application Ollama, puis « ↻ Vérifier à nouveau ».'))}`)
                 : ready ? notice('ok', esc(i18n('Prêt : la lecture se fait sur cet ordinateur, sans Internet.'))) : '';
-            box.innerHTML = `${head}${info()}<div class="h-txa-prog" data-txa-prog hidden><div class="h-txa-bar"><i></i></div><small data-txa-progtxt></small></div><div class="h-txa-out" data-txa-out></div>
+            // 19 (audit) : prêt → le bouton « 🔬 Lire » en haut, « Modèle et image » replié dans « ⚙️ Réglages ▸ » ; sinon les réglages d'abord (il faut installer)
+            const readBtn = ready && !o.setupOnly && o.all ? `<button type="button" class="button" data-txa-readall>🔬 ${esc(i18n('Lire toutes les pages avec ce modèle ({n})', {n: o.all.n}))}</button>` : ready && !o.setupOnly ? `<button type="button" class="button" data-txa-read>🔬 ${esc(i18n('Lire l’acte avec ce modèle'))}</button>` : '';
+            const fold = ready && !o.setupOnly, cur = (st.models || []).find(m => m.tag === model)?.label || model;
+            box.innerHTML = `${head}${fold ? `<div class="h-txa-row h-txa-deepbtns h-txa-readtop">${readBtn}<small class="muted">${esc(i18n('Modèle : {m}', {m: cur}))}</small></div><details class="h-txa-settings"><summary>⚙️ ${esc(i18n('Réglages (modèle et image)'))}</summary>${info()}</details>` : info()}<div class="h-txa-prog" data-txa-prog hidden><div class="h-txa-bar"><i></i></div><small data-txa-progtxt></small></div><div class="h-txa-out" data-txa-out></div>
                 <div class="h-txa-row h-txa-deepbtns">${!st.installed ? `<a class="button" href="${esc(st.download_url)}" target="_blank" rel="noopener noreferrer">↗ ${esc(i18n('Télécharger Ollama (ollama.com)'))}</a>` : ''}
                 ${st.running && !ready ? `<button type="button" class="button" data-txa-pull>⤓ ${esc(i18n('Installer la lecture approfondie'))}</button>` : ''}
-                ${ready && !o.setupOnly && o.all ? `<button type="button" class="button" data-txa-readall>🔬 ${esc(i18n('Lire toutes les pages avec ce modèle ({n})', {n: o.all.n}))}</button>` : ready && !o.setupOnly ? `<button type="button" class="button" data-txa-read>🔬 ${esc(i18n('Lire l’acte avec ce modèle'))}</button>` : ''}
+                ${fold ? '' : readBtn}
                 <button type="button" class="button secondary" data-txa-recheck>↻ ${esc(i18n('Vérifier à nouveau'))}</button></div>
                 ${ready && o.setupOnly ? notice('info', esc(i18n('Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire ▾ ».'))) : ''}
                 <p class="ui-hint">${esc(i18n('« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms.'))}</p>`;
@@ -186,12 +189,25 @@
             const usedTag = m => `<small class="muted h-txa-imgused" data-txa-imgused="${esc(m)}">🖼 ${esc(i18n(IMG_USED[m] || IMG_USED.orig))}</small>`;
             const keepBtns = (key, many) => many && o.existing ? `<span class="h-txa-keep2"><button type="button" class="button small" data-txa-keep="${key}" data-txa-mode="replace">⇄ ${esc(i18n('Remplacer le texte'))}</button><button type="button" class="button small secondary" data-txa-keep="${key}" data-txa-mode="append">＋ ${esc(i18n('Ajouter à la suite'))}</button></span><small class="muted">${esc(i18n('Le texte d’avant reste dans 🕘 Versions.'))}</small>` : `<button type="button" class="button small${key === 'htr' ? ' secondary' : ''}" data-txa-keep="${key}">✓ ${esc(many ? i18n('Garder celle-ci') : i18n('Mettre dans le texte'))}</button>`;
             out.innerHTML = `<h4>${esc(alt ? i18n('Les deux images côte à côte') : two ? i18n('Les deux lectures côte à côte') : i18n('Le texte lu'))}${o.pageLabel ? ` · ${esc(o.pageLabel)}` : ''}</h4><div class="h-txa-cmp2${two || alt ? '' : ' is-one'}">
-                ${two ? `<div><b>✍ ${esc(i18n('Écriture à la main'))}</b><textarea data-txa-t="htr" spellcheck="false">${esc(o.htrText)}</textarea><button type="button" class="button small secondary" data-txa-keep="htr">✓ ${esc(i18n('Garder celle-ci'))}</button></div>` : ''}
+                ${two ? `<div><b>✍ ${esc(o.htrFrom === 'mine' ? i18n('Ton texte actuel') : i18n('Écriture à la main'))}</b><textarea data-txa-t="htr" spellcheck="false">${esc(o.htrText)}</textarea><button type="button" class="button small secondary" data-txa-keep="htr">${esc(o.htrFrom === 'mine' ? `✓ ${i18n('Garder mon texte')}` : `✓ ${i18n('Garder celle-ci')}`)}</button></div>` : ''}
                 ${alt ? `<div><b>🔬 ${esc(i18n('Image d’origine'))}</b><textarea data-txa-t="deep0" spellcheck="false">${esc(alt.text)}</textarea>${usedTag(alt.mode)}${keepBtns('deep0', true)}</div>` : ''}
                 <div><b>🔬 ${esc(alt ? i18n(used === 'mine' ? 'Avec ton réglage « Mieux voir »' : 'Image améliorée') : i18n('Lecture approfondie'))}</b><textarea data-txa-t="deep" spellcheck="false">${esc(deepText)}</textarea>${usedTag(used)}${keepBtns('deep', two || !!alt)}</div></div>`;
             if (o.onCompareAll) { out.insertAdjacentHTML('beforeend', `<p class="h-txa-all"><button type="button" class="button small secondary" data-txa-all>⚖️ ${esc(i18n('Comparer toutes les lectures, mot par mot'))}</button> <small class="muted">${esc(i18n('Chaque lecture (chaque modèle) est gardée : prends le meilleur de chacune.'))}</small></p>`); out.querySelector('[data-txa-all]').addEventListener('click', () => o.onCompareAll()); }
             paintRepeats(); out.querySelector('[data-txa-t="deep"]')?.addEventListener('input', () => paintRepeats());
+            if (two || alt) wordDiff(out, two ? 'htr' : 'deep0', two ? (o.htrFrom === 'mine' ? '✍' : '✍') : '🔬');
+            out.scrollIntoView?.({block: 'start', behavior: 'smooth'}); // 19 : les résultats à l'écran
             o.onCompare?.(out); // 🪄 corrections proposées et ▤ « Relier les lignes à l'image » (app-lignes-alignement.js, posés par l'Atelier)
+        }
+        /** 20 (audit) : les mots qui diffèrent entre les deux textes, surlignés ; un clic prend le mot de gauche ou de droite
+         *  (le texte de droite, celui de la lecture approfondie, suit ; « Garder celle-ci » le met dans l'acte) */
+        function wordDiff(out, leftKey, leftIc) {
+            const CM = ext.txCompare, L = out.querySelector(`[data-txa-t="${leftKey}"]`), R = out.querySelector('[data-txa-t="deep"]'); if (!CM?.merge || !L || !R) return;
+            let parts = CM.merge([R.value, L.value], {base: 0}); const host = document.createElement('div'); host.className = 'h-txa-wdiff'; host.dataset.txaWdiff = '';
+            const paint = () => { const n = parts.filter(q => !q.same).length;
+                host.innerHTML = `<h5>${esc(n ? i18n(n > 1 ? '{n} passages diffèrent : clique le mot à garder' : '{n} passage diffère : clique le mot à garder', {n}) : i18n('Les deux textes disent la même chose'))}</h5><p>${parts.map((q, i) => q.same ? esc(q.text).replace(/\n/g, '<br>') : `<span class="h-txa-wd"><button type="button" class="h-txa-wl${q.pick === 1 ? ' is-on' : ''}" data-txa-pick="${i}:1" title="${esc(i18n('Prendre ce mot (à gauche)'))}">${esc(q.opts[1] || '∅')}</button><button type="button" class="h-txa-wr${q.pick === 0 ? ' is-on' : ''}" data-txa-pick="${i}:0" title="${esc(i18n('Prendre ce mot (à droite)'))}">${esc(q.opts[0] || '∅')}</button></span>`).join(' ')}</p>`; };
+            paint(); out.querySelector('.h-txa-cmp2')?.before(host); void leftIc;
+            host.addEventListener('click', e => { const b = e.target.closest('[data-txa-pick]'); if (!b) return; const [i, r] = b.dataset.txaPick.split(':').map(Number); parts[i].pick = r; R.value = CM.textOf(parts); paint(); paintRepeats(); });
+            R.addEventListener('input', () => { parts = CM.merge([R.value, L.value], {base: 0}); paint(); });
         }
         box.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;
@@ -221,7 +237,7 @@
             if (b.matches('[data-txa-redup]')) { const ta = box.querySelector('[data-txa-t="deep"]'); if (dedupBefore != null) ta.value = dedupBefore; dedupBefore = null; paintRepeats(); return; }
             if (b.dataset.txaKeep) { const v = box.querySelector(`[data-txa-t="${b.dataset.txaKeep}"]`)?.value || ''; if (!v.trim()) return; o.onKeep?.(v, b.dataset.txaKeep, b.dataset.txaMode || 'append'); dlg.close(); }
         });
-        box.addEventListener('change', e => { if (e.target.name === 'txa_model') { pick(); refresh(); }
+        box.addEventListener('change', e => { if (e.target.name === 'txa_model') { pick(); refresh().then(() => { const d = box.querySelector('details.h-txa-settings'); if (d) d.open = true; }); }
             if (e.target.name === 'txa_img') { try { localStorage.setItem(IMG_KEY, e.target.value); } catch (_) {} }
             if (e.target.matches('[data-txa-both]')) both = e.target.checked; });
         refresh();
@@ -262,12 +278,18 @@
             try {
                 const r = await post('act_import_check', {people: ex.people.map(p => ({key: p.key, first: p.given, last: p.surname, sex: p.sex, birth_year: p.birthYear, role: p.role})), year: ex.year, source_title: src.title});
                 st.check = r.result || st.check;
-                ex.people.forEach(p => { const c = st.check.candidates?.[p.key] || [], s = st.people.get(p.key); if (c.length && c[0].score >= 5 && !s.person_id) { s.action = 'link'; s.person_id = c[0].id; s.cand = c[0]; } });
+                // 🔴 3 (audit) : une fiche au même prénom et au même nom n'est jamais doublée par défaut : « ⇆ à trancher » (Relier ou Créer),
+                // le bouton ✓ Ajouter attend le choix ; très probable (score ≥ 5) : reliée d'office, comme avant
+                const same = (p, x) => C().norm(String(x.title || '')).replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim() === C().norm(upName(p)).replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim();
+                ex.people.forEach(p => { const c = st.check.candidates?.[p.key] || [], s = st.people.get(p.key); if (s.person_id) return;
+                    if (c.length && c[0].score >= 5) { s.action = 'link'; s.person_id = c[0].id; s.cand = c[0]; return; }
+                    const twin = c.find(x => same(p, x)); if (twin && s.action === 'create') { s.action = 'compare'; s.cand = twin; } });
             } catch (e) { toast(e.message, 'error'); }
         }
         await check();
+        const undecided = () => ex.people.filter(p => st.people.get(p.key)?.action === 'compare');
         const dlg = ext.openDialog({eyebrow: i18n('TRANSCRIPTION'), title: `🧭 ${i18n('Ce que l’app a trouvé dans l’acte')}`, wide: true, submitLabel: `✓ ${i18n('Ajouter à la généalogie')}`,
-            body: '<div class="h-txa-found" data-txa-found></div>', onSubmit: () => apply()});
+            body: '<div class="h-txa-found" data-txa-found></div>', onSubmit: () => { if (undecided().length) { toast(i18n('Choisis d’abord pour chaque fiche du même nom : 🔗 Relier ou ＋ Créer.'), 'error'); return false; } apply(); }});
         dlg.classList.add('h-txa-dlg');
         const root = dlg.querySelector('[data-txa-found]');
         const gabNote = document.createElement('div'); gabNote.dataset.txaGab = ''; root.before(gabNote);
@@ -314,7 +336,9 @@
             if (dead.length) li.push(`✝ <b>${esc(i18n('Décès estimé avant l’acte'))}</b> : ${dead.map(([p]) => esc(upName(p))).join(', ')}`);
             if (wit.length) li.push(`☆ <b>${esc(i18n('Gardés dans l’acte, sans fiche'))}</b> : ${wit.map(([p]) => esc(upName(p) + (p.job ? ` (${p.job})` : ''))).join(', ')}`);
             li.push(`📚 <b>${esc(i18n('La source'))}</b> : ${esc(src.title || i18n('(sans titre)'))}${st.check.source ? ` · ${esc(i18n('déjà dans ta base, reprise'))}` : ''}`);
-            return `<ul class="h-txa-recap">${li.map(x => `<li>${x}</li>`).join('')}</ul>`;
+            const und = undecided(); setTimeout(() => { const b = dlg?.querySelector('.modal-actions [type="submit"]'); if (b) b.disabled = !!undecided().length; });
+            if (und.length) li.unshift(`⚠️ <b>${esc(plural(und.length, 'personne à trancher', 'personnes à trancher'))}</b> : ${und.map(p => esc(upName(p))).join(', ')} — ${esc(i18n('une fiche du même nom existe déjà : 🔗 Relier ou ＋ Créer'))}`);
+            return `<ul class="h-txa-recap">${li.map(x => `<li${x.startsWith('⚠️') ? ' class="is-warn"' : ''}>${x}</li>`).join('')}</ul>`;
         };
         function paint() {
             const kinds = (ctx.kinds || []).filter(([k]) => ['mariage', 'bapteme', 'naissance', 'deces', 'sepulture', 'autre'].includes(k));
@@ -399,7 +423,7 @@
             const people = ex.people.map(p => { const s = st.people.get(p.key), a = s.add || {};
                 return {key: p.key, action: s.action === 'compare' ? 'create' : s.action, person_id: s.person_id, first: p.given, last: p.surname, name: p.name, sex: p.sex, role: p.role, job: p.job, age: p.age, birth_year: p.birthYear, residence: p.residence, deceased: p.deceased,
                     add: {job: st.opt.job && a.job !== false, birth: st.opt.birth && (s.action === 'create' || a.birth !== false), death: st.opt.death && a.death !== false, residence: st.opt.residence}}; });
-            const body = {transcription_id: ctx.transcriptionId || 0, media_id: ctx.mediaId || 0, text: ctx.text, event: {kind: ex.kind, date: ex.date?.label || '', place: placeName, place_id: placeId}, people, relations: ex.relations, source: {...src, id: st.check.source?.id || 0}};
+            const body = {transcription_id: ctx.transcriptionId || 0, media_id: ctx.mediaId || 0, text: ctx.citeText ?? ctx.text, event: {kind: ex.kind, date: ex.date?.label || '', place: placeName, place_id: placeId}, people, relations: ex.relations, source: {...src, id: st.check.source?.id || 0}};
             const r = await post('act_import_apply', body), res = r.result || {};
             const parts = [plural((res.created || 0) + (res.linked || 0), 'fiche', 'fiches')]; if (res.events) parts.push(plural(res.events, 'événement ajouté', 'événements ajoutés')); if (res.source_id) parts.push(plural(1, 'source', 'sources'));
             const kept = ex.people.map(p => { const s = st.people.get(p.key); return {name: upName(p), role: p.role, person_id: res.map?.[p.key] || 0, s: p.s, e: p.e, action: s.action}; });

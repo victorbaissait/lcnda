@@ -100,6 +100,8 @@
 :root[data-theme="dark"] .h-tx-ctl+.h-tx-ctl{border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-better{background:#24272c;border-color:#3a3f46;box-shadow:0 12px 32px rgba(0,0,0,.6)}
 :root[data-theme="dark"] .h-tx-better h4,:root[data-theme="dark"] .h-tx-better .h-tx-recipe small{color:#a1a1a6}
+/* 🔴 7 (audit) : la recette choisie (fond bleu) : sa description en clair */
+.h-tx-better .h-tx-recipe:is(.is-active,[aria-pressed=true]) small,:root[data-theme="dark"] .h-tx-better .h-tx-recipe:is(.is-active,[aria-pressed=true]) small{color:rgba(255,255,255,.85)}
 :root[data-theme="dark"] .h-tx-better .h-tx-allt{border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-readpanel{background:#24272c;border-color:#3a3f46;box-shadow:0 12px 32px rgba(0,0,0,.6)}
 :root[data-theme="dark"] .h-tx-tools .h-tx-readpanel .h-tx-readopt{background:none}
@@ -186,9 +188,9 @@
     .h-tx-dlg .h-tx[data-ptab=people] :is(.h-tx-flow,.h-tx-chars,.h-tx-editor,.h-tx-fixbar,.h-tx-docnote){display:none!important}
     .h-tx-dlg .h-tx[data-ptab=people] .h-tx-found{flex:1 1 auto;border-top:0}
     /* la fiche de l'acte (sorte, date, lieu, source, état) : avec les personnes ; en haut, le titre et les commandes */
-    .h-tx-dlg .h-tx:not([data-ptab=people]) .h-tx-top :is([data-tx=kind],[data-tx=date_text],[data-tx=place],[data-tx=source],[data-tx-state]){display:none}
+    .h-tx-dlg .h-tx:not([data-ptab=people]) .h-tx-meta{display:none}
     .h-tx-dlg .h-tx .h-tx-top [data-tx-cmd=export]{display:none}
-    .h-tx-dlg .h-tx[data-ptab=people] .h-tx-top :is([data-tx=kind],[data-tx=date_text],[data-tx=place],[data-tx=source]){flex:1 1 40%;max-width:none;min-width:0}
+    .h-tx-dlg .h-tx[data-ptab=people] .h-tx-meta :is([data-tx=kind],[data-tx=date_text],[data-tx=place],[data-tx=source]){flex:1 1 40%;max-width:none;min-width:0}
     .h-tx-dlg .h-tx-steps{grid-template-columns:repeat(4,minmax(0,1fr))}
     .h-tx-dlg .h-tx-step{padding:5px 4px 3px;gap:4px}
     .h-tx-dlg .h-tx-step i{width:18px;height:18px}
@@ -206,7 +208,6 @@
     .h-tx-dlg .h-tx .h-tx-top>.h-tx-hist{order:5}
     .h-tx-dlg .h-tx .h-tx-top>.spacer{order:6;flex:1 1 0;min-width:0}
     .h-tx-dlg .h-tx .h-tx-top>.h-tx-status{order:7;flex:0 1 auto;width:auto;min-width:0}
-    .h-tx-dlg .h-tx[data-ptab=people] .h-tx-top>:is([data-tx=kind],[data-tx=date_text],[data-tx=place],[data-tx=source],[data-tx-state]){order:8}
     .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus{gap:2px}
     .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus button{padding-left:5px;padding-right:5px}
     .h-tx-dlg .h-tx .h-tx-panehint{display:none}
@@ -368,3 +369,41 @@
 .h-tx-amline{display:block}
 .af-prices{margin:4px 0 0;padding-left:18px}
 .af-prices li{margin:2px 0}
+
+/* 25 (audit) : la fiche de l'acte (sorte, date, lieu, source, état) sur sa ligne, sous la barre du haut : le titre a toute la place */
+.h-tx-dlg .h-tx-top .h-tx-title{max-width:none;flex:1 1 320px}
+.h-tx-dlg .h-tx-editor{min-height:110px} /* une ligne de plus en haut (la fiche de l'acte) : le texte cède la place, rien ne passe sous la barre du bas */
+.h-tx-meta{display:flex;align-items:center;gap:6px;flex:none;flex-wrap:wrap;padding:3px 10px;background:#fff;border-bottom:1px solid #e3e3e8;font-size:12.5px}
+.h-tx-meta input,.h-tx-meta select{padding:3px 7px;border:1px solid #d0d0d6;border-radius:6px;font:inherit;min-width:0;background:#fff;color:inherit}
+.h-tx-meta [data-tx=kind]{flex:0 1 auto}.h-tx-meta [data-tx=date_text]{flex:0 1 180px}.h-tx-meta [data-tx=place]{flex:1 1 200px}.h-tx-meta [data-tx=source]{flex:2 1 280px}.h-tx-meta [data-tx-state]{flex:0 0 auto}
+.h-tx-metalab{color:#6e6e73;font-weight:600;white-space:nowrap}
+:root[data-theme="dark"] .h-tx-meta{background:#24272c;border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-meta input,:root[data-theme="dark"] .h-tx-meta select{background:#1f1f23;border-color:#4a4a4f;color:#eee}
+:root[data-theme="dark"] .h-tx-metalab{color:#a1a1a6}
+/* 🔴 8 (audit) : « Ouverture de l'acte… » tout de suite (un popover : au-dessus des autres fenêtres) */
+.h-tx-opening{position:fixed;inset:auto;top:18px;left:50%;transform:translateX(-50%);margin:0;padding:8px 16px;border:0;border-radius:999px;background:#1d1d1f;color:#fff;font:600 13px/1.3 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:2147483000}
+/* 🔴 5 (audit) : un seul texte sur plusieurs pages : les morceaux des autres pages légèrement grisés */
+.h-tx-mirror .h-tx-mc.is-off{background:rgba(120,120,128,.13)}
+:root[data-theme="dark"] .h-tx-mirror .h-tx-mc.is-off{background:rgba(255,255,255,.07)}
+/* 12 (audit) : un brouillon retrouvé sur cet ordinateur */
+.h-tx-draft{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;flex:none;padding:6px 10px;background:#fff8e1;border-bottom:1px solid #f0d48a;font-size:12.5px}
+.h-tx-draft>span{flex:1 1 220px;min-width:0}
+:root[data-theme="dark"] .h-tx-draft{background:#3d3410;border-color:#8a6d1a;color:#eee}
+/* 21 (audit) : l'acte sans image : un vrai bouton au milieu */
+.h-tx-empty>span{display:grid;gap:8px;justify-items:center}
+.h-tx-empty .h-tx-emptybtn{font-size:15px;padding:10px 18px;pointer-events:auto}
+.h-tx-empty small{color:#c7c7cc;font-size:13px}
+/* 18 (audit) : une zone choisie : les messages (🛟 copie de sauvegarde…) montent au-dessus de sa barre au lieu de la cacher */
+.h-tx-dlg:has(.h-tx-zonebar:not([hidden])) .toast-region{bottom:var(--h-tx-toast-bottom, 130px)}
+/* 17 (audit) : 📱 téléphone : l'image (40 %) au-dessus du texte dans l'onglet Texte, pour relier une ligne sans changer d'onglet
+   (la barre de l'image, les pages et la barre de la zone restent dans l'onglet Image) */
+@media (max-width:700px){
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main{grid-template-columns:var(--ed-tool) minmax(0,1fr)!important;grid-template-rows:minmax(110px,34%) minmax(0,1fr)!important}
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-rail{display:flex!important;grid-column:1!important;grid-row:1!important;overflow-y:auto}
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-docnote{display:none}
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-left{display:flex!important;flex-direction:column;grid-column:2!important;grid-row:1!important;border-right:0;border-bottom:1px solid #d6d6db;min-height:0}
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-right{grid-column:1 / -1!important;grid-row:2!important}
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-left :is(.h-tx-barwrap,.h-tx-pages,.h-tx-zonebar){display:none}
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-left .h-tx-stage{flex:1 1 auto;min-height:0}
+    :root[data-theme="dark"] .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-left{border-bottom-color:#4a4a4f}
+}

@@ -14,7 +14,7 @@
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const KEY = 'act_transcriptions_list', STEP = 50;
     const KINDS = [['apreciser', 'À préciser'], ['bapteme', 'Baptême'], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', 'Décès'], ['sepulture', 'Sépulture'], ['notarial', 'Acte notarié'], ['notoriete', 'Acte de notoriété'], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
-    const kindLabel = k => (KINDS.find(x => x[0] === k) || [, k || 'Acte'])[1];
+    const kindLabel = k => i18n((KINDS.find(x => x[0] === k) || [, k || 'Acte'])[1]); // 34 (audit) : sortes, états et bulles traduits
     const STATUS = {todo: ['À faire', '⚪'], doing: ['En cours', '🟡'], checked: ['Relue', '🔵'], done: ['Finie', '🟢']};
     const plural = (n, w, many) => (A().plural ? A().plural(n, w, many) : `${n} ${n > 1 ? many || w + 's' : w}`);
     let kindCounts = null; // le nombre de chaque sorte, pour « Filtrer ▾ » (relu à chaque affichage)
@@ -35,16 +35,16 @@
     const thumbOf = r => (r.thumb ? `<img src="media/${esc(encodeURIComponent(r.thumb))}" alt="" loading="lazy">` : '<span class="ui-card-ico">📜</span>');
     const peopleText = r => { const ps = (r.people || []).filter(p => p.name); if (!ps.length) return ''; const shown = ps.slice(0, 4).map(p => `${p.person_id ? '👤 ' : ''}${p.name}${p.role ? ` (${p.role})` : ''}`).join(', '); return ps.length > 4 ? `${shown}… (+${ps.length - 4})` : shown; };
     const firstLines = r => String(r.excerpt || '').split('\n').map(l => l.trim()).filter(Boolean).slice(0, 4);
-    const actions = r => `<button type="button" class="icon-button" data-atl-del="${r.id}" title="Supprimer cette transcription (« ↶ Annuler » la remet)" aria-label="Supprimer « ${esc(r.title || 'Acte')} »">🗑</button>`;
+    const actions = r => `<button type="button" class="icon-button" data-atl-del="${r.id}" title="${esc(i18n('Supprimer cette transcription (« ↶ Annuler » la remet)'))}" aria-label="${esc(i18n('Supprimer « {title} »', {title: r.title || i18n('Acte')}))}">🗑</button>`;
     function item(r, view) {
-        const st = STATUS[r.status] || STATUS.doing, what = [kindLabel(r.kind), r.date_text, r.place].filter(Boolean).join(' · ');
+        const st0 = STATUS[r.status] || STATUS.doing, st = [i18n(st0[0]), st0[1]], what = [kindLabel(r.kind), r.date_text, r.place].filter(Boolean).join(' · ');
         if (view === 'cards') return {thumb: thumbOf(r), name: r.title || kindLabel(r.kind), open: `data-atl-open="${r.id}"`, cls: 'h-atl-card',
             // K9 : 2 lignes grises, l'état en pastille, ⋯ pour supprimer
-            lines: [what, firstLines(r).length ? {html: `<span class="h-atl-text">${firstLines(r).map(esc).join('<br>')}</span>`} : 'Pas encore de texte'], badges: [{text: `${st[1]} ${st[0]}`, kind: r.status === 'done' ? 'green' : 'blue'}, {text: `${plural(r.lines, 'ligne', 'lignes')} · ${plural(r.zones, 'zone', 'zones')}`, kind: 'grey'}], when: r.updated_at, whenLabel: 'Modifié',
-            menu: [`<button type="button" class="danger" data-atl-del="${r.id}">🗑 Supprimer</button>`]};
+            lines: [what, firstLines(r).length ? {html: `<span class="h-atl-text">${firstLines(r).map(esc).join('<br>')}</span>`} : i18n('Pas encore de texte')], badges: [{text: `${st[1]} ${st[0]}`, kind: r.status === 'done' ? 'green' : 'blue'}, {text: `${plural(r.lines, 'ligne', 'lignes')} · ${plural(r.zones, 'zone', 'zones')}`, kind: 'grey'}], when: r.updated_at, whenLabel: i18n('Modifié'),
+            menu: [`<button type="button" class="danger" data-atl-del="${r.id}">🗑 ${esc(i18n('Supprimer'))}</button>`]};
         return {thumb: thumbOf(r), name: r.title || kindLabel(r.kind), open: `data-atl-open="${r.id}"`, cls: 'h-atl-row',
             lines: [what, r.source ? `📚 ${r.source}` : '', `${st[1]} ${st[0]} · ${plural(r.lines, 'ligne transcrite', 'lignes transcrites')} · ${plural(r.zones, 'zone', 'zones')}`, peopleText(r) ? `👥 ${peopleText(r)}` : ''],
-            when: r.updated_at, whenLabel: 'Modifié', actions: actions(r)};
+            when: r.updated_at, whenLabel: i18n('Modifié'), actions: actions(r)};
     }
 
     ext.lists[KEY] = async token => {
@@ -54,9 +54,9 @@
         if (!isCurrent()) return;
         const total0 = Object.values(kindCounts).reduce((a, b) => a + b, 0);
         ws.innerHTML = `<section class="page collection-page h-atl">
-            <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES ET SOURCES</span><h2>📜 Transcriptions d’actes</h2>
-                <p>Les actes transcrits dans l’atelier : l’image à gauche, le texte à droite, les zones reliées, les noms repérés. Un clic rouvre l’acte dans l’outil.</p></div>
-                <div class="page-actions"><button type="button" class="button" data-atl-new>＋ Nouvelle transcription</button></div></header>
+            <header class="page-header"><div><span class="eyebrow">${esc(i18n('LISTES · ARCHIVES ET SOURCES'))}</span><h2>📜 ${esc(i18n('Transcriptions d’actes'))}</h2>
+                <p>${esc(i18n('Les actes transcrits dans l’atelier : l’image à gauche, le texte à droite, les zones reliées, les noms repérés. Un clic rouvre l’acte dans l’outil.'))}</p></div>
+                <div class="page-actions"><button type="button" class="button" data-atl-new>＋ ${esc(i18n('Nouvelle transcription'))}</button></div></header>
             <div data-atl-bar></div><div class="h-atl-body" data-atl-body aria-live="polite"></div><div class="h-atl-more" data-atl-more></div></section>`;
         const sec = ws.querySelector('.h-atl'), body = sec.querySelector('[data-atl-body]'), moreSlot = sec.querySelector('[data-atl-more]');
         let items = [], total = 0, loading = 0, bar = null, more = null;
@@ -64,8 +64,8 @@
         const paint = () => {
             if (!items.length) {
                 const b = bar?.state || {}, filtered = b.q || Object.values(b.filters || {}).some(v => (Array.isArray(v) ? v.length : !!v));
-                body.innerHTML = filtered ? A().emptyState({icon: '🔍', text: 'Aucune transcription ne correspond.', hint: 'Retire un filtre, ou cherche autrement.'})
-                    : A().emptyState({icon: '📜', text: 'Aucune transcription d’acte pour l’instant', hint: 'Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté.', action: {label: '＋ Nouvelle transcription', attrs: 'data-atl-new'}});
+                body.innerHTML = filtered ? A().emptyState({icon: '🔍', text: i18n('Aucune transcription ne correspond.'), hint: i18n('Retire un filtre, ou cherche autrement.')})
+                    : A().emptyState({icon: '📜', text: i18n('Aucune transcription d’acte pour l’instant'), hint: i18n('Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté.'), action: {label: `＋ ${i18n('Nouvelle transcription')}`, attrs: 'data-atl-new'}});
             } else body.innerHTML = (U.itemsHtml ? U.itemsHtml(view(), items.map(r => item(r, view()))) : '');
             bar?.setCount(total, 'transcription');
             if (!more && U.moreButton) { more = U.moreButton({remaining: 0, step: STEP, feminine: true, onClick: () => load(true)}); moreSlot.appendChild(more); }
@@ -73,7 +73,7 @@
         };
         async function load(append = false) {
             const n = ++loading, b = bar?.state || {q: '', filters: {}, sort: 'recent'};
-            if (!append) body.innerHTML = U.skeleton ? U.skeleton(5) : '<p class="muted">Chargement…</p>';
+            if (!append) body.innerHTML = U.skeleton ? U.skeleton(5) : `<p class="muted">${esc(i18n('Chargement…'))}</p>`;
             try {
                 const r = await A().api('act_transcriptions_page', params(b, append ? items.length : 0));
                 if (n !== loading || !isCurrent()) return;
@@ -81,19 +81,19 @@
             } catch (e) { if (n === loading) body.innerHTML = U.notice ? U.notice('error', e.message) : `<p>⛔ ${esc(e.message)}</p>`; }
         }
         if (U.listBar) {
-            bar = U.listBar({key: KEY, search: {placeholder: 'Chercher… (titre, texte, personne, lieu, cote)'},
+            bar = U.listBar({key: KEY, search: {placeholder: i18n('Chercher… (titre, texte, personne, lieu, cote)')},
                 filters: [
-                    {id: 'kinds', label: 'Sorte d’acte', type: 'check', options: KINDS.filter(([k]) => kindCounts[k]).map(([k, l]) => [k, `${l} (${kindCounts[k]})`, l])},
-                    {id: 'person', label: 'Personne', group: 'Personne et lieu', type: 'person', chipPrefix: '👤', placeholder: 'Une personne reliée'},
-                    {id: 'place', label: 'Lieu', group: 'Personne et lieu', type: 'place', chipPrefix: '📍'},
-                    {id: 'from', label: 'De l’année', group: 'Période', type: 'text', placeholder: 'ex. 1750', chipPrefix: 'Depuis'},
-                    {id: 'to', label: 'À l’année', group: 'Période', type: 'text', placeholder: 'ex. 1800', chipPrefix: 'Jusqu’à'},
-                    {id: 'status', label: 'État', type: 'radio', options: [['', 'Tous les états'], ['todo', 'À faire', 'À faire'], ['doing', 'En cours', 'En cours'], ['checked', 'Relue', 'Relues'], ['done', 'Finie', 'Finies']], dflt: ''},
-                    {id: 'zones', label: 'Avec des zones', group: 'Autres', type: 'check', text: 'Avec des zones sur l’image'},
-                    {id: 'linked', label: 'Reliée à une fiche', group: 'Autres', type: 'check', text: 'Avec une personne reliée à sa fiche'},
+                    {id: 'kinds', label: i18n('Sorte d’acte'), type: 'check', options: KINDS.filter(([k]) => kindCounts[k]).map(([k, l]) => [k, `${i18n(l)} (${kindCounts[k]})`, i18n(l)])},
+                    {id: 'person', label: i18n('Personne'), group: i18n('Personne et lieu'), type: 'person', chipPrefix: '👤', placeholder: i18n('Une personne reliée')},
+                    {id: 'place', label: i18n('Lieu'), group: i18n('Personne et lieu'), type: 'place', chipPrefix: '📍'},
+                    {id: 'from', label: i18n('De l’année'), group: i18n('Période'), type: 'text', placeholder: i18n('ex. 1750'), chipPrefix: i18n('Depuis')},
+                    {id: 'to', label: i18n('À l’année'), group: i18n('Période'), type: 'text', placeholder: i18n('ex. 1800'), chipPrefix: i18n('Jusqu’à')},
+                    {id: 'status', label: i18n('État'), type: 'radio', options: [['', i18n('Tous les états')], ['todo', i18n('À faire'), i18n('À faire')], ['doing', i18n('En cours'), i18n('En cours')], ['checked', i18n('Relue'), i18n('Relues')], ['done', i18n('Finie'), i18n('Finies')]], dflt: ''},
+                    {id: 'zones', label: i18n('Avec des zones'), group: i18n('Autres'), type: 'check', text: i18n('Avec des zones sur l’image')},
+                    {id: 'linked', label: i18n('Reliée à une fiche'), group: i18n('Autres'), type: 'check', text: i18n('Avec une personne reliée à sa fiche')},
                 ],
                 view: {dflt: 'list', what: 'transcriptions'},
-                sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['date', 'Date de l’acte'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'recent'},
+                sort: {options: [['recent', i18n('Les plus récentes')], ['old', i18n('Les plus anciennes')], ['date', i18n('Date de l’acte')], ['az', 'A → Z'], ['za', 'Z → A']], value: 'recent'},
                 count: {n: total0, label: 'transcription'},
                 onChange: () => load(false)});
             sec.querySelector('[data-atl-bar]').replaceWith(bar);
@@ -103,7 +103,7 @@
             const o = e.target.closest('[data-atl-open]');
             if (o) { ext.openActTranscriber?.({id: Number(o.dataset.atlOpen), onSaved: () => {}, onClose: () => { if (isCurrent()) load(false); }}); return; }
             if (e.target.closest('[data-atl-new]')) { // la fenêtre unique de choix d'image, puis l'outil
-                const m = await ext.pickImage?.({eyebrow: 'TRANSCRIPTION', title: 'Image de l’acte', intro: 'Clique sur l’image de l’acte à transcrire. Une image de l’ordinateur est ajoutée aux Médias.'}); if (!m) return;
+                const m = await ext.pickImage?.({eyebrow: i18n('TRANSCRIPTION'), title: i18n('Image de l’acte'), intro: i18n('Clique sur l’image de l’acte à transcrire. Une image de l’ordinateur est ajoutée aux Médias.')}); if (!m) return;
                 ext.openActTranscriber?.({mediaId: m.id, filename: m.filename, title: m.imported ? '' : (m.title || ''), text: m.transcription || '', onClose: () => { if (isCurrent()) load(false); }}); return;
             }
             const d = e.target.closest('[data-atl-del]');

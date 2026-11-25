@@ -339,6 +339,10 @@ try {
         require_once __DIR__ . '/lib/tresors.php';
         tresors_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if ($action === 'atelier_idees' || $action === 'atelier_idees_write') { // 📜 Atelier, idées 35 à 40 : registre, IIIF, recherche, deux couches, entraîner (lib/atelier_idees.php)
+        require_once __DIR__ . '/lib/atelier_idees.php';
+        atelier_idees_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['postcards', 'postcard_write'], true)) { // 🏞 cartes postales anciennes (lib/postcards.php)
         require_once __DIR__ . '/lib/postcards.php';
         postcards_dispatch($pdo, (string) $action, $isWrite, $payload);
@@ -457,6 +461,9 @@ try {
     }
     if (in_array($action, TX_DEEP_ACTIONS, true)) { // 🔍 lecture approfondie (lib/transcription_actes.php) : rien n'est écrit dans la base
         tx_deep_dispatch((string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, IA_SRV_ACTIONS, true)) { // 🖥 Réglages → 🤖 IA : Ollama, Unsloth ou serveur compatible OpenAI, sur cet ordinateur (lib/ia_serveur.php)
+        ia_srv_dispatch((string) $action, $isWrite, $payload);
     }
     if (is_string($action) && str_starts_with($action, 'aia_')) { // 🤖 Assistant IA (lib/assistant_ia.php) : IA locale (Ollama), pas à pas, hors de la transaction commune ; n'ajoute qu'après un clic
         require_once __DIR__ . '/lib/assistant_ia.php';

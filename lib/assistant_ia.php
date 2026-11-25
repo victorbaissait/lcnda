@@ -718,8 +718,10 @@ function aia_pick_model(string $want, ?array $st = null): array
 {
     $st ??= tx_deep_status();
     if (!$st['local_only']) { throw new RuntimeException(i18n_t('L’adresse d’Ollama n’est pas sur cet ordinateur : l’assistant est éteint.')); }
+    if (!$st['running'] && ia_srv_is_openai()) { throw new RuntimeException(i18n_t('{s} ne répond pas à l’adresse {u} : lance-le, puis « ↻ Tester la connexion » (Réglages → 🤖 IA).', ['s' => ia_srv_public()['label'], 'u' => ia_srv_url()])); }
     if (!$st['running']) { throw new RuntimeException($st['installed'] ? i18n_t('Ollama est installé mais ne tourne pas : lance-le, puis réessaie.') : i18n_t('L’IA n’est pas encore installée sur cet ordinateur : ouvre l’installation guidée (Réglages → 🤖 IA).')); }
     $present = array_values(array_filter(array_merge($st['models'], $st['others'] ?? []), static fn($m) => !empty($m['present'])));
+    if (!$present && ia_srv_is_openai()) { throw new RuntimeException(i18n_t('{s} répond, mais aucun modèle n’y est chargé : choisis et lance un modèle dans {s}, puis réessaie.', ['s' => ia_srv_public()['label']])); }
     if (!$present) { throw new RuntimeException(i18n_t('Aucun modèle d’IA n’est installé dans Ollama : installe-en un avec l’installation guidée (Réglages → 🤖 IA).')); }
     foreach ($present as $m) { if ($want !== '' && $m['tag'] === $want) { return $m; } }
     foreach (['qwen3-vl:8b-instruct', 'qwen3-vl:4b-instruct', 'mistral-small3.2:24b'] as $t) { foreach ($present as $m) { if ($m['tag'] === $t) { return $m; } } }
@@ -735,7 +737,7 @@ function aia_ollama(string $model, array $messages, ?array $tools, bool $json = 
     $r = tx_deep_http('POST', '/api/chat', $body, AIA_TIMEOUT);
     $err = (string) ($r['json']['error'] ?? '');
     if (!$r['ok'] && $err !== '' && stripos($err, 'think') !== false) { unset($body['think']); $r = tx_deep_http('POST', '/api/chat', $body, AIA_TIMEOUT); $err = (string) ($r['json']['error'] ?? ''); }
-    if (($r['error'] ?? '') === 'unreachable') { return [null, i18n_t('Ollama ne répond pas : est-il lancé ?')]; }
+    if (($r['error'] ?? '') === 'unreachable') { return [null, ia_srv_is_openai() ? i18n_t('{s} ne répond pas à l’adresse {u} : est-il lancé ?', ['s' => ia_srv_public()['label'], 'u' => ia_srv_url()]) : i18n_t('Ollama ne répond pas : est-il lancé ?')]; }
     if (!$r['ok']) { return [null, $err !== '' ? $err : i18n_t('Ollama a répondu {c}.', ['c' => (string) ($r['code'] ?? '?')])]; }
     $m = $r['json']['message'] ?? null;
     return [is_array($m) ? $m : null, is_array($m) ? '' : i18n_t('Réponse vide d’Ollama.')];
@@ -1068,7 +1070,8 @@ function aia_step(PDO $pdo, array $d): array
 function aia_status(array $q): array
 {
     $st = tx_deep_status();
-    $out = ['ollama' => $st, 'ready' => false, 'model' => null, 'message' => '', 'tools' => null, 'setup_url' => $st['download_url'] ?? 'https://ollama.com/download'];
+    $srv = ia_srv_public(); unset($srv['kinds'], $srv['probes']); // 🖥 le serveur choisi (Ollama, Unsloth, compatible OpenAI : lib/ia_serveur.php)
+    $out = ['ollama' => $st, 'server' => $srv, 'ready' => false, 'model' => null, 'message' => '', 'tools' => null, 'setup_url' => $srv['api'] === 'ollama' ? ($st['download_url'] ?? 'https://ollama.com/download') : ($srv['site'] ?: '')];
     try {
         $m = aia_pick_model(safe_text($q['model'] ?? ''), $st);
         $out['model'] = $m; $out['ready'] = true;

@@ -350,7 +350,7 @@
                 <nav class="h-tx-rail" data-tx-rail aria-label="${esc(i18n('Outils'))}"><button type="button" data-tx-tool="pan" title="${esc(i18n('Déplacer l’image, ou barre d’espace'))}" aria-label="${esc(i18n('Déplacer l’image'))}" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="${esc(i18n('Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)'))}" aria-label="${esc(i18n('Dessiner une zone'))}" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="${esc(i18n('Loupe qui suit la souris (la molette change le grossissement)'))}" aria-label="${esc(i18n('Loupe'))}" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner l’image de 90°'))}" aria-label="${esc(i18n('Tourner de 90°'))}">⟳</button><button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}" aria-label="${esc(i18n('Image de l’acte'))}">🖼️</button></nav>
                 <section class="h-tx-left">
                     <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}${zopHtml()}${ext.txCtx ? ext.txCtx.wordColorHtml() : ''}</div><div class="h-tx-pages" data-tx-pages role="tablist" aria-label="${esc(i18n('Pages du document'))}" hidden></div>
-                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-words></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>${i18n('Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).')}</p></div>
+                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-words></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><div class="h-tx-empty" data-tx-empty><span><button type="button" class="button h-tx-emptybtn" data-tx-cmd="image">🖼️ ${esc(i18n('Choisir l’image de l’acte'))}</button><small>${esc(i18n('ou glisse une photo ici (une photo de la base, ou un fichier de l’ordinateur)'))}</small></span></div></div>
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
@@ -376,7 +376,8 @@
         const $ = s => dlg.querySelector(s), area = $('[data-tx-body]'), mirror = $('[data-tx-mirror]'), svg = $('[data-tx-svg]'), world = $('[data-tx-world]'), img = $('[data-tx-img]'), stage = $('[data-tx-stage]');
         area.value = t.body; // 🧲 le HTML d'une <textarea> mange le saut de ligne du tout début : sans ceci, toutes les zones commençaient 1 caractère trop tard
         const UI = window.LCNDA_UI || {}, STATES = {'modifié': 'dirty', '✓ Enregistré': 'saved', 'Enregistrement…': 'saving'};
-        const status = s => { const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
+        let lastStatus = '';
+        const status = s => { lastStatus = s || ''; const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
         let commitT = 0, HX = null, txBar = null; // E1 : un vrai historique ↶ ↷ (texte, zones, personnes, réglages de l'image, fiche de l'acte) ; K18 : la barre du bas
         const flushCommit = () => { if (commitT) { clearTimeout(commitT); commitT = 0; } HX?.commit(); };
         /* 🔴 2 (audit) : « modifié » se voit aussi de la page (data-dirty : « Quitter la page ? »), même sans rien taper (une zone
@@ -510,7 +511,8 @@
             pv[curPid()] = {...t.data.view};
             pageIx = i; t.filename = PAGES[i].filename; selZone = null; paintPages();
             t.data.view = TV.viewOf(pv[curPid()] || {...t.data.view, rot: 0, tilt: 0, mirror: false}); syncControls(); paintBadge();
-            if (!keepText) { const sg = PG.segments(area.value)[segIx()]; if (sg) { area.setSelectionRange(sg.s, sg.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, sg.s).split('\n').length - 2) * lineH); mirror.scrollTop = area.scrollTop; } }
+            if (!keepText) focusSeg();
+            paintMirror(); // 📑 le morceau de la page affichée en clair, les autres grisés
             await loadImage();
         }
         /** un texte par page : les actes des autres pages du même ensemble (pour « Ce que l'app a trouvé » sur tout le document) */
@@ -543,6 +545,57 @@
             if (pageForm !== 'one' || PAGES.length < 2) return;
             const id = Number((t.data.pages || [])[PG.segAt(area.value, area.selectionStart)] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id);
             if (i >= 0 && i !== pageIx) goPage(i, {keepText: true});
+        }
+        /** 🔴 5 (audit) : le curseur au début du morceau de la page affichée, le texte défile jusqu'à lui (à l'ouverture, à chaque page) */
+        function focusSeg() {
+            if (pageForm !== 'one' || PAGES.length < 2) return;
+            const sg = PG.segments(area.value)[segIx()]; if (!sg) return;
+            area.setSelectionRange(sg.s, sg.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20;
+            area.scrollTop = Math.max(0, (area.value.slice(0, sg.s).split('\n').length - 2) * lineH); mirror.scrollTop = area.scrollTop;
+        }
+        /** un clic dans le blanc sous le texte (le curseur irait tout à la fin, sur la dernière page) : la fin du morceau de la page affichée */
+        area.addEventListener('mouseup', e => {
+            if (pageForm !== 'one' || PAGES.length < 2 || area.selectionStart !== area.selectionEnd || area.selectionEnd !== area.value.length) return;
+            const sg = PG.segments(area.value), here = sg[segIx()]; if (!here || segIx() === sg.length - 1) return;
+            const last = mirror.lastElementChild, rs = last ? last.getClientRects() : [], textBottom = rs.length ? rs[rs.length - 1].bottom : area.getBoundingClientRect().top; // le bas de la dernière ligne écrite (le miroir suit le texte)
+            if (e.clientY <= textBottom) return;
+            area.setSelectionRange(here.e, here.e);
+        });
+        let markWarnAt = 0;
+        /** 🔴 5 : les repères « — page 2 — » séparent les pages ; ni effacés, ni coupés par une frappe (sinon le texte change de page) */
+        function guardMarks(e) {
+            if (pageForm !== 'one' || PAGES.length < 2 || !PG || !/^(insert|delete)/.test(e.inputType)) return false;
+            const v = area.value, s = area.selectionStart, en = area.selectionEnd, mk = PG.marks(v); if (!mk.length) return false;
+            let a = s, b = en;
+            if (s === en && e.inputType.startsWith('delete')) {
+                const back = /Backward$/.test(e.inputType), word = /Word/.test(e.inputType), line = /Line/.test(e.inputType);
+                if (back) { a = line ? v.lastIndexOf('\n', s - 1) + 1 : word ? Math.max(0, v.slice(0, s).search(/\S*\s*$/)) : s - 1; if (a === s) a = s - 1; }
+                else { const nl = v.indexOf('\n', s); b = line ? (nl < 0 ? v.length : nl) : word ? s + (v.slice(s).match(/^\s*\S*/)?.[0].length || 1) : s + 1; if (b === s) b = s + 1; }
+                a = Math.max(0, a); b = Math.min(v.length, b);
+            }
+            const nl = e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph' || /^\n/.test(e.data || '');
+            const hit = mk.some(k => (a < b ? a < k.end + 1 && b > k.at - 1 : (a > k.at && a < k.end) || ((a === k.at || a === k.end) && !nl && e.inputType.startsWith('insert'))));
+            if (!hit) return false;
+            e.preventDefault();
+            if (Date.now() - markWarnAt > 1500) { markWarnAt = Date.now(); toast(i18n('Les repères « — page 2 — » séparent les pages : ils ne s’effacent pas ici (📑 « Pages du document »).')); }
+            return true;
+        }
+        /** 12 : un brouillon de cet ordinateur plus récent que ce qui est enregistré : « Reprendre le brouillon » ou le laisser */
+        function offerDraft() {
+            if (!dlg.isConnected) return;
+            let d = null; try { d = JSON.parse(localStorage.getItem(draftKey()) || 'null'); } catch (_) { d = null; }
+            if (!d || typeof d.body !== 'string') return;
+            const savedAt = t.updated_at ? Date.parse(String(t.updated_at).replace(' ', 'T') + 'Z') : 0;
+            if ((d.body === area.value && JSON.stringify(d.zones || []) === JSON.stringify(t.data.zones)) || (savedAt && Number(d.at) <= savedAt)) { dropDraft(); return; }
+            const bar = document.createElement('div'); bar.className = 'h-tx-draft'; bar.dataset.txDraftbar = ''; bar.setAttribute('role', 'status');
+            const when = new Date(Number(d.at) || Date.now());
+            bar.innerHTML = `<span>📝 ${esc(i18n('Un brouillon pas enregistré a été retrouvé sur cet ordinateur ({when}).', {when: when.toLocaleString()}))}</span><button type="button" class="button small" data-tx-draft="use">${esc(i18n('Reprendre le brouillon'))}</button><button type="button" class="button small secondary" data-tx-draft="drop">${esc(i18n('Laisser'))}</button>`;
+            $('[data-tx-editor]').before(bar);
+            bar.addEventListener('click', ev => { const b = ev.target.closest('[data-tx-draft]'); if (!b) return; bar.remove();
+                if (b.dataset.txDraft === 'drop') { dropDraft(); return; }
+                const was = {...snapText(), fields: Object.fromEntries(['title', 'kind', 'date_text', 'place', 'source'].map(k => [k, $(`[data-tx="${k}"]`).value]))};
+                const put = x => { Object.entries(x.fields || {}).forEach(([k, val]) => { const el = $(`[data-tx="${k}"]`); if (el && typeof val === 'string') { el.value = val; t[k] = val; } }); putText({body: x.body, zones: Array.isArray(x.zones) ? x.zones : [], people: Array.isArray(x.people) ? x.people : [], reviewed: Array.isArray(x.reviewed) ? x.reviewed : []}); };
+                put(d); A().undoToast?.(i18n('Brouillon repris (pas encore enregistré)'), {undo: () => put(was), redo: () => put(d), icon: '📝'}); });
         }
         /** « (page 3, ligne 7) » d'une position du texte (un seul texte sur plusieurs pages) ; null sinon */
         const pageRef = pos => { if (pageForm !== 'one' || PAGES.length < 2 || !(pos >= 0)) return null; const li = PG.lineOf(area.value, pos), id = Number((t.data.pages || [])[li.seg] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id); if (i < 0) return null;
@@ -785,15 +838,41 @@
             curDecos = decos();
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
             found.forEach(f => marks.push({s: f.s, e: f.e, cls: `is-${f.type}`}));
-            marks.sort((a, b) => a.s - b.s); let h = '', pos = 0;
-            marks.forEach(m => { if (m.s < pos) return; h += fixSeg(text, pos, m.s); h += `<mark class="${m.cls || (m.c ? 'h-tx-zm' : '')}${m.on ? ' is-on' : ''}" ${m.c ? `style="--zc:${m.c}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; pos = m.e; });
-            h += fixSeg(text, pos, text.length);
-            if (TV.lineNos()) { let n = 1; h = `<span class="h-tx-ln" data-n="1"></span>${h.replace(/\n/g, () => `\n<span class="h-tx-ln" data-n="${++n}"></span>`)}`; } // le numéro au début de chaque ligne, dans la marge
-            mirror.innerHTML = h + '\n';
+            marks.sort((a, b) => a.s - b.s); const kept = []; let pos = 0;
+            marks.forEach(m => { if (m.s < pos) return; kept.push(m); pos = m.e; });
+            /* 28 (audit) : le miroir en morceaux (une ligne, ou plusieurs quand une couleur ou un soulignement passe d'une ligne à
+             * l'autre) ; seuls les morceaux qui ont changé sont remplacés. 📑 Plusieurs pages : les morceaux des autres pages grisés. */
+            const cuts = [...kept, ...curDecos].map(m => [m.s, m.e - 1]).filter(([x, y]) => y > x).sort((x, y) => x[0] - y[0]);
+            const chunks = [], ln = TV.lineNos(), many = pageForm === 'one' && PAGES.length > 1 && !!PG, mk = many ? PG.marks(text) : [], here = many ? segIx() : 0;
+            let from = 0, ci = 0, mi = 0, line = 1, seg = 0, k = -1;
+            const chunkHtml = (a0, b0) => { let h = '', q = a0; while (mi < kept.length && kept[mi].e <= b0) { const m = kept[mi++]; if (m.s < q) continue; h += fixSeg(text, q, m.s) + `<mark class="${m.cls || (m.c ? 'h-tx-zm' : '')}${m.on ? ' is-on' : ''}" ${m.c ? `style="--zc:${m.c}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; q = m.e; } return h + fixSeg(text, q, b0); };
+            const push = b0 => {
+                while (seg < mk.length && mk[seg].at <= from) seg++;
+                let h = chunkHtml(from, b0);
+                if (ln) { const n0 = line; let n = n0; h = (from === 0 ? '<span class="h-tx-ln" data-n="1"></span>' : '') + h.replace(/\n/g, () => `\n<span class="h-tx-ln" data-n="${++n}"></span>`); line = n; void n0; }
+                chunks.push(`<span class="h-tx-mc${many && seg !== here ? ' is-off' : ''}">${h}</span>`); from = b0;
+            };
+            while ((k = text.indexOf('\n', k + 1)) >= 0) {
+                while (ci < cuts.length && cuts[ci][1] <= k) ci++;
+                let inside = false; for (let j = ci; j < cuts.length && cuts[j][0] <= k; j++) if (cuts[j][0] <= k && k < cuts[j][1]) { inside = true; break; }
+                if (!inside) push(k + 1);
+            }
+            if (from < text.length || !chunks.length) push(text.length);
+            const old = paintMirror.chunks || [], kids = mirror.children;
+            if (paintMirror.root !== mirror || kids.length !== old.length) { mirror.innerHTML = chunks.join('') + '\n'; }
+            else {
+                let p0 = 0; while (p0 < old.length && p0 < chunks.length && old[p0] === chunks[p0]) p0++;
+                let q0 = 0; while (q0 < old.length - p0 && q0 < chunks.length - p0 && old[old.length - 1 - q0] === chunks[chunks.length - 1 - q0]) q0++;
+                const anchor = kids[old.length - q0] || mirror.lastChild; // le morceau gardé qui suit (ou le dernier retour à la ligne)
+                for (let i = old.length - q0 - 1; i >= p0; i--) kids[i].remove();
+                if (chunks.length - q0 > p0) { const tp = document.createElement('template'); tp.innerHTML = chunks.slice(p0, chunks.length - q0).join(''); mirror.insertBefore(tp.content, anchor); }
+            }
+            paintMirror.chunks = chunks; paintMirror.root = mirror;
             mirror.scrollTop = area.scrollTop; flowSoon();
         }
         function paintZoneBar() {
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
+            requestAnimationFrame(() => { if (!bar.hidden) dlg.style.setProperty('--h-tx-toast-bottom', `${Math.max(24, Math.round(innerHeight - bar.getBoundingClientRect().top + 8))}px`); }); // 18 : les messages au-dessus de la barre
             const linked = z.e > z.s;
             bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : `<span class="muted">${i18n('pas encore reliée au texte')}</span>`}
                 <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><select data-tx-zkind title="${esc(i18n('Ce qu’est cette zone : « ⛔ À ne pas lire » est sautée par la lecture automatique et les exports ; les autres donnent l’ordre de lecture et la sorte de bloc (ALTO, PAGE)'))}">${(TXX()?.KINDS || []).map(([v, ic, l]) => `<option value="${v}"${(z.kind || '') === v ? ' selected' : ''}>${ic} ${esc(i18n(l))}</option>`).join('')}</select><input data-tx-znote placeholder="${esc(i18n('Note (mot illisible, signature…)'))}" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="${esc(i18n('Couleur'))}"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button>${z.kind === 'sign' && ext.openSeals ? `<button type="button" class="button small secondary" data-tx-zsign title="${esc(i18n('Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net'))}">✍️ ${i18n('Détourer la signature')}</button>` : ''}<button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
@@ -1191,7 +1270,7 @@
             const K = A().keys, kk = s => (K?.html ? K.html(s) : `<kbd>${esc(s)}</kbd>`);
             const rows = [['⌘S', 'Enregistrer'], ['⌘Z', 'Annuler'], ['⇧⌘Z', 'Rétablir'], ['⌘F', 'Chercher dans le texte'], ['⌥⌘F', 'Chercher et remplacer'], ['↩ / ⇧↩', 'Résultat suivant, résultat d’avant'],
                 ...(TV.reviewMode?.() ? [['R', 'Relire ligne à ligne']] : []), ['⌥↓ / ⌥↑', 'Ligne suivante, ligne d’avant : l’image suit sa zone'], ['H', 'Déplacer l’image'], ['Espace', 'Déplacer l’image, en restant appuyé'], ['Z', 'Dessiner une zone'], ['L', 'Loupe'],
-                ['← → ↑ ↓', 'Déplacer la zone choisie (⇧ : l’agrandir)'], ['Suppr', 'Supprimer la zone choisie'], ['⌘0', 'Ajuster à la fenêtre'], ['⌘1', '100 %'], ['⌘+ / ⌘−', 'Zoom avant, zoom arrière'], ['⌘P', 'Imprimer'], ['⌘/ / ?', 'Cette liste des touches'], ['Échap', 'Fermer']];
+                ['← → ↑ ↓', 'Déplacer la zone choisie (⇧ : l’agrandir)'], ['Suppr', 'Supprimer la zone choisie'], ['⌘0', 'Ajuster à la fenêtre'], ['⌘1', '100 %'], ['Mod++ / ⌘−', 'Zoom avant, zoom arrière'], ['⌘P', 'Imprimer'], ['⌘/ / ?', 'Cette liste des touches'], ['Échap', 'Fermer']];
             ext.openDialog({eyebrow: i18n('Atelier de transcription').toUpperCase(), title: `⌨️ ${i18n('Raccourcis clavier')}`, submitLabel: i18n('Fermer'),
                 body: `<table class="h-tx-keys" data-tx-keys><tbody>${rows.map(([k, l]) => `<tr><td>${k.split(' / ').map(kk).join(' / ')}</td><td>${esc(i18n(l))}</td></tr>`).join('')}</tbody></table><p class="ui-hint">${esc(i18n('Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥.'))}</p>`, onSubmit: () => {}});
         }
@@ -1275,8 +1354,9 @@
         area.addEventListener('click', () => { if (!abbrevs.length || area.selectionStart !== area.selectionEnd) return hideAb(); const c = area.selectionStart; if (txFix.some(f => c >= f.s && c <= f.e)) return; const i = abbrevs.findIndex(a => c >= a.s && c <= a.e); if (i >= 0) showAb(i); else hideAb(); });
         area.addEventListener('input', hideAb); area.addEventListener('scroll', hideAb);
         let lastExtract = null, lastUnsure = 0, lastRich = null, lastRichAll = null;
-        async function runDetect() {
+        async function runDetect({quiet = false} = {}) {
             const src = findText(); // 📑 les repères « — page 2 — » ne sont ni des noms, ni des nombres
+            if (!src.trim() && !quiet) return toast(i18n('Le texte est vide : lis ou écris d’abord l’acte.'), 'error'); // 21 : comme les autres commandes
             found = detect(src);
             const names = [...new Set(found.filter(f => f.type === 'person').map(f => f.label))].filter(n => !matchCache.has(n));
             if (names.length) { try { const r = await post('act_match_people', {names}); (r.result || []).forEach((list, i) => matchCache.set(names[i], list)); } catch (_) {} }
@@ -1486,9 +1566,10 @@
             if (A().mediaLimits?.tooBig(imgW, imgH)) return bail(); // 📎 trop de points pour être lue sans saturer la mémoire (le message le dit)
             let st; try { st = await api('htr_setup_status'); } catch (e) { return bail(toast(e.message, 'error')); }
             const installed = (st.models || []).filter(m => m.present);
-            if (!st.ready || !installed.length) return bail(), toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error');
-            let pick = model; if (!pick) { try { pick = localStorage.getItem(HTR_MODEL_KEY) || ''; } catch (_) {} }
-            if (!installed.some(m => m.file === pick)) pick = (installed.find(m => m.recommended) || installed[0]).file;
+            if (!st.ready || !installed.length) return bail(), notInstalled();
+            const own = model ? '' : (ext.txModelFor?.(t) || ''); // 🎓 le modèle entraîné choisi pour ce registre (heritage-atelier-entrainer.js)
+            let pick = model || own; if (!pick) { try { pick = localStorage.getItem(HTR_MODEL_KEY) || ''; } catch (_) {} }
+            if (!own && !installed.some(m => m.file === pick)) pick = (installed.find(m => m.recommended) || installed[0]).file;
             let box = zone === undefined ? htrArea() : zone;
             if (zone === undefined && !box) { box = await pageArea(); if (box === false) return bail(); } // A : capture d'écran → recadrer sur le texte ?
             htrBusy(true, box && !box.mask && zone !== undefined ? i18n('Lecture de la zone…') : i18n('Lecture de l’acte…')); status('');
@@ -1522,6 +1603,12 @@
                 };
                 htrJob.timer = setTimeout(poll, 700);
             } catch (e) { htrJob = null; htrBusy(false); bail(); toast(e.message || 'Lecture impossible.', 'error'); }
+        }
+        /** 22 (audit) : la lecture à la main pas encore installée : le message a un bouton qui ouvre l'assistant (Réglages → Reconnaissance
+         *  d'écriture), l'acte enregistré d'abord */
+        function notInstalled() {
+            return toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error',
+                {action: {label: `⤓ ${i18n('Installer maintenant')}`, run: async () => { if (dirty) { await save(); if (dirty) return; } teardown(); const st = A().state; if (!st) return; st.maintenanceTab = 'htr'; A().persistUiState?.(); A().setModule?.('maintenance'); }}});
         }
         /** Les lignes lues, à côté de leur morceau d'image ; les mots peu sûrs surlignés ; on corrige, puis on met dans le texte */
         async function htrReview(lines, box, modelFile, installed) {
@@ -1637,7 +1724,7 @@
                         made.push(z); } });
                     putRead(text, made);
                     status(i18n('{x} (à relire)', {x: A().plural ? A().plural(kept.length, 'ligne lue', 'lignes lues') : kept.length + ' lignes lues'}));
-                    runDetect().then(() => toast(i18n('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.')));
+                    runDetect({quiet: true}).then(() => toast(i18n('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.')));
                     if (fixOn()) runFix({quiet: true});
                 }});
             dlgR?.addEventListener?.('close', () => setTimeout(() => readNext(true), 60)); // 📑 « Sur toutes les pages » : la page suivante
@@ -1655,14 +1742,14 @@
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
             const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
             const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), onReading: (txt, model, info) => { lastHints = Number(info?.hints) || 0; keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}); }, context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, htrFrom: htrText ? 'htr' : 'mine', pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), onReading: (txt, model, info) => { lastHints = Number(info?.hints) || 0; keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}); }, context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
                 existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
                 onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
                     if (mode === 'replace') versionBefore('Avant « Remplacer par la lecture approfondie »'); // l'ancien texte reste dans 🕘 Versions
                     const put = mode === 'replace' ? replaceRead(text.trim() + '\n') : appendRead(text.trim() + '\n'), start = put.s;
                     if (from !== 'htr') t.data.hinted = mode === 'replace' ? lastHints : Math.max(Number(t.data.hinted) || 0, lastHints); // 🧠 lue avec des indices : ses mots [?] le disent au survol
-                    before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect();
+                    before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect({quiet: true});
                     if (LG()?.linkOn()) linkLines({s: start, e: put.e, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide
                     if (fixOn()) runFix({quiet: true}); }}); // 🪄 les corrections proposées aussi sur ce texte
         }
@@ -1711,7 +1798,7 @@
         }
         async function deepAllEnd(stopped) {
             const R = deepRun; deepRun = null; paintDeepAll(); if (!R || !dlg.isConnected) return;
-            await runDetect();
+            await runDetect({quiet: true});
             if (pageForm === 'per' && dirty) await save(); // un texte par page : l'acte de la dernière page aussi (les autres l'ont été en changeant de page)
             status(stopped ? i18n('La lecture a été arrêtée.') : i18n('Toutes les pages sont lues (à relire)'));
             if (!stopped) toast(i18n('Toutes les pages sont lues (à relire)'));
@@ -1822,23 +1909,68 @@
         }
         /* ─── enregistrer, exporter ─── */
         let saving = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé (jamais deux transcriptions)
-        async function save() {
-            if (saving) { const p = saving; await p.catch(() => {}); return; }
-            saving = saveNow().finally(() => { saving = null; });
+        /** 🔴 1 (audit) : un enregistrement demandé pendant un autre attend la fin du premier, puis renvoie ce qui a changé entre-temps */
+        async function save({auto = false, force = false} = {}) {
+            if (saving) { await saving.catch(() => {}); if (!dirty) return; }
+            if (auto && conflictHold) return;
+            clearTimeout(autoT); autoT = 0;
+            saving = saveNow({auto, force}).finally(() => { saving = null; });
             return saving;
         }
-        async function saveNow() {
+        let autoErr = '';
+        async function saveNow({auto = false, force = false} = {}) {
             ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value; t.data.status = $('[data-tx-state]').value;
             if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${t.kind === 'apreciser' ? i18n('Acte') : (KINDS.find(k => k[0] === t.kind)?.[1] || i18n('Acte'))}${subj ? ` — ${subj.name}` : ''}${t.date_text ? ` — ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
-            status('Enregistrement…');
+            const quiet = () => auto && ![i18n('modifié'), 'Enregistrement…', ''].includes(lastStatus); // 12 : l'enregistrement automatique n'efface pas un message utile (« La lecture a été arrêtée »…)
+            if (!quiet()) status('Enregistrement…');
             if (pageForm === 'one' && PAGES.length > 1) { if (!t.data.pageViews || typeof t.data.pageViews !== 'object' || Array.isArray(t.data.pageViews)) t.data.pageViews = {}; t.data.pageViews[curPid()] = {...t.data.view}; }
-            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`); flushReads();
-                // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé)
-                if (typeof r.result.body === 'string' && r.result.body !== t.body) { snap(); area.value = r.result.body; before = area.value; t.body = area.value; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
+            const sent = t.body, rev0 = rev, key0 = draftKey(); // ce qui part : ce qui change pendant l'envoi reste « modifié »
+            // 🔴 10 : l'heure de la version lue ; le serveur refuse si l'acte a été enregistré ailleurs depuis (conflit)
+            const guard = t.id && !force && t.updated_at ? {base_updated_at: t.updated_at} : {};
+            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: sent, data: t.data, ...guard, ...(auto ? {auto: 1} : {})}), res = r.result || {};
+                t.id = res.id; if (res.updated_at) t.updated_at = res.updated_at; conflictHold = false; autoErr = ''; flushReads();
+                if (key0 !== draftKey()) dropDraft(key0); // un acte nouveau : son brouillon prend son numéro
+                // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé) ;
+                // ce qui a été tapé pendant l'enregistrement reste (le texte d'avant va à la fin)
+                if (typeof res.body === 'string' && res.body !== sent) {
+                    const tail = res.body.startsWith(sent.trimEnd()) ? res.body.slice(sent.trimEnd().length) : null;
+                    if (area.value === sent) { snap(); area.value = res.body; before = area.value; t.body = area.value; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
+                    else if (tail) { snap(); area.value = area.value.trimEnd() + tail; before = area.value; t.body = area.value; rev++; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
+                }
+                if (rev === rev0) { setDirty(false); if (!quiet()) status(`✓ ${i18n('Enregistré')}`); dropDraft(); } else { if (!quiet()) status(i18n('modifié')); autoSoon(); }
+                // 31 : au-delà des limites, ce qui n'a pas été gardé est dit
+                const dz = Number(res.dropped?.zones) || 0, dp = Number(res.dropped?.people) || 0;
+                if (dz) toast(i18n(dz > 1 ? '{n} zones n’ont pas été gardées ({max} au plus par acte).' : '{n} zone n’a pas été gardée ({max} au plus par acte).', {n: dz, max: (res.limits?.zones || 10000).toLocaleString()}), 'error');
+                if (dp) toast(i18n(dp > 1 ? '{n} personnes n’ont pas été gardées ({max} au plus par acte).' : '{n} personne n’a pas été gardée ({max} au plus par acte).', {n: dp, max: (res.limits?.people || 1000).toLocaleString()}), 'error');
                 docNote(); VS?.soon(); ctx.onSaved?.(t.id);
                 // 🧩 un acte enregistré peut répondre à ce qui manque à une enquête (heritage-connexions-besoins.js : un message seulement si c'est presque sûr, une fois)
                 ext.cxNeeds?.announce?.({kind: 'act', ref_id: t.id, what: t.kind, person_ids: (t.data.people || []).map(p => Number(p.person_id) || 0).filter(Boolean), names: (t.data.people || []).map(p => p.name).filter(Boolean), date: t.date_text, place: t.place, title: t.title, text: String(t.body || '').slice(0, 4000)}); }
-            catch (e) { status(''); toast(e.message, 'error'); }
+            catch (e) {
+                writeDraft(); // rien n'est perdu : le brouillon reste sur cet ordinateur
+                if (e.conflict) { conflictHold = true; status(i18n('Modifié dans une autre fenêtre')); setTimeout(askConflict, 0); return; }
+                if (auto) { if (!quiet()) status(i18n('Pas encore enregistré')); if (autoErr !== e.message) { autoErr = e.message; toast(e.message, 'error'); } clearTimeout(autoT); autoT = setTimeout(autoSave, 15000); return; }
+                status(''); toast(e.message, 'error');
+            }
+        }
+        /** 🔴 10 : l'acte a été enregistré ailleurs (un autre onglet, l'app de bureau) : recharger (mon texte gardé dans 🕘 Versions)
+         *  ou garder le mien (l'autre reste dans 🕘 Versions) ; fermé sans choisir : rien n'est enregistré tout seul jusqu'au prochain 💾 */
+        async function askConflict() {
+            if (!dlg.isConnected || !A().conflictBox) return;
+            const ans = await A().conflictBox({what: i18n('Cet acte')});
+            if (!dlg.isConnected) return;
+            if (ans === 'overwrite') { await save({force: true}); if (!dirty) toast(i18n('Ta version est enregistrée ; l’autre reste dans 🕘 Versions.')); return; }
+            if (ans !== 'reload') { status(i18n('Pas enregistré : modifié dans une autre fenêtre')); return; }
+            try { await post('save_act_transcription_version', {act_id: t.id, label: 'Ma version (avant de recharger)', body: area.value, data: {zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []}, auto: 0}); }
+            catch (e) { return toast(e.message, 'error'); }
+            let r; try { r = await api('act_transcription', {id: t.id}); } catch (e) { return toast(e.message, 'error'); }
+            const d = r.data && typeof r.data === 'object' ? r.data : {}, zs = Array.isArray(d.zones) ? d.zones : [], ps = Array.isArray(d.people) ? d.people : [];
+            const b = normBody(r.body, [zs, ps]);
+            ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { const el = $(`[data-tx="${k}"]`); if (el) el.value = r[k] ?? ''; t[k] = r[k] ?? ''; });
+            t.updated_at = r.updated_at; t.data = {...t.data, ...d, view: t.data.view};
+            if (['todo', 'doing', 'checked', 'done'].includes(d.status)) $('[data-tx-state]').value = d.status;
+            putText({body: b, zones: zs, people: ps, reviewed: Array.isArray(d.reviewed) ? d.reviewed : []});
+            clearTimeout(autoT); autoT = 0; setDirty(false); conflictHold = false; dropDraft(); status(`✓ ${i18n('Enregistré')}`); VS?.soon();
+            toast(i18n('Le texte de l’autre fenêtre est chargé ; le tien est gardé dans 🕘 Versions (« Ma version (avant de recharger) »).'));
         }
         /** L1 : la fenêtre « Imprimer » commune — image et texte côte à côte, l'un puis l'autre, ou le texte seul ; image améliorée ; personnes et rôles */
         // 📑 un seul texte pour plusieurs pages : les morceaux du texte avec le nom et l'image de leur page (export et impression)
@@ -1947,7 +2079,10 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
                 const before = {...t.data.view}, id = rcp.dataset.txRecipe, r = TV.RECIPES.find(x => x[0] === id); if (!r) return;
                 const put = v => { t.data.view = TV.viewOf(v); syncControls(); geom({keepCenter: !fitOn}); if (fitOn) applyFit(fitMode); else applyView(); applyImage(); touch(); };
                 put(TV.recipeView(before, id)); A().undoToast?.(i18n('Recette « {name} » posée sur l’image', {name: r[2]}), {undo: () => put(before), redo: () => put(TV.recipeView(before, id))}); return; }
-            const ch = e.target.closest('[data-tx-char]'); if (ch) { const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar; area.setRangeText(c, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
+            const ch = e.target.closest('[data-tx-char]'); if (ch) { // 26 : un mot choisi garde sa lecture : « mot[?] », « [mot] » (l'usage des paléographes)
+                const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar, sel = area.value.slice(s, en), word = sel && !/\n/.test(sel) ? sel : '';
+                const put = word && c === '[?]' ? `${word.replace(/\s+$/, '')}[?]${word.slice(word.replace(/\s+$/, '').length)}` : word && (c === '[' || c === ']') ? `[${word}]` : c;
+                area.setRangeText(put, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
             if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast(i18n('Choisis d’abord un passage dans le texte.'), 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
             if (e.target.closest('[data-tx-zdel]')) return deleteZone();
             if (e.target.closest('[data-tx-zsign]')) return signZone();
@@ -2072,6 +2207,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
               if (e.altKey && !mk && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target === area) { e.preventDefault(); e.stopPropagation(); lineStep(e.key === 'ArrowDown' ? 1 : -1); return; } }
             if (e.target.closest?.('[data-tx-ptabs]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = ['image', 'text', 'people'], i = ks.indexOf(e.target.closest('[data-tx-ptab]')?.dataset.txPtab); showPtab(ks[(i + (e.key === 'ArrowRight' ? 1 : 2)) % 3]); return; }
             if (e.target.closest?.('[data-tx-steps]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = STEPS.map(s => s[0]), i = ks.indexOf(e.target.closest('[data-tx-step]')?.dataset.txStep); showStep(ks[(i + (e.key === 'ArrowRight' ? 1 : ks.length - 1)) % ks.length]); return; } // C5 : les flèches d'un onglet à l'autre
+            if (e.target === area && (e.metaKey || e.ctrlKey) && !e.altKey && ['z', 'y'].includes(e.key.toLowerCase())) { e.preventDefault(); e.stopPropagation(); undoZones(e.key.toLowerCase() === 'y' || e.shiftKey); return; } // 16 : un seul historique
             if (e.target.closest?.('input, textarea, select')) return;
             if (e.target.closest?.('button, [contenteditable="true"]') && (e.key === ' ' || e.key === 'Enter')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
@@ -2089,24 +2225,34 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
         /** l'outil s'en va (× ou Échap, ou « ↗ Fiche » d'une personne) : touches, worker « Mieux voir », observateurs, fenêtre */
-        function teardown() { if (!dlg.isConnected) return; htrStop(true); if (!switching && deepRun) { deepRun.stop = true; if (deepRun.job) post('tx_deep_cancel', {id: deepRun.job}).catch(() => {}); deepRun = null; } document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); if (!switching) ctx.onClose?.(); }
-        async function close() { if (dirty && !await A().confirmBox(i18n('Les dernières modifications de la transcription seront perdues.'), {title: i18n('Fermer sans enregistrer la transcription ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return; teardown(); }
+        function teardown() { if (!dlg.isConnected) return; clearTimeout(autoT); clearTimeout(draftT); clearTimeout(peopleT); htrStop(true); if (!switching && deepRun) { deepRun.stop = true; if (deepRun.job) post('tx_deep_cancel', {id: deepRun.job}).catch(() => {}); deepRun = null; } document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); if (!switching) ctx.onClose?.(); }
+        async function close() { if (saving) await saving.catch(() => {}); if (dirty && !await A().confirmBox(i18n('Les dernières modifications de la transcription seront perdues.'), {title: i18n('Fermer sans enregistrer la transcription ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return; if (dirty) dropDraft(); teardown(); }
+        /** 🔴 8 : un autre acte demandé : enregistrer celui-ci d'abord (s'il a changé), puis le fermer ; false : on reste */
+        async function leave() {
+            if (saving) await saving.catch(() => {});
+            if (dirty) { if (!await A().confirmBox(i18n('Celui-ci est enregistré d’abord, puis l’autre acte s’ouvre.'), {title: i18n('Enregistrer et ouvrir l’autre acte ?'), okLabel: i18n('Enregistrer et ouvrir l’autre'), danger: false})) return false; await save(); if (dirty) return false; }
+            teardown(); return true;
+        }
+        Object.assign(dlg.txApi, {save: () => save(), isDirty: () => dirty, leave});
         dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         // la fenêtre change de taille (⛶, panneau) : l'ajustement choisi (toute l'image, largeur) suit
         let roW = 0, roH = 0; const ro = new ResizeObserver(() => { const r = stage.getBoundingClientRect(); if (!imgW || drag || (r.width === roW && r.height === roH)) return; roW = r.width; roH = r.height; if (fitOn && fitMode !== 'real') applyFit(fitMode, {keepY: true}); else applyView(); }); ro.observe(stage);
         function docNote() { const n = $('[data-tx-docnote]'); if (n) n.hidden = !t.media_id; }
-        renderBar(); paintMirror(); paintPeople(); docNote(); paintWhy(); VS?.refresh(); paintIaCount(); await initPages(); if (PAGES.length) { paintMirror(); paintPeople(); } await loadImage();
+        renderBar(); paintMirror(); paintPeople(); docNote(); paintWhy(); VS?.refresh(); paintIaCount(); await initPages(); if (PAGES.length) { paintMirror(); paintPeople(); } focusSeg(); await loadImage();
+        offerDraft();
         if (deepRun && dlg.isConnected) setTimeout(deepAllStep, 0); // 📑 la lecture approfondie de toutes les pages continue sur cette page
         if (fixAfterSwitch && dlg.isConnected) { fixAfterSwitch = false; runFix({quiet: true}); }
-        if (ctx.goto && dlg.isConnected) { runDetect(); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
+        if (ctx.goto && dlg.isConnected) { runDetect({quiet: true}); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
         /* E1 : l'historique (instantanés de tout l'acte) ; ⌘Z dans une case de texte garde l'annulation de la case */
         const F_KEYS = ['title', 'kind', 'date_text', 'place', 'source'];
         HX = UI.editorHistory?.({get: () => ({f: Object.fromEntries(F_KEYS.map(k => [k, $(`[data-tx="${k}"]`).value])), st: $('[data-tx-state]').value, body: area.value, zones: t.data.zones, people: t.data.people, view: t.data.view}),
             set: o => { F_KEYS.forEach(k => { $(`[data-tx="${k}"]`).value = o.f[k] ?? ''; t[k] = o.f[k] ?? ''; }); $('[data-tx-state]').value = o.st; t.data.status = o.st;
+                const was = area.value, focused = document.activeElement === area; // 16 : le curseur va là où le texte a changé (comme un traitement de texte)
                 area.value = o.body; before = o.body; t.body = o.body; t.data.zones = o.zones || []; t.data.people = o.people || []; if (!t.data.zones.some(z => z.id === selZone)) selZone = null;
+                if (was !== o.body) { const dd = diffOf(was, o.body), c = o.body.length - dd.q; area.setSelectionRange(Math.max(dd.p, Math.min(c, o.body.length)), Math.max(dd.p, Math.min(c, o.body.length))); if (focused) area.focus({preventScroll: true}); }
                 const vOld = JSON.stringify(t.data.view); t.data.view = TV.viewOf(o.view); syncControls(); if (JSON.stringify(t.data.view) !== vOld) { geom(); applyImage(); }
-                dirty = true; status(i18n('modifié')); drawZones(); paintMirror(); paintPeople(); },
+                rev++; setDirty(true); status(i18n('modifié')); autoSoon(); draftSoon(); drawZones(); paintMirror(); paintPeople(); },
             onChange: h => { $('[data-tx-hist="undo"]').disabled = !h.canUndo(); $('[data-tx-hist="redo"]').disabled = !h.canRedo(); }});
         HX?.reset();
         /** 🧲 recaler sur les lignes du texte les zones décalées de quelques caractères ; auto (à l'ouverture) : seulement si c'est sûr
@@ -2184,7 +2330,13 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         }
         const fichierLinks = () => [ext.sendTo ? {icon: '📤', label: i18n('Envoyer vers…'), run: sendMenu} : null, ext.openTextDoc ? {icon: '📝', label: i18n('Dans le traitement de texte'), run: toTextDoc} : null,
             ext.retouchMedia ? {icon: '🎚️', label: i18n('Éclaircir / restaurer l’image'), disabled: !curMedia(), run: retouchImage} : null].filter(Boolean);
-        UI.editorMenus?.($('[data-tx-menus]'), {
+        /* 🧩 idées 35 à 40 (heritage-atelier-*.js) : ext.txPlugins (f(plug) à l'ouverture), ext.txMenus (f(menu, plug) → [items], mis avant le dernier groupe) */
+        const plug = {dlg, ctx, get t() { return t; }, area, $, touch, save, status, drawZones, gotoRange, selectText, setTool, onHere, kindNow, curPid, isDirty: () => dirty,
+            geo: () => ({zoom, panX, panY, imgW, imgH, rotPt, unrot, stage}), reveal: z => reveal(z), runHtr: (o = {}) => runHtr(o),
+            switchTo: async next => { if (dirty) { await save(); if (dirty) return; } switching = true; teardown(); return open({...next, onClose: ctx.onClose, onSaved: ctx.onSaved}); }};
+        const txPlugMenus = defs => Object.fromEntries(Object.entries(defs).map(([k, f]) => [k, () => { const base = f(), more = (ext.txMenus || []).flatMap(g => { try { return g(k, plug) || []; } catch (_) { return []; } }).filter(Boolean);
+            if (!more.length) return base; const i = base.lastIndexOf('-'); return i < 0 ? [...base, '-', ...more] : [...base.slice(0, i), '-', ...more, ...base.slice(i)]; }]));
+        UI.editorMenus?.($('[data-tx-menus]'), txPlugMenus({
             Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', ...(fichierLinks().length ? [...fichierLinks(), '-'] : []), {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, {icon: '⚖️', label: `${i18n('Comparer les lectures')}…`, run: () => openCompare()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
             Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🔍', label: `${i18n('Chercher et remplacer')}…`, shortcut: '⌘F', run: () => openFind(true)}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}, '-', {icon: '🧲', label: i18n('Recaler les zones sur les lignes'), disabled: !t.data.zones.some(z => z.e > z.s), run: () => snapToLines()}],
             // K1 : les lectures, Repérer et « Ajouter à la généalogie » sont des outils (plus dans Édition) ; un symbole = une action (K11)
@@ -2192,10 +2344,11 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
                 {icon: '✍️', label: i18n('Lire l’écriture à la main (rapide)'), run: cmdOf('htr')}, {icon: '🖨', label: i18n('Lire un texte imprimé'), run: cmdOf('ocr')}, {icon: '🔬', label: `${i18n('Lecture approfondie (IA)')}…`, run: cmdOf('deep')}, {icon: '▤', label: i18n('Relier les lignes à l’image'), run: cmdOf('lines')}, '-',
                 {icon: '🪄', label: i18n('Corrections'), run: cmdOf('fix')}, {icon: '🧭', label: i18n('Repérer les noms, dates, lieux'), run: cmdOf('detect')}, {icon: '✓', label: `${i18n('Ajouter à la généalogie')}…`, run: cmdOf('found')}, '-',
                 {icon: '📖', label: i18n('Aide à la lecture…'), run: cmdOf('aide')}, {icon: '🪙', label: i18n('Convertisseur d’autrefois…'), run: () => ext.autrefois?.open()}],
-            Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: i18n('Zoom avant'), shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-',
+            Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: i18n('Zoom avant'), shortcut: 'Mod++', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-',
                 {icon: '⟳', label: i18n('Tourner de 90°'), run: cmdOf('rot')}, $('[data-tx-cmd="better"]') ? {icon: '🎚️', label: `${i18n('Mieux voir')}…`, run: () => togglePanel(true)} : null, {icon: '↺', label: i18n('Remettre l’image comme au départ'), run: cmdOf('resetview')}, '-',
-                TV.reviewMode?.() ? {icon: '👁', label: i18n('Relire ligne à ligne'), shortcut: 'R', run: cmdOf('review')} : null, {icon: '№', label: TV.lineNos() ? i18n('Cacher les numéros de ligne') : i18n('Montrer les numéros de ligne'), run: () => TV.setLineNos(!TV.lineNos())}, {label: TV.abbrevOn?.() ? i18n('Ne plus souligner les abréviations') : i18n('Souligner les abréviations connues'), run: () => TV.setAbbrevOn(!TV.abbrevOn())}, '-', {icon: '⌨️', label: i18n('Raccourcis clavier'), shortcut: '⌘/', run: () => showKeys()}]});
+                TV.reviewMode?.() ? {icon: '👁', label: i18n('Relire ligne à ligne'), shortcut: 'R', run: cmdOf('review')} : null, {icon: '№', label: TV.lineNos() ? i18n('Cacher les numéros de ligne') : i18n('Montrer les numéros de ligne'), run: () => TV.setLineNos(!TV.lineNos())}, {label: TV.abbrevOn?.() ? i18n('Ne plus souligner les abréviations') : i18n('Souligner les abréviations connues'), run: () => TV.setAbbrevOn(!TV.abbrevOn())}, '-', {icon: '⌨️', label: i18n('Raccourcis clavier'), shortcut: '⌘/', run: () => showKeys()}]}));
         UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});
+        (ext.txPlugins || []).forEach(f => { try { f(plug); } catch (e) { console.error(e); } });
         if (UI.editorStatus) { // K18 : l'image à gauche, l'aide de l'outil au milieu, le zoom à droite (⌘ + molette, ⌘0, ⌘1)
             txBar = UI.editorStatus({zoom: {get: () => zoom, set: k => { if (!imgW) return; const r = stage.getBoundingClientRect(); zoomAt(k, r.width / 2, r.height / 2); }, fit: () => imgW && applyFit('page'), min: .02, max: 20}});
             $('.h-tx').appendChild(txBar); paintTxBar();

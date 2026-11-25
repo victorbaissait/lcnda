@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 
 /* ═════════ 1. Lecture approfondie (Ollama, sur cet ordinateur seulement) ═════════ */
+require_once __DIR__ . '/ia_serveur.php'; // 🖥 le serveur d'IA choisi (Ollama, Unsloth ou compatible OpenAI) : lib/ia_serveur.php
 
 const TX_DEEP_DEFAULT_URL = 'http://127.0.0.1:11434';
 /** Les modèles proposés : licence vraiment ouverte (Apache 2.0), tag Ollama exact, poids approximatif du téléchargement. */
@@ -55,7 +56,7 @@ function tx_deep_url_ok(string $url): bool
 /** L'adresse d'Ollama (variable LCNDA_OLLAMA_URL pour un autre port), toujours ramenée à une adresse IP de l'ordinateur. */
 function tx_deep_base(?string $url = null): string
 {
-    $url = $url ?? ((string) getenv('LCNDA_OLLAMA_URL') ?: TX_DEEP_DEFAULT_URL);
+    $url = $url ?? ia_srv_url(); // sans réglage : LCNDA_OLLAMA_URL ou TX_DEEP_DEFAULT_URL, comme avant
     if (!tx_deep_url_ok($url)) { throw new LcndaBadInput('La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée.'); }
     $p = parse_url($url);
     $host = strtolower((string) $p['host']);
@@ -75,6 +76,7 @@ function tx_deep_model(string $tag): array
  */
 function tx_deep_http(string $method, string $path, ?array $body = null, int $timeout = 5, ?callable $onLine = null, ?string $base = null): array
 {
+    if (ia_srv_is_openai()) { return ia_srv_http($method, $path, $body, $timeout, $onLine, $base); } // Unsloth, LM Studio… : traduit vers /v1 (lib/ia_serveur.php)
     if (!function_exists('curl_init')) { throw new RuntimeException('La lecture approfondie a besoin de l’extension cURL de PHP.'); }
     $url = tx_deep_base($base) . $path;
     $ch = curl_init($url);

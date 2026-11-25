@@ -171,10 +171,8 @@
     function openBoard() { const st = A().state; store.set('genealogie-succ-view', 'cases'); if (ext.successoral?.openCase) { ext.successoral.openCase(0); } else { st.listType = 'successoral'; A().setModule('listes'); } }
     async function paintBanner() {
         const ws = document.getElementById('workspace'); if (!ws) return;
-        let bn = ws.querySelector(':scope > .succ-fbanner');
         const ids = filterIds(), m = A()?.state?.module;
-        if (!ids.length || NOFILTER.includes(m) || !active()) { bn?.remove(); return; }
-        if (!bn) { bn = document.createElement('div'); bn.className = 'succ-fbanner'; bn.setAttribute('role', 'status'); ws.prepend(bn); }
+        if (!ids.length || NOFILTER.includes(m) || !active()) { ws.querySelector(':scope > .succ-fbanner')?.remove(); return; }
         await index().catch(() => null);
         const cs = ids.map(id => localCases().find(c => c.id === id)).filter(Boolean);
         const set = await filterPeople();
@@ -182,6 +180,10 @@
         const what = cs.length === 1 ? i18n('Seulement le dossier {n}', {n: caseShort(cs[0])}) : i18n('Seulement {what} : {list}', {what: nDossiers(cs.length), list: cs.map(c => c.number).join(', ')});
         const html = `<span aria-hidden="true">⚖️</span> <span class="succ-fb-t"><b>${esc(what)}</b> : ${esc(i18n('{n} sur {total}', {n: plural(set ? set.size : 0, 'fiche'), total: num(total)}))}.</span>
             <button type="button" class="link-button" data-sf-change>${esc(i18n('Changer…'))}</button><button type="button" class="icon-button small succ-fb-x" data-sf-clear title="${esc(i18n('Tout montrer'))}" aria-label="${esc(i18n('Tout montrer'))}">✕</button>`;
+        // posé seulement une fois écrit (pas de bandeau vide le temps des lectures), et si le filtre n'a pas changé entre-temps
+        if (filterIds().join(',') !== ids.join(',') || NOFILTER.includes(A()?.state?.module) || !active()) return;
+        let bn = ws.querySelector(':scope > .succ-fbanner');
+        if (!bn) { bn = document.createElement('div'); bn.className = 'succ-fbanner'; bn.setAttribute('role', 'status'); ws.prepend(bn); }
         if (bn.innerHTML !== html) bn.innerHTML = html;
     }
     // le bandeau revient après chaque écran redessiné ; l'arbre grise ou cache les fiches hors du dossier

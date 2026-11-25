@@ -66,7 +66,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
     if (!phpPath) { console.log('— PHP absent : partie serveur sautée'); return finish(); }
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-succ-dossiers-'));
     const dir = path.join(tmp, 'data');
-    const env = { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1' };
+    const env = { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' };
     fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
     fs.writeFileSync(path.join(dir, 'media', 'deces-marcel.jpg'), 'image-fictive');
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`

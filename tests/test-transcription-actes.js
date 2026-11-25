@@ -250,6 +250,12 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
                 await p.evaluate(() => [...document.querySelectorAll('dialog[open] button[type=submit]')].at(-1).click()); await sleep(300);
                 await p.evaluate(() => document.querySelector('[data-txa-recap]').scrollIntoView()); await shot('txa-F-recap.png');
                 out.cb = counts();
+                // 🔴 3 (audit) : une fiche du même nom déjà dans la base n'est jamais doublée par défaut : « ⇆ à trancher », ✓ Ajouter grisé
+                // tant que ce n'est pas choisi ; ici on choisit « ＋ Créer » pour chacune (comme le faisait l'ancien choix par défaut)
+                out.undecided = await p.evaluate(() => [...document.querySelectorAll('dialog.h-txa-dlg .h-txa-pers')].filter(r => r.querySelector('.h-txa-seg .is-on')?.dataset.txaAct.endsWith(':compare')).map(r => r.dataset.txaP));
+                out.blocked = await p.evaluate(() => document.querySelector('dialog.h-txa-dlg button[type=submit]').disabled);
+                for (const k of out.undecided) await p.evaluate(k2 => document.querySelector(`dialog.h-txa-dlg [data-txa-act="${k2}:create"]`).click(), k);
+                await sleep(100);
                 await p.evaluate(() => document.querySelector('dialog.h-txa-dlg button[type=submit]').click());
                 await p.waitForFunction(() => [...document.querySelectorAll('.toast, [class*=toast]')].some(t => /Acte ajouté/.test(t.textContent)), null, { timeout: 15000 }); await sleep(400);
                 out.toast = await p.evaluate(() => [...document.querySelectorAll('.toast, [class*=toast]')].map(t => t.textContent).find(t => /Acte ajouté/.test(t)) || '');
@@ -379,6 +385,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
             assert.match(out.toast, /Acte ajouté/); assert.ok(out.ca.persons > out.cb.persons && out.ca.events > out.cb.events);
             assert.equal(out.cu.persons, out.cb.persons); assert.equal(out.cu.events, out.cb.events); assert.equal(out.cu.families, out.cb.families); assert.equal(out.cu.source_links, out.cb.source_links);
             assert.ok(out.txPeople >= 5);
+            assert.equal(out.blocked, out.undecided.length > 0, 'à trancher : ✓ Ajouter grisé (' + out.undecided.join(',') + ')');
         }],
         ['navigateur : à 390 px, rien ne déborde', () => assert.equal(out.narrow, true)],
         ['navigateur : aucune erreur JS', () => assert.deepEqual(out.errs, [])],

@@ -56,7 +56,7 @@ const KEY = 'genealogie-topbar-buttons';
     if (!chromium || !phpPath) { console.log('— navigateur : Playwright ou PHP absent, partie sautée'); console.log(`${failed ? '✗' : '✓'} boutons du haut : ${count} vérifications`); process.exit(failed ? 1 : 0); }
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-boutons-haut-'));
     const shots = process.env.BOUTONS_HAUT_SHOTS || '';
-    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1'});
+    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'});
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true});
     const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

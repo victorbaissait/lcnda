@@ -47,6 +47,11 @@
     /** le message clair quand l'IA n'est pas prête (Ollama absent, arrêté, sans modèle) */
     function offHtml(st) {
         const o = st?.ollama || {};
+        const srv = st?.server || {};
+        if (srv.api === 'openai') { // 🖥 Unsloth ou un autre serveur compatible OpenAI (assets/js/ia-serveur.js)
+            return notice('info', `<b>${esc(st?.message || T('{s} ne répond pas.', {s: srv.label}))}</b> ${esc(T('L’assistant utilise l’IA qui tourne sur ton ordinateur ({s}) : rien ne part sur Internet.', {s: srv.label}))}
+            <div class="aia-row"><button type="button" class="button small secondary" data-aia-recheck>↻ ${esc(T('Vérifier à nouveau'))}</button></div>`);
+        }
         const head = o.local_only === false ? T('L’adresse d’Ollama n’est pas sur cet ordinateur : l’assistant reste éteint.')
             : !o.installed ? T('L’IA n’est pas encore installée sur cet ordinateur.') : !o.running ? T('Ollama est installé mais ne tourne pas.') : T('Aucun modèle d’IA n’est encore téléchargé.');
         return notice('info', `<b>${esc(head)}</b> ${esc(T('L’assistant utilise l’IA qui tourne sur ton ordinateur (Ollama), la même que pour la lecture approfondie des actes : rien ne part sur Internet.'))}
@@ -332,9 +337,12 @@
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         const host = ws.querySelector('[data-aia-set]'); if (!host) return;
         const o = st.ollama || {};
+        const srv = st.server || {api: 'ollama', label: 'Ollama'}; const compat = srv.api === 'openai'; // 🖥 Unsloth, LM Studio… (assets/js/ia-serveur.js)
         const seg = [['local', `🖥 ${T('Sur cet ordinateur')}`, false], ['online', `🌐 ${T('Service en ligne')}`, true], ['off', T('Éteint'), false]]
             .map(([v, l, dis]) => `<button type="button" role="radio" aria-checked="${s.mode === v}" class="${s.mode === v ? 'is-active' : ''}" data-aia-mode="${v}" ${dis ? `disabled title="${esc(T('Bientôt : Mistral (France) et les services « compatibles OpenAI », avec ta clé et un avertissement clair sur ce qui part.'))}"` : ''}>${esc(l)}${dis ? ` <small>(${esc(T('bientôt'))})</small>` : ''}</button>`).join('');
-        const state = o.local_only === false ? notice('error', esc(T('L’adresse d’Ollama n’est pas sur cet ordinateur : refusée.')))
+        const state = compat ? (st.ready ? notice('ok', esc(T('{s} répond à {u} (le même serveur que pour la lecture approfondie des actes).', {s: srv.label, u: srv.url})) + (o.ram_gb ? ' ' + esc(T('Ton ordinateur a {n} Go de mémoire.', {n: o.ram_gb})) : ''))
+                : notice('warn', esc(st.message || T('{s} ne répond pas.', {s: srv.label}))))
+            : o.local_only === false ? notice('error', esc(T('L’adresse d’Ollama n’est pas sur cet ordinateur : refusée.')))
             : !o.installed ? notice('info', `<b>${esc(T('Ollama n’est pas encore sur cet ordinateur.'))}</b> ${esc(T('Installe-le une fois (gratuit), lance-le, puis « ↻ Tester la connexion ». Un ordinateur de 8 Go marche, mais lentement (30 s à 1 min par réponse).'))}`)
             : !o.running ? notice('warn', `<b>${esc(T('Ollama est installé mais ne tourne pas.'))}</b> ${esc(T('Lance l’application Ollama, puis « ↻ Tester la connexion ».'))}`)
             : st.ready ? notice('ok', esc(T('Ollama est installé et répond (le même que pour la lecture approfondie des actes).')) + (o.ram_gb ? ' ' + esc(T('Ton ordinateur a {n} Go de mémoire.', {n: o.ram_gb})) : '') + (st.tools === false ? `<br><small>${esc(T('Ce modèle ne sait pas appeler les outils directement : l’app lui parle en JSON (un peu moins sûr).'))}</small>` : ''))
@@ -342,13 +350,14 @@
         const cur = st.model?.tag || s.model;
         const models = (o.models || []).filter(m => m.tried || m.recommended || m.tag === 'mistral-small3.2:24b' || m.tag === 'qwen3-vl:32b-instruct' || m.present);
         const rows = models.map(m => `<tr class="${m.fits === false ? 'is-big' : ''}"><td><label><input type="radio" name="aia_model" value="${esc(m.tag)}" ${m.tag === cur ? 'checked' : ''} ${m.present ? '' : 'disabled'}> <b>${esc(m.label)}</b></label>${m.tag === 'qwen3-vl:8b-instruct' ? ` <span class="ui-badge is-green">${esc(T('conseillé'))}</span>` : ''}<br><small class="muted">${esc(T(m.pros || ''))}</small></td>
-            <td>${esc(T('{n} Go', {n: m.ram_gb}))}</td><td>${esc(T('{n} Go', {n: String(m.size_gb).replace('.', ',')}))}</td><td>${m.present ? `✓ ${esc(T('déjà installé'))}` : m.fits === false ? esc(T('trop gros ici')) : `<button type="button" class="button small secondary" data-aia-setup>⤓ ${esc(T('Télécharger'))}</button>`}</td></tr>`).join('')
-            + (o.others || []).map(m => `<tr><td><label><input type="radio" name="aia_model" value="${esc(m.tag)}" ${m.tag === cur ? 'checked' : ''}> <b>${esc(m.label)}</b></label> <small class="muted">${esc(T('autre modèle d’Ollama'))}</small></td><td></td><td></td><td>✓ ${esc(T('déjà installé'))}</td></tr>`).join('');
+            <td>${esc(T('{n} Go', {n: m.ram_gb}))}</td><td>${esc(T('{n} Go', {n: String(m.size_gb).replace('.', ',')}))}</td><td>${m.present ? `✓ ${esc(T('déjà installé'))}` : m.fits === false ? esc(T('trop gros ici')) : compat ? `<small class="muted">${esc(T('à lancer dans {s}', {s: srv.label}))}</small>` : `<button type="button" class="button small secondary" data-aia-setup>⤓ ${esc(T('Télécharger'))}</button>`}</td></tr>`).join('')
+            + (o.others || []).map(m => `<tr><td><label><input type="radio" name="aia_model" value="${esc(m.tag)}" ${m.tag === cur ? 'checked' : ''}> <b>${esc(m.label)}</b></label> <small class="muted">${esc(compat ? T('autre modèle de {s}', {s: srv.label}) : T('autre modèle d’Ollama'))}</small></td><td></td><td></td><td>✓ ${esc(T('déjà installé'))}</td></tr>`).join('');
         const sw = (k, label, hint) => `<label class="checkbox-line aia-switch"><input type="checkbox" data-aia-opt="${k}" ${s[k] ? 'checked' : ''}> <span><b>${esc(label)}</b><br><small class="muted">${esc(hint)}</small></span></label>`;
         host.innerHTML = `<div class="maintenance-panel"><h3>${esc(T('Où tourne l’IA'))}</h3><div class="segmented aia-seg" role="radiogroup">${seg}</div>
                 ${s.mode === 'off' ? `<p class="muted">${esc(T('L’assistant est éteint : le bouton 🤖 disparaît de la barre du haut. Rien d’autre ne change dans l’app.'))}</p>` : ''}</div>
-            <div class="maintenance-panel"><h3>🖥 ${esc(T('Sur cet ordinateur (Ollama)'))}</h3>${state}
-                <div class="aia-row"><button type="button" class="button small secondary" data-aia-test>↻ ${esc(T('Tester la connexion'))}</button><button type="button" class="button small secondary" data-aia-setup>🧭 ${esc(T('Installation guidée'))}</button>${!o.installed ? link(st.setup_url || 'https://ollama.com/download', '↗ ollama.com') : ''}</div>
+            <div class="maintenance-panel ias-panel" data-ias-host></div>
+            <div class="maintenance-panel"><h3>🖥 ${esc(compat ? T('Sur cet ordinateur ({s})', {s: srv.label}) : T('Sur cet ordinateur (Ollama)'))}</h3>${state}
+                <div class="aia-row"><button type="button" class="button small secondary" data-aia-test>↻ ${esc(T('Tester la connexion'))}</button>${compat ? '' : `<button type="button" class="button small secondary" data-aia-setup>🧭 ${esc(T('Installation guidée'))}</button>`}${!compat && !o.installed ? link(st.setup_url || 'https://ollama.com/download', '↗ ollama.com') : ''}</div>
                 <div class="cplus-scroll"><table class="data-table aia-models"><thead><tr><th>${esc(T('Modèle'))}</th><th>${esc(T('Mémoire'))}</th><th>${esc(T('Taille'))}</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>
                 <p class="ui-hint">${esc(T('Par défaut, le modèle déjà installé pour la lecture des actes (Qwen3-VL 8B) : rien à télécharger, il sait aussi converser.'))}</p>
                 ${sw('openarch', T('Le généalogiste peut interroger Open Archives'), T('nom, prénoms, années partent vers openarch.nl, comme dans « Où chercher » ; jamais pour une personne vivante ou une fiche 🔒'))}
@@ -363,6 +372,7 @@
                 ${log.rows.length ? `<ul class="aia-log">${log.rows.slice(0, 50).map(r => `<li><small class="muted">${esc(fmtDate(r.at))}</small> ${esc(r.host)} · « ${esc(r.what)} » · ${esc(T('0 vivant'))}</li>`).join('')}</ul><button type="button" class="button small secondary" data-aia-logclear>🗑 ${esc(T('Effacer le journal'))}</button>` : `<p>${esc(T('Rien n’est sorti de l’ordinateur.'))}</p>`}</div>
             <div class="maintenance-panel"><h3>🤖 ${esc(T('Mes conversations'))}</h3><p>${esc(T('{n} conversation(s) gardée(s) sur cet ordinateur.', {n: convs.total || 0}))}</p>
                 <div class="aia-row"><button type="button" class="button small secondary" data-aia-openpanel>${esc(T('Ouvrir l’assistant'))}</button>${convs.total ? `<button type="button" class="button small secondary" data-aia-clearall>🗑 ${esc(T('Tout effacer'))}</button>` : ''}</div></div>`;
+        ext.iaServeur?.mount(host.querySelector('[data-ias-host]'), {onChange: () => { STATUS = null; drawSettings(); }}); // 🖥 Ollama / Unsloth / compatible OpenAI
         host.onclick = async e => {
             const b = e.target.closest('button'); if (!b) return;
             if (b.dataset.aiaMode) { const before = settings(); const n = {...before, mode: b.dataset.aiaMode}; save(n); topbar(); drawSettings(); A().undoToast?.(b.dataset.aiaMode === 'off' ? T('Assistant IA éteint.') : T('Assistant IA : sur cet ordinateur.'), {icon: '🤖', undo: () => { save(before); topbar(); drawSettings(); }}); return; }

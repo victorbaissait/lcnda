@@ -37,7 +37,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
 // la météo d'autrefois : le jeu de données fabriqué du test météo (Gers, 1836–2025) ; sans python, les phrases météo ne sont pas vérifiées
 const withMeteo = spawnSync('python3', [path.join(appRoot, 'scripts', 'meteo', 'make-fixture.py'), fx], { encoding: 'utf8' }).status === 0;
 const dir = path.join(tmp, 'data');
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', ...(withMeteo ? { LCNDA_METEO_DIR: fx } : { LCNDA_METEO_DIR: path.join(tmp, 'rien') }) });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', ...(withMeteo ? { LCNDA_METEO_DIR: fx } : { LCNDA_METEO_DIR: path.join(tmp, 'rien') }) });
 fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
 const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

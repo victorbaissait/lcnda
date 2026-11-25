@@ -92,3 +92,12 @@
   .aia-panel{width:100vw;border-left:0}
   .aia-msg.is-user{max-width:94%}
 }
+/* 🖥 le serveur d'IA : Ollama / Unsloth / compatible OpenAI (assets/js/ia-serveur.js) */
+.ias-why{font-size:.85em;font-weight:500;margin-left:.4rem}
+.ias-kinds{display:grid;gap:.35rem;margin:.4rem 0 .6rem}
+.ias-form{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.ias-form input{width:100%;min-width:0}
+.ias-models{max-height:12rem;overflow:auto;margin:.4rem 0 0;padding-left:1.1rem;overflow-wrap:anywhere}
+.ias-explain h4{margin:.9rem 0 .2rem}
+.ias-explain ul{padding-left:1.1rem}
+.ias-explain code,.ias-models code{overflow-wrap:anywhere}

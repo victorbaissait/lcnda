@@ -179,6 +179,13 @@
             const pm = p.sex === 'f' ? 'mere' : 'pere';
             p.role = c.role === 'epoux' ? `${pm}_epoux` : c.role === 'epouse' ? `${pm}_epouse` : c.role === 'defunt' ? `${pm}_defunt` : c.role === 'sujet' ? pm : p.role;
         });
+        // 🔴 3 (audit) : « baptisé Jean, fils de Pierre MAZAUD » : l'enfant sans nom de famille prend celui de son père (puis la mère),
+        // pour être rapproché de « Jean MAZAUD » s'il est déjà dans la base
+        if (kind === 'bapteme' || kind === 'naissance') people.filter(c => c.role === 'sujet' && !c.surname).forEach(c => {
+            const ps = people.filter(p => p.relations.some(r => r.type === 'parent_of' && r.of === c.key)), f = ps.find(p => p.sex !== 'f' && p.surname) || ps.find(p => p.surname);
+            if (!f || f.sex === 'f' && ps.some(p => p.sex !== 'f')) return;
+            c.surname = f.surname; c.name = `${c.given} ${f.surname}`.trim();
+        });
         people.forEach(p => { p.birthYear = p.age != null && year ? year - p.age : null; });
         // le lien du couple, des parents
         const relations = [];

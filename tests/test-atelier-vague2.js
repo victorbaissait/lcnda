@@ -139,9 +139,12 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         await t('390 px : trois onglets Image / Texte / Personnes ; Texte au départ, en grand, avec la frise et « ✓ Ajouter » en bas', async () => {
             await p.setViewportSize({width: 390, height: 844}); await sleep(500);
             const s = await phoneState();
-            assert.deepEqual(s.tabs, ['image', 'text*', 'people']); assert.equal(s.stage, 0, 'image cachée'); assert.ok(s.editor && s.flow && s.add && !s.found, JSON.stringify(s));
+            // 17 (audit) : l'onglet Texte montre aussi l'image (40 % de la hauteur, au-dessus du texte) pour relier une ligne sans changer d'onglet
+            assert.deepEqual(s.tabs, ['image', 'text*', 'people']); assert.ok(s.stage > 300, 'image au-dessus du texte : ' + s.stage); assert.ok(s.editor && s.flow && s.add && !s.found, JSON.stringify(s));
+            const split = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), st = d.querySelector('[data-tx-stage]').getBoundingClientRect(), ed = d.querySelector('[data-tx-editor]').getBoundingClientRect(); return {stageH: st.height, stageBottom: st.bottom, edTop: ed.top, edH: ed.height}; });
+            assert.ok(split.stageH >= 100 && split.stageBottom <= split.edTop && split.edH >= 100, 'image puis texte : ' + JSON.stringify(split));
             assert.equal(await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-pane]')].filter(x => x.getBoundingClientRect().width > 0).length), 1, 'sur téléphone, seulement les boutons de l’étape montrée');
-            await shot("v2-390-texte.png"); assert.ok(s.editorTop < 330, "le texte commence haut : " + s.editorTop); assert.ok(s.sw <= 391, 'largeur ' + s.sw); assert.deepEqual(s.out, []);
+            await shot("v2-390-texte.png"); assert.ok(s.editorTop < 600, "le texte commence sous l’image : " + s.editorTop); assert.ok(s.sw <= 391, 'largeur ' + s.sw); assert.deepEqual(s.out, []);
             const lab = await p.textContent(`${D} [data-tx-ptab="people"]`); assert.match(lab, /Personnes\s*\d+/);
             await shot('v2-390-texte.png');
         });

@@ -26,7 +26,7 @@ const phpPath = findPhp([devBundledPhp()]);
 if (!phpPath) { console.log('— PHP absent : test sauté'); process.exit(0); }
 const SHOTS = process.env.SHOTS || '';
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-audit2810-'));
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 const read = f => fs.readFileSync(path.join(appRoot, f), 'utf8');
 

@@ -202,7 +202,7 @@ echo json_encode(['ok' => 1]);`, {TX_BODY: BODY, TX_DATA: JSON.stringify({zones:
             await ev(() => { document.documentElement.dataset.theme = "dark"; }); await sleep(150);
             const col2 = await ev(s => getComputedStyle(document.querySelector(s)).color, sel), bg2 = await bgOf(sel);
             await ev(() => { delete document.documentElement.dataset.theme; });
-            assert.ok(contrast(bg2, col2) >= 3, `sombre : description illisible : ${col2} sur ${bg2}`); console.log("   ", col, bg, col2, bg2);
+            assert.ok(contrast(bg2, col2) >= 3, `sombre : description illisible : ${col2} sur ${bg2}`)
         });
 
         /* ═════ 🔴 8 ═════ */
