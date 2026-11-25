@@ -1779,7 +1779,11 @@
   "other": "{n} epoche",
   "many": "{n} epoche"
  },
- "{n} époques": "{n} epoche",
+ "{n} époques": {
+  "one": "{n} epoca",
+  "other": "{n} epoche",
+  "many": "{n} epoche"
+ },
  "{n} essai raté": "{n} tentativo sbagliato",
  "{n} essais ratés": "{n} tentativi sbagliati",
  "{n} est à revoir avant publication (note sous {min}).": "{n} è da rivedere prima della pubblicazione (punteggio sotto {min}).",

@@ -1769,7 +1769,10 @@
   "one": "{n} period",
   "other": "{n} periods"
  },
- "{n} époques": "{n} periods",
+ "{n} époques": {
+  "one": "{n} period",
+  "other": "{n} periods"
+ },
  "{n} essai raté": "{n} wrong guess",
  "{n} essais ratés": "{n} wrong guesses",
  "{n} est à revoir avant publication (note sous {min}).": "{n} is to review before publishing (score below {min}).",

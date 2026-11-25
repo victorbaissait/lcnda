@@ -1789,7 +1789,12 @@
   "many": "{n} epok",
   "other": "{n} epoki"
  },
- "{n} époques": "{n} epok",
+ "{n} époques": {
+  "one": "{n} epoka",
+  "few": "{n} epoki",
+  "many": "{n} epok",
+  "other": "{n} epoki"
+ },
  "{n} essai raté": "nieudane próby: {n}",
  "{n} essais ratés": "nieudane próby: {n}",
  "{n} est à revoir avant publication (note sous {min}).": "{n} — do sprawdzenia przed publikacją (ocena poniżej {min}).",

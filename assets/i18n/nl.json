@@ -1769,7 +1769,10 @@
   "one": "{n} tijdperk",
   "other": "{n} tijdperken"
  },
- "{n} époques": "{n} tijdperken",
+ "{n} époques": {
+  "one": "{n} tijdperk",
+  "other": "{n} tijdperken"
+ },
  "{n} essai raté": "{n} mislukte poging",
  "{n} essais ratés": "{n} mislukte pogingen",
  "{n} est à revoir avant publication (note sous {min}).": "{n} moet nagekeken worden vóór publicatie (score onder {min}).",

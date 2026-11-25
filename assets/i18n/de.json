@@ -1769,7 +1769,10 @@
   "one": "{n} Epoche",
   "other": "{n} Epochen"
  },
- "{n} époques": "{n} Epochen",
+ "{n} époques": {
+  "one": "{n} Epoche",
+  "other": "{n} Epochen"
+ },
  "{n} essai raté": "{n} Fehlversuch",
  "{n} essais ratés": "{n} Fehlversuche",
  "{n} est à revoir avant publication (note sous {min}).": "{n} ist vor dem Veröffentlichen zu prüfen (Note unter {min}).",
