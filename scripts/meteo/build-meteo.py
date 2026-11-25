@@ -1632,27 +1632,42 @@ def do_era5(db, years, box, boxes, cache, hours_step=6, test=False):
         if db.execute('SELECT 1 FROM meta WHERE key=?', (f'era5-{y}',)).fetchone():
             continue
         months = ['01'] if test else [f'{m:02d}' for m in range(1, 13)]
+        # une demande par variable (Copernicus refuse « cost limits exceeded » quand une demande d'un an en porte plusieurs)
+        opened = {}
+        def era5_get(dataset, stat, var, base):
+            old = os.path.join(cache, f'era5-{y}-{stat}.nc')
+            if os.path.exists(old):  # fichier d'avant (plusieurs variables d'un coup), déjà téléchargé
+                return old
+            p = os.path.join(cache, f'era5-{y}-{stat}-{var}.nc')
+            if not os.path.exists(p):
+                say(f'     ERA5 {y} : {stat} · {var}… (la file d’attente de Copernicus peut prendre du temps)')
+                c.retrieve(dataset, dict(base, variable=[var]), p + '.part')
+                os.replace(p + '.part', p)
+            return p
+        def era5_var(paths, *names):
+            for p in paths:
+                if p not in opened:
+                    opened[p] = nc.Dataset(p)
+                for n in names:
+                    if n in opened[p].variables:
+                        return opened[p].variables[n][:]
+            raise Stop('ERA5 : variable introuvable (' + ', '.join(names) + ') — le format de Copernicus a peut-être changé.')
+        days = [f'{d:02d}' for d in range(1, 32)]
+        dbase = lambda stat: {'product_type': 'reanalysis', 'year': str(y), 'month': months, 'day': days, 'daily_statistic': stat,
+                              'time_zone': 'utc+00:00', 'frequency': '1_hourly', 'area': area}
         files = {}
         for stat, vars_ in (('daily_minimum', ['2m_temperature']), ('daily_maximum', ['2m_temperature', '10m_wind_gust_since_previous_post_processing']),
                             ('daily_mean', ['total_precipitation', 'total_cloud_cover', 'snowfall'])):
-            p = os.path.join(cache, f'era5-{y}-{stat}.nc')
-            if not os.path.exists(p):
-                say(f'     ERA5 {y} : {stat}… (la file d’attente de Copernicus peut prendre du temps)')
-                c.retrieve(ERA5_DAILY_DATASET, {'product_type': 'reanalysis', 'variable': vars_, 'year': str(y), 'month': months, 'day': [f'{d:02d}' for d in range(1, 32)],
-                                                'daily_statistic': stat, 'time_zone': 'utc+00:00', 'frequency': '1_hourly', 'area': area}, p + '.part')
-                os.replace(p + '.part', p)
-            files[stat] = p
-        ph = os.path.join(cache, f'era5-{y}-heures.nc')
-        if not os.path.exists(ph):
-            c.retrieve(ERA5_HOURLY_DATASET, {'product_type': ['reanalysis'], 'variable': ['2m_temperature', 'total_precipitation', '10m_wind_gust_since_previous_post_processing', 'total_cloud_cover'],
-                                             'year': [str(y)], 'month': months, 'day': [f'{d:02d}' for d in range(1, 32)], 'time': [f'{h:02d}:00' for h in range(0, 24, hours_step)],
-                                             'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}, ph + '.part')
-            os.replace(ph + '.part', ph)
-        dmin, dmax, dmean, hh = (nc.Dataset(files['daily_minimum']), nc.Dataset(files['daily_maximum']), nc.Dataset(files['daily_mean']), nc.Dataset(ph))
-        tn, tx = nc_var(dmin, 't2m')[:], nc_var(dmax, 't2m')[:]
-        fx = nc_var(dmax, 'fg10', 'i10fg')[:]
-        tp, tcc, sf = nc_var(dmean, 'tp')[:], nc_var(dmean, 'tcc')[:], nc_var(dmean, 'sf')[:]
-        ht, hrr, hfx, hnn = nc_var(hh, 't2m')[:], nc_var(hh, 'tp')[:], nc_var(hh, 'fg10', 'i10fg')[:], nc_var(hh, 'tcc')[:]
+            files[stat] = list(dict.fromkeys(era5_get(ERA5_DAILY_DATASET, stat, v, dbase(stat)) for v in vars_))
+        hbase = {'product_type': ['reanalysis'], 'year': [str(y)], 'month': months, 'day': days, 'time': [f'{h:02d}:00' for h in range(0, 24, hours_step)],
+                 'area': area, 'data_format': 'netcdf', 'download_format': 'unarchived'}
+        hold = os.path.join(cache, f'era5-{y}-heures.nc')
+        hfiles = [hold] if os.path.exists(hold) else list(dict.fromkeys(era5_get(ERA5_HOURLY_DATASET, 'heures', v, hbase) for v in
+                                                                          ['2m_temperature', 'total_precipitation', '10m_wind_gust_since_previous_post_processing', 'total_cloud_cover']))
+        tn, tx = era5_var(files['daily_minimum'], 't2m'), era5_var(files['daily_maximum'], 't2m')
+        fx = era5_var(files['daily_maximum'], 'fg10', 'i10fg')
+        tp, tcc, sf = era5_var(files['daily_mean'], 'tp'), era5_var(files['daily_mean'], 'tcc'), era5_var(files['daily_mean'], 'sf')
+        ht, hrr, hfx, hnn = era5_var(hfiles, 't2m'), era5_var(hfiles, 'tp'), era5_var(hfiles, 'fg10', 'i10fg'), era5_var(hfiles, 'tcc')
         nd = tn.shape[0]
         nrows = F.days_in_year(y) if not test else nd
         for (a, b), gid in ids.items():
@@ -1667,7 +1682,7 @@ def do_era5(db, years, box, boxes, cache, hours_step=6, test=False):
             hourly = [('T', hp([int(round((float(v) - 273.15) * 10)) for v in ht[:, a, b]])), ('RR', hp([int(round(float(v) * 1000 * 10 * hours_step)) for v in hrr[:, a, b]])),
                       ('FX', hp([int(round(float(v) * 10)) for v in hfx[:, a, b]])), ('NN', hp([int(round(float(v) * 100)) for v in hnn[:, a, b]]))]
             db.execute('INSERT OR REPLACE INTO grid_hourly(grid_id, annee, blob) VALUES(?,?,?)', (gid, y, F.encode(hourly, step=hours_step)))
-        for d in (dmin, dmax, dmean, hh):
+        for d in opened.values():
             d.close()
         db.execute("UPDATE grid SET debut=MIN(COALESCE(debut, ?), ?), fin=MAX(COALESCE(fin, ?), ?), heures_debut=MIN(COALESCE(heures_debut, ?), ?) WHERE source='era5'", (y, y, y, y, y, y))
         F.set_meta(db, **{f'era5-{y}': 'ok'})
