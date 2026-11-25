@@ -734,6 +734,12 @@ function echanges_geneanet(): bool
     return ($_GET['target'] ?? '') === 'geneanet';
 }
 
+/** Vrai pour un export GEDCOM réglé pour Ancestry (target=ancestry) : voir lib/gedcom.php et lib/arbres_en_ligne.php. */
+function echanges_ancestry(): bool
+{
+    return ($_GET['target'] ?? '') === 'ancestry';
+}
+
 /**
  * Lieu au format de Geneanet (GeneWeb) : « [Lieu-dit] - Commune, Code INSEE, Département, Région, Pays » ; en-tête
  * « PLAC FORM Town, Area code, County, Region, Country ». Le code est celui de la commune s'il est connu.

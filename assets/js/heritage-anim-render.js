@@ -388,7 +388,7 @@
         const c0 = merc(box[2], box[1], z), c1 = merc(box[3], box[0], z), left = (c0[0] + c1[0]) / 2 - BW / 2, top0 = (c0[1] + c1[1]) / 2 - BH / 2 + BH * .02;
         st.xy = pl => { const m = merc(P[pl][2], P[pl][1], z); return [(m[0] - left) / BW, (m[1] - top0) / BH]; }; // 0..1 dans le fond
         st.BW = BW; st.BH = BH;
-        st.bg = await basemap({bg: scene.basemap || 'light', z, left, top0, BW, BH, sea: scene.sea || '#dfe6ea', dim: clamp(Number(scene.dim ?? .18), 0, .9), tone: scene.tone || ''}, onStep);
+        st.bg = await basemap({bg: scene.basemap || 'osmfr', z, left, top0, BW, BH, sea: scene.sea || '#dfe6ea', dim: clamp(Number(scene.dim ?? .18), 0, .9), tone: scene.tone || ''}, onStep);
         // les chemins : les événements de chaque personne, dans l'ordre
         const per = new Map(); st.evs.forEach(e => { if (!per.has(e[0])) per.set(e[0], []); per.get(e[0]).push(e); });
         st.paths = per;

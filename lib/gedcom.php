@@ -440,8 +440,12 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $version = $sink !== null ? (($sink['version'] ?? '7') === '7' ? '7' : '5.5.1') : (($_GET['gedcom_version'] ?? '5.5.1') === '7' ? '7' : '5.5.1');
     // « Pour Geneanet » (lib/echanges.php) : GEDCOM 5.5.1 en UTF-8, vivants cachés, lieux au format de Geneanet, médias en liens, sans balises propres à LCNDA
     $geneanet = function_exists('echanges_geneanet') && echanges_geneanet();
+    // « Pour Ancestry » (lib/echanges.php) : mêmes règles que pour Geneanet, sauf les lieux (format habituel « Commune, Département,
+    // Région, Pays ») et les médias (Ancestry ne reprend pas les médias d'un GEDCOM : aucun n'est écrit)
+    $ancestry = function_exists('echanges_ancestry') && echanges_ancestry();
+    if ($ancestry) { $geneanet = true; }
     if ($geneanet) { $version = '5.5.1'; }
-    $filename = 'genealogie-' . ($geneanet ? 'geneanet-' : '') . (($_GET['branch_mode'] ?? '') !== '' ? 'branche-' : '') . date('Ymd-His') . '.ged';
+    $filename = 'genealogie-' . ($ancestry ? 'ancestry-' : ($geneanet ? 'geneanet-' : '')) . (($_GET['branch_mode'] ?? '') !== '' ? 'branche-' : '') . date('Ymd-His') . '.ged';
     if ($sink === null) {
         header('Content-Type: text/plain; charset=utf-8');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
@@ -644,7 +648,8 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
             if (trim((string) ($c['note'] ?? '')) !== '') { $text($level + 1, 'NOTE', (string) $c['note']); }
         }
     };
-    $writeMedia = static function (int $level, string $target) use ($mediaByTarget, $line, $geneanet, $media): void {
+    $writeMedia = static function (int $level, string $target) use ($mediaByTarget, $line, $geneanet, $ancestry, $media): void {
+        if ($ancestry) { return; }
         foreach (array_unique($mediaByTarget[$target] ?? []) as $id) {
             if (!$geneanet) { $line($level, 'OBJE', '@M' . $id . '@'); continue; }
             // Geneanet ne reçoit pas les fichiers : seulement les médias qui ont une adresse en ligne, en lien
@@ -658,7 +663,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
             $line($level + 2, 'TITL', (string) ($m['title'] ?: ($m['document_title'] ?: 'Document')));
         }
     };
-    $writeEvent = static function (array $e, string $scope) use ($line, $text, $writeDate, $writeNotes, $writeCitations, $writeMedia, $writeLabels, $includeNotes, $version, $geneanet): void {
+    $writeEvent = static function (array $e, string $scope) use ($line, $text, $writeDate, $writeNotes, $writeCitations, $writeMedia, $writeLabels, $includeNotes, $version, $geneanet, $ancestry): void {
         $tag = strtoupper(trim((string) ($e['gedcom_tag'] ?? '')));
         $standard = $scope === 'person' ? array_merge(GEDCOM_PERSON_EVENT_TAGS, GEDCOM_PERSON_ATTRIBUTE_TAGS) : GEDCOM_FAMILY_EVENT_TAGS;
         $isAttribute = in_array($tag, GEDCOM_PERSON_ATTRIBUTE_TAGS, true);
@@ -680,7 +685,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
             if (!in_array($calendar, ['', 'gregorian', 'julian', 'republican'], true)) { $line(3, '_CAL', $calendar); }
         }
         $parts = gedcom_place_parts($e);
-        $plac = $geneanet ? echanges_geneanet_place($parts, $e) : gedcom_place_value($parts);
+        $plac = $geneanet && !$ancestry ? echanges_geneanet_place($parts, $e) : gedcom_place_value($parts);
         if ($plac !== '') {
             $line(2, 'PLAC', $plac);
             if (($e['latitude'] ?? null) !== null && ($e['longitude'] ?? null) !== null && $e['latitude'] !== '' && $e['longitude'] !== '') {
@@ -709,7 +714,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $line(1, 'LANG', $version === '7' ? 'fr' : 'French');
     $line(1, 'DATE', strtoupper(date('j M Y')));
     $line(1, 'PLAC');
-    $line(2, 'FORM', $geneanet ? 'Town, Area code, County, Region, Country' : GEDCOM_PLACE_FORM);
+    $line(2, 'FORM', $geneanet && !$ancestry ? 'Town, Area code, County, Region, Country' : GEDCOM_PLACE_FORM);
     if ($version !== '7') { $line(1, 'SUBM', '@U1@'); } // obligatoire en 5.5.1 (l'enregistrement est écrit à la fin)
     // balises propres à LCNDA, déclarées en GEDCOM 7 (HEAD.SCHMA), comme la norme le demande
     if ($version === '7') {

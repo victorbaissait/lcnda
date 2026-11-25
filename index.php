@@ -1223,7 +1223,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=585" defer></script>
+<script src="assets/js/app.js?v=586" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1338,7 +1338,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=4" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=7" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=8" defer></script>
-<script src="assets/js/heritage-links.js?v=25" defer></script>
+<script src="assets/js/heritage-links.js?v=26" defer></script>
 <script src="assets/js/heritage-more.js?v=409" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
@@ -1606,6 +1606,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-carte-vie.js?v=2" defer></script><!-- 🗺 Carte de la vie d’une personne -->
 <script src="assets/js/heritage-cartes-plus.js?v=5" defer></script>
 <script src="assets/js/heritage-fonds-carte.js?v=1" defer></script>
+<script src="assets/js/heritage-fonds-libres.js?v=1" defer></script>
 <script src="assets/js/heritage-house-dxf.js?v=2" defer></script>
 <script src="assets/js/heritage-house.js?v=47" defer></script>
 <script src="assets/js/heritage-house3d.js?v=19" defer></script>
@@ -1617,9 +1618,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-house-equip.js?v=1" defer></script>
 <script src="assets/js/heritage-house-objets.js?v=1" defer></script>
 <script src="assets/js/heritage-frontieres.js?v=2" defer></script>
-<script src="assets/js/heritage-anim-render.js?v=3" defer></script>
+<script src="assets/js/heritage-anim-render.js?v=4" defer></script>
 <script src="assets/js/heritage-anim-export.js?v=2" defer></script>
-<script src="assets/js/heritage-anim-studio.js?v=5" defer></script>
+<script src="assets/js/heritage-anim-studio.js?v=6" defer></script>
 <script src="assets/js/heritage-envoyer.js?v=2" defer></script>
 <script src="assets/js/heritage-dna.js?v=25" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=11" defer></script>

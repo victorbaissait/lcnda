@@ -519,7 +519,7 @@
             const world = 2 ** zoom, tiles = [];
             for (let tx = Math.floor(left / 256); tx <= Math.floor((left + W) / 256); tx++) for (let ty = Math.floor(top / 256); ty <= Math.floor((top + H) / 256); ty++) { if (ty >= 0 && ty < world) tiles.push([tx, ty]); }
             const drawTiles = async online => {
-                const style = online ? 'light' : 'offline';
+                const style = online ? 'osmfr' : 'offline'; // fond libre par défaut (Esri n'est pas une carte libre)
                 const imgs = await Promise.all(tiles.map(([tx, ty]) => loadImage(online ? app.mapTileUrl(style, zoom, ((tx % world) + world) % world, ty) : `api.php?action=offline_tile&z=${zoom}&x=${((tx % world) + world) % world}&y=${ty}`, online)));
                 bg.fillStyle = '#dfe6ea'; bg.fillRect(0, 0, W, H);
                 imgs.forEach((img, i) => { if (img) bg.drawImage(img, tiles[i][0] * 256 - left, tiles[i][1] * 256 - top, 256, 256); });

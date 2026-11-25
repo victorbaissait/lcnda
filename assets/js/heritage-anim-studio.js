@@ -25,7 +25,7 @@
     /* ═════ réglages par défaut (⚙️ Réglages par défaut des nouveaux films) — valeurs recommandées ═════ */
     const DEF_KEY = 'genealogie-anim-defaults';
     const RECO = {format: '16:9', quality: 1080, fps: 30, font: 'system', bg: '#111111', trans: 'fade', transDur: .8, smooth: true, colorBy: 'surname', camMode: 'follow', maxZoom: 3,
-        autoCap: true, capKinds: ['depart', 'mariage'], capMax: 10, slow: true, basemap: 'light', trails: true, fadeDead: true, life: 25, dot: 6, captionStyle: 'dark', yearPos: 'tr', legend: 'br', exportFormat: 'mp4', srt: true, toMedia: false};
+        autoCap: true, capKinds: ['depart', 'mariage'], capMax: 10, slow: true, basemap: 'osmfr', trails: true, fadeDead: true, life: 25, dot: 6, captionStyle: 'dark', yearPos: 'tr', legend: 'br', exportFormat: 'mp4', srt: true, toMedia: false};
     const defs = () => { try { return {...RECO, ...(JSON.parse(localStorage.getItem(DEF_KEY) || '{}') || {})}; } catch (_) { return {...RECO}; } };
     const saveDefs = d => { try { localStorage.setItem(DEF_KEY, JSON.stringify(d)); } catch (_) {} };
 

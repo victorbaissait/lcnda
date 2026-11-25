@@ -163,10 +163,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const links = await p.$$eval('[data-lfc-panel] a', l => l.map(a => [a.href, a.target, a.rel]));
             assert.ok(links.length >= 30 && links.every(([h, tg, rel]) => /^https:\/\//.test(h) && tg === '_blank' && /noopener/.test(rel)));
             assert.strictEqual(await p.$eval('[data-lfc-esri]', el => el.checked), false);
-            await p.click('[data-lfc-esri]'); await p.locator('button:visible:has-text("↶ Annuler")').last().waitFor({timeout: 10000});
+            await p.click('[data-lfc-esri]');
+            await p.waitForFunction(() => [...document.querySelectorAll('.toast')].some(x => /Fonds Esri montrés/.test(x.textContent) && /Annuler/.test(x.textContent)), null, {timeout: 10000});
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-fonds-esri')), '1');
             assert.ok((await menu('bw')).includes('value="esri_topo"'), 'Esri montré');
-            await p.locator('button:visible:has-text("↶ Annuler")').last().click({timeout: 10000}); await sleep(400);
+            // le bouton « ↶ Annuler » du message des fonds Esri (le message glisse encore : clic direct)
+            await p.evaluate(() => [...document.querySelectorAll('.toast')].reverse().find(x => /Fonds Esri montrés/.test(x.textContent)).querySelectorAll('button').forEach(b => { if (/Annuler/.test(b.textContent)) b.click(); }));
+            await p.waitForFunction(() => localStorage.getItem('genealogie-fonds-esri') !== '1', null, {timeout: 5000}); await sleep(300);
             assert.ok(!(await menu('bw')).includes('value="esri_topo"'), '↶ Annuler : Esri à nouveau masqué');
             const n0 = net0.length;
             await p.waitForSelector('[data-lfc-panel]'); await p.click('[data-lfc-preview="basemap_at"]'); await sleep(500);
