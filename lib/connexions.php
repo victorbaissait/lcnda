@@ -598,6 +598,44 @@ function cx_used(PDO $pdo, array $q): array
     return ['used' => (object) $out];
 }
 
+/* ═════════════ 📎 « Insérer une info » / « 🔍 Chercher partout » : un seul champ pour tout ═════════════
+ * GET cx_search&q=gare vulaines → {base: [{kind, items}], lists: [{src, rows}], basket: [...]} : la base (fiches, événements, actes, sources,
+ * lieux, médias, notes ; 4 par sorte), le panier, et chaque liste de données installée (le mot le plus long cherché dans ses colonnes
+ * de noms ; les autres mots doivent se trouver dans la ligne ou dans le nom de la liste : « gare » → la liste des gares). Rapide : < 200 ms. */
+function cx_search(PDO $pdo, array $q): array
+{
+    $text = trim(preg_replace('/\s+/u', ' ', cx_str($q['q'] ?? '', 120)));
+    if (mb_strlen($text) < 2) { return ['base' => [], 'lists' => [], 'basket' => []]; }
+    $fold = static fn(string $v): string => function_exists('picker_fold') ? picker_fold($v) : mb_strtolower($v);
+    $words = array_values(array_filter(preg_split('/\s+/u', $text) ?: [], static fn($w) => mb_strlen($w) >= 2));
+    $out = ['base' => [], 'lists' => [], 'basket' => []];
+    // la base
+    require_once __DIR__ . '/picker.php';
+    $kinds = ['person', 'event', 'act', 'source', 'place', 'media'];
+    foreach ($kinds as $k) {
+        try { $r = picker_search($pdo, ['kind' => $k, 'q' => $text, 'limit' => 4]); $its = $r['groups'][0]['items'] ?? [];
+            if (!$its && count($words) > 1) { $long = $words; usort($long, static fn($a, $b) => mb_strlen($b) <=> mb_strlen($a)); $r = picker_search($pdo, ['kind' => $k, 'q' => $long[0], 'limit' => 8]);
+                $its = array_values(array_filter($r['groups'][0]['items'] ?? [], static function ($it) use ($words, $fold) { $hay = $fold(implode(' ', array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $it))); foreach ($words as $w) { if (!str_contains($hay, $fold($w))) { return false; } } return true; })); }
+            if ($its) { $out['base'][] = ['kind' => $k, 'items' => array_slice($its, 0, 4)]; } } catch (Throwable $_) {}
+    }
+    $notes = cx_notes($pdo, ['q' => $text])['items'] ?? []; if ($notes) { $out['base'][] = ['kind' => 'note', 'items' => array_slice($notes, 0, 3)]; }
+    // le panier
+    try { cx_schema($pdo); $like = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $text) . '%';
+        $s = $pdo->prepare("SELECT * FROM cx_basket_items WHERE title LIKE ? ESCAPE '\\' OR value LIKE ? ESCAPE '\\' ORDER BY id DESC LIMIT 4"); $s->execute([$like, $like]); $out['basket'] = array_map('cx_row_out', $s->fetchAll(PDO::FETCH_ASSOC)); } catch (Throwable $_) {}
+    // les listes de données installées
+    require_once __DIR__ . '/listes_donnees.php';
+    $long = $words; usort($long, static fn($a, $b) => mb_strlen($b) <=> mb_strlen($a));
+    foreach (ld_sources() as $src => $def) {
+        try { if (!($def['open'])()) { continue; }
+            $r = ld_query($pdo, $src, ['query' => json_encode(['q' => $long[0], 'limit' => 30])]);
+            $rows = array_values(array_filter($r['rows'] ?? [], static function ($row) use ($words, $long, $fold, $src) { $hay = $fold($src . ' ' . implode(' ', array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $row)));
+                foreach ($words as $w) { if ($w === $long[0]) { continue; } $fw = rtrim($fold($w), 's'); if (!str_contains($hay, $fw)) { return false; } } return true; }));
+            if ($rows) { $out['lists'][] = ['src' => $src, 'rows' => array_slice($rows, 0, 3)]; }
+        } catch (Throwable $_) {}
+    }
+    return $out;
+}
+
 /* ═════════════ aiguillage ═════════════ */
 function cx_api_get(PDO $pdo, string $action, array $q): array
 {
@@ -609,6 +647,7 @@ function cx_api_get(PDO $pdo, string $action, array $q): array
         'cx_item_links' => ['links' => cx_item_links($pdo, safe_int($q['item_id'] ?? 0))],
         'cx_notes' => cx_notes($pdo, $q),
         'cx_used' => cx_used($pdo, $q),
+        'cx_search' => cx_search($pdo, $q),
         default => cxn_api_get($pdo, $action, $q) ?? throw new LcndaBadInput('Action inconnue.'), // 🧩 les besoins (lib/connexions_besoins.php)
     };
 }
