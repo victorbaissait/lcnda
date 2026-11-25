@@ -83,12 +83,12 @@ def main():
         if ins and ins in C: return 'dep', [ins[:3] if ins.startswith('97') else ins[:2]], None
         code = next((v for v in wm.claims(e, 'P2586') if isinstance(v, str)), '')
         if code in DEP: return 'dep', [code], None
-        if q in R2D: return 'region', sorted(R2D[q]), None
+        if q in R2D and len(R2D[q]) <= 6: return 'region', sorted(R2D[q]), None
         lab = fold(wm.label(e, ('fr',)))
-        if lab in RL: return 'region', sorted(R2D[RL[lab]]), None
+        if lab in RL and len(R2D[RL[lab]]) <= 6: return 'region', sorted(R2D[RL[lab]]), None
         if lab in DEP_BY_NAME: return 'dep', [DEP_BY_NAME[lab]], None
         if depth == 0:
-            for p in ('P2341', 'P276', 'P131'):
+            for p in (('P2341', 'P131') if wm.ids(e, 'P31') and not set(wm.ids(e, 'P31')) & {'Q36784', 'Q209495', 'Q1620908', 'Q3502482'} else ()):
                 for l in wm.ids(e, p):
                     if l in ('Q142', 'Q90'): continue
                     r = where(l, 1)
@@ -109,10 +109,19 @@ def main():
     # Wikidata (libellé anglais exact) ; on préfère une région, puis un département, puis une commune, puis un lieu avec un centre
     names = sorted({re.sub(r'^Category:Traditional cloth(?:ing|es) of ', '', c) for c in regions})
     NQ = {}
-    for r in wm.sparql('SELECT ?i ?l ?code ?ins ?co WHERE { VALUES ?l { ' + ' '.join('"' + n.replace('"', '') + '"@en' for n in names) + ' } ?i rdfs:label ?l ; wdt:P17 wd:Q142 . '
-                       'OPTIONAL { ?i wdt:P2586 ?code } OPTIONAL { ?i wdt:P374 ?ins } OPTIONAL { ?i wdt:P625 ?co } }', 'coiffes-names-' + hashlib.sha1(' '.join(names).encode()).hexdigest()[:10], gap=1):
-        q = qid(r['i']); rank = 0 if q in R2D else 1 if r.get('code') else 2 if r.get('ins') else 3 if r.get('co') else 9
-        if rank < 9 and (r['l'] not in NQ or rank < NQ[r['l']][0]): NQ[r['l']] = (rank, q)
+    cand = wm.sparql('SELECT ?i ?l ?code ?ins ?co WHERE { VALUES ?l { ' + ' '.join('"' + n.replace('"', '') + '"@en' for n in names) + ' } ?i rdfs:label ?l ; wdt:P17 wd:Q142 . '
+                     'OPTIONAL { ?i wdt:P2586 ?code } OPTIONAL { ?i wdt:P374 ?ins } OPTIONAL { ?i wdt:P625 ?co } }', 'coiffes-names-' + hashlib.sha1(' '.join(names).encode()).hexdigest()[:10], gap=1)
+    ids = sorted({qid(r['i']) for r in cand})
+    TY = {}
+    for r in wm.sparql('SELECT ?i ?l ?t ?tl WHERE { VALUES ?i { ' + ' '.join('wd:' + i for i in ids) + ' } ?i rdfs:label ?l FILTER(lang(?l)="en") ?i wdt:P31 ?t . ?t rdfs:label ?tl FILTER(lang(?tl)="fr") }', 'coiffes-cand-types', gap=1):
+        TY.setdefault(qid(r['i']), set()).add(qid(r['t']))
+    # une région, une province, un département, une région naturelle ou culturelle ; une commune seulement s'il n'y a rien d'autre
+    AREA = {'Q36784', 'Q209495', 'Q1620908', 'Q3502482', 'Q6465', 'Q572995', 'Q22923920', 'Q1151616', 'Q1149061'}
+    TOWN = {'Q484170', 'Q1549591'}
+    for r in cand:
+        q = qid(r['i']); ty = TY.get(q, set())
+        rank = 0 if ty & AREA else 1 if ty & TOWN else 9
+        if rank < 9 and (r['l'] not in NQ or (rank, int(q[1:])) < (NQ[r['l']][0], int(NQ[r['l']][1][1:]))): NQ[r['l']] = (rank, q)
     more = sorted({q for _, q in NQ.values()} - set(T))
     if more: T.update(wm.entities(more, props='claims|labels|descriptions', languages='fr'))
 
@@ -148,6 +157,14 @@ def main():
         if deps: row['deps'] = deps
         if pt: row['lat'], row['lon'] = pt
         rows.append(row)
+    merged = {}  # « Normandy » et « Normandie » : une seule région
+    for r in rows:
+        k = fold(r['r'])
+        if k in merged:
+            m = merged[k]; m['photos'] += [p for p in r['photos'] if p not in m['photos']]; m['items'] += [i for i in r['items'] if i['n'] not in [x['n'] for x in m['items']]]
+        else: merged[k] = r
+    rows = list(merged.values())
+    for r in rows: r['photos'] = r['photos'][:8]
     CR = credits(sorted(set(want)))
     for r in rows:
         r['photos'] = [{'f': f, **CR['File:' + f]} for f in r['photos'] if 'File:' + f in CR]

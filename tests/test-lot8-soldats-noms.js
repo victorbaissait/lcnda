@@ -107,8 +107,8 @@ const life = (p, extra = {}) => ({ok: true, person: {first: 'Pierre', last: 'MAZ
 
     await t('📚 personnages et 🔤 variantes (Wikidata)', async () => {
         const Ro = L8.prepRomans(raw('romans'));
-        const r = L8.charactersOf(Ro, 'Rastignac'); assert.ok(r.some(c => /Balzac/.test(c.a)), JSON.stringify(r.slice(0, 3)));
-        console.log(`  (${Ro.n} personnages ; Rastignac : ${r.map(c => `${c.ch} — ${c.w} (${c.a})`).slice(0, 1)})`);
+        const r = L8.charactersOf(Ro, 'Chabert'); assert.ok(r.some(c => /Balzac/.test(c.a)), JSON.stringify(r.slice(0, 3)));
+        console.log(`  (${Ro.n} personnages ; Chabert : ${r.map(c => `${c.ch} — ${c.w} (${c.a})`).slice(0, 1)})`);
         const V = L8.prepVariants(raw('variantes'));
         const k = V.names.findIndex(x => x[2].length >= 1 && /^[A-Z][a-z]+$/.test(x[0]));
         const name = V.names[k][0], got = L8.variantsOf(V, name);
@@ -132,8 +132,8 @@ $ins->execute([1,'Pierre','MAZAUD','male','deceased',1,$mil,'yes']);
 $ins->execute([2,'Marie','LACOMBE','female','deceased',0,'','unknown']);
 $ins->execute([3,'Jean','Trouvé','male','deceased',0,'','unknown']);
 $ins->execute([4,'Floréal','DURAND','male','deceased',0,'','unknown']);
-$ins->execute([5,'Paul','Rastignac','male','deceased',0,'','unknown']);
-$ins->execute([6,'Louis','VARIANTNAME','male','deceased',0,'','unknown']);
+$ins->execute([5,'Paul','Chabert','male','deceased',0,'','unknown']);
+$ins->execute([6,'Louis','Lacombe','male','deceased',0,'','unknown']);
 $pdo->exec("INSERT INTO places(id,name,county,country,latitude,longitude,admin4_code) VALUES(1,'Limoges','Haute-Vienne','France',45.8336,1.2611,'87085'),(2,'Verdun','Meuse','France',49.1598,5.3844,'55545'),(3,'Chambéry','Savoie','France',45.5646,5.9178,'73065'),(4,'Tulle','Corrèze','France',45.2670,1.7680,'19272')");
 $t = fn($tag) => (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='$tag' LIMIT 1")->fetchColumn();
 $ev = $pdo->prepare("INSERT INTO events(scope,person_id,event_type_id,date_text,year,sort_date,place_id,address,description) VALUES('person',?,?,?,?,?,?,?,?)");
@@ -143,7 +143,7 @@ $ev->execute([3,$t('BIRT'),'1845',1845,'1845',4,'','']); $ev->execute([3,$t('DEA
 $ev->execute([4,$t('BIRT'),'1796',1796,'1796-05-01',4,'','']);
 $ev->execute([5,$t('BIRT'),'1850',1850,'1850',4,'','']);
 $pdo->exec("INSERT INTO poilu_units(person_id,unit_name,date_from,date_to,position) VALUES(1,'63e régiment d''infanterie','1914-08-02','1916-05-10',0)");
-$pdo->exec("INSERT INTO families(id,partner1_id,partner2_id) VALUES(1,2,0)");
+$pdo->exec("INSERT INTO families(id,partner1_id,partner2_id) VALUES(1,2,NULL)");
 $pdo->exec("INSERT INTO family_children(family_id,child_id) VALUES(1,1)");
 echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
     if (seed.status !== 0 || !/"ok"/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
@@ -173,7 +173,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match((await api('l8b_person', {id: 999})).error || '', /introuvable/i);
         });
 
-        await t('fiche : Pierre MAZAUD → « Le 63ᵉ RI, caserné à Limoges, a combattu… », l’année de sa mort, le CICR ; caché pour Marie… non : Savoie 1860', async () => {
+        await t('fiche : Pierre MAZAUD → « Le 63ᵉ RI, caserné à Limoges, a combattu… », l’année de sa mort, le CICR ; Marie LACOMBE à Chambéry : Savoie 1860', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-l8b-person="1"] .l8b-row', {timeout: 30000});
             const txt = await p.textContent('[data-l8b-person="1"]');
@@ -185,11 +185,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(await p.textContent('[data-l8b-person="2"]'), /En 1860, la Savoie et le comté de Nice deviennent français \(Chambéry\)/);
         });
 
-        await t('fiche : Jean Trouvé sans parents → enfant trouvé (prudent) ; Floréal DURAND, né en 1796 → mois républicain ; Rastignac → Balzac', async () => {
+        await t('fiche : Jean Trouvé sans parents → enfant trouvé (prudent) ; Floréal DURAND, né en 1796 → mois républicain ; Chabert → Balzac', async () => {
             const one = async id => p.evaluate(async i => { const h = document.createElement('div'); document.body.appendChild(h); await window.LCNDA_EXT.soldatsNoms.personInto(h, i); const x = h.textContent; h.remove(); return x; }, id);
             const a = await one(3); assert.match(a, /Son nom Trouvé est un de ceux que l’on donnait aux enfants trouvés\./); assert.match(a, /une piste, pas une preuve/);
             assert.match(await one(4), /Son prénom Floréal est un nom de mois du calendrier républicain/);
-            assert.match(await one(5), /Un personnage de Honoré de Balzac s’appelle Rastignac/);
+            assert.match(await one(5), /Un personnage de Honoré de Balzac s’appelle Chabert : Hyacinthe Chabert, dans « Le Colonel Chabert » \(1829\)/);
         });
 
         await t('🔤 « ＋ Ajouter aux variantes » écrit la variante, « ↶ Annuler » la retire', async () => {

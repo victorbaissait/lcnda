@@ -158,9 +158,11 @@
         return {years, battles};
     }
     /** « Bataille de Verdun » → « à Verdun » ; « Bataille de la Marne » → « à la bataille de la Marne » ; « Siège de Toul » → « au siège de Toul » */
+    const REGIONS = /^(Alsace|Lorraine|Champagne|Belgique|Picardie|Flandres?|Artois|Argonne|Woëvre|Somme|Marne|Aisne|Yser|Lys|Serbie|Roumanie|Italie|France|Macédoine|Prusse|Pologne|Russie|Autriche|Espagne|Égypte|Crimée|Allemagne|Hollande|Saxe|Bavière|Silésie|Moselle|Meuse|Oise|Vosges|Ourcq|Malmaison|Frontières)$/;
     function battlePhrase(noun) {
         const s = String(noun || '').trim(); let m;
-        if ((m = s.match(/^Bataille (?:de |d['’])([A-ZÉÈÂÎÔ][^\s]*(?:[- ][A-ZÉÈ][^\s]*)*)$/))) return `à ${m[1]}`;
+        if ((m = s.match(/^Bataille (?:de |d['’])([A-ZÉÈÂÎÔ][^\s]*(?:-[A-ZÉÈ][^\s]*)*)$/)) && !REGIONS.test(m[1])) return `à ${m[1]}`;
+        if (/^(Première|Seconde|Deuxième|Troisième|Quatrième) bataille\b/i.test(s)) return `à la ${s.charAt(0).toLowerCase()}${s.slice(1)}`;
         if (/^Chemin des Dames/.test(s)) return `au ${s}`;
         if (/^(Siège|Combat)\b/i.test(s)) return `au ${s.charAt(0).toLowerCase()}${s.slice(1)}`;
         if (/^(Bataille|Batailles|Offensive|Prise|Campagne|Course|Opération|Expédition)\b/i.test(s)) return `à la ${s.charAt(0).toLowerCase()}${s.slice(1)}`.replace(/^à la batailles/, 'aux batailles').replace(/^à la (course|offensive|opération|expédition|campagne|prise)/i, (x, w) => `à ${/^[aeiouéo]/i.test(w) ? "l'" : 'la '}${w.toLowerCase()}`);
@@ -277,7 +279,7 @@
             if (d !== null && d < f) continue;               // mort avant
             if (b === null && d === null && !evs.some(e => e.y !== null)) continue;
             let hit = null;
-            const near = e => e.y === null || (e.y >= f - (r.before || 15) && e.y <= Math.min(t, f + (r.after || 15)));
+            const near = e => e.y === null || (e.y >= f - (r.before || 40) && e.y <= f + (r.after || 15));
             if (r.where?.depts) hit = evs.find(e => r.where.depts.includes(e.w.dept) && near(e));
             else if (r.where?.algeria) hit = evs.find(e => e.w.algeria && near(e));
             else if (r.where?.colony) hit = evs.find(e => e.w.colony && near(e));

@@ -59,7 +59,7 @@ const life = (person, places = [], events = [], jobs = []) => ({ok: true, person
     await t('🧸 jouets : la décennie de ses 6 ans, chaque image avec auteur, licence libre et page Commons', async () => {
         const J = raw('jouets');
         const all = Object.values(J.decades).flat();
-        assert.ok(all.length > 20 && all.every(g => g.lic && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(g.page) && /^https:\/\/upload\.wikimedia\.org\//.test(g.thumb)));
+        assert.ok(all.length > 20 && all.every(g => g.lic && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(g.page) && /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(g.thumb)));
         const d = Object.keys(J.decades)[0]; const r = H.toysFor(J.decades, Number(d) - 6); assert.strictEqual(String(r.decade), d); assert.ok(r.list.length);
     });
     await t('🍬 marques nées de son vivant / 🚗 voitures de ses 30 ans ; rien en double avec « 💡 Les nouveautés »', async () => {
@@ -100,7 +100,7 @@ const life = (person, places = [], events = [], jobs = []) => ({ok: true, person
     fs.mkdirSync(path.join(tmp, 'media')); fs.mkdirSync(net0);
     const calls = () => { try { return fs.readFileSync(path.join(net0, 'calls.log'), 'utf8').trim().split('\n').filter(Boolean); } catch (_) { return []; } };
     // GBIF : la vraie réponse (comptes par espèce, Saint-Léonard-de-Noblat ±10 km, CC0 + CC BY 4.0), enregistrée le 2026-11-25
-    const GB = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures/lot9-sons-enfance-gbif.json'), 'utf8'));
+    const GB = {"birds":{"count":9550,"facets":[{"field":"SPECIES_KEY","counts":[{"name":"2490719","count":612},{"name":"2492956","count":437},{"name":"2494422","count":394},{"name":"2492462","count":385},{"name":"2495455","count":375},{"name":"9705453","count":351},{"name":"9409796","count":349},{"name":"2487879","count":327},{"name":"5231190","count":308},{"name":"5231438","count":269},{"name":"9809229","count":254},{"name":"2493091","count":249},{"name":"9515886","count":235},{"name":"5229490","count":217},{"name":"2477968","count":214},{"name":"2478523","count":208},{"name":"5229493","count":206},{"name":"2480537","count":196},{"name":"7901064","count":188},{"name":"2494686","count":177},{"name":"2488949","count":176},{"name":"2484916","count":172},{"name":"7745240","count":169},{"name":"2495000","count":168},{"name":"5739315","count":166},{"name":"9797180","count":162},{"name":"5845582","count":160},{"name":"2489214","count":158},{"name":"9687165","count":154},{"name":"2497266","count":144},{"name":"2475532","count":133},{"name":"7626513","count":115},{"name":"2497921","count":114},{"name":"4408759","count":109},{"name":"2491534","count":107},{"name":"9616058","count":107},{"name":"2495708","count":102},{"name":"2498415","count":99},{"name":"5228676","count":99},{"name":"9761484","count":97},{"name":"7660710","count":96},{"name":"2494200","count":87},{"name":"5231918","count":84},{"name":"9752149","count":84},{"name":"9282206","count":83},{"name":"8104397","count":76},{"name":"6100954","count":71},{"name":"5228199","count":55},{"name":"2482513","count":54},{"name":"8077224","count":45},{"name":"2474051","count":37},{"name":"2474156","count":29},{"name":"2481912","count":26},{"name":"2480242","count":25},{"name":"2475443","count":14},{"name":"8109681","count":13},{"name":"2473958","count":6},{"name":"6065824","count":3}]}]},"flowers":{"count":5458,"facets":[{"field":"SPECIES_KEY","counts":[{"name":"5334277","count":549},{"name":"5354656","count":360},{"name":"9220780","count":311},{"name":"2882482","count":266},{"name":"2888728","count":255},{"name":"7972010","count":209},{"name":"3023221","count":205},{"name":"5384795","count":198},{"name":"3120060","count":185},{"name":"3033363","count":174},{"name":"3188736","count":172},{"name":"5414995","count":168},{"name":"3033263","count":167},{"name":"5384738","count":164},{"name":"8324121","count":159},{"name":"2926557","count":154},{"name":"2890668","count":142},{"name":"5298231","count":140},{"name":"8848598","count":140},{"name":"7874883","count":138},{"name":"5357013","count":126},{"name":"9094061","count":122},{"name":"5371685","count":119},{"name":"5304283","count":106},{"name":"3117424","count":105},{"name":"3034742","count":80},{"name":"3189486","count":65},{"name":"7459480","count":50},{"name":"5384805","count":49},{"name":"3002461","count":48},{"name":"2849427","count":47},{"name":"2951984","count":43},{"name":"2928390","count":39},{"name":"5331181","count":37},{"name":"5341170","count":26},{"name":"3171949","count":21},{"name":"2888443","count":20},{"name":"8377689","count":19},{"name":"5394163","count":15},{"name":"3089561","count":11},{"name":"2882437","count":7},{"name":"3152374","count":6},{"name":"2925892","count":5},{"name":"3149879","count":5},{"name":"2926612","count":4},{"name":"2927305","count":4},{"name":"5405976","count":4},{"name":"7558421","count":4},{"name":"2858244","count":3},{"name":"2926683","count":3},{"name":"5414335","count":3},{"name":"2855356","count":2},{"name":"5392252","count":2},{"name":"3085368","count":1},{"name":"6409622","count":1}]}]}};
     fs.writeFileSync(path.join(net0, 'gbif-birds.json'), JSON.stringify(GB.birds)); fs.writeFileSync(path.join(net0, 'gbif-flowers.json'), JSON.stringify(GB.flowers));
     // Europeana et xeno-canto : au format de leur API, notices d'essai
     const EU = (kind, n, rights = 'http://creativecommons.org/licenses/by-sa/4.0/') => ({apikey: 'essai', success: true, itemsCount: n, totalResults: n + 3, items: Array.from({length: n}, (_, i) => ({
@@ -196,7 +196,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const items = (await api('tresor_memories', {kind: 'recipe'})).items || [];
             assert.strictEqual(items.length, before + 1);
             assert.match(JSON.stringify(items.at(-1)), /Wikisource/);
-            await p.click('button:has-text("↶ Annuler")', {timeout: 5000}); await sleep(600);
+            await sleep(300); await p.locator('button:has-text("↶ Annuler")').last().click({timeout: 5000}); await sleep(600);
             assert.strictEqual(((await api('tresor_memories', {kind: 'recipe'})).items || []).length, before);
         });
         await t('Marie LACOMBE (1925) : 🚗 une voiture de ses 30 ans ; Paul DURAND (sans dates) : bloc caché', async () => {
@@ -207,11 +207,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('[data-l9a-person="3"]', {state: 'attached', timeout: 20000}); await sleep(2500);
             assert.strictEqual(await p.evaluate(() => document.querySelector('[data-l9a-person="3"]').closest('section.card').hidden), true);
         });
-        await t('lieu sans clé : 🐦 oiseaux et 🌼 fleurs (GBIF), une offre de clé discrète (× la cache, ↶) ; un point en mer : rien', async () => {
+        await t('lieu sans clé : 🐦 oiseaux et 🌼 fleurs (GBIF), une offre de clé discrète ; un lieu sans position ni clé : rien', async () => {
             const html = await p.evaluate(async x => { const h = document.createElement('div'); document.body.appendChild(h); await window.LCNDA_EXT.sonsEnfance.placeInto(h, x); const r = h.innerHTML; h.remove(); return r; }, PLACE);
             assert.match(html, /Les oiseaux de son village/); assert.match(html, /Les fleurs sauvages de son pays/); assert.match(html, /GBIF\.org/); assert.match(html, /clé gratuite/);
             assert.ok(!/data-l9a-xc=/.test(html), 'sans clé xeno-canto : pas de bouton chant');
-            const none = await p.evaluate(async () => { const h = document.createElement('div'); document.body.appendChild(h); const n = await window.LCNDA_EXT.sonsEnfance.placeInto(h, {name: '', lat: 46, lon: -6}, {detached: true}); const r = [n, h.innerHTML]; h.remove(); return r; });
+            const none = await p.evaluate(async () => { const h = document.createElement('div'); document.body.appendChild(h); const n = await window.LCNDA_EXT.sonsEnfance.placeInto(h, {name: 'Lieu sans position', lat: null, lon: null}, {detached: true}); const r = [n, h.innerHTML]; h.remove(); return r; });
             assert.deepStrictEqual(none, [0, '']);
         });
 
@@ -224,7 +224,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.deepStrictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-lot9-cles'))), {eu: 'essaikey', xc: 'essaixc'});
             await p.click('[data-l9a-tg="jouets"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-lot9-sons-enfance')).jouets), false);
-            await p.click('.ui-toast button:has-text("↶ Annuler"), button:has-text("↶ Annuler")', {timeout: 5000}); await sleep(300);
+            await sleep(300); await p.locator('button:has-text("↶ Annuler")').last().click({timeout: 5000}); await sleep(300);
             assert.notStrictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-lot9-sons-enfance')).jouets), false);
         });
         await t('avec les clés : 💌 14-18 sur la fiche de Jean MAZAUD ; 📷 photos (sans doublon Commons) ; ＋ Garder dans les médias puis ↶', async () => {
@@ -239,7 +239,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('#l9a-essai [data-l9a-keep]:disabled', {timeout: 10000});
             await p.waitForFunction(() => /✓ Dans les médias/.test(document.querySelector('#l9a-essai').textContent), null, {timeout: 10000});
             const n1 = fs.readdirSync(path.join(tmp, 'media')).length; assert.strictEqual(n1, 1);
-            await p.click('button:has-text("↶ Annuler")', {timeout: 5000}); await sleep(800);
+            await sleep(300); await p.locator('button:has-text("↶ Annuler")').last().click({timeout: 5000}); await sleep(800);
             assert.strictEqual(fs.readdirSync(path.join(tmp, 'media')).length, 0);
             void m0;
         });

@@ -18,7 +18,7 @@ Ce qui est demandé (chaque étape = une sorte de question) :
               et les pays historiques (Q3024240) de ces continents ou de langue française — pour découper les personnes.
   people    : les personnes (P31 = Q5) de nationalité (P27) d'un de ces États, avec un lieu de naissance (P19) et au moins
               N liens vers les Wikipédias (wikibase:sitelinks) : N = 4 pour les États de langue française, 12 pour les autres (pour tenir sous 15 Mo).
-  details   : pour chaque personne (par paquets de 300) : nom fr/en, nom de famille (P734), naissance (P569, avec la
+  details   : pour chaque personne retenue (par paquets de 400) : nom fr/en, nom de famille (P734), naissance (P569, avec la
               précision), décès (P570), lieu de décès (P20), un métier (P106), et si elle a une page sur fr/en.wikipedia.
   places    : pour chaque lieu de naissance ou de décès (par paquets de 300) : nom fr/en, coordonnées (P625), pays (P17),
               noms officiels (P1448, avec début P580 / fin P582), surnoms (P1449), noms courts (P1813).
@@ -27,8 +27,9 @@ Ce qui est demandé (chaque étape = une sorte de question) :
               et des coordonnées (P625, ou celles du lieu P276).
   oldnames  : les anciens noms officiels (P1448 avec un début ou une fin) des communes et villes (une question par
               sorte de commune : communes de France, de Belgique, de Suisse, d'Italie, villes, villages…).
-  songs     : chansons (Q7366) et singles (Q134556) avec une date de publication (P577), un interprète (P175),
-              le pays (P495) et la langue (P407), au moins 2 liens Wikipédia.
+  songs     : chansons (Q7366), singles (Q134556) et œuvres musicales (Q105543609) avec une date de publication (P577),
+              un interprète (P175 : celui né le plus tôt, l'interprète d'origine), le pays (P495) et la langue (P407),
+              au moins 2 liens Wikipédia ; par décennie.
   write     : les fichiers compacts de l'app, dans assets/data/wikidata/ (gzip) — voir README dans la sortie.
 
 Seulement la bibliothèque standard de Python.
@@ -377,14 +378,18 @@ def step_oldnames(w):
 
 
 def step_songs(w):
+    """Chansons (Q7366), singles (Q134556) et œuvres musicales (Q105543609, la classe des vieilles chansons comme
+    « Parlez-moi d'amour ») avec une date de publication et au moins un interprète ; par décennie (puis par année)."""
     q = '''SELECT ?s (SAMPLE(?lfr) AS ?fr) (SAMPLE(?len) AS ?en) (SAMPLE(?lmul) AS ?mul) (MIN(?pd) AS ?d) (SAMPLE(?sl0) AS ?sl)
-      (SAMPLE(?pfr) AS ?pfr) (SAMPLE(?pen) AS ?pen) (GROUP_CONCAT(DISTINCT STRAFTER(STR(?c), "entity/"); separator=",") AS ?cs)
+      (GROUP_CONCAT(DISTINCT CONCAT(STR(?perf), "|", COALESCE(STR(YEAR(?pb)), ""), "|", COALESCE(?pfr, ?pen, ?pmul, "")); separator="§") AS ?perfs)
+      (GROUP_CONCAT(DISTINCT STRAFTER(STR(?c), "entity/"); separator=",") AS ?cs)
       (GROUP_CONCAT(DISTINCT STRAFTER(STR(?lang), "entity/"); separator=",") AS ?langs) (SAMPLE(?frw) AS ?frw) (SAMPLE(?enw) AS ?enw) WHERE {
-      VALUES ?cls { wd:Q7366 wd:Q134556 }
-      ?s wdt:P31 ?cls ; wdt:P577 ?pd ; wikibase:sitelinks ?sl0 . FILTER(?sl0 >= 2)
+      ?s wdt:P31 wd:CLS ; wdt:P577 ?pd ; wikibase:sitelinks ?sl0 . FILTER(?sl0 >= 2 && RANGE)
       ?s wdt:P175 ?perf .
+      OPTIONAL { ?perf wdt:P569 ?pb }
       OPTIONAL { ?perf rdfs:label ?pfr . FILTER(LANG(?pfr) = "fr") }
       OPTIONAL { ?perf rdfs:label ?pen . FILTER(LANG(?pen) = "en") }
+      OPTIONAL { ?perf rdfs:label ?pmul . FILTER(LANG(?pmul) = "mul") }
       OPTIONAL { ?s wdt:P495 ?c } OPTIONAL { ?s wdt:P407 ?lang }
       OPTIONAL { ?s rdfs:label ?lfr . FILTER(LANG(?lfr) = "fr") }
       OPTIONAL { ?s rdfs:label ?len . FILTER(LANG(?len) = "en") }
@@ -392,18 +397,25 @@ def step_songs(w):
       OPTIONAL { ?frw schema:about ?s ; schema:isPartOf <https://fr.wikipedia.org/> . }
       OPTIONAL { ?enw schema:about ?s ; schema:isPartOf <https://en.wikipedia.org/> . }
     } GROUP BY ?s'''
+    rng = lambda a, b: f'?pd >= "{a}-01-01T00:00:00Z"^^xsd:dateTime && ?pd < "{b}-01-01T00:00:00Z"^^xsd:dateTime'
     rows, seen = [], set()
-    for cls in ('Q7366', 'Q134556'):
-        for dec in range(1850, 2030, 10):  # par décennie : une seule grosse question dépasse le temps permis
-            part = w.ask(q.replace('VALUES ?cls { wd:Q7366 wd:Q134556 }', f'VALUES ?cls {{ wd:{cls} }}')
-                         .replace('FILTER(?sl0 >= 2)', f'FILTER(?sl0 >= 2 && ?pd >= "{dec}-01-01T00:00:00Z"^^xsd:dateTime && ?pd < "{dec + 10}-01-01T00:00:00Z"^^xsd:dateTime)'),
-                         f'songs-{cls}-{dec}')
-            if part is None:
-                log(f'  ⚠ chansons {cls} {dec} : trop long, abandonné')
-                continue
+    for cls in ('Q7366', 'Q134556', 'Q105543609'):
+        for dec in range(1850, 2030, 10):
+            part = w.ask(q.replace('CLS', cls).replace('RANGE', rng(dec, dec + 10)), f'song2-{cls}-{dec}')
+            if part is None:  # trop gros : année par année
+                part = []
+                for y in range(dec, dec + 10):
+                    p1 = w.ask(q.replace('CLS', cls).replace('RANGE', rng(y, y + 1)), f'song2-{cls}-{y}')
+                    if p1 is None:
+                        log(f'  ⚠ chansons {cls} {y} : trop long, abandonné')
+                    part += p1 or []
             for r in part:
                 if r['s'] not in seen:
                     seen.add(r['s'])
+                    # l'interprète d'origine : celui qui est né le plus tôt (les reprises viennent après)
+                    perfs = [x.split('|') for x in (r.get('perfs') or '').split('§') if x.count('|') == 2]
+                    perfs = [(int(y) if y.lstrip('-').isdigit() else 9999, lab) for _, y, lab in perfs if lab and not re.fullmatch(r'Q\d+', lab)]
+                    r['pfr'] = min(perfs)[1] if perfs else ''
                     rows.append(r)
     log(f'  chansons : {len(rows)}')
     return rows

@@ -218,7 +218,8 @@ def personnages(noms, out):
             continue
         work = r.get('work', '').rsplit('/', 1)[-1] if r.get('work') else ''
         auth = (r.get('auth') or r.get('cre') or '').rsplit('/', 1)[-1]
-        y = int(r['wdate'][:5].lstrip('+')) if r.get('wdate') and re.match(r'^[+-]?\d{4}', r['wdate'].lstrip('+')) else None
+        ym = re.match(r'^\+?(-?\d{1,4})-', r.get('wdate') or '')
+        y = int(ym.group(1)) if ym else None
         cur = by.setdefault((q, fn), {'q': q, 'fn': fn, 'ch': ch, 'w': '', 'a': '', 'y': None})
         wl = label(L, work) if work else ''
         al = label(L, auth) if auth else ''

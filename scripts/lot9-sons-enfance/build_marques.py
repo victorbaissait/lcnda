@@ -14,7 +14,7 @@ from common import jget, write, today
 # [nom cherché, article Wikipédia (fr), genre]   genre : aliment, boisson, maison, magasin, jouet, hygiene, voiture, objet, deux-roues
 ITEMS = [
     ['Banania', 'Banania', 'aliment'], ['LU', 'LU (entreprise)', 'aliment'], ['Petit Beurre', 'Petit-beurre', 'aliment'], ['La Vache qui rit', 'La vache qui rit', 'aliment'],
-    ['Poulain', 'Chocolat Poulain', 'aliment'], ['Menier', 'Chocolat Menier', 'aliment'], ['Lustucru', 'Lustucru', 'aliment'], ['Panzani', 'Panzani', 'aliment'],
+    ['Poulain', 'Chocolat Poulain', 'aliment'], ['Menier', 'Chocolat Menier', 'aliment'], ['Panzani', 'Panzani', 'aliment'],
     ['Amora', 'Amora', 'aliment'], ['Maille', 'Maille (entreprise)', 'aliment'], ['Bonduelle', 'Bonduelle', 'aliment'], ['Viandox', 'Viandox', 'aliment'],
     ['Babybel', 'Babybel', 'aliment'], ['Boursin', 'Boursin', 'aliment'], ['Carambar', 'Carambar', 'aliment'], ['Malabar', 'Malabar (confiserie)', 'aliment'],
     ['La Pie qui chante', 'La Pie qui chante', 'aliment'], ['Blédina', 'Blédina', 'aliment'], ['Phosphatine', 'Phosphatine', 'aliment'], ['Benenuts', 'Bénénuts', 'aliment'],
@@ -103,7 +103,7 @@ for name, title, kind in ITEMS:
                 m = commons_meta(cl[0]['mainsnak']['datavalue']['value'])
                 if FREE.search(m['lic'] or '') and m['thumb']: img = m; break
             except Exception as e: print('! image', name, e)
-    lab = (ent.get('labels', {}).get('fr') or {}).get('value') or name
+    lab = re.sub(r' \(.*\)$', '', name)  # le nom courant choisi ici (« Casino », pas « Plesio »)
     r = {'n': lab, 'k': kind, 'y': y, 'p': pr, 'q': w['q'], 'wp': 'https://fr.wikipedia.org/wiki/' + urllib.parse.quote(w['title'].replace(' ', '_')), 'sentence': sent}
     if img: r['img'] = img
     rows.append(r)
