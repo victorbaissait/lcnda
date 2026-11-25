@@ -339,8 +339,9 @@ function pcel_step_bfs(PDO $pdo, array &$job, bool &$net): void
             $st['frontier'] = $next;
         }
         if ($net) { break; }
-        $batch = array_splice($st['frontier'], 0, PC_BATCH);
-        $E = pcel_wd_entities($pdo, $batch, $net);
+        $batch = array_slice($st['frontier'], 0, PC_BATCH);
+        $E = pcel_wd_entities($pdo, $batch, $net); // hors ligne : une exception, et ces personnes restent à lire (« Reprendre »)
+        array_splice($st['frontier'], 0, count($batch));
         if ($net) { $st['counts']['net']++; }
         foreach ($batch as $q) {
             $e = $E[$q] ?? null;
@@ -590,9 +591,9 @@ function pcel_wt_set(PDO $pdo, array $d): array
     $w = str_replace(' ', '_', $w);
     if (!person_exists($pdo, $pid)) { throw new LcndaBadInput(i18n_t('Fiche introuvable.')); }
     $prev = array_values(array_filter(pcel_wt_ids($pdo, $pid), static fn($x) => $x['from'] === 'fiche'))[0]['wt'] ?? '';
+    if ($w !== '' && !preg_match('/^[\p{L}\'_.-]{1,60}-\d{1,9}$/u', $w)) { throw new LcndaBadInput(i18n_t('Un identifiant WikiTree ressemble à « Hugo-215 » (le nom, un tiret, un numéro).')); }
     $pdo->prepare("DELETE FROM pcel_links WHERE person_id=? AND kind='wikitree'")->execute([$pid]);
     if ($w !== '') {
-        if (!preg_match('/^[\p{L}\'_.-]{1,60}-\d{1,9}$/u', $w)) { throw new LcndaBadInput(i18n_t('Un identifiant WikiTree ressemble à « Hugo-215 » (le nom, un tiret, un numéro).')); }
         $pdo->prepare("INSERT INTO pcel_links(person_id, kind, ext_id, status) VALUES(?,'wikitree',?,'ok')")->execute([$pid, $w]);
     }
     return ['ok' => true, 'wt' => $w, 'before' => $prev];
