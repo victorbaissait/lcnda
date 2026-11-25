@@ -1569,6 +1569,7 @@
  },
  "{n} au registre": "w rejestrze: {n}",
  "{n} aujourd’hui": "{n} dzisiaj",
+ "{n} autre": "{n} inna",
  "{n} autre est cadré au centre : coche-le seulement s’il va.": {
   "one": "Kadr na środku – jeszcze {n}: zaznacz, tylko jeśli pasuje.",
   "few": "Kadr na środku – jeszcze {n}: zaznacz je, tylko jeśli pasują.",

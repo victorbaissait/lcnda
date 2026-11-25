@@ -1565,6 +1565,7 @@
  },
  "{n} au registre": "{n} nel registro",
  "{n} aujourd’hui": "{n} oggi",
+ "{n} autre": "altri {n}",
  "{n} autre est cadré au centre : coche-le seulement s’il va.": {
   "one": "{n} altro è inquadrato al centro: spuntalo solo se va.",
   "other": "{n} altri sono inquadrati al centro: spuntali solo se vanno.",

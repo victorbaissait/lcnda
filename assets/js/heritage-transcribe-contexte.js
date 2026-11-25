@@ -134,7 +134,7 @@
             host.innerHTML = `<span class="h-tx-vlab">🕘 ${esc(i18n('Versions'))}</span>
                 <button type="button" class="h-tx-chip2${open ? '' : ' is-on'}" data-tx-v="me" aria-pressed="${!open}">✍ ${esc(i18n('Ma version'))} <small>${esc(i18n('(actuelle)'))}</small></button>
                 ${shown.map(v => { const [ic, n, sm, kind] = chipOf(v); return `<button type="button" class="h-tx-chip2${kind === 'read' ? ' is-ai' : ''}${open?.id === v.id ? ' is-on' : ''}" data-tx-v="${v.id}" aria-pressed="${open?.id === v.id}" title="${esc(metaLines(v).join('\n'))}">${ic} <span data-i18n-off>${esc(n)}</span>${sm ? ` <small>· ${esc(sm)}</small>` : ''}</button>`; }).join('')}
-                ${more > 0 ? `<button type="button" class="h-tx-chip2" data-tx-vmore title="${esc(i18n('Toutes les versions, y compris les automatiques'))}">⋯ ${esc(i18n('{n} autres', {n: more}))}</button>` : ''}
+                ${more > 0 ? `<button type="button" class="h-tx-chip2" data-tx-vmore title="${esc(i18n('Toutes les versions, y compris les automatiques'))}">⋯ ${esc(i18n(more > 1 ? '{n} autres' : '{n} autre', {n: more}))}</button>` : ''}
                 <span class="spacer"></span><button type="button" class="button small secondary" data-tx-vdup title="${esc(i18n('Garder une copie de la version affichée, par exemple ce que l’IA a lu avant de corriger'))}">⧉ ${esc(i18n('Dupliquer'))}</button>`;
         };
         async function show(v) {

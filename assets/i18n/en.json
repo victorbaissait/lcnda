@@ -1561,6 +1561,7 @@
  },
  "{n} au registre": "{n} in the register",
  "{n} aujourd’hui": "{n} today",
+ "{n} autre": "{n} more",
  "{n} autre est cadré au centre : coche-le seulement s’il va.": {
   "one": "{n} other is framed in the centre: tick it only if it’s right.",
   "other": "{n} others are framed in the centre: tick them only if they’re right."
