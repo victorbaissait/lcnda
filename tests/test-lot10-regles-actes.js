@@ -162,6 +162,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual((await run('l10r_coutume', {id: 0, name: 'Bruxelles', country: 'Belgique', latitude: 50.85, longitude: 4.35})).ok, false);
         });
         await t('📖 Aide à la lecture : onglets ✂️ « Joes » → Ioannes (page de Cappelli), 📅 Sainte-Blandine 1750, 📚 « bru » (en ligne, enregistré), 🖋️ 1760', async () => {
+            try {
             await p.evaluate(() => window.LCNDA_EXT.readingAid.open({tab: 'l10r_cappelli', q: 'Joes'}));
             await p.waitForFunction(() => /Ioannes/.test(document.querySelector('.la-dialog [data-la-body]')?.textContent || ''), null, {timeout: 10000});
             assert.ok(await p.$('.la-dialog [data-la-tab="l10r_cappelli"].is-active'));
@@ -177,10 +178,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.click('.la-dialog [data-la-tab="l10r_ecritures"]'); await p.fill('.la-dialog [data-l10r-year]', '1760'); await p.dispatchEvent('.la-dialog [data-l10r-year]', 'change');
             await p.waitForFunction(() => /écriture ronde/.test(document.querySelector('.la-dialog [data-la-body]')?.textContent || ''), null, {timeout: 10000});
             await p.click('.la-dialog [data-la-tab="dict"]'); await p.waitForSelector('.la-dialog .la-dict, .la-dialog .empty-line', {timeout: 5000});
-            await p.keyboard.press('Escape');
+            } finally { await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); }
         });
         await t('date d’un événement : « le jour de la Sainte-Blandine 1750 » → une proposition de date ; Saint-Martin : le calcul habituel', async () => {
-            await p.evaluate(() => { const f = document.createElement('form'); f.id = 'event-form'; f.innerHTML = '<label><input name="date_text"></label><textarea name="description"></textarea>'; document.body.appendChild(f); });
+            await p.evaluate(() => { document.querySelectorAll('#event-form').forEach(x => { x.id = 'event-form-off'; }); const f = document.createElement('form'); f.id = 'event-form'; f.innerHTML = '<label><input name="date_text"></label><textarea name="description"></textarea>'; document.body.appendChild(f); });
             await p.fill('#event-form [name=date_text]', 'le jour de la Sainte-Blandine 1750');
             await p.waitForSelector('#event-form .l10r-feast-hint', {timeout: 5000});
             assert.match(await p.textContent('#event-form .l10r-feast-hint'), /mardi 2 juin 1750/);
@@ -188,7 +189,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual(await p.inputValue('#event-form [name=date_text]'), '2 juin 1750');
             await p.fill('#event-form [name=date_text]', 'le jour de la Saint-Martin 1702'); await sleep(300);
             assert.strictEqual(await p.$('#event-form .l10r-feast-hint'), null, 'Saint-Martin : la proposition habituelle suffit');
-            await p.evaluate(() => document.getElementById('event-form').remove());
+            await p.evaluate(() => { document.getElementById('event-form').remove(); document.querySelectorAll('#event-form-off').forEach(x => { x.id = 'event-form'; }); });
         });
         await t('LCNDA_EXT.dataSources, dataLists, mapLayerSources : à la demande ; listes avec source et lien par ligne', async () => {
             const ids = await p.evaluate(() => (window.LCNDA_EXT.dataSources || []).filter(d => /^l10r_/.test(d.id)).map(d => d.id));

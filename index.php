@@ -88,6 +88,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/lot8-soldats-noms.css?v=1">
     <link rel="stylesheet" href="assets/css/lot9-monde-coutumes.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-terre-gens.css?v=1">
+    <link rel="stylesheet" href="assets/css/lot10-objets-traces.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-ciel-metier.css?v=1">
     <link rel="stylesheet" href="assets/css/pays-memoire.css?v=1">
@@ -1659,13 +1660,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=1" defer></script>
 <script src="assets/js/heritage-terroir.js?v=1" defer></script>
 <script src="assets/js/heritage-terre-mots.js?v=2" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=4" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=5" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
 <script src="assets/js/heritage-chateaux-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-lot8-monde-village.js?v=1" defer></script>
 <script src="assets/js/heritage-lot10-voir-village.js?v=1" defer></script>
+<script src="assets/js/heritage-lot10-objets-traces.js?v=1" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=1" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>
