@@ -990,6 +990,7 @@ function gedimport_real_media_type(string $path): bool
 
 function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = null, bool $fromDisk = false): array
 {
+    $hadStart = (int) $pdo->query('SELECT COUNT(*) FROM persons WHERE is_start=1')->fetchColumn();
     $content = file_get_contents($path);
     if ($content === false) { throw new RuntimeException('Lecture du fichier GEDCOM impossible'); }
     $anselLatin1 = !mb_check_encoding($content, 'UTF-8') && gedcom_detect_encoding($content) === GEDCOM_ANSEL_LATIN1;
@@ -1485,8 +1486,71 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $stats['media_links'] += count($links); $stats['notes']++;
     }
     $pdo->exec("UPDATE persons SET living_status='deceased' WHERE living_status='unknown' AND id IN (SELECT e.person_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('DEAT','BURI','CREM'))");
+    // personne de départ (Sosa 1) : si la base n'en avait pas, celle que le fichier désigne, sinon celle qui a le plus d'ancêtres
+    if ($hadStart === 0 && ($pick = gedimport_pick_start($records, $byXref, $personMap))) {
+        $pdo->prepare('UPDATE persons SET is_start=CASE WHEN id=? THEN 1 ELSE 0 END')->execute([$pick['pid']]);
+        $stats['start_person'] = ['id' => $pick['pid'], 'name' => $firstName[$pick['xref']] ?? '', 'why' => $pick['why']];
+    }
     gedimport_rebuild_search($pdo);
     return ['format' => 'gedcom'] + $stats;
+}
+
+/**
+ * La personne de départ (Sosa 1) d'un fichier GEDCOM : 1) désignée dans l'en-tête (_ROOT, _HOME, _HME, _MASTER, _ROOTPERSON,
+ * _PRINCIPAL, _DECUJUS) ; 2) la fiche dont le numéro Sosa vaut 1 (SOSA, _SOSA, _SOSA_NUMBER, _SOSANUM, _SOSA_DAG,
+ * _NUMSOSA) ; 3) sinon, parmi les fiches sans enfant, celle qui a le plus d'ancêtres dans le fichier (à égalité : la plus
+ * jeune, puis la première du fichier). Geneanet, par exemple, met le père avant la personne : prendre « la première
+ * fiche » faisait du père le Sosa 1.
+ */
+function gedimport_pick_start(array $records, array $byXref, array $personMap): ?array
+{
+    $ok = static fn(string $x) => $x !== '' && isset($personMap[$x]);
+    foreach ($records as $rec) {
+        if ($rec->tag !== 'HEAD') { continue; }
+        foreach (['_ROOT', '_HOME', '_HME', '_MASTER', '_ROOTPERSON', '_PRINCIPAL', '_DECUJUS', '_START'] as $t) {
+            $n = gedimport_child($rec, $t);
+            $x = $n ? trim($n->value, '@ ') : '';
+            if ($ok($x)) { return ['xref' => $x, 'pid' => $personMap[$x], 'why' => 'header']; }
+        }
+    }
+    foreach ($records as $rec) {
+        if ($rec->tag !== 'INDI' || !$ok((string) $rec->xref)) { continue; }
+        foreach (['SOSA', '_SOSA', '_SOSA_NUMBER', '_SOSANUM', '_SOSA_DAG', '_NUMSOSA'] as $t) {
+            $n = gedimport_child($rec, $t);
+            if ($n && preg_match('/^\s*1\s*$/', (string) $n->value)) { return ['xref' => $rec->xref, 'pid' => $personMap[$rec->xref], 'why' => 'sosa']; }
+        }
+    }
+    // parents d'une fiche (par ses FAMC), et fiches qui ont des enfants (par leurs FAMS avec CHIL)
+    $parents = []; $hasChild = [];
+    foreach ($records as $rec) {
+        if ($rec->tag !== 'FAM') { continue; }
+        $hw = [];
+        foreach (['HUSB', 'WIFE'] as $t) { foreach (gedimport_children($rec, $t) as $n) { $x = trim($n->value, '@ '); if ($ok($x)) { $hw[] = $x; } } }
+        $kids = array_filter(array_map(static fn($n) => trim($n->value, '@ '), gedimport_children($rec, 'CHIL')), $ok);
+        foreach ($kids as $k) { $parents[$k] = array_merge($parents[$k] ?? [], $hw); }
+        if ($kids) { foreach ($hw as $x) { $hasChild[$x] = true; } }
+    }
+    foreach ($records as $rec) {
+        if ($rec->tag !== 'INDI' || !$ok((string) $rec->xref)) { continue; }
+        foreach (gedimport_children($rec, 'FAMC') as $f) {
+            $fam = $byXref[trim($f->value, '@ ')] ?? null;
+            if (!$fam) { continue; }
+            foreach (['HUSB', 'WIFE'] as $t) { foreach (gedimport_children($fam, $t) as $n) { $x = trim($n->value, '@ '); if ($ok($x) && !in_array($x, $parents[$rec->xref] ?? [], true)) { $parents[$rec->xref][] = $x; } } }
+        }
+    }
+    $birthYear = static function (stdClass $rec): int {
+        $b = gedimport_child($rec, 'BIRT'); $d = $b ? gedimport_child($b, 'DATE') : null;
+        return $d && preg_match('/(\d{3,4})\s*$/', (string) $d->value, $m) ? (int) $m[1] : 0;
+    };
+    $best = null;
+    foreach ($records as $i => $rec) {
+        if ($rec->tag !== 'INDI' || !$ok((string) $rec->xref) || isset($hasChild[$rec->xref])) { continue; }
+        $seen = []; $todo = $parents[$rec->xref] ?? [];
+        while ($todo && count($seen) < 20000) { $x = array_pop($todo); if (isset($seen[$x])) { continue; } $seen[$x] = true; foreach ($parents[$x] ?? [] as $y) { $todo[] = $y; } }
+        $key = [count($seen), $birthYear($rec), -$i];
+        if (!$best || $key > $best['key']) { $best = ['key' => $key, 'xref' => $rec->xref]; }
+    }
+    return $best && $best['key'][0] > 0 ? ['xref' => $best['xref'], 'pid' => $personMap[$best['xref']], 'why' => 'ancestors'] : null;
 }
 
 /**

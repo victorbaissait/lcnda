@@ -286,18 +286,18 @@
         return row('🎭', `${lead}${near} ${refLinks(x)}`, SRC.spectacles(), more(li ? `<p class="muted">${esc(T('Créés aussi en {y} :', {y: String(res.y)}))}</p><ul class="hist-ul">${li}</ul>` : '', res.list.length > 1 ? res.list.length - 1 : null));
     }
     const stageName = s => `${esc(s.a)}–${esc(s.b)}`;
-    const stageLi = x => `<li><b>${esc(dateTxt(x.s.d, x.s.y))}</b> : ${esc(T('étape {a}', {a: ''}))}${stageName(x.s)}${x.s.km ? ` <small class="muted">${esc(T('{n} km', {n: String(x.s.km)}))}</small>` : ''} <small class="muted">· ${esc(x.hit.includes('depart') && x.hit.includes('arrivee') ? T('départ et arrivée') : x.hit.includes('depart') ? T('départ') : T('arrivée'))}</small> ${link(x.s.edwiki ? wpUrl(x.s.edwiki) : wdUrl(x.s.q), T('↗ source'))}</li>`;
+    const stageLi = x => `<li><b>${esc(dateTxt(x.s.d, x.s.y))}</b> : ${esc(T('étape'))} ${stageName(x.s)}${x.s.km ? ` <small class="muted">${esc(T('{n} km', {n: String(x.s.km)}))}</small>` : ''} <small class="muted">· ${esc(x.hit.includes('depart') && x.hit.includes('arrivee') ? T('départ et arrivée') : x.hit.includes('depart') ? T('départ') : T('arrivée'))}</small> ${link(x.s.edwiki ? wpUrl(x.s.edwiki) : wdUrl(x.s.q), T('↗ source'))}</li>`;
     function tourHtml(list, life) {
         if (!list.length) return '';
         const x = list[0], P = life.person;
         let lead = T('Le Tour de France est passé à {p} en {y} (étape {s})', {p: esc(x.place), y: String(x.s.y), s: stageName(x.s)});
-        lead += x.lived ? ` ${esc(T('quand {he} y vivait', {he: he(P)}))}` : '';
-        lead += x.age !== null && x.age >= 0 ? ` ${esc(T('— {He} avait {a}.', {He: He(P), a: ageTxt(x.age)}))}` : '.';
+        if (x.lived) lead += esc(T(', quand {he} y vivait', {he: he(P)}));
+        lead += x.age !== null && x.age >= 0 ? esc(T(' : {he} avait {a}.', {he: he(P), a: ageTxt(x.age)})) : '.';
         const li = list.slice(1, 20).map(stageLi).join('');
         return row('🚲', `${lead} ${link(x.s.edwiki ? wpUrl(x.s.edwiki) : wdUrl(x.s.q), T('↗ source'))}`, SRC.tour(), more(li ? `<ul class="hist-ul">${li}</ul>` : '', list.length > 1 ? list.length - 1 : null));
     }
     const visitorsTxt = n => (n >= 1e6 ? T('{n} millions de visiteurs', {n: String(Math.round(n / 1e5) / 10).replace('.', ',')}) : T('{n} visiteurs', {n: nf(n)}));
-    const expoShort = e => (/^Exposition universelle de (\d{4})$/.test(e.n) ? T('l’Exposition universelle de {y}', {y: String(e.y)}) : T('l’{n}', {n: e.n.replace(/^Exposition/, 'Exposition')}).replace('l’Exposition', 'l’Exposition'));
+    const expoShort = e => (/^Exposition/.test(e.n) ? T('l’{n}', {n: e.n}) : e.n);
     const expoQuote = e => [e.visitors_sentence, e.highlight].filter(Boolean).map(s => `<blockquote class="l8c-quote">« ${esc(s)} »</blockquote>`).join('');
     function exposHtml(list, life) {
         if (!list.length) return '';
@@ -307,13 +307,12 @@
         const det = `${expoQuote(e)}${list.length > 1 ? `<p class="muted">${esc(T('Les autres Expositions de sa vie :'))}</p><ul class="hist-ul">${list.slice(1).map(y => `<li>${esc(y.e.n)} <small class="muted">${esc([y.e.city, ageTxt(y.age), y.e.visitors ? visitorsTxt(y.e.visitors) : ''].filter(Boolean).join(' · '))}</small> ${srcLink(y.e.url)}</li>`).join('')}</ul>` : ''}`;
         return row('🎡', `${lead} ${srcLink(e.url)}`, SRC.expos(e.url), more(det, list.length > 1 ? list.length - 1 : null));
     }
-    const evTitle = x => esc(x.ev.title);
-    const evWhat = x => (x.w === 'debut' ? T('début : {t}', {t: x.ev.title}) : x.w === 'fin' ? T('fin : {t}', {t: x.ev.title}) : x.ev.title);
+    const evWhat = x => (x.w === 'debut' ? T('{t} (le début)', {t: x.ev.title}) : x.w === 'fin' ? T('{t} (la fin)', {t: x.ev.title}) : x.ev.title);
     const coincLine = (c, P) => {
         const d = dateTxt(c.x.d), w = esc(evWhat(c.x));
-        if (c.kind === 'naissance') return T('{He} est né{e} le {d}, le jour même de {w}.', {He: He(P), e: P?.gender === 'female' ? 'e' : '', d, w: `<b>${w}</b>`});
-        if (c.kind === 'mariage') return T('{He} s’est marié{e} le {d}, le jour de {w}.', {He: He(P), e: P?.gender === 'female' ? 'e' : '', d, w: `<b>${w}</b>`});
-        if (c.kind === 'deces') return T('{He} est mort{e} le {d}, le jour de {w}.', {He: He(P), e: P?.gender === 'female' ? 'e' : '', d, w: `<b>${w}</b>`});
+        if (c.kind === 'naissance') return T('{He} est né{e} le {d} ; ce jour-là : {w}.', {He: He(P), e: P?.gender === 'female' ? 'e' : '', d, w: `<b>${w}</b>`});
+        if (c.kind === 'mariage') return T('{He} s’est marié{e} le {d} ; ce jour-là : {w}.', {He: He(P), e: P?.gender === 'female' ? 'e' : '', d, w: `<b>${w}</b>`});
+        if (c.kind === 'deces') return T('{He} est mort{e} le {d} ; ce jour-là : {w}.', {He: He(P), e: P?.gender === 'female' ? 'e' : '', d, w: `<b>${w}</b>`});
         return T('{He} a eu {n} le {d} : {w}.', {He: He(P), n: ageTxt(c.n), d, w: `<b>${w}</b>`});
     };
     const coincSrc = x => `${link(x.ev.url, T('↗ Wikipédia'))} ${link(wdUrl(x.q), T('↗ Wikidata'))}`;
@@ -324,15 +323,18 @@
         return row('🎂', `${coincLine(top, P)} ${coincSrc(top.x)}`, SRC.dates(), more(`${li ? `<ul class="hist-ul">${li}</ul>` : ''}<small class="muted hist-hyp">${esc(T('Le jour de l’événement vient de Wikidata (la date écrite sur l’élément de l’article de Wikipédia) ; ses dates viennent de sa fiche. Un hasard, rien de plus !'))}</small>`, list.length > 1 ? list.length - 1 : null));
     }
     const yrs = (a, z) => (a !== null && a !== undefined && z !== null && z !== undefined ? `${a}–${z}` : a !== null && a !== undefined ? T('dès {y}', {y: String(a)}) : z !== null && z !== undefined ? T('jusqu’en {y}', {y: String(z)}) : '');
+    const deOf = n => (/^[aeiouyàâéèêîôûh]/i.test(n) ? `d’${n}` : /^le /i.test(n) ? `du ${n.slice(3)}` : /^les /i.test(n) ? `des ${n.slice(4)}` : `de ${n}`);
+    /** « comte de Coligny » : le titre, et le lieu quand le titre est un seul mot (« baron ») */
+    const titleTxt = r => (r.title && r.of && !/\s/.test(r.title.trim()) ? `${r.title} ${deOf(r.of)}` : r.title || '');
     const lordWhen = r => (r.s !== null || r.e !== null ? yrs(r.s, r.e) : T('vie : {v}', {v: yrs(r.b, r.d)}));
-    const lordLi = r => `<li><b>${esc(r.n)}</b>, ${esc(r.title || '')}${r.of && fold(r.of) !== fold(r.commune) ? ` <small class="muted">(${esc(r.of)})</small>` : ''} <small class="muted">${esc(lordWhen(r))}</small> ${refLinks(r)}</li>`;
+    const lordLi = r => `<li><b>${esc(r.n)}</b>, ${esc(titleTxt(r))} <small class="muted">${esc(lordWhen(r))}</small> ${refLinks(r)}</li>`;
     const ownerLi = o => `<li><b>${esc(o.name)}</b>, ${esc(T('propriétaire de {c}', {c: o.castle}))} <small class="muted">${esc(yrs(o.from, o.to))}</small> ${link(wdUrl(o.cq), T('↗ Wikidata'))}</li>`;
     function lordsHtml(list, life) {
         if (!list.length) return '';
         const P = life.person, x = list[0];
         let lead;
-        if (x.at) lead = x.at.exact ? T('En {y}, à {p}, {he} vivait sous {n}, {t}.', {y: String(x.y), p: esc(x.place), he: he(P), n: `<b>${esc(x.at.r.n)}</b>`, t: esc(x.at.r.title)})
-            : T('À {p}, le dernier seigneur connu avant {y} : {n}, {t} ({w}).', {p: esc(x.place), y: String(x.y), n: `<b>${esc(x.at.r.n)}</b>`, t: esc(x.at.r.title), w: esc(lordWhen(x.at.r))});
+        if (x.at) lead = x.at.exact ? T('En {y}, à {p}, {he} vivait sous {n}, {t}.', {y: String(x.y), p: esc(x.place), he: he(P), n: `<b>${esc(x.at.r.n)}</b>`, t: esc(titleTxt(x.at.r))})
+            : T('À {p}, le dernier seigneur connu avant {y} : {n}, {t} ({w}).', {p: esc(x.place), y: String(x.y), n: `<b>${esc(x.at.r.n)}</b>`, t: esc(titleTxt(x.at.r)), w: esc(lordWhen(x.at.r))});
         else lead = T('En {y}, à {p}, {c} appartenait à {n}.', {y: String(x.y), p: esc(x.place), c: esc(x.own[0].castle), n: `<b>${esc(x.own[0].name)}</b>`});
         const det = list.map(z => `<p><b>${esc(z.place)}</b></p><ul class="hist-ul">${z.list.map(lordLi).join('')}${(z.own || []).map(ownerLi).join('')}</ul>`).join('')
             + `<small class="muted hist-hyp">${esc(T('Les titres et leurs dates viennent de Wikidata ; quand le titre n’a pas de dates, ce sont celles de la vie du seigneur. Beaucoup de seigneurs de village n’y sont pas : les terriers et les aveux sont aux Archives départementales (série E).'))}</small>`;
@@ -413,7 +415,7 @@
             return row('⚽', `${lead} ${refLinks(top)}`, SRC.clubs(), more(list.length > 1 ? `<ul class="hist-ul">${list.slice(0, 40).map(clubLi).join('')}</ul>` : '', list.length > 1 ? list.length : null));
         }
         if (kind === 'tour') {
-            const list = tourAt(rows, place).filter(x => !opts.years || (x.s.y >= opts.years.from - 30 && x.s.y <= opts.years.to + 30) || true); if (!list.length) return '';
+            const list = tourAt(rows, place); if (!list.length) return '';
             const first = list[0], last = list[list.length - 1];
             const lead = list.length > 1 ? T('Le Tour de France est passé ici {n} fois : la première en {y} (étape {s}), la dernière en {z}.', {n: String(list.length), y: String(first.s.y), s: stageName(first.s), z: String(last.s.y)})
                 : T('Le Tour de France est passé ici en {y} (étape {s}).', {y: String(first.s.y), s: stageName(first.s)});
@@ -433,8 +435,8 @@
             const old = own.filter(o => (o.from ?? o.to ?? 9999) <= 1789);
             if (!list.length && !old.length) return '';
             const r = list.length ? lordAt(list, 1780) : null;
-            const lead = r?.exact ? T('En 1780, le seigneur du lieu : {n}, {t}.', {n: `<b>${esc(r.r.n)}</b>`, t: esc(r.r.title)})
-                : list.length ? T('{n} seigneurs connus (Wikidata). Le premier : {s}, {t} ({w}).', {n: String(list.length), s: `<b>${esc(list[0].n)}</b>`, t: esc(list[0].title), w: esc(lordWhen(list[0]))})
+            const lead = r?.exact ? T('En 1780, le seigneur du lieu : {n}, {t}.', {n: `<b>${esc(r.r.n)}</b>`, t: esc(titleTxt(r.r))})
+                : list.length ? T('{n} seigneurs connus (Wikidata). Le premier : {s}, {t} ({w}).', {n: String(list.length), s: `<b>${esc(list[0].n)}</b>`, t: esc(titleTxt(list[0])), w: esc(lordWhen(list[0]))})
                 : T('{c} : {n} propriétaires connus avant la Révolution.', {c: esc(old[0].castle), n: String(old.length)});
             return row('👑', `${lead} ${list.length ? refLinks((r?.r) || list[0]) : link(wdUrl(old[0].cq), T('↗ Wikidata'))}`, SRC.seigneurs(), more(`<ul class="hist-ul">${list.map(lordLi).join('')}${old.map(ownerLi).join('')}</ul>`, list.length + old.length));
         }
@@ -521,7 +523,7 @@
             fields: [{key: 'name', label: T('Événement'), type: 'text'}, {key: 'date', label: T('Date'), type: 'date'}, {key: 'year', label: T('Année'), type: 'year'}, {key: 'day', label: T('Jour'), type: 'text'}, {key: 'cat', label: T('Sorte'), type: 'enum'}, {key: 'src', label: T('Source'), type: 'url'}, {key: 'wd', label: T('Wikidata'), type: 'url'}],
             period: x => [x.year, x.year]},
         {id: 'l8c_seigneurs', icon: '👑', label: T('Seigneurs des communes de France (avant 1800)'), group: 'Le lieu', source: SRC_TXT.seigneurs, sourceUrl: SRC_URL.seigneurs, enabled: () => on('seigneurs'),
-            load: async () => (await rowsOf('seigneurs')).map(r => ({...r, name: r.n, from: lordSpan(r)[0], to: lordSpan(r)[1], src: srcOf(r)})),
+            load: async () => (await rowsOf('seigneurs')).map(r => ({...r, name: r.n, title: titleTxt(r), from: lordSpan(r)[0], to: lordSpan(r)[1], src: srcOf(r)})),
             fields: [{key: 'name', label: T('Seigneur'), type: 'text'}, {key: 'title', label: T('Titre'), type: 'text'}, {key: 'commune', label: T('Commune'), type: 'place'}, {key: 'from', label: T('De'), type: 'year'}, {key: 'to', label: T('À'), type: 'year'}, {key: 'src', label: T('Source'), type: 'url'}],
             period: r => lordSpan(r)},
         {id: 'l8c_eglises', icon: '⛪', label: T('Églises, chapelles, abbayes disparues'), group: 'Le lieu', source: SRC_TXT.eglises, sourceUrl: SRC_URL.eglises, enabled: () => on('eglises'),
@@ -581,7 +583,7 @@
     /** les seigneurs connus d'une commune (Wikidata) et les propriétaires de ses châteaux : [{name, title, from, to, wikidata, wikipedia, kind}] */
     async function lordsOf(insee) {
         const ins = String(insee), list = lordsOfInsee(await rowsOf('seigneurs'), ins), own = (await ownersByInsee([ins]))[ins] || [];
-        return [...list.map(r => ({name: r.n, title: r.title, from: lordSpan(r)[0], to: lordSpan(r)[1], datesOf: r.s !== null || r.e !== null ? 'titre' : 'vie', wikidata: wdUrl(r.q), wikipedia: r.frwiki ? wpUrl(r.frwiki) : '', kind: 'seigneur'})),
+        return [...list.map(r => ({name: r.n, title: titleTxt(r), from: lordSpan(r)[0], to: lordSpan(r)[1], datesOf: r.s !== null || r.e !== null ? 'titre' : 'vie', wikidata: wdUrl(r.q), wikipedia: r.frwiki ? wpUrl(r.frwiki) : '', kind: 'seigneur'})),
             ...own.map(o => ({name: o.name, title: T('propriétaire de {c}', {c: o.castle}), from: o.from, to: o.to, datesOf: 'titre', wikidata: wdUrl(o.q || o.cq), wikipedia: '', kind: 'proprietaire', castle: o.castleItem}))];
     }
 

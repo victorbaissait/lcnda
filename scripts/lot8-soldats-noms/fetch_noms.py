@@ -12,17 +12,21 @@ import l8b_net as N
 CLASSES = ['Q15632617', 'Q3658341', 'Q95074', 'Q15773347', 'Q15711870', 'Q17624054']
 LANG = 'SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en,mul,it,es,de". }'
 
+RANGES = [(0, 1000000), (1000000, 10000000), (10000000, 30000000), (30000000, 60000000), (60000000, 90000000), (90000000, 110000000), (110000000, 125000000), (125000000, 200000000)]
+
 def fiction():
     rows = []
     for c in CLASSES:
-        q = f'''SELECT ?ch ?chLabel ?fn ?fnLabel ?work ?workLabel ?auth ?authLabel ?cre ?creLabel ?date ?wdate WHERE {{
-          ?ch wdt:P31 wd:{c}; wdt:P734 ?fn.
-          OPTIONAL {{ ?ch wdt:P1441 ?work. OPTIONAL {{ ?work wdt:P50 ?auth }} OPTIONAL {{ ?work wdt:P577 ?wdate }} }}
-          OPTIONAL {{ ?ch wdt:P170 ?cre }}
-          {LANG} }}'''
-        r = N.sparql(q)
-        print(c, len(r), file=sys.stderr)
-        rows += [{k: v['value'] for k, v in x.items()} for x in r]
+        for lo, hi in RANGES:
+            q = f'''SELECT ?ch ?chLabel ?fn ?fnLabel ?work ?workLabel ?auth ?authLabel ?cre ?creLabel ?wdate WHERE {{
+              ?ch wdt:P31 wd:{c}; wdt:P734 ?fn.
+              BIND(xsd:integer(STRAFTER(STR(?ch), "/Q")) AS ?n) FILTER(?n >= {lo} && ?n < {hi})
+              OPTIONAL {{ ?ch wdt:P1441 ?work. OPTIONAL {{ ?work wdt:P50 ?auth }} OPTIONAL {{ ?work wdt:P577 ?wdate }} }}
+              OPTIONAL {{ ?ch wdt:P170 ?cre }}
+              {LANG} }}'''
+            r = N.sparql(q)
+            print(c, lo, len(r), file=sys.stderr)
+            rows += [{k: v['value'] for k, v in x.items()} for x in r]
     return rows
 
 def variants():

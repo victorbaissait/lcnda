@@ -251,23 +251,31 @@ PROVINCES = {'bretagne': ['22', '29', '35', '56', '44'], 'normandie': ['14', '27
              'limousin': ['19', '23', '87'], 'perigord': ['24'], 'provence': ['04', '05', '06', '13', '83', '84'], 'bourgogne': ['21', '58', '71', '89'], 'champagne': ['08', '10', '51', '52'],
              'lorraine': ['54', '55', '57', '88'], 'alsace': ['67', '68'], 'auvergne': ['03', '15', '43', '63'], 'savoie': ['73', '74'], 'dauphine': ['05', '26', '38'], 'gascogne': ['32', '40', '65'],
              'quercy': ['46', '82'], 'rouergue': ['12'], 'poitou': ['79', '86', '85'], 'saintonge': ['17'], 'berry': ['18', '36'], 'franche comte': ['25', '39', '70', '90'], 'languedoc': ['11', '30', '34', '48'],
-             'roussillon': ['66'], 'bearn': ['64'], 'artois': ['62'], 'flandre': ['59'], 'maine': ['53', '72'], 'vendee': ['85'], 'brie': ['77'], 'beauce': ['28'], 'sologne': ['41'], 'corse': ['2A', '2B']}
+             'roussillon': ['66'], 'bearn': ['64'], 'artois': ['62'], 'flandre': ['59'], 'maine': ['53', '72'], 'vendee': ['85'], 'brie': ['77'], 'beauce': ['28'], 'sologne': ['41'], 'corse': ['2A', '2B'],
+             'caux': ['76'], 'bray': ['76', '60'], 'auge': ['14'], 'vexin': ['95', '27'], 'morvan': ['58'], 'bresse': ['01', '71'], 'forez': ['42'], 'velay': ['43'], 'medoc': ['33'],
+             'gatinais': ['45', '77'], 'hurepoix': ['91'], 'dombes': ['01'], 'cotentin': ['50'], 'bocage': ['14', '50', '61'], 'perche': ['28', '61'], 'beaujolais': ['69'], 'lyonnais': ['69'],
+             'nivernais': ['58'], 'bourbonnais': ['03'], 'angoumois': ['16'], 'aunis': ['17'], 'bigorre': ['65'], 'comminges': ['31'], 'albigeois': ['81'], 'vivarais': ['07'], 'gevaudan': ['48'], 'cevennes': ['30', '48']}
 def name_place(label):
-    """le lieu dont une variété porte le nom (« Reine-claude de Bavay », « Reinette du Mans ») : commune au nom unique en France,
-    département ou province ; ('', '', '') sinon. Seulement ce que dit le nom : jamais présenté comme le lieu d'origine."""
-    m = re.search(r"\b(?:de la|de l'|de l’|du|des|de|d'|d’)\s*([A-ZÉÈÀÂÎÔÛ][^()]*?)\s*(?:\(.*)?$", label or '')
+    """le lieu dont une variété porte le nom (« Reine-claude de Bavay », « Reinette du Mans ») : province ou pays, département, ou
+    commune au nom exact et unique en France ; ('', '', '') sinon (ou si c'est ambigu). Seulement ce que dit le nom : jamais
+    présenté comme le lieu d'origine. « Duchesse d'Angoulême », « Comtesse de Paris » : le nom d'une personne, pas d'un lieu."""
+    m = re.search(r"\b(de la|de l'|de l’|du|des|de|d'|d’)\s*([A-ZÉÈÀÂÎÔÛ][^()]*?)\s*(?:\(.*)?$", label or '')
     if not m: return '', '', ''
-    tail = m.group(1).strip(); f = fold(tail); art = re.search(r'\bdu\s', label or '') is not None
-    names = [f, 'le ' + f] if art else [f, 'la ' + f, 'l ' + f, 'les ' + f]
-    for n in names:
-        hits = BYNAME.get(n, [])
-        if len(hits) == 1: return hits[0], dep_of(hits[0]), C[hits[0]][0]
-    for n in names:
-        if n in DEP_BY_NAME: return '', DEP_BY_NAME[n], DEP[DEP_BY_NAME[n]]
+    if re.search(r"\b(duc|duchesse|comte|comtesse|prince|princesse|marquis|marquise|baron|baronne|roi|reine|madame|monsieur|docteur|abb[ée]|saint|sainte)\s+(de|d'|d’|du)\b", label, re.I) and not re.match(r'^(reine[ -]?claude|reineclaude)', label, re.I): return '', '', ''
+    prep = m.group(1).replace('’', "'"); tail = m.group(2).strip().replace('’', "'"); f = fold(tail)
     if f in PROVINCES: return '', PROVINCES[f][0], tail
+    art = {'du': 'le ', 'des': 'les ', 'de la': 'la ', "de l'": "l'"}.get(prep, '')
+    low = (art + tail).lower()
+    dep = DEP_BY_NAME.get(fold(art + tail)) or DEP_BY_NAME.get(f)
+    hits = BYEXACT.get(low, [])
+    if dep and hits: return '', '', ''  # « Vienne » : le département ou la ville ? on ne sait pas
+    if dep: return '', dep, DEP[dep]
+    # une commune : le nom exact (accents compris : « Berne » n'est pas « Berné »), et une seule commune de ce nom en France
+    if len(hits) == 1: return hits[0], dep_of(hits[0]), C[hits[0]][0]
     return '', '', ''
-BYNAME = {}
-for _i, (_n, _a, _b) in C.items(): BYNAME.setdefault(fold(_n), []).append(_i)
+BYEXACT = {}
+for _i, (_n, _a, _b) in C.items(): BYEXACT.setdefault(_n.lower().replace('’', "'").replace('-', ' '), []).append(_i)
+BYEXACT = {k: v for k, v in BYEXACT.items()} | {k.replace(' ', '-'): v for k, v in BYEXACT.items()}
 DEP_BY_NAME = {fold(n): c for c, n in DEP.items()}
 
 def build_fruits():
@@ -280,7 +288,7 @@ def build_fruits():
         for k in ('s', 'img'):
             if r.get(k) and k not in o: o[k] = r[k]
     resolve([l for o in items.values() for l in (o['loc'] | o['n'])])
-    labels(list(items))
+    labels(list(items) + [l for o in items.values() for l in (o['loc'] | o['n'])])
     rows = []
     for q, o in items.items():
         insee = dep = ''; via = ''; place = ''; prov = ''

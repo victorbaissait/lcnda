@@ -195,11 +195,14 @@ def build_tour():
                   **table(['q', 'y', 'd', 'no', 'a', 'ai', 'ala', 'alo', 'b', 'bi', 'bla', 'blo', 'km', 'ed', 'edwiki', 'n'], out)})
 
 def labels(ids):
-    """les libellés (fr, sinon en) de quelques éléments, par l'API de Wikidata"""
+    """les libellés (fr, sinon en) et la page Wikipédia de quelques éléments (service SPARQL, par paquets)"""
     out = {}
-    ents = wm.entities(sorted(set(i for i in ids if re.match(r'^Q\d+$', i or ''))), props='labels|sitelinks')
-    for k, e in ents.items():
-        out[k] = {'l': wm.label(e), 'fr': ((e.get('sitelinks') or {}).get('frwiki') or {}).get('title', '')}
+    ids = sorted(set(i for i in ids if re.match(r'^Q\d+$', i or '')), key=lambda x: int(x[1:]))
+    for i in range(0, len(ids), 500):
+        part = ids[i:i + 500]
+        q = 'SELECT ?x ?l ?fr WHERE { VALUES ?x { %s } OPTIONAL { ?fr schema:about ?x ; schema:isPartOf <https://fr.wikipedia.org/> } SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". ?x rdfs:label ?l . } }' % ' '.join('wd:' + x for x in part)
+        for r in sparql(q, 'labels-' + hashlib.sha1(' '.join(part).encode()).hexdigest()[:10]):
+            out[qid(r['x'])] = {'l': r.get('l', ''), 'fr': wptitle(r.get('fr'))}
     return out
 
 def build_seigneurs():
@@ -458,14 +461,18 @@ def build_dates():
             a = red.get(t, t); a = red2.get(a, a)
             if got.get(a): pp[t] = (got[a], a)
     qs = sorted({v[0] for v in pp.values()})
-    ents = wm.entities(qs, props='claims')
-    def times(e, p):
-        out = []
-        for c in (e or {}).get('claims', {}).get(p, []):
-            if c.get('rank') == 'deprecated': continue
-            v = c.get('mainsnak', {}).get('datavalue', {}).get('value')
-            if isinstance(v, dict) and v.get('precision', 0) >= 11 and v.get('calendarmodel', '').endswith('Q1985727'): out.append(v['time'].lstrip('+')[:10])
-        return out
+    # les dates à la précision du jour (11), calendrier grégorien (Q1985727), rang non déprécié
+    T = {}
+    for i in range(0, len(qs), 300):
+        part = qs[i:i + 300]
+        q = '''SELECT ?x ?p ?t WHERE { VALUES ?x { %s } VALUES ?p { "P585" "P580" "P582" "P571" "P1619" "P577" "P5444" }
+          BIND(IRI(CONCAT("http://www.wikidata.org/prop/", ?p)) AS ?pp) BIND(IRI(CONCAT("http://www.wikidata.org/prop/statement/value/", ?p)) AS ?pv)
+          ?x ?pp ?st . ?st ?pv ?v . ?st wikibase:rank ?rk . FILTER(?rk != wikibase:DeprecatedRank)
+          ?v wikibase:timeValue ?t ; wikibase:timePrecision ?pr ; wikibase:timeCalendarModel wd:Q1985727 . FILTER(?pr >= 11) }''' % ' '.join('wd:' + x for x in part)
+        for r in sparql(q, 'dates-' + hashlib.sha1(' '.join(part).encode()).hexdigest()[:10]):
+            T.setdefault(qid(r['x']), {}).setdefault(r['p'], []).append(r['t'][:10])
+    ents = {q: T.get(q, {}) for q in qs}
+    def times(e, p): return sorted(set(e.get(p, [])))
     rows = []
     for e in ev:
         t = tt[e['id']]
