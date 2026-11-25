@@ -854,8 +854,24 @@ function mount(root,o){
   if(t.dataset.y&&st.view==='search'){st.s.ex.delete(t.dataset.y);refreshRes();return;}
   if(t.dataset.n&&st.view==='search'){st.s.ex.add(t.dataset.n);refreshRes();return;}
   if(t.dataset.inst){st.s.installed.add(t.dataset.inst);paintSearch();toast('⤓ Liste installée : ses résultats sont ajoutés (à valider).');return;}
+  if(t.dataset.stt){const it=n.items.find(i=>i.id===t.dataset.stt),k=STT.findIndex(x=>x[0]===it.stt);it.stt=STT[(k+1)%STT.length][0];paintMain();paintTree();return;}
+  if(t.dataset.view){n.view=t.dataset.view;paintMain();return;}
+  if(t.dataset.gf){st.gclosed.has(t.dataset.gf)?st.gclosed.delete(t.dataset.gf):st.gclosed.add(t.dataset.gf);paintMain();return;}
+  if(t.dataset.live){const L=n.live;L.mode=t.dataset.live;if(L.mode==='auto'&&L.news.length){const k=L.news.length;L.news.forEach(x=>n.items.push(I(x[0],x[1],x[2],x[3])));L.news=[];paintAll();toast(`🔄 ${k} nouveautés ajoutées toutes seules (et les prochaines aussi). <u>↶ Annuler</u>`);}else paintAll();return;}
+  if(t.dataset.nwy!==undefined){st.newsEx.delete(n.id+t.dataset.nwy);paintMain();return;}
+  if(t.dataset.nwn!==undefined){st.newsEx.add(n.id+t.dataset.nwn);paintMain();return;}
+  if(t.dataset.pin){toast(`📍 ${esc(t.dataset.pin)} : ${esc(t.title)}`);return;}
   const a=t.dataset.a;if(!a)return;
   switch(a){
+   case'archopen':st.archOpen=!st.archOpen;paintTree();break;
+   case'unarch':n.arch=false;paintAll();toast('🗄 Panier sorti des archives.');break;
+   case'pin':n.pin=!n.pin;paintAll();toast(n.pin?'★ Épinglé en haut de l’arbre.':'Désépinglé.');break;
+   case'sortmenu':openSort(t,n);break;
+   case'manual':n.sort={k:'main',then:'',dir:1};paintMain();toast('↶ Revenu à ton ordre à la main (il n’avait pas bougé).');break;
+   case'missing':openMissing(n);break;
+   case'newsok':{const L=n.live,keep=L.news.filter((x,i)=>!st.newsEx.has(n.id+i));keep.forEach(x=>n.items.push(I(x[0],x[1],x[2],x[3])));L.news=[];st.newsEx.clear();paintAll();toast(`＋ ${keep.length} nouveauté${keep.length>1?'s':''} ajoutée${keep.length>1?'s':''} au panier.`);break;}
+   case'newsno':n.live.news=[];paintAll();toast('Nouveautés écartées : elles ne seront plus proposées.');break;
+   case'due':openDue(n);break;
    case'tree':ui.classList.toggle('treeopen');break;
    case'strip':st.stripOpen=!st.stripOpen;paintStrip();break;
    case'stripall':st.stripAll=true;paintStrip();break;
@@ -876,11 +892,20 @@ function mount(root,o){
    case'rename':{const el=$('.bn');el.contentEditable='true';el.focus();const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);const fin=()=>{el.contentEditable='false';n.name=el.textContent.trim()||n.name;paintTree();};el.onblur=fin;el.onkeydown=ev=>{if(ev.key==='Enter'){ev.preventDefault();el.blur();}};break;}
    case'dests':toast('Le choix des destinations s’ouvrirait (enquête, fiche, Atelier, dossier de preuve…), plusieurs possibles.');break;
    case'redo':toast('↻ 1 nouveauté trouvée (« 1816, l’année sans été ») : à valider ✓/✗ avant d’entrer.');break;
-   case'more':menu(t,`<button type="button" data-k="mv">📁 Déplacer dans un dossier…</button><button type="button" data-k="list">📋 Garder comme liste</button><button type="button" data-k="exp">⤓ Exporter (CSV, PDF)</button>${st.showSugg?'':'<button type="button" data-k="sug">💡 Montrer les idées</button>'}<hr><button type="button" data-k="empty">Vider</button><button type="button" data-k="del" style="color:var(--red)">🗑 Supprimer ${n.type==='f'?'le dossier':'le panier'}</button>`,m=>m.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{m.remove();const k=b.dataset.k;
+   case'more':{const dem=(n.items||[]).filter(i=>i.stt==='demander').length;menu(t,`<div class="mh">Organiser</div><button type="button" data-k="mv">📁 Déplacer dans un dossier…</button>${n.type==='b'?`<button type="button" data-k="tags">🏷 Étiquettes de couleur…</button><button type="button" data-k="cover">🖼 Image de couverture…</button><button type="button" data-k="due">⏰ Échéance et rappel…</button><button type="button" data-k="arch">🗄 Archiver (fini)</button>
+     <div class="mh">Voir</div><button type="button" data-k="cmp">⇄ Comparer avec un autre panier…</button><button type="button" data-k="hist">🕘 Historique <small>↶ chaque changement</small></button><button type="button" data-k="miss">🔎 Qu’est-ce qui manque ?</button>
+     <div class="mh">Faire avec</div><button type="button" data-k="enq">🔎 Créer une enquête à partir de ce panier</button><button type="button" data-k="sortie">🏛 Fiche de sortie aux archives</button><button type="button" data-k="lettres">✉ Lettres de demande <small>${dem} « à demander »</small></button><button type="button" data-k="exp">⤓ Exporter <small>tableur · PDF · Word</small></button><button type="button" data-k="list">📋 Garder comme liste</button>`:''}
+     <hr>${st.showSugg?'':'<button type="button" data-k="sug">💡 Montrer les idées</button>'}${n.type==='b'?'<button type="button" data-k="empty">Vider</button>':''}<button type="button" data-k="del" style="color:var(--red)">🗑 Supprimer ${n.type==='f'?'le dossier':'le panier'}</button>`,m=>m.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{m.remove();const k=b.dataset.k;
      if(k==='sug'){st.showSugg=true;paintAll();return;}
-     if(k==='del'){const old=n.p,idx=st.nodes.indexOf(n),gone=[n,...(n.type==='f'?sub(n.id):[])];st.nodes=st.nodes.filter(x=>!gone.includes(x));const next=st.nodes.find(x=>x.type==='b');const cur=st.sel;st.sel=next.id;paintAll();guard(old,()=>{st.nodes.splice(idx,0,...gone);st.sel=cur;},()=>{});toast(`🗑 « ${esc(n.name)} » supprimé. <u>↶ Annuler</u>`);return;}
-     if(k==='empty'){n.items&&(n.items=[]);paintAll();return;}
-     toast(b.textContent+' : s’ouvrirait ici.');}));break;
+     if(k==='del'){const old=n.p,idx=st.nodes.indexOf(n),gone=[n,...(n.type==='f'?sub(n.id):[])];st.nodes=st.nodes.filter(x=>!gone.includes(x));const next=st.nodes.find(x=>x.type==='b'&&!x.arch);const cur=st.sel;st.sel=next.id;paintAll();guard(old,()=>{st.nodes.splice(idx,0,...gone);st.sel=cur;},()=>{});toast(`🗑 « ${esc(n.name)} » supprimé. <u>↶ Annuler</u>`);return;}
+     if(k==='empty'){n.items=[];paintAll();return;}
+     if(k==='arch'){n.arch=true;n.pin=false;st.archOpen=true;paintAll();toast('🗄 Archivé : rangé en bas de l’arbre, plus proposé ailleurs. Rien n’est perdu.');return;}
+     if(k==='cover'){const C=['linear-gradient(135deg,#e9dcc3,#c8b79a)','linear-gradient(160deg,#a8c3d8,#d9cfb5)','linear-gradient(135deg,#cfe3d4,#8fb79a)'];n.cover=C[(C.indexOf(n.cover)+1)%C.length];paintMain();toast('🖼 Couverture changée (une image du panier, ou une à toi).');return;}
+     if(k==='tags')return openTags(n);if(k==='due')return openDue(n);if(k==='cmp')return openCompare(n);if(k==='hist')return openHist(n);if(k==='miss')return openMissing(n);if(k==='sortie')return openSortie(n);
+     if(k==='enq'){toast(`🔎 Une enquête « ${esc(n.name)} » s’ouvrirait avec ces ${n.items.length} éléments comme pièces (l’outil Enquêtes existant).`);return;}
+     if(k==='lettres'){toast(dem?`✉ Le Registre de courriers s’ouvrirait avec ${dem} lettre${dem>1?'s':''} de demande pré-remplie${dem>1?'s':''} (cote, service, objet).`:'Aucun élément « à demander » : change le statut d’un élément d’abord.');return;}
+     if(k==='exp'){toast('⤓ Exporter : tableur (.xlsx / .ods), PDF ou Word — avec sources, liens, licences et notes.');return;}
+     toast(esc(b.textContent)+' : s’ouvrirait ici.');}));break;}
    case'addcrit':menu(t,`<div class="mh">Qui</div><button type="button" data-c="ses ascendants sur 4 générations">ses ascendants, descendants (N générations)</button><button type="button" data-c="rôle : témoin ou parrain">un rôle : témoin, parrain, notaire…</button><button type="button" data-c="métier : tisserand">un métier</button><div class="mh">Quand</div><button type="button" data-c="saison : hiver">une saison, un mois</button><button type="button" data-c="± 3 jours autour du mariage">± N jours autour d’un événement</button><div class="mh">Où</div><button type="button" data-c="le long de la Vézère">le long d’une rivière</button><button type="button" data-c="département : Corrèze (19)">un département, un pays</button><div class="mh">Autre</div><button type="button" data-c="pas déjà dans un panier">pas déjà dans un panier</button><button type="button" data-c="licences libres seulement">licences libres seulement</button><button type="button" data-c="avec une image">avec une image</button>`,m=>m.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{m.remove();st.s.crit.push(b.dataset.c);paintSearch();}));break;
    case'create':{const s=st.s,d=SS[s.key],items=kept(d,s).map(r=>I(r.i,r.t,r.s+(r.km!=null?` · ${String(r.km).replace('.',',')} km`:''),r.src));const id=nid('b');st.nodes.push({id,type:'b',p:s.folder,name:s.name||'Panier',icon:d.icon,dests:[],query:s.q,items});if(s.folder)st.closed.delete(s.folder);st.s=null;select(id);toast(`🧺 Panier « ${esc(node(id).name)} » créé ${s.folder?'dans 📁 '+esc(node(s.folder).name):'à la racine'} : ${items.length} éléments.`);break;}
    case'addexist':{const s=st.s,d=SS[s.key];dlg(`<h4>＋ Ajouter à un panier existant</h4><p>Les éléments déjà dedans (même titre, même source) sont sautés.</p><div class="flds"><label class="f">Quel panier<select class="fld" data-to>${basketOpts('b5')}</select></label></div><div class="row"><button type="button" class="b ter" data-close>Annuler</button><button type="button" class="b pri" data-go>＋ Ajouter</button></div>`,el=>{el.querySelector('[data-go]').onclick=()=>{const b=node(el.querySelector('[data-to]').value);let add=0,skip=0;kept(d,s).forEach(r=>{if(b.items.some(i=>i.t===r.t)){skip++;return;}b.items.push(I(r.i,r.t,r.s,r.src));add++;});closeDlg();st.s=null;select(b.id);toast(`＋ ${add} ajoutés à « ${esc(b.name)} »${skip?` · ${skip} déjà dedans, sautés`:''}.`);};});break;}

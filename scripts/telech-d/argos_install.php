@@ -49,12 +49,13 @@ function run(array $cmd, array $env = []): array
     fclose($pipes[1]); fclose($pipes[2]);
     return [proc_close($p), $out];
 }
-function save_engine(array $patch): void
+function save_engine(array $patch, bool $fullModels = false): void
 {
     global $dir;
     $e = json_decode((string) @file_get_contents($dir . '/engine.json'), true);
     $e = is_array($e) ? $e : [];
     $e = array_replace_recursive($e, $patch);
+    if ($fullModels) { $e['models'] = $patch['models']; }
     @file_put_contents($dir . '/engine.json', json_encode($e, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 }
 
@@ -126,5 +127,5 @@ if ($code !== 0 || empty($j['ok'])) { fail('check', 'Argos Translate ne s’ouvr
 $models = [];
 foreach ($j['installed'] ?? [] as $m) { $models[$m['from'] . '-' . $m['to']] = ['version' => (string) $m['version'], 'licence' => (string) $m['licence']]; }
 foreach ($pairs as $pair) { if (!isset($models[$pair])) { fail('check', "Le modèle {$pair} manque après l’installation."); } }
-save_engine(['ok' => true, 'version' => (string) ($j['version'] ?? ''), 'python' => $vpy, 'models' => $models, 'built' => [$lang => date('Y-m-d')]]);
+save_engine(['ok' => true, 'version' => (string) ($j['version'] ?? ''), 'python' => $vpy, 'models' => $models, 'built' => [$lang => date('Y-m-d')]], true);
 status('done', 'Prêt.', 100);
