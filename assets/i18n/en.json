@@ -45355,7 +45355,10 @@
  "Personnaliser la monographie": "Customize the monograph",
  "Personnaliser n’est pas chargé.": "Customise isn’t loaded.",
  "Personnalité": "Notable person",
- "personne": "person",
+ "personne": {
+  "one": "person",
+  "other": "people"
+ },
  "Personne": "Person",
  "Personne : aucun enfant trouvé.": "Nobody: no children found.",
  "personne : il reste des branches à chercher.": "nobody: some branches remain to be searched.",

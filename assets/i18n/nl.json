@@ -45355,7 +45355,10 @@
  "Personnaliser la monographie": "De monografie aanpassen",
  "Personnaliser n’est pas chargé.": "Aanpassen is niet geladen.",
  "Personnalité": "Persoonlijkheid",
- "personne": "persoon",
+ "personne": {
+  "one": "persoon",
+  "other": "personen"
+ },
  "Personne": "Persoon",
  "Personne : aucun enfant trouvé.": "Niemand: geen kinderen gevonden.",
  "personne : il reste des branches à chercher.": "niemand: er blijven takken te zoeken.",

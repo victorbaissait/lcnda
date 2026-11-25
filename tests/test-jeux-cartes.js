@@ -347,6 +347,13 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             const rec = await page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-jeux-plateau-records') || '{}').cartes?.bataille);
             assert.ok(rec && rec.w + rec.l >= 1, 'compté dans les records');
         });
+        await t('🗑 une partie supprimée ne revient pas (même si la partie encore ouverte s’enregistre une dernière fois)', async () => {
+            const g = await start('huit'); assert.ok((await games()).some(x => x.id === g.id));
+            await page.click('[data-jf-del]'); await page.waitForSelector('[data-cb-ok]'); await page.click('[data-cb-ok]'); await page.waitForTimeout(400);
+            assert.ok(!(await games()).some(x => x.id === g.id), 'retirée');
+            await page.evaluate(g => window.LCNDA_JEUX_FAMILLE._write(g), g); await page.waitForTimeout(100); // le dernier enregistrement de la partie qui se ferme
+            assert.ok(!(await games()).some(x => x.id === g.id), 'pas revenue');
+        });
         await t('390 px et sombre : ni la préparation ni la table ne débordent', async () => {
             await page.setViewportSize({width: 390, height: 860}); await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; localStorage.removeItem('lcnda-jeux-famille-v1'); });
             for (const k of ['tarot', 'crapette', 'rami']) {

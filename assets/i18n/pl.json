@@ -46453,7 +46453,12 @@
  "Personnaliser la monographie": "Dostosuj monografię",
  "Personnaliser n’est pas chargé.": "Dostosowywanie nie jest wczytane.",
  "Personnalité": "Osobistość",
- "personne": "osoba",
+ "personne": {
+  "one": "osoba",
+  "few": "osoby",
+  "many": "osób",
+  "other": "osoby"
+ },
  "Personne": "Osoba",
  "Personne : aucun enfant trouvé.": "Nikt: nie znaleziono dzieci.",
  "personne : il reste des branches à chercher.": "nikt: zostały gałęzie do szukania.",

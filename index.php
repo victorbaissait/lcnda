@@ -1234,7 +1234,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-labyrinthe-core.js?v=1" defer></script>
 <script src="assets/js/app-labyrinthe.js?v=4" defer></script>
 <script src="assets/js/app-jeu-famille-logique.js?v=4" defer></script>
-<script src="assets/js/app-jeu-famille.js?v=3" defer></script>
+<script src="assets/js/app-jeu-famille.js?v=4" defer></script>
 <script src="assets/js/app-jeu-quiestce.js?v=2" defer></script>
 <script src="assets/js/app-jeu-memory.js?v=2" defer></script>
 <script src="assets/js/app-jeu-timeline.js?v=2" defer></script>

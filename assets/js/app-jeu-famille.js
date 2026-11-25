@@ -30,7 +30,10 @@
     const games = () => { const v = ls.get(GAMES_KEY, []); return Array.isArray(v) ? v.filter(g => g && typeof g.id === 'string' && DEFS.has(g.kind)).slice(0, MAX_GAMES) : []; };
     const saveGames = list => ls.set(GAMES_KEY, list.slice(0, MAX_GAMES));
     const gameById = id => games().find(g => g.id === id) || null;
-    const writeGame = g => { const l = games(), i = l.findIndex(x => x.id === g.id); g.updated = Date.now(); if (i >= 0) l[i] = g; else l.unshift(g); return saveGames(l); };
+    // 🗑 une partie supprimée ne revient pas : la partie encore ouverte (patience, échecs…) s'enregistre parfois une dernière fois
+    // en se fermant (minuteur, fin d'animation, nettoyage) ; sans cette liste, cet enregistrement la remettait dans la liste
+    const DELETED = new Set();
+    const writeGame = g => { if (!g || DELETED.has(g.id)) return true; const l = games(), i = l.findIndex(x => x.id === g.id); g.updated = Date.now(); if (i >= 0) l[i] = g; else l.unshift(g); return saveGames(l); };
     const owns = id => typeof id === 'string' && id.startsWith('fam-') && !!gameById(id);
     const gameCount = () => games().length;
     let stopper = null, setupKey = 'quiz';
@@ -218,7 +221,7 @@
         }, {signal: ac.signal});
         ws.querySelector('[data-jf-del]').addEventListener('click', async () => {
             const ok = !A().confirmBox || await A().confirmBox(i18n('La partie et sa progression seront supprimées.'), {title: i18n('Supprimer « {name} » ?', {name: g.name}), okLabel: i18n('Supprimer la partie'), danger: true});
-            if (!ok) return; saveGames(games().filter(x => x.id !== g.id)); toast(i18n('« {name} » est supprimée.', {name: g.name})); setupKey = def.key; ctx.newGame?.(def.key);
+            if (!ok) return; DELETED.add(g.id); saveGames(games().filter(x => x.id !== g.id)); toast(i18n('« {name} » est supprimée.', {name: g.name})); setupKey = def.key; ctx.newGame?.(def.key);
         }, {signal: ac.signal});
         try { def.mount(host, g, api); } catch (er) { host.innerHTML = notice('error', i18n('Cette partie ne peut pas s’ouvrir : {err}', {err: er?.message || er})); }
         return true;

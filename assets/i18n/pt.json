@@ -45904,7 +45904,11 @@
  "Personnaliser la monographie": "Personalizar a monografia",
  "Personnaliser n’est pas chargé.": "Personalizar não está carregado.",
  "Personnalité": "Personalidade",
- "personne": "pessoa",
+ "personne": {
+  "one": "pessoa",
+  "other": "pessoas",
+  "many": "pessoas"
+ },
  "Personne": "Pessoa",
  "Personne : aucun enfant trouvé.": "Ninguém: nenhum filho encontrado.",
  "personne : il reste des branches à chercher.": "ninguém: ainda há ramos por procurar.",

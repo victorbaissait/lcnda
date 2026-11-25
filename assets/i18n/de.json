@@ -45355,7 +45355,10 @@
  "Personnaliser la monographie": "Monografie anpassen",
  "Personnaliser n’est pas chargé.": "Anpassen ist nicht geladen.",
  "Personnalité": "Persönlichkeit",
- "personne": "Person",
+ "personne": {
+  "one": "Person",
+  "other": "Personen"
+ },
  "Personne": "Person",
  "Personne : aucun enfant trouvé.": "Niemand: keine Kinder gefunden.",
  "personne : il reste des branches à chercher.": "niemand: es bleiben Zweige zu suchen.",

@@ -2622,6 +2622,7 @@ function person_detail(PDO $pdo, int $id): never
         WHERE mt.person_id=? AND COALESCE(mt.tag_type,'person')='signature'
         ORDER BY COALESCE(m.date_text,''),m.id,mt.id");
     $signatures->execute([$id]);
+    $signatureRows = $signatures->fetchAll();
 
     // Familles (unions) de cette personne, pour permettre l'ajout d'un événement de portée
     // "Famille" (ex: Mariage) rattaché à la bonne union plutôt qu'à la personne seule.
@@ -2632,6 +2633,10 @@ function person_detail(PDO $pdo, int $id): never
         FROM families f WHERE f.partner1_id=? OR f.partner2_id=?
         ORDER BY marriage_year IS NULL, marriage_year, f.id");
     $families->execute([$id, $id, $id, $id]);
+    $familyRows = $families->fetchAll();
+    // 🔒 lectures toutes terminées ici : les fonctions appelées plus bas (heritage_person_data…) peuvent créer une table ; avec une
+    // lecture encore ouverte, SQLite refusait aussitôt cette écriture (« base occupée ») dès qu'un autre PHP du relais avait écrit entre-temps
+    $variantRows = $variants->fetchAll(); $hypothesisRows = $hypotheses->fetchAll(); $journalRows = $journal->fetchAll();
 
     $onlineSheets = $pdo->prepare('SELECT s.*, m.filename AS screenshot_filename, m.thumbnail AS screenshot_thumbnail, m.title AS screenshot_title FROM person_online_sheets s LEFT JOIN media m ON m.id=s.screenshot_media_id WHERE s.person_id=? ORDER BY s.updated_at DESC,s.id DESC');
     $onlineSheets->execute([$id]);
@@ -2656,20 +2661,20 @@ function person_detail(PDO $pdo, int $id): never
         'witnessEvents' => $witnessEventRows,
         'parents' => $completion['_parents'],
         'partners' => $completion['_partners'],
-        'families' => $families->fetchAll(),
+        'families' => $familyRows,
         'children' => $completion['_children'],
         'siblings' => $siblingRows,
-        'variants' => $variants->fetchAll(),
+        'variants' => $variantRows,
         'labels' => labels_for_entity($pdo,'person',$id),
         'notes' => $notesRows,
         'media' => $mediaRows,
-        'signatures' => $signatures->fetchAll(),
+        'signatures' => $signatureRows,
         'sources' => $sourceRows,
         'investigations' => $investigationRows,
         'battues' => $battueRows,
-        'hypotheses' => $hypotheses->fetchAll(),
+        'hypotheses' => $hypothesisRows,
         'evidence' => $evidenceRows,
-        'researchJournal' => $journal->fetchAll(),
+        'researchJournal' => $journalRows,
         'census' => $census,
         'completion' => ['score'=>$completion['score'],'items'=>$completion['items']],
         'biography' => automatic_biography($person,$completion['_events'],$completion['_parents'],$completion['_partners'],$completion['_children']),
