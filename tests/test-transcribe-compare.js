@@ -110,6 +110,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         await t('Fichier → ⚖️ Comparer les lectures… : le texte à l’écran et les lectures gardées, les passages qui diffèrent', async () => {
             await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg button, dialog.h-tx-dlg summary')].find(b => /^\s*Fichier\b/.test(b.textContent))?.click());
             await p.waitForSelector('.ui-actmenu'); await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Comparer les lectures/.test(b.textContent)).click());
+            // « Ligne par ligne » est le mode de départ (et le premier bouton) ; ces vérifications portent sur « Mot par mot »
+            await p.waitForSelector('.h-txc .h-txc-lines', {timeout: 15000});
+            assert.ok(await p.$eval('.h-txc [data-txc-mode]', b => b.dataset.txcMode === 'line'), 'Ligne par ligne en premier');
+            await p.click('.h-txc [data-txc-mode="word"]');
             await p.waitForSelector('.h-txc [data-txc-d]', {timeout: 15000});
             const st = await p.evaluate(() => ({on: [...document.querySelectorAll('.h-txc [data-txc-pick]:checked')].length, diffs: document.querySelectorAll('.h-txc [data-txc-d]').length, count: document.querySelector('.h-txc [data-txc-count]').textContent}));
             assert.strictEqual(st.on, 3, 'l’écran + 2 lectures'); assert.strictEqual(st.diffs, 5); assert.match(st.count, /5 passages/);
@@ -149,6 +153,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         await t('« Garder la fusion comme lecture » ; le réglage « garder chaque lecture » (coché au départ)', async () => {
             await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg button, dialog.h-tx-dlg summary')].find(b => /^\s*Fichier\b/.test(b.textContent))?.click());
             await p.waitForSelector('.ui-actmenu'); await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Comparer les lectures/.test(b.textContent)).click());
+            await p.waitForSelector('.h-txc [data-txc-mode="word"]'); await p.click('.h-txc [data-txc-mode="word"]');
             await p.waitForSelector('.h-txc [data-txc-save]');
             assert.ok(await p.$eval('.h-txc [data-txc-keepon]', e => e.checked));
             await p.click('.h-txc [data-txc-maj]'); await p.click('.h-txc [data-txc-save]'); await sleep(500);

@@ -96,6 +96,9 @@
     /* ✍ « Ma lecture » (ligne par ligne) : sous les lectures de chaque ligne, une ligne à moi où je tape ma propre lecture (réglage, décoché au départ) */
     const MA_KEY = 'genealogie-tx-cmp-ma-lecture', DRAFT_PREFIX = 'genealogie-tx-cmp-draft-';
     const maOn = () => { try { return localStorage.getItem(MA_KEY) === '1'; } catch (_) { return false; } };
+    const MODE_KEY = 'genealogie-tx-cmp-mode'; // « Ligne par ligne » par défaut ; « Mot par mot » gardé si choisi
+    const rd = k => { try { return localStorage.getItem(k); } catch (_) { return null; } };
+    const wr = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
     const setMa = on => { try { localStorage.setItem(MA_KEY, on ? '1' : '0'); } catch (_) {} };
     /** 📑 « — page 2 — » : un repère, pas une ligne de l'acte (pas de « Ma lecture » pour lui) */
     const PAGE_MARK = /^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/u, isSep = s => PAGE_MARK.test(String(s ?? '').trim());
@@ -118,7 +121,7 @@
         // ctx.pick : « ⚖️ Comparer avec ma version » (la bande 🕘 Versions) — le texte à l'écran et ces versions-là, cochées
         (ctx.pick || []).forEach(id => { if (!readings.some(r => r.id === id)) { const v = list.find(x => x.id === id); if (v) readings.push(v); } });
         let chosen = ctx.pick?.length ? [0, ...ctx.pick.filter(id => readings.some(r => r.id === id))] : readings.filter(r => r.source && r.source !== 'now').slice(0, 3).map(r => r.id); if (!chosen.includes(0)) chosen.unshift(0); chosen = chosen.slice(0, 4);
-        let base = 0, mode = ctx.mode === 'line' ? 'line' : 'word', loose = true, parts = [], rows = [], texts = [];
+        let base = 0, mode = ctx.mode === 'word' ? 'word' : ctx.mode === 'line' ? 'line' : (rd(MODE_KEY) === 'word' ? 'word' : 'line'), loose = true, parts = [], rows = [], texts = [];
         /* ✍ ma lecture : [{i, ref, text, on}] — gardée au brouillon (localStorage) jusqu'à « Mettre dans le texte » */
         const DRAFT = DRAFT_PREFIX + ctx.actId;
         let ma = maOn(), mine = [], savedBody = '';
@@ -130,7 +133,7 @@
             <div class="h-txc-body"><aside class="h-txc-side"><h4>${esc(T('Les lectures (2 à 4)'))}</h4><div data-txc-list></div>
                 <label class="ui-toggle h-txc-keep"><input type="checkbox" data-txc-keepon ${keepOn() ? 'checked' : ''}><i></i>${esc(T('Garder chaque nouvelle lecture (écriture à la main, IA, OCR)'))}</label>
                 <label class="ui-toggle h-txc-keep"><input type="checkbox" data-txc-maon ${ma ? 'checked' : ''}><i></i>${esc(T('✍ Ajouter une ligne « Ma lecture » sous chaque ligne pour taper ma propre transcription'))}</label></aside>
-            <section class="h-txc-main"><div class="h-txc-tools"><span class="segmented" role="radiogroup"><button type="button" data-txc-mode="word">${esc(T('Mot par mot'))}</button><button type="button" data-txc-mode="line">${esc(T('Ligne par ligne'))}</button></span>
+            <section class="h-txc-main"><div class="h-txc-tools"><span class="segmented" role="radiogroup"><button type="button" data-txc-mode="line">${esc(T('Ligne par ligne'))}</button><button type="button" data-txc-mode="word">${esc(T('Mot par mot'))}</button></span>
                 <button type="button" class="button small secondary" data-txc-maj title="${esc(T('Partout : ce que le plus de lectures disent'))}">🗳 ${esc(T('La majorité'))}</button><button type="button" class="button small secondary" data-txc-ref>↺ ${esc(T('Tout comme la référence'))}</button>
                 <label class="ui-toggle"><input type="checkbox" data-txc-loose ${loose ? 'checked' : ''}><i></i>${esc(T('Ignorer majuscules, accents et ponctuation'))}</label>${imgs.length ? `<label class="ui-toggle"><input type="checkbox" data-txc-imgon ${imgOn() ? 'checked' : ''}><i></i>🖼 ${esc(T('L’image à côté'))}</label>` : ''}<span class="h-txc-count" data-txc-count></span></div>
                 <div class="h-txc-split"><div class="h-txc-out" data-txc-out></div>${imgs.length ? `<div class="h-txc-img" data-txc-img ${imgOn() ? '' : 'hidden'}>
@@ -241,7 +244,7 @@
             const d = e.target.closest('[data-txc-d]'); if (d) return variantMenu(d, Number(d.dataset.txcD));
             const ip = e.target.closest('[data-txc-ipage]'); if (ip) return showPage(Number(ip.dataset.txcIpage));
             const zb = e.target.closest('[data-txc-z]'); if (zb) { const f = Number(zb.dataset.txcZ); if (!f) return fitImg(); return zoomAt(f > 0 ? 1.3 : 1 / 1.3, stage.clientWidth / 2, stage.clientHeight / 2); }
-            const md = e.target.closest('[data-txc-mode]'); if (md) { mode = md.dataset.txcMode; return compute(); }
+            const md = e.target.closest('[data-txc-mode]'); if (md) { mode = md.dataset.txcMode; wr(MODE_KEY, mode); return compute(); }
             if (e.target.closest('[data-txc-maj]')) { if (mode === 'word') majority(parts, base, loose); else rows.forEach(r => { const cnt = new Map(); r.variants.forEach((v, k) => { const kk = key(v, loose).trim(); cnt.set(kk, [...(cnt.get(kk) || []), k]); }); let best = null; cnt.forEach(ks => { if (!best || ks.length > best.length || (ks.length === best.length && ks.includes(base))) best = ks; }); r.pick = best.includes(base) ? base : best[0]; if (r.my) r.my.on = false; }); saveDraft(); return paint(); }
             if (e.target.closest('[data-txc-ref]')) { parts.forEach(p => { p.pick = base; delete p.custom; }); rows.forEach(r => { r.pick = base; if (r.my) r.my.on = false; }); saveDraft(); return paint(); }
             if (e.target.closest('[data-txc-apply]')) { const txt = merged(); if (!txt.trim()) return A().toast(T('Le texte fusionné est vide.'), 'error'); await keepMine(); await ctx.apply(txt, T('Avant « Fusion des lectures »')); clearTimeout(draftT); try { localStorage.removeItem(DRAFT); } catch (_) {} dlg.close(); dlg.parentNode?.removeChild(dlg); return; }
