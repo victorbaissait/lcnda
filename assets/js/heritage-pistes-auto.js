@@ -87,14 +87,24 @@
         if (!j) return '';
         const c = j.counts || {}, pct = j.total ? Math.round(100 * j.pos / j.total) : 0;
         const st = {running: T('en cours'), paused: T('en pause'), done: T('finie'), stopped: T('arrêtée')}[j.status] || j.status;
-        return `<div class="pst-job is-${esc(j.status)}" data-pst-job><div class="pst-job-top"><b>${esc(T('Recherche : {l}', {l: j.label}))}</b> <span class="ui-badge is-grey">${esc(st)}</span>
+        return `<div class="pst-job is-${esc(j.status)}" data-pst-job data-id="${Number(j.id)}" data-status="${esc(j.status)}"><div class="pst-job-top"><b>${esc(T('Recherche : {l}', {l: j.label}))}</b> <span class="ui-badge is-grey">${esc(st)}</span>
             <span class="pst-job-acts">${j.status === 'running' ? `<button type="button" class="button small secondary" data-pst-pause>${esc(T('⏸ Pause'))}</button>` : j.status === 'paused' ? `<button type="button" class="button small" data-pst-resume>${esc(T('▶ Reprendre'))}</button>` : ''}${['running', 'paused'].includes(j.status) ? `<button type="button" class="button small secondary" data-pst-stop>${esc(T('■ Arrêter'))}</button>` : ''}</span></div>
             <div class="pst-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div>
             <small class="muted">${esc(T('{p} fiches sur {t} regardées · {f} pistes trouvées · {x} fiches gardées pour soi (vivantes ou confidentielles : rien d’envoyé) · {n} questions à Open Archives', {p: fmt(j.pos), t: fmt(j.total), f: fmt(c.found), x: fmt(c.private), n: fmt(c.net)}))}</small>
             ${j.message ? `<p class="pst-msg">${esc(j.message)}</p>` : ''}</div>`;
     }
     function paint() {
-        document.querySelectorAll('[data-pst-jobhost]').forEach(h => { h.innerHTML = jobLine(RUN.job); });
+        document.querySelectorAll('[data-pst-jobhost]').forEach(h => {
+            const j = RUN.job, cur = h.querySelector('[data-pst-job]');
+            // même recherche, même état : seulement la barre et les nombres (les boutons ne bougent pas sous la souris)
+            if (j && cur && cur.dataset.id === String(j.id) && cur.dataset.status === j.status) {
+                const tmp = document.createElement('div'); tmp.innerHTML = jobLine(j);
+                cur.querySelector('.pst-bar').replaceWith(tmp.querySelector('.pst-bar')); cur.querySelector('small').replaceWith(tmp.querySelector('small'));
+                const m = tmp.querySelector('.pst-msg'), old = cur.querySelector('.pst-msg'); if (old) old.remove(); if (m) cur.appendChild(m);
+                return;
+            }
+            h.innerHTML = jobLine(j);
+        });
         let f = document.querySelector('.pst-float');
         const show = settings().float && RUN.job && RUN.job.status === 'running' && !(A().state?.module === 'listes' && A().state?.listType === LIST);
         if (!show) { f?.remove(); return; }

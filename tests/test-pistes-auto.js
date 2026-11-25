@@ -170,6 +170,7 @@ echo 'ok';`);
             const n0 = await p.$$eval('[data-pst-list] .pst-row', r => r.length);
             const id = await p.getAttribute('[data-pst-list] .pst-row [data-pst-no]', 'data-pst-no');
             await p.click(`[data-pst-no="${id}"]`);
+            await sleep(1500); console.log('DEBUG', await p.evaluate(async () => { const h = document.querySelector('[data-pst-host]'); const out = [typeof h.__pstRedraw, [...document.querySelectorAll('[data-pst-host]')].map(x => x.className + '<' + x.parentNode.id + '/' + x.parentNode.className).join(' ; '), document.querySelectorAll('[data-pst-row="1"]').length, document.querySelector('[data-pst-row="1"]').closest('[data-pst-host]').className]; try { await h.__pstRedraw(); } catch (e) { out.push('ERR ' + e.message); } out.push(document.querySelectorAll('[data-pst-row="1"]').length); return out.join(' '); }));
             await p.waitForFunction(i => !document.querySelector(`[data-pst-row="${i}"]`), id, {timeout: 10000});
             await undo(/Piste écartée/);
             await p.waitForSelector(`[data-pst-row="${id}"]`, {timeout: 10000});
