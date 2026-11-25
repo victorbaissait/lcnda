@@ -256,11 +256,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.deepStrictEqual(q('SELECT (SELECT count(*) FROM persons) p, (SELECT count(*) FROM events) e')[0], before, 'rien n’est écrit avant un clic');
             const st = await api('enligne_status'); assert.strictEqual(st.sites.ancestry.pending, 7); assert.strictEqual(st.sites.ancestry.last_received_file, 'arbre-ancestry.ged');
         });
-        await t('✓ une ligne à la fois : l’inhumation de Jean (« Reçu de Ancestry ») ; ↶ la retire', async () => {
+        await t('✓ une ligne à la fois : l’inhumation de Jean (« Reçu d’Ancestry ») ; ↶ la retire', async () => {
             const l = find(/Inhumation/, 'event');
             assert.deepStrictEqual((await post('enligne_apply', {ids: [l.id]})).applied, [l.id]);
             const ev = q(`SELECT e.id, e.year, e.description, pl.name FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE e.person_id=1 AND t.gedcom_tag='BURI'`);
-            assert.strictEqual(ev.length, 1); assert.strictEqual(ev[0].year, 1920); assert.strictEqual(ev[0].name, 'Tulle'); assert.match(ev[0].description, /Reçu de Ancestry/);
+            assert.strictEqual(ev.length, 1); assert.strictEqual(ev[0].year, 1920); assert.strictEqual(ev[0].name, 'Tulle'); assert.match(ev[0].description, /Reçu d’Ancestry/);
             assert.strictEqual(q('SELECT count(*) n FROM places WHERE name=\'Tulle\'')[0].n, 1, 'le lieu existant est repris');
             await post('enligne_undo', {ids: [l.id]});
             assert.strictEqual(q(`SELECT count(*) n FROM events WHERE id=${ev[0].id}`)[0].n, 0);

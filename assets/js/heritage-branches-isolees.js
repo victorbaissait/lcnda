@@ -2,7 +2,7 @@
  * Dans Réglages → ✅ Contrôle de la base, un cadre au-dessus de la liste : les groupes de fiches qu'aucun lien de parenté ou
  * d'union ne relie à la personne de départ. Pour chacun : taille, noms principaux, d'où il vient (import, fusion, date de
  * création), « 👁 Voir ces fiches », « 🔗 Relier à… » (une fiche du groupe, une fiche de l'arbre, le lien : parent, enfant ou
- * conjoint ; ↶ Annuler), « C'est voulu » (retenu, ↶ ; « 🙈 écartés » pour les revoir). Réglage : « genealogie-branches-isolees ».
+ * conjoint ; add_relation, ↶ Annuler retire exactement ce qui a été ajouté), « C'est voulu » (retenu, ↶ ; « 🙈 écartés » pour les revoir). Réglage : « genealogie-branches-isolees ».
  * Pour d'autres fichiers : LCNDA_EXT.branchesIsolees. Essai : tests/test-branches-isolees.js
  */
 (function (root) {
@@ -84,13 +84,13 @@
             const P = root.LCNDA_PICKER || A();
             const it = await P.openPicker?.({kind: 'person', title: T('Relier à quelle fiche de l’arbre ?'), eyebrow: T('BRANCHES ISOLÉES')});
             if (!it?.id) return;
-            // add_relation : person_id = la fiche du groupe ; « parent » = related_id est le parent de person_id
+            // add_relation (par isoles_link, qui garde ce qui est ajouté pour ↶) : person_id = la fiche du groupe ; « parent » = related_id est le parent de person_id
             const type = rel === 'parent' ? 'child' : rel === 'child' ? 'parent' : 'spouse';
             const body = {person_id: who, related_id: Number(it.id), relation_type: type};
             try {
-                await post('add_relation', body);
+                const res = await post('isoles_link', body);
                 const label = `${nm(r.people.find(p => p.id === who) || {})} ${T(REL.find(x => x[0] === rel)[1])} ${it.title || it.name || ''}`.trim();
-                A().undoToast?.(T('Lien ajouté : {l}', {l: label}), {icon: '🔗', undo: async () => { await post('remove_relation', body); refresh(); }});
+                A().undoToast?.(T('Lien ajouté : {l}', {l: label}), {icon: '🔗', undo: async () => { await post('isoles_link_undo', {token: res.token}); refresh(); }});
                 try { root.dispatchEvent(new CustomEvent('lcnda:data-changed')); } catch (_) {}
                 refresh();
             } catch (e) { A().toast?.(e.message, 'error'); }

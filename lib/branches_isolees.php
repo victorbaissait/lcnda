@@ -14,6 +14,8 @@ declare(strict_types=1);
  *  GET  isoles_list               → {root, total, main, groups[], ignored[]}
  *  GET  isoles_group&key=         → les fiches d'un groupe (pour « Voir ces fiches »)
  *  POST isoles_ignore {key, size} · isoles_unignore {key}
+ *  POST isoles_link {person_id, related_id, relation_type} → {token} (le lien, par add_relation) · isoles_link_undo {token}
+ *       (retire exactement ce que le lien a ajouté : la place d'enfant ou l'union ; remove_relation, lui, garderait l'autre parent)
  */
 
 function bis_schema(PDO $pdo): void
@@ -175,6 +177,44 @@ function bis_ignore(PDO $pdo, array $d, bool $on): array
     return ['ok' => true, 'key' => $key];
 }
 
+/** POST isoles_link : relier une fiche du groupe à une fiche de l'arbre (add_relation), en gardant ce qui a été ajouté pour ↶ */
+function bis_link(PDO $pdo, array $d): array
+{
+    $maxFam = (int) $pdo->query('SELECT COALESCE(MAX(id),0) FROM families')->fetchColumn();
+    $maxFc = (int) $pdo->query('SELECT COALESCE(MAX(id),0) FROM family_children')->fetchColumn();
+    $own = !$pdo->inTransaction();
+    if ($own) { $pdo->beginTransaction(); }
+    try {
+        $r = add_relation($pdo, ['person_id' => $d['person_id'] ?? 0, 'related_id' => $d['related_id'] ?? 0, 'relation_type' => $d['relation_type'] ?? '']);
+        $fams = array_map('intval', $pdo->query("SELECT id FROM families WHERE id > $maxFam")->fetchAll(PDO::FETCH_COLUMN));
+        $fc = array_map('intval', $pdo->query("SELECT id FROM family_children WHERE id > $maxFc")->fetchAll(PDO::FETCH_COLUMN));
+        if (function_exists('pets_sync_parents')) { pets_sync_parents($pdo); }
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+    $token = import_receipt_put('isoles_link', ['families' => $fams, 'children' => $fc, 'person_id' => (int) $r['person_id'], 'related_id' => (int) $r['related_id'], 'type' => (string) $r['relation_type']]);
+    return ['ok' => true, 'token' => $token] + $r;
+}
+/** POST isoles_link_undo {token} */
+function bis_link_undo(PDO $pdo, array $d): array
+{
+    $r = import_receipt_load((string) ($d['token'] ?? ''), 'isoles_link');
+    assert_person_unlocked($pdo, (int) $r['person_id']); assert_person_unlocked($pdo, (int) $r['related_id']);
+    $own = !$pdo->inTransaction();
+    if ($own) { $pdo->beginTransaction(); }
+    try {
+        foreach (array_map('intval', $r['children'] ?? []) as $id) { $pdo->prepare('DELETE FROM family_children WHERE id=?')->execute([$id]); }
+        foreach (array_map('intval', $r['families'] ?? []) as $id) {
+            $n = $pdo->prepare('SELECT count(*) FROM family_children WHERE family_id=?'); $n->execute([$id]);
+            $e = $pdo->prepare('SELECT count(*) FROM events WHERE family_id=?'); $e->execute([$id]);
+            if (!(int) $n->fetchColumn() && !(int) $e->fetchColumn()) { $pdo->prepare('DELETE FROM families WHERE id=?')->execute([$id]); }
+        }
+        if (function_exists('log_change')) { log_change($pdo, 'person', (int) $r['person_id'], 'remove-relation', 'Branches isolées : lien retiré (↶ Annuler)'); }
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+    @unlink(import_receipt_dir() . '/' . (string) $d['token'] . '.json');
+    return ['ok' => true];
+}
+
 function bis_api_get(PDO $pdo, string $action, array $q): array
 {
     return match ($action) {
@@ -188,6 +228,8 @@ function bis_api_post(PDO $pdo, string $action, array $d): array
     return match ($action) {
         'isoles_ignore' => bis_ignore($pdo, $d, true),
         'isoles_unignore' => bis_ignore($pdo, $d, false),
+        'isoles_link' => bis_link($pdo, $d),
+        'isoles_link_undo' => bis_link_undo($pdo, $d),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }

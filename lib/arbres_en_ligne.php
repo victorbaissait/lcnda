@@ -360,7 +360,7 @@ function ael_insert_event(PDO $pdo, array $e, ?int $pid, ?int $fid, array &$made
     $desc = trim((string) $e['description']);
     $pdo->prepare('INSERT INTO events(scope,person_id,family_id,event_type_id,date_text,year,sort_date,place_id,address,title,description,cause) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')
         ->execute([$fid ? 'family' : 'person', $pid, $fid, $type, (string) $e['date_text'], $e['year'], $e['sort_date'] ?? null, ael_place_id($pdo, $e['place'] ?? []), (string) ($e['address'] ?? ''), (string) ($e['title'] ?? ''),
-            $desc . ($desc !== '' ? "\n" : '') . 'Reçu de ' . AEL_SITES[$site]['name'] . ' (fichier GEDCOM) le ' . date('d/m/Y') . '.', (string) ($e['cause'] ?? '')]);
+            $desc . ($desc !== '' ? "\n" : '') . 'Reçu ' . (preg_match('/^[AEIOUY]/', AEL_SITES[$site]['name']) ? 'd’' : 'de ') . AEL_SITES[$site]['name'] . ' (fichier GEDCOM) le ' . date('d/m/Y') . '.', (string) ($e['cause'] ?? '')]);
     $id = (int) $pdo->lastInsertId(); $made['events'][] = $id; return $id;
 }
 function ael_family(PDO $pdo, ?int $a, ?int $b, array &$made): int

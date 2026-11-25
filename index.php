@@ -89,6 +89,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/lot9-monde-coutumes.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-regles-actes.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-terre-gens.css?v=1">
+    <link rel="stylesheet" href="assets/css/commune-reseau.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-objets-traces.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-ciel-metier.css?v=1">
@@ -1340,7 +1341,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lecture-autrefois.js?v=8" defer></script>
 <script src="assets/js/heritage-links.js?v=26" defer></script>
 <script src="assets/js/heritage-more.js?v=409" defer></script>
-<script src="assets/js/heritage-controle.js?v=10" defer></script>
+<script src="assets/js/heritage-controle.js?v=11" defer></script>
+<script src="assets/js/heritage-commune-histoire.js?v=1" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
 <script src="assets/js/heritage-av.js?v=20" defer></script>
@@ -1663,7 +1665,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=1" defer></script>
 <script src="assets/js/heritage-terroir.js?v=2" defer></script>
 <script src="assets/js/heritage-terre-mots.js?v=3" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=8" defer></script>
+<script src="assets/js/heritage-reseau.js?v=1" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=9" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
