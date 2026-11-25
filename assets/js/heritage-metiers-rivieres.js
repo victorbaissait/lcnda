@@ -257,7 +257,7 @@
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks.mr_metier = (index, detail) => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || !on('metier')) return '';
-        return A().card(index, T('⛏️ Son métier, près de chez lui'), '', `<div class="mr-block" data-mr-metier="${Number(p.id)}"></div>`, 'span-12').replace('<section class="card ', '<section hidden class="card ');
+        return A().card(index, T('⛏️ Son métier, près de chez lui'), '', `<div class="mr-block" data-mr-metier="${Number(p.id)}"></div>`, 'span-12').replace(/^(\s*<section class="card [^"]*")/, '$1 hidden'); // hidden après class : l'app pose encore data-pblock sur la carte
     };
     (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-mr-metier]').forEach(h => fillMetier(h, Number(h.dataset.mrMetier))); });
 

@@ -205,7 +205,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const txt = await p.textContent('[data-pblock="commune_culture"]');
             assert.match(txt, /Son nom et ses villages/); assert.match(txt, /MAZAUD/); assert.match(txt, /Même nom ne veut pas dire même famille/);
             const btn = await p.$('[data-cc-person="1"] [data-cc-recipe]');
-            if (btn) {
+            assert.ok(btn, '« ＋ Ajouter au livre de recettes » (plats du Limousin dans les données)');
+            {
                 await btn.click();
                 await toastWith(/livre de recettes/);
                 assert.strictEqual(q("SELECT COUNT(*) n FROM family_memories WHERE kind='recipe'")[0].n, 1);

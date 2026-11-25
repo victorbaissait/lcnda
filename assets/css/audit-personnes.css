@@ -29,11 +29,15 @@ body.is-kiosk #pa-quick-family, body.is-kiosk [data-pa-quick-family], body.is-ki
 @media (min-width: 851px) { .person-hero { grid-template-columns: auto minmax(min(45%, max(12rem, 100% - 34rem)), 1fr) auto; } }
 /* fiche étroite (colonne de gauche ouverte, écran de 1024 px…) : les badges et les boutons passent sous le nom au lieu de sortir du cadre */
 .person-page { container: pa-fiche / inline-size; }
-@container pa-fiche (min-width: 530px) and (max-width: 820px) {
-    .person-hero { grid-template-columns: auto minmax(0, 1fr); }
+@container pa-fiche (min-width: 530px) and (max-width: 820px) { .person-hero { grid-template-columns: auto minmax(0, 1fr); } }
+@container pa-fiche (max-width: 820px) {
     .person-hero-tools { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) auto; justify-items: start; }
     .person-hero-status { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; }
     .person-hero-status .pa-kin-badge { text-align: left; max-width: 100%; }
+}
+@container pa-fiche (max-width: 529px) { /* téléphone : les badges, puis les boutons en dessous (🖨 et ⤓ ne sortent plus du cadre) */
+    .person-hero-tools { grid-template-columns: minmax(0, 1fr); }
+    .person-hero-actions { justify-self: start; border-left: 0; padding-left: 0; }
 }
 .pa-kin-badge.is-none { background: var(--surface-2, #f1f1f1); color: var(--muted, #667); }
 .pa-hero-btn { font-size: 16px; }
