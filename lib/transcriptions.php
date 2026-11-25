@@ -36,7 +36,15 @@ function act_transcriptions_ensure(PDO $pdo): void
     try { $pdo->exec('CREATE TABLE IF NOT EXISTS act_transcription_deleted (act_id INTEGER PRIMARY KEY, deleted_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)'); } catch (Throwable $_) {}
     $done = true;
     act_versions_cleanup($pdo);
+    // 🧹 (audit sécurité) les dossiers d'entraînement de plus de 7 jours (images des lignes découpées) : au démarrage aussi
+    if (defined('DATA_DIR') && is_dir(DATA_DIR . '/atelier-train')) { try { require_once __DIR__ . '/atelier_entrainer.php'; txi_train_sweep(DATA_DIR . '/atelier-train'); } catch (Throwable $_) {} }
 }
+
+/* 🔢 (audit sécurité) le numéro de révision de l'acte, gardé dans ses données (data_json.rev) : +1 à chaque écriture, sans attendre
+ * la seconde suivante (updated_at ne change qu'à la seconde) — deux enregistrements dans la même seconde, depuis deux onglets, sont vus.
+ * Un acte d'avant n'a pas de numéro : 0. */
+const ACT_REV_SQL = "COALESCE(CASE WHEN json_valid(data_json) THEN json_extract(data_json, '$.rev') END, 0)";
+const ACT_REV_BUMP = "data_json=json_set(CASE WHEN json_valid(data_json) THEN data_json ELSE '{}' END, '$.rev', " . ACT_REV_SQL . " + 1)";
 
 /* ═════════ limites d'un acte (31, audit) : au-delà, un message clair (le texte) ou « N zones n'ont pas été gardées » ═════════ */
 const ACT_MAX_BODY = 1000000; // caractères du texte (un registre entier tient largement)
@@ -432,10 +440,14 @@ function save_act_transcription(PDO $pdo, array $data): array
     // 31 (audit) : un texte trop long n'est plus coupé sans rien dire
     if (mb_strlen($body) > ACT_MAX_BODY) { throw new LcndaBadInput('Le texte est trop long pour un seul acte (' . number_format(mb_strlen($body), 0, ',', ' ') . ' caractères, ' . number_format(ACT_MAX_BODY, 0, ',', ' ') . ' au plus) : coupe-le en plusieurs actes. Rien n’a été changé.'); }
     // 🔴 10 (audit) : enregistré ailleurs (un autre onglet, l'app de bureau) depuis l'ouverture : rien n'est écrasé sans le dire
+    // 🔢 avec le numéro de révision lu (base_rev) : aussi deux enregistrements dans la même seconde ; l'heure seule (base_updated_at) marche toujours
     $base = (string) ($data['base_updated_at'] ?? '');
-    if ($id && $base !== '' && empty($data['restore'])) {
-        $u = $pdo->prepare('SELECT updated_at FROM act_transcriptions WHERE id=?'); $u->execute([$id]); $now = $u->fetchColumn();
-        if ($now !== false && (string) $now !== $base) { throw new LcndaConflict('Cet acte a été enregistré ailleurs (un autre onglet ou une autre fenêtre) depuis son ouverture.'); }
+    $baseRev = isset($data['base_rev']) && is_numeric($data['base_rev']) ? max(0, (int) $data['base_rev']) : null;
+    $guarded = $id && ($base !== '' || $baseRev !== null) && empty($data['restore']);
+    $conflict = 'Cet acte a été enregistré ailleurs (un autre onglet ou une autre fenêtre) depuis son ouverture.';
+    if ($guarded) {
+        $u = $pdo->prepare('SELECT updated_at, ' . ACT_REV_SQL . ' FROM act_transcriptions WHERE id=?'); $u->execute([$id]); $now = $u->fetch(PDO::FETCH_NUM);
+        if ($now !== false && (($base !== '' && (string) $now[0] !== $base) || ($baseRev !== null && (int) $now[1] !== $baseRev))) { throw new LcndaConflict($conflict); }
     }
     $zIn = is_array($data['data']['zones'] ?? null) ? count($data['data']['zones']) : 0; $pIn = is_array($data['data']['people'] ?? null) ? count($data['data']['people']) : 0;
     // 📄 le premier acte d'une image qui avait déjà un texte (case de la visionneuse, OCR…) : ce texte est gardé sous le nouveau (jamais écrasé)
@@ -450,15 +462,17 @@ function save_act_transcription(PDO $pdo, array $data): array
     if ($json === false) { throw new RuntimeException('Zones ou personnes de l’acte illisibles : rien n’a été changé.'); }
     $vals = [$title, $kind, $mediaId ?: null, mb_substr(safe_text($data['date_text'] ?? ''), 0, 120), mb_substr(safe_text($data['place'] ?? ''), 0, 160), mb_substr(safe_text($data['source'] ?? ''), 0, 300), $body, $json];
     if ($id) {
-        $s = $pdo->prepare('UPDATE act_transcriptions SET title=?, kind=?, media_id=?, date_text=?, place=?, source=?, body=?, data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?');
-        $s->execute([...$vals, $id]);
+        // le numéro +1 et la vérification en une seule écriture : un autre enregistrement arrivé entre la lecture et ici est vu aussi
+        $s = $pdo->prepare('UPDATE act_transcriptions SET title=?, kind=?, media_id=?, date_text=?, place=?, source=?, body=?, data_json=json_set(?, \'$.rev\', ' . ACT_REV_SQL . ' + 1), updated_at=CURRENT_TIMESTAMP WHERE id=?' . ($guarded && $baseRev !== null ? ' AND ' . ACT_REV_SQL . '=CAST(? AS INTEGER)' : ''));
+        $s->execute([...$vals, $id, ...($guarded && $baseRev !== null ? [$baseRev] : [])]);
+        if (!$s->rowCount() && $guarded && $baseRev !== null) { $e = $pdo->prepare('SELECT 1 FROM act_transcriptions WHERE id=?'); $e->execute([$id]); if ($e->fetchColumn()) { throw new LcndaConflict($conflict); } }
         if (!$s->rowCount()) {
             // « ↶ Annuler » après une suppression : la transcription revient avec son numéro
             if (empty($data['restore'])) { throw new RuntimeException('Transcription introuvable.'); }
-            $pdo->prepare('INSERT INTO act_transcriptions(id, title, kind, media_id, date_text, place, source, body, data_json) VALUES(?,?,?,?,?,?,?,?,?)')->execute([$id, ...$vals]);
+            $pdo->prepare("INSERT INTO act_transcriptions(id, title, kind, media_id, date_text, place, source, body, data_json) VALUES(?,?,?,?,?,?,?,?,json_set(?, '$.rev', 1))")->execute([$id, ...$vals]);
         }
     } else {
-        $pdo->prepare('INSERT INTO act_transcriptions(title, kind, media_id, date_text, place, source, body, data_json) VALUES(?,?,?,?,?,?,?,?)')->execute($vals);
+        $pdo->prepare("INSERT INTO act_transcriptions(title, kind, media_id, date_text, place, source, body, data_json) VALUES(?,?,?,?,?,?,?,json_set(?, '$.rev', 1))")->execute($vals);
         $id = (int) $pdo->lastInsertId();
     }
     // 📄 un seul texte par document : la copie du média suit (visionneuse, page du document, recherche, listes, export) ;
@@ -469,9 +483,9 @@ function save_act_transcription(PDO $pdo, array $data): array
     act_version_on_save($pdo, $id, $body, is_array($data['data'] ?? null) ? $data['data'] : [], !empty($data['auto'])); // 🕘 une version à chaque enregistrement (si le texte a changé)
     if (!empty($data['restore'])) { $pdo->prepare('DELETE FROM act_transcription_deleted WHERE act_id=?')->execute([$id]); } // ↶ Annuler : ses versions restent
     log_change($pdo, 'meta', 0, 'update', 'Transcription d’acte enregistrée : ' . $title);
-    $ua = $pdo->prepare('SELECT updated_at FROM act_transcriptions WHERE id=?'); $ua->execute([$id]);
+    $ua = $pdo->prepare('SELECT updated_at, ' . ACT_REV_SQL . ' FROM act_transcriptions WHERE id=?'); $ua->execute([$id]); $ur = $ua->fetch(PDO::FETCH_NUM) ?: ['', 0];
     $dropped = array_filter(['zones' => max(0, $zIn - ACT_MAX_ZONES), 'people' => max(0, $pIn - ACT_MAX_PEOPLE_KEPT)]);
-    return ['id' => $id, 'body' => $body, 'updated_at' => (string) $ua->fetchColumn()] + ($dropped ? ['dropped' => $dropped, 'limits' => ['zones' => ACT_MAX_ZONES, 'people' => ACT_MAX_PEOPLE_KEPT]] : []);
+    return ['id' => $id, 'body' => $body, 'updated_at' => (string) $ur[0], 'rev' => (int) $ur[1]] + ($dropped ? ['dropped' => $dropped, 'limits' => ['zones' => ACT_MAX_ZONES, 'people' => ACT_MAX_PEOPLE_KEPT]] : []);
 }
 
 function delete_act_transcription(PDO $pdo, array $data): array
@@ -492,7 +506,7 @@ function rename_act_transcription(PDO $pdo, array $data): array
     $name = mb_substr(safe_text($data['name'] ?? ''), 0, 200);
     if ($name === '') { throw new RuntimeException('Nom manquant.'); }
     $id = safe_int($data['id'] ?? 0);
-    $pdo->prepare('UPDATE act_transcriptions SET title=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$name, $id]);
+    $pdo->prepare('UPDATE act_transcriptions SET title=?, ' . ACT_REV_BUMP . ', updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$name, $id]);
     $m = $pdo->prepare('SELECT media_id FROM act_transcriptions WHERE id=?'); $m->execute([$id]); media_doc_text_sync($pdo, (int) $m->fetchColumn()); // le titre d'un bloc (plusieurs actes)
     return ['ok' => true];
 }
@@ -551,7 +565,7 @@ function media_doc_text_accept(PDO $pdo, int $mediaId, string $text, string $bef
     $acts = media_doc_acts($pdo, $mediaId);
     if (!$acts) { return $text; }
     if (count($acts) === 1) {
-        if ((string) $acts[0]['body'] !== $text) { $pdo->prepare('UPDATE act_transcriptions SET body=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([mb_substr($text, 0, ACT_MAX_BODY), (int) $acts[0]['id']]); }
+        if ((string) $acts[0]['body'] !== $text) { $pdo->prepare('UPDATE act_transcriptions SET body=?, ' . ACT_REV_BUMP . ', updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([mb_substr($text, 0, ACT_MAX_BODY), (int) $acts[0]['id']]); }
         return $text;
     }
     $all = media_doc_text_of($acts);
@@ -587,7 +601,7 @@ function act_doc_text_merge_all(PDO $pdo): int
             foreach ($list as $a) { if (trim((string) $a['body']) === '') { $target = $a; break; } }
             if (!$target) { usort($list, static fn($x, $y) => strcmp((string) $y['updated_at'], (string) $x['updated_at']) ?: ((int) $y['id'] <=> (int) $x['id'])); $target = $list[0]; }
             $body = trim((string) $target['body']) === '' ? $media : rtrim((string) $target['body']) . "\n\n———\n" . $media;
-            $pdo->prepare('UPDATE act_transcriptions SET body=? WHERE id=?')->execute([$body, (int) $target['id']]);
+            $pdo->prepare('UPDATE act_transcriptions SET body=?, ' . ACT_REV_BUMP . ' WHERE id=?')->execute([$body, (int) $target['id']]);
             $n++;
         }
         $acts->execute([$mid]);
@@ -679,7 +693,7 @@ function act_link_person(PDO $pdo, array $data): array
     if ((int) ($d['people'][$i]['person_id'] ?? 0) !== $was) { throw new RuntimeException('Ce nom a été relié entre-temps : rien n’a été changé.'); }
     if ($pid) { $c = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $c->execute([$pid]); if (!$c->fetchColumn()) { throw new RuntimeException('Fiche introuvable.'); } }
     $d['people'][$i]['person_id'] = $pid;
-    $pdo->prepare('UPDATE act_transcriptions SET data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($d, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE), $id]);
+    $pdo->prepare("UPDATE act_transcriptions SET data_json=json_set(?, '$.rev', " . ACT_REV_SQL . ' + 1), updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($d, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE), $id]);
     log_change($pdo, 'meta', 0, 'update', ($pid ? 'Nom relié dans la transcription : ' : 'Nom délié dans la transcription : ') . $r['title']);
     return ['ok' => true, 'id' => $id, 'index' => $i, 'person_id' => $pid, 'was' => $was];
 }

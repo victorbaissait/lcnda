@@ -397,7 +397,9 @@
 @media (max-width:700px){
     .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main{grid-template-columns:var(--ed-tool) minmax(0,1fr)!important;grid-template-rows:minmax(110px,34%) minmax(0,1fr)!important}
     .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-rail{display:flex!important;grid-column:1!important;grid-row:1!important;overflow-y:auto}
-    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-docnote{display:none}
+    /* la phrase « 📄 Ce texte est celui du document » reste sur téléphone, sur une seule ligne (l'image prend le haut) ; la toucher la montre en entier */
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-docnote{margin:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-docnote.is-open{white-space:normal}
     .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-left{display:flex!important;flex-direction:column;grid-column:2!important;grid-row:1!important;border-right:0;border-bottom:1px solid #d6d6db;min-height:0}
     .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-right{grid-column:1 / -1!important;grid-row:2!important}
     .h-tx-dlg .h-tx[data-ptab=text] .h-tx-left :is(.h-tx-barwrap,.h-tx-pages,.h-tx-zonebar){display:none}

@@ -387,7 +387,7 @@
                         <span class="h-tx-frep" data-tx-frep hidden><input type="text" data-tx-fr placeholder="${esc(i18n('Remplacer par…'))}" aria-label="${esc(i18n('Remplacer par…'))}" spellcheck="false" autocomplete="off" data-ui-off><button type="button" data-tx-f="one">${esc(i18n('Remplacer'))}</button><button type="button" data-tx-f="all">${esc(i18n('Tout remplacer'))}</button></span></div>
                     <div class="h-tx-editor${TV.lineNos() ? ' has-ln' : ''}" data-tx-editor><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea><div class="h-tx-abtip" data-tx-abtip hidden role="tooltip"></div></div>
                     <div class="h-tx-fixbar" data-tx-fixbar hidden></div>
-                    <div class="h-tx-vers" data-tx-vers hidden></div><div class="h-tx-vprev" data-tx-vprev hidden></div><p class="h-tx-docnote" data-tx-docnote hidden>📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
+                    <div class="h-tx-vers" data-tx-vers hidden></div><div class="h-tx-vprev" data-tx-vprev hidden></div><p class="h-tx-docnote" data-tx-docnote hidden title="${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}">📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
                     <button type="button" class="h-tx-foundhead" data-tx-foundtoggle aria-expanded="true" aria-controls="h-tx-found"><span class="h-tx-foundt">🧾 ${esc(i18n('Ce que l’app a trouvé'))}</span><small class="h-tx-foundsum" data-tx-foundsum></small><span class="h-tx-foundcar" aria-hidden="true">▾</span></button>
                     <div class="h-tx-found" id="h-tx-found" data-tx-found></div>
                 </section>
@@ -2078,9 +2078,10 @@
             if (pageForm === 'one' && PAGES.length > 1) { if (!t.data.pageViews || typeof t.data.pageViews !== 'object' || Array.isArray(t.data.pageViews)) t.data.pageViews = {}; t.data.pageViews[curPid()] = {...t.data.view}; }
             const sent = t.body, rev0 = rev, key0 = draftKey(); // ce qui part : ce qui change pendant l'envoi reste « modifié »
             // 🔴 10 : l'heure de la version lue ; le serveur refuse si l'acte a été enregistré ailleurs depuis (conflit)
-            const guard = t.id && !force && t.updated_at ? {base_updated_at: t.updated_at} : {};
+            // 🔢 et le numéro de révision lu (data.rev) : aussi deux enregistrements dans la même seconde, depuis deux onglets
+            const guard = t.id && !force && (t.updated_at || Number.isInteger(t.data.rev)) ? {...(t.updated_at ? {base_updated_at: t.updated_at} : {}), ...(Number.isInteger(t.data.rev) ? {base_rev: t.data.rev} : {})} : {};
             try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: sent, data: t.data, ...guard, ...(auto ? {auto: 1} : {})}), res = r.result || {};
-                t.id = res.id; if (res.updated_at) t.updated_at = res.updated_at; conflictHold = false; autoErr = ''; flushReads();
+                t.id = res.id; if (res.updated_at) t.updated_at = res.updated_at; if (Number.isInteger(res.rev)) t.data.rev = res.rev; conflictHold = false; autoErr = ''; flushReads();
                 if (key0 !== draftKey()) dropDraft(key0); // un acte nouveau : son brouillon prend son numéro
                 // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé) ;
                 // ce qui a été tapé pendant l'enregistrement reste (le texte d'avant va à la fin)
@@ -2248,6 +2249,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             if (e.target.closest('[data-tx-zsign]')) return signZone();
             const pt = e.target.closest('[data-tx-ptab]'); if (pt) return showPtab(pt.dataset.txPtab);
             const stp = e.target.closest('[data-tx-step]'); if (stp) return showStep(stp.dataset.txStep);
+            const dn = e.target.closest('[data-tx-docnote]'); if (dn) { dn.classList.toggle('is-open'); return; } // 📱 sur une ligne : la toucher la montre en entier
             if (e.target.closest('[data-tx-stepnext]')) { const ks = STEPS.map(s => s[0]), i = ks.indexOf(flowView || flowCur); return showStep(ks[Math.min(ks.length - 1, i + 1)]); }
             const c = e.target.closest('[data-tx-cmd]'); if (!c) return; c.closest('details')?.removeAttribute('open');
             const k = c.dataset.txCmd;

@@ -262,7 +262,7 @@ const oneOther = n => (Math.abs(n) === 1 ? 'one' : 'other');
     const {phpRuntimeArgs} = php;
     const work = process.env.I18N_TMP || os.tmpdir();
     const tmp = fs.mkdtempSync(path.join(work, 'carnet-i18n-nord13-'));
-    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1'};
+    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'};
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true});
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

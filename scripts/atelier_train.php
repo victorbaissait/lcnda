@@ -66,6 +66,22 @@ $trained = static function (array $entry) use ($htrDir): void { // htr/models/tr
     ftruncate($h, 0); rewind($h); fwrite($h, json_encode($j, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)); flock($h, LOCK_UN); fclose($h);
 };
 $id = basename($dir); $engine = (string) ($job['engine'] ?? 'kraken');
+/* 🧹 (audit sécurité) fini, échoué ou arrêté : les images des lignes découpées (train/, heldout/), leurs textes, les listes et les étapes
+ * de l'entraînement (out/) sont effacés ; restent status.json, job.json et un petit journal (le modèle, lui, est rangé avec les modèles
+ * de lecture). out/ n'est gardé que s'il est lui-même le résultat (Qwen qui n'a pas pu être déplacé, modèle Kraken pas rangé). */
+$keepOut = false;
+$rm = static function (string $p) use (&$rm): void {
+    if (is_link($p) || is_file($p)) { @unlink($p); return; } // un lien est effacé, jamais suivi
+    if (!is_dir($p)) { return; }
+    foreach (scandir($p) ?: [] as $f) { if ($f !== '.' && $f !== '..') { $rm($p . '/' . $f); } }
+    @rmdir($p);
+};
+register_shutdown_function(static function () use ($dir, $rm, &$keepOut): void { // aussi après exit() et une erreur fatale
+    foreach (['train', 'heldout', 'train.txt', 'val.txt', 'heldout.txt', 'cancel', 'status.json.tmp'] as $f) { $rm($dir . '/' . $f); }
+    if (!$keepOut) { $rm($dir . '/out'); }
+    $lg = $dir . '/train.log'; // un petit journal : les 64 derniers Ko
+    if (is_file($lg) && !is_link($lg) && filesize($lg) > 65536) { $h = @fopen($lg, 'rb'); if ($h) { fseek($h, -65536, SEEK_END); $tail = (string) stream_get_contents($h); fclose($h); @file_put_contents($lg, '…' . "\n" . $tail); } }
+});
 
 if ($engine === 'qwen') {
     $put(['phase' => 'train']); $before = null; $after = null; $modelfile = ''; $adapter = ''; $err = '';
@@ -82,7 +98,7 @@ if ($engine === 'qwen') {
     if ($code === 'cancelled' && $adapter === '') { $put(['state' => 'cancelled']); exit(0); }
     if ($code !== 0 && $code !== 'cancelled') { $fail($err !== '' ? $err : 'L’entraînement de Qwen n’a pas abouti (voir le journal).'); }
     $dest = $htrDir . '/qwen/' . $id; @mkdir(dirname($dest), 0775, true);
-    if (!@rename($dir . '/out', $dest)) { $dest = $dir . '/out'; }
+    if (!@rename($dir . '/out', $dest)) { $dest = $dir . '/out'; $keepOut = true; } // pas pu être déplacé : le modèle reste ici
     $fix = static fn(string $p) => $p !== '' ? str_replace($dir . '/out', $dest, $p) : '';
     $modelfile = $fix($modelfile);
     $trained(['id' => $id, 'engine' => 'qwen', 'title' => (string) $job['title'], 'hand' => (string) $job['hand'], 'dir' => $dest, 'modelfile' => $modelfile, 'base' => (string) $job['base'], 'lines' => (int) $job['lines'], 'before' => $before, 'after' => $after, 'created' => date('c')]);
@@ -117,6 +133,6 @@ $cmd = array_map(static fn($a) => $a === '{MODEL}' ? $model : $a, (array) $job['
 $run($cmd, static function (string $l) use (&$after, $pct) { $v = $pct($l); if ($v !== null && preg_match('/average|accuracy/i', $l)) { $after = $v; } });
 $file = 'lcnda-' . substr((string) ($job['slug'] ?? 'main'), 0, 40) . '-' . substr($id, 0, 6) . '.mlmodel';
 @mkdir($htrDir . '/models', 0775, true);
-if (!@copy($model, $htrDir . '/models/' . $file)) { $fail('Le modèle n’a pas pu être rangé avec les modèles de lecture.'); }
+if (!@copy($model, $htrDir . '/models/' . $file)) { $keepOut = true; $fail('Le modèle n’a pas pu être rangé avec les modèles de lecture.'); }
 $trained(['id' => $id, 'engine' => 'kraken', 'file' => $file, 'title' => (string) $job['title'], 'hand' => (string) $job['hand'], 'base' => (string) ($job['base'] ?? ''), 'lines' => (int) $job['lines'], 'heldout' => (int) $job['heldout'], 'before' => $acc, 'after' => $after, 'created' => date('c')]);
 $put(['state' => $wasCancelled ? 'cancelled' : 'done', 'phase' => 'done', 'after' => $after, 'model_file' => $file, 'kept' => true, 'pct' => 100]);

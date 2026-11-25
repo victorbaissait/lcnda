@@ -113,6 +113,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         await t('étape 2 : accepter l’aperçu crée la fiche d’après la case (Paul MAZAUD, meunier), pas d’après l’ancien nom', async () => {
             await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="found"]').click());
             await p.waitForSelector('[data-txa-gab] .h-txa-msg', {timeout: 15000});
+            // 🔴 3 (audit, fiches en double) : « Jean MAZAUD » est déjà dans la base → « ⇆ à trancher », ✓ Ajouter grisé ; on le relie (c'est lui)
+            const undecided = await p.evaluate(() => [...document.querySelectorAll('dialog.h-txa-dlg [data-txa-p]')].filter(r => r.querySelector('.h-txa-seg button.is-on')?.dataset.txaAct.endsWith(':compare')).map(r => r.dataset.txaP));
+            for (const k of undecided) await p.evaluate(k2 => document.querySelector(`dialog.h-txa-dlg [data-txa-act="${k2}:link"]`).click(), k);
+            await sleep(150);
             await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].find(x => x.querySelector('[data-txa-found]')); [...d.querySelectorAll('.modal-actions button')].find(b => /Ajouter à la généalogie/.test(b.textContent)).click(); });
             let row = null; for (let i = 0; i < 40 && !row; i++) { await sleep(250); row = JSON.parse(php(`require 'lib/bootstrap.php'; echo json_encode(db()->query("SELECT first_name, last_name, occupation FROM persons WHERE first_name='Paul'")->fetch(PDO::FETCH_ASSOC));`).stdout || 'false'); }
             assert.ok(row, 'la fiche de Paul créée'); assert.equal(row.last_name, 'MAZAUD'); assert.match(String(row.occupation || ''), /meunier/i);

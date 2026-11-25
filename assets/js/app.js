@@ -1627,7 +1627,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         item.dataset.lcTotal=String(total); // 🎨 Designs au choix → A8 : le temps qui reste, écrit en secondes (app-designs.js)
         let left=total,last=performance.now(),paused=false,raf=0,closed=false;
         const bar=item.querySelector('.ui-toast-bar');
-        const tick=now=>{if(closed)return;if(!paused){left-=now-last;}last=now;bar.style.width=`${Math.max(0,left/total*100)}%`;if(left<=0)return close();raf=requestAnimationFrame(tick);};
+        const tick=now=>{if(closed)return;if(!paused){left-=Math.min(100,Math.max(0,now-last));}last=now; /* une page figée (redessin lourd, onglet caché) ne mange pas le temps de lecture du message */ bar.style.width=`${Math.max(0,left/total*100)}%`;if(left<=0)return close();raf=requestAnimationFrame(tick);};
         const pause=()=>{paused=true;item.classList.add('is-paused');};
         const resume=()=>{if(item.matches(':hover')||item.contains(document.activeElement))return;paused=false;last=performance.now();item.classList.remove('is-paused');};
         item.addEventListener('mouseenter',pause);item.addEventListener('mouseleave',resume);

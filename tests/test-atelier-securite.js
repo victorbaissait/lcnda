@@ -150,6 +150,31 @@ echo json_encode(['a' => $a, 'm' => $m, 'doc' => $doc]);`, { TX_LINES: JSON.stri
             assert.equal(dirs.length, 1, 'un seul dossier de travail');
             out.jobId = ok[0].j.id;
         });
+        await t('entraînement : les dossiers de travail de plus de 7 jours sont effacés (images des lignes comprises), pas les récents ni un travail en cours', async () => {
+            const r = JSON.parse(php(String.raw`require 'lib/bootstrap.php'; require_once 'lib/atelier_entrainer.php';
+$base = DATA_DIR . '/atelier-train'; @mkdir($base, 0775, true); $old = time() - 8 * 86400;
+$mk = function (string $id, array $st, int $t) use ($base) { $d = "$base/$id"; @mkdir("$d/train", 0775, true); file_put_contents("$d/train/00001.png", 'png'); file_put_contents("$d/status.json", json_encode($st + ['updated' => $t]));
+    foreach (["$d/train/00001.png", "$d/train", "$d/status.json", $d] as $f) { touch($f, $t); } return $d; };
+$a = $mk(str_repeat('a', 24), ['state' => 'done'], $old); $b = $mk(str_repeat('b', 24), ['state' => 'done'], time()); $c = $mk(str_repeat('c', 24), ['state' => 'running'], time());
+$q = $mk(str_repeat('d', 24), ['state' => 'done', 'dir' => $base . '/' . str_repeat('d', 24) . '/out'], $old); @mkdir("$q/out", 0775, true); file_put_contents("$q/out/Modelfile", 'FROM x'); touch($q, $old);
+$n = txi_train_sweep($base, 7 * 86400, true);
+echo json_encode(['n' => $n, 'a' => is_dir($a), 'b' => is_dir("$b/train"), 'c' => is_dir("$c/train"), 'qOut' => is_file("$q/out/Modelfile"), 'qTrain' => is_dir("$q/train"), 'job' => is_file("$base/` + out.jobId + `/status.json")]);`));
+            assert.deepEqual(r, { n: 2, a: false, b: true, c: true, qOut: true, qTrain: false, job: true });
+        });
+        await t('enregistrer : deux enregistrements dans la même seconde, depuis deux onglets, sont vus (numéro de révision) ; l’heure seule marche toujours', async () => {
+            const r = JSON.parse(php(String.raw`require 'lib/bootstrap.php'; require_once 'lib/transcriptions.php'; $pdo = db();
+$s = save_act_transcription($pdo, ['title' => 'Rév', 'body' => 'un', 'data' => []]); $id = $s['id'];
+$one = save_act_transcription($pdo, ['id' => $id, 'title' => 'Rév', 'body' => 'deux', 'data' => [], 'base_updated_at' => $s['updated_at'], 'base_rev' => $s['rev']]);
+$same = 0; try { save_act_transcription($pdo, ['id' => $id, 'title' => 'Rév', 'body' => 'trois (autre onglet)', 'data' => [], 'base_updated_at' => $one['updated_at'], 'base_rev' => $s['rev']]); } catch (LcndaConflict $e) { $same = 1; }
+$old = save_act_transcription($pdo, ['id' => $id, 'title' => 'Rév', 'body' => 'quatre', 'data' => [], 'base_updated_at' => $one['updated_at']]);
+$pdo->prepare("UPDATE act_transcriptions SET data_json='{\"zones\":[],\"people\":[]}' WHERE id=?")->execute([$id]); // un acte d'avant, sans numéro
+$legacy = save_act_transcription($pdo, ['id' => $id, 'title' => 'Rév', 'body' => 'cinq', 'data' => [], 'base_rev' => 0]);
+$back = act_transcription_get($pdo, $id);
+$pdo->prepare('DELETE FROM act_transcriptions WHERE id=?')->execute([$id]); $pdo->prepare('DELETE FROM act_transcription_versions WHERE act_id=?')->execute([$id]); // la base reste comme avant (les essais suivants comptent les actes)
+echo json_encode(['r0' => $s['rev'], 'r1' => $one['rev'], 'sameSecond' => $s['updated_at'] === $one['updated_at'], 'conflict' => $same, 'r2' => $old['rev'], 'legacy' => $legacy['rev'], 'body' => $back['body'], 'dataRev' => $back['data']['rev'] ?? null]);`));
+            assert.equal(r.r0, 1); assert.equal(r.r1, 2); assert.equal(r.conflict, 1, 'l’autre onglet (numéro d’avant) : conflit' + (r.sameSecond ? ', dans la même seconde' : ''));
+            assert.equal(r.r2, 3, 'un client qui n’envoie que l’heure enregistre toujours'); assert.equal(r.legacy, 1, 'un acte d’avant (sans numéro) : 0 → 1'); assert.equal(r.body, 'cinq'); assert.equal(r.dataRev, 1);
+        });
 
         /* ─── 4. recherche plein texte ─── */
         await t('recherche : la syntaxe FTS5 tapée ne casse rien', async () => {

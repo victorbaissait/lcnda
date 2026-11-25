@@ -362,7 +362,9 @@ function ld_status(): array
 {
     $out = [];
     foreach (ld_sources() as $id => $def) { try { $out[$id] = (bool) ($def['open'])(); } catch (Throwable) { $out[$id] = false; } }
-    return ['installed' => $out];
+    // 🧭 Histoire autour : les fichiers assets/data/ha-*.json.gz vraiment livrés (un sujet pas fabriqué n'est pas demandé : pas de 404)
+    $ha = array_values(array_map(static fn($f) => basename($f, '.json.gz'), glob(__DIR__ . '/../assets/data/ha-*.json.gz') ?: []));
+    return ['installed' => $out, 'ha_files' => $ha];
 }
 
 function ld_api_get(PDO $pdo, string $action, array $g): array

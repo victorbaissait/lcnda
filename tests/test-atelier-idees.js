@@ -41,7 +41,7 @@ async function main(out) {
     const dir = path.join(tmp, 'data'), site = path.join(tmp, 'site'); fs.mkdirSync(path.join(dir, 'media'), { recursive: true }); fs.mkdirSync(site, { recursive: true });
     const argsLog = path.join(tmp, 'trainer-args.log');
     const env = { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1', LCNDA_TEST_IIIF_DIR: site,
-        LCNDA_KETOS_BIN: path.join(appRoot, 'tests/fixtures/fake-trainer.php'), LCNDA_QWEN_TRAIN_BIN: path.join(appRoot, 'tests/fixtures/fake-trainer.php'), FAKE_TRAIN_ARGS_LOG: argsLog, FAKE_TRAIN_SLEEP: '220',
+        LCNDA_KETOS_BIN: path.join(appRoot, 'tests/fixtures/fake-trainer.php'), LCNDA_QWEN_TRAIN_BIN: path.join(appRoot, 'tests/fixtures/fake-trainer.php'), FAKE_TRAIN_ARGS_LOG: argsLog, FAKE_TRAIN_SNAP: path.join(tmp, 'trainer-snap'), FAKE_TRAIN_SLEEP: '220',
         LCNDA_TEST_GPU: 'NVIDIA GeForce RTX 3060,12288', LCNDA_TEST_OS: 'linux' };
     if (process.env.DROP) process.env.DROP.split(',').forEach(k => delete env[k]);
     const php = (code, extra = {}) => { const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: appRoot, encoding: 'utf8', env: { ...env, ...extra } }); if (r.status !== 0) throw new Error(r.stderr || r.stdout); return r.stdout; };
@@ -292,9 +292,14 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
         await p.waitForSelector('dialog.ait-dlg .ait-done', { timeout: 40000 }); await sleep(800);
         out.done = await p.evaluate(() => ({ text: document.querySelector('dialog.ait-dlg .ait-done').textContent.replace(/\s+/g, ' '), toast: [...document.querySelectorAll('.ui-toast')].map(t => t.textContent).join(' | ') }));
         out.args = fs.readFileSync(argsLog, 'utf8').trim().split('\n').filter(Boolean).map(l => JSON.parse(l));
-        const jobDir = fs.readdirSync(path.join(dir, 'atelier-train')).map(x => path.join(dir, 'atelier-train', x))[0];
-        out.split = { train: fs.readFileSync(path.join(jobDir, 'train.txt'), 'utf8').trim().split('\n'), val: fs.readFileSync(path.join(jobDir, 'val.txt'), 'utf8').trim().split('\n'), held: fs.readFileSync(path.join(jobDir, 'heldout.txt'), 'utf8').trim().split('\n') };
-        out.gt = fs.readFileSync(out.split.held[0].replace(/\.png$/, '.gt.txt'), 'utf8');
+        const jobDir = fs.readdirSync(path.join(dir, 'atelier-train')).filter(x => /^[a-f0-9]{24}$/.test(x)).map(x => path.join(dir, 'atelier-train', x))[0];
+        // ce que l'entraîneur a reçu (copie faite par le faux entraîneur : le dossier du travail est vidé une fois fini)
+        const snapDir = path.join(tmp, 'trainer-snap');
+        out.split = { train: fs.readFileSync(path.join(snapDir, 'train.txt'), 'utf8').trim().split('\n'), val: fs.readFileSync(path.join(snapDir, 'val.txt'), 'utf8').trim().split('\n'), held: fs.readFileSync(path.join(snapDir, 'heldout.txt'), 'utf8').trim().split('\n') };
+        out.gt = fs.readFileSync(path.join(snapDir, 'heldout-1.gt.txt'), 'utf8');
+        // 🧹 (audit sécurité) fini : les images des lignes découpées et les fichiers de travail sont effacés ; restent l'état et un petit journal
+        for (let i = 0; i < 20 && fs.existsSync(path.join(jobDir, 'train')); i++) await sleep(150);
+        out.jobLeft = fs.readdirSync(jobDir).sort();
         out.models = JSON.parse(fs.readFileSync(path.join(dir, 'htr/models/trained.json'), 'utf8')).models;
         out.assigned = JSON.parse(php(String.raw`require 'lib/bootstrap.php'; echo json_encode(db()->query('SELECT reg_key, model FROM atelier_reg_models')->fetchAll(PDO::FETCH_KEY_PAIR));`));
         await p.evaluate(() => document.querySelector('dialog.ait-dlg [data-ait-x]').click()); await sleep(200);
@@ -390,6 +395,9 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
             assert.equal(c[0], 'test'); assert.match(c[c.indexOf('-m') + 1], /out\/model_best\.mlmodel$/); }],
         ['🎓 35 : 1 ligne sur 10 mise de côté, jamais dans l’entraînement ni la validation ; chaque image a son texte juste', () => {
             assert.equal(out.split.held.length, 6); assert.ok(out.split.held.every(f => !out.split.train.includes(f) && !out.split.val.includes(f))); assert.equal(out.split.train.length + out.split.val.length, 54); assert.match(out.gt, /^Ligne \d+ du registre, Léonard Chassagne, tisserand$/); }],
+        ['🎓 35 : fini : les images des lignes découpées et les fichiers de travail sont effacés ; restent l’état et un petit journal', () => {
+            assert.ok(out.jobLeft.includes('status.json') && out.jobLeft.includes('train.log'), 'l’état et le journal restent : ' + out.jobLeft);
+            assert.deepEqual(out.jobLeft.filter(f => ['train', 'heldout', 'out', 'train.txt', 'val.txt', 'heldout.txt'].includes(f)), [], 'images des lignes et fichiers de travail effacés : ' + out.jobLeft); }],
         ['🎓 35 : fini : avant → après sur les lignes mises de côté ; « Main de Curé J. LACOMBE » rangé avec les modèles et choisi pour son registre (↶ Annuler)', () => {
             assert.match(out.done.text, /Avant : 81,2 % → après : 93,4 %/); assert.match(out.done.text, /sur 6 lignes jamais vues/); assert.match(out.done.toast, /Main de Curé J\. LACOMBE.*lu désormais pour 1 registre/);
             const m = out.models.find(x => x.engine === 'kraken'); assert.ok(m && /^lcnda-cure-j-lacombe-[0-9a-f]{6}\.mlmodel$/.test(m.file), JSON.stringify(out.models)); assert.equal(m.before, 81.2); assert.equal(m.after, 93.4);

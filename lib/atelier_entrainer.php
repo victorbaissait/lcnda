@@ -24,7 +24,36 @@ const ATELIER_QWEN_BASE = 'unsloth/Qwen2.5-VL-3B-Instruct-bnb-4bit';
 function txi_train_dir(): string
 {
     $d = DATA_DIR . '/atelier-train'; if (!is_dir($d)) { @mkdir($d, 0775, true); }
+    txi_train_sweep($d);
     return $d;
+}
+
+/** 🧹 (audit sécurité) au démarrage (au plus une fois par heure : un repère dans le dossier) : les dossiers de travail sans nouvelles
+ * depuis plus de 7 jours sont effacés (images des lignes comprises) ; un travail en cours n'est jamais touché ; un modèle Qwen resté
+ * dans son dossier (pas pu être déplacé) est gardé. $force : tout de suite (essais). */
+function txi_train_sweep(string $base, int $age = 7 * 86400, bool $force = false): int
+{
+    static $done = []; if (!$force && isset($done[$base])) { return 0; } $done[$base] = true;
+    if (!is_dir($base) || is_link($base)) { return 0; }
+    $mark = $base . '/.menage';
+    if (!$force && is_file($mark) && (int) @filemtime($mark) > time() - 3600) { return 0; }
+    @touch($mark);
+    $n = 0;
+    foreach (glob($base . '/*', GLOB_ONLYDIR) ?: [] as $d) {
+        if (is_link($d) || !preg_match('/^[a-f0-9]{24}$/', basename($d))) { continue; }
+        $s = htr_json_file($d . '/status.json');
+        $last = max((int) ($s['updated'] ?? 0), (int) @filemtime($d . '/status.json'), (int) @filemtime($d));
+        if (time() - $last < $age) { continue; }
+        try {
+            $kept = (string) ($s['dir'] ?? '');
+            if ($kept !== '' && str_starts_with($kept, $d . '/')) { // le modèle est ici : seulement les fichiers de travail
+                foreach (['train', 'heldout'] as $sub) { htr_rmtree($d . '/' . $sub, $base); }
+                foreach (['train.txt', 'val.txt', 'heldout.txt', 'cancel'] as $f) { if (is_file($d . '/' . $f) || is_link($d . '/' . $f)) { @unlink($d . '/' . $f); } }
+            } else { htr_rmtree($d, $base); }
+            $n++;
+        } catch (Throwable $e) { /* hors du dossier : rien n'est effacé */ }
+    }
+    return $n;
 }
 
 function txi_test_mode(): bool { return getenv('GENEALOGY_TEST') === '1'; }

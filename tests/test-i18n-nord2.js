@@ -161,7 +161,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
     const shots = process.env.I18N_SHOTS || '';
     const work = process.env.I18N_TMP || os.tmpdir();
     const tmp = fs.mkdtempSync(path.join(work, 'carnet-i18n-nord2-')), tmpEmpty = fs.mkdtempSync(path.join(work, 'carnet-i18n-nord2-vide-'));
-    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1'});
+    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'});
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true}); fs.mkdirSync(path.join(tmpEmpty, 'media'), {recursive: true});
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';
@@ -219,7 +219,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             const nav0 = await page.evaluate(() => document.querySelector('.main-nav').innerText);
             const opts = await page.$$eval('select[data-lc-lang] option', o => o.map(x => x.value + ':' + x.textContent));
             assert.equal(opts.length, 32); assert.ok(opts.some(o => /^sk:.*Slovenčina/.test(o)) && opts.some(o => /^nb:.*Norsk \(bokmål\)/.test(o)), opts.join(' '));
-            await page.selectOption('select[data-lc-lang]', 'nb'); await page.waitForTimeout(1200);
+            await page.selectOption('select[data-lc-lang]', 'nb'); await page.waitForTimeout(1200); await page.waitForFunction(() => [...document.querySelectorAll('.toast')].some(x => /↶/.test(x.innerText) && document.documentElement.lang !== 'fr'), null, {timeout: 15000}).catch(() => {}); // l'écran redessiné dans la langue, puis « ↶ Annuler » (lent sur une machine chargée)
             const nb = await page.evaluate(() => ({lang: document.documentElement.lang, nav: document.querySelector('.main-nav').innerText, banner: document.getElementById('lc-i18n-banner')?.innerText || '', saved: localStorage.getItem('lcnda-langue'), toast: [...document.querySelectorAll('.toast')].map(x => x.innerText).join(' | ')}));
             assert.equal(nb.lang, 'nb'); assert.equal(nb.saved, 'nb');
             assert.ok(nb.nav.includes('Oversikt') && nb.nav.includes('Innstillinger'), nb.nav);

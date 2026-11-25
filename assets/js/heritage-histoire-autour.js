@@ -291,9 +291,13 @@
         if (typeof DecompressionStream === 'undefined') throw new Error(T('Ce navigateur ne sait pas ouvrir les fichiers de l’histoire autour.'));
         return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
+    // les fichiers livrés (ld_status → ha_files) : un sujet pas fabriqué (chemins de Compostelle quand OpenStreetMap ne répondait pas) n'est jamais demandé
+    let shipped = null;
+    const isShipped = kind => { if (!A().api) return Promise.resolve(true); if (!shipped) shipped = A().api('ld_status').then(r => (Array.isArray(r.ha_files) ? r.ha_files : null)).catch(() => null);
+        return shipped.then(l => !l || l.includes(FILES[kind])); };
     /** charge un sujet : {meta, rows} (rows préparées pour le calcul) ; null si le fichier n'est pas livré */
     function load(kind) {
-        if (!data[kind]) data[kind] = fetch(`assets/data/${FILES[kind]}.json.gz?v=${DATA_V}`, {credentials: 'same-origin'})
+        if (!data[kind]) data[kind] = isShipped(kind).then(ok => (!ok ? {status: 404} : fetch(`assets/data/${FILES[kind]}.json.gz?v=${DATA_V}`, {credentials: 'same-origin'})))
             .then(r => { if (r.status === 404) return null; if (!r.ok) throw new Error(T('Le fichier {f} est introuvable.', {f: FILES[kind]})); return readMaybeGz(r); })
             .then(f => { if (!f) return null; files[kind] = f; const {rows, fields, names, itin, ...meta} = f; return {meta, rows: PREP[kind](f)}; })
             .catch(e => { delete data[kind]; throw e; });
