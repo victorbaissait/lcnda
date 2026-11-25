@@ -1,6 +1,7 @@
 /* LCNDA — 🔌 Connexions : la pastille 🧺, le panneau du panier, « 📥 Prendre depuis… », « 📍 Mettre dans… » (heritage-connexions.js) */
 .cx-pill { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; }
 .cx-pill b { font-size: 12px; min-width: 14px; }
+.cx-pill.is-float { position: fixed; right: 16px; bottom: 16px; z-index: 940; background: var(--card-bg, #fff); border: var(--line); padding: 6px 10px; box-shadow: var(--shadow-small); }
 .cx-pill.is-over { outline: 2px dashed var(--blue); outline-offset: 2px; }
 .cx-panel { position: fixed; top: 64px; right: 12px; z-index: 950; width: min(380px, calc(100vw - 32px)); max-height: min(70vh, 560px); overflow: auto; background: var(--card-bg, #fff); color: var(--ink); border: var(--line); box-shadow: var(--shadow-small); padding: 10px 12px; }
 .cx-panel-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }

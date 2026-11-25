@@ -162,7 +162,7 @@
     let P = null; // projet chargé : {project, folders, items, people}
     /** 🧺 « Ici » pour « Prendre depuis… » / « Mettre dans… » (heritage-connexions.js) : le projet ouvert, l'élément choisi (sa date, son lieu) */
     ext.atelierHere = () => {
-        const s = S(); if (s.module !== 'enquetes' || s.enquetesTab !== 'atelier' || !P?.project) return null;
+        const s = S(); if (s.module !== 'enquetes' || s.enquetesTab !== 'atelier' || Number(s.currentInvestigationId) || !P?.project) return null;
         const v = st(); if (Number(v.project) !== Number(P.project.id)) return null;
         const it = v.sel.length === 1 ? P.byId?.get(Number(v.sel[0])) : null, d = it?.data || {};
         const date = String(d.date || d.due || '').match(/^\d{4}-\d{2}-\d{2}/)?.[0] || '';

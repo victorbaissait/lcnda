@@ -84,6 +84,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/terre-mots.css?v=1">
     <link rel="stylesheet" href="assets/css/veille-synchro.css?v=1">
     <link rel="stylesheet" href="assets/css/pistes-branches-celebres.css?v=1">
+    <link rel="stylesheet" href="assets/css/assistant-ia.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-monde-village.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-voir-village.css?v=1">
     <link rel="stylesheet" href="assets/css/lot9-sons-enfance.css?v=1">
@@ -1672,6 +1673,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=1" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
+<script src="assets/js/heritage-assistant-ia.js?v=1" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
 <script src="assets/js/heritage-tout-sur.js?v=11" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>

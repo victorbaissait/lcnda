@@ -59,6 +59,11 @@ function brain(j) {
         const card = results[1]; const src = card.sources[0].source; const dad = card.parents.find(x => x.fiche).fiche;
         return say(`J’ai trouvé une ancêtre en Corrèze avant 1900 :\n- Jeanne MAZAUD [fiche ${card.fiche}] est née en 1880 à Tulle [source ${src}].\n- Son père Jan MAZAUD [fiche ${dad}] était forgeron. Pierre MAZAUD [fiche 999] vivait aussi à Tulle. Elle s’est mariée en 1777 [fiche ${card.fiche}].\n\nLa famille venait sans doute du Limousin.`);
     }
+    if (/Corrige/.test(q)) { // l'IA essaie de supprimer, puis de « corriger » un décès qui existe déjà
+        if (results.length === 0) return toolCall('proposer_ajout', {fiche: 12, quoi: 'supprimer', raison: 'doublon'});
+        if (results.length === 1) return toolCall('proposer_ajout', {fiche: 12, quoi: 'evenement', evenement: 'DEAT', date: '1961', lieu: 'Tulle', raison: 'autre date'});
+        return say('Je propose une autre date de décès pour Jeanne MAZAUD [fiche 12] (supposé).');
+    }
     if (/décès/i.test(q)) {
         if (!results.length) return toolCall('proposer_ajout', {fiche: 1, quoi: 'evenement', evenement: 'DEAT', date: 'après 1880', lieu: 'Tulle', raison: 'cité comme père en 1880'});
         return say('Je propose d’ajouter le décès de Jan MAZAUD [fiche 1] (supposé).');
@@ -135,10 +140,10 @@ echo 'ok';`);
         await p.waitForSelector('#aia-open', {state: 'attached', timeout: 10000});
         return p;
     };
-    const undo = async (p, re) => {
-        await p.waitForFunction(src => [...document.querySelectorAll('.ui-toast, .toast')].some(x => new RegExp(src).test(x.textContent)), re.source, {timeout: 10000});
-        const h = await p.evaluateHandle(src => { const box = [...document.querySelectorAll('.ui-toast, .toast')].reverse().find(x => new RegExp(src).test(x.textContent)); return [...(box ? box.querySelectorAll('button') : [])].find(b => /Annuler/.test(b.textContent)); }, re.source);
-        await h.asElement().click();
+    const undo = async (p, re) => { // « ↶ Annuler » du dernier message qui correspond (le locator se relit si le message est redessiné)
+        const b = p.locator('.ui-toast, .toast').filter({hasText: re}).last().locator('button', {hasText: /Annuler/});
+        await b.waitFor({timeout: 10000});
+        await b.evaluate(x => x.click()); // le message peut encore glisser (pile de messages) : un clic direct
     };
     const waitIdle = p => p.waitForFunction(() => !document.querySelector('.aia-panel .aia-working') && !document.querySelector('.aia-panel textarea').disabled, null, {timeout: 30000});
     const askUi = async (p, text) => { await p.fill('.aia-panel textarea', text); await p.click('.aia-panel [data-aia-form] button[type=submit]'); await p.waitForTimeout(200); await waitIdle(p); };
@@ -207,11 +212,18 @@ echo 'ok';`);
             assert.strictEqual(q("SELECT count(*) n FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=1 AND t.gedcom_tag='DEAT'")[0].n, 0, '↶ retire tout');
         });
         await t('seulement ajouter : l’app refuse une proposition qui corrigerait (décès déjà là) ou un type inconnu', async () => {
-            const r = await p.evaluate(async () => { const A = window.LCNDA_APP;
-                const c = (await A.api('aia_convs')).rows[0]; return c; });
-            assert.ok(r && r.kind === 'chat');
-            const e = await post('aia_apply', {conv_id: r.id, proposal: 999});
-            assert.match(e.error, /introuvable/);
+            const before = sent.length;
+            await askUi(p, 'Corrige le décès de Jeanne.');
+            const back = JSON.stringify(sent.slice(before).map(j => j.messages.filter(m => m.role === 'tool').map(m => m.content)));
+            assert.match(back, /seulement ajouter/, 'supprimer : refusé dès la proposition');
+            const c = (await p.evaluate(() => window.LCNDA_APP.api('aia_convs'))).rows[0];
+            const conv = (await p.evaluate(id => window.LCNDA_APP.api('aia_conv', {id}), c.id)).conv;
+            const prop = conv.proposals[conv.proposals.length - 1];
+            assert.strictEqual(prop.quoi, 'evenement');
+            const e = await post('aia_apply', {conv_id: c.id, proposal: prop.id});
+            assert.match(e.error || '', /déjà cet événement : l’assistant ne corrige rien/);
+            assert.strictEqual(q("SELECT count(*) n FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=12 AND t.gedcom_tag='DEAT'")[0].n, 1, 'son décès de 1960 est intact');
+            assert.match((await post('aia_apply', {conv_id: c.id, proposal: 999})).error || '', /introuvable/);
         });
 
         /* ═════════ 3. vivants et fiches 🔒 ═════════ */
@@ -224,7 +236,7 @@ echo 'ok';`);
             const blob = JSON.stringify(sent);
             for (const bad of ['Lucie', 'Paul', 'Anne', '1985', '1955']) assert.ok(!blob.includes(bad), `« ${bad} » est parti au modèle`);
             assert.ok(blob.includes('personne vivante'));
-            assert.ok(/"personnes_vivantes_non_montrees":2/.test(blob), 'deux DURAND vivants comptés, jamais nommés');
+            assert.ok(/personnes_vivantes_non_montrees\\?":2/.test(blob), 'deux DURAND vivants comptés, jamais nommés');
         });
         await t('une fiche vivante ou 🔒 : l’assistant, le généalogiste et le récit refusent avec une phrase claire', async () => {
             for (const [a, b] of [['aia_chat_start', {question: 'Raconte', person_id: 10}], ['aia_gen_start', {person_id: 5}], ['aia_recit_start', {person_id: 11}]]) {

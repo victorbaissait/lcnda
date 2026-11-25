@@ -217,6 +217,7 @@
         const p = panelEl(), ta = p.querySelector('textarea'), q = ta.value.trim();
         if (!q || BUSY) return;
         BUSY = true; ta.value = '';
+        drawThread();
         try {
             const r = await post('aia_chat_start', {question: q, conv_id: CONV?.id || '', person_id: CONV ? 0 : PERSON, model: model(), keep: settings().history});
             CONV = r.conv; drawThread();

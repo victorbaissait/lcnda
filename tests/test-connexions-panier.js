@@ -20,7 +20,8 @@ const zlib = require('zlib');
 const {spawn, spawnSync} = require('child_process');
 const root = path.join(__dirname, '..');
 let fails = 0;
-const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
+const ONLY = process.env.CX_ONLY ? new RegExp(process.env.CX_ONLY) : null;
+const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const km = (a, b, c, d) => { const r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2; return 6371 * 2 * Math.asin(Math.min(1, Math.sqrt(x))); };
 
@@ -250,7 +251,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('📚 Atelier, un élément daté (3 février 1978 à Auch) : « ＋ Ajouter → 📥 Prendre depuis… → 🧰 Données → 🌦 Météo » : la date et le lieu sont repris, une info précise cochée va dans ses notes avec sa source', async () => {
             proj = Number((await post('save_atelier_project', {title: 'Le village d’Auch', kind: 'livre'})).id);
             itemId = Number((await post('save_atelier_item', {project_id: proj, type: 'event', title: 'Naissance de Jean MAZAUD', data: {date: '1978-02-03', place: {text: 'Auch'}}})).id);
-            await go('enquetes', {enquetesTab: 'atelier', atelier: {project: proj, node: 'all', sel: [itemId]}});
+            await go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: proj, node: 'all', sel: [itemId]}});
             await p.waitForSelector('[data-at-addmenu]', {timeout: 20000});
             await p.click('[data-at-addmenu]'); await p.click('[data-at-take]');
             await p.waitForSelector('.cx-take'); assert.match(await p.textContent('.cx-take h2'), /Naissance de Jean MAZAUD/);
@@ -266,7 +267,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await clickUndo(); assert.ok(!/Température/.test((await atelierNotes(itemId)).notes || ''));
         });
         await t('📚 … la météo d’une semaine (du 3 au 9 février 1978) mise dans l’Atelier comme UN tableau sourcé (avec sa demande)', async () => {
-            await go('enquetes', {enquetesTab: 'atelier', atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
+            await go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
             await p.evaluate(() => window.LCNDA_EXT.connexions.openTake());
             await p.waitForSelector('.cx-take'); await p.click('.cx-take [data-cx-tab="data"]'); await p.selectOption('.cx-take [data-cx-ds]', 'meteo_jour');
             await p.waitForSelector('.cx-take .pk[data-picker="place"] input:not([type=hidden])');
@@ -289,7 +290,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.keyboard.press('Escape'); await cx('basket_clear', {}); await p.evaluate(() => window.LCNDA_EXT.connexions.refresh());
         });
         await t('⚰️ « les décès à Tulle du 1er au 30 juin 1980 » : la demande en français préremplit la liste INSEE (commune + du… au…) ; « Tout prendre » → l’Atelier', async () => {
-            await go('enquetes', {enquetesTab: 'atelier', atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
+            await go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
             const parsed = await p.evaluate(() => window.LCNDA_EXT.connexions.parseAsk('les décès à Tulle du 1er au 30 juin 1980', window.LCNDA_EXT.dataListsEngine.list()));
             assert.strictEqual(parsed.id, 'insee_deces'); assert.deepStrictEqual(parsed.preset.crit.find(c => c.kind === 'daterange'), {key: 'deces', kind: 'daterange', from: '1980-06-01', to: '1980-06-30'});
             assert.ok(parsed.preset.crit.some(c => c.key === 'commune_deces' && /Tulle/i.test(c.value)));
@@ -318,7 +319,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await cx('basket_clear', {}); await p.evaluate(() => window.LCNDA_EXT.connexions.refresh());
         });
         await t('📂 De l’extérieur : un CSV collé (décès d’une commune) filtré du… au… → l’Atelier, avec sa provenance et sa licence', async () => {
-            await go('enquetes', {enquetesTab: 'atelier', atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
+            await go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
             await p.evaluate(() => window.LCNDA_EXT.connexions.openTake()); await p.waitForSelector('.cx-take');
             await p.click('.cx-take [data-cx-tab="outside"]');
             await p.click('.cx-take summary:has-text("Coller un tableau")');

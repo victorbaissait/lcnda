@@ -127,6 +127,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         req.on('error', e => resolve({ status: 0, error: e.code, headers: {}, body: Buffer.alloc(0), json: () => ({}), text: () => '' }));
         req.end(data === null ? undefined : data);
     });
+    /** un nouveau « navigateur » du même appareil : le jeton de la porte, sans la séance */
+    const fresh = dev => ({ ...dev, jar: (() => { const j = jar(); j.c.lcnda_appareil = dev.jar.c.lcnda_appareil; return j; })() });
     const jar = () => { const c = {}; return { header: () => Object.entries(c).map(([k, v]) => `${k}=${v}`).join('; '), take: r => { for (const sc of [].concat(r.headers['set-cookie'] || [])) { const [kv] = sc.split(';'); const i = kv.indexOf('='); c[kv.slice(0, i).trim()] = kv.slice(i + 1).trim(); } }, c }; };
     const origin = () => `http://${HOME.ip}:${gate.port}`;
     const pair = async (name, ip) => {
@@ -165,7 +167,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         return r;
     };
     const mainGet = (action, q = '') => mainAsk(`/api.php?action=${action}${q}`);
-    const owner = async (op, body = {}) => { const r = await mainPost('fc_write', { op, ...body }); return { status: r.status, ...J(r) }; };
+    const owner = async (op, body = {}) => { const r = await mainPost('fc_write', { op, ...body }); return { ...J(r), status: r.status }; };
 
     const devs = {};
     const acc = {};
@@ -217,15 +219,16 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             await L.state(); r = await L.post('join', { code: inv.lucas.code, password: 'Lucas-Mot-2026', password2: 'Lucas-Mot-2026' }); assert.equal(r.status, 200, r.text());
             await X.state();
             const codes = [];
-            for (let i = 0; i < 4; i++) { r = await X.post('join', { code: String(10000000 + i), password: 'Intrus-Mot-2026', password2: 'Intrus-Mot-2026' }); codes.push(r.status); }
-            assert.deepEqual(codes, [403, 403, 403, 403]);
+            // (l'intrus a déjà raté une fois : le lien déjà utilisé, en A2)
+            for (let i = 0; i < 3; i++) { r = await X.post('join', { code: String(10000000 + i), password: 'Intrus-Mot-2026', password2: 'Intrus-Mot-2026' }); codes.push(r.status); }
+            assert.deepEqual(codes, [403, 403, 403]);
             r = await X.post('join', { code: '10000009', password: 'Intrus-Mot-2026', password2: 'Intrus-Mot-2026' }); assert.equal(r.status, 429, r.text());
             assert.ok(Number(r.headers['retry-after']) > 0);
         });
 
         /* ─── B. connexion et séance ─── */
         await t('B1 connexion : identifiant inconnu et mauvais mot de passe → la même réponse (401) ; bon mot de passe → séance', async () => {
-            const O2 = fam({ ...devs.odile, jar: jar() });
+            const O2 = fam(fresh(devs.odile));
             const a = await O2.login('personne.inconnue', 'Odile-Mot-2026');
             const b = await O2.login(acc.odile.login, 'faux-faux-faux');
             assert.equal(a.status, 401); assert.equal(b.status, 401); assert.equal(a.json().error, b.json().error);
@@ -234,11 +237,11 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             assert.ok([].concat(c.headers['set-cookie'] || []).some(s => /lcnda_famille=.*HttpOnly/i.test(s) && /SameSite=Strict/i.test(s)));
             devs.odile.jar = O2.dev.jar; O.dev.jar = O2.dev.jar; O.csrf = O2.csrf;
         });
-        await t('B2 5 mots de passe faux sur le compte de Lucas (depuis l’intrus) → ce compte attend, même avec le bon mot de passe ; débloqué par l’ordinateur principal', async () => {
-            const X2 = fam({ ...devs.intrus, jar: jar() });
+        await t('B2 5 mots de passe faux sur le compte de Lucas (depuis un autre appareil) → ce compte attend, même avec le bon mot de passe ; débloqué par l’ordinateur principal', async () => {
+            const X2 = fam(fresh(devs.plain));
             await X2.state();
             for (let i = 0; i < 5; i++) { await X2.post('login', { login: acc.lucas.login, password: 'faux' + i }); }
-            const L2 = fam({ ...devs.lucas, jar: jar() });
+            const L2 = fam(fresh(devs.lucas));
             let r = await L2.login(acc.lucas.login, 'Lucas-Mot-2026'); assert.equal(r.status, 429, r.text());
             assert.ok(sql("SELECT count(*) AS n FROM fc_journal WHERE kind='echec' AND account_id=?", acc.lucas.id)[0].n >= 5, 'les essais ratés sont au journal');
             assert.equal((await owner('unblock', { id: acc.lucas.id })).status, 200);
@@ -513,7 +516,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             assert.equal(sql('SELECT count(*) AS n FROM fc_publish WHERE token=?', P.pub)[0].n, 1);
         });
         await t('I2 📨 Relever : un fichier de propositions rapporté → en attente (🌐) ; fiche inconnue ou vivante ignorée ; publication inconnue refusée ; deux fois le même : ignoré', async () => {
-            const jean = P.arbre.people.find(p => p.f.startsWith('Jean')).i;
+            const jean = P.arbre.people.find(p => p.f === 'Jean' && p.l === 'MAZAUD').i;
             const boite = { format: 'lcnda-boite-famille', version: 1, publication: P.pub, items: [
                 { compte: 'Odile', kind: 'fait', fiche: jean, field: 'occupation', value: 'tisserand', comment: 'acte de mariage' },
                 { compte: 'Odile', kind: 'fait', fiche: 9999, field: 'occupation', value: 'x' },
@@ -574,7 +577,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 assert.ok(req, 'la demande arrive sur l’ordinateur');
                 gate.accept(req.id, 'lecture');
                 await ph.waitForURL(/\/famille\.php/, { timeout: 20000 });
-                await ph.waitForSelector('[data-fam-joinform]', { timeout: 20000 });
+                await ph.waitForSelector('[data-fam-joinform]', { timeout: 20000 }).catch(async e => { console.error(ph.url(), (await ph.content()).slice(0, 1500), errors); throw e; });
                 assert.equal(new URL(ph.url()).hash, '', 'l’invitation est retirée de l’adresse');
                 await ph.fill('[data-fam-joinform] input[name=password]', 'Marie-Mot-2026');
                 await ph.fill('[data-fam-joinform] input[name=password2]', 'Marie-Mot-2026');
@@ -628,9 +631,9 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         await t('K1 30 essais ratés en tout (tous appareils) → plus aucun essai pour personne pendant 15 min', async () => {
             const devices = [devs.intrus, devs.plain, devs.henri, devs.odile];
             let last = null;
-            for (let i = 0; i < 40; i++) { const F = fam({ ...devices[i % devices.length], jar: jar() }); await F.state(); last = await F.post('login', { login: 'nimporte' + i, password: 'x' }); if (last.status === 429 && i >= 20) break; }
+            for (let i = 0; i < 40; i++) { const F = fam(fresh(devices[i % devices.length])); await F.state(); last = await F.post('login', { login: 'nimporte' + i, password: 'x' }); if (last.status === 429 && i >= 20) break; }
             assert.equal(last.status, 429);
-            const F = fam({ ...devs.odile, jar: jar() }); const r = await F.login(acc.odile.login, 'Odile-Mot-2026'); assert.equal(r.status, 429);
+            const F = fam(fresh(devs.odile)); const r = await F.login(acc.odile.login, 'Odile-Mot-2026'); assert.equal(r.status, 429);
         });
     } finally {
         if (browser) await browser.close().catch(() => {});
@@ -638,6 +641,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         await gate.close('main').catch(() => {});
         await server.stop().catch(() => {});
     }
+    if (failed) { try { console.error(fs.readFileSync(path.join(tmp, 'logs', 'php.log'), 'utf8').split('\n').filter(l => /LCNDA famille|Fatal|Warning|Uncaught/.test(l)).slice(-15).join('\n')); } catch (_) {} }
     fs.rmSync(tmp, { recursive: true, force: true });
     finish();
 })().catch(e => { console.error(e); process.exit(1); });

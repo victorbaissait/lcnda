@@ -124,9 +124,10 @@
         if (!enabled() || !count) { if (pill) pill.hidden = true; return; }
         if (!pill) {
             const meta = document.querySelector('.topbar-meta'); if (!meta) return;
+            const hiddenBar = !meta.getClientRects().length; // petit écran : la barre du haut est cachée → la pastille flotte en bas à droite
             pill = document.createElement('button'); pill.type = 'button'; pill.className = 'screen-tool cx-pill'; pill.id = 'cx-pill';
             pill.setAttribute('aria-haspopup', 'dialog');
-            meta.insertBefore(pill, meta.querySelector('.status-dot') || null);
+            if (hiddenBar) { pill.classList.add('is-float'); document.body.appendChild(pill); } else meta.insertBefore(pill, meta.querySelector('.status-dot') || null);
             pill.addEventListener('click', () => openBasket(pill));
             pill.addEventListener('dragover', e => { if (dragItems(e) !== null || e.dataTransfer?.types?.includes('text/plain')) { e.preventDefault(); pill.classList.add('is-over'); } });
             pill.addEventListener('dragleave', () => pill.classList.remove('is-over'));
@@ -243,7 +244,7 @@
             const name = A().personName ? A().personName(person) : `${person.first_name || ''} ${person.last_name || ''}`.trim();
             return {kind: ev ? 'event' : 'person', id: Number(ev?.dataset.eventId || person.id), person_id: Number(person.id), label: T('Fiche de {n}', {n: name}), screen: 'personnes'};
         }
-        if (st.module === 'enquetes' && st.enquetesTab !== 'atelier' && st.currentInvestigationId) return {kind: 'investigation', id: Number(st.currentInvestigationId), label: document.querySelector('.investigation-detail h1, .investigation-detail h2')?.textContent?.trim() || T('Enquête'), open: {module: 'enquetes', investigation_id: Number(st.currentInvestigationId)}};
+        if (st.module === 'enquetes' && st.currentInvestigationId) return {kind: 'investigation', id: Number(st.currentInvestigationId), label: document.querySelector('.investigation-detail h1, .investigation-detail h2')?.textContent?.trim() || T('Enquête'), open: {module: 'enquetes', investigation_id: Number(st.currentInvestigationId)}};
         const h = document.querySelector('#workspace .page-header h1, #workspace .page-header h2, #workspace h2');
         return {kind: 'screen', label: (h?.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 120) || T('Écran'), screen: st.module || ''};
     }
@@ -343,7 +344,7 @@
     document.addEventListener('dragend', () => { overlay?.remove(); overlay = null; setTimeout(() => { dragging = null; }, 0); });
 
     /* ═════════════ les destinations de l'app ═════════════ */
-    const invOpen = () => { const st = S(); return st.module === 'enquetes' && st.enquetesTab !== 'atelier' && st.enquetesTab !== 'battues' && Number(st.currentInvestigationId) ? Number(st.currentInvestigationId) : 0; };
+    const invOpen = () => { const st = S(); return st.module === 'enquetes' && Number(st.currentInvestigationId) && document.querySelector('#workspace .investigation-detail') ? Number(st.currentInvestigationId) : 0; };
     const invTitle = () => document.querySelector('.investigation-detail .page-header h1, .investigation-detail .page-header h2, .investigation-detail h1, .investigation-detail h2')?.textContent?.trim() || T('cette enquête');
     const reloadInv = id => { const st = S(); if (st.module === 'enquetes' && Number(st.currentInvestigationId) === Number(id)) A().refreshScreen?.(); };
     /** 🕵️ choisir une enquête (toutes celles où la personne est principale ou secondaire, ou les dernières), et une piste */
@@ -861,8 +862,8 @@
     /** la barre « 🧺 Prendre… » de la page d'une liste (appelée par app-listes-donnees.js) */
     function listBar(page, L) {
         if (!enabled() || !page) return;
-        const send = page.querySelector('[data-ld-send]') || page.querySelector('[data-ld-export]');
-        const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'button small secondary'; btn.dataset.ldTake = '';
+        const send = page.querySelector('[data-ld-save]'); // dans la barre des critères (toujours visible)
+        const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'ui-listbar-btn'; btn.dataset.ldTake = '';
         btn.textContent = `🧺 ${T('Prendre…')}`; btn.title = T('Mettre les lignes trouvées (avec leurs critères et leur source) au panier, ou dans une enquête, l’Atelier…');
         if (send) send.after(btn); else page.querySelector('.ld-bar-row')?.prepend(btn);
         const back = listTake && listTake.id === L.d.id ? listTake : null;

@@ -853,6 +853,8 @@ function fc_read_proposal(PDO $pdo, array $a, array $p, bool $direct): array
     } else {
         $rel = is_string($p['relation'] ?? null) && in_array($p['relation'], FC_RELATIONS, true) ? (string) $p['relation'] : '';
         if ($rel === '') { throw new FcRefuse('Choisis le lien : un enfant, un conjoint ou un parent.'); }
+        // 🌿 une branche de descendants s'agrandit par le bas (enfant, conjoint) ; une branche d'ancêtres par le haut (parent)
+        if ($direct && $a['role'] === 'branche' && !in_array($rel, $a['scope_kind'] === 'ascendants' ? ['parent'] : ['enfant', 'conjoint'], true)) { throw new FcRefuse('hors_branche', 403); }
         $first = fc_line($p['first_name'] ?? '', 80); $last = fc_line($p['last_name'] ?? '', 80);
         if ($first === '' && $last === '') { throw new FcRefuse('Indique au moins un prénom ou un nom'); }
         $g = in_array($p['gender'] ?? '', ['male', 'female'], true) ? (string) $p['gender'] : 'unknown';
@@ -868,10 +870,6 @@ function fc_read_proposal(PDO $pdo, array $a, array $p, bool $direct): array
     if ($direct) {
         if (!fc_in_branch($pdo, $a, $pid)) { throw new FcRefuse('hors_branche', 403); }
         if (fc_person_locked($pdo, $pid)) { throw new FcRefuse('Cette fiche est verrouillée : propose plutôt la modification.', 423); }
-        if ($kind === 'personne' && $a['role'] === 'branche') {
-            $allowed = $a['scope_kind'] === 'ascendants' ? ['parent'] : ['enfant', 'conjoint'];
-            if (!in_array($out['field'], $allowed, true)) { throw new FcRefuse('hors_branche', 403); }
-        }
     }
     return $out;
 }
@@ -930,7 +928,7 @@ function fc_guest_propose(PDO $pdo, array $a, array $dev, array $p, bool $direct
     }
     fc_json(['ok' => true, 'id' => $id, 'direct' => $direct]);
 }
-function begin_fc_tx(PDO $pdo): void { if (function_exists('begin_write_transaction')) { begin_write_transaction($pdo); } else { $pdo->exec('BEGIN IMMEDIATE'); } }
+function begin_fc_tx(PDO $pdo): void { if (function_exists('begin_write_transaction')) { begin_write_transaction($pdo); return; } $pdo->beginTransaction(); try { $pdo->exec('DELETE FROM persons WHERE 0'); } catch (Throwable $e) { $pdo->rollBack(); throw $e; } } // le verrou d'écriture tout de suite (comme api.php)
 
 function fc_label(PDO $pdo, int $pid): string
 {
