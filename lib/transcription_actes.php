@@ -433,7 +433,7 @@ function tx_deep_run(string $dir): void
             if ($noThink) { $body['think'] = false; }
             if (($job['kind'] ?? '') === 'find') { $body['format'] = 'json'; $body['options']['num_predict'] = 3072; } // 🔍 Repérer avec l'IA : du texte seulement, réponse en JSON
             $left = max(5, (int) ceil($limit - (microtime(true) - $t0)));
-            $r = tx_deep_http('POST', '/api/chat', $body, $isRead ? $left + 15 : 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, &$info, &$loop, &$timedOut, &$seen, $put, $cancelled, $isRead, $expected, $limit, $t0) {
+            $r = tx_deep_http('POST', '/api/chat', $body, $isRead ? $left + 5 : 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, &$info, &$loop, &$timedOut, &$seen, $put, $cancelled, $isRead, $expected, $limit, $t0) {
                 if (!empty($j['error'])) { $err = mb_substr((string) $j['error'], 0, 300); return false; }
                 if (!empty($j['done'])) { $info = trim(implode(' · ', array_filter([isset($j['done_reason']) ? 'fin : ' . mb_substr((string) $j['done_reason'], 0, 20) : '', isset($j['prompt_eval_count']) ? 'image et consigne : ' . (int) $j['prompt_eval_count'] : '', isset($j['eval_count']) ? 'écrit : ' . (int) $j['eval_count'] : '']))); }
                 $piece = (string) ($j['message']['content'] ?? '');
@@ -499,7 +499,7 @@ function tx_deep_job(string $id): array
         $state = 'error'; $r['error'] = 'Temps maximum atteint ({m} min) : la lecture est arrêtée.'; $r['error_vars'] = ['m' => tx_deep_minutes($lim)]; $r['warn'] = 'timeout';
     }
     return ['id' => $id, 'kind' => (string) ($job['kind'] ?? ''), 'model' => (string) ($job['model'] ?? ''), 'state' => $state, 'elapsed' => max(0, time() - (int) ($job['created'] ?? time())),
-        'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => (string) ($r['error'] ?? ''), 'detail' => (string) ($r['detail'] ?? ''),
+        'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => is_array($r['error_vars'] ?? null) ? i18n_tx((string) ($r['error'] ?? ''), $r['error_vars']) : (string) ($r['error'] ?? ''), 'detail' => (string) ($r['detail'] ?? ''),
         'limit' => $lim, 'warn' => (string) ($r['warn'] ?? ''), 'line' => (int) ($r['line'] ?? 0), 'error_vars' => is_array($r['error_vars'] ?? null) ? $r['error_vars'] : new stdClass()]
         + (($job['kind'] ?? '') === 'find' && is_array($r['found'] ?? null) ? ['found' => $r['found']] : []);
 }

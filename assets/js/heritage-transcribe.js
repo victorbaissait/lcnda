@@ -465,6 +465,27 @@
         const pageZone = z => Object.assign(z, pz());
         const segIx = () => { const i = (t.data.pages || []).map(Number).indexOf(curPid()); return i < 0 ? 0 : i; };
         const pageName = (p, i) => (ext.mediaPages ? ext.mediaPages.labelOf(p, i) : i18n('Page {n}', {n: i + 1}));
+        /** 📑 le morceau du texte d'une page (son n° de média) : une lecture va dans le bloc de la page lue, même si on regarde une autre page */
+        const segOf = pid => { const i = (t.data.pages || []).map(Number).indexOf(Number(pid)); return i < 0 ? segIx() : i; };
+        const segName = i => { const id = Number((t.data.pages || [])[i] || 0), k = PAGES.findIndex(p => Number(p.media_id) === id), n = (k < 0 ? i : k) + 1, nm = k >= 0 ? pageName(PAGES[k], k) : '', pg = i18n('Page {n}', {n});
+            return nm && nm !== pg ? `${pg} (${nm})` : pg; };
+        const blocksOn = () => pageForm === 'one' && PAGES.length > 1 && !!PG;
+        /* 📑 les pages l'une sous l'autre, chacune dans son bloc (heritage-transcribe-blocs.js) : sa barre, « ✨ Lire cette page », ▸ replier */
+        const BK = ext.txBlocks ? ext.txBlocks.mount({editor: $('[data-tx-editor]'), area, mirror, on: blocksOn,
+            pages: () => (t.data.pages || []).map((id, i) => ({pid: Number(id), n: i + 1, name: segName(i)})), cur: () => segIx(),
+            zones: pid => t.data.zones.filter(z => Number(z.p || t.media_id) === Number(pid)).length, key: () => (t.id ? String(t.id) : `m${t.media_id}`),
+            show: i => showSeg(i), read: i => readSeg(i), readTitle: () => i18n('Lire cette page avec : {x}', {x: i18n((READS.find(r => r[0] === readChoice()) || READS[0])[2])}),
+            caret: () => followCaret()}) : null;
+        const READ_CHOICE_KEY = 'genealogie-tx-lire-choix';
+        /** la lecture choisie la dernière fois (✍️ rapide, 🖨 imprimé, 🔬 approfondie) : celle de « ✨ Lire cette page » */
+        const readChoice = () => { let v = ''; try { v = localStorage.getItem(READ_CHOICE_KEY) || ''; } catch (_) {} return READS.some(r => r[0] === v) ? v : 'htr'; };
+        const setReadChoice = v => { try { localStorage.setItem(READ_CHOICE_KEY, v); } catch (_) {} };
+        const idxOfSeg = i => PAGES.findIndex(p => Number(p.media_id) === Number((t.data.pages || [])[i] || 0));
+        /** ↦ Voir l'image : la page de ce bloc s'affiche, le curseur au début de son texte */
+        async function showSeg(i) { const k = idxOfSeg(i); if (k < 0) return; BK?.unfold(i); if (k !== pageIx) await goPage(k, {keepText: true}); const sg = PG.segments(area.value)[i]; if (sg) { area.focus({preventScroll: true}); area.setSelectionRange(sg.s, sg.s); } BK?.scrollTo(i); BK?.paint(); }
+        /** ✨ Lire cette page : la page s'affiche, puis la lecture choisie (sur cette page seulement) ; le texte lu va dans son bloc */
+        async function readSeg(i) { const k = idxOfSeg(i); if (k < 0) return; if (k !== pageIx) await goPage(k, {keepText: true}); BK?.unfold(i);
+            const c = readChoice(); if (c === 'ocr') return runOcr(); if (c === 'deep') return openDeep(); return runHtr(); }
         /** remplace [at, end) du texte par str ; les zones, personnes et repérages qui suivent se décalent */
         function spliceText(at, end, str) {
             const v = area.value, delta = str.length - (end - at);
@@ -474,27 +495,75 @@
             area.value = v.slice(0, at) + str + v.slice(end); before = area.value; t.body = area.value;
         }
         /** un texte lu (text = l'ancien texte + le nouveau, zones posées dessus) : à la fin du texte, ou à la fin de la page affichée (un seul texte) */
-        function putRead(text, made) {
+        function putRead(text, made, {pid = curPid(), ask = true} = {}) {
             if (pageForm !== 'one') { before = area.value = text; t.body = text; snap(); t.data.zones.push(...made); touch(); drawZones(); return; }
-            const old = area.value, rest = text.slice(old.length), add = rest.replace(/^\n+/, ''), base = old.length + (rest.length - add.length);
-            const sg = PG.segments(old)[segIx()] || {s: old.length, e: old.length}, at = sg.e, had = !!old.slice(sg.s, at).trim();
+            const old = area.value, rest = text.slice(old.length), add = rest.replace(/^\n+/, ''), base = old.length + (rest.length - add.length), si = segOf(pid);
+            const sg = PG.segments(old)[si] || {s: old.length, e: old.length}, at = sg.e, had = !!old.slice(sg.s, at).trim();
+            const was = had && ask && blocksOn() ? snapText() : null, rel = made.map(z => ({...z, s: z.s - base, e: z.e - base})); // 📑 la page avait déjà du texte : on proposera de remplacer
             const pre = had ? (old.slice(0, at).endsWith('\n') ? '\n' : '\n\n') : '', ins = pre + (at < old.length ? add.replace(/\n+$/, '') : add);
             spliceText(at, at, ins); snap();
-            const k = at + pre.length - base; made.forEach(z => { z.s += k; z.e += k; z.p = curPid(); });
-            t.data.zones.push(...made); touch(); drawZones();
+            const k = at + pre.length - base; made.forEach(z => { z.s += k; z.e += k; z.p = Number(pid) || curPid(); });
+            t.data.zones.push(...made); touch(); BK?.unfold(si); drawZones(); BK?.scrollTo(si);
+            if (was) offerPlace({pid, was, add: add.replace(/\n+$/, ''), rel});
             return {s: at + pre.length, e: at + ins.length};
         }
+        /** 📑 l'état du texte où la lecture (add, ses zones rel posées à partir de 0) remplace le texte de la page pid : les zones de la page
+         *  reliées ligne à ligne quand le nombre de lignes est le même (ext.txCtx.relinkZones), celles d'une lecture d'avant retirées */
+        function replacedState(x, pid, add, rel = []) {
+            const body = x.body, sg = PG.segments(body)[segOf(pid)] || {s: 0, e: body.length}, str = add.replace(/\n+$/, '') + (sg.e < body.length ? '' : '\n');
+            const old = body.slice(sg.s, sg.e), d = str.length - (sg.e - sg.s), mineP = z => Number(z.p || t.media_id) === Number(pid);
+            const inSeg = z => z.e > z.s && z.s >= sg.s && z.e <= sg.e && mineP(z), mine = x.zones.filter(inSeg);
+            const R = mine.length && ext.txCtx?.relinkZones && ext.txSnap ? ext.txCtx.relinkZones(mine.map(z => ({...z, s: z.s - sg.s, e: z.e - sg.s})), old, str, ext.txSnap.textLinesOf) : null;
+            const mv = r => { const f = v => (v >= sg.e ? v + d : v > sg.s ? sg.s : v); return {...r, s: f(r.s), e: Math.max(f(r.s), f(r.e))}; };
+            const zones = [];
+            x.zones.forEach(z => { const j = mine.indexOf(z);
+                if (j < 0) { if (!(z.src && mineP(z) && z.s < sg.e && z.e > sg.s)) zones.push(mv(z)); return; } // une zone d'une lecture à cheval : partie avec son texte
+                if (rel.length && z.src) return; // la nouvelle lecture a ses zones de ligne : celles de la lecture d'avant s'en vont
+                const r = R?.zones[j]; if (r && r.e > r.s) { zones.push({...r, s: r.s + sg.s, e: r.e + sg.s}); return; }
+                if (!z.src) zones.push({...z, s: sg.s, e: sg.s}); }); // pas de ligne pour elle : gardée sur l'image, à relier à la main
+            zones.push(...rel.map(z => ({...z, s: z.s + sg.s, e: z.e + sg.s, p: Number(pid)})));
+            return {body: body.slice(0, sg.s) + str + body.slice(sg.e), zones, people: x.people.map(mv), reviewed: x.reviewed};
+        }
+        /** 📑 une lecture arrivée sur une page qui avait déjà du texte : elle est ajoutée à la fin de la page (rien n'est perdu), et on
+         *  propose « ⇄ Remplacer la page », « ⚖️ Garder pour comparer » (le texte comme avant, la lecture dans ⚖️) ou « ↶ Annuler » */
+        let placeBar = null;
+        function offerPlace({pid, was, add, rel}) {
+            placeBar?.remove();
+            const to = snapText(), name = segName(segOf(pid)), bar = placeBar = document.createElement('div');
+            bar.className = 'h-tx-place'; bar.dataset.txPlacebar = String(pid); bar.setAttribute('role', 'status');
+            bar.innerHTML = `<span class="h-tx-placet">📄 ${esc(i18n('{page} avait déjà du texte : la lecture est ajoutée à la fin de la page.', {page: name}))}</span>`
+                + `<button type="button" class="button small secondary" data-tx-place="replace">⇄ ${esc(i18n('Remplacer la page'))}</button>`
+                + `<button type="button" class="button small" data-tx-place="append" aria-pressed="true">＋ ${esc(i18n('Ajouter à la fin de la page'))}</button>`
+                + `<button type="button" class="button small secondary" data-tx-place="compare">⚖️ ${esc(i18n('Garder pour comparer'))}</button>`
+                + `<button type="button" class="button small secondary" data-tx-place="undo">↶ ${esc(i18n('Annuler'))}</button>`
+                + `<button type="button" class="icon-button small" data-tx-place="close" title="${esc(i18n('Fermer'))}" aria-label="${esc(i18n('Fermer'))}">×</button>`;
+            $('[data-tx-editor]').before(bar);
+            const show = x => { putText(x); const i = segOf(pid); BK?.unfold(i); BK?.scrollTo(i); };
+            bar.addEventListener('click', e => { const b = e.target.closest('[data-tx-place]'); if (!b) return; const k = b.dataset.txPlace; bar.remove(); if (placeBar === bar) placeBar = null;
+                if (k === 'close' || k === 'append') return;
+                const now = snapText();
+                if (k === 'undo') { show(was); status(i18n('Lecture retirée du texte')); A().undoToast?.(i18n('Lecture retirée de {page}', {page: name}), {undo: () => show(now), redo: () => show(was), icon: '📄'}); return; }
+                if (k === 'replace') { const rep = replacedState(was, pid, add, rel); versionBefore('Avant « Remplacer la page »', was); show(rep); status(i18n('Texte lu (à relire)'));
+                    A().undoToast?.(i18n('Lecture mise à la place du texte de {page}', {page: name}), {undo: () => show(now), redo: () => show(rep), icon: '⇄'}); return; }
+                if (k === 'compare') { show(was); status(i18n('Lecture gardée pour comparer'));
+                    A().undoToast?.(i18n('Lecture gardée pour comparer : le texte de {page} est comme avant', {page: name}), {undo: () => show(now), redo: () => show(was), icon: '⚖️'});
+                    setTimeout(() => openCompare(null, 'line'), 400); } // ⚖️ la lecture est gardée (keepReading) : « Ligne par ligne »
+            });
+            void to;
+        }
         /** remplacer le texte de la page affichée (un seul texte pour plusieurs pages) ou tout le texte ; ses zones de lecture partent avec lui */
-        function replaceRead(str) {
+        function replaceRead(str, {pid = curPid()} = {}) {
             snap();
-            const sg = pageForm === 'one' && PAGES.length > 1 ? PG.segments(area.value)[segIx()] : {s: 0, e: area.value.length};
+            if (blocksOn()) { const si = segOf(pid), sg = PG.segments(area.value)[si], x = replacedState(snapText(), pid, str); // 📑 les zones de la page reliées ligne à ligne si elles le peuvent
+                const s0 = sg.s; putText(x); BK?.unfold(si); const e0 = PG.segments(area.value)[si]?.e ?? area.value.length; return {s: s0, e: e0}; }
+            const sg = {s: 0, e: area.value.length};
             t.data.zones = t.data.zones.filter(z => !(z.src && onHere(z) && z.s < sg.e && z.e > sg.s));
             spliceText(sg.s, sg.e, str); return {s: sg.s, e: sg.s + str.length};
         }
-        function appendRead(str) {
+        function appendRead(str, {pid = curPid(), ask = false} = {}) {
             const old = area.value, s0 = old.length + (old.trim() ? 2 : 0);
             if (pageForm !== 'one') { area.value += (old.trim() ? '\n\n' : '') + str; return {s: s0, e: area.value.length}; }
-            return putRead(old + (old.trim() ? '\n\n' : '') + str, []);
+            return putRead(old + (old.trim() ? '\n\n' : '') + str, [], {pid, ask});
         }
         function paintPages() {
             const bar = $('[data-tx-pages]'); if (!bar) return;
@@ -612,6 +681,10 @@
                 a = Math.max(0, a); b = Math.min(v.length, b);
             }
             const nl = e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph' || /^\n/.test(e.data || '');
+            // 📑 la dernière page, vide, sans ligne sous son repère : écrire là commence sa première ligne (le repère reste entier)
+            if (s === en && s === v.length && mk[mk.length - 1].end === v.length && e.inputType.startsWith('insert') && !nl) {
+                const put = e.data ?? e.dataTransfer?.getData('text/plain') ?? ''; if (!put) return false;
+                e.preventDefault(); area.setRangeText('\n' + put, s, s, 'end'); area.dispatchEvent(new Event('input')); return true; }
             const hit = mk.some(k => (a < b ? a < k.end + 1 && b > k.at - 1 : (a > k.at && a < k.end) || ((a === k.at || a === k.end) && !nl && e.inputType.startsWith('insert'))));
             if (!hit) return false;
             e.preventDefault();
@@ -891,7 +964,8 @@
                 while (seg < mk.length && mk[seg].at <= from) seg++;
                 let h = chunkHtml(from, b0);
                 if (ln || rvView) { let n = line; h = (from === 0 ? lnSpan(1) : '') + h.replace(/\n/g, () => `\n${lnSpan(++n)}`); line = n; }
-                chunks.push(`<span class="h-tx-mc${many && seg !== here ? ' is-off' : ''}">${h}</span>`); from = b0;
+                const mj = many ? mk.findIndex(q => q.at === from) : -1; // 📑 la ligne du repère « — page 2 — » : la barre de sa page est posée dessus (heritage-transcribe-blocs.js)
+                chunks.push(`<span class="h-tx-mc${many && seg !== here ? ' is-off' : ''}${mj >= 0 ? ' is-mk' : ''}"${mj >= 0 ? ` data-mk="${mj}"` : ''}>${h}</span>`); from = b0;
             };
             while ((k = text.indexOf('\n', k + 1)) >= 0) {
                 while (ci < cuts.length && cuts[ci][1] <= k) ci++;
@@ -909,7 +983,7 @@
                 if (chunks.length - q0 > p0) { const tp = document.createElement('template'); tp.innerHTML = chunks.slice(p0, chunks.length - q0).join(''); mirror.insertBefore(tp.content, anchor); }
             }
             paintMirror.chunks = chunks; paintMirror.root = mirror;
-            mirror.scrollTop = area.scrollTop; flowSoon();
+            mirror.scrollTop = area.scrollTop; flowSoon(); BK?.paint();
         }
         function paintZoneBar() {
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
@@ -1024,7 +1098,7 @@
         }
         const revealNow = z => { if (followOn && followZoom(z)) return; const r = stage.getBoundingClientRect(); const cx = z.x + z.w / 2, cy = z.y + z.h / 2; const [X, Y] = rotPt(cx, cy); if (X * zoom + panX < 0 || X * zoom + panX > r.width || Y * zoom + panY < 0 || Y * zoom + panY > r.height) { panX = r.width / 2 - X * zoom; panY = r.height / 2 - Y * zoom; applyView(); } };
         const gotoRange = (s, en) => { if (phone()) showPtab('text', false); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } else followCaret(); };
-        const selectText = (z, focus = true) => { if (!(z?.e > z?.s)) return; if (focus) area.focus(); area.setSelectionRange(z.s, z.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, z.s).split('\n').length; area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; };
+        const selectText = (z, focus = true) => { if (!(z?.e > z?.s)) return; BK?.revealPos(z.s); if (focus) area.focus(); area.setSelectionRange(z.s, z.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, z.s).split('\n').length; area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; };
         /* ─── glisser sur l'image : déplacer l'image, dessiner une zone, déplacer ou redimensionner la zone choisie ─── */
         let drag = null, space = false, pinch = null;
         const pointers = new Map();
@@ -1043,7 +1117,7 @@
         }
         const setGeom = (z, R) => Object.assign(z, {x: Math.round(R.x), y: Math.round(R.y), w: Math.round(R.w), h: Math.round(R.h)});
         /** le curseur au début du mot, dans le texte (le mot montré dans la barre d'état) */
-        const caretTo = w => { if (phone()) showPtab('text', false); area.focus({preventScroll: true}); area.setSelectionRange(w.s, w.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, w.s).split('\n').length;
+        const caretTo = w => { if (phone()) showPtab('text', false); BK?.revealPos(w.s); area.focus({preventScroll: true}); area.setSelectionRange(w.s, w.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, w.s).split('\n').length;
             if ((lines - 1) * lineH < area.scrollTop || (lines + 1) * lineH > area.scrollTop + area.clientHeight) { area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; }
             dlg.dataset.txCaret = String(w.s); status(i18n('Curseur sur « {w} »', {w: w.word})); };
         const pickZone = (id, {showText = true} = {}) => { const z = t.data.zones.find(q => q.id === id); if (!z) return null; if (selZone !== id) { selZone = id; drawZones(); } if (showText) selectText(z, false); stage.focus({preventScroll: true}); return z; };
@@ -1245,7 +1319,7 @@
             $('[data-tx-fcount]').classList.toggle('is-none', !!q && !out.length); paintMirror();
         }
         /** montrer le résultat en cours : choisi dans le texte (sans y aller), le texte défile jusqu'à lui */
-        function findShow() { const h = findHits[findCur]; if (!h) return; area.setSelectionRange(h.s, h.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, h.s).split('\n').length - 3) * lineH); mirror.scrollTop = area.scrollTop; $('[data-tx-fcount]').textContent = i18n('{n} sur {total}', {n: findCur + 1, total: findHits.length}); paintMirror(); }
+        function findShow() { const h = findHits[findCur]; if (!h) return; BK?.revealPos(h.s); area.setSelectionRange(h.s, h.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, h.s).split('\n').length - 3) * lineH); mirror.scrollTop = area.scrollTop; $('[data-tx-fcount]').textContent = i18n('{n} sur {total}', {n: findCur + 1, total: findHits.length}); paintMirror(); }
         const findStep = d => { if (!findHits.length) return; findCur = (findCur + d + findHits.length) % findHits.length; findShow(); };
         function openFind(replace = false) {
             const sel = area.value.slice(area.selectionStart, area.selectionEnd);
@@ -1281,7 +1355,7 @@
         function putText(x) { flushCommit(); area.value = x.body; before = x.body; t.body = x.body; t.data.zones = (x.zones || []).map(z => ({...z})); t.data.people = (x.people || []).map(p => ({...p})); t.data.reviewed = [...(x.reviewed || [])];
             if (!t.data.zones.some(z => z.id === selZone)) selZone = null; txFix = []; touch(); drawZones(); paintPeople(); if (!findBar.hidden) findRun(); flushCommit(); }
         /** juste avant un gros changement (tout remplacer, propositions sûres, lecture mise dans le texte) : une version automatique, si l'acte est enregistré */
-        function versionBefore(label) { if (!t.id || !area.value.trim()) return; post('save_act_transcription_version', {act_id: t.id, label, body: area.value, data: {zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []}, auto: 1}).then(() => VS?.soon(), () => {}); }
+        function versionBefore(label, x = null) { const b = x ? x.body : area.value; if (!t.id || !b.trim()) return; post('save_act_transcription_version', {act_id: t.id, label, body: b, data: {zones: x ? x.zones : t.data.zones, people: x ? x.people : t.data.people, reviewed: (x ? x.reviewed : t.data.reviewed) || []}, auto: 1}).then(() => VS?.soon(), () => {}); }
         async function openVersions() {
             if (!UI.openVersions) return toast(i18n('La fenêtre des versions n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }
@@ -1406,7 +1480,7 @@
         function showKeys() {
             const K = A().keys, kk = s => (K?.html ? K.html(s) : `<kbd>${esc(s)}</kbd>`);
             const rows = [['⌘S', 'Enregistrer'], ['⌘Z', 'Annuler'], ['⇧⌘Z', 'Rétablir'], ['⌘F', 'Chercher dans le texte'], ['⌥⌘F', 'Chercher et remplacer'], ['↩ / ⇧↩', 'Résultat suivant, résultat d’avant'],
-                ...(TV.reviewMode?.() ? [['R', 'Relire ligne à ligne']] : []), ['⌥↓ / ⌥↑', 'Ligne suivante, ligne d’avant : l’image suit sa zone'], ['⌥↩', 'Étape Corriger : la ligne est relue, puis la suivante'], ['H', 'Déplacer l’image'], ['Espace', 'Déplacer l’image, en restant appuyé'], ['Z', 'Dessiner une zone'], ['L', 'Loupe'],
+                ...(TV.reviewMode?.() ? [['R', 'Relire ligne à ligne']] : []), ['⌥↓ / ⌥↑', 'Ligne suivante, ligne d’avant : l’image suit sa zone'], ['⌘↓ / ⌘↑', 'Plusieurs pages : la page suivante, la page d’avant'], ['⌥↩', 'Étape Corriger : la ligne est relue, puis la suivante'], ['H', 'Déplacer l’image'], ['Espace', 'Déplacer l’image, en restant appuyé'], ['Z', 'Dessiner une zone'], ['L', 'Loupe'],
                 ['← → ↑ ↓', 'Déplacer la zone choisie (⇧ : l’agrandir)'], ['Suppr', 'Supprimer la zone choisie'], ['⌘0', 'Ajuster à la fenêtre'], ['⌘1', '100 %'], ['Mod++ / ⌘−', 'Zoom avant, zoom arrière'], ['⌘P', 'Imprimer'], ['⌘/ / ?', 'Cette liste des touches'], ['Échap', 'Fermer']];
             ext.openDialog({eyebrow: i18n('Atelier de transcription').toUpperCase(), title: `⌨️ ${i18n('Raccourcis clavier')}`, submitLabel: i18n('Fermer'),
                 body: `<table class="h-tx-keys" data-tx-keys><tbody>${rows.map(([k, l]) => `<tr><td>${k.split(' / ').map(kk).join(' / ')}</td><td>${esc(i18n(l))}</td></tr>`).join('')}</tbody></table><p class="ui-hint">${esc(i18n('Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥.'))}</p>`, onSubmit: () => {}});
@@ -1662,18 +1736,18 @@
         const viewChanged = () => Object.entries(TV.DEFAULT_VIEW).some(([k, d]) => k !== 'rot' && k !== 'tilt' && k !== 'mirror' && String(t.data.view[k]) !== String(d));
         async function runOcr() {
             if (!t.filename) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
-            const lang = $('[data-tx-lang]').value; status(i18n('Chargement du lecteur…'));
+            const lang = $('[data-tx-lang]').value, pid = curPid(); status(i18n('Chargement du lecteur…')); // 📑 la page lue : son texte va dans son bloc
             try {
                 const T = await A().loadOcrEngine(); status(i18n('Lecture de l’image…'));
                 const r = await T.recognize(await filteredCanvas(), lang);
                 const dd = r?.data || {}, lines = (dd.lines?.length ? dd.lines : (dd.blocks || []).flatMap(bl => (bl.paragraphs || []).flatMap(pg => pg.lines || []))).filter(l => (l.text || '').trim() && l.bbox && !skipped({x: l.bbox.x0, y: l.bbox.y0, w: l.bbox.x1 - l.bbox.x0, h: l.bbox.y1 - l.bbox.y0}));
                 if (!lines.length) { const plain = String(dd.text || '').trim(); if (plain) keepReading(plain, 'ocr', lang, {img: readImg(), part: 'page'}); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
-                    appendRead(plain); before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); return; }
+                    appendRead(plain, {pid, ask: true}); before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); return; }
                 keepReading(lines.map(l => l.text.replace(/\s+$/, '')).join('\n'), 'ocr', lang, {img: readImg(), part: 'page'}); // ⚖️
                 let text = area.value; if (text.trim()) text += '\n\n'; const start = text.length;
                 const made = [];
                 lines.forEach(l => { const s = text.length, line = l.text.replace(/\s+$/, ''); text += line + '\n'; const b = l.bbox; made.push({id: zid(), x: b.x0, y: b.y0, w: b.x1 - b.x0, h: b.y1 - b.y0, s, e: s + line.length, note: '', c: '', src: 'ocr'}); });
-                putRead(text, made);
+                putRead(text, made, {pid});
                 status(i18n(lines.length > 1 ? '{n} lignes lues (à relire)' : '{n} ligne lue (à relire)', {n: lines.length})); toast(i18n('Texte lu et zones posées ligne par ligne : relis et corrige.')); void start;
             } catch (e) { status(''); toast(e.message || 'Lecture impossible.', 'error'); }
         }
@@ -1727,7 +1801,7 @@
             if (!own && !installed.some(m => m.file === pick)) pick = (installed.find(m => m.recommended) || installed[0]).file;
             let box = zone === undefined ? htrArea() : zone;
             if (zone === undefined && !box) { box = await pageArea(); if (box === false) return bail(); } // A : capture d'écran → recadrer sur le texte ?
-            htrBusy(true, box && !box.mask && zone !== undefined ? i18n('Lecture de la zone…') : i18n('Lecture de l’acte…')); status('');
+            htrBusy(true, box && !box.mask && zone !== undefined ? i18n('Lecture de la zone…') : i18n('Lecture de l’acte…')); status(''); const pid = curPid(); // 📑 la page lue
             try {
                 const body = {media_id: curPid(), model_file: pick, language: $('[data-tx-lang]').value};
                 if (box || (useEnh() && viewChanged())) { // la zone découpée, et/ou l'image améliorée (« Mieux voir »)
@@ -1754,7 +1828,7 @@
                     try { localStorage.setItem(HTR_MODEL_KEY, j.model_file || pick); } catch (_) {}
                     if (!(j.lines || []).length) { setTimeout(() => readNext(true), 60); } if (!(j.lines || []).length) return toast(i18n('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.'), 'error');
                     keepReading((j.lines || []).map(l => l.text || '').join('\n'), 'htr', j.model_file || pick, {img: readImg(), part: box ? 'zone' : 'page'}); // ⚖️ la lecture gardée, même si elle n'est pas mise dans le texte
-                    htrReview(j.lines, box, j.model_file || pick, installed);
+                    htrReview(j.lines, box, j.model_file || pick, installed, pid);
                 };
                 htrJob.timer = setTimeout(poll, 700);
             } catch (e) { htrJob = null; htrBusy(false); bail(); toast(e.message || 'Lecture impossible.', 'error'); }
@@ -1766,7 +1840,7 @@
                 {action: {label: `⤓ ${i18n('Installer maintenant')}`, run: async () => { if (dirty) { await save(); if (dirty) return; } teardown(); const st = A().state; if (!st) return; st.maintenanceTab = 'htr'; A().persistUiState?.(); A().setModule?.('maintenance'); }}});
         }
         /** Les lignes lues, à côté de leur morceau d'image ; les mots peu sûrs surlignés ; on corrige, puis on met dans le texte */
-        async function htrReview(lines, box, modelFile, installed) {
+        async function htrReview(lines, box, modelFile, installed, pid = curPid()) {
             const ox = box?.x || 0, oy = box?.y || 0;
             lines = lines.filter(l => !l.bbox || !skipped({x: l.bbox[0] + ox, y: l.bbox[1] + oy, w: l.bbox[2] - l.bbox[0], h: l.bbox[3] - l.bbox[1]})); // ⛔ zones à ne pas lire
             let im = null; try { im = await new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = ko; i.src = origSrc(); }); } catch (_) {}
@@ -1877,7 +1951,7 @@
                     kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; const z = {id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? i18n('Lu automatiquement (sûr à {x} %)', {x: pct(l.conf)}) : '', c: '', src: 'htr'};
                         const wb = line === lineText(l) ? ext.txCtx?.wordsOfLine(wordsOf(l), ox) : null; if (wb) { z.wb = wb; z.wl = line.length; } // 🔦 la place de chaque mot (le cadre des mots choisis est alors exact)
                         made.push(z); } });
-                    putRead(text, made);
+                    putRead(text, made, {pid}); // 📑 dans le bloc de la page lue (vide : rempli ; déjà écrit : ajouté, et le choix proposé)
                     status(i18n('{x} (à relire)', {x: A().plural ? A().plural(kept.length, 'ligne lue', 'lignes lues') : kept.length + ' lignes lues'}));
                     runDetect({quiet: true}).then(() => toast(i18n('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.')));
                     if (fixOn()) runFix({quiet: true});
@@ -1896,16 +1970,16 @@
             // 📑 un seul texte pour plusieurs pages : on compare avec le morceau de la page affichée, pas avec tout le document
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
             const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
-            const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
+            const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '', pid = curPid(); // 📑 la page lue
             ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, htrFrom: htrText ? 'htr' : 'mine', pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), expectedLines: () => knownLines(b), onReading: (txt, model, info) => { lastHints = Number(info?.hints) || 0; keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}); }, context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
                 existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
                 onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
                     if (mode === 'replace') versionBefore('Avant « Remplacer par la lecture approfondie »'); // l'ancien texte reste dans 🕘 Versions
-                    const put = mode === 'replace' ? replaceRead(text.trim() + '\n') : appendRead(text.trim() + '\n'), start = put.s;
+                    const put = mode === 'replace' ? replaceRead(text.trim() + '\n', {pid}) : appendRead(text.trim() + '\n', {pid}), start = put.s;
                     if (from !== 'htr') t.data.hinted = mode === 'replace' ? lastHints : Math.max(Number(t.data.hinted) || 0, lastHints); // 🧠 lue avec des indices : ses mots [?] le disent au survol
                     before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect({quiet: true});
-                    if (LG()?.linkOn()) linkLines({s: start, e: put.e, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide
+                    if (LG()?.linkOn() && curPid() === pid) linkLines({s: start, e: put.e, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide (sur l'image de la page lue)
                     if (fixOn()) runFix({quiet: true}); }}); // 🪄 les corrections proposées aussi sur ce texte
         }
         /* ─── 📑 la lecture approfondie de toutes les pages : une demande à Ollama par page, l'une après l'autre ; le texte de chaque page
@@ -1952,7 +2026,7 @@
             if (err) { toast(err, 'error'); return deepAllEnd(true); }
             if (warn) { toast(`${pageName(PAGES[pageIx], pageIx)} · ${warn}`, 'error'); R.warns = [...(R.warns || []), `${pageName(PAGES[pageIx], pageIx)} · ${warn}`]; } // 🔁 ⏱ ■ dit, page par page
             if (txt.trim()) keepReading(txt, 'deep', R.model, {img: ext.txActe?.imageMode?.() || 'auto', hints: R.ctx?.hints?.length || 0, part: 'page'}); // ⚖️
-            if (txt.trim()) { if (R.ctx?.hints?.length) t.data.hinted = Math.max(Number(t.data.hinted) || 0, R.ctx.hints.length); const put = appendRead(txt.trim() + '\n'); before = area.value; t.body = area.value; touch(); paintMirror();
+            if (txt.trim()) { if (R.ctx?.hints?.length) t.data.hinted = Math.max(Number(t.data.hinted) || 0, R.ctx.hints.length); const put = appendRead(txt.trim() + '\n', {pid: Number(PAGES[i]?.media_id) || curPid()}); before = area.value; t.body = area.value; touch(); paintMirror();
                 if (LG()?.linkOn()) await linkLines({s: put.s, e: put.e, box: b || null, src: 'deep'}); // ▤ une zone par ligne, sur l'image de cette page
                 if (fixOn()) runFix({quiet: true}); } // 🪄
             if (R.stop) return deepAllEnd(true); // ■ le texte déjà lu de cette page est gardé ci-dessus
@@ -2278,6 +2352,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             if (k === 'resetview') { const before = {...t.data.view}, origin = () => { t.data.view = TV.viewOf(); fitOn = true; fitMode = 'page'; syncControls(); geom({keepCenter: false}); applyFit('page'); applyImage(); touch(); };
                 if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d))) return status(i18n('L’image est déjà comme au départ'));
                 origin(); A().undoToast?.(i18n('Image remise comme au départ'), {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
+            if (k === 'ocr' || k === 'htr' || k === 'deep') setReadChoice(k); // ✨ « Lire cette page » (la barre de chaque page) reprend ce choix
             if (k === 'ocr') return readAllOn() ? readAll('ocr') : (perOnly(), runOcr());
             if (k === 'htr') return readAllOn() ? readAll('htr') : (perOnly(), runHtr());
             if (k === 'htrstop') return htrStop();
@@ -2381,7 +2456,8 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
               if (e.ctrlKey && !e.metaKey && !e.altKey && e.key.toLowerCase() === 'h' && e.target === area) { e.preventDefault(); e.stopPropagation(); openFind(true); return; }
               if (mk && (e.key === '/' || e.code === 'Slash')) { e.preventDefault(); e.stopPropagation(); showKeys(); return; }
               if (e.altKey && !mk && e.key === 'Enter' && e.target === area && rvView) { e.preventDefault(); e.stopPropagation(); if (toggleReviewed(area.value.slice(0, area.selectionStart).split('\n').length)) lineStep(1); return; } // 👁 ⌥ Entrée : la ligne est relue, on passe à la suivante
-              if (e.altKey && !mk && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target === area) { e.preventDefault(); e.stopPropagation(); lineStep(e.key === 'ArrowDown' ? 1 : -1); return; } }
+              if (e.altKey && !mk && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target === area) { e.preventDefault(); e.stopPropagation(); lineStep(e.key === 'ArrowDown' ? 1 : -1); return; }
+              if (mk && !e.altKey && !e.shiftKey && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target === area && blocksOn() && BK) { e.preventDefault(); e.stopPropagation(); BK.jump(e.key === 'ArrowDown' ? 1 : -1); return; } } // 📑 Ctrl/⌘ ↓ ↑ : la page suivante, la page d'avant
             if (e.target.closest?.('[data-tx-ptabs]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = ['image', 'text', 'people'], i = ks.indexOf(e.target.closest('[data-tx-ptab]')?.dataset.txPtab); showPtab(ks[(i + (e.key === 'ArrowRight' ? 1 : 2)) % 3]); return; }
             if (e.target.closest?.('[data-tx-steps]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = STEPS.map(s => s[0]), i = ks.indexOf(e.target.closest('[data-tx-step]')?.dataset.txStep); showStep(ks[(i + (e.key === 'ArrowRight' ? 1 : ks.length - 1)) % ks.length]); return; } // C5 : les flèches d'un onglet à l'autre
             if (e.target === area && (e.metaKey || e.ctrlKey) && !e.altKey && ['z', 'y'].includes(e.key.toLowerCase())) { e.preventDefault(); e.stopPropagation(); undoZones(e.key.toLowerCase() === 'y' || e.shiftKey); return; } // 16 : un seul historique

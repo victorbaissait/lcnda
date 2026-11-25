@@ -152,7 +152,7 @@ const KEY = 'sk-unsloth-essai123';
             const r = await readJob();
             assert.equal(r.state, 'done', JSON.stringify(r)); assert.equal(r.text, 'Le 3 mars 1850\nJean MAZAUD [?]');
             const c = uns.chats.slice(n0).find(x => x.stream);
-            assert.ok(c, 'demande partie vers Unsloth'); assert.equal(c.model, 'unsloth/Qwen3-VL-8B-Instruct-GGUF'); assert.equal(c.temperature, 0); assert.equal(c.max_tokens, 4096);
+            assert.ok(c, 'demande partie vers Unsloth'); assert.equal(c.model, 'unsloth/Qwen3-VL-8B-Instruct-GGUF'); assert.equal(c.temperature, 0); assert.equal(c.max_tokens, 976, '🔁 borné d’après l’image (12 lignes au moins × 40 × 1,5 + 256 : tx_deep_budget)'); assert.ok(c.frequency_penalty > 0, 'pénalité de répétition (repeat_penalty → frequency_penalty)');
             const parts = c.messages[0].content; assert.ok(Array.isArray(parts));
             assert.equal(parts[0].type, 'text'); assert.match(parts[0].text, /paléographe/);
             assert.equal(parts[1].type, 'image_url'); assert.equal(parts[1].image_url.url, 'data:image/png;base64,' + png);
