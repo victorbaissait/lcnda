@@ -10968,7 +10968,10 @@
  "arrive dans": "komt aan in",
  "Arrive par (nom ; vide pour le premier)": "Komt via (naam; leeg voor de eerste)",
  "Arrivé pendant sa vie :": "Gekomen tijdens zijn leven:",
- "arrivée": "finish",
+ "arrivée": {
+  "one": "binnen",
+  "other": "binnen"
+ },
  "Arrivée": "Aankomst",
  "ARRIVÉE": "FINISH",
  "Arrivée (glisser)": "Invliegen (schuiven)",
@@ -24878,7 +24881,10 @@
  "Était-elle {job} ?": "Was deze persoon {job}?",
  "Étalage de magasin": "Winkeluitstalling",
  "Étalement": "Spreiding",
- "étape": "etappe",
+ "étape": {
+  "one": "etappe",
+  "other": "etappes"
+ },
  "Étape": "Etappe",
  "ÉTAPE": "ETAPPE",
  "étape {a} / {b}": "stap {a} / {b}",
@@ -46006,7 +46012,10 @@
  "Pictogramme mis à jour.": "Pictogram bijgewerkt.",
  "Pictogrammes (symboles répétés)": "Pictogrammen (herhaalde symbolen)",
  "Pictogrammes des tableaux": "Pictogrammen van de borden",
- "pièce": "stuk",
+ "pièce": {
+  "one": "stuk",
+  "other": "stukken"
+ },
  "Pièce": "Kamer",
  "PIÈCE": "STUK",
  "Pièce : {s}": "Stuk: {s}",
@@ -54890,6 +54899,8 @@
  "Tour le plus rapide": "Snelste ronde",
  "tour noir": "zwarte toren",
  "tour, donjon": "toren, donjon",
+ "tour|arrivée": "finish",
+ "tour|étape": "etappe",
  "Tourbillon": "Kolk",
  "Tourbillon inverse": "Omgekeerde kolk",
  "Tournage, période": "Opnames, periode",
@@ -57495,6 +57506,7 @@
  "unite|ans": "jr",
  "unité|en": "in",
  "unite|en %": "in %",
+ "unite|pièce": "stuk",
  "Unités": "Eenheden",
  "Unités (régiments, bataillons…)": "Eenheden (regimenten, bataljons…)",
  "unités cqw, cqh, cqi, cqb": "eenheden cqw, cqh, cqi, cqb",

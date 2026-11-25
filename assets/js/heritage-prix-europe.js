@@ -65,7 +65,7 @@
         return data;
     }
     const emptyLine = (text, icon = '💶') => `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">${icon}</span><span class="empty-line-text">${esc(text)}</span></p>`;
-    const unitText = (u, q) => (u === 'kg' ? 'kg' : u === 'L' ? (q >= 2 ? T('litres') : T('litre')) : (q >= 2 ? T('pièces') : T('pièce')));
+    const unitText = (u, q) => (u === 'kg' ? 'kg' : u === 'L' ? (q >= 2 ? T('litres') : T('litre')) : (q >= 2 ? T('pièces') : T('pièce', {ctx: 'unite'})));
     const yNote = (y, year) => (y !== year ? ` <small class="muted">(${esc(T('prix de {y}', {y: String(y)}))})</small>` : '');
 
     async function mount(pane, {year = '', value = ''} = {}) {

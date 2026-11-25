@@ -295,7 +295,7 @@
         return row('🎭', `${lead}${near} ${refLinks(x)}`, SRC.spectacles(), more(li ? `<p class="muted">${esc(T('Créés aussi en {y} :', {y: String(res.y)}))}</p><ul class="hist-ul">${li}</ul>` : '', res.list.length > 1 ? res.list.length - 1 : null));
     }
     const stageName = s => `${esc(s.a)}–${esc(s.b)}`;
-    const stageLi = x => `<li><b>${esc(dateTxt(x.s.d, x.s.y))}</b> : ${esc(T('étape'))} ${stageName(x.s)}${x.s.km ? ` <small class="muted">${esc(T('{n} km', {n: String(x.s.km)}))}</small>` : ''} <small class="muted">· ${esc(x.hit.includes('depart') && x.hit.includes('arrivee') ? T('départ et arrivée') : x.hit.includes('depart') ? T('départ') : T('arrivée'))}</small> ${link(x.s.edwiki ? wpUrl(x.s.edwiki) : wdUrl(x.s.q), T('↗ source'))}</li>`;
+    const stageLi = x => `<li><b>${esc(dateTxt(x.s.d, x.s.y))}</b> : ${esc(T('étape', {ctx: 'tour'}))} ${stageName(x.s)}${x.s.km ? ` <small class="muted">${esc(T('{n} km', {n: String(x.s.km)}))}</small>` : ''} <small class="muted">· ${esc(x.hit.includes('depart') && x.hit.includes('arrivee') ? T('départ et arrivée') : x.hit.includes('depart') ? T('départ') : T('arrivée', {ctx: 'tour'}))}</small> ${link(x.s.edwiki ? wpUrl(x.s.edwiki) : wdUrl(x.s.q), T('↗ source'))}</li>`;
     function tourHtml(list, life) {
         if (!list.length) return '';
         const x = list[0], P = life.person;

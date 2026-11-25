@@ -10968,7 +10968,10 @@
  "arrive dans": "arrives in",
  "Arrive par (nom ; vide pour le premier)": "Comes through (name; empty for the first)",
  "Arrivé pendant sa vie :": "Arrived during their life:",
- "arrivée": "finish",
+ "arrivée": {
+  "one": "finished",
+  "other": "finished"
+ },
  "Arrivée": "Arrival",
  "ARRIVÉE": "FINISH",
  "Arrivée (glisser)": "Fly in (slide)",
@@ -24878,7 +24881,10 @@
  "Était-elle {job} ?": "Was this person a {job}?",
  "Étalage de magasin": "Shop display",
  "Étalement": "Spread",
- "étape": "stage",
+ "étape": {
+  "one": "stop",
+  "other": "stops"
+ },
  "Étape": "Step",
  "ÉTAPE": "STOP",
  "étape {a} / {b}": "step {a} / {b}",
@@ -46006,7 +46012,10 @@
  "Pictogramme mis à jour.": "Icon updated.",
  "Pictogrammes (symboles répétés)": "Pictograms (repeated symbols)",
  "Pictogrammes des tableaux": "Board pictograms",
- "pièce": "piece",
+ "pièce": {
+  "one": "piece",
+  "other": "pieces"
+ },
  "Pièce": "Room",
  "PIÈCE": "DOCUMENT",
  "Pièce : {s}": "Document: {s}",
@@ -54890,6 +54899,8 @@
  "Tour le plus rapide": "Fastest lap",
  "tour noir": "black rook",
  "tour, donjon": "tower, keep",
+ "tour|arrivée": "finish",
+ "tour|étape": "stage",
  "Tourbillon": "Twirl",
  "Tourbillon inverse": "Reverse twirl",
  "Tournage, période": "Shooting, period",
@@ -57495,6 +57506,7 @@
  "unite|ans": "yrs",
  "unité|en": "in",
  "unite|en %": "in %",
+ "unite|pièce": "piece",
  "Unités": "Units",
  "Unités (régiments, bataillons…)": "Units (regiments, battalions…)",
  "unités cqw, cqh, cqi, cqb": "cqw, cqh, cqi, cqb units",

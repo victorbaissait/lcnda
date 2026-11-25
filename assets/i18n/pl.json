@@ -11128,7 +11128,12 @@
  "arrive dans": "trafia do",
  "Arrive par (nom ; vide pour le premier)": "Przychodzi przez (nazwisko; puste dla pierwszego)",
  "Arrivé pendant sa vie :": "Pojawiło się za jego życia:",
- "arrivée": "meta",
+ "arrivée": {
+  "one": "na mecie",
+  "few": "na mecie",
+  "many": "na mecie",
+  "other": "na mecie"
+ },
  "Arrivée": "Przyjazd",
  "ARRIVÉE": "META",
  "Arrivée (glisser)": "Wlot (przesunięcie)",
@@ -25416,7 +25421,12 @@
  "Était-elle {job} ?": "Czy była to osoba – {job}?",
  "Étalage de magasin": "Wystawa sklepowa",
  "Étalement": "Rozmycie",
- "étape": "etap",
+ "étape": {
+  "one": "etap",
+  "few": "etapy",
+  "many": "etapów",
+  "other": "etapy"
+ },
  "Étape": "Etap",
  "ÉTAPE": "ETAP",
  "étape {a} / {b}": "krok {a} / {b}",
@@ -47162,7 +47172,12 @@
  "Pictogramme mis à jour.": "Ikona zaktualizowana.",
  "Pictogrammes (symboles répétés)": "Piktogramy (powtarzane symbole)",
  "Pictogrammes des tableaux": "Piktogramy tablic",
- "pièce": "sztuka",
+ "pièce": {
+  "one": "wyrób",
+  "few": "wyroby",
+  "many": "wyrobów",
+  "other": "wyroby"
+ },
  "Pièce": "Pomieszczenie",
  "PIÈCE": "DOKUMENT",
  "Pièce : {s}": "Dokument: {s}",
@@ -56286,6 +56301,8 @@
  "Tour le plus rapide": "Najszybsze okrążenie",
  "tour noir": "czarna wieża",
  "tour, donjon": "wieża, donżon",
+ "tour|arrivée": "meta",
+ "tour|étape": "etap",
  "Tourbillon": "Wir",
  "Tourbillon inverse": "Wir odwrotny",
  "Tournage, période": "Zdjęcia, okres",
@@ -58905,6 +58922,7 @@
  "unite|ans": "lat",
  "unité|en": "w",
  "unite|en %": "w %",
+ "unite|pièce": "sztuka",
  "Unités": "Jednostki",
  "Unités (régiments, bataillons…)": "Jednostki (pułki, bataliony…)",
  "unités cqw, cqh, cqi, cqb": "jednostki cqw, cqh, cqi, cqb",

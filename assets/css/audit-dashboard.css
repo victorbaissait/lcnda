@@ -26,7 +26,10 @@
 .lg-add input, .lg-add select { width: auto; }
 /* 🧭 prochaine action */
 .na-q { margin: 0 0 .2rem; }
-.na-form { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .5rem; }
+.na-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; margin-top: .5rem; }
+/* 📐 les deux champs restent dans le widget (un champ a une largeur minimale : sans min-width 0, « Lieu » dépassait du cadre) */
+.na-form > label { min-width: 0; }
+.na-form > label input { display: block; width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; }
 .na-acts { grid-column: 1 / -1; display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
 
 /* ── ⏱ Temps de recherche ── */

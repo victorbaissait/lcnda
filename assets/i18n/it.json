@@ -11048,7 +11048,11 @@
  "arrive dans": "arriva in",
  "Arrive par (nom ; vide pour le premier)": "Arriva tramite (cognome; vuoto per il primo)",
  "Arrivé pendant sa vie :": "Arrivato durante la sua vita:",
- "arrivée": "arrivo",
+ "arrivée": {
+  "one": "arrivato",
+  "other": "arrivati",
+  "many": "arrivati"
+ },
  "Arrivée": "Arrivo",
  "ARRIVÉE": "ARRIVO",
  "Arrivée (glisser)": "Entrata (scorrere)",
@@ -25147,7 +25151,11 @@
  "Était-elle {job} ?": "Era {job}?",
  "Étalage de magasin": "Espositore del negozio",
  "Étalement": "Diffusione",
- "étape": "tappa",
+ "étape": {
+  "one": "tappa",
+  "other": "tappe",
+  "many": "tappe"
+ },
  "Étape": "Tappa",
  "ÉTAPE": "TAPPA",
  "étape {a} / {b}": "passo {a} / {b}",
@@ -46584,7 +46592,11 @@
  "Pictogramme mis à jour.": "Pittogramma aggiornato.",
  "Pictogrammes (symboles répétés)": "Pittogrammi (simboli ripetuti)",
  "Pictogrammes des tableaux": "Pittogrammi delle lavagne",
- "pièce": "pezzo",
+ "pièce": {
+  "one": "pezzo",
+  "other": "pezzi",
+  "many": "pezzi"
+ },
  "Pièce": "Stanza",
  "PIÈCE": "DOCUMENTO",
  "Pièce : {s}": "Documento: {s}",
@@ -55588,6 +55600,8 @@
  "Tour le plus rapide": "Giro più veloce",
  "tour noir": "torre nera",
  "tour, donjon": "torre, mastio",
+ "tour|arrivée": "arrivo",
+ "tour|étape": "tappa",
  "Tourbillon": "Vortice",
  "Tourbillon inverse": "Vortice inverso",
  "Tournage, période": "Riprese, periodo",
@@ -58200,6 +58214,7 @@
  "unite|ans": "anni",
  "unité|en": "in",
  "unite|en %": "in %",
+ "unite|pièce": "pezzo",
  "Unités": "Unità",
  "Unités (régiments, bataillons…)": "Unità (reggimenti, battaglioni…)",
  "unités cqw, cqh, cqi, cqb": "unità cqw, cqh, cqi, cqb",

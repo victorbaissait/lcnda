@@ -130,13 +130,19 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
             const before = await sky();
             assert.match(before.txt, /pleine lune/);
             const d = await api('person', {id: ID.louis}); const ev = d.events.find(e => (e.gedcom_tag || e.tag) === 'BIRT');
+            const birthInTree = () => p.evaluate(async i => (await window.LCNDA_EXT.tresors.T.tree()).evBy.get('p' + i).find(e => e.tag === 'BIRT').y, ID.louis);
+            await p.evaluate(() => window.LCNDA_EXT.tresors.T.tree(true)); // l'arbre des Trésors vient d'être lu (il est gardé 20 s)
+            assert.equal(await birthInTree(), 1890);
             const r = await post('save_event', {...ev, date_text: '1790', year: 1790, place_id: ID.paris}); assert.ok(!r.error, r.error);
+            assert.equal(await birthInTree(), 1790, 'l’arbre gardé en mémoire doit être relu après l’enregistrement');
             const after = await sky();
             assert.match(after.txt, /lune gibbeuse décroissante/, `ciel encore celui de 1890 : ${after.txt}`);
         });
 
         await t('🧭🌍⛰️🪨🏷️🌊🌾 les blocs « contexte » de la fiche suivent la naissance déplacée (1790, Paris)', async () => {
-            // (la naissance de Louis a été changée à l'essai précédent ; sa fiche est ouverte)
+            // (la naissance de Louis a été changée à l'essai précédent) : sa fiche redessinée après l'enregistrement
+            await p.evaluate(i => { document.querySelectorAll(`[data-br-person="${i}"]`).forEach(b => { b.dataset.old = '1'; }); window.LCNDA_APP.openPersonById(i); }, ID.louis);
+            await p.waitForFunction(i => document.querySelector(`[data-br-person="${i}"]:not([data-old])`), ID.louis, {timeout: 20000});
             const host = (sel, re) => p.waitForFunction(([s, r]) => new RegExp(r).test(document.querySelector(s)?.innerText || ''), [sel, re], {timeout: 30000}).then(() => true, () => false);
             const text = sel => p.evaluate(s => (document.querySelector(s)?.innerText || '(absent)').replace(/\s+/g, ' ').slice(0, 300), sel);
             const want = [
@@ -146,11 +152,14 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
                 [`[data-cc-person="${ID.louis}"]`, 'armoiries de Paris'], // 🏷️ nom et villages
                 [`[data-hist-life="${ID.louis}"] [data-mr-hist]`, 'passent à Paris'] // 🌊 rivières (bloc 🏘 Le lieu à son époque)
             ];
-            for (const [sel, re] of want) assert.ok(await host(sel, re), `${sel} : « ${re} » attendu, lu : ${await text(sel)}`);
+            const bad = []; // tous les blocs vérifiés, puis la liste de ceux restés sur l'ancienne naissance
+            for (const [sel, re] of want) if (!await host(sel, re)) bad.push(`${sel} : « ${re} » attendu, lu : ${await text(sel)}`);
             // ⛰️ terre et gens, 🌾 terroir : plus rien de la naissance de 1890 à Tulle
-            assert.ok(await host(`[data-l10-person="${ID.louis}"]`, '1816'), `⛰️ ${await text(`[data-l10-person="${ID.louis}"]`)}`);
-            assert.doesNotMatch(await text(`[data-l10-person="${ID.louis}"]`), /il avait 68 ans/);
-            assert.doesNotMatch(await text(`[data-trr-person="${ID.louis}"]`), /costume traditionnel de son pays \(Corrèze\)/);
+            const l10 = `[data-l10-person="${ID.louis}"]`, trr = `[data-trr-person="${ID.louis}"]`;
+            if (!await host(l10, '1816') || /il avait 68 ans/.test(await text(l10))) bad.push(`⛰️ ${l10} : ${await text(l10)}`);
+            await host(trr, 'Louis');
+            if (/costume traditionnel de son pays \(Corrèze\)/.test(await p.evaluate(s => document.querySelector(s)?.innerText || '', trr))) bad.push(`🌾 ${trr} : encore le costume de la Corrèze`);
+            assert.deepStrictEqual(bad, []);
         });
 
         await t('📍 Images de lieux : une image située depuis les Médias paraît sur la Carte sans recharger', async () => {

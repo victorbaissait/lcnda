@@ -9324,7 +9324,13 @@ ${backupSectionHtml()}
         if(d){const w=PA_DUP_TAGS[d.tag]||['fait','faits'];h+=`<span class="ui-badge is-yellow pa-dup-badge" title="${escapeHtml(i18n('Cette fiche a {n} {what} : garde la bonne, l’autre devient une « autre version » de ce fait.',{n:d.count,what:w[1]}))}">⚠️ ${escapeHtml(i18n('{n} {what}',{n:d.count,what:w[1]}))}</span>${locked||paKiosk()?'':`<button type="button" class="button small secondary pa-keep-btn" data-pa-keep-event="${Number(event.id)}" data-pa-keep-others="${d.others.join(',')}">${escapeHtml(i18n('✓ Garder celle-ci'))}</button>`}`;}
         return h;
     }
+    // « Garder » cliqué deux fois : un seul envoi (avant : le second disait en rouge « Événements introuvables. » alors que c'était fait)
+    let paKeepBusy=false;
     async function paKeepEvent(keepId,others){
+        if(paKeepBusy)return;paKeepBusy=true;
+        try{await paKeepEventNow(keepId,others);}finally{paKeepBusy=false;}
+    }
+    async function paKeepEventNow(keepId,others){
         const done=[];
         try{for(const drop of others){const r=(await api('event_keep_version',{},{method:'POST',body:{keep_id:keepId,drop_id:drop}})).result||{};done.push(r);}}
         catch(error){toast(error.message,'error');}

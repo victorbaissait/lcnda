@@ -284,6 +284,9 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             const g = await game(); assert.equal(g.reason, 'mat'); assert.equal(g.finished, true);
             assert.match(await page.textContent('.jpe-moves'), /Dh4#/);
             assert.match(await page.textContent('[data-jf-eyebrow]'), /^PARTIE TERMINÉE · ÉCHECS/, 'l’en-tête dit que la partie est finie');
+            // rouverte depuis la colonne de gauche : toujours « PARTIE TERMINÉE »
+            await page.click(`[data-jf-open="${g.id}"]`); await page.waitForSelector('.jpe-board');
+            assert.match(await page.textContent('[data-jf-eyebrow]'), /^PARTIE TERMINÉE · ÉCHECS/, 'rouverte : terminée');
             if (shots) await page.screenshot({path: path.join(shots, 'echecs-mat.png'), fullPage: true});
             await page.click('[data-jp-undo]'); await page.waitForFunction(() => window.LCNDA_JEUX_FAMILLE._games()[0].moves.length === 3);
             assert.equal((await game()).finished, false);
@@ -295,9 +298,6 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             watch = false;
         });
         await t('♟ au clavier (flèches + Entrée) puis l’ordinateur répond tout seul', async () => {
-            // une partie finie, rouverte depuis la colonne de gauche : « PARTIE TERMINÉE » dès l'ouverture
-            await page.evaluate(() => { const J = window.LCNDA_JEUX_FAMILLE, g = J._games()[0]; J._write({...g, finished: true, result: '0-1', reason: 'mat'}); });
-            await page.click(`[data-jf-open="${(await game()).id}"]`); await page.waitForFunction(() => /^PARTIE TERMINÉE/.test(document.querySelector('[data-jf-eyebrow]')?.textContent || ''));
             await page.click('[data-jf-new]'); await setup('echecs');
             await page.selectOption('.jf-player[data-i="1"] select[name="pai"]', 'facile');
             await startGame('echecs'); watch = true;

@@ -13,9 +13,9 @@ L’année de ses 20 ans ({y}) ¦ The year they turned 20 ({y}) ¦ El año de su
 C’était tout près de chez {p}. ¦ It was very close to {p}. ¦ Fue muy cerca de {p}. ¦ Es war ganz nah bei {p}. ¦ Era vicinissimo a {p}. ¦ Foi muito perto de {p}. ¦ To było tuż obok {p}. ¦ Het was vlak bij {p}.
 lui ¦ him ¦ él ¦ ihm ¦ lui ¦ ele ¦ niego ¦ hem
 Créés aussi en {y} : ¦ Also premiered in {y}: ¦ También estrenados en {y}: ¦ Ebenfalls {y} uraufgeführt: ¦ Prime anche nel {y}: ¦ Também estreados em {y}: ¦ Także prapremiery w {y}: ¦ Ook in première in {y}:
-étape ¦ stage ¦ etapa ¦ Etappe ¦ tappa ¦ etapa ¦ etap ¦ etappe
+tour|étape ¦ stage ¦ etapa ¦ Etappe ¦ tappa ¦ etapa ¦ etap ¦ etappe
 départ et arrivée ¦ start and finish ¦ salida y llegada ¦ Start und Ziel ¦ partenza e arrivo ¦ partida e chegada ¦ start i meta ¦ start en finish
-arrivée ¦ finish ¦ llegada ¦ Ziel ¦ arrivo ¦ chegada ¦ meta ¦ finish
+tour|arrivée ¦ finish ¦ llegada ¦ Ziel ¦ arrivo ¦ chegada ¦ meta ¦ finish
 Le Tour de France est passé à {p} en {y} (étape {s}) ¦ The Tour de France passed through {p} in {y} (stage {s}) ¦ El Tour de Francia pasó por {p} en {y} (etapa {s}) ¦ Die Tour de France kam {y} durch {p} (Etappe {s}) ¦ Il Tour de France è passato da {p} nel {y} (tappa {s}) ¦ A Volta a França passou por {p} em {y} (etapa {s}) ¦ Tour de France przejechał przez {p} w {y} (etap {s}) ¦ De Tour de France kwam in {y} door {p} (etappe {s})
 , quand {he} y vivait ¦ , when {he} lived there ¦ , cuando {he} vivía allí ¦ , als {he} dort lebte ¦ , quando {he} ci viveva ¦ , quando {he} lá vivia ¦ , gdy {he} tam mieszkał(a) ¦ , toen {he} er woonde
  : {he} avait {a}. ¦ : {he} was {a}. ¦ : {he} tenía {a}. ¦ : {he} war {a}. ¦ : {he} aveva {a}. ¦ : {he} tinha {a}. ¦ : {he} miał(a) {a}. ¦ : {he} was {a}.

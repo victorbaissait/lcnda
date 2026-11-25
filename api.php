@@ -12815,7 +12815,7 @@ function save_person(PDO $pdo,array $data): array
         if(array_key_exists('mort_pour_la_france',$data)){$pdo->prepare('UPDATE persons SET mort_pour_la_france=? WHERE id=?')->execute([safe_text($data['mort_pour_la_france'])?:'unknown',$id]);}$created=$pdo->query('SELECT * FROM persons WHERE id='.$id)->fetch();log_change($pdo,'person',$id,'create','Création de '.full_name($created),null,$created);rebuild_search($pdo,$id);return $created;
     }
     $stmt=$pdo->prepare('SELECT * FROM persons WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
-    if(!$before)throw new RuntimeException('Personne introuvable');
+    if(!$before)throw new RuntimeException('Personne introuvable : la fiche a peut-être été supprimée.'); // supprimée dans un autre onglet pendant que la fenêtre était ouverte
     assert_person_unlocked($pdo,$id);
     // deux onglets : la fiche a-t-elle changé ailleurs depuis l'ouverture de la fenêtre ? (seulement les cases que
     // l'autre fenêtre a changées ET que celle-ci remplacerait ; _force = « Enregistrer quand même »)

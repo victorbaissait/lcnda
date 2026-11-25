@@ -11048,7 +11048,11 @@
  "arrive dans": "chega a",
  "Arrive par (nom ; vide pour le premier)": "Chega por (apelido; vazio para o primeiro)",
  "Arrivé pendant sa vie :": "Chegado durante a sua vida:",
- "arrivée": "chegada",
+ "arrivée": {
+  "one": "chegou",
+  "other": "chegaram",
+  "many": "chegaram"
+ },
  "Arrivée": "Chegada",
  "ARRIVÉE": "CHEGADA",
  "Arrivée (glisser)": "Entrada (deslizar)",
@@ -25147,7 +25151,11 @@
  "Était-elle {job} ?": "Era {job}?",
  "Étalage de magasin": "Expositor de loja",
  "Étalement": "Dispersão",
- "étape": "etapa",
+ "étape": {
+  "one": "etapa",
+  "other": "etapas",
+  "many": "etapas"
+ },
  "Étape": "Etapa",
  "ÉTAPE": "ETAPA",
  "étape {a} / {b}": "passo {a} / {b}",
@@ -46584,7 +46592,11 @@
  "Pictogramme mis à jour.": "Pictograma atualizado.",
  "Pictogrammes (symboles répétés)": "Pictogramas (símbolos repetidos)",
  "Pictogrammes des tableaux": "Pictogramas dos quadros",
- "pièce": "peça",
+ "pièce": {
+  "one": "peça",
+  "other": "peças",
+  "many": "peças"
+ },
  "Pièce": "Divisão",
  "PIÈCE": "DOCUMENTO",
  "Pièce : {s}": "Documento: {s}",
@@ -55588,6 +55600,8 @@
  "Tour le plus rapide": "Volta mais rápida",
  "tour noir": "torre preta",
  "tour, donjon": "torre, torre de menagem",
+ "tour|arrivée": "chegada",
+ "tour|étape": "etapa",
  "Tourbillon": "Remoinho",
  "Tourbillon inverse": "Remoinho inverso",
  "Tournage, période": "Filmagem, período",
@@ -58200,6 +58214,7 @@
  "unite|ans": "anos",
  "unité|en": "em",
  "unite|en %": "em %",
+ "unite|pièce": "peça",
  "Unités": "Unidades",
  "Unités (régiments, bataillons…)": "Unidades (regimentos, batalhões…)",
  "unités cqw, cqh, cqi, cqb": "unidades cqw, cqh, cqi, cqb",

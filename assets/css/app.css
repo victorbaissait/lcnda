@@ -312,6 +312,13 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
 .card-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; align-items: start; }
 .card { background: var(--card-bg); border: var(--line); box-shadow: var(--shadow-small); min-width: 0; }
+/* 📐 Un cadre posé tel quel dans une page (Réglages → Données : GOV, Élections, Wikidata, ADN ancien, Bases officielles…), sans
+ *  en-tête ni corps (.card-head / .card-body) : il garde sa marge intérieure, ses textes ne touchent pas le bord.
+ *  Spécificité d'une seule classe (:where) : un cadre qui a déjà sa marge à lui (.wx-card, .mj-card…) la garde. */
+:where(.page) > .card:where(:not(:has(> .card-head, > .card-body))) { padding: 14px 16px; }
+:where(.page) > .card:where(:not(:has(> .card-head, > .card-body))) > :first-child { margin-top: 0; }
+:where(.page) > .card:where(:not(:has(> .card-head, > .card-body))) > :last-child { margin-bottom: 0; }
+@media (max-width: 640px) { :where(.page) > .card:where(:not(:has(> .card-head, > .card-body))) { padding: 12px; } }
 .card.span-3 { grid-column: span 3; }
 .card.span-4 { grid-column: span 4; }
 .card.span-5 { grid-column: span 5; }
@@ -1370,6 +1377,10 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .create-type-form select[name="icon"] { width: 180px; max-width: 180px; }
 .create-type-form > div { flex-shrink: 0; }
 .create-type-last-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 300px; }
+/* 📐 le choix du pictogramme, « Artiste » et « Créer le type » passent à la ligne plutôt que de sortir du cadre bleu */
+.create-type-last-group { min-width: min(300px, 100%); max-width: 100%; }
+.create-type-last-group > div { flex-wrap: wrap; min-width: 0; }
+.create-type-last-group > div > :first-child { min-width: 0; max-width: 100%; }
 .create-type-field-label { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .create-type-last-group select { border: var(--line); background: var(--white); padding: 8px 10px; font-size: .92rem; min-height: 38px; }
 .create-type-artistic-inline { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }

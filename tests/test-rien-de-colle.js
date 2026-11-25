@@ -68,6 +68,7 @@ function detect(opts) {
     const out = []; const seen = new Set();
     for (const it of items) {
         if (!visible(it.el)) continue;
+        if (it.el.tagName === 'LEGEND' || /^(absolute|fixed)$/.test(cs(it.el).position)) continue; // la légende est posée sur la bordure ; un bouton flottant au coin est voulu
         if (it.el.closest('.leaflet-container, .maplibregl-map, canvas, svg, .ui-toast, .toast, [data-no-glue-check], .CodeMirror, .tox, iframe')) continue;
         // le cadre le plus proche ; un défilement ou une découpe entre les deux : on laisse (tableaux larges, listes qui défilent)
         let c = null, clipped = false;
@@ -87,9 +88,13 @@ function detect(opts) {
         const bad = [];
         for (const k of 'lrtb') {
             const g = gaps[k];
-            if (g < -1.5 && !clips(s)) bad.push({side: k, gap: Math.round(g * 10) / 10, kind: 'deborde'});
-            else if (c.sides[k] && g < MIN - 0.01 && g >= -1.5) bad.push({side: k, gap: Math.round(g * 10) / 10, kind: 'colle'});
+            if (g < -2.5 && !clips(s)) bad.push({side: k, gap: Math.round(g * 10) / 10, kind: 'deborde'});
+            else if (c.sides[k] && g < MIN - 0.01 && g >= -2.5) bad.push({side: k, gap: Math.round(g * 10) / 10, kind: 'colle'});
         }
+        // un bouton ou un champ qui remplit son cadre d'un bord à l'autre (onglets côte à côte, en-tête cliquable, champ d'une
+        // boîte de recherche) : c'est voulu, ce n'est pas un contenu collé
+        const glued = new Set(bad.filter(b => b.kind === 'colle').map(b => b.side));
+        if (it.kind !== 'texte' && ((glued.has('l') && glued.has('r')) || (glued.has('t') && glued.has('b')))) { for (let i = bad.length - 1; i >= 0; i--) if (bad[i].kind === 'colle') bad.splice(i, 1); }
         if (!bad.length) continue;
         const key = pathOf(c.el) + ' | ' + describe(it.el) + ' | ' + bad.map(b => b.kind + b.side).join(',');
         if (seen.has(key)) continue; seen.add(key);

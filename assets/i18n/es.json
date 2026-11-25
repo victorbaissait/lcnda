@@ -11048,7 +11048,11 @@
  "arrive dans": "llega a",
  "Arrive par (nom ; vide pour le premier)": "Llega por (apellido; vacío para el primero)",
  "Arrivé pendant sa vie :": "Llegado durante su vida:",
- "arrivée": "llegada",
+ "arrivée": {
+  "one": "en la meta",
+  "other": "en la meta",
+  "many": "en la meta"
+ },
  "Arrivée": "Llegada",
  "ARRIVÉE": "LLEGADA",
  "Arrivée (glisser)": "Entrada (deslizar)",
@@ -25147,7 +25151,11 @@
  "Était-elle {job} ?": "¿Era {job}?",
  "Étalage de magasin": "Expositor de tienda",
  "Étalement": "Dispersión",
- "étape": "etapa",
+ "étape": {
+  "one": "etapa",
+  "other": "etapas",
+  "many": "etapas"
+ },
  "Étape": "Etapa",
  "ÉTAPE": "ETAPA",
  "étape {a} / {b}": "paso {a} / {b}",
@@ -46584,7 +46592,11 @@
  "Pictogramme mis à jour.": "Pictograma actualizado.",
  "Pictogrammes (symboles répétés)": "Pictogramas (símbolos repetidos)",
  "Pictogrammes des tableaux": "Pictogramas de los tableros",
- "pièce": "pieza",
+ "pièce": {
+  "one": "pieza",
+  "other": "piezas",
+  "many": "piezas"
+ },
  "Pièce": "Habitación",
  "PIÈCE": "DOCUMENTO",
  "Pièce : {s}": "Documento: {s}",
@@ -55588,6 +55600,8 @@
  "Tour le plus rapide": "Vuelta rápida",
  "tour noir": "torre negra",
  "tour, donjon": "torre, torre del homenaje",
+ "tour|arrivée": "llegada",
+ "tour|étape": "etapa",
  "Tourbillon": "Molinete",
  "Tourbillon inverse": "Molinete inverso",
  "Tournage, période": "Rodaje, período",
@@ -58200,6 +58214,7 @@
  "unite|ans": "años",
  "unité|en": "en",
  "unite|en %": "en %",
+ "unite|pièce": "pieza",
  "Unités": "Unidades",
  "Unités (régiments, bataillons…)": "Unidades (regimientos, batallones…)",
  "unités cqw, cqh, cqi, cqb": "unidades cqw, cqh, cqi, cqb",

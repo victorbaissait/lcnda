@@ -10968,7 +10968,10 @@
  "arrive dans": "kommt an in",
  "Arrive par (nom ; vide pour le premier)": "Kommt über (Name; leer für den ersten)",
  "Arrivé pendant sa vie :": "Zu seinen Lebzeiten gekommen:",
- "arrivée": "Ziel",
+ "arrivée": {
+  "one": "im Ziel",
+  "other": "im Ziel"
+ },
  "Arrivée": "Ankunft",
  "ARRIVÉE": "ZIEL",
  "Arrivée (glisser)": "Hereinfliegen (gleiten)",
@@ -24878,7 +24881,10 @@
  "Était-elle {job} ?": "War sie {job}?",
  "Étalage de magasin": "Warenauslage",
  "Étalement": "Streuung",
- "étape": "Etappe",
+ "étape": {
+  "one": "Etappe",
+  "other": "Etappen"
+ },
  "Étape": "Etappe",
  "ÉTAPE": "ETAPPE",
  "étape {a} / {b}": "Schritt {a} / {b}",
@@ -46006,7 +46012,10 @@
  "Pictogramme mis à jour.": "Symbol aktualisiert.",
  "Pictogrammes (symboles répétés)": "Piktogramme (wiederholte Symbole)",
  "Pictogrammes des tableaux": "Piktogramme der Tafeln",
- "pièce": "Stück",
+ "pièce": {
+  "one": "Stück",
+  "other": "Stücke"
+ },
  "Pièce": "Raum",
  "PIÈCE": "UNTERLAGE",
  "Pièce : {s}": "Nachweis: {s}",
@@ -54890,6 +54899,8 @@
  "Tour le plus rapide": "Schnellste Runde",
  "tour noir": "schwarzer Turm",
  "tour, donjon": "Turm, Bergfried",
+ "tour|arrivée": "Ziel",
+ "tour|étape": "Etappe",
  "Tourbillon": "Strudel",
  "Tourbillon inverse": "Strudel rückwärts",
  "Tournage, période": "Dreh, Zeitraum",
@@ -57495,6 +57506,7 @@
  "unite|ans": "J.",
  "unité|en": "in",
  "unite|en %": "in %",
+ "unite|pièce": "Stück",
  "Unités": "Einheiten",
  "Unités (régiments, bataillons…)": "Einheiten (Regimenter, Bataillone…)",
  "unités cqw, cqh, cqi, cqb": "Einheiten cqw, cqh, cqi, cqb",

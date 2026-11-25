@@ -67,10 +67,10 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/creations.css?v=1">
     <link rel="stylesheet" href="assets/css/puzzle.css?v=3">
     <link rel="stylesheet" href="assets/css/labyrinthe.css?v=1">
-    <link rel="stylesheet" href="assets/css/jeux-famille.css?v=3">
-    <link rel="stylesheet" href="assets/css/jeux-patience.css?v=2">
+    <link rel="stylesheet" href="assets/css/jeux-famille.css?v=4">
+    <link rel="stylesheet" href="assets/css/jeux-patience.css?v=3">
     <link rel="stylesheet" href="assets/css/jeux-plateau.css?v=1">
-    <link rel="stylesheet" href="assets/css/jeux-cartes.css?v=1">
+    <link rel="stylesheet" href="assets/css/jeux-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/bunker.css?v=19">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=9">
@@ -1216,7 +1216,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=117"></script>
+<script src="assets/js/app-i18n.js?v=118"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
@@ -1231,11 +1231,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-picker.js?v=29" defer></script>
 <script src="assets/js/app-media-picker.js?v=5" defer></script>
 <script src="assets/js/app-piece-archives.js?v=10" defer></script>
-<script src="assets/js/app-puzzle.js?v=9" defer></script>
+<script src="assets/js/app-puzzle.js?v=10" defer></script>
 <script src="assets/js/app-labyrinthe-core.js?v=1" defer></script>
-<script src="assets/js/app-labyrinthe.js?v=4" defer></script>
+<script src="assets/js/app-labyrinthe.js?v=5" defer></script>
 <script src="assets/js/app-jeu-famille-logique.js?v=4" defer></script>
-<script src="assets/js/app-jeu-famille.js?v=4" defer></script>
+<script src="assets/js/app-jeu-famille.js?v=5" defer></script>
 <script src="assets/js/app-jeu-quiestce.js?v=2" defer></script>
 <script src="assets/js/app-jeu-memory.js?v=2" defer></script>
 <script src="assets/js/app-jeu-timeline.js?v=2" defer></script>
@@ -1243,7 +1243,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu-naval.js?v=6" defer></script>
 <script src="assets/js/app-jeu-cables.js?v=7" defer></script>
 <script src="assets/js/app-jeu-patience-regles.js?v=7" defer></script>
-<script src="assets/js/app-jeu-patience.js?v=8" defer></script>
+<script src="assets/js/app-jeu-patience.js?v=9" defer></script>
 <script src="assets/js/app-jeu-plateau.js?v=4" defer></script>
 <script src="assets/js/app-jeu-echecs-moteur.js?v=1" defer></script>
 <script src="assets/js/app-jeu-echecs.js?v=3" defer></script>
@@ -1254,8 +1254,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu-yams-moteur.js?v=1" defer></script>
 <script src="assets/js/app-jeu-yams.js?v=3" defer></script>
 <script src="assets/js/app-jeu-cartes-regles.js?v=2" defer></script>
-<script src="assets/js/app-jeu-cartes.js?v=2" defer></script>
-<script src="assets/js/app-jeu.js?v=16" defer></script>
+<script src="assets/js/app-jeu-cartes.js?v=3" defer></script>
+<script src="assets/js/app-jeu.js?v=17" defer></script>
 <script src="assets/js/app-chronologie.js?v=14" defer></script>
 <script src="assets/js/app-comparaison.js?v=10" defer></script>
 <script src="assets/js/app-carte.js?v=17" defer></script>
@@ -1642,7 +1642,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-adn-livres.js?v=1" defer></script>
 <script src="assets/js/heritage-histoire.js?v=3" defer></script>
 <script src="assets/js/heritage-monde-contexte.js?v=1" defer></script>
-<script src="assets/js/heritage-prix-europe.js?v=1" defer></script>
+<script src="assets/js/heritage-prix-europe.js?v=2" defer></script>
 <script src="assets/js/heritage-terre-quotidien.js?v=1" defer></script>
 <script src="assets/js/heritage-commune-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-lieux-patrimoine.js?v=1" defer></script>
@@ -1667,7 +1667,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
 <script src="assets/js/heritage-chateaux-territoires.js?v=1" defer></script>
-<script src="assets/js/heritage-lot8-monde-village.js?v=1" defer></script>
+<script src="assets/js/heritage-lot8-monde-village.js?v=2" defer></script>
 <script src="assets/js/heritage-lot10-voir-village.js?v=1" defer></script>
 <script src="assets/js/heritage-lot10-objets-traces.js?v=1" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=1" defer></script>
