@@ -180,6 +180,11 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
 
         await t('écran : 🧭 ton lien dans la colonne, l’en-tête (clic = le chemin) et les arbres', async () => {
             await p.waitForFunction(i => /cousin germain/.test(document.querySelector(`#person-list .person-list-item[data-person-id="${i}"] .pa-kin`)?.textContent || ''), ID.luc, {timeout: 15000});
+            // l'interrupteur « 🧭 Ton lien » : éteint, les liens partent ; rallumé, ils reviennent (ils ne revenaient plus)
+            await p.click('label:has(#person-kin-show)');
+            await p.waitForFunction(() => !document.querySelector('#person-list .pa-kin'), null, {timeout: 5000});
+            await p.click('label:has(#person-kin-show)');
+            await p.waitForFunction(i => /cousin germain/.test(document.querySelector(`#person-list .person-list-item[data-person-id="${i}"] .pa-kin`)?.textContent || ''), ID.luc, {timeout: 15000});
             await openPerson(ID.luc);
             await p.waitForFunction(() => { const b = document.querySelector('[data-pa-kin-head]'); return b && !b.hidden && /cousin germain/.test(b.textContent); }, null, {timeout: 15000});
             assert.match(await p.textContent('[data-pa-kin-head]'), /par Pierre MAZAUD/);

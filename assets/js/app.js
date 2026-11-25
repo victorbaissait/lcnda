@@ -2763,7 +2763,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             searchInput.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();runSearch();}});
         }
         $('#person-phonetic').addEventListener('change',event=>{state.peoplePhonetic=event.target.checked;persistUiState();loadPeople();});
-        $('#person-kin-show').addEventListener('change',event=>{try{localStorage.setItem(KIN_SHOW_KEY,event.target.checked?'1':'0');}catch(_){}const list=$('#person-list');if(event.target.checked)paDecorateKin(list);else $$('.pa-kin',list).forEach(x=>x.remove());});
+        $('#person-kin-show').addEventListener('change',event=>{try{localStorage.setItem(KIN_SHOW_KEY,event.target.checked?'1':'0');}catch(_){}const list=$('#person-list');if(event.target.checked)paDecorateKin(list);else{$$('.pa-kin',list).forEach(x=>x.remove());$$('[data-pa-kin]',list).forEach(x=>delete x.dataset.paKin);}});// 🧭 éteint : on oublie aussi le repère « déjà décoré », sinon le rallumer ne remettait rien
         $('#new-person').addEventListener('click', openNewPersonDialog);
         $('#pa-quick-family')?.addEventListener('click',()=>openQuickFamilyDialog());
     }
