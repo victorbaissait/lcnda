@@ -1,0 +1,42 @@
+# Téléchargements — lot A : « 🗺 Voir le village tel qu'il était »
+
+Fait le 2026-11-25. Code : `assets/js/heritage-telech-a.js`, `lib/telech_a.php`, `assets/css/telech-a.css`,
+`scripts/telech-a/osm-region.sh`, `.github/workflows/telech-a-osm.yml`, traductions `assets/i18n/src/telech-a.tsv`,
+essai `tests/test-telech-a.js` (fixture : `tests/fixtures/telech-a.json.gz`, vraies tuiles CORINE autour d'Honfleur, 109 Ko).
+Rien n'est ajouté à `assets/data/` (0 octet livré avec l'app) : tout est soit des tuiles affichées en ligne pour un lieu
+public, soit lu en ligne et gardé (CORINE), soit un pack téléchargé à la demande (OpenStreetMap hors ligne).
+
+Règle de vie privée : rien ne part sur Internet pour une fiche confidentielle ou une personne vivante (le serveur répond
+`private` avant toute demande ; l'écran ne charge alors aucune tuile). Les tuiles du rideau ne sont demandées qu'à
+l'ouverture de « ▸ plus ».
+
+## Tableau
+
+| # | Idée | Déjà dans l'app ? | Licence (lue le 2026-11-25) | Ce qui a été fait | Où ça se voit |
+|---|---|---|---|---|---|
+| 10 | Carte d'État-major 1820-1866 (IGN) | **Oui** : fond « etatmajor » dans tous les menus « Fond » (`app.js`), carte de 1850 du lot 10 (forêts), Plan des adresses | Licence Ouverte 2.0 (Etalab) — IGN : « les données de l'IGN sont libres et gratuites, disponibles sous licence Etalab 2.0 » (dossier de presse IGN 2024) | Rien de neuf comme fond ; ajoutée au **rideau avant / après** « carte de 1850 ↔ plan d'aujourd'hui » (choisi d'office sur la fiche de quelqu'un qui a vécu avant 1920 ; au-delà du zoom 15 les tuiles sont agrandies) | Fiche d'un village, fiche d'une personne, monographie, 🧰 Données |
+| 11 | Photos aériennes anciennes ~1950 | **Oui** : lot 10 « ✈️ vu d'avion vers 1950 » (deux images côte à côte) + lien « Remonter le temps » ; fond `ign_ortho_1950` | Licence Ouverte 2.0 (couche `ORTHOIMAGERY.ORTHOPHOTOS.1950-1965`, Géoplateforme) | **Amélioré** : un vrai **rideau à faire glisser** (avant / après) au lieu de deux images séparées : photos 1950 ↔ aujourd'hui, carte de 1850 ↔ aujourd'hui, CORINE 1990 ↔ 2018 ; zoom ± ; clavier (curseur) | « ↔ Avant / après » : fiche d'un village, fiche d'une personne, monographie (`ta_avantapres`), 🧰 Données |
+| 12 | Corine Land Cover 1990 → 2018 | Non | Copernicus Land Monitoring Service : accès « free, full and open » (règlement (UE) n° 1159/2013) ; obligation de citer la source (« This publication has been prepared using European Union's Copernicus Land Monitoring Service information ») — https://land.copernicus.eu/en/data-policy | **Fait** : le serveur lit pixel par pixel les tuiles WMTS `LANDCOVER.CLC90_FR` et `LANDCOVER.CLC18_FR` (Géoplateforme, palette officielle des 44 postes) à moins de 1 km (paysage) et 3 km (mer, marais, carrières) ; une phrase « Autour de X (1 km), en 1990 : … En 2018 : le bâti en hausse (12 % → 24 %)… », tableau sous « ▸ plus » ; réponse gardée. Fonds de carte « CORINE 1990 » et « CORINE 2018 » | Fiche d'un village, fiche d'une personne (son lieu le plus long), monographie (`ta_paysage`), 🧰 Données, Listes « Le paysage autour des lieux déjà regardés », menus « Fond » |
+| 13 | Trait de côte / érosion | Non | Indicateur national de l'érosion côtière (Cerema, 2026) : licence « cc-by » sur data.gouv.fr (fiche 6ad9eb466ec242fe5671d6fc) ; mais **pas de service de carte (WMS/WFS) vérifiable** : la Géoplateforme n'a aucune couche « érosion » (GetCapabilities WMTS, WMS-V et WFS lus), Géolittoral ne répond pas d'ici | **Lien ↗ seulement** : quand CORINE trouve la mer, une plage ou des vasières à moins de 3 km, une ligne « 🌊 Au bord de la mer… » avec ↗ Géolittoral (téléchargement) et ↗ la fiche data.gouv, + le conseil de comparer la côte avec le rideau 1950 ↔ aujourd'hui | Fiche d'un village, fiche d'une personne, monographie |
+| 14 | Carte géologique BRGM | **Oui** : fond « Carte géologique (BRGM) » (`heritage-fonds-libres.js`, Licence Ouverte 2.0 via la Géoplateforme) ; roche sous chaque commune (`heritage-terre-mots.js`, BRGM 1/1 000 000 via EGDI, CC BY 4.0) | déjà vérifiée par ces modules | Rien de plus (le lien sol ↔ métiers des carriers est déjà fait par les cavités du lot 10 ; la ligne ⛏ ci-dessous complète) | — |
+| 15 | Anciennes carrières, mines, cavités (BDCavité) | **Oui** : lot 10 « 🕳️ Carrières et cavités » pour un carrier, mineur, ardoisier… (Géorisques, « Sauf mention contraire, tous les contenus de ce site sont sous licence etalab-2.0 ») ; mines Wikidata (Métiers et rivières) | déjà vérifiée | **Petit plus** : sur la fiche d'un carrier / mineur / ardoisier…, une ligne ⛏ « Une carrière ou une mine à ciel ouvert à moins de 3 km (CORINE, poste 131) : un lieu de travail possible » | Fiche d'une personne |
+| 16 | Rivières, gués, marais asséchés | **En partie** : la rivière du village (BD TOPAGE, Hub'Eau) dans « Métiers et rivières » | IGN `HYDROGRAPHY.HYDROGRAPHY` : Licence Ouverte 2.0 ; marais : CORINE (ci-dessus) ; aucune base ouverte des gués ni des marais d'avant 1990 | **Fait** : fond « Cours d'eau et plans d'eau (IGN, à superposer) » ; ligne « 💧 Des marais ont disparu autour de X : … ha en 1990, … ha en 2018 » (marais et tourbières de l'intérieur seulement : les vasières côtières changent de poste d'un inventaire à l'autre) ; pour les marais plus anciens, renvoi au rideau « carte de 1850 ↔ aujourd'hui » | Menus « Fond » (Superposition), fiche d'un village, fiche d'une personne, monographie |
+| 17 | OpenStreetMap hors ligne par région | Non (le fond « Hors ligne » existant = Natural Earth + contours des communes) | ODbL 1.0 : « You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors » (openstreetmap.org/copyright) ; schéma OpenMapTiles CC BY 4.0 | **Fait** : atelier GitHub `telech-a-osm.yml` (workflow_dispatch, liste de régions Geofabrik ; extrait `.osm.pbf` + mer d'osmdata.openstreetmap.de → tilemaker v3.0.0, zoom 0-14 → `osm-<région>.mbtiles`, coupé en morceaux et déposé dans la version « telech-a-osm » avec `telech-a-osm-manifest.json`). L'app télécharge par tranches de 16 Mo (reprise), vérifie taille + sha256 + MBTiles lisible, range le pack (↶ Annuler, 🗑 retirer ↶), et **dessine les tuiles en SVG sur l'ordinateur** (`telech_a_osm_tile`) : mer, bois, prés, bâtiments, routes, chemins, rivières, limites, noms des lieux ; au-delà du zoom 14 la tuile est agrandie ; hors des régions installées, le fond hors ligne de l'app. Attribution « © les contributeurs d'OpenStreetMap (ODbL) · OpenMapTiles » écrite sur la carte | Fond « OpenStreetMap hors ligne » dans tous les menus « Fond » ; Réglages → 🗂 Données (famille « 🗺 Carte hors ligne · région », les régions des départements de la généalogie proposées d'abord) ; Réglages → « 🗺 Le village tel qu'il était » |
+| 18 | BAN hors ligne par département | **Oui** : `lib/addr_map.php` télécharge une fois la BAN du département (adresse.data.gouv.fr, Licence Ouverte 2.0) et place les adresses des dépouillements sans Internet (Plan des adresses) | déjà vérifiée | Rien de neuf | Plan des adresses d'une commune |
+
+Taille des packs OSM : dépend de la région (ordre de grandeur : quelques dizaines à quelques centaines de Mo au zoom 14) ;
+écrite dans le sommaire après chaque fabrication et montrée avant le téléchargement. **Le workflow n'a pas encore été lancé**
+(Actions → « Cartes OpenStreetMap hors ligne » → Run workflow, ex. `bretagne,basse-normandie`) : tant qu'il ne l'a pas été,
+la ligne de Réglages → 🗂 Données dit « pas encore en ligne ».
+
+## Réglages
+`genealogie-telech-a` : avantapres, paysage, cote, marais, personne (tout allumé au départ ; ↶ Annuler à chaque changement).
+Réponses gardées : `SHARED_DATA_DIR/telech-a/cache` (🗑 Tout oublier, ↶). Packs : `SHARED_DATA_DIR/telech-a/osm/*.mbtiles`.
+
+## Limites honnêtes
+- Les pages officielles de licence de l'IGN (geoservices.ign.fr), de Copernicus (land.copernicus.eu), d'OpenStreetMap et de
+  Geofabrik n'étaient pas joignables depuis l'atelier : les citations viennent de la recherche web (mêmes pages) et, pour
+  l'IGN, de la mention déjà vérifiée par `heritage-fonds-libres.js`. La licence de l'INEC a été lue directement (API data.gouv.fr).
+- Les identifiants de régions Geofabrik ne sont pas codés en dur dans le workflow : il les cherche dans le sommaire officiel
+  `index-v1.json` (une région inconnue est sautée avec un avertissement).
+- CORINE 1990 est moins précis que 2018 : la phrase ne parle que des écarts d'au moins 3 points, et le texte « ▸ plus » le dit.

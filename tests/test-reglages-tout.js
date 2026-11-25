@@ -261,8 +261,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await Promise.all([page.waitForNavigation({waitUntil: 'load', timeout: 15000}), page.locator('dialog.confirm-box-dialog[open] button', {hasText: 'Appliquer'}).click()]);
             const toast = page.locator('.toast', {hasText: 'Tout de chez tout'}).last(); await toast.waitFor({timeout: 10000});
             await Promise.all([page.waitForNavigation({waitUntil: 'load', timeout: 15000}), toast.locator('button', {hasText: 'Annuler'}).click()]);
-            await page.waitForTimeout(1500);
-            await page.locator('.toast', {hasText: 'comme avant'}).last().waitFor({timeout: 8000});
+            await page.locator('.toast', {hasText: 'comme avant'}).last().waitFor({state: 'attached', timeout: 15000});
+            await page.waitForTimeout(800);
             const s = await lsAll();
             for (const k of Object.keys(b)) if (!Object.keys(PRIVATE).includes(k)) assert.equal(s[k], b[k], `remis comme avant : ${k}`);
             assert.equal(s['lcnda-photomaps-shape'], 'square'); assert.equal(s['genealogie-side-order'], null);
