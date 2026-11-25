@@ -409,6 +409,19 @@ def step_songs(w):
     return rows
 
 
+def step_mul_labels(w, rows, key, tag):
+    """Le nom « mul » (toutes langues) quand il n'y a ni nom français ni nom anglais : Wikidata range de plus en plus
+    les noms propres ainsi (Marie Curie, Varsovie…)."""
+    missing = sorted(q for q, r in rows.items() if q and not (r.get('fr') or r.get('en')))
+    for n, part in enumerate(chunks(missing, 400)):
+        q = f'''SELECT ?x ?l WHERE {{ VALUES ?x {{ {values('Q%d' % i for i in part)} }} ?x rdfs:label ?l . FILTER(LANG(?l) = "mul") }}'''
+        for r in w.ask(q, f'{tag}{n:05d}') or []:
+            x = rows.get(qnum(r['x']))
+            if x is not None:
+                x['fr'] = r['l']
+    log(f'  noms « mul » ({tag}) : {len(missing)} demandés')
+
+
 def step_occupations(w, occ_ids):
     out = {}
     for n, part in enumerate(chunks(sorted(occ_ids), 400)):
@@ -625,6 +638,8 @@ def main():
     p2, n2 = step_places(w, more, 'pld')
     places.update(p2)
     pnames.update(n2)
+    step_mul_labels(w, det, 'p', 'mulp')
+    step_mul_labels(w, places, 'pl', 'mulpl')
     occ = step_occupations(w, set(qnum(r.get('occ')) for r in det.values()) - {0})
     events = [] if a.test else step_events(w)
     oldrows = [] if a.test else step_oldnames(w)

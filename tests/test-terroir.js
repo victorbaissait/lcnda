@@ -203,11 +203,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             if (PR) assert.match(txt, /Jean :/);
             assert.ok(await p.$('[data-trr-person="1"] a[href^="https://www.inao.gouv.fr/"][target="_blank"]'), 'lien vers l’INAO');
             assert.strictEqual(await p.$eval('[data-pblock="terroir"]', el => el.hidden), false);
+            if (process.env.TR_SHOT) await (await p.$('[data-pblock="terroir"]')).screenshot({path: path.join(process.env.TR_SHOT, 'terroir-mazaud.png')});
         });
         await t('fiche de Marie Anne LACOMBE : « La vache de son pays : … (Finistère) »', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 2; A.setModule('personnes'); });
             await p.waitForSelector('[data-trr-person="2"] [data-trr-line="races"]', {timeout: 20000});
             assert.match(await p.textContent('[data-trr-person="2"] [data-trr-line="races"]'), /La vache de son pays : .+\(Finistère\)/);
+            if (process.env.TR_SHOT) { await sleep(800); await (await p.$('[data-pblock="terroir"]')).screenshot({path: path.join(process.env.TR_SHOT, 'terroir-lacombe.png')}); }
         });
         await t('fiche d’un village (Saint-Émilion) : « 🍷 Les produits de son terroir » avec la source', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'villages'; A.state.hVillage = '33394'; A.setModule('listes'); });

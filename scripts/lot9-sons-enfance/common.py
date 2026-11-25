@@ -26,6 +26,8 @@ def get(url, accept='application/json', tries=3, pause=0.0, cache=True):
             req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': accept})
             with urllib.request.urlopen(req, timeout=90) as r:
                 body = r.read()
+            if body.lstrip().startswith(b'{"error"'):
+                raise RuntimeError('réponse d’erreur : ' + body[:200].decode('utf-8', 'replace'))
             if cache:
                 open(f, 'wb').write(body)
             if pause:
