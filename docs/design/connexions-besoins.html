@@ -1,0 +1,459 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Connexions et besoins</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2}}
+:root[data-theme="dark"]{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45;overflow-wrap:anywhere}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:34px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green);background:var(--green-bg)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+pre{font:11.5px/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--grey-bg);border:1.5px solid var(--line2);padding:10px;overflow-x:auto;margin:8px 0;white-space:pre}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.wide{grid-column:1 / -1}
+.grid>*,.grid3>*,.grid4>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.input{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;background:var(--paper);min-height:28px;display:flex;align-items:center;color:var(--soft)}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.pill.vio{border-color:var(--vio);background:var(--vio-bg);color:var(--vio)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.scrollx{overflow-x:auto;max-width:100%}
+.scrollx>table{min-width:860px}
+.menu{background:var(--paper);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--shadow);width:min(340px,100%);font-size:13px}
+.menu div{padding:6px 12px;border-bottom:1px solid var(--line)}.menu .t{background:var(--bar);color:var(--bar-ink);font-weight:800}
+.menu .g{font:700 10.5px system-ui;color:var(--soft);letter-spacing:.08em;text-transform:uppercase;background:var(--grey-bg)}
+.menu .hi{background:var(--blue-bg);font-weight:700}
+.menu .k{float:right;color:var(--soft);font-size:11.5px}
+/* écrans */
+.screen{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.screen .bar{background:var(--bar);color:var(--bar-ink);padding:7px 12px;font:700 13px system-ui;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.screen .bar .sp{flex:1}
+.screen .body{padding:12px}
+.piste{border:1.5px solid var(--line2);padding:7px 9px;margin:6px 0;font-size:13px;display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.piste b{flex:1;min-width:0}
+.need{border-left:4px solid var(--yel);background:var(--yel-bg);padding:8px 10px;margin:8px 0;font-size:13px}
+.need.done{border-color:var(--green);background:var(--green-bg)}
+.ans{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 8px;align-items:center;font-size:12.5px;padding:5px 0 5px 6px;border-top:1px dashed var(--line2)}
+.ans:first-of-type{border-top:0}
+.picker{display:grid;grid-template-columns:150px minmax(0,1fr) 210px;min-height:300px}
+.picker .tabs{border-right:1.5px solid var(--line2);font-size:12.5px}
+.picker .tabs div{padding:6px 10px;border-bottom:1px solid var(--line)}
+.picker .tabs .on{background:var(--blue-bg);font-weight:800;border-left:4px solid var(--blue)}
+.picker .list{padding:8px;min-width:0}
+.picker .it{display:flex;gap:8px;align-items:center;padding:6px 4px;border-bottom:1px solid var(--line);font-size:12.5px}
+.picker .it span.t{flex:1;min-width:0}
+.picker .prev{border-left:1.5px solid var(--line2);padding:10px;font-size:12px;background:var(--grey-bg)}
+.thumb{width:100%;height:90px;background:repeating-linear-gradient(45deg,var(--line2) 0 6px,var(--grey-bg) 6px 12px);border:1.5px solid var(--line2);margin-bottom:6px}
+.foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-top:2px solid var(--ink);padding:8px 10px;font-size:12.5px}
+.foot .sp{flex:1}
+.chipbasket{display:inline-flex;align-items:center;gap:5px;border:2px solid var(--ink);border-radius:20px;background:var(--paper);padding:3px 10px;font:800 12.5px system-ui;box-shadow:2px 2px 0 var(--shadow)}
+.toast{background:var(--bar);color:var(--bar-ink);padding:10px 12px;font-size:13px;border-left:5px solid var(--green);box-shadow:5px 5px 0 var(--shadow);max-width:520px}
+.toast .row{margin-top:8px}
+.toast .btn{box-shadow:none;border-color:var(--bar-ink);background:transparent;color:var(--bar-ink)}
+.toast .btn.blue{background:var(--blue);border-color:var(--blue)}
+.ba{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.ba h4{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.cost{font:700 11px system-ui;color:var(--green);border:1.5px solid var(--green);background:var(--green-bg);padding:2px 6px;display:inline-block;margin-top:8px}
+.cost.mid{color:var(--yel-ink);border-color:var(--yel);background:var(--yel-bg)}
+.flow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:center;text-align:center;font-size:13px}
+.flow .bx{border:2px solid var(--ink);background:var(--paper);padding:10px;box-shadow:4px 4px 0 var(--shadow)}
+.flow .bx b{display:block;font-size:15px;margin-bottom:4px}
+.flow .ar{font:800 20px system-ui;color:var(--blue)}
+.qq{background:var(--paper);border:2px solid var(--ink);padding:12px 14px;margin:12px 0;box-shadow:4px 4px 0 var(--shadow)}
+.qq h3{margin:0 0 6px;font-size:15px}
+.qq .opt{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:4px 0}
+.qq .reco{font-size:13px;margin-top:8px;border-left:4px solid var(--green);background:var(--green-bg);padding:6px 10px}
+.fric{counter-reset:f;list-style:none;padding:0;margin:0}
+.fric li{counter-increment:f;background:var(--paper);border:1.5px solid var(--line2);padding:9px 12px 9px 46px;margin:8px 0;position:relative;font-size:13.5px}
+.fric li:before{content:counter(f);position:absolute;left:10px;top:9px;background:var(--red);color:#fff;font:800 13px system-ui;padding:2px 7px}
+.fric .path{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.dash td .pill{margin:1px 2px 1px 0}
+@media (max-width:980px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.picker{grid-template-columns:120px minmax(0,1fr)}.picker .prev{display:none}}
+@media (max-width:820px){.grid,.grid3,.grid4,.ba{grid-template-columns:minmax(0,1fr)}body{padding:14px}.flow{grid-template-columns:minmax(0,1fr)}.flow .ar{transform:rotate(90deg)}.picker{grid-template-columns:minmax(0,1fr)}.picker .tabs{display:flex;overflow-x:auto;border-right:0;border-bottom:1.5px solid var(--line2)}.picker .tabs div{white-space:nowrap;border-bottom:0;border-right:1px solid var(--line)}.picker .tabs .on{border-left:0;border-bottom:3px solid var(--blue)}}
+</style></head><body><div class="wrap">
+
+<h1>🔌 Tout relier simplement : « Prendre depuis… », le panier et les besoins</h1>
+<p class="sub">J'ai regardé dans le code comment les outils de l'app se passent les données aujourd'hui, et où ça coince. Voici une proposition qui vaut pour <b>toute l'app</b> (pas seulement les enquêtes), construite sur ce qui existe déjà, <b>sans charger l'écran ni ralentir l'app</b>. Rien n'est codé : tu choisis, je fais ensuite.</p>
+
+<div class="simple">
+<p><b>En bref.</b> Aujourd'hui, les données <b>partent</b> bien d'un outil (« 📤 Envoyer vers… »), mais elles <b>n'arrivent</b> pas facilement là où on travaille : pour mettre un acte, une fiche et une source dans une enquête, il faut aller les chercher une par une, chacune avec sa fenêtre à elle. Et l'app sait souvent ce qui manque (« Que manque-t-il ? », le Contrôle de la base, « Où chercher ? »), mais ces listes ne se parlent pas.</p>
+<p><b>Trois petites choses, les mêmes partout :</b></p>
+<p>📥 <b>Prendre depuis…</b> — l'inverse de « Envoyer vers… » : une seule fenêtre pour aller chercher une ou plusieurs choses (fiches, actes, sources, photos, notes, lieux, résultats de « Données », lignes d'une liste…). Rangée dans le bouton « ＋ Ajouter » qui existe déjà, ou au clavier.</p>
+<p>🧺 <b>Le panier</b> — on coche des choses n'importe où, elles nous suivent d'écran en écran ; Une petite pastille, seulement quand il y a quelque chose dedans.</p>
+<p>📍 <b>Mettre dans…</b> — ce qu'on a pris (une chose, plusieurs, ou le panier) se dépose <b>n'importe où</b> : enquête, fiche, note, livre, montage, site, carte, chronologie, tâche, courrier, liste… La fenêtre ne montre que les endroits possibles et dit ce que ça fera (« lier comme source », « ajouter comme photo », « mettre sur la carte »). Ou on glisse depuis le panier sur l'écran ouvert.</p>
+<p>🧩 <b>Les besoins</b> — un écran peut dire « il me manque ça » (un acte, une photo, une source, des coordonnées) et les outils qui peuvent aider répondent « je l'ai » ou « je peux le trouver ». Quand une donnée arrive (un acte transcrit, une photo importée), l'app propose de la ranger là où on l'attendait. Une pastille chiffrée sur l'écran, le détail dans un seul tableau.</p>
+</div>
+
+<div class="toc"><a href="#p1"><b>1</b>Ce qui coince aujourd'hui</a><a href="#p2"><b>2</b>📥 Prendre depuis…</a><a href="#p3"><b>3</b>🧺 Le panier</a><a href="#p4"><b>4</b>🧩 Les besoins</a><a href="#p5"><b>5</b>Partout dans l'app</a><a href="#p6"><b>6</b>📋 Le tableau central</a><a href="#p7"><b>7</b>Pas plus chargé, pas plus lent</a><a href="#p8"><b>8</b>Ce qui est réutilisé</a><a href="#p9"><b>9</b>Questions pour toi</a></div>
+
+<!-- ═════════════ 1 ═════════════ -->
+<div class="part" id="p1">Partie 1</div><h2>Ce qui coince aujourd'hui (vérifié dans le code)</h2>
+<p class="sub">Les 10 frottements les plus gênants, avec le chemin actuel. « clics » = à peu près, en partant de l'écran où l'on est.</p>
+<ol class="fric">
+<li><b>Depuis une enquête, on ne peut pas aller chercher une source, une note, un lieu, un résultat de « Données » ou une ligne de liste.</b> Le dossier sait recevoir des pistes, des médias, une page de recueil, des personnes liées — c'est tout.<span class="path">Aujourd'hui : recopier le titre de la source à la main dans une nouvelle piste (≈ 4 clics + taper). Les sources de la base, les notes, les lieux : aucun chemin.</span></li>
+<li><b>Une piste ne peut tenir qu'un seul événement.</b> La piste garde un seul événement relié (<code>linked_event_id</code>) : en relier un deuxième remplace le premier.<span class="path">Piste → « Relier un événement » → choisir la personne → choisir l'événement → Enregistrer (5 clics), une piste à la fois.</span></li>
+<li><b>Depuis une fiche, impossible d'envoyer plusieurs choses à la fois dans une enquête.</b> Ni la fiche, ni la barre de sélection des listes (Étiqueter · Mes listes · Exporter · Supprimer) n'ont « vers une enquête ».<span class="path">Pour 1 fiche + 2 photos + 1 événement : ≈ 4 + 6 + 5 = 15 clics, en changeant 3 fois d'écran.</span></li>
+<li><b>« Envoyer vers… » n'envoie rien vers les outils de recherche.</b> Ses 15 destinations sont des outils de création (montage, présentation, tableur, site…) : pas d'enquête, de tableau d'enquête, de note, de dossier de preuve.<span class="path">Depuis l'Atelier ou la Retouche : envoyer l'image… puis aller à l'enquête et « ＋ Média existant » à la main (≈ 6 clics).</span></li>
+<li><b>Un acte qu'on vient de transcrire n'est pas proposé à l'enquête qui le cherchait.</b> L'Atelier de transcription ne parle jamais des enquêtes (aucune mention dans le code).<span class="path">Après la transcription : Enquêtes → l'enquête → ＋ Média existant → retrouver l'image → cocher la piste → Enregistrer (≈ 6 clics, à condition de s'en souvenir).</span></li>
+<li><b>Une enquête ne sait pas dire ce qui lui manque.</b> Les modèles créent des pistes « Acte de naissance ou de baptême… à explorer », mais en texte libre : ni personne, ni sorte d'acte, ni lieu, ni années. Rien ne peut donc reconnaître l'acte quand il arrive.<span class="path">Aucun chemin : c'est à toi de faire le rapprochement de tête.</span></li>
+<li><b>Quatre listes « à faire » qui ne se parlent pas.</b> « Que manque-t-il ? » range ses recherches dans le Journal des recherches ; « Où chercher ? » crée une piste dans <i>la dernière enquête ouverte</i> de la personne (ou une enquête « Où chercher ? — X » créée d'office) sans te laisser choisir ; les rappels libres ne sont rattachés à rien ; les pistes automatiques vont sur la fiche. Seule « 🗓 Ma semaine » les relit toutes.<span class="path">« Que manque-t-il ? » → piste d'enquête : impossible (seulement « Journal des recherches »).</span></li>
+<li><b>Dossiers de preuve, hypothèses et courriers sont coupés des enquêtes.</b> Zéro lien dans le code dans un sens comme dans l'autre. Un courrier « Demander l'acte » n'est pas rattaché à la piste qui attend cet acte ; la réponse reçue n'y est pas rangée.<span class="path">Tout se recopie à la main d'un écran à l'autre.</span></li>
+<li><b>« ✓ Garder » de « Ce qui le concerne » ne propose que les enquêtes dont la personne est la principale</b>, et une seule suggestion à la fois. Une enquête où la personne est « secondaire » n'apparaît pas.<span class="path">Garder → cocher l'enquête → Garder (3 clics) × chaque suggestion.</span></li>
+<li><b>Les outils de création ne disent pas ce qui leur manque.</b> Le Livre de famille ne signale pas qu'une fiche n'a pas de photo ; la carte dit seulement « Rien à placer (lieux sans coordonnées) » ; le montage ne sait pas aller chercher « des photos de 1914 ».<span class="path">Il faut le voir soi-même, puis chercher ailleurs.</span></li>
+</ol>
+
+<h2>L'audit complet, outil par outil</h2>
+<p class="sub">Ce que chaque outil sait recevoir et envoyer aujourd'hui, et le trou principal.</p>
+<div class="scrollx"><table>
+<tr><th>Outil</th><th>Peut recevoir</th><th>Peut envoyer</th><th>Comment aujourd'hui</th><th>Trou principal</th></tr>
+<tr><td>🕵️ Enquête</td><td>pistes (texte), médias, page de recueil, personnes liées, 1 événement par piste, documents liés</td><td>rapport (CSV, impression)</td><td>un bouton et une fenêtre par sorte (4 à 6 clics)</td><td>pas de sources, notes, lieux, Données, lignes ; pas de besoins structurés</td></tr>
+<tr><td>🧩 Tableau d'enquête</td><td>fiches, médias, écrans de l'app, cartes, chronologie, liens, tableaux collés</td><td>image (📤)</td><td>menu Insérer (2–3 clics), riche</td><td>ce qu'on pose sur le tableau n'est pas ajouté à l'enquête</td></tr>
+<tr><td>⚖️ Dossier de preuve</td><td>sources, citations, dépouillements</td><td>—</td><td>menu de choix (3 clics)</td><td>aucun lien avec les enquêtes, hypothèses</td></tr>
+<tr><td>🤔 Hypothèses</td><td>personnes, événement</td><td>—</td><td>fenêtre</td><td>aucun lien avec les enquêtes</td></tr>
+<tr><td>📝 Notes</td><td>texte (rattaché à une fiche, un événement…)</td><td>—</td><td>fenêtre de la fiche</td><td>pas de « Prendre » : on recopie</td></tr>
+<tr><td>🔖 Sources</td><td>—</td><td>barre de sélection : étiqueter, exporter</td><td>liste</td><td>pas vers une enquête ni un dossier de preuve</td></tr>
+<tr><td>🖼 Médias</td><td>fichiers</td><td>📤 vers 15 outils de création</td><td>2 clics</td><td>pas vers enquête / note / preuve</td></tr>
+<tr><td>📜 Atelier de transcription</td><td>image (📤)</td><td>image, texte, personnes repérées (📤)</td><td>2 clics</td><td>ne propose pas l'acte à l'enquête qui l'attend</td></tr>
+<tr><td>📜 Monographie</td><td>parties enregistrées (<code>monographSections</code>)</td><td>impression</td><td>automatique</td><td>ne dit pas « il manque le registre de 1836 »</td></tr>
+<tr><td>🎬 Montage / Studio</td><td>images, sons, vidéos (📤)</td><td>vidéo</td><td>📤 depuis l'autre outil</td><td>ne sait pas aller chercher « photos de 1914 »</td></tr>
+<tr><td>📖 Livre de famille</td><td>une branche (réglages)</td><td>fichier</td><td>Réglages → Export</td><td>ne signale ni photos ni actes manquants</td></tr>
+<tr><td>📋 Listes / Données</td><td>registres <code>dataLists</code></td><td>lignes vers Tableur, Présentation, Document (📤)</td><td>2 clics</td><td>pas vers une enquête ni le panier</td></tr>
+<tr><td>🗺 Carte</td><td>couches <code>mapLayerSources</code></td><td>image</td><td>automatique</td><td>lieux sans coordonnées ignorés en silence</td></tr>
+<tr><td>🗓 Chronologie</td><td>événements de la fiche, « contexte » gardé</td><td>—</td><td>automatique</td><td>pas de « Prendre » (un événement d'un frère, une loi)</td></tr>
+<tr><td>⏰ Rappels / tâches</td><td>titre, notes, date</td><td>—</td><td>fenêtre</td><td>un rappel libre n'est rattaché à rien</td></tr>
+<tr><td>📮 Courriers</td><td>personne, événement, acte</td><td>lettre, registre de courriers</td><td>fenêtre</td><td>pas relié à la piste ; réponse pas rangée</td></tr>
+<tr><td>🌍 Où chercher ?</td><td>une personne</td><td>piste (dans la dernière enquête ouverte, sans choix)</td><td>1 clic</td><td>ne peut pas choisir l'enquête ; ne répond pas aux besoins</td></tr>
+<tr><td>🔎 Ce qui le concerne</td><td>registres <code>dataSources</code></td><td>note, source, événement, 1 enquête</td><td>3 clics par suggestion</td><td>lit le texte affiché (pas de données structurées) ; enquêtes « principales » seulement</td></tr>
+</table></div>
+
+<!-- ═════════════ 2 ═════════════ -->
+<div class="part" id="p2">Partie 2</div><h2>📥 « Prendre depuis… » : une fenêtre pour tout aller chercher</h2>
+<p class="sub">Pas de nouveau bouton : c'est une ligne de plus dans le bouton « ＋ Ajouter » qui existe déjà dans chaque outil, et dans le menu « ⋯ ». Raccourci proposé : <b>⇧⌘O</b> (libre aujourd'hui). La fenêtre est le <b>menu de choix commun</b> de l'app (celui qui sert déjà à choisir une personne, un lieu, une source…), en mode « plusieurs », avec des onglets en plus.</p>
+<div class="grid">
+<div class="case"><div class="head"><span class="tag"><span class="num-b">A</span>Dans une enquête</span><span class="badge have">bouton existant</span></div>
+<h3>Le « ＋ Ajouter » de l'enquête, une ligne en plus</h3>
+<div class="screen"><div class="bar">🕵️ Les parents de Jean MARTIN <span class="sp"></span><span>⏱ 2 h 10</span></div>
+<div class="body"><div class="row" style="margin-bottom:8px"><b style="flex:1">Pistes (6)</b><span class="btn small blue">＋ Ajouter ▾</span></div>
+<div class="menu"><div class="t">＋ Ajouter</div><div>📌 Une piste</div><div>🖼 Un média de l'app…</div><div>⬆ Un nouveau fichier…</div><div>📚 Une page d'un recueil…</div><div class="hi">📥 Prendre depuis… <span class="k">⇧⌘O</span></div><div>🧺 Vider le panier ici (3)</div></div>
+</div></div>
+<p class="note">La dernière ligne n'apparaît que si le panier contient quelque chose.</p></div>
+
+<div class="case"><div class="head"><span class="tag"><span class="num-b">B</span>La fenêtre</span><span class="badge new">nouveau</span></div>
+<h3>Chercher, cocher, voir, prendre</h3>
+<div class="screen"><div class="bar">📥 Prendre depuis… <span class="sp"></span><span>×</span></div>
+<div class="picker">
+<div class="tabs"><div>Tout</div><div class="on">🧺 Panier 3</div><div>🕘 Récents</div><div>👤 Fiches</div><div>📅 Événements</div><div>📜 Actes</div><div>🔖 Sources</div><div>🖼 Médias</div><div>📝 Notes</div><div>📍 Lieux</div><div>🧰 Données</div><div>📋 Listes</div></div>
+<div class="list"><div class="input" style="margin-bottom:6px">🔎 martin tulle 1906</div>
+<div class="it"><span class="cb on"></span><span class="t">📜 Recensement 1906, Tulle — foyer MARTIN<br><span class="mini">transcrit le 12/11 · 5 personnes</span></span></div>
+<div class="it"><span class="cb on"></span><span class="t">👤 Jean MARTIN (1872–1931)<br><span class="mini">fiche · Sosa 12</span></span></div>
+<div class="it"><span class="cb on"></span><span class="t">🔖 AD19, 6 M 412<br><span class="mini">source</span></span></div>
+<div class="it"><span class="cb"></span><span class="t">🌦 Météo à Tulle, hiver 1906<br><span class="mini">Données · Météo ancienne</span></span></div>
+<div class="it"><span class="cb"></span><span class="t">📍 Tulle (Corrèze)<br><span class="mini">lieu · 48 événements</span></span></div></div>
+<div class="prev"><div class="thumb"></div><b>Recensement 1906, Tulle</b><p style="margin:4px 0">Jean MARTIN, 34 ans, cordonnier ; Marie BESSE, 30 ans ; 3 enfants.</p><span class="pill blue">↗ ouvrir</span></div>
+</div>
+<div class="foot"><span>3 cochées</span><span class="sp"></span><span>Ranger dans :</span><span class="input">📌 Ici : piste « Recensements » ▾</span><span class="btn small ghost">🧺 Au panier</span><span class="btn small blue">📥 Prendre (3)</span></div></div>
+<p class="note">Chaque outil dit ce qu'il sait recevoir : la fenêtre ne montre que les onglets utiles (un montage ne propose pas « Sources »). « ↶ Annuler » comme partout.</p></div>
+</div>
+
+<!-- ═════════════ 3 ═════════════ -->
+<div class="part" id="p3">Partie 3</div><h2>🧺 Le panier : ce qu'on a mis de côté nous suit</h2>
+<p class="sub">On met de côté pendant qu'on navigue, on vide quand on est arrivé. Il se remplit depuis ce qui existe : la barre de sélection des listes (une action « 🧺 Au panier » à côté de « ★ Mes listes »), le menu « ⋯ » d'une fiche, d'un média, d'un événement, et « 📤 Envoyer vers… » (une destination « 🧺 Le panier »). Il se vide par « 📥 Prendre depuis… » (onglet Panier) ou « Vider le panier ici ».</p>
+<div class="grid">
+<div class="case"><div class="head"><span class="tag"><span class="num-b">C</span>La pastille</span><span class="badge new">nouveau</span></div>
+<h3>Discrète, et seulement s'il y a quelque chose</h3>
+<div class="ba"><div><h4>Panier vide</h4><div class="screen"><div class="bar">👤 Jean MARTIN <span class="sp"></span><span>🔍</span><span>⋯</span></div><div class="body mini">(rien de plus dans la barre)</div></div></div>
+<div><h4>3 choses dedans</h4><div class="screen"><div class="bar">👤 Jean MARTIN <span class="sp"></span><span class="chipbasket" style="color:var(--ink)">🧺 3</span><span>🔍</span><span>⋯</span></div><div class="body mini">une pastille, à côté de la loupe</div></div></div></div>
+<p class="note">Cliquer la pastille ouvre le petit panneau ci-contre. On peut aussi glisser une chose sur la pastille.</p></div>
+
+<div class="case"><div class="head"><span class="tag"><span class="num-b">D</span>Le panneau du panier</span><span class="badge new">nouveau</span></div>
+<h3>🧺 Mon panier (3)</h3>
+<div class="screen"><div class="body">
+<div class="piste"><span>📜</span><b>Recensement 1906, Tulle — foyer MARTIN</b><span class="mini">×</span></div>
+<div class="piste"><span>👤</span><b>Jean MARTIN (1872–1931)</b><span class="mini">×</span></div>
+<div class="piste"><span>🖼</span><b>Photo de mariage, 1898</b><span class="mini">×</span></div>
+<div class="row" style="margin-top:10px"><span class="btn small blue">📍 Mettre dans…</span><span class="btn small ghost">⭐ Garder comme liste</span><span class="btn small ghost">Tout retirer</span></div>
+<p class="mini" style="margin:8px 0 0">…ou glisse une ligne (ou tout le panier) sur l'écran ouvert.</p>
+</div></div>
+<p class="note">Ce qui ne va pas dans la destination (une fiche dans un montage) est simplement laissé dans le panier, avec une phrase pour le dire.</p></div>
+</div>
+
+<h2>Prendre ici, mettre n'importe où</h2>
+<p class="sub">Ce qu'on a pris (une chose, plusieurs, ou tout le panier) se dépose dans <b>n'importe quel outil</b>, pas seulement celui d'où l'on vient. Une seule fenêtre <b>« 📍 Mettre dans… »</b> : elle ne liste que les endroits qui savent recevoir ces choses-là, et dit en clair <b>ce que ça fera</b>. C'est la fenêtre « 📤 Envoyer vers… » d'aujourd'hui, élargie à toutes les sortes de données.</p>
+<div class="grid3">
+<div class="case"><div class="head"><span class="tag"><span class="num-b">1</span>Prendre ici</span></div>
+<h3>Sur la fiche de Jean MARTIN</h3>
+<div class="screen"><div class="bar">👤 Jean MARTIN <span class="sp"></span><span>⋯</span></div><div class="body" style="font-size:12.5px">
+<div class="piste"><span class="cb on"></span><b>🖼 Photo de mariage, 1898</b></div>
+<div class="piste"><span class="cb on"></span><b>📜 Naissance, Tulle 1872 (acte)</b></div>
+<div class="piste"><span class="cb on"></span><b>📍 Tulle (Corrèze)</b></div>
+<div class="row" style="margin-top:8px"><span class="mini" style="flex:1">3 cochées</span><span class="btn small">🧺 Au panier</span><span class="btn small blue">📍 Mettre dans…</span></div></div></div>
+<p class="note">Les cases apparaissent par la barre de sélection qui existe déjà (ou « ⋯ → Choisir plusieurs »). Sans cases : « ⋯ → 📍 Mettre dans… » sur une seule chose.</p></div>
+
+<div class="case"><div class="head"><span class="tag"><span class="num-b">2</span>Choisir où</span><span class="badge new">nouveau</span></div>
+<h3>📍 Mettre dans… (3 choses)</h3>
+<div class="menu" style="width:100%"><div class="t">📍 Mettre dans…</div>
+<div class="g">Ouverts récemment</div>
+<div class="hi">🕵️ Enquête « Les parents de Jean MARTIN »<br><span class="mini">l'acte et la photo comme pièces, Tulle comme lieu de l'enquête</span></div>
+<div>🎬 Montage « Les MARTIN à Tulle »<br><span class="mini">la photo et l'image de l'acte sur la piste ; Tulle : une carte animée</span></div>
+<div class="g">Partout ailleurs</div>
+<div>📖 Livre de famille…<br><span class="mini">la photo dans les photos de Jean ; l'acte en annexe</span></div>
+<div>🗺 Une carte…<br><span class="mini">mettre Tulle sur la carte, la photo en vignette</span></div>
+<div>🗓 La chronologie de…<br><span class="mini">l'acte comme repère daté (1872)</span></div>
+<div>📝 Une note… · ⏰ Une tâche… · 📮 Un courrier…<br><span class="mini">un lien vers chacune</span></div>
+<div>🌐 Mon site · 🎞️ Présentation · 🧩 Tableau d'enquête · ⚖️ Dossier de preuve · 📋 Mes listes</div>
+<div class="mini">🔎 chercher une destination…</div></div>
+<p class="note">Si une destination ne prend qu'une partie : « 2 sur 3 iront là ; Tulle reste dans le panier. »</p></div>
+
+<div class="case"><div class="head"><span class="tag"><span class="num-b">3</span>…ou glisser</span><span class="badge new">nouveau</span></div>
+<h3>Du panier vers l'écran ouvert</h3>
+<div class="screen"><div class="bar">🎬 Montage « Les MARTIN à Tulle » <span class="sp"></span><span class="chipbasket" style="color:var(--ink)">🧺 3</span></div>
+<div class="body" style="font-size:12.5px"><div class="thumb" style="height:60px"></div>
+<div style="border:2px dashed var(--blue);background:var(--blue-bg);padding:10px;text-align:center;color:var(--blue-ink);font-weight:700">Lâche ici : 2 images sur la piste vidéo<br><span class="mini">« Tulle » ne va pas dans un montage : il reste dans le panier</span></div></div></div>
+<p class="note">Le cadre bleu n'apparaît que pendant qu'on glisse. Il dit ce qui va se passer avant qu'on lâche. Lâcher = ↶ Annuler possible.</p></div>
+</div>
+<div class="msg"><b>Ce que ça fera</b>, selon la chose et l'endroit (exemples) : <b>une source</b> → « lier comme source » (fiche, événement), « pièce de l'enquête », « indice pour » (dossier de preuve) · <b>une photo</b> → « ajouter comme photo » (fiche, livre), « mettre sur la piste » (montage), « vignette » (carte) · <b>un lieu</b> → « mettre sur la carte », « lieu de l'enquête », « fiche du lieu dans le livre » · <b>une fiche</b> → « personne liée » (enquête, courrier, tâche), « ajouter à la liste » · <b>une ligne de données</b> → « note avec sa source », « repère dans la chronologie », « ligne du tableur ». Chaque outil écrit ces phrases lui-même, une fois.</div>
+
+<!-- ═════════════ 4 ═════════════ -->
+<div class="part" id="p4">Partie 4</div><h2>🧩 Les besoins : « il me manque ça » → « je l'ai » / « je peux le trouver »</h2>
+<p class="sub">Un besoin, c'est une chose précise qui manque : <i>quoi</i> (acte de naissance, photo, source, coordonnées…), <i>pour qui</i>, <i>où</i>, <i>quand</i>. Il vient d'un écran (une enquête, une fiche, le livre, la carte…). Les « fournisseurs » sont les outils qui savent répondre.</p>
+<div class="flow">
+<div class="bx"><b>Ceux qui demandent</b>enquête · piste · fiche · hypothèse · livre · montage · carte · monographie · « Que manque-t-il ? » · Contrôle de la base</div>
+<div class="ar">→</div>
+<div class="bx" style="border-color:var(--yel);background:var(--yel-bg)"><b>🧩 Les besoins</b>une seule liste : quoi, qui, où, quand, et pour quel écran</div>
+<div class="ar">←</div>
+<div class="bx"><b>Ceux qui répondent</b>Médias · Atelier · Journal des recherches · Pistes automatiques · Données installées · Où chercher ? · Courriers · Carte (communes)</div>
+</div>
+<p class="note">Deux sortes de réponses : <span class="pill ok">✓ je l'ai</span> (c'est déjà dans l'app : une photo, un acte transcrit, une ligne de données) et <span class="pill blue">🔎 je peux le trouver</span> (un site, un registre en ligne, une lettre à envoyer). Et une troisième, utile aussi : <span class="pill">🚫 déjà cherché</span> (le Journal des recherches dit « rien trouvé »).</p>
+
+<div class="grid" style="margin-top:18px">
+<div class="case"><div class="head"><span class="tag"><span class="num-b">E</span>Une enquête et ses besoins</span><span class="badge new">nouveau</span></div>
+<h3>Les pistes « à explorer » deviennent des besoins précis</h3>
+<div class="screen"><div class="bar">🕵️ Les parents de Jean MARTIN <span class="sp"></span><span class="pill q" style="border-color:var(--yel)">🧩 3 besoins · 2 réponses</span></div>
+<div class="body">
+<div class="need"><b>📜 Acte de naissance de Jean MARTIN</b> <span class="mini">· Tulle · 1870–1874</span>
+<div class="ans"><span class="pill ok">✓ je l'ai</span><span>📜 <b>Atelier</b> : « Naissance, Tulle 1872 » transcrit le 12/11 nomme Jean MARTIN</span><span class="btn small blue">Ranger</span></div>
+<div class="ans"><span class="pill blue">🔎 trouver</span><span>🌍 <b>Où chercher ?</b> : AD19, état civil en ligne, Tulle 1863–1872</span><span class="btn small">↗</span></div>
+<div class="ans"><span class="pill blue">🔎 trouver</span><span>📮 <b>Courriers</b> : demander la copie à la mairie de Tulle</span><span class="btn small">✉</span></div></div>
+<div class="need"><b>🏠 Recensement 1906 à Tulle</b>
+<div class="ans"><span class="pill ok">✓ je l'ai</span><span>🖼 <b>Médias</b> : 2 images « Tulle 1906 » pas encore rangées</span><span class="btn small blue">Voir</span></div></div>
+<div class="need"><b>💍 Acte de mariage des parents</b> <span class="mini">· lieu inconnu · 1860–1871</span>
+<div class="ans"><span class="pill">🚫 déjà cherché</span><span>📒 <b>Journal</b> : Tulle 1860–1870, rien trouvé (3 mars)</span><span></span></div>
+<div class="ans"><span class="pill blue">🔎 trouver</span><span>🔎 <b>Pistes automatiques</b> : 1 mariage probable (Open Archives)</span><span class="btn small">Voir</span></div></div>
+<div class="row mini" style="margin-top:6px">＋ dans « ＋ Ajouter » : « 🧩 Un besoin… » (quoi · qui · où · quand)</div>
+</div></div>
+<p class="note">Rien de neuf à remplir : les modèles d'enquête (« Trouver les parents de… ») créent déjà ces pistes ; elles reçoivent juste la personne, la sorte d'acte, le lieu et les années, déjà connus du modèle.</p>
+<span class="cost">Coût : calculé à l'ouverture de l'enquête seulement · quelques millisecondes</span></div>
+
+<div class="case"><div class="head"><span class="tag"><span class="num-b">F</span>Quand une donnée arrive</span><span class="badge new">nouveau</span></div>
+<h3>« Cet acte répond au besoin de… — l'y ranger ? »</h3>
+<div class="screen"><div class="bar">📜 Atelier de transcription — Naissance, Tulle 1872 <span class="sp"></span><span>💾</span></div>
+<div class="body"><div style="height:80px" class="thumb"></div>
+<div class="toast"><b>✓ Enregistré.</b> Cet acte que tu viens de transcrire répond au besoin de l'enquête <b>« Les parents de Jean MARTIN »</b> (acte de naissance).<div class="row"><span class="btn small blue">Ranger dans l'enquête</span><span class="btn small">Voir</span><span class="btn small">Pas lui</span></div></div>
+</div></div>
+<p class="note">Seulement quand c'est presque sûr (même personne <b>et</b> même sorte d'acte). Sinon rien ne s'affiche : la réponse attend dans le tableau central. Plusieurs à la fois ? Un seul message : « 3 nouvelles choses répondent à des besoins — voir ». Jamais rangé tout seul ; « ↶ Annuler » ; « Ne plus proposer » dans le message.</p>
+<p class="note">Mêmes messages après : un import de médias, un import GEDCOM, une piste automatique acceptée, une réponse de courrier enregistrée.</p>
+<span class="cost">Coût : une seule vérification, après l'enregistrement, sur les besoins ouverts de cette personne</span></div>
+</div>
+
+<!-- ═════════════ 5 ═════════════ -->
+<div class="part" id="p5">Partie 5</div><h2>Partout dans l'app : 4 exemples</h2>
+<p class="sub">Le même système, sur d'autres écrans. Chaque fois : <b>une pastille chiffrée ou une ligne repliée</b>, rien de plus. Ces besoins-là sont <b>calculés</b> (pas besoin de les écrire), et chaque écran peut aussi être fournisseur pour les autres.</p>
+<div class="grid4">
+<div class="case"><div class="head"><span class="tag">📖 Livre de famille</span></div>
+<h3>« Il me manque… »</h3>
+<div class="screen"><div class="body"><div class="row"><b style="flex:1">Branche MARTIN · 42 fiches</b></div>
+<details open style="margin-top:6px;font-size:12.5px"><summary><span class="pill q">🧩 7</span> il manque des choses au livre</summary>
+<div class="ans"><span>🖼</span><span>Pas de photo de Pierre MARTIN</span><span class="pill ok">✓ 2</span></div>
+<div class="ans"><span>💍</span><span>Acte de mariage de Jean et Marie</span><span class="pill blue">🔎</span></div>
+<div class="ans"><span>📝</span><span>5 fiches sans texte de biographie</span><span class="pill blue">✍</span></div></details></div></div>
+<p class="note">« ✓ 2 » : Médias a deux photos où Pierre est identifié mais pas comme portrait.</p>
+<p class="note"><b>Fournit :</b> le livre en PDF (📤 existe déjà).</p></div>
+
+<div class="case"><div class="head"><span class="tag">🎬 Montage</span></div>
+<h3>« Il me faut des photos de 1914 »</h3>
+<div class="screen"><div class="body"><div class="mini">＋ Ajouter ▾ → 📥 Prendre depuis…</div>
+<div class="input" style="margin:6px 0">🔎 photos · 1914 · famille MARTIN</div>
+<div class="ans"><span class="pill ok">✓ 14</span><span>🖼 Médias datés 1913–1915</span><span></span></div>
+<div class="ans"><span class="pill ok">✓ 6</span><span>💌 Cartes postales de Tulle</span><span></span></div>
+<div class="ans"><span class="pill ok">✓ 3</span><span>🎖 Fiche matricule, Mémoire des hommes</span><span></span></div></div></div>
+<p class="note">Ici pas de « besoin » enregistré : c'est la fenêtre « Prendre depuis… » avec un filtre d'années.</p>
+<p class="note"><b>Fournit :</b> la vidéo (📤 existe).</p></div>
+
+<div class="case"><div class="head"><span class="tag">👤 Fiche</span></div>
+<h3>« Pas de source pour cette naissance »</h3>
+<div class="screen"><div class="body" style="font-size:12.5px">
+<div class="piste"><span>👶</span><b>Naissance · 3 mai 1872 · Tulle</b><span class="pill q">🧩</span></div>
+<div class="ans"><span class="pill ok">✓</span><span>📜 Acte transcrit dans l'Atelier (12/11)</span><span class="btn small blue">Citer</span></div>
+<div class="ans"><span class="pill blue">🔎</span><span>🔎 1 piste automatique</span><span></span></div></div></div>
+<p class="note">La petite pastille 🧩 sur l'événement n'apparaît que s'il y a une réponse « ✓ je l'ai ». Le simple « sans source » reste dans le Contrôle de la base, comme aujourd'hui.</p>
+<p class="note"><b>Fournit :</b> fiches, événements, notes.</p></div>
+
+<div class="case"><div class="head"><span class="tag">🗺 Carte</span></div>
+<h3>« 12 lieux sans coordonnées »</h3>
+<div class="screen"><div class="body" style="font-size:12.5px">
+<div class="msg warn" style="margin:0 0 6px">🧩 12 lieux de cette branche ne sont pas sur la carte. <b>▸ plus</b></div>
+<div class="ans"><span class="pill ok">✓ 10</span><span>🏛 Communes (INSEE / GOV) : je peux les placer</span><span class="btn small blue">Placer</span></div>
+<div class="ans"><span class="pill blue">🔎 2</span><span>À placer à la main (« 🗺 Choisir sur la carte »)</span><span></span></div></div></div>
+<p class="note">Remplace la phrase actuelle « Rien à placer (lieux sans coordonnées) ».</p>
+<p class="note"><b>Fournit :</b> lieux, coordonnées, image de la carte.</p></div>
+</div>
+<p class="note">Même principe, sans maquette : la <b>monographie</b> (« le registre de 1836 n'est pas dépouillé »), l'<b>hypothèse</b> (« il faudrait l'acte de décès pour trancher »), le <b>courrier</b> (fournisseur : « je peux demander l'acte »), les <b>rappels</b> (un rappel peut être rattaché à un besoin et se cocher tout seul quand le besoin est rempli).</p>
+
+<!-- ═════════════ 6 ═════════════ -->
+<div class="part" id="p6">Partie 6</div><h2>📋 Le tableau central : « Ce qui manque partout / ce que je peux fournir »</h2>
+<p class="sub">Tout le détail est ici, pas sur les écrans. Ce n'est pas un écran de plus à apprendre : c'est <b>« 🗓 Ma semaine de recherche »</b> (qui relit déjà rappels, courriers, visites, pistes, hypothèses, « Que manque-t-il ? » et le Contrôle de la base), avec un deuxième onglet.</p>
+<div class="case">
+<div class="head"><span class="tag">🗓 Ma semaine · onglet 🧩 Ce qui manque</span><span class="row"><span class="pill blue">Tout 38</span><span class="pill ok">✓ Je l'ai déjà 6</span><span class="pill">🔎 Je peux le trouver 21</span><span class="pill">Sans réponse 11</span></span></div>
+<div class="scrollx" style="margin-top:10px"><table class="dash">
+<tr><th>Ce qui manque</th><th>Pour</th><th>Qui peut répondre</th><th></th></tr>
+<tr><td>📜 Acte de naissance de Jean MARTIN · Tulle 1870–74</td><td>🕵️ Les parents de Jean MARTIN</td><td><span class="pill ok">✓ Atelier</span><span class="pill blue">🌍 Où chercher</span><span class="pill blue">📮 Courrier</span></td><td><span class="btn small blue">Ranger</span></td></tr>
+<tr><td>🖼 Photo de Pierre MARTIN</td><td>📖 Livre « Branche MARTIN »</td><td><span class="pill ok">✓ Médias (2)</span></td><td><span class="btn small blue">Choisir</span></td></tr>
+<tr><td>📍 12 lieux sans coordonnées</td><td>🗺 Carte</td><td><span class="pill ok">✓ Communes (10)</span></td><td><span class="btn small blue">Placer</span></td></tr>
+<tr><td>💍 Mariage des parents · 1860–71</td><td>🕵️ Les parents de Jean MARTIN</td><td><span class="pill">🚫 Journal : Tulle rien</span><span class="pill blue">🔎 Pistes auto (1)</span></td><td><span class="btn small">Voir</span></td></tr>
+<tr><td>☠ Décès de Louise BESSE</td><td>❓ Que manque-t-il ? (Sosa 25)</td><td><span class="pill ok">✓ Décès INSEE</span></td><td><span class="btn small blue">Voir</span></td></tr>
+<tr><td>🔖 Source de la naissance de Marie BESSE</td><td>👤 Fiche</td><td><span class="mini">rien pour l'instant</span></td><td><span class="btn small ghost">Ignorer</span></td></tr>
+</table></div>
+<p class="note">Regroupé par personne, par écran ou par service d'archives (pour préparer une visite, comme « Que manque-t-il ? » le fait déjà). « 🖨 Imprimer pour aller aux archives » repris tel quel. Un widget du tableau de bord : « 🧩 6 choses que tu as déjà ».</p>
+<span class="cost mid">Coût : calculé quand on ouvre l'onglet, gardé en cache tant que la base ne change pas (comme le Contrôle de la base)</span></div>
+
+<!-- ═════════════ 7 ═════════════ -->
+<div class="part" id="p7">Partie 7</div><h2>Pas plus chargé, pas plus lent</h2>
+<p class="sub">Avant / après d'une enquête, à la même taille : la seule différence visible est une pastille dans l'en-tête et une ligne dans un menu qui existe déjà.</p>
+<div class="ba">
+<div><h4>Avant (aujourd'hui)</h4><div class="screen"><div class="bar">🕵️ Les parents de Jean MARTIN <span class="sp"></span><span>⏱ 2 h 10</span><span>⋯</span></div>
+<div class="body"><div class="row" style="margin-bottom:6px"><b style="flex:1">Pistes (6)</b><span class="btn small">Liste</span><span class="btn small">🧩</span><span class="btn small blue">＋ Ajouter</span></div>
+<div class="piste"><b>Acte de naissance ou de baptême</b><span class="pill q">à explorer</span></div>
+<div class="piste"><b>Acte de mariage (il nomme les parents)</b><span class="pill q">à explorer</span></div>
+<div class="piste"><b>Recensements : le foyer et ses voisins</b><span class="pill">explorée</span></div></div></div></div>
+<div><h4>Après</h4><div class="screen"><div class="bar">🕵️ Les parents de Jean MARTIN <span class="sp"></span><span class="pill q">🧩 2</span><span>⏱ 2 h 10</span><span>⋯</span></div>
+<div class="body"><div class="row" style="margin-bottom:6px"><b style="flex:1">Pistes (6)</b><span class="btn small">Liste</span><span class="btn small">🧩</span><span class="btn small blue">＋ Ajouter</span></div>
+<div class="piste"><b>Acte de naissance ou de baptême</b><span class="pill ok">✓ 1</span><span class="pill q">à explorer</span></div>
+<div class="piste"><b>Acte de mariage (il nomme les parents)</b><span class="pill q">à explorer</span></div>
+<div class="piste"><b>Recensements : le foyer et ses voisins</b><span class="pill">explorée</span></div></div></div></div>
+</div>
+<p class="note">Pas de nouveau bouton : « 📥 Prendre depuis… » et « 🧩 Un besoin… » sont dans « ＋ Ajouter ». La pastille « 🧩 2 » n'apparaît que s'il y a des réponses « ✓ je l'ai » ; un clic déplie les réponses sous les pistes.</p>
+
+<h2>Le coût de chaque partie</h2>
+<div class="scrollx"><table>
+<tr><th>Partie</th><th>Quand ça calcule</th><th>Coût</th><th>Sur l'écran</th><th>Réglage</th></tr>
+<tr><td>📥 Prendre depuis…</td><td>seulement quand on ouvre la fenêtre ; la recherche existante (<code>picker_search</code>) ; « Données » lancées une à une, à la demande</td><td><span class="pill ok">nul au repos</span></td><td>une ligne dans « ＋ Ajouter »</td><td>—</td></tr>
+<tr><td>📍 Mettre dans… / glisser</td><td>seulement quand on ouvre la fenêtre ou qu'on glisse : chaque outil dit « je prends ça » sans rien charger</td><td><span class="pill ok">nul au repos</span></td><td>rien (dans « ⋯ » et le panier)</td><td>—</td></tr>
+<tr><td>🧺 Panier</td><td>rien : une petite liste gardée</td><td><span class="pill ok">nul</span></td><td>pastille seulement si non vide</td><td>on / off</td></tr>
+<tr><td>🧩 Besoins d'une enquête, d'une fiche</td><td>à l'ouverture de l'écran, pour cette personne seulement, sur des tables indexées</td><td><span class="pill ok">quelques ms</span></td><td>une pastille chiffrée</td><td>on / off</td></tr>
+<tr><td>🧩 Besoins calculés (livre, carte, monographie)</td><td>à l'ouverture de l'outil, une fois</td><td><span class="pill ok">faible</span></td><td>une ligne repliée</td><td>on / off par outil</td></tr>
+<tr><td>Réponses des fournisseurs hors ligne (Médias, Atelier, Journal, Données installées)</td><td>en tâche légère, après l'affichage ; gardées en cache</td><td><span class="pill ok">faible</span></td><td>rien tant que pas déplié</td><td>on / off par fournisseur</td></tr>
+<tr><td>Réponses en ligne (Pistes automatiques, Open Archives)</td><td>jamais toutes seules : déjà calculées par « Pistes automatiques », on relit seulement le résultat</td><td><span class="pill ok">nul en plus</span></td><td>—</td><td>—</td></tr>
+<tr><td>Message « cet acte répond… »</td><td>une vérification après l'enregistrement, besoins ouverts de cette personne seulement</td><td><span class="pill ok">quelques ms</span></td><td>un message, regroupé</td><td>on / off</td></tr>
+<tr><td>📋 Tableau central</td><td>à l'ouverture de l'onglet, cache tant que la base ne change pas</td><td><span class="pill q">moyen, une fois</span></td><td>un onglet dans « Ma semaine »</td><td>—</td></tr>
+</table></div>
+<p class="note">Tout se coupe dans Réglages → « 🔌 Connexions » : panier, besoins, messages, chaque fournisseur. Coupé = l'app se comporte exactement comme aujourd'hui.</p>
+
+<!-- ═════════════ 8 ═════════════ -->
+<div class="part" id="p8">Partie 8</div><h2>Ce qui existe déjà et sera réutilisé</h2>
+<p class="sub">On ajoute des branchements, pas un nouveau système à côté.</p>
+<div class="scrollx"><table>
+<tr><th>Ce qui existe</th><th>Où</th><th>Ce qu'il devient</th></tr>
+<tr><td>📤 Envoyer vers… (15 destinations, sortes image, texte, lignes, son, vidéo, dessin)</td><td><code>assets/js/heritage-envoyer.js</code> (<code>ext.sendTargets</code>)</td><td>chaque destination dit aussi ce qu'elle <b>reçoit</b> (fiche, acte, source…) : c'est la même liste qui sert à « Prendre depuis… » et à « 📍 Mettre dans… » (avec la phrase « ce que ça fera ») ; + destinations Enquête, Tableau d'enquête, Note, Dossier de preuve, Panier</td></tr>
+<tr><td>Le menu de choix commun (plusieurs sortes mélangées, plusieurs choix, aperçu)</td><td><code>assets/js/app-picker.js</code>, <code>lib/picker.php</code> (<code>openPicker({multiple})</code>)</td><td>la fenêtre « 📥 Prendre depuis… » (onglets en plus : Panier, Récents, Données, Listes)</td></tr>
+<tr><td>☑ La barre de sélection commune</td><td><code>assets/js/app-selection.js</code></td><td>deux actions en plus : « 🧺 Au panier » et « 📤 Envoyer vers… »</td></tr>
+<tr><td>Registres <code>dataSources</code>, <code>dataLists</code></td><td>33 et 30 inscriptions dans <code>assets/js</code></td><td>onglets « 🧰 Données » et « 📋 Listes » de la fenêtre ; fournisseurs « je l'ai » (avec un petit <code>facts()</code> facultatif qui rend des données au lieu du seul affichage)</td></tr>
+<tr><td>🔎 Ce qui le concerne (✓ Garder, ＋ Ajouter aussi à…)</td><td><code>assets/js/heritage-tout-sur.js</code></td><td>« Garder » propose aussi les enquêtes où la personne est secondaire, et plusieurs suggestions à la fois (par le panier)</td></tr>
+<tr><td>Pistes d'enquête, modèles d'enquête</td><td><code>assets/js/app-enquetes.js</code>, <code>lib/enquetes_plus.php</code></td><td>une piste « à explorer » peut porter un besoin ; plusieurs événements par piste</td></tr>
+<tr><td>❓ Que manque-t-il ? · 💡 Suggestions · ✅ Contrôle de la base</td><td><code>lib/research_gaps.php</code>, <code>lib/suggestions.php</code>, <code>lib/controle.php</code></td><td>des « demandeurs » : leurs lignes deviennent des besoins (sans rien recopier)</td></tr>
+<tr><td>🌍 Où chercher ?</td><td><code>lib/ou_chercher.php</code></td><td>fournisseur « je peux le trouver » ; « ＋ En faire une piste » laisse choisir l'enquête</td></tr>
+<tr><td>🔎 Pistes automatiques <i>(en cours, pas touché)</i></td><td><code>lib/pistes_auto.php</code></td><td>plus tard : fournisseur, en relisant ses résultats déjà calculés</td></tr>
+<tr><td>📒 Journal des recherches</td><td><code>lib/research_journal.php</code></td><td>fournisseur « 🚫 déjà cherché »</td></tr>
+<tr><td>📮 Courriers « Demander l'acte »</td><td><code>lib/courriers_actes.php</code></td><td>fournisseur « je peux le demander » ; la réponse enregistrée remplit le besoin</td></tr>
+<tr><td>🗓 Ma semaine de recherche</td><td><code>lib/semaine.php</code></td><td>le tableau central (un onglet de plus)</td></tr>
+<tr><td>Cache « tant que la base ne change pas »</td><td><code>lib/controle.php</code>, <code>lib/preuve.php</code></td><td>même principe pour les réponses des fournisseurs</td></tr>
+</table></div>
+
+<details style="margin-top:14px"><summary><b>▸ Pour le code : les trois registres (une inscription par outil)</b></summary>
+<pre>// 1. ce qu'un outil sait recevoir (même liste que « Envoyer vers… »)
+ext.sendTargets.push({key: 'investigation', icon: '🕵️', label: 'Dans une enquête…',
+  kinds: ['image', 'text', 'rows'], takes: ['person', 'event', 'act', 'source', 'media', 'note', 'place', 'datum', 'row'],
+  ready: () =&gt; true, run: (kind, data, opts) =&gt; …,
+  explain: items =&gt; 'l\'acte et la photo comme pièces, Tulle comme lieu',   // « ce que ça fera »
+  receive: async (items, opts) =&gt; … });   // aussi appelé quand on lâche le panier sur l'écran ouvert
+
+// 2. un écran qui demande (calculé à l'ouverture, jamais en boucle)
+(ext.needSources = ext.needSources || []).push({id: 'book', icon: '📖', label: 'Livre de famille',
+  list: async scope =&gt; [{what: 'photo', person_id: 12, label: 'Photo de Pierre MARTIN'}]});
+
+// 3. un outil qui répond
+(ext.providers = ext.providers || []).push({id: 'media', icon: '🖼', label: 'Médias', offline: true,
+  answers: ['photo', 'act'], find: async need =&gt; [{have: true, kind: 'media', id: 812, title: '…'}]});
+
+// quand quelque chose arrive (après un enregistrement)
+ext.announce({kind: 'act', id: 431, person_ids: [12], what: 'birth', place_id: 7, year: 1872});</pre>
+<p class="note">Côté serveur : une petite table <code>needs</code> (pour, quoi, personne, lieu, années, état) pour les besoins écrits ; les besoins calculés ne sont pas enregistrés.</p></details>
+
+<!-- ═════════════ 9 ═════════════ -->
+<div class="part" id="p9">Partie 9</div><h2>Questions pour toi</h2>
+<div class="qq"><h3>1. Le panier : un seul, ou plusieurs avec un nom ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Un seul panier</b>, et « ⭐ Garder comme liste » si on veut le garder (Mes listes existe déjà).</span></div>
+<div class="opt"><span class="cb"></span><span>Plusieurs paniers nommés.</span></div>
+<div class="reco">Ma recommandation : <b>un seul</b>. C'est plus simple et Mes listes fait déjà le reste.</div></div>
+<div class="qq"><h3>2. Le panier est gardé où ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Dans la base</b> : il te suit sur un autre ordinateur, il survit à une fermeture.</span></div>
+<div class="opt"><span class="cb"></span><span>Seulement dans ce navigateur, vidé à la fermeture.</span></div>
+<div class="reco">Ma recommandation : <b>dans la base</b> (c'est une toute petite liste).</div></div>
+<div class="qq"><h3>3. Les besoins d'une enquête : une chose à part, ou les pistes « à explorer » améliorées ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Les pistes améliorées</b> : une piste « à explorer » peut dire quoi / qui / où / quand ; elle reste une piste.</span></div>
+<div class="opt"><span class="cb"></span><span>Une liste « Besoins » séparée des pistes.</span></div>
+<div class="reco">Ma recommandation : <b>les pistes améliorées</b>. Rien de nouveau à apprendre, et les modèles d'enquête les remplissent déjà.</div></div>
+<div class="qq"><h3>4. Le message « cet acte répond au besoin de… » : quand ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Seulement si c'est presque sûr</b> (même personne et même sorte d'acte) ; le reste attend dans le tableau central.</span></div>
+<div class="opt"><span class="cb"></span><span>À chaque fois qu'il y a une ressemblance.</span></div>
+<div class="opt"><span class="cb"></span><span>Jamais de message : seulement la pastille et le tableau central.</span></div>
+<div class="reco">Ma recommandation : <b>presque sûr seulement</b>, regroupé, avec « Ne plus proposer ».</div></div>
+<div class="qq"><h3>5. Ranger tout seul ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Jamais</b> : toujours un clic pour ranger, avec « ↶ Annuler ».</span></div>
+<div class="opt"><span class="cb"></span><span>Ranger tout seul quand c'est sûr à 100 %.</span></div>
+<div class="reco">Ma recommandation : <b>jamais tout seul</b>, comme les pistes automatiques (« ✓ Rattacher » / « ✗ Pas lui »).</div></div>
+<div class="qq"><h3>6. Par où commencer ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Étape 1</b> (la plus utile, la plus simple) : « Envoyer vers… » → enquête, note, dossier de preuve, panier ; la barre de sélection → panier ; « Où chercher ? » qui laisse choisir l'enquête ; plusieurs événements par piste.</span></div>
+<div class="opt"><span class="cb on"></span><span><b>Étape 2</b> : « 📥 Prendre depuis… » dans les « ＋ Ajouter » des enquêtes, notes, livre, montage, présentation.</span></div>
+<div class="opt"><span class="cb on"></span><span><b>Étape 3</b> : les besoins dans les enquêtes et les fiches, avec Médias, Atelier, Journal et Où chercher comme fournisseurs, et le message après une transcription.</span></div>
+<div class="opt"><span class="cb"></span><span><b>Étape 4</b> : le livre, la carte, la monographie, les courriers, et l'onglet « Ce qui manque » de Ma semaine.</span></div>
+<div class="reco">Ma recommandation : <b>étapes 1 à 3</b> d'abord ; l'étape 4 quand tu auras essayé.</div></div>
+<div class="qq"><h3>7. Le raccourci clavier de « Prendre depuis… »</h3>
+<div class="opt"><span class="cb on"></span><span><b>⇧⌘O</b> (libre aujourd'hui dans l'app).</span></div>
+<div class="opt"><span class="cb"></span><span>Pas de raccourci.</span></div>
+<div class="reco">Ma recommandation : <b>⇧⌘O</b>, affiché dans le menu à côté de la ligne.</div></div>
+
+<p class="note" style="margin:30px 0 10px">Maquette — rien n'est codé. Fichiers regardés : heritage-envoyer.js, app-picker.js, app-selection.js, heritage-tout-sur.js, app-enquetes.js, app.js (fenêtres d'enquête), heritage-boards.js, heritage-liens.js, heritage-ou-chercher.js, heritage-research-gaps.js, heritage-book.js, lib/bootstrap.php, lib/research_gaps.php, lib/suggestions.php, lib/ou_chercher.php, lib/preuve.php, lib/courriers_actes.php, lib/semaine.php, lib/controle.php, lib/research_journal.php, lib/pistes_auto.php (lu seulement).</p>
+</div></body></html>
