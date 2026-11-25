@@ -6,6 +6,13 @@
 .person-hero-actions.lc-cols-2 { display: grid; grid-template-columns: repeat(2, 29px); gap: 14px 12px; align-content: center; justify-content: center; }
 .person-hero-actions.lc-rows-2 { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); gap: 12px 12px; align-content: center; justify-content: center; }
 .lc-pf-btn { font-size: 15px; line-height: 1; }
+/* une action du menu ⋯ montrée en bouton carré (Réglages → « Ordre et visibilité des boutons ») */
+.lc-mb-btn { font-size: 15px; line-height: 1; }
+.person-hero-actions { max-width: 100%; }
+/* téléphone : beaucoup de boutons → ils passent à la ligne au lieu de sortir du cadre */
+@container pa-fiche (max-width: 529px) {
+    .person-hero-actions.lc-rows-2, .person-hero-actions.lc-cols-2 { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 10px; }
+}
 .lc-pf-link { border: var(--line); padding: 5px 10px; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; background: var(--white, #fff); color: var(--ink); cursor: pointer; font-family: inherit; }
 .lc-pf-link:hover, .lc-pf-link:focus-visible { background: var(--blue); color: var(--on-blue, #fff); }
 

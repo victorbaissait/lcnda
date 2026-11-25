@@ -1658,7 +1658,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lot8-soldats-noms.js?v=1" defer></script>
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=1" defer></script>
 <script src="assets/js/heritage-terroir.js?v=1" defer></script>
-<script src="assets/js/heritage-terre-mots.js?v=1" defer></script>
+<script src="assets/js/heritage-terre-mots.js?v=2" defer></script>
 <script src="assets/js/heritage-tout-sur.js?v=4" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>

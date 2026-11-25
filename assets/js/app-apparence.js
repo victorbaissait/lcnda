@@ -462,15 +462,50 @@
         ['profils', '🧩', 'Cette personne était… (ses profils)', '[data-lc-pf]'],
         ['star', '☆', 'Ajouter aux raccourcis (étoile)', '[data-sc-star]'],
         ['more', '⋯', 'Plus d’actions (menu ⋯)', '[data-fsec-hero-more]'],
+        // déjà dans l'en-tête, rangés à la fin jusque-là : maintenant dans la liste (montrés au départ, comme avant)
+        ['search', '🔎', 'Tout ce qui le concerne (avec le nombre de pistes)', '[data-ts-hero]'], // heritage-tout-sur.js
+        ['print', '🖨', 'Imprimer la fiche', '[data-print-person]'],
+        ['export', '⤓', 'Exporter la fiche (télécharger)', '[data-pa-export-menu]'],
     ];
     const HEAD_KEYS = HEAD_BUTTONS.map(b => b[0]);
+    /* Les actions du menu ⋯ (ext.personMenuItems, app-sections.js, avec celles des modules : ext.personMoreItems) peuvent devenir
+     * des boutons carrés : clé « m_<clé de l'action> », cochées une par une (cachées au départ : rien ne change tant qu'on n'y touche pas).
+     * Montrée en bouton, une action n'est plus répétée dans le menu ; le menu ⋯ reste là tant qu'il lui reste une action.
+     * 🖨 Imprimer et 🔎 Tout ce qui le concerne sont déjà des boutons de l'en-tête : une seule ligne chacun (TWIN), et l'action revient
+     * dans le menu ⋯ si on décoche le bouton. */
+    const TWIN = {print: 'print', toutsur: 'search'}; // clé dans le menu → clé du bouton
+    const MK = k => 'm_' + k, isMenuKey = k => /^m_/.test(String(k || ''));
+    const okMenuKey = k => typeof k === 'string' && /^m_[a-z0-9-]{1,48}$/.test(k);
     function headerCfg() {
         const v = lsGet(HEADER_KEY, {}) || {};
-        const order = Array.isArray(v.order) ? v.order.filter((k, i, l) => HEAD_KEYS.includes(k) && l.indexOf(k) === i) : [];
+        const order = Array.isArray(v.order) ? v.order.filter((k, i, l) => (HEAD_KEYS.includes(k) || okMenuKey(k)) && l.indexOf(k) === i) : [];
         HEAD_KEYS.forEach((k, i) => { if (!order.includes(k)) order.splice(Math.min(i, order.length), 0, k); });
-        return {frame: v.frame === 'hide' ? 'hide' : 'show', order, hidden: Array.isArray(v.hidden) ? v.hidden.filter(k => HEAD_KEYS.includes(k)) : ['profils'], // 🧩 en option : caché tant qu'on ne l'a pas coché
-            lay: ['c1', 'c2', 'r2'].includes(v.lay) ? v.lay : Number(v.cols) === 2 ? 'c2' : 'r2', pf: v.pf === 'badges' ? 'badges' : 'button'}; // r2 : sur 2 lignes (défaut) · c1 : 1 colonne · c2 : 2 colonnes
+        const on = Array.isArray(v.on) ? v.on.filter((k, i, l) => okMenuKey(k) && l.indexOf(k) === i) : [];
+        const names = {}; const nv = v.names && typeof v.names === 'object' && !Array.isArray(v.names) ? v.names : {};
+        on.forEach(k => { const n = nv[k]; if (Array.isArray(n)) names[k] = [String(n[0] || '•').slice(0, 8), String(n[1] || k.slice(2)).slice(0, 80)]; });
+        return {frame: v.frame === 'hide' ? 'hide' : 'show', order, hidden: Array.isArray(v.hidden) ? v.hidden.filter(k => HEAD_KEYS.includes(k) && k !== 'more') : ['profils'], // 🧩 en option : caché tant qu'on ne l'a pas coché
+            lay: ['c1', 'c2', 'r2'].includes(v.lay) ? v.lay : Number(v.cols) === 2 ? 'c2' : 'r2', pf: v.pf === 'badges' ? 'badges' : 'button', on, names}; // r2 : sur 2 lignes (défaut) · c1 : 1 colonne · c2 : 2 colonnes
     }
+    /** les actions du menu ⋯ d'une fiche (sans les traits) */
+    const menuOf = detail => { try { return (ext.personMenuItems?.(detail) || []).filter(x => x && x !== '-' && x.key); } catch (e) { console.warn(e); return []; } };
+    const SEEN = new Map(); // les actions vues sur une vraie fiche pendant cette visite (celles qui ne viennent que dans certains cas)
+    const PROBES = () => [{person: {id: -1, kind: 'human', living_status: 'deceased', first_name: '', last_name: ''}, events: [], heritage: {}, labels: []},
+        {person: {id: -1, kind: 'animal', first_name: '', last_name: ''}, events: [], heritage: {animal: {id: -1}}, labels: []}];
+    /** toutes les actions du menu ⋯ connues (pour la liste des réglages) : [{key, icon, name}] ; un module ajouté plus tard y vient tout seul */
+    function menuCatalog(cfg = headerCfg()) {
+        const out = new Map();
+        const add = (k, icon, name) => { if (!k || TWIN[k] || out.has(k)) return; out.set(k, {key: k, icon: String(icon || '•'), name: String(name || k)}); };
+        PROBES().forEach(d => menuOf(d).forEach(x => add(x.key, x.icon, x.name || x.label)));
+        SEEN.forEach((x, k) => add(k, x.icon, x.name));
+        cfg.on.forEach(mk => { const n = cfg.names[mk]; add(mk.slice(2), n?.[0], n?.[1] || mk.slice(2)); });
+        return [...out.values()];
+    }
+    /** l'action du menu (clé) est-elle montrée en bouton sur la fiche affichée ? (app-sections.js : elle sort alors du menu ⋯) */
+    ext.personHeadHas = key => {
+        const a = document.querySelector('#workspace .person-page .person-hero-actions'); if (!a || a.classList.contains('lc-hide-all')) return false;
+        const hk = TWIN[key], sel = hk ? HEAD_BUTTONS.find(b => b[0] === hk)[3] : `[data-lc-mb="${String(key).replace(/["\\]/g, '')}"]`;
+        try { return !!a.querySelector(`:scope > ${sel}:not(.lc-hide)`); } catch (_) { return false; }
+    };
     /* Éléments de l'en-tête (statut, 👁 Vu la dernière fois, étiquettes, boutons) et place de « ＋ Nouvelle observation » :
      * localStorage['genealogie-sheet-head'] = {order, hidden, seenPlace: name|badges|bottom, green, red, seenDetail, obsPlace, obsKey} */
     const SHEAD_KEY = 'genealogie-sheet-head';
@@ -546,29 +581,54 @@
         }
         if (!actions) return;
         if (pfShown && cfg.pf === 'button') actions.insertAdjacentHTML('beforeend', `<button type="button" class="icon-action lc-pf-btn" data-lc-pf ${pfAttrs(detail)} title="🧩 Cette personne était… : ouvrir sa page de profils" aria-label="Cette personne était… : ses profils">🧩</button>`);
+        // les actions du menu ⋯ cochées : un bouton carré chacune (même icône, son nom en bulle, le même clic que dans le menu)
+        actions.querySelectorAll(':scope > [data-lc-mb]').forEach(el => el.remove());
+        const menu = isRO() ? [] : menuOf(detail);
+        menu.forEach(x => { if (!TWIN[x.key] && !SEEN.has(x.key)) SEEN.set(x.key, {icon: x.icon, name: x.name || x.label}); });
         const known = new Set();
-        cfg.order.forEach(k => {
+        [...cfg.order, ...cfg.on.filter(k => !cfg.order.includes(k))].forEach(k => {
+            if (isMenuKey(k)) {
+                const it = cfg.on.includes(k) && menu.find(x => MK(x.key) === k); if (!it || TWIN[it.key]) return;
+                const b = document.createElement('button'); b.type = 'button'; b.className = 'icon-action lc-mb-btn'; b.dataset.lcMb = it.key;
+                const lab = String(it.label || it.name || ''); b.title = lab; b.setAttribute('aria-label', lab); b.textContent = String(it.icon || '•');
+                known.add(b); actions.appendChild(b); return;
+            }
             const def = HEAD_BUTTONS.find(b => b[0] === k); const el = def && actions.querySelector(`:scope > ${def[3]}`); if (!el) return;
-            known.add(el); el.classList.toggle('lc-hide', cfg.hidden.includes(k)); actions.appendChild(el);
+            known.add(el); if (k !== 'more') el.classList.toggle('lc-hide', cfg.hidden.includes(k)); actions.appendChild(el);
         });
         [...actions.children].forEach(el => { if (!known.has(el)) actions.appendChild(el); }); // les boutons d'autres outils restent, à la fin
+        // ⋯ : là tant qu'il reste une action dans le menu (rien à y montrer : il s'efface)
+        const more = actions.querySelector(':scope > [data-fsec-hero-more]');
+        if (more) { let left = 1; try { left = (ext.personMenuLeft?.(detail) || [1]).filter(x => x !== '-').length; } catch (_) {} more.classList.toggle('lc-hide', !left); }
         actions.classList.toggle('lc-cols-2', cfg.lay === 'c2'); actions.classList.toggle('lc-rows-2', cfg.lay === 'r2');
     }
+    // le clic sur une action du menu ⋯ montrée en bouton : la même action que dans le menu
+    document.addEventListener('click', async e => {
+        const b = e.target.closest?.('#workspace .person-hero-actions > [data-lc-mb]'); if (!b) return;
+        e.preventDefault();
+        const det = A().state?.currentPerson, it = menuOf(det).find(x => x.key === b.dataset.lcMb); if (!it) return;
+        try { await it.run(); } catch (err) { console.warn(err); }
+        setTimeout(refreshPerson, 0); // « Masquer / Afficher le lien de parenté » : la bulle suit
+    });
     ext.afterPerson = ext.afterPerson || [];
     // après les autres outils qui ajoutent leur bouton (✨ du diaporama…) : au tour suivant
     ext.afterPerson.push(detail => { applyHeader(detail); setTimeout(() => applyHeader(detail), 0); });
 
     function headerPreviewHtml(cfg) {
-        const shown = cfg.order.filter(k => !cfg.hidden.includes(k) && (k !== 'profils' || cfg.pf === 'button'));
+        const cat = menuCatalog(cfg), icon = k => (isMenuKey(k) ? (cat.find(x => MK(x.key) === k)?.icon || cfg.names[k]?.[0] || '•') : HEAD_BUTTONS.find(b => b[0] === k)[1]);
+        const moreLeft = cat.some(x => !cfg.on.includes(MK(x.key))) || cfg.hidden.includes('print') || cfg.hidden.includes('search');
+        const shown = [...cfg.order, ...cfg.on.filter(k => !cfg.order.includes(k))].filter(k => (isMenuKey(k) ? cfg.on.includes(k) : k === 'more' ? moreLeft : !cfg.hidden.includes(k)) && (k !== 'profils' || cfg.pf === 'button'));
         const pfBadge = !cfg.hidden.includes('profils') && cfg.pf === 'badges';
         if (cfg.frame === 'hide') return `<div class="lc-hh-prev is-off"><span>Cadre du haut masqué : la fiche commence par les parents, conjoints et enfants, puis les blocs.</span></div>`;
         return `<div class="lc-hh-prev" aria-hidden="true"><div class="lc-hh-id">${UI().avatarOn?.() && UI().avatar ? UI().avatar({first_name: 'Louise', last_name: 'BORIE', gender: 'female'}, 34, {noSosa: true}) : '<span class="lc-hh-av">LB</span>'}<span><small>FICHE INDIVIDUELLE · #3851</small><b>Louise BORIE</b></span></div>
             <div class="lc-hh-badges"><span class="ui-badge is-sosa">Sosa 64</span><span class="ui-badge is-yellow">À vérifier</span><span class="ui-badge is-grey">Hors généalogie</span><span class="ui-badge artist-badge">🎨 Artiste</span>${pfBadge ? '<span class="lc-pf-link">🧩 Cette personne était…</span>' : ''}</div>
-            <div class="lc-hh-btns${cfg.lay === 'c2' ? ' lc-cols-2' : cfg.lay === 'r2' ? ' lc-rows-2' : ''}">${shown.map(k => `<span class="lc-hh-btn${k === 'obs' ? ' is-obs' : ''}">${HEAD_BUTTONS.find(b => b[0] === k)[1]}</span>`).join('')}</div></div>`;
+            <div class="lc-hh-btns${cfg.lay === 'c2' ? ' lc-cols-2' : cfg.lay === 'r2' ? ' lc-rows-2' : ''}">${shown.map(k => `<span class="lc-hh-btn${k === 'obs' ? ' is-obs' : ''}">${esc(icon(k))}</span>`).join('')}</div></div>`;
     }
     function headerPanelHtml() {
-        const cfg = headerCfg();
-        const row = (k, i) => { const b = HEAD_BUTTONS.find(x => x[0] === k); return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="Afficher ce bouton"><input type="checkbox" data-hh-show aria-label="${i18n('Afficher « {nm} »', {nm: esc(i18n(b[2]))})}" ${cfg.hidden.includes(k) ? '' : 'checked'}></label><span class="lc-hh-ico" aria-hidden="true">${b[1]}</span><b>${esc(b[2])}${k === 'profils' && !profilsOn() ? ' <small class="muted">(outil des profils pas chargé)</small>' : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-hh-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-hh-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
+        const cfg = headerCfg(), cat = menuCatalog(cfg);
+        const keys = [...cfg.order.filter(k => !isMenuKey(k) || cat.some(x => MK(x.key) === k)), ...cat.map(x => MK(x.key)).filter(k => !cfg.order.includes(k))];
+        const menuRow = (k, i) => { const c = cat.find(x => MK(x.key) === k), nm = i18n(c.name); return `<div class="order-row has-visibility lc-hh-mrow" data-order-key="${esc(k)}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="${esc(i18n('En faire un bouton (sinon : dans le menu ⋯)'))}"><input type="checkbox" data-hh-show aria-label="${i18n('Afficher « {nm} »', {nm: esc(nm)})}" ${cfg.on.includes(k) ? 'checked' : ''}></label><span class="lc-hh-ico" aria-hidden="true">${esc(c.icon)}</span><b>${esc(nm)} <small class="muted">${esc(i18n('menu ⋯'))}</small></b><span class="page-actions"><button type="button" class="icon-button small" data-hh-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-hh-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
+        const row = (k, i) => { if (isMenuKey(k)) return menuRow(k, i); const b = HEAD_BUTTONS.find(x => x[0] === k), more = k === 'more'; return `<div class="order-row has-visibility" data-order-key="${k}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><label class="order-visible" title="${more ? esc(i18n('Toujours là tant qu’il reste une action dans le menu')) : 'Afficher ce bouton'}"><input type="checkbox" data-hh-show aria-label="${i18n('Afficher « {nm} »', {nm: esc(i18n(b[2]))})}" ${more || !cfg.hidden.includes(k) ? 'checked' : ''}${more ? ' disabled' : ''}></label><span class="lc-hh-ico" aria-hidden="true">${b[1]}</span><b>${esc(b[2])}${k === 'profils' && !profilsOn() ? ' <small class="muted">(outil des profils pas chargé)</small>' : ''}${more ? ` <small class="muted">${esc(i18n('(toujours là tant qu’il reste une action dedans)'))}</small>` : ''}</b><span class="page-actions"><button type="button" class="icon-button small" data-hh-move="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-hh-move="1" title="Descendre" aria-label="Descendre">↓</button></span></div>`; };
         const radio = (name, value, cur, label, help = '') => `<label class="lc-hh-radio"><input type="radio" name="${name}" value="${value}" ${String(cur) === String(value) ? 'checked' : ''}><span>${label}${help ? `<small>${help}</small>` : ''}</span></label>`;
         return `<section class="person-block-config" id="lc-person-header"><header><span class="eyebrow">FICHES PERSONNES ET ANIMAUX</span><h3 data-help="Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes." data-help-faq="en-tête de la fiche">En-tête de la fiche</h3><p>Le cadre du haut (nom, badges, boutons carrés) de toutes les fiches de personnes et d’animaux. Glisse les boutons pour changer leur ordre ; décoche un bouton pour le masquer.</p></header>
             <div class="design-order-grid block-grid">
@@ -580,16 +640,21 @@
                 <div class="page-actions action-zone"><button class="button small secondary" type="button" data-hh-reset>↺ Remettre comme au départ</button></div>
             </section>
             <section class="maintenance-panel order-editor block-order-editor"><div class="item-title-row"><h3>Ordre et visibilité des boutons</h3></div>
-                <div class="order-list block-order-list" id="lc-hh-order">${cfg.order.map(row).join('')}</div>
+                <div class="order-list block-order-list" id="lc-hh-order">${keys.map(row).join('')}</div>
                 <p class="muted lc-hh-k2">Gardé tout seul. Alt + ↑ / ↓ au clavier. « 👁＋ » n’apparaît que sur les fiches d’animaux.</p>
+                <p class="muted lc-hh-k2">${esc(i18n('Coche une action « menu ⋯ » pour en faire un bouton carré : elle sort alors du menu ⋯. Certaines ne viennent que sur certaines fiches.'))}</p>
             </section></div>
             <div data-lcd-a4-host></div></section>`; // la forme de l'en-tête (A4, grands aperçus) après les boutons : sinon on ne les trouve plus
     }
     function readHeaderPanel(box) {
         const val = n => box.querySelector(`input[name="${n}"]:checked`)?.value;
-        const rows = [...box.querySelectorAll('#lc-hh-order .order-row')];
-        return {frame: val('lc-hh-frame') === 'hide' ? 'hide' : 'show', lay: ['c1', 'c2', 'r2'].includes(val('lc-hh-lay')) ? val('lc-hh-lay') : 'r2', pf: val('lc-hh-pf') === 'badges' ? 'badges' : 'button',
-            order: rows.map(r => r.dataset.orderKey), hidden: rows.filter(r => !r.querySelector('[data-hh-show]').checked).map(r => r.dataset.orderKey)};
+        const rows = [...box.querySelectorAll('#lc-hh-order .order-row')], keys = rows.map(r => r.dataset.orderKey), prev = headerCfg(), cat = menuCatalog(prev);
+        const chk = r => !!r.querySelector('[data-hh-show]')?.checked;
+        const on = [...rows.filter(r => isMenuKey(r.dataset.orderKey) && chk(r)).map(r => r.dataset.orderKey), ...prev.on.filter(k => !keys.includes(k))]; // une action pas montrée ici (module pas chargé) garde son réglage
+        const names = Object.fromEntries(on.map(k => { const c = cat.find(x => MK(x.key) === k); return [k, c ? [c.icon, c.name] : prev.names[k] || ['•', k.slice(2)]]; }));
+        return {frame: val('lc-hh-frame') === 'hide' ? 'hide' : 'show', order: [...keys, ...prev.order.filter(k => !keys.includes(k))],
+            hidden: rows.filter(r => !isMenuKey(r.dataset.orderKey) && r.dataset.orderKey !== 'more' && !chk(r)).map(r => r.dataset.orderKey),
+            lay: ['c1', 'c2', 'r2'].includes(val('lc-hh-lay')) ? val('lc-hh-lay') : 'r2', pf: val('lc-hh-pf') === 'badges' ? 'badges' : 'button', on, names};
     }
     const refreshPerson = () => { const det = A().state?.currentPerson; if (det && document.querySelector('#workspace .person-page')) applyHeader(det); };
     function bindHeaderPanel(box) {
