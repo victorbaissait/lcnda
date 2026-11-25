@@ -632,7 +632,8 @@ function ba_list(array $in): array
             $where[] = 'e.s IN (' . implode(',', $list) . ')'; $narrowed = true;
         } elseif ($key === 'act') { $where[] = 'e.a LIKE ?'; $args[] = '%' . str_replace(['%', '_'], ['\%', '\_'], (string) $v) . '%'; }
         elseif ($key === 'year' && is_numeric($v)) { $where[] = $op === 'gte' ? 'e.y>=?' : ($op === 'lte' ? 'e.y<=?' : 'e.y=?'); $args[] = (int) $v; }
-        elseif ($key === 'book') { $where[] = 'e.b IN (SELECT id FROM books WHERE label LIKE ?)'; $args[] = '%' . (string) $v . '%'; }
+        elseif ($key === 'book' && $op === 'in' && is_array($v) && $v) { $where[] = 'e.b IN (SELECT id FROM books WHERE label IN (' . implode(',', array_fill(0, count($v), '?')) . '))'; foreach ($v as $one) { $args[] = (string) $one; } }
+        elseif ($key === 'book' && is_string($v) && $v !== '') { $where[] = 'e.b IN (SELECT id FROM books WHERE label LIKE ?)'; $args[] = '%' . $v . '%'; }
         elseif ($key === 'address') { $post[] = ba_fold((string) $v); }
     }
     $near = is_array($q['near'] ?? null) && is_numeric($q['near']['lat'] ?? null) && is_numeric($q['near']['lon'] ?? null) ? $q['near'] : null;

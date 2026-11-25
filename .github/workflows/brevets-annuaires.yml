@@ -1,0 +1,109 @@
+# 📇 Fabrication du pack des annuaires du commerce de Paris (1787–1914), déposé dans la version « brevets-annuaires-donnees »
+# du dépôt.
+#
+# L'app n'embarque pas ces données : Réglages → 📇 Annuaires et brevets → « ⤓ Installer » télécharge le pack depuis cette version
+# (lib/brevets_annuaires.php), le vérifie (taille, empreinte sha256, base lisible) puis le range.
+# 💡 Les brevets d'invention du XIXᵉ siècle (INPI) ne sont PAS fabriqués ici : leur fichier « open data » n'est envoyé que par
+# courriel, après une demande de compte à l'INPI ; l'app propose seulement de chercher sur le site de l'INPI.
+#
+# Lancer : onglet « Actions » → « Annuaires de Paris » → « Run workflow » (années : vide = toutes), ou pousser une étiquette
+# « brevets-annuaires-1 » (le chiffre ne sert qu'à relancer).
+# Source (scripts/brevets-annuaires/build-annuaires.py, en tête) : SoDUCo, « Annuaires historiques parisiens, 1798-1914 »,
+# NAKALA, DOI 10.34847/nkl.98eem49t (version 4), Licence Ouverte Etalab 2.0 — directories-ListNoms.zip (2,18 Go).
+# Tailles mesurées le 25/11/2026 : voir ba-rapport.json joint à la version (et le compte rendu de fabrication).
+
+name: Annuaires de Paris
+
+on:
+  workflow_dispatch:
+    inputs:
+      annees:
+        description: 'Années à garder, ex. « 1850-1860,1898 » (vide = toutes, de 1787 à 1914)'
+        type: string
+        default: ''
+  push:
+    tags: ['brevets-annuaires-*']
+    # un envoi qui touche ce fichier fait seulement connaître l'atelier à GitHub (rien n'est fabriqué)
+    branches: ['claude/**']
+    paths: ['.github/workflows/brevets-annuaires.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: brevets-annuaires-donnees
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    if: github.event_name != 'push' || startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reprendre le fichier déjà téléchargé
+        uses: actions/cache/restore@v4
+        with:
+          path: ba-cache
+          key: ba-noms-edd55aa542a6a47cc07a0e3f705939919cf2c284
+
+      - name: Télécharger directories-ListNoms.zip (NAKALA, 2,18 Go) et l'inventaire des annuaires
+        run: |
+          set -e
+          mkdir -p ba-cache
+          Z=ba-cache/directories-ListNoms.zip
+          for i in 1 2 3 4 5; do
+            curl -fL --retry 5 -C - -o "$Z" "https://api.nakala.fr/data/10.34847/nkl.98eem49t/edd55aa542a6a47cc07a0e3f705939919cf2c284" && break || sleep 30
+          done
+          test "$(stat -c %s "$Z")" = 2182889077
+          echo "edd55aa542a6a47cc07a0e3f705939919cf2c284  $Z" | sha1sum -c -
+          curl -fL --retry 5 -o ba-cache/directories_sources.csv "https://api.nakala.fr/data/10.34847/nkl.98eem49t/5a735666070d91df44447eaaa9b54563b831da1c"
+
+      - name: Garder le fichier pour la prochaine fois
+        uses: actions/cache/save@v4
+        with:
+          path: ba-cache
+          key: ba-noms-edd55aa542a6a47cc07a0e3f705939919cf2c284
+        continue-on-error: true
+
+      - name: Fabriquer
+        env:
+          ANNEES: ${{ inputs.annees }}
+        run: |
+          set -e
+          case "$ANNEES" in *[!0-9,-]*) echo "années refusées : $ANNEES"; exit 1;; esac
+          python3 scripts/brevets-annuaires/build-annuaires.py pack --dossier ba-sortie --zip ba-cache/directories-ListNoms.zip --sources-csv ba-cache/directories_sources.csv --annees "$ANNEES"
+          rm -f ba-sortie/ba-annuaires.sqlite
+          du -sh ba-sortie/*
+
+      - name: Déposer dans la version « brevets-annuaires-donnees »
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          R=brevets-annuaires-donnees
+          mkdir -p envoi && cd envoi
+          gh release view $R --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create $R --repo "$GITHUB_REPOSITORY" --title "Annuaires du commerce de Paris (1787–1914)" --prerelease \
+              --notes "Pack téléchargé par l'app (Réglages → 📇 Annuaires et brevets → ⤓ Installer). Source : SoDUCo, « Annuaires historiques parisiens, 1798-1914. Extraction structurée et géolocalisée à l'adresse des listes nominatives », NAKALA, DOI 10.34847/nkl.98eem49t (version 4) — Licence Ouverte Etalab 2.0. Lecture automatique (OCR) : vérifier sur la page numérisée (Gallica)."
+          for a in $(gh release view $R --repo "$GITHUB_REPOSITORY" --json assets --jq ".assets[].name" | grep -E '^ba-annuaires\.sqlite\.gz\.[0-9]{3}$' || true); do
+            gh release delete-asset $R "$a" --repo "$GITHUB_REPOSITORY" --yes
+          done
+          split -b 1900M -d -a 3 ../ba-sortie/ba-annuaires.sqlite.gz "ba-annuaires.sqlite.gz."
+          python3 - <<'PY'
+          import json, os, datetime
+          rep = json.load(open('../ba-sortie/ba-rapport.json'))['annuaires']
+          parts = sorted(p for p in os.listdir('.') if p.startswith('ba-annuaires.sqlite.gz.') and p.split('.')[-1].isdigit())
+          m = {'version': datetime.date.today().strftime('%Y-%m'), 'packs': {'annuaires': {'size': rep['size'], 'sha256': rep['sha256'], 'sqlite_size': rep['sqlite_size'], 'records': rep['records'],
+               'built': datetime.date.today().isoformat(), 'parts': [{'name': p, 'size': os.path.getsize(p)} for p in parts]}}}
+          assert sum(x['size'] for x in m['packs']['annuaires']['parts']) == rep['size']
+          json.dump(m, open('brevets-annuaires-manifest.json', 'w'), indent=1)
+          PY
+          cp ../ba-sortie/ba-rapport.json .
+          gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber $(ls | grep -E '\.[0-9]{3}$') brevets-annuaires-manifest.json ba-rapport.json
+          cat brevets-annuaires-manifest.json

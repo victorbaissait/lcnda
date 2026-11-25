@@ -28,7 +28,6 @@ Q = {
     'communes': 'SELECT ?c ?insee WHERE { ?c wdt:P374 ?insee }',
     'demonym': 'SELECT ?c ?d ?g WHERE { ?c wdt:P374 [] ; p:P1549 ?s . ?s ps:P1549 ?d . FILTER(lang(?d)="fr") OPTIONAL { ?s pq:P5109 ?g } }',
     'native': 'SELECT ?c ?n WHERE { ?c wdt:P374 [] ; wdt:P1705 ?n }',
-    **{f'lab_{l}': f'SELECT ?c ?l WHERE {{ ?c wdt:P374 [] ; rdfs:label ?l . FILTER(lang(?l)="{l}") }}' for l in REG_LANGS},
     'sundials': 'SELECT ?x ?loc ?coord ?img ?motto ?ins ?inc ?mh ?cty WHERE { ?x wdt:P31 wd:Q80793 . OPTIONAL { ?x wdt:P131 ?loc } OPTIONAL { ?x wdt:P625 ?coord } OPTIONAL { ?x wdt:P18 ?img } '
                 'OPTIONAL { ?x wdt:P1451 ?motto } OPTIONAL { ?x wdt:P1684 ?ins } OPTIONAL { ?x wdt:P571 ?inc } OPTIONAL { ?x wdt:P380 ?mh } OPTIONAL { ?x wdt:P17 ?cty } }',
     'disp_q': f'SELECT ?x ?k WHERE {{ VALUES ?k {{ {V(DISPARUS)} }} ?x wdt:P1552 ?k }}',
@@ -68,6 +67,11 @@ def places(ids):
     return batch(ids, 'SELECT ?x ?insee ?coord ?dep ?pinsee ?pdep ?cty WHERE { VALUES ?x { %VALUES% } OPTIONAL { ?x wdt:P374 ?insee } OPTIONAL { ?x wdt:P625 ?coord } '
                  'OPTIONAL { ?x wdt:P2586 ?dep } OPTIONAL { ?x wdt:P131 ?p . ?p wdt:P374 ?pinsee } OPTIONAL { ?x wdt:P131 ?p2 . ?p2 wdt:P2586 ?pdep } OPTIONAL { ?x wdt:P17 ?cty } }', 'pl')
 
+def reg_labels(ids):
+    """les noms des communes dans les langues régionales (et en français), par paquets de 1500 communes"""
+    langs = ', '.join('"%s"' % l for l in REG_LANGS)
+    return batch(ids, 'SELECT ?x ?l WHERE { VALUES ?x { %VALUES% } ?x rdfs:label ?l . FILTER(lang(?l) IN (' + langs + ')) }', 'reglab', 1500)
+
 def labels(ids):
     out = {}
     for r in batch(ids, 'SELECT ?x ?fr ?en ?d ?wp WHERE { VALUES ?x { %VALUES% } OPTIONAL { ?x rdfs:label ?fr FILTER(lang(?fr)="fr") } OPTIONAL { ?x rdfs:label ?en FILTER(lang(?en)="en") } '
@@ -82,3 +86,4 @@ if __name__ == '__main__':
     for k in (sys.argv[1:] or Q):
         try: print(k, len(rows(k)), flush=True)
         except Exception as e: print(k, 'ÉCHEC', e, flush=True)
+    if not sys.argv[1:]: print('reglabels', len(reg_labels([qid(r['c']) for r in rows('communes')])), flush=True)

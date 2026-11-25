@@ -385,6 +385,8 @@ def build_monuments():
 
 
 # ═════════════ 🐺 loups et bêtes sauvages (GBIF) ═════════════
+# le loup : seulement l'inventaire historique de l'INPN (les autres jeux mêlent des observations récentes, après le retour du loup)
+WOLF_DS = '50de8011-5291-4689-ae08-f35d2d2c17e2'
 SPECIES = [('loup', 5219173, 'Canis lupus', 1600, 1985), ('ours', 2433433, 'Ursus arctos', 1600, 1970), ('castor', 4409131, 'Castor fiber', 1600, 1970), ('lynx', 2435240, 'Lynx lynx', 1600, 1970)]
 
 
@@ -398,10 +400,11 @@ def build_faune():
     base = 'https://api.gbif.org/v1/occurrence/search?'
     for sp, key, sci, y0, y1 in SPECIES:
         # par facettes (léger) : les départements (GADM niveau 2), puis pour chacun les années et les jeux de données
-        top = C.fetch_json(base + urllib.parse.urlencode({'country': 'FR', 'taxonKey': key, 'year': f'{y0},{y1}', 'limit': 0, 'facet': 'gadmLevel2Gid', 'gadmLevel2Gid.facetLimit': 200}), min_gap=0.5)
+        only = [('datasetKey', WOLF_DS)] if sp == 'loup' else []
+        top = C.fetch_json(base + urllib.parse.urlencode([('country', 'FR'), ('taxonKey', key), ('year', f'{y0},{y1}'), ('limit', 0), ('facet', 'gadmLevel2Gid'), ('gadmLevel2Gid.facetLimit', 200)] + only), min_gap=0.5)
         for g in (top.get('facets') or [{}])[0].get('counts', []):
             d = C.fetch_json(base + urllib.parse.urlencode([('country', 'FR'), ('taxonKey', key), ('year', f'{y0},{y1}'), ('gadmLevel2Gid', g['name']), ('limit', 1),
-                                                             ('facet', 'year'), ('facet', 'datasetKey'), ('year.facetLimit', 500), ('datasetKey.facetLimit', 50)]), min_gap=0.5)
+                                                             ('facet', 'year'), ('facet', 'datasetKey'), ('year.facetLimit', 500), ('datasetKey.facetLimit', 50)] + only), min_gap=0.5)
             r0 = (d.get('results') or [{}])[0]
             nm = ((r0.get('gadm') or {}).get('level2') or {}).get('name') or r0.get('county') or ''
             code = by_name.get(fold(nm), '')

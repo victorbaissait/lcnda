@@ -1,0 +1,34 @@
+/* 📇 💡 Annuaires de Paris et brevets (assets/js/heritage-brevets-annuaires.js) : la ligne de la fiche, l'offre, les Réglages */
+.ba-person { margin: 4px 0 12px; display: grid; gap: 8px; }
+.ba-person[hidden] { display: none; }
+.ba-card .ba-person { margin: 0; }
+.ba-hit { border: 1px solid var(--line, #d9d4c7); border-left: 4px solid var(--blue, #3f6fb5); border-radius: 10px; padding: 8px 14px; background: var(--card-bg, transparent); }
+.ba-rec { padding: 6px 0; border-top: 1px dashed color-mix(in srgb, currentColor 18%, transparent); }
+.ba-rec:first-of-type { border-top: 0; }
+.ba-rec.is-no { opacity: .65; }
+.ba-line { margin: 0; }
+.ba-src-link { white-space: nowrap; font-size: .92em; }
+.ba-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 4px; }
+.ba-yes { color: var(--green, #2e7d32); font-weight: 600; }
+.ba-more { margin-top: 4px; font-size: .92em; }
+.ba-more summary { cursor: pointer; color: var(--muted, #6b6b6b); }
+.ba-why { font-size: .9em; color: var(--muted, #6b6b6b); }
+.ba-years { margin: 4px 0; padding-left: 1.2em; font-size: .92em; }
+.ba-src, .ba-srcs { font-size: .8em; color: var(--muted, #6b6b6b); margin: 4px 0 0; }
+.ba-foot { margin: 6px 0 0; font-size: .9em; }
+.ba-offer { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 6px 10px; border: 1px dashed color-mix(in srgb, currentColor 28%, transparent); border-radius: 8px; font-size: .9em; color: var(--muted, #6b6b6b); }
+.ba-offer > span:first-child { flex: 1 1 260px; }
+.ba-x { border: 0; background: none; color: inherit; cursor: pointer; font-size: 1em; padding: 2px 6px; border-radius: 4px; }
+.ba-x:hover, .ba-x:focus-visible { background: color-mix(in srgb, currentColor 12%, transparent); }
+.ba-prog { display: inline-flex; align-items: center; gap: 6px; }
+.ba-bar { display: inline-block; width: 160px; height: 8px; border-radius: 4px; background: color-mix(in srgb, currentColor 15%, transparent); overflow: hidden; vertical-align: middle; }
+.ba-bar i { display: block; height: 100%; background: var(--blue, #3f6fb5); }
+.ba-set .ba-base { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding: 10px 0; }
+.ba-base-ic { font-size: 1.5em; }
+.ba-base-txt { flex: 1 1 320px; }
+.ba-base-acts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ba-about summary { cursor: pointer; font-weight: 600; }
+.ba-about p { font-size: .9em; }
+.ba-mono { margin: 4px 0; padding-left: 1.2em; }
+@media (max-width: 640px) { .ba-bar { width: 100px; } }
+@media print { .ba-acts, .ba-offer, .ba-x { display: none !important; } }

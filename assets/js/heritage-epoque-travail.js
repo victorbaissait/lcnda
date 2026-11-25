@@ -53,7 +53,7 @@
         const c = fold(p?.county || p?.dept || '').replace(/\s*\(.*\)$/, '').replace(/^departement (du |de la |de l'|des |de )?/, '').replace(/ /g, '-').replace('territoire-de-belfort', 'territoire de belfort');
         if (DEPT_NAMES[c]) return DEPT_NAMES[c];
         // « Tulle, Corrèze, Limousin, France » : un morceau du nom complet
-        for (const part of String(p?.full || '').split(',').map(s => fold(s).replace(/ /g, '-'))) if (DEPT_NAMES[part]) return DEPT_NAMES[part];
+        for (const part of String(p?.full || '').split(/[,·|()–—]/).map(s => fold(s).replace(/ /g, '-'))) if (DEPT_NAMES[part]) return DEPT_NAMES[part];
         return '';
     }
     const isFrance = p => !p?.country || /^(france|fr|fra|republique francaise)$/.test(fold(p.country));
@@ -97,7 +97,7 @@
                 out.push({r, dep, place: p.name || '', job: strong || weak, strong: !!strong, age: age(life, r.y)});
             }
         }
-        return out.sort((a, b) => Number(b.strong) - Number(a.strong) || a.r.y - b.r.y);
+        return out.sort((a, b) => Number(b.strong) - Number(a.strong) || Number(!!b.r.exact) - Number(!!a.r.exact) || a.r.y - b.r.y);
     }
 
     /* ── ✊ les grèves ── */
@@ -186,8 +186,8 @@
     function fashionOf(decades, y, n = 6) {
         const dd = decadeOf(y); if (dd === null) return [];
         const list = decades[String(dd)] || []; if (!list.length) return [];
-        const by = {femmes: [], hommes: [], france: []}; for (const g of list) (by[g.who] || (by[g.who] = [])).push(g);
-        const out = []; const cats = ['hommes', 'femmes', 'france'];
+        const by = {femmes: [], hommes: [], gravure: []}; for (const g of list) (by[g.who] || (by[g.who] = [])).push(g);
+        const out = []; const cats = ['hommes', 'gravure', 'femmes'];
         for (let i = 0; out.length < n && i < 30; i++) for (const c of cats) { const g = by[c][i]; if (g && out.length < n && !out.includes(g)) out.push(g); }
         return out;
     }
@@ -200,7 +200,7 @@
 
     /* ── 📷 dater une photo ── */
     /** les formats possibles pour une année (ou toutes si y = null) */
-    const photoFormatsFor = (photos, y) => photos.filter(p => y === null || (p.from <= y && p.to >= y));
+    const photoFormatsFor = (photos, y) => photos.filter(p => y === null || (p.from <= y && (p.to === null || p.to === undefined || p.to >= y)));
 
     const core = {km, fold, table, lifeSpan, deptOf, jobMatch, prepFleaux, fleauxForDept, fleauxForLife, strikesForLife, strikesNear, worksForLife, worksNear, novelties, decadeOf, marriageYear, fashionOf, booksOf, photoFormatsFor, IND_JOBS, KIND};
     if (typeof module === 'object' && module.exports) { module.exports = core; return; }
@@ -282,9 +282,8 @@
         const P = life.person, out = [];
         for (const x of list.slice(0, 3)) {
             const r = x.r;
-            const where = r.exact ? T('dans {z}', {z: esc(r.zone)}) : T('dans {z}', {z: esc(r.zone)});
-            const lead = x.strong ? T('{f} arrive {w} {when} : {he} était {job}.', {f: cap(esc(r.name)), w: where, when: fleauWhen(r), he: he(P), job: `<b>${esc(x.job)}</b>`})
-                : T('{f} arrive {w} {when} ; {he} était {job} (peut-être avait-{p} des vignes ou des cultures touchées).', {f: cap(esc(r.name)), w: where, when: fleauWhen(r), he: he(P), job: `<b>${esc(x.job)}</b>`, p: P?.gender === 'female' ? 'elle' : 'il'});
+            const lead = x.strong ? T('{f} touche {z} {when} : {he} était {job}.', {f: cap(esc(r.name)), z: esc(r.zone), when: fleauWhen(r), he: he(P), job: `<b>${esc(x.job)}</b>`})
+                : T('{f} touche {z} {when} ; {he} était {job} (peut-être avait-{p} des vignes ou des cultures touchées).', {f: cap(esc(r.name)), z: esc(r.zone), when: fleauWhen(r), he: he(P), job: `<b>${esc(x.job)}</b>`, p: P?.gender === 'female' ? 'elle' : 'il'});
             const ag = x.age !== null && x.age >= 0 ? ` <span class="muted">(${esc(T('{n} a {a}', {n: P?.first || He(P), a: ageTxt(x.age)}))})</span>` : '';
             const det = `${quote(r)}<small class="muted hist-hyp">${esc(r.exact ? T('Ce département ({d}) est dans la zone que nomme la source ; ses lieux de vie y sont.', {d: x.dep}) : T('La source parle de toute la France ; ses lieux de vie y sont.'))} ${esc(T('Le métier vient de sa fiche (profession, recensements).'))}</small>`;
             out.push(row(r.icon || '🐛', lead + ag, SRC.fleaux(r.url), more(det)));
@@ -402,7 +401,7 @@
     function fleauxPlaceHtml(list, dep) {
         if (!list.length) return '';
         const top = list[0];
-        const lead = list.length > 1 ? T('{n} fléaux des cultures connus ici : {f} {w} {when}…', {n: String(list.length), f: esc(top.name), w: T('dans {z}', {z: esc(top.zone)}), when: fleauWhen(top)}) : T('{f} arrive {w} {when}.', {f: cap(esc(top.name)), w: T('dans {z}', {z: esc(top.zone)}), when: fleauWhen(top)});
+        const lead = list.length > 1 ? T('{n} fléaux des cultures connus dans ce département. Le premier : {f} touche {z} {when}.', {n: String(list.length), f: esc(top.name), z: esc(top.zone), when: fleauWhen(top)}) : T('{f} touche {z} {when}.', {f: cap(esc(top.name)), z: esc(top.zone), when: fleauWhen(top)});
         const li = list.map(r => `<li>${esc(r.icon || '🐛')} <b>${esc(cap(r.name))}</b> : ${esc(fleauWhen(r))}, ${esc(r.zone)} ${srcLink(r.url)}<br><small class="muted">« ${esc(r.sentence)} »</small></li>`).join('');
         return row('🐛', cap(lead), SRC.fleaux(top.url), more(`<ul class="hist-ul">${li}</ul><small class="muted hist-hyp">${esc(T('Département {d}. Les familles de vignerons, de magnaniers et de cultivateurs en ont souffert : ruine, départs, changements de métier.', {d: dep}))}</small>`, list.length > 1 ? list.length : null));
     }
@@ -443,18 +442,16 @@
         return html.length;
     }
     function villagePlace(village) {
-        const pli = village.querySelector('[data-pli-host]');
-        return {id: Number(pli?.dataset.pliPlace) || 0, name: pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim(), lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
-            insee: pli?.dataset.pliInsee || '', county: pli?.dataset.pliCounty || ''};
+        const pli = village.querySelector('[data-pli-host]'), head = village.querySelector('.page-header p, header p')?.textContent || '';
+        return {id: Number(pli?.dataset.pliPlace) || 0, name: pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim(),
+            lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
+            insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || village.querySelector('[data-cad-insee]')?.dataset.cadInsee || '', state: head};
     }
-    const placeMemo = new Map();
-    async function placeRow(id) { if (!id) return null; if (!placeMemo.has(id)) placeMemo.set(id, A().api('place_monograph', {id}).then(d => d?.place || null).catch(() => null)); return placeMemo.get(id); }
     async function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-et])'); if (!village) return;
         village.dataset.et = '1';
         const place = villagePlace(village);
-        if (place.id && !place.insee) { const pr = await placeRow(place.id); if (pr) { place.insee = pr.admin4_code || pr.insee || ''; place.county = pr.county || ''; place.country = pr.country || ''; if (place.lat === null) { place.lat = num(pr.latitude); place.lon = num(pr.longitude); } } }
         const anchor = village.querySelector('[data-ha-host]') || village.querySelector('[data-mr-host]') || village.querySelector('[data-lp-host]') || village.querySelector('.cplus-place') || village.querySelector('.h-village-grid');
         const box = '<div class="et-place" data-et-host></div>';
         if (anchor) anchor.insertAdjacentHTML('afterend', box); else village.insertAdjacentHTML('beforeend', box);
@@ -481,7 +478,7 @@
         const decades = Object.keys(dec).map(Number).sort((a, b) => a - b);
         let pick = opts.year ? decadeOf(opts.year) : (decades.find(d => d >= 1860) ?? decades[0]);
         const dlg = document.createElement('dialog'); dlg.className = 'modal modal-l et-dialog';
-        const fmt = `<table class="data-table et-photo-tbl"><thead><tr><th>${esc(T('Format'))}</th><th>${esc(T('Années'))}</th><th>${esc(T('Source'))}</th></tr></thead><tbody>${photos.map(p => `<tr><td>${esc(p.n)}<br><small class="muted">« ${esc(p.sentence)} »</small></td><td>${esc(`${p.from}–${p.to}`)}</td><td>${srcLink(p.url)}</td></tr>`).join('')}</tbody></table>`;
+        const fmt = `<table class="data-table et-photo-tbl"><thead><tr><th>${esc(T('Format'))}</th><th>${esc(T('Années'))}</th><th>${esc(T('Source'))}</th></tr></thead><tbody>${photos.map(p => `<tr><td>${esc(p.n)}<br><small class="muted">« ${esc(p.sentence)} »${p.sentence_to ? ` — « ${esc(p.sentence_to)} »` : ''}</small></td><td>${esc(p.to ? `${p.from}–${p.to}` : T('depuis {y}', {y: String(p.from)}))}</td><td>${srcLink(p.url)}</td></tr>`).join('')}</tbody></table>`;
         const img = opts.src ? `<figure class="et-fig et-fig-photo"><img alt="" src="${esc(opts.src)}"><figcaption>${esc(opts.title || T('Ta photo'))}</figcaption></figure>` : '';
         const draw = () => {
             const imgs = fashionOf(dec, pick, 8);
@@ -553,7 +550,7 @@
                 {key: 'fame', label: T('Wikipédias (renommée)'), type: 'number'}, {key: 'src', label: T('Source'), type: 'url'}],
             period: r => [r.y, null]},
         {id: 'et_mode', icon: '👗', label: T('La mode par décennie (gravures et photos)'), group: 'Le monde', source: SRC_TXT.mode, sourceUrl: SRC_URL.mode, enabled: () => on('mode'),
-            load: async () => { const M = await load('mode'); const out = []; for (const [d, list] of Object.entries(M?.raw?.decades || {})) for (const g of list) out.push({name: g.title, decade: Number(d), who: T({femmes: 'gravure de mode', hommes: 'mode des hommes', france: 'mode en France'}[g.who] || g.who), artist: g.artist, licence: g.lic, src: g.page, img: g.t}); return out; },
+            load: async () => { const M = await load('mode'); const out = []; for (const [d, list] of Object.entries(M?.raw?.decades || {})) for (const g of list) out.push({name: g.title, decade: Number(d), who: T({gravure: 'gravure de mode', hommes: 'mode des hommes', femmes: 'mode des femmes'}[g.who] || g.who), artist: g.artist, licence: g.lic, src: g.page, img: g.t}); return out; },
             fields: [{key: 'name', label: T('Image'), type: 'text'}, {key: 'decade', label: T('Décennie'), type: 'year'}, {key: 'who', label: T('Genre'), type: 'enum'}, {key: 'artist', label: T('Auteur'), type: 'text'}, {key: 'licence', label: T('Licence'), type: 'enum'}, {key: 'src', label: T('Source'), type: 'url'}],
             period: r => [r.decade, r.decade + 9], open: r => openPhotoDating({year: r.decade})},
         {id: 'et_photos', icon: '📷', label: T('Formats des photos anciennes (pour dater une photo)'), group: 'Chercher', source: SRC_TXT.nouveautes, sourceUrl: 'https://fr.wikipedia.org/wiki/Daguerr%C3%A9otype', enabled: () => on('mode'),

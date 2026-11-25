@@ -177,13 +177,25 @@ def build_nouveautes(cache):
 # ═════════ 📷 formats de photos ═════════
 def build_photos(cache):
     rows = []
-    for pid, name, a, b, page, rx in CU.PHOTOS:
-        hit = find_sentence(cache, page, rx, None, None)
+    for pid, name, page, start, end in CU.PHOTOS:
+        hit = find_sentence(cache, page, start[0], start[1])
         if not hit:
-            print(f'  ⚠️ photo {pid} : phrase introuvable', flush=True)
+            print(f'  ⚠️ photo {pid} : phrase du début introuvable', flush=True)
             continue
-        rows.append({'id': pid, 'n': name, 'from': a, 'to': b, **hit})
-    print(f'  formats de photos : {len(rows)} sur {len(CU.PHOTOS)}', flush=True)
+        y0 = int(re.search(start[0], hit['sentence']).group(0))
+        row = {'id': pid, 'n': name, 'from': y0, 'to': None, **hit}
+        if end:
+            h2 = find_sentence(cache, page, end[0], end[1])
+            if h2 and h2['sentence'] != hit['sentence']:
+                y1 = int(re.search(end[0], h2['sentence']).group(0))
+                if y1 > y0:
+                    row.update({'to': y1, 'sentence_to': h2['sentence']})
+            elif h2:
+                y1 = int(re.search(end[0], h2['sentence']).group(0))
+                if y1 > y0:
+                    row['to'] = y1
+        rows.append(row)
+    print(f'  formats de photos : {len(rows)} sur {len(CU.PHOTOS)} ({sum(1 for r in rows if r["to"])} avec une fin sourcée)', flush=True)
     return rows
 
 
@@ -348,7 +360,7 @@ def build_livres(cache, per_year=15):
     by = {}
     for a, b in W.BOOK_SPANS:
         try:
-            rs = sparql(cache, f'books-{a}', W.BOOKS % (25, a, b))
+            rs = sparql(cache, f'books-{a}', W.BOOKS % (30, a, b))
         except RuntimeError as e:
             print(f'  ⚠️ livres {a}–{b} : {e}', flush=True)
             continue
@@ -356,17 +368,22 @@ def build_livres(cache, per_year=15):
             by.setdefault(qid(r['w']), []).append(r)
     rows = []
     for q, rs in by.items():
-        t = rs[0].get('wLabel', '')
-        if re.match(r'^Q\d+$', t):
+        t = next((r['wfr'] for r in rs if r.get('wfr')), '') or next((r['wen'] for r in rs if r.get('wen')), '')
+        if not t or re.match(r'^Q\d+$', t):
             continue
         ys = [wd_year(r['d']) for r in rs if r.get('d')]
-        y = min(v for v in ys if v)
+        ys = [v for v in ys if v]
+        if not ys:
+            continue
+        y = min(ys)
         auth = []
         for r in rs:
-            al = r.get('aLabel', '')
-            if al and not re.match(r'^Q\d+$', al) and al not in auth:
+            al = r.get('afr') or r.get('aen') or ''
+            if al and al not in auth:
                 auth.append(al)
-        fr = any(FRLANG.match(r.get('langLabel', '') or '') for r in rs) or (not any(r.get('langLabel') for r in rs) and any(FRCOUNTRY.search(r.get('origLabel', '') or '') for r in rs))
+        langs = {qid(r['lang']) for r in rs if r.get('lang')}
+        origs = {qid(r['orig']) for r in rs if r.get('orig')}
+        fr = W.FR_LANG in langs or (not langs and bool(origs & W.FR_COUNTRIES))
         d = next((r['d'][:10] for r in rs if r.get('d') and wd_year(r['d']) == y and r['d'][5:10] != '01-01'), '')
         rows.append([q, t, ', '.join(auth[:3]), y, d, 1 if fr else 0, int(rs[0].get('sl') or 0), 1 if any(r.get('frwiki') for r in rs) else 0])
     keep = []
@@ -379,7 +396,7 @@ def build_livres(cache, per_year=15):
         keep += frs + [r for r in lst if r not in frs][:per_year - len(frs)]
     keep.sort(key=lambda r: (r[3], -r[6]))
     print(f'  livres : {len(keep)} gardés sur {len(rows)} (au plus {per_year} par an ; {sum(r[5] for r in keep)} en français)', flush=True)
-    return {**WD, 'note': f'Œuvres littéraires (roman, pièce, poème, recueil, nouvelle, essai…) de Wikidata avec une date de parution (P577) et au moins 25 articles dans les Wikipédias du monde ; au plus {per_year} par année, les plus connues.',
+    return {**WD, 'note': f'Œuvres littéraires (roman, pièce, poème, recueil, nouvelle, essai…) de Wikidata avec une date de parution (P577) et au moins 30 articles dans les Wikipédias du monde ; au plus {per_year} par année, les plus connues.',
             'fields': ['q', 't', 'a', 'y', 'd', 'fr', 'sl', 'frwiki'], 'rows': keep}
 
 
@@ -416,7 +433,7 @@ def build_mode(cache, photos):
     gaps = []
     for dd in range(1780, 1961, 10):
         imgs = []
-        for cat, who in [(f'Category:{dd}s fashion plates', 'femmes'), (f"Category:{dd}s men's fashion", 'hommes'), (f'Category:{dd}s fashion in France', 'france')]:
+        for cat, who in [(f'Category:{dd}s fashion plates', 'gravure'), (f'Category:Male fashion in the {dd}s', 'hommes')]:
             try:
                 got = commons_files(cache, cat)
             except RuntimeError as e:
@@ -433,7 +450,7 @@ def build_mode(cache, photos):
             gaps.append(dd)
         print(f'  mode {dd}s : {len(uniq)} images', flush=True)
     return {'source': 'Wikimedia Commons', 'licence': 'chaque image a sa licence (domaine public, CC BY, CC BY-SA)', 'url': 'https://commons.wikimedia.org', 'built': TODAY,
-            'note': 'Gravures de mode et photos de Wikimedia Commons, rangées par décennie (catégories « 1860s fashion plates », « 1860s men’s fashion », « 1860s fashion in France »). Les images ne sont pas dans l’app : elles s’affichent depuis Commons quand Internet est là.',
+            'note': 'Gravures de mode et photos de Wikimedia Commons, rangées par décennie (catégories « 1860s fashion plates », « Male fashion in the 1860s »). Les images ne sont pas dans l’app : elles s’affichent depuis Commons quand Internet est là.',
             'gaps': gaps, 'decades': decades, 'photos': photos, 'photos_source': WP}
 
 

@@ -51,16 +51,16 @@ SILK = r's[ée]ricicult|magnan|ver[s]? [àa] soie|fileu?r|fileuse|mouli[nn]i|soi
 FARM = r'cultivateur|laboureur|journalier|agricult|fermier|m[ée]tayer|propri[ée]taire|paysan|jardinier|maraîch|ménager|bordier|colon|domestique|valet de ferme|métayer'
 FLEAUX = [
     ('phylloxera', '🐛', 'le phylloxéra', WINE, 'fr:Phylloxéra', [
-        (1863, 'an', ['30'], 'Pujaut près de Roquemaure, dans le Gard', r'Pujaut'),
+        (1863, 'an', ['30'], 'le plateau de Pujaut, près de Roquemaure (Gard)', r'Pujaut'),
         (1865, 'an', ['13'], 'la Crau-Saint-Rémy (Bouches-du-Rhône)', r'Crau-Saint-Rémy'),
         (1866, 'an', ['33'], 'Floirac, en face de Bordeaux (Gironde)', r'Floirac'),
         (1871, 'an', ['34', '26', '13'], 'la vallée du Rhône, de Cadarache à Castries et Tain-l’Hermitage', r'grand triangle'),
-        (1872, 'an', ['16', '17'], 'près de Cognac', r'Cognac'),
-        (1876, 'an', ['45'], 'Orléans', r'Orléans'),
-        (1878, 'an', ['21', '71', '89'], 'la Bourgogne', r'Bourgogne'),
+        (1872, 'an', ['16', '17'], 'les vignes près de Cognac', r'Cognac'),
+        (1876, 'an', ['45'], 'les vignes d’Orléans', r'Orléans'),
+        (1878, 'an', ['21', '71', '89'], 'le vignoble de Bourgogne', r'Bourgogne'),
         (1884, 'an', ['15', '43', '63', '03'], 'les arrondissements d’Aurillac, de Brioude et d’Yssingeaux, puis toute l’Auvergne', r'Aurillac'),
         (1887, 'an', ['52'], 'le sud de la Haute-Marne', r'Haute-Marne'),
-        (1890, 'an', ['02'], 'l’Aisne (Trélou, près de Dormans)', r'Trélou'),
+        (1890, 'an', ['02'], 'l’Aisne (Trélou, près de Dormans), porte de la Champagne', r'Trélou'),
         (1894, 'an', ['51', '10'], 'le vignoble de Champagne', r'vignoble de Champagne'),
         (1893, 'an', ['12'], 'le vignoble de Marcillac (Aveyron)', r'Marcillac'),
         (1870, 'an', ['11'], 'l’Aude', r'phylloxéra fasse son apparition vers 1870', 'fr:Aude (département)'),
@@ -70,12 +70,12 @@ FLEAUX = [
         (1882, 'an', ['41'], 'le canton de Mer, puis celui de Vendôme (Loir-et-Cher)', r'canton de Mer', 'fr:Histoire de Loir-et-Cher'),
         (1880, 'decennie', ['89'], 'l’Yonne', r'Vers 1880-1890', 'fr:Histoire de l\'Yonne'),
         (1870, 'decennie', ['11', '34', '30', '13', '83', '84', '04', '06'], 'le Bas Languedoc et la Provence', r'Bas Languedoc'),
-        (1880, 'decennie', ['16', '17', '69', '45', '41', '37', '70'], 'les Charentes, le Beaujolais, la Loire moyenne, la Haute-Saône', r'Bas Languedoc'),
-        (1890, 'apres', ['51', '88', '54'], 'la Champagne, les Vosges, la Meurthe-et-Moselle', r'Bas Languedoc'),
+        (1880, 'decennie', ['16', '17', '69', '45', '41', '37', '70'], 'les Charentes, le Beaujolais, la Loire moyenne et la Haute-Saône', r'Bas Languedoc'),
+        (1890, 'apres', ['51', '88', '54'], 'la Champagne, les Vosges et la Meurthe-et-Moselle', r'Bas Languedoc'),
     ]),
     ('oidium', '🍇', 'l’oïdium de la vigne', WINE, 'fr:Oïdium de la vigne', [
         (1847, 'an', ['92', '75', '78'], 'les serres de Suresnes, à l’ouest de Paris', r'Suresnes'),
-        (1851, 'an', ['*'], 'tout le vignoble français (« quatre ans plus tard » que 1847)', r'Quatre ans plus tard', 1847),
+        (1851, 'an', ['*'], 'tout le vignoble français', r'Quatre ans plus tard', 1847),
     ]),
     ('mildiou_vigne', '🍂', 'le mildiou de la vigne', WINE, 'fr:Oïdium de la vigne', [
         (1878, 'an', ['*'], 'le vignoble européen', r'mildiou de la vigne suivit'),
@@ -91,17 +91,18 @@ FLEAUX = [
     ]),
 ]
 
-# 📷 dater une photo ancienne : (id, nom, de, à, page Wikipédia, mots de la phrase)
+# 📷 dater une photo ancienne : (id, nom, page Wikipédia, [année du début, mots], [année de la fin, mots] ou None)
+#   les deux années sont LUES dans la phrase trouvée (la première année qui répond à la règle) ; sans phrase de fin, on dit « depuis … »
 PHOTOS = [
-    ('daguerreotype', 'Daguerréotype (image sur plaque de métal argenté, comme un miroir)', 1839, 1860, 'fr:Daguerréotype', r'18[3-6]\d'),
-    ('calotype', 'Calotype (tirage sur papier, négatif papier)', 1841, 1860, 'fr:Calotype', r'184\d'),
-    ('ambrotype', 'Ambrotype (image sur verre, sur fond noir)', 1854, 1870, 'fr:Ambrotype', r'185\d'),
-    ('ferrotype', 'Ferrotype (image sur plaque de fer noircie)', 1856, 1930, 'fr:Ferrotype', r'185\d'),
-    ('carte_visite', 'Carte de visite (petit tirage collé sur carton, environ 6 × 10 cm)', 1854, 1900, 'fr:Carte de visite (photographie)', r'185\d'),
-    ('cabinet', 'Photo-carte « cabinet » (tirage plus grand, environ 11 × 17 cm)', 1866, 1914, 'en:Cabinet card', r'186\d'),
-    ('albumine', 'Tirage à l’albumine (couleur brun-sépia, papier fin)', 1850, 1895, 'fr:Tirage albuminé', r'18[5-9]\d'),
-    ('gelatino', 'Plaque sèche au gélatino-bromure (photos plus nettes, instantanés)', 1878, 1930, 'fr:Gélatino-bromure d\'argent', r'187\d'),
-    ('autochrome', 'Autochrome (premières photos en couleurs, sur verre)', 1907, 1935, 'fr:Autochrome', r'190\d'),
-    ('carte_postale', 'Carte postale photographique', 1889, 1960, 'fr:Carte postale', r'18[6-9]\d|190\d'),
-    ('kodak', 'Appareil Kodak (photos d’amateur, tirages ronds puis carrés)', 1888, 1930, 'fr:Kodak', r'1888'),
+    ('daguerreotype', 'Daguerréotype (image sur plaque de métal argenté, comme un miroir)', 'fr:Daguerréotype', (r'1839', r'Académie|présent|invention'), (r'18[56]\d', r'abandon|remplac|supplant|déclin|disparu|fin')),
+    ('calotype', 'Calotype (tirage sur papier, à partir d’un négatif papier)', 'fr:Calotype', (r'184[01]', r'Talbot|brevet|procédé'), None),
+    ('ambrotype', 'Ambrotype (image sur verre, posée sur un fond noir)', 'fr:Ambrotype', (r'185\d', r'brevet|procédé|invent|Archer|Cutting'), (r'18[6-9]\d', r'remplac|abandon|supplant|déclin|fin')),
+    ('ferrotype', 'Ferrotype (image sur une fine plaque de fer noircie)', 'fr:Ferrotype', (r'185\d', r'brevet|procédé|invent'), (r'19\d\d', r'jusqu|encore|fin|disparu')),
+    ('carte_visite', 'Carte de visite (petit tirage collé sur carton, environ 6 × 10 cm)', 'en:Carte de visite', (r'185\d', r'Disdéri|Disderi|patent'), (r'18[89]\d|190\d', r'declin|replac|popular|until|fad')),
+    ('cabinet', 'Photo « cabinet » (tirage plus grand sur carton, environ 11 × 17 cm)', 'en:Cabinet card', (r'186\d', r'introduc|adopt|first|became'), (r'19[0-2]\d', r'until|declin|replac|popular')),
+    ('albumine', 'Tirage à l’albumine (couleur brun-sépia, papier très fin)', 'en:Albumen print', (r'1850', r'Blanquart|introduc|invent'), (r'18[89]\d|19[01]\d', r'until|replac|declin|dominant')),
+    ('gelatino', 'Plaque sèche au gélatino-bromure (photos nettes, premiers instantanés)', 'fr:Gélatino-bromure d\'argent', (r'187\d', r'Maddox|procédé|invent|plaque'), None),
+    ('carte_postale', 'Carte postale (photo imprimée ou tirée sur carte)', 'fr:Carte postale', (r'18[6-9]\d', r'première|France|apparition|illustrée'), None),
+    ('kodak', 'Appareil Kodak (photos d’amateur, petits tirages)', 'fr:Kodak', (r'1888', r'appareil|Kodak'), None),
+    ('autochrome', 'Autochrome (premières photos en couleurs, sur plaque de verre)', 'fr:Autochrome', (r'190[3-7]', r'brevet|commercialis|Lumière'), (r'19[3-5]\d', r'remplac|fin|abandon|supplant|jusqu')),
 ]

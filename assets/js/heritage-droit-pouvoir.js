@@ -24,7 +24,9 @@
  */
 (function (root) {
     'use strict';
-    const T = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? String(v[k]) : m)));
+    // les nombres passent en texte : une année reste « 1830 » (pas « 1 830 »)
+    const T = (s, v) => { const w = v && Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x]));
+        return root.LCNDA_I18N ? root.LCNDA_I18N.t(s, w) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (w && w[k] != null ? String(w[k]) : m)); };
 
     /* ═════════════ le calcul (sans écran : aussi pour Node) ═════════════ */
     const INF = 99999999;
@@ -84,7 +86,7 @@
         // naissance : qui a écrit l'acte, quelles règles de prénoms
         if (birthEv) {
             const ec = lawsAt(L, birthEv.d, whoAt(birthEv), 'birth').filter(r => ['etat_civil', 'religion', 'noms'].includes(r.theme));
-            const keeper = ec.filter(r => r.theme === 'etat_civil').sort((a, b) => (dnum(b.from) ?? 0) - (dnum(a.from) ?? 0))[0];
+            const keeper = ec.filter(r => /^(registres-15|etat-civil-1792)/.test(r.id)).sort((a, b) => (dnum(b.from) ?? 0) - (dnum(a.from) ?? 0))[0];
             if (keeper) lines.push({icon: '👶', kind: 'birth', d: birthEv.d, text: T('Sa naissance ({y}) : {r}', {y: yOf(birthEv.d), r: keeper.rule}), rows: ec});
         }
         // école : à 6 ans
