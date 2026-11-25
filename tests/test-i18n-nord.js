@@ -136,7 +136,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches'];
     const shots = process.env.I18N_SHOTS || '';
     const work = process.env.I18N_TMP || os.tmpdir();
     const tmp = fs.mkdtempSync(path.join(work, 'carnet-i18n-nord-')), tmpEmpty = fs.mkdtempSync(path.join(work, 'carnet-i18n-nord-vide-'));
-    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'});
+    const envFor = d => ({...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1'});
     fs.mkdirSync(path.join(tmp, 'media'), {recursive: true}); fs.mkdirSync(path.join(tmpEmpty, 'media'), {recursive: true});
     const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

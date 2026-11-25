@@ -12,7 +12,7 @@ Signature — {t} ¦ Ënnerschrëft — {t}
 L’export Word n’est pas chargé. ¦ De Word-Export ass net gelueden.
 Éclaircir / restaurer l’image ¦ D’Bild opklären / restauréieren
 le texte mis en page, à ouvrir dans Word ou LibreOffice (.docx) ¦ de gestaltenen Text, fir an Word oder LibreOffice opzemaachen (.docx)
-Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net ¦ Dës Ënnerschrëft an « Ënnerschrëften a Siegelen » opmaachen: de Pabeier verschwënnt, d’Tënt gëtt eng kloer Linn
+Ouvrir cette signature dans « Signatures et sceaux » : le papier s’efface, l’encre devient un tracé net ¦ Dës Ënnerschrëft an „Ënnerschrëften a Siegelen“ opmaachen: de Pabeier verschwënnt, d’Tënt gëtt eng kloer Linn
 Détourer la signature ¦ D’Ënnerschrëft ausschneiden
 + {n} autres : zoome pour les voir. ¦ + {n} aner: zoom eran, fir se ze gesinn.
 1 case repérée ¦ 1 Këscht markéiert
@@ -37,7 +37,7 @@ Chargement du graphique… ¦ Grafik gëtt gelueden…
 Choisis d’abord la personne de départ (Sosa 1). ¦ Wiel als éischt d’Persoun vum Ufank (Sosa 1).
 Colorer les cases : une étiquette, une branche, ou les fiches sans source ¦ D’Këschte fierwen: eng Etikett, eng Branche oder d’Fichen ouni Quell
 Dans cette zone ¦ An dëser Zone
-Dans la fenêtre d’impression, choisis « Enregistrer en PDF ». ¦ An der Dréckfënster wiel « Als PDF späicheren ».
+Dans la fenêtre d’impression, choisis « Enregistrer en PDF ». ¦ An der Dréckfënster wiel „Als PDF späicheren“.
 De {a} à {b} ¦ Vu(n) {a} bis {b}
 Depuis {a} ¦ Zënter {a}
 Famille de {nm} ¦ Famill vu(n) {nm}
@@ -46,7 +46,7 @@ GRAPHIQUES ¦ GRAFIKEN
 Grand arbre à assembler ¦ Grousse Bam zum Zesummesetzen
 Génération {g} : {n}{y} ¦ Generatioun {g}: {n}{y}
 Image impossible avec ce fond de carte : choisis PDF. ¦ Bild net méiglech mat dëser Grondkaart: wiel PDF.
-Imprime à 100 % (sans « ajuster à la page »). ¦ Dréck op 100 % (ouni « un d’Säit upassen »).
+Imprime à 100 % (sans « ajuster à la page »). ¦ Dréck op 100 % (ouni „un d’Säit upassen“).
 Imprimer ce graphique (⌘P) ¦ Dës Grafik drécken (⌘P)
 Imprimer la carte affichée (⌘P) ¦ Déi ugewisen Kaart drécken (⌘P)
 Imprimer l’arbre en grand, sur plusieurs feuilles A4 ou A3 à assembler ¦ De Bam grouss drécken, op e puer A4- oder A3-Blieder zum Zesummesetzen
@@ -100,7 +100,7 @@ ses ascendants ¦ seng/hir Virfahren
 {what} de {nm} (créer la fiche ou relier une fiche) ¦ {what} vu(n) {nm} (d’Fiche uleeën oder eng Fiche verbannen)
 {x} se pose ici ¦ {x} kënnt heihinner
 © contributeurs OpenStreetMap ¦ © OpenStreetMap-Bäidréier
-« {x} » n’a pas encore de position sur la carte. ¦ « {x} » huet nach keng Positioun op der Kaart.
+« {x} » n’a pas encore de position sur la carte. ¦ „{x}“ huet nach keng Positioun op der Kaart.
 Âge {a} – {b} ¦ Alter {a} – {b}
 Étiquette : {x} ¦ Etikett: {x}
 à gauche : {x} ¦ lénks: {x}
@@ -125,12 +125,12 @@ Partir de ¦ Ufänke vun
 Barres de vie ¦ Liewensbalken
 Âge à chaque événement ¦ Alter bei all Evenement
 Anomalies en rouge ¦ Anomalien a rout
-Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ». ¦ Nach keng Usiicht: stell d’Zäitlinn an, dann « 💾 Usiicht späicheren ».
+Aucune vue pour l’instant : règle la frise, puis « 💾 Enregistrer la vue ». ¦ Nach keng Usiicht: stell d’Zäitlinn an, dann „💾 Usiicht späicheren“.
 Le monde autour… ¦ D’Welt ronderëm…
 Chercher dans la frise… (nom, lieu, année) ¦ An der Zäitlinn sichen… (Numm, Plaz, Joer)
 Chronologie de {x} ¦ Chronologie vu(n) {x}
-Vue « {name} » affichée. ¦ Usiicht « {name} » ugewisen.
-Vue « {name} » supprimée ¦ Usiicht « {name} » geläscht
+Vue « {name} » affichée. ¦ Usiicht „{name}“ ugewisen.
+Vue « {name} » supprimée ¦ Usiicht „{name}“ geläscht
 Partir de cette personne ¦ Vun dëser Persoun ufänken
 Comparer avec la personne de départ ¦ Mat der Persoun vum Ufank vergläichen
 Copier la ligne ¦ D’Linn kopéieren
@@ -159,7 +159,7 @@ tableur ¦ Tabelle
 🎖 Militaire ¦ 🎖 Militär
 📋 Recensements ¦ 📋 Vollékszielungen
 📌 Autres ¦ 📌 Anerer
-Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ». ¦ Nach keng Usiicht: wiel d’Fichen, dann « 💾 Usiicht späicheren ».
+Aucune vue pour l’instant : choisis les fiches, puis « 💾 Enregistrer la vue ». ¦ Nach keng Usiicht: wiel d’Fichen, dann „💾 Usiicht späicheren“.
 Choisir {x} ¦ {x} wielen
 Inverser A et B ¦ A a B ëmdréinen
 L’acte transcrit ¦ Den transkribéierten Akt
@@ -197,7 +197,7 @@ Fiche gardée : ¦ Behalen Fiche:
 Rien à choisir : les deux fiches ne se contredisent pas. ¦ Näischt ze wielen: déi zwou Fiche widdersprieche sech net.
 {n} événement(s) présent(s) sur une seule fiche : gardé(s) tel(s) quel(s). ¦ {n} Evenement(er) nëmmen op enger Fiche: esou behalen.
 Fusionner les deux fiches ? ¦ Déi zwou Fiche fusionéieren?
-« {b} » sera fusionnée dans « {a} » : tout ce qui la concerne passe sur « {a} », puis elle disparaît. Une fusion ne peut pas être annulée. ¦ « {b} » gëtt an « {a} » fusionéiert: alles, wat se betrëfft, geet op « {a} », duerno verschwënnt se. Eng Fusioun kann net réckgängeg gemaach ginn.
+« {b} » sera fusionnée dans « {a} » : tout ce qui la concerne passe sur « {a} », puis elle disparaît. Une fusion ne peut pas être annulée. ¦ „{b}“ gëtt an „{a}“ fusionéiert: alles, wat se betrëfft, geet op „{a}“, duerno verschwënnt se. Eng Fusioun kann net réckgängeg gemaach ginn.
 🔀 Fusionner ¦ 🔀 Fusionéieren
 Fusion faite, mais une valeur n’a pas pu être reprise : {err} ¦ Fusioun gemaach, mä e Wäert konnt net iwwerholl ginn: {err}
 Fiches fusionnées : {n} événement(s) en double retiré(s) ¦ Fiche fusionéiert: {n} duebel Evenement(er) ewechgeholl
@@ -248,17 +248,17 @@ Copier vers… ¦ Kopéieren an…
 Croissance ¦ Wuesstem
 Croissance de la base mois par mois ¦ Wuesstem vun der Datebank Mount fir Mount
 Croissance indisponible. ¦ Wuesstem net disponibel.
-Dans la fenêtre, « ⤓ PDF » ¦ An der Fënster, « ⤓ PDF »
+Dans la fenêtre, « ⤓ PDF » ¦ An der Fënster, „⤓ PDF“
 Date butoir ¦ Délai
 De cujus (ses ancêtres et descendants) ¦ De cujus (seng/hir Virfahren an Nokommen)
-Des objectifs au long cours (« 8 générations complètes d’ici décembre », « 100 actes transcrits ») avec une barre de progression calculée sur la base et une date butoir. ¦ Laangfristeg Ziler (« 8 komplett Generatioune bis Dezember », « 100 transkribéiert Akten ») mat engem Fortschrëttsbalken, deen op der Datebank berechent gëtt, an engem Délai.
+Des objectifs au long cours (« 8 générations complètes d’ici décembre », « 100 actes transcrits ») avec une barre de progression calculée sur la base et une date butoir. ¦ Laangfristeg Ziler („8 komplett Generatioune bis Dezember“, „100 transkribéiert Akten“) mat engem Fortschrëttsbalken, deen op der Datebank berechent gëtt, an engem Délai.
 Des questions sur un ancêtre envoyées en un fichier à un proche ; ses réponses reviennent dans les fiches. ¦ Froen iwwer e Virfar, an engem Fichier un e Familljemember geschéckt; seng Äntwerte kommen erëm an d’Fichen.
 Dossier (enquête) ¦ Dossier (Ënnersichung)
 Démarre le chronomètre quand tu te mets à chercher : le temps passé est rangé par jour et par sujet. ¦ Start de Chronometer, wann s du ufänks ze sichen: déi verbruecht Zäit gëtt pro Dag a pro Sujet gespäichert.
 En plein écran : le portrait, chaque étape avec sa date et son lieu, les photos, la carte. Espace = pause, flèches = avant / après, Échap = fin. ¦ Am Vollbild: de Portrait, all Etapp mat hirem Datum an hirer Plaz, d’Fotoen, d’Kaart. Leertast = Paus, Feiler = vir / zeréck, Esc = Enn.
 Entretien supprimé (le son reste dans les médias). ¦ Interview geläscht (den Toun bleift an de Medien).
 Essaie le lendemain, ou complète les dates exactes des actes. ¦ Probéier den Dag drop, oder vervollstänneg déi genau Datume vun den Akten.
-Essaie un autre mot : « lettre », « carte », « jeu »… ¦ Probéier en anert Wuert: « Bréif », « Kaart », « Spill »…
+Essaie un autre mot : « lettre », « carte », « jeu »… ¦ Probéier en anert Wuert: „Bréif“, „Kaart“, „Spill“…
 Et toi, que sais-tu encore de {name} ? ¦ An du, wat weess du nach iwwer {name}?
 Ex. : 8 générations complètes d’ici décembre, 100 actes transcrits. ¦ Z. B.: 8 komplett Generatioune bis Dezember, 100 transkribéiert Akten.
 Exporter ce widget (PDF) ¦ Dëse Widget exportéieren (PDF)
@@ -288,8 +288,8 @@ PDF (bilan imprimable) ¦ PDF (drockbare Bilan)
 Page enregistrée. ¦ Säit gespäichert.
 Page filtrée : {what}. ¦ Gefiltert Säit: {what}.
 Page web (.html) ¦ Websäit (.html)
-Page « {name} » supprimée, avec {widgets}. ¦ Säit « {name} » geläscht, mat {widgets}.
-Page « {name} » supprimée. ¦ Säit « {name} » geläscht.
+Page « {name} » supprimée, avec {widgets}. ¦ Säit „{name}“ geläscht, mat {widgets}.
+Page « {name} » supprimée. ¦ Säit „{name}“ geläscht.
 Pas assez d’éléments pour un diaporama. ¦ Net genuch Elementer fir eng Diashow.
 Pas encore de mariage noté pour ce couple. ¦ Nach keng Hochzäit fir dëst Koppel notéiert.
 Passeport supprimé. ¦ Pass geläscht.
@@ -322,9 +322,9 @@ Une personne, et le diaporama est prêt : son portrait, chaque étape avec sa da
 Une seule chose concrète à faire, remplie dans le widget : la date de mariage d’un couple, la naissance d’un ancêtre… puis ✓. ¦ Eng eenzeg konkret Saach ze maachen, am Widget ausgefëllt: den Hochzäitsdatum vun engem Koppel, d’Gebuert vun engem Virfar… dann ✓.
 Une vie en diaporama ¦ E Liewen als Diashow
 Widget ¦ Widget
-Widget copié vers « {name} ». ¦ Widget an « {name} » kopéiert.
+Widget copié vers « {name} ». ¦ Widget an „{name}“ kopéiert.
 Widget dupliqué. ¦ Widget duplizéiert.
-Widget « {name} » supprimé. ¦ Widget « {name} » geläscht.
+Widget « {name} » supprimé. ¦ Widget „{name}“ geläscht.
 actes transcrits ¦ transkribéiert Akten
 ajoutés sur {n} mois ¦ derbäigesat iwwer {n} Méint
 ancêtres Sosa ¦ Sosa-Virfahren
@@ -351,31 +351,31 @@ trésor ¦ Schatz
 {who} est né ¦ {who} ass gebuer
 {who} est née ¦ {who} ass gebuer
 {who} se sont mariés ¦ {who} hu sech bestuet
-« {title} » caché (⚙️ Réglages pour le remontrer). ¦ « {title} » verstoppt (⚙️ Astellungen, fir et erëm ze weisen).
-« {title} » retiré des favoris. ¦ « {title} » aus de Favoritten ewechgeholl.
-« {title} » supprimé. ¦ « {title} » geläscht.
+« {title} » caché (⚙️ Réglages pour le remontrer). ¦ „{title}“ verstoppt (⚙️ Astellungen, fir et erëm ze weisen).
+« {title} » retiré des favoris. ¦ „{title}“ aus de Favoritten ewechgeholl.
+« {title} » supprimé. ¦ „{title}“ geläscht.
 À ouvrir ou envoyer tel quel ¦ Fir esou opzemaachen oder ze schécken
 Écris la date (même approximative). ¦ Schreif den Datum (och ongeféier).
 Écris le nom du proche. ¦ Schreif den Numm vum Familljemember.
 à {n} ans ¦ mat {n} Joer
 ‹ Veille ¦ ‹ Den Dag virdrun
 ↕ Réordonner les widgets ¦ ↕ D’Widgeten nei uerdnen
-⏱ C’est parti : « {s} ». ¦ ⏱ Lass: « {s} ».
+⏱ C’est parti : « {s} ». ¦ ⏱ Lass: „{s}“.
 ⏱ Temps de recherche ¦ ⏱ Sichzäit
-⏱ {t} rangées dans « {s} ». ¦ ⏱ {t} an « {s} » gespäichert.
+⏱ {t} rangées dans « {s} ». ¦ ⏱ {t} an „{s}“ gespäichert.
 ▶ Démarrer ¦ ▶ Starten
 ✉ Envoyé ¦ ✉ Geschéckt
 ✓ Mariage ajouté. ¦ ✓ Hochzäit derbäigesat.
 ✓ Naissance ajoutée. ¦ ✓ Gebuert derbäigesat.
 ✕ Tout montrer ¦ ✕ Alles weisen
 ⭐ Favoris ¦ ⭐ Favoritten
-⭐ « {title} » dans les favoris. ¦ ⭐ « {title} » an de Favoritten.
+⭐ « {title} » dans les favoris. ¦ ⭐ „{title}“ an de Favoritten.
 ＋ Ajouter un widget ¦ ＋ Widget derbäisetzen
 ＋ Objectif ¦ ＋ Zil
 🎞 Lancer le diaporama ¦ 🎞 D’Diashow starten
 🎯 Mes objectifs ¦ 🎯 Meng Ziler
 📈 Croissance de la base ¦ 📈 Wuesstem vun der Datebank
-📌 « {block} » de {name} mis dans le tableau de bord, page « {page} ». ¦ 📌 « {block} » vu(n) {name} op den Dashboard gesat, Säit « {page} ».
+📌 « {block} » de {name} mis dans le tableau de bord, page « {page} ». ¦ 📌 „{block}“ vu(n) {name} op den Dashboard gesat, Säit „{page}“.
 📚 Atelier ¦ 📚 Atelier
 📮 Préparer et télécharger ¦ 📮 Preparéieren an eroflueden
 🔎 Filtrer cette page ¦ 🔎 Dës Säit filteren
@@ -395,7 +395,7 @@ Aucun groupe. ¦ Keng Grupp.
 Aucun test. ¦ Keen Test.
 Aucune piste dans cette enquête. ¦ Keng Spuer an dëser Ënnersichung.
 Aucune piste. ¦ Keng Spuer.
-Battue « {title} » supprimée ¦ Sichaktioun « {title} » geläscht
+Battue « {title} » supprimée ¦ Sichaktioun „{title}“ geläscht
 CONCLUSION ¦ CONCLUSIOUN
 Ce que l’enquête a établi ¦ Wat d’Ënnersichung festgestallt huet
 Ce qui est reconstitué ¦ Wat rekonstituéiert ass
@@ -419,7 +419,7 @@ Conclusion ajoutée sur la fiche de {name} ¦ Conclusioun op d’Fiche vu(n) {na
 Conclusion enregistrée ¦ Conclusioun gespäichert
 Contrat de mariage chez le notaire ¦ Hochzäitskontrakt beim Notaire
 Correspondance supprimée ¦ Treffer geläscht
-Correspondance « {name} » supprimée ¦ Treffer « {name} » geläscht
+Correspondance « {name} » supprimée ¦ Treffer „{name}“ geläscht
 Correspondances ADN ¦ DNA-Treffer
 Correspondances introuvables. ¦ Treffer net fonnt.
 Correspondances montrées ¦ Ugewise Treffer
@@ -435,10 +435,10 @@ Depuis un modèle… ¦ Vun enger Virlag…
 Donne au moins la cote ou le fonds parcouru. ¦ Gëff mindestens d’Kote oder de Fong un, deen s du duerchgekuckt hues.
 Donner à : {gp} ¦ Ginn un: {gp}
 Dossier de recherche sur ¦ Fuerschungsdossier iwwer
-Dossier « {name} » supprimé ¦ Dossier « {name} » geläscht
+Dossier « {name} » supprimé ¦ Dossier „{name}“ geläscht
 Dupliquer l’enquête ¦ D’Ënnersichung duplizéieren
 Déjà parcouru : ¦ Scho duerchgekuckt:
-D’après l’enquête « {title} ». ¦ No der Ënnersichung « {title} ».
+D’après l’enquête « {title} ». ¦ No der Ënnersichung „{title}“.
 ENQUÊTE ¦ ËNNERSICHUNG
 En cours : a répondu ¦ Amgaang: huet geäntwert
 En cours : arbre échangé ¦ Amgaang: Bam ausgetosch
@@ -448,8 +448,8 @@ Enquête dupliquée ¦ Ënnersichung duplizéiert
 Enquête supprimée ¦ Ënnersichung geläscht
 Enquête sur {name} ¦ Ënnersichung iwwer {name}
 Enquête vide ¦ Eidel Ënnersichung
-Enquête « {title} » créée ¦ Ënnersichung « {title} » ugeluecht
-Enquête « {title} » supprimée ¦ Ënnersichung « {title} » geläscht
+Enquête « {title} » créée ¦ Ënnersichung „{title}“ ugeluecht
+Enquête « {title} » supprimée ¦ Ënnersichung „{title}“ geläscht
 Enregistrer la conclusion ¦ D’Conclusioun späicheren
 Ex. AD de la Corrèze, registres paroissiaux de Naves ¦ Z. B. AD de la Corrèze, Parrainsregistere vun Naves
 Ex. Jean DURAND est le fils de Pierre DURAND et de Marie LACOMBE. ¦ Z. B. Jean DURAND ass de Jong vum Pierre DURAND an der Marie LACOMBE.
@@ -460,7 +460,7 @@ Fonds ou archives ¦ Fong oder Archiven
 Force de l’endogamie ¦ Stäerkt vun der Endogamie
 Frères et sœurs testés ¦ Getest Geschwëster
 Glisse une piste ici ¦ Zéi eng Spuer heihinner
-Groupe « {name} » supprimé ¦ Grupp « {name} » geläscht
+Groupe « {name} » supprimé ¦ Grupp „{name}“ geläscht
 Il en faut au moins trois pour un phasage fiable. ¦ Et brauch mindestens dräi fir eng zouverlässeg Phaséierung.
 Impasse ¦ Sakgaass
 Imprimer le rapport ¦ De Rapport drécken
@@ -475,8 +475,8 @@ L’enquête de ce dossier n’existe plus. ¦ D’Ënnersichung vun dësem Doss
 L’enquête de cette recherche n’existe plus. ¦ D’Ënnersichung vun dëser Sich gëtt et net méi.
 L’enquête est terminée. Mettre la conclusion sur la fiche de {name} ? ¦ D’Ënnersichung ass fäerdeg. D’Conclusioun op d’Fiche vu(n) {name} setzen?
 Mes données ¦ Meng Donnéeën
-Mettre dans « {col} » ¦ An « {col} » setzen
-Mettre l’enquête dans « Terminées » ¦ D’Ënnersichung an « Ofgeschloss » setzen
+Mettre dans « {col} » ¦ An „{col}“ setzen
+Mettre l’enquête dans « Terminées » ¦ D’Ënnersichung an „Ofgeschloss“ setzen
 Modifier la recherche sans résultat ¦ D’Sich ouni Resultat änneren
 Morceau attribué ¦ Stéck zougewisen
 Morceau changé ¦ Stéck geännert
@@ -500,9 +500,9 @@ Personne cherchée ¦ Gesicht Persoun
 Phasage ¦ Phaséierung
 Phasage introuvable. ¦ Phaséierung net fonnt.
 Phasage visuel ¦ Visuell Phaséierung
-Phasage « {name} » supprimé ¦ Phaséierung « {name} » geläscht
-Piste « {title} » : {col} ¦ Spuer « {title} »: {col}
-Plus de relance pour « {name} » ¦ Keng Erënnerung méi fir « {name} »
+Phasage « {name} » supprimé ¦ Phaséierung „{name}“ geläscht
+Piste « {title} » : {col} ¦ Spuer „{title}“: {col}
+Plus de relance pour « {name} » ¦ Keng Erënnerung méi fir „{name}“
 Point de recombinaison ajouté ¦ Rekombinatiounspunkt derbäigesat
 Presse locale et courriers de la famille restée au pays ¦ Lokal Press a Bréiwer vun der Famill, déi doheem bliwwen ass
 Quand et par où {name} est-il parti, et où s’est-il installé ? ¦ Wéini a wéi eng Streck ass {name} fortgaang, a wou huet hie sech néiergelooss?
@@ -522,14 +522,14 @@ Recherches sans résultat ¦ Siche ouni Resultat
 Registres des consulats ¦ Registere vun de Konsulater
 Registres parcourus ¦ Duerchgekuckt Registeren
 Regrouper et placer ¦ Gruppéieren a placéieren
-Relance de « {name} » le {d} ¦ Erënnerung fir « {name} » de(n) {d}
+Relance de « {name} » le {d} ¦ Erënnerung fir „{name}“ de(n) {d}
 Relancer dans {n} jours ¦ An {n} Deeg erënneren
 Relancer {name} (ADN) ¦ {name} erënneren (DNA)
 Remettre le temps à zéro ¦ D’Zäit op null zrécksetzen
 Retirer ce morceau ¦ Dëst Stéck ewechhuelen
 Retrouver un soldat ¦ E Zaldot erëmfannen
 Rien de prérempli ¦ Näischt virausgefëllt
-Rien à relancer : sur une correspondance « Contactée », « 🔔 Relancer dans 30 jours ». ¦ Näischt ze erënneren: op engem « Kontaktéierten » Treffer, « 🔔 An 30 Deeg erënneren ».
+Rien à relancer : sur une correspondance « Contactée », « 🔔 Relancer dans 30 jours ». ¦ Näischt ze erënneren: op engem „Kontaktéierten“ Treffer, „🔔 An 30 Deeg erënneren“.
 Rubriques de l’ADN ¦ DNA-Rubriken
 Segment supprimé ¦ Segment geläscht
 Sources retenues ¦ Gewielte Quellen
@@ -537,10 +537,10 @@ Sépultures de guerre et nécropoles ¦ Krichsgriewer an Nekropolen
 Tables décennales autour de la naissance ¦ Zéngjärreg Tabellen ronderëm d’Gebuert
 Temps remis à zéro ¦ Zäit op null zréckgesat
 Terminé : placé dans l’arbre ✓ ¦ Fäerdeg: am Bam placéiert ✓
-Test « {name} » supprimé ¦ Test « {name} » geläscht
+Test « {name} » supprimé ¦ Test „{name}“ geläscht
 Tests entièrement endogames ¦ Komplett endogam Tester
 Trouver les parents de… ¦ D’Eltere fannen vu(n)…
-Un point de recombinaison à la position « De » ¦ E Rekombinatiounspunkt op der Positioun « Vun »
+Un point de recombinaison à la position « De » ¦ E Rekombinatiounspunkt op der Positioun „Vun“
 Une question à résoudre : ses pistes, ses pièces, sa conclusion. ¦ Eng Fro fir ze léisen: hir Spueren, hir Stécker, hir Conclusioun.
 Voir ses correspondances ¦ Seng/hir Treffer gesinn
 années non notées ¦ Joren net notéiert
@@ -551,7 +551,7 @@ paire notée ¦ Paar notéiert
 paires notées ¦ Puer notéiert
 partagé : {a}–{b} Mb, {cm} cM ¦ gedeelt: {a}–{b} Mb, {cm} cM
 un fichier .html à envoyer ¦ e .html-Fichier fir ze schécken
-{cote} ({years}) le {d}, enquête « {title} » ¦ {cote} ({years}) de(n) {d}, Ënnersichung « {title} »
+{cote} ({years}) le {d}, enquête « {title} » ¦ {cote} ({years}) de(n) {d}, Ënnersichung „{title}“
 {m} min ¦ {m} Min.
 {n} ajoutées ¦ {n} derbäigesat
 {n} commencées ¦ {n} ugefaang
@@ -562,11 +562,11 @@ un fichier .html à envoyer ¦ e .html-Fichier fir ze schécken
 {n}/{all} ({pct} %) ¦ {n}/{all} ({pct} %)
 {n}/{all} registres parcourus ¦ {n}/{all} Registeren duerchgekuckt
 {raw} cM comptés comme {cm} cM ¦ {raw} cM als {cm} cM gezielt
-« Enregistrer en PDF » dans la fenêtre d’impression ¦ « Als PDF späicheren » an der Dréckfënster
-« Trouver les parents de… », « Retrouver un soldat », « Émigré » : questions et pistes préparées ¦ « D’Eltere fannen vu(n)… », « E Zaldot erëmfannen », « Emigrant »: preparéiert Froen a Spueren
-« {a} » et « {b} » ne se correspondent plus ¦ « {a} » an « {b} » passen net méi zesummen
-« {a} » et « {b} » se correspondent ¦ « {a} » an « {b} » passen zesummen
-« {name} » a répondu ¦ « {name} » huet geäntwert
+« Enregistrer en PDF » dans la fenêtre d’impression ¦ „Als PDF späicheren“ an der Dréckfënster
+« Trouver les parents de… », « Retrouver un soldat », « Émigré » : questions et pistes préparées ¦ „D’Eltere fannen vu(n)…“, „E Zaldot erëmfannen“, „Emigrant“: preparéiert Froen a Spueren
+« {a} » et « {b} » ne se correspondent plus ¦ „{a}“ an „{b}“ passen net méi zesummen
+« {a} » et « {b} » se correspondent ¦ „{a}“ an „{b}“ passen zesummen
+« {name} » a répondu ¦ „{name}“ huet geäntwert
 À explorer → En cours → Explorée → Impasse : glisse les pistes d’une colonne à l’autre ¦ Ze exploréieren → Amgaang → Exploréiert → Sakgaass: zéi d’Spuere vun enger Kolonn an déi aner
 À faire : contacter ¦ Ze maachen: kontaktéieren
 Écris la conclusion. ¦ Schreif d’Conclusioun.
@@ -593,7 +593,7 @@ un fichier .html à envoyer ¦ e .html-Fichier fir ze schécken
 📈 Endogamie ¦ 📈 Endogamie
 📊 Tableur ¦ 📊 Tabelle
 🔔 Relancer le ¦ 🔔 Erënneren de(n)
-🔔 « Relancer dans… » propose ¦ 🔔 « Erënneren an… » proposéiert
+🔔 « Relancer dans… » propose ¦ 🔔 „Erënneren an…“ proposéiert
 🔔 À relancer ¦ 🔔 Ze erënneren
 🗂 Ranger en groupes… ¦ 🗂 A Gruppen opdeelen…
 🗑 Supprimer ce phasage ¦ 🗑 Dës Phaséierung läschen
@@ -618,12 +618,12 @@ Journal des marches et opérations (JMO) de son régiment ¦ Journal vun de Mars
 Listes de passagers (port de départ, port d’arrivée) ¦ Passagéierlëschten (Depart-Hafen, Ukunfts-Hafen)
 Légère (quelques mariages entre cousins) ¦ Liicht (e puer Hochzäiten tëscht Kosengen)
 Moyenne (village ou vallée assez fermés) ¦ Mëttel (zimlech zouent Duerf oder Dall)
-Nom du phasage (ex. « Fratrie DURAND ») ¦ Numm vun der Phaséierung (z. B. « Geschwëster DURAND »)
+Nom du phasage (ex. « Fratrie DURAND ») ¦ Numm vun der Phaséierung (z. B. „Geschwëster DURAND“)
 Passeports et registres de départ (archives départementales, série M) ¦ Päss an Departs-Registeren (Departementsarchiven, Serie M)
 Phasage visuel (frères et sœurs) ¦ Visuell Phaséierung (Geschwëster)
 Reconstitué (tous) ¦ Rekonstituéiert (all)
 cM corrigés (endogamie) ¦ Korrigéiert cM (Endogamie)
-la page affichée (« Enregistrer en PDF ») ¦ déi ugewise Säit (« Als PDF späicheren »)
+la page affichée (« Enregistrer en PDF ») ¦ déi ugewise Säit („Als PDF späicheren“)
 pat. ¦ pat.
 mat. ¦ mat.
 à (Mb) ¦ bis (Mb)
@@ -633,9 +633,9 @@ prioritaire ¦ prioritär
 Code ¦ Code
 Fiche de {name} ¦ Fiche vu(n) {name}
 tout l’ADN (JSON) ¦ dat ganzt DNA (JSON)
-Aucune paire « Nom A ; Nom B ». ¦ Kee Paar « Numm A ; Numm B ».
-Une paire par ligne : « Nom A ; Nom B » (ou une tabulation, une virgule). Les noms tels que sur le site du test. ¦ E Paar pro Linn: « Numm A ; Numm B » (oder en Tab, e Komma). D’Nimm wéi um Site vum Test.
-Qui correspond avec qui : la base des regroupements (Leeds, grappes). Une case pleine, A et B se correspondent. Clique une case pour l’ajouter ou la retirer ; ou colle la liste « en commun » donnée par la société. ¦ Wien passt mat wiem: d’Basis vun de Gruppéierungen (Leeds, Cluster). Eng voll Këscht, A a B passen zesummen. Klick op eng Këscht, fir se derbäizesetzen oder ewechzehuelen; oder pech d’Lëscht « gemeinsam », déi d’Firma gëtt.
+Aucune paire « Nom A ; Nom B ». ¦ Kee Paar „Numm A ; Numm B“.
+Une paire par ligne : « Nom A ; Nom B » (ou une tabulation, une virgule). Les noms tels que sur le site du test. ¦ E Paar pro Linn: „Numm A ; Numm B“ (oder en Tab, e Komma). D’Nimm wéi um Site vum Test.
+Qui correspond avec qui : la base des regroupements (Leeds, grappes). Une case pleine, A et B se correspondent. Clique une case pour l’ajouter ou la retirer ; ou colle la liste « en commun » donnée par la société. ¦ Wien passt mat wiem: d’Basis vun de Gruppéierungen (Leeds, Cluster). Eng voll Këscht, A a B passen zesummen. Klick op eng Këscht, fir se derbäizesetzen oder ewechzehuelen; oder pech d’Lëscht „gemeinsam“, déi d’Firma gëtt.
 rubriques ¦ Rubriken
 ＋ Correspondances ¦ ＋ Treffer
 ligne cochée ¦ ugekräizt Linn
@@ -653,25 +653,25 @@ ex. À vérifier aux archives ¦ z. B. Am Archiv ze kontrolléieren
 Étiquette posée sur {n} ¦ Etikett op {n} gesat
 ({n} verrouillées laissées de côté) ¦ ({n} gespaart op der Säit gelooss)
 Ajouter à Mes listes ¦ Bei Meng Lëschten derbäisetzen
-Ajouter les fiches cochées à une de « Mes listes » ¦ Déi ugekräizt Fiche bei eng vu « Meng Lëschten » derbäisetzen
-Aucune de « Mes listes » ne contient des personnes : crée-en une dans Listes → Mes listes. ¦ Keng vu « Meng Lëschten » enthält Persounen: maach eng an Lëschten → Meng Lëschten.
+Ajouter les fiches cochées à une de « Mes listes » ¦ Déi ugekräizt Fiche bei eng vu „Meng Lëschten“ derbäisetzen
+Aucune de « Mes listes » ne contient des personnes : crée-en une dans Listes → Mes listes. ¦ Keng vu „Meng Lëschten“ enthält Persounen: maach eng an Lëschten → Meng Lëschten.
 MES LISTES ¦ MENG LËSCHTEN
 Ajouter {n} à une liste ¦ {n} bei eng Lëscht derbäisetzen
-{n} ajoutées à « {list} » ¦ {n} bei « {list} » derbäigesat
+{n} ajoutées à « {list} » ¦ {n} bei „{list}“ derbäigesat
 Plus rien ne pourra changer sur ces fiches tant qu’elles sont verrouillées ¦ Näischt kann op dëse Fiche méi geännert ginn, soulaang se gespaart sinn
 Ces fiches pourront de nouveau être modifiées ¦ Dës Fiche kënnen nees geännert ginn
 {n} verrouillées ¦ {n} gespaart
 {n} déverrouillées ¦ {n} entspaart
 Les lignes cochées dans un fichier CSV (tableur) ¦ Déi ugekräizt Linnen an engem CSV-Fichier (Tabelle)
 {n} exportées. ¦ {n} exportéiert.
-Supprime les fiches cochées ; « ↶ Annuler » les remet ¦ Läscht déi ugekräizt Fichen; « ↶ Réckgängeg » setzt se zeréck
-Supprime les lignes cochées ; « ↶ Annuler » les remet ¦ Läscht déi ugekräizt Linnen; « ↶ Réckgängeg » setzt se zeréck
+Supprime les fiches cochées ; « ↶ Annuler » les remet ¦ Läscht déi ugekräizt Fichen; „↶ Réckgängeg“ setzt se zeréck
+Supprime les lignes cochées ; « ↶ Annuler » les remet ¦ Läscht déi ugekräizt Linnen; „↶ Réckgängeg“ setzt se zeréck
 {n} laissées de côté : {why} ¦ {n} op der Säit gelooss: {why}
 {n} supprimées ¦ {n} geläscht
 {n} supprimés ¦ {n} geläscht
-Plus d’actions pour « {name} » ¦ Méi Aktioune fir « {name} »
+Plus d’actions pour « {name} » ¦ Méi Aktioune fir „{name}“
 Copie impossible : choisis le texte et copie-le à la main. ¦ Kopie net méiglech: wiel den Text a kopéier en mat der Hand.
-Toutes les sources de ta généalogie : où elles sont gardées, combien de fois elles sont citées, sur quelles fiches. Ouvre une source pour son modèle de citation, ses doublons et « Où est-elle citée ? ». ¦ All d’Quelle vun denger Genealogie: wou se opbewaart sinn, wéi dacks se zitéiert ginn, op wéi enge Fichen. Maach eng Quell op fir hire Zitatiounsmodell, hir Duplikater an « Wou gëtt se zitéiert? ».
+Toutes les sources de ta généalogie : où elles sont gardées, combien de fois elles sont citées, sur quelles fiches. Ouvre une source pour son modèle de citation, ses doublons et « Où est-elle citée ? ». ¦ All d’Quelle vun denger Genealogie: wou se opbewaart sinn, wéi dacks se zitéiert ginn, op wéi enge Fichen. Maach eng Quell op fir hire Zitatiounsmodell, hir Duplikater an „Wou gëtt se zitéiert?“.
 ＋ Nouvelle source ¦ ＋ Nei Quell
 Chercher une source… (titre, auteur, dépôt, cote) ¦ Eng Quell sichen… (Titel, Auteur, Depot, Kote)
 Doublons possibles ({n}) ¦ Méiglech Duplikater ({n})
@@ -684,7 +684,7 @@ Tous les dépôts ¦ All d’Depoten
 Z → A ¦ Z → A
 Les moins citées ¦ Déi mannst zitéiert
 {n} sur {t} ¦ {n} vu(n) {t}
-Les sources s’ajoutent depuis une fiche (bloc Sources) ou ici avec « ＋ Nouvelle source ». ¦ D’Quelle ginn op enger Fiche derbäigesat (Block Quellen) oder hei mat « ＋ Nei Quell ».
+Les sources s’ajoutent depuis une fiche (bloc Sources) ou ici avec « ＋ Nouvelle source ». ¦ D’Quelle ginn op enger Fiche derbäigesat (Block Quellen) oder hei mat „＋ Nei Quell“.
 Aucune source ne correspond ¦ Keng Quell passt
 Citations ¦ Zitatiounen
 Même titre ou même lien qu’une autre source ¦ Selwechten Titel oder selwechte Link wéi eng aner Quell
@@ -692,18 +692,18 @@ doublon ? ¦ Duplikat?
 source cochée ¦ ugekräizt Quell
 sources cochées ¦ ugekräizt Quellen
 Garder une seule des sources cochées : les citations des autres passent dans celle-là ¦ Nëmmen eng vun den ugekräizte Quellen halen: d’Zitatioune vun deenen aneren ginn an déi eng
-Supprime les sources cochées et leurs citations ; « ↶ Annuler » les remet ¦ Läscht déi ugekräizt Quellen an hir Zitatiounen; « ↶ Réckgängeg » setzt se zeréck
+Supprime les sources cochées et leurs citations ; « ↶ Annuler » les remet ¦ Läscht déi ugekräizt Quellen an hir Zitatiounen; „↶ Réckgängeg“ setzt se zeréck
 FUSIONNER DES SOURCES ¦ QUELLE FUSIONÉIEREN
 Garder une seule source ¦ Eng eenzeg Quell halen
 ⇄ Fusionner ¦ ⇄ Fusionéieren
-Les citations, étiquettes, médias et notes des autres passent dans la source gardée ; ses cases vides sont complétées. « ↶ Annuler » remet tout comme avant. ¦ D’Zitatiounen, Etiketten, Medien an Notize vun deenen aneren ginn an déi behale Quell; hir eidel Felder gi vervollstännegt. « ↶ Réckgängeg » setzt alles zeréck wéi virdrun.
+Les citations, étiquettes, médias et notes des autres passent dans la source gardée ; ses cases vides sont complétées. « ↶ Annuler » remet tout comme avant. ¦ D’Zitatiounen, Etiketten, Medien an Notize vun deenen aneren ginn an déi behale Quell; hir eidel Felder gi vervollstännegt. „↶ Réckgängeg“ setzt alles zeréck wéi virdrun.
 {n} fusionnées dans une seule ¦ {n} an eng eenzeg fusionéiert
 Fusionner avec ses doublons ¦ Mat hiren Duplikater fusionéieren
 {n} sources se ressemblent ¦ {n} Quelle gläiche sech
 Copier la citation ¦ D’Zitatioun kopéieren
 Le style classique, à la française ¦ De klassesche Stil, op franséisch Aart
 Exporter (RIS, BibTeX) ¦ Exportéieren (RIS, BibTeX)
-« ↶ Annuler » la remet ¦ « ↶ Réckgängeg » setzt se zeréck
+« ↶ Annuler » la remet ¦ „↶ Réckgängeg“ setzt se zeréck
 Entrée de la liste des sources ¦ Entrée an der Quellelëscht
 Première note ¦ Éischt Notiz
 Note suivante ¦ Nächst Notiz
@@ -759,7 +759,7 @@ Voir plus ¦ Méi gesinn
 note cochée ¦ ugekräizt Notiz
 notes cochées ¦ ugekräizt Notizen
 notes ¦ Notizen
-« ↶ Annuler » les remet ¦ « ↶ Réckgängeg » setzt se zeréck
+« ↶ Annuler » les remet ¦ „↶ Réckgängeg“ setzt se zeréck
 NOTE ¦ NOTIZ
 SOURCES ¦ QUELLEN
 Nouvelle source ¦ Nei Quell
@@ -772,9 +772,9 @@ La recherche, les filtres et le tri de maintenant, sous un nom ¦ D’Sich, d’
 Choisis d’abord une recherche ou un filtre ¦ Wiel als éischt eng Sich oder e Filter
 Un nom pour retrouver cette liste filtrée d’un clic. ¦ En Numm, fir dës gefiltert Lëscht mat engem Klick erëmzefannen.
 ex. Les Mazaud nés à Tulle ¦ z. B. D’Mazaud, déi zu Tulle gebuer sinn
-Filtres gardés sous « {name} ». ¦ Filteren ënner « {name} » behalen.
-Oublier « {name} » ¦ « {name} » vergiessen
-Filtres « {name} » oubliés ¦ Filteren « {name} » vergiess
+Filtres gardés sous « {name} ». ¦ Filteren ënner „{name}“ behalen.
+Oublier « {name} » ¦ „{name}“ vergiessen
+Filtres « {name} » oubliés ¦ Filteren „{name}“ vergiess
 Filtres enregistrés ¦ Gespäichert Filteren
 événement coché ¦ ugekräizt Evenement
 événements cochés ¦ ugekräizt Evenementer
@@ -782,7 +782,7 @@ Double-clic pour corriger ¦ Duebelklick fir ze korrigéieren
 Corriger la date ¦ Den Datum korrigéieren
 Ou double-clic sur la case ¦ Oder Duebelklick op d’Feld
 Nouvelle valeur ¦ Neie Wäert
-Corrigé : « {v} » ¦ Korrigéiert: « {v} »
+Corrigé : « {v} » ¦ Korrigéiert: „{v}“
 ✓ Terminée le {date} ¦ ✓ Ofgeschloss de(n) {date}
 À faire (date passée) ¦ Ze maachen (Datum vergaangen)
 À faire ({n}) ¦ Ze maachen ({n})
