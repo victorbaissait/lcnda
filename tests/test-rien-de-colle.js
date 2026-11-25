@@ -223,9 +223,21 @@ if (require.main === module) (async () => {
             ['Listes', go.module('listes')],
             ['Tableau de bord', go.module('dashboard')],
         ];
-        const extra = await (async () => { const p = await newPage(browser, base); const tabs = await p.evaluate(() => window.LCNDA_APP.defaultMaintenanceTabs.map(t => t[0])); await p.context().close(); return tabs; })();
+        const extra = await (async () => { const p = await newPage(browser, base); const r = await p.evaluate(() => ({tabs: window.LCNDA_APP.defaultMaintenanceTabs.map(t => t[0]), data: (window.LCNDA_APP.defaultListTypes || []).map(t => t[0]).find(k => /^data_/.test(k)) || ''})); await p.context().close(); return r; })();
         // les pages de données ajoutées par les lots (prénoms, terre-mots, lot8, lot9, lot10…) quand elles sont là
-        for (const k of ['prenoms_france', 'terre_mots', 'adn_livres', 'bases_officielles', 'brevets_annuaires', 'patrimoine', 'lieux_patrimoine']) if (extra.includes(k)) pages.push([`Réglages → ${k}`, go.settings(k)]);
+        for (const k of ['histoire', 'bases_officielles', 'brevets_annuaires', 'insee_deces', 'adn_livres', 'wikidata_autour', 'terre_mots', 'lot8_monde_village', 'lot9_sons_enfance', 'lot10_voir_village', 'lieux_patrimoine', 'event_types', 'raccourcis', 'calendar_measures']) if (extra.tabs.includes(k)) pages.push([`Réglages → ${k}`, go.settings(k)]);
+        if (extra.data) pages.push([`Listes de données → ${extra.data}`, go.liste(extra.data)]);
+        await t('le détecteur voit bien un texte collé, un bouton qui touche le bord et un champ qui déborde (témoin)', async () => {
+            const p = await newPage(browser, base);
+            await go.settings('gov')(p);
+            const pad = await p.evaluate(() => [...document.querySelectorAll('.gov-set > .card')].map(c => parseFloat(getComputedStyle(c).paddingLeft)));
+            assert.ok(pad.length === 2 && pad.every(x => x >= 12), 'les cadres GOV ont leur marge intérieure : ' + pad);
+            const found = await p.evaluate(detect_ => { const box = document.createElement('div'); box.id = 'glue-temoin'; box.style.cssText = 'border:2px solid #000;padding:0;width:320px;margin:20px'; box.innerHTML = '<h3 style="margin:0">Titre collé</h3><button type="button">Bouton</button><div style="padding:10px"><input style="width:400px"></div>'; document.querySelector('#workspace').prepend(box); const r = (0, eval)('(' + detect_ + ')')({root: '#glue-temoin'}); box.remove(); return r; }, detect.toString());
+            assert.ok(found.some(f => f.kind === 'texte' && f.label === 'Titre collé'), JSON.stringify(found));
+            assert.ok(found.some(f => f.kind === 'bouton'), JSON.stringify(found));
+            assert.ok(found.some(f => f.kind === 'champ' && f.bad.some(b => b.kind === 'deborde')), JSON.stringify(found));
+            await p.context().close();
+        });
         for (const [w, dark] of [[1440, false], [390, false], [1440, true], [390, true]]) {
             const p = await newPage(browser, base, {width: w, dark});
             for (const [name, fn] of pages) {

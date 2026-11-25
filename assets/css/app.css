@@ -320,6 +320,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 :where(.page) > .card:where(:not(:has(> .card-head, > .card-body))) { padding: 14px 16px; }
 :where(.page) > .card:where(:not(:has(> .card-head, > .card-body))) > :first-child { margin-top: 0; }
 :where(.page) > .card:where(:not(:has(> .card-head, > .card-body))) > :last-child { margin-bottom: 0; }
+:where(.page > .card + .card) { margin-top: 14px; } /* deux cadres l'un sous l'autre ne se touchent pas (sinon leurs bordures se collent en un trait épais) */
 @media (max-width: 640px) { :where(.page) > .card:where(:not(:has(> .card-head, > .card-body))) { padding: 12px; } }
 .card.span-3 { grid-column: span 3; }
 .card.span-4 { grid-column: span 4; }
@@ -1383,6 +1384,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .create-type-last-group { min-width: min(300px, 100%); max-width: 100%; }
 .create-type-last-group > div { flex-wrap: wrap; min-width: 0; }
 .create-type-last-group > div > :first-child { min-width: 0; max-width: 100%; }
+.create-type-form label.create-type-artistic-inline { flex-direction: row; align-items: center; gap: 6px; }
 .create-type-field-label { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .create-type-last-group select { border: var(--line); background: var(--white); padding: 8px 10px; font-size: .92rem; min-height: 38px; }
 .create-type-artistic-inline { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }

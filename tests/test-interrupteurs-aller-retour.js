@@ -129,6 +129,8 @@ echo json_encode($I);`], {cwd: root, encoding: 'utf8', env});
             };
             const before = await sky();
             assert.match(before.txt, /pleine lune/);
+            // les blocs « contexte » (essai suivant) ont fini de lire la naissance de 1890 à Tulle : c'est ce qu'ils gardaient en mémoire
+            await p.waitForFunction(i => /1890 à Tulle/.test(document.querySelector(`[data-br-person="${i}"]`)?.innerText || '') && /armoiries de Tulle/.test(document.querySelector(`[data-cc-person="${i}"]`)?.innerText || ''), ID.louis, {timeout: 30000});
             const d = await api('person', {id: ID.louis}); const ev = d.events.find(e => (e.gedcom_tag || e.tag) === 'BIRT');
             const birthInTree = () => p.evaluate(async i => (await window.LCNDA_EXT.tresors.T.tree()).evBy.get('p' + i).find(e => e.tag === 'BIRT').y, ID.louis);
             await p.evaluate(() => window.LCNDA_EXT.tresors.T.tree(true)); // l'arbre des Trésors vient d'être lu (il est gardé 20 s)

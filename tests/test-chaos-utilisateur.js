@@ -9,6 +9,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *   2. Ctrl+Z appuyé deux fois après une suppression : une seule annulation, pas de « rien n'a été annulé » en rouge ;
  *   3. double-clic sur « Garder » (deux naissances) : un seul envoi, pas de « Événements introuvables. » en rouge ;
  *   3b. double-clic sur la pastille « Sans source » d'un lien parent : une seule fenêtre (et un seul dossier de preuve créé) ;
+ *   3c. double-clic sur « ＋ Ajouter » / « Tout voir » des blocs presse, récompenses, scolarité : une seule fenêtre ;
  *   4. fiche supprimée dans un autre onglet puis enregistrée ici : message clair (« la fiche a peut-être été supprimée »).
  */
 const assert = require('node:assert/strict');
@@ -28,12 +29,13 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
     await t('statique : person_detail lit tout avant les fonctions qui écrivent ; Ctrl+Z et « Garder » une seule fois ; fiche supprimée', () => {
         const a = php('api.php');
         const body = a.slice(a.indexOf('function person_detail('), a.indexOf('function completion_score('));
-        const resp = body.slice(body.indexOf('json_response(['));
+        const resp = body.slice(body.lastIndexOf('json_response(['));
         assert.doesNotMatch(resp, /\$[a-zA-Z]+->fetch(All|Column)?\(/, 'aucune lecture laissée ouverte jusqu’à la réponse (heritage_person_data peut créer une table)');
         assert.match(a, /throw new RuntimeException\('Personne introuvable : la fiche a peut-être été supprimée\.'\); \/\/ supprimée dans un autre onglet/);
         const app = js('app.js');
         assert.match(app, /let undoLastBusy=null;\n    function undoLastChange\(\)\{if\(undoLastBusy\)return undoLastBusy;/);
         assert.match(js('heritage-preuve.js'), /function openLink\(childId, parentId\) \{ return once\(/); assert.match(js('heritage-preuve.js'), /function openFor\(q\) \{ return once\(/);
+        assert.match(js('heritage-blocs.js'), /BL\.open = \(o = \{\}\) => \{ if \(opening\) return opening;/);
         assert.match(app, /let paKeepBusy=false;\n    async function paKeepEvent\(keepId,others\)\{\n        if\(paKeepBusy\)return;/);
     });
 
@@ -149,6 +151,19 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
                 await page.waitForFunction(() => !document.querySelector('dialog[open] [data-pv-link]')?.textContent.startsWith('…'), null, { timeout: 60000 });
                 await page.waitForTimeout(1500); // la seconde fenêtre arrivait après la réponse du serveur
                 assert.equal(await page.evaluate(() => document.querySelectorAll('dialog[open] [data-pv-link]').length), 1);
+                assert.deepEqual(page.errs, []);
+                await page.close();
+            });
+
+            await t('3c. double-clic sur « ＋ Ajouter » et « Tout voir » des blocs (presse, récompenses, scolarité) : une seule fenêtre', async () => {
+                const page = await open(`#personnes/${ids.henri}`); await page.waitForFunction(() => document.querySelector('[data-bl-new]') && document.querySelector('[data-bl-open]'), null, { timeout: 90000 });
+                for (const sel of ['[data-bl-new]', '[data-bl-open]']) {
+                    const b = page.locator(sel).first(); await b.scrollIntoViewIfNeeded(); await b.dblclick();
+                    await page.waitForFunction(() => document.querySelector('dialog.bl-dlg[open] [data-ar-body]')?.children.length, null, { timeout: 60000 });
+                    await page.waitForTimeout(1500); // la seconde fenêtre arrivait après le chargement de la première
+                    assert.equal(await page.evaluate(() => document.querySelectorAll('dialog.bl-dlg[open]').length), 1, sel);
+                    await page.evaluate(() => document.querySelectorAll('dialog.bl-dlg').forEach(d => { d.close(); d.remove(); }));
+                }
                 assert.deepEqual(page.errs, []);
                 await page.close();
             });

@@ -169,7 +169,11 @@
     /* ═════════ La fenêtre (plein écran) : la liste d'une sorte, ou une fiche ═════════ */
     let OPEN = null;
     /** BL.open({domain | kind, pid, item, add, all}) : pid = la personne (filtre « Personne » mis d'office) */
-    BL.open = async (o = {}) => {
+    /* double-clic sur « ＋ Ajouter », « Palmarès », « Tout voir »… : pendant le chargement de la première fenêtre, le second clic
+     * en ouvrait une deuxième par-dessus (deux « Nouveau : passage dans les médias » ; enregistrer l'une laissait l'autre) */
+    let opening = null;
+    BL.open = (o = {}) => { if (opening) return opening; const p = openNow(o); opening = p; p.then(() => { if (opening === p) opening = null; }, () => { if (opening === p) opening = null; }); return p; };
+    const openNow = async (o = {}) => {
         const kind0 = o.kind || BL.DOMAINS[o.domain || 'press'].kinds[0], domain = o.domain || domainOf(kind0), D = BL.DOMAINS[domain];
         if (OPEN?.dlg?.isConnected) { if (!await OPEN.close()) return null; }
         const pid = Number(o.pid) || 0;
