@@ -131,7 +131,10 @@
         }
         // Réglages : le titre est le nom de la page dans le menu (« Étiquettes », pas « Catégoriser sans modifier les actes »)
         if (h2 && st.module === 'maintenance' && !detail && !head.hasAttribute('data-ph-title')) {
-            const name = itemOf('maintenance', st.maintenanceTab), ico = h2.querySelector(':scope > .ui-ph-ico');
+            const full = itemOf('maintenance', st.maintenanceTab), ico = h2.querySelector(':scope > .ui-ph-ico');
+            // le nom du menu porte souvent son icône (« ⛏️ Métiers et rivières ») : elle va dans la pastille, pas deux fois (« ⛏️⛏️ », « ❓🪦 »)
+            const em = ico && full ? full.match(EMOJI_RE) : null, name = em ? full.slice(em[0].length) : full;
+            if (em && ico.textContent !== em[1]) ico.textContent = em[1];
             const rest = [...h2.childNodes].filter(n => n !== ico);
             if (name && rest.every(n => n.nodeType === 3) && !same(rest.map(n => n.textContent).join('').trim(), name)) { rest.forEach(n => n.remove()); h2.append(name); }
         }
