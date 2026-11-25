@@ -1,0 +1,96 @@
+# 🧭 Mémoire et vieux papiers (lot D) : refaire assets/data/td-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 📜 td-latin : le vocabulaire latin des registres depuis le fichier COMPLET du Wiktionnaire en français
+#    (dumps.wikimedia.org, ≈ 1 Go, CC BY-SA 4.0) : les mots de la liste ET toutes leurs formes fléchies (filii, filio…),
+#    ce que l'API, page par page, ne donne pas. Trop gros pour l'atelier de développement : la fabrication se fait ici.
+#  - ⚱️ td-necropoles, 🕯 td-camps, 🎲 td-jeux (Wikidata CC0, Wikipédia CC BY-SA 4.0, MémorialGenWeb CC BY-SA),
+#    📅 td-almanachs (liens Internet Archive) : questions polies, une à la fois.
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Mémoire et vieux papiers (lot D) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Mémoire et vieux papiers (lot D)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, latin, necropoles, camps, jeux ou almanachs'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-d.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-d-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+      TD_RAW: ${{ runner.temp }}/td-cache
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/td-cache
+          key: telech-d-${{ github.run_id }}
+          restore-keys: telech-d-
+      - name: "📜 Wiktionnaire complet (latin des registres et formes fléchies)"
+        if: env.QUOI == 'tout' || env.QUOI == 'latin'
+        timeout-minutes: 120
+        run: |
+          mkdir -p "$RUNNER_TEMP/wikt"
+          F="$RUNNER_TEMP/wikt/frwiktionary-latest-pages-articles.xml.bz2"
+          for i in 1 2 3; do
+            curl -fL --retry 5 --retry-delay 30 -A "LCNDA-genealogie-build/1.0 (open-source genealogy app; GitHub Actions)" -C - -o "$F" \
+              https://dumps.wikimedia.org/frwiktionary/latest/frwiktionary-latest-pages-articles.xml.bz2 && break
+            sleep 60
+          done
+          ls -l "$F"
+          python3 -I scripts/telech-d/build_latin.py --dump "$F" assets/data
+      - name: "⚱️ Nécropoles et cimetières de guerre"
+        if: env.QUOI == 'tout' || env.QUOI == 'necropoles'
+        run: python3 -I scripts/telech-d/build_necropoles.py assets/data
+      - name: "🕯 Camps et maisons d’enfants"
+        if: env.QUOI == 'tout' || env.QUOI == 'camps'
+        run: python3 -I scripts/telech-d/build_camps.py assets/data
+      - name: "🎲 Jeux traditionnels"
+        if: env.QUOI == 'tout' || env.QUOI == 'jeux'
+        run: python3 -I scripts/telech-d/build_jeux.py assets/data
+      - name: "📅 Almanachs"
+        if: env.QUOI == 'tout' || env.QUOI == 'almanachs'
+        run: python3 -I scripts/telech-d/build_almanachs.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/td-cache
+          key: telech-d-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/td-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Mémoire et vieux papiers (lot D) : données refaites sur GitHub (Wiktionnaire CC BY-SA 4.0, Wikidata CC0…)"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done

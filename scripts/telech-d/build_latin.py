@@ -93,7 +93,7 @@ def parse(title, text):
         for line in body.splitlines():
             if re.match(r'^#(?![*:#])', line):
                 raw = line[1:]
-                ofm = re.search(r'de\s+(?:\[\[|\{\{(?:lien|l)\|)([^\]|#}]+)', raw) if h.group(2) else None
+                ofm = re.search(r"\bd(?:e|u|’|')(?:'')?\s*(?:'')?\s*(?:\[\[|\{\{(?:lien|l)\|)([^\]|#}]+)", raw) if h.group(2) else None
                 if ofm and not of:
                     of = ofm.group(1).strip()
                 d = clean(raw)
@@ -134,8 +134,8 @@ def from_dump(path):
     with bz2.open(path, 'rt', encoding='utf-8') as f:
         for line in f:
             if '<title>' in line:
-                title = re.sub(r'.*<title>(.*)</title>.*', r'\1', line.strip())
-            elif '<text' in line:
+                title = re.sub(r'.*<title>(.*?)</title>.*', r'\1', line.strip())
+            if '<text' in line and not intext:
                 intext = True
                 buf = [re.sub(r'.*<text[^>]*>', '', line)]
                 if '</text>' in line:

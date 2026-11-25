@@ -2,10 +2,10 @@
 /* 🐑 La vie du village et la nature (téléchargements, lot B) — assets/js/heritage-telech-b-village.js, assets/css/telech-b.css,
  * assets/data/tb-*.json.gz (scripts/telech-b/build.py, .github/workflows/telech-b.yml).
  *  1. Node : les fichiers livrés (licences, sources, tailles) et le calcul (Wikidata + OpenStreetMap sans doublon, ce qui existait
- *     l'année de sa naissance, la série de vendanges la plus proche, la date et l'écart à l'habitude).
+ *     l'année de sa naissance, la série de vendanges la plus proche dans les lignes de « hist_vendanges »).
  *  2. Serveur et écran (php -S + Playwright, base temporaire, pas d'Internet) : Jean PERRIN né à Confracourt (Haute-Saône) en 1801,
- *     marié en 1825 ; Luc PERRIN vivant. Le lavoir et le calvaire de Confracourt (vraies données Wikidata), les vendanges de
- *     « Lorraine du Sud » ; Réglages (un sujet s'éteint, ↶) ; registres (Listes, monographie, cartes, à la demande).
+ *     marié en 1825 ; Luc PERRIN vivant. Le lavoir et le calvaire de Confracourt (vraies données Wikidata), les vendanges lues
+ *     dans la liste « hist_vendanges » du pack Histoire du lieu (remplacée ici par deux lignes d'essai) ; Réglages (un sujet s'éteint, ↶) ; registres (Listes, monographie, cartes, à la demande).
  *   node tests/test-telech-b.js */
 'use strict';
 const assert = require('assert');
@@ -30,7 +30,7 @@ const CONFRACOURT = {lat: 47.6671, lon: 5.8771};
     /* ═════════ 1. les fichiers et le calcul ═════════ */
     await t('fichiers livrés : présents, petits (< 15 Mo chacun, < 1 Mo en tout), chacun avec source, adresse, licence et date', async () => {
         let tot = 0;
-        for (const n of [...THEMES.map(x => `wd-${x}`), 'cepages', 'vendanges']) {
+        for (const n of [...THEMES.map(x => `wd-${x}`), 'cepages']) {
             const f = path.join(root, 'assets/data', `tb-${n}.json.gz`), st = fs.statSync(f); tot += st.size; assert.ok(st.size < 15e6, n);
             const d = raw(n); assert.ok(d.source && /^https:\/\//.test(d.url) && d.licence && /^https:\/\//.test(d.licence_url) && /^\d{4}-\d\d-\d\d$/.test(d.built), n);
             assert.ok(!d.fixture, `${n} : pas un fichier d’essai`);
@@ -38,7 +38,8 @@ const CONFRACOURT = {lat: 47.6671, lon: 5.8771};
         }
         assert.ok(tot < 1e6, `${tot} octets`); console.log(`  (en tout ${Math.round(tot / 1024)} Ko)`);
         const m = JSON.parse(fs.readFileSync(path.join(root, 'assets/data/manifest.json'), 'utf8'));
-        for (const n of ['tb-wd-croix', 'tb-vendanges', 'tb-cepages']) assert.strictEqual(m.packs[n]?.script, 'scripts/telech-b/build.py', `${n} dans Réglages → 🗂 Données`);
+        assert.ok(!m.packs['tb-vendanges'] && !fs.existsSync(path.join(root, 'assets/data/tb-vendanges.json.gz')), 'pas de 2e copie des vendanges (pack « Histoire du lieu »)');
+        for (const n of ['tb-wd-croix', 'tb-cepages']) assert.strictEqual(m.packs[n]?.script, 'scripts/telech-b/build.py', `${n} dans Réglages → 🗂 Données`);
     });
     await t('Wikidata : chaque point a son élément (Q…), une position en France ou un pays voisin, une sorte connue', async () => {
         const kinds = {croix: ['croix', 'calvaire'], eau: ['lavoir', 'puits', 'fontaine'], village: ['four', 'pigeonnier'], bornes: ['borne', 'octroi', 'douane'], berger: ['draille', 'buron', 'cabane'], cultes: ['temple', 'synagogue']};
@@ -65,17 +66,13 @@ const CONFRACOURT = {lat: 47.6671, lon: 5.8771};
         assert.ok(H.near(eau, CONFRACOURT, 1.5).some(x => x.r.n === 'lavoir de Confracourt'));
         assert.ok(H.near(croix, CONFRACOURT, 1.5).some(x => x.r.n === 'calvaire de Confracourt'));
     });
-    await t('🍇 vendanges : 27 séries ; Bourgogne 1354 = 15,3 jours après le 31 août (15 septembre) ; écart à l’habitude ; trop loin : rien', async () => {
-        const V = raw('vendanges');
-        assert.strictEqual(V.regions.length, 27); assert.ok(V.regions.every(g => g.count > 50 && g.lat && g.lon));
-        const bur = V.regions.findIndex(g => g.code === 'Burgundy');
-        assert.ok(V.rows.some(r => r[0] === bur && r[1] === 1354 && r[2] === 15.3));
+    await t('🍇 vendanges (lignes de « hist_vendanges », pack Histoire du lieu) : la série la plus proche, sa moyenne ; trop loin : rien', async () => {
+        const rows = [{code: 'SLo', region: 'Lorraine du Sud', year: 1801, days: 30, diff: -6, lat: 47.98, lon: 5.88}, {code: 'SLo', region: 'Lorraine du Sud', year: 1800, days: 40, diff: 4, lat: 47.98, lon: 5.88},
+            {code: 'Bur', region: 'Bourgogne', year: 1801, days: 20, diff: -5, lat: 47.32, lon: 5.04}];
+        const S = H.harvestSeries(rows, CONFRACOURT);
+        assert.strictEqual(S.code, 'SLo'); assert.deepStrictEqual(S.rows.map(r => r.year), [1800, 1801]); assert.strictEqual(S.mean, 36); assert.deepStrictEqual([S.first, S.last], [1800, 1801]);
+        assert.strictEqual(H.harvestSeries(rows, {lat: 48.4, lon: -4.5}), null, 'Brest : pas de vigne à moins de 150 km');
         assert.deepStrictEqual(H.ghdDay(15.3), {m: 9, d: 15}); assert.deepStrictEqual(H.ghdDay(0), {m: 8, d: 31}); assert.deepStrictEqual(H.ghdDay(31), {m: 10, d: 1});
-        const reg = H.harvestRegion(V, {lat: 47.02, lon: 4.84}); assert.strictEqual(reg.g.n, 'Bourgogne');
-        const y = H.harvestYear(V, reg, 1788); assert.strictEqual(y.days, 18.6); assert.strictEqual(y.diff, Math.round(18.6 - reg.g.median));
-        assert.strictEqual(H.harvestYear(V, reg, 1356), null, 'année sans date : rien');
-        assert.strictEqual(H.harvestRegion(V, {lat: 48.4, lon: -4.5}), null, 'Brest : pas de vigne à moins de 150 km');
-        assert.strictEqual(H.harvestRegion(V, CONFRACOURT).g.n, 'Lorraine du Sud');
     });
     await t('docs et fabrication : licences citées, workflow GitHub au bon modèle (lancé à la main, rien sur un simple push)', async () => {
         const doc = fs.readFileSync(path.join(root, 'docs/telechargements-lot-b.md'), 'utf8');
@@ -118,13 +115,12 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await p.waitForFunction(() => !!window.LCNDA_EXT?.telechB, null, {timeout: 20000});
         const into = (fn, arg, opts = {}) => p.evaluate(async ([f, a, o]) => { const h = document.createElement('div'); document.body.appendChild(h); const n = await window.LCNDA_EXT.telechB[f](h, a, {detached: true, ...o}); const r = [n, h.innerHTML, h.textContent]; h.remove(); return r; }, [fn, arg, opts]);
 
-        await t('fiche de Jean PERRIN : ⛲ le lavoir et le calvaire de Confracourt, 🍇 les vendanges de 1801 et de 1825 ; ↗ source partout', async () => {
+        await t('fiche de Jean PERRIN : ⛲ le lavoir et le calvaire de Confracourt ; pas de 2e ligne des vendanges (déjà dans « Le lieu à son époque ») ; ↗ source partout', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
             await p.waitForSelector('[data-tb-person="1"] .tb-row', {timeout: 30000});
-            await p.waitForFunction(() => /vendangé/.test(document.querySelector('[data-tb-person="1"]')?.textContent || ''), null, {timeout: 20000});
             const txt = await p.textContent('[data-tb-person="1"]');
             assert.match(txt, /Près de Confracourt, là où il est né\(e\)/); assert.match(txt, /lavoir de Confracourt/); assert.match(txt, /calvaire de Confracourt/);
-            assert.match(txt, /L’année de sa naissance \(1801\), on a vendangé vers le \d+ (septembre|octobre)/); assert.match(txt, /L’année de son mariage \(1825\)/); assert.match(txt, /Lorraine du Sud/);
+            assert.ok(!/vendang/i.test(txt), 'les vendanges de sa vie sont dans « Le lieu à son époque »');
             const a = await p.$$eval('[data-tb-person="1"] a', l => l.map(x => [x.href, x.target, x.rel]));
             assert.ok(a.length && a.every(([h, tg, rel]) => /^https?:\/\//.test(h) && tg === '_blank' && /noopener/.test(rel)));
             assert.ok((await p.$$eval('[data-tb-person="1"] .tb-row', l => l.map(r => !!r.querySelector('.hist-src')))).every(Boolean), 'une ligne Source sous chaque sujet');
@@ -141,9 +137,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(!outside.some(u => /PERRIN|GIRARD/i.test(decodeURIComponent(u))), 'aucun nom de personne ne part sur Internet');
         });
         await t('lieu (fiche d’un village) : ✝️ ⛲ une phrase chacun, la liste sous « ▸ plus », Source + licence ; 🍇 ; un lieu sans position : rien', async () => {
+            // le pack « Histoire du lieu » n'est pas installé dans l'essai : sa liste hist_vendanges répond avec deux lignes d'essai
+            const stub = await p.evaluate(() => { const d = (window.LCNDA_EXT.dataListsEngine?.list?.() || window.LCNDA_EXT.dataLists).find(x => x.id === 'hist_vendanges'); if (!d) return false;
+                window.__tbQ = []; d.installed = () => true; d.query = async q => { window.__tbQ.push(q); return {rows: [{code: 'SLo', region: 'Lorraine du Sud', year: 1801, days: 30, diff: -6, lat: 47.98, lon: 5.88, kind: 'normales'}, {code: 'SLo', region: 'Lorraine du Sud', year: 1802, days: 42, diff: 6, lat: 47.98, lon: 5.88, kind: 'normales'}], total: 2}; }; return true; });
+            assert.ok(stub, 'la liste hist_vendanges existe (app-listes-donnees.js)');
             const [n, html, txt] = await into('placeInto', {id: 1, name: 'Confracourt', ...CONFRACOURT});
-            assert.ok(n >= 3, txt); assert.match(txt, /Calvaires et croix de chemin à moins de 3 km/); assert.match(txt, /Lavoirs, puits et fontaines à moins de 3 km/);
-            assert.match(txt, /Les vendanges \(Lorraine du Sud/); assert.match(html, /▸ plus/); assert.match(txt, /Wikidata \(CC0\)/); assert.match(html, /tb-links/);
+            assert.ok(n >= 3, txt); assert.deepStrictEqual(await p.evaluate(() => window.__tbQ[0].near), {...CONFRACOURT, km: 150}); assert.match(txt, /Calvaires et croix de chemin à moins de 3 km/); assert.match(txt, /Lavoirs, puits et fontaines à moins de 3 km/);
+            assert.match(txt, /Les vendanges \(Lorraine du Sud, série à 35 km\) : d’habitude vers le 30 septembre ; dates connues de 1801 à 1802/); assert.match(txt, /pack « Histoire du lieu »/); assert.match(html, /▸ plus/); assert.match(txt, /Wikidata \(CC0\)/); assert.match(html, /tb-links/);
             assert.match(html, /https:\/\/www\.wikidata\.org\/wiki\/Q\d+/); assert.match(txt, /arriveront avec la mise à jour des données/);
             const none = await into('placeInto', {id: 0, name: '', lat: null, lon: null});
             assert.deepStrictEqual(none.slice(0, 2), [0, '']);
@@ -152,7 +152,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'telech_b'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-tb-settings-page] table tbody tr', {timeout: 20000});
             const txt = await p.textContent('[data-tb-settings-page]');
-            assert.match(txt, /CC0 1\.0/); assert.match(txt, /Daux/); assert.match(txt, /Pas encore fabriqué \(sur GitHub\)/); assert.match(txt, /PEP725/); assert.match(txt, /Atlas linguistique de la France/);
+            assert.match(txt, /CC0 1\.0/); assert.match(txt, /Daux/); assert.match(txt, /Pas de copie ici/); assert.match(txt, /Pas encore fabriqué \(sur GitHub\)/); assert.match(txt, /PEP725/); assert.match(txt, /Atlas linguistique de la France/);
             await p.click('[data-tb-tg="croix"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-b')).croix), false);
             const off = await into('placeInto', {id: 1, name: 'Confracourt', ...CONFRACOURT}); assert.ok(!/Calvaires et croix/.test(off[2]), 'sujet éteint : plus affiché');
@@ -175,7 +175,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                 out.tab = (window.LCNDA_APP.defaultMaintenanceTabs || []).some(b => b[0] === 'telech_b');
                 return out;
             }, CONFRACOURT);
-            ['tb_croix', 'tb_eau', 'tb_cultes', 'tb_cepages', 'tb_vendanges'].forEach(id => assert.ok(r.ids.includes(id) && r.rows[id] > 50, id));
+            assert.ok(!r.ids.includes('tb_vendanges'), 'une seule liste des vendanges (hist_vendanges)');
+            ['tb_croix', 'tb_eau', 'tb_cultes', 'tb_cepages'].forEach(id => assert.ok(r.ids.includes(id) && r.rows[id] > 50, id));
             assert.ok(r.src, 'colonne Source partout'); assert.strictEqual(r.mono[0], true); assert.match(r.mono[1], /lavoir de Confracourt/);
             assert.deepStrictEqual(r.secs, ['tb_croix', 'tb_eau', 'tb_village', 'tb_bornes', 'tb_berger', 'tb_cultes', 'tb_vendanges']);
             assert.ok(r.map > 20, String(r.map)); assert.match(r.ds, /Confracourt/); assert.ok(r.srcs.length >= 8 && r.srcs.every(([, o]) => o === false), 'rien en ligne');

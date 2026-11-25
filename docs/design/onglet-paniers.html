@@ -347,7 +347,8 @@ a.alink:hover,.src a:hover{text-decoration:underline}
  .gh2 code{display:none}
  .acts .b.opt{display:none}
  .ovl{padding:12px}
- .cover{width:44px;height:44px}
+ .cover{display:none}
+ .mfoot .cnt .mini{display:none}
  .cmp{grid-template-columns:minmax(0,1fr)}
  .ltools .srch{flex:1 1 100%}
  .frise{margin-left:58px}
@@ -1062,6 +1063,7 @@ function mount(root,o){
 
  paintAll();
  return {
+  foldStrip(){st.stripOpen=false;paintStrip();},
   search(k){st.view='search';startSearch(k);paintAll();root.querySelector('.tabui').scrollIntoView({behavior:'smooth',block:'start'});},
   sel(id){select(id);if(node(id).type==='f'){st.pick=true;const b=basketsIn(id)[0];b.items.forEach(i=>st.picked.add(i.id));const b2=basketsIn(id)[1];b2&&st.picked.add(b2.items[0].id);paintMain();}},
   find(){select('b5');st.find='monument';st.pick=true;paintMain();st.picked.add(node('b5').items.find(i=>/Treignac \(/.test(i.t)).id);st.picked.add(node('b5').items.find(i=>/Rilhac/.test(i.t)).id);paintMain();},
@@ -1079,7 +1081,7 @@ function mount(root,o){
 const desk=mount(document.getElementById('desk'),{});
 mount(document.getElementById('phone'),{phone:true});
 const p2=mount(document.getElementById('phone2'),{phone:true,noFocus:true});p2.search('voir');
-document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#desk .ovl').forEach(o=>o.hidden=true);const [k,v,w]=b.dataset.d.split(':');if(k==='ss')desk.search(v);else if(k==='sel')desk.sel(v);else if(k==='sort')desk.sort(v,w);else if(k==='view')desk.view(v);else desk[k]();document.getElementById('desk').scrollIntoView({behavior:'smooth',block:'start'});});
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#desk .ovl').forEach(o=>o.hidden=true);desk.foldStrip();const [k,v,w]=b.dataset.d.split(':');if(k==='ss')desk.search(v);else if(k==='sel')desk.sel(v);else if(k==='sort')desk.sort(v,w);else if(k==='view')desk.view(v);else desk[k]();document.getElementById('desk').scrollIntoView({behavior:'smooth',block:'start'});});
 document.getElementById('theme').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';};
 })();
 </script>
