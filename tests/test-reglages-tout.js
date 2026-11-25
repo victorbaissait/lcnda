@@ -217,6 +217,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await saveAs('Tout de chez tout');
             preset = (await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-settings-profiles') || '[]'))).find(x => x.name === 'Tout de chez tout');
             assert.equal(preset.reg, 2, 'un ensemble fait avec le registre');
+            for (const k of Object.keys(MINE)) if (!['lcnda-ld:hist_gares', 'genealogie-reglages-ouverts', 'lcnda-side-order'].includes(k)) assert.equal(preset.settings[k], MINE[k], `tel quel : ${k}`);
+            assert.equal(JSON.parse(preset.settings['genealogie-reglages-ouverts']).design, false, 'les sections repliées');
             for (const k of [...Object.keys(MINE), 'genealogie-side-order', 'genealogie-dashboard-blocks', 'genealogie-design']) assert.ok(k in preset.settings, `gardé : ${k}`);
             for (const k of Object.keys(PRIVATE)) assert.ok(!(k in preset.settings), `pas gardé : ${k}`);
             assert.ok(!JSON.stringify(preset).includes('JETON-SECRET'), 'aucun jeton');
@@ -234,7 +236,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.equal(before['genealogie-side-order'], null); assert.equal(before['lcnda-sort:listes:persons'], 'az');
             await applyRow('Tout de chez tout');
             const s = await lsAll();
-            for (const k of Object.keys(MINE)) if (k !== 'lcnda-ld:hist_gares') assert.equal(s[k], saved[k], `revenu : ${k}`);
+            for (const k of Object.keys(MINE)) if (k !== 'lcnda-ld:hist_gares') assert.equal(s[k], preset.settings[k], `revenu : ${k}`);
             for (const k of ['genealogie-side-order', 'genealogie-dashboard-blocks', 'genealogie-design']) assert.equal(s[k], preset.settings[k], `revenu : ${k}`);
             assert.deepEqual(JSON.parse(s['lcnda-ld:hist_gares']), {q: 'brive', crit: [], sort: 'name', dir: 'desc', view: 'table', hide: ['code'], gps: true}, 'colonne GPS et tri revenus, la recherche tapée d’ici reste');
             assert.equal(s['lcnda-photomaps-shape'], null, 'un réglage absent de l’ensemble revient au départ');
@@ -254,8 +256,10 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await setLs({'genealogie-list-hidden': JSON.stringify(['media']), 'lcnda-sort:listes:persons': 'az', 'lcnda-photomaps-shape': 'square'});
             await page.waitForTimeout(1500);
             const b = await lsAll();
-            await applyRow('Tout de chez tout');
-            const toast = page.locator('.toast', {hasText: 'Tout de chez tout'}).last(); await toast.waitFor({timeout: 8000});
+            const f = await openFrame(ALL);
+            await rowOf(f, 'Tout de chez tout').locator('[data-ps-apply]').click();
+            await Promise.all([page.waitForNavigation({waitUntil: 'load', timeout: 15000}), page.locator('dialog.confirm-box-dialog[open] button', {hasText: 'Appliquer'}).click()]);
+            const toast = page.locator('.toast', {hasText: 'Tout de chez tout'}).last(); await toast.waitFor({timeout: 10000});
             await Promise.all([page.waitForNavigation({waitUntil: 'load', timeout: 15000}), toast.locator('button', {hasText: 'Annuler'}).click()]);
             await page.waitForTimeout(1500);
             await page.locator('.toast', {hasText: 'comme avant'}).last().waitFor({timeout: 8000});
@@ -284,7 +288,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             assert.ok(imported, 'importé'); assert.equal(imported.reg, 2);
             await applyRow('Tout de chez tout');
             const s = await lsAll();
-            for (const k of Object.keys(MINE)) if (k !== 'lcnda-ld:hist_gares') assert.equal(s[k], saved[k], `revenu par le fichier : ${k}`);
+            for (const k of Object.keys(MINE)) if (k !== 'lcnda-ld:hist_gares') assert.equal(s[k], preset.settings[k], `revenu par le fichier : ${k}`);
             assert.equal(JSON.parse(s['lcnda-ld:hist_gares']).gps, true);
             assert.equal(s['genealogie-side-order'], preset.settings['genealogie-side-order']);
         });

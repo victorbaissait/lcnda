@@ -346,7 +346,7 @@
             if (u.phase !== 'applied' || !u.settings || typeof u.settings !== 'object') return;
             const msg = i18n('Ensemble « {name} » appliqué.', {name});
             const undo = () => applyAll(u.settings, {name, undo: true});
-            if (A().undoToast) A().undoToast(msg, {undo, icon: '💾'}); else toast(msg);
+            toast(`💾 ${msg}`, '', {kind: 'undo', duration: 15000, action: {label: i18n('↶ Annuler'), run: undo}}); // (15 s : tout un ensemble, on a le temps de regarder)
         };
         if (document.readyState === 'complete') setTimeout(show, 600); else window.addEventListener('load', () => setTimeout(show, 600), {once: true});
     })();

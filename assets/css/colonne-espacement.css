@@ -10,7 +10,7 @@
 :root #sidebar-content .side-menu-item { min-width: 0; box-sizing: border-box; }
 :root #sidebar-content .side-menu-item > .side-number { flex: 0 0 auto; }
 :root #sidebar-content .side-menu-item > .side-ico { flex: 0 0 1.4em; width: 1.4em; margin-right: -3px; text-align: center; line-height: 1.2; align-self: center; }
-:root #sidebar-content .side-menu-item > .side-label { flex: 1 1 auto; min-width: 0; line-height: 1.3; overflow-wrap: break-word; hyphens: auto; }
+:root #sidebar-content .side-menu-item > .side-label { flex: 1 1 auto; min-width: 0; line-height: 1.3; overflow-wrap: break-word; hyphens: manual; }
 :root #sidebar-footer.sidebar-footer { padding: 12px 18px 14px; }
 :root #sidebar-footer.sidebar-footer > * + * { margin-top: 10px; }
 /* une phrase grise (small, span : en ligne) ne prenait pas la marge du haut : collée sous les boutons */

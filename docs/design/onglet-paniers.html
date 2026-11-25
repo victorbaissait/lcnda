@@ -263,6 +263,57 @@ a.alink:hover,.src a:hover{text-decoration:underline}
 .toast{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:var(--bar);color:var(--bar-ink);border-left:5px solid var(--green);border-radius:8px;padding:10px 14px;font-size:13px;max-width:calc(100% - 40px);box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:30}
 .toast[hidden]{display:none}
 
+/* ranger, statuts, vues, panier vivant… */
+.sr{position:absolute;left:-9999px}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden;flex:none}
+.seg button{border:0;background:var(--paper);color:var(--muted);font:600 12.5px system-ui;padding:5px 10px;cursor:pointer;white-space:nowrap}
+.seg button+button{border-left:1px solid var(--line2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.ltools{display:flex;gap:8px 10px;align-items:center;margin:20px 0 0;flex-wrap:wrap;position:relative}
+.sorow{display:flex;gap:8px;align-items:center;padding:6px 10px;flex-wrap:wrap}
+.menu button[aria-pressed="true"]{font-weight:800;color:var(--blue-ink)}
+.menu .seg button{width:auto;padding:5px 9px;border-radius:0;font-size:12px}
+.menu .seg button[aria-pressed="true"]{color:var(--paper)}
+.ghd{list-style:none;margin:12px 0 2px}
+.ghd button{border:0;background:var(--grey-bg);color:var(--ink);font:800 12px system-ui;letter-spacing:.04em;padding:6px 12px;border-radius:8px;cursor:pointer;width:100%;text-align:left}
+.ghd button span{color:var(--soft);font-weight:600;margin-left:6px}
+.stt{border:0;border-radius:999px;font:700 11.5px system-ui;padding:4px 10px;cursor:pointer;white-space:nowrap;background:var(--grey-bg);color:var(--muted)}
+.stt.s-demander{background:var(--yel-bg);color:var(--yel-ink)}
+.stt.s-trouve{background:var(--blue-bg);color:var(--blue-ink)}
+.stt.s-verifie{background:var(--vio-bg);color:var(--vio)}
+.stt.s-utilise{background:var(--green-bg);color:var(--green)}
+.stt.s-revoir{background:var(--red-bg);color:var(--red)}
+.bhead{display:flex;gap:14px;align-items:flex-start}
+.cover{width:64px;height:64px;border-radius:12px;flex:none;border:1px solid var(--line2)}
+.bht{flex:1;min-width:0}
+.pinb{border:0;background:none;font-size:18px;cursor:pointer;color:var(--yel);padding:0 4px;line-height:1}
+.summ{margin:4px 0 0;font-size:12.5px;color:var(--muted)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line2);border-radius:999px;padding:2px 10px;font:500 12px system-ui;background:var(--paper);color:var(--ink)}
+.tag i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.tag.due{cursor:pointer;background:var(--yel-bg);color:var(--yel-ink);border-color:transparent;font-weight:700}
+.tdot{width:8px;height:8px;border-radius:50%;flex:none}
+.tsec{display:block;font:800 10.5px system-ui;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);margin:12px 6px 4px;border:0;background:none;padding:0;text-align:left;cursor:default}
+.tsec.tarch{cursor:pointer;margin-top:16px}
+.tr.archr{opacity:.7}
+.live{margin:14px 0 0;border:1px solid var(--blue);background:var(--blue-bg);border-radius:12px;padding:12px 14px;font-size:13px}
+.lmode{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.news{margin-top:10px;background:var(--paper);border-radius:10px;padding:10px 12px}
+.map{position:relative;height:300px;margin-top:12px;border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:repeating-linear-gradient(0deg,var(--grey-bg) 0 1px,transparent 1px 40px),repeating-linear-gradient(90deg,var(--grey-bg) 0 1px,var(--paper) 1px 40px)}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.mpin{position:absolute;transform:translate(-50%,-50%);border:2px solid var(--paper);background:var(--blue);color:#fff;border-radius:999px;font:700 12px system-ui;padding:3px 10px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.25);white-space:nowrap;max-width:46%;overflow:hidden;text-overflow:ellipsis}
+.mpin b{background:#fff;color:var(--blue);border-radius:999px;padding:0 6px;margin-right:3px}
+.maplab{position:absolute;right:16px;top:24%;font-style:italic}
+.frise{list-style:none;margin:14px 0 0;padding:0 0 0 4px;border-left:2px solid var(--line2);margin-left:62px}
+.frise li{position:relative;display:flex;gap:12px;align-items:baseline;padding:6px 0 6px 14px}
+.frise .yr{position:absolute;left:-66px;width:52px;text-align:right;font:800 12.5px system-ui;color:var(--blue-ink)}
+.frise .fdot{position:absolute;left:-8px;top:12px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid var(--paper)}
+.frise .ft{font-size:13.5px;min-width:0}
+.cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:8px}
+.cmpc{min-width:0}
+.sheet{border:1px dashed var(--line2);border-radius:10px;padding:14px 16px;background:var(--paper)}
+.shh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.lines{height:60px;background:repeating-linear-gradient(var(--paper) 0 19px,var(--line2) 19px 20px)}
 /* ═════════ téléphone ═════════ */
 @container tab (max-width:720px){
  .appbar{padding:8px 14px}
@@ -294,6 +345,11 @@ a.alink:hover,.src a:hover{text-decoration:underline}
  .gh2 code{display:none}
  .acts .b.opt{display:none}
  .ovl{padding:12px}
+ .cover{width:44px;height:44px}
+ .cmp{grid-template-columns:minmax(0,1fr)}
+ .ltools .srch{flex:1 1 100%}
+ .frise{margin-left:58px}
+ .mpin{font-size:11px;padding:2px 7px}
  .dlg{padding:16px 16px}
 }
 @media (max-width:980px){.setgrid{grid-template-columns:minmax(0,1fr)}}
@@ -309,7 +365,8 @@ a.alink:hover,.src a:hover{text-decoration:underline}
 <div class="simple">
 <p><b>En bref.</b> Aujourd’hui, les paniers vivent dans la pastille 🧺 et une fenêtre « ⛶ en grand ». On ajoute <b>un onglet « 🧺 Paniers »</b>, caché au départ, qu’on allume dans <i>Réglages → Onglets en plus → 1 · Des parties de l’app, cachées au départ</i>.</p>
 <p><b>Dedans :</b> à gauche l’arbre des 📁 dossiers et 🧺 paniers (on glisse pour ranger) ; à droite le panier ouvert, comme une liste (sources ↗, licence, « ✓ utilisé », note, ordre) avec ses destinations « → … ». En haut, <b>des idées</b> de choses à y mettre (repliables, masquables) et <b>« 🔍 Créer un panier par une recherche… »</b> : tu écris une phrase, je montre ce que j’ai compris en pastilles modifiables, ce que je n’ai pas compris, ce qui manque ; tu gardes ✓ ou écartes ✗ chaque résultat ; puis « Créer le panier « … » (N éléments) » dans le dossier choisi.</p>
-<p><b>Et aussi :</b> chercher <i>dans</i> un panier puis ne prendre qu’une partie de ce qu’on a trouvé, dupliquer (tout ou les cochés), <b>⇪ partager</b> un panier de données publiques (un petit fichier, sans rien de personnel) et <b>⇩ récupérer</b> celui d’un autre.</p>
+<p><b>Ranger sans mille boutons :</b> un seul « ↕ Ranger : … ▾ » (à la main, nom, catégorie, date, ajout, lieu, personne, source, distance, utilisé, taille ; « ＋ puis par… » ; ↑↓), des en-têtes de groupe repliables, et « ↶ Mon ordre à la main » toujours là. Vues ☰ Liste · 🗺 Carte · ⏳ Frise.</p>
+<p><b>Et aussi :</b> un statut par élément (à chercher → à demander → trouvé → vérifié → utilisé → à revoir), le panier vivant (« +2 nouveaux »), l’échéance et son rappel, la fiche de sortie aux archives, les doublons signalés, un résumé en une ligne, comparer deux paniers, les lettres de demande, l’export, la couverture, les étiquettes, ★ épingler, 🗄 archiver, l’historique ↶, « Qu’est-ce qui manque ? » — presque tout rangé dans « ⋯ ». Chercher <i>dans</i> un panier puis ne prendre qu’une partie de ce qu’on a trouvé, dupliquer (tout ou les cochés), <b>⇪ partager</b> un panier de données publiques (un petit fichier, sans rien de personnel) et <b>⇩ récupérer</b> celui d’un autre.</p>
 </div>
 
 <div class="toc"><a href="#p1"><b>1</b>Où on l’allume</a><a href="#p2"><b>2</b>L’onglet (ordinateur)</a><a href="#p3"><b>3</b>Sur téléphone</a><a href="#p4"><b>4</b>Ce qui change</a><a href="#p5"><b>5</b>Questions</a></div>
@@ -353,6 +410,17 @@ a.alink:hover,.src a:hover{text-decoration:underline}
 <button type="button" data-d="import">⇩ Récupérer</button>
 <button type="button" data-d="last">⚠ Le dernier panier d’un dossier</button>
 </div>
+<div class="demo-bar"><span class="lab">Ranger et voir</span>
+<button type="button" data-d="sort:main">↕ À la main</button>
+<button type="button" data-d="sort:cat:date">↕ Catégorie, puis Date</button>
+<button type="button" data-d="sort:lieu">↕ Lieu</button>
+<button type="button" data-d="view:carte">🗺 Carte</button>
+<button type="button" data-d="view:frise">⏳ Frise</button>
+<button type="button" data-d="live">🔄 Panier vivant (+2)</button>
+<button type="button" data-d="more">⋯ Toutes les autres actions</button>
+<button type="button" data-d="sortie">🏛 Sortie aux archives</button>
+<button type="button" data-d="compare">⇄ Comparer</button>
+</div>
 <div class="stage"><div class="appwrap" id="desk"></div></div>
 
 <!-- ═════════════ 3 ═════════════ -->
@@ -377,6 +445,13 @@ a.alink:hover,.src a:hover{text-decoration:underline}
 <li><b>🔎 Chercher dans un panier</b> puis cocher parmi les trouvés : « Prendre / Mettre dans / Dupliquer les 2 cochés parmi les 7 trouvés ».</li>
 <li><b>⧉ Dupliquer</b> : tout le panier, ou « les 4 cochés dans un nouveau panier ».</li>
 <li><b>⇪ Partager / ⇩ Récupérer</b> un panier de données publiques : un fichier <code>.lcnda-panier</code> (JSON : titres, dates, lieux, sources, liens, licences).<small>L’app retire tout ce qui vient de ton arbre (personnes, actes, notes, médias) sauf accord explicite, et jamais une personne vivante ou confidentielle. À l’arrivée : aperçu ✓/✗, dossier au choix, doublons sautés. Option « Envoyer à un compte du site familial » si les comptes famille existent.</small></li>
+<li><b>↕ Ranger : un seul contrôle</b> : À la main · Nom A→Z · Catégorie · Date de l’élément · Date d’ajout · Lieu · Personne · Source · Distance au lieu du panier · Utilisé · Taille ; « ＋ puis par… » caché derrière un lien ; ↑↓.<small>Catégorie, Lieu, Personne, Source, Utilisé font des groupes repliables avec leur nombre. Ranger ne touche jamais l’ordre à la main (la colonne <code>position</code>) : « ↶ Mon ordre à la main » est toujours là. Retenu par panier (<code>sort_json</code>).</small></li>
+<li><b>☰ Liste · 🗺 Carte · ⏳ Frise</b> : le même panier, vu par lieux ou dans le temps ; ce qui n’a pas de lieu ou de date est dit à part.</li>
+<li><b>Un statut par élément</b>, comme une liste de courses : 🔍 à chercher → ✉ à demander → 📌 trouvé → ☑ vérifié → ✓ utilisé → ↺ à revoir. Un clic passe au suivant.<small>Remplace la case « ✓ utilisé » (<code>done</code> devient <code>status</code>). « Mettre dans… » passe les éléments à « utilisé ».</small></li>
+<li><b>🔄 Panier vivant</b> : il garde ses critères et refait sa recherche ; « +2 » dans l’arbre ; par panier « Me demander d’abord » (liste ✓/✗) ou « Ajouter tout seul ».</li>
+<li><b>En-tête du panier</b> : couverture, ★ épingler, résumé en une ligne (« 8 éléments · 1801–1900 · 3 communes · 6 sources · 2 utilisés »), étiquettes de couleur, ⏰ échéance avec rappel (dans ⏰ Rappels).</li>
+<li><b>⋯ range le reste</b> : déplacer, étiquettes, couverture, échéance, archiver · comparer, historique ↶, qu’est-ce qui manque · créer une enquête à partir du panier, 🏛 fiche de sortie aux archives (cotes par série, horaires, cases), ✉ lettres de demande (Registre de courriers existant), ⤓ tableur / PDF / Word.<small>Pas de « modèles de panier » qui referaient les listes de documents des enquêtes et des fiches : le panier sert à <i>transporter</i> ; on renvoie vers l’enquête. Pas de diaporama ni de chapitre de livre.</small></li>
+<li><b>Doublons signalés</b> : « ⧉ aussi dans « Château de Rochefière » » sur l’élément ; ⇄ Comparer montre « seulement ici / dans les deux / seulement là ».</li>
 <li><b>Dans la base</b> : <code>cx_baskets</code> gagne une sorte (<code>kind</code> : dossier ou panier) et la requête qui l’a créé (<code>query_json</code>) ; les éléments, une marque « public » calculée à l’envoi.</li>
 </ul>
 
@@ -405,6 +480,15 @@ a.alink:hover,.src a:hover{text-decoration:underline}
 <div class="opt"><span class="cb on"></span><span><b>Figé, mais il garde sa recherche</b> : « ↻ Refaire » montre les nouveautés à valider (✓/✗).</span></div>
 <div class="opt"><span class="cb"></span><span>Vivant : il se remplit seul quand une liste ou l’arbre change.</span></div>
 <div class="reco">Ma recommandation : <b>figé + ↻ Refaire</b> : un panier ne change jamais sans toi, comme le reste de l’app.</div></div>
+
+<div class="qq"><h3>6. Panier vivant : que fait-il par défaut quand il trouve du nouveau ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>« Me demander d’abord »</b> : un badge « +2 » dans l’arbre et une liste ✓/✗ dans le panier.</span></div>
+<div class="opt"><span class="cb"></span><span>« Ajouter tout seul » (avec ↶ dans l’historique).</span></div>
+<div class="reco">Ma recommandation : <b>me demander d’abord</b> par défaut ; « Ajouter tout seul » se choisit panier par panier (utile pour une veille, ex. les nouveaux relevés d’une commune).</div></div>
+<div class="qq"><h3>7. Les statuts des éléments : ces six-là, ou moins ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Six</b> : à chercher · à demander · trouvé · vérifié · utilisé · à revoir (un clic = le suivant).</span></div>
+<div class="opt"><span class="cb"></span><span>Trois : à faire · trouvé · utilisé.</span></div>
+<div class="reco">Ma recommandation : <b>les six</b>, parce que « à demander » alimente les lettres de demande et la fiche de sortie aux archives ; un nouvel élément arrive « trouvé », donc la plupart des gens n’en verront que deux ou trois.</div></div>
 
 <p class="note">Fichier : <code>docs/design/onglet-paniers.html</code> · même allure et mêmes couleurs que <code>prendre-depuis.html</code>, clair et sombre.</p>
 </div>
@@ -875,7 +959,7 @@ function mount(root,o){
    <div class="row"><button type="button" class="b ter" data-close>Fermer</button><button type="button" class="b sec" data-close>📍 Mettre dans Visites d’archives</button><button type="button" class="b pri" data-close>🖨 Imprimer</button></div>`);}
  /* ── clics ── */
  root.addEventListener('click',e=>{
-  const t=e.target.closest('button,[data-id],input,label');if(!t||!root.contains(t))return;
+  const t=e.target.closest('button,[data-id],input,label');if(!t||!root.contains(t)||t.closest('.ovl'))return;
   if(t.dataset.tw){st.closed.has(t.dataset.tw)?st.closed.delete(t.dataset.tw):st.closed.add(t.dataset.tw);paintTree();return;}
   if(t.dataset.id&&t.classList.contains('tr')){select(t.dataset.id);return;}
   if(t.dataset.open){select(t.dataset.open);return;}
@@ -981,13 +1065,19 @@ function mount(root,o){
   find(){select('b5');st.find='monument';st.pick=true;paintMain();st.picked.add(node('b5').items.find(i=>/Treignac \(/.test(i.t)).id);st.picked.add(node('b5').items.find(i=>/Rilhac/.test(i.t)).id);paintMain();},
   share(){select('b1');openShare(node('b1'));},
   import(){openImport();},
-  last(){select('b3');moveNode('b3','f4');}
+  last(){select('b3');moveNode('b3','f4');},
+  sort(k,then){select('b1');node('b1').sort={k,then:then||'',dir:1};node('b1').view='liste';paintMain();},
+  live(){select('b2');},
+  view(v){select('b5');node('b5').view=v;paintMain();},
+  sortie(){select('b1');openSortie(node('b1'));},
+  compare(){select('b5');openCompare(node('b5'));},
+  more(){select('b1');setTimeout(()=>$('[data-a=more]').click(),0);}
  };
 }
 const desk=mount(document.getElementById('desk'),{});
 mount(document.getElementById('phone'),{phone:true});
 const p2=mount(document.getElementById('phone2'),{phone:true,noFocus:true});p2.search('voir');
-document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const [k,v]=b.dataset.d.split(':');if(k==='ss')desk.search(v);else if(k==='sel')desk.sel(v);else desk[k]();document.getElementById('desk').scrollIntoView({behavior:'smooth',block:'start'});});
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const [k,v,w]=b.dataset.d.split(':');if(k==='ss')desk.search(v);else if(k==='sel')desk.sel(v);else if(k==='sort')desk.sort(v,w);else if(k==='view')desk.view(v);else desk[k]();document.getElementById('desk').scrollIntoView({behavior:'smooth',block:'start'});});
 document.getElementById('theme').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';};
 })();
 </script>
