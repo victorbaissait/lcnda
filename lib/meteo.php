@@ -244,6 +244,28 @@ function meteo_first_station(float $lat, float $lon): ?array
     return $first ? ['name' => meteo_short_name((string) $first['nom']), 'year' => (int) $first['debut'], 'km' => (int) round($first['km'])] : null;
 }
 
+/** Les années couvertes près d'ici par les données installées (stations à moins de 120 km, carreaux), ou null : ['from' => 1836, 'to' => 2025]. */
+function meteo_span(float $lat, float $lon): ?array
+{
+    $from = null; $to = null;
+    $take = static function ($a, $b) use (&$from, &$to): void { if ($a !== null) { $from = $from === null ? (int) $a : min($from, (int) $a); } if ($b !== null) { $to = $to === null ? (int) $b : max($to, (int) $b); } };
+    foreach (meteo_near_stations($lat, $lon, null, 0, METEO_WORLD_KM, true) as $st) {
+        if ($st['km'] > (str_starts_with((string) $st['kind'], 'monde-') ? METEO_WORLD_KM : 120)) { continue; }
+        $take($st['debut'], $st['fin']);
+    }
+    foreach (meteo_files() as $f) {
+        $pdo = meteo_pdo($f['path']); if (!$pdo) { continue; }
+        foreach (['era5' => 0.35, '20cr' => 1.0] as $src => $w) {
+            try {
+                $s = $pdo->prepare('SELECT MIN(debut) a, MAX(fin) b FROM grid WHERE source=? AND lat BETWEEN ? AND ? AND lon BETWEEN ? AND ?');
+                $s->execute([$src, $lat - $w, $lat + $w, $lon - $w * 1.5, $lon + $w * 1.5]);
+                $r = $s->fetch(); if ($r && $r['a'] !== null) { $take($r['a'], $r['b']); }
+            } catch (Throwable) {}
+        }
+    }
+    return $from !== null && $to !== null ? ['from' => $from, 'to' => $to] : null;
+}
+
 function meteo_short_name(string $n): string { return trim(preg_split('/\s+[–-]\s+/u', $n)[0] ?? $n); }
 
 /* ═════════════════════════ Les altitudes (grille de 30″, Copernicus DEM GLO-90) ═════════════════════════ */
@@ -593,6 +615,7 @@ function meteo_day(float $lat, float $lon, ?float $alt, string $date, ?string $t
     if (!$series) {
         $res['ok'] = false; $res['reliability'] = 'none'; $res['why'] = 'far';
         $res['first'] = meteo_first_station($lat, $lon);
+        $res['span'] = meteo_span($lat, $lon); // 🧺 « de quand à quand » la météo existe ici (ex. une date d'après les données installées)
         // ni station à moins de 120 km, ni carreau : hors de la zone de la météo (ex. l'Italie, qui n'a que l'altitude)
         if (!$res['first'] && !meteo_near_cell('era5', $lat, $lon, max(1940, $y)) && !meteo_near_cell('20cr', $lat, $lon, min(1939, max(1836, $y)))) { $res['why'] = 'out'; }
         return $res;

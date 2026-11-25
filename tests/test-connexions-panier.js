@@ -76,9 +76,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         const p = await ctx.newPage();
         p.on('pageerror', e => errs.push(e.message));
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_APP?.defaultMaintenanceTabs && window.LCNDA_EXT?.sendTargets && window.LCNDA_EXT?.dataListsEngine, null, {timeout: 60000});
-        // index.php ne charge pas encore ces fichiers : on les ajoute (comme le feront les balises)
-        if (!(await p.evaluate(() => !!window.LCNDA_EXT?.connexions))) { await p.addStyleTag({url: base + 'assets/css/connexions.css'}); await p.addScriptTag({url: base + 'assets/js/heritage-connexions.js'}); }
+        // index.php charge le module et sa feuille de style (balises avec ?v=)
         await p.waitForFunction(() => window.LCNDA_EXT?.connexions && window.LCNDA_EXT.sendTargets.some(x => x.key === 'cx_investigation'), null, {timeout: 15000});
+        assert.ok(await p.evaluate(() => !!document.querySelector('script[src*="heritage-connexions.js?v="]') && !!document.querySelector('link[href*="connexions.css?v="]')), 'index.php charge heritage-connexions.js et connexions.css');
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, {...z, _t: String(Date.now() + Math.random())}).catch(e => ({error: e.message})), [x, q]);
         const post = (x, body) => p.evaluate(([y, b]) => window.LCNDA_APP.api(y, {}, {method: 'POST', body: b}).then(r => r?.result ?? r).catch(e => ({error: e.message})), [x, body]);
         const cx = (op, body = {}) => post('cx_write', {op, ...body});
@@ -286,6 +286,26 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const it = (await api('atelier_project', {id: proj})).items.find(x => /Météo/.test(x.title));
             const rows = it.data.text.split('\n').filter(l => /^1978-02-0\d \|/.test(l)); assert.strictEqual(rows.length, 7); assert.match(it.data.text, /Source :/);
         });
+        await t('📚 … la météo d’un jour pas encore dans les données (1er juin 2026) : rien d’inventé, la phrase dit de quand à quand c’est possible ici (1836 à 2025)', async () => {
+            await go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
+            await p.evaluate(() => window.LCNDA_EXT.connexions.openTake());
+            await p.waitForSelector('.cx-take'); await p.click('.cx-take [data-cx-tab="data"]'); await p.selectOption('.cx-take [data-cx-ds]', 'meteo_jour');
+            await p.waitForSelector('.cx-take .pk[data-picker="place"] input:not([type=hidden])');
+            await p.fill('.cx-take .pk[data-picker="place"] input:not([type=hidden])', 'Auch');
+            await p.locator('.cx-take .pk-list [role="option"], .cx-take .pk-item', {hasText: 'Auch'}).first().click();
+            await p.fill('.cx-take [name="cx_date"]', '2026-06-01'); await p.fill('.cx-take [name="cx_to"]', '');
+            await p.click('.cx-take [data-cx-run]');
+            await p.waitForSelector('.cx-take [data-cx-dout] .error', {timeout: 20000});
+            const msg = await p.textContent('.cx-take [data-cx-dout] .error');
+            assert.match(msg, /Pas encore de météo pour 2026/); assert.match(msg, /de 1836 à 2025/);
+            assert.strictEqual(await p.locator('.cx-take [data-cx-dres] li').count(), 0, 'rien à cocher');
+            // une semaine entière hors des données : la raison une seule fois, pas 7 lignes vides
+            await p.fill('.cx-take [name="cx_date"]', '2026-06-01'); await p.fill('.cx-take [name="cx_to"]', '2026-06-07');
+            await p.click('.cx-take [data-cx-run]');
+            await p.waitForSelector('.cx-take [data-cx-dout] .error', {timeout: 30000});
+            assert.match(await p.textContent('.cx-take [data-cx-dout] .error'), /de 1836 à 2025/);
+            await p.keyboard.press('Escape');
+        });
         await t('🌦 le détail d’un jour (fiche) : « 🧺 Au panier » prend la météo du jour avec sa source', async () => {
             await go('personnes', {currentPersonId: 1}); await p.waitForSelector('#workspace .event-row[data-event-id="1"]');
             await p.evaluate(() => window.LCNDA_EXT.meteo.openDay(1)); await p.waitForSelector('.wx-dialog [data-wx-cxtake]', {timeout: 20000});
@@ -360,7 +380,6 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const m = await ctx.newPage(); m.on('pageerror', e => errs.push(e.message));
             await m.setViewportSize({width: 390, height: 800});
             await m.goto(base); await m.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.sendTargets, null, {timeout: 60000});
-            if (!(await m.evaluate(() => !!window.LCNDA_EXT?.connexions))) { await m.addStyleTag({url: base + 'assets/css/connexions.css'}); await m.addScriptTag({url: base + 'assets/js/heritage-connexions.js'}); }
             await m.waitForFunction(() => window.LCNDA_EXT?.connexions);
             await m.evaluate(() => window.LCNDA_EXT.connexions.take([{kind: 'datum', title: 'Lieu', value: 'Auch'}]));
             await m.waitForSelector('#cx-pill:not([hidden])');

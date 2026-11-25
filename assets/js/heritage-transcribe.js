@@ -1158,8 +1158,8 @@
         /* ─── lecture automatique ─── */
         /** l'image pour la lecture (gris) ou l'export (couleurs) : améliorée (« Mieux voir », pleine taille) si c'est choisi dans « Plus ▾ ».
          *  Sans redressement ni miroir : les zones posées par la lecture restent en pixels de l'image. */
-        async function filteredCanvas({gray = true} = {}) {
-            const v = t.data.view, enhanced = useEnh();
+        async function filteredCanvas({gray = true, enhanced = useEnh()} = {}) {
+            const v = t.data.view;
             if (!imgW || !imgH) throw new Error(i18n('Image de l’acte illisible.'));
             let i = await new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ko(new Error(i18n('Image de l’acte illisible.'))); im.src = origSrc(); });
             if (enhanced && TV.needsPixels(v) && getEnh().ok) { srcEl = srcEl || i; if (!await ensureSource()) throw new Error(i18n('« Mieux voir » : cette image n’a pas pu être préparée.')); i = await createImageBitmap(await enh.full(v)); }
@@ -1210,12 +1210,15 @@
             if (!cropChoice && ask) { cropChoice = await ext.txActe.askCrop(await loadSrcImg(), b) || ''; if (!cropChoice) return false; }
             return cropChoice === 'crop' ? {x: b.x, y: b.y, w: b.w, h: b.h} : null;
         }
-        /** l'image de la zone (ou de toute la page), en PNG base64 — pour la lecture approfondie */
-        async function areaB64(box, {max = 0} = {}) {
-            const full = await filteredCanvas({gray: false}); let c = full;
+        /** l'image de la zone (ou de toute la page), en PNG base64 — pour la lecture approfondie. mode (🖼 choisi dans sa fenêtre) :
+         *  'orig' l'image d'origine, 'mine' avec « Mieux voir », 'auto' l'origine améliorée doucement (heritage-transcribe-acte.js autoEnhance) ;
+         *  sans mode : comme « Lire et exporter l'image améliorée ». Une copie en mémoire : le fichier de l'acte n'est jamais touché. */
+        async function areaB64(box, {max = 0, mode = ''} = {}) {
+            const full = await filteredCanvas(mode ? {gray: false, enhanced: mode === 'mine'} : {gray: false}); let c = full;
             if (box) { c = document.createElement('canvas'); c.width = Math.max(1, Math.min(box.w, imgW - box.x)); c.height = Math.max(1, Math.min(box.h, imgH - box.y)); const g = c.getContext('2d');
                 if (box.mask) { g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); box.mask.forEach(z => g.drawImage(full, z.x, z.y, z.w, z.h, z.x - box.x, z.y - box.y, z.w, z.h)); } else g.drawImage(full, box.x, box.y, c.width, c.height, 0, 0, c.width, c.height); }
             if (max && Math.max(c.width, c.height) > max) { const k = max / Math.max(c.width, c.height), r = document.createElement('canvas'); r.width = Math.round(c.width * k); r.height = Math.round(c.height * k); r.getContext('2d').drawImage(c, 0, 0, r.width, r.height); c = r; }
+            if (mode === 'auto' && ext.txActe?.autoEnhance) c = ext.txActe.autoEnhance(c, {target: 2000, max});
             const b = await new Promise(r2 => c.toBlob(r2, 'image/png'));
             return new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); });
         }
@@ -1393,7 +1396,7 @@
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
             const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
             const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: () => areaB64(b, {max: 2200}), onReading: (txt, model) => keepReading(txt, 'deep', model), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), onReading: (txt, model) => keepReading(txt, 'deep', model), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
                 existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
                 onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
@@ -1429,7 +1432,7 @@
             let txt = '', err = '', b = null;
             try {
                 b = await pageArea({ask: false}); if (b === false) b = null;
-                const img = await areaB64(b, {max: 2200});
+                const img = await areaB64(b, {max: 2200, mode: ext.txActe?.imageMode?.() || 'auto'}); // 🖼 l'image choisie dans la fenêtre
                 if (!R.stop) { const r = await post('tx_deep_read', {model: R.model, language: R.lang, image_b64: img}); R.job = r.result.id; }
                 while (!R.stop && R.job) { await new Promise(res => setTimeout(res, 900)); if (R.stop) break;
                     const j = await api('tx_deep_job', {id: R.job}); if (j.state === 'running') continue;

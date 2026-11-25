@@ -8,6 +8,9 @@
  *  - Sur un appareil invité ou en mode consultation : rien ne s'affiche ici (le serveur refuse aussi). */
 (() => {
     'use strict';
+    // chargé une seule fois : une 2e copie du script (index.php + injection) doublait les écouteurs → deux fenêtres l'une sur l'autre
+    if (window.__lcndaComptesFamille) return;
+    window.__lcndaComptesFamille = true;
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (_, k) => (v && k in v ? v[k] : `{${k}}`)));
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI || {};

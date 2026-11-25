@@ -60,6 +60,37 @@
 
     /* ═════════ G. Lecture approfondie (Ollama, sur cet ordinateur) ═════════ */
     const DEEP_KEY = 'genealogie-tx-deep-model';
+    /* 🖼 l'image envoyée au modèle : améliorée automatiquement (doux, par défaut), avec le réglage « Mieux voir », ou d'origine.
+     * Toujours une copie temporaire (canvas) : le fichier de l'acte n'est jamais modifié ni réenregistré. */
+    const IMG_KEY = 'genealogie-htr-image-mode', IMG_MODES = ['auto', 'mine', 'orig'];
+    const imageMode = () => { try { const v = localStorage.getItem(IMG_KEY); return IMG_MODES.includes(v) ? v : 'auto'; } catch (_) { return 'auto'; } };
+    const IMG_USED = {auto: 'Image envoyée : améliorée automatiquement', mine: 'Image envoyée : avec ton réglage « Mieux voir »', orig: 'Image envoyée : l’image d’origine'};
+    /** amélioration douce pour un modèle d'IA (pas de noir et blanc franc, qui le gêne) : petite image agrandie (grand côté ≈ target,
+     *  ×2,5 au plus), niveaux étirés d'après l'histogramme (0,5 % – 99,5 %, pente ×3 au plus), un peu de netteté. Rend un nouveau canvas. */
+    function autoEnhance(src, {target = 2000, max = 0} = {}) {
+        let w = src.width, h = src.height; const L = Math.max(w, h), goal = max ? Math.min(target, max) : target;
+        const k = L && L < goal ? Math.min(goal / L, 2.5) : 1;
+        w = Math.max(1, Math.round(w * k)); h = Math.max(1, Math.round(h * k));
+        const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d', {willReadFrequently: true});
+        g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high'; g.drawImage(src, 0, 0, w, h);
+        let im; try { im = g.getImageData(0, 0, w, h); } catch (_) { return c; }
+        const d = im.data, n = w * h, hist = new Uint32Array(256);
+        for (let i = 0; i < d.length; i += 4) hist[(d[i] * 77 + d[i + 1] * 150 + d[i + 2] * 29) >> 8]++;
+        let lo = 0, hi = 255, acc = 0; const cut = n * .005;
+        for (; lo < 255; lo++) { acc += hist[lo]; if (acc > cut) break; }
+        acc = 0; for (; hi > 0; hi--) { acc += hist[hi]; if (acc > cut) break; }
+        const lut = new Uint8ClampedArray(256);
+        if (hi - lo >= 16) { const s = Math.min(3, 255 / (hi - lo)); const mid = (lo + hi) / 2; for (let v = 0; v < 256; v++) lut[v] = Math.round(127.5 + (v - mid) * s); }
+        else for (let v = 0; v < 256; v++) lut[v] = v;
+        for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i + 1] = lut[d[i + 1]]; d[i + 2] = lut[d[i + 2]]; }
+        // un peu de netteté : masque flou (flou 3 × 3), force 0,5
+        const out = new Uint8ClampedArray(d), AMT = .5;
+        for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) { const p = (y * w + x) * 4;
+            for (let ch = 0; ch < 3; ch++) { const q = p + ch, r = w * 4;
+                const b = (d[q - r - 4] + d[q - r] + d[q - r + 4] + d[q - 4] + d[q] + d[q + 4] + d[q + r - 4] + d[q + r] + d[q + r + 4]) / 9;
+                out[q] = d[q] + AMT * (d[q] - b); } }
+        im.data.set(out); g.putImageData(im, 0, 0); return c;
+    }
     const gb = n => `${(n / 1e9).toLocaleString(document.documentElement.lang || 'fr', {maximumFractionDigits: 1})} Go`;
     /**
      * o.getImage() : l'image à lire (base64 PNG / JPEG, la zone recadrée) ; o.lang : la langue du texte ;
@@ -67,7 +98,7 @@
      * o.onCompare(zone) : ajoute ce qu'il faut sous les deux textes (corrections proposées, case « ▤ Relier les lignes à l'image »).
      */
     async function openDeep(o = {}) {
-        let st = null, job = null, timer = 0, model = '';
+        let st = null, job = null, timer = 0, model = '', both = false, stepLabel = '';
         try { model = localStorage.getItem(DEEP_KEY) || ''; } catch (_) {}
         const dlg = ext.openDialog({eyebrow: i18n('LECTURE APPROFONDIE'), title: `🔬 ${i18n('Lecture approfondie')}`, wide: true, body: '<div data-txa-deep></div>',
             onOpen: d => { d.addEventListener('close', () => { clearTimeout(timer); if (job && job.state === 'running') post('tx_deep_cancel', {id: job.id}).catch(() => {}); }); }});
@@ -75,6 +106,7 @@
         const info = () => `<div class="h-txa-grid">
             <span class="k">${esc(i18n('Ce qu’il faut'))}</span><span>${esc(i18n('Ollama (gratuit, open source) et un modèle vision ouvert, au choix :'))}</span>
             <span class="k">${esc(i18n('Modèle', {ctx: 'ia'}))}</span><span class="h-txa-models">${modelsHtml()}</span>
+            ${imgHtml()}
             <span class="k">${esc(i18n('Mémoire'))}</span><span>${esc(st?.ram_gb ? i18n('cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois', {n: st.ram_gb}) : i18n('8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois'))}</span>
             <span class="k">${esc(i18n('Vitesse'))}</span><span>${esc(i18n('≈ 20 à 60 s par page sur un ordinateur récent'))}</span>
             <span class="k">${esc(i18n('Confidentialité'))}</span><span>${esc(i18n('rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur'))}</span></div>`;
@@ -87,6 +119,12 @@
         const modelsHtml = () => { const all = st?.models || [], main = all.filter(m => m.tried || m.recommended || m.tag === model), test = all.filter(m => !main.includes(m)), oth = st?.others || [];
             return main.map(modelRow).join('') + (test.length ? `<details class="h-txa-more"${test.some(m => m.tag === model) ? ' open' : ''}><summary>🧪 ${esc(i18n('Autres modèles à essayer ({n})', {n: test.length}))}</summary><p class="ui-hint">${esc(i18n('Pas encore essayés par l’app sur des actes : compare-les sur tes actes (« Les deux lectures côte à côte ») avant de t’y fier.'))}</p>${test.map(modelRow).join('')}</details>` : '')
                 + `<details class="h-txa-more"${oth.some(m => m.tag === model) ? ' open' : ''}><summary>⚙️ ${esc(i18n('Avancé : autre modèle (Ollama)'))}</summary><p class="ui-hint">${esc(i18n('Les modèles déjà installés dans Ollama sur cet ordinateur. Un modèle qui ne sait pas lire une image ne peut pas lire l’acte. Pas essayé par l’app : vérifie toujours le texte.'))}</p>${oth.length ? oth.map(m => `<label class="h-txa-model"><input type="radio" name="txa_model" value="${esc(m.tag)}" ${m.tag === model ? 'checked' : ''} ${m.vision ? '' : 'disabled'}> <b>${esc(m.label)}</b> <small class="muted">${esc(m.vision ? i18n('lit les images') : i18n('ne lit pas les images'))}</small></label>`).join('') : `<p class="muted">${esc(i18n('Aucun autre modèle installé. Dans un terminal : « ollama pull » suivi du nom du modèle.'))}</p>`}</details>`; };
+        /** 🖼 sous le choix du modèle : quelle image envoyer (retenu dans IMG_KEY), et « Essayer les deux et comparer » (une seule page) */
+        const imgHtml = () => { if (o.setupOnly || !(o.getImage || o.all)) return ''; const cur = imageMode();
+            const opts = [['auto', '✨', 'Améliorer l’image automatiquement', 'Contraste ajusté, un peu de netteté, petite image agrandie (pas de noir et blanc forcé).'], ['mine', '🎚️', 'Utiliser mon réglage « Mieux voir »', 'Les réglages de « 🎚️ Mieux voir » de cette page.'], ['orig', '🖼', 'Image d’origine', 'L’image telle quelle.']];
+            return `<span class="k">${esc(i18n('Image'))}</span><span class="h-txa-models h-txa-imgmode" data-txa-imgmode>${opts.map(([v, ic, l, h]) => `<label class="h-txa-model"><input type="radio" name="txa_img" value="${v}" ${v === cur ? 'checked' : ''}> ${ic} <b>${esc(i18n(l))}</b>${v === 'auto' ? ` <span class="ui-badge is-green">${esc(i18n('conseillé'))}</span>` : ''} <small class="muted">${esc(i18n(h))}</small></label>`).join('')}
+                ${o.getImage && !o.all ? `<label class="checkbox-line"><input type="checkbox" data-txa-both ${both ? 'checked' : ''}> ${esc(i18n('Essayer les deux et comparer'))} <small class="muted">${esc(i18n('lit l’image d’origine et l’image améliorée, puis montre les deux textes côte à côte (deux fois plus long)'))}</small></label>` : ''}
+                <small class="muted">${esc(i18n('Une copie améliorée est envoyée au modèle : l’image de l’acte n’est jamais modifiée.'))}</small></span>`; };
         const pick = () => { const r = box.querySelector('[name="txa_model"]:checked'); if (r) { model = r.value; try { localStorage.setItem(DEEP_KEY, model); } catch (_) {} } return model; };
         async function refresh() {
             box.innerHTML = UI().spinner ? UI().spinner(i18n('Recherche d’Ollama sur cet ordinateur…')) : '…';
@@ -109,22 +147,22 @@
             if (ready && o.all) { const out = box.querySelector('[data-txa-out]'); out.innerHTML = '<div class="h-txa-cmp2 is-one" hidden></div>'; o.onCompare?.(out); }
         }
         const prog = (on, pct, txt) => { const p = box.querySelector('[data-txa-prog]'); if (!p) return; p.hidden = !on; p.querySelector('i').style.width = `${Math.max(0, Math.min(100, pct))}%`; p.querySelector('[data-txa-progtxt]').textContent = txt || ''; };
-        async function poll(onDone) {
-            let j; try { j = await api('tx_deep_job', {id: job.id}); } catch (e) { job = null; prog(false); box.querySelectorAll('[data-txa-read], [data-txa-pull]').forEach(x => { x.disabled = false; }); const out = box.querySelector('[data-txa-out]'); if (out) out.innerHTML = notice('error', `${esc(i18n('Impossible de suivre la lecture : {x}', {x: e.message || '?'}))}`); return toast(e.message, 'error'); }
+        async function poll(onDone, onFail) {
+            let j; try { j = await api('tx_deep_job', {id: job.id}); } catch (e) { job = null; onFail?.(); prog(false); box.querySelectorAll('[data-txa-read], [data-txa-pull]').forEach(x => { x.disabled = false; }); const out = box.querySelector('[data-txa-out]'); if (out) out.innerHTML = notice('error', `${esc(i18n('Impossible de suivre la lecture : {x}', {x: e.message || '?'}))}`); return toast(e.message, 'error'); }
             job = {...job, ...j};
             if (j.state === 'running') {
                 if (j.kind === 'pull') prog(true, j.total ? j.completed / j.total * 100 : 3, j.total ? i18n('Téléchargement du modèle… {done} sur {total}', {done: gb(j.completed), total: gb(j.total)}) : i18n('Téléchargement du modèle…'));
-                else { prog(true, Math.min(95, j.elapsed * 2), (o.pageLabel ? o.pageLabel + ' · ' : '') + i18n('Lecture approfondie… {n} s', {n: j.elapsed})); const out = box.querySelector('[data-txa-out]'); if (out && j.text) out.innerHTML = `<pre class="h-txa-live">${esc(j.text)}</pre>`; }
-                timer = setTimeout(() => poll(onDone), 900); return;
+                else { prog(true, Math.min(95, j.elapsed * 2), (o.pageLabel ? o.pageLabel + ' · ' : '') + (stepLabel ? stepLabel + ' · ' : '') + i18n('Lecture approfondie… {n} s', {n: j.elapsed})); const out = box.querySelector('[data-txa-out]'); if (out && j.text) out.innerHTML = `<pre class="h-txa-live">${esc(j.text)}</pre>`; }
+                timer = setTimeout(() => poll(onDone, onFail), 900); return;
             }
             prog(false);
             box.querySelectorAll('[data-txa-read], [data-txa-pull]').forEach(x => { x.disabled = false; }); // jamais un bouton grisé pour rien
             if (j.state === 'error' || j.state === 'cancelled') { // le message reste dans la fenêtre (une bulle passe trop vite)
                 const msg = j.state === 'cancelled' ? i18n('La lecture a été arrêtée.') : (j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.'));
                 const out = box.querySelector('[data-txa-out]'); if (out) out.innerHTML = notice('error', `${esc(msg)}<br><small>${esc(i18n('Modèle : {m} · {n} s', {m: j.model || '?', n: String(j.elapsed ?? '?')}))}${j.detail ? ` · ${esc(j.detail)}` : ''}</small>`);
-                return toast(msg, 'error');
+                onFail?.(); return toast(msg, 'error');
             }
-            if (j.state === 'done') onDone(j);
+            if (j.state === 'done') onDone(j); else onFail?.();
         }
         // 🔁 un modèle d'IA écrit parfois deux fois de suite la même ligne : le signaler, et « Retirer le doublon » (↶ Annuler)
         const normLine = l => l.toLowerCase().replace(/[\s.,;:!?«»"'’-]+/g, ' ').trim();
@@ -139,11 +177,15 @@
             el.innerHTML = n ? `${notice('warn', `🔁 ${esc(i18n('Ligne répétée deux fois de suite : {n}', {n}))}`)}<button type="button" class="button small secondary" data-txa-dedup>${esc(i18n('Retirer le doublon'))}</button>`
                 : `<button type="button" class="button small secondary" data-txa-redup>↶ ${esc(i18n('Annuler'))}</button>`;
         }
-        function compare(deepText) {
-            const out = box.querySelector('[data-txa-out]'); const two = !!String(o.htrText || '').trim();
-            out.innerHTML = `<h4>${esc(two ? i18n('Les deux lectures côte à côte') : i18n('Le texte lu'))}${o.pageLabel ? ` · ${esc(o.pageLabel)}` : ''}</h4><div class="h-txa-cmp2${two ? '' : ' is-one'}">
+        /** deepText : le texte lu, used : l'image envoyée (auto / mine / orig) ; alt : {mode, text} la lecture de l'image d'origine (« Essayer les deux ») */
+        function compare(deepText, used = 'orig', alt = null) {
+            const out = box.querySelector('[data-txa-out]'); const two = !alt && !!String(o.htrText || '').trim();
+            const usedTag = m => `<small class="muted h-txa-imgused" data-txa-imgused="${esc(m)}">🖼 ${esc(i18n(IMG_USED[m] || IMG_USED.orig))}</small>`;
+            const keepBtns = (key, many) => many && o.existing ? `<span class="h-txa-keep2"><button type="button" class="button small" data-txa-keep="${key}" data-txa-mode="replace">⇄ ${esc(i18n('Remplacer le texte'))}</button><button type="button" class="button small secondary" data-txa-keep="${key}" data-txa-mode="append">＋ ${esc(i18n('Ajouter à la suite'))}</button></span><small class="muted">${esc(i18n('Le texte d’avant reste dans 🕘 Versions.'))}</small>` : `<button type="button" class="button small${key === 'htr' ? ' secondary' : ''}" data-txa-keep="${key}">✓ ${esc(many ? i18n('Garder celle-ci') : i18n('Mettre dans le texte'))}</button>`;
+            out.innerHTML = `<h4>${esc(alt ? i18n('Les deux images côte à côte') : two ? i18n('Les deux lectures côte à côte') : i18n('Le texte lu'))}${o.pageLabel ? ` · ${esc(o.pageLabel)}` : ''}</h4><div class="h-txa-cmp2${two || alt ? '' : ' is-one'}">
                 ${two ? `<div><b>✍ ${esc(i18n('Écriture à la main'))}</b><textarea data-txa-t="htr" spellcheck="false">${esc(o.htrText)}</textarea><button type="button" class="button small secondary" data-txa-keep="htr">✓ ${esc(i18n('Garder celle-ci'))}</button></div>` : ''}
-                <div><b>🔬 ${esc(i18n('Lecture approfondie'))}</b><textarea data-txa-t="deep" spellcheck="false">${esc(deepText)}</textarea>${two && o.existing ? `<span class="h-txa-keep2"><button type="button" class="button small" data-txa-keep="deep" data-txa-mode="replace">⇄ ${esc(i18n('Remplacer le texte'))}</button><button type="button" class="button small secondary" data-txa-keep="deep" data-txa-mode="append">＋ ${esc(i18n('Ajouter à la suite'))}</button></span><small class="muted">${esc(i18n('Le texte d’avant reste dans 🕘 Versions.'))}</small>` : `<button type="button" class="button small" data-txa-keep="deep">✓ ${esc(two ? i18n('Garder celle-ci') : i18n('Mettre dans le texte'))}</button>`}</div></div>`;
+                ${alt ? `<div><b>🔬 ${esc(i18n('Image d’origine'))}</b><textarea data-txa-t="deep0" spellcheck="false">${esc(alt.text)}</textarea>${usedTag(alt.mode)}${keepBtns('deep0', true)}</div>` : ''}
+                <div><b>🔬 ${esc(alt ? i18n(used === 'mine' ? 'Avec ton réglage « Mieux voir »' : 'Image améliorée') : i18n('Lecture approfondie'))}</b><textarea data-txa-t="deep" spellcheck="false">${esc(deepText)}</textarea>${usedTag(used)}${keepBtns('deep', two || !!alt)}</div></div>`;
             if (o.onCompareAll) { out.insertAdjacentHTML('beforeend', `<p class="h-txa-all"><button type="button" class="button small secondary" data-txa-all>⚖️ ${esc(i18n('Comparer toutes les lectures, mot par mot'))}</button> <small class="muted">${esc(i18n('Chaque lecture (chaque modèle) est gardée : prends le meilleur de chacune.'))}</small></p>`); out.querySelector('[data-txa-all]').addEventListener('click', () => o.onCompareAll()); }
             paintRepeats(); out.querySelector('[data-txa-t="deep"]')?.addEventListener('input', () => paintRepeats());
             o.onCompare?.(out); // 🪄 corrections proposées et ▤ « Relier les lignes à l'image » (app-lignes-alignement.js, posés par l'Atelier)
@@ -156,16 +198,27 @@
                 return;
             }
             if (b.matches('[data-txa-readall]')) { const m = pick(); dlg.close(); o.all.run(m); return; }
-            if (b.matches('[data-txa-read]')) {
-                let img; try { img = await o.getImage(); } catch (err) { return toast(err.message, 'error'); }
-                try { const r = await post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img}); job = {id: r.result.id, state: 'running'}; b.disabled = true; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(j => { b.disabled = false; o.onReading?.(j.text, pick()); compare(j.text); }); } catch (err) { toast(err.message, 'error'); }
+            if (b.matches('[data-txa-read]')) { // 🖼 une lecture (l'image choisie), ou deux (« Essayer les deux » : l'origine puis l'améliorée)
+                const mode = imageMode(), runs = both ? ['orig', mode === 'orig' ? 'auto' : mode] : [mode], got = [];
+                b.disabled = true;
+                for (const [i, m] of runs.entries()) {
+                    let img; try { img = await o.getImage(m); } catch (err) { b.disabled = false; stepLabel = ''; return toast(err.message, 'error'); }
+                    stepLabel = runs.length > 1 ? i18n('Image {i} sur {n}', {i: i + 1, n: runs.length}) : '';
+                    const j = await new Promise(res => { post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img}).then(r => { job = {id: r.result.id, state: 'running'}; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(res, () => res(null)); }, err => { toast(err.message, 'error'); res(null); }); });
+                    if (!j || !box.isConnected) { b.disabled = false; stepLabel = ''; return; }
+                    got.push({mode: m, text: String(j.text || '')}); o.onReading?.(j.text, pick());
+                }
+                b.disabled = false; stepLabel = ''; const last = got[got.length - 1];
+                compare(last.text, last.mode, got.length > 1 ? got[0] : null);
                 return;
             }
             if (b.matches('[data-txa-dedup]')) { const ta = box.querySelector('[data-txa-t="deep"]'); dedupBefore = ta.value; ta.value = dedup(ta.value); paintRepeats(); return; }
             if (b.matches('[data-txa-redup]')) { const ta = box.querySelector('[data-txa-t="deep"]'); if (dedupBefore != null) ta.value = dedupBefore; dedupBefore = null; paintRepeats(); return; }
             if (b.dataset.txaKeep) { const v = box.querySelector(`[data-txa-t="${b.dataset.txaKeep}"]`)?.value || ''; if (!v.trim()) return; o.onKeep?.(v, b.dataset.txaKeep, b.dataset.txaMode || 'append'); dlg.close(); }
         });
-        box.addEventListener('change', e => { if (e.target.name === 'txa_model') { pick(); refresh(); } });
+        box.addEventListener('change', e => { if (e.target.name === 'txa_model') { pick(); refresh(); }
+            if (e.target.name === 'txa_img') { try { localStorage.setItem(IMG_KEY, e.target.value); } catch (_) {} }
+            if (e.target.matches('[data-txa-both]')) both = e.target.checked; });
         refresh();
         return dlg;
     }
@@ -353,5 +406,5 @@
         return dlg;
     }
 
-    ext.txActe = {detectCrop, askCrop, lowNoticeHtml, openDeep, openFound};
+    ext.txActe = {detectCrop, askCrop, lowNoticeHtml, openDeep, openFound, autoEnhance, imageMode};
 })();

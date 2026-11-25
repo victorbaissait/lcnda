@@ -353,7 +353,7 @@
         return new Promise(res => {
             const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-inv';
             const opt = (v, l, sel) => `<option value="${esc(v)}" ${sel ? 'selected' : ''}>${esc(l)}</option>`;
-            const role = r => (r === 'main' ? '' : r === 'primary' ? T(' (principale)') : T(' (secondaire)'));
+            const role = r => (r === 'main' ? '' : r === 'primary' ? ` ${T('(principale)')}` : ` ${T('(secondaire)')}`);
             dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">🕵️ ${esc(T('ENQUÊTE'))}</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></div>
                 <div class="cx-body">${multiple ? `<div class="cx-invs">${list.map((i, k) => `<label class="checkbox-line"><input type="checkbox" name="inv" value="${i.id}" ${k === 0 ? 'checked' : ''}> ${esc(i.title)}<small class="muted">${esc(role(i.role))}${i.status !== 'open' ? ` · ${esc(T('fermée'))}` : ''}</small></label>`).join('') || `<p class="muted">${esc(T('Aucune enquête pour cette personne.'))}</p>`}</div>`
                     : `<label>${esc(T('Enquête'))}<select name="inv">${list.map((i, k) => opt(i.id, `${i.title}${role(i.role)}${i.status !== 'open' ? ` · ${T('fermée')}` : ''}`, k === 0)).join('')}${allowNew && personId ? opt('new', T('＋ Une nouvelle enquête…'), !list.length) : ''}</select></label>

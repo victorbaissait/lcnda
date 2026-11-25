@@ -108,7 +108,9 @@
     const COUNTRY = {FR: 'France', BE: 'Belgique', CH: 'Suisse', LU: 'Luxembourg', IT: 'Italie', NL: 'Pays-Bas', ES: 'Espagne', DE: 'Allemagne', PT: 'Portugal', GB: 'Royaume-Uni', PL: 'Pologne', DK: 'Danemark', CZ: 'Tchéquie', SK: 'Slovaquie'};
     let regionNames = null; // les autres pays (packs du monde) : le nom donné par le navigateur
     const countryName = c => COUNTRY[c] || (() => { try { regionNames = regionNames || new Intl.DisplayNames(['fr'], {type: 'region'}); return regionNames.of(c) || c; } catch (_) { return c; } })();
-    const emptyText = r => i18n(r.why === 'nodata' ? 'Les données météo ne sont pas installées.' : r.why === 'place' ? 'Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'
+    // 🧺 une date hors des données installées ici (trop tôt, ou pas encore dans les packs) : dire de quand à quand c'est possible
+    const outOfSpan = r => { const y = Number(String(r?.date || '').slice(0, 4)); return r?.why === 'far' && r.span && y && (y < r.span.from || y > r.span.to) ? y : 0; };
+    const emptyText = r => outOfSpan(r) ? i18n(outOfSpan(r) > r.span.to ? 'Pas encore de météo pour {year} ici : les données installées couvrent ce lieu de {from} à {to}.' : 'Pas de météo pour {year} ici : les données installées couvrent ce lieu de {from} à {to}.', {year: String(outOfSpan(r)), from: String(r.span.from), to: String(r.span.to)}) : i18n(r.why === 'nodata' ? 'Les données météo ne sont pas installées.' : r.why === 'place' ? 'Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'
         : r.why === 'date' ? 'La date n’est pas connue au jour près.'
         : r.why === 'out' ? 'Pas de météo pour ce lieu : aucune station connue à moins de 150 km dans les données installées (Réglages → 🌦 Météo d’autrefois : le pack Europe et les packs du monde ajoutent les autres pays).' : r.first ? 'Pas de relevé connu près d’ici avant {year} (première station : {name}).' : 'Pas de relevé connu près d’ici avant {year}.', {year: String(r.first?.year || 1836), name: r.first?.name || ''});
     const sourcesLine = r => (r.sources || []).map(x => { const m = x.mention || x.nom || ''; return `${x.id === 'era5' && r.hours_source && r.reliability !== 'estimated' ? 'Heures : ' : ''}${m}${x.licence && !/Copernicus|20th/.test(m) ? ', ' + x.licence : ''}`; }).join(' · ');
@@ -353,6 +355,7 @@
                     rows.push([days[i], `${lk.icon} ${lk.title}`, d.tn != null ? T(d.tn, s) : '', d.tx != null ? T(d.tx, s) : '', d.rr != null ? R(d.rr, s) : '', strip(badge(r))]); }
                 catch (e) { if (e.notInstalled) throw e; rows.push([days[i], '—', '', '', '', e.message]); }
             }
+            if (rows.length && rows.every(x => x[1] === '—') && new Set(rows.map(x => x[5])).size === 1) throw new Error(rows[0][5]); // rien sur toute la période : la raison une fois (ex. « couvrent ce lieu de 1836 à 2025 »)
             return {columns: [i18n('Jour'), i18n('Temps'), i18n('Min.'), i18n('Max.'), i18n('Pluie'), i18n('Fiabilité')], rows, source, url};
         }});
 
