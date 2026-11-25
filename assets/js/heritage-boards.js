@@ -615,7 +615,7 @@
             const box = el.querySelector('[data-bd-map]'); if (!box) return;
             const {pts, paths} = await mapPoints(it);
             if (!ext.miniMap) { box.innerHTML = `<p class="muted">${esc(i18n('Carte indisponible.'))}</p>`; return; }
-            box.innerHTML = ext.miniMap(pts, paths, {height: Math.round(1000 * Math.max(60, it.h - 30) / Math.max(60, it.w)), emptyText: i18n(it.mapSrc || (it.pins || []).length ? 'Aucun lieu avec ses coordonnées.' : 'Choisis à droite une personne, une famille ou une enquête, ou pose des repères.')});
+            box.innerHTML = ext.miniMap(pts, paths, {interactive: false, height: Math.round(1000 * Math.max(60, it.h - 30) / Math.max(60, it.w)), emptyText: i18n(it.mapSrc || (it.pins || []).length ? 'Aucun lieu avec ses coordonnées.' : 'Choisis à droite une personne, une famille ou une enquête, ou pose des repères.')});
         }
         // ── cadres : ce qui est dedans (entièrement) bouge avec eux ──
         const framed = f => items.filter(i => i !== f && i.type !== 'frame' && i.x >= f.x - 1 && i.y >= f.y - 1 && i.x + i.w <= f.x + f.w + 1 && i.y + i.h <= f.y + (f.collapsed ? (f.fh || f.h) : f.h) + 1);

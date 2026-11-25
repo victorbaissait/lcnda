@@ -229,19 +229,22 @@
             this.lineEls = this.paths.map(p => { const l = document.createElementNS(SVGNS, 'polyline'); l.setAttribute('fill', 'none'); l.setAttribute('stroke', p.color || '#0066cc'); l.setAttribute('stroke-width', p.width || 3); if (p.dashed) l.setAttribute('stroke-dasharray', '8 6'); l.setAttribute('stroke-linecap', 'round'); l.setAttribute('stroke-linejoin', 'round'); l.setAttribute('opacity', '.9'); this.gLines.appendChild(l); return l; });
             this.circleEls = this.circles.map(c => { const l = document.createElementNS(SVGNS, 'polygon'); l.setAttribute('class', 'mm-circle'); if (c.color) l.style.stroke = c.color; this.gCircles.appendChild(l); return l; });
             this.clusterEls = [];
-            el.insertAdjacentHTML('beforeend', `<div class="mm-ctl" role="toolbar" aria-label="${esc(T('Zoom de la carte'))}">
+            const live = cfg.interactive !== false; // interactive: false → carte posée dans un autre outil qui a ses propres gestes (ex. Tableaux)
+            el.insertAdjacentHTML('beforeend', `${live ? `<div class="mm-ctl" role="toolbar" aria-label="${esc(T('Zoom de la carte'))}">
                 <button type="button" data-mm-zoom="1" aria-label="${esc(T('Zoomer'))}" title="${esc(T('Zoomer (touche +)'))}">+</button>
                 <button type="button" data-mm-zoom="-1" aria-label="${esc(T('Dézoomer'))}" title="${esc(T('Dézoomer (touche −)'))}">−</button>
                 <button type="button" data-mm-fit aria-label="${esc(T('Tout voir'))}" title="${esc(T('Recadrer sur tous les points'))}"><span aria-hidden="true">⤢</span><span class="mm-lab" aria-hidden="true">${esc(T('Tout voir'))}</span></button>
                 <button type="button" data-mm-nb aria-pressed="false" aria-label="${esc(T('Noir et blanc'))}" title="${esc(T('Fond sobre : contours noirs sur blanc, pour bien lire les points et pour imprimer'))}"><span aria-hidden="true">◐</span><span class="mm-lab" aria-hidden="true">${esc(T('Noir et blanc'))}</span></button>
-            </div><div class="mm-credit" data-mm-credit></div><div class="mm-tip" role="status" hidden></div>`);
+            </div>` : ''}<div class="mm-credit" data-mm-credit></div><div class="mm-tip" role="status" hidden></div>`);
             this.ctl = el.querySelector(':scope > .mm-ctl'); this.credit = el.querySelector(':scope > .mm-credit'); this.tip = el.querySelector(':scope > .mm-tip');
-            el.classList.add('mm-on'); el.setAttribute('role', 'region'); el.tabIndex = 0;
-            el.setAttribute('aria-label', T('Carte : molette, pincement ou + − pour zoomer ; glisser ou flèches pour se déplacer'));
+            if (live) {
+                el.classList.add('mm-on'); el.setAttribute('role', 'region'); el.tabIndex = 0;
+                el.setAttribute('aria-label', T('Carte : molette, pincement ou + − pour zoomer ; glisser ou flèches pour se déplacer'));
+            }
             el.dataset.mmReady = '1';
             this.nb = nbOn(); this.syncNb();
             this.tileMap = new Map();
-            this.bind();
+            if (live) this.bind();
             this.view = null;
             const go = () => {
                 if (!this.size()) return false;
@@ -488,7 +491,8 @@
 
         /* ── souris, doigts, clavier ── */
         bind() {
-            const el = this.el, rel = e => { const r = el.getBoundingClientRect(); return [e.clientX - r.left - el.clientLeft, e.clientY - r.top - el.clientTop]; };
+            // position dans la carte, en pixels de la carte (même si une page agrandie / réduite la met à l'échelle)
+            const el = this.el, rel = e => { const r = el.getBoundingClientRect(), k = (r.width / (el.offsetWidth || r.width)) || 1; return [(e.clientX - r.left) / k - el.clientLeft, (e.clientY - r.top) / k - el.clientTop]; };
             el.addEventListener('wheel', e => {
                 if (!this.view) return; e.preventDefault();
                 let dy = e.deltaY * (e.deltaMode === 1 ? 33 : e.deltaMode === 2 ? 400 : 1);

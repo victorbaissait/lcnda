@@ -385,3 +385,29 @@ dialog.cx-put { width: min(720px, 94vw); max-width: 94vw; height: min(680px, 90v
 .cx-bform { display: grid; gap: 10px; }
 .cx-bform label { display: grid; gap: 4px; }
 .cx-bform-row { display: flex; gap: 12px; }
+/* 🗂 paniers dans des paniers : l'arbre, les en-têtes repliables, les cases à trois états ; de l'air partout */
+.cx-btree { gap: 6px; }
+.cx-bnode { margin: 6px 0 6px calc(var(--d, 1) * 0px); border: 1px solid var(--cx-line); border-radius: 12px; padding: 4px 12px 8px; background: var(--cx-bg); }
+.cx-bnode .cx-bnode { margin-left: 4px; }
+.cx-bhead { display: flex; gap: 8px; align-items: center; padding: 8px 2px; cursor: grab; flex-wrap: wrap; }
+.cx-bhead b { font-size: 14px; }
+.cx-bhead .cx-bmeta { margin-left: auto; }
+.cx-bhead input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--cx-blue); }
+.cx-tw2 { border: 0; background: none; color: var(--cx-mut); font-size: 14px; width: 26px; height: 26px; border-radius: 6px; cursor: pointer; }
+.cx-tw2:hover, .cx-tw2:focus-visible { background: var(--cx-grey); }
+.cx-bbody[hidden] { display: none !important; }
+.cx-bempty { margin: 4px 0 6px 34px; }
+.is-over { outline: 2px dashed var(--cx-blue); outline-offset: 2px; }
+.cx-pickbar { display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; background: var(--cx-blue-bg); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
+.cx-presets { display: flex; gap: 6px 8px; align-items: center; flex-wrap: wrap; background: var(--cx-green-bg); border-radius: 10px; padding: 10px 12px; font-size: 13px; }
+.cx-presets small { flex-basis: 100%; }
+.cx-choices { display: grid; gap: 8px; margin-top: 8px; }
+.cx-crumbs { color: var(--cx-soft); }
+.cx-dests-line { color: var(--cx-green); font-weight: 600; }
+.cx-bgh { padding-left: calc(8px + var(--d, 0) * 16px); align-items: center; }
+.cx-bgh input { width: 16px; height: 16px; accent-color: var(--cx-blue); }
+.cx-bdests { border: 1px solid var(--cx-line2, #c9ced8); border-radius: 10px; padding: 8px 12px; display: grid; gap: 4px; max-height: 180px; overflow: auto; }
+.cx-bdests legend { font-size: 12.5px; padding: 0 4px; }
+.cx-grow { flex: 1; min-width: 0; }
+.cx-grow select { width: 100%; }
+.cx-bview .cx-tk-head .cx-b { align-self: flex-start; }

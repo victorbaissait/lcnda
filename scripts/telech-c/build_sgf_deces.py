@@ -57,6 +57,13 @@ MODERN = {'ain': '01', 'aisne': '02', 'allier': '03', 'hautes alpes': '05', 'alp
           'var': '83', 'vaucluse': '84', 'vendee': '85', 'vienne': '86', 'haute vienne': '87', 'vosges': '88', 'yonne': '89'}
 
 
+ACCENTS = {'Ardeche': 'Ardèche', 'Ariege': 'Ariège', 'Bouches-du-Rhone': 'Bouches-du-Rhône', 'Charente-Inferieure': 'Charente-Inférieure', 'Correze': 'Corrèze',
+           "Cote-d'Or": "Côte-d'Or", 'Cotes-du-Nord': 'Côtes-du-Nord', 'Drome': 'Drôme', 'Finistere': 'Finistère', 'Herault': 'Hérault', 'Isere': 'Isère',
+           'Loire-Inferieure': 'Loire-Inférieure', 'Lozere': 'Lozère', 'Nievre': 'Nièvre', 'Puy-de-Dome': 'Puy-de-Dôme', 'Basses-Pyrenees': 'Basses-Pyrénées',
+           'Hautes-Pyrenees': 'Hautes-Pyrénées', 'Pyrenees-Orientales': 'Pyrénées-Orientales', 'Rhone': 'Rhône', 'Haute-Saone': 'Haute-Saône',
+           'Saone-et-Loire': 'Saône-et-Loire', 'Seine-Inferieure': 'Seine-Inférieure', 'Deux-Sevres': 'Deux-Sèvres', 'Vendee': 'Vendée'}
+
+
 def fold(s):
     s = unicodedata.normalize('NFD', str(s)).encode('ascii', 'ignore').decode().lower()
     return re.sub(r'[^a-z]+', ' ', s).strip()
@@ -119,7 +126,7 @@ def main():
         if codes is None:
             print('département inconnu :', name, file=sys.stderr)
             continue
-        rows.append({'n': 'France' if k == 'france' else nice(name), 'deps': codes, 'sgf': d['sgf'], 'v': [d.get(y) for y in order]})
+        rows.append({'n': 'France' if k == 'france' else ACCENTS.get(nice(name), nice(name)), 'deps': codes, 'sgf': d['sgf'], 'v': [d.get(y) for y in order]})
     rows.sort(key=lambda r: ('0' if r['deps'] == ['FR'] else r['deps'][0]))
     data = {
         'title': 'Décès par département et par année, an IX-1855 (Statistique générale de la France)',
