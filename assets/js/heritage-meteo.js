@@ -515,9 +515,10 @@
                     : k === 'plus-neige' ? `<div class="wx-data-head"><b>${esc(i18n('Compléments Copernicus (facultatifs)'))}</b><small>${esc(i18n('Chacun s’installe à part et s’ajoute au détail d’un jour : neige, ressenti, rivière, températures plus fines, relevés d’avant 1836. France, Belgique, Suisse, Luxembourg (les relevés anciens : toute l’Europe).'))}</small></div>` : '';
                 const plusSrc = isPlus(k) && PLUS_SRC[k] ? `<small class="wx-plus-src">${esc(i18n('Source : {s} · {l} · citation demandée', {s: PLUS_SRC[k][0], l: i18n(PLUS_LIC[k] || 'CC BY 4.0')}))} <a href="${esc(PLUS_SRC[k][1])}" target="_blank" rel="noopener">${esc(i18n('↗ source'))}</a></small>` : '';
                 const desc = on ? `${isWorld(k) && f.station_countries?.length ? `${A().plural(f.station_countries.length, 'pays', 'pays')} · ` : ''}${k === 'europe' && f.station_countries?.length ? `Stations : ${f.station_countries.map(countryName).join(', ')} · ` : ''}${k === 'europe' && f.c20?.n ? `20CR ${f.c20.a}–${f.c20.b} (toute l’Europe) · ` : ''}${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · altitudes : ${A().plural(f.relief, 'carré')} de 1°${f.relief_countries?.length ? ` (${f.relief_countries.map(countryName).join(', ')})` : ''}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
+                const desc1 = desc.replace(/^ · /, '');
                 const acts = on ? (f.removable ? `<button type="button" class="button small secondary" data-wx-remove="${k}">🗑 Supprimer le pack</button>` : '')
                     : dlActs(k);
-                return `${head}<div class="wx-data-row${isWorld(k) ? ' wx-world' : ''}${isPlus(k) ? ' wx-plus-row' : ''}" data-wx-pack="${esc(k)}"><span><b>${esc(name)}</b><small>${esc(desc)}</small>${plusSrc}</span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
+                return `${head}<div class="wx-data-row${isWorld(k) ? ' wx-world' : ''}${isPlus(k) ? ' wx-plus-row' : ''}" data-wx-pack="${esc(k)}"><span><b>${esc(name)}</b><small>${esc(desc1)}</small>${plusSrc}</span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
             }).join('');
             ws.innerHTML = `<section class="page wx-settings">${UI().pageHeader({title: 'Météo d’autrefois', icon: '🌦', attrs: 'data-ph-title', where: 'Réglages · Données', saved: true, help: 'Le temps qu’il faisait le jour de chaque événement, sans Internet.',
                 actions: ['<button type="button" class="button secondary" data-wx-reset data-ui-reset>↺ Remettre comme au départ</button>']})}
@@ -636,7 +637,7 @@
         try {
             const r = await post('meteo_pack_finish', {id}); dlForget(k); delete DL.run[k];
             await dlRefresh();
-            A().undoToast?.(i18n('🌦 {name} installé ({n} stations).', {name: i18n(packName(k)), n: String(r.stations || 0)}), {undo: async () => { await post('meteo_pack_undo', {kind: k}); await dlRefresh(); }});
+            A().undoToast?.(r.stations || !isPlus(k) ? i18n('🌦 {name} installé ({n} stations).', {name: i18n(packName(k)), n: String(r.stations || 0)}) : i18n('🌦 {name} installé.', {name: i18n(packName(k))}), {undo: async () => { await post('meteo_pack_undo', {kind: k}); await dlRefresh(); }});
         } catch (x) { dlForget(k); delete DL.run[k]; dlRedraw(); A().toast(x.message, 'error'); }
     }
     async function dlCancel(k) {

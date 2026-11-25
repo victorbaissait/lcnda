@@ -183,6 +183,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForFunction(() => document.querySelector('dialog.fe-dlg [data-fe-prow] [data-fe-pid="3"]'), null, {timeout: 10000});
         });
 
+        if (process.env.FE_SHOT) { // FE_SHOT=dossier : des captures pour regarder la fiche (clair, sombre, téléphone)
+            const shot = async n => { await sleep(700); await p.screenshot({path: path.join(process.env.FE_SHOT, n + '.png')}); };
+            await p.evaluate(() => document.querySelectorAll('.toast, [class*="toast"]').forEach(x => x.remove()));
+            await shot('fiche-abbaye'); await p.evaluate(() => { const d = document.querySelector('dialog.fe-dlg'); d.scrollTop = 650; d.querySelector('.modal-body').scrollTop = 650; }); await shot('fiche-abbaye-2');
+            await p.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); await shot('fiche-abbaye-sombre');
+            await p.evaluate(() => document.documentElement.removeAttribute('data-theme')); await p.setViewportSize({width: 390, height: 844}); await shot('fiche-abbaye-telephone'); await p.setViewportSize({width: 1440, height: 900});
+        }
         await t('fiche : chaque lien externe s’ouvre à part (target=_blank, noopener) et chaque fait venu d’ailleurs a son « ↗ »', async () => {
             const a = await p.$$eval('dialog.fe-dlg .fe-sheet a', l => l.map(x => [x.href, x.target, x.rel]));
             assert.ok(a.length > 5);
@@ -245,6 +252,14 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const g = await api('ed_get', {id: abbId});
             assert.strictEqual(g.events.length, 2); assert.strictEqual(g.people.length, 1); assert.strictEqual(g.people[0].person_id, 3);
             await p.evaluate(() => document.querySelector('dialog.fe-dlg')?.close());
+        });
+
+        await t('fiche d’un village (Aubazines) : « 🏰⛪ Les édifices de la commune » — la fiche de l’abbaye d’abord, puis ce qui est connu', async () => {
+            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'villages'; A.state.hVillage = '19013'; A.setModule('listes'); });
+            await p.waitForSelector('.h-village [data-fe-host] [data-fe-open]', {timeout: 30000});
+            const txt = await p.textContent('.h-village [data-fe-host]');
+            assert.match(txt, /Les édifices de la commune/); assert.match(txt, /1 fiche d’édifice/); assert.match(txt, /Monastère du Coyroux/);
+            assert.strictEqual((txt.match(/Aubazine/g) || []).length >= 1, true);
         });
 
         await t('Réglages → 🏰⛪ Fiches des édifices : éteindre « Dans les actes » (genealogie-fiches-edifices), ↶ le remet', async () => {

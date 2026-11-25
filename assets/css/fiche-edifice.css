@@ -30,7 +30,8 @@ ul.fe-l li:last-child { border-bottom: 0; }
 .fe-src { font-size: 12px; white-space: nowrap; }
 .fe-note { font-size: 13px; color: var(--muted, #6b665c); }
 .fe-quote { white-space: pre-line; }
-.fe-more summary { cursor: pointer; color: var(--fe-accent, #8a4b12); font-weight: 600; }
+.fe-more summary::-webkit-details-marker { display: none; }
+.fe-more summary { list-style: none; cursor: pointer; color: var(--fe-accent, #8a4b12); font-weight: 600; }
 .fe-prop { margin-top: 8px; padding: 8px 10px; border-radius: 8px; background: var(--fe-chip, rgba(127, 110, 80, .12)); }
 .fe-dec { list-style: none; padding: 0; margin: .3em 0; }
 .fe-dec li { display: grid; grid-template-columns: 4em 1fr 2.5em; gap: 8px; align-items: center; font-size: 13px; }

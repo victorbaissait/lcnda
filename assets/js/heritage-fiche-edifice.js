@@ -249,7 +249,7 @@
         const st = eventStats(D.events);
         const edit = !kiosk();
         const peopleRows = D.people.map(p => `<li data-fe-prow="${p.id}"><span class="fe-yr">${esc(yrs(p.year_from, p.year_to) || '—')}</span><span>${p.person_id ? personBtn(p.person_id, p.person_name || p.name) : esc(p.name)}${p.role ? `, ${esc(p.role)}` : ''}${p.note ? ` <small class="muted">${esc(p.note)}</small>` : ''}</span>
-            ${p.source_url ? src(p.source_url, p.source_label ? `↗ ${p.source_label}` : T('↗ source')) : `<small class="muted">${esc(T('(ta saisie)'))}</small>`}
+            ${p.source_url ? src(p.source_url, p.source_label ? `↗ ${p.source_label}` : T('↗ source')) : `<small class="muted">${esc(p.source_label === 'arbre' ? T('(d’après ton arbre)') : T('(ta saisie)'))}</small>`}
             ${edit ? `<span class="fe-acts">${p.person_id ? '' : `<button type="button" class="button small secondary" data-fe-plink="${p.id}">${esc(T('＋ Relier à une personne'))}</button>`}<button type="button" class="icon-button small" data-fe-pdel="${p.id}" title="${esc(T('Retirer'))}" aria-label="${esc(T('Retirer'))}">✕</button></span>` : ''}</li>`).join('');
         const evRow = (e, proposed) => `<li><span class="fe-yr">${esc(e.year ?? '?')}</span><span>${esc(e.type)}${e.people.length ? ' — ' + e.people.map(p => personBtn(p.id, p.name)).join(` ${esc(T('et'))} `) : ''}${e.address ? ` <small class="muted">« ${esc(e.address)} »</small>` : ''}</span>
             ${edit ? (proposed ? `<button type="button" class="button small" data-fe-elink="${e.id}">${esc(T('✓ Relier'))}</button>` : `<button type="button" class="icon-button small" data-fe-eunlink="${e.id}" title="${esc(T('Ne plus relier cet acte'))}" aria-label="${esc(T('Ne plus relier cet acte'))}">✕</button>`) : ''}</li>`;
@@ -268,15 +268,15 @@
             <section class="fe-sec"><h4>${esc(T(g.people))}</h4>${D.people.length ? `<ul class="fe-l">${peopleRows}</ul>` : ''}<div data-fe-x="people"></div>
                 ${edit ? `<p><button type="button" class="button small secondary" data-fe-padd>${esc(T('＋ Ajouter'))}</button></p>` : ''}</section>
             <section class="fe-sec"><h4>${esc(T('👪 Ta famille ici'))}</h4>
-                ${D.events.length ? `<p>${esc(counts.join(', '))} ${esc(T('de ta famille.'))}</p><ul class="fe-l">${D.events.slice(0, 8).map(e => evRow(e, false)).join('')}</ul>${more(`<ul class="fe-l">${D.events.slice(8).map(e => evRow(e, false)).join('')}</ul>`, D.events.length > 8 ? D.events.length - 8 : 0)}
+                ${D.events.length ? `<p>${esc(counts.join(', '))} ${esc(T('de ta famille.'))}</p><ul class="fe-l">${D.events.slice(0, 8).map(e => evRow(e, false)).join('')}</ul>${D.events.length > 8 ? more(`<ul class="fe-l">${D.events.slice(8).map(e => evRow(e, false)).join('')}</ul>`, D.events.length - 8) : ''}
                     ${st.decades.length > 1 ? more(`<ul class="fe-dec">${st.decades.map(([d, n]) => `<li><span class="fe-yr">${d}</span><i style="width:${Math.round(n / Math.max(...st.decades.map(x => x[1])) * 100)}%"></i><span>${n}</span></li>`).join('')}</ul>`, 0, T('▸ par décennie')) : ''}` : ''}
-                ${D.proposed.length ? `<div class="fe-prop"><p><b>${esc(T('À confirmer :'))}</b> ${esc(T('{n} acte(s) de la commune dont l’adresse parle de cet édifice.', {n: String(D.proposed.length)}))} ${edit && D.proposed.length > 1 ? `<button type="button" class="button small" data-fe-elink-all>${esc(T('✓ Tout relier'))}</button>` : ''}</p><ul class="fe-l">${D.proposed.slice(0, 12).map(e => evRow(e, true)).join('')}</ul>${more(`<ul class="fe-l">${D.proposed.slice(12).map(e => evRow(e, true)).join('')}</ul>`, D.proposed.length > 12 ? D.proposed.length - 12 : 0)}</div>` : ''}
+                ${D.proposed.length ? `<div class="fe-prop"><p><b>${esc(T('À confirmer :'))}</b> ${esc(T('{n} acte(s) de la commune dont l’adresse parle de cet édifice.', {n: String(D.proposed.length)}))} ${edit && D.proposed.length > 1 ? `<button type="button" class="button small" data-fe-elink-all>${esc(T('✓ Tout relier'))}</button>` : ''}</p><ul class="fe-l">${D.proposed.slice(0, 12).map(e => evRow(e, true)).join('')}</ul>${D.proposed.length > 12 ? more(`<ul class="fe-l">${D.proposed.slice(12).map(e => evRow(e, true)).join('')}</ul>`, D.proposed.length - 12) : ''}</div>` : ''}
                 ${!D.events.length && !D.proposed.length ? `<p class="muted">${esc(T('Aucun acte relié pour l’instant. Un acte se relie depuis cette fiche, ou depuis la fiche de la personne (« 🔗 Relier à une fiche ? »).'))}</p>` : ''}
                 <p class="fe-note">${esc(T('La liste vient des actes reliés à la fiche, et des actes de la commune dont l’adresse parle de l’édifice (proposés, à confirmer d’un clic).'))}</p></section>
             <section class="fe-sec"><h4>${esc(T(g.regTitle))}</h4>${D.registers.length ? `<ul class="fe-l">${regRows}</ul>` : ''}<div data-fe-x="registers"></div>
                 ${edit ? `<p><button type="button" class="button small secondary" data-fe-radd>${esc(T('＋ Ajouter des registres'))}</button></p>` : ''}</section>
             <section class="fe-sec" data-fe-x="objects" hidden></section>
-            <section class="fe-sec"><h4>${esc(T('🖼 Photos et plans'))}</h4>${s.image ? `<figure class="fe-fig"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 640))}" alt="${esc(s.name)}" loading="lazy" onerror="this.closest('figure').hidden=true"></a><figcaption>${esc(s.image)} · ${link(fileUrl(s.image), T('↗ auteur et licence'))}</figcaption></figure>` : `<p class="muted">${esc(T('Pas encore d’image. « ✏️ Modifier » → une image de Wikimedia Commons (son nom de fichier) : l’auteur et la licence restent sur sa page.'))}</p>`}</section>
+            <section class="fe-sec"><h4>${esc(T('🖼 Photos et plans'))}</h4>${s.image ? `<figure class="fe-fig"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 640))}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()"></a><figcaption>${esc(s.image)} · ${link(fileUrl(s.image), T('↗ auteur et licence'))}</figcaption></figure>` : `<p class="muted">${esc(T('Pas encore d’image. « ✏️ Modifier » → une image de Wikimedia Commons (son nom de fichier) : l’auteur et la licence restent sur sa page.'))}</p>`}</section>
             ${s.lat != null ? `<section class="fe-sec"><h4>${esc(T('🗺 Sur la carte'))}</h4>${miniMap(s)}</section>` : ''}
             <section class="fe-sec"><h4>${esc(T('📑 Sources'))}</h4>${sources.length ? `<ul class="fe-src-list">${sources.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}<div data-fe-x="sources"></div><p class="muted">${esc(T('Ce que tu as écrit toi-même est marqué « ta saisie ». Tes sources se citent comme partout dans l’app, sur les actes.'))}</p></section>
         </article>`;
@@ -302,7 +302,7 @@
         if (c?.y0 != null) hist.push(`<p>${esc(T('Construit vers {y} ({s}).', {y: String(c.y0), s: centuryTxt(c.y0)}))} ${src(wdUrl(c.q))}</p>`);
         else if (s.built_from != null) hist.push(`<p>${esc(T('Construit vers {y} ({s}).', {y: String(s.built_from), s: centuryTxt(s.built_from)}))} ${originSrc(s) ? src(originSrc(s)) : `<small class="muted">${esc(T('(ta saisie)'))}</small>`}</p>`);
         if (c?.y1 != null) hist.push(`<p>${esc(T('Détruit ou disparu en {y}.', {y: String(c.y1)}))} ${src(wdUrl(c.q))}</p>`);
-        if (wi) hist.push(`<p>${esc(cap(wi.stateText))}${wi.from != null ? ` ${esc(T('(attesté dès {y})', {y: String(wi.from)}))}` : ''}. ${src(wi.wikipedia || wi.wikidata)}</p>`);
+        if (wi) hist.push(`<p>${esc(cap(wi.stateText))}${wi.from != null && s.built_from == null ? ` ${esc(T('(attesté dès {y})', {y: String(wi.from)}))}` : ''}. ${src(wi.wikipedia || wi.wikidata)}</p>`);
         const H2 = pat ? heritageOf(s, pat.list) : {notice: null, objects: []};
         const fx = pat?.fixture ? ` <b>${esc(T('(données d’essai, inventées)'))}</b>` : '';
         if (H2.notice) {
@@ -325,7 +325,8 @@
         const sug = [];
         for (const o of c?.ow || []) if (!have.has(fold(o[0]))) sug.push({name: o[0], role: T('propriétaire'), year_from: o[2] ?? null, year_to: o[3] ?? null, source_url: wdUrl(o[1] || c.q), source_label: 'Wikidata', why: T('Wikidata (P127)')});
         for (const l of lords || []) if (l.kind === 'seigneur' && !have.has(fold(l.name))) sug.push({name: l.name, role: l.title || T('seigneur'), year_from: l.datesOf === 'titre' ? l.from : null, year_to: l.datesOf === 'titre' ? l.to : null, source_url: l.wikipedia || l.wikidata, source_label: 'Wikidata', why: T('seigneur de la commune (Wikidata)')});
-        for (const hnt of D.clergy_hints || []) sug.push({person_id: hnt.person_id, name: hnt.name, role: (g.roles.find(r => fold(hnt.occupation).includes(fold(r))) || hnt.occupation).toLowerCase(), year_from: hnt.y0, year_to: hnt.y1, why: T('dans ton arbre : « {o} »', {o: hnt.occupation}), tree: true});
+        for (const hnt of D.clergy_hints || []) sug.push({person_id: hnt.person_id, name: hnt.name, role: (g.roles.find(r => fold(hnt.occupation).includes(fold(r))) || hnt.occupation).toLowerCase(), year_from: null, year_to: null, source_label: 'arbre',
+            why: T('dans ton arbre : « {o} »', {o: hnt.occupation}) + (hnt.y0 != null ? ` · ${T('actes ici : {y}', {y: yrs(hnt.y0, hnt.y1)})}` : ''), tree: true});
         const ps = slot('people');
         if (ps && sug.length) {
             ps.__sug = sug;
@@ -534,7 +535,7 @@
             : T('{n} édifice(s) connu(s) dans la commune (Wikidata, Mérimée), pas encore de fiche.', {n: String(known.length)});
         const firstKnown = known.slice(0, Math.max(0, 6 - sites.length));
         host.innerHTML = `<p>${esc(lead)}</p><ul class="fe-l fe-place">${sites.map(siteLi).join('')}${firstKnown.map(knownLi).join('')}</ul>
-            ${more(`<ul class="fe-l fe-place">${known.slice(firstKnown.length).map(knownLi).join('')}</ul>`, known.length - firstKnown.length)}
+            ${known.length > firstKnown.length ? more(`<ul class="fe-l fe-place">${known.slice(firstKnown.length).map(knownLi).join('')}</ul>`, known.length - firstKnown.length) : ''}
             ${kiosk() ? '' : `<p><button type="button" class="link-button" data-fe-new='${esc(JSON.stringify({place_id: pid || null, insee: ins}))}'>${esc(T('＋ Faire la fiche d’un autre château ou lieu de culte'))}</button></p>`}
             <p><small class="muted">${esc(T('Sources : tes fiches ; Wikidata (CC0) ; Ministère de la Culture, Mérimée (Licence Ouverte) si le pack « Patrimoine » est installé.'))}</small></p>`;
         // ⛪ en ligne (Wikidata, heritage-commune-plus.js) : ajouté quand la réponse arrive
