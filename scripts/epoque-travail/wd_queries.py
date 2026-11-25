@@ -74,7 +74,7 @@ FACTS = '''SELECT ?s ?sLabel ?d ?st ?end ?coord ?loc ?locLabel ?lcoord ?larea ?a
 }'''
 
 # 📚 en deux temps (plus léger pour le serveur) : 1) les œuvres d'un type, datées, connues ; 2) leurs titres, auteurs, langues
-BOOK_TYPES = ['Q7725634', 'Q8261', 'Q25379', 'Q5185279', 'Q49084', 'Q1279564', 'Q12106333', 'Q37484', 'Q571']
+BOOK_TYPES = ['Q7725634', 'Q37484']  # « œuvre littéraire » (Wikidata range le roman, la pièce… dans P7937 « forme ») et « épopée »
 BOOK_IDS = '''SELECT ?w ?d ?sl WHERE {
  ?w wdt:P31 wd:%s ; wdt:P577 ?d .
  FILTER(YEAR(?d) >= 1600 && YEAR(?d) <= 2000)

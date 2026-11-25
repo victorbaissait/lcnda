@@ -26,9 +26,9 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=286">
+    <link rel="stylesheet" href="assets/css/app.css?v=287">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=280">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=281">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -51,9 +51,9 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/audit-chrono.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=2">
-    <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=2">
-    <link rel="stylesheet" href="assets/css/audit-cartes.css?v=1">
-    <link rel="stylesheet" href="assets/css/audit-personnes.css?v=2">
+    <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=3">
+    <link rel="stylesheet" href="assets/css/audit-cartes.css?v=2">
+    <link rel="stylesheet" href="assets/css/audit-personnes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=1">
     <link rel="stylesheet" href="assets/css/audit-options.css?v=1">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=2">
@@ -107,7 +107,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/cousinade.css?v=1">
     <link rel="stylesheet" href="assets/css/successoral.css?v=8">
     <link rel="stylesheet" href="assets/css/successoral-plus2.css?v=1">
-    <link rel="stylesheet" href="assets/css/complements.css?v=1">
+    <link rel="stylesheet" href="assets/css/complements.css?v=2">
     <link rel="stylesheet" href="assets/css/verrou.css?v=1">
     <link rel="stylesheet" href="assets/css/reseau-local.css?v=3">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
@@ -116,12 +116,12 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/tableur.css?v=7">
     <link rel="stylesheet" href="assets/css/socface.css?v=4">
     <link rel="stylesheet" href="assets/css/archives-en-ligne.css?v=1">
-    <link rel="stylesheet" href="assets/css/semaine.css?v=3">
+    <link rel="stylesheet" href="assets/css/semaine.css?v=4">
     <link rel="stylesheet" href="assets/css/ou-chercher.css?v=2">
     <link rel="stylesheet" href="assets/css/ou-chercher-monde.css?v=1">
-    <link rel="stylesheet" href="assets/css/archives-dispo.css?v=1">
+    <link rel="stylesheet" href="assets/css/archives-dispo.css?v=2">
     <link rel="stylesheet" href="assets/css/recherche-fr.css?v=2">
-    <link rel="stylesheet" href="assets/css/preuve.css?v=1">
+    <link rel="stylesheet" href="assets/css/preuve.css?v=2">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
     <link rel="stylesheet" href="assets/css/lecture-autrefois.css?v=2">
     <link rel="stylesheet" href="assets/css/prenoms-france.css?v=3">
@@ -1303,7 +1303,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-editeurs.js?v=4" defer></script>
 <script src="assets/js/app-versions.js?v=4" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=14" defer></script>
+<script src="assets/js/app-pages.js?v=15" defer></script>
 <script src="assets/js/app-access.js?v=19" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
@@ -1352,7 +1352,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-audio-studio.js?v=7" defer></script>
 <script src="assets/js/heritage-audio-multi.js?v=3" defer></script>
 <script src="assets/js/heritage-calendars.js?v=22" defer></script>
-<script src="assets/js/heritage-horloges.js?v=5" defer></script>
+<script src="assets/js/heritage-horloges.js?v=6" defer></script>
 <script src="assets/js/heritage-assemble.js?v=11" defer></script>
 <script src="assets/js/heritage-columns.js?v=9" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=8" defer></script>

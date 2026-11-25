@@ -29,7 +29,7 @@ def iso(t, prec):
 
 def sommets():
     q = '''SELECT ?m ?mLabel ?c ?d ?prec ?alt ?ctry ?wpfr ?wpen (GROUP_CONCAT(DISTINCT ?whoL; separator="|") AS ?who) WHERE {
-      ?m p:P793 ?st. ?st ps:P793 wd:Q1194369; psv:P585 [wikibase:timeValue ?d; wikibase:timePrecision ?prec].
+      ?m p:P793 ?st. ?st ps:P793 wd:Q1194369; pqv:P585 [wikibase:timeValue ?d; wikibase:timePrecision ?prec].
       ?m wdt:P625 ?c.
       OPTIONAL { ?m wdt:P2044 ?alt. } OPTIONAL { ?m wdt:P17 ?ctry. }
       OPTIONAL { ?st pq:P710 ?who0. ?who0 rdfs:label ?whoL. FILTER(lang(?whoL) = "fr" || lang(?whoL) = "en") }
@@ -54,8 +54,8 @@ def sommets():
 
 def papes():
     q = '''SELECT ?p ?pLabel ?s ?sp ?e ?ep ?wp ?img ?birthName WHERE {
-      ?p p:P39 ?st. ?st ps:P39 wd:Q19546; psv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp].
-      OPTIONAL { ?st psv:P582 [wikibase:timeValue ?e; wikibase:timePrecision ?ep]. }
+      ?p p:P39 ?st. ?st ps:P39 wd:Q19546; pqv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp].
+      OPTIONAL { ?st pqv:P582 [wikibase:timeValue ?e; wikibase:timePrecision ?ep]. }
       OPTIONAL { ?wp schema:about ?p; schema:isPartOf <https://fr.wikipedia.org/>. }
       OPTIONAL { ?p wdt:P1477 ?birthName. }
       SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
@@ -85,8 +85,8 @@ def sejours():
       VALUES ?occ { %s }
       ?p wdt:P106 ?occ.
       ?p p:P551 ?st. ?st ps:P551 ?loc.
-      { ?st psv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp]. } UNION { ?st psv:P585 [wikibase:timeValue ?t; wikibase:timePrecision ?tp]. }
-      OPTIONAL { ?st psv:P582 [wikibase:timeValue ?e; wikibase:timePrecision ?ep]. }
+      { ?st pqv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp]. } UNION { ?st pqv:P585 [wikibase:timeValue ?t; wikibase:timePrecision ?tp]. }
+      OPTIONAL { ?st pqv:P582 [wikibase:timeValue ?e; wikibase:timePrecision ?ep]. }
       ?loc wdt:P17 wd:Q142.
       OPTIONAL { ?loc wdt:P374 ?insee. }
       OPTIONAL { ?loc wdt:P625 ?c. }

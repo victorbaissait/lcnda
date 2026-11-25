@@ -35,7 +35,7 @@ $n = []; $none = [];
 foreach (array_chunk($names, 40) as $i => $chunk) {
     for ($try = 0; ; $try++) {
         try { $res = tr_wikt_fetch($chunk, 'prenom'); break; }
-        catch (Throwable $e) { if ($try >= 8) { throw $e; } fwrite(STDERR, '  ' . $e->getMessage() . " — on attend\n"); sleep(20 * ($try + 1)); }
+        catch (Throwable $e) { if ($try >= 30) { throw $e; } fwrite(STDERR, '  ' . $e->getMessage() . " — on attend\n"); sleep(min(180, 30 * ($try + 1))); }
     }
     foreach ($chunk as $w) { $r = $res[$w] ?? null; if ($r && !empty($r['text'])) { $n[$r['title']] = $r['text']; } else { $none[] = $w; } }
     fwrite(STDERR, sprintf("  %d/%d : %d trouvés\n", min(count($names), ($i + 1) * 40), count($names), count($n)));

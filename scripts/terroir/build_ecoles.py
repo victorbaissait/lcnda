@@ -50,9 +50,9 @@ def main():
         for r in wm.sparql(q, 'ecoles-meta-' + hashlib.sha1(' '.join(part).encode()).hexdigest()[:12], gap=5):
             o = M.setdefault(qid(r['s']), {'l': '', 'inc': None, 'end': None, 'img': '', 'wp': '', 'uai': False})
             o['l'] = o['l'] or r.get('l', '')
-            y = lambda v: int(v[:5].lstrip('+')) if v and re.match(r'^[+-]?\d{4}', v.lstrip('+')) else None
+            y = lambda v: (int(m.group(1)) if (m := re.match(r'^\+?(\d{4})-', v or '')) else None)  # années après J.-C. seulement
             for k, src in (('inc', 'inc'), ('end', 'end')):
-                v = y(r.get(src, ''));
+                v = y(r.get(src, ''))
                 if v is not None and (o[k] is None or v < o[k]): o[k] = v
             if r.get('img') and not o['img']: o['img'] = urllib.parse.unquote(re.sub(r'^.*Special:FilePath/', '', r['img']))
             if r.get('wp') and not o['wp']: o['wp'] = urllib.parse.unquote(r['wp'].rsplit('/wiki/', 1)[1]).replace('_', ' ')

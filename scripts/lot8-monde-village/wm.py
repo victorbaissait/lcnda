@@ -3,7 +3,7 @@ Chaque réponse est gardée dans un dossier (raw/) : relancer le script ne refai
 Wikimedia limite fort les appels : User-Agent explicite, attente entre deux appels, reprise après 429."""
 import hashlib, json, os, sys, time, urllib.parse, urllib.request
 
-UA = 'LCNDA-genealogie/1.0 (build script lot8-monde-village; https://github.com/victorbaissait/lcnda)'
+UA = 'LCNDA-lot8-monde-village/1.0 (genealogy desktop app, offline data build script)'
 RAW = os.environ.get('L8C_RAW', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'raw'))
 _last = {}
 

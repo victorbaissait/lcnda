@@ -38,22 +38,31 @@ def main():
         if t.get('fem'):  # libellés neutres de Wikidata : « forgeron ou forgeronne »
             labels.setdefault(f"{t['name'].strip().lower()} ou {t['fem'].strip().lower()}", []).append((t['key'], 0))
     keys = sorted(labels)
-    found = {}
-    for i in range(0, len(keys), 60):
-        part = keys[i:i + 60]
+    cands = []
+    for i in range(0, len(keys), 80):
+        part = keys[i:i + 80]
         vals = ' '.join(f'"{esc(k)}"@fr' for k in part)
-        rows = C.sparql(f'''SELECT ?i ?l ?sl ?how WHERE {{ VALUES ?l {{ {vals} }}
+        cands += C.sparql(f'''SELECT ?i ?l ?sl ?how ?c WHERE {{ VALUES ?l {{ {vals} }}
             {{ ?i rdfs:label ?l . BIND("label" AS ?how) }}
             UNION {{ ?i skos:altLabel ?l . BIND("alias" AS ?how) }}
-            FILTER EXISTS {{ ?i wdt:P31/wdt:P279* {OCC} }}
-            ?i wikibase:sitelinks ?sl }}''')
-        for r in rows:
-            l = r['l']
-            for key, rank in labels.get(l, []):
-                score = (2 if r['how'] == 'label' else 0) + (1 if rank == 0 else 0)
-                cand = (score, int(r['sl']), C.qid(r['i']))
-                if key not in found or cand > found[key]: found[key] = cand
-        print(f'… {i + len(part)}/{len(keys)} libellés, {len(found)} métiers reliés', flush=True)
+            ?i wdt:P31 ?c ; wikibase:sitelinks ?sl }}''')
+        print(f'… {i + len(part)}/{len(keys)} libellés, {len(cands)} candidats', flush=True)
+    # les classes des candidats qui sont des métiers (sous-classes de « occupation », Q12737077)
+    classes = sorted({C.qid(r['c']) for r in cands})
+    occ_cls = {'Q12737077', 'Q28640'}
+    for i in range(0, len(classes), 150):
+        part = classes[i:i + 150]
+        for r in C.sparql(f'''SELECT ?c WHERE {{ VALUES ?c {{ {' '.join('wd:' + q for q in part)} }} ?c wdt:P279+ {OCC} }}'''):
+            occ_cls.add(C.qid(r['c']))
+    print(f'… {len(classes)} classes, {len(occ_cls)} sont des métiers', flush=True)
+    found = {}
+    for r in cands:
+        if C.qid(r['c']) not in occ_cls: continue
+        for key, rank in labels.get(r['l'], []):
+            score = (2 if r['how'] == 'label' else 0) + (1 if rank == 0 else 0)
+            cand = (score, int(r['sl']), C.qid(r['i']))
+            if key not in found or cand > found[key]: found[key] = cand
+    print(f'… {len(found)} métiers reliés', flush=True)
     qids = sorted({v[2] for v in found.values()})
     vals = lambda qs: ' '.join('wd:' + q for q in qs)
     occ = {q: {'tools': [], 'saints': [], 'art': []} for q in qids}

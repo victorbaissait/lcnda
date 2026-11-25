@@ -9,7 +9,22 @@ UA = 'lcnda-build/1.0 (genealogy desktop app; open data build script)'
 PAUSE = float(os.environ.get('L8B_PAUSE', '1.5'))
 
 
-def get(url, params=None, data=None, accept='application/json', tries=8, timeout=180, cache=True):
+def _path(url, params=None, data=None):
+    if params:
+        url += ('&' if '?' in url else '?') + urllib.parse.urlencode(params)
+    body = urllib.parse.urlencode(data).encode() if data else None
+    key = hashlib.sha1((url + '\n' + (body or b'').decode()).encode()).hexdigest()
+    return os.path.join(CACHE, key[:2], key)
+
+
+def forget(url, params=None, data=None):
+    try:
+        os.remove(_path(url, params, data))
+    except OSError:
+        pass
+
+
+def get(url, params=None, data=None, accept='application/json', tries=40, timeout=180, cache=True):
     if params:
         url += ('&' if '?' in url else '?') + urllib.parse.urlencode(params)
     body = urllib.parse.urlencode(data).encode() if data else None
@@ -29,14 +44,26 @@ def get(url, params=None, data=None, accept='application/json', tries=8, timeout
                 with open(path, 'wb') as f:
                     f.write(out)
             return out
-        except Exception as e:  # 429, 5xx, coupure : on attend puis on recommence
-            print('  … nouvel essai', i + 1, url[:100], e, file=sys.stderr)
-            time.sleep(min(300, 20 * (i + 1)))
+        except Exception as e:  # 429, 5xx, coupure : on attend (Retry-After si le site le dit) puis on recommence
+            wait = min(300, 20 * (i + 1))
+            ra = getattr(e, 'headers', None) and e.headers.get('Retry-After')
+            if ra and str(ra).isdigit():
+                wait = int(ra) + 5
+            print('  … nouvel essai', i + 1, 'dans', wait, 's', url[:90], e, file=sys.stderr)
+            time.sleep(wait)
     raise RuntimeError('échec : ' + url[:200])
 
 
 def js(url, params=None, data=None, **kw):
-    return json.loads(get(url, params, data, **kw))
+    for i in range(4):
+        raw = get(url, params, data, **kw)
+        try:
+            return json.loads(raw)
+        except ValueError:  # réponse coupée (Wikidata qui dépasse son temps) : on l'oublie et on recommence
+            print('  … réponse coupée, nouvel essai', file=sys.stderr)
+            forget(url, params, data)
+            time.sleep(30)
+    raise RuntimeError('réponse illisible : ' + url[:200])
 
 
 def sparql(q):

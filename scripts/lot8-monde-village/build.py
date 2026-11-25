@@ -79,6 +79,31 @@ def kind_of(genres, types):
     if re.search(r'symphon|concerto|oratorio|messe|requiem|cantate|musical|poème symphonique|suite', g): return 'concert'
     return ''
 
+_CC = [(v[1], v[2], v[0]) for v in C.values()]
+def nearest_commune(la, lo, maxkm=6):
+    import math
+    best = None
+    for a, b, n in _CC:
+        if abs(a - la) > .1 or abs(b - lo) > .15: continue
+        d = math.hypot((a - la) * 111, (b - lo) * 111 * math.cos(math.radians(la)))
+        if d <= maxkm and (best is None or d < best[0]): best = (d, n)
+    return best[1] if best else ''
+def clean_city(city, venue, la, lo, france):
+    """la ville de la première : la commune la plus proche en France (les arrondissements de Paris → Paris) ; ailleurs le libellé, nettoyé"""
+    bad = lambda v: not v or re.match(r'^Q\d+$', v)
+    if france and la is not None:
+        n = nearest_commune(la, lo)
+        if n: return n
+    if bad(city): return '' if bad(venue) else ''
+    if re.search(r'Westminster|Kensington|Camden|Islington|Southwark|Lambeth|Londres|London|Hackney|Tower Hamlets', city): return 'Londres'
+    FIX = {'Hamburg-Mitte': 'Hambourg', 'Tverskoï': 'Moscou', 'commune de Copenhague': 'Copenhague', "Ville d'Édimbourg": 'Édimbourg', 'Brno-město': 'Brno', 'Praha 1': 'Prague'}
+    if city in FIX: return FIX[city]
+    if city in EUROPE.values(): return ''
+    m = re.match(r'^\d+(er|e) arrondissement de (.+)$', city) or re.match(r'^.+\((.+)\)$', city)
+    if m: return m.groups()[-1]
+    if re.match(r'^(Métropole|Innere Stadt|Ostrobotnie|Hérault|Comté|Province|Région|Land |District|Borough|City of Westminster)', city): return {'Innere Stadt': 'Vienne', 'City of Westminster': 'Londres'}.get(city, '')
+    return city
+
 def build_spectacles():
     q = '''SELECT ?w ?wl ?d ?prec ?loc ?locl ?city ?cityl ?coord ?ccoord ?cty ?sl ?g ?gl ?t ?tl ?by ?byl ?fr WHERE {
   ?w p:P1191 ?st . ?st psv:P1191 [ wikibase:timeValue ?d ; wikibase:timePrecision ?prec ] . ?w wdt:P4647 ?loc ; wikibase:sitelinks ?sl . FILTER(?sl >= 4)
@@ -106,7 +131,7 @@ def build_spectacles():
         if not kind or kind == 'concert' and not x['g']: continue
         if any(re.search(r'\bfilm\b|single|album|chanson|hymne', t.lower()) for t in x['t']) and kind not in ('opera', 'ballet', 'operette'): continue
         la, lo = point(r0.get('coord')); cla, clo = point(r0.get('ccoord'))
-        city = r0.get('cityl') if r0.get('cityl') and not re.match(r'^Q\d+$', r0.get('cityl', '')) else ''
+        city = clean_city(r0.get('cityl', ''), r0.get('locl', ''), la if la is not None else cla, lo if lo is not None else clo, any(c in FRANCE_Q for c in ctys))
         out.append({'q': x['q'], 'n': x['n'], 'y': y, 'd': day(r0['d'], r0.get('prec')), 'k': kind, 'by': ', '.join(x['by'][:2]),
                     'venue': r0.get('locl', '') if not re.match(r'^Q\d+$', r0.get('locl', '')) else '', 'city': city,
                     'country': EUROPE[sorted(ctys)[0]], 'fr': 1 if any(c in FRANCE_Q for c in ctys) else 0,
@@ -169,31 +194,42 @@ def build_tour():
     save('tour', {**WD, 'what': 'Étapes du Tour de France 1903–2025 (Wikidata : éditions Q33881, P527 « comprend », départ P1427, arrivée P1444, date P585)',
                   **table(['q', 'y', 'd', 'no', 'a', 'ai', 'ala', 'alo', 'b', 'bi', 'bla', 'blo', 'km', 'ed', 'edwiki', 'n'], out)})
 
+def labels(ids):
+    """les libellés (fr, sinon en) de quelques éléments, par l'API de Wikidata"""
+    out = {}
+    ents = wm.entities(sorted(set(i for i in ids if re.match(r'^Q\d+$', i or ''))), props='labels|sitelinks')
+    for k, e in ents.items():
+        out[k] = {'l': wm.label(e), 'fr': ((e.get('sitelinks') or {}).get('frwiki') or {}).get('title', '')}
+    return out
+
 def build_seigneurs():
-    q = '''SELECT ?p ?pl ?title ?tl ?of ?ofl ?s ?e ?b ?d ?ins ?ins2 ?coord ?fr WHERE {
+    q = '''SELECT ?p ?title ?of ?s ?e ?b ?d ?ins ?ins2 WHERE {
   { ?p p:P97 ?st . ?st ps:P97 ?title ; pq:P1001|pq:P276 ?of . OPTIONAL { ?st pq:P580 ?s } OPTIONAL { ?st pq:P582 ?e } }
   UNION
   { ?p p:P97 ?st . ?st ps:P97 ?title . ?title wdt:P1001 ?of . OPTIONAL { ?st pq:P580 ?s } OPTIONAL { ?st pq:P582 ?e } }
-  OPTIONAL { ?of wdt:P374 ?ins } OPTIONAL { ?of wdt:P131 ?up . ?up wdt:P374 ?ins2 } OPTIONAL { ?of wdt:P625 ?coord }
+  OPTIONAL { ?of wdt:P374 ?ins } OPTIONAL { ?of wdt:P131 ?up . ?up wdt:P374 ?ins2 }
   OPTIONAL { ?p wdt:P569 ?b } OPTIONAL { ?p wdt:P570 ?d }
-  OPTIONAL { ?fr schema:about ?p ; schema:isPartOf <https://fr.wikipedia.org/> }
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". ?p rdfs:label ?pl . ?title rdfs:label ?tl . ?of rdfs:label ?ofl . }
 }'''
     by = {}
     for r in sparql(q, 'seigneurs'):
+        # le lieu du titre est la commune (P374), sinon un château, une seigneurie… situé dans la commune (P131)
         ins = r.get('ins') or r.get('ins2') or ''
         if ins not in C: continue
         k = (qid(r['p']), qid(r['title']), ins)
-        x = by.get(k)
         s, e, b, d = year(r.get('s')), year(r.get('e')), year(r.get('b')), year(r.get('d'))
-        lab = lambda v: '' if re.match(r'^Q\d+$', v or '') else (v or '')
-        if not lab(r.get('pl')): continue
+        x = by.get(k)
         if x is None:
-            by[k] = {'q': qid(r['p']), 'n': lab(r.get('pl')), 'title': lab(r.get('tl')), 'tq': qid(r['title']), 'of': lab(r.get('ofl')), 'oq': qid(r['of']),
-                     'ins': ins, 'commune': C[ins][0], 's': s, 'e': e, 'b': b, 'd': d, 'frwiki': wptitle(r.get('fr'))}
+            by[k] = {'q': k[0], 'tq': k[1], 'oq': qid(r['of']), 'ins': ins, 'commune': C[ins][0], 's': s, 'e': e, 'b': b, 'd': d}
         else:
-            x['s'] = x['s'] if x['s'] is not None else s; x['e'] = x['e'] if x['e'] is not None else e
-    out = [x for x in by.values() if (x['s'] or x['b'] or x['d'] or 0) and (x['s'] or x['b'] or x['d']) < 1800]
+            for kk, v in (('s', s), ('e', e), ('b', b), ('d', d)):
+                if x[kk] is None: x[kk] = v
+    rows = [x for x in by.values() if (x['s'] or x['b'] or x['d']) and (x['s'] or x['b'] or x['d']) < 1800]
+    L = labels([x['q'] for x in rows] + [x['tq'] for x in rows] + [x['oq'] for x in rows])
+    out = []
+    for x in rows:
+        n, t, o = L.get(x['q'], {}).get('l', ''), L.get(x['tq'], {}).get('l', ''), L.get(x['oq'], {}).get('l', '')
+        if not n or re.match(r'^Q\d+$', n): continue
+        out.append({**x, 'n': n, 'title': t, 'of': o, 'frwiki': L.get(x['q'], {}).get('fr', '')})
     out.sort(key=lambda r: (r['ins'], r['s'] or r['b'] or r['d'] or 0))
     save('seigneurs', {**WD, 'what': 'Seigneurs, barons, comtes… d’un lieu de France avant 1800 (Wikidata : titre de noblesse P97 avec le lieu du titre P1001 / P276, ou P1001 du titre ; dates P580 / P582, sinon naissance et mort)',
                        **table(['q', 'n', 'title', 'tq', 'of', 'oq', 'ins', 'commune', 's', 'e', 'b', 'd', 'frwiki'], out)})
