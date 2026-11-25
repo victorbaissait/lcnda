@@ -445,7 +445,7 @@
     /* ── fiche ⋯ → « ⚖️ Dossiers… » ── */
     ext.personMoreItems.push(detail => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || !active()) return null;
-        return {icon: '⚖️', label: i18n('Dossiers…'), run: () => personCasesDialog(Number(p.id), [p.first_name, String(p.last_name || '').toLocaleUpperCase('fr')].filter(Boolean).join(' '))};
+        return {key: 'succ-dossiers', icon: '⚖️', label: i18n('Dossiers…'), run: () => personCasesDialog(Number(p.id), [p.first_name, String(p.last_name || '').toLocaleUpperCase('fr')].filter(Boolean).join(' '))};
     });
     async function personCasesDialog(pid, name) {
         let r; try { r = await get('person_cases', {person_id: pid}); } catch (e) { return toast(e.message, 'error'); }

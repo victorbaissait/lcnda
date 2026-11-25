@@ -662,18 +662,18 @@
     // le menu ⋯ de la fiche (app-sections.js lit ext.personMoreItems : une fonction → une ligne ou null)
     ext.personMoreItems = ext.personMoreItems || [];
     const humanOf = detail => { const p = detail?.person; return p?.id && p.kind !== 'animal' ? p : null; };
-    ext.personMoreItems.push(detail => { const p = humanOf(detail); return p ? {icon: '🌍', label: 'Où chercher ?', run: () => openPerson(Number(p.id))} : null; });
+    ext.personMoreItems.push(detail => { const p = humanOf(detail); return p ? {key: 'ou-chercher', icon: '🌍', label: 'Où chercher ?', run: () => openPerson(Number(p.id))} : null; });
     // et ses raccourcis (les 3 premiers du bloc, écran 5b) quand le bloc les a déjà calculés
     [0, 1, 2].forEach(i => ext.personMoreItems.push(detail => {
         const p = humanOf(detail); if (!p || !SO()) return null;
         const v = [...VIEWS.values()].find(x => x.pid === Number(p.id) && x.res && !x.bar); if (!v) return null;
         const s = SO().shortcuts(v.res.ctx, v.res.list)[i]; if (!s) return null;
-        return {icon: '🌍', label: `› ${s.icon} ${i18n(s.short)} (${s.n})`, run: () => openPerson(Number(p.id), 'ou_chercher', {cats: [s.id]})};
+        return {key: `ou-chercher-${i + 1}`, name: `Où chercher ? › raccourci n° ${i + 1}`, icon: '🌍', label: `› ${s.icon} ${i18n(s.short)} (${s.n})`, run: () => openPerson(Number(p.id), 'ou_chercher', {cats: [s.id]})};
     }));
     ext.personMoreItems.push(detail => {
         const p = humanOf(detail); if (!p) return null;
         const manual = !!(cache.get(Number(p.id))?.raw?.wall?.manual);
-        return {icon: '🧱', label: manual ? 'Ne plus bloquer ici' : 'Je bloque ici (mur de brique)', run: async () => {
+        return {key: 'mur', name: 'Je bloque ici (mur de brique)', icon: '🧱', label: manual ? 'Ne plus bloquer ici' : 'Je bloque ici (mur de brique)', run: async () => {
             let on = !manual; try { on = !(await loadPerson(Number(p.id), {fresh: true, detail})).raw.wall?.manual; } catch (_) {}
             await toggleManual(Number(p.id), A().personName?.(p) || p.first_name || '', on); cache.delete(Number(p.id)); }};
     });

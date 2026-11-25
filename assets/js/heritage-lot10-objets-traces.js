@@ -368,7 +368,9 @@
         const priv = p.living_status === 'living' || Number(p.is_private) === 1 ? '1' : '';
         return A().card(index, T('🔔 Objets et traces'), '', `<div class="l10o-block" data-l10o-person="${Number(p.id)}" data-l10o-priv="${priv}"></div>`, 'span-12').replace('<section class="card ', '<section hidden class="card ');
     };
-    (ext.afterPerson = ext.afterPerson || []).push(() => {
+    let viewing = null; // la fiche ouverte : {id, priv}
+    (ext.afterPerson = ext.afterPerson || []).push(detail => {
+        const P = detail?.person; viewing = P?.id ? {id: Number(P.id), priv: P.living_status === 'living' || Number(P.is_private) === 1} : null;
         document.querySelectorAll('#workspace [data-l10o-person]').forEach(async h => {
             const id = Number(h.dataset.l10oPerson);
             const n = await personInto(h, id, {private: h.dataset.l10oPriv === '1'});
@@ -466,8 +468,11 @@
         if (!n) host.innerHTML = emptyLine(T(empty), 'ℹ️');
         return n;
     }
+    const ONLINE = ['cloches', 'musee', 'herbier', 'plaques'];
     async function runPlace(kind, ctx, host) {
         const pl = placeOfCtx(ctx.place); if (!pl) { host.innerHTML = emptyLine(T('Choisis un lieu.'), '📍'); return null; }
+        // « 🔎 Ce qui le concerne » lance les sources de lieu en fond pour la fiche ouverte : rien en ligne pour une fiche vivante ou confidentielle
+        if (ONLINE.includes(kind) && viewing?.priv && host.closest?.('.ts-parking')) { host.innerHTML = ''; return false; }
         const html = await placePart(kind, pl, {});
         host.innerHTML = html ? `<div class="hist-life l10o-life">${html}</div>` : '';
         return !!html;
@@ -480,8 +485,8 @@
         ['pelerinages', '🕯️', 'Les pèlerinages de sa région', 'Aucun lieu de pèlerinage connu à moins de 50 km.'],
         ['hospices', '🏥', 'Les hospices près du lieu de sa mort', 'Il faut un lieu et une année de décès.']];
     (ext.dataSources = ext.dataSources || []).push(
-        ...PDS.map(([k, icon, label, empty]) => ({id: `l10op_${k}`, icon, label: T(label), group: 'La personne', needs: ['person'], installed: () => true, run: (ctx, host) => runPerson([k], ctx, host, empty)})),
-        ...MONO.map(([kind, id, icon, label]) => ({id: `${id}_lieu`, icon, label: T(label), group: 'Le lieu', needs: ['place'], installed: () => true, run: (ctx, host) => runPlace(kind, ctx, host)})));
+        ...PDS.map(([k, icon, label, empty]) => ({id: `l10op_${k}`, icon, label: T(label), group: 'La personne', needs: ['person'], online: ONLINE.includes(k), installed: () => true, run: (ctx, host) => runPerson([k], ctx, host, empty)})),
+        ...MONO.map(([kind, id, icon, label]) => ({id: `${id}_lieu`, icon, label: T(label), group: 'Le lieu', needs: ['place'], online: ONLINE.includes(kind), installed: () => true, run: (ctx, host) => runPlace(kind, ctx, host)})));
 
     /* ─────────── 🌍 Où chercher : un site en plus (registre des sites du monde) ─────────── */
     function registerOuChercher() {

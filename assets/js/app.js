@@ -9161,7 +9161,7 @@ ${backupSectionHtml()}
         undoToast(on?i18n('Lien de parenté affiché sur les fiches.'):i18n('Lien de parenté masqué sur les fiches.'),{undo:()=>paSetKinHead(before),icon:'🧭'});
     }
     {const ext=window.LCNDA_EXT=window.LCNDA_EXT||{};ext.personMoreItems=ext.personMoreItems||[];
-     ext.personMoreItems.push(detail=>{const p=detail?.person||{};return p.id&&paRootId()?{icon:'🧭',label:paKinHeadOn()?i18n('Masquer le lien de parenté'):i18n('Afficher le lien de parenté'),run:()=>paSetKinHead(!paKinHeadOn())}:null;});}
+     ext.personMoreItems.push(detail=>{const p=detail?.person||{};return p.id&&paRootId()?{key:'kin',name:i18n('Afficher / masquer le lien de parenté'),icon:'🧭',label:paKinHeadOn()?i18n('Masquer le lien de parenté'):i18n('Afficher le lien de parenté'),run:()=>paSetKinHead(!paKinHeadOn())}:null;});}
     async function paFillKinHead(detail){
         const id=Number(detail?.person?.id),badge=$(`[data-pa-kin-head="${id}"]`);if(!badge||!paRootId())return;
         if(!paKinHeadOn()){badge.hidden=true;return;} // 🧭 masquée par le choix de la personne (⋯ de la fiche)

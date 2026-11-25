@@ -1113,7 +1113,7 @@
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || hidden()) return null;
         const dead = p.living_status === 'deceased' || (detail.events || []).some(ev => ['DEAT', 'BURI', 'CREM'].includes(ev.gedcom_tag || ev.tag));
         if (!dead) return null;
-        return {icon: '⚖️', label: i18n('Rechercher les héritiers…'), run: () => openFor(Number(p.id))};
+        return {key: 'succ-heritiers', icon: '⚖️', label: i18n('Rechercher les héritiers…'), run: () => openFor(Number(p.id))};
     });
 
     /* ═════ Le widget « ⚖️ Dossiers de succession » (dossiers en cours, prochaine échéance) ═════ */

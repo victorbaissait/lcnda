@@ -469,7 +469,7 @@
         row.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action ts-hero" data-ts-hero="${Number(p.id)}" data-ts-open="${Number(p.id)}" title="${esc(T('🔎 Tout ce qui le concerne'))}" aria-label="${esc(T('Tout ce qui le concerne'))}">🔎</button>`);
     });
     ext.personMoreItems = ext.personMoreItems || [];
-    ext.personMoreItems.push(detail => { const p = detail?.person; return p?.id && p.kind !== 'animal' ? {icon: '🔎', label: T('Tout ce qui le concerne'), run: () => open({person: Number(p.id)})} : null; });
+    ext.personMoreItems.push(detail => { const p = detail?.person; return p?.id && p.kind !== 'animal' ? {key: 'toutsur', icon: '🔎', label: T('Tout ce qui le concerne'), run: () => open({person: Number(p.id)})} : null; });
 
     /* ═════════════ ⤢ le rapport complet ═════════════ */
     function cardHtml(r, i, life) {
