@@ -31,7 +31,7 @@ const PA_MIN_SCORE = 55;
 const PA_STEP_SECONDS = 2.5;
 const PA_NET_WAIT_MS = 2100; // une requête réseau toutes les ~2 s : < 30 par minute, comme le demande ouc_oa_throttle()
 
-function pa_schema(PDO $pdo): void
+function pst_schema(PDO $pdo): void
 {
     static $done = false;
     if ($done) { return; }
@@ -48,7 +48,7 @@ function pa_schema(PDO $pdo): void
 /* ═════════════════════ petits outils (aussi pour lib/parents_celebres.php) ═════════════════════ */
 
 /** MAJUSCULES sans accents ni signes : « Lacombe-Durand » → « LACOMBEDURAND » */
-function pa_key(string $s): string
+function pst_key(string $s): string
 {
     $s = str_replace(['œ', 'Œ', 'æ', 'Æ', 'ß'], ['oe', 'OE', 'ae', 'AE', 'ss'], $s);
     $s = function_exists('ascii_fold') ? ascii_fold($s) : $s;
@@ -56,16 +56,16 @@ function pa_key(string $s): string
     return (string) preg_replace('/[^A-Z]+/', '', strtoupper($s));
 }
 /** les mots d'un nom, chacun en clé : « Jean-Marie Victor » → [JEAN, MARIE, VICTOR, JEANMARIE] */
-function pa_words(string $s): array
+function pst_words(string $s): array
 {
     $out = [];
-    foreach (preg_split('/[\s,]+/u', trim($s)) ?: [] as $w) { if ($w === '') { continue; } foreach (explode('-', $w) as $p) { $k = pa_key($p); if ($k !== '') { $out[] = $k; } } if (str_contains($w, '-')) { $out[] = pa_key($w); } }
+    foreach (preg_split('/[\s,]+/u', trim($s)) ?: [] as $w) { if ($w === '') { continue; } foreach (explode('-', $w) as $p) { $k = pst_key($p); if ($k !== '') { $out[] = $k; } } if (str_contains($w, '-')) { $out[] = pst_key($w); } }
     return array_values(array_unique($out));
 }
-function pa_town(string $place): string { return trim((string) preg_split('/[,(]/u', $place)[0]); }
+function pst_town(string $place): string { return trim((string) preg_split('/[,(]/u', $place)[0]); }
 
 /** une fiche vue par les pistes : nom, prénoms, dates, lieux, parents, conjoint */
-function pa_facts(PDO $pdo, int $pid): ?array
+function pst_facts(PDO $pdo, int $pid): ?array
 {
     static $memo = [];
     if (isset($memo[$pid])) { return $memo[$pid]; }
@@ -85,7 +85,7 @@ function pa_facts(PDO $pdo, int $pid): ?array
         if ($y) { $years[] = $y; }
         if (in_array($tag, ['BIRT', 'CHR', 'BAPM'], true)) { if ($by === null && $y) { $by = $y; } if ($bplace === '' && $e['place'] !== '') { $bplace = (string) $e['place']; } }
         if (in_array($tag, ['DEAT', 'BURI', 'CREM'], true)) { $hasDeath = true; if ($dy === null && $y) { $dy = $y; } if ($dplace === '' && $e['place'] !== '') { $dplace = (string) $e['place']; } }
-        $town = pa_town((string) $e['place']);
+        $town = pst_town((string) $e['place']);
         if ($town !== '' && !in_array($town, $towns, true)) { $towns[] = $town; }
     }
     $estimated = false;
@@ -99,7 +99,7 @@ function pa_facts(PDO $pdo, int $pid): ?array
 }
 
 /** pourquoi cette fiche ne part pas sur Internet ('' : elle peut) — vivante, confidentielle, peut-être vivante, animal */
-function pa_private_reason(?array $f): string
+function pst_private_reason(?array $f): string
 {
     if (!$f) { return 'introuvable'; }
     if ($f['animal'] || $f['outside']) { return 'hors_genealogie'; }
@@ -111,9 +111,9 @@ function pa_private_reason(?array $f): string
 
 /* ═════════════════════ les tâches de fond (une ligne par recherche ; aussi pour les parents célèbres) ═════════════════════ */
 
-function pa_job_get(PDO $pdo, int $id, string $kind): ?array
+function pst_job_get(PDO $pdo, int $id, string $kind): ?array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     $s = $pdo->prepare('SELECT * FROM lcnda_bg_jobs WHERE id=? AND kind=?'); $s->execute([$id, $kind]);
     $r = $s->fetch(PDO::FETCH_ASSOC);
     if (!$r) { return null; }
@@ -121,28 +121,28 @@ function pa_job_get(PDO $pdo, int $id, string $kind): ?array
     $r['id'] = (int) $r['id'];
     return $r;
 }
-function pa_job_last(PDO $pdo, string $kind): ?array
+function pst_job_last(PDO $pdo, string $kind): ?array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     $s = $pdo->prepare('SELECT id FROM lcnda_bg_jobs WHERE kind=? ORDER BY id DESC LIMIT 1'); $s->execute([$kind]);
     $id = (int) $s->fetchColumn();
-    return $id ? pa_job_get($pdo, $id, $kind) : null;
+    return $id ? pst_job_get($pdo, $id, $kind) : null;
 }
-function pa_job_save(PDO $pdo, array $job): void
+function pst_job_save(PDO $pdo, array $job): void
 {
     $pdo->prepare('UPDATE lcnda_bg_jobs SET state=?, status=?, message=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')
         ->execute([json_encode($job['state'], JSON_UNESCAPED_UNICODE), $job['status'], mb_substr((string) ($job['message'] ?? ''), 0, 500), $job['id']]);
 }
-function pa_job_new(PDO $pdo, string $kind, string $label, array $state): array
+function pst_job_new(PDO $pdo, string $kind, string $label, array $state): array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     $pdo->prepare("UPDATE lcnda_bg_jobs SET status='stopped', updated_at=CURRENT_TIMESTAMP WHERE kind=? AND status IN ('running','paused')")->execute([$kind]);
     $pdo->prepare('INSERT INTO lcnda_bg_jobs(kind, label, state, status) VALUES(?,?,?,?)')->execute([$kind, $label, json_encode($state, JSON_UNESCAPED_UNICODE), 'running']);
     $old = $pdo->prepare('DELETE FROM lcnda_bg_jobs WHERE kind=? AND id NOT IN (SELECT id FROM lcnda_bg_jobs WHERE kind=? ORDER BY id DESC LIMIT 10)'); $old->execute([$kind, $kind]);
-    return pa_job_get($pdo, (int) $pdo->lastInsertId(), $kind) ?? throw new RuntimeException('Recherche impossible.');
+    return pst_job_get($pdo, (int) $pdo->lastInsertId(), $kind) ?? throw new RuntimeException('Recherche impossible.');
 }
 /** ce que l'écran montre d'une tâche (sans la liste des fiches) */
-function pa_job_out(?array $job): ?array
+function pst_job_out(?array $job): ?array
 {
     if (!$job) { return null; }
     $st = $job['state'];
@@ -151,7 +151,7 @@ function pa_job_out(?array $job): ?array
         'counts' => $st['counts'] ?? [], 'sources' => $st['sources'] ?? [], 'scope' => (string) ($st['scope'] ?? ''), 'started' => (string) $job['created_at'], 'updated' => (string) $job['updated_at']];
 }
 /** les fiches d'une portée : tout l'arbre, les ancêtres (Sosa), une branche, les descendants, une personne */
-function pa_scope_ids(PDO $pdo, string $scope): array
+function pst_scope_ids(PDO $pdo, string $scope): array
 {
     if ($scope === 'all' || $scope === '') { return array_map('intval', $pdo->query('SELECT id FROM persons ORDER BY id')->fetchAll(PDO::FETCH_COLUMN)); }
     if (preg_match('/^person:(\d+)$/', $scope, $m)) { return person_exists($pdo, (int) $m[1]) ? [(int) $m[1]] : []; }
@@ -166,7 +166,7 @@ function pa_scope_ids(PDO $pdo, string $scope): array
     }
     throw new LcndaBadInput('Portée inconnue.');
 }
-function pa_scope_label(PDO $pdo, string $scope): string
+function pst_scope_label(PDO $pdo, string $scope): string
 {
     if ($scope === 'all' || $scope === '') { return i18n_t('Tout l’arbre'); }
     if ($scope === 'sosa') { return i18n_t('Mes ancêtres (Sosa)'); }
@@ -180,26 +180,26 @@ function pa_scope_label(PDO $pdo, string $scope): string
 /* ═════════════════════ la note d'une piste ═════════════════════ */
 
 /** [ok|q|no, texte] → « ✓ même nom » ; le score va de 0 à 100 */
-function pa_check(string $k, string $text): array { return [$k, $text]; }
+function pst_check(string $k, string $text): array { return [$k, $text]; }
 
 /** une ligne de résultat d'Open Archives (ouc_oa_row) comparée à la fiche → null (écartée) ou {score, why[], tag, main} */
-function pa_oa_score(array $f, array $row): ?array
+function pst_oa_score(array $f, array $row): ?array
 {
-    $last = pa_key($f['last']);
-    $words = pa_words((string) $row['name']);
+    $last = pst_key($f['last']);
+    $words = pst_words((string) $row['name']);
     if ($last === '' || !$words) { return null; }
     $full = implode('', $words);
     if (!str_contains($full, $last)) { return null; }
-    $why = [pa_check('ok', i18n_t('même nom ({n})', ['n' => $f['last']]))]; $score = 30;
+    $why = [pst_check('ok', i18n_t('même nom ({n})', ['n' => $f['last']]))]; $score = 30;
     // les prénoms de l'acte : ce qui précède le nom
-    $lastWords = pa_words($f['last']);
+    $lastWords = pst_words($f['last']);
     $given = array_values(array_filter($words, static fn($w) => !in_array($w, $lastWords, true) && !in_array($w, ['VAN', 'DE', 'DER', 'DEN', 'LE', 'LA', 'DU', 'TER', 'TEN'], true)));
-    $mine = pa_words($f['first']);
+    $mine = pst_words($f['first']);
     if ($given && $mine) {
-        if ($given[0] === $mine[0]) { $score += 25; $why[] = pa_check('ok', i18n_t('même prénom ({p})', ['p' => explode(' ', trim($f['first']))[0]])); }
-        elseif (array_intersect($given, $mine)) { $score += 16; $why[] = pa_check('q', i18n_t('un de ses prénoms')); }
+        if ($given[0] === $mine[0]) { $score += 25; $why[] = pst_check('ok', i18n_t('même prénom ({p})', ['p' => explode(' ', trim($f['first']))[0]])); }
+        elseif (array_intersect($given, $mine)) { $score += 16; $why[] = pst_check('q', i18n_t('un de ses prénoms')); }
         else { return null; } // un autre prénom écrit en toutes lettres : quelqu'un d'autre
-    } elseif ($mine) { $why[] = pa_check('q', i18n_t('prénom absent de l’acte')); }
+    } elseif ($mine) { $why[] = pst_check('q', i18n_t('prénom absent de l’acte')); }
     $tag = function_exists('ouc_oa_tag') ? ouc_oa_tag((string) ($row['type_nl'] ?: $row['type'])) : '';
     $role = mb_strtolower((string) ($row['role_nl'] ?: $row['role']));
     $main = defined('OUC_OA_MAIN_ROLES') && in_array($role, OUC_OA_MAIN_ROLES, true);
@@ -210,34 +210,34 @@ function pa_oa_score(array $f, array $row): ?array
         if ($y < $by - 1 - ($f['estimated'] ? 15 : 0) || $y > $hi) { return null; } // hors de sa vie
         if ($main && in_array($tag, ['BIRT', 'BAPM'], true)) {
             $d = abs($y - $by);
-            if ($f['estimated']) { $score += 8; $why[] = pa_check('q', i18n_t('naissance en {y} (sa fiche n’a pas de date de naissance)', ['y' => $y])); }
-            elseif ($d === 0) { $score += 25; $why[] = pa_check('ok', i18n_t('né(e) la même année ({y})', ['y' => $y])); }
-            elseif ($d === 1) { $score += 18; $why[] = pa_check('ok', i18n_t('né(e) à un an près ({y} ; sa fiche : {z})', ['y' => $y, 'z' => $by])); }
-            elseif ($d <= 3) { $score += 6; $why[] = pa_check('q', i18n_t('naissance en {y} (sa fiche : {z})', ['y' => $y, 'z' => $by])); }
+            if ($f['estimated']) { $score += 8; $why[] = pst_check('q', i18n_t('naissance en {y} (sa fiche n’a pas de date de naissance)', ['y' => $y])); }
+            elseif ($d === 0) { $score += 25; $why[] = pst_check('ok', i18n_t('né(e) la même année ({y})', ['y' => $y])); }
+            elseif ($d === 1) { $score += 18; $why[] = pst_check('ok', i18n_t('né(e) à un an près ({y} ; sa fiche : {z})', ['y' => $y, 'z' => $by])); }
+            elseif ($d <= 3) { $score += 6; $why[] = pst_check('q', i18n_t('naissance en {y} (sa fiche : {z})', ['y' => $y, 'z' => $by])); }
             else { return null; }
         } elseif ($main && in_array($tag, ['DEAT', 'BURI'], true)) {
-            if ($dy !== null) { $d = abs($y - $dy); if ($d === 0) { $score += 25; $why[] = pa_check('ok', i18n_t('mort(e) la même année ({y})', ['y' => $y])); } elseif ($d <= 1) { $score += 15; $why[] = pa_check('ok', i18n_t('mort(e) à un an près ({y})', ['y' => $y])); } else { return null; } }
-            else { $score += 10; $why[] = pa_check('q', i18n_t('décès en {y}, à {a} ans environ (sa fiche n’a pas de décès)', ['y' => $y, 'a' => $y - $by])); }
+            if ($dy !== null) { $d = abs($y - $dy); if ($d === 0) { $score += 25; $why[] = pst_check('ok', i18n_t('mort(e) la même année ({y})', ['y' => $y])); } elseif ($d <= 1) { $score += 15; $why[] = pst_check('ok', i18n_t('mort(e) à un an près ({y})', ['y' => $y])); } else { return null; } }
+            else { $score += 10; $why[] = pst_check('q', i18n_t('décès en {y}, à {a} ans environ (sa fiche n’a pas de décès)', ['y' => $y, 'a' => $y - $by])); }
         } elseif ($main && $tag === 'MARR') {
             $age = $y - $by;
             if ($age < 14 || $age > 75) { return null; }
-            $score += 12; $why[] = pa_check('ok', i18n_t('marié(e) en {y}, à {a} ans environ', ['y' => $y, 'a' => $age]));
+            $score += 12; $why[] = pst_check('ok', i18n_t('marié(e) en {y}, à {a} ans environ', ['y' => $y, 'a' => $age]));
         } else {
-            $score += 4; $why[] = pa_check('q', i18n_t('cité(e) en {y}, de son vivant', ['y' => $y]));
+            $score += 4; $why[] = pst_check('q', i18n_t('cité(e) en {y}, de son vivant', ['y' => $y]));
         }
-    } elseif ($y) { $why[] = pa_check('q', i18n_t('acte de {y} (sa fiche n’a pas de date)', ['y' => $y])); }
-    $town = pa_key(pa_town((string) $row['place']));
+    } elseif ($y) { $why[] = pst_check('q', i18n_t('acte de {y} (sa fiche n’a pas de date)', ['y' => $y])); }
+    $town = pst_key(pst_town((string) $row['place']));
     if ($town !== '') {
-        $hit = null; foreach ($f['towns'] as $t) { if (pa_key($t) === $town) { $hit = $t; break; } }
-        if ($hit !== null) { $score += 15; $why[] = pa_check('ok', i18n_t('même lieu ({l})', ['l' => $hit])); }
-        elseif ($f['towns']) { $why[] = pa_check('q', i18n_t('lieu : {l} (sa fiche : {m})', ['l' => pa_town((string) $row['place']), 'm' => implode(', ', array_slice($f['towns'], 0, 2))])); }
+        $hit = null; foreach ($f['towns'] as $t) { if (pst_key($t) === $town) { $hit = $t; break; } }
+        if ($hit !== null) { $score += 15; $why[] = pst_check('ok', i18n_t('même lieu ({l})', ['l' => $hit])); }
+        elseif ($f['towns']) { $why[] = pst_check('q', i18n_t('lieu : {l} (sa fiche : {m})', ['l' => pst_town((string) $row['place']), 'm' => implode(', ', array_slice($f['towns'], 0, 2))])); }
     }
-    if (!$main) { $score -= 10; $why[] = pa_check('q', i18n_t('cité(e) dans l’acte comme : {r}', ['r' => (string) ($row['role'] ?: $row['role_nl'])])); }
+    if (!$main) { $score -= 10; $why[] = pst_check('q', i18n_t('cité(e) dans l’acte comme : {r}', ['r' => (string) ($row['role'] ?: $row['role_nl'])])); }
     return ['score' => max(0, min(100, $score)), 'why' => $why, 'tag' => $tag, 'main' => $main];
 }
 
 /** l'acte lu (ouc_oa_parse_record) : ses parents comparés à ceux de la fiche → [bonus, why[]] */
-function pa_oa_parents(array $f, array $rec, string $pid): array
+function pst_oa_parents(array $f, array $rec, string $pid): array
 {
     $roles = ['father' => ['vader', 'père', 'pere', 'vader van de bruidegom', 'vader van de bruid', 'father'], 'mother' => ['moeder', 'mère', 'mere', 'moeder van de bruidegom', 'moeder van de bruid', 'mother']];
     $isBride = false;
@@ -250,11 +250,11 @@ function pa_oa_parents(array $f, array $rec, string $pid): array
             $r = mb_strtolower($p['role_raw']);
             if (!in_array($r, $roles[$k], true)) { continue; }
             if (str_contains($r, 'bruid')) { $forBride = str_ends_with($r, 'bruid'); if ($forBride !== $isBride) { continue; } }
-            $a = pa_words($p['first'] ?: $p['name']); $b = pa_words($mine['first']);
+            $a = pst_words($p['first'] ?: $p['name']); $b = pst_words($mine['first']);
             if (!$a) { continue; }
-            if ($a[0] === ($b[0] ?? '')) { $bonus += 10; $why[] = pa_check('ok', i18n_t('même {w} : {n}', ['w' => i18n_t($word), 'n' => $p['name']])); }
-            elseif (array_intersect($a, $b)) { $bonus += 5; $why[] = pa_check('q', i18n_t('{w} : {n} (sa fiche : {m})', ['w' => i18n_t($word), 'n' => $p['name'], 'm' => trim($mine['first'] . ' ' . $mine['last'])])); }
-            else { $bonus -= 15; $why[] = pa_check('no', i18n_t('{w} : {n} (sa fiche : {m})', ['w' => i18n_t($word), 'n' => $p['name'], 'm' => trim($mine['first'] . ' ' . $mine['last'])])); }
+            if ($a[0] === ($b[0] ?? '')) { $bonus += 10; $why[] = pst_check('ok', i18n_t('même {w} : {n}', ['w' => i18n_t($word), 'n' => $p['name']])); }
+            elseif (array_intersect($a, $b)) { $bonus += 5; $why[] = pst_check('q', i18n_t('{w} : {n} (sa fiche : {m})', ['w' => i18n_t($word), 'n' => $p['name'], 'm' => trim($mine['first'] . ' ' . $mine['last'])])); }
+            else { $bonus -= 15; $why[] = pst_check('no', i18n_t('{w} : {n} (sa fiche : {m})', ['w' => i18n_t($word), 'n' => $p['name'], 'm' => trim($mine['first'] . ' ' . $mine['last'])])); }
             break;
         }
     }
@@ -264,7 +264,7 @@ function pa_oa_parents(array $f, array $rec, string $pid): array
 /* ═════════════════════ les sources ═════════════════════ */
 
 /** les pistes déjà décidées pour une fiche : src|clé → statut */
-function pa_decided(PDO $pdo, int $pid): array
+function pst_decided(PDO $pdo, int $pid): array
 {
     $s = $pdo->prepare("SELECT src, rec_key, status FROM pistes WHERE person_id=? AND status<>'new'"); $s->execute([$pid]);
     $out = [];
@@ -273,7 +273,7 @@ function pa_decided(PDO $pdo, int $pid): array
     return $out;
 }
 /** garde une piste (jamais une piste déjà décidée : « ✗ Pas lui » ne revient pas) ; renvoie vrai si elle est nouvelle */
-function pa_save(PDO $pdo, int $pid, string $src, string $key, int $score, string $title, string $url, array $data): bool
+function pst_save(PDO $pdo, int $pid, string $src, string $key, int $score, string $title, string $url, array $data): bool
 {
     $s = $pdo->prepare('SELECT status FROM pistes WHERE person_id=? AND src=? AND rec_key=?'); $s->execute([$pid, $src, $key]);
     $old = $s->fetchColumn();
@@ -285,36 +285,36 @@ function pa_save(PDO $pdo, int $pid, string $src, string $key, int $score, strin
 }
 
 /** ⚰️ Décès INSEE : même nom, même premier prénom, né(e) à un an près ; le lieu et l'année du décès s'ajoutent à la note */
-function pa_insee(PDO $pdo, array $f): array
+function pst_insee(PDO $pdo, array $f): array
 {
     static $has = null;
     $has ??= (bool) $pdo->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='insee_deces'")->fetchColumn() && (bool) $pdo->query('SELECT 1 FROM insee_deces LIMIT 1')->fetchColumn();
     if (!$has || $f['birth'] === null || $f['estimated'] || $f['birth'] < 1860) { return []; }
     if ($f['death'] !== null && $f['death'] < 1970) { return []; }
-    $nom = pa_key($f['last']); $mine = pa_words($f['first']);
+    $nom = pst_key($f['last']); $mine = pst_words($f['first']);
     if ($nom === '' || !$mine) { return []; }
     $s = $pdo->prepare("SELECT * FROM insee_deces WHERE nom GLOB ? AND annee_naissance BETWEEN ? AND ? LIMIT 300");
     $s->execute([strtoupper(ascii_fold(trim($f['last']))) . '*', $f['birth'] - 1, $f['birth'] + 1]);
     $out = []; $seen = [];
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) {
-        if (pa_key((string) $r['nom']) !== $nom) { continue; }
-        $theirs = pa_words((string) ($r['prenoms'] ?: $r['prenom']));
+        if (pst_key((string) $r['nom']) !== $nom) { continue; }
+        $theirs = pst_words((string) ($r['prenoms'] ?: $r['prenom']));
         if (!$theirs || !in_array($mine[0], $theirs, true)) { continue; }
         $sx = strtoupper((string) $r['sexe']); $sx = $sx === '1' ? 'M' : ($sx === '2' ? 'F' : $sx);
         if (in_array($sx, ['M', 'F'], true) && in_array($f['gender'], ['male', 'female'], true) && ($sx === 'F') !== ($f['gender'] === 'female')) { continue; }
         $dy = (int) $r['annee_deces'];
         if ($f['death'] !== null && $dy && abs($dy - $f['death']) > 1) { continue; }
-        $key = 'i:' . substr(sha1($nom . '|' . pa_key((string) $r['prenoms']) . '|' . $r['date_naissance'] . '|' . $r['date_deces'] . '|' . $r['numero_acte_deces']), 0, 20);
+        $key = 'i:' . substr(sha1($nom . '|' . pst_key((string) $r['prenoms']) . '|' . $r['date_naissance'] . '|' . $r['date_deces'] . '|' . $r['numero_acte_deces']), 0, 20);
         if (isset($seen[$key])) { continue; } $seen[$key] = true;
-        $why = [pa_check('ok', i18n_t('même nom ({n})', ['n' => $f['last']])), $theirs[0] === $mine[0] ? pa_check('ok', i18n_t('même prénom ({p})', ['p' => ucfirst(strtolower($mine[0]))])) : pa_check('q', i18n_t('un de ses prénoms'))];
+        $why = [pst_check('ok', i18n_t('même nom ({n})', ['n' => $f['last']])), $theirs[0] === $mine[0] ? pst_check('ok', i18n_t('même prénom ({p})', ['p' => ucfirst(strtolower($mine[0]))])) : pst_check('q', i18n_t('un de ses prénoms'))];
         $score = 30 + ($theirs[0] === $mine[0] ? 25 : 15);
         $ry = (int) $r['annee_naissance'];
-        if ($ry === $f['birth']) { $score += 25; $why[] = pa_check('ok', i18n_t('né(e) la même année ({y})', ['y' => $ry])); } else { $score += 15; $why[] = pa_check('ok', i18n_t('né(e) à un an près ({y} ; sa fiche : {z})', ['y' => $ry, 'z' => $f['birth']])); }
-        $bt = pa_key(pa_town($f['birth_place']));
-        if ($bt !== '' && pa_key((string) $r['commune_naissance']) === $bt) { $score += 15; $why[] = pa_check('ok', i18n_t('même lieu de naissance ({l})', ['l' => (string) $r['commune_naissance']])); }
-        elseif ($bt !== '' && trim((string) $r['commune_naissance']) !== '') { $score -= 10; $why[] = pa_check('q', i18n_t('né(e) à {l} (sa fiche : {m})', ['l' => (string) $r['commune_naissance'], 'm' => pa_town($f['birth_place'])])); }
-        if ($f['death'] !== null && $dy) { $score += 5; $why[] = pa_check('ok', i18n_t('mort(e) la même année ({y})', ['y' => $dy])); }
-        elseif ($dy) { $why[] = pa_check('q', i18n_t('mort(e) en {y} (sa fiche n’a pas de décès)', ['y' => $dy])); }
+        if ($ry === $f['birth']) { $score += 25; $why[] = pst_check('ok', i18n_t('né(e) la même année ({y})', ['y' => $ry])); } else { $score += 15; $why[] = pst_check('ok', i18n_t('né(e) à un an près ({y} ; sa fiche : {z})', ['y' => $ry, 'z' => $f['birth']])); }
+        $bt = pst_key(pst_town($f['birth_place']));
+        if ($bt !== '' && pst_key((string) $r['commune_naissance']) === $bt) { $score += 15; $why[] = pst_check('ok', i18n_t('même lieu de naissance ({l})', ['l' => (string) $r['commune_naissance']])); }
+        elseif ($bt !== '' && trim((string) $r['commune_naissance']) !== '') { $score -= 10; $why[] = pst_check('q', i18n_t('né(e) à {l} (sa fiche : {m})', ['l' => (string) $r['commune_naissance'], 'm' => pst_town($f['birth_place'])])); }
+        if ($f['death'] !== null && $dy) { $score += 5; $why[] = pst_check('ok', i18n_t('mort(e) la même année ({y})', ['y' => $dy])); }
+        elseif ($dy) { $why[] = pst_check('q', i18n_t('mort(e) en {y} (sa fiche n’a pas de décès)', ['y' => $dy])); }
         $dd = (string) $r['date_deces'];
         $ddTxt = preg_match('/^(\d{4})-?(\d\d)-?(\d\d)$/', $dd, $m) ? ((int) $m[3] . '/' . $m[2] . '/' . $m[1]) : ($dy ? (string) $dy : $dd);
         $first = ucwords(strtolower(trim((string) ($r['prenoms'] ?: $r['prenom']))));
@@ -329,13 +329,13 @@ function pa_insee(PDO $pdo, array $f): array
 }
 
 /** 🎖️ Morts pour la France / 🏅 Léonore (bases à installer : rien si elles ne le sont pas) */
-function pa_bo(PDO $pdo, array $f, string $kind): array
+function pst_bo(PDO $pdo, array $f, string $kind): array
 {
     if (!function_exists('bo_matches')) { require_once __DIR__ . '/bases_officielles.php'; }
     try { $bf = bo_person_facts($pdo, $f['id']); $m = bo_matches($kind, $bf, 3); } catch (Throwable $_) { return []; }
     $out = [];
     foreach ($m as $r) {
-        $why = array_map(static fn($w) => pa_check('ok', (string) $w), $r['why']);
+        $why = array_map(static fn($w) => pst_check('ok', (string) $w), $r['why']);
         $title = ($kind === 'leonore' ? i18n_t('Légion d’honneur — ') : i18n_t('Mort pour la France — ')) . trim(mb_strtoupper($r['nom']) . ' ' . $r['prenoms']) . ($r['annee'] ? ' (' . $r['annee'] . ')' : '');
         $out[] = ['src' => $kind, 'key' => $r['key'], 'score' => min(98, 55 + 6 * (int) $r['score']), 'why' => $why, 'title' => $title, 'url' => $r['url'] !== '' ? $r['url'] : $r['home'],
             'data' => ['bo_id' => $r['id'], 'tag' => $kind === 'mpf' ? 'DEAT' : '', 'date' => $r['deces'], 'place' => $r['lieu_deces'], 'archive' => $r['source'] ?: ($kind === 'leonore' ? 'Archives nationales' : 'Mémoire des hommes'), 'licence' => $r['licence'], 'source_url' => $r['source_url'], 'cote' => $r['cote']]];
@@ -344,14 +344,14 @@ function pa_bo(PDO $pdo, array $f, string $kind): array
 }
 
 /** 📇 Annuaires de Paris (pack à installer) */
-function pa_annuaire(PDO $pdo, array $f): array
+function pst_annuaire(PDO $pdo, array $f): array
 {
     if (!function_exists('ba_matches')) { require_once __DIR__ . '/brevets_annuaires.php'; }
     try { if (!ba_pdo()) { return []; } $bf = ba_person_facts($pdo, $f['id']); $m = ba_matches($bf, 2); } catch (Throwable $_) { return []; }
     $out = [];
     foreach ($m['groups'] ?? [] as $g) {
         $b = $g['best'];
-        $why = array_map(static fn($w) => pa_check('ok', (string) $w), array_values(array_unique($g['why'])));
+        $why = array_map(static fn($w) => pst_check('ok', (string) $w), array_values(array_unique($g['why'])));
         $out[] = ['src' => 'annuaire', 'key' => $g['key'], 'score' => min(95, 50 + 5 * (int) $g['score']), 'why' => $why,
             'title' => i18n_t('Annuaire de Paris {y} — {e}', ['y' => $g['from'] === $g['to'] ? (string) $g['from'] : $g['from'] . '–' . $g['to'], 'e' => trim($b['name'] . ($b['act'] !== '' ? ', ' . $b['act'] : '') . ($b['address'] !== '' ? ', ' . $b['address'] : ''))]),
             'url' => (string) ($b['url'] ?? ''), 'data' => ['ba_id' => (int) $b['id'], 'tag' => 'RESI', 'date' => (string) $g['from'], 'place' => 'Paris', 'archive' => 'SoDUCo — annuaires (BnF Gallica)', 'licence' => 'Licence Ouverte 2.0']];
@@ -360,7 +360,7 @@ function pa_annuaire(PDO $pdo, array $f): array
 }
 
 /** 🇳🇱🇧🇪 la question posée à Open Archives pour une fiche (null : pas assez pour chercher) */
-function pa_oa_query(array $f): ?array
+function pst_oa_query(array $f): ?array
 {
     $clean = static fn(string $x) => trim(preg_replace('/\s+/u', ' ', preg_replace('/[&"*?~$%>()\-]+/u', ' ', $x) ?? '') ?? '');
     $last = $clean($f['last']); $first = $clean(trim(preg_split('/[\s,]+/', trim($f['first']))[0] ?? ''));
@@ -369,7 +369,7 @@ function pa_oa_query(array $f): ?array
     $name = $first !== '' ? '"' . $first . ' ' . $last . '"' : '>' . str_replace(' ', ' >', $last);
     return ['name' => "$name $y1-$y2", 'lang' => 'fr', 'number_show' => 50, 'sort' => 4];
 }
-function pa_oa_title(array $row): string
+function pst_oa_title(array $row): string
 {
     $type = OUC_OA_EVENT_FR[mb_strtolower((string) $row['type_nl'])] ?? ($row['type'] ?: i18n_t('Acte'));
     return trim($type . ' — ' . $row['name'] . ($row['role'] !== '' ? ' (' . $row['role'] . ')' : '') . ($row['year'] ? ', ' . $row['year'] : '') . ($row['place'] !== '' ? ', ' . $row['place'] : ''));
@@ -378,25 +378,25 @@ function pa_oa_title(array $row): string
 /* ═════════════════════ la recherche, pas à pas ═════════════════════ */
 
 /** POST pistes_start : une nouvelle recherche (l'ancienne s'arrête) */
-function pa_start(PDO $pdo, array $d): array
+function pst_start(PDO $pdo, array $d): array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     $scope = (string) ($d['scope'] ?? 'all');
-    $ids = pa_scope_ids($pdo, $scope);
+    $ids = pst_scope_ids($pdo, $scope);
     if (!$ids) { throw new LcndaBadInput(i18n_t('Aucune fiche dans ce choix.')); }
     $src = array_values(array_intersect(PA_SOURCES, array_map('strval', (array) ($d['sources'] ?? PA_SOURCES))));
     if (!$src) { throw new LcndaBadInput(i18n_t('Choisis au moins une source.')); }
-    $job = pa_job_new($pdo, 'pistes', pa_scope_label($pdo, $scope), ['scope' => $scope, 'ids' => $ids, 'pos' => 0, 'sources' => $src, 'sub' => null,
+    $job = pst_job_new($pdo, 'pistes', pst_scope_label($pdo, $scope), ['scope' => $scope, 'ids' => $ids, 'pos' => 0, 'sources' => $src, 'sub' => null,
         'counts' => ['done' => 0, 'found' => 0, 'private' => 0, 'net' => 0, 'cached' => 0, 'errors' => 0]]);
-    return ['job' => pa_job_out($job)];
+    return ['job' => pst_job_out($job)];
 }
 
 /** POST pistes_step {id} : avance la recherche (au plus ~2,5 s de travail et UNE requête réseau) */
-function pa_step(PDO $pdo, array $d): array
+function pst_step(PDO $pdo, array $d): array
 {
-    $job = pa_job_get($pdo, safe_int($d['id'] ?? 0), 'pistes');
+    $job = pst_job_get($pdo, safe_int($d['id'] ?? 0), 'pistes');
     if (!$job) { throw new LcndaBadInput(i18n_t('Recherche introuvable.')); }
-    if ($job['status'] !== 'running') { return ['job' => pa_job_out($job), 'wait_ms' => 0]; }
+    if ($job['status'] !== 'running') { return ['job' => pst_job_out($job), 'wait_ms' => 0]; }
     $st = &$job['state'];
     $ids = $st['ids']; $n = count($ids);
     $deadline = microtime(true) + PA_STEP_SECONDS;
@@ -405,24 +405,24 @@ function pa_step(PDO $pdo, array $d): array
         $pid = (int) $ids[$st['pos']];
         if (($st['sub']['pid'] ?? 0) !== $pid) { $st['sub'] = ['pid' => $pid, 'phase' => 'local', 'todo' => []]; }
         $sub = &$st['sub'];
-        $f = pa_facts($pdo, $pid);
-        if (($why = pa_private_reason($f)) !== '') { $st['counts']['private'] += $why === 'introuvable' ? 0 : 1; $st['pos']++; $st['sub'] = null; $st['counts']['done']++; unset($sub); continue; }
+        $f = pst_facts($pdo, $pid);
+        if (($why = pst_private_reason($f)) !== '') { $st['counts']['private'] += $why === 'introuvable' ? 0 : 1; $st['pos']++; $st['sub'] = null; $st['counts']['done']++; unset($sub); continue; }
         $decided = null;
         if ($sub['phase'] === 'local') {
-            $decided = pa_decided($pdo, $pid);
+            $decided = pst_decided($pdo, $pid);
             $found = [];
-            if (in_array('insee', $st['sources'], true)) { $found = array_merge($found, pa_insee($pdo, $f)); }
-            foreach (['mpf', 'leonore'] as $k) { if (in_array($k, $st['sources'], true)) { $found = array_merge($found, pa_bo($pdo, $f, $k)); } }
-            if (in_array('annuaire', $st['sources'], true)) { $found = array_merge($found, pa_annuaire($pdo, $f)); }
+            if (in_array('insee', $st['sources'], true)) { $found = array_merge($found, pst_insee($pdo, $f)); }
+            foreach (['mpf', 'leonore'] as $k) { if (in_array($k, $st['sources'], true)) { $found = array_merge($found, pst_bo($pdo, $f, $k)); } }
+            if (in_array('annuaire', $st['sources'], true)) { $found = array_merge($found, pst_annuaire($pdo, $f)); }
             foreach ($found as $x) {
                 if ($x['score'] < PA_MIN_SCORE || isset($decided[$x['src'] . '|' . $x['key']])) { continue; }
-                if (pa_save($pdo, $pid, $x['src'], $x['key'], $x['score'], $x['title'], $x['url'], $x['data'] + ['why' => $x['why']])) { $st['counts']['found']++; }
+                if (pst_save($pdo, $pid, $x['src'], $x['key'], $x['score'], $x['title'], $x['url'], $x['data'] + ['why' => $x['why']])) { $st['counts']['found']++; }
             }
-            $sub['phase'] = in_array('oa', $st['sources'], true) && pa_oa_query($f) ? 'oa_search' : 'done';
+            $sub['phase'] = in_array('oa', $st['sources'], true) && pst_oa_query($f) ? 'oa_search' : 'done';
         }
         if ($sub['phase'] === 'oa_search') {
             if ($net) { unset($sub); break; }
-            try { [$j, $cached] = ouc_oa_cached($pdo, 'records/search.json', pa_oa_query($f)); }
+            try { [$j, $cached] = ouc_oa_cached($pdo, 'records/search.json', pst_oa_query($f)); }
             catch (Throwable $e) {
                 $msg = $e->getMessage();
                 if (preg_match('/attends|moins vite|minute|429/i', $msg)) { $wait = 30000; $job['message'] = $msg; unset($sub); break; } // Open Archives demande d'aller moins vite : on attend, puis on reprend ici
@@ -432,12 +432,12 @@ function pa_step(PDO $pdo, array $d): array
             }
             if (!$cached) { $net = true; $st['counts']['net']++; } elseif ($j !== null) { $st['counts']['cached']++; }
             if ($j !== null) {
-                $decided ??= pa_decided($pdo, $pid);
+                $decided ??= pst_decided($pdo, $pid);
                 $rows = [];
                 foreach ((array) ($j['response']['docs'] ?? []) as $doc) {
                     if (!is_array($doc) || !($row = ouc_oa_row($doc))) { continue; }
                     if (isset($decided['oa|' . $row['key']])) { continue; }
-                    $sc = pa_oa_score($f, $row);
+                    $sc = pst_oa_score($f, $row);
                     if (!$sc || $sc['score'] < PA_MIN_SCORE - 10) { continue; }
                     $rows[$row['key']] ??= [$row, $sc];
                     if ($sc['score'] > $rows[$row['key']][1]['score']) { $rows[$row['key']] = [$row, $sc]; } // une personne citée deux fois dans le même acte : la meilleure lecture
@@ -447,7 +447,7 @@ function pa_step(PDO $pdo, array $d): array
                 $todo = [];
                 foreach ($rows as $k => [$row, $sc]) {
                     if ($sc['score'] >= PA_MIN_SCORE) {
-                        if (pa_save($pdo, $pid, 'oa', $k, $sc['score'], pa_oa_title($row), $row['url'], ['archive_code' => $row['archive_code'], 'identifier' => $row['identifier'], 'pid' => $row['pid'],
+                        if (pst_save($pdo, $pid, 'oa', $k, $sc['score'], pst_oa_title($row), $row['url'], ['archive_code' => $row['archive_code'], 'identifier' => $row['identifier'], 'pid' => $row['pid'],
                             'tag' => $sc['tag'], 'main' => $sc['main'], 'date' => (string) ($row['year'] ?: ''), 'year' => $row['year'], 'place' => $row['place'], 'archive' => $row['archive'], 'role' => $row['role'], 'type' => $row['type'],
                             'source' => $row['source'], 'licence' => i18n_t('celle de l’archive (le plus souvent CC0 1.0)'), 'source_url' => 'https://www.openarchieven.nl/', 'why' => $sc['why']])) { $st['counts']['found']++; }
                     }
@@ -472,7 +472,7 @@ function pa_step(PDO $pdo, array $d): array
                 $s = $pdo->prepare("SELECT id, score, data FROM pistes WHERE person_id=? AND src='oa' AND rec_key=?"); $s->execute([$pid, $k]);
                 $row = $s->fetch(PDO::FETCH_ASSOC);
                 $data = $row ? (json_decode((string) $row['data'], true) ?: []) : null;
-                [$bonus, $why] = pa_oa_parents($f, ouc_oa_parse_record($j, $arch, $ident), (string) ($data['pid'] ?? ''));
+                [$bonus, $why] = pst_oa_parents($f, ouc_oa_parse_record($j, $arch, $ident), (string) ($data['pid'] ?? ''));
                 if (!$why) { continue; }
                 $score = max(0, min(100, $base + $bonus));
                 if ($row) {
@@ -488,24 +488,24 @@ function pa_step(PDO $pdo, array $d): array
     }
     if ((int) $st['pos'] >= $n && $job['status'] === 'running') { $job['status'] = 'done'; }
     unset($st);
-    pa_job_save($pdo, $job);
-    return ['job' => pa_job_out($job), 'wait_ms' => $job['status'] !== 'running' ? 0 : ($wait ?: ($net ? PA_NET_WAIT_MS : 0)), 'new' => pa_count($pdo)['new']];
+    pst_job_save($pdo, $job);
+    return ['job' => pst_job_out($job), 'wait_ms' => $job['status'] !== 'running' ? 0 : ($wait ?: ($net ? PA_NET_WAIT_MS : 0)), 'new' => pst_count($pdo)['new']];
 }
 
-function pa_set_status(PDO $pdo, array $d, string $to): array
+function pst_set_status(PDO $pdo, array $d, string $to): array
 {
-    $job = pa_job_get($pdo, safe_int($d['id'] ?? 0), 'pistes');
+    $job = pst_job_get($pdo, safe_int($d['id'] ?? 0), 'pistes');
     if (!$job) { throw new LcndaBadInput(i18n_t('Recherche introuvable.')); }
     if ($to === 'running' && !in_array($job['status'], ['paused', 'running'], true)) { throw new LcndaBadInput(i18n_t('Cette recherche est finie : relance-en une.')); }
-    if ($to !== 'running' && $job['status'] === 'done') { return ['job' => pa_job_out($job)]; }
+    if ($to !== 'running' && $job['status'] === 'done') { return ['job' => pst_job_out($job)]; }
     $job['status'] = $to; $job['message'] = '';
-    pa_job_save($pdo, $job);
-    return ['job' => pa_job_out($job)];
+    pst_job_save($pdo, $job);
+    return ['job' => pst_job_out($job)];
 }
 
 /* ═════════════════════ la liste ═════════════════════ */
 
-function pa_row_out(array $r): array
+function pst_row_out(array $r): array
 {
     $d = json_decode((string) $r['data'], true) ?: [];
     $years = trim(($r['by'] ?? '') . '–' . ($r['dy'] ?? ''), '–');
@@ -516,9 +516,9 @@ function pa_row_out(array $r): array
 }
 
 /** GET pistes_list */
-function pa_list(PDO $pdo, array $q): array
+function pst_list(PDO $pdo, array $q): array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     $where = []; $args = [];
     $status = (string) ($q['status'] ?? 'new');
     if (in_array($status, ['new', 'added', 'no'], true)) { $where[] = 'p.status=?'; $args[] = $status; }
@@ -536,12 +536,12 @@ function pa_list(PDO $pdo, array $q): array
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.person_id AND t.gedcom_tag IN ('DEAT','BURI') AND e.year IS NOT NULL ORDER BY e.year LIMIT 1) AS dy
         FROM pistes p JOIN persons pe ON pe.id=p.person_id $w ORDER BY $order LIMIT $limit OFFSET $offset");
     $s->execute($args);
-    return ['total' => (int) $total->fetchColumn(), 'rows' => array_map('pa_row_out', $s->fetchAll(PDO::FETCH_ASSOC)), 'counts' => pa_count($pdo)];
+    return ['total' => (int) $total->fetchColumn(), 'rows' => array_map('pst_row_out', $s->fetchAll(PDO::FETCH_ASSOC)), 'counts' => pst_count($pdo)];
 }
 /** GET pistes_count : combien à vérifier (widget, bandeau) */
-function pa_count(PDO $pdo): array
+function pst_count(PDO $pdo): array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     $by = [];
     foreach ($pdo->query("SELECT src, count(*) n FROM pistes p JOIN persons pe ON pe.id=p.person_id WHERE p.status='new' GROUP BY src") as $r) { $by[$r['src']] = (int) $r['n']; }
     $people = (int) $pdo->query("SELECT count(DISTINCT person_id) FROM pistes p JOIN persons pe ON pe.id=p.person_id WHERE p.status='new'")->fetchColumn();
@@ -551,9 +551,9 @@ function pa_count(PDO $pdo): array
 
 /* ═════════════════════ ✓ Rattacher, ✗ Pas lui, ↶ ═════════════════════ */
 
-function pa_row(PDO $pdo, int $id): array
+function pst_row(PDO $pdo, int $id): array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     $s = $pdo->prepare('SELECT * FROM pistes WHERE id=?'); $s->execute([$id]);
     $r = $s->fetch(PDO::FETCH_ASSOC);
     if (!$r) { throw new LcndaBadInput(i18n_t('Piste introuvable.')); }
@@ -562,9 +562,9 @@ function pa_row(PDO $pdo, int $id): array
 }
 
 /** POST pistes_accept {id, mode} : la source (et au choix l'événement « à vérifier ») sur la fiche, par la fonction de chaque source */
-function pa_accept(PDO $pdo, array $d): array
+function pst_accept(PDO $pdo, array $d): array
 {
-    $r = pa_row($pdo, safe_int($d['id'] ?? 0));
+    $r = pst_row($pdo, safe_int($d['id'] ?? 0));
     if ($r['status'] === 'added') { throw new RuntimeException(i18n_t('Cette piste est déjà rattachée.')); }
     $pid = (int) $r['person_id']; $D = $r['data'];
     $mode = (string) ($d['mode'] ?? 'source') === 'event' ? 'event' : 'source';
@@ -585,7 +585,7 @@ function pa_accept(PDO $pdo, array $d): array
             $undo = ['key' => $res['key']];
             break;
         case 'insee':
-            $undo = pa_insee_add($pdo, $r, $mode); $notes = $undo['notes'] ?? [];
+            $undo = pst_insee_add($pdo, $r, $mode); $notes = $undo['notes'] ?? [];
             break;
         default: throw new LcndaBadInput('Source inconnue.');
     }
@@ -594,14 +594,14 @@ function pa_accept(PDO $pdo, array $d): array
 }
 
 /** ⚰️ Décès INSEE : une source (relue dans la table : rien de l'écran n'est recopié), et au choix le décès « à vérifier » */
-function pa_insee_add(PDO $pdo, array $r, string $mode): array
+function pst_insee_add(PDO $pdo, array $r, string $mode): array
 {
     $pid = (int) $r['person_id'];
     if (!person_exists($pdo, $pid)) { throw new RuntimeException(i18n_t('Fiche introuvable.')); }
     assert_person_unlocked($pdo, $pid);
     $s = $pdo->prepare('SELECT * FROM insee_deces WHERE id=?'); $s->execute([(int) ($r['data']['insee_id'] ?? 0)]); $row = $s->fetch(PDO::FETCH_ASSOC);
     if (!$row) { throw new RuntimeException(i18n_t('Cette ligne du fichier INSEE n’est plus là (fichier retiré ?).')); }
-    $f = pa_facts($pdo, $pid);
+    $f = pst_facts($pdo, $pid);
     $who = trim(($f['first'] ?? '') . ' ' . mb_strtoupper((string) ($f['last'] ?? '')));
     $D = $r['data'];
     $lines = [i18n_t('Trouvé dans le fichier des personnes décédées de l’INSEE avec « 🔎 Pistes » le {date}. À VÉRIFIER : est-ce bien {name} ?', ['date' => date('d/m/Y'), 'name' => $who]),
@@ -638,9 +638,9 @@ function pa_insee_add(PDO $pdo, array $r, string $mode): array
 }
 
 /** POST pistes_undo {id} : retire ce que « ✓ Rattacher » a ajouté ; la piste redevient « à vérifier » */
-function pa_undo(PDO $pdo, array $d): array
+function pst_undo(PDO $pdo, array $d): array
 {
-    $r = pa_row($pdo, safe_int($d['id'] ?? 0));
+    $r = pst_row($pdo, safe_int($d['id'] ?? 0));
     if ($r['status'] !== 'added') { throw new RuntimeException(i18n_t('Rien à annuler.')); }
     $u = json_decode((string) $r['undo'], true) ?: [];
     $pid = (int) $r['person_id'];
@@ -662,9 +662,9 @@ function pa_undo(PDO $pdo, array $d): array
 }
 
 /** POST pistes_reject {id} : « ✗ Pas lui » (retenu : la piste ne revient pas, même à la prochaine recherche) */
-function pa_reject(PDO $pdo, array $d): array
+function pst_reject(PDO $pdo, array $d): array
 {
-    $r = pa_row($pdo, safe_int($d['id'] ?? 0));
+    $r = pst_row($pdo, safe_int($d['id'] ?? 0));
     if ($r['status'] === 'added') { throw new RuntimeException(i18n_t('Cette piste est rattachée à sa fiche : annule l’ajout d’abord.')); }
     $pdo->prepare("UPDATE pistes SET status='no', decided_at=CURRENT_TIMESTAMP WHERE id=?")->execute([(int) $r['id']]);
     try {
@@ -674,9 +674,9 @@ function pa_reject(PDO $pdo, array $d): array
     return ['ok' => true, 'id' => (int) $r['id'], 'prev' => (string) $r['status']];
 }
 /** POST pistes_unreject {id} : ↶ après « ✗ Pas lui » */
-function pa_unreject(PDO $pdo, array $d): array
+function pst_unreject(PDO $pdo, array $d): array
 {
-    $r = pa_row($pdo, safe_int($d['id'] ?? 0));
+    $r = pst_row($pdo, safe_int($d['id'] ?? 0));
     if ($r['status'] !== 'no') { return ['ok' => true, 'id' => (int) $r['id']]; }
     $pdo->prepare("UPDATE pistes SET status='new', decided_at='' WHERE id=?")->execute([(int) $r['id']]);
     try {
@@ -688,7 +688,7 @@ function pa_unreject(PDO $pdo, array $d): array
 
 /* ═════════════════════ à propos, aiguillage ═════════════════════ */
 
-function pa_about(PDO $pdo): array
+function pst_about(PDO $pdo): array
 {
     $insee = false; try { $insee = (bool) $pdo->query('SELECT 1 FROM insee_deces LIMIT 1')->fetchColumn(); } catch (Throwable $_) {}
     $bo = ['mpf' => false, 'leonore' => false];
@@ -704,33 +704,33 @@ function pa_about(PDO $pdo): array
         ['id' => 'mpf', 'icon' => '🎖️', 'label' => i18n_t('Morts pour la France 1914–1918'), 'online' => false, 'installed' => $bo['mpf'], 'what' => i18n_t('Fiches de Mémoire des hommes'), 'licence' => i18n_t('voir Réglages → Bases officielles'), 'url' => 'https://www.memoiredeshommes.sga.defense.gouv.fr/'],
         ['id' => 'leonore', 'icon' => '🏅', 'label' => i18n_t('Légion d’honneur (Léonore)'), 'online' => false, 'installed' => $bo['leonore'], 'what' => i18n_t('Dossiers des décorés'), 'licence' => i18n_t('voir Réglages → Bases officielles'), 'url' => 'https://www.leonore.archives-nationales.culture.gouv.fr/'],
         ['id' => 'annuaire', 'icon' => '📇', 'label' => i18n_t('Annuaires de Paris'), 'online' => false, 'installed' => $ba, 'what' => i18n_t('Annuaires du commerce 1798–1914'), 'licence' => 'Licence Ouverte 2.0', 'url' => 'https://nakala.fr/10.34847/nkl.98eem49t']],
-        'branches' => $branches, 'job' => pa_job_out(pa_job_last($pdo, 'pistes')), 'counts' => pa_count($pdo)];
+        'branches' => $branches, 'job' => pst_job_out(pst_job_last($pdo, 'pistes')), 'counts' => pst_count($pdo)];
 }
 
-function pa_api_get(PDO $pdo, string $action, array $q): array
+function pst_api_get(PDO $pdo, string $action, array $q): array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     return match ($action) {
-        'pistes_list' => pa_list($pdo, $q),
-        'pistes_count' => pa_count($pdo) + ['job' => pa_job_out(pa_job_last($pdo, 'pistes'))],
-        'pistes_job' => ['job' => pa_job_out(pa_job_last($pdo, 'pistes'))],
-        'pistes_about' => pa_about($pdo),
+        'pistes_list' => pst_list($pdo, $q),
+        'pistes_count' => pst_count($pdo) + ['job' => pst_job_out(pst_job_last($pdo, 'pistes'))],
+        'pistes_job' => ['job' => pst_job_out(pst_job_last($pdo, 'pistes'))],
+        'pistes_about' => pst_about($pdo),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }
-function pa_api_post(PDO $pdo, string $action, array $d): array
+function pst_api_post(PDO $pdo, string $action, array $d): array
 {
-    pa_schema($pdo);
+    pst_schema($pdo);
     return match ($action) {
-        'pistes_start' => pa_start($pdo, $d),
-        'pistes_step' => pa_step($pdo, $d),
-        'pistes_pause' => pa_set_status($pdo, $d, 'paused'),
-        'pistes_resume' => pa_set_status($pdo, $d, 'running'),
-        'pistes_stop' => pa_set_status($pdo, $d, 'stopped'),
-        'pistes_accept' => pa_accept($pdo, $d),
-        'pistes_undo' => pa_undo($pdo, $d),
-        'pistes_reject' => pa_reject($pdo, $d),
-        'pistes_unreject' => pa_unreject($pdo, $d),
+        'pistes_start' => pst_start($pdo, $d),
+        'pistes_step' => pst_step($pdo, $d),
+        'pistes_pause' => pst_set_status($pdo, $d, 'paused'),
+        'pistes_resume' => pst_set_status($pdo, $d, 'running'),
+        'pistes_stop' => pst_set_status($pdo, $d, 'stopped'),
+        'pistes_accept' => pst_accept($pdo, $d),
+        'pistes_undo' => pst_undo($pdo, $d),
+        'pistes_reject' => pst_reject($pdo, $d),
+        'pistes_unreject' => pst_unreject($pdo, $d),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }

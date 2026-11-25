@@ -16,7 +16,7 @@ declare(strict_types=1);
  *  POST isoles_ignore {key, size} · isoles_unignore {key}
  */
 
-function bi_schema(PDO $pdo): void
+function bis_schema(PDO $pdo): void
 {
     static $done = false;
     if ($done) { return; }
@@ -25,7 +25,7 @@ function bi_schema(PDO $pdo): void
 }
 
 /** les groupes (composantes connexes) de l'arbre : [personne → représentant], en une passe */
-function bi_components(PDO $pdo): array
+function bis_components(PDO $pdo): array
 {
     $cols = array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(PDO::FETCH_ASSOC), 'name');
     $skip = [];
@@ -59,7 +59,7 @@ function bi_components(PDO $pdo): array
 }
 
 /** d'où viennent ces fiches : un import encore annulable (son reçu), une fusion d'arbre (journal), sinon les dates de création */
-function bi_origins(PDO $pdo): array
+function bis_origins(PDO $pdo): array
 {
     $out = ['imports' => [], 'merges' => []];
     if (function_exists('import_receipt_dir')) {
@@ -76,11 +76,11 @@ function bi_origins(PDO $pdo): array
 }
 
 /** GET isoles_list */
-function bi_list(PDO $pdo, bool $withIds = false): array
+function bis_list(PDO $pdo, bool $withIds = false): array
 {
-    bi_schema($pdo);
+    bis_schema($pdo);
     $t0 = microtime(true);
-    $comp = bi_components($pdo);
+    $comp = bis_components($pdo);
     $total = array_sum(array_map('count', $comp));
     $root = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn();
     $mainRep = null;
@@ -90,7 +90,7 @@ function bi_list(PDO $pdo, bool $withIds = false): array
     }
     $ignored = [];
     foreach ($pdo->query('SELECT gkey, size, label, created_at FROM isoles_ignored') as $r) { $ignored[(string) $r['gkey']] = $r; }
-    $origins = bi_origins($pdo);
+    $origins = bis_origins($pdo);
     $groups = []; $alone = [];
     foreach ($comp as $rep => $members) {
         if ($rep === $mainRep) { continue; }
@@ -139,10 +139,10 @@ function bi_list(PDO $pdo, bool $withIds = false): array
 }
 
 /** GET isoles_group&key= : les fiches d'un groupe (nom, années), pour « Voir ces fiches » et « Relier à… » */
-function bi_group(PDO $pdo, string $key): array
+function bis_group(PDO $pdo, string $key): array
 {
     if (!preg_match('/^(g:\d+|seules)$/', $key)) { throw new LcndaBadInput('Groupe inconnu.'); }
-    $all = bi_list($pdo, true);
+    $all = bis_list($pdo, true);
     $g = null;
     foreach (array_merge($all['groups'], $all['ignored']) as $x) { if ($x['key'] === $key) { $g = $x; break; } }
     if (!$g) { throw new LcndaBadInput(i18n_t('Ce groupe n’existe plus : il a peut-être été relié à l’arbre.')); }
@@ -165,9 +165,9 @@ function bi_group(PDO $pdo, string $key): array
     return ['group' => $g, 'people' => $people, 'root' => $all['root']];
 }
 
-function bi_ignore(PDO $pdo, array $d, bool $on): array
+function bis_ignore(PDO $pdo, array $d, bool $on): array
 {
-    bi_schema($pdo);
+    bis_schema($pdo);
     $key = (string) ($d['key'] ?? '');
     if (!preg_match('/^(g:\d+|seules)$/', $key)) { throw new LcndaBadInput('Groupe inconnu.'); }
     if ($on) { $pdo->prepare('INSERT INTO isoles_ignored(gkey, size, label) VALUES(?,?,?) ON CONFLICT(gkey) DO UPDATE SET size=excluded.size, label=excluded.label, created_at=CURRENT_TIMESTAMP')->execute([$key, safe_int($d['size'] ?? 0), mb_substr(safe_text($d['label'] ?? ''), 0, 200)]); }
@@ -175,19 +175,19 @@ function bi_ignore(PDO $pdo, array $d, bool $on): array
     return ['ok' => true, 'key' => $key];
 }
 
-function bi_api_get(PDO $pdo, string $action, array $q): array
+function bis_api_get(PDO $pdo, string $action, array $q): array
 {
     return match ($action) {
-        'isoles_list' => bi_list($pdo),
-        'isoles_group' => bi_group($pdo, (string) ($q['key'] ?? '')),
+        'isoles_list' => bis_list($pdo),
+        'isoles_group' => bis_group($pdo, (string) ($q['key'] ?? '')),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }
-function bi_api_post(PDO $pdo, string $action, array $d): array
+function bis_api_post(PDO $pdo, string $action, array $d): array
 {
     return match ($action) {
-        'isoles_ignore' => bi_ignore($pdo, $d, true),
-        'isoles_unignore' => bi_ignore($pdo, $d, false),
+        'isoles_ignore' => bis_ignore($pdo, $d, true),
+        'isoles_unignore' => bis_ignore($pdo, $d, false),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }
