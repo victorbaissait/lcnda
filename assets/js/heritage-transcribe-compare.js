@@ -4,7 +4,9 @@
  * lecture d'où elles viennent ; « 🗳 La majorité » choisit partout ce que la plupart des lectures disent ; « ✎ Écrire autrement ».
  * Le texte fusionné va dans l'acte (le texte d'avant reste dans 🕘 Versions, ↶ Annuler) ou se garde comme une lecture de plus.
  *   ext.txCompare = {tokens, align, merge, linesOf, labelOf, keepOn, open}
- * Essai : tests/test-transcribe-compare.js.
+ * ✍ « Ma lecture » (réglage genealogie-tx-cmp-ma-lecture) : ligne par ligne, une ligne à moi sous chaque ligne ; brouillon
+ *   genealogie-tx-cmp-draft-<acte>, gardée comme version « ✍ Ma lecture (Comparer) » (source mine).
+ * Essais : tests/test-transcribe-compare.js, tests/test-comparer-ma-lecture.js.
  */
 (() => {
     'use strict';
@@ -116,7 +118,7 @@
         // ctx.pick : « ⚖️ Comparer avec ma version » (la bande 🕘 Versions) — le texte à l'écran et ces versions-là, cochées
         (ctx.pick || []).forEach(id => { if (!readings.some(r => r.id === id)) { const v = list.find(x => x.id === id); if (v) readings.push(v); } });
         let chosen = ctx.pick?.length ? [0, ...ctx.pick.filter(id => readings.some(r => r.id === id))] : readings.filter(r => r.source && r.source !== 'now').slice(0, 3).map(r => r.id); if (!chosen.includes(0)) chosen.unshift(0); chosen = chosen.slice(0, 4);
-        let base = 0, mode = 'word', loose = true, parts = [], rows = [], texts = [];
+        let base = 0, mode = ctx.mode === 'line' ? 'line' : 'word', loose = true, parts = [], rows = [], texts = [];
         /* ✍ ma lecture : [{i, ref, text, on}] — gardée au brouillon (localStorage) jusqu'à « Mettre dans le texte » */
         const DRAFT = DRAFT_PREFIX + ctx.actId;
         let ma = maOn(), mine = [], savedBody = '';
@@ -308,6 +310,20 @@
 .h-txc-lines tr.is-diff{background:rgba(212,168,0,.06)}
 .h-txc-lv{display:flex;gap:6px;align-items:flex-start;padding:3px 6px;border-left:4px solid var(--c);margin:2px 0;cursor:pointer}.h-txc-lv.is-on{background:color-mix(in srgb,var(--c) 12%,transparent)}
 .h-txc-lv mark{background:color-mix(in srgb,var(--c) 30%,transparent);color:inherit}
+.h-txc-headbtns{display:flex;gap:8px;align-items:center;flex:none}.h-txc-maq[aria-pressed="true"]{background:color-mix(in srgb,#b26a00 16%,transparent);border-color:#b26a00}
+.h-txc-sep td{text-align:center;color:var(--muted,#777);font:600 12px system-ui;letter-spacing:.06em;background:transparent}
+.h-txc-me{align-items:center;border-left-style:dashed}
+.h-txc-me-tag{display:flex;gap:4px;align-items:center;flex:none;font:600 12px system-ui;color:var(--muted,#666);cursor:pointer;white-space:nowrap}
+.h-txc-me-f{position:relative;flex:1;min-width:0;display:block}
+.h-txc .h-txc-me-f input,.h-txc-me-bk{font:inherit;line-height:1.5;padding:1px 4px;margin:0;border:0;border-bottom:1.5px solid transparent;border-radius:0;box-sizing:border-box;width:100%;letter-spacing:normal;word-spacing:normal;white-space:pre;min-height:0;height:auto;box-shadow:none}
+.h-txc-me-bk{position:absolute;left:0;top:0;bottom:0;overflow:hidden;color:transparent;pointer-events:none}
+.h-txc-me-bk mark{color:transparent;background:color-mix(in srgb,var(--c) 30%,transparent);padding:0;border-radius:0}
+.h-txc .h-txc-me-f input{position:relative;display:block;background:transparent;color:inherit;border-bottom-color:color-mix(in srgb,currentColor 30%,transparent);border-bottom-style:dashed;outline:none}
+.h-txc .h-txc-me-f input:focus{border-bottom:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 6%,transparent)}
+.h-txc .h-txc-me-f input::placeholder{color:var(--muted,#888);opacity:.7;font-style:italic}
+.h-txc-mecp{flex:none;font:12px system-ui;border:1px solid color-mix(in srgb,currentColor 25%,transparent);background:transparent;color:inherit;padding:1px 7px;border-radius:999px;cursor:pointer;min-height:0;opacity:.75}
+.h-txc-mecp:hover,.h-txc-mecp:focus-visible{opacity:1;border-color:var(--c)}
+@media (max-width:600px){.h-txc-lines{font-size:16px}.h-txc-me-tag>span,.h-txc-mecp>span,.h-txc-maq>span{display:none}.h-txc-lines td{padding:4px 3px}.h-txc-n{width:22px}.h-txc-lv{padding:3px 4px}}
 @media (max-width:860px){.h-txc-body,.h-txc-split.has-img{grid-template-columns:1fr}.h-txc-stage{height:40vh}}
 `; document.head.appendChild(st); }
 })();

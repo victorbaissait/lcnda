@@ -1328,6 +1328,8 @@
                 put(to, hTo); status(i18n('Version mise dans le texte (à relire)'));
                 A().undoToast?.(i18n('« {x} » est maintenant ta version (l’ancienne est gardée dans 🕘 Versions)', {x: ext.txCtx.chipOf(v)[1]}), {undo: () => put(was, hWas), redo: () => put(to, hTo), icon: '🕘'}); },
             compare: v => openCompare([v.id]),
+            compareLines: v => openCompare([v.id], 'line'), // ⚖️ « Comparer ligne à ligne » (≡ Par lignes, ✍ Ma lecture)
+            current: () => area.value, zones: () => t.data.zones.map((z, i) => ({s: z.s, e: z.e, c: z.c || COLORS[i % COLORS.length]})), // ≡ l'aperçu « Par lignes » : mes lignes, leurs couleurs
             duplicate: async v => { // ⧉ garder une copie de la version affichée (ou de ma version)
                 if (!t.id) { await save(); if (!t.id) return; }
                 let x = {body: area.value, data: {zones: t.data.zones, people: t.data.people}}; if (v) { try { x = await api('act_transcription_version', {id: v.id}); } catch (e) { return toast(e.message, 'error'); } }
@@ -1362,10 +1364,10 @@
             try { if (area.value === w.body) await post('save_act_transcription_version_zones', {id: w.v.id, zones: t.data.zones});
                 else await post('save_act_transcription_version', {act_id: t.id, label: 'Copie corrigée', body: area.value, data: {zones: t.data.zones, people: t.data.people, meta: {from}}, auto: 0, source: 'copy'}); } catch (e) { toast(e.message, 'error'); }
             VS?.soon(); }
-        async function openCompare(pick = null) {
+        async function openCompare(pick = null, mode = '') {
             if (!ext.txCompare) return toast(i18n('La comparaison des lectures n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }
-            ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post, pick: Array.isArray(pick) ? pick : null, // ⚖️ « Comparer avec ma version » : ces lectures cochées
+            ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post, pick: Array.isArray(pick) ? pick : null, mode: mode === 'line' ? 'line' : '', // ⚖️ « Comparer avec ma version » : ces lectures cochées
                 images: PAGES.length > 1 ? PAGES.map((p, i) => ({src: `media/${encodeURIComponent(p.filename)}`, label: pageName(p, i)})) : t.filename ? [{src: origSrc()}] : [], // 🖼 l'image de l'acte à côté des lectures
                 apply: (txt, label) => { versionBefore(label); const was = snapText(), to = {...was, body: txt + (txt.endsWith('\n') ? '' : '\n')}; putText(to); status(i18n('Texte fusionné (à relire)'));
                     A().undoToast?.(i18n('Lectures fusionnées dans le texte.'), {undo: () => putText(was), redo: () => putText(to)}); }});

@@ -199,6 +199,42 @@
     /** le texte en lecture seule : les mots douteux [?] soulignés ; hinted : la lecture s'est aidée d'indices (la bulle « 🧠 lu avec un indice ») */
     const roHtml = (body, hinted = 0) => esc(body).replace(/(\S+)\s?\[\?\]/g, hinted ? `<span class="h-tx-doubt is-hint" title="${esc(hintTitle())}">$1</span>` : '<span class="h-tx-doubt">$1</span>').replace(/\[illisible\]/g, '<span class="h-tx-doubt">[illisible]</span>').replace(/\n/g, '<br>');
     const MAX_CHIPS = 4;
+    /* ≡ l'aperçu d'une version « Par lignes » : numérotée comme l'éditeur (les lignes du texte actuel, celles des bandes de l'image),
+     * chaque ligne avec la couleur de sa zone ; une lecture d'un seul bloc (l'IA) est découpée d'après mes lignes (≈), mot à mot */
+    const VLINES_KEY = 'genealogie-tx-apercu-lignes';
+    const vlinesOn = () => { try { return localStorage.getItem(VLINES_KEY) === '1'; } catch (_) { return false; } };
+    const VPAGE_MARK = /^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/u;
+    /**
+     * versionLines(version, texte actuel, zones [{s, e, c}]) → {rows: [{n, text, sep, c}], approx}
+     * n : le n° de la ligne du texte actuel (comme la marge de l'éditeur, « — page 2 — » compris) ; c : la couleur de sa zone ;
+     * approx : la version était d'un seul bloc, découpée d'après mes lignes.
+     */
+    function versionLines(body, cur, zones = []) {
+        const C = ext.txCompare, own = String(body ?? '').replace(/\r/g, '').split('\n'), curL = String(cur ?? '').replace(/\r/g, '').split('\n');
+        const starts = []; let p = 0; curL.forEach(l => { starts.push(p); p += l.length + 1; });
+        const colorAt = n => { if (!n || !curL[n - 1]) return null; const s = starts[n - 1], e = s + curL[n - 1].length; let best = null, bo = 0;
+            (zones || []).forEach(z => { if (!z || !(z.e > z.s) || !z.c) return; const o = Math.min(e, z.e) - Math.max(s, z.s); if (o > bo) { bo = o; best = z.c; } }); return best; };
+        const sep = l => VPAGE_MARK.test(String(l).trim());
+        if (!C?.align || !String(cur ?? '').trim()) return {rows: own.map((l, i) => ({n: i + 1, text: l, sep: sep(l), c: null})).filter(r => r.text.trim()), approx: false};
+        const B = C.tokens(cur), V = C.tokens(body), x = C.align(B, V, true), lineOf = []; let ln = 1;
+        B.forEach((w, i) => { lineOf[i] = ln; if (w === '\n') ln++; });
+        const seq = []; // [mot de la version, n° de ma ligne]
+        for (let i = 0; i <= B.length; i++) { const L = i < B.length ? lineOf[i] : ln; x.pre[i].forEach(w => seq.push([w, L])); if (i < B.length && x.at[i] !== null) seq.push([x.at[i], lineOf[i]]); }
+        if (own.filter(l => l.trim()).length > 1) { // la version a ses lignes : gardées, chacune avec le n° de la ligne qui lui correspond chez moi
+            const groups = [[]]; seq.forEach(([w, L]) => { if (w === '\n') groups.push([]); else groups.at(-1).push(L); });
+            const rows = own.map((l, k) => { const cnt = new Map(); (groups[k] || []).forEach(L => cnt.set(L, (cnt.get(L) || 0) + 1)); let n = 0, best = 0; cnt.forEach((v, L) => { if (v > best) { best = v; n = L; } });
+                return {n, text: l, sep: sep(l), c: sep(l) ? null : colorAt(n)}; }).filter(r => r.text.trim());
+            return {rows, approx: false};
+        }
+        const by = new Map(); seq.forEach(([w, L]) => { if (w === '\n') return; let k = L; while (k > 1 && sep(curL[k - 1] || '')) k--; if (!by.has(k)) by.set(k, []); by.get(k).push(w); });
+        const rows = []; curL.forEach((l, i) => { const n = i + 1; if (sep(l)) { rows.push({n, text: l.trim(), sep: true, c: null}); return; } const ws = by.get(n); if (ws?.length) rows.push({n, text: ws.join(' '), sep: false, c: colorAt(n)}); });
+        return {rows, approx: true};
+    }
+    function linesHtml(V, hinted = 0) {
+        return `${V.approx ? `<p class="h-tx-vapprox" title="${esc(i18n('Cette lecture était d’un seul bloc : ses mots sont rangés sous tes lignes, d’après les mots communs.'))}">≈ ${esc(i18n('découpé d’après tes lignes'))}</p>` : ''}<div class="h-tx-vlines">${V.rows.map(r => (r.sep
+            ? `<div class="h-tx-vl is-sep"><span class="h-tx-vn">${r.n || ''}</span><span class="h-tx-vt">${esc(r.text)}</span></div>`
+            : `<div class="h-tx-vl${V.approx ? ' is-approx' : ''}"><span class="h-tx-vn">${r.n || '·'}</span><span class="h-tx-vt">${r.c ? `<mark class="h-tx-zm" style="--zc:${esc(r.c)}">${roHtml(r.text, hinted)}</mark>` : roHtml(r.text, hinted)}</span></div>`)).join('')}</div>`;
+    }
     const kiosk = () => !!document.body?.classList.contains('is-kiosk'); // mode consultation : rien ne s'écrit (le serveur refuse aussi)
     /**
      * host : la bande ; o = {list(), body(id) → {body}, use(v), compare(v), duplicate(v | null), rename(v), openAll(), dim(on)}.
@@ -224,11 +260,20 @@
             open = v; paint(); o.dim?.(true); prev.hidden = false; prev.innerHTML = `<p class="muted">…</p>`;
             let x; try { x = await o.body(v.id); } catch (e) { prev.hidden = true; open = null; paint(); o.dim?.(false); return A().toast(e.message, 'error'); }
             if (open !== v) return;
-            const [ic, n, , kind] = chipOf(v);
-            prev.innerHTML = `<div class="h-tx-vhead"><b>${ic} <span data-i18n-off>${esc(n)}</span></b> <span class="muted">— ${esc(i18n('lecture seule'))}</span></div>
+            const [ic, n, , kind] = chipOf(v), hinted = Number(x.data?.meta?.hints || v.meta?.hints) || 0, byLines = vlinesOn();
+            shownBody = {body: x.body || '', hinted};
+            prev.innerHTML = `<div class="h-tx-vhead"><b>${ic} <span data-i18n-off>${esc(n)}</span></b> <span class="muted">— ${esc(i18n('lecture seule'))}</span><span class="h-tx-vmode" role="radiogroup" aria-label="${esc(i18n('Affichage'))}"><button type="button" role="radio" data-tx-vmode="flow" aria-checked="${!byLines}">¶ ${esc(i18n('Texte suivi'))}</button><button type="button" role="radio" data-tx-vmode="lines" aria-checked="${byLines}">≡ ${esc(i18n('Par lignes'))}</button></span></div>
                 <div class="h-tx-vmeta">${metaLines(v).map(s => `<span class="ui-badge is-grey">${esc(s)}</span>`).join('')}</div>
-                <div class="h-tx-vro" data-tx-vro>${roHtml(x.body || '', Number(x.data?.meta?.hints || v.meta?.hints) || 0)}</div>
-                <div class="h-tx-vbtns"><button type="button" class="button small" data-tx-vuse>✓ ${esc(i18n('Utiliser cette version'))}</button>${o.work && !kiosk() && working?.v.id !== v.id ? `<button type="button" class="button small secondary" data-tx-vedit title="${esc(i18n('Elle devient le texte de l’éditeur (le tien est gardé) : relie les lignes de l’image à ses lignes, corrige-la ; « ↩ Revenir à ma version » ensuite'))}">✎ ${esc(i18n('Travailler sur cette version dans l’éditeur'))}</button>` : ''}<button type="button" class="button small secondary" data-tx-vcmp>⚖️ ${esc(i18n('Comparer avec ma version'))}</button>${kind !== 'read' ? `<button type="button" class="button small secondary" data-tx-vren>✎ ${esc(i18n('Renommer'))}</button>` : ''}${kiosk() ? '' : `<button type="button" class="button small secondary danger" data-tx-vdel title="${esc(i18n('On peut encore l’annuler juste après.'))}">🗑 ${esc(i18n('Supprimer cette version'))}</button>`}<button type="button" class="button small secondary" data-tx-vclose>× ${esc(i18n('Fermer'))}</button></div>`;
+                <div class="h-tx-vro${byLines ? ' is-lines' : ''}" data-tx-vro>${roBody(byLines)}</div>
+                <div class="h-tx-vbtns"><button type="button" class="button small" data-tx-vuse>✓ ${esc(i18n('Utiliser cette version'))}</button>${o.work && !kiosk() && working?.v.id !== v.id ? `<button type="button" class="button small secondary" data-tx-vedit title="${esc(i18n('Elle devient le texte de l’éditeur (le tien est gardé) : relie les lignes de l’image à ses lignes, corrige-la ; « ↩ Revenir à ma version » ensuite'))}">✎ ${esc(i18n('Travailler sur cette version dans l’éditeur'))}</button>` : ''}<button type="button" class="button small secondary" data-tx-vcmp>⚖️ ${esc(i18n('Comparer avec ma version'))}</button>${o.compareLines ? `<button type="button" class="button small secondary" data-tx-vcmpl ${byLines && ext.txCompare?.maOn?.() ? '' : 'hidden'} title="${esc(i18n('Comparer en mode ligne par ligne, avec « ✍ Ma lecture » sous chaque ligne'))}">⚖️ ${esc(i18n('Comparer ligne à ligne'))}</button>` : ''}${kind !== 'read' ? `<button type="button" class="button small secondary" data-tx-vren>✎ ${esc(i18n('Renommer'))}</button>` : ''}${kiosk() ? '' : `<button type="button" class="button small secondary danger" data-tx-vdel title="${esc(i18n('On peut encore l’annuler juste après.'))}">🗑 ${esc(i18n('Supprimer cette version'))}</button>`}<button type="button" class="button small secondary" data-tx-vclose>× ${esc(i18n('Fermer'))}</button></div>`;
+        }
+        let shownBody = null;
+        const roBody = byLines => (!shownBody ? '' : byLines ? linesHtml(versionLines(shownBody.body, o.current?.() ?? '', o.zones?.() || []), shownBody.hinted) : roHtml(shownBody.body, shownBody.hinted));
+        function setLines(on) {
+            try { localStorage.setItem(VLINES_KEY, on ? '1' : '0'); } catch (_) {}
+            prev.querySelectorAll('[data-tx-vmode]').forEach(b => b.setAttribute('aria-checked', String((b.dataset.txVmode === 'lines') === on)));
+            const ro = prev.querySelector('[data-tx-vro]'); if (ro) { ro.classList.toggle('is-lines', on); ro.innerHTML = roBody(on); }
+            const cl = prev.querySelector('[data-tx-vcmpl]'); if (cl) cl.hidden = !(on && ext.txCompare?.maOn?.());
         }
         function close() { if (!open && prev.hidden) return; open = null; prev.hidden = true; prev.innerHTML = ''; o.dim?.(false); paint(); }
         host.addEventListener('click', async e => {
@@ -242,7 +287,9 @@
         prev.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b || !open) return; const v = open;
             if ('txVclose' in b.dataset) return close();
+            if (b.dataset.txVmode) return setLines(b.dataset.txVmode === 'lines');
             if ('txVcmp' in b.dataset) return o.compare(v);
+            if ('txVcmpl' in b.dataset) return o.compareLines?.(v);
             if ('txVuse' in b.dataset) { const w = working; close(); if (w) { working = null; await o.keep?.(w); paint(); } return o.use(v); }
             if ('txVren' in b.dataset) { await o.rename(v); return; }
             if ('txVedit' in b.dataset) { close(); return o.work?.(v); }
@@ -314,6 +361,31 @@
         return dlg;
     }
 
+    if (typeof document !== 'undefined' && !document.getElementById('h-tx-vprev-css')) { const st = document.createElement('style'); st.id = 'h-tx-vprev-css'; st.textContent = `
+.h-tx-vhead{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.h-tx-vmode{margin-left:auto;display:inline-flex;border:1.5px solid color-mix(in srgb,currentColor 30%,transparent);border-radius:14px;overflow:hidden}
+.h-tx-vmode button{font:600 12px system-ui;border:0;background:transparent;color:inherit;padding:2px 9px;min-height:0;cursor:pointer;box-shadow:none}
+.h-tx-vmode button[aria-checked="true"]{background:#6929c4;color:#fff}
+.h-tx-vro.is-lines{max-height:300px;padding:4px 0}
+.h-tx-vapprox{margin:0 8px 4px;font:600 11.5px system-ui;color:#6929c4}
+.h-tx-vlines{font:14px/1.65 Georgia,serif;color:var(--ink,#1d1d1f)}
+.h-tx-vl{display:grid;grid-template-columns:34px minmax(0,1fr);gap:6px;padding:0 8px 0 0}
+.h-tx-vn{text-align:right;font:500 11px/1.65rem system-ui,sans-serif;color:#8e8e93;font-variant-numeric:tabular-nums;user-select:none}
+.h-tx-vl.is-approx .h-tx-vn::before{content:'≈ ';opacity:.6}
+.h-tx-vl.is-sep .h-tx-vt{text-align:center;font:600 11.5px/1.65rem system-ui;color:var(--muted,#666);letter-spacing:.05em}
+.h-tx-vlines mark.h-tx-zm{background:color-mix(in srgb,var(--zc) 40%,transparent);color:inherit;padding:0;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+:root[data-theme="dark"] .h-tx-vlines mark.h-tx-zm{background:color-mix(in srgb,var(--zc) 38%,#24272c)}
+:root[data-theme="dark"] .h-tx-vn{color:#8e9299}:root[data-theme="dark"] .h-tx-vlines{color:inherit}:root[data-theme="dark"] .h-tx-vapprox{color:#b99af0}
+:root .h-tx-vprev .h-tx-vbtns{display:flex;flex-wrap:wrap;gap:6px}
+:root .h-tx-vprev .h-tx-vbtns .button.small{min-height:0;padding:3px 10px;font:600 12px system-ui;letter-spacing:0;text-transform:none;border-width:1.5px;border-radius:14px;box-shadow:none;transform:none;white-space:nowrap}
+:root .h-tx-vprev .h-tx-vbtns .button.small:hover{transform:none;box-shadow:none;filter:brightness(.97)}
+:root .h-tx-vprev .h-tx-vbtns .button.small.secondary:not(.danger){border-color:color-mix(in srgb,currentColor 30%,transparent)}
+:root .h-tx-vprev .h-tx-vbtns .button.small.danger{background:transparent;color:#b0152a;border-color:color-mix(in srgb,#b0152a 45%,transparent)}
+:root .h-tx-vprev .h-tx-vbtns .button.small.danger:hover{background:color-mix(in srgb,#b0152a 10%,transparent)}
+:root[data-theme="dark"] .h-tx-vprev .h-tx-vbtns .button.small.danger{color:#ff8a95;border-color:color-mix(in srgb,#ff8a95 45%,transparent)}
+@media (max-width:600px){.h-tx-vmode{margin-left:0}}
+`; document.head.appendChild(st); }
+
     ext.txCtx = {REASONS, reasonOf, reasonGuess, reasonHtml, whyHtml, reasonHint, WCOL_KEY, WORD_COLORS, wordColor, setWordColor, wordColorHtml, wordBoxes, wordsOfLine, wordAt, doubtWords, hintTitle, roHtml,
-        chipOf, metaLines, versionsStrip, removeVersions, relinkZones, openAide, contextOf, checkedCount, hintsOf};
+        chipOf, metaLines, versionsStrip, versionLines, VLINES_KEY, removeVersions, relinkZones, openAide, contextOf, checkedCount, hintsOf};
 })();
