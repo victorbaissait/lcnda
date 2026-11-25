@@ -62,6 +62,8 @@ const FC_FIELD_LABELS = ['first_name' => 'Prénom', 'last_name' => 'Nom', 'occup
 const FC_KINDS = ['fait', 'note', 'photo', 'personne'];
 const FC_RELATIONS = ['enfant', 'conjoint', 'parent'];
 const FC_ERR_LOGIN = 'Identifiant ou mot de passe incorrect.';
+/** une vraie empreinte bcrypt (d'un mot de passe tiré au hasard, oublié) : un identifiant inconnu coûte le même calcul */
+const FC_DUMMY_HASH = '$2y$10$AkrfeRI6XLNypaxp.BLKxO0QhOPoE4ygGT4wZDHn/r5jmetQkbai.';
 
 final class FcRefuse extends RuntimeException
 {
@@ -631,7 +633,7 @@ function fc_guest_login(PDO $pdo, array $dev, array $p): never
     if ($w = fc_tries_wait($pdo, $keys)) { fc_tries_refuse($w); }
     $pw = fc_pw($p['password'] ?? null);
     // même calcul pour un identifiant inconnu (on n'apprend pas qu'il n'existe pas)
-    $ok = fc_pw_ok($pw, $a ? (string) $a['pw_hash'] : '$2y$10$abcdefghijklmnopqrstuuJ4Q8kd5VqQ0x6h3XyM3k6m0Fq9uHq6W') && $a !== null && strlen($pw) <= 1024;
+    $ok = fc_pw_ok($pw, $a ? (string) $a['pw_hash'] : FC_DUMMY_HASH) && $a !== null && strlen($pw) <= 1024;
     if (!$ok) {
         fc_tries_fail($pdo, $keys);
         if ($a) { fc_journal_add($pdo, $a, 'echec', 0, '', 'mot de passe incorrect'); }

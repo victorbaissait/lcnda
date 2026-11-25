@@ -62,7 +62,7 @@ function multipart(fields = {}, files = []) {
         assert.match(rl, /'fc_state', 'fc_props', 'fc_journal', 'fc_count', 'fc_prop_file', 'fc_publish_preview', 'fc_publish_export'\]/);
         assert.match(rl, /const LAN_GUEST_WRITES = \['glock_unlock', 'glock_lock_now', 'glock_touch', 'save_settings'\];/, 'les écritures d’un invité dans api.php : inchangées');
         assert.match(lib, /if \(function_exists\('lan_device'\) && lan_device\(\)\) \{ json_response\(/, 'défense en profondeur : les actions de l’ordinateur principal refusent un appareil invité');
-        assert.ok(!/export_death_cutoff_year\(\): \?int \{ return null; \}\s*\}\s*\n\s*\/\/ main/.test(lib) || /function fc_hidden/.test(lib));
+        assert.match(lib, /const FC_DUMMY_HASH = '\$2y\$10\$[A-Za-z0-9.\/]{53}';/, 'identifiant inconnu : une vraie empreinte, le même temps de calcul');
     });
 
     const phpPath = findPhp([devBundledPhp()]);
