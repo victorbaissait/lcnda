@@ -802,7 +802,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         foreach (array_keys($famsBySpouse[$pid] ?? []) as $famId) { $line(1, 'FAMS', '@F' . $famId . '@'); }
         // 🤝 relations hors famille : 5.5.1 ASSO + RELA ; 7 ASSO + ROLE (+ PHRASE), un nom sans fiche = ASSO @VOID@ + PHRASE (5.5.1 : une note)
         foreach ($relationsByPerson[$pid] ?? [] as $rl) {
-            $relLabel = rs_label((string) $rl['rel_type'], '', (string) $rl['rel_label']) . ((string) $rl['rel_type'] === 'parrain' ? ' (hors acte)' : ''); // « hors acte » : relu comme relation, pas comme témoin du baptême
+            $relLabel = rs_label((string) $rl['rel_type'], $rl['other_id'] !== null ? (string) ($genderById[(int) $rl['other_id']] ?? '') : '', (string) $rl['rel_label']) . ((string) $rl['rel_type'] === 'parrain' ? ' (hors acte)' : ''); // « hors acte » : relu comme relation, pas comme témoin du baptême
             $relNote = rs_gedcom_note($rl, trim((string) ($rl['place_name'] ?? '')));
             if ($rl['other_id'] === null) {
                 if ($version !== '7') { if ($includeNotes) { $text(1, 'NOTE', 'Réseau — ' . $relLabel . ' : ' . trim((string) $rl['other_name']) . ($relNote !== '' ? "\n" . $relNote : '')); } continue; }

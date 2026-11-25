@@ -277,7 +277,9 @@ function ael_build_lines(PDO $pdo, PDO $tmp, string $site): array
         $fams[(int) $f['id']] = ['p1' => (int) $f['partner1_id'] ?: null, 'p2' => (int) $f['partner2_id'] ?: null, 'kids' => $kids, 'events' => array_map('ael_event_payload', $incFamEv[(int) $f['id']] ?? [])];
     }
     $label = static function (int $id) use ($map, $mText, $pText): string { return isset($map[$id]) ? $mText($map[$id]) : $pText($id); };
-    foreach ($fams as $f) {
+    $shown = static fn($id) => $id && isset($inc[$id]); // pas les « Personne vivante » du fichier
+    foreach ($fams as $f0) {
+        $f = ['p1' => $shown($f0['p1']) ? $f0['p1'] : null, 'p2' => $shown($f0['p2']) ? $f0['p2'] : null, 'kids' => array_values(array_filter($f0['kids'], $shown))];
         $parents = array_values(array_filter([$f['p1'], $f['p2']]));
         foreach ($f['kids'] as $k) { if ($parents) { $relOf[$k][] = ($incAll[$k]['gender'] ?? '') === 'female' ? 'fille de ' . implode(' et ', array_map($label, $parents)) : 'enfant de ' . implode(' et ', array_map($label, $parents)); } }
         if ($f['p1'] && $f['p2']) { $relOf[$f['p1']][] = 'conjoint de ' . $label($f['p2']); $relOf[$f['p2']][] = 'conjoint de ' . $label($f['p1']); }
