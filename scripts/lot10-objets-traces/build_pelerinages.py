@@ -2,7 +2,7 @@
 """🕯️ Lot 10 — Les lieux de pèlerinage de France et des pays voisins (assets/data/l10o-pelerinages.json.gz).
 
 Source : Wikidata (CC0 1.0), service SPARQL query.wikidata.org. Gardé : les éléments dont la NATURE (P31) est « lieu de pèlerinage »
-(Q15135589), « sanctuaire » (Q697295, Q29553), « sanctuaire marial » (Q840482), « pèlerinage » (Q1644573), « pardon » (Q1582987) ou
+(Q15135589), « sanctuaire » (Q697295), « sanctuaire marial » (Q840482), « pèlerinage » (Q1644573), « pardon » (Q1582987) ou
 « basilique mineure » (Q120560, titre donné surtout aux églises de pèlerinage), avec une position (P625) ; la commune (P131 → P374),
 la date de fondation (P571), à qui il est dédié (P825), l'image (P18, nom du fichier Commons) et l'article de Wikipédia.
 Les fontaines saintes et pèlerinages tout près de la commune sont déjà dans « ⛲ Fontaines et saints » (pays-memoire) : ici, la région.
@@ -15,7 +15,7 @@ import wm
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'assets', 'data')
-KINDS = {'Q15135589': 'pelerinage', 'Q1644573': 'pelerinage', 'Q1582987': 'pardon', 'Q840482': 'marial', 'Q697295': 'sanctuaire', 'Q29553': 'sanctuaire', 'Q120560': 'basilique'}
+KINDS = {'Q15135589': 'pelerinage', 'Q1644573': 'pelerinage', 'Q1582987': 'pardon', 'Q840482': 'marial', 'Q697295': 'sanctuaire', 'Q120560': 'basilique'}
 COUNTRIES = {'Q142': 'France', 'Q31': 'Belgique', 'Q39': 'Suisse', 'Q32': 'Luxembourg', 'Q235': 'Monaco'}
 qid = lambda u: (u or '').rsplit('/', 1)[-1]
 
@@ -52,6 +52,8 @@ def main():
         if lat is None:
             continue
         k = KINDS[qid(b['k']['value'])]
+        if re.search(r'gallo-romain|antique|romain|celt|protohistor|néolithique|temple', b['xl']['value'], re.I):
+            continue  # un sanctuaire de l'Antiquité n'est pas un pèlerinage de son temps
         r = rows.get(x)
         if not r:
             r = rows[x] = {'q': x, 'n': b['xl']['value'], 'kind': k, 'lat': lat, 'lon': lon, 'country': COUNTRIES[qid(b['ctry']['value'])],

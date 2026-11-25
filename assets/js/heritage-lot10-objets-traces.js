@@ -103,10 +103,13 @@
         const list = institutionsAt(rows, home.lat, home.lon, ['couvent'], y, radius);
         return list.length ? {home, year: y, list, rel} : null;
     }
+    // un établissement d'aujourd'hui sans date de fondation : pas « de son temps »
+    const MODERN = /centre hospitalier|clinique|\bchu\b|\bchr\b|polyclinique|ehpad|centre de soins|maison de retraite|hopital prive/;
     /** 🏥 où il a pu être soigné ou mourir : hospices, hôtels-Dieu, hôpitaux, asiles ouverts l'année de sa mort près du lieu */
     function hospicesFor(rows, life, radius = 10) {
         const d = deathPlace(life); if (!d || d.year === null) return null;
-        const list = institutionsAt(rows, d.lat, d.lon, ['hospice', 'hoteldieu', 'hopital', 'asile'], d.year, radius).filter(x => x.i.from !== null || x.i.kinds.includes('hoteldieu') || x.i.kinds.includes('hospice'));
+        const list = institutionsAt(rows, d.lat, d.lon, ['hospice', 'hoteldieu', 'hopital', 'asile'], d.year, radius)
+            .filter(x => x.i.from !== null || !MODERN.test(fold(x.i.n)));
         return list.length ? {place: d, list} : null;
     }
     /** 🌿 les spécimens cueillis de son vivant (la liste du serveur : déjà la commune et ses années) */
@@ -296,7 +299,7 @@
         const res = await ask('l10o_herbier', {id: home.id, pid, from: Math.max(1700, span.from), to: Math.min(2025, span.to ?? span.from + 80)});
         const list = herbsInLife(res?.items, span); if (!list.length) return '';
         const f = list[0], age = span.birth !== null ? f.year - span.birth : null;
-        const lead = T('Un botaniste est passé à {p} en {y}{a} : {w} y a cueilli {s}.', {p: esc(res.place?.name || home.name), y: String(f.year), a: age !== null && age >= 0 ? T(' (il avait {n} ans)', {n: String(age)}).replace('il', he(life.person)) : '', w: esc(f.who || T('un botaniste')), s: `<i>${esc(f.sci)}</i>`});
+        const lead = T('Un botaniste est passé à {p} en {y}{a} : {w} y a cueilli {s}.', {p: esc(res.place?.name || home.name), y: String(f.year), a: age !== null && age >= 0 ? T(' ({e} avait {n} ans)', {e: he(life.person), n: String(age)}) : '', w: esc(f.who || T('un botaniste')), s: `<i>${esc(f.sci)}</i>`});
         return row('🌿', `${lead} ${srcLink(f.url)}`, SRC.gbif(), more(`<ul class="hist-ul l10o-ul">${list.slice(0, 30).map(herbLi).join('')}</ul>${hyp(T('La plante séchée est encore dans un herbier ; la notice dit où, par qui et quand elle a été cueillie.'))}`, list.length));
     }
     function contesForPerson(D, life, places) {

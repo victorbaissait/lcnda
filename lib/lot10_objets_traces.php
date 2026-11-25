@@ -156,6 +156,13 @@ function l10o_people_here(PDO $pdo, array $p): array
         if (is_numeric($r['year'])) { $y = (int) $r['year']; $o['from'] = $o['from'] === null ? $y : min($o['from'], $y); $o['to'] = $o['to'] === null ? $y : max($o['to'], $y); }
         $out[$id] = $o;
     }
+    // les années de toute sa vie dans la base (pas seulement ici) : pour dire si l'objet est « de son vivant »
+    if ($out) {
+        $ids = implode(',', array_map('intval', array_keys($out)));
+        foreach ($pdo->query("SELECT person_id, MIN(year) AS a, MAX(year) AS b FROM events WHERE person_id IN ($ids) AND year IS NOT NULL GROUP BY person_id")->fetchAll(PDO::FETCH_ASSOC) as $y) {
+            $out[(int) $y['person_id']]['from'] = (int) $y['a']; $out[(int) $y['person_id']]['to'] = (int) $y['b'];
+        }
+    }
     return array_values(array_filter($out, static fn($o) => mb_strlen(l10o_fold($o['last'])) >= 3));
 }
 /** les personnes dont le nom de famille est écrit dans le texte ; « full » quand le prénom y est aussi (homonymes possibles : à vérifier) */
@@ -304,7 +311,7 @@ function l10o_herbier(PDO $pdo, array $q): array
             $items[] = ['key' => (string) $k, 'sci' => mb_substr((string) ($r['scientificName'] ?? ''), 0, 160), 'species' => mb_substr((string) ($r['species'] ?? ''), 0, 120), 'family' => (string) ($r['family'] ?? ''),
                 'year' => isset($r['year']) ? (int) $r['year'] : null, 'date' => mb_substr((string) ($r['eventDate'] ?? ''), 0, 30), 'who' => mb_substr((string) ($r['recordedBy'] ?? ''), 0, 160),
                 'where' => mb_substr((string) ($r['locality'] ?? $r['verbatimLocality'] ?? ''), 0, 200), 'inst' => mb_substr((string) ($r['institutionCode'] ?? ''), 0, 40),
-                'dataset' => (string) ($r['datasetKey'] ?? ''), 'dsname' => mb_substr((string) ($r['datasetName'] ?? ''), 0, 160), 'lic' => $licN, 'licurl' => $licU, 'img' => $img,
+                'dataset' => (string) ($r['datasetKey'] ?? ''), 'dsname' => mb_substr((string) ($r['datasetName'] ?? ''), 0, 160), 'lic' => $licN, 'licurl' => (string) preg_replace('~^http://~', 'https://', $licU), 'img' => $img,
                 'url' => 'https://www.gbif.org/occurrence/' . rawurlencode((string) $k), 'dsurl' => 'https://www.gbif.org/dataset/' . rawurlencode((string) ($r['datasetKey'] ?? ''))];
         }
         usort($items, static fn($a, $b) => ($a['year'] ?? 9999) <=> ($b['year'] ?? 9999));

@@ -1,0 +1,10 @@
+/* LCNDA — 🔔 Objets et traces (assets/js/heritage-lot10-objets-traces.js) : le reste vient de histoire.css (hist-row…) et commune-plus.css */
+.l10o-life { display: grid; gap: 12px; }
+.l10o-ul li { margin-bottom: 6px; }
+.l10o-quote { margin: 4px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; white-space: pre-line; overflow-wrap: anywhere; }
+.l10o-name { display: inline-block; padding: 0 6px; border-radius: 9px; background: var(--chip-bg, rgba(127, 127, 127, .14)); font-size: 12px; }
+.l10o-name.l10o-full { font-weight: 600; outline: 1px solid var(--accent, rgba(127, 127, 127, .5)); }
+.l10o-mini { width: 40px; height: 40px; object-fit: cover; border-radius: 3px; vertical-align: middle; }
+.l10o-src-link { font-size: 12px; white-space: nowrap; }
+.l10o-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+@media print { .l10o-more:not([open]) { display: none; } }
