@@ -161,3 +161,11 @@
 .wx-data-head b { font-size: 14px; }
 .wx-data-head small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
 :root[data-theme="dark"] .wx-data-head { background: #2a2c31; border-bottom-color: #474a52; }
+/* les compléments Copernicus (packs « plus-… ») : une phrase par complément dans le détail, les sources repliées */
+.wx-plus { margin-top: 4px; }
+.wx-plus .wx-plus-line { margin-top: 6px; background: var(--surface-2, #f6f7f9); border-left-color: var(--muted, #8a8f98); }
+.wx-plus-more { margin-top: 6px; font-size: 12px; color: var(--muted); }
+.wx-plus-more summary { cursor: pointer; }
+.wx-plus-more ul { margin: 4px 0 0; padding-left: 18px; }
+.wx-plus-src { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+:root[data-theme="dark"] .wx-plus .wx-plus-line { background: #2a2c31; }

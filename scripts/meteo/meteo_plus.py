@@ -555,7 +555,7 @@ class GridBuilder:
             for label, m, days in chunks_of(y, months):
                 for r in self.spec['requests']:
                     self.fetch(r, y, m, days, label)
-            if self.spec.get('next_day') and y < y1 and not self.test:  # la valeur du 31 décembre arrive avec le 1er janvier suivant
+            if self.spec.get('next_day') and y < datetime.date.today().year - 1 and not self.test:  # la valeur du 31 décembre arrive avec le 1er janvier suivant
                 for label, m, days in chunks_of(y + 1, [1]):
                     for r in self.spec['requests']:
                         self.fetch(r, y + 1, m, days, label)
@@ -616,7 +616,8 @@ def insitu_records(files):
     for fp in files:
         low = fp.lower()
         if low.endswith('.csv') or low.endswith('.csv.gz') or not low.endswith('.nc'):
-            raw = open(fp, 'rb').read()
+            with open(fp, 'rb') as fh:
+                raw = fh.read()
             if raw[:2] == b'\x1f\x8b':
                 import gzip
                 raw = gzip.decompress(raw)

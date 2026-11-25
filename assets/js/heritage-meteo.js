@@ -21,7 +21,7 @@
     const PACK_URLS = {complet: '', europe: '', socle: ''};
     const KINDS = [['BIRT', 'Naissance', ['BIRT']], ['BAPM', 'Baptême', ['BAPM', 'CHR', 'BAPT']], ['MARR', 'Mariage', ['MARR', 'MARB', 'MARC', 'MARL', 'MARS', 'ENGA']], ['DEAT', 'Décès', ['DEAT']],
         ['BURI', 'Inhumation', ['BURI', 'CREM']], ['CENS', 'Recensement', ['CENS']], ['TRAVEL', 'Départ, voyage', ['EMIG', 'IMMI', 'TRAV', 'TRAVEL', 'RESI']], ['OTHER', 'Tous les autres', []]];
-    const DEF = {show: 'always', open: 'window', temp: 'c', rain: 'mm', phrase: true, normal: true, sources: true, block: false, curious: true, today: true, coarse: false,
+    const DEF = {show: 'always', open: 'window', temp: 'c', rain: 'mm', phrase: true, normal: true, sources: true, block: false, curious: true, today: true, coarse: false, plus: true,
         kinds: {BIRT: true, BAPM: true, MARR: true, DEAT: true, BURI: true, CENS: false, TRAVEL: false, OTHER: false}, hidePersons: [], hideEvents: []};
     const clone = o => JSON.parse(JSON.stringify(o));
     function settings() {
@@ -228,6 +228,7 @@
             const where = r.station?.short ? ` à ${r.station.short}` : '';
             parts.push(`<div class="wx-norm"><span aria-hidden="true">${near ? '〰️' : a < 0 ? '📉' : '📈'}</span><span>${near ? '<b>Proche de la normale</b>' : `<b>${esc(dT(a, s))} ${a < 0 ? 'sous' : 'au-dessus de'} la normale</b>`} ${MONTHS[r.normal.month - 1] && /^[aeiouéo]/.test(MONTHS[r.normal.month - 1]) ? 'd’' : 'de '}${esc(MONTHS[r.normal.month - 1])} ${esc(r.normal.period)}${esc(where)} (min. ${esc(T(r.normal.tn, s))}, max. ${esc(T(r.normal.tx, s))}).</span></div>`);
         }
+        if (s.plus && r.plus) parts.push(plusHtml(r, s, {compact}));
         if (!compact) {
             const rows = [['Fiabilité', badge(r)]];
             if (r.station) rows.push(['Station', esc(`${r.station.name} · à ${Math.round(r.station.km)} km${r.station.alt != null ? `, ${metres(r.station.alt)}` : ''}${r.alt ? ` — ton lieu ${r.alt.from === 'carte' ? '≈ ' : ''}${metres(r.alt.m)}` : ''}`)]);
@@ -243,6 +244,42 @@
         parts.push(`<div class="wx-links">${compact ? `<button type="button" class="link-button" data-wx-full="${Number(r.event_id) || ''}">Tout le détail…</button>` : ''}<button type="button" class="link-button" data-wx-about>↗ Source</button><button type="button" class="link-button" data-wx-map>🗺 Voir sur la carte</button>${r.place_id && !kiosk() && !compact ? `<button type="button" class="link-button" data-wx-place-edit="${Number(r.place_id)}">⛰ Altitude du lieu</button>` : ''}${r.event_id ? `<button type="button" class="icon-button wx-more" data-wx-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>` : ''}</div>`);
         if (!compact || s.sources) parts.push(`<div class="wx-src">${esc(sourcesLine(r))}</div>`); // la ligne des sources reste toujours dans le détail (licences)
         return parts.join('');
+    }
+    /* les compléments Copernicus (packs « plus-… », lib/meteo_plus.php) : une phrase par complément, les sources repliées */
+    const utciWord = v => (v > 46 ? 'chaleur extrême' : v > 38 ? 'chaleur très forte' : v > 32 ? 'forte chaleur' : v > 26 ? 'chaleur modérée' : v >= 9 ? 'pas de gêne' : v >= 0 ? 'un peu de froid' : v >= -13 ? 'froid modéré' : v >= -27 ? 'froid fort' : v >= -40 ? 'froid très fort' : 'froid extrême');
+    const nf = (v, d = 0) => Number(v).toLocaleString('fr-FR', {maximumFractionDigits: d});
+    function plusLines(r, s = settings()) {
+        const p = r.plus || {}, out = [];
+        const sn = p.snow;
+        if (sn && (sn.sh > 0 || sn.sf > 0)) {
+            out.push(['❄️', sn.sh > 0 ? `<b>${esc(i18n('Neige au sol : {n} cm', {n: nf(sn.sh)}))}</b>${sn.sf > 0 ? esc(i18n(' ; il en est tombé ≈ {n} cm ce jour-là', {n: nf(sn.sf)})) : ''}.`
+                : esc(i18n('Il est tombé ≈ {n} cm de neige ce jour-là (pas de neige au sol le matin).', {n: nf(sn.sf)})), 'era5land']);
+        }
+        const fe = p.feel;
+        if (fe) {
+            if (fe.ux != null && fe.ux > 26) out.push(['🥵', esc(i18n('Ressenti au plus chaud : {t} ({w}).', {t: T(fe.ux, s), w: i18n(utciWord(fe.ux))})), 'utci']);
+            if (fe.un != null && fe.un < 0) out.push(['🥶', esc(i18n('Ressenti au plus froid : {t} ({w}).', {t: T(fe.un, s), w: i18n(utciWord(fe.un))})), 'utci']);
+            if (!(fe.ux > 26) && !(fe.un < 0) && fe.ux != null && fe.un != null) out.push(['🙂', esc(i18n('Ressenti : de {a} à {b} (pas de gêne).', {a: T(fe.un, s), b: T(fe.ux, s)})), 'utci']);
+        }
+        const rv = p.river;
+        if (rv && rv.mean > 0) {
+            const ratio = rv.q / rv.mean;
+            const state = rv.q >= rv.p99 ? 'en crue' : rv.q >= rv.p90 ? 'hautes eaux' : rv.q <= rv.p10 ? 'basses eaux' : '';
+            const cmp = ratio >= 1.5 ? i18n('{n} fois son débit moyen', {n: nf(ratio, 1)}) : ratio <= 0.67 ? i18n('{n} % de son débit moyen', {n: nf(Math.round(ratio * 100))}) : i18n('proche de son débit moyen');
+            out.push([state === 'en crue' ? '🌊' : '〰️', `${esc(i18n('La grande rivière la plus proche (à {km} km) : {q} m³/s, {cmp}', {km: nf(Math.max(1, Math.round(rv.km))), q: nf(rv.q, rv.q < 10 ? 1 : 0), cmp}))}${state ? ` — <b>${esc(i18n(state))}</b>` : ''}.`, 'glofas']);
+        }
+        const fi = p.fine;
+        if (fi && r.reliability !== 'measured' && (fi.tn != null || fi.tx != null)) {
+            out.push(['🌡', esc(i18n('Au plus près ({src}, carreau ≈ {size} km) : min. {tn}, max. {tx}.', {src: fi.source === 'cerra' ? 'CERRA' : 'ERA5-Land', size: nf(fi.size, 1), tn: T(fi.tn, s), tx: T(fi.tx, s)})), fi.source]);
+        }
+        return out;
+    }
+    function plusHtml(r, s = settings(), {compact = false} = {}) {
+        const lines = plusLines(r, s);
+        if (!lines.length) return '';
+        const srcs = (r.plus.sources || []).filter(x => lines.some(l => l[2] === x.id));
+        const more = !compact && srcs.length ? `<details class="wx-plus-more"><summary>${esc(i18n('▸ Sources des compléments'))}</summary><ul>${srcs.map(x => `<li><b>${esc(x.nom)}</b> — ${esc(x.licence)}${x.mention ? ` — « ${esc(x.mention)} »` : ''}${x.url ? ` <a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(i18n('↗ source'))}</a>` : ''}</li>`).join('')}</ul></details>` : '';
+        return `<div class="wx-plus" data-wx-plus>${lines.map(([icon, html]) => `<div class="wx-norm wx-plus-line"><span aria-hidden="true">${icon}</span><span>${html}</span></div>`).join('')}${more}</div>`;
     }
     async function openDay(id, {result = null} = {}) {
         let r = result;
@@ -443,8 +480,22 @@
         ['monde-afrique', 'Afrique', '≈ 600 stations · ≈ 25 Mo'],
         ['monde-asie', 'Asie', '≈ 1 800 stations (avec la Russie à l’est de l’Oural, la Turquie et le Caucase) · ≈ 100 Mo'],
         ['monde-oceanie', 'Océanie', '≈ 1 000 stations (Australie, Nouvelle-Zélande, îles du Pacifique) · ≈ 50 Mo'],
-        ['monde-europe', 'Europe (hors pack Europe)', '≈ 1 200 stations des pays que le pack Europe n’a pas (Autriche, Scandinavie, Europe de l’Est, Russie jusqu’à l’Oural…) · ≈ 80 Mo']];
+        ['monde-europe', 'Europe (hors pack Europe)', '≈ 1 200 stations des pays que le pack Europe n’a pas (Autriche, Scandinavie, Europe de l’Est, Russie jusqu’à l’Oural…) · ≈ 80 Mo'],
+        // les compléments Copernicus (scripts/meteo/meteo_plus.py) : facultatifs, chacun s'installe à part (France, Belgique, Suisse, Luxembourg)
+        ['plus-neige', 'Neige et températures fines', 'ERA5-Land : neige au sol, neige tombée, min. et max. sur des carreaux de ≈ 9 km · 1950 → · ≈ 150 à 300 Mo'],
+        ['plus-cerra', 'Températures très fines', 'CERRA : min. et max. sur des carreaux de ≈ 5,5 km · 1985 → 2021 · ≈ 300 à 600 Mo'],
+        ['plus-ressenti', 'Ressenti thermique', 'UTCI (ERA5-HEAT) : le ressenti le plus chaud et le plus froid de chaque jour, en tenant compte du vent, du soleil et de l’humidité · 1940 → · ≈ 100 Mo'],
+        ['plus-rivieres', 'Débit des rivières', 'GloFAS : le débit des grandes rivières chaque jour (crues, basses eaux) · 1979 → · ≈ 100 à 200 Mo'],
+        ['plus-anciennes', 'Relevés anciens (avant 1836)', 'Les plus vieilles séries de relevés d’Europe, avant le socle (relevés à heures fixes) · quelques Mo']];
+    /* source, licence et page officielle de chaque complément (ligne sous le pack, lien « ↗ source ») */
+    const PLUS_SRC = {'plus-neige': ['ERA5-Land (Copernicus)', 'https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land'],
+        'plus-cerra': ['CERRA (Copernicus)', 'https://cds.climate.copernicus.eu/datasets/reanalysis-cerra-single-levels'],
+        'plus-ressenti': ['ERA5-HEAT, UTCI (Copernicus)', 'https://cds.climate.copernicus.eu/datasets/derived-utci-historical'],
+        'plus-rivieres': ['GloFAS (Copernicus CEMS)', 'https://ewds.climate.copernicus.eu/datasets/cems-glofas-historical'],
+        'plus-anciennes': ['Observations in situ (Copernicus)', 'https://cds.climate.copernicus.eu/datasets/insitu-observations-surface-land']};
+    const PLUS_LIC = {'plus-rivieres': 'Licence CEMS-FLOODS, libre avec mention'};
     const isWorld = k => String(k).startsWith('monde-');
+    const isPlus = k => String(k).startsWith('plus-');
     const packName = k => (PACKS.find(p => p[0] === k) || [k, 'Pack'])[1];
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.meteo = async token => {
@@ -460,11 +511,13 @@
             const dataRows = PACKS.map(([k, name, sub]) => {
                 const f = files[k];
                 const on = f && f.ok;
-                const head = k === 'monde-amerique-nord' ? `<div class="wx-data-head"><b>${esc(i18n('Le reste du monde'))}</b><small>${esc(i18n('Un pack par continent (NOAA GHCN-Daily) : chaque jour, températures, pluie et neige des plus longues séries. Là où les stations sont rares, la plus proche jusqu’à 150 km.'))}</small></div>` : '';
+                const head = k === 'monde-amerique-nord' ? `<div class="wx-data-head"><b>${esc(i18n('Le reste du monde'))}</b><small>${esc(i18n('Un pack par continent (NOAA GHCN-Daily) : chaque jour, températures, pluie et neige des plus longues séries. Là où les stations sont rares, la plus proche jusqu’à 150 km.'))}</small></div>`
+                    : k === 'plus-neige' ? `<div class="wx-data-head"><b>${esc(i18n('Compléments Copernicus (facultatifs)'))}</b><small>${esc(i18n('Chacun s’installe à part et s’ajoute au détail d’un jour : neige, ressenti, rivière, températures plus fines, relevés d’avant 1836. France, Belgique, Suisse, Luxembourg (les relevés anciens : toute l’Europe).'))}</small></div>` : '';
+                const plusSrc = isPlus(k) && PLUS_SRC[k] ? `<small class="wx-plus-src">${esc(i18n('Source : {s} · {l} · citation demandée', {s: PLUS_SRC[k][0], l: i18n(PLUS_LIC[k] || 'CC BY 4.0')}))} <a href="${esc(PLUS_SRC[k][1])}" target="_blank" rel="noopener">${esc(i18n('↗ source'))}</a></small>` : '';
                 const desc = on ? `${isWorld(k) && f.station_countries?.length ? `${A().plural(f.station_countries.length, 'pays', 'pays')} · ` : ''}${k === 'europe' && f.station_countries?.length ? `Stations : ${f.station_countries.map(countryName).join(', ')} · ` : ''}${k === 'europe' && f.c20?.n ? `20CR ${f.c20.a}–${f.c20.b} (toute l’Europe) · ` : ''}${f.stations ? A().plural(f.stations, 'station') : ''}${f.cells ? ` · ${A().plural(f.cells, 'carreau', 'carreaux')}` : ''}${f.from ? ` · ${f.from} → ${f.to}` : ''}${f.hours_from ? ` · heures depuis ${f.hours_from}` : ''}${f.relief ? ` · altitudes : ${A().plural(f.relief, 'carré')} de 1°${f.relief_countries?.length ? ` (${f.relief_countries.map(countryName).join(', ')})` : ''}` : ''} · ${fmtSize(f.size)}${f.fixture ? ' · jeu d’essai fabriqué' : ''}` : sub;
                 const acts = on ? (f.removable ? `<button type="button" class="button small secondary" data-wx-remove="${k}">🗑 Supprimer le pack</button>` : '')
                     : dlActs(k);
-                return `${head}<div class="wx-data-row${isWorld(k) ? ' wx-world' : ''}"><span><b>${esc(name)}</b><small>${esc(desc)}</small></span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
+                return `${head}<div class="wx-data-row${isWorld(k) ? ' wx-world' : ''}${isPlus(k) ? ' wx-plus-row' : ''}" data-wx-pack="${esc(k)}"><span><b>${esc(name)}</b><small>${esc(desc)}</small>${plusSrc}</span>${UI().badge(on ? 'Installé' : 'Pas installé', on ? 'green' : 'grey')}${acts ? `<span class="wx-acts">${acts}</span>` : ''}</div>`;
             }).join('');
             ws.innerHTML = `<section class="page wx-settings">${UI().pageHeader({title: 'Météo d’autrefois', icon: '🌦', attrs: 'data-ph-title', where: 'Réglages · Données', saved: true, help: 'Le temps qu’il faisait le jour de chaque événement, sans Internet.',
                 actions: ['<button type="button" class="button secondary" data-wx-reset data-ui-reset>↺ Remettre comme au départ</button>']})}
@@ -481,6 +534,7 @@
                     ${tg('curious', 'Phrases curieuses (« Né le jour le plus froid… »)')}
                     ${tg('today', 'Dans « Ce jour-là » et le tableau de bord')}
                     ${tg('coarse', 'Montrer aussi les reconstitutions grossières (avant 1940)')}
+                    ${tg('plus', 'Les compléments Copernicus dans le détail', 'Neige, ressenti, rivière, températures plus fines… quand le pack est installé.')}
                     <h4>Pour quels événements</h4>
                     ${(() => { const used = (A()?.state?.bootstrap?.eventTypes || []).filter(t => Number(t.usage_count) > 0).sort((a, b) => String(a.label).localeCompare(String(b.label), 'fr', {sensitivity: 'base'}));
                         if (!used.length) return `<div class="wx-chks">${KINDS.map(([k, l]) => C(l, {checked: !!s.kinds[k], attrs: `data-wx-kind="${k}"`})).join('')}</div>`;
@@ -595,10 +649,10 @@
     /* ⤓ le fabriquer soi-même (le fichier se fabrique une fois, puis s'importe) */
     function openHowTo(kind) {
         const url = PACK_URLS[kind];
-        const name = {socle: 'le socle', complet: 'le pack complet', europe: 'le pack Europe'}[kind] || (isWorld(kind) ? i18n('le pack « {name} »', {name: i18n(packName(kind))}) : 'le pack');
+        const name = {socle: 'le socle', complet: 'le pack complet', europe: 'le pack Europe'}[kind] || (isWorld(kind) || isPlus(kind) ? i18n('le pack « {name} »', {name: i18n(packName(kind))}) : 'le pack');
         const cmd = PACKS.some(p => p[0] === kind) ? kind : 'socle';
         const body = `${url ? `<p><a class="button" href="${esc(url)}" target="_blank" rel="noopener">⤓ Télécharger ${esc(name)}</a></p>` : ''}
-            <ol class="wx-steps"><li>${url ? 'Ou bien, sur' : 'Sur'} un ordinateur qui a Internet, suis le mode d’emploi <b>docs/METEO.md</b> (livré avec l’app) : il installe Python si besoin, puis lance<br><code>python3 scripts/meteo/build-meteo.py ${esc(cmd)}</code></li>
+            <ol class="wx-steps">${isPlus(kind) ? `<li>${esc(i18n('Il faut un compte Copernicus gratuit, sa clé (docs/METEO.md, « Le compte Copernicus ») et avoir accepté les conditions du jeu sur sa page (onglet « Download »).'))}</li>` : ''}<li>${url ? 'Ou bien, sur' : 'Sur'} un ordinateur qui a Internet, suis le mode d’emploi <b>docs/METEO.md</b> (livré avec l’app) : il installe Python si besoin, puis lance<br><code>python3 scripts/meteo/build-meteo.py ${esc(cmd)}</code></li>
             <li>Le fichier <code>meteo-${esc(cmd === 'socle' ? 'socle.sqlite' : 'pack-' + cmd + '.lcmeteo')}</code> apparaît dans le dossier <code>meteo-sortie</code>.</li>
             <li>Ici : <b>⤒ Importer le fichier…</b> (une seule fois). Ensuite l’app n’a plus besoin d’Internet.</li></ol>
             ${UI().notice('info', 'Rien n’est envoyé sur Internet par l’app : le fichier reste sur ton ordinateur.')}`;

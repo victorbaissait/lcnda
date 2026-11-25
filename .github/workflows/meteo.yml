@@ -10,6 +10,11 @@
 # Une fabrication peut dépasser les 6 h d'une machine GitHub : le programme reprend où il s'était arrêté (dossier
 # meteo-sortie gardé en cache d'une fois sur l'autre) ; relancer jusqu'à ce que le pack soit déposé.
 # Sans ERA5 (compte Copernicus personnel) : --sans-era5.
+# Les compléments Copernicus (facultatifs, un pack chacun, scripts/meteo/meteo_plus.py) : plus-neige (ERA5-Land), plus-ressenti
+# (UTCI), plus-rivieres (GloFAS, serveur EWDS : mêmes compte et clé), plus-cerra (CERRA), plus-anciennes (relevés d'avant 1836).
+# Ils demandent la clé CDSAPI_KEY et l'acceptation des conditions de chaque jeu sur son site ; ils ont leur propre cache et ne
+# touchent ni au socle ni au cache du socle. E-OBS n'est pas proposé : sa licence (recherche et enseignement non commerciaux) ne
+# permet pas de le redistribuer.
 # Le pack est coupé en morceaux de 1 900 Mo (limite d'un fichier d'une version GitHub : 2 Go) ; meteo-manifest.json dit les
 # morceaux, la taille et l'empreinte de chaque pack.
 
@@ -21,7 +26,7 @@ on:
       quoi:
         description: 'Le pack à fabriquer'
         type: choice
-        options: [socle, europe, complet, monde-amerique-nord, monde-amerique-sud, monde-afrique, monde-asie, monde-oceanie, monde-europe]
+        options: [socle, europe, complet, monde-amerique-nord, monde-amerique-sud, monde-afrique, monde-asie, monde-oceanie, monde-europe, plus-neige, plus-ressenti, plus-rivieres, plus-cerra, plus-anciennes]
         default: socle
   push:
     tags: ['meteo-*']
@@ -45,7 +50,7 @@ jobs:
         run: |
           q="${{ inputs.quoi }}"
           if [ -z "$q" ]; then q=$(echo "${GITHUB_REF_NAME}" | sed -E 's/^meteo-([a-z-]*[a-z])(-[0-9]+)?$/\1/'); fi
-          case "$q" in socle|europe|complet|monde-amerique-nord|monde-amerique-sud|monde-afrique|monde-asie|monde-oceanie|monde-europe) ;; *) echo "pack inconnu : $q"; exit 1;; esac
+          case "$q" in socle|europe|complet|monde-amerique-nord|monde-amerique-sud|monde-afrique|monde-asie|monde-oceanie|monde-europe|plus-neige|plus-ressenti|plus-rivieres|plus-cerra|plus-anciennes) ;; *) echo "pack inconnu : $q"; exit 1;; esac
           echo "quoi=$q" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-python@v5

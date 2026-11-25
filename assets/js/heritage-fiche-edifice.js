@@ -151,7 +151,7 @@
     const more = (html, n, label = T('▸ plus')) => (html ? `<details class="fe-more"><summary>${esc(label)}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
     const yrs = (a, b) => (a == null && b == null ? '' : a != null && b != null ? (a === b ? String(a) : `${a} – ${b}`) : a != null ? T('dès {y}', {y: String(a)}) : T('jusqu’en {y}', {y: String(b)}));
     const kindLabel = k => T((KINDS[k] || KINDS.eglise)[1]);
-    const personBtn = (id, name) => (id ? `<button type="button" class="link-button fe-who" data-open-person="${Number(id)}">${esc(name)}</button>` : esc(name));
+    const personBtn = (id, name) => (id ? `<button type="button" class="link-button fe-who" data-fe-pid="${Number(id)}">${esc(name)}</button>` : esc(name));
     const openPerson = id => A().openPersonById?.(Number(id));
     /** d'où vient une valeur gardée sur la fiche (son « ↗ source ») */
     const originSrc = s => (/^(cht|l8c|cplus)/.test(s.origin) && s.wikidata ? wdUrl(s.wikidata) : s.origin === 'merimee' && s.merimee ? popUrl(s.merimee) : '');
@@ -215,7 +215,7 @@
         dlg.innerHTML = `<div class="modal-head"><h2 data-fe-title></h2><button type="button" class="icon-button" data-fe-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">✕</button></div><div class="modal-body" data-fe-body></div>`;
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => { current = null; });
-        dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('[data-fe-close]')) dlg.close(); if (e.target.closest('[data-open-person]')) dlg.close(); });
+        dlg.addEventListener('click', e => { if (e.target === dlg || e.target.closest('[data-fe-close]')) dlg.close(); });
         return dlg;
     }
     async function open(id) {
@@ -312,12 +312,10 @@
             if (n.vocable && !s.patron_saint && s.group !== 'castle') hist.push(`<p>${esc(T('Vocable : {v}', {v: n.vocable}))} ${src(n.url)}</p>`);
         }
         if (s.lat != null) {
-            const y = s.built_from != null && s.built_from < 1789 ? Math.max(s.built_from, 1500) : 1700;
             const tr = await territoryAt(s.lat, s.lon, 1700).catch(() => null);
             if (tr && body.isConnected) {
                 const bits = [...tr.drawn.slice(0, 2).map(it => `<button type="button" class="link-button" data-cht-terr="${esc(it.q)}">${esc(it.n)}</button> ${src(wdUrl(it.q))}`), ...tr.seats.slice(0, 2).map(it => `${esc(T('siège de : {n}', {n: it.n}))} ${src(wdUrl(it.q))}`)];
                 if (bits.length) hist.push(`<p>${esc(T('En {y}, ce lieu était dans :', {y: '1700'}))} ${bits.join(' · ')} <small class="muted">${esc(T('(👑 Territoires d’autrefois)'))}</small></p>`);
-                void y;
             }
         }
         const h = slot('history'); if (h) h.insertAdjacentHTML('afterbegin', hist.join(''));
@@ -384,7 +382,7 @@
             ${field(T('Cote'), inp('cote'))}${field(T('Lien (registres en ligne)'), inp('url', '', 'type="url" placeholder="https://"'))}</div>`,
         async d => { const r = await post('ed_reg_save', {...d, site_id: s.id}); A().undoToast?.(T('Registres ajoutés.'), {undo: async () => { await post('ed_reg_delete', {id: r.id}); await refresh(); }}); await refresh(); });
     }
-    function editForm(body, s) {
+    function editForm(body, s, onSave = null) {
         const kinds = ['castle', 'church', 'abbey', 'temple', 'synagogue', 'mosquee'].map(gr => `<optgroup label="${esc(gr === 'castle' ? T('Châteaux') : T('Lieux de culte'))}">${Object.entries(KINDS).filter(([, v]) => v[2] === gr).map(([k, v]) => `<option value="${k}" ${k === s.kind ? 'selected' : ''}>${v[0]} ${esc(T(v[1]))}</option>`).join('')}</optgroup>`).join('');
         const sel = (name, map, v) => `<select name="${name}">${Object.entries(map).map(([k, l]) => `<option value="${k}" ${k === (v || '') ? 'selected' : ''}>${esc(T(l))}</option>`).join('')}</select>`;
         body.innerHTML = `<div class="fe-edit"></div>`;
@@ -397,8 +395,8 @@
             ${field(T('Wikidata (Q…)'), inp('wikidata', s.wikidata, 'pattern="Q[0-9]+"'))}${field(T('Mérimée (PA…)'), inp('merimee', s.merimee))}${field(T('Wikipédia (lien)'), inp('wikipedia', s.wikipedia, 'type="url"'))}
             ${field(T('Image de Wikimedia Commons (nom du fichier)'), inp('image', s.image))}<label class="checkbox-line"><input type="checkbox" name="visit" value="1" ${s.visit ? 'checked' : ''}> ${esc(T('Se visite'))}</label></div>
             ${field(T('Son histoire'), `<textarea name="history" rows="4">${esc(s.history)}</textarea>`)}${field(T('Ta note'), `<textarea name="notes" rows="3">${esc(s.notes)}</textarea>`)}`,
-        async d => { await saveSite({...d, id: s.id, visit: d.visit ? 1 : 0, origin: s.origin}, T('Fiche enregistrée.')); });
-        body.querySelector('[data-fe-cancel]')?.addEventListener('click', () => render());
+        async d => { if (onSave) return onSave(d); await saveSite({...d, id: s.id, visit: d.visit ? 1 : 0, origin: s.origin}, T('Fiche enregistrée.')); });
+        if (!onSave) body.querySelector('[data-fe-cancel]')?.addEventListener('click', () => render());
     }
     function wdDialog(body, s, w) {
         const diff = diffWd(s, w);
@@ -423,9 +421,10 @@
         await refresh(); redrawPerson();
     }
     if (root.document) document.addEventListener('click', async e => {
-        const t = e.target.closest?.('[data-fe-open],[data-fe-make],[data-fe-relink],[data-fe-map],[data-fe-new]');
+        const t = e.target.closest?.('[data-fe-open],[data-fe-make],[data-fe-relink],[data-fe-map],[data-fe-new],[data-fe-pid]');
         if (t) {
             e.preventDefault();
+            if (t.dataset.fePid) { dlg?.close(); return openPerson(t.dataset.fePid); }
             if (t.dataset.feOpen) return open(Number(t.dataset.feOpen));
             if (t.dataset.feMake) { const pre = makeMemo.get(t.dataset.feMake); if (pre) { t.disabled = true; await create(pre); t.disabled = false; } return; }
             if (t.dataset.feRelink) return relinkDialog(Number(t.dataset.feRelink), t);
@@ -479,9 +478,7 @@
         d.querySelector('[data-fe-title]').textContent = T('Nouvelle fiche d’un édifice');
         const body = d.querySelector('[data-fe-body]'); delete body.dataset.feSite;
         const s = {kind: 'eglise', name: '', state: '', cult: '', visit: 0, history: '', notes: '', patron_saint: '', diocese: '', protection: '', wikidata: '', merimee: '', wikipedia: '', image: '', insee: '', place_id: null, lat: null, lon: null, ...pre};
-        editForm(body, s);
-        const f = body.querySelector('form');
-        f.onsubmit = async e => { e.preventDefault(); e.stopImmediatePropagation(); const data = Object.fromEntries(new FormData(f).entries()); const site = await create({...pre, ...data, visit: data.visit ? 1 : 0}, {open: false}); if (site) { if (pre.event_id) await linkEvents([pre.event_id], site.id); await open(site.id); } };
+        editForm(body, s, async data => { const site = await create({...pre, ...data, visit: data.visit ? 1 : 0}, {open: false}); if (site) { if (pre.event_id) await linkEvents([pre.event_id], site.id); await open(site.id); } });
         body.querySelector('[data-fe-cancel]')?.addEventListener('click', () => d.close());
         if (!d.open) { if (d.showModal) d.showModal(); else d.setAttribute('open', ''); }
     }
