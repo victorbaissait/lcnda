@@ -181,6 +181,13 @@ try {
             'scan_inbox_status' => ['dir' => '', 'enabled' => false, 'move_imported' => true, 'reachable' => false, 'pending' => 0, 'recent' => [], 'can_convert' => false, 'total' => 0],
             'parish_map' => ['by_place' => [], 'by_insee' => []],
             'compl' => ($_GET['op'] ?? '') === 'settings' ? ['settings' => []] : null, // 🧩 réglages des compléments : ceux de départ
+            // modules qui lisent au démarrage (sans attendre la base) : la même réponse qu'une base neuve
+            'gov_status' => (static function () { require_once __DIR__ . '/lib/gov.php'; return gov_status_data(); })(), // 🏰 Lieux anciens : ne dépend pas de la base
+            'cc_about' => (static function () { require_once __DIR__ . '/lib/commune_culture.php'; return cc_about(); })(),
+            'carto_packs' => (static function () { require_once __DIR__ . '/lib/territoires.php'; return ['packs' => array_keys(carto_packs())]; })(),
+            'terr_list' => ['territories' => []],
+            'reseau_settings' => (static function () { require_once __DIR__ . '/lib/relations_reseau.php'; return ['settings' => ['fiche' => true, 'listes' => true, 'diagramme' => true, 'genogramme' => true], 'types' => rs_type_list()]; })(),
+            'cx_count' => ['count' => 0, 'total' => 0, 'baskets' => 0],
             default => null,
         };
         if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
