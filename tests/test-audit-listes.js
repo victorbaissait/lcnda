@@ -188,7 +188,8 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             await p.click(`tr[data-sel-id="${ID.jean}"] [data-sel-check]`); await p.click(`tr[data-sel-id="${ID.paul}"] [data-sel-check]`);
             assert.match(await p.textContent('.sel-bar'), /2 fiches cochées/);
             const acts = await p.$$eval('.sel-bar [data-sel-act]', bs => bs.map(b => b.textContent.trim()));
-            assert.deepStrictEqual(acts, ['🏷 Étiqueter', '★ Ajouter à Mes listes', '🔒 Verrouiller', '🔓 Déverrouiller', '⤓ Exporter', '🗑 Supprimer']);
+            // + 🔌 Connexions (heritage-connexions.js) : « 🧺 Au panier » et « 📍 Mettre dans… » pour les lignes cochées
+            assert.deepStrictEqual(acts, ['🏷 Étiqueter', '★ Ajouter à Mes listes', '🔒 Verrouiller', '🔓 Déverrouiller', '⤓ Exporter', '🗑 Supprimer', '🧺 Au panier', '📍 Mettre dans…']);
             await p.click('.sel-bar [data-sel-act="0"]');
             await p.waitForSelector('dialog[open] input[name=label_name]');
             await p.fill('dialog[open] input[name=label_name]', 'Branche DURAND');
@@ -200,7 +201,8 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             await p.click(`tr[data-sel-id="${ID.pierre}"] td:nth-child(2)`, {button: 'right'});
             await p.waitForSelector('.ui-actmenu');
             const m = await p.$$eval('.ui-actmenu .ui-actmenu-i b', bs => bs.map(b => b.textContent));
-            assert.deepStrictEqual(m, ['Ouvrir', 'Modifier', 'Étiqueter', 'Ajouter à Mes listes', 'Verrouiller', 'Déverrouiller', 'Exporter', 'Supprimer']);
+            // + 🔌 Connexions : le clic droit sur une info précise (l'année) propose de la prendre ou de la ranger
+            assert.deepStrictEqual(m, ['Ouvrir', 'Modifier', 'Étiqueter', 'Ajouter à Mes listes', 'Verrouiller', 'Déverrouiller', 'Exporter', 'Prendre « 1870 »', 'Mettre « 1870 » dans…', 'Supprimer']);
             await p.keyboard.press('Escape');
         });
         await t('écran 📅 Événements : ✎ double-clic sur la date, Entrée, ↶ Annuler', async () => {

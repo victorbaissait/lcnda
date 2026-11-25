@@ -31,7 +31,7 @@ function iiif_get(string $url, int $max): string
         $body = ''; $too = false;
         $ch = curl_init($url);
         curl_setopt_array($ch, ($resolve !== '' ? [CURLOPT_RESOLVE => [$resolve]] : []) + [CURLOPT_RETURNTRANSFER => false, CURLOPT_FOLLOWLOCATION => false, CURLOPT_PROXY => '', CURLOPT_NOPROXY => '*',
-            CURLOPT_CONNECTTIMEOUT => 15, CURLOPT_TIMEOUT => 90, CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS, CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, lecture IIIF)',
+            CURLOPT_CONNECTTIMEOUT => 15, CURLOPT_TIMEOUT => 90, CURLOPT_LOW_SPEED_LIMIT => 256, CURLOPT_LOW_SPEED_TIME => 20, /* un site qui envoie au goutte-à-goutte : abandonné après 20 s */ CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS, CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, lecture IIIF)',
             CURLOPT_HTTPHEADER => ['Accept: application/ld+json, application/json, image/*;q=0.9, */*;q=0.5'],
             CURLOPT_WRITEFUNCTION => function ($c, $chunk) use (&$body, &$too, $max) { $body .= $chunk; if (strlen($body) > $max) { $too = true; return 0; } return strlen($chunk); }] + lcnda_curl_tls());
         curl_exec($ch);
@@ -43,6 +43,15 @@ function iiif_get(string $url, int $max): string
         return $body;
     }
     throw new LcndaBadInput(i18n_t('Trop de redirections.'));
+}
+
+/** une image téléchargée : vraie image (JPEG, PNG, WebP, GIF) et pas plus de 150 millions de pixels (une « bombe » de quelques Mo
+ *  qui demanderait des Go de mémoire à décoder) → l'extension, ou '' */
+function iiif_image_ext(string $bytes): string
+{
+    $info = @getimagesizefromstring($bytes);
+    if (!$info || (int) $info[0] < 1 || (int) $info[1] < 1 || (int) $info[0] * (int) $info[1] > 150000000) { return ''; }
+    return ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif'][$info['mime'] ?? ''] ?? '';
 }
 
 /** un libellé IIIF (texte, {"fr": ["…"]}, [{"@value": "…"}]) en texte */
@@ -91,7 +100,7 @@ function iiif_parse(string $json): array
 /** GET recueil_iiif_preview&url=… : ce qu'il y a avant de télécharger */
 function recueil_iiif_preview(string $url): array
 {
-    if (function_exists('onglets_kiosk') && onglets_kiosk()) { throw new LcndaBadInput(i18n_t('Pas en mode consultation.')); }
+    if (function_exists('kiosk_state') && !empty(kiosk_state()['on'])) { throw new LcndaBadInput(i18n_t('Pas en mode consultation.')); } // (onglets_kiosk n'est pas chargé ici : sa vérification ne faisait rien)
     $p = iiif_parse(iiif_get($url, IIIF_MANIFEST_MAX));
     return ['title' => $p['title'], 'attribution' => $p['attribution'], 'count' => count($p['views']), 'labels' => array_column($p['views'], 'label')];
 }
@@ -116,7 +125,7 @@ function recueil_iiif_import(PDO $pdo, array $d): array
     for ($k = $done; $k < $total && count($ids) < IIIF_BATCH; $k++) {
         $v = $p['views'][$from - 1 + $k];
         $bytes = iiif_get($v['url'], IIIF_IMAGE_MAX);
-        $info = @getimagesizefromstring($bytes); $ext = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif'][$info['mime'] ?? ''] ?? '';
+        $ext = iiif_image_ext($bytes);
         if ($ext === '') { throw new LcndaBadInput(i18n_t('La vue {n} n’est pas une image.', ['n' => $v['label']])); }
         if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
         $name = bin2hex(random_bytes(16)) . '.' . $ext;

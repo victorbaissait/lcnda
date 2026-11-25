@@ -257,7 +257,7 @@
             if (e.target.closest('[data-ael-old]')) { st.showOld = !st.showOld; update(); return; }
             const go = e.target.closest('[data-ael-go][data-ael-copy]');
             if (go) { const txt = go.dataset.aelCopy; try { navigator.clipboard?.writeText(txt).then(() => toast(i18n('« {text} » est copié : colle-le dans la case du site.', {text: txt})), () => toast(i18n('Écris « {text} » dans la case du site.', {text: txt}))); } catch (_) { /* presse-papiers refusé */ } }
-            const im = e.target.closest('[data-ael-import]'); if (im) { const en = all.find(x => x.id === im.dataset.aelImport); if (en) { dlg.close(); importFor(en, {personId: pid, place: o.place, target, placeId: o.placeId}); } return; }
+            const im = e.target.closest('[data-ael-import]'); if (im) { const en = all.find(x => x.id === im.dataset.aelImport); if (en) { dlg.close(); dlg.remove(); importFor(en, {personId: pid, place: o.place, target, placeId: o.placeId}); } return; } // retirée tout de suite : la fenêtre d'import la remplace
             if (e.target.closest('[data-ael-settings]')) { openSettings({lot: o.lot, onChange: () => update()}); return; }
             if (e.target.closest('[data-ael-ouc]')) { dlg.close(); ext.ouChercher.openPerson(pid); return; }
             if (e.target.closest('[data-ael-paste-in]')) { dlg.close(); openPaste({personId: pid, lot: o.lot}); return; }

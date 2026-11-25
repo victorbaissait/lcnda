@@ -123,7 +123,7 @@ check('rendu échappé (données et texte tapé)', () => {
 const phpPath = findPhp([devBundledPhp()]);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-abc-'));
 const dir = path.join(tmp, 'a');
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 const SHOTS = process.env.ALPHABETS_SHOTS || '';

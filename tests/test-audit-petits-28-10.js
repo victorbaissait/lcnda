@@ -175,7 +175,8 @@ const startServer = async dir => {
                 await t(`${name} : « ⚙️ Ranger les outils » — poignée ⠿, K1 si tout est décoché (7)`, async () => {
                     await p.evaluate(() => window.LCNDA_EXT.arrangeEditTools());
                     await p.waitForSelector('dialog[open] [data-list] [data-k]'); await p.waitForTimeout(400);
-                    assert.ok(await p.$('dialog[open] [data-list] .dnd-grip'), 'poignée ⠿');
+                    // la poignée est posée par heritage-dnd.js quand la page se calme (au plus 600 ms, même si le tableau de bord bouge sans arrêt)
+                    assert.ok(await p.waitForSelector('dialog[open] [data-list] .dnd-grip', {timeout: 3000}).catch(() => null), 'poignée ⠿');
                     if (vp.width > 800) assert.equal(await p.$eval('dialog[open] [data-list] [data-up]', b => getComputedStyle(b).display), 'none', 'flèches cachées à la souris');
                     await p.$$eval('dialog[open] [data-list] input[type=checkbox]', xs => xs.forEach(x => { x.checked = false; }));
                     await p.click('dialog[open] .modal-actions button[type=submit], dialog[open] .modal-actions .button:not(.secondary)');

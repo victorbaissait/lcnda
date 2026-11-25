@@ -234,6 +234,14 @@ function txi_crop_line(string $file, array $l, string $out): bool
  */
 function txi_train_start(PDO $pdo, array $d): array
 {
+    // deux « Entraîner » en même temps (double clic, deux onglets) : un seul travail — la vérification et le lancement sous un verrou
+    $lock = @fopen(DATA_DIR . '/atelier-train.lock', 'c');
+    if ($lock) { flock($lock, LOCK_EX); }
+    try { return txi_train_start_locked($pdo, $d); } finally { if ($lock) { flock($lock, LOCK_UN); fclose($lock); } }
+}
+
+function txi_train_start_locked(PDO $pdo, array $d): array
+{
     if ($r = txi_train_running()) { throw new LcndaBadInput(i18n_t('Un entraînement est déjà en cours : attends qu’il se termine, ou arrête-le.')); }
     $engine = ($d['engine'] ?? '') === 'qwen' ? 'qwen' : 'kraken';
     $hand = trim(safe_text($d['hand'] ?? ''));
@@ -309,7 +317,8 @@ function txi_train_job(PDO $pdo, string $id): array
     $out['elapsed'] = max(0, time() - (int) ($job['created'] ?? time()));
     unset($out['log']); $out['log'] = mb_substr((string) @file_get_contents("$dir/train.log"), -3000);
     $model = (string) ($s['model_file'] ?? '');
-    if (in_array($s['state'] ?? '', ['done', 'cancelled'], true) && $model !== '' && empty($s['assigned']) && ($job['engine'] ?? '') === 'kraken') {
+    // (une lecture en mode consultation n'écrit rien : le modèle sera choisi à la prochaine lecture hors consultation)
+    if (in_array($s['state'] ?? '', ['done', 'cancelled'], true) && $model !== '' && empty($s['assigned']) && ($job['engine'] ?? '') === 'kraken' && !txi_kiosk()) {
         $was = []; $set = $pdo->prepare('INSERT INTO atelier_reg_models(reg_key, model, label, updated_at) VALUES(?,?,?,CURRENT_TIMESTAMP) ON CONFLICT(reg_key) DO UPDATE SET model=excluded.model, label=excluded.label, updated_at=CURRENT_TIMESTAMP');
         $get = $pdo->prepare('SELECT model FROM atelier_reg_models WHERE reg_key=?');
         foreach ((array) ($job['reg_keys'] ?? []) as $k) { if (!is_string($k) || !preg_match('/^[rin]:[0-9a-f]{1,16}$/', $k)) { continue; } $get->execute([$k]); $was[$k] = (string) ($get->fetchColumn() ?: ''); $set->execute([$k, $model, (string) ($job['title'] ?? '')]); }

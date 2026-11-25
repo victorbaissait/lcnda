@@ -95,7 +95,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
     if (!pw) { console.log('  – navigateur : sauté (Playwright absent)'); }
     else {
         const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-audit-'));
-        const env = { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1' };
+        const env = { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' };
         fs.mkdirSync(path.join(dir, 'media'), { recursive: true });
         const init = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';

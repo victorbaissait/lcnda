@@ -1,8 +1,8 @@
 /* LCNDA — 📜 Atelier de transcription, idée 37 : ⏭ « Acte suivant » et « Vue suivante » du même registre, et le champ « ✍ Main »
  * (maquette approuvée docs/design/atelier-idees.html ; réponse 4 : sur un registre IIIF, une vue téléchargée par clic).
  * Une bande discrète au-dessus de l'image, SEULEMENT quand l'acte vient d'un registre (un recueil, ou une vue IIIF, 🌐 40) :
- *   📚 BMS Treignac 1780-1792 · vue 139 / 268 · acte 2 · ✍ Curé J. LACOMBE  ↗ source      ◀   ➕ Acte suivant   Vue suivante →
- * ➕ Acte suivant (même vue) : l'acte d'après s'il existe, sinon un nouvel acte prêt à tracer sa zone sous la dernière zone ; repris :
+ *   📚 BMS Treignac 1780-1792 · vue 139 / 268 · acte 2 · ✍ Curé J. LACOMBE  ↗ source      ◀   ＋ Acte suivant   Vue suivante →
+ * ＋ Acte suivant (même vue) : l'acte d'après s'il existe, sinon un nouvel acte prêt à tracer sa zone sous la dernière zone ; repris :
  * commune, registre, cote, vue, main (la langue est déjà retenue) ; proposé : le même type et l'année (le jour reste vide).
  * Vue suivante → : même registre, vue + 1 (son premier acte, ou un nouvel acte) ; une vue IIIF est téléchargée à ce moment-là.
  * ◀ : l'acte d'avant. Raccourcis (hors des cases de texte) : Alt + → acte suivant, Alt + ⇧ + → vue suivante, Alt + ← acte d'avant.
@@ -66,7 +66,7 @@
             strip.innerHTML = `<button type="button" class="ais-reg" data-ais-edit title="${esc(i18n('Registre, cote, vue et main de l’écriture (repris par « Acte suivant » et « Vue suivante »)'))}">📚 <b data-i18n-off>${esc(title)}</b>${bits.length ? ` · ${esc(bits.join(' · '))}` : ''}${reg.hand ? ` · <span class="ais-hand" data-i18n-off>✍ ${esc(reg.hand)}</span>` : ` · <span class="ais-hand is-empty">✍ ${esc(i18n('Main ?'))}</span>`}</button>`
                 + (/^https?:\/\//i.test(src) ? `<a class="ais-src" href="${esc(src)}" target="_blank" rel="noopener noreferrer" title="${esc(i18n('La page officielle de ce registre'))}">↗ ${esc(i18n('source'))}</a>` : '')
                 + `<span class="ais-sp"></span><button type="button" class="ais-btn" data-ais-go="prev" ${info.prev_act ? '' : 'disabled'} title="${esc(i18n('Acte d’avant (Alt + ←)'))}" aria-label="${esc(i18n('Acte d’avant'))}">◀</button>`
-                + `<button type="button" class="ais-btn" data-ais-go="next" title="${esc(i18n('Acte suivant sur cette vue (Alt + →)'))}">${info.next_act ? `${esc(i18n('Acte suivant'))} ›` : `➕ ${esc(i18n('Acte suivant'))}`}</button>`
+                + `<button type="button" class="ais-btn" data-ais-go="next" title="${esc(i18n('Acte suivant sur cette vue (Alt + →)'))}">${info.next_act ? `${esc(i18n('Acte suivant'))} ›` : `＋ ${esc(i18n('Acte suivant'))}`}</button>`
                 + `<button type="button" class="ais-btn is-view" data-ais-go="view" ${info.next_view ? '' : 'disabled'} title="${esc(i18n('Vue suivante du registre (Alt + ⇧ + →)'))}">${esc(i18n('Vue suivante'))} →</button>`;
         }
         async function refresh() {
@@ -107,6 +107,10 @@
             return plug.switchTo({mediaId: mid, filename: fn, title: '', text: '', kind: kind(), atelierNext: carry(v)});
         }
         async function goPrev() { const i = await refresh(); if (i?.prev_act) return plug.switchTo({id: i.prev_act}); }
+        // double / triple clic, Alt + → répété : un seul déplacement à la fois (sinon une vue IIIF téléchargée deux ou trois fois)
+        let moving = null;
+        const once = f => () => moving || (moving = Promise.resolve().then(f).finally(() => { moving = null; }));
+        goNextAct = once(goNextAct); goNextView = once(goNextView); goPrev = once(goPrev);
         strip.addEventListener('click', e => {
             const b = e.target.closest('[data-ais-go]'); if (b) { if (b.dataset.aisGo === 'next') goNextAct(); else if (b.dataset.aisGo === 'view') goNextView(); else goPrev(); return; }
             if (e.target.closest('[data-ais-edit]')) editReg();
@@ -156,7 +160,7 @@
     ext.txMenus = ext.txMenus || [];
     ext.txMenus.push((menu, plug) => {
         if (menu === 'Édition' && plug.suivant) return [{icon: '📚', label: `${i18n('Registre et main')}…`, run: () => plug.suivant.editReg()}];
-        if (menu === 'Fichier' && plug.reg?.register) return [{icon: '➕', label: i18n('Acte suivant'), shortcut: 'Alt+→', run: () => plug.suivant.goNextAct()}, {icon: '→', label: i18n('Vue suivante'), shortcut: 'Alt+⇧+→', disabled: !plug.reg.next_view, run: () => plug.suivant.goNextView()}];
+        if (menu === 'Fichier' && plug.reg?.register) return [{icon: '＋', label: i18n('Acte suivant'), shortcut: 'Alt+→', run: () => plug.suivant.goNextAct()}, {icon: '→', label: i18n('Vue suivante'), shortcut: 'Alt+⇧+→', disabled: !plug.reg.next_view, run: () => plug.suivant.goNextView()}];
         return [];
     });
 })();

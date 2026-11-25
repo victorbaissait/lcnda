@@ -2589,6 +2589,9 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-tx-chip2.is-ai, :root .h-tx-chip2.is-ai:is([data-lc-lines], [data-lc-lines] *) {border-color:#6929c4}
 :root.lc-frame .h-tx-chip2.is-on, :root .h-tx-chip2.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--ink,#111)}
 :root.lc-frame .h-tx-chip2.is-ai.is-on, :root .h-tx-chip2.is-ai.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:#6929c4}
+:root.lc-frame .h-tx-vers .button.small.h-tx-vdup, :root .h-tx-vers .button.small.h-tx-vdup:is([data-lc-lines], [data-lc-lines] *) {border-width:calc(1.5px * var(--lc-frame-k))}
+:root.lc-frame .h-tx-chip2.is-work, :root .h-tx-chip2.is-work:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-width:calc(2px * var(--lc-frame-k))}
+:root.lc-frame .h-tx-vwork, :root .h-tx-vwork:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #6929c4}
 :root.lc-frame .h-tx-vprev, :root .h-tx-vprev:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #6929c4}
 :root.lc-frame .h-tx-vro, :root .h-tx-vro:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#c9ced8)}
 :root.lc-frame .h-tx-wcol button, :root .h-tx-wcol button:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--paper,#fff)}
@@ -2601,6 +2604,15 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-ia-sent pre, :root .h-ia-sent pre:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#c9ced8)}
 :root.lc-frame .h-tx-mirror .h-tx-hintw, :root .h-tx-mirror .h-tx-hintw:is([data-lc-lines], [data-lc-lines] *) {border-bottom:2px dotted #6929c4}
 :root[data-theme="dark"].lc-frame .h-tx-mirror .h-tx-hintw, :root[data-theme="dark"] .h-tx-mirror .h-tx-hintw:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#b48cff}
+:root.lc-frame .h-txa-settings, :root .h-txa-settings:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e3e5ea}
+:root[data-theme="dark"].lc-frame .h-txa-settings, :root[data-theme="dark"] .h-txa-settings:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .h-txa-wdiff, :root .h-txa-wdiff:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e3e5ea}
+:root.lc-frame .h-txa-wd button, :root .h-txa-wd button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d0d0d6}
+:root.lc-frame .h-txa-wd .h-txa-wl, :root .h-txa-wd .h-txa-wl:is([data-lc-lines], [data-lc-lines] *) {border-color:#e6c25a}
+:root.lc-frame .h-txa-wd .h-txa-wr, :root .h-txa-wd .h-txa-wr:is([data-lc-lines], [data-lc-lines] *) {border-color:#9ec2f5}
+:root[data-theme="dark"].lc-frame .h-txa-wdiff, :root[data-theme="dark"] .h-txa-wdiff:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-txa-wd .h-txa-wl, :root[data-theme="dark"] .h-txa-wd .h-txa-wl:is([data-lc-lines], [data-lc-lines] *) {border-color:#8a6d1a}
+:root[data-theme="dark"].lc-frame .h-txa-wd .h-txa-wr, :root[data-theme="dark"] .h-txa-wd .h-txa-wr:is([data-lc-lines], [data-lc-lines] *) {border-color:#2f4a7a}
 /* heritage-diagram-genea.css */
 :root.lc-frame .gn-app fieldset, :root .gn-app fieldset:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d9dde3)}
 :root[data-theme="dark"].lc-frame .gn-app fieldset, :root[data-theme="dark"] .gn-app fieldset:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
@@ -3650,14 +3662,12 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-tx-step.is-cur i, :root .h-tx-step.is-cur i:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
 :root.lc-frame .h-tx-step.is-active, :root .h-tx-step.is-active:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#1473e6}
 :root.lc-frame .h-tx-flow .h-tx-stepbody, :root .h-tx-flow .h-tx-stepbody:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
-:root.lc-frame .h-tx-addbar, :root .h-tx-addbar:is([data-lc-lines], [data-lc-lines] *) {border-top:2px solid #1473e6}
 :root[data-theme="dark"].lc-frame .h-tx-flow, :root[data-theme="dark"] .h-tx-flow:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-steps, :root[data-theme="dark"] .h-tx-steps:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-step, :root[data-theme="dark"] .h-tx-step:is([data-lc-lines], [data-lc-lines] *) {border-right-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-step i, :root[data-theme="dark"] .h-tx-step i:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-step.is-done i, :root[data-theme="dark"] .h-tx-step.is-done i:is([data-lc-lines], [data-lc-lines] *) {border-color:#2f9e54}
 :root[data-theme="dark"].lc-frame .h-tx-step.is-cur i, :root[data-theme="dark"] .h-tx-step.is-cur i:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
 :root[data-theme="dark"].lc-frame .h-tx-step.is-active, :root[data-theme="dark"] .h-tx-step.is-active:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#5b93ff}
-:root[data-theme="dark"].lc-frame .h-tx-addbar, :root[data-theme="dark"] .h-tx-addbar:is([data-lc-lines], [data-lc-lines] *) {border-top-color:#5b93ff}
 :root.lc-frame .h-tx-dlg .h-tx-ptabs, :root .h-tx-dlg .h-tx-ptabs:is([data-lc-lines], [data-lc-lines] *) {border-width:0 0 calc(2px * var(--lc-frame-k))}
 :root.lc-frame .h-tx-dlg .h-tx:not([data-ptab=image]) .h-tx-main>.h-tx-right, :root .h-tx-dlg .h-tx:not([data-ptab=image]) .h-tx-main>.h-tx-right:is([data-lc-lines], [data-lc-lines] *) {border-left:0}
 :root.lc-frame .h-tx-dlg .h-tx[data-ptab=people] .h-tx-found, :root .h-tx-dlg .h-tx[data-ptab=people] .h-tx-found:is([data-lc-lines], [data-lc-lines] *) {border-top:0}
@@ -3674,14 +3684,15 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-tx-find input, :root[data-theme="dark"] .h-tx-find input:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-find button, :root[data-theme="dark"] .h-tx-find button:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-find button.is-active, :root[data-theme="dark"] .h-tx-find button.is-active:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-find button[aria-pressed=true], :root[data-theme="dark"] .h-tx-find button[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
 :root[data-theme="dark"].lc-frame .h-tx-keys td, :root[data-theme="dark"] .h-tx-keys td:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
-:root.lc-frame .h-tx-pstate, :root .h-tx-pstate:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .h-tx-prog, :root .h-tx-prog:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e3e8}
+:root.lc-frame .h-tx-stepbody .h-tx-pchip, :root .h-tx-stepbody .h-tx-pchip:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
 :root.lc-frame .h-tx-pchip, :root .h-tx-pchip:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
-:root.lc-frame .h-tx-pchip.is-warn, :root .h-tx-pchip.is-warn:is([data-lc-lines], [data-lc-lines] *) {border-color:#e0b93a}
-:root.lc-frame .h-tx-pchip.is-ok, :root .h-tx-pchip.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#b7dfc2}
+:root.lc-frame .h-tx-stepbody .h-tx-pchip.is-warn, :root .h-tx-stepbody .h-tx-pchip.is-warn:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tx-pchip.is-warn, :root .h-tx-pchip.is-warn:is([data-lc-lines], [data-lc-lines] *) {border-color:#e0b93a}
+:root.lc-frame .h-tx-stepbody .h-tx-pchip.is-ok, :root .h-tx-stepbody .h-tx-pchip.is-ok:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tx-pchip.is-ok, :root .h-tx-pchip.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#b7dfc2}
 :root.lc-frame .h-tx-pchip:hover, :root .h-tx-pchip:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
-:root[data-theme="dark"].lc-frame .h-tx-pchip, :root[data-theme="dark"] .h-tx-pchip:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
-:root[data-theme="dark"].lc-frame .h-tx-pchip.is-warn, :root[data-theme="dark"] .h-tx-pchip.is-warn:is([data-lc-lines], [data-lc-lines] *) {border-color:#8a6d1c}
-:root[data-theme="dark"].lc-frame .h-tx-pchip.is-ok, :root[data-theme="dark"] .h-tx-pchip.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#2b5a3a}
+:root[data-theme="dark"].lc-frame .h-tx-pchip, :root[data-theme="dark"] .h-tx-pchip:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-stepbody .h-tx-pchip, :root[data-theme="dark"] .h-tx-stepbody .h-tx-pchip:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-pchip.is-warn, :root[data-theme="dark"] .h-tx-pchip.is-warn:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-stepbody .h-tx-pchip.is-warn, :root[data-theme="dark"] .h-tx-stepbody .h-tx-pchip.is-warn:is([data-lc-lines], [data-lc-lines] *) {border-color:#8a6d1c}
+:root[data-theme="dark"].lc-frame .h-tx-pchip.is-ok, :root[data-theme="dark"] .h-tx-pchip.is-ok:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-stepbody .h-tx-pchip.is-ok, :root[data-theme="dark"] .h-tx-stepbody .h-tx-pchip.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#2b5a3a}
 :root.lc-frame .h-tx-mirror .h-tx-ab, :root .h-tx-mirror .h-tx-ab:is([data-lc-lines], [data-lc-lines] *) {border-bottom:2px dotted #1473e6}
 :root.lc-frame .h-tx-abtip, :root .h-tx-abtip:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #1d1d1f}
 :root[data-theme="dark"].lc-frame .h-tx-mirror .h-tx-ab, :root[data-theme="dark"] .h-tx-mirror .h-tx-ab:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#7db6ff}
@@ -3707,6 +3718,74 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .tx-gut-mirror, :root .tx-gut-mirror:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:transparent}
 :root.lc-frame .h-tx-mirror .h-tx-ab.is-amount, :root .h-tx-mirror .h-tx-ab.is-amount:is([data-lc-lines], [data-lc-lines] *) {border-bottom:2px dotted #1e8a4c}
 :root[data-theme="dark"].lc-frame .h-tx-mirror .h-tx-ab.is-amount, :root[data-theme="dark"] .h-tx-mirror .h-tx-ab.is-amount:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#6fd39a}
+:root.lc-frame .h-tx-meta, :root .h-tx-meta:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e3e8}
+:root.lc-frame .h-tx-meta input, :root .h-tx-meta input:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tx-meta select, :root .h-tx-meta select:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d0d0d6}
+:root[data-theme="dark"].lc-frame .h-tx-meta, :root[data-theme="dark"] .h-tx-meta:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-meta input, :root[data-theme="dark"] .h-tx-meta input:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-meta select, :root[data-theme="dark"] .h-tx-meta select:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .h-tx-opening, :root .h-tx-opening:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .h-tx-draft, :root .h-tx-draft:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #f0d48a}
+:root[data-theme="dark"].lc-frame .h-tx-draft, :root[data-theme="dark"] .h-tx-draft:is([data-lc-lines], [data-lc-lines] *) {border-color:#8a6d1a}
+:root.lc-frame .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-left, :root .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-left:is([data-lc-lines], [data-lc-lines] *) {border-right:0;border-bottom:1px solid #d6d6db}
+:root[data-theme="dark"].lc-frame .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-left, :root[data-theme="dark"] .h-tx-dlg .h-tx[data-ptab=text] .h-tx-main>.h-tx-left:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:var(--lc-frame-color)}
+:root.lc-frame .h-tx-states, :root .h-tx-states:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d0d0d6}
+:root.lc-frame .h-tx-prog .h-tx-states button, :root .h-tx-prog .h-tx-states button:is([data-lc-lines], [data-lc-lines] *) {border:0;border-left:1px solid #d0d0d6}
+:root.lc-frame .h-tx-prog .h-tx-states button:first-child, :root .h-tx-prog .h-tx-states button:first-child:is([data-lc-lines], [data-lc-lines] *) {border-left:0}
+:root.lc-frame .h-tx-prog .h-tx-stepnext, :root .h-tx-prog .h-tx-stepnext:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d0d0d6}
+:root.lc-frame .h-tx-prog .h-tx-stepnext:hover, :root .h-tx-prog .h-tx-stepnext:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-step.is-half i, :root .h-tx-step.is-half i:is([data-lc-lines], [data-lc-lines] *) {border-color:#d4a800}
+:root.lc-frame .h-tx-stepbody .button.small.h-tx-relu.is-done, :root .h-tx-stepbody .button.small.h-tx-relu.is-done:is([data-lc-lines], [data-lc-lines] *) {border-color:#1a7f37}
+:root.lc-frame .h-tx-dlg .h-tx-chars .h-tx-charplus, :root .h-tx-dlg .h-tx-chars .h-tx-charplus:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
+:root.lc-frame .h-tx-chars.is-open .h-tx-charplus, :root .h-tx-chars.is-open .h-tx-charplus:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:#1473e6}
+:root.lc-frame .h-tx-cpanel, :root .h-tx-cpanel:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
+:root.lc-frame .h-tx-cpanel.is-pin .h-tx-ch[aria-pressed=true], :root .h-tx-cpanel.is-pin .h-tx-ch[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-foundhead, :root .h-tx-foundhead:is([data-lc-lines], [data-lc-lines] *) {border:0;border-top:1px solid #e3e3e8}
+:root.lc-frame .h-tx-foundhead+.h-tx-found, :root .h-tx-foundhead+.h-tx-found:is([data-lc-lines], [data-lc-lines] *) {border-top:0}
+:root.lc-frame .h-tx-zcbtn, :root .h-tx-zcbtn:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d0d0d6}
+:root.lc-frame .h-tx-zcbtn:hover, :root .h-tx-zcbtn:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-sw, :root .h-tx-sw:is([data-lc-lines], [data-lc-lines] *) {border:1px solid rgba(0,0,0,.28)}
+:root.lc-frame .h-tx-zcpop, :root .h-tx-zcpop:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
+:root.lc-frame .h-tx-zcpop button, :root .h-tx-zcpop button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .h-tx-zcpop button[aria-pressed=true], :root .h-tx-zcpop button[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-barwrap .h-tx-follow, :root .h-tx-barwrap .h-tx-follow:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
+:root.lc-frame .h-tx-barwrap .h-tx-follow:hover, :root .h-tx-barwrap .h-tx-follow:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-barwrap .h-tx-follow.is-active, :root .h-tx-barwrap .h-tx-follow.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root[data-theme="dark"].lc-frame .h-tx-states, :root[data-theme="dark"] .h-tx-states:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-prog .h-tx-stepnext, :root[data-theme="dark"] .h-tx-prog .h-tx-stepnext:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-zcbtn, :root[data-theme="dark"] .h-tx-zcbtn:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-barwrap .h-tx-follow, :root[data-theme="dark"] .h-tx-barwrap .h-tx-follow:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-prog .h-tx-states button, :root[data-theme="dark"] .h-tx-prog .h-tx-states button:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-prog, :root[data-theme="dark"] .h-tx-prog:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-barwrap .h-tx-follow.is-active, :root[data-theme="dark"] .h-tx-barwrap .h-tx-follow.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root[data-theme="dark"].lc-frame .h-tx-step.is-half i, :root[data-theme="dark"] .h-tx-step.is-half i:is([data-lc-lines], [data-lc-lines] *) {border-color:#c9a400}
+:root[data-theme="dark"].lc-frame .h-tx-foundhead, :root[data-theme="dark"] .h-tx-foundhead:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-cpanel, :root[data-theme="dark"] .h-tx-cpanel:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-zcpop, :root[data-theme="dark"] .h-tx-zcpop:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-cpanel.is-pin .h-tx-ch[aria-pressed=true], :root[data-theme="dark"] .h-tx-cpanel.is-pin .h-tx-ch[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#5b93ff}
+:root[data-theme="dark"].lc-frame .h-tx-zcpop button[aria-pressed=true], :root[data-theme="dark"] .h-tx-zcpop button[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#5b93ff}
+/* atelier-idees.css */
+:root.lc-frame .aip-pill-x, :root .aip-pill-x:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ais-strip, :root .ais-strip:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#eceef2)}
+:root.lc-frame .ais-reg, :root .ais-reg:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ais-btn, :root .ais-btn:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line2,#c9ced8)}
+:root.lc-frame .ais-btn:hover:not(:disabled), :root .ais-btn:hover:not(:disabled):is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ais-btn:focus-visible, :root .ais-btn:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue,#055dff)}
+:root.lc-frame .ais-f.is-reg input, :root .ais-f.is-reg input:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--green,#1a7f37)}
+:root.lc-frame .aii-found, :root .aii-found:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line2,#c9ced8)}
+:root.lc-frame .aii-th, :root .aii-th:is([data-lc-lines], [data-lc-lines] *) {border:2px solid transparent}
+:root.lc-frame .aii-th.is-on, :root .aii-th.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue,#055dff)}
+:root.lc-frame .air-panel, :root .air-panel:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line2,#c9ced8)}
+:root.lc-frame .air-hit, :root .air-hit:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#eceef2)}
+:root.lc-frame .air-hit:hover, :root .air-hit:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .air-hit:focus-visible, :root .air-hit:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue,#055dff)}
+:root.lc-frame .air-hit.is-var, :root .air-hit.is-var:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed;border-color:var(--vio,#6929c4)}
+:root.lc-frame .air-var, :root .air-var:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed currentColor}
+:root.lc-frame .air-panel.is-compact, :root .air-panel.is-compact:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .aic-switch button, :root .aic-switch button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .aic-mcell input, :root .aic-mcell input:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--vio,#6929c4)}
+:root.lc-frame .aic-row.is-rev .aic-mcell input, :root .aic-row.is-rev .aic-mcell input:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--yel,#d4a800)}
+:root.lc-frame .ait-hands th, :root .ait-hands th:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#eceef2)}
+:root.lc-frame .ait-hands td, :root .ait-hands td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#eceef2)}
+:root.lc-frame .ait-engines, :root .ait-engines:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ait-eng, :root .ait-eng:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line2,#c9ced8)}
+:root.lc-frame .ait-eng.is-on, :root .ait-eng.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue,#055dff)}
+:root.lc-frame .ait-run, :root .ait-run:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ait-done, :root .ait-done:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line2,#c9ced8)}
+:root[data-theme="dark"].lc-frame .ais-f.is-reg input, :root[data-theme="dark"] .ais-f.is-reg input:is([data-lc-lines], [data-lc-lines] *) {border-color:#4cc070}
+:root[data-theme="dark"].lc-frame .aic-row.is-rev .aic-mcell input, :root[data-theme="dark"] .aic-row.is-rev .aic-mcell input:is([data-lc-lines], [data-lc-lines] *) {border-color:#e0b93a}
+:root:not([data-theme="light"]).lc-frame .ais-f.is-reg input, :root:not([data-theme="light"]) .ais-f.is-reg input:is([data-lc-lines], [data-lc-lines] *) {border-color:#4cc070}
 /* photomaps.css */
 :root.lc-frame .pm-filter, :root .pm-filter:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pm-chip, :root .pm-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
 :root.lc-frame .pm-filter.is-active, :root .pm-filter.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}

@@ -158,8 +158,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=38" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=40" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=39" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=41" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
@@ -1400,7 +1400,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=29" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=2" defer></script>
 <script src="assets/js/heritage-boards.js?v=54" defer></script>
-<script src="assets/js/heritage-dnd.js?v=13" defer></script>
+<script src="assets/js/heritage-dnd.js?v=14" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
 <script src="assets/js/heritage-studio.js?v=118" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=2" defer></script>
@@ -1459,7 +1459,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-sources-ouvertes-7.js?v=3" defer></script>
 <script src="assets/js/app-sources-ouvertes-8-core.js?v=1" defer></script>
 <script src="assets/js/app-archives-en-ligne-core.js?v=2" defer></script>
-<script src="assets/js/heritage-archives-en-ligne.js?v=2" defer></script>
+<script src="assets/js/heritage-archives-en-ligne.js?v=3" defer></script>
 <script src="assets/js/heritage-journal.js?v=4" defer></script>
 <script src="assets/js/heritage-semaine.js?v=6" defer></script>
 <script src="assets/js/app-ou-chercher-core.js?v=5" defer></script>
@@ -1579,7 +1579,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=8" defer></script>
 <script src="assets/js/heritage-atelier-regle.js?v=1" defer></script>
-<script src="assets/js/heritage-atelier-suivant.js?v=1" defer></script>
+<script src="assets/js/heritage-atelier-suivant.js?v=3" defer></script>
 <script src="assets/js/heritage-atelier-iiif.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-recherche.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-couches.js?v=1" defer></script>

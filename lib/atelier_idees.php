@@ -29,6 +29,10 @@ function txi_ensure(PDO $pdo): void
     $done = true;
 }
 
+/** mode consultation (ou appareil invité en lecture seule) : rien ne s'écrit, rien ne part sur Internet.
+ *  (kiosk_state, lib/heritage_tools.php : toujours chargé ; onglets_kiosk ne l'est pas ici, sa vérification ne faisait rien) */
+function txi_kiosk(): bool { return function_exists('kiosk_state') && !empty(kiosk_state()['on']); }
+
 function txi_idees_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload): never
 {
     try {
@@ -47,7 +51,7 @@ function txi_idees_dispatch(PDO $pdo, string $action, bool $isWrite, array $payl
             });
         }
         if ($isWrite && $action === 'atelier_idees_write') {
-            if (function_exists('onglets_kiosk') && onglets_kiosk()) { throw new LcndaBadInput(i18n_t('Pas en mode consultation.')); }
+            if (txi_kiosk()) { throw new LcndaBadInput(i18n_t('Pas en mode consultation.')); }
             $op = (string) ($payload['op'] ?? '');
             if (str_starts_with($op, 'train_')) { require_once __DIR__ . '/atelier_entrainer.php'; json_response(txi_train_post($pdo, $op, $payload)); }
             json_response(match ($op) {
@@ -261,7 +265,7 @@ function txi_iiif_size_url(array $v, string $size): string
 /** GET iiif_preview : ce que dit le manifeste, avant de rien télécharger d'autre */
 function txi_iiif_preview(string $url): array
 {
-    if (function_exists('onglets_kiosk') && onglets_kiosk()) { throw new LcndaBadInput(i18n_t('Pas en mode consultation.')); }
+    if (txi_kiosk()) { throw new LcndaBadInput(i18n_t('Pas en mode consultation.')); }
     $p = txi_iiif_manifest($url, true);
     return ['title' => $p['title'], 'cote' => $p['cote'], 'attribution' => $p['attribution'], 'licence' => $p['licence'], 'licence_url' => $p['licence_url'], 'licence_warn' => $p['licence_warn'],
         'page_url' => $p['page_url'], 'count' => count($p['views']), 'labels' => array_column($p['views'], 'label')];
@@ -276,9 +280,10 @@ function txi_iiif_thumb(string $manifest, int $n): never
     if (!$v) { http_response_code(404); exit; }
     $t = txi_iiif_cache_dir() . '/t-' . sha1($manifest . '#' . $n) . '.jpg';
     if (!is_file($t)) {
+        if (txi_kiosk()) { http_response_code(404); exit; } // en consultation : seulement les vignettes déjà là, rien ne part sur Internet
         require_once __DIR__ . '/recueil_iiif.php';
         try { $bytes = iiif_get(txi_iiif_size_url($v, '!200,200'), 3 * 1024 * 1024); } catch (Throwable $e) { http_response_code(404); exit; }
-        if (!@getimagesizefromstring($bytes)) { http_response_code(404); exit; }
+        if (iiif_image_ext($bytes) === '') { http_response_code(404); exit; }
         @file_put_contents($t, $bytes);
     }
     header('Content-Type: ' . ((@getimagesize($t)['mime'] ?? '') ?: 'image/jpeg')); header('Cache-Control: private, max-age=86400');
@@ -298,13 +303,20 @@ function txi_iiif_open(PDO $pdo, array $d): array
     $v = $p['views'][$n - 1];
     $reg = ['register' => $p['title'], 'cote' => $p['cote'], 'archive' => $p['attribution'], 'attribution' => $p['attribution'], 'licence' => $p['licence'], 'licence_warn' => $p['licence_warn'],
         'page_url' => $p['page_url'], 'manifest' => $url, 'n' => $n, 'total' => $total, 'view' => $n];
+    // la même vue demandée deux fois en même temps (double clic, deux onglets) : la seconde attend, puis reprend la première
+    $lock = @fopen(txi_iiif_cache_dir() . '/open-' . sha1($url . '#' . $n) . '.lock', 'c'); if ($lock) { flock($lock, LOCK_EX); }
+    try { return txi_iiif_open_locked($pdo, $url, $n, $total, $v, $p, $reg); } finally { if ($lock) { flock($lock, LOCK_UN); fclose($lock); } }
+}
+
+function txi_iiif_open_locked(PDO $pdo, string $url, int $n, int $total, array $v, array $p, array $reg): array
+{
     $s = $pdo->prepare('SELECT v.media_id, m.filename FROM atelier_iiif_views v JOIN media m ON m.id=v.media_id WHERE v.manifest=? AND v.n=?'); $s->execute([$url, $n]); $have = $s->fetch(PDO::FETCH_ASSOC);
     if ($have && is_file(MEDIA_DIR . '/' . $have['filename'])) { return ['media_id' => (int) $have['media_id'], 'filename' => (string) $have['filename'], 'n' => $n, 'total' => $total, 'label' => $v['label'], 'reg' => $reg, 'reused' => true]; }
     require_once __DIR__ . '/recueil_iiif.php';
     $bytes = '';
     foreach (array_unique(array_filter([txi_iiif_size_url($v, '!3000,3000'), $v['direct']])) as $u) { try { $bytes = iiif_get($u, IIIF_IMAGE_MAX); break; } catch (LcndaBadInput $e) { $last = $e; } }
     if ($bytes === '') { throw $last ?? new LcndaBadInput(i18n_t('La vue n’a pas pu être téléchargée.')); }
-    $info = @getimagesizefromstring($bytes); $ext = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif'][$info['mime'] ?? ''] ?? '';
+    $ext = iiif_image_ext($bytes);
     if ($ext === '') { throw new LcndaBadInput(i18n_t('La vue {n} n’est pas une image.', ['n' => $v['label']])); }
     if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
     $name = bin2hex(random_bytes(16)) . '.' . $ext;
