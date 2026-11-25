@@ -110,6 +110,7 @@ echo json_encode(['ok' => 1, 'treignac' => $treignac, 'wedding' => $wedding]);`]
             {name: 'Cimetière du Mas-Vieux', kind: 'churchyard', km: 2.1, religion_label: '', lat: 45.55, lon: 1.80, url: 'https://www.openstreetmap.org/way/2', route: 'https://www.openstreetmap.org/directions?to=45.55,1.80'}],
         source: '© OpenStreetMap contributors (ODbL 1.0)', source_url: 'https://www.openstreetmap.org/copyright'})}));
     await page.goto(base);
+    if (process.env.PD_DBG) setTimeout(async () => { console.log(await page.evaluate(() => JSON.stringify({csrf: !!window.LCNDA_APP?.state?.csrf, cx: !!window.LCNDA_EXT?.connexions, ld: !!window.LCNDA_EXT?.dataListsEngine, h: document.body.innerText.slice(0, 300)}))); }, 20000);
     await page.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.connexions && window.LCNDA_EXT?.dataListsEngine, null, {timeout: 60000});
     const api = (a, q) => page.evaluate(([x, y]) => window.LCNDA_APP.api(x, y), [a, q || {}]);
     const go = async (module, extra = {}) => { await page.evaluate(([m, e]) => { const st = window.LCNDA_APP.state; Object.assign(st, e); window.LCNDA_APP.setModule(m); }, [module, extra]); await sleep(500); };

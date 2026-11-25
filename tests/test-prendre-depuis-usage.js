@@ -43,6 +43,9 @@ const t = async (name, fn) => {
     const listQ = async q => { await F(`${D} [data-cx-lq]`, q); await p.waitForFunction(x => [...document.querySelectorAll('.cx-take [data-cx-lrows] .cx-rlist li')].length && [...document.querySelectorAll('.cx-take [data-cx-lrows] .cx-rlist li')].every(li => li.textContent.toLowerCase().includes(x.toLowerCase().split(' ')[0])), q, {timeout: 20000}); };
     const openList = async id => { await C(`${D} [data-cx-tab="lists"]`); await C(`${D} [data-cx-list="${id}"]`); await rowsOfList(); };
     const basket = () => B.api('cx_basket');
+    /** choisir une source de « Données » et attendre que son formulaire soit là */
+    const ds = async id => { await p.selectOption(`${D} [data-cx-ds]`, id); t.m.clicks++;
+        await p.waitForFunction(() => { const s2 = document.querySelector('.cx-take [data-cx-ds]'), b = document.querySelector('.cx-take [data-cx-run]'); const lab = s2?.selectedOptions[0]?.textContent.replace(/^\S+\s/, '').trim(); return b && lab && b.textContent.includes(lab); }, null, {timeout: 15000}); };
     /** le lieu d'une source de « Données » (celui d'avant est repris : on le retire d'abord) */
     const setPlace = async name => {
         const x = L(`${D} .pk[data-picker="place"] .pk-chip [data-pk="remove"]`); if (await x.count()) { await x.first().click(); t.m.clicks++; }
@@ -103,13 +106,13 @@ const t = async (name, fn) => {
             m.notes.push('compris : typo « chatteaux », « autour de 5 km de », « du 19 », « en mars 1356 », un nom propre (Donati) → recherche dans la liste (corrigés ici)');
         });
         await t('U4 · Données : la météo du jour du mariage (Auch, 3 février 1978) et les cimetières autour de Treignac, « tout le tableau » → l’enquête', async m => {
-            await openTake(); await C(`${D} [data-cx-tab="data"]`); await p.selectOption(`${D} [data-cx-ds]`, 'meteo_jour'); m.clicks++;
+            await openTake(); await C(`${D} [data-cx-tab="data"]`); await ds('meteo_jour');
             await p.waitForSelector(`${D} .pk[data-picker="place"]`);
             await setPlace('Auch');
             await F(`${D} [name="cx_date"]`, '1978-02-03'); await C(`${D} [data-cx-run]`);
             await p.waitForSelector(`${D} [data-cx-dres] li`, {timeout: 30000});
             await check(L(`${D} [data-cx-dres] li`, {hasText: 'Température la plus haute'}).first().locator('input'));
-            await p.selectOption(`${D} [data-cx-ds]`, 'commune_plus_cemeteries'); m.clicks++;
+            await ds('commune_plus_cemeteries');
             await p.waitForSelector(`${D} .pk[data-picker="place"]`);
             await setPlace('Treignac');
             await C(`${D} [data-cx-run]`); await p.waitForSelector(`${D} [data-cx-dres] li:has-text("Tout le tableau")`, {timeout: 30000});
@@ -234,11 +237,11 @@ const t = async (name, fn) => {
             await clearBasket();
             await openTake(); await openList('ciel_cometes'); await listQ('Halley'); await check(L(`${D} [data-cx-lrows] .cx-rlist li`).first().locator('input'));
             if (pack && await hasList('hist_gares')) { await C(`${D} [data-cx-lback]`); await C(`${D} [data-cx-list="hist_gares"]`); await rowsOfList(); await listQ('Treignac'); await check(L(`${D} [data-cx-lrows] .cx-rlist li`).first().locator('input')); }
-            await C(`${D} [data-cx-tab="data"]`); await p.selectOption(`${D} [data-cx-ds]`, 'commune_plus_cemeteries'); m.clicks++;
+            await C(`${D} [data-cx-tab="data"]`); await ds('commune_plus_cemeteries');
             await setPlace('Treignac');
             await C(`${D} [data-cx-run]`); await p.waitForSelector(`${D} [data-cx-dres] li:has-text("Mas-Vieux")`, {timeout: 30000});
             await check(L(`${D} [data-cx-dres] li`, {hasText: 'Cimetière de Treignac'}).first().locator('input')); await check(L(`${D} [data-cx-dres] li`, {hasText: 'Mas-Vieux'}).first().locator('input'));
-            await p.selectOption(`${D} [data-cx-ds]`, 'meteo_jour'); m.clicks++;
+            await ds('meteo_jour');
             await setPlace('Auch');
             await F(`${D} [name="cx_date"]`, '1978-02-03'); await C(`${D} [data-cx-run]`); await p.waitForSelector(`${D} [data-cx-dres] li:has-text("Température la plus haute")`, {timeout: 30000});
             await check(L(`${D} [data-cx-dres] li`, {hasText: 'Température la plus haute'}).first().locator('input'));
@@ -252,7 +255,7 @@ const t = async (name, fn) => {
             await openTake(); await shown('basket'); for (let i = 0; i < want; i++) await check(L(`${D} .cx-rlist li`).nth(i).locator('input'));
             await C(`${D} [data-cx-takehere]`); await waitDelivered();
             assert.strictEqual((await basket()).items.length, 0);
-            const ls = await linksOf(); assert.ok(ls.some(l => /Halley/.test(l.label)) && ls.some(l => /Mas-Vieux/.test(l.label)));
+            const ls = await linksOf(); assert.ok(ls.some(l => /comète/.test(l.label) && /Halley/.test(l.value)) && ls.some(l => /Mas-Vieux/.test(l.label)), "la comète et les cimetières");
         });
         await t('S4 · le doublon : la même comète une 2e fois → « ✓ déjà dans l’enquête »', async m => {
             await openTake(); await openList('ciel_cometes'); await listQ('Halley');
