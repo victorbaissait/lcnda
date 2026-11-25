@@ -15,6 +15,19 @@ const BACKUP_MARKER = 'lcnda-sauvegarde.json';
 const BACKUP_MEDIA_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'heic', 'heif', 'tif', 'tiff', 'bmp',
     'pdf', 'mp3', 'm4a', 'aac', 'wav', 'aif', 'aiff', 'aifc', 'ogg', 'flac', 'mov', 'mp4', 'm4v', 'webm', 'avi', 'mkv'];
 
+/**
+ * 🔒 Un nom de fichier venu d'un fichier reçu (paquet MacFamilyTree, archive d'un dossier de succession, dossier partagé à deux
+ * ordinateurs) avant de l'écrire dans les médias : seulement une photo, un son, une vidéo, un PDF ou un document (comme « Lots » et
+ * le traitement de texte en rangent). Jamais « .php », « .phtml », « .svg », « .js »… : sous Apache (MAMP, XAMPP), le dossier media/
+ * est servi par Apache, un script ou un dessin piégé déposé là s'exécuterait ou s'ouvrirait avec les droits de l'app.
+ */
+function media_import_name_ok(string $name): bool
+{
+    $ext = strtolower(pathinfo(str_replace('\\', '/', $name), PATHINFO_EXTENSION));
+    // les documents rangés par « Lots » (lib/lots.php) et le traitement de texte ; un .html n'y est jamais servi comme une page (router.php, .htaccess)
+    return in_array($ext, BACKUP_MEDIA_EXTENSIONS, true) || in_array($ext, ['docx', 'odt', 'rtf', 'md', 'txt', 'html', 'xlsx', 'ods', 'csv'], true);
+}
+
 /** Fichiers de médias à sauvegarder (chemin relatif à MEDIA_DIR ⇒ chemin absolu), sans fichiers cachés. */
 function backup_media_files(): array
 {

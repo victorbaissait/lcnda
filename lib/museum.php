@@ -361,7 +361,7 @@ function museum_shrunk_image(string $path, int $max): array
         }
     }
     $mime = $info ? (string) $info['mime'] : 'image/jpeg';
-    return [(string) file_get_contents($path), $mime, MUSEUM_IMAGES[$mime] ?? 'jpg'];
+    return [image_strip_metadata((string) file_get_contents($path)), $mime, MUSEUM_IMAGES[$mime] ?? 'jpg']; // 🔒 sans EXIF (GPS, appareil, date), sans réencoder
 }
 
 /** Données du musée pour l'export : images et sons repris dans le paquet. */

@@ -288,7 +288,7 @@
     }
     /** ⤓ l'état page par page, pour un tableur (CSV, séparateur « ; », comme Excel en français) */
     function csv(D) {
-        const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+        const q = v => `"${(A().csvSafe || (x => String(x ?? '')))(v).replace(/"/g, '""')}"`; // pas de formule glissée dans un tableur
         const head = [T('N°'), T('Nom'), T('Langue'), T('Sorte de page'), T('État'), T('État choisi'), T('Fiabilité'), T('Lignes'), T('Lignes relues'), T('Mots peu sûrs'), T('Lisibilité'), T('Photo'), T('Photo à refaire'), T('Absente'), T('Jusqu’en'), T('Note')];
         const rows = D.pages.map(p => [p.num, pageWord(D, p), langOf(D, p), p.page_kind ? T(kindOf(p.page_kind)[1]) : '', p.absent ? '' : T(STATES[p.state][1]), p.state_set ? T('oui') : '', REL[p.reliability] ? T(REL[p.reliability][1]) : '', p.act?.lines ?? '', p.act?.reviewed ?? '', p.doubt || '',
             T(LEGI.find(l => l[0] === p.legibility)?.[1] || ''), p.has_photo ? T('oui') : T('non'), p.redo ? T('oui') : '', p.absent ? T(absentOf(p.absent)[2]) : '', p.absent_until, p.absent_note]);

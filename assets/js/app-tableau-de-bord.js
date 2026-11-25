@@ -551,7 +551,8 @@
         $$('#workspace .dashboard-widget').forEach(c=>{const t=c.querySelector('.card-head h3, h3')?.textContent.trim()||'';
             c.querySelectorAll('.dashboard-metrics > div, .dashboard-mini-metrics > button, .dashboard-coverage > div').forEach(m=>{const v=m.querySelector('strong')?.textContent.trim()||'',l=(m.querySelector('span')?.textContent||'').trim();if(v||l)rows.push([t,l,v]);});
             c.querySelectorAll('.dashboard-row').forEach(r=>{const l=r.querySelector('strong')?.textContent.trim()||'',v=r.querySelector('small')?.textContent.trim()||'';if(l)rows.push([t,l,v]);});});
-        return '﻿'+rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(';')).join('\r\n');
+        const safe=window.LCNDA_APP.csvSafe||(x=>String(x??''));// pas de formule glissée dans un tableur
+        return '﻿'+rows.map(r=>r.map(x=>`"${safe(x).replace(/"/g,'""')}"`).join(';')).join('\r\n');
     }
     function dashExportMenu(anchor){
         const items=[{icon:'📄',label:i18n('PDF (bilan imprimable)'),help:i18n('Dans la fenêtre, « ⤓ PDF »'),run:dashPrint},

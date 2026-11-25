@@ -146,7 +146,7 @@
             onSubmit: async form => { setPref({cols: [...form.querySelectorAll('[name=c]:checked')].map(c => c.value)}); after(); return true; }});
     }
     function csv(rows) {
-        const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+        const q = v => `"${(A().csvSafe || (x => String(x ?? '')))(v).replace(/"/g, '""')}"`; // pas de formule glissée dans un tableur
         const head = [T('Service d’archives'), T('Fonds'), T('Recueil'), ...COLS.map(c => colTitle(c[0]))];
         const lines = rows.map(r => [r.service?.name || '', r.fonds, r.title, ...COLS.map(c => (c[0] === 'reste' ? reste(r) : c[0] === 'comm' ? commText(r) : c[0] === 'online' ? (safeUrl(r.url) || '') : cellText(c[0], r)))]);
         const blob = new Blob(['﻿' + [head, ...lines].map(l => l.map(q).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'});

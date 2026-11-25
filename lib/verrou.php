@@ -796,7 +796,7 @@ function access_log_rows(PDO $pdo, array $q): array
 function access_log_csv(PDO $pdo): never
 {
     $rows = access_log_rows($pdo, ['limit' => 5000])['rows'];
-    $cell = static function (string $v): string { if ($v !== '' && strpbrk($v[0], '=+-@') !== false) { $v = "'" . $v; } return '"' . str_replace('"', '""', $v) . '"'; };
+    $cell = static function (string $v): string { if ($v !== '' && strpbrk($v[0], "=+-@\t\r") !== false) { $v = "'" . $v; } return '"' . str_replace('"', '""', $v) . '"'; };
     $out = "\xEF\xBB\xBF" . implode(';', ['Date', 'Sorte', 'Objet', 'Numéro', 'Libellé', 'Détail', 'Poste', 'Appareil']) . "\r\n";
     foreach ($rows as $r) { $out .= implode(';', array_map($cell, [$r['at'], $r['kind'], $r['obj_type'], (string) ($r['obj_id'] ?? ''), $r['obj_label'], $r['what'], $r['machine'], $r['device']])) . "\r\n"; }
     while (ob_get_level() > 0) { ob_end_clean(); }

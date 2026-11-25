@@ -8369,6 +8369,7 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
                     // jamais un fichier pris hors du dossier « resources » du paquet (« ../../ », lien) : rien de l'ordinateur ne sort ainsi
                     $real = $from !== '' ? realpath($from) : false; $root = $resourcesDir ? realpath($resourcesDir) : false;
                     if ($real === false || $root === false || !str_starts_with($real, rtrim($root, '/\\') . DIRECTORY_SEPARATOR)) { $from = ''; }
+                    if (!media_import_name_ok($name) || str_starts_with($name, '.')) { $from = ''; } // 🔒 une photo, un son, un document : jamais « .php », « .svg », « .js » dans les médias
                     $to = $mediaDir . '/' . $name;
                     if ($from !== '' && is_file($from) && !is_file($to)) { copy($from, $to); }
                     if ($relative === $original && !is_file($to)) { $mediaMissing++; }

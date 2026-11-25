@@ -15,7 +15,7 @@ Options -Indexes
     # Fichiers et dossiers cachés (.git, .env, .DS_Store…)
     RewriteRule (^|/)\. - [R=404,L]
     # Seuls les scripts PHP à la racine sont des pages (index.php, api.php, upload.php…)
-    RewriteRule ^.+/.+\.(php|phtml|phar)$ - [R=404,L,NC]
+    RewriteRule ^.+/.+\.(php\d?|phtml|pht|phar|phps)$ - [R=404,L,NC]
 </IfModule>
 <IfModule !mod_rewrite.c>
     # Sans mod_rewrite : au moins les fichiers cachés et les scripts PHP rangés dans des sous-dossiers
@@ -27,4 +27,19 @@ Options -Indexes
 
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# Dossier media/ (photos, documents reçus, fichiers importés) : comme router.php, jamais une page ni un script.
+# Un fichier .php, .phtml… arrivé là n'est jamais exécuté (règle « seuls les scripts PHP à la racine » ci-dessus) ; une page .html,
+# un dessin .svg ou un .xml ne s'ouvre jamais comme une page de l'app (CSP « sandbox » : ni script, ni accès à l'app) et se télécharge.
+<IfModule mod_version.c>
+<IfVersion >= 2.4>
+    <IfModule mod_headers.c>
+        <If "%{REQUEST_URI} =~ m#/media/.*\.(html?|xhtml|shtml|svgz?|xml|xsl|js|mjs|md)$#i">
+            Header always set X-Content-Type-Options "nosniff"
+            Header always set Content-Security-Policy "sandbox; default-src 'none'"
+            Header always set Content-Disposition "attachment"
+        </If>
+    </IfModule>
+</IfVersion>
 </IfModule>

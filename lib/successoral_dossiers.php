@@ -731,6 +731,7 @@ function succ_bundle_import(PDO $to, array $b, string $mediaTo, ?callable $media
         $set = [];
         foreach (['filename', 'thumbnail'] as $col) {
             $fn = (string) ($m[$col] ?? ''); if ($fn === '' || str_contains($fn, '..') || preg_match('#^[a-z]+://#i', $fn)) { continue; }
+            if (str_contains($fn, "\0") || str_contains($fn, '\\') || preg_match('#(^|/)\.#', $fn) || (function_exists('media_import_name_ok') && !media_import_name_ok($fn))) { continue; } // 🔒 jamais « .php », « .svg », « .js », fichier caché
             $data = $mediaRead ? $mediaRead($fn) : null;
             if ($data === null) { continue; }
             $dest = $fn; $i = 1;

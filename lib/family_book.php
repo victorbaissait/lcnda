@@ -371,7 +371,7 @@ function family_book_epub(array $m, array $o): string
         $path = family_book_media_file($file); if (!$path) { return ''; }
         $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION)); $mime = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif', 'webp' => 'image/webp'][$ext] ?? '';
         if ($mime === '') { return ''; }
-        $name = 'img' . (count($images) + 1) . '.' . $ext; $zip->addFile($path, 'OEBPS/' . $name); $images[$name] = $mime; return $name;
+        $name = 'img' . (count($images) + 1) . '.' . $ext; $zip->addFromString('OEBPS/' . $name, image_strip_metadata((string) file_get_contents($path))); /* 🔒 sans EXIF (GPS, appareil, date) */ $images[$name] = $mime; return $name;
     };
     // Les parties HTML du livre, chapitre par chapitre, réécrites en XHTML
     foreach ($o['sections'] as $s) {

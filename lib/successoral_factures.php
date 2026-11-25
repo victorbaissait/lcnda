@@ -288,7 +288,7 @@ function succ_inv_quote(PDO $pdo, array $d, string $act): array
 function succ_inv_csv(PDO $pdo, array $g): never
 {
     $b = succ_inv_pdo($pdo); $year = preg_match('/^\d{4}$/', (string) ($g['year'] ?? '')) ? (string) $g['year'] : date('Y');
-    $cell = static function (string $v): string { if ($v !== '' && strpbrk($v[0], '=+-@') !== false && !preg_match('/^-?\d/', $v)) { $v = "'" . $v; } return '"' . str_replace('"', '""', $v) . '"'; };
+    $cell = static function (string $v): string { if ($v !== '' && strpbrk($v[0], "=+-@\t\r") !== false && !preg_match('/^-?\d+(?:[.,]\d+)?$/', $v)) { $v = "'" . $v; } return '"' . str_replace('"', '""', $v) . '"'; };
     $eur = static fn(int $c): string => ($c < 0 ? '-' : '') . intdiv(abs($c), 100) . ',' . str_pad((string) (abs($c) % 100), 2, '0', STR_PAD_LEFT);
     $lines = [implode(';', array_map($cell, ['n°', 'date', 'client', 'dossier', 'généalogie', 'HT', 'taux', 'TVA', 'TTC', 'payée le', 'moyen']))];
     [$vis, $vp] = succ_inv_visible_sql();
