@@ -4561,6 +4561,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         sc('settings','move','Ouvrir les réglages (Apparence)','Mod+,','global',()=>{state.maintenanceTab='design';setModule('maintenance');},{menu:true}),
         sc('help','move','Afficher la liste des raccourcis','F1','any',()=>openShortcutHelp(),{menu:true}),
         // 📥 « Prendre depuis… » (heritage-connexions.js) : ⇧⌘O est déjà pris (écran divisé), donc ⌥⌘O (Ctrl+Alt+O sous Windows et Linux), libre partout
+        // 📎 « Insérer une info » à l'endroit du curseur (app-inserer.js) : ⌥⌘K (Ctrl+Alt+K), libre partout ; marche aussi en écrivant
+        sc('insert_info','move','📎 Insérer une info à l’endroit du curseur (une date, un lieu, une ligne de liste…)','Mod+Alt+K','any',()=>window.LCNDA_EXT?.insertInfo?.openHere?.(),{menu:true,when:()=>!!window.LCNDA_EXT?.insertInfo}),
         sc('take_from','move','📥 Prendre depuis… (fiches, actes, sources, données, panier)','Mod+Alt+O','global',()=>window.LCNDA_EXT?.connexions?.openTake?.(),{menu:true,when:()=>window.LCNDA_EXT?.connexions?.enabled?.()!==false}),
         sc('edit_person','person','Modifier la fiche ouverte','Mod+E','person',()=>{if(personIsLocked())return toast('Cette fiche est verrouillée.','error');openPersonDialog(state.currentPerson);},{noTyping:true,menu:true}),
         sc('new_person','person','Nouveau… dans l’onglet ouvert (une personne dans Personnes)','Mod+Shift+N','global',()=>runTabShortcut('new'),{menu:true}),

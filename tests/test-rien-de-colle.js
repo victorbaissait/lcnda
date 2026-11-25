@@ -250,6 +250,7 @@ function sideDetect() {
         const kids = [...foot.children].filter(x => x.getBoundingClientRect().height > 0 && getComputedStyle(x).display !== 'none');
         for (let i = 1; i < kids.length; i++) {
             const a = kids[i - 1].getBoundingClientRect(), b = kids[i].getBoundingClientRect();
+            if (b.top < a.top + a.height / 2) continue; // côte à côte, sur la même rangée
             if (b.top - a.bottom < 8 - 0.5) out.push(`pied : « ${kids[i].textContent.trim().slice(0, 30)} » à ${Math.round((b.top - a.bottom) * 10) / 10} px sous « ${kids[i - 1].textContent.trim().slice(0, 20)} » (8 attendus)`);
         }
         for (const k of kids) { const r = k.getBoundingClientRect(); if (r.left - fr.left < 12 - 0.5) out.push(`pied : « ${k.textContent.trim().slice(0, 30)} » à ${Math.round(r.left - fr.left)} px du bord gauche (12 attendus)`); }

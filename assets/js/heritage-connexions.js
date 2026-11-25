@@ -967,7 +967,7 @@
             <header class="cx-tk-head"><div class="cx-tk-ht"><span class="cx-eyebrow">📥 ${esc(T('Prendre depuis…'))}</span>
                 <h2 id="cx-take-h">${target ? `${esc(T('Ajouter à'))} <span class="cx-destpill"><span aria-hidden="true">${esc(target.icon || '📥')}</span> ${esc(dn)}</span>` : esc(T('Prendre depuis…'))}</h2>
                 <p class="cx-tk-say">${esc(target ? T('Coche ce que tu veux prendre, puis « 📥 Prendre ». Clique une ligne pour la voir en grand à droite.') : T('Coche ce que tu veux prendre, puis garde-le dans le panier ou mets-le ailleurs. Clique une ligne pour la voir en grand.'))}</p></div>
-                <button type="button" class="cx-x" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></header>
+                ${ext.insertInfo ? `<button type="button" class="cx-b is-sec is-sm cx-everywhere" data-cx-everywhere>🔍 ${esc(T('Chercher partout'))}</button>` : ''}<button type="button" class="cx-x" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></header>
             <div class="cx-quoi"><button type="button" data-cx-quoi aria-expanded="false" aria-controls="cx-rail"><span><span class="cx-quoi-lab">${esc(T('Quoi :'))}</span> <b data-cx-quoi-t></b></span><span aria-hidden="true">▾</span></button></div>
             <div class="cx-tk-body">
                 <nav class="cx-rail" id="cx-rail" role="tablist" aria-orientation="vertical" aria-label="${esc(T('Où chercher'))}">${RAIL.map(([g, a]) => `<h5>${esc(T(g))}</h5>${a.map(([k, i, l]) => `<button type="button" role="tab" data-cx-tab="${k}" aria-selected="false"><span aria-hidden="true">${i}</span> <span class="cx-rl">${esc(T(l))}</span>${k === 'basket' && count ? `<span class="cx-rn is-b">${nf(count)}</span>` : ''}</button>`).join('')}`).join('')}</nav>
@@ -986,6 +986,8 @@
         document.body.appendChild(dlg); dlg.addEventListener('close', () => { dlg.remove(); if (takeState === st) takeState = null; }); dlg.showModal();
         st.dlg = dlg;
         dlg.querySelector('[data-cx-x]').addEventListener('click', () => dlg.close());
+        // 🔍 Chercher partout : la base, les listes, le panier d'un coup (la fenêtre de « 📎 Insérer une info ») ; ce qu'on choisit est coché
+        dlg.querySelector('[data-cx-everywhere]')?.addEventListener('click', e => ext.insertInfo.open(e.currentTarget, {onPick: items => { items.forEach(it => togglePick(st, it, true)); if (st.picked.size >= 2) st.preview = null; paintCount(st); if (st.picked.size < 2) previewItem(st, items[0]); toast(T('✓ Coché : {t}', {t: items[0]?.title || ''})); }}));
         const rail = dlg.querySelector('.cx-rail');
         rail.addEventListener('click', e => { const b = e.target.closest('[data-cx-tab]'); if (!b) return; goTab(st, b.dataset.cxTab); });
         rail.addEventListener('keydown', e => { // ↑ ↓ entre les rubriques
@@ -1827,8 +1829,9 @@
                 <p class="muted"><small>${esc(T('Le panier est gardé dans la base : il te suit sur un autre ordinateur et dans les sauvegardes.'))}</small></p></div>
             <div class="maintenance-panel"><h3>${esc(T('Prendre et déposer'))}</h3>${tg('ctx', 'Clic droit : « 🧺 Prendre… » une date, un lieu, une phrase', 'Sur une fiche, une note, une transcription, une enquête… ; un texte choisi à la souris aussi.')}${tg('dnd', 'Glisser du panier sur l’écran ouvert', 'Un cadre bleu dit ce qui va se passer avant qu’on lâche.')}</div>
             <div class="maintenance-panel"><h3>${esc(T('Raccourci clavier'))}</h3><p>📥 ${esc(T('Prendre depuis…'))} : <b>${esc(combo || T('aucun'))}</b> · <button type="button" class="link-button" data-cx-keys>${esc(T('Changer dans Raccourcis clavier'))}</button></p>
-                <p class="muted"><small>${esc(T('⇧⌘O était déjà pris (écran divisé) : le raccourci de départ est ⌥⌘O (Ctrl+Alt+O sous Windows et Linux).'))}</small></p></div>${ext.cxNeeds?.settingsHtml?.() || ''}</section>`;
+                <p class="muted"><small>${esc(T('⇧⌘O était déjà pris (écran divisé) : le raccourci de départ est ⌥⌘O (Ctrl+Alt+O sous Windows et Linux).'))}</small></p></div>${ext.cxNeeds?.settingsHtml?.() || ''}${ext.insertInfo?.settingsHtml?.() || ''}</section>`;
         ext.cxNeeds?.bindSettings?.(ws); // 🧩 les besoins (heritage-connexions-besoins.js)
+        ext.insertInfo?.bindSettings?.(ws); // 📎 Insérer une info (app-inserer.js)
         ws.querySelectorAll('[data-cx-tg]').forEach(el => { const inp = el.matches('input') ? el : el.querySelector('input'); (inp || el).addEventListener('change', e => { const k = el.dataset.cxTg; const v = !!(e.target.checked ?? inp?.checked); saveSettings({...settings(), [k]: v}, v ? T('Activé') : T('Éteint')); if (k === 'on' && v && count == null) boot(); }); });
         ws.querySelectorAll('[name="cx-multi"]').forEach(r => r.addEventListener('change', e => { writeJ(CUR, 0); basket = null; saveSettings({...settings(), multi: e.target.value === '1'}, e.target.value === '1' ? T('Plusieurs paniers') : T('Un seul panier')); }));
         ws.querySelector('[data-cx-keys]')?.addEventListener('click', () => { st.maintenanceTab = 'raccourcis'; A().persistUiState?.(); A().setModule?.('maintenance'); });
