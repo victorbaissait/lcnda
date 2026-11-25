@@ -45,7 +45,7 @@ function kiosk_path(): string { return DATA_DIR . '/consultation.json'; }
 
 /** Ce qui sort de l'app pour d'autres (exports, partage, site, livre, rapport, musée, synchronisation) : sans les événements confidentiels. */
 // (sync_export s'en charge lui-même : il pose d'abord les uid, lib/heritage_tools.php sync_export)
-const PRIVATE_EVENT_EXPORT_ACTIONS = ['export_gedcom', 'export_json', 'export_plus', 'export_csv', 'export_csv_global', 'export_family_book',
+const PRIVATE_EVENT_EXPORT_ACTIONS = ['export_gedcom', 'export_json', 'export_plus', 'export_csv', 'export_csv_global', 'export_family_book', 'sources_export', // ⤓ RIS / BibTeX : pas une source jointe seulement à un événement confidentiel
     'export_research_report', 'museum_export', 'export_my_list', 'compl_export', 'family_share_preview', 'family_share_export',
     'website_preview', 'website_export', 'website_export_check', 'website_render', 'website_map_points', 'website_publish',
     'website_live', 'website_php_run', 'layout_family_data', 'layout_tree_data']; // 📐 la mise en page : un livre qui s'imprime et s'exporte
@@ -153,7 +153,8 @@ function kiosk_blocks(string $action, bool $isWrite): bool
 {
     // backup_sqlite : seulement la sauvegarde automatique dans le dossier de l'app (vérifié dans api.php)
     $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now', 'museum_sign']; // le livre d'or du musée se signe aussi en consultation
-    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_plus', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export', 'export_my_list', 'export_custom_block_def', 'family_share_preview', 'family_share_export', 'website_export', 'desk_widget_file', 'compl_export'];
+    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_plus', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export', 'export_my_list', 'export_custom_block_def', 'family_share_preview', 'family_share_export', 'website_export', 'desk_widget_file', 'compl_export',
+        'sources_export']; // ⤓ toutes les sources en RIS / BibTeX (lib/imports_plus.php) : un export comme les autres
     return ($isWrite && !in_array($action, $allowedWrites, true)) || (!$isWrite && in_array($action, $blockedReads, true)) || in_array($action, ['switch_database', 'delete_database', 'clone_database'], true);
 }
 

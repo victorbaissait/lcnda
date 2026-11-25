@@ -672,7 +672,8 @@ const ACCESS_LOG_KINDS = ['case_open', 'print', 'export', 'letters', 'unlock_ok'
 const ACCESS_LOG_EXPORTS = ['export_csv' => 'csv', 'export_csv_global' => 'csv', 'export_gedcom' => 'gedcom', 'export_plus' => 'plus', 'export_json' => 'json',
     'export_sqlite' => 'sqlite', 'export_full_backup' => 'backup', 'export_research_report' => 'report', 'export_family_book' => 'book', 'sync_export' => 'sync',
     'vault_export' => 'vault', 'vault_download' => 'vault', 'museum_export' => 'museum', 'export_my_list' => 'list', 'export_custom_block_def' => 'block',
-    'family_share_export' => 'share', 'website_export' => 'website', 'website_publish' => 'website_publish', 'offsite_copy_now' => 'offsite', 'access_log_csv' => 'access_csv'];
+    'family_share_export' => 'share', 'website_export' => 'website', 'website_publish' => 'website_publish', 'offsite_copy_now' => 'offsite', 'access_log_csv' => 'access_csv',
+    'sources_export' => 'sources']; // ⤓ toutes les sources en RIS / BibTeX (lib/imports_plus.php)
 
 function access_log_schema(PDO $pdo): void
 {
