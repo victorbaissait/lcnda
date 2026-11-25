@@ -140,8 +140,10 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
             await p.click('.mp-panel li[data-k="family"] [data-mp-move="-1"]');
             const after = await ids(); assert.strictEqual(after.indexOf('family'), i - 1, after.join(','));
             // glisser « Où chercher » tout en haut de la liste
-            // la liste compte une partie par fichier qui en déclare (25 et plus) : une fenêtre assez haute pour voir la ligne tirée et l'endroit visé
-            await p.setViewportSize({width: 1440, height: 2000});
+            // la liste compte une partie par fichier qui en déclare (plus de 100 aujourd'hui) : une fenêtre assez haute pour voir toute la liste,
+            // la ligne tirée et l'endroit visé (un glisser ne fait pas défiler la page tout seul)
+            const listH = await p.evaluate(() => Math.ceil(document.querySelector('.mp-panel [data-mp-order]').getBoundingClientRect().height));
+            await p.setViewportSize({width: 1440, height: Math.max(2000, listH + 400)});
             await p.evaluate(() => document.querySelector('.mp-panel [data-mp-order]').scrollIntoView({block: 'start'}));
             const a = await p.locator('.mp-panel li[data-k="search"] .mp-grip').boundingBox(), b = await p.locator('.mp-panel [data-mp-order] li').first().boundingBox();
             await p.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await p.mouse.down();

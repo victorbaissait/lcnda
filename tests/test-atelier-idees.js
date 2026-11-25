@@ -332,7 +332,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
 (async () => {
     if (!chromium) { console.log('Playwright absent : essai sauté.'); process.exit(0); }
     const out = {};
-    try { await main(out); } catch (e) { if (process.env.DEBUG) console.log(JSON.stringify(out, null, 1).slice(0, 6000)); throw e; }
+    try { await main(out); } catch (e) { if (process.env.DEBUG) fs.writeFileSync(process.env.DEBUG_OUT || '/dev/stdout', JSON.stringify(out, null, 1)); throw e; }
     const S = out.seed;
     const checks = [
         ['📏 39 : le bouton 📏 dans la barre de l’image, éteint au départ', () => { assert.equal(out.regleBtn, true); assert.equal(out.regleOffBand, 'none'); }],

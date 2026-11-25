@@ -62,6 +62,9 @@ function txi_idees_dispatch(PDO $pdo, string $action, bool $isWrite, array $payl
         json_response(['error' => $e->getMessage()], 422);
     } catch (RuntimeException $e) {
         json_response(['error' => $e->getMessage()], str_contains($e->getMessage(), 'introuvable') ? 404 : 422);
+    } catch (Throwable $e) { // jamais une erreur 500 : « pas disponible ici », en clair
+        error_log('LCNDA atelier_idees : ' . $e->getMessage());
+        json_response(['error' => i18n_t('Cette fonction de l’Atelier n’est pas disponible ici.'), 'unavailable' => true], 422);
     }
 }
 
