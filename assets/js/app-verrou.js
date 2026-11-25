@@ -218,7 +218,7 @@
         ['lock', 'Mot de passe', ['unlock_ok', 'unlock_fail', 'lock_now', 'lock_idle', 'lock_set', 'lock_change', 'lock_remove', 'lock_minutes']], ['lan', 'Plusieurs ordinateurs', ['lan_open', 'lan_close', 'lan_ok', 'lan_refuse', 'lan_remove', 'lan_connect']], ['tw', 'Téléphone de terrain', ['tw_depot', 'tw_refus', 'tw_liste', 'tw_relie']], ['other', 'Lignes anciennes effacées', ['purge', 'retention']]];
     const EXP = {csv: 'CSV', gedcom: 'GEDCOM', plus: 'Autre format', json: 'JSON', sqlite: 'Base .db', backup: 'Sauvegarde complète', report: 'Rapport de recherche', book: 'Livre de famille',
         sync: 'Paquet du travail à deux', vault: 'Copie chez un cousin', museum: 'Musée de famille', list: 'Liste', block: 'Bloc', share: 'Partage avec la famille', website: 'Site web',
-        website_publish: 'Site web publié', offsite: 'Copie hors de l’ordinateur', access_csv: 'Registre « Qui a vu quoi » (CSV)', sources: 'Sources (RIS ou BibTeX)', succ_archive: 'Archive du dossier (.zip)',
+        website_publish: 'Site web publié', offsite: 'Copie hors de l’ordinateur', access_csv: 'Registre « Qui a vu quoi » (CSV)', sources: 'Sources', succ_archive: 'Archive du dossier (.zip)',
         map_trademap: 'Carte des métiers', map_mirrormap: 'Carte des deux lignées', map_lifearea: 'Carte de l’aire de vie', map_linkmap: 'Carte des parrains et témoins', map_crisismap: 'Carte des années de crise', // 🗺️ vague 2
         succ_move: 'Dossier déplacé vers une autre généalogie', succ_journal_csv: 'Journal du dossier (CSV)', succ_pdf: 'Tableau, arbre ou parts imprimés',
         // ⚖️ outils de plus (lib/successoral_plus2.php)
