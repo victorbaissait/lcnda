@@ -134,7 +134,10 @@
                 if (n > 0 && n <= 110 && (dy === null || y <= dy)) out.push({kind: 'anniversaire', x, n, rank: n % 10 === 0 ? 1 : 2});
             }
         }
-        return out.sort((a, b) => a.rank - b.rank || (a.x.ev?.level ?? 3) - (b.x.ev?.level ?? 3) || a.x.d.localeCompare(b.x.d));
+        // le même jour : on garde l'événement d'un jour (« Armistice du 11 novembre 1918 ») plutôt que la fin d'une période (« Première Guerre mondiale »)
+        const dayHit = new Set(out.filter(c => c.x.w === 'jour').map(c => c.kind + c.x.d));
+        return out.filter(c => c.x.w === 'jour' || !dayHit.has(c.kind + c.x.d))
+            .sort((a, b) => a.rank - b.rank || (a.x.ev?.level ?? 3) - (b.x.ev?.level ?? 3) || a.x.d.localeCompare(b.x.d));
     }
 
     /* ── 👑 les seigneurs ── */
@@ -151,9 +154,15 @@
     function lordsForLife(rows, life, owners = {}) {
         const out = [];
         for (const p of placesOf(life).filter(p => p.ins && isFrance(p))) {
-            const y = p.from ?? lifeSpan(life).from; if (y === null || y > 1789) continue;
-            const list = lordsOfInsee(rows, p.ins), at = list.length ? lordAt(list, Math.min(y, 1789)) : null;
-            const own = (owners[p.ins] || []).filter(o => (o.from ?? -Infinity) <= Math.min(y, 1789) && (o.to ?? Infinity) >= y && (o.from !== null || o.to !== null));
+            const a = p.from ?? lifeSpan(life).from; if (a === null || a > 1789) continue;
+            const z = Math.min(p.to ?? lifeSpan(life).to ?? a, 1789);
+            const list = lordsOfInsee(rows, p.ins);
+            // le seigneur de ses années là (de a à z) : celui dont les années croisent les siennes, sinon le dernier avant
+            const over = list.filter(r => { const [s0, e0] = lordSpan(r); return s0 !== null && e0 !== null && s0 <= z && e0 >= a; });
+            const pick = over[over.length - 1];
+            const y = pick ? Math.max(a, lordSpan(pick)[0]) : a;
+            const at = pick ? {r: pick, exact: true} : (list.length ? lordAt(list, a) : null);
+            const own = (owners[p.ins] || []).filter(o => (o.from ?? -Infinity) <= z && (o.to ?? Infinity) >= a && (o.from !== null || o.to !== null));
             if (at || own.length) out.push({place: p.name, ins: p.ins, y, at, list, own, age: age(life, y)});
         }
         return out;
@@ -344,7 +353,7 @@
     function fairsHtml(res, life) {
         if (!res) return '';
         const P = life.person, x = res.list[0];
-        const lead = T('{He} était {job} : {f} se tenait à {k} de {p}.', {He: He(P), job: `<b>${esc(res.job)}</b>`, f: `<b>${esc(x.f.n)}</b>`, k: kmTxt(x.km), p: esc(x.place)});
+        const lead = T('{He} était {job} ; la foire connue la plus proche de chez {lui} : {f}, à {k} de {p}.', {He: He(P), job: `<b>${esc(res.job)}</b>`, lui: P?.gender === 'female' ? T('elle') : T('lui'), f: `<b>${esc(x.f.n)}</b>`, k: kmTxt(x.km), p: esc(x.place)});
         return row('🐄', `${lead} ${refLinks(x.f)}`, SRC.foires(), more(`<ul class="hist-ul">${res.list.slice(0, 15).map(fairLi).join('')}</ul>`, res.list.length > 1 ? res.list.length : null));
     }
     const clubLi = c => `<li><b>${esc(c.n)}</b> <small class="muted">${esc([T('fondé en {y}', {y: String(c.y)}), c.sp, c.end ? T('disparu en {y}', {y: String(c.end)}) : ''].filter(Boolean).join(' · '))}</small> ${refLinks(c)}</li>`;

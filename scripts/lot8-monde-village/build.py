@@ -2,7 +2,7 @@
 """🎭⚽🚲🎡🎂👑⛪🐄 Lot 8 « Le monde du village » : fabrique les données livrées avec l'app (assets/data/l8c-*.json.gz).
 
 Sources (toutes ouvertes, téléchargées au moment de la fabrication ; chaque ligne garde son lien) :
-  - Wikidata (CC0 1.0), par le service SPARQL query.wikidata.org et l'API www.wikidata.org :
+  - Wikidata (CC0 1.0), par le service SPARQL query.wikidata.org :
       l8c-spectacles   œuvres avec « date de première représentation » (P1191) et « lieu de la première » (P4647), ≥ 4 Wikipédias
       l8c-clubs        clubs sportifs de France (P31/P279* Q847017) avec date de fondation (P571) et commune (P159 / P131 → code INSEE P374)
       l8c-tour         étapes du Tour de France (éditions Q33881, « comprend » P527 ; départ P1427, arrivée P1444)

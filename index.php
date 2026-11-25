@@ -82,6 +82,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
     <link rel="stylesheet" href="assets/css/terroir.css?v=1">
     <link rel="stylesheet" href="assets/css/terre-mots.css?v=1">
+    <link rel="stylesheet" href="assets/css/lot8-monde-village.css?v=1">
     <link rel="stylesheet" href="assets/css/lot9-sons-enfance.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-soldats-noms.css?v=1">
     <link rel="stylesheet" href="assets/css/lot9-monde-coutumes.css?v=1">
@@ -1659,6 +1660,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
 <script src="assets/js/heritage-chateaux-territoires.js?v=1" defer></script>
+<script src="assets/js/heritage-lot8-monde-village.js?v=1" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>
 <script src="assets/js/heritage-suivi-audit.js?v=1" defer></script>
