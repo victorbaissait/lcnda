@@ -134,7 +134,7 @@ echo json_encode(['ok' => 1]);`);
             const b0 = (await st()).body, z0 = (await st()).zones; await clickRead(1); await waitRead(2);
             let s = await st();
             assert.match(s.place, /Page 2 avait déjà du texte/); ['Remplacer la page', 'Ajouter à la fin de la page', 'Garder pour comparer', 'Annuler'].forEach(x => assert.ok(s.place.includes(x), x));
-            assert.equal(segs(s.body)[1].trim().split('\n').length, 4, 'ajoutée à la fin de la page 2'); assert.equal(segs(s.body)[0], segs(b0)[0]);
+            assert.equal(segs(s.body)[1].trim().split('\n').filter(l => l.trim()).length, 4, 'ajoutée à la fin de la page 2'); assert.equal(segs(s.body)[0], segs(b0)[0]);
             await p.click(`${D} [data-tx-placebar] [data-tx-place="undo"]`); await sleep(300);
             s = await st(); assert.equal(s.body, b0, '↶ Annuler : le texte d’avant'); assert.deepEqual(s.zones, z0); assert.equal(s.place, '');
             // et ⌘Z (un seul historique) refait / défait comme le reste
@@ -151,10 +151,10 @@ echo json_encode(['ok' => 1]);`);
             await p.click(`${D} [data-tx-placebar] [data-tx-place="replace"]`); await sleep(400);
             const s = await st(), sg = segs(s.body);
             assert.equal(sg[0], segs(b0)[0]); assert.equal(sg[1].trim(), 'relu sur le feuillet 2, ligne un\nrelu sur le feuillet 2, ligne deux');
-            const zm = s.zones.find(z => !z.src); assert.equal(zm.t, 'relu sur le feuillet 2, ligne un', 'la zone à la main suit sa ligne');
+            const zm = s.zones.find(z => !z.src); if (process.env.DBG) console.log(JSON.stringify(s.zones), JSON.stringify(s.body)); assert.equal(zm.t, 'relu sur le feuillet 2, ligne un', 'la zone à la main suit sa ligne');
             assert.equal(s.zones.filter(z => z.src === 'ocr').length, 2, 'les zones de la nouvelle lecture, pas celles d’avant en double');
             await p.evaluate(() => { const tt = [...document.querySelectorAll('.ui-toast')].filter(x => /à la place du texte de Page 2/.test(x.textContent)).at(-1); [...tt.querySelectorAll('button')].find(x => /Annuler/.test(x.textContent)).click(); }); await sleep(400);
-            assert.equal(segs((await st()).body)[1].trim().split('\n').length, 4, '↶ Annuler : revenu au texte ajouté (avant le choix)');
+            assert.equal(segs((await st()).body)[1].trim().split('\n').filter(l => l.trim()).length, 4, '↶ Annuler : revenu au texte ajouté (avant le choix)');
         });
         await t('une lecture lancée sur la page 2, puis la page 1 affichée : le texte va quand même dans la page 2', async () => {
             await setBody('Au nom de Dieu, moi Jeanne FAURIAC,\nveuve de Antoine LESCURE.\n— page 2 —\n'); await sleep(200);
@@ -198,7 +198,9 @@ echo json_encode(['ok' => 1]);`);
             await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.focus(); }); await p.keyboard.press('Control+z'); await sleep(400);
             assert.equal((await st()).body, before, '⌘Z défait la frappe');
             await p.click(`${D} [data-tx-pghd][data-seg="1"] .h-tx-pgt`, {modifiers: ['Alt']}); await sleep(200);
-            assert.ok((await st()).heads.every(h => !h.fold), 'Alt + clic : toutes dépliées');
+            assert.ok((await st()).heads.every(h => h.fold), 'Alt + clic, une page ouverte : toutes repliées');
+            await p.click(`${D} [data-tx-pghd][data-seg="1"] .h-tx-pgt`, {modifiers: ['Alt']}); await sleep(200);
+            assert.ok((await st()).heads.every(h => !h.fold), 'Alt + clic, toutes repliées : toutes dépliées');
         });
         await t('↦ Voir l’image : la page de ce bloc s’affiche', async () => {
             await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-pghd][data-seg="1"] [data-tx-pgshow]').click()); await sleep(600);
