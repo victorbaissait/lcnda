@@ -104,7 +104,7 @@ a{color:var(--blue)}
 .chatwin{display:grid;grid-template-columns:minmax(0,1fr) 290px;border:2px solid var(--ink);background:var(--paper)}
 .chatwin>*{min-width:0}
 .chat{padding:12px;display:flex;flex-direction:column;gap:12px;background:var(--grey-bg)}
-.q{align-self:flex-end;max-width:80%;background:var(--blue);color:#fff;padding:8px 12px;font-size:13.5px;border:2px solid var(--blue)}
+.uq{align-self:flex-end;max-width:80%;background:var(--blue);color:#fff;padding:8px 12px;font-size:13.5px;border:2px solid var(--blue)}
 .a{align-self:flex-start;max-width:92%;background:var(--paper);border:2px solid var(--ink);padding:10px 12px;font-size:13.5px;box-shadow:4px 4px 0 var(--shadow)}
 .a p{margin:0 0 8px}.a p:last-child{margin:0}
 .a ul{margin:4px 0 8px;padding-left:18px}.a li{margin:3px 0}
@@ -174,7 +174,7 @@ a{color:var(--blue)}
 .key{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 .key .input{flex:1 1 200px;font-family:ui-monospace,Menlo,monospace;letter-spacing:.1em}
 @media (max-width:1000px){.chatwin{grid-template-columns:1fr}.cside{border-left:0;border-top:2px solid var(--ink)}.pipe{grid-template-columns:1fr 1fr}}
-@media (max-width:760px){.pipe{grid-template-columns:1fr}.q{max-width:92%}.a{max-width:100%}.plan li{grid-template-columns:22px minmax(0,1fr)}.plan li>span:last-child{grid-column:2}.cmp{grid-template-columns:84px minmax(0,1fr) minmax(0,1fr) 18px;font-size:12px}}
+@media (max-width:760px){.pipe{grid-template-columns:1fr}.uq{max-width:92%}.a{max-width:100%}.plan li{grid-template-columns:22px minmax(0,1fr)}.plan li>span:last-child{grid-column:2}.cmp{grid-template-columns:84px minmax(0,1fr) minmax(0,1fr) 18px;font-size:12px}}
 </style></head><body><div class="wrap">
 
 <p class="eyebrow">Maquette · grosse fonction n°3 · rien n'est encore construit</p>
@@ -213,7 +213,7 @@ a{color:var(--blue)}
 <div class="chatwin">
  <div>
   <div class="chat">
-   <div class="q">Qui de mes ancêtres a vécu en Bretagne avant 1800 ?</div>
+   <div class="uq">Qui de mes ancêtres a vécu en Bretagne avant 1800 ?</div>
    <div class="a">
     <p>J'ai trouvé <b>5 ancêtres</b> avec au moins un événement en Bretagne avant 1800 :</p>
     <ul>
@@ -225,12 +225,12 @@ a{color:var(--blue)}
     <p>Ils sont tous dans la branche de ta grand-mère paternelle, <a href="#" class="p-ref">Sosa 13 · Anne LE GOFF</a>.</p>
     <details class="how"><summary>Comment j'ai trouvé (3 recherches dans ta base)</summary><ol><li>tes ancêtres Sosa (1 à 4095)</li><li>leurs événements dans les départements 22, 29, 35, 44, 56 avant 1800</li><li>les lieux sans département : comparés à la liste des communes</li></ol></details>
    </div>
-   <div class="q">Raconte la vie d'Hervé.</div>
+   <div class="uq">Raconte la vie d'Hervé.</div>
    <div class="a">
     <p><b>Hervé Le Goff</b> naît le 14 avril 1772 à Lannilis<a href="#" class="s-ref">S3</a>, troisième enfant d'Yves, laboureur, et de Marie-Jeanne Abiven. En 1791, on le retrouve <span class="guess">sans doute</span> mousse à Brest : un « Hervé Le Goff, de Lannilis, 19 ans » est inscrit sur un rôle d'équipage<a href="#" class="s-ref">S4</a>. Il épouse à Bordeaux, le 2 février 1801, Catherine Dupuy, fille d'un tonnelier<a href="#" class="s-ref">S5</a>…</p>
     <p class="mini">Le jaune marque ce qui est supposé. Ce récit n'est pas enregistré : <span class="btn small">📖 Le mettre dans la biographie (à relire)</span></p>
    </div>
-   <div class="q">Qu'est-ce qui cloche dans la branche Lavergne ?</div>
+   <div class="uq">Qu'est-ce qui cloche dans la branche Lavergne ?</div>
    <div class="a">
     <p>Trois choses, de la plus grave à la moins grave :</p>
     <ul>
@@ -249,7 +249,7 @@ a{color:var(--blue)}
   <div class="sugg"><span>Qui est né le même jour que moi ?</span><span>Quels métiers revenaient le plus ?</span><span>Résume la branche maternelle</span><span>Écris une lettre aux AD de la Corrèze</span></div>
  </div>
  <div class="cside">
-  <div class="blk"><h5>Où tourne l'IA</h5><div class="mode">🖥 Sur cet ordinateur · Qwen3 8B</div><p class="mini" style="margin:6px 0 0">Rien ne quitte l'ordinateur. <a href="#reglages">Réglages</a></p></div>
+  <div class="blk"><h5>Où tourne l'IA</h5><div class="mode">🖥 Sur cet ordinateur · Qwen3-VL 8B</div><p class="mini" style="margin:6px 0 0">Rien ne quitte l'ordinateur. <a href="#reglages">Réglages</a></p></div>
   <div class="blk"><h5>Sources citées</h5>
    <p style="margin:0 0 4px"><span class="s-ref">S1</span> Baptême, Plouguerneau 1741, AD 29, 3 E 214/2</p>
    <p style="margin:0 0 4px"><span class="s-ref">S2</span> Mariage Le Goff × Abiven, Lannilis 1766</p>

@@ -154,7 +154,7 @@ a{color:var(--blue)}
 .steps>li:before{counter-increment:st;content:counter(st);position:absolute;left:10px;top:9px;width:28px;height:28px;background:var(--blue);color:#fff;font:800 15px/28px system-ui;text-align:center}
 @media (max-width:900px){.ways{grid-template-columns:1fr}.lvl{grid-template-columns:1fr 1fr}}
 @media (max-width:760px){
- .ev{grid-template-columns:72px minmax(0,1fr)}.ev>*:nth-child(3){grid-column:2}
+ .ev{grid-template-columns:72px minmax(0,1fr)}.ev>*:nth-child(3){grid-column:2;justify-self:start}
  .prop{grid-template-columns:20px minmax(0,1fr)}.prop .acts,.prop .done{grid-column:2;justify-content:flex-start!important}
  .log li{grid-template-columns:26px minmax(0,1fr)}.log li .d{grid-column:2;order:3}.log li>.btn{grid-column:2;justify-self:start;order:4}
  .lvl{grid-template-columns:1fr}
@@ -187,12 +187,12 @@ a{color:var(--blue)}
   <span class="badge re">s'appuie sur l'existant</span>
   <h3>🏠 (a) Sur le réseau de la maison</h3>
   <div class="netd"><svg viewBox="0 0 420 150" role="img" aria-label="L'ordinateur principal reçoit les téléphones et ordinateurs de la maison par le wifi">
-   <rect class="bxb" x="150" y="10" width="130" height="56"/><text x="215" y="34" text-anchor="middle">💻 Ton ordinateur</text><text class="m" x="215" y="52" text-anchor="middle">l'arbre (SQLite) + la porte du wifi</text>
-   <rect class="bx" x="10" y="98" width="110" height="42"/><text x="65" y="123" text-anchor="middle">📱 Paul (proposer)</text>
-   <rect class="bx" x="160" y="98" width="110" height="42"/><text x="215" y="123" text-anchor="middle">💻 Hélène (branche)</text>
-   <rect class="bx" x="310" y="98" width="100" height="42"/><text x="360" y="123" text-anchor="middle">📱 Lucas (lire)</text>
-   <path class="ln" d="M65 98 L180 66 M215 98 L215 66 M360 98 L250 66"/>
-   <text class="m" x="300" y="86">wifi de la maison seulement</text>
+   <rect class="bxb" x="125" y="10" width="170" height="56"/><text x="210" y="34" text-anchor="middle">💻 Ton ordinateur</text><text class="m" x="210" y="52" text-anchor="middle">l'arbre + la porte du wifi</text>
+   <rect class="bx" x="10" y="98" width="110" height="42"/><text x="65" y="123" text-anchor="middle">📱 Paul ✎</text>
+   <rect class="bx" x="155" y="98" width="110" height="42"/><text x="210" y="123" text-anchor="middle">💻 Hélène 🌿</text>
+   <rect class="bx" x="300" y="98" width="110" height="42"/><text x="355" y="123" text-anchor="middle">📱 Lucas 👁</text>
+   <path class="ln" d="M65 98 L170 66 M210 98 L210 66 M355 98 L250 66"/>
+   <text class="m" x="410" y="22" text-anchor="end">wifi de la</text><text class="m" x="410" y="36" text-anchor="end">maison seulement</text>
   </svg></div>
   <ul>
    <li>Rien à installer ailleurs : l'app de bureau (Electron) ouvre la porte du wifi, comme aujourd'hui.</li>
@@ -242,7 +242,7 @@ a{color:var(--blue)}
  <div class="win-body scrollx">
   <table class="acc"><thead><tr><th>Personne</th><th>Droits</th><th>Sur quelle partie</th><th>Vivants</th><th>Dernière visite</th><th></th></tr></thead>
   <tbody>
-   <tr><td><span class="who"><span class="av k">M</span><span><b>Toi</b><small>propriétaire · cet ordinateur</small></span></span></td><td><div class="rights"><span class="on">tout</span></div></td><td>tout l'arbre</td><td>visibles</td><td>—</td><td></td></tr>
+   <tr><td><span class="who"><span class="av k">T</span><span><b>Toi</b><small>propriétaire · cet ordinateur</small></span></span></td><td><div class="rights"><span class="on">tout</span></div></td><td>tout l'arbre</td><td>visibles</td><td>—</td><td></td></tr>
    <tr><td><span class="who"><span class="av g">H</span><span><b>Hélène Martin</b><small>ta tante · 💻 portable d'Hélène</small></span></span></td><td><div class="rights"><span>lire</span><span>proposer</span><span class="on">modifier une branche</span></div></td><td>🌿 descendants de <b>Jean Martin</b> (1851)</td><td>prénom seulement</td><td>hier, 18 h 12</td><td><span class="btn small">Modifier</span></td></tr>
    <tr><td><span class="who"><span class="av b">P</span><span><b>Paul Lavergne</b><small>cousin · 📱 téléphone de Paul</small></span></span></td><td><div class="rights"><span>lire</span><span class="on">proposer</span><span>modifier une branche</span></div></td><td>tout l'arbre</td><td>cachés</td><td>il y a 3 jours</td><td><span class="btn small">Modifier</span></td></tr>
    <tr><td><span class="who"><span class="av y">L</span><span><b>Lucas</b><small>ton petit-fils · 📱</small></span></span></td><td><div class="rights"><span class="on">lire</span><span>proposer</span><span>modifier une branche</span></div></td><td>🌿 ancêtres de <b>toi</b> seulement</td><td>prénom seulement</td><td>le 2 novembre</td><td><span class="btn small">Modifier</span></td></tr>
@@ -301,7 +301,7 @@ a{color:var(--blue)}
    <div class="ev"><span class="k">Mariage</span><span>1904, Naves, avec Marie Chassagne</span><span class="btn small ghost">✎</span></div>
    <div class="ev"><span class="k">Enfants</span><span>Louis (1905–1977) · Jeanne (1908–1990) · <span class="hid">Personne vivante</span></span><span></span></div>
   </div>
-  <div class="win-foot"><span class="mini" style="margin-right:auto">Ta proposition est envoyée à Marie. Tu verras ici si elle l'accepte.</span><span class="btn ghost">Annuler</span><span class="btn blue">Envoyer la proposition</span></div>
+  <div class="win-foot"><span class="mini" style="margin-right:auto">Ta proposition est envoyée à la personne qui tient l'arbre. Tu verras ici si elle l'accepte.</span><span class="btn ghost">Annuler</span><span class="btn blue">Envoyer la proposition</span></div>
  </div>
 </div>
 <div>
@@ -314,7 +314,7 @@ a{color:var(--blue)}
    <label class="lab">La photo</label><div class="input">📷 Prendre une photo / choisir…</div>
    <label class="lab">Ce qu'on y voit</label><div class="input">Antoine et Marie devant la ferme, vers 1925</div>
    <label class="lab">D'où ça vient ?</label><div class="input">album de ma grand-mère Jeanne</div>
-   <p class="mini">Marie verra ta proposition avant qu'elle n'entre dans l'arbre.</p>
+   <p class="mini">La personne qui tient l'arbre verra ta proposition avant qu'elle n'entre dans l'arbre.</p>
    <span class="btn blue" style="width:100%;justify-content:center">Envoyer</span>
   </div>
  </div>
@@ -366,7 +366,7 @@ a{color:var(--blue)}
 <div class="win">
  <div class="win-bar"><b>📜 Journal</b><span class="row"><span class="seg"><span class="on">tout</span><span>modifications</span><span>propositions</span><span>visites</span></span><span class="input" style="width:170px">Personne : toutes ▾</span></span></div>
  <div class="win-body"><ul class="log">
-  <li><span class="d">auj. 10:42</span><span class="av k">M</span><span><b>Toi</b> as accepté la proposition de Paul : décès d'Antoine Lavergne → 4 février 1951, Naves<small>source « Livret de famille Lavergne (photo de Paul) » créée</small></span><span class="btn small">↶</span></li>
+  <li><span class="d">auj. 10:42</span><span class="av k">T</span><span><b>Toi</b> as accepté la proposition de Paul : décès d'Antoine Lavergne → 4 février 1951, Naves<small>source « Livret de famille Lavergne (photo de Paul) » créée</small></span><span class="btn small">↶</span></li>
   <li><span class="d">hier 18:12</span><span class="av g">H</span><span><b>Hélène</b> a modifié <b>Louise Martin</b> : métier « couturière » ajouté<small>branche « descendants de Jean Martin » · 💻 portable d'Hélène</small></span><span class="btn small">↶</span></li>
   <li><span class="d">hier 18:05</span><span class="av g">H</span><span><b>Hélène</b> a essayé de modifier <b>Pierre Chassagne</b> : refusé, hors de sa branche</span><span></span></li>
   <li><span class="d">22 nov.</span><span class="av b">P</span><span><b>Paul</b> a proposé 3 changements<small>📱 téléphone de Paul · réseau de la maison</small></span><span></span></li>
