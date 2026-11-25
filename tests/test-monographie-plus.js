@@ -144,6 +144,9 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
             // la ligne tirée et l'endroit visé (un glisser ne fait pas défiler la page tout seul)
             const listH = await p.evaluate(() => Math.ceil(document.querySelector('.mp-panel [data-mp-order]').getBoundingClientRect().height));
             await p.setViewportSize({width: 1440, height: Math.max(2000, listH + 400)});
+            // la fenêtre agrandie fait dessiner d'autres parties, et la liste se redessine : attendre qu'elle ne bouge plus (1 s de calme)
+            await p.evaluate(() => new Promise(res => { const el = document.querySelector('.mp-panel'); let done = false; const end = () => { if (done) return; done = true; mo.disconnect(); res(); };
+                let t = setTimeout(end, 1000); const mo = new MutationObserver(() => { clearTimeout(t); t = setTimeout(end, 1000); }); mo.observe(el, {childList: true, subtree: true}); setTimeout(end, 20000); }));
             await p.evaluate(() => document.querySelector('.mp-panel [data-mp-order]').scrollIntoView({block: 'start'}));
             const a = await p.locator('.mp-panel li[data-k="search"] .mp-grip').boundingBox(), b = await p.locator('.mp-panel [data-mp-order] li').first().boundingBox();
             await p.mouse.move(a.x + a.width / 2, a.y + a.height / 2); await p.mouse.down();
@@ -171,7 +174,8 @@ echo json_encode(['tul' => $tul, 'ids' => $ids]);`], {cwd: root, encoding: 'utf8
             await p.click('.mp-panel [data-mp-reset]');
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-monographie-parties')), null);
             assert.strictEqual((await ids())[0], 'events', 'ordre de départ');
-            await p.click('button:has-text("↶ Annuler")', {timeout: 5000});
+            // plusieurs messages « ↶ Annuler » restent affichés (commune, réorganisation…) : celui de la remise à zéro
+            await p.click('.toast:has-text("remise comme au départ") button:has-text("↶ Annuler")', {timeout: 5000});
             await p.waitForFunction(() => document.querySelector('.place-monograph-sections > *:not([hidden])')?.dataset.mp === 'search');
         });
 

@@ -576,7 +576,7 @@
     function printReport(host) {
         const html = reportHtml(host); if (!html) return;
         if (UI().openPrintDialog) UI().openPrintDialog({title: host.__ts.title, icon: '🔎', key: 'tout-sur', html: `<div class="ts-print">${html}</div>`, photos: false});
-        else { const w = window.open('', '_blank'); if (w) { w.document.write(html); w.print(); } }
+        else { const w = window.open('', '_blank'); if (w) { w.document.write(html); w.print(); } } // secours (sans LCNDA_UI)
     }
     async function addNote(host) {
         const S = host.__ts; if (!S?.life || !S.sug.length) return toast(T('Rien à mettre dans la note.'));

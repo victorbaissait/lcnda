@@ -183,7 +183,7 @@ echo json_encode(['ok' => 1, 'rid' => $r['id'], 'lid' => $l['id'], 'ids' => $ids
             assert.deepEqual(items.map(r => [r.title, r.level]), [['Partie A', 1], ['Livre 1', 2], ['Cahier I', 3], ['Feuillet a', 4], ['Section α', 5], ['Détail ω', 6]]);
             await p.evaluate(id => { const A = window.LCNDA_APP; A.state.hRecueil = {id, tab: 'sommaire', page: 0, view: 'grid', q: ''}; A.state.listType = 'recueils'; A.setModule('listes'); }, lid);
             await p.waitForSelector('.rs-tree .rs-li', {timeout: 20000});
-            assert.deepEqual(await p.evaluate(() => [...document.querySelectorAll('[data-rs-level]')].map(b => b.textContent)), ['Niveau 1', '2', '3', '4', '5', '6', '+ passages']);
+            assert.deepEqual(await p.evaluate(() => [...document.querySelectorAll('[data-rs-level]')].map(b => b.textContent)), ['Niveau 1', '2', '3', '4', '5', '6', '＋ passages']);
             const shown = () => p.evaluate(() => [...document.querySelectorAll('.rs-tree > .rs-li .rs-title')].map(x => x.textContent));
             assert.equal((await shown()).length, 6);
             await p.click('[data-rs-level="4"]'); await sleep(200); assert.deepEqual(await shown(), ['Partie A', 'Livre 1', 'Cahier I', 'Feuillet a']);

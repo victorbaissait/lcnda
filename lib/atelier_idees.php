@@ -39,7 +39,7 @@ function txi_idees_dispatch(PDO $pdo, string $action, bool $isWrite, array $payl
             if ($op === 'iiif_thumb') { txi_iiif_thumb((string) ($_GET['manifest'] ?? ''), safe_int($_GET['n'] ?? 0)); }
             if (str_starts_with($op, 'train_')) { require_once __DIR__ . '/atelier_entrainer.php'; json_response(txi_train_get($pdo, $op, $_GET)); }
             json_response(match ($op) {
-                'reg' => txi_reg_info($pdo, safe_int($_GET['act_id'] ?? 0), safe_int($_GET['media_id'] ?? 0)),
+                'reg' => txi_reg_info($pdo, safe_int($_GET['act_id'] ?? 0), safe_int($_GET['media_id'] ?? 0), txi_idees_clean_extra(['reg' => ['manifest' => $_GET['manifest'] ?? '', 'n' => $_GET['n'] ?? 0, 'total' => $_GET['total'] ?? 0, 'register' => $_GET['register'] ?? '', 'page_url' => $_GET['page_url'] ?? '']])['reg'] ?? []),
                 'search' => txi_search($pdo, (string) ($_GET['q'] ?? ''), !empty($_GET['near']), safe_int($_GET['limit'] ?? 60) ?: 60),
                 'iiif_preview' => txi_iiif_preview((string) ($_GET['url'] ?? '')),
                 'stats' => txi_stats($pdo),
@@ -132,11 +132,11 @@ function txi_reg_key(array $reg, ?array $rec, string $place = ''): string
  * GET reg : {register: bool, kind: recueil|iiif|'', title, view, total, acts_here, index, prev_act, next_act, next_view, prev_view, reg_key, model}
  * next_view : {media_id, act_id (le 1er acte déjà fait sur cette vue, ou 0)} pour un recueil ; {iiif: n} pour une vue IIIF pas encore téléchargée.
  */
-function txi_reg_info(PDO $pdo, int $actId, int $mediaId): array
+function txi_reg_info(PDO $pdo, int $actId, int $mediaId, array $given = []): array
 {
     $act = txi_act_row($pdo, $actId);
     if ($act) { $mediaId = (int) ($act['media_id'] ?? 0); }
-    $reg = is_array($act['data']['reg'] ?? null) ? $act['data']['reg'] : [];
+    $reg = is_array($act['data']['reg'] ?? null) ? $act['data']['reg'] : $given; // un acte pas encore enregistré : son registre envoyé par l'Atelier
     $out = ['register' => false, 'kind' => '', 'title' => '', 'view' => 0, 'total' => 0, 'acts_here' => txi_acts_on($pdo, $mediaId), 'prev_act' => 0, 'next_act' => 0, 'next_view' => null, 'prev_view' => null, 'reg_key' => '', 'model' => '', 'url' => ''];
     $here = $out['acts_here']; $pos = $actId ? array_search($actId, $here, true) : false;
     $rec = txi_recueil_of($pdo, $mediaId);

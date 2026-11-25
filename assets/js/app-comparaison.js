@@ -415,7 +415,7 @@
         const css = A().graphExportCss ? A().graphExportCss() : '';
         const doc = `<!doctype html><html><head><meta charset="utf-8"><title>${escapeHtml(exportTitle())}</title><style>${css}@page{margin:12mm}body{background:#fff;color:#000}</style></head><body>${clone.outerHTML}</body></html>`;
         if (UI().openPrintDialog) return UI().openPrintDialog({title: exportTitle(), key: 'comparaison', html: doc, photos: state.comparisonMode === 'images'});
-        window.print();
+        window.print(); // secours (sans LCNDA_UI)
     }
     function csvText() {
         const items = lastData?.items || [], cell = v => (A().csvCell ? A().csvCell(v) : `"${String(v ?? '').replace(/"/g, '""')}"`);

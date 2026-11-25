@@ -65,7 +65,7 @@
         let data; try { data = await load(ctx); } catch (e) { body.innerHTML = A().emptyState({icon: '⛔', text: T('Le sommaire ne s’ouvre pas'), hint: e.message || ''}); return; }
         if (!body.isConnected) return;
         const items = data.items || [], shut = shutRead(rid), ro = document.body.classList.contains('is-kiosk');
-        // les niveaux montrés : 1, 2, 3, 4… jusqu'au plus profond des chapitres (sous-sous-sous-chapitres et ainsi de suite), puis « + passages »
+        // les niveaux montrés : 1, 2, 3, 4… jusqu'au plus profond des chapitres (sous-sous-sous-chapitres et ainsi de suite), puis « ＋ passages »
         const deepest = Math.max(1, ...items.filter(r => r.kind === 'chapter').map(r => r.level));
         const level = levelRead() === 'all' || Number(levelRead()) <= deepest ? levelRead() : 'all';
         // chercher : les lignes trouvées et leurs parents
@@ -90,7 +90,7 @@
         body.innerHTML = `<div class="rs-tab${st.read ? ' is-read' : ''}">
             <div class="rs-bar-top">
                 <span class="re-row"><button type="button" class="button small secondary" data-rs-all="open">▾ ${esc(T('Tout ouvrir'))}</button><button type="button" class="button small secondary" data-rs-all="shut">▸ ${esc(T('Tout fermer'))}</button>
-                <span class="segmented rs-level" role="radiogroup" aria-label="${esc(T('Niveaux montrés'))}">${[...Array.from({length: Math.min(deepest, 30)}, (_, i) => [String(i + 1), i ? String(i + 1) : T('Niveau 1')]), ['all', T('+ passages')]].map(([k, l]) => `<button type="button" role="radio" aria-checked="${level === k}" class="${level === k ? 'is-active' : ''}" data-rs-level="${k}">${esc(l)}</button>`).join('')}</span></span>
+                <span class="segmented rs-level" role="radiogroup" aria-label="${esc(T('Niveaux montrés'))}">${[...Array.from({length: Math.min(deepest, 30)}, (_, i) => [String(i + 1), i ? String(i + 1) : T('Niveau 1')]), ['all', T('＋ passages')]].map(([k, l]) => `<button type="button" role="radio" aria-checked="${level === k}" class="${level === k ? 'is-active' : ''}" data-rs-level="${k}">${esc(l)}</button>`).join('')}</span></span>
                 <input type="search" class="rs-q" data-rs-q value="${esc(st.q)}" placeholder="${esc(T('Chercher dans le sommaire…'))}" aria-label="${esc(T('Chercher dans le sommaire'))}">
                 <span class="re-row">${ro ? '' : `<button type="button" class="button small" data-rs-new="chapter">＋ ${esc(T('Chapitre…'))}</button><button type="button" class="button small secondary" data-rs-new="element">＋ ${esc(T('Passage…'))}</button><button type="button" class="button small secondary" data-rs-propose>✨ ${esc(T('Proposer le découpage'))}</button>${isLiasse(D) ? `<button type="button" class="button small secondary" data-rs-arrange>🗃 ${esc(T('Ranger par…'))}</button>` : ''}`}
                 <button type="button" class="button small secondary${st.read ? ' is-active' : ''}" data-rs-read aria-pressed="${st.read}">📖 ${esc(T('Mode lecture'))}</button></span></div>

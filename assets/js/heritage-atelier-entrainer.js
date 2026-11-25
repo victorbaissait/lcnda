@@ -62,7 +62,7 @@
         function paint() {
             if (!st) return; const h = st.hands.find(x => x.hand === sel), q = st.qwen, k = st.kraken;
             const est = h ? h.estimate[engine] : null;
-            const canGo = !!h?.can && (engine === 'kraken' ? k.ready : q.ready || (q.mac && q.unsloth.installed)) && !job;
+            const canGo = !!h?.can && (engine === 'kraken' ? k.ready : q.ready || (q.mac && q.unsloth.installed)) && job?.state !== 'running';
             const regs = [...new Map(st.hands.flatMap(x => x.registers || []).filter(r => r.key).map(r => [r.key, r])).values()];
             body.innerHTML = `${machine()}
                 ${st.hands.length ? `<table class="ait-hands"><thead><tr><th>${esc(i18n('Main'))}</th><th>${esc(i18n('Registre'))}</th><th>${esc(i18n('Lignes relues'))}</th><th></th></tr></thead><tbody>${st.hands.map(handRow).join('')}</tbody></table>`

@@ -71,7 +71,8 @@
         }
         async function refresh() {
             const T = t(); if (!T.id && !T.media_id) { info = null; paint(); return null; }
-            try { info = await get({op: 'reg', act_id: T.id || 0, media_id: T.media_id || 0}); } catch (_) { info = null; }
+            const R = T.id ? {} : Object.fromEntries(['manifest', 'n', 'total', 'register', 'page_url'].filter(k => T.data.reg?.[k]).map(k => [k, T.data.reg[k]])); // pas encore enregistré
+            try { info = await get({op: 'reg', act_id: T.id || 0, media_id: T.media_id || 0, ...R}); } catch (_) { info = null; }
             plug.reg = info; paint(); return info;
         }
         /** ce que le prochain acte reprend */

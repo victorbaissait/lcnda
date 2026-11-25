@@ -80,7 +80,8 @@ const t = async (name, fn) => { try { await fn(); count++; console.log('✓', na
     });
     await t('K11 une action = un symbole : ⤒ importer, ⤓ exporter, plus de 📥 / 📤 / ⬇ / ⬆ pour ça', () => {
         none(/📥 ?(Importer|Exporter|CSV|Télécharger|Récupérer|Garder|Dans les médias|Mon propre)|>📥</g, '📥 n’est plus une action');
-        none(/📤 ?(Export|Partager \(fichier)|>📤</g, '📤 Exporter → ⤓');
+        // 📤 reste le signe de « Envoyer vers… » (heritage-envoyer.js) : un bouton d'icône seule qui le dit (aria-label) est permis
+        none(/📤 ?(Export|Partager \(fichier)|(?<!aria-label="\$\{esc\(i18n\('Envoyer vers…'\)\)\}")>📤</g, '📤 Exporter → ⤓');
         none(/(⬆️?|💾|⤓|⬇️?|💬|＋|\+) ?(Importer|Réimporter)\b/g, 'importer : ⤒');
         none(/(⬇️?︎?|📄|🌐|◧|✂|📅|💬|±) ?Exporter\b/g, 'exporter : ⤓');
         none(/(📥|⬇️?|📅|💾) ?Télécharger/g, 'télécharger : ⤓');

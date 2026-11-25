@@ -438,7 +438,7 @@
     function printTimeline() {
         if (!cache) return;
         if (UI().openPrintDialog) return UI().openPrintDialog({title: exportTitle(), key: 'chronologie', html: printDoc(), photos: false});
-        window.print();
+        window.print(); // secours (sans LCNDA_UI)
     }
     async function pngBlob(scale = 1, mime = 'image/png') {
         const body = $('#chrono-body'); if (!body) throw new Error(T('Rien à exporter.'));

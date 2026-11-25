@@ -1264,8 +1264,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu-cartes-regles.js?v=2" defer></script>
 <script src="assets/js/app-jeu-cartes.js?v=3" defer></script>
 <script src="assets/js/app-jeu.js?v=17" defer></script>
-<script src="assets/js/app-chronologie.js?v=14" defer></script>
-<script src="assets/js/app-comparaison.js?v=10" defer></script>
+<script src="assets/js/app-chronologie.js?v=15" defer></script>
+<script src="assets/js/app-comparaison.js?v=11" defer></script>
 <script src="assets/js/app-carte.js?v=17" defer></script>
 <script src="assets/js/app-enquetes.js?v=17" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=26" defer></script>
@@ -1359,7 +1359,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueil-verif.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-iiif.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-etat.js?v=8" defer></script>
-<script src="assets/js/heritage-recueil-sommaire.js?v=3" defer></script>
+<script src="assets/js/heritage-recueil-sommaire.js?v=4" defer></script>
 <script src="assets/js/heritage-recueil-index.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-fiche.js?v=2" defer></script>
 <script src="assets/js/heritage-recueil-fonds.js?v=6" defer></script>
@@ -1687,11 +1687,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
 <script src="assets/js/heritage-connexions.js?v=2" defer></script>
-<script src="assets/js/heritage-connexions-besoins.js?v=1" defer></script><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
+<script src="assets/js/heritage-connexions-besoins.js?v=2" defer></script><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=12" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=13" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>

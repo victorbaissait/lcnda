@@ -351,7 +351,7 @@
             const b = document.createElement('button'); b.type = 'button'; b.className = `button small secondary cx-pins-btn${showPins ? ' is-active' : ''}`; b.setAttribute('aria-pressed', String(showPins));
             b.textContent = `📌 ${nf(list.length)}`; b.title = T('Ce que tu as « 📍 Mis sur la carte » : montrer ou cacher (clic droit : tout retirer)');
             b.addEventListener('click', () => { showPins = !showPins; b.classList.toggle('is-active', showPins); b.setAttribute('aria-pressed', String(showPins)); drawPins(); });
-            b.addEventListener('contextmenu', e => { e.preventDefault(); if (kiosk()) return; UI().menuAt?.(b, [{icon: '🗑', label: T('Tout retirer de la carte'), danger: true, run: async () => { const r = await post('map_remove', {all: 1}); pins = []; drawPins(); b.remove();
+            b.addEventListener('contextmenu', e => { e.preventDefault(); if (kiosk()) return; UI().contextMenu?.(e, [{icon: '🗑', label: T('Tout retirer de la carte'), danger: true, run: async () => { const r = await post('map_remove', {all: 1}); pins = []; drawPins(); b.remove();
                 undoToast(T('{n} retirés de la carte', {n: plural(r.removed.length, T('point'))}), {undo: async () => { await post('map_restore', {rows: r.removed}); await loadPins(true); A().drawMap?.(); }}); }}], {title: T('Mis sur la carte')}); });
             s2.insertBefore(b, s2.querySelector('.spacer'));
         });

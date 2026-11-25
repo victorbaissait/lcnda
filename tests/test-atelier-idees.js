@@ -62,7 +62,7 @@ $a1 = $ins(['title' => 'Baptême de Jean MAZAUD', 'kind' => 'bapteme', 'media' =
 $a2 = $ins(['title' => 'Sépulture d’Anne MAZEAUD', 'kind' => 'sepulture', 'media' => $m['photo.png'], 'date' => '4 mars 1789', 'place' => 'Treignac', 'body' => "L’an mil sept cent quatre vingt neuf\na été inhumée Anne Mazeaud âgée de", 'data' => ['zones' => [['id' => 'q0', 'x' => 40, 'y' => 40, 'w' => 700, 'h' => 44, 's' => 0, 'e' => 35], ['id' => 'q1', 'x' => 40, 'y' => 100, 'w' => 700, 'h' => 44, 's' => 36, 'e' => 70]], 'status' => 'doing']]);
 $a3 = $ins(['title' => 'Baptême de Marie LACOMBE', 'kind' => 'bapteme', 'media' => $m['photo.png'], 'date' => '21 juil. 1790', 'place' => 'Treignac', 'body' => "marraine Jeanne Mazaut sa tante\nfille de Léonard Lacombe labr", 'data' => ['zones' => [], 'status' => 'doing', 'modern' => ['text' => "marraine Jeanne MAZAUT sa tante\nfille de Léonard LACOMBE laboureur", 'from' => 'auto', 'keys' => []]]]);
 // 🎓 deux actes de la même main (30 lignes relues chacun, sur une grande image), un acte d'une main inconnue (9 lignes)
-$train = function (int $from, int $n, string $hand, string $title) use ($ins, $m) { $lines = []; for ($i = 0; $i < $n; $i++) { $lines[] = 'Ligne ' . ($from + $i) . ' du registre, Jean Mazaud et Marie Durand'; }
+$train = function (int $from, int $n, string $hand, string $title) use ($ins, $m) { $lines = []; for ($i = 0; $i < $n; $i++) { $lines[] = 'Ligne ' . ($from + $i) . ' du registre, Léonard Chassagne, tisserand'; }
     $body = implode("\n", $lines); $zones = []; $at = 0; foreach ($lines as $i => $l) { $len = mb_strlen($l); $zones[] = ['id' => 't' . ($from + $i), 'x' => 40, 'y' => 20 + (($from + $i) % 32) * 60, 'w' => 900, 'h' => 44, 's' => $at, 'e' => $at + $len]; $at += $len + 1; }
     return $ins(['title' => $title, 'kind' => 'bapteme', 'media' => $m['train.png'], 'place' => 'Treignac', 'body' => $body, 'data' => ['zones' => $zones, 'reviewed' => array_map('txi_line_key', $lines), 'reg' => array_filter(['hand' => $hand, 'register' => 'BMS Treignac', 'cote' => '3 E 271/4']), 'status' => 'checked']]); };
 $t1 = $train(0, 30, 'Curé J. LACOMBE', 'Lignes LACOMBE 1'); $t2 = $train(30, 30, 'Curé J. LACOMBE', 'Lignes LACOMBE 2'); $t3 = $train(60, 9, '', 'Main inconnue');
@@ -274,7 +274,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
 
         /* ═════ 35. 🎓 entraîner ═════ */
         // l'ordinateur : sans carte graphique, sur Mac (vérifié par le serveur, sans navigateur)
-        const st = (extra) => JSON.parse(php(String.raw`require 'lib/bootstrap.php'; require_once 'lib/atelier_entrainer.php'; $pdo = db(); txi_ensure($pdo); echo json_encode(txi_train_get($pdo, 'train_status', []), JSON_UNESCAPED_UNICODE);`, extra));
+        const st = (extra) => JSON.parse(php(String.raw`require 'lib/bootstrap.php'; require 'tests/api_functions.php'; require_once 'lib/atelier_entrainer.php'; $pdo = db(); txi_ensure($pdo); echo json_encode(txi_train_get($pdo, 'train_status', []), JSON_UNESCAPED_UNICODE);`, extra));
         out.stNoGpu = st({ LCNDA_TEST_GPU: 'none' }); out.stMac = st({ LCNDA_TEST_OS: 'mac', LCNDA_TEST_GPU: 'Apple M2,16384' });
         out.tooFew = await apiPost('atelier_idees_write', { op: 'train_start', engine: 'kraken', hand: 'Inconnu' });
         out.noHand = await apiPost('atelier_idees_write', { op: 'train_start', engine: 'kraken', hand: '' });
@@ -315,7 +315,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
         await p.check('dialog.ait-dlg [name="ait-eng"][value="qwen"]'); await sleep(200);
         out.qwenUi = await p.evaluate(() => ({ dl: !!document.querySelector('dialog.ait-dlg [data-ait-dl]'), why: document.querySelector('dialog.ait-dlg .ait-eng.is-on .ait-why')?.textContent || '' }));
         await p.check('dialog.ait-dlg [data-ait-dl]'); await p.click('dialog.ait-dlg [data-ait-go]');
-        await p.waitForSelector('dialog.ait-dlg .ait-done', { timeout: 40000 }); await sleep(300);
+        await p.waitForFunction(() => /Ollama/.test(document.querySelector('dialog.ait-dlg .ait-done')?.textContent || ''), null, { timeout: 40000 }); await sleep(300);
         out.qwenDone = await p.evaluate(() => document.querySelector('dialog.ait-dlg .ait-done').textContent.replace(/\s+/g, ' '));
         out.qwenArgs = fs.readFileSync(argsLog, 'utf8').trim().split('\n').map(l => JSON.parse(l)).filter(a => a.includes('--engine'));
         const ol = await p.$('dialog.ait-dlg .ait-done [data-ait-ollama]'); if (ol) { await ol.click(); await sleep(800); }
@@ -341,7 +341,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
             assert.equal(out.band3.est, false); assert.ok(Math.abs(out.band3.y - (z.y - z.h * .25)) <= 1, JSON.stringify(out.band3)); assert.ok(out.band3.h >= z.h * 1.4, JSON.stringify(out.band3)); }],
         ['📏 39 : Entrée en fin de ligne → ligne sans zone : la règle prend la hauteur de la ligne d’avant, juste dessous', () => { const z = ZONES[5]; assert.equal(out.bandEst.est, true); assert.ok(Math.abs(out.bandEst.y - (z.y + z.h - z.h * .25)) <= 1, JSON.stringify(out.bandEst)); }],
         ['📏 39 : ↑ sur l’image : la ligne d’avant, le curseur du texte suit', () => { assert.equal(out.stepUp, LINES[3]); assert.ok(Math.abs(out.bandUp.y - (ZONES[3].y - ZONES[3].h * .25)) <= 1); }],
-        ['📏 39 : la force de l’assombrissement, retenue ; Affichage → 📏 Règle de lecture', () => { assert.equal(out.force.op, '0.8'); assert.equal(out.force.ls, '0.8'); assert.ok(out.affichage.some(l => /Règle de lecture/.test(l)), out.affichage.join(',')); }],
+        ['📏 39 : la force de l’assombrissement, retenue ; Affichage → 📏 Règle de lecture', () => { assert.equal(out.force.op, '0.8'); assert.equal(out.force.ls, '0.8'); assert.ok(out.affichage.some(l => /règle de lecture/i.test(l)), out.affichage.join(',')); }],
         ['⏭ 37 : un acte de recueil : la bande « 📚 BMS Treignac · vue 1 / 3 », ➕ Acte suivant, Vue suivante →, ◀ éteint', () => { assert.equal(out.strip1.hidden, false); assert.match(out.strip1.text, /BMS Treignac 1780-1792 · vue 1 \/ 3/); assert.match(out.strip1.text, /Acte suivant/); assert.equal(out.strip1.view, true); assert.equal(out.strip1.prev, false); }],
         ['⏭ 37 : Édition → 📚 Registre et main… : champs en vert ; Main et cote gardées avec l’acte, la source écrite toute seule', () => {
             assert.ok(out.edition.some(l => /Registre et main/.test(l))); assert.deepEqual(out.regGreen.sort(), ['archive', 'cote', 'hand', 'register', 'total', 'view'].sort());
@@ -389,7 +389,7 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
             assert.equal(b[0], 'train'); assert.deepEqual([b[b.indexOf('-i') + 1].endsWith('mccatmus-fr-en.mlmodel'), b[b.indexOf('--resize') + 1], b[b.indexOf('-N') + 1], b[b.indexOf('-d') + 1], b[b.indexOf('-f') + 1]], [true, 'union', '30', 'cuda:0', 'path']);
             assert.equal(c[0], 'test'); assert.match(c[c.indexOf('-m') + 1], /out\/model_best\.mlmodel$/); }],
         ['🎓 35 : 1 ligne sur 10 mise de côté, jamais dans l’entraînement ni la validation ; chaque image a son texte juste', () => {
-            assert.equal(out.split.held.length, 6); assert.ok(out.split.held.every(f => !out.split.train.includes(f) && !out.split.val.includes(f))); assert.equal(out.split.train.length + out.split.val.length, 54); assert.match(out.gt, /^Ligne \d+ du registre, Jean Mazaud et Marie Durand$/); }],
+            assert.equal(out.split.held.length, 6); assert.ok(out.split.held.every(f => !out.split.train.includes(f) && !out.split.val.includes(f))); assert.equal(out.split.train.length + out.split.val.length, 54); assert.match(out.gt, /^Ligne \d+ du registre, Léonard Chassagne, tisserand$/); }],
         ['🎓 35 : fini : avant → après sur les lignes mises de côté ; « Main de Curé J. LACOMBE » rangé avec les modèles et choisi pour son registre (↶ Annuler)', () => {
             assert.match(out.done.text, /Avant : 81,2 % → après : 93,4 %/); assert.match(out.done.text, /sur 6 lignes jamais vues/); assert.match(out.done.toast, /Main de Curé J\. LACOMBE.*lu désormais pour 1 registre/);
             const m = out.models.find(x => x.engine === 'kraken'); assert.ok(m && /^lcnda-cure-j-lacombe-[0-9a-f]{6}\.mlmodel$/.test(m.file), JSON.stringify(out.models)); assert.equal(m.before, 81.2); assert.equal(m.after, 93.4);
