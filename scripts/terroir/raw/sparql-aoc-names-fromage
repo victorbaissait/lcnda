@@ -1,0 +1,628 @@
+{
+  "head" : {
+    "vars" : [ "i", "l" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q123199835"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fourme d'Yssingeaux"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q28493422"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Rambol"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q542046"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "brousse du Rove"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q249310"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "comté"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q322899"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "abondance"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q189221"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "roquefort"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1086855"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "camembert de Normandie"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3531223"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tome fraîche de l'Aubrac"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q761524"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "brocciu"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q2587663"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Rollot"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3080069"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fourme de Rochefort-Montagne"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3531219"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Tome du Champsaur"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q2820735"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "abbaye de Tamié"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q97358622"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Trappe de Timadeuc"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q117662902"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "meule de tarentaise"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1000176"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "chaource"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q132736069"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Gris du Périgord"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q662125"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "mont d'or"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131560883"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Anneau des Gors"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q22442810"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "tomme du Nevet"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q108315407"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Vercorais"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q114328512"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Comtesse de Vichy"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q177727"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "morbier"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q249873"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "crottin de Chavignol"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q520598"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "ossau-iraty"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1244306"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Saint Agur"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1245441"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fourme de Montbrison"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1245530"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "fourme d'Ambert"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1245627"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "salers"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q2930178"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Bûche du Poitou"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q10563342"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "chabichou du Poitou"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1249172"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "selles-sur-cher"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q2089007"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "rigotte de Condrieu"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q2304082"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "soumaintrain"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q20968815"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "mimolette extra vieille"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q524966"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "tome des Bauges"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q545994"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "brie de Melun"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q543805"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "reblochon"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q640839"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Pouligny-Saint-Pierre"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q548309"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "saint-nectaire"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q724855"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Brillat-Savarin"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q652628"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "sainte-maure de Touraine"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q659277"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "valençay"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q681326"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "laguiole"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q643697"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "mimolette vieille"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1241190"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "neufchâtel"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q137808644"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "tomme de Berry au pesto basilic"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q734978"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "maroilles"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q749378"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "brie de Meaux"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1233145"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "pont-l'évêque"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1240158"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "langres"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q765540"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "munster"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q767952"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "bleu du Vercors-Sassenage"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1067646"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "charolais"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1227853"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "tomme des Pyrénées"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1231414"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "époisses"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1231078"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "bleu de Gex Haut-Jura"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q772326"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "banon"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q965981"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "pélardon"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q781150"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "beaufort"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q883938"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "bleu des Causses"
+      }
+    }, {
+      "i" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1071353"
+      },
+      "l" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "chevrotin"
+      }
+    } ]
+  }
+}

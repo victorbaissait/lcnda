@@ -137,15 +137,20 @@ def eveques(atlas_names):
         d['end'] = max(filter(None, [d['end'], day(val(b, 'end'))]), default='')
         d['seat'] = d['seat'] or val(b, 'seat')
     time.sleep(3)
-    rows = sparql('''SELECT ?dio ?p ?pLabel ?t ?s ?e WHERE {
-      ?dio wdt:P31/wdt:P279* wd:Q665487 ; wdt:P17 wd:Q142 .
-      { ?p p:P39 ?st . ?st pq:P708 ?dio ; ps:P39 ?tp . VALUES ?tp { wd:Q1144278 wd:Q48629921 wd:Q29182 wd:Q611644 wd:Q135981985 } BIND(?tp AS ?t) }
-      UNION
-      { ?pos wdt:P1001 ?dio ; wdt:P279* ?cl . VALUES ?cl { wd:Q1144278 wd:Q48629921 wd:Q611644 wd:Q29182 } ?st ps:P39 ?pos . ?p p:P39 ?st . BIND(?pos AS ?t)
-        FILTER NOT EXISTS { ?pos wdt:P279* wd:Q75178 } }
-      ?st pq:P580 ?s . OPTIONAL { ?st pq:P582 ?e }
-      FILTER NOT EXISTS { ?st wikibase:rank wikibase:DeprecatedRank }
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". } }''')
+    # par paquets de diocèses (la requête d'un coup dépasse le temps permis) ; on garde les fonctions d'évêque ou d'archevêque
+    rows, qs = [], sorted(dio)
+    for i in range(0, len(qs), 40):
+        vals = ' '.join('wd:' + q for q in qs[i:i + 40])
+        rows += sparql(f'''SELECT ?dio ?p ?pLabel ?t ?tLabel ?s ?e WHERE {{
+          VALUES ?dio {{ {vals} }}
+          {{ ?st pq:P708 ?dio ; ps:P39 ?t . ?p p:P39 ?st . }} UNION {{ ?t wdt:P1001 ?dio . ?st ps:P39 ?t . ?p p:P39 ?st . }}
+          ?st pq:P580 ?s . OPTIONAL {{ ?st pq:P582 ?e }}
+          FILTER NOT EXISTS {{ ?st wikibase:rank wikibase:DeprecatedRank }}
+          SERVICE wikibase:label {{ bd:serviceParam wikibase:language "fr,en". }} }}''')
+        time.sleep(2)
+    # « évêque de X », « archevêque de X », « évêque diocésain »… mais pas auxiliaire, coadjuteur, vicaire, administrateur
+    rows = [b for b in rows if re.search(r'évêque|eveque|bishop|archevêque|prince-évêque', val(b, 'tLabel'), re.I)
+            and not re.search(r'auxiliaire|coadjuteur|vicaire|administrat|titulaire|auxiliary|coadjutor|émérite', val(b, 'tLabel'), re.I)]
     fix = label_fix(rows)
     for b in rows:
         q = qid(val(b, 'dio'))

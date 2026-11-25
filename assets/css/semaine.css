@@ -21,7 +21,7 @@
 .msr-acts .msr-done:hover { color: #1e8e3e; border-color: #1e8e3e; }
 .msr-ext { white-space: nowrap; }
 /* widget étroit : les boutons passent sous le texte (sinon le titre n'a plus que 47 px) */
-.msr { container-type: inline-size; }
+.msr-list { container-type: inline-size; }
 @container (max-width: 380px) { .msr-row { grid-template-columns: 24px minmax(0, 1fr); } .msr-acts { grid-column: 2; flex-wrap: wrap; } }
 .msr-more { margin-top: 4px; }
 .msr-snoozed { margin: 0; font-size: 12.5px; color: var(--muted); }

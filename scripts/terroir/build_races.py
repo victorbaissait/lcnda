@@ -65,6 +65,9 @@ def main():
     up = sorted({p for e in E.values() for p in wm.ids(e, 'P131')} - set(E))
     if up: E.update(wm.entities(up, props='claims|labels', languages='fr'))
     R2D = reg2dep(); C = communes()
+    RL = {}  # nom replié d'une région (ou ancienne région) → son élément
+    for r in wm.sparql('SELECT ?r ?l WHERE { VALUES ?r { ' + ' '.join('wd:' + q for q in sorted(R2D)) + ' } ?r rdfs:label ?l FILTER(lang(?l)="fr") }', 'races-regions', gap=1):
+        RL.setdefault(fold(r['l']), qid(r['r']))
 
     def deps_of_item(q, depth=0):
         e = E.get(q) or {}
@@ -73,11 +76,18 @@ def main():
         code = next((v for v in wm.claims(e, 'P2586') if isinstance(v, str)), '')
         if code in DEP: return 'dep', [code], ''
         if q in R2D: return 'region', sorted(R2D[q]), ''
-        if depth == 0:
+        if depth == 0 and wm.ids(e, 'P17') == ['Q142']:  # un lieu-dit, un pays, une vallée de France : son département
             for p in wm.ids(e, 'P131'):
                 lvl, d, i = deps_of_item(p, 1)
-                if d: return ('dep' if lvl in ('commune', 'dep') else lvl), d, ''
+                if d and lvl in ('commune', 'dep'): return 'dep', d, ''
+        if depth == 0:
+            lab = fold(wm.label(e, ('fr',)))
+            if lab in RL: return 'region', sorted(R2D[RL[lab]]), ''
         return '', [], ''
+
+    def point_of(q):
+        co = next((x for x in wm.claims(E.get(q), 'P625') if isinstance(x, dict)), None)
+        return (round(co['latitude'], 3), round(co['longitude'], 3)) if co else None
 
     out = []
     for b, o in B.items():
@@ -86,24 +96,32 @@ def main():
         if o['img']: row['img'] = o['img']
         if o['wp']: row['wp'] = o['wp']
         if b in origin:
-            v = origin[b]; deps = set(); lvl = ''; ins = ''
-            for t, _ in links_of(v):
+            v = origin[b]; deps = set(); lvl = ''; ins = ''; pts = []
+            for t, txt in links_of(v):
                 q = P2Q.get(t) or P2Q.get(t[:1].upper() + t[1:])
-                if not q: continue
+                if not q or q == 'Q142' or fold(txt) in ('nord', 'sud', 'est', 'ouest', 'centre', 'france', 'sud ouest', 'nord ouest', 'sud est', 'nord est'): continue
                 l, d, i = deps_of_item(q)
                 if d:
                     deps |= set(d); lvl = lvl or l; ins = ins or i
-            if not deps:  # pas de lien utile : les noms de départements écrits en clair
+                elif point_of(q): pts.append(point_of(q))
+            if not deps and pts:  # une province, un massif, un pays (Poitou, Massif central…) : son centre, sans limites précises
+                row['lat'], row['lon'] = pts[0]; lvl = 'province'
+            if not deps:  # pas de lien utile : les noms de départements ou de régions écrits en clair
+                cap = ' '.join(w for w in re.split(r'[\s,;()/]+', plain(v)) if w[:1].isupper())  # les noms propres seulement (« nord de la Bretagne » ≠ le Nord)
                 for name, code in DEP_BY_NAME.items():
-                    if re.search(r'\b' + re.escape(name) + r'\b', fold(plain(v))): deps.add(code); lvl = lvl or 'dep'
+                    if re.search(r'\b' + re.escape(name) + r'\b', fold(cap)): deps.add(code); lvl = lvl or 'dep'
+                if not deps:
+                    for name, rq in RL.items():
+                        if re.search(r'\b' + re.escape(name) + r'\b', fold(cap)): deps |= R2D[rq]; lvl = lvl or 'region'
             row['o'] = plain(v)[:120]
             if deps and len(deps) <= 20: row['deps'] = sorted(deps); row['lvl'] = lvl
+            elif lvl == 'province': row['lvl'] = lvl
             if ins: row['insee'] = ins
         out.append(row)
     out.sort(key=lambda r: (r['sp'], fold(r['n'])))
     by = {}
     for r in out: by[r['sp']] = by.get(r['sp'], 0) + 1
-    print('par espèce :', by, '· France avec départements :', sum(1 for r in out if r.get('deps')), flush=True)
+    print('par espèce :', by, '· France avec départements :', sum(1 for r in out if r.get('deps')), '· avec un centre seulement :', sum(1 for r in out if r.get('lvl') == 'province'), flush=True)
     write('races', {'v': 1, 'built': TODAY,
                     'attr': 'Wikidata (races : P31, pays d’origine P495/P17, image P18) ; région d’origine des races de France : paramètre « origine » de l’infobox des articles de Wikipédia en français',
                     'licence': 'CC0 1.0 (Wikidata) ; CC BY-SA 4.0 (Wikipédia, texte « origine »)', 'url': 'https://www.wikidata.org/', 'rows': out})

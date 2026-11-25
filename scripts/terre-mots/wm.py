@@ -12,7 +12,7 @@ def _wait(host, gap):
     if t > 0: time.sleep(t)
     _last[host] = time.time()
 
-def get(url, data=None, accept='application/json', gap=1.5, key=None, tries=12):
+def get(url, data=None, accept='application/json', gap=1.5, key=None, tries=int(os.environ.get('TM_TRIES', '12'))):
     os.makedirs(RAW, exist_ok=True)
     k = key or hashlib.sha1((url + '|' + (data or '')).encode()).hexdigest()
     f = os.path.join(RAW, k)

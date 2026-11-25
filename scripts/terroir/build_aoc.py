@@ -22,17 +22,17 @@ URLS = {'aoc': 'https://static.data.gouv.fr/resources/aires-geographiques-des-ao
 # la sorte de produit : d'abord le type Wikidata, sinon les mots du nom
 WD_CAT = {'vin': {'Q282', 'Q1827', 'Q10210', 'Q12979', 'Q80114014', 'Q630531', 'Q10750129', 'Q22715', 'Q2140699', 'Q156362', 'Q3558198', 'Q1565828', 'Q154'},
           'fromage': {'Q10943', 'Q2223649'}, 'spiritueux': {'Q284', 'Q170582'}, 'olive': {'Q93165', 'Q12179886'}}
-WORDS = [('fromage', r'\bfromage|\btomme\b|\bbleu\b|\bbrie\b|camembert|roquefort|comt[ée]\b(?!s? tolosan)|reblochon|munster|époisses|mont d.or|ossau|beaufort|cantal|salers|laguiole|saint-nectaire|morbier|maroilles|chaource|langres|neufchâtel|pélardon|picodon|rocamadour|valençay|selles-sur-cher|chabichou|crottin|banon|abondance|emmental|raclette|livarot|pont-l.évêque|brocciu|fourme|gruyère|mâconnais|charolais \(fromage\)|sainte-maure|pouligny|bleu'),
-         ('spiritueux', r'eau[x]?-de-vie|cognac|armagnac|calvados|\bmarc\b|\bfine\b|whisky|rhum|liqueur|pommeau|génépi|absinthe|kirsch|mirabelle de lorraine \(eau|cassis de|pineau|floc|macvin|ratafia|vermouth|gin\b|genièvre|brandy|pastis|chartreuse'),
+WORDS = [('spiritueux', r'eau[x]?-de-vie|cognac|armagnac|calvados|\bmarc\b|\bfine\b|whisky|rhum|liqueur|pommeau|génépi|absinthe|kirsch|pineau|floc|macvin|ratafia|vermouth|\bgin\b|genièvre|brandy|pastis|quetsch'),
          ('cidre', r'\bcidre|poiré'),
-         ('vin', r'\brouge\b|\bblanc\b|\brosé\b|\bvin\b|mousseux|crémant|primeur|clairet|vendanges|\bgris\b|pétillant|liquoreux|\bmoelleux\b|vin doux|grand cru|premier cru|villages\b|côtes?[- ]d|coteaux|\bsur lie\b'),
+         ('vin', r'\brouge\b|\bblanc\b|\brosé\b|\bvins?\b|mousseux|crémant|primeur|clairet|vendanges|\bgris\b|pétillant|liquoreux|\bmoelleux\b|grand cru|premier cru|\bvillages\b|\bsur lie\b|grains nobles|cru du beaujolais|dénomination de climat|\bmuscat|\broussette\b|méthode ancestrale|\bambré\b|hors d.âge|avec sucres|\bsec\b|klevener'),
+         ('fromage', r'\bfromage|\btomm?e\b|\bbleu\b|\bbrie\b|camembert|roquefort|^comté$|reblochon|munster|époisses|mont d.or|ossau|beaufort|^cantal$|^salers$|^laguiole$|saint-nectaire|morbier|maroilles|chaource|^langres$|neufchâtel|pélardon|picodon|rocamadour|valençay|selles-sur-cher|chabichou|crottin|^banon$|abondance|emmental|raclette|livarot|pont-l.évêque|brocciu|fourme|gruyère|^mâconnais$|sainte-maure|pouligny|brousse|rigotte|mothais|chavignol|brillat|cancoillotte|saint-marcellin|soumaintrain|chevrotin|tome fraîche'),
          ('laitier', r'\bbeurre|\bcrème\b|\blait\b'),
-         ('viande', r'volaille|poulet|dinde|chapon|canard|\boie\b|pintade|\bporc\b|jambon|agneau|b[oœ]uf|bovin|veau|viande|saucisse|saucisson|rillettes|foie gras|taureau|\bfin gras\b|charcuterie|andouille|boudin|pâté|lapin|mouton'),
-         ('mer', r'huître|moule|coquille|poisson|sardine|anchois|thon|crevette|sel\b|fleur de sel'),
-         ('olive', r'huile|olive'),
+         ('viande', r'volaille|poulet|dinde|chapon|canard|\boie\b|pintade|\bporc\b|jambon|agneau|b[oœ]uf|bovin|veau|viande|saucisse|saucisson|rillettes|foie gras|taureau|\bfin gras\b|charcuterie|andouille|boudin|pâté|lapin|mouton|génisse|prés-salés|kintoa|coppa|lonzo|figatell|pancetta|bulagna|poularde|ternera|rosée des pyrénées|barèges|^maine-anjou$|charolais de bourgogne|œufs'),
+         ('mer', r'huître|moule|coquille|poisson|sardine|anchois|thon|crevette|\bsel\b|fleur de sel|bulot|caviar'),
+         ('olive', r'huile|olive|lucques'),
          ('miel', r'\bmiel\b'),
-         ('fruit', r'pomme|poire|abricot|cerise|prune|pruneau|mirabelle|noix|noisette|châtaigne|marron|fraise|melon|pêche|clémentine|kiwi|figue|raisin|citron|chasselas|framboise|myrtille|bergamote|reinette|agrumes'),
-         ('legume', r'lentille|haricot|coco\b|pomme de terre|piment|oignon|ail\b|échalote|carotte|poireau|asperge|chou|artichaut|mogette|lingot|riz\b|farine|blé|maïs|safran|moutarde|thym|lavande|foin|herbes'),
+         ('fruit', r'pomme|poire|abricot|cerise|prune|pruneau|mirabelle|noix|noisette|châtaigne|marron|fraise|melon|pêche|clémentine|kiwi|figue|raisin|citron|chasselas|framboise|myrtille|bergamote|reinette|agrumes|pomelo|vanille'),
+         ('legume', r'lentille|haricot|coco\b|pomme de terre|piment|oignon|\bail\b|échalote|carotte|poireau|asperge|chou|artichaut|mogette|lingot|\briz\b|farine|blé|maïs|safran|moutarde|thym|lavande|foin|herbes|mâche|épeautre|pâtes'),
          ('autre', r'.')]
 CATS = {'vin': ('🍷', 'Vin'), 'fromage': ('🧀', 'Fromage'), 'spiritueux': ('🥃', 'Eau-de-vie ou liqueur'), 'cidre': ('🍏', 'Cidre ou poiré'), 'laitier': ('🧈', 'Beurre ou crème'),
         'viande': ('🍖', 'Viande ou volaille'), 'mer': ('🦪', 'Produit de la mer'), 'olive': ('🫒', 'Olive ou huile'), 'miel': ('🍯', 'Miel'), 'fruit': ('🍎', 'Fruit'),
@@ -61,6 +61,11 @@ def main(src):
         if r.get('img') and not o['img']: o['img'] = urllib.parse.unquote(re.sub(r'^.*Special:FilePath/', '', r['img']))
         if r.get('wp') and not o['wp']: o['wp'] = urllib.parse.unquote(r['wp'].rsplit('/wiki/', 1)[1]).replace('_', ' ')
 
+    WDN = {}  # nom replié → sorte (vins, fromages de France sur Wikidata)
+    for k, root in (('vin', 'Q282'), ('fromage', 'Q10943')):
+        for r in wm.sparql('SELECT DISTINCT ?i ?l WHERE { ?i wdt:P31/wdt:P279* wd:' + root + ' . { ?i wdt:P17 wd:Q142 } UNION { ?i wdt:P495 wd:Q142 } ?i rdfs:label ?l FILTER(lang(?l)="fr") }', 'aoc-names-' + k, gap=1):
+            n = fold(re.sub(r'\s*\((vin|aoc|fromage|appellation)[^)]*\)', '', r['l'], flags=re.I))
+            if n and n not in WDN: WDN[n] = k
     areas = {}  # IDA → infos
     def area(ida, name, sign):
         a = areas.get(ida)
@@ -83,9 +88,13 @@ def main(src):
             if not w: continue
             for c, s in WD_CAT.items():
                 if w['t'] & s: cat = cat or c
+        if not cat and fold(a['name']) in WDN:  # un vin ou un fromage de France de ce nom sur Wikidata
+            cat = WDN[fold(a['name'])]
         if not cat:
-            text = ' | '.join([a['name']] + [p['name'] for p in ps]).lower()
-            cat = next(c for c, rx in WORDS if re.search(rx, text))
+            for text in [p['name'].lower() for p in ps if p['name'] != a['name']] + [a['name'].lower()]:
+                cat = next((c for c, rx in WORDS[:-1] if re.search(rx, text)), '')
+                if cat: break
+            cat = cat or 'autre'
         w = next((WD[p['id']] for p in ps if p['id'] in WD and (WD[p['id']]['img'] or WD[p['id']]['wp'])), None) or next((WD[p['id']] for p in ps if p['id'] in WD), None)
         names = list(dict.fromkeys(p['name'] for p in ps if p['name'] and p['name'] != a['name']))
         row = [int(ida), a['name'], a['sign'].upper(), cat, w['q'] if w else '', w['wp'] if w else '', w['img'] if w else '', names[:15], len(names)]

@@ -5312,6 +5312,8 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 .cp-set-row { display: flex; align-items: center; gap: 10px; justify-content: space-between; padding: 8px 10px; border: var(--line); border-radius: 8px; }
 .cp-set-row > span { display: grid; gap: 2px; min-width: 0; }
 .cp-set-row small { color: var(--muted, #666); overflow-wrap: anywhere; }
+.cp-set-row > .ui-badge { flex: none; } /* « Installé » ne sort plus du cadre sur téléphone */
+@media (max-width: 480px) { .cp-set-row { flex-wrap: wrap; } }
 .cp-app .cp-pick { display: grid; gap: 4px; }
 .cpr-c { cursor: pointer; }
 .cpr-c:focus-visible circle { stroke: var(--blue, #0066cc); stroke-width: 3; }

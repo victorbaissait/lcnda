@@ -135,8 +135,19 @@
     let parking = null;
     const park = () => { if (!parking || !parking.isConnected) { parking = document.createElement('div'); parking.className = 'ts-parking'; parking.hidden = true; parking.setAttribute('aria-hidden', 'true'); document.body.appendChild(parking); } return parking; };
     const EMPTY_SEL = '.empty-line,.empty-box,.empty-card,.empty-state,.muted,script,style,button,.skeleton,.ui-skeleton,.loading-block,.ui-spinner,[hidden],small';
-    function meaningful(node) { const c = node.cloneNode(true); c.querySelectorAll(EMPTY_SEL).forEach(x => x.remove()); return c.textContent.replace(/\s+/g, ' ').trim().length >= 3; }
-    const loading = node => !!node.querySelector('.ui-spinner,.loading-block,.skeleton,.ui-skeleton');
+    /** le texte d'un morceau de page, avec une espace entre les éléments (« à 200 m.hôpital » → « à 200 m. hôpital ») */
+    const textOf = el => { const c = el.cloneNode(true); c.querySelectorAll('*').forEach(e => e.append(' ')); return c.textContent.replace(/\s+/g, ' ').trim(); };
+    // ce qui veut dire « rien » ou « pas maintenant » (hors ligne) : on ne le montre pas
+    const NOTHING_RE = /^(\W*\s*)(aucun|aucune|rien|pas de |pas d’|pas d'|personne de ce nom|ce lieu n’est dans aucun|choisis )|pas de connexion à internet|s’afficheront quand tu seras connecté|hors ligne/i;
+    function meaningful(node) {
+        const c = node.cloneNode(true); c.querySelectorAll(EMPTY_SEL).forEach(x => x.remove());
+        const t = textOf(c), letters = (t.match(/\p{L}/gu) || []).length;
+        if (letters < 12) return false;
+        if (t.length < 200 && NOTHING_RE.test(t)) return false;
+        if (node.querySelector('input, select, textarea') && t.length < 90) return false; // un petit formulaire, pas un résultat
+        return true;
+    }
+    const loading = node => !!node.querySelector('.ui-spinner,.loading-block,.skeleton,.ui-skeleton') || /(on cherche|recherche|chargement)[^.]{0,80}…\s*$/i.test(node.textContent.trim());
     function runOne(task, force = false) {
         if (!force && CACHE.has(task.key)) return CACHE.get(task.key);
         const pr = (async () => {
@@ -147,7 +158,7 @@
             try { ret = await timeout(d.run(task.ctx, host), RUN_MS, '__timeout__'); } catch (e) { err = e?.message || String(e); }
             for (let i = 0; i < 15 && loading(host); i++) await new Promise(r => setTimeout(r, 200));
             if (err) return {task, state: 'error', error: err, host};
-            if (ret === false || !meaningful(host)) return {task, state: 'empty', host};
+            if (ret === false || loading(host) || !meaningful(host)) return {task, state: 'empty', host};
             return {task, state: 'found', host, ...digest(host)};
         })();
         CACHE.set(task.key, pr); return pr;
@@ -163,20 +174,20 @@
 
     /** le résumé d'un résultat : une phrase, le nombre de lignes, le lien vers la source */
     function digest(host) {
-        const c = host.cloneNode(true); c.querySelectorAll('script,style,button,.muted,[hidden],details > summary').forEach(x => x.remove());
-        const cand = [...c.querySelectorAll('li, p, tr, .hist-t, .tq-row, h4 + *')].map(x => x.textContent.replace(/\s+/g, ' ').trim()).find(t => t.length >= 12);
-        let summary = (cand || c.textContent.replace(/\s+/g, ' ').trim());
+        const c = host.cloneNode(true); c.querySelectorAll('script,style,button,.muted,[hidden],details > summary,input,select,textarea,label').forEach(x => x.remove());
+        const cand = [...c.querySelectorAll('li, p, tr, .hist-t, .tq-row, h4 + *')].map(textOf).find(t => (t.match(/\p{L}/gu) || []).length >= 12);
+        let summary = (cand || textOf(c));
         if (summary.length > 170) summary = summary.slice(0, 165).replace(/\s+\S*$/, '') + '…';
         const items = host.querySelectorAll('li, tbody tr').length;
         const links = [...host.querySelectorAll('a[href^="http"]')];
         const best = links.find(a => /source|wikidata|wikip|↗|data\.gouv|insee|archives|memoire|leonore|ign|osm|openstreetmap/i.test(a.textContent + ' ' + a.closest('small, .src, [class*="src"]')?.className)) || links[0];
-        const text = host.textContent.replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim().slice(0, 1500);
+        const text = textOf(c).slice(0, 1500);
         return {summary, items, url: best?.href || '', urlLabel: best ? (best.textContent.trim() || hostOf(best.href)) : '', text};
     }
     const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (_) { return ''; } };
     function sourceOf(r) {
         const d = r.task.d, dl = lists().find(x => x.id === d.id);
-        const label = d.source || dl?.source || (r.url ? hostOf(r.url) : '');
+        const label = d.source || dl?.source || (r.url ? hostOf(r.url) : T('{l}, dans LCNDA', {l: T(d.label)}));
         return {label, url: d.sourceUrl || r.url || dl?.sourceUrl || ''};
     }
 
@@ -413,7 +424,7 @@
         const G = (ext.listGroupDefaults || []).find(g => g[0] === 'g_data'); if (G && Array.isArray(G[3]) && !G[3].includes(TOOL)) G[3].splice(Math.min(1, G[3].length), 0, TOOL);
         const W = A(); if (Array.isArray(W.defaultDashboardBlocks) && !W.defaultDashboardBlocks.some(x => x[0] === WIDGET)) { W.defaultDashboardBlocks.push([WIDGET, T('🔎 Ce qui le/la concerne')]); if (W.defaultDashboardBlockSpans) W.defaultDashboardBlockSpans[WIDGET] = '6'; if (W.dashboardWidgetInfo) W.dashboardWidgetInfo[WIDGET] = T('Les meilleures suggestions des données de l’app pour une personne : à garder sur sa fiche en un clic.'); }
     };
-    const TOOL = 'tout_sur', WIDGET = 'tout_sur';
+    const TOOL = 'data_tout_sur', WIDGET = 'tout_sur';
 
     async function fillBlock(host) {
         const pid = Number(host.dataset.tsBlock), detail = await getDetail(pid, !host.__tsFresh); host.__tsFresh = true;
@@ -597,11 +608,11 @@
             ws.querySelector('[data-ts-n]').textContent = tasks.length ? T('{n} données utilisables', {n: String(by.size)}) : '';
             box.innerHTML = by.size ? GROUPS.map(([g, ic, lab]) => { const ids = [...by.keys()].filter(id => by.get(id)[0].group === g); return ids.length ? `<h3>${ic} ${esc(T(lab))}</h3><ul class="ts-tool-list">${ids.map(id => { const d = by.get(id)[0].d; return `<li><span class="ts-ico">${esc(d.icon || '•')}</span><span>${esc(T(d.label))}${d.source ? ` <small class="muted">${esc(d.source)}</small>` : ''}${isOnline(d) ? ` <small class="muted">· ${esc(T('en ligne'))}</small>` : ''}</span><button type="button" class="button small secondary" data-ts-one="${esc(id)}">▶ ${esc(T('Lancer'))}</button></li>`; }).join('')}</ul>` : ''; }).join('')
                 : (A().empty ? A().empty(T('Choisis une personne, un lieu ou une année.'), {icon: '🔎'}) : '');
-            box.querySelectorAll('[data-ts-one]').forEach(b => b.addEventListener('click', () => runTool([b.dataset.tsOne])));
         };
+        ws.querySelector('[data-ts-list]').addEventListener('click', e => { const b = e.target.closest('[data-ts-one]'); if (b) runTool([b.dataset.tsOne]); });
         const runTool = only => renderReport(ws.querySelector('[data-ts-out]'), {person: cur.person || null, place: cur.place, year: cur.year || null, only}).catch(e => toast(e.message, 'error'));
         ws.querySelector('[data-ts-runall]').addEventListener('click', () => { if (!cur.person && !cur.place && !cur.year) return toast(T('Choisis une personne, un lieu ou une année.')); runTool(null); });
-        ws.querySelector('[data-ts-year-in]').addEventListener('change', e => { cur.year = Number(e.target.value) || 0; keep(); draw(); });
+        ws.querySelector('[data-ts-year-in]').addEventListener('change', e => { const y = Number(e.target.value) || 0; if (y === cur.year) return; cur.year = y; keep(); draw(); });
         ws.addEventListener('picker-change', async e => {
             const it = e.detail?.item;
             if (e.target.closest('[data-ts-pick-person]')) { cur.person = it && !it.free ? Number(it.id) || 0 : 0; }

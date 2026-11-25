@@ -1050,6 +1050,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
 .data-table-wrap { background: white; border: var(--line); box-shadow: var(--shadow); overflow: auto; }
 .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.table-scroll { max-width: 100%; overflow-x: auto; } /* un tableau large (Vie de tous les jours, Le monde à son époque) défile dans son cadre au lieu d'élargir la page sur téléphone */
 .data-table th { position: sticky; top: 0; z-index: 2; text-align: left; padding: 12px; color: white; background: var(--blue); border-bottom: 2px solid var(--ink); white-space: nowrap; }
 .data-table th > button { width: 100%; padding: 0; border: 0; background: transparent; color: white; font-weight: 800; text-align: left; cursor: pointer; }
 .data-table th > button:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -4167,6 +4168,10 @@ body.is-kiosk .sf-add, body.is-kiosk .sf-tools, body.is-kiosk .sf-range-btn { di
    sur-titre = l'endroit ; titre = nom + icône du menu, même taille partout ; à droite : ✓ Enregistré · bouton bleu · 2 boutons · ⋯ · ⭐ */
 #workspace .page-header.ui-ph { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 22px; flex-wrap: nowrap; }
 #workspace .page-header.ui-ph > .ui-ph-text { min-width: 0; flex: 1 1 auto; }
+/* beaucoup de boutons (Enquêtes à 1024 px : « Enquêt / es ») : le titre garde au moins 16rem, les boutons passent dessous, à droite */
+#workspace .page-header.ui-ph { flex-wrap: wrap; }
+#workspace .page-header.ui-ph > .ui-ph-text { flex-basis: min(16rem, 100%); }
+#workspace .page-header.ui-ph > .ui-ph-actions { margin-left: auto; }
 #workspace .page-header.ui-ph .eyebrow { display: block; text-transform: uppercase; }
 #workspace .page-header.ui-ph h2 { margin: 6px 0 0; font-size: 38px; line-height: 1.02; letter-spacing: -.03em; overflow-wrap: anywhere; }
 #workspace .page-header.ui-ph h2 .ui-ph-ico { margin-right: .22em; font-size: .86em; letter-spacing: 0; }

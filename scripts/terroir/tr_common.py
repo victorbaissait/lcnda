@@ -95,6 +95,7 @@ def links_of(v):
 def plain(v):
     """un peu de wikicode → texte simple (liens gardés par leur texte ; modèles et balises enlevés)"""
     v = re.sub(r'<ref[^>]*/>|<ref[^>]*>.*?</ref>', '', v, flags=re.S)
+    v = re.sub(r'\[\[(?:Fichier|File|Image):[^\]]*\]\]', '', v, flags=re.I)
     v = re.sub(r'\{\{(?:FRA|France|drapeau[^}]*)\}\}', '', v, flags=re.I)
     for _ in range(3): v = re.sub(r'\{\{[^{}]*\}\}', '', v)
     v = re.sub(r'\[\[(?:[^\]|]+\|)?([^\]]+)\]\]', r'\1', v)

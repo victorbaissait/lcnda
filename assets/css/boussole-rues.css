@@ -1,0 +1,28 @@
+/* 🧭🗞️📍 Boussole, jours et rues (assets/js/heritage-boussole-rues.js) — reprend l'allure de « Le village dans la culture »
+ * (commune-plus.css : .cplus-panel, .cplus-lead, .cplus-src, .cplus-more ; commune-culture.css : .cc-line) ; clair et sombre : currentColor */
+.br-src{margin:.6rem 0 0;font-size:.82em;opacity:.78}
+.br-more summary{cursor:pointer;margin:.4rem 0}
+.br-more h5{margin:.6rem 0 .2rem;font-size:.92em}
+.br-list{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.br-list li{display:flex;flex-direction:column;gap:.1rem;line-height:1.45}
+.br-list li > svg{display:none}
+.br-list small{overflow-wrap:anywhere}
+.br-day + .br-day{margin-top:.45rem}
+.br-compass{display:flex;gap:.7rem;align-items:flex-start}
+.br-compass .cplus-lead{margin-top:.1rem}
+.br-why{margin:.1rem 0 0;font-size:.88em;opacity:.8}
+.br-needle{flex:0 0 auto;vertical-align:middle}
+.br-n-ring{fill:none;stroke:currentColor;stroke-opacity:.35;stroke-width:1.2}
+.br-n-true{stroke:currentColor;stroke-opacity:.35;stroke-width:.8;stroke-dasharray:2 2}
+.br-n-n{font:700 7px system-ui,sans-serif;fill:currentColor;fill-opacity:.6;text-anchor:middle}
+.br-n-north{fill:#b5462b}
+.br-n-south{fill:currentColor;fill-opacity:.45}
+.br-n-pin{fill:currentColor}
+.br-table td{white-space:nowrap}
+.br-table .br-needle{margin-right:.3rem}
+.br-big{display:flex;gap:.9rem;align-items:center}
+.br-big > div{display:flex;flex-direction:column;gap:.1rem}
+.br-chip{margin-left:.3rem}
+.br-ask{display:flex;gap:.6rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:.6rem}
+.br-vm{margin-top:.4rem}
+@media (max-width:560px){.br-compass{flex-direction:column}.br-big{flex-direction:column;align-items:flex-start}}
