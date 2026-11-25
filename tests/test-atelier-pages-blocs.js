@@ -151,7 +151,7 @@ echo json_encode(['ok' => 1]);`);
             await p.click(`${D} [data-tx-placebar] [data-tx-place="replace"]`); await sleep(400);
             const s = await st(), sg = segs(s.body);
             assert.equal(sg[0], segs(b0)[0]); assert.equal(sg[1].trim(), 'relu sur le feuillet 2, ligne un\nrelu sur le feuillet 2, ligne deux');
-            const zm = s.zones.find(z => !z.src); if (process.env.DBG) console.log(JSON.stringify(s.zones), JSON.stringify(s.body)); assert.equal(zm.t, 'relu sur le feuillet 2, ligne un', 'la zone à la main suit sa ligne');
+            const zm = s.zones.find(z => !z.src); assert.equal(zm.t, 'relu sur le feuillet 2, ligne un', 'la zone à la main suit sa ligne');
             assert.equal(s.zones.filter(z => z.src === 'ocr').length, 2, 'les zones de la nouvelle lecture, pas celles d’avant en double');
             await p.evaluate(() => { const tt = [...document.querySelectorAll('.ui-toast')].filter(x => /à la place du texte de Page 2/.test(x.textContent)).at(-1); [...tt.querySelectorAll('button')].find(x => /Annuler/.test(x.textContent)).click(); }); await sleep(400);
             assert.equal(segs((await st()).body)[1].trim().split('\n').filter(l => l.trim()).length, 4, '↶ Annuler : revenu au texte ajouté (avant le choix)');
