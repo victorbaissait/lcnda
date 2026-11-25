@@ -80,6 +80,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=4">
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
+    <link rel="stylesheet" href="assets/css/pays-memoire.css?v=1">
     <link rel="stylesheet" href="assets/css/brevets-annuaires.css?v=1">
     <link rel="stylesheet" href="assets/css/droit-pouvoir.css?v=1">
     <link rel="stylesheet" href="assets/css/tout-sur.css?v=1">
@@ -1638,6 +1639,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boussole-rues.js?v=1" defer></script>
 <script src="assets/js/heritage-droit-pouvoir.js?v=1" defer></script>
 <script src="assets/js/heritage-brevets-annuaires.js?v=1" defer></script>
+<script src="assets/js/heritage-pays-memoire.js?v=1" defer></script>
 <script src="assets/js/heritage-tout-sur.js?v=2" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
