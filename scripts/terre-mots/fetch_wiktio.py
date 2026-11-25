@@ -55,7 +55,8 @@ def clean(s):
     s = re.sub(r'\{\{[^{}]*\}\}', '', s); s = re.sub(r'\{\{[^{}]*\}\}', '', s)
     s = re.sub(r'\[\[(?:[^|\]]*\|)?([^\]]+)\]\]', r'\1', s)
     s = re.sub(r"'''?", '', s); s = re.sub(r'<[^>]+>', '', s)
-    s = re.sub(r'\(\s*[,;]?\s*\)', '', s); s = re.sub(r'\s+([,.;:)])', r'\1', s); s = re.sub(r'([,;])\s*([,.;])', r'\2', s); s = re.sub(r'\(\s+', '(', s)
+    s = re.sub(r"\(\s*[,;'’]?\s*\)", '', s); s = re.sub(r'\s+([,.;:)])', r'\1', s); s = re.sub(r'([,;])\s*([,.;])', r'\2', s); s = re.sub(r'\(\s+', '(', s)
+    s = re.sub(r'^[&\s]+', '', s)
     return re.sub(r'\s+', ' ', s).strip(' :;,')
 
 def definition(text, key):
@@ -69,7 +70,7 @@ def definition(text, key):
         if re.match(r'#[^*:#]', line):
             raw = line[1:]
             d = clean(raw)
-            if len(d) < 4: continue
+            if len(d) < 4 or re.fullmatch(r'\([^)]*\)\.?', d): continue  # seulement une étiquette « (Bourgogne). » : pas une définition
             tpl = ' '.join(re.findall(r'\{\{([^}]+)\}\}', raw)).lower()
             if first is None: first = (pos, d)
             if best is None and key in tpl: best = (pos, d)
