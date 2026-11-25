@@ -145,7 +145,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             ['monument', 'faune', 'doleances', 'parler'].forEach(id => assert.ok(parts.some(x => x.id === id && !x.hidden), id));
             parts.filter(x => !x.hidden).forEach(x => { assert.ok(x.txt.trim().length > 20 && x.src, x.id); });
             assert.ok(!parts.some(x => x.id === 'films' && !x.hidden && /\d+ films/.test(x.txt)), 'Saint-Flour : pas de film (hors ligne)');
-            if (process.env.PM_SHOTS) { await p.$eval('.h-village [data-pm-host]', n => n.scrollIntoView()); await sleep(500); await p.screenshot({path: path.join(process.env.PM_SHOTS, 'village.png')}); }
+            if (process.env.PM_SHOTS) { for (const id of ['faune', 'monument', 'parler', 'doleances']) await (await p.$(`.h-village [data-pm-part="${id}"]`)).screenshot({path: path.join(process.env.PM_SHOTS, `village-${id}.png`)}); }
         });
         await t('Réglages → 🏡 Pays et mémoire : éteindre « monument » le retire ; À propos ; registres', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'pays_memoire'; A.setModule('maintenance'); });

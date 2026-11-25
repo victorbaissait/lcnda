@@ -130,7 +130,7 @@
     const emptyLine = (t, icon = 'ℹ️') => (A().emptyState ? A().emptyState({text: t, icon, size: 'small'}) : `<p class="muted">${esc(t)}</p>`);
     const wait = t => (UI().spinner ? UI().spinner(t) : `<p class="muted">${esc(t)}</p>`);
     const fmtKm = d => (d < 1 ? T('moins d’1 km') : T('{n} km', {n: String(Math.round(d))}));
-    const more = (n, body) => `<details class="pm-more"><summary>${esc(T('▸ plus ({n})', {n}))}</summary>${body}</details>`;
+    const more = (n, body) => `<details class="pm-more"><summary>${esc(T('plus ({n})', {n}))}</summary>${body}</details>`;
     const he = P => (P.gender === 'female' ? T('Elle') : P.gender === 'male' ? T('Il') : esc(P.first || T('Cette personne')));
     const listJoin = a => (a.length > 1 ? a.slice(0, -1).join(', ') + ' ' + T('et') + ' ' + a[a.length - 1] : a[0] || '');
 

@@ -103,12 +103,13 @@ function pm_names_in(string $name, string $text): bool
 function pm_commons(string $name): array
 {
     $cat = str_replace(' ', '_', $name);
-    $out = [];
+    $out = []; $ok = false; $fail = null;
     // 1. le titre dit la commune ; 2. les mêmes, marqués « domaine public » (P6216 = Q19652) : les vieux films passent devant ; 3. les catégories
     foreach ([['commons-search.json', 'filetype:video intitle:"' . $name . '"'], ['commons-pd.json', 'filetype:video intitle:"' . $name . '" haswbstatement:P6216=Q19652'], ['commons-cat.json', 'filetype:video incategory:"Videos_of_' . $cat . '"|"Films_of_' . $cat . '"']] as [$step, $q]) {
         $u = 'https://commons.wikimedia.org/w/api.php?' . http_build_query(['action' => 'query', 'format' => 'json', 'generator' => 'search', 'gsrnamespace' => 6, 'gsrlimit' => 40, 'gsrsearch' => $q,
             'prop' => 'imageinfo', 'iiprop' => 'url|extmetadata|mediatype', 'iiurlwidth' => 320, 'iiextmetadatafilter' => 'DateTimeOriginal|LicenseShortName|Artist|ImageDescription|ObjectName']);
-        $j = pm_json($step, $u);
+        try { $j = pm_json($step, $u); } catch (Throwable $e) { $fail = $e; continue; }
+        $ok = true;
         foreach (($j['query']['pages'] ?? []) as $p) {
             $ii = $p['imageinfo'][0] ?? []; $m = $ii['extmetadata'] ?? [];
             $g = static fn(string $k): string => pm_strip((string) ($m[$k]['value'] ?? ''));
@@ -123,6 +124,7 @@ function pm_commons(string $name): array
                 'page' => (string) ($ii['descriptionurl'] ?? ''), 'video' => (string) ($ii['url'] ?? ''), 'thumb' => (string) ($ii['thumburl'] ?? ''), 'desc' => mb_substr($g('ImageDescription'), 0, 240)];
         }
     }
+    if (!$ok && $fail) { throw $fail; } // une recherche sur trois suffit
     return array_values($out);
 }
 

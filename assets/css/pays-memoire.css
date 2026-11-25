@@ -1,6 +1,14 @@
 /* 🏡 Pays et mémoire (assets/js/heritage-pays-memoire.js) — reprend .hist-row (heritage-histoire), .maintenance-panel / .cplus-panel,
  * .cplus-strip / .cplus-img / .cplus-src (commune-plus.css) ; clair et sombre : couleurs prises du texte (currentColor) */
-.pm-place{display:contents}
+.pm-place{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1rem;margin:1rem 0}
+.pm-place:empty{display:none}
+.pm-place .pm-panel[data-pm-part="films"],.pm-place .pm-panel[data-pm-part="monument"]{grid-column:1/-1}
+.pm-part .cplus-strip{display:flex;gap:.8rem;overflow-x:auto;padding:.2rem .1rem .6rem;scroll-snap-type:x proximity}
+.pm-part .cplus-img{flex:0 0 220px;margin:0;scroll-snap-align:start;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.pm-part .cplus-img img{display:block;width:100%;height:150px;object-fit:cover;background:color-mix(in srgb,currentColor 8%,transparent)}
+.pm-part .cplus-img figcaption{display:flex;flex-direction:column;gap:.2rem;padding:.5rem .6rem .6rem;font-size:.9em}
+.pm-part .cplus-img figcaption small{opacity:.8;overflow-wrap:anywhere}
+.pm-part .cplus-src{margin:.6rem 0 0;font-size:.82em;opacity:.78}
 .pm-part > p:first-child{margin-top:0}
 .pm-lead{margin:0 0 .3rem;font-weight:600}
 .pm-more{margin:.35rem 0}
@@ -24,5 +32,6 @@
 .pm-thumb{display:block;max-width:180px;max-height:130px;margin:.3rem 0;border-radius:6px;object-fit:cover}
 .pm-hist{display:contents}
 .pm-mpf{margin:.4rem 0 0}
-@media (max-width:640px){.pm-film{flex-basis:200px}.pm-audio{max-width:100%}}
+.pm-part .cplus-img.is-noimg > a:first-child{display:none}
+@media (max-width:640px){.pm-place{grid-template-columns:1fr}.pm-film{flex-basis:200px}.pm-audio{max-width:100%}}
 @media print{.pm-audio,.pm-video,.pm-film-play span{display:none}}

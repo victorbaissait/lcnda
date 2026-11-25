@@ -28,9 +28,10 @@ def http(url, data=None, headers=None, timeout=300, tries=6):
         except urllib.error.HTTPError as e:
             last = e
             if e.code in (400, 404): raise RuntimeError(f'{url} : {e} {e.read()[:300]!r}')
-            time.sleep(60 if e.code == 429 else 10 * (i + 1))
+            print(f'  … {host} {e.code}, essai {i + 1}', flush=True)
+            time.sleep(30 if e.code == 429 else 10 * (i + 1))
         except Exception as e:
-            last = e; time.sleep(20)
+            last = e; print(f'  … {host} {e!r}, essai {i + 1}', flush=True); time.sleep(20)
     raise RuntimeError(f'{url} : {last}')
 
 
