@@ -85,21 +85,20 @@ class Snow(unittest.TestCase):
         os.makedirs(cls.fx)
         sea = lambda b: b == 2
         for y in (1990, 1991):
-            for m in range(1, 13):
-                ts = days_of(y, m)
-                lab = f'{y}-{m:02d}'
-                # neige au sol à 0 h : 10 cm + n° du jour ; neige tombée (valeur de 0 h = la veille) : 1 mm d'eau le 15 janvier 1990 (→ rangé le 14)
-                nc_grid(os.path.join(cls.fx, f'plus-neige-neige-{lab}.nc'), ts, {
-                    'sde': lambda t, a, b: None if sea(b) else (0.10 + t.day / 100 if t.month == 1 else 0.0),
-                    'sf': lambda t, a, b: None if sea(b) else (0.001 if (t.month, t.day) == (1, 15) else (0.002 if (t.month, t.day) == (1, 1) else 0.0))})
-                for name, base in (('tmin', 270.15), ('tmax', 280.15)):
-                    if (y, m, name) == (1990, 3, 'tmin'):  # « trop gros » : recoupé en deux moitiés
-                        open(os.path.join(cls.fx, f'plus-neige-tmin-{lab}.nc.trop-gros'), 'w').close()
-                        for d0, d1 in ((1, 15), (16, 31)):
-                            nc_grid(os.path.join(cls.fx, f'plus-neige-tmin-{lab}-{d0:02d}-{d1:02d}.nc'), [datetime.datetime(y, 3, d) for d in range(d0, d1 + 1)],
-                                    {'t2m': lambda t, a, b, base=base: None if sea(b) else base - 5})
-                        continue
-                    nc_grid(os.path.join(cls.fx, f'plus-neige-{name}-{lab}.nc'), ts, {'t2m': lambda t, a, b, base=base: None if sea(b) else base + a})
+            ts = [datetime.datetime(y, 1, 1) + datetime.timedelta(days=k) for k in range(F.days_in_year(y))]
+            # une année par demande. Neige au sol à 0 h : 10 cm + n° du jour en janvier ; neige tombée (valeur de 0 h = la veille) :
+            # 1 mm d'eau le 15 janvier (→ rangé le 14), 2 mm le 1er janvier (→ le 31 décembre d'avant)
+            nc_grid(os.path.join(cls.fx, f'plus-neige-neige-{y}.nc'), ts, {
+                'sde': lambda t, a, b: None if sea(b) else (0.10 + t.day / 100 if t.month == 1 else 0.0),
+                'sf': lambda t, a, b: None if sea(b) else (0.001 if (t.month, t.day) == (1, 15) else (0.002 if (t.month, t.day) == (1, 1) else 0.0))})
+            for name, base in (('tmin', 270.15), ('tmax', 280.15)):
+                if (y, name) == (1990, 'tmin'):  # « trop gros » : recoupé en deux (janvier–juin, juillet–décembre)
+                    open(os.path.join(cls.fx, f'plus-neige-tmin-{y}.nc.trop-gros'), 'w').close()
+                    for m0, m1 in ((1, 6), (7, 12)):
+                        nc_grid(os.path.join(cls.fx, f'plus-neige-tmin-{y}-m{m0:02d}-{m1:02d}.nc'), [t for t in ts if m0 <= t.month <= m1],
+                                {'t2m': lambda t, a, b, base=base: None if sea(b) else (base - 5 if t.month == 3 else base + a)})
+                    continue
+                nc_grid(os.path.join(cls.fx, f'plus-neige-{name}-{y}.nc'), ts, {'t2m': lambda t, a, b, base=base: None if sea(b) else base + a})
         cls.out = os.path.join(cls.tmp, 'out')
 
         class Cut(Exception):
@@ -153,8 +152,8 @@ class Snow(unittest.TestCase):
 
     def test_resume(self):
         self.assertEqual(self.asked_before, 4, 'coupé à la 5e demande')
-        self.assertNotIn('plus-neige-neige-1990-01.nc', self.asked_after, 'déjà fait avant la coupure : pas redemandé')
-        self.assertIn('plus-neige-tmin-1990-03-01-15.nc', self.asked_after)
+        self.assertEqual(self.asked_after[0], 'plus-neige-tmax-1990.nc', 'ce qui était fini avant la coupure n’est pas redemandé')
+        self.assertEqual(self.asked_after, ['plus-neige-tmax-1990.nc', 'plus-neige-neige-1991.nc', 'plus-neige-tmin-1991.nc', 'plus-neige-tmax-1991.nc'])
 
     def test_read_by_php(self):
         app = os.path.join(self.tmp, 'app')
@@ -210,12 +209,10 @@ class Others(unittest.TestCase):
 
     def test_glofas_big_rivers_only(self):
         """GloFAS : seuls les carreaux des grandes rivières restent (débit moyen ≥ 10 m³/s), seuils de crue calculés"""
-        for m in range(1, 13):
-            ts = days_of(1980, m)
-            nc_grid(os.path.join(self.fx, f'plus-rivieres-debit-1980-{m:02d}.nc'), ts,
-                    {'dis24': lambda t, a, b: None if b == 2 else (300.0 * (5 if (t.month, t.day) == (2, 10) else 1) if (a, b) == (0, 0) else 4.0)})
-        ts = days_of(1981, 1)
-        nc_grid(os.path.join(self.fx, 'plus-rivieres-debit-1981-01.nc'), ts, {'dis24': lambda t, a, b: None if b == 2 else (300.0 if (a, b) == (0, 0) else 4.0)})
+        for y in (1980, 1981):
+            ts = [datetime.datetime(y, 1, 1) + datetime.timedelta(days=k) for k in range(F.days_in_year(y))]
+            nc_grid(os.path.join(self.fx, f'plus-rivieres-debit-{y}.nc'), ts,
+                    {'dis24': lambda t, a, b: None if b == 2 else (300.0 * (5 if (t.year, t.month, t.day) == (1980, 2, 10) else 1) if (a, b) == (0, 0) else 4.0)})
         P.GridBuilder('plus-rivieres', self.out, (1980, 1980), P.Offline(self.fx), log=lambda *a: None).run()
         db = sqlite3.connect(os.path.join(self.out, 'meteo-plus-rivieres.sqlite'))
         self.assertEqual(db.execute('SELECT COUNT(*) FROM grid').fetchone()[0], 1)

@@ -621,6 +621,7 @@ class GridBuilder:
                 db.execute('INSERT OR REPLACE INTO riviere(grid_id, moyenne, p10, p90, p99) VALUES(?,?,?,?,?)', (gid, round(sum(qs) / len(qs), 3), pc(.1), pc(.9), pc(.99)))
         db.commit()
         db.close()
+        self.w.db.close()
         return finish_pack(path, self.out, kind, self.say)
 
 
@@ -830,6 +831,7 @@ def build_insitu(out, years, fetcher, test=False, log=say):
             db.execute('INSERT INTO daily(station_id, annee, blob) VALUES(?,?,?)', (row[0], y, blob))
     db.commit()
     db.close()
+    w.db.close()
     return finish_pack(path, out, kind, log)
 
 

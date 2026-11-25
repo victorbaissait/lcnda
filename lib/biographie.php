@@ -110,9 +110,21 @@ function bio_cap(string $s): string
     return $s === '' ? '' : mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1);
 }
 
+/**
+ * 🔒 Les fiches qu'un export ne montre pas (vivants, fiches confidentielles, mode confidentialité) : le temps d'une requête, la
+ * biographie écrite pour un autre fiche ne les nomme pas (parents, conjoints, enfants, témoins). null = ne rien changer.
+ */
+function bio_hidden_persons(?array $set = null): array
+{
+    static $hidden = [];
+    if ($set !== null) { $hidden = $set; }
+    return $hidden;
+}
+
 /** Tout ce que la fiche sait, rangé pour écrire */
 function bio_facts(PDO $pdo, int $id): array
 {
+    $hiddenIds = bio_hidden_persons();
     $s = $pdo->prepare('SELECT * FROM persons WHERE id=?'); $s->execute([$id]);
     $p = $s->fetch(PDO::FETCH_ASSOC);
     if (!$p) { throw new RuntimeException('Fiche introuvable.'); }
@@ -125,7 +137,7 @@ function bio_facts(PDO $pdo, int $id): array
     $s = $pdo->prepare('SELECT f.id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? ORDER BY fc.id'); $s->execute([$id]);
     $parentFams = $s->fetchAll(PDO::FETCH_ASSOC);
     $pp = $pdo->prepare('SELECT id, first_name, last_name, gender, occupation FROM persons WHERE id=?');
-    $person = static function (?int $pid) use ($pp): ?array { if (!$pid) { return null; } $pp->execute([$pid]); return $pp->fetch(PDO::FETCH_ASSOC) ?: null; };
+    $person = static function (?int $pid) use ($pp, $hiddenIds): ?array { if (!$pid || isset($hiddenIds[$pid])) { return null; } $pp->execute([$pid]); return $pp->fetch(PDO::FETCH_ASSOC) ?: null; };
     $parents = [];
     if ($parentFams) { foreach ([(int) $parentFams[0]['partner1_id'], (int) $parentFams[0]['partner2_id']] as $x) { if ($q = $person($x)) { $parents[] = $q; } } }
     $siblings = 0;
@@ -139,7 +151,7 @@ function bio_facts(PDO $pdo, int $id): array
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $f) {
         $other = (int) $f['partner1_id'] === $id ? (int) $f['partner2_id'] : (int) $f['partner1_id'];
         $fe->execute([(int) $f['id']]); $kids->execute([(int) $f['id']]);
-        $unions[] = ['id' => (int) $f['id'], 'spouse' => $person($other), 'events' => $fe->fetchAll(PDO::FETCH_ASSOC), 'children' => $kids->fetchAll(PDO::FETCH_ASSOC)];
+        $unions[] = ['id' => (int) $f['id'], 'spouse' => $person($other), 'events' => $fe->fetchAll(PDO::FETCH_ASSOC), 'children' => array_values(array_filter($kids->fetchAll(PDO::FETCH_ASSOC), static fn($k) => !isset($hiddenIds[(int) $k['id']])))];
     }
     // témoins, parrains, marraines
     $allIds = array_merge(array_column($events, 'id'), ...array_map(static fn($u) => array_column($u['events'], 'id'), $unions ?: [['events' => []]]));
@@ -149,7 +161,7 @@ function bio_facts(PDO $pdo, int $id): array
         try {
             $w = $pdo->prepare("SELECT w.event_id, w.note, p.id, p.first_name, p.last_name, p.gender FROM event_witnesses w JOIN persons p ON p.id=w.person_id WHERE w.event_id IN ($marks) ORDER BY w.position, w.id");
             $w->execute($allIds);
-            foreach ($w->fetchAll(PDO::FETCH_ASSOC) as $r) { $witnesses[(int) $r['event_id']][] = $r; }
+            foreach ($w->fetchAll(PDO::FETCH_ASSOC) as $r) { if (!isset($hiddenIds[(int) $r['id']])) { $witnesses[(int) $r['event_id']][] = $r; } }
         } catch (Throwable $_) {}
     }
     // recensements

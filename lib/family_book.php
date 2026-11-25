@@ -51,6 +51,11 @@ function family_book_model(PDO $pdo, array $o, array $q): array
     $people = array_values(array_filter($pdo->query(person_select() . " ORDER BY COALESCE(birth_year,9999),p.last_name COLLATE NOCASE,p.first_name COLLATE NOCASE,p.id")->fetchAll(), 'export_person_allowed'));
     $scope = in_array($q['scope'] ?? 'all', ['all', 'ancestors', 'descendants', 'both'], true) ? (string) ($q['scope'] ?? 'all') : 'all';
     $allowed = $people; // les parents, conjoints et enfants hors de la branche sont nommés quand même
+    // 🔒 la biographie (lib/biographie.php) relit la famille dans la base : elle ne nomme pas les fiches que l'export retire (vivants, confidentielles)
+    if (function_exists('bio_hidden_persons')) {
+        $keep = array_fill_keys(array_map(static fn($p) => (int) $p['id'], $allowed), true);
+        bio_hidden_persons(array_fill_keys(array_values(array_filter(array_map('intval', $pdo->query('SELECT id FROM persons')->fetchAll(PDO::FETCH_COLUMN)), static fn($id) => !isset($keep[$id]))), true));
+    }
     [$people, $numbers, $branchTitle] = family_book_branch($pdo, $people, safe_int($q['root_id'] ?? 0), $scope, max(1, min(30, safe_int($q['generations'] ?? 8) ?: 8)));
     $visible = family_book_person_set($people);
     $related = family_book_person_set($allowed);
