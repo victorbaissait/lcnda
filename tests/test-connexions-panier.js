@@ -187,6 +187,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                 const li = p.locator('.cx-take .cx-rlist li', {hasText: text}).first(); await li.locator('input[type=checkbox]').check(); };
             await pick('person', 'DURAND', 'DURAND'); await pick('place', 'Tulle', 'Tulle'); await pick('event', 'Naissance', 'Naissance');
             assert.match(await p.textContent('.cx-take [data-cx-n]'), /3 cochées/);
+            assert.match(await p.textContent('.cx-take [data-cx-prev]'), /3 éléments choisis/); // plusieurs cases : le résumé à droite
             await p.click('.cx-take [data-cx-toput]'); await p.waitForSelector('.cx-put [data-cx-here="1"]');
             const here = p.locator('.cx-put [data-cx-here="1"]', {hasText: 'note'}); await here.click();
             await pollPage(async () => { const d = await window.LCNDA_APP.api('person', {id: 1}); return (d.notes || []).some(n => /DURAND/.test(n.body) && /Tulle/.test(n.body)); }, null, {timeout: 15000});
@@ -320,10 +321,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(parsed.preset.crit.some(c => c.key === 'commune_deces' && /Tulle/i.test(c.value)));
             await p.evaluate(() => window.LCNDA_EXT.connexions.openTake()); await p.waitForSelector('.cx-take');
             await p.click('.cx-take [data-cx-tab="lists"]'); await p.fill('.cx-take [data-cx-ask]', 'les décès à Tulle du 1er au 30 juin 1980'); await p.click('.cx-take [data-cx-askgo]');
-            await p.waitForSelector('.ld-page[data-ld-page="insee_deces"] [data-cx-ltake]', {timeout: 20000});
-            await p.waitForFunction(() => /2/.test(document.querySelector('[data-ld-count]')?.textContent || ''), null, {timeout: 15000});
-            assert.match(await p.textContent('.ld-chips'), /du 1 juin 1980 au 30 juin 1980|du 1er juin 1980/);
-            await p.click('[data-cx-ltake]');
+            // la liste s'ouvre DANS la fenêtre (maquette docs/design/prendre-depuis.html, partie 4) : critères, lignes à cocher, tout le tableau
+            await p.waitForSelector('.cx-take [data-cx-lset]', {timeout: 20000});
+            await p.waitForFunction(() => /\b2 lignes\b/.test(document.querySelector('.cx-take [data-cx-lcount]')?.textContent || ''), null, {timeout: 15000});
+            assert.match(await p.textContent('.cx-take .cx-lcrit'), /du 1 juin 1980 au 30 juin 1980|du 1er juin 1980/);
+            assert.ok(await p.evaluate(() => !!document.querySelector('.cx-take[open]')), 'la fenêtre reste ouverte');
+            await p.click('.cx-take [data-cx-lset]'); await p.waitForFunction(() => /1 cochée/.test(document.querySelector('.cx-take [data-cx-n]')?.textContent || ''));
+            await p.click('.cx-take [data-cx-takehere]');
             await pollPage(async pr => (await window.LCNDA_APP.api('atelier_project', {id: pr})).items.some(x => /Décès INSEE/.test(x.title)), proj, {timeout: 15000});
             const it = (await api('atelier_project', {id: proj})).items.find(x => /Décès INSEE/.test(x.title));
             assert.match(it.data.text, /MAZAUD/); assert.match(it.data.text, /DURAND/); assert.ok(!/LACOMBE/.test(it.data.text), 'le 2 juillet est hors période'); assert.ok(!/BRIVE/.test(it.data.text.split('Source')[0]), 'une autre commune');

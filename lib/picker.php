@@ -131,7 +131,8 @@ function picker_search(PDO $pdo, array $get): array
         'portraits' => (string) ($get['portraits'] ?? '') === '1', 'recent' => (string) ($get['recent'] ?? '') === '1',
         'recent_ids' => array_slice(array_map('intval', explode(',', (string) ($get['recent_ids'] ?? ''))), 0, 60),
         'media_flag' => in_array($get['media_flag'] ?? '', ['notr', 'tr', 'sig'], true) ? $get['media_flag'] : '',
-        'with_text' => (string) ($get['with_text'] ?? '') === '1']; // avec la transcription (relecture d'un média choisi)
+        'with_text' => (string) ($get['with_text'] ?? '') === '1', // avec la transcription (relecture d'un média choisi)
+        'year_from' => (int) ($get['year_from'] ?? 0), 'year_to' => (int) ($get['year_to'] ?? 0)]; // 📥 « Prendre depuis… » : une période (événements)
     // 🎨 fiches des catalogues d'artistes : sortes (« release,master ») et artiste
     $opts['art_kind'] = (string) preg_replace('/[^a-z0-9_,]/', '', strtolower(scalar_text($get['art_kind'] ?? '', 'art_kind')));
     $opts['art_person'] = max(0, (int) ($get['art_person'] ?? 0));
@@ -281,6 +282,7 @@ function picker_events(PDO $pdo, string $q, int $offset, int $limit, array $opts
     $where = picker_text_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params);
     // filter.person_id : les événements d'une personne et de ses couples (⏳ Une journée dans la vie de…)
     if (!empty($opts['person_id'])) { $pid = (int) $opts['person_id']; $where = "({$where}) AND (e.person_id={$pid} OR f.partner1_id={$pid} OR f.partner2_id={$pid})"; }
+    if (!empty($opts['year_from']) && !empty($opts['year_to'])) { $where = "({$where}) AND e.year BETWEEN " . (int) $opts['year_from'] . ' AND ' . (int) $opts['year_to']; } // « Treignac 1780-1800 »
     $src = picker_table_exists($pdo, 'source_links') ? "(SELECT count(*) FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id)" : '0'; // 📥 « Prendre depuis… » : nombre de sources
     [$total, $rows] = picker_page($pdo, "SELECT e.id, e.title, e.date_text, e.year, t.label, t.gedcom_tag AS tag, pl.name AS place, e.scope, e.person_id, {$who} AS who, {$couple} AS couple, {$src} AS n_src",
         "FROM events e LEFT JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id WHERE {$where}",

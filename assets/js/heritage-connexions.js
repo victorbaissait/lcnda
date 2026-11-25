@@ -626,89 +626,357 @@
         return deliver(t, items, {here: true, fromBasket: true});
     }
 
-    /* ═════════════ 📥 « Prendre depuis… » ═════════════ */
-    const TABS = [['basket', '🧺', 'Panier'], ['recent', '🕘', 'Récents'], ['person', '👤', 'Fiches'], ['event', '📅', 'Événements'], ['act', '📜', 'Actes'], ['source', '🔖', 'Sources'], ['media', '🖼', 'Médias'], ['note', '📝', 'Notes'], ['place', '📍', 'Lieux'], ['data', '🧰', 'Données'], ['lists', '📋', 'Listes'], ['outside', '📂', 'De l’extérieur']];
+    /* ═════════════ 📥 « Prendre depuis… » (maquette validée docs/design/prendre-depuis.html) ═════════════
+     * Une colonne : en-tête (où ça va), corps (rubriques à gauche · recherche + lignes · poignée · aperçu), pied (combien, ce que fait
+     * « Prendre »). Seule la liste défile. Clic sur une ligne = la montrer à droite ; la case, un double-clic ou Espace = la cocher. */
+    const RAIL = [['Mis de côté', [['basket', '🧺', 'Panier'], ['recent', '🕘', 'Récents']]],
+        ['Dans ma base', [['person', '👤', 'Fiches'], ['event', '📅', 'Événements'], ['act', '📜', 'Actes'], ['source', '🔖', 'Sources'], ['media', '🖼', 'Médias'], ['note', '📝', 'Notes'], ['place', '📍', 'Lieux']]],
+        ['Ailleurs', [['data', '🧰', 'Données'], ['lists', '📋', 'Listes'], ['outside', '📂', 'De l’extérieur']]]];
+    const TABS = RAIL.flatMap(([, a]) => a);
+    const HINT = {basket: 'Ce que tu as mis de côté, d’un écran à l’autre.', recent: 'Ce que tu as pris ces derniers jours.', person: 'Un nom, un prénom, une année…', event: 'Un nom, une commune, une année ou une période (1780-1800)…',
+        act: 'Une sorte d’acte, un nom, une commune, une cote…', source: 'Un titre, un auteur, une cote, un service d’archives…', media: 'Un titre, un nom de fichier, une cote, une personne…', note: 'Un mot de la note…', place: 'Une commune, un hameau, un département…'};
     const PS = ext.pickSources = ext.pickSources || [];
+    const SPLIT = 'genealogie-cx-take-split';
     let takeState = null;
     /** la destination « ici » (l'écran ouvert qui sait recevoir) */
     const hereDest = () => DT.find(t => t.id !== 'basket' && (!t.enabled || t.enabled() !== false) && hereOf(t)) || null;
-    async function openTake({tab = '', dest = null} = {}) {
+    /** « Ici : l'enquête « X » » → « l'enquête « X » » (la destination dite une fois, sans « Ici : ») */
+    const destName = st => String(st.ctx?.label || (st.target ? T(st.target.label) : '')).replace(new RegExp(`^\\s*${T('Ici')}\\s*:\\s*`, 'i'), '').trim();
+    const cleanIt = it => { if (!it) return it; const {_v, ...r} = it; return r; };
+    const narrow = () => window.matchMedia?.('(max-width: 980px)').matches;
+    async function openTake({tab = '', dest = null, ctx = null, restore = null} = {}) {
         if (!enabled()) return;
         if (kiosk()) return toast(T('Mode consultation : rien ne peut être modifié.'));
+        if (takeState?.dlg?.isConnected) takeState.dlg.close();
         const target = dest || hereDest();
-        const st = takeState = {tab: tab || (count ? 'basket' : 'person'), q: '', picked: new Map(), results: [], target, ctx: target ? hereOf(target) : null, preview: null};
-        const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-take';
-        const tabs = TABS.filter(([k]) => !target?.kinds || ['basket', 'recent', 'data', 'lists', 'outside'].includes(k) || target.kinds.includes(k));
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">📥 ${esc(T('PRENDRE DEPUIS…'))}</span><h2>${esc(target ? st.ctx?.label || T(target.label) : T('Prendre depuis…'))}</h2></div><button type="button" class="icon-button" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></div>
-            <div class="cx-tabs" role="tablist">${tabs.map(([k, i, l]) => `<button type="button" role="tab" data-cx-tab="${k}">${i} ${esc(T(l))}${k === 'basket' && count ? ` <small>${nf(count)}</small>` : ''}</button>`).join('')}</div>
-            <div class="cx-take-body"><div class="cx-left"><input type="search" class="cx-q" data-cx-q placeholder="${esc(T('🔍 Chercher…'))}" aria-label="${esc(T('Chercher'))}"><div class="cx-res" data-cx-res></div></div><div class="cx-prev" data-cx-prev></div></div>
-            <div class="modal-actions cx-take-foot"><span data-cx-n class="cx-n"></span><span class="spacer"></span>
-                <button type="button" class="button secondary" data-cx-tobasket>🧺 ${esc(T('Au panier'))}</button>
-                <button type="button" class="button secondary" data-cx-toput>📍 ${esc(T('Mettre dans…'))}</button>
-                ${target ? `<button type="button" class="button" data-cx-takehere>📥 ${esc(T('Prendre'))} <span data-cx-n2></span></button>` : ''}</div></form>`;
+        const st = takeState = {tab: restore?.tab || tab || (count ? 'basket' : 'person'), q: restore?.q || '', picked: new Map(restore?.picked || []), results: [], target, ctx: ctx || (target ? hereOf(target) : null),
+            preview: null, filters: new Set(), rank: 'date', mview: 'list', list: restore?.list || null, used: new Map(), back: restore?.back || null};
+        const dn = target ? destName(st) : '';
+        const dlg = document.createElement('dialog'); dlg.className = 'modal cx-modal cx-take'; dlg.setAttribute('aria-labelledby', 'cx-take-h');
+        const split = Number(readJ(SPLIT, 0)) || 0; if (split) dlg.style.setProperty('--cx-pw', `${split}px`);
+        dlg.innerHTML = `<form method="dialog" class="cx-tk">
+            <header class="cx-tk-head"><div class="cx-tk-ht"><span class="cx-eyebrow">📥 ${esc(T('Prendre depuis…'))}</span>
+                <h2 id="cx-take-h">${target ? `${esc(T('Ajouter à'))} <span class="cx-destpill"><span aria-hidden="true">${esc(target.icon || '📥')}</span> ${esc(dn)}</span>` : esc(T('Prendre depuis…'))}</h2>
+                <p class="cx-tk-say">${esc(target ? T('Coche ce que tu veux prendre, puis « 📥 Prendre ». Clique une ligne pour la voir en grand à droite.') : T('Coche ce que tu veux prendre, puis garde-le dans le panier ou mets-le ailleurs. Clique une ligne pour la voir en grand.'))}</p></div>
+                <button type="button" class="cx-x" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></header>
+            <div class="cx-quoi"><button type="button" data-cx-quoi aria-expanded="false" aria-controls="cx-rail"><span><span class="cx-quoi-lab">${esc(T('Quoi :'))}</span> <b data-cx-quoi-t></b></span><span aria-hidden="true">▾</span></button></div>
+            <div class="cx-tk-body">
+                <nav class="cx-rail" id="cx-rail" role="tablist" aria-orientation="vertical" aria-label="${esc(T('Où chercher'))}">${RAIL.map(([g, a]) => `<h5>${esc(T(g))}</h5>${a.map(([k, i, l]) => `<button type="button" role="tab" data-cx-tab="${k}" aria-selected="false"><span aria-hidden="true">${i}</span> <span class="cx-rl">${esc(T(l))}</span>${k === 'basket' && count ? `<span class="cx-rn is-b">${nf(count)}</span>` : ''}</button>`).join('')}`).join('')}</nav>
+                <section class="cx-mid" aria-live="polite">
+                    <div class="cx-tools" data-cx-tools><div class="cx-srch" data-cx-srch><input type="search" class="cx-q" data-cx-q aria-label="${esc(T('Chercher'))}" autocomplete="off"></div><div class="cx-chips" data-cx-chips></div></div>
+                    <div class="cx-res" data-cx-res tabindex="-1"></div>
+                </section>
+                <div class="cx-gut" data-cx-gut role="separator" tabindex="0" aria-orientation="vertical" aria-label="${esc(T('Largeur de l’aperçu (← →)'))}"></div>
+                <aside class="cx-prev" data-cx-prev aria-label="${esc(T('Aperçu'))}"></aside>
+            </div>
+            <footer class="cx-tk-foot"><div class="cx-cnt"><b data-cx-n class="cx-n"></b><span class="cx-what">${esc(target ? T('Prendre = les ajouter à {d}', {d: dn}) : T('Garder dans le panier = les retrouver plus tard, depuis n’importe quel écran'))}</span></div>
+                <div class="cx-acts">
+                    <button type="button" class="cx-b is-ter" data-cx-toput>${esc(T('Mettre ailleurs…'))}</button>
+                    <button type="button" class="cx-b ${target ? 'is-sec' : 'is-pri'}" data-cx-tobasket>🧺 ${esc(T('Garder dans le panier'))}</button>
+                    ${target ? `<button type="button" class="cx-b is-pri" data-cx-takehere><span>📥 ${esc(T('Prendre'))} <span data-cx-n2></span></span><small>${esc(T('dans {d}', {d: dn}))}</small></button>` : ''}</div></footer></form>`;
         document.body.appendChild(dlg); dlg.addEventListener('close', () => { dlg.remove(); if (takeState === st) takeState = null; }); dlg.showModal();
         st.dlg = dlg;
         dlg.querySelector('[data-cx-x]').addEventListener('click', () => dlg.close());
-        dlg.querySelectorAll('[data-cx-tab]').forEach(b => b.addEventListener('click', () => { st.tab = b.dataset.cxTab; st.q = ''; dlg.querySelector('[data-cx-q]').value = ''; drawTab(st); }));
-        let tm = 0; dlg.querySelector('[data-cx-q]').addEventListener('input', e => { clearTimeout(tm); tm = setTimeout(() => { st.q = e.target.value.trim(); drawTab(st); }, 220); });
-        dlg.querySelector('[data-cx-q]').addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
-        const picked = () => [...st.picked.values()];
-        dlg.querySelector('[data-cx-tobasket]').addEventListener('click', async () => { const p = picked(); if (!p.length) return toast(T('Coche d’abord ce que tu prends.')); dlg.close(); await take(p); });
-        dlg.querySelector('[data-cx-toput]').addEventListener('click', e => { const p = picked(); if (!p.length) return toast(T('Coche d’abord ce que tu prends.')); dlg.close(); putInto(p, {anchor: e.currentTarget, fromBasket: p.every(x => x.id && st.fromBasket?.has(x.id))}); });
-        dlg.querySelector('[data-cx-takehere]')?.addEventListener('click', async () => { const p = picked(); if (!p.length) return toast(T('Coche d’abord ce que tu prends.')); dlg.close(); await deliver(target, p, {here: true, fromBasket: p.some(x => x.id && st.fromBasket?.has(x.id)), original: p}); });
-        drawTab(st);
+        const rail = dlg.querySelector('.cx-rail');
+        rail.addEventListener('click', e => { const b = e.target.closest('[data-cx-tab]'); if (!b) return; goTab(st, b.dataset.cxTab); });
+        rail.addEventListener('keydown', e => { // ↑ ↓ entre les rubriques
+            if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return; e.preventDefault();
+            const bs = [...rail.querySelectorAll('[data-cx-tab]')], i = bs.indexOf(document.activeElement), n = bs[(i + (e.key === 'ArrowDown' ? 1 : -1) + bs.length) % bs.length]; n.focus(); goTab(st, n.dataset.cxTab);
+        });
+        dlg.querySelector('[data-cx-quoi]').addEventListener('click', e => { const on = !dlg.classList.contains('is-railopen'); dlg.classList.toggle('is-railopen', on); e.currentTarget.setAttribute('aria-expanded', String(on)); if (on) rail.querySelector('[aria-selected="true"]')?.focus(); });
+        let tm = 0; const q = dlg.querySelector('[data-cx-q]');
+        q.value = st.q;
+        q.addEventListener('input', e => { clearTimeout(tm); tm = setTimeout(() => { st.q = e.target.value.trim(); drawTab(st); }, 200); });
+        q.addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); if (e.key === 'ArrowDown') { e.preventDefault(); dlg.querySelector('[data-cx-res] .cx-rt')?.focus(); } });
+        bindGutter(st);
+        const picked = () => [...st.picked.values()].map(cleanIt);
+        const need = () => { const p = picked(); if (!p.length) toast(T('Coche d’abord ce que tu prends.')); return p; };
+        let busy = false; // un double-clic sur « Prendre » ne prend pas deux fois
+        dlg.querySelector('[data-cx-tobasket]').addEventListener('click', async () => { const p = need(); if (!p.length || busy) return; busy = true; dlg.close(); await take(p); });
+        dlg.querySelector('[data-cx-toput]').addEventListener('click', e => { const p = need(); if (!p.length || busy) return; busy = true; dlg.close(); putInto(p, {anchor: e.currentTarget, fromBasket: p.every(x => x.id && st.fromBasket?.has(x.id))}); });
+        dlg.querySelector('[data-cx-takehere]')?.addEventListener('click', async () => { const p = need(); if (!p.length || busy) return; busy = true; dlg.close(); await deliver(target, p, {here: true, ctx: st.ctx || null, fromBasket: p.some(x => x.id && st.fromBasket?.has(x.id)), original: p}); });
+        dlg.addEventListener('keydown', e => { if (e.key === 'Escape' && dlg.classList.contains('is-sheet')) { e.preventDefault(); closeSheet(st); } else if (e.key === 'Escape' && dlg.classList.contains('is-railopen')) { e.preventDefault(); dlg.classList.remove('is-railopen'); } });
+        paintCount(st); drawTab(st);
         return st;
     }
+    function goTab(st, k) {
+        if (st.tab !== k) { st.tab = k; st.q = ''; st.filters = new Set(); st.list = null; st.dlg.querySelector('[data-cx-q]').value = ''; }
+        st.dlg.classList.remove('is-railopen'); st.dlg.querySelector('[data-cx-quoi]')?.setAttribute('aria-expanded', 'false');
+        drawTab(st);
+    }
+    /** la poignée entre la liste et l'aperçu : se tire, ou ← → au clavier ; la largeur est retenue */
+    function bindGutter(st) {
+        const g = st.dlg.querySelector('[data-cx-gut]'), dlg = st.dlg;
+        const cur = () => st.dlg.querySelector('[data-cx-prev]').getBoundingClientRect().width || 340;
+        const set = w => { const max = Math.max(260, dlg.getBoundingClientRect().width - 560); w = Math.round(Math.min(max, Math.max(240, w))); dlg.style.setProperty('--cx-pw', `${w}px`); writeJ(SPLIT, w); g.setAttribute('aria-valuenow', String(w)); };
+        g.addEventListener('keydown', e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); set(cur() + (e.key === 'ArrowLeft' ? 32 : -32)); } });
+        g.addEventListener('pointerdown', e => {
+            e.preventDefault(); g.setPointerCapture?.(e.pointerId); const right = dlg.getBoundingClientRect().right;
+            const mv = ev => set(right - ev.clientX - 1), up = () => { g.removeEventListener('pointermove', mv); g.removeEventListener('pointerup', up); };
+            g.addEventListener('pointermove', mv); g.addEventListener('pointerup', up);
+        });
+    }
     const pickKey = it => `${it.kind}|${it.ref_id || 0}|${it.title}|${it.value || ''}|${it.id || ''}`;
-    function paintCount(st) { const n = st.picked.size; st.dlg.querySelector('[data-cx-n]').textContent = n ? T('{n} cochées', {n: nf(n)}) : ''; const n2 = st.dlg.querySelector('[data-cx-n2]'); if (n2) n2.textContent = n ? `(${nf(n)})` : ''; }
-    function resultsHtml(st, list) {
+    function paintCount(st) {
+        const n = st.picked.size, el = st.dlg.querySelector('[data-cx-n]');
+        el.textContent = n ? T(n > 1 ? '{n} cochées' : '{n} cochée', {n: nf(n)}) : T('Rien de coché');
+        const n2 = st.dlg.querySelector('[data-cx-n2]'); if (n2) n2.textContent = n ? `(${nf(n)})` : '';
+        st.dlg.querySelector('[data-cx-takehere]')?.toggleAttribute('aria-disabled', !n);
+        if (!st.preview && (n >= 2 || st.sum)) drawSummary(st); else if (st.sum && n < 2) { st.sum = false; previewItem(st, null); }
+    }
+    const togglePick = (st, it, on) => { const k = pickKey(it); if (on) st.picked.set(k, it); else st.picked.delete(k); };
+
+    /* ── une ligne : qui, quand, où, combien de sources, déjà utilisé ? ── */
+    const EV_ICON = {BIRT: '👶', CHR: '⛪', BAPM: '⛪', MARR: '💍', ENGA: '💍', MARC: '📜', DEAT: '✝', BURI: '⚰', CREM: '⚰', CENS: '🏠', RESI: '🏠', OCCU: '🛠', MILI: '🎖'};
+    const EV_TYPE = {BIRT: 'n', CHR: 'n', BAPM: 'n', MARR: 'm', ENGA: 'm', MARC: 'm', DIV: 'm', DEAT: 'd', BURI: 'd', CREM: 'd'};
+    const ACT_KIND = {naissance: 'Acte de naissance', bapteme: 'Acte de baptême', mariage: 'Acte de mariage', deces: 'Acte de décès', sepulture: 'Acte de sépulture', notarial: 'Acte notarié', notoriete: 'Acte de notoriété', recensement: 'Recensement', militaire: 'Registre militaire', lettre: 'Lettre', autre: 'Autre acte'};
+    const looksCode = s => /^[0-9a-f-]{16,}$/i.test(String(s || '').trim()) || /^(capture|screenshot|img|dsc|scan)[ _-]?\S*\.(png|jpe?g|pdf|tiff?)$/i.test(String(s || '').trim());
+    const shortDate = s => { const d = new Date(String(s || '').replace(' ', 'T')); return Number.isFinite(d.getTime()) ? d.toLocaleDateString('fr-FR', {day: 'numeric', month: 'short', year: 'numeric'}) : ''; };
+    /** une ligne du serveur (picker_search) → un élément à prendre, avec sa vue (_v : ce qu'on affiche ; jamais envoyé) */
+    function pickItem(kind, x) {
+        const v = {ico: x.icon || KIND[kind]?.[0], who: '', date: '', place: '', extra: [], pills: [], thumb: x.thumb || '', fields: [], todo: false, year: null, type: ''};
+        let title = x.title || '', value = '';
+        if (kind === 'event') {
+            v.ico = EV_ICON[x.tag] || '📅'; v.type = EV_TYPE[x.tag] || 'o'; v.who = x.who || ''; v.date = x.date_text || (x.year ? String(x.year) : ''); v.place = x.place || ''; v.year = x.year || null;
+            const typ = x.type || title; title = v.who && !title.includes(v.who) ? `${title} · ${v.who}` : title;
+            v.src = Number(x.sources ?? -1); if (v.src >= 0) v.pills.push(v.src ? ['ok', plural(v.src, T('source'))] : ['q', T('sans source')]);
+            v.fields = [[T('Sorte'), typ], [T('Qui'), v.who], [T('Date'), v.date], [T('Lieu'), v.place || T('lieu inconnu')], [T('Sources'), v.src >= 0 ? (v.src ? plural(v.src, T('source')) : T('aucune pour l’instant')) : '']];
+            value = [v.who, v.date, v.place].filter(Boolean).join(' · ');
+        } else if (kind === 'act') {
+            const raw = looksCode(x.raw_title ?? title) ? '' : (x.raw_title ?? title);
+            v.todo = !!x.undescribed; v.date = x.date_text || ''; v.place = x.place || ''; v.year = Number(String(v.date).match(/\d{4}/)?.[0]) || null;
+            title = raw || (v.todo ? T('Acte sans titre (importé le {d})', {d: shortDate(x.created_at) || '…'}) : T(ACT_KIND[x.act_kind] || 'Acte'));
+            const stt = ['checked', 'done'].includes(x.status) ? ['ok', T('Relue')] : x.status === 'doing' ? ['blue', T('En cours')] : x.has_text ? ['blue', T('Transcrit, à relire')] : ['q', T('À faire')];
+            v.pills.push(v.todo ? ['red', T('À décrire')] : stt);
+            if (x.cote) v.extra.push(x.cote); if (x.people_count) v.extra.push(plural(x.people_count, T('personne')));
+            v.fields = [[T('Sorte'), x.act_kind && x.act_kind !== 'apreciser' ? T(ACT_KIND[x.act_kind] || 'Acte') : T('à préciser')], [T('Date'), v.date], [T('Lieu'), v.place], [T('Cote'), x.cote], [T('Personnes'), x.people_count ? plural(x.people_count, T('personne')) : T('aucune personne')], [T('État'), v.todo ? T('À décrire') : stt[1]]];
+            value = [T(ACT_KIND[x.act_kind] || ''), v.date, v.place].filter(Boolean).join(' · ');
+        } else if (kind === 'media') {
+            const named = x.title && x.title !== x.filename && !looksCode(x.title);
+            v.todo = !named && !x.date_text && !x.people_count; v.date = x.date_text || x.year || ''; v.place = x.place || ''; v.year = Number(x.year) || null;
+            const typ = {image: T('Photo'), document: T('Document'), audio: T('Audio'), video: T('Vidéo')}[x.media_type] || T('Média');
+            if (v.todo) v.pills.push(['q', T('pas encore décrit')]); else if (x.has_tr) v.pills.push(['blue', T('transcrit')]);
+            v.extra = [typ, x.cote, x.people_count ? plural(x.people_count, T('personne')) : ''].filter(Boolean);
+            v.fields = [[T('Sorte'), typ], [T('Date'), v.date], [T('Lieu'), v.place], [T('Cote'), x.cote], [T('Personnes'), x.people_count ? plural(x.people_count, T('personne')) : T('aucune personne')], [T('Fichier'), x.filename]];
+            value = [typ, v.date, v.place].filter(Boolean).join(' · ');
+        } else {
+            const meta = String(x.meta || x.sub || '');
+            v.extra = meta ? [meta] : []; v.year = Number(meta.match(/\b(1[0-9]{3}|20\d\d)\b/)?.[1]) || null;
+            if (kind === 'place') v.place = title; if (x.badge && kind !== 'person') v.pills.push(['', x.badge]);
+            v.fields = meta.split(' · ').filter(Boolean).map((s, i) => [i ? '' : T(KIND[kind]?.[1] || ''), s]);
+            value = meta;
+        }
+        return {kind, ref_id: Number(x.id) || 0, title, value, _v: v,
+            data: kind === 'media' ? {filename: x.filename || String(x.thumb || '').replace(/^media\//, '').split('?')[0]} : kind === 'place' && x.lat != null ? {lat: x.lat, lon: x.lon} : null,
+            origin: kind === 'person' ? {kind: 'person', id: Number(x.id), person_id: Number(x.id), label: x.title} : x.person_id ? {kind: 'person', id: Number(x.person_id), person_id: Number(x.person_id), label: T('Fiche de {n}', {n: x.who || x.person_name || ''})} : {kind, id: Number(x.id), label: `${T(KIND[kind]?.[1] || '')} « ${x.title || title} »`}};
+    }
+    const viewOf = it => it._v || {ico: icon(it), extra: it.kind === 'set' ? [plural(setCount(it), T('ligne'))] : [], pills: [], fields: []};
+    const sameText = (a, b) => { const x = fold(a).replace(/\W+/g, ' ').trim(), y = fold(b).replace(/\W+/g, ' ').trim(); return !y || x === y || x.startsWith(y) || y.startsWith(x); };
+    function usedPill(st, it) {
+        const u = st.used.get(`${it.kind}:${it.ref_id}`) || []; if (!u.length) return null;
+        const inv = Number(st.ctx?.investigation_id || 0);
+        return u.some(x => x.investigation_id === inv) ? ['ok', T('✓ déjà dans l’enquête')] : ['', T(u.length > 1 ? 'utilisé dans {n} enquêtes' : 'utilisé dans 1 enquête', {n: u.length})];
+    }
+    function rowHtml(st, it, i) {
+        const v = viewOf(it), on = st.picked.has(pickKey(it)), up = usedPill(st, it);
+        const line2 = [v.who && !it.title.includes(v.who) ? v.who : '', v.date, v.place].filter(Boolean);
+        const t2 = it.kind === 'event' ? [v.date, v.place].filter(Boolean).join(' · ') : line2.length ? line2.join(' · ') : '';
+        const t3 = [...(v.extra || [])].filter(Boolean).join(' · ') || (!t2 && it.value && it.kind !== 'set' && !sameText(it.title, it.value) ? String(it.value).slice(0, 160) : '');
+        const pills = [...(v.pills || []), up].filter(Boolean);
+        const th = v.thumb ? `<span class="cx-th"><img src="${esc(v.thumb)}" alt="" loading="lazy" decoding="async"></span>` : (['media', 'act'].includes(it.kind) ? `<span class="cx-th is-none" aria-hidden="true">${v.ico || ''}</span>` : '');
+        const lbl = `${it.title}${t2 ? ` — ${t2}` : ''}`;
+        return `<li data-cx-r="${i}" class="cx-row${on ? ' is-on' : ''}${v.todo ? ' is-todo' : ''}"><label class="cx-chk"><input type="checkbox" data-cx-ri="${i}" ${on ? 'checked' : ''} aria-label="${esc(T('Prendre « {t} »', {t: lbl.slice(0, 120)}))}"></label>${th}
+            <button type="button" class="cx-rt" data-cx-see="${i}" aria-describedby="cx-hint-space"><span class="cx-t1">${st.mview === 'grid' && it.kind === 'media' ? '' : `<span class="cx-ico" aria-hidden="true">${esc(v.ico || icon(it))}</span>`}${esc(it.title)}</span>${t2 ? `<span class="cx-t2">${esc(t2)}</span>` : ''}${t3 ? `<span class="cx-t3">${esc(t3)}</span>` : ''}</button>
+            <span class="cx-rp">${(it.kind === 'data' || it.kind === 'row') && (it.data?.links?.length || it.origin?.url) ? `<span class="cx-lk">${it.data?.links?.length ? it.data.links.slice(0, 3).map(l => srcLink(l.url, l.label)).join(' · ') : srcLink(it.origin.url)}</span>` : ''}${pills.map(([c, t]) => `<span class="cx-pl${c ? ` is-${c}` : ''}">${esc(t)}</span>`).join('')}${v.todo && !kiosk() ? `<button type="button" class="cx-b is-ter is-sm" data-cx-describe="${i}">✎ ${esc(T('Décrire'))}</button>` : ''}</span></li>`;
+    }
+    /** les lignes, rangées (par date, personne, lieu) ; les actes et médias pas décrits à la fin, « À décrire » */
+    function resultsHtml(st, list, {groups = true} = {}) {
         st.results = list;
-        if (!list.length) return `<p class="muted cx-none">${esc(st.q ? T('Rien trouvé.') : T('Rien ici pour l’instant.'))}</p>`;
-        return `<ul class="cx-rlist">${list.map((it, i) => `<li data-cx-r="${i}" class="${st.picked.has(pickKey(it)) ? 'is-on' : ''}"><label class="cx-chk"><input type="checkbox" data-cx-ri="${i}" ${st.picked.has(pickKey(it)) ? 'checked' : ''} aria-label="${esc(T('Prendre'))}"></label><span class="cx-ico" aria-hidden="true">${icon(it)}</span><button type="button" class="cx-rt" data-cx-see="${i}"><b>${esc(it.title)}</b>${it.kind === 'set' ? ` <small class="cx-n">${esc(plural(setCount(it), T('ligne')))}</small>` : ''}${it.value && it.kind !== 'set' ? `<small>${esc(String(it.value).slice(0, 140))}</small>` : ''}</button></li>`).join('')}</ul>`;
+        if (!list.length) return '';
+        const idx = new Map(list.map((x, i) => [x, i]));
+        const rank = st.rank, keyOf = x => (rank === 'person' ? viewOf(x).who : rank === 'place' ? viewOf(x).place : '') || '';
+        let order = [...list];
+        if (groups && ['event', 'act', 'media', 'source', 'note'].includes(st.tab)) {
+            if (rank === 'date') order.sort((a, b) => (viewOf(a).year ?? 1e9) - (viewOf(b).year ?? 1e9));
+            else order.sort((a, b) => (keyOf(a) ? 0 : 1) - (keyOf(b) ? 0 : 1) || keyOf(a).localeCompare(keyOf(b), 'fr') || (viewOf(a).year ?? 1e9) - (viewOf(b).year ?? 1e9));
+        }
+        const known = order.filter(x => !viewOf(x).todo), todo = order.filter(x => viewOf(x).todo);
+        const grid = st.mview === 'grid' && st.tab === 'media';
+        const ul = arr => `<ul class="cx-rlist${grid ? ' cx-mgrid' : ''}">${arr.map(x => rowHtml(st, x, idx.get(x))).join('')}</ul>`;
+        let html = '';
+        if (groups && rank !== 'date' && ['event', 'act', 'media'].includes(st.tab)) {
+            const by = new Map(); known.forEach(x => { const k = keyOf(x) || (rank === 'person' ? T('Sans personne') : T('Sans lieu')); by.set(k, [...(by.get(k) || []), x]); });
+            html = [...by].map(([k, arr]) => `<h6 class="cx-gh">${esc(k)} <span>${nf(arr.length)}</span></h6>${ul(arr)}`).join('');
+        } else html = known.length ? ul(known) : '';
+        if (todo.length) html += `<h6 class="cx-gh is-todo">${esc(T('À décrire'))} <span>${nf(todo.length)}</span><small>${esc(T('pas encore de sorte, de date ni de lieu : « ✎ Décrire » pour les retrouver ensuite'))}</small></h6>${ul(todo)}`;
+        return `${html}<p class="cx-sr" id="cx-hint-space">${esc(T('Espace ou double-clic : cocher'))}</p>`;
     }
     function bindResults(st, host) {
-        host.querySelectorAll('[data-cx-ri]').forEach(b => b.addEventListener('change', () => { const it = st.results[Number(b.dataset.cxRi)]; if (!it) return; const k = pickKey(it); if (b.checked) st.picked.set(k, it); else st.picked.delete(k); b.closest('li')?.classList.toggle('is-on', b.checked); paintCount(st); }));
-        host.querySelectorAll('[data-cx-see]').forEach(b => b.addEventListener('click', () => previewItem(st, st.results[Number(b.dataset.cxSee)])));
+        const itOf = el => st.results[Number(el.dataset.cxRi ?? el.dataset.cxSee ?? el.dataset.cxDescribe ?? el.dataset.cxR)];
+        const flip = (li, on) => { const cb = li?.querySelector('[data-cx-ri]'); const it = itOf(cb || {dataset: {}}); if (!cb || !it) return; cb.checked = on ?? !cb.checked; togglePick(st, it, cb.checked); li.classList.toggle('is-on', cb.checked); paintCount(st); };
+        host.querySelectorAll('[data-cx-ri]').forEach(b => b.addEventListener('change', () => flip(b.closest('li'), b.checked)));
+        host.querySelectorAll('[data-cx-see]').forEach(b => {
+            b.addEventListener('click', () => { host.querySelectorAll('.cx-row.is-focus').forEach(x => x.classList.remove('is-focus')); b.closest('li').classList.add('is-focus'); previewItem(st, itOf(b), {open: true}); });
+            b.addEventListener('dblclick', e => { e.preventDefault(); flip(b.closest('li')); });
+            b.addEventListener('keydown', e => {
+                if (e.key === ' ') { e.preventDefault(); flip(b.closest('li')); }
+                else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const all = [...host.querySelectorAll('[data-cx-see]')], j = all.indexOf(b) + (e.key === 'ArrowDown' ? 1 : -1); if (all[j]) { all[j].focus(); all[j].click(); } else if (j < 0) st.dlg.querySelector('[data-cx-q]:not([hidden])')?.focus(); }
+            });
+        });
+        host.querySelectorAll('[data-cx-describe]').forEach(b => b.addEventListener('click', () => describe(st, itOf(b))));
     }
-    /** l'aperçu : ce que c'est, ↗ ouvrir, et chaque morceau à prendre tout seul (une info précise) */
-    function previewItem(st, it) {
-        const box = st.dlg.querySelector('[data-cx-prev]'); if (!it) { box.innerHTML = ''; return; }
-        const parts = it.kind === 'set' ? [] : [it.title, ...String(it.value || '').split(/\s+·\s+|\n/)].map(s => s.trim()).filter((s, i, a) => s && a.indexOf(s) === i).slice(0, 20);
-        box.innerHTML = `<h4>${icon(it)} ${esc(it.title)}</h4>${it.kind === 'set' ? `<div class="cx-set">${setTable(it, 30)}</div>` : ''}
-            ${parts.length > 1 ? `<p class="muted"><small>${esc(T('Prendre seulement une info précise :'))}</small></p><ul class="cx-parts">${parts.map((p, i) => `<li><label class="checkbox-line"><input type="checkbox" data-cx-part="${i}"> ${esc(p)}</label></li>`).join('')}</ul>` : ''}
-            ${it.origin?.url || it.origin?.open || it.ref_id ? `<p><button type="button" class="link-button" data-cx-open>↗ ${esc(T('ouvrir'))}</button></p>` : ''}`;
-        box.querySelectorAll('[data-cx-part]').forEach(b => b.addEventListener('change', () => {
-            const p = parts[Number(b.dataset.cxPart)], d = {kind: 'datum', title: `${it.title}`.slice(0, 200), value: p, ref_id: 0, origin: {...(it.origin || {}), kind: it.origin?.kind || it.kind, id: it.origin?.id || it.ref_id, label: it.origin?.label || `${KIND[it.kind]?.[1] || ''} « ${it.title} »`}};
-            const k = pickKey(d); if (b.checked) st.picked.set(k, d); else st.picked.delete(k); paintCount(st);
+    /** ✎ Décrire : l'acte (dans la transcription) ou le média ; la fenêtre se ferme, on y revient avec ⌥⌘O */
+    function describe(st, it) {
+        if (!it) return;
+        if (it.kind === 'act' && ext.openActTranscriber) { st.dlg.close(); return ext.openActTranscriber({id: it.ref_id}); }
+        if (it.kind === 'media') { const f = A().openMedia || window.LCNDA_PICKER?.openMedia; if (f) { st.dlg.close(); return f(it.ref_id); } }
+        openOrigin(it);
+    }
+    const openIt = it => {
+        if (it.kind === 'act' && it.ref_id && ext.openActTranscriber) return ext.openActTranscriber({id: it.ref_id});
+        if (it.kind === 'media' && it.ref_id) { const f = A().openMedia || window.LCNDA_PICKER?.openMedia; if (f) return f(it.ref_id); }
+        return openOrigin(it);
+    };
+    /** l'aperçu : grande vignette, tous les champs, ↗ ouvrir, « Déjà utilisé dans… », et chaque morceau à prendre tout seul */
+    function previewItem(st, it, {open = false} = {}) {
+        const box = st.dlg.querySelector('[data-cx-prev]'); st.preview = it || null; st.sum = false;
+        if (!it) { box.innerHTML = st.picked.size >= 2 ? '' : `<div class="cx-help"><p><b>${esc(T('Clique une ligne pour la voir ici.'))}</b></p><p>${esc(T('La case (ou Espace, ou un double-clic) la coche. Coche plusieurs lignes, même dans plusieurs rubriques : elles restent cochées.'))}</p></div>`; if (st.picked.size >= 2) drawSummary(st); return; }
+        const v = viewOf(it), up = st.used.get(`${it.kind}:${it.ref_id}`) || [];
+        const parts = it.kind === 'set' ? [] : [...(v.fields || []).filter(([, s]) => s).map(([l, s]) => [l, String(s)]), ...(v.fields?.length ? [] : String(it.value || '').split(/\s+·\s+|\n/).map(s => ['', s]))].map(([l, s]) => [l, s.trim()]).filter(([, s], i, a) => s && a.findIndex(y => y[1] === s) === i).slice(0, 20);
+        const bigTh = v.thumb ? `<img class="cx-big" src="${esc(v.thumb)}" alt="${esc(it.title)}">` : '';
+        const back = st.picked.size >= 2 ? `<button type="button" class="cx-b is-ter is-sm" data-cx-sumback>← ${esc(T('{n} éléments choisis', {n: nf(st.picked.size)}))}</button>` : '';
+        const canOpen = it.origin?.url || it.origin?.open || it.ref_id || it.origin?.person_id;
+        box.innerHTML = `<button type="button" class="cx-b is-ter is-sm cx-prev-back" data-cx-sheetx>← ${esc(T('Retour à la liste'))}</button>${back}${bigTh}<h4><span aria-hidden="true">${esc(v.ico || icon(it))}</span> ${esc(it.title)}</h4>
+            ${it.kind === 'set' ? `<div class="cx-set">${setTable(it, 30)}</div>` : ''}
+            ${v.fields?.filter(([, s]) => s).length ? `<dl class="cx-dl">${v.fields.filter(([, s]) => s).map(([l, s]) => `<dt>${esc(l)}</dt><dd>${esc(s)}</dd>`).join('')}</dl>` : !v.fields?.length && it.value && it.kind !== 'set' && !sameText(it.title, it.value) ? `<p>${esc(String(it.value).slice(0, 600))}</p>` : ''}
+            ${it.origin?.label && it.kind !== 'set' ? `<p class="cx-src"><small>${esc(T('Source :'))} ${esc(it.origin.label)}${it.origin.url ? ` · ${srcLink(it.origin.url)}` : ''}</small></p>` : ''}
+            ${canOpen ? `<p><button type="button" class="cx-b is-sec is-sm" data-cx-open>↗ ${esc(T('ouvrir'))}</button></p>` : ''}
+            ${up.length ? `<h5 class="cx-sect">${esc(T('Déjà utilisé dans'))}</h5><ul class="cx-used">${up.map(u => `<li>🕵️ ${esc(u.title)}${u.item_title ? ` — <small>${esc(u.item_title)}</small>` : ''}</li>`).join('')}</ul>` : it.ref_id && ['event', 'act', 'media', 'source', 'note', 'place'].includes(it.kind) ? `<p class="cx-muted"><small>${esc(T('Pas encore utilisé dans une enquête.'))}</small></p>` : ''}
+            ${parts.length > 1 ? `<h5 class="cx-sect">${esc(T('Prendre seulement une info'))}</h5><ul class="cx-parts">${parts.map(([l, p], i) => `<li><label class="checkbox-line"><input type="checkbox" data-cx-part="${i}" ${st.picked.has(pickKey(partOf(it, l, p))) ? 'checked' : ''}> ${l ? `<span class="cx-muted">${esc(l)} :</span> ` : ''}${esc(p)}</label></li>`).join('')}</ul>` : ''}`;
+        box.querySelectorAll('[data-cx-part]').forEach(b => b.addEventListener('change', () => { const [l, p] = parts[Number(b.dataset.cxPart)]; togglePick(st, partOf(it, l, p), b.checked); const keep = st.preview; paintCount(st); st.preview = keep; }));
+        box.querySelector('[data-cx-open]')?.addEventListener('click', () => openIt(it));
+        box.querySelector('[data-cx-sumback]')?.addEventListener('click', () => { st.preview = null; drawSummary(st); });
+        box.querySelector('[data-cx-sheetx]')?.addEventListener('click', () => closeSheet(st));
+        if (open && narrow()) { st.dlg.classList.add('is-sheet'); box.querySelector('[data-cx-sheetx]')?.focus(); }
+    }
+    const closeSheet = st => { st.dlg.classList.remove('is-sheet'); st.dlg.querySelector('.cx-row.is-focus .cx-rt')?.focus(); };
+    /** une info précise : « la date », « le lieu »… d'un élément */
+    const partOf = (it, l, p) => ({kind: 'datum', title: `${it.title}${l ? ` — ${String(l).toLowerCase()}` : ''}`.slice(0, 200), value: p, ref_id: 0,
+        origin: {...(it.origin || {}), kind: it.origin?.kind || it.kind, id: it.origin?.id || it.ref_id, label: it.origin?.label || `${KIND[it.kind]?.[1] || ''} « ${it.title} »`}});
+    /** plusieurs cases cochées : « N éléments choisis » (× pour en retirer un) et ce que « Prendre » va faire */
+    function drawSummary(st) {
+        const box = st.dlg.querySelector('[data-cx-prev]'), items = [...st.picked.entries()]; st.sum = true; st.preview = null;
+        if (!items.length) { previewItem(st, null); return; }
+        let will = ''; const list = items.map(([, x]) => cleanIt(x));
+        if (st.target) { try { will = st.target.explain?.(accepted(st.target, list), st.ctx) || ''; } catch (_) {} }
+        const acc = st.target ? accepted(st.target, list).length : list.length;
+        const dn = st.target ? destName(st) : '';
+        box.innerHTML = `<button type="button" class="cx-b is-ter is-sm cx-prev-back" data-cx-sheetx>← ${esc(T('Retour à la liste'))}</button><h4 data-cx-sum>${esc(T(items.length > 1 ? '{n} éléments choisis' : '{n} élément choisi', {n: nf(items.length)}))}</h4>
+            <ul class="cx-sum">${items.map(([k, x]) => `<li><span aria-hidden="true">${esc(viewOf(x).ico || icon(x))}</span><span class="cx-sum-t">${esc(x.title)}${x.kind === 'datum' ? ` <small>${esc(x.value)}</small>` : ''}</span><button type="button" class="cx-sum-x" data-cx-unpick="${esc(k)}" aria-label="${esc(T('Ne plus prendre « {t} »', {t: x.title}))}">×</button></li>`).join('')}</ul>
+            <div class="cx-will"><b>${esc(T('Ce que « Prendre » va faire'))}</b><br>${esc(st.target ? (will || T('Les {n} vont dans {d}, chacun avec d’où il vient (↗ pour y revenir).', {n: nf(acc), d: dn})) : T('Garder dans le panier : tu les retrouves plus tard, sur n’importe quel écran (🧺 en haut).'))}${st.target && acc < list.length ? `<br><small>${esc(T('{a} sur {b} iront là ; le reste reste dans le panier.', {a: acc, b: list.length}))}</small>` : ''}</div>`;
+        box.querySelectorAll('[data-cx-unpick]').forEach(b => b.addEventListener('click', () => {
+            st.picked.delete(b.dataset.cxUnpick);
+            st.dlg.querySelectorAll('[data-cx-ri]').forEach(cb => { const it = st.results[Number(cb.dataset.cxRi)]; if (it && pickKey(it) === b.dataset.cxUnpick) { cb.checked = false; cb.closest('li')?.classList.remove('is-on'); } });
+            paintCount(st); if (st.picked.size >= 1) drawSummary(st);
         }));
-        box.querySelector('[data-cx-open]')?.addEventListener('click', () => openOrigin(it));
+        box.querySelector('[data-cx-sheetx]')?.addEventListener('click', () => closeSheet(st));
     }
-    const setTable = (it, max = 200) => { const d = it.data || {}; return `<table class="data-table cx-tbl"><thead><tr>${(d.columns || []).map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${(d.rows || []).slice(0, max).map(r => `<tr>${(r || []).map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>${(d.rows || []).length > max ? `<p class="muted">${esc(T('… et {n} autres lignes', {n: nf(d.rows.length - max)}))}</p>` : ''}<p class="muted"><small>${esc(T('Source :'))} ${esc([d.source, d.licence].filter(Boolean).join(' — '))}${d.url ? ` <a href="${esc(d.url)}" target="_blank" rel="noopener">↗ ${esc(T('source'))}</a>` : ''}${d.criteria ? ` · ${esc(d.criteria)}` : ''}</small></p>`; };
+    /** une adresse → un petit lien lisible : « ↗ OpenStreetMap » (jamais l'adresse brute) */
+    const HOSTS = [[/openstreetmap\.org/, 'OpenStreetMap'], [/wikidata\.org/, 'Wikidata'], [/wikipedia\.org/, 'Wikipédia'], [/wikimedia\.org/, 'Wikimedia'], [/geoportail|ign\.fr/, 'IGN'], [/insee\.fr/, 'INSEE'], [/data\.gouv\.fr/, 'data.gouv.fr'], [/meteo|open-meteo/, 'Météo'], [/google\.[a-z.]+\/maps|maps\.google/, 'Google Maps'], [/archives|ad\d\d/, 'Archives'], [/geneanet/, 'Geneanet'], [/gallica\.bnf/, 'Gallica']];
+    const hostLabel = u => { let h = ''; try { h = new URL(u).hostname.replace(/^www\./, ''); } catch (_) { return T('source'); } return (HOSTS.find(([re]) => re.test(u)) || [null, h])[1]; };
+    const srcLink = (u, label = '') => (/^https?:\/\//i.test(String(u || '')) ? `<a href="${esc(u)}" target="_blank" rel="noopener" title="${esc(u)}">↗ ${esc(label || hostLabel(u))}</a>` : esc(u || ''));
+    const cellOf = c => (/^https?:\/\/\S+$/i.test(String(c ?? '').trim()) ? srcLink(String(c).trim()) : esc(c));
+    const setTable = (it, max = 200) => { const d = it.data || {}; return `<div class="cx-tw"><table class="data-table cx-tbl"><thead><tr>${(d.columns || []).map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${(d.rows || []).slice(0, max).map(r => `<tr>${(r || []).map(c => `<td>${cellOf(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${(d.rows || []).length > max ? `<p class="cx-muted">${esc(T('… et {n} autres lignes', {n: nf(d.rows.length - max)}))}</p>` : ''}<p class="cx-muted"><small>${esc(T('Source :'))} ${esc([d.source, d.licence].filter(Boolean).join(' — '))}${d.url ? ` ${srcLink(d.url)}` : ''}${d.criteria ? ` · ${esc(d.criteria)}` : ''}</small></p>`; };
+
+    /** quand c'est vide : pourquoi, et quoi faire */
+    function emptyHtml(st, why) {
+        const tab = TABS.find(([k]) => k === st.tab) || [], name = T(tab[2] || '');
+        const E = {
+            basket: ['🧺', T('Le panier est vide'), T('Le panier garde des choses pour plus tard, d’un écran à l’autre. Coche des lignes n’importe où dans l’app, puis « 🧺 Garder dans le panier ».'), [['person', T('Voir mes fiches')]]],
+            recent: ['🕘', T('Rien de pris pour l’instant'), T('Ce que tu prends (ou mets de côté) apparaîtra ici, pour le reprendre d’un clic.'), [['event', T('Voir les événements')]]],
+            search: ['🔍', T('Rien pour « {q} »', {q: st.q}), T('Essaie l’orthographe d’époque, un seul mot ou seulement l’année. Les accents ne comptent pas.'), [['clear', T('Effacer la recherche')]]],
+            filter: ['🔎', T('Rien avec ces filtres'), T('Les filtres cochés cachent tout ce qui est ici.'), [['nofilter', T('Enlever les filtres')]]],
+            none: [tab[1] || '📭', T('Rien dans « {r} » pour l’instant', {r: name}), T('Ajoute-en dans l’app, ou va chercher ailleurs : Listes, Données, De l’extérieur.'), [['lists', T('Voir les listes')], ['outside', T('Importer…')]]],
+        }[why];
+        return `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">${E[0]}</span><b>${esc(E[1])}</b><p>${esc(E[2])}</p><div class="cx-empty-row">${E[3].map(([k, l]) => `<button type="button" class="cx-b is-sec is-sm" data-cx-empty="${k}">${esc(l)}</button>`).join('')}</div></div>`;
+    }
+    function bindEmpty(st, host) {
+        host.querySelectorAll('[data-cx-empty]').forEach(b => b.addEventListener('click', () => {
+            const k = b.dataset.cxEmpty;
+            if (k === 'clear') { st.q = ''; st.dlg.querySelector('[data-cx-q]').value = ''; drawTab(st); }
+            else if (k === 'nofilter') { st.filters = new Set(); drawTab(st); }
+            else goTab(st, k);
+        }));
+    }
+    /** les pastilles et « Ranger par » de la rubrique */
+    function chipsHtml(st) {
+        const inv = Number(st.ctx?.investigation_id || 0), F = [];
+        if (st.tab === 'event') F.push(['n', T('Naissances')], ['m', T('Mariages')], ['d', T('Décès')], ['nosrc', T('Sans source')]);
+        if (st.tab === 'act' || st.tab === 'media') F.push(['todo', T('À décrire')]);
+        if (inv && ['event', 'act', 'media', 'source', 'note', 'place', 'person'].includes(st.tab)) F.push(['notused', T('Pas encore dans l’enquête')]);
+        const rank = ['event', 'act', 'media'].includes(st.tab) ? `<span class="cx-lab">${esc(T('Ranger par'))}</span><span class="cx-seg" role="group" aria-label="${esc(T('Ranger par'))}">${[['date', T('date')], ['person', T('personne')], ['place', T('lieu')]].map(([k, l]) => `<button type="button" data-cx-rank="${k}" aria-pressed="${st.rank === k}">${esc(l)}</button>`).join('')}</span>` : '';
+        const view = st.tab === 'media' ? `<span class="cx-seg" role="group" aria-label="${esc(T('Affichage'))}">${[['list', '☰ ' + T('liste')], ['grid', '▦ ' + T('grille')]].map(([k, l]) => `<button type="button" data-cx-mview="${k}" aria-pressed="${st.mview === k}">${esc(l)}</button>`).join('')}</span>` : '';
+        return F.length || rank || view ? `<span class="cx-cf">${F.map(([k, l]) => `<button type="button" class="cx-chip" data-cx-chip="${k}" aria-pressed="${st.filters.has(k)}">${esc(l)}</button>`).join('')}</span><span class="cx-sp"></span><span class="cx-ca">${rank}${view}</span>` : '';
+    }
+    function applyFilters(st, list) {
+        const f = st.filters, inv = Number(st.ctx?.investigation_id || 0); if (!f.size) return list;
+        const types = ['n', 'm', 'd'].filter(k => f.has(k));
+        return list.filter(x => { const v = viewOf(x);
+            if (types.length && !types.includes(v.type)) return false;
+            if (f.has('nosrc') && v.src !== 0) return false;
+            if (f.has('todo') && !v.todo) return false;
+            if (f.has('notused') && (st.used.get(`${x.kind}:${x.ref_id}`) || []).some(u => u.investigation_id === inv)) return false;
+            return true; });
+    }
+    async function loadUsed(st, list) {
+        const by = {}; list.forEach(x => { if (x.ref_id && ['event', 'act', 'media', 'source', 'note', 'place', 'person'].includes(x.kind) && !st.used.has(`${x.kind}:${x.ref_id}`)) (by[x.kind] = by[x.kind] || []).push(x.ref_id); });
+        await Promise.all(Object.entries(by).map(async ([kind, ids]) => {
+            try { const r = await api('cx_used', {kind, ids: ids.slice(0, 200).join(',')}); ids.forEach(id => st.used.set(`${kind}:${id}`, (r.used || {})[id] || [])); } catch (_) {}
+        }));
+    }
 
     async function drawTab(st) {
-        const dlg = st.dlg; dlg.querySelectorAll('[data-cx-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.cxTab === st.tab)));
-        const res = dlg.querySelector('[data-cx-res]'), q = dlg.querySelector('[data-cx-q]'), prev = dlg.querySelector('[data-cx-prev]');
-        q.hidden = ['data', 'lists', 'outside'].includes(st.tab); prev.innerHTML = '';
-        res.innerHTML = UI().spinner ? UI().spinner(T('Chargement…'), {inline: true}) : '…';
+        const dlg = st.dlg; dlg.querySelectorAll('[data-cx-tab]').forEach(b => { const on = b.dataset.cxTab === st.tab; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
+        const tab = TABS.find(([k]) => k === st.tab) || TABS[0];
+        dlg.querySelector('[data-cx-quoi-t]').textContent = `${tab[1]} ${T(tab[2])}`;
+        const res = dlg.querySelector('[data-cx-res]'), q = dlg.querySelector('[data-cx-q]'), srch = dlg.querySelector('[data-cx-srch]'), chips = dlg.querySelector('[data-cx-chips]');
+        const special = ['data', 'lists', 'outside'].includes(st.tab);
+        srch.hidden = special; q.hidden = special; // le champ est vraiment retiré là où il ne sert pas (Listes, Données, De l'extérieur)
+        q.placeholder = T(HINT[st.tab] || 'Chercher…');
+        dlg.classList.toggle('is-wide', special); // Données, Listes, De l'extérieur : sans aperçu, toute la largeur
+        if (!st.preview || st.preview.kind !== st.tab) previewItem(st, null);
+        chips.innerHTML = special ? '' : chipsHtml(st); chips.hidden = !chips.innerHTML;
+        chips.querySelectorAll('[data-cx-chip]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cxChip; if (st.filters.has(k)) st.filters.delete(k); else st.filters.add(k); drawTab(st); }));
+        chips.querySelectorAll('[data-cx-rank]').forEach(b => b.addEventListener('click', () => { st.rank = b.dataset.cxRank; drawTab(st); }));
+        chips.querySelectorAll('[data-cx-mview]').forEach(b => b.addEventListener('click', () => { st.mview = b.dataset.cxMview; drawTab(st); }));
         const seq = st.seq = (st.seq || 0) + 1, mine = () => seq === st.seq && st.dlg.isConnected;
-        let list = [];
+        if (!res.children.length || special) res.innerHTML = UI().spinner ? UI().spinner(T('Chargement…'), {inline: true}) : '…';
+        else res.setAttribute('aria-busy', 'true');
+        let list = []; st.more = false;
         try {
             if (st.tab === 'basket') { const b = await loadBasket(true); list = (b.items || []).filter(x => !st.q || fold(itemLine(x)).includes(fold(st.q))); st.fromBasket = new Set(list.map(x => x.id)); }
             else if (st.tab === 'recent') list = (readJ(RECENT, []) || []).filter(x => !st.q || fold(itemLine(x)).includes(fold(st.q)));
-            else if (st.tab === 'note') { const r = await api('cx_notes', {q: st.q}); list = (r.items || []).map(n => ({kind: 'note', ref_id: Number(n.id), title: n.title || String(n.body || '').slice(0, 80), value: String(n.body || '').slice(0, 600), origin: n.person_name ? {kind: 'person', id: Number(n.entity_id), person_id: Number(n.entity_id), label: T('Fiche de {n}', {n: n.person_name})} : null})); }
+            else if (st.tab === 'note') { const r = await api('cx_notes', {q: st.q}); list = (r.items || []).map(n => ({kind: 'note', ref_id: Number(n.id), title: n.title || String(n.body || '').slice(0, 80), value: String(n.body || '').slice(0, 600), _v: {ico: '📝', who: n.person_name || '', extra: [String(n.body || '').replace(/\s+/g, ' ').slice(0, 140)], pills: [], fields: [[T('Fiche'), n.person_name || ''], [T('Texte'), String(n.body || '').slice(0, 600)]]}, origin: n.person_name ? {kind: 'person', id: Number(n.entity_id), person_id: Number(n.entity_id), label: T('Fiche de {n}', {n: n.person_name})} : null})); }
             else if (['person', 'event', 'act', 'source', 'media', 'place'].includes(st.tab)) {
-                const r = await api('picker_search', {kind: st.tab, q: st.q, limit: 40});
-                list = (r.groups || []).flatMap(g => g.items || []).map(x => ({kind: st.tab, ref_id: Number(x.id) || 0, title: x.title || '', value: [x.sub, x.badge].filter(Boolean).join(' · '),
-                    data: st.tab === 'media' ? {filename: x.filename || String(x.thumb || '').replace(/^media\//, '').split('?')[0]} : st.tab === 'place' && x.lat != null ? {lat: x.lat, lon: x.lon} : null,
-                    origin: st.tab === 'person' ? {kind: 'person', id: Number(x.id), person_id: Number(x.id), label: x.title} : x.person_id ? {kind: 'person', person_id: Number(x.person_id), label: x.person_name || ''} : {kind: st.tab, id: Number(x.id), label: `${KIND[st.tab][1]} « ${x.title} »`}}));
+                // « Treignac 1780-1800 » : la période se filtre ici (le serveur cherche les mots)
+                const yr = st.q.match(/(?:^|\s)(\d{3,4})\s*(?:-|–|à|a|au|to)\s*(\d{3,4})(?=\s|$)/i); let qs = st.q, range = null;
+                if (yr) { range = [Number(yr[1]), Number(yr[2])].sort((a, b) => a - b); qs = st.q.replace(yr[0], ' ').replace(/\s+/g, ' ').trim(); }
+                const r = await api('picker_search', {kind: st.tab, q: qs, limit: 100, ...(range && st.tab === 'event' ? {year_from: range[0], year_to: range[1]} : {})});
+                list = (r.groups || []).flatMap(g => g.items || []).map(x => pickItem(st.tab, x)); st.more = !!r.more;
+                if (range) { list = list.filter(x => { const y = viewOf(x).year; return y && y >= range[0] && y <= range[1]; }); }
             }
             else if (st.tab === 'data') { if (mine()) await drawData(st, res); return; }
-            else if (st.tab === 'lists') { if (mine()) drawLists(st, res); return; }
+            else if (st.tab === 'lists') { if (mine()) { if (st.list) await drawListIn(st, res); else drawLists(st, res); } return; }
             else if (st.tab === 'outside') { if (mine()) drawOutside(st, res); return; }
+            if (st.ctx?.investigation_id || ['event', 'act', 'media', 'source'].includes(st.tab)) await loadUsed(st, list);
         } catch (e) { if (mine()) res.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
         if (!mine()) return;
+        res.removeAttribute('aria-busy');
         if (st.target?.kinds) list = list.filter(x => st.target.kinds.includes(x.kind) || x.kind === 'set');
-        res.innerHTML = resultsHtml(st, list); bindResults(st, res);
+        const shown = applyFilters(st, list);
+        res.innerHTML = shown.length ? resultsHtml(st, shown) + (st.more ? `<p class="cx-muted cx-pad"><small>${esc(T('Les {n} premiers seulement : précise la recherche (un nom, une commune, une période comme 1780-1800).', {n: nf(list.length)}))}</small></p>` : '') : emptyHtml(st, list.length ? 'filter' : st.q ? 'search' : ['basket', 'recent'].includes(st.tab) ? st.tab : 'none');
+        res.scrollTop = 0; bindResults(st, res); bindEmpty(st, res);
+        if (st.picked.size >= 2 && !st.preview) drawSummary(st);
     }
 
     /* ── 🧰 Données : une source, ses critères (personne, lieu, année, date, du… au…), l'aperçu, une info ou tout ── */
@@ -722,13 +990,16 @@
         const all = dataSourcesAll();
         const cur = all.find(d => d.id === st.dataId) || null;
         const groups = [...new Set(all.map(d => d.group || T('Autres')))];
-        res.innerHTML = `<label class="cx-dsel">${esc(T('Une source de données'))}<select data-cx-ds><option value="">${esc(T('— choisir —'))}</option>${groups.map(g => `<optgroup label="${esc(T(g))}">${all.filter(d => (d.group || T('Autres')) === g).map(d => `<option value="${esc(d.id)}" ${cur?.id === d.id ? 'selected' : ''}>${esc(`${d.icon || '🧰'} ${T(d.label)}`)}</option>`).join('')}</optgroup>`).join('')}</select></label><div data-cx-dform></div>`;
+        res.innerHTML = `<div class="cx-pad cx-data"><h6 class="cx-step">1. ${esc(T('Quelle donnée ?'))}</h6>
+            <label class="cx-dsel"><span class="cx-sr">${esc(T('Une source de données'))}</span><select data-cx-ds aria-label="${esc(T('Une source de données'))}"><option value="">${esc(T('— choisir —'))}</option>${groups.map(g => `<optgroup label="${esc(T(g))}">${all.filter(d => (d.group || T('Autres')) === g).map(d => `<option value="${esc(d.id)}" ${cur?.id === d.id ? 'selected' : ''}>${esc(`${d.icon || '🧰'} ${T(d.label)}`)}</option>`).join('')}</optgroup>`).join('')}</select></label>
+            ${cur ? '' : `<p class="cx-muted">${esc(T('Une info précise pour une date, un lieu, une personne : la météo d’un jour, les cimetières autour d’une commune, les prénoms d’une année… Chaque info garde sa source.'))}</p>`}
+            <div data-cx-dform></div></div>`;
         res.querySelector('[data-cx-ds]').addEventListener('change', e => { st.dataId = e.target.value; drawData(st, res); });
         if (!cur) return;
         const host = res.querySelector('[data-cx-dform]');
         let ok = true; try { ok = typeof cur.installed === 'function' ? (await cur.installed()) !== false : true; } catch (_) { ok = true; }
         if (!ok) {
-            host.innerHTML = `<p class="cx-notinst">${esc(T('Ces données ne sont pas encore installées sur cet ordinateur.'))}</p>${cur.install && !kiosk() ? `<button type="button" class="button small" data-cx-install>⤓ ${esc(T('Installer'))}</button>` : ''}`;
+            host.innerHTML = `<p class="cx-notinst">${esc(T('Ces données ne sont pas encore installées sur cet ordinateur.'))}</p>${cur.install && !kiosk() ? `<button type="button" class="cx-b is-sec is-sm" data-cx-install>⤓ ${esc(T('Installer'))}</button>` : ''}`;
             host.querySelector('[data-cx-install]')?.addEventListener('click', () => { st.dlg.close(); try { cur.install(); } catch (e) { toast(e.message, 'error'); } });
             return;
         }
@@ -737,14 +1008,15 @@
         const PK = window.LCNDA_PICKER || A();
         if (st.ctx?.placeText && !v.place && needs.includes('place')) v.place = await placeByName(st.ctx.placeText); // l'élément ouvert (Atelier) donne son lieu
         if (st.ctx?.date && !v.date) v.date = st.ctx.date;
-        host.innerHTML = `<div class="cx-dform">${needs.includes('person') ? `<label><span class="pk-lab">${esc(T('Personne'))}</span>${PK.pickerField?.({name: 'cx_person', hiddenName: false, kind: 'person', value: v.person || null, inline: true}) || ''}</label>` : ''}
+        host.innerHTML = `<h6 class="cx-step">2. ${esc(needs.length ? T('Où, quand ?') : T('Chercher'))}</h6><div class="cx-dform">${needs.includes('person') ? `<label><span class="pk-lab">${esc(T('Personne'))}</span>${PK.pickerField?.({name: 'cx_person', hiddenName: false, kind: 'person', value: v.person || null, inline: true}) || ''}</label>` : ''}
             ${needs.includes('place') ? `<label><span class="pk-lab">${esc(T('Lieu'))}</span>${PK.pickerField?.({name: 'cx_place', hiddenName: false, kind: 'place', value: v.place || null, inline: true}) || ''}</label>` : ''}
             ${needs.includes('year') ? `<label>${esc(T('Année'))}<input type="number" min="1" max="2100" name="cx_year" value="${esc(v.year || '')}"></label>` : ''}
             ${needs.includes('date') ? `<label>${esc(T('Date'))}<input type="date" name="cx_date" value="${esc(v.date || '')}"></label>${cur.range ? `<label>${esc(T('… jusqu’au (pour une période)'))}<input type="date" name="cx_to" value="${esc(v.to || '')}"></label>` : ''}` : ''}
-            <button type="button" class="button small" data-cx-run>${esc(T('Voir'))}</button></div><div class="cx-dout" data-cx-dout></div>`;
+            <button type="button" class="cx-b is-pri is-sm" data-cx-run>🔍 ${esc(T('Chercher : {w}', {w: T(cur.label)}))}</button></div>
+            ${cur.source ? `<p class="cx-muted"><small>${esc(T('Source :'))} ${cur.sourceUrl ? srcLink(cur.sourceUrl, cur.source) : esc(cur.source)}</small></p>` : ''}
+            <div class="cx-dout" data-cx-dout></div>`;
         const f = host.querySelector('.cx-dform');
         f.addEventListener('picker-change', e => { const k = e.target.closest?.('.pk')?.dataset?.picker || ''; const it = e.detail?.item || null; if (k === 'person') v.person = it; else if (k === 'place') v.place = it; });
-        // l'élément ouvert de l'Atelier (ou l'écran) donne déjà sa date et son lieu ?
         const pre = st.ctx?.date || st.ctx?.placeText ? st.ctx : null;
         if (pre?.date && f.querySelector('[name="cx_date"]') && !v.date) f.querySelector('[name="cx_date"]').value = pre.date;
         host.querySelector('[data-cx-run]').addEventListener('click', () => runData(st, cur, f, host.querySelector('[data-cx-dout]')));
@@ -780,13 +1052,13 @@
                 await Promise.race([d.run(ctx, host), new Promise(r => setTimeout(r, 20000))]);
                 const lines = linesOf(host), firstUrl = host.querySelector('a[href^="http"]')?.href || d.sourceUrl || '';
                 const label = `${T(d.label)}${placeLabel ? ` — ${placeLabel}` : ''}${ctx.year ? `, ${ctx.year}` : ''}`;
-                items = lines.map(l => ({kind: 'data', title: l.text.slice(0, 120), value: l.text, origin: {label, url: l.url || firstUrl}}));
+                items = lines.map(l => ({kind: 'data', title: l.text.slice(0, 120), value: l.text.length > 120 ? l.text : '', data: l.links?.length ? {links: l.links} : null, origin: {label, url: l.url || firstUrl}}));
                 if (items.length > 1) items.push({kind: 'set', title: label, value: '', data: {icon: d.icon, columns: [T('Info'), T('Source')], rows: lines.map(l => [l.text, l.url || firstUrl]), source: d.source || label, url: firstUrl, criteria: [placeLabel, ctx.year].filter(Boolean).join(', ')}, origin: {label, url: firstUrl}});
             }
-            if (!items.length) { out.innerHTML = `<p class="muted">${esc(T('Rien trouvé pour ces critères.'))}</p>`; return; }
-            out.innerHTML = `<p class="muted"><small>${esc(T('Coche une info précise, ou « ▦ Tout » (un tableau sourcé) :'))}</small></p><div data-cx-dres></div>`;
+            if (!items.length) { out.innerHTML = `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">🔎</span><b>${esc(T('Rien trouvé pour ces critères.'))}</b><p>${esc(T('Essaie une autre date, un lieu voisin ou une distance plus grande.'))}</p></div>`; return; }
+            out.innerHTML = `<h6 class="cx-step">3. ${esc(T('Les résultats'))}</h6><p class="cx-muted"><small>${esc(T('Coche une info précise, ou « ▦ Tout le tableau » (avec sa source) :'))}</small></p><div data-cx-dres></div>`;
             const box = out.querySelector('[data-cx-dres]');
-            box.innerHTML = resultsHtml(st, items.sort((a, b) => (a.kind === 'set') - (b.kind === 'set')).map(x => (x.kind === 'set' ? {...x, title: `▦ ${T('Tout')} : ${x.title}`} : x)));
+            box.innerHTML = resultsHtml(st, items.sort((a, b) => (a.kind === 'set') - (b.kind === 'set')).map(x => (x.kind === 'set' ? {...x, title: `▦ ${T('Tout le tableau')} : ${x.title}`} : x)), {groups: false});
             bindResults(st, box);
             const set = st.results.find(x => x.kind === 'set'); if (set) previewItem(st, set);
         } catch (e) { out.innerHTML = `<p class="error">${esc(e.notInstalled ? T('Ces données ne sont pas encore installées sur cet ordinateur.') : e.message)}</p>`; }
@@ -799,31 +1071,120 @@
         const out = [], seen = new Set();
         (blocks.length ? blocks : [host]).forEach(b => {
             const c = b.cloneNode(true); c.querySelectorAll('button, script, style').forEach(x => x.remove());
-            const text = (c.innerText || c.textContent || '').replace(/\s+/g, ' ').replace(/↗\s*source/gi, '').trim();
+            // les petits liens « carte ↗ · itinéraire ↗ » : gardés à part (↗ carte), pas dans le texte de la ligne
+            const links = [...c.querySelectorAll('a[href^="http"]')].filter(a => /↗/.test(a.textContent)).map(a => { const l = a.textContent.replace(/↗/g, '').trim(); a.remove(); return {label: l, url: a.href}; });
+            const text = (c.innerText || c.textContent || '').replace(/\s+/g, ' ').replace(/↗\s*source/gi, '').replace(/(\s*·\s*)+$/, '').trim();
             if (text.length < 3 || text.length > 1000 || seen.has(text)) return; seen.add(text);
-            out.push({text, url: b.querySelector('a[href^="http"]')?.href || ''});
+            out.push({text, url: b.querySelector('a[href^="http"]')?.href || links[0]?.url || '', links});
         });
         return out.slice(0, 200);
     }
 
-    /* ── 📋 Listes : le moteur des Listes de données tel quel (critères, période, autour de, territoires) ── */
+    /* ── 📋 Listes : « Dis ce qu'il te faut », les listes par thème ; une liste s'ouvre DANS la fenêtre (critères, lignes à cocher, tout le tableau) ── */
+    const listsAll = () => (ext.dataListsEngine?.list?.() || []).filter(d => !d.link && (!d.enabled || d.enabled() !== false));
+    const ASK_EX = ['les décès à Tulle du 1er au 30 juin 1980', 'les châteaux à 4 km de Brive', 'les gares de la Corrèze', 'les crues de 1875'];
     function drawLists(st, res) {
-        const lists = (ext.dataListsEngine?.list?.() || []).filter(d => !d.link && (!d.enabled || d.enabled() !== false));
-        res.innerHTML = `<div class="cx-ask"><label>${esc(T('Dis ce qu’il te faut :'))}<input type="search" data-cx-ask placeholder="${esc(T('ex. les décès à Tulle du 1er au 30 juin 1980 · les châteaux à 4 km de Brive'))}"></label><button type="button" class="button small" data-cx-askgo>${esc(T('Chercher'))}</button><p class="muted" data-cx-askmsg><small>${esc(T('Ou choisis une liste : elle s’ouvre avec tous ses critères (période, commune, « autour de… », territoire), puis « 🧺 Prendre… ».'))}</small></p></div>
-            <ul class="cx-rlist cx-lists">${lists.map(d => `<li><button type="button" class="cx-rt" data-cx-list="${esc(d.id)}"><b>${esc(`${d.icon || '📋'} ${T(d.label)}`)}</b><small>${esc(T(d.group || ''))}${d.source ? ` · ${esc(d.source)}` : ''}</small></button></li>`).join('')}</ul>`;
-        const go = (id, preset) => { const tgt = st.target, ctx = st.ctx; st.dlg.close(); listTake = {target: tgt, ctx, id}; ext.dataListsEngine.open(id, preset || null); };
-        res.querySelectorAll('[data-cx-list]').forEach(b => b.addEventListener('click', () => go(b.dataset.cxList)));
+        const lists = listsAll();
+        const groups = [...new Set(lists.map(d => d.group || 'Autres'))];
+        res.innerHTML = `<div class="cx-pad"><div class="cx-ask"><label for="cx-ask-in"><b>${esc(T('Dis ce qu’il te faut :'))}</b></label>
+            <div class="cx-ask-row"><input id="cx-ask-in" type="search" data-cx-ask placeholder="${esc(T('ex. les décès à Tulle du 1er au 30 juin 1980 · les châteaux à 4 km de Brive'))}"><button type="button" class="cx-b is-pri is-sm" data-cx-askgo>${esc(T('Chercher'))}</button></div>
+            <p class="cx-ex"><span class="cx-muted">${esc(T('Par exemple :'))}</span> ${ASK_EX.map(x => `<button type="button" class="cx-chip" data-cx-askex data-i18n-off>${esc(x)}</button>`).join(' ')}</p>
+            <p class="cx-muted" data-cx-askmsg role="status"><small>${esc(T('Ou choisis une liste : elle s’ouvre ici, avec ses critères ; tu coches des lignes ou tu prends tout le tableau.'))}</small></p></div>
+            ${groups.map(g => `<h6 class="cx-gh">${esc(T(g))}</h6><ul class="cx-llist">${lists.filter(d => (d.group || 'Autres') === g).map(d => `<li><button type="button" class="cx-lrow" data-cx-list="${esc(d.id)}"><span class="cx-ico" aria-hidden="true">${esc(d.icon || '📋')}</span><span class="cx-lt"><b>${esc(T(d.label))}</b><small>${esc(T('Ça donne : une ligne par élément, avec sa source'))}${d.source ? ` · ${esc(d.source)}` : ''}</small></span><span aria-hidden="true">›</span></button></li>`).join('')}</ul>`).join('')}</div>`;
+        res.querySelectorAll('[data-cx-list]').forEach(b => b.addEventListener('click', () => { st.list = {id: b.dataset.cxList, state: null}; drawTab(st); }));
         const ask = async () => {
             const q = res.querySelector('[data-cx-ask]').value.trim(); if (!q) return;
             const msg = res.querySelector('[data-cx-askmsg]');
             const r = await parseAsk(q, lists);
             if (!r) { msg.innerHTML = `<small>${esc(T('Je n’ai pas compris quelle liste : choisis-la ci-dessous.'))}</small>`; return; }
-            go(r.id, r.preset);
+            st.list = {id: r.id, state: r.preset, asked: q}; drawTab(st);
         };
         res.querySelector('[data-cx-askgo]').addEventListener('click', ask);
         res.querySelector('[data-cx-ask]').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ask(); } });
+        res.querySelectorAll('[data-cx-askex]').forEach(b => b.addEventListener('click', () => { res.querySelector('[data-cx-ask]').value = b.textContent; ask(); }));
     }
-    let listTake = null; // {target, ctx, id} : « Prendre depuis… » a ouvert une liste ; on revient déposer
+    const LBLANK = () => ({q: '', crit: [], period: null, near: null, sort: '', dir: 'asc', view: 'table'});
+    const ldCols = (d, s) => [...(d.fields || []).filter(f => f.type !== 'url' && !f.hidden), ...(s?.near ? [{key: '_km', label: 'Distance (km)', type: 'number'}] : [])];
+    const ldVal = (f, v) => (v == null ? '' : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : f.type === 'number' && typeof v === 'number' ? v.toLocaleString('fr-FR', {maximumFractionDigits: 2}) : String(v));
+    const ldCrit = (d, s) => { const E = ext.dataListsEngine; return [s.q ? `« ${s.q} »` : '', ...(s.crit || []).map(c => E.critText(d, c)), s.period ? E.periodText(s.period) : '', s.near ? E.nearText(s.near) : ''].filter(Boolean); };
+    /** une ligne d'une liste → un élément « ligne de liste » (avec sa liste comme source et son lien ↗) */
+    function ldRowItem(d, s, r) {
+        const cs = ldCols(d, s), vals = cs.map(f => ldVal(f, r[f.key])), url = (d.fields || []).filter(f => f.type === 'url').map(f => r[f.key]).find(Boolean) || '';
+        const head = cs.map(f => `${T(f.label)}${f.unit ? ` (${T(f.unit)})` : ''}`);
+        return {kind: 'row', title: String(vals.find(Boolean) || T(d.label)).slice(0, 200), value: vals.slice(1).filter(Boolean).join(' · ').slice(0, 2000), ref_id: 0,
+            data: {columns: head, row: vals, list: d.id, icon: d.icon || '📋'},
+            _v: {ico: d.icon || '📋', extra: [], pills: [], fields: head.map((h, i) => [h, vals[i]]).filter(([, x]) => x)},
+            origin: {kind: 'list', id: d.id, label: `${T('Listes')} · ${T(d.label)}${d.source ? ` — ${d.source}` : ''}`, url: url || d.sourceUrl || '', open: {list: d.id, preset: s}}};
+    }
+    async function ldAll(d, s, max = 5000) {
+        const E = ext.dataListsEngine, out = []; let total = Infinity;
+        while (out.length < Math.min(total, max)) { const p = await E.fetchPage(d, s, out.length, 2000); total = p.total; if (!p.rows.length) break; out.push(...p.rows); }
+        return out.slice(0, max);
+    }
+    function ldSet(d, s, rows) {
+        const cs = ldCols(d, s), crit = ldCrit(d, s).join(' · ');
+        return {kind: 'set', title: `${d.icon || '📋'} ${T(d.label)}${crit ? ` — ${crit}` : ''}`, value: '',
+            data: {icon: d.icon || '📋', columns: cs.map(f => `${T(f.label)}${f.unit ? ` (${T(f.unit)})` : ''}`), rows: rows.map(r => cs.map(f => ldVal(f, r[f.key]))), source: d.source || T(d.label), url: d.sourceUrl || '', criteria: crit, request: {list: d.id, state: s}, taken: new Date().toISOString().slice(0, 10)},
+            origin: {kind: 'list', id: d.id, label: `${T('Listes')} · ${T(d.label)}`, url: d.sourceUrl || '', open: {list: d.id, preset: s}}};
+    }
+    async function drawListIn(st, res) {
+        const E = ext.dataListsEngine, d = listsAll().find(x => x.id === st.list.id);
+        if (!E || !d) { st.list = null; return drawLists(st, res); }
+        const s = st.list.state = {...LBLANK(), ...(st.list.state || E.stateOf(d.id) || {})};
+        const crit = ldCrit(d, s);
+        const top = `<div class="cx-lhead"><button type="button" class="cx-b is-ter is-sm" data-cx-lback>← ${esc(T('Toutes les listes'))}</button>
+            <h3 class="cx-ltitle"><span aria-hidden="true">${esc(d.icon || '📋')}</span> ${esc(T(d.label))}</h3>
+            ${st.list.asked ? `<p class="cx-understood" role="status">${esc(T('J’ai compris : « {q} »', {q: st.list.asked}))} → <b>${esc(T(d.label))}</b>${crit.length ? ` · ${esc(crit.join(' · '))}` : ''}</p>` : ''}
+            <div class="cx-lcrit">${crit.length ? crit.map(c => `<span class="cx-chip is-on">${esc(c)}</span>`).join('') : `<span class="cx-muted"><small>${esc(T('Aucun critère : toute la liste.'))}</small></span>`}</div>
+            <div class="cx-srch cx-lsrch"><input type="search" data-cx-lq value="${esc(s.q || '')}" placeholder="${esc(T('Chercher dans cette liste (un nom, une commune, une année…)'))}" aria-label="${esc(T('Chercher dans cette liste'))}"></div>
+            <div class="cx-lacts"><span class="cx-lcount" data-cx-lcount aria-live="polite"></span><button type="button" class="cx-b is-sec is-sm" data-cx-lall>☑ ${esc(T('Tout cocher'))}</button><button type="button" class="cx-b is-sec is-sm" data-cx-lset>▦ ${esc(T('Prendre tout le tableau'))}</button>
+                <button type="button" class="cx-b is-ter is-sm" data-cx-lfull title="${esc(T('Tu quittes cette fenêtre ; un bandeau te ramène ici, et ce que tu as coché reste coché.'))}">↗ ${esc(T('Ouvrir la liste complète dans l’app'))}</button></div>
+            <p class="cx-muted cx-lnote"><small>${esc(T('« Ouvrir la liste complète » : pour trier, ajouter un critère, enregistrer la recherche. Un bandeau te ramène ici, ce que tu as coché reste coché.'))}</small></p></div><div data-cx-lrows></div>`;
+        res.innerHTML = `<div class="cx-pad">${top}</div>`;
+        const rowsBox = res.querySelector('[data-cx-lrows]'), cnt = res.querySelector('[data-cx-lcount]');
+        res.querySelector('[data-cx-lback]').addEventListener('click', () => { st.list = null; drawTab(st); });
+        let tm = 0; res.querySelector('[data-cx-lq]').addEventListener('input', e => { clearTimeout(tm); tm = setTimeout(() => { s.q = e.target.value.trim(); paintRows(); }, 250); });
+        res.querySelector('[data-cx-lq]').addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
+        res.querySelector('[data-cx-lall]').addEventListener('click', () => { const on = st.results.some(x => !st.picked.has(pickKey(x))); st.results.forEach(x => togglePick(st, x, on)); rowsBox.querySelectorAll('[data-cx-ri]').forEach(cb => { cb.checked = on; cb.closest('li')?.classList.toggle('is-on', on); }); paintCount(st); });
+        res.querySelector('[data-cx-lset]').addEventListener('click', async e => {
+            const b = e.currentTarget; b.disabled = true;
+            try { const rows = await ldAll(d, s); if (!rows.length) { toast(T('Aucune ligne trouvée avec ces critères.')); return; } const it = ldSet(d, s, rows); togglePick(st, it, true); paintCount(st); previewItem(st, it); toast(T('▦ Ensemble coché : {n}', {n: plural(rows.length, T('ligne'))})); }
+            catch (err) { toast(err.message, 'error'); } finally { b.disabled = false; }
+        });
+        res.querySelector('[data-cx-lfull]').addEventListener('click', () => openFullList(st, d, s));
+        const ok = d.installed ? await d.installed().catch(() => false) : true;
+        if (!ok) { rowsBox.innerHTML = `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">⤓</span><b>${esc(T('Ces données ne sont pas encore installées sur cet ordinateur.'))}</b>${d.install && !kiosk() ? `<div class="cx-empty-row"><button type="button" class="cx-b is-sec is-sm" data-cx-lfull2>↗ ${esc(T('Les installer (page de la liste)'))}</button></div>` : ''}</div>`; rowsBox.querySelector('[data-cx-lfull2]')?.addEventListener('click', () => openFullList(st, d, s)); return; }
+        const paintRows = async () => {
+            const seq = st.lseq = (st.lseq || 0) + 1;
+            rowsBox.innerHTML = UI().spinner ? UI().spinner(T('On cherche…'), {inline: true}) : '…';
+            let p; try { p = await E.fetchPage(d, s, 0, 200); } catch (err) { if (seq === st.lseq) rowsBox.innerHTML = `<p class="error">${esc(err.message)}</p>`; return; }
+            if (seq !== st.lseq || !rowsBox.isConnected) return;
+            const items = p.rows.map(r => ldRowItem(d, s, r));
+            cnt.textContent = p.more ? T('plus de {n} lignes', {n: nf(p.total)}) : plural(p.total, T('ligne'));
+            rowsBox.innerHTML = items.length ? resultsHtml(st, items, {groups: false}) + (p.total > items.length ? `<p class="cx-muted cx-pad"><small>${esc(T('Les {a} premières lignes sur {b} : « ▦ Prendre tout le tableau » les prend toutes, ou ajoute un critère.', {a: nf(items.length), b: nf(p.total)}))}</small></p>` : '')
+                : `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">🔎</span><b>${esc(T('Rien ne correspond à ces critères.'))}</b><p>${esc(T('Retire un critère, élargis la période ou la distance (↗ Ouvrir la liste complète).'))}</p></div>`;
+            bindResults(st, rowsBox);
+        };
+        await paintRows();
+    }
+    /** ↗ la page Listes en grand : la fenêtre se ferme, un bandeau ramène ici (ce qui est coché reste coché) */
+    function openFullList(st, d, s) {
+        const app = S();
+        const back = {module: app.module, enquetesTab: app.enquetesTab, currentInvestigationId: app.currentInvestigationId, investigationFolderId: app.investigationFolderId, currentPersonId: app.currentPersonId, atelier: app.atelier ? JSON.parse(JSON.stringify(app.atelier)) : undefined};
+        listTake = {target: st.target, ctx: st.ctx, id: d.id, snap: {tab: 'lists', q: '', picked: [...st.picked.entries()], list: {id: d.id, state: s}, back}};
+        st.dlg.close();
+        ext.dataListsEngine.open(d.id, s);
+    }
+    /** « ← Revenir à Prendre depuis… » : l'écran d'avant, puis la fenêtre telle qu'on l'a laissée */
+    async function backToTake(snap, target, ctx) {
+        const b = snap.back || {};
+        if (b.module && b.module !== S().module) {
+            const app = S(); Object.entries(b).forEach(([k, v]) => { if (v !== undefined) app[k] = v; }); A().persistUiState?.(); A().setModule?.(b.module);
+            for (let i = 0; i < 30 && target && !hereOf(target); i++) await new Promise(r => setTimeout(r, 100));
+        }
+        return openTake({dest: target, ctx: (target && hereOf(target)) || ctx, restore: snap});
+    }
+    let listTake = null; // {target, ctx, id, snap} : « Prendre depuis… » a ouvert une liste en grand ; on revient
     /** la demande en français → {id de liste, critères} (dates « du 1er au 30 juin 1859 », « en 1859 », « de 1850 à 1860 » ; « à 4 km de Brive » ; « à Tulle ») */
     const MONTHS = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
     function parseDates(s) {
@@ -862,7 +1223,9 @@
         }
         return {id: d.id, preset};
     }
-    /** la barre « 🧺 Prendre… » de la page d'une liste (appelée par app-listes-donnees.js) */
+    /** la barre « 🧺 Prendre… » de la page d'une liste (appelée par app-listes-donnees.js) ; venue de « Prendre depuis… » : le bandeau
+     *  « 📥 Tu choisis des lignes pour … », une case par ligne, « Prendre les N cochées », « Tout prendre (N) », « ← Revenir » */
+    let pageTake = null; // {L, bar, back}
     function listBar(page, L) {
         if (!enabled() || !page) return;
         const send = page.querySelector('[data-ld-save]'); // dans la barre des critères (toujours visible)
@@ -870,12 +1233,29 @@
         btn.textContent = `🧺 ${T('Prendre…')}`; btn.title = T('Mettre les lignes trouvées (avec leurs critères et leur source) au panier, ou dans une enquête, l’Atelier…');
         if (send) send.after(btn); else page.querySelector('.ld-bar-row')?.prepend(btn);
         const back = listTake && listTake.id === L.d.id ? listTake : null;
+        pageTake = null;
         if (back?.target) {
-            const bar = document.createElement('div'); bar.className = 'cx-ltake'; bar.setAttribute('role', 'note');
-            bar.innerHTML = `<span>📥 ${esc(T('Prendre depuis cette liste pour « {t} » : choisis les critères, puis', {t: back.ctx?.label || T(back.target.label)}))}</span><button type="button" class="button small" data-cx-ltake>📥 ${esc(T('Tout prendre'))}</button><button type="button" class="link-button" data-cx-lx>✕</button>`;
+            btn.hidden = true; // un seul bouton pour prendre : celui du bandeau
+            const dn = destName({ctx: back.ctx, target: back.target}).replace(/[«»"]/g, '').replace(/\s+/g, ' ').trim();
+            const bar = document.createElement('div'); bar.className = 'cx-ltake'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', T('Prendre des lignes'));
+            bar.innerHTML = `<div class="cx-ltake-t"><b>📥 ${esc(T('Tu choisis des lignes pour {d}', {d: dn}))}</b><span>${esc(T('Coche les lignes, ou prends tout. Chaque ligne garde la liste comme source.'))}</span></div>
+                <button type="button" class="cx-b is-pri is-sm" data-cx-ltake-sel disabled></button><button type="button" class="cx-b is-sec is-sm" data-cx-ltake></button>
+                <button type="button" class="cx-b is-ter is-sm" data-cx-lback>← ${esc(T('Revenir à Prendre depuis…'))}</button><button type="button" class="cx-x" data-cx-lx aria-label="${esc(T('Fermer ce bandeau'))}">×</button>`;
             page.querySelector('.ld-bar')?.before(bar);
-            bar.querySelector('[data-cx-lx]').addEventListener('click', () => { listTake = null; bar.remove(); });
-            bar.querySelector('[data-cx-ltake]').addEventListener('click', async () => { const it = await listSet(L); if (!it) return; const r = await deliver(back.target, [it], {ctx: back.ctx}); if (r) { listTake = null; bar.remove(); } });
+            pageTake = {L, bar, back};
+            paintPageTake();
+            const done = () => { listTake = null; pageTake = null; bar.remove(); btn.hidden = false; page.querySelectorAll('.cx-ldck').forEach(x => x.remove()); };
+            bar.querySelector('[data-cx-lx]').addEventListener('click', done);
+            bar.querySelector('[data-cx-lback]').addEventListener('click', () => { const b = back; done(); backToTake(b.snap, b.target, b.ctx); });
+            bar.querySelector('[data-cx-ltake]').addEventListener('click', async e => { e.currentTarget.disabled = true; const it = await listSet(L); if (!it) { e.currentTarget.disabled = false; return; } const r = await deliver(back.target, [it], {ctx: back.ctx}); if (r) done(); else e.currentTarget.disabled = false; });
+            bar.querySelector('[data-cx-ltake-sel]').addEventListener('click', async e => {
+                const mine = new Map(back.snap.picked), rows = [...mine].filter(([, x]) => x.kind === 'row' && x.data?.list === L.d.id);
+                if (!rows.length) return; e.currentTarget.disabled = true;
+                const r = await deliver(back.target, rows.map(([, x]) => cleanIt(x)), {ctx: back.ctx});
+                if (!r) { e.currentTarget.disabled = false; return; }
+                rows.forEach(([k]) => mine.delete(k)); back.snap.picked = [...mine];
+                const b = back; done(); backToTake(b.snap, b.target, b.ctx);
+            });
         }
         btn.addEventListener('click', async () => {
             const n = L.total?.() || 0;
@@ -885,6 +1265,30 @@
                 {icon: '📍', label: T('Mettre dans…'), run: async () => { const it = await listSet(L); if (it) putInto([it], {anchor: btn}); }},
             ].filter(Boolean), {title: T('Prendre les lignes trouvées')});
         });
+    }
+    function paintPageTake() {
+        const p = pageTake; if (!p?.bar?.isConnected) return;
+        const n = p.back.snap.picked.filter(([, x]) => x.kind === 'row' && x.data?.list === p.L.d.id).length, tot = p.L.total?.() || 0;
+        const sel = p.bar.querySelector('[data-cx-ltake-sel]'); sel.textContent = T(n > 1 ? 'Prendre les {n} cochées' : n ? 'Prendre la ligne cochée' : 'Prendre les lignes cochées', {n: nf(n)}); sel.disabled = !n;
+        p.bar.querySelector('[data-cx-ltake]').textContent = tot ? T('Tout prendre ({n})', {n: nf(tot)}) : T('Tout prendre');
+    }
+    /** la page a dessiné ses lignes : une case devant chacune (seulement pendant le bandeau) */
+    function listRowsPainted(res, rows, {d} = {}) {
+        const p = pageTake; if (!p?.bar?.isConnected || !d || p.L.d.id !== d.id) return;
+        const s = p.L.state?.() || {}, keys = new Set(p.back.snap.picked.map(([k]) => k));
+        const tr0 = res.querySelector('thead tr'); if (tr0 && !tr0.querySelector('.cx-ldck')) tr0.insertAdjacentHTML('afterbegin', `<th class="cx-ldck"><span class="cx-sr">${esc(T('Prendre'))}</span></th>`);
+        res.querySelectorAll('tbody tr[data-ld-row]').forEach(tr => {
+            if (tr.querySelector('.cx-ldck')) return;
+            const r = rows[Number(tr.dataset.ldRow)]; if (!r) return;
+            const it = ldRowItem(d, s, r), k = pickKey(it), on = keys.has(k);
+            tr.classList.toggle('is-on', on);
+            tr.insertAdjacentHTML('afterbegin', `<td class="cx-ldck"><input type="checkbox" ${on ? 'checked' : ''} aria-label="${esc(T('Prendre « {t} »', {t: it.title}))}"></td>`);
+            tr.querySelector('.cx-ldck input').addEventListener('change', e => {
+                const m = new Map(p.back.snap.picked); if (e.target.checked) m.set(k, it); else m.delete(k); p.back.snap.picked = [...m];
+                tr.classList.toggle('is-on', e.target.checked); paintPageTake();
+            });
+        });
+        paintPageTake();
     }
     /** les lignes trouvées → un ensemble sourcé, qui garde sa demande (pour la relancer) */
     async function listSet(L) {
@@ -896,16 +1300,17 @@
             origin: {kind: 'list', id: d.id, label: `${T('Listes')} · ${T(d.label)}`, url: d.sourceUrl || '', open: {list: d.id, preset: L.state()}}};
     }
 
-    /* ── 📂 De l'extérieur : un fichier, un tableau collé, l'adresse d'un fichier de données, une image ou un PDF ── */
+    /* ── 📂 De l'extérieur : quatre cartes (un fichier, une image ou un PDF, un tableau collé, l'adresse d'un fichier de données) ── */
     function drawOutside(st, res) {
-        res.innerHTML = `<div class="cx-out">
-            <label class="button small secondary cx-file">📄 ${esc(T('Un fichier (CSV, TSV, XLSX, ODS, JSON)…'))}<input type="file" data-cx-file accept=".csv,.tsv,.txt,.json,.xlsx,.ods" hidden></label>
-            <label class="button small secondary cx-file">🖼 ${esc(T('Une image ou un PDF (comme pièce)…'))}<input type="file" data-cx-media accept="image/*,application/pdf" hidden></label>
-            <details><summary>📋 ${esc(T('Coller un tableau (copié d’un site, d’un PDF, d’Excel)'))}</summary><textarea data-cx-paste rows="5" placeholder="${esc(T('Colle ici les lignes, la première avec les titres des colonnes'))}"></textarea><button type="button" class="button small" data-cx-pastego>${esc(T('Lire le tableau'))}</button></details>
-            <details><summary>🌐 ${esc(T('L’adresse d’un fichier de données (CSV, JSON)'))}</summary><input type="url" data-cx-url placeholder="https://…/donnees.csv"><button type="button" class="button small" data-cx-urlgo>⤓ ${esc(T('Télécharger ce fichier'))}</button><small class="muted">${esc(T('Seulement un fichier de données (pas une page web) ; téléchargé une fois, quand tu cliques.'))}</small></details>
-            <div data-cx-imp></div></div>`;
+        res.innerHTML = `<div class="cx-pad cx-out"><p class="cx-muted">${esc(T('Ce qui n’est pas encore dans ta base : chaque import garde d’où il vient et la date.'))}</p><div class="cx-cards">
+            <div class="cx-card"><h6>📄 ${esc(T('Un fichier de données'))}</h6><p>${esc(T('CSV, TSV, XLSX, ODS, JSON : un relevé, un tableau d’association…'))}</p><p class="cx-gives">${esc(T('Ça donne : un tableau, filtrable par date, lieu, mot, distance'))}</p>
+                <label class="cx-b is-sec is-sm cx-file">${esc(T('Choisir un fichier…'))}<input type="file" data-cx-file accept=".csv,.tsv,.txt,.json,.xlsx,.ods" hidden></label></div>
+            <div class="cx-card"><h6>🖼 ${esc(T('Une image ou un PDF'))}</h6><p>${esc(T('Une photo, un acte scanné, un document.'))}</p><p class="cx-gives">${esc(T('Ça donne : un média de ta base, déjà coché'))}</p>
+                <label class="cx-b is-sec is-sm cx-file">${esc(T('Choisir une image ou un PDF…'))}<input type="file" data-cx-media accept="image/*,application/pdf" hidden></label></div>
+            <div class="cx-card"><details><summary><h6>📋 ${esc(T('Coller un tableau (copié d’un site, d’un PDF, d’Excel)'))}</h6></summary><textarea data-cx-paste rows="5" aria-label="${esc(T('Le tableau collé'))}" placeholder="${esc(T('Colle ici les lignes, la première avec les titres des colonnes'))}"></textarea><button type="button" class="cx-b is-sec is-sm" data-cx-pastego>${esc(T('Lire le tableau'))}</button></details><p class="cx-gives">${esc(T('Ça donne : un tableau, avec ses colonnes reconnues'))}</p></div>
+            <div class="cx-card"><details><summary><h6>🌐 ${esc(T('L’adresse d’un fichier de données (CSV, JSON)'))}</h6></summary><input type="url" data-cx-url aria-label="${esc(T('L’adresse du fichier'))}" placeholder="https://…/donnees.csv"><button type="button" class="cx-b is-sec is-sm" data-cx-urlgo>⤓ ${esc(T('Télécharger ce fichier'))}</button></details><p class="cx-gives">${esc(T('Seulement un fichier de données (pas une page web) ; téléchargé une fois, quand tu cliques.'))}</p></div>
+            </div><div data-cx-imp aria-live="polite"></div></div>`;
         const imp = res.querySelector('[data-cx-imp]');
-        const SH = () => window.LCNDA_SHEET;
         const fromRows = (rows, prov) => showImport(st, imp, rows, prov);
         res.querySelector('[data-cx-file]').addEventListener('change', async e => {
             const file = e.target.files?.[0]; if (!file) return;
@@ -928,7 +1333,6 @@
             try { const r = await post('fetch_url', {url}); const bin = Uint8Array.from(atob(r.base64), c => c.charCodeAt(0)); fromRows(await readTable(r.name, bin.buffer), {name: r.name, url: r.url}); }
             catch (err) { imp.innerHTML = `<p class="error">${esc(err.message)}</p>`; }
         });
-        void SH;
     }
     const isFormula = s => typeof s === 'string' && (/^\s*[=@]/.test(s) || /^\s*[+\-]\s*[A-Za-z(]/.test(s));
     const clean = v => { let s = String(v ?? '').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').replace(/\s+/g, ' ').trim(); if (isFormula(s)) s = ''; return s.slice(0, 2000); };
@@ -1073,6 +1477,6 @@
             undoToast(T('📮 Réponse rangée dans la piste « {p} »', {p: l.b_label || ''}), {undo: async () => { await post('inv_receive_undo', r); }});
         }}});
     }
-    ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
+    ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
         count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
 })();
