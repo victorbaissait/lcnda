@@ -53,6 +53,3 @@ def sparql(q):
 def overpass(q, server='https://overpass-api.de/api/interpreter'):
     return json.loads(get(server, 'application/json', urllib.parse.urlencode({'data': q}), tries=4, timeout=900))
 
-
-def wiktionary(params):
-    return json.loads(get('https://fr.wiktionary.org/w/api.php?' + urllib.parse.urlencode({**params, 'format': 'json', 'formatversion': '2'})))

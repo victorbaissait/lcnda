@@ -41,6 +41,9 @@ const TA_OSM_REGIONS = [
     'picardie' => 'Picardie', 'poitou-charentes' => 'Poitou-Charentes', 'provence-alpes-cote-d-azur' => 'Provence-Alpes-Côte d’Azur', 'rhone-alpes' => 'Rhône-Alpes',
     'belgium' => 'Belgique', 'luxembourg' => 'Luxembourg', 'switzerland' => 'Suisse', 'monaco' => 'Monaco'];
 
+/** département → région Geofabrik (régions d'avant 2016, comme les extraits) */
+const TA_DEP_REGION = ['67' => 'alsace', '68' => 'alsace', '24' => 'aquitaine', '33' => 'aquitaine', '40' => 'aquitaine', '47' => 'aquitaine', '64' => 'aquitaine', '03' => 'auvergne', '15' => 'auvergne', '43' => 'auvergne', '63' => 'auvergne', '14' => 'basse-normandie', '50' => 'basse-normandie', '61' => 'basse-normandie', '21' => 'bourgogne', '58' => 'bourgogne', '71' => 'bourgogne', '89' => 'bourgogne', '22' => 'bretagne', '29' => 'bretagne', '35' => 'bretagne', '56' => 'bretagne', '18' => 'centre', '28' => 'centre', '36' => 'centre', '37' => 'centre', '41' => 'centre', '45' => 'centre', '08' => 'champagne-ardenne', '10' => 'champagne-ardenne', '51' => 'champagne-ardenne', '52' => 'champagne-ardenne', '2A' => 'corse', '2B' => 'corse', '20' => 'corse', '25' => 'franche-comte', '39' => 'franche-comte', '70' => 'franche-comte', '90' => 'franche-comte', '27' => 'haute-normandie', '76' => 'haute-normandie', '75' => 'ile-de-france', '77' => 'ile-de-france', '78' => 'ile-de-france', '91' => 'ile-de-france', '92' => 'ile-de-france', '93' => 'ile-de-france', '94' => 'ile-de-france', '95' => 'ile-de-france', '11' => 'languedoc-roussillon', '30' => 'languedoc-roussillon', '34' => 'languedoc-roussillon', '48' => 'languedoc-roussillon', '66' => 'languedoc-roussillon', '19' => 'limousin', '23' => 'limousin', '87' => 'limousin', '54' => 'lorraine', '55' => 'lorraine', '57' => 'lorraine', '88' => 'lorraine', '09' => 'midi-pyrenees', '12' => 'midi-pyrenees', '31' => 'midi-pyrenees', '32' => 'midi-pyrenees', '46' => 'midi-pyrenees', '65' => 'midi-pyrenees', '81' => 'midi-pyrenees', '82' => 'midi-pyrenees', '59' => 'nord-pas-de-calais', '62' => 'nord-pas-de-calais', '44' => 'pays-de-la-loire', '49' => 'pays-de-la-loire', '53' => 'pays-de-la-loire', '72' => 'pays-de-la-loire', '85' => 'pays-de-la-loire', '02' => 'picardie', '60' => 'picardie', '80' => 'picardie', '16' => 'poitou-charentes', '17' => 'poitou-charentes', '79' => 'poitou-charentes', '86' => 'poitou-charentes', '04' => 'provence-alpes-cote-d-azur', '05' => 'provence-alpes-cote-d-azur', '06' => 'provence-alpes-cote-d-azur', '13' => 'provence-alpes-cote-d-azur', '83' => 'provence-alpes-cote-d-azur', '84' => 'provence-alpes-cote-d-azur', '01' => 'rhone-alpes', '07' => 'rhone-alpes', '26' => 'rhone-alpes', '38' => 'rhone-alpes', '42' => 'rhone-alpes', '69' => 'rhone-alpes', '73' => 'rhone-alpes', '74' => 'rhone-alpes'];
+
 /* ═════════════════════ réseau et réponses gardées ═════════════════════ */
 
 function ta_dir(string $sub = '', bool $create = false): string
@@ -178,7 +181,7 @@ function ta_clc_calc(float $lat, float $lon, ?callable $tile = null): array
     foreach (array_keys(TA_CLC_LAYERS) as $year) {
         [$in, $out, $mpp, $n] = ta_clc_sample($lat, $lon, (string) $year, $tile);
         $tiles += $n; $ha = $mpp * $mpp / 10000;
-        $wet = 0; $coast = 0; foreach ($out as $code => $c) { if (TA_CLC[$code][1] === 'marais') { $wet += $c; } // marais et tourbières de l'intérieur (les vasières de la côte changent de poste d'un inventaire à l'autre) if (in_array($code, [331, 421, 422, 423, 521, 522, 523], true)) { $coast += $c; } }
+        $wet = 0; $coast = 0; foreach ($out as $code => $c) { if (TA_CLC[$code][1] === 'marais') { $wet += $c; } /* marais et tourbières de l'intérieur seulement (les vasières de la côte changent de poste d'un inventaire à l'autre) */ if (in_array($code, [331, 421, 422, 423, 521, 522, 523], true)) { $coast += $c; } }
         $quarry = 0; foreach ($out as $code => $c) { if ($code === 131) { $quarry += $c; } }
         $res[$year] = ['groups' => ta_clc_groups($in), 'codes' => $in, 'pixels' => array_sum($in), 'wet_ha' => round($wet * $ha, 1), 'coast_ha' => round($coast * $ha, 1), 'quarry_ha' => round($quarry * $ha, 1)];
     }
@@ -254,12 +257,20 @@ function ta_osm_installed(): array
     }
     return $all;
 }
-function telech_a_osm_status(): array
+/** les régions des lieux de la famille (les plus citées d'abord) : ce qu'on propose de télécharger */
+function ta_osm_wanted(PDO $pdo): array
+{
+    require_once __DIR__ . '/lieux_patrimoine.php';
+    $out = [];
+    try { foreach (lp_user_deps($pdo) as $d) { $r = TA_DEP_REGION[$d] ?? ''; if ($r !== '' && !in_array($r, $out, true)) { $out[] = $r; } } } catch (Throwable) {}
+    return array_slice($out, 0, 6);
+}
+function telech_a_osm_status(?PDO $pdo = null): array
 {
     $packs = [];
     foreach (ta_osm_installed() as $k => $v) { $packs[$k] = ['label' => $v['meta']['label'] ?: (TA_OSM_REGIONS[$k] ?? $k), 'built' => $v['meta']['built'] ?: $v['date'], 'size' => $v['size'], 'bounds' => $v['meta']['bounds'], 'maxzoom' => $v['meta']['maxzoom']]; }
     $removed = array_map(static fn($f) => basename($f, '.mbtiles.removed'), glob(ta_dir('osm') . '/*.mbtiles.removed') ?: []);
-    return ['installed' => (bool) $packs, 'packs' => $packs, 'removed' => $removed, 'regions' => TA_OSM_REGIONS, 'dir' => ta_dir('osm')];
+    return ['installed' => (bool) $packs, 'packs' => $packs, 'removed' => $removed, 'regions' => TA_OSM_REGIONS, 'wanted' => $pdo ? ta_osm_wanted($pdo) : [], 'dir' => ta_dir('osm')];
 }
 
 /** un fichier de la version GitHub « telech-a-osm » (ou du dossier d'essai) ; $range = [début, fin] */
@@ -598,7 +609,7 @@ function telech_a_api_get(PDO $pdo, string $action, array $q): array
         'telech_a_clc' => telech_a_clc($pdo, $q),
         'telech_a_list' => telech_a_list(),
         'telech_a_about' => telech_a_about(),
-        'telech_a_osm_status' => telech_a_osm_status(),
+        'telech_a_osm_status' => telech_a_osm_status($pdo),
         'telech_a_osm_dl_info' => (static function () { try { return telech_a_osm_dl_info(); } catch (RuntimeException $e) { return ['version' => '', 'packs' => [], 'offline' => true, 'error' => $e->getMessage()]; } })(),
         'telech_a_osm_dl_resume' => telech_a_osm_dl_resume((string) ($q['id'] ?? '')),
         default => throw new LcndaBadInput('Action inconnue.'),

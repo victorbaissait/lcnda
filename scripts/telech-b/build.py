@@ -4,17 +4,16 @@
     python3 scripts/telech-b/build.py wikidata [--out DOSSIER]   # ✝️ ⛲ 🍞 🪨 🐑 🕍 🍇 depuis Wikidata (CC0)          — ici ou sur GitHub
     python3 scripts/telech-b/build.py vendanges [--out DOSSIER]  # 🍇 dates des vendanges 1354–2007 (Daux et al. 2012, NOAA)
     python3 scripts/telech-b/build.py osm [--out DOSSIER]        # ✝️ ⛲ 🍞 🪨 🐑 🕍 depuis OpenStreetMap (ODbL) — sur GitHub seulement
-    python3 scripts/telech-b/build.py dictons [--out DOSSIER]    # 🗣️ proverbes des langues régionales (Wiktionnaire, CC BY-SA 4.0)
     python3 scripts/telech-b/build.py essai --out DOSSIER        # petits fichiers INVENTÉS (marqués « fixture ») pour les essais
 
-Le service Overpass (OpenStreetMap) et l'API du Wiktionnaire ne répondent pas (ou peu) depuis l'atelier de développement :
-ces deux fabrications se font sur GitHub (.github/workflows/telech-b.yml, lancé à la main).
+Le service Overpass (OpenStreetMap) ne répond pas depuis l'atelier de développement : cette fabrication se fait sur GitHub
+(.github/workflows/telech-b.yml, lancé à la main).
+Pas de fichier de proverbes régionaux : le Wiktionnaire n'en a presque pas (« Proverbes en occitan » : 4 pages ; alsacien, picard,
+corse, provençal : pas de catégorie ; breton : une seule annexe) — l'app donne le lien (docs/telechargements-lot-b.md).
 
 Sources et licences (lues le 2026-11-25 ; voir docs/telechargements-lot-b.md) :
   · Wikidata — « All structured data … is released into the public domain under Creative Commons Zero » (CC0 1.0).
   · OpenStreetMap — Open Database License (ODbL 1.0), « © les contributeurs d'OpenStreetMap » sur chaque écran.
-  · Wiktionnaire — « Vous avez la permission de copier, distribuer ou modifier le texte de tous les articles du Wiktionnaire selon
-    les termes de la licence CC-BY-SA 4.0 » : chaque proverbe garde le lien vers sa page (attribution) ; le fichier est sous CC BY-SA 4.0.
   · Dates des vendanges — Daux, V. et al. (2012), « An open-access database of grape harvest dates for climate research »,
     Climate of the Past 8, 1403–1418 (article CC BY 3.0), données distribuées par NOAA NCEI / World Data Service for
     Paleoclimatology : « Users may access and download these data free of charge; please cite the original references ».
@@ -296,58 +295,6 @@ def build_vendanges(out):
         'regions': reg, 'fields': ['r', 'y', 'd'], 'rows': rows})
 
 
-# ═════════════════════════ 🗣️ proverbes régionaux (Wiktionnaire, sur GitHub) ═════════════════════════
-# langue (nom de la catégorie du Wiktionnaire) → régions où on la parlait ; la traduction française est la 1re définition (« # … »)
-LANGS = {'breton': ['Bretagne'], 'gallo': ['Bretagne'], 'occitan': ['Occitanie', 'Nouvelle-Aquitaine', 'Provence-Alpes-Côte d’Azur', 'Auvergne-Rhône-Alpes'],
-         'provençal': ['Provence-Alpes-Côte d’Azur'], 'gascon': ['Nouvelle-Aquitaine', 'Occitanie'], 'languedocien': ['Occitanie'], 'limousin': ['Nouvelle-Aquitaine'],
-         'auvergnat': ['Auvergne-Rhône-Alpes'], 'alsacien': ['Grand Est'], 'francique lorrain': ['Grand Est'], 'lorrain': ['Grand Est'], 'champenois': ['Grand Est'],
-         'picard': ['Hauts-de-France'], 'flamand occidental': ['Hauts-de-France'], 'normand': ['Normandie'], 'basque': ['Nouvelle-Aquitaine'], 'catalan': ['Occitanie'],
-         'corse': ['Corse'], 'francoprovençal': ['Auvergne-Rhône-Alpes', 'Bourgogne-Franche-Comté'], 'poitevin-saintongeais': ['Nouvelle-Aquitaine'],
-         'wallon': ['Wallonie'], 'bourguignon': ['Bourgogne-Franche-Comté'], 'franc-comtois': ['Bourgogne-Franche-Comté'], 'savoyard': ['Auvergne-Rhône-Alpes'],
-         'nissart': ['Provence-Alpes-Côte d’Azur'], 'vivaro-alpin': ['Auvergne-Rhône-Alpes', 'Provence-Alpes-Côte d’Azur'], 'angevin': ['Pays de la Loire'],
-         'berrichon': ['Centre-Val de Loire'], 'tourangeau': ['Centre-Val de Loire'], 'mayennais': ['Pays de la Loire']}
-WIKI_CLEAN = [(r"'''?", ''), (r'\{\{[^{}|]*\|([^{}|]*)\}\}', r'\1'), (r'\{\{[^{}]*\}\}', ''), (r'\[\[[^\]|]*\|([^\]]*)\]\]', r'\1'), (r'\[\[([^\]]*)\]\]', r'\1'), (r'<[^>]+>', ''), (r'\s+', ' ')]
-
-
-def clean(s):
-    for a, b in WIKI_CLEAN:
-        s = re.sub(a, b, s)
-    return s.strip(' .;:')
-
-
-def build_dictons(out):
-    rows = []
-    for lang, regions in LANGS.items():
-        cat = f'Catégorie:Proverbes en {lang}'
-        titles, cont = [], {}
-        while True:
-            d = wm.wiktionary({'action': 'query', 'list': 'categorymembers', 'cmtitle': cat, 'cmlimit': '500', 'cmnamespace': '0', **cont})
-            titles += [m['title'] for m in d.get('query', {}).get('categorymembers', [])]
-            if 'continue' not in d:
-                break
-            cont = {'cmcontinue': d['continue']['cmcontinue']}
-        if not titles:
-            continue
-        print(f'    {lang} : {len(titles)} proverbes')
-        for k in range(0, len(titles), 40):
-            d = wm.wiktionary({'action': 'query', 'prop': 'revisions', 'rvprop': 'content', 'rvslots': 'main', 'titles': '|'.join(titles[k:k + 40])})
-            for p in d.get('query', {}).get('pages', []):
-                txt = ((p.get('revisions') or [{}])[0].get('slots', {}).get('main', {}).get('content', '')) or ''
-                # la section de la langue, puis la 1re définition « # … » (la traduction ou l'explication en français)
-                sec = re.split(r'==\s*\{\{langue\|', txt)
-                body = next((s for s in sec if re.match(r'[^}]*\}\}', s) and re.search(r'\{\{S\|proverbe', s)), '')
-                m = re.search(r'^#\s*([^*:#].+)$', body, re.M)
-                if not m:
-                    continue
-                sense = clean(m.group(1))
-                if not sense or len(sense) > 400:
-                    continue
-                rows.append([p['title'], lang, sense, ', '.join(regions), 'https://fr.wiktionary.org/wiki/' + p['title'].replace(' ', '_')])
-    write(out, 'dictons', {'title': 'Proverbes des langues régionales (Wiktionnaire)', 'source': 'Wiktionnaire, catégories « Proverbes en … »',
-                           'licence': 'CC BY-SA 4.0', 'licence_url': 'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
-                           'url': 'https://fr.wiktionary.org/wiki/Convention:Droit_d%E2%80%99auteur', 'fields': ['p', 'lang', 'fr', 'regions', 'url'], 'rows': rows})
-
-
 # ═════════════════════════ essai : petits fichiers inventés ═════════════════════════
 def build_essai(out):
     fx = {'fixture': True, 'note': 'données INVENTÉES pour les essais'}
@@ -362,13 +309,11 @@ def build_essai(out):
                            'rows': [['Cépage d’essai', 'France', 'Essaiville', 45.0, 3.0, 1700, 'noir', '', 'Q2']]})
     write(out, 'vendanges', {'title': 'Vendanges', 'source': 'essai', 'licence': 'essai', **fx, 'regions': [{'code': 'X', 'n': 'Région d’essai', 'lat': 45.0, 'lon': 3.0, 'first': 1780, 'last': 1790, 'count': 2, 'median': 20.0}],
                              'fields': ['r', 'y', 'd'], 'rows': [[0, 1780, 20.0], [0, 1788, 30.0]]})
-    write(out, 'dictons', {'title': 'Proverbes', 'source': 'essai', 'licence': 'CC BY-SA 4.0', **fx, 'fields': ['p', 'lang', 'fr', 'regions', 'url'],
-                           'rows': [['Proverbe d’essai', 'occitan', 'Traduction d’essai.', 'Auvergne-Rhône-Alpes', 'https://fr.wiktionary.org/']]})
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('what', choices=['wikidata', 'vendanges', 'osm', 'dictons', 'essai', 'tout'])
+    ap.add_argument('what', choices=['wikidata', 'vendanges', 'osm', 'essai', 'tout'])
     ap.add_argument('--out', default=os.path.join(ROOT, 'assets', 'data'))
     ap.add_argument('--overpass', default='https://overpass-api.de/api/interpreter')
     a = ap.parse_args()
@@ -378,8 +323,6 @@ def main():
         build_vendanges(a.out)
     if a.what in ('osm', 'tout'):
         build_osm(a.out, a.overpass)
-    if a.what in ('dictons', 'tout'):
-        build_dictons(a.out)
     if a.what == 'essai':
         build_essai(a.out)
 

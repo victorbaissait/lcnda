@@ -128,7 +128,7 @@ dialog.cx-take, dialog.cx-put { --cx-bg: #fff; --cx-ink: #111; --cx-mut: #555; -
 .cx-tk-body { flex: 1; min-height: 0; display: grid; grid-template-columns: 200px minmax(0, 1fr) 8px var(--cx-pw); position: relative; }
 .cx-take.is-wide .cx-tk-body { grid-template-columns: 200px minmax(0, 1fr); }
 .cx-take.is-wide .cx-gut, .cx-take.is-wide .cx-prev { display: none; }
-.cx-rail { border-right: 1px solid var(--cx-line); padding: 12px 10px; overflow: auto; background: var(--cx-grey); }
+.cx-rail { border-right: 1px solid var(--cx-line); padding: 14px 14px; overflow: auto; background: var(--cx-grey); }
 .cx-rail h5 { margin: 12px 8px 4px; font: 800 10.5px system-ui, sans-serif; letter-spacing: .09em; text-transform: uppercase; color: var(--cx-soft); }
 .cx-rail h5:first-child { margin-top: 2px; }
 .cx-rail button { display: flex; width: 100%; align-items: center; gap: 8px; border: 0; background: none; color: var(--cx-ink); font: 500 13.5px system-ui, sans-serif; padding: 7px 10px; border-radius: 8px; cursor: pointer; text-align: left; }

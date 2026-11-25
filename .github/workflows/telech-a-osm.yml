@@ -1,0 +1,100 @@
+# 🗺 Cartes OpenStreetMap hors ligne (lot A « Voir le village tel qu'il était ») : un pack .mbtiles par région, déposé dans
+# la version « telech-a-osm » du dépôt, avec telech-a-osm-manifest.json (taille, sha256, date, morceaux).
+#
+# L'app n'embarque aucune carte : Réglages → 🗂 Données → « 🗺 Cartes hors ligne » → ⤓ télécharge le pack par tranches
+# (lib/telech_a.php), le vérifie (taille, empreinte, MBTiles lisible), puis dessine les tuiles sur l'ordinateur, sans Internet.
+# Fabrication : extrait régional de Geofabrik (download.geofabrik.de, données OpenStreetMap, ODbL 1.0) + polygones de la mer
+# (osmdata.openstreetmap.de, ODbL) → tilemaker v3.0.0 (schéma OpenMapTiles, CC BY 4.0), zoom 0 à 14.
+# Attribution obligatoire, écrite sur les cartes de l'app : « © les contributeurs d'OpenStreetMap ».
+#
+# Lancer : onglet « Actions » → « Cartes OpenStreetMap hors ligne » → « Run workflow », avec la liste des régions
+# (identifiants Geofabrik séparés par des virgules : bretagne, basse-normandie, belgium…). Une région déjà déposée est remplacée.
+
+name: Cartes OpenStreetMap hors ligne
+
+on:
+  workflow_dispatch:
+    inputs:
+      regions:
+        description: 'Régions Geofabrik, séparées par des virgules (ex. bretagne,pays-de-la-loire,belgium)'
+        required: true
+        default: 'bretagne'
+  push:
+    # un envoi qui touche ce fichier fait seulement connaître l'atelier à GitHub (rien n'est fabriqué)
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-a-osm.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-a-osm
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+
+      - name: Outils (tilemaker v3.0.0, compilé ici)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libboost-dev libboost-filesystem-dev libboost-iostreams-dev libboost-program-options-dev \
+            libboost-system-dev liblua5.1-0-dev libshp-dev libsqlite3-dev rapidjson-dev zlib1g-dev sqlite3 jq unzip
+          git clone --depth 1 --branch v3.0.0 https://github.com/systemed/tilemaker.git "$RUNNER_TEMP/tilemaker"
+          make -C "$RUNNER_TEMP/tilemaker" -j"$(nproc)"
+          sudo make -C "$RUNNER_TEMP/tilemaker" install
+          tilemaker --help | head -3
+
+      - name: Fabriquer les régions demandées
+        env:
+          REGIONS: ${{ github.event.inputs.regions }}
+        run: |
+          set -e
+          mkdir -p sortie
+          for r in $(echo "$REGIONS" | tr ',' ' '); do
+            bash scripts/telech-a/osm-region.sh "$r" sortie "$RUNNER_TEMP/tilemaker" || echo "⚠ région ratée : $r"
+          done
+          ls -l sortie
+          ls sortie/*.mbtiles >/dev/null
+
+      - name: Déposer les packs dans la version « telech-a-osm »
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          gh release view telech-a-osm --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create telech-a-osm --repo "$GITHUB_REPOSITORY" --title "Cartes OpenStreetMap hors ligne (LCNDA)" --prerelease \
+              --notes "Packs régionaux de tuiles vectorielles (MBTiles, schéma OpenMapTiles, zoom 0-14) pour les cartes hors ligne de l'app (Réglages → 🗂 Données). © les contributeurs d'OpenStreetMap, ODbL 1.0 (https://www.openstreetmap.org/copyright). Extraits : Geofabrik. Mer : osmdata.openstreetmap.de (ODbL). Tuiles : tilemaker, schéma OpenMapTiles (CC BY 4.0)."
+          mkdir -p envoi
+          gh release download telech-a-osm --repo "$GITHUB_REPOSITORY" --pattern telech-a-osm-manifest.json --dir envoi 2>/dev/null || echo '{"packs":{}}' > envoi/telech-a-osm-manifest.json
+          for f in sortie/osm-*.mbtiles; do
+            key=$(basename "$f" .mbtiles); key=${key#osm-}
+            for a in $(gh release view telech-a-osm --repo "$GITHUB_REPOSITORY" --json assets --jq ".assets[].name" | grep -E "^osm-$key\.mbtiles\.[0-9]{3}$" || true); do
+              gh release delete-asset telech-a-osm "$a" --repo "$GITHUB_REPOSITORY" --yes
+            done
+            (cd envoi && rm -f osm-*.mbtiles.* && split -b 1900M -d -a 3 "../$f" "osm-$key.mbtiles.")
+            python3 - "$key" "$f" "$(cat sortie/osm-$key.label)" <<'PY'
+          import json, os, sys, hashlib, datetime
+          key, f, label = sys.argv[1], sys.argv[2], sys.argv[3]
+          h = hashlib.sha256()
+          with open(f, 'rb') as fh:
+              for b in iter(lambda: fh.read(1 << 20), b''): h.update(b)
+          m = json.load(open('envoi/telech-a-osm-manifest.json'))
+          parts = sorted(p for p in os.listdir('envoi') if p.startswith(f'osm-{key}.mbtiles.') and p.split('.')[-1].isdigit())
+          m.setdefault('packs', {})[key] = {'label': label, 'size': os.path.getsize(f), 'sha256': h.hexdigest(), 'built': datetime.date.today().isoformat(),
+              'parts': [{'name': p, 'size': os.path.getsize(os.path.join('envoi', p))} for p in parts],
+              'licence': 'ODbL 1.0 — © les contributeurs d’OpenStreetMap ; schéma OpenMapTiles CC BY 4.0', 'source': 'https://download.geofabrik.de/'}
+          m['version'] = datetime.date.today().strftime('%Y-%m')
+          json.dump(m, open('envoi/telech-a-osm-manifest.json', 'w'), indent=1, ensure_ascii=False)
+          PY
+            (cd envoi && gh release upload telech-a-osm --repo "$GITHUB_REPOSITORY" --clobber $(ls | grep -E "^osm-$key\.mbtiles\.[0-9]{3}$"))
+          done
+          gh release upload telech-a-osm --repo "$GITHUB_REPOSITORY" --clobber envoi/telech-a-osm-manifest.json
+          cat envoi/telech-a-osm-manifest.json

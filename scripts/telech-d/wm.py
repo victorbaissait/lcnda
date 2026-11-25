@@ -4,7 +4,7 @@ import hashlib, json, os, time, urllib.parse, urllib.request
 
 CACHE = os.environ.get('TD_RAW') or os.path.join(os.path.expanduser('~'), '.cache', 'lcnda-td')
 UA = 'LCNDA-genealogie-build/1.0 (open-source genealogy app; data build script)'
-GAP = {'query.wikidata.org': 2.0, 'fr.wikisource.org': 2.5, 'www.wikidata.org': 1.5}
+GAP = {'query.wikidata.org': 2.0, 'fr.wikisource.org': 3.0, 'www.wikidata.org': 1.5, 'fr.wiktionary.org': 3.0, 'fr.wikipedia.org': 3.0}
 _last = {}
 
 
@@ -26,7 +26,7 @@ def get(url, accept='application/json', data=None, tries=6):
                                          **({'Content-Type': 'application/x-www-form-urlencoded'} if data else {})})
             with urllib.request.urlopen(req, timeout=120) as r:
                 body = r.read()
-            if body.lstrip()[:9] == b'{"error":' or b'too many requests' in body[:2000].lower():
+            if body.lstrip()[:9] == b'{"error":' or b'too many requests' in body[:2000].lower() or b'making too many requests' in body[:400].lower():
                 raise RuntimeError('réponse d’erreur : ' + body[:160].decode('utf-8', 'replace'))
             open(f, 'wb').write(body)
             return body
@@ -42,7 +42,7 @@ def get(url, accept='application/json', data=None, tries=6):
                 ra = int(e.headers.get('Retry-After') or 0)
             except Exception:  # noqa
                 pass
-            time.sleep(max(ra, 10 * (i + 1)) if code == 429 else 5 * (i + 1))
+            time.sleep(max(ra, 20 * (i + 1)) if code == 429 or 'too many' in str(e).lower() else 5 * (i + 1))
     raise RuntimeError(f'{url[:160]} : {last}')
 
 
@@ -54,3 +54,17 @@ def sparql(q):
 def ws(params):
     """API de fr.wikisource.org"""
     return json.loads(get('https://fr.wikisource.org/w/api.php?' + urllib.parse.urlencode({**params, 'format': 'json', 'formatversion': '2'})))
+
+
+def mw(host, params):
+    """API MediaWiki (fr.wikipedia.org, fr.wiktionary.org…)"""
+    return json.loads(get(f'https://{host}/w/api.php?' + urllib.parse.urlencode({**params, 'format': 'json', 'formatversion': '2', 'maxlag': '5'})))
+
+
+def write_gz(out_dir, name, meta):
+    import gzip
+    os.makedirs(out_dir, exist_ok=True)
+    p = os.path.join(out_dir, name)
+    with gzip.GzipFile(p, 'wb', mtime=0, compresslevel=9) as f:
+        f.write(json.dumps(meta, ensure_ascii=False, separators=(',', ':')).encode())
+    return os.path.getsize(p)
