@@ -48,7 +48,7 @@ const COGNAC = {name: 'Cognac', insee: '16102', country: 'France', lat: 45.6958,
         for (const r of raw('fleaux').rows) { assert.ok(r.url.startsWith('https://') && r.sentence, r.f); assert.ok(r.sentence.includes(String(r.y)) || /quatre ans plus tard/i.test(r.sentence), `${r.f} ${r.y} : ${r.sentence}`); }
         for (const r of raw('nouveautes').rows) { assert.ok(r.sentence.includes(String(r.y)), `${r.id} : ${r.sentence}`); assert.match(r.url, /^https:\/\/fr\.wikipedia\.org\/wiki\//); }
         for (const p of raw('mode').photos) assert.ok(p.sentence.includes(String(p.from)), p.id);
-        for (const list of Object.values(raw('mode').decades)) for (const g of list) { assert.ok(g.lic && g.page && /^https:\/\/upload\.wikimedia\.org\//.test(g.t), g.f); }
+        for (const list of Object.values(raw('mode').decades)) for (const g of list) { assert.ok(g.lic && g.page && /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(g.t), g.f); }
         assert.strictEqual(raw('greves').licence, 'CC0 1.0'); assert.match(raw('fleaux').licence, /CC BY-SA/);
     });
 
@@ -144,7 +144,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
     const errs = [];
     try {
         const ctx = await browser.newContext({viewport: {width: 1440, height: 900}});
-        await ctx.route(/^https:\/\/(upload|commons)\.wikimedia\.org\//, r => r.abort()); // pas d'Internet dans l'essai
+        await ctx.route(/^https:\/\/(upload|thumb|commons)\.wikimedia\.org\//, r => r.abort()); // pas d'Internet dans l'essai
         const p = await ctx.newPage();
         p.on('pageerror', e => errs.push(e.message));
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_APP?.defaultPersonBlocks, null, {timeout: 30000});

@@ -10,7 +10,8 @@
 # « brevets-annuaires-1 » (le chiffre ne sert qu'à relancer).
 # Source (scripts/brevets-annuaires/build-annuaires.py, en tête) : SoDUCo, « Annuaires historiques parisiens, 1798-1914 »,
 # NAKALA, DOI 10.34847/nkl.98eem49t (version 4), Licence Ouverte Etalab 2.0 — directories-ListNoms.zip (2,18 Go).
-# Tailles mesurées le 25/11/2026 : voir ba-rapport.json joint à la version (et le compte rendu de fabrication).
+# Mesuré le 25/11/2026 (toutes les années) : 12 135 275 entrées gardées sur 12 545 252 lignes, 102 années (1787–1914), 140 annuaires ;
+# ba-annuaires.sqlite.gz = 505 506 649 octets (≈ 506 Mo, un seul morceau), 1,41 Go une fois installé ; ≈ 15 min de fabrication.
 
 name: Annuaires de Paris
 

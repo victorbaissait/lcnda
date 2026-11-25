@@ -362,7 +362,7 @@ def build_livres(cache, per_year=15):
     dates, sls = {}, {}
     for ty in W.BOOK_TYPES:
         try:
-            rs = sparql(cache, f'bookids-{ty}', W.BOOK_IDS % (ty, 30))
+            rs = sparql(cache, f'bookids-{ty}', W.BOOK_IDS % (ty, 20))
         except RuntimeError as e:
             print(f'  ⚠️ livres {ty} : {e}', flush=True)
             continue
@@ -415,7 +415,7 @@ def build_livres(cache, per_year=15):
         keep += frs + [r for r in lst if r not in frs][:per_year - len(frs)]
     keep.sort(key=lambda r: (r[3], -r[6]))
     print(f'  livres : {len(keep)} gardés sur {len(rows)} (au plus {per_year} par an ; {sum(r[5] for r in keep)} en français)', flush=True)
-    return {**WD, 'note': f'Œuvres littéraires (roman, pièce, poème, recueil, nouvelle, essai…) de Wikidata avec une date de parution (P577) et au moins 30 articles dans les Wikipédias du monde ; au plus {per_year} par année, les plus connues.',
+    return {**WD, 'note': f'Œuvres littéraires (roman, pièce, poème, recueil, nouvelle, essai…) de Wikidata avec une date de parution (P577) et au moins 20 articles dans les Wikipédias du monde ; au plus {per_year} par année, les plus connues.',
             'fields': ['q', 't', 'a', 'y', 'd', 'fr', 'sl', 'frwiki'], 'rows': keep}
 
 

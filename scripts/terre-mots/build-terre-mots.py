@@ -169,7 +169,8 @@ def build_things():
     write('affaires', {'attr': 'Wikidata — affaires criminelles et judiciaires en France (lieu et date)', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/', 'keys': keys, 'rows': compact(cr, keys)})
     fe = thing_rows('fetes', W.FETES)
     # les festivals de musique, de cinéma… n'en sont pas : seulement les « festival » sans plus de précision, avec un mot de fête dans le nom
-    fe = [r for r in fe if r['k'] != 'festival' or re.search(r'f[eê]te|carnaval|pardon|ducasse|kermesse|foire|feria|f[ée]ria|p[eè]lerinage|procession|bravade|tradition|folklor|saint|fest', fold(r['n']) + ' ' + fold(r['d']))]
+    # (et pas les éditions d'une année : « Carnaval de Belfort 2014 »)
+    fe = [r for r in fe if not re.search(r'\b(19|20)\d\d\b', r['n']) and (r['k'] != 'festival' or re.search(r'\b(fete|fetes|carnaval|pardon|ducasse|kermesse|foire|feria|pelerinage|procession|bravade|tradition|traditionnel|traditionnelle|folklore|folklorique|medieval|medievale|medievales|vendanges?|patronale|votive|celtique|interceltique|occitan|breton|bretonne|basque)\b', fold(r['n']) + ' ' + fold(r['d'])))]
     write('fetes', {'attr': 'Wikidata — fêtes, carnavals, pardons, pèlerinages et traditions en France (lieu, retour chaque année)', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/', 'keys': keys, 'rows': compact(fe, keys)})
     return len(leg), len(cr), len(fe)
 

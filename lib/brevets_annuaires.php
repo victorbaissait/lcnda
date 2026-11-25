@@ -404,7 +404,7 @@ function ba_matches(array $f, int $limit = 4): array
 {
     $x = ba_pdo();
     if (!$x || !ba_could_match($f)) { return ['groups' => [], 'total' => 0]; }
-    $s = $x->prepare('SELECT * FROM e WHERE k=? AND y BETWEEN ? AND ? ORDER BY y LIMIT 15000');
+    $s = $x->prepare('SELECT * FROM e WHERE k=? AND y BETWEEN ? AND ? ORDER BY y LIMIT 40000');
     $s->execute([ba_key($f['last']), $f['from'], $f['to']]);
     $rows = $s->fetchAll();
     $stems = ba_job_stems($f['jobs']);

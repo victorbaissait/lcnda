@@ -482,13 +482,13 @@ def build_doleances():
 
 # ═════════════ 🎓 grandes écoles (Wikidata) ═════════════
 ECOLE_Q = '''SELECT ?p ?pl ?b ?s ?sl ?start ?bpl WHERE {
-  VALUES ?s { wd:Q273523 wd:Q83259 wd:Q1059421 wd:Q2069566 }
+  VALUES ?s { wd:Q273626 wd:Q83259 wd:Q1132066 wd:Q481762 }
   ?p p:P69 ?st . ?st ps:P69 ?s . OPTIONAL { ?st pq:P580 ?start }
   ?p wdt:P569 ?b . ?p rdfs:label ?pl FILTER(LANG(?pl) = "fr")
   ?s rdfs:label ?sl FILTER(LANG(?sl) = "fr")
   OPTIONAL { ?p wdt:P19 ?bp . ?bp rdfs:label ?bpl FILTER(LANG(?bpl) = "fr") }
 }'''
-ECOLE_SITES = '''SELECT ?s ?sl ?web WHERE { VALUES ?s { wd:Q273523 wd:Q83259 wd:Q1059421 wd:Q2069566 } ?s rdfs:label ?sl FILTER(LANG(?sl) = "fr") OPTIONAL { ?s wdt:P856 ?web } }'''
+ECOLE_SITES = '''SELECT ?s ?sl ?web WHERE { VALUES ?s { wd:Q273626 wd:Q83259 wd:Q1132066 wd:Q481762 } ?s rdfs:label ?sl FILTER(LANG(?sl) = "fr") OPTIONAL { ?s wdt:P856 ?web } }'''
 
 
 def build_ecoles():

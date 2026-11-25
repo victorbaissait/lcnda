@@ -43,7 +43,10 @@ const KEY = 'genealogie-topbar-buttons';
             fs.readFileSync(path.join(dir, f), 'utf8').split('\n').forEach((l, i) => { if (/\bMaintenance\b|\bMAINTENANCE\b/.test(l)) left.push(`${f}:${i + 1}`); });
         }
         assert.deepEqual(left, [], 'plus de « Maintenance » écrit dans assets/js (hors noms de fonctions)');
-        assert.ok(!/\bMaintenance\b/.test(read('faq-data.js')), 'FAQ de la page de présentation refaite');
+        // La FAQ de la page de présentation est écrite dans la page (scripts/build-presentation-faq.js), plus dans faq-data.js.
+        const faqPage = read('carnet-numerique-des-ancetres.php').split('<!-- FAQ:DEBUT -->')[1].split('<!-- FAQ:FIN -->')[0];
+        assert.ok(faqPage.includes('class="presentation-faq-item"'), 'FAQ écrite dans la page de présentation');
+        assert.ok(!/\bMaintenance\b/.test(faqPage), 'FAQ de la page de présentation refaite');
     });
 
     /* ── 2. navigateur ── */

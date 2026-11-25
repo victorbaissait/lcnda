@@ -81,7 +81,9 @@ def fetch():
         except Exception as e: print(cat, 'ÉCHEC', e); continue
         words = []
         for i in range(0, len(titles), 50):
-            for t, (txt, rev) in texts(titles[i:i + 50]).items():
+            try: got = texts(titles[i:i + 50])
+            except Exception as e: print(cat, 'ÉCHEC', e); got = {}
+            for t, (txt, rev) in got.items():
                 d = definition(txt, key)
                 if d and 4 <= len(d[1]) <= 300: words.append({'w': t, 'pos': d[0], 'def': d[1], 'rev': rev})
         words.sort(key=lambda w: w['w'].lower())

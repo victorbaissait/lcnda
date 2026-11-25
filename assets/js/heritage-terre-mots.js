@@ -251,7 +251,7 @@
         const out = [];
         if (want('sol')) out.push(line('sol', solHtml(r.sol, {place: home})));
         if (want('noms')) out.push(line('noms', nomsHtml(r.noms, {place: home})));
-        if (want('disparus') && r.disparus?.length) out.push(line('disparus', `${r.disparus.map(v => `<p class="cplus-lead">🏚️ ${esc(T('Une commune de sa vie a disparu : {t}', {t: vanishedText(v, v.place)}))} ${link(v.wp_url || v.url, T('↗ source'))}</p>`).join('')}${src(...WD)}`));
+        if (want('disparus') && r.disparus?.length) out.push(line('disparus', `${r.disparus.map(v => `<p class="cplus-lead">🏚️ ${esc(T('Un lieu de sa vie a disparu. {t}', {t: vanishedText(v, v.place)}))} ${link(v.wp_url || v.url, T('↗ source'))}</p>`).join('')}${src(...WD)}`));
         if (want('fruits') && r.fruits?.items?.length) out.push(line('fruits', fruitsHtml(r.fruits.items, {lead: T('🍎 Un métier de la terre ({j}) : les variétés anciennes de sa région ({d}) — {n}.', {j: r.fruits.job || T('cultivateur'), d: r.fruits.dep_name || r.fruits.place, n: r.fruits.items.slice(0, 3).map(x => x.n).join(', ')})})));
         if (want('fetes') && r.fetes?.length) out.push(line('fetes', fetesHtml(r.fetes, {place: r.fetes[0].place})));
         if (want('legendes')) out.push(line('legendes', legendesHtml(r.legendes, {person: true})));
@@ -424,8 +424,7 @@
     if (!ext.autrefoisTabs.some(t => t.id === 'tm_mesures')) ext.autrefoisTabs.push({id: 'tm_mesures', label: T('📏 Mesures de son pays'), mount: pane => (on('mesures') ? mountMesures(pane) : (pane.innerHTML = emptyLine(T('Partie éteinte dans Réglages → Terre et mots du village.'))))});
 
     /* ═════════ Réglages → 🪨 Terre et mots du village ═════════ */
-    document.addEventListener('change', e => { const t = e.target.closest?.('[data-tm-tg]'); if (t && e.target.matches('input')) { const s = settings(), before = s[t.dataset.tmTg]; s[t.dataset.tmTg] = e.target.checked; save(s); memo.clear();
-        A().undoToast?.(T('Réglage enregistré.'), {undo: () => { const s2 = settings(); s2[t.dataset.tmTg] = before; save(s2); drawSettings(); }}); } });
+    document.addEventListener('change', e => { const t = e.target.closest?.('[data-tm-tg]'); if (t && e.target.matches('input')) { const s = settings(); s[t.dataset.tmTg] = e.target.checked; save(s); memo.clear(); } });
     document.addEventListener('click', e => { if (e.target.closest?.('[data-tm-clear]')) clearCache(); });
     async function clearCache() {
         try {

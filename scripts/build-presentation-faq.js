@@ -173,21 +173,23 @@ User-agent: *
 Allow: /
 ${SITE_URL ? `\nSitemap: ${url('sitemap.xml')}\n` : '\n# Sitemap : sitemap.xml, à côté de cette page (adresse complète : LCNDA_SITE_URL=https://… node scripts/build-presentation-faq.js)\n'}`;
 
-// ── Écrire (ou vérifier) ──
-let stale = [];
-for (const [file, text] of Object.entries(outputs)) {
-    const p = path.join(root, file);
-    const old = fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : null;
-    if (old === text) continue;
-    stale.push(file);
-    if (!CHECK) fs.writeFileSync(p, text);
-}
-if (CHECK) {
-    if (stale.length) { console.error('Pas à jour (lance node scripts/build-presentation-faq.js) : ' + stale.join(', ')); process.exit(1); }
-    console.log(`FAQ de la page de présentation à jour : ${count} questions.`);
-} else {
-    if (enMissing) console.warn(`page anglaise : ${enMissing} question(s) encore en français`);
-    console.log(`FAQ écrite dans ${PAGE_FR} et ${PAGE_EN} : ${FAQ.length} thèmes, ${count} questions.` + (stale.length ? ` Mis à jour : ${stale.join(', ')}.` : ' Rien à changer.'));
-    groups.fr.forEach(([theme, items]) => console.log(`  ${theme} : ${items.length}`));
+// ── Écrire (ou vérifier) : seulement quand le script est lancé (require() ne fait que lire) ──
+if (require.main === module) {
+    let stale = [];
+    for (const [file, text] of Object.entries(outputs)) {
+        const p = path.join(root, file);
+        const old = fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : null;
+        if (old === text) continue;
+        stale.push(file);
+        if (!CHECK) fs.writeFileSync(p, text);
+    }
+    if (CHECK) {
+        if (stale.length) { console.error('Pas à jour (lance node scripts/build-presentation-faq.js) : ' + stale.join(', ')); process.exit(1); }
+        console.log(`FAQ de la page de présentation à jour : ${count} questions.`);
+    } else {
+        if (enMissing) console.warn(`page anglaise : ${enMissing} question(s) encore en français`);
+        console.log(`FAQ écrite dans ${PAGE_FR} et ${PAGE_EN} : ${FAQ.length} thèmes, ${count} questions.` + (stale.length ? ` Mis à jour : ${stale.join(', ')}.` : ' Rien à changer.'));
+        groups.fr.forEach(([theme, items]) => console.log(`  ${theme} : ${items.length}`));
+    }
 }
 module.exports = { groups, count };

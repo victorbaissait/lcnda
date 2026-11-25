@@ -241,7 +241,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('le bloc est avec les blocs de contexte de la fiche ; il s’éteint dans les Réglages (genealogie-bases-officielles, ↶) ; caché quand il n’a rien à dire', async () => {
             const keys = await p.evaluate(() => window.LCNDA_APP.defaultPersonBlocks.map(b => b[0]));
             const i = keys.indexOf('bases_officielles'), before = ['histoire', 'monde_contexte', 'world'].map(k => keys.indexOf(k)).find(x => x >= 0);
-            assert.ok(i > 0 && (before === undefined || i === before + 1), JSON.stringify(keys.slice(Math.max(0, i - 3), i + 2)));
+            // parmi les blocs de contexte (d'autres blocs de données s'y rangent aussi) : après le premier d'entre eux
+            assert.ok(i > 0 && (before === undefined || i > before), JSON.stringify(keys.slice(Math.max(0, i - 3), i + 2)));
             await openPerson(4);
             assert.strictEqual(await p.$eval('.bo-card', c => c.hidden), true, 'rien à dire : le bloc est caché');
             await settings();
