@@ -139,7 +139,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/semaine.css?v=5">
     <link rel="stylesheet" href="assets/css/ou-chercher.css?v=3">
     <link rel="stylesheet" href="assets/css/ou-chercher-monde.css?v=1">
-    <link rel="stylesheet" href="assets/css/archives-dispo.css?v=2">
+    <link rel="stylesheet" href="assets/css/archives-dispo.css?v=3">
     <link rel="stylesheet" href="assets/css/recherche-fr.css?v=2">
     <link rel="stylesheet" href="assets/css/preuve.css?v=2">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
@@ -1475,7 +1475,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lune.js?v=1" defer></script>
 <script src="assets/js/heritage-mouvements.js?v=1" defer></script>
 <script src="assets/js/heritage-metiers-anciens.js?v=3" defer></script>
-<script src="assets/js/heritage-archive-services.js?v=6" defer></script>
+<script src="assets/js/heritage-archive-services.js?v=7" defer></script>
+<script src="assets/js/heritage-series-archives.js?v=1" defer></script>
 <script src="assets/js/heritage-citations.js?v=2" defer></script>
 <script src="assets/js/heritage-hypotheses.js?v=3" defer></script>
 <script src="assets/js/heritage-faces.js?v=11" defer></script>
@@ -1639,7 +1640,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-questions.js?v=4" defer></script>
 <script src="assets/js/heritage-photo-ask.js?v=3" defer></script>
 <script src="assets/js/heritage-courriers-actes.js?v=5" defer></script>
-<script src="assets/js/heritage-archives-dispo.js?v=1" defer></script>
+<script src="assets/js/heritage-archives-dispo.js?v=2" defer></script>
 <script src="assets/js/heritage-recherche-fr.js?v=1" defer></script>
 <script src="assets/js/heritage-questions-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-postcards.js?v=5" defer></script>

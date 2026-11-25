@@ -42,3 +42,13 @@ body.is-kiosk .ad-badge, body.is-kiosk .ad-ouc { display: none !important; }
 .event-date .ad-badge { white-space: normal; text-align: left; }
 /* dans la colonne étroite de la date : le texte coule sur plusieurs lignes (plus « · Ma / de / Argen » coupé), sans dépasser de la colonne */
 .event-date .ad-badge { display: inline-block; margin: 2px 0 0; border-radius: 10px; overflow: visible; overflow-wrap: anywhere; box-sizing: border-box; }
+/* 🗂 Les séries, c'est quoi ? (heritage-series-archives.js) */
+.ser-link { font-size: 12.5px; font-weight: 500; margin-left: 6px; white-space: nowrap; }
+.ser-help h3 { margin: 14px 0 6px; font-size: 15px; }
+.ser-help h3:first-child { margin-top: 0; }
+.ser-help p { margin: 0 0 8px; }
+.ser-table th[scope=row] { white-space: nowrap; width: 1%; }
+.ser-table .ser-period th { background: var(--soft, rgba(127, 127, 127, .08)); text-align: left; font-size: 12.5px; }
+.ser-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.ser-sources { margin: 0; padding-left: 18px; font-size: 13px; }
+.ser-sources li { margin: 0 0 4px; }

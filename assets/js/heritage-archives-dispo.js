@@ -10,7 +10,7 @@
  * L213-2 sur Légifrance), ✓ Je l'ai trouvé en ligne / ✗ Pas en ligne (tout le département, ou seulement cette commune ;
  * ↶ Annuler), la Chronologie et la liste des Événements (à cocher dans Réglages → 🏛 Actes en ligne aux archives),
  * 🌍 Où chercher ? (« Ses actes aux archives »), 📮 Actes à demander (Registre de courriers), 📑 Pièces d'un dossier de
- * succession, widget « 🏛 Actes en ligne à aller voir ». Mode consultation : rien (lecture seule, pastilles cachées).
+ * succession, widget « 🏛 Actes en ligne à aller voir ». ⓘ « Les séries, c’est quoi ? » : heritage-series-archives.js. Mode consultation : rien (lecture seule, pastilles cachées).
  */
 (() => {
     'use strict';
@@ -119,6 +119,7 @@
         if (st.tag === 'DEAT' && (st.status === 'ask')) lines.push(`<p>${esc(i18n('Un acte de décès est communicable à tous, tout de suite.'))}</p>`);
         if (st.who && (st.status === 'ask' || st.status === 'restricted' || st.status === 'verify' || st.status === 'maybe')) lines.push(`<p><b>${esc(i18n('À qui demander :'))}</b> ${esc(WHO[st.who]?.[0] || '')} ${esc(whoLabel(st))}</p>`);
         lines.push(`<p class="muted">${legiHtml()}</p>`);
+        if (ext.seriesArchives) lines.push(`<p class="muted">${ext.seriesArchives.link({site: st.site, name: st.dept?.service || ''})}</p>`); // 🗂 heritage-series-archives.js
         lines.push(`<p class="muted">${esc(i18n('L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes.'))}</p>`);
         const ro = kiosk();
         const acts = [];
@@ -325,7 +326,7 @@
             ${st.site && (st.status === 'online' || st.status === 'maybe') ? `<a class="link-button" href="${esc(st.site)}" target="_blank" rel="noopener noreferrer">${esc(i18n('🏛 Ouvrir'))}</a>` : ''}${st.status === 'maybe' && st.reason === 'straddle' ? ` <small class="muted">${esc(i18n('Commence par les tables décennales.'))}</small>` : ''}
             ${(st.status === 'ask' || st.status === 'restricted') && ext.openActLetter ? `<button type="button" class="link-button" data-ad-letter-ev="${st.event_id}">${esc(i18n('📮 Lettre'))}</button>` : ''}</li>`;
         const box = document.createElement('section');
-        box.className = 'ad-ouc'; box.innerHTML = `<h4>${esc(i18n('Ses actes aux archives'))}</h4><ul>${items.slice(0, 8).map(line).join('')}</ul>`;
+        box.className = 'ad-ouc'; box.innerHTML = `<h4>${esc(i18n('Ses actes aux archives'))} ${ext.seriesArchives?.link() || ''}</h4><ul>${items.slice(0, 8).map(line).join('')}</ul>`;
         (body.querySelector('.ouc-facts') || body.firstChild)?.after(box);
     };
     const hookOuc = () => { const O = ext.ouChercher; if (!O) { setTimeout(hookOuc, 200); return; } O.afterRedraw = O.afterRedraw || []; if (!O.afterRedraw.includes(oucHook)) O.afterRedraw.push(oucHook); };
