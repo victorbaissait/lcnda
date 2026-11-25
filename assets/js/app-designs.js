@@ -817,8 +817,8 @@
         r.style.cssText = src.style.cssText;
         VARS.forEach(n => r.style.removeProperty(n));
         const isDark = src.dataset.theme === 'dark';
-        if (dark && !isDark) { r.dataset.theme = 'dark'; ['--blue', '--bg', '--paper', '--card-bg', '--card-head-bg'].forEach((k, i) => r.style.setProperty(k, [DARK.blue, DARK.bg, DARK.paper, DARK.card, DARK.cardHead][i])); r.classList.remove('lc-frame'); r.style.removeProperty('--ink'); }
-        if (!dark && isDark) { r.removeAttribute('data-theme'); ['--blue', '--bg', '--paper', '--card-bg', '--card-head-bg'].forEach((k, i) => r.style.setProperty(k, [LIGHT.blue, LIGHT.bg, LIGHT.paper, LIGHT.card, LIGHT.cardHead][i])); r.classList.remove('lc-frame'); r.style.removeProperty('--ink'); }
+        if (dark && !isDark) { r.dataset.theme = 'dark'; ['--blue', '--bg', '--paper', '--card-bg', '--card-head-bg'].forEach((k, i) => r.style.setProperty(k, [DARK.blue, DARK.bg, DARK.paper, DARK.card, DARK.cardHead][i])); r.style.setProperty('--on-blue', '#111111'); r.classList.remove('lc-frame'); r.style.removeProperty('--ink'); }
+        if (!dark && isDark) { r.removeAttribute('data-theme'); ['--blue', '--bg', '--paper', '--card-bg', '--card-head-bg'].forEach((k, i) => r.style.setProperty(k, [LIGHT.blue, LIGHT.bg, LIGHT.paper, LIGHT.card, LIGHT.cardHead][i])); r.style.setProperty('--on-blue', '#ffffff'); r.classList.remove('lc-frame'); r.style.removeProperty('--ink'); }
     }
     const fitAll = new Set();
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(entries => entries.forEach(e => e.target.lcdFit?.())) : null;

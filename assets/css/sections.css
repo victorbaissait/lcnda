@@ -40,7 +40,7 @@
 .fsec-wrap.is-big .fsec-num { color: var(--muted); font-size: 24px; font-weight: 700; opacity: .6; }
 .fsec-wrap.is-big .fsec-ic { font-size: 22px; }
 /* Bandeau : une bande de la couleur principale (Apparence), titre en blanc */
-.fsec-wrap.is-band .fsec-head { background: var(--blue); color: #fff; padding: 4px 8px 4px 14px; }
+.fsec-wrap.is-band .fsec-head { background: var(--blue); color: var(--on-blue, #fff); padding: 4px 8px 4px 14px; }
 .fsec-wrap.is-band .fsec-num { color: var(--blue); background: #fff; padding: 1px 6px; font-size: 12px; }
 .fsec-wrap.is-band .fsec-meta { color: rgba(255,255,255,.82); }
 .fsec-wrap.is-band .fsec-chev { border-color: rgba(255,255,255,.6); color: #fff; }
@@ -186,7 +186,7 @@
 .fsec-pv-h { font-weight: 900; text-transform: uppercase; letter-spacing: .06em; font-size: 10px; display: flex; gap: 5px; }
 .fsec-pv-h em { color: var(--blue); font-style: normal; }
 .fsec-pv.is-line .fsec-pv-h { border-bottom: 2px solid var(--ink); }
-.fsec-pv.is-band .fsec-pv-h { background: var(--blue); color: #fff; padding: 2px 5px; }
+.fsec-pv.is-band .fsec-pv-h { background: var(--blue); color: var(--on-blue, #fff); padding: 2px 5px; }
 .fsec-pv.is-band .fsec-pv-h em { color: #fff; }
 .fsec-pv.is-box .fsec-pv-sec { border: 1px solid var(--ink); padding: 5px; }
 .fsec-pv.is-big .fsec-pv-h { text-transform: none; font-size: 13px; letter-spacing: 0; }
@@ -195,7 +195,7 @@
 .fsec-pv-grid i { height: 12px; background: color-mix(in srgb, var(--ink) 12%, var(--card-bg)); border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent); }
 .fsec-pv-tabs { display: flex; flex-wrap: wrap; gap: 0; }
 .fsec-pv-tabs span { border: 1px solid var(--ink); padding: 1px 5px; margin-left: -1px; }
-.fsec-pv-tabs span.is-on { background: var(--blue); color: #fff; border-color: var(--blue); }
+.fsec-pv-tabs span.is-on { background: var(--blue); color: var(--on-blue, #fff); border-color: var(--blue); }
 @media (max-width: 700px) {
     .fsec-row { grid-template-columns: minmax(0, 1fr); }
     .fsec-row > .ui-toggle { grid-column: 1; }
@@ -204,12 +204,12 @@
 }
 
 /* ── En-tête d'une fiche d'animal : « ＋ Nouvelle observation » (F9) et « 👁 Vu la dernière fois » ── */
-.icon-action.lc-obs-btn { background: var(--blue); color: #fff; border-color: var(--blue); font-size: 10px; font-weight: 900; letter-spacing: -.04em; }
+.icon-action.lc-obs-btn { background: var(--blue); color: var(--on-blue, #fff); border-color: var(--blue); font-size: 10px; font-weight: 900; letter-spacing: -.04em; }
 .lc-obs-blue { margin-bottom: 6px; }
 .lc-obs-pill { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; padding: 3px 10px; border: 1.5px solid var(--blue); background: var(--blue-soft); color: var(--blue); font-weight: 800; font-size: 12px; cursor: pointer; border-radius: 999px; }
 .lc-obs-pill span { font-weight: 600; color: var(--muted); }
 .lc-obs-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -8px 0 18px; padding: 10px 14px; border: var(--line); background: var(--card-bg); }
-.lc-obs-fab { position: fixed; right: 24px; bottom: 84px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; border: 0; background: var(--blue); color: #fff; font-size: 15px; font-weight: 900; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+.lc-obs-fab { position: fixed; right: 24px; bottom: 84px; z-index: 40; width: 56px; height: 56px; border-radius: 50%; border: 0; background: var(--blue); color: var(--on-blue, #fff); font-size: 15px; font-weight: 900; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
 .person-hero-actions.lc-hide-all { display: none; }
 .lc-hero-labels { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; max-width: 220px; }
 .lc-seen { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 8px; font-size: 13px; color: var(--muted); }
@@ -233,7 +233,7 @@
 .lc-sh-pv-head b { display: block; font-size: 16px; }
 .lc-sh-pv-seen { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
 .lc-sh-pv-head .lc-hh-btns { display: grid; grid-template-columns: repeat(2, 22px); gap: 3px; }
-.lc-hh-btn.is-obs { background: var(--blue); color: #fff; border-color: var(--blue); font-size: 8px; }
+.lc-hh-btn.is-obs { background: var(--blue); color: var(--on-blue, #fff); border-color: var(--blue); font-size: 8px; }
 .lc-sh-pv-badges { display: flex; flex-wrap: wrap; gap: 6px; }
 .lc-op-panel { padding: 16px 22px; display: grid; gap: 12px; }
 .lc-op-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }

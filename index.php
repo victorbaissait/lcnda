@@ -26,12 +26,12 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=287">
+    <link rel="stylesheet" href="assets/css/app.css?v=288">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=281">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=282">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
+    <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-famille.css?v=1">
@@ -41,13 +41,13 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/heritage-diagram-perso.css?v=1">
     <link rel="stylesheet" href="assets/css/layout.css?v=17">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
-    <link rel="stylesheet" href="assets/css/tresors.css?v=14">
+    <link rel="stylesheet" href="assets/css/tresors.css?v=15">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=30">
-    <link rel="stylesheet" href="assets/css/ui.css?v=23">
+    <link rel="stylesheet" href="assets/css/ui.css?v=24">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
-    <link rel="stylesheet" href="assets/css/onglets.css?v=16">
+    <link rel="stylesheet" href="assets/css/onglets.css?v=17">
     <link rel="stylesheet" href="assets/css/audit-chrono.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=2">
@@ -71,13 +71,13 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/jeux-patience.css?v=2">
     <link rel="stylesheet" href="assets/css/jeux-plateau.css?v=1">
     <link rel="stylesheet" href="assets/css/jeux-cartes.css?v=1">
-    <link rel="stylesheet" href="assets/css/bunker.css?v=18">
+    <link rel="stylesheet" href="assets/css/bunker.css?v=19">
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
-    <link rel="stylesheet" href="assets/css/apparence.css?v=7">
-    <link rel="stylesheet" href="assets/css/sections.css?v=3">
+    <link rel="stylesheet" href="assets/css/apparence.css?v=8">
+    <link rel="stylesheet" href="assets/css/sections.css?v=4">
     <link rel="stylesheet" href="assets/css/transcribe.css?v=24">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
-    <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
+    <link rel="stylesheet" href="assets/css/shortcuts.css?v=4">
     <link rel="stylesheet" href="assets/css/meteo.css?v=4">
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
     <link rel="stylesheet" href="assets/css/terroir.css?v=1">
@@ -116,7 +116,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/successoral.css?v=8">
     <link rel="stylesheet" href="assets/css/successoral-plus2.css?v=1">
     <link rel="stylesheet" href="assets/css/complements.css?v=2">
-    <link rel="stylesheet" href="assets/css/verrou.css?v=1">
+    <link rel="stylesheet" href="assets/css/verrou.css?v=2">
     <link rel="stylesheet" href="assets/css/reseau-local.css?v=3">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
@@ -124,8 +124,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/tableur.css?v=7">
     <link rel="stylesheet" href="assets/css/socface.css?v=4">
     <link rel="stylesheet" href="assets/css/archives-en-ligne.css?v=1">
-    <link rel="stylesheet" href="assets/css/semaine.css?v=4">
-    <link rel="stylesheet" href="assets/css/ou-chercher.css?v=2">
+    <link rel="stylesheet" href="assets/css/semaine.css?v=5">
+    <link rel="stylesheet" href="assets/css/ou-chercher.css?v=3">
     <link rel="stylesheet" href="assets/css/ou-chercher-monde.css?v=1">
     <link rel="stylesheet" href="assets/css/archives-dispo.css?v=2">
     <link rel="stylesheet" href="assets/css/recherche-fr.css?v=2">
@@ -134,20 +134,20 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/lecture-autrefois.css?v=2">
     <link rel="stylesheet" href="assets/css/prenoms-france.css?v=3">
     <link rel="stylesheet" href="assets/css/visite.css?v=1">
-    <link rel="stylesheet" href="assets/css/cadastre.css?v=1">
-    <link rel="stylesheet" href="assets/css/successions.css?v=1">
+    <link rel="stylesheet" href="assets/css/cadastre.css?v=2">
+    <link rel="stylesheet" href="assets/css/successions.css?v=2">
     <link rel="stylesheet" href="assets/css/plus-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-outils.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-perso.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-nouvelles.css?v=2">
-    <link rel="stylesheet" href="assets/css/traitement-texte.css?v=5">
+    <link rel="stylesheet" href="assets/css/traitement-texte.css?v=6">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/versions.css?v=1">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=37" id="lc-frame-css" media="not all">
     <link rel="stylesheet" href="assets/css/designs-gen.css?v=39" id="lc-designs-gen" media="not all">
-    <link rel="stylesheet" href="assets/css/designs.css?v=14">
+    <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
@@ -1218,7 +1218,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=581" defer></script>
+<script src="assets/js/app.js?v=582" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=6" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1312,7 +1312,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-versions.js?v=4" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=16" defer></script>
-<script src="assets/js/app-access.js?v=19" defer></script>
+<script src="assets/js/app-access.js?v=20" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
@@ -1536,7 +1536,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-successoral-droit-core.js?v=2" defer></script>
 <script src="assets/js/heritage-successoral-droit.js?v=2" defer></script>
 <script src="assets/js/heritage-successoral-audit.js?v=1" defer></script>
-<script src="assets/js/heritage-complements-core.js?v=1" defer></script>
+<script src="assets/js/heritage-complements-core.js?v=2" defer></script>
 <script src="assets/js/heritage-complements.js?v=1" defer></script>
 <script src="assets/js/heritage-complements-2.js?v=2" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
@@ -1678,7 +1678,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-imports-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-photos-import.js?v=2" defer></script>
 <script src="assets/js/app-apparence.js?v=27" defer></script>
-<script src="assets/js/app-designs.js?v=26" defer></script>
+<script src="assets/js/app-designs.js?v=27" defer></script>
 <script src="assets/js/app-sections.js?v=10" defer></script>
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=2" defer></script>

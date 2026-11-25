@@ -1,7 +1,7 @@
 """Petit client poli pour Wikidata / Wikimedia (scripts de construction de terre-mots).
 Chaque réponse est gardée dans un dossier (raw/) : relancer le script ne refait pas les appels.
 Wikimedia limite fort les appels : User-Agent explicite, attente entre deux appels, reprise après 429."""
-import hashlib, json, os, sys, time, urllib.parse, urllib.request
+import hashlib, json, os, sys, time, urllib.error, urllib.parse, urllib.request
 
 UA = 'LCNDA-genealogie/1.0 (build script terre-mots; https://github.com/victorbaissait/lcnda)'
 RAW = os.environ.get('TM_RAW', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'raw'))
@@ -34,6 +34,11 @@ def get(url, data=None, accept='application/json', gap=1.5, key=None, tries=int(
                 return body
             except ValueError:
                 print('  réponse non JSON ou coupée, on attend', file=sys.stderr)
+        except urllib.error.HTTPError as e:
+            ra = e.headers.get('Retry-After', '') if e.headers else ''
+            print(f'  {host}: {e} — essai {i + 1}' + (f' (Retry-After {ra} s)' if ra else ''), file=sys.stderr)
+            if e.code in (429, 503) and ra.strip().isdigit():  # le serveur dit combien attendre : on attend (un peu plus)
+                time.sleep(int(ra) + 5); _last[host] = time.time(); continue
         except Exception as e:
             print(f'  {host}: {e} — essai {i + 1}', file=sys.stderr)
         time.sleep(min(120, 20 * (i + 1)))

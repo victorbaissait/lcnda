@@ -260,5 +260,5 @@ dialog.modal.wp-dlg.is-full { width: 100vw; height: 100vh; max-height: 100vh; ma
 /* les onglets de documents (heritage-traitement-texte-onglets.js), comme les feuilles du tableur */
 .wp-tabs { display: flex; align-items: stretch; min-width: 0; overflow-x: auto; flex: none; border-top: 1px solid var(--line, #d9dce2); background: var(--card-bg, #fff); }
 .wp-tab { border: 0; border-right: 1px solid var(--line, #d9dce2); background: transparent; color: inherit; font: 600 12.5px inherit; padding: 7px 14px; cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; }
-.wp-tab:hover { background: var(--blue-soft, #eef4fd); } .wp-tab.is-active { background: var(--blue, #2a7de1); color: #fff; } .wp-tab.is-drop { box-shadow: inset 3px 0 0 var(--blue, #2a7de1); }
+.wp-tab:hover { background: var(--blue-soft, #eef4fd); } .wp-tab.is-active { background: var(--blue, #2a7de1); color: var(--on-blue, #fff); } .wp-tab.is-drop { box-shadow: inset 3px 0 0 var(--blue, #2a7de1); }
 .wp-tab-add { border: 0; background: none; color: var(--blue, #2a7de1); font: 700 15px inherit; padding: 4px 12px; cursor: pointer; }

@@ -36,7 +36,7 @@
 .sc-frise { list-style: none; margin: 6px 0 10px; padding: 0; display: grid; gap: 12px; position: relative; }
 .sc-frise::before { content: ''; position: absolute; left: 2.15em; top: 6px; bottom: 6px; width: 3px; margin-left: -1px; background: var(--blue, #0066cc); opacity: .35; border-radius: 3px; }
 .sc-step { position: relative; display: grid; grid-template-columns: 4.3em minmax(0, 1fr); gap: 8px; align-items: start; margin: 0; padding: 0; }
-.sc-step-year { position: relative; z-index: 1; align-self: start; justify-self: center; height: auto; padding: 2px 8px; border-radius: 999px; background: var(--blue, #0066cc); color: #fff; font-weight: 700; font-size: 13px; line-height: 1.4; }
+.sc-step-year { position: relative; z-index: 1; align-self: start; justify-self: center; height: auto; padding: 2px 8px; border-radius: 999px; background: var(--blue, #0066cc); color: var(--on-blue, #fff); font-weight: 700; font-size: 13px; line-height: 1.4; }
 .sc-step-card { border: var(--line); border-radius: 10px; background: var(--card-bg); padding: 8px 10px; display: grid; gap: 4px; min-width: 0; }
 .sc-step-head { font-weight: 600; overflow-wrap: anywhere; }
 .sc-step-row { display: flex; flex-wrap: wrap; align-items: center; }

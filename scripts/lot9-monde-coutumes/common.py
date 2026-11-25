@@ -33,7 +33,11 @@ def get(url, params=None, data=None, accept='*/*', tries=14, binary=False, refre
             code = getattr(e, 'code', None)
             if code in (400, 404, 414):
                 raise
-            print('  … nouvel essai', i + 1, url[:120], e)
+            ra = (getattr(e, 'headers', None) or {}).get('Retry-After', '') or ''
+            print('  … nouvel essai', i + 1, url[:120], e, f'(Retry-After {ra} s)' if ra else '')
+            if code in (429, 503) and ra.strip().isdigit():  # le serveur dit combien attendre : on attend ce qu'il demande (un peu plus)
+                time.sleep(int(ra) + 5)
+                continue
             time.sleep(wait)
             wait = min(wait * 2, 120)
     raise IOError('échec : ' + url)

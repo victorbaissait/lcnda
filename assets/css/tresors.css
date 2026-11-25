@@ -134,13 +134,13 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-tr-quiz .h-tr-qz-time { display: inline-grid; place-items: center; min-width: 2em; padding: 0 .3em; border: var(--line, 2px solid #080808); background: var(--white, #fff); color: var(--blue, #0066cc); box-shadow: var(--shadow-small, 3px 3px 0 rgba(5, 93, 255, .25)); }
 .h-tr-quiz .h-tr-qz h2 { letter-spacing: -.02em; color: var(--ink, #080808); }
 .h-tr-quiz .h-tr-qz-opt { border-radius: 0; border: var(--line, 2px solid #080808); background: var(--white, #fff); color: var(--ink, #080808); box-shadow: var(--shadow, 6px 6px 0 rgba(5, 93, 255, .25)); font-weight: 700; }
-.h-tr-quiz .h-tr-qz-opt b { border-radius: 0; background: var(--blue, #0066cc); color: #fff; transform: rotate(-3deg); border: 2px solid var(--ink, #080808); }
+.h-tr-quiz .h-tr-qz-opt b { border-radius: 0; background: var(--blue, #0066cc); color: var(--on-blue, #fff); transform: rotate(-3deg); border: 2px solid var(--ink, #080808); }
 .h-tr-quiz .h-tr-qz-opt.is-good { background: #1f9d55; color: #fff; box-shadow: 6px 6px 0 var(--ink, #080808); }
 .h-tr-quiz .h-tr-qz-opt.is-bad { opacity: .35; }
 .h-tr-quiz .h-tr-qz-why { color: var(--muted, #555); }
 .h-tr-quiz .h-tr-vl-bar { background: var(--card-head-bg, #f0f0ee); border-top: var(--line, 2px solid #080808); }
 .h-tr-quiz .h-tr-vl-bar button, .h-tr-quiz .h-tr-qz-score button { border-radius: 0; border: var(--line, 2px solid #080808); background: var(--white, #fff); color: var(--ink, #080808); font-weight: 700; box-shadow: var(--shadow-small, 3px 3px 0 rgba(5, 93, 255, .25)); }
-.h-tr-quiz .h-tr-qz-score button:not(:disabled):hover, .h-tr-quiz .h-tr-vl-bar button:hover { background: var(--blue, #0066cc); color: #fff; }
+.h-tr-quiz .h-tr-qz-score button:not(:disabled):hover, .h-tr-quiz .h-tr-vl-bar button:hover { background: var(--blue, #0066cc); color: var(--on-blue, #fff); }
 .h-tr-quiz .h-tr-qz-score button small { color: var(--blue, #0066cc); }
 .h-tr-quiz .h-tr-vl-ini { background: var(--white, #fff); border: var(--line, 2px solid #080808); box-shadow: var(--shadow, 6px 6px 0 rgba(5, 93, 255, .25)); border-radius: 0; }
 /* 🖍️ Arbre à colorier : le choix du dessin */
@@ -148,7 +148,7 @@ mark.h-tr-word { background: #ffe8a3; color: inherit; border-bottom: 2px dotted 
 .h-tr-co-d { position: relative; }
 .h-tr-co-d input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .h-tr-co-d span { display: inline-block; padding: 6px 12px; border: 2px solid var(--line, #222); border-radius: 999px; background: var(--paper, #fff); font-size: 14px; }
-.h-tr-co-d input:checked + span { background: var(--blue, #2f6bff); color: #fff; border-color: var(--blue, #2f6bff); }
+.h-tr-co-d input:checked + span { background: var(--blue, #2f6bff); color: var(--on-blue, #fff); border-color: var(--blue, #2f6bff); }
 .h-tr-co-d input:focus-visible + span { outline: 3px solid var(--focus, #2f6bff); outline-offset: 2px; }
 /* 🃏 7 familles : les couleurs des familles, la fenêtre de la photo */
 .h-tr-7-cols { gap: 6px 14px; }

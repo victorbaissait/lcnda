@@ -30,6 +30,12 @@ COLUMNS = {
     8: ('SS', 'min', 'soleil (durée d’ensoleillement)'),
     9: ('WW', 'bits', 'phénomènes : 1 brouillard, 2 orage, 4 grêle, 8 neige tombée, 16 gel ou verglas, 32 brume'),
     10: ('Z', 'm', 'altitude du sol (grille des altitudes)'),
+    # les compléments Copernicus (packs « plus-… », scripts/meteo/meteo_plus.py) : de nouvelles colonnes, les autres ne changent pas
+    11: ('SH', 'cm', 'neige au sol (hauteur, à 0 h UTC)'),
+    12: ('SF', 'cm', 'neige tombée dans la journée (≈ 1 cm par mm d’eau)'),
+    13: ('UX', '0,1 °C', 'ressenti thermique UTCI le plus chaud de la journée'),
+    14: ('UN', '0,1 °C', 'ressenti thermique UTCI le plus froid de la journée'),
+    15: ('QL', 'millièmes de log10(m³/s)', 'débit de la rivière : 1000 × log10(débit en m³/s), moyenne de la journée'),
 }
 CODE = {v[0]: k for k, v in COLUMNS.items()}
 WW_FOG, WW_STORM, WW_HAIL, WW_SNOW, WW_ICE, WW_MIST = 1, 2, 4, 8, 16, 32
@@ -91,6 +97,25 @@ SOURCES = {
                  mention='Generated using Copernicus Climate Change Service information [{year}]',
                  url='https://cds.climate.copernicus.eu', sorte='grid', annees='1940 → aujourd’hui',
                  contenu='Réanalyse : carreaux ≈ 30 km, 4 heures par jour (socle) ou toutes les heures (packs)'),
+    # ── les compléments Copernicus (packs « plus-… » : scripts/meteo/meteo_plus.py) ──
+    'era5land': dict(nom='ERA5-Land (Copernicus)', licence='CC BY 4.0 (licence Copernicus)', mention='Generated using Copernicus Climate Change Service information [{year}] — ERA5-Land (Muñoz Sabater, 2019)',
+                     url='https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land', sorte='grid', annees='1950 → aujourd’hui',
+                     contenu='Neige au sol, neige tombée, températures min. et max. ; carreaux ≈ 9 km, sur terre'),
+    'utci': dict(nom='ERA5-HEAT : ressenti thermique UTCI (Copernicus)', licence='CC BY 4.0 (licence Copernicus)',
+                 mention='Generated using Copernicus Climate Change Service information [{year}] — Thermal comfort indices derived from ERA5 reanalysis (Di Napoli et al.)',
+                 url='https://cds.climate.copernicus.eu/datasets/derived-utci-historical', sorte='grid', annees='1940 → aujourd’hui',
+                 contenu='Ressenti thermique (UTCI) le plus chaud et le plus froid de la journée ; carreaux ≈ 30 km'),
+    'glofas': dict(nom='GloFAS : débit des rivières (Copernicus CEMS)', licence='Licence CEMS-FLOODS (libre, redistribution permise avec mention)',
+                   mention='Copernicus Emergency Management Service information [{year}] — GloFAS historical river discharge (Harrigan et al.)',
+                   url='https://ewds.climate.copernicus.eu/datasets/cems-glofas-historical', sorte='grid', annees='1979 → aujourd’hui',
+                   contenu='Débit des grandes rivières chaque jour (modèle LISFLOOD forcé par ERA5) ; carreaux ≈ 5 km'),
+    'cerra': dict(nom='CERRA (Copernicus)', licence='CC BY 4.0 (licence Copernicus)', mention='Generated using Copernicus Climate Change Service information [{year}] — CERRA (Ridal et al.)',
+                  url='https://cds.climate.copernicus.eu/datasets/reanalysis-cerra-single-levels', sorte='grid', annees='1985 → 2021 (et suite si publiée)',
+                  contenu='Réanalyse régionale de l’Europe : températures min. et max. ; carreaux ≈ 5,5 km'),
+    'c3s-insitu': dict(nom='Observations anciennes (Copernicus, in situ)', licence='Données « open » seulement : CC BY 4.0 (licence Copernicus) ; mention des fournisseurs',
+                       mention='Generated using Copernicus Climate Change Service information [{year}] — Global land surface atmospheric variables from comprehensive in-situ observations',
+                       url='https://cds.climate.copernicus.eu/datasets/insitu-observations-surface-land', sorte='station', annees='≈ 1720 → 1835',
+                       contenu='Les plus vieilles séries de relevés d’Europe, avant 1836 (relevés à heures fixes)'),
     '20cr': dict(nom='20CRv3 (NOAA / DOE)', licence='CC BY 4.0 (usage libre avec mention)',
                  mention='20th Century Reanalysis V3, NOAA / DOE', url='https://psl.noaa.gov/data/20thC_Rean/',
                  sorte='grid', annees='1836 → 1939', contenu='Reconstitution quotidienne, carreaux ≈ 100 km'),

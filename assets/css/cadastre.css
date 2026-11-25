@@ -23,7 +23,7 @@
 .cad-layer-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cad-layer .cad-poly.is-mine { pointer-events: visiblePainted; cursor: pointer; }
 .cad-ctl { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.cad-ctl .is-active, .cad-find-btns .is-active { background: var(--blue, #0066cc); color: #fff; }
+.cad-ctl .is-active, .cad-find-btns .is-active { background: var(--blue, #0066cc); color: var(--on-blue, #fff); }
 .map-stage.is-cad-pick { cursor: crosshair; }
 .cad-pop { position: absolute; z-index: 30; width: 280px; max-width: calc(100% - 16px); background: var(--card-bg); color: var(--ink); border: var(--line); border-radius: 10px; box-shadow: var(--shadow); padding: 10px 12px; display: grid; gap: 4px; }
 .cad-pop-x { position: absolute; right: 6px; top: 6px; }

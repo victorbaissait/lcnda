@@ -43,7 +43,7 @@
 .msr-cfg-lab { min-width: 70px; font-weight: 600; }
 .msr-seg { display: inline-flex; flex-wrap: wrap; }
 .msr-seg label { cursor: pointer; display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; margin: -1px 0 0 -1px; border: var(--line); background: var(--white); font-size: 12px; font-weight: 700; position: relative; }
-.msr-seg label.is-active { z-index: 1; color: white; background: var(--blue); }
+.msr-seg label.is-active { z-index: 1; color: var(--on-blue, #fff); background: var(--blue); }
 .msr-seg label:focus-within { outline: 2px solid var(--blue-bright, #055dff); outline-offset: 1px; }
 .msr-seg input { position: absolute; opacity: 0; pointer-events: none; }
 .msr-cfg-sorts { border: 1px solid var(--line, #e3e6ea); padding: 6px 10px; display: grid; gap: 2px; min-width: 0; }

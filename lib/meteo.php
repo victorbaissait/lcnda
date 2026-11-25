@@ -19,11 +19,15 @@ declare(strict_types=1);
  * Résultats gardés dans DATA_DIR/cache/meteo-cache.sqlite (la clé change quand un fichier de données change).
  */
 
-const METEO_COLS = [1 => 'TN', 2 => 'TX', 3 => 'T', 4 => 'RR', 5 => 'SN', 6 => 'FX', 7 => 'NN', 8 => 'SS', 9 => 'WW', 10 => 'Z'];
+const METEO_COLS = [1 => 'TN', 2 => 'TX', 3 => 'T', 4 => 'RR', 5 => 'SN', 6 => 'FX', 7 => 'NN', 8 => 'SS', 9 => 'WW', 10 => 'Z',
+    11 => 'SH', 12 => 'SF', 13 => 'UX', 14 => 'UN', 15 => 'QL']; // 11 à 15 : les compléments Copernicus (lib/meteo_plus.php)
 require_once __DIR__ . '/meteo_dl.php'; // ⤓ installer un pack en un bouton (version « meteo-donnees » du dépôt)
+require_once __DIR__ . '/meteo_plus.php'; // les compléments Copernicus (packs « plus-… » : neige, ressenti, rivières, CERRA, relevés d'avant 1836)
 const METEO_KINDS = ['complet' => 3, 'europe' => 2, 'socle' => 1, // ordre de préférence quand une station est dans deux fichiers
     // les packs du monde (GHCN-Daily, NOAA ; scripts/meteo/build-meteo.py monde-<région>) : un par continent, après les autres
-    'monde-europe' => 0, 'monde-amerique-nord' => 0, 'monde-amerique-sud' => 0, 'monde-afrique' => 0, 'monde-asie' => 0, 'monde-oceanie' => 0];
+    'monde-europe' => 0, 'monde-amerique-nord' => 0, 'monde-amerique-sud' => 0, 'monde-afrique' => 0, 'monde-asie' => 0, 'monde-oceanie' => 0,
+    // les compléments Copernicus (scripts/meteo/build-meteo.py plus-…) : à part, ils n'entrent pas dans le choix du socle
+    'plus-neige' => -1, 'plus-ressenti' => -1, 'plus-rivieres' => -1, 'plus-cerra' => -1, 'plus-anciennes' => -1];
 /** hors d'Europe, les stations sont rares : sans station à moins de 40 km ni carreau de réanalyse, celle d'un pack du monde
  *  jusqu'à 150 km (« Station à N km », la pluie devient « il a plu dans la région ») ; une station d'un pack du monde à moins
  *  de 3 km d'une station d'un autre pack est la même : sautée */
@@ -53,6 +57,11 @@ const METEO_SOURCES_INFO = [
     'chmi' => ['ČHMÚ (Tchéquie)', 'Stations de Tchéquie, chaque jour', '≈ 1961 → 2025', 'Pack Europe', 'CC BY 4.0', 'Zdroj: Český hydrometeorologický ústav'],
     'ghcn' => ['GHCN-Daily (NOAA)', 'Quelques longues séries d’Italie, du Portugal et de Slovaquie (pack Europe) ; dans les packs du monde, les plus longues séries de chaque continent (températures, pluie, neige)', '≈ 1760 → 2025', 'Pack Europe · Packs du monde (Amérique du Nord, Amérique du Sud, Afrique, Asie, Océanie, Europe hors pack Europe)', 'Domaine public (données américaines) ; autres pays : échange OMM, usage non commercial conseillé', 'Menne et al., Global Historical Climatology Network – Daily (GHCN-Daily), NOAA NCEI'],
     'era5' => ['ERA5 (Copernicus)', 'Réanalyse : carreaux ≈ 30 km, 4 heures par jour (socle) ou toutes les heures (packs)', '1940 → 2025', 'Socle · Pack complet · Pack Europe', 'CC BY 4.0', 'Generated using Copernicus Climate Change Service information [2025]'],
+    'era5land' => ['ERA5-Land (Copernicus)', 'Neige au sol, neige tombée, températures min. et max. : carreaux ≈ 9 km, sur terre', '1950 → 2025', 'Complément « Neige et températures fines »', 'CC BY 4.0 (licence Copernicus)', 'Generated using Copernicus Climate Change Service information [2025] — ERA5-Land (Muñoz Sabater, 2019)'],
+    'cerra' => ['CERRA (Copernicus)', 'Réanalyse régionale de l’Europe : températures min. et max., carreaux ≈ 5,5 km', '1985 → 2021', 'Complément « Températures très fines »', 'CC BY 4.0 (licence Copernicus)', 'Generated using Copernicus Climate Change Service information [2025] — CERRA (Ridal et al.)'],
+    'utci' => ['ERA5-HEAT : ressenti UTCI (Copernicus)', 'Ressenti thermique le plus chaud et le plus froid de la journée, carreaux ≈ 30 km', '1940 → 2025', 'Complément « Ressenti thermique »', 'CC BY 4.0 (licence Copernicus)', 'Generated using Copernicus Climate Change Service information [2025] — Thermal comfort indices derived from ERA5 reanalysis (Di Napoli et al.)'],
+    'glofas' => ['GloFAS : débit des rivières (Copernicus CEMS)', 'Débit des grandes rivières chaque jour (modèle LISFLOOD), carreaux ≈ 5 km', '1979 → 2025', 'Complément « Débit des rivières »', 'Licence CEMS-FLOODS (libre, redistribution permise avec mention)', 'Copernicus Emergency Management Service information [2025] — GloFAS historical river discharge (Harrigan et al.)'],
+    'c3s-insitu' => ['Relevés anciens (Copernicus, in situ)', 'Les plus vieilles séries de relevés d’Europe (relevés à heures fixes : le plus bas et le plus haut du jour)', '≈ 1720 → 1835', 'Complément « Relevés anciens »', 'CC BY 4.0 (licence Copernicus ; données « open » seulement)', 'Generated using Copernicus Climate Change Service information [2025] — Global land surface atmospheric variables from comprehensive in-situ observations'],
     '20cr' => ['20CRv3 (NOAA / DOE)', 'Reconstitution quotidienne, ≈ 100 km', '1836 → 1939', 'Socle (France, Belgique, Suisse, Luxembourg) · Pack Europe (toute l’Europe)', 'CC BY 4.0 — usage libre avec mention', '20th Century Reanalysis V3, NOAA / DOE'],
 ];
 
@@ -644,6 +653,8 @@ function meteo_day(float $lat, float $lon, ?float $alt, string $date, ?string $t
         $res['around'] = $around;
     }
     $res['sources'] = meteo_source_rows($sources);
+    // 5. les compléments Copernicus (détail seulement, s'il y a un pack « plus-… ») : neige, températures fines, ressenti, rivière
+    if ($detail && ($plus = meteo_plus_day($lat, $lon, $y, $i))) { $res['plus'] = $plus; }
     return $res;
 }
 

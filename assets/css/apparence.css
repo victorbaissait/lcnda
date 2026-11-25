@@ -7,7 +7,7 @@
 .person-hero-actions.lc-rows-2 { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); gap: 12px 12px; align-content: center; justify-content: center; }
 .lc-pf-btn { font-size: 15px; line-height: 1; }
 .lc-pf-link { border: var(--line); padding: 5px 10px; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; background: var(--white, #fff); color: var(--ink); cursor: pointer; font-family: inherit; }
-.lc-pf-link:hover, .lc-pf-link:focus-visible { background: var(--blue); color: #fff; }
+.lc-pf-link:hover, .lc-pf-link:focus-visible { background: var(--blue); color: var(--on-blue, #fff); }
 
 /* le réglage (Réglages → Fiches personnes et animaux) */
 .lc-hh-set { border: 0; padding: 0; margin: 0 0 14px; display: grid; gap: 6px; min-width: 0; }

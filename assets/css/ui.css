@@ -234,7 +234,7 @@ button.ui-row-thumb { cursor: pointer; }
 .icon-button.small { width: 26px; height: 26px; font-size: 12px; }
 .icon-button.tool { width: 36px; height: 36px; font-size: 17px; border-width: 1.5px; box-shadow: none; }
 .icon-button.tool.is-active { background: var(--ui-blue); color: #fff; }
-.modal-close:hover { background: var(--blue, #0066cc); color: #fff; transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ui-shadow); }
+.modal-close:hover { background: var(--blue, #0066cc); color: var(--on-blue, #fff); transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ui-shadow); }
 /* un seul aspect « désactivé » */
 button:disabled, .button:disabled, .is-disabled, .icon-button:disabled { opacity: .45; cursor: not-allowed; }
 .icon-button:disabled:hover, .button:disabled:hover { transform: none; }

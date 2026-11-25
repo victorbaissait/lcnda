@@ -12,6 +12,9 @@ Mode d'emploi pas à pas, en français simple : docs/METEO.md. En bref :
     python3 scripts/meteo/build-meteo.py monde-asie    # un pack du monde (GHCN-Daily, NOAA) : monde-amerique-nord, monde-amerique-sud,
                                                        # monde-afrique, monde-asie, monde-oceanie, monde-europe (hors pack Europe) ;
                                                        # « monde » : les six (plusieurs heures chacun)
+    python3 scripts/meteo/build-meteo.py plus-neige    # un complément Copernicus (clé Copernicus obligatoire) : plus-neige (ERA5-Land),
+                                                       # plus-ressenti (UTCI), plus-rivieres (GloFAS), plus-cerra (CERRA),
+                                                       # plus-anciennes (relevés d'avant 1836) — voir meteo_plus.py
 
 Options utiles :
     --dossier meteo-sortie     où tout est rangé (téléchargements, travail, fichiers finis) — par défaut ./meteo-sortie
@@ -1984,7 +1987,7 @@ def finish(path, out_dir, kind, wrap=True, page_size=None):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description='Fabrique les données de la « Météo d’autrefois » de LCNDA (voir docs/METEO.md).')
-    ap.add_argument('quoi', nargs='?', default='socle', choices=['socle', 'complet', 'europe', 'altitudes', 'tout', 'monde'] + WORLD_KINDS)
+    ap.add_argument('quoi', nargs='?', default='socle', choices=['socle', 'complet', 'europe', 'altitudes', 'tout', 'monde'] + WORLD_KINDS + PLUS_KINDS)
     ap.add_argument('--test', action='store_true', help='essai rapide : le Gers (32), une année, quelques stations')
     ap.add_argument('--dossier', default='meteo-sortie')
     ap.add_argument('--hors-ligne', dest='offline')
@@ -2004,6 +2007,8 @@ def main(argv=None):
     ap.add_argument('--dmi-cle', default='', help='la clé DMI si elle est demandée (sinon la variable DMI_API_KEY)')
     ap.add_argument('--stations-monde', type=int, default=0, help='combien de stations au plus dans un pack du monde (sinon : le nombre prévu pour la région)')
     a = ap.parse_args(argv)
+    if a.quoi in PLUS_KINDS:  # les compléments Copernicus : des packs à part (scripts/meteo/meteo_plus.py), le socle n'est pas touché
+        return build_plus(a)
     world = WORLD_KINDS if a.quoi == 'monde' else [a.quoi] if a.quoi in WORLD_KINDS else []
     if a.depuis is None:
         a.depuis = 1750 if world else 1836
@@ -2148,6 +2153,29 @@ def main(argv=None):
         return 130
     m = int(time.time() - t0)
     say(f'\n✓ Fini en {m // 3600} h {m % 3600 // 60:02d} min. Les fichiers sont dans {out}.\n  Le socle : copie meteo-socle.sqlite dans le dossier data-meteo de l’app ; un pack (.lcmeteo) : Réglages → 🌦 Météo d’autrefois → « ⤒ Importer le fichier… ».')
+    return 0
+
+
+# ═══════════════════════ Les compléments Copernicus (packs « plus-… », facultatifs) ═══════════════════════
+PLUS_KINDS = ['plus-neige', 'plus-ressenti', 'plus-rivieres', 'plus-cerra', 'plus-anciennes']
+
+
+def build_plus(a):
+    import meteo_plus as P
+    out = os.path.abspath(a.dossier + ('-test' if a.test and a.dossier == 'meteo-sortie' else ''))
+    os.makedirs(out, exist_ok=True)
+    t0 = time.time()
+    try:
+        say(f'🌦 Météo d’autrefois — complément : {a.quoi}{" (essai)" if a.test else ""}\n   dossier : {out}')
+        P.build(a.quoi, out, (a.depuis or 0, a.until), a.offline, a.test)
+    except (P.Stop, Stop) as e:
+        say(f'\n⛔ {e}\n')
+        return 2
+    except KeyboardInterrupt:
+        say('\n⏸ Arrêté. Relance la même commande : le programme reprendra où il en était.')
+        return 130
+    m = int(time.time() - t0)
+    say(f'\n✓ Fini en {m // 3600} h {m % 3600 // 60:02d} min. Le pack : {out}/meteo-pack-{a.quoi}.lcmeteo (Réglages → 🌦 Météo d’autrefois → « ⤒ Importer un fichier… »).')
     return 0
 
 
