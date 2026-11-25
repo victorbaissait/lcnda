@@ -241,7 +241,8 @@
         } else {
             parts.push(`<div class="wx-fold-meta">${badge(r)}<span class="muted">${esc([r.station ? `${r.station.short}, ${Math.round(r.station.km)} km` : '', r.normal?.anomaly != null && Math.abs(r.normal.anomaly) >= 1 ? `${dT(r.normal.anomaly, s)} ${r.normal.anomaly < 0 ? 'sous' : 'au-dessus de'} la normale` : ''].filter(Boolean).join(' · '))}</span></div>`);
         }
-        parts.push(`<div class="wx-links">${compact ? `<button type="button" class="link-button" data-wx-full="${Number(r.event_id) || ''}">Tout le détail…</button>` : ''}<button type="button" class="link-button" data-wx-about>↗ Source</button><button type="button" class="link-button" data-wx-map>🗺 Voir sur la carte</button>${r.place_id && !kiosk() && !compact ? `<button type="button" class="link-button" data-wx-place-edit="${Number(r.place_id)}">⛰ Altitude du lieu</button>` : ''}${r.event_id ? `<button type="button" class="icon-button wx-more" data-wx-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>` : ''}</div>`);
+        const cx = !compact && !kiosk() && ext.connexions && ext.connexions.enabled?.() !== false ? `<button type="button" class="link-button" data-wx-cxtake>🧺 ${esc(i18n('Au panier'))}</button><button type="button" class="link-button" data-wx-cxput>📍 ${esc(i18n('Mettre dans…'))}</button>` : '';
+        parts.push(`<div class="wx-links">${cx}${compact ? `<button type="button" class="link-button" data-wx-full="${Number(r.event_id) || ''}">Tout le détail…</button>` : ''}<button type="button" class="link-button" data-wx-about>↗ Source</button><button type="button" class="link-button" data-wx-map>🗺 Voir sur la carte</button>${r.place_id && !kiosk() && !compact ? `<button type="button" class="link-button" data-wx-place-edit="${Number(r.place_id)}">⛰ Altitude du lieu</button>` : ''}${r.event_id ? `<button type="button" class="icon-button wx-more" data-wx-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>` : ''}</div>`);
         if (!compact || s.sources) parts.push(`<div class="wx-src">${esc(sourcesLine(r))}</div>`); // la ligne des sources reste toujours dans le détail (licences)
         return parts.join('');
     }
@@ -304,11 +305,57 @@
         box.addEventListener('click', e => {
             if (e.target.closest('[data-wx-about]')) return openAbout();
             if (e.target.closest('[data-wx-map]')) return openMap(r);
+            if (e.target.closest('[data-wx-cxtake]')) return ext.connexions?.take?.([dayItem(r)]); // 🧺 heritage-connexions.js
+            if (e.target.closest('[data-wx-cxput]')) { close?.(); return ext.connexions?.putInto?.([dayItem(r)]); }
             const pe = e.target.closest('[data-wx-place-edit]'); if (pe) return editPlaceAltitude(Number(pe.dataset.wxPlaceEdit), () => { cache.clear(); close?.(); openDay(r.event_id); A().state?.module === 'personnes' && A().refreshScreen?.(); });
             const full = e.target.closest('[data-wx-full]'); if (full) return openDay(Number(full.dataset.wxFull));
             const more = e.target.closest('[data-wx-more]'); if (more) UI().menuAt?.(more, menuItems(r, {after: () => close?.()}));
         });
     }
+    /* ═════════════════ 🧺 Prendre la météo d'un jour (heritage-connexions.js) : des infos précises, sourcées ═════════════════ */
+    const strip = h => { const d = document.createElement('div'); d.innerHTML = h; return (d.textContent || '').replace(/\s+/g, ' ').trim(); };
+    function factsOf(r, s = settings()) {
+        const lk = look(r, s), d = r.day || {}, out = [], url = (r.sources || []).map(x => x.url).find(Boolean) || '', src = sourcesLine(r);
+        out.push({label: i18n('Le temps'), value: `${lk.icon} ${lk.title}. ${lk.desc}`.trim()});
+        if (d.tn != null) out.push({label: i18n('Température la plus basse'), value: T(d.tn, s)});
+        if (d.tx != null) out.push({label: i18n('Température la plus haute'), value: T(d.tx, s)});
+        if (d.rr != null) out.push({label: i18n('Pluie'), value: R(d.rr, s)});
+        if (d.sn > 0) out.push({label: i18n('Neige'), value: `${d.sn} cm`});
+        if (r.normal?.anomaly != null) out.push({label: i18n('Par rapport à la normale'), value: Math.abs(r.normal.anomaly) < 1 ? i18n('proche de la normale') : `${dT(r.normal.anomaly, s)} ${r.normal.anomaly < 0 ? i18n('sous') : i18n('au-dessus de')} ${i18n('la normale')} (${r.normal.period})`});
+        plusLines(r, s).forEach(([, html]) => out.push({label: i18n('Complément'), value: strip(html)}));
+        out.push({label: i18n('Fiabilité'), value: [strip(badge(r)), r.station ? i18n('station {n} à {k} km', {n: r.station.name, k: Math.round(r.station.km)}) : r.cell ? i18n('carreau {s}', {s: r.cell.source === '20cr' ? '20CR (≈ 100 km)' : 'ERA5 (≈ 30 km)'}) : ''].filter(Boolean).join(' · ')});
+        return {facts: out.map(f => ({...f, url, source: src})), source: src, url};
+    }
+    function dayItem(r) {
+        const f = factsOf(r), title = `🌦 ${i18n('Météo du {d}', {d: r.date ? dayLong(r.date) : ''})}${r.place ? ` · ${r.place}` : ''}`;
+        return {kind: 'data', title, value: f.facts.map(x => `${x.label} : ${x.value}`).join(' · '), data: {facts: f.facts, date: r.date, place: r.place}, origin: {label: `${i18n('Météo d’autrefois')} — ${f.source}`, url: f.url, person_id: Number(r.person_id) || 0}};
+    }
+    async function dayAt(place, date) {
+        const lat = place?.lat ?? place?.latitude, lon = place?.lon ?? place?.longitude;
+        if (lat == null || lon == null) throw new Error(i18n('Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'));
+        const r = await api('meteo_point', {lat, lon, date, country: place.country || '', place: place.name || '', detail: '1'});
+        if (r.installed === false) { const e = new Error(i18n('Les données météo ne sont pas installées.')); e.notInstalled = true; throw e; }
+        const day = r.result || {}; if (!day.ok) throw new Error(emptyText(day));
+        return {...day, date: day.date || date, place: day.place || place.name || ''};
+    }
+    /* « 📥 Prendre depuis… → 🧰 Données → 🌦 Météo d'autrefois » : pour une date et un lieu (ou du… au…), sans fiche */
+    (ext.pickSources = ext.pickSources || []).push({id: 'meteo_jour', icon: '🌦', label: 'Météo d’autrefois', group: 'Le lieu', needs: ['place', 'date'], source: 'Météo d’autrefois (packs installés)',
+        enabled: () => settings().on !== false,
+        installed: async () => { try { const st = await api('meteo_status'); return Object.values(st.files || {}).some(f => f && f.ok); } catch (_) { return false; } },
+        install: () => openSettings(),
+        fetch: async ctx => { const r = await dayAt(ctx.place, ctx.date); const f = factsOf(r); return {title: `🌦 ${i18n('Météo du {d}', {d: dayLong(r.date)})} · ${r.place}`, ...f}; },
+        range: async (ctx, progress) => {
+            const days = []; for (let t = Date.parse(ctx.from + 'T12:00:00Z'), end = Date.parse(ctx.to + 'T12:00:00Z'); t <= end && days.length < 92; t += 864e5) days.push(new Date(t).toISOString().slice(0, 10));
+            const rows = [], s = settings(); let url = '', source = '';
+            for (let i = 0; i < days.length; i++) {
+                progress?.(i + 1, days.length);
+                try { const r = await dayAt(ctx.place, days[i]), lk = look(r, s), d = r.day || {}, f = factsOf(r, s); url = url || f.url; source = source || f.source;
+                    rows.push([days[i], `${lk.icon} ${lk.title}`, d.tn != null ? T(d.tn, s) : '', d.tx != null ? T(d.tx, s) : '', d.rr != null ? R(d.rr, s) : '', strip(badge(r))]); }
+                catch (e) { if (e.notInstalled) throw e; rows.push([days[i], '—', '', '', '', e.message]); }
+            }
+            return {columns: [i18n('Jour'), i18n('Temps'), i18n('Min.'), i18n('Max.'), i18n('Pluie'), i18n('Fiabilité')], rows, source, url};
+        }});
+
     /* variante : le panneau qui se déplie sous l'événement */
     async function toggleFold(btn, id) {
         const row = btn.closest('.event-row'), open = row.querySelector('.wx-fold');

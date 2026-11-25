@@ -254,17 +254,32 @@ function ouc_make_lead(PDO $pdo, array $d): array
     if ($url !== '' && (!filter_var($url, FILTER_VALIDATE_URL) || !preg_match('#^https?://#i', $url))) { throw new RuntimeException('Adresse Internet invalide'); }
     $s = $pdo->prepare('SELECT * FROM persons WHERE id=?'); $s->execute([$pid]); $p = $s->fetch(PDO::FETCH_ASSOC);
     if (!$p) { throw new RuntimeException('Fiche introuvable.'); }
-    $s = $pdo->prepare("SELECT id FROM investigations WHERE person_id=? AND COALESCE(status,'open')='open' ORDER BY updated_at DESC, id DESC LIMIT 1"); $s->execute([$pid]);
-    $inv = (int) $s->fetchColumn(); $created = false;
+    $inv = 0; $created = false;
+    if (($want = safe_int($d['investigation_id'] ?? 0)) > 0) { // 🧺 l'enquête choisie dans « Dans quelle enquête ? » (heritage-connexions.js)
+        $s = $pdo->prepare('SELECT id FROM investigations WHERE id=?'); $s->execute([$want]); $inv = (int) $s->fetchColumn();
+        if (!$inv) { throw new RuntimeException('Enquête introuvable.'); }
+    } elseif (empty($d['new_investigation'])) {
+        $s = $pdo->prepare("SELECT id FROM investigations WHERE person_id=? AND COALESCE(status,'open')='open' ORDER BY updated_at DESC, id DESC LIMIT 1"); $s->execute([$pid]);
+        $inv = (int) $s->fetchColumn();
+    }
     if (!$inv) {
-        $r = save_investigation($pdo, ['person_id' => $pid, 'title' => 'Où chercher ? — ' . ouc_name($p), 'question' => 'Les sites proposés par « 🌍 Où chercher ? » pour ' . ouc_name($p) . '.', 'status' => 'open']);
+        $r = save_investigation($pdo, ['person_id' => $pid, 'title' => cx_ouc_title($d) ?: 'Où chercher ? — ' . ouc_name($p), 'question' => 'Les sites proposés par « 🌍 Où chercher ? » pour ' . ouc_name($p) . '.', 'status' => 'open']);
         $inv = (int) $r['id']; $created = true;
+    }
+    if (($into = safe_int($d['item_id'] ?? 0)) > 0) { // sur une piste qui existe : une pièce de plus (le lien)
+        require_once __DIR__ . '/connexions.php';
+        $s = $pdo->prepare('SELECT id FROM investigation_items WHERE id=? AND investigation_id=?'); $s->execute([$into, $inv]);
+        if (!$s->fetchColumn()) { throw new RuntimeException('Piste introuvable dans cette enquête.'); }
+        $lid = cx_add_item_link($pdo, $into, ['kind' => 'datum', 'ref_id' => 0, 'title' => $title, 'value' => $notes, 'data_json' => '', 'origin_json' => json_encode(['label' => 'Où chercher ?', 'url' => $url], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
+        return ['item_id' => 0, 'link_id' => $lid, 'into_item_id' => $into, 'investigation_id' => $inv, 'created' => false];
     }
     $r = add_investigation_item($pdo, ['investigation_id' => $inv, 'kind' => 'link', 'title' => $title, 'url' => $url, 'notes' => $notes, 'status' => 'to_explore', 'linked_person_ids' => (string) $pid]);
     $item = (int) ($r['id'] ?? 0);
     if (!$item) { $item = (int) $pdo->query('SELECT max(id) FROM investigation_items WHERE investigation_id=' . $inv)->fetchColumn(); }
     return ['item_id' => $item, 'investigation_id' => $inv, 'created' => $created];
 }
+
+function cx_ouc_title(array $d): string { return mb_substr(trim((string) ($d['new_title'] ?? '')), 0, 200); }
 
 /* ═════════════════════ 🧩 Les murs de brique ═════════════════════ */
 

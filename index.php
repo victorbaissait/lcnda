@@ -26,7 +26,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=289">
+    <link rel="stylesheet" href="assets/css/app.css?v=290">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=282">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
@@ -54,7 +54,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-personnes.css?v=5">
-    <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=1">
+    <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-options.css?v=1">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=2">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">

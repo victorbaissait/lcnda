@@ -191,10 +191,14 @@
     async function makeLead(view, x) {
         const ctx = view.res.ctx;
         let r;
-        try { r = await post('ou_chercher_piste', {person_id: view.pid, title: `Chercher sur ${x.site.label}`.slice(0, 200), url: x.site.href, notes: `${x.reasons.join('. ')}. — proposé par « 🌍 Où chercher ? » pour ${ctx.name}.`}); }
+        // 🧺 choisir l'enquête (ou en créer une) au lieu de prendre la dernière ouverte (heritage-connexions.js ; éteint : comme avant)
+        const where = ext.connexions?.leadTarget ? await ext.connexions.leadTarget(view.pid, `Où chercher ? — ${ctx.name}`) : {};
+        if (where === null) return;
+        try { r = await post('ou_chercher_piste', {person_id: view.pid, title: `Chercher sur ${x.site.label}`.slice(0, 200), url: x.site.href, notes: `${x.reasons.join('. ')}. — proposé par « 🌍 Où chercher ? » pour ${ctx.name}.`, ...where}); }
         catch (e) { A().toast(e.message, 'error'); return; }
         await refreshView(view);
-        A().undoToast(i18n(r.created ? '＋ Piste ajoutée : « Chercher sur {site} » (nouvelle enquête « Où chercher ? »)' : '＋ Piste ajoutée : « Chercher sur {site} »', {site: x.site.label}), {undo: async () => {
+        A().undoToast(r.link_id ? i18n('＋ Ajouté à la piste choisie : « Chercher sur {site} »', {site: x.site.label}) : i18n(r.created ? '＋ Piste ajoutée : « Chercher sur {site} » (nouvelle enquête « Où chercher ? »)' : '＋ Piste ajoutée : « Chercher sur {site} »', {site: x.site.label}), {undo: async () => {
+            if (r.link_id) await post('cx_write', {op: 'item_link_remove', ids: [r.link_id]});
             if (r.item_id) await post('delete_investigation_item', {id: r.item_id});
             if (r.created && r.investigation_id) await post('delete_investigation', {id: r.investigation_id});
             await refreshView(view);

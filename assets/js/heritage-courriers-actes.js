@@ -53,6 +53,7 @@
                 <div class="form-grid"><label>Acte<select name="act">${opt(ACTS, st.act)}</select></label><label>Ce que tu demandes<select name="what">${opt(WHATS, st.what)}</select></label></div>
                 <label>Ton lien avec la personne<select name="relation">${opt(RELS, st.relation || 'descendant')}</select></label>
                 <div data-cl-legal></div>
+                ${ext.connexions && ext.connexions.enabled?.() !== false ? `<label data-cl-piste hidden>🕵️ Piste qui attend cet acte<select name="cx_piste"><option value="">— aucune —</option></select></label>` : ''}
                 <label>Destinataire<select name="recipient">${opt(RECIPS, st.recipient || 'mairie')}</select></label>
                 <label>Adresse du destinataire<textarea name="recipient_address" rows="4" maxlength="600"></textarea></label>
                 <p class="ui-hint" data-cl-addr-hint>Vérifie l’adresse : complète le code postal ou corrige-la si besoin.</p>
@@ -72,6 +73,13 @@
             onOpen: d => {
                 d.classList.add('cl-dialog');
                 const f = d.querySelector('form'), $ = s => d.querySelector(s);
+                // 🧺 relier le courrier à la piste qui attend l'acte (heritage-connexions.js) : les pistes des enquêtes de la personne
+                const fillPistes = async pid => { const box = $('[data-cl-piste]'); if (!box) return; let invs = []; try { invs = pid ? (await api('cx_person_investigations', {person_id: pid})).investigations || [] : []; } catch (_) {}
+                    const opts = invs.flatMap(i => (i.items || []).map(x => [x.id, `${x.title} — ${i.title}`]));
+                    if (o.item_id && !opts.some(([id]) => Number(id) === Number(o.item_id))) opts.unshift([o.item_id, o.item_title || i18n('La piste choisie')]);
+                    box.querySelector('select').innerHTML = `<option value="">${esc(i18n('— aucune —'))}</option>${opts.map(([id, t]) => `<option value="${id}" ${Number(id) === Number(o.item_id) ? 'selected' : ''}>${esc(t)}</option>`).join('')}`;
+                    box.hidden = !opts.length; };
+                fillPistes(st.person_id); f.addEventListener('picker-change', e => { if (e.target.closest?.('.pk')?.dataset.picker === 'person') setTimeout(() => fillPistes(st.person_id), 300); });
                 // ⚙️ dans l'en-tête de la fenêtre (K2) : mon adresse, les modèles, 💾 réglages enregistrés
                 const head = d.querySelector('.modal-head'); head?.querySelector('[data-h-close]')?.insertAdjacentHTML('beforebegin', '<button type="button" class="icon-button" data-cl-settings title="Mon adresse et mes modèles de lettres" aria-label="Réglages des courriers">⚙️</button>');
                 const fromLine = () => { const s = cfg().sender; $('[data-cl-from]').innerHTML = `De : <b>${esc(s.name || 'ton nom')}</b>${s.address ? ` · ${esc(s.address.split('\n')[0])}…` : ' · <span class="muted">adresse à remplir</span>'} <button type="button" class="link-button" data-cl-settings>⚙️ Mon adresse et mes modèles…</button>`; };
@@ -141,9 +149,11 @@
                     precision: form.precision.value, by_email: form.querySelector('[name="by_email"]:checked')?.value === '1' ? 1 : 0, sender: cfg().sender, template: cfg().templates[form.what.value] || '',
                     letter: form.letter.value, objet: form.objet.value, date_envoi: form.date_envoi.value, relance_jours: Number(form.relance_jours.value) || 0, remind_open: !form.querySelector('[data-cl-remind]').hidden && form.remind_open.checked ? 1 : 0, media_id: mediaId};
                 const r = await write('file', body);
+                const piste = Number(form.cx_piste?.value) || 0; let cxLink = 0;
+                if (piste && r.courrier_id) { try { cxLink = (await api('cx_write', {}, {method: 'POST', body: {op: 'link_add', a_type: 'courrier', a_id: r.courrier_id, b_type: 'investigation_item', b_id: piste}}))?.id || 0; } catch (_) {} }
                 const after = () => { if (A().state?.listType === 'courriers' && A().state?.module === 'listes') A().renderList?.(); window.dispatchEvent(new CustomEvent('lcnda:courrier-filed', {detail: r})); };
                 after();
-                A().undoToast(r.relance_date ? i18n('Courrier rangé dans les courriers suivis (relance le {dt})', {dt: window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.fmtDate(new Date(r.relance_date + 'T12:00:00'), {day: 'numeric', month: 'long'}) : new Date(r.relance_date + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long'})}) : i18n('Courrier rangé dans les courriers suivis'), {undo: async () => { await write('unfile', {courrier_id: r.courrier_id}); after(); }});
+                A().undoToast(r.relance_date ? i18n('Courrier rangé dans les courriers suivis (relance le {dt})', {dt: window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.fmtDate(new Date(r.relance_date + 'T12:00:00'), {day: 'numeric', month: 'long'}) : new Date(r.relance_date + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long'})}) : i18n('Courrier rangé dans les courriers suivis'), {undo: async () => { if (cxLink) await api('cx_write', {}, {method: 'POST', body: {op: 'link_remove', id: cxLink}}).catch(() => {}); await write('unfile', {courrier_id: r.courrier_id}); after(); }});
                 o.onFiled?.(r);
             }});
         return dlg;

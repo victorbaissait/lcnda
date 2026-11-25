@@ -670,6 +670,10 @@ function aia_verify(PDO $pdo, string $raw, array $conv, array $extraYears = []):
                 }
             }
             $rest = substr($sent, $pos); if ($rest !== '') { $segs[] = ['t' => 'txt', 's' => $rest]; }
+            // un renvoi retiré laisse deux bouts de texte côte à côte : un seul, sans double espace
+            $m2 = [];
+            foreach ($segs as $sg) { $li = count($m2) - 1; if ($sg['t'] === 'txt' && $li >= 0 && $m2[$li]['t'] === 'txt') { $m2[$li]['s'] .= $sg['s']; } else { $m2[] = $sg; } }
+            $segs = array_map(static function ($sg) { if ($sg['t'] === 'txt') { $sg['s'] = (string) preg_replace('/\s+([.,;:!?])/u', '$1', (string) preg_replace('/[ \t]{2,}/u', ' ', $sg['s'])); } return $sg; }, $m2);
             $plain = trim(implode('', array_map(static fn($s) => $s['t'] === 'txt' ? $s['s'] : '', $segs)));
             preg_match_all('/(?<!\d)(1[0-9]{3}|20[0-9]{2})(?!\d)/', $plain, $ym);
             $years = array_map('intval', $ym[1]);
@@ -846,7 +850,8 @@ function aia_chat_step(PDO $pdo, array &$conv): void
         return;
     }
     if ($content === '') { $turn['state'] = 'error'; $turn['error'] = i18n_t('Le modèle n’a rien répondu.'); return; }
-    $turn['answer'] = aia_verify($pdo, $content, $conv);
+    preg_match_all('/(?<!\d)(1[0-9]{3}|20[0-9]{2})(?!\d)/', (string) $turn['q'], $qy); // les années de la question viennent de l'utilisateur
+    $turn['answer'] = aia_verify($pdo, $content, $conv, array_map('intval', $qy[1]));
     $turn['state'] = 'done';
     unset($turn);
 }

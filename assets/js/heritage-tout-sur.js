@@ -356,6 +356,8 @@
         addRel(detail?.parents, T('parent'), p => !!y && aliveAt(p, y) && (!life.by || y - life.by < 18));
         addRel(detail?.siblings, T('frère ou sœur'), () => false);
         let invs = []; try { invs = ((await timeout(api('investigations', {status: 'open'}), 4000, {}))?.investigations || []).filter(i => Number(i.person_id) === life.pid); } catch (_) {}
+        // 🧺 toutes les enquêtes où la personne apparaît, principale ou secondaire (lib/connexions.php) — plusieurs à cocher d'un coup
+        try { const all = ((await timeout(api('cx_person_investigations', {person_id: life.pid}), 4000, {}))?.investigations || []).filter(i => i.status === 'open'); const seen = new Set(invs.map(i => Number(i.id))); all.forEach(i => { if (!seen.has(Number(i.id))) { seen.add(Number(i.id)); invs.push({...i, secondary: i.role !== 'main'}); } }); } catch (_) {}
         const ev = y && sug.task.group !== 'search';
         const d = document.createElement('dialog'); d.className = 'modal ts-keep-dialog';
         d.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">✓ ${esc(T('GARDER'))}</span><h2>${esc(sug.summary)}</h2></div><button type="button" class="modal-close" data-ts-x aria-label="${esc(T('Fermer'))}">×</button></div>
@@ -367,7 +369,7 @@
             <fieldset class="ts-keep-who"><legend>＋ ${esc(T('Ajouter aussi à…'))}</legend>
                 ${rel.length ? rel.map(r => `<label><input type="checkbox" data-ts-who="${r.id}" ${r.checked ? 'checked' : ''}> ${esc(r.name)} <small class="muted">(${esc(r.role)})</small></label>`).join('') : `<p class="muted">${esc(T('Pas de proche sur sa fiche.'))}</p>`}
                 ${ev ? `<label><input type="checkbox" data-ts-timeline> ${esc(T('🗓 sa chronologie (un événement « contexte »)'))}</label>` : ''}
-                ${invs.map(i => `<label><input type="checkbox" data-ts-inv="${Number(i.id)}"> 🕵️ ${esc(T('l’enquête « {t} »', {t: i.title || ''}))}</label>`).join('')}
+                ${invs.map(i => `<label><input type="checkbox" data-ts-inv="${Number(i.id)}"> 🕵️ ${esc(T('l’enquête « {t} »', {t: i.title || ''}))}${i.secondary ? ` <small class="muted">${esc(T('(il y est secondaire)'))}</small>` : ''}</label>`).join('')}
                 ${y ? `<small class="muted">${esc(T('Cochés d’office : ceux qui étaient en vie en {y}.', {y: String(y)}))}</small>` : ''}</fieldset></div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-ts-x>${esc(T('Annuler'))}</button><button type="submit" class="button" data-ts-ok>✓ ${esc(T('Garder'))}</button></div></form>`;
         document.body.appendChild(d);

@@ -565,7 +565,8 @@
         const rows = sel?.rows?.() || [];
         return ids.map(id => { const row = rows.find(r => String(r.dataset.selId || r.dataset.ongSel || '') === String(id));
             const title = (row?.querySelector('.table-link, strong, b, a')?.textContent || row?.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 200) || `${KIND[kind]?.[1] || ''} ${id}`;
-            return {kind: KIND[kind] ? kind : 'row', ref_id: Number(id) || 0, title, value: '', origin: screenOrigin()}; });
+            const value = (row?.querySelector('.event-date')?.childNodes?.[0]?.textContent || '').trim();
+            return {kind: KIND[kind] ? kind : 'row', ref_id: Number(id) || 0, title, value, origin: screenOrigin(row)}; });
     }
     function addSelectionActions() {
         const SB = ext.selectionBar; if (!SB || SB.__cx) return !!SB;
@@ -730,13 +731,15 @@
         const needs = Array.isArray(cur.needs) ? cur.needs : [];
         const v = st.dataCtx = st.dataCtx || {};
         const PK = window.LCNDA_PICKER || A();
+        if (st.ctx?.placeText && !v.place && needs.includes('place')) v.place = await placeByName(st.ctx.placeText); // l'élément ouvert (Atelier) donne son lieu
+        if (st.ctx?.date && !v.date) v.date = st.ctx.date;
         host.innerHTML = `<div class="cx-dform">${needs.includes('person') ? `<label><span class="pk-lab">${esc(T('Personne'))}</span>${PK.pickerField?.({name: 'cx_person', hiddenName: false, kind: 'person', value: v.person || null, inline: true}) || ''}</label>` : ''}
             ${needs.includes('place') ? `<label><span class="pk-lab">${esc(T('Lieu'))}</span>${PK.pickerField?.({name: 'cx_place', hiddenName: false, kind: 'place', value: v.place || null, inline: true}) || ''}</label>` : ''}
             ${needs.includes('year') ? `<label>${esc(T('Année'))}<input type="number" min="1" max="2100" name="cx_year" value="${esc(v.year || '')}"></label>` : ''}
             ${needs.includes('date') ? `<label>${esc(T('Date'))}<input type="date" name="cx_date" value="${esc(v.date || '')}"></label>${cur.range ? `<label>${esc(T('… jusqu’au (pour une période)'))}<input type="date" name="cx_to" value="${esc(v.to || '')}"></label>` : ''}` : ''}
             <button type="button" class="button small" data-cx-run>${esc(T('Voir'))}</button></div><div class="cx-dout" data-cx-dout></div>`;
         const f = host.querySelector('.cx-dform');
-        f.addEventListener('picker-change', e => { const n = e.target.closest('[data-name], .pk-field')?.dataset?.name || ''; const it = e.detail?.item || null; if (/person/.test(n) || it?.kind === 'person') v.person = it; else v.place = it; });
+        f.addEventListener('picker-change', e => { const k = e.target.closest?.('.pk')?.dataset?.picker || ''; const it = e.detail?.item || null; if (k === 'person') v.person = it; else if (k === 'place') v.place = it; });
         // l'élément ouvert de l'Atelier (ou l'écran) donne déjà sa date et son lieu ?
         const pre = st.ctx?.date || st.ctx?.placeText ? st.ctx : null;
         if (pre?.date && f.querySelector('[name="cx_date"]') && !v.date) f.querySelector('[name="cx_date"]').value = pre.date;
@@ -746,10 +749,10 @@
     async function runData(st, d, f, out) {
         const v = st.dataCtx;
         const PK = window.LCNDA_PICKER || A();
-        const pv = name => { const el = f.querySelector(`[data-name="${name}"]`) || f.querySelector(`.pk-field[data-pk-name="${name}"]`); return el && PK.pickerValue ? PK.pickerValue(el) : null; };
+        const pv = kind => { const el = f.querySelector(`.pk[data-picker="${kind}"]`); return el && PK.pickerValue ? PK.pickerValue(el) : null; };
         v.year = Number(f.querySelector('[name="cx_year"]')?.value) || null; v.date = f.querySelector('[name="cx_date"]')?.value || ''; v.to = f.querySelector('[name="cx_to"]')?.value || '';
-        if ((d.needs || []).includes('place') && !v.place) { const id = pv('cx_place'); if (id) { const r = await api('picker_search', {kind: 'place', ids: String(id)}); v.place = r.groups?.[0]?.items?.[0] || null; } }
-        if ((d.needs || []).includes('person') && !v.person) { const id = pv('cx_person'); if (id) v.person = {id}; }
+        if ((d.needs || []).includes('place') && !v.place) { const id = pv('place'); if (id) { const r = await api('picker_search', {kind: 'place', ids: String(id)}); v.place = r.groups?.[0]?.items?.[0] || null; } }
+        if ((d.needs || []).includes('person') && !v.person) { const id = pv('person'); if (id) v.person = {id}; }
         const miss = (d.needs || []).filter(n => (n === 'place' && !v.place) || (n === 'person' && !v.person) || (n === 'year' && !v.year) || (n === 'date' && !v.date));
         if (miss.length) { out.innerHTML = `<p class="error">${esc(T('Il manque : {w}', {w: miss.map(m => T({place: 'le lieu', person: 'la personne', year: 'l’année', date: 'la date'}[m])).join(', ')}))}</p>`; return; }
         out.innerHTML = UI().spinner ? UI().spinner(T('Je cherche…'), {inline: true}) : '…';
@@ -1018,6 +1021,53 @@
     if (!register()) document.addEventListener('DOMContentLoaded', () => { register(); setTimeout(register, 500); }, {once: true});
     setTimeout(register, 0);
 
-    ext.connexions = {enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
+    /* ═════════════ 🕵️ les pièces d'une piste (plusieurs événements, sources, médias, infos…) ═════════════ */
+    /** une destination « cette piste » (menu ⋯ d'une piste : « 📥 Prendre dans cette piste… ») */
+    function pisteDest(invId, item) {
+        const base = DT.find(t => t.id === 'investigation');
+        return {...base, id: 'investigation', here: () => ({investigation_id: Number(invId), item_id: Number(item.id), mode: 'one', title: invTitle(), label: T('Ici : la piste « {t} »', {t: item.title})})};
+    }
+    function linksHtml(item) {
+        const links = item?.links || []; if (!links.length) return '';
+        return `<div class="cx-links" data-cx-links="${Number(item.id)}">${links.map(l => { const it = {kind: l.entity_type, title: l.label, value: l.value, data: l.data};
+            return `<span class="investigation-item-meta-pill cx-link" title="${esc([l.label, l.value, l.origin?.label].filter(Boolean).join(' — '))}"><span aria-hidden="true">${icon(it)}</span>${esc(String(l.label || l.value).slice(0, 80))}${l.entity_type === 'set' ? ` <small>(${esc(plural((l.data?.rows || []).length, T('ligne')))})</small>` : l.value && l.value !== l.label ? ` <small>${esc(String(l.value).slice(0, 60))}</small>` : ''}${l.origin?.url ? ` <a href="${esc(l.origin.url)}" target="_blank" rel="noopener" title="${esc(T('↗ source'))}">↗</a>` : ''}${kiosk() ? '' : `<button type="button" class="investigation-item-meta-pill-remove" data-cx-link-x="${Number(l.id)}" aria-label="${esc(T('Retirer de la piste'))}" title="${esc(T('Retirer de la piste'))}">×</button>`}</span>`; }).join('')}</div>`;
+    }
+    document.addEventListener('click', async e => {
+        const x = e.target.closest?.('[data-cx-link-x]'); if (!x) return;
+        e.preventDefault(); e.stopPropagation();
+        try { const r = await post('item_link_remove', {ids: [Number(x.dataset.cxLinkX)]}); A().refreshScreen?.();
+            undoToast(T('Retiré de la piste'), {undo: async () => { await post('item_link_restore', {rows: r.removed}); A().refreshScreen?.(); }}); } catch (err) { toast(err.message, 'error'); }
+    }, true);
+
+    /* ═════════════ 👤 la fiche : « ⋯ → ☑ Choisir plusieurs » (ses événements) ═════════════ */
+    let ficheSel = null;
+    (ext.personMoreItems = ext.personMoreItems || []).push(detail => {
+        if (!enabled() || kiosk() || !detail?.person?.id || !ext.selectionBar) return null;
+        return {icon: '☑', label: ficheSel?.el?.isConnected ? T('Ne plus choisir plusieurs') : T('Choisir plusieurs (événements)'), run: () => {
+            if (ficheSel?.el?.isConnected) { ficheSel.destroy(); document.querySelectorAll('#workspace .event-row .sel-box').forEach(b => b.remove()); ficheSel = null; return; }
+            const first = document.querySelector('#workspace .event-row[data-event-id]'); if (!first) return toast(T('Pas d’événement sur cette fiche.'));
+            ficheSel = ext.selectionBar({host: first.parentElement, rowSelector: '.event-row[data-event-id]', idOf: el => el.dataset.eventId, kind: 'event', what: [T('événement coché'), T('événements cochés')], actions: []});
+        }};
+    });
+
+    /** « Dans quelle enquête ? » pour une piste proposée (Où chercher ?, Que manque-t-il ?) → paramètres pour le serveur ; {} si éteint (comme avant) ; null si annulé */
+    async function leadTarget(personId, newTitle = '', title = T('Dans quelle enquête ?')) {
+        if (!enabled()) return {};
+        const c = await chooseInvestigation({personId, title, items: [{}], newTitle}); if (!c) return null;
+        return c.create ? {new_investigation: 1, new_title: c.title || newTitle} : {investigation_id: c.investigation_id, item_id: c.item_id || 0, investigation_title: c.title};
+    }
+    /** 📮 une réponse enregistrée pour un courrier relié à une piste : « La ranger dans la piste ? » (un clic, ↶) */
+    async function courrierReplied(id, vals = {}) {
+        if (!enabled() || !id) return;
+        let links = []; try { links = ((await api('cx_links', {a_type: 'courrier', a_id: id})).links || []).filter(l => l.b_type === 'investigation_item'); } catch (_) { return; }
+        if (!links.length) return;
+        const l = links[0];
+        const item = {kind: 'courrier', ref_id: id, title: T('Réponse : {o}', {o: vals.objet || T('courrier')}).slice(0, 200), value: [vals.destinataire, vals.recu_le ? T('reçue le {d}', {d: frDate(vals.recu_le)}) : T('réponse reçue')].filter(Boolean).join(' · '), origin: {label: T('Registre de courriers'), kind: 'courrier', id}};
+        toast(T('📮 Ce courrier attendait une réponse pour la piste « {p} ».', {p: l.b_label || ''}), '', {action: {label: T('🕵️ La ranger dans la piste'), run: async () => {
+            const r = await post('inv_receive', {investigation_id: l.investigation_id, item_id: l.b_id, items: [item]});
+            undoToast(T('📮 Réponse rangée dans la piste « {p} »', {p: l.b_label || ''}), {undo: async () => { await post('inv_receive_undo', r); }});
+        }}});
+    }
+    ext.connexions = {courrierReplied, leadTarget, pisteDest, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
         count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
 })();

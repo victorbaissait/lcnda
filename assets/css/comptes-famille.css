@@ -1,0 +1,30 @@
+/* LCNDA — 👪 Site familial, côté ordinateur principal (assets/js/heritage-comptes-famille.js). */
+.cf-tabs { margin: 0 0 12px; flex-wrap: wrap; }
+.cf-n:empty { display: none; }
+.cf-n { display: inline-block; min-width: 1.4em; padding: 0 5px; border-radius: 999px; background: #c62828; color: #fff; font-size: 12px; line-height: 1.5; text-align: center; }
+.cf-table-wrap { overflow-x: auto; max-width: 100%; }
+.cf-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.cf-table th, .cf-table td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line, #e3e6eb); vertical-align: top; }
+.cf-acts { white-space: nowrap; }
+.cf-acts .button { margin: 0 2px 4px 0; }
+.cf-dialog { max-width: min(560px, calc(100vw - 32px)); width: 100%; border: 2px solid currentColor; padding: 0; }
+.cf-form { display: grid; gap: 10px; padding: 16px; }
+.cf-form fieldset { border: 1px solid var(--line, #d9dde4); padding: 8px 10px; display: grid; gap: 4px; }
+.cf-form label:not(.checkbox-line) { display: grid; gap: 4px; font-weight: 600; }
+.cf-code { font: 700 32px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; margin: 4px 0; }
+.cf-qr svg { display: block; background: #fff; padding: 6px; }
+.cf-url { word-break: break-all; display: block; }
+.cf-err { color: #c62828; min-height: 1em; margin: 0; }
+.cf-group h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.cf-props, .cf-journal { list-style: none; margin: 0; padding: 0; }
+.cf-prop { display: grid; grid-template-columns: 28px 1fr; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--line, #e3e6eb); }
+.cf-prop-main { min-width: 0; overflow-wrap: anywhere; }
+.cf-com { font-style: italic; margin: 2px 0; }
+.cf-file img { max-height: 90px; max-width: 160px; border: 1px solid var(--line, #d9dde4); margin: 4px 0; }
+.cf-warn { background: #fff8d6; color: #7a5d00; padding: 4px 8px; margin: 4px 0; font-size: 13px; }
+.cf-done { margin-top: 6px; font-weight: 600; }
+.cf-dec { margin-top: 6px; }
+.cf-journal li { padding: 6px 0; border-bottom: 1px solid var(--line, #e3e6eb); overflow-wrap: anywhere; }
+.cf-jbar { flex-wrap: wrap; gap: 8px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cf-warn { background: #2c2612; color: #f0d276; } }
+:root[data-theme="dark"] .cf-warn { background: #2c2612; color: #f0d276; }

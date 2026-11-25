@@ -32,7 +32,8 @@
         const sfUrl = it.kind === 'socface' && window.LCNDA_SOCFACE ? window.LCNDA_SOCFACE.searchUrl({last: it.sf?.last, first: it.sf?.first, place: it.sf?.place, y1: it.from, y2: it.to, gender: it.sf?.gender}) : '';
         const links = [sfUrl ? `<a href="${esc(sfUrl)}" target="_blank" rel="noopener noreferrer" data-gap-sf-link>🔍 Chercher sur SocFace ↗</a>` : '', it.archive?.france && it.place && it.kind !== 'socface' ? `<a href="${esc(faSearch(`${it.place} ${it.what}`))}" target="_blank" rel="noopener">FranceArchives</a>` : '',
             it.kind === 'death' && it.gender === 'male' && it.from <= 1921 && it.to >= 1914 ? `<a href="${esc(webSearch(`Mémoire des hommes ${it.name}`))}" target="_blank" rel="noopener">Mémoire des hommes</a>` : '',
-            `<a href="${esc(webSearch(`${it.name} ${it.place || ''} ${it.what} généalogie`))}" target="_blank" rel="noopener">Sur internet</a>`].filter(Boolean).join(' · ');
+            `<a href="${esc(webSearch(`${it.name} ${it.place || ''} ${it.what} généalogie`))}" target="_blank" rel="noopener">Sur internet</a>`,
+            ext.connexions?.enabled?.() !== false && ext.connexions && !document.body.classList.contains('is-kiosk') ? `<button type="button" class="link-button" data-gap-inv title="${esc(i18n('Choisir l’enquête (ou en créer une) et y mettre cette recherche comme piste'))}">🕵️ ${esc(i18n('En faire une piste…'))}</button>` : ''].filter(Boolean).join(' · ');
         return `<article class="h-gap" data-gap-i="${it._i}">
             <div class="h-gap-head"><span class="h-gap-kind" title="${esc(label)}">${ico}</span>
                 <div class="h-gap-who">${opts.noPerson ? '' : `<button type="button" class="table-link" data-h-person="${Number(it.person_id)}">${esc(it.name)}</button> <small class="muted">Sosa ${fmt(it.sosa)} · génération ${it.generation}</small>`}
@@ -107,6 +108,22 @@
                     const idx = items.indexOf(it); items.splice(idx, 1); draw();
                     A().undoToast?.(res === 'found' ? i18n('Trouvé : recensement de {year} noté dans le Journal des recherches', {year: String(it.from)}) : i18n('Pas trouvé : noté dans le Journal des recherches'), {undo: async () => { if (id) await api('delete_archive_digest', {}, {method: 'POST', body: {id}}); items.splice(idx, 0, it); draw(); }});
                 } catch (err) { sfb.disabled = false; toast(err.message, 'error'); }
+                return;
+            }
+            const gi = e.target.closest('[data-gap-inv]'); // 🧺 « Que manque-t-il ? » → une piste d'enquête choisie (heritage-connexions.js)
+            if (gi) {
+                const it = items.find(x => x._i === Number(gi.closest('[data-gap-i]').dataset.gapI)); if (!it) return;
+                const label = `${KINDS[it.kind]?.[1] || it.what} de ${it.name}`;
+                const where = await ext.connexions.leadTarget(Number(it.person_id), `Que manque-t-il ? — ${it.name}`); if (where === null) return;
+                const notes = [`${it.place ? `À ${it.place}` : 'Lieu inconnu'}${years(it) ? `, ${years(it)}` : ''} — ${it.why}`, ...(it.where || []).map(w => `${w.series} : ${w.detail}`), it.archive?.label ? `🏛️ ${it.archive.label}` : ''].filter(Boolean).join('\n');
+                try {
+                    const r0 = await api('ou_chercher_piste', {}, {method: 'POST', body: {person_id: Number(it.person_id), title: `${label}${it.place ? ` · ${it.place}` : ''}${years(it) ? ` · ${years(it)}` : ''}`.slice(0, 200), url: '', notes: `${notes}\n— proposé par « Que manque-t-il ? » (Sosa ${it.sosa}).`, ...where}});
+                    const r = r0?.result || r0;
+                    A().undoToast?.(i18n('🕵️ « {w} » : piste ajoutée à l’enquête', {w: label}), {undo: async () => {
+                        if (r.link_id) await api('cx_write', {}, {method: 'POST', body: {op: 'item_link_remove', ids: [r.link_id]}});
+                        if (r.item_id) await api('delete_investigation_item', {}, {method: 'POST', body: {id: r.item_id}});
+                        if (r.created && r.investigation_id) await api('delete_investigation', {}, {method: 'POST', body: {id: r.investigation_id}}); }});
+                } catch (err) { toast(err.message, 'error'); }
                 return;
             }
             const b = e.target.closest('[data-gap-add]'); if (!b) return;

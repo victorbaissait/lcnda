@@ -160,6 +160,14 @@
         return a;
     };
     let P = null; // projet chargé : {project, folders, items, people}
+    /** 🧺 « Ici » pour « Prendre depuis… » / « Mettre dans… » (heritage-connexions.js) : le projet ouvert, l'élément choisi (sa date, son lieu) */
+    ext.atelierHere = () => {
+        const s = S(); if (s.module !== 'enquetes' || s.enquetesTab !== 'atelier' || !P?.project) return null;
+        const v = st(); if (Number(v.project) !== Number(P.project.id)) return null;
+        const it = v.sel.length === 1 ? P.byId?.get(Number(v.sel[0])) : null, d = it?.data || {};
+        const date = String(d.date || d.due || '').match(/^\d{4}-\d{2}-\d{2}/)?.[0] || '';
+        return {project: Number(P.project.id), projectTitle: P.project.title, item: it ? Number(it.id) : 0, itemTitle: it?.title || '', folder: typeof v.node === 'number' ? v.node : 0, date, placeText: d.place?.text || ''};
+    };
     const load = async id => { P = await api('atelier_project', {id}); P.byId = new Map(P.items.map(i => [Number(i.id), i])); P.fById = new Map(P.folders.map(f => [Number(f.id), f])); return P; };
     const kids = parent => P.folders.filter(f => (f.parent_id === null ? 0 : Number(f.parent_id)) === parent).sort((a, b) => a.position - b.position || a.id - b.id);
     const descendants = id => { const out = [id]; kids(id).forEach(k => out.push(...descendants(Number(k.id)))); return out; };
@@ -390,7 +398,7 @@
         return `${head}
             ${folder ? `<details class="h-at-fnotes" ${folder.notes ? 'open' : ''}><summary>${i18n('📝 Notes du dossier')}${folder.notes ? '' : ` <small class="muted">${i18n('(vides)')}</small>`}</summary><textarea data-at-fnotes rows="4" placeholder="Ce que ce dossier doit contenir, le plan de la section, les idées…">${esc(folder.notes || '')}</textarea></details>` : ''}
             ${sub.length ? `<div class="h-at-subs">${sub.map(f => `<button type="button" class="h-at-sub" data-at-go="${f.id}" data-at-folder-drop="${f.id}">${esc(f.icon || CFG.folders.closed)} ${esc(f.name)}</button>`).join('')}</div>` : ''}
-            <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>＋ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>`).join('')}<button type="button" data-at-library title="Des numéros de revue, des articles, des livres, des chapitres, des documentaires et leurs moments">📚 Revues, livres, documentaires…</button><button type="button" class="h-at-menu-cfg" data-at-settings>⚙️ Réglages des sortes…</button></div></div>
+            <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>＋ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>`).join('')}<button type="button" data-at-library title="Des numéros de revue, des articles, des livres, des chapitres, des documentaires et leurs moments">📚 Revues, livres, documentaires…</button>${ext.connexions?.enabled?.() !== false && ext.connexions ? `<button type="button" data-at-take title="${esc(i18n('Une fiche, un acte, une source, une donnée (météo d’un jour…), une ligne de liste, un fichier : dans ce projet, ou dans l’élément choisi'))}">📥 ${esc(i18n('Prendre depuis…'))}${ext.connexions.count?.() ? ` <small>· 🧺 ${ext.connexions.count()}</small>` : ''}</button>` : ''}<button type="button" class="h-at-menu-cfg" data-at-settings>⚙️ Réglages des sortes…</button></div></div>
                 <button type="button" class="button small secondary" data-at-import title="Zotero (.rdf), CSL JSON, EndNote (.xml), BibTeX (.bib), RIS (.ris)">⤒ Importer…</button>`}
                 ${folder && kids(node).length ? `<label class="ui-toggle h-at-deep"><input type="checkbox" data-at-deep ${v.deep ? 'checked' : ''}><i></i>avec les sous-dossiers</label>` : ''}
                 <select data-at-type><option value="">Toutes les sortes</option>${CFG.types.filter(t => !t.hidden || t.key === v.type).map(t => `<option value="${esc(t.key)}" ${v.type === t.key ? 'selected' : ''}>${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</select>
@@ -960,6 +968,7 @@
             if (q('[data-at-tagclear]')) { v.tags = []; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-settings]')) return openSettings();
             if (q('[data-at-addmenu]')) { const m = q('.h-at-addmenu').querySelector('.h-at-menu'); m.hidden = !m.hidden; return; }
+            if (q('[data-at-take]')) { ws.querySelector('.h-at-menu')?.setAttribute('hidden', ''); return ext.connexions?.openTake?.(); } // 🧺 heritage-connexions.js
             if (q('[data-at-library]')) { ws.querySelector('.h-at-menu')?.setAttribute('hidden', ''); return ext.pickLibraryForAtelier?.(P.project.id, typeof v.node === 'number' ? v.node : 0, () => reload()); }
             if (q('[data-at-add]')) { ws.querySelector('.h-at-menu')?.setAttribute('hidden', ''); return itemDialog(q('[data-at-add]').dataset.atAdd); }
             if (q('[data-at-import]')) {

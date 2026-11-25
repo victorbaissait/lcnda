@@ -519,15 +519,15 @@ function rt_abbrev(string $v, string $find, string $replace): string
 }
 
 const RT_PARTICLES = ['de', 'du', 'des', 'la', 'le', 'les', 'd', 'l', 'van', 'von', 'der', 'den', 'di', 'da', 'del', 'et'];
-/** « jean-pierre » → « Jean-Pierre » ; pour un nom : « de LA FONTAINE » → « de La Fontaine » (particules en minuscules, sauf au début) */
+/** « jean-pierre » → « Jean-Pierre » ; pour un nom : « DE LA FONTAINE » → « de la Fontaine » (particules en minuscules, sauf un mot seul) */
 function rt_title_case(string $v, bool $isName): string
 {
     $parts = preg_split("/([\\s\\-'’]+)/u", mb_strtolower($v), -1, PREG_SPLIT_DELIM_CAPTURE) ?: [$v];
-    $out = ''; $first = true;
+    $words = count(array_filter($parts, static fn($p) => $p !== '' && !preg_match("/^[\\s\\-'’]+$/u", $p)));
+    $out = '';
     foreach ($parts as $p) {
         if ($p === '' || preg_match("/^[\\s\\-'’]+$/u", $p)) { $out .= $p; continue; }
-        $out .= ($isName && !$first && in_array($p, RT_PARTICLES, true)) ? $p : mb_strtoupper(mb_substr($p, 0, 1)) . mb_substr($p, 1);
-        $first = false;
+        $out .= ($isName && $words > 1 && in_array($p, RT_PARTICLES, true)) ? $p : mb_strtoupper(mb_substr($p, 0, 1)) . mb_substr($p, 1);
     }
     return $out;
 }
@@ -767,7 +767,7 @@ function rt_run(PDO $pdo, array $recipe, array $skip): array
             } elseif (isset($c['label'])) {
                 if (!$labelId) {
                     $lq = $pdo->prepare('SELECT id FROM labels WHERE name=? COLLATE NOCASE'); $lq->execute([$c['label']]); $labelId = (int) $lq->fetchColumn();
-                    if (!$labelId) { $pdo->prepare('INSERT INTO labels(name, color) VALUES(?, ?)')->execute([$c['label'], '#6929c4']); $labelId = (int) $pdo->lastInsertId(); $undo['created_labels'][] = ['id' => $labelId, 'name' => $c['label'], 'color' => '#6929c4']; }
+                    if (!$labelId) { $pdo->prepare('INSERT INTO labels(name, color) VALUES(?, ?)')->execute([$c['label'], '#6929c4']); $labelId = (int) $pdo->lastInsertId(); $undo['created_labels'][] = $pdo->query('SELECT * FROM labels WHERE id=' . $labelId)->fetch(PDO::FETCH_ASSOC); }
                 }
                 $ins = $pdo->prepare("INSERT OR IGNORE INTO label_links(label_id, entity_type, entity_id) VALUES(?, 'person', ?)"); $ins->execute([$labelId, (int) $c['person_id']]);
                 if ($ins->rowCount()) { $undo['label_links'][] = [$labelId, (int) $c['person_id']]; $stats['labels']++; }
@@ -864,7 +864,7 @@ function rt_redo(PDO $pdo, array $data): array
     $p = $row['payload']; $n = 0;
     foreach ($p['changes'] ?? [] as $c) { $n += ro_set_if($pdo, (string) $c['t'], (string) $c['c'], (int) $c['id'], $c['before'], $c['after']); }
     foreach ($p['deleted_places'] ?? [] as $snap) { $pdo->prepare('DELETE FROM places WHERE id=? AND NOT EXISTS (SELECT 1 FROM events WHERE place_id=?)')->execute([(int) $snap['id'], (int) $snap['id']]); }
-    foreach ($p['created_labels'] ?? [] as $l) { $pdo->prepare('INSERT OR IGNORE INTO labels(id, name, color) VALUES(?,?,?)')->execute([(int) $l['id'], (string) $l['name'], (string) $l['color']]); } // l'étiquette revient avec ses liens
+    foreach ($p['created_labels'] ?? [] as $l) { $ex = $pdo->prepare('SELECT 1 FROM labels WHERE id=?'); $ex->execute([(int) $l['id']]); if (!$ex->fetchColumn()) { insert_snapshot_row($pdo, 'labels', $l); } } // l'étiquette revient telle quelle, avec ses liens
     $ins = $pdo->prepare("INSERT OR IGNORE INTO label_links(label_id, entity_type, entity_id) VALUES(?, 'person', ?)");
     foreach ($p['label_links'] ?? [] as [$lid, $pid]) {
         $ex = $pdo->prepare('SELECT 1 FROM labels WHERE id=?'); $ex->execute([(int) $lid]);

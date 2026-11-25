@@ -888,6 +888,12 @@ function fc_guest_propose(PDO $pdo, array $a, array $dev, array $p, bool $direct
     if (!$direct && (int) $pend->fetchColumn() >= FC_MAX_PENDING) { fc_json(['error' => 'Beaucoup de propositions attendent déjà : la personne qui tient l’arbre doit d’abord les regarder.'], 429); }
     try { $r = fc_read_proposal($pdo, $a, $p, $direct); }
     catch (FcRefuse $e) {
+        if ($direct && $e->status === 404) {
+            // une fiche qu'il ne voit pas (hors de sa partie de l'arbre) : noté pour toi, et la même réponse qu'une fiche qui n'existe pas
+            $pid = (int) (is_numeric($p['person'] ?? null) ? $p['person'] : 0);
+            $label = fc_label($pdo, $pid);
+            if ($label !== '') { fc_journal_add($pdo, $a, 'hors_branche', $pid, $label); }
+        }
         if ($e->getMessage() === 'hors_branche') {
             $pid = (int) (is_numeric($p['person'] ?? null) ? $p['person'] : 0);
             $label = fc_mode($pdo, $a, $pid) === 'full' ? fc_label($pdo, $pid) : '';
