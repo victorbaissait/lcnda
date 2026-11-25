@@ -93,7 +93,7 @@
     async function loadBasket(force = false) {
         if (basket && !force) return basket;
         if (loading && !force) return loading;
-        loading = api('cx_basket', {basket_id: curBasket()}).then(r => { basket = r; baskets = r.baskets || baskets; count = (r.items || []).length; paintPill(); return r; }).finally(() => { loading = null; });
+        loading = api('cx_basket', {basket_id: curBasket()}).then(r => { basket = r; baskets = r.baskets || baskets; folders = r.folders || folders; count = (r.items || []).length; paintPill(); return r; }).finally(() => { loading = null; });
         return loading;
     }
     const setCountFrom = r => { if (r && r.count != null) { count = Number(r.count); paintPill(); } basket = null; };
@@ -1279,7 +1279,7 @@
         else res.setAttribute('aria-busy', 'true');
         let list = []; st.more = false;
         try {
-            if (st.tab === 'basket') { const b = st.bk = keepTree(await api('cx_basket', {basket_id: curBasket(), all: (baskets || []).length > 1 || (folders || []).length ? 1 : 0})); if ((b.baskets || []).length > 1 && !b.items.some(x => Number(x.basket_id) !== Number(b.basket_id))) Object.assign(b, keepTree(await api('cx_basket', {basket_id: curBasket(), all: 1}))); list = (b.items || []).filter(x => !st.q || fold(itemLine(x)).includes(fold(st.q))); st.fromBasket = new Set(list.map(x => x.id)); }
+            if (st.tab === 'basket') { const b = st.bk = keepTree(await api('cx_basket', {basket_id: curBasket(), all: 1})); if ((b.baskets || []).length < 2 && !(b.folders || []).length) b.items = b.items.filter(x => Number(x.basket_id) === Number(b.basket_id)); list = (b.items || []).filter(x => !st.q || fold(itemLine(x)).includes(fold(st.q))); st.fromBasket = new Set(list.map(x => x.id)); }
             else if (st.tab === 'recent') list = (readJ(RECENT, []) || []).filter(x => !st.q || fold(itemLine(x)).includes(fold(st.q)));
             else if (st.tab === 'note') { const r = await api('cx_notes', {q: st.q}); list = (r.items || []).map(n => ({kind: 'note', ref_id: Number(n.id), title: n.title || String(n.body || '').slice(0, 80), value: String(n.body || '').slice(0, 600), _v: {ico: '📝', who: n.person_name || '', extra: [String(n.body || '').replace(/\s+/g, ' ').slice(0, 140)], pills: [], fields: [[T('Fiche'), n.person_name || ''], [T('Texte'), String(n.body || '').slice(0, 600)]]}, origin: n.person_name ? {kind: 'person', id: Number(n.entity_id), person_id: Number(n.entity_id), label: T('Fiche de {n}', {n: n.person_name})} : null})); }
             else if (['person', 'event', 'act', 'source', 'media', 'place'].includes(st.tab)) {

@@ -411,3 +411,13 @@ dialog.cx-put { width: min(720px, 94vw); max-width: 94vw; height: min(680px, 90v
 .cx-grow { flex: 1; min-width: 0; }
 .cx-grow select { width: 100%; }
 .cx-bview .cx-tk-head .cx-b { align-self: flex-start; }
+/* 📁 l'arbre des paniers (« Prendre depuis… → Panier ») : dossiers › paniers › éléments */
+.cx-ttree { display: flex; flex-direction: column; gap: 6px; padding: 6px 4px 12px; }
+.cx-tnode { border: 1px solid var(--cx-line); border-radius: 12px; padding: 2px 12px 6px; margin-left: calc(var(--d, 0) * 14px); background: var(--cx-bg); }
+.cx-tnode.is-folder { background: var(--cx-grey); }
+.cx-tnode .cx-tnode { margin: 6px 0 2px 6px; }
+.cx-thead { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 8px 2px; cursor: grab; }
+.cx-thead.is-cur b { color: var(--cx-blue-ink); }
+.cx-thead input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--cx-blue); }
+.cx-thead .cx-bmeta { margin-left: auto; }
+.cx-tnode .cx-rlist { margin: 0 0 4px; }

@@ -258,8 +258,9 @@
         return out;
     }
     /**
-     * Carte fixe : points {lat, lon, label, color, n} et trajets {coords:[[lat,lon]…], color, dashed, ocean}.
-     * Les trajets « ocean » suivent le grand cercle.
+     * Carte : points {lat, lon, label, color, n} et trajets {coords:[[lat,lon]…], color, dashed, ocean}.
+     * Les trajets « ocean » suivent le grand cercle. Écrite fixe ici, puis réveillée par heritage-mini-carte.js (zoom, déplacement,
+     * points regroupés, ◐ noir et blanc) ; options : view {lat, lon, zoom}, circles [{lat, lon, km}], cluster, interactive (false = sans gestes).
      */
     function miniMap(points = [], paths = [], {height = 360, emptyText = 'Rien à placer sur la carte (lieux sans coordonnées).', view = null, circles = [], cluster, interactive} = {}) {
         const app = A();
