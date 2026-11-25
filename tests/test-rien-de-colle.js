@@ -93,6 +93,11 @@ function detect(opts) {
         }
         // un bouton ou un champ qui remplit son cadre d'un bord à l'autre (onglets côte à côte, en-tête cliquable, champ d'une
         // boîte de recherche) : c'est voulu, ce n'est pas un contenu collé
+        // un cadre qui défile lui-même (tableau large) : ce qui passe sous son bord en défilant n'est pas collé
+        const scrollsX = /(auto|scroll)/.test(s.overflowX) && c.el.scrollWidth > c.el.clientWidth + 1, scrollsY = /(auto|scroll)/.test(s.overflowY) && c.el.scrollHeight > c.el.clientHeight + 1;
+        for (let i = bad.length - 1; i >= 0; i--) if ((scrollsX && /[lr]/.test(bad[i].side)) || (scrollsY && /[tb]/.test(bad[i].side))) bad.splice(i, 1);
+        // des boutons côte à côte qui forment le cadre (onglets, choix « Court / Normal / Détaillé ») : voulu
+        if (it.kind !== 'texte' && it.el.parentElement === c.el && [...c.el.children].every(x => x.matches('button, a, input, label, [role=tab], [role=button]'))) { for (let i = bad.length - 1; i >= 0; i--) if (bad[i].kind === 'colle') bad.splice(i, 1); }
         const glued = new Set(bad.filter(b => b.kind === 'colle').map(b => b.side));
         if (it.kind !== 'texte' && ((glued.has('l') && glued.has('r')) || (glued.has('t') && glued.has('b')))) { for (let i = bad.length - 1; i >= 0; i--) if (bad[i].kind === 'colle') bad.splice(i, 1); }
         if (!bad.length) continue;

@@ -145,6 +145,16 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await page.evaluate(() => { window.LCNDA_APP.state.listType = 'persons'; window.LCNDA_APP.setModule('listes'); }); await page.waitForSelector('#list-reorder');
             await page.click('#list-reorder'); await page.waitForSelector('dialog[open].mt-reorder');
             assert.equal(await page.evaluate(() => window.LCNDA_APP.state.module), 'listes');
+            // ☑ la case d'un groupe masque / affiche toutes ses listes d'un coup ; une seule décochée → case « à moitié »
+            if (await page.$('dialog[open].mt-reorder [data-gvis]')) {
+                const sec = 'dialog[open].mt-reorder [data-gi="1"]';
+                await page.click(`${sec} [data-gvis]`); await page.waitForTimeout(150);
+                assert.ok(await page.$$eval(`${sec} [data-vis]`, x => x.length > 0 && x.every(i => !i.checked)), 'tout le groupe masqué');
+                await page.click(`${sec} [data-gvis]`); await page.waitForTimeout(150);
+                assert.ok(await page.$$eval(`${sec} [data-vis]`, x => x.every(i => i.checked)), 'tout le groupe remis');
+                await page.click(`${sec} [data-vis] >> nth=0`); await page.waitForTimeout(100);
+                assert.ok(await page.$eval(`${sec} [data-gvis]`, i => i.indeterminate), 'case du groupe « à moitié »');
+            } else assert.fail('la case de groupe « tout masquer » manque');
             await page.click('dialog[open].mt-reorder [data-close]'); await page.waitForTimeout(200);
             await page.evaluate(() => window.LCNDA_APP.setModule('maintenance')); await page.waitForTimeout(800);
         });
