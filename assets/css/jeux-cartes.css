@@ -95,3 +95,6 @@
 :root[data-theme="dark"] .cx-pts { background: rgba(255, 255, 255, .12); }
 :root[data-theme="dark"] .cx .pc-count { background: #e8e8e8; color: #111; }
 :root[data-theme="dark"] .cx-bat-col.is-win { background: rgba(242, 194, 48, .22); }
+/* 🂠 le dos au choix sur les petites cartes des adversaires : la couleur, ou l'image recadrée */
+.cx[data-back="couleur"] .cx-mini i { background-color: var(--jb-c, #1f4fa0); }
+.cx[data-back="image"] .cx-mini i { background: var(--jb-img) center / cover no-repeat, #6b6b6b; }

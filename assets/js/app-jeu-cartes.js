@@ -17,7 +17,7 @@
     const SUIT = ['♥', '♦', '♠', '♣'], RANK = ['', 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'V', 'D', 'R'], TRANK = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'V', 'C', 'D', 'R'];
     const Pl = () => window.LCNDA_JEUX_PLATEAU; // la barre de partie commune (L2), les records, le choix « Qui joue » : app-jeu-plateau.js
     const SPEEDS = [['lent', 'Lent'], ['normal', 'Normal'], ['rapide', 'Rapide']], DELAY = {lent: 1000, normal: 560, rapide: 180};
-    const BACKS = [['bleu', 'Bleu'], ['rouge', 'Rouge'], ['vert', 'Vert'], ['sepia', 'Sépia']];
+    const CB = () => J().cardBack; // 🂠 le dos des cartes : 4 couleurs, une couleur au choix, une photo de l'app ou une image de l'ordinateur (app-jeu-famille.js)
     const HINTS = [[0, 'Aucun'], [3, '3'], [5, '5'], [10, '10']];
     const escH = v => String(v ?? '').replace(/[&<>"']/g, ch => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[ch]));
     const gameOf = k => C().get(k) || C().get('belote');
@@ -68,7 +68,7 @@
         defaults: () => ({game: 'belote', portraits: true, names: false, back: 'bleu', speed: 'normal', hints: 5, scope: {kind: 'sosa', gen: 3}}),
         clean(c) {
             c.game = C().get(c.game) ? c.game : 'belote'; c.players.forEach(p => { p.ai = cleanAi(p.ai); }); fitPlayers(c);
-            return {...c, portraits: c.portraits !== false, names: !!c.names, back: BACKS.some(b => b[0] === c.back) ? c.back : 'bleu', speed: SPEEDS.some(x => x[0] === c.speed) ? c.speed : 'normal', hints: HINTS.some(h => h[0] === Number(c.hints)) ? Number(c.hints) : 5};
+            return {...c, portraits: c.portraits !== false, names: !!c.names, ...CB().clean(c), speed: SPEEDS.some(x => x[0] === c.speed) ? c.speed : 'normal', hints: HINTS.some(h => h[0] === Number(c.hints)) ? Number(c.hints) : 5};
         },
         ready: [{k: 'bel', name: 'Belote', hint: 'toi et Nord contre Ouest et Est', cfg: {game: 'belote'}}, {k: 'tar', name: 'Tarot à 4', hint: 'prise, garde, chien et excuse', cfg: {game: 'tarot'}},
             {k: 'dam', name: 'Dame de pique', hint: 'ne ramasse pas les cœurs', cfg: {game: 'dame'}}, {k: 'hui', name: 'Huit américain', hint: 'pour commencer', cfg: {game: 'huit'}},
@@ -80,7 +80,8 @@
             <div class="jf-row"><span class="jf-lab">${h.esc(i18n('Vitesse de l’ordinateur'))}</span>${h.seg('speed', tl(SPEEDS), c.speed)}</div>
             <div class="jf-row"><span class="jf-lab">${h.esc(i18n('Conseils 💡 par manche'))}</span>${h.seg('hints', tl(HINTS), c.hints)}</div>
             <div class="jf-checks">${h.toggle('data-cx-portraits', c.portraits, i18n('🖼 Les Rois, Dames et Valets avec les portraits de mes ancêtres'))}${h.toggle('data-cx-names', c.names, i18n('🤖 L’ordinateur porte des noms d’ancêtres'))}</div>
-            <div class="jfp-backs"><span>${h.esc(i18n('Dos des cartes'))}</span>${h.seg('back', tl(BACKS), c.back)}</div>`,
+            ${CB().fieldHtml(c)}`,
+        bindFields: (form, c, save) => CB().bind(form, c, save),
         bindPlayers(box, c) {
             // le nombre de joueurs suit le jeu choisi
             const allowed = gameOf(c.game).players, add = box.parentElement?.querySelector('[data-jf-padd]');
@@ -100,7 +101,7 @@
                 return 'players';
             }
         },
-        onSeg(name, v, c) { if (name === 'speed') c.speed = v; if (name === 'back') c.back = v; if (name === 'hints') c.hints = Number(v); },
+        onSeg(name, v, c) { if (name === 'speed') c.speed = v; if (name === 'hints') c.hints = Number(v); },
         async start(c, src, prev) {
             fitPlayers(c);
             const humans = c.players.map((p, i) => (p.ai ? -1 : i)).filter(i => i >= 0);
@@ -115,6 +116,7 @@
             return {st, faces, colors: order.map(i => c.players[i].color), ms: 0, round: (prev?.round || 0) + 1, hintsLeft: c.hints, finished: false, recorded: false, status: gameOf(c.game).name};
         },
         mount(host, g, api) {
+            CB().apply(host, g.cfg); // les variables du dos (couleur, image) : une fois, la table se redessine dedans
             const {esc} = api, c = g.cfg, def = gameOf(g.st.k), K = def.k, CC = C(), PL = Pl();
             const st = () => g.st, me = 0;
             let sel = [], pick = null, hintA = null, pause = null, botT = 0, autoT = 0, cw = 64, suitFor = null, msg = '', lastMsg = '';
@@ -272,7 +274,7 @@
                 cw = Math.max(34, Math.min(78, Math.floor(K === 'crapette' ? (tableW - 30) / 9.6 : Math.min(tableW / 7.5, 80))));
                 const ov = Math.min(6, Math.floor((tableW - 20 - handN * cw) / Math.max(1, handN - 1)));
                 const crap = K === 'crapette', hide = paused() ? ' jp-hide' : '';
-                host.innerHTML = `${sh ? sh.bar(barPlayers()) : ''}<div class="goose-game-layout jfp cx cx-${esc(K)}${wide ? '' : ' is-stacked'}" data-back="${esc(c.back)}" style="--cw:${cw}px;--ch:${Math.round(cw * 1.4)}px;--ov:${ov}px">
+                host.innerHTML = `${sh ? sh.bar(barPlayers()) : ''}<div class="goose-game-layout jfp cx cx-${esc(K)}${wide ? '' : ' is-stacked'}" data-back="${esc(CB().key(c))}" style="--cw:${cw}px;--ch:${Math.round(cw * 1.4)}px;--ov:${ov}px">
                     <div class="goose-board-wrap jp-wrap">${sh ? sh.pauseHtml() : ''}<div class="cx-board${hide}" role="application" aria-label="${esc(i18n('La table : {name}', {name: def.name}))}">
                       ${crap ? crapetteHtml() : `<div class="cx-table cx-n${S.n}">${Array.from({length: S.n}, (_, p) => p).filter(p => p !== me).map(seatHtml).join('')}<div class="cx-center" aria-live="polite">${centerHtml()}</div></div>
                       <div class="cx-me">${seatHtml(me)}<div class="cx-hand" role="group" aria-label="${esc(i18n(K === 'bataille' ? 'Ton tas' : 'Ta main'))}">${handHtml()}</div>${K === 'rami' ? ramiInfo() : ''}${wide ? '' : `<div class="jfp-tools cx-acts">${actionsHtml()}</div>`}</div>`}${crap && !wide ? `<div class="jfp-tools cx-acts">${actionsHtml()}</div>` : ''}

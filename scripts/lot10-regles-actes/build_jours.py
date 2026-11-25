@@ -34,8 +34,13 @@ for f in sorted(glob.glob(RAW + '/*.json')):
         if len(txt) > 260: continue
         dic.append([txt, note[:120]])
     sts = []
-    for sec in [r"Saints des Églises catholiques et orthodoxes", r"Saints et bienheureux des Églises catholiques", r"Saints des Églises catholiques\s*="]:
-        body = section(wt, sec, 4) or section(wt, sec, 3)
+    blocks = []
+    for m in re.finditer(r'^(={3,4})\s*([^=\n]*?[Ss]aints?[^=\n]*?)\s*=+\s*$', wt, re.M):
+        head = m.group(2)
+        if 'catholique' not in head.lower(): continue
+        rest = wt[m.end():]; end = re.search(r'^={2,4}[^=]', rest, re.M)
+        blocks.append(rest[:end.start()] if end else rest)
+    for body in blocks:
         for line in body.splitlines():
             if not line.startswith('* '): continue
             raw = line[2:]

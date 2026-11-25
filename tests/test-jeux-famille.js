@@ -130,6 +130,8 @@ async function browserPart() {
     const appRoot = path.resolve(__dirname, '..'), phpPath = findPhp([devBundledPhp()]);
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-jeux-')), env = {...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1'};
     fs.mkdirSync(path.join(dir, 'media'), {recursive: true});
+    const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
+    for (const f of ['ferme.png', 'vivant.png']) fs.writeFileSync(path.join(dir, 'media', f), PNG);
     const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 require 'lib/paths.php';
 $p = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p = null;
@@ -147,6 +149,10 @@ for ($i = 0; $i < 30; $i++) {
     $p->prepare('INSERT INTO events(scope,person_id,event_type_id,date_text,year,place_id) VALUES(?,?,?,?,?,?)')->execute(['person', $id, $tag('DEAT'), (string) (1760 + $i * 7), 1760 + $i * 7, $place($towns[($i + 3) % 8])]);
 }
 $p->exec("INSERT INTO persons(first_name,last_name,gender,living_status) VALUES('Vivant','Toujours','male','living')");
+$vivant = (int) $p->lastInsertId();
+// 🂠 deux photos pour le dos des cartes : une de la ferme (un ancêtre), une d'une personne vivante (jamais au dos des cartes)
+$p->exec("INSERT INTO media(title,filename,media_type) VALUES('La ferme','ferme.png','image')"); $p->prepare("INSERT INTO media_links(media_id,entity_type,entity_id) VALUES(?, 'person', ?)")->execute([(int) $p->lastInsertId(), $ids[0]]);
+$p->exec("INSERT INTO media(title,filename,media_type) VALUES('Photo du vivant','vivant.png','image')"); $p->prepare("INSERT INTO media_links(media_id,entity_type,entity_id) VALUES(?, 'person', ?)")->execute([(int) $p->lastInsertId(), $vivant]);
 $p->exec("INSERT INTO persons(first_name,last_name,gender,living_status,is_private) VALUES('Cachée','Secrète','female','deceased',1)");
 for ($i = 0; $i < 6; $i++) { $p->prepare('INSERT INTO families(partner1_id,partner2_id) VALUES(?,?)')->execute([$ids[2 * $i], $ids[2 * $i + 1]]); $f = (int) $p->lastInsertId();
     $p->prepare('INSERT INTO events(scope,family_id,event_type_id,date_text,year,place_id) VALUES(?,?,?,?,?,?)')->execute(['family', $f, $tag('MARR'), (string) (1730 + $i * 9), 1730 + $i * 9, $place('Auch')]); }
@@ -257,6 +263,93 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
             await page.evaluate(async () => { await window.LCNDA_APP.setModule('jeu'); });
             await page.waitForSelector('[data-jf-open]'); assert.ok(await page.$$eval('[data-jf-open]', l => l.length) >= 5);
             await page.click('[data-jf-open]'); await page.waitForSelector('[data-jf-play]');
+        });
+        await t('🗂 colonne de gauche : « Trier : Récentes · Par type », un en-tête pliable par jeu, le choix retenu', async () => {
+            const heads = () => page.$$eval('.jeu-tri-head', l => l.map(b => [b.dataset.jeuFold, b.querySelector('small').textContent, b.getAttribute('aria-expanded')]));
+            await page.waitForSelector('.jeu-tri [data-jeu-tri="type"].is-active');
+            assert.deepEqual((await heads()).map(h => h[0]), ['quiz', 'memory', 'timeline', 'morpion'], 'dans l’ordre du menu « Jeu ▾ »');
+            assert.deepEqual((await heads()).find(h => h[0] === 'morpion'), ['morpion', '2', 'true'], 'les deux morpions ensemble');
+            assert.deepEqual(await page.$$eval('[data-jeu-group="morpion"] [data-jf-open]', l => l.length), 2);
+            // plier un type : il reste plié après un nouveau dessin de la colonne
+            await page.click('[data-jeu-fold="morpion"]');
+            assert.equal(await page.getAttribute('[data-jeu-fold="morpion"]', 'aria-expanded'), 'false');
+            assert.ok(await page.$eval('[data-jeu-group="morpion"]', el => el.hidden));
+            await page.evaluate(() => window.LCNDA_APP.renderSidebar());
+            assert.ok(await page.$eval('[data-jeu-group="morpion"]', el => el.hidden), 'toujours plié');
+            await page.click('[data-jeu-fold="morpion"]'); assert.ok(!(await page.$eval('[data-jeu-group="morpion"]', el => el.hidden)));
+            // « Récentes » : toutes les parties mêlées, la dernière jouée en haut, sans en-têtes
+            await page.click('[data-jeu-tri="recent"]'); await page.waitForSelector('[data-jeu-tri="recent"].is-active');
+            assert.equal(await page.$$eval('.jeu-tri-head', l => l.length), 0);
+            const want = (await games()).slice().sort((a, b) => (b.updated || 0) - (a.updated || 0)).map(g => g.id);
+            assert.deepEqual(await page.$$eval('[data-jf-open]', l => l.map(b => b.dataset.jfOpen)), want);
+            assert.equal(await page.evaluate(() => localStorage.getItem('genealogie-jeux-tri')), 'recent');
+            await page.reload(); await page.waitForFunction(() => window.LCNDA_JEUX_FAMILLE?.KEYS?.length >= 6 && window.LCNDA_APP?.state);
+            await page.evaluate(async () => { await window.LCNDA_APP.setModule('jeu'); });
+            await page.waitForSelector('[data-jeu-tri="recent"].is-active'); // retenu
+            await page.click('[data-jeu-tri="type"]'); await page.waitForSelector('.jeu-tri-head');
+            assert.equal(await page.evaluate(() => localStorage.getItem('genealogie-jeux-tri')), 'type');
+        });
+        await t('🂠 dos des cartes : couleur au choix (motif lisible), photo de l’app (jamais un vivant), image de l’ordinateur ou glissée, ↶ Annuler, retenu', async () => {
+            const toPatience = async () => { if (!await page.$('select[name="variant"]')) { await page.click('[data-jf-new]'); await page.waitForSelector('select[name="variant"]'); } await page.selectOption('select[name="variant"]', 'patience'); await page.waitForSelector('.jf-patience [data-jfb-box]'); };
+            await toPatience();
+            assert.deepEqual(await page.$$eval('[data-jfb]', l => l.map(b => b.dataset.jfb)), ['bleu', 'rouge', 'vert', 'sepia', 'couleur', 'photo', 'fichier']);
+            const prev = () => page.$eval('[data-jfb-prev]', el => ({back: el.dataset.back, c: el.style.getPropertyValue('--jb-c'), line: el.style.getPropertyValue('--jb-line'), img: el.style.getPropertyValue('--jb-img')}));
+            const pref = () => page.evaluate(() => JSON.parse(localStorage.getItem('lcnda-jeux-famille-prefs-v1') || '{}').patience || {});
+            const setColor = v => page.$eval('[data-jfb-color]', (el, val) => { el.value = val; el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true})); }, v);
+            // 🎨 une couleur : rayures foncées sur un fond clair, claires sur un fond foncé
+            await page.click('[data-jfb="couleur"]'); await page.waitForSelector('[data-jfb-color]');
+            await setColor('#f5e6a0'); let p = await prev();
+            assert.equal(p.back, 'couleur'); assert.equal(p.c, '#f5e6a0'); assert.match(p.line, /rgba\(0,\s*0,\s*0/);
+            await setColor('#202060'); p = await prev(); assert.match(p.line, /rgba\(255,\s*255,\s*255/);
+            assert.equal((await pref()).back, 'couleur'); assert.equal((await pref()).backColor, '#202060', 'enregistré tout seul');
+            // ↶ Annuler : un clic sur « Rouge », puis Annuler → la couleur d'avant revient
+            await page.click('[data-jfb="rouge"]'); assert.equal((await prev()).back, 'rouge');
+            await page.locator('.ui-toast-acts button:has-text("Annuler")').last().click();
+            await page.waitForFunction(() => document.querySelector('[data-jfb-prev]')?.dataset.back === 'couleur');
+            assert.equal((await pref()).back, 'couleur'); assert.equal((await pref()).backColor, '#202060');
+            // 🖼 une photo de l'app : celle d'une personne vivante est refusée, celle de la ferme est prise
+            const mid = title => page.evaluate(async t => (await window.LCNDA_JEUX_FAMILLE.loadData(true)).media.find(m => m.title === t)?.id, title);
+            const okId = await mid('La ferme'), livingId = await mid('Photo du vivant'); assert.ok(okId && livingId);
+            await page.evaluate(id => { window.LCNDA_PICKER.openMediaPicker = async () => ({id, title: 'x'}); }, livingId);
+            await page.click('[data-jfb="photo"]'); await page.waitForSelector('.ui-toast-text:has-text("personne vivante")');
+            assert.equal((await prev()).back, 'couleur', 'refusée : rien ne change');
+            await page.evaluate(id => { window.LCNDA_PICKER.openMediaPicker = async () => ({id, title: 'x'}); }, okId);
+            await page.click('[data-jfb="photo"]'); await page.waitForFunction(() => document.querySelector('[data-jfb-prev]')?.dataset.back === 'image');
+            p = await prev(); assert.match(p.img, /media\/ferme\.png/); assert.equal((await pref()).back, 'photo'); assert.equal((await pref()).backMedia.id, okId);
+            assert.match(await page.textContent('[data-jfb-more]'), /La ferme/);
+            // 📁 une image de l'ordinateur : réduite et gardée dans ce navigateur ; un fichier qui n'est pas une image est refusé
+            await page.setInputFiles('[data-jfb-file]', {name: 'notes.txt', mimeType: 'text/plain', buffer: Buffer.from('bonjour')});
+            await page.waitForSelector('.ui-toast-text:has-text("pas une image")'); assert.equal((await pref()).back, 'photo');
+            await page.setInputFiles('[data-jfb-file]', {name: 'dos.png', mimeType: 'image/png', buffer: PNG});
+            await page.waitForFunction(() => JSON.parse(localStorage.getItem('lcnda-jeux-famille-prefs-v1') || '{}').patience?.back === 'fichier');
+            const img1 = await page.evaluate(() => localStorage.getItem('lcnda-jeux-dos-image') || '');
+            assert.match(img1, /^data:image\/jpeg;base64,/); assert.ok(img1.length <= 420 * 1024, `taille bornée : ${img1.length}`);
+            assert.match((await prev()).img, /data:image\/jpeg/);
+            // glisser-déposer une image (plus grande) sur le cadre : recadrée au format d'une carte
+            await page.evaluate(async () => {
+                const cv = document.createElement('canvas'); cv.width = 1600; cv.height = 900; const x = cv.getContext('2d'); x.fillStyle = '#c33'; x.fillRect(0, 0, 1600, 900); x.fillStyle = '#3c3'; x.fillRect(700, 0, 200, 900);
+                const blob = await new Promise(r => cv.toBlob(r, 'image/png')), dt = new DataTransfer(); dt.items.add(new File([blob], 'grande.png', {type: 'image/png'}));
+                const box = document.querySelector('[data-jfb-box]'); box.dispatchEvent(new DragEvent('dragover', {dataTransfer: dt, bubbles: true, cancelable: true})); box.dispatchEvent(new DragEvent('drop', {dataTransfer: dt, bubbles: true, cancelable: true}));
+            });
+            await page.waitForFunction(old => (localStorage.getItem('lcnda-jeux-dos-image') || '') !== old, img1);
+            const dims = await page.evaluate(() => new Promise(r => { const im = new Image(); im.onload = () => r([im.naturalWidth, im.naturalHeight]); im.src = localStorage.getItem('lcnda-jeux-dos-image'); }));
+            assert.deepEqual(dims, [300, 420], 'au format d’une carte');
+            // ↶ Annuler remet l'image d'avant
+            await page.locator('.ui-toast-acts button:has-text("Annuler")').last().click();
+            await page.waitForFunction(old => localStorage.getItem('lcnda-jeux-dos-image') === old, img1);
+            // la partie : le dos est l'image, recadrée (cover), avec une bordure blanche ; aussi en sombre
+            await page.click('#jf-setup-form [type=submit]'); await page.waitForSelector('[data-jf-play] .jfp[data-back="image"] .pc-card.is-back');
+            const look = () => page.$eval('.jfp .pc-card.is-back', el => { const cs = getComputedStyle(el); return {img: cs.backgroundImage, size: cs.backgroundSize, shadow: cs.boxShadow}; });
+            let l = await look(); assert.match(l.img, /data:image\/jpeg/); assert.match(l.img, /^url\("data:image\/jpeg/, 'l’image en premier'); assert.equal(l.size.split(',')[0].trim(), 'cover', 'recadrée (cover)'); assert.match(l.shadow, /rgb\(255, 255, 255\).*inset|inset.*rgb\(255, 255, 255\)/);
+            await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; }); l = await look(); assert.match(l.img, /data:image\/jpeg/); assert.match(l.shadow, /rgb\(255, 255, 255\)/);
+            await page.evaluate(() => { delete document.documentElement.dataset.theme; });
+            assert.equal((await games())[0].cfg.back, 'fichier');
+            // retenu : la préparation suivante repart de ce dos ; les jeux de cartes à plusieurs ont le même réglage
+            await toPatience(); assert.equal(await page.getAttribute('[data-jfb="fichier"]', 'aria-pressed'), 'true');
+            await page.selectOption('select[name="variant"]', 'cartes'); await page.waitForSelector('.jf-cartes [data-jfb-box]');
+            assert.equal(await page.$$eval('.jf-cartes [data-jfb]', l => l.length), 7);
+            await page.click('[data-jfb="couleur"]'); await page.waitForSelector('.jf-cartes [data-jfb-color]');
+            assert.equal(JSON.parse(await page.evaluate(() => localStorage.getItem('lcnda-jeux-famille-prefs-v1'))).cartes.back, 'couleur');
         });
         await t('390 px et sombre : préparation et parties sans débordement de la page', async () => {
             await page.setViewportSize({width: 390, height: 844});

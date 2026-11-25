@@ -4951,7 +4951,11 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         const result=await api('backup_sqlite',{}, {method:'POST',body:{dir:settings.dir,max_files:settings.maxFiles,mode:'manual'}});
         toast(`Sauvegarde faite : ${result.file||'fichier créé'}.`);
     }
-    async function undoLastChange(){
+    // Ctrl+Z appuyé deux fois de suite : le second appui attend le premier (avant : deux « undo_change » du même changement →
+    // « ↶ Annulé » puis, en rouge, « La dernière modification a changé entre-temps : rien n'a été annulé »)
+    let undoLastBusy=null;
+    function undoLastChange(){if(undoLastBusy)return undoLastBusy;undoLastBusy=undoLastChangeNow().finally(()=>{undoLastBusy=null;});return undoLastBusy;}
+    async function undoLastChangeNow(){
         const c=await api('undo_candidate');
         // rien d'annulable d'un coup : un message doux (pas une erreur), qui dit quoi faire
         if(!c.available)return toast(c.summary?`${i18n('ℹ️ « {name} » ne s’annule pas automatiquement.',{name:c.summary})} ${i18n(c.reason)}`:`ℹ️ ${i18n(c.reason)}`);

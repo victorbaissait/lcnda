@@ -52,7 +52,7 @@
     const games = () => { const v = ls.get(GAMES_KEY, []); return Array.isArray(v) ? v.filter(g => g && typeof g.id === 'string').slice(0, MAX_GAMES) : []; };
     const saveGames = list => ls.set(GAMES_KEY, list.slice(0, MAX_GAMES));
     const gameById = id => games().find(g => g.id === id) || null;
-    const writeGame = g => { const list = games(), i = list.findIndex(x => x.id === g.id); if (i >= 0) list[i] = g; else list.unshift(g); saveGames(list); };
+    const writeGame = g => { g.updated = Date.now(); const list = games(), i = list.findIndex(x => x.id === g.id); if (i >= 0) list[i] = g; else list.unshift(g); saveGames(list); };
     const owns = id => typeof id === 'string' && id.startsWith('laby-') && !!gameById(id);
     const gameCount = () => games().length;
 
@@ -630,7 +630,7 @@
     function sidebarHtml(active) {
         const list = games(); if (!list.length) return '';
         return list.map(g => { const tot = g.stages?.length || 0, p = g.players?.[0] || {}, best = Math.min(...(g.players || []).filter(x => x.done).map(x => x.ms), Infinity);
-            return `<button class="side-button lb-side ${g.id === active ? 'is-active' : ''}" type="button" data-lb-open="${esc(g.id)}" title="${esc(i18n('Reprendre ce labyrinthe'))}"><strong>🌀 ${esc(g.name)}</strong><small>${esc(i18n('Labyrinthe'))} · ${esc(i18n(SHAPES.find(s => s[0] === g.cfg?.shape)?.[2] || ''))}${tot ? ` · ${esc(plural(tot, 'étape'))}` : ''}</small><small>${g.finished ? `🏁 ${esc(isFinite(best) ? i18n('terminé en {time}', {time: fmtTime(best)}) : i18n('terminé'))}` : `⏱ ${fmtTime(p.ms)} · ${esc(i18n('{n} pas', {n: Number(p.steps || 0) || 0, ctx: 'laby'}))}`}</small></button>`; }).join('');
+            return `<button class="side-button lb-side ${g.id === active ? 'is-active' : ''}" type="button" data-lb-open="${esc(g.id)}" data-jeu-type="laby" data-jeu-when="${Number(g.updated || g.created) || 0}" title="${esc(i18n('Reprendre ce labyrinthe'))}"><strong>🌀 ${esc(g.name)}</strong><small>${esc(i18n('Labyrinthe'))} · ${esc(i18n(SHAPES.find(s => s[0] === g.cfg?.shape)?.[2] || ''))}${tot ? ` · ${esc(plural(tot, 'étape'))}` : ''}</small><small>${g.finished ? `🏁 ${esc(isFinite(best) ? i18n('terminé en {time}', {time: fmtTime(best)}) : i18n('terminé'))}` : `⏱ ${fmtTime(p.ms)} · ${esc(i18n('{n} pas', {n: Number(p.steps || 0) || 0, ctx: 'laby'}))}`}</small></button>`; }).join('');
     }
     function bindSidebar(content, ctx, signal) { content.querySelectorAll('[data-lb-open]').forEach(b => b.addEventListener('click', () => ctx.open?.(b.dataset.lbOpen), signal ? {signal} : undefined)); }
 

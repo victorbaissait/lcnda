@@ -87,6 +87,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/lot9-sons-enfance.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-soldats-noms.css?v=1">
     <link rel="stylesheet" href="assets/css/lot9-monde-coutumes.css?v=1">
+    <link rel="stylesheet" href="assets/css/lot10-regles-actes.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-terre-gens.css?v=1">
     <link rel="stylesheet" href="assets/css/lot10-objets-traces.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
@@ -1336,7 +1337,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets-data.js?v=2" defer></script>
 <script src="assets/js/heritage-alphabets.js?v=4" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=7" defer></script>
-<script src="assets/js/heritage-lecture-autrefois.js?v=7" defer></script>
+<script src="assets/js/heritage-lecture-autrefois.js?v=8" defer></script>
 <script src="assets/js/heritage-links.js?v=25" defer></script>
 <script src="assets/js/heritage-more.js?v=409" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
@@ -1655,12 +1656,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lot8-ciel-metier.js?v=1" defer></script>
 <script src="assets/js/heritage-epoque-travail.js?v=1" defer></script>
 <script src="assets/js/heritage-lot9-monde-coutumes.js?v=1" defer></script>
+<script src="assets/js/heritage-lot10-regles-actes.js?v=1" defer></script>
 <script src="assets/js/heritage-lot10-terre-gens.js?v=2" defer></script>
 <script src="assets/js/heritage-lot8-soldats-noms.js?v=1" defer></script>
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=1" defer></script>
 <script src="assets/js/heritage-terroir.js?v=1" defer></script>
 <script src="assets/js/heritage-terre-mots.js?v=2" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=7" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=8" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
