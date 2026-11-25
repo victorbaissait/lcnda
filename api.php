@@ -87,6 +87,10 @@ try {
         kiosk_exit($payload);
     }
     kiosk_guard((string) $action, $isWrite);
+    if (is_string($action) && str_starts_with($action, 'donnees_maj_')) { // 🗂 Données installées : date, vérifier, mettre à jour, ↶ (lib/donnees_maj.php)
+        require_once __DIR__ . '/lib/donnees_maj.php';
+        donnees_maj_api($action, $isWrite, is_array($payload) ? $payload : []);
+    }
     if (!$isWrite && $action === 'website_live_rev') { // 🌐 aperçu en direct : sa révision, demandée chaque seconde (sans ouvrir la base ; lib/website_php.php)
         require_once __DIR__ . '/lib/website_php.php';
         website_live_rev((string) ($_GET['token'] ?? ''));

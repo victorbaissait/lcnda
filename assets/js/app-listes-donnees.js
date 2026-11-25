@@ -199,6 +199,7 @@
     /** une page de résultats : {rows, total, more} */
     const XF_MAX = 10000;
     async function fetchPage(d, st, offset, limit) {
+        if (st.inBase && ext.listesPersonnes?.fetchPage) return ext.listesPersonnes.fetchPage(d, st, offset, limit, (s, o, l) => fetchPage(d, {...s, inBase: false}, o, l)); // 👤 « Seulement les noms présents dans ma base » (app-listes-personnes.js)
         await xfPrepare(st);
         if (d.query && xfCrit(st).length) { // un filtre 🧩 : on lit jusqu'à 10 000 lignes du serveur et on trie ici
             const got = []; let total = Infinity, truncated = false;
@@ -285,6 +286,7 @@
             <div class="ld-results" data-ld-results></div>
             <div class="ld-more-host" data-ld-more-host></div></section>`;
         bindPage(host.querySelector('.ld-page'), d);
+        try { ext.listesPersonnes?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, rerun}); } catch (e) { console.error(e); } // 👤 noms reliés aux fiches (app-listes-personnes.js)
         try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, rows: () => cur.rows, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
         paintSaved(); paintChips(); await refresh();
     }
@@ -299,7 +301,7 @@
     function paintChips() {
         const box = ws()?.querySelector('[data-ld-chips]'), d = cur.d, st = cur.st; if (!box) return;
         const chips = [...st.crit.map((c, i) => [`crit:${i}`, critText(d, c)]), st.period ? ['period', periodText(st.period)] : null, st.near ? ['near', nearText(st.near)] : null].filter(Boolean);
-        box.innerHTML = `<span class="ld-count" data-ld-count aria-live="polite"></span>${chips.map(([k, t]) => `<button type="button" class="ui-listbar-chip" data-ld-chip="${esc(k)}" title="${esc(T('Retirer ce critère'))}">${esc(t)} <span aria-hidden="true">×</span></button>`).join('')}${chips.length > 1 || (chips.length && st.q) ? `<button type="button" class="ui-listbar-clearall" data-ld-clear>${esc(T('Tout effacer'))}</button>` : ''}`;
+        box.innerHTML = `<span class="ld-count" data-ld-count aria-live="polite"></span>${chips.map(([k, t]) => `<button type="button" class="ui-listbar-chip" data-ld-chip="${esc(k)}" title="${esc(T('Retirer ce critère'))}">${esc(t)} <span aria-hidden="true">×</span></button>`).join('')}${ext.listesPersonnes?.chip?.(d, st) || ''}${chips.length > 1 || (chips.length && st.q) ? `<button type="button" class="ui-listbar-clearall" data-ld-clear>${esc(T('Tout effacer'))}</button>` : ''}`;
         ws()?.querySelectorAll('[data-ld-view]').forEach(b => { const on = b.dataset.ldView === st.view; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
     }
     const countText = () => (cur.more ? T('plus de {n} lignes', {n: nf(cur.total)}) : cur.total === 1 ? T('1 ligne') : T('{n} lignes', {n: nf(cur.total)}));
@@ -332,6 +334,7 @@
         res.innerHTML = `<div class="data-table-wrap ld-table-wrap"><table class="data-table ld-table"><thead><tr>${head}${urls.length ? '<th></th>' : ''}</tr></thead><tbody>${body}</tbody></table></div>`;
         paintMore();
         try { ext.connexions?.listRowsPainted?.(res, cur.rows, {d, total: cur.total}); } catch (e) { console.error(e); } // 📥 cases « Tu choisis des lignes… » (heritage-connexions.js)
+        try { ext.listesPersonnes?.rowsPainted?.(res, cur.rows, {d}); } catch (e) { console.error(e); } // 👤 « dans ta base : … », 🔗 Relier à une fiche (app-listes-personnes.js)
     }
     function paintMore() {
         const host = ws()?.querySelector('[data-ld-more-host]'); if (!host) return;
