@@ -772,7 +772,7 @@ function succ_bundle_import(PDO $to, array $b, string $mediaTo, ?callable $media
         $options = json_decode((string) ($c['options_json'] ?? '{}'), true); if (!is_array($options)) { $options = []; }
         $options['similar'] = array_map(static fn($x) => [$x[0], $x[1]], $similar);
         $set = ['deceased_id' => $pmap[(int) $c['deceased_id']] ?? null, 'notary_person_id' => $notary ? ($pmap[$notary] ?? null) : null,
-            'notary_text' => $notary && !isset($pmap[$notary]) ? ((string) ($opts['notary_name'] ?? '') ?: (string) $c['notary_text']) : (string) $c['notary_text'],
+            'notary_text' => $notary && !isset($pmap[$notary]) ? ((string) ($opts['notary_name'] ?? '') ?: (string) ($c['notary_text'] ?? '')) : (string) ($c['notary_text'] ?? ''),
             'death_place_id' => null, 'overrides_json' => json_encode($ov2 ?: new stdClass(), JSON_UNESCAPED_UNICODE), 'snapshot_json' => is_array($snap) ? json_encode($snap, JSON_UNESCAPED_UNICODE) : '',
             'options_json' => json_encode($options ?: new stdClass(), JSON_UNESCAPED_UNICODE), 'deleted_at' => null, 'progress' => $c['progress'] ?? null, 'progress_json' => (string) ($c['progress_json'] ?? '')];
         if (!empty($opts['state'])) { $set['state'] = $opts['state']; $set['archived_at'] = null; }

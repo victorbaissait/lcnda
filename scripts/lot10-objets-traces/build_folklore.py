@@ -48,24 +48,45 @@ for _k, _hs in NAMES.items():
 def subpages(base):
     out, cont = [], {}
     while True:
-        d = wm.ws({'action': 'query', 'list': 'allpages', 'apprefix': base + '/', 'apnamespace': 0, 'aplimit': 500, **cont})
+        d = wm.ws({'action': 'query', 'list': 'allpages', 'apprefix': base + ('' if base.startswith('Littérature orale de la Picardie') else '/'), 'apnamespace': 0, 'aplimit': 500, **cont})
         out += [p['title'] for p in d['query']['allpages']]
         if 'continue' not in d:
             return out
         cont = {'apcontinue': d['continue']['apcontinue']}
 
 
-def text_of(title):
-    d = wm.ws({'action': 'parse', 'page': title, 'prop': 'text', 'disablelimitreport': 1, 'disableeditsection': 1})
-    if 'parse' not in d:
-        return ''
-    t = d['parse']['text']
-    t = re.sub(r'<style.*?</style>', ' ', t, flags=re.S)
-    t = re.sub(r'<(div|table)[^>]*(headertemplate|ws-noexport|navigation)[^>]*>.*?</\1>', ' ', t, flags=re.S)
-    t = re.sub(r'<sup[^>]*>.*?</sup>', '', t, flags=re.S)
-    t = re.sub(r'<br\s*/?>|</p>', '\n', t)
-    t = re.sub(r'<[^>]+>', ' ', t)
-    return html.unescape(re.sub(r'[ \t]+', ' ', t))
+def contents(titles):
+    """wikitext de plusieurs pages (50 par requête)"""
+    out = {}
+    for i in range(0, len(titles), 50):
+        d = wm.ws({'action': 'query', 'prop': 'revisions', 'rvprop': 'content', 'rvslots': 'main', 'titles': '|'.join(titles[i:i + 50])})
+        for pg in d.get('query', {}).get('pages', []):
+            if pg.get('revisions'):
+                out[pg['title']] = pg['revisions'][0]['slots']['main']['content']
+    return out
+
+
+PAGES = re.compile(r'<pages\s+index="([^"]+)"([^>]*)/?>', re.I)
+ATTR = lambda a, k: (re.search(k + r'\s*=\s*"?([^"\s/>]+)"?', a) or [None, None])[1]
+
+
+def plain(w):
+    w = re.sub(r'<noinclude>.*?</noinclude>', ' ', w, flags=re.S)
+    w = re.sub(r'\{\{(?:[^{}]|\{\{[^{}]*\}\})*\}\}', ' ', w)  # modèles
+    w = re.sub(r'\[\[(?:[^|\]]*\|)?([^\]]*)\]\]', r'\1', w)
+    w = re.sub(r'<[^>]+>', ' ', w)
+    w = re.sub(r"'{2,}", '', w)
+    return html.unescape(re.sub(r'[ \t]+', ' ', w))
+
+
+def section(w, name):
+    if not name:
+        return w
+    m = re.search(r'##\s*' + re.escape(name) + r'\s*##(.*?)(?=##\s*[^#\n]+\s*##|$)', w, re.S)
+    if m:
+        return m.group(1)
+    m = re.search(r'<section\s+begin\s*=\s*"?' + re.escape(name) + r'"?\s*/>(.*?)<section\s+end\s*=\s*"?' + re.escape(name), w, re.S)
+    return m.group(1) if m else None
 
 
 # « Conté par Marie-Yvonne Guézennec, de Plouaret. » ; « Conté en 1879 par Rose Renaud, de Saint-Cast » ; « Dit par … de Lectoure » ;
@@ -100,30 +121,48 @@ def place_of(sentence, deps):
 def main():
     rows, works = [], []
     for base, who, died, years, deps, kind, note in WORKS:
-        titles = [t for t in subpages(base) if not re.search(r'/(Préface|Avant-propos|Additions|Table|Texte entier|Introduction|Références|Notes?|Index|Errata)\b', t)]
+        titles = [t for t in subpages(base) if t != base and not re.search(r'(/| – )(Préface|Avant-propos|Additions|Table|Texte entier|Introduction|Références|Notes?|Index|Errata|Lettre)\b|/Breton$|Bilingue', t)]
         print(f'{base} : {len(titles)} pages', flush=True)
         found = 0
+        main = contents(titles)
+        want = {}  # titre → (page du livre, section)
         for t in titles:
-            txt = text_of(t)
-            if len(txt) < 400:
-                continue  # page de sommaire
+            w = main.get(t, '')
+            m = PAGES.search(w)
+            if m:
+                to = ATTR(m.group(2), 'to') or ATTR(m.group(2), 'from')
+                if to:
+                    want[t] = (f'Page:{m.group(1)}/{to}', ATTR(m.group(2), 'tosection'))
+        pages = contents(sorted({v[0] for v in want.values()}))
+        for t in titles:
+            w = main.get(t, '')
+            if t in want:
+                pw = pages.get(want[t][0], '')
+                sec = section(pw, want[t][1])
+                if sec is None:
+                    sec = pw if len(re.findall(WHO, plain(pw))) <= 1 else ''
+                txt = plain(sec)
+            elif len(w) > 600:
+                txt = plain(w)
+            else:
+                continue  # sommaire
             tail = txt[-1500:]
-            sents = [s.strip() for s in re.split(r'(?<=[.)\]])\s+|\n', tail) if re.search(WHO, s)]
+            sents = [x.strip() for x in re.split(r'(?<=[.)\]])\s+|\n', tail) if re.search(WHO, x)]
             hit = None
-            for s in reversed(sents):
-                pl = place_of(s, deps)
+            for x in reversed(sents):
+                pl = place_of(x, deps)
                 if pl:
-                    hit = (s, pl)
+                    hit = (x, pl)
                     break
-            name = t.split('/')[-1]
+            name = t.split('/')[-1].split(' – ')[-1]
             row = {'t': name, 'w': base, 'url': WS + t.replace(' ', '_'), 'k': kind}
             if hit:
-                s, (insee, nom, lat, lon) = hit
-                s = re.sub(r'\s+', ' ', s).strip(' ()[]')
-                if len(s) > 220:
-                    s = s[:219].rsplit(' ', 1)[0] + '…'
-                y = YEAR.search(s)
-                row.update({'q': s, 'insee': insee, 'p': nom, 'lat': lat, 'lon': lon, 'y': int(y.group(1)) if y else None})
+                x, (insee, nom, lat, lon) = hit
+                x = re.sub(r'\s+', ' ', x).strip(' ()[]')
+                if len(x) > 220:
+                    x = x[:219].rsplit(' ', 1)[0] + '…'
+                y = YEAR.search(x)
+                row.update({'q': x, 'insee': insee, 'p': nom, 'lat': lat, 'lon': lon, 'y': int(y.group(1)) if y else None})
                 found += 1
             rows.append(row)
         works.append({'w': base, 'who': who, 'died': died, 'from': years[0], 'to': years[1], 'deps': deps, 'k': kind, 'note': note,
