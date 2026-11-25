@@ -321,7 +321,7 @@ a.alink:hover,.src a:hover{text-decoration:underline}
  .tb{padding:12px 16px 10px;gap:10px}
  .tb h3{font-size:16px;flex:1}
  .smart{order:3;flex:1 1 100%;font-size:13.5px}
- .crumbbtn{display:flex;order:4;flex:1 1 100%;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:9px;background:var(--paper);color:var(--ink);font:700 13.5px system-ui;padding:9px 12px;cursor:pointer;text-align:left}
+ .crumbbtn{display:flex;order:4;flex:1 1 100%;min-width:0;max-width:100%;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:9px;background:var(--paper);color:var(--ink);font:700 13.5px system-ui;padding:9px 12px;cursor:pointer;text-align:left}
  .crumbbtn span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
  .strip{padding:10px 16px}
  .striph .mini{display:none}
@@ -332,7 +332,8 @@ a.alink:hover,.src a:hover{text-decoration:underline}
  .tclose{display:inline-flex}
  .mscroll{padding:14px 16px 18px}
  .mfoot{padding:10px 16px 12px}
- .mfoot .b{flex:1 1 auto;justify-content:center}
+ .mfoot .b{flex:1 1 auto;justify-content:center;white-space:normal;text-align:center;min-width:0}
+ .mfoot input[type=text],.mfoot select{flex:1 1 100%!important}
  .bh h3{font-size:17px}
  .it{flex-wrap:wrap;gap:8px 10px;padding:10px 6px}
  .grip{display:none}

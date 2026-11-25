@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """LCNDA — lot B « la vie du village et la nature » : fabrique les fichiers assets/data/tb-*.json.gz.
 
-    python3 scripts/telech-b/build.py wikidata [--out DOSSIER]   # ✝️ ⛲ 🍞 🪨 🐑 🕍 🍇 depuis Wikidata (CC0)          — ici ou sur GitHub
-    python3 scripts/telech-b/build.py vendanges [--out DOSSIER]  # 🍇 dates des vendanges 1354–2007 (Daux et al. 2012, NOAA)
+    python3 scripts/telech-b/build.py wikidata [--out DOSSIER]   # ✝️ ⛲ 🍞 🪨 🐑 🕍 🍇 (cépages) depuis Wikidata (CC0)          — ici ou sur GitHub
     python3 scripts/telech-b/build.py osm [--out DOSSIER]        # ✝️ ⛲ 🍞 🪨 🐑 🕍 depuis OpenStreetMap (ODbL) — sur GitHub seulement
     python3 scripts/telech-b/build.py essai --out DOSSIER        # petits fichiers INVENTÉS (marqués « fixture ») pour les essais
 
@@ -14,9 +13,8 @@ corse, provençal : pas de catégorie ; breton : une seule annexe) — l'app don
 Sources et licences (lues le 2026-11-25 ; voir docs/telechargements-lot-b.md) :
   · Wikidata — « All structured data … is released into the public domain under Creative Commons Zero » (CC0 1.0).
   · OpenStreetMap — Open Database License (ODbL 1.0), « © les contributeurs d'OpenStreetMap » sur chaque écran.
-  · Dates des vendanges — Daux, V. et al. (2012), « An open-access database of grape harvest dates for climate research »,
-    Climate of the Past 8, 1403–1418 (article CC BY 3.0), données distribuées par NOAA NCEI / World Data Service for
-    Paleoclimatology : « Users may access and download these data free of charge; please cite the original references ».
+  · Les dates des vendanges ne sont PAS refaites ici : elles sont déjà dans le pack « Histoire du lieu » (lib/histoire.php,
+    liste « hist_vendanges ») ; heritage-telech-b-village.js les lit là.
 Format : {title, source, licence, licence_url, url, built, fields, rows:[[…]]} (+ des tables en plus selon le fichier), gzip.
 Bibliothèques : seulement celles de Python.
 """
@@ -229,72 +227,6 @@ def build_osm(out, server):
         write(out, f'osm-{theme}', {'title': f'{TITLES[theme]} (OpenStreetMap) : France', **OSM, 'kinds': sorted({k for k, _ in filters}), 'fields': OSM_FIELDS, 'rows': rows})
 
 
-# ═════════════════════════ 🍇 dates des vendanges ═════════════════════════
-GHD_URL = 'https://www.ncei.noaa.gov/pub/data/paleo/historical/europe/europe2012ghd.txt'
-GHD_FR = {'Alsace': 'Alsace', 'Auvergne': 'Auvergne', 'Auxerre-Avalon': 'Auxerrois et Avallonnais', 'Beaujolais and Maconnais': 'Beaujolais et Mâconnais',
-          'Bordeaux': 'Bordelais', 'Burgundy': 'Bourgogne', 'Champagne 1': 'Champagne (Marne)', 'Champagne 2': 'Champagne (Aube)', 'Gaillac- South-West': 'Gaillac et Sud-Ouest',
-          'Germany': 'Allemagne (Bade-Wurtemberg)', 'High Loire Valley': 'Haute vallée de la Loire', 'Ile de France': 'Île-de-France', 'Jura': 'Jura', 'Languedoc': 'Languedoc',
-          'Low Loire Valley': 'Basse vallée de la Loire', 'Luxembourg': 'Luxembourg', 'Maritime alps': 'Alpes-Maritimes', 'Northern Italy': 'Italie du Nord',
-          'Northern Lorraine': 'Lorraine du Nord', 'Northern Rhône valley': 'Vallée du Rhône (nord)', 'Savoie': 'Savoie', 'Spain': 'Espagne (Rioja)',
-          'Southern Lorraine': 'Lorraine du Sud', 'Southern Rhône valley': 'Vallée du Rhône (sud)', 'Switzerland (Leman Lake)': 'Suisse (Léman)',
-          'Various South-East': 'Sud-Est (divers)', 'Vendée - Poitou Charente': 'Vendée, Poitou, Charentes'}
-
-
-def parse_ghd(text):
-    lines = text.splitlines()
-    regions = []
-    i = next(i for i, l in enumerate(lines) if l.startswith('Location') and 'Latitude' in l) + 1
-    while lines[i].strip():
-        m = re.match(r'^(.+?)\s{2,}(-?[\d.]+)\s+(-?[\d.]+)\s*$', lines[i])
-        if m:
-            regions.append((m.group(1).strip(), float(m.group(2)), float(m.group(3))))
-        i += 1
-    series = {r[0]: {} for r in regions}
-    parts = [i for i, l in enumerate(lines) if re.match(r'^Daux et al\. 2012 Grape Harvest Date Data, part \d of 3', l)]
-    ri = 0
-    for p in parts:
-        # colonnes : la ligne des codes (« Als Auv … », parfois sur la ligne « Year », parfois sur la suivante, après « 1354 ») ;
-        # les valeurs sont alignées à droite sous leur code : une valeur appartient au code dont la fin est la plus proche
-        h = next(j for j in range(p + 1, p + 6) if len(lines[j].split()) >= 5 and all(re.fullmatch(r'[A-Z][A-Za-z]{1,2}\d?', t) for t in lines[j].split()[1:]))
-        cols = [(m.start(), m.end()) for m in re.finditer(r'\S+', lines[h])][1:]
-        names = [r[0] for r in regions[ri:ri + len(cols)]]
-        ri += len(cols)
-        j = h + 1
-        while j < len(lines) and not lines[j].startswith('Daux et al'):
-            l = lines[j]
-            m = re.match(r'^(\d{4})\b', l)
-            if m and j != h:
-                y = int(m.group(1))
-                for v in re.finditer(r'-?\d+(?:\.\d+)?', l[4:]):
-                    s, e = v.start() + 4, v.end() + 4
-                    c = min(range(len(cols)), key=lambda k: abs(cols[k][1] - e))
-                    series[names[c]][y] = float(v.group(0))
-            j += 1
-    return regions, series
-
-
-def build_vendanges(out):
-    text = wm.get(GHD_URL, 'text/plain').decode('utf-8', 'replace')
-    regions, series = parse_ghd(text)
-    assert series['Burgundy'].get(1354) == 15.3, 'lecture du tableau : Bourgogne 1354 ≠ 15,3'
-    reg = []
-    for name, lat, lon in regions:
-        s = series[name]
-        vals = sorted(s.values())
-        reg.append({'code': name, 'n': GHD_FR.get(name, name), 'lat': lat, 'lon': lon, 'first': min(s) if s else None, 'last': max(s) if s else None,
-                    'count': len(s), 'median': vals[len(vals) // 2] if vals else None})
-    rows = []
-    for i, (name, _, _) in enumerate(regions):
-        for y, d in sorted(series[name].items()):
-            rows.append([i, y, d])
-    write(out, 'vendanges', {
-        'title': 'Dates des vendanges en France et pays voisins, 1354–2007 (27 séries régionales)',
-        'source': 'Daux, V. et al. (2012), An open-access database of grape harvest dates for climate research, Climate of the Past 8, 1403–1418 ; NOAA NCEI, World Data Service for Paleoclimatology',
-        'licence': 'données en accès libre (« free of charge ; please cite ») ; article CC BY 3.0', 'licence_url': 'https://doi.org/10.5194/cp-8-1403-2012',
-        'url': 'https://doi.org/10.25921/2xg2-mt70', 'note': 'jours après le 31 août (0 = 31 août, 15 = 15 septembre) ; série régionale composée de plusieurs vignobles',
-        'regions': reg, 'fields': ['r', 'y', 'd'], 'rows': rows})
-
-
 # ═════════════════════════ essai : petits fichiers inventés ═════════════════════════
 def build_essai(out):
     fx = {'fixture': True, 'note': 'données INVENTÉES pour les essais'}
@@ -307,20 +239,16 @@ def build_essai(out):
     write(out, 'osm-croix', {'title': TITLES['croix'], **OSM, **fx, 'fields': OSM_FIELDS, 'rows': [['croix', 'Croix d’essai', 45.004, 3.0, None, 'n1']]})
     write(out, 'cepages', {'title': 'Cépages', **WD, **fx, 'fields': ['n', 'country', 'origin', 'lat', 'lon', 'from', 'color', 'fr', 'src'],
                            'rows': [['Cépage d’essai', 'France', 'Essaiville', 45.0, 3.0, 1700, 'noir', '', 'Q2']]})
-    write(out, 'vendanges', {'title': 'Vendanges', 'source': 'essai', 'licence': 'essai', **fx, 'regions': [{'code': 'X', 'n': 'Région d’essai', 'lat': 45.0, 'lon': 3.0, 'first': 1780, 'last': 1790, 'count': 2, 'median': 20.0}],
-                             'fields': ['r', 'y', 'd'], 'rows': [[0, 1780, 20.0], [0, 1788, 30.0]]})
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('what', choices=['wikidata', 'vendanges', 'osm', 'essai', 'tout'])
+    ap.add_argument('what', choices=['wikidata', 'osm', 'essai', 'tout'])
     ap.add_argument('--out', default=os.path.join(ROOT, 'assets', 'data'))
     ap.add_argument('--overpass', default='https://overpass-api.de/api/interpreter')
     a = ap.parse_args()
     if a.what in ('wikidata', 'tout'):
         build_wikidata(a.out)
-    if a.what in ('vendanges', 'tout'):
-        build_vendanges(a.out)
     if a.what in ('osm', 'tout'):
         build_osm(a.out, a.overpass)
     if a.what == 'essai':

@@ -4,7 +4,6 @@
 #               drailles, temples et synagogues — OpenStreetMap (ODbL 1.0, « © les contributeurs d’OpenStreetMap »).
 #               Le service Overpass n'est pas joignable depuis l'atelier de développement : la fabrication se fait ici.
 #   · wikidata  les mêmes sujets et les cépages — Wikidata (CC0 1.0)
-#   · vendanges dates des vendanges 1354–2007 (Daux et al. 2012, NOAA NCEI : données libres, à citer)
 # Seulement des questions polies (une à la fois, pause entre deux), User-Agent du script, rien de personnel.
 #
 # Lancer : onglet « Actions » → « Lot B : village et nature » → « Run workflow ».
@@ -15,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       quoi:
-        description: 'Quoi refaire : osm, wikidata, vendanges (séparés par des virgules)'
+        description: 'Quoi refaire : osm, wikidata (séparés par des virgules)'
         type: string
         default: 'osm'
   push:
@@ -61,7 +60,7 @@ jobs:
         run: |
           case "$QUOI" in *[!a-z,]*) echo "refusé : $QUOI"; exit 1;; esac
           for w in $(echo "$QUOI" | tr ',' ' '); do
-            case "$w" in osm|wikidata|vendanges) ;; *) echo "inconnu : $w"; exit 1;; esac
+            case "$w" in osm|wikidata) ;; *) echo "inconnu : $w"; exit 1;; esac
             ok=0
             for i in 1 2 3 4 5; do
               srv=https://overpass-api.de/api/interpreter; [ $((i % 2)) -eq 0 ] && srv=https://overpass.kumi.systems/api/interpreter

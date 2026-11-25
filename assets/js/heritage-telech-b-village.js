@@ -8,12 +8,14 @@
  *   🐑 berger    drailles (transhumance), burons, cabanes de berger       tb-wd-berger  (+ tb-osm-berger)
  *   🕍 cultes    temples protestants et synagogues                         tb-wd-cultes  (+ tb-osm-cultes)
  *   🍇 cepages   cépages et leur pays / lieu d'origine (Listes)            tb-cepages
- *   🍇 vendanges dates des vendanges 1354–2007, 27 régions                 tb-vendanges
+ *   🍇 vendanges la date des vendanges près du village, année par année : PAS de fichier ici — on lit le jeu « hist_vendanges »
+ *                du pack « Histoire du lieu » (lib/histoire.php, Daux et al. 2012), par la liste déjà enregistrée dans Listes
  * Sources : Wikidata (CC0 1.0) ; OpenStreetMap (ODbL 1.0, « © les contributeurs d'OpenStreetMap », fichiers tb-osm-* fabriqués sur
  *   GitHub : .github/workflows/telech-b.yml) ; Daux et al. 2012 / NOAA NCEI (données libres, à citer). Tout est lu sur l'ordinateur :
  *   rien ne part sur Internet (ni nom, ni lieu), pour personne. Seuls les liens « ↗ » ouvrent une page, sur un clic.
  * Où : fiche d'un village et Monographie de commune (une phrase par sujet, la liste sous « ▸ plus ») ; fiche d'une personne, bloc
- *   « 🐑 Son village et la nature » (le petit patrimoine près de chez lui, les vendanges de l'année de sa naissance et de son mariage) ;
+ *   « 🐑 Son village et la nature » (le petit patrimoine près de chez lui ; les vendanges de sa naissance et de son mariage sont déjà
+ *   dans « 🏘 Le lieu à son époque », heritage-histoire.js : pas refait ici) ;
  *   Listes (LCNDA_EXT.dataLists) ; Cartes (mapLayerSources) ; à la demande (LCNDA_EXT.dataSources) ;
  *   Réglages → « 🐑 Village et nature » (chaque sujet s'éteint ↶, À propos des données, liens seulement).
  * localStorage : « genealogie-telech-b ».   window.LCNDA_EXT.telechB = {core…, load, placeInto, personInto, openSettings}
@@ -60,23 +62,20 @@
         }
         return out.sort((a, b) => a.km - b.km);
     }
-    /** 🍇 la série des vendanges la plus proche (≤ maxKm) qui a des dates */
-    function harvestRegion(V, ll, maxKm = 150) {
-        if (!V || !okLL(ll)) return null;
+    /** 🍇 les lignes de hist_vendanges ({code, region, year, days, diff, lat, lon…}) → la série la plus proche (≤ maxKm) :
+     *  {code, region, km, rows (triées par année), mean (jours après le 31 août, la moyenne de la série), first, last} */
+    function harvestSeries(rows, ll, maxKm = 150) {
+        if (!okLL(ll)) return null;
         let best = null;
-        (V.regions || []).forEach((g, i) => { if (!g.count) return; const d = km(ll.lat, ll.lon, g.lat, g.lon); if (d <= maxKm && (!best || d < best.km)) best = {i, g, km: d}; });
-        return best;
+        for (const r of rows || []) { if (!okLL(r)) continue; const d = km(ll.lat, ll.lon, Number(r.lat), Number(r.lon)); if (d <= maxKm && (!best || d < best.km)) best = {code: r.code, region: r.region, km: d}; }
+        if (!best) return null;
+        const list = rows.filter(r => r.code === best.code).sort((x, y) => x.year - y.year);
+        const means = list.filter(r => num(r.days) !== null && num(r.diff) !== null).map(r => r.days - r.diff);
+        return {...best, rows: list, mean: means.length ? means.reduce((x, y) => x + y, 0) / means.length : null, first: list[0]?.year ?? null, last: list.at(-1)?.year ?? null};
     }
-    const harvestOf = (V, i, y) => { const r = (V?.rows || []).find(x => x[0] === i && x[1] === y); return r ? r[2] : null; };
     /** jours après le 31 août → {m, d} (mois 8–11, jour) */
     function ghdDay(d) { const t = new Date(Date.UTC(2001, 7, 31 + Math.round(d))); return {m: t.getUTCMonth() + 1, d: t.getUTCDate()}; }
-    /** les vendanges d'une année : la date, et l'écart avec la date habituelle (la médiane de la série) */
-    function harvestYear(V, reg, y) {
-        if (!reg || y === null || y === undefined) return null;
-        const d = harvestOf(V, reg.i, y); if (d === null) return null;
-        return {year: y, days: d, date: ghdDay(d), diff: reg.g.median === null ? null : Math.round(d - reg.g.median)};
-    }
-    const core = {num, fold, table, km, merge, near, harvestRegion, harvestYear, ghdDay};
+    const core = {num, fold, table, km, merge, near, harvestSeries, ghdDay};
     if (typeof module === 'object' && module.exports) { module.exports = core; return; }
 
     /* ═════════════ l'écran ═════════════ */
@@ -102,7 +101,7 @@
     const SUBS = {croix: 'Les calvaires, croix de chemin et oratoires autour du village.', eau: 'Les lavoirs, puits et fontaines où l’on allait chercher l’eau et laver le linge.',
         village: 'Les fours à pain du village et les pigeonniers.', bornes: 'Les bornes des anciennes limites, les bureaux d’octroi et les douanes.',
         berger: 'Les chemins de transhumance (drailles), les burons et les cabanes de berger.', cultes: 'Les temples protestants et les synagogues de la région, avec leur date.',
-        vendanges: 'Le jour où l’on vendangeait près de chez lui, l’année de sa naissance et de son mariage (1354–2007).', cepages: 'La liste des cépages et de leur pays ou lieu d’origine.'};
+        vendanges: 'Le jour où l’on vendangeait près du village, année par année (1354–2007), d’après le pack « Histoire du lieu ».', cepages: 'La liste des cépages et de leur pays ou lieu d’origine.'};
     const settings = () => { let s = {}; try { s = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (_) { s = {}; } return {...Object.fromEntries(PARTS.map(p => [p[0], true])), ...s}; };
     const on = k => settings()[k] !== false;
     const saveSettings = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
@@ -121,7 +120,7 @@
     const SRC = {
         wd: () => `${link('https://www.wikidata.org/wiki/Wikidata:Licensing', 'Wikidata')} (CC0)`,
         osm: () => `${link('https://www.openstreetmap.org/copyright', T('© les contributeurs d’OpenStreetMap'))} (ODbL)`,
-        ghd: () => `${link('https://doi.org/10.5194/cp-8-1403-2012', 'Daux et al. 2012, Climate of the Past')} · ${link('https://doi.org/10.25921/2xg2-mt70', 'NOAA NCEI')} (${esc(T('données libres, à citer'))})`
+        ghd: () => `${link('https://doi.org/10.5194/cp-8-1403-2012', 'Daux et al. 2012, Climate of the Past')} · ${link('https://www.ncei.noaa.gov/access/paleo-search/study/13194', 'NOAA / WDS-Paleo')} (${esc(T('données libres, à citer'))}) — ${esc(T('pack « Histoire du lieu »'))}`
     };
 
     /* ─────────── chargement (une fois, à la demande ; un fichier absent = rien) ─────────── */
@@ -144,7 +143,15 @@
             .then(([w, o]) => ({wd: w, osm: o, rows: merge(table(w), table(o))}));
         return merged[theme];
     }
-    const vendanges = () => file('vendanges');
+    /** 🍇 le jeu « hist_vendanges » du pack « Histoire du lieu » (une seule source dans l'app), par la liste de Listes ;
+     *  null quand le pack n'est pas installé (rien n'est affiché : l'installation se propose dans Réglages → Histoire du lieu) */
+    async function harvestNear(ll, km = 150) {
+        const d = (ext.dataListsEngine?.list?.() || ext.dataLists || []).find(x => x.id === 'hist_vendanges');
+        if (!d?.query) return null;
+        try { if (d.installed && !(await d.installed())) return null; } catch (_) { return null; }
+        const r = await d.query({near: {lat: ll.lat, lon: ll.lon, km}, sort: 'year', dir: 'asc', offset: 0, limit: 5000}).catch(() => null);
+        return harvestSeries(r?.rows || [], ll, km);
+    }
 
     /* ─────────── 🏘 un lieu : fiche d'un village, monographie, à la demande ─────────── */
     const placeLL = pl => { const lat = num(pl?.lat ?? pl?.latitude), lon = num(pl?.lon ?? pl?.longitude); return lat !== null && lon !== null && !(lat === 0 && lon === 0) ? {lat, lon} : null; };
@@ -170,16 +177,17 @@
         return themeHtml(theme, D, list, T('{t} à moins de {r} km ({n}) : {l}.', {t: esc(T(TH[theme][2])), r: String(TH[theme][3]), n: nf(list.length), l: shortList(theme, list)}));
     }
     async function harvestPlace(ll, years) {
-        const V = await vendanges(); const reg = harvestRegion(V, ll); if (!reg) return '';
-        const g = reg.g, mid = g.median === null ? null : ghdDay(g.median);
-        const lead = T('Les vendanges ({r}, série à {k}) : d’habitude vers le {d} ; dates connues de {a} à {b}.', {r: esc(T(g.n)), k: esc(kmTxt(reg.km)), d: esc(mid ? dayTxt(mid) : '?'), a: String(g.first), b: String(g.last)});
-        const rows = (V.rows || []).filter(x => x[0] === reg.i && (!years || (x[1] >= years.from - 5 && x[1] <= years.to + 5)));
-        const ext5 = [...(V.rows || []).filter(x => x[0] === reg.i)].sort((a, b) => a[2] - b[2]);
-        const li = x => `<li>${esc(x[1])} : ${esc(dayTxt(ghdDay(x[2])))}${g.median !== null ? ` <small class="muted">(${esc(diffTxt(Math.round(x[2] - g.median)))})</small>` : ''}</li>`;
-        const body = `${ext5.length ? `<p>${esc(T('Les plus précoces :'))} ${ext5.slice(0, 3).map(x => `${x[1]} (${esc(dayTxt(ghdDay(x[2])))})`).join(', ')}<br>${esc(T('Les plus tardives :'))} ${ext5.slice(-3).reverse().map(x => `${x[1]} (${esc(dayTxt(ghdDay(x[2])))})`).join(', ')}</p>` : ''}
-            ${years && rows.length ? `<p>${esc(T('Les années de ta famille ici :'))}</p><ul class="hist-ul tb-ul tb-cols">${rows.slice(0, 120).map(li).join('')}</ul>` : ''}
+        const S = await harvestNear(ll); if (!S || !S.rows.length) return '';
+        const mid = S.mean === null ? null : ghdDay(S.mean);
+        const lead = T('Les vendanges ({r}, série à {k}) : d’habitude vers le {d} ; dates connues de {a} à {b}.', {r: esc(T(S.region)), k: esc(kmTxt(S.km)), d: esc(mid ? dayTxt(mid) : '?'), a: String(S.first), b: String(S.last)});
+        const mine = S.rows.filter(x => years && x.year >= years.from - 5 && x.year <= years.to + 5);
+        const byDays = S.rows.filter(x => num(x.days) !== null).sort((a, b) => a.days - b.days);
+        const when = x => `${x.year} (${esc(dayTxt(ghdDay(x.days)))})`;
+        const li = x => `<li>${esc(x.year)} : ${esc(dayTxt(ghdDay(x.days)))}${num(x.diff) !== null ? ` <small class="muted">(${esc(diffTxt(Number(x.diff)))})</small>` : ''}</li>`;
+        const body = `${byDays.length ? `<p>${esc(T('Les plus précoces :'))} ${byDays.slice(0, 3).map(when).join(', ')}<br>${esc(T('Les plus tardives :'))} ${byDays.slice(-3).reverse().map(when).join(', ')}</p>` : ''}
+            ${mine.length ? `<p>${esc(T('Les années de ta famille ici :'))}</p><ul class="hist-ul tb-ul tb-cols">${mine.slice(0, 120).map(li).join('')}</ul>` : ''}
             ${hyp(T('Une série régionale mêle plusieurs vignobles : la date est celle du « ban des vendanges » ou du début de la récolte. Une vendange tardive dit un été froid ; une précoce, un été chaud.'))}`;
-        return row('🍇', lead, SRC.ghd(), more(body, rows.length || null));
+        return row('🍇', lead, SRC.ghd(), more(body, mine.length || null));
     }
     const diffTxt = d => (d === 0 ? T('comme d’habitude') : d > 0 ? T('{n} jours plus tard que d’habitude', {n: String(d)}) : T('{n} jours plus tôt que d’habitude', {n: String(-d)}));
     async function placePart(kind, place, opts = {}) {
@@ -251,21 +259,10 @@
         return row('⛲', `${lead} ${srcLink(all[0].r.url)}`, srcs, more(`<ul class="hist-ul tb-ul">${all.slice(0, 20).map(x => itemLi(x.theme, x)).join('')}</ul>${hyp(T('La distance est mesurée depuis la position du lieu (souvent le centre du village), pas depuis sa maison.'))}`, all.length));
     }
     const he = P => (P?.gender === 'female' ? T('elle') : T('il'));
-    async function harvestForPerson(life) {
-        const home = birthPlace(life); if (!home) return '';
-        const V = await vendanges(); const reg = harvestRegion(V, home); if (!reg) return '';
-        const out = [];
-        const b = harvestYear(V, reg, yearOf(evOf(life, ['BIRT', 'BAPM', 'CHR'])) ?? num(life?.person?.birth));
-        if (b) out.push(T('L’année de sa naissance ({y}), on a vendangé vers le {d} ({diff}).', {y: String(b.year), d: esc(dayTxt(b.date)), diff: esc(diffTxt(b.diff ?? 0))}));
-        const m = harvestYear(V, reg, yearOf(evOf(life, ['MARR'])));
-        if (m) out.push(T('L’année de son mariage ({y}), vers le {d} ({diff}).', {y: String(m.year), d: esc(dayTxt(m.date)), diff: esc(diffTxt(m.diff ?? 0))}));
-        if (!out.length) return '';
-        return row('🍇', `${out.join(' ')} <small class="muted">${esc(T('Série : {r}.', {r: T(reg.g.n)}))}</small>`, SRC.ghd(), hyp(T('Une vendange tardive dit un été froid (mauvaise récolte, pain cher) ; une précoce, un été chaud.')));
-    }
-    const PERSON_PARTS = ['eau', 'vendanges'];
+    const PERSON_PARTS = ['eau'];
     async function personInto(host, id, opts = {}) {
         const s = settings();
-        const jobs = {eau: () => (s.eau || s.village || s.croix || opts.force ? smallHeritageForPerson : null), vendanges: () => (s.vendanges || opts.force ? harvestForPerson : null)};
+        const jobs = {eau: () => (s.eau || s.village || s.croix || opts.force ? smallHeritageForPerson : null)};
         const want = (opts.parts || PERSON_PARTS).map(k => jobs[k]?.()).filter(Boolean);
         if (!want.length) { host.innerHTML = ''; return 0; }
         let life; try { life = opts.life || await lifeOf(id); } catch (_) { host.innerHTML = ''; return 0; }
@@ -279,7 +276,7 @@
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks[BLOCK] = (index, detail) => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal') return '';
-        if (!['eau', 'village', 'croix', 'vendanges'].some(on)) return '';
+        if (!['eau', 'village', 'croix'].some(on)) return '';
         return A().card(index, T('🐑 Son village et la nature'), '', `<div class="tb-block" data-tb-person="${Number(p.id)}"></div>`, 'span-12').replace('<section class="card ', '<section hidden class="card ');
     };
     (ext.afterPerson = ext.afterPerson || []).push(() => {
@@ -292,7 +289,7 @@
     /* ─────────── 📜 Monographie de commune : une partie par sujet ─────────── */
     (ext.monographSections = ext.monographSections || []).push(...PLACE_KINDS.map(kind => ({
         id: `tb_${kind}`, icon: kind === 'vendanges' ? '🍇' : TH[kind][1], label: kind === 'vendanges' ? T('Les dates des vendanges') : T(TH[kind][2]), group: 'Le lieu', defaultOn: true, enabled: () => on(kind),
-        source: kind === 'vendanges' ? 'Daux et al. 2012 ; NOAA NCEI (données libres, à citer)' : 'Wikidata (CC0) ; © les contributeurs d’OpenStreetMap (ODbL)',
+        source: kind === 'vendanges' ? 'Daux et al. 2012 ; NOAA / WDS-Paleo — pack « Histoire du lieu »' : 'Wikidata (CC0) ; © les contributeurs d’OpenStreetMap (ODbL)',
         render: async (place, host, ctx) => {
             let years = null; try { years = ctx?.years ? await ctx.years() : null; } catch (_) {}
             const html = await placePart(kind, place, {years}); if (!html) return false;
@@ -312,11 +309,7 @@
         {id: 'tb_cepages', icon: '🍇', label: T('Cépages et leur origine'), group: 'Le monde', source: 'Wikidata (CC0)', sourceUrl: 'https://www.wikidata.org/wiki/Q958314', enabled: () => on('cepages'),
             load: async () => table(await file('cepages')).map(r => ({name: r.n, country: r.country || '', origin: r.origin || '', from: num(r.from), color: r.color || '', wikipedia: wp(r.fr), lat: r.lat, lon: r.lon, src: `https://www.wikidata.org/wiki/${r.src}`})),
             fields: [F('name', 'Cépage'), F('country', 'Pays d’origine', 'enum'), F('origin', 'Lieu d’origine'), F('color', 'Couleur', 'enum'), F('from', 'Connu depuis', 'year'), F('wikipedia', 'Wikipédia', 'url'), F('src', 'Source', 'url')],
-            period: r => [r.from, null], geo: r => (r.lat !== null && r.lat !== undefined ? [r.lat, r.lon] : null), open: openUrl},
-        {id: 'tb_vendanges', icon: '🍇', label: T('Dates des vendanges (1354–2007)'), group: 'Le monde', source: 'Daux et al. 2012 ; NOAA NCEI', sourceUrl: 'https://doi.org/10.25921/2xg2-mt70', enabled: () => on('vendanges'),
-            load: async () => { const V = await vendanges(); if (!V) return []; return V.rows.map(([i, y, d]) => { const g = V.regions[i]; return {region: T(g.n), year: y, date: dayTxt(ghdDay(d)), days: d, diff: g.median === null ? null : Math.round(d - g.median), lat: g.lat, lon: g.lon, src: 'https://doi.org/10.25921/2xg2-mt70'}; }); },
-            fields: [F('region', 'Région', 'enum'), F('year', 'Année', 'year'), F('date', 'Début des vendanges'), F('days', 'Jours après le 31 août', 'number'), F('diff', 'Écart (jours)', 'number'), F('src', 'Source', 'url')],
-            period: r => [r.year, r.year], geo: r => [r.lat, r.lon], open: openUrl});
+            period: r => [r.from, null], geo: r => (r.lat !== null && r.lat !== undefined ? [r.lat, r.lon] : null), open: openUrl});
 
     /* ─────────── 🗺 Cartes ─────────── */
     const inBox = (bbox, lat, lon) => !bbox || (lon >= bbox[0] && lat >= bbox[1] && lon <= bbox[2] && lat <= bbox[3]);
@@ -351,7 +344,7 @@
     /* ─────────── ⚙️ Réglages → 🐑 Village et nature ─────────── */
     async function drawSettings(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
-        const files = ['cepages', 'vendanges', ...THEMES.flatMap(t => [`wd-${t[0]}`, `osm-${t[0]}`])];
+        const files = ['cepages', ...THEMES.flatMap(t => [`wd-${t[0]}`, `osm-${t[0]}`])];
         const metas = {};
         await Promise.all(files.map(async f => { metas[f] = await file(f); }));
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
@@ -363,7 +356,7 @@
             <div class="maintenance-panel"><h3>${esc(T('Ce qui s’affiche'))}</h3><p class="muted">${esc(T('Sur la fiche d’un village, dans la monographie de commune et sur la fiche d’une personne (bloc « 🐑 Son village et la nature »). Les listes sont dans Listes, les points dans Cartes.'))}</p>${PARTS.map(tg).join('')}</div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3><div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Sujet'))}</th><th>${esc(T('Source'))}</th><th>${esc(T('Lignes'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Fabriqué le'))}</th></tr></thead><tbody>
                 ${THEMES.map(([k, i, l]) => fileRow(`wd-${k}`, `${i} ${l} (Wikidata)`) + fileRow(`osm-${k}`, `${i} ${l} (OpenStreetMap)`)).join('')}
-                ${fileRow('cepages', '🍇 Cépages')}${fileRow('vendanges', '🍇 Dates des vendanges')}</tbody></table></div>
+                ${fileRow('cepages', '🍇 Cépages')}<tr><td>${esc(T('🍇 Dates des vendanges'))}</td><td colspan="4">${SRC.ghd()}<br><small class="muted">${esc(T('Pas de copie ici : la liste « Dates des vendanges (27 régions) » du pack « Histoire du lieu » (Réglages → Histoire du lieu).'))}</small></td></tr></tbody></table></div>
                 <p class="muted">${esc(T('Rien ne part sur Internet : les fichiers sont dans l’app (mis à jour par Réglages → 🗂 Données). Seuls les liens « ↗ » ouvrent une page, quand tu cliques.'))}</p>
                 <p class="muted">${esc(T('Déjà ailleurs dans l’app : les lieux de pèlerinage (« 🔔 Objets et traces »), les fontaines saintes et les loups, ours, castors et lynx (« Pays et mémoire »), les dictons du jour (« Règles de vie »), les gentilés (« Terre et mots »), les monuments protégés (pack « Patrimoine »).'))}</p>
                 ${linksHtml().replace('<details class="tb-more tb-links">', '<details class="tb-more tb-links" open>')}</div></section>`;
@@ -387,6 +380,6 @@
     }
     if (!register()) document.addEventListener('DOMContentLoaded', register, {once: true});
 
-    ext.telechB = {...core, load, vendanges, settings, personInto, placeInto, placePart, lifeOf,
+    ext.telechB = {...core, load, harvestNear, settings, personInto, placeInto, placePart, lifeOf,
         openSettings: () => { const st = A().state; if (!st) return; st.maintenanceTab = TAB[0]; A().persistUiState?.(); A().setModule?.('maintenance'); }};
 })(typeof window !== 'undefined' ? window : globalThis);
