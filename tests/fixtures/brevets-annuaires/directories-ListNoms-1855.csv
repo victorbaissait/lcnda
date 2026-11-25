@@ -1,0 +1,250 @@
+uuid,text_ocr,per,titre,act,address.number,address.name,geocoding.has_geocoding,geocoding.query.time,geocoding.query.layer,geocoding.response.number,geocoding.response.name,geocoding.response.locality,geocoding.response.layer,geocoding.response.score_levenshtein,geocoding.response.score_temporal,geocoding.response.source,geocoding.response.geom,source.pdf_id,source.book,source.collection,source.list_category,source.publication_year,source.pdf_view,source.view_link
+2b266697-03ba-5652-9ebb-e5ee0daefe91,"
+A
+PA
+COMPRENANT LES HABITANS COMMERÇANS ET NON COMMERCANS, LES INSTITUTIONS
+LES
+TABLISSEMENS DE TOUS GENRES.
+Aaron, objets d'art, pass. Choiseul, 72 et 74.
+","'T','COMMERÇANS','COMMERCANS','TABLISS'","'A','ABI','EM','GENRES'",,,ENS DE TOUS,True,1850.0,address,,Rue Grégoire De Tours,Paris,street,0.42857143,1.0,atlas_andriveaugoujon_1849,POINT (2.337829 48.853244),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,72,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f70
+df6b9d4d-d7d4-5d84-af30-711152b6eaf2,"Académie du départem. de la Seine, Sorbonne, 15.
+",,,'Académie du départem. de la Seine',15,Sorbonne,True,1850.0,address,7,Rue De Sorbonne,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.343468 48.849481),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,72,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f70
+c2bba667-3c5e-5513-9c45-23704ecbd4c6,"Durand, broderies. Echiquier, 15.
+Durand, repr. de fahr. suisses, St-Denis, 349.
+Durand, hobons, E loses-St-Martin, 41.
+",'Durand',,'hobons',41,E loses-St-Martin,True,1850.0,address,46,Rue De L'Est,Paris,address,0.05882353,0.94602174,atlas_jacoubet_1836,POINT (2.339205 48.844197),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+54e5ce65-5530-5350-aa1e-5a973913fc9f,"Durand, acier poti, N.-D.-de Nazareth, 56.
+",'Durand',,'acier poti',56,N.-D.-de Nazareth,True,1850.0,address,10,Rue Notre Dame De Nazareth,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.360844 48.867115),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+5463a381-3498-540b-b66f-29168ff51a4f,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand',,'architecte',8,q d lE ole,True,1850.0,address,8,Quai D'Orléans,Paris,address,0.21428572,0.94602174,atlas_jacoubet_1836,POINT (2.355348 48.851351),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+2729fd13-a8fc-56a3-9af1-82997b9d6e2c,"Durand charp., Miroméuil, 44.
+",'Durand',,'charp.',44,Miroméuil,True,1850.0,address,1,Rue De Miroménil,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.31604 48.871501),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+ffb2e9b2-4294-55ae-a502-1a35df3b1650,"Durand , anc. chef à la marine, Paradis-Poiss., 49.
+Durand, chaises, Cléry, 47.
+Durand, coiffeur, Petits-Pères. 1.
+",'Durand',,'anc. chef à la marine',49,Paradis-Poiss.,True,1850.0,address,49,Rue De Paradis Poissonnière,Paris,address,0.44444445,0.94602174,atlas_jacoubet_1836,POINT (2.349586 48.875532),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+8f606773-55f2-57e4-8a93-1f0d6e468671,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand',,'architecte',24,pass. du Havre,True,1850.0,address,24,Passage Du Havre,Paris,address,0.8125,0.6875881,atlas_municipal_1888,POINT (2.327737 48.875228),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+4da665e9-3ef8-55a2-9350-76d2557ec3f3,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand',,'a chitecte',12,Martyrs,True,1850.0,address,,Rue Des Martyrs,Paris,street,0.53333336,0.6875881,atlas_municipal_1888,POINT (2.340227 48.880745),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+8a963e1a-8542-5f12-928b-881a9892f210,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand',,'avocat',,Ia ard,True,1850.0,address,,Rue De L'Arcade,Paris,street,0.26666668,1.0,atlas_andriveaugoujon_1849,POINT (2.324247 48.872981),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+ba7f3ac6-4019-57ec-9570-21d555dbe4b7,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand',,'hanquier',11,Grammont,True,1850.0,address,11,Rue De Grammont,Paris,address,0.53333336,0.94602174,atlas_jacoubet_1836,POINT (2.336784 48.869841),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+03d4bf2c-4cdd-591b-9f5d-c478c9801462,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand',,'bijoux dorév',13,N.-D -de-Nazareth,True,1850.0,address,13,Rue Notre Dame De Nazareth,Paris,address,0.46153846,0.94602174,atlas_jacoubet_1836,POINT (2.360327 48.867125),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+82834d41-2d37-5b25-a199-c3ed826b6fba,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand',,'brjouner',2,Castiglione,True,1850.0,address,2,Rue Castiglione,Paris,address,0.73333335,0.6875881,atlas_municipal_1888,POINT (2.327593 48.865358),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+94bfd7f2-ecf2-59a6-aca9-6d3c0fd614a1,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand (Albert',,'manufacture de bongies et chandelles',2,route de Fontainebleau,True,1850.0,address,2,Rue De Jouy,Paris,address,0.36363637,0.94602174,atlas_jacoubet_1836,POINT (2.358738 48.854618),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+94bfd7f2-ecf2-59a6-aca9-6d3c0fd614a1,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand (Albert',,'manufacture de bongies et chandelles',,Maison Blanche,True,1850.0,address,,Maison,Gennevilliers,street,0.42857143,1.0,custom_catchall_alwaysvalid,POINT (2.263144 48.944169),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+94bfd7f2-ecf2-59a6-aca9-6d3c0fd614a1,"Durand, architecte, q d lE ole, 8.
+Durand, architecte, pass. du Havre, 24.
+Durand, a chitecte, Martyrs, 12.
+Durand, avocat, Ia ard, 1.
+Durand, hanquier, Grammont, 11.
+Durand, bijoux dorév, N.-D -de-Na",'Durand (Albert',,'manufacture de bongies et chandelles',,à Gentilly,False,1850.0,locality,,,,,,,,,Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+a08947f1-8e51-554c-aef9-351271bff619,"Durand, broderies. Echiquier, 15.
+Durand, repr. de fahr. suisses, St-Denis, 349.
+Durand, hobons, E loses-St-Martin, 41.
+",'Durand',,'broderies',15,Echiquier,True,1850.0,address,15,Rue De L'Echiquier,Paris,address,0.5,0.94602174,atlas_jacoubet_1836,POINT (2.351805 48.871226),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+4fe41f58-5d78-5bd9-916f-395ab8e6e5be,"Durand, broderies. Echiquier, 15.
+Durand, repr. de fahr. suisses, St-Denis, 349.
+Durand, hobons, E loses-St-Martin, 41.
+",'Durand',,'repr. de fahr. suisses',349,St-Denis,True,1850.0,address,349,Rue Saint Denis,Paris,address,0.46666667,0.94602174,atlas_jacoubet_1836,POINT (2.35178 48.868137),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+c0068bcf-d8cb-556a-92c5-1b3f5f2a5aa7,"Durand , anc. chef à la marine, Paradis-Poiss., 49.
+Durand, chaises, Cléry, 47.
+Durand, coiffeur, Petits-Pères. 1.
+",'Durand',,'chaises',47,Cléry,True,1850.0,address,47,Rue De Cléry,Paris,address,0.41666666,0.94602174,atlas_jacoubet_1836,POINT (2.34882 48.868765),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+d66ef2f9-f5ee-5c8b-a0fc-76ce0624b734,"Durand , anc. chef à la marine, Paradis-Poiss., 49.
+Durand, chaises, Cléry, 47.
+Durand, coiffeur, Petits-Pères. 1.
+",'Durand',,'coiffeur',,Petits-Pères,True,1850.0,address,,Passage Des Petits Pères,Paris,street,0.45833334,1.0,atlas_andriveaugoujon_1849,POINT (2.340278 48.866462),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+dc4465c1-139b-5c09-be95-eea7c7ba8828,"Durand, coiffeur, Echaudé. 17.
+Durand, coisfeur, Montorgueil, 98.
+Durand, commis qresfier de 1re inst., Cassette, 20.
+",'Durand',,'coiffeur',17,Echaudé,True,1850.0,address,17,Rue De L'Echaudé,Paris,address,0.4375,0.94602174,atlas_jacoubet_1836,POINT (2.33604 48.853895),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+91f1f1db-56af-5f07-9d40-2b04023c48ff,"Durand, coiffeur, Echaudé. 17.
+Durand, coisfeur, Montorgueil, 98.
+Durand, commis qresfier de 1re inst., Cassette, 20.
+",'Durand',,'coisfeur',98,Montorgueil,True,1850.0,address,98,Rue Montorgueil,Paris,address,0.73333335,0.94602174,atlas_jacoubet_1836,POINT (2.347135 48.865919),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+8b73877b-a646-5674-bfbf-67d87a54f52d,"Durand, coiffeur, Echaudé. 17.
+Durand, coisfeur, Montorgueil, 98.
+Durand, commis qresfier de 1re inst., Cassette, 20.
+",'Durand',,'commis qresfier de 1re inst.',20,Cassette,True,1850.0,address,20,Rue Cassette,Paris,address,0.6666667,0.94602174,atlas_jacoubet_1836,POINT (2.330823 48.850363),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+b0c1427a-e733-5406-af1d-41245b035a02,"Durand &. ommiss. genéral des Monnuies, q. Conti, 11.
+Durand, propr. Bleue, 15.
+",'Durand','&.','ommiss. genéral des Monnuies',11,q. Conti,True,1850.0,address,7,Quai Conti,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.34006 48.856299),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+a5407a5c-5c26-52d3-977f-4743e0fbaa28,"Durand &. ommiss. genéral des Monnuies, q. Conti, 11.
+Durand, propr. Bleue, 15.
+",'Durand',,'propr.',15,Bleue,True,1850.0,address,,Rue Bleue,Paris,street,0.6666667,1.0,atlas_andriveaugoujon_1849,POINT (2.346053 48.875921),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+0682f5f2-e2a0-52c9-bde9-b3a183ee7c31,"Durand f. daguerréotypes, q. des Orfévres. 68.
+Durand, enirepreneur, Faub-St-Martin, 86.
+Durand, entreprise d'ecritures et d'autog., Vivienne, 31.
+Durand. épic., fub. chocolat Banque 15.
+Durand, horlo",'Durand',,'enirepreneur',86,Faub-St-Martin,True,1850.0,address,86,Rue Du Faubourg Saint Martin,Paris,address,0.42857143,0.94602174,atlas_jacoubet_1836,POINT (2.357589 48.872255),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+2dcc437e-0e80-5d8e-b9e6-80ee9c088b97,"Durand f. daguerréotypes, q. des Orfévres. 68.
+Durand, enirepreneur, Faub-St-Martin, 86.
+Durand, entreprise d'ecritures et d'autog., Vivienne, 31.
+Durand. épic., fub. chocolat Banque 15.
+Durand, horlo",'Durand',,'entreprise d''ecritures et d''autog.',31,Vivienne,True,1850.0,address,31bis,Rue Vivienne,Paris,address,0.26666668,0.94602174,atlas_jacoubet_1836,POINT (2.340452 48.869715),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,204,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f202
+ec35fc91-4567-5e90-b614-6fca35884a3f,"Lacombe, vins, quai des Célestins, 8.
+",'Lacombe',,'vins',8,quai des Célestins,True,1850.0,address,18,Quai Des Célestins,Paris,address,0.5,0.94602174,atlas_jacoubet_1836,POINT (2.361371 48.852052),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+19c485b9-82bc-5ff4-9f9d-de50cf49d216,"Lacombe (abbé) X, Vieux-Colombier, 13.
+Lacombe, bottier, Sèvres, 82.
+",'Lacombe (abbé)','X',,13,Vieux-Colombier,True,1850.0,address,13,Rue Du Vieux Colombier,Paris,address,0.6363636,0.94602174,atlas_jacoubet_1836,POINT (2.331788 48.851346),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+129b59e5-2952-53f7-8367-51f23f66f60f,"Lacombe (abbé) X, Vieux-Colombier, 13.
+Lacombe, bottier, Sèvres, 82.
+",'Lacombe',,'bottier',82,Sèvres,True,1850.0,address,82,Rue De Sèvres,Paris,address,0.46153846,0.94602174,atlas_jacoubet_1836,POINT (2.319616 48.848015),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+1da0a211-bd7b-5b40-ab6b-fa2e11ec14e9,"Lacombe, boulanger, Cléry, 53.
+Lacombe, chaudronn., Bonaparte, 41.
+Lacombe (abbé) X, Vieux-Colombier, 13.
+Lacombe, guètres, Bourdonnais, 41.
+Lacombe, hôtel meublé, Cité Bergère, 6.
+Lacombe, fond. méca",'Lacombe',,'boulanger',53,Cléry,True,1850.0,address,53,Rue De Cléry,Paris,address,0.41666666,0.94602174,atlas_jacoubet_1836,POINT (2.349136 48.868867),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+2ecd7646-e986-5297-8cd0-18ede7fc56c6,"Lacombe, boulanger, Cléry, 53.
+Lacombe, chaudronn., Bonaparte, 41.
+Lacombe (abbé) X, Vieux-Colombier, 13.
+Lacombe, guètres, Bourdonnais, 41.
+Lacombe, hôtel meublé, Cité Bergère, 6.
+Lacombe, fond. méca",'Lacombe',,'chaudronn.',41,Bonaparte,True,1850.0,address,1,Rue Bonaparte,Paris,address,0.34615386,0.6875881,atlas_municipal_1888,POINT (2.335403 48.857656),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+21d4df5b-b1a4-5499-82e6-9c315cf1278b,"Lacombe, boulanger, Cléry, 53.
+Lacombe, chaudronn., Bonaparte, 41.
+Lacombe (abbé) X, Vieux-Colombier, 13.
+Lacombe, guètres, Bourdonnais, 41.
+Lacombe, hôtel meublé, Cité Bergère, 6.
+Lacombe, fond. méca",'Lacombe (abbé)','X',,13,Vieux-Colombier,True,1850.0,address,13,Rue Du Vieux Colombier,Paris,address,0.6363636,0.94602174,atlas_jacoubet_1836,POINT (2.331788 48.851346),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+018677e5-b422-549a-abe0-109668fb5b7c,"Lacombe, boulanger, Cléry, 53.
+Lacombe, chaudronn., Bonaparte, 41.
+Lacombe (abbé) X, Vieux-Colombier, 13.
+Lacombe, guètres, Bourdonnais, 41.
+Lacombe, hôtel meublé, Cité Bergère, 6.
+Lacombe, fond. méca",'Lacombe',,'guètres',41,Bourdonnais,True,1850.0,address,2,Rue Des Bourdonnais,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.344853 48.859598),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+8abb777a-146f-5a5f-9365-94c6f27df328,"Lacombe, boulanger, Cléry, 53.
+Lacombe, chaudronn., Bonaparte, 41.
+Lacombe (abbé) X, Vieux-Colombier, 13.
+Lacombe, guètres, Bourdonnais, 41.
+Lacombe, hôtel meublé, Cité Bergère, 6.
+Lacombe, fond. méca",'Lacombe',,'hôtel meublé',6,Cité Bergère,True,1850.0,address,6,Cité Bergère,Paris,address,1.0,0.94602174,atlas_jacoubet_1836,POINT (2.344349 48.871802),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+b543a58a-08b1-5acd-9cc2-9daed534f9c7,"Lacombe, boulanger, Cléry, 53.
+Lacombe, chaudronn., Bonaparte, 41.
+Lacombe (abbé) X, Vieux-Colombier, 13.
+Lacombe, guètres, Bourdonnais, 41.
+Lacombe, hôtel meublé, Cité Bergère, 6.
+Lacombe, fond. méca",'Lacombe',,'fond. mécanicien',46,Aumaire,True,1850.0,address,46,Rue Aumaire,Paris,address,0.6363636,0.94602174,atlas_jacoubet_1836,POINT (2.354554 48.865007),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+6e7d1316-9a21-58ea-8f3d-9e807d07e69c,"Lacombe, imp. lithog., St-Denis, 374.
+",'Lacombe',,'imp. lithog.',374,St-Denis,True,1850.0,address,374,Rue Saint Denis,Paris,address,0.46666667,0.94602174,atlas_jacoubet_1836,POINT (2.352063 48.868485),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+6030de86-e261-5fdc-a5c0-101ee1ec581d,"Lacombe, pension bourgeoise, Clef, 6.
+",'Lacombe',,'pension bourgeoise',6,Clef,True,1850.0,address,6,Rue De La Clef,Paris,address,0.2857143,0.94602174,atlas_jacoubet_1836,POINT (2.352661 48.841633),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+0b3c826c-a885-5362-afaa-59c0e86d71e5,"Lacombe, tailleur, Cléry, 10.
+",'Lacombe',,'tailleur',10,Cléry,True,1850.0,address,10,Rue De Cléry,Paris,address,0.41666666,0.94602174,atlas_jacoubet_1836,POINT (2.345095 48.867588),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+c3a01f8c-3afc-552c-b12a-5b7d76214544,"Lacombe (A.), layetier-emball., N.-D.-Nazareth, 62.
+",'Lacombe (A.',,'layetier-emball.',62,N.-D.-Nazareth,True,1850.0,address,10,Rue Notre Dame De Nazareth,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.360844 48.867115),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+31948f76-a530-5d96-b856-d17b91c5d3e1,"Lacombe, libraire, Beaux-Arts, 9.
+",'Lacombe',,'libraire',9,Beaux-Arts,True,1850.0,address,9,Rue Des Beaux Arts,Paris,address,0.5,0.6875881,atlas_municipal_1888,POINT (2.335674 48.856288),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+6e3e3c81-34ae-57ea-a5a6-de6371dfc5ca,"Lacombe (Louis), prof. de piano, Victoire, 54.
+Lacombe, vins, Montreuil, 5.
+",'Lacombe (Louis',,'prof. de piano',54,Victoire,True,1850.0,address,1,Place Des Victoires,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.340818 48.865503),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+5e4a4607-d062-5635-bc5b-d5afdace198b,"Lacombe (Louis), prof. de piano, Victoire, 54.
+Lacombe, vins, Montreuil, 5.
+",'Lacombe',,'vins',5,Montreuil,True,1850.0,address,5,Rue De Montreuil,Paris,address,0.5625,0.94602174,atlas_jacoubet_1836,POINT (2.384032 48.850495),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+bd812a12-df76-5227-b0aa-a6daf5ebb8b2,"Lacombe, vins dét., St-Lazare, 99 bis.
+",'Lacombe',,'vins dét.',99 bis,St-Lazare,True,1850.0,address,99,Rue Saint Lazare,Paris,address,0.16666667,0.94602174,atlas_jacoubet_1836,POINT (2.326342 48.875508),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+26ca2367-3cde-52b7-9a08-b6cd58857d0d,"Lacomme, avoué, Neuve-Petits-Champs, 60.
+Lacombe, vins, quai des Célestins, 8.
+",'Lacombe',,'vins',8,quai des Célestins,True,1850.0,address,18,Quai Des Célestins,Paris,address,0.5,0.94602174,atlas_jacoubet_1836,POINT (2.361371 48.852052),Bottin3_1855a,Bottin3_1855,AlmComm,ListNoms,1855,288,https://gallica.bnf.fr/ark:/12148/bpt6k62671515/f286
+95cba62a-5d61-5f37-b5b1-c24a3d3d12d5,"De Lacombe (Mme), imprimeur en lettres,
+Enghien, 14.
+",'Lacombe (Mme',,'imprimeur en lettres',14,Enghien,True,1850.0,address,14,Rue D'Enghien,Paris,address,0.53846157,0.94602174,atlas_jacoubet_1836,POINT (2.351672 48.871915),Didot_1855a,Didot_1855,Didot,ListNoms,1855,170,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f168
+67eb4f85-77e6-5afc-93b2-1f8942f46561,"Lacombe (le chevalier de), Antin, 23.
+",'Lacombe (le chevalier de',,,23,Antin,True,1850.0,address,23,Cité D'Antin,Paris,address,0.41666666,0.94602174,atlas_jacoubet_1836,POINT (2.333688 48.873522),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+004721b6-c93d-50dc-91d7-3d77e8794f6d,"Lacombe (l'abbé) *, ancien préfet apostôli-
+que de la Guadeloupe, Vieux-Colombier, 13.
+",'Lacombe (l''abbé)','*','ancien préfet apostôli-que de la Guadeloupe',13,Vieux-Colombier,True,1850.0,address,13,Rue Du Vieux Colombier,Paris,address,0.6363636,0.94602174,atlas_jacoubet_1836,POINT (2.331788 48.851346),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+c5cb0f30-21d7-5ff9-bfec-adb663301f2c,"Lacombe (Mme), appartements meublés, cité
+Bergère, 6.
+",'Lacombe (Mme',,'appartements meublés',6,cité Bergère,True,1850.0,address,6,Cité Bergère,Paris,address,1.0,0.94602174,atlas_jacoubet_1836,POINT (2.344349 48.871802),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+ffc0603a-043a-53a0-81c2-f583a2ff7099,"Lacombe, architecte, Neuve-Breda, 6.
+",'Lacombe',,'architecte',6,Neuve-Breda,True,1850.0,address,6,Rue Breda,Paris,address,0.6363636,0.6875881,atlas_municipal_1888,POINT (2.336954 48.879053),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+64b9bf78-73d2-5de8-91e9-6b376974e207,"Lacombe, bottier, Sèvres, 80.
+",'Lacombe',,'bottier',80,Sèvres,True,1850.0,address,80,Rue De Sèvres,Paris,address,0.46153846,0.94602174,atlas_jacoubet_1836,POINT (2.319815 48.848094),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+4e9ae22a-f5e4-5b4b-bf34-0e5776143757,"Lacombe, boulanger, Cléry, 53.
+",'Lacombe',,'boulanger',53,Cléry,True,1850.0,address,53,Rue De Cléry,Paris,address,0.41666666,0.94602174,atlas_jacoubet_1836,POINT (2.349136 48.868867),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+660e883c-4063-5e17-ad5c-cafe75bb7e23,"Lacombe, chaudronnier, Childebert, 7.
+Lacombe, emballeur, N. -D. -de-Nazareth, 62.
+",'Lacombe',,'chaudronnier',7,Childebert,True,1850.0,address,7,Rue Childebert,Paris,address,0.71428573,0.94602174,atlas_jacoubet_1836,POINT (2.333607 48.853799),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+510c8c26-81e1-540d-bbfa-fa4af4ff8517,"Lacombe, chaudronnier, Childebert, 7.
+Lacombe, emballeur, N. -D. -de-Nazareth, 62.
+",'Lacombe',,'emballeur',62,N. -D. -de-Nazareth,True,1850.0,address,10,Rue Notre Dame De Nazareth,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.360844 48.867115),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+b11b2de4-31c2-557e-a308-2c5cfd5262c4,"Lacombe (Mme), fab. guêtres, Bourdonnais,41.
+",'Lacombe (Mme',,'fab. guêtres',41,Bourdonnais,True,1850.0,address,2,Rue Des Bourdonnais,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.344853 48.859598),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+a2e6e3f6-5faa-5e74-9886-b03272ccc856,"Lacombe, fondeur-fontainier, Aumaire, 46.
+",'Lacombe',,'fondeur-fontainier',46,Aumaire,True,1850.0,address,46,Rue Aumaire,Paris,address,0.6363636,0.94602174,atlas_jacoubet_1836,POINT (2.354554 48.865007),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+114ac1f3-2788-509b-84b3-894a65709937,"Lacombe (H.), imprim.-lithogr. , Saint-Denis,
+374.
+",'Lacombe (H.',,'imprim.-lithogr.',374,Saint-Denis,True,1850.0,address,374,Rue Saint Denis,Paris,address,0.6666667,0.94602174,atlas_jacoubet_1836,POINT (2.352063 48.868485),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+0b616e61-4421-50ed-9f8b-7aca5185b507,"Lacombe, ingénieur civil, St-Quentin, 40.
+",'Lacombe',,'ingénieur civil',40,St-Quentin,True,1850.0,address,40,Rue De Saint Quentin,Paris,address,0.45,0.6875881,atlas_municipal_1888,POINT (2.356056 48.879628),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+ac8cb7c8-608d-546c-bc01-9f6f2eb5d7df,"Lacombe, libraire-éditeur, Beaux-Arts, 9.
+",'Lacombe',,'libraire-éditeur',9,Beaux-Arts,True,1850.0,address,9,Rue Des Beaux Arts,Paris,address,0.5,0.6875881,atlas_municipal_1888,POINT (2.335674 48.856288),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+d6957f67-4a59-5d3b-b8c9-971564533e6a,"Lacombe, pension bourgeoise, Clef, 6.
+",'Lacombe',,'pension bourgeoise',6,Clef,True,1850.0,address,6,Rue De La Clef,Paris,address,0.2857143,0.94602174,atlas_jacoubet_1836,POINT (2.352661 48.841633),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+8385b5c5-a07e-5b73-8c4f-ee8e25694990,"Lacombe, orfèvre-joaillier, boul. des Italiens,
+29.*
+Lacombe (Mlle), pensionnat, La Rocheſou-
+cauld, 27.
+Lacombe, prof. de piano, Victoire, 54.
+",'Lacombe',,'orfèvre-joaillier',29,boul. des Italiens,True,1850.0,address,29,Boulevard Des Italiens,Paris,address,0.77272725,0.94602174,atlas_jacoubet_1836,POINT (2.33456 48.870885),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+9997e774-a20a-5a60-a62c-37943308f174,"Lacombe, orfèvre-joaillier, boul. des Italiens,
+29.*
+Lacombe (Mlle), pensionnat, La Rocheſou-
+cauld, 27.
+Lacombe, prof. de piano, Victoire, 54.
+",'Lacombe (Mlle',,'pensionnat',27,La Rocheſou-cauld,True,1850.0,address,11,Rue De La Rochefoucault,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.334556 48.878843),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+f2fb8f48-afd0-5879-9b6f-1b62165a1777,"Lacombe, orfèvre-joaillier, boul. des Italiens,
+29.*
+Lacombe (Mlle), pensionnat, La Rocheſou-
+cauld, 27.
+Lacombe, prof. de piano, Victoire, 54.
+",'Lacombe',,'prof. de piano',54,Victoire,True,1850.0,address,1,Place Des Victoires,Paris,address,0.0,0.94602174,atlas_jacoubet_1836,POINT (2.340818 48.865503),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+0ba568b6-e2e5-5b6f-b9b3-e9a1ef21c77d,"Lacombe, propriétaire, St-Lazare, 46.
+",'Lacombe',,'propriétaire',46,St-Lazare,True,1850.0,address,46,Rue Saint Lazare,Paris,address,0.5,0.94602174,atlas_jacoubet_1836,POINT (2.335269 48.876911),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268
+1b3510ee-054a-5c5a-8c46-ccc9744cdae2,"Lacombe, vins, St-Lazare, 99 bis.
+",'Lacombe',,'vins',99 bis,St-Lazare,True,1850.0,address,99,Rue Saint Lazare,Paris,address,0.16666667,0.94602174,atlas_jacoubet_1836,POINT (2.326342 48.875508),Didot_1855a,Didot_1855,Didot,ListNoms,1855,270,https://gallica.bnf.fr/ark:/12148/bpt6k6282019m/f268

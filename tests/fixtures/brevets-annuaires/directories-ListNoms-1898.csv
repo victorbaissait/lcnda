@@ -1,0 +1,455 @@
+uuid,text_ocr,per,titre,act,address.number,address.name,geocoding.has_geocoding,geocoding.query.time,geocoding.query.layer,geocoding.response.number,geocoding.response.name,geocoding.response.locality,geocoding.response.layer,geocoding.response.score_levenshtein,geocoding.response.score_temporal,geocoding.response.source,geocoding.response.geom,source.pdf_id,source.book,source.collection,source.list_category,source.publication_year,source.pdf_view,source.view_link
+9677a275-79dd-5db6-9579-ea40ee1beb30,"r
+",,,,,,False,,,,,,,,,,,DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,353,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f351
+2425c3f8-f2b2-5bf5-97c3-adbbfde2ac23,"Oberkampf, 50.
+",,,,50,Oberkampf,True,1890.0,address,50,Rue Oberkampf,Paris,address,0.6923077,1.0,atlas_municipal_1888,POINT (2.372282 48.864543),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,350,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f348
+75788cb1-6b92-5626-baca-c077a7dcdc3e,"Durand, commissaire de police, r. Alexandre-
+Dumas, 104.
+",'Durand',,'commissaire de police',104,r. Alexandre-Dumas,True,1890.0,address,104,Rue Alexandre Dumas,Paris,address,0.84210527,1.0,atlas_municipal_1888,POINT (2.399862 48.855343),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+167cf1e1-ffec-5f83-bcd6-ebf195cc5201,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l",'Durand (Ch.',,,40,boul. Magenta,True,1890.0,address,148,Boulevard De Magenta,Paris,address,0.2,1.0,atlas_municipal_1888,POINT (2.351811 48.880834),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+7b1edf1e-cd69-5908-8bd1-eb130214591d,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l",'Durand (Joseph',,,16,cité des Fleurs,True,1890.0,address,16,Cité Des Fleurs,Paris,address,1.0,1.0,atlas_municipal_1888,POINT (2.319739 48.891833),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+eab41596-b254-5fd2-b336-542e6c97dcca,"Durand (Antonin), architecte, arbitre près le
+Tribunal de commerce et expert près le con-
+seil de Préfecture, boul. St-Germain, 84.
+Durand (E.), architecte, r. de Crussol, 7.
+",'Durand (Antonin',,"'architecte, arbitre près le Tribunal de commerce et expert près le con-seil de Préfecture'",84,boul. St-Germain,True,1890.0,address,84,Boulevard Saint Germain,Paris,address,0.6086956,1.0,atlas_municipal_1888,POINT (2.34543 48.85097),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+18f8ea88-3310-52ff-ae6e-be0b644f8472,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l","'Durand (Augte)','et fils'","'NC3, de la maison A. Durand'",,19,av. de l'Alma,True,1890.0,address,19,Avenue De L Alma,Paris,address,0.6875,1.0,atlas_municipal_1888,POINT (2.301399 48.866948),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+6abaf7c5-5e05-52c9-be2e-e7f089a524d3,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l","'Durand (Jacques), de la maison A. Durand et fils'","'TE','PH]'",,19,av. de l'Alma,True,1890.0,address,19,Avenue De L Alma,Paris,address,0.6875,1.0,atlas_municipal_1888,POINT (2.301399 48.866948),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+6abaf7c5-5e05-52c9-be2e-e7f089a524d3,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l","'Durand (Jacques), de la maison A. Durand et fils'","'TE','PH]'",,532-88,LÉ,False,,,,,,,,,,,DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+63453c3a-448a-5616-9984-2bbb40c9cf2d,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l",'Durand (Paul',,'administrateur-gérant du journal « Le Gazn',12,r. Fontaine-St-Georges,True,1890.0,address,12,Rue Saint Georges,Paris,address,0.54545456,1.0,atlas_municipal_1888,POINT (2.33723 48.874766),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+d05aa594-367b-5baa-9690-425f4746af17,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l","'Durand (Albert) NC et E. Guinier, (E, Guinier succ.'",,'applications générales du gaz et de l''électricité',36,r. de Trévise,True,1890.0,address,36,Rue De Trevise,Paris,address,0.78571427,1.0,atlas_municipal_1888,POINT (2.345563 48.875165),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+d05aa594-367b-5baa-9690-425f4746af17,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l","'Durand (Albert) NC et E. Guinier, (E, Guinier succ.'",,'applications générales du gaz et de l''électricité',38,r. de Trévise,True,1890.0,address,38,Rue De Trevise,Paris,address,0.78571427,1.0,atlas_municipal_1888,POINT (2.345583 48.875341),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+d05aa594-367b-5baa-9690-425f4746af17,"Durand (Ch.), boul. Magenta, 40.
+Durand (Joseph), cité des Fleurs, 16.
+Durand (Augte) NC3, de la maison A. Durand et
+fils, av. de l'Alma, 19.
+Durand (Jacques), de la maison A. Durand et
+fils, av. de l","'Durand (Albert) NC et E. Guinier, (E, Guinier succ.'",,'applications générales du gaz et de l''électricité',149-06,TELÉPH,True,1890.0,address,10,Rue Du Telegraphe,Paris,address,0.09803922,1.0,atlas_municipal_1888,POINT (2.399991 48.871728),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+ec0a4167-9636-53d8-9297-7aa9f879fef7,"Durand (P. Paul), architecte, r. Hallé, 1.
+",'Durand (P. Paul',,'architecte',,r. Hallé,True,1890.0,address,,Rue Halle,Paris,street,0.6666667,1.0,atlas_municipal_1888,POINT (2.332297 48.830545),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+975e2b80-46a6-564e-9791-42e1a40f7de2,"Durand (Antonin), architecte, arbitre près le
+Tribunal de commerce et expert près le con-
+seil de Préfecture, boul. St-Germain, 84.
+Durand (E.), architecte, r. de Crussol, 7.
+",'Durand (E.',,'architecte',7,r. de Crussol,True,1890.0,address,7,Rue De Crussol,Paris,address,0.85714287,1.0,atlas_municipal_1888,POINT (2.367362 48.864054),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+fe5d9af4-d9de-5d2a-8cbb-8170be312ca5,"Durand, avocat, r. Clément-Marot, 5.
+Durand, banque, commission, r. du Temple,
+170.
+Durand, beurre et œeufs, r. des Ecoles, 4.
+",'Durand',,'avocat',5,r. Clément-Marot,True,1890.0,address,5,Rue Clement Marot,Paris,address,0.7647059,1.0,atlas_municipal_1888,POINT (2.304057 48.866972),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+a91b2534-1207-5315-a161-c72fd5248e5b,"Durand, avocat, r. Clément-Marot, 5.
+Durand, banque, commission, r. du Temple,
+170.
+Durand, beurre et œeufs, r. des Ecoles, 4.
+",'Durand',,"'banque, commission'",170,r. du Temple,True,1890.0,address,170,Rue Du Temple,Paris,address,0.84615386,1.0,atlas_municipal_1888,POINT (2.361899 48.866552),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+51699fb0-921a-5e2e-8094-59846df49827,"Durand, avocat, r. Clément-Marot, 5.
+Durand, banque, commission, r. du Temple,
+170.
+Durand, beurre et œeufs, r. des Ecoles, 4.
+",'Durand',,'beurre et œeufs',4,r. des Ecoles,True,1890.0,address,4,Rue Des Ecoles,Paris,address,0.85714287,1.0,atlas_municipal_1888,POINT (2.351817 48.847839),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+02aa53e1-07e3-560b-945b-89f2d8d7e90c,"Durand, beurre et œufs, r. Gassendi, 11.
+",'Durand',,'beurre et œufs',11,r. Gassendi,True,1890.0,address,6,Rue Perrin Gasselin,Paris,address,0.0,0.5431405,atlas_jacoubet_1836,POINT (2.347087 48.858519),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+c1ec3e86-1cf0-5ea0-bf1f-8b86f9595a65,"Durand, bijoutier-horlog., r. Ménilmontant, 71.
+",'Durand',,'bijoutier-horlog.',71,r. Ménilmontant,True,1890.0,address,71,Rue De Menilmontant,Paris,address,0.68421054,1.0,atlas_municipal_1888,POINT (2.389611 48.868598),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+213445db-bf7c-5932-b8d8-2bff00a5cea6,"Durand, bois à brúler, r. de la Santé, 60.
+",'Durand',,'bois à brúler',60,r. de la Santé,True,1890.0,address,60,Rue De La Sante,Paris,address,0.8,1.0,atlas_municipal_1888,POINT (2.341112 48.830865),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+ee24d242-aaf3-548a-856c-dbde1dd30ded,"Durand, bois et charbons, r. des Boulets, 50.
+",'Durand',,'bois et charbons',50,r. des Boulets,True,1890.0,address,103,Rue Des Boulets,Paris,address,0.2888889,1.0,atlas_municipal_1888,POINT (2.385441 48.856613),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+4d5ef691-0448-5e9c-a959-5beebd7f2101,"Durand et Cie, bois des iles, imp. Charles-Pe-
+tit, 8.
+",'Durand et Cie',,'bois des iles',8,imp. Charles-Pe-tit,True,1890.0,address,8,Rue Charles V,Paris,address,0.42105263,1.0,atlas_municipal_1888,POINT (2.362992 48.85287),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+e333e9b9-2f29-56bc-9c43-6a7fe6908d68,"Durand, coiffeur, r. St-Martin, 166.
+",'Durand',,'coiffeur',166,r. St-Martin,True,1890.0,address,166,Rue Saint Martin,Paris,address,0.625,1.0,atlas_municipal_1888,POINT (2.352012 48.862121),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+18b6a536-0e05-5a5f-aca7-5587420a73e7,"Durand (A.) (G. Dutreih success.), boîtes à
+musique et horlogerie, r. Charlot, 15.
+Durand, boucher, r. Daguerre, 29.
+Durand, boucher, r. Gérando, 10.
+Durand, boucher, r. Volta, 9.
+Durand, boucherie hi",'Durand (A.) (G. Dutreih success.',,'boîtes à musique et horlogerie',15,r. Charlot,True,1890.0,address,15,Rue Charlot,Paris,address,0.8181818,1.0,atlas_municipal_1888,POINT (2.360948 48.861616),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+d187e6ec-a4a6-564b-adaa-7ac5bb4fa57f,"Durand (A.) (G. Dutreih success.), boîtes à
+musique et horlogerie, r. Charlot, 15.
+Durand, boucher, r. Daguerre, 29.
+Durand, boucher, r. Gérando, 10.
+Durand, boucher, r. Volta, 9.
+Durand, boucherie hi",'Durand',,'boucher',29,r. Daguerre,True,1890.0,address,29,Rue Daguerre,Paris,address,0.8333333,1.0,atlas_municipal_1888,POINT (2.328731 48.834197),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+abeeedf3-a8c4-5895-9ee3-6b2388ea9f64,"Durand (A.) (G. Dutreih success.), boîtes à
+musique et horlogerie, r. Charlot, 15.
+Durand, boucher, r. Daguerre, 29.
+Durand, boucher, r. Gérando, 10.
+Durand, boucher, r. Volta, 9.
+Durand, boucherie hi",'Durand',,'boucher',10,r. Gérando,True,1890.0,address,10,Rue De Gerando,Paris,address,0.5714286,1.0,atlas_municipal_1888,POINT (2.346001 48.882486),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,518,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f516
+f37690dc-e50f-50e7-89ac-7e56cd671ec0,"Lacombe, rentier, r. Pierre-Charron, 11.
+",'Lacombe',,'rentier',11,r. Pierre-Charron,True,1890.0,address,45,Rue Pierre Charron,Paris,address,0.0,1.0,atlas_municipal_1888,POINT (2.301728 48.868874),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+85496477-9096-5f56-a8eb-01e925b3708a,"Lacombe, r. de Richelieu, 10.
+",'Lacombe',,,10,r. de Richelieu,True,1890.0,address,10,Rue De Richelieu,Paris,address,0.875,1.0,atlas_municipal_1888,POINT (2.336071 48.864046),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+8fdfbc13-1c1f-5db3-9443-61f2fd0c330b,"Lacombe (E.), de la maison Boudet et Lac-
+combe, r. Ste-Anne, 63.
+","'Lacombe (E.','de la'",,'maison',,,False,,,,,,,,,,,DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+8f73cbae-2b9d-5ca0-8553-ec59b0612cac,"Lacombe et Deniau, (agence centrale de pu-
+blicité), affichage et publicité, r. J.-J.-Rous-
+seau, 13. TĚLEPH. 115.60.
+",'Lacombe et Deniau',,"'(agence centrale de pu-blicité','affichage et publicité'",13,r. J.-J.-Rous-seau,True,1890.0,address,13,Rue Rousselet,Paris,address,0.33333334,1.0,atlas_municipal_1888,POINT (2.318225 48.849389),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+8f73cbae-2b9d-5ca0-8553-ec59b0612cac,"Lacombe et Deniau, (agence centrale de pu-
+blicité), affichage et publicité, r. J.-J.-Rous-
+seau, 13. TĚLEPH. 115.60.
+",'Lacombe et Deniau',,"'(agence centrale de pu-blicité','affichage et publicité'",115,TĚLEPH.,True,1890.0,address,10,Rue Du Telegraphe,Paris,address,0.09803922,1.0,atlas_municipal_1888,POINT (2.399991 48.871728),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+8f73cbae-2b9d-5ca0-8553-ec59b0612cac,"Lacombe et Deniau, (agence centrale de pu-
+blicité), affichage et publicité, r. J.-J.-Rous-
+seau, 13. TĚLEPH. 115.60.
+",'Lacombe et Deniau',,"'(agence centrale de pu-blicité','affichage et publicité'",60,TĚLEPH.,True,1890.0,address,10,Rue Du Telegraphe,Paris,address,0.14705883,1.0,atlas_municipal_1888,POINT (2.399991 48.871728),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+99cdbe06-f9ef-5b32-80ec-8ea160550c58,"Lacombe (A.), agence universelle, boul. St-
+Germain, 34.
+",'Lacombe (A.',,'agence universelle',34,boul. St-Germain,True,1890.0,address,34,Boulevard Saint Germain,Paris,address,0.6086956,1.0,atlas_municipal_1888,POINT (2.351553 48.849664),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+eefd098e-030d-583a-add9-899e43869ce8,"Lacombe, agent d'affaires, r. d'Hauteville. 10,
+et Faub.-St-Martin, 66.
+",'Lacombe',,'agent d''affaires',66,Faub.-St-Martin,True,1890.0,address,66,Rue Du Faubourg Saint Martin,Paris,address,0.42857143,1.0,atlas_municipal_1888,POINT (2.35711 48.871426),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+eefd098e-030d-583a-add9-899e43869ce8,"Lacombe, agent d'affaires, r. d'Hauteville. 10,
+et Faub.-St-Martin, 66.
+",'Lacombe',,'agent d''affaires',10,r. d'Hauteville,True,1890.0,address,10,Rue D Hauteville,Paris,address,0.8125,1.0,atlas_municipal_1888,POINT (2.349863 48.871161),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+0a93a5f6-2334-5d7f-89aa-ef1a2eb42464,"Lacombe, agent dépositaire de Conte et Cie,
+entrepôt de Bercy, r. du Port-de-Bercy, 4.
+",'Lacombe',,"'agent dépositaire de Conte et Cie, entrepôt de Bercy'",4,r. du Port-de-Bercy,True,1890.0,address,1,Port De Bercy,Paris,address,0.0,1.0,atlas_municipal_1888,POINT (2.386702 48.82972),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+ca681349-b837-53d3-8b8e-96160ac0623d,"Lacombe (de), ancien député, r. de Narbonne, 1.
+",'Lacombe (de',,'ancien député',,r. de Narbonne,True,1890.0,address,,Rue De Narbonne,Paris,street,0.8666667,1.0,atlas_municipal_1888,POINT (2.324521 48.85313),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+6014f532-7174-5264-ba08-c8f879a5dd9d,"Lacombe (Vve), beurre et œufs, r. de la Pompe,
+150.
+",'Lacombe (Vve',,'beurre et œufs',150,r. de la Pompe,True,1890.0,address,150,Rue De La Pompe,Paris,address,0.8666667,1.0,atlas_municipal_1888,POINT (2.282216 48.869317),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+02c6d348-f41e-5669-8f8b-01d9b7c64812,"Lacombe (Emile), boucher, r. Guilhem, 34.
+",'Lacombe (Emile',,'boucher',34,r. Guilhem,True,1890.0,address,34,Rue Guilhem,Paris,address,0.8181818,1.0,atlas_municipal_1888,POINT (2.378817 48.862754),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+029b10ae-518c-526b-b032-be59eb9c7720,"Lacombe, charbonnier, r. Aumaice, 18.
+",'Lacombe',,'charbonnier',18,r. Aumaice,True,1890.0,address,18,Rue Aumaire,Paris,address,0.72727275,0.5431405,atlas_jacoubet_1836,POINT (2.355976 48.864729),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+2e30c8a8-8511-5dbe-bb6a-2dca4a7edb0f,"Lacombe, charbonnier, r. du Dragon, 5.
+Lacombe, charbonnier et vins, r. Mabillon, 12.
+",'Lacombe',,'charbonnier',5,r. du Dragon,True,1890.0,address,5,Rue Du Dragon,Paris,address,0.84615386,0.5431405,atlas_jacoubet_1836,POINT (2.331231 48.853649),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+441ca235-6da6-5387-a111-d1285225c56d,"Lacombe, charbonnier, r. du Dragon, 5.
+Lacombe, charbonnier et vins, r. Mabillon, 12.
+",'Lacombe',,'charbonnier et vins',12,r. Mabillon,True,1890.0,address,12,Rue Mabillon,Paris,address,0.8333333,1.0,atlas_municipal_1888,POINT (2.335145 48.852008),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+1e495cf7-0484-5fd5-87a2-872cdd4f2d06,"Lacombe, coiffeur, r. de Grammont, 4.
+Lacombe, coiffeur, boul. Malesherbes, 74.
+",'Lacombe',,'coiffeur',4,r. de Grammont,True,1890.0,address,4,Rue De Gramont,Paris,address,0.78571427,1.0,atlas_municipal_1888,POINT (2.336826 48.869201),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+187f5779-f9dc-531a-8992-2fe9523a9291,"Lacombe, coiffeur, r. de Grammont, 4.
+Lacombe, coiffeur, boul. Malesherbes, 74.
+",'Lacombe',,'coiffeur',74,boul. Malesherbes,True,1890.0,address,74,Boulevard Malesherbes,Paris,address,0.7619048,1.0,atlas_municipal_1888,POINT (2.314837 48.879235),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+7a5f5d66-903d-5748-8974-609f1512e2bd,"Lacombe, coiffeur-parfumeur, r. Jacob, 13.
+",'Lacombe',,'coiffeur-parfumeur',13,r. Jacob,True,1890.0,address,13,Rue Jacob,Paris,address,0.7777778,1.0,atlas_municipal_1888,POINT (2.335275 48.854957),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+c230b5dd-c72c-59cf-a867-d803fade00ec,"Lacombe (Mlle), cours pour jeunes filles, r. Le
+Peletier, 35.
+",'Lacombe (Mlle',,'cours pour jeunes filles',35,r. Le Peletier,True,1890.0,address,35,Rue Le Peletier,Paris,address,0.8666667,1.0,atlas_municipal_1888,POINT (2.33895 48.874079),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+f2ff152a-1e4f-5fbd-b891-35b44006e2a4,"Lacombe (Mme), couturière, Faub.-St-Honoré,
+84.
+",'Lacombe (Mme',,'couturière',84,Faub.-St-Honoré,True,1890.0,address,84,Rue Du Faubourg Saint Honore,Paris,address,0.39285713,1.0,atlas_municipal_1888,POINT (2.317185 48.870698),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+85a96f85-b082-5930-a5bc-0edd90545642,"Lacombe, crémier, r. Ernest-Renan, 7.
+Lacombe, député de l'Aveyron, boul. St-Ger-
+main, 238.
+",'Lacombe',,'crémier',7,r. Ernest-Renan,True,1890.0,address,7,Rue Ernest,Paris,address,0.46666667,1.0,atlas_municipal_1888,POINT (2.34232 48.830104),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+a6ba6e7b-fae2-5443-acdb-be473a8142a9,"Lacombe, crémier, r. Ernest-Renan, 7.
+Lacombe, député de l'Aveyron, boul. St-Ger-
+main, 238.
+",'Lacombe',,'député de l''Aveyron',238,boul. St-Ger-main,True,1890.0,address,238,Boulevard Saint Germain,Paris,address,0.5652174,1.0,atlas_municipal_1888,POINT (2.325844 48.85626),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+1e812ed7-59b6-50e3-9d8f-40c37910615b,"Lacombe, fromages en gros, r. St-Denis, 105.
+",'Lacombe',,'fromages en gros',105,r. St-Denis,True,1890.0,address,105,Rue Saint Denis,Paris,address,0.6,1.0,atlas_municipal_1888,POINT (2.349432 48.862534),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+472b189a-bf6c-5080-8bae-cb9fc56bcbdd,"Lacombe, hôtel et vins, r. de la Roquette, 24.
+",'Lacombe',,'hôtel et vins',24,r. de la Roquette,True,1890.0,address,24,Rue De La Roquette,Paris,address,0.8888889,1.0,atlas_municipal_1888,POINT (2.371179 48.854084),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+89d1ff1f-e98b-53b0-b200-efcb5eee795b,"Lacombe, fabr. de jumelles, boul. des Fil-
+les-du-Calvaire, 9.
+Lacombe, linge américain, r. du Château-
+d'Eau, 1.
+",'Lacombe',,'fabr. de jumelles',9,boul. des Fil-les-du-Calvaire,True,1890.0,address,9,Rue Des Filles Du Calvaire,Paris,address,0.7586207,1.0,atlas_municipal_1888,POINT (2.365179 48.862413),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+e83ab782-9eb8-55ae-ad62-3d0399b592bc,"Lacombe, fabr. de jumelles, boul. des Fil-
+les-du-Calvaire, 9.
+Lacombe, linge américain, r. du Château-
+d'Eau, 1.
+",'Lacombe',,'linge américain',1.,r. du Château-d'Eau,True,1890.0,address,1,Rue Du Chateau D Eau,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.362562 48.868766),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+9914d9f6-c126-51c7-b758-33576de62009,"Lacombe (A.), maître de forges, à Rive-de-
+Gier (Loire), Marius Martin, représentant,
+r. Pierre-Charron, 48.
+",'Lacombe (A.',,"'maître de forges','er (Loire'",,"Marius Martin, représentant",True,1890.0,address,,Passage Des Mariniers,Paris,street,0.22222222,1.0,atlas_municipal_1888,POINT (2.31216 48.827),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+9914d9f6-c126-51c7-b758-33576de62009,"Lacombe (A.), maître de forges, à Rive-de-
+Gier (Loire), Marius Martin, représentant,
+r. Pierre-Charron, 48.
+",'Lacombe (A.',,"'maître de forges','er (Loire'",48,r. Pierre-Charron,True,1890.0,address,48,Rue Pierre Charron,Paris,address,0.8333333,1.0,atlas_municipal_1888,POINT (2.301949 48.868685),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+9914d9f6-c126-51c7-b758-33576de62009,"Lacombe (A.), maître de forges, à Rive-de-
+Gier (Loire), Marius Martin, représentant,
+r. Pierre-Charron, 48.
+",'Lacombe (A.',,"'maître de forges','er (Loire'",,à Rive-de-Gi,False,,,,,,,,,,,DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+18f79a54-f2ba-5266-a3eb-6b3fe2184c05,"Lacombe, maréchal-ferrant, r. Cardinet, 113.
+",'Lacombe',,'maréchal-ferrant',113,r. Cardinet,True,1890.0,address,113,Rue Cardinet,Paris,address,0.8333333,1.0,atlas_municipal_1888,POINT (2.311534 48.885687),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+14bd66ad-0407-5e72-af80-e9d98410c377,"Lacombe, maréchal-ferrant, r. de la Jon-
+quière, 38.
+",'Lacombe',,'maréchal-ferrant',38,r. de la Jon-quière,True,1890.0,address,38,Rue De La Jonquiere,Paris,address,0.7894737,1.0,atlas_municipal_1888,POINT (2.323842 48.893576),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+1fbc3069-b650-5f6a-825a-d91e343356d3,"Lacombe (Dr.), médecin, boul. Malesherbes,
+20.
+",'Lacombe (Dr.',,'médecin',20,boul. Malesherbes,True,1890.0,address,20,Boulevard Malesherbes,Paris,address,0.7619048,1.0,atlas_municipal_1888,POINT (2.321957 48.87225),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+4910c98f-c15a-5fcf-b76b-c3717b92b7e1,"Lacombe, mercerie, r. de Belleville, 193.
+",'Lacombe',,'mercerie',193.,r. de Belleville,True,1890.0,address,193,Rue De Belleville,Paris,address,0.7777778,1.0,atlas_municipal_1888,POINT (2.393883 48.875386),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+e11b42a1-e4b2-56bf-ad81-cf24cd882ad2,"Lacombe et Gensous, modes et robes, r. de
+Beaurepaire, 12.
+",'Lacombe et Gensous',,'modes et robes',12,r. de Beaurepaire,True,1890.0,address,12,Rue Beaurepaire,Paris,address,0.8235294,1.0,atlas_municipal_1888,POINT (2.363785 48.869842),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+4753e511-77c5-55a8-8486-a7cf34c85a58,"Lacombe (Mme), papeterie, boul. Raspail, 212.
+",'Lacombe (Mme',,'papeterie',212.,boul. Raspail,True,1890.0,address,212,Boulevard Raspail,Paris,address,0.5882353,1.0,atlas_municipal_1888,POINT (2.329736 48.84102),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+2a13c974-d287-5b3f-bd4c-9e542e0fb94e,"Lacombe père, Protecteur-Lacombe, r. de
+Paradis, 10.
+",'Lacombe père',,'Protecteur-Lacombe',10,r. de Paradis,True,1890.0,address,10,Rue De Paradis,Paris,address,0.85714287,1.0,atlas_municipal_1888,POINT (2.35452 48.874615),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+0704f428-10ab-59c3-aeb6-951e8a352f05,"Lacombe, receveur de l'enregistrement et du
+timbre, r. du Château-d'Eau, 29.
+",'Lacombe',,'receveur de l''enregistrement et du timbre',29,r. du Château-d'Eau,True,1890.0,address,29,Rue Du Chateau D Eau,Paris,address,0.75,1.0,atlas_municipal_1888,POINT (2.358793 48.870784),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+4a4b4e8d-32c8-58c1-88f9-bc6feb33e0e8,"Lacombe, sénateur, r. de Vaugirard, 102.
+",'Lacombe',,'sénateur',102,r. de Vaugirard,True,1890.0,address,102,Rue De Vaugirard,Paris,address,0.875,1.0,atlas_municipal_1888,POINT (2.323724 48.846209),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+8d0917b0-e9ac-5b12-8847-7f3a408d2768,"Lacombe (H.), soies de porc, boul. de Temple,
+39.
+",'Lacombe (H.',,'soies de porc',39,boul. de Temple,True,1890.0,address,39,Boulevard Du Temple,Paris,address,0.68421054,1.0,atlas_municipal_1888,POINT (2.36465 48.866202),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+a61e3910-fc1b-5034-a598-022550321876,"Lacombe (Paul), trésorier de la Société de
+l'histoire de Paris et de l'Ile-de-France, r
+de Moscou, 5.
+",'Lacombe (Paul',,'trésorier de la Société de l''histoire de Paris et de l''Ile-de-France',5,r de Moscou,True,1890.0,address,5,Rue De Moscou,Paris,address,0.84615386,1.0,atlas_municipal_1888,POINT (2.326177 48.87993),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+5f7e9ee1-88b5-509e-a00f-4cac34902451,"Lacombe, vétérinaire, r. St-Ferdinand, 42.
+",'Lacombe',,'vétérinaire',42,r. St-Ferdinand,True,1890.0,address,42,Rue Saint Ferdinand,Paris,address,0.68421054,1.0,atlas_municipal_1888,POINT (2.286759 48.877531),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+5a81a6c6-4e34-55be-a1b0-68e1575f3291,"Lacombe, vins, r. des Annelets, 31.
+",'Lacombe',,'vins',31,r. des Annelets,True,1890.0,address,31,Rue Des Annelets,Paris,address,0.875,1.0,atlas_municipal_1888,POINT (2.389587 48.87866),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+21046d20-9c9b-5c92-a8c0-3a8834c39bef,"Lacombe, vins, r. Cardinet, 121.
+",'Lacombe',,'vins',12,r. Cardinet,True,1890.0,address,12,Rue Cardinet,Paris,address,0.8333333,1.0,atlas_municipal_1888,POINT (2.301944 48.881425),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+1c8f7190-84df-5caa-99fa-897291d71d2a,"Lacombe, vins, r. Caumartin, 58.
+",'Lacombe',,'vins',58,r. Caumartin,True,1890.0,address,58,Rue Caumartin,Paris,address,0.84615386,1.0,atlas_municipal_1888,POINT (2.328503 48.874629),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+c54b9596-3b47-5e60-ab50-a5f7a8222e21,"Lacombe, vins, r. de Londres, 32.
+",'Lacombe',,'vins',32,r. de Londres,True,1890.0,address,32,Rue De Londres,Paris,address,0.85714287,1.0,atlas_municipal_1888,POINT (2.327596 48.877745),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+279b6ffb-7d0d-5b4e-a7b9-31ed48a186b5,"Lacombe, vins, r. de la Mare, 1.
+Lacombe, vins, r. Nation, 13
+Lacombe, vins, r. Rochechouart, 90.
+Lacombe (Jules), vins étrangers, liqueurs,
+spiritueux, r. de Paris, 74, à Charenton
+(Seine).
+",'Lacombe',,'vins',,r. de la Mare,True,1890.0,address,,Rue De La Mare,Paris,street,0.85714287,1.0,atlas_municipal_1888,POINT (2.388725 48.873339),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+266186bb-282b-553b-8383-bebd40f2dfff,"Lacombe, vins, r. de la Mare, 1.
+Lacombe, vins, r. Nation, 13
+Lacombe, vins, r. Rochechouart, 90.
+Lacombe (Jules), vins étrangers, liqueurs,
+spiritueux, r. de Paris, 74, à Charenton
+(Seine).
+",'Lacombe',,'vins',13,r. Nation,True,1890.0,address,13,Rue De La Nation,Paris,address,0.5,1.0,atlas_municipal_1888,POINT (2.348268 48.884705),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+21669f7f-4336-531e-a161-40bc2ed7e1bb,"Lacombe, vins, r. de la Mare, 1.
+Lacombe, vins, r. Nation, 13
+Lacombe, vins, r. Rochechouart, 90.
+Lacombe (Jules), vins étrangers, liqueurs,
+spiritueux, r. de Paris, 74, à Charenton
+(Seine).
+",'Lacombe',,'vins',90,r. Rochechouart,True,1890.0,address,90,Rue De Rochechouart,Paris,address,0.7368421,1.0,atlas_municipal_1888,POINT (2.346926 48.883036),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+45ead732-6de2-5fb2-a03c-4048ebb7df62,"Lacombe, vins, r. de la Mare, 1.
+Lacombe, vins, r. Nation, 13
+Lacombe, vins, r. Rochechouart, 90.
+Lacombe (Jules), vins étrangers, liqueurs,
+spiritueux, r. de Paris, 74, à Charenton
+(Seine).
+",'Lacombe (Jules',,"'vins étrangers, liqueurs, spiritueux'",,à Charenton (Seine,False,1890.0,locality,,,,,,,,,DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+45ead732-6de2-5fb2-a03c-4048ebb7df62,"Lacombe, vins, r. de la Mare, 1.
+Lacombe, vins, r. Nation, 13
+Lacombe, vins, r. Rochechouart, 90.
+Lacombe (Jules), vins étrangers, liqueurs,
+spiritueux, r. de Paris, 74, à Charenton
+(Seine).
+",'Lacombe (Jules',,"'vins étrangers, liqueurs, spiritueux'",74,r. de Paris,True,1890.0,address,23,Petite Rue De Paris,Paris,address,0.0,1.0,atlas_municipal_1888,POINT (2.303952 48.828869),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+77cd76a4-bb92-587e-9d51-3ed7c7cc6764,"Lacombe, vins-restaurant, r. Le Goff, 6.
+",'Lacombe',,'vins-restaurant',6,r. Le Goff,True,1890.0,address,6,Rue Le Goff,Paris,address,0.8181818,1.0,atlas_municipal_1888,POINT (2.341509 48.846688),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+11ea6004-49c5-5717-86ce-d7710c7f97a0,"Lacombe (F.), vins et tabac, r. Pigalle, 31.
+",'Lacombe (F.',,'vins et tabac',31,r. Pigalle,True,1890.0,address,31,Rue Pigalle,Paris,address,0.8181818,1.0,atlas_municipal_1888,POINT (2.333762 48.879613),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,656,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f654
+0318d318-07e7-5b85-b85a-7f1951dff457,"Mazaud (Mme), couturière, r. du Louvre, 20.
+",'Mazaud (Mme',,'couturière',20,r. du Louvre,True,1890.0,address,20,Rue Du Louvre,Paris,address,0.84615386,1.0,atlas_municipal_1888,POINT (2.341256 48.861429),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,749,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f747
+2fcf74ff-dd68-5c1c-8c34-eb16f430add0,"Mazaud, boucher, r. de la Butte-aux-Cailles, 21.
+",'Mazaud',,'boucher',21,r. de la Butte-aux-Cailles,True,1890.0,address,21,Rue De La Butte Aux Cailles,Paris,address,0.8518519,1.0,atlas_municipal_1888,POINT (2.349606 48.827636),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,749,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f747
+7da0d9ef-5cc9-5e67-921b-93e21479cb60,"Mazaud, boulanger, cité Guénot, 4.
+",'Mazaud',,'boulanger',4,cité Guénot,True,1890.0,address,4,Rue Guenot,Paris,address,0.54545456,1.0,atlas_municipal_1888,POINT (2.392459 48.850749),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,749,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f747
+771a6420-8f40-5b09-bfe0-9283520f82a4,"Mazaud, pharmacien, r. de la Gaité, 16.
+",'Mazaud',,'pharmacien',16,r. de la Gaité,True,1890.0,address,16,Rue De La Gaite,Paris,address,0.8,1.0,atlas_municipal_1888,POINT (2.323734 48.840043),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,749,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f747
+40a7acd1-aaae-5fbd-a545-b3b3d425fe91,"Mazaud, scierie mécanique, r. d'Allemagne,
+127.
+Mazaud, serrurier, r. de la Chapelle, 97.
+",'Mazaud',,'scierie mécanique',127,r. d'Allemagne,True,1890.0,address,127,Rue D Allemagne,Paris,address,0.8,1.0,atlas_municipal_1888,POINT (2.383115 48.886279),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,749,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f747
+81530b6f-adca-549f-84ec-731e36790f37,"Mazaud, scierie mécanique, r. d'Allemagne,
+127.
+Mazaud, serrurier, r. de la Chapelle, 97.
+",'Mazaud',,'serrurier',97,r. de la Chapelle,True,1890.0,address,97,Rue De La Chapelle,Paris,address,0.8888889,1.0,atlas_municipal_1888,POINT (2.35883 48.898192),DidotBottin_1898a,DidotBottin_1898,DidotBottin,ListNoms,1898,749,https://gallica.bnf.fr/ark:/12148/bpt6k9685098r/f747
+341cb34e-3a06-573b-a1ad-7e0a5eee5fa4,"Lacombe (A.), receveur de rentes, Hau-
+teville, 10.
+",'Lacombe (A.',,'receveur de rentes',10,Hau-teville,True,1890.0,address,1,Rue Du Haut Pave,Paris,address,0.09375,1.0,atlas_municipal_1888,POINT (2.349617 48.851652),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+35983144-24bf-504f-bd15-6f93bac234a1,"Lacombe, ancien sénateur, Vaugirard,
+102.
+",'Lacombe',,'ancien sénateur',102,Vaugirard,True,1890.0,address,102,Rue De Vaugirard,Paris,address,0.5625,1.0,atlas_municipal_1888,POINT (2.323724 48.846209),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+c20f09f0-578e-5f1f-b667-420cede41c97,"Lacombe, beurre et œeufs, Ernest-Re-
+nan, 7.
+Lacombe, ancien sénateur, Vaugirard,
+102.
+",'Lacombe',,'beurre et œeufs',7,Ernest-Re-nan,True,1890.0,address,,Rue Ernest,Paris,street,0.33333334,1.0,atlas_municipal_1888,POINT (2.342002 48.830233),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+383ae484-65b7-5a1f-b9ff-ebc88dcdb81b,"Lacombe, beurre et œeufs, Ernest-Re-
+nan, 7.
+Lacombe, ancien sénateur, Vaugirard,
+102.
+",'Lacombe',,'ancien sénateur',102,Vaugirard,True,1890.0,address,102,Rue De Vaugirard,Paris,address,0.5625,1.0,atlas_municipal_1888,POINT (2.323724 48.846209),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+f507b6c0-73a7-5f5f-be94-79552abd5121,"Lacombe, beurre et œeufs, Ernest-Re-
+nan, 7.
+",'Lacombe',,'beurre et œeufs',7,Ernest-Re-nan,True,1890.0,address,,Rue Ernest,Paris,street,0.33333334,1.0,atlas_municipal_1888,POINT (2.342002 48.830233),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+c0431e41-98c9-50b2-a2ff-23b00e52c881,"Lacombe, beurre, Pompe, 150.
+",'Lacombe',,'beurre',150,Pompe,True,1890.0,address,150,Rue De La Pompe,Paris,address,0.33333334,1.0,atlas_municipal_1888,POINT (2.282216 48.869317),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+315dd526-cd4a-53e9-a578-3bfafdcbdbca,"Lacombe, art. de billards, Crozatier, 10
+",'Lacombe',,'art. de billards',10,Crozatier,True,1890.0,address,10,Rue Crozatier,Paris,address,0.6923077,1.0,atlas_municipal_1888,POINT (2.382719 48.845694),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+11d77c68-81cc-50e1-a90d-021fabe6aaf7,"Lacombe (Emile), boucher, Guilhem, 34
+",'Lacombe (Emile',,'boucher',34,Guilhem,True,1890.0,address,34,Rue Guilhem,Paris,address,0.6363636,1.0,atlas_municipal_1888,POINT (2.378817 48.862754),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+6bdcf985-76f7-5c7a-9ee5-028fd9a01d32,"Lacombe, charbons, Aumaire, 18.
+",'Lacombe',,'charbons',18,Aumaire,True,1890.0,address,18,Rue Aumaire,Paris,address,0.6363636,0.5431405,atlas_jacoubet_1836,POINT (2.355976 48.864729),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+b5aa88b6-6182-589e-bd70-521903a941a2,"Lacombe, charbons et vins, Mabillon, 12
+",'Lacombe',,'charbons et vins',12,Mabillon,True,1890.0,address,12,Rue Mabillon,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.335145 48.852008),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+f1e9c8bd-ca35-5612-9c59-5c91f34d7833,"Lacombe (Ch.), coiffeur, Jacob, 13.
+",'Lacombe (Ch.',,'coiffeur',13,Jacob,True,1890.0,address,13,Rue Jacob,Paris,address,0.5555556,1.0,atlas_municipal_1888,POINT (2.335275 48.854957),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+16222459-d2e3-5175-98b6-8cc7cc830a5c,"Lacombe, comptoir des transactions,
+",'Lacombe',,'comptoir des transactions',,,False,,,,,,,,,,,Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+aafb1f2e-3c43-50a7-aad4-36ddbcbf93c7,"Lacombe, député de l'Aveyron, blv.
+St-Germain, 238.
+",'Lacombe',,'député de l''Aveyron',238,blv. St-Germain,True,1890.0,address,238,Boulevard Saint Germain,Paris,address,0.5652174,1.0,atlas_municipal_1888,POINT (2.325844 48.85626),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+d19ab5f6-56bd-573a-8449-1df36f63610a,"Lacombe (Ernest), éditeur de musique,
+Fbg-Poissonniére, 11.
+",'Lacombe (Ernest',,'éditeur de musique',11,Fbg-Poissonniére,True,1890.0,address,11,Rue Du Faubourg Poissonniere,Paris,address,0.5,1.0,atlas_municipal_1888,POINT (2.347754 48.871719),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+6c4126d6-c65f-54fb-ad3e-033cd6934b73,"Lacombe, fourrages, St-Denis, 105.
+St-Germain, 238.
+",'Lacombe',,'fourrages',105,St-Denis,True,1890.0,address,105,Rue Saint Denis,Paris,address,0.46666667,1.0,atlas_municipal_1888,POINT (2.349432 48.862534),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+6c4126d6-c65f-54fb-ad3e-033cd6934b73,"Lacombe, fourrages, St-Denis, 105.
+St-Germain, 238.
+",'Lacombe',,'fourrages',238,St-Germain,True,1890.0,address,18,Rue Saint Germain L Auxerrois,Paris,address,0.10344828,1.0,atlas_municipal_1888,POINT (2.34458 48.858411),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+2363296d-465e-5a60-82cc-e714aaebfa6e,"Lacombe (Ernest), éditeur de musique,
+Fbg-Poissonniére, 11.
+",'Lacombe (Ernest',,'éditeur de musique',11,Fbg-Poissonniére,True,1890.0,address,11,Rue Du Faubourg Poissonniere,Paris,address,0.5,1.0,atlas_municipal_1888,POINT (2.347754 48.871719),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+13a76abf-0696-5c8e-9063-4df3e727478c,"Lacombe, fourrages, St-Denis, 105.
+",'Lacombe',,'fourrages',105,St-Denis,True,1890.0,address,105,Rue Saint Denis,Paris,address,0.46666667,1.0,atlas_municipal_1888,POINT (2.349432 48.862534),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+9e910bb1-175d-58ec-adfc-6b6e0577983a,"Lacombe (Mile), institution, Le Pele-
+tier, 35.
+",'Lacombe (Mile',,'institution',35,Le Pele-tier,True,1890.0,address,35,Rue Le Peletier,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.33895 48.874079),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+ec3217f3-81b9-556d-ac2d-369a18f12b46,"Lacombe, hôtel du Nord, Aumaire, 23.
+",'Lacombe',,'hôtel du Nord',23,Aumaire,True,1890.0,address,23,Rue Aumaire,Paris,address,0.6363636,0.5431405,atlas_jacoubet_1836,POINT (2.355803 48.864719),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+651d5cdc-bdcd-5a2f-aa3d-0d2af7db37f0,"Lacombe, mercerie et confections, Bel-
+leville, 193.
+",'Lacombe',,'mercerie et confections',193.,Bel-leville,True,1890.0,address,11,Villa Du Bel Air,Paris,address,0.020833334,1.0,atlas_municipal_1888,POINT (2.408642 48.842682),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+4ab60982-72f3-5b77-a019-142593f30226,"Lacombe (Vve), mercerie, Chateau-
+d'Eau, 1.
+lesherbes, 20.
+",'Lacombe (Vve',,'mercerie',20,Chateau-d'Eau,True,1890.0,address,20,Rue Du Chateau D Eau,Paris,address,0.55,1.0,atlas_municipal_1888,POINT (2.360432 48.87012),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+4ab60982-72f3-5b77-a019-142593f30226,"Lacombe (Vve), mercerie, Chateau-
+d'Eau, 1.
+lesherbes, 20.
+",'Lacombe (Vve',,'mercerie',1.,Chateau-d'Eau,True,1890.0,address,1,Rue Du Chateau D Eau,Paris,address,0.6,1.0,atlas_municipal_1888,POINT (2.362562 48.868766),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+55d82c9f-71d3-55b6-b981-f66e64b05ed2,"Lacombe, propriétaire, blv. Temple, 39.
+",'Lacombe',,'propriétaire',39,blv. Temple,True,1890.0,address,39,Boulevard Du Temple,Paris,address,0.5263158,1.0,atlas_municipal_1888,POINT (2.36465 48.866202),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+c2fe46e4-9c24-5434-8364-43d692ba166e,"Lacombe (protecteur Lacombe), rue de
+Paradis, 10.
+",'Lacombe (protecteur Lacombe',,,10,rue de Paradis,True,1890.0,address,10,Rue De Paradis,Paris,address,1.0,1.0,atlas_municipal_1888,POINT (2.35452 48.874615),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+31f5003d-c597-5f5f-976a-86a74a7e85f9,"Lacombe (A.), receveur de rentes, Hau-
+",'Lacombe (A.',,'receveur de rentes',,Hau-,True,1890.0,address,,Rue Du Haut Pave,Paris,street,0.1875,1.0,atlas_municipal_1888,POINT (2.349431 48.851579),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+81bd65f7-fa6d-59c8-a7eb-dc4b6f5b0512,"Lacombe, propriétaire, blv. Temple, 39.
+",'Lacombe',,'propriétaire',39,blv. Temple,True,1890.0,address,39,Boulevard Du Temple,Paris,address,0.5263158,1.0,atlas_municipal_1888,POINT (2.36465 48.866202),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+672a2448-572b-5257-8904-7c6ba6ff262d,"Lacombe (protecteur Lacombe), rue de
+Paradis, 10.
+",'Lacombe (protecteur Lacombe',,,10,rue de Paradis,True,1890.0,address,10,Rue De Paradis,Paris,address,1.0,1.0,atlas_municipal_1888,POINT (2.35452 48.874615),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+37b0d31a-7c59-58c7-9480-07cb712d8ead,"Lacombe, rentier, Chanaleilles, 5.
+Lacombe, rentier, Constantinople, 23.
+",'Lacombe',,'rentier',5,Chanaleilles,True,1890.0,address,5,Rue De Chanaleilles,Paris,address,0.6315789,1.0,atlas_municipal_1888,POINT (2.318684 48.853022),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+b08c87b3-6d57-5b9e-bb99-d9f44ba77d28,"Lacombe, rentier, Chanaleilles, 5.
+Lacombe, rentier, Constantinople, 23.
+",'Lacombe',,'rentier',23,Constantinople,True,1890.0,address,23,Rue De Constantinople,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.319785 48.880093),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+fa5830c5-0109-5a8e-89d7-52ac9311556d,"Lacombe (Mme), rentière, blv. Hauss-
+mann, 83.
+",'Lacombe (Mme',,'rentière',83,blv. Hauss-mann,True,1890.0,address,83,Boulevard Haussmann,Paris,address,0.6315789,1.0,atlas_municipal_1888,POINT (2.321452 48.874662),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+e78bb88f-f8bb-546a-94a8-2863ce6d64ee,"Lacombe, rentier, Moscou, 5.
+",'Lacombe',,'rentier',5,Moscou,True,1890.0,address,5,Rue De Moscou,Paris,address,0.46153846,1.0,atlas_municipal_1888,POINT (2.326177 48.87993),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+73c5c8bd-ed16-50dc-a9bd-f3888c2fb3f4,"Lacombe (de), rentier, Narbonne, 1.
+",'Lacombe (de',,'rentier',,Narbonne,True,1890.0,address,,Rue De Narbonne,Paris,street,0.53333336,1.0,atlas_municipal_1888,POINT (2.324521 48.85313),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+59c58cc4-188f-5291-bd19-6574a4555ccc,"Lacombe (Mme), robes, Fbg-St-Ho-
+noré, 84.
+",'Lacombe (Mme',,'robes',84,Fbg-St-Ho-noré,True,1890.0,address,84,Rue Du Faubourg Saint Honore,Paris,address,0.32142857,1.0,atlas_municipal_1888,POINT (2.317185 48.870698),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+f3a9d087-4e62-5cfb-832a-3081a8bbf0e3,"Lacombe (E.), , médecin-vétérinaire,
+St-Ferdinand, 42, et Cardinet, 113.
+",'Lacombe (E.',,'médecin-vétérinaire',113,Cardinet,True,1890.0,address,113,Rue Cardinet,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.311534 48.885687),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+f3a9d087-4e62-5cfb-832a-3081a8bbf0e3,"Lacombe (E.), , médecin-vétérinaire,
+St-Ferdinand, 42, et Cardinet, 113.
+",'Lacombe (E.',,'médecin-vétérinaire',42,St-Ferdinand,True,1890.0,address,42,Rue Saint Ferdinand,Paris,address,0.57894737,1.0,atlas_municipal_1888,POINT (2.286759 48.877531),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+04108467-ea03-512c-8d41-180d52392a0c,"Lacombe, vins, Cardinet, 121.
+noré, 84.
+",'Lacombe',,'vins',12,Cardinet,True,1890.0,address,12,Rue Cardinet,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.301944 48.881425),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+04108467-ea03-512c-8d41-180d52392a0c,"Lacombe, vins, Cardinet, 121.
+noré, 84.
+",'Lacombe',,'vins',84,noré,True,1890.0,address,15,Rue Du Pole Nord,Paris,address,0.0,1.0,atlas_municipal_1888,POINT (2.338893 48.893819),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+5838ab8a-12bf-5470-a05a-b9a6fdfa0195,"Lacombe (E.), , médecin-vétérinaire,
+St-Ferdinand, 42, et Cardinet, 113.
+",'Lacombe (E.',,'médecin-vétérinaire',113,Cardinet,True,1890.0,address,113,Rue Cardinet,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.311534 48.885687),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+5838ab8a-12bf-5470-a05a-b9a6fdfa0195,"Lacombe (E.), , médecin-vétérinaire,
+St-Ferdinand, 42, et Cardinet, 113.
+",'Lacombe (E.',,'médecin-vétérinaire',42,St-Ferdinand,True,1890.0,address,42,Rue Saint Ferdinand,Paris,address,0.57894737,1.0,atlas_municipal_1888,POINT (2.286759 48.877531),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+bf45df59-158d-5074-9c65-03a56ee1a933,"Lacombe, vins, Cardinet, 121.
+",'Lacombe',,'vins',12,Cardinet,True,1890.0,address,12,Rue Cardinet,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.301944 48.881425),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+c07658f1-8a2c-553b-8667-2699642870d2,"Lacombe, vins, Caumartin, 58.
+",'Lacombe',,'vins',58,Caumartin,True,1890.0,address,58,Rue Caumartin,Paris,address,0.6923077,1.0,atlas_municipal_1888,POINT (2.328503 48.874629),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+fbc912e7-5f70-523e-aa67-4fe7436bbebb,"Lacombe, vins et charbons, Dragon, 5.
+",'Lacombe',,'vins et charbons',5,Dragon,True,1890.0,address,5,Rue Fragonard,Paris,address,0.3846154,1.0,atlas_municipal_1888,POINT (2.314861 48.894323),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+a30a5b5a-f5a8-5bcb-b79e-78092be4ccca,"Lacombe, vins, Mare, 1.
+Lacombe, vins, Roquette, 24.
+",'Lacombe',,'vins',,Mare,True,1890.0,address,,Rue De La Mare,Paris,street,0.2857143,1.0,atlas_municipal_1888,POINT (2.388725 48.873339),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+c289970b-31fd-5739-9c22-dd2e115403bb,"Lacombe, vins, Mare, 1.
+Lacombe, vins, Roquette, 24.
+",'Lacombe',,'vins',24,Roquette,True,1890.0,address,24,Rue De La Roquette,Paris,address,0.44444445,1.0,atlas_municipal_1888,POINT (2.371179 48.854084),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+d308a0cc-3b4a-5587-9a2a-503ad4077539,"Lacombe (Antoine), vins, Nation, 13.
+",'Lacombe (Antoine',,'vins',13,Nation,True,1890.0,address,13,Rue De La Nation,Paris,address,0.375,1.0,atlas_municipal_1888,POINT (2.348268 48.884705),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+d39fa3d9-d198-51a7-bef6-89aa35c7f01b,"Lacombe, vins, Rochechouart, 90.
+",'Lacombe',,'vins',90,Rochechouart,True,1890.0,address,90,Rue De Rochechouart,Paris,address,0.6315789,1.0,atlas_municipal_1888,POINT (2.346926 48.883036),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+85f58674-e345-53db-afc4-f876d4767977,"Lacombe et Cie, agents d'affaires, bou-
+modes, Beaurepaire, 12.
+",'Lacombe et Cie',,'agents d''affaires',12,Beaurepaire,True,1890.0,address,12,Rue Beaurepaire,Paris,address,0.73333335,1.0,atlas_municipal_1888,POINT (2.363785 48.869842),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,474,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f472
+d1fb4e6f-7a9a-5f64-87ba-1a18303adc40,"Mazaud, boucher, Brancion, 38.
+",'Mazaud',,'boucher',38,Brancion,True,1890.0,address,38,Rue Brancion,Paris,address,0.6666667,1.0,atlas_municipal_1888,POINT (2.301653 48.829849),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,560,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f558
+9edcc896-a569-5f9a-976f-59fcb4da330c,"Mazaud frères, bouchers, Château-
+d'Eau, 29.
+",'Mazaud frères',,'bouchers',29,Château-d'Eau,True,1890.0,address,29,Rue Du Chateau D Eau,Paris,address,0.5,1.0,atlas_municipal_1888,POINT (2.358793 48.870784),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,560,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f558
+b2498d02-695c-570f-9901-b20705dbbe0f,"Mazaud, boulanger, cité Guénot, 4.
+",'Mazaud',,'boulanger',4,cité Guénot,True,1890.0,address,4,Rue Guenot,Paris,address,0.54545456,1.0,atlas_municipal_1888,POINT (2.392459 48.850749),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,560,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f558
+8b689a81-758d-5e1f-9266-5ddaadcdbdac,"Mazaud (Vve), manteaux, Louvre,20.
+",'Mazaud (Vve',,'manteaux',20,Louvre,True,1890.0,address,20,Rue Du Louvre,Paris,address,0.46153846,1.0,atlas_municipal_1888,POINT (2.341256 48.861429),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,560,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f558
+45c21ce4-eb74-5692-be44-80621925d887,"Mazaud, pharmacien, rue de la Gaîté, 16.
+d'Eau, 29.
+",'Mazaud',,'pharmacien',29,d'Eau,True,1890.0,address,29,Rue Du Chateau D Eau,Paris,address,0.2,1.0,atlas_municipal_1888,POINT (2.358793 48.870784),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,560,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f558
+45c21ce4-eb74-5692-be44-80621925d887,"Mazaud, pharmacien, rue de la Gaîté, 16.
+d'Eau, 29.
+",'Mazaud',,'pharmacien',16,rue de la Gaîté,True,1890.0,address,16,Rue De La Gaite,Paris,address,0.8666667,1.0,atlas_municipal_1888,POINT (2.323734 48.840043),Paris_adresses_1898,Paris_adresses_1898,Paris_adresses,ListNoms,1898,560,https://gallica.bnf.fr/ark:/12148/bpt6k992370w/f558

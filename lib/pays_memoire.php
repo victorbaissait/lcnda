@@ -104,7 +104,8 @@ function pm_commons(string $name): array
 {
     $cat = str_replace(' ', '_', $name);
     $out = [];
-    foreach ([['commons-search.json', 'filetype:video intitle:"' . $name . '"'], ['commons-cat.json', 'filetype:video incategory:"Videos_of_' . $cat . '"|"Films_of_' . $cat . '"']] as [$step, $q]) {
+    // 1. le titre dit la commune ; 2. les mêmes, marqués « domaine public » (P6216 = Q19652) : les vieux films passent devant ; 3. les catégories
+    foreach ([['commons-search.json', 'filetype:video intitle:"' . $name . '"'], ['commons-pd.json', 'filetype:video intitle:"' . $name . '" haswbstatement:P6216=Q19652'], ['commons-cat.json', 'filetype:video incategory:"Videos_of_' . $cat . '"|"Films_of_' . $cat . '"']] as [$step, $q]) {
         $u = 'https://commons.wikimedia.org/w/api.php?' . http_build_query(['action' => 'query', 'format' => 'json', 'generator' => 'search', 'gsrnamespace' => 6, 'gsrlimit' => 40, 'gsrsearch' => $q,
             'prop' => 'imageinfo', 'iiprop' => 'url|extmetadata|mediatype', 'iiurlwidth' => 320, 'iiextmetadatafilter' => 'DateTimeOriginal|LicenseShortName|Artist|ImageDescription|ObjectName']);
         $j = pm_json($step, $u);
@@ -112,7 +113,7 @@ function pm_commons(string $name): array
             $ii = $p['imageinfo'][0] ?? []; $m = $ii['extmetadata'] ?? [];
             $g = static fn(string $k): string => pm_strip((string) ($m[$k]['value'] ?? ''));
             $title = (string) preg_replace('/^File:|\.(webm|ogv|ogg|mpg|mpeg|mp4)$/i', '', (string) ($p['title'] ?? ''));
-            if ($step === 'commons-search.json' && !pm_names_in($name, $title)) { continue; }
+            if ($step !== 'commons-cat.json' && !pm_names_in($name, $title)) { continue; }
             $y = pm_film_year($g('DateTimeOriginal'), $title . ' ' . $g('ObjectName'));
             if ($y === null || $y > PM_MAX_YEAR) { continue; }
             $lic = $g('LicenseShortName');

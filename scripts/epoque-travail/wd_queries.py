@@ -42,7 +42,6 @@ BOOKS = '''SELECT ?w ?wfr ?wen ?d ?a ?afr ?aen ?lang ?orig ?frwiki ?sl WHERE {
  OPTIONAL { ?w wdt:P407 ?lang }
  OPTIONAL { ?w wdt:P495 ?orig }
  OPTIONAL { ?frwiki schema:about ?w ; schema:isPartOf <https://fr.wikipedia.org/> }
-}''' + LAB.format('') + '''
 }'''
 BOOK_SPANS = [(1600, 1800), (1800, 1850), (1850, 1880), (1880, 1900), (1900, 1920), (1920, 1940), (1940, 1960), (1960, 1980), (1980, 2001)]
 FR_LANG = "Q150"

@@ -252,6 +252,7 @@ def build_greves(cache):
     except RuntimeError as e:
         print(f'  ⚠️ catégories de Wikipédia : {e}', flush=True)
         catof = {}
+    base_ids = {qid(r['s']) for r in base}
     by = {}
     for r in base + extra:
         by.setdefault(qid(r['s']), []).append(r)
@@ -264,7 +265,8 @@ def build_greves(cache):
             continue
         # les catégories ramènent aussi des lois, des syndicats, des catastrophes : on garde ce qui est une grève ou une révolte
         types = ' '.join(r.get('typeLabel', '') for r in rs).lower()
-        if extra and q in catof and not re.search(r'gr[èe]ve|r[ée]volte|insurrection|[ée]meute|fusillade|massacre|conflit|manifestation|mouvement|soul[èe]vement|occupation|r[ée]bellion|lock-out|strike|protest|riot|jacquerie', name.lower() + ' ' + types):
+        # les catégories ramènent aussi des émeutes politiques, des lois, des syndicats : on garde les conflits du TRAVAIL
+        if q in catof and q not in base_ids and not re.search(r'gr[èe]ve|strike|lock-out|conflit du travail|conflit social|labou?r|ouvri|canut|mineur|houill|fusillade|cheminot|docker|midinette|sardini|vigneron|tisser|travailleu|salari', name.lower() + ' ' + types):
             skipped += 1
             continue
         ys = [wd_year(r.get('st')) or wd_year(r.get('d')) for r in rs if r.get('st') or r.get('d')]
