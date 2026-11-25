@@ -42,15 +42,34 @@ const ACT_VERSIONS_AUTO_MAX = 60; // versions automatiques gardées par acte (le
 function act_version_data(PDO $pdo, $data): array
 {
     $c = act_transcription_clean_data($pdo, is_array($data) ? $data : []);
-    return ['zones' => $c['zones'], 'people' => $c['people']] + (isset($c['reviewed']) ? ['reviewed' => $c['reviewed']] : []);
+    $meta = act_version_meta(is_array($data) ? ($data['meta'] ?? null) : null);
+    return ['zones' => $c['zones'], 'people' => $c['people']] + (isset($c['reviewed']) ? ['reviewed' => $c['reviewed']] : []) + ($meta ? ['meta' => $meta] : []);
+}
+
+/**
+ * 🕘 ce que retient une lecture gardée (maquette docs/design/transcription-versions-contexte.html, 1) : le modèle, l'image envoyée
+ * (auto : améliorée automatiquement · mine : avec « Mieux voir » · orig : d'origine), la partie lue (toute la page, la zone, « page 2 »),
+ * le nombre d'indices de « 🧠 Aider l'IA », et pour une copie (⧉ Dupliquer) la version d'où elle vient. Du texte court, rien d'autre.
+ */
+function act_version_meta($m): array
+{
+    if (!is_array($m)) { return []; }
+    $txt = static fn($v, int $n) => mb_substr(trim(preg_replace('/[\x00-\x1f]+/u', ' ', safe_text(is_scalar($v) ? (string) $v : '')) ?? ''), 0, $n);
+    $out = [];
+    if (($v = $txt($m['model'] ?? '', 80)) !== '') { $out['model'] = $v; }
+    if (in_array($m['img'] ?? '', ['auto', 'mine', 'orig'], true)) { $out['img'] = $m['img']; }
+    if (($v = $txt($m['part'] ?? '', 60)) !== '') { $out['part'] = $v; }
+    if (isset($m['hints']) && is_numeric($m['hints'])) { $out['hints'] = max(0, min(99, (int) $m['hints'])); }
+    if (($v = $txt($m['from'] ?? '', 120)) !== '') { $out['from'] = $v; }
+    return $out;
 }
 
 function act_transcription_versions(PDO $pdo, int $actId): array
 {
     act_transcriptions_ensure($pdo);
-    $s = $pdo->prepare('SELECT id, label, auto, created_at, body, source FROM act_transcription_versions WHERE act_id=? ORDER BY id DESC'); $s->execute([$actId]);
-    return array_map(static function ($r) { $b = (string) $r['body'];
-        return ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'auto' => (int) $r['auto'], 'source' => (string) $r['source'], 'created_at' => $r['created_at'], 'words' => count(preg_split('/\s+/u', trim($b), -1, PREG_SPLIT_NO_EMPTY)), 'lines' => count(array_filter(explode("\n", $b), static fn($l) => trim($l) !== ''))]; }, $s->fetchAll());
+    $s = $pdo->prepare("SELECT id, label, auto, created_at, body, source, json_extract(data_json, '$.meta') AS meta FROM act_transcription_versions WHERE act_id=? ORDER BY id DESC"); $s->execute([$actId]);
+    return array_map(static function ($r) { $b = (string) $r['body']; $meta = act_version_meta(json_decode((string) ($r['meta'] ?? ''), true));
+        return ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'auto' => (int) $r['auto'], 'source' => (string) $r['source'], 'created_at' => $r['created_at'], 'words' => count(preg_split('/\s+/u', trim($b), -1, PREG_SPLIT_NO_EMPTY)), 'lines' => count(array_filter(explode("\n", $b), static fn($l) => trim($l) !== ''))] + ($meta ? ['meta' => $meta] : []); }, $s->fetchAll());
 }
 
 function act_transcription_version(PDO $pdo, int $id): array
@@ -205,7 +224,7 @@ function act_transcriptions_for_media(PDO $pdo, int $mediaId): array
     if (!$rows && ($owner = act_page_owner($pdo, $mediaId))) { $o = $pdo->prepare('SELECT id, title, kind, date_text, place, source, body, data_json, updated_at, media_id FROM act_transcriptions WHERE id=?'); $o->execute([$owner]); $rows = $o->fetchAll(); }
     $hide = act_doc_hidden_ids($pdo);
     return array_map(static function ($r) use ($hide, $mediaId) { $r['page_of'] = (int) $r['media_id'] !== $mediaId ? (int) $r['media_id'] : 0; unset($r['media_id']); $d = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']);
-        $r['id'] = (int) $r['id']; $r['zones'] = count(is_array($d['zones'] ?? null) ? $d['zones'] : []);
+        $r['id'] = (int) $r['id']; $r['zones'] = count(is_array($d['zones'] ?? null) ? $d['zones'] : []); if (is_array($d['reason'] ?? null) && $r['kind'] === 'notoriete') { $r['reason'] = $d['reason']; }
         $r['status'] = in_array($d['status'] ?? '', ['todo', 'doing', 'checked', 'done'], true) ? $d['status'] : (trim((string) $r['body']) === '' ? 'todo' : 'doing');
         if ($hide) { $d['people'] = array_values(array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], static fn($p) => is_array($p) && !isset($hide[(int) ($p['person_id'] ?? 0)]))); } $r['people'] = array_values(array_map(static fn($p) => ['name' => (string) ($p['name'] ?? ''), 'role' => (string) ($p['role'] ?? ''), 'person_id' => (int) ($p['person_id'] ?? 0)], array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], 'is_array'))); return $r;     }, $rows);
 }
@@ -221,6 +240,26 @@ function act_transcription_get(PDO $pdo, int $id): array
 }
 
 /** les zones, les repérages et les liens : des nombres, des textes courts, des numéros de fiche ; rien d'autre n'est gardé */
+/** ❓ les raisons d'un acte de notoriété (maquette docs/design/transcription-versions-contexte.html, 4) */
+const ACT_REASONS = ['mariage', 'naissance', 'succession', 'pension', 'autre'];
+
+/**
+ * 🔦 la place de chaque mot d'une ligne lue (l'écriture à la main donne la boîte de chaque mot) : wb = [[début, fin, x0, x1], …]
+ * (début et fin dans le texte de la zone, x en pixels de l'image), wl = la longueur du texte de la zone quand elle a été posée
+ * (le texte changé ensuite : la place est de nouveau estimée). 300 mots au plus.
+ */
+function act_zone_words(array $z, callable $num): array
+{
+    $wb = [];
+    foreach (array_slice(is_array($z['wb'] ?? null) ? $z['wb'] : [], 0, 300) as $w) {
+        if (!is_array($w) || count($w) !== 4) { continue; }
+        [$a, $b, $x0, $x1] = array_values($w);
+        if (!is_numeric($a) || !is_numeric($b)) { continue; }
+        $wb[] = [max(0, min(100000, (int) $a)), max(0, min(100000, (int) $b)), $num($x0), $num($x1)];
+    }
+    return $wb ? ['wb' => $wb, 'wl' => max(0, min(100000, (int) ($z['wl'] ?? 0)))] : [];
+}
+
 function act_transcription_clean_data(PDO $pdo, $data): array
 {
     $data = is_array($data) ? $data : [];
@@ -232,7 +271,7 @@ function act_transcription_clean_data(PDO $pdo, $data): array
         $zones[] = ['id' => mb_substr(preg_replace('/[^\w-]/', '', (string) ($z['id'] ?? '')), 0, 24), 'x' => $num($z['x'] ?? 0), 'y' => $num($z['y'] ?? 0), 'w' => $num($z['w'] ?? 0), 'h' => $num($z['h'] ?? 0),
             's' => max(0, (int) ($z['s'] ?? 0)), 'e' => max(0, (int) ($z['e'] ?? 0)), 'note' => mb_substr(safe_text($z['note'] ?? ''), 0, 300), 'c' => preg_match('/^#[0-9a-f]{6}$/i', (string) ($z['c'] ?? '')) ? $z['c'] : ''] + (in_array($z['src'] ?? '', ['htr', 'ocr', 'deep'], true) ? ['src' => $z['src']] : [])
             + (in_array($z['kind'] ?? '', ['skip', 'margin', 'head', 'sign', 'note'], true) ? ['kind' => $z['kind']] : []) // kind : ⛔ à ne pas lire, marge, titre, signatures, note (heritage-transcribe-xml.js)
-            + (safe_int($z['p'] ?? 0) > 0 ? ['p' => safe_int($z['p'])] : []); // p : la page (n° du média) d'un acte en plusieurs pages ; absente = l'image de l'acte // src : posée par une lecture (sinon dessinée à la main)
+            + (safe_int($z['p'] ?? 0) > 0 ? ['p' => safe_int($z['p'])] : []) + act_zone_words($z, $num); // p : la page (n° du média) d'un acte en plusieurs pages ; absente = l'image de l'acte // src : posée par une lecture (sinon dessinée à la main)
     }
     $people = [];
     foreach (array_slice(is_array($data['people'] ?? null) ? $data['people'] : [], 0, 200) as $p) {
@@ -282,7 +321,12 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     $reviewed = array_values(array_unique(array_filter(array_slice(is_array($data['reviewed'] ?? null) ? $data['reviewed'] : [], -5000), static fn($k) => is_string($k) && preg_match('/^[0-9a-z]{1,10}$/', $k))));
     // 📑 un acte en plusieurs pages, un seul texte coupé par « — page 2 — » : les médias des morceaux du texte, dans l'ordre du texte
     $pages = array_values(array_unique(array_filter(array_map('safe_int', array_slice(is_array($data['pages'] ?? null) ? $data['pages'] : [], 0, 200)), static fn($v) => $v > 0)));
-    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($pageViews ? ['pageViews' => $pageViews] : []) + ($gabarit ? ['gabarit' => $gabarit] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
+    // ❓ acte de notoriété : pourquoi il a été fait (k : la raison, t : la précision libre, auto : pré-rempli par « 🧭 Repérer », à vérifier)
+    $reason = null; $rs = is_array($data['reason'] ?? null) ? $data['reason'] : null;
+    if ($rs && in_array($rs['k'] ?? '', ACT_REASONS, true)) { $reason = ['k' => $rs['k'], 't' => mb_substr(safe_text(is_scalar($rs['t'] ?? '') ? (string) ($rs['t'] ?? '') : ''), 0, 300)] + (!empty($rs['auto']) ? ['auto' => true] : []); }
+    // 🧠 « Aider l'IA » : en quelques mots, de quoi parle l'acte
+    $about = mb_substr(safe_text(is_string($data['about'] ?? null) ? $data['about'] : ''), 0, 600);
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($reason ? ['reason' => $reason] : []) + ($about !== '' ? ['about' => $about] : []) + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($pageViews ? ['pageViews' => $pageViews] : []) + ($gabarit ? ['gabarit' => $gabarit] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
 }
 
 function save_act_transcription(PDO $pdo, array $data): array
@@ -499,7 +543,8 @@ function act_transcriptions_for_person(PDO $pdo, int $pid, bool $withGuess = tru
         }
         if (!$hit && !$guess) { continue; }
         $q = $hit ?: $guess;
-        $out[] = ['act_id' => (int) $r['id'], 'media_id' => (int) $r['media_id'], 'title' => (string) $r['title'], 'kind' => (string) $r['kind'], 'date_text' => (string) $r['date_text'], 'place' => (string) $r['place'],
+        $why = json_decode((string) $r['data_json'], true)['reason'] ?? null;
+        $out[] = ['act_id' => (int) $r['id'], 'media_id' => (int) $r['media_id'], 'title' => (string) $r['title'], 'kind' => (string) $r['kind'], 'date_text' => (string) $r['date_text'], 'place' => (string) $r['place']] + (is_array($why) && $r['kind'] === 'notoriete' ? ['reason' => $why] : []) + [
             'role' => mb_substr((string) ($q['role'] ?? ''), 0, 60), 'name' => mb_substr((string) ($q['name'] ?? ''), 0, 160), 'state' => $hit ? 'linked' : 'tolink', 'index' => $hit ? -1 : (int) $guess['i'],
             'excerpt' => $excerpt((string) $r['body'], (string) ($q['name'] ?? '')), 'filename' => (string) ($r['filename'] ?? ''), 'thumb' => (string) ($r['thumb'] ?? '')];
         if ($hit && $r['media_id']) { $seenMedia[(int) $r['media_id']] = true; }

@@ -776,7 +776,7 @@
         return acts.map((a, i) => { const st = TXST[a.status] || TXST.doing;
             const meta = [a.place, a.date_text, a.source, a.zones ? A().plural(a.zones, 'zone') : ''].filter(Boolean).join(' · ');
             return `<section class="card ong-sec ong-trsec" data-ong-act="${a.id}"><div class="ong-sh"><h3>📜 ${esc(acts.length > 1 ? a.title || T('Transcription') : T('Transcription'))}</h3>${bdg(ext.actKindLabel ? ext.actKindLabel(a.kind) : a.kind, 'grey')}${bdg(T(st[0]), st[1])}<span class="spacer"></span>${open(a.id)}${i === 0 ? wp : ''}</div>
-                ${acts.length === 1 && a.title ? `<p class="ong-trtitle">${esc(a.title)}</p>` : ''}${String(a.body || '').trim() ? trText(a.body) : `<p class="muted">${esc(T('Rien d’écrit pour l’instant.'))}</p>`}
+                ${acts.length === 1 && a.title ? `<p class="ong-trtitle">${esc(a.title)}</p>` : ''}${a.reason && ext.txCtx ? `<p class="ong-trwhy">${ext.txCtx.reasonHtml(a.reason)}</p>` : ''}${String(a.body || '').trim() ? trText(a.body) : `<p class="muted">${esc(T('Rien d’écrit pour l’instant.'))}</p>`}
                 ${meta ? `<p class="ong-trmeta">${esc(meta)}</p>` : ''}</section>`; }).join('');
     }
     /** les noms relevés dans l'Atelier pas encore reliés à une fiche (ils se relient dans l'Atelier, ou sur la fiche qui leur ressemble) */

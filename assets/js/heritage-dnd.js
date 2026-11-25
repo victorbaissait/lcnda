@@ -181,4 +181,13 @@
             now?.querySelector(GRIPS)?.focus();
         }
     }, true);
+
+    /* ⠿ une poignée tenue (glisser-déposer du navigateur) : les messages en bas à gauche ne cachent plus l'endroit où l'on dépose.
+     * Sans cela, une ligne sous la pile des messages (ex. renommer trois pages de suite) ne recevait pas le glisser : rien n'était rangé. */
+    let held = false, dragging = false;
+    const hold = on => { held = on; document.documentElement.classList.toggle('lc-grip-held', on); };
+    document.addEventListener('pointerdown', e => { if (e.button === 0 && e.target.closest?.(`[draggable="true"], ${GRIPS}`)) hold(true); }, true);
+    document.addEventListener('dragstart', () => { dragging = true; }, true);
+    ['pointerup', 'dragend', 'drop'].forEach(ev => document.addEventListener(ev, () => { dragging = false; if (held) hold(false); }, true));
+    document.addEventListener('pointercancel', () => setTimeout(() => { if (held && !dragging) hold(false); }, 0), true); // un glisser qui commence annule aussi le pointeur : on garde
 })();

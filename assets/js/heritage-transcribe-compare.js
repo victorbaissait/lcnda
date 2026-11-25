@@ -93,7 +93,7 @@
     const keepOn = () => { try { return localStorage.getItem(KEEP_KEY) !== '0'; } catch (_) { return true; } };
 
     /* ═════ la fenêtre ═════
-     * ctx = {actId, title, current() → texte à l'écran, apply(texte, label) (le met dans l'acte, ↶), api, post} */
+     * ctx = {actId, title, current() → texte à l'écran, apply(texte, label) (le met dans l'acte, ↶), api, post, pick: [n° de version] cochées d'office} */
     const IMG_KEY = 'genealogie-tx-comparer-image', imgOn = () => { try { return localStorage.getItem(IMG_KEY) !== '0'; } catch (_) { return true; } };
     async function open(ctx) {
         const imgs = (ctx.images || []).filter(m => m && m.src);
@@ -102,7 +102,9 @@
         const readings = [{id: 0, label: T('📝 Le texte à l’écran'), source: 'now'}, ...list.filter(v => v.source), ...list.filter(v => !v.source && !v.auto), ...list.filter(v => !v.source && v.auto).slice(0, 10)];
         const bodies = new Map([[0, ctx.current()]]);
         const getBody = async id => { if (!bodies.has(id)) bodies.set(id, (await ctx.api('act_transcription_version', {id})).body || ''); return bodies.get(id); };
-        let chosen = readings.filter(r => r.source && r.source !== 'now').slice(0, 3).map(r => r.id); if (!chosen.includes(0)) chosen.unshift(0); chosen = chosen.slice(0, 4);
+        // ctx.pick : « ⚖️ Comparer avec ma version » (la bande 🕘 Versions) — le texte à l'écran et ces versions-là, cochées
+        (ctx.pick || []).forEach(id => { if (!readings.some(r => r.id === id)) { const v = list.find(x => x.id === id); if (v) readings.push(v); } });
+        let chosen = ctx.pick?.length ? [0, ...ctx.pick.filter(id => readings.some(r => r.id === id))] : readings.filter(r => r.source && r.source !== 'now').slice(0, 3).map(r => r.id); if (!chosen.includes(0)) chosen.unshift(0); chosen = chosen.slice(0, 4);
         let base = 0, mode = 'word', loose = true, parts = [], rows = [], texts = [];
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-txc'; dlg.dataset.ownClose = '1';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">⚖️ ${esc(T('Atelier de transcription'))} · ${esc(ctx.title || '')}</span><h2>${esc(T('Comparer les lectures'))}</h2></div><button type="button" class="icon-button" data-txc-x aria-label="${esc(T('Fermer'))}">×</button></div>

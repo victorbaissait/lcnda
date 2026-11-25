@@ -369,6 +369,7 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
 .toast-region { position: fixed; left: 24px; right: auto; bottom: 24px; top: auto; z-index: 2147483000; display: grid; gap: 8px; width: min(470px, calc(100vw - 48px)); max-width: min(470px, calc(100vw - 48px)); justify-items: stretch; pointer-events: none; }
 .toast-region[popover] { inset: auto auto 24px 24px; margin: 0; padding: 0; border: 0; background: transparent; overflow: visible; color: inherit; }
 .toast-region:empty { display: none; }
+html.lc-grip-held .toast-region, html.lc-grip-held .toast-region * { pointer-events: none !important; } /* ⠿ une poignée tenue : on dépose à travers les messages (heritage-dnd.js) */
 .toast.ui-toast { position: relative; display: flex; align-items: center; gap: 12px; box-sizing: border-box; width: 100%; max-width: 100%; background: #111; color: #fff; border: 0; padding: 11px 14px 13px; font: 500 14px/1.35 var(--font, Inter, system-ui, sans-serif); box-shadow: 5px 5px 0 rgba(5, 93, 255, .45); pointer-events: auto; overflow: hidden; animation: toast-in .22s ease; transition: opacity .15s, transform .15s; }
 .toast.ui-toast.success { background: #14532d; color: #fff; }
 .toast.ui-toast.error { background: #7f1020; color: #fff; }

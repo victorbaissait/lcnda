@@ -96,7 +96,7 @@
     }
 
     /**
-     * le panneau : render(box, {gab, kind, guess, where(s) → « l. 3 » | « page 2, l. 3 »}) ; les actions sont des attributs
+     * le panneau : render(box, {gab, kind, guess, where(s) → « l. 3 » | « page 2, l. 3 », top : le choix ❓ « Pourquoi cet acte » d'une notoriété}) ; les actions sont des attributs
      * data-gab-* que l'Atelier écoute (écrire, ✓, montrer le passage, changer de sorte, menu ⋯).
      */
     function render(box, o) {
@@ -108,7 +108,7 @@
         }
         const F = fieldsOf(kind, gab), filled = F.filter(([k]) => gab.fields[k]?.v).length, ok = F.filter(([k]) => gab.fields[k]?.ok).length;
         box.innerHTML = `<div class="h-gab-head"><b>${esc(i18n(KIND_NAME[kind]))}</b><small class="muted" data-gab-count>${esc(i18n('Cases remplies : {a}/{b} · vérifiées : {c}', {a: filled, b: F.length, c: ok}))}</small><span class="spacer"></span><button type="button" class="icon-button small" data-gab-menu aria-haspopup="menu" title="${esc(i18n('Gabarit'))}" aria-label="${esc(i18n('Gabarit'))}">⋯</button></div>
-            <div class="h-gab-fields">${F.map(([k, label, , own]) => { const f = gab.fields[k] || null, st = !f?.v ? 'is-empty' : f.ok ? 'is-ok' : f.own ? 'is-own' : 'is-auto', w = f && f.s >= 0 ? o.where?.(f.s) : '';
+            ${o.top ? `<div class="h-gab-why">${o.top}</div>` : ''}<div class="h-gab-fields">${F.map(([k, label, , own]) => { const f = gab.fields[k] || null, st = !f?.v ? 'is-empty' : f.ok ? 'is-ok' : f.own ? 'is-own' : 'is-auto', w = f && f.s >= 0 ? o.where?.(f.s) : '';
                 return `<label class="h-gab-k" for="gab-${k}">${esc(label)}</label><input id="gab-${k}" class="h-gab-v ${st}" data-gab-field="${k}" value="${esc(f?.v || '')}" placeholder="${esc(i18n('à remplir'))}" spellcheck="false" autocomplete="off">
                     <span class="h-gab-a">${f?.ok ? '<span class="h-gab-ok" title="' + esc(i18n('Vérifié')) + '">✓</span>' : `<button type="button" class="icon-button small" data-gab-ok="${k}" ${f?.v ? '' : 'disabled'} title="${esc(i18n('Vérifié'))}" aria-label="${esc(i18n('Vérifié'))}">✓</button>`}${w ? ` <button type="button" class="link-button" data-tx-goto="${f.s}:${f.e}">${esc(w)}</button>` : ''}${own ? ` <button type="button" class="icon-button small" data-gab-del="${k}" title="${esc(i18n('Retirer cette case'))}" aria-label="${esc(i18n('Retirer cette case'))}">×</button>` : ''}</span>`; }).join('')}</div>
             <div class="h-gab-add"><button type="button" class="button small secondary" data-gab-add>＋ ${esc(i18n('Ajouter une case'))}</button><span class="h-gab-addrow" data-gab-addrow hidden><input type="text" data-gab-newlabel maxlength="60" placeholder="${esc(i18n('Nom de la case (ex. Profession du parrain)'))}" aria-label="${esc(i18n('Nom de la case'))}" spellcheck="false" autocomplete="off"><button type="button" class="button small" data-gab-addok>＋ ${esc(i18n('Ajouter'))}</button></span></div>

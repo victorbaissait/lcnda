@@ -10350,6 +10350,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'media_pages_save' => media_pages_save($pdo,$data), // 📑 relier, nommer, ranger, retirer des pages d'un document (et ↶ Annuler)
             'act_link_person' => act_link_person($pdo,$data), // 👤 « Relier » un nom relevé dans l'Atelier (fiche → 📜 Actes et transcriptions)
             'act_match_people' => act_transcription_match_people($pdo, is_array($data['names'] ?? null) ? $data['names'] : []),
+            'act_ai_hints' => act_ai_hints($pdo,$data), // 🧠 « Aider l'IA » : les indices de la base (lib/transcription_actes.php), rien n'est écrit
             'act_import_check' => act_import_check($pdo,$data), // 📜 Ce que l'app a trouvé : fiches ressemblantes (lib/transcription_actes.php)
             'act_import_apply' => act_import_apply($pdo,$data), // 📜 ✓ Ajouter à la généalogie, d'un coup
             'act_import_undo' => act_import_undo($pdo,$data), // 📜 ↶ Annuler cet ajout

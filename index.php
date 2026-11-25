@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=282">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
-    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=7">
+    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=8">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -43,7 +43,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/tresors.css?v=15">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=30">
-    <link rel="stylesheet" href="assets/css/ui.css?v=24">
+    <link rel="stylesheet" href="assets/css/ui.css?v=25">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
@@ -1399,7 +1399,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=29" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=2" defer></script>
 <script src="assets/js/heritage-boards.js?v=54" defer></script>
-<script src="assets/js/heritage-dnd.js?v=12" defer></script>
+<script src="assets/js/heritage-dnd.js?v=13" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
 <script src="assets/js/heritage-studio.js?v=118" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=2" defer></script>
@@ -1556,22 +1556,23 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/app-correspondances-core.js?v=2" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=28" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=29" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=4" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=12" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=4" defer></script>
-<script src="assets/js/heritage-transcribe-acte.js?v=17" defer></script>
+<script src="assets/js/heritage-transcribe-acte.js?v=18" defer></script>
 <script src="assets/js/heritage-transcribe-trouve.js?v=5" defer></script>
 <script src="assets/js/heritage-transcribe-relecture.js?v=7" defer></script>
-<script src="assets/js/heritage-transcribe-gabarit.js?v=5" defer></script>
+<script src="assets/js/heritage-transcribe-gabarit.js?v=6" defer></script>
 <script src="assets/js/heritage-transcribe-aligne.js?v=2" defer></script>
 <script src="assets/js/heritage-liens.js?v=4" defer></script>
 <script src="assets/js/heritage-recueil-docs.js?v=3" defer></script>
 <script src="assets/js/heritage-pages.js?v=4" defer></script>
 <script src="assets/js/heritage-transcribe-pages.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe-compare.js?v=2" defer></script>
+<script src="assets/js/heritage-transcribe-compare.js?v=3" defer></script>
 <script src="assets/js/heritage-transcribe-xml.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=80" defer></script>
+<script src="assets/js/heritage-transcribe-contexte.js?v=1" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=81" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=7" defer></script>

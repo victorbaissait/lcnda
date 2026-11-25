@@ -138,7 +138,7 @@
         pill.title = T('Le panier : {n} (cliquer pour l’ouvrir, glisser une chose dessus pour l’y mettre)', {n: plural(count, T('chose'), T('choses'))});
         pill.setAttribute('aria-label', T('Le panier : {n}', {n: plural(count, T('chose'), T('choses'))}));
     }
-    const boot = () => { if (!enabled() || count != null) return; api('cx_count', {basket_id: curBasket()}).then(r => { count = Number(r.count) || 0; paintPill(); }).catch(() => {}); };
+    const boot = () => { if (!enabled() || count != null) return; api('cx_count', {basket_id: curBasket()}).then(r => { if (count != null) return; count = Number(r.count) || 0; paintPill(); }) /* une prise faite entre-temps a déjà le bon nombre */.catch(() => {}); };
     const idle = window.requestIdleCallback || (f => setTimeout(f, 1500));
     if (document.readyState === 'complete') idle(boot, {timeout: 4000}); else window.addEventListener('load', () => idle(boot, {timeout: 4000}), {once: true});
 

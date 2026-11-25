@@ -170,9 +170,40 @@ function tx_deep_job_dir(string $id): string
 }
 
 /** La consigne donnée au modèle : une transcription diplomatique, ligne par ligne, sans rien inventer. */
-function tx_deep_prompt(string $lang): string
+function tx_deep_prompt(string $lang, array $ctx = []): string
 {
     $l = TX_DEEP_LANGS[$lang] ?? 'français';
+    return tx_deep_base_prompt($l) . tx_deep_context_text($ctx);
+}
+
+/**
+ * 🧠 « Aider l'IA » (maquette docs/design/transcription-versions-contexte.html, 3) : ce que l'on sait déjà du document, ajouté à la consigne.
+ * ctx = {doc, about, hints: [« mariage connu : … »]} — du texte court, nettoyé ; jamais une consigne de plus : la règle finale dit de ne rien
+ * inventer, et un mot lu grâce à un indice reste marqué douteux [?]. Le navigateur montre ce texte tel quel (« Voir ce qui est envoyé »).
+ */
+function tx_deep_context_clean($ctx): array
+{
+    $ctx = is_array($ctx) ? $ctx : [];
+    $line = static fn($v, int $n) => mb_substr(trim(preg_replace('/\s+/u', ' ', str_replace("\0", '', is_scalar($v) ? (string) $v : '')) ?? ''), 0, $n);
+    $hints = [];
+    foreach (array_slice(is_array($ctx['hints'] ?? null) ? array_values($ctx['hints']) : [], 0, 20) as $h) { $h = $line($h, 240); if ($h !== '') { $hints[] = $h; } }
+    return ['doc' => $line($ctx['doc'] ?? '', 240), 'about' => $line($ctx['about'] ?? '', 600), 'hints' => $hints];
+}
+
+function tx_deep_context_text($ctx): string
+{
+    $c = tx_deep_context_clean($ctx);
+    if ($c['doc'] === '' && $c['about'] === '' && !$c['hints']) { return ''; }
+    $t = "\n\nCe que l'on sait déjà de ce document (pour t'aider à lire un mot peu lisible, jamais pour compléter) :";
+    if ($c['doc'] !== '') { $t .= "\nDocument : " . rtrim($c['doc'], '.') . '.'; }
+    if ($c['about'] !== '') { $t .= "\nDe quoi il parle : " . rtrim($c['about'], '.') . '.'; }
+    if ($c['hints']) { $t .= "\nIndices (à n'utiliser que pour lire un mot peu lisible) :\n- " . implode("\n- ", $c['hints']); }
+    return $t . "\nRègle : recopie seulement ce qui est écrit sur l'image. N'ajoute jamais un nom, une date, un lieu ou une phrase qui n'y est pas. "
+        . "Si un mot n'est pas sûr, marque-le [?] même s'il ressemble à un indice : un mot lu grâce à un indice reste douteux.";
+}
+
+function tx_deep_base_prompt(string $l): string
+{
     return "Tu es paléographe. Transcris fidèlement, en transcription diplomatique, le texte manuscrit de cette image d'un registre ancien (langue : $l).\n"
         . "- Recopie ligne par ligne : une ligne de l'image = une ligne de ta réponse, dans le même ordre.\n"
         . "- Garde l'orthographe, les abréviations, les majuscules et la ponctuation d'origine ; ne modernise pas, ne traduis pas.\n"
@@ -233,7 +264,7 @@ function tx_deep_read_start(array $data): array
     }
     [$id, $dir] = tx_deep_new_job([]);
     file_put_contents($dir . '/image.b64', base64_encode($bin)); unset($bin);
-    file_put_contents($dir . '/job.json', json_encode(['kind' => 'read', 'model' => $m['tag'], 'base' => tx_deep_base(), 'prompt' => tx_deep_prompt($lang), 'created' => time()], JSON_UNESCAPED_UNICODE));
+    file_put_contents($dir . '/job.json', json_encode(['kind' => 'read', 'model' => $m['tag'], 'base' => tx_deep_base(), 'prompt' => tx_deep_prompt($lang, is_array($data['context'] ?? null) ? $data['context'] : []), 'created' => time()], JSON_UNESCAPED_UNICODE));
     file_put_contents($dir . '/result.json', json_encode(['state' => 'running', 'updated' => time(), 'text' => '']));
     htr_spawn_php([APP_ROOT . '/scripts/tx_deep_job.php', $dir, APP_ROOT], $dir . '/run.log');
     return ['id' => $id, 'model' => $m['tag']];
@@ -336,11 +367,12 @@ function tx_deep_dispatch(string $action, bool $isWrite, array $payload): never
         if ($isWrite && $action === 'tx_deep_pull') { json_response(['ok' => true, 'result' => tx_deep_pull_start($payload)]); }
         if ($isWrite && $action === 'tx_deep_read') { json_response(['ok' => true, 'result' => tx_deep_read_start($payload)]); }
         if ($isWrite && $action === 'tx_find_start') { json_response(['ok' => true, 'result' => tx_find_start($payload)]); }
+        if ($isWrite && $action === 'tx_deep_prompt') { $lang = (string) ($payload['language'] ?? 'fra'); json_response(['ok' => true, 'result' => ['prompt' => tx_deep_prompt(isset(TX_DEEP_LANGS[$lang]) ? $lang : 'fra', is_array($payload['context'] ?? null) ? $payload['context'] : [])]]); } // 🧠 « Voir ce qui est envoyé »
         if ($isWrite && $action === 'tx_deep_cancel') { json_response(['ok' => true, 'result' => tx_deep_cancel(safe_text($payload['id'] ?? ''))]); }
     } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
     json_response(['error' => 'Action inconnue'], 404);
 }
-const TX_DEEP_ACTIONS = ['tx_deep_status', 'tx_deep_job', 'tx_deep_pull', 'tx_deep_read', 'tx_deep_cancel', 'tx_find_start'];
+const TX_DEEP_ACTIONS = ['tx_deep_status', 'tx_deep_job', 'tx_deep_pull', 'tx_deep_read', 'tx_deep_cancel', 'tx_find_start', 'tx_deep_prompt'];
 
 /* ═════════ 1 bis. 🔍 Repérer avec l'IA : le texte seul (jamais l'image) envoyé au même modèle local, réponse en JSON vérifiée ═════════ */
 
@@ -781,4 +813,59 @@ function act_item_add(PDO $pdo, array $d): array
     $undo = import_receipt_save($pdo, 'tree', $before, ['label' => $label, 'act' => ['occupations' => $occBefore, 'transcription_id' => safe_int($d['transcription_id'] ?? 0)]]);
     log_change($pdo, 'meta', 0, 'create', 'Élément d’un acte ajouté à une fiche : ' . $label);
     return $count + ['event_id' => $eventId, 'note_id' => $noteId, 'source_id' => $source['_id'], 'date' => $date, 'place' => $place, 'undo' => $undo];
+}
+
+/* ═════════ 🧠 « Aider l'IA » : ce que la base sait déjà des personnes reliées à l'acte (maquette docs/design/transcription-versions-contexte.html, 3) ═════════
+ * Des indices courts, jamais imposés : cochés au départ pour l'événement principal (mariage connu), les façons d'écrire les noms et les lieux ;
+ * décochés pour le reste (parents, métiers). Rien n'est écrit dans la base. */
+function act_ai_hints(PDO $pdo, array $d): array
+{
+    $ids = array_values(array_unique(array_filter(array_map('safe_int', array_slice(is_array($d['person_ids'] ?? null) ? $d['person_ids'] : [], 0, 30)), static fn($v) => $v > 0)));
+    $place = mb_substr(trim(safe_text(is_scalar($d['place'] ?? '') ? (string) ($d['place'] ?? '') : '')), 0, 160);
+    $hints = [];
+    $add = static function (string $key, string $icon, string $label, array $parts, bool $on) use (&$hints): void {
+        $parts = array_values(array_unique(array_filter(array_map(static fn($x) => trim((string) $x), $parts), static fn($x) => $x !== '')));
+        if ($parts) { $hints[] = ['key' => $key, 'icon' => $icon, 'label' => $label, 'text' => mb_substr(implode(' · ', $parts), 0, 230), 'on' => $on]; }
+    };
+    $nameOf = static function (int $pid) use ($pdo): string { static $c = []; if (!isset($c[$pid])) { $s = $pdo->prepare('SELECT first_name, last_name FROM persons WHERE id=?'); $s->execute([$pid]); $r = $s->fetch(PDO::FETCH_ASSOC); $c[$pid] = $r ? trim($r['first_name'] . ' ' . mb_strtoupper((string) $r['last_name'])) : ''; } return $c[$pid]; };
+    $placeName = static function ($id) use ($pdo): string { if (!$id) { return ''; } $s = $pdo->prepare('SELECT name FROM places WHERE id=?'); $s->execute([(int) $id]); return (string) $s->fetchColumn(); };
+    $places = $place !== '' ? [$place] : [];
+    if ($ids) {
+        $in = implode(',', $ids);
+        // 💍 les mariages connus (le couple, l'année, le lieu)
+        $mar = [];
+        foreach ($pdo->query("SELECT id, partner1_id, partner2_id FROM families WHERE partner1_id IN ($in) OR partner2_id IN ($in) LIMIT 12")->fetchAll(PDO::FETCH_ASSOC) as $f) {
+            if (!$f['partner1_id'] || !$f['partner2_id']) { continue; }
+            $e = $pdo->prepare("SELECT e.year, e.date_text, e.place_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=? AND t.gedcom_tag='MARR' ORDER BY e.id LIMIT 1"); $e->execute([(int) $f['id']]); $ev = $e->fetch(PDO::FETCH_ASSOC) ?: [];
+            $pl = $placeName($ev['place_id'] ?? 0); if ($pl !== '') { $places[] = $pl; }
+            $mar[] = implode(', ', array_filter([$nameOf((int) $f['partner1_id']) . ' × ' . $nameOf((int) $f['partner2_id']), (string) ($ev['year'] ?? '') ?: (string) ($ev['date_text'] ?? ''), $pl]));
+        }
+        $add('marriage', '💍', 'mariage connu', $mar, true);
+        // ✍ les façons d'écrire les noms : le nom de la fiche (MAZAUD, Mazaud) et ses variantes (Mazaut)
+        $forms = [];
+        foreach ($pdo->query("SELECT DISTINCT last_name FROM persons WHERE id IN ($in) AND trim(last_name)<>''")->fetchAll(PDO::FETCH_COLUMN) as $ln) {
+            $ln = trim((string) $ln); $f = [mb_strtoupper($ln), mb_convert_case(mb_strtolower($ln), MB_CASE_TITLE)];
+            $v = $pdo->prepare("SELECT DISTINCT trim(nv.last_name) FROM name_variants nv JOIN persons p ON p.id=nv.person_id WHERE p.id IN ($in) AND p.last_name=? AND trim(nv.last_name)<>'' LIMIT 8"); $v->execute([$ln]);
+            foreach ($v->fetchAll(PDO::FETCH_COLUMN) as $x) { $f[] = (string) $x; }
+            $forms[] = implode(', ', array_values(array_unique($f)));
+        }
+        $add('names', '✍', 'façons d’écrire', $forms, true);
+        // 📍 les lieux de leurs événements
+        foreach ($pdo->query("SELECT DISTINCT p.name FROM events e JOIN places p ON p.id=e.place_id WHERE (e.person_id IN ($in) OR e.family_id IN (SELECT id FROM families WHERE partner1_id IN ($in) OR partner2_id IN ($in))) AND trim(p.name)<>'' LIMIT 10")->fetchAll(PDO::FETCH_COLUMN) as $pl) { $places[] = (string) $pl; }
+        // 👪 les parents ; 🧑‍🌾 les métiers (décochés au départ)
+        $par = [];
+        foreach ($ids as $pid) {
+            $s = $pdo->prepare('SELECT f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? LIMIT 1'); $s->execute([$pid]); $f = $s->fetch(PDO::FETCH_ASSOC);
+            if ($f) { $pp = array_filter([$f['partner1_id'] ? $nameOf((int) $f['partner1_id']) : '', $f['partner2_id'] ? $nameOf((int) $f['partner2_id']) : '']); if ($pp) { $par[] = 'de ' . $nameOf($pid) . ' : ' . implode(' et ', $pp); } }
+        }
+        $add('parents', '👪', 'parents', $par, false);
+        $jobs = [];
+        foreach ($pdo->query("SELECT e.person_id, e.description FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IN ($in) AND t.gedcom_tag='OCCU' AND trim(e.description)<>'' LIMIT 10")->fetchAll(PDO::FETCH_ASSOC) as $j) { $jobs[] = $nameOf((int) $j['person_id']) . ', ' . mb_substr((string) $j['description'], 0, 60); }
+        $add('jobs', '🧑‍🌾', 'métiers', $jobs, false);
+    }
+    $add('places', '📍', 'lieux', array_slice(array_values(array_unique($places)), 0, 8), true);
+    // l'ordre de la maquette : mariage, noms, lieux, puis le reste
+    $rank = ['marriage' => 0, 'names' => 1, 'places' => 2, 'parents' => 3, 'jobs' => 4];
+    usort($hints, static fn($a, $b) => $rank[$a['key']] <=> $rank[$b['key']]);
+    return ['hints' => $hints];
 }

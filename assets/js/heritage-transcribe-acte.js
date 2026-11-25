@@ -106,7 +106,7 @@
         const info = () => `<div class="h-txa-grid">
             <span class="k">${esc(i18n('Ce qu’il faut'))}</span><span>${esc(i18n('Ollama (gratuit, open source) et un modèle vision ouvert, au choix :'))}</span>
             <span class="k">${esc(i18n('Modèle', {ctx: 'ia'}))}</span><span class="h-txa-models">${modelsHtml()}</span>
-            ${imgHtml()}
+            ${imgHtml()}${ctxHtml()}
             <span class="k">${esc(i18n('Mémoire'))}</span><span>${esc(st?.ram_gb ? i18n('cet ordinateur : {n} Go · chaque modèle se télécharge une seule fois', {n: st.ram_gb}) : i18n('8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois'))}</span>
             <span class="k">${esc(i18n('Vitesse'))}</span><span>${esc(i18n('≈ 20 à 60 s par page sur un ordinateur récent'))}</span>
             <span class="k">${esc(i18n('Confidentialité'))}</span><span>${esc(i18n('rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur'))}</span></div>`;
@@ -125,6 +125,9 @@
             return `<span class="k">${esc(i18n('Image'))}</span><span class="h-txa-models h-txa-imgmode" data-txa-imgmode>${opts.map(([v, ic, l, h]) => `<label class="h-txa-model"><input type="radio" name="txa_img" value="${v}" ${v === cur ? 'checked' : ''}> ${ic} <b>${esc(i18n(l))}</b>${v === 'auto' ? ` <span class="ui-badge is-green">${esc(i18n('conseillé'))}</span>` : ''} <small class="muted">${esc(i18n(h))}</small></label>`).join('')}
                 ${o.getImage && !o.all ? `<label class="checkbox-line"><input type="checkbox" data-txa-both ${both ? 'checked' : ''}> ${esc(i18n('Essayer les deux et comparer'))} <small class="muted">${esc(i18n('lit l’image d’origine et l’image améliorée, puis montre les deux textes côte à côte (deux fois plus long)'))}</small></label>` : ''}
                 <small class="muted">${esc(i18n('Une copie améliorée est envoyée au modèle : l’image de l’acte n’est jamais modifiée.'))}</small></span>`; };
+        /** 🧠 « Aider l'IA » (heritage-transcribe-contexte.js) : combien d'indices partent avec l'image, et le bouton pour les choisir */
+        const ctxHtml = () => { if (o.setupOnly || !o.context) return ''; const n = o.ctxCount?.() || 0;
+            return `<span class="k">🧠 ${esc(i18n('Aider l’IA'))}</span><span class="h-txa-ctx" data-txa-ctxline>${esc(n ? i18n(n > 1 ? '{n} indices cochés : l’IA s’en sert pour les mots douteux, sans rien inventer' : '{n} indice coché : l’IA s’en sert pour les mots douteux, sans rien inventer', {n}) : i18n('sans indices'))} ${o.onCtx ? `<button type="button" class="link-button" data-txa-ctx>${esc(i18n('Choisir…'))}</button>` : ''}</span>`; };
         const pick = () => { const r = box.querySelector('[name="txa_model"]:checked'); if (r) { model = r.value; try { localStorage.setItem(DEEP_KEY, model); } catch (_) {} } return model; };
         async function refresh() {
             box.innerHTML = UI().spinner ? UI().spinner(i18n('Recherche d’Ollama sur cet ordinateur…')) : '…';
@@ -193,6 +196,7 @@
         box.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;
             if (b.matches('[data-txa-recheck]')) return refresh();
+            if (b.matches('[data-txa-ctx]')) { dlg.close(); return o.onCtx?.(); }
             if (b.matches('[data-txa-pull]')) {
                 try { const r = await post('tx_deep_pull', {model: pick()}); job = {id: r.result.id, state: 'running'}; b.disabled = true; prog(true, 2, i18n('Téléchargement du modèle…')); poll(() => { toast(i18n('La lecture approfondie est installée.')); refresh(); }); } catch (err) { toast(err.message, 'error'); }
                 return;
@@ -204,9 +208,10 @@
                 for (const [i, m] of runs.entries()) {
                     let img; try { img = await o.getImage(m); } catch (err) { b.disabled = false; stepLabel = ''; return toast(err.message, 'error'); }
                     stepLabel = runs.length > 1 ? i18n('Image {i} sur {n}', {i: i + 1, n: runs.length}) : '';
-                    const j = await new Promise(res => { post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img}).then(r => { job = {id: r.result.id, state: 'running'}; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(res, () => res(null)); }, err => { toast(err.message, 'error'); res(null); }); });
+                    let ctxv = null; try { ctxv = o.context ? await o.context() : null; } catch (_) { ctxv = null; } // 🧠 ce que l'on sait déjà de l'acte (rien si « Lire sans »)
+                    const j = await new Promise(res => { post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img, ...(ctxv ? {context: ctxv} : {})}).then(r => { job = {id: r.result.id, state: 'running'}; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(res, () => res(null)); }, err => { toast(err.message, 'error'); res(null); }); });
                     if (!j || !box.isConnected) { b.disabled = false; stepLabel = ''; return; }
-                    got.push({mode: m, text: String(j.text || '')}); o.onReading?.(j.text, pick());
+                    got.push({mode: m, text: String(j.text || '')}); o.onReading?.(j.text, pick(), {img: m, hints: ctxv?.hints?.length || 0});
                 }
                 b.disabled = false; stepLabel = ''; const last = got[got.length - 1];
                 compare(last.text, last.mode, got.length > 1 ? got[0] : null);

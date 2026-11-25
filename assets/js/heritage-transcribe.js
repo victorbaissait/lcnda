@@ -205,7 +205,7 @@
         const opt = ([k, ic, label, what]) => `<button type="button" class="h-tx-readopt" data-tx-cmd="${k}" role="menuitem"><span class="h-tx-readt">${ic} <b>${esc(i18n(label))}</b><span class="h-tx-readst" data-tx-readst="${k}"></span></span><small>${esc(i18n(what))}</small></button>`;
         return `<div class="h-tx-readpanel" data-tx-readpanel hidden role="menu" aria-label="${esc(i18n('Lire', {ctx: 'atelier'}))}">${READS.map(opt).join('')}
             <div class="h-tx-readscope" data-tx-readscope hidden role="radiogroup" aria-label="${esc(i18n('Plusieurs pages'))}"><label><input type="radio" name="txreadscope" value="page" checked> ${esc(i18n('Sur la page affichée'))}</label><label><input type="radio" name="txreadscope" value="all"> ${esc(i18n('Sur toutes les pages'))}</label><label><input type="radio" name="txreadscope" value="empty"> ${esc(i18n('Seulement les pages pas encore lues'))}</label><small class="h-tx-pread" data-tx-pread></small></div>
-            <div class="h-tx-readmore"><button type="button" class="h-tx-readopt h-tx-readline" data-tx-cmd="lines" role="menuitem" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${esc(i18n('Relier les lignes à l’image'))}</button>
+            <div class="h-tx-readmore"><button type="button" class="h-tx-readopt h-tx-readline" data-tx-cmd="aideia" role="menuitem" title="${esc(i18n('Ce que l’on sait déjà de l’acte (titre, de quoi il parle, personnes reliées, indices de la base) : l’IA s’en sert pour lire les mots douteux, sans rien inventer'))}">🧠 ${esc(i18n('Aider l’IA à lire…'))}</button><button type="button" class="h-tx-readopt h-tx-readline" data-tx-cmd="lines" role="menuitem" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${esc(i18n('Relier les lignes à l’image'))}</button>
             <label class="h-tx-readlang">🌐 ${esc(i18n('Langue du texte'))} <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
             <label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></div></div>`;
     }
@@ -238,29 +238,29 @@
                 <input data-tx="date_text" placeholder="${esc(i18n('Date'))}" value="${esc(t.date_text)}" title="${esc(i18n('Date de l’acte'))}"><input data-tx="place" placeholder="${esc(i18n('Lieu'))}" value="${esc(t.place)}" title="${esc(i18n('Paroisse, commune'))}"><input data-tx="source" placeholder="${esc(i18n('Source (AD, cote, vue)'))}" value="${esc(t.source)}" title="${esc(i18n('Archives, cote, numéro de vue'))}">
                 <select data-tx-state title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${[['todo', i18n('À faire')], ['doing', i18n('En cours')], ['checked', i18n('Relue')], ['done', i18n('Finie')]].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <span class="spacer"></span><span class="muted h-tx-status" data-tx-status data-ui-status></span>
-                <button type="button" class="button small secondary" data-tx-cmd="export" title="${esc(i18n('Le texte (.txt), l’impression ou un PDF (image + texte)'))}">⤓ ${i18n('Exporter ▾')}</button><button type="button" class="button small" data-tx-cmd="save" title="${esc(i18n('Enregistrer'))}" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 ${i18n('Enregistrer')}</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="${esc(i18n('Fermer'))}">×</button></header>
+                <button type="button" class="button small secondary h-tx-iabtn" data-tx-cmd="aideia" title="${esc(i18n('Aider l’IA à lire cet acte : ce qui est coché part avec l’image vers l’IA (lecture approfondie)'))}">🧠 ${esc(i18n('Aider l’IA'))}<span data-tx-iacount></span></button><button type="button" class="button small secondary" data-tx-cmd="export" title="${esc(i18n('Le texte (.txt), l’impression ou un PDF (image + texte)'))}">⤓ ${i18n('Exporter ▾')}</button><button type="button" class="button small" data-tx-cmd="save" title="${esc(i18n('Enregistrer'))}" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 ${i18n('Enregistrer')}</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="${esc(i18n('Fermer'))}">×</button></header>
             <div class="ui-tabs h-tx-ptabs" role="tablist" aria-label="${esc(i18n('Image, texte ou personnes'))}" data-tx-ptabs>${[['image', '🖼️', 'Image'], ['text', '📝', 'Texte'], ['people', '👥', 'Personnes']].map(([k, ic, l]) => `<button type="button" role="tab" data-tx-ptab="${k}" class="${k === 'text' ? 'is-active' : ''}" aria-selected="${k === 'text'}">${ic} ${esc(i18n(l))}${k === 'people' ? ' <span class="h-tx-pcount" data-tx-pcount></span>' : ''}</button>`).join('')}</div>
             <div class="h-tx-main">
                 <nav class="h-tx-rail" data-tx-rail aria-label="${esc(i18n('Outils'))}"><button type="button" data-tx-tool="pan" title="${esc(i18n('Déplacer l’image, ou barre d’espace'))}" aria-label="${esc(i18n('Déplacer l’image'))}" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="${esc(i18n('Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)'))}" aria-label="${esc(i18n('Dessiner une zone'))}" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="${esc(i18n('Loupe qui suit la souris (la molette change le grossissement)'))}" aria-label="${esc(i18n('Loupe'))}" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner l’image de 90°'))}" aria-label="${esc(i18n('Tourner de 90°'))}">⟳</button><button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}" aria-label="${esc(i18n('Image de l’acte'))}">🖼️</button></nav>
                 <section class="h-tx-left">
-                    <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}${zopHtml()}</div><div class="h-tx-pages" data-tx-pages role="tablist" aria-label="${esc(i18n('Pages du document'))}" hidden></div>
-                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>${i18n('Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).')}</p></div>
+                    <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}${zopHtml()}${ext.txCtx ? ext.txCtx.wordColorHtml() : ''}</div><div class="h-tx-pages" data-tx-pages role="tablist" aria-label="${esc(i18n('Pages du document'))}" hidden></div>
+                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-words></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>${i18n('Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).')}</p></div>
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
                     <div class="h-tx-flow" data-tx-flow><div class="h-tx-steps" role="tablist" aria-label="${esc(i18n('Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie'))}" data-tx-steps>${STEPS.map(([k, label, help], i) => `<button type="button" role="tab" class="h-tx-step" data-tx-step="${k}" aria-selected="false" aria-controls="h-tx-pane-${k}" title="${esc(i18n(help))}"><i aria-hidden="true">${i + 1}</i><span><b>${esc(k === 'read' ? i18n('Lire', {ctx: 'atelier'}) : i18n(label))}</b><small data-tx-steprest="${k}"></small></span></button>`).join('')}</div>
                     <div class="h-tx-tools h-tx-stepbody" data-tx-stepbody><span class="h-tx-readw"><button type="button" class="h-tx-readbtn" data-tx-cmd="readmenu" aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA'))}">✨ ${esc(i18n('Lire', {ctx: 'atelier'}))} ▾</button>${readPanelHtml()}</span><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
                         <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-read" data-tx-pane="read"><button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">🧩 ${i18n('Modèle')}</button><small class="muted h-tx-panehint">${esc(i18n('Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne.'))}</small></span>
-                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-fix" data-tx-pane="fix"><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📖 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="review" data-shortcut="R" title="${esc(i18n('Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne'))}">👁 ${esc(i18n('Relire ligne à ligne'))}</button><small class="muted h-tx-panehint" data-tx-fixinfo></small></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-fix" data-tx-pane="fix"><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📖 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="review" data-shortcut="R" title="${esc(i18n('Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne'))}">👁 ${esc(i18n('Relire ligne à ligne'))}</button><button type="button" data-tx-cmd="aideia" title="${esc(i18n('Ce que l’on sait déjà de l’acte (titre, de quoi il parle, personnes reliées, indices de la base) : l’IA s’en sert pour lire les mots douteux, sans rien inventer'))}">🧠 ${esc(i18n('Aider l’IA'))}</button><small class="muted h-tx-panehint" data-tx-fixinfo></small></span>
                         <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-find" data-tx-pane="find"><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><small class="muted h-tx-panehint" data-tx-findinfo></small></span>
                         <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-add" data-tx-pane="add"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button><small class="muted h-tx-panehint">${esc(i18n("L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches"))}</small></span>
                         <span class="spacer"></span><button type="button" class="h-tx-stepnext" data-tx-stepnext title="${esc(i18n('Étape suivante'))}">${esc(i18n('Étape suivante'))} ›</button></div><div class="h-tx-prog" data-tx-prog aria-label="${esc(i18n('Avancement'))}"></div></div>
-                    <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
+                    <div class="h-tx-why" data-tx-whyrow hidden></div><div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-find" data-tx-find hidden role="search" aria-label="${esc(i18n('Chercher dans le texte'))}"><input type="search" data-tx-fq placeholder="${esc(i18n('Chercher…'))}" aria-label="${esc(i18n('Chercher'))}" spellcheck="false" autocomplete="off" data-ui-off><span class="h-tx-fcount" data-tx-fcount aria-live="polite"></span><button type="button" data-tx-f="prev" title="${esc(i18n('Précédent'))}" aria-label="${esc(i18n('Précédent'))}" data-shortcut="⇧↩">↑</button><button type="button" data-tx-f="next" title="${esc(i18n('Suivant'))}" aria-label="${esc(i18n('Suivant'))}" data-shortcut="↩">↓</button><button type="button" data-tx-f="case" aria-pressed="false" title="${esc(i18n('Majuscules et minuscules comptent'))}">Aa</button><button type="button" data-tx-f="rep" aria-pressed="false" title="${esc(i18n('Chercher et remplacer'))}" data-shortcut="⌥⌘F">⇄</button><button type="button" class="h-tx-fclose" data-tx-f="close" title="${esc(i18n('Fermer'))}" aria-label="${esc(i18n('Fermer'))}">×</button>
                         <span class="h-tx-frep" data-tx-frep hidden><input type="text" data-tx-fr placeholder="${esc(i18n('Remplacer par…'))}" aria-label="${esc(i18n('Remplacer par…'))}" spellcheck="false" autocomplete="off" data-ui-off><button type="button" data-tx-f="one">${esc(i18n('Remplacer'))}</button><button type="button" data-tx-f="all">${esc(i18n('Tout remplacer'))}</button></span></div>
                     <div class="h-tx-editor${TV.lineNos() ? ' has-ln' : ''}" data-tx-editor><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea><div class="h-tx-abtip" data-tx-abtip hidden role="tooltip"></div></div>
                     <div class="h-tx-fixbar" data-tx-fixbar hidden></div>
-                    <p class="h-tx-docnote" data-tx-docnote hidden>📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
+                    <div class="h-tx-vers" data-tx-vers hidden></div><div class="h-tx-vprev" data-tx-vprev hidden></div><p class="h-tx-docnote" data-tx-docnote hidden>📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
                     <div class="h-tx-found" data-tx-found></div>
                     <div class="h-tx-addbar" data-tx-addbar><span class="h-tx-addinfo" data-tx-addinfo></span><span class="h-tx-extra"><button type="button" class="button small secondary" data-tx-cmd="copy">📋 ${i18n("Copier le texte")}</button><button type="button" class="button small" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button></span></div>
                 </section>
@@ -467,7 +467,7 @@
             const pts = [[0, 0], [imgW, 0], [0, imgH], [imgW, imgH]].map(([x, y]) => A0.transformPoint(new DOMPoint(x, y))), xs = pts.map(q => q.x), ys = pts.map(q => q.y);
             const minX = Math.min(...xs), minY = Math.min(...ys);
             M = new DOMMatrix().translate(-minX, -minY).multiply(A0); Mi = M.inverse(); WH = [Math.max(...xs) - minX, Math.max(...ys) - minY];
-            const tr = mstr(M); img.setAttribute('transform', tr); $('[data-tx-zones]').setAttribute('transform', tr); $('[data-tx-draw]').setAttribute('transform', tr);
+            const tr = mstr(M); img.setAttribute('transform', tr); $('[data-tx-zones]').setAttribute('transform', tr); $('[data-tx-words]').setAttribute('transform', tr); $('[data-tx-draw]').setAttribute('transform', tr);
             if (before) { const [ax, ay] = rotPt(cx, cy); panX += (before[0] - ax) * zoom; panY += (before[1] - ay) * zoom; } // le centre de l'image ne bouge pas à l'écran
         }
         const rotWH = () => WH;
@@ -480,7 +480,7 @@
             $('[data-tx-zoomtxt]').textContent = now; b.dataset.fit = on ? fitMode : '';
             b.title = i18n('Zoom : {now}. Clic : {next} (puis {then}, {last})', {now: on ? FIT_HELP[fitMode] : now, next: FIT_HELP[next], then: FIT_HELP[FIT_NEXT[next]], last: FIT_HELP[FIT_NEXT[FIT_NEXT[next]]]});
         }
-        const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); paintOverlay(); paintZoomLabel(); txBar?.sync(); };
+        const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); paintOverlay(); paintZoomLabel(); txBar?.sync(); paintWords(); };
         /** ⤢ : trois façons d'ajuster — toute l'image, la largeur (on lit l'acte de haut en bas), la taille réelle (100 %) */
         function applyFit(mode = 'page', {keepY = false} = {}) {
             if (!imgW) return; const r = stage.getBoundingClientRect(); if (!r.width || !r.height) return;
@@ -552,7 +552,19 @@
             g.innerHTML = t.data.zones.map((z, i) => !onHere(z) ? '' : `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id || z.kind ? ` class="${selZone === z.id ? 'is-sel' : ''}${z.kind ? ` is-k-${esc(z.kind)}` : ''}"` : ''}${z.kind === 'skip' ? ` stroke-dasharray="${6 / zoom} ${4 / zoom}"` : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${z.kind === 'skip' ? '#6b7280' : colorOf(z, i)}" fill-opacity="${(selZone === z.id ? .38 : .2) * zop()}" stroke="${colorOf(z, i)}" stroke-opacity="${selZone === z.id ? 1 : Math.max(.08, zop())}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${z.kind ? `${esc(XK(z.kind))} — ` : ''}${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || i18n('Zone non reliée'))}${selZone === z.id ? ` ${i18n('— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)')}` : ''}</title></rect>`).join('');
             paintHandles();
         }
-        function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); paintTxBar(); }
+        function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); paintTxBar(); paintWords(); }
+        /* 🔦 les mots choisis dans le texte : un cadre serré dans la bande de leur ligne (≈ estimé, ou exact si la lecture a donné la place des mots) */
+        function paintWords() {
+            const g = $('[data-tx-words]'); if (!g) return; const C = ext.txCtx, s = area.selectionStart, e = area.selectionEnd;
+            const boxes = C && imgW && e > s && area.value.slice(s, e).trim() ? C.wordBoxes(area.value, t.data.zones.filter(onHere), s, e) : [];
+            dlg.dataset.txWords = String(boxes.length);
+            if (!boxes.length) { if (g.firstChild) g.innerHTML = ''; return; }
+            const col = C.wordColor(), sw = 2.5 / zoom, fs = 12 / zoom, cut = x => (x.length > 32 ? x.slice(0, 31) + '…' : x);
+            g.innerHTML = boxes.map((b, i) => `<rect class="h-tx-wbox" data-tx-wbox="${b.exact ? 'exact' : 'est'}" x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="${3 / zoom}" fill="${col}" fill-opacity=".18" stroke="${col}" stroke-width="${sw}"><title>${esc(b.exact ? i18n('Place donnée par la lecture') : i18n('≈ place estimée d’après la position des mots dans la ligne'))}</title></rect>${i ? '' : `<text class="h-tx-wlab" x="${b.x}" y="${b.y - 5 / zoom}" font-size="${fs}" fill="${col}">${b.exact ? '' : '≈ '}« ${esc(cut(boxes.map(q => q.label).join(' ')))} »</text>`}`).join('');
+        }
+        ['select', 'mouseup', 'keyup', 'input'].forEach(ev => area.addEventListener(ev, () => requestAnimationFrame(paintWords)));
+        dlg.addEventListener('click', e => { const b = e.target.closest('[data-tx-wcol]'); if (!b || !ext.txCtx) return; ext.txCtx.setWordColor(b.dataset.txWcol);
+            dlg.querySelectorAll('[data-tx-wcol]').forEach(x => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-checked', String(on)); }); paintWords(); });
         dlg.addEventListener('input', e => { if (!e.target.matches?.('[data-tx-zop]')) return; try { localStorage.setItem(ZOP_KEY, String(Math.round(Number(e.target.value) || 0))); } catch (_) {} paintZoneRects(); });
         /* ─── la zone choisie : 8 poignées (coins et milieux), toujours de la même taille à l'écran ─── */
         // les poignées sont nommées dans l'image (nw = coin haut-gauche de l'image) ; leur curseur suit leur direction à l'écran
@@ -901,7 +913,7 @@
         function putText(x) { flushCommit(); area.value = x.body; before = x.body; t.body = x.body; t.data.zones = (x.zones || []).map(z => ({...z})); t.data.people = (x.people || []).map(p => ({...p})); t.data.reviewed = [...(x.reviewed || [])];
             if (!t.data.zones.some(z => z.id === selZone)) selZone = null; txFix = []; touch(); drawZones(); paintPeople(); if (!findBar.hidden) findRun(); flushCommit(); }
         /** juste avant un gros changement (tout remplacer, propositions sûres, lecture mise dans le texte) : une version automatique, si l'acte est enregistré */
-        function versionBefore(label) { if (!t.id || !area.value.trim()) return; post('save_act_transcription_version', {act_id: t.id, label, body: area.value, data: {zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []}, auto: 1}).catch(() => {}); }
+        function versionBefore(label) { if (!t.id || !area.value.trim()) return; post('save_act_transcription_version', {act_id: t.id, label, body: area.value, data: {zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []}, auto: 1}).then(() => VS?.soon(), () => {}); }
         async function openVersions() {
             if (!UI.openVersions) return toast(i18n('La fenêtre des versions n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }
@@ -921,24 +933,79 @@
                     await post('save_act_transcription_version', {act_id: t.id, label: String(name || '').trim().slice(0, 120), body: area.value, data: dataOf(), auto: 0}); }});
         }
         /* ─── ⚖️ chaque lecture gardée (✍ main, 🔬 IA, 🔎 OCR) pour les comparer et prendre le meilleur (heritage-transcribe-compare.js) ─── */
-        async function keepReading(text, source, model = '') {
+        /** meta : ce que la lecture retient avec elle (🕘 la bande « Versions ») — img : auto | mine | orig, part : page | zone, hints : les indices de « 🧠 Aider l'IA » */
+        async function keepReading(text, source, model = '', meta = {}) {
             const C = ext.txCompare; if (!C || !C.keepOn() || !String(text || '').trim()) return;
             const page = PAGES.length > 1 ? pageName(PAGES[pageIx], pageIx) : '';
-            const v = {label: C.labelOf(source, model, page), body: String(text).trim(), data: {zones: [], people: []}, auto: 0, source: `${source}:${String(model || '').slice(0, 80)}`};
+            const v = {label: C.labelOf(source, model, page), body: String(text).trim(), data: {zones: [], people: [], meta: {model: String(model || '').slice(0, 80), ...meta}}, auto: 0, source: `${source}:${String(model || '').slice(0, 80)}`};
             // un acte pas encore enregistré : la lecture attend le premier enregistrement (l'enregistrer ici, pendant la lecture, écrasait le texte lu)
             if (!t.id) { readsWaiting.push(v); return; }
-            post('save_act_transcription_version', {act_id: t.id, ...v}).catch(() => {});
+            post('save_act_transcription_version', {act_id: t.id, ...v}).then(() => VS?.soon(), () => {});
         }
         const readsWaiting = [];
-        const flushReads = () => { if (!t.id) return; readsWaiting.splice(0).forEach(v => post('save_act_transcription_version', {act_id: t.id, ...v}).catch(() => {})); };
-        async function openCompare() {
+        const flushReads = () => { if (!t.id) return; readsWaiting.splice(0).forEach(v => post('save_act_transcription_version', {act_id: t.id, ...v}).then(() => VS?.soon(), () => {})); VS?.soon(); };
+        /** l'image envoyée à la lecture rapide et à l'OCR : améliorée (« Mieux voir ») ou d'origine */
+        const readImg = () => (useEnh() && viewChanged() ? 'mine' : 'orig');
+        /* ─── 🕘 la bande « Versions » au-dessus de « 📄 Ce texte est celui du document » (heritage-transcribe-contexte.js) ─── */
+        const VS = ext.txCtx ? ext.txCtx.versionsStrip($('[data-tx-vers]'), $('[data-tx-vprev]'), {
+            list: async () => (t.id ? ((await api('act_transcription_versions', {act_id: t.id})).items || []) : []),
+            body: id => api('act_transcription_version', {id}),
+            use: async v => { // ✓ Utiliser cette version : elle devient « Ma version » ; l'ancienne est gardée (🕘), ↶ Annuler
+                let x; try { x = await api('act_transcription_version', {id: v.id}); } catch (e) { return toast(e.message, 'error'); }
+                versionBefore('Avant « Utiliser cette version »');
+                const was = snapText(), to = {body: x.body, zones: x.data?.zones || [], people: x.data?.people || [], reviewed: x.data?.reviewed || []}; putText(to); status(i18n('Version mise dans le texte (à relire)'));
+                A().undoToast?.(i18n('« {x} » est maintenant ta version (l’ancienne est gardée dans 🕘 Versions)', {x: ext.txCtx.chipOf(v)[1]}), {undo: () => putText(was), redo: () => putText(to), icon: '🕘'}); },
+            compare: v => openCompare([v.id]),
+            duplicate: async v => { // ⧉ garder une copie de la version affichée (ou de ma version)
+                if (!t.id) { await save(); if (!t.id) return; }
+                let x = {body: area.value, data: {zones: t.data.zones, people: t.data.people}}; if (v) { try { x = await api('act_transcription_version', {id: v.id}); } catch (e) { return toast(e.message, 'error'); } }
+                const src = String(v?.source || '').split(':')[0], label = !v ? 'Copie de ma version' : ['deep', 'htr', 'ocr'].includes(src) ? 'Copie de l’IA' : 'Copie';
+                let id = 0; try { id = Number(((await post('save_act_transcription_version', {act_id: t.id, label, body: x.body, data: {zones: x.data?.zones || [], people: x.data?.people || [], meta: {from: v ? ext.txCtx.chipOf(v)[1] : i18n('Ma version')}}, auto: 0, source: 'copy'})).result || {}).id || 0); } catch (e) { return toast(e.message, 'error'); }
+                await VS.refresh();
+                A().undoToast?.(i18n('Copie gardée : « {x} »', {x: i18n(label)}), {undo: async () => { if (id) await post('delete_act_transcription_version', {id}); VS.refresh(); }, icon: '⧉'}); },
+            rename: async v => { const name = await A().askText({title: `✎ ${i18n('Renommer')}`, message: i18n('Le nouveau nom de cette version :'), value: i18n(v.label || ''), okLabel: i18n('Renommer')}); if (name === null || !String(name).trim()) return;
+                const old = v.label; try { await post('rename_act_transcription_version', {id: v.id, label: String(name).trim().slice(0, 120)}); } catch (e) { return toast(e.message, 'error'); } await VS.refresh();
+                A().undoToast?.(i18n('Version renommée'), {undo: async () => { await post('rename_act_transcription_version', {id: v.id, label: old}); VS.refresh(); }, icon: '✎'}); },
+            openAll: () => openVersions(),
+            dim: on => $('[data-tx-editor]')?.classList.toggle('is-dim', on)}) : null;
+        async function openCompare(pick = null) {
             if (!ext.txCompare) return toast(i18n('La comparaison des lectures n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }
-            ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post,
+            ext.txCompare.open({actId: t.id, title: $('[data-tx="title"]').value || i18n('Acte'), current: () => area.value, api, post, pick: Array.isArray(pick) ? pick : null, // ⚖️ « Comparer avec ma version » : ces lectures cochées
                 images: PAGES.length > 1 ? PAGES.map((p, i) => ({src: `media/${encodeURIComponent(p.filename)}`, label: pageName(p, i)})) : t.filename ? [{src: origSrc()}] : [], // 🖼 l'image de l'acte à côté des lectures
                 apply: (txt, label) => { versionBefore(label); const was = snapText(), to = {...was, body: txt + (txt.endsWith('\n') ? '' : '\n')}; putText(to); status(i18n('Texte fusionné (à relire)'));
                     A().undoToast?.(i18n('Lectures fusionnées dans le texte.'), {undo: () => putText(was), redo: () => putText(to)}); }});
         }
+        /* ─── 🧠 « Aider l'IA » (heritage-transcribe-contexte.js) : le titre, de quoi parle l'acte, les personnes reliées, les indices de la base ;
+         * cochés au départ : l'événement, les noms, les lieux (et ❓ pourquoi l'acte). Envoyés avec l'image à la lecture approfondie. ─── */
+        let iaOn = true, iaCache = {key: null, list: []};
+        const iaPeople = () => [...new Set(t.data.people.map(p => Number(p.person_id) || 0).filter(Boolean))].sort((a, b) => a - b);
+        async function iaList() {
+            const key = JSON.stringify([iaPeople(), $('[data-tx="place"]').value]); if (iaCache.key === key) return iaCache.list;
+            let list = []; try { const r = await post('act_ai_hints', {person_ids: iaPeople(), place: $('[data-tx="place"]').value}); list = (r.result || r).hints || []; } catch (_) { list = []; }
+            iaCache = {key, list}; return list;
+        }
+        const IA = {get key() { return String(t.id || `m${t.media_id}`); }, title: () => $('[data-tx="title"]').value, setTitle: v => { const el = $('[data-tx="title"]'); el.value = v; t.title = v; touch(); },
+            about: () => t.data.about || '', setAbout: v => { t.data.about = String(v).slice(0, 600); touch(); }, people: () => t.data.people, hints: iaList,
+            reason: () => (kindNow() === 'notoriete' ? t.data.reason || null : null), lang: () => $('[data-tx-lang]').value, onChange: () => paintIaCount(),
+            doc: () => { const kl = KINDS.find(k => k[0] === kindNow() && k[0] !== 'apreciser')?.[1] || '', where = [$('[data-tx="date_text"]').value, $('[data-tx="place"]').value].filter(x => x.trim()).join(', '), ti = $('[data-tx="title"]').value.trim();
+                return [ti, kl && kl !== ti ? `${kl}${where ? ` (${where})` : ''}` : where].filter(Boolean).join(' — '); },
+            onRead: withHints => { iaOn = withHints; paintIaCount(); openDeep(); }};
+        /** ce qui part vers l'IA avec l'image (null : sans « Aider l'IA ») */
+        const iaContext = async () => (iaOn && ext.txCtx ? ext.txCtx.contextOf(IA, await iaList()) : null);
+        const iaCount = () => (iaOn && ext.txCtx ? ext.txCtx.checkedCount(IA, iaCache.list) : 0);
+        async function paintIaCount() { const el = $('[data-tx-iacount]'); if (!el || !ext.txCtx) return; await iaList(); const n = iaCount(); el.textContent = n ? ` · ${n}` : ''; }
+        function openIa() { if (!ext.txCtx) return toast(i18n('« Aider l’IA » n’est pas chargé.'), 'error'); flushCommit(); return ext.txCtx.openAide(IA); }
+        /* ─── ❓ acte de notoriété : « Pourquoi cet acte a été fait » (data.reason), au-dessus du texte et dans le 🧩 Gabarit ─── */
+        function paintWhy() { const row = $('[data-tx-whyrow]'), on = kindNow() === 'notoriete' && !!ext.txCtx; if (!row) return; row.hidden = !on; row.innerHTML = on ? ext.txCtx.whyHtml(t.data.reason) : ''; }
+        const whySync = () => { const r = t.data.reason; dlg.querySelectorAll('[data-tx-why-k]').forEach(x => { x.value = r?.k || ''; }); dlg.querySelectorAll('[data-tx-why-t]').forEach(x => { if (x !== document.activeElement) x.value = r?.t || ''; }); dlg.querySelectorAll('.h-why-k').forEach(x => x.classList.toggle('is-auto', !!r?.auto)); dlg.querySelectorAll('.h-why-auto').forEach(x => { if (!r?.auto) x.remove(); }); };
+        dlg.addEventListener('change', e => { if (!e.target.matches?.('[data-tx-why-k]')) return; snap(); const k = e.target.value, txt = t.data.reason?.t || '';
+            if (k) t.data.reason = {k, t: txt}; else delete t.data.reason; touch(); whySync(); paintIaCount(); });
+        dlg.addEventListener('input', e => { if (!e.target.matches?.('[data-tx-why-t]')) return; const v = e.target.value.slice(0, 300);
+            t.data.reason = {k: t.data.reason?.k || 'autre', t: v}; touch(); whySync(); });
+        /** « 🧭 Repérer » : la raison lue dans le texte, en vert, à vérifier (jamais à la place d'un choix fait à la main) */
+        function guessWhy(src) { if (kindNow() !== 'notoriete' || !ext.txCtx || (t.data.reason && !t.data.reason.auto)) return; const g = ext.txCtx.reasonGuess(src); if (!g || t.data.reason?.k === g.k) return;
+            t.data.reason = {k: g.k, t: t.data.reason?.t || '', auto: true}; touch(); paintWhy(); }
         /* ─── ⌨️ les touches de l'Atelier (⌘/ ou ?) ─── */
         function showKeys() {
             const K = A().keys, kk = s => (K?.html ? K.html(s) : `<kbd>${esc(s)}</kbd>`);
@@ -1028,7 +1095,7 @@
             // 📑 un texte par page : « Ce que l'app a trouvé » lit aussi les actes des autres pages (une carte par personne sur tout le document)
             perCombo = makeCombo(); lastRichAll = null; 
             if (perCombo) { try { lastRichAll = window.LCNDA_TXACTE?.richFind?.(blankMarks(perCombo.text), {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; } catch (_) { lastRichAll = null; } }
-            fillGabarit(src);
+            fillGabarit(src); guessWhy(src);
             paintMirror(); paintPeople(); status(i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}));
         }
         /* ─── 🧩 le gabarit (heritage-transcribe-gabarit.js) : les cases de la sorte d'acte, remplies par Repérer, jamais une case ✓ ou écrite écrasée ─── */
@@ -1041,7 +1108,7 @@
             if (JSON.stringify(next) !== JSON.stringify(t.data.gabarit || null)) { t.data.gabarit = next; touch(); }
         }
         const gabWhere = s0 => { const r = pageRef(s0); return r ? i18n('page {n}, l. {line}', {n: r.n, line: r.line}) : i18n('l. {n}', {n: area.value.slice(0, s0).split('\n').length}); };
-        function paintGabarit() { const box = $('[data-gab-box]'); if (box) GB()?.render(box, {gab: t.data.gabarit, kind: kindNow(), guess: lastExtract?.kind, where: gabWhere}); }
+        function paintGabarit() { const box = $('[data-gab-box]'); if (box) GB()?.render(box, {gab: t.data.gabarit, kind: kindNow(), guess: lastExtract?.kind, where: gabWhere, top: kindNow() === 'notoriete' && ext.txCtx ? ext.txCtx.whyHtml(t.data.reason) : ''}); }
         function gabCount() { const g = GB(), el = $('[data-gab-count]'); if (!g || !el || !g.has(kindNow())) return; const F = g.fieldsOf(kindNow(), t.data.gabarit), f = t.data.gabarit?.fields || {};
             el.textContent = i18n('Cases remplies : {a}/{b} · vérifiées : {c}', {a: F.filter(([k]) => f[k]?.v).length, b: F.length, c: F.filter(([k]) => f[k]?.ok).length}); }
         function gabField(k) { const g = t.data.gabarit = (t.data.gabarit && t.data.gabarit.kind === kindNow()) ? t.data.gabarit : {kind: kindNow(), fields: {}}; g.fields = g.fields || {}; return g; }
@@ -1175,9 +1242,9 @@
                 const T = await A().loadOcrEngine(); status(i18n('Lecture de l’image…'));
                 const r = await T.recognize(await filteredCanvas(), lang);
                 const dd = r?.data || {}, lines = (dd.lines?.length ? dd.lines : (dd.blocks || []).flatMap(bl => (bl.paragraphs || []).flatMap(pg => pg.lines || []))).filter(l => (l.text || '').trim() && l.bbox && !skipped({x: l.bbox.x0, y: l.bbox.y0, w: l.bbox.x1 - l.bbox.x0, h: l.bbox.y1 - l.bbox.y0}));
-                if (!lines.length) { const plain = String(dd.text || '').trim(); if (plain) keepReading(plain, 'ocr', lang); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
+                if (!lines.length) { const plain = String(dd.text || '').trim(); if (plain) keepReading(plain, 'ocr', lang, {img: readImg(), part: 'page'}); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
                     appendRead(plain); before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); return; }
-                keepReading(lines.map(l => l.text.replace(/\s+$/, '')).join('\n'), 'ocr', lang); // ⚖️
+                keepReading(lines.map(l => l.text.replace(/\s+$/, '')).join('\n'), 'ocr', lang, {img: readImg(), part: 'page'}); // ⚖️
                 let text = area.value; if (text.trim()) text += '\n\n'; const start = text.length;
                 const made = [];
                 lines.forEach(l => { const s = text.length, line = l.text.replace(/\s+$/, ''); text += line + '\n'; const b = l.bbox; made.push({id: zid(), x: b.x0, y: b.y0, w: b.x1 - b.x0, h: b.y1 - b.y0, s, e: s + line.length, note: '', c: '', src: 'ocr'}); });
@@ -1260,7 +1327,7 @@
                     if (then) { htrBusy(false); return then(true); }
                     try { localStorage.setItem(HTR_MODEL_KEY, j.model_file || pick); } catch (_) {}
                     if (!(j.lines || []).length) { setTimeout(() => readNext(true), 60); } if (!(j.lines || []).length) return toast(i18n('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.'), 'error');
-                    keepReading((j.lines || []).map(l => l.text || '').join('\n'), 'htr', j.model_file || pick); // ⚖️ la lecture gardée, même si elle n'est pas mise dans le texte
+                    keepReading((j.lines || []).map(l => l.text || '').join('\n'), 'htr', j.model_file || pick, {img: readImg(), part: box ? 'zone' : 'page'}); // ⚖️ la lecture gardée, même si elle n'est pas mise dans le texte
                     htrReview(j.lines, box, j.model_file || pick, installed);
                 };
                 htrJob.timer = setTimeout(poll, 700);
@@ -1375,7 +1442,9 @@
                     if (!kept.length) { toast(i18n('Aucune ligne gardée.')); return; }
                     versionBefore('Avant la lecture mise dans le texte'); let text = area.value; if (text.trim()) text += '\n\n';
                     const made = [];
-                    kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; made.push({id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? i18n('Lu automatiquement (sûr à {x} %)', {x: pct(l.conf)}) : '', c: '', src: 'htr'}); } });
+                    kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; const z = {id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? i18n('Lu automatiquement (sûr à {x} %)', {x: pct(l.conf)}) : '', c: '', src: 'htr'};
+                        const wb = line === lineText(l) ? ext.txCtx?.wordsOfLine(wordsOf(l), ox) : null; if (wb) { z.wb = wb; z.wl = line.length; } // 🔦 la place de chaque mot (le cadre des mots choisis est alors exact)
+                        made.push(z); } });
                     putRead(text, made);
                     status(i18n('{x} (à relire)', {x: A().plural ? A().plural(kept.length, 'ligne lue', 'lignes lues') : kept.length + ' lignes lues'}));
                     runDetect().then(() => toast(i18n('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.')));
@@ -1391,12 +1460,12 @@
             if (all && !pagesToRead().length) return toast(i18n('Toutes les pages ont déjà du texte.'));
             if (all) { if (deepRun) return toast(i18n('Lecture approfondie : page {i} sur {n}…', {i: deepRun.done + 1, n: deepRun.n})); // 📑 toutes les pages, l'une après l'autre
                 return ext.txActe.openDeep({lang: $('[data-tx-lang]').value, all: {n: pagesToRead().length, run: model => startDeepAll(model)}, onCompare: out => LG()?.compareExtras(out, {})}); }
-            let b = box; if (b === undefined) { b = htrArea(); if (!b) { b = await pageArea(); if (b === false) return; } }
+            let b = box; const isZone = box !== undefined ? !!box : !!htrArea(); if (b === undefined) { b = htrArea(); if (!b) { b = await pageArea(); if (b === false) return; } }
             // 📑 un seul texte pour plusieurs pages : on compare avec le morceau de la page affichée, pas avec tout le document
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
             const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
             const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), onReading: (txt, model) => keepReading(txt, 'deep', model), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: mode => areaB64(b, {max: 2200, mode: mode || ext.txActe.imageMode?.() || 'auto'}), onReading: (txt, model, info) => keepReading(txt, 'deep', model, {img: info?.img || '', hints: info?.hints || 0, part: isZone ? 'zone' : 'page'}), context: iaContext, ctxCount: iaCount, onCtx: () => openIa(), onCompareAll: () => openCompare(), // ⚖️ chaque lecture de chaque modèle gardée, et la comparaison
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
                 existing: !htrText && !!cur, // le texte déjà là (de la page) : « Remplacer » ou « Ajouter à la suite »
                 onKeep: (text, from, mode) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */
@@ -1413,7 +1482,7 @@
             if (deepRun || PAGES.length < 2) return;
             const left = pagesToRead(); if (!left.length) return toast(i18n('Toutes les pages ont déjà du texte.'));
             deepRun = {model, lang: $('[data-tx-lang]').value, left, n: left.length, done: 0, stop: false, job: 0, busy: false};
-            deepAllStep();
+            iaContext().then(c => { if (deepRun) deepRun.ctx = c; }, () => {}).finally(() => deepAllStep());
         }
         function paintDeepAll() {
             let bar = $('[data-tx-deepall]'); const R = deepRun;
@@ -1433,7 +1502,7 @@
             try {
                 b = await pageArea({ask: false}); if (b === false) b = null;
                 const img = await areaB64(b, {max: 2200, mode: ext.txActe?.imageMode?.() || 'auto'}); // 🖼 l'image choisie dans la fenêtre
-                if (!R.stop) { const r = await post('tx_deep_read', {model: R.model, language: R.lang, image_b64: img}); R.job = r.result.id; }
+                if (!R.stop) { const r = await post('tx_deep_read', {model: R.model, language: R.lang, image_b64: img, ...(R.ctx ? {context: R.ctx} : {})}); R.job = r.result.id; } // 🧠 « Aider l'IA »
                 while (!R.stop && R.job) { await new Promise(res => setTimeout(res, 900)); if (R.stop) break;
                     const j = await api('tx_deep_job', {id: R.job}); if (j.state === 'running') continue;
                     if (j.state === 'done') txt = String(j.text || ''); else if (j.state !== 'cancelled') err = j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.');
@@ -1442,7 +1511,7 @@
             R.busy = false; R.job = 0;
             if (R.stop || !dlg.isConnected) return deepAllEnd(true);
             if (err) { toast(err, 'error'); return deepAllEnd(true); }
-            if (txt.trim()) keepReading(txt, 'deep', R.model); // ⚖️
+            if (txt.trim()) keepReading(txt, 'deep', R.model, {img: ext.txActe?.imageMode?.() || 'auto', hints: R.ctx?.hints?.length || 0, part: 'page'}); // ⚖️
             if (txt.trim()) { const put = appendRead(txt.trim() + '\n'); before = area.value; t.body = area.value; touch(); paintMirror();
                 if (LG()?.linkOn()) await linkLines({s: put.s, e: put.e, box: b || null, src: 'deep'}); // ▤ une zone par ligne, sur l'image de cette page
                 if (fixOn()) runFix({quiet: true}); } // 🪄
@@ -1575,7 +1644,7 @@
             try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`); flushReads();
                 // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé)
                 if (typeof r.result.body === 'string' && r.result.body !== t.body) { snap(); area.value = r.result.body; before = area.value; t.body = area.value; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }
-                docNote(); ctx.onSaved?.(t.id); }
+                docNote(); VS?.soon(); ctx.onSaved?.(t.id); }
             catch (e) { status(''); toast(e.message, 'error'); }
         }
         /** L1 : la fenêtre « Imprimer » commune — image et texte côte à côte, l'un puis l'autre, ou le texte seul ; image améliorée ; personnes et rôles */
@@ -1717,6 +1786,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             if (k === 'detect') return runDetect();
             if (k === 'fix') return runFix();
             if (k === 'deep') return openDeep({all: readAllAny()});
+            if (k === 'aideia') return openIa();
             if (k === 'lines') return linkLines({manual: true});
             if (k === 'found') return openFound();
             if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast(i18n('L’aide à la lecture n’est pas chargée.'), 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
@@ -1750,7 +1820,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
             if (e.target.matches('[data-tx-zcolor]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { if (!e.target.dataset.snapped) { snap(); e.target.dataset.snapped = '1'; } z.c = e.target.value; touch(); paintZoneRects(); paintMirror(); } }
         });
         dlg.addEventListener('change', e => { if (e.target.matches('[data-tx-zkind]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { snap(); if (e.target.value) z.kind = e.target.value; else delete z.kind; touch(); paintZoneRects(); paintZoneBar(); $('[data-tx-zkind]')?.focus(); } return; }
-            if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); if (GB()) { fillGabarit(); paintPeople(); } } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); paintProg(); }
+            if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); paintWhy(); paintIaCount(); if (GB()) { fillGabarit(); paintPeople(); } } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); paintProg(); }
             if (e.target.matches('[data-tx-lang]')) { try { localStorage.setItem(TX_LANG_KEY, e.target.value); } catch (_) {} if (found.length) paintPeople(); } }); // la langue : retenue, et les mots connus suivent
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
         const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };
@@ -1776,7 +1846,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         }
         /* ─── la barre se redessine quand on la règle (⚙️, ou Réglages) ─── */
         let narrow = false; const isNarrow = () => ($('.h-tx-left')?.getBoundingClientRect().width || 1000) < 620;
-        function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}) + zopHtml(); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
+        function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}) + zopHtml() + (ext.txCtx ? ext.txCtx.wordColorHtml() : ''); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
         const roBar = new ResizeObserver(() => { if (dlg.isConnected && isNarrow() !== narrow) renderBar(); }); roBar.observe($('.h-tx-left'));
         const onBar = () => { renderBar(); $('[data-tx-editor]')?.classList.toggle('has-ln', TV.lineNos()); paintMirror(); paintFlow(); }; window.addEventListener('lcnda-txbar-change', onBar);
         /* ─── 🔍 Loupe : suit la souris ; la molette change le grossissement ─── */
@@ -1833,7 +1903,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         // la fenêtre change de taille (⛶, panneau) : l'ajustement choisi (toute l'image, largeur) suit
         let roW = 0, roH = 0; const ro = new ResizeObserver(() => { const r = stage.getBoundingClientRect(); if (!imgW || drag || (r.width === roW && r.height === roH)) return; roW = r.width; roH = r.height; if (fitOn && fitMode !== 'real') applyFit(fitMode, {keepY: true}); else applyView(); }); ro.observe(stage);
         function docNote() { const n = $('[data-tx-docnote]'); if (n) n.hidden = !t.media_id; }
-        renderBar(); paintMirror(); paintPeople(); docNote(); await initPages(); if (PAGES.length) { paintMirror(); paintPeople(); } await loadImage();
+        renderBar(); paintMirror(); paintPeople(); docNote(); paintWhy(); VS?.refresh(); paintIaCount(); await initPages(); if (PAGES.length) { paintMirror(); paintPeople(); } await loadImage();
         if (deepRun && dlg.isConnected) setTimeout(deepAllStep, 0); // 📑 la lecture approfondie de toutes les pages continue sur cette page
         if (fixAfterSwitch && dlg.isConnected) { fixAfterSwitch = false; runFix({quiet: true}); }
         if (ctx.goto && dlg.isConnected) { runDetect(); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
@@ -1984,7 +2054,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         const people = a => (a.people || []).filter(p => p.name).map(p => `${esc(p.name)}${p.role ? ` <small class="muted">(${esc(p.role)})</small>` : ''}`).join(', ');
         const body = `<div class="lb-read"><figure class="lb-read-img"><img src="media/${encodeURIComponent(it.filename)}" alt=""></figure><div class="lb-read-txt">
             ${lbActs.length ? '' : `<h3>${i18n('Transcription du document')}</h3>`}${lbActs.length ? '' : txt.trim() ? `<pre class="lb-read-pre">${esc(txt)}</pre>` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">${i18n('Rien d’écrit pour l’instant dans la visionneuse.')}</span></p>`}
-            ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.people?.length ? `<p><b>${i18n('Personnes :')}</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">${esc(i18n('📜 Ouvrir dans l’Atelier'))}</button></section>`).join('')}</div></div>`;
+            ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.reason && ext.txCtx ? `<p class="lb-read-why">${ext.txCtx.reasonHtml(a.reason)}</p>` : ''}${a.people?.length ? `<p><b>${i18n('Personnes :')}</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">${esc(i18n('📜 Ouvrir dans l’Atelier'))}</button></section>`).join('')}</div></div>`;
         ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `📖 ${it.title || 'Document'}`, wide: true, submitLabel: `🖨 ${i18n('Imprimer')}`, body,
             onOpen: dg => { dg.classList.add('lb-read-dlg'); dg.addEventListener('click', e => { const b = e.target.closest('[data-lbact-open]'); if (b) { dg.close(); lbOpenTool(Number(b.dataset.lbactOpen)); } }); },
             onSubmit: f => { const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) { toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error'); return false; } // L1 : la fenêtre « Imprimer » commune
@@ -2034,7 +2104,7 @@ ${gb.map(([l, v]) => `        <interp n="${x(l)}">${x(v)}</interp>`).join('\n')}
         const row = (r, i) => { const role = r.state === 'tolink' ? badgeH(i18n('relevé, à relier'), 'yellow') : r.role ? badgeH(r.role, 'grey') : '';
             const th = r.thumb ? `<img src="media/${esc(encodeURIComponent(r.thumb))}" alt="" loading="lazy">` : '<span aria-hidden="true">📜</span>';
             const main = r.state === 'tolink' ? (kiosk ? '' : `<button type="button" class="button small secondary" data-pacts-link="${i}">${esc(i18n('Relier'))}</button>`) : `<button type="button" class="button small secondary" data-pacts-open="${i}">${esc(i18n('Ouvrir'))}</button>`;
-            return `<li data-pacts-row="${i}"><span class="h-pacts-img">${th}</span><div><b>${esc(r.title || kindLabel(r.kind))}</b> ${role}${r.state === 'tolink' && r.name ? ` <small class="muted">${esc(r.name)}</small>` : ''}${r.excerpt ? `<q data-i18n-off>${esc(r.excerpt)}</q>` : ''}</div><span class="h-pacts-acts">${main}<button type="button" class="icon-button small" data-pacts-more="${i}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></span></li>`; };
+            return `<li data-pacts-row="${i}"><span class="h-pacts-img">${th}</span><div><b>${esc(r.title || kindLabel(r.kind))}</b> ${role}${r.state === 'tolink' && r.name ? ` <small class="muted">${esc(r.name)}</small>` : ''}${r.reason && ext.txCtx ? `<div class="h-pacts-why">${ext.txCtx.reasonHtml(r.reason)}</div>` : ''}${r.excerpt ? `<q data-i18n-off>${esc(r.excerpt)}</q>` : ''}</div><span class="h-pacts-acts">${main}<button type="button" class="icon-button small" data-pacts-more="${i}" aria-label="${esc(i18n('Plus d’actions'))}" title="${esc(i18n('Plus d’actions'))}">⋯</button></span></li>`; };
         const guessN = all.filter(r => r.state === 'tolink').length;
         const body = `<div class="h-pacts" data-pacts-person="${pid}">${list.length ? `<ul class="h-pacts-list">${list.map(r => row(r, all.indexOf(r))).join('')}</ul>` : `<p class="muted">${esc(i18n('Aucun document transcrit pour l’instant.'))}</p>`}
             ${guessN ? `<div class="h-pacts-foot">${window.LCNDA_UI?.checkHtml ? window.LCNDA_UI.checkHtml(i18n('Avec les noms relevés pas encore reliés'), {checked: withGuess(), attrs: 'data-pacts-guess'}) : ''}</div>` : ''}</div>`;

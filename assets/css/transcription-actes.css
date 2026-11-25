@@ -110,3 +110,43 @@
 .h-txa-pc{display:flex;flex-wrap:wrap;gap:2px 12px;width:100%;font-size:12px;color:var(--muted,#5b6170);padding-left:22px}
 .h-txa-more{margin-top:6px}
 .h-txa-more>summary{cursor:pointer;font-weight:600;padding:4px 0}
+/* ═════ 🕘 la bande « Versions », 🔦 les mots sur l'image, 🧠 Aider l'IA, ❓ pourquoi l'acte (heritage-transcribe-contexte.js ; maquette transcription-versions-contexte.html) ═════ */
+.h-tx-vers{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:6px 8px 0;padding:6px 8px;border:1.5px dashed var(--line,#c9ced8);background:var(--soft-bg,#f1f2f4)}
+.h-tx-vers[hidden],.h-tx-vprev[hidden]{display:none}
+.h-tx-vlab{font:800 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#5b6170);margin-right:2px}
+.h-tx-chip2{display:inline-flex;gap:4px;align-items:center;max-width:100%;min-width:0;border:1.5px solid var(--line,#c9ced8);background:var(--paper,#fff);color:var(--ink,#111);border-radius:14px;padding:2px 9px;font:600 12px system-ui;cursor:pointer;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-tx-chip2 small{color:var(--muted,#5b6170);font-weight:500}
+.h-tx-chip2.is-ai{border-color:#6929c4}
+.h-tx-chip2.is-on{background:var(--ink,#111);border-color:var(--ink,#111);color:var(--paper,#fff)}.h-tx-chip2.is-on small{color:inherit;opacity:.8}
+.h-tx-chip2.is-ai.is-on{background:#6929c4;border-color:#6929c4}
+.h-tx-vers .spacer{flex:1}
+.h-tx-vprev{margin:6px 8px 0;padding:8px 10px;border:2px solid #6929c4;background:color-mix(in srgb,#6929c4 8%,var(--paper,#fff));font-size:13px}
+.h-tx-vmeta{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 6px}
+.h-tx-vro{max-height:180px;overflow:auto;background:var(--paper,#fff);border:1.5px solid var(--line,#c9ced8);padding:6px 8px;font:13px/1.6 Georgia,serif;color:var(--muted,#3d4250);overflow-wrap:anywhere}
+.h-tx-vbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.h-tx-doubt{text-decoration:underline wavy #d4a800;text-underline-offset:3px}
+.h-tx-editor.is-dim{opacity:.45;transition:opacity .15s}
+.h-tx-wcol{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;font-size:13px}
+.h-tx-wcol button{width:16px;height:16px;border-radius:50%;border:2px solid var(--paper,#fff);background:var(--c);box-shadow:0 0 0 1px var(--line,#c9ced8);padding:0;cursor:pointer}
+.h-tx-wcol button.is-on{box-shadow:0 0 0 2px var(--c)}
+.h-tx-wbox{pointer-events:none}.h-tx-wlab{font-family:system-ui,sans-serif;font-weight:700;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:.25em}
+.h-tx-why{margin:4px 8px;font-size:13px}.h-tx-why[hidden]{display:none}
+.h-why-k{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-why-k select{max-width:100%;min-width:0}.h-why-k input{flex:1;min-width:160px}
+.h-why-k.is-auto select{border-color:#1a7f37;background:color-mix(in srgb,#1a7f37 10%,var(--paper,#fff))}
+.h-why-auto{color:#1a7f37;font-weight:600}
+.h-gab-why{margin:4px 0 8px;padding:6px 8px;border:1px solid var(--line,#e3e3e3)}
+.h-why-tag{display:inline-flex;flex-direction:column;gap:2px;align-items:flex-start;max-width:100%}
+.h-pacts-why,.lb-read-why,.ong-trwhy{margin:3px 0}
+.h-tx-iabtn [data-tx-iacount]{font-weight:800}
+.h-ia h4{margin:12px 0 5px;font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#5b6170)}
+.h-ia h4:first-of-type{margin-top:4px}
+.h-ia input[type=text],.h-ia textarea{width:100%;box-sizing:border-box}
+.h-ia-use{margin:0;font-size:12.5px}
+.h-ia-pers{display:flex;flex-wrap:wrap;gap:6px}.h-ia-pers>span{border:1.5px solid var(--line,#c9ced8);padding:3px 8px;font-size:12.5px}.h-ia-pers>span.is-none{border:0;padding:0}
+.h-ia-hint{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid var(--line,#eceef2);font-size:13px}
+.h-ia-hint:last-child{border-bottom:0}.h-ia-hint input{margin-top:3px}
+.h-ia-sent pre{white-space:pre-wrap;font:11.5px/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--soft-bg,#f1f2f4);border:1.5px solid var(--line,#c9ced8);padding:8px 10px;max-height:260px;overflow:auto}
+.h-ia-sent summary{cursor:pointer;font-weight:600;margin-top:8px}
+.h-txa-ctx{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+@media (max-width:700px){.h-tx-chip2 small{display:none}.h-tx-dlg .h-tx[data-ptab=people] :is(.h-tx-vers,.h-tx-vprev,.h-tx-why){display:none!important}}
