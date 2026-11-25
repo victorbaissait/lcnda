@@ -1,0 +1,10 @@
+{"_note": "Réponse de https://api.openarch.nl/1.1/records/show.json (forme A2A relevée le 25/11/2026), noms fictifs : un mariage où les parents du marié ne sont PAS ceux de la fiche.",
+ "Person": [
+  {"@pid": "Person900000501", "PersonName": {"PersonNameFirstName": "Pieter", "PersonNameLastName": "Mazaud"}, "Gender": "Man"},
+  {"@pid": "Person900000502", "PersonName": {"PersonNameFirstName": "Maria", "PersonNameLastName": "Lacombe"}, "Gender": "Vrouw"},
+  {"@pid": "Person900000503", "PersonName": {"PersonNameFirstName": "Gerrit", "PersonNameLastName": "Mazaud"}, "Gender": "Man"},
+  {"@pid": "Person900000504", "PersonName": {"PersonNameFirstName": "Anna", "PersonNameLastName": "Durand"}, "Gender": "Vrouw"}],
+ "Event": {"@eid": "Event1", "EventType": "Huwelijk", "EventDate": {"Year": "1846", "Month": "05", "Day": "03"}, "EventPlace": {"Place": "Leiden"}},
+ "RelationEP": [{"PersonKeyRef": "Person900000501", "EventKeyRef": "Event1", "RelationType": "Bruidegom"}, {"PersonKeyRef": "Person900000502", "EventKeyRef": "Event1", "RelationType": "Bruid"},
+  {"PersonKeyRef": "Person900000503", "EventKeyRef": "Event1", "RelationType": "Vader van de bruidegom"}, {"PersonKeyRef": "Person900000504", "EventKeyRef": "Event1", "RelationType": "Moeder van de bruidegom"}],
+ "Source": {"SourcePlace": {"Place": "Leiden"}, "SourceType": "BS Huwelijk", "SourceReference": {"InstitutionName": "Erfgoed Leiden en Omstreken", "Book": "Huwelijken 1846", "DocumentNumber": "77"}}}

@@ -77,6 +77,12 @@ echo 'ok';`);
             const g = r.groups[0];
             assert.deepStrictEqual(g.names[0], {name: 'LACOMBE', n: 3}); assert.strictEqual(g.created_from, '2026-03-03');
             assert.strictEqual(r.isolated, 7);
+            // un import encore annulable (son reçu) : « venu de l’import « cousins-lacombe.ged » »
+            fs.mkdirSync(path.join(tmp, 'cache/import-receipts'), {recursive: true});
+            fs.writeFileSync(path.join(tmp, 'cache/import-receipts', 'aaaaaaaaaaaaaaaaaaaaaaaa.json'), JSON.stringify({kind: 'tree', at: '2026-03-03T10:00:00+01:00', label: 'cousins-lacombe.ged', ranges: {persons: [9, 13]}}));
+            const r2 = await api('isoles_list');
+            assert.deepStrictEqual(r2.groups[0].origin, {kind: 'import', label: 'cousins-lacombe.ged', at: '2026-03-03'});
+            assert.strictEqual(r2.groups[1].origin, null);
         });
         await t('isoles_group : les fiches d’un groupe (nom, années, liens) ; un groupe inconnu est refusé', async () => {
             const r = await api('isoles_group', {key: 'g:10'});
@@ -98,7 +104,7 @@ echo 'ok';`);
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'controle'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-bis-box] .bis-row', {timeout: 30000});
             const txt = await p.textContent('[data-bis-box]');
-            assert.match(txt, /Branches isolées/); assert.match(txt, /Groupe de 4 fiches/); assert.match(txt, /LACOMBE \(3\)/); assert.match(txt, /3 mars 2026/);
+            assert.match(txt, /Branches isolées/); assert.match(txt, /Groupe de 4 fiches/); assert.match(txt, /LACOMBE \(3\)/); assert.match(txt, /venu de l’import « cousins-lacombe\.ged » du 3 mars 2026/);
             assert.match(txt, /1 fiches seules|fiches seules/); assert.match(txt, /Jean MAZAUD/);
         });
         await t('« 👁 Voir ces fiches » : la liste du groupe, avec « ↗ Fiche »', async () => {

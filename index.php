@@ -1224,7 +1224,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=587" defer></script>
+<script src="assets/js/app.js?v=588" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1356,7 +1356,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueil-index.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-fiche.js?v=2" defer></script>
 <script src="assets/js/heritage-recueil-fonds.js?v=6" defer></script>
-<script src="assets/js/heritage-recueils.js?v=35" defer></script>
+<script src="assets/js/heritage-recueils.js?v=36" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=31" defer></script>
 <script src="assets/js/heritage-decennales.js?v=4" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=14" defer></script>
@@ -1568,7 +1568,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=7" defer></script>
-<script src="assets/js/heritage-slideshow.js?v=25" defer></script>
+<script src="assets/js/heritage-slideshow.js?v=26" defer></script>
 <script src="assets/js/heritage-keynote.js?v=28" defer></script>
 <script src="assets/js/heritage-tableur.js?v=15" defer></script>
 <script src="assets/js/heritage-tableur-cibles.js?v=5" defer></script>
@@ -1579,7 +1579,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-traitement-texte.js?v=10" defer></script>
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=5" defer></script>
 <script src="assets/js/heritage-traitement-texte-outils.js?v=5" defer></script>
-<script src="assets/js/heritage-traitement-texte-fichiers.js?v=9" defer></script>
+<script src="assets/js/heritage-traitement-texte-fichiers.js?v=10" defer></script>
 <script src="assets/js/heritage-traitement-texte-fusion.js?v=3" defer></script>
 <script src="assets/js/heritage-traitement-texte-relecture.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-onglets.js?v=5" defer></script>
@@ -1666,7 +1666,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-terroir.js?v=2" defer></script>
 <script src="assets/js/heritage-terre-mots.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=9" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=10" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-territoires.js?v=1" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
