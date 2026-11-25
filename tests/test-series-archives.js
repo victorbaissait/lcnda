@@ -57,7 +57,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
         await p.waitForSelector('dialog[open].ser-dialog .ser-table');
         const d = await p.evaluate(() => {
             const dlg = document.querySelector('dialog[open].ser-dialog');
-            return {title: dlg.querySelector('h2').textContent, letters: [...dlg.querySelectorAll('.ser-table tbody th[scope=row]')].map(x => x.textContent.trim()),
+            return {title: dlg.querySelector('h2').textContent, letters: [...dlg.querySelectorAll('.ser-table tbody td.ser-l')].map(x => x.textContent.trim()),
                 head: [...dlg.querySelectorAll('.ser-table thead th')].map(x => x.textContent.trim()),
                 links: [...dlg.querySelectorAll('a[href]')].map(a => ({href: a.getAttribute('href'), rel: a.getAttribute('rel') || '', target: a.getAttribute('target')})),
                 text: dlg.querySelector('.ser-help').textContent};
@@ -78,6 +78,9 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
         if (site) assert.ok(d.links.some(a => a.href === site), 'le site du service');
         assert.ok(await p.$('dialog[open].ser-dialog [data-ser-dispo]'), '🏛 Actes en ligne aux archives');
         assert.ok(await p.$('dialog[open].ser-dialog [data-ser-courriers]'), '📮 Actes à demander');
+        const over = await p.evaluate(() => { const b = document.querySelector('dialog[open].ser-dialog .h-dialog-body'); return b.scrollWidth - b.clientWidth; });
+        assert.ok(over <= 1, `la fenêtre déborde de ${over} px`);
+        if (process.env.SHOTS) { fs.mkdirSync(process.env.SHOTS, {recursive: true}); await p.screenshot({path: path.join(process.env.SHOTS, `series-${p.viewportSize().width}.png`)}); }
         await p.click('dialog[open].ser-dialog .modal-actions [type=submit]');
         await p.waitForFunction(() => !document.querySelector('dialog[open].ser-dialog'));
     };

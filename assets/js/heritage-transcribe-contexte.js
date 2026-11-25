@@ -3,6 +3,11 @@
  *  1. 🕘 la bande « Versions » au-dessus de « 📄 Ce texte est celui du document… » : ma version, chaque lecture (modèle, date, image envoyée),
  *     les copies ; un clic = l'aperçu en lecture seule (« Utiliser cette version », « Comparer avec ma version », « Fermer ») ;
  *     « ⧉ Dupliquer » garde une copie ; les versions automatiques et les plus anciennes dans « ⋯ N autres » (la fenêtre 🕘 Versions).
+ *     🗑 « Supprimer cette version » (aperçu) et plusieurs cochées dans 🕘 Versions : une seule « ↶ Annuler » remet chaque ligne telle quelle
+ *     (même id, même date) ; « Ma version (actuelle) » est le texte du document : elle ne se supprime pas.
+ *     ✎ « Travailler sur cette version dans l'éditeur » : elle devient le texte (l'ancien gardé, comme « Utiliser cette version »), les zones
+ *     de l'image sont reliées à ses lignes (relinkZones : même nombre de lignes → la ligne i ; sinon à relier à la main) ; la bande dit
+ *     « Tu travailles sur : … — ↩ Revenir à ma version » ; chaque version garde ses propres zones reliées (save_act_transcription_version_zones).
  *  2. 🔦 les mots choisis dans le texte : un cadre serré dans la bande de leur ligne (≈ estimé d'après la place des lettres ; exact si la
  *     lecture a donné la place de chaque mot) ; sa couleur se choisit (bleu au départ), retenue dans genealogie-htr-word-color.
  *  3. 🧠 « Aider l'IA » : titre, de quoi parle l'acte, personnes reliées, indices de la base (cochés au départ : l'événement, les noms, les lieux) ;
@@ -66,7 +71,10 @@
             let a2 = a, b2 = Math.min(end, le);
             while (a2 < b2 && /\s/.test(text[a2])) a2++; while (b2 > a2 && /\s/.test(text[b2 - 1])) b2--;
             if (b2 > a2) {
-                const z = zones.filter(q => q.e > q.s && q.w > 0 && q.h > 0 && q.s <= a2 && q.e >= b2).sort((p, q) => (p.e - p.s) - (q.e - q.s))[0];
+                // la zone qui contient ces mots (la plus serrée) ; sinon celle qui en couvre le plus (une zone décalée d'une lettre,
+                // un choix qui commence à la 1re lettre de la ligne ou finit sur la ponctuation : le cadre s'affiche quand même)
+                const ov = q => Math.min(q.e, b2) - Math.max(q.s, a2), inside = q => q.s <= a2 && q.e >= b2;
+                const z = zones.filter(q => q.e > q.s && q.w > 0 && q.h > 0 && ov(q) > 0).sort((p, q) => (inside(q) - inside(p)) || (inside(p) ? (p.e - p.s) - (q.e - q.s) : ov(q) - ov(p)))[0];
                 if (z) {
                     const zt = text.slice(z.s, z.e); let x0 = 0, x1 = 0, exact = false;
                     if (Array.isArray(z.wb) && z.wb.length && Number(z.wl) === zt.length) {
@@ -121,6 +129,38 @@
     }
 
     /* ═════════ 1. 🕘 la bande « Versions » ═════════ */
+    const apiPost = (action, body) => A().api(action, {}, {method: 'POST', body}).then(r => { if (r && r.error) throw new Error(r.error); return (r && r.result) || r; });
+    /** 🗑 des versions supprimées d'un coup (toutes ou aucune) → {versions, undo()} : ↶ Annuler les remet telles quelles (même id, même date) */
+    async function removeVersions(vs) {
+        const r = await apiPost('delete_act_transcription_versions', {ids: vs.map(v => Number(v.id))});
+        return {versions: r.versions || [], undo: () => apiPost('restore_act_transcription_versions', {versions: r.versions || []})};
+    }
+    const LINK_SKIP = ['sign', 'note', 'skip'];
+    /**
+     * ✎ les zones de l'image reliées aux lignes d'un texte (oldText) → reliées aux lignes d'un autre texte (newText) :
+     * même nombre de lignes → la zone de la ligne i va sur la ligne i ; sinon, autant de zones de ligne que de lignes → dans l'ordre ;
+     * sinon (et les signatures, notes, passages dans une ligne) : plus reliées (s = e = 0), à relier à la main. linesOf : ext.txSnap.textLinesOf.
+     * → {zones, linked, unlinked}
+     */
+    function relinkZones(zones, oldText, newText, linesOf) {
+        oldText = String(oldText ?? ''); newText = String(newText ?? '');
+        const L0 = linesOf(oldText), L1 = linesOf(newText);
+        const lineOf = z => { if (!z || !(z.e > z.s) || LINK_SKIP.includes(z.kind)) return -1;
+            const k = L0.findIndex(l => { const n = Math.min(z.e, l.e) - Math.max(z.s, l.s); return n > 0 && n >= (l.e - l.s) * .6 && n >= (z.e - z.s) * .6; }); return k; };
+        const idx = (zones || []).map(lineOf), onLines = idx.filter(k => k >= 0);
+        let map = null;
+        if (onLines.length && L0.length === L1.length) map = i => idx[i];
+        else if (onLines.length && onLines.length === L1.length && new Set(onLines).size === onLines.length) { const order = [...onLines].sort((a, b) => a - b); map = i => order.indexOf(idx[i]); }
+        let linked = 0, unlinked = 0;
+        const out = (zones || []).map((z, i) => {
+            const c = {...z}; delete c.wb; delete c.wl;
+            const l = map && idx[i] >= 0 ? L1[map(i)] : null;
+            if (l) { c.s = l.s; c.e = l.e; if (Array.isArray(z.wb) && newText.slice(l.s, l.e) === oldText.slice(z.s, z.e)) { c.wb = z.wb; c.wl = z.wl; } linked++; return c; }
+            if (z.e > z.s) unlinked++;
+            c.s = 0; c.e = 0; return c;
+        });
+        return {zones: out, linked, unlinked};
+    }
     const IMG_SHORT = {auto: 'image améliorée', mine: 'avec « Mieux voir »', orig: 'image d’origine'};
     const IMG_LONG = {auto: '✨ image améliorée automatiquement', mine: '🎚️ avec mon réglage « Mieux voir »', orig: '🖼 image d’origine'};
     const when = at => { const d = new Date(String(at || '').replace(' ', 'T') + (/Z|[+-]\d\d:?\d\d$/.test(String(at || '')) ? '' : 'Z')); if (Number.isNaN(d.getTime())) return ''; const L = document.documentElement.lang || 'fr';
@@ -164,15 +204,20 @@
      * Renvoie {refresh(), close(), shown()}.
      */
     function versionsStrip(host, prev, o) {
-        let items = [], open = null;
+        let items = [], open = null, working = null; // working : {v, was, body} — ✎ la version sur laquelle on travaille dans l'éditeur
         const paint = () => {
-            const mine = items.filter(v => !v.auto), shown = mine.slice(0, MAX_CHIPS), more = items.length - shown.length;
+            const mine = items.filter(v => !v.auto), shown = mine.slice(0, MAX_CHIPS);
+            if (working && !shown.some(v => v.id === working.v.id)) { const w = items.find(v => v.id === working.v.id); if (w) shown.push(w); }
+            const more = items.length - shown.length, meOn = !open && !working;
+            const onV = v => open?.id === v.id || (!open && working?.v.id === v.id);
             host.hidden = !items.length;
+            const wk = working && chipOf(working.v);
             host.innerHTML = `<span class="h-tx-vlab">🕘 ${esc(i18n('Versions'))}</span>
-                <button type="button" class="h-tx-chip2${open ? '' : ' is-on'}" data-tx-v="me" aria-pressed="${!open}">✍ ${esc(i18n('Ma version'))} <small>${esc(i18n('(actuelle)'))}</small></button>
-                ${shown.map(v => { const [ic, n, sm, kind] = chipOf(v); return `<button type="button" class="h-tx-chip2${kind === 'read' ? ' is-ai' : ''}${open?.id === v.id ? ' is-on' : ''}" data-tx-v="${v.id}" aria-pressed="${open?.id === v.id}" title="${esc(metaLines(v).join('\n'))}">${ic} <span data-i18n-off>${esc(n)}</span>${sm ? ` <small>· ${esc(sm)}</small>` : ''}</button>`; }).join('')}
+                <button type="button" class="h-tx-chip2${meOn ? ' is-on' : ''}" data-tx-v="me" aria-pressed="${meOn}" title="${esc(i18n('Ma version : le texte du document. Elle ne se supprime pas (pour la remplacer, ouvre une autre version et « Utiliser cette version »).'))}">✍ ${esc(i18n('Ma version'))}${working ? '' : ` <small>${esc(i18n('(actuelle)'))}</small>`}</button>
+                ${shown.map(v => { const [ic, n, sm, kind] = chipOf(v); return `<button type="button" class="h-tx-chip2${kind === 'read' ? ' is-ai' : ''}${onV(v) ? ' is-on' : ''}${working?.v.id === v.id ? ' is-work' : ''}" data-tx-v="${v.id}" aria-pressed="${onV(v)}" title="${esc(metaLines(v).join('\n'))}">${working?.v.id === v.id ? '✎ ' : ''}${ic} <span data-i18n-off>${esc(n)}</span>${sm ? ` <small>· ${esc(sm)}</small>` : ''}</button>`; }).join('')}
                 ${more > 0 ? `<button type="button" class="h-tx-chip2" data-tx-vmore title="${esc(i18n('Toutes les versions, y compris les automatiques'))}">⋯ ${esc(i18n(more > 1 ? '{n} autres' : '{n} autre', {n: more}))}</button>` : ''}
-                <span class="spacer"></span><button type="button" class="button small secondary" data-tx-vdup title="${esc(i18n('Garder une copie de la version affichée, par exemple ce que l’IA a lu avant de corriger'))}">⧉ ${esc(i18n('Dupliquer'))}</button>`;
+                <button type="button" class="button small secondary h-tx-vdup" data-tx-vdup title="${esc(i18n('Garder une copie de la version affichée, par exemple ce que l’IA a lu avant de corriger'))}">⧉ ${esc(i18n('Dupliquer'))}</button>
+                ${wk ? `<div class="h-tx-vwork" data-tx-vwork role="status">✎ ${esc(i18n('Tu travailles sur :'))} <b>${wk[0]} <span data-i18n-off>${esc(wk[1])}</span>${wk[2] ? ` · <span data-i18n-off>${esc(wk[2])}</span>` : ''}</b> <button type="button" class="link-button" data-tx-vback title="${esc(i18n('Remettre le texte et les zones d’avant ; cette version garde ses zones reliées'))}">↩ ${esc(i18n('Revenir à ma version'))}</button></div>` : ''}`;
         };
         async function show(v) {
             open = v; paint(); o.dim?.(true); prev.hidden = false; prev.innerHTML = `<p class="muted">…</p>`;
@@ -182,7 +227,7 @@
             prev.innerHTML = `<div class="h-tx-vhead"><b>${ic} <span data-i18n-off>${esc(n)}</span></b> <span class="muted">— ${esc(i18n('lecture seule'))}</span></div>
                 <div class="h-tx-vmeta">${metaLines(v).map(s => `<span class="ui-badge is-grey">${esc(s)}</span>`).join('')}</div>
                 <div class="h-tx-vro" data-tx-vro>${roHtml(x.body || '', Number(x.data?.meta?.hints || v.meta?.hints) || 0)}</div>
-                <div class="h-tx-vbtns"><button type="button" class="button small" data-tx-vuse>✓ ${esc(i18n('Utiliser cette version'))}</button><button type="button" class="button small secondary" data-tx-vcmp>⚖️ ${esc(i18n('Comparer avec ma version'))}</button>${kind !== 'read' ? `<button type="button" class="button small secondary" data-tx-vren>✎ ${esc(i18n('Renommer'))}</button>` : ''}<button type="button" class="button small secondary" data-tx-vclose>× ${esc(i18n('Fermer'))}</button></div>`;
+                <div class="h-tx-vbtns"><button type="button" class="button small" data-tx-vuse>✓ ${esc(i18n('Utiliser cette version'))}</button>${o.work && working?.v.id !== v.id ? `<button type="button" class="button small secondary" data-tx-vedit title="${esc(i18n('Elle devient le texte de l’éditeur (le tien est gardé) : relie les lignes de l’image à ses lignes, corrige-la ; « ↩ Revenir à ma version » ensuite'))}">✎ ${esc(i18n('Travailler sur cette version dans l’éditeur'))}</button>` : ''}<button type="button" class="button small secondary" data-tx-vcmp>⚖️ ${esc(i18n('Comparer avec ma version'))}</button>${kind !== 'read' ? `<button type="button" class="button small secondary" data-tx-vren>✎ ${esc(i18n('Renommer'))}</button>` : ''}<button type="button" class="button small secondary danger" data-tx-vdel title="${esc(i18n('On peut encore l’annuler juste après.'))}">🗑 ${esc(i18n('Supprimer cette version'))}</button><button type="button" class="button small secondary" data-tx-vclose>× ${esc(i18n('Fermer'))}</button></div>`;
         }
         function close() { if (!open && prev.hidden) return; open = null; prev.hidden = true; prev.innerHTML = ''; o.dim?.(false); paint(); }
         host.addEventListener('click', async e => {
@@ -190,21 +235,34 @@
             if (b.dataset.txV === 'me') return close();
             if (b.dataset.txV) { const v = items.find(x => String(x.id) === b.dataset.txV); if (v) { if (open?.id === v.id) return close(); show(v); } return; }
             if ('txVmore' in b.dataset) return o.openAll?.();
+            if ('txVback' in b.dataset) { b.disabled = true; try { await o.back?.(); } finally { b.disabled = false; } return; }
             if ('txVdup' in b.dataset) { b.disabled = true; try { await o.duplicate(open); } finally { b.disabled = false; } }
         });
         prev.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b || !open) return; const v = open;
             if ('txVclose' in b.dataset) return close();
             if ('txVcmp' in b.dataset) return o.compare(v);
-            if ('txVuse' in b.dataset) { close(); return o.use(v); }
-            if ('txVren' in b.dataset) { await o.rename(v); }
+            if ('txVuse' in b.dataset) { const w = working; close(); if (w) { working = null; await o.keep?.(w); paint(); } return o.use(v); }
+            if ('txVren' in b.dataset) { await o.rename(v); return; }
+            if ('txVedit' in b.dataset) { close(); return o.work?.(v); }
+            if ('txVdel' in b.dataset) return removeOne(v);
         });
+        /** 🗑 depuis l'aperçu : pas de question (↶ Annuler la remet telle quelle) */
+        async function removeOne(v) {
+            const name = chipOf(v)[1], w = working?.v.id === v.id ? working : null;
+            close();
+            let r; try { r = await (o.remove || removeVersions)([v]); } catch (e) { return A().toast(e.message, 'error'); }
+            if (w) working = null; // le texte reste (c'est maintenant celui du document) ; la version n'existe plus
+            await refresh(); o.onRemoved?.([v]);
+            A().undoToast?.(i18n('Version supprimée : « {x} »', {x: name}), {undo: async () => { await r.undo(); if (w && !working) working = w; await refresh(); }, icon: '🗑'});
+        }
         async function refresh() {
             try { items = await o.list(); } catch (_) { items = []; }
+            if (working && !items.some(v => v.id === working.v.id)) working = null;
             if (open && !items.some(v => v.id === open.id)) close(); else { if (open) open = items.find(v => v.id === open.id) || open; paint(); }
         }
         let rt = 0; const soon = (ms = 250) => { clearTimeout(rt); rt = setTimeout(refresh, ms); };
-        return {refresh, soon, close, isOpen: () => !!open};
+        return {refresh, soon, close, isOpen: () => !!open, working: () => working, setWorking: w => { working = w || null; paint(); }};
     }
 
     /* ═════════ 3. 🧠 Aider l'IA ═════════ */
@@ -256,5 +314,5 @@
     }
 
     ext.txCtx = {REASONS, reasonOf, reasonGuess, reasonHtml, whyHtml, reasonHint, WCOL_KEY, WORD_COLORS, wordColor, setWordColor, wordColorHtml, wordBoxes, wordsOfLine, wordAt, doubtWords, hintTitle, roHtml,
-        chipOf, metaLines, versionsStrip, openAide, contextOf, checkedCount, hintsOf};
+        chipOf, metaLines, versionsStrip, removeVersions, relinkZones, openAide, contextOf, checkedCount, hintsOf};
 })();

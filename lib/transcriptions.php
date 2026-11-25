@@ -156,6 +156,24 @@ function restore_act_transcription_versions(PDO $pdo, array $data): array
     return ['ids' => $ids];
 }
 
+/**
+ * ✎ « Travailler sur cette version dans l'éditeur » : la version garde ses propres zones reliées à ses lignes (data.zones), retrouvées
+ * quand on y revient. Seulement les zones (le texte, la date, le modèle de la lecture ne changent pas : une lecture n'est jamais écrasée).
+ */
+function save_act_transcription_version_zones(PDO $pdo, array $data): array
+{
+    act_transcriptions_ensure($pdo);
+    $s = $pdo->prepare('SELECT id, body, data_json FROM act_transcription_versions WHERE id=?'); $s->execute([safe_int($data['id'] ?? 0)]); $r = $s->fetch();
+    if (!$r) { throw new RuntimeException('Version introuvable.'); }
+    $old = json_decode((string) $r['data_json'], true) ?: [];
+    $zones = array_values(array_filter(is_array($data['zones'] ?? null) ? $data['zones'] : [], 'is_array'));
+    $len = intdiv(strlen((string) mb_convert_encoding((string) $r['body'], 'UTF-16LE', 'UTF-8')), 2); // la longueur comme la page la compte (UTF-16)
+    foreach ($zones as &$z) { if (safe_int($z['e'] ?? 0) > $len) { $z['s'] = 0; $z['e'] = 0; } } unset($z); // un passage hors du texte de la version : la zone n'est plus reliée
+    $new = act_version_data($pdo, ['zones' => $zones] + $old);
+    $pdo->prepare('UPDATE act_transcription_versions SET data_json=? WHERE id=?')->execute([json_encode($new, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE) ?: '{}', (int) $r['id']]);
+    return ['id' => (int) $r['id'], 'zones' => count($new['zones'])];
+}
+
 function rename_act_transcription_version(PDO $pdo, array $data): array
 {
     $old = act_transcription_version($pdo, safe_int($data['id'] ?? 0));

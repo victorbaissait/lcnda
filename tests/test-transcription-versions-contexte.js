@@ -33,6 +33,7 @@ try { ({ chromium } = require('playwright')); } catch (_) { try { ({ chromium } 
 const LINES = ['L’an mil huit cent treize, le douze octobre,', 'par devant nous juge de paix du canton de Treignac', 'a comparu Gaspard Mazaud, cultivateur,', 'demeurant au village du Puy, lequel nous',
     'a dit vouloir contracter mariage avec', 'Catherine Lacombe, fille de Pierre et de', 'feue Marie Durand, et ne pouvoir représenter son acte de naissance.'];
 const BODY = LINES.join('\n') + '\n';
+const VLINES = LINES.map(l => l.replace('Mazaud', 'Mazaut').replace('douze', 'XII')), VBODY = VLINES.join('\n') + '\n'; // ✎ une lecture de 7 lignes (autant que les zones)
 const AI_TEXT = ['L’an mil huit cent treize, le douze octobre,', 'par devant nous juge de paix du canton de Treignac', 'a comparu Gaspard Mazand [?], cultivateur,'];
 /* ─── l'image : 1000 × 400, sept bandes d'écriture ─── */
 const W = 1000, H = 400, px = new Uint8Array(W * H).fill(225);
@@ -212,6 +213,71 @@ echo json_encode(['g' => $g, 'c' => $c]);`, { TX_BODY: BODY, TX_ZONES: JSON.stri
         await sleep(600); out.strip2 = await strip();
         out.list2 = (await api('act_transcription_versions', { act_id: 1 })).items;
 
+        /* ─── 🗑 supprimer une version (aperçu, fenêtre 🕘 Versions) et ✎ travailler sur une version dans l'éditeur ─── */
+        const rowsDb = () => JSON.parse(php(String.raw`require 'lib/bootstrap.php'; echo json_encode(db()->query('SELECT id, act_id, label, body, created_at, source, auto, data_json FROM act_transcription_versions ORDER BY id')->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);`)).map(r => ({ ...r, id: Number(r.id) }));
+        const toastUndo = re => p.evaluate(r => { const tt = [...document.querySelectorAll('.ui-toast')].filter(x => new RegExp(r).test(x.textContent)).at(-1); const b = tt && [...tt.querySelectorAll('button')].find(x => /Annuler/.test(x.textContent)); b?.click(); return !!b; }, re);
+        const postApi = (a, body) => p.evaluate(([x, b]) => window.LCNDA_APP.api(x, {}, { method: 'POST', body: b }).then(r => r.result || r), [a, body]);
+        const essA = (await postApi('save_act_transcription_version', { act_id: 1, label: 'Essai A', body: 'essai A', data: { zones: [], people: [] }, auto: 1 })).id;
+        const essB = (await postApi('save_act_transcription_version', { act_id: 1, label: 'Essai B', body: 'essai B', data: { zones: [], people: [] }, auto: 1 })).id;
+        const wid = (await postApi('save_act_transcription_version', { act_id: 1, label: 'Lecture 7 lignes', body: VBODY, data: { zones: [], people: [], meta: { model: 'kraken-essai' } }, auto: 0, source: 'htr:kraken-essai' })).id;
+        await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(1200);
+        // 🗑 depuis l'aperçu : la pastille disparaît, la ligne part de la base ; ↶ Annuler la remet telle quelle (même id, même date, même texte)
+        const copyV = out.list2.find(v => v.source === 'copy'); out.delRowBefore = rowsDb().find(r => r.id === copyV.id);
+        await p.click(`dialog.h-tx-dlg [data-tx-v="${copyV.id}"]`); await p.waitForSelector('dialog.h-tx-dlg [data-tx-vprev] [data-tx-vdel]', { timeout: 10000 });
+        out.delBtns = await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-vprev] button')].map(b => b.textContent.trim()));
+        await p.click('dialog.h-tx-dlg [data-tx-vdel]'); await sleep(900);
+        out.delConfirm = await p.evaluate(() => !!document.querySelector('dialog[open].confirm-dialog, dialog[open] [data-confirm-ok]'));
+        out.delStrip = await strip(); out.delInDb = rowsDb().some(r => r.id === copyV.id); out.delPrevHidden = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-vprev]').hidden);
+        out.delUndo = await toastUndo('Version supprimée'); await sleep(900);
+        out.delRowAfter = rowsDb().find(r => r.id === copyV.id); out.delStripAfter = await strip();
+        // « Ma version (actuelle) » : le texte du document, pas de 🗑 (la bulle le dit)
+        await p.click('dialog.h-tx-dlg [data-tx-v="me"]'); await sleep(200);
+        out.me = await p.evaluate(() => ({ del: !!document.querySelector('dialog.h-tx-dlg [data-tx-vdel]') })); out.me.title = out.delStripAfter.chips.find(x => x.id === 'me').title;
+        // ⧉ Dupliquer : à la suite des pastilles, sans ombre décalée, de la hauteur d'une pastille
+        out.dupLook = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg [data-tx-vdup]'), m = document.querySelector('dialog.h-tx-dlg [data-tx-vmore]') || [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-v]')].at(-1), cs = getComputedStyle(d), a = d.getBoundingClientRect(), b = m.getBoundingClientRect();
+            return { shadow: cs.boxShadow, h: a.height, chipH: b.height, sameRow: Math.abs((a.top + a.bottom) / 2 - (b.top + b.bottom) / 2) < 3, gap: a.left - b.right, spacer: !!document.querySelector('dialog.h-tx-dlg [data-tx-vers] .spacer') }; });
+        // 🕘 la fenêtre Versions : plusieurs cochées (et « Maintenant », qui ne part pas) → 🗑 d'un coup, une seule ↶ Annuler
+        await p.click('dialog.h-tx-dlg [data-tx-vmore]'); await p.waitForSelector('dialog[open] [data-vers-check]', { timeout: 10000 }); await sleep(400);
+        for (const id of ['now', essA, essB, copyV.id]) await p.click(`dialog[open] [data-vers-check="${id}"]`);
+        await sleep(200);
+        out.manyBtn = await p.evaluate(() => document.querySelector('dialog[open] [data-vers-delmany]')?.textContent.trim() || '');
+        out.manyRowsBefore = rowsDb().filter(r => [essA, essB, copyV.id].includes(Number(r.id)));
+        await p.click('dialog[open] [data-vers-delmany]'); await sleep(1200);
+        out.manyLeft = rowsDb().filter(r => [essA, essB, copyV.id].includes(Number(r.id))).length;
+        out.manyRows = await p.evaluate(() => [...document.querySelectorAll('dialog[open] [data-vers-row]')].map(r => r.dataset.versRow));
+        out.manyStrip = await strip(); out.manyText = await textNow();
+        out.manyUndo = await toastUndo('3 versions supprimées'); await sleep(1200);
+        out.manyRowsAfter = rowsDb().filter(r => [essA, essB, copyV.id].includes(Number(r.id)));
+        await p.evaluate(() => document.querySelector('dialog[open] [data-vers-close]').click()); await sleep(400);
+        // ✎ travailler sur une version dans l'éditeur : même nombre de lignes → chaque zone reliée à sa ligne ; la bande dit sur quoi on travaille
+        const zonesNow = async () => { await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(900); return (await api('act_transcription', { id: 1 })).data.zones; };
+        const statusNow = () => p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-status]').title);
+        out.workTextBefore = await textNow(); out.workZonesBefore = await zonesNow();
+        await p.click(`dialog.h-tx-dlg [data-tx-v="${wid}"]`); await p.waitForSelector('dialog.h-tx-dlg [data-tx-vprev] [data-tx-vedit]', { timeout: 10000 });
+        await p.click('dialog.h-tx-dlg [data-tx-vedit]'); await sleep(900);
+        out.workStatus = await statusNow(); out.workText = await textNow();
+        out.workBand = await p.evaluate(() => { const b = document.querySelector('dialog.h-tx-dlg [data-tx-vwork]'); return b ? b.textContent.replace(/\s+/g, ' ').trim() : ''; });
+        out.workChips = await p.evaluate(id => ({ me: document.querySelector('dialog.h-tx-dlg [data-tx-v="me"]').classList.contains('is-on'), v: document.querySelector(`dialog.h-tx-dlg [data-tx-v="${id}"]`)?.className || '' }), wid);
+        out.workBands = await p.evaluate(() => document.querySelectorAll('dialog.h-tx-dlg [data-tx-zones] rect').length);
+        out.workZones = await zonesNow();
+        await p.click('dialog.h-tx-dlg [data-tx-vback]'); await sleep(1200);
+        out.backText = await textNow(); out.backBand = await p.evaluate(() => !!document.querySelector('dialog.h-tx-dlg [data-tx-vwork]'));
+        out.backZones = await zonesNow();
+        out.widZones = JSON.parse(rowsDb().find(r => r.id === wid).data_json).zones;
+        // une lecture d'un autre nombre de lignes : les zones ne sont plus reliées (à relier à la main) ; ↶ Annuler remet tout
+        await p.click(`dialog.h-tx-dlg [data-tx-v="${aiId}"]`); await p.waitForSelector('dialog.h-tx-dlg [data-tx-vprev] [data-tx-vedit]', { timeout: 10000 });
+        await p.click('dialog.h-tx-dlg [data-tx-vedit]'); await sleep(900);
+        out.aiStatus = await statusNow(); out.aiText = await textNow();
+        out.aiUndo = await toastUndo('Tu travailles sur'); await sleep(600);
+        out.aiUndoText = await textNow(); out.aiUndoBand = await p.evaluate(() => !!document.querySelector('dialog.h-tx-dlg [data-tx-vwork]'));
+        out.aiUndoZones = await zonesNow();
+        // revenir sur la version de 7 lignes : ses zones à elle (gardées), puis ↩
+        await p.click(`dialog.h-tx-dlg [data-tx-v="${wid}"]`); await p.waitForSelector('dialog.h-tx-dlg [data-tx-vprev] [data-tx-vedit]', { timeout: 10000 });
+        await p.click('dialog.h-tx-dlg [data-tx-vedit]'); await sleep(900);
+        out.againStatus = await statusNow(); out.againZones = await zonesNow();
+        await p.click('dialog.h-tx-dlg [data-tx-vback]'); await sleep(1200);
+        out.againBackText = await textNow();
+
         // la couleur retenue après avoir fermé et rouvert l'Atelier
         await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(700);
         await closeAct(); await openAct();
@@ -300,6 +366,32 @@ echo json_encode(['g' => $g, 'c' => $c]);`, { TX_BODY: BODY, TX_ZONES: JSON.stri
         ['🕘 la bande reste courte : les versions automatiques dans « ⋯ N autres »', () => {
             const more = out.strip2.chips.find(c => c.id === 'more'); assert.ok(more, JSON.stringify(out.strip2.chips)); assert.ok(out.strip2.chips.length <= 7);
             assert.ok(out.list2.filter(v => v.auto).length >= 1); assert.equal(out.strip2.chips.filter(c => c.id !== 'me' && c.id !== 'more').length, out.list2.filter(v => !v.auto).length); }],
+        ['🗑 « Supprimer cette version » dans l’aperçu : sans question, la pastille et la ligne de la base partent ; ↶ Annuler la remet telle quelle', () => {
+            assert.ok(out.delBtns.some(b => /🗑 Supprimer cette version/.test(b)), out.delBtns.join(' | ')); assert.equal(out.delConfirm, false);
+            const id = String(out.delRowBefore.id); assert.ok(!out.delStrip.chips.some(c => c.id === id), JSON.stringify(out.delStrip.chips)); assert.equal(out.delInDb, false); assert.equal(out.delPrevHidden, true);
+            assert.equal(out.delUndo, true); assert.deepEqual(out.delRowAfter, out.delRowBefore); assert.ok(out.delStripAfter.chips.some(c => c.id === id)); }],
+        ['🗑 « Ma version (actuelle) » ne se supprime pas (c’est le texte du document) : pas de 🗑, la bulle le dit', () => {
+            assert.equal(out.me.del, false); assert.match(out.me.title, /ne se supprime pas/); }],
+        ['⧉ « Dupliquer » à la suite des pastilles, petit et sans ombre décalée', () => {
+            const d = out.dupLook; assert.equal(d.spacer, false); assert.equal(d.shadow, 'none'); assert.ok(d.sameRow, JSON.stringify(d)); assert.ok(d.gap >= 0 && d.gap < 20, JSON.stringify(d)); assert.ok(d.h <= d.chipH + 4, JSON.stringify(d)); }],
+        ['🗑 fenêtre 🕘 Versions : plusieurs cochées supprimées d’un coup (pas « Maintenant »), une seule ↶ Annuler les remet (mêmes id, dates, textes)', () => {
+            assert.match(out.manyBtn, /Supprimer les 3 versions cochées/); assert.equal(out.manyRowsBefore.length, 3); assert.equal(out.manyLeft, 0);
+            assert.ok(out.manyRows.includes('now')); assert.ok(!out.manyRows.includes(String(out.manyRowsBefore[0].id)));
+            assert.ok(!out.manyStrip.chips.some(c => c.id === String(out.delRowBefore.id)), 'la bande suit'); assert.equal(out.manyText, out.textUndone);
+            assert.equal(out.manyUndo, true); assert.deepEqual(out.manyRowsAfter, out.manyRowsBefore); }],
+        ['✎ « Travailler sur cette version dans l’éditeur » : son texte, chaque zone reliée à sa ligne (même nombre de lignes), la bande dit « Tu travailles sur … — ↩ Revenir à ma version »', () => {
+            const vl = VLINES; let at = 0; const want = vl.map(l => { const r = [at, at + l.length]; at += l.length + 1; return r; });
+            assert.equal(out.workText, VBODY); assert.match(out.workStatus, /Zones reliées aux lignes de cette version/);
+            assert.deepEqual(out.workZones.map(z => [z.s, z.e]), want); assert.deepEqual(out.workZones.map(z => z.id), out.workZonesBefore.map(z => z.id)); assert.equal(out.workBands, 7);
+            assert.match(out.workBand, /Tu travailles sur : ✍️ Écriture à la main/); assert.match(out.workBand, /↩ Revenir à ma version/);
+            assert.equal(out.workChips.me, false); assert.match(out.workChips.v, /is-work/); assert.match(out.workChips.v, /is-on/); }],
+        ['✎ « ↩ Revenir à ma version » : mon texte et mes zones ; la version garde ses zones reliées (retrouvées en y revenant)', () => {
+            assert.equal(out.backText, out.workTextBefore); assert.equal(out.backBand, false); assert.deepEqual(out.backZones, out.workZonesBefore);
+            assert.deepEqual(out.widZones.map(z => [z.id, z.s, z.e]), out.workZones.map(z => [z.id, z.s, z.e]));
+            assert.match(out.againStatus, /Zones reliées/); assert.deepEqual(out.againZones.map(z => [z.id, z.s, z.e]), out.workZones.map(z => [z.id, z.s, z.e])); assert.equal(out.againBackText, out.workTextBefore); }],
+        ['✎ une lecture d’un autre nombre de lignes : les zones restent à relier à la main ; ↶ Annuler remet mon texte et mes zones', () => {
+            assert.match(out.aiStatus, /^7 zones à relier/); assert.match(out.aiText, /Gaspard Mazand \[\?\]/);
+            assert.equal(out.aiUndo, true); assert.equal(out.aiUndoText, out.workTextBefore); assert.equal(out.aiUndoBand, false); assert.deepEqual(out.aiUndoZones, out.workZonesBefore); }],
         ['❓ la raison retrouvée en rouvrant l’acte', () => assert.equal(out.whyReopen, 'naissance')],
         ['à 390 px, la bande et le choix de la raison ne débordent pas', () => assert.deepEqual(out.overflow, [])],
         ['aucune erreur JS', () => assert.deepEqual(out.errs, [])],

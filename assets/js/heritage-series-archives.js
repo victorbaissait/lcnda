@@ -68,7 +68,7 @@
             ['Mi', 'Microfilms (copies)', 'Des registres consultables seulement en microfilm']]]];
 
     function body({site = '', name = ''} = {}) {
-        const rows = TABLE.map(([period, list]) => `<tr class="ser-period"><th colspan="3" scope="colgroup">${esc(i18n(period))}</th></tr>${list.map(([l, what, use]) => `<tr><th scope="row"><b>${esc(l)}</b></th><td>${esc(i18n(what))}</td><td>${esc(i18n(use))}</td></tr>`).join('')}`).join('');
+        const rows = TABLE.map(([period, list]) => `<tr class="ser-period"><td colspan="3">${esc(i18n(period))}</td></tr>${list.map(([l, what, use]) => `<tr><td class="ser-l"><b>${esc(l)}</b></td><td>${esc(i18n(what))}</td><td>${esc(i18n(use))}</td></tr>`).join('')}`).join('');
         const s = safeUrl(site);
         const acts = [];
         if (ext.archivesDispo) acts.push(`<button type="button" class="button small secondary" data-ser-dispo>${esc(i18n('🏛 Actes en ligne aux archives'))}</button>`);
@@ -76,7 +76,7 @@
         return `<div class="ser-help">
             <h3>${esc(i18n('Une série, c’est quoi ?'))}</h3>
             <p>${esc(i18n('Les Archives départementales rangent leurs documents dans un cadre de classement commun à toute la France, fixé en 1841 et complété depuis (dernier texte : circulaire de 1998). Chaque grande famille de documents a sa lettre : c’est la série. Une sous-série ajoute un chiffre devant (3 E, 4 M), puis vient le numéro de l’article : c’est la cote (3 E 12/4).'))}</p>
-            <div class="data-table-wrap"><table class="data-table ser-table" data-cols-off><thead><tr><th scope="col">${esc(i18n('Lettre'))}</th><th scope="col">${esc(i18n('Ce qu’on y trouve'))}</th><th scope="col">${esc(i18n('Utile pour le généalogiste'))}</th></tr></thead><tbody>${rows}</tbody></table></div>
+            <div class="data-table-wrap"><table class="data-table ser-table" data-cols-off><colgroup><col class="ser-c1"><col><col></colgroup><thead><tr><th scope="col">${esc(i18n('Lettre'))}</th><th scope="col">${esc(i18n('Ce qu’on y trouve'))}</th><th scope="col">${esc(i18n('Utile pour le généalogiste'))}</th></tr></thead><tbody>${rows}</tbody></table></div>
             <h3>${esc(i18n('Pourquoi ça change d’un département à l’autre'))}</h3>
             <p>${esc(i18n('Chaque département applique ce cadre avec ses propres sous-séries et sa numérotation : les notaires sont en 3 E ici, en 5 E ailleurs ; l’état civil peut être en E, en E-dépôt, ou à consulter en microfilm (Mi). Certaines séries n’existent pas partout.'))}</p>
             <p>${s ? `${esc(i18n('Avant de chercher ou d’écrire, regarde leur cadre de classement et leurs inventaires :'))} ${ext_(s, name ? i18n('Site de « {name} »', {name}) : i18n('Site du service'))}` : esc(i18n('Avant de chercher ou d’écrire, regarde le cadre de classement et les inventaires sur le site des archives du département.'))}</p>

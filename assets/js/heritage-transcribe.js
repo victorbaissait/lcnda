@@ -614,7 +614,8 @@
             const col = C.wordColor(), sw = 2.5 / zoom, fs = 12 / zoom, cut = x => (x.length > 32 ? x.slice(0, 31) + '…' : x);
             g.innerHTML = boxes.map((b, i) => `<rect class="h-tx-wbox" data-tx-wbox="${b.exact ? 'exact' : 'est'}" x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="${3 / zoom}" fill="${col}" fill-opacity=".18" stroke="${col}" stroke-width="${sw}"><title>${esc(b.exact ? i18n('Place donnée par la lecture') : i18n('≈ place estimée d’après la position des mots dans la ligne'))}</title></rect>${i ? '' : `<text class="h-tx-wlab" x="${b.x}" y="${b.y - 5 / zoom}" font-size="${fs}" fill="${col}">${b.exact ? '' : '≈ '}« ${esc(cut(boxes.map(q => q.label).join(' ')))} »</text>`}`).join('');
         }
-        ['select', 'mouseup', 'keyup', 'input'].forEach(ev => area.addEventListener(ev, () => requestAnimationFrame(paintWords)));
+        // 🔦 selectionchange : un choix au clavier ou à la souris relâchée hors de la case (sans mouseup sur elle) ; un rAF à la fois
+        let wordsRaf = 0; ['select', 'selectionchange', 'mouseup', 'keyup', 'input', 'focus'].forEach(ev => area.addEventListener(ev, () => { if (!wordsRaf) wordsRaf = requestAnimationFrame(() => { wordsRaf = 0; paintWords(); }); }));
         dlg.addEventListener('click', e => { const b = e.target.closest('[data-tx-wcol]'); if (!b || !ext.txCtx) return; ext.txCtx.setWordColor(b.dataset.txWcol);
             dlg.querySelectorAll('[data-tx-wcol]').forEach(x => { const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-checked', String(on)); }); paintWords(); });
         dlg.addEventListener('input', e => { if (!e.target.matches?.('[data-tx-zop]')) return; try { localStorage.setItem(ZOP_KEY, String(Math.round(Number(e.target.value) || 0))); } catch (_) {} paintZoneRects(); });
@@ -992,6 +993,7 @@
                     return {undo: () => putText(was), redo: () => putText(to)}; },
                 rename: (v, label) => post('rename_act_transcription_version', {id: v.id, label}),
                 remove: async v => { const r = await post('delete_act_transcription_version', {id: v.id}); full.delete(v.id); return {undo: () => post('restore_act_transcription_version', {version: (r.result || r).version})}; },
+                removeMany: async vs => { const r = await ext.txCtx.removeVersions(vs); vs.forEach(v => full.delete(v.id)); return r; }, onChange: () => VS?.soon(), // 🗑 plusieurs cochées, une seule ↶ Annuler ; la bande suit
                 saveNow: async () => { const name = await A().askText({title: `🕘 ${i18n('Nouvelle version')}`, message: i18n('Un nom pour cette version (facultatif) :'), value: '', okLabel: i18n('Enregistrer')}); if (name === null) return;
                     await post('save_act_transcription_version', {act_id: t.id, label: String(name || '').trim().slice(0, 120), body: area.value, data: dataOf(), auto: 0}); }});
         }
@@ -1033,7 +1035,29 @@
                 const old = v.label; try { await post('rename_act_transcription_version', {id: v.id, label: String(name).trim().slice(0, 120)}); } catch (e) { return toast(e.message, 'error'); } await VS.refresh();
                 A().undoToast?.(i18n('Version renommée'), {undo: async () => { await post('rename_act_transcription_version', {id: v.id, label: old}); VS.refresh(); }, icon: '✎'}); },
             openAll: () => openVersions(),
+            /* ✎ « Travailler sur cette version dans l'éditeur » : elle devient le texte (le mien gardé), ses zones à elle ou les miennes reliées à ses lignes */
+            work: async v => {
+                if (!t.id) { await save(); if (!t.id) return; }
+                let x; try { x = await api('act_transcription_version', {id: v.id}); } catch (e) { return toast(e.message, 'error'); }
+                const C = ext.txCtx, cur = VS.working(), here = snapText(), hHere = Number(t.data.hinted) || 0, mine = cur ? cur.was : here;
+                if (cur) await keepWork(cur); else versionBefore('Avant « Travailler sur cette version »');
+                const body = String(x.body || ''), own = (x.data?.zones || []).filter(z => z.e > z.s);
+                const R = own.length && own.every(z => z.e <= body.length) ? {zones: x.data.zones, unlinked: 0} : C.relinkZones(mine.zones, mine.body, body, ext.txSnap.textLinesOf);
+                const to = {body, zones: R.zones, people: x.data?.people || [], reviewed: []}, hTo = Number(x.data?.meta?.hints) || 0, w = {v, body, was: mine, wasHinted: cur ? cur.wasHinted : hHere};
+                const put = (o, h, ww) => { t.data.hinted = h; putText(o); VS.setWorking(ww); };
+                put(to, hTo, w); status(R.unlinked ? i18n(R.unlinked > 1 ? '{n} zones à relier aux lignes de cette version' : '{n} zone à relier aux lignes de cette version', {n: R.unlinked}) : i18n('Zones reliées aux lignes de cette version'));
+                A().undoToast?.(i18n('Tu travailles sur « {x} » dans l’éditeur (ton texte est gardé)', {x: C.chipOf(v)[1]}), {undo: () => put(here, hHere, cur), redo: () => put(to, hTo, w), icon: '✎'}); },
+            back: async () => { const w = VS.working(); if (!w) return; await keepWork(w); const here = snapText(), hHere = Number(t.data.hinted) || 0;
+                const put = (o, h, ww) => { t.data.hinted = h; putText(o); VS.setWorking(ww); }; put(w.was, w.wasHinted, null); status(i18n('Retour à ta version'));
+                A().undoToast?.(i18n('Retour à ta version'), {undo: () => put(here, hHere, w), redo: () => put(w.was, w.wasHinted, null), icon: '↩'}); },
+            keep: w => keepWork(w),
             dim: on => $('[data-tx-editor]')?.classList.toggle('is-dim', on)}) : null;
+        /** ✎ en quittant une version : elle garde ses zones reliées ; son texte corrigé → une copie (une lecture n'est jamais écrasée) */
+        async function keepWork(w) {
+            if (!w || !t.id) return; const from = ext.txCtx.chipOf(w.v)[1];
+            try { if (area.value === w.body) await post('save_act_transcription_version_zones', {id: w.v.id, zones: t.data.zones});
+                else await post('save_act_transcription_version', {act_id: t.id, label: 'Copie corrigée', body: area.value, data: {zones: t.data.zones, people: t.data.people, meta: {from}}, auto: 0, source: 'copy'}); } catch (e) { toast(e.message, 'error'); }
+            VS?.soon(); }
         async function openCompare(pick = null) {
             if (!ext.txCompare) return toast(i18n('La comparaison des lectures n’est pas chargée.'), 'error');
             if (!t.id) { await save(); if (!t.id) return; }

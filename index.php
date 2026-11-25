@@ -30,7 +30,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=282">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
-    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=10">
+    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=11">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -155,10 +155,10 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=6">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
-    <link rel="stylesheet" href="assets/css/versions.css?v=1">
+    <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=37" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=39" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=38" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=40" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
@@ -1230,7 +1230,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=589" defer></script>
+<script src="assets/js/app.js?v=590" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1321,7 +1321,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tips.js?v=3" defer></script>
 <script src="assets/js/app-actions.js?v=11" defer></script>
 <script src="assets/js/app-editeurs.js?v=4" defer></script>
-<script src="assets/js/app-versions.js?v=4" defer></script>
+<script src="assets/js/app-versions.js?v=5" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=16" defer></script>
 <script src="assets/js/app-access.js?v=20" defer></script>
@@ -1354,7 +1354,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-av.js?v=20" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=10" defer></script>
 <script src="assets/js/heritage-recueil-sens.js?v=1" defer></script>
-<script src="assets/js/heritage-recueil-plus.js?v=1" defer></script>
+<script src="assets/js/heritage-recueil-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-recueil-verif.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-iiif.js?v=1" defer></script>
 <script src="assets/js/heritage-recueil-etat.js?v=8" defer></script>
@@ -1572,8 +1572,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-pages.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-compare.js?v=3" defer></script>
 <script src="assets/js/heritage-transcribe-xml.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe-contexte.js?v=3" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=83" defer></script>
+<script src="assets/js/heritage-transcribe-contexte.js?v=5" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=85" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=7" defer></script>
@@ -1669,7 +1669,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-epoque-travail.js?v=1" defer></script>
 <script src="assets/js/heritage-lot9-monde-coutumes.js?v=2" defer></script>
 <script src="assets/js/heritage-lot10-regles-actes.js?v=1" defer></script>
-<script src="assets/js/heritage-lot10-terre-gens.js?v=3" defer></script>
+<script src="assets/js/heritage-lot10-terre-gens.js?v=4" defer></script>
 <script src="assets/js/heritage-lot8-soldats-noms.js?v=1" defer></script>
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=1" defer></script>
 <script src="assets/js/heritage-terroir.js?v=2" defer></script>
