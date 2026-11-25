@@ -96,7 +96,19 @@ def wd_labels(cache, name, ids, size=2500):
 
 def overpass(cache, name, query):
     key = hashlib.sha1(query.encode()).hexdigest()[:10]
-    raw = cached(cache, f'osm-{name}-{key}.json', lambda: http('https://overpass-api.de/api/interpreter', data=urllib.parse.urlencode({'data': query}).encode(), timeout=900))
+    # plusieurs serveurs Overpass publics (le principal peut être injoignable, par ex. une machine sans IPv6) ; OVERPASS_URLS les remplace
+    urls = [u for u in os.environ.get('OVERPASS_URLS', 'https://overpass-api.de/api/interpreter https://overpass.private.coffee/api/interpreter https://overpass.kumi.systems/api/interpreter').split() if u]
+
+    def fetch():
+        last = None
+        for u in urls:
+            try:
+                return http(u, data=urllib.parse.urlencode({'data': query}).encode(), timeout=900)
+            except Exception as e:  # noqa: BLE001 — on essaie le serveur suivant
+                last = e
+                print(f'  … {u} : {e} ; serveur suivant', flush=True)
+        raise RuntimeError(f'Overpass injoignable : {last}')
+    raw = cached(cache, f'osm-{name}-{key}.json', fetch)
     return json.loads(raw)
 
 
