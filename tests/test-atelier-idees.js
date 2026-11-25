@@ -96,7 +96,8 @@ echo json_encode(['m' => $m, 'a1' => $a1, 'a2' => $a2, 'a3' => $a3, 't1' => $t1,
         const ctxB = await browser.newContext({ viewport: { width: 1440, height: 900 } });
         const p = await ctxB.newPage(); const errs = [];
         p.on('pageerror', e => errs.push(e.message));
-        await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.openActTranscriber && window.LCNDA_EXT?.txPlugins?.length >= 6 && window.LCNDA_EXT?.txActe, null, { timeout: 30000 });
+        p.on('console', m => { if (m.type() === 'error' && process.env.DEBUG) console.log('console:', m.text()); });
+        await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.openActTranscriber && window.LCNDA_EXT?.txPlugins?.length >= 6 && window.LCNDA_EXT?.txActe, null, { timeout: 30000 }).catch(async e => { console.log(errs, await p.evaluate(() => ({ o: !!window.LCNDA_EXT?.openActTranscriber, n: window.LCNDA_EXT?.txPlugins?.length, a: !!window.LCNDA_EXT?.txActe }))); throw e; });
         await p.evaluate(() => { try { ['genealogie-tx-regle', 'genealogie-tx-regle-force', 'genealogie-tx-search-near', 'genealogie-tx-mains'].forEach(k => localStorage.removeItem(k)); } catch (_) {} });
         const api = (a, q = {}) => p.evaluate(([x, y]) => window.LCNDA_APP.api(x, y), [a, q]);
         const apiPost = (a, b) => p.evaluate(([x, y]) => window.LCNDA_APP.api(x, {}, { method: 'POST', body: y }).then(r => ({ ok: true, r }), e => ({ ok: false, error: e.message })), [a, b]);
