@@ -10,6 +10,12 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *   3. double-clic sur « Garder » (deux naissances) : un seul envoi, pas de « Événements introuvables. » en rouge ;
  *   3b. double-clic sur la pastille « Sans source » d'un lien parent : une seule fenêtre (et un seul dossier de preuve créé) ;
  *   3c. double-clic sur « ＋ Ajouter » / « Tout voir » des blocs presse, récompenses, scolarité : une seule fenêtre ;
+ *   3d. double-clic sur 📝 « Écrire sur cette personne » : un seul traitement de texte ;
+ *   3e. ✨ « Récit d'une vie » : un clic = seulement la fenêtre des choix (plus de diaporama vide derrière), double-clic = une seule ;
+ *   3f. 🧭 Ton lien sur la fiche de la mère / du père : « mère », sans « · par » elle-même ;
+ *   3g. double-clic sur « ✗ » d'une carte 🌠 (Ce qui le concerne) : une seule carte cachée ;
+ *   3h. double-clic sur « 🔗 Relier un recueil » : une seule question « Aucun recueil » ;
+ *   (un seul envoi / une seule ouverture à la fois : window.LCNDA_APP.once(clé, fn), app.js)
  *   4. fiche supprimée dans un autre onglet puis enregistrée ici : message clair (« la fiche a peut-être été supprimée »).
  */
 const assert = require('node:assert/strict');
@@ -38,6 +44,11 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
         assert.match(js('heritage-preuve.js'), /function openLink\(childId, parentId\) \{ return once\(/); assert.match(js('heritage-preuve.js'), /function openFor\(q\) \{ return once\(/);
         assert.match(js('heritage-blocs.js'), /BL\.open = \(o = \{\}\) => \{ if \(opening\) return opening;/);
         assert.match(app, /let paKeepBusy=false;\n    async function paKeepEvent\(keepId,others\)\{\n        if\(paKeepBusy\)return;/);
+        assert.match(app, /window\.LCNDA_APP=\{once:onceAtATime,/);
+        assert.match(js('heritage-traitement-texte-fichiers.js'), /tools\.writeAbout = \(pid, ctx = \{\}\) => A\(\)\.once\(/);
+        assert.match(js('heritage-slideshow.js'), /return A\(\)\.once\('ss-story'/);
+        assert.match(js('heritage-recueils.js'), /ext\.recueilAttachDialog = \(type, key, after, o = \{\}\) => A\(\)\.once\(/);
+        assert.match(js('heritage-tout-sur.js'), /if \(e\.detail > 1\) return; nope\(/);
     });
 
     let pw = null; for (const m of ['playwright', '/opt/node22/lib/node_modules/playwright', '/opt/node-tools/node_modules/playwright']) { try { pw = require(m); break; } catch (_) {} }
@@ -226,6 +237,8 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
                 const page = await open(`#personnes/${ids.jacques}`);
                 const card = page.locator('[data-ts-block] li.ts-sug').filter({ hasText: /1812/ }).filter({ hasText: /Chantonnay/ }).filter({ has: page.locator('.ts-ico', { hasText: '🌠' }) });
                 const nope = card.locator('[data-ts-nope]').first(); await nope.waitFor({ timeout: 90000 });
+                // le bloc se redessine tant que des données arrivent (hors ligne, puis « en ligne » 2,5 s après) : on attend qu'il ait fini
+                await page.waitForFunction(() => { const b = document.querySelector('[data-ts-block]'); return b && !b.querySelector('.ts-prog, [data-ts-online]'); }, null, { timeout: 120000 });
                 await quiet(page);
                 const before = await page.evaluate(() => document.querySelectorAll('[data-ts-block] li.ts-sug').length), sum = (await card.first().locator('.ts-sum').textContent()).trim();
                 await nope.scrollIntoViewIfNeeded(); await nope.dblclick();
