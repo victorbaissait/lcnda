@@ -240,6 +240,18 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.deepStrictEqual([r.a, r.b, r.c, r.inst], [true, true, false, true]);
             assert.match(r.t1, /En 1898, un MAZAUD, boulanger/); assert.match(r.l1, /^https:\/\/gallica\.bnf\.fr\//);
             assert.match(r.t2, /Cherche « MAZAUD Jean » dans les brevets d’invention de 1791 à 1901/); assert.strictEqual(r.l2, 'https://bases-brevets19e.inpi.fr/brevets');
+            // le vrai consommateur (heritage-tout-sur.js) : une suggestion par source, sa phrase et son lien « ↗ source »
+            const ts = await p.evaluate(async () => {
+                const T = window.LCNDA_EXT.toutSur; if (!T) return null;
+                const detail = await window.LCNDA_APP.api('person', {id: 1});
+                const res = await T.run(T.plan({person: detail, only: ['ba_annuaires', 'ba_brevets']}));
+                window.__baTs = res.map(x => [x.task.d.id, x.state, x.error || '']); return T.suggestions(res, T.lifeOf(detail)).map(s => [s.task.d.id, s.summary, s.src.url]);
+            });
+            if (ts) {
+                const m = Object.fromEntries(ts.map(x => [x[0], x])); if (!m.ba_annuaires) console.log(await p.evaluate(() => JSON.stringify(window.__baTs)));
+                assert.match(m.ba_annuaires[1], /En 1898, un MAZAUD, boulanger, 4 rue Guenot/); assert.match(m.ba_annuaires[2], /^https:\/\/(gallica\.bnf\.fr|nakala\.fr)\//);
+                assert.match(m.ba_brevets[1], /MAZAUD Jean/); assert.strictEqual(m.ba_brevets[2], 'https://bases-brevets19e.inpi.fr/brevets');
+            }
         });
         await t('« Où chercher » : 💡 la base des brevets de l’INPI (↗ Ouvrir, 📋 nom à copier) et 📇 les annuaires, par son crochet', async () => {
             const html = await p.evaluate(async () => {

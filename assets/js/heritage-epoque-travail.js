@@ -90,7 +90,8 @@
             for (const r of fleauxForDept(rows, dep)) {
                 if (seen.has(r.f)) continue;
                 const yEnd = r.prec === 'decennie' ? r.y + 9 : r.prec === 'apres' ? r.y + 10 : r.y;
-                if (yEnd < from || r.y > to) continue;
+                const adult = life.person?.birth != null ? Number(life.person.birth) + 14 : from; // « il était vigneron » : déjà en âge de travailler
+                if (yEnd < adult || r.y > to) continue;
                 const strong = jobMatch(life, STRONG[r.f] || /$^/), weak = strong ? '' : jobMatch(life, r.jobs || '$^');
                 if (!strong && !weak) continue;
                 seen.add(r.f);
@@ -279,16 +280,13 @@
     const deptName = code => DEPT[code] || code;
     function fleauxHtml(list, life) {
         if (!list.length) return '';
-        const P = life.person, out = [];
-        for (const x of list.slice(0, 3)) {
-            const r = x.r;
-            const lead = x.strong ? T('{f} touche {z} {when} : {he} était {job}.', {f: cap(esc(r.name)), z: esc(r.zone), when: fleauWhen(r), he: he(P), job: `<b>${esc(x.job)}</b>`})
-                : T('{f} touche {z} {when} ; {he} était {job} (peut-être avait-{p} des vignes ou des cultures touchées).', {f: cap(esc(r.name)), z: esc(r.zone), when: fleauWhen(r), he: he(P), job: `<b>${esc(x.job)}</b>`, p: P?.gender === 'female' ? 'elle' : 'il'});
-            const ag = x.age !== null && x.age >= 0 ? ` <span class="muted">(${esc(T('{n} a {a}', {n: P?.first || He(P), a: ageTxt(x.age)}))})</span>` : '';
-            const det = `${quote(r)}<small class="muted hist-hyp">${esc(r.exact ? T('Ce département ({d}) est dans la zone que nomme la source ; ses lieux de vie y sont.', {d: x.dep}) : T('La source parle de toute la France ; ses lieux de vie y sont.'))} ${esc(T('Le métier vient de sa fiche (profession, recensements).'))}</small>`;
-            out.push(row(r.icon || '🐛', lead + ag, SRC.fleaux(r.url), more(det)));
-        }
-        return out.join('');
+        const P = life.person, x = list[0], r = x.r;
+        const lead = x.strong ? T('{f} touche {z} {when} : {he} était {job}.', {f: cap(esc(r.name)), z: esc(r.zone), when: fleauWhen(r), he: he(P), job: `<b>${esc(x.job)}</b>`})
+            : T('{f} touche {z} {when} ; {he} était {job} (peut-être avait-{p} des vignes ou des cultures touchées).', {f: cap(esc(r.name)), z: esc(r.zone), when: fleauWhen(r), he: he(P), job: `<b>${esc(x.job)}</b>`, p: P?.gender === 'female' ? 'elle' : 'il'});
+        const ag = x.age !== null && x.age >= 0 ? ` <span class="muted">(${esc(T('{n} a {a}', {n: P?.first || He(P), a: ageTxt(x.age)}))})</span>` : '';
+        const others = list.slice(1).map(y => `<li>${esc(y.r.icon || '🐛')} <b>${esc(cap(y.r.name))}</b> : ${esc(fleauWhen(y.r))}, ${esc(y.r.zone)}${y.age !== null && y.age >= 0 ? ` <small class="muted">(${esc(ageTxt(y.age))})</small>` : ''} ${srcLink(y.r.url)}<br><small class="muted">« ${esc(y.r.sentence)} »</small></li>`).join('');
+        const det = `${quote(r)}${others ? `<p class="muted">${esc(T('Les autres fléaux de son métier pendant sa vie :'))}</p><ul class="hist-ul">${others}</ul>` : ''}<small class="muted hist-hyp">${esc(r.exact ? T('Son département ({d}) est dans la zone que nomme la source.', {d: x.dep}) : T('La source parle de toute la France.'))} ${esc(T('Le métier vient de sa fiche (profession, recensements).'))}</small>`;
+        return row(r.icon || '🐛', lead + ag, SRC.fleaux(r.url), more(det, list.length > 1 ? list.length : null));
     }
     function strikeName(s) { return esc(String(s.n).replace(/^(Grève|Grèves|Mouvement|Révolte|Fusillade|Massacre)\b/, w => w.toLowerCase())); }
     function strikeLi(x) {

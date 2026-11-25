@@ -72,3 +72,19 @@ FACTS = '''SELECT ?s ?sLabel ?d ?st ?end ?coord ?loc ?locLabel ?lcoord ?larea ?a
  ?s wikibase:sitelinks ?sl .
  ''' + LAB.format('') + '''
 }'''
+
+# 📚 en deux temps (plus léger pour le serveur) : 1) les œuvres d'un type, datées, connues ; 2) leurs titres, auteurs, langues
+BOOK_TYPES = ['Q7725634', 'Q8261', 'Q25379', 'Q5185279', 'Q49084', 'Q1279564', 'Q12106333', 'Q37484', 'Q571']
+BOOK_IDS = '''SELECT ?w ?d ?sl WHERE {
+ ?w wdt:P31 wd:%s ; wdt:P577 ?d .
+ FILTER(YEAR(?d) >= 1600 && YEAR(?d) <= 2000)
+ ?w wikibase:sitelinks ?sl . FILTER(?sl >= %d)
+}'''
+BOOK_FACTS = '''SELECT ?w ?wfr ?wen ?a ?afr ?aen ?lang ?orig ?frwiki WHERE {
+ VALUES ?w { %s }
+ OPTIONAL { ?w rdfs:label ?wfr FILTER(LANG(?wfr) = "fr") } OPTIONAL { ?w rdfs:label ?wen FILTER(LANG(?wen) = "en") }
+ OPTIONAL { ?w wdt:P50 ?a . OPTIONAL { ?a rdfs:label ?afr FILTER(LANG(?afr) = "fr") } OPTIONAL { ?a rdfs:label ?aen FILTER(LANG(?aen) = "en") } }
+ OPTIONAL { ?w wdt:P407 ?lang }
+ OPTIONAL { ?w wdt:P495 ?orig }
+ OPTIONAL { ?frwiki schema:about ?w ; schema:isPartOf <https://fr.wikipedia.org/> }
+}'''

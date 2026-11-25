@@ -359,15 +359,32 @@ FRCOUNTRY = re.compile(r'France|Belgique|Suisse|Royaume de France|Second Empire|
 
 
 def build_livres(cache, per_year=15):
-    by = {}
-    for a, b in W.BOOK_SPANS:
+    dates, sls = {}, {}
+    for ty in W.BOOK_TYPES:
         try:
-            rs = sparql(cache, f'books-{a}', W.BOOKS % (30, a, b))
+            rs = sparql(cache, f'bookids-{ty}', W.BOOK_IDS % (ty, 30))
         except RuntimeError as e:
-            print(f'  ⚠️ livres {a}–{b} : {e}', flush=True)
+            print(f'  ⚠️ livres {ty} : {e}', flush=True)
             continue
+        print(f'  livres {ty} : {len(rs)}', flush=True)
         for r in rs:
+            q = qid(r['w'])
+            dates.setdefault(q, set()).add(r['d'])
+            sls[q] = int(r.get('sl') or 0)
+    ids = sorted(dates)
+    by = {}
+    for k in range(0, len(ids), 400):
+        for r in sparql(cache, f'bookfacts{k // 400}', W.BOOK_FACTS % ' '.join(f'wd:{q}' for q in ids[k:k + 400])):
             by.setdefault(qid(r['w']), []).append(r)
+    for q in ids:
+        lst = by.setdefault(q, [{}])
+        for i, d in enumerate(sorted(dates[q])):
+            if i < len(lst):
+                lst[i] = {**lst[i], 'd': d, 'sl': sls[q]}
+            else:
+                lst.append({'d': d, 'sl': sls[q]})
+        for r in lst:
+            r.setdefault('sl', sls[q])
     rows = []
     for q, rs in by.items():
         t = next((r['wfr'] for r in rs if r.get('wfr')), '') or next((r['wen'] for r in rs if r.get('wen')), '')
