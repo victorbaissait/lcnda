@@ -318,8 +318,13 @@ def build_fontaines():
         if not r['pos'] and not r['insee']:
             continue
         kind = 'pelerinage' if r['k'] & {'Q15135589', 'Q840482'} else 'fontaine'
+        devotion = bool(r['k'] & {'Q1371047', 'Q121746926'}) or kind == 'pelerinage'
+        cn = fold(communes.get(r['insee'], [''])[0])
+        rest = fold(re.sub(r'^(fontaine|source|puits|bonne fontaine)( de la| du| des| de| d’| d\')?\s*', '', r['n'], flags=re.I))
+        if not devotion and not r['saint'] and (re.match(r'^(fontaine|source|puits) (de|du|des|d’|d\')\b', r['n'], re.I) or (cn and rest.startswith(cn))):
+            continue  # « fontaine de Saint-Bonnet-le-Château » : la fontaine de la commune, pas celle d'un saint
         if not r['saint']:  # le saint écrit dans le nom (« Fontaine Saint-Clair ») : on le dit comme tel
-            m = re.search(r'(Saint|Sainte|Notre-Dame)[- ]([A-ZÉÈ][\w’\'-]+(?:[- ][A-ZÉ][\w’\'-]+)?)?', r['n'])
+            m = re.search(r'(Notre-Dame(?:[- ](?:de |des |du |de la )?[A-ZÉÈ][\w’\'-]+)?|(?:Saint|Sainte)[- ][A-ZÉÈ][\w’\'-]+)', r['n'])
             name_saint = m.group(0).replace('Saint ', 'Saint-').replace('Sainte ', 'Sainte-') if m else ''
         else:
             name_saint = ''

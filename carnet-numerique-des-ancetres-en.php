@@ -9,6 +9,9 @@
     <link rel="alternate" hreflang="fr" href="carnet-numerique-des-ancetres.php">
     <link rel="alternate" hreflang="en" href="carnet-numerique-des-ancetres-en.php">
     <link rel="alternate" hreflang="x-default" href="carnet-numerique-des-ancetres.php">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"LCNDA — The Digital Ancestors' Notebook","alternateName":"Le Carnet numérique des ancêtres","applicationCategory":"Genealogy","operatingSystem":"macOS, Windows, Linux","softwareVersion":"0.10.0","datePublished":"2026-11-22","license":"https://www.gnu.org/licenses/agpl-3.0.html","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"inLanguage":["fr","en","es","de","it","pt","pl","nl","cs","sv","da","sk","nb","ro","fi","hu","hr","sl","lt","lv","et","is","tr","lb","sq","mt","vi","id","ru","uk","el","bg"],"downloadUrl":["download/LCNDA-0.10.0-mac-arm64.dmg","download/LCNDA-0.10.0-windows-x64.exe","download/LCNDA-0.10.0-linux-x86_64.AppImage"],"releaseNotes":"carnet-numerique-des-ancetres-en.php#v0-10-0","description":"A local app (nothing on the Internet) to organise, document and pass on a family history: records, sources, trees, maps, transcription of old records, estates and heirs."}</script>
+    <!-- FAQ-JSONLD:DEBUT -->
+    <!-- FAQ-JSONLD:FIN -->
     <style>
         :root { --presentation-ink:#080808; --presentation-blue:#0066cc; --presentation-paper:#fbfbfb; --presentation-muted:#515151; }
         * { box-sizing:border-box; }
@@ -175,6 +178,24 @@
         .presentation-lang-banner[hidden] { display:none; }
         .presentation-lang-banner a { color:var(--presentation-blue); text-decoration:underline; text-underline-offset:3px; }
         .presentation-lang-banner button { flex:none; display:grid; place-items:center; width:28px; height:28px; padding:0; border:2px solid var(--presentation-ink); background:#fff; color:var(--presentation-ink); font:900 16px/1 Arial,Helvetica,sans-serif; cursor:pointer; }
+        /* ─── Versions : fiche de chaque version, « en bref », tableau des versions ; sommaire de la FAQ ─── */
+        .presentation-facts { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; margin:6px 0 18px; }
+        .presentation-facts div { border:1px solid #d7d7d7; padding:10px 12px; }
+        .presentation-facts dt { font-size:12px; font-weight:900; letter-spacing:.1em; color:var(--presentation-blue); text-transform:uppercase; }
+        .presentation-facts dd { margin:4px 0 0; font-weight:700; }
+        .presentation-facts a { color:var(--presentation-blue); text-decoration:underline; }
+        .presentation-changes-body .presentation-brief { margin:0 0 12px; padding-left:20px; font-weight:600; line-height:1.6; }
+        .presentation-versions-scroll { overflow-x:auto; }
+        .presentation-versions-table { width:100%; border-collapse:collapse; font-size:15px; font-weight:600; }
+        .presentation-versions-table th { text-align:left; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--presentation-muted); border-bottom:2px solid var(--presentation-ink); padding:8px; }
+        .presentation-versions-table td { border-bottom:1px solid #e3e3e3; padding:9px 8px; vertical-align:top; }
+        .presentation-versions-table td:first-child a { color:var(--presentation-blue); text-decoration:underline; }
+        .presentation-versions-table td:nth-child(2) { white-space:nowrap; }
+        .presentation-versions-hint { margin:8px 0 14px; color:var(--presentation-muted); font-size:14px; font-weight:600; }
+        .presentation-faq-toc { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 0; }
+        .presentation-faq-toc a { border:1.5px solid var(--presentation-ink); padding:5px 10px; font-weight:800; font-size:14px; background:#fff; }
+        .presentation-faq-toc small { color:var(--presentation-blue); }
+        @media (max-width:640px) { .presentation-versions-table thead { display:none; } .presentation-versions-table tr { display:grid; grid-template-columns:auto 1fr; gap:2px 12px; padding:9px 0; border-bottom:1px solid #e3e3e3; } .presentation-versions-table td { padding:0; border:0; } .presentation-versions-table td:nth-child(2) { color:var(--presentation-muted); } .presentation-versions-table td:nth-child(3) { grid-column:1 / -1; } }
     </style>
 </head>
 <body class="presentation-body">
@@ -258,9 +279,14 @@
                 </div>
             </article>
 
-            <details class="presentation-changes">
-                <summary><span>What's new in version 0.10.0<small>Transcription workshop, records read by an AI on your own computer, multi-page documents, phone photos over wifi, several computers, six new maps, very large databases</small></span></summary>
+            <details class="presentation-changes" id="v0-10-0">
+                <summary><span>What's new in version 0.10.0<small>Released on 22 November 2026 · Transcription workshop, records read by an AI on your own computer, multi-page documents, phone photos over wifi, several computers, six new maps, very large databases</small></span></summary>
                 <div class="presentation-changes-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-11-22">22 November 2026</time></dd></div><div><dt>Systems</dt><dd>macOS 11+ (Apple Silicon, Intel), Windows 10/11, Linux (x64, ARM)</dd></div><div><dt>Size</dt><dd>550 to 600 MB</dd></div><div><dt>Languages</dt><dd>32</dd></div><div><dt>Database update</dt><dd>By itself, a safety copy is made first</dd></div><div><dt>Check</dt><dd><a href="download/SHA256SUMS.txt">SHA256SUMS.txt</a> · <a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.10.0.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.10.0">this version on GitHub</a></dd></div></dl>
+<h4>In short</h4><ul class="presentation-brief"><li>📜 The transcription workshop: one text per document, everywhere.</li><li>🔍 Records read by an AI <b>on your own computer</b> (nothing goes to the Internet).</li><li>📑 Documents with several pages (front, back, appendices).</li><li>📱 Phone photos over wifi; 🖧 several computers.</li><li>⚡ Up to 500,000 people.</li></ul>
+<h4>Who is it for?</h4><p>Everyone; especially people who transcribe records and people with very large databases.</p>
+<h4>Before you update</h4><p>Make a backup (Settings → Backup): a database opened by 0.10.0 cannot be opened again in an older version. Reading by the AI needs Ollama and enough memory (Settings → AI checks this).</p>
+<h4>The details</h4>
                     <h4>📜 Transcription workshop</h4>
                     <p>One text per document, the same everywhere: workshop, viewer, document page, the records of linked people, search and GEDCOM export. A readable title instead of the file name. A simpler layout: the “🎚️ See better” bar with 3 ready-made settings, a single “✨ Read ▾” button that explains each kind of reading, the “Read → Correct → Mark → Add” strip, a full-screen line-by-line proofreading mode, 🕘 text versions, find / replace, the progress of each record and abbreviations explained on hover. On a phone, three tabs: Image, Text, People.</p>
                     <h4>🔍 In-depth reading by an AI, on your own computer</h4>
@@ -286,11 +312,13 @@
             </details>
 
             <details class="presentation-changes presentation-changes-old">
-                <summary><span>What was new in earlier versions<small>What the previous versions brought</small></span></summary>
+                <summary><span>What was new in earlier versions<small>The 16 previous versions, each with its date and a short summary</small></span></summary>
                 <div class="presentation-changes-body">
-                    <details class="presentation-version">
-                        <summary>Version 0.9.2 <small>The app in 32 languages, guided first launch with a sample database, online archives in one place, evidence and strength of links, new tools, imports and exports, maps and diagrams, games</small></summary>
+<h4>All versions at a glance</h4><div class="presentation-versions-scroll"><table class="presentation-versions-table"><thead><tr><th>Version</th><th>Released</th><th>The main points</th></tr></thead><tbody><tr><td><a href="#v0-10-0"><b>0.10.0</b></a></td><td>22 November 2026</td><td>Transcription workshop, records read by an AI on your own computer, multi-page documents, phone photos over wifi, several computers, six new maps, very large databases</td></tr><tr><td><a href="#v0-9-2"><b>0.9.2</b></a></td><td>13 November 2026</td><td>The app in 32 languages, guided first launch with a sample database, online archives in one place, evidence and strength of links, new tools, imports and exports, maps and diagrams, games</td></tr><tr><td><a href="#v0-9-1"><b>0.9.1</b></a></td><td>29 October 2026</td><td>The same bar above every list, a single “Print” window and a single “Versions” window, search in Settings, a much richer bunker, more readable colours, lots of fixes</td></tr><tr><td><a href="#v0-9-0"><b>0.9.0</b></a></td><td>27 October 2026</td><td>Family treasures, 108 solitaire games and two new games, page backgrounds, reorganised settings, gazette, embroidery, birth sky, soundscape, many fixes</td></tr><tr><td><a href="#v0-8-2"><b>0.8.2</b></a></td><td>24 October 2026</td><td>Spreadsheet (solver, scenarios, recorded actions), video editing (colour wheels, green screen, tracking, multiple cameras, standard loudness), PDF/A and fold-up booklet, retouching (Liquify, magic eraser, PSD), drawing (dimensions, perspective)</td></tr><tr><td><a href="#v0-8-1"><b>0.8.1</b></a></td><td>24 October 2026</td><td>The house like an architect's plan (DXF, repeat, arrow labels, title block), 145 more pieces of furniture and appliances, website with a real code editor, pivot table and mail merge, clearer settings, shortcuts at the top right</td></tr><tr><td><a href="#v0-8-0"><b>0.8.0</b></a></td><td>23 October 2026</td><td>Animal tracking, records arranged in sections, weather of the past, word processor and spreadsheet, sound studio, a more advanced house, database check, research log, land registry, website, games, simple mode and designs to choose from</td></tr><tr><td><a href="#v0-7-1"><b>0.7.1</b></a></td><td>20 October 2026</td><td>Photoshop-style retouching (gradients, Hue/Saturation, paragraphs, glyphs, patterns, brush shapes), a single colour window, video editing, redesigned saved settings, diagrams, search by exact date, adjustable messages</td></tr><tr><td><a href="#v0-7-0"><b>0.7.0</b></a></td><td>19 October 2026</td><td>Creations, artists and careers, the family house in 3D, drawing and coats of arms, transcription of records and old alphabets, presentations and life stories, charts and maps, photo maps, DNA and faces, several family trees, a more consistent and more accessible app</td></tr><tr><td><a href="#v0-6-0"><b>0.6.0</b></a></td><td>16 October 2026</td><td>Layout workshop, photo retouching with layers, small video editor, sound projects, free-form boards, animals, topic cards, family book and booklets, statistics and your own settings</td></tr><tr><td><a href="#v0-5-0"><b>0.5.0</b></a></td><td>13 October 2026</td><td>Collections, page-by-page record indexes, census address map, a village record you can organise, research workshop, sounds and videos, calendars</td></tr><tr><td><a href="#v0-4-2"><b>0.4.2</b></a></td><td>—</td><td>3D family museum, photo retouching, your own widgets, voter cards, automatic INSEE death records, 26 calendars, many fixes</td></tr><tr><td><a href="#v0-4-1"><b>0.4.1</b></a></td><td>11 October 2026</td><td>My lists, a richer village record, one-click installation of handwriting recognition, fixes</td></tr><tr><td><a href="#v0-4-0"><b>0.4.0</b></a></td><td>10 October 2026</td><td>New blocks, block editor, village record, a clean database, working as two, a copy kept at a cousin's</td></tr><tr><td><a href="#v0-3-1"><b>0.3.1</b></a></td><td>9 October 2026</td><td>Ancestors and descendants, merging a cousin's tree, keyboard shortcuts</td></tr><tr><td><a href="#v0-3-0"><b>0.3.0</b></a></td><td>9 October 2026</td><td>Research help, search sweeps worldwide, family heirlooms and memory</td></tr><tr><td><a href="#v0-2-1"><b>0.2.1</b></a></td><td>—</td><td>Search sweeps across borders, and fixes</td></tr></tbody></table></div><p class="presentation-versions-hint">Click a number to open that version below.</p>
+                    <details class="presentation-version" id="v0-9-2">
+                        <summary>Version 0.9.2 <small>Released on 13 November 2026 · The app in 32 languages, guided first launch with a sample database, online archives in one place, evidence and strength of links, new tools, imports and exports, maps and diagrams, games</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-11-13">13 November 2026</time></dd></div><div><dt>What's new</dt><dd>8 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.9.2.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.9.2">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>🌐 The app in 32 languages</li><li>🧭 First launch and guided tour</li><li>🔍 Online archives in one place</li><li>⚖️ Evidence and strength of links</li><li>🧰 New tools</li><li>⤒ Imports and exports</li></ul><h4>The details</h4>
                     <h4>🌐 The app in 32 languages</h4>
                     <p>Français, English, Español, Deutsch, Italiano, Português, Polski, Nederlands, Čeština, Svenska, Dansk, Slovenčina, Norsk (bokmål), Română, Suomi, Magyar, Hrvatski, Slovenščina, Lietuvių, Latviešu, Eesti, Íslenska, Türkçe, Lëtzebuergesch, Shqip, Malti, Tiếng Việt, Bahasa Indonesia, Русский, Українська, Ελληνικά, Български. The whole app is translated (menus, records, tools, Settings, games, editors), as are the 806 answers in the FAQ. The first time, the app opens in your computer's language (otherwise in English), with two buttons, “Français” / “English”. The translations are made by an AI: a banner says so, with “Report a mistake”. Your data (names, notes, places) is never translated.</p>
                     <h4>🧭 First launch and guided tour</h4>
@@ -310,9 +338,10 @@
                     <p>The database updates itself the first time you open it: nothing to do.</p>
     </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.9.1 <small>The same bar above every list, a single “Print” window and a single “Versions” window, search in Settings, a much richer bunker, more readable colours, lots of fixes</small></summary>
+                    <details class="presentation-version" id="v0-9-1">
+                        <summary>Version 0.9.1 <small>Released on 29 October 2026 · The same bar above every list, a single “Print” window and a single “Versions” window, search in Settings, a much richer bunker, more readable colours, lots of fixes</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-29">29 October 2026</time></dd></div><div><dt>What's new</dt><dd>7 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.9.1.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.9.1">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>🔍 The same bar above every list</li><li>🖨 One window for printing, one for versions</li><li>⚙️ Easier Settings</li><li>☢ A much richer bunker</li><li>📄 New tabs</li><li>🎨 More readable colours</li></ul><h4>The details</h4>
                     <h4>🔍 The same bar above every list</h4>
                     <p>More than forty more lists now have the shared bar: 🔍 Search · Filter ▾ · List | Cards · Sort (family papers, passports, coats of arms, heirlooms and family memory, old occupations, precise places, villages, parishes, old maps, field trips, WWI soldiers, Resistance members, departures, children in care, genealogy fairs, help requests, archive visits, censuses, Treasures, gazettes, My lists…). The old small buttons (“To do / Done”, “All / Domestic / Abroad”…) move into Filter, with the number found next to each choice; active filters show as blue chips you remove with one click. Each list remembers its search, filters, sort order and display; the maps above a list follow the filters. Both calendars have 🔍 and Filter. <b>My lists</b> gains “⤓ Export ▾” (CSV, spreadsheet, Excel), “🖨 Print” and “More ▾” for its other layouts. A sealed letter is never searched.</p>
                     <h4>🖨 One window for printing, one for versions</h4>
@@ -330,9 +359,10 @@
                     <p>The database updates itself the first time you open it (a few indexes and one extra column): nothing to do.</p>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.9.0 <small>Family treasures, 108 solitaire games and two new games, page backgrounds, reorganised settings, gazette, embroidery, birth sky, soundscape, many fixes</small></summary>
+                    <details class="presentation-version" id="v0-9-0">
+                        <summary>Version 0.9.0 <small>Released on 27 October 2026 · Family treasures, 108 solitaire games and two new games, page backgrounds, reorganised settings, gazette, embroidery, birth sky, soundscape, many fixes</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-27">27 October 2026</time></dd></div><div><dt>What's new</dt><dd>7 topics</dd></div><div><dt>Database</dt><dd>A small table added by itself</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.9.0.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.9.0">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>✨ Family treasures</li><li>🎲 Games</li><li>🧩 Page backgrounds</li><li>🎨 Reorganised settings</li><li>📊 Diagrams and dashboard</li><li>🥚 A secret</li></ul><h4>The details</h4>
                     <h4>✨ Family treasures</h4>
                     <p>A new tab (hidden at first): 💌 letters to descendants sealed until a given date, 🎂 “At your age…”, 📷 date a photo, 🃏 Happy Families card game (photos and 6 styles), 🖍 colouring tree, memories of the senses, recipes and songs (stored in Family memory), 🌌 birth sky calculated for the place and date, 🕯 candle, 🎧 period soundscape (36 layers, 25 atmospheres, timer), 🗺 treasure hunt, mystery ancestor of the day, choose-your-own-adventure book, coincidences, “What if…”, 🧵 cross-stitch embroidery, laser engraving, portrait mosaic, 📰 gazette of the year (8 styles), wallpaper, 🛂 internal passports, grandparent tells the story, secure temporary sharing. 13 widgets and lists to find them again.</p>
                     <h4>🎲 Games</h4>
@@ -350,9 +380,10 @@
                     <p>A small table is added to the database automatically for the Treasures, the first time you use them: nothing to do.</p>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.8.2 <small>Spreadsheet (solver, scenarios, recorded actions), video editing (colour wheels, green screen, tracking, multiple cameras, standard loudness), PDF/A and fold-up booklet, retouching (Liquify, magic eraser, PSD), drawing (dimensions, perspective)</small></summary>
+                    <details class="presentation-version" id="v0-8-2">
+                        <summary>Version 0.8.2 <small>Released on 24 October 2026 · Spreadsheet (solver, scenarios, recorded actions), video editing (colour wheels, green screen, tracking, multiple cameras, standard loudness), PDF/A and fold-up booklet, retouching (Liquify, magic eraser, PSD), drawing (dimensions, perspective)</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-24">24 October 2026</time></dd></div><div><dt>What's new</dt><dd>7 topics</dd></div><div><dt>Database</dt><dd>No change</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.8.2.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.8.2">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>🧾 Spreadsheet</li><li>🎞️ Presentation</li><li>📝 Word processor</li><li>🎬 Video editing</li><li>📐 Layout</li><li>🎚️ Retouching</li></ul><h4>The details</h4>
                             <h4>🧾 Spreadsheet</h4>
                             <p>✨ Flash fill (one example is enough), Σ subtotals with ⊟ outline that collapses the detail, 📈 sparklines in cells, 🎯 goal seek, 🧮 solver (several cells, constraints, whole numbers), 📋 scenario table (“what if…”), ⏺ recorded actions to replay in one click, and the LET and LAMBDA formulas.</p>
                             <h4>🎞️ Presentation</h4>
@@ -371,9 +402,10 @@
 
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.8.1 <small>The house like an architect's plan (DXF, repeat, arrow labels, title block), 145 more pieces of furniture and appliances, website with a real code editor, pivot table and mail merge, clearer settings, shortcuts at the top right</small></summary>
+                    <details class="presentation-version" id="v0-8-1">
+                        <summary>Version 0.8.1 <small>Released on 24 October 2026 · The house like an architect's plan (DXF, repeat, arrow labels, title block), 145 more pieces of furniture and appliances, website with a real code editor, pivot table and mail merge, clearer settings, shortcuts at the top right</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-24">24 October 2026</time></dd></div><div><dt>What's new</dt><dd>9 topics</dd></div><div><dt>Database</dt><dd>No change</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.8.1.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.8.1">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>🏠 The house, like an architect's plan</li><li>🛋️ Furniture</li><li>🌐 My website</li><li>🧾 Spreadsheet and 📝 word processor</li><li>📊 Diagrams</li><li>🎨 Clearer settings</li></ul><h4>The details</h4>
                             <h4>🏠 The house, like an architect's plan</h4>
                             <p>⤒ import a <b>DXF</b> plan (AutoCAD, LibreCAD, an architect's or notary's plan) and ⤓ export yours as DXF, organised in layers (walls, rooms, openings, furniture, text, dimensions). <b>🔁 Repeat</b> places several copies at once: 6 chairs around a table (facing it), a row, a grid, or a row of windows along a wall. <b>🏷 Arrow labels</b>: a note linked to a point on the plan, such as “The well was here” or “Double glazing fitted in 1978”. In the floor's “View”: overall dimensions, a table of rooms and their areas placed on the plan, a title block (name, place, period, floor, date) and a dark technical-drawing display.</p>
                             <h4>🛋️ Furniture</h4>
@@ -396,9 +428,10 @@
 
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.8.0 <small>Animal tracking, records arranged in sections, weather of the past, word processor and spreadsheet, sound studio, a more advanced house, database check, research log, land registry, website, games, simple mode and designs to choose from</small></summary>
+                    <details class="presentation-version" id="v0-8-0">
+                        <summary>Version 0.8.0 <small>Released on 23 October 2026 · Animal tracking, records arranged in sections, weather of the past, word processor and spreadsheet, sound studio, a more advanced house, database check, research log, land registry, website, games, simple mode and designs to choose from</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-23">23 October 2026</time></dd></div><div><dt>What's new</dt><dd>15 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.8.0.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.8.0">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>🐾 Animal tracking</li><li>🗂️ Records arranged in sections</li><li>🌦️ Weather of the past</li><li>📝 Word processor</li><li>🧾 Spreadsheet</li><li>🎧 Sound</li></ul><h4>The details</h4>
                             <h4>🐾 Animal tracking</h4>
                             <p>A new tab (hidden at first, to show in Settings → Appearance → tabs) for tracking animals in the field or at home. It is made of blocks, like the dashboard, with pages per species or per site, and its blocks can also go on the dashboard. Rings and marks according to the species (bird, cat or dog, horse, farm animal, fish, marine mammal, wild animal, primate), with the basic colours and the colour window. An uncertain reading (“7?”, “7[K|X]”) is kept as it is, along with the possible animals. Sightings with several photos, sounds or videos; GPS routes (GPX, Movebank, collar); health and weight with the curve; groups, roles and social history; census; sharing and merging with another tracking project.</p>
                             <h4>🗂️ Records arranged in sections</h4>
@@ -432,9 +465,10 @@
 
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.7.1 <small>Photoshop-style retouching (gradients, Hue/Saturation, paragraphs, glyphs, patterns, brush shapes), a single colour window, video editing, redesigned saved settings, diagrams, search by exact date, adjustable messages</small></summary>
+                    <details class="presentation-version" id="v0-7-1">
+                        <summary>Version 0.7.1 <small>Released on 20 October 2026 · Photoshop-style retouching (gradients, Hue/Saturation, paragraphs, glyphs, patterns, brush shapes), a single colour window, video editing, redesigned saved settings, diagrams, search by exact date, adjustable messages</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-20">20 October 2026</time></dd></div><div><dt>What's new</dt><dd>9 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.7.1.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.7.1">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>🎚️ Photo retouching, like Photoshop</li><li>🎨 A single colour window everywhere</li><li>🎞️ Video editing</li><li>📐 Layout and ✏️ drawing</li><li>💾 Saved settings, new frame</li><li>📊 Diagrams and maps</li></ul><h4>The details</h4>
                             <h4>🎚️ Photo retouching, like Photoshop</h4>
                             <p>A real <b>▦ Gradient</b> tool (linear, radial, angle, reflected, diamond; colour and transparency stops, 16 presets, handles on the image, inside a mask to blend a photo); the <b>ⓘ Properties</b> tab with <b>Hue/Saturation</b> (colour ranges, Colorize, eyedroppers, targeted adjustment), mask density and feathering; <b>🔤 Character, ¶ Paragraph and Ω Glyphs</b> (font and its weight, justified text blocks with hyphenation, indents, French typography and genealogy signs); <b>▩ Patterns</b> to apply to a layer or to create yourself (seamless tiling); <b>🖌 Brush shapes</b> (stars, leaves, grass, chalk, calligraphy pen… and your own shape from a selection); images placed as <b>smart objects 🧩</b> (enlarge, rotate without loss); <b>Fill</b> and <b>fx</b> layer effects (shadow, glow, stroke); non-destructive restoration (everything goes on layers); replace the sky, cut out a person, upscale ×2 / ×4, panorama; empty canvas; the two colour squares with X and D.</p>
                             <h4>🎨 A single colour window everywhere</h4>
@@ -455,9 +489,10 @@
                             <p>A separate “Maps and base maps” page; messages after an action can be adjusted (corner of the screen, duration, colours of each kind of message); FAQ search with a single frame.</p>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.7.0 <small>Creations, artists and careers, the family house in 3D, drawing and coats of arms, transcription of records and old alphabets, presentations and life stories, charts and maps, photo maps, DNA and faces, several family trees, a more consistent and more accessible app</small></summary>
+                    <details class="presentation-version" id="v0-7-0">
+                        <summary>Version 0.7.0 <small>Released on 19 October 2026 · Creations, artists and careers, the family house in 3D, drawing and coats of arms, transcription of records and old alphabets, presentations and life stories, charts and maps, photo maps, DNA and faces, several family trees, a more consistent and more accessible app</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-19">19 October 2026</time></dd></div><div><dt>What's new</dt><dd>13 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.7.0.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.7.0">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>🎨 Creations, artists and careers</li><li>🏠 The family house, as a plan and in 3D</li><li>✏️ Drawing, coats of arms, plans and announcements</li><li>📜 Reading old records</li><li>🎞️ Presentations, slideshows and video editing</li><li>🎚️ Retouching and layout</li></ul><h4>The details</h4>
                             <h4>🎨 Creations, artists and careers</h4>
                             <ul>
                                 <li><b>“This person was…”</b>: profiles to tick on a record (artist, craftsperson, actor, athlete, politician, scientist, inventor, explorer, soldier, farmer… and your own). Each profile adds its own parts; a person can have several, brought together on one page with a <b>timeline coloured by profile</b>.</li>
@@ -541,9 +576,10 @@
                             </ul>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.6.0 <small>Layout workshop, photo retouching with layers, small video editor, sound projects, free-form boards, animals, topic cards, family book and booklets, statistics and your own settings</small></summary>
+                    <details class="presentation-version" id="v0-6-0">
+                        <summary>Version 0.6.0 <small>Released on 16 October 2026 · Layout workshop, photo retouching with layers, small video editor, sound projects, free-form boards, animals, topic cards, family book and booklets, statistics and your own settings</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-16">16 October 2026</time></dd></div><div><dt>What's new</dt><dd>12 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.6.0.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.6.0">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>📐 Layout workshop</li><li>🎬 Small video editor</li><li>🎚️ Photo retouching, with layers</li><li>🎧 Sound</li><li>🛠️ Editing tools</li><li>🧩 Free-form boards</li></ul><h4>The details</h4>
                     <h4>📐 Layout workshop</h4>
                     <ul>
                         <li>Make <b>the book of your family history</b> as in desktop publishing software: single pages or <b>facing pages</b>, <b>master pages</b> (page number, running head), <b>layers</b> (hide, lock, arrange).</li>
@@ -620,9 +656,10 @@
                     </ul>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.5.0 <small>Collections, page-by-page record indexes, census address map, a village record you can organise, research workshop, sounds and videos, calendars</small></summary>
+                    <details class="presentation-version" id="v0-5-0">
+                        <summary>Version 0.5.0 <small>Released on 13 October 2026 · Collections, page-by-page record indexes, census address map, a village record you can organise, research workshop, sounds and videos, calendars</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-13">13 October 2026</time></dd></div><div><dt>What's new</dt><dd>7 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.5.0.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.5.0">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>📚 Collections</li><li>📜 Record indexes</li><li>🗺️ Address map</li><li>🏘️ Village record</li><li>🔬 Research workshop</li><li>🎧 Sounds, videos and calendars</li></ul><h4>The details</h4>
                     <h4>📚 Collections</h4>
                     <ul>
                         <li>The pages of a register or notebook <b>photographed in order</b>, with transcription and versions side by side.</li>
@@ -666,9 +703,10 @@
                     </ul>
                         </div>
                     </details>
-                    <details class="presentation-version">
+                    <details class="presentation-version" id="v0-4-2">
                         <summary>Version 0.4.2 <small>3D family museum, photo retouching, your own widgets, voter cards, automatic INSEE death records, 26 calendars, many fixes</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd>work version (not released)</dd></div><div><dt>What's new</dt><dd>6 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/blob/HEAD/release-notes/v0.4.2.md">full notes (in French)</a> · <a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.4.2">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>3D family museum</li><li>Photos and appearance</li><li>Dashboard, lists and search</li><li>New blocks and tools</li><li>Calendars</li><li>Fixes</li></ul><h4>The details</h4>
                     <h4>3D family museum</h4>
                     <ul>
                         <li>Rooms where you display photos, documents and objects, with a <b>floor plan of the room</b> to place each item and a <b>custom room size</b>.</li>
@@ -711,9 +749,10 @@
                     </ul>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.4.1 <small>My lists, a richer village record, one-click installation of handwriting recognition, fixes</small></summary>
+                    <details class="presentation-version" id="v0-4-1">
+                        <summary>Version 0.4.1 <small>Released on 11 October 2026 · My lists, a richer village record, one-click installation of handwriting recognition, fixes</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-11">11 October 2026</time></dd></div><div><dt>What's new</dt><dd>4 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.4.1">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>My lists (Settings)</li><li>Village record</li><li>Handwriting recognition (HTR)</li><li>Comfort and fixes</li></ul><h4>The details</h4>
                     <h4>My lists (Settings)</h4>
                     <ul>
                         <li><b>Create your own lists</b> by combining criteria: for example divorces between 1850 and 1920, marriages without a source, ancestors born in a given department…</li>
@@ -742,9 +781,10 @@
                     </ul>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.4.0 <small>New blocks, block editor, village record, a clean database, working as two, a copy kept at a cousin's</small></summary>
+                    <details class="presentation-version" id="v0-4-0">
+                        <summary>Version 0.4.0 <small>Released on 10 October 2026 · New blocks, block editor, village record, a clean database, working as two, a copy kept at a cousin's</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-10">10 October 2026</time></dd></div><div><dt>What's new</dt><dd>6 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.4.0">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>New blocks on records</li><li>New lists</li><li>Search and understand</li><li>A clean database</li><li>Share and protect</li><li>Fixes</li></ul><h4>The details</h4>
                     <h4>New blocks on records</h4>
                     <ul>
                         <li><b>Departures and emigration</b>: port, ship, stopovers, passenger list, people who left together, each person's naturalisation, emigration papers, and the ship's route on the map.</li>
@@ -789,9 +829,10 @@
                     </ul>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.3.1 <small>Ancestors and descendants, merging a cousin's tree, keyboard shortcuts</small></summary>
+                    <details class="presentation-version" id="v0-3-1">
+                        <summary>Version 0.3.1 <small>Released on 9 October 2026 · Ancestors and descendants, merging a cousin's tree, keyboard shortcuts</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-09">9 October 2026</time></dd></div><div><dt>What's new</dt><dd>3 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.3.1">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>Family</li><li>Keyboard shortcuts</li><li>Comfort and fixes</li></ul><h4>The details</h4>
                     <h4>Family</h4>
                     <ul>
                         <li><b>“Ancestors”</b> and <b>“Descendants”</b> blocks on each record, as a list: you choose the number of generations (for all records or just one), and a “┄ more” line shows there are more beyond. Also as a dashboard widget and in Charts.</li>
@@ -818,9 +859,10 @@
                     </ul>
                         </div>
                     </details>
-                    <details class="presentation-version">
-                        <summary>Version 0.3.0 <small>Research help, search sweeps worldwide, family heirlooms and memory</small></summary>
+                    <details class="presentation-version" id="v0-3-0">
+                        <summary>Version 0.3.0 <small>Released on 9 October 2026 · Research help, search sweeps worldwide, family heirlooms and memory</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd><time datetime="2026-10-09">9 October 2026</time></dd></div><div><dt>What's new</dt><dd>5 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.3.0">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>Search sweeps worldwide</li><li>Research help</li><li>The history around people</li><li>Comfort</li><li>Protection and sharing</li></ul><h4>The details</h4>
                     <h4>Search sweeps worldwide</h4>
                     <ul>
                         <li>The municipalities of <b>226 countries and territories</b> ship with the app (Europe, the Americas, Africa, Asia, Oceania, the Caribbean), all usable offline; neighbouring municipalities on either side of a border are linked.</li>
@@ -863,9 +905,10 @@
                     </ul>
                 </div>
                     </details>
-                    <details class="presentation-version">
+                    <details class="presentation-version" id="v0-2-1">
                         <summary>Version 0.2.1 <small>Search sweeps across borders, and fixes</small></summary>
                         <div class="presentation-version-body">
+<dl class="presentation-facts"><div><dt>Released</dt><dd>work version (not released)</dd></div><div><dt>What's new</dt><dd>2 topics</dd></div><div><dt>Database</dt><dd>Updates itself, a copy is made first</dd></div><div><dt>Links</dt><dd><a href="https://github.com/victorbaissait/lcnda/releases/tag/v0.2.1">this version on GitHub</a></dd></div></dl><h4>In short</h4><ul class="presentation-brief"><li>Search sweeps across borders</li><li>Fixes</li></ul><h4>The details</h4>
                     <h4>Search sweeps across borders</h4>
                     <ul>
                         <li>Search sweeps no longer stop at the border: you can add the municipalities of <b>Belgium, Switzerland, Luxembourg, Liechtenstein, Germany, Italy, Austria and Spain</b>, as well as those of <b>French overseas territories</b> (Guadeloupe, Martinique, French Guiana, Réunion, Mayotte).</li>
@@ -1152,9 +1195,8 @@
             <div class="presentation-faq-box">
                 <h3>Frequently asked questions</h3>
                 <input class="presentation-faq-search" id="faq-search" type="search" placeholder="🔎 Ask your question: how do I make a family book as a PDF?" aria-label="Search the FAQ" autocomplete="off">
-                <p class="presentation-faq-hint" id="faq-count">How to do this or that in LCNDA.</p>
-                <p class="presentation-faq-empty" id="faq-empty" hidden>No question matches this search.</p>
-                <div id="faq-list"></div>
+                <!-- FAQ:DEBUT -->
+                <!-- FAQ:FIN -->
             </div>
         </section>
     </main>
@@ -1163,42 +1205,18 @@
         <span>LCNDA — THE DIGITAL ANCESTORS' NOTEBOOK · BETA VERSION · 0.10.0 · AGPL-3.0 LICENCE</span>
         <a href="#haut">Back to top ↑</a>
     </footer>
-    <script src="faq-data-en.js"></script>
     <script>
-    // FAQ: questions grouped by theme in a frame in section 5, expandable, with search.
+    // FAQ: the questions are written in the page; the JavaScript only does the search.
     (() => {
         const list = document.getElementById('faq-list');
         const input = document.getElementById('faq-search');
         const empty = document.getElementById('faq-empty');
-        const count = document.getElementById('faq-count');
         if (!list) return;
-        if (typeof FAQ === 'undefined' || !Array.isArray(FAQ)) {
-            empty.textContent = 'The FAQ could not be loaded: the file faq-data-en.js must be placed next to this page.';
-            empty.hidden = false;
-            input.disabled = true;
-            return;
-        }
-        const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-        const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
-        let nb = 0;
-        const cats = FAQ.map(([title, items]) => {
-            const box = el('div', 'presentation-faq-cat');
-            const h = el('h3', '', title);
-            h.appendChild(el('small', '', String(items.length)));
-            box.appendChild(h);
-            const rows = items.map(([q, a]) => {
-                const d = el('details', 'presentation-faq-item');
-                d.appendChild(el('summary', '', q));
-                d.appendChild(el('p', '', a));
-                box.appendChild(d);
-                nb++;
-                return { d, text: norm(q + ' ' + a) };
-            });
-            list.appendChild(box);
-            return { box, rows };
-        });
-        count.textContent = 'How to do this or that in LCNDA: ' + nb + ' question' + (nb === 1 ? '' : 's') + '.';
-
+        const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const cats = [...list.querySelectorAll('.presentation-faq-cat')].map(box => ({
+            box,
+            rows: [...box.querySelectorAll('.presentation-faq-item')].map(d => ({ d, text: norm(d.textContent) })),
+        }));
         input.addEventListener('input', () => {
             const words = norm(input.value).split(/\s+/).filter(Boolean);
             let total = 0;
@@ -1251,6 +1269,24 @@
         track.addEventListener('scroll', () => window.requestAnimationFrame(refresh), { passive: true });
         window.addEventListener('resize', refresh);
         refresh();
+    })();
+    </script>
+    <script>
+    // Direct links (#v0-10-0, #faq-3, #q-3-12): the target block and the ones around it open, on load and on click.
+    (() => {
+        const openTo = (hash, scroll) => {
+            let el = null;
+            try { el = hash && hash.length > 1 ? document.querySelector(hash) : null; } catch (_) { return; }
+            if (!el) return;
+            for (let p = el; p; p = p.parentElement) if (p.tagName === 'DETAILS') p.open = true;
+            if (scroll) el.scrollIntoView({ block: 'start' });
+        };
+        document.addEventListener('click', e => {
+            const a = e.target.closest('a[href^="#"]');
+            if (a) openTo(a.getAttribute('href'), false);
+        });
+        window.addEventListener('hashchange', () => openTo(location.hash, true));
+        if (location.hash) openTo(location.hash, true);
     })();
     </script>
 </body>

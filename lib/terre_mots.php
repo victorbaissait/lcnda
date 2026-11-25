@@ -182,7 +182,7 @@ function tm_fruits(string $insee, string $dep): array
 {
     $out = [];
     foreach (tm_rows('fruits') as $r) {
-        $rank = ($insee !== '' && ($r['insee'] ?? '') === $insee) ? 0 : (($dep !== '' && ($r['dep'] ?? '') === $dep) ? 1 : null);
+        $rank = ($insee !== '' && ($r['insee'] ?? '') === $insee) ? 0 : (($dep !== '' && (($r['dep'] ?? '') === $dep || in_array($dep, (array) ($r['deps'] ?? []), true))) ? 1 : null);
         if ($rank !== null) { $out[] = tm_item($r) + ['rank' => $rank]; }
     }
     usort($out, static fn($a, $b) => [$a['rank'], $a['img'] ? 0 : 1, $a['n']] <=> [$b['rank'], $b['img'] ? 0 : 1, $b['n']]);
@@ -333,11 +333,12 @@ function tm_person(PDO $pdo, array $q): array
                 if ($pl['lat'] === null) { continue; }
                 foreach (tm_near($k, (float) $pl['lat'], (float) $pl['lon'], $dist, $pl['insee']) as $r) {
                     $s = $r['s'] ?? null; $e = $r['e'] ?? $s;
-                    if ($s === null || $s > $Y['to'] || $e < $Y['from'] + ($k === 'affaires' ? 5 : 0)) { continue; }
+                    if ($s === null) { if ($k !== 'legendes') { continue; } $r['undated'] = true; } // une légende sans date : « de son pays », jamais « de son vivant »
+                    elseif ($s > $Y['to'] || $e < $Y['from'] + ($k === 'affaires' ? 5 : 0)) { continue; }
                     if (!isset($got[$r['q']]) || $got[$r['q']]['km'] > $r['km']) { $got[$r['q']] = $r + ['place' => $pl['name'], 'age' => max(0, (int) $s - (int) $Y['from'])]; }
                 }
             }
-            if ($got) { $v = array_values($got); usort($v, static fn($a, $b) => [$a['km'], $a['s']] <=> [$b['km'], $b['s']]); $out[$k] = array_slice($v, 0, 6); }
+            if ($got) { $v = array_values($got); usort($v, static fn($a, $b) => [!empty($a['undated']) ? 1 : 0, $a['km'], $a['s']] <=> [!empty($b['undated']) ? 1 : 0, $b['km'], $b['s']]); $out[$k] = array_slice($v, 0, 6); }
         }
     }
     // 🌟 son nom dans le ciel et les jardins

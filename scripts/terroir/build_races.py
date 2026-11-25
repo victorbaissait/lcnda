@@ -47,17 +47,18 @@ def main():
     import urllib.parse
     for o in B.values():
         o['img'] = urllib.parse.unquote(o['img']); o['wp'] = urllib.parse.unquote(o['wp']).replace('_', ' ')
-    B = {b: o for b, o in B.items() if o['c'] and (o['fr'] or o['en'])}
-    print('races gardées (pays connus) :', len(B), flush=True)
+    B = {b: o for b, o in B.items() if (o['c'] or o['wp']) and (o['fr'] or o['en'])}
+    print('races (pays connu ou article en français) :', len(B), flush=True)
 
-    # 🇫🇷 les races de France : l'origine dans l'infobox de Wikipédia
-    fr = {b: o for b, o in B.items() if 'FR' in o['c'] and o['wp']}
+    # 🇫🇷 les races de France (ou sans pays sur Wikidata) : l'origine dans l'infobox de Wikipédia
+    fr = {b: o for b, o in B.items() if ('FR' in o['c'] or not o['c']) and o['wp']}
     T = wikitexts([o['wp'] for o in fr.values()], section0=True)
     origin = {}
     for b, o in fr.items():
         tx = T.get(o['wp'], ('', ''))[1]
         v = infobox_param(tx, 'origine') or infobox_param(tx, 'région') or infobox_param(tx, "région d'origine")
         if v: origin[b] = v
+        if not o['c'] and v and re.search(r'\{\{\s*(FRA|France)\s*\}\}|\bFrance\b', v): o['c'].add('FR')  # pays lu dans l'infobox
     print('origine lue dans l’infobox :', len(origin), flush=True)
     targets = sorted({t for v in origin.values() for t, _ in links_of(v)})
     P2Q = page_items(targets)
@@ -89,6 +90,8 @@ def main():
         co = next((x for x in wm.claims(E.get(q), 'P625') if isinstance(x, dict)), None)
         return (round(co['latitude'], 3), round(co['longitude'], 3)) if co else None
 
+    B = {b: o for b, o in B.items() if o['c']}
+    print('races gardées (pays connu) :', len(B), flush=True)
     out = []
     for b, o in B.items():
         row = {'q': b, 'n': o['fr'] or o['en'], 'sp': sorted(o['sp'])[0], 'c': sorted(o['c'])}

@@ -180,13 +180,13 @@
     }
     async function partFontaines(pl, host) {
         const F = await data('fontaines'); const rows = fontainesNear(F, pl, 5); if (!rows.length) return false;
-        const saint = r => (r.saint ? T('dédiée à {s}', {s: r.saint}) + (r.dom.length ? ` — ${T('invoqué(e) pour {d}', {d: r.dom.join(', ')})}` : '') : r.in_name ? T('le nom dit {s}', {s: r.in_name}) : '');
+        const saint = r => (r.saint ? T('dédiée à {s}', {s: r.saint}) + (r.dom.length ? ` — ${T('patron(ne) des métiers : {d}', {d: r.dom.join(', ')})}` : '') : r.in_name ? T('le nom dit {s}', {s: r.in_name}) : '');
         const li = r => `<li><b>${esc(r.n)}</b>${r.kind === 'pelerinage' ? ` <span class="pm-badge">${esc(T('pèlerinage'))}</span>` : ''}${saint(r) ? ` <small class="muted">(${esc(saint(r))})</small>` : ''}${r.insee !== pl.insee && r.km != null ? ` <small class="muted">${esc(fmtKm(r.km))}</small>` : ''}${r.wp ? ' ' + link(WP(r.wp), T('Wikipédia ↗')) : ''}${srcLink(WD(r.q))}</li>`;
         const here = rows.filter(r => r.insee === pl.insee).length;
         const lead = here ? T(here > 1 ? '{n} fontaines saintes ou lieux de pèlerinage à {p}' : '{n} fontaine sainte ou lieu de pèlerinage à {p}', {n: `<b>${here}</b>`, p: esc(pl.name)}) + (rows.length > here ? ` ${T('et {n} tout près', {n: rows.length - here})}` : '')
             : T(rows.length > 1 ? '{n} fontaines saintes ou lieux de pèlerinage à moins de 5 km' : '{n} fontaine sainte ou lieu de pèlerinage à moins de 5 km', {n: `<b>${rows.length}</b>`});
         host.innerHTML = `<p>${lead} : ${esc(rows.slice(0, 3).map(r => r.n).join(', '))}.</p>${more(rows.length, `<ul class="pm-list">${rows.map(li).join('')}</ul>`)}
-            ${srcLine(T('Wikidata (CC0) — fontaines à dévotion, sources et lieux de pèlerinage ; « invoqué pour » : propriété P2925 du saint'), 'https://www.wikidata.org/wiki/Q1371047')}`;
+            ${srcLine(T('Wikidata (CC0) — fontaines à dévotion, sources et lieux de pèlerinage ; « patron des métiers » : propriété P2925 du saint'), 'https://www.wikidata.org/wiki/Q1371047')}`;
         return true;
     }
     async function partFilms(pl, host) {
@@ -452,7 +452,7 @@
         {id: 'pm_fontaines', icon: '⛲', label: T('Fontaines saintes et lieux de pèlerinage'), group: 'Le lieu', source: 'Wikidata (CC0)', sourceUrl: 'https://www.wikidata.org/wiki/Q1371047',
             load: async () => { const F = await data('fontaines'), I = await data('communes'); return F.rows.map(r => ({name: r.n, sorte: r.kind === 'pelerinage' ? 'lieu de pèlerinage' : 'fontaine', saint: r.saint || r.in_name, invoque: r.dom.join(', '), commune: (I.c[r.insee] || [''])[0], insee: r.insee, dep: depOf(r.insee), lat: r.lat, lon: r.lon, url: WD(r.q)})); },
             geo, open: openUrl, period: () => null,
-            fields: [{key: 'name', label: T('Nom'), type: 'text'}, {key: 'sorte', label: T('Sorte'), type: 'enum', values: ['fontaine', 'lieu de pèlerinage']}, {key: 'saint', label: T('Saint'), type: 'text'}, {key: 'invoque', label: T('Invoqué pour'), type: 'text'},
+            fields: [{key: 'name', label: T('Nom'), type: 'text'}, {key: 'sorte', label: T('Sorte'), type: 'enum', values: ['fontaine', 'lieu de pèlerinage']}, {key: 'saint', label: T('Saint'), type: 'text'}, {key: 'invoque', label: T('Patron de'), type: 'text'},
                 {key: 'commune', label: T('Commune'), type: 'place'}, DEPF, {key: 'insee', label: T('Code INSEE'), type: 'text'}, SRCF]},
         {id: 'pm_monuments', icon: '🪦', label: T('Monuments aux morts'), group: 'Le lieu', source: 'Wikidata (CC0) ; photos Wikimedia Commons', sourceUrl: 'https://www.wikidata.org/wiki/Q575759',
             load: async () => { const MO = await data('monuments'), I = await data('communes'); return MO.rows.map(r => ({name: r[4] || T('Monument aux morts de {p}', {p: (I.c[r[1]] || [''])[0]}), commune: (I.c[r[1]] || [''])[0], insee: r[1], dep: depOf(r[1]), annee: r[6] || null, sculpteur: (r[7] || []).map(i => (MO.creators[i] || [])[1]).join(', '), photo: r[5] ? 'oui' : 'non', lat: r[2], lon: r[3], image: r[5] ? FILEPATH(r[5], 240) : '', url: WD('Q' + r[0])})); },

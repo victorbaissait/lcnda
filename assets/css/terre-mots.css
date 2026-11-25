@@ -1,0 +1,21 @@
+/* 🪨🗣️💬 Terre et mots du village (assets/js/heritage-terre-mots.js) — reprend l'allure de « Autour du village » et « Le village dans la culture »
+ * (commune-plus.css : .cplus-panel, .cplus-lead, .cplus-src, .cplus-more ; commune-culture.css : .cc-place, .cc-line) ; clair et sombre : currentColor */
+.tm-place:empty{display:none}
+.tm-place .tm-panel[data-tm-part="mesures"]{grid-column:1/-1}
+.tm-src{margin:.6rem 0 0;font-size:.82em;opacity:.78}
+.tm-more summary{cursor:pointer;margin:.4rem 0}
+.tm-head{margin:.25rem 0 0;font-size:.92em;opacity:.9}
+.tm-head small{opacity:.8}
+.tm-rows{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.tm-row{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem .6rem;border:1px solid color-mix(in srgb,currentColor 14%,transparent);border-radius:10px}
+.tm-row > div{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.tm-row small{opacity:.82;overflow-wrap:anywhere}
+.tm-thumb img{width:64px;height:64px;object-fit:cover;border-radius:6px;display:block;background:color-mix(in srgb,currentColor 8%,transparent)}
+.tm-quote{margin:.3rem 0 .4rem;padding:.3rem .7rem;border-left:3px solid color-mix(in srgb,currentColor 25%,transparent);font-style:italic}
+.tm-quote small{font-style:normal;opacity:.8}
+.tm-motto{margin:.2rem 0 .4rem}
+.tm-words{margin:.2rem 0;padding-left:1.1rem;display:grid;gap:.2rem}
+.tm-mes td{vertical-align:top}
+.tm-conv-in{width:5.5rem}
+.tm-conv-out{margin-left:.3rem;font-weight:600;white-space:nowrap}
+@media print{.tm-more[open] summary,[data-tm-copy]{display:none}}

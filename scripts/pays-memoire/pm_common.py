@@ -54,8 +54,19 @@ def fetch_json(url, **kw):
 def sparql(query, min_gap=62):
     """Requête au service SPARQL de Wikidata (limité à 1 requête par minute pendant les pannes : on attend)."""
     body = urllib.parse.urlencode({'query': query, 'format': 'json'})
-    raw = fetch('https://query.wikidata.org/sparql', data=body, headers={'Accept': 'application/sparql-results+json', 'Content-Type': 'application/x-www-form-urlencoded'}, min_gap=min_gap)
-    return json.loads(raw.decode('utf-8'))['results']['bindings']
+    h = {'Accept': 'application/sparql-results+json', 'Content-Type': 'application/x-www-form-urlencoded'}
+    for i in range(3):
+        raw = fetch('https://query.wikidata.org/sparql', data=body, headers=h, min_gap=min_gap)
+        try:
+            return json.loads(raw.decode('utf-8'), strict=False)['results']['bindings']
+        except ValueError:  # réponse coupée (délai du service) : on l'oublie et on recommence
+            key = hashlib.sha1(('https://query.wikidata.org/sparql|' + body).encode()).hexdigest()
+            try:
+                os.remove(os.path.join(WORK, key + '.bin'))
+            except OSError:
+                pass
+            print('  query.wikidata.org: réponse illisible, on recommence', file=sys.stderr)
+    raise RuntimeError('Wikidata : réponse illisible')
 
 
 def wd_api(params, min_gap=1.5):

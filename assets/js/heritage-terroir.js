@@ -51,16 +51,16 @@
     const INAO_SRC = () => srcLine('INAO — Institut national de l’origine et de la qualité, data.gouv.fr', T('Licence Ouverte'), 'https://www.data.gouv.fr/datasets/aires-geographiques-des-aoc-aop', ` · <small>${link('https://www.data.gouv.fr/datasets/aire-geographique-des-igp-et-des-ig', T('aires des IGP ↗'))}</small>`);
 
     /** l'auteur et la licence d'une image Wikidata (lus en ligne sur Commons, gardés, quand l'image s'affiche) */
-    const credit = (file, page) => `<span data-tr-credit="${esc(file)}">${esc(T('auteur et licence :'))}</span> ${link(page, T('Wikimedia Commons ↗'))}`;
+    const credit = (file, page) => `<span data-trr-credit="${esc(file)}">${esc(T('auteur et licence :'))}</span> ${link(page, T('Wikimedia Commons ↗'))}`;
     async function fillCredits(root) {
-        const spans = [...(root?.querySelectorAll?.('[data-tr-credit]:not([data-done])') || [])]; if (!spans.length) return;
+        const spans = [...(root?.querySelectorAll?.('[data-trr-credit]:not([data-done])') || [])]; if (!spans.length) return;
         spans.forEach(s => { s.dataset.done = '1'; });
-        const files = [...new Set(spans.map(s => s.dataset.trCredit))];
+        const files = [...new Set(spans.map(s => s.dataset.trrCredit))];
         for (let i = 0; i < files.length; i += 20) {
             const part = files.slice(i, i + 20);
             const r = await ask('tr_credit', {files: part.join('|')});
-            spans.filter(s => part.includes(s.dataset.trCredit)).forEach(s => {
-                const c = r?.credits?.[s.dataset.trCredit];
+            spans.filter(s => part.includes(s.dataset.trrCredit)).forEach(s => {
+                const c = r?.credits?.[s.dataset.trrCredit];
                 if (c) s.innerHTML = `${c.author ? `${esc(c.author)} · ` : ''}${c.licence_url ? link(c.licence_url, c.licence) : esc(c.licence)} ·`;
                 else s.textContent = r?.offline ? T('auteur et licence : sur la page de l’image (hors ligne)') : T('auteur et licence : sur la page de l’image');
             });
@@ -156,7 +156,7 @@
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks.terroir = (index, detail) => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || !PARTS.some(x => on(x[0]))) return '';
-        return A().card(index, T('🌾 Son terroir'), '', `<div class="tr-block" data-tr-person="${Number(p.id)}"></div>`, 'span-12').replace(/^(\s*<section class="card[^"]*")/, '$1 hidden'); // caché tant qu'il n'y a rien
+        return A().card(index, T('🌾 Son terroir'), '', `<div class="tr-block" data-trr-person="${Number(p.id)}"></div>`, 'span-12').replace(/^(\s*<section class="card[^"]*")/, '$1 hidden'); // caché tant qu'il n'y a rien
     };
     const firstWord = s => String(s || '').trim().split(/\s+/)[0] || '';
     async function fillPerson(host, id, only = null) {
@@ -164,23 +164,23 @@
         const r = await ask('tr_person', {id});
         if (!host.isConnected || !r?.ok) return r;
         const out = [];
-        if (want('prenom')) out.push(`<div class="tr-line" data-tr-line="prenom">${meaningHtml(r.prenom, r.prenom?.title || firstWord(r.first))}${meaningHtml(r.nom, (r.last || '').toUpperCase())}</div>`);
+        if (want('prenom')) out.push(`<div class="tr-line" data-trr-line="prenom">${meaningHtml(r.prenom, r.prenom?.title || firstWord(r.first))}${meaningHtml(r.nom, (r.last || '').toUpperCase())}</div>`);
         if (want('aoc') && r.aoc) {
             const a = r.aoc.areas[0];
-            out.push(`<div class="tr-line" data-tr-line="aoc">${aocHtml(r.aoc.areas, r.aoc.place).replace(/^<p class="cplus-lead">.*?<\/p>/s, `<p class="cplus-lead">${esc(a.icon)} ${esc(T('{j} dans l’aire {a} ({s})', {j: r.aoc.job, a: a.name, s: signTxt(a)}))}${r.aoc.count > 1 ? ` <small class="muted">${esc(T('— {c}, et {n} autres aires', {c: r.aoc.place, n: r.aoc.count - 1}))}</small>` : ` <small class="muted">— ${esc(r.aoc.place)}</small>`}</p>`)}</div>`);
+            out.push(`<div class="tr-line" data-trr-line="aoc">${aocHtml(r.aoc.areas, r.aoc.place).replace(/^<p class="cplus-lead">.*?<\/p>/s, `<p class="cplus-lead">${esc(a.icon)} ${esc(T('{j} dans l’aire {a} ({s})', {j: r.aoc.job, a: a.name, s: signTxt(a)}))}${r.aoc.count > 1 ? ` <small class="muted">${esc(T('— {c}, et {n} autres aires', {c: r.aoc.place, n: r.aoc.count - 1}))}</small>` : ` <small class="muted">— ${esc(r.aoc.place)}</small>`}</p>`)}</div>`);
         }
         if (want('races') && r.races?.items?.length) {
             const f = r.races.items[0], where = r.races.dep_name || r.races.place;
-            out.push(`<div class="tr-line" data-tr-line="races">${racesHtml(r.races.items, {lead: `${f.icon} ${T('{l} : {b}', {l: T(SP_LEAD[f.species] || 'La race de son pays'), b: breedName(f)})}${where ? ` (${where})` : ''}.`})}</div>`);
+            out.push(`<div class="tr-line" data-trr-line="races">${racesHtml(r.races.items, {lead: `${f.icon} ${T('{l} : {b}', {l: T(SP_LEAD[f.species] || 'La race de son pays'), b: breedName(f)})}${where ? ` (${where})` : ''}.`})}</div>`);
         }
         if (want('coiffes') && r.coiffes?.items?.length) {
             const c = r.coiffes.items[0], it = c.items?.[0];
-            out.push(`<div class="tr-line" data-tr-line="coiffes">${coiffeHtml(c, {lead: it ? T('La coiffe ou le costume de son pays ({r}) : {n}.', {r: c.region, n: it.name}) : T('Le costume traditionnel de son pays ({r}) : des photos.', {r: c.region})})}</div>`);
+            out.push(`<div class="tr-line" data-trr-line="coiffes">${coiffeHtml(c, {lead: it ? T('La coiffe ou le costume de son pays ({r}) : {n}.', {r: c.region, n: it.name}) : T('Le costume traditionnel de son pays ({r}) : des photos.', {r: c.region})})}</div>`);
         }
         if (want('ecoles') && r.ecoles?.items?.length) {
             const s = r.ecoles.items.find(x => x.founded) || r.ecoles.items[0];
             const lead = `${r.ecoles.job ? `${r.ecoles.job} — ` : ''}${s.name}${s.founded ? `, ${founded(s)}` : ''}${s.place ? ` (${s.place})` : ''}.`;
-            out.push(`<div class="tr-line" data-tr-line="ecoles">${schoolsHtml(r.ecoles.items, {lead})}</div>`);
+            out.push(`<div class="tr-line" data-trr-line="ecoles">${schoolsHtml(r.ecoles.items, {lead})}</div>`);
         }
         host.innerHTML = out.join('');
         host.querySelectorAll('.tr-line').forEach(l => { if (!l.textContent.trim()) l.remove(); });
@@ -193,18 +193,18 @@
             if (!host.isConnected || !rr?.ok) return r;
             const html = `${meaningHtml(rr.prenom, rr.prenom?.title || firstWord(r.first))}${meaningHtml(rr.nom, (r.last || '').toUpperCase())}`;
             if (html) {
-                let line = host.querySelector('[data-tr-line="prenom"]');
-                if (!line) { host.insertAdjacentHTML('afterbegin', '<div class="tr-line" data-tr-line="prenom"></div>'); line = host.querySelector('[data-tr-line="prenom"]'); }
+                let line = host.querySelector('[data-trr-line="prenom"]');
+                if (!line) { host.insertAdjacentHTML('afterbegin', '<div class="tr-line" data-trr-line="prenom"></div>'); line = host.querySelector('[data-trr-line="prenom"]'); }
                 line.innerHTML = html;
                 if (card) card.hidden = false;
             }
         }
         return r;
     }
-    (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-tr-person]').forEach(h => fillPerson(h, Number(h.dataset.trPerson))); });
+    (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-trr-person]').forEach(h => fillPerson(h, Number(h.dataset.trrPerson))); });
 
     /* ═════════ la fiche d'un village ═════════ */
-    const panel = (id, title, body) => `<section class="maintenance-panel cplus-panel tr-panel" data-tr-part="${id}"><h3>${esc(title)}</h3>${body}</section>`;
+    const panel = (id, title, body) => `<section class="maintenance-panel cplus-panel tr-panel" data-trr-part="${id}"><h3>${esc(title)}</h3>${body}</section>`;
     const PLACE_PARTS = {aoc: '🍷 Les produits de son terroir', races: '🐄 Les animaux de son pays', coiffes: '👒 La coiffe et le costume de la région', ecoles: '🏫 Écoles d’autrefois'};
     function partHtml(k, r) {
         if (k === 'aoc') return aocHtml(r.aoc, r.commune?.name);
@@ -229,24 +229,24 @@
     }
     function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
-        const village = ws.querySelector('.h-village:not([data-tr])');
+        const village = ws.querySelector('.h-village:not([data-trr])');
         if (!village) return;
-        village.dataset.tr = '1';
+        village.dataset.trr = '1';
         if (!['aoc', 'races', 'coiffes', 'ecoles'].some(on)) return;
         const place = villagePlace(village); if (!place.id && !place.insee && !place.name) return;
         const anchor = village.querySelector('[data-cc-host]') || village.querySelector('[data-mr-host]') || village.querySelector('[data-lp-host]') || village.querySelector('.cplus-place') || village.querySelector('.h-village-grid') || village.querySelector('[data-vsec="stats"]');
-        const box = '<div class="tr-place" data-tr-host></div>';
+        const box = '<div class="tr-place" data-trr-host></div>';
         if (anchor) anchor.insertAdjacentHTML('afterend', box); else village.insertAdjacentHTML('beforeend', box);
-        placeInto(village.querySelector('[data-tr-host]'), place);
+        placeInto(village.querySelector('[data-trr-host]'), place);
     }
     let pending = 0;
     new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; try { decorate(); } catch (e) { console.error(e); } }); }).observe(document.documentElement, {childList: true, subtree: true});
 
     document.addEventListener('click', e => {
-        if (e.target.closest?.('[data-tr-clear]')) { clearCache(); return; }
-        if (e.target.closest?.('[data-tr-fetch]')) fetchBase();
+        if (e.target.closest?.('[data-trr-clear]')) { clearCache(); return; }
+        if (e.target.closest?.('[data-trr-fetch]')) fetchBase();
     });
-    document.addEventListener('change', e => { const t = e.target.closest?.('[data-tr-tg]'); if (t && e.target.matches('input')) { const s = settings(); s[t.dataset.trTg] = e.target.checked; save(s); memo.clear(); } });
+    document.addEventListener('change', e => { const t = e.target.closest?.('[data-trr-tg]'); if (t && e.target.matches('input')) { const s = settings(); s[t.dataset.trrTg] = e.target.checked; save(s); memo.clear(); } });
 
     /* ═════════ 📜 Monographie de commune ═════════ */
     const monoPlace = pl => ({id: Number(pl?.id) || 0, name: pl?.name || '', lat: pl?.latitude ?? pl?.lat ?? null, lon: pl?.longitude ?? pl?.lon ?? null, country: pl?.country || '', county: pl?.county || ''});
@@ -254,7 +254,7 @@
         let insee = ''; try { insee = (await ctx?.village?.())?.insee || ''; } catch (_) {}
         host.innerHTML = '<div></div>';
         await placeInto(host.firstElementChild, {...monoPlace(place), insee}, {parts: [part]});
-        const body = host.querySelector('[data-tr-part]');
+        const body = host.querySelector('[data-trr-part]');
         if (!body || !body.textContent.trim()) { host.innerHTML = ''; return false; }
         host.innerHTML = body.innerHTML.replace(/^<h3>.*?<\/h3>/s, '');
         await fillCredits(host);
@@ -334,7 +334,7 @@
     /** cherche en ligne le sens des prénoms de la base (40 par appel), sans rien écrire dans la base : seulement des réponses gardées */
     async function fetchBase() {
         if (fetching) return; fetching = true;
-        const box = document.querySelector('[data-tr-base]');
+        const box = document.querySelector('[data-trr-base]');
         try {
             for (let i = 0; i < 60; i++) {
                 const r = await api('tr_base_names', {fetch: 40});
@@ -343,12 +343,12 @@
                 if (!r.left) break;
             }
             memo.clear();
-        } finally { fetching = false; const b = document.querySelector('[data-tr-base]'); if (b?.isConnected) api('tr_base_names', {}).then(r => { b.innerHTML = baseHtml(r); }).catch(() => {}); }
+        } finally { fetching = false; const b = document.querySelector('[data-trr-base]'); if (b?.isConnected) api('tr_base_names', {}).then(r => { b.innerHTML = baseHtml(r); }).catch(() => {}); }
     }
     function baseHtml(r, busy = false) {
         if (!r?.total) return `<p class="muted">${esc(T('Pas encore de prénoms dans ta base.'))}</p>`;
         return `<p>${esc(T('{f} prénoms de ta base ont un sens connu, sur {t}.', {f: r.found, t: r.total}))}${r.left ? ` ${esc(T('{n} n’ont pas encore été cherchés.', {n: r.left}))}` : ''}</p>
-            <div class="page-actions"><button type="button" class="button secondary" data-tr-fetch ${r.left && !busy && !kiosk() ? '' : 'disabled'}>${esc(busy ? T('On cherche sur le Wiktionnaire…') : T('📖 Chercher le sens des autres prénoms (en ligne)'))}</button></div>
+            <div class="page-actions"><button type="button" class="button secondary" data-trr-fetch ${r.left && !busy && !kiosk() ? '' : 'disabled'}>${esc(busy ? T('On cherche sur le Wiktionnaire…') : T('📖 Chercher le sens des autres prénoms (en ligne)'))}</button></div>
             <p class="muted"><small>${esc(T('Seuls les prénoms partent sur Internet (jamais ceux des fiches confidentielles ni des personnes vivantes). Les réponses sont gardées sur l’ordinateur.'))}</small></p>`;
     }
     const fmtSize = b => (b >= 1e6 ? `${String(Math.round(b / 1e5) / 10).replace('.', ',')} Mo` : `${Math.max(1, Math.round(b / 1e3))} Ko`);
@@ -357,19 +357,19 @@
         let about = {sources: [], cache: {count: 0, bytes: 0}};
         try { about = await api('tr_about'); } catch (_) {}
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
-        if (A().state?.maintenanceTab !== TAB[0] && token === undefined && !ws.querySelector('[data-tr-settings]')) return;
+        if (A().state?.maintenanceTab !== TAB[0] && token === undefined && !ws.querySelector('[data-trr-settings]')) return;
         const s = settings();
-        const tg = ([k, label, sub]) => `<label class="checkbox-line cplus-tg" data-tr-tg="${k}"><input type="checkbox" ${s[k] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
+        const tg = ([k, label, sub]) => `<label class="checkbox-line cplus-tg" data-trr-tg="${k}"><input type="checkbox" ${s[k] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
         const rows = about.sources.map(x => `<tr><td>${link(x.url, x.label)}</td><td>${esc(x.what)}${x.count ? ` <small class="muted">(${esc(Number(x.count).toLocaleString('fr-FR'))})</small>` : ''}</td><td>${esc(x.online ? T('en ligne, gardé') : x.bytes ? T('dans l’app ({s})', {s: fmtSize(x.bytes)}) : T('pas encore là'))}</td><td>${esc(x.licence)}</td><td>${esc(x.mention)}</td></tr>`).join('');
         const kb = Math.max(1, Math.round((about.cache?.bytes || 0) / 1024));
-        ws.innerHTML = `<section class="page cplus-settings tr-settings" data-tr-settings>${UI().pageHeader ? UI().pageHeader({title: T('Son terroir'), icon: '🌾', where: T('Réglages · Données'), help: esc(T('Les produits, les animaux, les coiffes et les écoles du pays de tes ancêtres, et le sens de leur prénom.'))}) : `<h2>${esc(T(TAB[2]))}</h2>`}
+        ws.innerHTML = `<section class="page cplus-settings tr-settings" data-trr-settings>${UI().pageHeader ? UI().pageHeader({title: T('Son terroir'), icon: '🌾', where: T('Réglages · Données'), help: esc(T('Les produits, les animaux, les coiffes et les écoles du pays de tes ancêtres, et le sens de leur prénom.'))}) : `<h2>${esc(T(TAB[2]))}</h2>`}
             <div class="maintenance-panel"><h3>${esc(T('Ce qui s’affiche'))}</h3>${PARTS.map(tg).join('')}</div>
-            <div class="maintenance-panel"><h3>${esc(T('🔤 Le sens des prénoms de ta base'))}</h3><div data-tr-base><p class="muted">${esc(T('On compte…'))}</p></div></div>
+            <div class="maintenance-panel"><h3>${esc(T('🔤 Le sens des prénoms de ta base'))}</h3><div data-trr-base><p class="muted">${esc(T('On compte…'))}</p></div></div>
             <div class="maintenance-panel"><h3>${esc(T('Gardé sur l’ordinateur'))}</h3><p>${esc(T('Le sens des prénoms et des noms trouvés en ligne : {n} réponses gardées ({k} Ko).', {n: about.cache?.count || 0, k: kb}))}</p>
-                <div class="page-actions"><button type="button" class="button secondary" data-tr-clear ${about.cache?.count && !kiosk() ? '' : 'disabled'}>${esc(T('🗑 Effacer les réponses gardées'))}</button></div></div>
+                <div class="page-actions"><button type="button" class="button secondary" data-trr-clear ${about.cache?.count && !kiosk() ? '' : 'disabled'}>${esc(T('🗑 Effacer les réponses gardées'))}</button></div></div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3><div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Source'))}</th><th>${esc(T('Ce qu’elle donne'))}</th><th>${esc(T('Où'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Mention'))}</th></tr></thead><tbody>${rows}</tbody></table></div>
                 <p class="muted">${esc(T('Ce qui part sur Internet : seulement un prénom ou un nom de famille (Wiktionnaire), et le nom des images à créditer (Wikimedia Commons). Tout le reste est dans l’app.'))}</p></div></section>`;
-        const b = ws.querySelector('[data-tr-base]');
+        const b = ws.querySelector('[data-trr-base]');
         if (b) api('tr_base_names', {}).then(r => { if (b.isConnected) b.innerHTML = baseHtml(r, fetching); }).catch(() => { b.innerHTML = ''; });
     }
     ext.maintenance = ext.maintenance || {};

@@ -164,7 +164,8 @@ def build_things():
     keys = ['q', 'n', 'k', 'd', 'insee', 'dep', 'lat', 'lon', 'where', 's', 'e', 'img', 'wp', 'freq', 'day']
     leg = thing_rows('legendes', W.LEGENDES)
     write('legendes', {'attr': 'Wikidata — légendes, créatures et personnages légendaires situés en France (lieu, dates)', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/', 'keys': keys, 'rows': compact(leg, keys)})
-    cr = [r for r in thing_rows('crimes', W.CRIMES) if r['s'] or r['e']]
+    # seulement les « affaires » (et procès, crimes) d'avant 1990, avec une date : l'histoire d'un pays, pas les faits divers récents
+    cr = [r for r in thing_rows('crimes', W.CRIMES) if (r['s'] or r['e']) and (r['s'] or r['e']) <= 1990 and re.match(r'^(affaire|proc[eè]s|crime d)', fold(r['n']))]
     write('affaires', {'attr': 'Wikidata — affaires criminelles et judiciaires en France (lieu et date)', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/', 'keys': keys, 'rows': compact(cr, keys)})
     fe = thing_rows('fetes', W.FETES)
     # les festivals de musique, de cinéma… n'en sont pas : seulement les « festival » sans plus de précision, avec un mot de fête dans le nom
@@ -245,6 +246,29 @@ def build_disparus():
     return len(rows)
 
 # ═══════════ 🍎 fruits anciens et 🌟 cultivars nommés d'après ═══════════
+PROVINCES = {'bretagne': ['22', '29', '35', '56', '44'], 'normandie': ['14', '27', '50', '61', '76'], 'picardie': ['02', '60', '80'], 'touraine': ['37'], 'anjou': ['49'],
+             'limousin': ['19', '23', '87'], 'perigord': ['24'], 'provence': ['04', '05', '06', '13', '83', '84'], 'bourgogne': ['21', '58', '71', '89'], 'champagne': ['08', '10', '51', '52'],
+             'lorraine': ['54', '55', '57', '88'], 'alsace': ['67', '68'], 'auvergne': ['03', '15', '43', '63'], 'savoie': ['73', '74'], 'dauphine': ['05', '26', '38'], 'gascogne': ['32', '40', '65'],
+             'quercy': ['46', '82'], 'rouergue': ['12'], 'poitou': ['79', '86', '85'], 'saintonge': ['17'], 'berry': ['18', '36'], 'franche comte': ['25', '39', '70', '90'], 'languedoc': ['11', '30', '34', '48'],
+             'roussillon': ['66'], 'bearn': ['64'], 'artois': ['62'], 'flandre': ['59'], 'maine': ['53', '72'], 'vendee': ['85'], 'brie': ['77'], 'beauce': ['28'], 'sologne': ['41'], 'corse': ['2A', '2B']}
+def name_place(label):
+    """le lieu dont une variété porte le nom (« Reine-claude de Bavay », « Reinette du Mans ») : commune au nom unique en France,
+    département ou province ; ('', '', '') sinon. Seulement ce que dit le nom : jamais présenté comme le lieu d'origine."""
+    m = re.search(r"\b(?:de la|de l'|de l’|du|des|de|d'|d’)\s*([A-ZÉÈÀÂÎÔÛ][^()]*?)\s*(?:\(.*)?$", label or '')
+    if not m: return '', '', ''
+    tail = m.group(1).strip(); f = fold(tail); art = re.search(r'\bdu\s', label or '') is not None
+    names = [f, 'le ' + f] if art else [f, 'la ' + f, 'l ' + f, 'les ' + f]
+    for n in names:
+        hits = BYNAME.get(n, [])
+        if len(hits) == 1: return hits[0], dep_of(hits[0]), C[hits[0]][0]
+    for n in names:
+        if n in DEP_BY_NAME: return '', DEP_BY_NAME[n], DEP[DEP_BY_NAME[n]]
+    if f in PROVINCES: return '', PROVINCES[f][0], tail
+    return '', '', ''
+BYNAME = {}
+for _i, (_n, _a, _b) in C.items(): BYNAME.setdefault(fold(_n), []).append(_i)
+DEP_BY_NAME = {fold(n): c for c, n in DEP.items()}
+
 def build_fruits():
     items = {}
     for r in W.rows('cultivars'):
@@ -255,23 +279,27 @@ def build_fruits():
         for k in ('s', 'img'):
             if r.get(k) and k not in o: o[k] = r[k]
     resolve([l for o in items.values() for l in (o['loc'] | o['n'])])
+    labels(list(items))
     rows = []
     for q, o in items.items():
-        insee = dep = ''; via = ''
+        insee = dep = ''; via = ''; place = ''; prov = ''
         for l in sorted(o['loc']) + sorted(o['n']):
             P = PLACE.get(l) or {}
             if P.get('insee') or P.get('dep'):
-                insee, dep, via = P.get('insee', ''), P.get('dep') or dep_of(P.get('insee', '')), ('origine' if l in o['loc'] else 'nom'); place = l; break
-        else: place = ''
+                insee, dep, via = P.get('insee', ''), P.get('dep') or dep_of(P.get('insee', '')), ('origine' if l in o['loc'] else 'nom'); place = lab(l); break
+        if not insee and not dep and (not o['o'] or 'Q142' in o['o']):
+            # le nom de la variété contient un lieu de France (une commune au nom unique, un département, une province)
+            i, d, w = name_place(lab(q))
+            if i or d: insee, dep, via, place = i, d, 'nom', w
+            if w and not i and fold(w) in PROVINCES: prov = fold(w)
         if not insee and not dep: continue
         t = sorted(o['t'] & set(W.FRUITS))
-        rows.append({'q': q, 'k': W.FRUITS[t[0]] if t else '', 'insee': insee, 'dep': dep, 'via': via, 'where': place, 's': year(o.get('s', '')),
+        rows.append({'q': q, 'k': W.FRUITS[t[0]] if t else '', 'insee': insee, 'dep': dep, 'deps': PROVINCES.get(prov, []), 'via': via, 'where': place, 's': year(o.get('s', '')),
                      'img': urllib.parse.unquote((o.get('img') or '').rsplit('/', 1)[-1]).replace('_', ' ')})
-    labels([r['q'] for r in rows] + [r['where'] for r in rows])
-    for r in rows: r['n'] = lab(r['q']); r['d'] = (LAB.get(r['q']) or {}).get('desc', ''); r['wp'] = wp(r['q']); r['where'] = lab(r['where'])
+    for r in rows: r['n'] = lab(r['q']); r['d'] = (LAB.get(r['q']) or {}).get('desc', ''); r['wp'] = wp(r['q'])
     rows = [r for r in rows if r['n'] and not re.match(r'^Q\d+$', r['n'])]
-    keys = ['q', 'n', 'k', 'd', 'insee', 'dep', 'via', 'where', 's', 'img', 'wp']
-    write('fruits', {'attr': 'Wikidata — variétés fruitières et potagères (pommes, poires, prunes, cerises, cépages…) dont le lieu d’origine (P1071) ou le lieu qui leur donne leur nom (P138) est en France', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/', 'keys': keys, 'rows': compact(rows, keys)})
+    keys = ['q', 'n', 'k', 'd', 'insee', 'dep', 'deps', 'via', 'where', 's', 'img', 'wp']
+    write('fruits', {'attr': 'Wikidata — variétés fruitières et potagères (pommes, poires, prunes, cerises, cépages…) dont le lieu d’origine (P1071), le lieu qui leur donne leur nom (P138) ou le nom lui-même renvoie à un lieu de France', 'licence': 'CC0 1.0', 'url': 'https://www.wikidata.org/', 'keys': keys, 'rows': compact(rows, keys)})
     return len(rows)
 
 def build_ciel():

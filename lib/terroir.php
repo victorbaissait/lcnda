@@ -161,19 +161,19 @@ function tr_country_code(string $country): string
 function tr_inao_search(string $name): string { return 'https://www.inao.gouv.fr/rechercher-un-produit?' . http_build_query(['search_api_fulltext' => $name]); }
 function tr_aoc_row(array $D, int $i): array
 {
-    [$ida, $name, $sign, $cat, $q, $wp, $img, $prods, $np] = $D['areas'][$i] + [0, '', '', 'autre', '', '', '', [], 0];
+    [$ida, $name, $sign, $cat, $q, $wp, $img, $prods, $np, $nc] = $D['areas'][$i] + [0, '', '', 'autre', '', '', '', [], 0, 0];
     $c = $D['cats'][$cat] ?? ['🏷️', 'Autre produit'];
-    return ['ida' => (int) $ida, 'name' => (string) $name, 'sign' => (string) $sign, 'cat' => (string) $cat, 'icon' => $c[0], 'cat_label' => $c[1], 'products' => $prods, 'products_count' => (int) $np,
+    return ['ida' => (int) $ida, 'name' => (string) $name, 'sign' => (string) $sign, 'cat' => (string) $cat, 'icon' => $c[0], 'cat_label' => $c[1], 'products' => $prods, 'products_count' => (int) $np, 'communes' => (int) $nc,
         'url' => tr_inao_search((string) $name), 'qid' => (string) $q, 'wd' => tr_wd((string) $q), 'wp' => tr_wp((string) $wp), 'image' => (string) $img, 'thumb' => $img !== '' ? tr_thumb((string) $img, 160) : '',
         'image_page' => $img !== '' ? tr_file_page((string) $img) : ''];
 }
-/** les aires d'une commune, rangées : vins d'abord… (ordre des sortes du fichier), AOC avant IGP */
+/** les aires d'une commune, rangées : vins d'abord… (ordre des sortes du fichier), AOC avant IGP, la plus petite aire d'abord (Saint-Émilion avant Bordeaux) */
 function tr_aoc_for(string $insee): array
 {
     $D = tr_data('aoc'); if (!$D || $insee === '' || empty($D['c'][$insee])) { return []; }
     $order = array_flip(array_keys($D['cats']));
     $out = array_map(static fn($i) => tr_aoc_row($D, (int) $i), $D['c'][$insee]);
-    usort($out, static fn($a, $b) => [$order[$a['cat']] ?? 99, $a['sign'] === 'AOC' ? 0 : 1, tr_fold($a['name'])] <=> [$order[$b['cat']] ?? 99, $b['sign'] === 'AOC' ? 0 : 1, tr_fold($b['name'])]);
+    usort($out, static fn($a, $b) => [$order[$a['cat']] ?? 99, $a['sign'] === 'AOC' ? 0 : 1, $a['communes'], tr_fold($a['name'])] <=> [$order[$b['cat']] ?? 99, $b['sign'] === 'AOC' ? 0 : 1, $b['communes'], tr_fold($b['name'])]);
     return $out;
 }
 
@@ -459,6 +459,8 @@ function tr_person(PDO $pdo, array $q): array
         foreach ($cands as $pl) {
             if ($pl['insee'] === '') { continue; }
             $areas = array_values(array_filter(tr_aoc_for($pl['insee']), static fn($a) => in_array($a['cat'], $j['topics']['aoc'], true)));
+            $cf = tr_fold($pl['name']); // l'aire qui porte le nom de la commune d'abord (« Saint-Emilion » pour Saint-Émilion)
+            usort($areas, static fn($a, $b) => (tr_fold($a['name']) === $cf ? 0 : (str_starts_with(tr_fold($a['name']), $cf) ? 1 : 2)) <=> (tr_fold($b['name']) === $cf ? 0 : (str_starts_with(tr_fold($b['name']), $cf) ? 1 : 2)));
             if ($areas) { $aoc[] = ['job' => tr_capfirst($j['text']), 'place' => $pl['name'], 'insee' => $pl['insee'], 'areas' => array_slice($areas, 0, 12), 'count' => count($areas)]; break; }
         }
         if ($aoc) { break; }
@@ -566,7 +568,7 @@ function tr_list(PDO $pdo, array $q): array
             $r = tr_aoc_row($D, $i);
             $dn = array_map(static fn($d) => (string) (cc_departements()[$d] ?? $d), array_keys($deps[$i] ?? []));
             sort($dn);
-            $rows[] = ['name' => $r['name'], 'sign' => $r['sign'], 'cat_label' => i18n_t($r['cat_label']), 'icon' => $r['icon'], 'communes' => $n[$i] ?? 0, 'dep_names' => implode(', ', $dn),
+            $rows[] = ['name' => $r['name'], 'sign' => $r['sign'], 'cat_label' => i18n_t($r['cat_label']), 'icon' => $r['icon'], 'communes' => $r['communes'] ?: ($n[$i] ?? 0), 'dep_names' => implode(', ', $dn),
                 'products' => implode(' · ', $r['products']), 'url' => $r['url'], 'wd' => $r['wd'], 'wp' => $r['wp']];
         }
         return ['ok' => true, 'rows' => $rows];

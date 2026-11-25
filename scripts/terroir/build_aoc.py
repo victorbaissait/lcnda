@@ -22,7 +22,9 @@ URLS = {'aoc': 'https://static.data.gouv.fr/resources/aires-geographiques-des-ao
 # la sorte de produit : d'abord le type Wikidata, sinon les mots du nom
 WD_CAT = {'vin': {'Q282', 'Q1827', 'Q10210', 'Q12979', 'Q80114014', 'Q630531', 'Q10750129', 'Q22715', 'Q2140699', 'Q156362', 'Q3558198', 'Q1565828', 'Q154'},
           'fromage': {'Q10943', 'Q2223649'}, 'spiritueux': {'Q284', 'Q170582'}, 'olive': {'Q93165', 'Q12179886'}}
-WORDS = [('vin', r'vin de liqueur|vin doux'),
+WORDS = [('vin', r'vin de liqueur|vin doux|muscadet|chablis|côtes de bordeaux|^languedoc|saint-chinian|^saumur|^bourgogne|picpoul|^cahors$|[ée]chezeaux|^moulis|^vézelay$|terrasses du larzac|montravel|saussignac|grés de montpellier|coteaux de die|boutenac|béa du roussillon|orléans-cléry'),
+         ('cidre', r'^cornouaille$|^pays d.auge|^domfront$'),
+         ('spiritueux', r'^cassis de'),
          ('spiritueux', r'eau[x]?-de-vie|cognac|armagnac|calvados|^marc\b|\bmarc d|^fine\b|\bfine (champagne|bordeaux|bourgogne|faugères)|whisky|rhum|liqueur|pommeau|génépi|absinthe|kirsch|pineau|floc|macvin|ratafia|vermouth|\bgin\b|genièvre|brandy|pastis|quetsch'),
          ('cidre', r'\bcidre|poiré'),
          ('vin', r'\brouge\b|\bblanc\b|\brosé\b|\bvins?\b|mousseux|crémant|primeur|clairet|vendanges|\bgris\b|pétillant|liquoreux|\bmoelleux\b|grand cru|premier cru|\bvillages\b|\bsur lie\b|grains nobles|cru du beaujolais|dénomination de climat|\bmuscat|\broussette\b|méthode ancestrale|\bambré\b|hors d.âge|avec sucres|\bsec\b|klevener'),
@@ -101,7 +103,7 @@ def main(src):
             cat = cat or 'autre'
         w = next((WD[p['id']] for p in ps if p['id'] in WD and (WD[p['id']]['img'] or WD[p['id']]['wp'])), None) or next((WD[p['id']] for p in ps if p['id'] in WD), None)
         names = list(dict.fromkeys(p['name'] for p in ps if p['name'] and p['name'] != a['name']))
-        row = [int(ida), a['name'], a['sign'].upper(), cat, w['q'] if w else '', w['wp'] if w else '', w['img'] if w else '', names[:15], len(names)]
+        row = [int(ida), a['name'], a['sign'].upper(), cat, w['q'] if w else '', w['wp'] if w else '', w['img'] if w else '', names[:15], len(names), len(a['communes'])]
         rows.append((row, a['communes']))
     rows.sort(key=lambda x: fold(x[0][1]))
     out_areas = [r for r, _ in rows]
@@ -112,9 +114,9 @@ def main(src):
     stats = {}
     for r in out_areas: stats[r[3]] = stats.get(r[3], 0) + 1
     print('aires :', len(out_areas), '· communes :', len(by_c), '· sortes :', stats, '· signes :', {s: sum(1 for r in out_areas if r[2] == s) for s in {r[2] for r in out_areas}})
-    write('aoc', {'v': 1, 'built': TODAY, 'fields': ['ida', 'nom', 'signe', 'sorte', 'wikidata', 'wikipedia', 'image', 'produits', 'nb_produits'],
+    write('aoc', {'v': 1, 'built': TODAY, 'fields': ['ida', 'nom', 'signe', 'sorte', 'wikidata', 'wikipedia', 'image', 'produits', 'nb_produits', 'nb_communes'],
                   'cats': CATS, 'attr': 'INAO (Institut national de l’origine et de la qualité) : aires géographiques des AOC/AOP, des IGP et des IG, et produits de chaque aire (fichiers du 9 octobre 2025 et du 10 mars 2025) ; sorte de produit, image, article : Wikidata (P3895)',
-                  'licence': 'Licence Ouverte (Etalab) — INAO, data.gouv.fr ; CC0 1.0 (Wikidata)', 'urls': URLS,
+                  'licence': 'Licence Ouverte (Etalab) — INAO, data.gouv.fr ; CC0 1.0 (Wikidata)', 'url': 'https://www.data.gouv.fr/datasets/aires-geographiques-des-aoc-aop', 'urls': URLS,
                   'pages': {'aoc': 'https://www.data.gouv.fr/datasets/aires-geographiques-des-aoc-aop', 'ig': 'https://www.data.gouv.fr/datasets/aire-geographique-des-igp-et-des-ig', 'produits': 'https://www.data.gouv.fr/datasets/aires-et-produits-aoc-aop-et-igp'},
                   'areas': out_areas, 'c': by_c})
 

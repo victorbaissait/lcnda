@@ -1,0 +1,488 @@
+{
+  "head" : {
+    "vars" : [ "p", "pLabel", "pDescription", "b", "d" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1685497"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1882-12-15T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1946-03-10T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "cinéaste français (1882-1946)"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3165339"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1950-10-04T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean-Dominique Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "historien français"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3170566"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1742-01-01T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1812-01-01T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean-Baptiste Léonard Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "avocat et diplomate, Directeur de la Compagnie du Sénégal"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3171884"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1907-01-06T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1992-02-20T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "homme politique français (1907-1992)"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3171885"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1865-01-08T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1936-10-11T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "personnalité politique française"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3171885"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1865-01-08T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1936-10-12T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "personnalité politique française"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3171886"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1814-12-27T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1886-03-05T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand de Villers"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "militaire français"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q12891905"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durandisse"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "artiste haïtien"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q52222225"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1894-01-01T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1977-01-01T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q58010044"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1891-04-29T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1970-01-01T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "magistrat français"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q64991305"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1900-01-12T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1990-01-08T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Andrée Rochat-Aeschlimann"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "musicienne suisse"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q65088319"
+      },
+      "pLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q89596004"
+      },
+      "pLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "ichthyologist"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q93247385"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "French opera singer"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q98247815"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1940-07-14T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q98777756"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1949-04-02T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean-Paul Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "ecclésiastique français et professeur de droit (1949- )"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q102227410"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1666-01-01T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1727-01-01T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "- Mar 1727"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q106548795"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1636-01-01T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1672-01-01T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "1636 - 1672"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q110081914"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1919-01-01T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2000-01-01T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q112484946"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1646-01-01T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1690-01-01T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q118434047"
+      },
+      "pLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      },
+      "pDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "(Aimargues)"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q132229296"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1530-01-01T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1593-01-24T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durand"
+      }
+    }, {
+      "p" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q132451698"
+      },
+      "b" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "1925-06-21T00:00:00Z"
+      },
+      "d" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2016-12-22T00:00:00Z"
+      },
+      "pLabel" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "Jean Durandau"
+      },
+      "pDescription" : {
+        "xml:lang" : "fr",
+        "type" : "literal",
+        "value" : "architecte français"
+      }
+    } ]
+  }
+}
