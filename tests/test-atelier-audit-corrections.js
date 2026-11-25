@@ -151,6 +151,7 @@ echo json_encode(['ok' => 1]);`, {TX_BODY: BODY, TX_DATA: JSON.stringify({zones:
         await t('🔴 4. Entrée puis une ligne à la fin du texte : la nouvelle ligne n’entre pas dans la zone d’avant', async () => {
             await openTx({id: 3});
             await caretEnd(); await p.keyboard.press('Enter'); await p.keyboard.type('Nouvelle ligne');
+            await sleep(700);
             const r = await ev(() => { const d = document.querySelector('dialog.h-tx-dlg'), z = d.txApi.get().data.zones.find(q => q.id === 'z6'); return {z, prog: JSON.parse(d.dataset.txProg || '{}')}; });
             assert.equal(r.z.e, BODY.length, 'la zone de la dernière ligne garde sa fin');
             assert.equal(r.prog.linked, 6); assert.equal(r.prog.total, 7);
@@ -198,6 +199,10 @@ echo json_encode(['ok' => 1]);`, {TX_BODY: BODY, TX_DATA: JSON.stringify({zones:
             assert.ok(await p.$(sel), 'une recette choisie');
             const col = await ev(s => getComputedStyle(document.querySelector(s)).color, sel), bg = await bgOf(sel);
             assert.ok(contrast(bg, col) >= 3, `description illisible : ${col} sur ${bg}`);
+            await ev(() => { document.documentElement.dataset.theme = "dark"; }); await sleep(150);
+            const col2 = await ev(s => getComputedStyle(document.querySelector(s)).color, sel), bg2 = await bgOf(sel);
+            await ev(() => { delete document.documentElement.dataset.theme; });
+            assert.ok(contrast(bg2, col2) >= 3, `sombre : description illisible : ${col2} sur ${bg2}`); console.log("   ", col, bg, col2, bg2);
         });
 
         /* ═════ 🔴 8 ═════ */

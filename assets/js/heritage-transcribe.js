@@ -305,7 +305,29 @@
     const zopHtml = () => `<label class="h-tx-zop" title="${esc(i18n('Opacité des cadres de couleur (0 = presque invisibles)'))}">${esc(i18n('Cadres'))} <input type="range" min="0" max="100" step="5" value="${Math.round(zop() * 100)}" data-tx-zop aria-label="${esc(i18n('Opacité des cadres de couleur (0 = presque invisibles)'))}"></label>`;
 
     /* ═════════ L'atelier ═════════ */
+    /* 🔴 8 (audit) : un seul Atelier à la fois. Deux ouvertures rapprochées (double-clic, ou deux clics pendant le chargement) n'en
+     * ouvrent qu'un ; « Ouverture de l'acte… » se voit tout de suite ; un autre acte demandé pendant qu'un Atelier est ouvert :
+     * « Enregistrer et ouvrir l'autre » (ou rien, s'il n'y a rien à enregistrer). */
+    let opening = null;
+    function openingNote() {
+        const el = document.createElement('div'); el.className = 'h-tx-opening'; el.dataset.txOpening = ''; el.setAttribute('role', 'status');
+        el.textContent = `📜 ${i18n('Ouverture de l’acte…')}`;
+        try { el.popover = 'manual'; } catch (_) {}
+        document.body.appendChild(el); try { el.showPopover?.(); } catch (_) {}
+        return el;
+    }
     async function open(ctx = {}) {
+        if (opening) return opening;
+        const cur = [...document.querySelectorAll('dialog.h-tx-dlg')].find(d => d.isConnected && d.txApi);
+        if (cur) {
+            if (ctx.id && Number(cur.txApi.get().id) === Number(ctx.id)) { cur.focus?.(); return null; } // le même acte : il est déjà là
+            if (!await cur.txApi.leave()) return null;
+        }
+        const note = openingNote();
+        opening = openNow(ctx).finally(() => { opening = null; try { note.hidePopover?.(); } catch (_) {} note.remove(); });
+        return opening;
+    }
+    async function openNow(ctx = {}) {
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
         let t = {id: 0, title: '', kind: 'apreciser', media_id: 0, filename: '', date_text: '', place: '', source: '', body: '', data: {zones: [], people: [], status: 'todo', view: TV.viewOf()}};
         if (!ctx.id && ctx.mediaId) { try { const o = await api('act_page_owner', {media_id: ctx.mediaId}); if (o?.id) ctx = {...ctx, id: Number(o.id), page: Number(ctx.mediaId)}; } catch (_) {} } // 📑
@@ -317,12 +339,12 @@
         let flowView = '', flowCur = '', flowT = 0, fixCount = null, fixCountFor = ''; // la frise (plus bas)
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-tx-dlg';
         dlg.innerHTML = `<div class="h-tx" data-ptab="text">
-            <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="${esc(i18n('Annuler'))}" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="${esc(i18n('Rétablir'))}" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="${esc(i18n('Titre de l’acte (ex. Baptême de Jean Martin, 1790)'))}" value="${esc(t.title)}">
-                <select data-tx="kind" title="${esc(i18n('Genre d’acte'))}">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
-                <input data-tx="date_text" placeholder="${esc(i18n('Date'))}" value="${esc(t.date_text)}" title="${esc(i18n('Date de l’acte'))}"><input data-tx="place" placeholder="${esc(i18n('Lieu'))}" value="${esc(t.place)}" title="${esc(i18n('Paroisse, commune'))}"><input data-tx="source" placeholder="${esc(i18n('Source (AD, cote, vue)'))}" value="${esc(t.source)}" title="${esc(i18n('Archives, cote, numéro de vue'))}">
-                <select data-tx-state title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${[['todo', i18n('À faire')], ['doing', i18n('En cours')], ['checked', i18n('Relue')], ['done', i18n('Finie')]].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+            <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="${esc(i18n('Annuler'))}" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="${esc(i18n('Rétablir'))}" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="${esc(i18n('Titre de l’acte (ex. Baptême de Jean Martin, 1790)'))}" value="${esc(t.title)}" title="${esc(t.title)}">
                 <span class="spacer"></span><span class="muted h-tx-status" data-tx-status data-ui-status></span>
                 <button type="button" class="button small secondary h-tx-iabtn" data-tx-cmd="aideia" title="${esc(i18n('Aider l’IA à lire cet acte : ce qui est coché part avec l’image vers l’IA (lecture approfondie)'))}">🧠 ${esc(i18n('Aider l’IA'))}<span data-tx-iacount></span></button><button type="button" class="button small secondary" data-tx-cmd="export" title="${esc(i18n('Le texte (.txt), l’impression ou un PDF (image + texte)'))}">⤓ ${i18n('Exporter ▾')}</button><button type="button" class="button small" data-tx-cmd="save" title="${esc(i18n('Enregistrer'))}" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 ${i18n('Enregistrer')}</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="${esc(i18n('Fermer'))}">×</button></header>
+            <div class="h-tx-meta" data-tx-meta role="group" aria-label="${esc(i18n('Fiche de l’acte'))}"><span class="h-tx-metalab">ⓘ ${esc(i18n('Fiche de l’acte'))}</span><select data-tx="kind" title="${esc(i18n('Genre d’acte'))}">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+                <input data-tx="date_text" placeholder="${esc(i18n('Date'))}" value="${esc(t.date_text)}" title="${esc(i18n('Date de l’acte'))}"><input data-tx="place" placeholder="${esc(i18n('Lieu'))}" value="${esc(t.place)}" title="${esc(i18n('Paroisse, commune'))}"><input data-tx="source" placeholder="${esc(i18n('Source (AD, cote, vue)'))}" value="${esc(t.source)}" title="${esc(i18n('Archives, cote, numéro de vue'))}">
+                <select data-tx-state title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${[['todo', i18n('À faire')], ['doing', i18n('En cours')], ['checked', i18n('Relue')], ['done', i18n('Finie')]].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
             <div class="ui-tabs h-tx-ptabs" role="tablist" aria-label="${esc(i18n('Image, texte ou personnes'))}" data-tx-ptabs>${[['image', '🖼️', 'Image'], ['text', '📝', 'Texte'], ['people', '👥', 'Personnes']].map(([k, ic, l]) => `<button type="button" role="tab" data-tx-ptab="${k}" class="${k === 'text' ? 'is-active' : ''}" aria-selected="${k === 'text'}">${ic} ${esc(i18n(l))}${k === 'people' ? ' <span class="h-tx-pcount" data-tx-pcount></span>' : ''}</button>`).join('')}</div>
             <div class="h-tx-main">
                 <nav class="h-tx-rail" data-tx-rail aria-label="${esc(i18n('Outils'))}"><button type="button" data-tx-tool="pan" title="${esc(i18n('Déplacer l’image, ou barre d’espace'))}" aria-label="${esc(i18n('Déplacer l’image'))}" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="${esc(i18n('Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)'))}" aria-label="${esc(i18n('Dessiner une zone'))}" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="${esc(i18n('Loupe qui suit la souris (la molette change le grossissement)'))}" aria-label="${esc(i18n('Loupe'))}" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner l’image de 90°'))}" aria-label="${esc(i18n('Tourner de 90°'))}">⟳</button><button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}" aria-label="${esc(i18n('Image de l’acte'))}">🖼️</button></nav>
@@ -357,7 +379,31 @@
         const status = s => { const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
         let commitT = 0, HX = null, txBar = null; // E1 : un vrai historique ↶ ↷ (texte, zones, personnes, réglages de l'image, fiche de l'acte) ; K18 : la barre du bas
         const flushCommit = () => { if (commitT) { clearTimeout(commitT); commitT = 0; } HX?.commit(); };
-        const touch = () => { dirty = true; status(i18n('modifié')); clearTimeout(commitT); commitT = setTimeout(() => { commitT = 0; HX?.commit(); }, 450); };
+        /* 🔴 2 (audit) : « modifié » se voit aussi de la page (data-dirty : « Quitter la page ? »), même sans rien taper (une zone
+         * dessinée, déplacée, supprimée) ; après un enregistrement, plus rien à demander. rev compte les modifications (🔴 1 : ce qui
+         * change pendant un enregistrement n'est pas marqué « enregistré »). 12 : enregistrement automatique 4 s après la dernière
+         * modification (les versions automatiques du serveur gardent l'historique) et un brouillon sur cet ordinateur. */
+        let rev = 0, autoT = 0, draftT = 0, conflictHold = false;
+        const setDirty = on => { dirty = !!on; dlg.dataset.dirty = dirty ? '1' : ''; };
+        const touch = ({text = false} = {}) => { rev++; setDirty(true); status(i18n('modifié')); clearTimeout(commitT); commitT = setTimeout(() => { commitT = 0; HX?.commit(); }, text ? 1000 : 450); autoSoon(); draftSoon(); };
+        // la page marque « modifié » à chaque frappe dans la fenêtre (même dans « Chercher ») : ici, seul compte ce qui change l'acte
+        ['input', 'change'].forEach(ev => dlg.addEventListener(ev, () => { dlg.dataset.dirty = dirty ? '1' : ''; }, true));
+        const AUTO_MS = 4000;
+        function autoSoon() { clearTimeout(autoT); autoT = setTimeout(autoSave, AUTO_MS); }
+        async function autoSave() {
+            autoT = 0; if (!dlg.isConnected || !dirty || conflictHold) return;
+            if (!t.id && !area.value.trim()) return; // un acte nouveau sans texte : rien à créer tout seul
+            if (saving || htrJob) { autoSoon(); return; }
+            await save({auto: true});
+        }
+        const draftKey = () => `genealogie-tx-draft-${t.id || (t.media_id ? 'm' + t.media_id : 'new')}`;
+        function draftSoon() { clearTimeout(draftT); draftT = setTimeout(writeDraft, 700); }
+        function writeDraft() {
+            draftT = 0; if (!dlg.isConnected || !dirty) return;
+            const fields = Object.fromEntries(['title', 'kind', 'date_text', 'place', 'source'].map(k => [k, $(`[data-tx="${k}"]`)?.value ?? '']));
+            try { localStorage.setItem(draftKey(), JSON.stringify({at: Date.now(), base: t.updated_at || '', fields, body: area.value, zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []})); } catch (_) {}
+        }
+        const dropDraft = (key = draftKey()) => { clearTimeout(draftT); draftT = 0; try { localStorage.removeItem(key); } catch (_) {} };
         // E4 : une image glissée (ou collée) sur l'acte entre dans les Médias et devient l'image de l'acte
         UI.bindFileDrop?.(stage, async files => {
             if (pagesLocked()) return;
@@ -490,7 +536,7 @@
             if (dirty) { await save(); if (dirty) return; }
             switching = true; teardown();
             const next = (p.acts || []).length ? {id: Number(p.acts[0])} : {mediaId: Number(p.media_id), filename: p.filename, title: '', text: p.transcription || ''};
-            return open({...next, page: Number(p.media_id), goto, onClose: ctx.onClose, onSaved: ctx.onSaved});
+            return openNow({...next, page: Number(p.media_id), goto, onClose: ctx.onClose, onSaved: ctx.onSaved});
         }
         /** un clic (ou les flèches) dans le texte d'une autre page : son image s'affiche */
         function followCaret() {
@@ -774,9 +820,24 @@
         area.addEventListener('input', () => {
             const now = area.value, dd = diffOf(before, now), {p, q, oldEnd, delta} = dd;
             const shift = r => { const f = v => v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, p + (now.length - q - p))) : v; r.s = f(r.s); r.e = Math.max(r.s, f(r.e)); };
-            followEdit(before, now, t.data.zones, dd); t.data.people.forEach(shift); // 🧲 les zones de ligne restent sur toute leur ligne found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
+            followEdit(before, now, t.data.zones, dd); t.data.people.forEach(shift); found.forEach(shift); // 🧲 les zones de ligne restent sur toute leur ligne
             txFix.forEach(shift); txFix = txFix.filter(f => now.slice(f.s, f.e) === f.word); if (txFixOn) { clearTimeout(txFixT); txFixT = setTimeout(() => runFix({quiet: true}), 900); }
-            before = now; t.body = now; touch(); if (!findBar.hidden) findRun({keep: true}); paintMirror(); paintPeople();
+            before = now; t.body = now; touch({text: true});
+            // 28 (audit) : le texte surligné se redessine à la prochaine image de l'écran (et seulement les lignes touchées),
+            // les personnes après une pause dans la frappe
+            paintSoon(); peopleSoon();
+        });
+        let paintRaf = 0, peopleT = 0;
+        function paintSoon() { if (paintRaf) return; paintRaf = requestAnimationFrame(() => { paintRaf = 0; if (!dlg.isConnected) return; if (!findBar.hidden) findRun({keep: true}); else paintMirror(); }); }
+        function peopleSoon() { clearTimeout(peopleT); peopleT = setTimeout(() => { peopleT = 0; if (dlg.isConnected) paintPeople(); }, 500); }
+        /* 16 (audit) : un seul historique. ⌘Z dans la case passe par celui de l'Atelier (texte, zones, personnes…), un pas par mot
+         * (l'état d'avant chaque espace ou retour à la ligne tapé après un mot) ou par pause dans la frappe. */
+        area.addEventListener('beforeinput', e => {
+            if (e.inputType === 'historyUndo' || e.inputType === 'historyRedo') { e.preventDefault(); undoZones(e.inputType === 'historyRedo'); return; }
+            if (guardMarks(e)) return;
+            const ws = e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph' || (e.inputType === 'insertText' && /^\s$/.test(e.data || ''));
+            const prev = area.value[area.selectionStart - 1] || '';
+            if (ws && prev && /\S/.test(prev)) flushCommit();
         });
         area.addEventListener('scroll', () => { mirror.scrollTop = area.scrollTop; });
         area.addEventListener('click', () => followCaret()); area.addEventListener('keyup', e => { if (/^(Arrow|Page|Home|End)/.test(e.key)) followCaret(); });
