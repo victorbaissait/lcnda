@@ -143,6 +143,7 @@ echo json_encode(['ok' => 1, 'even' => $t('EVEN')]);`], {cwd: root, encoding: 'u
             await p.click('#workspace [data-ts-block] ~ * [data-ts-open], #workspace [data-ts-open]');
             await p.waitForSelector('dialog.ts-dialog[open]');
             await p.waitForFunction(() => /données regardées, \d+ ont trouvé quelque chose/.test(document.querySelector('.ts-dialog [data-ts-count]')?.textContent || ''), null, {timeout: 20000});
+            if (process.env.TS_SHOT) { await p.waitForTimeout(1500); await p.screenshot({path: require('path').join(process.env.TS_SHOT, 'tout-voir.png')}); } // capture à regarder : TS_SHOT=<dossier>
             const c = await p.textContent('.ts-dialog [data-ts-count]'), m = c.match(/(\d+) données regardées, (\d+) ont/);
             assert.ok(Number(m[1]) >= 8 && Number(m[2]) >= 4, c);
             const groups = await p.$$eval('.ts-dialog [data-ts-group]:not([hidden]) h3', x => x.map(h => h.textContent));
