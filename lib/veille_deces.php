@@ -78,7 +78,7 @@ function vd_watched(PDO $pdo): array
 function vd_rows(PDO $pdo, string $name, int $by, int $afterImport): array
 {
     $n = succ_p2_norm($name); if (mb_strlen($n) < 2) { return []; }
-    $pre = str_replace(['*', '?', '['], '', substr($n, 0, min(4, strlen($n))));
+    $pre = str_replace(['*', '?', '['], '', substr($n, 0, min(3, strlen($n)))); // trois lettres : MAZAUD retrouve MAZEAUD
     $sql = 'SELECT * FROM insee_deces WHERE nom GLOB ? AND annee_naissance BETWEEN ? AND ?' . ($afterImport > 0 ? ' AND source_import_id > ?' : '') . ' LIMIT 2000';
     $par = [$pre . '*', $by - 1, $by + 1]; if ($afterImport > 0) { $par[] = $afterImport; }
     $s = $pdo->prepare($sql); $s->execute($par);
