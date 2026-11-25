@@ -38,8 +38,11 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
         });
         await t('Événements : chaque ligne dit qui, quand, où et combien de sources ; une seule loupe ; la période « 1780-1800 » est comprise', async () => {
             await tab('event', 'Treignac 1780-1800');
-            const rows = await p.$$eval(`${D} .cx-rlist li`, a => a.map(li => li.innerText.replace(/\s+/g, ' ')));
-            assert.strictEqual(rows.length, 25, rows.length + ' lignes');
+            let rows = await p.$$eval(`${D} .cx-rlist li`, a => a.map(li => li.innerText.replace(/\s+/g, ' ')));
+            assert.ok(rows.length >= 25 && rows.every(r => /Treignac/.test(r)), rows.length + ' lignes');
+            await p.click(`${D} [data-cx-chip="n"]`); await p.waitForFunction(() => /\|n\|/.test(document.querySelector('.cx-take [data-cx-res]').dataset.cxShown));
+            rows = await p.$$eval(`${D} .cx-rlist li`, a => a.map(li => li.innerText.replace(/\s+/g, ' ')));
+            assert.strictEqual(rows.length, 25, rows.length + ' naissances');
             assert.ok(rows.every(r => /(MAZAUD|LACOMBE|DURAND)/.test(r) && /\b17[89]\d|1800\b/.test(r) && /Treignac/.test(r)), rows[0]);
             assert.ok(rows.some(r => /sources?|sans source/.test(r)), 'nombre de sources');
             assert.ok(!/🔍/.test(await p.getAttribute(`${D} [data-cx-q]`, 'placeholder')), 'pas de loupe dans le texte d’aide');

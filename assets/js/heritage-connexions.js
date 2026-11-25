@@ -813,7 +813,9 @@
     }
     function bindResults(st, host) {
         const itOf = el => st.results[Number(el.dataset.cxRi ?? el.dataset.cxSee ?? el.dataset.cxDescribe ?? el.dataset.cxR)];
-        const flip = (li, on) => { const cb = li?.querySelector('[data-cx-ri]'); const it = itOf(cb || {dataset: {}}); if (!cb || !it) return; cb.checked = on ?? !cb.checked; togglePick(st, it, cb.checked); li.classList.toggle('is-on', cb.checked); paintCount(st); };
+        const flip = (li, on) => { const cb = li?.querySelector('[data-cx-ri]'); const it = itOf(cb || {dataset: {}}); if (!cb || !it) return; cb.checked = on ?? !cb.checked; togglePick(st, it, cb.checked); li.classList.toggle('is-on', cb.checked);
+            if (st.picked.size >= 2) st.preview = null; // plusieurs cases : à droite, « N éléments choisis » et ce que fera « Prendre »
+            paintCount(st); };
         host.querySelectorAll('[data-cx-ri]').forEach(b => b.addEventListener('change', () => flip(b.closest('li'), b.checked)));
         host.querySelectorAll('[data-cx-see]').forEach(b => {
             b.addEventListener('click', () => { host.querySelectorAll('.cx-row.is-focus').forEach(x => x.classList.remove('is-focus')); b.closest('li').classList.add('is-focus'); previewItem(st, itOf(b), {open: true}); });
@@ -965,9 +967,12 @@
                 list = (r.groups || []).flatMap(g => g.items || []).map(x => pickItem(st.tab, x)); st.more = !!r.more;
                 if (range) { list = list.filter(x => { const y = viewOf(x).year; return y && y >= range[0] && y <= range[1]; }); }
             }
-            else if (st.tab === 'data') { if (mine()) await drawData(st, res); return; }
-            else if (st.tab === 'lists') { if (mine()) { if (st.list) await drawListIn(st, res); else drawLists(st, res); } return; }
-            else if (st.tab === 'outside') { if (mine()) drawOutside(st, res); return; }
+            else if (special) {
+                if (!mine()) return;
+                if (st.tab === 'data') await drawData(st, res); else if (st.tab === 'outside') drawOutside(st, res); else if (st.list) await drawListIn(st, res); else drawLists(st, res);
+                if (mine()) res.dataset.cxShown = `${st.tab}||${st.list?.id || ''}|`;
+                return;
+            }
             if (st.ctx?.investigation_id || ['event', 'act', 'media', 'source'].includes(st.tab)) await loadUsed(st, list);
         } catch (e) { if (mine()) res.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
         if (!mine()) return;
@@ -1201,26 +1206,45 @@
     async function placeByName(name) {
         try { const r = await api('picker_search', {kind: 'place', q: name, limit: 5}); return (r.groups || []).flatMap(g => g.items || []).find(x => x.lat != null) || (r.groups || []).flatMap(g => g.items || [])[0] || null; } catch (_) { return null; }
     }
+    /** une faute de frappe (une lettre de trop, de moins ou changée) : « chateux », « cimetieres », « seimes » */
+    const near1 = (a, b) => { if (Math.abs(a.length - b.length) > 1 || a.length < 5) return false; let i = 0; while (i < a.length && a[i] === b[i]) i++; return a.slice(i + 1) === b.slice(i + 1) || a.slice(i + 1) === b.slice(i) || a.slice(i) === b.slice(i + 1); };
+    const STOP = new Set('les la le l des de du d un une a au aux en et ou dans sur pour avec autour pres km rayon moins plus entre mois annee annees jour vers commune ville village departement dep me il faut je veux cherche trouve tous toutes tout liste the of'.split(' '));
     async function parseAsk(q, lists) {
-        const f = fold(q);
-        let d = null;
-        for (const [re, ids] of SYN) if (re.test(f)) { d = lists.find(x => ids.includes(x.id)); if (d) break; }
-        if (!d) d = lists.map(x => ({x, n: fold(x.label).split(/[^a-z]+/).filter(w => w.length > 3 && f.includes(w.replace(/s$/, ''))).length})).sort((a, b) => b.n - a.n).find(z => z.n)?.x || null;
+        const f = fold(q).replace(/[’']/g, ' ').replace(/\s+/g, ' ');
+        const words = f.split(/[^a-z0-9-]+/).filter(Boolean);
+        let d = null, used = new Set();
+        for (const [re, ids] of SYN) { const m = f.match(re); if (m) { d = lists.find(x => ids.includes(x.id)); if (d) { used.add(m[0]); break; } } }
+        if (!d) { // les mots du nom de la liste, au pluriel ou non, avec une faute de frappe permise
+            const score = x => { const lw = fold(x.label).split(/[^a-z]+/).filter(w => w.length > 3).map(w => w.replace(/s$/, '')); let n = 0; words.forEach(w => { const w1 = w.replace(/s$/, ''); if (lw.some(l => l === w1 || (w1.length > 4 && (l.startsWith(w1) || w1.startsWith(l))) || near1(l, w1))) { n++; used.add(w); } }); return n; };
+            d = lists.map(x => ({x, n: score(x)})).sort((a, b) => b.n - a.n).find(z => z.n)?.x || null;
+            if (d) { used = new Set(); const lw = fold(d.label).split(/[^a-z]+/).filter(w => w.length > 3).map(w => w.replace(/s$/, '')); words.forEach(w => { const w1 = w.replace(/s$/, ''); if (lw.some(l => l === w1 || (w1.length > 4 && (l.startsWith(w1) || w1.startsWith(l))) || near1(l, w1))) used.add(w); }); }
+        }
         if (!d) return null;
         const preset = {q: '', crit: [], period: null, near: null};
         const dt = parseDates(q), fields = d.fields || [];
         const dateField = fields.find(x => x.type === 'date' && /deces|date|jour/.test(fold(x.key + ' ' + x.label))) || fields.find(x => x.type === 'date');
         if (dt?.from && dateField) preset.crit.push({key: dateField.key, kind: 'daterange', from: dt.from, to: dt.to});
         else if (dt && d.period) { const a = dt.yfrom || Number(dt.from.slice(0, 4)), b = dt.yto || Number(dt.to.slice(0, 4)); preset.period = a === b ? {mode: 'in', from: a, to: a} : {mode: 'overlap', from: a, to: b}; }
-        const near = f.match(/a (\d+(?:[.,]\d+)?) ?km (?:de|d |autour de|du|des) ?([a-z' -]+?)(?: du | de | en | entre |$)/) || f.match(/autour de ([a-z' -]+?)(?: du | en |$)/);
+        else if (dt) { const yf = fields.find(x => x.type === 'year'); const a = dt.yfrom || Number(dt.from.slice(0, 4)), b = dt.yto || Number(dt.to.slice(0, 4)); if (yf) preset.crit.push({key: yf.key, kind: 'range', from: a, to: b}); }
+        // « à 4 km de Brive », « autour de 5 km de Treignac », « dans un rayon de 5 km autour de Treignac », « à moins de 5 km de Treignac », « autour de Brive »
+        const near = f.match(/(\d+(?:[.,]\d+)?) ?km (?:de |d |autour de |du |des |a |de la |du centre de )?([a-z][a-z' -]*?)(?: du | de \d| en | entre | depuis |$)/) || f.match(/autour de ([a-z][a-z' -]*?)(?: du | en | depuis |$)/);
+        let placeWords = '';
         if (near && d.geo) {
-            const km = near.length > 2 ? Number(String(near[1]).replace(',', '.')) : 10, name = (near.length > 2 ? near[2] : near[1]).trim();
-            const pl = await placeByName(name); if (pl?.lat != null) preset.near = {lat: pl.lat, lon: pl.lon, km, title: String(pl.title || name).replace(/\s*\(.*\)$/, '')};
+            const km = near.length > 2 && /^\d/.test(near[1]) ? Number(String(near[1]).replace(',', '.')) : 10, name = (near.length > 2 && /^\d/.test(near[1]) ? near[2] : near[1]).trim();
+            const pl = await placeByName(name); if (pl?.lat != null) { preset.near = {lat: pl.lat, lon: pl.lon, km, title: String(pl.title || name).replace(/\s*\(.*\)$/, '')}; placeWords = name; }
         } else {
-            const m = f.match(/ (?:a|dans|sur la commune de) ([a-z][a-z' -]+?)(?: du | de \d| en | entre | au |$)/);
+            const m = f.match(/ (?:a|dans|sur la commune de|de) ([a-z][a-z' -]+?)(?: du | de \d| en \d| entre | au |$)/);
             const placeField = fields.find(x => x.type === 'place' && /deces/.test(fold(x.key))) || fields.find(x => x.type === 'place' && /commune/.test(fold(x.key))) || fields.find(x => x.type === 'place');
-            if (m && placeField) { const words = q.slice(f.indexOf(m[1])).split(/\s+/).slice(0, m[1].trim().split(/\s+/).length).join(' '); preset.crit.push({key: placeField.key, kind: 'place', value: words.replace(/^(.)/, c => c.toUpperCase())}); }
+            if (m && placeField && !/^(\d|les |la |l )/.test(m[1])) { const ws = q.slice(f.indexOf(m[1])).split(/\s+/).slice(0, m[1].trim().split(/\s+/).length).join(' '); preset.crit.push({key: placeField.key, kind: 'place', value: ws.replace(/^(.)/, c => c.toUpperCase())}); placeWords = m[1]; }
         }
+        // « dans le 19 », « en Corrèze (19) », « du 87 » : un numéro de département → le code Insee commence par…
+        const dep = f.match(/(?:^| )(?:dans le |du |le |en |\()(\d{2}|2a|2b|97\d)(?:\)|$| )/);
+        const codeField = fields.find(x => /^(code|insee|code_insee|depcom)$/.test(x.key)) || fields.find(x => /code insee/.test(fold(x.label)));
+        if (dep && codeField) preset.crit.push({key: codeField.key, kind: 'text', op: 'starts', value: dep[1].toUpperCase()});
+        // les mots qui restent (« Donati », « Saint-Amand ») : une recherche dans la liste
+        const consumed = new Set([...used, ...fold(placeWords).split(/[^a-z0-9-]+/), ...MONTHS]);
+        const rest = words.filter(w => !STOP.has(w) && !consumed.has(w) && !consumed.has(w.replace(/s$/, '')) && !/^\d+$/.test(w) && !(dep && w === dep[1]) && w.length > 2 && !(SYN.some(([re]) => re.test(w))));
+        if (rest.length && !preset.near && !preset.crit.some(c => c.kind === 'place')) preset.q = q.split(/\s+/).filter(w => rest.includes(fold(w).replace(/[’'.,;:!?()]/g, ''))).join(' ');
         return {id: d.id, preset};
     }
     /** la barre « 🧺 Prendre… » de la page d'une liste (appelée par app-listes-donnees.js) ; venue de « Prendre depuis… » : le bandeau

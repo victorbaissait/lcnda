@@ -381,13 +381,13 @@
         }
         if (kind === 'enum') {
             const form = editor(`<b>${lab}</b><input type="search" class="ld-ed-filter" data-ld-ed-filter placeholder="${esc(T('Chercher un choix…'))}"><div class="ld-ed-list" data-ld-ed-list>${UI().spinner ? UI().spinner(T('Chargement…'), {inline: true}) : '…'}</div>`,
-                form => { const vals = [...form.querySelectorAll('[data-ld-ed-list] input:checked')].map(i => i.value); if (!vals.length) { toast(T('Coche au moins un choix.'), 'error'); return false; } done({key, kind, values: vals}); }, '[data-ld-ed-filter]');
+                form => { const cl = form.querySelector('.ui-choice'), vals = cl ? cl.values : [...form.querySelectorAll('[data-ld-ed-list] input:checked')].map(i => i.value); if (!vals.length) { toast(T('Coche au moins un choix.'), 'error'); return false; } done({key, kind, values: vals}); }, '[data-ld-ed-filter]');
             if (!form) return;
             const vals = await enumValues(d, key, st).catch(() => []), have = new Set(old?.values || []);
             const list = form.querySelector('[data-ld-ed-list]'); if (!list) return;
             if (!vals.length) { list.innerHTML = `<label>${esc(T('Valeur'))} <input name="free" data-ld-free></label>`; form.addEventListener('submit', e => { const v = form.elements.free?.value.trim(); if (v) { e.stopImmediatePropagation(); e.preventDefault(); done({key, kind: 'text', op: 'eq', value: v}); ws().querySelector('[data-ld-editor]').hidden = true; } }, true); return; }
-            list.innerHTML = vals.slice(0, 400).map(([v, n]) => `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" value="${esc(v)}" ${have.has(v) ? 'checked' : ''}> ${esc(v)}${n != null ? ` <small class="ui-listbar-on">${esc(nf(n))}</small>` : ''}</label>`).join('');
-            form.querySelector('[data-ld-ed-filter]').addEventListener('input', e => { const q = fold(e.target.value); list.querySelectorAll('label').forEach(l => { l.hidden = !!q && !fold(l.textContent).includes(q); }); });
+            // la liste de choix commune (app-ui.js) : 🔍 sans accents, cochés en haut, « 3 choix sur 214 », par nombre / A → Z, Entrée, ↓, toute la liste (par morceaux)
+            list.classList.add('is-choice'); list.replaceChildren(UI().choiceList({items: vals.map(([v, n]) => [v, n, v]), checked: [...have], multiple: true, key: `ld:${d.id}:${key}`, label: T(f.label), search: form.querySelector('[data-ld-ed-filter]')}));
             return;
         }
         const ops = [['contains', T('contient')], ['starts', T('commence par')], ['eq', T('est exactement')], ['notempty', T('est rempli')], ['empty', T('est vide')]];

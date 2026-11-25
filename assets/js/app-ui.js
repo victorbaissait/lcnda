@@ -619,6 +619,152 @@
         return b;
     };
 
+    /* ═════ Listes de choix (cases à cocher ou ronds) : 🔍 chercher · cochés en haut · nombres à droite ═════
+     * choiceList({items, checked, multiple, name, key, search, onChange, onApply, …}) → l'élément .ui-choice (mode d'emploi : docs/UI.md)
+     *   items : [[valeur, nombre, libellé]] ou [{value, n, label, icon, sub, text, cls, attrs, disabled}] (nombre null : pas de nombre ; text : des mots en plus pour la recherche)
+     *   checked : les valeurs cochées ; multiple : cases (true) ou ronds (false : name pour le formulaire)
+     *   key : retient « par nombre / A → Z » pour ce champ (localStorage « genealogie-choix-tri ») ; search : true (sa case), false, ou une case <input type="search"> déjà posée
+     *   inputAttrs : des attributs (texte, ou fonction(choix)) sur chaque case ; optClass : une classe en plus sur chaque ligne ; label : le nom de la liste (lecteur d'écran)
+     *   onChange(valeurs, {value, checked}) ; onApply(valeurs) : Entrée quand il ne reste qu'un choix (sans onApply : le formulaire autour est envoyé)
+     *   filter(choix) : un tri de plus (ex. une liste déroulante à côté) ; tickAll : « Tout cocher » même sans recherche
+     * Recherche sans accents ni majuscules, début de mot d'abord, partie trouvée surlignée ; cochés épinglés sous « Cochés (N) » ; « 3 choix sur 214 » ;
+     * « Tout cocher les N affichés » / « Tout décocher » ; ↓ entre dans la liste, ↑ ↓ s'y déplacent, Espace coche, Entrée coche le premier trouvé
+     * (ou applique s'il est seul), Échap vide la case puis ferme ; une longue liste se montre par morceaux (« + 1 200 autres : tape pour chercher »).
+     * L'élément : .values, .search (la case), .refresh(), .setItems(items, cochés), .setChecked(valeurs), .setFilter(fn). Toute case cochée reste dans la page. */
+    const CHOICE_SORT = 'genealogie-choix-tri';
+    const tr = (s, v) => (window.LCNDA_I18N ? i18n(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? (typeof v[k] === 'number' ? v[k].toLocaleString('fr-FR') : v[k]) : m)));
+    const nfmt = n => (window.LCNDA_I18N?.fmtNumber ? window.LCNDA_I18N.fmtNumber(n) : Number(n).toLocaleString('fr-FR'));
+    const fold2 = s => fold(s).replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/ß/g, 'ss').replace(/[’‘ʼ]/g, "'");
+    const qFold = s => fold2(s).replace(/\s+/g, ' ').trim();
+    /** le texte plié (sans accents, minuscules) + où chaque lettre pliée commence et finit dans le texte d'origine (pour surligner) */
+    const foldIdx = s => {
+        let f = ''; const st = [], en = []; let i = 0;
+        for (const ch of String(s ?? '')) { const x = fold2(ch); if (!x.length && en.length) en[en.length - 1] = i + ch.length; for (let k = 0; k < x.length; k++) { f += x[k]; st.push(i); en.push(i + ch.length); } i += ch.length; }
+        return {f, st, en};
+    };
+    const WORDCH = /[\p{L}\p{N}]/u;
+    /** où q est trouvé : début du texte (0), début d'un mot (1), ailleurs (2) */
+    const choiceHit = (fi, q) => {
+        let p = fi.f.indexOf(q); if (p < 0) return null; const first = p;
+        while (p >= 0) { if (!p || !WORDCH.test(fi.f[p - 1])) return {at: p, rank: p ? 1 : 0}; p = fi.f.indexOf(q, p + 1); }
+        return {at: first, rank: 2};
+    };
+    UI.choiceList = ({items = [], checked = [], multiple = true, name = '', key = '', search = true, placeholder = '', label = '', inputAttrs = '', optClass = '', onChange = null, onApply = null, filter = null, page = 150, maxHeight = '', sort = 'n', tickAll = false} = {}) => {
+        const root = h('div', 'ui-choice' + (multiple ? '' : ' is-single'));
+        const uid = 'uic-' + Math.random().toString(36).slice(2, 9);
+        let list = [], on = new Set(), limit = page, extra = filter, matched = [], shown = [], quiet = false;
+        const norm = (it, i) => { const o = Array.isArray(it) ? {value: it[0], n: it[1], label: it[2]} : {...it}; o.value = String(o.value ?? ''); o.label = String(o.label ?? o.value); o.i = i; o.fl = foldIdx(o.label); o.fx = fold2(`${o.sub || ''} ${o.text || ''}`); return o; };
+        const setItems = (its, ch) => { list = (its || []).map(norm); const known = new Set(list.map(o => o.value)); on = new Set([...(ch || [])].map(String).filter(v => known.has(v))); if (!multiple && on.size > 1) on = new Set([...on].slice(0, 1)); };
+        setItems(items, checked);
+        let mode = (key && (store.get(CHOICE_SORT, {}) || {})[key]) || sort;
+        let q = null;
+        if (search && search.nodeType) q = search;
+        else if (search) { q = h('input'); q.type = 'search'; q.autocomplete = 'off'; q.spellcheck = false; q.placeholder = placeholder || tr('Chercher un choix…'); }
+        root.innerHTML = `<div class="ui-choice-top"></div><div class="ui-choice-bar"><span class="ui-choice-count" id="${uid}-n" aria-live="polite"></span><span class="ui-choice-sort" role="group" aria-label="${esc(tr('Trier :'))}" hidden><span>${esc(tr('Trier :'))}</span><button type="button" data-choice-sort="n">${esc(tr('par nombre'))}</button><button type="button" data-choice-sort="az">${esc(tr('A → Z'))}</button></span></div><div class="ui-choice-tools" hidden><button type="button" class="ui-choice-link" data-choice-all></button><button type="button" class="ui-choice-link" data-choice-none>${esc(tr('Tout décocher'))}</button></div><div class="ui-choice-list" id="${uid}" role="${multiple ? 'group' : 'radiogroup'}" aria-label="${esc(label || tr('Choix'))}" aria-describedby="${uid}-n"></div>`;
+        const $ = s => root.querySelector(s), box = $('.ui-choice-list'), cnt = $('.ui-choice-count'), tools = $('.ui-choice-tools'), allBtn = $('[data-choice-all]'), noneBtn = $('[data-choice-none]'), sortEl = $('.ui-choice-sort');
+        if (maxHeight) box.style.maxHeight = maxHeight;
+        if (q && !search.nodeType) $('.ui-choice-top').appendChild(q); else $('.ui-choice-top').remove();
+        if (q) { q.classList.add('ui-choice-q'); if (!q.getAttribute('aria-label')) q.setAttribute('aria-label', q.placeholder || tr('Chercher un choix…')); q.setAttribute('aria-controls', uid); q.setAttribute('aria-describedby', `${uid}-n`); if (!q.title) q.title = tr('Entrée : cocher le premier choix trouvé · ↓ : aller dans la liste · Échap : vider'); }
+        const hasN = () => list.some(o => typeof o.n === 'number');
+        const byN = (a, b) => (Number(b.n) || 0) - (Number(a.n) || 0) || a.i - b.i;
+        const byAz = (a, b) => a.label.localeCompare(b.label, 'fr', {sensitivity: 'base', numeric: true}) || a.i - b.i;
+        const mark = (o, at, len) => { const s = o.fl.st[at], e = o.fl.en[at + len - 1]; return s == null || e == null ? esc(o.label) : `${esc(o.label.slice(0, s))}<mark>${esc(o.label.slice(s, e))}</mark>${esc(o.label.slice(e))}`; };
+        const row = (o, hl) => {
+            const at = typeof inputAttrs === 'function' ? inputAttrs(o) : inputAttrs;
+            const n = o.n == null || o.n === '' ? '' : `<small class="ui-choice-n">${esc(typeof o.n === 'number' ? nfmt(o.n) : o.n)}</small>`;
+            return `<label class="ui-choice-opt checkbox-line${optClass ? ' ' + optClass : ''}${o.cls ? ' ' + o.cls : ''}"${o.attrs ? ' ' + o.attrs : ''}><input type="${multiple ? 'checkbox' : 'radio'}"${name ? ` name="${esc(name)}"` : ''} value="${esc(o.value)}"${on.has(o.value) ? ' checked' : ''}${o.disabled ? ' disabled' : ''}${at ? ' ' + at : ''}><span class="ui-choice-txt">${o.icon ? `<span class="ui-choice-ico" aria-hidden="true">${esc(o.icon)}</span> ` : ''}<span class="ui-choice-l">${hl || esc(o.label)}</span>${o.sub ? ` <small class="ui-choice-sub">${esc(o.sub)}</small>` : ''}</span>${n}</label>`;
+        };
+        const query = () => qFold(q?.value || '');
+        const inputs = () => [...box.querySelectorAll('input:not([disabled])')];
+        const tools2 = () => {
+            const left = shown.filter(o => !on.has(o.value) && !o.disabled).length, qq = query();
+            allBtn.hidden = !multiple || !left || !(qq || (extra && matched.length !== list.length) || tickAll);
+            allBtn.textContent = tr('Tout cocher les {n} affichés', {n: left});
+            noneBtn.hidden = !multiple || !on.size;
+            tools.hidden = allBtn.hidden && noneBtn.hidden;
+            const pin = box.querySelector('[data-choice-pinned]'); if (pin) pin.textContent = tr('Cochés ({n})', {n: on.size});
+        };
+        function paint() {
+            const act = document.activeElement, keep = act && box.contains(act) && act.matches('input') ? act.value : null;
+            const qq = query(), sortable = hasN();
+            const base = list.filter(o => !extra || extra(o));
+            if (sortable) base.sort(mode === 'az' ? byAz : byN);
+            const hits = new Map();
+            if (qq) {
+                matched = [];
+                base.forEach(o => { const m = choiceHit(o.fl, qq); if (m) { hits.set(o, m); matched.push(o); } else if (o.fx.includes(qq)) { hits.set(o, {rank: 3}); matched.push(o); } });
+                matched = matched.map((o, k) => [o, k]).sort((a, b) => hits.get(a[0]).rank - hits.get(b[0]).rank || a[1] - b[1]).map(x => x[0]);
+            } else matched = base;
+            const hl = o => { const m = hits.get(o); return m && m.at != null ? mark(o, m.at, qq.length) : ''; };
+            const pin = (sortable ? [...list].sort(mode === 'az' ? byAz : byN) : list).filter(o => on.has(o.value));
+            shown = matched.filter(o => !on.has(o.value));
+            let html = '';
+            if (pin.length) html += `<div class="ui-choice-h" data-choice-pinned></div>${pin.map(o => row(o, hl(o))).join('')}${shown.length ? `<div class="ui-choice-h">${esc(tr('Les autres'))}</div>` : ''}`;
+            html += shown.slice(0, limit).map(o => row(o, hl(o))).join('');
+            const rest = shown.length - limit;
+            if (rest > 0) html += `<button type="button" class="ui-choice-more" data-choice-more title="${esc(tr('Montrer les suivants'))}">${esc(tr('+ {n} autres : tape pour chercher', {n: rest}))}</button>`;
+            if (qq && !matched.length) html += `<div class="ui-choice-empty" role="status"><span>${esc(tr('Aucun choix ne contient « {q} »', {q: q.value.trim()}))}</span><button type="button" class="ui-choice-link" data-choice-clear>${esc(tr('Effacer la recherche'))}</button></div>`;
+            box.innerHTML = html;
+            const filtered = !!qq || (extra && base.length !== list.length);
+            cnt.textContent = filtered ? tr('{n} choix sur {total}', {n: matched.length, total: list.length}) : plural(list.length, 'choix', 'choix');
+            sortEl.hidden = !sortable;
+            sortEl.querySelectorAll('[data-choice-sort]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.choiceSort === mode)));
+            tools2();
+            if (keep != null) box.querySelector(`input[value="${CSS.escape(keep)}"]`)?.focus();
+        }
+        const apply = () => { if (onApply) { onApply(root.values); return; } const f = root.closest('form') || q?.closest('form'); if (f) { if (f.requestSubmit) f.requestSubmit(); else f.submit(); } };
+        /** cocher / décocher plusieurs choix d'un coup : un seul « change » pour ceux qui écoutent autour */
+        const setMany = (vals, state) => {
+            vals.forEach(v => { if (state) on.add(v); else on.delete(v); });
+            paint();
+            const t = box.querySelector('input') || root;
+            quiet = true; try { fire(t, 'change'); } finally { quiet = false; }
+            onChange?.(root.values, {value: null, checked: state});
+        };
+        box.addEventListener('change', e => {
+            const i = e.target; if (quiet || !i.matches?.('input')) return;
+            if (multiple) { if (i.checked) on.add(i.value); else on.delete(i.value); } else if (i.checked) on = new Set([i.value]);
+            tools2(); onChange?.(root.values, {value: i.value, checked: i.checked});
+        });
+        root.addEventListener('click', e => {
+            const t = e.target.closest('button'); if (!t || !root.contains(t)) return;
+            if (t.dataset.choiceSort) { mode = t.dataset.choiceSort; if (key) store.set(CHOICE_SORT, {...(store.get(CHOICE_SORT, {}) || {}), [key]: mode}); paint(); t.focus(); }
+            else if (t.matches('[data-choice-all]')) { setMany(shown.filter(o => !o.disabled).map(o => o.value), true); q?.focus(); }
+            else if (t.matches('[data-choice-none]')) { setMany([...on], false); (q || box.querySelector('input'))?.focus(); }
+            else if (t.matches('[data-choice-clear]')) { if (q) { q.value = ''; fire(q, 'input'); q.focus(); } }
+            else if (t.matches('[data-choice-more]')) { const k = Math.min(shown.length, limit); limit += Math.max(page, 300); paint(); box.querySelectorAll(on.size ? 'label.ui-choice-opt:not(:has(:checked)) input' : 'input')[k]?.focus(); }
+        });
+        // descendre au bas de la liste montre la suite toute seule
+        box.addEventListener('scroll', () => { if (box.querySelector('[data-choice-more]') && box.scrollTop + box.clientHeight > box.scrollHeight - 48) { limit += Math.max(page, 300); paint(); } }, {passive: true});
+        box.addEventListener('keydown', e => {
+            const i = e.target; if (!i.matches?.('input')) return;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault(); const all = inputs(), k = all.indexOf(i), nx = all[k + (e.key === 'ArrowDown' ? 1 : -1)];
+                if (nx) nx.focus(); else if (e.key === 'ArrowUp') q?.focus(); else box.querySelector('[data-choice-more]')?.focus();
+            } else if (e.key === 'Enter') { e.preventDefault(); apply(); }
+        });
+        q?.addEventListener('input', () => { limit = page; paint(); });
+        q?.addEventListener('keydown', e => {
+            if (e.key === 'ArrowDown') { const f = inputs()[0]; if (f) { e.preventDefault(); f.focus(); } }
+            else if (e.key === 'Enter') {
+                e.preventDefault(); if (e.isComposing) return;
+                if (!query()) { apply(); return; }
+                if (!matched.length) return;
+                const tick = o => { const i = box.querySelector(`input[value="${CSS.escape(o.value)}"]`); if (i && !i.disabled && !i.checked) { i.checked = true; fire(i, 'change'); } };
+                if (matched.length === 1) { tick(matched[0]); apply(); return; }
+                const o = matched.find(x => !on.has(x.value) && !x.disabled); if (o) tick(o); q.select();
+            } else if (e.key === 'Escape' && q.value) { e.preventDefault(); e.stopPropagation(); q.value = ''; fire(q, 'input'); }
+        });
+        Object.defineProperty(root, 'values', {get: () => list.filter(o => on.has(o.value)).map(o => o.value)});
+        root.search = q;
+        root.refresh = () => paint();
+        root.setItems = (its, ch) => { setItems(its, ch ?? [...on]); limit = page; paint(); };
+        root.setChecked = vals => { const known = new Set(list.map(o => o.value)); on = new Set([...(vals || [])].map(String).filter(v => known.has(v))); paint(); };
+        root.setFilter = fn => { extra = fn; limit = page; paint(); };
+        paint();
+        return root;
+    };
+
     /* ═════ H10 La barre commune des listes : 🔍 Chercher · Filtrer ▾ · Liste | Fiches · Trier : … ▾ ═════
      * Maquette : docs/design/messages-et-listes.html. Sous la barre : les filtres actifs en pastilles bleues « Femmes × » + « Tout effacer ».
      * Tout est retenu pour chaque liste (localStorage « lcnda-listbar:<key> »). Mode d'emploi : docs/UI.md. */
@@ -627,6 +773,7 @@
     const lbEmpty = v => v == null || v === '' || v === false || (Array.isArray(v) && !v.length);
     const optList = f => (f.options || []).map(o => (Array.isArray(o) ? {value: String(o[0]), label: o[1], chip: o[2], n: o[3]} : {value: String(o.value), label: o.label, chip: o.chip, n: o.n})); // n : le nombre trouvé, écrit à droite du choix
     const optN = o => (o.n != null && o.n !== '' ? ` <small class="ui-listbar-on">${esc(typeof o.n === 'number' ? o.n.toLocaleString('fr-FR') : o.n)}</small>` : '');
+    const LB_CHOICE_MIN = 8; // au-delà de 8 choix, « Filtrer ▾ » montre la liste de choix commune (choiceList)
     const placeTitle = v => (v && typeof v === 'object' ? (v.title || v.name || '') : String(v || '').replace(/^txt:/, ''));
     /** listBar({key, search, filters, view, sort, count, onChange}) → l'élément (.state, .setCount(n), .adoptSort(barreC6), .setFilter(id, v), .clear(), .input) */
     UI.listBar = ({key = '', search = {}, filters = [], view = null, sort = null, count = null, onChange = null, remember = true} = {}) => {
@@ -674,6 +821,7 @@
         const changed = (f, what = 'filter') => { paintActive(); emit(what); };
         function menuRow(f) {
             const v = st.filters[f.id], nm = `lb-${key || 'x'}-${f.id}`.replace(/[^\w-]/g, '_');
+            if ((f.type === 'check' && f.options || f.type === 'radio') && f.search !== false && optList(f).length > LB_CHOICE_MIN) return `<div class="ui-listbar-choice" data-lb-choice="${esc(f.id)}"></div>`; // une longue liste : la liste de choix commune (🔍, cochés en haut)
             if (f.type === 'check' && f.options) return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${(v || []).map(String).includes(o.value) ? ' checked' : ''}> ${esc(o.label)}${optN(o)}</label>`).join('');
             if (f.type === 'check') return `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}"${v ? ' checked' : ''}${f.disabled?.(st.filters) ? ' disabled' : ''}> ${esc(f.text || f.label)}</label>`;
             if (f.type === 'radio') return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="radio" name="${nm}" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${String(v) === o.value ? ' checked' : ''}> ${esc(o.label)}${optN(o)}</label>`).join('');
@@ -693,6 +841,13 @@
             const groups = []; filters.forEach(f => { const g = f.group || f.label; let gr = groups.find(x => x.g === g); if (!gr) groups.push(gr = {g, fs: []}); gr.fs.push(f); });
             box.innerHTML = groups.map(gr => `<div class="ui-listbar-group"><b>${esc(gr.g)}</b>${gr.fs.map(f => `<div class="ui-listbar-f" data-lb-row="${esc(f.id)}">${f.group && f.group !== f.label && f.type !== 'check' ? `<small>${esc(f.label)}</small>` : ''}${menuRow(f)}</div>`).join('')}</div>`).join('') + `<div class="ui-listbar-menu-foot"><button type="button" class="ui-listbar-clear" data-lb-clear>Tout effacer</button><button type="button" class="button small" data-lb-done>Fermer</button></div>`;
             const find = id => filters.find(f => f.id === id);
+            box.querySelectorAll('[data-lb-choice]').forEach(slot => {
+                const f = find(slot.dataset.lbChoice); if (!f) return;
+                const multi = f.type === 'check', v = st.filters[f.id];
+                slot.appendChild(UI.choiceList({items: optList(f).map(o => ({value: o.value, label: o.label, n: o.n ?? null})), checked: multi ? (v || []).map(String) : [String(v ?? '')], multiple: multi,
+                    name: `lb-${key || 'x'}-${f.id}`.replace(/[^\w-]/g, '_'), key: `lb:${key || 'x'}:${f.id}`, label: f.label, inputAttrs: `data-lb-f="${esc(f.id)}"`, optClass: 'ui-listbar-opt', maxHeight: '260px',
+                    onApply: () => { closePop(); fbtn.focus(); }}));
+            });
             const refreshDisabled = () => filters.forEach(f => { if (!f.disabled) return; const i = box.querySelector(`[data-lb-f="${CSS.escape(f.id)}"]`); if (i) { i.disabled = !!f.disabled(st.filters); if (i.disabled && st.filters[f.id]) { st.filters[f.id] = false; i.checked = false; } } });
             box.addEventListener('change', e => {
                 const t = e.target, f = find(t.dataset?.lbF); if (!f) return;

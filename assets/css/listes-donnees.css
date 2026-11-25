@@ -14,6 +14,7 @@
 .ld-ed-row input[type="number"] { width: 7.5em; }
 .ld-ed-row input:not([type]), .ld-ed-row input[name="v"] { flex: 1 1 180px; min-width: 0; }
 .ld-ed-list { max-height: 260px; overflow: auto; display: grid; gap: 2px; }
+.ld-ed-list.is-choice { max-height: none; overflow: visible; display: block; } /* la liste de choix commune a sa propre hauteur (app-ui.js choiceList) */
 .ld-ed-actions { display: flex; gap: 6px; justify-content: flex-end; }
 .ld-pk { min-width: 0; max-width: 420px; }
 .ld-saved { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 8px; }
