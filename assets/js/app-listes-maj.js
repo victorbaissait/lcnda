@@ -383,7 +383,7 @@
             </div>
             <div class="dmaj-filters"><span class="segmented" role="group" aria-label="${esc(T('Montrer'))}">${filt.map(([v, l]) => `<button type="button" data-dmaj-filter="${v}" class="${C.filter === v ? 'is-active' : ''}" aria-pressed="${C.filter === v}">${esc(T(l))}</button>`).join('')}</span>
               <input type="search" class="dmaj-q" data-dmaj-q placeholder="${esc(T('Chercher un pack…'))}" aria-label="${esc(T('Chercher un pack'))}" value="${esc(C.q)}"></div>
-            <div data-dmaj-list>${shown.length ? THEMES.map(group).join('') : `<p class="muted">${esc(T('Rien à montrer avec ce filtre.'))}</p>`}</div>
+            <div data-dmaj-list>${shown.length ? [...new Set([...THEMES, ...FAM.map(f => f.theme)])].map(group).join('') : `<p class="muted">${esc(T('Rien à montrer avec ce filtre.'))}</p>`}</div>
             <p class="muted"><small>${esc(T('Les données livrées avec l’app sont refaites sur GitHub (dépôt du projet) ; une mise à jour est vérifiée (sha256) et l’ancienne version gardée. Les packs se téléchargent un à la fois, pour ménager les serveurs.'))}</small></p>`;
         bindPanel(host);
         paintQueue();
