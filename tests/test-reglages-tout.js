@@ -255,8 +255,8 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await page.evaluate(ks => ks.forEach(k => localStorage.removeItem(k)), [...Object.keys(MINE), 'genealogie-side-order']);
             await setLs({'genealogie-list-hidden': JSON.stringify(['media']), 'lcnda-sort:listes:persons': 'az', 'lcnda-photomaps-shape': 'square'});
             await page.waitForTimeout(1500);
-            const b = await lsAll();
             const f = await openFrame(ALL);
+            const b = await lsAll(); // (après avoir ouvert le cadre : il retient lui-même qu'il est ouvert)
             await rowOf(f, 'Tout de chez tout').locator('[data-ps-apply]').click();
             await Promise.all([page.waitForNavigation({waitUntil: 'load', timeout: 15000}), page.locator('dialog.confirm-box-dialog[open] button', {hasText: 'Appliquer'}).click()]);
             const toast = page.locator('.toast', {hasText: 'Tout de chez tout'}).last(); await toast.waitFor({state: 'attached', timeout: 15000});

@@ -138,7 +138,7 @@
         if (e.key === 'Enter' && (e.shiftKey || e.metaKey || e.ctrlKey)) { e.preventDefault(); return toBasket(); } // 🧺 au panier au lieu d'insérer (on reste ici)
         if (e.key === 'Enter') { e.preventDefault(); if (res) act(); }
     }
-    function enter(res) { pop.path.push({id: res.enter, label: res.label, icon: res.icon, q: pop.q}); pop.q = ''; pop.box.querySelector('[data-qi-q]').value = ''; pop.i = 0; draw(); }
+    function enter(res) { const c = findCat(res.enter); pop.path.push({id: res.enter, label: c?.label || res.label, icon: c?.icon || res.icon, q: pop.q}); pop.q = ''; pop.box.querySelector('[data-qi-q]').value = ''; pop.i = 0; draw(); }
     function goBack() { const p = pop.path.pop(); pop.q = p?.q || ''; pop.box.querySelector('[data-qi-q]').value = pop.q; pop.i = 0; draw(); }
     function tick() { const res = pop.results[pop.i]; if (!res?.item) return; const k = K().pickKey(res.item); if (pop.ticked.has(k)) pop.ticked.delete(k); else pop.ticked.set(k, res); paintBk(); draw(); }
 
@@ -175,9 +175,14 @@
         rec.forEach(x => out.push({...asRes(x), group: T('Récents')}));
         const byKind = new Map();
         (r.base || []).forEach(g => (g.items || []).forEach(x => { const it = g.kind === 'note' ? {kind: 'note', ref_id: Number(x.id), title: x.title || String(x.body || '').slice(0, 80), value: String(x.body || '').slice(0, 300), origin: x.person_name ? {kind: 'person', id: Number(x.entity_id), label: T('Fiche de {n}', {n: x.person_name})} : null} : K().pickItem(g.kind, x); byKind.set(g.kind, [...(byKind.get(g.kind) || []), it]); }));
-        (r.lists || []).forEach(g => { const d = lists.find(x => x.id === g.src); if (d) (g.rows || []).forEach(row => out.push({...asRes(K().ldRowItem(d, {}, row)), group: `${d.icon || '📋'} ${T(d.label)}`, src: d})); });
-        loc.forEach((rows, k) => rows.forEach(it => out.push({...asRes(it), group: `${local[k].icon || '📋'} ${T(local[k].label)}`, src: local[k]})));
+        // ma base d'abord (ce que la personne de la fiche a de plus proche en tête), puis les listes de données dont un mot correspond
         PICK_KINDS.concat('note').forEach(k => (byKind.get(k) || []).forEach(it => out.push({...asRes(it), group: T(CX().KIND?.[k]?.[1] ? `${CX().KIND[k][1]}s` : k)})));
+        const listHit = d => words.some(w => fold(`${d.id} ${d.label}`).includes(w.replace(/s$/, '')));
+        const lrows = [];
+        (r.lists || []).forEach(g => { const d = lists.find(x => x.id === g.src); if (d) (g.rows || []).forEach(row => lrows.push({...asRes(K().ldRowItem(d, {}, row)), group: `${d.icon || '📋'} ${T(d.label)}`, src: d, hit: listHit(d)})); });
+        loc.forEach((rows, k) => rows.forEach(it => lrows.push({...asRes(it), group: `${local[k].icon || '📋'} ${T(local[k].label)}`, src: local[k], hit: true})));
+        // une ligne d'une liste nommée dans la demande (« gare vulaines ») passe devant tout
+        out.unshift(...lrows.filter(x => x.hit)); out.push(...lrows.filter(x => !x.hit));
         (r.basket || []).forEach(it => out.push({...asRes(it), group: T('Panier')}));
         // des éléments d'abord (8 au plus ; ce qui est mis de côté pour ici en premier), puis l'ensemble demandé, les listes et les catégories
         const iciKeys = new Set(iciItems().map(x => `${x.title}|${x.value}`)); out.sort((a, b) => (iciKeys.has(`${b.item?.title}|${b.item?.value}`) ? 1 : 0) - (iciKeys.has(`${a.item?.title}|${a.item?.value}`) ? 1 : 0));
@@ -269,7 +274,7 @@
     async function insert(el, {text, html, trigger, saved, ctx, items}) {
         let undoText;
         if (el.matches('textarea')) {
-            const before = el.value; let a = saved.start, b = saved.end;
+            const before = trigger ? el.value.slice(0, trigger.start) + el.value.slice(trigger.start + trigger.len) : el.value; let a = saved.start, b = saved.end;
             if (trigger) { a = trigger.start; b = Math.max(b, trigger.start + trigger.len); }
             const pre = el.value.slice(0, a), post = el.value.slice(b), sep = post && !/^\s/.test(post) ? ' ' : '';
             el.value = pre + text + sep + post; const pos = (pre + text + sep).length; el.focus(); el.setSelectionRange(pos, pos);

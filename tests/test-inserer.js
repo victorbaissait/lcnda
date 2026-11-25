@@ -110,7 +110,7 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             const bad = await p.evaluate(() => { const b = document.querySelector('.cx-qi'), r = b.getBoundingClientRect(); return [...b.querySelectorAll('input, button, .cx-qi-r, .cx-qi-g')].filter(e => e.getClientRects().length).filter(e => { const q = e.getBoundingClientRect(); return q.left - r.left < 12 || r.right - q.right < 12; }).map(e => e.outerHTML.slice(0, 80)); });
             assert.deepStrictEqual(bad, []);
             await p.keyboard.press('Escape'); await p.setViewportSize({width: 390, height: 800}); await sleep(200);
-            await p.focus('dialog[open] textarea[name="t"]'); await p.keyboard.type('/'); await p.waitForSelector(QI);
+            await p.fill('dialog[open] textarea[name="t"]', ''); await p.focus('dialog[open] textarea[name="t"]'); await p.keyboard.type('/'); await p.waitForSelector(QI);
             assert.ok(await p.evaluate(() => { const r = document.querySelector('.cx-qi').getBoundingClientRect(); return r.left >= 0 && r.right <= 390 && document.documentElement.scrollWidth <= 390; }));
             await p.keyboard.press('Escape'); await p.setViewportSize({width: 1440, height: 900});
         });
