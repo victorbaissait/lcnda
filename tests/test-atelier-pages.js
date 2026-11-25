@@ -613,7 +613,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             assert.equal(r.lbs, r.lines, 'une ligne <lb/> par ligne du texte (sans les repères de page)');
             assert.ok(r.facs.length >= 4 && r.facsOk, 'des lignes reliées à leur zone, toutes vers une zone qui existe : ' + r.facs.length);
         });
-        await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout, rien n’est ajouté', async () => {
+        await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout : seule la page 1 garde ce qui était déjà lu, rien pour les suivantes', async () => {
             ollama.delay = 700; const b0 = (await tx()).body, c0 = ollama.chats;
             await deepAll();
             await p.waitForFunction(() => { const x = document.querySelector('dialog.h-tx-dlg [data-tx-deepall]'); return x && !x.hidden && /page 1 sur 4/.test(x.textContent); }, null, {timeout: 15000});
@@ -621,7 +621,10 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await p.click(`${D} [data-tx-deepstop]`);
             await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-deepall]')?.hidden, null, {timeout: 10000});
             await sleep(2500);
-            assert.match(await statusTx(), /arrêtée/); assert.equal((await tx()).body, b0); assert.equal(ollama.chats - c0, 1, 'pas de demande pour les pages suivantes');
+            assert.match(await statusTx(), /arrêtée/); assert.equal(ollama.chats - c0, 1, 'pas de demande pour les pages suivantes');
+            // « ■ Arrêter » garde ce qui était déjà lu de la page en cours (voulu) ; les pages suivantes ne changent pas
+            const b1 = (await tx()).body, after = s => s.slice(s.indexOf('— page 2 —'));
+            assert.ok(b1.indexOf('— page 2 —') >= 0); assert.equal(after(b1), after(b0), 'les pages 2 à 4 sont intactes');
             ollama.delay = 20; await closeAtelier();
         });
         await t('un acte d’une seule page : « Ce que l’app a trouvé » sans page (comme avant)', async () => {

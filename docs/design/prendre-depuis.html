@@ -1,0 +1,684 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prendre depuis, en clair</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sep1:#c8b79a;--sep2:#e9dcc3;--hover:#f6f8fc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sep1:#5a4f3d;--sep2:#3a3328;--hover:#22262d}}
+:root[data-theme="dark"]{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sep1:#5a4f3d;--sep2:#3a3328;--hover:#22262d}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45;overflow-wrap:anywhere}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:34px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1384px;margin:0 auto}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}.simple p:last-child{margin:0}
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.theme{position:fixed;top:10px;right:10px;z-index:50;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:700 12px system-ui;padding:5px 9px;cursor:pointer}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.mini{font-size:12px;color:var(--muted)}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.fric{counter-reset:f;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 22px}
+.fric li{counter-increment:f;background:var(--paper);border:1.5px solid var(--line2);padding:9px 12px 9px 46px;position:relative;font-size:13.5px;min-width:0}
+.fric li:before{content:counter(f);position:absolute;left:10px;top:9px;background:var(--red);color:#fff;font:800 13px system-ui;padding:2px 7px}
+.fric .path{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.changes{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 22px}
+.changes li{background:var(--paper);border:1.5px solid var(--line2);padding:9px 12px;font-size:13.5px;min-width:0}
+.changes li small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.changes .was{color:var(--soft);text-decoration:line-through}
+.qq{background:var(--paper);border:2px solid var(--ink);padding:12px 14px;margin:12px 0;box-shadow:4px 4px 0 var(--shadow);max-width:1000px}
+.qq h3{margin:0 0 6px;font-size:15px}
+.qq .opt{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:4px 0}
+.qq .reco{font-size:13px;margin-top:8px;border-left:4px solid var(--green);background:var(--green-bg);padding:6px 10px}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;margin-top:2px}.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.demo-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px;font-size:13px}
+.demo-bar .lab{font:800 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.demo-bar button{border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:700 12.5px system-ui;padding:5px 10px;cursor:pointer;box-shadow:3px 3px 0 var(--shadow)}
+.stage{background:repeating-linear-gradient(135deg,var(--grey-bg) 0 14px,var(--bg) 14px 28px);border:2px solid var(--ink);padding:26px;display:flex;justify-content:center}
+.stage.phone{padding:18px 0;background:var(--bg);border:0}
+.phoneframe{width:390px;max-width:100%;border:10px solid var(--bar);border-radius:34px;background:var(--bar);overflow:hidden;box-shadow:6px 6px 0 var(--shadow)}
+.phoneframe .notch{height:22px;color:var(--bar-ink);font:700 11px system-ui;display:flex;justify-content:space-between;padding:3px 16px 0}
+.empties{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.empties>div{background:var(--paper);border:1.5px solid var(--line2);border-radius:12px;padding:4px 6px;min-width:0}
+
+/* ═════════ la fenêtre proposée : plus légère, aérée ═════════ */
+.dlgwrap{width:min(1200px,100%);container-type:inline-size;container-name:dlg}
+.dlg{--pw:340px;position:relative;background:var(--paper);color:var(--ink);border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.18);display:flex;flex-direction:column;height:720px;overflow:hidden;font-size:13.5px}
+.phoneframe .dlg{height:800px;border-radius:18px 18px 0 0;border:0}
+.dh{display:flex;gap:14px;align-items:flex-start;padding:18px 22px 14px;border-bottom:1px solid var(--line)}
+.dh .eyebrow{font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.dh h3{margin:2px 0 4px;font-size:18px}
+.dh p{margin:0;color:var(--muted);font-size:13px;max-width:720px}
+.dest{display:inline-flex;align-items:center;gap:6px;background:var(--blue-bg);color:var(--blue-ink);border-radius:999px;padding:2px 10px;font-weight:700}
+.x{margin-left:auto;flex:none;width:34px;height:34px;border-radius:8px;border:1px solid transparent;background:none;color:var(--muted);font-size:22px;line-height:1;cursor:pointer}
+.x:hover{background:var(--grey-bg)}
+.db{flex:1;min-height:0;display:grid;grid-template-columns:200px minmax(0,1fr) 8px var(--pw)}
+/* rail */
+.rail{border-right:1px solid var(--line);padding:12px 10px;overflow:auto;background:var(--grey-bg)}
+.rail h5{margin:12px 8px 4px;font:800 10.5px system-ui;letter-spacing:.09em;text-transform:uppercase;color:var(--soft)}
+.rail h5:first-child{margin-top:2px}
+.rail button{display:flex;width:100%;align-items:center;gap:8px;border:0;background:none;color:var(--ink);font:500 13.5px system-ui;padding:7px 10px;border-radius:8px;cursor:pointer;text-align:left}
+.rail button:hover{background:var(--hover)}
+.rail button[aria-selected="true"]{background:var(--paper);color:var(--blue-ink);font-weight:700;box-shadow:inset 3px 0 0 var(--blue),0 1px 2px rgba(0,0,0,.06)}
+.rail button .n{margin-left:auto;font-size:11.5px;color:var(--soft);font-weight:600}
+.rail button .n.b{background:var(--blue);color:#fff;border-radius:999px;padding:0 7px}
+.quoi{display:none}
+.dlg.noprev .db{grid-template-columns:200px minmax(0,1fr)}
+/* centre */
+.mid{display:flex;flex-direction:column;min-width:0;min-height:0}
+.tools{padding:14px 20px 10px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line)}
+.srch{position:relative}
+.srch:before{content:"🔍";position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;opacity:.65;pointer-events:none}
+.srch input{width:100%;border:1px solid var(--line2);border-radius:9px;background:var(--paper);color:var(--ink);font:14px system-ui;padding:9px 12px 9px 34px}
+.srch input:focus{outline:2px solid var(--blue);outline-offset:0;border-color:var(--blue)}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--line2);background:var(--paper);color:var(--ink);border-radius:999px;font:500 12.5px system-ui;padding:4px 11px;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--blue-bg);border-color:var(--blue);color:var(--blue-ink);font-weight:700}
+.cf,.ca{display:contents}
+.chips .lab{white-space:nowrap;flex:none;font-size:12px;color:var(--soft);margin-right:2px}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--paper);color:var(--muted);font:600 12.5px system-ui;padding:4px 10px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.sp{flex:1}
+.list{flex:1;min-height:0;overflow:auto;padding:6px 12px 18px}
+.gh{font:800 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);padding:14px 8px 4px;display:flex;gap:8px}
+.gh .c{font-weight:600;letter-spacing:0;text-transform:none}
+.r{display:flex;gap:12px;align-items:flex-start;padding:10px 8px;border-radius:10px;border:1px solid transparent}
+.r+.r{border-top-color:var(--line)}
+.r:hover{background:var(--hover)}
+.r.on{background:var(--blue-bg)}
+.r.focus{border-color:var(--blue)}
+.ck{flex:none;padding:3px 2px;cursor:pointer}
+.ck input{width:18px;height:18px;accent-color:var(--blue);cursor:pointer;margin:0}
+.rt{flex:1;min-width:0;border:0;background:none;color:inherit;text-align:left;padding:0;cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:2px}
+.rt .t1{font-size:14px}
+.rt .t1 .ico{margin-right:4px}
+.rt .t2{font-size:12.5px;color:var(--muted)}
+.rt .t3{font-size:12px;color:var(--soft)}
+.rt .lk{font-size:12px;display:flex;gap:12px;flex-wrap:wrap}
+.lk a,.alink{color:var(--blue);text-decoration:none;font-weight:600}
+.lk a:hover,.alink:hover{text-decoration:underline}
+.rp{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:180px;flex:none}
+.pill{display:inline-flex;gap:4px;align-items:center;font:700 11px/1.2 system-ui;padding:3px 8px;border-radius:999px;background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.ok{background:var(--green-bg);color:var(--green)}
+.pill.q{background:var(--yel-bg);color:var(--yel-ink)}
+.pill.blue{background:var(--blue-bg);color:var(--blue-ink)}
+.pill.red{background:var(--red-bg);color:var(--red)}
+.th{flex:none;width:64px;height:48px;border-radius:6px;background:linear-gradient(135deg,var(--sep2),var(--sep1));position:relative;overflow:hidden;border:1px solid var(--line2)}
+.th:after{content:"";position:absolute;inset:8px 10px;border-top:2px solid rgba(0,0,0,.18);border-bottom:2px solid rgba(0,0,0,.12);box-shadow:0 8px 0 -6px rgba(0,0,0,.15)}
+.th.ph:after{inset:auto;left:12px;right:12px;bottom:0;height:60%;border:0;border-radius:50% 50% 0 0;background:rgba(0,0,0,.18);box-shadow:none}
+.th.pc{background:linear-gradient(160deg,#a8c3d8,#d9cfb5)}
+.th.pc:after{inset:auto;left:0;right:0;bottom:0;height:40%;border:0;background:rgba(80,70,50,.3);box-shadow:none}
+.th.no{background:repeating-linear-gradient(45deg,var(--line2) 0 6px,var(--grey-bg) 6px 12px)}
+.th.no:after{display:none}
+.th.pdf{background:var(--red-bg)}
+.th.pdf:after{content:"PDF";inset:auto;left:0;right:0;top:14px;border:0;box-shadow:none;text-align:center;font:800 11px system-ui;color:var(--red)}
+/* grille des médias */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:8px}
+.mc{border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative;background:var(--paper);cursor:pointer}
+.mc.on{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+.mc .th{width:100%;height:110px;border-radius:0;border:0}
+.mc .ck{position:absolute;top:6px;left:6px;background:var(--paper);border-radius:6px;padding:3px 4px}
+.mc .cap{padding:7px 9px;font-size:12px}
+.mc .cap b{display:block;font-size:12.5px}
+.mc .cap span{color:var(--muted)}
+/* poignée et aperçu */
+.gut{cursor:col-resize;background:none;border:0;border-left:1px solid var(--line);padding:0;position:relative}
+.gut:after{content:"";position:absolute;left:1px;top:50%;width:4px;height:36px;margin-top:-18px;border-radius:3px;background:var(--line2)}
+.gut:hover:after,.gut:focus-visible:after{background:var(--blue)}
+.prev{overflow:auto;padding:18px 20px;background:var(--paper);min-width:0}
+.prev .back{display:none}
+.prev h4{margin:0 0 4px;font-size:16px}
+.prev .big{width:100%;height:190px;border-radius:10px;margin:0 0 12px}
+.prev dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;margin:12px 0;font-size:13px}
+.prev dt{color:var(--soft)}
+.prev dd{margin:0}
+.prev .sect{font:800 10.5px system-ui;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);margin:16px 0 6px}
+.prev ul{margin:0;padding-left:18px;font-size:13px}
+.prev .parts{list-style:none;padding:0}
+.prev .parts li{display:flex;gap:8px;align-items:center;padding:3px 0}
+.prev .help{color:var(--muted);font-size:13px}
+.prev .help b{color:var(--ink)}
+.sumrow{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}
+.sumrow button.t{flex:1;min-width:0;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer;font:inherit;padding:0}
+.sumrow .rm{border:0;background:none;color:var(--soft);cursor:pointer;font-size:16px}
+.will{background:var(--green-bg);border-radius:10px;padding:10px 12px;font-size:13px;margin-top:12px}
+.will b{color:var(--green)}
+.box{background:var(--grey-bg);border-radius:10px;padding:10px 12px;font-size:13px;margin-top:10px}
+/* pied */
+.df{border-top:1px solid var(--line2);padding:12px 22px 14px;display:flex;gap:14px;align-items:center;background:var(--paper)}
+.df .cnt{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.df .cnt b{font-size:14px}
+.df .cnt .what{font-size:12.5px;color:var(--muted)}
+.df .cnt .link{border:0;background:none;color:var(--blue);font:600 12.5px system-ui;padding:0;cursor:pointer;text-align:left}
+.df .acts{display:flex;gap:10px;align-items:center;flex:none}
+.b{display:inline-flex;flex-direction:column;align-items:flex-start;gap:0;border-radius:9px;font:700 13.5px system-ui;padding:8px 14px;cursor:pointer;white-space:nowrap;line-height:1.2}
+.b small{font:500 11.5px system-ui;opacity:.85}
+.b.pri{background:var(--blue);color:#fff;border:1px solid var(--blue)}
+.b.pri:disabled{opacity:.45;cursor:not-allowed}
+.b.sec{background:var(--paper);color:var(--ink);border:1px solid var(--line2)}
+.b.sec:hover{background:var(--hover)}
+.b.ter{background:none;border:1px solid transparent;color:var(--blue)}
+.b.ter:hover{background:var(--blue-bg)}
+.b.sm{padding:5px 10px;font-size:12.5px}
+.toast{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);background:var(--bar);color:var(--bar-ink);border-left:5px solid var(--green);border-radius:8px;padding:10px 14px;font-size:13px;max-width:90%;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:5}
+/* contenus spéciaux */
+.pad{padding:16px 20px 22px}
+.step{font:800 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:16px 0 8px}
+.step:first-child{margin-top:4px}
+.form{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);min-width:0}
+.form .fld{border:1px solid var(--line2);border-radius:9px;padding:8px 11px;font:14px system-ui;color:var(--ink);background:var(--paper);min-width:150px}
+.form select.fld{min-width:240px}
+.placef{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:9px;padding:6px 10px;background:var(--paper);color:var(--ink);font-size:14px;min-width:240px}
+.placef .xx{margin-left:auto;color:var(--soft);cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.card{border:1px solid var(--line2);border-radius:12px;padding:14px;background:var(--paper);display:flex;flex-direction:column;gap:6px;min-width:0}
+.card h6{margin:0;font-size:14px}
+.card p{margin:0;font-size:12.5px;color:var(--muted)}
+.card .gives{font-size:12.5px;color:var(--ink);background:var(--grey-bg);border-radius:8px;padding:6px 9px}
+.card .b{align-self:flex-start;margin-top:4px}
+.understood{background:var(--blue-bg);border-radius:10px;padding:10px 12px;font-size:13px;margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.lrow{display:flex;gap:12px;align-items:center;padding:10px 8px;border-top:1px solid var(--line);flex-wrap:wrap}
+.lrow:first-of-type{border-top:0}
+.lrow .lt{flex:1;min-width:200px}
+.lrow .lt b{display:block;font-size:14px}
+.lrow .lt span{font-size:12.5px;color:var(--muted)}
+.lrow .lt span i{font-style:normal;color:var(--ink)}
+.empty{padding:34px 22px;text-align:center;color:var(--muted);font-size:13.5px}
+.empty .big{font-size:34px;display:block;margin-bottom:6px}
+.empty b{color:var(--ink);display:block;font-size:15px;margin-bottom:4px}
+.empty .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.rtable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+.rtable td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.rtable td:last-child{text-align:right;white-space:nowrap}
+
+/* ═════════ la page Listes, si on l'ouvre en grand ═════════ */
+.ba{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:18px;align-items:start}
+.ba h4{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.lp{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--shadow);min-width:0}
+.lp .bar{background:var(--bar);color:var(--bar-ink);padding:7px 12px;font:700 13px system-ui}
+.lp .in{padding:14px 16px}
+.oldban{border:2px dashed var(--line2);padding:8px 10px;font-size:13px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.oldtb{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0;font-size:12.5px}
+.oldtb span{border:1.5px solid var(--line2);padding:3px 8px}
+.oldtb .dup{border-color:var(--red);color:var(--red)}
+.newban{background:var(--blue-bg);border:1px solid var(--blue);border-radius:12px;padding:12px 14px;display:flex;gap:10px 14px;flex-wrap:wrap;align-items:center;font-size:13.5px}
+.newban .txt{flex:1 1 280px;min-width:0}
+.newban .txt span{display:block;font-size:12.5px;color:var(--muted)}
+.newtb{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;font-size:12.5px;align-items:center}
+.newtb span{border:1px solid var(--line2);border-radius:8px;padding:4px 9px}
+.newtb .gone{border-style:dashed;color:var(--soft);text-decoration:line-through}
+.lt2{width:100%;border-collapse:collapse;font-size:13px}
+.lt2 th{font:700 11px system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);text-align:left;padding:7px 8px;border-bottom:1px solid var(--line2)}
+.lt2 td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.lt2 tr.on td{background:var(--blue-bg)}
+.lt2 input{width:17px;height:17px;accent-color:var(--blue)}
+.tw{overflow-x:auto}
+@media (max-width:980px){.ba{grid-template-columns:minmax(0,1fr)}}
+/* ═════════ moyen : l'aperçu passe sous la liste ═════════ */
+@container dlg (max-width:980px){
+ .db,.dlg.noprev .db{grid-template-columns:180px minmax(0,1fr)}
+ .gut{display:none}
+ .prev{display:none}
+ .dlg.sheet .prev{display:block;position:absolute;right:0;top:0;bottom:0;width:min(380px,90%);z-index:4;box-shadow:-12px 0 30px rgba(0,0,0,.18);border-left:1px solid var(--line2)}
+ .dlg.sheet .prev .back{display:inline-flex}
+}
+/* ═════════ téléphone ═════════ */
+@container dlg (max-width:640px){
+ .dh{padding:14px 16px 10px}
+ .dh h3{font-size:16px}
+ .dh p{font-size:12.5px}
+ .db,.dlg.noprev .db{grid-template-columns:minmax(0,1fr)}
+ .rail{display:none;position:absolute;left:12px;right:12px;top:132px;z-index:6;border:1px solid var(--line2);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.2);max-height:60%;background:var(--paper)}
+ .dlg.railopen .rail{display:block}
+ .quoi{display:flex;gap:8px;align-items:center;margin:0 16px;padding:10px 0 0}
+ .quoi button{flex:1;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line2);border-radius:9px;background:var(--paper);color:var(--ink);font:700 14px system-ui;padding:9px 12px;cursor:pointer}
+ .quoi .lab{font-size:12px;color:var(--soft)}
+ .tools{padding:10px 16px 8px}
+ .list{padding:4px 8px 14px}
+ .rp{max-width:96px}
+ .th{width:52px;height:42px}
+ .dlg.sheet .prev{left:0;right:0;top:auto;width:auto;height:78%;border-radius:16px 16px 0 0;box-shadow:0 -12px 30px rgba(0,0,0,.25);border:1px solid var(--line2)}
+ .df{flex-direction:column;align-items:stretch;gap:10px;padding:10px 14px 14px}
+ .df .acts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+ .df .acts .b{align-items:center;justify-content:center;white-space:normal;text-align:center}
+ .df .acts .b.pri{order:-1;grid-column:1/-1}
+ .df .cnt .what{display:none}
+ .tools .hint{display:none}
+ .chips.tb{display:block}
+ .chips.tb .cf{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:3px;align-items:center}
+ .chips.tb .ca{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px}
+ .chips.tb .sp{display:none}
+ .b small{display:none}
+ .pad{padding:12px 14px 18px}
+ .form select.fld,.placef{min-width:0;width:100%}
+ .form label{width:100%}
+ .mgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .mc .th{height:90px}
+ .toast{bottom:150px}
+}
+@media (max-width:820px){body{padding:14px}.fric,.changes,.empties{grid-template-columns:minmax(0,1fr)}.stage{padding:10px}.dlg{height:760px}}
+@media (max-width:420px){.stage.phone .phoneframe{border-width:6px;border-radius:24px}}
+</style></head><body>
+<button class="theme" type="button" id="theme">◐ clair / sombre</button>
+<div class="wrap">
+
+<h1>📥 « Prendre depuis… », en clair et aéré</h1>
+<p class="sub">Une nouvelle version de la fenêtre qui va chercher des choses dans ta base (ou ailleurs) pour les mettre dans l'écran ouvert. Construite à partir du code actuel (<code>heritage-connexions.js</code>, <code>connexions.css</code>, <code>lib/picker.php</code>) et de tes captures. Rien n'est codé : la maquette ci-dessous se clique.</p>
+
+<div class="simple">
+<p><b>En bref.</b> Aujourd'hui la fenêtre est serrée contre ses bords, ses lignes ne disent presque rien (« Naissance — 1555 », « Acte », « Média ») et on ne sait pas ce que font ses trois boutons.</p>
+<p><b>La nouvelle :</b> une colonne de gauche rangée (<i>Mis de côté</i> · <i>Dans ma base</i> · <i>Ailleurs</i>), un seul champ de recherche qui dit quoi taper, des lignes complètes (qui, quand, où, combien de sources, déjà utilisé ?), un aperçu à droite qui montre vraiment la chose, et en bas <b>un seul bouton principal</b> qui dit où ça va : « 📥 Prendre — dans l'enquête « testenquête » ».</p>
+</div>
+
+<div class="toc"><a href="#p1"><b>1</b>Ce qui coince</a><a href="#p2"><b>2</b>La fenêtre (ordinateur)</a><a href="#p3"><b>3</b>Sur téléphone</a><a href="#p4"><b>4</b>Une liste, sans quitter la fenêtre</a><a href="#p5"><b>5</b>Quand c'est vide</a><a href="#p6"><b>6</b>Ce qui change</a><a href="#p7"><b>7</b>Questions</a></div>
+
+<!-- ═════════════ 1 ═════════════ -->
+<div class="part" id="p1">Partie 1</div><h2>Ce qui coince aujourd'hui (et pourquoi, vu dans le code)</h2>
+<ol class="fric">
+<li><b>Tout est collé aux bords.</b> La recherche, la liste et le texte de « Listes » touchent le cadre.<span class="path">Le corps <code>.cx-take-body</code> n'a aucune marge ; seuls l'en-tête et le pied (<code>.modal-head</code>, <code>.modal-actions</code>) en ont.</span></li>
+<li><b>Les onglets débordent</b> avec une barre de défilement horizontale (12 onglets sur une ligne).<span class="path"><code>.cx-tabs { overflow-x: auto }</code> ; la fenêtre fait <code>--modal-m</code> de large.</span></li>
+<li><b>« 🔍 🔍 Chercher… »</b> : deux loupes.<span class="path">Le texte d'aide contient déjà « 🔍 » et le champ de recherche de l'app ajoute sa propre loupe.</span></li>
+<li><b>Le pied flotte au milieu de la liste</b> quand on fait défiler.<span class="path">Le pied est « collant » (<code>position: sticky; bottom: 0</code>, app.css) alors que c'est le formulaire entier qui défile, en plus des colonnes qui défilent chacune (<code>max-height: 58vh</code>).</span></li>
+<li><b>Événements : « Naissance / 1555 »</b>, sans personne ni lieu ni date complète.<span class="path">Le serveur envoie bien qui / date / lieu dans <code>meta</code>, mais la fenêtre lit <code>sub</code> (qui n'existe pas) : il ne reste que le titre et l'année (<code>badge</code>). Même chose pour les Actes et les Médias.</span></li>
+<li><b>Actes : « Acte », « Acte », un nom de capture d'écran, un code (UUID)</b>.<span class="path">Pas de sorte d'acte, de date, de lieu, de personnes, de vignette, ni d'état de transcription.</span></li>
+<li><b>Médias : des noms de fichiers et « Média »</b> en gris.<span class="path">La vignette (<code>thumb</code>) est envoyée par le serveur mais pas affichée ; « Média » est le badge, identique pour tous.</span></li>
+<li><b>L'aperçu de droite reste vide</b> tant qu'on n'a pas cliqué sur le titre, et il ne montre qu'un titre et « ↗ ouvrir ».<span class="path">Pas de grande vignette, pas de champs, pas de « déjà utilisé dans… ».</span></li>
+<li><b>Listes et Données : un champ de recherche vide, sans nom, en haut</b>, puis un deuxième champ.<span class="path">Le code cache le champ (<code>q.hidden = true</code>) mais le style de l'app le réaffiche (<code>display</code> écrase <code>hidden</code>).</span></li>
+<li><b>Données : trop étroit, textes en double, liens bruts.</b> Chaque ligne répète son titre en gris ; l'aperçu « Info / Source » est un tableau serré avec des adresses OpenStreetMap coupées ; « Voir » ne dit pas ce qu'il fait ; « 1 cochées ».<span class="path">La ligne affiche <code>title</code> puis <code>value</code> (souvent le même texte) ; <code>setTable()</code> écrit l'URL en entier ; le compteur dit toujours « {n} cochées ».</span></li>
+<li><b>Choisir une liste fait quitter la fenêtre sans prévenir.</b> On arrive sur la page Listes (ex. « Grandes comètes et aurores ») avec un bandeau « 📥 Prendre depuis cette liste pour « Ici : l'enquête « testenquête » » », un tableau <i>sans cases</i>, seulement « Tout prendre », qui double « 🧺 Prendre… » de la barre ; pas de « ← Revenir ».<span class="path"><code>drawLists()</code> → <code>st.dlg.close()</code> puis <code>dataListsEngine.open()</code> ; le bandeau colle le libellé « Ici : … » dans des guillemets ; les cases cochées avant sont perdues.</span></li>
+<li><b>Boutons lourds, sens flou.</b> « 🧺 Au panier », « 📍 Mettre dans… », « 📥 Prendre » se ressemblent ; « Ici : l'enquête « … » » ne dit pas que c'est la destination.<span class="path">Trois boutons à bordure noire épaisse et ombre décalée, sans explication.</span></li>
+</ol>
+
+<!-- ═════════════ 2 ═════════════ -->
+<div class="part" id="p2">Partie 2</div><h2>La fenêtre proposée, sur ordinateur (1440 px)</h2>
+<p class="sub">Clique les rubriques à gauche, coche des lignes, clique une ligne pour la voir en grand à droite. La poignée entre la liste et l'aperçu se tire (ou ← → au clavier). La fenêtre fait <b>min(1200 px, 94 % de l'écran)</b>.</p>
+<div class="demo-bar"><span class="lab">Aller à</span><button type="button" data-go="event">📅 Événements</button><button type="button" data-go="act">📜 Actes</button><button type="button" data-go="media">🖼 Médias</button><button type="button" data-go="data">🧰 Données (cimetières)</button><button type="button" data-go="lists">📋 Listes</button><button type="button" data-golist="comets">☄ Une liste ouverte dans la fenêtre</button><button type="button" data-go="outside">📂 De l'extérieur</button><button type="button" data-multi>☑ Cocher 3 éléments</button></div>
+<div class="stage"><div class="dlgwrap" id="desk"></div></div>
+
+<!-- ═════════════ 3 ═════════════ -->
+<div class="part" id="p3">Partie 3</div><h2>La même fenêtre sur téléphone (390 px)</h2>
+<p class="sub">La colonne de gauche devient un bouton « Quoi : 📅 Événements ▾ ». L'aperçu monte en feuille par le bas quand on touche une ligne. Les trois boutons s'empilent, le principal en premier. Seule la liste défile : le pied reste en bas, toujours.</p>
+<div class="stage phone"><div class="phoneframe"><div class="notch"><span>9:41</span><span>●●● ▮</span></div><div class="dlgwrap" id="phone"></div></div></div>
+
+<!-- ═════════════ 4 ═════════════ -->
+<div class="part" id="p4">Partie 4</div><h2>Une liste, sans quitter la fenêtre</h2>
+<p class="sub">Règle : <b>« Prendre depuis… » ne fait jamais changer d'écran sans le dire.</b> Choisir une liste l'ouvre <b>dans la fenêtre</b> (essaie « ☄ Une liste ouverte dans la fenêtre » au-dessus de la maquette) : ses critères, ses lignes avec des cases, « ▦ Prendre tout le tableau », et l'aperçu de la ligne à droite. Le pied dit toujours « Prendre (3) — dans l'enquête « testenquête » ».</p>
+<div class="msg" style="border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:0 0 16px;max-width:1000px">La page Listes en grand ne sert que si on en a vraiment besoin (trier, ajouter un critère, enregistrer la recherche). On y va par un lien qui le dit : « ↗ Ouvrir la liste complète dans l'app — tu quittes cette fenêtre ; un bandeau te ramène ici, et ce que tu as coché reste coché. » Voici alors la page :</div>
+<div class="ba">
+<div><h4>Aujourd'hui</h4><div class="lp"><div class="bar">Listes › ☄ Grandes comètes et aurores</div><div class="in">
+<div class="oldban">📥 Prendre depuis cette liste pour « Ici : l'enquête « testenquête » » : choisis les critères, puis <span style="border:2px solid var(--ink);padding:2px 7px;font-weight:700">Tout prendre</span> ×</div>
+<div class="oldtb"><span>Chercher dans cette liste…</span><span>＋ Ajouter un critère</span><span>Période</span><span>★ Enregistrer cette recherche</span><span class="dup">🧺 Prendre… (en double)</span></div>
+<div class="tw"><table class="lt2"><thead><tr><th>Date</th><th>Phénomène</th></tr></thead><tbody><tr><td>1556</td><td>Grande comète</td></tr><tr><td>1577</td><td>Grande comète</td></tr><tr><td>…</td><td>24 lignes, aucune case</td></tr></tbody></table></div>
+<p class="note">Guillemets dans les guillemets, pas de cases, deux boutons pour la même chose, pas de retour, on ne sait pas ce qui sera ajouté.</p></div></div></div>
+<div><h4>Proposé (seulement si on a choisi « ↗ Ouvrir la liste complète »)</h4><div class="lp"><div class="bar">Listes › ☄ Grandes comètes et aurores</div><div class="in">
+<div class="newban" id="nb"><div class="txt">📥 <b>Tu choisis des lignes pour l'enquête testenquête</b><span>Coche les lignes, ou prends tout (24). Chaque ligne devient une information de l'enquête, avec la liste comme source.</span></div>
+<button type="button" class="b pri sm" id="nbtake">Prendre les 3 cochées</button><button type="button" class="b sec sm">Tout prendre (24)</button><button type="button" class="b ter sm">← Revenir à Prendre depuis…</button></div>
+<div class="newtb"><span>🔍 Chercher dans cette liste…</span><span>＋ Ajouter un critère</span><span>Période : 1550 → 1650</span><span>★ Enregistrer cette recherche</span><span class="gone" title="caché tant que le bandeau est là">🧺 Prendre…</span><span class="mini">(caché tant que le bandeau est là)</span></div>
+<div class="tw"><table class="lt2" id="nbt"><thead><tr><th><input type="checkbox" aria-label="Tout cocher" id="nball"></th><th>Date</th><th>Phénomène</th><th>Où on l'a vu</th><th>Source</th></tr></thead><tbody>
+<tr class="on"><td><input type="checkbox" checked aria-label="Choisir"></td><td>mars 1556</td><td>☄ Grande comète</td><td>toute l'Europe</td><td><a class="alink" href="#">↗ catalogue</a></td></tr>
+<tr><td><input type="checkbox" aria-label="Choisir"></td><td>nov. 1577</td><td>☄ Grande comète</td><td>Europe, observée au Danemark</td><td><a class="alink" href="#">↗ catalogue</a></td></tr>
+<tr class="on"><td><input type="checkbox" checked aria-label="Choisir"></td><td>sept. 1607</td><td>☄ Comète de Halley</td><td>Europe</td><td><a class="alink" href="#">↗ catalogue</a></td></tr>
+<tr class="on"><td><input type="checkbox" checked aria-label="Choisir"></td><td>nov. 1618</td><td>☄ Trois comètes</td><td>Europe</td><td><a class="alink" href="#">↗ catalogue</a></td></tr>
+<tr><td><input type="checkbox" aria-label="Choisir"></td><td>sept. 1621</td><td>🌌 Aurore boréale</td><td>France</td><td><a class="alink" href="#">↗ catalogue</a></td></tr>
+</tbody></table></div><p class="note">… 19 autres lignes. « ← Revenir » rouvre la fenêtre « Prendre depuis… » telle qu'on l'a laissée (rubrique, recherche, cases cochées). « Prendre les 3 cochées » ajoute et revient aussi à la fenêtre, avec « ✓ 3 lignes ajoutées · ↶ Annuler ».</p></div></div></div>
+</div>
+
+<!-- ═════════════ 5 ═════════════ -->
+<div class="part" id="p5">Partie 5</div><h2>Quand c'est vide : on explique, on propose</h2>
+<p class="sub">Plus de « Rien ici pour l'instant. » sec : chaque cas dit pourquoi et ce qu'on peut faire.</p>
+<div class="empties">
+<div><div class="empty"><span class="big">🧺</span><b>Le panier est vide</b>Le panier garde des choses pour plus tard, d'un écran à l'autre. Coche des lignes n'importe où dans l'app, puis « 🧺 Garder dans le panier ».<div class="row"><button class="b sec sm" type="button">Voir mes fiches</button></div></div></div>
+<div><div class="empty"><span class="big">🔍</span><b>Rien pour « Mazaux »</b>Essaie l'orthographe d'époque ou seulement l'année. Les recherches tiennent déjà compte des accents.<div class="row"><button class="b sec sm" type="button">Chercher « Mazaud »</button><button class="b ter sm" type="button">Chercher dans toutes les rubriques</button></div></div></div>
+<div><div class="empty"><span class="big">📜</span><b>Tous les actes sont déjà dans l'enquête</b>Le filtre « Pas encore dans l'enquête » cache les 3 actes déjà pris.<div class="row"><button class="b sec sm" type="button">Enlever ce filtre</button><button class="b ter sm" type="button">Importer un acte…</button></div></div></div>
+</div>
+
+<!-- ═════════════ 5 ═════════════ -->
+<div class="part" id="p6">Partie 6</div><h2>Ce qui change</h2>
+<ul class="changes">
+<li><b>De l'air partout</b> : 20 px de marge autour de la recherche, de la liste et de l'aperçu ; lignes de 10 px de haut et de bas.<small>Le corps reçoit sa propre marge, comme l'en-tête et le pied.</small></li>
+<li><b>Rubriques rangées à gauche</b> en 3 groupes au lieu de 12 onglets qui débordent.<small><span class="was">barre d'onglets qui défile</span> → colonne « Mis de côté / Dans ma base / Ailleurs », avec le nombre de choses ; sur téléphone, un bouton « Quoi : … ▾ ».</small></li>
+<li><b>Une seule loupe, un seul champ par rubrique</b>, avec une aide adaptée (« Un nom, une année, une commune… »).<small>Le 🔍 sort du texte d'aide ; le champ est vraiment retiré là où il ne sert pas (Listes, De l'extérieur).</small></li>
+<li><b>Le pied ne flotte plus</b> : la fenêtre est une colonne (en-tête, corps, pied) et seule la liste défile.<small>Plus de <code>sticky</code> dans ce formulaire ; hauteur fixe <code>min(720px, 90vh)</code>.</small></li>
+<li><b>Lignes complètes</b> : « 👶 Naissance · Jean MAZAUD — 12 mars 1555 · Treignac (19) », nombre de sources, « déjà dans l'enquête ».<small>Il suffit d'abord de lire <code>meta</code> (déjà envoyé) au lieu de <code>sub</code> ; puis d'ajouter au serveur le nombre de sources et l'utilisation.</small></li>
+<li><b>Actes et médias avec vignette</b>, sorte, date, lieu, personnes, état (À faire / Transcrit / Relue) ; les actes sans description sont rangés à part, « À décrire », avec « ✎ Décrire ».<small>Plus de code interne affiché : « Acte sans titre (importé le 4 oct.) ».</small></li>
+<li><b>Ranger et filtrer</b> : par date, par personne, par lieu ; pastilles « Naissances », « Sans source », « Pas encore dans l'enquête »… ; médias en liste ou en grille.</li>
+<li><b>Aperçu vivant à droite</b> : grande vignette, tous les champs, « ↗ ouvrir », « Déjà utilisé dans… », et « Prendre seulement la date / le lieu ». Avec plusieurs cases cochées : « 3 éléments choisis » et ce que « Prendre » va faire.</li>
+<li><b>Un pied qui explique</b> : « 3 cochées » (et « 1 cochée »), « Prendre = les ajouter à l'enquête « testenquête » », un seul bouton bleu.<small><span class="was">🧺 Au panier · 📍 Mettre dans… · 📥 Prendre</span> → 📥 Prendre (principal) · 🧺 Garder dans le panier · Mettre ailleurs… (lien)</small></li>
+<li><b>La destination est dite en haut</b> : « Ajouter à 🔎 l'enquête « testenquête » » au lieu de « Ici : l'enquête… ».</li>
+<li><b>Données, plus large et en 3 étapes</b> : 1. quelle donnée · 2. où / quand (le lieu de l'enquête déjà rempli) · 3. les résultats. Le bouton dit ce qu'il fait (« Chercher les cimetières ») au lieu de « Voir ».<small>Une ligne = un titre une fois, puis distance, culte, et petits liens « ↗ carte · ↗ itinéraire » ; la source devient « ↗ OpenStreetMap », jamais d'adresse brute. Aperçu lisible, sans défilement de côté.</small></li>
+<li><b>Listes et De l'extérieur expliqués</b> : un seul champ « Dis ce qu'il te faut » avec des exemples à cliquer, les listes par thème avec « ce que ça donne » ; quatre cartes (fichier, image/PDF, coller, adresse) qui disent ce qu'on obtient.</li>
+<li><b>Une liste s'ouvre dans la fenêtre</b> : critères, lignes avec cases, « Prendre tout le tableau » ; jamais de changement d'écran sans le dire.<small>Si on ouvre la page Listes en grand (lien explicite) : bandeau clair « Tu choisis des lignes pour l'enquête testenquête », cases, « Prendre les 3 cochées » / « Tout prendre (24) », « ← Revenir » qui garde les cases ; « 🧺 Prendre… » de la barre caché pendant ce temps ; plus de « Ici : « … » » dans des guillemets.</small></li>
+<li><b>Boutons légers</b> : coins arrondis, bordure fine, pas d'ombre décalée dans la fenêtre.<small>Le style du reste de l'app ne bouge pas.</small></li>
+<li><b>La séparation se règle</b> : la poignée entre liste et aperçu se tire, et la largeur est retenue.</li>
+</ul>
+
+<!-- ═════════════ 6 ═════════════ -->
+<div class="part" id="p7">Partie 7</div><h2>Questions pour toi</h2>
+<div class="qq"><h3>1. Les rubriques : colonne à gauche ou onglets sur deux lignes ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Colonne à gauche en 3 groupes</b> (Mis de côté · Dans ma base · Ailleurs), bouton « Quoi : … ▾ » sur téléphone.</span></div>
+<div class="opt"><span class="cb"></span><span>Onglets qui passent à la ligne au-dessus de la liste.</span></div>
+<div class="reco">Ma recommandation : <b>la colonne à gauche</b>. 12 rubriques se lisent mieux en liste, les groupes disent d'où ça vient, et la liste garde toute sa hauteur.</div></div>
+<div class="qq"><h3>2. Cliquer sur une ligne : la cocher, ou seulement la montrer ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>Clic sur la ligne = la montrer à droite</b> ; la case (grande) = la choisir ; double-clic ou Espace = cocher.</span></div>
+<div class="opt"><span class="cb"></span><span>Clic sur la ligne = la cocher et la montrer en même temps.</span></div>
+<div class="reco">Ma recommandation : <b>montrer d'abord</b>. On peut regarder un acte sans le prendre par erreur ; c'est aussi ce que fait déjà le code (bouton du titre → aperçu).</div></div>
+<div class="qq"><h3>3. Les actes et médias sans description (captures, codes) : où ?</h3>
+<div class="opt"><span class="cb on"></span><span><b>À la fin, dans un groupe « À décrire »</b>, avec « ✎ Décrire » sur la ligne.</span></div>
+<div class="opt"><span class="cb"></span><span>Cachés tant qu'ils ne sont pas décrits.</span></div>
+<div class="opt"><span class="cb"></span><span>Mélangés avec les autres, comme aujourd'hui.</span></div>
+<div class="reco">Ma recommandation : <b>« À décrire » à la fin</b> : rien ne disparaît, mais ils ne noient plus les actes connus.</div></div>
+
+<p class="note" style="margin:30px 0 10px">Maquette — rien n'est codé. Noms fictifs (MAZAUD, LACOMBE, DURAND) ; communes réelles pour l'exemple. Fichiers regardés : assets/js/heritage-connexions.js, assets/js/heritage-connexions-besoins.js, assets/css/connexions.css, assets/css/app.css (pied collant), lib/connexions.php, lib/picker.php.</p>
+</div>
+
+<script>
+(function(){
+'use strict';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DEST='l’enquête « testenquête »';
+const RAIL=[
+ ['Mis de côté',[['basket','🧺','Panier'],['recent','🕘','Récents']]],
+ ['Dans ma base',[['person','👤','Fiches'],['event','📅','Événements'],['act','📜','Actes'],['source','🔖','Sources'],['media','🖼','Médias'],['note','📝','Notes'],['place','📍','Lieux']]],
+ ['Ailleurs',[['data','🧰','Données'],['lists','📋','Listes'],['outside','📂','De l’extérieur']]]];
+const LROWS={};const LBL={};RAIL.forEach(([,a])=>a.forEach(([k,i,l])=>LBL[k]=[i,l]));
+const used=['Enquête « testenquête »'];
+// ───── données fictives ─────
+const D={
+event:[
+ {k:'e1',ico:'👶',t:'Naissance · Jean MAZAUD',who:'Jean MAZAUD',date:'12 mars 1555',y:1555,place:'Treignac (19)',src:2,type:'n',sub:['12 mars 1555','Treignac (19)'],extra:'fils de Pierre MAZAUD et Marie LACOMBE',parts:['12 mars 1555','Treignac (19)','Jean MAZAUD']},
+ {k:'e2',ico:'👶',t:'Naissance · Antoinette MAZAUD',who:'Antoinette MAZAUD',date:'vers 1557',y:1557,place:'Treignac (19)',src:0,type:'n',sub:['vers 1557 (date approchée)','Treignac (19)'],parts:['vers 1557','Treignac (19)']},
+ {k:'e6',ico:'👶',t:'Naissance · Léonard DURAND',who:'Léonard DURAND',date:'1555',y:1555,place:'',src:0,type:'n',sub:['1555 (année seule)','lieu inconnu'],parts:['1555']},
+ {k:'e3',ico:'💍',t:'Mariage · Jean MAZAUD et Marie LACOMBE',who:'Jean MAZAUD',date:'8 février 1580',y:1580,place:'Chamberet (19)',src:1,type:'m',used:true,sub:['8 février 1580','Chamberet (19)'],parts:['8 février 1580','Chamberet (19)']},
+ {k:'e4',ico:'👶',t:'Naissance · Pierre MAZAUD',who:'Pierre MAZAUD',date:'3 janvier 1582',y:1582,place:'Treignac (19)',src:1,type:'n',sub:['3 janvier 1582','Treignac (19)'],extra:'fils de Jean MAZAUD et Marie LACOMBE',parts:['3 janvier 1582','Treignac (19)']},
+ {k:'e8',ico:'⛪',t:'Baptême · Catherine LACOMBE',who:'Catherine LACOMBE',date:'17 mai 1584',y:1584,place:'Chamberet (19)',src:1,type:'n',sub:['17 mai 1584','Chamberet (19)'],parts:['17 mai 1584','Chamberet (19)']},
+ {k:'e5',ico:'✝',t:'Décès · Jean MAZAUD',who:'Jean MAZAUD',date:'21 novembre 1621',y:1621,place:'Treignac (19)',src:1,type:'d',sub:['21 novembre 1621','Treignac (19)'],extra:'à 66 ans environ',parts:['21 novembre 1621','Treignac (19)']},
+ {k:'e7',ico:'✝',t:'Décès · Marie LACOMBE',who:'Marie LACOMBE',date:'4 avril 1630',y:1630,place:'Treignac (19)',src:0,type:'d',sub:['4 avril 1630','Treignac (19)'],parts:['4 avril 1630','Treignac (19)']},
+ {k:'e9',ico:'🏠',t:'Recensement · famille DURAND',who:'Léonard DURAND',date:'1836',y:1836,place:'Eymoutiers (87)',src:1,type:'o',sub:['1836','Eymoutiers (87)'],extra:'5 personnes au foyer',parts:['1836','Eymoutiers (87)']}],
+act:[
+ {k:'a1',th:'',ico:'📜',t:'Acte de baptême · Jean MAZAUD',date:'12 mars 1555',y:1555,who:'Jean MAZAUD',place:'Treignac (19)',state:['ok','Relue'],sub:['12 mars 1555','Treignac (19)','AD Corrèze 3 E 271/2, vue 14'],ppl:'Jean MAZAUD (baptisé) · Pierre MAZAUD (père) · Marie LACOMBE (mère) · Antoine DURAND (parrain)',used:true},
+ {k:'a2',th:'',ico:'📜',t:'Acte de mariage · Jean MAZAUD et Marie LACOMBE',date:'8 février 1580',y:1580,who:'Jean MAZAUD',place:'Chamberet (19)',state:['blue','Transcrit, à relire'],sub:['8 février 1580','Chamberet (19)','AD Corrèze 3 E 48/1, vue 52'],ppl:'Jean MAZAUD (époux) · Marie LACOMBE (épouse) · 2 témoins'},
+ {k:'a3',th:'',ico:'📜',t:'Acte de sépulture · Jean MAZAUD',date:'21 novembre 1621',y:1621,who:'Jean MAZAUD',place:'Treignac (19)',state:['q','À faire'],sub:['21 novembre 1621','Treignac (19)','AD Corrèze 3 E 271/5, vue 88'],ppl:'Jean MAZAUD (défunt)'},
+ {k:'a4',th:'no',ico:'📜',t:'Capture d’écran du 2 mars 2026',todo:true,date:'',y:0,who:'',place:'',state:['red','À décrire'],sub:['importée le 2 mars 2026','fichier « Capture d’écran 2026-03-02 à 14.12.png »'],ppl:'aucune personne'},
+ {k:'a5',th:'no',ico:'📜',t:'Acte sans titre (importé le 4 oct. 2026)',todo:true,date:'',y:0,who:'',place:'',state:['red','À décrire'],sub:['importé le 4 octobre 2026','sans sorte, sans date'],ppl:'aucune personne'}],
+media:[
+ {k:'m1',th:'ph',ico:'🖼',t:'img004.jpg',date:'vers 1910',y:1910,who:'Marie DURAND',sub:['Photo','vers 1910'],ppl:'Marie DURAND, Léonard DURAND',state:['q','pas encore décrite']},
+ {k:'m3',th:'pc',ico:'🖼',t:'Treignac, la place de l’église',date:'1912',y:1912,who:'',sub:['Carte postale','1912','Treignac (19)'],ppl:'aucune personne',used:true},
+ {k:'m4',th:'',ico:'📄',t:'Registre de Chamberet, vue 52',date:'1580',y:1580,who:'Jean MAZAUD',sub:['Document','AD Corrèze 3 E 48/1'],ppl:'Jean MAZAUD, Marie LACOMBE · lié à l’acte de mariage'},
+ {k:'m2',th:'pc',ico:'🎨',t:'Canevas « Mariage MAZAUD »',date:'2025',y:2025,who:'Jean MAZAUD',sub:['Montage de l’Atelier','2025'],ppl:'4 personnes'},
+ {k:'m6',th:'',ico:'📄',t:'Livret de famille DURAND',date:'1923',y:1923,who:'Léonard DURAND',sub:['Document','1923'],ppl:'3 personnes'},
+ {k:'m5',th:'pdf',ico:'📄',t:'scan_0031.pdf',date:'',y:0,who:'',sub:['PDF','3 pages'],ppl:'aucune personne',state:['q','pas encore décrit']}],
+source:[
+ {k:'s1',ico:'🔖',t:'Registres paroissiaux de Treignac (1550–1600)',sub:['AD Corrèze','cote 3 E 271/2'],n:14,y:1550,who:'',place:'Treignac (19)',lnk:'↗ vues en ligne'},
+ {k:'s2',ico:'🔖',t:'Registres paroissiaux de Chamberet (1575–1610)',sub:['AD Corrèze','cote 3 E 48/1'],n:6,y:1575,place:'Chamberet (19)',lnk:'↗ vues en ligne',used:true},
+ {k:'s4',ico:'🔖',t:'Minutes de Me LACOMBE, notaire à Treignac (1580)',sub:['AD Corrèze','cote 5 E 1203'],n:1,y:1580,place:'Treignac (19)'},
+ {k:'s3',ico:'🔖',t:'Recensement d’Eymoutiers, 1836',sub:['AD Haute-Vienne','cote 6 M 412'],n:3,y:1836,place:'Eymoutiers (87)',lnk:'↗ vues en ligne'},
+ {k:'s5',ico:'📚',t:'« Familles du plateau » (livre, 2004)',sub:['Bibliothèque personnelle','p. 112–118'],n:0,y:2004,place:''}],
+place:[
+ {k:'l1',ico:'📍',t:'Treignac',sub:['commune','Corrèze (19)','Nouvelle-Aquitaine'],n:37,place:'Treignac (19)',used:true},
+ {k:'l2',ico:'📍',t:'Chamberet',sub:['commune','Corrèze (19)'],n:12,place:'Chamberet (19)'},
+ {k:'l5',ico:'📍',t:'Le Mas-Vieux',sub:['hameau de Treignac','Corrèze (19)'],n:3,place:'Treignac (19)'},
+ {k:'l3',ico:'📍',t:'Eymoutiers',sub:['commune','Haute-Vienne (87)'],n:4,place:'Eymoutiers (87)'},
+ {k:'l4',ico:'📍',t:'Tulle',sub:['commune','Corrèze (19)','préfecture'],n:2,place:'Tulle (19)',nogeo:true}],
+person:[
+ {k:'p1',ico:'👨',t:'Jean MAZAUD',sub:['° 12 mars 1555 Treignac','† 21 nov. 1621 Treignac'],ppl:'fils de Pierre MAZAUD et Marie LACOMBE · époux de Marie LACOMBE',who:'Jean MAZAUD',y:1555,used:true},
+ {k:'p2',ico:'👩',t:'Marie LACOMBE',sub:['° vers 1560','† 4 avril 1630 Treignac'],ppl:'épouse de Jean MAZAUD · 3 enfants',who:'Marie LACOMBE',y:1560},
+ {k:'p3',ico:'👨',t:'Pierre MAZAUD',sub:['° 3 janvier 1582 Treignac'],ppl:'fils de Jean MAZAUD et Marie LACOMBE',who:'Pierre MAZAUD',y:1582},
+ {k:'p4',ico:'👩',t:'Antoinette MAZAUD',sub:['° vers 1557 Treignac'],ppl:'sœur de Jean MAZAUD ?',who:'Antoinette MAZAUD',y:1557},
+ {k:'p5',ico:'👨',t:'Léonard DURAND',sub:['° 1555','lieu inconnu'],ppl:'aucun parent connu',who:'Léonard DURAND',y:1555}],
+note:[
+ {k:'n1',ico:'📝',t:'Hypothèse : deux Jean MAZAUD à Treignac ?',sub:['sur la fiche de Jean MAZAUD','modifiée le 20 nov.'],ppl:'« Deux baptêmes la même année, même père ? Vérifier les parrains… »',who:'Jean MAZAUD'},
+ {k:'n2',ico:'📝',t:'À demander aux AD Corrèze : minutes 1580',sub:['note libre','modifiée le 3 nov.'],ppl:'« Contrat de mariage MAZAUD × LACOMBE chez Me LACOMBE ? »',who:''},
+ {k:'n3',ico:'📝',t:'Lecture difficile vue 14 : le parrain',sub:['sur l’acte de baptême','modifiée le 28 oct.'],ppl:'« Antoine DURAND ou Antoine DUBAND ? »',who:'Jean MAZAUD'}],
+basket:[
+ {k:'b1',ico:'📜',t:'Acte de mariage · Jean MAZAUD et Marie LACOMBE',sub:['mis hier','depuis la fiche de Jean MAZAUD'],kind:'act'},
+ {k:'b2',ico:'🖼',t:'img004.jpg',th:'ph',sub:['mis lundi','depuis Médias'],kind:'media'},
+ {k:'b3',ico:'📍',t:'Chamberet',sub:['mis lundi','depuis la carte'],kind:'place'}],
+recent:[
+ {k:'r1',ico:'👨',t:'Jean MAZAUD',sub:['fiche','vue il y a 5 min'],kind:'person'},
+ {k:'r2',ico:'📜',t:'Acte de baptême · Jean MAZAUD',sub:['acte','vu il y a 12 min'],kind:'act'},
+ {k:'r3',ico:'🔖',t:'Registres paroissiaux de Treignac (1550–1600)',sub:['source','vue hier'],kind:'source'},
+ {k:'r4',ico:'📍',t:'Treignac',sub:['lieu','vu hier'],kind:'place'}]
+};
+D.event.forEach(x=>{x.pills=[x.src?['ok',x.src+(x.src>1?' sources':' source')]:['q','sans source']];if(x.used)x.pills.push(['blue','déjà dans l’enquête']);});
+D.act.forEach(x=>{x.pills=[x.state];if(x.used)x.pills.push(['blue','déjà dans l’enquête']);});
+D.media.forEach(x=>{x.pills=x.state?[x.state]:[];if(x.used)x.pills.push(['blue','déjà dans l’enquête']);});
+D.source.forEach(x=>{x.pills=[[x.n?'':'q',x.n?x.n+(x.n>1?' citations':' citation'):'pas encore citée']];if(x.used)x.pills.push(['blue','déjà dans l’enquête']);});
+D.place.forEach(x=>{x.pills=[['',x.n+' événements']];if(x.nogeo)x.pills.push(['q','pas sur la carte']);if(x.used)x.pills.push(['blue','déjà dans l’enquête']);});
+D.person.forEach(x=>{x.pills=x.used?[['blue','déjà dans l’enquête']]:[];});
+D.note.forEach(x=>x.pills=[]);D.basket.forEach(x=>x.pills=[]);D.recent.forEach(x=>x.pills=[]);
+// cimetières autour de Saint-Amand-Montrond (exemple ; données OpenStreetMap)
+const CEM=[
+ {k:'c1',t:'Cimetière de Saint-Amand-Montrond',d:'0,8 km',rel:'communal',info:'au nord du centre-ville'},
+ {k:'c2',t:'Cimetière d’Orval',d:'2,1 km',rel:'communal',info:'Orval (18)'},
+ {k:'c3',t:'Cimetière de Drevant',d:'4,6 km',rel:'communal',info:'près de l’église'},
+ {k:'c4',t:'Cimetière de La Groutte',d:'5,3 km',rel:'communal',info:'La Groutte (18)'},
+ {k:'c5',t:'Cimetière de Colombiers',d:'5,9 km',rel:'communal',info:'Colombiers (18)'},
+ {k:'c6',t:'Ancien cimetière de Bouzais',d:'6,4 km',rel:'désaffecté',info:'à côté de l’église'}];
+CEM.forEach(c=>{c.ico='🪦';c.kind='datum';c.sub=[c.d,c.rel,c.info];c.pills=[];});
+const CFG={
+ basket:{ph:'Chercher dans le panier',hint:'Ce que tu as mis de côté sur d’autres écrans. Ça reste dans le panier jusqu’à ce que tu le ranges.',chips:[],arr:[]},
+ recent:{ph:'Chercher dans ce que tu as vu',hint:'Les 30 dernières choses ouvertes, la plus récente en haut.',chips:[],arr:[]},
+ person:{ph:'Un prénom, un nom, une année…',hint:'Les fiches de ta base, avec dates et parents pour ne pas confondre les homonymes.',chips:[['notin','Pas encore dans l’enquête',x=>!x.used]],arr:[['name','par nom'],['date','par date']]},
+ event:{ph:'Un nom, une année, une commune… (ex. « Mazaud 1555 »)',hint:'Les événements de ta base : qui, quand, où, et combien de sources les appuient.',chips:[['n','👶 Naissances',x=>x.type==='n'],['m','💍 Mariages',x=>x.type==='m'],['d','✝ Décès',x=>x.type==='d'],['nosrc','Sans source',x=>!x.src],['notin','Pas encore dans l’enquête',x=>!x.used]],arr:[['person','par personne'],['date','par date'],['place','par lieu']]},
+ act:{ph:'Une personne, une sorte d’acte, une cote…',hint:'Les actes importés ou transcrits dans l’Atelier, avec leur état de lecture.',chips:[['todo','À faire',x=>x.state[1]==='À faire'],['read','Relus',x=>x.state[1]==='Relue'],['notin','Pas encore dans l’enquête',x=>!x.used]],arr:[['date','par date'],['person','par personne']]},
+ source:{ph:'Un titre, une cote, un service d’archives…',hint:'Tes sources, avec la cote et le service d’archives.',chips:[['notin','Pas encore dans l’enquête',x=>!x.used]],arr:[['arch','par archives'],['date','par date']]},
+ media:{ph:'Un nom de fichier, une personne, une année…',hint:'Photos, documents, montages. Ceux sans description sont signalés.',chips:[['nodesc','Pas encore décrits',x=>!!x.state],['notin','Pas encore dans l’enquête',x=>!x.used]],arr:[['date','par date'],['person','par personne']],view:true},
+ note:{ph:'Un mot de la note…',hint:'Tes notes, avec la fiche ou l’acte où elles sont rangées.',chips:[],arr:[]},
+ place:{ph:'Une commune, un hameau, un département…',hint:'Les lieux de ta base, avec leur département.',chips:[['geo','Sur la carte',x=>!x.nogeo]],arr:[['dep','par département'],['name','par nom']]}
+};
+function mount(host,opts){
+ const st={listOpen:null,tab:'event',q:'',picked:new Map(),focus:null,mode:'auto',filters:new Set(),arr:'person',view:'list',sheet:false,rail:false,dataRun:false,ask:''};
+ host.innerHTML=`<div class="dlg" role="dialog" aria-label="Prendre depuis">
+  <div class="dh"><div><div class="eyebrow">📥 Prendre depuis…</div><h3>Ajouter à <span class="dest">🔎 ${esc(DEST)}</span></h3><p>Choisis dans ta base (ou ailleurs) ce que tu veux mettre dans cette enquête. Rien n’est ajouté tant que tu n’as pas cliqué « Prendre ».</p></div><button class="x" type="button" aria-label="Fermer">×</button></div>
+  <div class="quoi"><span class="lab">Quoi :</span><button type="button" data-quoi></button></div>
+  <div class="db"><nav class="rail" role="tablist" aria-label="Rubriques"></nav><div class="mid"></div><button class="gut" type="button" aria-label="Élargir ou rétrécir l’aperçu"></button><aside class="prev" aria-live="polite"></aside></div>
+  <div class="df"></div></div>`;
+ const dlg=host.firstElementChild,$=s=>dlg.querySelector(s);
+ const all=()=>st.tab==='data'?CEM:(D[st.tab]||[]);
+ const find=k=>{for(const t in D){const x=D[t].find(i=>i.k===k);if(x)return Object.assign({_t:t},x);}const c=CEM.find(i=>i.k===k);if(c)return Object.assign({_t:'data'},c);return LROWS[k]?Object.assign({},LROWS[k]):null;};
+ function toast(m){const o=dlg.querySelector('.toast');if(o)o.remove();const t=document.createElement('div');t.className='toast';t.textContent=m;dlg.appendChild(t);setTimeout(()=>t.remove(),2600);}
+ function drawRail(){
+  $('.rail').innerHTML=RAIL.map(([g,a])=>`<h5>${esc(g)}</h5>`+a.map(([k,i,l])=>{const n=k==='basket'?D.basket.length:(D[k]?D[k].length:'');return `<button type="button" role="tab" data-tab="${k}" aria-selected="${st.tab===k}"><span>${i}</span>${esc(l)}<span class="n ${k==='basket'?'b':''}">${n}</span></button>`;}).join('')).join('');
+  $('[data-quoi]').innerHTML=`<span>${LBL[st.tab][0]} ${esc(LBL[st.tab][1])}</span><span>▾</span>`;
+ }
+ function rowHtml(x){
+  const on=st.picked.has(x.k),th=x.th!=null?`<span class="th ${x.th}"></span>`:'';
+  const lk=x.kind==='datum'?`<span class="lk"><a href="#" data-noop>↗ carte</a><a href="#" data-noop>↗ itinéraire</a></span>`:x.lnk?`<span class="lk"><a href="#" data-noop>${esc(x.lnk)}</a></span>`:'';
+  const t3=x.ppl?`<span class="t3">${esc(x.ppl)}</span>`:x.extra?`<span class="t3">${esc(x.extra)}</span>`:'';
+  return `<div class="r ${on?'on':''} ${st.focus===x.k?'focus':''}" data-k="${x.k}"><label class="ck"><input type="checkbox" data-ck="${x.k}" ${on?'checked':''} aria-label="Choisir ${esc(x.t)}"></label>${th}<button type="button" class="rt" data-see="${x.k}"><span class="t1"><span class="ico">${x.ico}</span><b>${esc(x.t)}</b></span><span class="t2">${esc((x.sub||[]).join(' · '))}</span>${t3}${lk}</button><span class="rp">${(x.pills||[]).map(p=>`<span class="pill ${p[0]}">${esc(p[1])}</span>`).join('')}</span></div>`;
+ }
+ const fold=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+ function filtered(){
+  const c=CFG[st.tab];let L=all().slice();
+  if(st.q){const qs=fold(st.q).split(/\s+/).filter(Boolean);L=L.filter(x=>{const h=fold([x.t,...(x.sub||[]),x.ppl||'',x.extra||''].join(' '));return qs.every(q=>h.includes(q));});}
+  if(c)c.chips.forEach(([id,,f])=>{if(st.filters.has(id))L=L.filter(f);});
+  // les pastilles de sorte (naissances, mariages, décès) s'additionnent
+  if(st.tab==='event'){const ty=['n','m','d'].filter(t=>st.filters.has(t));if(ty.length>1){L=all().filter(x=>ty.includes(x.type)).filter(x=>!st.q||fold(x.t+x.sub).includes(fold(st.q)));if(st.filters.has('nosrc'))L=L.filter(x=>!x.src);if(st.filters.has('notin'))L=L.filter(x=>!x.used);}}
+  return L;
+ }
+ function groups(L){
+  const a=st.arr,G=new Map(),push=(g,x)=>{if(!G.has(g))G.set(g,[]);G.get(g).push(x);};
+  const todo=L.filter(x=>x.todo);L=L.filter(x=>!x.todo);
+  if(a==='person'){L.sort((p,q)=>(p.who||'~').localeCompare(q.who||'~')||(p.y||0)-(q.y||0));L.forEach(x=>push(x.who||'Sans personne',x));}
+  else if(a==='date'){L.sort((p,q)=>(p.y||9999)-(q.y||9999));L.forEach(x=>push(x.y?(Math.floor(x.y/100)+1)+'ᵉ siècle':'Sans date',x));}
+  else if(a==='place'){L.sort((p,q)=>(p.place||'~').localeCompare(q.place||'~'));L.forEach(x=>push(x.place||'Lieu inconnu',x));}
+  else if(a==='arch'){L.forEach(x=>push(x.sub[0],x));}
+  else if(a==='dep'){L.forEach(x=>push(x.sub.find(s=>/\(\d+\)/.test(s))||'Autre',x));}
+  else if(a==='name'){L.sort((p,q)=>p.t.localeCompare(q.t));push('',L);}
+  else push('',L);
+  if(todo.length)G.set('À décrire',todo);
+  return G;
+ }
+ function drawMid(){
+  const m=$('.mid'),c=CFG[st.tab];
+  if(st.tab==='data')return drawData(m);
+  if(st.tab==='lists')return drawLists(m);
+  if(st.tab==='outside')return drawOutside(m);
+  if(c.arr.length&&!c.arr.some(a=>a[0]===st.arr))st.arr=c.arr[0][0];
+  m.innerHTML=`<div class="tools"><div class="srch"><input type="search" data-q value="${esc(st.q)}" placeholder="${esc(c.ph)}" aria-label="Chercher dans ${esc(LBL[st.tab][1])}"></div><p class="hint">${esc(c.hint)}</p>
+   ${c.chips.length||c.arr.length||c.view?`<div class="chips tb"><span class="cf">${c.chips.length?'<span class="lab">Montrer :</span>':''}${c.chips.map(([id,l])=>`<button type="button" class="chip" data-f="${id}" aria-pressed="${st.filters.has(id)}">${esc(l)}</button>`).join('')}</span><span class="sp"></span><span class="ca">${c.arr.length?`<span class="lab">Ranger</span><span class="seg">${c.arr.map(([id,l])=>`<button type="button" data-arr="${id}" aria-pressed="${st.arr===id}">${esc(l)}</button>`).join('')}</span>`:''}${c.view?`<span class="seg" aria-label="Affichage"><button type="button" data-view="list" aria-pressed="${st.view==='list'}" title="En liste">☰</button><button type="button" data-view="grid" aria-pressed="${st.view==='grid'}" title="En vignettes">▦</button></span>`:''}</span></div>`:''}</div><div class="list" data-list></div>`;
+  drawList();
+  const q=m.querySelector('[data-q]');q.addEventListener('input',()=>{st.q=q.value;drawList();});
+  m.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{const f=b.dataset.f;st.filters.has(f)?st.filters.delete(f):st.filters.add(f);b.setAttribute('aria-pressed',st.filters.has(f));drawList();});
+  m.querySelectorAll('[data-arr]').forEach(b=>b.onclick=()=>{st.arr=b.dataset.arr;m.querySelectorAll('[data-arr]').forEach(o=>o.setAttribute('aria-pressed',o===b));drawList();});
+  m.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{st.view=b.dataset.view;m.querySelectorAll('[data-view]').forEach(o=>o.setAttribute('aria-pressed',o===b));drawList();});
+ }
+ function drawList(){
+  const box=$('[data-list]');if(!box)return;const L=filtered();
+  if(!L.length){box.innerHTML=st.q?`<div class="empty"><span class="big">🔍</span><b>Rien pour « ${esc(st.q)} »</b>Essaie l’orthographe d’époque, seulement le nom de famille, ou seulement l’année.<div class="row"><button type="button" class="b sec sm" data-clear>Effacer la recherche</button></div></div>`:`<div class="empty"><span class="big">${LBL[st.tab][0]}</span><b>Rien avec ces pastilles</b>Les pastilles cochées sont peut-être trop strictes.<div class="row"><button type="button" class="b sec sm" data-nof>Enlever les pastilles</button></div></div>`;
+   const cl=box.querySelector('[data-clear]');if(cl)cl.onclick=()=>{st.q='';drawMid();};const nf=box.querySelector('[data-nof]');if(nf)nf.onclick=()=>{st.filters.clear();drawMid();};return;}
+  if(st.tab==='media'&&st.view==='grid'){box.innerHTML=`<div class="mgrid">${L.map(x=>`<div class="mc ${st.picked.has(x.k)?'on':''}" data-see="${x.k}"><span class="th ${x.th}"></span><label class="ck"><input type="checkbox" data-ck="${x.k}" ${st.picked.has(x.k)?'checked':''} aria-label="Choisir ${esc(x.t)}"></label><div class="cap"><b>${esc(x.t)}</b><span>${esc([x.date||'sans date',x.ppl].join(' · '))}</span></div></div>`).join('')}</div>`;}
+  else{const G=groups(L);let h='';G.forEach((arr,g)=>{h+=(g?`<div class="gh">${esc(g)}<span class="c">${arr.length}</span></div>`:'')+arr.map(rowHtml).join('');});box.innerHTML=h;}
+  bindRows(box);
+ }
+ function bindRows(box){
+  box.querySelectorAll('[data-ck]').forEach(b=>{b.onclick=e=>e.stopPropagation();b.onchange=()=>{const x=find(b.dataset.ck);if(b.checked)st.picked.set(x.k,x);else st.picked.delete(x.k);st.focus=x.k;st.mode='auto';const r=b.closest('.r,.mc');if(r)r.classList.toggle('on',b.checked);paintFocus();drawPrev();drawFoot();};});
+  box.querySelectorAll('[data-see]').forEach(b=>{b.onclick=e=>{if(e.target.closest('a,input,label'))return;st.focus=b.dataset.see;st.mode='detail';st.sheet=true;dlg.classList.add('sheet');paintFocus();drawPrev();};b.ondblclick=()=>{const c=box.querySelector(`[data-ck="${b.dataset.see}"]`);if(c){c.checked=!c.checked;c.onchange();}};});
+  box.querySelectorAll('[data-noop]').forEach(a=>a.onclick=e=>{e.preventDefault();e.stopPropagation();toast('S’ouvrirait dans un nouvel onglet (OpenStreetMap).');});
+ }
+ function paintFocus(){dlg.querySelectorAll('.r').forEach(r=>r.classList.toggle('focus',r.dataset.k===st.focus));}
+ const KIND={event:'événement',act:'acte',media:'média',source:'source',place:'lieu',person:'fiche',note:'note',data:'donnée',lists:'ligne',basket:'élément',recent:'élément'};
+ const WILL={event:'reliés à l’enquête (avec leurs sources)',act:'ajoutés comme pièces de l’enquête',media:'ajoutés comme médias de l’enquête',source:'liés comme sources',place:'ajoutés aux lieux de l’enquête',person:'ajoutées comme personnes liées',note:'liées à l’enquête',data:'ajoutées comme informations, avec leur source',lists:'ajoutées comme informations, avec la liste comme source',basket:'ajoutés à l’enquête',recent:'ajoutés à l’enquête'};
+ function plural(n,w){return n+' '+w+(n>1&&!/s$/.test(w)?'s':'');}
+ function drawPrev(){
+  const p=$('.prev'),back=`<button type="button" class="b ter sm back" data-back>← Retour à la liste</button>`;
+  if(st.picked.size>=2&&st.mode!=='detail'){
+   const by={};st.picked.forEach(x=>{(by[x._t]=by[x._t]||[]).push(x);});
+   p.innerHTML=`${back}<h4>${st.picked.size} éléments choisis</h4><p class="help">Clique un élément pour le revoir, × pour l’enlever.</p>${[...st.picked.values()].map(x=>`<div class="sumrow"><span>${x.ico}</span><button type="button" class="t" data-sum="${x.k}">${esc(x.t)}</button><button type="button" class="rm" data-rm="${x.k}" aria-label="Enlever">×</button></div>`).join('')}
+    <div class="will"><b>Ce que « Prendre » va faire</b><ul>${Object.entries(by).map(([t,a])=>`<li>${plural(a.length,KIND[t])} → ${WILL[t]}</li>`).join('')}</ul></div>`;
+  }else{
+   const x=st.focus&&find(st.focus);
+   if(!x){p.innerHTML=st.tab==='data'?`<h4>Comment ça marche</h4><p class="help">1. Choisis une donnée. 2. Dis où et quand (le lieu de l’enquête est déjà rempli). 3. Clique « Chercher ». Les résultats arrivent dans la liste : coche ceux que tu veux, ou prends tout en un tableau.</p>`:`<h4>Aperçu</h4><p class="help"><b>Clique une ligne</b> pour la voir ici en grand : tous ses détails, où elle est déjà utilisée, et « ↗ ouvrir ».</p><p class="help"><b>Coche la case</b> pour la choisir. Tu peux en choisir dans plusieurs rubriques avant de prendre.</p>`;}
+   else p.innerHTML=`${back}${prevBody(x)}${st.picked.size>=2?`<p><button type="button" class="b ter sm" data-sumback>← Revenir aux ${st.picked.size} choisis</button></p>`:''}`;
+  }
+  p.querySelectorAll('[data-sum]').forEach(b=>b.onclick=()=>{st.focus=b.dataset.sum;st.mode='detail';drawPrev();paintFocus();});
+  p.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{st.picked.delete(b.dataset.rm);const c=dlg.querySelector(`[data-ck="${b.dataset.rm}"]`);if(c){c.checked=false;const r=c.closest('.r,.mc');if(r)r.classList.remove('on');}drawPrev();drawFoot();});
+  const sb=p.querySelector('[data-sumback]');if(sb)sb.onclick=()=>{st.mode='auto';drawPrev();};
+  const bk=p.querySelector('[data-back]');if(bk)bk.onclick=()=>{st.sheet=false;dlg.classList.remove('sheet');};
+  p.querySelectorAll('[data-open]').forEach(a=>a.onclick=e=>{e.preventDefault();toast('S’ouvrirait dans un nouvel onglet.');});
+  const tk=p.querySelector('[data-pk]');if(tk)tk.onclick=()=>{const x=find(st.focus);st.picked.set(x.k,x);const c=dlg.querySelector(`[data-ck="${x.k}"]`);if(c){c.checked=true;const r=c.closest('.r,.mc');if(r)r.classList.add('on');}drawFoot();drawPrev();};
+ }
+ function prevBody(x){
+  const t=x._t,big=x.th!=null?`<span class="th big ${x.th}"></span>`:'';
+  const F=[];
+  if(t==='event'){F.push(['Quoi',x.t.split(' · ')[0]],['Qui',x.t.split(' · ')[1]],['Date',x.date],['Lieu',x.place||'inconnu']);if(x.extra)F.push(['Aussi',x.extra]);F.push(['Sources',x.src?plural(x.src,'source')+' (registres de '+(x.place||'?').replace(/ \(.*/,'')+')':'aucune — à chercher']);}
+  else if(t==='act'){F.push(['Sorte',x.todo?'pas encore dite':x.t.split(' · ')[0]],['Date',x.date||'—'],['Lieu',x.place||'—'],['Cote',x.sub[2]||'—'],['Personnes',x.ppl],['Lecture',x.state[1]]);}
+  else if(t==='media'){F.push(['Sorte',x.sub[0]],['Date',x.date||'—'],['Personnes',x.ppl],['Fichier',x.t.includes('.')?x.t:'—']);}
+  else if(t==='source'){F.push(['Archives',x.sub[0]],['Cote',x.sub[1].replace('cote ','')],['Lieu',x.place||'—'],['Citations',String(x.n)]);}
+  else if(t==='place'){F.push(['Sorte',x.sub[0]],['Département',x.sub[1]],['Événements',String(x.n)],['Carte',x.nogeo?'pas de coordonnées':'oui']);}
+  else if(t==='data'){F.push(['Distance',x.d+' du centre de Saint-Amand-Montrond'],['Sorte',x.rel],['Où',x.info],['Source','<a class="alink" href="#" data-open>↗ OpenStreetMap</a>']);}
+  else if(t==='lists'){(x.f||[]).forEach(f=>F.push(f));F.push(['Liste',(LIST_BY[x.list]||['','',x.t])[2]]);}
+  else F.push(['Détail',(x.sub||[]).join(' · ')]);if(x.ppl&&!['act','media'].includes(t))F.push(['Aussi',x.ppl]);
+  const parts=x.parts?`<div class="sect">Prendre seulement une info</div><ul class="parts">${x.parts.map(s=>`<li><input type="checkbox" aria-label="${esc(s)}"> ${esc(s)}</li>`).join('')}</ul>`:'';
+  const use=x.used?`<ul><li>${esc(used[0])}</li><li>Livre de famille, p. 12</li></ul>`:`<p class="help">Nulle part encore.</p>`;
+  const links=t==='lists'?`<a class="alink" href="#" data-open>${esc(x.list?LD[x.list].src:'↗ voir la liste')}</a>`:t==='data'?`<a class="alink" href="#" data-open>↗ carte</a> · <a class="alink" href="#" data-open>↗ itinéraire</a>`:`<a class="alink" href="#" data-open>↗ ouvrir ${t==='person'?'la fiche':t==='place'?'sur la carte':'la source'}</a>`;
+  return `${big}<h4>${x.ico} ${esc(x.t)}</h4><p class="mini">${links}</p><dl>${F.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${a==='Source'?b:esc(b)}</dd>`).join('')}</dl>${x.todo?`<div class="box">Cet acte n’est pas encore décrit : on ne sait pas qui il concerne. <button type="button" class="b ter sm" data-open>✎ Le décrire</button></div>`:''}<div class="sect">Déjà utilisé dans</div>${use}${parts}${st.picked.has(x.k)?'':`<p><button type="button" class="b sec sm" data-pk>☑ Choisir celui-ci</button></p>`}`;
+ }
+ function drawFoot(){
+  const n=st.picked.size,f=$('.df');
+  f.innerHTML=`<div class="cnt"><b>${n?plural(n,'cochée'):'Rien de coché'}</b><span class="what">${n?`Prendre = ${n>1?'les ajouter':'l’ajouter'} à ${esc(DEST)}.`:'Coche une ou plusieurs lignes, dans une ou plusieurs rubriques.'}</span>${n?`<span><button type="button" class="link" data-seesel>Voir ce que j’ai choisi</button> · <button type="button" class="link" data-none>Tout décocher</button></span>`:''}</div>
+   <div class="acts"><button type="button" class="b ter" data-else>Mettre ailleurs…<small>une note, l’Atelier, une liste…</small></button><button type="button" class="b sec" data-keep>🧺 Garder dans le panier<small>pour plus tard, sur un autre écran</small></button><button type="button" class="b pri" data-take ${n?'':'disabled'}>📥 Prendre${n?' ('+n+')':''}<small>dans l’enquête « testenquête »</small></button></div>`;
+  const nn=f.querySelector('[data-none]');if(nn)nn.onclick=()=>{st.picked.clear();st.mode='auto';drawMid();drawPrev();drawFoot();};
+  const ss=f.querySelector('[data-seesel]');if(ss)ss.onclick=()=>{st.mode='auto';st.sheet=true;dlg.classList.add('sheet');drawPrev();};
+  f.querySelector('[data-take]').onclick=()=>{toast(`✓ ${plural(n,'élément')} ajouté${n>1?'s':''} à ${DEST}. ↶ Annuler`);};
+  f.querySelector('[data-keep]').onclick=()=>toast(n?`🧺 ${plural(n,'élément')} dans le panier. Tu les retrouves sur n’importe quel écran.`:'Coche d’abord ce que tu veux garder.');
+  f.querySelector('[data-else]').onclick=()=>toast(n?'La fenêtre « Mettre dans… » s’ouvrirait : enquête, note, Atelier, liste, carte…':'Coche d’abord ce que tu veux ranger.');
+ }
+ function drawData(m){
+  const res=st.dataRun?CEM:[];
+  m.innerHTML=`<div class="list"><div class="pad" style="padding-left:8px;padding-right:8px">
+   <div class="step">1 · Quelle donnée ?</div><div class="form"><label>Donnée<select class="fld" data-ds><optgroup label="Autour d’un lieu"><option selected>🪦 Cimetières autour d’un lieu</option><option>⛪ Églises et chapelles</option><option>🏰 Châteaux et manoirs</option></optgroup><optgroup label="Un jour"><option>📅 Le calendrier de ce jour</option><option>🌦 Le temps qu’il faisait</option></optgroup><optgroup label="Une commune"><option>👥 La population (recensements)</option></optgroup></select></label></div>
+   <p class="hint" style="margin-top:6px">Donne une liste de cimetières, avec la distance, la sorte et un lien vers la carte. Source : OpenStreetMap.</p>
+   <div class="step">2 · Autour de quel lieu ?</div><div class="form"><label>Lieu<span class="placef">📍 Saint-Amand-Montrond (18)<span class="xx" title="Changer">×</span></span></label><label>Jusqu’à<select class="fld" style="min-width:110px"><option>2 km</option><option>5 km</option><option selected>7 km</option><option>15 km</option></select></label><button type="button" class="b pri sm" data-run>🔍 Chercher les cimetières</button></div>
+   <p class="hint" style="margin-top:6px">Le lieu vient de l’enquête ; tu peux le changer.</p>
+   <div class="step">3 · Résultats ${res.length?`<span style="text-transform:none;letter-spacing:0;font-weight:600">— ${res.length} cimetières à moins de 7 km</span>`:''}</div>
+   ${res.length?`<div class="chips" style="margin-bottom:4px"><button type="button" class="b sec sm" data-all>▦ Tout prendre en un tableau</button><span class="hint">ou coche ceux que tu veux, un par un</span></div><div data-dres>${res.map(rowHtml).join('')}</div>`:`<div class="empty" style="padding:18px"><b>Pas encore cherché</b>Clique « Chercher les cimetières » : rien n’est téléchargé avant.</div>`}
+  </div></div>`;
+  m.querySelector('[data-run]').onclick=()=>{st.dataRun=true;drawData(m);drawPrev();};
+  const al=m.querySelector('[data-all]');if(al)al.onclick=()=>{const it={k:'cset',ico:'▦',t:'Cimetières autour de Saint-Amand-Montrond (tableau de 6)',_t:'data',d:'jusqu’à 7 km',rel:'tableau',info:'6 lignes, source OpenStreetMap',sub:[]};st.picked.set(it.k,it);st.focus=null;drawFoot();drawPrev();toast('Le tableau entier est choisi (1 élément).');};
+  const r=m.querySelector('[data-dres]');if(r)bindRows(r);
+ }
+ const LISTS=[
+  ['État civil et personnes',[['deces','🕯','Les décès d’une commune (depuis 1970)','nom, prénoms, date et lieu de naissance, âge','INSEE'],['naiss','👶','Les naissances de ta base, par commune et période','nom, date, parents, source','ta base']]],
+  ['Lieux et patrimoine',[['chateaux','🏰','Les châteaux autour d’un lieu','nom, distance, époque, ↗ fiche Mérimée','Mérimée'],['eglises','⛪','Les églises et chapelles d’un canton','nom, commune, siècle, protection','OpenStreetMap']]],
+  ['Archives',[['registres','📚','Les registres en ligne d’une commune','sorte (BMS, NMD), années, cote, ↗ vues','archives départementales']]],
+  ['Ciel et climat',[['comets','☄','Grandes comètes et aurores','date, phénomène, où on l’a vu, source','catalogues historiques']]]];
+ const LD={
+  comets:{crit:[['Période','1550','1650'],['Vu depuis','Europe']],src:'↗ catalogue historique',rows:[
+   ['1556','☄','Grande comète de 1556','visible en mars, « la comète de Charles Quint »'],['1577','☄','Grande comète de 1577','novembre ; observée par Tycho Brahe'],['1582','☄','Comète de 1582','mai ; visible à l’œil nu'],['1585','☄','Comète de 1585','octobre'],['1590','☄','Comète de 1590','mars'],['1596','☄','Comète de 1596','juillet'],['1607','☄','Comète de Halley','septembre–octobre'],['1618','☄','Les trois comètes de 1618','novembre ; très commentées'],['1621','🌌','Aurore boréale','septembre ; vue en France']]},
+  chateaux:{crit:[['Autour de','Treignac (19)'],['Jusqu’à','4 km']],src:'↗ Mérimée',rows:[['1,2 km','🏰','Château de Treignac (ruines)','Moyen Âge · inscrit'],['3,4 km','🏰','Manoir du Mas','XVIᵉ s.'],['3,9 km','🏰','Château de la Vergne','XVᵉ–XVIIIᵉ s.']]},
+  deces:{crit:[['Commune','Tulle (19)'],['Du','1980-06-01','1980-06-30']],src:'↗ fichier INSEE',rows:[['3 juin 1980','🕯','Marie DURAND','née en 1901 à Treignac · 79 ans'],['11 juin 1980','🕯','Jean LACOMBE','né en 1912 à Tulle · 68 ans'],['24 juin 1980','🕯','Pierre MAZAUD','né en 1899 à Chamberet · 81 ans']]},
+  naiss:{crit:[['Nom','MAZAUD'],['Commune','Treignac (19)'],['Avant','1600']],src:'↗ fiche',rows:[['1555','👶','Jean MAZAUD','12 mars 1555 · 2 sources'],['1557','👶','Antoinette MAZAUD','vers 1557 · sans source'],['1582','👶','Pierre MAZAUD','3 janvier 1582 · 1 source']]},
+  eglises:{crit:[['Canton','Treignac']],src:'↗ OpenStreetMap',rows:[['Treignac','⛪','Église Notre-Dame','XIIᵉ s. · inscrite'],['Chamberet','⛪','Église Saint-Martin','XIIIᵉ s.'],['Soudaine','⛪','Chapelle du Mas','XVIIᵉ s.']]},
+  registres:{crit:[['Commune','Chamberet (19)']],src:'↗ vues en ligne',rows:[['1575–1610','📚','BMS 1575–1610','cote 3 E 48/1 · 212 vues'],['1611–1650','📚','BMS 1611–1650','cote 3 E 48/2 · 180 vues'],['1793–1802','📚','NMD an II – an X','cote 2 E 48/1 · 96 vues']]}};
+ const LIST_BY={};LISTS.forEach(([g,a])=>a.forEach(x=>LIST_BY[x[0]]=x));
+ Object.entries(LD).forEach(([id,d])=>{d.items=d.rows.map((r,i)=>({k:'L'+id+i,ico:r[1],t:r[2],sub:[r[0],r[3]],pills:[],kind:'row',_t:'lists',list:id,f:[[id==='comets'?'Date':id==='deces'?'Décès':'Repère',r[0]],['Détail',r[3]]]}));d.items.forEach(x=>LROWS[x.k]=x);});
+ const ASK={'les décès à Tulle en juin 1980':['deces','Les décès d’une commune · commune : Tulle (19) · du 1ᵉʳ au 30 juin 1980'],'les châteaux à 4 km de Treignac':['chateaux','Les châteaux autour d’un lieu · autour de Treignac (19) · 4 km'],'les comètes vues entre 1550 et 1650':['comets','Grandes comètes et aurores · de 1550 à 1650'],'les MAZAUD nés à Treignac avant 1600':['naiss','Les naissances de ta base · nom : MAZAUD · Treignac (19) · avant 1600']};
+ function drawLists(m){
+  if(st.listOpen)return drawListOpen(m);
+  const u=ASK[st.ask];
+  m.innerHTML=`<div class="tools"><div class="srch"><input type="search" data-ask value="${esc(st.ask)}" placeholder="Dis ce qu’il te faut, avec tes mots" aria-label="Dis ce qu’il te faut"></div>
+   <div class="chips"><span class="lab">Par exemple :</span>${Object.keys(ASK).map(k=>`<button type="button" class="chip" data-ex="${esc(k)}" aria-pressed="${st.ask===k}">« ${esc(k)} »</button>`).join('')}</div>
+   ${u?`<div class="understood">✓ J’ai compris : <b>${esc(u[1])}</b><span class="sp"></span><button type="button" class="b pri sm" data-lopen="${u[0]}">Voir les lignes</button></div>`:st.ask?`<div class="understood" style="background:var(--yel-bg)">Je n’ai pas reconnu de liste : choisis-la ci-dessous.</div>`:''}</div>
+   <div class="list"><div class="pad" style="padding-left:8px;padding-right:8px"><div class="box" style="margin:0 0 6px"><b>Comment ça marche</b> : la liste s’ouvre <b>ici, dans cette fenêtre</b>, avec ses critères (commune, période, « autour de… »). Tu coches les lignes qui t’intéressent, ou tu prends tout le tableau d’un coup (un seul élément dans l’enquête, qu’on peut relire).</div>
+   ${LISTS.map(([g,a])=>`<div class="gh">${esc(g)}</div>`+a.map(([id,i,t,give,src])=>`<div class="lrow"><span style="font-size:20px">${i}</span><div class="lt"><b>${esc(t)}</b><span>Ce que ça donne : <i>${esc(give)}</i> · ${esc(src)}</span></div><button type="button" class="b sec sm" data-lopen="${id}">Voir les lignes</button></div>`).join('')).join('')}</div></div>`;
+  const a=m.querySelector('[data-ask]');a.onchange=()=>{st.ask=a.value.trim();drawLists(m);};
+  a.onkeydown=e=>{if(e.key==='Enter'){st.ask=a.value.trim();drawLists(m);}};
+  m.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{st.ask=b.dataset.ex;drawLists(m);});
+  m.querySelectorAll('[data-lopen]').forEach(b=>b.onclick=()=>openList(b.dataset.lopen));
+ }
+ function drawListOpen(m){
+  const id=st.listOpen,L=LIST_BY[id],d=LD[id],n=d.items.filter(x=>st.picked.has(x.k)).length;
+  m.innerHTML=`<div class="tools"><div class="chips"><button type="button" class="b ter sm" data-lback>← Toutes les listes</button><span class="sp"></span><span class="pill blue">ouverte ici, tu ne quittes pas la fenêtre</span></div>
+   <div><b style="font-size:15px">${L[1]} ${esc(L[2])}</b><p class="hint">Ce que ça donne : ${esc(L[3])} · ${esc(L[4])}</p></div>
+   <div class="form">${d.crit.map(c=>`<label>${esc(c[0])}<span style="display:flex;gap:6px;align-items:center"><input class="fld" style="min-width:0;width:${c[2]?'110px':'190px'}" value="${esc(c[1])}" aria-label="${esc(c[0])}">${c[2]?` à <input class="fld" style="min-width:0;width:110px" value="${esc(c[2])}" aria-label="${esc(c[0])} (fin)">`:''}</span></label>`).join('')}<button type="button" class="b sec sm" data-lupd>Mettre à jour</button></div></div>
+   <div class="list"><div class="chips" style="padding:10px 8px 4px"><b>${d.items.length} lignes</b><button type="button" class="chip" data-lall>☑ Tout cocher</button><span class="sp"></span><button type="button" class="b sec sm" data-lset>▦ Prendre tout le tableau (${d.items.length} lignes)</button></div>
+   <div data-lrows>${d.items.map(rowHtml).join('')}</div>
+   <div class="box" style="margin:14px 8px 0">Besoin de trier, d’ajouter un critère ou d’enregistrer la recherche ? <button type="button" class="b ter sm" data-lfull>↗ Ouvrir la liste complète dans l’app</button><br><span class="mini">Tu quittes cette fenêtre ; un bandeau en haut de la liste te ramène ici, et ce que tu as déjà coché reste coché.</span></div></div>`;
+  bindRows(m.querySelector('[data-lrows]'));
+  m.querySelector('[data-lback]').onclick=()=>{st.listOpen=null;st.focus=null;layout();drawLists(m);drawPrev();};
+  m.querySelector('[data-lupd]').onclick=()=>toast('Les lignes seraient recalculées avec ces critères.');
+  m.querySelector('[data-lall]').onclick=()=>{d.items.forEach(x=>st.picked.set(x.k,x));st.mode='auto';drawListOpen(m);drawPrev();drawFoot();};
+  m.querySelector('[data-lset]').onclick=()=>{const it={k:'Lset'+id,ico:'▦',t:`${L[2]} (tableau de ${d.items.length} lignes)`,_t:'lists',sub:[],f:[['Lignes',String(d.items.length)],['Critères',d.crit.map(c=>c[0]+' : '+c.slice(1).join(' à ')).join(' · ')]]};LROWS[it.k]=it;st.picked.set(it.k,it);st.focus=it.k;st.mode='detail';drawPrev();drawFoot();toast('Le tableau entier est choisi (1 élément).');};
+  m.querySelector('[data-lfull]').onclick=()=>toast('La page Listes s’ouvrirait avec le bandeau « Tu choisis des lignes pour l’enquête testenquête » et « ← Revenir » (voir partie 4).');
+ }
+ function openList(id){st.tab='lists';st.listOpen=id;st.focus=null;st.mode='auto';drawRail();layout();drawMid();drawPrev();}
+ function drawOutside(m){
+  const C=[['📄','Un fichier de tableau','CSV, TSV, Excel (XLSX), LibreOffice (ODS), JSON. Jusqu’à 20 Mo.','un tableau : tout d’un bloc, ou ligne par ligne','Choisir un fichier…'],
+   ['🖼','Une image ou un PDF','Un scan d’acte, une photo, un PDF reçu des archives.','une pièce de l’enquête ; tu pourras la décrire ou la transcrire ensuite','Choisir une image ou un PDF…'],
+   ['📋','Coller un tableau','Copié depuis un site, un PDF ou Excel. La première ligne donne les titres des colonnes.','un tableau, comme pour un fichier','Coller…'],
+   ['🌐','L’adresse d’un fichier de données','Un lien qui finit par .csv ou .json (pas une page web). Téléchargé une seule fois, quand tu cliques.','un tableau, avec l’adresse gardée comme source','Saisir l’adresse…']];
+  m.innerHTML=`<div class="list"><div class="pad" style="padding-left:8px;padding-right:8px"><p class="hint" style="margin:0 0 12px">Quelque chose qui n’est pas encore dans ta base. Rien n’est enregistré avant « Prendre ».</p><div class="cards">${C.map(([i,t,p,g,b])=>`<div class="card"><h6>${i} ${esc(t)}</h6><p>${esc(p)}</p><div class="gives">Ce que ça donne : ${esc(g)}</div><button type="button" class="b sec sm" data-open>${esc(b)}</button></div>`).join('')}</div></div></div>`;
+  m.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>toast('Le choix du fichier s’ouvrirait ; un aperçu du contenu apparaîtrait à droite.'));
+ }
+ function layout(){const no=st.tab==='outside'||(st.tab==='lists'&&!st.listOpen);$('.gut').style.display=no?'none':'';$('.prev').style.display=no?'none':'';dlg.classList.toggle('noprev',no);}
+ function go(tab){st.tab=tab;st.q='';st.listOpen=null;st.filters.clear();st.focus=null;st.mode='auto';st.rail=false;st.sheet=false;dlg.classList.remove('railopen','sheet');drawRail();layout();drawMid();drawPrev();}
+ $('.rail').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)go(b.dataset.tab);});
+ $('[data-quoi]').onclick=()=>{st.rail=!st.rail;dlg.classList.toggle('railopen',st.rail);};
+ $('.x').onclick=()=>toast('La fenêtre se fermerait (rien n’est ajouté).');
+ // poignée : tirer ou ← →
+ const gut=$('.gut');let drag=null;
+ const setW=w=>{w=Math.max(260,Math.min(560,w));dlg.style.setProperty('--pw',w+'px');};
+ gut.addEventListener('pointerdown',e=>{drag={x:e.clientX,w:$('.prev').getBoundingClientRect().width};gut.setPointerCapture(e.pointerId);});
+ gut.addEventListener('pointermove',e=>{if(drag)setW(drag.w-(e.clientX-drag.x));});
+ gut.addEventListener('pointerup',()=>drag=null);
+ gut.addEventListener('keydown',e=>{const w=$('.prev').getBoundingClientRect().width;if(e.key==='ArrowLeft'){setW(w+30);e.preventDefault();}if(e.key==='ArrowRight'){setW(w-30);e.preventDefault();}});
+ go(opts&&opts.tab||'event');drawFoot();
+ return {go,openList,multi(){go('event');['e1','e3','e5'].forEach(k=>st.picked.set(k,find(k)));drawMid();st.mode='auto';drawPrev();drawFoot();}};
+}
+const desk=mount(document.getElementById('desk'),{tab:'event'});
+mount(document.getElementById('phone'),{tab:'event'});
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>desk.go(b.dataset.go));
+document.querySelector('[data-multi]').onclick=()=>desk.multi();
+document.querySelectorAll('[data-golist]').forEach(b=>b.onclick=()=>desk.openList(b.dataset.golist));
+(function(){const t=document.getElementById('nbt'),b=document.getElementById('nbtake'),all=document.getElementById('nball');const paint=()=>{const c=[...t.querySelectorAll('tbody input')];c.forEach(i=>i.closest('tr').classList.toggle('on',i.checked));const n=c.filter(i=>i.checked).length;b.textContent=n?`Prendre ${n>1?'les '+n+' cochées':'la ligne cochée'}`:'Coche des lignes';b.disabled=!n;};t.addEventListener('change',e=>{if(e.target===all)t.querySelectorAll('tbody input').forEach(i=>i.checked=all.checked);paint();});})();
+document.getElementById('theme').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';};
+})();
+</script>
+</body></html>
