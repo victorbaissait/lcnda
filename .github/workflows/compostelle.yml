@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Préférer IPv4 (la machine GitHub n'a pas d'IPv6 : « Network is unreachable »)
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
         run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
       - name: Fabriquer les chemins (Overpass, plusieurs essais)
         run: |
