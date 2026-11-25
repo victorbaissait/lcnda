@@ -195,6 +195,7 @@
     }
     const calc = {lifeOf, avalanchesPerson, volcansPerson, epavesPerson, relaisOnRoute, bigJourney, spouseWalk, matchPlace, quebecNear, nomShares, walkTime, near, isMarin, isCarrier, isQC, isCH, isDZ};
     if (!W.document) return calc;
+    if (ext.terreGens?.fillPerson) return ext.terreGens; // déjà chargé (index.php + un essai, ou deux balises) : pas de doubles écouteurs
 
     /* ═════════════ les morceaux de texte ═════════════ */
     const WD = (q, label = 'Wikidata') => link(`https://www.wikidata.org/wiki/${q}`, label);
@@ -418,14 +419,17 @@
     function dismissed(k) { try { return W.localStorage?.getItem(`${KEY}-offre-${k}`) === '1'; } catch (_) { return false; } }
     async function fillPerson(host, id, only = null) {
         const want = k => (only ? only.includes(k) : on(k));
-        const P = await ask('l10t_person', {id});
-        if (!P?.ok || P.kind === 'animal') { host.innerHTML = ''; return P; }
-        const {L, out} = await personParts(P, want);
-        host.innerHTML = PERSON_ORDER.map(k => line(k, out[k])).join('');
-        showCard(host);
-        await onlineParts(host, P, L, want).catch(() => {});
-        showCard(host);
-        return P;
+        delete host.dataset.l10Ready;
+        try {
+            const P = await ask('l10t_person', {id});
+            if (!P?.ok || P.kind === 'animal') { host.innerHTML = ''; return P; }
+            const {L, out} = await personParts(P, want);
+            host.innerHTML = PERSON_ORDER.map(k => line(k, out[k])).join('');
+            showCard(host);
+            await onlineParts(host, P, L, want).catch(() => {});
+            showCard(host);
+            return P;
+        } finally { host.dataset.l10Ready = '1'; } // fini, en ligne compris (les essais attendent ce signal)
     }
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks.terre_gens = (index, detail) => {

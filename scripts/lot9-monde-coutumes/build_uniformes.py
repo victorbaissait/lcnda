@@ -50,13 +50,23 @@ for i in range(0, len(files), 12):
             continue
         t = p['title'][5:]
         name = re.sub(r'\.(jpe?g|png|tiff?)$', '', t, flags=re.I)
-        m = re.search(r'\b(1[6-9]\d\d)\b', name) or re.search(r'\b(1[6-9]\d\d)\b', strip(md.get('ObjectName', {}).get('value', '')))
-        if not m:
+        # l'année de l'uniforme : dans le titre du fichier, sans la période d'un recueil (« … 1690-1894 », « Dragons 1745-1828 ») ;
+        # sinon dans la description de Commons quand elle ne cite qu'UNE année (« … Garde Royale in 1815 ») ; sinon, pour les règlements
+        # numérisés par la BnF (« Description de l'uniforme … »), leur date (la date du règlement = celle de l'uniforme décrit)
+        span = r'\b1[6-9]\d\d\s*[-–]\s*1[6-9]\d\d\b'
+        desc = strip(md.get('ImageDescription', {}).get('value', ''))
+        m = re.search(r'\b(1[6-9]\d\d)\b', re.sub(span, '', name)) or re.search(r'\b(1[6-9]\d\d)\b', re.sub(span, '', strip(md.get('ObjectName', {}).get('value', ''))))
+        y = int(m.group(1)) if m else None
+        if y is None:
+            ys = set(re.findall(r'\b(1[6-9]\d\d)\b', re.sub(span, '', desc)))
+            if len(ys) == 1:
+                y = int(ys.pop())
+        if y is None and re.match(r"description de l.uniforme", name, re.I):
+            d = re.fullmatch(r'\s*(1[6-9]\d\d)\s*(?:date QS:P571,\+\1-00-00T00:00:00Z/9)?\s*', strip(md.get('DateTimeOriginal', {}).get('value', '')))
+            y = int(d.group(1)) if d else None
+        if y is None or not 1680 <= y <= 1950:
             continue
-        y = int(m.group(1))
-        if not 1680 <= y <= 1950:
-            continue
-        low = name.lower()
+        low = (name + ' ' + desc).lower()
         arm = next((a for a, rx in ARMS if re.search(rx, low)), '')
         rows.append({'title': name.replace('_', ' '), 'y': y, 'arm': arm, 'file': t, 'thumb': ii.get('thumburl', ''), 'page': ii.get('descriptionurl', ''),
                      'author': strip(md.get('Artist', {}).get('value', ''))[:120], 'licence': lic, 'licence_url': strip(md.get('LicenseUrl', {}).get('value', '')),

@@ -101,6 +101,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         p.on('pageerror', e => errs.push(e.message));
         await p.goto(base); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_APP?.defaultPersonBlocks, null, {timeout: 30000});
         // index.php ne charge pas encore ce fichier : on l'ajoute (comme le feront les balises)
+        const loaded = await p.evaluate(() => document.querySelectorAll('script[src*="heritage-lot10-terre-gens"]').length);
+        assert.ok(loaded <= 1, 'le script n’est chargé qu’une fois');
         if (!await p.evaluate(() => !!window.LCNDA_EXT?.terreGens)) { await p.addStyleTag({url: base + 'assets/css/lot10-terre-gens.css'}); await p.addScriptTag({url: base + 'assets/js/heritage-lot10-terre-gens.js'}); }
         await p.waitForFunction(() => window.LCNDA_EXT?.terreGens, null, {timeout: 10000});
         const api = (x, qq = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, qq]);
@@ -153,13 +155,15 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
 
         /* ═════════ 2. l'écran ═════════ */
-        const open = async id => { await p.evaluate(x => { document.querySelectorAll('[data-l10-done]').forEach(e => e.removeAttribute('data-l10-done')); const A = window.LCNDA_APP; A.state.currentPersonId = x; A.setModule('personnes'); }, id); };
+        // ouvrir une fiche comme l'app (openPersonById) puis attendre que le bloc ait FINI (en ligne compris) : data-l10-ready
+        const ready = id => p.waitForSelector(`[data-l10-person="${id}"][data-l10-ready]`, {timeout: 60000, state: 'attached'});
+        const open = async id => { await p.evaluate(x => window.LCNDA_APP.openPersonById(x), id); await ready(id); };
         const line = async (id, k) => ((await p.$(`[data-l10-person="${id}"] [data-l10-line="${k}"]`)) ? p.textContent(`[data-l10-person="${id}"] [data-l10-line="${k}"]`) : '');
         await t('fiche de Jean MAZAUD : 🌋 1816, 🪨 Grenoble 1837, 🕳️ carrières de Caen, 👥 son nom, 🚶 Marie à Naves, 🐴 sa route, 🗺️ la parcelle', async () => {
             await open(1);
-            await p.waitForSelector('[data-l10-person="1"] [data-l10-line="volcans"]', {timeout: 20000});
-            await p.waitForSelector('[data-l10-person="1"] [data-l10-line="marche"]', {timeout: 20000});
-            await p.waitForSelector('[data-l10-person="1"] [data-l10-line="cavites"]', {timeout: 20000});
+            await p.waitForSelector('[data-l10-person="1"] [data-l10-line="volcans"]', {timeout: 60000, state: 'attached'});
+            await p.waitForSelector('[data-l10-person="1"] [data-l10-line="marche"]', {timeout: 60000, state: 'attached'});
+            await p.waitForSelector('[data-l10-person="1"] [data-l10-line="cavites"]', {timeout: 60000, state: 'attached'});
             assert.match(await line(1, 'volcans'), /En 1816, l’« année sans été », il avait 16 ans : l’éruption du Tambora/);
             assert.match(await line(1, 'volcans'), /le prix du blé double entre 1815 et 1817/);
             assert.match(await line(1, 'mvt'), /De son vivant, à Grenoble : chute de blocs \/ eboulement \(Porte de France\) en 12 août 1837 — il avait 37 ans/);
@@ -170,28 +174,29 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.match(await line(1, 'parcelle'), /« la Combe des Échelles » \(Tulle\) sur le cadastre/);
             for (const k of ['volcans', 'mvt', 'nom', 'marche']) assert.ok(await p.$(`[data-l10-person="1"] [data-l10-line="${k}"] a[target="_blank"][rel~="noopener"]`), `↗ source : ${k}`);
             await p.click('[data-l10-person="1"] [data-l10-parcel-go]');
-            await p.waitForSelector('[data-l10-person="1"] [data-l10-parcel-key]', {timeout: 15000});
+            await p.waitForSelector('[data-l10-person="1"] [data-l10-parcel-key]', {timeout: 60000, state: 'attached'});
             assert.match(await line(1, 'parcelle'), /tombe dans la parcelle B[XY] \d+ du cadastre d’aujourd’hui/);
             assert.strictEqual(await p.$eval('[data-pblock="terre_gens"]', el => el.hidden), false);
             if (process.env.L10T_SHOT) { await p.$eval('[data-pblock="terre_gens"]', el => { el.querySelectorAll('details').forEach(d => { d.open = true; }); el.scrollIntoView(); }); await (await p.$('[data-pblock="terre_gens"]')).screenshot({path: process.env.L10T_SHOT}); }
         });
         await t('Pierre DURAND, marin pêcheur à Brest : ⚓ le naufrage de son vivant ; Paul (Philippeville) ; Louis (Québec) ; Hans (Vevey) ; Joseph (Chamonix)', async () => {
-            await open(3); await p.waitForSelector('[data-l10-person="3"] [data-l10-line="epaves"]', {timeout: 20000});
+            await open(3); await p.waitForSelector('[data-l10-person="3"] [data-l10-line="epaves"]', {timeout: 60000, state: 'attached'});
             assert.match(await line(3, 'epaves'), /De son vivant, à \d+ km de Brest : Swansea Vale \((8 août )?1918\) — il avait 28 ans/);
-            await open(6); await p.waitForSelector('[data-l10-person="6"] [data-l10-line="algerie"]', {timeout: 20000});
+            await open(6); await p.waitForSelector('[data-l10-person="6"] [data-l10-line="algerie"]', {timeout: 60000, state: 'attached'});
             assert.match(await line(6, 'algerie'), /Philippeville \(aujourd’hui Skikda\) a été créée en 1838, avant sa naissance/);
-            await open(5); await p.waitForSelector('[data-l10-person="5"] [data-l10-line="quebec"]', {timeout: 20000});
+            await open(5); await p.waitForSelector('[data-l10-person="5"] [data-l10-line="quebec"]', {timeout: 60000, state: 'attached'});
             assert.match(await line(5, 'quebec'), /Près de Québec, de son temps : .* \(depuis 1[56]\d\d\)/);
             assert.ok(await p.$('[data-l10-person="5"] a[href^="https://www.patrimoine-culturel.gouv.qc.ca/rpcq/detail.do"]'));
-            await open(7); await p.waitForSelector('[data-l10-person="7"] [data-l10-line="suisse"]', {timeout: 20000});
+            await open(7); await p.waitForSelector('[data-l10-person="7"] [data-l10-line="suisse"]', {timeout: 60000, state: 'attached'});
             assert.ok(await p.$('[data-l10-person="7"] a[href="https://hls-dhs-dss.ch/fr/articles/002620/"]'));
-            await open(9); await p.waitForSelector('[data-l10-person="9"] [data-l10-line="avalanches"]', {timeout: 20000});
+            await open(9); await p.waitForSelector('[data-l10-person="9"] [data-l10-line="avalanches"]', {timeout: 60000, state: 'attached'});
             assert.match(await line(9, 'avalanches'), /De son vivant, .* de Chamonix-Mont-Blanc : 1999 Montroc avalanche, le 9 février 1999 .* il avait 69 ans/);
         });
         await t('Léa MAZAUD (vivante) : rien n’est demandé en ligne ; pas de bloc vide', async () => {
-            const n = calls().length;
-            await open(8); await sleep(1500);
-            assert.strictEqual(calls().length, n, 'aucun appel en ligne');
+            await open(9); // la fiche d'avant a fini ses appels en ligne
+            const n0 = calls().length;
+            await open(8);
+            assert.strictEqual(calls().length, n0, 'aucun appel en ligne');
             const card = await p.$('[data-pblock="terre_gens"]');
             assert.ok(!card || await card.evaluate(el => el.hidden || !el.querySelector('.l10-line:not(:empty)') || /MAZAUD/.test(el.textContent)), 'seulement la carte du nom (calculée dans l’app)');
         });
@@ -235,12 +240,12 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         });
         await t('Réglages → ⛰️ Sa terre et ses gens : licences, liens seulement ; éteindre « volcans » le retire (↶ Annuler)', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'terre_gens'; A.setModule('maintenance'); });
-            await p.waitForSelector('[data-l10-settings] [data-l10-tg="volcans"] input', {timeout: 20000});
+            await p.waitForSelector('[data-l10-settings] [data-l10-tg="volcans"] input', {timeout: 60000});
             const s = await p.textContent('[data-l10-settings]');
             assert.match(s, /Licence Ouverte 2\.0/); assert.match(s, /CC0 1\.0/); assert.match(s, /CC BY-SA 4\.0/); assert.match(s, /Enquête permanente sur les avalanches/); assert.match(s, /Décès INSEE importés : 11 personnes/);
             await p.uncheck('[data-l10-tg="volcans"] input');
             assert.strictEqual(JSON.parse(await p.evaluate(() => localStorage.getItem('genealogie-terre-gens'))).volcans, false);
-            await open(1); await p.waitForSelector('[data-l10-person="1"] [data-l10-line="nom"]', {timeout: 20000});
+            await open(1); await p.waitForSelector('[data-l10-person="1"] [data-l10-line="nom"]', {timeout: 60000, state: 'attached'});
             assert.strictEqual(await p.$('[data-l10-person="1"] [data-l10-line="volcans"]'), null);
             await p.evaluate(() => localStorage.removeItem('genealogie-terre-gens'));
             const a = await api('l10t_about'); assert.ok(a.cache.count >= 3);
