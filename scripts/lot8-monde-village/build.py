@@ -356,7 +356,9 @@ def build_foires():
     out = []
     for x in by.values():
         if re.match(r'^Q\d+$', x['n']) or not x['ins']: continue
-        if re.search(r'\b(salon|festival|exposition universelle)\b', x['n'], re.I) and not re.search(r'foire', x['n'], re.I): continue
+        # seulement les foires au sens d'autrefois (foire, foirail, marché aux bestiaux…) : pas les salons, expositions, festivals
+        if not re.search(r"\bfoire|\bfoirail|march[ée] aux (bestiaux|chevaux|b[œo]e?ufs|veaux|bovins|ovins|mulets)|\bassemblade|\bfrairie|\bapport", x['n'], re.I): continue
+        if re.search(r'salon|exposition|festival|international[e]? (de l.|du|des) (livre|art)|comics|marché international', x['n'], re.I): continue
         e = ex.get(x['frwiki']) if x['frwiki'] else None
         la, lo = point(x.pop('coord'))
         if la is None and e and e.get('coord'): la, lo = e['coord']
