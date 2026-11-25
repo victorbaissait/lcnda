@@ -82,7 +82,9 @@ const PARIS = {lat: 48.8566, lon: 2.3522, km: 20, title: 'Paris', country: 'Fran
         const all = await E.query({years: {from: 2000, to: 2030, mode: 'overlap'}, limit: 500}), here = await E.query({near: PARIS, years: {from: 2000, to: 2030, mode: 'overlap'}, limit: 500});
         assert.ok(here.total > 10 && here.total < all.total, `${here.total} / ${all.total}`);
         assert.ok(here.rows.every(r => r.seen && r.local && r.pct != null && r._km >= 0));
-        assert.ok(!here.rows.some(r => r.id === 's2017-08-21'), 'la grande éclipse américaine de 2017 ne se voyait pas de Paris');
+        assert.ok(all.rows.some(r => r.id === 's2023-04-20') && !here.rows.some(r => r.id === 's2023-04-20'), 'l’éclipse hybride australienne de 2023 ne se voyait pas de Paris');
+        const us = here.rows.find(r => r.id === 's2017-08-21'); assert.ok(us && us.pct < 10 && us.pct > 0, 'la grande éclipse américaine de 2017 : à peine, au coucher du soleil');
+        assert.strictEqual(all.rows.find(r => r.id === 's2023-04-20').type, 'hybride');
         const big = await E.query({near: PARIS, years: {from: 2000, to: 2030, mode: 'overlap'}, filters: [{key: 'pct', op: 'gte', value: 90}], limit: 500});
         assert.ok(big.total > 0 && big.rows.every(r => r.pct >= 90));
     });
