@@ -91,6 +91,17 @@
     const labelOf = (source, model = '', page = '') => { const [ic, l] = SRC[source] || ['•', source]; return `${ic} ${T(l)}${model ? ` · ${String(model).replace(/\.(mlmodel|pt|safetensors)$/i, '').slice(0, 50)}` : ''}${page ? ` · ${page}` : ''}`; };
     const KEEP_KEY = 'genealogie-tx-garder-lectures';
     const keepOn = () => { try { return localStorage.getItem(KEEP_KEY) !== '0'; } catch (_) { return true; } };
+    /* ✍ « Ma lecture » (ligne par ligne) : sous les lectures de chaque ligne, une ligne à moi où je tape ma propre lecture (réglage, décoché au départ) */
+    const MA_KEY = 'genealogie-tx-cmp-ma-lecture', DRAFT_PREFIX = 'genealogie-tx-cmp-draft-';
+    const maOn = () => { try { return localStorage.getItem(MA_KEY) === '1'; } catch (_) { return false; } };
+    const setMa = on => { try { localStorage.setItem(MA_KEY, on ? '1' : '0'); } catch (_) {} };
+    /** 📑 « — page 2 — » : un repère, pas une ligne de l'acte (pas de « Ma lecture » pour lui) */
+    const PAGE_MARK = /^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/u, isSep = s => PAGE_MARK.test(String(s ?? '').trim());
+    /** les mots de ma lecture qu'aucune des lectures ne dit (pour les montrer, comme les autres) */
+    function myDiff(variants, mine, loose = false) {
+        const ws = tokens(mine), marks = variants.filter(v => String(v).trim()).map(v => diffWords(v, mine, loose));
+        return ws.map((w, k) => ({w, d: !marks.length || marks.every(m => m[k]?.d)}));
+    }
 
     /* ═════ la fenêtre ═════
      * ctx = {actId, title, current() → texte à l'écran, apply(texte, label) (le met dans l'acte, ↶), api, post, pick: [n° de version] cochées d'office} */
@@ -106,10 +117,17 @@
         (ctx.pick || []).forEach(id => { if (!readings.some(r => r.id === id)) { const v = list.find(x => x.id === id); if (v) readings.push(v); } });
         let chosen = ctx.pick?.length ? [0, ...ctx.pick.filter(id => readings.some(r => r.id === id))] : readings.filter(r => r.source && r.source !== 'now').slice(0, 3).map(r => r.id); if (!chosen.includes(0)) chosen.unshift(0); chosen = chosen.slice(0, 4);
         let base = 0, mode = 'word', loose = true, parts = [], rows = [], texts = [];
+        /* ✍ ma lecture : [{i, ref, text, on}] — gardée au brouillon (localStorage) jusqu'à « Mettre dans le texte » */
+        const DRAFT = DRAFT_PREFIX + ctx.actId;
+        let ma = maOn(), mine = [], savedBody = '';
+        try { const d = JSON.parse(localStorage.getItem(DRAFT) || 'null'); if (d && Array.isArray(d.mine)) { mine = d.mine.filter(e => e && typeof e.text === 'string').map(e => ({i: Number(e.i) || 0, ref: String(e.ref ?? ''), text: e.text, on: !!e.on})); savedBody = String(d.saved || ''); } } catch (_) { mine = []; }
+        const hasMine = () => mine.some(e => e.text.trim());
+        if (ma && hasMine()) mode = 'line';
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-txc'; dlg.dataset.ownClose = '1';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">⚖️ ${esc(T('Atelier de transcription'))} · ${esc(ctx.title || '')}</span><h2>${esc(T('Comparer les lectures'))}</h2></div><button type="button" class="icon-button" data-txc-x aria-label="${esc(T('Fermer'))}">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">⚖️ ${esc(T('Atelier de transcription'))} · ${esc(ctx.title || '')}</span><h2>${esc(T('Comparer les lectures'))}</h2></div><span class="h-txc-headbtns"><button type="button" class="button small secondary h-txc-maq" data-txc-maq aria-pressed="${ma}" title="${esc(T('Ma lecture : une ligne à moi sous chaque ligne (Tab ou Entrée : ligne suivante)'))}">✍<span> ${esc(T('Ma lecture'))}</span></button><button type="button" class="icon-button" data-txc-x aria-label="${esc(T('Fermer'))}">×</button></span></div>
             <div class="h-txc-body"><aside class="h-txc-side"><h4>${esc(T('Les lectures (2 à 4)'))}</h4><div data-txc-list></div>
-                <label class="ui-toggle h-txc-keep"><input type="checkbox" data-txc-keepon ${keepOn() ? 'checked' : ''}><i></i>${esc(T('Garder chaque nouvelle lecture (écriture à la main, IA, OCR)'))}</label></aside>
+                <label class="ui-toggle h-txc-keep"><input type="checkbox" data-txc-keepon ${keepOn() ? 'checked' : ''}><i></i>${esc(T('Garder chaque nouvelle lecture (écriture à la main, IA, OCR)'))}</label>
+                <label class="ui-toggle h-txc-keep"><input type="checkbox" data-txc-maon ${ma ? 'checked' : ''}><i></i>${esc(T('✍ Ajouter une ligne « Ma lecture » sous chaque ligne pour taper ma propre transcription'))}</label></aside>
             <section class="h-txc-main"><div class="h-txc-tools"><span class="segmented" role="radiogroup"><button type="button" data-txc-mode="word">${esc(T('Mot par mot'))}</button><button type="button" data-txc-mode="line">${esc(T('Ligne par ligne'))}</button></span>
                 <button type="button" class="button small secondary" data-txc-maj title="${esc(T('Partout : ce que le plus de lectures disent'))}">🗳 ${esc(T('La majorité'))}</button><button type="button" class="button small secondary" data-txc-ref>↺ ${esc(T('Tout comme la référence'))}</button>
                 <label class="ui-toggle"><input type="checkbox" data-txc-loose ${loose ? 'checked' : ''}><i></i>${esc(T('Ignorer majuscules, accents et ponctuation'))}</label>${imgs.length ? `<label class="ui-toggle"><input type="checkbox" data-txc-imgon ${imgOn() ? 'checked' : ''}><i></i>🖼 ${esc(T('L’image à côté'))}</label>` : ''}<span class="h-txc-count" data-txc-count></span></div>
@@ -140,7 +158,7 @@
         async function compute() {
             texts = await Promise.all(chosen.map(getBody));
             base = Math.min(base, chosen.length - 1);
-            if (mode === 'word') parts = merge(texts, {base, loose}); else rows = linesOf(texts, {base, loose});
+            if (mode === 'word') parts = merge(texts, {base, loose}); else { stash(); rows = linesOf(texts, {base, loose}); attachMine(); }
             paint();
         }
         function paint() {
@@ -151,44 +169,120 @@
                 const n = parts.filter(p => !p.same).length; $('[data-txc-count]').textContent = n ? T('{n} passages diffèrent', {n: String(n)}) : T('Les lectures disent la même chose');
                 out.innerHTML = `<div class="h-txc-text">${parts.map((p, i) => (p.same ? esc(p.text).replace(/\n/g, '<br>') : `<button type="button" class="h-txc-d${p.custom !== undefined ? ' is-custom' : ''}" data-txc-d="${i}" style="--c:${p.custom !== undefined ? '#6b6f76' : colorOf(chosen[p.pick])}" title="${esc(T('Les autres lectures : {v}', {v: p.opts.map((o, r) => `${nameOf(chosen[r])} : « ${o || '—'} »`).join(' · ')}))}">${esc(p.custom ?? p.opts[p.pick]) || '<i>∅</i>'}</button>`)).join(' ')}</div>`;
             } else {
-                const n = rows.filter(r => new Set(r.variants.map(v => key(v, loose).trim())).size > 1).length; $('[data-txc-count]').textContent = T('{n} lignes diffèrent sur {m}', {n: String(n), m: String(rows.length)});
-                out.innerHTML = `<table class="h-txc-lines"><tbody>${rows.map((r, i) => { const differ = new Set(r.variants.map(v => key(v, loose).trim())).size > 1;
-                    return `<tr class="${differ ? 'is-diff' : ''}"><td class="h-txc-n">${i + 1}</td><td>${differ ? r.variants.map((v, k) => `<label class="h-txc-lv${r.pick === k ? ' is-on' : ''}" style="--c:${colorOf(chosen[k])}"><input type="radio" name="txc-l${i}" data-txc-line="${i}|${k}" ${r.pick === k ? 'checked' : ''}><span>${k === base ? esc(v) : diffWords(r.variants[base], v, loose).map(x => (x.d ? `<mark>${esc(x.w)}</mark>` : esc(x.w))).join(' ')}</span></label>`).join('') : esc(r.variants[base])}</td></tr>`; }).join('')}</tbody></table>`;
+                const n = rows.filter(r => !r.sep && new Set(r.variants.map(v => key(v, loose).trim())).size > 1).length; $('[data-txc-count]').textContent = T('{n} lignes diffèrent sur {m}', {n: String(n), m: String(rows.filter(r => !r.sep).length)});
+                let num = 0;
+                out.innerHTML = `<table class="h-txc-lines${ma ? ' has-me' : ''}"><tbody>${rows.map((r, i) => { if (r.sep) return `<tr class="h-txc-sep"><td class="h-txc-n"></td><td>${esc(r.variants[base])}</td></tr>`;
+                    num++; const differ = new Set(r.variants.map(v => key(v, loose).trim())).size > 1, pk = pickOf(r);
+                    const reads = differ || ma ? r.variants.map((v, k) => `<label class="h-txc-lv${pk === k ? ' is-on' : ''}" style="--c:${colorOf(chosen[k])}"><input type="radio" name="txc-l${i}" data-txc-line="${i}|${k}" ${pk === k ? 'checked' : ''}><span>${k === base || !differ ? esc(v) : diffWords(r.variants[base], v, loose).map(x => (x.d ? `<mark>${esc(x.w)}</mark>` : esc(x.w))).join(' ')}</span></label>`).join('') : esc(r.variants[base]);
+                    const me = !ma ? '' : `<div class="h-txc-lv h-txc-me${pk === -1 ? ' is-on' : ''}" style="--c:${ME_COLOR}"><label class="h-txc-me-tag" title="${esc(T('Ma lecture'))}"><input type="radio" name="txc-l${i}" data-txc-line="${i}|-1" ${pk === -1 ? 'checked' : ''} aria-label="${esc(T('Ma lecture, ligne {n}', {n: String(num)}))}">✍<span> ${esc(T('Ma lecture'))}</span></label>`
+                        + `<span class="h-txc-me-f"><span class="h-txc-me-bk" aria-hidden="true">${backdrop(r)}</span><input type="text" data-txc-me="${i}" value="${esc(r.my.text)}" placeholder="${esc(T('ta lecture de la ligne {n}…', {n: String(num)}))}" aria-label="${esc(T('Ma lecture, ligne {n}', {n: String(num)}))}" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="next"></span>`
+                        + `<button type="button" class="h-txc-mecp" data-txc-mecp="${i}" title="${esc(T('Copier la lecture choisie dans ma lecture'))}">⇣<span> ${esc(T('copier'))}</span></button></div>`;
+                    return `<tr class="${differ ? 'is-diff' : ''}"><td class="h-txc-n">${num}</td><td>${reads}${me}</td></tr>`; }).join('')}</tbody></table>`;
             }
         }
-        const merged = () => (mode === 'word' ? textOf(parts) : rows.map(r => r.custom ?? r.variants[r.pick]).join('\n'));
+        /* ✍ ma lecture : la relier aux lignes (même ligne de la référence, sinon même place), la garder au brouillon, la remettre */
+        const ME_COLOR = '#b26a00';
+        const pickOf = r => (r.pick === -1 && !ma ? base : r.pick);
+        function attachMine() {
+            const pool = mine.slice(), take = k => pool.splice(k, 1)[0];
+            rows.forEach(r => { r.ref = r.variants[base]; r.sep = isSep(r.ref); r.my = null; });
+            rows.forEach(r => { if (r.sep) return; const k = pool.findIndex(e => e.ref === r.variants[base]); if (k >= 0) r.my = take(k); });
+            rows.forEach((r, i) => { if (r.sep || r.my) return; const k = pool.findIndex(e => e.i === i); if (k >= 0) r.my = take(k); });
+            rows.forEach(r => { if (r.sep) return; r.my = {text: r.my?.text || '', on: !!r.my?.on}; if (r.my.on) { r.prev = base; r.pick = -1; } });
+        }
+        function stash() {
+            if (!rows.length) return;
+            mine = rows.map((r, i) => (r.sep || !r.my || (!r.my.text && !r.my.on) ? null : {i, ref: r.ref, text: r.my.text, on: r.pick === -1})).filter(Boolean);
+        }
+        let draftT = 0;
+        const saveDraft = () => { clearTimeout(draftT); stash(); try { if (hasMine()) localStorage.setItem(DRAFT, JSON.stringify({at: Date.now(), mine, saved: savedBody})); else localStorage.removeItem(DRAFT); } catch (_) {} };
+        const saveDraftSoon = () => { clearTimeout(draftT); draftT = setTimeout(saveDraft, 300); };
+        /** le fond du champ : les mots qu'aucune lecture ne dit, surlignés (le texte tapé reste au-dessus, aligné) */
+        function backdrop(r) {
+            const text = r.my?.text || ''; if (!text) return '';
+            const marks = myDiff(r.variants, text, loose); let w = 0;
+            return text.split(/(\s+)/).map(x => (!x ? '' : /^\s+$/.test(x) ? esc(x) : (marks[w++]?.d ? `<mark>${esc(x)}</mark>` : esc(x)))).join('');
+        }
+        /** ce que dit ma lecture d'une ligne change : le champ, le fond, la case cochée (sans tout redessiner : le curseur reste) */
+        function setMine(i, text, {select = true} = {}) {
+            const r = rows[i]; if (!r || r.sep) return; r.my = r.my || {text: '', on: false}; r.my.text = text;
+            if (select && text.trim() && r.pick !== -1) { r.prev = r.pick; r.pick = -1; }
+            if (!text.trim() && r.pick === -1) r.pick = r.prev ?? base; // vidée : la lecture choisie avant
+            r.my.on = r.pick === -1;
+            const f = dlg.querySelector(`[data-txc-me="${i}"]`);
+            if (f) { if (f.value !== text) f.value = text; const bk = f.parentNode.querySelector('.h-txc-me-bk'); bk.innerHTML = backdrop(r); bk.scrollLeft = f.scrollLeft;
+                const td = f.closest('td'); td.querySelectorAll('[data-txc-line]').forEach(x => { const on = Number(x.dataset.txcLine.split('|')[1]) === r.pick; x.checked = on; x.closest('.h-txc-lv').classList.toggle('is-on', on); }); }
+            saveDraftSoon();
+        }
+        const fields = () => [...dlg.querySelectorAll('[data-txc-me]')];
+        const goField = (f, step) => { const all = fields(), to = all[all.indexOf(f) + step]; if (!to) return false; to.focus(); const n = to.value.length; try { to.setSelectionRange(n, n); } catch (_) {} to.scrollIntoView?.({block: 'nearest'}); return true; };
+        /** tout le texte de ma lecture : mes lignes, et pour les autres la lecture choisie (une lecture complète, gardée dans 🕘 Versions) */
+        const myBody = () => rows.map(r => (r.sep ? r.variants[base] : r.my?.text.trim() ? r.my.text.trim() : (r.custom ?? r.variants[pickOf(r) === -1 ? base : pickOf(r)]))).join('\n').trim();
+        /** ✍ en mettant dans le texte ou en fermant : ma lecture gardée comme une version (réglage « Garder chaque nouvelle lecture »), une fois */
+        async function keepMine() {
+            if (!ma || !keepOn() || !rows.length) return; stash(); if (!hasMine()) return;
+            const body = myBody(); if (!body || body === savedBody) return; savedBody = body;
+            try { await ctx.post('save_act_transcription_version', {act_id: ctx.actId, label: '✍ Ma lecture (Comparer)', body, data: {zones: [], people: [], meta: {from: T('Comparer les lectures')}}, auto: 0, source: 'mine'}); A().toast(T('Ma lecture gardée dans 🕘 Versions.')); }
+            catch (err) { savedBody = ''; A().toast(err.message, 'error'); }
+        }
+        const closeDlg = () => { saveDraft(); const k = keepMine().then(saveDraft); dlg.close(); dlg.parentNode?.removeChild(dlg); return k; };
+        const merged = () => (mode === 'word' ? textOf(parts) : rows.map(r => (pickOf(r) === -1 ? r.my?.text.trim() || '' : r.custom ?? r.variants[pickOf(r)])).join('\n'));
         function variantMenu(btn, i) {
             const p = parts[i], items = p.opts.map((o, r) => ({icon: r === p.pick && p.custom === undefined ? '✓' : '', label: `${o || T('(rien)')} — ${nameOf(chosen[r])}`, run: () => { p.pick = r; delete p.custom; paint(); }}));
             items.push('-', {icon: '✎', label: T('Écrire autrement…'), run: async () => { const v = await A().askText({title: T('Ce passage'), value: p.custom ?? p.opts[p.pick] ?? '', okLabel: T('Valider')}); if (v === null || v === undefined) return; p.custom = v.trim(); paint(); }});
             window.LCNDA_UI?.menuAt?.(btn, items, {title: T('Les lectures disent')});
         }
         dlg.addEventListener('click', async e => {
-            if (e.target.closest('[data-txc-x]')) { dlg.close(); dlg.parentNode?.removeChild(dlg); return; }
+            if (e.target.closest('[data-txc-x]')) return closeDlg();
+            if (e.target.closest('[data-txc-maq]')) return toggleMa(!ma);
+            const cp = e.target.closest('[data-txc-mecp]'); if (cp) return copyInto(Number(cp.dataset.txcMecp));
             const d = e.target.closest('[data-txc-d]'); if (d) return variantMenu(d, Number(d.dataset.txcD));
             const ip = e.target.closest('[data-txc-ipage]'); if (ip) return showPage(Number(ip.dataset.txcIpage));
             const zb = e.target.closest('[data-txc-z]'); if (zb) { const f = Number(zb.dataset.txcZ); if (!f) return fitImg(); return zoomAt(f > 0 ? 1.3 : 1 / 1.3, stage.clientWidth / 2, stage.clientHeight / 2); }
             const md = e.target.closest('[data-txc-mode]'); if (md) { mode = md.dataset.txcMode; return compute(); }
-            if (e.target.closest('[data-txc-maj]')) { if (mode === 'word') majority(parts, base, loose); else rows.forEach(r => { const cnt = new Map(); r.variants.forEach((v, k) => { const kk = key(v, loose).trim(); cnt.set(kk, [...(cnt.get(kk) || []), k]); }); let best = null; cnt.forEach(ks => { if (!best || ks.length > best.length || (ks.length === best.length && ks.includes(base))) best = ks; }); r.pick = best.includes(base) ? base : best[0]; }); return paint(); }
-            if (e.target.closest('[data-txc-ref]')) { parts.forEach(p => { p.pick = base; delete p.custom; }); rows.forEach(r => { r.pick = base; }); return paint(); }
-            if (e.target.closest('[data-txc-apply]')) { const txt = merged(); if (!txt.trim()) return A().toast(T('Le texte fusionné est vide.'), 'error'); await ctx.apply(txt, T('Avant « Fusion des lectures »')); dlg.close(); dlg.parentNode?.removeChild(dlg); return; }
+            if (e.target.closest('[data-txc-maj]')) { if (mode === 'word') majority(parts, base, loose); else rows.forEach(r => { const cnt = new Map(); r.variants.forEach((v, k) => { const kk = key(v, loose).trim(); cnt.set(kk, [...(cnt.get(kk) || []), k]); }); let best = null; cnt.forEach(ks => { if (!best || ks.length > best.length || (ks.length === best.length && ks.includes(base))) best = ks; }); r.pick = best.includes(base) ? base : best[0]; if (r.my) r.my.on = false; }); saveDraft(); return paint(); }
+            if (e.target.closest('[data-txc-ref]')) { parts.forEach(p => { p.pick = base; delete p.custom; }); rows.forEach(r => { r.pick = base; if (r.my) r.my.on = false; }); saveDraft(); return paint(); }
+            if (e.target.closest('[data-txc-apply]')) { const txt = merged(); if (!txt.trim()) return A().toast(T('Le texte fusionné est vide.'), 'error'); await keepMine(); await ctx.apply(txt, T('Avant « Fusion des lectures »')); clearTimeout(draftT); try { localStorage.removeItem(DRAFT); } catch (_) {} dlg.close(); dlg.parentNode?.removeChild(dlg); return; }
             if (e.target.closest('[data-txc-save]')) { const txt = merged(); try { await ctx.post('save_act_transcription_version', {act_id: ctx.actId, label: labelOf('merge', chosen.map(nameOf).map(x => x.replace(/^\S+\s/, '')).join(' + ').slice(0, 80)), body: txt, data: {zones: [], people: []}, auto: 0, source: 'merge'}); A().toast(T('Fusion gardée dans 🕘 Versions (une lecture de plus).')); } catch (err) { A().toast(err.message, 'error'); } }
         });
         dlg.addEventListener('change', e => {
             const pk = e.target.closest('[data-txc-pick]'), bs = e.target.closest('[data-txc-base]'), ln = e.target.closest('[data-txc-line]');
             if (pk) { const id = Number(pk.dataset.txcPick), refId = chosen[base]; if (pk.checked && !chosen.includes(id)) chosen.push(id); if (!pk.checked) chosen = chosen.filter(x => x !== id); base = Math.max(0, chosen.indexOf(refId)); paintList(); compute(); }
             if (bs) { base = chosen.indexOf(Number(bs.dataset.txcBase)); compute(); }
-            if (ln) { const [i, k] = ln.dataset.txcLine.split('|').map(Number); rows[i].pick = k; paint(); }
+            if (ln) { const [i, k] = ln.dataset.txcLine.split('|').map(Number), r = rows[i]; if (k === -1 && r.pick !== -1) r.prev = r.pick; r.pick = k; if (r.my) r.my.on = k === -1; saveDraft(); paint(); if (k === -1) dlg.querySelector(`[data-txc-me="${i}"]`)?.focus(); }
+            if (e.target.closest('[data-txc-maon]')) toggleMa(e.target.checked);
             if (e.target.closest('[data-txc-loose]')) { loose = e.target.checked; compute(); }
             if (e.target.closest('[data-txc-imgon]')) { try { localStorage.setItem(IMG_KEY, e.target.checked ? '1' : '0'); } catch (_) {} $('[data-txc-img]').hidden = !e.target.checked; dlg.querySelector('.h-txc-split').classList.toggle('has-img', e.target.checked); if (e.target.checked) requestAnimationFrame(fitImg); }
             if (e.target.closest('[data-txc-keepon]')) { try { localStorage.setItem(KEEP_KEY, e.target.checked ? '1' : '0'); } catch (_) {} }
         });
-        dlg.addEventListener('cancel', e => { e.preventDefault(); dlg.close(); dlg.parentNode?.removeChild(dlg); });
+        dlg.addEventListener('cancel', e => { e.preventDefault(); closeDlg(); });
+        /* ✍ ma lecture : taper la choisit ; Tab, Entrée, ↓ : la ligne suivante ; Maj+Tab, ↑ : la précédente */
+        dlg.addEventListener('input', e => { const f = e.target.closest('[data-txc-me]'); if (f) setMine(Number(f.dataset.txcMe), f.value); });
+        dlg.addEventListener('scroll', e => { const f = e.target.closest?.('[data-txc-me]'); if (f) f.parentNode.querySelector('.h-txc-me-bk').scrollLeft = f.scrollLeft; }, true);
+        dlg.addEventListener('keydown', e => {
+            const f = e.target.closest?.('[data-txc-me]'); if (!f || e.isComposing || e.altKey || e.ctrlKey || e.metaKey) return;
+            const step = e.key === 'Enter' || e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey) ? 1 : e.key === 'ArrowUp' || (e.key === 'Tab' && e.shiftKey) ? -1 : 0;
+            if (step && (goField(f, step) || e.key !== 'Tab')) e.preventDefault();
+        });
+        function toggleMa(on) {
+            ma = !!on; setMa(ma); const cb = $('[data-txc-maon]'); if (cb) cb.checked = ma; $('[data-txc-maq]').setAttribute('aria-pressed', String(ma));
+            if (ma && mode !== 'line') { mode = 'line'; return compute().then(() => fields()[0]?.focus()); }
+            paint(); if (ma) fields()[0]?.focus();
+        }
+        /** ⇣ copier : la lecture choisie de cette ligne dans ma lecture (ce que j'avais tapé : ↶ Annuler) */
+        function copyInto(i) {
+            const r = rows[i]; if (!r || r.sep) return; const from = r.pick === -1 ? (r.prev ?? base) : r.pick, txt = r.custom ?? r.variants[from] ?? '', old = r.my?.text || '', oldPick = r.pick;
+            setMine(i, txt); const f = dlg.querySelector(`[data-txc-me="${i}"]`); f?.focus();
+            if (old.trim() && old !== txt) A().undoToast?.(T('Ma lecture de la ligne {n} remplacée', {n: String(rows.slice(0, i + 1).filter(x => !x.sep).length)}), {icon: '✍',
+                undo: () => { setMine(i, old); if (dlg.isConnected) { rows[i].pick = oldPick; rows[i].my.on = oldPick === -1; paint(); } saveDraft(); }, redo: () => setMine(i, txt)});
+        }
         dlg.querySelector('.h-txc-split').classList.toggle('has-img', !!imgs.length && imgOn());
         paintList(); await compute();
+        if (ma && hasMine()) A().toast?.(T('Ta lecture reprise là où tu l’avais laissée.'));
         return dlg;
     }
 
-    ext.txCompare = {tokens, align, merge, majority, textOf, linesOf, diffWords, labelOf, keepOn, open, KEEP_KEY};
+    ext.txCompare = {tokens, align, merge, majority, textOf, linesOf, diffWords, myDiff, isSep, labelOf, keepOn, maOn, open, KEEP_KEY, MA_KEY};
     if (typeof module === 'object' && module.exports) module.exports = ext.txCompare;
     if (typeof document !== 'undefined' && !document.getElementById('h-txc-css')) { const st = document.createElement('style'); st.id = 'h-txc-css'; st.textContent = `
 .h-txc{width:min(1300px,96vw);max-width:none}
