@@ -25,7 +25,7 @@ const { findPhp, devBundledPhp, phpRuntimeArgs } = require('../electron/php-serv
 const appRoot = path.resolve(__dirname, '..');
 const phpPath = findPhp([devBundledPhp()]);
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-f567-'));
-const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1' });
+const envFor = d => ({ ...process.env, GENEALOGY_DATA_DIR: d, GENEALOGY_MEDIA_DIR: path.join(d, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4' });
 fs.mkdirSync(path.join(tmp, 'media'), { recursive: true });
 const shots = process.env.F567_SHOTS || '';
 {

@@ -54,7 +54,7 @@
         // la fenêtre change de taille (contenu ajouté, onglet changé) : elle se replace pour rester dans l'écran
         const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => place()) : null; ro?.observe(el);
         const outside = e => { if (!el.contains(e.target) && !anchor.contains(e.target)) close(); };
-        const key = e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); anchor.focus?.(); } };
+        const key = e => { if (e.key === 'Escape') { if (el.contains(e.target) && e.target.matches?.('.ui-choice-q') && e.target.value) return; /* Échap dans « Chercher un choix » : vide d'abord la case (choiceList), puis ferme */ e.preventDefault(); e.stopPropagation(); close(); anchor.focus?.(); } };
         const close = () => {
             if (openPop?.el !== el) return; openPop = null;
             document.removeEventListener('pointerdown', outside, true); document.removeEventListener('keydown', key, true); removeEventListener('resize', place); ro?.disconnect();
