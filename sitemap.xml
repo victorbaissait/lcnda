@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>carnet-numerique-des-ancetres.php</loc>
+    <lastmod>2026-11-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="carnet-numerique-des-ancetres.php"/>
+    <xhtml:link rel="alternate" hreflang="en" href="carnet-numerique-des-ancetres-en.php"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="carnet-numerique-des-ancetres.php"/>
+  </url>
+  <url>
+    <loc>carnet-numerique-des-ancetres-en.php</loc>
+    <lastmod>2026-11-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr" href="carnet-numerique-des-ancetres.php"/>
+    <xhtml:link rel="alternate" hreflang="en" href="carnet-numerique-des-ancetres-en.php"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="carnet-numerique-des-ancetres.php"/>
+  </url>
+  <url>
+    <loc>llms.txt</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>llms-full.txt</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+  <url>
+    <loc>llms-full-en.txt</loc>
+    <lastmod>2026-11-22</lastmod>
+  </url>
+</urlset>
