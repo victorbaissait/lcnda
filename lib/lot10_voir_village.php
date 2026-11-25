@@ -298,7 +298,7 @@ function l10v_visible(float $z0, array $dists, array $zs, float $targetTop): arr
         $a = ($zs[$i] - l10v_drop($dists[$i]) - $eye) / $dists[$i];
         if ($a > $maxAng) { $maxAng = $a; }
     }
-    return ['visible' => $maxAng <= $tAng + 0.0004, 'angle' => rad2deg(atan($tAng)), 'margin' => $maxAng === -INF ? null : rad2deg(atan($tAng) - atan($maxAng))];
+    return ['visible' => $maxAng <= $tAng + 0.0001, 'angle' => rad2deg(atan($tAng)), 'margin' => $maxAng === -INF ? null : rad2deg(atan($tAng) - atan($maxAng))];
 }
 function l10v_vue(PDO $pdo, array $q): array
 {

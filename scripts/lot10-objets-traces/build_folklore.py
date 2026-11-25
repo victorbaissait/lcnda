@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""🎻 Lot 10 — Contes et chansons recueillis par les folkloristes du XIXe siècle (assets/data/l10-folklore.json.gz).
+"""🎻 Lot 10 — Contes et chansons recueillis par les folkloristes du XIXe siècle (assets/data/l10o-folklore.json.gz).
 
 Source : fr.wikisource.org (textes du DOMAINE PUBLIC : les auteurs sont morts avant 1930 ; la mise en page de Wikisource est sous
 CC BY-SA 4.0). On garde seulement : le titre, le recueil, le folkloriste, et la phrase du texte qui dit où et par qui le conte ou la
@@ -28,7 +28,6 @@ WORKS = [
     ('Littérature orale de la Haute-Bretagne', 'Paul Sébillot', 1918, (1878, 1881), ['22', '35', '44', '56'], 'conte', ''),
     ('Contes populaires de la Gascogne', 'Jean-François Bladé', 1900, (1860, 1886), ['32', '47', '40', '82', '31', '65', '33', '64'], 'conte', ''),
     ('Littérature orale de la Picardie', 'Henry Carnoy', 1930, (1875, 1883), ['80', '60', '02', '62'], 'conte', ''),
-    ('Littérature orale de la Basse-Normandie', 'Jean Fleury', 1894, (1870, 1883), ['50', '14', '61'], 'conte', ''),
     ('Légendes rustiques', 'George Sand', 1876, (1830, 1858), ['36', '18', '23'], 'légende', 'Légendes du Berry racontées par George Sand (pas un relevé mot à mot).'),
     ('Barzaz Breiz', 'Théodore Hersart de La Villemarqué', 1895, (1833, 1867), ['29', '22', '56'], 'chanson', 'Chants bretons publiés par La Villemarqué : il les a souvent arrangés, l’authenticité de certains est discutée.'),
 ]
@@ -72,7 +71,13 @@ ATTR = lambda a, k: (re.search(k + r'\s*=\s*"?([^"\s/>]+)"?', a) or [None, None]
 
 def plain(w):
     w = re.sub(r'<noinclude>.*?</noinclude>', ' ', w, flags=re.S)
-    w = re.sub(r'\{\{(?:[^{}]|\{\{[^{}]*\}\})*\}\}', ' ', w)  # modèles
+    # modèles : la mise en forme ({{d|Conté par …}}, {{sc|…}}, {{taille|…|90}}) garde son texte, le reste s'en va
+    drop = re.compile(r'^\s*(textquality|sectionnav|nr|rh|ref|refl|interligne|separateur|séparateur|—|t3|t2|t4|lang|img|image|vertical|numérotation)\s*$', re.I)
+    for _ in range(6):
+        w2 = re.sub(r'\{\{([^{}|]*)(?:\|([^{}]*))?\}\}', lambda m: '' if drop.match(m.group(1)) or m.group(2) is None else ' ' + m.group(2).split('|')[0] + ' ', w)
+        if w2 == w:
+            break
+        w = w2
     w = re.sub(r'\[\[(?:[^|\]]*\|)?([^\]]*)\]\]', r'\1', w)
     w = re.sub(r'<[^>]+>', ' ', w)
     w = re.sub(r"'{2,}", '', w)
@@ -93,11 +98,16 @@ def section(w, name):
 # « Recueilli à Plouaret » ; « (Chanté par …, de Plufur, 1868) »
 WHO = r'(?:Cont[ée]e?s?|Dit|Dite|Chant[ée]e?|Recueilli|Recueillie|Narr[ée]e?|Racont[ée]e?|Dict[ée]e?|Entendu|Communiqu[ée]e?)'
 PAT = re.compile(WHO + r'[^.\n]{0,160}?\b(?:de|à|a|au|en)\s+((?:Saint|Sainte|Le|La|Les|L’|L\')?[-\s]?[A-ZÉÈÂÎÔ][\w’\'éèêëàâîïôöûüç-]+(?:[-\s](?:sur|sous|en|de|du|des|lès|les|la|le|aux|d’)?[-\s]?[A-ZÉÈÂÎÔ]?[\w’\'éèêëàâîïôöûüç-]+){0,4})')
-YEAR = re.compile(r'\b(1[78]\d\d)\b')
+YEAR = re.compile(r'(?<!\d)(1[78]\d\d)(?!\d)')
 
 
 def place_of(sentence, deps):
-    """le premier nom de la phrase qui est une commune des départements du recueil"""
+    """le premier nom de la phrase qui est une commune des départements du recueil (« X, commune de Y » : Y d'abord)"""
+    c = re.search(r'commune d[e’\']\s*((?:Saint|Sainte|Le|La|Les)?[-\s]?[A-ZÉÈÂÎÔ][\w’\'éèêëàâîïôöûüç-]+)', sentence)
+    if c:
+        hits = [h for h in NAMES.get(FOLD2(c.group(1)), []) if h[0][:2] in deps]
+        if hits:
+            return hits[0]
     for m in PAT.finditer(sentence):
         words = re.split(r'(\s+)', m.group(1).strip())
         cand = m.group(1).strip()
@@ -158,7 +168,10 @@ def main():
             row = {'t': name, 'w': base, 'url': WS + t.replace(' ', '_'), 'k': kind}
             if hit:
                 x, (insee, nom, lat, lon) = hit
-                x = re.sub(r'\s+', ' ', x).strip(' ()[]')
+                x = re.sub(r'\s+', ' ', x)
+                w0 = re.search(WHO, x)
+                x = x[w0.start():] if w0 else x  # la phrase commence à « Conté par… » (pas la fin du conte)
+                x = x.strip(' ()[]')
                 if len(x) > 220:
                     x = x[:219].rsplit(' ', 1)[0] + '…'
                 y = YEAR.search(x)
@@ -175,10 +188,10 @@ def main():
             'note': 'Le lieu vient de la phrase du texte (« Conté par …, de … ») ; quand il n’y en a pas, seul le recueil et sa région sont connus.'}
     fields = ['t', 'w', 'url', 'k', 'q', 'insee', 'p', 'lat', 'lon', 'y']
     out = {**meta, 'works': works, 'fields': fields, 'rows': [[r.get(k) for k in fields] for r in rows]}
-    p = os.path.join(OUT, 'l10-folklore.json.gz')
+    p = os.path.join(OUT, 'l10o-folklore.json.gz')
     with gzip.GzipFile(p, 'wb', mtime=0, compresslevel=9) as f:
         f.write(json.dumps(out, ensure_ascii=False, separators=(',', ':')).encode())
-    print(f'l10-folklore : {len(rows)} textes, {sum(1 for r in rows if r.get("insee"))} placés, {os.path.getsize(p)} octets')
+    print(f'l10o-folklore : {len(rows)} textes, {sum(1 for r in rows if r.get("insee"))} placés, {os.path.getsize(p)} octets')
 
 
 if __name__ == '__main__':

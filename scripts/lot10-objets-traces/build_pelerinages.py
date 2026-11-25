@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""🕯️ Lot 10 — Les lieux de pèlerinage de France et des pays voisins (assets/data/l10-pelerinages.json.gz).
+"""🕯️ Lot 10 — Les lieux de pèlerinage de France et des pays voisins (assets/data/l10o-pelerinages.json.gz).
 
 Source : Wikidata (CC0 1.0), service SPARQL query.wikidata.org. Gardé : les éléments dont la NATURE (P31) est « lieu de pèlerinage »
 (Q15135589), « sanctuaire » (Q697295, Q29553), « sanctuaire marial » (Q840482), « pèlerinage » (Q1644573), « pardon » (Q1582987) ou
@@ -78,11 +78,11 @@ def main():
             'what': 'Lieux de pèlerinage, sanctuaires, pardons et basiliques mineures avec une position (Wikidata) : France, Belgique, Suisse, Luxembourg, Monaco',
             'fields': fields, 'rows': [[r[k] for k in fields] for r in out]}
     os.makedirs(OUT, exist_ok=True)
-    p = os.path.join(OUT, 'l10-pelerinages.json.gz')
+    p = os.path.join(OUT, 'l10o-pelerinages.json.gz')
     with gzip.GzipFile(p, 'wb', mtime=0, compresslevel=9) as f:
         f.write(json.dumps(meta, ensure_ascii=False, separators=(',', ':')).encode())
     from collections import Counter
-    print(f'l10-pelerinages : {len(out)} lieux {dict(Counter(r["kind"] for r in out))}, {os.path.getsize(p)} octets')
+    print(f'l10o-pelerinages : {len(out)} lieux {dict(Counter(r["kind"] for r in out))}, {os.path.getsize(p)} octets')
 
 
 if __name__ == '__main__':

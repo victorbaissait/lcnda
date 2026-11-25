@@ -24,8 +24,8 @@ const L10T_TTL = ['risques' => 90 * 86400, 'marche' => 365 * 86400, 'parcelle' =
 const L10T_KIND = ['BIRT' => 'birth', 'CHR' => 'bapt', 'BAPM' => 'bapt', 'MARR' => 'marriage', 'MRCI' => 'marriage', 'MRRE' => 'marriage', 'DEAT' => 'death', 'BURI' => 'burial',
     'RESI' => 'resi', 'CENS' => 'resi', 'OCCU' => 'occu', 'EMIG' => 'emig', 'IMMI' => 'immi', 'NATU' => 'natu'];
 /** pays reconnus (texte du champ « pays » du lieu) → code */
-const L10T_COUNTRY = ['fr' => '/^(fr|fra|france)$/i', 'dz' => '/alg[ée]rie|algeria/i', 'ca' => '/canada|qu[ée]bec|nouvelle[- ]france/i', 'ch' => '/suisse|switzerland|schweiz|svizzera/i',
-    'us' => '/[ée]tats[- ]unis|united states|^usa$|^u\.s\.a?\.?$|am[ée]rique/i', 'be' => '/belgique|belgium/i', 'it' => '/italie|italy/i'];
+const L10T_COUNTRY = ['fr' => '/^(fr|fra|france)$/iu', 'dz' => '/alg[ée]rie|algeria/iu', 'ca' => '/canada|qu[ée]bec|nouvelle[- ]france/iu', 'ch' => '/suisse|switzerland|schweiz|svizzera/iu',
+    'us' => '/[ée]tats[- ]unis|united states|^usa$|^u\.s\.a?\.?$|am[ée]rique/iu', 'be' => '/belgique|belgium/iu', 'it' => '/italie|italy/iu'];
 
 /* ═════════════════════ cache, réseau ═════════════════════ */
 
@@ -104,7 +104,7 @@ function l10t_fold(string $s): string
 function l10t_country(string $country, string $county = ''): string
 {
     foreach (L10T_COUNTRY as $code => $re) { if ($country !== '' && preg_match($re, $country)) { return $code; } }
-    if ($country === '' && preg_match('/qu[ée]bec/i', $county)) { return 'ca'; }
+    if ($country === '' && preg_match('/qu[ée]bec/iu', $county)) { return 'ca'; }
     return '';
 }
 
@@ -235,6 +235,26 @@ function l10t_risques(array $q): array
                 'lat' => is_numeric($r['latitude'] ?? null) ? (float) $r['latitude'] : null, 'lon' => is_numeric($r['longitude'] ?? null) ? (float) $r['longitude'] : null];
         }
         return ['insee' => $insee, 'mvt' => $mvt, 'mvt_total' => (int) ($m['results'] ?? count($mvt)), 'cav' => $cav, 'cav_total' => (int) ($c['results'] ?? count($cav)), 'url_mvt' => $urlM, 'url_cav' => $urlC];
+    });
+}
+
+/** GET l10t_risques_near&lat=&lon=&km=&which=mvt|cav : la liste « autour d'un point » (Listes → Données), 10 km au plus */
+function l10t_risques_near(array $q): array
+{
+    if (!is_numeric($q['lat'] ?? null) || !is_numeric($q['lon'] ?? null)) { throw new LcndaBadInput('Choisis un lieu.'); }
+    $lat = round((float) $q['lat'], 4); $lon = round((float) $q['lon'], 4); $r = (int) max(500, min(10000, round((float) ($q['km'] ?? 5) * 1000)));
+    $which = ($q['which'] ?? '') === 'cav' ? 'cavites' : 'mvt';
+    $url = L10T_GR . $which . '?' . http_build_query(['latlon' => $lon . ',' . $lat, 'rayon' => $r, 'page_size' => 500]);
+    return l10t_cached('risques', "near:$which:$lat,$lon,$r", !empty($q['fresh']), static function () use ($url, $which) {
+        $j = json_decode(l10t_http(($which === 'mvt' ? 'mvt' : 'cav') . '-near', $url), true);
+        if (!is_array($j)) { throw new RuntimeException(i18n_t('Réponse de Géorisques illisible.')); }
+        $rows = [];
+        foreach ($j['data'] ?? [] as $x) {
+            $d = (string) ($x['date_debut'] ?? '');
+            $rows[] = ['type' => (string) ($x['type'] ?? ''), 'date' => $d, 'year' => preg_match('/^(\d{4})/', $d, $m) ? (int) $m[1] : null, 'lieu' => trim((string) ($x['lieu'] ?? '')), 'nom' => trim((string) ($x['nom'] ?? '')),
+                'insee' => (string) ($x['code_insee'] ?? ''), 'fiab' => (string) ($x['fiabilite'] ?? ''), 'lat' => is_numeric($x['latitude'] ?? null) ? (float) $x['latitude'] : null, 'lon' => is_numeric($x['longitude'] ?? null) ? (float) $x['longitude'] : null];
+        }
+        return ['rows' => $rows, 'total' => (int) ($j['results'] ?? count($rows)), 'url' => $url];
     });
 }
 
@@ -392,6 +412,7 @@ function l10t_api_get(PDO $pdo, string $action, array $q): array
         'l10t_person' => l10t_person($pdo, $q),
         'l10t_place' => l10t_place($pdo, $q),
         'l10t_risques' => l10t_risques($q),
+        'l10t_risques_near' => l10t_risques_near($q),
         'l10t_nom' => l10t_nom($pdo, $q),
         'l10t_marche' => l10t_marche($q),
         'l10t_parcelle' => l10t_parcelle($pdo, $q),
