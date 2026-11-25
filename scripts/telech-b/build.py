@@ -41,7 +41,7 @@ OSM = {'source': 'OpenStreetMap (© les contributeurs d’OpenStreetMap)', 'lice
 WD_KINDS = {
     'croix': {'Q2309609': 'croix', 'Q371752': 'calvaire'},
     'eau': {'Q1690211': 'lavoir', 'Q43483': 'puits', 'Q556186': 'puits', 'Q483453': 'fontaine'},
-    'village': {'Q5153962': 'four', 'Q948878': 'pigeonnier'},
+    'village': {'Q5153962': 'four', 'Q798436': 'four', 'Q948878': 'pigeonnier'},
     'bornes': {'Q921099': 'borne', 'Q138783271': 'octroi', 'Q110453637': 'octroi', 'Q218653': 'douane'},
     'berger': {'Q1168568': 'draille', 'Q2928590': 'buron', 'Q1317595': 'cabane'},
     'cultes': {'Q56242063': 'temple', 'Q34627': 'synagogue', 'Q96376027': 'synagogue'},

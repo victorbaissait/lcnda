@@ -52,7 +52,7 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             assert.strictEqual((await bByName('Famille MAZAUD')).total, 5);
         });
         await t('« Garder dans le panier » demande lequel (le dernier utilisé en premier) ; « ＋ Nouveau panier… » (nom, emoji, une ligne)', async () => {
-            await B.openInv(1); await p.evaluate(() => window.LCNDA_EXT.connexions.openTake({tab: 'place'})); await p.waitForSelector('.cx-take [data-cx-res] .cx-rlist li', {timeout: 15000});
+            await B.openInv(1); await p.evaluate(() => window.LCNDA_EXT.connexions.openTake({tab: 'place'})); await p.waitForSelector('.cx-take [data-cx-q]'); await p.fill('.cx-take [data-cx-q]', 'Treignac'); await p.waitForSelector('.cx-take [data-cx-res] .cx-rlist li', {timeout: 15000});
             await p.locator('.cx-take .cx-rlist li').first().locator('input').check();
             await p.click('.cx-take [data-cx-tobasket]'); await p.waitForSelector('.ui-actmenu');
             assert.match(await p.textContent('.ui-actmenu'), /Dans quel panier/); assert.match(await p.textContent('.ui-actmenu'), /Famille MAZAUD › Mariage 1813 › Témoins/);
@@ -68,8 +68,8 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             await view();
             assert.match(await p.textContent('.cx-bview .cx-tk-say'), /5 éléments dont 4 dans les sous-paniers/);
             assert.strictEqual(await p.locator('.cx-bview .cx-bnode').count(), 2);
-            await p.click(`.cx-bview [data-cx-btog="${mar}"]`); assert.ok(await p.locator(`.cx-bview [data-cx-bn="${mar}"] > .cx-bbody`).isHidden());
-            await p.click(`.cx-bview [data-cx-btog="${mar}"]`); assert.ok(await p.locator(`.cx-bview [data-cx-bn="${tem}"]`).isVisible());
+            await p.click(`.cx-bview [data-cx-btog="${mar}"]`); await sleep(500); assert.ok(await p.locator(`.cx-bview [data-cx-bn="${mar}"] > .cx-bbody`).isHidden());
+            await p.click(`.cx-bview [data-cx-btog="${mar}"]`); await sleep(500); assert.ok(await p.locator(`.cx-bview [data-cx-bn="${tem}"]`).isVisible());
             const li = p.locator('.cx-bview [data-cx-vi]', {hasText: 'Moulin de Treignac'});
             await li.locator('[data-cx-vdone]').check(); await p.waitForSelector('.cx-bview [data-cx-vi].is-done');
             await p.locator('.cx-bview [data-cx-vi]', {hasText: 'Moulin de Treignac'}).locator('[data-cx-vnote]').fill('voir le cadastre'); await p.keyboard.press('Tab'); await sleep(500);

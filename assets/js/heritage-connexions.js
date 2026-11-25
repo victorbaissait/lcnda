@@ -320,7 +320,7 @@
             const b = await api('cx_basket', {basket_id: curBasket(), tree: 1}); basket = null; baskets = b.baskets; if (!dlg.isConnected) return;
             const items = b.items || [], x = bOf(b, b.basket_id) || {}, own = items.filter(it => Number(it.basket_id) === Number(b.basket_id));
             const sel = items.filter(it => vs.picked.has(Number(it.id)));
-            dlg.innerHTML = `<form method="dialog" class="cx-tk"><header class="cx-tk-head"${x.color ? ` style="box-shadow: inset 6px 0 0 ${esc(x.color)}"` : ''}><div class="cx-tk-ht"><span class="cx-eyebrow">🧺 ${esc(T('Panier'))}</span>
+            const html = `<form method="dialog" class="cx-tk"><header class="cx-tk-head"${x.color ? ` style="box-shadow: inset 6px 0 0 ${esc(x.color)}"` : ''}><div class="cx-tk-ht"><span class="cx-eyebrow">🧺 ${esc(T('Panier'))}</span>
                     <h2 id="cx-bview-h">${basketSelect(b, 'data-cx-vsel')}</h2><p class="cx-tk-say">${basketMeta(b)}</p></div>
                     <button type="button" class="cx-b is-ter is-sm" data-cx-vedit>✎ ${esc(T('Modifier'))}</button><button type="button" class="cx-x" data-cx-x aria-label="${esc(T('Fermer'))}">×</button></header>
                 <div class="cx-put-body cx-btree" data-cx-btree>${vs.pick ? `<div class="cx-pickbar"><b>${esc(T('Coche ce que tu mets : des éléments, ou des sous-paniers entiers.'))}</b><button type="button" class="cx-b is-sec is-sm" data-cx-pall>☑ ${esc(T('Tout'))}</button><button type="button" class="cx-b is-ter is-sm" data-cx-pnone>${esc(T('Rien'))}</button></div>` : ''}
@@ -330,6 +330,8 @@
                     ${vs.pick ? `<button type="button" class="cx-b is-ter" data-cx-vpick>${esc(T('Annuler le choix'))}</button><button type="button" class="cx-b is-pri" data-cx-vputsel ${sel.length ? '' : 'disabled'}><span>📍 ${esc(T(sel.length > 1 ? 'Mettre les {n} cochés dans…' : 'Mettre le coché dans…', {n: nf(sel.length)}))}</span></button>`
                     : `<button type="button" class="cx-b is-ter" data-cx-vdup>⧉ ${esc(T('Dupliquer'))}</button>${(b.baskets || []).length > 1 ? `<button type="button" class="cx-b is-ter" data-cx-vdel>🗑 ${esc(T('Supprimer'))}</button>` : ''}<button type="button" class="cx-b is-sec" data-cx-vpick ${items.length ? '' : 'disabled'}>☑ ${esc(T('Choisir…'))}</button>
                     <button type="button" class="cx-b is-pri" data-cx-vput ${items.length ? '' : 'disabled'}><span>📍 ${esc(T('Mettre tout dans…'))}</span></button>`}</div></footer></form>`;
+            // seul le formulaire est redessiné : un message « ↶ Annuler » posé dans la fenêtre reste là
+            const tpl = document.createElement('template'); tpl.innerHTML = html; const old = dlg.querySelector(':scope > form'); if (old) old.replaceWith(tpl.content.firstElementChild); else dlg.prepend(tpl.content.firstElementChild);
             setMixed(dlg);
             const byId = id => items.find(y => Number(y.id) === Number(id)), q = sl => dlg.querySelector(sl);
             const dests = x.dests || [];
