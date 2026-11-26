@@ -117,6 +117,7 @@
         return H().render?.(++st.workspaceToken);
     }
     const current = () => cur;
+    if (/^#donnees(\/|$)/.test(location.hash)) hash(); // un lien direct, au démarrage (app.js a pu demander l'adresse avant que ce fichier soit là)
     /** l'écran de l'onglet : la page ouverte (même moteur que Listes), sinon le récap / les thèmes (app-donnees-accueil.js) */
     function wrapRender() {
         const home = ext.dataHome; if (!home || home.render?.__dno) return !!home;

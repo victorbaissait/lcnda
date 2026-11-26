@@ -2581,7 +2581,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         if(module==='maintenance')return `#maintenance/${encodeURIComponent(state.maintenanceTab||'issues')}`;
         if(module==='dashboard'&&state.dashboardBoard)return `#dashboard/${encodeURIComponent(state.dashboardBoard)}`;
         if(module==='documents'||module==='catalogue'){const h=window.LCNDA_EXT?.onglets?.[module]?.hash?.();if(h)return h;}
-        if(module==='donnees'){const h=window.LCNDA_EXT?.donneesOnglet?.hash?.();if(h)return h;} // 📊 « #donnees/data_theme_guerres » (app-donnees-onglet.js) // 📄 « #documents/12 », 🎨 « #catalogue/45/301 »
+        if(module==='donnees'){const h=window.LCNDA_EXT?.donneesOnglet?.hash?.()||(/^#donnees\/[\w%-]{1,160}$/.test(location.hash)?location.hash:'');if(h)return h;} // 📊 « #donnees/data_theme_guerres » (app-donnees-onglet.js) // 📄 « #documents/12 », 🎨 « #catalogue/45/301 »
         if(module==='personnes'&&Number(state.currentPersonId)){const id=Number(state.currentPersonId),sh=state.sheetHash;return `#personnes/${id}${sh&&Number(sh.id)===id&&sh.slug?`/${encodeURIComponent(sh.slug)}`:''}`;}
         return `#${module}`;
     }

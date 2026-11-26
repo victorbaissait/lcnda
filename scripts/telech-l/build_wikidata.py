@@ -3,7 +3,8 @@
 
   memoriaux  🎖 monuments aux morts et mémoriaux de guerre du monde, hors de France (P31/P279* Q575759, avec une position) :
              nom, position, pays, commune, année, guerre commémorée (P547) — la France a déjà les siens dans l'app.
-  cimetieres ✝️ cimetières du monde, hors de France (P31 Q39614, avec une position) : nom, position, pays, commune, ouverture.
+  cimetieres ✝️ cimetières du monde, hors de France (P31 Q39614, avec une position) : nom, position, pays, ouverture (sans la commune :
+             la requête serait trop lourde pour le service).
   villages   🏚 villages désertés et disparus (P31 Q350895 « abandoned village » ou Q21751582 « deserted medieval village » —
              dont les Wüstungen d'Allemagne et les villages médiévaux désertés d'Angleterre que Wikidata reprend de Historic England,
              P1216 → fiche officielle) : nom, position, pays, commune, fin (P576), identifiant Historic England.
@@ -78,8 +79,8 @@ Q = {
     'memoriaux': '''SELECT ?i ?iLabel ?c ?cyLabel ?admLabel ?y ?warLabel WHERE { ?i wdt:P31/wdt:P279* wd:Q575759 ; wdt:P625 ?c . #PART#
         OPTIONAL { ?i wdt:P17 ?cy } FILTER(!BOUND(?cy) || ?cy != wd:Q142) OPTIONAL { ?i wdt:P131 ?adm } OPTIONAL { ?i wdt:P571 ?y } OPTIONAL { ?i wdt:P547 ?war }
         SERVICE wikibase:label { bd:serviceParam wikibase:language "%s". } }''' % LANGS,
-    'cimetieres': '''SELECT ?i ?iLabel ?c ?cyLabel ?admLabel ?y WHERE { ?i wdt:P31 wd:Q39614 ; wdt:P625 ?c . #PART#
-        OPTIONAL { ?i wdt:P17 ?cy } FILTER(!BOUND(?cy) || ?cy != wd:Q142) OPTIONAL { ?i wdt:P131 ?adm } OPTIONAL { ?i wdt:P571 ?y }
+    'cimetieres': '''SELECT ?i ?iLabel ?c ?cyLabel ?y WHERE { ?i wdt:P31 wd:Q39614 ; wdt:P625 ?c . #PART#
+        OPTIONAL { ?i wdt:P17 ?cy } FILTER(!BOUND(?cy) || ?cy != wd:Q142) OPTIONAL { ?i wdt:P571 ?y }
         SERVICE wikibase:label { bd:serviceParam wikibase:language "%s". } }''' % LANGS,
     'villages': '''SELECT ?i ?iLabel ?c ?cyLabel ?admLabel ?y ?end ?nhle WHERE { VALUES ?cls { wd:Q350895 wd:Q21751582 } ?i wdt:P31 ?cls ; wdt:P625 ?c . #PART#
         OPTIONAL { ?i wdt:P17 ?cy } OPTIONAL { ?i wdt:P131 ?adm } OPTIONAL { ?i wdt:P571 ?y } OPTIONAL { ?i wdt:P576 ?end } OPTIONAL { ?i wdt:P1216 ?nhle }

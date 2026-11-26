@@ -59,6 +59,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.goBack(); await idle(); assert.strictEqual((await st()).hash, '#donnees/themes'); assert.ok(await p.$('#workspace .ldt-overview'));
         });
         await t('un lien direct #donnees/data_theme_guerres (après rechargement) ouvre le thème dans Données', async () => {
+            await p.evaluate(() => { localStorage.removeItem('lcnda-donnees-ouvert'); window.LCNDA_EXT.donneesOnglet.open('dno_recap'); }); await idle(); // pas de page retenue : seule l'adresse compte
             await p.goto(B.base + '#donnees/data_theme_guerres'); await p.waitForFunction(() => window.LCNDA_APP?.state?.module === 'donnees', null, {timeout: 60000});
             await p.waitForSelector('.ldt-tabs [data-ldt-back]', {timeout: 30000}); await idle();
             const s = await st(); assert.deepStrictEqual([s.module, s.hash, s.active], ['donnees', '#donnees/data_theme_guerres', 'data_theme_guerres']);
