@@ -197,6 +197,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.click('[data-dmaj-filter="missing"]');
             assert.ok((await p.$$eval('[data-dmaj-row]', els => els.map(e => e.dataset.dmajRow))).includes('meteo:europe'));
             await p.click('[data-dmaj-filter="all"]');
+            // les 4 filtres tiennent sur une seule ligne (pas « Mise à jour dispo » tout seul en dessous)
+            const tops = await p.$$eval('[data-dmaj-filter]', els => els.map(e => Math.round(e.getBoundingClientRect().top)));
+            assert.strictEqual(new Set(tops).size, 1, `filtres sur une ligne : ${tops}`);
+            await p.screenshot({path: path.join(require('os').tmpdir(), 'dmaj-filtres.png'), clip: await p.$eval('.dmaj-filters', e => { const r = e.getBoundingClientRect(); return {x: Math.max(0, r.x - 20), y: Math.max(0, r.y - 20), width: Math.min(r.width + 40, 1400), height: r.height + 40}; })});
         });
         await t('« ⤓ Tout télécharger » : confirmation, une file un pack à la fois, pause, reprise après redémarrage', async () => {
             // des tranches lentes : le temps de mettre en pause

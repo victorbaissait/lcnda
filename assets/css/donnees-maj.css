@@ -13,6 +13,9 @@
 .dmaj-acts { display: flex; flex-wrap: wrap; gap: .4rem; }
 .dmaj-filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .4rem 0 .8rem; }
 .dmaj-filters .segmented button.is-active { font-weight: 700; }
+/* les 4 filtres sur une seule ligne, chacun à sa largeur ; la recherche à côté (passe dessous seulement si la place manque) */
+.dmaj-filters .segmented { display: inline-flex; flex-wrap: nowrap; margin: 0; max-width: 100%; overflow-x: auto; }
+.dmaj-filters .segmented button { flex: 0 0 auto; padding: 0 16px; white-space: nowrap; }
 .dmaj-q { flex: 1 1 14rem; max-width: 22rem; }
 .dmaj-group { margin: .6rem 0 1rem; }
 .dmaj-group h3 { font-size: 1rem; margin: .3rem 0; display: inline-block; }
