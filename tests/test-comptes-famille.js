@@ -52,7 +52,7 @@ function multipart(fields = {}, files = []) {
     /* ═════ 0. sans serveur : listes blanches et branchements ═════ */
     await t('0 listes blanches : famille.php a ses actions et leur méthode ; séance à part ; l’appareil relié ne joint que famille.php ; api.php refuse fc_* aux invités', () => {
         const lib = read('lib/comptes_famille.php');
-        assert.match(lib, /const FC_GUEST_ACTIONS = \['state' => 'GET', 'join' => 'POST', 'login' => 'POST', 'logout' => 'POST', 'search' => 'GET', 'person' => 'GET', 'media' => 'GET',\s*'similar' => 'GET', 'mine' => 'GET', 'propose' => 'POST', 'withdraw' => 'POST', 'edit' => 'POST', 'edit_undo' => 'POST'\];/);
+        assert.match(lib, /const FC_GUEST_ACTIONS = \['state' => 'GET', 'join' => 'POST', 'login' => 'POST', 'logout' => 'POST', 'search' => 'GET', 'person' => 'GET', 'media' => 'GET',\s*'similar' => 'GET', 'mine' => 'GET', 'propose' => 'POST', 'withdraw' => 'POST', 'edit' => 'POST', 'edit_undo' => 'POST',\s*'listes' => 'GET',[^\n]*\n\s*'partages' => 'GET', 'partages_vu' => 'POST', 'partage_retirer' => 'POST'\];/);
         assert.match(lib, /if \(!isset\(FC_GUEST_ACTIONS\[\$action\]\)\) \{ fc_json\(\['error' => 'Refusé\.'\], 403\); \}/);
         assert.match(lib, /if \(\$method === 'POST'\) \{ verify_csrf\(/);
         assert.match(lib, /password_hash\(\$p, PASSWORD_ARGON2ID\)/); assert.match(lib, /PASSWORD_BCRYPT, \['cost' => 12\]/);

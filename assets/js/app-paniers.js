@@ -598,6 +598,9 @@
         let rows = [], accounts = [];
         try { rows = (await post('pn_share_build', {basket_id: b.id, list: 1})).rows || []; } catch (e) { toast(e.message, 'error'); return; }
         try { accounts = (await post('pn_share_accounts', {})).accounts || []; } catch (_) {}
+        let sent = [];
+        if (accounts.length) { try { sent = (await post('pn_share_sent', {basket_id: b.id})).sent || []; } catch (_) {} }
+        const sentWord = x => (x.status === 'retire' ? T('retiré par le destinataire') : x.status === 'lu' ? T('lu le {d}', {d: x.read}) : T('envoyé, pas encore lu'));
         const pub = rows.filter(r => !r.personal), per = rows.filter(r => r.personal && !r.blocked), blk = rows.filter(r => r.blocked);
         const line = (r, inp, sub) => `<li class="${r.blocked ? 'is-lock' : ''}">${inp}<span class="pn-t">${esc(r.title)}<small>${esc(sub)}</small></span></li>`;
         const r = await dlg({title: T('⇪ Partager « {n} »', {n: b.name}), wide: true,
@@ -606,12 +609,13 @@
                 ${pub.length ? `<div class="pn-lh">${esc(T('Partagés (données publiques)'))}</div><ul class="pn-shl">${pub.map(x => line(x, '<input type="checkbox" checked disabled>', x.source || T('donnée publique'))).join('')}</ul>` : ''}
                 ${per.length ? `<div class="pn-lh">${esc(T('De ton arbre : à cocher un par un'))}</div><ul class="pn-shl">${per.map(x => line(x, `<input type="checkbox" name="inc" value="${x.id}" aria-label="${esc(x.title)}">`, x.source || T('ton arbre'))).join('')}</ul>` : ''}
                 ${blk.length ? `<div class="pn-lh">🔒 ${esc(T('Jamais partagés (vivants, confidentiels)'))}</div><ul class="pn-shl">${blk.map(x => line(x, '<input type="checkbox" disabled>', T('personne vivante ou confidentielle'))).join('')}</ul>` : ''}
-                ${accounts.length ? `<div class="pn-flds"><label class="pn-f">${esc(T('Envoyer à un compte du site familial'))}<select name="acc"><option value="">${esc(T('(non, seulement le fichier)'))}</option>${accounts.map(a => `<option value="${a.id}">${esc(a.name)}</option>`).join('')}</select></label></div>` : ''}`,
+                ${accounts.length ? `<div class="pn-flds"><label class="pn-f">${esc(T('Envoyer à un compte du site familial'))}<select name="acc"><option value="">${esc(T('(non, seulement le fichier)'))}</option>${accounts.map(a => `<option value="${a.id}">${esc(a.name)}</option>`).join('')}</select></label></div>` : ''}
+                ${sent.length ? `<div class="pn-lh">✉ ${esc(T('Déjà envoyé'))}</div><ul class="pn-shl" data-pn-sent>${sent.map(x => `<li><span class="pn-t">${esc(x.account || T('compte retiré'))}<small>${esc(String(x.at).slice(0, 10))} · ${esc(T('{n} éléments', {n: x.n}))} · ${esc(sentWord(x))}</small></span></li>`).join('')}</ul>` : ''}`,
             buttons: [['', T('Annuler'), 'is-ter'], ...(accounts.length ? [['send', T('✉ Envoyer au compte'), 'is-sec']] : []), ['file', T('⤓ Enregistrer le fichier .lcnda-panier'), 'is-pri']]});
         if (!r.key) return;
         const include = [...r.form.querySelectorAll('[name="inc"]:checked')].map(i => Number(i.value));
         try {
-            if (r.key === 'send') { if (!r.form.acc.value) { toast(T('Choisis un compte.'), 'error'); return; } const x = await post('pn_share_send', {basket_id: b.id, include, account_id: Number(r.form.acc.value)}); toast(T('✉ Envoyé ({n} éléments)', {n: x.counts.public + x.counts.personal})); return; }
+            if (r.key === 'send') { if (!r.form.acc.value) { toast(T('Choisis un compte.'), 'error'); return; } const x = await post('pn_share_send', {basket_id: b.id, include, account_id: Number(r.form.acc.value)}); toast(T('✉ Envoyé ({n} éléments)', {n: x.counts.sent ?? (x.counts.public + x.counts.personal)}) + (x.counts.notes ? ' · ' + T('{n} note(s) non envoyée(s)', {n: x.counts.notes}) : '')); return; }
             const x = await post('pn_share_build', {basket_id: b.id, include});
             st.lastShare = x.share;
             download(new Blob([JSON.stringify(x.share, null, 1)], {type: 'application/json'}), x.fname);

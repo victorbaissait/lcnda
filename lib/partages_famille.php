@@ -80,7 +80,7 @@ function pf_send(PDO $pdo, array $d): array
     $f['share']['items'] = $items;
     if (!$items) { throw new LcndaBadInput('Rien à envoyer : ce panier ne contient que des éléments qui ne se partagent pas.'); }
     if (dplus_names_hit((string) $f['share']['name'], $names)) { $f['share']['name'] = cx_t('Panier partagé'); }
-    $f['counts']['blocked'] += $dropped; $f['counts']['notes'] = $notes;
+    $f['counts']['blocked'] += $dropped; $f['counts']['notes'] = $notes; $f['counts']['sent'] = count($items);
     $pdo->prepare('INSERT INTO cx_shares(account_id, name, body) VALUES(?,?,?)')->execute([$acc, $f['share']['name'], (string) json_encode($f['share'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
     $id = (int) $pdo->lastInsertId();
     pf_schema($pdo);
