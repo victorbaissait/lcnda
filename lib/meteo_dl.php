@@ -41,7 +41,7 @@ function meteo_dl_get(string $name, ?array $range = null, int $max = 20 * 1024 *
         unset($ch);
         if ($too) { throw new RuntimeException(i18n_t('Réponse trop grosse du serveur des données météo.')); }
         if (in_array($code, [301, 302, 303, 307, 308], true) && $loc !== '') { $url = link_absolute_url($url, $loc); continue; }
-        if ($code === 404) { throw new RuntimeException(i18n_t('Les données météo ne sont pas encore en ligne : réessaie plus tard, ou importe un fichier.')); }
+        if ($code === 404) { throw new RuntimeException(i18n_t('Les données météo ne sont pas encore en ligne : réessaie plus tard, ou importe un fichier.'), 404); } // 404 : pas encore publié (≠ site injoignable)
         if ($code < 200 || $code >= 300) { throw new RuntimeException($err !== '' ? i18n_t('Pas de connexion au serveur des données météo : {err}', ['err' => $err]) : i18n_t('Le serveur des données météo répond {code}.', ['code' => (string) $code])); }
         return $body;
     }
