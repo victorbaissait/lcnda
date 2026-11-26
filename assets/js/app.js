@@ -1370,7 +1370,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     function menuFullLabel(key,fallback){const d=splitMenuIcon(fallback),own=splitMenuIcon(menuNames()[key]||''),icons=menuIcons();const icon=Object.prototype.hasOwnProperty.call(icons,key)?cleanMenuIcon(icons[key]):(own.icon||d.icon);return `${icon?icon+' ':''}${own.base||d.base}`;}
     /** le petit titre du panneau de gauche (« 13 — S’ÉMERVEILLER ») : le même numéro que l'onglet dans la barre du haut */
     function moduleIndexLabel(module){const base=modules[module]?.[0]||'';const key=module==='personnes'&&state.peopleScope==='animals'?'animaux':module;const num=document.querySelector(`.main-nav [data-module="${key}"]:not(.nav-custom-tab) span`)?.textContent?.trim();return num&&/^\d+/.test(base)?base.replace(/^\d+/,num):base;}
-    function applyMenuOrder(){const nav=$('.main-nav');if(!nav)return;let visibleIndex=0;const hidden=menuHiddenKeys();
+    function applyMenuOrder(){const nav=$('.main-nav');if(!nav)return;let visibleIndex=0,prevKey='';const hidden=menuHiddenKeys();
         $$('.nav-custom-tab',nav).forEach(button=>button.remove());
         // Onglets à soi : un bouton chacun, à sa place dans « Ordre du menu principal » (Apparence)
         const tabs=Object.fromEntries(customTabs().map(t=>[t.id,t]));
@@ -1380,7 +1380,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             const button=tab?customButton(tab):nav.querySelector(`[data-module="${key}"]:not(.nav-custom-tab)`);if(!button)return;
             const isHidden=key!=='maintenance'&&(hidden.includes(key)||!!tab?.hidden);
             if(!tab){const label=[...button.childNodes].find(n=>n.nodeType===3);if(label){if(button.dataset.defaultLabel===undefined)button.dataset.defaultLabel=label.textContent;label.textContent=menuFullLabel(key,button.dataset.defaultLabel);}}
-            button.style.display=isHidden?'none':'';if(!isHidden){button.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');}nav.append(button);
+            button.style.display=isHidden?'none':'';if(!isHidden){const share=key==='diagrammes'&&prevKey==='graphiques'&&visibleIndex>0;/* 📈 Diagrammes juste après Graphiques : le même numéro (03) */button.querySelector('span').textContent=String(share?visibleIndex:++visibleIndex).padStart(2,'0');prevKey=key;}nav.append(button);
         });
         const idx=$('#sidebar-index');if(idx&&state.module&&modules[state.module]&&idx.textContent!=='MON ONGLET')idx.textContent=moduleIndexLabel(state.module);
     }

@@ -54,7 +54,7 @@
     const tabButton = () => document.querySelector(`.main-nav .nav-item[data-module="${MOD}"]`);
     const hiddenKeys = () => { try { return A().menuHiddenKeys ? A().menuHiddenKeys() : JSON.parse(localStorage.getItem('genealogie-menu-hidden') || '[]'); } catch (_) { return []; } };
     const on = () => !!tabButton() && !hiddenKeys().includes(MOD);
-    const KEYS = ['genealogie-menu-hidden', `genealogie-menu-${MOD}`, 'genealogie-menu-added'];
+    const KEYS = ['genealogie-menu-hidden', `genealogie-menu-${MOD}`, 'genealogie-menu-added', 'genealogie-menu-order'];
     function setOn(v, {undo = true} = {}) {
         if (kiosk()) return;
         const snap = Object.fromEntries(KEYS.map(k => [k, readLS(k, null)]));
@@ -62,6 +62,8 @@
         let added = readJ('genealogie-menu-added', []); if (!Array.isArray(added)) added = [];
         if (v) { hidden = hidden.filter(k => k !== MOD); added = [...new Set([...added, MOD])]; } else { hidden = [...new Set([...hidden, MOD])]; added = added.filter(k => k !== MOD); }
         writeLS('genealogie-menu-hidden', JSON.stringify(hidden)); writeLS(`genealogie-menu-${MOD}`, '1'); writeLS('genealogie-menu-added', JSON.stringify(added));
+        const order = readJ('genealogie-menu-order', null); // un ordre du menu déjà rangé : l'onglet va juste après Graphiques (le même numéro, 03)
+        if (v && Array.isArray(order) && order.includes('graphiques')) { const o = order.filter(k => k !== MOD); o.splice(o.indexOf('graphiques') + 1, 0, MOD); writeLS('genealogie-menu-order', JSON.stringify(o)); }
         const after = () => { try { A().applyMenuOrder?.(); } catch (_) {} try { if (A().state?.module === 'graphiques') A().renderSidebar?.(); } catch (_) {} };
         after();
         const msg = v ? T('L’onglet 📈 Diagrammes est dans le menu') : T('L’onglet 📈 Diagrammes est caché');

@@ -32,7 +32,7 @@
         {k: 'tresors', g: 1, icon: '✨', name: 'Trésors de famille', desc: 'Lettres à ouvrir plus tard, recettes, musée de famille.', module: 'tresors', rec: 'RPNRPYPPYN', words: 'trésor souvenir recette musée'},
         {k: 'fiches', g: 1, icon: '📒', name: 'Fiches', desc: 'Fiches thématiques : un métier, une guerre, un village.', module: 'fiches', rec: 'RPPRPRRRPP', words: 'fiche thème métier guerre village'},
         {k: 'paniers', g: 1, icon: '🧺', name: 'Paniers', desc: 'Tes paniers rangés en dossiers, des idées à y mettre, et une recherche qui crée un panier. La pastille 🧺 reste là, même onglet éteint.', module: 'paniers', rec: 'RPPRPRRRPR', isNew: true, words: 'panier dossier recherche idée rassembler collecter'},
-        {k: 'diagrammes', g: 1, icon: '📈', name: 'Diagrammes', desc: 'Hémicycles, frises de vies, pyramides des âges, flux… tous tes diagrammes au même endroit, sans quitter l’onglet.', module: 'diagrammes', rec: 'RPPRPRRPRR', isNew: true, words: 'diagramme graphique frise pyramide hémicycle camembert dessin'},
+        {k: 'diagrammes', g: 1, icon: '📈', name: 'Diagrammes', desc: 'Hémicycles, frises de vies, pyramides des âges, flux… tous tes diagrammes au même endroit, sans quitter l’onglet.', module: 'diagrammes', after: 'graphiques', rec: 'RPPRPRRPRR', isNew: true, words: 'diagramme graphique frise pyramide hémicycle camembert dessin'},
         {k: 'donnees', g: 1, icon: '📊', name: 'Données', desc: 'Le récap des listes de données, la question en français et les 20 thèmes, dans le menu du haut. Le même écran que Listes → 🧰 Données, pas une copie.', module: 'donnees', rec: 'RPPRPRRPRR', isNew: true, words: 'données liste récap question thème séisme bataille musée'},
         {k: 'adn', g: 1, icon: '🧬', name: 'ADN', desc: 'Tes correspondances ADN et leurs liens.', module: 'adn', rec: 'PNNNNNRNPP', words: 'adn dna correspondance'},
         {k: 'catalogue', g: 1, icon: '🎨', name: 'Catalogue raisonné', desc: 'Les œuvres d’un artiste, albums, expositions.', module: 'catalogue', rec: 'PNNPYRNPPN', words: 'artiste œuvre oeuvre exposition album'},
@@ -120,6 +120,8 @@
             if (!own.has(key) && ownLast()) while (at > 0 && own.has(o[at - 1])) at--;
             o.splice(at, 0, key); ls.put('genealogie-menu-order', JSON.stringify(o)); A()?.applyMenuOrder?.();
         };
+        /** 📈 un onglet qui va à côté d'un autre (Diagrammes après Graphiques), pas à la fin */
+        const toAfter = (key, after) => { const o = menuKeys().filter(k => k !== key), i = o.indexOf(after); if (i < 0) return toEnd(key); o.splice(i + 1, 0, key); ls.put('genealogie-menu-order', JSON.stringify(o)); A()?.applyMenuOrder?.(); };
         /** ⤓ mes onglets regroupés à la fin (avant Réglages s'il est dernier), dans l'ordre où ils sont */
         const ownGrouped = order => { const own = new Set(ownTabs().map(t => t.id)), mine = order.filter(k => own.has(k)), rest = order.filter(k => !own.has(k)), m = rest.indexOf('maintenance'); rest.splice(m >= 0 && m === rest.length - 1 ? m : rest.length, 0, ...mine); return rest; };
         const label = item => `${item.icon} ${i18n(item.name)}`;
@@ -134,7 +136,7 @@
                 added = on ? [...new Set([...added, item.module])] : added.filter(k => k !== item.module);
                 ls.put('genealogie-menu-added', JSON.stringify(added));
                 A()?.applyMenuOrder?.();
-                if (on) toEnd(item.module);
+                if (on) { if (item.after) toAfter(item.module, item.after); else toEnd(item.module); }
             } else {
                 const list = ownTabs().map(t => ({...t}));
                 const same = list.filter(t => t.kind === 'screen' && t.target === item.target);

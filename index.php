@@ -1711,7 +1711,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-dates-feter.js?v=3" defer></script>
 <script src="assets/js/heritage-meteo.js?v=15" defer></script>
 <script src="assets/js/heritage-elections.js?v=3" defer></script>
-<script src="assets/js/heritage-gov.js?v=2" defer></script>
+<script src="assets/js/heritage-gov.js?v=3" defer></script>
 <script src="assets/js/heritage-bases-officielles.js?v=3" defer></script>
 <script src="assets/js/heritage-ciel-heure.js?v=1" defer></script>
 <script src="assets/js/heritage-adn-livres.js?v=2" defer></script>

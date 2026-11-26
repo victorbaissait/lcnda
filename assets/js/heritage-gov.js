@@ -62,7 +62,7 @@
         return STATUS;
     }
     const forget = () => { STATUS = null; evCache.clear(); };
-    window.addEventListener('lcnda:installs-changed', () => { STATUS = null; }); // ⤓ installé ou retiré ailleurs (🗂 Données) : relu
+    window.addEventListener('lcnda:installs-changed', () => { void status(true); }); // ⤓ installé ou retiré ailleurs (🗂 Données) : relu tout de suite (STATUS sert aussi sans attendre : le choix d'un lieu)
 
     /* ═════════ Morceaux d'affichage ═════════ */
     const span = n => (n.from && n.to ? i18n('{a} → {b}', {a: String(n.from), b: String(n.to)}) : n.from ? i18n('depuis {y}', {y: String(n.from)}) : n.to ? i18n('jusqu’en {y}', {y: String(n.to)}) : n.year ? i18n('attesté en {y}', {y: String(n.year)}) : '');
