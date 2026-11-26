@@ -194,7 +194,7 @@
     async function coversFamily(boxes) {
         const LF = ext.listesFamille; if (!LF) return false; try { await LF.ready(); } catch (_) { return false; }
         const pl = LF.data?.()?.places || [];
-        return pl.some(([lat, lon]) => boxes.some(([w, s, e, n]) => lon >= w && lon <= e && lat >= s && lat <= n));
+        return pl.some(({lat, lon}) => boxes.some(([w, s, e, n]) => lon >= w && lon <= e && lat >= s && lat <= n));
     }
     /* ✨ « Nouveau : thème » : la date où chaque thème est apparu sur cet ordinateur (la première fois : tous comptent comme déjà là) */
     const K_THSEEN = 'genealogie-donnees-themes-vus', NEW_DAYS = 30;

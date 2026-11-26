@@ -77,17 +77,22 @@
     }
     function open() { const st = A().state; if (!st) return; st.maintenanceTab = TAB[0]; A().persistUiState?.(); A().setModule?.('maintenance'); }
 
-    function cardHtml(it, mode = 'new', inFrame = false) {
+    /** « 2026-11-26 10:00:00 » → « 26/11/2026 » */
+    const dayFr = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || '')); return m ? `${m[3]}/${m[2]}/${m[1]}` : ''; };
+    const ficheBtn = id => `<button type="button" class="button small secondary vd-fiche" data-vd-fiche="${Number(id)}">${esc(T('👤 Ouvrir la fiche'))}</button>`;
+    function cardHtml(it, mode = 'new', inFrame = false, onPage = false) {
         const d = it.detail || {};
         const why = [d.name === 1 ? T('même nom') : d.near ? T('nom proche') : d.name ? T('nom composé') : '', d.first === 1 ? T('même prénom') : d.first ? T('prénom proche') : '',
             d.birth === 'day' ? T('même date de naissance') : d.birth === 'month' ? T('même mois de naissance') : d.birth === 'year' ? T('même année de naissance') : d.birth === 'near' ? T('naissance à un an près') : '',
             d.place === 1 ? T('même lieu de naissance') : d.place === 0.5 ? T('même département de naissance') : ''].filter(Boolean);
         const mine = [it.person.birth ? T('naissance : {d}', {d: it.person.birth}) : '', it.person.birth_place].filter(Boolean).join(', ');
-        const acts = mode === 'new' ? `<button type="button" class="button small" data-vd-yes="${it.id}">${esc(yesLabel(it))}</button><button type="button" class="button small secondary" data-vd-no="${it.id}">${esc(noLabel(it))}</button>`
+        const dbt = it.doubt;
+        const acts = mode === 'new' ? `<button type="button" class="button small" data-vd-yes="${it.id}">${esc(yesLabel(it))}</button>${kiosk() ? '' : dbt ? `<button type="button" class="button small secondary" data-vd-doubt="${it.id}" data-vd-doubt-off aria-pressed="true">${esc(T('↩ Plus de doute'))}</button>` : `<button type="button" class="button small secondary" data-vd-doubt="${it.id}" title="${esc(T('Je l’ai vue, je reviendrai dessus : elle reste dans la liste'))}">${esc(T('🤔 J’ai un doute'))}</button>`}<button type="button" class="button small secondary" data-vd-no="${it.id}">${esc(noLabel(it))}</button>`
             : `<button type="button" class="button small secondary" data-vd-undo="${it.id}">${esc(T('↶ Remettre dans les décès possibles'))}</button>`;
         return `<article class="vd-card" data-vd-card="${it.id}">
             <p class="vd-sentence"><b>${esc(sentence(it))}</b> <span class="vd-src">(${link(it.insee.url, T('INSEE, Licence Ouverte'))}) ${link(it.source.url, T('↗ source'))}</span></p>
-            ${inFrame ? '' : `<p class="muted vd-mine">${esc(T('Ta fiche :'))} <button type="button" class="table-link" data-open-person="${it.person.id}">${esc(it.person.name)}</button>${mine ? ` — ${esc(mine)}` : ''}</p>`}
+            ${dbt && mode === 'new' ? `<p class="vd-doubt"><span class="ui-badge is-yellow vd-doubt-badge">${esc(T('🤔 Vu le {d} — à revoir', {d: dayFr(dbt.at)}))}</span>${dbt.note ? ` <span class="vd-doubt-text">${esc(dbt.note)}</span>` : ''}${kiosk() ? '' : ` <button type="button" class="link-button" data-vd-note-edit="${it.id}">${esc(dbt.note ? T('✎ Changer la note') : T('✎ Ajouter une note'))}</button>`}</p>` : ''}
+            ${inFrame ? '' : `<p class="muted vd-mine">${esc(T('Ta fiche :'))} <button type="button" class="table-link" data-open-person="${it.person.id}">${esc(it.person.name)}</button>${mine ? ` — ${esc(mine)}` : ''}${onPage ? ` ${ficheBtn(it.person.id)}` : ''}</p>`}
             <p class="vd-why"><span class="ui-badge">${esc(T('{n} % de ressemblance', {n: it.score}))}</span> ${esc(why.join(' · '))}${it.insee.acte ? ` · ${esc(T('acte n° {n}', {n: it.insee.acte}))}` : ''}</p>
             <div class="page-actions vd-acts">${acts}</div></article>`;
     }
@@ -105,10 +110,31 @@
     }
 
     /** 🗂 un cadre par personne de l'arbre (réglage genealogie-cadres) : ses fiches INSEE possibles dedans ; on décide toujours fiche par fiche */
-    const cards = (items, mode = 'new') => (!UI().framesOn?.() ? items.map(it => cardHtml(it, mode)).join('')
+    const cards = (items, mode = 'new') => (!UI().framesOn?.() ? items.map(it => cardHtml(it, mode, false, true)).join('')
         : UI().personCardsHtml(UI().groupByPerson(items, it => it.person?.id).map(g => { const p = g.items[0].person || {};
-            return UI().personCardHtml({id: p.id, name: p.name || '', life: [p.birth ? T('naissance : {d}', {d: p.birth}) : '', p.birth_place].filter(Boolean).join(', '), cls: 'vd-frame',
+            return UI().personCardHtml({id: p.id, name: p.name || '', actions: ficheBtn(p.id), life: [p.birth ? T('naissance : {d}', {d: p.birth}) : '', p.birth_place].filter(Boolean).join(', '), cls: 'vd-frame',
                 count: mode === 'new' ? plural(g.items.length, 'décès possible', 'décès possibles') : plural(g.items.length, 'piste écartée', 'pistes écartées'), body: g.items.map(it => cardHtml(it, mode, true)).join('')}); }).join('')));
+    const FILTER = 'lcnda-vd-filter';
+    const vdFilter = () => { const v = ls.get(FILTER, 'all'); return ['all', 'todo', 'doubt'].includes(v) ? v : 'all'; };
+    let BACK = null; // {y} : la position dans la page quand on est allé sur une fiche
+    const rememberPlace = () => { const ws = document.getElementById('workspace'); BACK = {y: Math.max(document.scrollingElement?.scrollTop || 0, ws?.scrollTop || 0)}; };
+    /** 🤔 poser / enlever le doute ; ↶ remet l'état d'avant */
+    async function doubt(id, body, msg) {
+        let r; try { r = await post('vd_doubt', {id, ...body}); } catch (e) { A().toast?.(e.message, 'error'); return null; }
+        LIST = null; await keepPlace(draw); refillPersons();
+        if (msg) A().undoToast?.(msg, {undo: async () => { await post('vd_doubt', {id, prev: r.prev}); LIST = null; await keepPlace(draw); refillPersons(); }});
+        return r;
+    }
+    const refillPersons = () => document.querySelectorAll('#workspace [data-vd-person]').forEach(h => fillPerson(h, Number(h.dataset.vdPerson)));
+    const keepPlace = async fn => { rememberPlace(); await fn(); };
+    function noteField(id) {
+        const card = document.querySelector(`#workspace [data-vd-card="${id}"]`); if (!card || card.querySelector('[data-vd-note]')) return;
+        const cur = card.querySelector('.vd-doubt-text')?.textContent || '';
+        const f = document.createElement('form'); f.className = 'vd-note'; f.dataset.vdNoteForm = String(id);
+        f.innerHTML = `<input type="text" maxlength="500" data-vd-note="${id}" value="${esc(cur)}" placeholder="${esc(T('Une note pour plus tard (facultatif)'))}" aria-label="${esc(T('Note du doute'))}"><button type="submit" class="button small">${esc(T('Enregistrer'))}</button><button type="button" class="button small secondary" data-vd-note-cancel>${esc(T('Pas de note'))}</button>`;
+        (card.querySelector('.vd-doubt') || card.querySelector('.vd-acts')).after(f);
+        f.querySelector('input').focus();
+    }
     async function draw(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
         if (A().state?.maintenanceTab !== TAB[0] && token === undefined && !ws.querySelector('[data-vd-page]')) return;
@@ -117,6 +143,10 @@
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         const st = list, ins = st.insee || {};
         const on = enabled(st);
+        const nDoubt = list.items.filter(it => it.doubt).length, f = nDoubt || vdFilter() !== 'doubt' ? vdFilter() : 'all';
+        const shown = list.items.filter(it => f === 'all' || (f === 'doubt' ? it.doubt : !it.doubt));
+        const chips = list.items.length ? `<div class="ui-filters vd-filters" role="group" aria-label="${esc(T('Décès possibles'))}">${[['all', T('Tous'), list.items.length], ['todo', T('À trancher'), list.items.length - nDoubt], ['doubt', T('🤔 À revoir'), nDoubt]]
+            .map(([k, l, n]) => `<button type="button" class="${f === k ? 'is-active' : ''}" aria-pressed="${f === k}" data-vd-filter="${k}">${esc(l)} <small>(${n})</small></button>`).join('')}</div>` : '';
         const head = UI().pageHeader ? UI().pageHeader({title: T('Veille des décès'), icon: '⚰️', where: T('Réglages · Données'), help: esc(T('Les personnes de ton arbre qu’on croit vivantes, comparées au fichier des décès de l’INSEE installé sur ton ordinateur.'))}) : `<h2>${esc(TAB[2])}</h2>`;
         const insLine = ins.installed ? T('Fichier des décès de l’INSEE installé : décès de {a} à {b}.', {a: String(ins.from || '?'), b: String(ins.to || '?')}) : T('Le fichier des décès de l’INSEE n’est pas installé : installe-le dans Recherche → Décès INSEE (bouton « ⤓ Tout installer »). Sans lui, la veille ne peut rien comparer.');
         const lastLine = st.last_run ? T('Dernière comparaison : {d}. Fiches surveillées : {n}.', {d: esc(String(st.last_run).slice(0, 16)), n: String(st.watched)}) : T('Fiches surveillées : {n}.', {n: String(st.watched)});
@@ -125,15 +155,31 @@
                 <p>${esc(insLine)}</p><p class="muted">${lastLine}</p>
                 <div class="page-actions"><button type="button" class="button secondary" data-vd-run ${ins.installed && !kiosk() ? '' : 'disabled'}>${esc(T('🔎 Vérifier maintenant (tout le fichier)'))}</button></div></div>
             <div class="maintenance-panel"><h3>${esc(T('Décès possibles'))} ${list.items.length ? `<span class="ui-badge">${list.items.length}</span>` : ''}</h3>
-                ${list.items.length ? cards(list.items) : `<p class="muted">${esc(ins.installed ? T('Aucun décès possible pour l’instant.') : T('Rien à montrer tant que le fichier INSEE n’est pas installé.'))}</p>`}
+                ${chips}${list.items.length ? (shown.length ? cards(shown) : `<p class="muted">${esc(f === 'doubt' ? T('Aucune piste à revoir.') : T('Tout est à revoir : rien d’autre à trancher.'))}</p>`) : `<p class="muted">${esc(ins.installed ? T('Aucun décès possible pour l’instant.') : T('Rien à montrer tant que le fichier INSEE n’est pas installé.'))}</p>`}
                 ${gone.items.length ? `<details class="cplus-more"><summary>${esc(T('▸ Pistes écartées ({n})', {n: gone.items.length}))}</summary>${cards(gone.items, 'gone')}</details>` : ''}</div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3>
                 <p>${esc(T('Source :'))} ${link(st.source?.url || 'https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/', T('Fichier des personnes décédées (INSEE), data.gouv.fr'))} — ${link(st.source?.licence_url || 'https://www.etalab.gouv.fr/licence-ouverte-open-licence/', st.source?.licence || 'Licence Ouverte 2.0 (Etalab)')}. ${esc(T('Chaque décès ajouté porte cette source et le numéro de l’acte ; « ↗ » ouvre la recherche de la personne dans matchID, le moteur libre du même fichier.'))}</p>
                 <p class="muted">${esc(T('Les avis de décès des journaux et des sites (Libra Memoria, Dans nos cœurs, Avis-de-deces…) ne sont pas des données ouvertes : l’app ne les lit pas. Elle propose seulement des liens de recherche dans « Où chercher » d’une personne.'))}</p></div></section>`;
         if (!A().escapeHtml) return;
         A().bindTableLinks?.();
+        // revenir d'une fiche : la même position dans la page
+        if (BACK && BACK.y != null) { const y = BACK.y; BACK = null; requestAnimationFrame(() => { const sc = document.scrollingElement; sc.scrollTop = y; ws.scrollTop = y; }); }
     }
     document.addEventListener('click', e => {
+        // 👤 ouvrir une fiche depuis l'écran : on retient la position (filtre gardé), « retour » la retrouve
+        if (e.target.closest?.('[data-vd-page] [data-h-person], [data-vd-page] [data-open-person]')) rememberPlace();
+        const fb = e.target.closest?.('[data-vd-fiche]'); if (fb) { rememberPlace(); const st = A().state; st.currentPersonId = Number(fb.dataset.vdFiche); A().setModule?.('personnes'); return; }
+        const fl = e.target.closest?.('[data-vd-filter]'); if (fl) { ls.set(FILTER, fl.dataset.vdFilter); keepPlace(draw); return; }
+        if (e.target.closest?.('[data-vd-note-cancel]')) { e.target.closest('form')?.remove(); return; }
+        const ne = e.target.closest?.('[data-vd-note-edit]'); if (ne) { if (!kiosk()) noteField(Number(ne.dataset.vdNoteEdit)); return; }
+        const db = e.target.closest?.('[data-vd-doubt]');
+        if (db) {
+            if (kiosk()) return;
+            const id = Number(db.dataset.vdDoubt); db.disabled = true;
+            if (db.hasAttribute('data-vd-doubt-off')) { doubt(id, {off: 1}, T('Plus de doute sur cette piste.')); return; }
+            doubt(id, {}, T('🤔 Notée « à revoir » : elle reste dans la liste.')).then(r => { if (r) noteField(id); });
+            return;
+        }
         const t = e.target.closest?.('[data-vd-yes],[data-vd-no],[data-vd-undo],[data-vd-run],[data-vd-open]'); if (!t) return;
         if (t.matches('[data-vd-open]')) { e.preventDefault(); return open(); }
         if (kiosk()) return;
@@ -146,6 +192,11 @@
         t.disabled = true;
         const id = Number(t.dataset.vdYes || t.dataset.vdNo || t.dataset.vdUndo);
         decide(id, t.matches('[data-vd-yes]') ? 'yes' : t.matches('[data-vd-no]') ? 'no' : 'undo');
+    });
+    document.addEventListener('submit', e => {
+        const f = e.target.closest?.('[data-vd-note-form]'); if (!f) return;
+        e.preventDefault(); if (kiosk()) return;
+        doubt(Number(f.dataset.vdNoteForm), {note: f.querySelector('input').value}, '');
     });
     document.addEventListener('change', e => {
         if (!e.target.matches?.('[data-vd-toggle]')) return;

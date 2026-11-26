@@ -265,7 +265,9 @@
     const cur = {d: null, base: null, st: null, rows: [], total: 0, more: false, token: 0, seq: 0};
     const ws = () => document.getElementById('workspace');
     const whereOf = d => { try { const w = ext.listesThemes?.whereOf?.(d); if (w) return w; } catch (_) {} return T(groupOf(d)); }; // 🗂 le thème (app-listes-themes.js), sinon le groupe
-    const header = (d, extra = {}) => (UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')} · ${whereOf(d)}`, icon: d.icon || '📋', title: T(d.label), ...extra}) : `<h2>${esc(T(d.label))}</h2>`);
+    /** le fil d'Ariane : « Listes · 🧰 Données », ou « 📊 Données » quand la page est ouverte dans l'onglet du haut (app-donnees-onglet.js) */
+    const crumb = () => (A().state?.module === 'donnees' ? `📊 ${T('Données')}` : `${T('Listes')} · 🧰 ${T('Données')}`);
+    const header = (d, extra = {}) => (UI().pageHeader ? UI().pageHeader({where: `${crumb()} · ${whereOf(d)}`, icon: d.icon || '📋', title: T(d.label), ...extra}) : `<h2>${esc(T(d.label))}</h2>`);
     const sourceLine = d => (d.source ? `<p class="ld-source muted"><small>${esc(T('Source :'))} ${/^https?:\/\/[^\s"'<>]+$/i.test(String(d.sourceUrl || '')) ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener">${esc(d.source)}</a>` : esc(d.source)}</small></p>` : '');
     /** les colonnes : celles de la liste moins celles décochées dans « ⚙ Colonnes » (st.hide), + 📍 GPS (st.gps, listes avec positions), + Distance */
     const cols = (d, st) => {
@@ -723,12 +725,13 @@
     function openKey(k, preset = null) {
         const app = A(), st = app.state; if (!st) return;
         const d = byKey(k); if (preset && d) saveState(d.id, {...blank(), ...preset});
+        if (st.module === 'donnees' && ext.donneesOnglet?.open) return ext.donneesOnglet.open(k); // 📊 ouvert depuis l'onglet Données : on y reste (app-donnees-onglet.js)
         st.listType = k; st.precisePlaceKey = '';
         if (st.module === 'listes') { app.renderSidebar?.(); ext.lists[k]?.(++st.workspaceToken); } else app.setModule?.('listes');
     }
     /** ouvrir une liste de données d'ailleurs, déjà filtrée : LCNDA_EXT.dataListsEngine.open('hist_gares', {near: {lat, lon, km, title}}) */
     ext.dataListsEngine = {open: (id, preset) => { const d = all().find(x => x.id === id); if (d) openKey(d.link ? null : keyOf(d), preset); }, keyOf, list: () => all(), applyLocal: localFilter, fetchPage, stateOf, critText, periodText, nearText, buildQuery,
-        render: (d, token) => renderList(d, token), overview: token => renderOverview(token), sync: () => sync(), openKey, forget, loadAll, isInstalled, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
+        render: (d, token) => renderList(d, token), crumb, overview: token => renderOverview(token), sync: () => sync(), openKey, forget, loadAll, isInstalled, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
 
     /* ═════════════════════════════════════════════════════════════════════════════════════════
      * Les données déjà dans l'app (packs, fichiers livrés) : leurs listes, sans toucher à leurs fichiers.

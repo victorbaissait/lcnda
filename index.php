@@ -40,11 +40,12 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes2.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-options.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage-diagram-perso.css?v=1">
+    <link rel="stylesheet" href="assets/css/heritage-diagram-donnees.css?v=1">
     <link rel="stylesheet" href="assets/css/layout.css?v=17">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/tresors.css?v=15">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=30">
-    <link rel="stylesheet" href="assets/css/ui.css?v=27">
+    <link rel="stylesheet" href="assets/css/ui.css?v=28">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
@@ -84,9 +85,9 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
     <link rel="stylesheet" href="assets/css/terroir.css?v=1">
     <link rel="stylesheet" href="assets/css/terre-mots.css?v=1">
-    <link rel="stylesheet" href="assets/css/veille-synchro.css?v=1">
+    <link rel="stylesheet" href="assets/css/veille-synchro.css?v=2">
     <link rel="stylesheet" href="assets/css/pistes-branches-celebres.css?v=1">
-    <link rel="stylesheet" href="assets/css/connexions.css?v=8">
+    <link rel="stylesheet" href="assets/css/connexions.css?v=9">
     <link rel="stylesheet" href="assets/css/paniers.css?v=3"><!-- 🧺 l’onglet Paniers -->
     <link rel="stylesheet" href="assets/css/assistant-ia.css?v=3">
     <link rel="stylesheet" href="assets/css/comptes-famille.css?v=1">
@@ -126,7 +127,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/fiche-edifice.css?v=2">
     <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">
     <link rel="stylesheet" href="assets/css/listes-donnees.css?v=3">
-    <link rel="stylesheet" href="assets/css/listes-themes.css?v=5">
+    <link rel="stylesheet" href="assets/css/listes-themes.css?v=6">
     <link rel="stylesheet" href="assets/css/donnees-maj.css?v=2">
     <link rel="stylesheet" href="assets/css/donnees-recap.css?v=1"><!-- 📊 Récap des données -->
     <link rel="stylesheet" href="assets/css/donnees-plus.css?v=1"><!-- 📊 Données, en plus -->
@@ -181,7 +182,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=62" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=63" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
@@ -1257,7 +1258,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=600" defer></script>
+<script src="assets/js/app.js?v=601" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1297,7 +1298,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=26" defer></script>
 <script src="assets/js/app-chrono-recherche.js?v=1" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
-<script src="assets/js/app-ui.js?v=38" defer></script>
+<script src="assets/js/app-ui.js?v=39" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=11" defer></script>
 <script src="assets/js/app-aide-lecture.js?v=5" defer></script>
 <!-- aide-langues : une langue = un fichier (assets/js/aide-langues/README-format.md) -->
@@ -1417,8 +1418,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-horloges.js?v=7" defer></script>
 <script src="assets/js/heritage-assemble.js?v=11" defer></script>
 <script src="assets/js/heritage-columns.js?v=9" defer></script>
-<script src="assets/js/heritage-atelier-widgets.js?v=9" defer></script>
-<script src="assets/js/heritage-atelier-donnees.js?v=1" defer></script><!-- 📊 Données téléchargées : widget du projet, widget du tableau de bord, élément de l’Atelier -->
+<script src="assets/js/heritage-atelier-widgets.js?v=10" defer></script>
+<script src="assets/js/heritage-atelier-donnees.js?v=2" defer></script><!-- 📊 Données téléchargées : widget du projet, widget du tableau de bord, élément de l’Atelier -->
 <script src="assets/js/heritage-voters.js?v=11" defer></script>
 <script src="assets/js/heritage-widgets.js?v=56" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=17" defer></script>
@@ -1470,8 +1471,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-fiches.js?v=29" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=7" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=18" defer></script>
-<script src="assets/js/heritage-diagrams-render.js?v=11" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=37" defer></script>
+<script src="assets/js/heritage-diagrams-render.js?v=12" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=38" defer></script>
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
 <script src="assets/js/heritage-vector.js?v=43" defer></script>
@@ -1548,7 +1549,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>
 <script src="assets/js/heritage-diagram-plus.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-lot-b.js?v=1" defer></script>
-<script src="assets/js/heritage-diagram-perso.js?v=5" defer></script>
+<script src="assets/js/heritage-diagram-perso.js?v=6" defer></script>
+<script src="assets/js/heritage-diagram-donnees.js?v=1" defer></script><!-- 📊 Partir des données : une liste, une question (maquette docs/design/diagrammes-donnees.html) -->
 <script src="assets/js/heritage-diagram-lot-a.js?v=2" defer></script>
 <script src="assets/js/heritage-artist.js?v=19" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=12" defer></script>
@@ -1725,12 +1727,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-lot9-sons-enfance.js?v=2" defer></script>
 <script src="assets/js/heritage-terroir.js?v=2" defer></script>
 <script src="assets/js/heritage-terre-mots.js?v=3" defer></script>
-<script src="assets/js/heritage-veille-deces.js?v=2" defer></script>
+<script src="assets/js/heritage-veille-deces.js?v=3" defer></script>
 <script src="assets/js/heritage-arbres-en-ligne.js?v=1" defer></script>
 <script src="assets/js/heritage-pistes-auto.js?v=3" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
-<script src="assets/js/heritage-connexions.js?v=10" defer></script>
+<script src="assets/js/heritage-connexions.js?v=12" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=6" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=5" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
@@ -1745,7 +1747,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-chateaux-territoires.js?v=3" defer></script>
 <script src="assets/js/heritage-lot8-monde-village.js?v=5" defer></script>
 <script src="assets/js/heritage-lot10-voir-village.js?v=2" defer></script>
-<script src="assets/js/heritage-telech-a.js?v=2" defer></script>
+<script src="assets/js/heritage-telech-a.js?v=3" defer></script>
 <script src="assets/js/heritage-lot10-objets-traces.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-d.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-d-traduire.js?v=2" defer></script>

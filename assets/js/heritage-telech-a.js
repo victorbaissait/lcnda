@@ -205,7 +205,11 @@
         const anchor = village.querySelector('[data-l10v-host]') || village.querySelector('[data-lp-host]') || village.querySelector('.cplus-place') || village.querySelector('.h-village-grid');
         const box = '<div class="ta-place" data-ta-host></div>';
         if (anchor) anchor.insertAdjacentHTML('afterend', box); else village.insertAdjacentHTML('beforeend', box);
-        const host = village.querySelector('[data-ta-host]'), html = await placeHtml(villagePlace(village));
+        const host = village.querySelector('[data-ta-host]'), where = villagePlace(village);
+        // ⏱ le paysage CORINE vient d'Internet (plusieurs secondes, un PHP occupé) : demandé quand la partie arrive à l'écran (app-observateurs.js)
+        if (window.LCNDA_PERF?.whenSeen) await new Promise(ok => window.LCNDA_PERF.whenSeen(host, ok));
+        if (!host.isConnected) return;
+        const html = await placeHtml(where);
         if (host.isConnected) host.innerHTML = html ? panel(html) : '';
     }
     let pending = 0;

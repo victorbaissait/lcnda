@@ -2579,7 +2579,8 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     function moduleHash(module=state.module){
         if(module==='maintenance')return `#maintenance/${encodeURIComponent(state.maintenanceTab||'issues')}`;
         if(module==='dashboard'&&state.dashboardBoard)return `#dashboard/${encodeURIComponent(state.dashboardBoard)}`;
-        if(module==='documents'||module==='catalogue'){const h=window.LCNDA_EXT?.onglets?.[module]?.hash?.();if(h)return h;} // 📄 « #documents/12 », 🎨 « #catalogue/45/301 »
+        if(module==='documents'||module==='catalogue'){const h=window.LCNDA_EXT?.onglets?.[module]?.hash?.();if(h)return h;}
+        if(module==='donnees'){const h=window.LCNDA_EXT?.donneesOnglet?.hash?.();if(h)return h;} // 📊 « #donnees/data_theme_guerres » (app-donnees-onglet.js) // 📄 « #documents/12 », 🎨 « #catalogue/45/301 »
         if(module==='personnes'&&Number(state.currentPersonId)){const id=Number(state.currentPersonId),sh=state.sheetHash;return `#personnes/${id}${sh&&Number(sh.id)===id&&sh.slug?`/${encodeURIComponent(sh.slug)}`:''}`;}
         return `#${module}`;
     }
@@ -2661,7 +2662,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         setTimeout(()=>{['wheel','touchstart','keydown','pointerdown'].forEach(ev=>window.removeEventListener(ev,stop,{capture:true}));if(scrollRestoring&&scrollRestoring.mod===mod)scrollRestoring=null;},6100);
     }
 
-    const SIDEBAR_MODULES = ['dashboard', 'suivi', 'documents', 'catalogue', 'personnes', 'graphiques', 'jeu', 'carte', 'listes', 'chronologie', 'recherche', 'enquetes', 'fiches', 'adn', 'comparaison', 'maintenance'];
+    const SIDEBAR_MODULES = ['dashboard', 'suivi', 'documents', 'catalogue', 'personnes', 'graphiques', 'jeu', 'carte', 'listes', 'donnees', 'chronologie', 'recherche', 'enquetes', 'fiches', 'adn', 'comparaison', 'maintenance'];
     function renderSidebar() {
         sidebarController?.abort();sidebarController=new AbortController();
         const content = $('#sidebar-content');
@@ -2677,6 +2678,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         if (state.module === 'jeu') renderGooseGameSidebar(content, footer);
         if (state.module === 'carte') renderMapSidebar(content, footer);
         if (state.module === 'listes') renderListSidebar(content, footer);
+        if (state.module === 'donnees') window.LCNDA_EXT?.donneesOnglet?.sidebar?.(content, footer); // 📊 les 20 thèmes en groupes (app-donnees-onglet.js)
         if (state.module === 'chronologie') renderTimelineSidebar(content, footer);
         if (state.module === 'recherche') renderResearchSidebar(content, footer);
         if (state.module === 'enquetes') renderInvestigationsSidebar(content, footer);

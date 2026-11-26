@@ -3,7 +3,15 @@
 .vd-card p { margin: .2rem 0; }
 .vd-src { font-weight: normal; font-size: .9em; }
 .vd-why { font-size: .9em; }
-.vd-acts { margin-top: .4rem; gap: .4rem; flex-wrap: wrap; }
+.vd-acts { margin-top: .4rem; gap: 9px; flex-wrap: wrap; justify-content: flex-end; }
+/* 🤔 J'ai un doute : la pastille calme, la note, le petit champ après le clic ; 👤 Ouvrir la fiche ; les pastilles du haut */
+.vd-doubt { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.vd-doubt-text { font-style: italic; color: var(--muted, #6b7280); overflow-wrap: anywhere; }
+.vd-note { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin: .5rem 0 .2rem; }
+.vd-note input { flex: 1 1 220px; min-width: 0; }
+.vd-mine .vd-fiche { margin-left: 6px; }
+.vd-filters { margin: 4px 0 10px; }
+@media (max-width: 640px) { .vd-acts { justify-content: flex-start; } }
 .vd-w-list, .ael-w-list { margin: .2rem 0; padding-left: 1.1rem; }
 .ael-table td, .ael-table th { vertical-align: top; }
 .ael-tabs { margin: .6rem 0; }

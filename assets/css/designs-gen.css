@@ -4599,6 +4599,7 @@
 :root[data-lc-density] tbody.ui-person-tb > tr.ui-person-tb-head > th{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
 @media (max-width: 640px){
   :root[data-lc-density] .ui-person-card{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+  :root[data-lc-density] .ui-person-card .ui-row{padding:calc(10px * var(--lc-sp)) calc(2px * var(--lc-sp))}
 }
 @media print{
   :root .ui-person-card:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
@@ -7096,6 +7097,26 @@
 :root[data-lc-density] .atd-pickrows{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .atd-pickrows label{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .atd-mode{gap:calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .atd-show .atd-head b{padding-left:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-d-compact{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .atd-d-compact .atd-table td{padding:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-d-airy{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .atd-d-airy .atd-rows{gap:calc(9px * var(--lc-sp))}
+:root[data-lc-density] .atd-perso{padding-top:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-perso > summary,:root[data-lc-density] .atd-sec > summary,:root[data-lc-density] .atd-ask > summary{padding:calc(4px * var(--lc-sp)) 0}
+:root[data-lc-density] .atd-sec > .atd-filters{padding:calc(6px * var(--lc-sp)) 0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .atd-cols{gap:calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .atd-cols:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .atd-cols{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .atd-table th,:root[data-lc-density] .atd-table td{padding:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-cards{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-card{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .atd-card{padding:calc(8px * var(--lc-sp))}
+:root .atd-card:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .atd-time{padding:0 0 0 calc(10px * var(--lc-sp))}
+:root[data-lc-density] .atd-time{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .atd-time li{gap:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .atd-ticker{gap:calc(6px * var(--lc-sp))}
 /* donnees-maj.css */
 :root[data-lc-density] .dmaj-filters .segmented button{padding:0 calc(16px * var(--lc-sp))}
 /* donnees-recap.css */

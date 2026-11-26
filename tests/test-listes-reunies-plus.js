@@ -22,7 +22,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
     const p = B.page;
     try {
         await p.waitForFunction(() => window.LCNDA_EXT?.listesReuniesPlus && window.LCNDA_EXT?.listesValeurs, null, {timeout: 30000});
-        const openKey = async k => { await p.evaluate(x => { const A = window.LCNDA_APP; A.state.listType = x; A.setModule('listes'); }, k); };
+        const openKey = async k => { await p.evaluate(x => { const A = window.LCNDA_APP, H = window.LCNDA_EXT.dataHome; if (x === 'donnees' && H) H._st.view = 'themes'; A.state.listType = x; A.setModule('listes'); }, k); }; // 📊 Récap d'abord (app-donnees-accueil.js) : ici, la vue 🧰 Thèmes
 
         await t('déclarations : 5 listes réunies, chacune dans son thème, colonnes + Sources ↗ + 👪 ; anciens noms une seule fois', async () => {
             const r = await p.evaluate(() => { const E = window.LCNDA_EXT, TH = E.listesThemes;

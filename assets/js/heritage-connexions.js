@@ -1941,9 +1941,9 @@
         box.addEventListener('click', e => {
             if (e.target.closest('[data-cx-patt-take]')) { openTake({dest: pisteDest(invId, cur)}).then(afterTake); return; }
             if (e.target.closest('[data-cx-patt-basket]')) { openTake({dest: pisteDest(invId, cur), tab: 'basket'}).then(afterTake); return; }
-            if (e.target.closest('[data-cx-link-x]')) { setTimeout(refresh, 600); setTimeout(refresh, 1500); }
         });
-        document.addEventListener('click', e => { if (box.isConnected && e.target.closest?.('.toast button')) setTimeout(refresh, 800); }); // ↶ Annuler
+        const onLinks = () => { if (!box.isConnected) return document.removeEventListener('lcnda-piste-links', onLinks); refresh(); };
+        document.addEventListener('lcnda-piste-links', onLinks); // ✕ et ↶ Annuler
         paint();
     }
     function linksHtml(item) {
@@ -1954,8 +1954,9 @@
     document.addEventListener('click', async e => {
         const x = e.target.closest?.('[data-cx-link-x]'); if (!x) return;
         e.preventDefault(); e.stopPropagation();
-        try { const r = await post('item_link_remove', {ids: [Number(x.dataset.cxLinkX)]}); A().refreshScreen?.();
-            undoToast(T('Retiré de la piste'), {undo: async () => { await post('item_link_restore', {rows: r.removed}); A().refreshScreen?.(); }}); } catch (err) { toast(err.message, 'error'); }
+        const changed = () => document.dispatchEvent(new CustomEvent('lcnda-piste-links')); // 📌 la fenêtre de la piste se redessine (pisteAttach)
+        try { const r = await post('item_link_remove', {ids: [Number(x.dataset.cxLinkX)]}); A().refreshScreen?.(); changed();
+            undoToast(T('Retiré de la piste'), {undo: async () => { await post('item_link_restore', {rows: r.removed}); A().refreshScreen?.(); changed(); }}); } catch (err) { toast(err.message, 'error'); }
     }, true);
 
     /* ═════════════ 👤 la fiche : « ⋯ → ☑ Choisir plusieurs » (ses événements) ═════════════ */

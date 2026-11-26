@@ -62,9 +62,9 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.waitForFunction(async pid => { const d = await window.LCNDA_APP.api('investigation', {id: 1}); return d.items.find(x => Number(x.id) === pid)?.links?.some(l => /Tulle/.test(l.label)); }, piste, {timeout: 15000});
         });
         await t('un dossier de l’enquête : 📥 Prendre depuis… y range un média ; ↶ remet comme avant ; un dossier d’une autre enquête est refusé', async () => {
-            const f = await post('save_investigation_folder', {investigation_id: 1, name: 'Registres'}).catch(() => null);
+            const f = await post('save_investigation_media_folder', {investigation_id: 1, parent_id: '', name: 'Registres'}).catch(() => null);
             let fid = Number(f?.id || 0);
-            if (!fid) { const d = await inv(); fid = Number((d.folders || [])[0]?.id || 0); }
+            if (!fid) { const d = await inv(); fid = Number((d.folders || []).find(x => x.name === 'Registres')?.id || 0); }
             assert.ok(fid, 'un dossier : ' + JSON.stringify(f));
             const media = ((await B.api('list', {type: 'media', limit: 5})).rows || [])[0]; assert.ok(media, 'un média dans la base d’essai');
             await B.go('enquetes', {enquetesTab: 'enquetes', currentInvestigationId: 1, investigationFolderId: fid}); await p.waitForSelector('#take-into-folder', {timeout: 15000});

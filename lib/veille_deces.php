@@ -12,9 +12,11 @@ declare(strict_types=1);
  *  - « Vérifier maintenant » : tout le fichier.
  * Chaque piste attend une décision : « ✓ C'est elle » (décès écrit sur la fiche, avec la source INSEE et son numéro d'acte ;
  * la fiche passe « décédée ») ou « ✗ Ce n'est pas elle » (retenu : jamais reproposée). ↶ Annuler pour les deux.
+ * « 🤔 J'ai un doute » : vue, à revoir — la piste RESTE dans la liste (status 'new'), avec review='doubt', sa date et une note ;
+ * « ↩ Plus de doute » l'enlève ; ↶ remet l'état d'avant (prev).
  * Tables (créées ici) : vd_pistes, vd_state.
  *  - GET vd_status · GET vd_list · GET vd_dismissed
- *  - POST vd_run {full} · vd_auto · vd_confirm {id} · vd_not_same {id} · vd_undo {id}
+ *  - POST vd_run {full} · vd_auto · vd_confirm {id} · vd_not_same {id} · vd_undo {id} · vd_doubt {id, note?, off?, prev?}
  * Source : Fichier des personnes décédées, INSEE, data.gouv.fr, Licence Ouverte 2.0 (Etalab).
  */
 
@@ -47,6 +49,11 @@ function vd_tables(PDO $pdo): void
         UNIQUE(person_id, insee_key))");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_vd_pistes_status ON vd_pistes(status)');
     $pdo->exec('CREATE TABLE IF NOT EXISTS vd_state (k TEXT PRIMARY KEY, v TEXT)');
+    // 🤔 « J'ai un doute » : review = '' | 'doubt' (seules valeurs permises), sa date et sa note
+    $cols = array_column($pdo->query('PRAGMA table_info(vd_pistes)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+    if (!in_array('review', $cols, true)) { $pdo->exec("ALTER TABLE vd_pistes ADD COLUMN review TEXT NOT NULL DEFAULT ''"); }
+    if (!in_array('review_at', $cols, true)) { $pdo->exec('ALTER TABLE vd_pistes ADD COLUMN review_at TEXT'); }
+    if (!in_array('review_note', $cols, true)) { $pdo->exec("ALTER TABLE vd_pistes ADD COLUMN review_note TEXT NOT NULL DEFAULT ''"); }
     $done[$k] = true;
 }
 function vd_get(PDO $pdo, string $k, string $d = ''): string { $s = $pdo->prepare('SELECT v FROM vd_state WHERE k=?'); $s->execute([$k]); $v = $s->fetchColumn(); return $v === false ? $d : (string) $v; }
@@ -171,6 +178,7 @@ function vd_item(array $v, array $p, array $row): array
 {
     $N = succ_p2_insee_date((string) $row['date_naissance']); $D = succ_p2_insee_date((string) $row['date_deces']);
     return ['id' => (int) $v['id'], 'status' => (string) $v['status'], 'score' => (int) $v['score'], 'detail' => json_decode((string) $v['detail_json'], true) ?: [], 'found_at' => (string) $v['found_at'],
+        'doubt' => ($v['review'] ?? '') === 'doubt' ? ['at' => (string) ($v['review_at'] ?? ''), 'note' => (string) ($v['review_note'] ?? '')] : null,
         'person' => ['id' => (int) $p['id'], 'name' => succ_name($p), 'gender' => (string) $p['gender'], 'birth' => (string) ($p['birth']['text'] ?? ''), 'birth_place' => (string) ($p['birth']['place'] ?? ''), 'status' => (string) $p['status']],
         'insee' => ['id' => (int) $row['id'], 'nom' => (string) $row['nom'], 'prenoms' => (string) ($row['prenoms'] ?: $row['prenom']), 'sexe' => (string) $row['sexe'],
             'naissance' => $N['text'], 'lieu_naissance' => vd_place_text((string) $row['commune_naissance'], (string) $row['code_lieu_naissance'], (string) $row['pays_naissance']),
@@ -253,6 +261,29 @@ function vd_not_same(PDO $pdo, array $d): array
     $pdo->prepare("UPDATE vd_pistes SET status='not_same', decided_at=CURRENT_TIMESTAMP WHERE id=?")->execute([(int) $v['id']]);
     return ['ok' => true, 'pending' => vd_pending_count($pdo)];
 }
+/** 🤔 « J'ai un doute » sur une piste qui attend : elle reste dans la liste, marquée « vue, à revoir » (date, note facultative).
+ *  {id} pose le doute (aujourd'hui) ; {id, note} change seulement la note ; {id, off: 1} l'enlève ; {id, prev: {review, at, note}} remet l'état d'avant (↶). */
+function vd_doubt(PDO $pdo, array $d): array
+{
+    $v = vd_piste($pdo, $d);
+    if ($v['status'] !== 'new') { throw new LcndaBadInput('Cette piste est déjà décidée.'); }
+    $prev = ['review' => (string) ($v['review'] ?? ''), 'at' => $v['review_at'] ?? null, 'note' => (string) ($v['review_note'] ?? '')];
+    $note = static fn($x) => mb_substr(trim(preg_replace('/\s+/u', ' ', (string) $x)), 0, 500);
+    if (isset($d['prev']) && is_array($d['prev'])) {
+        $r = (string) ($d['prev']['review'] ?? '');
+        if (!in_array($r, ['', 'doubt'], true)) { throw new LcndaBadInput('État inconnu.'); }
+        $at = $r === 'doubt' && preg_match('/^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}:\d{2})?$/', (string) ($d['prev']['at'] ?? '')) ? (string) $d['prev']['at'] : null;
+        $pdo->prepare('UPDATE vd_pistes SET review=?, review_at=?, review_note=? WHERE id=?')->execute([$r, $r === 'doubt' ? ($at ?? date('Y-m-d H:i:s')) : null, $r === 'doubt' ? $note($d['prev']['note'] ?? '') : '', (int) $v['id']]);
+    } elseif (!empty($d['off'])) {
+        $pdo->prepare("UPDATE vd_pistes SET review='', review_at=NULL, review_note='' WHERE id=?")->execute([(int) $v['id']]);
+    } elseif (array_key_exists('note', $d) && $prev['review'] === 'doubt') {
+        $pdo->prepare('UPDATE vd_pistes SET review_note=? WHERE id=?')->execute([$note($d['note']), (int) $v['id']]);
+    } else {
+        $pdo->prepare("UPDATE vd_pistes SET review='doubt', review_at=?, review_note=? WHERE id=?")->execute([date('Y-m-d H:i:s'), $note($d['note'] ?? ''), (int) $v['id']]);
+    }
+    $s = $pdo->prepare('SELECT review, review_at, review_note FROM vd_pistes WHERE id=?'); $s->execute([(int) $v['id']]); $n = $s->fetch(PDO::FETCH_ASSOC);
+    return ['ok' => true, 'prev' => $prev, 'doubt' => $n['review'] === 'doubt' ? ['at' => (string) $n['review_at'], 'note' => (string) $n['review_note']] : null];
+}
 /** ↶ Annuler une décision : le décès ajouté est retiré, la fiche reprend son statut ; la piste revient */
 function vd_undo(PDO $pdo, array $d): array
 {
@@ -293,6 +324,7 @@ function vd_api_post(PDO $pdo, string $action, array $d): array
         'vd_confirm' => vd_confirm($pdo, $d),
         'vd_not_same' => vd_not_same($pdo, $d),
         'vd_undo' => vd_undo($pdo, $d),
+        'vd_doubt' => vd_doubt($pdo, $d),
         default => throw new LcndaBadInput('Action inconnue.'),
     };
 }

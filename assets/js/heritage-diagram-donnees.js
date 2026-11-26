@@ -391,12 +391,12 @@
         let hit = liveMem.get(key);
         if (!hit || Date.now() - hit.t > 60000) { hit = {t: Date.now(), p: compute(cfg, spec, {share})}; liveMem.set(key, hit); }
         let r; try { r = await hit.p; } catch (_) { liveMem.delete(key); return spec; }
-        if (!r.spec) return share ? {...clone(spec), o: {...(spec.o || {}), source: (spec.o?.source || '')}} : spec;
+        if (!r.spec) return spec;
         const out = {...clone(r.spec), live: spec.live}; out.o = {...out.o, title: spec.o?.title || out.o.title, subtitle: spec.o?.subtitle ?? out.o.subtitle};
         delete out.__auto; return out;
     }
     /** ce qui part dans un fichier : les chiffres d'aujourd'hui, sans les vivants, sans la recette « tenue à jour » */
-    async function frozen(spec) { const s = await resolve(spec, {share: true}); const out = clone(s); delete out.live; return out; }
+    async function frozen(spec) { const s = await resolve(spec, {share: true}); const out = clone(s); delete out.live; delete out.dataRecipe; return out; }
 
     /* ═════════ ⭐ Modèles : la mise en forme et la recette, jamais un chiffre ni un nom ═════════ */
     const FORMAT_KEYS = ['palette', 'colors', 'font', 'bg', 'bgColor', 'fg', 'lineW', 'radius', 'scale', 'grid', 'style', 'legend', 'titleAlign', 'width', 'height', 'format', 'log', 'y2', 'facet', 'facetCols', 'values', 'sameScale', 'cols', 'chartHeight', 'colorBy', 'labels', 'sort', 'angle', 'hole', 'dotSize', 'opacity'];
@@ -426,11 +426,12 @@
         const W = Number(m[1]), H = Number(m[2]); let W2 = W, H2 = H;
         if (W / H > r) H2 = W / r; else W2 = H * r;
         const dx = (W2 - W) / 2, dy = (H2 - H) / 2, bg = (svg.match(/<rect class="dg-bg"[^>]*fill="([^"]+)"/) || [])[1] || (spec.o?.bg === 'transparent' ? '' : '#ffffff');
-        return svg.replace(/viewBox="0 0 [\d.]+ [\d.]+" width="[\d.]+" height="[\d.]+"/, `viewBox="${-dx.toFixed(1)} ${-dy.toFixed(1)} ${W2.toFixed(1)} ${H2.toFixed(1)}" width="${Math.round(W2)}" height="${Math.round(H2)}"`)
-            .replace(/(<svg\b[^>]*>)/, `$1${bg ? `<rect class="dgd-frame" x="${-dx.toFixed(1)}" y="${-dy.toFixed(1)}" width="${W2.toFixed(1)}" height="${H2.toFixed(1)}" fill="${esc(bg)}"/>` : ''}`);
+        const W3 = Math.ceil(W2), H3 = Math.ceil(H2);
+        return svg.replace(/viewBox="0 0 [\d.]+ [\d.]+" width="[\d.]+" height="[\d.]+"/, `viewBox="0 0 ${W3} ${H3}" width="${W3}" height="${H3}"`)
+            .replace(/(<svg\b[^>]*>)/, `$1${bg ? `<rect class="dgd-frame" width="${W3}" height="${H3}" fill="${esc(bg)}"/>` : ''}<g class="dgd-fmt" transform="translate(${dx.toFixed(1)} ${dy.toFixed(1)})">`).replace(/<\/svg>\s*$/, '</g></svg>');
     }
     const prevFinish = R()?.finish;
-    const installFinish = () => { const DR = R(); if (DR && DR.finish !== finish) { const before = typeof DR.finish === 'function' ? DR.finish : null; DR.finish = (svg, spec) => finish(before ? before(svg, spec) : svg, spec); DR.finish.__dgd = true; } };
+    const installFinish = () => { const DR = R(); if (DR && !DR.finish?.__dgd) { const before = typeof DR.finish === 'function' ? DR.finish : null; DR.finish = (svg, spec) => finish(before ? before(svg, spec) : svg, spec); DR.finish.__dgd = true; } };
     if (!prevFinish?.__dgd) { if (R()) installFinish(); else if (typeof document !== 'undefined') document.addEventListener('DOMContentLoaded', installFinish); }
 
     /* ═════════ ⚙️ Personnaliser : format, note d'un clic, ⭐ modèle, deux panneaux / deuxième axe ═════════ */
@@ -451,9 +452,11 @@
         }, sig),
     });
     async function askModelName(spec) {
-        const name = await (A().promptBox ? A().promptBox(T('Nom du modèle'), {value: spec.o?.title ? T('Comme « {t} »', {t: String(spec.o.title).slice(0, 40)}) : T('Mon modèle')}) : Promise.resolve(window.prompt?.(T('Nom du modèle'), T('Mon modèle'))));
-        if (!name) return;
-        saveModel(spec, name); toast(T('⭐ Modèle « {n} » enregistré : la mise en forme et la recette, sans chiffres ni noms.', {n: String(name).slice(0, 60)}));
+        const done = name => { name = String(name || '').trim(); if (!name) return false; saveModel(spec, name); toast(T('⭐ Modèle « {n} » enregistré : la mise en forme et la recette, sans chiffres ni noms.', {n: name.slice(0, 60)})); return true; };
+        if (!ext.openDialog) return done(T('Mon modèle'));
+        ext.openDialog({eyebrow: T('Diagramme'), title: `⭐ ${T('Enregistrer comme modèle')}`, submitLabel: T('Enregistrer'),
+            body: `<label>${esc(T('Nom du modèle'))}<input name="dgd_model" maxlength="60" value="${esc(T('Mon modèle'))}" data-dgd-modelname></label><p class="ui-hint">${esc(T('Seulement la mise en forme et la recette (liste, filtres, champs) : un cousin l’ouvre et il se remplit avec son arbre.'))}</p>`,
+            onSubmit: form => done(form.querySelector('[name=dgd_model]')?.value)});
     }
     // 📝 la note d'un clic : le point cliqué de l'aperçu (en part de la largeur et de la hauteur), avec une flèche vers la colonne
     if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('click', e => {
@@ -476,7 +479,7 @@
         const box = document.createElement('div'); box.className = 'dgd'; box.dataset.dgd = '';
         pane.appendChild(box); pane.appendChild(tree);
         const st = pane.__dgd || (pane.__dgd = {});
-        const start = api.start?.(); const live = api.spec().live?.data;
+        const start = api.start?.(); const live = api.spec().live?.data || api.spec().dataRecipe;
         st.cfg = st.cfg || (live ? clone(live) : {src: start?.src || 'tree', live: true, ...(start || {})});
         if (start) Object.assign(st.cfg, start);
         if (st.cfg.list && !st.cfg.km) { const d = listById(st.cfg.list); if (d) st.cfg.km = kmFor(d); }
@@ -493,8 +496,7 @@
                 : `<form class="dgd-ask" data-dgd-askform><span aria-hidden="true">💬</span><input type="search" data-dgd-ask value="${esc(c.ask || '')}" placeholder="${esc(T('ex. les séismes près de Tulle 1700–1900'))}" aria-label="${esc(T('Ta question'))}"><button type="submit" class="button small">${esc(T('Comprendre'))}</button></form>${st.chips ? `<div class="dgd-understood"><span class="dgd-lab">${esc(T('J’ai compris'))}</span>${st.chips.map(([k, v]) => `<button type="button" class="ui-listbar-chip" data-dgd-fix>${esc(k)} : ${esc(v)}</button>`).join('')}</div>` : ''}`;
             const models0 = models();
             const head = sw + (models0.length ? `<details class="dgd-models"><summary>⭐ ${esc(T('Mes modèles'))} (${models0.length})</summary><div>${models0.map((m, i) => `<button type="button" class="ui-listbar-chip" data-dgd-usemodel="${i}">⭐ ${esc(m.name || T('Sans nom'))}</button>`).join('')}<button type="button" class="link-button" data-dgd-modexp>⤓ ${esc(T('Partager (fichier)'))}</button><label class="link-button dgd-imp">⤒ ${esc(T('Ouvrir un modèle'))}<input type="file" accept=".json,application/json" data-dgd-modimp hidden></label></div></details>` : `<label class="link-button dgd-imp">⤒ ${esc(T('Ouvrir un modèle'))}<input type="file" accept=".json,application/json" data-dgd-modimp hidden></label>`);
-            let html = step(1, T('D’où viennent les données ?'), one).replace(/^<section[^>]*><h4>.*?<\/h4>/, m0 => m0) ;
-            html = head + html;
+            let html = head + step(1, T('Choisir'), one);
             if (d) {
                 html += step(2, T('Ne garder que…'), `<div class="dgd-chips" data-dgd-chips>${chipsHtml(d, c)}</div><div data-dgd-addf hidden></div>`, `<p class="ui-hint">${esc(T('Un clic sur × retire une pastille ; le rayon se règle avec − / +.'))}</p>`);
                 html += step(3, T('Qui va où'), mapHtml(d, c, st));
@@ -522,6 +524,7 @@
                 st.sug = suggestFields(r.d, c, []); st.sug.gal = suggestKinds(profileOf(r.d, c), 'all')[0];
                 const s = r.spec; delete s.__auto;
                 if (c.live) s.live = {data: clone(c), label: T(r.d.label), sum: r.sum}; else delete s.live;
+                s.dataRecipe = clone(c); // la recette (sans chiffres) : « 📊 Partir des données » se rouvre sur la même source, même figé
                 api.setSpec(s); api.setSum(r.sum + (c.live ? ' ' + T('Tenu à jour.') : ''));
                 paint();
             } catch (e) { toast(e.message || String(e), 'error'); }
@@ -556,7 +559,7 @@
             if (t.dataset.dgdMap) { c[t.dataset.dgdMap] = t.value; if (t.dataset.dgdMap === 'color' && c.gal === 'bars') run(); else run(); return; }
             if (t.dataset.dgdTwo !== undefined) { const v = t.value; if (!v) delete c.two; else c.two = v === 'births' ? {src: 'births'} : {src: 'list', list: v}; if (c.two) c.gal = 'lines'; run(); return; }
             if (t.hasAttribute('data-dgd-live')) { c.live = t.checked; run(); return; }
-            if (t.hasAttribute('data-dgd-modimp') && t.files?.[0]) { try { const j = JSON.parse(await t.files[0].text()); const list = j.lcnda_diagram_models === 1 ? j.models : [j]; let n = 0; list.forEach(m => { if (m?.lcnda_diagram_model === 1) { const clean = modelOf({kind: m.kind, o: m.o, live: {data: m.data}}, m.name); const all = models().filter(x => x.name !== clean.name); all.unshift(clean); writeJ(K_MOD, all.slice(0, 40)); n++; } }); if (!n) throw new Error(T('Ce fichier n’est pas un modèle de diagramme.')); toast(T('{n} modèle(s) ajouté(s) à ⭐ Mes modèles.', {n})); paint(); } catch (err) { toast(err.message || String(err), 'error'); } }
+            if (t.hasAttribute('data-dgd-modimp') && t.files?.[0]) { try { const j = JSON.parse(await t.files[0].text()); const list = j.lcnda_diagram_models === 1 ? j.models : [j]; let n = 0; list.forEach(m => { if (m?.lcnda_diagram_model === 1) { const clean = modelOf({kind: m.kind, o: m.o, live: {data: m.data}}, m.name); const all = models().filter(x => x.name !== clean.name); all.unshift(clean); writeJ(K_MOD, all.slice(0, 40)); n++; } }); if (!n) throw new Error(T('Ce fichier n’est pas un modèle de diagramme.')); toast(T('Modèles ajoutés à ⭐ Mes modèles : {n}.', {n})); paint(); } catch (err) { toast(err.message || String(err), 'error'); } }
             if (t.dataset.dgdFkey !== undefined) { const h = box.querySelector('[data-dgd-addf]'); h.innerHTML = await addFilterHtml(listById(c.list), c, t.value); }
         });
         box.addEventListener('submit', async e => {

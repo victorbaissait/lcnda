@@ -245,7 +245,7 @@
     async function overview(host, token) {
         const app = A(), I = index(), all = I.ds;
         host.innerHTML = '<section class="page collection-page ld-page ld-overview ldt-overview"></section>';
-        picker(host.querySelector('.ldt-overview'), {head: UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')}`, icon: '🧰', title: T('Toutes les données'), help: esc(T('Des listes toutes prêtes pour comprendre la vie de ta famille, rangées par thème. Lecture seule.')),
+        picker(host.querySelector('.ldt-overview'), {onPaint: () => { try { ext.donneesOnglet?.arrangeCards?.(host.querySelector('.ldt-overview')); } catch (e) { console.error(e); } }, head: UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')}`, icon: '🧰', title: T('Toutes les données'), help: esc(T('Des listes toutes prêtes pour comprendre la vie de ta famille, rangées par thème. Lecture seule.')),
             actions: [`<button type="button" class="button small secondary" data-ldt-settings title="${esc(T('Par thème ou par groupe, ce qu’ouvre un thème, le rayon « Dans la famille »'))}">⚙ ${esc(T('Réglages des listes'))}</button>`]}) : ''});
         void token; void app; void all;
     }
@@ -259,7 +259,8 @@
 
     /* ═════════════ un thème : sa liste réunie, ou ses listes ═════════════ */
     const tabOf = new Map(); // thème → onglet choisi pendant la visite ('lists' ou l'id d'une liste réunie)
-    const curTheme = () => { const k = String(A().state?.listType || ''); return k.startsWith(TKEY) ? k.slice(TKEY.length) : ''; };
+    const curTheme = () => { const k = String((A().state?.module === 'donnees' ? ext.donneesOnglet?.current?.() : A().state?.listType) || ''); // 📊 dans l'onglet Données : la page ouverte là (app-donnees-onglet.js)
+        return k.startsWith(TKEY) ? k.slice(TKEY.length) : ''; };
     function renderTheme(id, token) {
         const host = ws(), t = themeById(id); if (!host || !t) return;
         const mg = mergedOf(id), want = tabOf.get(id) || (openMode() === 'reunie' && mg.length ? mg[0].id : 'lists');
@@ -285,7 +286,7 @@
     }
     function renderThemeLists(id, token) {
         const host = ws(), t = themeById(id), plain = plainOf(id), mg = mergedOf(id);
-        host.innerHTML = `<section class="page collection-page ld-page ld-overview ldt-theme-page" data-ldt-page="${esc(id)}">${UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')}`, icon: t.icon, title: T(t.label), help: esc(T(t.hint || ''))}) : ''}
+        host.innerHTML = `<section class="page collection-page ld-page ld-overview ldt-theme-page" data-ldt-page="${esc(id)}">${UI().pageHeader ? UI().pageHeader({where: E().crumb ? E().crumb() : `${T('Listes')} · 🧰 ${T('Données')}`, icon: t.icon, title: T(t.label), help: esc(T(t.hint || ''))}) : ''}
             ${mg.length ? '' : `<nav class="ldt-tabs"><button type="button" class="ldt-back" data-ldt-back>← ${esc(T('Tous les thèmes'))}</button></nav>`}
             <input type="search" class="ld-q ldt-q" data-ldt-q placeholder="${esc(T('Chercher dans ce thème…'))}" aria-label="${esc(T('Chercher dans ce thème'))}">
             <div class="ld-cards" data-ldt-cards>${[...mg, ...plain].map(cardOf).join('')}</div></section>`;
