@@ -498,6 +498,7 @@ try {
         require_once __DIR__ . '/lib/recherche_outils.php';
         ro_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []);
     }
+    if (is_string($action) && str_starts_with($action, 'ld_')) { require_once __DIR__ . '/lib/lieux_doublons.php'; ld_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📍 Lieux en double probables : trouver, fusionner, ↶ (lib/lieux_doublons.php)
     if (is_string($action) && str_starts_with($action, 'rt_')) { require_once __DIR__ . '/lib/rapports_traitements.php'; rt_dispatch($pdo, $action, $isWrite, is_array($payload) ? $payload : []); } // 📊 Mes rapports, 🧰 Traitements en lot (lib/rapports_traitements.php)
     // Fusion de l'arbre d'un cousin : hors de la transaction générale (copie de sécurité VACUUM INTO d'abord)
     if ($isWrite && $action === 'merge_gedcom_analyse') {
@@ -10611,7 +10612,11 @@ function readable_error_message(Throwable $e): string
         if(preg_match('/scope/i',$raw))return 'Portée invalide : l’événement doit concerner une personne ou un couple.';
         return 'Une valeur saisie n’est pas acceptée (choix hors de la liste). Vérifie le formulaire et réessaie.';
     }
-    if(stripos($raw,'UNIQUE constraint')!==false)return 'Cet élément existe déjà (doublon refusé).';
+    if(stripos($raw,'UNIQUE constraint')!==false){
+        // 📍 un lieu (ou une de ses lignes : population d'une année, n° GeoNames…) en double : on dit quoi faire (lib/lieux_doublons.php)
+        if(preg_match('/UNIQUE constraint failed: (places|place_[a-z_]+)\./i',$raw))return 'Ce lieu existe déjà : veux-tu les fusionner ? Réglages → Modifications groupées → « Lieux en double probables » (ou le bouton « Fusionner… » du menu de choix des lieux). Rien n’a été modifié.';
+        return 'Cet élément existe déjà (doublon refusé). Rien n’a été modifié : cherche l’élément existant et modifie-le, ou fusionne les deux.';
+    }
     if(stripos($raw,'NOT NULL constraint')!==false)return 'Un champ obligatoire est vide. Vérifie le formulaire et réessaie.';
     if(stripos($raw,'database is locked')!==false||stripos($raw,'busy')!==false)return 'La base est occupée par une autre opération. Réessaie dans un instant.';
     if(str_starts_with($raw,'SQLSTATE'))return 'L’enregistrement a échoué (erreur de la base). Réessaie ; si ça recommence, fais une sauvegarde et signale-le.';
