@@ -6765,6 +6765,17 @@
 /* telech-b.css */
 :root[data-lc-density] .tb-life{gap:calc(12px * var(--lc-sp))}
 :root[data-lc-density] .tb-links{margin-top:calc(10px * var(--lc-sp))}
+/* telech-e.css */
+:root[data-lc-density] .te-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .te-latin{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .te-actions{gap:calc(6px * var(--lc-sp))}
+/* telech-f.css */
+:root[data-lc-density] .tf-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .tf-quote{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .tf-panel{margin-top:calc(12px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root[data-lc-density] .tf-ul{padding-left:calc(18px * var(--lc-sp))}
+}
 /* epoque-travail.css */
 :root[data-lc-density] .et-quote{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .et-figs{gap:calc(8px * var(--lc-sp))}
@@ -6830,6 +6841,8 @@
 :root[data-lc-density] .ld-gps-act{gap:calc(4px * var(--lc-sp))}
 :root .ld-gps-act button:is([data-lc-r], [data-lc-r] *), :root .ld-gps-act a:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .ld-gps-act button,:root[data-lc-density] .ld-gps-act a{padding:1px calc(6px * var(--lc-sp))}
+/* donnees-maj.css */
+:root[data-lc-density] .dmaj-filters .segmented button{padding:0 calc(16px * var(--lc-sp))}
 /* listes-personnes.css */
 :root[data-lc-density] .lp-cell{gap:calc(3px * var(--lc-sp))}
 :root[data-lc-density] .lp-chip{padding:1px calc(8px * var(--lc-sp))}

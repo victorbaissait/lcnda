@@ -103,6 +103,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/telech-d.css?v=2">
     <link rel="stylesheet" href="assets/css/telech-c.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-b.css?v=1">
+    <link rel="stylesheet" href="assets/css/telech-e.css?v=1">
+    <link rel="stylesheet" href="assets/css/telech-f.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-ciel-metier.css?v=1">
     <link rel="stylesheet" href="assets/css/pays-memoire.css?v=1">
@@ -166,7 +168,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=45" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=46" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=1">
@@ -1712,7 +1714,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=15" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=17" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-territoires.js?v=2" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
@@ -1725,6 +1727,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-d-traduire.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-c.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-b-village.js?v=2" defer></script>
+<script src="assets/js/heritage-telech-e.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-f.js?v=1" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=3" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>
