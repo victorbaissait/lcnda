@@ -177,6 +177,29 @@ def us_ok(cache):
         return False
 
 
+BABYNAMES = 'https://raw.githubusercontent.com/hadley/babynames/4391c25ea10b8b0589cdbab63067de3bc8b3a628/'  # version fixée (1.0.1)
+US_ROW_BABYNAMES = (US_ROW[0], US_ROW[1] + ' — copie du paquet R « babynames » (H. Wickham, CC0)', 'Domaine public (SSA) ; copie « babynames » sous CC0',
+                    US_ROW[3] + ' Copie : paquet R « babynames » 1.0.1 (Hadley Wickham, CC0), https://github.com/hadley/babynames.', 'https://github.com/hadley/babynames', '1880–2017', US_ROW[6])
+
+
+def read_us_babynames(cache, acc, zone, essai):
+    get = lambda u: urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'LCNDA build-prenoms'}), timeout=300).read()  # noqa: E731
+    desc = get(BABYNAMES + 'DESCRIPTION').decode('utf-8', 'replace')
+    if not re.search(r'(?m)^License:\s*CC0\s*$', desc) or 'SSA' not in desc:
+        raise RuntimeError('le DESCRIPTION de « babynames » ne dit plus « License: CC0 » ni « SSA » : rien n’est copié')
+    os.makedirs(cache, exist_ok=True)
+    path = os.path.join(cache, 'us-babynames.rda')
+    if not (os.path.exists(path) and os.path.getsize(path) > 0):
+        print('téléchargement', BABYNAMES + 'data/babynames.rda', file=sys.stderr)
+        open(path, 'wb').write(get(BABYNAMES + 'data/babynames.rda'))
+    import pyreadr  # pip install pyreadr pandas (atelier « Données des prénoms »)
+    d = pyreadr.read_r(path)['babynames']
+    for y, sx, nm, n in zip(d['year'], d['sex'], d['name'], d['n']):
+        if sx in ('M', 'F') and int(n) > 0:
+            acc.add(zone, 1 if sx == 'M' else 2, int(y), key(str(nm)), int(n))
+    print('États-Unis : copie « babynames » (CC0) lue,', len(d), 'lignes', file=sys.stderr)
+
+
 def read_us(path, acc, zone, essai):
     z = zipfile.ZipFile(path)
     for n in z.namelist():
@@ -207,6 +230,7 @@ def build(args):
     read_qc(fetch('qc_f', cache), 2, acc, zone_of('QC', ''), args.essai)
     read_qc(fetch('qc_g', cache), 1, acc, zone_of('QC', ''), args.essai)
     with_us = not args.sans_us and us_ok(cache)
+    us_row = US_ROW
     if with_us:
         try:
             us_file = fetch('us', cache)
@@ -214,6 +238,16 @@ def build(args):
             print('États-Unis laissés de côté :', e, file=sys.stderr); with_us = False
         if with_us:
             read_us(us_file, acc, zone_of('US', ''), args.essai)
+    if not with_us and not args.sans_us:
+        # la SSA refuse les machines de GitHub (HTTP 403) : on ne contourne rien, on prend la copie publiée des MÊMES données
+        # dans le paquet R « babynames » (H. Wickham, licence CC0 relue dans son DESCRIPTION), 1880-2017, 5 enfants au moins
+        try:
+            n0 = len(acc.t)
+            read_us_babynames(cache, acc, zone_of('US', ''), args.essai)
+            with_us = len(acc.t) > n0
+            us_row = US_ROW_BABYNAMES
+        except Exception as e:  # noqa
+            print('États-Unis (copie « babynames ») laissés de côté :', e, file=sys.stderr)
 
     os.makedirs(args.dossier, exist_ok=True)
     db_path = os.path.join(args.dossier, 'prenoms-pays.sqlite')
@@ -251,7 +285,7 @@ def build(args):
     rows.sort()
     db.executemany('INSERT INTO counts VALUES(?,?,?,?,?,?)', rows)
     db.executemany('INSERT INTO totals VALUES(?,?,?,?,?)', [(z, s, y, n, len(acc.c.get((z, s, y), {}))) for (z, s, y), n in sorted(acc.t.items())])
-    db.executemany('INSERT INTO sources VALUES(?,?,?,?,?,?,?)', SOURCE_ROWS + ([US_ROW] if with_us else []))
+    db.executemany('INSERT INTO sources VALUES(?,?,?,?,?,?,?)', SOURCE_ROWS + ([us_row] if with_us else []))
     # les années vraiment couvertes (lues dans les fichiers)
     db.execute("UPDATE sources SET annees=(SELECT MIN(t.annee) || '–' || MAX(t.annee) FROM totals t JOIN zones z ON z.id=t.zone WHERE z.pays=sources.pays)")
     built = datetime.date.today().isoformat()

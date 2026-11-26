@@ -6,7 +6,8 @@
 # Lancer : onglet « Actions » → « Données des prénoms » → « Run workflow ». Une dizaine de minutes.
 # Sources (scripts/prenoms/build-prenoms.py) : Insee (Fichier des prénoms, France et départements, Licence Ouverte 2.0),
 # OFS (STATPOP, prénoms selon l'année de naissance, OPEN-BY), Retraite Québec (Banque de prénoms, CC BY 4.0) ;
-# lot L : États-Unis (SSA, names.zip, domaine public — la page de la SSA est relue ; si elle ne répond pas, le pack se fait sans).
+# lot L : États-Unis (SSA, names.zip, domaine public — la page de la SSA est relue ; la SSA refuse les machines de GitHub (403) :
+# alors la copie des mêmes données dans le paquet R « babynames » 1.0.1, CC0, 1880-2017 ; sinon le pack se fait sans).
 # Le pack est coupé en morceaux de 1 900 Mo au plus (limite d'un fichier d'une version GitHub : 2 Go) ;
 # prenoms-manifest.json dit les morceaux, la taille et l'empreinte.
 
@@ -44,7 +45,7 @@ jobs:
           python-version: '3.12'
 
       - name: Bibliothèque (lecture des fichiers Excel de l'OFS)
-        run: pip install openpyxl
+        run: pip install openpyxl pyreadr pandas   # pyreadr : la copie « babynames » (CC0) des prénoms des États-Unis
 
       - name: Fabriquer
         run: python3 scripts/prenoms/build-prenoms.py --dossier prenoms-sortie --cache prenoms-cache ${{ inputs.essai && '--essai' || '' }}
