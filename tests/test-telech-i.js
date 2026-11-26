@@ -118,7 +118,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('[data-ti-person="1"] .ti-row', {timeout: 30000});
             await sleep(500);
             const txt = await p.textContent('[data-ti-person="1"]');
-            assert.match(txt, /Son métier touchait aux navires/); assert.match(txt, /Corderie royale/); assert.match(txt, /André et Julien passent à Mâcon/); assert.match(txt, /CORDIER/);
+            assert.match(txt, /Son métier touchait aux navires/); assert.match(txt, /Corderie royale/); assert.match(txt, /André et Julien passent à (Brest|Mâcon)/); assert.match(txt, /Mâcon \(chapitre XLIV/); assert.match(txt, /CORDIER/);
             assert.match(txt, /▸ plus/); assert.match(txt, /↗ source/);
             const html = await p.innerHTML('[data-ti-person="1"]');
             assert.match(html, /target="_blank" rel="noopener noreferrer"/); assert.ok(!/href="(?!https?:)/.test(html), 'seulement des liens http(s)');

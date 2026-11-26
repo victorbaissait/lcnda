@@ -249,7 +249,7 @@
         hippodromes: async life => { const D = await rowsOf('hippodromes'); const list = foundedFor(D.rows, life, 12); if (!list.length) return '';
             const x = list[0]; return listHtml('🐎', list, T('En {y}, on ouvre l’hippodrome {n} ({k} de {p}).', {y: esc(String(x.r.from)), n: `<b>${esc(x.r.n)}</b>`, k: esc(kmTxt(x.km)), p: esc(x.place)}), LIC.wd(), ctxLine(await ctx('hippodromes'))); },
         tour: async life => { const D = await quiet(load('tour')); if (!D) return ''; const list = tourFor(D.rows, life); if (!list.length) return '';
-            return tourHtml(list, T('Dans « Le Tour de la France par deux enfants », André et Julien passent à {c}, près de {p} :', {c: `<b>${esc(list[0].r.commune)}</b>`, p: esc(list[0].place)}), D.meta); },
+            return tourHtml(list, list[0].km < 2 ? T('Dans « Le Tour de la France par deux enfants », André et Julien passent à {c} :', {c: `<b>${esc(list[0].r.commune)}</b>`}) : T('Dans « Le Tour de la France par deux enfants », André et Julien passent à {c}, près de {p} :', {c: `<b>${esc(list[0].r.commune)}</b>`, p: esc(list[0].place)}), D.meta); },
         dico: async life => { const D = await quiet(load('dico')); if (!D) return ''; const list = dicoFor(D.rows, life); if (!list.length) return '';
             const r = list[0];
             return row('📕', `${esc(T('En 1860, un petit dictionnaire d’école définissait son métier :'))} ${quote(r.def)} ${srcLink(r.url)}`, LIC.ws(D.meta.url, T('Th. Soulice, « Petit dictionnaire de la langue française » (1860)')),
