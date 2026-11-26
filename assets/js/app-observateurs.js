@@ -8,6 +8,8 @@
  * la même image sont mis de côté et donnés en une fois juste avant le prochain dessin (requestAnimationFrame, donc avant que l'écran ne
  * soit peint : rien ne se voit), ou après 100 ms si la fenêtre est cachée. Les observateurs d'un élément précis ne changent pas.
  * disconnect() oublie les changements mis de côté (comme le navigateur) ; takeRecords() les rend.
+ * Un observateur qui doit rester immédiat (la traduction de la page : aucun texte français entre deux tâches) passe
+ * { lcndaImmediate: true } à observe() (option ignorée par le navigateur).
  * Chargé en tout premier (index.php, sans defer), avant tout script qui crée un observateur. */
 (function () {
     'use strict';
@@ -15,7 +17,7 @@
     if (typeof Native !== 'function' || Native.__lcndaParImage) return;
     var raf = typeof window.requestAnimationFrame === 'function' ? window.requestAnimationFrame.bind(window) : null;
     var isPage = function (target, opts) {
-        return !!(opts && opts.subtree) && (target === document || target === document.documentElement || target === document.body);
+        return !!(opts && opts.subtree) && !opts.lcndaImmediate && (target === document || target === document.documentElement || target === document.body);
     };
     function ParImage(callback) {
         var pending = [], hot = false, page = false, timer = 0, frame = 0;

@@ -361,7 +361,8 @@
                 else if (m.type === 'attributes' && !skipped(m.target)) doAttrs(m.target);
             }
         });
-        observer.observe(document.documentElement, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ATTRS});
+        // immédiat (app-observateurs.js) : un texte ajouté est traduit avant la tâche suivante, comme avant
+        observer.observe(document.documentElement, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ATTRS, lcndaImmediate: true});
     }
     function unobserve() { if (observer) { observer.disconnect(); observer = null; } }
 
