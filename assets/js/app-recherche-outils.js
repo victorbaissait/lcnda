@@ -163,6 +163,7 @@
         });
         const head = o.head || PEOPLE_HEAD(), row = o.row || personRow;
         bindExportPrint(page, () => { const ids = picked(); const list = ids.length ? ids.map(id => byId.get(id)).filter(Boolean) : people; return {title, head, rows: list.map(row)}; });
+        if (o.kit !== false) window.LCNDA_EXT?.researchKit?.people(page, {people, title, criteria: o.criteria || title, head, row, nameOf: personName}); // 🧺 📎 dans « ⤓ Exporter ▾ » et au bout de chaque ligne (app-recherche-kit.js)
     }
     const pickCell = p => `<td class="rp-pick-cell"><input type="checkbox" data-rp-pick="${Number(p.id)}" aria-label="${esc(i18n('Cocher {name}', {name: personName(p)}))}"></td>`;
     /** Le tableau de personnes des sortes ajoutées (avec une case à cocher par ligne) */
@@ -319,6 +320,7 @@
             const citHtml = d.citations.length ? `<div class="data-table-wrap"><table class="data-table rp-cit-table"><thead><tr><th>${esc(i18n('Source'))}</th><th>${esc(i18n('Pour'))}</th><th>${esc(i18n('Page'))}</th><th>${esc(i18n('Extrait'))}</th></tr></thead><tbody>${d.citations.map(c => `<tr><td>${esc(c.title)}</td><td>${c.person_id ? `<button class="table-link" data-open-person="${c.person_id}">${esc(c.person_name || i18n('Personne sans nom'))}</button>` : esc(c.entity_type)}</td><td>${esc(c.page)}</td><td class="rp-snippet">${markHtml(c.snippet, q, false, false)}</td></tr>`).join('')}</tbody></table></div>` : `<p class="muted">${esc(i18n('Aucune citation ne contient ce texte.'))}</p>`;
             out.innerHTML = `<h3>${esc(i18n('📚 Sources ({n})', {n: d.sources.length}))}</h3>${srcHtml}<h3>${esc(i18n('🔖 Citations ({n})', {n: d.citations.length}))}</h3>${citHtml}`;
             A().bindTableLinks?.();
+            if (d.sources.length) window.LCNDA_EXT?.researchKit?.sources(page, {sources: d.sources, criteria: `${i18n('Sources et citations')} : ${q}`}); // 🧺 📎 (app-recherche-kit.js)
         };
         form.addEventListener('submit', e => { e.preventDefault(); run(); });
         bindExportPrint(page, () => ({title: i18n('Sources et citations'), head: [i18n('Sorte'), i18n('Source'), i18n('Pour'), i18n('Extrait')],

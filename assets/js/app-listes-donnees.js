@@ -451,6 +451,8 @@
     function paintMap(res) {
         const d = cur.d, st = cur.st, pts = [], rows = [];
         ws()?.querySelector('[data-ld-back-map]')?.remove();
+        const was = ext.carteFiche?.of?.(res), oldCtl = was && ext.miniMapOf?.(res); // redessinée sur place (ex. 👪 les lieux arrivent) : même cadrage, la fiche reste ouverte
+        if (oldCtl) { if (!cur.mapView) cur.mapView = oldCtl.getView?.() || null; const r0 = res.__ldMapRows?.[was.current()]; if (r0 && !cur.mapReopen) cur.mapReopen = rowKeyOf(d, r0); }
         cur.rows.forEach(r => { const g = geoOf(d, r); if (g) { rows.push(r); pts.push({lat: g[0], lon: g[1], label: pointLabel(d, r), color: '#0066cc'}); } }); // au survol : le titre et la date
         if (st.near) pts.push({lat: st.near.lat, lon: st.near.lon, label: st.near.title, color: '#d4380d', n: '★'});
         if (!rows.length) { res.innerHTML = A().empty ? A().empty(T('Aucune de ces lignes n’a de position sur la carte.'), {icon: '🗺'}) : ''; paintMore(); return; }
@@ -485,6 +487,7 @@
         paintNote(false);
         res.querySelector('.h-map')?.addEventListener('minimap-view', e => { const z = e.detail || {}; paintNote(z.zoom > (z.fitZoom ?? 0) + 0.9); });
         const ctl = ext.miniMapOf?.(res);
+        res.__ldMapRows = rows;
         const cf = CF?.attach(res, {card: i => (rows[i] ? pointCard(d, st, rows[i]) : null), label: i => (rows[i] ? pointTitle(d, rows[i]).title : ''), sub: i => (rows[i] ? pointDate(d, rows[i], true) : ''),
             onAct: (k, i, b) => pointAct(k, rows[i], b, res)});
         const reopen = cur.mapReopen; cur.mapReopen = null;

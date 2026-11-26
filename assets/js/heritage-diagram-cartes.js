@@ -835,11 +835,11 @@
     }
     // la case de recherche au-dessus de la liste des pays (heritage-diagrams.js : select avec « search ») : la liste se resserre ; Entrée choisit le premier
     if (typeof document !== 'undefined') {
-        const fill = inp => { const sel = inp.parentElement?.querySelector('select[data-opt="country"]'); if (!sel) return null; const cur = sel.value;
+        const fill = inp => { const sel = (inp.closest('label') || inp.parentElement)?.querySelector('select[data-opt="country"]'); /* la case est parfois habillée (.ui-search) */ if (!sel) return null; const cur = sel.value;
             sel.innerHTML = paysGroups({o: {country: cur}}, inp.value).map(([gl, ch]) => `<optgroup label="${esc(gl)}">${ch.map(([c, n]) => `<option value="${esc(c)}"${c === cur ? ' selected' : ''}>${esc(n)}</option>`).join('')}</optgroup>`).join(''); return sel; };
         document.addEventListener('input', e => { const inp = e.target.closest?.('[data-opt-filter="country"]'); if (!inp) return; fill(inp); paysIndex().then(() => fill(inp)).catch(() => {}); });
         document.addEventListener('keydown', e => { const inp = e.target.closest?.('[data-opt-filter="country"]'); if (!inp || e.key !== 'Enter') return; e.preventDefault(); const sel = fill(inp); if (!sel) return;
-            const k = fold(inp.value), first = [...sel.options].find(op => !k || fold(op.textContent).includes(k) || op.value.toLowerCase() === k) || sel.options[0]; if (!first || first.value === sel.value) return; sel.value = first.value; sel.dispatchEvent(new Event('change', {bubbles: true})); });
+            const k = fold(inp.value), first = [...sel.options].find(op => !k || fold(op.textContent).includes(k) || op.value.toLowerCase() === k) || sel.options[0]; if (!first || first.value === sel.value) return; sel.value = first.value; sel.dispatchEvent(new Event('input', {bubbles: true})); sel.dispatchEvent(new Event('change', {bubbles: true})); });
     }
     const mapOpts = ({parishes = false} = {}) => [ // parishes : le niveau « Paroisses » (carte colorée par zones seulement)
         C('map', 'Carte', 'select', {choices: Object.entries(MAPS).map(([k, m]) => [k, m.label]), def: 'fr'}),

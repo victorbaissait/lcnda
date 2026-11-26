@@ -178,7 +178,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const pr = await p.evaluate(() => [...document.querySelectorAll('.source-item.is-collapsed')].map(b => ({h: b.querySelector('.src-body').getBoundingClientRect().height, vis: getComputedStyle(b.querySelector('.src-body-in')).visibility, tog: getComputedStyle(b.querySelector('.src-toggle')).display})));
             assert.ok(pr.length >= 3 && pr.every(x => x.h > 10 && x.vis === 'visible' && x.tog === 'none'), JSON.stringify(pr));
             await p.emulateMedia({media: 'screen'}); await sleep(100);
-            await p.evaluate(() => window.LCNDA_UI.printPage('Fiche'));
+            await p.evaluate(() => { window.LCNDA_UI.printPage('Fiche'); }); // sans attendre : la fenêtre se ferme à la main
             await p.waitForSelector('dialog[open] iframe[title="Aperçu de l’impression"]', {timeout: 20000});
             let res = null;
             for (let i = 0; i < 60 && !res; i++) {

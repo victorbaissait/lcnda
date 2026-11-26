@@ -4994,6 +4994,15 @@
 :root[data-lc-density] .mt-reorder .mt-openmode{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 :root[data-lc-density] .mt-reorder .mt-datahide{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .mt-reorder .mt-datahide{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+/* recherche-carte.css */
+:root[data-lc-density] #workspace .rk-page .page-header.ui-ph{gap:calc(12px * var(--lc-sp)) calc(20px * var(--lc-sp))}
+:root[data-lc-density] #workspace .rk-page .page-header.ui-ph > .ui-ph-actions{padding-top:calc(4px * var(--lc-sp))}
+:root[data-lc-density] #workspace .rk-page .date-results{gap:calc(9px * var(--lc-sp))}
+:root[data-lc-density] .rk-legend{gap:calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .rk-legend{padding:calc(6px * var(--lc-sp)) calc(2px * var(--lc-sp)) 0}
+:root[data-lc-density] .rk-leg{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .rk-row-acts{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .rk-ico{padding:1px calc(5px * var(--lc-sp))}
 /* audit-enquetes.css */
 :root[data-lc-density] .enq-row-act{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .enq-conclusion{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}

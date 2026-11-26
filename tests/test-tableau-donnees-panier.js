@@ -203,7 +203,8 @@ const FAKE = () => {
             await openBoard(bid); await clean();
             const id = await p.evaluate(async () => (await window.LCNDA_EXT.boardsInternals.current.placeCx([{kind: 'row', title: 'Grand prix de Chamberet', value: '1777 · Chamberet', origin: {label: 'Listes · Courses de caisses à savon', url: 'https://example.org/gp'}}])).ids[0]); await sleep(400);
             const before = (await B.api('cx_basket', {})).items.length; await p.evaluate(x => window.LCNDA_EXT.boardsInternals.current.focus([x]), id); await sleep(600);
-            await mclick(p.locator(`.h-bi[data-bi="${id}"]`), {button: 'right'}); await p.waitForSelector('.ui-actmenu'); console.log('MENU', await p.evaluate(() => document.querySelector('.ui-actmenu').innerText.replace(/\n+/g, ' | ')));
+            
+            await mclick(p.locator(`.h-bi[data-bi="${id}"]`), {button: 'right'}); await p.waitForSelector('.ui-actmenu');
             await mclick(p.locator('.ui-actmenu button, .ui-actmenu [role="menuitem"]', {hasText: /Prendre/}).first()); await sleep(800);
             const items = (await B.api('cx_basket', {})).items; assert.strictEqual(items.length, before + 1);
             assert.ok(items.some(i => i.title === 'Grand prix de Chamberet' && i.origin?.url === 'https://example.org/gp'));

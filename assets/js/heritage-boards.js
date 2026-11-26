@@ -363,7 +363,7 @@
         if (II?.hosts && !II.hosts.some(h => h.id === 'board')) II.hosts.push({id: 'board', match: el => !!el.closest?.('.h-board'), context: () => ({}), cite: async (el, list) => boardOpen()?.cite?.(el, list) || null});
         const UI = window.LCNDA_UI;
         if (UI && !(UI.ctxExtras || []).some(f => f._board)) { // clic droit sur un élément du tableau : 🧺 Prendre, 📍 Mettre dans…
-            const f = e => { const el = e.target.closest?.('.h-board [data-bi]') || (e.target.closest?.('.h-board-sel') ? document.elementsFromPoint(e.clientX, e.clientY).map(x => x.closest?.('.h-board [data-bi]')).find(Boolean) : null), c = boardOpen(); if (!el || !c || !ext.connexions?.take) return []; const list = c.asCx(el.dataset.bi); if (!list.length) return [];
+            const f = e => { const el = e.target.closest?.('.h-board [data-bi]') || (e.target.closest?.('.h-board-stage') ? document.elementsFromPoint(e.clientX, e.clientY).map(x => x.closest?.('.h-board [data-bi]')).find(Boolean) : null), c = boardOpen(); if (!el || !c || !ext.connexions?.take) return []; const list = c.asCx(el.dataset.bi); if (!list.length) return [];
                 const short = list.length > 1 ? plural(list.length, 'élément') : `« ${String(list[0].title).slice(0, 38)} »`;
                 return [{icon: '🧺', label: i18n('Prendre {w}', {w: short}), inEditor: true, run: () => ext.connexions.take(list)}, {icon: '📍', label: i18n('Mettre {w} dans…', {w: short}), inEditor: true, run: () => ext.connexions.putInto(list)}]; };
             f._board = true; (UI.ctxExtras = UI.ctxExtras || []).push(f);

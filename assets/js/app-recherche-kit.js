@@ -71,7 +71,8 @@
     function mount(page, cfg = {}) {
         if (!page || !cfg) return null;
         page.__rk?.destroy?.();
-        const K = page.__rk = {cfg, destroy: () => { page.querySelectorAll('[data-rk-own]').forEach(x => x.remove()); const old = page.querySelector('[data-rp-export][data-rk-hidden]'); if (old) { old.hidden = false; delete old.dataset.rkHidden; } page.classList.remove('rk-page'); }};
+        const ac = new AbortController();
+        const K = page.__rk = {cfg, destroy: () => { ac.abort(); page.querySelectorAll('[data-rk-own]').forEach(x => x.remove()); const old = page.querySelector('[data-rp-export][data-rk-hidden]'); if (old) { old.hidden = false; delete old.dataset.rkHidden; } page.classList.remove('rk-page'); }};
         page.classList.add('rk-page');
         const picked = () => { try { const s = cfg.selected ? cfg.selected() : [...page.querySelectorAll('[data-rp-pick]:checked')].map(c => Number(c.dataset.rpPick)); return s && s.length ? s : null; } catch (_) { return null; } };
         const nOf = () => { const s = picked(); return s ? s.length : null; };
@@ -106,7 +107,7 @@
                 let r = null; try { r = cfg.rowItems(id); } catch (x) { console.error(x); } if (!r) return;
                 if (b.matches('[data-rk-bk]')) toBasket(r.items || [], b);
                 else toInsert(cfg, setOf(cfg, r.rows || [], r.columns || cfg.columns, r.title || cfg.title), b);
-            });
+            }, {signal: ac.signal});
         }
         /* 🗺 Carte */
         const pts = (cfg.map?.points || []).filter(p => Number.isFinite(Number(p.lat)) && Number.isFinite(Number(p.lon)) && !(Number(p.lat) === 0 && Number(p.lon) === 0));
@@ -151,13 +152,105 @@
                 host.classList.toggle('has-rk-hi', on.size > 0);
             };
             const rowOf = t => t.closest?.('[data-rk-id]');
-            page.addEventListener('mouseover', e => { const r = rowOf(e.target); if (r && page.contains(r) && !panel.contains(r)) hi(r.dataset.rkId); });
-            page.addEventListener('mouseout', e => { const r = rowOf(e.target); if (r && !r.contains(e.relatedTarget)) hi(null); });
-            page.addEventListener('focusin', e => { const r = rowOf(e.target); if (r && !panel.contains(r)) hi(r.dataset.rkId); });
+            page.addEventListener('mouseover', e => { const r = rowOf(e.target); if (r && page.contains(r) && !panel.contains(r)) hi(r.dataset.rkId); }, {signal: ac.signal});
+            page.addEventListener('mouseout', e => { const r = rowOf(e.target); if (r && !r.contains(e.relatedTarget)) hi(null); }, {signal: ac.signal});
+            page.addEventListener('focusin', e => { const r = rowOf(e.target); if (r && !panel.contains(r)) hi(r.dataset.rkId); }, {signal: ac.signal});
             K.open = on => set(on); K.highlight = hi; K.points = pts;
         }
         return K;
     }
 
-    ext.researchKit = {mount, personItem, setOf, kindOf, colorOf};
+    /* ═════ les écrans qui s'en servent ═════ */
+    const link = p => `<button type="button" class="table-link" data-open-person="${Number(p.id)}">${esc(p.name || T('Personne sans nom'))}</button>`;
+    const links = (ps, max = 8) => `${ps.slice(0, max).map(link).join(', ')}${ps.length > max ? ` <small class="muted">${esc(T('+ {n} autres', {n: ps.length - max}))}</small>` : ''}`;
+    const evDate = ev => String(ev.date_text || ev.year || '');
+    const near = (a, b) => Math.abs(Number(a.lat) - Number(b.lat)) < 1e-6 && Math.abs(Number(a.lon) - Number(b.lon)) < 1e-6;
+
+    /** 📍 Proximité · qui d'autre était là ? (app-recherche.js renderProximitySearch) */
+    function proximity(page, {data, people, criteria, title}) {
+        const origin = {kind: 'research', label: `${T('Recherche')} · ${criteria}`, url: ''};
+        const byId = new Map(people.map(p => [String(p.id), p]));
+        const list = sel => (sel ? sel.map(id => byId.get(String(id))).filter(Boolean) : people);
+        const evRows = ps => ps.flatMap(p => (p.events || []).map(ev => [p.name || '', ev.type || '', evDate(ev), ev.place || '']));
+        const roleLabel = {principal: T('Événement'), famille: T('Conjoint / famille'), temoin: T('Témoin')};
+        // un point par événement (ses personnes), plus la commune cherchée (★) et les communes voisines
+        const evs = new Map();
+        people.forEach(p => (p.events || []).forEach(ev => { if (!evs.has(ev.id)) evs.set(ev.id, {ev, who: []}); evs.get(ev.id).who.push({id: p.id, name: p.name, role: ev.role}); }));
+        const pts = [], cards = [];
+        const communeAt = (lat, lon, name, km) => {
+            const here = [...evs.values()].filter(x => x.ev.lat != null && near(x.ev, {lat, lon}));
+            const who = [...new Map(here.flatMap(x => x.who).map(w => [w.id, w])).values()];
+            return {title: name, lines: [[T('Distance'), km != null ? esc(T('{km} km', {km: String(km).replace('.', ',')})) : esc(T('la commune cherchée'))], [T('Événements'), esc(String(here.length))], [T('Personnes'), who.length ? links(who) : '—']], src: esc(criteria), ins: !kiosk(), bk: !kiosk(), _who: who, _rows: here.flatMap(x => x.who.map(w => [w.name || '', x.ev.type || '', evDate(x.ev), x.ev.place || '']))};
+        };
+        if (data.placeLat != null && data.placeLon != null) { pts.push({lat: data.placeLat, lon: data.placeLon, label: data.placeName, color: '#d4380d', n: '★'}); cards.push(() => communeAt(data.placeLat, data.placeLon, data.placeName, null)); }
+        (data.nearbyPlaces || []).forEach(np => { if (np.lat == null) return; pts.push({lat: np.lat, lon: np.lon, label: `${np.name} · ${np.distance_km} km`, color: '#868e96'}); cards.push(() => communeAt(np.lat, np.lon, np.name, np.distance_km)); });
+        evs.forEach(x => {
+            if (x.ev.lat == null) return;
+            pts.push({lat: x.ev.lat, lon: x.ev.lon, tag: x.ev.gedcom_tag, label: `${x.ev.type} · ${evDate(x.ev)} · ${x.who.map(w => w.name).join(', ')}`, rowIds: x.who.map(w => w.id)});
+            cards.push(() => ({title: `${x.ev.type} — ${evDate(x.ev)}`, lines: [[T('Personnes'), x.who.map(w => `${link(w)} <small class="muted">${esc(roleLabel[w.role] || '')}</small>`).join('<br>')], [T('Commune'), esc(x.ev.place || '—')]],
+                src: esc(criteria), ins: !kiosk(), bk: !kiosk(), _who: x.who, _rows: x.who.map(w => [w.name || '', x.ev.type || '', evDate(x.ev), x.ev.place || ''])}));
+        });
+        const cardOf = i => { try { return cards[i]?.() || null; } catch (_) { return null; } };
+        const columns = [T('Personne'), T('Événement'), T('Date'), T('Commune')];
+        const cfg = {key: 'proximity', storeKey: 'genealogie-proximite-carte', title, criteria, columns,
+            rows: sel => evRows(list(sel)),
+            items: sel => list(sel).map(p => personItem({...p, value: T('{n} occurrence(s)', {n: p.count || (p.events || []).length})}, origin)),
+            rowItems: id => { const p = byId.get(String(id)); return p ? {items: [personItem(p, origin)], rows: evRows([p]), title: `${title} · ${p.name || ''}`} : null; },
+            map: {points: pts, circles: data.radiusKm > 0 && data.placeLat != null ? [{lat: data.placeLat, lon: data.placeLon, km: Number(data.radiusKm)}] : [],
+                legend: [{color: '#d4380d', label: T('Commune cherchée')}, ...((data.nearbyPlaces || []).length ? [{color: '#868e96', label: T('Communes voisines incluses')}] : [])],
+                card: cardOf,
+                onAct: (k, i, b) => { const c = cardOf(i); if (!c) return; if (k === 'bk') toBasket((c._who || []).map(w => personItem(w, origin)), b); if (k === 'ins') toInsert(cfg, setOf(cfg, c._rows || [], columns, `${title} · ${c.title}`), b); }}};
+        return mount(page, cfg);
+    }
+
+    /** 📅 Période ou date précise (app-recherche.js renderDateSearch) : des événements */
+    function dates(page, {events, criteria, title, placeOf}) {
+        const origin = {kind: 'research', label: `${T('Recherche')} · ${criteria}`, url: ''};
+        const byId = new Map(events.map(e => [String(e.id), e]));
+        const who = e => (e.participants || []).map(p => p.name).join(' + ');
+        const row = e => [who(e), e.type || '', evDate(e), placeOf(e) || ''];
+        const item = e => ({kind: 'event', ref_id: Number(e.id), title: `${e.type || ''} — ${who(e)}`.trim(), value: [evDate(e), placeOf(e)].filter(Boolean).join(' · '), origin});
+        const placed = events.filter(e => e.lat != null && e.lon != null);
+        const columns = [T('Personne'), T('Événement'), T('Date'), T('Lieu')];
+        const cfg = {key: 'dates', title, criteria, columns, rows: () => events.map(row), items: () => events.map(item), selected: () => null, rowSel: '[data-rk-row]',
+            rowItems: id => { const e = byId.get(String(id)); return e ? {items: [item(e)], rows: [row(e)]} : null; },
+            map: {points: placed.map(e => ({lat: e.lat, lon: e.lon, tag: e.gedcom_tag, label: `${e.type} · ${evDate(e)} · ${who(e)}`, rowIds: [e.id]})),
+                card: i => { const e = placed[i]; return e ? {title: `${e.type} — ${evDate(e)}`, lines: [[T('Personnes'), (e.participants || []).length ? links(e.participants) : '—'], [T('Lieu'), esc(placeOf(e) || '—')]], src: esc(criteria), ins: !kiosk(), bk: !kiosk()} : null; },
+                onAct: (k, i, b) => { const e = placed[i]; if (!e) return; if (k === 'bk') toBasket([item(e)], b); if (k === 'ins') toInsert(cfg, setOf(cfg, [row(e)]), b); }}};
+        return mount(page, cfg);
+    }
+
+    /** 📍 Nom de lieu avec joker (app-recherche.js renderPlaceNameSearch) : des lieux */
+    function places(page, {rows, criteria, title}) {
+        const origin = {kind: 'research', label: `${T('Recherche')} · ${criteria}`, url: ''};
+        const label = r => [r.name, r.subdivision, r.country].filter(Boolean).join(', ');
+        const row = r => [r.name || '', [r.subdivision, r.county].filter(Boolean).join(', '), r.country || '', r.latitude != null ? `${r.latitude}, ${r.longitude}` : ''];
+        const item = r => ({kind: 'place', ref_id: Number(r.id) || 0, title: r.name || '', value: label(r), data: r.latitude != null ? {lat: Number(r.latitude), lon: Number(r.longitude)} : null, origin});
+        const placed = rows.filter(r => r.latitude != null && r.longitude != null && r.latitude !== '');
+        const cfg = {key: 'place_name', title, criteria, columns: [T('Lieu'), T('Subdivision'), T('Pays'), T('Coordonnées')], rows: () => rows.map(row), items: () => rows.map(item), selected: () => null,
+            map: {points: placed.map(r => ({lat: Number(r.latitude), lon: Number(r.longitude), label: label(r), color: '#1971c2'})),
+                card: i => { const r = placed[i]; return r ? {title: r.name || '—', lines: [[T('Lieu'), esc(label(r))], [T('Coordonnées'), esc(`${r.latitude}, ${r.longitude}`)]], src: esc(criteria), ins: !kiosk(), bk: !kiosk()} : null; },
+                onAct: (k, i, b) => { const r = placed[i]; if (!r) return; if (k === 'bk') toBasket([item(r)], b); if (k === 'ins') toInsert(cfg, setOf(cfg, [row(r)]), b); }}};
+        return mount(page, cfg);
+    }
+
+    /** 👤 une liste de personnes (☑ la barre d'app-recherche-outils.js : texte, lien de parenté, comparer deux recherches) — pas de carte */
+    function people(page, {people: ps, title, criteria, head, row, nameOf}) {
+        const origin = {kind: 'research', label: `${T('Recherche')} · ${criteria || title}`, url: ''};
+        const byId = new Map(ps.map(p => [String(p.id), p]));
+        const list = sel => (sel ? sel.map(id => byId.get(String(id))).filter(Boolean) : ps);
+        const it = p => personItem({id: p.id, name: nameOf(p), value: row(p).slice(1).filter(x => x && x !== '—').join(' · ')}, origin);
+        return mount(page, {key: 'people', title, criteria: criteria || title, columns: head, rows: sel => list(sel).map(row), items: sel => list(sel).map(it),
+            rowItems: id => { const p = byId.get(String(id)); return p ? {items: [it(p)], rows: [row(p)]} : null; }});
+    }
+
+    /** 🧾 Sources et citations (app-recherche-outils.js) : les sources trouvées, sans carte */
+    function sources(page, {sources: list, criteria}) {
+        const origin = {kind: 'research', label: `${T('Recherche')} · ${criteria}`, url: ''};
+        const row = s => [s.title || '', s.author || '', s.snippet || ''];
+        return mount(page, {key: 'sources', title: T('Sources et citations'), criteria, columns: [T('Source'), T('Auteur'), T('Extrait')], selected: () => null,
+            rows: () => list.map(row), items: () => list.map(s => ({kind: 'source', ref_id: Number(s.id) || 0, title: s.title || T('Source sans titre'), value: s.author || '', origin}))});
+    }
+
+    ext.researchKit = {mount, personItem, setOf, kindOf, colorOf, proximity, dates, places, people, sources};
 })();

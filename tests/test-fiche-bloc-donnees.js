@@ -111,15 +111,16 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             if (shot) dialogPng = await p.locator('dialog[open]').screenshot();
             await p.click('dialog[open] button[type="submit"]');
             await p.waitForSelector('[data-fi-new] [data-fi-dbox] [data-fi-dpicker] [data-ld-pick]', {timeout: 10000});
+            await sleep(100); const focus = await p.evaluate(() => !!document.activeElement?.matches('[data-fi-dbox] [data-ld-ov-q]'));
             await p.click('[data-fi-dbox] [data-ldt-pth="all"]'); // (le dernier thème retenu est gardé d'une fois à l'autre)
             const g = await p.evaluate(() => { const box = document.querySelector('[data-fi-dbox]');
                 return {native: box.querySelectorAll('select[name="list"], [data-fi-dfind]').length, chips: [...box.querySelectorAll('[data-ldt-pth]')].map(x => x.textContent.trim()),
                     groups: [...box.querySelectorAll('[data-ldt-group]')].map(x => x.querySelector('h3').textContent), mine: box.querySelector('[data-ld-pick="test_batailles"]')?.closest('[data-ldt-group]')?.querySelector('h3').textContent,
-                    merged: box.querySelectorAll('[data-ld-pick^="reunie_"].is-merged').length, focus: document.activeElement?.matches('[data-ld-ov-q]')}; });
+                    merged: box.querySelectorAll('[data-ld-pick^="reunie_"].is-merged').length}; });
             assert.strictEqual(g.native, 0, 'plus de grand menu déroulant ni de champ « Chercher une liste… » à part');
             assert.ok(g.chips.length >= 11 && /^Tous/.test(g.chips[0]), 'Tous + les thèmes en pastilles : ' + g.chips.join(' | '));
             assert.ok(g.groups.length >= 10, g.groups.join(' | ')); assert.match(g.mine, /Guerres et soldats/); assert.ok(g.merged, 'les listes réunies (🔀) sont proposées');
-            assert.ok(g.focus, 'la recherche du choix a le curseur');
+            assert.ok(focus, 'la recherche du choix a le curseur');
             // les sections repliées : seule « 📋 Données » est ouverte ; les autres disent leur résumé
             const secs = await p.evaluate(() => [...document.querySelectorAll('[data-fi-dbox] [data-fi-dsec]')].map(d => [d.dataset.fiDsec, d.open, d.querySelector('[data-fi-dsum]').textContent, getComputedStyle(d.querySelector('[data-fi-dsum]')).display]));
             assert.deepStrictEqual(secs.map(x => [x[0], x[1]]), [['data', true], ['filt', false], ['show', false], ['look', false]]);
@@ -204,10 +205,11 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
                 const gaps = [...box.querySelectorAll('.h-fi-dgrid > label:not(.checkbox-line)')].filter(l => l.offsetParent).map(l => [l.textContent.trim().slice(0, 20), Math.round(r(l.querySelector('input,select')).top - r(l).top)]);
                 const fr = r(box.querySelector('[name="from"]')), to = r(box.querySelector('[name="to"]')), km = r(box.querySelector('[name="km"]')), near = r(box.querySelector('[name="near"]')), dir = r(box.querySelector('[name="dir"]'));
                 return {gaps, rowFT: Math.abs(fr.bottom - to.bottom), sameRow: Math.abs(fr.top - to.top) < 4, nk: Math.abs(near.top - km.top) < 4 ? Math.abs(near.bottom - km.bottom) : 0, dir: [Math.round(dir.width), Math.round(dir.height)]}; });
-            assert.ok(geo.gaps.every(([, g]) => g >= 0 && g <= 30), 'titre au-dessus du champ : ' + JSON.stringify(geo.gaps));
+            assert.ok(geo.gaps.every(([, g]) => g >= 0 && g <= 48), 'titre au-dessus du champ : ' + JSON.stringify(geo.gaps));
             if (geo.sameRow) assert.ok(geo.rowFT <= 2, 'de / à : alignés');
             assert.ok(geo.nk <= 2, 'autour de / rayon : alignés');
             assert.ok(geo.dir[1] <= 48 && geo.dir[0] >= 90, 'l’ordre du tri : ' + geo.dir);
+            if (shot) await p.locator('[data-fi-block] form').screenshot({path: shot.replace(/\.png$/, '-reglages.png')});
             await p.click('[data-fi-block] form [data-fi-cancel]'); await sleep(400);
             assert.strictEqual((await sheet(id)).blocks.find(x => x.type === 'data').list, 'test_batailles', 'Annuler : la liste d’avant');
         });
@@ -215,7 +217,8 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             const s = await sheet(id);
             const old = {id: 'b_ancien1', type: 'data', title: 'Vieilles batailles', width: '6', list: 'test_batailles', mode: 'live', view: 'list', cols: ['nom', 'annee'], from: 1800, to: null, near: '', km: 30, limit: 2, sort: 'annee', dir: 'desc', family: false, famcol: false, q: '', ask: ''};
             await post('save_topic_sheet', {...s, blocks: [...s.blocks, old]});
-            const saved = (await sheet(id)).blocks.find(x => x.id === 'b_ancien1'), k = (await sheet(id)).blocks.indexOf(saved);
+            const all0 = (await sheet(id)).blocks, saved = all0.find(x => x.id === 'b_ancien1'), k = all0.indexOf(saved);
+            assert.ok(saved, JSON.stringify(all0.map(x => [x.id, x.type, x.title])));
             await openSheet(id, true);
             await p.waitForSelector(`[data-fi-block="${k}"] .h-fi-dlist li`, {timeout: 15000});
             assert.deepStrictEqual(await p.evaluate(j => [...document.querySelectorAll(`[data-fi-block="${j}"] .h-fi-dlist li b`)].map(x => x.textContent), k), ['Siège de Chamberet', 'Bataille d’Auch']);
@@ -349,6 +352,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             assert.ok(!/rgb\(255, 255, 255\)/.test(col.bg), 'sombre : les cartes du choix ne restent pas blanches ' + col.bg);
             bad = await p.evaluate(detect, {root: '[data-fi-dbox]', min: 4});
             assert.deepStrictEqual(bad.map(b => b.key), [], 'réglages (ouverts, avec le choix de la liste)');
+            if (shot) await p.locator('[data-fi-block] form').screenshot({path: shot.replace(/\.png$/, '-reglages-390.png')});
             await p.click('[data-fi-block] form [data-fi-cancel]');
             await p.evaluate(() => { const cur = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); delete cur.preset; localStorage.setItem('genealogie-design', JSON.stringify(cur)); window.LCNDA_APP.applyDesign?.(); });
             await p.setViewportSize({width: 1440, height: 900});

@@ -91,7 +91,7 @@ c.commit()`, db], {encoding: 'utf8'});
             assert.ok(c.x >= s.x + 6 && c.x + c.width <= s.x + s.width - 6 && c.y >= s.y + 6 && c.y + c.height <= s.y + s.height - 6, 'dans le cadre de la carte, sans toucher les bords');
             assert.ok(near(c, g), 'à côté de son point, sans le cacher ' + JSON.stringify([c, g]));
             assert.ok(!(await p.$eval(card, x => x.classList.contains('cf-panel') || x.classList.contains('cf-sheet'))), 'une bulle');
-            await sleep(300); assert.deepStrictEqual(extReq, [], 'rien demandé à Internet pour la fiche');
+            await sleep(300); assert.deepStrictEqual(extReq.filter(u => !/\/\d+\/\d+\/\d+\.(png|jpg|webp)(\?|$)/.test(u)), [], 'rien demandé à Internet pour la fiche (les tuiles du fond de carte mises à part)');
         });
         await t('la fiche suit son point quand la carte bouge ; 🔍 Zoomer ici', async () => {
             const z0 = (await ctlView()).zoom;

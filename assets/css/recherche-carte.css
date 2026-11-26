@@ -1,0 +1,49 @@
+/* LCNDA — 🔎 Recherche : « 🗺 Carte » qui monte au-dessus des résultats, 📎 🧺 au bout de chaque résultat (assets/js/app-recherche-kit.js). */
+
+/* l'en-tête : le grand titre garde sa place, les boutons passent dessous plutôt que de le toucher */
+#workspace .rk-page .page-header.ui-ph { flex-wrap: wrap; align-items: flex-start; gap: 12px 20px; }
+#workspace .rk-page .page-header.ui-ph h2 { font-size: clamp(22px, 2.6vw, 32px); line-height: 1.15; text-wrap: balance; }
+#workspace .rk-page .page-header.ui-ph > .ui-ph-text { flex: 1 1 22rem; }
+#workspace .rk-page .page-header.ui-ph > .ui-ph-actions { flex-wrap: wrap; justify-content: flex-end; margin-left: auto; padding-top: 4px; }
+#workspace .rk-page .date-results { gap: 9px; }
+.rk-map-btn.is-on { background: var(--accent-soft, rgba(0, 102, 204, .12)); border-color: var(--accent, #0066cc); }
+
+/* le panneau qui monte (0fr → 1fr : la hauteur suit la carte, sans saut) */
+.rk-map { display: grid; grid-template-rows: 0fr; opacity: 0; margin: 0; transition: grid-template-rows .32s ease, opacity .25s ease, margin .32s ease; }
+.rk-map.is-open { grid-template-rows: 1fr; opacity: 1; margin: 0 0 14px; }
+.rk-map-in { min-height: 0; overflow: hidden; }
+.rk-map.is-open .rk-map-in { overflow: visible; }
+.rk-map-host { position: relative; border: 1px solid var(--line, #ddd); border-radius: 10px; overflow: hidden; background: var(--surface, #fff); }
+.rk-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 6px 2px 0; font-size: .8rem; color: var(--muted, #666); }
+.rk-leg { display: inline-flex; align-items: center; gap: 6px; }
+.rk-leg i { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--ink, #111); display: inline-block; }
+@media (prefers-reduced-motion: reduce) { .rk-map { transition: none; } }
+
+/* un résultat survolé : ses points s'éclairent, les autres pâlissent */
+.rk-map-host.has-rk-hi .h-map-point:not(.is-rk-hi) { opacity: .35; }
+.rk-map-host .h-map-point.is-rk-hi circle { stroke: var(--ink, #111); stroke-width: 3.5; }
+.rk-map-host .h-map-point.is-rk-hi { opacity: 1; }
+.rk-map-host .h-map-cluster.is-rk-hi { outline: 3px solid var(--accent, #0066cc); outline-offset: 2px; border-radius: 50%; }
+
+/* 📎 🧺 au bout de chaque résultat : au survol, au focus ; toujours au doigt */
+.rk-row { position: relative; }
+.rk-row-acts { display: inline-flex; gap: 2px; opacity: 0; transition: opacity .15s; }
+article.rk-row > .rk-row-acts { position: absolute; top: 6px; right: 6px; }
+tr.rk-row .rk-row-acts { margin-left: .4rem; vertical-align: middle; }
+.rk-row:hover > .rk-row-acts, .rk-row:hover .rk-row-acts, .rk-row:focus-within .rk-row-acts { opacity: 1; }
+@media (hover: none) { .rk-row-acts { opacity: 1; } }
+.rk-ico { border: 1px solid var(--line, #ddd); background: var(--surface, #fff); color: inherit; border-radius: 6px; padding: 1px 5px; font-size: 13px; line-height: 1.4; cursor: pointer; }
+.rk-ico:hover, .rk-ico:focus-visible { border-color: var(--accent, #0066cc); }
+.is-kiosk .rk-row-acts { display: none; }
+
+/* sombre */
+:root[data-theme="dark"] .rk-map-host { background: var(--surface, #1c1f24); border-color: var(--line, #3a3f47); }
+:root[data-theme="dark"] .rk-ico { background: var(--surface, #23272e); border-color: var(--line, #3a3f47); }
+:root[data-theme="dark"] .rk-leg i { border-color: #e6e6e6; }
+
+/* téléphone : la carte prend toute la largeur, les boutons passent à la ligne */
+@media (max-width: 560px) {
+    #workspace .rk-page .page-header.ui-ph > .ui-ph-actions { margin-left: 0; justify-content: flex-start; width: 100%; }
+    .rk-map.is-open { margin-left: 0; margin-right: 0; }
+    .rk-map-host { border-radius: 8px; }
+}
