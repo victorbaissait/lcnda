@@ -160,9 +160,10 @@ const FAKE = () => {
             const tx = Math.round(sb.x + sb.w - 220), ty = Math.round(sb.y + 160); // à droite du panneau du panier
             const lb = await li.boundingBox(); await p.mouse.move(lb.x + 40, lb.y + lb.height / 2); await p.mouse.down(); await p.mouse.move(lb.x + 60, lb.y + lb.height / 2 + 10, {steps: 3}); await p.mouse.move(tx, ty, {steps: 8}); await p.mouse.up();
             await p.waitForFunction(n => window.LCNDA_EXT.boardsInternals.current.items.length === n + 1, n0, {timeout: 15000});
-            const c = (await cur()).at(-1); console.log('DROPDBG', JSON.stringify(sb), await p.$eval('.h-board-stage', x => JSON.stringify(x.getBoundingClientRect())));
+            const c = (await cur()).at(-1);
             const pos = await p.evaluate(id => { const el = document.querySelector(`.h-bi[data-bi="${id}"]`).getBoundingClientRect(); return {x: el.left + el.width / 2, y: el.top + el.height / 2}; }, c.id);
-            assert.ok(Math.abs(pos.x - tx) < 40 && Math.abs(pos.y - ty) < 40, `au pointeur : ${JSON.stringify(pos)} ≈ ${tx},${ty}`);
+            const sb2 = await p.$eval('.h-board-stage', x => { const r = x.getBoundingClientRect(); return {x: r.left, y: r.top}; }), ex = tx + sb2.x - sb.x, ey = ty + sb2.y - sb.y; // la barre d'options change de hauteur quand un élément est choisi
+            assert.ok(Math.abs(pos.x - ex) < 30 && Math.abs(pos.y - ey) < 30, `au pointeur : ${JSON.stringify(pos)} ≈ ${ex},${ey}`);
             await undo();
         });
         await t('📎 de la barre, rien de choisi : l’info est posée au centre avec sa source', async () => {

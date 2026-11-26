@@ -5,8 +5,12 @@
  *     « À jour » ne garde pas de copie ; la colonne « 👪 Dans la famille » d'une copie ne nomme jamais une personne vivante ni une
  *     fiche confidentielle (les morts restent) ;
  *  2. Navigateur (base tests/prendre-depuis-seed.js : noms inventés MAZAUD, LACOMBE, DURAND ; une liste FABRIQUÉE « Batailles
- *     inventées » enregistrée dans le moteur des listes) : « ＋ Ajouter un bloc » propose 📊 Données ; la liste se choisit par thème
- *     (⚔️ Guerres et soldats), colonnes, période, autour du sujet de la fiche (« Tulle »), au plus N lignes ; chaque ligne a son ↗ source,
+ *     inventées » enregistrée dans le moteur des listes) : « ＋ Ajouter un bloc » propose 📊 Données ; la liste se choisit avec le choix
+ *     commun (LCNDA_EXT.dataListPicker : 🔍 recherche, pastilles des thèmes — ⚔️ Guerres et soldats —, cartes, clavier) puis se replie en
+ *     une ligne « 📋 … · thème — Changer » + source et licence ; « Changer » / « ✕ Garder » ; une liste pas installée : « ⤓ Installer » ;
+ *     les réglages en 4 sections repliées (📋 Données ouverte, les autres disent leur résumé), grille alignée (le Rayon sous son titre,
+ *     l'ordre du tri lisible) ; un bloc enregistré avant s'ouvre tel quel ;
+ *     colonnes, période, autour du sujet de la fiche (« Tulle »), au plus N lignes ; chaque ligne a son ↗ source,
  *     le pied dit source + licence ; ↶ Annuler ; une question (« 🔎 Comprendre », clavier : Entrée) remplit les réglages et montre
  *     « Ce que j'ai compris » ; 📌 Figé (copie datée gardée par le serveur, qui reste quand la liste n'est plus là) ; « 📌 Figer
  *     maintenant » + ↶ ; liste compacte, frise, carte ; ⤓ Markdown / page web et 🖨 Imprimer contiennent le tableau et ses sources ;
@@ -73,6 +77,9 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
     const openSheet = async (id, editing = false) => { await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.dataset.ownClose = '1'; delete d.dataset.dirty; d.close(); })); await p.evaluate(i => { const A = window.LCNDA_APP; A.state.ficheId = i; A.setModule('fiches'); }, id); await p.waitForSelector('#workspace .h-fi-grid', {timeout: 20000}); if (editing !== await p.evaluate(() => !!document.querySelector('#workspace .h-fi.is-editing'))) { await p.click('[data-fi-mode]'); await p.waitForSelector(editing ? '.h-fi.is-editing' : '.h-fi:not(.is-editing)'); } };
     const clickUndo = async () => { const u = p.locator('.toast.undo .ui-toast-btn').last(); await u.waitFor({timeout: 8000}); await u.click(); await sleep(800); };
     const shot = process.env.FICHE_SHOT || '';
+    const openSec = async k => { const sel = `[data-fi-dbox] [data-fi-dsec="${k}"]`; if (!(await p.evaluate(x => document.querySelector(x)?.open, sel))) await p.click(`${sel} > summary`); await p.waitForFunction(x => document.querySelector(x)?.open, sel); };
+    const sumOf = k => p.evaluate(x => document.querySelector(`[data-fi-dbox] [data-fi-dsum="${x}"]`)?.textContent || '', k);
+    const pickerCards = () => p.evaluate(() => [...document.querySelectorAll('[data-fi-dbox] [data-fi-dpicker] [data-ld-pick]')].map(c => c.dataset.ldPick));
     let dialogPng = null;
     try {
         // une liste FABRIQUÉE : 6 batailles autour de Tulle et ailleurs, chacune avec sa fiche ↗ (thème ⚔️ Guerres et soldats)
@@ -87,6 +94,9 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             window.LCNDA_EXT.dataLists.push({id: 'test_batailles', icon: '⚔️', label: 'Batailles inventées', group: 'Le monde', theme: 'guerres', source: 'Jeu d’essai (CC0)', sourceUrl: 'https://example.org/',
                 fields: [{key: 'nom', label: 'Bataille'}, {key: 'annee', label: 'Année', type: 'year'}, {key: 'lieu', label: 'Lieu', type: 'place'}, {key: 'morts', label: 'Morts', type: 'number'}, {key: 'u', label: 'Fiche', type: 'url'}],
                 load: async () => rows, period: r => [r.annee, r.annee], geo: r => [r.lat, r.lon], familyColumn: true});
+            // un pack pas encore installé (pour « ⤓ Installer » sur place)
+            window.LCNDA_EXT.dataLists.push({id: 'test_pack', icon: '📦', label: 'Pack inventé des moulins', group: 'Le lieu', theme: 'guerres', source: 'Jeu d’essai (CC0)',
+                fields: [{key: 'nom', label: 'Moulin'}], load: async () => rows, installed: async () => window.__packOk === true, install: h => { window.__installed = !!h; }});
         });
         await sleep(300);
         const id = (await post('save_topic_sheet', {title: 'Tulle', icon: '🏘️', subtitle: 'La ville et ses batailles', blocks: [{type: 'text', title: 'En bref', text: 'Tulle, préfecture de la Corrèze.', width: '12'}]})).id;
@@ -100,21 +110,51 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             await p.check('dialog[open] input[name="kind"][value="data"]');
             if (shot) dialogPng = await p.locator('dialog[open]').screenshot();
             await p.click('dialog[open] button[type="submit"]');
-            await p.waitForSelector('[data-fi-new] [data-fi-dbox] select[name="list"]', {timeout: 10000});
-            const g = await p.evaluate(() => { const s = document.querySelector('[data-fi-dbox] select[name="list"]'), og = [...s.querySelectorAll('optgroup')];
-                return {groups: og.map(x => x.label), mine: og.find(x => [...x.children].some(o => o.value === 'test_batailles'))?.label, merged: [...s.options].some(o => o.value.startsWith('reunie_') && o.textContent.startsWith('🔀'))}; });
+            await p.waitForSelector('[data-fi-new] [data-fi-dbox] [data-fi-dpicker] [data-ld-pick]', {timeout: 10000});
+            await p.click('[data-fi-dbox] [data-ldt-pth="all"]'); // (le dernier thème retenu est gardé d'une fois à l'autre)
+            const g = await p.evaluate(() => { const box = document.querySelector('[data-fi-dbox]');
+                return {native: box.querySelectorAll('select[name="list"], [data-fi-dfind]').length, chips: [...box.querySelectorAll('[data-ldt-pth]')].map(x => x.textContent.trim()),
+                    groups: [...box.querySelectorAll('[data-ldt-group]')].map(x => x.querySelector('h3').textContent), mine: box.querySelector('[data-ld-pick="test_batailles"]')?.closest('[data-ldt-group]')?.querySelector('h3').textContent,
+                    merged: box.querySelectorAll('[data-ld-pick^="reunie_"].is-merged').length, focus: document.activeElement?.matches('[data-ld-ov-q]')}; });
+            assert.strictEqual(g.native, 0, 'plus de grand menu déroulant ni de champ « Chercher une liste… » à part');
+            assert.ok(g.chips.length >= 11 && /^Tous/.test(g.chips[0]), 'Tous + les thèmes en pastilles : ' + g.chips.join(' | '));
             assert.ok(g.groups.length >= 10, g.groups.join(' | ')); assert.match(g.mine, /Guerres et soldats/); assert.ok(g.merged, 'les listes réunies (🔀) sont proposées');
+            assert.ok(g.focus, 'la recherche du choix a le curseur');
+            // les sections repliées : seule « 📋 Données » est ouverte ; les autres disent leur résumé
+            const secs = await p.evaluate(() => [...document.querySelectorAll('[data-fi-dbox] [data-fi-dsec]')].map(d => [d.dataset.fiDsec, d.open, d.querySelector('[data-fi-dsum]').textContent, getComputedStyle(d.querySelector('[data-fi-dsum]')).display]));
+            assert.deepStrictEqual(secs.map(x => [x[0], x[1]]), [['data', true], ['filt', false], ['show', false], ['look', false]]);
+            assert.match(secs[1][2], /aucun filtre/); assert.match(secs[2][2], /Tableau · .*20 lignes au plus · 🔄 À jour/); assert.match(secs[3][2], /le nom de la liste · largeur 1/);
+            assert.ok(secs.slice(1).every(x => x[3] !== 'none'), 'fermée : le résumé se voit'); assert.strictEqual(secs[0][3], 'none', 'ouverte : pas de résumé');
         });
         await t('réglages : liste, colonnes, période, autour du sujet de la fiche, 3 lignes ; chaque ligne a son ↗ source ; pied source + licence ; ↶ Annuler', async () => {
-            await p.fill('[data-fi-dbox] [data-fi-dfind]', 'inventées');
-            assert.strictEqual(await p.evaluate(() => [...document.querySelectorAll('[data-fi-dbox] select[name="list"] option')].filter(o => o.value && !o.hidden).map(o => o.value).join()), 'test_batailles', 'chercher une liste');
-            await p.selectOption('[data-fi-dbox] select[name="list"]', 'test_batailles');
+            // 🔍 chercher, puis 🏷 une pastille de thème, puis choisir : la liste se replie en une ligne calme
+            await p.fill('[data-fi-dbox] [data-ld-ov-q]', 'inventées');
+            await p.waitForFunction(() => document.querySelectorAll('[data-fi-dbox] [data-ld-pick]').length === 1, null, {timeout: 5000});
+            assert.deepStrictEqual(await pickerCards(), ['test_batailles'], 'chercher une liste');
+            await p.click('[data-fi-dbox] [data-ldt-pth="guerres"]');
+            const th = await p.evaluate(() => ({q: document.querySelector('[data-fi-dbox] [data-ld-ov-q]').value, groups: [...document.querySelectorAll('[data-fi-dbox] [data-ldt-group]')].map(x => x.dataset.ldtGroup), on: document.querySelector('[data-fi-dbox] [data-ldt-pth="guerres"]').getAttribute('aria-pressed')}));
+            assert.deepStrictEqual([th.q, th.groups, th.on], ['', ['guerres'], 'true'], 'la pastille « Guerres et soldats » : ce thème seulement');
+            assert.ok((await pickerCards()).includes('test_batailles'));
+            await p.click('[data-fi-dbox] [data-ld-pick="test_batailles"]');
+            await p.waitForSelector('[data-fi-dbox] [data-fi-dchosen-line="test_batailles"]');
+            const line = await p.evaluate(() => { const l = document.querySelector('[data-fi-dchosen-line]'); return {name: l.querySelector('.h-fi-dchosen-name').textContent.replace(/\s+/g, ' ').trim(), src: l.querySelector('.h-fi-dchosen-src')?.textContent, picker: document.querySelector('[data-fi-dpicker]').hidden, cards: document.querySelectorAll('[data-fi-dpicker] [data-ld-pick]').length, list: document.querySelector('[data-fi-dbox] input[name="list"]').value, warn: !!l.querySelector('.h-fi-dwarn')}; });
+            assert.match(line.name, /^📋 ⚔️ Batailles inventées · ⚔️ Guerres et soldats — Changer$/, line.name);
+            assert.match(line.src, /Source : Jeu d’essai \(CC0\) · Licence : CC0/); assert.deepStrictEqual([line.picker, line.cards, line.list, line.warn], [true, 0, 'test_batailles', false], 'replié, la liste gardée, installée');
+            assert.match(await sumOf('data'), /Batailles inventées · Guerres et soldats/);
+            await openSec('show');
             await p.waitForSelector('[data-fi-dcols] input[value="morts"]');
             await p.uncheck('[data-fi-dcols] input[value="morts"]');
+            await openSec('filt');
             await p.fill('[data-fi-dbox] input[name="from"]', '1700'); await p.fill('[data-fi-dbox] input[name="to"]', '1900');
+            assert.ok(await p.locator('[data-fi-dbox] input[name="place"]').isHidden() && await p.locator('[data-fi-dbox] input[name="km"]').isHidden(), 'partout : ni lieu ni rayon');
             await p.selectOption('[data-fi-dbox] select[name="near"]', 'subject'); await p.fill('[data-fi-dbox] input[name="km"]', '40');
+            assert.ok(await p.locator('[data-fi-dbox] input[name="place"]').isHidden() && await p.locator('[data-fi-dbox] input[name="km"]').isVisible(), 'le sujet de la fiche : le rayon seulement');
             await p.fill('[data-fi-dbox] input[name="limit"]', '3'); await p.selectOption('[data-fi-dbox] select[name="sort"]', 'annee');
+            assert.deepStrictEqual(await p.evaluate(() => [...document.querySelectorAll('[data-fi-dbox] select[name="dir"] option')].map(o => o.textContent)), ['↑ croissant', '↓ décroissant'], 'l’ordre du tri se lit');
             await p.check('[data-fi-dbox] input[name="famcol"]');
+            await p.click('[data-fi-dbox] [data-fi-dsec="filt"] > summary'); await p.click('[data-fi-dbox] [data-fi-dsec="show"] > summary');
+            assert.strictEqual(await sumOf('filt'), '1700–1900 · 40 km autour du sujet de la fiche');
+            assert.match(await sumOf('show'), /Tableau · 3 colonnes · 3 lignes au plus · tri : Année ↑ · 👪 · 🔄 À jour/);
             await p.click('[data-fi-new] form button[type="submit"]');
             await p.waitForSelector('.h-fi-dtable tbody tr', {timeout: 15000});
             const r = await p.evaluate(() => { const blk = document.querySelector('.h-fi-data'); return {heads: [...blk.querySelectorAll('thead th')].map(x => x.textContent), rows: [...blk.querySelectorAll('tbody tr')].map(tr => [...tr.cells].map(c => c.textContent.trim())), links: [...blk.querySelectorAll('tbody a.h-fi-dsrc')].map(a => [a.href, a.target, a.rel]), foot: blk.querySelector('.h-fi-dfoot').textContent, crit: blk.querySelector('.h-fi-dcrit').textContent}; });
@@ -131,11 +171,69 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             assert.ok(!(await sheet(id)).blocks.some(x => x.type === 'data'), '↶ Annuler : plus de bloc');
             const s2 = await sheet(id); await post('save_topic_sheet', {...s2, blocks: [...s2.blocks, b]}); // on le remet pour la suite
         });
+        await t('« Changer » rouvre le choix (« ✕ Garder » revient), Entrée choisit au clavier ; une liste pas installée : « ⤓ Installer » sur place ; grille alignée', async () => {
+            await openSheet(id, true);
+            const i = await p.evaluate(() => [...document.querySelectorAll('[data-fi-block]')].findIndex(x => x.querySelector('.h-fi-data')));
+            await p.click(`[data-fi-block="${i}"] [data-fi-edit]`);
+            await p.waitForSelector('[data-fi-dbox] [data-fi-dchosen-line="test_batailles"]');
+            await p.click('[data-fi-dbox] [data-fi-dchange]');
+            await p.waitForSelector('[data-fi-dbox] [data-fi-dpicker] [data-ld-pick]');
+            assert.match(await p.textContent('[data-fi-dbox] [data-fi-dkeep]'), /Garder « Batailles inventées »/);
+            assert.ok(await p.evaluate(() => document.activeElement?.matches('[data-fi-dpicker] [data-ld-ov-q]')), 'Changer : le curseur dans la recherche');
+            assert.ok(await p.evaluate(() => document.querySelector('[data-fi-dpicker] [data-ld-pick="test_batailles"]')?.getAttribute('aria-pressed') === 'true' || !document.querySelector('[data-fi-dpicker] [data-ld-pick="test_batailles"]')), 'la liste actuelle est marquée');
+            await p.click('[data-fi-dbox] [data-fi-dkeep]');
+            await p.waitForSelector('[data-fi-dbox] [data-fi-dchosen-line="test_batailles"]');
+            assert.ok(await p.locator('[data-fi-dbox] [data-fi-dpicker]').isHidden());
+            // Entrée au clavier, sur une liste pas encore installée
+            await p.click('[data-fi-dbox] [data-fi-dchange]'); await p.waitForSelector('[data-fi-dbox] [data-fi-dpicker] [data-ld-ov-q]');
+            await p.fill('[data-fi-dbox] [data-fi-dpicker] [data-ld-ov-q]', 'pack moulins');
+            await p.waitForFunction(() => { const c = [...document.querySelectorAll('[data-fi-dpicker] [data-ld-pick]')]; return c.length === 1 && c[0].dataset.ldPick === 'test_pack'; }, null, {timeout: 5000});
+            assert.match(await p.textContent('[data-fi-dpicker] [data-ld-pick="test_pack"]'), /à télécharger/);
+            await p.press('[data-fi-dbox] [data-fi-dpicker] [data-ld-ov-q]', 'Enter');
+            await p.waitForSelector('[data-fi-dbox] [data-fi-dchosen-line="test_pack"] .h-fi-dwarn', {timeout: 5000});
+            assert.match(await p.textContent('[data-fi-dchosen-line="test_pack"]'), /pas encore sur cet ordinateur/);
+            await p.click('[data-fi-dbox] [data-fi-dinstall]');
+            assert.strictEqual(await p.evaluate(() => window.__installed), true, '⤓ Installer : l’installation du pack, sur place');
+            await p.evaluate(() => { window.__packOk = true; }); await p.click('[data-fi-dbox] [data-fi-drecheck]');
+            await p.waitForFunction(() => !document.querySelector('[data-fi-dchosen-line="test_pack"] .h-fi-dwarn'), null, {timeout: 5000});
+            assert.match(await sumOf('data'), /Pack inventé des moulins/);
+            assert.strictEqual(await p.evaluate(() => document.querySelector('[data-fi-dcols]').textContent.trim()), 'Moulin', 'les colonnes suivent la liste choisie');
+            // la grille : chaque titre juste au-dessus de son champ (le Rayon compris), les champs d'une même ligne alignés, l'ordre du tri à sa taille
+            await openSec('filt'); await openSec('show');
+            const geo = await p.evaluate(() => { const box = document.querySelector('[data-fi-dbox]'), r = e => e.getBoundingClientRect();
+                const gaps = [...box.querySelectorAll('.h-fi-dgrid > label:not(.checkbox-line)')].filter(l => l.offsetParent).map(l => [l.textContent.trim().slice(0, 20), Math.round(r(l.querySelector('input,select')).top - r(l).top)]);
+                const fr = r(box.querySelector('[name="from"]')), to = r(box.querySelector('[name="to"]')), km = r(box.querySelector('[name="km"]')), near = r(box.querySelector('[name="near"]')), dir = r(box.querySelector('[name="dir"]'));
+                return {gaps, rowFT: Math.abs(fr.bottom - to.bottom), sameRow: Math.abs(fr.top - to.top) < 4, nk: Math.abs(near.top - km.top) < 4 ? Math.abs(near.bottom - km.bottom) : 0, dir: [Math.round(dir.width), Math.round(dir.height)]}; });
+            assert.ok(geo.gaps.every(([, g]) => g >= 0 && g <= 30), 'titre au-dessus du champ : ' + JSON.stringify(geo.gaps));
+            if (geo.sameRow) assert.ok(geo.rowFT <= 2, 'de / à : alignés');
+            assert.ok(geo.nk <= 2, 'autour de / rayon : alignés');
+            assert.ok(geo.dir[1] <= 48 && geo.dir[0] >= 90, 'l’ordre du tri : ' + geo.dir);
+            await p.click('[data-fi-block] form [data-fi-cancel]'); await sleep(400);
+            assert.strictEqual((await sheet(id)).blocks.find(x => x.type === 'data').list, 'test_batailles', 'Annuler : la liste d’avant');
+        });
+        await t('un bloc enregistré avant (mêmes champs) s’ouvre tel quel : lignes, liste repliée, résumés, et « Enregistrer » le garde', async () => {
+            const s = await sheet(id);
+            const old = {id: 'b_ancien1', type: 'data', title: 'Vieilles batailles', width: '6', list: 'test_batailles', mode: 'live', view: 'list', cols: ['nom', 'annee'], from: 1800, to: null, near: '', km: 30, limit: 2, sort: 'annee', dir: 'desc', family: false, famcol: false, q: '', ask: ''};
+            await post('save_topic_sheet', {...s, blocks: [...s.blocks, old]});
+            const saved = (await sheet(id)).blocks.find(x => x.id === 'b_ancien1'), k = (await sheet(id)).blocks.indexOf(saved);
+            await openSheet(id, true);
+            await p.waitForSelector(`[data-fi-block="${k}"] .h-fi-dlist li`, {timeout: 15000});
+            assert.deepStrictEqual(await p.evaluate(j => [...document.querySelectorAll(`[data-fi-block="${j}"] .h-fi-dlist li b`)].map(x => x.textContent), k), ['Siège de Chamberet', 'Bataille d’Auch']);
+            await p.click(`[data-fi-block="${k}"] [data-fi-edit]`);
+            await p.waitForSelector(`[data-fi-block="${k}"] [data-fi-dchosen-line="test_batailles"]`);
+            assert.match(await sumOf('filt'), /^1800–…$/); assert.match(await sumOf('show'), /Liste compacte · 2 colonnes · 2 lignes au plus · tri : Année ↓/); assert.match(await sumOf('look'), /« Vieilles batailles » · largeur 1\/2/);
+            assert.deepStrictEqual(await p.evaluate(() => [...document.querySelectorAll('[data-fi-dcols] input:checked')].map(x => x.value)), ['nom', 'annee']);
+            await p.click(`[data-fi-block="${k}"] form button[type="submit"]`); await sleep(800);
+            const after = (await sheet(id)).blocks.find(x => x.id === 'b_ancien1'), keys = ['list', 'mode', 'view', 'cols', 'from', 'to', 'near', 'km', 'limit', 'sort', 'dir', 'family', 'famcol', 'title', 'width', 'color'];
+            assert.deepStrictEqual(Object.fromEntries(keys.map(x => [x, after[x]])), Object.fromEntries(keys.map(x => [x, saved[x]])));
+            const s2 = await sheet(id); await post('save_topic_sheet', {...s2, blocks: s2.blocks.filter(x => x.id !== 'b_ancien1')});
+        });
         await t('une question : « 🔎 Comprendre » (Entrée au clavier) remplit les réglages et dit « Ce que j’ai compris » (pastilles qui mènent au champ)', async () => {
             await openSheet(id, true);
             const i = await p.evaluate(() => [...document.querySelectorAll('[data-fi-block]')].findIndex(x => x.querySelector('.h-fi-data')));
             await p.click(`[data-fi-block="${i}"] [data-fi-edit]`);
-            await p.waitForSelector('[data-fi-dbox] input[name="ask"]');
+            await p.waitForSelector('[data-fi-dbox] [data-fi-daskbox] > summary');
+            await p.click('[data-fi-dbox] [data-fi-daskbox] > summary');
             await p.focus('[data-fi-dbox] input[name="ask"]');
             await p.keyboard.type('les batailles près de Tulle entre 1800 et 1880');
             await p.keyboard.press('Enter');
@@ -153,7 +251,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             await openSheet(id, true);
             const i = s.blocks.indexOf(b);
             await p.click(`[data-fi-block="${i}"] [data-fi-edit]`);
-            await p.waitForSelector('[data-fi-dbox] input[name="mode"][value="frozen"]');
+            await p.waitForSelector('[data-fi-dbox]'); await openSec('show');
             await p.check('[data-fi-dbox] input[name="mode"][value="frozen"]');
             await p.click(`[data-fi-block="${i}"] form button[type="submit"]`);
             await p.waitForSelector('.h-fi-data.is-frozen .h-fi-dtable', {timeout: 15000});
@@ -241,9 +339,16 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             await p.click('[data-fi-mode]'); await p.waitForSelector('.h-fi.is-editing');
             const i = await p.evaluate(() => [...document.querySelectorAll('[data-fi-block]')].findIndex(x => x.querySelector('.h-fi-data')));
             await p.click(`[data-fi-block="${i}"] [data-fi-edit]`); await p.waitForSelector('[data-fi-dbox]'); await sleep(300);
-            assert.ok(await over() <= 1, `réglages : déborde de ${await over()} px`);
             bad = await p.evaluate(detect, {root: '[data-fi-dbox]', min: 4});
-            assert.deepStrictEqual(bad.map(b => b.key), [], 'réglages');
+            assert.deepStrictEqual(bad.map(b => b.key), [], 'réglages (repliés)');
+            for (const k of ['filt', 'show', 'look']) await openSec(k);
+            await p.click('[data-fi-dbox] [data-fi-dchange]'); await p.waitForSelector('[data-fi-dbox] [data-fi-dpicker] [data-ld-pick]'); await sleep(300);
+            assert.ok(await over() <= 1, `réglages : déborde de ${await over()} px`);
+            const col = await p.evaluate(() => { const ls = [...document.querySelectorAll('[data-fi-dsec="filt"] .h-fi-dgrid > label')].filter(l => l.offsetParent); return {lefts: [...new Set(ls.map(l => Math.round(l.getBoundingClientRect().left)))], dark: document.documentElement.dataset.theme, bg: getComputedStyle(document.querySelector('.h-fi-dchosen, [data-fi-dpicker] .ld-card')).backgroundColor}; });
+            assert.strictEqual(col.lefts.length, 1, 'à 390 px : une seule colonne ' + col.lefts); assert.strictEqual(col.dark, 'dark');
+            assert.ok(!/rgb\(255, 255, 255\)/.test(col.bg), 'sombre : les cartes du choix ne restent pas blanches ' + col.bg);
+            bad = await p.evaluate(detect, {root: '[data-fi-dbox]', min: 4});
+            assert.deepStrictEqual(bad.map(b => b.key), [], 'réglages (ouverts, avec le choix de la liste)');
             await p.click('[data-fi-block] form [data-fi-cancel]');
             await p.evaluate(() => { const cur = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); delete cur.preset; localStorage.setItem('genealogie-design', JSON.stringify(cur)); window.LCNDA_APP.applyDesign?.(); });
             await p.setViewportSize({width: 1440, height: 900});

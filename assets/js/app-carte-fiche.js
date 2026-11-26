@@ -86,7 +86,10 @@
             const [x, y] = ctl.screen(n[0], n[1]), W = stage.clientWidth, H = stage.clientHeight, w = box.offsetWidth, h = box.offsetHeight;
             let left = Math.max(8, Math.min(W - w - 8, x - w / 2)), top = y - h - 16;
             if (top < 8) top = y + 16;
-            top = Math.max(8, Math.min(H - h - 8, top));
+            if (top + h > H - 8) { // ni au-dessus ni en dessous : à côté du point (à droite, sinon à gauche), sans le cacher
+                top = Math.max(8, Math.min(H - h - 8, y - h / 2));
+                left = x + 16 + w <= W - 8 ? x + 16 : x - 16 - w >= 8 ? x - 16 - w : left;
+            }
             const L = left.toFixed(0) + 'px', Tp = top.toFixed(0) + 'px';
             if (box.style.left !== L) box.style.left = L; if (box.style.top !== Tp) box.style.top = Tp;
         }

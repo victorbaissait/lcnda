@@ -55,10 +55,10 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=6">
     <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=3">
-    <link rel="stylesheet" href="assets/css/audit-cartes.css?v=3">
+    <link rel="stylesheet" href="assets/css/audit-cartes.css?v=4">
     <link rel="stylesheet" href="assets/css/audit-personnes.css?v=5">
     <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=2">
-    <link rel="stylesheet" href="assets/css/audit-options.css?v=2">
+    <link rel="stylesheet" href="assets/css/audit-options.css?v=3">
     <link rel="stylesheet" href="assets/css/anim-studio.css?v=3">
     <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
@@ -184,7 +184,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=75" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=76" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
@@ -1260,7 +1260,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=605" defer></script>
+<script src="assets/js/app.js?v=606" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1296,7 +1296,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-jeu.js?v=17" defer></script>
 <script src="assets/js/app-chronologie.js?v=15" defer></script>
 <script src="assets/js/app-comparaison.js?v=11" defer></script>
-<script src="assets/js/app-carte.js?v=17" defer></script>
+<script src="assets/js/app-carte-couleurs.js?v=1" defer></script><!-- 🎨 couleurs et formes des sortes sur toutes les cartes (Réglages → Cartes et fonds de carte) -->
+<script src="assets/js/app-carte.js?v=18" defer></script>
 <script src="assets/js/app-enquetes.js?v=19" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=26" defer></script>
 <script src="assets/js/app-chrono-recherche.js?v=1" defer></script>
@@ -1473,7 +1474,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-widgets.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-listes.js?v=7" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=16" defer></script>
-<script src="assets/js/heritage-fiches.js?v=30" defer></script>
+<script src="assets/js/heritage-fiches.js?v=31" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=7" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=18" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=12" defer></script>

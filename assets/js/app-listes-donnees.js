@@ -392,10 +392,14 @@
         const back = cur.backMap; let bar = ws()?.querySelector('[data-ld-back-map]');
         if (back && !bar) { bar = document.createElement('div'); bar.className = 'ld-back-map'; bar.dataset.ldBackMap = ''; res.before(bar); }
         if (bar) bar.innerHTML = `<button type="button" class="button small secondary" data-ld-back-map-go>🗺 ${esc(T('Revenir à la carte'))}</button>${i < 0 ? `<small class="muted">${esc(T('Cette ligne n’est pas dans les premières lignes du tableau : ajoute un critère pour la retrouver.'))}</small>` : ''}`;
-        const tr = i >= 0 ? res.querySelector(`tr[data-ld-row="${i}"]`) : null; if (!tr) return;
-        tr.classList.add('ld-row-hl'); tr.scrollIntoView?.({block: 'center'});
-        (tr.querySelector('[data-ld-open], button, a') || tr).focus?.({preventScroll: true});
-        setTimeout(() => tr.classList.remove('ld-row-hl'), 6000);
+        if (i < 0) return;
+        const hl = first => { // encore une fois un peu après : un fichier branché peut redessiner le tableau (☑, 👪…)
+            const tr = res.querySelector(`tr[data-ld-row="${i}"]`); if (!tr || (!first && tr.contains(document.activeElement))) return;
+            tr.classList.add('ld-row-hl'); if (first) tr.scrollIntoView?.({block: 'center'});
+            (tr.querySelector('[data-ld-open], button, a') || tr).focus?.({preventScroll: true});
+            clearTimeout(tr.__hl); tr.__hl = setTimeout(() => tr.classList.remove('ld-row-hl'), 6000);
+        };
+        hl(true); setTimeout(hl, 150); setTimeout(hl, 600);
     }
     function cellHtml(f, row) {
         if (typeof f.html === 'function') { let h = ''; try { h = f.html(row); } catch (_) {} return h ? `<td class="ld-html">${h}</td>` : '<td class="muted">—</td>'; } // f.html(row) : du HTML déjà échappé par la liste (ex. Sources ↗)

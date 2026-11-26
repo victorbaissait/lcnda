@@ -5050,6 +5050,16 @@
   :root[data-lc-density] .graph-layout .tool-strip{gap:calc(8px * var(--lc-sp))}
   :root[data-lc-density] .gp-numbers header{gap:calc(6px * var(--lc-sp))}
 }
+:root[data-lc-density] .kc-presets{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .kc-preset{gap:calc(8px * var(--lc-sp))}
+:root .kc-preset:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .kc-preset{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root .kc-preset.is-on:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .kc-preset.is-on{padding:calc(4px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .kc-preset-sw{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .kc-rows{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .kc-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .kc-foot{gap:calc(8px * var(--lc-sp))}
 /* audit-personnes.css */
 :root[data-lc-density] .pa-people-bar{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .pa-people-toggles{gap:calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp))}
@@ -5144,6 +5154,24 @@
 :root[data-lc-density] .h-fi-dchoices{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-fi-dchoice{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-fi-dchoice{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dbox{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dsec{padding:0 calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dsec > summary{gap:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dsec > summary{padding:calc(10px * var(--lc-sp)) 0}
+:root[data-lc-density] .h-fi-dsec-body{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dsec-body{padding:0 0 calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dgrid{gap:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dgrid > label{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dgrid > .checkbox-line{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dchosen{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dchosen{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dinstrow{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dask{padding-top:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dask > summary{padding:calc(4px * var(--lc-sp)) 0}
+:root[data-lc-density] .h-fi-dask-in{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dask-in{padding:calc(6px * var(--lc-sp)) 0 calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dlook{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dlook > label{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .sv-sess-head,:root[data-lc-density] .sv-sess-row{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .sv-sess-head{margin-top:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .succ-au-box{gap:calc(8px * var(--lc-sp))}

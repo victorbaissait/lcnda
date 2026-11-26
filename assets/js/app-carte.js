@@ -443,6 +443,12 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
 
     /* ── 🗒 légende ── */
     window.addEventListener('lcnda-carte-couleurs',()=>{if(state.module==='carte'&&$('#map-stage')&&state.mapLastDraw)drawMap();});
+    /** la légende au-dessus de la mention « © OpenStreetMap · connexion requise… » (même coin) : l'écart suit sa vraie hauteur (elle passe sur 2–3 lignes en téléphone, ou quand d'autres fonds sont cités) */
+    function placeLegend(){
+        const st=$('#map-stage'),cap=st?.querySelector(':scope > .map-caption');if(!st)return;
+        const set=()=>{const r=cap&&!cap.hidden&&cap.offsetParent!==null?cap.getBoundingClientRect():null,sr=st.getBoundingClientRect();st.style.setProperty('--map-legend-bottom',`${r&&r.height?Math.ceil(sr.bottom-r.top)+8:26}px`);};
+        set();if(cap&&!st._kcRO&&window.ResizeObserver){st._kcRO=new ResizeObserver(set);st._kcRO.observe(cap);st._kcRO.observe(st);}
+    }
     function drawLegend(visible){
         const box=$('#map-legend');if(!box)return;
         if(!mapOpts().legend||state.mapMode==='mine'){box.hidden=true;return;}
@@ -458,6 +464,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const lin=mapActiveFilters(choicesCache?.v).map(x=>x.t).join(' · ');
         box.hidden=!rows&&!yr;
         box.innerHTML=`<b>${escapeHtml(mapModeLabel())}</b>${rows}${yr?`<small>${escapeHtml(yr.min===yr.max?String(yr.min):i18n('Période : {a} – {b}',{a:String(yr.min),b:String(yr.max)}))}</small>`:''}${lin?`<small>${escapeHtml(lin)}</small>`:''}${mapOpts().gravity&&state.mapGravity?.data?.note?`<small>${escapeHtml(i18n(state.mapGravity.data.note))}</small>`:''}`;
+        placeLegend();
     }
 
     /* ── 🕳 lieux sans position : le compteur sur le bouton « Lieux à placer » ── */
