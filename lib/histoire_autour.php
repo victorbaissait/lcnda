@@ -78,7 +78,7 @@ function ha_life(PDO $pdo, int $id): array
         $ev = ['id' => (int) $e['id'], 'tag' => $tag, 'type' => (string) $e['type_label'], 'year' => $y, 'date' => (string) ($e['sort_date'] ?? ''), 'date_text' => (string) $e['date_text'],
             'place_id' => $e['place_id'] !== null ? (int) $e['place_id'] : null, 'place' => trim((string) preg_replace('/\s*,.*$/u', '', (string) $e['place'])), 'place_full' => (string) $e['place'],
             'country' => (string) ($e['country'] ?? ''), 'lat' => $lat, 'lon' => $lon, 'insee' => (string) ($e['insee'] ?? ''),
-            'address' => (string) $e['address'], 'title' => (string) $e['title'], 'description' => (string) $e['description']];
+            'address' => (string) $e['address'], 'title' => (string) $e['title'], 'description' => (string) $e['description'], 'cause' => (string) ($e['cause'] ?? '')];
         $events[] = $ev;
         if ($tag === 'OCCU' || in_array(strtolower((string) $e['slug']), ['occupation', 'profession', 'metier'], true)) { $addJob((string) ($e['title'] ?: $e['description']), $y); }
         foreach (['address', 'title', 'description', 'cause', 'agency'] as $k) { if (trim((string) $e[$k]) !== '') { $texts[] = (string) $e[$k]; } }
