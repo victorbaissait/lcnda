@@ -192,7 +192,7 @@
             <div class="gt-row gt-row2">
               ${tg('anc', `👪 ${T('Seulement les ancêtres directs')}`, T('Nos lieux et les âges : la racine Sosa et ses ancêtres'))}${tg('approx', T('Placées par leur lieu'), T('Batailles sans coordonnées : le point est celui du lieu nommé (en pointillé)'))}${tg('borders', T('Frontières d’aujourd’hui'))}
             </div>
-            <div class="gt-track"><svg class="gt-hist" data-gt-hist preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div class="gt-track" data-ui-off><svg class="gt-hist" data-gt-hist preserveAspectRatio="none" aria-hidden="true"></svg>
               <input type="range" class="gt-range" data-gt-range min="${S.range[0]}" max="${S.range[1]}" value="${S.year}" aria-label="${esc(T('Année'))}">
               <div class="gt-ticks" data-gt-ticks aria-hidden="true"></div></div>
             <div class="gt-lives" data-gt-lives aria-label="${esc(T('Nos ancêtres'))}"></div>

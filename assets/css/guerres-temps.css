@@ -43,7 +43,7 @@
 .gt-cv { position: absolute; left: 0; top: 0; display: block; touch-action: manipulation; }
 .gt-fx { pointer-events: none; }
 .gt-box { position: absolute; z-index: 4; background: color-mix(in srgb, var(--card-bg, #fff) 94%, transparent); color: var(--ink, #111); border: 2px solid var(--ink, #111); padding: 7px 10px; font-size: 12px; }
-.gt-yearbox { left: 10px; top: 10px; max-width: calc(100% - 150px); pointer-events: none; }
+.gt-yearbox { left: 10px; top: 10px; max-width: min(340px, calc(100% - 150px)); pointer-events: none; }
 .gt-yr { font: 800 30px/1 system-ui, sans-serif; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .gt-sub { font-size: 12px; color: var(--muted, #555); margin-top: 3px; }
 .gt-legend { left: 10px; bottom: 34px; display: flex; flex-direction: column; gap: 3px; pointer-events: none; max-width: 300px; }
