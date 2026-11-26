@@ -253,6 +253,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             const s = await sheet(id), b = s.blocks.find(x => x.type === 'data');
             await post('save_topic_sheet', {...s, blocks: s.blocks.map(x => (x.id === b.id ? {...x, limit: 5, from: null, to: null, near: '', title: 'Les batailles autour de Tulle'} : x))});
             await openSheet(id); await p.waitForSelector('.h-fi-data .h-fi-dtable tbody tr', {timeout: 15000}); await sleep(500);
+            await p.evaluate(() => document.querySelectorAll('.toast').forEach(x => x.remove()));
             const sheetPng = await p.locator('#workspace .h-fi').screenshot();
             const q = await B.ctx.newPage(); await q.setViewportSize({width: 1900, height: 1000});
             await q.setContent(`<body style="margin:0;background:#e9e9ef;display:flex;gap:24px;padding:24px;align-items:flex-start"><img style="max-width:640px;box-shadow:0 2px 12px #0003" src="data:image/png;base64,${dialogPng ? dialogPng.toString('base64') : ''}"><img style="max-width:1180px;box-shadow:0 2px 12px #0003" src="data:image/png;base64,${sheetPng.toString('base64')}"></body>`);

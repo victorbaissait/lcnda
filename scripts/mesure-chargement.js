@@ -41,6 +41,7 @@ async function main() {
     const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-d', 'memory_limit=1024M', '-S', `127.0.0.1:${port}`, '-t', ROOT, path.join(ROOT, 'router.php')], { cwd: ROOT, env, stdio: 'ignore', detached: true });
     const stop = () => { try { process.kill(-proc.pid, 'SIGTERM'); } catch (_) { try { proc.kill(); } catch (_) { /* arrêté */ } } };
     process.on('exit', stop);
+    for (const sig of ['SIGINT', 'SIGTERM']) process.on(sig, () => { stop(); process.exit(130); });
     const base = `http://127.0.0.1:${port}/`;
     for (let i = 0; i < 150; i++) { try { await fetch(base + 'robots.txt'); break; } catch (_) { await sleep(100); } }
     const browser = await chromium.launch({ proxy: { server: 'http://127.0.0.1:9', bypass: '127.0.0.1' } });
