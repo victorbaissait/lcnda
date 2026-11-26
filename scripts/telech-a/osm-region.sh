@@ -78,4 +78,5 @@ sqlite3 "$out/osm-$region.mbtiles" "SELECT name, value FROM metadata WHERE name 
 sqlite3 "$out/osm-$region.mbtiles" "VACUUM"
 rm -f "work/$region.osm.pbf"
 echo "$label" > "$out/osm-$region.label"
+echo "$c" > "$out/osm-$region.source"
 ls -l "$out/osm-$region.mbtiles"

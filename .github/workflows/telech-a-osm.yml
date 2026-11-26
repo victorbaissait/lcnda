@@ -3,7 +3,8 @@
 #
 # L'app n'embarque aucune carte : Réglages → 🗂 Données → « 🗺 Cartes hors ligne » → ⤓ télécharge le pack par tranches
 # (lib/telech_a.php), le vérifie (taille, empreinte, MBTiles lisible), puis dessine les tuiles sur l'ordinateur, sans Internet.
-# Fabrication : extrait régional de Geofabrik (download.geofabrik.de, données OpenStreetMap, ODbL 1.0) + polygones de la mer
+# Fabrication : extrait régional de Geofabrik (download.geofabrik.de, données OpenStreetMap, ODbL 1.0 ; sinon le même extrait
+# chez OpenStreetMap France, download.openstreetmap.fr/extracts, ODbL 1.0) + polygones de la mer
 # (osmdata.openstreetmap.de, ODbL) → tilemaker v3.0.0 (schéma OpenMapTiles, CC BY 4.0), zoom 0 à 14.
 # Attribution obligatoire, écrite sur les cartes de l'app : « © les contributeurs d'OpenStreetMap ».
 #
@@ -43,12 +44,15 @@ jobs:
         run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
 
       - name: Outils (tilemaker v3.0.0, compilé ici)
+        # Le Makefile de tilemaker cherche d'abord un INTERPRÉTEUR Lua (luajit, lua, lua5.4 … lua5.1) pour trouver la version :
+        # sans lui (seulement liblua5.1-0-dev), « make: -e: No such file or directory » puis « Couldn't find Lua libraries ».
+        # LuaJIT (interpréteur + en-têtes /usr/include/luajit-2.1) : trouvé par le Makefile, et plus rapide pour le schéma.
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential libboost-dev libboost-filesystem-dev libboost-iostreams-dev libboost-program-options-dev \
-            libboost-system-dev liblua5.1-0-dev libshp-dev libsqlite3-dev rapidjson-dev zlib1g-dev sqlite3 jq unzip
+            libboost-system-dev luajit libluajit-5.1-dev libshp-dev libsqlite3-dev rapidjson-dev zlib1g-dev sqlite3 jq unzip
           git clone --depth 1 --branch v3.0.0 https://github.com/systemed/tilemaker.git "$RUNNER_TEMP/tilemaker"
-          make -C "$RUNNER_TEMP/tilemaker" -j"$(nproc)"
+          make -C "$RUNNER_TEMP/tilemaker" -j"$(nproc)" TM_VERSION=v3.0.0
           sudo make -C "$RUNNER_TEMP/tilemaker" install
           tilemaker --help | head -3
 
@@ -80,9 +84,9 @@ jobs:
               gh release delete-asset telech-a-osm "$a" --repo "$GITHUB_REPOSITORY" --yes
             done
             (cd envoi && rm -f osm-*.mbtiles.* && split -b 1900M -d -a 3 "../$f" "osm-$key.mbtiles.")
-            python3 - "$key" "$f" "$(cat sortie/osm-$key.label)" <<'PY'
+            python3 - "$key" "$f" "$(cat sortie/osm-$key.label)" "$(cat sortie/osm-$key.source 2>/dev/null || echo https://download.geofabrik.de/)" <<'PY'
           import json, os, sys, hashlib, datetime
-          key, f, label = sys.argv[1], sys.argv[2], sys.argv[3]
+          key, f, label, source = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
           h = hashlib.sha256()
           with open(f, 'rb') as fh:
               for b in iter(lambda: fh.read(1 << 20), b''): h.update(b)
@@ -90,7 +94,7 @@ jobs:
           parts = sorted(p for p in os.listdir('envoi') if p.startswith(f'osm-{key}.mbtiles.') and p.split('.')[-1].isdigit())
           m.setdefault('packs', {})[key] = {'label': label, 'size': os.path.getsize(f), 'sha256': h.hexdigest(), 'built': datetime.date.today().isoformat(),
               'parts': [{'name': p, 'size': os.path.getsize(os.path.join('envoi', p))} for p in parts],
-              'licence': 'ODbL 1.0 — © les contributeurs d’OpenStreetMap ; schéma OpenMapTiles CC BY 4.0', 'source': 'https://download.geofabrik.de/'}
+              'licence': 'ODbL 1.0 — © les contributeurs d’OpenStreetMap ; schéma OpenMapTiles CC BY 4.0', 'source': source}
           m['version'] = datetime.date.today().strftime('%Y-%m')
           json.dump(m, open('envoi/telech-a-osm-manifest.json', 'w'), indent=1, ensure_ascii=False)
           PY
