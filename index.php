@@ -133,6 +133,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/donnees-maj.css?v=2">
     <link rel="stylesheet" href="assets/css/donnees-recap.css?v=1"><!-- 📊 Récap des données -->
     <link rel="stylesheet" href="assets/css/donnees-onglet.css?v=1"><!-- 📊 l’onglet Données : sa colonne de gauche -->
+    <link rel="stylesheet" href="assets/css/diagrammes-onglet.css?v=1"><!-- 📈 l’onglet Diagrammes : la colonne, les vignettes, l’éditeur dans la page -->
     <link rel="stylesheet" href="assets/css/donnees-plus.css?v=2"><!-- 📊 Données, en plus -->
     <link rel="stylesheet" href="assets/css/guerres-temps.css?v=2"><!-- ▶ Dans le temps -->
     <link rel="stylesheet" href="assets/css/listes-personnes.css?v=1">
@@ -211,6 +212,7 @@ header('X-Content-Type-Options: nosniff');
             <button class="nav-item" data-module="catalogue"><span>02</span>🎨 Catalogue raisonné</button>
             <button class="nav-item" data-module="successoral"><span>02</span>⚖️ Successions</button>
             <button class="nav-item" data-module="graphiques"><span>03</span>Graphiques</button>
+            <button class="nav-item" data-module="diagrammes"><span>03</span>📈 Diagrammes</button>
             <button class="nav-item" data-module="carte"><span>04</span>Carte</button>
             <button class="nav-item" data-module="listes"><span>05</span>Listes</button>
             <button class="nav-item" data-module="donnees"><span>05</span>📊 Données</button>
@@ -1261,7 +1263,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=607" defer></script>
+<script src="assets/js/app.js?v=608" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1381,7 +1383,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-recherche.js?v=37" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=3" defer></script>
 <script src="assets/js/app-recherche-kit.js?v=1" defer></script><!-- 🔎 🗺 Carte · 🧺 📎 sur les résultats de recherche -->
-<script src="assets/js/app-graphiques.js?v=29" defer></script>
+<script src="assets/js/app-graphiques.js?v=30" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=50" defer></script>
@@ -1432,7 +1434,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-widgets.js?v=56" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=17" defer></script>
 <script src="assets/js/heritage-tabs.js?v=18" defer></script>
-<script src="assets/js/app-onglets-plus.js?v=9" defer></script>
+<script src="assets/js/app-onglets-plus.js?v=10" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=4" defer></script>
 <script src="assets/js/heritage-employers.js?v=9" defer></script>
 <script src="assets/js/heritage-book.js?v=12" defer></script>
@@ -1480,7 +1482,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-genealogies.js?v=7" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=18" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=12" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=40" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=41" defer></script>
+<script src="assets/js/app-diagrammes-onglet.js?v=1" defer></script><!-- 📈 l’onglet Diagrammes : tout s’ouvre dedans (galerie, éditeur, dossiers, ⭐, 🗑 corbeille) -->
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
 <script src="assets/js/heritage-vector.js?v=44" defer></script>
@@ -1537,7 +1540,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-images-similaires.js?v=2" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-kinds.js?v=17" defer></script>
-<script src="assets/js/heritage-graphs.js?v=7" defer></script>
+<script src="assets/js/heritage-graphs.js?v=8" defer></script>
 <script src="assets/js/heritage-diagram-chiffres.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-cartes.js?v=13" defer></script>
 <script src="assets/js/heritage-diagram-more.js?v=9" defer></script>

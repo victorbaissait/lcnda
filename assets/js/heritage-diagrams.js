@@ -120,6 +120,8 @@
             toast(i18n('↺ Diagramme remis à sa place.')); } catch (err) { toast(err.message, 'error'); }
     }
     ext.diagramTrashChanged = () => { trashMem = null; };
+    /** ces diagrammes ont changé de place (🗑 corbeille, ↺ remis) : leurs cases posées ailleurs se redessinent */
+    ext.diagramRefreshPlaced = ids => { trashMem = null; (ids || []).forEach(id => refreshEmbeds(id)); document.querySelectorAll('[data-dg-host][data-dg-filled]').forEach(h => { delete h.dataset.dgFilled; }); fillHosts(); };
     /** 📈 l'onglet Diagrammes est-il allumé ? (app-diagrammes-onglet.js) */
     const tabOn = () => !!ext.diagrammesOnglet?.on?.();
     /** ouvrir un diagramme : dans 📈 Diagrammes si l'onglet est allumé, sinon dans Graphiques → Mes diagrammes (comme avant) */

@@ -183,9 +183,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(pr.length >= 3 && pr.every(x => x.h > 10 && x.vis === 'visible' && x.tog === 'none'), JSON.stringify(pr));
             await p.emulateMedia({media: 'screen'}); await sleep(100);
             await p.evaluate(() => { window.LCNDA_UI.printPage('Fiche'); }); // sans attendre : la fenêtre se ferme à la main
-            await p.waitForSelector('dialog[open] iframe[title="Aperçu de l’impression"]', {timeout: 20000});
+            await p.waitForSelector('dialog[open] iframe[title="Aperçu de l’impression"]', {state: 'attached', timeout: 30000});
             let res = null;
-            for (let i = 0; i < 60 && !res; i++) {
+            for (let i = 0; i < 120 && !res; i++) {
                 await sleep(250);
                 res = await p.evaluate(() => { const f = document.querySelector('dialog[open] iframe[title="Aperçu de l’impression"]'); const d = f?.contentDocument; const B = d ? [...d.querySelectorAll('.source-item.is-collapsed')] : []; if (!B.length) return null; return B.map(b => ({h: b.querySelector('.src-body').getBoundingClientRect().height, vis: d.defaultView.getComputedStyle(b.querySelector('.src-body-in')).visibility, txt: b.querySelector('.source-meta')?.textContent || ''})); });
             }

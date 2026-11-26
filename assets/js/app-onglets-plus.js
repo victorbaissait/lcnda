@@ -32,6 +32,7 @@
         {k: 'tresors', g: 1, icon: '✨', name: 'Trésors de famille', desc: 'Lettres à ouvrir plus tard, recettes, musée de famille.', module: 'tresors', rec: 'RPNRPYPPYN', words: 'trésor souvenir recette musée'},
         {k: 'fiches', g: 1, icon: '📒', name: 'Fiches', desc: 'Fiches thématiques : un métier, une guerre, un village.', module: 'fiches', rec: 'RPPRPRRRPP', words: 'fiche thème métier guerre village'},
         {k: 'paniers', g: 1, icon: '🧺', name: 'Paniers', desc: 'Tes paniers rangés en dossiers, des idées à y mettre, et une recherche qui crée un panier. La pastille 🧺 reste là, même onglet éteint.', module: 'paniers', rec: 'RPPRPRRRPR', isNew: true, words: 'panier dossier recherche idée rassembler collecter'},
+        {k: 'diagrammes', g: 1, icon: '📈', name: 'Diagrammes', desc: 'Hémicycles, frises de vies, pyramides des âges, flux… tous tes diagrammes au même endroit, sans quitter l’onglet.', module: 'diagrammes', rec: 'RPPRPRRPRR', isNew: true, words: 'diagramme graphique frise pyramide hémicycle camembert dessin'},
         {k: 'donnees', g: 1, icon: '📊', name: 'Données', desc: 'Le récap des listes de données, la question en français et les 20 thèmes, dans le menu du haut. Le même écran que Listes → 🧰 Données, pas une copie.', module: 'donnees', rec: 'RPPRPRRPRR', isNew: true, words: 'données liste récap question thème séisme bataille musée'},
         {k: 'adn', g: 1, icon: '🧬', name: 'ADN', desc: 'Tes correspondances ADN et leurs liens.', module: 'adn', rec: 'PNNNNNRNPP', words: 'adn dna correspondance'},
         {k: 'catalogue', g: 1, icon: '🎨', name: 'Catalogue raisonné', desc: 'Les œuvres d’un artiste, albums, expositions.', module: 'catalogue', rec: 'PNNPYRNPPN', words: 'artiste œuvre oeuvre exposition album'},
@@ -68,7 +69,7 @@
         {k: 'outil_assembler', g: 3, icon: '🧷', name: 'Assembler des photos', desc: 'Coller plusieurs photos d’un registre en une.', target: 'tool:assembler', where: 'Listes → Outils de modification', rec: 'PPPPPRPPPP', words: 'assembler coller photos registre'},
     ];
     const GROUPS = {1: ['Des parties de l’app, cachées au départ', 'Elles existent déjà : cocher les montre dans le menu.'], 2: ['Un raccourci vers une liste', 'Il devient un « onglet à soi » (Éditeur d’onglets).'], 3: ['Un raccourci vers un outil', '']};
-    const FLAGGED = ['animaux', 'suivi', 'documents', 'catalogue', 'tresors', 'successoral', 'fiches', 'paniers', 'donnees', 'adn']; // cachés au départ tant que leur repère n'est pas posé (app.js, menuHiddenKeys)
+    const FLAGGED = ['animaux', 'suivi', 'documents', 'catalogue', 'tresors', 'successoral', 'fiches', 'paniers', 'donnees', 'diagrammes', 'adn']; // cachés au départ tant que leur repère n'est pas posé (app.js, menuHiddenKeys)
     /** pour les usages allumés : 'shown' (déjà montré par l'usage), 'rec' (conseillé), 'ok' (possible), 'off' (absent du catalogue) */
     function status(item, usages) {
         const set = (Array.isArray(usages) && usages.length ? usages : ['genealogie']).map(u => USAGE_ORDER.indexOf(u)).filter(i => i >= 0);

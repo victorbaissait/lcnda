@@ -175,7 +175,7 @@
         const refresh = async () => { try { diagrams = await ext.diagramList(true); } catch (_) {} items = collect(diagrams); if (page.isConnected) draw(); };
         page.addEventListener('click', async e => {
             if (e.target.closest('[data-gr-newgraph]')) return ext.newStatFor?.();
-            if (e.target.closest('[data-gr-newdg]')) return ext.openDiagramEditor?.(null, {onSave: () => refresh()});
+            if (e.target.closest('[data-gr-newdg]')) return ext.diagrammesOnglet?.on?.() ? ext.diagrammesOnglet.edit(null) : ext.openDiagramEditor?.(null, {onSave: () => refresh()}); // 📈 onglet allumé : « ＋ Nouveau » dans l'onglet
             const b = e.target.closest('[data-gr-open],[data-gr-edit]'); if (!b) return;
             const ref = b.dataset.grOpen || b.dataset.grEdit, i = ref.indexOf(':'), type = ref.slice(0, i), id = ref.slice(i + 1), it = items.find(x => x.type === type && String(x.id) === id); if (!it) return;
             const edit = b.hasAttribute('data-gr-edit');
@@ -184,7 +184,7 @@
                 if (!edit && g.inStats) return ext.openCustomStat?.(id);
                 return ext.editStatFor?.(id);
             }
-            if (edit) return ext.openDiagramEditor?.(Number(id), {onSave: () => refresh()});
+            if (edit) return ext.diagrammesOnglet?.on?.() ? ext.openDiagram?.(Number(id)) : ext.openDiagramEditor?.(Number(id), {onSave: () => refresh()}); // 📈 chaque ligne s'ouvre dans l'onglet quand il est allumé
             ext.openDiagram?.(Number(id));
         });
         const onChg = () => { if (!page.isConnected) { document.removeEventListener('lcnda:graphs-changed', onChg); return; } refresh(); };
