@@ -590,4 +590,15 @@ const query = dataListsEngine.buildQuery({near: {lat, lon, km},
 <script>
 (function(){var b=document.getElementById('tgl'),r=document.documentElement;function dark(){var t=r.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;}function lab(){b.textContent=dark()?'☀ Thème clair':'☾ Thème sombre';}b.addEventListener('click',function(){r.setAttribute('data-theme',dark()?'light':'dark');lab();});lab();})();
 </script>
+
+<section id="decisions" style="margin:32px auto;max-width:900px;padding:20px 24px;border:1px solid currentColor;border-radius:14px">
+<h2>✅ Décisions (validé le 2026-11-26)</h2>
+<ol>
+<li>Listes → Données s'ouvre sur le 📊 Récap.</li>
+<li><b>Au choix dans les Réglages</b>, où se trouvent les données : « dans Listes seulement » (par défaut), « dans l'onglet 📊 Données seulement » ou « aux deux endroits ». Au moins un des deux reste toujours là (on ne peut pas tout enlever). Même écran dans les deux cas (un seul composant).</li>
+<li>⌘K : une ligne « 📊 Demander aux données : … », réponse calculée seulement si on la choisit.</li>
+<li>« Près de » / « autour de » sans distance : rayon par thème (séismes 150 km, musées 30 km, crues 10 km…), <b>toujours modifiable à la main</b> : − / + ou on tape le nombre dans la pastille 📍, ou on l'écrit dans la question (« à 20 km de Tulle ») ; les rayons par défaut de chaque thème se changent aussi dans les Réglages.</li>
+<li>Question seulement sur la famille : proposer 🔍 Recherche → « Poser une question en français », avec un bouton.</li>
+</ol>
+</section>
 </body></html>
