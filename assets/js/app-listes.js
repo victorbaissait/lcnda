@@ -120,7 +120,11 @@
         setFlatOrder: keys => { try { localStorage.setItem('genealogie-list-order', JSON.stringify(keys)); } catch (_) {} },
         canHide: true, hidden: () => { try { const v = JSON.parse(localStorage.getItem('genealogie-list-hidden') || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } }, setHidden: keys => { try { localStorage.setItem('genealogie-list-hidden', JSON.stringify(keys)); } catch (_) {} },
         mine: () => window.LCNDA_EXT?.extraListTypes?.() || [], mineKey: 'genealogie-mylists-order',
-        current: () => state.listType, eyebrow: 'LISTES', what: 'listes', searchPh: 'Chercher une liste…'});
+        current: () => state.listType, eyebrow: 'LISTES', what: 'listes', searchPh: 'Chercher une liste…',
+        // ☐ « Masquer les données de la liste » : les données téléchargées seulement dans l'onglet 📊 Données (même réglage que Réglages → 🧰 Listes de données)
+        extraState: () => ({dataHide: window.LCNDA_EXT?.dataHome?.place?.() === 'onglet'}),
+        extraHtml: x => (window.LCNDA_EXT?.dataHome?.setPlace && !document.body.classList.contains('is-kiosk') ? `<label class="checkbox-line mt-datahide"><input type="checkbox" data-mt-extra="dataHide" ${x.dataHide ? 'checked' : ''}> <span><b>${escapeHtml(i18n('Masquer les données de la liste'))}</b><small class="muted"> — ${escapeHtml(i18n('les données téléchargées restent dans l’onglet 📊 Données'))}</small></span></label>` : ''),
+        applyExtra: x => { const H = window.LCNDA_EXT?.dataHome; if (!H?.setPlace) return; const now = H.place() === 'onglet'; if (!!x.dataHide !== now) H.setPlace(x.dataHide ? 'onglet' : 'deux'); }});
     function renderListSidebar(content,footer){
         LG.render(content, sidebarSignal());
         footer.innerHTML='<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="list-reorder" title="En groupes ou en une seule liste, l’ordre, ce qui s’affiche">Réordonner</button></div><small class="muted">Recherche et export des données</small>';$('#list-reorder')?.addEventListener('click',()=>{const A=window.LCNDA_APP;

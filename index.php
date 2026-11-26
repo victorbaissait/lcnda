@@ -53,7 +53,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/onglets.css?v=18">
     <link rel="stylesheet" href="assets/css/audit-chrono.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=2">
-    <link rel="stylesheet" href="assets/css/audit-recherche.css?v=5">
+    <link rel="stylesheet" href="assets/css/audit-recherche.css?v=6">
     <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-personnes.css?v=5">
@@ -1357,9 +1357,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-pages.js?v=19" defer></script>
 <script src="assets/js/app-access.js?v=20" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
-<script src="assets/js/app-sidegroups.js?v=15" defer></script>
+<script src="assets/js/app-sidegroups.js?v=17" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
-<script src="assets/js/app-listes.js?v=68" defer></script>
+<script src="assets/js/app-listes.js?v=69" defer></script>
 <script src="assets/js/app-listes-donnees.js?v=17" defer></script>
 <script src="assets/js/app-listes-themes.js?v=6" defer></script><!-- 🗂 Listes → Données par thème (20 thèmes), recherche sur toutes les listes ; Réglages → 🧰 Listes de données -->
 <script src="assets/js/app-listes-reunies.js?v=4" defer></script><!-- 🔀 listes réunies (🌋 Séismes réunis) : plusieurs sources, sans doublons -->

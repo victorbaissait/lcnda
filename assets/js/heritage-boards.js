@@ -281,8 +281,97 @@
     const myTemplates = () => { try { const l = JSON.parse(localStorage.getItem(TPL_KEY) || '[]'); return Array.isArray(l) ? l.filter(t => t && t.id && Array.isArray(t.items)) : []; } catch (_) { return []; } };
 
     /* ═════════ L'éditeur ═════════ */
+    /* ═════════ 📊 Données téléchargées et 🧺 panier posés sur un tableau (heritage-atelier-donnees.js, heritage-connexions.js) ═════════
+     * Un élément du panier {kind, ref_id, title, value, data, origin} devient : fiche → la fiche ; média → le média ; lieu → une carte avec
+     * son repère (sinon une carte 📍) ; ensemble → un tableur (colonnes, lignes) avec sa source ; passage → une note ; le reste → une carte
+     * (titre, ligne, ↗ source). Mode consultation : rien n'est posé. Essai : tests/test-tableau-donnees-panier.js */
+    const kioskOn = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly');
+    const okUrl = u => (/^https?:\/\/[^\s"'<>]+$/i.test(String(u || '')) ? String(u) : '');
+    const cxOrigin = o => {
+        if (!o || typeof o !== 'object') return null; const out = {};
+        for (const k of ['kind', 'label', 'field', 'screen']) if (o[k] != null && o[k] !== '') out[k] = String(o[k]).slice(0, 300);
+        for (const k of ['id', 'person_id']) if (Number(o[k])) out[k] = Number(o[k]);
+        if (okUrl(o.url)) out.url = okUrl(o.url);
+        if (o.open && typeof o.open === 'object') { const op = {}; for (const [k, v] of Object.entries(o.open)) if (/^[a-z_]{1,30}$/i.test(k) && ['string', 'number', 'boolean'].includes(typeof v)) op[k] = typeof v === 'string' ? v.slice(0, 200) : v; if (Object.keys(op).length) out.open = op; }
+        return Object.keys(out).length ? out : null;
+    };
+    /** d'où vient une chose prise : {source, url} (un ensemble : sa source et sa licence) */
+    const cxSrc = it => { const o = it?.origin || {}, d = it?.data || {}, set = it?.kind === 'set';
+        return {source: String((set ? [d.source, d.licence].filter(Boolean).join(' — ') : '') || o.label || '').slice(0, 300), url: okUrl(set ? d.url || o.url : o.url)}; };
+    const CX_ICONS = {event: '📅', act: '📜', source: '🔖', note: '📝', investigation: '🕵️', datum: '✳️', row: '📋', data: '🧰', citation: '🔖', digest: '📜', courrier: '📮', reminder: '⏰', atelier: '📚', place: '📍'};
+    /** une chose du panier → ce qu'on pose (taille comprise) */
+    function cxSpec(it, media = {}) {
+        const s = cxSrc(it), o = cxOrigin(it.origin), base = {cxkind: String(it.kind || ''), ...(Number(it.ref_id) ? {ref_id: Number(it.ref_id)} : {}), ...(o ? {origin: o} : {}), ...(s.source ? {source: s.source} : {}), ...(s.url ? {url: s.url} : {})};
+        const title = String(it.title || '').slice(0, 300), sub = it.value && it.value !== it.title ? String(it.value).slice(0, 600) : '';
+        if (it.kind === 'person' && Number(it.ref_id)) return {type: 'person', person_id: Number(it.ref_id), w: 230, h: 90};
+        if (it.kind === 'media' && Number(it.ref_id)) { const k = kindOfMedia(media[it.ref_id] || it.data || {}); return {type: 'media', media_id: Number(it.ref_id), w: k === 'audio' ? 300 : 280, h: k === 'audio' ? 92 : 200}; }
+        if (it.kind === 'place' && it.data && Number.isFinite(Number(it.data.lat)) && Number.isFinite(Number(it.data.lon)) && it.data.lat !== null && it.data.lon !== null)
+            return {...base, type: 'map', title, pins: [{lat: Number(it.data.lat), lon: Number(it.data.lon), label: title, color: '#d0021b'}], w: 300, h: 230};
+        if (it.kind === 'set') {
+            const d = it.data || {}, rows = (Array.isArray(d.rows) ? d.rows : []).slice(0, 99).map(r => (Array.isArray(r) ? r : [r]).slice(0, 30).map(v => String(v ?? '').slice(0, 500)));
+            const cols = (Array.isArray(d.columns) ? d.columns : []).slice(0, 30).map(v => String(v ?? ''));
+            const cells = [cols.length ? cols : Array.from({length: Math.max(1, ...rows.map(r => r.length))}, (_, i) => colName(i)), ...rows], n = Math.max(1, ...cells.map(r => r.length));
+            return {...base, type: 'table', title, cells: cells.map(r => Array.from({length: n}, (_, c) => r[c] ?? '')), colw: Array(n).fill(120), header: true, stripes: true, hfill: '#e8eef7', fs: 13, color: '#111111', w: Math.min(1400, n * 120), h: Math.min(2400, cells.length * 29)};
+        }
+        if (it.kind === 'text') return {...base, type: 'note', text: [title, sub].filter(Boolean).join('\n').slice(0, 5000), fill: NOTE_COLORS[0], fs: 16, color: '#111111', w: 240, h: 160};
+        return {...base, type: 'card', icon: (it.kind === 'set' && it.data?.icon) || CX_ICONS[it.kind] || '📋', title: title || '—', sub, w: 260, h: 132};
+    }
+    /** une liste de choses posées en grille nette autour de (cx, cy) ; un ▭ cadre autour si on veut */
+    function gridLayout(specs, cx, cy, frameTitle = '') {
+        const gap = 24, n = specs.length, cols = Math.max(1, Math.min(n, Math.ceil(Math.sqrt(n * 1.4)))), cw = Math.max(...specs.map(s => s.w));
+        const rowsH = []; specs.forEach((s, i) => { const r = Math.floor(i / cols); rowsH[r] = Math.max(rowsH[r] || 0, s.h); });
+        const W = cols * cw + (cols - 1) * gap, H = rowsH.reduce((a, h) => a + h, 0) + (rowsH.length - 1) * gap, pad = frameTitle ? 30 : 0, head = frameTitle ? 34 : 0;
+        const x0 = cx - W / 2, y0 = cy - H / 2;
+        const out = specs.map((s, i) => { const r = Math.floor(i / cols), c = i % cols; return {id: uid(), ...s, x: x0 + c * (cw + gap), y: y0 + rowsH.slice(0, r).reduce((a, h) => a + h + gap, 0)}; });
+        if (frameTitle) out.unshift({id: uid(), type: 'frame', title: String(frameTitle).slice(0, 300), x: x0 - pad, y: y0 - pad - head, w: W + pad * 2, h: H + pad * 2 + head, fill: '#eef4ff', stroke: '#9fb7d9'});
+        return out;
+    }
+    /** les briefs des médias pris (pour savoir si c'est un son, une image…) */
+    const mediaBriefs = async list => { const ids = [...new Set(list.filter(x => x.kind === 'media' && Number(x.ref_id)).map(x => Number(x.ref_id)))]; if (!ids.length) return {}; try { return (await api('media_brief', {ids: ids.join(',')})).media || {}; } catch (_) { return {}; } };
+    /** poser sur un tableau qui n'est pas ouvert : lu, complété à droite de ce qu'il contient, enregistré ; ↶ retire ce qui a été posé */
+    async function placeOnClosedBoard(boardId, list) {
+        const media = await mediaBriefs(list), nb = await api('board', {id: boardId}), old = nb.data?.items || [];
+        let x1 = 0, y0 = 0; if (old.length) { x1 = Math.max(...old.map(i => (i.x || 0) + (i.w || 0))); y0 = Math.min(...old.map(i => i.y || 0)); }
+        const specs = list.map(x => cxSpec(x, media)), g0 = gridLayout(specs, 0, 0), minX = Math.min(...g0.map(i => i.x)), minY = Math.min(...g0.map(i => i.y));
+        let z = old.reduce((m, i) => Math.max(m, i.z || 0), 0); const added = g0.map(i => ({...i, x: i.x - minX + x1 + (old.length ? 160 : 40), y: i.y - minY + y0 + (old.length ? 0 : 40), z: ++z}));
+        const body = d => ({id: boardId, title: nb.title, icon: nb.icon, color: nb.color, status: nb.status, owner_type: nb.owner_type || '', owner_id: nb.owner_id || 0, part: nb.part || '', data: d});
+        await api('save_board', {}, {method: 'POST', body: body({...nb.data, items: [...old, ...added]})});
+        const ids = new Set(added.map(i => i.id));
+        return {ids: [...ids], title: nb.title, undo: async () => { const cur = await api('board', {id: boardId}); await api('save_board', {}, {method: 'POST', body: {...body({...cur.data, items: (cur.data?.items || []).filter(i => !ids.has(i.id))}), title: cur.title}}); }};
+    }
+    /* 📍 « Mettre dans… → 🧩 Un tableau » (registre des destinations, heritage-connexions.js) */
+    const boardOpen = () => { const c = ext.boardsInternals?.current; return c?.isOpen?.() ? c : null; };
+    (ext.dropTargets = ext.dropTargets || []).push({
+        id: 'board', icon: '🧩', label: 'Un tableau…', group: 'Créer', enabled: () => !kioskOn(),
+        here: () => { const c = boardOpen(); return c && !c.locked() ? {board_id: c.id, title: c.title(), label: i18n('Ici : le tableau « {t} »', {t: c.title()})} : null; },
+        choose: async () => {
+            let list = []; try { list = (await api('boards', {owner_type: 'all'})).boards || []; } catch (_) {}
+            if (!list.length) { toast(i18n('Aucun tableau : crée-en un dans Enquêtes → Tableaux.')); return null; }
+            return new Promise(res => window.LCNDA_UI?.menuAt?.(document.activeElement || document.body, list.slice(0, 40).map(r => ({icon: r.icon || '🧩', label: r.title, run: () => res({board_id: Number(r.id), title: r.title})})), {title: i18n('Sur quel tableau ?'), onClose: () => setTimeout(() => res(null), 50)}));
+        },
+        explain: items => i18n('{n} posés sur le tableau, avec leur source', {n: plural(items.length, 'élément')}),
+        receive: async (items, ctx) => {
+            if (kioskOn()) throw new Error(i18n('Mode consultation : rien ne peut être ajouté au tableau.'));
+            const c = boardOpen();
+            if (c && Number(c.id) === Number(ctx.board_id)) { const r = await c.placeCx(items, {at: c.takeDrop()}); if (!r) throw new Error(i18n('Tableau verrouillé : 🔒 en haut pour le déverrouiller.')); return {message: i18n('🧩 Posé sur le tableau « {t} » : {n}', {t: c.title(), n: plural(r.ids.length, 'élément')}), undo: async () => c.removeIds(r.ids)}; }
+            const r = await placeOnClosedBoard(ctx.board_id, items);
+            return {message: i18n('🧩 Posé sur le tableau « {t} » : {n}', {t: r.title, n: plural(r.ids.length, 'élément')}), undo: r.undo};
+        }});
+    /* 📎 « Insérer une info » dans un texte du tableau : la source est gardée sur l'élément (« ↗ » en dessous) */
+    function boardHooks() {
+        const II = ext.insertInfo;
+        if (II?.hosts && !II.hosts.some(h => h.id === 'board')) II.hosts.push({id: 'board', match: el => !!el.closest?.('.h-board'), context: () => ({}), cite: async (el, list) => boardOpen()?.cite?.(el, list) || null});
+        const UI = window.LCNDA_UI;
+        if (UI && !(UI.ctxExtras || []).some(f => f._board)) { // clic droit sur un élément du tableau : 🧺 Prendre, 📍 Mettre dans…
+            const f = e => { const el = e.target.closest?.('.h-board [data-bi]'), c = boardOpen(); if (!el || !c || !ext.connexions?.take) return []; const list = c.asCx(el.dataset.bi); if (!list.length) return [];
+                const short = list.length > 1 ? plural(list.length, 'élément') : `« ${String(list[0].title).slice(0, 38)} »`;
+                return [{icon: '🧺', label: i18n('Prendre {w}', {w: short}), inEditor: true, run: () => ext.connexions.take(list)}, {icon: '📍', label: i18n('Mettre {w} dans…', {w: short}), inEditor: true, run: () => ext.connexions.putInto(list)}]; };
+            f._board = true; (UI.ctxExtras = UI.ctxExtras || []).push(f);
+        }
+    }
     async function openBoard(id, host) {
         personCache.clear(); fullCache.clear(); // les fiches ont pu changer depuis la dernière fois
+        boardHooks();
         let b; try { b = await api('board', {id}); } catch (error) { toast(error.message, 'error'); return; }
         const media = b.media || {};
         let items = (b.data?.items || []).map(it => ({...it}));

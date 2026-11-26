@@ -85,3 +85,9 @@ body.is-kiosk [data-delete-event-type], body.is-kiosk [data-delete-personal-dict
 #research-form .rk-menu[hidden], #research-form .rk-menu:empty { border: 0; padding: 0; margin: 0; }
 #research-proximity-fields .proximity-radius-value { display: block; margin: 6px 0 14px; }
 #research-proximity-fields .year-range-fields { margin-top: 10px; }
+/* « Réordonner les listes » : rien de collé au trait du haut ni entre les parties */
+.mt-reorder .dash-reorder-tools { padding: 16px 20px 4px; display: flex; flex-wrap: wrap; gap: 9px; }
+.mt-reorder .mt-rbody { padding-top: 12px; }
+.mt-reorder .mt-enable { display: flex; gap: 8px; margin: 0 0 16px; }
+.mt-reorder .mt-openmode { margin: 0 0 16px; padding: 10px 14px 12px; }
+.mt-reorder .mt-datahide { display: flex; gap: 8px; align-items: baseline; margin: 0 0 18px; padding: 10px 14px; border: 1px dashed var(--line-soft, rgba(0,0,0,.3)); }

@@ -4984,6 +4984,13 @@
 :root[data-lc-density] .lr-list{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] #research-form .rk-menu{padding-bottom:calc(18px * var(--lc-sp))}
 :root[data-lc-density] #research-form .rk-menu{margin-bottom:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .mt-reorder .dash-reorder-tools{padding:calc(16px * var(--lc-sp)) calc(20px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .mt-reorder .dash-reorder-tools{gap:calc(9px * var(--lc-sp))}
+:root[data-lc-density] .mt-reorder .mt-rbody{padding-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .mt-reorder .mt-enable{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .mt-reorder .mt-openmode{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .mt-reorder .mt-datahide{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .mt-reorder .mt-datahide{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
 /* audit-enquetes.css */
 :root[data-lc-density] .enq-row-act{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .enq-conclusion{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
