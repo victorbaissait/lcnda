@@ -1,0 +1,115 @@
+/* LCNDA — 🗂 Listes → Données par thème (app-listes-themes.js), 🔀 listes réunies (app-listes-reunies.js), 👪 « Dans la famille »
+ * (app-listes-famille.js), ☑ plusieurs lignes d'un coup (app-listes-choix.js). Couleurs : variables de l'app ; le mode sombre suit. */
+
+/* ── 🗂 l'écran des thèmes ── */
+.ldt-q { margin: 0 0 10px; width: 100%; max-width: 640px; }
+.ldt-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 12px; }
+.ldt-chips-lab { color: var(--muted, #6d6d6d); font-size: 13px; margin-right: 2px; }
+.ldt-chip { border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); color: inherit; font: inherit; font-size: 13px; border-radius: 999px; padding: 3px 11px; cursor: pointer; }
+.ldt-chip i { font-style: normal; color: var(--muted, #6d6d6d); margin-left: 2px; }
+.ldt-chip:hover, .ldt-chip:focus-visible { border-color: var(--blue-bright, #055dff); }
+.ldt-chip.is-on { border-color: var(--blue-bright, #055dff); background: var(--blue-soft, #eaf2ff); font-weight: 700; }
+.ldt-found { margin: 0 0 8px; font-size: 13px; }
+.ldt-results { margin: 0 0 6px; }
+.ldt-themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 10px; }
+.ldt-theme { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; text-align: left; padding: 12px 14px; border: 1.5px solid var(--line-color, #d6d6d6); border-radius: 12px; background: var(--card-bg, #fff); color: inherit; font: inherit; cursor: pointer; min-width: 0; transition: opacity .15s; }
+.ldt-theme:hover, .ldt-theme:focus-visible { border-color: var(--blue-bright, #055dff); }
+.ldt-theme.is-dim { opacity: .45; }
+.ldt-ic { font-size: 24px; line-height: 1.1; }
+.ldt-txt { display: grid; gap: 2px; min-width: 0; }
+.ldt-txt b i { font-style: normal; font-weight: 400; color: var(--muted, #6d6d6d); margin-left: 4px; }
+.ldt-txt small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ldt-mg { font-size: 12.5px; color: var(--blue-bright, #055dff); }
+.ldt-tag { font-size: 11.5px; padding: 1px 7px; border-radius: 999px; background: var(--soft, #f1f2f4); color: var(--muted, #6d6d6d); white-space: nowrap; }
+.ldt-tag.is-merged { background: var(--blue-soft, #eaf2ff); color: var(--blue-bright, #055dff); }
+.ld-card.is-merged { border-color: var(--blue-bright, #055dff); }
+.ldt-tabs { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 0 0 12px; }
+.ldt-back { border: 0; background: none; color: var(--blue-bright, #055dff); font: inherit; cursor: pointer; padding: 2px 0; }
+.ldt-seg button i { font-style: normal; color: var(--muted, #6d6d6d); margin-left: 3px; }
+.ldt-seg button.is-active { font-weight: 700; }
+.ldt-theme-page .ld-cards { margin-top: 4px; }
+.ldt-settings .maintenance-panel { max-width: 760px; }
+.ldt-km input { width: 6em; margin: 0 4px; }
+/* la colonne de gauche : en mode thèmes, la liste ouverte se montre sous son thème */
+.ld-themes-on .mt-gitems [data-side-value^="data_"] { padding-left: 2.1em; font-size: 13px; }
+
+/* ── 🔀 une liste réunie ── */
+.ldr-sub { display: block; color: var(--muted, #6d6d6d); font-size: 12px; }
+.ldr-src { white-space: nowrap; margin-right: 6px; }
+.ldr-src a { text-decoration: none; }
+.ldr-diff { display: inline-block; font-size: 11.5px; padding: 0 6px; border-radius: 999px; background: var(--soft, #fff8d6); color: inherit; white-space: nowrap; }
+.ldr-stats { margin: 8px 0 0; font-size: 13px; }
+.ld-table tr.is-open > td { border-bottom-color: transparent; }
+.ldr-detail-tr > td { max-width: none !important; white-space: normal; background: var(--card-head-bg, #fafafa); }
+.ldr-detail { display: grid; gap: 10px; padding: 6px 4px 10px; }
+.ldr-dtable td { max-width: 260px; }
+.ldr-note { margin: 0; font-size: 13px; }
+.ldr-dacts { display: flex; flex-wrap: wrap; gap: 6px; }
+.ldr-offer ul { margin: 4px 0 0; padding-left: 18px; }
+.ld-table td.ld-html { white-space: normal; }
+/* 👪 « Dans la famille » */
+.ld-table td.ld-fam { min-width: 9em; white-space: normal; }
+.ldf-who { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--blue-soft, #eaf2ff); font-size: 13px; }
+/* 🏷 les pastilles d'une liste (d.chips), ↳ le bandeau d'une sous-liste */
+.ld-qchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ld-qchip { border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); color: inherit; font: inherit; font-size: 13px; border-radius: 999px; padding: 3px 11px; cursor: pointer; }
+.ld-qchip.is-on { border-color: var(--blue-bright, #055dff); background: var(--blue-soft, #eaf2ff); }
+.ld-qchip:focus-visible { outline: 2px solid var(--blue-bright, #055dff); outline-offset: 2px; }
+.ld-parent { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+
+/* ── ☑ plusieurs lignes d'un coup ── */
+.ldc-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ldc-all { border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); color: inherit; font: inherit; font-size: 13px; border-radius: 8px; padding: 3px 10px; cursor: pointer; }
+.ldc-all:hover, .ldc-all:focus-visible { border-color: var(--blue-bright, #055dff); }
+.ldc-hint { font-size: 12px; }
+.ld-table th.ld-ck, .ld-table td.ld-ck { width: 34px; max-width: 34px; padding-left: 6px; padding-right: 2px; text-align: center; }
+.ld-table:has(.cx-ldck) .ld-ck { display: none; } /* « ☑ Choisir des lignes » de Prendre depuis… a déjà ses cases */
+.ld-ck-b { width: 22px; height: 22px; border: 1.5px solid var(--muted, #6d6d6d); border-radius: 5px; background: var(--card-bg, #fff); padding: 0; cursor: pointer; display: inline-grid; place-items: center; color: #fff; font-size: 14px; line-height: 1; opacity: 0; transition: opacity .12s; vertical-align: middle; }
+.ld-ck-b::after { content: ''; }
+.ld-ck-b[aria-checked="true"] { background: var(--blue-bright, #055dff); border-color: var(--blue-bright, #055dff); }
+.ld-ck-b[aria-checked="true"]::after { content: '✓'; }
+.ld-ck-b[aria-checked="mixed"] { background: var(--blue-bright, #055dff); border-color: var(--blue-bright, #055dff); }
+.ld-ck-b[aria-checked="mixed"]::after { content: '–'; }
+.ld-table tr:hover .ld-ck-b, .ld-ck-b:focus-visible, .ld-ck-b[aria-checked="true"], .ld-ck-b[aria-checked="mixed"], .ldc-has-sel .ld-ck-b { opacity: 1; }
+.ld-ck-b:focus-visible { outline: 2px solid var(--blue-bright, #055dff); outline-offset: 2px; }
+@media (hover: none) { .ld-ck-b { opacity: 1; } }
+.ld-table tr.is-picked > td { background: var(--blue-soft, #eaf2ff); }
+.ld-table th.ld-acts, .ld-table td.ld-acts { width: 1%; white-space: nowrap; text-align: right; max-width: none; }
+.ld-act { border: 0; background: none; font: inherit; font-size: 15px; padding: 2px 5px; border-radius: 6px; cursor: pointer; opacity: .55; }
+.ld-table tr:hover .ld-act, .ld-act:focus-visible { opacity: 1; }
+.ld-act:hover:not(:disabled) { background: var(--blue-soft, #eaf2ff); }
+.ld-act:disabled { cursor: not-allowed; opacity: .3; }
+.ldc-bar { position: sticky; bottom: 14px; z-index: 30; display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; margin: 16px auto 4px; width: fit-content; max-width: calc(100% - 8px);
+  padding: 8px 10px 8px 16px; border: 1.5px solid var(--line-color, #d6d6d6); border-radius: 14px; background: var(--card-bg, #fff); box-shadow: 0 6px 22px rgba(0, 0, 0, .14); }
+.ldc-bar[hidden] { display: none; }
+.ldc-n { font-weight: 700; white-space: nowrap; }
+.ldc-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.ldc-b { border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); color: inherit; font: inherit; font-size: 13.5px; border-radius: 9px; padding: 4px 11px; cursor: pointer; white-space: nowrap; }
+.ldc-b:hover:not(:disabled), .ldc-b:focus-visible { border-color: var(--blue-bright, #055dff); }
+.ldc-b:disabled { opacity: .45; cursor: not-allowed; }
+.ldc-x { border: 0; background: none; color: var(--muted, #6d6d6d); font: inherit; font-size: 16px; padding: 4px 8px; border-radius: 8px; cursor: pointer; }
+.ldc-x:hover, .ldc-x:focus-visible { background: var(--soft, #f1f2f4); color: inherit; }
+:root[data-theme="dark"] .ldc-bar { box-shadow: 0 6px 22px rgba(0, 0, 0, .5); }
+:root[data-theme="dark"] .ld-ck-b { background: transparent; }
+
+/* ── 390 px : thèmes en une colonne, le tableau d'une liste réunie en cartes de deux lignes ── */
+@media (max-width: 600px) {
+  .ldt-themes { grid-template-columns: 1fr; }
+  .ldt-chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
+  .ldt-chip { flex: none; }
+  .ldc-bar { bottom: calc(10px + env(safe-area-inset-bottom, 0px)); padding: 6px 8px 6px 12px; gap: 6px; }
+  .ldc-b span { display: none; }
+  .ldc-b { font-size: 16px; padding: 4px 10px; }
+  .ldc-hint { display: none; }
+  .ld-table--cards thead { display: none; }
+  .ld-table--cards, .ld-table--cards tbody { display: block; }
+  .ld-table--cards tr[data-ld-row] { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 8px; padding: 10px 6px; border-bottom: 1px solid var(--line-color, #d6d6d6); }
+  .ld-table--cards tr[data-ld-row] > td { display: block; border: 0; padding: 0; max-width: none; grid-column: 2; }
+  .ld-table--cards tr[data-ld-row] > td.muted { display: none; }
+  .ld-table--cards tr[data-ld-row] > td.ld-ck { grid-column: 1; grid-row: 1 / span 6; }
+  .ld-table--cards tr[data-ld-row] > td.ld-acts { grid-column: 3; grid-row: 1 / span 6; align-self: center; }
+  .ld-table--cards tr[data-ld-row] > td:nth-child(2) { font-weight: 700; }
+  .ld-table--cards .ld-act { font-size: 20px; padding: 6px 8px; opacity: 1; }
+  .ld-table--cards tr.ldr-detail-tr { display: block; }
+  .ld-table--cards tr.ldr-detail-tr > td { display: block; }
+}

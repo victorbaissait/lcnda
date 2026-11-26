@@ -184,3 +184,55 @@ def qid(u):
 def point(v):
     m = _re.match(r'Point\(([-\d.eE]+) ([-\d.eE]+)\)', v or '')
     return (round(float(m.group(2)), 5), round(float(m.group(1)), 5)) if m else (None, None)
+
+
+# ───────── lot M : les tableaux de Wikipédia (wikitext, action=raw) → lignes de cellules ; un nom dans une cellule ─────────
+def wp_tables(w):
+    """tous les tableaux « {| … |} » d'un wikitexte → [[cellules]] par tableau (attributs de cellule enlevés ; rowspan non déplié)"""
+    out = []
+    for m in _re.finditer(r'\n\{\|(.*?)\n\|\}', '\n' + w, flags=_re.S):
+        rows = []
+        for rr in _re.split(r'\n\|-[^\n]*', m.group(1)):
+            cells = []
+            for line in rr.split('\n'):
+                if not line or line[0] not in '|!' or line.startswith('|+') or line.startswith('{|'):
+                    continue
+                for c in _re.split(r'\|\||!!', line[1:]):
+                    depth, cut = 0, None
+                    for i in range(len(c)):
+                        two = c[i:i + 2]
+                        if two in ('[[', '{{'):
+                            depth += 1
+                        elif two in (']]', '}}'):
+                            depth -= 1
+                        elif c[i] == '|' and depth == 0:
+                            cut = i
+                            break
+                    if cut is not None and _re.search(r'(style|scope|class|rowspan|colspan|align|bgcolor|width|data-sort-value)\s*=', c[:cut]):
+                        c = c[cut + 1:]
+                    cells.append(c.strip())
+            if cells:
+                rows.append(cells)
+        out.append(rows)
+    return out
+
+
+def name_in(c):
+    """le nom (et l'article) d'une personne, d'un club ou d'un cheval dans une cellule : {{sortname}}, {{flagathlete}}, [[lien]] → (nom, titre)"""
+    c = _re.sub(r'<ref[^>]*/>', '', c)
+    c = _re.sub(r'<ref[^>]*>.*?</ref>', '', c, flags=_re.S)
+    c = _re.sub(r'\{\{efn[^{}]*(\{\{[^{}]*\}\}[^{}]*)*\}\}', '', c)
+    c = _re.sub(r'<small>.*?</small>', '', c, flags=_re.S)
+    m = _re.search(r'\{\{sortname\|([^|}]*)\|([^|}]*)(?:\|([^|}]*))?[^}]*\}\}', c)
+    if m:
+        n = f'{m.group(1).strip()} {m.group(2).strip()}'.strip()
+        t = (m.group(3) or '').strip()
+        return n, (t if t and not t.startswith('dab=') else n)
+    for m in _re.finditer(r'\[\[([^\]|]*)(?:\|([^\]]*))?\]\]', c):
+        t = m.group(1).strip()
+        if _re.match(r'(?i)(file|fichier|image|category|catégorie):', t):
+            continue
+        return (m.group(2) or t).strip(), t
+    s = plain(c)
+    s = _re.sub(r'[†‡◊*]+', '', s).strip(' ,;')
+    return s, ''

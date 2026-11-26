@@ -1656,7 +1656,7 @@
         paintPageTake();
         // une case du tableau : « Prendre cette info » (un clic) ; clic droit sur une ligne : chaque info, ou toute la ligne
         const results = page.querySelector('[data-ld-results]');
-        results?.addEventListener('click', e => { if (e.target.closest('a, button, input, select, textarea, label, .cx-ldck, .ld-links') || window.getSelection?.()?.toString()) return; const td = e.target.closest('tbody td'); if (td) cellMenu(L, td, {x: e.clientX, y: e.clientY}); });
+        results?.addEventListener('click', e => { if (e.target.closest('a, button, input, select, textarea, label, .cx-ldck, .ld-links, .ld-ck, .ld-acts, .ldr-detail-tr') || window.getSelection?.()?.toString()) return; const td = e.target.closest('tbody td'); if (td) cellMenu(L, td, {x: e.clientX, y: e.clientY}); });
         results?.addEventListener('contextmenu', e => { const td = e.target.closest('tbody td'); if (!td || e.target.closest('a, input')) return; e.preventDefault(); e.stopPropagation(); cellMenu(L, td, {x: e.clientX, y: e.clientY}, true); });
         btn.addEventListener('click', async () => {
             const n = L.total?.() || 0, c = pt.sel.size;

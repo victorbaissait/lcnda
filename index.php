@@ -120,6 +120,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/fiche-edifice.css?v=2">
     <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">
     <link rel="stylesheet" href="assets/css/listes-donnees.css?v=3">
+    <link rel="stylesheet" href="assets/css/listes-themes.css?v=1">
     <link rel="stylesheet" href="assets/css/donnees-maj.css?v=2">
     <link rel="stylesheet" href="assets/css/listes-personnes.css?v=1">
     <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
@@ -1345,7 +1346,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sidegroups.js?v=15" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
-<script src="assets/js/app-listes-donnees.js?v=10" defer></script>
+<script src="assets/js/app-listes-donnees.js?v=11" defer></script>
+<script src="assets/js/app-listes-themes.js?v=1" defer></script><!-- 🗂 Listes → Données par thème (20 thèmes), recherche sur toutes les listes ; Réglages → 🧰 Listes de données -->
+<script src="assets/js/app-listes-reunies.js?v=1" defer></script><!-- 🔀 listes réunies (🌋 Séismes réunis) : plusieurs sources, sans doublons -->
+<script src="assets/js/app-listes-famille.js?v=1" defer></script><!-- 👪 « Dans la famille » : calculé ici (GET ld_famille) -->
+<script src="assets/js/app-listes-choix.js?v=1" defer></script><!-- ☑ plusieurs lignes d’un coup : cases, Tout cocher, barre du bas (📎 · 🧺 · ⤓) -->
 <script src="assets/js/app-listes-maj.js?v=3" defer></script>
 <script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
@@ -1709,10 +1714,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=2" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
-<script src="assets/js/heritage-connexions.js?v=8" defer></script>
+<script src="assets/js/heritage-connexions.js?v=9" defer></script>
 <script src="assets/js/app-paniers-core.js?v=2" defer></script>
 <script src="assets/js/app-paniers.js?v=4" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
-<script src="assets/js/app-inserer.js?v=2" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
+<script src="assets/js/app-inserer.js?v=3" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
 <script src="assets/js/heritage-connexions-besoins.js?v=2" defer></script><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>

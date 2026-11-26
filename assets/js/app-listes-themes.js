@@ -37,26 +37,26 @@
 
     /* ═════════════ les 20 thèmes ═════════════ */
     const DEFAULT_THEMES = [
-        ['seismes', '🌋', 'Séismes, volcans et terrains', 'EPICA, NOAA, volcans, avalanches, cavités…', 'seisme tremblement volcan eruption avalanche cavite gouffre terrain glissement fossile roche geolog tsunami'],
-        ['eaux', '🌊', 'Eaux, crues et mers', 'Inondations, repères de crues, marées, épaves…', 'crue inondation maree epave naufrage phare thermal eaux lavoir fontaine riviere fleuve mer littoral cote port etang'],
-        ['ciel', '⛅', 'Climat, ciel et saisons', 'Vendanges, météo, vents, comètes, éclipses…', 'meteo climat vent dicton comete eclipse etoile asteroide meteorite saison glacier hiver secheresse ciel aurore vendange'],
-        ['guerres', '⚔️', 'Guerres et soldats', 'Morts pour la France, batailles, régiments…', 'guerre bataille soldat regiment militaire necropole monument aux morts camp siege decoration uniforme poilu armee fort bastion rempart maginot vauban aviateur resistan deporte'],
-        ['monuments', '🏛', 'Monuments et patrimoine', 'Châteaux, Mérimée, Palissy, sites antiques…', 'chateau merimee palissy monument historique patrimoine antique inscription romaine jardin bastide armoiries manoir abbaye'],
-        ['village', '🏘', 'Petit patrimoine du village', 'Fours, lavoirs, croix, bornes, halles…', 'four pigeonnier borne octroi croix calvaire cadran halle kiosque marianne liberte ecole village plaque'],
-        ['images', '🖼', 'Musées, images et sons', 'Joconde, Mémoire, films, 78 tours…', 'musee joconde photo image film tableau gravure enregistrement son coiffe costume mode atlas collection'],
-        ['lieux', '🗺', 'Lieux et noms de lieux', 'GOV, DicoTopo, lieux-dits, villages disparus…', 'lieux-dits lieu-dit toponym nom des lieux anciens noms commune village disparu rue homonyme territoire pays traditionnel population'],
-        ['pouvoirs', '👑', 'Pouvoirs, lois et frontières', 'Frontières, préfets, maires, seigneurs…', 'frontiere territoire chef de l etat prefet maire seigneur election loi droit coutume gabelle nationalite depute doleance noblesse ancien regime'],
-        ['noms', '👶', 'Prénoms et noms de famille', 'Prénoms par pays, blasons, romans…', 'prenom nom de famille patronyme blason roman personnage porteurs'],
-        ['personnes', '🔎', 'Retrouver une personne', 'Décès INSEE, Léonore, annuaires…', 'deces insee leonore annuaire celebre eleve personne individu relation laureat registre passager'],
-        ['metiers', '⚒️', 'Métiers et industries', 'Mines, moulins, forges, outils, grèves…', 'metier industri mine carriere moulin usine forge saline atelier outil greve ouvri foire fabrique manufacture chantier sucrerie coutell'],
-        ['terre', '🌾', 'Champs, bêtes et plantes', 'AOC, races, fruits anciens, loups…', 'aoc race animal fruit variete cepage potager loup oiseau fleur arbre foret paysage berger transhumance culture fleau rose plante'],
-        ['routes', '🚂', 'Routes, trains et bateaux', 'Gares, voies romaines, relais de poste…', 'gare train voie romaine chemin relais poste pont canal ecluse tunnel funiculaire tramway navire bateau voyage route ascension sommet'],
-        ['croire', '✝️', 'Croire, soigner, enfermer', 'Églises, saints, hospices, prisons…', 'eglise chapelle saint eveque pape pelerinage temple synagogue hopital hospice prison couvent cimetiere affaire criminelle lazaret sanatorium culte diocese'],
-        ['prix', '💶', 'Prix, monnaies et chiffres', 'Prix des denrées, pièces, timbre…', 'prix monnaie piece timbre mesure esperance de vie chiffre salaire denree'],
-        ['livres', '📚', 'Livres, journaux et écritures', 'Journaux, almanachs, latin…', 'livre journal almanach latin abreviation ecriture mot dictionnaire conte chanson recueil dictee'],
-        ['fetes', '🎉', 'Fêtes, jeux et vie de tous les jours', 'Fêtes, jeux, chansons, plats…', 'fete tradition jeu chanson plat jouet musique danse opera spectacle rosiere legende marque exposition'],
-        ['evenements', '🌍', 'Grands événements et dates', 'Le monde autour, nouveautés…', 'evenement epidemie nouveaute calendrier jours celebres grands mouvements traite'],
-        ['sport', '🏆', 'Sport', 'Compétitions, Tour de France, clubs, Jeux olympiques…', 'sport competition tour de france club olympi cycli football rugby champion stade course hippodrome boxe tennis']];
+        ['seismes', '🌋', 'Séismes, volcans et terrains', 'EPICA, NOAA, volcans, avalanches, cavités…', 'seisme, tremblement, volcan, eruption, avalanche, cavite, gouffre, terrain, glissement, fossile, roche, geolog, tsunami'],
+        ['eaux', '🌊', 'Eaux, crues et mers', 'Inondations, repères de crues, marées, épaves…', 'crue, inondation, maree, epave, naufrage, phare, thermal, eaux, lavoir, fontaine, riviere, fleuve, mer, littoral, cote, port, etang'],
+        ['ciel', '⛅', 'Climat, ciel et saisons', 'Vendanges, météo, vents, comètes, éclipses…', 'meteo, climat, vent, dicton, comete, eclipse, etoile, asteroide, meteorite, saison, glacier, hiver, secheresse, ciel, aurore, vendange'],
+        ['guerres', '⚔️', 'Guerres et soldats', 'Morts pour la France, batailles, régiments…', 'guerre, bataille, soldat, regiment, militaire, necropole, monument aux morts, camp, siege, decoration, uniforme, poilu, armee, fort, bastion, rempart, maginot, vauban, aviateur, resistan, deporte'],
+        ['monuments', '🏛', 'Monuments et patrimoine', 'Châteaux, Mérimée, Palissy, sites antiques…', 'chateau, merimee, palissy, monument, historique, patrimoine, antique, inscription, romaine, jardin, bastide, armoiries, manoir, abbaye'],
+        ['village', '🏘', 'Petit patrimoine du village', 'Fours, lavoirs, croix, bornes, halles…', 'four, pigeonnier, borne, octroi, croix, calvaire, cadran, halle, kiosque, marianne, liberte, ecole, village, plaque'],
+        ['images', '🖼', 'Musées, images et sons', 'Joconde, Mémoire, films, 78 tours…', 'musee, joconde, photo, image, film, tableau, gravure, enregistrement, son, coiffe, costume, mode, atlas, collection'],
+        ['lieux', '🗺', 'Lieux et noms de lieux', 'GOV, DicoTopo, lieux-dits, villages disparus…', 'lieux-dits, lieu-dit, toponym, nom des lieux, anciens noms, commune, village disparu, rue, homonyme, territoire, pays traditionnel, population'],
+        ['pouvoirs', '👑', 'Pouvoirs, lois et frontières', 'Frontières, préfets, maires, seigneurs…', 'frontiere, territoire, chef de l etat, prefet, maire, seigneur, election, loi, droit, coutume, gabelle, nationalite, depute, doleance, noblesse, ancien regime'],
+        ['noms', '👶', 'Prénoms et noms de famille', 'Prénoms par pays, blasons, romans…', 'prenom, nom de famille, patronyme, blason, roman, personnage, porteurs'],
+        ['personnes', '🔎', 'Retrouver une personne', 'Décès INSEE, Léonore, annuaires…', 'deces, insee, leonore, annuaire, celebre, eleve, personne, individu, relation, laureat, registre, passager'],
+        ['metiers', '⚒️', 'Métiers et industries', 'Mines, moulins, forges, outils, grèves…', 'metier, industri, mine, carriere, moulin, usine, forge, saline, atelier, outil, greve, ouvri, foire, fabrique, manufacture, chantier, sucrerie, coutell'],
+        ['terre', '🌾', 'Champs, bêtes et plantes', 'AOC, races, fruits anciens, loups…', 'aoc, race, animal, fruit, variete, cepage, potager, loup, oiseau, fleur, arbre, foret, paysage, berger, transhumance, culture, fleau, rose, plante'],
+        ['routes', '🚂', 'Routes, trains et bateaux', 'Gares, voies romaines, relais de poste…', 'gare, train, voie romaine, chemin, relais, poste, pont, canal, ecluse, tunnel, funiculaire, tramway, navire, bateau, voyage, route, ascension, sommet'],
+        ['croire', '✝️', 'Croire, soigner, enfermer', 'Églises, saints, hospices, prisons…', 'eglise, chapelle, saint, eveque, pape, pelerinage, temple, synagogue, hopital, hospice, prison, couvent, cimetiere, affaire, criminelle, lazaret, sanatorium, culte, diocese'],
+        ['prix', '💶', 'Prix, monnaies et chiffres', 'Prix des denrées, pièces, timbre…', 'prix, monnaie, piece, timbre, mesure, esperance de vie, chiffre, salaire, denree'],
+        ['livres', '📚', 'Livres, journaux et écritures', 'Journaux, almanachs, latin…', 'livre, journal, almanach, latin, abreviation, ecriture, mot, dictionnaire, conte, chanson, recueil, dictee'],
+        ['fetes', '🎉', 'Fêtes, jeux et vie de tous les jours', 'Fêtes, jeux, chansons, plats…', 'fete, tradition, jeu, chanson, plat, jouet, musique, danse, opera, spectacle, rosiere, legende, marque, exposition'],
+        ['evenements', '🌍', 'Grands événements et dates', 'Le monde autour, nouveautés…', 'evenement, epidemie, nouveaute, calendrier, jours celebres, grands mouvements, traite'],
+        ['sport', '🏆', 'Sport', 'Compétitions, Tour de France, clubs, Jeux olympiques…', 'sport, competition, tour de france, club, olympi, cycli, football, rugby, champion, stade, course, hippodrome, boxe, tennis']];
     const RANGER = {id: 'aranger', icon: '📦', label: 'À ranger', hint: 'Les listes qui n’ont pas encore de thème', words: []};
     /** la table id → thème de la maquette (§ 1, « La répartition, liste par liste ») ; décision 2 : Tour de France et clubs vont dans 🏆 Sport */
     const THEME_OF = {};
@@ -80,10 +80,14 @@
     put('livres', 'et_livres l9a_livres l9a_recettes l9_coutumes l10o_contes l9_journaux cplus_newspapers td_almanachs td_latin l10r_cappelli l10r_ecritures tm_mots pm_parlers');
     put('fetes', 'tm_fetes td_jeux l8c_expos l8c_spectacles pm_musique wikidata_chansons l9a_chansons tf_rosieres tm_legendes cc_plats l9a_marques l9a_jouets');
     put('evenements', 'link_world_events link_historical_context link_grands_mouvements wikidata_evenements l8c_dates et_nouveautes l8b_calendrier');
-    put('sport', 'l8c_clubs l8c_tour');
+    put('sport', 'l8c_clubs l8c_tour ti_hippodromes');
+    // lots G et I (venus après la maquette ; § 7 : aviateurs → 🔎, forts → ⚔️, sémaphores → 🏛, lazarets → ✝️)
+    put('personnes', 'tg_filles tg_aviateurs'); put('guerres', 'tg_carignan tg_compagnons tg_forts tg_poudres'); put('pouvoirs', 'tg_deputes');
+    put('monuments', 'tg_semaphores'); put('croire', 'tg_lazarets ti_sanas ti_centrales'); put('village', 'tg_wallace'); put('routes', 'tg_lloyd ti_romains');
+    put('metiers', 'ti_navals ti_autos ti_sucreries ti_dico'); put('eaux', 'ti_maregraphe'); put('livres', 'ti_tour ti_ecole ti_chansons');
 
     /* le registre : ce que d'autres fichiers ont déjà mis (avant nous) passe devant, puis les thèmes de départ */
-    const adopt = arr => { if (!Array.isArray(arr)) arr = []; DEFAULT_THEMES.forEach(([id, icon, label, hint, words]) => { if (!arr.some(t => t && t.id === id)) arr.push({id, icon, label, hint, words: words.split(' ')}); }); return arr; };
+    const adopt = arr => { if (!Array.isArray(arr)) arr = []; DEFAULT_THEMES.forEach(([id, icon, label, hint, words]) => { if (!arr.some(t => t && t.id === id)) arr.push({id, icon, label, hint, words: words.split(/\s*,\s*/)}); }); return arr; };
     let THEMES = adopt(ext.dataListThemes);
     Object.defineProperty(ext, 'dataListThemes', {get: () => THEMES, set: v => { THEMES = adopt(v); stamp++; }, configurable: true});
     let stamp = 0;
@@ -99,7 +103,7 @@
         let th = d.theme && themeById(d.theme) ? d.theme : THEME_OF[d.id];
         if (!th) {
             const name = ` ${fold(`${d.label} ${d.id}`).replace(/[^a-z0-9]+/g, ' ')} `; let best = 0;
-            for (const t of themes()) { let n = 0; for (const w of t.words || []) { const f = fold(w).trim(); if (f && name.includes(` ${f}`)) n += f.length > 4 ? 2 : 1; } if (n > best) { best = n; th = t.id; } }
+            for (const t of themes()) { let n = 0; for (const w of t.words || []) { const f = fold(w).replace(/[^a-z0-9]+/g, ' ').trim(); if (f.length > 2 && name.includes(` ${f}`)) n += f.length > 4 ? 2 : 1; } if (n > best) { best = n; th = t.id; } }
         }
         th = th || RANGER.id; memo.set(key, th); return th;
     }

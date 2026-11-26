@@ -92,7 +92,7 @@
     const blank = () => ({q: '', crit: [], period: null, near: null, sort: '', dir: 'asc', view: 'table', hide: [], gps: false, chips: [], dview: ''});
     /** d (facultatif) : ses colonnes cachées au départ (d.hideCols), sa vue et ses pastilles de départ (d.views[0], chips[].on) */
     const stateOf = (id, d = null) => { const d0 = d || all().find(x => x.id === id), saved = readJ('lcnda-ld:' + id, {}) || {};
-        const st = {...blank(), hide: [...(d0?.hideCols || [])], chips: (d0?.chips || []).filter(c => c.on).map(c => c.id), dview: d0?.views?.[0]?.id || '', ...saved};
+        const st = {...blank(), hide: [...(d0?.hideCols || [])], chips: (d0?.chips || []).filter(c => c.on).map(c => c.id), dview: d0?.views?.[0]?.id || '', sort: d0?.defaultSort?.[0] || '', dir: d0?.defaultSort?.[1] || 'asc', ...saved};
         if (!Array.isArray(st.chips)) st.chips = []; return st; };
     const saveState = (id, st) => writeJ('lcnda-ld:' + id, st);
     const savedAll = () => { const v = readJ(SAVED, {}); return v && typeof v === 'object' && v.saved && typeof v.saved === 'object' ? v : {saved: {}}; };
@@ -359,11 +359,14 @@
         if (!cur.rows.length) { res.innerHTML = A().emptyState ? A().emptyState({icon: '🔎', text: T('Rien ne correspond à ces critères.'), hint: T('Retire un critère, élargis la période ou la distance.'), size: 'small'}) : esc(T('Rien ne correspond à ces critères.')); paintMore(); return; }
         const CH = ext.listesChoix, fam = !!(d.familyColumn && ext.listesFamille && d.geo && d.period);
         const sortable = f => !f.gps && f.sort !== false;
-        const head = cs.map(f => !sortable(f) ? `<th>${esc(flab(f))}</th>` : `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(flab(f))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`).join('');
+        const famAt = fam ? cs.findIndex(f => f.key === d.familyBefore) : -1, famTh = `<th>${esc(T('Dans la famille'))}</th>`; // « Dans la famille » : avant d.familyBefore, sinon à la fin
+        const head = cs.map((f, j) => (j === famAt ? famTh : '') + (!sortable(f) ? `<th>${esc(flab(f))}</th>` : `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(flab(f))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`)).join('') + (fam && famAt < 0 ? famTh : '');
         const firstTxt = (f, r) => (Array.isArray(r[f.key]) ? r[f.key].join(' · ') : r[f.key]) ?? '—';
         const openable = !!(d.open || d.sub);
-        const body = cur.rows.map((r, i) => `<tr data-ld-row="${i}">${CH ? CH.cellBefore(i) : ''}${cs.map((f, j) => (f.gps ? gpsCell(d, r, i) : j === 0 && openable ? `<td><button type="button" class="table-link" data-ld-open="${i}">${esc(firstTxt(f, r))}</button></td>` : cellHtml(f, r))).join('')}${fam ? `<td class="ld-fam" data-ld-fam="${i}"></td>` : ''}${urls.length ? `<td class="ld-links">${urls.map(u => (r[u.key] ? `<a href="${esc(A().safeUrl ? A().safeUrl(r[u.key]) : r[u.key])}" target="_blank" rel="noopener" title="${esc(T(u.label))}">↗</a>` : '')).join(' ')}</td>` : ''}${CH ? CH.cellAfter(i) : ''}</tr>`).join('');
-        res.innerHTML = `<div class="data-table-wrap ld-table-wrap"><table class="data-table ld-table${d.cards ? ' ld-table--cards' : ''}"><thead><tr>${CH ? CH.headBefore() : ''}${head}${fam ? `<th>${esc(T('Dans la famille'))}</th>` : ''}${urls.length ? '<th></th>' : ''}${CH ? CH.headAfter() : ''}</tr></thead><tbody>${body}</tbody></table></div>`;
+        const famTd = i => `<td class="ld-fam" data-ld-fam="${i}"></td>`;
+        const firstHtml = (f, r) => { if (typeof f.html === 'function') { try { const h = f.html(r); if (h) return h; } catch (_) {} } return esc(firstTxt(f, r)); };
+        const body = cur.rows.map((r, i) => `<tr data-ld-row="${i}">${CH ? CH.cellBefore(i) : ''}${cs.map((f, j) => (j === famAt ? famTd(i) : '') + (f.gps ? gpsCell(d, r, i) : j === 0 && openable ? `<td><button type="button" class="table-link" data-ld-open="${i}" aria-expanded="false">${firstHtml(f, r)}</button></td>` : cellHtml(f, r))).join('')}${fam && famAt < 0 ? famTd(i) : ''}${urls.length ? `<td class="ld-links">${urls.map(u => (r[u.key] ? `<a href="${esc(A().safeUrl ? A().safeUrl(r[u.key]) : r[u.key])}" target="_blank" rel="noopener" title="${esc(T(u.label))}">↗</a>` : '')).join(' ')}</td>` : ''}${CH ? CH.cellAfter(i) : ''}</tr>`).join('');
+        res.innerHTML = `<div class="data-table-wrap ld-table-wrap"><table class="data-table ld-table${d.cards ? ' ld-table--cards' : ''}"><thead><tr>${CH ? CH.headBefore() : ''}${head}${urls.length ? '<th></th>' : ''}${CH ? CH.headAfter() : ''}</tr></thead><tbody>${body}</tbody></table></div>`;
         paintMore();
         if (fam) { try { ext.listesFamille.fill(res, cur.rows, d); } catch (e) { console.error(e); } } // 👪 « Louis DURAND, 29 ans » (app-listes-famille.js)
         try { CH?.rowsPainted?.(res, cur.rows, pageApi()); } catch (e) { console.error(e); } // ☑ (app-listes-choix.js)

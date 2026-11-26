@@ -113,7 +113,12 @@
         return ss.filter((s, i) => ok[i]);
     }
     /** toutes les lignes d'une source (petites listes : load ; grandes : query, page après page) */
-    async function rowsOfSource(s) {
+    const srcRows = new Map(); // source → Promise(lignes) : lues une fois (une séparation refait seulement la réunion)
+    function rowsOfSource(s) {
+        if (!srcRows.has(s.id)) { const pr = readSource(s); srcRows.set(s.id, pr); pr.catch(() => srcRows.delete(s.id)); }
+        return srcRows.get(s.id);
+    }
+    async function readSource(s) {
         const d = s.d;
         if (!d.query) return E().loadAll(d);
         const st = {...E().blank(), ...(s.preset || {})}, out = []; let total = Infinity;
@@ -126,7 +131,11 @@
         if (built.has(id)) return built.get(id);
         const pr = (async () => {
             const ss = await activeSources(M), recs = [], per = {};
-            await Promise.all(ss.map(async s => {
+            // une source lente (lazy : ex. Wikidata, 400 petits fichiers) arrive après : la liste s'ouvre sans l'attendre, puis se complète
+            const ready = await Promise.all(ss.map(s => (s.lazy ? Promise.race([rowsOfSource(s).then(() => true, () => true), new Promise(r => setTimeout(() => r(false), 0))]) : true)));
+            const now = ss.filter((s, i) => ready[i]), later = ss.filter((s, i) => !ready[i]);
+            if (later.length) Promise.all(later.map(s => rowsOfSource(s).catch(() => []))).then(() => { built.delete(id); E().forget?.(`reunie_${id}`); const pg = E().page?.(); if (pg?.base?.id === `reunie_${id}`) pg.refresh(); });
+            await Promise.all(now.map(async s => {
                 let rows = []; try { rows = await rowsOfSource(s); } catch (e) { console.error(e); }
                 const src = {id: s.id, list: s.list, short: s.short || T(s.d.label), sub: s.sub || '', rank: s.rank || 9, label: T(s.d.label), url: s.d.sourceUrl || ''};
                 let n = 0;
@@ -134,7 +143,7 @@
                 per[src.short] = n;
             }));
             const t0 = performance.now(), rows = merge(M, recs, apartOf(id));
-            return {rows, stats: {sources: ss.length, lines: recs.length, rows: rows.length, merged: recs.length - rows.length, per, ms: Math.round(performance.now() - t0)}};
+            return {rows, stats: {sources: now.length, lines: recs.length, rows: rows.length, merged: recs.length - rows.length, per, ms: Math.round(performance.now() - t0), pending: later.map(s => s.short)}};
         })();
         built.set(id, pr); pr.catch(() => built.delete(id));
         return pr;
@@ -146,7 +155,7 @@
     function defOf(M) {
         const id = `reunie_${M.id}`;
         return {id, merged: true, mergeId: M.id, theme: M.theme, icon: M.icon || '🔀', label: M.label, group: M.group || 'Le monde', source: M.source || '', sourceUrl: M.sourceUrl || '',
-            keywords: M.keywords || [], cards: true, familyColumn: M.familyColumn, familyKm: M.familyKm, hideCols: M.hideCols, chips: M.chips, views: M.views,
+            keywords: M.keywords || [], cards: true, familyColumn: M.familyColumn, familyKm: M.familyKm, familyBefore: M.familyBefore, defaultSort: M.defaultSort, hideCols: M.hideCols, chips: M.chips, views: M.views,
             fields: (M.fields || []).map(f => (f.key === 'sources' ? {type: 'enum', values: sourcesOf(M).map(s => s.short), html: srcLinks, ...f} : f)),
             period: M.period || (r => [r.year, r.year]), geo: M.geo || (r => [r.lat, r.lon]),
             rowKey: r => r._k, sourceCount: () => sourcesOf(M).length, mergeLine: () => T('{s}, sans doublons', {s: sourcesOf(M).map(s => s.short).join(' + ')}),
@@ -176,7 +185,8 @@
         let line = res.parentElement.querySelector('[data-ldr-stats]');
         if (!line) { line = document.createElement('p'); line.className = 'ldr-stats muted'; line.dataset.ldrStats = ''; (host || res).after(line); }
         const s = b.stats, noun = M.noun || [T('ligne'), T('lignes')];
-        line.textContent = s.lines ? T('{n} {w} réunis ({l} lignes dans les sources : {m} doublons fondus) · {s} sources', {n: nf(s.rows), w: T(s.rows > 1 ? noun[1] : noun[0]), l: nf(s.lines), m: nf(s.merged), s: nf(s.sources)}) : '';
+        line.textContent = (s.lines ? T('{n} {w} réunis ({l} lignes dans les sources : {m} doublons fondus) · {s} sources', {n: nf(s.rows), w: T(s.rows > 1 ? noun[1] : noun[0]), l: nf(s.lines), m: nf(s.merged), s: nf(s.sources)}) : '')
+            + (s.pending?.length ? ` · ${T('{s} arrive…', {s: s.pending.join(', ')})}` : '');
     }
 
     /* ── une ligne ouverte : ce que dit chaque source ; 📎 · 🧺 · ✂ ── */
@@ -224,7 +234,7 @@
             {key: 'force', label: 'Force', type: 'text', sort: false, html: r => `${esc([r.io != null ? roman(r.io) : '', r.mag != null ? mag(r.mag) : ''].filter(Boolean).join(' · ') || '—')}${r._diff ? ` <span class="ldr-diff" title="${esc(T('Les sources ne donnent pas la même force : voir la ligne ouverte'))}">⚖ ${esc(T('{n} avis', {n: r._members?.length || 2}))}</span>` : ''}`},
             {key: 'io', label: 'Intensité à l’épicentre', type: 'number'}, {key: 'mag', label: 'Magnitude', type: 'number'}, {key: 'dead', label: 'Morts', type: 'number'},
             {key: 'sources', label: 'Sources'}],
-        hideCols: ['year', 'country', 'io', 'mag'], familyColumn: true, familyKm: 150,
+        hideCols: ['year', 'country', 'io', 'mag'], familyColumn: true, familyKm: 150, familyBefore: 'sources', defaultSort: ['date', 'desc'],
         diff: [{key: 'mag', abs: 0.5}, {key: 'io', abs: 0.5}, {key: 'dead', ratio: 2}],
         detail: [{key: 'date', label: 'Date', fmt: (v, r) => dateText(v, r.year)}, {key: 'place', label: 'Épicentre'}, {key: 'io', label: 'Intensité', fmt: v => roman(v)}, {key: 'mag', label: 'Magnitude', fmt: v => mag(v)}, {key: 'dead', label: 'Morts', fmt: v => nf(v)}],
         title: r => `${r.place || T('Séisme')}, ${dateText(r.date, r.year)}`,
@@ -232,7 +242,7 @@
             {list: 'hist_seismes', rank: 2, short: 'EPICA', sub: 'Europe 1000–1899', row: r => ({date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.zone, io: r.intensity ?? r.io, mag: r.mw})},
             {list: 'ha_catastrophes', rank: 3, short: 'NOAA', sub: 'monde', when: r => r.k === 'eq', row: r => ({key: r.id, date: r.date || r.y, year: r.y ?? r.year, lat: r.lat, lon: r.lon, place: r.loc || r.place, country: r.country, io: r.int, mag: r.mag ?? r.magnitude, dead: r.deaths,
                 url: r.id ? `https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-more-info/${encodeURIComponent(r.id)}` : ''})},
-            {list: 'wikidata_evenements', rank: 4, short: 'Wikidata', when: r => /s[ée]isme|tremblement de terre|earthquake|terremoto|erdbeben|aardbeving|trz[ęe]sienie/i.test(String(r.name || '')),
+            {list: 'wikidata_evenements', rank: 4, short: 'Wikidata', lazy: true, when: r => /s[ée]isme|tremblement de terre|earthquake|terremoto|erdbeben|aardbeving|trz[ęe]sienie/i.test(String(r.name || '')),
                 row: r => ({key: r.qid, date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.name, url: r.url})}]};
     SEISMES.chips = [{id: 'famille', icon: '👪', label: 'Autour des lieux de la famille · 150 km', prepare: () => ext.listesFamille?.ready?.(), test: (row, {geo} = {}) => !!geo && !!ext.listesFamille && ext.listesFamille.nearKm(geo[0], geo[1], 150) <= 150}];
 
