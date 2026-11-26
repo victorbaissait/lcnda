@@ -182,7 +182,7 @@ header('X-Content-Type-Options: nosniff');
     for(k in c.v||{})if(/^--lc-[a-z0-9-]+$/.test(k)&&/^[#a-z0-9.%() ,-]{1,40}$/i.test(String(c.v[k])))r.style.setProperty(k,c.v[k]);
     var g=document.getElementById('lc-designs-gen');if(g)g.media='all';if(c.a['data-lc-lines']){var s=document.getElementById('lc-frame-css');if(s)s.media='all';}}catch(e){}})();</script>
 </head>
-<body>
+<body<?= function_exists('kiosk_state') && !empty(kiosk_state()['on']) ? ' class="is-kiosk"' : '' ?>>
 <div class="app-shell<?= $ready ? '' : ' is-not-ready' ?>" id="app">
     <header class="topbar">
         <a class="brand" href="#dashboard" aria-label="Accueil de la généalogie">
@@ -1360,7 +1360,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-mini-carte.js?v=2" defer></script>
 <script src="assets/js/app-selection.js?v=3" defer></script>
 <script src="assets/js/app-sources-liste.js?v=3" defer></script>
-<script src="assets/js/heritage-tools.js?v=22" defer></script>
+<script src="assets/js/heritage-tools.js?v=23" defer></script>
 <script src="assets/js/heritage-sauvegarde.js?v=5" defer></script>
 <script src="assets/js/heritage-alphabets-data.js?v=2" defer></script>
 <script src="assets/js/heritage-alphabets.js?v=4" defer></script>

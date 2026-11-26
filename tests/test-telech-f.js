@@ -126,15 +126,28 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             // une page neuve, sans fiche ouverte (les autres modules de la fiche chargent leurs images) : seul ce module travaille
             const k = await ctx.newPage(); k.on('pageerror', e => errs.push(e.message));
             await k.goto(base); await k.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.telechF, null, {timeout: 30000});
+            // la page rouvre la dernière fiche (Jean, ouverte plus haut) : on revient à l'accueil, sans fiche (les autres modules de la fiche
+            // chargent leurs images en temps normal, et ce n'est pas ce qu'on mesure ici)
+            await k.evaluate(() => window.LCNDA_APP.setModule('dashboard'));
             await k.waitForLoadState('networkidle').catch(() => {}); await sleep(800);
             const n0 = outside.length;
             const run = (fn, a) => k.evaluate(async ([f, x]) => { const h = document.createElement('div'); document.body.appendChild(h); const n = await window.LCNDA_EXT.telechF[f](h, x, {detached: true}); h.remove(); return n; }, [fn, a]);
             await run('personInto', 4); await run('personInto', 1);
+            assert.deepStrictEqual(outside.slice(n0).filter(u => !/^https:\/\/[a-z]\.?tile\.|^https:\/\/tile\./.test(u)), [], 'fiche vivante : rien en ligne');
             const r = await k.evaluate(() => window.LCNDA_APP.api('kiosk_enter', {}, {method: 'POST', body: {password: 'essai-1234'}}).then(() => 'ok').catch(e => e.message));
+            // comme le bouton 🔒 : la page se recharge en consultation (body.is-kiosk posée dès la page) ; la fiche de Jean ouverte en entier
+            // (ses autres blocs aussi : la pièce dans sa poche n'y demande plus sa vignette à commons.wikimedia.org)
+            await k.reload(); await k.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.telechF, null, {timeout: 30000});
+            assert.ok(await k.evaluate(() => document.body.classList.contains('is-kiosk')), 'consultation : posée dès la page');
+            const n1 = outside.length;
+            await k.evaluate(() => { const A = window.LCNDA_APP; A.state.currentPersonId = 1; A.setModule('personnes'); });
+            await k.waitForSelector('[data-tf-person="1"] .tf-row', {timeout: 30000}).catch(() => {});
+            await k.evaluate(() => window.scrollTo(0, document.body.scrollHeight)); await k.waitForLoadState('networkidle').catch(() => {}); await sleep(800);
             assert.ok((await run('personInto', 2)) >= 1, 'en mode consultation, la fiche se lit quand même (tout est sur l’ordinateur)');
             await run('placeInto', {id: 3, name: 'Soissons', lat: 49.3758, lon: 3.3233, insee: '02722'});
+            const leak = outside.slice(n1).filter(u => !/^https:\/\/[a-z]\.?tile\.|^https:\/\/tile\./.test(u));
             await k.evaluate(() => window.LCNDA_APP.api('kiosk_exit', {}, {method: 'POST', body: {password: 'essai-1234'}}).catch(() => {}));
-            assert.deepStrictEqual(outside.slice(n0).filter(u => !/^https:\/\/[a-z]\.?tile\.|^https:\/\/tile\./.test(u)), [], `kiosque : ${r}`); // les tuiles de la carte de l'accueil (autre module) ne comptent pas
+            assert.deepStrictEqual(leak, [], `kiosque : ${r}`); // les tuiles de la carte de l'accueil (autre module) ne comptent pas
             assert.ok((await k.evaluate(() => window.LCNDA_EXT.dataSources.filter(d => /^tf/.test(d.id)).every(d => d.online === false))), 'à la demande : rien en ligne');
             await k.close();
         });
