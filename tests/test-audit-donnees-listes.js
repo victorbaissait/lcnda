@@ -8,11 +8,13 @@
  *     branche ne lit jamais le nom d'une personne hors de sa branche ; 5 000 personnes cachées × 2 000 lignes : rapide ;
  *  3. mode consultation : ld_famille ne donne pas les vivants probables (sans « vivant » coché, né il y a 30 ans) ; 🕳 dplus_missing ne
  *     compte pas les lieux des vivants ;
+ *     🧭 ha_life (lib/histoire_autour.php) : la vie d'une personne vivante ou confidentielle refusée (un invité du réseau pouvait la lire par son numéro) ;
  *  4. app-paniers-core.js parseData : un mot de thème plein de signes (« c++ », « (x ») ne casse plus la question ;
  *  5. liens : app-inserer.js, app-listes-donnees.js (source d'une liste), heritage-histoire-autour.js (À propos) : http(s) seulement ;
  *  6. (vérifié, rien à corriger) dans l'app : une liste dont les valeurs, le nom, la source sont piégés (<img onerror>, javascript:), une note,
  *     une ligne ajoutée, une ligne douteuse et une question piégées : rien ne s'exécute, aucun lien autre que http(s) ; une liste de
- *     5 000 lignes s'ouvre sans geler la page plus de 200 ms d'affilée (hors chargement).
+ *     5 000 lignes s'ouvre sans geler la page plus de 200 ms d'affilée (hors chargement) ;
+ *  7. 🎞 diaporama (app-donnees-plus-outils.js) : refusé pour une personne vivante, comme le livret (il part dans 🎤 Présentation, PDF, vidéo).
  *     node tests/test-audit-donnees-listes.js */
 'use strict';
 const assert = require('assert');
@@ -108,6 +110,13 @@ echo json_encode(['dropped' => $s['dropped'], 'rows' => count($g['lists'][0]['ro
         assert.ok(!on.m.places.some(p => p.name === 'Bourg-Perdu'), 'en consultation, le lieu d’une personne vivante : ' + JSON.stringify(on.m.places));
     });
 
+    await t('mode consultation : 🧭 Histoire autour (ha_life) ne lit pas la vie d’une personne vivante, probable ou confidentielle', async () => {
+        const code = String.raw`require_once 'lib/histoire_autour.php'; $o = []; foreach ([1, 2, 3, 4] as $i) { try { $o[$i] = count(ha_life($pdo, $i)['events'] ?? []); } catch (Throwable $e) { $o[$i] = 'refus'; } } echo json_encode($o), "\n";`;
+        const off = runPhp(code), on = runPhp(code, {kiosk: true});
+        assert.deepStrictEqual(off, {1: 1, 2: 1, 3: 0, 4: 1}, 'hors consultation, sur ton ordinateur : tout se lit');
+        assert.deepStrictEqual(on, {1: 1, 2: 'refus', 3: 'refus', 4: 'refus'});
+    });
+
     await t('parseData : un mot de thème plein de signes (« c++ », « (x », « a[b ») ne casse plus la question', async () => {
         const C = require('../assets/js/app-paniers-core.js');
         const u = C.parseData('les séismes près de Treignac en 1909', {themes: [{id: 'x', words: ['c++', '(x', 'a[b', '*']}, {id: 'seismes', words: ['seisme']}]});
@@ -166,6 +175,13 @@ echo json_encode(['dropped' => $s['dropped'], 'rows' => count($g['lists'][0]['ro
             assert.ok(long1 < 1500, `ouvrir 5 000 lignes : la page gèle ${Math.round(long1)} ms`);
             assert.ok(long2 < 200 || !q, `chercher dans 5 000 lignes : la page gèle ${Math.round(long2)} ms`);
             console.log(`  (gel le plus long : ouverture ${Math.round(long1)} ms, recherche ${Math.round(long2)} ms)`);
+            // 🎞 le diaporama (qui part ensuite dans 🎤 Présentation, PDF, vidéo, .pptx) : jamais pour une personne vivante, comme le livret
+            const sq = spawnSync(php, [...phpRuntimeArgs(php), '-r', `$p = new PDO('sqlite:' . getenv('DBF')); $b = (int) $p->query("SELECT id FROM event_types WHERE gedcom_tag='BIRT'")->fetchColumn();
+                $p->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status) VALUES(901,'Claire','VIVANTE','female','living')"); $p->exec("INSERT INTO events(scope,person_id,event_type_id,date_text,year,place_id) VALUES('person',901,$b,'1990',1990,1)"); echo 'ok';`], {encoding: 'utf8', env: {...process.env, DBF: path.join(B.tmp, 'genealogy.sqlite')}});
+            assert.strictEqual(sq.stdout.trim(), 'ok', sq.stderr);
+            await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
+            await p.evaluate(() => window.LCNDA_EXT.donneesPlusOutils.slideshow(901)); await sleep(1500);
+            assert.strictEqual(await p.$('dialog[open] [data-dp-slide]'), null, 'un diaporama s’ouvre pour une personne vivante');
             assert.deepStrictEqual(B.errs.filter(e => !/Failed to load resource|net::/.test(e)), []);
         } finally { await B.stop(); }
     });

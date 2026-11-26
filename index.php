@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=291">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=283">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=284">
     <link rel="stylesheet" href="assets/css/recueil-etat.css?v=12">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=14">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=2">
@@ -111,6 +111,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/telech-m.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-k.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-j.css?v=1">
+    <link rel="stylesheet" href="assets/css/noms-lieux-monde.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-ciel-metier.css?v=1">
     <link rel="stylesheet" href="assets/css/pays-memoire.css?v=1">
@@ -1353,16 +1354,16 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sidegroups.js?v=15" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
-<script src="assets/js/app-listes-donnees.js?v=15" defer></script>
+<script src="assets/js/app-listes-donnees.js?v=16" defer></script>
 <script src="assets/js/app-listes-themes.js?v=3" defer></script><!-- 🗂 Listes → Données par thème (20 thèmes), recherche sur toutes les listes ; Réglages → 🧰 Listes de données -->
 <script src="assets/js/app-listes-reunies.js?v=4" defer></script><!-- 🔀 listes réunies (🌋 Séismes réunis) : plusieurs sources, sans doublons -->
 <script src="assets/js/app-listes-famille.js?v=3" defer></script><!-- 👪 « Dans la famille » : calculé ici (GET ld_famille) -->
 <script src="assets/js/app-listes-reunies-plus.js?v=1" defer></script><!-- 🔀 Éruptions, Crues, Batailles, Monuments, Soldats réunis ; 🔎 chercher dans les valeurs ; 👪 cercles de la famille sur la carte -->
 <script src="assets/js/app-listes-choix.js?v=3" defer></script><!-- ☑ plusieurs lignes d’un coup : cases, Tout cocher, barre du bas (📎 · 🧺 · ⤓) -->
 <script src="assets/js/app-listes-maj.js?v=3" defer></script>
-<script src="assets/js/app-donnees-accueil.js?v=3" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
+<script src="assets/js/app-donnees-accueil.js?v=4" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-plus.js?v=2" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
-<script src="assets/js/app-donnees-plus-outils.js?v=1" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
+<script src="assets/js/app-donnees-plus-outils.js?v=2" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
 <script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
 <script src="assets/js/app-listes-perso.js?v=2" defer></script>
@@ -1476,7 +1477,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector-tree.js?v=16" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=13" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=11" defer></script>
-<script src="assets/js/heritage-research-gaps.js?v=10" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=11" defer></script>
 <script src="assets/js/app-lecture-auto.js?v=3" defer></script>
 <script src="assets/js/app-socface-core.js?v=3" defer></script>
 <script src="assets/js/heritage-socface.js?v=8" defer></script>
@@ -1755,6 +1756,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-m.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-k.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-j.js?v=1" defer></script>
+<script src="assets/js/noms-lieux-monde.js?v=1" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
 <script src="assets/js/heritage-fiche-edifice.js?v=4" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>

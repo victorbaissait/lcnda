@@ -3676,6 +3676,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 @media print{body.h-gaps-printing .sidebar,body.h-gaps-printing header.app-header,body.h-gaps-printing .h-gaps-bar,body.h-gaps-printing .h-gaps-kinds,body.h-gaps-printing .page-actions,body.h-gaps-printing .h-gap-act,body.h-gaps-printing .h-gap-links{display:none!important}body.h-gaps-printing .h-gap{break-inside:avoid;border-color:#999}}
 /* 👤 « Pour qui ? » et 🗂 un cadre par personne (heritage-research-gaps.js) */
 .h-gaps-who{display:flex;flex-direction:column;gap:3px;font-size:.85em;min-width:0}.h-gaps-who-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.h-gaps-pick{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-gaps-bar .h-gaps-frames{flex-direction:row;align-items:center;gap:8px;padding-bottom:8px;font-size:.9em}
 .h-gaps-more{margin:14px 0;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .h-gap-card{background:var(--card-bg,#fff);border:var(--line,1px solid #d0d4dc);box-shadow:var(--shadow-small,none);border-radius:10px;padding:14px 18px 6px;margin:0 0 16px;min-width:0}
 .h-gap-card-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;padding-bottom:10px;border-bottom:1px solid var(--line-color,#d6d6d6)}

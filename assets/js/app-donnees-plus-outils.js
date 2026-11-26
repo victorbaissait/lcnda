@@ -291,6 +291,7 @@
     /* ═════════════ 🎞 sa vie, année par année (17) ═════════════ */
     async function slideshow(pid) {
         let p; try { p = await P().personInfo(pid); } catch (e) { return toast(e.message, 'error'); }
+        if (p.living) return toast(T('Pas de diaporama pour une personne vivante.'), 'error'); // comme le livret : il part dans 🎤 Présentation, puis en PDF, vidéo, .pptx
         if (!p.b) return toast(T('{p} n’a pas d’année de naissance : impossible de situer sa vie.', {p: p.name}), 'error');
         const rows = p.places.length ? (await P().collect({places: p.places, from: p.b, to: p.end})).filter(r => r.y >= p.b && r.y2 - r.y <= 5).sort((a, b) => a.k - b.k) : [];
         const by = new Map(); rows.forEach(r => { const y = r.y; if (!by.has(y)) by.set(y, []); if (by.get(y).length < 3) by.get(y).push({t: r.title, s: `${themeOf(r.theme)?.icon || ''} ${T(themeOf(r.theme)?.label || '')} · ${T('à {n} km', {n: String(r.k).replace('.', ',')})}`}); });

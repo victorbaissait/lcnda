@@ -24,6 +24,7 @@ const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? proces
 const RUNS = Number(arg('--runs', 2)) || 2;
 const OUT = arg('--json', '');
 const ELECTRON_CACHE = process.argv.includes('--electron-cache');
+const INIT = arg('--init', ''); // script ajouté à chaque page (instrumentation) ; ce qu'il range dans window.__report est affiché
 const PROFILE = arg('--profile', ''); // profil processeur de la 1re ouverture à froid (.cpuprofile) + résumé par fichier
 
 async function main() {
@@ -55,6 +56,7 @@ async function main() {
                     await r.fulfill({ response: resp, headers: h });
                 });
             }
+            if (INIT) await ctx.addInitScript({ path: INIT });
             await ctx.addInitScript(() => {
                 window.__lt = []; window.__ready = 0;
                 try { new PerformanceObserver(l => { for (const e of l.getEntries()) window.__lt.push([e.startTime, e.duration]); }).observe({ type: 'longtask', buffered: true }); } catch (_) { /* ancien */ }
@@ -94,6 +96,7 @@ async function main() {
                         ready: window.__ready, calm, lt: lt.length, ltTotal: lt.reduce((a, x) => a + x[1], 0), ltMax: lt.reduce((a, x) => Math.max(a, x[1]), 0),
                         scripts: document.scripts.length, css: document.querySelectorAll('link[rel=stylesheet]').length };
                 });
+                if (INIT) console.log('report', k, JSON.stringify(await page.evaluate(() => window.__report && window.__report()), null, 1));
                 if (PROFILE && run === 0 && k === 0) { const { profile } = await cdp.send('Profiler.stop'); fs.writeFileSync(PROFILE, JSON.stringify(profile)); summarizeProfile(profile); }
                 const pm = Object.fromEntries((await cdp.send('Performance.getMetrics')).metrics.map(x => [x.name, x.value]));
                 const row = { run, kind, ...Object.fromEntries(Object.entries(m).map(([a, b]) => [a, Math.round(b)])),

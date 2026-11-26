@@ -1472,6 +1472,23 @@
         ext.quickSearchProviders = ext.quickSearchProviders || [];
         ext.quickSearchProviders.push(provider);
     })();
+    /* 🗂 « Un cadre par personne » (Réglages → 🔎 Recherche ; clé générale genealogie-cadres, oui au départ ; même objet que heritage-research-gaps.js).
+     * UI.framesOn() : le réglage ; UI.framesPref(clé) : la case « Ranger par personne » d'un écran (non au départ : Journal, Notes, Enquêtes) ;
+     * UI.groupByPerson(liste, it => id) : les groupes dans l'ordre de leur première ligne (O(n)) ; UI.personCardHtml / UI.personTbodyHtml : le cadre. */
+    window.LCNDA_CADRES = window.LCNDA_CADRES || {on: () => { try { return localStorage.getItem('genealogie-cadres') !== '0'; } catch (_) { return true; } },
+        set: on => { try { localStorage.setItem('genealogie-cadres', on ? '1' : '0'); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda:cadres-changed', {detail: {on: !!on}})); }};
+    UI.framesOn = () => window.LCNDA_CADRES.on();
+    UI.framesPref = key => { try { return localStorage.getItem('genealogie-cadres:' + key) === '1'; } catch (_) { return false; } };
+    UI.setFramesPref = (key, on) => { try { localStorage.setItem('genealogie-cadres:' + key, on ? '1' : '0'); } catch (_) {} };
+    UI.groupByPerson = (list, keyOf) => {
+        const m = new Map(), none = [];
+        for (const it of list || []) { const k = keyOf(it); if (k == null || k === '' || k === 0 || k === '0') { none.push(it); continue; } let g = m.get(String(k)); if (!g) m.set(String(k), g = {key: String(k), items: []}); g.items.push(it); }
+        const out = [...m.values()]; if (none.length) out.push({key: '', items: none}); return out;
+    };
+    const cardHead = ({id, name = '', sub = '', life = '', count = '', extra = ''}) => `<div class="ui-person-card-who">${id ? `<button type="button" class="table-link ui-person-card-name" data-h-person="${Number(id)}" title="${esc(i18n('Ouvrir la fiche de {name}', {name}))}">${esc(name)}</button>` : `<strong class="ui-person-card-name">${esc(name || i18n('Sans personne'))}</strong>`}${sub ? ` <small class="muted ui-person-card-sub">${esc(sub)}</small>` : ''}${life ? ` <small class="muted ui-person-card-life">${esc(life)}</small>` : ''}${extra}</div>${count ? `<span class="ui-person-card-count">${esc(count)}</span>` : ''}`;
+    UI.personCardHtml = (o = {}) => `<section class="ui-person-card${o.cls ? ' ' + o.cls : ''}" data-person-card="${esc(o.id || '')}"${o.attrs ? ' ' + o.attrs : ''}><header class="ui-person-card-head">${cardHead(o)}</header><div class="ui-person-card-body">${o.body || ''}</div></section>`;
+    UI.personCardsHtml = html => `<div class="ui-person-cards">${html}</div>`;
+    UI.personTbodyHtml = (o = {}) => `<tbody class="ui-person-tb" data-person-card="${esc(o.id || '')}"><tr class="ui-person-tb-head"><th colspan="${Number(o.cols) || 1}" scope="rowgroup"><div class="ui-person-card-head">${cardHead(o)}</div></th></tr>${o.rows || ''}</tbody>`;
     wrapUndoToast();
     document.addEventListener('DOMContentLoaded', wrapUndoToast);
     addEventListener('load', wrapUndoToast);

@@ -23,6 +23,8 @@
     const KINDS = {birth: ['👶', 'Naissance'], marriage: ['💍', 'Mariage'], death: ['🕯️', 'Décès'], parents: ['👪', 'Parents'], contract: ['📜', 'Contrat de mariage'], succession: ['⚖️', 'Succession'], census: ['🏠', 'Recensements'], socface: ['🧾', 'Recensement (SocFace)'], military: ['🎖️', 'Registre matricule']};
     const STATUS = {todo: 'à faire', done: 'terminé', review: 'à revoir', doubt: 'doute', priority: 'priorité', later: 'plus tard'};
     const years = it => it.from == null ? '' : it.from === it.to || it.to == null ? String(it.from) : `${it.from} – ${it.to}`;
+    /** 🗂 « Un cadre par personne » (Réglages → 🔎 Recherche ; clé générale genealogie-cadres, pour Où chercher et les autres listes) : oui par défaut */
+    const cadres = window.LCNDA_CADRES = window.LCNDA_CADRES || {on: () => ls('genealogie-cadres', '1') !== '0', set: on => { lsSet('genealogie-cadres', on ? '1' : '0'); window.dispatchEvent(new CustomEvent('lcnda:cadres-changed', {detail: {on: !!on}})); }};
     const GENS = Array.from({length: 28}, (_, i) => i + 3); // 3 … 30 générations
     const st = () => (S().gapsView ||= {gen: Math.min(30, Number(ls('genealogie-gaps-gen', 7)) || 7), group: ls('genealogie-gaps-group', 'archives'), off: [], q: '', limit: 600,
         person: Number(ls('genealogie-gaps-person', 0)) || 0, personName: ls('genealogie-gaps-person-name', '')});
@@ -92,7 +94,8 @@
                     <small class="muted">${esc(i18n('Sosa {n} · génération {g}', {n: fmt(it.sosa), g: it.generation}))}${life ? ` · <span class="h-gap-life">${esc(life)}</span>` : ''}</small></div>
                     <span class="h-gap-card-count" data-gap-card-count>${esc(plural(l.length, 'recherche', 'recherches'))}</span></header>
                     <div class="h-gap-card-body">${l.map(x => row(x, {noPerson: true, noArchive: v.group === 'archives'})).join('')}</div></article>`; };
-            ws.querySelector('[data-gaps-list]').innerHTML = vis.length ? [...groups.entries()].map(([k, list]) => `<section class="h-gaps-group">${v.group === 'person' ? '' : head(k, list)}${cards(list)}</section>`).join('')
+            const framed = cadres.on(); // sans cadres : les lignes d'avant, toujours rangées par groupe
+            ws.querySelector('[data-gaps-list]').innerHTML = vis.length ? [...groups.entries()].map(([k, list]) => `<section class="h-gaps-group">${framed && v.group === 'person' ? '' : head(k, list)}${framed ? cards(list) : sortIn(list).map(it => row(it, {noPerson: v.group === 'person', noArchive: v.group === 'archives'})).join('')}</section>`).join('')
                 : `<p class="muted">${items.length ? 'Rien avec ces filtres.' : 'Rien ne manque dans les générations regardées : bravo ! Regarde plus loin (générations) ou complète la lignée.'}</p>`;
             ws.querySelector('[data-gaps-count]').textContent = `${fmt(vis.length)} recherche${vis.length > 1 ? 's' : ''}${vis.length !== items.length ? ` sur ${fmt(items.length)}` : ''}`;
         };
@@ -105,6 +108,7 @@
                 <label>Générations<select data-gaps-gen>${GENS.map(n => `<option value="${n}" ${n === v.gen ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
                 <label>Ranger par<select data-gaps-group>${[['archives', 'Service d’archives'], ['commune', 'Commune'], ['person', 'Ancêtre'], ['kind', 'Sorte d’acte']].map(([k, l]) => `<option value="${k}" ${k === v.group ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="h-gaps-q">Filtrer<input type="search" data-gaps-q value="${esc(v.q)}" placeholder="Nom, commune, département…"></label>
+                <label class="ui-toggle h-gaps-frames"><input type="checkbox" data-gaps-frames ${cadres.on() ? 'checked' : ''}><i></i><span>${esc(i18n('Un cadre par personne'))}</span></label>
                 <strong data-gaps-count></strong></div>
             <div class="h-gaps-kinds">${Object.entries(KINDS).filter(([k]) => counts[k]).map(([k, [ico, l]]) => `<label class="h-gaps-chip"><input type="checkbox" data-gaps-kind="${k}" ${v.off.includes(k) ? '' : 'checked'}> ${ico} ${esc(l)} <small>${fmt(counts[k])}</small></label>`).join('')}</div>
             <div data-gaps-list></div>${Number(d.total || 0) > items.length ? `<p class="h-gaps-more muted" data-gaps-more-note>${esc(i18n('Les {shown} premières recherches sur {total} : affine avec le filtre ou les générations.', {shown: fmt(items.length), total: fmt(d.total)}))} <button type="button" class="button small secondary" data-gaps-more>${esc(i18n('Voir les suivantes'))}</button></p>` : ''}${d.truncated ? `<p class="h-gaps-more muted">${esc(i18n('Lignée très grande : les {n} premiers ancêtres sont regardés.', {n: fmt(d.ancestors)}))}</p>` : ''}</section>`;
@@ -116,6 +120,7 @@
             if (!it || !(Number(it.id) > 0)) return;
             setPerson(Number(it.id) === Number(d.default_root_id) ? 0 : it.id, it.title || it.name || ''); render(++S().workspaceToken);
         });
+        ws.querySelector('[data-gaps-frames]').addEventListener('change', e => { cadres.set(e.target.checked); draw(); });
         ws.querySelector('[data-gaps-reset]')?.addEventListener('click', () => { setPerson(0, ''); render(++S().workspaceToken); });
         ws.querySelector('[data-gaps-more]')?.addEventListener('click', () => { v.limit += 600; render(++S().workspaceToken); });
         ws.querySelector('[data-gaps-group]').addEventListener('change', e => { v.group = e.target.value; lsSet('genealogie-gaps-group', v.group); draw(); });
@@ -165,12 +170,27 @@
                 await api('save_archive_digest', {}, {method: 'POST', body: {id: 0, place_id: it.place_id || 0, city_name: it.place || '', department: it.archive?.department || '', archive_service: it.archive?.label || '', year_text: years(it), record_type: it.record_type || 'autre', status: 'todo',
                     searched: `${KINDS[it.kind]?.[1] || it.what} de ${it.name} (Sosa ${it.sosa}) — ${it.why}`, notes}});
                 it.digested = [...(it.digested || []), {year_text: years(it), status: 'todo'}]; b.textContent = '✓ Ajouté'; toast('Ajouté au suivi : Recherche → Dépouillement d’archive.');
-                const art = b.closest('[data-gap-i]'); art.outerHTML = row(it, {noPerson: true, noArchive: v.group === 'archives'});
+                const art = b.closest('[data-gap-i]'); art.outerHTML = row(it, {noPerson: cadres.on() || v.group === 'person', noArchive: v.group === 'archives'});
             } catch (err) { b.disabled = false; toast(err.message, 'error'); }
         });
     }
     ext.researchGaps = render;
     ext.researchGapsFor = openFor;
+    ext.cadres = cadres;
+    // Réglages → 🔎 Recherche : la case « Un cadre par personne » (même clé que la case de la barre)
+    const wrapSettings = () => {
+        const base = ext.maintenance?.recherche_fr; if (!base || base.cadresWrapped) return;
+        const wrapped = async token => {
+            await base(token);
+            const page = document.querySelector('#workspace .rfr-page'); if (!page || page.querySelector('[data-cadres-pref]')) return;
+            const box = document.createElement('section'); box.className = 'maintenance-panel';
+            box.innerHTML = `<h3>${esc(i18n('Affichage des listes de recherche'))}</h3><label class="ui-toggle"><input type="checkbox" data-cadres-pref ${cadres.on() ? 'checked' : ''}><i></i><span>${esc(i18n('Un cadre par personne'))}<small class="muted"> — ${esc(i18n('« Que manque-t-il ? » : les recherches de chaque personne réunies dans un cadre ; sinon une ligne par recherche'))}</small></span></label>`;
+            page.appendChild(box);
+            box.querySelector('[data-cadres-pref]').addEventListener('change', e => { cadres.set(e.target.checked); toast(i18n('Réglage enregistré.'), 'success'); });
+        };
+        wrapped.cadresWrapped = true; wrapped.qpWrapped = base.qpWrapped; ext.maintenance.recherche_fr = wrapped;
+    };
+    wrapSettings(); document.addEventListener('DOMContentLoaded', wrapSettings); window.addEventListener('load', wrapSettings);
     // 🔍 la fiche, menu ⋯ : « Que manque-t-il pour elle / lui ? »
     (ext.personMoreItems = ext.personMoreItems || []).push(detail => { const p = detail?.person; if (!p?.id || p.kind === 'animal') return null;
         return {key: 'que-manque', icon: '🔍', label: i18n(p.gender === 'male' ? 'Que manque-t-il pour lui ?' : 'Que manque-t-il pour elle ?'), run: () => openFor(Number(p.id), A().personName?.(p) || `${p.first_name || ''} ${p.last_name || ''}`.trim())}; });
