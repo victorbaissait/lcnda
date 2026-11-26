@@ -224,7 +224,8 @@ function dmaj_status(): array
         $out[] = ['id' => (string) $id, 'title' => (string) ($c['title'] ?? ''), 'version' => (string) ($c['version'] ?? ''), 'built' => (string) ($c['built'] ?? ''), 'size' => (int) ($c['size'] ?? 0),
             'rows' => (int) ($c['rows'] ?? 0), 'licence' => (string) ($c['licence'] ?? ''), 'source' => (string) ($c['source'] ?? ''), 'url' => (string) ($c['url'] ?? ''),
             'files' => count($c['files'] ?? []), 'state' => $c['state'], 'installed_at' => (string) ($c['installed_at'] ?? ''), 'can_undo' => $bk,
-            'wikidata' => !empty(dmaj_local()['packs'][$id]['wikidata_count']), 'script' => (string) (dmaj_local()['packs'][$id]['script'] ?? '')];
+            'wikidata' => !empty(dmaj_local()['packs'][$id]['wikidata_count']), 'script' => (string) (dmaj_local()['packs'][$id]['script'] ?? '')]
+            + array_filter(['bbox' => dmaj_local()['packs'][$id]['bbox'] ?? null, 'country' => dmaj_local()['packs'][$id]['country'] ?? null], static fn($v) => is_array($v)); // ce que couvre le pack (récap)
         foreach (array_keys($c['files'] ?? []) as $rel) { $index[$rel] = (string) $id; }
     }
     $free = @disk_free_space(SHARED_DATA_DIR);

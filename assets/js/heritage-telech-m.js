@@ -575,7 +575,24 @@
             {key: 'winner', label: 'Vainqueur', type: 'text'}, {key: 'stages', label: 'Étapes et km', type: 'text'}, {key: 'name', label: 'Édition', type: 'text'}, {key: 'sources', label: 'Sources'}],
         hideCols: ['stages', 'name'], same: {by: 'key'}, keep: ['chip'], familyColumn: true, familyBefore: 'sources', defaultSort: ['year', 'desc'],
         detail: [{key: 'name', label: 'Édition'}, {key: 'place', label: 'Où'}, {key: 'winner', label: 'Vainqueur'}, {key: 'stages', label: 'Étapes et km'}],
-        title: r => r.name || `${r.comp || ''} ${r.year || ''}`.trim(), period: r => [r.year, r.year], geo: r => [r.lat, r.lon]};
+        title: r => r.name || `${r.comp || ''} ${r.year || ''}`.trim(), period: r => [r.year, r.year], geo: r => [r.lat, r.lon],
+        // 🚲 la pastille « Tour de France » allumée : les vues de la liste du Tour (Éditions · Étapes · 🗺 Carte), sans les refaire ici
+        painted: (res, pg) => tourViewsBar(res, pg)};
+    async function tourViewsBar(res, pg) {
+        const page = res?.closest?.('.ld-page'); if (!page) return;
+        const st = pg?.state?.() || {}, chip = (st.crit || []).find(c => c.key === 'comp' && c.chip);
+        const lab = compLabel(await compMeta().catch(() => ({})), 'tdf');
+        const on = !!chip && String(chip.values?.[0] ?? '') === lab;
+        let bar = page.querySelector('[data-tsx-tourviews]');
+        if (!on) { bar?.remove(); return; }
+        const tour = (ext.dataLists || []).find(x => x.id === 'ts_tour');
+        if (!tour || (tour.enabled && !tour.enabled())) { bar?.remove(); return; }
+        if (!bar) { bar = document.createElement('div'); bar.className = 'ld-parent tsx-tourviews'; bar.dataset.tsxTourviews = ''; page.querySelector('.ld-bar')?.after(bar); }
+        const yr = (st.crit || []).find(c => c.key === 'year' && c.kind === 'range'), pre = yr ? {crit: [{key: 'year', kind: 'range', from: yr.from, to: yr.to}]} : {};
+        bar.innerHTML = `<b>🚲 ${esc(T('Tour de France'))}</b><span class="segmented" role="group" aria-label="${esc(T('Les vues du Tour de France'))}">${(tour.views || []).map(v => `<button type="button" data-tsx-tv="${esc(v.id)}">${esc(T(v.label))}</button>`).join('')}<button type="button" data-tsx-tv="map">🗺 ${esc(T('Carte'))}</button></span>`;
+        bar.onclick = e => { const b = e.target.closest('[data-tsx-tv]'); if (!b) return; const v = b.dataset.tsxTv;
+            ext.dataListsEngine?.open('ts_tour', {...pre, dview: v === 'map' ? 'editions' : v, view: v === 'map' ? 'map' : 'table'}); };
+    }
     const addMerge = () => { const M = ext.dataListMerges = ext.dataListMerges || []; if (!M.some(m => m.id === MERGE.id)) M.push(MERGE); };
     addMerge();
     if (root.document) document.addEventListener('DOMContentLoaded', () => { const M = ext.dataListMerges || []; const mine = M.filter(m => m.id === MERGE.id); if (mine.length > 1) M.splice(M.indexOf(MERGE), 1); }, {once: true});

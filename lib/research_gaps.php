@@ -153,14 +153,63 @@ function gaps_where(string $kind, ?int $from, ?int $to, array $arch, string $pla
     return $steps;
 }
 
+const GAPS_MAX_GEN = 30;
+const GAPS_MAX_PEOPLE = 10000; // ancêtres lus au plus (les requêtes « IN (…) » en prennent jusqu'à 3 fois : sous la limite de SQLite)
+const GAPS_MAX_ITEMS = 600;    // lignes envoyées à l'écran d'abord (le total est donné à côté ; « Voir les suivantes »)
+
+/**
+ * La lignée de $root jusqu'à $maxGen générations, génération par génération (une requête par génération et par paquet de
+ * 900, pas une par personne) : sosa => id, chaque ancêtre une seule fois, à son plus petit numéro (implexe : ses ancêtres
+ * ne sont lus qu'une fois). 30 générations sur une grosse base restent rapides. 'truncated' : la limite de personnes est atteinte.
+ */
+function gaps_positions(PDO $pdo, int $root, int $maxGen, int $maxPeople = GAPS_MAX_PEOPLE): array
+{
+    $positions = [1 => $root]; $seen = [$root => true]; $level = [1 => $root]; $truncated = false;
+    for ($g = 2; $g <= $maxGen && $level; $g++) {
+        $parents = [];
+        foreach (array_chunk(array_values(array_unique($level)), 900) as $chunk) {
+            $marks = implode(',', array_fill(0, count($chunk), '?'));
+            $s = $pdo->prepare("SELECT fc.child_id, p.id, p.gender FROM family_children fc JOIN families f ON f.id=fc.family_id JOIN persons p ON p.id=f.partner1_id OR p.id=f.partner2_id WHERE fc.child_id IN ($marks)");
+            $s->execute($chunk);
+            foreach ($s->fetchAll() as $r) { $parents[(int) $r['child_id']][] = $r; }
+        }
+        $next = [];
+        ksort($level);
+        foreach ($level as $sosa => $pid) {
+            // même choix du père et de la mère que sosa_parent_ids() (api.php)
+            $father = null; $mother = null; $others = [];
+            foreach ($parents[$pid] ?? [] as $r) { $id = (int) $r['id'];
+                if ($r['gender'] === 'male' && $father === null) { $father = $id; } elseif ($r['gender'] === 'female' && $mother === null) { $mother = $id; } else { $others[] = $id; } }
+            foreach ($others as $o) { if ($father === null) { $father = $o; } elseif ($mother === null) { $mother = $o; } }
+            foreach ([[$father, $sosa * 2], [$mother, $sosa * 2 + 1]] as [$id, $ns]) {
+                if (!$id) { continue; }
+                if (count($positions) >= $maxPeople && !isset($seen[$id])) { $truncated = true; continue; }
+                $positions[$ns] = $id;
+                if (!isset($seen[$id])) { $seen[$id] = true; $next[$ns] = $id; }
+            }
+        }
+        $level = $next;
+    }
+    ksort($positions);
+    return ['positions' => $positions, 'truncated' => $truncated];
+}
+
 function research_gaps_data(PDO $pdo, array $q = []): array
 {
-    $maxGen = max(2, min(12, safe_int($q['gen'] ?? 7) ?: 7));
-    $base = function_exists('research_suggestions_data') ? research_suggestions_data($pdo, 0) : ['root_id' => 0, 'items' => []];
-    $root = (int) ($base['root_id'] ?? 0);
-    if (!$root) { return ['root_id' => 0, 'items' => [], 'archives' => [], 'counts' => []]; }
-    $positions = array_filter(sosa_positions($pdo, $root, 20000)['positions'] ?? [], static fn($s) => $s < (1 << $maxGen), ARRAY_FILTER_USE_KEY);
-    ksort($positions);
+    $maxGen = max(2, min(GAPS_MAX_GEN, safe_int($q['gen'] ?? 7) ?: 7));
+    $limit = max(GAPS_MAX_ITEMS, min(20000, safe_int($q['limit'] ?? GAPS_MAX_ITEMS) ?: GAPS_MAX_ITEMS)); // « Voir les suivantes » : 600 de plus à chaque fois
+    // 👤 « Pour qui ? » : la personne de départ choisie (Sosa 1), sinon le de cujus ; un numéro qui n'existe plus → le de cujus
+    $defaultRoot = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn();
+    $asked = safe_int($q['person'] ?? 0);
+    $root = $defaultRoot;
+    if ($asked > 0) { $c = $pdo->prepare('SELECT id FROM persons WHERE id=?'); $c->execute([$asked]); if ($c->fetchColumn()) { $root = $asked; } }
+    $nameOf = static function (int $id) use ($pdo): string { if (!$id) { return ''; } try { $s = $pdo->prepare('SELECT first_name, last_name FROM persons WHERE id=?'); $s->execute([$id]); $r = $s->fetch(); return $r ? trim($r['first_name'] . ' ' . $r['last_name']) : ''; } catch (Throwable $_) { return ''; } };
+    $who = ['default_root_id' => $defaultRoot, 'default_root_name' => $nameOf($defaultRoot), 'asked_id' => $asked, 'person_invalid' => $asked > 0 && $root !== $asked];
+    if (!$root) { return ['root_id' => 0, 'items' => [], 'archives' => [], 'counts' => []] + $who; }
+    // la lignée lue une fois, une génération de plus (pour savoir si les parents de la dernière sont connus)
+    $lineage = gaps_positions($pdo, $root, $maxGen + 1);
+    $base = function_exists('research_suggestions_data') ? research_suggestions_data($pdo, 0, $root, $lineage['positions'], (1 << ($maxGen + 1)) - 1) : ['root_id' => $root, 'items' => []];
+    $positions = array_filter($lineage['positions'], static fn($s) => $s < (1 << $maxGen), ARRAY_FILTER_USE_KEY);
     $ids = array_values(array_unique($positions));
     $sosaOf = []; foreach ($positions as $s => $pid) { $sosaOf[$pid] ??= $s; }
     $items = array_values(array_filter($base['items'] ?? [], static fn($it) => $it['generation'] <= $maxGen));
@@ -261,6 +310,9 @@ function research_gaps_data(PDO $pdo, array $q = []): array
     foreach ($archives as &$a) { arsort($a['communes']); $a['communes'] = array_slice(array_keys($a['communes']), 0, 12); }
     unset($a);
     $counts = []; foreach ($items as $it) { $counts[$it['kind']] = ($counts[$it['kind']] ?? 0) + 1; }
-    $rootName = ''; try { $s = $pdo->prepare('SELECT first_name, last_name FROM persons WHERE id=?'); $s->execute([$root]); $r = $s->fetch(); $rootName = $r ? trim($r['first_name'] . ' ' . $r['last_name']) : ''; } catch (Throwable $_) {}
-    return ['root_id' => $root, 'root_name' => $rootName, 'generations' => $maxGen, 'ancestors' => count($ids), 'items' => array_slice($items, 0, 600), 'total' => count($items), 'archives' => $archives, 'counts' => $counts];
+    // les dates de vie de chaque personne de la liste (en-tête de son cadre)
+    $life = [];
+    foreach ($items as $it) { $pid = (int) $it['person_id']; if (isset($life[$pid]) || !isset($people[$pid])) { continue; } $life[$pid] = ['birth' => $people[$pid]['by'], 'death' => $people[$pid]['dy']]; }
+    return ['root_id' => $root, 'root_name' => $nameOf($root), 'generations' => $maxGen, 'max_generations' => GAPS_MAX_GEN, 'ancestors' => count($ids), 'items' => array_slice($items, 0, $limit), 'total' => count($items), 'shown' => min(count($items), $limit),
+        'archives' => $archives, 'counts' => $counts, 'life' => (object) $life, 'truncated' => $lineage['truncated']] + $who;
 }

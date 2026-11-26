@@ -9,7 +9,10 @@
  *  3. mode consultation : ld_famille ne donne pas les vivants probables (sans « vivant » coché, né il y a 30 ans) ; 🕳 dplus_missing ne
  *     compte pas les lieux des vivants ;
  *  4. app-paniers-core.js parseData : un mot de thème plein de signes (« c++ », « (x ») ne casse plus la question ;
- *  5. liens : app-inserer.js, app-listes-donnees.js (source d'une liste), heritage-histoire-autour.js (À propos) : http(s) seulement.
+ *  5. liens : app-inserer.js, app-listes-donnees.js (source d'une liste), heritage-histoire-autour.js (À propos) : http(s) seulement ;
+ *  6. (vérifié, rien à corriger) dans l'app : une liste dont les valeurs, le nom, la source sont piégés (<img onerror>, javascript:), une note,
+ *     une ligne ajoutée, une ligne douteuse et une question piégées : rien ne s'exécute, aucun lien autre que http(s) ; une liste de
+ *     5 000 lignes s'ouvre sans geler la page plus de 200 ms d'affilée (hors chargement).
  *     node tests/test-audit-donnees-listes.js */
 'use strict';
 const assert = require('assert');
@@ -124,6 +127,47 @@ echo json_encode(['dropped' => $s['dropped'], 'rows' => count($g['lists'][0]['ro
         assert.ok(/sourceLine = d => .*\/\^https\?:/.test(ld), 'app-listes-donnees.js : la source d’une liste');
         const ha = fs.readFileSync(path.join(root, 'assets/js/heritage-histoire-autour.js'), 'utf8');
         assert.ok(/const link = \(url, label\) => \(\/\^https\?:/.test(ha), 'heritage-histoire-autour.js : link()');
+    });
+
+    await t('dans l’app : valeurs, note, ligne ajoutée, douteuse et question piégées ne s’exécutent pas ; 5 000 lignes sans gel', async () => {
+        const B = await require('./prendre-depuis-seed.js').start();
+        const p = B.page, sleep = ms => new Promise(r => setTimeout(r, ms));
+        try {
+            const X = '<img src=x onerror="window.__xss=(window.__xss||0)+1">';
+            await p.evaluate(X => {
+                const E = window.LCNDA_EXT, rows = [];
+                rows.push({name: 'Combat ' + X, d: '1760-05-02', y: 1760, lat: 45.585, lon: 1.72, lieu: X, u: 'javascript:window.__xss=1'});
+                for (let i = 0; i < 5000; i++) rows.push({name: 'Combat n° ' + i, d: `${1600 + i % 300}-01-01`, y: 1600 + i % 300, lat: 45 + (i % 100) / 100, lon: 1 + (i % 70) / 100, lieu: 'Lieu ' + (i % 40), u: ''});
+                E.dataLists.push({id: 'test_piege', icon: '⚔️', label: 'Piège ' + X, group: 'Le monde', theme: 'guerres', source: 'Source ' + X, sourceUrl: 'javascript:window.__xss=1', load: async () => rows,
+                    fields: [{key: 'name', label: 'Combat ' + X, type: 'text'}, {key: 'd', label: 'Date', type: 'date'}, {key: 'lieu', label: 'Lieu', type: 'place'}, {key: 'u', label: 'Lien', type: 'url'}],
+                    period: r => [r.y, r.y], geo: r => [r.lat, r.lon], rowKey: r => r.name, familyColumn: true});
+                E.donneesPlus?.resetCache?.();
+                const k = 'Combat ' + X;
+                localStorage.setItem('genealogie-donnees-lignes', JSON.stringify({test_piege: [{id: 'm1', what: X, when: '1771', where: X, src: X, y: 1771}]}));
+                localStorage.setItem('genealogie-donnees-douteuses', JSON.stringify({['test_piege|' + k]: {why: X, at: 1}, ['test_piege\u0001' + k]: {why: X, at: 1}}));
+            }, X);
+            await p.evaluate(X => window.LCNDA_APP.api('dplus_note', {}, {method: 'POST', body: {list: 'test_piege', key: 'Combat ' + X, title: X, note: 'note ' + X}}), X);
+            // le gel le plus long pendant qu'on ouvre la liste
+            await p.evaluate(() => { window.__long = 0; try { new PerformanceObserver(l => { for (const e of l.getEntries()) window.__long = Math.max(window.__long, e.duration); }).observe({type: 'longtask', buffered: false}); } catch (_) {} });
+            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'data_test_piege'; A.setModule('listes'); });
+            await p.waitForSelector('[data-ld-page="test_piege"] [data-ld-results] tbody tr[data-ld-row]', {timeout: 30000}); await sleep(1500);
+            const long1 = await p.evaluate(() => window.__long);
+            // la recherche dans la liste, puis la question du récap
+            await p.evaluate(() => { window.__long = 0; });
+            const q = await p.$('[data-ld-page="test_piege"] input[type="search"]');
+            if (q) { await q.fill('Combat n° 49'); await sleep(1200); }
+            const long2 = await p.evaluate(() => window.__long);
+            await p.evaluate(() => { const H = window.LCNDA_EXT.dataHome._st; H.view = 'recap'; H.q = ''; H.res = null; const A = window.LCNDA_APP; A.state.listType = 'donnees'; A.setModule('listes'); });
+            await p.waitForSelector('[data-dr-q]', {timeout: 30000});
+            await p.fill('[data-dr-q]', `les séismes près de ${X} quand ${X} avait 30 ans`); await p.press('[data-dr-q]', 'Enter'); await sleep(2500);
+            const bad = await p.evaluate(() => ({xss: window.__xss || 0, on: document.querySelectorAll('[onerror], [onload], [onmouseover]').length,
+                js: [...document.querySelectorAll('a[href]')].filter(a => !/^(https?:|mailto:|tel:|#|$|blob:|api\.php|media\/|index\.php|\.?\/?[a-z0-9_-]*\.php)/i.test(a.getAttribute('href').trim())).map(a => a.getAttribute('href')).slice(0, 5)}));
+            assert.deepStrictEqual(bad, {xss: 0, on: 0, js: []});
+            assert.ok(long1 < 1500, `ouvrir 5 000 lignes : la page gèle ${Math.round(long1)} ms`);
+            assert.ok(long2 < 200 || !q, `chercher dans 5 000 lignes : la page gèle ${Math.round(long2)} ms`);
+            console.log(`  (gel le plus long : ouverture ${Math.round(long1)} ms, recherche ${Math.round(long2)} ms)`);
+            assert.deepStrictEqual(B.errs.filter(e => !/Failed to load resource|net::/.test(e)), []);
+        } finally { await B.stop(); }
     });
 
     console.log(fails ? `\n${fails} échec(s)` : '\nTout est bon.');

@@ -7,7 +7,7 @@
  *      id: 'seismes', theme: 'seismes', icon: '🌋', label: 'Séismes réunis', noun: ['séisme', 'séismes'],
  *      same: {km: 50, days: 1, yearOnly: true},   // même jour ± 1 ET moins de 50 km ; une source qui n'a que l'année : même année,
  *                                                 // moins de 50 km, et un seul candidat (sinon on ne réunit pas). Ou {by: 'qid'} : même valeur.
- *      fields: [...], hideCols: [...], period, geo, familyColumn, familyKm, chips, views,   // comme une liste
+ *      fields: [...], hideCols: [...], period, geo, familyColumn, familyKm, chips, views, painted,   // comme une liste
  *      diff: [{key: 'mag', abs: 0.5}, {key: 'dead', ratio: 2}],                             // « ⚖ 2 avis » quand les sources s'écartent
  *      detail: [{key, label, fmt?}],                                                         // ce que dit chaque source, ligne ouverte
  *      sources: [{list: 'hist_seismes', rank: 2, short: 'EPICA', sub: 'Europe 1000–1899', when?: r => bool, row: r => ({date, year, lat, lon, …, url}),
@@ -176,7 +176,7 @@
             load: async () => (await build(M.id)).rows,
             open: (row, ctx) => toggleDetail(M, row, ctx),
             itemOf: (row, it) => itemOf(M, row, it),
-            painted: (res, o) => statsLine(M, res, o)};
+            painted: (res, o) => { statsLine(M, res, o); try { M.painted?.(res, o); } catch (e) { console.error(e); } }}; // M.painted : ex. 🚲 les vues du Tour quand sa pastille est allumée
     }
     /** une ligne réunie → un élément de panier ou d'insertion, avec SES sources (pas seulement la liste) */
     function itemOf(M, row, it) {

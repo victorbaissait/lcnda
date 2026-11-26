@@ -3,6 +3,8 @@
  * avec la commune, les années, les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires 3 E,
  * enregistrement 3 Q, recrutement 1 R, recensements 6 M) et ce qui est déjà dans le suivi des dépouillements.
  * Une ligne s'ajoute au suivi (« à faire ») en un clic ; la liste s'imprime pour aller aux archives. Données : lib/research_gaps.php.
+ * 👤 « Pour qui ? » : la lignée de n'importe quelle personne (Sosa comptés depuis elle), retenue ; aussi depuis la fiche (⋯).
+ * 🗂 Un cadre par personne : ses recherches dedans, une ligne chacune, les boutons à droite (dessous sur un téléphone).
  */
 (() => {
     'use strict';
@@ -21,7 +23,13 @@
     const KINDS = {birth: ['👶', 'Naissance'], marriage: ['💍', 'Mariage'], death: ['🕯️', 'Décès'], parents: ['👪', 'Parents'], contract: ['📜', 'Contrat de mariage'], succession: ['⚖️', 'Succession'], census: ['🏠', 'Recensements'], socface: ['🧾', 'Recensement (SocFace)'], military: ['🎖️', 'Registre matricule']};
     const STATUS = {todo: 'à faire', done: 'terminé', review: 'à revoir', doubt: 'doute', priority: 'priorité', later: 'plus tard'};
     const years = it => it.from == null ? '' : it.from === it.to || it.to == null ? String(it.from) : `${it.from} – ${it.to}`;
-    const st = () => (S().gapsView ||= {gen: Number(ls('genealogie-gaps-gen', 7)) || 7, group: ls('genealogie-gaps-group', 'archives'), off: [], q: ''});
+    const GENS = Array.from({length: 28}, (_, i) => i + 3); // 3 … 30 générations
+    const st = () => (S().gapsView ||= {gen: Math.min(30, Number(ls('genealogie-gaps-gen', 7)) || 7), group: ls('genealogie-gaps-group', 'archives'), off: [], q: '', limit: 600,
+        person: Number(ls('genealogie-gaps-person', 0)) || 0, personName: ls('genealogie-gaps-person-name', '')});
+    const setPerson = (id, name) => { const v = st(); v.person = Number(id) || 0; v.personName = v.person ? String(name || '') : ''; v.limit = 600; lsSet('genealogie-gaps-person', String(v.person)); lsSet('genealogie-gaps-person-name', v.personName); };
+    const lifeText = l => !l || (l.birth == null && l.death == null) ? '' : l.death == null ? `° ${l.birth}` : l.birth == null ? `† ${l.death}` : `${l.birth} – ${l.death}`;
+    /** 🔍 depuis la fiche (⋯) ou ailleurs : « Que manque-t-il ? » pour cette personne */
+    function openFor(id, name) { setPerson(id, name); S().researchKind = 'gaps'; A().persistUiState?.(); A().setModule('recherche'); }
     const webSearch = q => `https://duckduckgo.com/?q=${encodeURIComponent(q)}`;
     const faSearch = q => `https://francearchives.gouv.fr/fr/search?q=${encodeURIComponent(q)}`;
 
@@ -34,7 +42,7 @@
             it.kind === 'death' && it.gender === 'male' && it.from <= 1921 && it.to >= 1914 ? `<a href="${esc(webSearch(`Mémoire des hommes ${it.name}`))}" target="_blank" rel="noopener">Mémoire des hommes</a>` : '',
             `<a href="${esc(webSearch(`${it.name} ${it.place || ''} ${it.what} généalogie`))}" target="_blank" rel="noopener">Sur internet</a>`,
             ext.connexions?.enabled?.() !== false && ext.connexions && !document.body.classList.contains('is-kiosk') ? `<button type="button" class="link-button" data-gap-inv title="${esc(i18n('Choisir l’enquête (ou en créer une) et y mettre cette recherche comme piste'))}">🕵️ ${esc(i18n('En faire une piste…'))}</button>` : ''].filter(Boolean).join(' · ');
-        return `<article class="h-gap" data-gap-i="${it._i}">
+        return `<article class="h-gap" data-gap-i="${it._i}" data-gap-kind="${esc(it.kind)}">
             <div class="h-gap-head"><span class="h-gap-kind" title="${esc(label)}">${ico}</span>
                 <div class="h-gap-who">${opts.noPerson ? '' : `<button type="button" class="table-link" data-h-person="${Number(it.person_id)}">${esc(it.name)}</button> <small class="muted">Sosa ${fmt(it.sosa)} · génération ${it.generation}</small>`}
                     <div><b>${esc(label)}</b>${it.place ? ' ' + i18n('à {place}', {place: `<b>${esc(it.place)}</b>`}) : ` <span class="muted">${i18n('(lieu inconnu)')}</span>`}${years(it) ? `, <b>${esc(years(it))}</b>` : ''} <small class="muted">— ${esc(it.why)}</small></div>
@@ -49,8 +57,11 @@
         const v = st(), ws = document.getElementById('workspace');
         ws.innerHTML = '<section class="page h-gaps">'+window.LCNDA_UI.spinner('Je regarde ce qui manque à la lignée…')+'</section>';
         let d;
-        try { d = await api('research_gaps', {gen: v.gen}); } catch (e) { ws.innerHTML = `<section class="page"><p class="error">${esc(e.message)}</p></section>`; return; }
+        try { d = await api('research_gaps', {gen: v.gen, limit: v.limit, ...(v.person ? {person: v.person} : {})}); } catch (e) { ws.innerHTML = `<section class="page"><p class="error">${esc(e.message)}</p></section>`; return; }
         if (token !== S().workspaceToken || S().module !== 'recherche') return;
+        if (d.person_invalid) { setPerson(0, ''); toast(i18n('Cette personne n’existe plus : retour à {name}.', {name: d.default_root_name || ''})); }
+        else if (v.person && d.root_name && d.root_name !== v.personName) setPerson(v.person, d.root_name);
+        const chosen = v.person && d.root_id && Number(d.root_id) !== Number(d.default_root_id);
         const items = (d.items || []).map((it, i) => ({...it, _i: i}));
         const draw = () => {
             const q = v.q.trim().toLowerCase(), vis = items.filter(it => !v.off.includes(it.kind) && (!q || `${it.name} ${it.place} ${it.archive?.label} ${it.what}`.toLowerCase().includes(q)));
@@ -71,7 +82,17 @@
                     <span class="h-gap-links">${it.archive?.france && a.department ? `<a href="${esc(webSearch(`${it.archive.label} état civil en ligne`))}" target="_blank" rel="noopener">🌐 Trouver le site des archives</a> · <a href="${esc(faSearch(a.department))}" target="_blank" rel="noopener">FranceArchives</a>` : ''}</span></p>`;
             };
             const sortIn = list => v.group === 'archives' || v.group === 'commune' ? [...list].sort((a, b) => String(a.place).localeCompare(String(b.place), 'fr') || (a.from ?? 0) - (b.from ?? 0)) : list;
-            ws.querySelector('[data-gaps-list]').innerHTML = vis.length ? [...groups.entries()].map(([k, list]) => `<section class="h-gaps-group">${head(k, list)}${sortIn(list).map(it => row(it, {noPerson: v.group === 'person', noArchive: v.group === 'archives'})).join('')}</section>`).join('')
+            // 🗂 un cadre par personne : son nom, Sosa · génération, ses dates, le nombre de recherches ; une ligne par recherche
+            const cards = list => {
+                const by = new Map(); sortIn(list).forEach(it => { const k = Number(it.person_id); if (!by.has(k)) by.set(k, []); by.get(k).push(it); });
+                return [...by.values()].sort((a, b) => (a[0].sosa || 0) - (b[0].sosa || 0)).map(cardHtml).join('');
+            };
+            const cardHtml = l => { const it = l[0], life = lifeText(d.life?.[it.person_id]);
+                return `<article class="h-gap-card" data-gap-person="${Number(it.person_id)}"><header class="h-gap-card-head"><div class="h-gap-card-who"><button type="button" class="table-link h-gap-card-name" data-h-person="${Number(it.person_id)}">${esc(it.name)}</button>
+                    <small class="muted">${esc(i18n('Sosa {n} · génération {g}', {n: fmt(it.sosa), g: it.generation}))}${life ? ` · <span class="h-gap-life">${esc(life)}</span>` : ''}</small></div>
+                    <span class="h-gap-card-count" data-gap-card-count>${esc(plural(l.length, 'recherche', 'recherches'))}</span></header>
+                    <div class="h-gap-card-body">${l.map(x => row(x, {noPerson: true, noArchive: v.group === 'archives'})).join('')}</div></article>`; };
+            ws.querySelector('[data-gaps-list]').innerHTML = vis.length ? [...groups.entries()].map(([k, list]) => `<section class="h-gaps-group">${v.group === 'person' ? '' : head(k, list)}${cards(list)}</section>`).join('')
                 : `<p class="muted">${items.length ? 'Rien avec ces filtres.' : 'Rien ne manque dans les générations regardées : bravo ! Regarde plus loin (générations) ou complète la lignée.'}</p>`;
             ws.querySelector('[data-gaps-count]').textContent = `${fmt(vis.length)} recherche${vis.length > 1 ? 's' : ''}${vis.length !== items.length ? ` sur ${fmt(items.length)}` : ''}`;
         };
@@ -79,14 +100,24 @@
         ws.innerHTML = `<section class="page h-gaps"><header class="page-header"><div><span class="eyebrow">RECHERCHE · QUE MANQUE-T-IL ?</span><h2>${d.root_name ? i18n('Les actes à chercher pour la lignée de {name}', {name: esc(d.root_name)}) : i18n('Les actes à chercher')}</h2>
                 <p class="muted">${i18n('{searches} pour {ancestors} ancêtres sur {gens} générations, chez {services}.', {searches: plural(d.total, 'recherche', 'recherches'), ancestors: Number(d.ancestors || 0), gens: Number(d.generations || 0), services: plural((d.archives || []).length, 'service d’archives', 'services d’archives')})} ${i18n('Les plus proches générations d’abord : leurs actes sont les plus faciles à trouver, et chacun ouvre la porte du suivant.')}</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-gaps-print>🖨 Imprimer pour aller aux archives</button></div></header>
-            <div class="h-gaps-bar"><label>Générations<select data-gaps-gen>${[3, 4, 5, 6, 7, 8, 9, 10, 12].map(n => `<option value="${n}" ${n === v.gen ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+            <div class="h-gaps-bar"><div class="h-gaps-who"><span class="h-gaps-lab" id="h-gaps-who-lab">${esc(i18n('Pour qui ?'))}</span><span class="h-gaps-who-row"><button type="button" class="button secondary h-gaps-pick" data-gaps-pick aria-labelledby="h-gaps-who-lab h-gaps-who-name" title="${esc(i18n('Chercher ce qui manque à la lignée d’une autre personne'))}">👤 <span id="h-gaps-who-name" data-i18n-off>${esc(d.root_name || '…')}</span> ▾</button>
+                ${chosen ? `<button type="button" class="link-button" data-gaps-reset>${esc(i18n('↺ Revenir à {name}', {name: d.default_root_name || ''}))}</button>` : ''}</span></div>
+                <label>Générations<select data-gaps-gen>${GENS.map(n => `<option value="${n}" ${n === v.gen ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
                 <label>Ranger par<select data-gaps-group>${[['archives', 'Service d’archives'], ['commune', 'Commune'], ['person', 'Ancêtre'], ['kind', 'Sorte d’acte']].map(([k, l]) => `<option value="${k}" ${k === v.group ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="h-gaps-q">Filtrer<input type="search" data-gaps-q value="${esc(v.q)}" placeholder="Nom, commune, département…"></label>
                 <strong data-gaps-count></strong></div>
             <div class="h-gaps-kinds">${Object.entries(KINDS).filter(([k]) => counts[k]).map(([k, [ico, l]]) => `<label class="h-gaps-chip"><input type="checkbox" data-gaps-kind="${k}" ${v.off.includes(k) ? '' : 'checked'}> ${ico} ${esc(l)} <small>${fmt(counts[k])}</small></label>`).join('')}</div>
-            <div data-gaps-list></div></section>`;
+            <div data-gaps-list></div>${Number(d.total || 0) > items.length ? `<p class="h-gaps-more muted" data-gaps-more-note>${esc(i18n('Les {shown} premières recherches sur {total} : affine avec le filtre ou les générations.', {shown: fmt(items.length), total: fmt(d.total)}))} <button type="button" class="button small secondary" data-gaps-more>${esc(i18n('Voir les suivantes'))}</button></p>` : ''}${d.truncated ? `<p class="h-gaps-more muted">${esc(i18n('Lignée très grande : les {n} premiers ancêtres sont regardés.', {n: fmt(d.ancestors)}))}</p>` : ''}</section>`;
         draw();
-        ws.querySelector('[data-gaps-gen]').addEventListener('change', e => { v.gen = Number(e.target.value); lsSet('genealogie-gaps-gen', v.gen); render(++S().workspaceToken); });
+        ws.querySelector('[data-gaps-gen]').addEventListener('change', e => { v.gen = Number(e.target.value); v.limit = 600; lsSet('genealogie-gaps-gen', v.gen); render(++S().workspaceToken); });
+        ws.querySelector('[data-gaps-pick]').addEventListener('click', async () => {
+            const P = window.LCNDA_PICKER || A().picker; if (!P?.openPicker) return;
+            const it = await P.openPicker({kind: 'person', title: i18n('Que manque-t-il ? Pour qui ?'), allowCreate: false});
+            if (!it || !(Number(it.id) > 0)) return;
+            setPerson(Number(it.id) === Number(d.default_root_id) ? 0 : it.id, it.title || it.name || ''); render(++S().workspaceToken);
+        });
+        ws.querySelector('[data-gaps-reset]')?.addEventListener('click', () => { setPerson(0, ''); render(++S().workspaceToken); });
+        ws.querySelector('[data-gaps-more]')?.addEventListener('click', () => { v.limit += 600; render(++S().workspaceToken); });
         ws.querySelector('[data-gaps-group]').addEventListener('change', e => { v.group = e.target.value; lsSet('genealogie-gaps-group', v.group); draw(); });
         let tm = 0; ws.querySelector('[data-gaps-q]').addEventListener('input', e => { clearTimeout(tm); tm = setTimeout(() => { v.q = e.target.value; draw(); }, 200); });
         ws.querySelectorAll('[data-gaps-kind]').forEach(c => c.addEventListener('change', () => { v.off = [...ws.querySelectorAll('[data-gaps-kind]')].filter(x => !x.checked).map(x => x.dataset.gapsKind); draw(); }));
@@ -134,11 +165,15 @@
                 await api('save_archive_digest', {}, {method: 'POST', body: {id: 0, place_id: it.place_id || 0, city_name: it.place || '', department: it.archive?.department || '', archive_service: it.archive?.label || '', year_text: years(it), record_type: it.record_type || 'autre', status: 'todo',
                     searched: `${KINDS[it.kind]?.[1] || it.what} de ${it.name} (Sosa ${it.sosa}) — ${it.why}`, notes}});
                 it.digested = [...(it.digested || []), {year_text: years(it), status: 'todo'}]; b.textContent = '✓ Ajouté'; toast('Ajouté au suivi : Recherche → Dépouillement d’archive.');
-                const art = b.closest('[data-gap-i]'); art.outerHTML = row(it, {noPerson: v.group === 'person', noArchive: v.group === 'archives'});
+                const art = b.closest('[data-gap-i]'); art.outerHTML = row(it, {noPerson: true, noArchive: v.group === 'archives'});
             } catch (err) { b.disabled = false; toast(err.message, 'error'); }
         });
     }
     ext.researchGaps = render;
+    ext.researchGapsFor = openFor;
+    // 🔍 la fiche, menu ⋯ : « Que manque-t-il pour elle / lui ? »
+    (ext.personMoreItems = ext.personMoreItems || []).push(detail => { const p = detail?.person; if (!p?.id || p.kind === 'animal') return null;
+        return {key: 'que-manque', icon: '🔍', label: i18n(p.gender === 'male' ? 'Que manque-t-il pour lui ?' : 'Que manque-t-il pour elle ?'), run: () => openFor(Number(p.id), A().personName?.(p) || `${p.first_name || ''} ${p.last_name || ''}`.trim())}; });
     // un foyer SocFace importé : sa ligne « Recensement de … : chercher sur SocFace » s'en va
     window.addEventListener('lcnda:socface-changed', () => { if (S()?.module === 'recherche' && S().researchKind === 'gaps') render(++S().workspaceToken); });
 })();

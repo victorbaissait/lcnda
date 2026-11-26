@@ -127,6 +127,9 @@ function build() {
             const url = [meta.url, meta.source_url, meta.source?.url, meta.licence_url].find(u => typeof u === 'string' && /^https:\/\//.test(u));
             if (url) entry.url = url;
             const title = short(meta.title || meta.what || '', 160); if (title) entry.title = title;
+            // ce que couvre le pack (récap « dont N utiles pour tes lieux », app-donnees-accueil.js) : bbox [O, S, E, N] et/ou pays ISO
+            const bb = meta.bbox || meta.meta?.bbox; if (Array.isArray(bb) && bb.length === 4 && bb.every(Number.isFinite)) entry.bbox = bb.map(x => Math.round(x * 100) / 100);
+            const cc = [].concat(meta.country || meta.meta?.country || []).filter(c => /^[A-Z]{2}$/.test(c)); if (cc.length) entry.country = cc;
         }
         const b = BUILDERS.find(([re]) => re.test(id)); if (b) entry.script = b[1];
         if (WIKIDATA_COUNT[id]) entry.wikidata_count = WIKIDATA_COUNT[id];

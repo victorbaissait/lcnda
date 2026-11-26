@@ -363,6 +363,8 @@
     async function refresh() {
         if (cur.base) cur.d = viewDef(cur.base, cur.st);
         const d = cur.d, st = cur.st, res = ws()?.querySelector('[data-ld-results]'); if (!res) return;
+        const self = st.view !== 'map' && typeof d.paint === 'function'; res.closest('.ld-page')?.classList.toggle('ld-self', self); // 👁 une vue qui se dessine elle-même (views[].paint : 🔎 Un nom → le lieu, noms-lieux-monde.js)
+        if (self) { ++cur.seq; cur.rows = []; cur.total = 0; cur.more = false; paintMore(); try { d.paint(res, pageApi()); } catch (e) { console.error(e); } return; }
         const my = ++cur.seq;
         res.innerHTML = UI().spinner ? UI().spinner(T('On cherche…')) : '…';
         let page;

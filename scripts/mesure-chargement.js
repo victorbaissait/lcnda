@@ -24,6 +24,7 @@ const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? proces
 const RUNS = Number(arg('--runs', 2)) || 2;
 const OUT = arg('--json', '');
 const ELECTRON_CACHE = process.argv.includes('--electron-cache');
+const PROFILE = arg('--profile', ''); // profil processeur de la 1re ouverture à froid (.cpuprofile) + résumé par fichier
 
 async function main() {
     let chromium; try { ({ chromium } = require('playwright')); } catch (_) { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); }
@@ -74,6 +75,7 @@ async function main() {
                 cdp.on('Network.loadingFailed', () => { inflight--; last = Date.now(); });
                 cdp.on('Network.requestServedFromCache', () => { fromCache++; });
                 cdp.on('Network.responseReceived', e => { if (e.response.status === 304) fromCache++; });
+                if (PROFILE && run === 0 && k === 0) { await cdp.send('Profiler.enable'); await cdp.send('Profiler.setSamplingInterval', { interval: 500 }); await cdp.send('Profiler.start'); }
                 const t0 = Date.now();
                 await page.goto(base, { waitUntil: 'commit' });
                 await page.waitForFunction(() => window.__ready > 0, null, { timeout: 120000, polling: 50 });
@@ -92,6 +94,7 @@ async function main() {
                         ready: window.__ready, calm, lt: lt.length, ltTotal: lt.reduce((a, x) => a + x[1], 0), ltMax: lt.reduce((a, x) => Math.max(a, x[1]), 0),
                         scripts: document.scripts.length, css: document.querySelectorAll('link[rel=stylesheet]').length };
                 });
+                if (PROFILE && run === 0 && k === 0) { const { profile } = await cdp.send('Profiler.stop'); fs.writeFileSync(PROFILE, JSON.stringify(profile)); summarizeProfile(profile); }
                 const pm = Object.fromEntries((await cdp.send('Performance.getMetrics')).metrics.map(x => [x.name, x.value]));
                 const row = { run, kind, ...Object.fromEntries(Object.entries(m).map(([a, b]) => [a, Math.round(b)])),
                     scriptMs: Math.round(pm.ScriptDuration * 1000), taskMs: Math.round(pm.TaskDuration * 1000), layoutMs: Math.round((pm.LayoutDuration + pm.RecalcStyleDuration) * 1000),
@@ -117,13 +120,23 @@ async function main() {
     try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (_) { /* gardé */ }
 }
 
+function summarizeProfile(profile) {
+    const byId = new Map(profile.nodes.map(n => [n.id, n])); const self = new Map();
+    const dt = profile.timeDeltas; profile.samples.forEach((id, i) => self.set(id, (self.get(id) || 0) + (dt[i] || 0)));
+    const byUrl = new Map(), byFn = new Map();
+    for (const [id, us] of self) { const cf = byId.get(id).callFrame; const u = (cf.url || '(' + cf.functionName + ')').replace(/^.*\/assets\//, '').replace(/\?.*/, '');
+        byUrl.set(u, (byUrl.get(u) || 0) + us); const f = `${cf.functionName || '(anonyme)'} ${u}:${cf.lineNumber + 1}`; byFn.set(f, (byFn.get(f) || 0) + us); }
+    const top = (m, n) => [...m].sort((a, b) => b[1] - a[1]).slice(0, n).map(([k, v]) => `${String(Math.round(v / 1000)).padStart(6)} ms  ${k}`).join('\n');
+    console.log('Temps propre par fichier :\n' + top(byUrl, 25) + '\nFonctions :\n' + top(byFn, 40));
+}
+
 async function measureNav(page, cdp, results) {
     let inflight = 0, last = Date.now(), reqs = 0;
     cdp.on('Network.requestWillBeSent', () => { inflight++; reqs++; last = Date.now(); });
     cdp.on('Network.loadingFinished', () => { inflight--; last = Date.now(); });
     cdp.on('Network.loadingFailed', () => { inflight--; last = Date.now(); });
     const villageKey = await page.evaluate(async () => (await window.LCNDA_APP.api('villages')).villages?.[0]?.key || '');
-    const personId = await page.evaluate(async () => { const r = await window.LCNDA_APP.api('persons'); const l = r.persons || r.items || r; return (Array.isArray(l) && l[0]?.id) || 1; });
+    const personId = await page.evaluate(async () => { const r = await window.LCNDA_APP.api('people'); const l = r.people || r.persons || r.items || r; return (Array.isArray(l) && l[0]?.id) || 1; });
     const steps = [
         ['fiche personne', `location.hash = '#personnes/${personId}'`, '#workspace .person-sheet, #workspace [data-person-sheet], #workspace .sheet, #workspace h1, #workspace h2'],
         ['fiche village', `(() => { const s = window.LCNDA_APP.state; s.listType = 'villages'; s.hVillage = ${JSON.stringify(villageKey)}; window.LCNDA_APP.setModule('listes'); })()`, '#workspace [data-h-village-edit], #workspace .h-village, #workspace h1, #workspace h2'],

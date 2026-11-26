@@ -310,6 +310,21 @@ if (require.main === module) (async () => {
                     await w('pn_meta', {basket_id: f.basket_id, labels: [['famille', '#1a7f37']], due: '2026-12-15', remind: true, pinned: true}); localStorage.setItem('genealogie-paniers-ouvert', JSON.stringify({t: 'b', id: f.basket_id})); }
                 await A.setModule('paniers'); }); // (l'onglet s'ouvre sans être montré dans le menu : « ⛶ en grand » garde sa fenêtre)
             await p.waitForSelector('[data-pn] .pn-it', {timeout: 20000}); await settle(p); return '[data-pn]'; };
+        // 📊 les écrans des données (app-donnees-accueil.js, app-donnees-plus*.js, heritage-guerres-temps.js) : tous allumés (Réglages → 📊 Données)
+        const dpAll = p => p.evaluate(() => { try { const v = JSON.parse(localStorage.getItem('genealogie-donnees-plus') || '{}') || {}; v.on = Object.fromEntries(Array.from({length: 21}, (_, i) => [i + 1, true])); localStorage.setItem('genealogie-donnees-plus', JSON.stringify(v)); } catch (_) {} window.LCNDA_EXT.donneesPlus?.resetCache?.(); });
+        const recap = async p => { await cxClose(p); await closeDialogs(p); await dpAll(p); await p.evaluate(() => { const H = window.LCNDA_EXT.dataHome._st; H.view = 'recap'; H.q = ''; H.res = null; const A = window.LCNDA_APP; A.state.listType = 'donnees'; A.setModule('listes'); });
+            await p.waitForSelector('[data-dr] [data-dr-body] .dr-trs', {timeout: 30000}); await settle(p); return '#workspace'; };
+        const dpDlg = (fn, sel) => async p => { await cxClose(p); await closeDialogs(p); await dpAll(p); await p.evaluate(fn, ID); await p.waitForSelector(sel, {timeout: 30000}); await settle(p); return 'dialog[open]'; };
+        pages.push(['📊 Récap des données', recap]);
+        pages.push(['📊 ⚙ Organiser le récap', async p => { await recap(p); await p.click('[data-dp-org]'); await p.waitForSelector('.dp-org-dlg [data-dp-row]'); await settle(p); return 'dialog[open]'; }]);
+        pages.push(['Réglages → 📊 Données', async p => { await dpAll(p); return go.settings('donnees_plus')(p); }]);
+        pages.push(['📜 Crédits et licences', dpDlg(() => window.LCNDA_EXT.donneesPlusOutils.credits(), 'dialog[open] [data-dp-credt]')]);
+        pages.push(['⚖️ Comparer', dpDlg(() => window.LCNDA_EXT.donneesPlusOutils.compare(), 'dialog[open] [data-dp-c="0"] input')]);
+        pages.push(['🗺 Tout autour d’un lieu', dpDlg(() => window.LCNDA_EXT.donneesPlusOutils.around(), 'dialog[open] [data-dp-ap] input')]);
+        pages.push(['📄 Livret (aperçu)', dpDlg(I => window.LCNDA_EXT.donneesPlusOutils.booklet(I.jean), 'dialog[open] [data-dp-bprint]')]);
+        pages.push(['⚔️ Batailles ▶ Dans le temps', async p => { await cxClose(p); await closeDialogs(p); await go.liste('data_ha_batailles')(p);
+            if (await p.$('[data-ld-page="ha_batailles"] [data-gt-on]')) { if (await p.getAttribute('[data-gt-on]', 'aria-pressed') !== 'true') await p.click('[data-gt-on]'); await p.waitForSelector('[data-gt-stage] canvas', {timeout: 60000}); await settle(p); }
+            return '#workspace'; }]);
         pages.push(['🧺 L’onglet Paniers (un panier ouvert)', pnOpen]);
         pages.push(['🧺 L’onglet Paniers (la recherche qui crée un panier)', async p => { await pnOpen(p); await p.click('[data-pn-a="search"]'); await p.fill('[data-pn-q]', 'les naissances de la famille MAZAUD à Tulle entre 1780 et 1800'); await p.keyboard.press('Enter');
             await p.waitForSelector('[data-pn] .pn-und', {timeout: 30000}); await settle(p); return '[data-pn]'; }]);

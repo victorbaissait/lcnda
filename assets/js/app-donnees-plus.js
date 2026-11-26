@@ -608,8 +608,7 @@
     async function todoExtras(todo) {
         const ul = todo.querySelector('[data-dr-todo]'); if (!ul) return;
         const add = [];
-        const prev = seen(), newTh = prev?.themes ? (TH()?.themeList?.() || []).filter(t => !prev.themes.includes(t.id)) : [];
-        newTh.forEach(t => add.push(`<li><span>✨ ${esc(T('Nouveau : {t} ({n} listes)', {t: `${t.icon} ${T(t.label)}`, n: (TH().index().by.get(t.id) || []).length}))}</span><button type="button" class="dr-link" data-dp-newgo="theme:${esc(t.id)}">${esc(T('voir'))}</button></li>`));
+        // ✨ « Nouveau : thème » : écrit par le récap lui-même (app-donnees-accueil.js newThemes), même sans le bloc 🆕
         const offN = FEATS.filter(f => !on(f.n)).length;
         if (offN && readLS(K_OFFER, '') !== '1') add.push(`<li class="dp-offer"><span>🧩 ${esc(offN > 1 ? T('{n} ajouts éteints : les voir', {n: offN}) : T('1 ajout éteint : le voir'))}</span><span><button type="button" class="dr-link" data-dp-offer>${esc(T('voir'))}</button> <button type="button" class="dp-x" data-dp-offer-x aria-label="${esc(T('Ne plus proposer'))}" title="${esc(T('Ne plus proposer'))}">×</button></span></li>`);
         if (!add.length) return;

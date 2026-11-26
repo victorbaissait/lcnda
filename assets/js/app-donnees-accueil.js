@@ -178,13 +178,40 @@
         fillStats(page); fillHighlights(page);
         try { ext.dataPlus?.recap?.(page, body); } catch (e) { console.error(e); } // ⭐ 🕘 🆕 💾 🕳 💽, « ⚙ Organiser le récap » (app-donnees-plus.js)
     }
+    /* « dont N utiles pour tes lieux » : seulement quand la liste (d.cover) ou son pack (sommaire : bbox [O, S, E, N] ou country) dit
+     * ce qu'il couvre ; sinon on ne compte pas (on ne devine pas). Les lieux de la famille : app-listes-famille.js (lat, lon). */
+    const COUNTRY_BOX = {FR: [-5.2, 41.3, 9.6, 51.1], BE: [2.5, 49.5, 6.4, 51.5], CH: [5.9, 45.8, 10.5, 47.8], NL: [3.3, 50.7, 7.3, 53.6], DE: [5.8, 47.2, 15.1, 55.1], ES: [-9.4, 35.9, 4.4, 43.8], IT: [6.6, 36.6, 18.6, 47.1],
+        GB: [-8.7, 49.8, 1.8, 60.9], IE: [-10.5, 51.4, -5.9, 55.4], NO: [4.5, 57.9, 31.2, 71.2], SE: [10.9, 55.3, 24.2, 69.1], DK: [8, 54.5, 15.2, 57.8], FI: [20.5, 59.7, 31.6, 70.1], IS: [-24.6, 63.3, -13.4, 66.6],
+        US: [-125, 24.4, -66.9, 49.4], CA: [-141, 41.7, -52.6, 83.1], AU: [112.9, -43.7, 153.7, -10.6], NZ: [166.4, -47.3, 178.6, -34.4], PT: [-9.6, 36.9, -6.1, 42.2], PL: [14.1, 49, 24.2, 54.9]};
+    const boxOk = b => Array.isArray(b) && b.length === 4 && b.every(x => Number.isFinite(Number(x)));
+    async function coverOf(d, packs) {
+        const boxes = [], add = c => { if (!c) return; if (boxOk(c.bbox)) boxes.push(c.bbox.map(Number)); [].concat(c.country || []).forEach(k => { const b = COUNTRY_BOX[String(k).toUpperCase()]; if (b) boxes.push(b); }); };
+        add(d.cover);
+        if (!boxes.length && packs?.packs && ext.listesMaj?.packsOfList) { let ids = []; try { ids = await ext.listesMaj.packsOfList(d); } catch (_) {} ids.forEach(id => add(packs.packs.find(p => p.id === id))); }
+        return boxes.length ? boxes : null;
+    }
+    async function coversFamily(boxes) {
+        const LF = ext.listesFamille; if (!LF) return false; try { await LF.ready(); } catch (_) { return false; }
+        const pl = LF.data?.()?.places || [];
+        return pl.some(([lat, lon]) => boxes.some(([w, s, e, n]) => lon >= w && lon <= e && lat >= s && lat <= n));
+    }
+    /* ✨ « Nouveau : thème » : la date où chaque thème est apparu sur cet ordinateur (la première fois : tous comptent comme déjà là) */
+    const K_THSEEN = 'genealogie-donnees-themes-vus', NEW_DAYS = 30;
+    function newThemes() {
+        const tl = (TH()?.themeList?.() || []).filter(t => t.id !== 'aranger'); if (!tl.length) return [];
+        let seen = null; try { seen = JSON.parse(readLS(K_THSEEN, 'null')); } catch (_) {}
+        const first = !seen || typeof seen !== 'object', now = Date.now(); seen = first ? {} : seen; let dirty = first;
+        tl.forEach(t => { if (!(t.id in seen)) { seen[t.id] = first ? 0 : now; dirty = true; } });
+        if (dirty) writeLS(K_THSEEN, JSON.stringify(seen));
+        return tl.filter(t => Number(seen[t.id]) > 0 && now - Number(seen[t.id]) < NEW_DAYS * 864e5).map(t => ({...t, at: Number(seen[t.id])}));
+    }
     /** les comptes par thème : listes installées, lignes (les paquets livrés le disent), ⤓, ↻ — l'état de Réglages → 🗂 Données */
     let statsP = null, statsAt = 0;
     function stats() {
         if (statsP && Date.now() - statsAt < 300000) return statsP;
         statsAt = Date.now();
         statsP = (async () => {
-            const I = TH()?.index?.(), out = {byTheme: {}, total: 0, inst: 0, missing: 0, update: 0};
+            const I = TH()?.index?.(), out = {byTheme: {}, total: 0, inst: 0, missing: 0, update: 0, coverKnown: 0, useful: []};
             let packs = null; try { packs = await ext.listesMaj?.status?.(); } catch (_) {}
             const rowsOfPack = new Map((packs?.packs || []).map(p => [p.id, Number(p.rows) || 0]));
             const upd = new Set(); try { (ext.listesMaj?.rows?.() || []).filter(r => r.state === 'update').forEach(r => upd.add(r.k)); } catch (_) {}
@@ -192,6 +219,7 @@
                 const s = out.byTheme[id] = {n: 0, inst: 0, rows: 0, missing: 0, update: 0};
                 await Promise.all(ds.filter(d => !d.link && !d.merged).map(async d => {
                     s.n++; const ok = await E().isInstalled?.(d); if (ok) s.inst++; else s.missing++;
+                    if (!ok) { const c = await coverOf(d, packs); if (c) { out.coverKnown++; if (await coversFamily(c)) out.useful.push(T(d.label)); } } // « dont N utiles pour tes lieux »
                     let ps = []; try { ps = ok && ext.listesMaj?.packsOfList ? await ext.listesMaj.packsOfList(d) : []; } catch (_) {}
                     ps.forEach(p => { s.rows += rowsOfPack.get(p) || 0; if (upd.has(p)) s.update++; });
                 }));
@@ -215,9 +243,11 @@
             const last = Number(readLS('genealogie-donnees-maj-dernier', '0')) || 0;
             const items = [];
             if (S.missing) items.push(`<li><span>⤓ ${esc(S.missing > 1 ? T('{n} listes pas encore installées', {n: nf(S.missing)}) : T('1 liste pas encore installée'))}</span><button type="button" class="dr-link" data-dr-todo-install>${esc(T('voir'))}</button></li>`);
+            if (S.missing && S.coverKnown && S.useful.length) items.push(`<li class="dr-todo-sub"><small>${esc(T('dont {n} utiles pour tes lieux : {l}', {n: nf(S.useful.length), l: S.useful.slice(0, 3).join(', ') + (S.useful.length > 3 ? '…' : '')}))}</small></li>`);
             if (S.update) items.push(`<li><span>↻ ${esc(S.update > 1 ? T('{n} listes ont une version plus récente', {n: nf(S.update)}) : T('1 liste a une version plus récente'))}</span><button type="button" class="dr-link" data-dr-todo-update>${esc(T('mettre à jour'))}</button></li>`);
             items.push(`<li class="muted"><small>${esc(last ? T('Vérifié le {d}, sur ton clic.', {d: new Date(last).toLocaleDateString('fr-FR', {day: 'numeric', month: 'short'})}) : T('Pas encore vérifié s’il existe plus récent : Réglages → 🗂 Données → ↻ Vérifier.'))}</small></li>`);
             if (!S.missing && !S.update) items.unshift(`<li>✓ ${esc(T('Toutes les listes sont installées.'))}</li>`);
+            newThemes().forEach(t => items.push(`<li data-dr-newth="${esc(t.id)}"><span>✨ ${esc(T('Nouveau : {t} ({n} listes)', {t: `${t.icon} ${T(t.label)}`, n: nf((TH()?.index?.().by.get(t.id) || []).filter(d => !d.link && !d.merged).length)}))}</span><button type="button" class="dr-link" data-dr-theme="${esc(t.id)}">${esc(new Date(t.at).toLocaleDateString('fr-FR', {day: 'numeric', month: 'short'}))}</button></li>`));
             todo.innerHTML = items.join('');
         }
     }
@@ -438,6 +468,7 @@
             ${missing}<div data-dr-rows>${list}</div>${foot}${selBar}<p class="dr-lock">${esc(lock)}</p></div>`;
         bindAnswer(page);
         try { ext.dataPlus?.answer?.(page, ST); } catch (e) { console.error(e); } // 💾 Garder cette question (app-donnees-plus.js)
+        try { ext.nomsLieuxMonde?.answer?.(page, ST.q); } catch (e) { console.error(e); } // 🗺 « Presbourg » : un ancien nom de lieu → le lieu d'aujourd'hui (noms-lieux-monde.js)
     }
     function suggestions(u) {
         const F = LF()?.data?.(), pl = (F?.places || [])[0]?.name || 'Tulle', who = (F?.people || []).find(p => p.b);

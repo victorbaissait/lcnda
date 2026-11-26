@@ -93,7 +93,7 @@ $row = $pdo->query('SELECT body, refs FROM cx_shares WHERE id=' . $s['share_id']
 $bad = 0; try { pn_share_send($pdo, ['basket_id' => 1, 'account_id' => 99]); } catch (LcndaBadInput $e) { $bad = 1; }
 echo json_encode(['s' => $s, 's2' => $s2['share_id'], 'body' => json_decode($row['body'], true), 'refs' => json_decode($row['refs'], true), 'bad' => $bad]);`);
         const titles = ids.body.items.map(i => i.title);
-        assert.deepEqual(titles, ['Moulin de Treignac', 'Lien piégé <script>', 'Jean MAZAUD']);
+        assert.deepEqual(titles, ['Moulin de Treignac', 'Lien piégé', 'Jean MAZAUD']);
         assert.equal(ids.body.items[1].url, undefined, 'javascript: jamais');
         assert.equal(ids.body.items[0].url, 'https://example.org/moulins');
         assert.equal(ids.s.counts.notes, 1, 'la note cochée ne part pas');
@@ -109,16 +109,15 @@ echo json_encode(['s' => $s, 's2' => $s2['share_id'], 'body' => json_decode($row
         const r = php(String.raw`
 $a = pf_guest($pdo, $acc(1)); $h = pf_guest($pdo, $acc(2)); $o = pf_guest($pdo, $acc(3));
 $pdo->exec("UPDATE persons SET living_status='living' WHERE id=1");
-$after = pf_guest($pdo, $acc(1));
-$pdo->exec("UPDATE persons SET living_status='deceased' WHERE id=1");
-echo json_encode(['a' => $a, 'h' => $h, 'o' => $o, 'after' => $after]);`);
+echo json_encode(['a' => $a, 'h' => $h, 'o' => $o]);`);
+        r.after = php(String.raw`$x = pf_guest($pdo, $acc(1)); $pdo->exec("UPDATE persons SET living_status='deceased' WHERE id=1"); echo json_encode($x);`); // une nouvelle requête (fc_hidden est gardé le temps d'une requête)
         assert.equal(r.a.baskets.length, 1); assert.equal(r.a.baskets[0].name, 'Mariage 1813'); assert.equal(r.a.baskets[0].new, true);
-        assert.deepEqual(r.a.baskets[0].items.map(i => i.title), ['Moulin de Treignac', 'Lien piégé <script>', 'Jean MAZAUD']);
+        assert.deepEqual(r.a.baskets[0].items.map(i => i.title), ['Moulin de Treignac', 'Lien piégé', 'Jean MAZAUD']);
         assert.ok(!('refs' in r.a.baskets[0]), 'les fiches d’origine ne sortent jamais');
-        assert.deepEqual(r.h.baskets[0].items.map(i => i.title), ['Moulin de Treignac', 'Lien piégé <script>'], 'Jean hors de la branche de Henri');
+        assert.deepEqual(r.h.baskets[0].items.map(i => i.title), ['Moulin de Treignac', 'Lien piégé'], 'Jean hors de la branche de Henri');
         assert.equal(r.h.baskets[0].hidden, 1);
         assert.equal(r.o.baskets.length, 0, 'un autre compte ne voit pas ce panier');
-        assert.deepEqual(r.after.baskets[0].items.map(i => i.title), ['Moulin de Treignac', 'Lien piégé <script>'], 'Jean devenu vivant : retiré à la lecture');
+        assert.deepEqual(r.after.baskets[0].items.map(i => i.title), ['Moulin de Treignac', 'Lien piégé'], 'Jean devenu vivant : retiré à la lecture');
         assert.ok(Array.isArray(r.a.lists), 'les 📊 listes dans la même réponse');
     });
 

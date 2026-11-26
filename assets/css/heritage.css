@@ -3674,6 +3674,18 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-gap-where{margin:6px 0 0 6px;padding-left:16px;font-size:.9em}.h-gap-where li{margin:2px 0}
 .h-gap-foot{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px;font-size:.85em}.h-gap-links{margin-left:auto}.h-gap-dig{background:#fff4d6;border-radius:5px;padding:0 6px}.h-gap-dig.ok{background:#dff5e3}
 @media print{body.h-gaps-printing .sidebar,body.h-gaps-printing header.app-header,body.h-gaps-printing .h-gaps-bar,body.h-gaps-printing .h-gaps-kinds,body.h-gaps-printing .page-actions,body.h-gaps-printing .h-gap-act,body.h-gaps-printing .h-gap-links{display:none!important}body.h-gaps-printing .h-gap{break-inside:avoid;border-color:#999}}
+/* 👤 « Pour qui ? » et 🗂 un cadre par personne (heritage-research-gaps.js) */
+.h-gaps-who{display:flex;flex-direction:column;gap:3px;font-size:.85em;min-width:0}.h-gaps-who-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.h-gaps-pick{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-gaps-more{margin:14px 0;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.h-gap-card{background:var(--card-bg,#fff);border:var(--line,1px solid #d0d4dc);box-shadow:var(--shadow-small,none);border-radius:10px;padding:14px 18px 6px;margin:0 0 16px;min-width:0}
+.h-gap-card-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;padding-bottom:10px;border-bottom:1px solid var(--line-color,#d6d6d6)}
+.h-gap-card-who{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;min-width:0}.h-gap-card-name{font-size:1.08em;font-weight:700}
+.h-gap-card-count{font-size:.85em;color:var(--muted,#6b7280);background:var(--soft,#f2f3f6);border-radius:999px;padding:2px 10px;white-space:nowrap}
+:root .h-gaps .h-gap-card .h-gap{border:0;border-top:1px solid var(--line-color,#d6d6d6);border-radius:0;box-shadow:none;background:transparent;margin:0;padding:12px 2px}
+:root .h-gaps .h-gap-card .h-gap:first-child{border-top:0}
+.h-gap-card .h-gap-head{flex-wrap:wrap;align-items:center}.h-gap-card .h-gap-act{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;margin-left:auto}
+@media (max-width:640px){.h-gap-card{padding:12px 14px 4px}.h-gap-card .h-gap-act{flex-basis:100%;justify-content:flex-start;margin-left:0}.h-gap-card .h-gap-who{flex-basis:calc(100% - 40px)}.h-gaps-who{flex-basis:100%}}
+@media print{body.h-gaps-printing .h-gap-card{box-shadow:none;border:1px solid #999;break-inside:avoid-page}body.h-gaps-printing .h-gaps-who-row .link-button,body.h-gaps-printing .h-gaps-more{display:none!important}}
 /* 🧬 Groupes automatiques et placement d'un cousin */
 .h-dna-auto{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:16px;align-items:start}.h-dna-matrix{overflow:auto;max-width:100%;background:var(--panel,#fff);border:1px solid var(--line,#d0d4dc);border-radius:10px;padding:8px}
 .h-dna-cl-list{display:flex;flex-direction:column;gap:10px}.h-dna-cl{padding:12px 14px;border-left:6px solid var(--c)!important}.h-dna-cl h3{margin:0 0 6px;font-size:1em}.h-dna-cl p{margin:4px 0}
@@ -5832,6 +5844,7 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 :root[data-theme="dark"] .h-gap-td span{background:#111f39;color:#a8bee6}
 :root[data-theme="dark"] .h-gap-dig{background:#423513}
 :root[data-theme="dark"] .h-gap-dig.ok{background:#1e3723}
+:root[data-theme="dark"] .h-gap-card-count{background:#2a2a2a;color:#bbb}
 :root[data-theme="dark"] .h-dna-warn{background:#423513}
 :root[data-theme="dark"] .h-dna-ok{background:#1e3723}
 :root[data-theme="dark"] .h-faces-progress span{background:#182842}
