@@ -70,7 +70,7 @@
 .enq-kempty { padding: 10px 4px; text-align: center; }
 [data-enq-kcol="dead"] .enq-kcard b { text-decoration: line-through; color: var(--muted, #667); }
 
-/* ── 🧭 avancement des battues ── */
+/* ── 🔦 avancement des battues ── */
 .battue-progress-panel { border: 2px solid var(--ink, #222); background: var(--card, #fff); padding: 10px 14px; margin: 14px 0 0; }
 .battue-progress-bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 20px; margin-top: 6px; }
 .battue-pline { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; }

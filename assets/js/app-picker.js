@@ -22,7 +22,7 @@
         source: {sym: '📚', add: '＋ Ajouter une source…', one: 'source', fem: true, none: 'Aucune source', label: '📚 Sources'},
         media: {sym: '🖼', add: '＋ Ajouter un média…', one: 'média', none: 'Aucun média', label: '🖼 Médias'},
         investigation: {sym: '🔍', add: '＋ Ajouter une enquête…', one: 'enquête', fem: true, none: 'Aucune enquête', label: '🔍 Enquêtes'},
-        battue: {sym: '🧭', add: '＋ Ajouter une battue…', one: 'battue', fem: true, none: 'Aucune battue', label: '🧭 Battues'},
+        battue: {sym: '🔦', add: '＋ Ajouter une battue…', one: 'battue', fem: true, none: 'Aucune battue', label: '🔦 Battues'},
         label: {sym: '🏷', add: '＋ Ajouter une étiquette…', one: 'étiquette', fem: true, none: 'Aucune étiquette', label: '🏷 Étiquettes'},
         house: {sym: '🏠', add: '＋ Ajouter une maison…', one: 'maison', fem: true, none: 'Aucune maison', label: '🏠 Maisons'},
         periodical: {sym: '📰', add: '＋ Ajouter une revue…', one: 'revue', fem: true, none: 'Aucune revue', label: '📰 Revues'},

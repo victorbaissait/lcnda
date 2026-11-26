@@ -24,7 +24,7 @@
     const uid = () => Math.random().toString(36).slice(2, 10);
     const clone = v => JSON.parse(JSON.stringify(v));
     const OWNERS = {'': 'Libre', investigation: 'Enquête', battue: 'Battue', atelier_project: 'Atelier'};
-    const OWNER_ICONS = {'': '🧩', investigation: '🔍', battue: '🧭', atelier_project: '📚'};
+    const OWNER_ICONS = {'': '🧩', investigation: '🔍', battue: '🔦', atelier_project: '📚'};
     const COLORS = ['#111111', '#555555', '#d0021b', '#f5a623', '#f8e71c', '#7ed321', '#2a7de1', '#9013fe', '#ff6fb5', '#ffffff'];
     const NOTE_COLORS = ['#fff3a3', '#ffd6a5', '#caffbf', '#bde0fe', '#e4c1f9', '#ffc6d9', '#f1f1f1'];
     const SHAPES = [['rect', '▭ Rectangle'], ['round', '▢ Arrondi'], ['ellipse', '◯ Ovale'], ['triangle', '△ Triangle'], ['diamond', '◇ Losange'], ['star', '☆ Étoile'], ['hexagon', '⬡ Hexagone'], ['bubble', '💬 Bulle'], ['cloud', '☁ Nuage']].map(([k, l]) => [k, i18n(l)]);
@@ -1914,7 +1914,7 @@
         const showLock = () => { const bt = root.querySelector('[data-bd-lockall]'); bt.textContent = boardLocked ? '🔒' : '🔓'; bt.classList.toggle('is-on', boardLocked); bt.title = i18n(boardLocked ? 'Tableau verrouillé : clic pour le déverrouiller' : 'Verrouiller tout le tableau'); root.classList.toggle('is-locked', boardLocked); status(boardLocked ? '🔒 Verrouillé' : 'Enregistré ✓'); if (boardLocked) setTool('select'); };
         root.querySelector('[data-bd-lockall]').addEventListener('click', () => { boardLocked = !boardLocked; showLock(); save(); toast(i18n(boardLocked ? 'Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge.' : 'Tableau déverrouillé.')); });
         // ── associé à… (une fiche, une enquête, une partie d'enquête, une battue, un projet, un recueil, un autre tableau) ──
-        const LINK_KINDS = Object.fromEntries(Object.entries({person: ['👤', 'Une personne'], investigation: ['🔎', 'Une enquête'], battue: ['🧭', 'Une battue'], atelier_project: ['🛠', 'Un projet de l’Atelier'], recueil: ['📚', 'Un recueil'], place: ['📍', 'Un lieu (sa commune)'], media: ['🖼', 'Un média (photo, acte, son…)'], label: ['🏷', 'Une étiquette'], family: ['💑', 'Une famille (un couple)'], event: ['📅', 'Un événement'], pet: ['🐾', 'Un animal'], board: ['🧩', 'Un autre tableau']}).map(([k, [i, l]]) => [k, [i, i18n(l)]]));
+        const LINK_KINDS = Object.fromEntries(Object.entries({person: ['👤', 'Une personne'], investigation: ['🔎', 'Une enquête'], battue: ['🔦', 'Une battue'], atelier_project: ['🛠', 'Un projet de l’Atelier'], recueil: ['📚', 'Un recueil'], place: ['📍', 'Un lieu (sa commune)'], media: ['🖼', 'Un média (photo, acte, son…)'], label: ['🏷', 'Une étiquette'], family: ['💑', 'Une famille (un couple)'], event: ['📅', 'Un événement'], pet: ['🐾', 'Un animal'], board: ['🧩', 'Un autre tableau']}).map(([k, [i, l]]) => [k, [i, i18n(l)]]));
         // ces sortes se choisissent avec le menu de choix unique ; familles et événements gardent leur recherche
         const PICK_KINDS = ['person', 'investigation', 'battue', 'place', 'media', 'label'];
         const SEARCH_KINDS = {family: async q => (await api('board_family_search', {q})).families || [],
@@ -2749,7 +2749,7 @@
         const fold = t => String(t ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
         const open = r => kind === 'boards_list' ? `data-bd-go="${r.id}"` : kind === 'investigations_list' ? `data-bd-inv="${r.id}"` : kind === 'battues_list' ? `data-bd-bat="${r.id}"` : `data-bd-ate="${r.id}"`;
         const strip = h => String(h ?? '').replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
-        const icon = r => kind === 'boards_list' ? (r.thumb ? `<img src="${esc(r.thumb)}" alt="">` : `<span class="ui-card-ico">${esc(r.icon || '🧩')}</span>`) : `<span class="ui-card-ico">${esc(kind === 'atelier_list' ? (r.icon || '📚') : kind === 'battues_list' ? '🧭' : '🔍')}</span>`;
+        const icon = r => kind === 'boards_list' ? (r.thumb ? `<img src="${esc(r.thumb)}" alt="">` : `<span class="ui-card-ico">${esc(r.icon || '🧩')}</span>`) : `<span class="ui-card-ico">${esc(kind === 'atelier_list' ? (r.icon || '📚') : kind === 'battues_list' ? '🔦' : '🔍')}</span>`;
         const dateCol = colsFr.findIndex(c => /^Modifi|^Échéance/.test(c[0]));
         const item = r => ({thumb: icon(r), name: r.title || i18n('Sans titre'), open: open(r), lines: [cols.slice(1).map((c, k) => { const t = k + 1 === dateCol ? '' : strip(c[1](r)); return t && /^\d/.test(t) ? i18n('{what} : {value}', {what: c[0], value: t}) : t; }).filter(Boolean).join(' · ')], date: dateCol >= 0 && strip(cols[dateCol][1](r)) ? i18n('{what} : {value}', {what: cols[dateCol][0], value: strip(cols[dateCol][1](r))}) : ''});
         const num = i => all.some(r => typeof cols[i][2](r) === 'number');
@@ -2760,7 +2760,7 @@
         const old = st.bdListSort[kind];
         const ws = A().$('#workspace');
         // K5 : l'en-tête commun (icône du menu, une phrase d'aide) ; le nombre va dans la barre H10
-        const HEAD = {boards_list: ['🧩', 'Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres.'], atelier_list: ['📚', 'Les projets de l’Atelier de recherche, avec leur état et leur échéance.'], investigations_list: ['🔍', 'Toutes les enquêtes, avec leurs pistes et leurs tableaux.'], battues_list: ['🧭', 'Toutes les battues, commune par commune.']}[kind] || ['📋', ''];
+        const HEAD = {boards_list: ['🧩', 'Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres.'], atelier_list: ['📚', 'Les projets de l’Atelier de recherche, avec leur état et leur échéance.'], investigations_list: ['🔍', 'Toutes les enquêtes, avec leurs pistes et leurs tableaux.'], battues_list: ['🔦', 'Toutes les battues, commune par commune.']}[kind] || ['📋', ''];
         const NOUN = {boards_list: ['tableau', 'tableaux'], atelier_list: ['projet', 'projets'], investigations_list: ['enquête', 'enquêtes'], battues_list: ['battue', 'battues']}[kind] || ['ligne', 'lignes'];
         ws.innerHTML = `<section class="page">${UI.pageHeader({icon: HEAD[0], title: i18n(title), help: HEAD[1] ? i18n('{help} Un clic sur un titre l’ouvre ; un clic sur une colonne trie.', {help: i18n(HEAD[1])}) : i18n('Un clic sur un titre l’ouvre ; un clic sur une colonne trie.')})}
             ${all.length ? '<div data-bd-bar></div>' : ''}<div data-bd-body></div></section>`;

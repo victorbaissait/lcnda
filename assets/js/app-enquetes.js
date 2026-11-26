@@ -8,7 +8,7 @@
     /* ═════════ Audit des onglets (docs/design/audit-onglets.html) : barre commune H10 (R2), « ⋯ » et clic droit (R11), ↶ Annuler (R7),
      * mode consultation (R6), ⤓ Exporter ▾ et 🖨 Imprimer (R4), mots d'état (R9), attente (R10), chercher dans la page (R13) ;
      * ajouts : 🧩 pistes en colonnes, ✅ conclure l'enquête, 🚫 recherches négatives, 🗂 modèles d'enquête, 🖨 rapport d'enquête,
-     * ⏱ temps passé, 🧭 avancement des battues sur la carte. Serveur : lib/enquetes_plus.php. Essai : tests/test-audit-enquetes.js */
+     * ⏱ temps passé, 🔦 avancement des battues sur la carte. Serveur : lib/enquetes_plus.php. Essai : tests/test-audit-enquetes.js */
     const UI=()=>window.LCNDA_UI||{};
     const kiosk=()=>document.body.classList.contains('is-kiosk'); // R6 : en consultation, rien à modifier
     const postR=(action,body)=>api(action,{},{method:'POST',body}).then(r=>r&&r.result!==undefined?r.result:r);
@@ -353,7 +353,7 @@
     }
     function renderInvestigationsSidebar(content,footer){
         const isBattue=state.enquetesTab==='battue',isAtelier=state.enquetesTab==='atelier';
-        const tabs=`<div class="segmented enquetes-tab-toggle">${[['enquetes','🔍','Enquêtes'],['battue','🧭','Battue'],['atelier','📚','Atelier'],['tableaux','🧩','Tableaux']].map(([k,icon,label])=>`<button class="${state.enquetesTab===k||(k==='enquetes'&&!['battue','atelier','tableaux'].includes(state.enquetesTab))?'is-active ':''}enquetes-tab-btn" data-enquetes-tab="${k}"><span class="enquetes-tab-icon" aria-hidden="true">${icon}</span><span>${label}</span></button>`).join('')}</div>`;
+        const tabs=`<div class="segmented enquetes-tab-toggle">${[['enquetes','🔍','Enquêtes'],['battue','🔦','Battue'],['atelier','📚','Atelier'],['tableaux','🧩','Tableaux']].map(([k,icon,label])=>`<button class="${state.enquetesTab===k||(k==='enquetes'&&!['battue','atelier','tableaux'].includes(state.enquetesTab))?'is-active ':''}enquetes-tab-btn" data-enquetes-tab="${k}"><span class="enquetes-tab-icon" aria-hidden="true">${icon}</span><span>${label}</span></button>`).join('')}</div>`;
         if(state.enquetesTab==='tableaux'&&window.LCNDA_EXT?.boardsSidebar){
             window.LCNDA_EXT.boardsSidebar(content,footer,tabs,sidebarSignal());
             content.addEventListener('click',event=>{const tab=event.target.closest('[data-enquetes-tab]');if(tab){state.enquetesTab=tab.dataset.enquetesTab;state.currentInvestigationId=0;state.currentBattueId=0;state.currentBoardId=0;persistUiState();renderSidebar();renderInvestigations();}},{signal:sidebarSignal()});

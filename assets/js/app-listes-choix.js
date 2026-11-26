@@ -163,9 +163,8 @@
         const items = rows.map(r => itemOf(d, st, r));
         if (kind === 'basket') {
             const cx = CX(); if (!cx?.take) return toast(T('Le panier n’est pas chargé.'), 'error');
-            const bid = cx.chooseBasket ? await cx.chooseBasket(anchor) : 0; if (bid === null) return;
             const its = items.length <= 500 ? items : [blockOf(d, items, api.table2d(rows)).items[0]]; // une seule écriture : au-delà de 500, un ensemble
-            return cx.take(its, {basketId: bid || null});
+            return cx.take(its, {anchor, ask: 'multi'}); // plusieurs lignes et plusieurs paniers : « Dans quel panier ? » ; une seule : le panier en cours, « Changer ▾ »
         }
         if (kind === 'insert') {
             const t2 = api.table2d(rows), b = blockOf(d, items, t2);

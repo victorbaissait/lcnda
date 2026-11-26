@@ -32,6 +32,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const ALL = process.env.ECRASEE_ALL === '1';
 const ONLY = process.env.ECRASEE_ONLY ? new RegExp(process.env.ECRASEE_ONLY, 'i') : null;
 const SHOTS = process.env.ECRASEE_SHOTS || fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-ecrasee-shots-'));
+fs.mkdirSync(SHOTS, {recursive: true});
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAgAAAAGCAIAAABxZ0isAAAAEUlEQVR4nGM4saoCK2IYSAkA+7xb4bzwD28AAAAASUVORK5CYII=', 'base64');
 
 /* ═════════ Le détecteur (dans la page) ═════════ */
@@ -39,12 +40,17 @@ function squash(opts) {
     const scope = (opts && opts.root && document.querySelector(opts.root)) || document.body;
     const SKIP = '.leaflet-container, .maplibregl-map, svg, canvas, iframe, .ui-toast, .toast, [data-no-squash-check], .CodeMirror, [aria-hidden="true"], script, style, noscript, template, .sr-only, .visually-hidden, select, option, textarea';
     const words = s => (String(s).match(/[\p{L}\p{N}][\p{L}\p{N}'’.-]*/gu) || []).length;
+    const lwords = s => (String(s).match(/[\p{L}\p{N}'’.-]*\p{L}[\p{L}\p{N}'’.-]*/gu) || []).length; // des mots avec des lettres (« 1 2 3 », « 10 55–59 » : des chiffres)
     const vis = el => !el.checkVisibility || el.checkVisibility({checkOpacity: true, checkVisibilityCSS: true});
     const describe = el => { const c = typeof el.className === 'string' ? el.className.trim().split(/\s+/).filter(Boolean).slice(0, 3).join('.') : ''; return el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') + (c ? '.' + c : ''); };
     const pathOf = el => { const p = []; for (let e = el, i = 0; e && e !== document.body && i < 4; e = e.parentElement, i++) p.unshift(describe(e)); return p.join(' > '); };
     const linesOf = node => { const rg = document.createRange(); rg.selectNodeContents(node); const tops = []; for (const r of rg.getClientRects()) { if (r.width < 0.5 || r.height < 0.5) continue; if (!tops.some(t => Math.abs(t - r.top) < r.height * 0.5)) tops.push(r.top); } return tops.length; };
     // un élément tourné, en colonne verticale, ou dans un cadre qui défile de côté (tableau large) : pas jugé
     const odd = el => { for (let e = el; e && e !== document.body; e = e.parentElement) { const s = getComputedStyle(e); if (s.writingMode && !/horizontal/.test(s.writingMode)) return true; if (s.transform && s.transform !== 'none' && /matrix\((?!1, 0, 0, 1)/.test(s.transform)) return true; } return false; };
+    // le texte lisible d'un élément (sans les choix d'une liste déroulante ni ce qui est caché aux lecteurs)
+    const textOf = el => { let t = ''; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); const rg = document.createRange(); for (let x = w.nextNode(); x; x = w.nextNode()) { if (!x.nodeValue.trim() || x.parentElement.closest(SKIP)) continue; rg.selectNodeContents(x); if ([...rg.getClientRects()].some(q => q.width > 0.5 && q.height > 0.5) && vis(x.parentElement)) t += x.nodeValue + ' '; } return t.trim(); };
+    // un tableau partage sa largeur entre ses colonnes (le texte passe à la ligne, c'est voulu) : une case n'est jugée que sous 48 px
+    const inTable = (el, w) => w >= 48 && !!el.closest('td, th, caption');
     const out = []; const seen = new Set();
     const add = (el, kind, why) => {
         const key = kind + '|' + pathOf(el); if (seen.has(key)) return; seen.add(key);
@@ -59,7 +65,7 @@ function squash(opts) {
         if (s.display === 'none' || s.display === 'contents') continue;
         const grid = /grid/.test(s.display) && el.children.length > 1 && r.width > 250;
         if (r.width >= 80 && !grid) continue;
-        const txt = r.width < 80 ? (el.innerText || '').trim() : ''; const n = txt ? words(txt) : 0;
+        const txt = r.width < 80 && !inTable(el, r.width) && !/^(absolute|fixed)$/.test(s.position) ? textOf(el) : ''; const n = txt ? lwords(txt) : 0; // (une case placée à la main — un nœud de diagramme — a sa taille voulue)
         // 1. écrasé : ≥ 3 mots, < 80 px de large, sur plusieurs lignes, dans un parent de plus de 250 px
         const par = el.parentElement;
         if (n >= 3 && r.width < 80 && par && par.getBoundingClientRect().width > 250 && r.height > (parseFloat(s.lineHeight) || (parseFloat(s.fontSize) || 14) * 1.2) * 1.6 + 2 && vis(el) && !odd(el)) {
@@ -70,8 +76,8 @@ function squash(opts) {
             for (const c of el.children) {
                 const cs = getComputedStyle(c); if (cs.position === 'absolute' || cs.position === 'fixed') continue;
                 if (cs.gridColumnStart !== 'auto' || !/auto|^$/.test(cs.gridColumnEnd) && !/^span 1$/.test(cs.gridColumnEnd)) continue;
-                const cr = c.getBoundingClientRect(); const ct = (c.innerText || '').trim();
-                if (cr.width > 0.5 && cr.width < 60 && ct.length >= 20 && words(ct) >= 3 && vis(c) && !c.closest(SKIP) && !odd(c)) add(c, 'colonne étroite', `enfant de grille (grid-column auto) dans ${Math.round(cr.width)} px : « ${ct.slice(0, 30)} »`);
+                const cr = c.getBoundingClientRect(); if (!(cr.width > 0.5 && cr.width < 60)) continue; const ct = textOf(c);
+                if (cr.width > 0.5 && cr.width < 60 && ct.length >= 20 && lwords(ct) >= 3 && vis(c) && !c.closest(SKIP) && !odd(c)) add(c, 'colonne étroite', `enfant de grille (grid-column auto) dans ${Math.round(cr.width)} px : « ${ct.slice(0, 30)} »`);
             }
         }
     }
@@ -80,7 +86,7 @@ function squash(opts) {
     for (let t = tw.nextNode(); t; t = tw.nextNode()) {
         const pe = t.parentElement; if (!pe || pe.closest(SKIP)) continue;
         const n = words(t.nodeValue); if (n >= 6 || n < 1) continue;
-        if (linesOf(t) > 4 && vis(pe) && !odd(pe)) add(pe, 'mot par ligne', `${n} mot(s) sur ${linesOf(t)} lignes dans ${Math.round(pe.getBoundingClientRect().width)} px`);
+        if (linesOf(t) > 4 && !inTable(pe, pe.getBoundingClientRect().width) && vis(pe) && !odd(pe)) add(pe, 'mot par ligne', `${n} mot(s) sur ${linesOf(t)} lignes dans ${Math.round(pe.getBoundingClientRect().width)} px`);
     }
     return out;
 }
@@ -186,6 +192,7 @@ echo json_encode(['ok' => 1, 'start' => $start, 'jeanne' => $jeanne, 'n' => $id]
     for (let i = 0; i < 300; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await sleep(100); } }
     const browser = await chromium.launch();
     const stop = async () => { await browser.close().catch(() => {}); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true}); };
+    for (const sig of ['SIGINT', 'SIGTERM']) process.once(sig, () => { proc.kill(); try { fs.rmSync(tmp, {recursive: true, force: true}); } catch (_) {} process.exit(130); }); // le serveur ne reste pas derrière
     return {ID, base, browser, stop, proc};
 }
 
@@ -211,7 +218,7 @@ async function newPage(browser, base, {width = 1440, dark = false} = {}) {
     const ctx = await browser.newContext({viewport: {width, height: width > 500 ? 900 : 844}});
     await ctx.addInitScript(trackFetches);
     await ctx.addInitScript(dark => { try {
-        localStorage.setItem('genealogie-premier-vu', '1'); localStorage.setItem('genealogie-veille-deces', '1');
+        localStorage.setItem('genealogie-premier-vu', '1'); localStorage.setItem('genealogie-veille-deces', '1'); localStorage.setItem('genealogie-recherche-icones', 'toujours');
         ['suivi', 'animaux', 'fiches', 'adn', 'tresors', 'documents', 'catalogue', 'paniers', 'comparaison', 'diagrammes', 'donnees'].forEach(k => localStorage.setItem('genealogie-menu-' + k, '1'));
         if (dark) { const cur = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); localStorage.setItem('genealogie-design', JSON.stringify({...cur, preset: 'dark'})); }
     } catch (_) {} }, dark);
@@ -233,6 +240,8 @@ const clean = p => p.evaluate(() => {
 });
 const setMod = (p, m, st = {}) => p.evaluate(async ([m, st]) => { const A = window.LCNDA_APP; Object.assign(A.state, st); await A.setModule(m); }, [m, st]);
 const wait = (p, sel, timeout = 20000) => p.waitForSelector(sel, {timeout, state: 'attached'}).catch(() => {});
+/* coche les deux premières cases (la barre de sélection apparaît) */
+const pickSome = async (p, sel = '#workspace [data-rp-pick]') => { await p.evaluate(sel => { [...document.querySelectorAll(sel)].filter(c => c.getBoundingClientRect().width > 0).slice(0, 2).forEach(c => { if (!c.checked) c.click(); }); }, sel); await settle(p); };
 const post = (p, a, b) => p.evaluate(async ([x, y]) => { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r?.result ?? r; }, [a, b]);
 
 /* la liste de données FABRIQUÉE (moteur des listes) : des batailles autour de Tulle, chacune avec sa fiche ↗ */
@@ -246,7 +255,7 @@ const registerList = p => p.evaluate(() => {
         {nom: 'Bataille d’Eymoutiers', annee: 1850, lieu: 'Eymoutiers', morts: 70, lat: 45.74, lon: 1.74, u: 'https://example.org/bataille/5'}];
     (E.dataLists = E.dataLists || []).push({id: 'sq_batailles', icon: '⚔️', label: 'Batailles inventées du plateau', group: 'Le monde', theme: 'guerres', source: 'Jeu d’essai (CC0)', sourceUrl: 'https://example.org/',
         fields: [{key: 'nom', label: 'Bataille'}, {key: 'annee', label: 'Année', type: 'year'}, {key: 'lieu', label: 'Lieu', type: 'place'}, {key: 'morts', label: 'Morts', type: 'number'}, {key: 'u', label: 'Fiche', type: 'url'}],
-        load: async () => rows, period: r => [r.annee, r.annee], geo: r => [r.lat, r.lon], familyColumn: true});
+        load: async () => rows, period: r => [r.annee, r.annee], geo: r => [r.lat, r.lon], familyColumn: true, cards: true});
 });
 
 /* une fois par base : ce que l'écran crée par l'API (panier, dépouillement, fiche avec bloc 📊, tableau, recherches enregistrées) */
@@ -283,13 +292,12 @@ function screens(ID, R) {
     add('Personnes (liste)', mod('personnes', {currentPersonId: 0}));
     // Listes : natives, données (tableau, cartes, carte, ☑)
     add('Listes (accueil)', mod('listes', {listType: ''}));
-    for (const k of ['persons', 'events', 'places', 'sources', 'media', 'occupations', 'sosa']) add(`Listes → ${k}`, mod('listes', {listType: k}));
+    for (const k of ['persons', 'events', 'places', 'media', 'occupations', 'sosa', 'act_transcriptions_list', 'depouillements', 'investigations_list', 'topic_sheets_list', 'boards_list', 'fragile_branches']) add(`Listes → ${k}`, mod('listes', {listType: k}));
     const ldList = view => async p => { await clean(p); await registerList(p); await setMod(p, 'listes', {listType: 'data_sq_batailles'}); await wait(p, '[data-ld-page]'); await settle(p);
-        if (view === 'pick') { const b = await p.$('#workspace [data-ld-pickmode], #workspace [data-lc-toggle], #workspace [data-ld-select]'); if (b) { await b.click().catch(() => {}); await settle(p); } }
-        else if (view) { const b = await p.$(`#workspace [data-ld-view="${view}"]`); if (b) { await b.click().catch(() => {}); await settle(p); } }
+        const b = await p.$(`#workspace [data-ld-view="${view === 'map' ? 'map' : 'table'}"]`); if (b && await b.getAttribute('aria-pressed') !== 'true') { await b.click().catch(() => {}); await settle(p); }
+        if (view === 'pick') { await p.click('#workspace [data-ld-choose]').catch(() => {}); await settle(p); await pickSome(p, '#workspace .cx-ldck input, #workspace input.cx-ldck'); }
         return '#workspace'; };
     add('Listes de données (tableau)', ldList(''));
-    add('Listes de données (cartes)', ldList('cards'));
     add('Listes de données (carte)', ldList('map'));
     add('Listes de données (☑ choix multiple)', ldList('pick'));
     // Données
@@ -299,10 +307,13 @@ function screens(ID, R) {
     // Recherche : chaque sorte, avec des résultats
     const PROX = {proximitySearch: {placeId: 1, placeName: 'Treignac', dateMode: 'range', yearFrom: 1760, yearTo: 1900, radiusKm: 20}};
     add('Recherche → proximité', research('proximity', PROX, '#workspace .date-results'));
+    add('Recherche → proximité (☑ cochées)', async p => { await research('proximity', PROX, '#workspace .date-results')(p); await pickSome(p); return '#workspace'; });
+    add('Recherche → proximité (en liste)', async p => { await research('proximity', PROX)(p); await p.evaluate(() => { window.LCNDA_APP.state.researchDisplay = 'list'; window.LCNDA_PARTS?.renderResearch?.(); }); await settle(p); return '#workspace'; });
     add('Recherche → dates', research('dates', {dateSearch: {mode: 'range', yearFrom: 1760, yearTo: 1900, values: '', valueTo: '', eventTypeId: 0, placeId: 0, placeName: '', occupationId: '', dateWindowMode: 'exact', dateWindowDays: ''}, research: {q: '', category: 'all'}}, '#workspace .date-results'));
     add('Recherche → texte', research('text', {research: {q: 'MAZAUD', category: 'all'}}, '#workspace .research-person-card, #workspace .search-results'));
     add('Recherche → lieu joker', research('place_name', {placeNameSearch: {q: 'T*', country: '', division: ''}, research: {q: 'T*', category: 'all'}}));
-    add('Recherche → multicritère', research('saved'));
+    add('Recherche → multicritère', async p => { await research('saved', {hSearch: {criteria: {}, id: 0, name: ''}})(p); if (await p.$('#h-search-form')) { await p.fill('#h-search-form [name=last_name]', 'MAZAUD'); await p.click('#h-search-form button[type=submit]'); await wait(p, '#h-search-results [data-rp-pick]', 10000); await settle(p); } return '#workspace'; });
+    add('Recherche → multicritère (☑ cochées)', async p => { const r = await S.find(x => x[0] === 'Recherche → multicritère')[1](p); await pickSome(p); return r; });
     add('Recherche → question', research('question', {hQuestion: 'Qui est né à Treignac ?'}));
     add('Recherche → que manque-t-il', research('gaps'));
     add('Recherche → où chercher', research('ou_chercher'));
@@ -313,6 +324,7 @@ function screens(ID, R) {
     add('Recherche → SocFace', research('socface'));
     add('Recherche → journal', research('journal'));
     add('Recherche → parenté', async p => { await research('kinship', {currentPersonId: ID.start})(p); const f = await p.$('[data-rp-kin-form]'); if (f) { await p.selectOption('[data-rp-kin-form] [name=relation]', 'ancestors').catch(() => {}); await p.click('[data-rp-kin-form] button[type=submit]').catch(() => {}); await wait(p, '[data-rp-kin-out] [data-rp-pick]', 10000); await settle(p); } return '#workspace'; });
+    add('Recherche → parenté (☑ cochées)', async p => { await S.find(x => x[0] === 'Recherche → parenté')[1](p); await pickSome(p); return '#workspace'; });
     add('Recherche → comparer', async p => { await research('compare')(p); const opts = await p.$$eval('[data-rp-cmp-form] [name=a] option', o => o.map(x => x.value).filter(Boolean)).catch(() => []);
         if (opts.length >= 2) { await p.selectOption('[data-rp-cmp-form] [name=a]', opts[0]); await p.selectOption('[data-rp-cmp-form] [name=b]', opts[1]); await p.click('[data-rp-cmp-form] button[type=submit]'); await settle(p); } return '#workspace'; });
     add('Recherche → sources', async p => { await research('sources')(p); if (await p.$('[data-rp-src-form]')) { await p.fill('[data-rp-src-form] [name=q]', 'folio'); await p.click('[data-rp-src-form] button[type=submit]'); await wait(p, '.rp-cit-table', 10000); await settle(p); } return '#workspace'; });
@@ -392,7 +404,7 @@ if (require.main === module) (async () => {
         let R = null;
         { const p = await newPage(B.browser, B.base); await registerList(p); R = await prepare(p, B.ID); await p.context().close(); }
         const list = screens(B.ID, R).filter(([n]) => !ONLY || ONLY.test(n));
-        const variants = [[1440, false], [390, false], [1440, true], [390, true]];
+        const variants = [[1440, false], [390, false], [1440, true], [390, true]].filter(([w, d]) => !process.env.ECRASEE_VARIANTS || process.env.ECRASEE_VARIANTS.split(',').includes(w + (d ? 'd' : 'c')));
         const report = [];
         for (const [w, dark] of variants) {
             const p = await newPage(B.browser, B.base, {width: w, dark});

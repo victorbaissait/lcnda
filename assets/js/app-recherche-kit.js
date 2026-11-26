@@ -62,7 +62,7 @@
         if (kiosk()) return toast(T('Mode consultation : rien ne peut être écrit.'));
         const cx = CX(); if (!cx?.take) return toast(T('Le panier n’est pas chargé.'), 'error');
         if (!items.length) return toast(T('Rien à mettre.'));
-        try { const bid = cx.chooseBasket ? await cx.chooseBasket(anchor) : 0; if (bid === null) return; return await cx.take(items, {basketId: bid || null}); } catch (e) { toast(e.message, 'error'); }
+        try { return await cx.take(items, {anchor, ask: 'multi'}); } catch (e) { toast(e.message, 'error'); } // le panier en cours (nommé, « Changer ▾ ») ; plusieurs choses et plusieurs paniers : « Dans quel panier ? »
     }
     function toInsert(cfg, set, anchor) {
         if (kiosk()) return toast(T('Mode consultation : rien ne peut être écrit.'));

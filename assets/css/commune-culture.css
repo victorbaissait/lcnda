@@ -12,7 +12,8 @@
 .cc-arms figure{margin:0;flex:0 0 120px;display:flex;flex-direction:column;gap:.25rem}
 .cc-arms img{width:120px;height:auto;max-height:140px;object-fit:contain}
 .cc-arms figcaption{font-size:.72em;opacity:.8;overflow-wrap:anywhere}
-.cc-arms.is-small figure{flex-basis:72px}.cc-arms.is-small img{width:72px;max-height:86px}
+.cc-arms.is-small figure{flex-basis:120px}.cc-arms.is-small img{width:72px;max-height:86px} /* la vignette reste petite ; « auteur et licence… » dessous n'est pas écrasé en 72 px */
+.cc-arms > div{flex:1 1 auto;min-width:0}
 .cc-arms + .cc-arms{margin-top:.6rem}
 .cc-blazon{font-style:italic}
 .cc-works,.cc-dishes,.cc-rues{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}

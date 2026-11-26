@@ -579,8 +579,9 @@
         counter(0);
         const go = async force => {
             results = []; found = 0; counter(0); paint();
-            await runAll(tasks, (r, n) => { results.push(r); if (r.state === 'found') found++; counter(n); paint(); }, {force});
-            counter(tasks.length); host.querySelector('.ts-prog-bar')?.classList.add('is-done');
+            const paintSoon = perFrame(paint); // ⏱ 600 réponses (souvent déjà gardées, toutes d'un coup) : redessiné au plus une fois par image, puis à la fin
+            await runAll(tasks, (r, n) => { results.push(r); if (r.state === 'found') found++; counter(n); paintSoon(); }, {force});
+            paint(); counter(tasks.length); host.querySelector('.ts-prog-bar')?.classList.add('is-done');
             if (!tasks.length) host.querySelector('[data-ts-count]').textContent = T('Aucune donnée ne sait parler de ça pour l’instant.');
             if (life) { const hb = hiddenBlocks(life.pid), box = host.querySelector('[data-ts-hidden]');
                 box.innerHTML = hb.length && !RO() ? `<section class="ts-group ts-hidden-blocks"><h3>🙈 ${esc(T('Sur sa fiche, caché'))}</h3><ul class="ts-miss-list">${hb.map(([k, l]) => `<li><span>${esc(l)}</span><button type="button" class="button small secondary" data-ts-show="${esc(k)}">👁 ${esc(T('Remontrer sur sa fiche'))}</button></li>`).join('')}</ul></section>` : '';

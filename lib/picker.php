@@ -29,7 +29,7 @@ const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'ba
     'citation']; // 🔖 citations de sources (source_links : source, page, ce qui est cité — ⚖️ dossiers de preuve, lib/preuve.php)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
-    'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
+    'investigation' => '🔍 Enquêtes', 'battue' => '🔦 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
     'periodical' => '📰 Revues', 'employer' => '🏭 Employeurs', 'census' => '📋 Recensements',
     'artwork' => '🎨 Œuvres', 'graph' => '📈 Graphiques',
     'sheet' => '📒 Fiches', 'atelier' => '📚 Atelier', 'board' => '🧩 Tableaux', 'layout' => '📐 Mises en page', 'diagram' => '🏛️ Diagrammes', 'oldmap' => '🗺️ Cartes', 'act' => '📜 Transcriptions',
@@ -990,7 +990,7 @@ function picker_battues(PDO $pdo, string $q, int $offset, int $limit): array
     return ['total' => $total, 'items' => array_map(static fn($r) => [
         'kind' => 'battue', 'id' => (int) $r['id'], 'title' => (string) $r['title'],
         'meta' => implode(' · ', array_filter(['Battue', trim((string) $r['target_text']), mb_strtolower($status[$r['status']] ?? (string) $r['status'])])),
-        'badge' => $status[$r['status']] ?? '', 'badge_style' => $r['status'] === 'open' ? 'blue' : '', 'group' => 'battue', 'icon' => '🧭', 'short' => trim((string) $r['target_text']),
+        'badge' => $status[$r['status']] ?? '', 'badge_style' => $r['status'] === 'open' ? 'blue' : '', 'group' => 'battue', 'icon' => '🔦', 'short' => trim((string) $r['target_text']),
     ], $rows)];
 }
 

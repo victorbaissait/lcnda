@@ -1082,6 +1082,23 @@ function aia_status(array $q): array
     return $out;
 }
 
+/** 🧭 Je veux… (assets/js/app-je-veux-ui.js) : réécrire une phrase avec les mots de l'app, quand rien ne correspond.
+ *  Seulement l'IA de cet ordinateur (aia_pick_model refuse une adresse qui n'est pas locale) ; elle ne choisit rien : elle propose
+ *  une autre phrase, que la personne voit, puis le moteur cherche à nouveau. Rien de la généalogie n'est envoyé : la phrase et les noms des intentions. */
+function aia_rephrase(array $d): array
+{
+    $q = trim(mb_substr(safe_text($d['q'] ?? ''), 0, 300));
+    if ($q === '') { throw new LcndaBadInput(i18n_t('Rien à reformuler.')); }
+    $names = json_decode((string) ($d['names'] ?? '[]'), true);
+    $names = array_slice(array_values(array_filter(array_map(static fn($n) => is_string($n) ? mb_substr(trim($n), 0, 80) : '', is_array($names) ? $names : []))), 0, 120);
+    $m = aia_pick_model('');
+    $sys = "Tu aides à utiliser un logiciel de généalogie. Réécris la demande en une phrase courte (moins de 12 mots), qui commence par un verbe à l'infinitif, avec les mots de cette liste de choses que le logiciel sait faire. Réponds seulement par la phrase, sans guillemets.\n- " . implode("\n- ", $names);
+    [$msg, $err] = aia_ollama((string) $m['tag'], [['role' => 'system', 'content' => $sys], ['role' => 'user', 'content' => $q]], null);
+    if ($err !== '') { throw new RuntimeException($err); }
+    $text = trim((string) preg_replace('/\s+/u', ' ', strip_tags((string) ($msg['content'] ?? ''))), " \t\n\"«»");
+    return ['text' => mb_substr($text, 0, 160)];
+}
+
 function aia_api_get(PDO $pdo, string $action, array $q): array
 {
     return match ($action) {
@@ -1102,6 +1119,7 @@ function aia_api_get(PDO $pdo, string $action, array $q): array
 function aia_api_post(PDO $pdo, string $action, array $d): array
 {
     return match ($action) {
+        'aia_rephrase' => aia_rephrase($d), // 🧭 Je veux… : « Reformuler avec l’IA de l’ordinateur »
         'aia_chat_start' => aia_chat_start($pdo, $d),
         'aia_gen_start' => aia_gen_start($pdo, $d),
         'aia_recit_start' => aia_recit_start($pdo, $d),

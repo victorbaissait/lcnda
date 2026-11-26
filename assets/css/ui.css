@@ -479,9 +479,10 @@ html.lc-grip-held .toast-region, html.lc-grip-held .toast-region * { pointer-eve
     .ui-toast-acts { margin-left: auto; }
     .ui-cards { grid-template-columns: 1fr; gap: 14px; }
     .ui-card-thumb { height: 170px; }
-    .ui-row { grid-template-columns: 48px minmax(0, 1fr) auto; gap: 8px; padding: 7px 8px; }
+    .ui-row { grid-template-columns: 48px minmax(0, 1fr) fit-content(45%); gap: 8px; padding: 7px 8px; } /* deux boutons au bout : ils passent l'un sous l'autre, le texte garde sa place */
     .ui-row-thumb { width: 48px; height: 38px; }
-    .ui-row-date { display: none; }
+    .ui-row-date, .ui-row > span:empty { display: none; } /* la place vide de la date (sans date) ne pousse pas les boutons sous la vignette, dans la colonne de 48 px */
+    .ui-row-act { flex-wrap: wrap; justify-content: flex-end; }
     .ui-sortbar.has-view { justify-content: flex-start; }
     .ui-sortbar.has-view .ui-sortbar-count { width: 100%; }
     .ui-sortbar.has-view .ui-viewtoggle { margin-left: 0; }

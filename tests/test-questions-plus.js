@@ -300,7 +300,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`], { cwd: appRoot, env: { ...env, 
                     await p.waitForFunction(() => /François Combes/.test(document.querySelector('#quick-search')?.innerText || ''), null, {timeout: 10000});
                     assert.doesNotMatch(await p.locator('#quick-search').innerText(), /Poser la question/);
                     await p.fill('#quick-search input', 'Les Combes');
-                    await p.waitForFunction(() => /François Combes/.test(document.querySelector('#quick-search')?.innerText || '') && /🔎/.test(document.querySelector('#quick-search')?.innerText || ''), null, {timeout: 10000});
+                    await p.waitForFunction(() => /François Combes/.test(document.querySelector('#quick-search ul')?.innerText || '') && /🔎/.test(document.querySelector('#quick-search ul')?.innerText || ''), null, {timeout: 10000}); // la liste seulement : le sélecteur de mode « 🔎 Trouver » de 🧭 Je veux… (app-je-veux.js) a aussi un 🔎
                     const rows = await p.locator('#quick-search li[data-qs-index]').allInnerTexts();
                     assert.ok(!/🔎/.test(rows[0]) && /🔎/.test(rows[1] || ''), 'la ligne question passe 2e : ' + rows.slice(0, 3).join(' / '));
                     // XSS dans ⌘K

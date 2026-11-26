@@ -106,7 +106,8 @@
     const ptOf = a => { if (a instanceof Element && a.isConnected) { const r = a.getBoundingClientRect(); if (r.width || r.height) return {x: r.left, y: r.bottom + 6}; } if (a && !(a instanceof Element) && Number.isFinite(a.x)) return a; return lastPt || {x: innerWidth / 2 - 120, y: innerHeight / 3}; };
     /** « Dans quel panier ? » : le panier en cours (✓) en premier, puis par 📁 dossier ; « ＋ Nouveau panier… » demande le nom sur place → {id, made} ou null */
     async function askBasket(anchor, {n = 0} = {}) {
-        const list = await ensureTree(), cur = curBasket() || Number(list[0]?.id) || 0;
+        await loadTree().catch(() => {}); // à jour (un panier ou un dossier fait ailleurs, les nombres)
+        const list = baskets || [], cur = curBasket() || Number(list[0]?.id) || 0;
         const lab = x => `${crumbs(x).replace(/^\S+\s/u, '')} (${nf(x.count)})`;
         const groups = [list.filter(x => Number(x.id) !== cur && !Number(x.folder_id)), ...(folders || []).map(f => list.filter(x => Number(x.id) !== cur && Number(x.folder_id) === Number(f.id)))].filter(g => g.length);
         return new Promise(res => {
@@ -175,8 +176,10 @@
         return toast(msg, '', {kind: 'undo', action: {label: T('↶ Annuler'), run: doUndo}, actions: [{label: T('Changer ▾'), title: T('Mettre plutôt dans un autre panier (ou un nouveau)'), close: false, run: change}]});
     }
     /** un bouton 🧺 (au bout d'un résultat, d'une carte, d'une barre…) : Alt+clic, clic droit ou appui long → « Dans quel panier ? » avant de mettre */
+    const bkWords = () => new RegExp(['panier', 'prendre', T('panier'), T('Prendre')].map(w => String(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'i');
     const bkBtn = el => { const b = el?.closest?.('button, [role="button"]'); if (!b || b.disabled || b.id === 'cx-pill' || b.closest('.ui-actmenu, .cx-panel, .toast, .ui-export-formats')) return null;
-        if (b.matches('[data-rk-bk], [data-cf-act="bk"], [data-cx-tobasket]')) return b; const t = (b.textContent || '').trim(); return t.length <= 60 && t.includes('🧺') ? b : null; };
+        if (b.matches('[data-rk-bk], [data-cf-act="bk"], [data-cx-tobasket]')) return b; if (b.closest('[data-pn-tree], .cx-bsw, select') || b.matches('[data-pn-b], [data-pn-f]')) return null; // (un panier dans un arbre : son propre clic droit)
+        const t = (b.textContent || '').trim(), say = `${t} ${b.title || ''} ${b.getAttribute('aria-label') || ''}`; return t.length <= 60 && t.includes('🧺') && bkWords().test(say) ? b : null; };
     document.addEventListener('contextmenu', e => { if (!enabled() || kiosk()) return; const b = bkBtn(e.target); if (!b) return; e.preventDefault(); e.stopPropagation(); forceAsk = Date.now(); forceAt = b; b.click(); }, true);
     document.addEventListener('click', e => { if (!e.altKey || !e.isTrusted || !enabled()) return; const b = bkBtn(e.target); if (b) { forceAsk = Date.now(); forceAt = b; } }, true);
     async function removeFromBasket(ids, {quiet = false} = {}) {
@@ -1980,6 +1983,55 @@
         ws.querySelectorAll('[name="cx-multi"]').forEach(r => r.addEventListener('change', e => { writeJ(CUR, 0); basket = null; saveSettings({...settings(), multi: e.target.value === '1'}, e.target.value === '1' ? T('Plusieurs paniers') : T('Un seul panier')); }));
         ws.querySelector('[data-cx-keys]')?.addEventListener('click', () => { st.maintenanceTab = 'raccourcis'; A().persistUiState?.(); A().setModule?.('maintenance'); });
     }
+    /* ═════════════ ⤓ la fenêtre « Exporter » : « 🧺 Mettre dans le panier » choisi → « Dans : [panier ▾] » sous les tuiles ═════════════
+     * (les paniers par 📁 dossier, « ＋ Nouveau panier… » demande le nom sur place, créé à « Mettre dans… » ; « ＋ Nouveau dossier… ») ;
+     * le bouton du bas dit où : « Mettre dans « Mariage MAZAUD 1813 » (3) ». Toute fenêtre d'export avec une tuile 🧺 … panier (ou basket: true). */
+    const isBkFmt = f => !!f && (f.basket === true || (/🧺/u.test(String(f.label || '')) && /panier/i.test(String(f.label || ''))));
+    function wrapExportBasket() {
+        const U = UI(); if (!U.openExportDialog) return false; if (U._cxBk) return true;
+        const orig = U.openExportDialog;
+        U.openExportDialog = (o = {}) => {
+            const fs = o.formats || [], bk = fs.filter(isBkFmt);
+            if (!bk.length || !enabled() || kiosk()) return orig(o);
+            const st = {id: 0};
+            const nOf = f => (String(f.goLabel || '').match(/\((\d[\d\s\u00a0\u202f]*)/u) || [])[1]?.trim() || '';
+            const paintGo = (dlg, f) => { const go = dlg.querySelector('[data-ui-go]'); if (!go || go.disabled) return;
+                const nm = st.id === 'new' ? (dlg.querySelector('[data-cx-expname]')?.value.trim() || T('Nouveau panier')) : bName(st.id), n = nOf(f);
+                go.textContent = `🧺 ${n ? T('Mettre dans « {b} » ({n})', {b: nm, n}) : T('Mettre dans « {b} »', {b: nm})}`; };
+            const paint = async (id, dlg) => {
+                const f = bk.find(x => x.id === id); let line = dlg.querySelector('.cx-exp-bk');
+                if (!f) { if (line) line.hidden = true; return; }
+                if (!line) { line = document.createElement('div'); line.className = 'cx-exp-bk'; line.innerHTML = UI().spinner ? UI().spinner('…') : '…'; dlg.querySelector('.ui-export-formats')?.after(line); }
+                line.hidden = false;
+                await loadTree().catch(() => {}); const list = baskets || []; if (!st.id) st.id = curBasket() || Number(list[0]?.id) || 0;
+                if (!line.querySelector('[data-cx-expsel]')) {
+                    line.innerHTML = `<div class="cx-exp-row"><span class="ui-export-lab">${esc(T('Dans :'))}</span>${basketSelect({baskets: list, folders, basket_id: st.id}, 'data-cx-expsel')}</div>
+                        <div class="cx-exp-new" hidden><input type="text" maxlength="120" data-cx-expname placeholder="${esc(T('ex. Mariage MAZAUD 1813'))}" aria-label="${esc(T('Le nom du panier'))}">${(folders || []).length ? `<select data-cx-expf aria-label="${esc(T('Dans le dossier'))}">${folderOptions(0)}</select>` : ''}</div>`;
+                    const sel = line.querySelector('[data-cx-expsel]'), nw = line.querySelector('.cx-exp-new'), inp = line.querySelector('[data-cx-expname]');
+                    sel.addEventListener('change', async () => {
+                        if (sel.value === 'newfolder') { const id = await newFolder(); if (id) st.id = id; line.innerHTML = ''; return paint(id ? f.id : dlg.querySelector('.ui-export-fmt.is-active')?.dataset.fmt, dlg); }
+                        st.id = sel.value === 'new' ? 'new' : Number(sel.value); nw.hidden = st.id !== 'new'; if (st.id === 'new') inp.focus(); paintGo(dlg, bk.find(x => x.id === dlg.querySelector('.ui-export-fmt.is-active')?.dataset.fmt) || f);
+                    });
+                    inp.addEventListener('input', () => paintGo(dlg, bk.find(x => x.id === dlg.querySelector('.ui-export-fmt.is-active')?.dataset.fmt) || f));
+                }
+                paintGo(dlg, f);
+            };
+            const formats = fs.map(f => (!bk.includes(f) ? f : {...f, run: async opts => {
+                let id = st.id || curBasket(), made = 0;
+                if (id === 'new') { const dlg = document.querySelector('dialog.ui-export[open]'), name = dlg?.querySelector('[data-cx-expname]')?.value.trim();
+                    if (!name) { dlg?.querySelector('[data-cx-expname]')?.focus(); throw new Error(T('Donne un nom au panier.')); }
+                    const r = keepTree(await post('basket_new', {name, folder_id: Number(dlg.querySelector('[data-cx-expf]')?.value) || 0})); id = made = Number(r.id); }
+                if (id) nextTo = {id: Number(id), made, until: Date.now() + 8000};
+                return f.run?.(opts);
+            }}));
+            const onPick0 = o.onPick;
+            return orig({...o, formats, onPick: (id, dlg) => { try { onPick0?.(id, dlg); } catch (x) { console.error(x); } paint(id, dlg).catch(x => console.error(x)); }});
+        };
+        Object.assign(U.openExportDialog, orig); // les marques des autres enveloppes (heritage-connexions-outils.js : _cx)
+        U._cxBk = true; return true;
+    }
+    if (!wrapExportBasket()) { const w = setInterval(() => { if (wrapExportBasket()) clearInterval(w); }, 200); setTimeout(() => clearInterval(w), 30000); }
+
     ext.maintenance = ext.maintenance || {};
     ext.maintenance[TAB[0]] = token => drawSettings(token);
     function register() {

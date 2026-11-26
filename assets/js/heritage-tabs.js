@@ -49,7 +49,7 @@
     }
     /* ─── Une commune choisie : sa fiche de village ou sa monographie, avec une organisation propre à cet endroit ─── */
     const PLACE_KINDS = {village: '🏘️ Fiche d’un village…', monograph: '📜 Monographie de commune…'};
-    const MONO_SECTIONS = [['filters', '🔎 Les filtres (commune, années, sorte d’acte)'], ['metrics', '🔢 Les chiffres'], ['events', '📜 Actes rattachés'], ['census', '🏠 Recensements'], ['digests', '📑 Dépouillements'], ['battues', '🧭 Battues'], ['cemetery', '⚰️ Cimetière']];
+    const MONO_SECTIONS = [['filters', '🔎 Les filtres (commune, années, sorte d’acte)'], ['metrics', '🔢 Les chiffres'], ['events', '📜 Actes rattachés'], ['census', '🏠 Recensements'], ['digests', '📑 Dépouillements'], ['battues', '🔦 Battues'], ['cemetery', '⚰️ Cimetière']];
     let villages = [];
     const loadVillages = async () => { try { villages = (await A().api('villages')).villages || []; } catch (_) { villages = []; } return villages; };
     const placeKind = t => { const m = String(t || '').match(/^(village|monograph):/); return m ? m[1] : ''; };

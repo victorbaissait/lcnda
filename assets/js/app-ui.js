@@ -1001,6 +1001,7 @@
         const text = btn.dataset.text || '', faq = btn.dataset.faq || '';
         const bub = h('div', 'ui-bubble', `<p>${esc(text)}</p>${faq ? '<a href="#" class="ui-bubble-more" data-ui-faq>En savoir plus (FAQ) →</a>' : ''}`); bub._uiFor = btn; bub.setAttribute('role', 'tooltip');
         const pop = popup(btn, bub);
+        try { window.LCNDA_EXT?.helpBubbleMore?.(bub, btn); } catch (_) {} // 🧭 « Ce qu'on fait souvent ici » (app-je-veux.js, réglage éteint au départ)
         bub.querySelector('[data-ui-faq]')?.addEventListener('click', e => {
             e.preventDefault();
             if (btn.closest('dialog')) { // dans une fenêtre : la réponse s'affiche ici, sans perdre le travail en cours

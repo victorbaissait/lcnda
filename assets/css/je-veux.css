@@ -1,0 +1,119 @@
+/* 🧭 Je veux… (app-je-veux.js, app-je-veux-ui.js ; maquette docs/design/je-veux.html) — mêmes jetons que l'app, clair et sombre. */
+.jv-page, .jv-list, .jv-settings { min-width: 0; }
+.jv-k { display: inline-flex; align-items: center; gap: 5px; border: 1.5px solid var(--line-color, #d6d6d6); padding: 3px 10px; font: 600 12px/1.35 var(--font-family, system-ui, sans-serif); background: var(--card-bg, #fff); border-radius: 999px; color: var(--ink, #111); cursor: pointer; white-space: normal; text-align: left; max-width: 100%; min-height: 28px; }
+.jv-k:hover { border-color: var(--blue-bright, #055dff); }
+.jv-k[aria-pressed="true"] { background: var(--blue-soft, #eaf1ff); border-color: var(--blue-bright, #055dff); color: var(--blue, #0066cc); }
+.jv-k small { color: var(--muted, #666); font-weight: 500; }
+.jv-k.is-static { cursor: default; font-size: 11.5px; padding: 2px 8px; min-height: 24px; }
+.jv-chips { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; margin: 10px 0 0; }
+.jv-chips .lbl, .jv-pre .lbl { color: var(--muted, #666); text-transform: uppercase; letter-spacing: .08em; font: 700 10.5px var(--font-family, system-ui, sans-serif); }
+.jv-chips .lbl + .jv-k { margin-left: 0; }
+.jv-ask { display: flex; gap: 8px; align-items: center; border: 2px solid var(--ink, #111); background: var(--card-bg, #fff); box-shadow: var(--shadow-small); padding: 5px 5px 5px 12px; min-width: 0; max-width: 900px; }
+.jv-ask input { flex: 1; min-width: 0; border: 0 !important; background: transparent !important; box-shadow: none !important; font-size: 15px; outline: 0; padding: 7px 0 !important; color: var(--ink, #111); }
+.jv-ask .button { box-shadow: none; flex: none; }
+.jv-ask-big input { font-size: 16px; }
+.jv-kiosk { display: flex; gap: 8px; align-items: center; font-size: 13px; padding: 8px 12px; background: var(--blue-soft, #eaf2ff); border-left: 4px solid var(--blue-bright, #055dff); margin: 0 0 12px; max-width: 900px; }
+[data-jv-und-zone] .jv-und { margin: 14px 0 0; max-width: 900px; }
+.jv-und { padding: 10px 14px 12px; }
+.jv-say { margin: 0 0 8px; font-size: 14.5px; line-height: 1.45; }
+.jv-say b { font-weight: 800; }
+.jv-ok { color: #1a7f37; font-weight: 800; margin-right: 4px; }
+:root[data-theme="dark"] .jv-ok { color: #4cc070; }
+.jv-und.is-low { border-left-color: #d9480f; background: #fff1e8; }
+.jv-und.is-low h4 { color: #b23c0a; }
+:root[data-theme="dark"] .jv-und.is-low { background: #2e1e14; border-left-color: #ff8a4c; }
+:root[data-theme="dark"] .jv-und.is-low h4 { color: #ff8a4c; }
+.jv-confirm { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; margin: 10px 0 0; padding: 9px 0 0; border-top: 1px dashed var(--blue-bright, #055dff); font-size: 13.5px; }
+.jv-alt { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; margin: 9px 0 0; font-size: 12.5px; }
+.jv-alt > span:first-child { color: var(--muted, #666); }
+.jv-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.jv-pop { max-width: min(520px, 100%); }
+.jv-pop .pk { max-width: 100%; }
+.jv-ms { display: grid; gap: 12px; margin: 14px 0 0; max-width: 900px; }
+.jv-ma { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 4px 12px; border: 2px solid var(--ink, #111); background: var(--card-bg, #fff); box-shadow: var(--shadow-small); padding: 12px 14px; min-width: 0; }
+:root[data-theme="dark"] .jv-ma, :root[data-theme="dark"] .jv-cc { border-color: #3a3a3a; }
+.jv-ma.best { border-color: var(--blue-bright, #055dff); box-shadow: inset 4px 0 0 var(--blue-bright, #055dff), var(--shadow-small); }
+.jv-ma-ic { font-size: 28px; line-height: 1; text-align: center; padding-top: 2px; }
+.jv-ma h3 { margin: 0; font-size: 16px; line-height: 1.25; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
+.jv-what { margin: 3px 0 6px; font-size: 13px; color: var(--muted, #666); }
+.jv-path { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; margin: 0 0 6px; font: 600 12px var(--font-family, system-ui, sans-serif); min-width: 0; }
+.jv-path span { border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); padding: 1px 7px; overflow-wrap: anywhere; }
+.jv-path span.on { border-color: var(--blue-bright, #055dff); background: var(--blue-soft, #eaf1ff); }
+.jv-path i { font-style: normal; color: var(--muted, #666); }
+.jv-pre { display: flex; flex-wrap: wrap; gap: 5px 6px; align-items: center; font-size: 12px; margin: 0 0 6px; }
+.jv-pre .lbl { color: #1a7f37; }
+:root[data-theme="dark"] .jv-pre .lbl { color: #4cc070; }
+.jv-ma-acts { grid-column: 2; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.jv-sp { flex: 1; }
+.jv-ma-ro { grid-column: 2; font-size: 12px; color: var(--muted, #666); margin: 4px 0 0; }
+.jv-ma.is-ro .jv-ma-b, .jv-cc.is-ro .jv-cc-b { opacity: .75; }
+.jv-star { border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); width: 32px; height: 32px; cursor: pointer; font-size: 15px; color: var(--muted, #666); padding: 0; flex: none; }
+.jv-star.on { color: #d28e05; border-color: #d28e05; }
+.jv-others { max-width: 900px; }
+.jv-nomatch { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; border-top: 1px solid var(--line-color, #e3e5ea); padding: 12px 0 0; margin: 14px 0 0; font-size: 13px; max-width: 900px; }
+.jv-nomatch .lbl { color: var(--muted, #666); text-transform: uppercase; letter-spacing: .08em; font: 700 10.5px var(--font-family, system-ui, sans-serif); }
+.jv-empty { border: 2px dashed var(--line-color, #d6d6d6); padding: 18px; text-align: center; color: var(--muted, #666); font-size: 13.5px; }
+.jv-empty b { display: block; color: var(--ink, #111); font-size: 15px; margin-bottom: 4px; }
+/* 🗂 Tout parcourir */
+.jv-cat-top { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.jv-cat-top .jv-fams { margin: 0; flex: 1 1 420px; }
+.jv-catq { flex: 0 1 300px; min-width: 0; max-width: 100%; }
+.jv-fh { margin: 18px 0 8px; font: 800 11px var(--font-family, system-ui, sans-serif); letter-spacing: .1em; text-transform: uppercase; color: var(--blue, #0066cc); }
+.jv-fh small { text-transform: none; letter-spacing: 0; font-weight: 600; color: var(--muted, #666); }
+.jv-cgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+.jv-cc { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 6px 10px; border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); padding: 10px 12px; min-width: 0; }
+.jv-cc-ic { font-size: 20px; text-align: center; line-height: 1.2; }
+.jv-cc-b { min-width: 0; display: grid; gap: 3px; }
+.jv-cc-b b { font-size: 13.5px; }
+.jv-cc-b small { color: var(--muted, #666); font-size: 12px; }
+.jv-cc-b .jv-path { margin: 2px 0 0; font-size: 11.5px; }
+.jv-cc-acts { grid-column: 2; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+/* ⌘K */
+.jv-qk-modes { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.jv-qk-und { padding: 0 2px; }
+.jv-qk-und .jv-und { padding: 8px 10px 9px; margin: 0; }
+.jv-qk-und .jv-say { font-size: 13.5px; margin: 0 0 6px; }
+.jv-qk-und .dr-pill { font-size: 12px; padding: 3px 9px 3px 8px; }
+.jv-qk-sep { margin: 2px 0 4px; font: 800 10.5px var(--font-family, system-ui, sans-serif); letter-spacing: .1em; text-transform: uppercase; color: var(--blue, #0066cc); }
+.quick-search li.jv-qk-row { display: flex; align-items: center; gap: 10px; }
+.quick-search li.jv-qk-row > span:first-child { flex: 1; min-width: 0; }
+.jv-qk-go { display: inline-flex; gap: 4px; flex: none; }
+.jv-qk-go .button { min-height: 28px; padding: 3px 8px; box-shadow: none; }
+/* la barre du haut, le tableau de bord, la bulle « ? » */
+.jv-topbtn { display: inline-flex; align-items: center; gap: 5px; width: auto !important; padding: 0 10px !important; font-weight: 700; font-size: 13px; }
+.jv-topbtn[hidden] { display: none !important; }
+@media (max-width: 760px) { .jv-topbtn-t { display: none; } .jv-topbtn { padding: 0 6px !important; } }
+.jv-dash-top { margin: 0 0 16px; max-width: 900px; }
+.jv-dash-top .card-head { padding: 10px 14px; }
+.jv-dash-top .card-head h3 { margin: 0; font-size: 15px; }
+.jv-dash-top .card-body { padding: 12px 14px; }
+.jv-wform .jv-ask { box-shadow: none; }
+.jv-bub h6 { margin: 12px 0 6px; padding: 8px 0 0; border-top: 1px solid var(--line-color, #e3e5ea); font: 800 10.5px var(--font-family, system-ui, sans-serif); letter-spacing: .1em; text-transform: uppercase; color: var(--blue, #0066cc); }
+.jv-bl { display: flex; flex-direction: column; gap: 4px; }
+.jv-bl button { display: flex; gap: 8px; align-items: center; text-align: left; border: 1.5px solid var(--line-color, #d6d6d6); background: var(--card-bg, #fff); padding: 5px 8px; font-size: 12.5px; cursor: pointer; color: var(--ink, #111); }
+.jv-bl button:hover { border-color: var(--blue-bright, #055dff); background: var(--blue-soft, #eaf1ff); }
+.jv-bl button small { margin-left: auto; color: var(--muted, #666); font-size: 11px; }
+/* Listes → 🧭 Tout ce que l'app sait faire */
+.jv-ltable td { vertical-align: top; }
+.jv-lact { white-space: nowrap; }
+.jv-lact .button { min-height: 28px; padding: 3px 8px; margin: 0 2px; box-shadow: none; }
+/* Réglages → 🧭 Je veux… */
+.jv-set-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start; }
+.jv-set-grid > .maintenance-panel { max-width: none; min-width: 0; }
+.jv-set-grid h3 { margin: 0 0 6px; }
+.jv-setrow { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line-color, #e3e5ea); font-size: 13.5px; }
+.jv-setrow:last-child { border-bottom: 0; }
+.jv-setrow > div:first-child { flex: 1 1 220px; min-width: 0; }
+.jv-setrow small { display: block; color: var(--muted, #666); font-size: 12px; }
+.jv-setrow .ui-toggle { flex: 1 1 260px; min-width: 0; }
+.jv-setrow .ui-toggle > span { min-width: 0; }
+.jv-setx { flex: none; }
+@media (max-width: 760px) {
+    .jv-ma { grid-template-columns: 36px minmax(0, 1fr); padding: 10px 12px; }
+    .jv-ma-ic { font-size: 22px; }
+    .jv-ma-acts, .jv-ma-ro, .jv-cc-acts { grid-column: 1 / -1; }
+    .jv-cgrid, .jv-set-grid { grid-template-columns: minmax(0, 1fr); }
+    .jv-ask .button { padding-left: 10px; padding-right: 10px; }
+    .jv-ex .jv-k:nth-child(n+6) { display: none; }
+    .jv-catq { flex: 1 1 100%; }
+}

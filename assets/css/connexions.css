@@ -502,3 +502,15 @@ dialog.cx-put { width: var(--modal-m); max-width: 94vw; height: min(680px, 90vh)
 .cx-panel > .cx-panel-acts { position: sticky; bottom: -1px; z-index: 2; background: var(--card-bg, #fff); padding: 8px 0 4px; box-shadow: 0 -6px 8px -6px rgba(0,0,0,.18); }
 .cx-panel .cx-clear-top { margin-left: auto; }
 :root[data-theme="dark"] .cx-panel > .cx-panel-head, :root[data-theme="dark"] .cx-panel > .cx-panel-acts { background: var(--card-bg, #222); }
+/* 🧺 « Dans quel panier ? » : ＋ Nouveau panier sur place ; la fenêtre « Exporter » : « Dans : [panier ▾] » */
+.cx-bpick { max-width: min(340px, calc(100vw - 32px)); }
+.cx-bnew { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; }
+.cx-bnew input, .cx-bnew select { width: 100%; min-width: 0; }
+.cx-bnew-acts { display: flex; justify-content: flex-end; gap: 6px; flex-wrap: wrap; }
+.cx-exp-bk { display: flex; flex-direction: column; gap: 6px; margin: 10px 0 4px; }
+.cx-exp-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cx-exp-row .cx-bsw { flex: 1; min-width: 0; }
+.cx-exp-row .cx-bsw select, .cx-exp-new input { width: 100%; min-width: 0; }
+.cx-exp-new { display: flex; flex-direction: column; gap: 6px; }
+.cx-exp-new[hidden], .cx-exp-bk[hidden] { display: none; }
+.cx-askset small { display: inline-block; margin-top: 2px; }

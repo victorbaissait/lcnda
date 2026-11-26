@@ -20,7 +20,7 @@
     const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const KEY = 'listes:research_journal';
     const RESULTS = {found: ['Trouvé', 'green'], none: ['Rien trouvé', 'grey'], partial: ['En partie', 'yellow'], not_consulted: ['Pas consulté', 'grey']};
-    const KINDS = {digest: ['📜', 'Dépouillement', 'Dépouillements'], visit: ['🗄️', 'Visite faite', 'Visites faites'], lead: ['🔍', 'Piste d’enquête', 'Pistes d’enquête'], battue: ['🧭', 'Battue', 'Battues'], request: ['📮', 'Demande', 'Demandes']};
+    const KINDS = {digest: ['📜', 'Dépouillement', 'Dépouillements'], visit: ['🗄️', 'Visite faite', 'Visites faites'], lead: ['🔍', 'Piste d’enquête', 'Pistes d’enquête'], battue: ['🔦', 'Battue', 'Battues'], request: ['📮', 'Demande', 'Demandes']};
     const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const badge = r => (RESULTS[r] ? (UI()?.badge ? UI().badge(RESULTS[r][0], RESULTS[r][1]) : `<span class="ui-badge is-${RESULTS[r][1]}">${esc(RESULTS[r][0])}</span>`) : '');
     /** le menu fixe du résultat (un simple menu déroulant : choix fixes) */

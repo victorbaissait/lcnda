@@ -484,7 +484,7 @@ pre.code .s{color:var(--green)}
 <div class="wrap">
   <div class="mock">
     <div>
-      <span class="eyebrow"><span class="tag-new">Maquette</span>à valider · tel que dans l’app</span>
+      <span class="eyebrow"><span class="tag-new">Maquette</span>validée · tel que dans l’app (voir « Décisions »)</span>
       <h1>🧭 Je veux… — dire ce qu’on veut faire, et l’app y emmène</h1>
       <p>Tu écris ton but en français, comme tu le dirais (« imprimer un arbre pour mamie »). L’app trouve <b>1 à 3 endroits</b> qui le font, dit en une ligne ce que ça fait et où c’est, puis <b>▶ t’y emmène</b> (avec la bonne personne et les bons choix déjà mis) ou <b>👣 te montre</b> les boutons un par un. Un seul moteur, à deux endroits : <b>⌘K</b> et <b>🔍 Recherche</b>. Il marche <b>sans Internet et sans IA</b>. Familles inventées MAZAUD (Tulle), LACOMBE (Nice), DURAND (Salon-de-Provence) ; les nombres sont des exemples.</p>
       <div class="path" aria-label="Où c’est dans l’app"><span class="on">⌘K → 🧭 Je veux…</span><i>et</i><span class="on">07 Recherche → 🧭 Je veux faire…</span><i>en option :</i><span>bouton du haut</span><span>tableau de bord</span><span>« ? » des titres</span></div>
@@ -493,7 +493,7 @@ pre.code .s{color:var(--green)}
   </div>
 
   <nav class="toc" aria-label="Sommaire">
-    <a href="#s1">1 · Dans ⌘K</a><a href="#s2">2 · Dans Recherche</a><a href="#s3">3 · 👣 Montre-moi</a><a href="#s4">4 · Les autres entrées <small>en option</small></a><a href="#s5">5 · Comment il comprend</a><a href="#s6">6 · Toutes les intentions</a><a href="#s7">7 · Récents, ⭐, souvent</a><a href="#s8">8 · Réglages</a><a href="#qs">? Questions <small>6</small></a><a href="#reuse">♻ Ce qu’on reprend</a>
+    <a href="#decisions">✓ Décisions</a><a href="#s1">1 · Dans ⌘K</a><a href="#s2">2 · Dans Recherche</a><a href="#s3">3 · 👣 Montre-moi</a><a href="#s4">4 · Les autres entrées <small>en option</small></a><a href="#s5">5 · Comment il comprend</a><a href="#s6">6 · Toutes les intentions</a><a href="#s7">7 · Récents, ⭐, souvent</a><a href="#s8">8 · Réglages</a><a href="#qs">? Questions <small>6</small></a><a href="#reuse">♻ Ce qu’on reprend</a>
   </nav>
 
   <!-- ═══════════ 1 · ⌘K ═══════════ -->
@@ -686,6 +686,21 @@ intent({
   </section>
 
   <!-- ═══════════ Questions ═══════════ -->
+  <!-- ═══════════ ✓ Décisions ═══════════ -->
+  <section class="sec" id="decisions" aria-labelledby="dech">
+    <div class="sec-h"><span class="eyebrow">✓ Validé · ce qui est construit</span><h2 id="dech">Décisions</h2><p>Toutes les recommandations sont acceptées. Voici ce que l’app fait, et où c’est dans le code.</p></div>
+    <ol class="qs">
+      <li class="card"><b>⌘K et Recherche, allumés au départ</b><p class="opt2">« 🧭 Je veux… » est le premier mode de ⌘K (Tab → « 🔎 Trouver » ; sans verbe dans la phrase, ⌘K cherche les noms comme avant) et le premier type de 🔍 Recherche (« 🧭 Je veux faire… »). Le bouton 🧭 du haut (rangé avec les autres dans « Boutons en haut à droite »), le widget « 🧭 Que veux-tu faire ? » et « 🧭 Ce qu’on fait souvent ici » dans les bulles « ? » sont là, éteints au départ.</p><p class="reco">assets/js/app-je-veux.js (petit, chargé au démarrage) ; le moteur et les écrans se chargent à la première ouverture : le démarrage ne change pas.</p></li>
+      <li class="card"><b>« C’est bien ça ? » seulement quand l’app n’est pas sûre</b><p class="opt2">La ligne « ✓ Ce que j’ai compris » est toujours visible ; ses pastilles se corrigent (les mêmes que Données → question : .dr-und, .dr-pill, .dr-pop) et les réponses se reclassent tout de suite. Quand c’est ambigu : les homonymes avec leurs dates (« 3 fiches portent ce nom : lequel ? »), d’autres lectures (« Ce n’est pas ça ? »), les fautes corrigées (« J’ai corrigé : arbe → arbre ») et les mots ignorés (« Je n’ai pas tenu compte de : … »).</p><p class="reco">Pas sûr = verbe ou objet manquant, deux personnes du même nom, ou deux réponses de familles différentes presque à égalité.</p></li>
+      <li class="card"><b>▶ M’y emmener remplit, mais ne fait jamais le dernier geste</b><p class="opt2">Le bon écran, la bonne personne, le lieu, les années, la phrase déjà posés. Imprimer, fusionner, envoyer, supprimer, importer : c’est toi qui cliques le dernier bouton (« ✓ C’est ici. Vérifie les choix, puis clique toi-même « ⤓ Exporter » »).</p><p class="reco">Chaque intention dit son dernier bouton (last) ; un essai vérifie que rien n’est imprimé ni fusionné.</p></li>
+      <li class="card"><b>👣 Montre-moi : tout seul la 1re fois pour chaque but, puis sur demande</b><p class="opt2">La même bulle et le même halo que la ▶ Visite guidée (app-visite.js, LCNDA_EXT.tour.guide), sur les vrais boutons, avec « ▶ Fais-le pour moi » (même règle que ▶). Réglage : Jamais / La 1re fois / Toujours. Possible aussi en mode consultation.</p></li>
+      <li class="card"><b>🤖 L’IA seulement si elle est installée, seulement quand rien ne va</b><p class="opt2">« 🤖 Reformuler avec l’IA de l’ordinateur » : éteint au départ, à allumer dans Réglages → 🧭 Je veux…, seulement si l’assistant IA est installé (heritage-assistant-ia.js) et seulement quand aucune réponse ne correspond. L’IA de cet ordinateur seulement (lib/assistant_ia.php, aia_rephrase) : jamais en ligne ; elle propose une phrase, que tu vois, puis le moteur cherche à nouveau.</p></li>
+      <li class="card"><b>🧭 pour « Je veux… », 🔦 pour la Battue</b><p class="opt2">La Battue passe à 🔦 partout où son icône était 🧭 (onglets d’Enquêtes, raccourcis, menu de choix, recueils, tableaux, journal, monographie, médias), pour ne pas mélanger.</p></li>
+      <li class="card"><b>En plus : la liste de tout ce que l’app sait faire</b><p class="opt2">« pas bête d’avoir une liste qui permet de mieux voir » : dans Recherche → 🧭 Je veux faire…, « 🗂 Tout parcourir » montre toutes les intentions (pas un échantillon) en cartes calmes (icône, nom, une ligne, chemin, ▶ 👣 ☆), rangées par famille (Toutes, Saisir, Chercher, Montrer, Imprimer/exporter, Partager, Ranger/panier, Vérifier, Données, Outils, Réglages), avec une case pour filtrer. La même chose en tableau dans Listes → « 🧭 Tout ce que l’app sait faire » (famille, nom, ce que ça fait, chemin, ▶).</p></li>
+      <li class="card"><b>Le registre et le test de garde</b><p class="opt2">Un seul moteur pour ⌘K et Recherche (app-je-veux-moteur.js, LCNDA_EXT.intents) : environ 90 intentions écrites à la main, plus celles fabriquées toutes seules depuis les onglets, les pages des Réglages (et leurs mots), les listes, Graphiques, les types de Recherche, les outils et actions des Raccourcis, les thèmes des données et le catalogue « ＋ Ajouter un onglet ». tests/test-je-veux-couverture.js échoue si un onglet, une page des Réglages ou un outil n’a pas d’intention.</p></li>
+    </ol>
+  </section>
+
   <section class="sec" id="qs" aria-labelledby="qsh">
     <div class="sec-h"><span class="eyebrow">Avant de le faire</span><h2 id="qsh">6 questions pour toi</h2><p>Ma recommandation est en vert. Réponds juste par le numéro et oui ou non, ou change ce que tu veux.</p></div>
     <ol class="qs">

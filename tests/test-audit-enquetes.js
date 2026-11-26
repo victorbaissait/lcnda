@@ -267,7 +267,7 @@ echo json_encode($ids + ['inv' => $inv, 'inv2' => $inv2, 'bat' => $bat, 'media' 
         });
 
         /* ═════════ Battue ═════════ */
-        await t('🧭 battue : avancement (registres, communes), carte colorée par avancement (gardé), mots d’état', async () => {
+        await t('🔦 battue : avancement (registres, communes), carte colorée par avancement (gardé), mots d’état', async () => {
             await p.evaluate(id => { const A = window.LCNDA_APP; A.state.enquetesTab = 'battue'; A.state.currentInvestigationId = 0; A.state.currentBattueId = id; A.renderSidebar(); A.setModule('enquetes'); }, ID.bat);
             await p.waitForSelector('.battue-detail [data-battue-progress]', {timeout: 20000});
             assert.match(await p.textContent('[data-bp-reg]'), /1\/2 \(50 %\)/);
