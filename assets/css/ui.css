@@ -639,3 +639,5 @@ tbody.ui-person-tb > tr.ui-person-tb-head .ui-person-card-head { padding-bottom:
 .ui-person-card.is-light .ui-person-card-head { padding-bottom: 6px; }
 .ui-person-card.is-light .ui-person-card-name { font-size: 1em; }
 .ui-person-card.is-light .h-sugg { padding-top: 6px; }
+:root .ui-person-card .ui-person-card-body > .issue { border: 0; border-top: 1px solid var(--line-color, #d6d6d6); box-shadow: none; background: transparent; padding: 12px 2px; }
+:root .ui-person-card .ui-person-card-body > .issue:first-child { border-top: 0; }

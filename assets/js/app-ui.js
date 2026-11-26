@@ -1488,6 +1488,13 @@
     const cardHead = ({id, name = '', sub = '', life = '', count = '', extra = ''}) => `<div class="ui-person-card-who">${id ? `<button type="button" class="table-link ui-person-card-name" data-h-person="${Number(id)}" title="${esc(i18n('Ouvrir la fiche de {name}', {name}))}">${esc(name)}</button>` : `<strong class="ui-person-card-name">${esc(name || i18n('Sans personne'))}</strong>`}${sub ? ` <small class="muted ui-person-card-sub">${esc(sub)}</small>` : ''}${life ? ` <small class="muted ui-person-card-life">${esc(life)}</small>` : ''}${extra}</div>${count ? `<span class="ui-person-card-count">${esc(count)}</span>` : ''}`;
     UI.personCardHtml = (o = {}) => `<section class="ui-person-card${o.cls ? ' ' + o.cls : ''}" data-person-card="${esc(o.id || '')}"${o.attrs ? ' ' + o.attrs : ''}><header class="ui-person-card-head">${cardHead(o)}</header><div class="ui-person-card-body">${o.body || ''}</div></section>`;
     UI.personCardsHtml = html => `<div class="ui-person-cards">${html}</div>`;
+    /** la case « Ranger par personne » d'un écran où l'ordre des dates compte (non au départ) ; rien si le réglage général est éteint */
+    UI.framesOption = (key, onChange) => {
+        const l = h('label', 'checkbox-line ui-frames-opt'); if (!UI.framesOn()) { l.hidden = true; return l; }
+        l.innerHTML = `<input type="checkbox" data-frames-opt="${esc(key)}"${UI.framesPref(key) ? ' checked' : ''}> <span>${esc(i18n('🗂 Ranger par personne'))}</span>`;
+        l.firstElementChild.addEventListener('change', e => { UI.setFramesPref(key, e.target.checked); onChange?.(e.target.checked); });
+        return l;
+    };
     UI.personTbodyHtml = (o = {}) => `<tbody class="ui-person-tb" data-person-card="${esc(o.id || '')}"><tr class="ui-person-tb-head"><th colspan="${Number(o.cols) || 1}" scope="rowgroup"><div class="ui-person-card-head">${cardHead(o)}</div></th></tr>${o.rows || ''}</tbody>`;
     wrapUndoToast();
     document.addEventListener('DOMContentLoaded', wrapUndoToast);

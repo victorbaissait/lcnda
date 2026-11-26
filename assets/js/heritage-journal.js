@@ -132,6 +132,7 @@
         const box = ws.querySelector('[data-rj-list]');
         let filtered = [];
         ws.querySelector('[data-rj-bar]').replaceWith(bar);
+        bar.after(UI().framesOption?.('journal', () => paint()) || '');
         const person = S().rjPerson; if (person?.id) { S().rjPerson = null; bar.setFilter?.('person', {id: Number(person.id), title: person.title || ''}); }
         function paint() {
             const st = bar.state, q = fold(st.q).trim(), f = st.filters;
@@ -147,7 +148,11 @@
             if (!all.length) { box.innerHTML = A().emptyState({icon: '🗓', text: 'Rien de cherché pour l’instant', hint: 'Note tes dépouillements, tes visites d’archives (« ✓ Fait le … »), tes pistes d’enquête et tes battues : tout s’affichera ici, du plus récent au plus ancien.', action: {label: '＋ Nouveau dépouillement', attrs: 'data-rj-new-digest'}}); return; }
             if (!filtered.length) { box.innerHTML = A().emptyState({icon: '🔍', text: 'Rien ne correspond', hint: 'Enlève un filtre, ou cherche autrement (une cote, une commune, un nom).'}); return; }
             const view = st.view === 'cards' ? 'cards' : 'list';
-            box.innerHTML = UI().itemsHtml(view, filtered.slice(0, shown).map(r => itemOf(r, view)));
+            // 🗂 « Ranger par personne » (case de cet écran, non au départ : l'ordre des dates compte ; seulement si le réglage « Un cadre par personne » est mis)
+            const page = filtered.slice(0, shown);
+            box.innerHTML = UI().framesOn?.() && UI().framesPref('journal') ? UI().personCardsHtml(UI().groupByPerson(page, r => r.people?.[0]?.id).map(g => (
+                UI().personCardHtml({id: g.key, name: g.key ? g.items[0].people[0].title || '' : i18n('Sans personne'), count: A().plural(g.items.length, 'recherche'), body: UI().itemsHtml(view, g.items.map(r => itemOf(r, view)))}))).join(''))
+                : UI().itemsHtml(view, page.map(r => itemOf(r, view)));
             if (filtered.length > shown) { const more = UI().moreButton({remaining: filtered.length - shown, step: 60, feminine: true, onClick: () => { shown += 60; paint(); }}); box.appendChild(more); }
         }
         paint();
