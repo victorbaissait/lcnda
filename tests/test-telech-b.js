@@ -12,6 +12,7 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const OSM_BUILT = require('fs').readdirSync(require('path').join(__dirname, '..', 'assets', 'data')).some(f => /^tb-osm-.*\.json\.gz$/.test(f));
 const net = require('net');
 const zlib = require('zlib');
 const {spawn, spawnSync} = require('child_process');
@@ -144,7 +145,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const [n, html, txt] = await into('placeInto', {id: 1, name: 'Confracourt', ...CONFRACOURT});
             assert.ok(n >= 3, txt); assert.deepStrictEqual(await p.evaluate(() => window.__tbQ[0].near), {...CONFRACOURT, km: 150}); assert.match(txt, /Calvaires et croix de chemin à moins de 3 km/); assert.match(txt, /Lavoirs, puits et fontaines à moins de 3 km/);
             assert.match(txt, /Les vendanges \(Lorraine du Sud, série à 35 km\) : d’habitude vers le 6 octobre ; dates connues de 1801 à 1802/); assert.match(txt, /pack « Histoire du lieu »/); assert.match(html, /▸ plus/); assert.match(txt, /Wikidata \(CC0\)/); assert.match(html, /tb-links/);
-            assert.match(html, /https:\/\/www\.wikidata\.org\/wiki\/Q\d+/); assert.match(txt, /arriveront avec la mise à jour des données/);
+            assert.match(html, /https:\/\/www\.wikidata\.org\/wiki\/Q\d+/); // les points OpenStreetMap : fabriqués sur GitHub (assets/data/tb-osm-*.json.gz) → plus d'annonce « arriveront… » ; sinon l'annonce
+            if (OSM_BUILT) { assert.ok(!/arriveront avec la mise à jour des données/.test(txt), 'données OSM là : pas d’annonce'); assert.match(txt, /OpenStreetMap/); }
+            else assert.match(txt, /arriveront avec la mise à jour des données/);
             const none = await into('placeInto', {id: 0, name: '', lat: null, lon: null});
             assert.deepStrictEqual(none.slice(0, 2), [0, '']);
         });
@@ -152,7 +155,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'telech_b'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-tb-settings-page] table tbody tr', {timeout: 20000});
             const txt = await p.textContent('[data-tb-settings-page]');
-            assert.match(txt, /CC0 1\.0/); assert.match(txt, /Daux/); assert.match(txt, /Pas de copie ici/); assert.match(txt, /Pas encore fabriqué \(sur GitHub\)/); assert.match(txt, /PEP725/); assert.match(txt, /Atlas linguistique de la France/);
+            assert.match(txt, /CC0 1\.0/); assert.match(txt, /Daux/); assert.match(txt, /Pas de copie ici/); if (OSM_BUILT) assert.ok(!/Pas encore fabriqué \(sur GitHub\)/.test(txt), 'fichiers OSM présents'); else assert.match(txt, /Pas encore fabriqué \(sur GitHub\)/); assert.match(txt, /PEP725/); assert.match(txt, /Atlas linguistique de la France/);
             await p.click('[data-tb-tg="croix"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-b')).croix), false);
             const off = await into('placeInto', {id: 1, name: 'Confracourt', ...CONFRACOURT}); assert.ok(!/Calvaires et croix/.test(off[2]), 'sujet éteint : plus affiché');
