@@ -1512,7 +1512,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sources-ouvertes-7-core.js?v=3" defer></script>
 <script src="assets/js/heritage-sources-ouvertes-7.js?v=3" defer></script>
 <script src="assets/js/app-sources-ouvertes-8-core.js?v=1" defer></script>
-<script src="assets/js/app-archives-en-ligne-core.js?v=2" defer></script>
+<script src="assets/js/app-archives-en-ligne-core.js?v=3" defer></script>
 <script src="assets/js/heritage-archives-en-ligne.js?v=3" defer></script>
 <script src="assets/js/heritage-journal.js?v=6" defer></script>
 <script src="assets/js/heritage-semaine.js?v=7" defer></script>
@@ -1800,7 +1800,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sections.js?v=11" defer></script>
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=3" defer></script>
-<script src="assets/js/app-je-veux.js?v=1" defer></script><!-- 🧭 Je veux… : ⌘K, Recherche, Listes, Réglages (le moteur et les écrans se chargent à la première ouverture : app-je-veux-moteur.js, app-je-veux-ui.js) -->
+<script src="assets/js/app-je-veux.js?v=2" defer></script><!-- 🧭 Je veux… : ⌘K, Recherche, Listes, Réglages (le moteur et les écrans se chargent à la première ouverture : app-je-veux-moteur.js, app-je-veux-ui.js) -->
 <script src="assets/js/app-a-trier.js?v=1" defer></script>
 <script src="assets/js/heritage-comptes-famille.js?v=2" defer></script>
 <script src="assets/js/app-htr-correction.js?v=2" defer></script>
