@@ -98,6 +98,21 @@
     });
     // Erreurs « 423 » renvoyées par le serveur en mode consultation : le message est déjà affiché par l'application.
     setTimeout(async () => { try { kiosk = await api('kiosk_state'); applyKiosk(); } catch (_) {} }, 300);
+    /* 🔒 consultation (body.is-kiosk, posée dès la page par index.php) ou invité du réseau local : aucune image ni aucun son de
+       Wikimedia Commons ne part chercher sur Internet. Les modules ne les dessinent plus dans ce mode ; ici, en plus, une image déjà
+       posée mais pas encore chargée (chargement « paresseux ») ou posée par un autre module est retirée, son lien ↗ reste. */
+    const COMMONS_MEDIA = /^https?:\/\/(?:commons|upload)\.wikimedia\.org\//i;
+    const offlineNow = () => document.body?.classList.contains('is-kiosk') || !!window.LCNDA_GUEST;
+    function dropCommonsMedia(scope) {
+        if (!offlineNow() || !scope?.querySelectorAll) return;
+        const list = [...(scope.matches?.('img, audio, video, source') ? [scope] : []), ...scope.querySelectorAll('img[src], audio[src], video[src], source[src]')];
+        for (const el of list) if (COMMONS_MEDIA.test(el.getAttribute('src') || '')) { el.removeAttribute('src'); el.removeAttribute('srcset'); el.hidden = true; }
+    }
+    if (typeof MutationObserver === 'function') {
+        new MutationObserver(muts => { if (offlineNow()) for (const m of muts) m.addedNodes.forEach(n => n.nodeType === 1 && dropCommonsMedia(n)); }).observe(document.documentElement, {childList: true, subtree: true});
+        if (document.body) new MutationObserver(() => dropCommonsMedia(document.body)).observe(document.body, {attributes: true, attributeFilter: ['class']}); // on entre en consultation
+        dropCommonsMedia(document.body);
+    }
 
     /* ═══════════════════════ 📅 FÊTES RELIGIEUSES EN DATE EXACTE ═══════════════════════ */
 
