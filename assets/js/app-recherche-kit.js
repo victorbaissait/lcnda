@@ -72,16 +72,16 @@
         if (!page || !cfg) return null;
         page.__rk?.destroy?.();
         const ac = new AbortController();
-        const K = page.__rk = {cfg, destroy: () => { ac.abort(); page.querySelectorAll('[data-rk-own]').forEach(x => x.remove()); const old = page.querySelector('[data-rp-export][data-rk-hidden]'); if (old) { old.hidden = false; delete old.dataset.rkHidden; } page.classList.remove('rk-page'); }};
+        const K = page.__rk = {cfg, destroy: () => { ac.abort(); const e0 = page.querySelector('[data-rk-export]'); if (K.oldExport && e0) e0.before(K.oldExport); page.querySelectorAll('[data-rk-own]').forEach(x => x.remove()); page.classList.remove('rk-page'); }};
         page.classList.add('rk-page');
         const picked = () => { try { const s = cfg.selected ? cfg.selected() : [...page.querySelectorAll('[data-rp-pick]:checked')].map(c => Number(c.dataset.rpPick)); return s && s.length ? s : null; } catch (_) { return null; } };
         const nOf = () => { const s = picked(); return s ? s.length : null; };
         /* ⤓ Exporter ▾ : un menu (l'export d'avant, puis 🧺 et 📎) */
-        const old = page.querySelector('.page-header [data-rp-export]');
+        const old = page.querySelector('.page-header [data-rp-export]:not([data-rk-export])');
         let exp = null;
         if (old) {
             exp = document.createElement('button'); exp.type = 'button'; exp.className = old.className; exp.dataset.rkExport = ''; exp.dataset.rkOwn = ''; exp.setAttribute('aria-haspopup', 'menu');
-            exp.textContent = T('⤓ Exporter ▾'); old.hidden = true; old.dataset.rkHidden = ''; old.before(exp);
+            exp.textContent = T('⤓ Exporter ▾'); old.before(exp); old.remove(); K.oldExport = old; // l'ancien bouton, hors de la page : ses écouteurs (CSV, impression) servent toujours
             exp.addEventListener('click', () => {
                 const n = nOf(), what = n ? T('les {n} cochés', {n}) : T('tout');
                 const items = [{icon: '📊', label: T('CSV ou impression…'), run: () => old.click()}];

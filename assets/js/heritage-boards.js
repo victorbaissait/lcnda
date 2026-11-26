@@ -1786,10 +1786,13 @@
         /** ＋ Ajouter → 📊 Des données téléchargées et 🧺 Mon panier */
         function addMenuData(dlg, close) {
             const dsec = dlg.querySelector('section[data-k="data"]'), host = dsec?.querySelector('[data-bd-datahost]');
-            if (dsec && !dsec.hidden && host && ext.atelierData?.chooser) {
+            // le choix des listes (lourd) seulement quand on le demande
+            dsec?.querySelector('[data-bd-datapick]')?.addEventListener('click', e => {
+                e.currentTarget.hidden = true; host.hidden = false;
+                if (!ext.atelierData?.chooser) { host.innerHTML = `<p class="muted">${esc(i18n('Données indisponibles.'))}</p>`; return; }
                 ext.atelierData.chooser(host, {}, {pickRows: true, buttons: false});
                 const mb = host.querySelector('[data-atd-modebox]'); if (mb) mb.style.display = 'none'; // les lignes se cochent ; « Poser » dit quoi
-            } else if (host) host.innerHTML = `<p class="muted">${esc(i18n('Données indisponibles.'))}</p>`;
+            });
             dsec?.querySelector('[data-bd-datalive]')?.addEventListener('click', () => {
                 const c = host?._atd?.read?.(); if (!c || (!c.src && !c.ask)) { toast(i18n('Choisis une liste, ou pose une question.'), 'error'); return; }
                 const d = dataList(c), t = placeSpecs([{type: 'data', cfg: c, title: d ? i18n(d.label) : c.ask, w: 380, h: 320}]);
@@ -1854,7 +1857,7 @@
                     <section data-k="media"><h4>🖼 Un média de l’app</h4>${window.LCNDA_PICKER?.mediaField ? window.LCNDA_PICKER.mediaField({name: 'bd_media', types: ['image', 'video', 'audio', 'document'], eyebrow: 'TABLEAU', title: 'Un média de l’app', okLabel: 'Poser sur le tableau', placeholder: 'Choisir une image, un son, une vidéo…'}) : PKF({name: 'bd_media', kind: 'media'})}</section>
                     <section data-k="web"><h4>🌐 D’ailleurs</h4><label>Adresse d’une image ou d’un site<input data-bd-url placeholder="https://…"></label><button type="button" class="button small" data-bd-addurl>Poser</button></section>
                     <section data-k="person"><h4>👤 Une fiche</h4>${PKF({name: 'bd_person', kind: 'person'})}<button type="button" class="button small" data-bd-addperson>Poser la fiche</button></section>
-                    <section data-k="data"><h4>📊 Des données téléchargées</h4><p class="muted">${esc(i18n('Une liste téléchargée (séismes, gares, Tour de France…) : vivante (elle reste à jour, avec son ⚙️ à droite), ou seulement les lignes cochées, chacune en carte avec sa source.'))}</p><div data-bd-datahost></div>
+                    <section data-k="data"><h4>📊 Des données téléchargées</h4><p class="muted">${esc(i18n('Une liste téléchargée (séismes, gares, Tour de France…) : vivante (elle reste à jour, avec son ⚙️ à droite), ou seulement les lignes cochées, chacune en carte avec sa source.'))}</p><button type="button" class="button small secondary" data-bd-datapick>📋 ${esc(i18n('Choisir la liste…'))}</button><div data-bd-datahost hidden></div>
                         <div class="h-bd-dpgo"><button type="button" class="button small" data-bd-datalive>📊 ${esc(i18n('Poser vivant'))}</button><button type="button" class="button small secondary" data-bd-datarows>🗒 ${esc(i18n('Poser les lignes cochées'))}</button><label class="checkbox-line"><input type="checkbox" data-bd-dataframe checked> <span>${esc(i18n('dans un cadre au nom de la liste'))}</span></label></div></section>
                     <section data-k="basket"><h4>🧺 Mon panier</h4><p class="muted">${esc(i18n('Ce que tu as mis de côté : coche, puis « Poser ». Chaque chose garde sa source et devient « ✓ utilisé ».'))}</p><div data-bd-bkhost></div>
                         <div class="h-bd-dpgo"><button type="button" class="button small" data-bd-bkput>🧺 ${esc(i18n('Poser sur le tableau'))}</button><button type="button" class="button small secondary" data-bd-bktake>📥 ${esc(i18n('Prendre depuis…'))}</button></div></section>

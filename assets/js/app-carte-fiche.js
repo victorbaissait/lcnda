@@ -12,8 +12,8 @@
  *   - carte étroite (téléphone, 390 px) : la fiche est une feuille en bas, dans le cadre de la carte ; thème sombre ;
  *   - rien n'est demandé à Internet : tout ce que montre la fiche est déjà dans la page (les liens ↗ ne s'ouvrent que si on clique).
  *  API : LCNDA_EXT.carteFiche = {attach(hôte, cfg), close(hôte), mode()}
- *    cfg = {card(i) → {title, lines: [[libellé, html]], fam?: Promise<html>|html, src?: html, ins?, bk?, line?, roWhy?},
- *           label(i) → texte (la liste d'un endroit), sub?(i) → texte, onAct(kind 'ins'|'bk'|'line', i, bouton)}
+ *    cfg = {card(i) → {title, lines: [[libellé, html]], fam?: Promise<html>|html, src?: html, ins?, bk?, open?, line?, roWhy?},
+ *           label(i) → texte (la liste d'un endroit), sub?(i) → texte, onAct(kind 'ins'|'bk'|'open'|'line', i, bouton)}
  *    les points de la carte portent data-cf-i = l'index de leur ligne (les autres points ne s'ouvrent pas).
  *  Essai : tests/test-carte-fiche-point.js
  */
@@ -121,6 +121,7 @@
             const ro = m.roWhy ? ` disabled title="${esc(m.roWhy)}"` : '';
             const acts = [m.ins ? `<button type="button" class="button small secondary" data-cf-act="ins"${ro || ` title="${esc(T('Insérer cette ligne (avec sa source)'))}"`}>📎 ${esc(T('Insérer'))}</button>` : '',
                 m.bk ? `<button type="button" class="button small secondary" data-cf-act="bk"${ro || ` title="${esc(T('Mettre cette ligne au panier'))}"`}>🧺 ${esc(T('Au panier'))}</button>` : '',
+                m.open ? `<button type="button" class="button small secondary" data-cf-act="open" title="${esc(T('Ouvrir cette ligne'))}">↗ ${esc(T('Ouvrir'))}</button>` : '',
                 m.line ? `<button type="button" class="button small secondary" data-cf-act="line" title="${esc(T('Voir cette ligne dans le tableau'))}">☰ ${esc(T('Voir la ligne'))}</button>` : '',
                 `<button type="button" class="button small ghost" data-cf-zoom>🔍 ${esc(T('Zoomer ici'))}</button>`].join('');
             const lines = (m.lines || []).filter(l => l && l[1] != null && l[1] !== '').slice(0, 6);

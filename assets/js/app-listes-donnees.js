@@ -542,11 +542,12 @@
     function pointCard(d, st, r) {
         const t = pointTitle(d, r), CH = ext.listesChoix, ro = kiosk() || document.documentElement.classList.contains('base-readonly');
         const lines = cols(d, st).filter(f => !f.gps && f.key !== 'sources' && (t.own || f.key !== t.key)).map(f => [flab(f), valHtml(f, r)]).filter(l => l[1]).slice(0, 6);
-        return {title: t.title, lines, fam: pointFamily(d, r), src: pointSource(d, r), ins: !!CH, bk: !!(CH && ext.connexions), line: true, roWhy: ro ? T('Mode consultation : rien ne peut être écrit.') : ''};
+        return {title: t.title, lines, fam: pointFamily(d, r), src: pointSource(d, r), ins: !!CH, bk: !!(CH && ext.connexions), open: !!(d.open && !d.merged && !d.sub), line: true, roWhy: ro ? T('Mode consultation : rien ne peut être écrit.') : ''};
     }
     function pointAct(kind, r, btn, res) {
         if (!r) return;
         if (kind === 'ins' || kind === 'bk') return ext.listesChoix?.act?.(kind === 'ins' ? 'insert' : 'basket', [r], btn, pageApi());
+        if (kind === 'open') { try { cur.d.open(r); } catch (e) { toast(e.message, 'error'); } return; } // ↗ Ouvrir : la page de la ligne (ex. la commune)
         if (kind === 'line') { const key = rowKeyOf(cur.d, r); cur.backMap = {view: ext.miniMapOf?.(res)?.getView?.() || null, key}; cur.findRow = key; cur.st.view = 'table'; rerun(); }
     }
     /** « Charger les points de cette zone » : les lignes dont la position est dans le cadre de la carte (filtre sur place ; ou le serveur

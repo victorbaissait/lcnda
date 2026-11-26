@@ -251,6 +251,45 @@
         void token; void app; void all;
     }
     ext.dataListPicker = (box, o) => picker(box, o);
+    /**
+     * 🧰 Un <select> de listes de données → le choix commun (compact), replié en une ligne « 📋 nom · thème — Changer ».
+     * Le <select> reste dans la page, caché : sa valeur, son « change » et ce qui est enregistré ne changent pas.
+     *   LCNDA_EXT.dataListSelect(select, {items?() → [{id, icon, label…}] (sinon : ses options, reliées aux vraies listes),
+     *     before?(id) (avant de poser la valeur, ex. remplir le menu d'un autre thème), min = 9}) → {refresh, box} | null
+     * Huit choix ou moins : le menu reste un menu (null). Essai : tests/test-choix-liste-partout.js
+     */
+    function selectPicker(sel, o = {}) {
+        if (!sel || sel.dataset.ldtSel) return null;
+        const fromOpt = x => {
+            const v = x.value, all = E().list?.() || [], d = all.find(z => z.id === v || 'dl:' + z.id === v || (E().keyOf && E().keyOf(z) === v));
+            if (d) return Object.assign(Object.create(d), {id: v, theme: themeOf(d)});
+            const t = x.textContent.trim(), m = t.match(/^(\p{Extended_Pictographic}[️‍\p{Extended_Pictographic}]*)\s*(.*)$/u);
+            return {id: v, icon: m ? m[1] : '📋', label: m ? m[2] : t, description: x.parentElement?.tagName === 'OPTGROUP' ? x.parentElement.label : ''};
+        };
+        const items = () => (o.items ? o.items() : [...sel.options].filter(x => x.value).map(fromOpt));
+        if (items().length < (o.min ?? 9)) return null;
+        sel.dataset.ldtSel = '1'; sel.hidden = true;
+        const box = document.createElement('div'); box.className = 'ldt-sel'; box.dataset.ldtSelbox = '';
+        box.innerHTML = '<div data-ldt-selline></div><div class="ldt-selpick" data-ldt-selpick hidden></div>';
+        (sel.closest('label') || sel).after(box);
+        const line = box.querySelector('[data-ldt-selline]'), pk = box.querySelector('[data-ldt-selpick]');
+        let open = false;
+        const cur = () => items().find(d => d.id === sel.value) || null;
+        const lineHtml = d => { const t = themeById(themeOf(d)), ic = d.merged ? '🔀' : d.icon || '📋';
+            return `<p class="ldt-selline"><span aria-hidden="true">${esc(ic === '📋' ? '📋' : `📋 ${ic}`)}</span> <b>${esc(T(d.label))}</b>${t && t.id !== RANGER.id ? ` <span class="muted">· ${esc(`${t.icon} ${T(t.label)}`)}</span>` : ''} <span class="muted" aria-hidden="true">—</span> <button type="button" class="link-button ldt-selchange" data-ldt-selchange>${esc(T('Changer'))}</button></p>`; };
+        const mount = keep => { pk.hidden = false;
+            picker(pk, {compact: true, items, selected: sel.value, head: keep ? `<p class="ldt-selkeep"><button type="button" class="link-button" data-ldt-selkeep>${esc(T('✕ Garder « {nm} »', {nm: T(keep.label)}))}</button></p>` : '',
+                onPick: d => { o.before?.(d.id); sel.value = d.id; open = false; sel.dispatchEvent(new Event('change', {bubbles: true})); paint(); try { line.querySelector('button')?.focus({preventScroll: true}); } catch (_) {} }}); };
+        const paint = () => { const d = open ? null : cur(); if (d) { line.innerHTML = lineHtml(d); pk.hidden = true; pk.innerHTML = ''; } else { line.innerHTML = ''; if (!pk.firstChild || pk.hidden) mount(open ? cur() : null); } };
+        box.addEventListener('click', e => {
+            if (e.target.closest('[data-ldt-selchange]')) { e.preventDefault(); open = true; const d = cur(); line.innerHTML = ''; mount(d); setTimeout(() => { try { pk.querySelector('[data-ld-ov-q]')?.focus({preventScroll: true}); } catch (_) {} }, 30); }
+            if (e.target.closest('[data-ldt-selkeep]')) { e.preventDefault(); open = false; paint(); }
+        });
+        sel.addEventListener('change', () => { if (!open) paint(); });
+        paint();
+        return {refresh: paint, box};
+    }
+    ext.dataListSelect = (sel, o) => selectPicker(sel, o);
     function go(v) {
         if (v.startsWith('link:')) { const d = (E().list?.() || []).find(x => x.id === v.slice(5)); try { d?.link(); } catch (x) { toast(x.message, 'error'); } return; }
         E().openKey?.(v);

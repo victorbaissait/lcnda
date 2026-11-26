@@ -222,8 +222,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('.ld-results [data-mm-ready]');
             assert.strictEqual(await p.$$eval('.ld-results .h-map-point', a => a.length), 4);
             const note = await p.textContent('[data-ld-map-note]'); assert.match(note, /4 points sur la carte/); assert.match(note, /1 ligne sans position/);
-            await p.click('.ld-results [data-ld-map-row="2"]'); assert.deepStrictEqual(await p.evaluate(() => window.__opened), ['Manoir Durand']);
-            await p.focus('.ld-results [data-ld-map-row="0"]'); await p.keyboard.press('Enter');
+            // un clic (ou Entrée) ouvre la fiche du point sur la carte (app-carte-fiche.js) ; « ↗ Ouvrir » y ouvre la ligne
+            await p.click('.ld-results [data-ld-map-row="2"]'); await p.click('.ld-results .cf-card [data-cf-act="open"]'); assert.deepStrictEqual(await p.evaluate(() => window.__opened), ['Manoir Durand']);
+            await p.keyboard.press('Escape');
+            await p.focus('.ld-results [data-ld-map-row="0"]'); await p.keyboard.press('Enter'); await p.click('.ld-results .cf-card [data-cf-act="open"]');
             assert.deepStrictEqual(await p.evaluate(() => window.__opened), ['Manoir Durand', 'Château de Mazaud']);
             assert.match(await p.getAttribute('.ld-results [data-ld-map-row="0"]', 'aria-label'), /Château de Mazaud/);
         });

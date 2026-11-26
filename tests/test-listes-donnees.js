@@ -190,7 +190,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('🗺 Carte : un point par ligne + le lieu choisi ; un clic sur un point ouvre', async () => {
             await p.click('[data-ld-view="map"]'); await p.waitForSelector('.ld-results .h-map-point');
             assert.strictEqual(await p.$$eval('.ld-results .h-map-point', a => a.length), 4);
-            await p.evaluate(() => document.querySelector('[data-ld-map-row="0"]').dispatchEvent(new MouseEvent('click', {bubbles: true})));
+            await p.evaluate(() => document.querySelector('[data-ld-map-row="0"]').dispatchEvent(new MouseEvent('click', {bubbles: true}))); // la fiche du point, sur la carte (app-carte-fiche.js)
+            await p.click('.ld-results .cf-card [data-cf-act="open"]');
             assert.strictEqual((await p.evaluate(() => window.__opened)).length, 2);
             await p.click('[data-ld-view="table"]'); await p.waitForSelector('.ld-table');
         });

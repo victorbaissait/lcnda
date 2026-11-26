@@ -35,7 +35,9 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         await t('Proximité : « 🗺 Carte » avant « ⤓ Exporter ▾ », fermée au départ ; elle monte avec les points, le rayon et la légende', async () => {
             await openProx();
             const order = await p.$$eval('#workspace .page-header .ui-ph-actions > button:not([hidden])', a => a.map(x => (x.matches('[data-rk-map-btn]') ? 'map' : x.matches('[data-rk-export]') ? 'export' : x.matches('[data-rp-print]') ? 'print' : '?')));
-            assert.deepStrictEqual(order.filter(x => x !== '?'), ['map', 'export', 'print'], order.join(','));
+            assert.deepStrictEqual(order.filter(x => x !== '?').slice(0, 2), ['map', 'export'], order.join(','));
+            assert.ok(await p.$('#workspace .page-header [data-rp-print]'), '🖨 Imprimer reste (à côté, ou dans « ⋯ » : deux boutons au plus, la règle des en-têtes)');
+            assert.strictEqual(await p.$$eval('#workspace .page-header [data-rp-export], #workspace .page-header [data-rk-export]', a => a.length), 1, 'un seul « Exporter »');
             assert.strictEqual(await p.$eval('[data-rk-map]', el => el.classList.contains('is-open')), false);
             assert.ok(await p.$eval('[data-rk-map]', el => el.compareDocumentPosition(document.querySelector('#workspace .date-results')) & Node.DOCUMENT_POSITION_FOLLOWING), 'au-dessus des résultats');
             await p.click('[data-rk-map-btn]');
@@ -60,7 +62,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
                 const g = [...host.querySelectorAll('.h-map-point[data-cf-i]')].map(x => [x, vis(x)]).find(x => x[1]) || [...host.querySelectorAll('.h-map-cluster')].map(x => [x, vis(x)]).find(x => x[1]);
                 if (!g) return null; g[0].scrollIntoView({block: 'center'}); const r = g[0].getBoundingClientRect(); return {x: r.x + r.width / 2, y: r.y + r.height / 2};
             });
-            assert.ok(where, 'un point visible');
+            assert.ok(where, 'un point visible ' + await p.evaluate(() => { const h = document.querySelector('[data-rk-map-host]'); return [document.querySelectorAll('[data-rk-map]').length, document.querySelector('[data-rk-map]')?.className, h?.querySelectorAll('.h-map-point').length, h?.querySelectorAll('.h-map-cluster').length, h?.innerHTML.length].join(','); }));
             await p.mouse.click(where.x, where.y);
             await p.waitForSelector('[data-rk-map] .cf-card', {timeout: 5000});
             let txt = await p.textContent('[data-rk-map] .cf-card');

@@ -161,6 +161,14 @@
 :root[data-theme="dark"] .ldt-picker .ld-card, :root[data-theme="dark"] .ldt-picker .ldt-chip { background: var(--white, #242424); color: var(--ink, #e8e8e8); border-color: rgba(255, 255, 255, .22); }
 :root[data-theme="dark"] .ldt-picker .ldt-pick-card.is-on, :root[data-theme="dark"] .ldt-picker .ldt-chip.is-on { background: var(--blue-soft, #1a2a3d); border-color: var(--blue-bright, #5599ff); }
 :root[data-theme="dark"] .atd-chosen { background: var(--blue-soft, #1a2a3d); }
+/* 🧰 un menu de listes devenu le choix commun (LCNDA_EXT.dataListSelect) : replié, une ligne « 📋 nom · thème — Changer » */
+.ldt-sel { display: grid; gap: 6px; min-width: 0; margin: 4px 0; }
+.ldt-selline { margin: 0; padding: 8px 12px; border: 1.5px solid var(--blue-bright, #055dff); border-radius: 10px; background: var(--blue-soft, #eaf2ff); overflow-wrap: anywhere; font-weight: 500; }
+.ldt-selline b { font-weight: 800; }
+.ldt-selchange { color: var(--blue, #0066cc); text-decoration: underline; font-weight: 700; }
+.ldt-selkeep { margin: 0 0 6px; }
+.ldt-selpick { min-width: 0; }
+:root[data-theme="dark"] .ldt-selline { background: var(--blue-soft, #1a2a3d); }
 /* 📊 ⚙️ Personnaliser et les formes du widget */
 .atd-show { --atd-accent: var(--blue-bright, #055dff); }
 .atd-show .atd-head b { color: inherit; border-left: 3px solid var(--atd-accent); padding-left: 6px; }

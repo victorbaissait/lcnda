@@ -43,7 +43,7 @@ const FAKE = () => {
         await p.evaluate(x => window.LCNDA_EXT.openBoardById(x), id); await p.waitForSelector('.h-board-stage', {timeout: 20000});
         await p.waitForFunction(x => window.LCNDA_EXT.boardsInternals?.current?.isOpen?.() && window.LCNDA_EXT.boardsInternals.current.id === x, id, {timeout: 20000}); await sleep(300); };
     const addMenu = async () => { await clean(); await p.click('.h-board [data-bd-add]'); await p.waitForSelector('dialog[open] .h-bd-add'); };
-    const pickList = async () => { const S = 'dialog[open] section[data-k="data"]'; await p.waitForSelector(`${S} [data-ld-ov-q]`, {timeout: 15000}); await p.fill(`${S} [data-ld-ov-q]`, 'savon'); await p.click(`${S} [data-ld-pick="test_caisses"]`); await p.waitForSelector(`${S} .atd-chosen`); return S; };
+    const pickList = async () => { const S = 'dialog[open] section[data-k="data"]'; await p.click(`${S} [data-bd-datapick]`); await p.waitForSelector(`${S} [data-ld-ov-q]`, {timeout: 15000}); await p.fill(`${S} [data-ld-ov-q]`, 'savon'); await p.click(`${S} [data-ld-pick="test_caisses"]`); await p.waitForSelector(`${S} .atd-chosen`); return S; };
     try {
         await B.ctx.addInitScript(FAKE);
         await p.reload(); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.atelierData && window.LCNDA_EXT?.dataListPicker && window.LCNDA_EXT?.openBoardById && window.LCNDA_EXT?.connexions, null, {timeout: 60000});
@@ -224,7 +224,7 @@ const FAKE = () => {
         await t('390 px et sombre : la fenêtre « Ajouter » ne déborde pas, rien de collé ; données et cartes en sombre', async () => {
             await p.setViewportSize({width: 390, height: 844}); await p.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
             await openBoard(bid); await addMenu(); await p.waitForSelector('dialog[open] section[data-k="basket"] [data-bd-bki], dialog[open] section[data-k="basket"] .muted', {timeout: 15000});
-            await p.waitForSelector('dialog[open] section[data-k="data"] [data-ld-ov-q]', {timeout: 15000});
+            await p.click('dialog[open] section[data-k="data"] [data-bd-datapick]'); await p.waitForSelector('dialog[open] section[data-k="data"] [data-ld-ov-q]', {timeout: 15000});
             const r = await p.evaluate(() => {
                 const vw = document.documentElement.clientWidth, bad = [];
                 document.querySelectorAll('dialog[open] section[data-k="data"] *, dialog[open] section[data-k="basket"] *').forEach(el => { const b = el.getBoundingClientRect(); if (!b.width || el.closest('.ldt-pick-themes')) return; if (b.right > vw + 0.5 || b.left < -0.5) bad.push(el.className || el.tagName); });
