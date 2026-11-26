@@ -71,8 +71,9 @@
         prepared.sort((a, b) => (a.src.rank || 9) - (b.src.rank || 9) || (a.dn == null) - (b.dn == null) || (a.year ?? 0) - (b.year ?? 0));
         const clusters = [], byDay = new Map(), byYear = new Map(), byKey = new Map();
         const push = (m, k, i) => { const l = m.get(k); if (l) l.push(i); else m.set(k, [i]); };
-        const okWith = (c, x) => (x.src.many || !c.srcs.has(x.src.id)) && !c.members.some(m => apart.has(pair(m.key, x.key))); // many : une source qui a plusieurs lignes du même événement (ex. les repères d'une crue)
-        const dist = (c, x) => (c.geo && x.geo ? km(c.lat, c.lon, x.lat, x.lon) : Infinity);
+        const okWith = (c, x) => (x.src.many || !c.srcs.has(x.src.id)) && !(apart.size && c.members.some(m => apart.has(pair(m.key, x.key)))); // many : une source qui a plusieurs lignes du même événement (ex. les repères d'une crue)
+        // ⏱ plus loin en latitude que KM (1° ≥ 111 km, toujours) : pas la peine du calcul exact (on ne compare qu'à KM ; ≈ 1,5 s de moins pour une grosse liste)
+        const dist = (c, x) => (c.geo && x.geo ? (Math.abs(c.lat - x.lat) * 111 >= KM ? Infinity : km(c.lat, c.lon, x.lat, x.lon)) : Infinity);
         for (const x of prepared) {
             let best = -1;
             if (BY) { for (const k of BYS) { const v = vOf(x, k); if (!v) continue; best = (byKey.get(v) || []).find(i => okWith(clusters[i], x)) ?? -1; if (best >= 0) break; } }

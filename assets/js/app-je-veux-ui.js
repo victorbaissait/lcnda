@@ -311,7 +311,10 @@
         const text = String(q || '').trim();
         QK.rows = new Map();
         if (text.length < 4) { if (und) und.hidden = true; return []; }
-        const u = await understand(text);
+        const pre = E().analyse(text, reg()), f = E().fold(text).trim();
+        // pas de verbe, ou une question (« qui est… », « les enfants de… ») : c'est la recherche de noms et « Poser une question », comme avant
+        if (!pre.act || /^(qui|quand|combien|ou|quel|quels|quelle|quelles|les|des|mes|ma|mon)\b/.test(f)) { if (und) und.hidden = true; return []; }
+        const u = await Promise.race([understand(text), sleep(1500).then(() => pre)]);
         if (!document.body.contains(dlg) || dlg.querySelector('input')?.value.trim() !== text) return [];
         if (!u.act) { if (und) und.hidden = true; return []; } // pas de verbe : c'est une recherche de noms, comme avant
         const r = E().rank(u, reg()), conf = E().confidence(u, r), confirmed = QK.confirmed === E().fold(text);

@@ -180,8 +180,9 @@
             H('diagram', 'montrer', '📈', 'Faire un diagramme', 'Tu dis ce que tu veux montrer, l’app propose les bons dessins (« Je veux représenter… »).', ['Diagrammes', '＋ Nouveau', '💬 Je veux représenter…'], {act: ['faire', 'voir'], obj: ['diagramme', 'metier', 'prenom', 'deces', 'mariage'], words: 'representer statistique chiffres pyramide camembert frise', pr: 2,
                 go: async c => { // ＋ Nouveau → 💬 Je veux représenter…, avec la phrase (l'assistant propose les dessins ; rien n'est créé)
                     const d = X().diagrammesOnglet;
-                    if (!d?.go || d.on?.() === false) { S().graphMode = 'distribution'; return A().setModule?.('graphiques'); }
-                    await d.go({view: 'new', door: 'ask', nav: 'all', id: 0, model: -1});
+                    if (d?.go && d.on?.() !== false) await d.go({view: 'new', door: 'ask', nav: 'all', id: 0, model: -1});
+                    else if (X().diagramsInternals?.openEditor) X().diagramsInternals.openEditor(); // l'onglet Diagrammes éteint : la galerie « ＋ Nouveau diagramme », avec « Je veux représenter… »
+                    else { S().graphMode = 'distribution'; return A().setModule?.('graphiques'); }
                     for (let i = 0; i < 40; i++) { const inp = document.querySelector('[data-dga-q]'); if (inp) { if (c.q) { inp.value = c.q; inp.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true})); } return; } await new Promise(r => setTimeout(r, 100)); }
                 }, module: 'diagrammes'}),
             H('occ', 'montrer', '🧱', 'Transmission des métiers', 'Qui faisait quel métier, de père en fils.', ['Graphiques', 'Transmission des métiers'], {act: ['voir', 'faire'], obj: ['metier'], words: 'profession pere fils metier transmis', go: graph('occupations'), target: 'graph:occupations', module: 'graphiques'}),

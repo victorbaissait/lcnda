@@ -251,15 +251,17 @@ echo json_encode($I);`], {cwd: appRoot, encoding: 'utf8', env});
                     assert.equal(await p.$('.vg-root'), null, 'la bulle est fermée');
                 });
                 await t('▶ « Faire un diagramme des métiers » : Diagrammes → ＋ Nouveau → 💬 Je veux représenter…, la phrase posée, rien de créé', async () => {
+                    const closeDlg = () => p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { try { d.close(); } catch (_) {} }));
                     await p.evaluate(() => window.LCNDA_EXT.jeVeux.save({show: 'never'}));
                     await toJV(p, 'faire un diagramme des métiers'); await p.waitForSelector('.jv-ma.best');
                     assert.equal(await p.$eval('.jv-ma.best', a => a.dataset.jvCard), 'diagram');
                     const before = p.posts.length;
                     await p.click('.jv-ma.best [data-jv-go]');
                     await p.waitForFunction(() => document.querySelector('[data-dga-q]')?.value === 'faire un diagramme des métiers', null, {timeout: 15000});
-                    assert.equal(await p.evaluate(() => window.LCNDA_APP.state.module), 'diagrammes');
+                    assert.ok(await p.evaluate(() => window.LCNDA_APP.state.module === 'diagrammes' || !!document.querySelector('dialog[open] [data-dga-q]')), 'l’onglet Diagrammes, ou sa galerie quand l’onglet est éteint');
                     await p.waitForTimeout(500);
                     assert.equal(p.posts.slice(before).filter(x => /diagram|dgo_/i.test(x) && /save|create|new/i.test(x)).length, 0, p.posts.slice(before).join('\n'));
+                    await closeDlg();
                     await p.evaluate(() => window.LCNDA_EXT.jeVeux.save({show: 'first'}));
                 });
                 await t('⭐ Mes buts : ☆ sur une réponse, retrouvé en tête de page', async () => {
