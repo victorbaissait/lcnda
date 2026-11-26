@@ -153,12 +153,14 @@
 
     /* ═════════════ « 🧰 Toutes les données » : recherche, pastilles, thèmes ═════════════ */
     const ws = () => document.getElementById('workspace');
-    const notInstalled = new Set(); let installChecked = false;
-    window.addEventListener('lcnda:installs-changed', () => { installChecked = false; notInstalled.clear(); }); // ⤓ un pack installé ou retiré : « à installer » se revérifie (app-listes-donnees.js)
+    const notInstalled = new Set(), checkErr = new Map(); let installChecked = false; // checkErr : la vérification a échoué (serveur) → ni « installé » ni « à télécharger »
+    const errTag = id => `<span class="ldt-tag is-warn" title="${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: checkErr.get(id) || '?'}))}">⚠ ${esc(T('Vérification impossible'))}</span>`;
+    window.addEventListener('lcnda:installs-changed', () => { installChecked = false; notInstalled.clear(); checkErr.clear(); }); // ⤓ un pack installé ou retiré : « à installer » se revérifie (app-listes-donnees.js)
     async function checkInstalls(onDone, list = null) {
         const ds = (list || index().ds).filter(d => d.installed && !d.link);
-        await Promise.all(ds.map(async d => { let ok = true; try { ok = E().isInstalled ? await E().isInstalled(d) : (await d.installed()) !== false; } catch (_) { ok = false; } if (ok) notInstalled.delete(d.id); else notInstalled.add(d.id); }));
-        if (!list) installChecked = true; onDone?.();
+        let failed = false;
+        await Promise.all(ds.map(async d => { let ok = true; try { ok = E().isInstalled ? await E().isInstalled(d) : (await d.installed()) !== false; checkErr.delete(d.id); } catch (e) { failed = true; checkErr.set(d.id, e?.message || String(e)); notInstalled.delete(d.id); return; } if (ok) notInstalled.delete(d.id); else notInstalled.add(d.id); }));
+        if (!list && !failed) installChecked = true; onDone?.(); // une erreur : on revérifiera (pas « à télécharger » pour rien)
     }
     const textOf = new Map();
     const hay = d => { const k = `${d.id}|${d.label}`; if (!textOf.has(k)) { const t = themeById(themeOf(d)); textOf.set(k, fold([T(d.label), d.label, d.id, d.source, d.description ? T(d.description) : '', t ? T(t.label) : '', ...(d.fields || []).map(f => T(f.label)), ...(d.keywords || [])].join(' '))); } return textOf.get(k); };
@@ -169,7 +171,7 @@
     const cardOf = d => `<button type="button" class="ld-card${d.merged ? ' is-merged' : ''}" data-ld-go="${esc(listKey(d))}"><span class="ld-card-ico" aria-hidden="true">${esc(d.merged ? '🔀' : d.icon || '📋')}</span><span class="ld-card-txt"><b>${esc(T(d.label))}</b>${d.merged ? `<small class="muted">${esc(d.mergeLine?.() || T('liste réunie'))}</small>` : d.source ? `<small class="muted">${esc(d.source)}</small>` : ''}</span><span class="ld-card-state" data-ld-state="${esc(d.id)}">${d.link ? `<span class="ldt-tag">${esc(T('lien'))}</span>` : d.merged ? `<span class="ldt-tag is-merged">${esc(T('liste réunie'))}</span>` : notInstalled.has(d.id) ? `<span class="ldt-tag">${esc(T('à installer'))}</span>` : ''}</span></button>`;
     /* compact (choisir une source ailleurs) : la même carte, une ligne pour dire ce que c'est, « installé » ou « à télécharger » */
     const descOf = d => { try { return d.merged ? (d.mergeLine?.() || T('liste réunie')) : d.description ? T(d.description) : d.source || ''; } catch (_) { return d.source || ''; } };
-    const stateTag = (d, checked) => (d.link ? `<span class="ldt-tag">${esc(T('lien'))}</span>` : notInstalled.has(d.id) ? `<span class="ldt-tag">${esc(T('à télécharger'))}</span>` : checked || !d.installed ? `<span class="ldt-tag is-ok">${esc(T('installé'))}</span>` : '');
+    const stateTag = (d, checked) => (d.link ? `<span class="ldt-tag">${esc(T('lien'))}</span>` : checkErr.has(d.id) ? errTag(d.id) : notInstalled.has(d.id) ? `<span class="ldt-tag">${esc(T('à télécharger'))}</span>` : checked || !d.installed ? `<span class="ldt-tag is-ok">${esc(T('installé'))}</span>` : '');
     const pickCard = (d, sel, checked) => `<button type="button" class="ld-card ldt-pick-card${d.merged ? ' is-merged' : ''}${sel ? ' is-on' : ''}" data-ld-pick="${esc(d.id)}" aria-pressed="${sel ? 'true' : 'false'}"><span class="ld-card-ico" aria-hidden="true">${esc(d.merged ? '🔀' : d.icon || '📋')}</span><span class="ld-card-txt"><b>${esc(T(d.label))}</b>${descOf(d) ? `<small class="muted">${esc(descOf(d))}</small>` : ''}</span><span class="ld-card-state" data-ld-state="${esc(d.id)}">${stateTag(d, checked)}</span></button>`;
     const K_PICK_THEME = 'genealogie-donnees-choix-theme';
     /**
@@ -239,7 +241,7 @@
             if (t.closest('[data-ldt-settings]')) return goSettings();
             if ((b = t.closest('[data-ld-go]'))) return go(b.dataset.ldGo);
         });
-        const after = () => { if (!page.isConnected) return; checked = true; counts(); if (chip === 'install' || compact) paint(); page.querySelectorAll('[data-ld-state]').forEach(el => { if (notInstalled.has(el.dataset.ldState) && !el.textContent) el.innerHTML = `<span class="ldt-tag">${esc(T('à installer'))}</span>`; }); o.onChecked?.(src().filter(d => !notInstalled.has(d.id))); };
+        const after = () => { if (!page.isConnected) return; checked = true; counts(); if (chip === 'install' || compact) paint(); page.querySelectorAll('[data-ld-state]').forEach(el => { if (checkErr.has(el.dataset.ldState)) el.innerHTML = errTag(el.dataset.ldState); else if (notInstalled.has(el.dataset.ldState) && !el.textContent) el.innerHTML = `<span class="ldt-tag">${esc(T('à installer'))}</span>`; }); o.onChecked?.(src().filter(d => !notInstalled.has(d.id))); };
         if (custom || o.filter || o.onlyInstalled) checkInstalls(after, src()); else checkInstalls(after);
         return {paint, focus: () => input.focus(), setQuery: v => { input.value = v; q = v; paint(); }, list: src, installed: d => !notInstalled.has(d.id)};
     }
@@ -335,7 +337,7 @@
         bindTabs(page.querySelector('.ldt-tabs'), id);
         page.querySelector('[data-ldt-q]').addEventListener('input', e => { const w = fold(e.target.value).split(/\s+/).filter(Boolean); page.querySelectorAll('.ld-card').forEach(c => { const d = (E().list?.() || []).find(x => listKey(x) === c.dataset.ldGo); c.hidden = !!w.length && !(d && w.every(x => hay(d).includes(x))); }); });
         page.querySelector('[data-ldt-cards]').addEventListener('click', e => { const b = e.target.closest('[data-ld-go]'); if (b) go(b.dataset.ldGo); });
-        if (!installChecked) checkInstalls(() => { if (!page.isConnected) return; page.querySelectorAll('[data-ld-state]').forEach(el => { if (notInstalled.has(el.dataset.ldState) && !el.textContent) el.innerHTML = `<span class="ldt-tag">${esc(T('à installer'))}</span>`; }); });
+        if (!installChecked) checkInstalls(() => { if (!page.isConnected) return; page.querySelectorAll('[data-ld-state]').forEach(el => { if (checkErr.has(el.dataset.ldState)) el.innerHTML = errTag(el.dataset.ldState); else if (notInstalled.has(el.dataset.ldState) && !el.textContent) el.innerHTML = `<span class="ldt-tag">${esc(T('à installer'))}</span>`; }); });
         void token;
     }
     /** le sur-titre d'une liste : son thème (en mode thèmes) */

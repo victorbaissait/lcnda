@@ -16,6 +16,8 @@
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const UI = () => window.LCNDA_UI || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const api = (...a) => A().api(...a);
@@ -267,7 +269,7 @@
     ext.maintenance[TAB[0]] = async token => {
         const ws = document.getElementById('workspace'); if (!ws) return;
         PAGE.view = PAGE.pending; PAGE.pending = null;
-        try { PAGE.st = await api('bo_status'); } catch (_) { PAGE.st = {bases: {}}; }
+        try { PAGE.st = await api('bo_status'); } catch (e) { PAGE.st = {bases: {}}; statusErr(e); }
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         // seulement tant que la page est à l'écran
         redraw = () => { if (ws.querySelector('.bo-set')) ws.innerHTML = PAGE.view ? searchHtml() : settingsHtml(); };
@@ -290,7 +292,7 @@
             if (e.target.closest('[data-bo-undismiss]')) { const s = settings(); const before = {...s.dismiss}; s.dismiss = {}; lsSave(KEY, s); changed(); redraw(); A().undoToast?.(i18n('Les bases seront de nouveau proposées sur les fiches.'), {undo: () => { lsSave(KEY, {...settings(), dismiss: before}); changed(); redraw(); }}); }
         });
     };
-    listeners.add(async () => { const ws = document.getElementById('workspace'); if (!ws?.querySelector('.bo-set')) return; try { PAGE.st = await api('bo_status'); } catch (_) {} redraw(); });
+    listeners.add(async () => { const ws = document.getElementById('workspace'); if (!ws?.querySelector('.bo-set')) return; try { PAGE.st = await api('bo_status'); } catch (e) { statusErr(e); } redraw(); });
 
     /* un seul écouteur pour les boutons (fiche et Réglages) */
     document.addEventListener('click', e => {
@@ -350,7 +352,7 @@
     });
 
     /* 🧰 le registre commun des données : chaque base, pour n'importe quelle personne, quand on veut */
-    const installedNow = async k => { try { return !!(await api('bo_status')).bases?.[k]?.installed; } catch (_) { return false; } };
+    const installedNow = async k => !!(await api('bo_status')).bases?.[k]?.installed; // une erreur remonte : ce n'est pas « pas installé »
     (ext.dataSources = ext.dataSources || []).push(...KINDS.map(k => ({
         id: `bases_officielles_${k}`, icon: NAMES[k][0], label: NAMES[k][1], group: 'Chercher', needs: ['person'],
         installed: () => installedNow(k), install: () => install(k),

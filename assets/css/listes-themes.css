@@ -22,6 +22,7 @@
 .ldt-mg { font-size: 12.5px; color: var(--blue-bright, #055dff); }
 .ldt-tag { font-size: 11.5px; padding: 1px 7px; border-radius: 999px; background: var(--soft, #f1f2f4); color: var(--muted, #6d6d6d); white-space: nowrap; }
 .ldt-tag.is-merged { background: var(--blue-soft, #eaf2ff); color: var(--blue-bright, #055dff); }
+.ldt-tag.is-warn { background: var(--yellow-soft, #fff4d6); color: var(--text, #5a4300); } /* ⚠ la vérification « installé ? » a échoué */
 .ld-card.is-merged { border-color: var(--blue-bright, #055dff); }
 .ldt-tabs { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 0 0 12px; }
 .ldt-back { border: 0; background: none; color: var(--blue-bright, #055dff); font: inherit; cursor: pointer; padding: 2px 0; }

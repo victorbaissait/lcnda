@@ -213,33 +213,35 @@
         if (statsP && Date.now() - statsAt < 300000) return statsP;
         statsAt = Date.now();
         statsP = (async () => {
-            const I = TH()?.index?.(), out = {byTheme: {}, total: 0, inst: 0, missing: 0, update: 0, coverKnown: 0, useful: []};
+            const I = TH()?.index?.(), out = {byTheme: {}, total: 0, inst: 0, missing: 0, update: 0, coverKnown: 0, useful: [], err: 0, errMsg: ''};
             let packs = null; try { packs = await ext.listesMaj?.status?.(); } catch (_) {}
             const rowsOfPack = new Map((packs?.packs || []).map(p => [p.id, Number(p.rows) || 0]));
             const upd = new Set(); try { (ext.listesMaj?.rows?.() || []).filter(r => r.state === 'update').forEach(r => upd.add(r.k)); } catch (_) {}
             await Promise.all([...(I?.by.entries() || [])].map(async ([id, ds]) => {
                 const s = out.byTheme[id] = {n: 0, inst: 0, rows: 0, missing: 0, update: 0};
                 await Promise.all(ds.filter(d => !d.link && !d.merged).map(async d => {
-                    s.n++; const ok = await E().isInstalled?.(d); if (ok) s.inst++; else s.missing++;
+                    s.n++; let ok; try { ok = await E().isInstalled?.(d); } catch (e) { out.err++; out.errMsg = e?.message || String(e); return; } // la vérification a échoué : ni installée ni « ⤓ », comptée à part (⚠)
+                    if (ok) s.inst++; else s.missing++;
                     if (!ok) { const c = await coverOf(d, packs); if (c) { out.coverKnown++; if (await coversFamily(c)) out.useful.push(T(d.label)); } } // « dont N utiles pour tes lieux »
                     let ps = []; try { ps = ok && ext.listesMaj?.packsOfList ? await ext.listesMaj.packsOfList(d) : []; } catch (_) {}
                     ps.forEach(p => { s.rows += rowsOfPack.get(p) || 0; if (upd.has(p)) s.update++; });
                 }));
                 out.total += s.n; out.inst += s.inst; out.missing += s.missing; out.update += s.update;
             }));
+            if (out.err) statsAt = 0; // pas gardé : on revérifie la prochaine fois
             return out;
         })().catch(e => { statsP = null; throw e; });
         return statsP;
     }
     async function fillStats(page) {
-        let S; try { S = await stats(); } catch (_) { return; } if (!page.isConnected) return;
+        let S; try { S = await stats(); } catch (e) { const f = page.isConnected && page.querySelector('[data-dr-foot]'); if (f) f.textContent = '⚠ ' + T('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}); return; } if (!page.isConnected) return;
         Object.entries(S.byTheme).forEach(([id, s]) => {
             const n = page.querySelector(`[data-dr-tn="${CSS.escape(id)}"]`), st = page.querySelector(`[data-dr-ts="${CSS.escape(id)}"]`);
             if (n) n.textContent = `${T('{a} / {b} listes', {a: nf(s.inst), b: nf(s.n)})}${s.rows ? ` · ${s.rows >= 1e6 ? T('{n} millions de lignes', {n: (Math.round(s.rows / 1e5) / 10).toLocaleString('fr-FR')}) : T('{n} lignes', {n: nf(s.rows)})}` : ''}`;
             if (st) st.innerHTML = `${s.missing ? `<span class="dr-dl" title="${esc(T('{n} listes à installer', {n: nf(s.missing)}))}">⤓ ${nf(s.missing)}</span>` : ''}${s.update ? `<span class="dr-up" title="${esc(T('une version plus récente existe'))}">↻</span>` : ''}`;
         });
         const foot = page.querySelector('[data-dr-foot]');
-        if (foot) foot.innerHTML = `${esc(T('{a} listes installées sur {b}', {a: nf(S.inst), b: nf(S.total)}))}${S.missing ? ` · ⤓ ${nf(S.missing)}` : ''}${S.update ? ` · ↻ ${nf(S.update)}` : ''} · <button type="button" class="dr-link" data-dr-view="themes">🧰 ${esc(T('voir en cartes'))}</button>`;
+        if (foot) foot.innerHTML = `${esc(T('{a} listes installées sur {b}', {a: nf(S.inst), b: nf(S.total)}))}${S.missing ? ` · ⤓ ${nf(S.missing)}` : ''}${S.update ? ` · ↻ ${nf(S.update)}` : ''}${S.err ? ` · <span class="dr-err" data-dr-err title="${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: S.errMsg}))}">⚠ ${esc(T('Vérification impossible'))} (${nf(S.err)})</span>` : ''} · <button type="button" class="dr-link" data-dr-view="themes">🧰 ${esc(T('voir en cartes'))}</button>`;
         const todo = page.querySelector('[data-dr-todo]');
         if (todo) {
             const last = Number(readLS('genealogie-donnees-maj-dernier', '0')) || 0;
@@ -273,7 +275,8 @@
             for (const h of HL) {
                 if (items.length >= 4) break;
                 const d = h.lists.map(id => listsAll().find(x => x.id === id)).find(Boolean);
-                if (!d || h.noGeo || !d.geo || !(await E().isInstalled?.(d))) continue;
+                if (!d || h.noGeo || !d.geo) continue;
+                try { if (!(await E().isInstalled?.(d))) continue; } catch (_) { continue; } // (une suggestion : une vérification ratée la saute, comme une lecture ratée)
                 let rows = [];
                 try { const p = await E().fetchPage(d, {...E().blank(), view: 'table'}, 0, d.query ? 2000 : 200000); rows = p.all || p.rows || []; } catch (_) { continue; }
                 const hits = [];

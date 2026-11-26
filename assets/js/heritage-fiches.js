@@ -444,7 +444,8 @@
     async function dRun(b, sheet) {
         const E = DE(), d0 = dListOf(b.list);
         if (!E || !d0) return {error: i18n('Cette liste n’est pas disponible ici.')};
-        if (!(await E.isInstalled(d0))) return {error: i18n('Ces données ne sont pas encore sur cet ordinateur (Réglages → 🗂 Données).'), notInstalled: true};
+        let inst; try { inst = await E.isInstalled(d0); } catch (e) { return {error: i18n('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)})}; } // pas « pas installées »
+        if (!inst) return {error: i18n('Ces données ne sont pas encore sur cet ordinateur (Réglages → 🗂 Données).'), notInstalled: true};
         const st = {...E.blank()}, d = E.viewDef ? E.viewDef(d0, st) : d0;
         if (b.q) st.q = b.q;
         if (b.from != null || b.to != null) st.period = {from: b.from ?? -9999, to: b.to ?? 9999, mode: 'overlap'};
@@ -658,7 +659,8 @@
         /* ⚠ une liste pas encore sur cet ordinateur : « ⤓ Installer » sur place (le pack s'installe comme dans Listes), puis ↻ vérifier */
         const checkInst = async d => {
             const slot = chosenBox.querySelector('[data-fi-dinst]'); if (!slot || !DE()?.isInstalled) return;
-            const ok = await DE().isInstalled(d); if (!slot.isConnected || el('list').value !== d.id) return;
+            let ok, err = ''; try { ok = await DE().isInstalled(d); } catch (e) { err = e?.message || String(e); } if (!slot.isConnected || el('list').value !== d.id) return;
+            if (err) { slot.innerHTML = `<p class="h-fi-dwarn">⚠ ${esc(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: err}))}</p><div class="h-fi-dinstrow"><button type="button" class="button small secondary" data-fi-drecheck>${esc(i18n('↻ C’est installé : vérifier'))}</button></div>`; return; } // pas « pas encore » : on ne sait pas
             slot.innerHTML = ok ? '' : `<p class="h-fi-dwarn">⚠ ${esc(i18n('Ces données ne sont pas encore sur cet ordinateur : installe-les pour voir les lignes.'))}</p>
                 <div class="h-fi-dinstrow">${d.install && !kiosk() ? `<button type="button" class="button small" data-fi-dinstall>${esc(i18n('⤓ Installer'))}</button>` : ''}<button type="button" class="button small secondary" data-fi-drecheck>${esc(i18n('↻ C’est installé : vérifier'))}</button></div><div data-fi-dinsthost></div>`;
         };

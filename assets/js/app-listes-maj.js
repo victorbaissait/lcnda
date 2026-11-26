@@ -213,10 +213,11 @@
     const famOf = id => FAM.find(f => f.id === id);
 
     /* l'état de chaque famille (local) et ce qui est en ligne (seulement après un clic) */
-    const C = {st: {}, info: {}, infoErr: {}, net: '', data: null, check: null, checkErr: '', checkedAt: 0, filter: readLS('genealogie-donnees-filtre', 'all'), q: ''};
+    const C = {st: {}, stErr: {}, dataErr: '', info: {}, infoErr: {}, net: '', data: null, check: null, checkErr: '', checkedAt: 0, filter: readLS('genealogie-donnees-filtre', 'all'), q: ''};
     async function loadLocal() {
-        await Promise.all(FAM.map(async f => { try { C.st[f.id] = await api(f.status); } catch (e) { C.st[f.id] = null; } }));
-        try { C.data = await status(true); } catch (_) { C.data = null; }
+        // une vérification ratée (serveur) n'est pas « pas installé » : elle est gardée (stErr, dataErr) et montrée sur la ligne (⚠)
+        await Promise.all(FAM.map(async f => { try { C.st[f.id] = await api(f.status); C.stErr[f.id] = ''; } catch (e) { C.st[f.id] = null; C.stErr[f.id] = e?.message || String(e); } }));
+        try { C.data = await status(true); C.dataErr = ''; } catch (e) { C.data = null; C.dataErr = e?.message || String(e); }
     }
     /** « ↻ Vérifier tout » : les sommaires en ligne de chaque famille + celui des données livrées */
     async function loadOnline() {
@@ -231,6 +232,7 @@
         for (const f of FAM) {
             const s = C.st[f.id], i = C.info[f.id];
             const items = f.itemsOf ? f.itemsOf(s, i) : f.items;
+            if (C.stErr[f.id]) { (items.length ? items : [one('?', f.theme, '')]).forEach(it => out.push({key: `${f.id}:${it.k}`, fam: f.id, k: it.k, theme: f.theme, icon: f.icon, name: it.name, what: it.what, tab: f.tab, size: 0, date: '', source: f.source, licence: it.licence || f.licence, url: f.url, state: 'error', err: C.stErr[f.id], dl: 0, removable: false})); continue; }
             for (const it of items) {
                 const inst = !!(s && f.installed(s, it.k)), on = i ? f.online(i, it.k) : null;
                 const built = s ? f.built(s, it.k) : '';
@@ -241,6 +243,7 @@
                     dl: upd || !inst ? (on?.size || 0) : 0, removable: inst && (!f.removable || f.removable(s, it.k))});
             }
         }
+        if (C.dataErr) out.push({key: 'data:?', fam: 'data', k: '?', theme: 'Livrées avec l’app', icon: '📦', name: 'Livrées avec l’app', what: '', size: 0, date: '', state: 'error', err: C.dataErr, dl: 0, removable: false});
         for (const p of C.data?.packs || []) {
             const c = C.check?.packs?.[p.id];
             out.push({key: `data:${p.id}`, fam: 'data', k: p.id, theme: 'Livrées avec l’app', icon: '📦', name: titleOf(p), what: p.rows ? T('{n} lignes', {n: nf(p.rows)}) : '', size: p.size, date: p.version,
@@ -350,7 +353,7 @@
     async function refreshPanel() { if (!panel()) return; await loadLocal(); drawPanel(); }
     function repaintAll() { document.querySelectorAll('[data-dmaj-line]').forEach(l => refreshLine(l).catch(() => {})); if (panel()) refreshPanel(); }
 
-    const STATE_TXT = {ok: ['✓', 'installé · à jour'], update: ['↻', 'mise à jour dispo'], missing: ['⤓', 'pas installé'], absent: ['🕓', 'pas encore prêt']};
+    const STATE_TXT = {ok: ['✓', 'installé · à jour'], update: ['↻', 'mise à jour dispo'], missing: ['⤓', 'pas installé'], absent: ['🕓', 'pas encore prêt'], error: ['⚠', 'Vérification impossible']};
     /* « pas encore prêt » = pas encore fabriqué (sur GitHub) ; « site injoignable » = le sommaire en ligne n'a pas répondu */
     const STATE_WHY = {absent: 'Ce pack n’est pas encore fabriqué : il apparaîtra ici dès qu’il sera prêt. Rien à faire de ton côté.', unreach: 'Le site n’a pas répondu : réessaie plus tard avec « ↻ Vérifier ».'};
     function drawPanel() {
@@ -359,7 +362,7 @@
         const installedSize = (C.data?.data_dir_size || 0) + (C.data?.packs || []).filter(p => p.state === 'shipped').reduce((n, p) => n + p.size, 0);
         const missing = all.filter(r => r.state === 'missing' && r.online), updates = all.filter(r => r.state === 'update');
         const sum = l => l.reduce((n, r) => n + (r.dl || 0), 0);
-        const pass = r => (C.filter === 'all' || (C.filter === 'installed' && (r.state === 'ok' || r.state === 'update')) || (C.filter === 'missing' && (r.state === 'missing' || r.state === 'absent')) || (C.filter === 'update' && r.state === 'update'))
+        const pass = r => (C.filter === 'all' || (C.filter === 'installed' && (r.state === 'ok' || r.state === 'update')) || (C.filter === 'missing' && (r.state === 'missing' || r.state === 'absent' || r.state === 'error')) || (C.filter === 'update' && r.state === 'update'))
             && (!q || fold(`${r.name} ${r.what} ${r.source} ${r.theme}`).includes(q));
         const shown = all.filter(pass);
         const auto = readLS(AUTO, '0') === '1';
@@ -394,7 +397,7 @@
     function rowHtml(r) {
         const unreach = r.state === 'absent' && r.unreachable;
         const [ico, lab] = unreach ? ['⚠', 'site injoignable'] : (STATE_TXT[r.state] || STATE_TXT.missing);
-        const why = unreach ? STATE_WHY.unreach : STATE_WHY[r.state] || lab;
+        const why = unreach ? STATE_WHY.unreach : r.state === 'error' ? T('Impossible de vérifier si ces données sont installées : {e}', {e: r.err}) : STATE_WHY[r.state] || lab;
         const k = kiosk(), q = Q.items.find(x => x.fam === r.fam && x.k === r.k && x.state !== 'done');
         const act = k ? '' : q ? `<span class="dmaj-inq muted" data-dmaj-inq>${esc(q.state === 'run' ? T('en cours…') : T('dans la file'))}</span>`
             : r.state === 'update' ? `<button type="button" class="button small" data-dmaj-do="update">${esc(T('Mettre à jour'))}${r.dl ? ` <small>(${esc(fmtSize(r.dl))})</small>` : ''}</button>`

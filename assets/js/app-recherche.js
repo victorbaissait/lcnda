@@ -1016,7 +1016,10 @@
         }
         if(finished)imFinished(finished);
     }
+    // ⤓ les décès INSEE installés ou retirés : les mémoires « installé ? » de 📊 Données (thèmes, récap, listes) sont oubliées
+    function imInstallsChanged(){try{const f=window.LCNDA_EXT?.dataListsEngine?.forgetInstalls;if(f)f();else window.dispatchEvent(new CustomEvent('lcnda:installs-changed'));}catch(_){}}
     function imFinished(f){
+        imInstallsChanged();
         const labels=(f.labels||[]).map(imShort);
         const what=f.kind==='updates'&&labels.length?i18n('Décès INSEE à jour : {list} ({who}).',{list:labels.slice(0,3).join(', ')+(labels.length>3?'…':''),who:plural(Number(f.rows||0),'personne ajoutée','personnes ajoutées')})
             :i18n('Décès INSEE installés : {files}, {who}.',{files:plural(Number(f.files||0),'fichier'),who:plural(Number(f.rows||0),'personne ajoutée','personnes ajoutées')});
@@ -1216,7 +1219,8 @@
         try{
             let done=false,guard=0;
             while(!done&&guard++<5000){const r=await api('insee_maj_remove_year',{},{method:'POST',body:{year}});removed+=Number(r.deleted_rows||0);done=!!r.completed;const b=$(`[data-im-remove="${year}"]`);if(b){b.disabled=true;b.textContent=i18n('Retrait… {n}',{n:removed.toLocaleString('fr-FR')});}}
-        }catch(error){toast(error.message,'error');await imLoad().catch(()=>{});return;}
+        }catch(error){toast(error.message,'error');imInstallsChanged();await imLoad().catch(()=>{});return;}
+        imInstallsChanged();
         await imLoad().catch(()=>{});
         toast(year?i18n('Décès de {y} retirés ({who}).',{y:String(year),who:plural(removed,'fiche')}):i18n('Fichiers importés à la main retirés ({who}).',{who:plural(removed,'fiche')}),'',year?{duration:12000,action:{label:i18n('↶ Annuler (retélécharger)'),run:()=>imStart([year])}}:{});
     }

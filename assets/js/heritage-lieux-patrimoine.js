@@ -15,6 +15,8 @@
 (() => {
     'use strict';
     const A = () => window.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(T('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const UI = () => window.LCNDA_UI || {};
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const T = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
@@ -48,7 +50,8 @@
         return memo.get(k);
     }
     let statusP = null;
-    const status = (fresh = false) => { if (fresh || !statusP) statusP = api('lp_status').catch(() => ({packs: {}, dicotopo: {deps: {}}})); return statusP; };
+    const status = (fresh = false) => { if (fresh || !statusP) statusP = api('lp_status').catch(e => { statusP = null; statusErr(e); return {packs: {}, dicotopo: {deps: {}}, error: e?.message || String(e)}; }); return statusP; }; // une erreur n'est pas gardée
+    window.addEventListener('lcnda:installs-changed', () => { statusP = null; });
     const offerHidden = kind => !!(lsGet(OFFER_KEY, {}) || {})[kind];
     function hideOffer(kind) { const o = lsGet(OFFER_KEY, {}) || {}; o[kind] = true; lsSet(OFFER_KEY, o); A().undoToast?.(T('Proposition cachée. Elle reste dans Réglages → 🏘️ Lieux-dits et patrimoine.'), {undo: () => { const p = lsGet(OFFER_KEY, {}) || {}; delete p[kind]; lsSet(OFFER_KEY, p); redrawPlaces(); }}); }
     function offerHtml(kind, dep, depName) {

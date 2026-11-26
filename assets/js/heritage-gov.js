@@ -14,6 +14,8 @@
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const UI = () => window.LCNDA_UI || {};
     const esc = v => (A().escapeHtml ? A().escapeHtml(String(v ?? '')) : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const api = (...a) => A().api(...a);
@@ -56,10 +58,11 @@
     let STATUS = null, statusAt = 0;
     async function status(force = false) {
         if (!force && STATUS && Date.now() - statusAt < 60000) return STATUS;
-        try { STATUS = await api('gov_status'); statusAt = Date.now(); } catch (_) { STATUS = {installed: false}; }
+        try { STATUS = await api('gov_status'); statusAt = Date.now(); } catch (e) { STATUS = {installed: false, error: e?.message || String(e)}; statusAt = 0; statusErr(e); } // une erreur n'est pas gardée
         return STATUS;
     }
     const forget = () => { STATUS = null; evCache.clear(); };
+    window.addEventListener('lcnda:installs-changed', () => { STATUS = null; }); // ⤓ installé ou retiré ailleurs (🗂 Données) : relu
 
     /* ═════════ Morceaux d'affichage ═════════ */
     const span = n => (n.from && n.to ? i18n('{a} → {b}', {a: String(n.from), b: String(n.to)}) : n.from ? i18n('depuis {y}', {y: String(n.from)}) : n.to ? i18n('jusqu’en {y}', {y: String(n.to)}) : n.year ? i18n('attesté en {y}', {y: String(n.year)}) : '');

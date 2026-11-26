@@ -1423,6 +1423,7 @@ function saved_search_results(PDO $pdo, array $criteria, int $searchId = 0): arr
     }
     $people = collection_people($pdo, array_slice($ids, 0, 1000));
     $out = [];
+    foreach ($ids as $id) { if (isset($people[$id])) { $out[] = $people[$id] + ['is_new' => $searchId && !isset($seen[$id])]; } }
     $geo = research_people_places($pdo, array_map(static fn($p) => (int) $p['id'], $out));
     foreach ($out as &$p) { $p['places'] = $geo[(int) $p['id']] ?? []; } unset($p);
     return ['people' => $out, 'count' => count($ids), 'description' => saved_search_label($criteria)];

@@ -46,8 +46,8 @@
     const post = (a, b) => api(a, {}, {method: 'POST', body: b}).then(r => r?.result || r);
     const link = (url, label) => `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`; // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
     const langName = k => T(LANGS[k] || k).toLowerCase();
-    let st = null;
-    const status = async (fresh = false) => { if (!st || fresh) st = await api('td_tr_status').catch(() => null); return st; };
+    let st = null, stErr = ''; // stErr : la vérification a échoué (serveur) — ce n'est pas « pas installée »
+    const status = async (fresh = false) => { if (!st || fresh) { try { st = await api('td_tr_status'); stErr = ''; } catch (e) { st = null; stErr = e?.message || String(e); } } return st; };
     const ready = (s, k) => !!s?.langs?.[k]?.installed;
 
     /** installer une langue (et le moteur), en suivant l'avancement ; onStep(pct, texte) */
@@ -78,6 +78,7 @@
             if (lang === 'la') { host.innerHTML = latinHelp(); return; }
             if (!LANGS[lang]) { host.innerHTML = `<p class="muted">${esc(T('Choisis la langue du texte : allemand, italien, espagnol, néerlandais, polonais, portugais ou anglais.'))}</p>`; return; }
             const s = await status();
+            if (!s && stErr) { host.innerHTML = `<p class="error" role="alert">${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: stErr}))}</p>`; return; }
             if (!ready(s, lang)) {
                 const mb = Math.round((s?.engine?.installed ? (lang === 'en' ? 1 : 2) * 95 : 450 + (lang === 'en' ? 1 : 2) * 95));
                 host.innerHTML = `<p>${esc(T('La traduction {l} → français marche sans Internet une fois installée (≈ {n} Mo, une seule fois). Le texte ne quitte jamais l’ordinateur.', {l: langName(lang), n: String(mb)}))}</p>
@@ -176,7 +177,7 @@
     async function settingsInto(host) {
         if (!host) return;
         const s = await status(true);
-        if (!s) { host.innerHTML = ''; return; }
+        if (!s) { host.innerHTML = stErr ? `<p class="error" role="alert">${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: stErr}))}</p>` : ''; return; }
         const S = s.sources || {};
         const rowL = ([k, l]) => { const L = s.langs?.[k]; return `<tr><td>${esc(T(l))} → ${esc(T('français'))}</td><td>${esc((L?.pairs || []).join(' + '))}</td><td>${L?.installed ? `✓ ${esc(L.built || '')}` : '—'}</td>
             <td>${L?.installed ? `<button type="button" class="button small secondary" data-tdt-undo="${k}">${esc(T('Retirer'))}</button>` : `<button type="button" class="button small" data-tdt-inst="${k}">${esc(T('⤓ Installer'))}</button>`}</td></tr>`; };

@@ -115,7 +115,8 @@
         const d = listById(c.src);
         if (!d) return {rows: [], total: 0, missing: true};
         if (!eligible(d)) return {d, rows: [], total: 0, missing: true};
-        if (!(await E().isInstalled?.(d))) return {d, rows: [], total: 0, notInstalled: true};
+        let inst; try { inst = await E().isInstalled?.(d); } catch (e) { return {d, rows: [], total: 0, note: '⚠ ' + T('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)})}; } // une vérification ratée n'est pas « pas installée »
+        if (!inst) return {d, rows: [], total: 0, notInstalled: true};
         const st = await stateFor(c);
         if (c.famOnly && LF()) { // seulement quand quelqu'un de la famille vivait près de là (calculé ici)
             await LF().ready();

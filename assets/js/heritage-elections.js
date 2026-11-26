@@ -13,6 +13,8 @@
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const UI = () => window.LCNDA_UI || {};
     const esc = v => (A().escapeHtml ? A().escapeHtml(String(v ?? '')) : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const api = (...a) => A().api(...a);
@@ -159,7 +161,7 @@
     ext.maintenance.elections = async token => {
         const ws = document.getElementById('workspace'); if (!ws) return;
         let st = {installed: false};
-        try { st = await api('elections_status'); } catch (_) {}
+        try { st = await api('elections_status'); } catch (e) { statusErr(e); }
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         const draw = () => {
             const s = settings(), K = UI().toggleHtml || ((l, o) => `<label class="ui-toggle"><input type="checkbox" ${o.attrs} ${o.checked ? 'checked' : ''}><i></i>${esc(l)}</label>`);
@@ -180,7 +182,7 @@
         const loadInfo = () => api('elections_dl_info').then(r => { DL.online = r.pack || null; DL.err = r.error || ''; }).catch(x => { DL.online = null; DL.err = x.message; }).finally(async () => {
             const id = dlSaved(); if (id && !DL.run) { try { const r = await api('elections_dl_resume', {id}); if (r.exists) DL.paused = {id, received: r.received, size: r.size}; else dlForget(); } catch (_) {} }
             redraw(); });
-        refresh = async () => { try { st = await api('elections_status'); } catch (_) {} redraw(); if (!st.installed && DL.online === undefined) loadInfo(); };
+        refresh = async () => { try { st = await api('elections_status'); } catch (e) { statusErr(e); } redraw(); if (!st.installed && DL.online === undefined) loadInfo(); };
         if (!st.installed) loadInfo();
         if (ws.__elBound !== true) {
             ws.__elBound = true;

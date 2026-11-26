@@ -83,9 +83,9 @@ function extractActions(dir = JS) {
     const files = fs.readdirSync(dir).filter(f => f.endsWith('.js')).sort();
     const srcs = Object.fromEntries(files.map(f => [f, fs.readFileSync(path.join(dir, f), 'utf8').replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[\s;{}])\/\/[^\n]*/g, '$1')])); // sans les commentaires
     // les familles de téléchargement (app-listes-maj.js : FAM) : pre, status, info, finish
-    const maj = srcs['app-listes-maj.js'] || '';
-    for (const m of maj.matchAll(/\{id:\s*'[a-z_]+',[^\n]*?status:\s*'([a-z_]+)',\s*info:\s*'([a-z_]+)',\s*pre:\s*'([a-z_]+)',\s*finish:\s*'([a-z_]+)'/g)) {
-        add(m[1], 'GET', 'app-listes-maj.js'); add(m[2], 'GET', 'app-listes-maj.js'); add(m[4], 'POST', 'app-listes-maj.js'); famPre.push(m[3]);
+    // (et celles qu'un autre fichier y ajoute : heritage-telech-a.js → FAMILY telech_a_osm)
+    for (const f of files) for (const m of srcs[f].matchAll(/\{id:\s*'[a-z_]+',[^\n]*?status:\s*'([a-z_]+)',\s*info:\s*'([a-z_]+)',\s*pre:\s*'([a-z_]+)',\s*finish:\s*'([a-z_]+)'/g)) {
+        add(m[1], 'GET', f); add(m[2], 'GET', f); add(m[4], 'POST', f); famPre.push(m[3]);
     }
     const esc = w => w.replace(/[$]/g, '\\$');
     /** la sous-action d'un appel : {op: 'save'} dans « …, {op: 'save', … » ou « body: {op: 'save' » */
@@ -206,7 +206,7 @@ const UNKNOWN_OP = /\b(demande|op[ée]ration)( [^.:!?]{0,40})? inconnue\b|unknow
     if (process.env.LCNDA_ROUTES_LIST) { for (const [a, e] of [...acts].sort()) console.log([...e.methods].join('+'), a, [...e.files].join(','), [...e.variants.GET, ...e.variants.POST].join(' ')); process.exit(0); }
     await t(`le JS appelle ${acts.size} actions : la lecture du code les trouve toutes (ld_*, familles, fonctions maison)`, async () => {
         assert.ok(acts.size > 400, 'trop peu d’actions trouvées : ' + acts.size);
-        for (const a of ['ld_status', 'ld_query', 'ld_facet', 'ld_famille', 'ld_groups', 'ld_merge', 'meteo_status', 'hist_dl_start', 'gov_pack_remove', 'bo_pack_restore', 'prenoms_pays_dl_step', 'donnees_maj_check', 'rt_saved_get', 'aia_conv', 'inbox_write'])
+        for (const a of ['ld_status', 'ld_query', 'ld_facet', 'ld_famille', 'ld_groups', 'ld_merge', 'meteo_status', 'hist_dl_start', 'telech_a_osm_dl_step', 'telech_a_osm_pack_finish', 'gov_pack_remove', 'bo_pack_restore', 'prenoms_pays_dl_step', 'donnees_maj_check', 'rt_saved_get', 'aia_conv', 'inbox_write'])
             assert.ok(acts.has(a), 'pas trouvée : ' + a);
         assert.ok(acts.get('ld_merge').methods.has('POST') && acts.get('ld_status').methods.has('GET'));
     });

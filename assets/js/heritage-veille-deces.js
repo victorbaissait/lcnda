@@ -251,7 +251,7 @@
     (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-vd-person]:not([data-vd-done])').forEach(h => { h.dataset.vdDone = '1'; fillPerson(h, Number(h.dataset.vdPerson)); }); });
     /* à la demande (« 🧰 Données ») : les décès possibles d'une personne */
     (ext.dataSources = ext.dataSources || []).push({id: 'veille_deces', icon: '⚰️', label: T('Décès possible (fichier INSEE)'), group: 'La personne', needs: ['person'],
-        installed: () => get('vd_status').then(s => !!s.insee?.installed).catch(() => false),
+        installed: () => get('vd_status').then(s => !!s.insee?.installed), // une erreur remonte : ce n'est pas « pas installé »
         run: async (ctx, host) => { LIST = null; const id = Number(ctx.person?.id || ctx.person); if (!(await fillPerson(host, id))) host.innerHTML = `<p class="muted">${esc(T('Aucun décès possible pour cette personne dans le fichier INSEE installé.'))}</p>`; }});
 
     /* « Où chercher » : les avis de décès des journaux (liens seulement) — registre lu par heritage-ou-chercher.js */

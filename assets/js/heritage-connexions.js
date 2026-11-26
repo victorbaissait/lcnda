@@ -1552,7 +1552,7 @@
             catch (err) { toast(err.message, 'error'); } finally { b.disabled = false; }
         });
         res.querySelector('[data-cx-lfull]').addEventListener('click', () => openFullList(st, d, s));
-        const ok = d.installed ? await d.installed().catch(() => false) : true;
+        let ok = true; try { ok = d.installed ? await d.installed() : true; } catch (err) { rowsBox.innerHTML = `<p class="error" role="alert">${esc(T('Impossible de vérifier si ces données sont installées : {e}', {e: err?.message || String(err)}))}</p>`; return; } // pas « pas encore installées » : on ne sait pas
         if (!ok) { rowsBox.innerHTML = `<div class="cx-empty"><span class="cx-empty-i" aria-hidden="true">⤓</span><b>${esc(T('Ces données ne sont pas encore installées sur cet ordinateur.'))}</b>${d.install && !kiosk() ? `<div class="cx-empty-row"><button type="button" class="cx-b is-sec is-sm" data-cx-lfull2>↗ ${esc(T('Les installer (page de la liste)'))}</button></div>` : ''}</div>`; rowsBox.querySelector('[data-cx-lfull2]')?.addEventListener('click', () => openFullList(st, d, s)); return; }
         const paintRows = async () => {
             const seq = st.lseq = (st.lseq || 0) + 1;

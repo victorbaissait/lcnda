@@ -175,7 +175,8 @@
         const d = listById(cfg.list);
         if (!d) return {rows: [], note: T('Cette liste n’existe plus.')};
         if (!eligible(d)) return {d, rows: [], note: T('Cette liste n’est pas disponible ici.')};
-        if (!(await E().isInstalled?.(d))) return {d, rows: [], notInstalled: true, note: T('{l} : pas encore téléchargée sur cet ordinateur.', {l: T(d.label)})};
+        let inst; try { inst = await E().isInstalled?.(d); } catch (e) { return {d, rows: [], note: '⚠ ' + T('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)})}; } // une vérification ratée n'est pas « pas installée »
+        if (!inst) return {d, rows: [], notInstalled: true, note: T('{l} : pas encore téléchargée sur cet ordinateur.', {l: T(d.label)})};
         const st = {...(E().blank?.() || {}), q: '', crit: []};
         const from = Number(cfg.from), to = Number(cfg.to), hasF = cfg.from !== '' && cfg.from != null && Number.isFinite(from), hasT = cfg.to !== '' && cfg.to != null && Number.isFinite(to);
         if (d.period && (hasF || hasT)) st.period = {from: hasF ? from : -9999, to: hasT ? to : 9999, mode: 'overlap', label: `📅 ${hasF ? from : '…'} → ${hasT ? to : '…'}`};

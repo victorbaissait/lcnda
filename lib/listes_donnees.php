@@ -360,11 +360,12 @@ function ld_facet(PDO $pdo, string $src, array $g): array
 /** les sources installées (pour l'écran : « ⤓ Installer » sinon) */
 function ld_status(): array
 {
-    $out = [];
-    foreach (ld_sources() as $id => $def) { try { $out[$id] = (bool) ($def['open'])(); } catch (Throwable) { $out[$id] = false; } }
+    $out = []; $err = [];
+    // un pack qui ne s'ouvre pas (abîmé, verrouillé…) n'est pas « pas installé » : son erreur est donnée à part (l'écran la montre)
+    foreach (ld_sources() as $id => $def) { try { $out[$id] = (bool) ($def['open'])(); } catch (Throwable $e) { $out[$id] = false; $err[$id] = $e->getMessage(); } }
     // 🧭 Histoire autour : les fichiers assets/data/ha-*.json.gz vraiment livrés (un sujet pas fabriqué n'est pas demandé : pas de 404)
     $ha = array_values(array_map(static fn($f) => basename($f, '.json.gz'), glob(__DIR__ . '/../assets/data/ha-*.json.gz') ?: []));
-    return ['installed' => $out, 'ha_files' => $ha];
+    return ['installed' => $out, 'errors' => (object) $err, 'ha_files' => $ha];
 }
 
 function ld_api_get(PDO $pdo, string $action, array $g): array

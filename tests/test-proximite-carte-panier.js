@@ -29,7 +29,8 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
     const PROX = {proximitySearch: {placeId: 1, placeName: 'Treignac', dateMode: 'range', yearFrom: 1780, yearTo: 1800, radiusKm: 10}};
     const openProx = () => research('proximity', PROX, '#workspace .research-person-card[data-rk-id]');
     /** « ⤓ Exporter ▾ » : la fenêtre d'export commune ; ses formats (📊 CSV, 🖨, puis 🧺 et 📎 là où ça a un sens) */
-    const menu = async () => { await clean(); await p.click('#workspace .page-header [data-rp-export]'); await p.waitForSelector('dialog.ui-export'); return p.$$eval('dialog.ui-export .ui-export-fmt', a => a.map(x => x.textContent.trim())); };
+    const menu = async () => { await clean(); await p.$eval('#workspace .page-header [data-rp-export]', b => b.click()); // (dans « ⋯ » quand l'en-tête a déjà deux boutons)
+        await p.waitForSelector('dialog.ui-export'); return p.$$eval('dialog.ui-export .ui-export-fmt', a => a.map(x => x.textContent.trim())); };
     const menuPick = async re => { await p.locator('dialog.ui-export .ui-export-fmt').filter({hasText: re}).first().click(); await p.click('dialog.ui-export [data-ui-go]'); await sleep(300); };
     const actPick = async re => { await p.locator('.ui-actmenu .ui-actmenu-i').filter({hasText: re}).first().click(); };
     try {
@@ -151,10 +152,10 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
             assert.ok(await p.$('#workspace .research-person-card .rk-row-acts'));
         });
         const hasKit = async () => { const items = await menu(); await clean(); return items.some(x => /panier/.test(x)) && items.some(x => /Insérer…/.test(x)); };
-        const openMap = async () => { if (!(await p.$('[data-rk-map].is-open'))) await p.click('#workspace [data-rk-map-btn]'); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'}); };
+        const openMap = async () => { if (!(await p.$('[data-rk-map].is-open'))) await p.$eval('#workspace [data-rk-map-btn]', b => b.click()); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'}); };
         await t('Multicritère : ☑ cases + barre, 🗺 Carte (les lieux des fiches), 🧺 📎, 📎 🧺 au bout de chaque ligne', async () => {
             await research('saved', {hSearch: {criteria: {last_name: 'MAZAUD', name_mode: 'exact'}, id: 0, name: ''}}, '#h-search-results tr [data-rp-pick]');
-            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000});
+            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000, state: 'attached'});
             assert.ok(await p.$('#h-search-results [data-rp-bar]'), 'la barre de sélection');
             await openMap();
             assert.ok(await p.$('#h-search-results tr .rk-row-acts [data-rk-bk]'));
@@ -165,7 +166,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         await t('Que manque-t-il ? : 🗺 Carte des communes à visiter, 🧺 📎 les recherches (un « Exporter » ajouté à l’en-tête)', async () => {
             await research('gaps', {}, '#workspace .h-gap');
             assert.ok(await hasKit());
-            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000}); await openMap();
+            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000, state: 'attached'}); await openMap();
             assert.match(await p.textContent('[data-rk-map] [data-rk-legend]'), /Commune à visiter/);
             const before = await basketN(), n = await p.$$eval('#workspace .h-gap', a => a.length);
             await menu(); await menuPick(/Mettre dans le panier/); await sleep(1200);
@@ -175,23 +176,24 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         });
         await t('Dépouillements : 🗺 Carte par commune, 🧺 📎', async () => {
             await p.evaluate(() => window.LCNDA_APP.api('save_archive_digest', {}, {method: 'POST', body: {id: 0, place_id: 1, city_name: 'Treignac', archive_service: 'AD Corrèze', archive_reference: '3 E 271/2', year_text: '1780-1800', record_type: 'naissance', status: 'todo', searched: 'Baptêmes MAZAUD'}}));
-            await research('archive_digest', {archiveDigestSearch: {q: '', city: '', placeId: 0, radiusKm: 0, dept: '', region: '', recordType: '', status: ''}, archiveDigestAdding: false, archiveDigestEditId: 0}, '#workspace [data-rk-map-btn]');
+            await research('archive_digest', {archiveDigestSearch: {q: '', city: '', placeId: 0, radiusKm: 0, dept: '', region: '', recordType: '', status: ''}, archiveDigestAdding: false, archiveDigestEditId: 0}, '#workspace .archive-digest-groups');
+            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000, state: 'attached'});
             await openMap(); assert.ok(await hasKit());
         });
         await t('Transcriptions : 🧺 📎 (des médias), pas de carte', async () => {
-            await research('transcriptions', {transcriptionSearch: {q: 'douze'}}, '#workspace .page-header [data-rp-export]');
+            await research('transcriptions', {transcriptionSearch: {q: 'baptême'}}, '#workspace .page-header [data-rp-export]');
             await sleep(300);
-            if (await p.$('#workspace .date-result, #workspace table.data-table tbody tr')) { assert.ok(await hasKit()); }
+            assert.ok(await p.$('#workspace .date-result, #workspace table.data-table tbody tr'), 'des médias trouvés'); assert.ok(await hasKit());
             assert.strictEqual(await p.$('#workspace [data-rk-map-btn]'), null);
         });
         await t('Poser une question : 🧺 📎 sur les fiches trouvées, 🗺 Carte de leurs lieux', async () => {
             await research('question', {hQuestion: 'les MAZAUD'}, '#h-question-out table.data-table');
-            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000});
+            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000, state: 'attached'});
             assert.ok(await hasKit());
         });
         await t('Où chercher ? : 🧺 les sites au panier (comme liens), 📎 ; pas de carte', async () => {
             await research('ou_chercher', {oucPerson: 1}, '#workspace .ouc-row a[data-ouc-go]');
-            await p.waitForSelector('#workspace .page-header [data-rp-export]', {timeout: 10000});
+            await p.waitForSelector('#workspace .page-header [data-rp-export]', {timeout: 10000, state: 'attached'});
             assert.strictEqual(await p.$('#workspace [data-rk-map-btn]'), null);
             const before = await basketN(), n = await p.$$eval('#workspace .ouc-row a[data-ouc-go]', a => a.filter(x => /^https?:/.test(x.href)).length);
             await menu(); await menuPick(/Mettre dans le panier/); await sleep(1200);

@@ -78,6 +78,8 @@
 
     /* ═════════════ l'écran ═════════════ */
     const A = () => W.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(T('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const ext = W.LCNDA_EXT = W.LCNDA_EXT || {};
     const KEY = 'genealogie-telech-a';
     const TAB = ['telech_a', '25ta', '🗺 Le village tel qu’il était'];
@@ -348,7 +350,7 @@
     }
     async function drawSettings(token) {
         const ws = W.document.getElementById('workspace'); if (!ws) return;
-        let about = null, st = null; try { [about, st] = await Promise.all([A().api('telech_a_about'), A().api('telech_a_osm_status')]); } catch (_) {}
+        let about = null, st = null; try { [about, st] = await Promise.all([A().api('telech_a_about'), A().api('telech_a_osm_status')]); } catch (e) { statusErr(e); }
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         if (token === undefined && !ws.querySelector('[data-ta-settings]')) return; // ré-affichage seulement si la page est encore ouverte
         const s = settings();

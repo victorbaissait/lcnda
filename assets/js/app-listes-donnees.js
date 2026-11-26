@@ -809,7 +809,7 @@
             openKey(v); });
         // pas encore installé : une petite pastille (sans attendre)
         ds.filter(d => d.installed && !d.link).forEach(async d => { let ok = true, err = ''; try { ok = await isInstalled(d); } catch (e) { err = e?.message || String(e); } const el = host.querySelector(`[data-ld-state="${CSS.escape(d.id)}"]`); if (!el) return;
-            if (err) { el.innerHTML = UI().badge ? UI().badge('⚠ ' + T('Vérification impossible'), 'orange') : esc('⚠ ' + T('Vérification impossible')); el.title = T('Impossible de vérifier si ces données sont installées : {e}', {e: err}); } // pas « à installer » : on ne sait pas
+            if (err) { el.innerHTML = UI().badge ? UI().badge('⚠ ' + T('Vérification impossible'), 'yellow') : esc('⚠ ' + T('Vérification impossible')); el.title = T('Impossible de vérifier si ces données sont installées : {e}', {e: err}); } // pas « à installer » : on ne sait pas
             else if (!ok) el.innerHTML = UI().badge ? UI().badge(T('à installer'), 'grey') : esc(T('à installer')); });
         void token;
     }
@@ -830,7 +830,7 @@
     const api = (a, q) => A().api(a, q);
     let ldStatus = null, ldStatusAt = 0;
     // une erreur du serveur n'est pas « pas installé » : elle remonte (installState → le message), et rien n'est gardé
-    const ldInstalled = async src => { if (!ldStatus || Date.now() - ldStatusAt > 15000) { ldStatusAt = Date.now(); const p = ldStatus = api('ld_status').catch(e => { if (ldStatus === p) ldStatus = null; throw e; }); } return !!(await ldStatus).installed?.[src]; };
+    const ldInstalled = async src => { if (!ldStatus || Date.now() - ldStatusAt > 15000) { ldStatusAt = Date.now(); const p = ldStatus = api('ld_status').catch(e => { if (ldStatus === p) ldStatus = null; throw e; }); } const r = await ldStatus; if (r.errors?.[src]) throw new Error(r.errors[src]); return !!r.installed?.[src]; }; // le pack ne s'ouvre pas : son erreur, pas « pas installé »
     /** ⤓ une installation finie, retirée ou ↶ : plus rien de gardé en mémoire (ici ; 🗂 thèmes, 📊 récap, 🗂 Données écoutent « lcnda:installs-changed ») */
     function forgetInstalls() { ldStatus = null; ldStatusAt = 0; try { window.dispatchEvent(new CustomEvent('lcnda:installs-changed')); } catch (_) {} }
     // chaque pack s'installe par un POST …_finish (hist_pack_finish, meteo_pack_finish, bo_dl_finish…), donnees_maj_apply, …_undo / _remove / _restore :

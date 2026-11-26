@@ -7331,6 +7331,54 @@
 /* donnees-onglet.css */
 :root[data-lc-density] .dno-more{padding:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
 :root[data-lc-density] .dno-showhid{gap:calc(6px * var(--lc-sp))}
+/* diagrammes-onglet.css */
+:root[data-lc-density] .dgo-n{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dgo-frow{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .dgo-fmore{padding:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgo-crumb{gap:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgo-kiosk{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dgo-kiosk{padding:calc(8px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .dgo-bar{gap:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root .dgo-fpanel:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .dgo-fpanel{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .dgo-fpanel{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .dgo-fr{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .dgo-fr > .lbl{padding-top:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .dgo-k{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .dgo-k{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .dgo-grid{gap:calc(16px * var(--lc-sp))}
+:root .dgo-card:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .dgo-star:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .dgo-ck:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .dgo-b{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .dgo-b{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .dgo-meta{gap:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dgo-card .dgo-used{padding:calc(6px * var(--lc-sp)) calc(36px * var(--lc-sp)) 0 0}
+:root .dgo-empty:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .dgo-empty{padding:calc(26px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .dgo-selbar{gap:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .dgo-selbar{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .dgo-selbar:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .dgo-selbar:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-l)}
+:root .dgo-selbar:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root[data-lc-density] .h-dg-trashed{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .h-dg-trashed:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .dgo-doors{gap:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .dgo-door{gap:calc(4px * var(--lc-sp))}
+:root .dgo-door:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .dgo-door{padding:calc(13px * var(--lc-sp)) calc(15px * var(--lc-sp))}
+:root .dgo-panel:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .dgo-panel{padding:calc(16px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .dgo-srcs{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .dgo-models{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dgo-edpage{padding-top:calc(18px * var(--lc-sp))}
+:root .h-dg-dlg.h-dg-inline:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .h-dg-inhead{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-dg-inhead{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .h-dg-crumb{gap:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-dg-undo{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dgo-setrow{gap:calc(8px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .dgo-setrow{padding:calc(10px * var(--lc-sp)) 0}
 /* donnees-plus.css */
 :root[data-lc-density] .dp-grid{gap:calc(16px * var(--lc-sp))}
 :root[data-lc-density] .dp-bh{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}

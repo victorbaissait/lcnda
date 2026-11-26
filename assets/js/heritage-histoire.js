@@ -15,6 +15,8 @@
         return window.LCNDA_I18N ? window.LCNDA_I18N.t(s, w) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (w && k in w ? w[k] : m)); };
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const UI = () => window.LCNDA_UI || {};
     const esc = v => (A().escapeHtml ? A().escapeHtml(String(v ?? '')) : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const api = (...a) => A().api(...a);
@@ -274,7 +276,7 @@
     ext.maintenance.histoire = async token => {
         const ws = document.getElementById('workspace'); if (!ws) return;
         let st = {installed: false, fhmd: {count: 0, codes: []}}, fh = {codes: [], wanted: [], missing: []};
-        const load = async () => { try { st = await api('hist_status'); } catch (_) {} try { fh = await api('hist_fhmd_status'); } catch (_) {} };
+        const load = async () => { try { st = await api('hist_status'); } catch (e) { statusErr(e); } try { fh = await api('hist_fhmd_status'); } catch (e) { statusErr(e); } };
         await load();
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         const draw = () => {

@@ -131,7 +131,8 @@
     async function offline(d) {
         if (!d) return null;
         if (d.online || d.needsInternet) return {k: 'net', t: T('🌐 il faut Internet'), cls: 'is-grey'};
-        if (!(await E().isInstalled?.(d))) return {k: 'dl', t: T('⤓ à installer'), cls: 'is-grey'};
+        let inst; try { inst = await E().isInstalled?.(d); } catch (_) { return {k: 'err', t: '⚠ ' + T('Vérification impossible'), cls: 'is-yellow'}; } // pas « à installer » : on ne sait pas
+        if (!inst) return {k: 'dl', t: T('⤓ à installer'), cls: 'is-grey'};
         if ((d.fields || []).some(f => (f.type === 'url' || f.type === 'image') && PHOTO.test(`${f.key} ${f.label}`))) return {k: 'photo', t: T('📶 sauf photos'), cls: 'is-orange'};
         return {k: 'ok', t: T('📶 sans Internet'), cls: 'is-green'};
     }
@@ -149,7 +150,7 @@
             for (const [tid, ds] of I?.by.entries() || []) {
                 if (tid === 'aranger') continue;
                 const ok = ds.filter(d => !d.link && d.geo && d.period && !d.query && typeof d.load === 'function');
-                const inst = []; for (const d of ok) { if (await E().isInstalled?.(d)) inst.push(d); }
+                const inst = []; for (const d of ok) { try { if (await E().isInstalled?.(d)) inst.push(d); } catch (_) { candAt = 0; } } // une vérification ratée : cette liste est sautée, et on revérifie la prochaine fois
                 const mg = inst.filter(d => d.merged);
                 const plain = inst.filter(d => !d.merged && !(mg.length && (src.has(d.id) || d.merge))); // une source déjà dans une liste réunie installée ne compte pas deux fois
                 plain.sort((a, b) => (b.familyColumn ? 1 : 0) - (a.familyColumn ? 1 : 0)); // celles faites pour « Dans la famille » d'abord

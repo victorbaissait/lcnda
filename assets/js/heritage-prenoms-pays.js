@@ -11,6 +11,8 @@
     'use strict';
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const UI = () => window.LCNDA_UI || {};
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -121,7 +123,7 @@
     const pct = (a, b) => (b ? Math.floor(a / b * 100) : 0);
     let host = null, st = {installed: false}, onChange = () => {};
     const redraw = () => { if (host && host.isConnected) draw(); };
-    async function refresh(changed = true) { try { st = await api('prenoms_pays_status'); } catch (_) {} redraw(); if (!st.installed && DL.online === undefined) loadInfo(); if (changed) onChange(st); }
+    async function refresh(changed = true) { try { st = await api('prenoms_pays_status'); } catch (e) { statusErr(e); } redraw(); if (!st.installed && DL.online === undefined) loadInfo(); if (changed) onChange(st); }
     function loadInfo() {
         DL.online = undefined;
         api('prenoms_pays_dl_info').then(r => { DL.online = r.pack || null; DL.err = r.error || ''; }).catch(x => { DL.online = null; DL.err = x.message; }).finally(async () => {

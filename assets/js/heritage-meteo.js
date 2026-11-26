@@ -13,6 +13,8 @@
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
+    // ⚠ la vérification « installé ? » a échoué (serveur) : on le DIT (pas « pas installé » en silence), une fois toutes les 30 s au plus
+    const statusErr = e => { const now = Date.now(); if (now - (statusErr.at || 0) < 30000) return; statusErr.at = now; A().toast?.(i18n('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}), 'error'); };
     const UI = () => window.LCNDA_UI || {};
     const esc = v => (A().escapeHtml ? A().escapeHtml(String(v ?? '')) : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const api = (...a) => A().api(...a);
@@ -343,7 +345,7 @@
     /* « 📥 Prendre depuis… → 🧰 Données → 🌦 Météo d'autrefois » : pour une date et un lieu (ou du… au…), sans fiche */
     (ext.pickSources = ext.pickSources || []).push({id: 'meteo_jour', icon: '🌦', label: 'Météo d’autrefois', group: 'Le lieu', needs: ['place', 'date'], source: 'Météo d’autrefois (packs installés)',
         enabled: () => settings().on !== false,
-        installed: async () => { try { const st = await api('meteo_status'); return Object.values(st.files || {}).some(f => f && f.ok); } catch (_) { return false; } },
+        installed: async () => { const st = await api('meteo_status'); return Object.values(st.files || {}).some(f => f && f.ok); }, // une erreur remonte : ce n'est pas « pas installé »
         install: () => openSettings(),
         fetch: async ctx => { const r = await dayAt(ctx.place, ctx.date); const f = factsOf(r); return {title: `🌦 ${i18n('Météo du {d}', {d: dayLong(r.date)})} · ${r.place}`, ...f}; },
         range: async (ctx, progress) => {
@@ -551,7 +553,7 @@
     ext.maintenance.meteo = async token => {
         const ws = document.getElementById('workspace'); if (!ws) return;
         let st = {files: {}};
-        try { st = await api('meteo_status'); } catch (_) {}
+        try { st = await api('meteo_status'); } catch (e) { statusErr(e); }
         if (token !== undefined && A().state && token !== A().state.workspaceToken) return;
         const draw = () => {
             const s = settings(), K = UI().toggleHtml, C = UI().checkHtml;
@@ -603,7 +605,7 @@
                 </section></div></section>`;
         };
         draw();
-        const refresh = async () => { try { st = await api('meteo_status'); } catch (_) {} cache.clear(); draw(); };
+        const refresh = async () => { try { st = await api('meteo_status'); } catch (e) { statusErr(e); } cache.clear(); draw(); };
         dlRedraw = draw; dlRefresh = refresh;
         // ce qui est en ligne (taille de chaque pack), et les téléchargements interrompus à reprendre
         api('meteo_dl_info').then(r => { DL.online = r.packs || {}; DL.err = r.error || ''; }).catch(x => { DL.online = {}; DL.err = x.message; }).finally(async () => {

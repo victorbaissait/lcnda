@@ -229,9 +229,11 @@
     const overlap = (life, a, b) => !life?.by || (life.by <= b && life.end >= a);
     const has = (life, ...cc) => !!life && life.countries.some(c => cc.includes(c));
     const FR = life => has(life, 'fr');
-    const st = {}; // les états des packs, gardés 20 s
-    const status = (k, f) => { const x = st[k]; if (x && Date.now() - x.at < 20000) return x.p; const p = Promise.resolve().then(f).catch(() => null); st[k] = {at: Date.now(), p}; return p; };
-    const info = (k, action) => status('info_' + k, () => timeout(api(action), 6000, null));
+    const st = {}; // les états des packs, gardés 20 s ; oubliés dès qu'un pack est installé ou retiré
+    window.addEventListener('lcnda:installs-changed', () => { for (const k of Object.keys(st)) delete st[k]; });
+    // une vérification ratée n'est PAS « pas installé » : l'erreur remonte (la suggestion est sautée), et rien n'est gardé
+    const status = (k, f) => { const x = st[k]; if (x && Date.now() - x.at < 20000) return x.p; const p = Promise.resolve().then(f).catch(e => { if (st[k]?.p === p) delete st[k]; throw e; }); st[k] = {at: Date.now(), p}; return p; };
+    const info = (k, action) => status('info_' + k, () => timeout(api(action), 6000, null).catch(() => null)); // le sommaire en ligne : facultatif
     const sizeFrom = (r, k) => Number(r?.packs?.[k]?.size || r?.pack?.size || 0) || 0;
     const METEO = [['socle', 'Météo d’autrefois : le socle', ['fr', 'be', 'ch', 'lu'], 1836, 550e6], ['europe', 'Météo d’autrefois : pack Europe', ['de', 'nl', 'dk', 'gb', 'es', 'pl', 'cz', 'it', 'pt', 'sk'], 1836, 2.5e9],
         ['monde-amerique-nord', 'Météo d’autrefois : Amérique du Nord', ['us', 'ca', 'mx'], 1850, 300e6], ['monde-amerique-sud', 'Météo d’autrefois : Amérique du Sud', ['br', 'ar', 'cl', 'uy'], 1850, 15e6],
