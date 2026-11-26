@@ -140,7 +140,8 @@ crémation) ; la prison seulement si la fiche elle-même en parle (détenu, cond
   Mark) n'existe qu'en scan → lien « ↗ « forgeron » dans le Petit Larousse illustré de 1911 » (recherche dans le scan).
 - **À la place, transcrit et relu** : Théodore Soulice, « Petit dictionnaire de la langue française » (Hachette, 1860), un article
   par page sur Wikisource. `ti-dico` : la définition de 1860 des métiers à un mot du dictionnaire des métiers de l'app
-  (`metiers-anciens.json`), recopiée telle quelle. Fiche : « En 1860, un petit dictionnaire d'école définissait son métier : … ».
+  (`metiers-anciens.json`), recopiée telle quelle : 190 définitions (noms masculins « s. m. » seulement ; un féminin est souvent un
+  autre mot, ex. SAUNIÈRE = coffre à sel). Fiche : « En 1860, un petit dictionnaire d'école définissait son métier : … ».
   Les objets ne sont pas faits (seulement les métiers).
 
 ### 49. Dictées et problèmes du certificat d'études — **construit (petit, 6 textes) + liens**

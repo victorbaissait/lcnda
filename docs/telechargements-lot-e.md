@@ -120,7 +120,7 @@ pour un appareil invité (`body.is-kiosk`, `LCNDA_GUEST`). Il n'y a donc pas de 
 - **Construit** : `te-libertes.json.gz` — Wikidata n'en connaît que **2** en France (Bayeux, Sainte-Marie-aux-Mines), sans année.
   Overpass refusé par le réseau de l'atelier : `build_libertes.py --osm` les cherche sur GitHub (nom « Arbre de la Liberté »,
   année tirée de `start_date` ou du nom). Sans `--osm`, le script garde les arbres OSM déjà fabriqués.
-- **Où** : fiche (« En 1848, à 18 ans, on planta un arbre de la Liberté près de chez lui… », dès qu'une année est connue), village,
+- **Où** : fiche (« En 1848, à 18 ans, on planta un arbre de la Liberté près de chez lui… », dès qu’une année est connue, à 3 km d’un de ses lieux de cette époque — à 25 ans près, ou sans date), village,
   monographie, Listes, Cartes.
 
 ### 9. Camisards, dragonnades, guerres de Religion — **construit**
@@ -129,7 +129,7 @@ pour un appareil invité (`body.is-kiosk`, `LCNDA_GUEST`). Il n'y a donc pas de 
 - **Licence** : Wikidata CC0 (ci-dessus).
 - **Construit** : `te-religion.json.gz` (64 événements avec un lieu : batailles, sièges, massacres, de 1562 à 1703 ; 3 de la guerre
   des Camisards). **Dragonnades : aucun événement localisé dans Wikidata** — dit ici, rien d'inventé. Des lieux et des dates, aucun nom.
-- **Où** : fiche (événements à moins de 40 km de ses lieux de son vivant, avant 1715), village (30 km), monographie, Listes, Cartes.
+- **Où** : fiche (événements à moins de 40 km de ses lieux de son vivant, avant 1715 ; un lieu daté compte à 25 ans près de l'événement), village (30 km), monographie, Listes, Cartes.
 
 ### 10. Insurgés de juin 1848 et poursuivis de 1851 (J.-C. Farcy) — **lien seulement**
 - **Existait** : non.

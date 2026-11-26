@@ -62,7 +62,7 @@ consultation : pareil). Seuls les liens « ↗ » ouvrent une page, sur un clic.
   il n'y a pas d'article « Liste des ballons montés… » séparé, et Wikidata n'a aucun élément « ballon monté » (Q805335 : 0 instance).
 - **Construit** : `tf-ballons` (68 lignes, 60 lieux d'arrivée placés par Wikidata). Gardé : numéro, date, nom du ballon, départ,
   arrivée, distance, fret. Les noms des pilotes et passagers ne sont pas copiés.
-- **Où** : fiche (personne en vie en 1870-71, un lieu à moins de 40 km de l'arrivée) ; village (moins de 30 km) ; monographie ; Listes ;
+- **Où** : fiche (personne en vie en 1870-71, un lieu de sa vie de 1850 à 1890, ou sans date, à moins de 40 km de l'arrivée) ; village (moins de 30 km) ; monographie ; Listes ;
   Cartes ; à la demande.
 
 ### 12. Ponts suspendus (ponts Seguin) — **construit**
