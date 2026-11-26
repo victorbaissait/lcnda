@@ -427,7 +427,7 @@
         let gs; try { gs = await find(q, 3); } catch (_) { return; }
         const ans = page.querySelector('.dr-ans'); if (!ans || !page.isConnected || !gs.length || page.querySelector('[data-nlm-ans]')) return;
         const box = document.createElement('section'); box.className = 'nlm-ans'; box.dataset.nlmAns = '';
-        box.innerHTML = `<h4>🗺 ${esc(T('« {q} » : un ancien nom de lieu', {q: String(q).trim()}))}</h4><ul>${gs.map(g => { const h = g.names.find(n => n.hit); return `<li><b>📍 ${esc(g.now)}</b>${g.cc ? ` <small>${esc(ccName(g.cc))}</small>` : ''}${h ? ` — ${esc(h.name)} <small class="muted">(${esc(whenTxt(h.from, h.to))})</small>` : ''} <small class="muted">· ${esc(T('{n} noms', {n: nf(g.names.length)}))}</small></li>`; }).join('')}</ul>
+        box.innerHTML = `<h4>🗺 ${esc(T('« {q} » : un ancien nom de lieu', {q: String(q).trim()}))}</h4><ul>${gs.map(g => { const h = g.names.find(n => n.hit); return `<li><b>📍 ${esc(g.now)}</b>${g.cc ? ` <small>${esc(ccName(g.cc))}</small>` : ''}${h ? ` — ${esc(h.name)} <small class="muted">(${esc(whenTxt(h.from, h.to))})</small>` : ''} <small class="muted">· ${esc(T(g.names.length > 1 ? '{n} noms' : '{n} nom', {n: nf(g.names.length)}))}</small></li>`; }).join('')}</ul>
             <button type="button" class="button small" data-nlm-ans-go>🔎 ${esc(T('Tous ses noms, la carte et les sources'))}</button>`;
         box.querySelector('[data-nlm-ans-go]').addEventListener('click', () => open(q));
         (ans.querySelector('.dr-backp') || ans.firstChild)?.after?.(box);

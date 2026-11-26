@@ -172,11 +172,17 @@
             ${p.length || e.place ? `<div class="ctl-chips">${p.map(x => personChip(x)).join('')}${placeChip(e.place)}</div>` : ''}</div>
             <div class="ctl-row-acts">${open}<button type="button" class="button small secondary" data-ctl-again="${i}">↺ Signaler de nouveau</button></div></article>`;
     }
-    const cardsOf = (list) => UI().cardsHtml(list.map((a, i) => ({
+    const cardsOf = (list, ix = null) => UI().cardsHtml(list.map((a, k) => { const i = ix ? ix[k] : k; return {
         thumb: `<span class="ui-card-ico">${levelOf(a.level)[0]}</span>`, name: a.title, open: a.people[0] ? `data-open-person="${a.people[0]}"` : `data-ctl-dismiss="${i}"`, openLabel: a.people[0] ? '↗ Fiche' : 'Pas une erreur',
         lines: [a.detail || '', a.people.map(id => nm(DATA.people[id])).concat(a.place ? [a.place.name] : []).join(' · ')], badges: [{text: SORTS[a.sort][1], kind: 'grey'}],
         menu: [a.fix?.event_id ? `<button type="button" data-ctl-fix="${i}">✎ Corriger</button>` : '', `<button type="button" data-ctl-dismiss="${i}">Ce n’est pas une erreur</button>`].filter(Boolean),
-    })), {size: 's'});
+    }; }), {size: 's'});
+    /** 🗂 un cadre par personne (réglage genealogie-cadres) : une alerte à deux personnes va sous la première ; les numéros de ligne restent ceux de la liste */
+    const framed = (page, inner, word = ['chose à vérifier', 'choses à vérifier']) => UI().personCardsHtml(UI().groupByPerson(page.map((a, i) => ({a, i})), x => x.a.people[0]).map(g => {
+        const p = g.key ? DATA.people[g.key] : null;
+        return UI().personCardHtml({id: p ? p.id : 0, name: p ? nm(p) : i18n('Sans personne'), sub: p?.sosa ? `Sosa ${fmt(p.sosa)}` : '', life: p ? yrs(p) : '', count: plural(g.items.length, word[0], word[1]),
+            body: inner(g.items.map(x => x.a), g.items.map(x => x.i))});
+    }).join(''));
 
     let bar = null, current = [];
     function renderPage(token) {
@@ -219,13 +225,14 @@
                 const q = bar.state.q;
                 current = DATA.exceptions.filter(e => matchQ({title: e.title, detail: e.reason + ' ' + e.note, people: e.people, place: e.place}, q));
                 bar.setCount(current.length, 'exception');
-                list.innerHTML = current.length ? current.slice(0, shown).map(excRowHtml).join('') : A().emptyState({icon: '🙈', text: 'Aucune alerte écartée', hint: '« Ce n’est pas une erreur » sur une ligne la range ici, avec sa raison : tu pourras toujours la signaler de nouveau.'});
+                list.innerHTML = current.length ? (UI().framesOn?.() ? framed(current.slice(0, shown), (l, ix) => l.map((e, k) => excRowHtml(e, ix[k])).join(''), ['exception', 'exceptions']) : current.slice(0, shown).map(excRowHtml).join('')) : A().emptyState({icon: '🙈', text: 'Aucune alerte écartée', hint: '« Ce n’est pas une erreur » sur une ligne la range ici, avec sa raison : tu pourras toujours la signaler de nouveau.'});
                 A().$('[data-ctl-map]').innerHTML = '';
             } else {
                 current = sorted(applyPills(base, f2), bar.state.sort);
                 bar.setCount(current.length, 'chose à vérifier', 'choses à vérifier');
                 const page = current.slice(0, shown);
-                list.innerHTML = current.length ? (bar.state.view === 'cards' ? cardsOf(page) : page.map(rowHtml).join(''))
+                const cards = bar.state.view === 'cards';
+                list.innerHTML = current.length ? (UI().framesOn?.() ? framed(page, (l, ix) => (cards ? cardsOf(l, ix) : l.map((a, k) => rowHtml(a, ix[k])).join(''))) : cards ? cardsOf(page) : page.map(rowHtml).join(''))
                     : A().emptyState({icon: '✅', text: DATA.alerts.length ? 'Rien avec ces filtres' : 'Rien à vérifier', hint: DATA.alerts.length ? 'Retire un filtre pour revoir les autres alertes.' : 'Aucune incohérence trouvée dans tes fiches. Bravo !'});
                 // la carte des lieux, au-dessus de la liste, quand « 📍 Lieux » est choisi
                 const pts = f2.sort === 'lieux' ? current.filter(a => a.place && (a.place.lat || a.place.lon)).slice(0, 200).map(a => ({lat: a.place.lat, lon: a.place.lon, label: a.place.name, color: a.level === 'red' ? '#c62828' : '#b5523b'})) : [];

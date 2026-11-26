@@ -90,6 +90,10 @@ WHAT = {'memoriaux': 'Monuments aux morts et mémoriaux de guerre du monde, hors
         'mesures': 'Unités de mesure anciennes ou locales liées à un pays, avec leur valeur en unités du Système international (Wikidata)'}
 
 
+SI_OK = {'mètre', 'centimètre', 'millimètre', 'kilomètre', 'mètre carré', 'mètre cube', 'litre', 'kilogramme', 'gramme'}  # longueurs, aires, volumes, masses
+SKIP = {'Q11524325'}  # « Tokyo Dome » (une unité pour rire, pas une mesure d'autrefois)
+
+
 def build(kind):
     if kind == 'mesures':
         binds = wm.sparql(Q[kind])
@@ -101,7 +105,8 @@ def build(kind):
                 amount = float(v(b, 'amount'))
             except ValueError:
                 continue
-            if not re.match(r'^Q\d+$', q) or not name or amount <= 0:
+            unit = label_or_q(b, 'siLabel')
+            if not re.match(r'^Q\d+$', q) or not name or amount <= 0 or unit not in SI_OK or q in SKIP:
                 continue
             k = (q, label_or_q(b, 'cyLabel'))
             if k in rows:

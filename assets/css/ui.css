@@ -628,3 +628,7 @@ tbody.ui-person-tb > tr.ui-person-tb-head .ui-person-card-head { padding-bottom:
     .ui-person-card { box-shadow: none; border: 1px solid #999; break-inside: avoid-page; }
     tbody.ui-person-tb { break-inside: avoid-page; }
 }
+/* 🗂 les écrans qui rangent leurs lignes dans un cadre par personne */
+.ctl-list:has(> .ui-person-cards) { border: 0; background: transparent; display: block; }
+.ui-person-card .ctl-row { padding: 12px 4px 12px 12px; }
+.ui-person-card .ctl-row:last-child { border-bottom: 0; }

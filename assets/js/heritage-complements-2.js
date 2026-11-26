@@ -111,13 +111,18 @@
             if (!list.length) { box.innerHTML = A().emptyState({icon: '🔍', text: i18n('Rien ne correspond'), hint: i18n('Enlève un filtre, ou cherche autrement.')}); return; }
             const view = bar.state.view === 'cards' ? 'cards' : 'list';
             const pale = cfg().doutes_seen_show === 'pale' || bar.state.filters.seen !== 'unseen';
-            box.innerHTML = UI().itemsHtml(view, list.slice(0, shown).map(r => {
+            const item = r => {
                 const s = SORT[r.sort] || ['•', r.sort, '↗'], lv = LEVEL[r.level] || LEVEL.yellow;
                 return {thumb: `<span class="ui-card-ico" aria-hidden="true">${s[0]}</span>`, name: r.title, cls: r.seen && pale ? 'compl-dt-seen' : '', attrs: `data-dt-key="${esc(r.key)}"`,
                     lines: [[i18n(s[1]), r.detail, r.sosa ? `Sosa ${r.sosa}` : ''].filter(Boolean).join(' · '), r.seen ? i18n('vu le {d}', {d: fmtDate(r.seen_at)}) : r.returned ? i18n('revenu : la chose a changé') : ''],
                     badges: [{text: `${lv[0]} ${i18n(lv[1])}`, kind: lv[2]}],
                     actions: `${badge(`${lv[0]} ${i18n(lv[1])}`, lv[2])}<button type="button" class="button small secondary" data-dt-go>${esc(i18n(s[2]))}</button>${menuHtml(r)}`};
-            }));
+            };
+            const page = list.slice(0, shown);
+            // 🗂 un cadre par personne (réglage genealogie-cadres) : les doutes d'une même personne ensemble, dans l'ordre du tri
+            box.innerHTML = UI().framesOn?.() ? UI().personCardsHtml(UI().groupByPerson(page, r => (r.masked ? '' : (r.people || [])[0])).map(g => { const r0 = g.items.find(r => (r.people || []).length === 1 && r.sosa) || {};
+                return UI().personCardHtml({id: g.key, name: g.key ? names[g.key] || '' : i18n('Sans personne'), sub: g.key && r0.sosa ? `Sosa ${r0.sosa}` : '', count: plural(g.items.length, 'doute'), body: UI().itemsHtml(view, g.items.map(item))}); }).join(''))
+                : UI().itemsHtml(view, page.map(item));
             if (list.length > shown) box.appendChild(UI().moreButton({remaining: list.length - shown, step: 60, onClick: () => { shown += 60; paint(); }}));
         }
         const rowOf = el => { const k = el.closest('[data-dt-key]')?.dataset.dtKey; return rows.find(r => r.key === k); };

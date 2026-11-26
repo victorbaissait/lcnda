@@ -19,7 +19,7 @@ declare(strict_types=1);
  * Vie privée : une fiche vivante, confidentielle, sans date de décès et née il y a moins de 100 ans (ou sans aucune date)
  * n'est JAMAIS envoyée à Open Archives (elle n'est même pas regardée dans les bases installées).
  *
- *  GET  pistes_list&status=new|added|no|all&person_id=&src=&min=&q=&offset=&limit=   · pistes_count · pistes_job · pistes_about
+ *  GET  pistes_list&status=new|added|no|all&person_id=&src=&min=&q=&offset=&limit=&per_person=1 (→ per_person {id: total}, un cadre par personne)   · pistes_count · pistes_job · pistes_about
  *  POST pistes_start {scope: all|sosa|branch:N|desc:N|person:N, sources[]} · pistes_step {id} · pistes_pause / pistes_resume / pistes_stop {id}
  *  POST pistes_accept {id, mode: source|event} → {undo}   · pistes_undo {id}   · pistes_reject {id}   · pistes_unreject {id}
  * Essais : GENEALOGY_TEST=1 + LCNDA_TEST_OPENARCH_DIR (comme ou_chercher_openarch.php : search.json, show-<archive>-<id>.json,
@@ -536,7 +536,16 @@ function pst_list(PDO $pdo, array $q): array
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.person_id AND t.gedcom_tag IN ('DEAT','BURI') AND e.year IS NOT NULL ORDER BY e.year LIMIT 1) AS dy
         FROM pistes p JOIN persons pe ON pe.id=p.person_id $w ORDER BY $order LIMIT $limit OFFSET $offset");
     $s->execute($args);
-    return ['total' => (int) $total->fetchColumn(), 'rows' => array_map('pst_row_out', $s->fetchAll(PDO::FETCH_ASSOC)), 'counts' => pst_count($pdo)];
+    $rows = array_map('pst_row_out', $s->fetchAll(PDO::FETCH_ASSOC));
+    $out = ['total' => (int) $total->fetchColumn(), 'rows' => $rows, 'counts' => pst_count($pdo)];
+    // 🗂 un cadre par personne : combien de pistes chaque personne de la page a en tout (mêmes filtres), pour « + N autres pistes »
+    if (!empty($q['per_person']) && $rows) {
+        $ids = array_values(array_unique(array_column($rows, 'person_id')));
+        $c = $pdo->prepare("SELECT p.person_id, count(*) FROM pistes p JOIN persons pe ON pe.id=p.person_id " . ($w ? "$w AND" : 'WHERE') . ' p.person_id IN (' . implode(',', array_fill(0, count($ids), '?')) . ') GROUP BY p.person_id');
+        $c->execute(array_merge($args, $ids));
+        $out['per_person'] = array_map('intval', $c->fetchAll(PDO::FETCH_KEY_PAIR));
+    }
+    return $out;
 }
 /** GET pistes_count : combien à vérifier (widget, bandeau) */
 function pst_count(PDO $pdo): array

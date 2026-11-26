@@ -177,17 +177,32 @@
         let shown = 50;
         const draw = async () => {
             const f = filt();
-            let r; try { r = await get('pistes_list', {status: f.status, src: f.src, min: f.min, q: f.q, sort: f.sort, limit: shown}); } catch (e) { A().toast?.(e.message, 'error'); return; }
+            const framesOn = !!UI().framesOn?.();
+            let r; try { r = await get('pistes_list', {status: f.status, src: f.src, min: f.min, q: f.q, sort: f.sort, limit: shown, ...(framesOn ? {per_person: 1} : {})}); } catch (e) { A().toast?.(e.message, 'error'); return; }
             if (!host.isConnected) return;
             const c = r.counts || {};
             host.querySelector('[data-pst-pills]').innerHTML = [['new', T('À vérifier'), c.new], ['added', T('Rattachées'), c.added], ['no', T('Écartées'), c.no]]
                 .map(([k, l, n]) => `<button type="button" data-pst-status="${k}" class="${f.status === k ? 'is-active' : ''}">${esc(l)} <span class="ctl-n">(${fmt(n)})</span></button>`).join('');
             const L = host.querySelector('[data-pst-list]');
-            L.innerHTML = r.rows.length ? r.rows.map(x => rowHtml(x)).join('') : emptyLine(f.status === 'new' ? T('Aucune piste à vérifier') : T('Rien ici'), '🔎', f.status === 'new' ? T('Lance « 🔍 Chercher des pistes » : les actes qui ressemblent à tes fiches viendront ici.') : '');
+            // 🗂 un cadre par personne (réglage genealogie-cadres) : ses pistes de la page ensemble ; celles d'autres pages (tri par note) en « + N autres pistes »
+            if (framesOn && r.rows.length) {
+                for (const [pid, rows] of opened) { if (!r.rows.some(x => x.person_id === pid)) opened.delete(pid); else r.rows.push(...rows.filter(x => !r.rows.some(y => y.id === x.id))); }
+                const per = r.per_person || {};
+                L.innerHTML = UI().personCardsHtml(UI().groupByPerson(r.rows, x => x.person_id).map(g => { const x0 = g.items[0], all = Math.max(g.items.length, Number(per[g.key]) || 0), rest = all - g.items.length;
+                    return UI().personCardHtml({id: x0.person_id, name: x0.person, life: x0.years, count: T(all > 1 ? '{n} pistes' : '{n} piste', {n: fmt(all)}), cls: 'pst-card',
+                        body: g.items.map(x => rowHtml(x, {person: false})).join('') + (rest > 0 ? `<p class="ui-person-card-more"><button type="button" class="link-button" data-pst-rest="${x0.person_id}">${esc(rest > 1 ? T(x0.gender === 'male' ? '+ {n} autres pistes pour lui' : '+ {n} autres pistes pour elle', {n: fmt(rest)}) : T(x0.gender === 'male' ? '+ 1 autre piste pour lui' : '+ 1 autre piste pour elle'))}</button></p>` : '')}); }).join(''));
+            } else L.innerHTML = r.rows.length ? r.rows.map(x => rowHtml(x)).join('') : emptyLine(f.status === 'new' ? T('Aucune piste à vérifier') : T('Rien ici'), '🔎', f.status === 'new' ? T('Lance « 🔍 Chercher des pistes » : les actes qui ressemblent à tes fiches viendront ici.') : '');
             const more = host.querySelector('[data-pst-more]'); more.innerHTML = '';
             if (r.total > r.rows.length) { const b = document.createElement('button'); b.type = 'button'; b.className = 'button secondary'; b.textContent = T('Voir {n} de plus', {n: Math.min(50, r.total - r.rows.length)}); b.onclick = () => { shown += 50; draw(); }; more.appendChild(b); }
         };
         host.__pstRedraw = draw;
+        const opened = new Map(); // les personnes dont on a chargé toutes les pistes (« + N autres pistes »)
+        host.addEventListener('click', async e => {
+            const b = e.target.closest('[data-pst-rest]'); if (!b) return;
+            const f = filt(), pid = Number(b.dataset.pstRest); b.disabled = true;
+            try { const r = await get('pistes_list', {person_id: pid, status: f.status, src: f.src, min: f.min, q: f.q, sort: f.sort, limit: 500}); opened.set(pid, r.rows || []); } catch (err) { b.disabled = false; A().toast?.(err.message, 'error'); return; }
+            draw();
+        });
         host.addEventListener('change', e => {
             const t = e.target;
             if (t.matches('[data-pst-src]')) { const s2 = settings(); s2.src[t.dataset.pstSrc] = t.checked; save(s2); }
