@@ -65,6 +65,11 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             const s = await st(); assert.deepStrictEqual([s.module, s.hash, s.active], ['donnees', '#donnees/data_theme_guerres', 'data_theme_guerres']);
         });
 
+        await t('une question posée (⌘K) depuis une page de liste de Données : la réponse, pas la liste d’avant', async () => {
+            await p.evaluate(() => window.LCNDA_EXT.dataHome.ask('les crues près de Tulle')); await p.waitForSelector('[data-dr] [data-dr-body] .dr-ans', {timeout: 30000}); await idle();
+            const s = await st(); assert.deepStrictEqual([s.module, s.hash, s.active], ['donnees', '#donnees', 'dno_recap']);
+        });
+
         /* ═════════ 2. la colonne ═════════ */
         await t('la colonne : 📊 Récap, 🧰 Tous les thèmes, puis les thèmes en groupes repliables (pas de cartes numérotées) ; 🔀 d’abord ; le groupe ouvert retenu', async () => {
             await home();

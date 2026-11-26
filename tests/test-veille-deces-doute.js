@@ -112,7 +112,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             // ↩ Plus de doute, puis ↶
             await p.click(`[data-vd-doubt="${id}"][data-vd-doubt-off]`);
             await p.waitForFunction(i => !document.querySelector(`[data-vd-card="${i}"] .vd-doubt-badge`), id);
-            await p.click('.ui-toast:has-text("Plus de doute") button:has-text("Annuler"), .toast:has-text("Plus de doute") button:has-text("Annuler")');
+            await p.locator('.ui-toast, .toast').filter({hasText: 'Plus de doute sur cette piste'}).last().locator('button', {hasText: 'Annuler'}).click();
+            for (let i = 0; i < 40 && q(`SELECT review FROM vd_pistes WHERE id=${id}`)[0]?.review !== 'doubt'; i++) await sleep(250);
+            assert.strictEqual(q(`SELECT review, review_note FROM vd_pistes WHERE id=${id}`)[0].review_note, 'prénom à vérifier', '↶ remet le doute et sa note');
             await p.waitForFunction(i => /prénom à vérifier/.test(document.querySelector(`[data-vd-card="${i}"] .vd-doubt`)?.textContent || ''), id, {timeout: 10000});
             // re-cliquer enlève aussi
             await p.click(`[data-vd-doubt="${id}"]`); await p.waitForFunction(i => !document.querySelector(`[data-vd-card="${i}"] .vd-doubt-badge`), id);
@@ -165,7 +167,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
 
         await t('les décès déjà confirmés avant : citation_json rempli d’après la note, une seule fois, sans toucher une citation déjà remplie', async () => {
             const id = (await api('vd_list')).items.find(i => i.person.name === 'Paul MAZAUD').id;
-            await post('vd_confirm', {id});
+            const c = await post('vd_confirm', {id}); assert.strictEqual(c.ok, true, JSON.stringify(c));
             const link = q(`SELECT source_link_id FROM vd_pistes WHERE id=${id}`)[0].source_link_id;
             x(`UPDATE source_links SET citation_json='' WHERE id=${link}`); x(`DELETE FROM vd_state WHERE k='citations_v1'`);
             const run = () => spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', `require 'lib/paths.php'; require 'lib/bootstrap.php'; require_once 'lib/veille_deces.php'; $pdo = db(); vd_tables($pdo); echo json_encode([vd_fill_citations($pdo)]);`], {cwd: root, encoding: 'utf8', env});
@@ -178,7 +180,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await post('vd_undo', {id});
         });
 
-        await t('mode consultation : pas de bouton 🤔, et l’API refuse', async () => {
+        await t('mode consultation : pas de bouton 🤔 (vd_doubt est une écriture : kiosk_blocks la refuse)', async () => {
             assert.ok(/kiosk_blocks/.test(fs.readFileSync(path.join(root, 'lib/heritage_tools.php'), 'utf8')));
             await openPage();
             await p.evaluate(() => document.body.classList.add('is-kiosk')); await openPage();

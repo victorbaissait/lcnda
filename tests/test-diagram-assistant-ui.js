@@ -81,7 +81,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const i = await p.evaluate(() => [...document.querySelectorAll('.h-dg-gallery [data-tpl]')].findIndex(b => /Ensembles parallèles/.test(b.textContent))); assert.ok(i >= 0, 'dans la galerie');
             await p.evaluate(j => document.querySelectorAll('.h-dg-gallery [data-tpl]')[j].click(), i);
             await p.waitForSelector('.h-dg-dlg [data-dg-name]');
-            if (!(await p.$('.h-dg-dlg [data-dgm-go]'))) { const tabs = await p.$$('.h-dg-dlg [data-dg-tab]'); for (const b of tabs) { const tx = await b.textContent(); if (/Depuis|base|app/i.test(tx)) { await b.click(); break; } } await sleep(300); }
+            if (!(await p.$('.h-dg-dlg [data-dgm-go]'))) { const tabs = await p.$$('.h-dg-dlg [data-dg-tab]'); for (const b of tabs) { const tx = await b.textContent(); if (/Depuis|base|app|Partir des données/i.test(tx)) { await b.click(); break; } } await sleep(300); }
             await p.waitForSelector('.h-dg-dlg [data-dgm-go]', {timeout: 10000});
             await p.click('.h-dg-dlg [data-dgm-go]'); await sleep(1200);
             const txt = await p.$eval('.h-dg-dlg', e => e.textContent); assert.match(txt, /Aurillac/); assert.match(txt, /Lieu de naissance/);

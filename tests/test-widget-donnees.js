@@ -224,26 +224,26 @@ const FAKE = () => {
         });
 
         /* ═════════ 📥 Prendre depuis… → Données ═════════ */
-        await t('📥 Prendre depuis… → Données : 🔍, pastilles, ↑ ↓ Entrée → l’étape 2', async () => {
+        await t('📥 Prendre depuis… → Données : 🔍, pastilles, ↑ ↓ Entrée → l’étape 2', async () => { try {
             await p.evaluate(() => window.LCNDA_EXT.connexions.openTake()); await p.waitForSelector('.cx-take');
             await p.click('.cx-take [data-cx-tab="data"]'); await p.waitForSelector('.cx-take [data-cx-dpick] [data-ld-ov-q]');
             const P = '.cx-take [data-cx-dpick]';
             const n0 = await p.$$eval(`${P} [data-ld-pick]`, a => a.length); assert.ok(n0 >= 3, String(n0));
             assert.ok(await p.$$eval(`${P} [data-ldt-pth]`, a => a.length) >= 3, 'les thèmes en pastilles');
-            await p.fill(`${P} [data-ld-ov-q]`, 'meteo'); await sleep(200);
+            await p.fill(`${P} [data-ld-ov-q]`, 'meteo');
+            await p.waitForFunction(([sel, n]) => document.querySelectorAll(sel).length < n, [`${P} [data-ld-pick]`, n0], {timeout: 15000});
             const ids = await p.$$eval(`${P} [data-ld-pick]`, a => a.map(x => x.dataset.ldPick)); assert.ok(ids.includes('meteo_jour'), ids.join(','));
             assert.ok(ids.length < n0);
             await p.press(`${P} [data-ld-ov-q]`, 'Escape'); assert.strictEqual(await p.inputValue(`${P} [data-ld-ov-q]`), '', 'Échap vide la recherche');
             assert.ok(await p.$('.cx-take'), 'la fenêtre reste ouverte');
-            await p.fill(`${P} [data-ld-ov-q]`, 'météo'); await sleep(200);
+            await p.fill(`${P} [data-ld-ov-q]`, 'météo'); await p.waitForFunction(([sel, n]) => document.querySelectorAll(sel).length < n, [`${P} [data-ld-pick]`, n0], {timeout: 15000});
             await p.press(`${P} [data-ld-ov-q]`, 'ArrowDown');
             const first = await p.$eval(`${P} .ldt-pick-card.is-kb`, x => x.dataset.ldPick);
             await p.press(`${P} [data-ld-ov-q]`, 'Enter');
             await p.waitForSelector('.cx-take .cx-dchosen', {timeout: 15000});
             await p.waitForSelector('.cx-take [data-cx-dform] .cx-step, .cx-take [data-cx-dform] .cx-notinst', {timeout: 15000});
             assert.ok(first);
-            await p.evaluate(() => document.querySelector('dialog.cx-take')?.close());
-        });
+        } finally { await p.evaluate(() => document.querySelector('dialog.cx-take')?.close()); } });
 
         /* ═════════ vide, 390 px, sombre ═════════ */
         await t('sans données téléchargées : une phrase calme qui mène à Données', async () => {

@@ -80,7 +80,8 @@
     function arrangeCards(box) {
         const grid = box?.querySelector?.('[data-ldt-themes]'); if (!grid) return;
         const cards = [...grid.querySelectorAll(':scope > [data-ldt-theme]')], by = new Map(cards.map(c => [c.dataset.ldtTheme, c]));
-        const want = ordered(cards.map(c => ({id: c.dataset.ldtTheme}))).map(t => by.get(t.id));
+        const def = (TH()?.themes?.() || []).map(t => t.id), rank = id => (def.indexOf(id) < 0 ? 1e6 : def.indexOf(id)); // l'ordre de départ d'abord (les cartes ont pu être rangées avant)
+        const want = ordered(cards.map(c => ({id: c.dataset.ldtTheme})).sort((a, b) => rank(a.id) - rank(b.id))).map(t => by.get(t.id));
         if (want.some((c, i) => c !== cards[i])) want.forEach(c => grid.appendChild(c));
         const hid = new Set(prefs().hidden), show = showHidden();
         cards.forEach(c => { const h = hid.has(c.dataset.ldtTheme); c.hidden = h && !show; c.classList.toggle('dno-is-hidden', h); });
@@ -100,6 +101,7 @@
             else if (v === 'recap') { setCur(''); if (H()._st) H()._st.view = 'recap'; }
             else setCur(okKey(v) ? v : '');
         }
+        if (H()._st?.pending) setCur(''); // une question posée : l'écran de la réponse
         lastHash = hashFor(); return lastHash;
     }
     /** ouvrir dans l'onglet : une page de liste ou de thème, « donnees » (= ← Tous les thèmes), le récap */
@@ -123,6 +125,7 @@
         const home = ext.dataHome; if (!home || home.render?.__dno) return !!home;
         const base = home.render;
         const w = async token => {
+            if (cur && home._st?.pending) setCur(''); // une question posée (⌘K, un lien) : la réponse, pas la liste d'avant
             if (cur && !ext.lists?.[cur]) { try { E().sync?.(); } catch (_) {} }
             if (cur && ext.lists?.[cur]) return ext.lists[cur](token);
             if (cur) setCur(''); // une liste qui n'existe plus (ou pas encore installée ici) : le récap
