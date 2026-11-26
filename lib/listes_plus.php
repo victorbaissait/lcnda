@@ -155,6 +155,13 @@ function lp_notes(PDO $pdo, string $q, int $offset = 0): array
         $target = in_array($r['entity_type'], ['person', 'event', 'family', 'media'], true) ? srcm_link_target($pdo, (string) $r['entity_type'], (int) $r['entity_id']) : ($r['entity_type'] === 'source' ? ['kind' => 'Source', 'label' => (string) ($pdo->query('SELECT title FROM sources WHERE id=' . (int) $r['entity_id'])->fetchColumn() ?: '#' . $r['entity_id']), 'person_id' => 0, 'source_id' => (int) $r['entity_id']] : ['kind' => (string) $r['entity_type'], 'label' => '#' . $r['entity_id'], 'person_id' => 0]);
         $rows[] = ['id' => (int) $r['id'], 'title' => (string) $r['title'], 'excerpt' => $excerpt, 'length' => mb_strlen($body), 'body' => mb_strlen($body) <= 20000 ? $body : null, 'entity_type' => (string) $r['entity_type'], 'entity_id' => (int) $r['entity_id'], 'updated_at' => (string) ($r['updated_at'] ?: $r['created_at'])] + $target;
     }
+    // 🗂 « Ranger par personne » : le nom de la personne de chaque note (une seule question pour toute la page)
+    $pids = array_values(array_unique(array_filter(array_map(static fn($r) => (int) ($r['person_id'] ?? 0), $rows))));
+    if ($pids) {
+        $n = $pdo->prepare('SELECT id, trim(coalesce(first_name, \'\') || \' \' || coalesce(last_name, \'\')) FROM persons WHERE id IN (' . implode(',', array_fill(0, count($pids), '?')) . ')'); $n->execute($pids);
+        $names = $n->fetchAll(PDO::FETCH_KEY_PAIR);
+        foreach ($rows as &$r) { if (!empty($r['person_id'])) { $r['person_name'] = (string) ($names[$r['person_id']] ?? ''); } } unset($r);
+    }
     return ['rows' => $rows, 'total' => (int) $total->fetchColumn(), 'offset' => $offset];
 }
 

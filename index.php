@@ -110,6 +110,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/telech-i.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-m.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-k.css?v=1">
+    <link rel="stylesheet" href="assets/css/telech-l.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-j.css?v=1">
     <link rel="stylesheet" href="assets/css/noms-lieux-monde.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
@@ -1735,7 +1736,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=23" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=24" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-territoires.js?v=2" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
@@ -1755,6 +1756,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-i.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-m.js?v=4" defer></script>
 <script src="assets/js/heritage-telech-k.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-l.js?v=1" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
 <script src="assets/js/heritage-telech-j.js?v=1" defer></script>
 <script src="assets/js/noms-lieux-monde.js?v=1" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
 <script src="assets/js/heritage-fiche-edifice.js?v=4" defer></script>
