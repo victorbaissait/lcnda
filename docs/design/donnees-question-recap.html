@@ -1,0 +1,592 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Récap et question sur les données</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2}}
+:root[data-theme="dark"],.force-dark{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2}
+.force-dark{color:var(--ink)}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:44px 0 6px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:inherit;text-decoration:none}
+.sum b{font-size:18px;display:block}.sum span{font-size:12px;color:var(--muted)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink);white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+code,pre{font:11.5px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+pre{background:var(--grey-bg);border:1px solid var(--line);padding:12px 14px;overflow-x:auto;white-space:pre;margin:10px 0 0;color:var(--ink)}
+pre .c{color:var(--soft)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:18px 20px 20px;min-width:0}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:10px 14px;font-size:13px;margin:12px 0}
+.msg.ok{border-color:var(--green);background:var(--green-bg)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap;cursor:pointer}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.clear{color:var(--blue);text-decoration:underline;font-size:12px}
+/* fenêtre de l'app */
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0;color:var(--ink)}
+.win-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-body{padding:18px 20px 20px;min-width:0}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.ph h4{margin:0;font-size:20px}.ph small{display:block;font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase;margin-bottom:2px}
+.ph p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.tabsx{display:flex;flex-wrap:wrap;align-items:stretch;border-bottom:2px solid var(--ink);margin:14px 0 16px}
+.tabsx span{padding:8px 12px;font-size:13px;white-space:nowrap}
+.tabsx span.on{background:var(--ink);color:var(--paper);font-weight:700}
+.k{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line2);padding:4px 10px;font-size:12.5px;background:var(--paper);white-space:nowrap;border-radius:999px;color:var(--ink)}
+.k i{font-style:normal;font:700 11px system-ui;color:var(--soft)}
+/* la boîte « Pose une question » */
+.ask{display:flex;gap:8px;align-items:center;border:2px solid var(--ink);background:var(--paper);box-shadow:4px 4px 0 var(--shadow);padding:6px 6px 6px 12px;min-width:0}
+.ask .q{flex:1;min-width:0;font-size:14.5px;color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ask.on .q{color:var(--ink)}
+.ask .btn{box-shadow:none}
+.ex{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:9px 0 0}
+.ex .klab{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-right:2px}
+.ex .k{font-size:12px;color:var(--blue-ink)}
+/* ce que j'ai compris */
+.und{border-left:4px solid var(--blue);background:var(--blue-bg);padding:10px 12px 11px;margin:14px 0 0}
+.und h5,.nope h5{margin:0 0 7px;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-ink)}
+.und h5 small{font:400 12px system-ui;letter-spacing:0;text-transform:none;color:var(--muted);margin-left:6px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--blue);background:var(--paper);border-radius:999px;padding:3px 10px 3px 9px;font-size:12.5px;color:var(--ink);max-width:100%}
+.pill em{font-style:normal;font:700 9.5px system-ui;letter-spacing:.07em;text-transform:uppercase;color:var(--soft)}
+.pill:after{content:"▾";color:var(--blue);font-size:10px}
+.pill.auto{border-style:dashed}
+.pill.open{box-shadow:0 0 0 3px var(--shadow)}
+.pill.chg{background:var(--blue);color:#fff}.pill.chg em,.pill.chg:after{color:#fff;opacity:.85}
+.und .why{font-size:12px;color:var(--muted);margin:7px 0 0}
+.nope{border-left:4px solid var(--yel);background:var(--yel-bg);padding:10px 12px;margin:10px 0 0;font-size:13px}
+.nope h5{color:var(--yel-ink)}
+.nope ul{margin:0;padding-left:18px}.nope li{margin:2px 0}
+.pop{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);padding:12px 14px;font-size:13px;max-width:340px;margin:10px 0 0}
+.pop b{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.pop label{display:flex;gap:8px;align-items:center;padding:3px 0}
+.rad{display:inline-flex;align-items:center;border:1.5px solid var(--line2)}
+.rad span{padding:3px 9px;font:700 12.5px system-ui}.rad span+span{border-left:1.5px solid var(--line2)}
+.inp{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;display:inline-block;min-width:56px;background:var(--paper)}
+.rb{width:14px;height:14px;border:2px solid var(--ink);border-radius:50%;display:inline-block;flex:none}
+.rb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+/* résultats */
+.mt{margin-top:12px}
+.mt td{font-size:12.8px}
+.mt .d{white-space:nowrap;font-variant-numeric:tabular-nums}
+.mt .pl b{display:block}
+.mt small{color:var(--muted);font-size:11.5px;display:block}
+.who{display:inline-block;border:1px solid var(--line2);border-radius:999px;padding:1px 8px;font-size:11.5px;background:var(--grey-bg);white-space:nowrap}
+.srcs{display:flex;gap:4px;flex-wrap:wrap}
+.srcs a{font:700 10.5px system-ui;border:1px solid var(--line2);padding:1px 6px;color:var(--blue-ink);background:var(--blue-bg);text-decoration:none;white-space:nowrap}
+.acts{white-space:nowrap;text-align:right}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line2);background:var(--paper);font-size:14px;margin-left:3px;color:var(--ink);text-decoration:none}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-top:12px}
+.lock{font-size:12px;color:var(--muted);border-top:1px dashed var(--line2);margin-top:12px;padding-top:9px}
+/* cartes-réponses (§ 3) */
+.ans{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 16px;min-width:0}
+.ans .qq{font-size:15px;font-weight:700;margin:2px 0 0}
+.ans .qq:before{content:"« ";color:var(--soft)}.ans .qq:after{content:" »";color:var(--soft)}
+.pcard{border-bottom:1px solid var(--line);padding:10px 2px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px}
+.pcard:last-of-type{border-bottom:0}
+.pcard b{font-size:13.5px}
+.pcard small{display:block;color:var(--muted);font-size:12px}
+.pcard .srcs{margin-top:4px}
+.pcard .acts{grid-row:1 / 3;grid-column:2;display:flex;gap:4px;align-items:flex-start}
+.pcard .ib{margin:0}
+/* récap */
+.rc{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;margin-top:18px}
+.box{border:1.5px solid var(--line2);background:var(--paper);padding:12px 14px;min-width:0}
+.box>b:first-child{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.hl{list-style:none;margin:0;padding:0}
+.hl li{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:2px 8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:start}
+.hl li:last-child{border-bottom:0}
+.hl li .ic{font-size:16px}
+.hl li small{display:block;color:var(--muted);font-size:11.5px}
+.hl li .go{color:var(--blue);font-size:12px;white-space:nowrap}
+.todo{list-style:none;margin:0;padding:0;font-size:13px}
+.todo li{padding:6px 0;border-bottom:1px solid var(--line);display:flex;gap:8px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.todo li:last-child{border-bottom:0}
+.trs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px;margin-top:16px}
+.tr{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:0 8px;align-items:center;padding:7px 2px;border-bottom:1px solid var(--line);font-size:13px;min-width:0}
+.tr .ic{font-size:16px}
+.tr b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.tr small{display:block;color:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums}
+.tr .st{display:flex;gap:4px;white-space:nowrap}
+.dl,.up{font:700 10.5px system-ui;padding:1px 6px;border:1px solid var(--line2);color:var(--muted);white-space:nowrap}
+.up{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.trs-h{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap;margin-top:18px}
+/* barre du haut de l'app */
+.appbar{display:flex;gap:2px;flex-wrap:wrap;align-items:center;background:var(--bar);color:var(--bar-ink);padding:6px 8px;font-size:13px}
+.appbar span{padding:6px 10px;white-space:nowrap;opacity:.82}
+.appbar span.on{background:var(--bar-ink);color:var(--bar);opacity:1;font-weight:700}
+.appbar .plus{opacity:.45}
+/* deux portes, un écran */
+.doors{display:grid;grid-template-columns:minmax(0,1fr) 60px minmax(0,1.2fr);gap:10px;align-items:center}
+.door{border:1.5px solid var(--line2);background:var(--paper);padding:10px 12px;font-size:13px}
+.door+.door{margin-top:10px}
+.door small{display:block;color:var(--muted);font-size:12px}
+.arrow{font-size:26px;color:var(--blue);text-align:center}
+.comp{border:2px solid var(--blue);background:var(--blue-bg);padding:12px 14px;font-size:13px}
+.comp code{color:var(--blue-ink)}
+.comp ul{margin:6px 0 0;padding-left:18px}
+/* catalogue des onglets en plus */
+.cat{border:1.5px solid var(--line2);background:var(--paper)}
+.cat .ch{padding:9px 14px;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);border-bottom:1px solid var(--line)}
+.cat .ci{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:2px 10px;padding:10px 14px;border-bottom:1px solid var(--line);align-items:start;font-size:13px}
+.cat .ci:last-child{border-bottom:0}
+.cat .ci.hit{background:var(--blue-bg)}
+.cat .ci .ic{font-size:18px}
+.cat .ci small{display:block;color:var(--muted);font-size:12px}
+.sw{width:36px;height:20px;border-radius:999px;background:var(--line2);position:relative;display:inline-block;flex:none;margin-top:2px}
+.sw:after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--paper)}
+.sw.on{background:var(--blue)}.sw.on:after{left:18px}
+/* reprises */
+.reuse td:first-child{white-space:nowrap}
+.reuse td{font-size:12.8px}
+/* questions */
+.qs{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.qs li{background:var(--paper);border:2px solid var(--ink);padding:14px 18px;counter-increment:q}
+.qs li>b:before{content:counter(q) ". ";color:var(--blue)}
+.qs li>b{font-size:15px;display:block;margin-bottom:6px}
+.qs .reco{font-size:13px;margin-top:8px;border-left:4px solid var(--green);background:var(--green-bg);padding:7px 11px}
+.qs .opt{font-size:13px;color:var(--muted)}
+/* téléphone */
+.phones{display:grid;grid-template-columns:repeat(2,minmax(0,390px));gap:30px;justify-content:center}
+.phone{width:100%;max-width:390px;border:10px solid #222;border-radius:26px;background:var(--paper);overflow:hidden;margin:0 auto;color:var(--ink)}
+.phone .ptop{display:flex;align-items:center;gap:8px;background:var(--bar);color:var(--bar-ink);padding:10px 14px;font-size:13px;font-weight:700}
+.phone .ptop .sp{flex:1}
+.phone .pbody{padding:16px;font-size:13px}
+.phone .ask{box-shadow:3px 3px 0 var(--shadow)}
+.phone .ask .q{font-size:13.5px}
+.phone .tr{grid-template-columns:22px minmax(0,1fr) auto}
+.phone .und{margin-top:12px}
+.cap{font:700 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-align:center;margin:0 0 10px}
+.toggle{border:1.5px solid var(--line2);background:var(--paper);color:var(--ink);font:700 12.5px system-ui;padding:7px 12px;cursor:pointer}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.phones{grid-template-columns:minmax(0,390px)}.rc{grid-template-columns:1fr}.doors{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}
+@media (max-width:760px){
+ body{padding:16px}
+ .case,.ans{padding:14px 16px}
+ .win-body{padding:14px 14px 16px}
+ .phone{border-width:0;border-radius:0}
+ .trs{grid-template-columns:1fr}
+ .hide-s{display:none}
+}
+</style></head><body><div class="wrap">
+
+<div class="top">
+ <div>
+  <h1>📊 Les données : un récap, et une question en français</h1>
+  <p class="sub">Maquette à valider. Demande : « dans Listes un onglet qui récapitule les données, et comme la recherche “Poser une question en français”, poser une question qui montrerait les données et qui dit ce qu’il a compris ; et pourquoi pas un onglet “Données”, masqué par défaut, qui présente les données en liste exactement pareil que dans Listes ». Je pars des décisions déjà prises (<code>listes-categories.html</code>) : <b>20 thèmes</b> dont 🏆 Sport, thèmes par défaut (les 4 groupes en option), un thème s’ouvre sur sa liste réunie, 📎 / 🧺 / ↗ partout. Familles inventées : <b>MAZAUD</b> (Tulle), <b>LACOMBE</b> (Nice), <b>DURAND</b> (Salon-de-Provence). Les événements sont vrais ; les nombres marqués « exemple » sont à recompter dans l’app.</p>
+ </div>
+ <button class="toggle" type="button" id="tgl">☾ Thème sombre</button>
+</div>
+
+<div class="sum">
+ <a href="#s0"><b>0</b><span>Ce qu’on reprend</span></a>
+ <a href="#s1"><b>1</b><span>📊 Récap des données</span></a>
+ <a href="#s2"><b>2</b><span>Une question, en détail</span></a>
+ <a href="#s3"><b>3</b><span>4 autres questions</span></a>
+ <a href="#s4"><b>4</b><span>Onglet 📊 Données</span></a>
+ <a href="#s5"><b>5</b><span>Téléphone · 390 · sombre</span></a>
+ <a href="#sq"><b>?</b><span>5 questions pour toi</span></a>
+</div>
+
+<!-- ═══════════ 0 ═══════════ -->
+<h2 id="s0"><span class="num-b">0</span>Rien de neuf à inventer : on assemble ce qui marche déjà</h2>
+<p class="sub">La question sur les données n’est pas un troisième moteur. Elle prend la <b>lecture de la phrase</b> du panier « intelligent », l’<b>allure</b> de « J’ai compris » de la recherche, et le <b>moteur des listes</b> pour trouver les lignes.</p>
+<div class="case">
+ <div class="scrollx"><table class="reuse">
+  <thead><tr><th>Ce qui existe</th><th>Où</th><th>Ce qu’on en reprend</th></tr></thead>
+  <tbody>
+   <tr><td>🧺 Recherche qui crée un panier</td><td><code>app-paniers-core.js</code> · <code>parseSmart()</code>, <code>ageSpan()</code><br><code>app-paniers.js</code> ~ l. 650 · <code>resolve()</code></td><td>La lecture de la phrase : « à 4 km autour du château de… », « entre 10 et 12 ans » (l’âge d’une personne nommée → des années), « LACOMBE à Treignac 1780–1800 ». La boîte <b>« Ce que j’ai compris »</b> qu’on peut corriger (Qui · Quand / âge · Où + rayon · Quoi) et <b>« Ce que je n’ai pas compris »</b>. On l’élargit : « Quoi » connaît les <b>mots des 20 thèmes</b> (<code>dataListThemes[].words</code>), plus seulement ses 15 sortes.</td></tr>
+   <tr><td>🔎 Poser une question en français</td><td><code>heritage-links.js</code> · <code>runQuestion()</code><br><code>lib/question_plus.php</code></td><td>Le ton et l’allure : « J’ai compris : » suivi de pastilles ; « Je n’ai pas tenu compte de : … » ; les homonymes (« 2 fiches portent ce nom : répondre pour celle-ci »). Les réécritures de <code>qp_rewrite</code> (fautes de frappe, « vers 1850 », « à st pierre ») valent aussi ici.</td></tr>
+   <tr><td>⌘K questions</td><td><code>heritage-questions-plus.js</code> · <code>isQuestion()</code></td><td>Reconnaître une question dans la recherche rapide, sans serveur (question ? 3).</td></tr>
+   <tr><td>🧰 Listes → Données</td><td><code>app-listes-donnees.js</code> · <code>LCNDA_EXT.dataListsEngine</code></td><td><code>buildQuery()</code> avec <code>near</code> + <code>years</code>, <code>fetchPage()</code>, <code>applyLocal()</code> : les lignes viennent du même moteur que les listes ; « Ouvrir la liste complète » ouvre la liste avec les mêmes critères (<code>open(id, preset)</code>).</td></tr>
+   <tr><td>🗂 Données installées</td><td><code>app-listes-maj.js</code> · Réglages → 🗂 Données</td><td>Pour le récap : installé ou non, date des données, « une version plus récente existe ». Rien ne part sur Internet sans un clic (sauf la case « une fois par mois »).</td></tr>
+   <tr><td>Onglets en plus</td><td><code>app-onglets-plus.js</code> · <code>CATALOG</code>, <code>FLAGGED</code></td><td>L’onglet 📊 Données, caché au départ, comme 🧺 Paniers : une ligne de plus dans le catalogue.</td></tr>
+  </tbody>
+ </table></div>
+</div>
+
+<!-- ═══════════ 1 ═══════════ -->
+<h2 id="s1"><span class="num-b">1</span>Listes → 🧰 Données → 📊 Récap</h2>
+<p class="sub">La première vue de 🧰 Données. Un seul écran, calme : la question en haut, ce que les données disent <b>de ta famille</b>, ce qu’il reste à faire, puis les 20 thèmes en une ligne chacun. Un clic sur un thème l’ouvre (sur sa liste réunie, comme décidé). La vue « 🧰 Thèmes » (les cartes) reste à côté.</p>
+<div class="win">
+ <div class="win-bar"><span class="eyebrow">Listes › 🧰 Données</span><span class="mini">216 listes · 20 thèmes</span></div>
+ <div class="win-body">
+  <div class="ph"><div><small>Données</small><h4>📊 Récap des données</h4><p>Ce que les listes savent, et ce qu’elles disent de ta famille. Tout est calculé ici, dans ton navigateur.</p></div></div>
+  <div class="tabsx"><span class="on">📊 Récap</span><span>🧰 Thèmes</span></div>
+
+  <div class="ask"><span class="q">🔍 Pose une question sur les données…</span><span class="btn blue small">Demander</span></div>
+  <div class="ex"><span class="klab">Essaie</span>
+   <span class="k">les séismes à moins de 50 km de Tulle entre 1800 et 1900</span>
+   <span class="k">le Tour de France quand Jean MAZAUD avait 12 ans</span>
+   <span class="k">les musées autour de Brive</span>
+   <span class="clear">d’autres exemples</span>
+  </div>
+
+  <div class="rc">
+   <div class="box">
+    <b>Pour ta famille</b>
+    <ul class="hl">
+     <li><span class="ic">🌋</span><div>3 séismes forts à moins de 50 km des lieux de la famille<small>Lambesc 1909 (Louis DURAND avait 29 ans) · Roquebillière 1644 · La Bollène 1564</small></div><span class="go">voir →</span></li>
+     <li><span class="ic">🏆</span><div>Le Tour de France est passé 14 fois à moins de 50 km de Tulle <span class="mini">(exemple)</span><small>dont 3 fois à Tulle ; en 1976, Jean MAZAUD avait 12 ans</small></div><span class="go">voir →</span></li>
+     <li><span class="ic">⚔️</span><div>3 combats près de Nice du vivant de Marie LACOMBE<small>Gilette 1793 · Saorge 1794 · le pont du Var 1800</small></div><span class="go">voir →</span></li>
+     <li><span class="ic">🌊</span><div>2 grandes crues de la Corrèze à Tulle du vivant des MAZAUD <span class="mini">(exemple)</span><small>repères de crues + BDHI</small></div><span class="go">voir →</span></li>
+    </ul>
+    <p class="note" style="margin-top:6px">« voir → » pose la question qui donne ce résultat, dans la boîte du haut : on apprend à demander en regardant.</p>
+   </div>
+   <div class="box">
+    <b>À faire</b>
+    <ul class="todo">
+     <li><span>⤓ <b>29 listes</b> pas encore installées</span><span class="clear">voir</span></li>
+     <li><span class="mini" style="width:100%">dont 3 utiles pour tes lieux : Météo d’autrefois (Marseille), Séismes de France, Décès INSEE 1990–2009</span></li>
+     <li><span>↻ <b>4 listes</b> ont une version plus récente</span><span class="clear">mettre à jour</span></li>
+     <li><span class="mini" style="width:100%">Vérifié le 20 nov., sur ton clic. Les deux liens mènent à Réglages → 🗂 Données.</span></li>
+     <li><span>✨ Nouveau : 🏆 Sport (2 listes)</span><span class="mini">12 nov.</span></li>
+    </ul>
+   </div>
+  </div>
+
+  <div class="trs-h"><b style="font-size:14px">Les 20 thèmes</b><span class="mini">installées sur toutes · lignes <span class="hide-s">(lignes : exemple)</span> · ⤓ à installer · ↻ plus récent</span></div>
+  <div class="trs">
+   <div class="tr"><span class="ic">🌋</span><div><b>Séismes, volcans et terrains</b><small>8 / 9 listes · 31 200 lignes</small></div><span class="st"><span class="dl">⤓ 1</span></span></div>
+   <div class="tr"><span class="ic">🌊</span><div><b>Eaux, crues et mers</b><small>8 / 8 · 54 900 lignes</small></div><span class="st"><span class="up">↻</span></span></div>
+   <div class="tr"><span class="ic">⛅</span><div><b>Climat, ciel et saisons</b><small>11 / 14 · 412 000 lignes</small></div><span class="st"><span class="dl">⤓ 3</span></span></div>
+   <div class="tr"><span class="ic">⚔️</span><div><b>Guerres et soldats</b><small>9 / 11 · 1,4 million de lignes</small></div><span class="st"><span class="dl">⤓ 2</span><span class="up">↻</span></span></div>
+   <div class="tr"><span class="ic">🏛</span><div><b>Monuments et patrimoine</b><small>11 / 12 · 47 800 lignes</small></div><span class="st"><span class="dl">⤓ 1</span></span></div>
+   <div class="tr"><span class="ic">🏘</span><div><b>Petit patrimoine du village</b><small>11 / 11 · 22 600 lignes</small></div><span class="st"></span></div>
+   <div class="tr"><span class="ic">🖼</span><div><b>Musées, images et sons</b><small>10 / 12 · 8 900 lignes</small></div><span class="st"><span class="dl">⤓ 2</span></span></div>
+   <div class="tr"><span class="ic">🗺</span><div><b>Lieux et noms de lieux</b><small>11 / 14 · 236 000 lignes</small></div><span class="st"><span class="dl">⤓ 3</span><span class="up">↻</span></span></div>
+   <div class="tr"><span class="ic">👑</span><div><b>Pouvoirs, lois et frontières</b><small>11 / 13 · 96 400 lignes</small></div><span class="st"><span class="dl">⤓ 2</span></span></div>
+   <div class="tr"><span class="ic">👶</span><div><b>Prénoms et noms de famille</b><small>6 / 8 · 610 000 lignes</small></div><span class="st"><span class="dl">⤓ 2</span></span></div>
+   <div class="tr"><span class="ic">🔎</span><div><b>Retrouver une personne</b><small>7 / 11 · 9,8 millions de lignes</small></div><span class="st"><span class="dl">⤓ 4</span></span></div>
+   <div class="tr"><span class="ic">⚒️</span><div><b>Métiers et industries</b><small>12 / 13 · 38 100 lignes</small></div><span class="st"><span class="dl">⤓ 1</span></span></div>
+   <div class="tr"><span class="ic">🌾</span><div><b>Champs, bêtes et plantes</b><small>12 / 14 · 15 300 lignes</small></div><span class="st"><span class="dl">⤓ 2</span></span></div>
+   <div class="tr"><span class="ic">🚂</span><div><b>Routes, trains et bateaux</b><small>12 / 13 · 41 700 lignes</small></div><span class="st"><span class="dl">⤓ 1</span></span></div>
+   <div class="tr"><span class="ic">✝️</span><div><b>Croire, soigner, enfermer</b><small>11 / 12 · 63 000 lignes</small></div><span class="st"><span class="dl">⤓ 1</span></span></div>
+   <div class="tr"><span class="ic">💶</span><div><b>Prix, monnaies et chiffres</b><small>7 / 7 · 12 400 lignes</small></div><span class="st"></span></div>
+   <div class="tr"><span class="ic">📚</span><div><b>Livres, journaux et écritures</b><small>10 / 13 · 19 800 lignes</small></div><span class="st"><span class="dl">⤓ 3</span></span></div>
+   <div class="tr"><span class="ic">🎉</span><div><b>Fêtes, jeux et vie de tous les jours</b><small>11 / 12 · 6 100 lignes</small></div><span class="st"><span class="dl">⤓ 1</span></span></div>
+   <div class="tr"><span class="ic">🌍</span><div><b>Grands événements et dates</b><small>7 / 7 · 4 300 lignes</small></div><span class="st"></span></div>
+   <div class="tr"><span class="ic">🏆</span><div><b>Sport</b> <span class="badge new" style="font-size:9px;padding:1px 4px">nouveau</span><small>2 / 2 · 2 470 lignes</small></div><span class="st"><span class="up">↻</span></span></div>
+  </div>
+  <div class="foot"><span>187 listes installées sur 216 · ⤓ 29 · ↻ 4 · comptées à l’ouverture, gardées un jour</span><span class="clear">🧰 voir en cartes</span></div>
+ </div>
+</div>
+<div class="grid" style="margin-top:24px">
+ <div class="case">
+  <span class="tag">D’où viennent les chiffres</span>
+  <h3>Tout est compté ici, rien n’est demandé à Internet</h3>
+  <ul style="font-size:13px;padding-left:18px;margin:0">
+   <li><b>Listes et lignes</b> : le registre <code>dataLists</code> + <code>installed()</code> ; les lignes, le nombre que donne chaque liste (gardé un jour : pas de lenteur à l’ouverture).</li>
+   <li><b>⤓ et ↻</b> : l’état de Réglages → 🗂 Données. « ↻ » n’apparaît que si une vérification a eu lieu (ton clic, ou la case « une fois par mois »).</li>
+   <li><b>Pour ta famille</b> : les lieux et les dates de ta généalogie, croisés avec les listes installées, <b>dans le navigateur</b>. Quatre lignes au plus, les plus parlantes (une par thème).</li>
+  </ul>
+ </div>
+ <div class="case">
+  <span class="tag">Ce qui n’est pas là, exprès</span>
+  <h3>Pas un tableau de bord</h3>
+  <ul style="font-size:13px;padding-left:18px;margin:0">
+   <li>Pas de graphiques, pas de boutons par thème : une ligne = un clic qui ouvre le thème.</li>
+   <li>Pas de « Tout installer » ici : il est dans Réglages → 🗂 Données, avec la taille et la licence dites avant.</li>
+   <li>En <b>mode consultation</b> (visiteurs), « Pour ta famille » ne cite jamais une personne vivante ou confidentielle ; la ligne garde le lieu et la date, sans le nom.</li>
+  </ul>
+ </div>
+</div>
+
+<!-- ═══════════ 2 ═══════════ -->
+<h2 id="s2"><span class="num-b">2</span>Une question, en détail : « le Tour de France quand Jean MAZAUD avait 12 ans »</h2>
+<p class="sub">La réponse s’affiche sous la boîte, à la place du récap (« ← Récap » pour revenir). D’abord <b>ce que j’ai compris</b>, en pastilles qu’on touche pour corriger, puis les lignes trouvées dans la liste réunie du thème. Une pastille en pointillé = je l’ai déduite (ici, le lieu : là où vivait Jean à cet âge).</p>
+<div class="win">
+ <div class="win-bar"><span class="eyebrow">Listes › 🧰 Données › 📊 Question</span><span class="mini">← Récap</span></div>
+ <div class="win-body">
+  <div class="ask on"><span class="q">🔍 le Tour de France quand Jean MAZAUD avait 12 ans</span><span class="clear">effacer</span><span class="btn blue small">Demander</span></div>
+
+  <div class="und">
+   <h5>Ce que j’ai compris <small>touche une pastille pour la changer</small></h5>
+   <div class="pills">
+    <span class="pill"><em>Quoi</em>🏆 Sport › Compétitions sportives › Tour de France</span>
+    <span class="pill"><em>Qui</em>👤 Jean MAZAUD, né en 1964 à Tulle</span>
+    <span class="pill"><em>Quand</em>à 12 ans → 1976</span>
+    <span class="pill auto open"><em>Où</em>📍 Tulle (là où il vivait) · 100 km</span>
+   </div>
+   <p class="why">« quand il avait 12 ans » : de sa naissance (3 mars 1964) → du 3 mars 1976 au 2 mars 1977. Le Tour se court en juillet : c’est le Tour 1976.</p>
+  </div>
+  <div class="pop">
+   <b>📍 Où (pastille ouverte)</b>
+   <label><span class="rb on"></span> Là où vivait Jean à cet âge : <b style="display:inline;font:inherit;letter-spacing:0;text-transform:none;color:var(--ink);margin:0">Tulle</b></label>
+   <label><span class="rb"></span> Tous les lieux de la famille <span class="mini">(3)</span></label>
+   <label><span class="rb"></span> Un lieu : <span class="inp">Brive</span></label>
+   <label><span class="rb"></span> Partout (pas de lieu)</label>
+   <div class="row" style="margin-top:8px"><span class="mini">à</span><span class="rad"><span>−</span><span>100 km</span><span>+</span></span><span class="sp" style="flex:1"></span><span class="btn blue small">Changer</span></div>
+  </div>
+
+  <div class="scrollx">
+  <table class="mt">
+   <thead><tr><th>Date</th><th>Étape</th><th>Près de</th><th>Dans la famille</th><th>Source</th><th></th></tr></thead>
+   <tbody>
+    <tr><td class="d">jeudi 15 juillet 1976</td><td class="pl"><b>19ᵉ étape · Sainte-Foy-la-Grande → Tulle</b><small>220 km · arrivée à Tulle</small></td><td>7 km de chez lui</td><td><span class="who">Jean MAZAUD, 12 ans</span></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib" title="Insérer">📎</span><span class="ib" title="Au panier">🧺</span></td></tr>
+    <tr><td class="d">vendredi 16 juillet 1976</td><td class="pl"><b>20ᵉ étape · Tulle → puy de Dôme</b><small>départ de Tulle</small></td><td>7 km de chez lui</td><td><span class="who">Jean MAZAUD, 12 ans</span></td><td><div class="srcs"><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+   </tbody>
+  </table>
+  </div>
+  <div class="foot"><span>2 étapes à moins de 100 km, sur les 27 tronçons du Tour 1976 (24 juin → 18 juillet).</span><span class="row"><span class="btn small">🧺 Les 2 au panier</span><span class="btn small">Ouvrir la liste complète →</span></span></div>
+  <p class="lock">🔒 Jean MAZAUD est vivant : son nom, sa date de naissance et son lieu restent sur ton ordinateur. La liste des étapes est un fichier installé ; si une liste en ligne servait (Wikidata, POP…), elle ne recevrait que « Tulle, 100 km, 1976 », jamais un nom.</p>
+ </div>
+</div>
+<div class="grid" style="margin-top:24px">
+ <div class="case">
+  <span class="tag">Les quatre pastilles</span>
+  <h3>Toujours les mêmes, dans le même ordre</h3>
+  <ul style="font-size:13px;padding-left:18px;margin:0">
+   <li><b>Quoi</b> : un thème, une liste réunie ou une liste. Menu : les listes du thème, puis « un autre thème… ». Par défaut la <b>liste réunie</b> du thème (comme décidé).</li>
+   <li><b>Qui</b> : une personne de l’arbre (<code>picker_search</code>). Deux fiches du même nom → « 2 fiches portent ce nom : répondre pour celle-ci », comme la recherche.</li>
+   <li><b>Quand</b> : des années, une date, un âge (→ années), « pendant sa vie », « le jour de son mariage ».</li>
+   <li><b>Où</b> : un lieu + un rayon (− / +), « ses lieux à cet âge », « les lieux de la famille », ou partout.</li>
+  </ul>
+  <p class="note">Une pastille changée devient pleine (bleue) et la réponse se refait tout de suite. La phrase de la boîte ne bouge pas : on voit ce qu’on a demandé, et ce qu’on a corrigé.</p>
+ </div>
+ <div class="case">
+  <span class="tag">Le geste qui suit</span>
+  <h3>📎 🧺 ↗ et « Ouvrir la liste complète »</h3>
+  <ul style="font-size:13px;padding-left:18px;margin:0">
+   <li><b>📎</b> pose « 19ᵉ étape du Tour de France, Sainte-Foy-la-Grande → Tulle, 15 juillet 1976 (Wikidata) » au curseur, avec sa source.</li>
+   <li><b>🧺</b> met la ligne au panier ; « 🧺 Les N au panier » prend toutes les lignes (le panier « intelligent » sait déjà le faire).</li>
+   <li><b>↗</b> ouvre la fiche de la source.</li>
+   <li><b>Ouvrir la liste complète →</b> ouvre la liste réunie avec <b>les mêmes critères</b> en filtres (📍 Tulle · 100 km · 📅 1976) : on peut trier, filtrer, mettre en carte, exporter.</li>
+  </ul>
+  <p class="note">Un clic sur une ligne l’ouvre (ce que dit chaque source), comme dans la liste réunie.</p>
+ </div>
+</div>
+
+<!-- ═══════════ 3 ═══════════ -->
+<h2 id="s3"><span class="num-b">3</span>Quatre autres questions, et une pas comprise</h2>
+<p class="sub">Même écran, réponses raccourcies. Chaque réponse dit d’où viennent ses lignes, et ce qui manque.</p>
+<div class="grid">
+
+ <div class="ans">
+  <span class="mini">Question</span>
+  <p class="qq">les séismes à moins de 50 km de Tulle entre 1800 et 1900</p>
+  <div class="und">
+   <h5>Ce que j’ai compris</h5>
+   <div class="pills"><span class="pill"><em>Quoi</em>🌋 Séismes réunis</span><span class="pill"><em>Où</em>📍 Tulle · 50 km</span><span class="pill"><em>Quand</em>1800 → 1900</span></div>
+  </div>
+  <div class="nope"><h5>Rien trouvé</h5>Aucun séisme dans les listes installées. Elles ne gardent que les séismes <b>forts</b> (EPICA, NOAA) ; le Limousin en a eu très peu.
+   <div class="row" style="margin-top:8px"><span class="btn small">⤓ Installer Séismes de France (SisFrance : aussi les petits)</span><span class="btn small ghost">📍 → les lieux de la famille</span></div></div>
+  <p class="note">Avec la pastille 📍 changée en « les lieux de la famille · 100 km » :</p>
+  <div class="pcard"><div><b>23 févr. 1887 · Ligurie</b><small>IX · ≈ 640 morts · 69 km de Nice</small><small><span class="who">Jeanne LACOMBE, 15 ans</span></small><div class="srcs"><a href="#">EPICA ↗</a><a href="#">NOAA ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+  <div class="foot"><span>1 séisme</span><span class="clear">Ouvrir la liste complète →</span></div>
+ </div>
+
+ <div class="ans">
+  <span class="mini">Question</span>
+  <p class="qq">les batailles près des lieux de la famille pendant la vie de Marie LACOMBE</p>
+  <div class="und">
+   <h5>Ce que j’ai compris</h5>
+   <div class="pills"><span class="pill"><em>Quoi</em>⚔️ Batailles réunies</span><span class="pill"><em>Qui</em>👤 Marie LACOMBE (1772–1841)</span><span class="pill"><em>Quand</em>sa vie · 1772 → 1841</span><span class="pill auto"><em>Où</em>📍 lieux de la famille · 50 km</span></div>
+   <p class="why">« près » sans distance : 50 km (la pastille le dit, et se change).</p>
+  </div>
+  <div class="pcard"><div><b>19 oct. 1793 · Combat de Gilette</b><small>≈ 25 km de Nice · Marie a 21 ans</small><div class="srcs"><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+  <div class="pcard"><div><b>28–29 avr. 1794 · Bataille de Saorge</b><small>≈ 45 km de Nice · 22 ans</small><div class="srcs"><a href="#">Batailles et sièges ↗</a><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+  <div class="pcard"><div><b>mai 1800 · Combats du pont du Var</b><small>≈ 7 km de Nice · 28 ans</small><div class="srcs"><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+  <div class="foot"><span>3 batailles · 2 de plus à 100 km (Toulon 1793, Loano 1795)</span><span class="clear">Ouvrir la liste complète →</span></div>
+ </div>
+
+ <div class="ans">
+  <span class="mini">Question</span>
+  <p class="qq">les musées autour de Brive</p>
+  <div class="und">
+   <h5>Ce que j’ai compris</h5>
+   <div class="pills"><span class="pill"><em>Quoi</em>🖼 Musées, images et sons › musées</span><span class="pill auto"><em>Où</em>📍 Brive-la-Gaillarde · 30 km</span></div>
+  </div>
+  <div class="pcard"><div><b>Musée Labenche</b><small>art et histoire · Brive · 0 km</small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span><span class="ib">↗</span></div></div>
+  <div class="pcard"><div><b>Musée Edmond-Michelet</b><small>Résistance et déportation · Brive · 1 km</small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span><span class="ib">↗</span></div></div>
+  <div class="pcard"><div><b>Musée de l’Homme de Néandertal</b><small>La Chapelle-aux-Saints · ≈ 25 km</small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span><span class="ib">↗</span></div></div>
+  <div class="pcard"><div><b>Musée du Cloître</b><small>Tulle · ≈ 27 km · <span class="who">près des MAZAUD</span></small></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span><span class="ib">↗</span></div></div>
+  <div class="nope"><h5>Il manque une liste</h5>« Musées de France (Muséofile) » n’est pas installée : il peut y en avoir d’autres. <span class="clear">⤓ l’installer</span></div>
+ </div>
+
+ <div class="ans">
+  <span class="mini">Question</span>
+  <p class="qq">quel temps faisait-il le jour du mariage de Pierre DURAND</p>
+  <div class="und">
+   <h5>Ce que j’ai compris</h5>
+   <div class="pills"><span class="pill"><em>Quoi</em>⛅ Météo d’autrefois</span><span class="pill"><em>Qui</em>👤 Pierre DURAND</span><span class="pill"><em>Quand</em>son mariage · 12 mai 1903</span><span class="pill auto"><em>Où</em>📍 Salon-de-Provence → station Marseille, 38 km</span></div>
+   <p class="why">Pas de station à Salon : je prends la plus proche qui a des relevés ce jour-là.</p>
+  </div>
+  <div class="pcard"><div><b>mardi 12 mai 1903 · Marseille</b><small>max 21 °C · min 11 °C · pas de pluie · vent de nord-ouest (mistral) <span class="mini">— valeurs : exemple</span></small><small><span class="who">Pierre DURAND, 26 ans · mariage à Salon</span></small><div class="srcs"><a href="#">Météo d’autrefois ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+  <div class="foot"><span>1 jour · « ± 3 jours » se règle dans la pastille Quand</span><span class="clear">Ouvrir la liste complète →</span></div>
+ </div>
+
+ <div class="ans wide">
+  <span class="mini">Question</span>
+  <p class="qq">les gens célèbres qui ont dormi à Treignac</p>
+  <div class="und">
+   <h5>Ce que j’ai compris</h5>
+   <div class="pills"><span class="pill"><em>Où</em>📍 Treignac · 30 km</span><span class="pill"><em>Quoi</em>🔎 Retrouver une personne › célébrités ?</span></div>
+  </div>
+  <div class="nope"><h5>Je n’ai pas compris</h5>
+   <ul><li>« ont dormi » : aucune liste ne dit qui a dormi où. Je peux chercher où ils sont <b>nés</b>, <b>morts</b> ou <b>enterrés</b>.</li>
+    <li>Rien ne te concerne dans la famille : si tu voulais parler d’un ancêtre, pose la question dans 🔍 Recherche → « Poser une question en français ».</li></ul>
+   <div class="ex" style="margin-top:9px"><span class="klab">Essaie</span><span class="k">les célébrités nées à moins de 30 km de Treignac</span><span class="k">les châteaux autour de Treignac</span><span class="k">ce qu’a pu voir Jean MAZAUD à 10 ans</span></div>
+  </div>
+  <p class="note">Comme la recherche (<code>qp_ignored</code>) : un mot qui compte et qui n’a pas été lu est toujours dit. Jamais une réponse au hasard.</p>
+ </div>
+</div>
+
+<!-- ═══════════ 4 ═══════════ -->
+<h2 id="s4"><span class="num-b">4</span>L’onglet 📊 Données, en haut (caché au départ)</h2>
+<p class="sub">Une autre <b>porte</b> vers le même écran. Ce n’est pas une copie : c’est le même morceau de code, monté à deux endroits. Un changement (un thème de plus, une question mieux comprise) se voit partout à la fois ; les deux ne peuvent pas diverger.</p>
+<div class="win">
+ <div class="appbar"><span>🌳 Arbre</span><span>👤 Personnes</span><span>📋 Listes</span><span>🔍 Recherche</span><span class="on">📊 Données</span><span>🧺 Paniers</span><span class="plus">＋</span></div>
+ <div class="win-body">
+  <div class="ph"><div><small>Données</small><h4>📊 Récap des données</h4><p>Exactement l’écran du § 1 : même question, mêmes 20 thèmes, mêmes réglages (thèmes ou 4 groupes).</p></div></div>
+  <div class="tabsx"><span class="on">📊 Récap</span><span>🧰 Thèmes</span></div>
+  <div class="ask"><span class="q">🔍 Pose une question sur les données…</span><span class="btn blue small">Demander</span></div>
+  <p class="note">… la suite est identique au § 1. Seul le fil d’Ariane change : « 📊 Données » au lieu de « Listes › 🧰 Données ».</p>
+ </div>
+</div>
+<div class="grid" style="margin-top:24px">
+ <div class="case">
+  <span class="tag">Deux portes, un seul écran</span>
+  <h3>Pourquoi ça ne peut pas diverger</h3>
+  <div class="doors">
+   <div>
+    <div class="door">📋 Listes → 🧰 Données<small>toujours là</small></div>
+    <div class="door">📊 Données, en haut<small>si tu l’allumes</small></div>
+   </div>
+   <div class="arrow">→</div>
+   <div class="comp"><code>LCNDA_EXT.dataHome.mount(hôte)</code>
+    <ul><li>un seul fichier, <code>app-donnees-accueil.js</code></li><li>un seul état : la dernière question, le thème ouvert, la vue (Récap / Thèmes) — tu retrouves la même chose par l’une ou l’autre porte</li><li>les listes ouvertes passent par <code>dataListsEngine.open()</code></li></ul>
+   </div>
+  </div>
+  <p class="note">Un essai (<code>tests/test-donnees-accueil.js</code>) monte l’écran aux deux endroits et vérifie que le HTML est le même, au fil d’Ariane près.</p>
+ </div>
+ <div>
+  <div class="cat">
+   <div class="ch">Réglages → Onglets en plus · 1 · Des parties de l’app, cachées au départ</div>
+   <div class="ci"><span class="ic">🧺</span><div><b>Paniers</b><small>Tes paniers rangés en dossiers, des idées, une recherche qui crée un panier.</small></div><span class="sw on"></span></div>
+   <div class="ci hit"><span class="ic">📊</span><div><b>Données</b> <span class="badge new" style="font-size:9px;padding:1px 4px">nouveau</span><small>Le récap des listes de données, la question en français et les 20 thèmes, dans le menu du haut. Le même écran que Listes → 🧰 Données, pas une copie.</small></div><span class="sw"></span></div>
+   <div class="ci"><span class="ic">📒</span><div><b>Fiches</b><small>Fiches thématiques : un métier, une guerre, un village.</small></div><span class="sw"></span></div>
+  </div>
+  <p class="note">Comme 🧺 Paniers : une ligne dans <code>CATALOG</code> (<code>k: 'donnees'</code>, <code>g: 1</code>) et le nom dans <code>FLAGGED</code> → caché tant que le repère <code>genealogie-menu-donnees</code> n’est pas posé. Se range avec « ⠿ Ordre du menu ». Pas d’onglet en mode simple.</p>
+ </div>
+</div>
+
+<!-- ═══════════ 5 ═══════════ -->
+<h2 id="s5"><span class="num-b">5</span>Téléphone, 390 px (le second toujours en sombre)</h2>
+<div class="phones">
+ <div>
+  <p class="cap">Récap · suit le thème choisi</p>
+  <div class="phone">
+   <div class="ptop"><span>☰</span><span>📊 Données</span><span class="sp"></span><span>⋯</span></div>
+   <div class="pbody">
+    <div class="ask"><span class="q">🔍 Pose une question…</span></div>
+    <div class="ex"><span class="k">les musées autour de Brive</span><span class="k">le Tour quand Jean avait 12 ans</span></div>
+    <div class="box" style="margin-top:14px">
+     <b>Pour ta famille</b>
+     <ul class="hl">
+      <li><span class="ic">🌋</span><div>3 séismes forts à moins de 50 km<small>Lambesc 1909 · Vésubie 1644, 1564</small></div><span class="go">→</span></li>
+      <li><span class="ic">🏆</span><div>Le Tour, 14 fois près de Tulle<small>exemple · dont 1976 : Jean, 12 ans</small></div><span class="go">→</span></li>
+     </ul>
+    </div>
+    <div class="trs" style="margin-top:10px">
+     <div class="tr"><span class="ic">🌋</span><div><b>Séismes, volcans…</b><small>8 / 9</small></div><span class="st"><span class="dl">⤓ 1</span></span></div>
+     <div class="tr"><span class="ic">🌊</span><div><b>Eaux, crues et mers</b><small>8 / 8</small></div><span class="st"><span class="up">↻</span></span></div>
+     <div class="tr"><span class="ic">⛅</span><div><b>Climat, ciel et saisons</b><small>11 / 14</small></div><span class="st"><span class="dl">⤓ 3</span></span></div>
+     <div class="tr" style="border-bottom:0"><span class="ic" style="color:var(--soft)">⌄</span><div><b style="color:var(--muted)">17 autres thèmes</b></div><span></span></div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div>
+  <p class="cap">Une réponse · en sombre</p>
+  <div class="phone force-dark">
+   <div class="ptop"><span>←</span><span>📊 Question</span><span class="sp"></span><span>⋯</span></div>
+   <div class="pbody">
+    <div class="ask on"><span class="q">🔍 le Tour de France quand Jean MAZAUD avait 12 ans</span></div>
+    <div class="und">
+     <h5>Ce que j’ai compris</h5>
+     <div class="pills"><span class="pill"><em>Quoi</em>🏆 Tour de France</span><span class="pill"><em>Qui</em>👤 Jean MAZAUD</span><span class="pill"><em>Quand</em>12 ans → 1976</span><span class="pill auto"><em>Où</em>📍 Tulle · 100 km</span></div>
+    </div>
+    <div class="pcard" style="margin-top:6px"><div><b>15 juil. 1976 · Sainte-Foy → Tulle</b><small>19ᵉ étape · arrivée à 7 km de chez lui</small><small><span class="who">Jean MAZAUD, 12 ans</span></small><div class="srcs"><a href="#">Wikidata ↗</a></div></div><div class="acts" style="flex-direction:column"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>16 juil. 1976 · Tulle → puy de Dôme</b><small>20ᵉ étape · départ à 7 km de chez lui</small><div class="srcs"><a href="#">Wikidata ↗</a></div></div><div class="acts" style="flex-direction:column"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="foot"><span>2 étapes</span><span class="clear">Ouvrir la liste complète →</span></div>
+    <p class="lock">🔒 Rien sur Jean ne quitte ton ordinateur.</p>
+   </div>
+  </div>
+ </div>
+</div>
+<p class="note" style="text-align:center">Sur téléphone : les pastilles passent à la ligne, une pastille ouverte devient une feuille qui monte du bas ; 📎 et 🧺 restent à droite, grands assez pour le doigt.</p>
+
+<!-- ═══════════ code ═══════════ -->
+<h2 id="s6"><span class="num-b">6</span>Pour le code (court)</h2>
+<div class="grid">
+ <div class="case">
+  <span class="tag">La question</span>
+  <h3><code>LCNDA_EXT.dataAsk(phrase)</code></h3>
+<pre><span class="c">// 1. lire : parseSmart() du panier, élargi aux mots des thèmes</span>
+const u = paniersCore.parseSmart(q, {themes: ext.dataListThemes});
+<span class="c">//    → {what: {theme, merge, list}, who, age, years, around, km, nope}</span>
+<span class="c">// 2. résoudre : la personne (picker_search, sur TON serveur),</span>
+<span class="c">//    âge → années (ageSpan), « ses lieux à cet âge », « son mariage »</span>
+await resolve(u);                 <span class="c">// repris d'app-paniers.js</span>
+<span class="c">// 3. chercher : le moteur des listes, rien d'autre</span>
+const query = dataListsEngine.buildQuery({near: {lat, lon, km},
+  years: {from, to, mode: 'overlap'}});
+<span class="c">// 4. répondre : {understood: pastilles, rows, missing: [⤓], nope}</span></pre>
+  <p class="note">Une liste <code>online: true</code> ne reçoit que lieu, rayon et années ; jamais un nom ni une date de naissance. En mode consultation, une personne vivante ou confidentielle n’est pas reconnue comme « Qui ».</p>
+ </div>
+ <div class="case">
+  <span class="tag">L’écran</span>
+  <h3><code>LCNDA_EXT.dataHome</code></h3>
+  <ul style="font-size:13px;padding-left:18px;margin:0">
+   <li><code>mount(hôte)</code> : appelé par Listes → 🧰 Données (première vue) <b>et</b> par l’onglet 📊 Données. Rien d’autre ne dessine cet écran.</li>
+   <li><code>recap()</code> : les comptes par thème, l’état ⤓ / ↻ lu dans <code>listesMaj</code>, et « Pour ta famille » (gardé un jour, refait si la généalogie change).</li>
+   <li>Les exemples de la boîte : une petite liste fixe, plus ceux tirés de « Pour ta famille » (avec tes vrais lieux et noms).</li>
+   <li>Essais : <code>tests/test-donnees-question.js</code> (les 5 phrases de cette maquette → les bonnes pastilles), <code>tests/test-donnees-accueil.js</code>.</li>
+  </ul>
+ </div>
+</div>
+
+<!-- ═══════════ Questions ═══════════ -->
+<h2 id="sq"><span class="num-b">?</span>5 questions pour toi</h2>
+<ol class="qs">
+ <li><b>Quand tu ouvres 🧰 Données, tu tombes sur quoi ?</b>
+  <div class="opt">A. Le 📊 Récap (la question, ta famille, les 20 thèmes en lignes). — B. Les 🧰 Thèmes en cartes, le récap dans le second onglet.</div>
+  <div class="reco">Ma reco : <b>A</b>. Le récap montre aussi les 20 thèmes (un clic les ouvre), et la question est ce que tu veux faire le plus souvent. Les cartes restent à un clic.</div></li>
+ <li><b>L’onglet 📊 Données en haut : il remplace Listes → 🧰 Données, ou il en est le miroir ?</b>
+  <div class="opt">A. Miroir : les deux portes mènent au même écran. — B. Il remplace : allumé, 🧰 Données disparaît de Listes.</div>
+  <div class="reco">Ma reco : <b>A</b>. Rien ne disparaît quand on allume une option, et comme c’est le même code, il n’y a rien à tenir à jour deux fois.</div></li>
+ <li><b>La même question dans la recherche rapide ⌘K ?</b>
+  <div class="opt">A. Oui : une ligne « 📊 Demander aux données : « … » », la réponse quand tu choisis la ligne. — B. Oui, avec la réponse courte dans la ligne (« 2 étapes en 1976 »). — C. Non, seulement dans Données.</div>
+  <div class="reco">Ma reco : <b>A</b>. ⌘K reconnaît déjà les questions (<code>isQuestion</code>) ; il suffit d’une ligne de plus quand la phrase parle d’un thème. Pas de calcul pendant la frappe : ⌘K reste rapide.</div></li>
+ <li><b>« Près de » ou « autour de » sans distance : combien ?</b>
+  <div class="opt">A. 50 km partout, écrit dans la pastille. — B. Selon le thème (séismes 150, musées 30, crues 10…). — C. Le demander à chaque fois.</div>
+  <div class="reco">Ma reco : <b>B</b>, toujours écrit dans la pastille 📍 et réglable d’un − / +. Un musée à 150 km ne sert à rien, un séisme à 30 km est trop restrictif ; le thème sait ce qui a du sens.</div></li>
+ <li><b>Une question qui ne parle que de la famille (« les enfants de Marie LACOMBE ») posée ici ?</b>
+  <div class="opt">A. Je la reconnais et je propose « La poser dans 🔍 Recherche → Poser une question en français ». — B. J’y réponds ici aussi.</div>
+  <div class="reco">Ma reco : <b>A</b>. Chaque boîte reste simple et fait une chose ; un bouton évite de retaper.</div></li>
+</ol>
+
+<p class="note" style="margin:30px 0 10px">Fichiers lus : <code>assets/js/app-paniers-core.js</code> (<code>parseSmart</code>, <code>SMART</code>), <code>assets/js/app-paniers.js</code> (recherche qui crée un panier, <code>resolve</code>), <code>assets/js/heritage-links.js</code> (« J’ai compris »), <code>assets/js/heritage-questions-plus.js</code> (⌘K), <code>lib/question_plus.php</code>, <code>assets/js/app-recherche.js</code>, <code>assets/js/app-listes-donnees.js</code> (<code>dataListsEngine</code>), <code>assets/js/app-listes-maj.js</code>, <code>assets/js/app-onglets-plus.js</code>. Nombres de lignes, passages du Tour près de Tulle, crues et météo : exemples. Tour 1976, combats de Gilette, Saorge et du pont du Var, séisme de Ligurie 1887 et musées de Brive, Tulle et La Chapelle-aux-Saints : réels (distances à vérifier).</p>
+</div>
+<script>
+(function(){var b=document.getElementById('tgl'),r=document.documentElement;function dark(){var t=r.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;}function lab(){b.textContent=dark()?'☀ Thème clair':'☾ Thème sombre';}b.addEventListener('click',function(){r.setAttribute('data-theme',dark()?'light':'dark');lab();});lab();})();
+</script>
+</body></html>
