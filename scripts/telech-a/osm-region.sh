@@ -44,8 +44,24 @@ declare -A NOMS=([alsace]=Alsace [aquitaine]=Aquitaine [auvergne]=Auvergne [bass
 candidats=()
 [ -z "$url" ] || candidats+=("$url")
 u=${region//-/_}
-if [ -n "${NOMS[$region]:-}" ]; then candidats+=("https://download.openstreetmap.fr/extracts/europe/france/$u-latest.osm.pbf")
-else candidats+=("https://download.openstreetmap.fr/extracts/europe/$u-latest.osm.pbf"); fi
+# OpenStreetMap France : l'ancienne région est rangée soit à la racine de europe/france/, soit dans le dossier de la région
+# d'aujourd'hui (depuis 2016) ; on lit les pages des dossiers (petites) pour ne demander que des fichiers qui existent
+declare -A NOUV=([alsace]=grand_est [champagne-ardenne]=grand_est [lorraine]=grand_est [aquitaine]=nouvelle_aquitaine
+  [limousin]=nouvelle_aquitaine [poitou-charentes]=nouvelle_aquitaine [auvergne]=auvergne_rhone_alpes [rhone-alpes]=auvergne_rhone_alpes
+  [bourgogne]=bourgogne_franche_comte [franche-comte]=bourgogne_franche_comte [basse-normandie]=normandie [haute-normandie]=normandie
+  [nord-pas-de-calais]=hauts_de_france [picardie]=hauts_de_france [languedoc-roussillon]=occitanie [midi-pyrenees]=occitanie)
+OSMFR=https://download.openstreetmap.fr/extracts
+if [ -n "${NOMS[$region]:-}" ]; then dossiers=("europe/france" ${NOUV[$region]:+"europe/france/${NOUV[$region]}"} "europe/france/$u")
+else dossiers=("europe" "europe/france" "central-america" "south-america" "africa"); fi
+for d in "${dossiers[@]}"; do
+  if petit "$OSMFR/$d/" work/osmfr.html 2>/dev/null; then
+    for f in "$u-latest.osm.pbf" "${region}-latest.osm.pbf"; do
+      if grep -q "href=\"$f\"" work/osmfr.html; then candidats+=("$OSMFR/$d/$f"); break; fi
+    done
+    echo "  OpenStreetMap France, $d/ : $(grep -o 'href="[^"?]*"' work/osmfr.html | sed 's/href=//; s/"//g' | grep -v '^\.\./\?$' | head -40 | tr '\n' ' ')"
+  fi
+done
+rm -f work/osmfr.html
 ok=0
 for c in "${candidats[@]}"; do
   echo "→ $region ($label) : $c"
