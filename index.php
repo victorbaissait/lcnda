@@ -86,7 +86,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/veille-synchro.css?v=1">
     <link rel="stylesheet" href="assets/css/pistes-branches-celebres.css?v=1">
     <link rel="stylesheet" href="assets/css/connexions.css?v=6">
-    <link rel="stylesheet" href="assets/css/paniers.css?v=1"><!-- 🧺 l’onglet Paniers -->
+    <link rel="stylesheet" href="assets/css/paniers.css?v=2"><!-- 🧺 l’onglet Paniers -->
     <link rel="stylesheet" href="assets/css/assistant-ia.css?v=3">
     <link rel="stylesheet" href="assets/css/comptes-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/rapports.css?v=1">
@@ -1705,8 +1705,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
 <script src="assets/js/heritage-connexions.js?v=7" defer></script>
-<script src="assets/js/app-paniers-core.js?v=1" defer></script>
-<script src="assets/js/app-paniers.js?v=1" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
+<script src="assets/js/app-paniers-core.js?v=2" defer></script>
+<script src="assets/js/app-paniers.js?v=2" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=1" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
 <script src="assets/js/heritage-connexions-besoins.js?v=2" defer></script><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->

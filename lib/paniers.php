@@ -196,6 +196,7 @@ function pn_txt(mixed $v, int $max): string
 {
     if (!is_scalar($v)) { return ''; }
     $t = (string) $v;
+    $t = preg_replace('#<(script|style|iframe|object)\b[^>]*>.*?</\1\s*>#isu', '', $t) ?? '';
     $t = preg_replace('/<[^>]*>/u', '', $t) ?? '';
     $t = str_replace(['<', '>'], ['‹', '›'], $t);
     $t = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u', '', $t) ?? '';

@@ -285,3 +285,4 @@ dialog.pn-dlg::backdrop { background: rgba(0, 0, 0, .35); }
     .pn-cmp { grid-template-columns: minmax(0, 1fr); }
     .pn-dlgb { padding: 16px 16px; }
 }
+:root[data-theme="dark"] section.pn { background: var(--pn-bg); } /* le fond sombre (app.css rend « .page » transparent en sombre) */

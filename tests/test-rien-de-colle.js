@@ -3,7 +3,7 @@
  * pas le bord intérieur (au moins 4 px d'écart) et ne déborde pas du cadre.
  * Pages rejouées : Réglages → 🏰 Lieux anciens (GOV), 🌦 Météo, 🗳 Élections, ADN, bases officielles, brevets…, fiche
  * d'une personne, « Tout ce qui le concerne », Listes de données, monographie d'un lieu, 📥 « Prendre depuis… », 📍 « Mettre dans… »,
- * 🧺 le panier en grand, 📎 « Insérer une info » ; à 1440 px et 390 px, clair et sombre.
+ * 🧺 le panier en grand, 📎 « Insérer une info », 🧺 l'onglet Paniers (un panier, la recherche) ; à 1440 px et 390 px, clair et sombre.
  * La colonne de gauche (sideDetect), sur plusieurs onglets (Recherche, Listes, Réglages, Graphiques, Carte) : au moins 12 px entre
  * les cartes (ombre comprise) et la barre de défilement (place gardée : scrollbar-gutter), la dernière carte entière au-dessus du pied
  * (12 px), le pied et sa phrase grise (8 px sous les boutons, 12 px du bord), les textes alignés qu'ils aient une icône ou non
@@ -296,6 +296,17 @@ if (require.main === module) (async () => {
         pages.push(['🧺 Le panier en grand', async p => { await cxClose(p); await closeDialogs(p); await p.evaluate(() => window.LCNDA_EXT.connexions.openBasketView()); await p.waitForSelector('dialog.cx-bview .cx-put-body'); await settle(p); return 'dialog.cx-bview'; }]);
         pages.push(['📎 Insérer une info', async p => { await cxClose(p); await closeDialogs(p); await p.evaluate(() => { window.LCNDA_EXT.openDialog({title: 'Essai', body: '<textarea name="t" rows="4" style="width:100%"></textarea>', submitLabel: 'OK', onSubmit: () => true}); }); await p.waitForSelector('dialog[open] textarea[name="t"]');
             await p.evaluate(() => window.LCNDA_EXT.insertInfo.open(document.querySelector('dialog[open] textarea[name="t"]'))); await p.waitForSelector('.cx-qi .cx-qi-r'); await settle(p); return '.cx-qi'; }]);
+        // 🧺 l'onglet Paniers (app-paniers.js) : le panier ouvert, puis la recherche qui crée un panier
+        const pnOpen = async p => { await cxClose(p); await closeDialogs(p);
+            await p.evaluate(async () => { const A = window.LCNDA_APP, w = (op, b) => A.api('cx_write', {}, {method: 'POST', body: {op, ...b}}).then(r => r?.result ?? r);
+                const t = await A.api('cx_basket', {all: 1}); if (!t.baskets.some(b => b.name === 'Témoins du mariage')) { const f = await w('folder_new', {name: 'Famille MAZAUD', basket_name: 'Témoins du mariage'});
+                    await w('basket_add', {basket_id: f.basket_id, items: [{kind: 'datum', title: 'Date du mariage', value: '8 février 1813'}, {kind: 'row', title: 'Prix du blé à Limoges, 1826', value: 'liste « Prix et mesures »', origin: {kind: 'list', label: 'Wikipédia', url: 'https://fr.wikipedia.org/'}}]});
+                    await w('pn_meta', {basket_id: f.basket_id, labels: [['famille', '#1a7f37']], due: '2026-12-15', remind: true, pinned: true}); localStorage.setItem('genealogie-paniers-ouvert', JSON.stringify({t: 'b', id: f.basket_id})); }
+                await A.setModule('paniers'); }); // (l'onglet s'ouvre sans être montré dans le menu : « ⛶ en grand » garde sa fenêtre)
+            await p.waitForSelector('[data-pn] .pn-it', {timeout: 20000}); await settle(p); return '[data-pn]'; };
+        pages.push(['🧺 L’onglet Paniers (un panier ouvert)', pnOpen]);
+        pages.push(['🧺 L’onglet Paniers (la recherche qui crée un panier)', async p => { await pnOpen(p); await p.click('[data-pn-a="search"]'); await p.fill('[data-pn-q]', 'les naissances de la famille MAZAUD à Tulle entre 1780 et 1800'); await p.keyboard.press('Enter');
+            await p.waitForSelector('[data-pn] .pn-und', {timeout: 30000}); await settle(p); return '[data-pn]'; }]);
         await t('le détecteur voit bien un texte collé, un bouton qui touche le bord et un champ qui déborde (témoin)', async () => {
             const p = await newPage(browser, base);
             await go.settings('gov')(p);

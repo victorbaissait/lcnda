@@ -70,6 +70,7 @@
     async function render(token) {
         const host = ws(); if (!host) return;
         st.token = token;
+        st.sel = readJ(SEL, st.sel);
         try { await load(); } catch (e) { host.innerHTML = `<section class="page pn"><p class="pn-empty">${esc(e.message)}</p></section>`; return; }
         if (token !== undefined && token !== A().state?.workspaceToken) return;
         host.innerHTML = `<section class="page pn" data-pn>

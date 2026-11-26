@@ -304,7 +304,7 @@ const FIXTURES = () => {
         await t('⇩ récupérer : aperçu ✓/✗, doublons écartés d’avance, dossier au choix ; fichier vérifié (format, taille, pas de HTML ni de script)', async () => {
             const evil = {...shareFile, name: 'Panier de cousin', items: [...shareFile.items, {kind: 'row', title: '<img src=x onerror=alert(1)>Moulin de Treignac<script>alert(2)</script>', value: 'javascript:alert(3)', url: 'javascript:alert(4)'}]};
             await openTab();
-            await p.evaluate(x => window.LCNDA_EXT.paniers.importText(JSON.stringify(x), 'cousin.lcnda-panier'), evil); await p.waitForSelector(`${dlg} [data-pn-irows]`);
+            await p.evaluate(x => { window.LCNDA_EXT.paniers.importText(JSON.stringify(x), 'cousin.lcnda-panier'); }, evil); await p.waitForSelector(`${dlg} [data-pn-irows]`);
             const rows = await p.$$eval(`${dlg} [data-pn-irows] .pn-rr`, l => l.map(x => [x.classList.contains('is-ex'), x.querySelector('b').textContent]));
             assert.deepStrictEqual(rows, [[true, 'Monument aux morts de Treignac (1921)'], [true, 'Jean MAZAUD'], [false, 'Moulin de Treignac']], JSON.stringify(rows));
             assert.ok(!(await p.$(`${dlg} img, ${dlg} script`)));
@@ -312,7 +312,7 @@ const FIXTURES = () => {
             await p.selectOption(`${dlg} [name="folder"]`, String(fam)); await p.click(`${dlg} [data-pn-dk="ok"]`); await sleep(1500);
             const b = await bBy('Panier de cousin'); assert.ok(b && b.folder_id === fam && b.count === 2, JSON.stringify(b));
             const its = await itemsOf(b.id);
-            assert.ok(its.every(x => !/[<>]/.test(x.title) && !/javascript/i.test(x.value) && !x.origin?.url?.startsWith('javascript')), JSON.stringify(its));
+            assert.ok(its.every(x => !/[<>]|alert/.test(x.title) && !/javascript/i.test(x.value) && !x.origin?.url?.startsWith('javascript')), JSON.stringify(its));
             // dans un panier qui a déjà tout : tout sauté
             const r = await cx('pn_share_import', {body: JSON.stringify(shareFile), basket_id: b.id}); assert.strictEqual(r.ids.length, 1); assert.strictEqual(r.skipped, 1);
             const bad = await p.evaluate(() => Promise.all([JSON.stringify({format: 'autre', items: []}), JSON.stringify({format: 'lcnda-panier', version: 1, items: [{title: 'x'.repeat(2100000)}]})].map(body => window.LCNDA_APP.api('cx_write', {}, {method: 'POST', body: {op: 'pn_share_preview', body}}).then(() => 'ok', e => e.message))));
