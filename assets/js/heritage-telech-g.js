@@ -69,7 +69,7 @@
     /** les noms de famille possibles d'une ligne : P734, sinon les derniers mots du nom (« Olivier Morel de La Durantaye » → durantaye, morel…) */
     function rowSurnames(r) {
         const out = new Set(); if (r.fam) out.add(surKey(r.fam));
-        const t = toks(String(r.n || '').replace(/,.*$/, '')); // « Guillaume Richard, dit Lafleur » → avant la virgule
+        const t = toks(String(r.n || '').replace(/,.*$/, '').replace(/\s*\([^)]*\)/g, '')); // « Guillaume Richard, dit Lafleur » → avant la virgule ; « Georges Prost (résistant) » → sans la parenthèse
         for (let i = 1; i < t.length; i++) { out.add(surKey(t.slice(i).join(' '))); if (!PART.has(t[i]) && !/^(la|le|les|l)$/.test(t[i])) out.add(surKey(t[i])); }
         out.delete(''); return out;
     }
@@ -119,11 +119,26 @@
     }
     /** le volume le plus proche d'une année */
     const lloydNearest = (rows, y) => rows.slice().sort((a, b) => Math.abs(a.y - y) - Math.abs(b.y - y) || (a.part ? 1 : 0) - (b.part ? 1 : 0))[0] || null;
+    /** Wikidata + OpenStreetMap d'un sujet en une liste : un point OSM à moins de maxKm d'un point Wikidata est le même.
+     *  Une grille de carreaux de 0,01° : chaque point OSM n'est comparé qu'aux points Wikidata voisins (pas de n × m sur des milliers de lignes). */
+    function mergeRows(wd, osm, maxKm) {
+        const out = (wd || []).map(r => ({...r, via: 'wd'})), C = 0.01, grid = new Map(), key = (a, b) => `${a}|${b}`;
+        for (const w of out) { if (num(w.lat) === null || num(w.lon) === null) continue; const k = key(Math.floor(w.lat / C), Math.floor(w.lon / C)); if (!grid.has(k)) grid.set(k, []); grid.get(k).push(w); }
+        for (const o of osm || []) {
+            let dup = false;
+            if (num(o.lat) !== null && num(o.lon) !== null) {
+                const a = Math.floor(o.lat / C), b = Math.floor(o.lon / C);
+                for (let i = -1; i <= 1 && !dup; i++) for (let j = -1; j <= 1 && !dup; j++) dup = (grid.get(key(a + i, b + j)) || []).some(w => km(w.lat, w.lon, o.lat, o.lon) < maxKm);
+            }
+            if (!dup) out.push({...o, q: '', via: 'osm', from: num(o.from), to: null});
+        }
+        return out;
+    }
     /** une adresse sûre : http(s) seulement */
     const safeUrl = u => (/^https?:\/\/[^\s"'<>]+$/i.test(String(u || '').trim()) ? String(u).trim() : '');
     const safeId = s => (/^[A-Za-z0-9_.-]{1,80}$/.test(String(s || '')) ? String(s) : '');
 
-    const core = {num, fold, table, km, lifeSpan, aliveIn, ageIn, placedEvents, near, nearLife, jobsText, surKey, rowSurnames, nameMatches, bornNear, lloydVolumes, lloydNearest, safeUrl, safeId,
+    const core = {num, fold, table, km, mergeRows, lifeSpan, aliveIn, ageIn, placedEvents, near, nearLife, jobsText, surKey, rowSurnames, nameMatches, bornNear, lloydVolumes, lloydNearest, safeUrl, safeId,
         ARMY_JOB, POWDER_JOB, SEA_JOB, HEALTH_JOB};
     if (typeof module === 'object' && module.exports) { module.exports = core; return; }
 
@@ -200,11 +215,11 @@
     const quiet = p => p.catch(() => null);
     const rowsOf = kind => quiet(load(kind)).then(D => D || {meta: {}, rows: []});
     /** Wikidata + OpenStreetMap d'un sujet (un point OSM à moins de 150 m d'un point Wikidata est le même) */
+    const mergedMemo = {};
     async function merged(kind) {
         const [W, O] = await Promise.all([rowsOf(kind), rowsOf(`osm_${kind}`)]);
-        const out = W.rows.map(r => ({...r, via: 'wd'}));
-        for (const o of O.rows) if (!out.some(w => w.via === 'wd' && Math.abs(w.lat - o.lat) < 0.003 && km(w.lat, w.lon, o.lat, o.lon) < 0.15)) out.push({...o, q: '', via: 'osm', from: num(o.from), to: null});
-        return out;
+        const m = mergedMemo[kind]; if (m && m.w === W.rows && m.o === O.rows) return m.out; // une fois par fichier, pas à chaque fiche ouverte
+        const out = mergeRows(W.rows, O.rows, 0.15); mergedMemo[kind] = {w: W.rows, o: O.rows, out}; return out;
     }
     const lifeMemo = new Map();
     const lifeOf = id => { const H = ext.histoireAutour; if (H?.lifeOf) return H.lifeOf(id); if (!lifeMemo.has(id)) lifeMemo.set(id, api('ha_life', {id}).catch(e => { lifeMemo.delete(id); throw e; })); return lifeMemo.get(id); };
@@ -325,7 +340,7 @@
         if (!want.length) { host.innerHTML = ''; return 0; }
         let life; try { life = opts.life || await lifeOf(id); } catch (_) { host.innerHTML = ''; return 0; }
         if (!life?.ok || life.person?.kind === 'animal') { host.innerHTML = ''; return 0; }
-        const priv = !!opts.private;
+        const priv = !!opts.private || life.person?.living_status === 'living' || Number(life.person?.is_private) === 1;
         const job = k => {
             if (NAMES[k]) return priv ? '' : rowsOf(k).then(D => (D.rows.length ? namesHtml(k, life, D) : '')); // une fiche vivante ou confidentielle : pas de comparaison de noms
             if (LINKS[k]) return linkHtml(k, life, priv);
@@ -431,7 +446,7 @@
         kind === 'aviateurs' ? [F('name', 'Nom', 'text', {person: true}), F('role', 'Brevet'), F('year', 'Année', 'year'), F('extra', 'Pays'), F('killed', 'Mort en vol', 'enum'), F('note', 'Remarque (Wikipédia)'), F('src', 'Source', 'url')]
             : [F('name', 'Nom', 'text', {person: true}), F('born', 'Naissance', 'year'), F('died', 'Décès', 'year'), F('place', 'Lieu de naissance', 'place'), F('role', 'Rôle', 'enum'), F('src', 'Source', 'url')],
         {period: r => (kind === 'aviateurs' ? [r.year, r.year] : [NAMES[kind].win[0], NAMES[kind].win[1]]), geo: r => (num(r.lat) !== null ? [r.lat, r.lon] : null),
-            personMatch: {born: r => r.born, died: r => r.died, place: lpPlace, role: r => r.role}});
+            personMatch: {born: r => r.born, died: r => r.died, place: lpPlace, role: r => r.role, historic: true}}); // jamais une fiche vivante ou confidentielle
     const placeList = (kind, label) => L(`tg_${kind}`, FILES[kind], PLACES[kind].icon, label, 'Le lieu', 'Wikidata (CC0) ; OpenStreetMap (ODbL)', 'https://www.wikidata.org', kind,
         async () => (await merged(kind)).map(r => ({name: r.n, kind: T(KIND_WORD[r.k] || r.k), from: r.from, to: r.to, commune: r.commune || '', base: r.via === 'osm' ? 'OpenStreetMap' : 'Wikidata', lat: r.lat, lon: r.lon, src: placeUrl(r)})),
         [F('name', 'Nom'), F('kind', 'Sorte', 'enum'), F('from', 'Depuis', 'year'), F('to', 'Jusqu’en', 'year'), F('commune', 'Commune', 'place'), F('base', 'Base', 'enum'), F('src', 'Source', 'url')],

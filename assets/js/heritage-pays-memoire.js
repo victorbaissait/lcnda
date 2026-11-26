@@ -124,6 +124,8 @@
     function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} }
     const on = k => settings()[k] !== false;
     const kiosk = () => document.body.classList.contains('is-kiosk') || document.body.classList.contains('ms-on');
+    /** consultation (kiosque) ou invité du réseau local : aucune image ni aucun son chargé d'Internet (les liens restent) */
+    const offline = () => !!(root.document?.body?.classList.contains('is-kiosk') || root.LCNDA_GUEST);
     const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
     const srcLink = (url, label = T('↗ source')) => (url ? ` <a class="pm-src-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : '');
     const srcLine = (txt, url) => `<p class="cplus-src pm-src">${esc(T('Source :'))} ${esc(txt)}${srcLink(url)}</p>`;
@@ -158,7 +160,7 @@
     /* ═════════════ les parties d'un lieu ═════════════ */
     function mediaHtml(m) {
         const by = m.by ? ` · ${esc(m.by)}` : '';
-        const tag = m.t === 'video' ? `<video class="pm-video" controls preload="none" src="${esc(FILEPATH(m.f))}"></video>` : `<audio class="pm-audio" controls preload="none" src="${esc(FILEPATH(m.f))}"></audio>`;
+        const tag = offline() ? '' : m.t === 'video' ? `<video class="pm-video" controls preload="none" src="${esc(FILEPATH(m.f))}"></video>` : `<audio class="pm-audio" controls preload="none" src="${esc(FILEPATH(m.f))}"></audio>`;
         return `<div class="pm-media">${tag}<small class="muted">${esc(m.lic)}${by} — ${link(COMMONS(m.f), T('fichier sur Commons ↗'))}</small></div>`;
     }
     const KIND_TXT = {danse: 'danse', instrument: 'instrument', chant: 'chant', musique: 'musique', tradition: 'tradition'};
@@ -228,7 +230,7 @@
         if (!pl.insee) return false;
         const MO = await data('monuments'); const rows = monumentsOf(MO, pl.insee); if (!rows.length) return false;
         const lille = id => (MO.lille_url && id ? MO.lille_url.replace('$1', encodeURIComponent(id)) : '');
-        const fig = m => `<figure class="cplus-img pm-mon">${m.img ? `<a href="${esc(COMMONS(m.img))}" target="_blank" rel="noopener noreferrer"><img loading="lazy" alt="${esc(m.name || T('Monument aux morts'))}" src="${esc(FILEPATH(m.img, 320))}" onerror="this.closest('figure').classList.add('is-noimg')"></a>` : ''}
+        const fig = m => `<figure class="cplus-img pm-mon">${m.img && !offline() ? `<a href="${esc(COMMONS(m.img))}" target="_blank" rel="noopener noreferrer"><img loading="lazy" alt="${esc(m.name || T('Monument aux morts'))}" src="${esc(FILEPATH(m.img, 320))}" onerror="this.closest('figure').classList.add('is-noimg')"></a>` : ''}
             <figcaption><b>${esc(m.name || T('Monument aux morts de {p}', {p: pl.name}))}</b>${m.year ? `<span>${esc(T('élevé en {y}', {y: m.year}))}</span>` : ''}${m.creators.length ? `<span>${esc(T('par {c}', {c: m.creators.join(', ')}))}</span>` : ''}
             <small>${srcLink(WD(m.q), T('↗ Wikidata'))}${lille(m.lille) ? ` · ${link(lille(m.lille), T('base de Lille ↗'))}` : ''}${m.img ? ` · ${esc(T('photo : Wikimedia Commons'))}` : ''}</small></figcaption></figure>`;
         const m0 = rows[0];
@@ -360,7 +362,7 @@
             const cand = [L.birthPlace, ...L.places].filter(x => x?.insee).filter((x, i, a) => a.findIndex(y => y.insee === x.insee) === i);
             const hit = cand.map(pl => ({pl, m: monumentsOf(MO, pl.insee)[0]})).find(x => x.m); if (!hit) return '';
             return row('🪦', T('Mort pendant la guerre : son nom est peut-être gravé sur le monument aux morts de {p}{y}.', {p: `<b>${esc(hit.pl.name)}</b>`, y: hit.m.year ? ` (${esc(T('élevé en {y}', {y: hit.m.year}))})` : ''}), T('Wikidata (CC0)'), WD(hit.m.q),
-                hit.m.img ? `<a href="${esc(COMMONS(hit.m.img))}" target="_blank" rel="noopener noreferrer"><img class="pm-thumb" loading="lazy" alt="" src="${esc(FILEPATH(hit.m.img, 240))}" onerror="this.remove()"></a>` : '');
+                hit.m.img && !offline() ? `<a href="${esc(COMMONS(hit.m.img))}" target="_blank" rel="noopener noreferrer"><img class="pm-thumb" loading="lazy" alt="" src="${esc(FILEPATH(hit.m.img, 240))}" onerror="this.remove()"></a>` : '');
         });
         await safe(async () => { // 🎓
             if (!L.birth || L.birth > 1960) return '';

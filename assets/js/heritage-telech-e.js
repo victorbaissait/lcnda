@@ -199,13 +199,15 @@
         const here = all.filter(x => (place.insee && x.r.insee === place.insee) || x.km <= 2);
         return {here, around: all.filter(x => !here.includes(x))};
     }
+    /** « près de chez lui » en l'année y : un lieu de sa vie sans date, ou daté à 25 ans au plus de y (pas le lieu où il n'arrive que 60 ans plus tard) */
+    const nearInTime = (e, y) => e.year === null || y === null || Math.abs(e.year - y) <= 25;
     /** 🌳 les arbres de la Liberté plantés de son vivant près d'un de ses lieux (3 km) */
     function libertyLife(rows, life, radius = 3) {
         const {birth, death, to} = lifeSpan(life); if (birth === null) return [];
         const end = death ?? to ?? birth + 80, evs = placedEvents(life), out = new Map();
         for (const r of rows) {
             if (r.y === null || r.y < birth || r.y > end) continue;
-            for (const e of evs) { const k = km(e.lat, e.lon, r.lat, r.lon); if (k <= radius && (!out.has(r.id) || k < out.get(r.id).km)) out.set(r.id, {r, km: k, place: e.name, age: r.y - birth}); }
+            for (const e of evs) { if (!nearInTime(e, r.y)) continue; const k = km(e.lat, e.lon, r.lat, r.lon); if (k <= radius && (!out.has(r.id) || k < out.get(r.id).km)) out.set(r.id, {r, km: k, place: e.name, age: r.y - birth}); }
         }
         return [...out.values()].sort((a, b) => a.r.y - b.r.y);
     }
@@ -215,7 +217,7 @@
         const end = death ?? to ?? birth + 80, evs = placedEvents(life), out = new Map();
         for (const r of rows) {
             if (r.y < birth || r.y > end) continue;
-            for (const e of evs) { const k = km(e.lat, e.lon, r.lat, r.lon); if (k <= radius && (!out.has(r.q) || k < out.get(r.q).km)) out.set(r.q, {r, km: k, place: e.name, age: r.y - birth}); }
+            for (const e of evs) { if (!nearInTime(e, r.y)) continue; const k = km(e.lat, e.lon, r.lat, r.lon); if (k <= radius && (!out.has(r.q) || k < out.get(r.q).km)) out.set(r.q, {r, km: k, place: e.name, age: r.y - birth}); }
         }
         return [...out.values()].sort((a, b) => a.r.y - b.r.y);
     }
@@ -277,6 +279,8 @@
     const ageTxt = a => (a <= 0 ? T('l’année de sa naissance') : a === 1 ? T('à 1 an') : T('à {n} ans', {n: String(a)}));
     const ROMAN = n => { const r = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]; let s = ''; for (const [v, l] of r) while (n >= v) { s += l; n -= v; } return s; };
     const centuryTxt = c => T('{r}e siècle', {r: ROMAN(c)});
+    /** une année : « 50 av. J.-C. » avant notre ère (pas « -50 ») */
+    const yearTxt = y => (num(y) === null ? '?' : Number(y) < 0 ? T('{y} av. J.-C.', {y: String(-Number(y))}) : String(y));
     const kiosk = () => !!(root.document?.body?.classList.contains('is-kiosk') || root.LCNDA_GUEST);
     const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
     const dayTxt = (d, m) => `${d === 1 ? '1er' : d} ${T(MONTHS[m - 1])}`;
@@ -428,7 +432,7 @@
         if (!want.length) { host.innerHTML = ''; return 0; }
         let life; try { life = opts.life || await lifeOf(id); } catch (_) { host.innerHTML = ''; return 0; }
         if (!life?.ok || life.person?.kind === 'animal') { host.innerHTML = ''; return 0; }
-        const priv = !!opts.private;
+        const priv = !!opts.private || life.person?.living_status === 'living' || Number(life.person?.is_private) === 1;
         const jobs = {ciel: () => skyForPerson(life), etoiles: () => meteorHtml(life), secheresses: () => droughtForPerson(life), hivers: () => seasonsForPerson(life),
             libertes: () => libertyForPerson(life), religion: () => religionForPerson(life), farcy: () => farcyHtml(life, priv)};
         const html = await Promise.all(want.filter(k => jobs[k]).map(k => Promise.resolve().then(jobs[k]).catch(e => { console.error(e); return ''; })));
@@ -462,7 +466,7 @@
     const PBDB_COLL = no => `https://paleobiodb.org/classic/basicCollectionSearch?collection_no=${Number(no)}`;
     const fosLi = x => `<li>🦴 <b>${esc(x.r.name || T('gisement n° {n}', {n: String(x.r.no)}))}</b> <small class="muted">(${esc([x.r.early, x.r.late && x.r.late !== x.r.early ? x.r.late : ''].filter(Boolean).join(' – '))}${maTxt(x.r) ? ` · ${esc(maTxt(x.r))}` : ''} · ${esc(kmTxt(x.km))})</small>${(x.r.taxa || []).length ? `<br><small><i>${esc(x.r.taxa.map(t => t[0]).join(', '))}</i></small>` : ''} ${srcLink(PBDB_COLL(x.r.no))}</li>`;
     const kindTxt = k => (String(k || '').endsWith(' (?)') ? `${T(String(k).slice(0, -4))} (?)` : T(k || 'inscription'));
-    const insLi = x => `<li>🏛 <b>${esc(kindTxt(x.r.kind))}</b> <small class="muted">(${esc([x.r.spot, x.r.anc ? `${T('antique :')} ${x.r.anc}` : '', x.r.from !== null ? `${x.r.from}–${x.r.to}` : '', x.km !== undefined ? kmTxt(x.km) : ''].filter(Boolean).join(' · '))}${x.r.approx ? ` · ${esc(T('position approchée'))}` : ''})</small><br><q class="te-latin" lang="la">${esc(x.r.text)}</q> ${srcLink(`https://edh.ub.uni-heidelberg.de/edh/inschrift/${encodeURIComponent(x.r.hd)}`)}</li>`;
+    const insLi = x => `<li>🏛 <b>${esc(kindTxt(x.r.kind))}</b> <small class="muted">(${esc([x.r.spot, x.r.anc ? `${T('antique :')} ${x.r.anc}` : '', x.r.from !== null ? `${yearTxt(x.r.from)}–${yearTxt(x.r.to)}` : '', x.km !== undefined ? kmTxt(x.km) : ''].filter(Boolean).join(' · '))}${x.r.approx ? ` · ${esc(T('position approchée'))}` : ''})</small><br><q class="te-latin" lang="la">${esc(x.r.text)}</q> ${srcLink(`https://edh.ub.uni-heidelberg.de/edh/inschrift/${encodeURIComponent(x.r.hd)}`)}</li>`;
     async function placePart(kind, place) {
         const ll = placeLL(place); if (!ll && kind !== 'puits') return '';
         const P = {...place, ...ll};

@@ -15,7 +15,8 @@
  *     pas de nom ni d'années dans la pastille ; personnes vivantes : pas d'années ; en consultation, ni l'une ni l'autre n'est proposée.
  *
  * Une liste se déclare « de personnes » par un champ {key, …, person: true} (+ facultatif sur la liste : personMatch {born, died,
- * period, place, role, event}). Les listes déjà dans l'app sont décrites dans CONF plus bas (le drapeau person est posé ici).
+ * period, place, role, event, historic}). historic : true = liste d'autrefois (personnes toutes décédées) → jamais comparée à une fiche
+ * vivante ou confidentielle. Les listes déjà dans l'app sont décrites dans CONF plus bas (le drapeau person est posé ici).
  * Branché par app-listes-donnees.js : ext.listesPersonnes.{listBar, chip, fetchPage, rowsPainted}. Essai : tests/test-listes-personnes.js
  */
 (() => {
@@ -222,6 +223,7 @@
                 for (const cd of cands) {
                     const hits = IDX.bySur.get(surKey(cd.last)); if (!hits) continue;
                     for (const h of hits) {
+                        if (c.historic && h.p.flags) continue; // une liste d'autrefois (personnes toutes décédées) : jamais une fiche vivante ou confidentielle
                         const f = firstScore(cd.first, h.fk); if (!f) continue;
                         const cx = contextScore(h.p, ctx); if (cx === null) continue;
                         const sc = f + cx - cd.w; if (sc < 45) continue;

@@ -125,7 +125,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/metiers-rivieres.css?v=1">
     <link rel="stylesheet" href="assets/css/lieux-patrimoine.css?v=1">
     <link rel="stylesheet" href="assets/css/commune-plus.css?v=1">
-    <link rel="stylesheet" href="assets/css/terre-quotidien.css?v=1">
+    <link rel="stylesheet" href="assets/css/terre-quotidien.css?v=2">
     <link rel="stylesheet" href="assets/css/carto-territoires.css?v=2">
     <link rel="stylesheet" href="assets/css/monographie-plus.css?v=1">
     <link rel="stylesheet" href="assets/css/adn-livres.css?v=1">
@@ -1347,7 +1347,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes.js?v=67" defer></script>
 <script src="assets/js/app-listes-donnees.js?v=10" defer></script>
 <script src="assets/js/app-listes-maj.js?v=3" defer></script>
-<script src="assets/js/app-listes-personnes.js?v=2" defer></script>
+<script src="assets/js/app-listes-personnes.js?v=3" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
 <script src="assets/js/app-listes-perso.js?v=2" defer></script>
 <script src="assets/js/app-maintenance.js?v=68" defer></script>
@@ -1685,7 +1685,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-histoire.js?v=4" defer></script>
 <script src="assets/js/heritage-monde-contexte.js?v=2" defer></script>
 <script src="assets/js/heritage-prix-europe.js?v=3" defer></script>
-<script src="assets/js/heritage-terre-quotidien.js?v=2" defer></script>
+<script src="assets/js/heritage-terre-quotidien.js?v=3" defer></script>
 <script src="assets/js/heritage-commune-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-lieux-patrimoine.js?v=2" defer></script>
 <script src="assets/js/heritage-metiers-rivieres.js?v=3" defer></script>
@@ -1694,7 +1694,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boussole-rues.js?v=4" defer></script>
 <script src="assets/js/heritage-droit-pouvoir.js?v=2" defer></script>
 <script src="assets/js/heritage-brevets-annuaires.js?v=1" defer></script>
-<script src="assets/js/heritage-pays-memoire.js?v=2" defer></script>
+<script src="assets/js/heritage-pays-memoire.js?v=3" defer></script>
 <script src="assets/js/heritage-lot8-ciel-metier.js?v=2" defer></script>
 <script src="assets/js/heritage-epoque-travail.js?v=2" defer></script>
 <script src="assets/js/heritage-lot9-monde-coutumes.js?v=2" defer></script>
@@ -1721,8 +1721,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-monographie-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-territoires.js?v=2" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
-<script src="assets/js/heritage-chateaux-territoires.js?v=2" defer></script>
-<script src="assets/js/heritage-lot8-monde-village.js?v=3" defer></script>
+<script src="assets/js/heritage-chateaux-territoires.js?v=3" defer></script>
+<script src="assets/js/heritage-lot8-monde-village.js?v=4" defer></script>
 <script src="assets/js/heritage-lot10-voir-village.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-a.js?v=2" defer></script>
 <script src="assets/js/heritage-lot10-objets-traces.js?v=2" defer></script>
@@ -1730,12 +1730,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-d-traduire.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-c.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-b-village.js?v=2" defer></script>
-<script src="assets/js/heritage-telech-e.js?v=2" defer></script>
-<script src="assets/js/heritage-telech-f.js?v=2" defer></script>
+<script src="assets/js/heritage-telech-e.js?v=3" defer></script>
+<script src="assets/js/heritage-telech-f.js?v=3" defer></script>
 <script src="assets/js/heritage-telech-h.js?v=1" defer></script>
-<script src="assets/js/heritage-telech-g.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-g.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-i.js?v=1" defer></script>
-<script src="assets/js/heritage-fiche-edifice.js?v=3" defer></script>
+<script src="assets/js/heritage-fiche-edifice.js?v=4" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>
 <script src="assets/js/heritage-suivi-audit.js?v=1" defer></script>

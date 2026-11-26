@@ -242,6 +242,8 @@
     const emptyLine = (t, icon = 'ℹ️') => (A().empty ? A().empty(t, {icon}) : `<p class="muted">${esc(t)}</p>`);
     const imgUrl = (f, w = 240) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(String(f).replace(/ /g, '_'))}?width=${w}`;
     const fileUrl = f => `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(String(f).replace(/ /g, '_'))}`;
+    /** consultation (kiosque) ou invité du réseau local : aucune image chargée d'Internet (les liens restent) */
+    const offline = () => !!(root.document?.body?.classList.contains('is-kiosk') || root.LCNDA_GUEST);
 
     /* ─────────── chargement (une fois, à la demande) ─────────── */
     const data = {};
@@ -453,7 +455,7 @@
             const list = churchesAt(rows, place); if (!list.length) return '';
             const top = list.find(r => r.st === 'detruit') || list[0];
             const lead = list.length > 1 ? T('{n} édifices religieux disparus ou fermés dans la commune, dont {c}.', {n: String(list.length), c: `<b>${esc(top.n)}</b>${top.y1 ? ` (${esc(churchState(top))})` : ''}`}) : T('{c} : {s}.', {c: `<b>${esc(cap(top.n))}</b>`, s: esc(churchState(top))});
-            const imgs = list.filter(r => r.img).slice(0, 6).map(r => `<figure class="l8c-fig"><a href="${esc(fileUrl(r.img))}" target="_blank" rel="noopener noreferrer"><img loading="lazy" alt="${esc(r.n)}" src="${esc(imgUrl(r.img))}" onerror="this.closest('figure').hidden=true"></a><figcaption>${esc(r.n)} · ${link(fileUrl(r.img), T('↗ auteur et licence'))}</figcaption></figure>`).join('');
+            const imgs = (offline() ? [] : list.filter(r => r.img)).slice(0, 6).map(r => `<figure class="l8c-fig"><a href="${esc(fileUrl(r.img))}" target="_blank" rel="noopener noreferrer"><img loading="lazy" alt="${esc(r.n)}" src="${esc(imgUrl(r.img))}" onerror="this.closest('figure').hidden=true"></a><figcaption>${esc(r.n)} · ${link(fileUrl(r.img), T('↗ auteur et licence'))}</figcaption></figure>`).join('');
             const li = list.map(r => `<li><b>${esc(r.n)}</b> <small class="muted">${esc([T(r.k), churchState(r), r.mh ? T('monument historique') : ''].filter(Boolean).join(' · '))}</small> ${refLinks(r)}</li>`).join('');
             return row('⛪', `${lead} ${refLinks(top)}`, SRC.eglises(), more(`${imgs ? `<div class="l8c-figs">${imgs}</div>` : ''}<ul class="hist-ul">${li}</ul><small class="muted hist-hyp">${esc(T('« Fermé » : Wikidata donne une date de fin (une abbaye dissoute à la Révolution, par exemple) sans dire si le bâtiment a été démoli.'))}</small>`, list.length > 1 ? list.length : null));
         }

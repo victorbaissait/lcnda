@@ -231,12 +231,14 @@
 
     /* ─────────── 🏰 la petite fiche d'un château ─────────── */
     const imgUrl = (f, w = 360) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f.replace(/ /g, '_'))}?width=${w}`;
+    /** consultation (kiosque) ou invité du réseau local : aucune image chargée d'Internet (le lien reste) */
+    const offline = () => !!(root.document?.body?.classList.contains('is-kiosk') || root.LCNDA_GUEST);
     const fileUrl = f => `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f.replace(/ /g, '_'))}`;
     function castleCardHtml(r) {
         const c = r.raw;
         const rows = [[T('Sorte'), r.type], [T('État'), r.state === 'non précisé' ? T('non précisé dans Wikidata') : r.state], [T('Construit'), c.y0 != null ? `${yr(c.y0)} (${centuryLabel(c.y0)})` : ''],
             [T('Détruit ou disparu'), yr(c.y1)], [T('Commune'), [r.commune, r.region, r.country].filter(Boolean).join(', ')], [T('Protection'), r.protection], [T('Se visite'), c.v ? T('oui (d’après Wikidata)') : '']].filter(x => x[1]);
-        return `<div class="cht-card">${c.im ? `<figure class="cht-img"><img src="${esc(imgUrl(c.im))}" alt="${esc(r.name)}" loading="lazy" onerror="this.closest('figure').hidden=true"><figcaption><small>${link(fileUrl(c.im), T('Image Wikimedia Commons (auteur et licence)'))}</small></figcaption></figure>` : ''}
+        return `<div class="cht-card">${c.im && offline() ? `<p class="muted"><small>🖼 ${link(fileUrl(c.im), T('Image Wikimedia Commons (auteur et licence)'))}</small></p>` : c.im ? `<figure class="cht-img"><img src="${esc(imgUrl(c.im))}" alt="${esc(r.name)}" loading="lazy" onerror="this.closest('figure').hidden=true"><figcaption><small>${link(fileUrl(c.im), T('Image Wikimedia Commons (auteur et licence)'))}</small></figcaption></figure>` : ''}
             ${r.local && r.local !== r.name ? `<p class="muted">${esc(r.local)}</p>` : ''}
             <dl class="data-list">${rows.map(([k, v]) => `<div class="data-row"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
             ${(c.ow || []).length ? `<h4>${esc(T('Propriétaires et seigneurs connus'))}</h4><ul>${c.ow.map(o => `<li>${esc(ownerText(o))}</li>`).join('')}</ul>` : ''}
@@ -258,7 +260,7 @@
         const it = r.raw;
         const rows = [[T('Sorte'), r.kind], [T('Dates'), span(it.y0, it.y1)], [T('Capitale'), r.capital], [T('Faisait partie de'), r.parent], [T('Avant'), r.before], [T('Après'), r.after],
             [T('Limites'), it.sh != null ? T('contour dessiné (Wikimedia Commons)') : T('limites inconnues : seulement un point')]].filter(x => x[1]);
-        return `<div class="cht-card">${it.arms ? `<figure class="cht-arms"><img src="${esc(imgUrl(it.arms, 120))}" alt="${esc(T('Armoiries'))}" loading="lazy" onerror="this.closest('figure').hidden=true"></figure>` : ''}
+        return `<div class="cht-card">${it.arms && !offline() ? `<figure class="cht-arms"><img src="${esc(imgUrl(it.arms, 120))}" alt="${esc(T('Armoiries'))}" loading="lazy" onerror="this.closest('figure').hidden=true"></figure>` : ''}
             <dl class="data-list">${rows.map(([k, v]) => `<div class="data-row"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>${extra}
             <p class="h-links">${[r.wikipedia ? link(r.wikipedia, T('Wikipédia')) : '', link(r.wikidata, 'Wikidata')].filter(Boolean).join(' · ')}</p>
             <p><small class="muted">${esc(T('Source : Wikidata (CC0), {q}.', {q: it.q}))}${it.sh != null && terrCtx?.shapes?.shapes[it.sh] ? ' ' + esc(T('Contour : {f}, licence {l}.', {f: terrCtx.shapes.shapes[it.sh].file, l: terrCtx.shapes.shapes[it.sh].licence})) : ''}</small></p></div>`;

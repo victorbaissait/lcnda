@@ -59,7 +59,8 @@
     const FORGE_JOB = /\b(forgeron|forgeur|maitre de forges?|forges?|fondeur|charbonnier|marechal ferrant|taillandier|cloutier|affineur|puddleur|mineur de fer|ferronnier|serrurier)\b/;
     const SALT_JOB = /\b(saunier|sauniere|paludier|paludiere|salinier|saliniere|faux saunier|gabelou|ouvrier des salines|sel)\b/;
     /** 🎈 les ballons posés près de ses lieux, s'il était en vie pendant le siège (sept. 1870 – janv. 1871) */
-    function balloonsFor(rows, life, radius = 40) { return aliveIn(life, 1870, 1871) ? nearLife(rows.filter(r => num(r.lat) !== null), life, radius, (r, e) => e.year === null || e.year >= 1850) : []; }
+    /*  (un lieu de sa vie autour de 1870 : de 1850 à 1890, ou sans date — « il vivait non loin » ne se dit pas d'un lieu où il n'est arrivé qu'en 1920) */
+    function balloonsFor(rows, life, radius = 40) { return aliveIn(life, 1870, 1871) ? nearLife(rows.filter(r => num(r.lat) !== null), life, radius, (r, e) => e.year === null || (e.year >= 1850 && e.year <= 1890)) : []; }
     /** 🌉 les ponts suspendus construits près de chez lui pendant sa vie */
     function bridgesFor(rows, life, radius = 12) {
         const s = lifeSpan(life); if (s.from === null) return [];
@@ -87,10 +88,25 @@
     function aodSpan(meta, a, b) { const out = []; for (let y = Math.max(a, meta.aod_from); y <= Math.min(b, meta.aod_from + meta.aod.length - 1); y++) out.push([y, meta.aod[y - meta.aod_from]]); return out; }
     /** 🔔 les phrases d'une époque */
     const soundsOf = (rows, a, b) => rows.filter(r => r.from <= b && r.to >= a);
+    /** Wikidata + OpenStreetMap d'un sujet en une liste : un point OSM à moins de maxKm d'un point Wikidata est le même.
+     *  Une grille de carreaux de 0,01° : chaque point OSM n'est comparé qu'aux points Wikidata voisins (pas de n × m sur des milliers de lignes). */
+    function mergeRows(wd, osm, maxKm) {
+        const out = (wd || []).map(r => ({...r, via: 'wd'})), C = 0.01, grid = new Map(), key = (a, b) => `${a}|${b}`;
+        for (const w of out) { if (num(w.lat) === null || num(w.lon) === null) continue; const k = key(Math.floor(w.lat / C), Math.floor(w.lon / C)); if (!grid.has(k)) grid.set(k, []); grid.get(k).push(w); }
+        for (const o of osm || []) {
+            let dup = false;
+            if (num(o.lat) !== null && num(o.lon) !== null) {
+                const a = Math.floor(o.lat / C), b = Math.floor(o.lon / C);
+                for (let i = -1; i <= 1 && !dup; i++) for (let j = -1; j <= 1 && !dup; j++) dup = (grid.get(key(a + i, b + j)) || []).some(w => km(w.lat, w.lon, o.lat, o.lon) < maxKm);
+            }
+            if (!dup) out.push({...o, q: '', via: 'osm', from: num(o.from), to: null});
+        }
+        return out;
+    }
     /** une adresse sûre : http(s) seulement */
     const safeUrl = u => (/^https?:\/\/[^\s"'<>]+$/i.test(String(u || '').trim()) ? String(u).trim() : '');
 
-    const core = {num, fold, table, km, lifeSpan, aliveIn, placedEvents, near, nearLife, jobsText, balloonsFor, bridgesFor, worksFor, veggiesFor, montyonFor, rosieresFor, veiledYears, aodSpan, soundsOf, safeUrl, FORGE_JOB, SALT_JOB};
+    const core = {num, fold, table, km, mergeRows, lifeSpan, aliveIn, placedEvents, near, nearLife, jobsText, balloonsFor, bridgesFor, worksFor, veggiesFor, montyonFor, rosieresFor, veiledYears, aodSpan, soundsOf, safeUrl, FORGE_JOB, SALT_JOB};
     if (typeof module === 'object' && module.exports) { module.exports = core; return; }
 
     /* ═════════════ l'écran ═════════════ */
@@ -154,11 +170,11 @@
     const quiet = p => p.catch(() => null);
     const rowsOf = kind => quiet(load(kind)).then(D => D || {meta: {}, rows: []});
     /** Wikidata + OpenStreetMap d'un sujet en une liste (un point OSM à moins de 80 m d'un point Wikidata est le même) */
+    const mergedMemo = {};
     async function merged(kind) {
         const [W, O] = await Promise.all([rowsOf(kind), rowsOf(`osm_${kind}`)]);
-        const out = W.rows.map(r => ({...r, via: 'wd'}));
-        for (const o of O.rows) if (!out.some(w => w.via === 'wd' && Math.abs(w.lat - o.lat) < 0.002 && km(w.lat, w.lon, o.lat, o.lon) < 0.08)) out.push({...o, q: '', via: 'osm', from: num(o.from), to: null});
-        return out;
+        const m = mergedMemo[kind]; if (m && m.w === W.rows && m.o === O.rows) return m.out; // une fois par fichier, pas à chaque fiche ouverte
+        const out = mergeRows(W.rows, O.rows, 0.08); mergedMemo[kind] = {w: W.rows, o: O.rows, out}; return out;
     }
     const lifeMemo = new Map();
     const lifeOf = id => { const H = ext.histoireAutour; if (H?.lifeOf) return H.lifeOf(id); if (!lifeMemo.has(id)) lifeMemo.set(id, api('ha_life', {id}).catch(e => { lifeMemo.delete(id); throw e; })); return lifeMemo.get(id); };
@@ -172,8 +188,8 @@
             more(`<ul class="hist-ul tf-ul">${list.slice(0, 12).map(balloonLi).join('')}</ul>${hyp(T('Les ballons partaient de Paris encerclé avec le courrier, des pigeons voyageurs et parfois des passagers ; le vent décidait de l’arrivée. Liste de J. Le Pileur et G. L’Héritier, d’après Wikipédia.'))}`, list.length));
     }
     const bridgeLi = x => (x.r.via === 'mer' ? `<li>🏛 ${link(x.r.url, x.r.n)} <small class="muted">(${esc(x.r.k)}${x.r.siecle ? ` · ${esc(x.r.siecle)}` : ''})</small> ${srcLink(x.r.url)}</li>` : `<li>🌉 <b>${link(wp(x.r.frwiki) || wd(x.r.q), x.r.n)}</b> <small class="muted">(${x.r.from ? esc(String(x.r.from)) : '?'}${x.r.to ? `–${esc(String(x.r.to))}` : ''}${x.r.river ? ` · ${esc(x.r.river)}` : ''}${x.r.commune ? ` · ${esc(x.r.commune)}` : ''}${x.km !== undefined ? `, ${esc(kmTxt(x.km))}` : ''}${x.r.seguin ? ` · ${esc(T('pont Seguin'))}` : ''})</small> ${srcLink(wd(x.r.q) || wp(x.r.frwiki))}</li>`);
-    const bridgeSentence = x => (x.r.replaces ? T('En {y}, un pont suspendu remplace {w} : {n}.', {y: String(x.r.from), w: `<b>${esc(x.r.replaces)}</b>`, n: `<b>${esc(x.r.n)}</b>`})
-        : T('En {y}, on construit {n} ({k}).', {y: String(x.r.from), n: `<b>${esc(x.r.n)}</b>`, k: esc(kmTxt(x.km))}));
+    const bridgeSentence = x => (x.r.replaces ? T('En {y}, un pont suspendu remplace {w} : {n}.', {y: esc(String(x.r.from)), w: `<b>${esc(x.r.replaces)}</b>`, n: `<b>${esc(x.r.n)}</b>`})
+        : T('En {y}, on construit {n} ({k}).', {y: esc(String(x.r.from)), n: `<b>${esc(x.r.n)}</b>`, k: esc(kmTxt(x.km))}));
     function bridgesHtml(list, lead) {
         return row('🌉', `${lead} ${srcLink(list[0].r.via === 'mer' ? list[0].r.url : wd(list[0].r.q) || wp(list[0].r.frwiki))}`, `${list.some(x => x.r.via === 'mer') ? `${LIC.mer()} · ` : ''}${LIC.wd()} · ${LIC.wp('https://fr.wikipedia.org/wiki/Liste_de_ponts_de_France', T('Wikipédia, « Liste de ponts de France »'))}`,
             more(`<ul class="hist-ul tf-ul">${list.slice(0, 12).map(bridgeLi).join('')}</ul>${hyp(T('Avant les ponts suspendus, on passait souvent la rivière en bac ou à gué ; Marc Seguin et ses frères en construisent à partir de 1823. « Remplace un bac » n’est écrit que si Wikidata le dit.'))}`, list.length));

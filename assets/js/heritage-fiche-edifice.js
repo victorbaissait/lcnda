@@ -148,6 +148,8 @@
     const saveSettings = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
     const on = k => settings()[k] !== false;
     const kiosk = () => !!root.document?.body?.classList.contains('is-kiosk');
+    /** consultation (kiosque) ou invité du réseau local : aucune image chargée d'Internet (le lien reste) */
+    const offline = () => !!(root.document?.body?.classList.contains('is-kiosk') || root.LCNDA_GUEST);
     const safe = u => (A().safeUrl ? A().safeUrl(u) : u) || '#';
     const link = (url, label) => (url ? `<a href="${esc(safe(url))}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
     const src = (url, label = T('↗ source')) => (url ? `<a class="fe-src" href="${esc(safe(url))}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(label)}</a>` : '');
@@ -262,7 +264,7 @@
         const sources = [s.wikidata && `${link(wdUrl(s.wikidata), `Wikidata ${s.wikidata}`)} ${esc(T('(CC0)'))}`, s.merimee && `${link(popUrl(s.merimee), `Mérimée ${s.merimee}`)} ${esc(T('(Licence Ouverte)'))}`,
             s.wikipedia && `${link(s.wikipedia, 'Wikipédia')} ${esc(T('(CC BY-SA 4.0)'))}`, s.image && `${link(fileUrl(s.image), T('Image : Wikimedia Commons'))} ${esc(T('(auteur et licence sur sa page)'))}`].filter(Boolean);
         return `<article class="fe-sheet k-${esc(s.group)}">
-            <div class="fe-hero">${s.image ? `<figure class="fe-ph"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 360))}" alt="${esc(s.name)}" loading="lazy" onerror="this.closest('figure').classList.add('is-ico');this.remove()"></a><span aria-hidden="true">${iconOf(s.kind)}</span></figure>` : `<div class="fe-ph is-ico" aria-hidden="true"><span>${iconOf(s.kind)}</span></div>`}
+            <div class="fe-hero">${s.image && !offline() ? `<figure class="fe-ph"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 360))}" alt="${esc(s.name)}" loading="lazy" onerror="this.closest('figure').classList.add('is-ico');this.remove()"></a><span aria-hidden="true">${iconOf(s.kind)}</span></figure>` : `<div class="fe-ph is-ico" aria-hidden="true"><span>${iconOf(s.kind)}</span></div>`}
                 <div><div class="fe-eyebrow">${esc(eyebrow)}</div><h3>${esc(s.name)}</h3>
                 ${chips.length ? `<div class="fe-chips">${chips.map(([c, u]) => `<span class="fe-chip">${esc(c)}${u ? ` ${src(u, '↗')}` : ''}</span>`).join('')}</div>` : ''}
                 <small class="muted">${esc(where.join(' · '))}${links.length ? ` · ${links.join(' · ')}` : ''}</small></div></div>
@@ -279,7 +281,7 @@
             <section class="fe-sec"><h4>${esc(T(g.regTitle))}</h4>${D.registers.length ? `<ul class="fe-l">${regRows}</ul>` : ''}<div data-fe-x="registers"></div>
                 ${edit ? `<p><button type="button" class="button small secondary" data-fe-radd>${esc(T('＋ Ajouter des registres'))}</button></p>` : ''}</section>
             <section class="fe-sec" data-fe-x="objects" hidden></section>
-            <section class="fe-sec"><h4>${esc(T('🖼 Photos et plans'))}</h4>${s.image ? `<figure class="fe-fig"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 640))}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()"></a><figcaption>${esc(s.image)} · ${link(fileUrl(s.image), T('↗ auteur et licence'))}</figcaption></figure>` : `<p class="muted">${esc(T('Pas encore d’image. « ✎ Modifier » → une image de Wikimedia Commons (son nom de fichier) : l’auteur et la licence restent sur sa page.'))}</p>`}</section>
+            <section class="fe-sec"><h4>${esc(T('🖼 Photos et plans'))}</h4>${s.image && offline() ? `<p class="muted">🖼 ${link(fileUrl(s.image), s.image)}</p>` : s.image ? `<figure class="fe-fig"><a href="${esc(fileUrl(s.image))}" target="_blank" rel="noopener noreferrer"><img src="${esc(imgUrl(s.image, 640))}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()"></a><figcaption>${esc(s.image)} · ${link(fileUrl(s.image), T('↗ auteur et licence'))}</figcaption></figure>` : `<p class="muted">${esc(T('Pas encore d’image. « ✎ Modifier » → une image de Wikimedia Commons (son nom de fichier) : l’auteur et la licence restent sur sa page.'))}</p>`}</section>
             ${s.lat != null ? `<section class="fe-sec"><h4>${esc(T('🗺 Sur la carte'))}</h4>${miniMap(s)}</section>` : ''}
             <section class="fe-sec"><h4>${esc(T('📑 Sources'))}</h4>${sources.length ? `<ul class="fe-src-list">${sources.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}<div data-fe-x="sources"></div><p class="muted">${esc(T('Ce que tu as écrit toi-même est marqué « ta saisie ». Tes sources se citent comme partout dans l’app, sur les actes.'))}</p></section>
         </article>`;

@@ -252,6 +252,8 @@
     const wp = t => `https://fr.wikipedia.org/wiki/${encodeURIComponent(String(t).replace(/ /g, '_'))}`;
     const commonsThumb = (f, w = 96) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(String(f).replace(/ /g, '_'))}?width=${w}`;
     const commonsPage = f => `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(String(f).replace(/ /g, '_'))}`;
+    /** consultation (kiosque) ou invité du réseau local : rien ne part sur Internet, pas même une image (un lien calme à la place) */
+    const offline = () => !!(root.document?.body?.classList.contains('is-kiosk') || root.LCNDA_GUEST);
 
     /* réglages : chaque partie s'éteint (allumée au départ) */
     const KEY = 'genealogie-terre-quotidien';
@@ -314,7 +316,7 @@
         const extra = [r.row[6], plantedTxt(r.row) && T('planté ou né : {p}', {p: plantedTxt(r.row)})].filter(Boolean).join(' · ');
         return row('🌳', esc(treeText(r, life)), `${link(wd(r.row[0]), 'Wikidata')}${r.row[8] ? ` · ${link(wp(r.row[8]), 'Wikipédia')}` : ''} (CC0)`, extra ? `<p class="muted"><small>${esc(extra)}</small></p>` : '');
     }
-    const coinImg = c => (c.img ? `<a class="tq-coin" href="${esc(commonsPage(c.img))}" target="_blank" rel="noopener noreferrer" title="${esc(T('Image : {c}', {c: c.credit || 'Wikimedia Commons'}))}"><img src="${esc(commonsThumb(c.img))}" alt="${esc(c.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('a').remove()"></a>` : '');
+    const coinImg = c => (!c.img ? '' : offline() ? `<span class="tq-coin tq-coin-off" aria-hidden="true" title="${esc(T('Image : {c}', {c: c.credit || 'Wikimedia Commons'}))}">🪙</span>` : `<a class="tq-coin" href="${esc(commonsPage(c.img))}" target="_blank" rel="noopener noreferrer" title="${esc(T('Image : {c}', {c: c.credit || 'Wikimedia Commons'}))}"><img src="${esc(commonsThumb(c.img))}" alt="${esc(c.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('a').remove()"></a>`);
     const coinSrc = c => `${link(c.url, c.src || 'Wikipédia')}${c.img ? ` · ${esc(T('image'))} ${link(commonsPage(c.img), c.credit || 'Wikimedia Commons')}${c.licence ? ` (${esc(c.licence)})` : ''}` : ''}`;
     async function pocheHtml(life) {
         if (!life?.by) return ''; const y = life.by + 20; if (y > life.end) return '';
