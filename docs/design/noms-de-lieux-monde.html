@@ -385,5 +385,10 @@ document.getElementById('q').addEventListener('input', draw);
 draw();
 (function () { const btns = document.querySelectorAll('[data-theme-set]'); btns.forEach(b => b.addEventListener('click', () => { const v = b.dataset.themeSet; if (v === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.dataset.theme = v; btns.forEach(x => x.setAttribute('aria-pressed', String(x === b))); })); })();
 </script>
+
+<section id="decisions" style="margin:32px auto;max-width:900px;padding:20px 24px;border:1px solid currentColor;border-radius:14px">
+<h2>✅ Décisions (validé le 2026-11-26)</h2>
+<p>Maquette validée telle quelle, avec toutes les recommandations pour ses questions.</p>
+</section>
 </body>
 </html>
