@@ -28,7 +28,7 @@ THEMES = {
     'mer': (['Ostréiculture', 'Goémonier', 'Pêche à pied'], r'huîtr|ostréi|goémon|varech|pêche à pied|algue|parcs?\b'),
     'teinture': (['Garance des teinturiers', 'Pastel des teinturiers', 'Pays de Cocagne'], r'garance|pastel|teintur|cocagne|guède|coque'),
 }
-BROKEN = re.compile(r'\s[,.;:)]|\(\s*\)|[,:;]$|\b(le|la|du|au|des|de|en)\s*[,.]|[a-z]{2}[A-Z][a-z]')
+BROKEN = re.compile(r'\s[,.;:)]|\(\s*\)|[,:;]$|\b(le|la|du|au|des|de|en)\s*[,.]|[a-z]{2}[A-Z][a-z]|\benviron\s+(des|de|les)\b')
 SKIP = re.compile(r'^\s*(\{\{|\[\[(Fichier|File|Image|Catégorie)|\||!|=|<|\*\s*\[\[(Fichier|Catégorie)|__)', re.I)
 
 
@@ -73,6 +73,9 @@ def main():
                     plain = wm.plain(s)
                     if not (40 <= len(plain) <= 360) or plain.count('|') or plain.count('{') or BROKEN.search(plain):
                         continue  # trop court, trop long, ou un modèle perdu (« depuis le , ») : on ne cite pas une phrase abîmée
+                    ys = [int(y) for y in re.findall(r'\b(1[0-9]{3}|20[0-9]{2})\b', plain)]
+                    if ys and min(ys) >= 1960:
+                        continue  # une phrase d'aujourd'hui (chiffre d'affaires, label…) : hors sujet pour des ancêtres
                     if j < 2 and not ctx.get(k) and kre.search(plain):
                         ctx.setdefault(k, []).append({'q': plain, 'title': t, 'url': wm.wp_url(t)})
                     if kre.search(plain):
