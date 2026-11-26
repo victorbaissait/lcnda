@@ -184,7 +184,7 @@
             await base(token);
             const page = document.querySelector('#workspace .rfr-page'); if (!page || page.querySelector('[data-cadres-pref]')) return;
             const box = document.createElement('section'); box.className = 'maintenance-panel';
-            box.innerHTML = `<h3>${esc(i18n('Affichage des listes de recherche'))}</h3><label class="ui-toggle"><input type="checkbox" data-cadres-pref ${cadres.on() ? 'checked' : ''}><i></i><span>${esc(i18n('Un cadre par personne'))}<small class="muted"> — ${esc(i18n('« Que manque-t-il ? » : les recherches de chaque personne réunies dans un cadre ; sinon une ligne par recherche'))}</small></span></label>`;
+            box.innerHTML = `<h3>${esc(i18n('Affichage des listes de recherche'))}</h3><label class="ui-toggle"><input type="checkbox" data-cadres-pref ${cadres.on() ? 'checked' : ''}><i></i><span>${esc(i18n('Un cadre par personne'))}<small class="muted"> — ${esc(i18n('Que manque-t-il ?, Où chercher, doutes, contrôle, pistes, Ma semaine, décès possibles, actes manquants, doublons : ce qui concerne chaque personne réuni dans un cadre ; sinon une ligne par élément'))}</small></span></label>`;
             page.appendChild(box);
             box.querySelector('[data-cadres-pref]').addEventListener('change', e => { cadres.set(e.target.checked); toast(i18n('Réglage enregistré.'), 'success'); });
         };

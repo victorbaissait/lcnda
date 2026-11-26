@@ -1483,7 +1483,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector-tree.js?v=16" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=13" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=11" defer></script>
-<script src="assets/js/heritage-research-gaps.js?v=11" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=12" defer></script>
 <script src="assets/js/app-lecture-auto.js?v=3" defer></script>
 <script src="assets/js/app-socface-core.js?v=3" defer></script>
 <script src="assets/js/heritage-socface.js?v=8" defer></script>
