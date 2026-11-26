@@ -134,9 +134,12 @@ DATES = '''OPTIONAL {{ {v} p:P585/psv:P585 [wikibase:timeValue ?d; wikibase:time
 BIG_PLACE = 'wd:Q6256 wd:Q3624078 wd:Q7275 wd:Q5107 wd:Q165 wd:Q9430 wd:Q4022 wd:Q46831 wd:Q35657 wd:Q10864048 wd:Q82794 wd:Q1620908 wd:Q34763 wd:Q107390 wd:Q36784 wd:Q1250464'
 
 
-def dated(r):
-    """(y, d, y2, d2) d'une ligne : P585 (moment), sinon P580 (début), sinon P582 (fin) ; fin = P582 si elle suit le début"""
-    if r.get('d') or r.get('s'):
+def dated(r, start_first=False):
+    """(y, d, y2, d2) d'une ligne : P585 (moment), sinon P580 (début), sinon P582 (fin) ; fin = P582 si elle suit le début.
+    start_first (les guerres) : le début P580 d'abord (P585 est souvent la date de l'armistice)"""
+    if start_first and r.get('s'):
+        y, d = precise(r.get('s'), r.get('sp'))
+    elif r.get('d') or r.get('s'):
         y, d = precise(r.get('d') or r.get('s'), r.get('dp') or r.get('sp'))
     else:
         y, d = precise(r.get('e'), r.get('ep'))
@@ -163,7 +166,7 @@ def war_set(cache):
     out = {}
     for r in sparql(cache, 'guerres', q):
         w = qid(r['w'])
-        x = dated(r) if (r.get('d') or r.get('s') or r.get('e')) else (precise(r.get('i'), 9) + (None, '') if r.get('i') else None)
+        x = dated(r, True) if (r.get('d') or r.get('s') or r.get('e')) else (precise(r.get('i'), 9) + (None, '') if r.get('i') else None)
         pt = wkt_point(r.get('c'))
         cur = out.get(w)
         if x and (not cur or cur['y'] is None or better(cur, x)):
@@ -260,6 +263,15 @@ def build_guerres(cache):
     wset = war_set(cache)
     labs = names_of(cache, 'guerres-noms', WAR.replace('?w', '?it'))
     at = attrs(cache, 'guerres-camps-pays', WAR, ['P710', 'P17', 'P276'], '?w')
+    # les camps : P710 sans les personnes (les chefs sont aussi « participants »)
+    rows710 = sparql(cache, 'guerres-camps', f'SELECT DISTINCT ?w ?v WHERE {{ {WAR} ?w wdt:P710 ?v . FILTER NOT EXISTS {{ ?v wdt:P31 wd:Q5 }} }}')
+    labs710 = wd_labels(cache, 'guerres-camps', [qid(r['v']) for r in rows710])
+    camps = {}
+    for r in rows710:
+        x = labs710.get(qid(r['v']))
+        if x and x not in camps.setdefault(qid(r['w']), []):
+            camps[qid(r['w'])].append(x)
+    few = lambda lst, n=4: '|'.join(sorted(lst)) if len(lst) <= n else ''  # au-delà de 4 pays ou lieux (guerres mondiales) : rien plutôt qu'un choix au hasard
     import gzip as _gz
     with _gz.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'assets', 'data', 'ha-batailles.json.gz')) as f:
         B = json.load(f)
@@ -281,11 +293,11 @@ def build_guerres(cache):
             lat, lon = x['pt']
         else:
             lat = lon = None
-        rows.append([w, name, x['y'], x['d'], x['y2'], x['d2'], lat, lon, '|'.join(at['P710'].get(w, [])[:8]), '|'.join(at['P17'].get(w, [])[:4]), '|'.join(at['P276'].get(w, [])[:4]), nb, frw])
+        rows.append([w, name, x['y'], x['d'], x['y2'], x['d2'], lat, lon, '|'.join(sorted(camps.get(w, []))[:10]), few(at['P17'].get(w, [])), few(at['P276'].get(w, [])), nb, frw])
     rows.sort(key=lambda r: (r[2] if r[2] is not None else 99999, r[1]))
     print(f'🎖 {len(rows)} guerres ({sum(1 for r in rows if r[11])} avec des batailles placées)', flush=True)
     meta = dict(WD_SRC, what='Guerres (Wikidata : nature = guerre Q198 et ses sous-classes ; début P580, fin P582, camps P710, pays P17, lieux P276 ; '
-                'nb = ses batailles placées dans ha-batailles, par P361 « partie de », de proche en proche)')
+                'camps = P710 sans les personnes ; pays et lieux seulement quand il y en a 4 au plus ; nb = ses batailles placées dans ha-batailles, par P361 « partie de », de proche en proche)')
     return write_gz('ha-guerres.json.gz', {**meta, 'fields': ['q', 'n', 'y', 'd', 'y2', 'd2', 'lat', 'lon', 'part', 'country', 'loc', 'nb', 'frwiki'], 'rows': rows}), len(rows)
 
 

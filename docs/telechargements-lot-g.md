@@ -96,7 +96,7 @@ ils n'existent pas pour une fiche vivante ou confidentielle, ni en consultation 
 - **Existait** : non (grep « États généraux / conventionnel » : rien).
 - **Source** : Wikidata : P39 = « député aux États généraux de 1789 » (Q59309522) ; P39 = « député de l'Assemblée constituante »
   (Q28218485) avec le mandat P2937 = « Assemblée nationale constituante » (Q876424, la suite des États généraux) et sa circonscription
-  (P768) ; P39 = « député de la Convention nationale » (Q20808382). **XXDEP** personnes (XXDEPLL avec un lieu de naissance placé).
+  (P768) ; P39 = « député de la Convention nationale » (Q20808382). **2 085** personnes (2 032 avec un lieu de naissance placé).
 - **Où** : fiche (homonyme ; député né dans sa commune, de son vivant), village et monographie (« Nés ici »), Listes, Cartes (lieux
   de naissance), à la demande.
 
@@ -104,7 +104,7 @@ ils n'existent pas pour une fiche vivante ou confidentielle, ni en consultation 
 - **Existait** : en partie — un lien « Compagnons de la Libération ↗ » dans le bloc Résistance (`heritage-more.js`) : gardé, pas
   dupliqué ; ici la liste elle-même.
 - **Source** : Wikidata, P166 = « compagnon de la Libération » (Q2990283), personnes (Q5) seulement (pas les communes ni les unités),
-  et **seulement avec une date de mort** (P570) : **XXCOMP** personnes. Le dernier Compagnon (Hubert Germain) est mort en 2021 : tous
+  et **seulement avec une date de mort** (P570) : **1 047** personnes (1 045 avec un lieu de naissance placé ; Wikidata en a un peu plus que les 1 038 officiels — doublons ou erreurs de Wikidata, gardés tels quels). Le dernier Compagnon (Hubert Germain) est mort en 2021 : tous
   sont décédés ; l'essai le vérifie (aucune ligne sans date de mort).
 - **Où** : fiche, village, monographie, Listes, Cartes, à la demande.
 

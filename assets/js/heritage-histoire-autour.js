@@ -259,7 +259,7 @@
     const UI = () => root.LCNDA_UI || {};
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
     const esc = v => (A().escapeHtml ? A().escapeHtml(String(v ?? '')) : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
-    const DATA_V = 1;
+    const DATA_V = 2;
     const FILES = {batailles: 'ha-batailles', guerres: 'ha-guerres', voies: 'ha-voies-romaines', compostelle: 'ha-compostelle', institutions: 'ha-institutions', catastrophes: 'ha-catastrophes', navires: 'ha-navires', phares: 'ha-phares'};
     const KEY = 'genealogie-histoire-autour';
     const TAB = ['histoire_autour', '25k6', '🧭 Histoire autour'];

@@ -62,15 +62,15 @@
     const HEALTH_JOB = /\b(medecin|chirurgien|infirmier|infirmiere|apothicaire|pharmacien|officier de sante|religieuse hospitaliere|garde sanitaire)\b/;
 
     /* ── les noms : la personne et une liste (comparaison sur l'ordinateur, jamais envoyée) ── */
-    const PART = new Set(['de', 'du', 'des', 'd', 'la', 'le', 'les', 'l', 'van', 'von', 'der', 'den', 'di', 'da', 'del', 'dit', 'dite']);
+    const PART = new Set(['de', 'du', 'des', 'd', 'van', 'von', 'der', 'den', 'di', 'da', 'del', 'dit', 'dite']); // « La », « Le » restent : de La Combe = Lacombe
     const toks = s => fold(String(s ?? '').replace(/['’.]/g, ' ')).split(' ').filter(Boolean);
-    /** la clé du nom de famille : sans particule, lettres doublées réduites (Mazaud = Mazaut ? non ; Lacombe = La Combe) */
+    /** la clé du nom de famille : sans « de, du, d’… » de tête, sans espaces, lettres doublées réduites (Lacombe = La Combe = de La Combe) */
     const surKey = s => { const t = toks(s).filter(x => !/^\d+$/.test(x)); while (t.length > 1 && PART.has(t[0])) t.shift(); return t.join('').replace(/(.)\1+/g, '$1'); };
     /** les noms de famille possibles d'une ligne : P734, sinon les derniers mots du nom (« Olivier Morel de La Durantaye » → durantaye, morel…) */
     function rowSurnames(r) {
         const out = new Set(); if (r.fam) out.add(surKey(r.fam));
         const t = toks(String(r.n || '').replace(/,.*$/, '')); // « Guillaume Richard, dit Lafleur » → avant la virgule
-        for (let i = 1; i < t.length; i++) { if (PART.has(t[i])) continue; out.add(surKey(t.slice(i).join(' '))); out.add(surKey(t[i])); }
+        for (let i = 1; i < t.length; i++) { out.add(surKey(t.slice(i).join(' '))); if (!PART.has(t[i]) && !/^(la|le|les|l)$/.test(t[i])) out.add(surKey(t[i])); }
         out.delete(''); return out;
     }
     const firstTok = s => toks(String(s || '').replace(/-/g, ' '))[0] || '';
@@ -431,7 +431,7 @@
     const nameList = (kind, label, url) => L(`tg_${kind}`, FILES[kind], NAMES[kind].icon, label, 'Le monde', kind === 'aviateurs' ? 'Wikipédia en anglais (CC BY-SA 4.0)' : 'Wikidata (CC0)', url, kind,
         async () => { const D = await rowsOf(kind); NAMES_META[kind] = D.meta; return D.rows.map(r => ({name: r.n, born: num(r.b), died: num(r.d), place: r.bp || '', insee: r.insee || '', role: NAMES[kind].role(r), extra: r.extra || r.country || '', note: r.note || '', lat: r.lat, lon: r.lon, year: r.y ?? null, killed: r.killed ? T(r.killed === 'w' ? 'au combat' : 'en accident') : '', src: rowUrl(kind, r)})); },
         kind === 'aviateurs' ? [F('name', 'Nom', 'text', {person: true}), F('role', 'Brevet'), F('year', 'Année', 'year'), F('extra', 'Pays'), F('killed', 'Mort en vol', 'enum'), F('note', 'Remarque (Wikipédia)'), F('src', 'Source', 'url')]
-            : [F('name', 'Nom', 'text', {person: true}), F('born', 'Naissance', 'year'), F('died', 'Décès', 'year'), F('place', 'Lieu de naissance', 'place'), F('role', 'Rôle', 'enum'), F('extra', 'Circonscription'), F('src', 'Source', 'url')],
+            : [F('name', 'Nom', 'text', {person: true}), F('born', 'Naissance', 'year'), F('died', 'Décès', 'year'), F('place', 'Lieu de naissance', 'place'), F('role', 'Rôle', 'enum'), F('src', 'Source', 'url')],
         {period: r => (kind === 'aviateurs' ? [r.year, r.year] : [NAMES[kind].win[0], NAMES[kind].win[1]]), geo: r => (num(r.lat) !== null ? [r.lat, r.lon] : null),
             personMatch: {born: r => r.born, died: r => r.died, place: lpPlace, role: r => r.role}});
     const placeList = (kind, label) => L(`tg_${kind}`, FILES[kind], PLACES[kind].icon, label, 'Le lieu', 'Wikidata (CC0) ; OpenStreetMap (ODbL)', 'https://www.wikidata.org', kind,
