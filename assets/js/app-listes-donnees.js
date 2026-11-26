@@ -358,7 +358,7 @@
         const d = cur.d, st = cur.st, cs = cols(d, st), urls = urlFields(d);
         if (!cur.rows.length) { res.innerHTML = A().emptyState ? A().emptyState({icon: '🔎', text: T('Rien ne correspond à ces critères.'), hint: T('Retire un critère, élargis la période ou la distance.'), size: 'small'}) : esc(T('Rien ne correspond à ces critères.')); paintMore(); return; }
         const CH = ext.listesChoix, fam = !!(d.familyColumn && ext.listesFamille && d.geo && d.period);
-        const sortable = f => !f.gps && f.sort !== false && typeof f.html !== 'function';
+        const sortable = f => !f.gps && f.sort !== false;
         const head = cs.map(f => !sortable(f) ? `<th>${esc(flab(f))}</th>` : `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(flab(f))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`).join('');
         const firstTxt = (f, r) => (Array.isArray(r[f.key]) ? r[f.key].join(' · ') : r[f.key]) ?? '—';
         const openable = !!(d.open || d.sub);
@@ -367,6 +367,7 @@
         paintMore();
         if (fam) { try { ext.listesFamille.fill(res, cur.rows, d); } catch (e) { console.error(e); } } // 👪 « Louis DURAND, 29 ans » (app-listes-famille.js)
         try { CH?.rowsPainted?.(res, cur.rows, pageApi()); } catch (e) { console.error(e); } // ☑ (app-listes-choix.js)
+        try { d.painted?.(res, pageApi()); } catch (e) { console.error(e); } // une liste qui ajoute un mot sous son tableau (ex. 🔀 « 4 doublons fondus »)
         try { ext.connexions?.listRowsPainted?.(res, cur.rows, {d, total: cur.total}); } catch (e) { console.error(e); } // 📥 cases « Tu choisis des lignes… » (heritage-connexions.js)
         try { ext.listesPersonnes?.rowsPainted?.(res, cur.rows, {d}); } catch (e) { console.error(e); } // 👤 « dans ta base : … », 🔗 Relier à une fiche (app-listes-personnes.js)
     }
@@ -479,7 +480,7 @@
     const pickerHtml = (name, title) => (window.LCNDA_PICKER?.pickerField ? `<div class="pk-host ld-pk" data-ld-pk="${esc(name)}">${window.LCNDA_PICKER.pickerField({name, kind: 'place', inline: true, allowFree: false, allowCreate: false, value: null}).replace(` name="${name}"`, '')}</div>` : `<input name="${esc(name)}_txt" placeholder="${esc(title)}">`);
     async function enumValues(d, key, st) {
         const f = fieldOf(d, key);
-        if (!d.query) { const rows = localFilter(d, await loadAll(d), st, key); const n = new Map(); rows.forEach(r => { const v = r[key]; if (v == null || v === '') return; n.set(String(v), (n.get(String(v)) || 0) + 1); }); (f.values || []).forEach(v => { if (!n.has(String(v))) n.set(String(v), 0); }); return [...n.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr')); }
+        if (!d.query) { const rows = localFilter(d, await loadAll(d), st, key); const n = new Map(); rows.forEach(r => [].concat(r[key] ?? []).forEach(v => { if (v == null || v === '') return; n.set(String(v), (n.get(String(v)) || 0) + 1); })); (f.values || []).forEach(v => { if (!n.has(String(v))) n.set(String(v), 0); }); return [...n.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr')); }
         if (d.facet) { try { const r = await d.facet(key, buildQuery({...st, crit: st.crit.filter(c => c.key !== key)})); if (Array.isArray(r) && r.length) return r.map(x => (Array.isArray(x) ? [String(x[0]), x[1]] : [String(x), null])); } catch (_) {} }
         return (f.values || []).map(v => [String(v), null]);
     }
@@ -568,7 +569,7 @@
     }
     const table2d = rows => {
         const d = cur.d, cs = [...cols(d, cur.st), ...urlFields(d)].flatMap(f => (f.gps ? [{key: '_lat', label: 'latitude', gi: 0}, {key: '_lon', label: 'longitude', gi: 1}] : [f])); // 📍 GPS → deux colonnes, en degrés décimaux (point)
-        const val = (f, v) => (v == null ? '' : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : v);
+        const val = (f, v) => (v == null ? '' : Array.isArray(v) ? v.join(' · ') : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : v);
         return [cs.map(f => (f.gi != null ? f.label : flab(f))), ...rows.map(r => cs.map(f => { if (f.gi == null) return val(f, r[f.key]); const g = geoOf(d, r); return g ? Number(g[f.gi].toFixed(6)) : ''; }))];
     };
     const critSummary = () => { const d = cur.d, st = cur.st; return [st.q ? `« ${st.q} »` : '', ...st.crit.map(c => critText(d, c)), st.period ? periodText(st.period) : '', st.near ? nearText(st.near) : ''].filter(Boolean).join(' · '); };
