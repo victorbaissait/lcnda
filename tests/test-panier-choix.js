@@ -24,7 +24,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
     const cur = () => p.evaluate(() => Number(JSON.parse(localStorage.getItem('genealogie-connexions-panier') || '0')) || 0);
     const setCur = id => p.evaluate(x => localStorage.setItem('genealogie-connexions-panier', String(x)), id);
     const clean = () => p.evaluate(() => { document.querySelectorAll('.ui-actmenu').forEach(x => x.remove()); document.querySelectorAll('dialog[open]').forEach(d => d.close()); document.querySelectorAll('.toast').forEach(x => x.remove()); });
-    const lastToast = () => p.locator('.toast:not(.is-leaving)').last();
+    const lastToast = () => p.locator('.toast:not(.is-leaving)', {hasText: '🧺'}).last(); // le message du panier, pas le rappel « 🛟 copie » qui arrive 6 s après l’ouverture
     const toastBtn = async re => { const b = lastToast().locator('button', {hasText: re}); await b.waitFor({timeout: 10000}); return b; };
     const setAsk = v => p.evaluate(x => { const k = 'genealogie-connexions'; const s = JSON.parse(localStorage.getItem(k) || '{}'); s.ask = x; localStorage.setItem(k, JSON.stringify(s)); }, v);
     const research = async () => {

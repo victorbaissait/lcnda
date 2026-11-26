@@ -49,8 +49,8 @@ def get(url, accept='application/json', data=None, tries=6, check=None):
 
 
 def sparql(q):
-    body = get('https://query.wikidata.org/sparql', 'application/sparql-results+json', urllib.parse.urlencode({'query': q}), check=json.loads)
-    return json.loads(body)['results']['bindings']
+    body = get('https://query.wikidata.org/sparql', 'application/sparql-results+json', urllib.parse.urlencode({'query': q}), check=lambda b: json.loads(b, strict=False))
+    return json.loads(body, strict=False)['results']['bindings']   # strict=False : un libellé peut contenir une tabulation
 
 
 def ws(params):

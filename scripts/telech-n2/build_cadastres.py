@@ -30,7 +30,7 @@ OPEN = {'fr-lo': 'Licence Ouverte 1.0', 'lov2': 'Licence Ouverte 2.0', 'odc-odbl
 LIC_URL = {'fr-lo': 'https://www.etalab.gouv.fr/licence-ouverte-open-licence', 'lov2': 'https://www.etalab.gouv.fr/licence-ouverte-open-licence',
            'odc-odbl': 'https://opendatacommons.org/licenses/odbl/', 'cc-by': 'https://creativecommons.org/licenses/by/4.0/deed.fr',
            'cc-by-sa': 'https://creativecommons.org/licenses/by-sa/4.0/deed.fr', 'cc-zero': 'https://creativecommons.org/publicdomain/zero/1.0/deed.fr'}
-DEPS = {'Hauts-de-Seine': ['92'], 'Doubs': ['25'], 'Vaucluse': ['84'], 'Loiret': ['45'], 'Haute-Garonne': ['31'], 'Bretagne': ['22', '29', '35', '56'],
+DEPS = {'Hauts-de-Seine': ['92'], 'Côtes d’Armor': ['22'], "Côtes d'Armor": ['22'], 'Doubs': ['25'], 'Vaucluse': ['84'], 'Loiret': ['45'], 'Haute-Garonne': ['31'], 'Bretagne': ['22', '29', '35', '56'],
         'Brest': ['29'], 'Avignon': ['84']}
 CITIES = {'Brest': '29019', 'Avignon': '84007', 'Boulogne-Billancourt': '92012'}
 
@@ -62,9 +62,9 @@ def cadastres(out):
     found = search('cadastre napoléonien')
     rows, link_only = [], []
     for did in sorted(found):
-        d = full(did)
-        if not re.search(r'napol[ée]on|cadastre ancien', d['title'], re.I):
+        if not re.search(r'napol[ée]on|cadastre ancien', found[did].get('title', ''), re.I):
             continue
+        d = full(did)
         org = (d.get('organization') or {}).get('name', '') or (d.get('owner') or {}).get('slug', '')
         zone, deps, ins = where(d['title'], org)
         res = [[r.get('title') or '', (r.get('format') or '').lower(), r.get('url') or '', r.get('filesize')] for r in d.get('resources') or [] if (r.get('url') or '').startswith('https://')]
@@ -97,9 +97,10 @@ def rues(out):
     found.update(search('anciens noms des rues'))
     cities, link_only = [], []
     for did in sorted(found):
-        d = full(did)
-        if not re.search(r'ancien|historique|caduqu', d['title'], re.I) or not re.search(r'rue|voie', d['title'], re.I):
+        t0 = found[did].get('title', '')
+        if not re.search(r'ancien|historique|caduqu', t0, re.I) or not re.search(r'rue|voie', t0, re.I):
             continue
+        d = full(did)
         org = (d.get('organization') or {}).get('name', '')
         if 'Ville de Paris' in org:
             continue   # Paris : br-paris (boussole des rues)

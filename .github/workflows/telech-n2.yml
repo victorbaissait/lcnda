@@ -1,0 +1,104 @@
+# 📊 Chiffres d'époque, mots des actes, lieux d'Europe (lot N2) : refaire assets/data/tn2-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 📚 👥 🗺 tn2-sgf-ecole, tn2-sgf-recensements, tn2-sgf-territoire : Insee, Statistique générale de la France (Licence Ouverte 2.0, page relue).
+#  - ✝️ ⛪ ⚔️ 🍁 tn2-ordres, tn2-patrons, tn2-generaux, tn2-quebec-paroisses : Wikidata (CC0).
+#  - 🩺 📜 🇨🇭 ⏳ tn2-maladies, tn2-formules, tn2-heimatort, tn2-mortalite : textes rédigés pour LCNDA (CC BY-SA 4.0) ; phrases de Wikisource.
+#  - 🗺 🛣 tn2-cadastres, tn2-rues : catalogue data.gouv.fr (licence de chaque jeu lue dans data.gouv.fr).
+#  - 📖 tn2-expilly/ : Expilly 1762-1770, Internet Archive (Public Domain Mark lue dans les métadonnées de chaque volume).
+#  - 🇪🇺 🇮🇹 🇨🇭 🍁 🇱🇺 tn2-lau, tn2-it-variazioni, tn2-ch-communes, tn2-qc-toponymes, tn2-lu-communes : GISCO, ISTAT, OFS, Données Québec,
+#    data.public.lu. La licence est lue sur la page officielle à chaque fabrication : sans licence ouverte lue, rien n'est fabriqué (lien seulement).
+# Plusieurs de ces sites (Internet Archive, Eurostat, ISTAT, OFS, Données Québec, data.public.lu, opendatasoft) ne sont pas joignables
+# depuis l'atelier : ce travail les fabrique ici. Puis le sommaire assets/data/manifest.json.
+#
+# Lancer : onglet « Actions » → « Chiffres d'époque et lieux d'Europe (lot N2) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Chiffres d'époque et lieux d'Europe (lot N2)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, sgf, wikidata, textes, cadastres, rues, expilly ou europe'
+        required: false
+        default: 'tout'
+      europe:
+        description: 'pour « europe » : lau istat ofs quebec lux (séparés par des espaces ; vide = tout)'
+        required: false
+        default: ''
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-n2.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-n2-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+      EUROPE: ${{ github.event.inputs.europe || '' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TN2_RAW=$RUNNER_TEMP/tn2-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Lire les fichiers Excel
+        run: pip install xlrd==2.0.1 openpyxl==3.1.5
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.TN2_RAW }}
+          key: telech-n2-${{ github.run_id }}
+          restore-keys: telech-n2-
+      - name: "📚 👥 🗺 Statistique générale de la France (Insee)"
+        if: env.QUOI == 'tout' || env.QUOI == 'sgf'
+        run: python3 -I scripts/telech-n2/build_sgf.py assets/data
+      - name: "✝️ ⛪ ⚔️ 🍁 Ordres, saints patrons, généraux, paroisses du Québec (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'wikidata'
+        run: python3 -I scripts/telech-n2/build_wikidata.py assets/data
+      - name: "🩺 📜 🇨🇭 ⏳ Maladies, formules des actes, Heimatort, mortalité"
+        if: env.QUOI == 'tout' || env.QUOI == 'textes'
+        run: python3 -I scripts/telech-n2/build_textes.py assets/data
+      - name: "🗺 Cadastres napoléoniens ouverts (catalogue data.gouv.fr)"
+        if: env.QUOI == 'tout' || env.QUOI == 'cadastres'
+        run: python3 -I scripts/telech-n2/build_cadastres.py assets/data cadastres
+      - name: "🛣 Anciens noms des rues hors de Paris (data.gouv.fr)"
+        if: env.QUOI == 'tout' || env.QUOI == 'rues'
+        run: python3 -I scripts/telech-n2/build_cadastres.py assets/data rues
+      - name: "📖 Expilly 1762-1770 (Internet Archive, domaine public)"
+        if: env.QUOI == 'tout' || env.QUOI == 'expilly'
+        run: python3 -I scripts/telech-n2/build_expilly.py assets/data
+      - name: "🇪🇺 Communes d’Europe et leurs changements (GISCO, ISTAT, OFS, Québec, Luxembourg)"
+        if: env.QUOI == 'tout' || env.QUOI == 'europe'
+        run: python3 -I scripts/telech-n2/build_europe.py assets/data $EUROPE
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.TN2_RAW }}
+          key: telech-n2-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/tn2-*.json.gz assets/data/manifest.json
+          if [ -d assets/data/tn2-expilly ]; then git add assets/data/tn2-expilly; fi
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Chiffres d'époque et lieux d'Europe (lot N2) : données refaites sur GitHub (Insee LO 2.0, Wikidata CC0, licences relues)"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done
