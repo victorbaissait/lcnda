@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Onglet Diagrammes</title>
+<style>
+/* Les jetons et les composants de l'app (assets/css/app.css, ui.css, listes-donnees.css, fiche-village-organiser.css), recopiés ici pour que la maquette s'ouvre seule — même base que donnees-plus.html et diagrammes-donnees.html. */
+:root{
+  color-scheme:light;
+  --ink:#080808;--paper:#fff;--card-bg:#fff;--card-head-bg:#fafafa;--card-line:#080808;
+  --blue:#0066cc;--blue-bright:#055dff;--blue-soft:#eaf2ff;--on-blue:#fff;--line-color:#d6d6d6;--muted:#6d6d6d;
+  --shadow:6px 6px 0 rgba(5,93,255,.34);--shadow-small:4px 4px 0 rgba(5,93,255,.28);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(5,93,255,.45);
+  --ui-ink:#111;--ui-bg:#fff;--ui-soft:#eaf1ff;--ui-line:#e3e5ea;--ui-muted:#666;--ui-blue:#055dff;
+  --eyebrow:#0066cc;--btn2-bg:#fff;--btn2-line:#080808;--btn2-ink:#080808;
+  --seg-bg:#fff;--seg-ink:#111;--seg-line:#111;--seg-on-bg:#055dff;--seg-on-ink:#fff;
+  --grid:rgba(0,102,204,.035);--topbar:#fff;--topline:#080808;
+  --toggle-off:#b8bec9;--kbd-line:#c9ccd3;--link:#2b6cb0;
+  --green:#1a7f37;--green-soft:#eaf6ee;--orange:#d9480f;--orange-soft:#fff1e8;--red:#c62828;--red-soft:#fdecec;--yel-soft:#fff8d6;--yel-ink:#7a5d00;--fog:#9aa0a8;
+  --toast-bg:#111;--toast-ink:#fff;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.4 var(--font);padding:24px 24px 56px;overflow-wrap:break-word}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:is(button,input,select,textarea,a,[tabindex]):focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1440px;margin:0 auto}
+
+/* ── la maquette autour ── */
+.mock{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;flex-wrap:wrap;margin:0 0 18px}
+.mock .eyebrow{display:block}
+.mock h1{margin:5px 0 6px;font-size:22px;letter-spacing:-.01em}
+.mock p{margin:0;max-width:860px;color:var(--muted);font-size:14px;line-height:1.45}
+.tag-new{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.08em;text-transform:uppercase;background:var(--ui-blue);color:#fff;padding:0 6px;margin-right:6px;vertical-align:1px}
+.path{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin:8px 0 0;font-size:13px;font-weight:600}
+.path span{border:1.5px solid var(--line-color);background:var(--card-bg);padding:2px 8px}
+.path span.on{border-color:var(--ui-blue);background:var(--ui-soft);color:var(--ink)}
+.path i{font-style:normal;color:var(--muted)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 26px}
+.toc a{text-decoration:none;border:2px solid var(--card-line);background:var(--card-bg);padding:6px 11px;font-size:13px;font-weight:700;box-shadow:var(--shadow-btn)}
+.toc a:hover{background:var(--ui-soft)}
+.toc a small{color:var(--muted);font-weight:600;margin-left:4px}
+.sec{margin:46px 0 0}
+.sec-h{margin:0 0 16px;max-width:900px}
+.sec-h h2{margin:4px 0 4px;font-size:24px;letter-spacing:-.02em}
+.sec-h p{margin:0;color:var(--muted);font-size:14px}
+.callout{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;background:var(--orange);color:#fff;font:800 12px/1 var(--font);border-radius:11px;vertical-align:2px}
+
+/* ── composants de l'app ── */
+.eyebrow{color:var(--eyebrow);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:2px solid var(--ink);background:var(--blue);color:var(--on-blue);padding:11px 15px;min-height:42px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-small);transition:.15s ease;white-space:nowrap;border-radius:0;text-decoration:none}
+:root[data-theme="dark"] .button:not(.secondary){border-color:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .button:not(.secondary){border-color:var(--blue)}}
+.button:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.button:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.button.secondary{color:var(--btn2-ink);background:var(--btn2-bg);border-color:var(--btn2-line)}
+.button.small{min-height:32px;padding:6px 10px;font-size:11.5px;box-shadow:var(--shadow-btn)}
+.button.small:hover{box-shadow:1px 1px 0 var(--ink)}
+.button.icon{font-size:18px;line-height:1;padding:9px 13px}
+.link-button{border:0;background:none;padding:0;color:var(--link);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-size:13px}
+.segmented{display:inline-flex;flex-wrap:wrap;padding:1px 0 0 1px;flex:none;max-width:100%}
+.segmented button{min-height:32px;margin:-1px 0 0 -1px;position:relative;border:2px solid var(--seg-line);background:var(--seg-bg);color:var(--seg-ink);cursor:pointer;font-size:12px;font-weight:700;padding:1px 9px;white-space:nowrap;border-radius:0}
+.segmented button[aria-pressed="true"]{z-index:1;background:var(--seg-on-bg);color:var(--seg-on-ink)}
+.segmented.sm button{min-height:28px;font-size:11.5px;padding:1px 7px}
+.ui-listbar-btn{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:5px 9px;min-height:34px;font:600 13px/1.2 var(--font);cursor:pointer;white-space:nowrap;border-radius:0}
+.ui-listbar-btn:hover{background:var(--ui-soft)}
+.ui-listbar-btn[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.ui-listbar-chip{display:inline-flex;align-items:center;gap:4px;background:var(--ui-soft);border:1.5px solid var(--ui-blue);color:var(--ui-blue);padding:3px 8px;font:700 12px/1.3 var(--font);cursor:pointer;border-radius:0}
+.ui-listbar-chip.off{background:transparent;border-color:var(--line-color);color:var(--muted);text-decoration:line-through}
+.ui-select{appearance:none;border:2px solid var(--ui-ink);border-radius:0;background:var(--ui-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 9px center;color:var(--ui-ink);padding:5px 28px 5px 9px;font:600 13px var(--font);min-height:34px;max-width:100%;min-width:0}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;position:relative;user-select:none;min-height:30px}
+.ui-toggle>input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ui-toggle>i{width:34px;height:20px;border-radius:12px;background:var(--toggle-off);position:relative;flex:none;transition:background .15s}
+.ui-toggle>i::after{content:'';position:absolute;left:3px;top:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:left .15s}
+.ui-toggle>input:checked+i{background:var(--ui-blue)}
+.ui-toggle>input:checked+i::after{left:17px}
+.ui-toggle>input:disabled+i{opacity:.55}
+.ui-toggle>input:focus-visible+i{outline:3px solid rgba(5,93,255,.5);outline-offset:2px}
+.ui-num{display:inline-flex;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);min-height:30px}
+.ui-num input{width:50px;border:0;background:transparent;padding:3px 7px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ui-ink);outline:0}
+.ui-num span{padding:0 7px 0 0;font-size:12px;color:var(--muted)}
+.ui-badge{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.06em;text-transform:uppercase;padding:0 6px;border:1.5px solid var(--ui-ink);white-space:nowrap;vertical-align:1px}
+.ui-badge.is-blue{background:var(--ui-blue);border-color:var(--ui-blue);color:#fff}
+.ui-badge.is-green{border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.ui-badge.is-grey{border-color:var(--line-color);color:var(--muted)}
+.ui-badge.is-orange{border-color:var(--orange);color:var(--orange);background:var(--orange-soft)}
+.lbl{font-size:12px;font-weight:700;white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.card{background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);min-width:0}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px 10px;flex-wrap:wrap;padding:12px 15px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.card-head h3{margin:0;font-size:16px;line-height:1.2}
+.card-head h3 small{color:var(--muted);font-weight:400;font-size:12.5px}
+.card-body{padding:14px 15px}
+.data-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.data-table th{text-align:left;padding:9px 10px;color:var(--on-blue);background:var(--blue);border-bottom:2px solid var(--ink);white-space:nowrap;font-weight:800}
+.data-table td{padding:9px 10px;border-bottom:1px solid var(--line-color);vertical-align:top}
+.data-table tr:hover td{background:var(--blue-soft)}
+.data-table td small{display:block;color:var(--muted);font-size:11.5px}
+.tw{max-width:100%;overflow-x:auto;position:relative}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line-color);background:var(--card-bg);font-size:13px;margin-left:3px;color:var(--ink);cursor:pointer;padding:0;vertical-align:middle}
+.ib:hover{border-color:var(--ui-blue);background:var(--ui-soft)}
+.ib.on{border-color:var(--ui-blue);background:var(--ui-soft)}
+.src a,.srca{font:700 11px var(--font);border:1px solid var(--line-color);padding:1px 6px;color:var(--blue);background:var(--blue-soft);text-decoration:none;white-space:nowrap}
+.toast{position:fixed;left:24px;bottom:24px;z-index:50;display:flex;align-items:center;gap:12px;max-width:min(470px,calc(100vw - 32px));background:var(--toast-bg);color:var(--toast-ink);padding:11px 14px;font:500 14px/1.35 var(--font);box-shadow:5px 5px 0 rgba(5,93,255,.45)}
+.toast button{border:1.5px solid currentColor;background:transparent;color:inherit;font-weight:700;font-size:13px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+
+/* ── la fenêtre de l'app : barre du haut ── */
+.app{border:2px solid var(--topline);background:var(--paper);min-width:0}
+.topbar{display:grid;grid-template-columns:240px minmax(0,1fr);align-items:center;background:var(--topbar);border-bottom:2px solid var(--topline);min-height:72px}
+.brand{height:100%;border-right:2px solid var(--topline);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:end;padding:12px 24px 9px;font-size:12px;line-height:1;letter-spacing:.04em;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;width:130px;height:130px;right:-62px;top:-85px;background:repeating-radial-gradient(circle,var(--blue) 0 1px,transparent 1px 4px);transform:rotate(-8deg)}
+.brand span{background:var(--topbar);border:1px solid var(--blue);color:var(--blue);justify-self:end;padding:3px 5px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand strong{background:var(--blue);color:var(--on-blue);justify-self:start;padding:4px 6px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand small{grid-column:1/-1;font-size:10px;letter-spacing:.18em;align-self:end;text-align:center;color:var(--muted)}
+.main-nav{display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;padding:8px 16px;gap:8px;min-width:0}
+.nav-item{border:2px solid transparent;background:transparent;font-weight:700;padding:6px 12px;white-space:nowrap;line-height:1.1;font-size:15px;color:var(--ink);text-align:left}
+.nav-item span{display:block;font-size:9px;line-height:1;color:var(--blue);letter-spacing:.12em;margin-bottom:4px}
+.nav-item.is-active{background:var(--blue);border-color:var(--ink);color:var(--on-blue);box-shadow:var(--shadow-small)}
+.nav-item.is-active span{color:var(--on-blue)}
+.workspace{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.page{padding:28px 3.5% 34px}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin:0 0 16px}
+.page-header h2{margin:6px 0 0;font-size:clamp(26px,3vw,34px);line-height:1.02;letter-spacing:-.03em}
+.page-header p{margin:6px 0 0;color:var(--muted);font-size:13.5px;max-width:640px}
+.ph-ico{font-size:.86em;margin-right:.19em}
+.page-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ld-source{margin:-4px 0 12px;color:var(--muted);font-size:13px}
+.ld-bar-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ld-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
+.ld-count{font-weight:700;margin-right:4px;font-size:14px}
+.kiosk{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:14px 0 0;padding:9px 0 0}
+
+/* ── modale (app.css .modal) ── */
+.modal{border:3px solid var(--ink);box-shadow:var(--shadow-modal);background:var(--card-bg);min-width:0}
+:root[data-theme="dark"] .modal{border-color:#555}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .modal{border-color:#555}}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.modal-head h2{margin:4px 0 0;font-size:21px;letter-spacing:-.01em}
+.modal-body{padding:14px 18px}
+.modal-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 18px 16px;border-top:1px solid var(--ui-line)}
+.modal-actions .spacer{flex:1}
+.x{border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted);padding:2px 6px}
+</style>
+<style>
+/* ── séries des diagrammes (la palette validée de diagrammes-donnees.html) ── */
+:root{--s1:#257de0;--s2:#f47230;--s3:#00b894;--s4:#f2a600;--s5:#ee7fac;--vz-grid:#e6e8ec;--vz-bg:#fff;--smi-line:#080808;--smi-bg:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--s1:#338ced;--s2:#e76624;--s3:#00a888;--s4:#d28e05;--s5:#e24d8b;--vz-grid:#363636;--vz-bg:#1f1f1f;--smi-line:#444;--smi-bg:#2a2a2a}}
+:root[data-theme="dark"]{--s1:#338ced;--s2:#e76624;--s3:#00a888;--s4:#d28e05;--s5:#e24d8b;--vz-grid:#363636;--vz-bg:#1f1f1f;--smi-line:#444;--smi-bg:#2a2a2a}
+.c1{fill:var(--s1)}.c2{fill:var(--s2)}.c3{fill:var(--s3)}.c4{fill:var(--s4)}.c5{fill:var(--s5)}
+.k1{stroke:var(--s1)}.k2{stroke:var(--s2)}.k3{stroke:var(--s3)}.kg{stroke:var(--vz-grid)}.km{stroke:var(--muted)}
+.gr{fill:var(--vz-grid)}.tx{fill:var(--muted);font:600 9px var(--font)}.tk{fill:var(--ink);font:700 10px var(--font)}
+
+/* ── la maquette autour : l'adresse, le scénario ── */
+.addr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 8px;font-size:12.5px}
+.addr code{font:600 12.5px ui-monospace,Menlo,Consolas,monospace;border:1.5px solid var(--line-color);background:var(--card-bg);padding:3px 8px;overflow-wrap:anywhere}
+.addr .sp{flex:1}
+.scen{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:0 0 10px}
+.note{font-size:13px;color:var(--muted);margin:12px 0 0;max-width:900px}
+.note b{color:var(--ink)}
+
+/* ── la colonne de gauche (app.css : .sidebar, .side-menu-item, .mt-group) ── */
+.shell{display:grid;grid-template-columns:300px minmax(0,1fr);min-width:0}
+.shell.no-side{grid-template-columns:minmax(0,1fr)}
+.shell.no-side .sb{display:none}
+.sb{border-right:2px solid var(--topline);background:var(--card-bg);display:flex;flex-direction:column;min-width:0}
+.sb-top{min-height:98px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 18px 16px 24px;border-bottom:2px solid var(--topline);background:var(--card-head-bg)}
+.sb-top h1{margin:4px 0 0;font-size:24px;line-height:1}
+.icon-button{width:38px;height:38px;border:2px solid var(--smi-line);background:var(--smi-bg);color:var(--ink);cursor:pointer;font-weight:700;font-size:19px;box-shadow:3px 3px 0 rgba(5,93,255,.28);flex:none}
+.icon-button:hover{background:var(--blue);color:var(--on-blue)}
+.sb-content{flex:1;padding:18px;min-width:0}
+.sb-foot{border-top:2px solid var(--topline);padding:12px 18px 14px;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:8px}
+.sb-search{width:100%;margin:0 0 12px;padding:7px 10px;border:2px solid var(--smi-line);background:var(--smi-bg);color:var(--ink);font-size:13px;border-radius:0}
+.side-menu{display:grid;gap:9px}
+.smi{width:100%;text-align:left;border:2px solid var(--smi-line);background:var(--smi-bg);color:var(--ink);padding:10px 12px;cursor:pointer;box-shadow:3px 3px 0 rgba(5,93,255,.18);display:flex;align-items:center;gap:11px;font-weight:700;font-size:14px;transition:.15s ease;min-width:0}
+.smi:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--blue)}
+.smi.is-active{background:var(--blue);color:var(--on-blue);box-shadow:4px 4px 0 var(--ink)}
+.smi .lb{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.smi small{margin-left:auto;color:var(--muted);font-weight:600;font-size:12px;flex:none}
+.smi.is-active small,.smi.is-active .side-number{color:var(--on-blue)}
+.side-number{color:var(--blue);font-size:10px;min-width:22px;flex:none}
+.mt-group{margin:12px 0 0}
+.mt-group>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 4px;font-weight:800;font-size:13px;border-bottom:1px solid var(--line-color)}
+.mt-group>summary::-webkit-details-marker{display:none}
+.mt-group>summary::after{content:'›';margin-left:2px;font-size:16px;transition:transform .15s}
+.mt-group[open]>summary::after{transform:rotate(90deg)}
+.mt-group>summary small{color:var(--muted);font-weight:600;margin-left:auto}
+.mt-group[open]>summary{margin-bottom:9px}
+.mt-gitems{display:grid;gap:9px;padding:0 0 4px}
+.g-more{border:0;background:none;color:var(--muted);font-size:15px;cursor:pointer;padding:0 4px;line-height:1}
+.g-more:hover{color:var(--blue)}
+.sb-add{justify-self:start;margin:0 0 0 2px}
+.smi.is-trash{border-style:dashed}
+
+/* ── la page « Tous mes diagrammes » ── */
+.crumb{display:flex;flex-wrap:wrap;gap:2px 6px;align-items:center}
+.crumb a{color:inherit;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.crumb i{font-style:normal;opacity:.7}
+.bar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:0 0 4px}
+.bar .sp{flex:1}
+.fpanel{border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-small);padding:12px 14px;margin:10px 0 4px;display:grid;gap:10px}
+.fpanel .fr{display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 10px;align-items:start}
+.fpanel .fr>.lbl{padding-top:4px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px}
+.k{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line-color);padding:3px 10px;font-size:12px;background:var(--card-bg);border-radius:999px;color:var(--ink);cursor:pointer;white-space:nowrap;font-weight:600}
+.k:hover{border-color:var(--ui-blue)}
+.k[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);color:var(--ui-blue)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:14px 0 0}
+.dc{position:relative;display:flex;flex-direction:column;border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-btn);min-width:0}
+.dc:hover{box-shadow:var(--shadow-small)}
+.dc.is-sel{outline:3px solid var(--ui-blue);outline-offset:-1px}
+.dc-th{position:relative;border-bottom:1px solid var(--ui-line);background:var(--vz-bg);cursor:pointer}
+.dc-th svg{display:block;width:100%;height:auto}
+.dc-ic{display:grid;place-items:center;height:56px;font-size:26px}
+.dc-star{position:absolute;top:6px;right:6px;width:30px;height:28px;border:1.5px solid var(--line-color);background:var(--card-bg);cursor:pointer;font-size:14px;line-height:1;color:var(--muted);padding:0}
+.dc-star.on{color:var(--s4);border-color:var(--s4)}
+.dc-star:disabled{cursor:default;opacity:.7}
+.dc-ck{position:absolute;top:6px;left:6px;width:30px;height:28px;display:grid;place-items:center;background:var(--card-bg);border:1.5px solid var(--ui-blue)}
+.dc-ck input{width:16px;height:16px;accent-color:var(--ui-blue);margin:0}
+.dc-b{padding:10px 12px 12px;display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}
+.dc-name{border:0;background:none;padding:0;text-align:left;font-weight:800;font-size:14px;line-height:1.25;color:var(--ink);cursor:pointer}
+.dc-name:hover{color:var(--blue);text-decoration:underline}
+.dc-meta{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;font-size:12px;color:var(--muted)}
+.dc-used{font-size:12px;color:var(--muted);border-top:1px dashed var(--line-color);padding:6px 0 0;margin-top:auto}
+.dc-used a,.uln a{color:var(--link);text-underline-offset:2px}
+.dc .dc-more{position:absolute;right:8px;bottom:10px}
+.mini{display:inline-block;width:54px;vertical-align:middle;border:1px solid var(--ui-line);background:var(--vz-bg)}
+.mini svg,.card-body>svg{display:block;width:100%;height:auto}
+.chip-x{font-size:11px;opacity:.75;margin-left:2px}
+.dc-used{padding-right:34px}
+.lt td .mini{margin-right:8px}
+.lt .nm{font-weight:800;border:0;background:none;padding:0;color:var(--ink);cursor:pointer;text-align:left}
+.lt .nm:hover{color:var(--blue);text-decoration:underline}
+.lt td{vertical-align:middle}
+.lt .st{border:0;background:none;cursor:pointer;font-size:15px;color:var(--muted);padding:0}
+.lt .st.on{color:var(--s4)}
+.empty{border:2px dashed var(--line-color);padding:26px 18px;text-align:center;color:var(--muted);margin:14px 0 0}
+.empty b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+.selbar{position:sticky;bottom:12px;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:16px 0 0;padding:10px 12px;background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-modal)}
+.selbar b{font-size:14px;margin-right:4px}
+.selbar .sp{flex:1}
+.trash-row td:first-child{width:60px}
+.kiosk-line{display:flex;gap:8px;align-items:center;font-size:12.5px;padding:8px 11px;background:var(--blue-soft);border-left:4px solid var(--ui-blue);margin:0 0 12px}
+
+/* ── le petit menu « ⋯ » (LCNDA_UI.menuAt) ── */
+.menu{position:fixed;z-index:70;width:270px;max-width:calc(100vw - 32px);background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);padding:6px 0}
+.menu h6{margin:0;padding:4px 12px 6px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow);border-bottom:1px solid var(--ui-line);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.menu button{display:flex;align-items:center;gap:9px;width:100%;border:0;background:none;padding:7px 12px;text-align:left;font-size:13px;cursor:pointer;color:var(--ink)}
+.menu button:hover{background:var(--ui-soft)}
+.menu button .mi{width:18px;text-align:center;flex:none}
+.menu button small{margin-left:auto;color:var(--muted);font-size:11.5px}
+.menu button.danger{color:var(--red)}
+.menu hr{border:0;border-top:1px solid var(--ui-line);margin:5px 0}
+
+/* ── ＋ Nouveau ── */
+.doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:4px 0 18px}
+.door{display:flex;flex-direction:column;gap:4px;text-align:left;border:2px solid var(--card-line);background:var(--card-bg);padding:13px 15px;box-shadow:var(--shadow-btn);cursor:pointer;color:var(--ink);min-width:0}
+.door b{font-size:15px}
+.door small{color:var(--muted);font-size:12.5px;line-height:1.35}
+.door:hover{background:var(--ui-soft)}
+.door[aria-pressed="true"]{border-color:var(--ui-blue);background:var(--ui-soft);box-shadow:inset 0 -4px 0 var(--ui-blue),var(--shadow-btn)}
+.ask{display:flex;gap:8px;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);box-shadow:var(--shadow-small);padding:5px 5px 5px 12px;min-width:0}
+.ask input{flex:1;min-width:0;border:0;background:transparent;font-size:14.5px;outline:0;padding:6px 0}
+.ask .button{box-shadow:none}
+.ex{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0;font-size:12px}
+.ex .lbl,.understood .lbl{color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px}
+.understood{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 0}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:10px 0 0}
+.gt{position:relative;display:flex;flex-direction:column;gap:5px;text-align:left;border:2px solid var(--card-line);background:var(--card-bg);padding:9px 10px 11px;box-shadow:var(--shadow-btn);cursor:pointer;min-width:0;color:var(--ink)}
+.gt:hover{background:var(--ui-soft)}
+.gt[aria-pressed="true"]{border-color:var(--ui-blue);box-shadow:inset 0 -4px 0 var(--ui-blue)}
+.gt svg{width:100%;height:auto;display:block;background:var(--vz-bg);border:1px solid var(--ui-line)}
+.gt b{font-size:13px;line-height:1.25}
+.gt small{font-size:11.5px;color:var(--muted);line-height:1.3}
+.gh{margin:18px 0 0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--eyebrow)}
+.gh small{text-transform:none;letter-spacing:0;color:var(--muted);font-weight:400}
+.panel{border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-small);padding:16px 18px}
+.panel h3{margin:0 0 4px;font-size:16px}
+.panel>p.muted{margin:0 0 12px;font-size:13px}
+.go-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end;border-top:1px solid var(--ui-line);margin:16px 0 0;padding:12px 0 0}
+.go-row .sp{flex:1}
+.map{display:grid;grid-template-columns:90px minmax(0,1fr);gap:8px 10px;align-items:center;max-width:520px;margin:12px 0 0}
+.map .ui-select{width:100%}
+.map .sug{grid-column:2;margin:-4px 0 2px;font-size:11.5px;color:var(--green)}
+.models{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:14px 0 0;font-size:12.5px}
+
+/* ── l'éditeur, dans l'onglet ── */
+.ed{border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-small);min-width:0}
+.ed-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:10px 14px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.ed-top .nm{flex:1 1 240px;min-width:0;border:2px solid var(--ui-line);background:var(--ui-bg);padding:5px 9px;font-weight:700;font-size:14px}
+.ed-top .stat{font-size:12px;font-weight:700;color:var(--green);white-space:nowrap}
+.ed-top .stat.dirty{color:var(--orange)}
+.ed-top .grp{display:inline-flex;gap:6px}
+.ed-body{display:grid;grid-template-columns:400px minmax(0,1fr);min-width:0}
+.ed-side{border-right:2px solid var(--card-line);padding:14px 16px 18px;min-width:0}
+.ed-prev{padding:16px 18px 18px;min-width:0}
+.ed-tabs{margin:0 0 14px}
+.pane h4{margin:12px 0 8px;font-size:13.5px}
+.pane h4:first-child{margin-top:2px}
+.pane .hint{margin:8px 0 0;font-size:12px;color:var(--muted)}
+.rows{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed}
+.rows th{text-align:left;font-size:11px;color:var(--muted);padding:4px 6px;border-bottom:2px solid var(--ui-line);font-weight:700}
+.rows td{padding:3px 4px;border-bottom:1px solid var(--ui-line)}
+.rows input{width:100%;min-width:0;border:1.5px solid transparent;background:transparent;padding:3px 4px;font-size:12.5px}
+.rows input:hover{border-color:var(--ui-line)}
+.opt{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:7px 0;border-bottom:1px dotted var(--ui-line);font-size:13px}
+.opt .lbl{min-width:96px}
+.acc{border:1.5px solid var(--ui-line);margin:0 0 8px}
+.acc>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;padding:9px 12px;font-weight:700;font-size:13px}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary::after{content:'▸';margin-left:auto;color:var(--muted);font-size:12px}
+.acc[open]>summary::after{content:'▾'}
+.acc>summary small{font-weight:400;color:var(--muted);font-size:12px}
+.acc .in{padding:0 12px 11px;display:flex;flex-direction:column;gap:8px;font-size:12.5px}
+.links{list-style:none;margin:0;padding:0}
+.links li{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--ui-line);font-size:13px}
+.links li span{flex:1;min-width:0}
+.links li small{display:block;color:var(--muted);font-size:11.5px}
+.vz{background:var(--vz-bg);border:1px dashed var(--line-color);padding:14px 16px 10px;min-width:0}
+.vz svg{display:block;width:100%;height:auto;overflow:visible}
+.vz-title{font-size:15px;font-weight:800;margin:0}
+.vz-sub{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.vz-leg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0 2px;font-size:12px}
+.vz-leg i{display:inline-block;width:11px;height:11px;margin-right:5px;vertical-align:-1px;border-radius:2px}
+.vz-src{display:flex;flex-wrap:wrap;gap:5px 8px;align-items:center;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:10px 0 0;padding:8px 0 0}
+.uln{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:14px 0 0;padding:10px 12px;border:2px solid var(--card-line);background:var(--card-head-bg);font-size:13px}
+.uln .lbl{text-transform:uppercase;letter-spacing:.08em;font-size:10.5px;color:var(--eyebrow)}
+.uln .sp{flex:1}
+.prev-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:0 0 10px}
+
+/* ── tableaux de la maquette, réglages, questions ── */
+.cmp td:first-child{font-weight:700;width:22%}
+.cmp td small{display:block;color:var(--muted);font-size:11.5px}
+.cmp .now{color:var(--muted)}
+.cmp .new{color:var(--ink)}
+code.k2c{font:600 11.5px ui-monospace,Menlo,Consolas,monospace;background:var(--ui-soft);padding:0 4px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.setrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--ui-line);font-size:13.5px}
+.setrow:last-child{border-bottom:0}
+.setrow small{display:block;color:var(--muted);font-size:12px}
+.setrow>div:last-child{justify-self:end;max-width:100%}
+.catalog-tile{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:10px;align-items:center;border:2px solid var(--card-line);background:var(--card-bg);padding:10px 12px;margin:0 0 10px}
+.catalog-tile .ic{font-size:24px;text-align:center}
+.catalog-tile small{display:block;color:var(--muted);font-size:12px}
+.catalog-tile.dim{opacity:.55}
+.priv ul{margin:0;padding:0;list-style:none}
+.priv li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;padding:9px 0;border-bottom:1px solid var(--ui-line);font-size:13.5px}
+.priv li:last-child{border-bottom:0}
+.priv li small{display:block;color:var(--muted);font-size:12px}
+.exp-line{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;background:var(--yel-soft);color:var(--yel-ink);border-left:4px solid var(--yel-ink);font-size:12.5px;margin:0 0 10px}
+.qs{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.qs li{counter-increment:q;padding:14px 16px}
+.qs li>b{display:block;font-size:15px;margin:0 0 6px}
+.qs li>b::before{content:counter(q) ". ";color:var(--blue)}
+.qs .opt2{font-size:13px;color:var(--muted);margin:0}
+.qs .reco{font-size:13px;margin:9px 0 0;border-left:4px solid var(--green);background:var(--green-soft);padding:7px 11px}
+.nav-plus{border:2px dashed var(--line-color);background:transparent;color:var(--muted);font-weight:700;padding:6px 10px;font-size:15px;flex:none}
+
+@media (max-width:1180px){
+  .ed-body{grid-template-columns:340px minmax(0,1fr)}
+  .shell{grid-template-columns:260px minmax(0,1fr)}
+}
+@media (max-width:980px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .sb{border-right:0;border-bottom:2px solid var(--topline)}
+  .sb-content{max-height:420px;overflow:auto}
+  .ed-body{grid-template-columns:minmax(0,1fr)}
+  .ed-side{border-right:0;border-bottom:2px solid var(--card-line)}
+  .qs,.two{grid-template-columns:minmax(0,1fr)}
+  .doors{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  body{padding:16px 16px 40px}
+  .topbar{grid-template-columns:minmax(0,1fr);min-height:0}
+  .brand{border-right:0;border-bottom:2px solid var(--topline);height:50px;padding:10px 100px 8px}
+  .brand small{display:none}
+  .main-nav{padding:8px 10px}
+  .nav-item{font-size:13px;padding:5px 8px}
+  .page{padding:18px 12px 22px}
+  .page-header h2{font-size:25px}
+  .sec{margin-top:36px}
+  .sec-h h2{font-size:21px}
+  .sb-top{min-height:0;padding:12px 14px}
+  .sb-top h1{font-size:20px}
+  .sb-content{padding:12px 14px;max-height:340px}
+  .sb-foot{padding:10px 14px 12px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .dc-b{padding:8px 9px 10px}
+  .dc-name{font-size:13px}
+  .dc-used{display:none}
+  .dc .dc-more{bottom:6px;right:6px}
+  .dc-meta:nth-of-type(2){padding-right:30px}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .gt small{display:none}
+  .fpanel .fr{grid-template-columns:minmax(0,1fr)}
+  .fpanel .fr>.lbl{padding-top:0}
+  .ed-side{padding:12px}
+  .ed-prev{padding:12px}
+  .ed-top{padding:9px 12px}
+  .vz{padding:10px 10px 8px}
+  .panel{padding:12px}
+  .map{grid-template-columns:72px minmax(0,1fr)}
+  .card-body{padding:12px}
+  .lt .hide-m{display:none}
+  .setrow{grid-template-columns:minmax(0,1fr)}
+  .setrow>div:last-child{justify-self:start}
+  .toast{left:16px;right:16px;bottom:16px}
+  .selbar>.button{order:2}
+  .selbar>.x{order:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mock">
+    <div>
+      <span class="eyebrow"><span class="tag-new">Maquette</span>à valider · tel que dans l’app</span>
+      <h1>📈 Un onglet Diagrammes, où tout reste dedans</h1>
+      <p>Un onglet du haut, <b>caché au départ</b> (on l’allume comme 📊 Données). On y crée un diagramme, on retrouve ceux qu’on a faits, on les range, on les ouvre, on les exporte — <b>sans être envoyé dans Graphiques ni ailleurs</b>. C’est le même outil qu’aujourd’hui (le même éditeur, la même galerie de plus de 100 types, « Je veux représenter… », « 📊 Partir des données », ⭐ modèles, « Tenir à jour ») : seul l’endroit change. Familles inventées MAZAUD (Tulle), LACOMBE (Nice), DURAND (Salon-de-Provence) ; les événements sont vrais, les nombres marqués « exemple ».</p>
+      <div class="path" aria-label="Où c’est dans l’app"><span>Réglages → Menus</span><i>ou</i><span>＋ Ajouter un onglet</span><i>→</i><span class="on">03 📈 Diagrammes</span></div>
+    </div>
+    <span class="segmented" role="group" aria-label="Thème"><button type="button" data-theme-set="auto" aria-pressed="true">Auto</button><button type="button" data-theme-set="light" aria-pressed="false">Clair</button><button type="button" data-theme-set="dark" aria-pressed="false">Sombre</button></span>
+  </div>
+
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#s1">1 · Tous mes diagrammes</a><a href="#s2">2 · ＋ Nouveau</a><a href="#s3">3 · L’éditeur, dans l’onglet</a><a href="#s4">4 · ⚙ Réglages de l’onglet</a><a href="#s5">5 · Allumer l’onglet</a><a href="#s6">6 · Ce qui change</a><a href="#s7">7 · Vie privée, consultation</a><a href="#qs">? Questions <small>6</small></a>
+  </nav>
+
+  <!-- ═══════════ 1 · Accueil ═══════════ -->
+  <section class="sec" id="s1" aria-labelledby="s1h" style="margin-top:0">
+    <div class="sec-h"><span class="eyebrow">1 · L’accueil de l’onglet</span><h2 id="s1h">« Tous mes diagrammes »</h2>
+      <p>À gauche, la colonne comme dans les autres onglets : ＋ Nouveau, tout, puis des groupes qui se replient. À droite, les vignettes (ou la liste), un tri, un filtre. Chaque diagramme dit où il est posé. Clique : la colonne, ⭐, ⋯, « Filtrer ▾ », « ☑ Choisir », Vignettes | Liste.</p></div>
+    <div class="scen"><span class="lbl">Voir :</span><span class="segmented sm" role="group" aria-label="Scénario" data-scen><button type="button" data-s="normal" aria-pressed="true">Normal</button><button type="button" data-s="multi" aria-pressed="false">Choix multiple</button><button type="button" data-s="kiosk" aria-pressed="false">Mode consultation</button></span></div>
+    <div class="addr"><span class="lbl">Adresse</span><code data-addr>#diagrammes</code><span class="sp"></span><span class="muted small">← → du navigateur : on revient à l’écran d’avant</span></div>
+    <div class="app" data-app="home">
+      <div class="topbar" data-topbar></div>
+      <div class="shell"><aside class="sb" data-sb aria-label="Colonne Diagrammes"></aside>
+        <div class="workspace"><section class="page" data-home></section></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 2 · Nouveau ═══════════ -->
+  <section class="sec" id="s2" aria-labelledby="s2h">
+    <div class="sec-h"><span class="eyebrow">2 · Créer</span><h2 id="s2h">＋ Nouveau, sans fenêtre par-dessus</h2>
+      <p>Trois portes, dans la page : dire en mots simples ce qu’on veut montrer, choisir un dessin (les conseillés d’abord, puis « Tous »), ou partir des données de l’app. Ensuite l’éditeur s’ouvre <b>ici</b>, en grand.</p></div>
+    <div class="addr"><span class="lbl">Adresse</span><code data-addr2>#diagrammes/nouveau</code></div>
+    <div class="app">
+      <div class="topbar" data-topbar></div>
+      <div class="shell"><aside class="sb" data-sb2 aria-label="Colonne Diagrammes"></aside>
+        <div class="workspace"><section class="page">
+          <header class="page-header"><div><span class="eyebrow crumb"><a href="#s1">Diagrammes</a><i>›</i><span>Nouveau</span></span><h2><span class="ph-ico">＋</span>Nouveau diagramme</h2><p>Choisis une façon de commencer. Tu pourras tout changer ensuite (le dessin, les chiffres, les couleurs).</p></div>
+            <div class="page-actions"><a class="button secondary" href="#s1">← Mes diagrammes</a></div></header>
+          <div class="doors" role="group" aria-label="Comment commencer" data-doors>
+            <button type="button" class="door" data-door="ask" aria-pressed="true"><b>💬 Je veux représenter…</b><small>Tu l’écris en mots simples, l’app propose les bons dessins.</small></button>
+            <button type="button" class="door" data-door="gal" aria-pressed="false"><b>🖼 Choisir un dessin</b><small>Les 5 conseillés d’abord, puis tous (112, exemple). Il arrive avec un exemple à remplacer.</small></button>
+            <button type="button" class="door" data-door="data" aria-pressed="false"><b>📊 Partir des données</b><small>Ton arbre, une liste de données ou une question : les chiffres viennent de l’app.</small></button>
+          </div>
+          <div data-doorpane></div>
+        </section></div></div>
+    </div>
+    <p class="note">Le nombre de dessins conseillés (ici 5) est le réglage qui existe déjà (<code class="k2c">genealogie-diagrammes-conseilles</code>, de 3 à 12 ou « Tous ») ; on le retrouve dans ⚙ de l’onglet. « ⚙ Ranger les types » ouvre le rangement du catalogue qui existe déjà (ordre, types cachés, groupes à soi).</p>
+  </section>
+
+  <!-- ═══════════ 3 · Éditeur ═══════════ -->
+  <section class="sec" id="s3" aria-labelledby="s3h">
+    <div class="sec-h"><span class="eyebrow">3 · Modifier</span><h2 id="s3h">L’éditeur, en pleine largeur dans l’onglet</h2>
+      <p>Le même éditeur qu’aujourd’hui (Données, Réglages, ⚙️ Personnaliser, 📊 Partir des données, Relier), mais dans la page et non plus dans une fenêtre. La colonne de gauche se range pour laisser la place ; « ← Mes diagrammes » revient à la liste. Enregistré tout seul, ↶ ↷ pour défaire et refaire.</p></div>
+    <div class="scen"><span class="lbl">Arrivé par :</span><span class="segmented sm" role="group" aria-label="Arrivé par" data-arrive><button type="button" data-a="open" aria-pressed="true">Ouvrir un diagramme</button><button type="button" data-a="new" aria-pressed="false">＋ Nouveau</button></span></div>
+    <div class="addr"><span class="lbl">Adresse</span><code data-addr3>#diagrammes/12</code></div>
+    <div class="app">
+      <div class="topbar" data-topbar></div>
+      <div class="shell no-side"><aside class="sb"></aside>
+        <div class="workspace"><section class="page" data-editor></section></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 4 · Réglages ═══════════ -->
+  <section class="sec" id="s4" aria-labelledby="s4h">
+    <div class="sec-h"><span class="eyebrow">4 · ⚙ dans l’en-tête de l’onglet</span><h2 id="s4h">Les réglages de l’onglet</h2>
+      <p>Peu de réglages, tous ici (et aussi dans Réglages → Diagrammes, c’est le même). Rien n’est obligatoire : les valeurs de départ conviennent.</p></div>
+    <div class="modal" style="max-width:640px" role="group" aria-label="Réglages de l’onglet Diagrammes">
+      <div class="modal-head"><div><span class="eyebrow">Diagrammes</span><h2>⚙ Réglages de l’onglet</h2></div><button type="button" class="x" aria-label="Fermer">×</button></div>
+      <div class="modal-body">
+        <div class="setrow"><div><b>Vue de départ</b><small>Comment s’affiche « Tous mes diagrammes ».</small></div><div><span class="segmented sm" role="group" aria-label="Vue de départ" data-seg><button type="button" aria-pressed="true">▦ Vignettes</button><button type="button" aria-pressed="false">☰ Liste</button></span></div></div>
+        <div class="setrow"><div><b>En ouvrant l’onglet</b><small>Ce qu’on voit en arrivant.</small></div><div><select class="ui-select" aria-label="En ouvrant l’onglet"><option>Tous mes diagrammes</option><option>Les récents</option><option>Le dernier ouvert</option></select></div></div>
+        <div class="setrow"><div><b>Types conseillés</b><small>Combien de dessins proposés d’abord, dans « ＋ Nouveau » et « 📊 Partir des données ».</small></div><div><select class="ui-select" aria-label="Types conseillés"><option>3</option><option>4</option><option selected>5</option><option>6</option><option>8</option><option>10</option><option>12</option><option>Tous</option></select></div></div>
+        <div class="setrow"><div><b>Dossier par défaut</b><small>Où se range un nouveau diagramme.</small></div><div><select class="ui-select" aria-label="Dossier par défaut"><option>Le dossier ouvert (sinon : sans dossier)</option><option>Sans dossier</option><option>📁 Famille MAZAUD</option><option>📁 Famille LACOMBE</option><option>📁 Famille DURAND</option></select></div></div>
+        <div class="setrow"><div><b>Montrer les vignettes</b><small>Éteint : une icône à la place du dessin (plus rapide sur un vieil ordinateur).</small></div><div><label class="ui-toggle"><input type="checkbox" checked><i></i><span class="sr">Montrer les vignettes</span></label></div></div>
+        <div class="setrow"><div><b>Demander avant de supprimer</b><small>Éteint au départ : un diagramme supprimé va à la 🗑 Corbeille (30 jours) et « ↶ Annuler » le remet.</small></div><div><label class="ui-toggle"><input type="checkbox"><i></i><span class="sr">Demander avant de supprimer</span></label></div></div>
+        <div class="setrow"><div><b>Montrer aussi mes graphiques</b><small>Ceux de l’Éditeur de graphiques (Réglages), mêlés aux diagrammes, avec 📈. Voir la question 4.</small></div><div><label class="ui-toggle"><input type="checkbox"><i></i><span class="sr">Montrer aussi mes graphiques</span></label></div></div>
+      </div>
+      <div class="modal-actions"><button type="button" class="link-button">↺ Valeurs de départ</button><span class="spacer"></span><button type="button" class="button secondary">Fermer</button></div>
+    </div>
+    <p class="note">Gardés dans un seul réglage qui suit la base (<code class="k2c">genealogie-diagrammes-onglet</code>) ; les ⭐ et les dossiers aussi (les dossiers sont ceux qui existent déjà : <code class="k2c">genealogie-side-folders</code>, partie « diagram »). Les « récents » restent sur ce navigateur.</p>
+  </section>
+
+  <!-- ═══════════ 5 · Allumer ═══════════ -->
+  <section class="sec" id="s5" aria-labelledby="s5h">
+    <div class="sec-h"><span class="eyebrow">5 · Caché au départ</span><h2 id="s5h">Allumer l’onglet, comme 📊 Données</h2>
+      <p>Deux portes qui existent déjà. Éteint, rien ne change : les diagrammes restent dans Graphiques → « Mes diagrammes ». Il prend le numéro 03, à côté de Graphiques.</p></div>
+    <div class="two">
+      <div class="card"><div class="card-head"><h3>Réglages → Menus <small>· la liste des onglets</small></h3></div>
+        <div class="card-body">
+          <div class="catalog-tile"><span class="ic">📊</span><div><b>03 · Graphiques</b><small>Arbres, éventails, statistiques, Mes diagrammes.</small></div><label class="ui-toggle"><input type="checkbox" checked disabled><i></i><span class="sr">Graphiques</span></label></div>
+          <div class="catalog-tile"><span class="ic">📈</span><div><b>03 · Diagrammes <span class="ui-badge is-blue">nouveau</span></b><small>Créer, retrouver, ranger tes diagrammes. Caché au départ.</small></div><label class="ui-toggle"><input type="checkbox" data-tab-on><i></i><span class="sr">Montrer l’onglet Diagrammes</span></label></div>
+          <div class="catalog-tile dim"><span class="ic">📊</span><div><b>05 · Données</b><small>Le récap des listes de données.</small></div><label class="ui-toggle"><input type="checkbox"><i></i><span class="sr">Données</span></label></div>
+        </div></div>
+      <div class="card"><div class="card-head"><h3>＋ Ajouter un onglet <small>· le ＋ au bout du menu</small></h3></div>
+        <div class="card-body">
+          <div class="catalog-tile"><span class="ic">📈</span><div><b>Diagrammes <span class="ui-badge is-green">conseillé</span></b><small>Hémicycles, frises de vies, pyramides des âges, flux… tous tes diagrammes au même endroit, sans quitter l’onglet.</small></div><button type="button" class="button small" data-tab-add>Ajouter</button></div>
+          <p class="small muted" style="margin:6px 0 0">Ajouté ici, il n’est jamais recaché par un changement d’usage (<code class="k2c">genealogie-menu-added</code>), comme Données. Caché : <code class="k2c">genealogie-menu-hidden</code> le contient au départ.</p>
+        </div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 6 · Ce qui change ═══════════ -->
+  <section class="sec" id="s6" aria-labelledby="s6h">
+    <div class="sec-h"><span class="eyebrow">6 · Avant / après</span><h2 id="s6h">Ce qui change : plus d’envoi ailleurs</h2>
+      <p>Aujourd’hui, l’outil vit dans Graphiques et s’ouvre dans des fenêtres par-dessus ; plusieurs gestes font sauter vers Graphiques, Réglages ou Listes. Onglet allumé, tout ce qui suit reste dans 📈 Diagrammes.</p></div>
+    <div class="card"><div class="tw"><table class="data-table cmp">
+      <thead><tr><th>Geste</th><th>Aujourd’hui</th><th>Avec l’onglet</th></tr></thead>
+      <tbody>
+        <tr><td>Créer un diagramme</td><td class="now">Une fenêtre « Nouveau diagramme » (galerie), puis une 2<sup>e</sup> fenêtre pour l’éditeur, par-dessus l’onglet où l’on est.<small>chooseType() puis openEditor() : &lt;dialog&gt;</small></td><td class="new">Page « ＋ Nouveau » puis l’éditeur, dans l’onglet. <code class="k2c">#diagrammes/nouveau</code></td></tr>
+        <tr><td>Ouvrir un diagramme posé (fiche, widget, enquête)</td><td class="now">Ferme les fenêtres ouvertes et <b>saute dans Graphiques</b> → Mes diagrammes.<small>openInGraphs() : setModule('graphiques')</small></td><td class="new">Ouvre <code class="k2c">#diagrammes/12</code> ; ← du navigateur ramène à la fiche.</td></tr>
+        <tr><td>Enregistrer, Dupliquer, Importer, Supprimer</td><td class="now">Recharge Graphiques (on y est renvoyé si on y était).<small>afterSave(), data-dg-dup, data-dg-del, importFile()</small></td><td class="new">On reste sur le diagramme ; enregistré tout seul ; Supprimer = 🗑 Corbeille + ↶ Annuler (aujourd’hui : effacé pour de bon après une question).</td></tr>
+        <tr><td>Retrouver tous ses diagrammes</td><td class="now">La colonne de Graphiques (avec 📁 dossiers), ou <b>Listes → Graphiques et diagrammes</b>.</td><td class="new">« 🗂 Tous mes diagrammes », ⭐, 🕘, 📁, 🔄 / 📌, 🧩, 🗑 — un seul endroit.</td></tr>
+        <tr><td>Le poser ailleurs</td><td class="now">Un texte qui renvoie à <b>Réglages → Éditeur de widgets</b>, à une Fiche, à « Relier », à la mise en page ; « Poser dans → Tableau de bord » ne fait qu’afficher ce conseil.</td><td class="new">« 📄 Poser dans… » le fait depuis l’onglet (fiche, récap, tableau de bord, Studio) ; « Utilisé dans » montre où il est.</td></tr>
+        <tr><td>Un « 📈 de mes graphiques » posé comme diagramme</td><td class="now">« Modifier » ouvre l’<b>Éditeur de graphiques</b> (Réglages).<small>followId() → ext.editMyGraph()</small></td><td class="new">Reste ainsi (c’est un autre outil) ; le bouton dit « ↗ Ouvrir dans l’Éditeur de graphiques ». Voir question 4.</td></tr>
+        <tr><td>Aller vers ce qui est relié</td><td class="now">Fiche d’une personne, enquête, Atelier : on quitte l’outil.</td><td class="new">Pareil, mais voulu (un lien ↗ dans « Utilisé dans ») ; ← revient au diagramme.</td></tr>
+      </tbody></table></div></div>
+  </section>
+
+  <!-- ═══════════ 7 · Vie privée ═══════════ -->
+  <section class="sec" id="s7" aria-labelledby="s7h">
+    <div class="sec-h"><span class="eyebrow">7 · Ce qui sort, qui peut toucher</span><h2 id="s7h">Vie privée et mode consultation</h2></div>
+    <div class="two priv">
+      <div class="card"><div class="card-head"><h3>🔒 Ce qui sort de l’app</h3></div><div class="card-body">
+        <div class="exp-line">⚠ Export de « Prénoms des DURAND » : 4 personnes vivantes retirées (exemple). Le fichier garde ses chiffres et sa date.</div>
+        <ul>
+          <li><span>🧑</span><span>Pas de personne vivante dans un PNG, SVG, PDF, fichier, Studio, Présentation, panier partagé.<small>La règle qui existe déjà pour « 📊 Partir des données » (frozen, share) vaut pour tout l’onglet, export groupé compris.</small></span></li>
+          <li><span>📌</span><span>Ce qui part est figé : les chiffres du jour, la date, la source.</span></li>
+          <li><span>🗑</span><span>La corbeille ne s’exporte pas, ne se partage pas.</span></li>
+        </ul></div></div>
+      <div class="card"><div class="card-head"><h3>👀 Mode consultation</h3></div><div class="card-body">
+        <ul>
+          <li><span>👁</span><span>On voit, on ouvre, on exporte (sans vivants).<small>L’éditeur s’ouvre en lecture : pas de champ, pas de ↶ ↷.</small></span></li>
+          <li><span>🚫</span><span>Pas de ＋ Nouveau, pas de ⭐, pas de dossier à créer ou ranger, pas de « Réordonner », pas de corbeille.<small>Le ⋯ ne garde que Ouvrir et Exporter.</small></span></li>
+          <li><span>🔗</span><span>Les liens #diagrammes/… marchent aussi, en lecture.</span></li>
+        </ul>
+        <p class="small muted" style="margin:8px 0 0">Essaie « Mode consultation » en haut de la partie 1.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ Questions ═══════════ -->
+  <section class="sec" id="qs" aria-labelledby="qsh">
+    <div class="sec-h"><span class="eyebrow">À toi de choisir</span><h2 id="qsh">6 questions, avec ce que je te conseille</h2></div>
+    <ol class="qs">
+      <li class="card"><b>Graphiques garde-t-il sa partie « Mes diagrammes » ?</b><p class="opt2">Garder les deux, ou faire mener Graphiques vers l’onglet.</p><p class="reco">✅ Je conseille : onglet éteint, rien ne bouge. Onglet allumé, Graphiques garde la liste, mais tout s’ouvre dans 📈 Diagrammes (comme Listes et Données : « les deux », un seul endroit pour travailler).</p></li>
+      <li class="card"><b>Les dossiers : les mêmes que dans Graphiques ?</b><p class="opt2">Mêmes dossiers partout, ou des dossiers propres à l’onglet.</p><p class="reco">✅ Les mêmes (le rangement qui existe déjà, 3 niveaux). Un diagramme est dans un seul dossier ; ⭐ Favoris en plus, pour ce qu’on ouvre souvent.</p></li>
+      <li class="card"><b>Qu’est-ce qu’on voit en ouvrant l’onglet ?</b><p class="opt2">Tous en vignettes, en liste, ou le dernier ouvert.</p><p class="reco">✅ « Tous mes diagrammes », en vignettes, les plus récents d’abord. Le dernier ouvert se retrouve en tête des 🕘 Récents.</p></li>
+      <li class="card"><b>Montrer aussi les graphiques de l’Éditeur de graphiques ?</b><p class="opt2">Ce sont d’autres objets (Réglages → Éditeur de graphiques).</p><p class="reco">✅ Non au départ, une case dans ⚙ pour qui veut. Ceux déjà posés comme diagramme (📈) sont là de toute façon.</p></li>
+      <li class="card"><b>Supprimer : corbeille ou question ?</b><p class="opt2">Aujourd’hui : une question, puis effacé pour de bon (et retiré des fiches où il était posé).</p><p class="reco">✅ 🗑 Corbeille 30 jours + ↶ Annuler, sans question. Là où il était posé : « Diagramme à la corbeille — Remettre ».</p></li>
+      <li class="card"><b>Listes → « Graphiques et diagrammes » : on garde ?</b><p class="opt2">C’est une liste comme les autres, avec la barre commune.</p><p class="reco">✅ On garde ; chaque ligne ouvre dans 📈 Diagrammes quand l’onglet est allumé.</p></li>
+    </ol>
+  </section>
+</div>
+<div class="toast" data-toast hidden role="status"><span data-toast-msg></span><button type="button" data-toast-undo>↶ Annuler</button></div>
+<div class="menu" data-menu hidden role="menu"></div>
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+
+/* ── thème ── */
+$$('[data-theme-set]').forEach(b => b.addEventListener('click', () => {
+  const v = b.dataset.themeSet; if (v === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.dataset.theme = v;
+  $$('[data-theme-set]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+}));
+$$('[data-seg]').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('button', g).forEach(x => x.setAttribute('aria-pressed', String(x === b))); }));
+
+/* ── vignettes (SVG, couleurs par classes : les variables marchent en clair et en sombre) ── */
+const W = 240, H = 120;
+const svg = inner => `<svg viewBox="0 0 ${W} ${H}" role="img" aria-hidden="true" focusable="false"><rect width="${W}" height="${H}" fill="none"/>${inner}</svg>`;
+const TH = {
+  columns: () => svg([3, 5, 8, 6, 9, 7, 4].map((v, i) => `<rect class="${i === 4 ? 'c2' : 'c1'}" x="${24 + i * 28}" y="${104 - v * 9}" width="18" height="${v * 9}"/>`).join('') + '<line class="kg" x1="16" x2="224" y1="104" y2="104" stroke-width="1.5"/>'),
+  bars: () => svg([150, 118, 92, 60, 38].map((v, i) => `<rect class="gr" x="24" y="${16 + i * 19}" width="40" height="5"/><rect class="${i ? 'c1' : 'c2'}" x="70" y="${12 + i * 19}" width="${v}" height="12"/>`).join('')),
+  line: () => svg('<line class="kg" x1="16" x2="224" y1="100" y2="100" stroke-width="1.5"/><polyline class="k1" fill="none" stroke-width="3" points="20,78 60,70 100,74 140,52 180,44 220,30"/><polyline class="k2" fill="none" stroke-width="3" points="20,90 60,84 100,80 140,70 180,62 220,58"/>' + [[20, 78], [60, 70], [100, 74], [140, 52], [180, 44], [220, 30]].map(([x, y]) => `<circle class="c1" cx="${x}" cy="${y}" r="3.5"/>`).join('')),
+  donut: () => { const C = 2 * Math.PI * 38; let o = 0; return svg([.46, .27, .17, .1].map((p, i) => { const s = `<circle cx="120" cy="60" r="38" fill="none" class="k${(i % 3) + 1}" stroke-width="20" stroke-dasharray="${p * C} ${C}" stroke-dashoffset="${-o * C}" transform="rotate(-90 120 60)"${i === 3 ? ' style="stroke:var(--s4)"' : ''}/>`; o += p; return s; }).join('')); },
+  pyramid: () => svg([18, 26, 34, 40, 44, 38, 30, 20, 12].map((v, i) => { const y = 10 + i * 11; const r = [14, 22, 30, 42, 48, 44, 36, 26, 16][i]; return `<rect class="c1" x="${118 - v * 2}" y="${y}" width="${v * 2}" height="9"/><rect class="c2" x="122" y="${y}" width="${r * 2}" height="9"/>`; }).join('') + '<line class="km" x1="120" x2="120" y1="6" y2="112" stroke-width="1"/>'),
+  timeline: () => svg([[20, 140, 'c1'], [34, 168, 'c2'], [80, 200, 'c1'], [96, 210, 'c2'], [138, 222, 'c1'], [150, 226, 'c2']].map(([a, b, c], i) => `<rect class="${c}" x="${a}" y="${12 + i * 16}" width="${b - a}" height="10" rx="2"/>`).join('') + '<line class="km" x1="110" x2="110" y1="6" y2="112" stroke-width="1" stroke-dasharray="3 3"/><line class="km" x1="190" x2="190" y1="6" y2="112" stroke-width="1" stroke-dasharray="3 3"/>'),
+  parliament: () => { let out = '', k = 0; const rows = [[44, 9], [58, 12], [72, 15], [86, 18], [100, 21]]; const tot = rows.reduce((s, r) => s + r[1], 0); rows.forEach(([r, n]) => { for (let j = 0; j < n; j++) { const a = Math.PI - (j + .5) * Math.PI / n; const x = 120 + r * Math.cos(a), y = 108 - r * Math.sin(a); const f = (j + .5) / n; out += `<circle class="${f < .93 ? 'c1' : 'c2'}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.6"/>`; k++; } }); return svg(out); },
+  treemap: () => svg('<rect class="c1" x="12" y="10" width="110" height="100"/><rect class="c2" x="126" y="10" width="102" height="54"/><rect class="c3" x="126" y="68" width="56" height="42"/><rect style="fill:var(--s4)" x="186" y="68" width="42" height="42"/><text class="tk" x="20" y="26" style="fill:#fff">Armurier</text><text class="tk" x="134" y="26" style="fill:#fff">Cultivateur</text>'),
+  sankey: () => svg('<rect class="c1" x="18" y="14" width="12" height="92"/><rect class="c2" x="210" y="10" width="12" height="44"/><rect class="c3" x="210" y="60" width="12" height="26"/><rect style="fill:var(--s4)" x="210" y="92" width="12" height="18"/><path class="k2" fill="none" stroke-width="40" stroke-opacity=".45" d="M30 34 C120 34 120 32 210 32"/><path class="k3" fill="none" stroke-width="24" stroke-opacity=".45" d="M30 70 C120 70 120 73 210 73"/><path style="stroke:var(--s4)" fill="none" stroke-width="16" stroke-opacity=".45" d="M30 96 C120 96 120 101 210 101"/>'),
+  words: () => svg([['Marius', 120, 52, 26, 'c1'], ['Rose', 62, 82, 18, 'c2'], ['Jean', 182, 84, 17, 'c3'], ['Marie', 52, 34, 15, 'c2'], ['Fernand', 140, 24, 12, 'c1'], ['Léonie', 120, 102, 13, 'c3']].map(([t, x, y, s, c]) => `<text class="${c}" x="${x}" y="${y}" text-anchor="middle" style="font:800 ${s}px var(--font)">${t}</text>`).join('')),
+  map: () => svg('<path class="gr" d="M70 14 L150 10 L196 34 L206 76 L176 108 L112 112 L64 92 L44 54 Z"/>' + [[160, 88, 12], [140, 80, 7], [176, 70, 6], [124, 94, 5], [150, 62, 4]].map(([x, y, r], i) => `<circle class="${i ? 'c1' : 'c2'}" cx="${x}" cy="${y}" r="${r}" fill-opacity=".8"/>`).join('')),
+  waffle: () => { let o = ''; for (let i = 0; i < 50; i++) { const x = 46 + (i % 10) * 15, y = 22 + Math.floor(i / 10) * 15; o += `<rect class="${i < 31 ? 'c1' : i < 40 ? 'c2' : 'gr'}" x="${x}" y="${y}" width="12" height="12"/>`; } return svg(o); },
+  box: () => svg([[50, 30, 70, 90, 'c1'], [120, 24, 60, 84, 'c2'], [190, 36, 74, 96, 'c1']].map(([x, a, b, c, k]) => `<line class="km" x1="${x}" x2="${x}" y1="14" y2="108" stroke-width="1.5"/><rect class="${k}" x="${x - 16}" y="${a + 10}" width="32" height="${b - a + 20}"/><line x1="${x - 16}" x2="${x + 16}" y1="${(a + b) / 2 + 14}" y2="${(a + b) / 2 + 14}" stroke="#fff" stroke-width="2"/>`).join('')),
+  stacked: () => svg([[30, 40], [50, 30], [42, 44], [60, 26], [34, 50], [46, 36]].map(([a, b], i) => `<rect class="c1" x="${26 + i * 33}" y="${104 - a}" width="22" height="${a}"/><rect class="c2" x="${26 + i * 33}" y="${104 - a - b}" width="22" height="${b}"/>`).join('')),
+  family: () => svg('<g class="km" stroke-width="1.5" fill="none"><path d="M120 34 V48 M64 48 H176 M64 48 V62 M120 48 V62 M176 48 V62"/></g><rect class="c1" x="96" y="14" width="48" height="20"/><rect class="c2" x="40" y="62" width="48" height="20"/><rect class="c1" x="96" y="62" width="48" height="20"/><rect class="c2" x="152" y="62" width="48" height="20"/><rect class="gr" x="40" y="92" width="48" height="16"/><rect class="gr" x="152" y="92" width="48" height="16"/>')
+};
+const thumb = k => (TH[k] || TH.columns)();
+
+/* ── les données (exemple) ── */
+const KIND = {timeline: ['🗓️', 'Frise de vies', 'Frises'], pyramid: ['🔺', 'Pyramide des âges', 'Famille'], bars: ['📊', 'Barres', 'Barres et colonnes'], sankey: ['🔀', 'Flux', 'Flux'], treemap: ['🧱', 'Mosaïque', 'Parts'], parliament: ['🏛️', 'Hémicycle', 'Assemblées'], words: ['☁️', 'Nuage de mots', 'Mots'], map: ['🗺️', 'Carte à points', 'Cartes'], line: ['📈', 'Courbe', 'Courbes'], columns: ['📶', 'Colonnes', 'Barres et colonnes'], donut: ['🍩', 'Anneau', 'Parts'], waffle: ['🧇', 'Gaufre', 'Parts']};
+const SRC = {arbre: '🌳 Mon arbre', liste: '📋 Une liste', question: '💬 Une question', main: '✍️ À la main'};
+const FOLD = {f1: 'Famille MAZAUD', f2: 'Famille LACOMBE', f3: 'Famille DURAND', f4: 'Guerres et événements'};
+const USE = {fichep: '👤 Fiche d’une personne', fiche: '📒 Fiche', recap: '📊 Récap des données', studio: '🎬 Studio', pres: '🖥 Présentation', dash: '🏠 Tableau de bord', enq: '🔎 Enquête', none: 'Posé nulle part'};
+const DG = [
+  {id: 12, name: 'Frise de vies — les LACOMBE de Nice', kind: 'timeline', src: 'arbre', live: true, f: 'f2', fav: true, t: 1, upd: 'aujourd’hui, 10 h 42', who: 'Honoré LACOMBE', used: [['fichep', '👤 Honoré LACOMBE'], ['studio', '🎬 scène « Nice 1860 »']]},
+  {id: 9, name: 'Pyramide des âges au décès — MAZAUD', kind: 'pyramid', src: 'arbre', live: true, f: 'f1', fav: true, t: 2, upd: 'hier', who: 'Jean MAZAUD', used: [['recap', '📊 Récap des données']]},
+  {id: 15, name: 'Morts pour la France, 1914–1918', kind: 'bars', src: 'liste', srcd: '⚔️ Guerres et soldats › Morts pour la France', live: true, f: 'f4', fav: false, t: 3, upd: 'il y a 3 jours', who: '', used: [['fiche', '📒 « La Grande Guerre à Tulle »'], ['dash', '🏠 Tableau de bord']]},
+  {id: 7, name: 'De Tulle à Paris : les départs', kind: 'sankey', src: 'arbre', live: false, f: 'f1', fav: false, t: 4, upd: 'il y a 1 semaine', who: 'Jean MAZAUD', used: [['pres', '🖥 « Cousinade 2026 »']]},
+  {id: 18, name: 'Métiers des MAZAUD à Tulle', kind: 'treemap', src: 'question', srcd: '« les métiers des MAZAUD à Tulle »', live: true, f: 'f1', fav: false, t: 5, upd: 'il y a 1 semaine', who: '', used: []},
+  {id: 4, name: 'Plébiscite de Nice, avril 1860', kind: 'parliament', src: 'liste', srcd: '🗳️ Votes et élections', live: false, f: 'f2', fav: false, t: 6, upd: 'il y a 2 semaines', who: '', used: [['fiche', '📒 « Nice devient française »']]},
+  {id: 21, name: 'Prénoms des DURAND', kind: 'words', src: 'arbre', live: true, f: 'f3', fav: true, t: 7, upd: 'il y a 3 semaines', who: 'Marius DURAND', used: [['fichep', '👤 Marius DURAND']]},
+  {id: 11, name: 'Séisme de Provence, 11 juin 1909', kind: 'map', src: 'liste', srcd: '🌋 Séismes › Séismes historiques', live: false, f: 'f3', fav: false, t: 8, upd: 'il y a 1 mois', who: '', used: [['enq', '🔎 « La maison de Lambesc »']]},
+  {id: 3, name: 'Âge au premier mariage, par siècle', kind: 'line', src: 'arbre', live: true, f: '', fav: false, t: 9, upd: 'il y a 1 mois', who: '', used: [['recap', '📊 Récap des données']]},
+  {id: 6, name: 'Naissances par décennie à Salon-de-Provence', kind: 'columns', src: 'question', srcd: '« naissances à Salon par décennie »', live: true, f: 'f3', fav: false, t: 10, upd: 'il y a 2 mois', who: '', used: []},
+  {id: 2, name: 'Sources de mes actes', kind: 'donut', src: 'liste', srcd: '📜 Mes sources', live: true, f: '', fav: false, t: 11, upd: 'il y a 2 mois', who: '', used: [['dash', '🏠 Tableau de bord']]},
+  {id: 1, name: 'Cousinade 2026 : qui vient', kind: 'waffle', src: 'main', live: false, f: '', fav: false, t: 12, upd: 'il y a 3 mois', who: '', used: [['pres', '🖥 « Cousinade 2026 »']]}
+];
+let TRASH = [{id: 30, name: 'Essai de camembert', kind: 'donut', when: 'il y a 4 jours', left: '26 jours'}, {id: 31, name: 'Hémicycle (copie)', kind: 'parliament', when: 'il y a 12 jours', left: '18 jours'}];
+const MODELS = [['🗓️', 'Frise de vies d’une branche', 'timeline'], ['🔺', 'Pyramide des âges', 'pyramid'], ['📶', 'Une liste, par décennie', 'columns']];
+
+const S = {nav: 'all', view: 'grid', sort: 'recent', thumbs: true, fpanel: false, mode: 'normal', sel: new Set(), F: {type: new Set(), src: new Set(), st: new Set(), use: new Set(), who: ''}, open: {fav: true, rec: false, fold: true, st: false, mod: false, tr: false}};
+const kiosk = () => S.mode === 'kiosk';
+const count = fn => DG.filter(fn).length;
+
+/* ── barre du haut ── */
+const TABS = [['01', 'Tableau de bord'], ['02', 'Personnes'], ['03', 'Graphiques'], ['03', '📈 Diagrammes', 1], ['04', 'Carte'], ['05', 'Listes'], ['06', 'Chronologie'], ['07', 'Recherche'], ['08', 'Enquêtes'], ['09', 'Comparaison'], ['10', 'Réglages']];
+const scrollNav = () => $$('.main-nav').forEach(n => { const a = $('.is-active', n); if (a) n.scrollLeft = Math.max(0, a.offsetLeft - n.offsetLeft - 60); });
+$$('[data-topbar]').forEach(t => { t.innerHTML = `<div class="brand"><span>Le carnet</span><strong>des ancêtres</strong><small>numérique</small></div><nav class="main-nav" aria-label="Onglets">${TABS.map(([n, l, on]) => `<span class="nav-item${on ? ' is-active' : ''}"${on ? ' aria-current="page"' : ''}><span>${n}</span>${l}</span>`).join('')}<span class="nav-plus" title="＋ Ajouter un onglet">＋</span></nav>`; });
+
+/* ── la colonne de gauche ── */
+function sidebar(active, interactive) {
+  const smi = (v, num, label, n, extra = '') => `<button type="button" class="smi${active === v ? ' is-active' : ''}${extra}" data-nav="${v}"><span class="side-number">${num}</span><span class="lb">${label}</span>${n != null ? `<small>${n}</small>` : ''}</button>`;
+  const grp = (k, ic, label, n, items, more = '') => `<details class="mt-group" data-grp="${k}"${S.open[k] || items.includes('is-active') ? ' open' : ''}><summary><span aria-hidden="true">${ic}</span><span>${label}</span><small>${n}</small>${more}</summary><div class="mt-gitems">${items}</div></details>`;
+  const favs = DG.filter(d => d.fav), recs = [...DG].sort((a, b) => a.t - b.t).slice(0, 5);
+  const folders = Object.entries(FOLD).map(([k, l], i) => smi(k, String(i + 1).padStart(2, '0'), `📁 ${l}`, count(d => d.f === k))).join('') + smi('nofold', '··', 'Sans dossier', count(d => !d.f)) + (kiosk() ? '' : '<button type="button" class="link-button sb-add" data-newfolder>＋ Nouveau dossier</button>');
+  const html = `<div class="sb-top"><div><span class="eyebrow">03 — VISUALISER</span><h1>Diagrammes</h1></div><button type="button" class="icon-button" title="Replier la colonne" aria-label="Replier la colonne">‹</button></div>
+  <div class="sb-content"><input type="search" class="sb-search" placeholder="Chercher un diagramme…" aria-label="Chercher un diagramme" data-q>
+    <div class="side-menu">${kiosk() ? '' : smi('new', '＋', 'Nouveau diagramme', null)}${smi('all', '🗂', 'Tous mes diagrammes', DG.length)}</div>
+    ${grp('fav', '⭐', 'Favoris', favs.length, favs.map((d, i) => smi('d' + d.id, String(i + 1).padStart(2, '0'), esc(d.name), null)).join('') || '<p class="small muted">Clique ☆ sur un diagramme.</p>')}
+    ${grp('rec', '🕘', 'Récents', recs.length, recs.map((d, i) => smi('d' + d.id, String(i + 1).padStart(2, '0'), esc(d.name), null)).join(''))}
+    ${grp('fold', '📁', 'Dossiers', Object.keys(FOLD).length, folders, kiosk() ? '' : '<button type="button" class="g-more" data-foldmore aria-label="Ranger les dossiers" aria-haspopup="menu">⋯</button>')}
+    ${grp('st', '🔄', 'À jour · 📌 Figés', DG.length, smi('live', '🔄', 'À jour', count(d => d.live)) + smi('frozen', '📌', 'Figés', count(d => !d.live)))}
+    ${grp('mod', '🧩', 'Modèles', MODELS.length, MODELS.map(([ic, l], i) => smi('m' + i, String(i + 1).padStart(2, '0'), `${ic} ${l}`, null)).join(''))}
+    ${kiosk() ? '' : grp('tr', '🗑', 'Corbeille', TRASH.length, smi('trash', '🗑', 'Voir la corbeille', TRASH.length, ' is-trash'))}
+  </div>
+  <div class="sb-foot">${kiosk() ? '<span>Mode consultation : on voit et on ouvre, rien d’autre.</span>' : '<div><button type="button" class="button small secondary" data-reorder title="L’ordre des groupes, ceux qui s’affichent">Réordonner</button></div><span>Glisse un diagramme sur un 📁 pour le ranger.</span>'}</div>`;
+  return html;
+}
+
+/* ── l'accueil ── */
+const NAVT = {all: ['Tous', '🗂', 'Tous mes diagrammes'], live: ['À jour', '🔄', 'À jour'], frozen: ['Figés', '📌', 'Figés'], trash: ['Corbeille', '🗑', 'Corbeille'], nofold: ['Sans dossier', '··', 'Sans dossier'], fav: ['Favoris', '⭐', 'Favoris']};
+const HASH = {all: '#diagrammes', live: '#diagrammes/a-jour', frozen: '#diagrammes/figes', trash: '#diagrammes/corbeille', nofold: '#diagrammes/dossier/aucun', f1: '#diagrammes/dossier/f_mazaud', f2: '#diagrammes/dossier/f_lacombe', f3: '#diagrammes/dossier/f_durand', f4: '#diagrammes/dossier/f_guerres'};
+function shown() {
+  const q = ($('[data-q]')?.value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  let l = DG.filter(d => {
+    if (S.nav === 'live' && !d.live) return false; if (S.nav === 'frozen' && d.live) return false;
+    if (S.nav === 'nofold' && d.f) return false; if (/^f\d$/.test(S.nav) && d.f !== S.nav) return false;
+    if (S.F.type.size && !S.F.type.has(KIND[d.kind][2])) return false;
+    if (S.F.src.size && !S.F.src.has(d.src)) return false;
+    if (S.F.st.size && !S.F.st.has(d.live ? 'live' : 'frozen')) return false;
+    if (S.F.use.size && !(S.F.use.has('none') && !d.used.length) && !d.used.some(u => S.F.use.has(u[0]))) return false;
+    if (S.F.who && d.who !== S.F.who) return false;
+    if (q && !(d.name + ' ' + KIND[d.kind][1]).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').includes(q)) return false;
+    return true;
+  });
+  if (S.sort === 'name') l.sort((a, b) => a.name.localeCompare(b.name, 'fr')); else if (S.sort === 'type') l.sort((a, b) => KIND[a.kind][1].localeCompare(KIND[b.kind][1], 'fr') || a.t - b.t); else l.sort((a, b) => a.t - b.t);
+  return l;
+}
+const nF = () => S.F.type.size + S.F.src.size + S.F.st.size + S.F.use.size + (S.F.who ? 1 : 0);
+function cardHtml(d) {
+  const k = KIND[d.kind], sel = S.sel.has(d.id);
+  return `<article class="dc${sel ? ' is-sel' : ''}" data-card="${d.id}" draggable="${kiosk() ? 'false' : 'true'}">
+    <div class="dc-th" data-open="${d.id}">${S.thumbs ? thumb(d.kind) : `<span class="dc-ic" aria-hidden="true">${k[0]}</span>`}
+      ${S.mode === 'multi' ? `<label class="dc-ck" data-stop><input type="checkbox" data-ck="${d.id}"${sel ? ' checked' : ''} aria-label="Choisir « ${esc(d.name)} »"></label>` : ''}
+      <button type="button" class="dc-star${d.fav ? ' on' : ''}" data-star="${d.id}" aria-pressed="${d.fav}" aria-label="Favori"${kiosk() ? ' disabled' : ''}>${d.fav ? '★' : '☆'}</button></div>
+    <div class="dc-b"><button type="button" class="dc-name" data-open="${d.id}">${esc(d.name)}</button>
+      <div class="dc-meta"><span>${k[0]} ${k[1]}</span><span>· ${SRC[d.src]}</span></div>
+      <div class="dc-meta">${d.live ? '<span class="ui-badge is-green">🔄 À jour</span>' : '<span class="ui-badge is-grey">📌 Figé</span>'}<span>${d.upd}</span></div>
+      <div class="dc-used">${d.used.length ? `Utilisé dans : ${d.used.map(u => `<a href="#s3">${esc(u[1])}</a>`).join(', ')}` : 'Posé nulle part'}</div></div>
+    <button type="button" class="ib dc-more" data-more="${d.id}" aria-label="Plus d’actions sur « ${esc(d.name)} »" aria-haspopup="menu">⋯</button></article>`;
+}
+function listHtml(l) {
+  return `<div class="card" style="margin-top:14px"><div class="tw"><table class="data-table lt"><thead><tr>${S.mode === 'multi' ? '<th><span class="sr">Choisir</span></th>' : ''}<th><span class="sr">Favori</span>⭐</th><th>Nom</th><th class="hide-m">Type</th><th class="hide-m">Source</th><th class="hide-m">État</th><th class="hide-m">Utilisé dans</th><th class="hide-m">Modifié</th><th><span class="sr">Actions</span></th></tr></thead><tbody>
+  ${l.map(d => `<tr>${S.mode === 'multi' ? `<td><input type="checkbox" data-ck="${d.id}"${S.sel.has(d.id) ? ' checked' : ''} aria-label="Choisir « ${esc(d.name)} »"></td>` : ''}<td><button type="button" class="st${d.fav ? ' on' : ''}" data-star="${d.id}" aria-pressed="${d.fav}" aria-label="Favori"${kiosk() ? ' disabled' : ''}>${d.fav ? '★' : '☆'}</button></td>
+  <td>${S.thumbs ? `<span class="mini">${thumb(d.kind)}</span>` : ''}<button type="button" class="nm" data-open="${d.id}">${esc(d.name)}</button></td><td class="hide-m">${KIND[d.kind][0]} ${KIND[d.kind][1]}</td><td class="hide-m">${SRC[d.src]}${d.srcd ? `<small>${esc(d.srcd)}</small>` : ''}</td>
+  <td class="hide-m">${d.live ? '<span class="ui-badge is-green">🔄 À jour</span>' : '<span class="ui-badge is-grey">📌 Figé</span>'}</td><td class="hide-m">${d.used.map(u => esc(u[1])).join('<br>') || '<span class="muted">—</span>'}</td><td class="hide-m">${d.upd}</td>
+  <td><button type="button" class="ib" data-more="${d.id}" aria-label="Plus d’actions" aria-haspopup="menu">⋯</button></td></tr>`).join('')}</tbody></table></div></div>`;
+}
+function chipRow(key, pairs) { return pairs.map(([v, l]) => `<button type="button" class="k" data-f="${key}" data-v="${esc(v)}" aria-pressed="${key === 'who' ? String(S.F.who === v) : String(S.F[key].has(v))}">${l}</button>`).join(''); }
+function homeHtml() {
+  const nav = S.nav;
+  if (nav === 'trash') return `<header class="page-header"><div><span class="eyebrow crumb"><a href="#" data-nav="all">Diagrammes</a><i>›</i><span>Corbeille</span></span><h2><span class="ph-ico">🗑</span>Corbeille</h2><p>Gardés 30 jours, puis effacés. Là où ils étaient posés, on voit « Diagramme à la corbeille — Remettre ».</p></div><div class="page-actions"><button type="button" class="button secondary" data-empty${TRASH.length ? '' : ' disabled'}>Vider la corbeille</button></div></header>
+    ${TRASH.length ? `<div class="card"><div class="tw"><table class="data-table trash-row"><thead><tr><th><span class="sr">Dessin</span></th><th>Nom</th><th>Supprimé</th><th>Effacé dans</th><th><span class="sr">Actions</span></th></tr></thead><tbody>${TRASH.map(t => `<tr><td><span class="mini" style="display:block;width:54px">${thumb(t.kind)}</span></td><td><b>${esc(t.name)}</b></td><td>${t.when}</td><td>${t.left}</td><td><button type="button" class="button small secondary" data-restore="${t.id}">↺ Remettre</button></td></tr>`).join('')}</tbody></table></div></div>` : '<div class="empty"><b>La corbeille est vide.</b>Ce que tu supprimes arrive ici.</div>'}`;
+  if (/^m\d$/.test(nav)) { const m = MODELS[Number(nav.slice(1))]; return `<header class="page-header"><div><span class="eyebrow crumb"><a href="#" data-nav="all">Diagrammes</a><i>›</i><span>Modèles</span></span><h2><span class="ph-ico">🧩</span>${esc(m[1])}</h2><p>Un ⭐ modèle garde la mise en forme et la recette, jamais un chiffre ni un nom. On l’applique à d’autres données.</p></div><div class="page-actions">${kiosk() ? '' : '<a class="button" href="#s2">Utiliser ce modèle</a>'}</div></header><div class="card" style="max-width:520px"><div class="card-body">${thumb(m[2])}<p class="small muted" style="margin:8px 0 0">Fait à partir de « ${esc(DG.find(d => d.kind === m[2])?.name || '—')} » · exemple</p></div></div>`; }
+  const t = /^f\d$/.test(nav) ? ['📁', FOLD[nav]] : [NAVT[nav]?.[1] || '🗂', NAVT[nav]?.[2] || 'Tous mes diagrammes'];
+  const l = shown();
+  const crumb = nav === 'all' ? '<span>Diagrammes</span><i>›</i><span>Tous</span>' : `<a href="#" data-nav="all">Diagrammes</a><i>›</i><span>${esc(t[1])}</span>`;
+  const isFold = /^f\d$/.test(nav);
+  return `<header class="page-header"><div><span class="eyebrow crumb">${crumb}</span><h2><span class="ph-ico">${t[0]}</span>${esc(t[1])}</h2><p>${nav === 'all' ? 'Tous tes diagrammes, du plus récent au plus ancien. Chacun dit d’où viennent ses chiffres et où il est posé.' : isFold ? 'Un dossier. Glisse un diagramme ici, ou « 📁 Déplacer » dans son ⋯.' : nav === 'live' ? 'Ils relisent tes données à chaque affichage.' : nav === 'frozen' ? 'Leurs chiffres ne bougent plus : ceux du jour où ils ont été figés.' : ''}</p></div>
+    <div class="page-actions">${kiosk() ? '' : `<button type="button" class="button" data-nav="new">＋ Nouveau diagramme</button>`}${isFold && !kiosk() ? `<button type="button" class="button icon secondary" data-foldmenu="${nav}" aria-label="Le dossier : renommer, ranger, supprimer" aria-haspopup="menu">⋯</button>` : ''}<button type="button" class="button icon secondary" data-settings aria-label="Réglages de l’onglet" title="Réglages de l’onglet">⚙</button></div></header>
+  ${kiosk() ? '<p class="kiosk-line">👀 Mode consultation : on voit, on ouvre, on exporte (sans les personnes vivantes). Rien ne se modifie.</p>' : ''}
+  <div class="bar"><span class="ld-count">${l.length} diagramme${l.length > 1 ? 's' : ''}</span>
+    <span class="segmented sm" role="group" aria-label="Affichage"><button type="button" data-view="grid" aria-pressed="${S.view === 'grid'}">▦ Vignettes</button><button type="button" data-view="list" aria-pressed="${S.view === 'list'}">☰ Liste</button></span>
+    <span class="sp"></span>
+    <label class="sr" for="dg-sort">Trier</label><select id="dg-sort" class="ui-select" data-sort><option value="recent"${S.sort === 'recent' ? ' selected' : ''}>Trier : les plus récents</option><option value="name"${S.sort === 'name' ? ' selected' : ''}>Trier : par nom</option><option value="type"${S.sort === 'type' ? ' selected' : ''}>Trier : par type</option></select>
+    <button type="button" class="ui-listbar-btn" data-fpanel aria-pressed="${S.fpanel || nF() > 0}" aria-expanded="${S.fpanel}">Filtrer${nF() ? ` (${nF()})` : ''} ▾</button>
+    ${kiosk() ? '' : `<button type="button" class="ui-listbar-btn" data-multi aria-pressed="${S.mode === 'multi'}">☑ Choisir</button>`}</div>
+  ${S.fpanel ? `<div class="fpanel" role="group" aria-label="Filtres">
+    <div class="fr"><span class="lbl">Type</span><div class="ld-chips" style="margin:0">${chipRow('type', ['Frises', 'Barres et colonnes', 'Courbes', 'Parts', 'Flux', 'Cartes', 'Assemblées', 'Mots', 'Famille'].map(x => [x, x]))}</div></div>
+    <div class="fr"><span class="lbl">Source</span><div class="ld-chips" style="margin:0">${chipRow('src', Object.entries(SRC))}</div></div>
+    <div class="fr"><span class="lbl">Personne</span><div class="ld-chips" style="margin:0">${chipRow('who', [['Honoré LACOMBE', '👤 Honoré LACOMBE'], ['Jean MAZAUD', '👤 Jean MAZAUD'], ['Marius DURAND', '👤 Marius DURAND']])}<button type="button" class="link-button">Une autre…</button></div></div>
+    <div class="fr"><span class="lbl">État</span><div class="ld-chips" style="margin:0">${chipRow('st', [['live', '🔄 À jour'], ['frozen', '📌 Figé']])}</div></div>
+    <div class="fr"><span class="lbl">Posé dans</span><div class="ld-chips" style="margin:0">${chipRow('use', Object.entries(USE))}</div></div>
+    <div style="display:flex;justify-content:flex-end"><button type="button" class="link-button" data-fclear${nF() ? '' : ' disabled'}>Tout effacer</button></div></div>` : nF() ? `<div class="ld-chips">${[...S.F.type].map(v => ['type', v, v]).concat([...S.F.src].map(v => ['src', v, SRC[v]]), [...S.F.st].map(v => ['st', v, v === 'live' ? '🔄 À jour' : '📌 Figé']), [...S.F.use].map(v => ['use', v, USE[v]]), S.F.who ? [['who', S.F.who, '👤 ' + S.F.who]] : []).map(([k, v, lab]) => `<button type="button" class="ui-listbar-chip" data-f="${k}" data-v="${esc(v)}">${esc(lab)} <span class="chip-x" aria-hidden="true">×</span><span class="sr">Retirer</span></button>`).join('')}<button type="button" class="link-button" data-fclear>Tout effacer</button></div>` : ''}
+  ${l.length ? (S.view === 'grid' ? `<div class="grid">${l.map(cardHtml).join('')}</div>` : listHtml(l)) : `<div class="empty"><b>Aucun diagramme ici.</b>${nF() ? 'Retire un filtre, ou ' : ''}${kiosk() ? '' : '<button type="button" class="link-button" data-nav="new">＋ crée-en un</button>'}</div>`}
+  ${S.mode === 'multi' ? `<div class="selbar" role="region" aria-label="Diagrammes choisis"><b>${S.sel.size} choisi${S.sel.size > 1 ? 's' : ''}</b><button type="button" class="link-button" data-selall>Tout choisir</button><span class="sp"></span>
+    <button type="button" class="button small secondary" data-bulk="fav"${S.sel.size ? '' : ' disabled'}>⭐ Favori</button><button type="button" class="button small secondary" data-bulk="move"${S.sel.size ? '' : ' disabled'}>📁 Déplacer</button><button type="button" class="button small secondary" data-bulk="export"${S.sel.size ? '' : ' disabled'}>⤓ Exporter</button><button type="button" class="button small secondary" data-bulk="del"${S.sel.size ? '' : ' disabled'}>🗑 Supprimer</button><button type="button" class="x" data-multi aria-label="Fermer le choix multiple">×</button></div>` : ''}`;
+}
+const sb = $('[data-sb]'), home = $('[data-home]');
+let qVal = '';
+function render() {
+  qVal = $('[data-q]', sb)?.value || qVal;
+  sb.innerHTML = sidebar(S.nav === 'all' || !S.nav ? 'all' : S.nav, true);
+  const q = $('[data-q]', sb); q.value = qVal;
+  home.innerHTML = homeHtml();
+  const app = $('[data-app="home"]'); app.classList.toggle('kiosk-on', kiosk());
+  const hq = (HASH[S.nav] || (/^m\d$/.test(S.nav) ? '#diagrammes/modeles/' + S.nav.slice(1) : S.nav === 'fav' ? '#diagrammes/favoris' : '#diagrammes')) + (S.view === 'list' ? '?vue=liste' : '');
+  $('[data-addr]').textContent = hq;
+}
+sb.addEventListener('toggle', e => { const d = e.target.closest?.('[data-grp]'); if (d) S.open[d.dataset.grp] = d.open; }, true);
+sb.addEventListener('input', e => { if (e.target.matches('[data-q]')) { qVal = e.target.value; home.innerHTML = homeHtml(); } });
+
+/* ── le menu ⋯ ── */
+const menu = $('[data-menu]');
+function openMenu(anchor, title, items) {
+  menu.innerHTML = (title ? `<h6>${esc(title)}</h6>` : '') + items.map(it => it === '-' ? '<hr>' : `<button type="button" role="menuitem" class="${it.danger ? 'danger' : ''}" data-mi="${esc(it.msg || it.l)}"><span class="mi" aria-hidden="true">${it.ic}</span><span>${esc(it.l)}</span>${it.sub ? `<small>${esc(it.sub)}</small>` : ''}</button>`).join('');
+  menu.hidden = false;
+  const r = anchor.getBoundingClientRect(), w = menu.offsetWidth, h = menu.offsetHeight;
+  let left = Math.min(Math.max(16, r.right - w), innerWidth - w - 16), top = r.bottom + 4;
+  if (top + h > innerHeight - 8) top = Math.max(8, r.top - h - 4);
+  menu.style.left = left + 'px'; menu.style.top = top + 'px';
+  menu._items = items; menu._anchor = anchor;
+  menu.querySelector('button')?.focus();
+}
+const closeMenu = () => { if (!menu.hidden) { menu.hidden = true; menu._anchor?.focus?.(); } };
+document.addEventListener('click', e => { if (!menu.hidden && !e.target.closest('[data-menu]') && !e.target.closest('[data-more],[data-foldmore],[data-foldmenu],[data-exp]')) menu.hidden = true; });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+window.addEventListener('scroll', () => { menu.hidden = true; }, {passive: true});
+menu.addEventListener('click', e => { const b = e.target.closest('[data-mi]'); if (!b) return; const it = menu._items.find(x => x !== '-' && (x.msg || x.l) === b.dataset.mi); menu.hidden = true; if (it?.run) it.run(); else toast(b.dataset.mi); });
+function cardMenu(anchor, d) {
+  const items = kiosk() ? [{ic: '↗', l: 'Ouvrir', run: () => { location.hash = '#s3'; }}, {ic: '⤓', l: 'Exporter', sub: 'PNG · SVG · PDF', msg: '⤓ Exporté en PNG (sans les personnes vivantes)'}]
+    : [{ic: '↗', l: 'Ouvrir', run: () => { location.hash = '#s3'; }}, {ic: '⧉', l: 'Dupliquer', msg: `« ${d.name} (copie) » créé, dans le même dossier`}, {ic: '✎', l: 'Renommer', msg: 'Le nom devient un champ, Entrée pour garder'}, {ic: '📁', l: 'Déplacer dans un dossier…', sub: d.f ? FOLD[d.f] : 'sans dossier', msg: 'La liste des dossiers s’ouvre (et « ＋ Nouveau dossier »)'}, '-',
+      {ic: '⤓', l: 'Exporter', sub: 'PNG · SVG · PDF', msg: '⤓ Exporté en PNG (sans les personnes vivantes)'}, {ic: '📤', l: 'Envoyer vers…', sub: 'Studio, Présentation', msg: 'Envoyer vers : 🎬 Studio, 🖥 Présentation, 📚 Atelier'}, {ic: '📄', l: 'Poser dans…', sub: 'fiche, récap, tableau', msg: 'Poser dans : 👤 une fiche, 📊 le récap, 🏠 le tableau de bord'}, {ic: '🧺', l: 'Mettre dans un panier', msg: '🧺 Mis dans le panier « Cousinade 2026 »'}, {ic: '📎', l: 'Joindre à une fiche ou une enquête', msg: '📎 Le choix d’une fiche ou d’une enquête s’ouvre'}, '-',
+      {ic: '🗑', l: 'Mettre à la corbeille', danger: true, run: () => trash([d.id])}];
+  openMenu(anchor, d.name, items);
+}
+
+/* ── toast avec ↶ Annuler ── */
+const tEl = $('[data-toast]'); let tTimer = 0, tUndo = null;
+function toast(msg, undo) { $('[data-toast-msg]').textContent = msg; tUndo = undo || null; $('[data-toast-undo]').hidden = !undo; tEl.hidden = false; clearTimeout(tTimer); tTimer = setTimeout(() => { tEl.hidden = true; }, 5000); }
+$('[data-toast-undo]').addEventListener('click', () => { tUndo?.(); tEl.hidden = true; });
+function trash(ids) {
+  const gone = DG.filter(d => ids.includes(d.id)); if (!gone.length) return;
+  gone.forEach(d => { DG.splice(DG.indexOf(d), 1); TRASH.unshift({id: d.id, name: d.name, kind: d.kind, when: 'à l’instant', left: '30 jours', _d: d}); });
+  S.sel.clear(); render();
+  toast(gone.length > 1 ? `${gone.length} diagrammes mis à la corbeille` : `« ${gone[0].name} » mis à la corbeille`, () => { gone.forEach(d => { DG.push(d); TRASH = TRASH.filter(t => t.id !== d.id); }); render(); });
+}
+
+/* ── les clics de la partie 1 ── */
+const app1 = $('[data-app="home"]');
+app1.addEventListener('click', e => {
+  const t = e.target;
+  const nav = t.closest('[data-nav]'); if (nav) { e.preventDefault(); const v = nav.dataset.nav; if (v === 'new') { location.hash = '#s2'; return; } if (/^d\d+$/.test(v)) { location.hash = '#s3'; return; } S.nav = v; S.sel.clear(); render(); return; }
+  const op = t.closest('[data-open]'); if (op && !t.closest('[data-star],[data-stop],[data-more]')) { location.hash = '#s3'; return; }
+  const st = t.closest('[data-star]'); if (st) { const d = DG.find(x => x.id === Number(st.dataset.star)); d.fav = !d.fav; render(); toast(d.fav ? `⭐ « ${d.name} » dans les favoris` : `« ${d.name} » retiré des favoris`); return; }
+  const mo = t.closest('[data-more]'); if (mo) { e.stopPropagation(); const d = DG.find(x => x.id === Number(mo.dataset.more)); if (menu.hidden || menu._anchor !== mo) cardMenu(mo, d); else menu.hidden = true; return; }
+  if (t.closest('[data-foldmore]')) { e.preventDefault(); e.stopPropagation(); openMenu(t.closest('[data-foldmore]'), 'Dossiers', [{ic: '＋', l: 'Nouveau dossier', msg: '📁 « Nouveau dossier » créé : tape son nom'}, {ic: '⇅', l: 'Ranger les dossiers…', msg: 'La fenêtre « Réordonner » s’ouvre sur les dossiers'}]); return; }
+  const fm = t.closest('[data-foldmenu]'); if (fm) { e.stopPropagation(); openMenu(fm, FOLD[fm.dataset.foldmenu], [{ic: '✎', l: 'Renommer le dossier', msg: 'Le nom du dossier devient un champ'}, {ic: '＋', l: 'Nouveau sous-dossier', msg: '📁 Sous-dossier créé (3 niveaux au plus)'}, {ic: '↑', l: 'Monter'}, {ic: '↓', l: 'Descendre'}, '-', {ic: '🗑', l: 'Supprimer le dossier', sub: 'garde les diagrammes', danger: true, msg: 'Dossier supprimé ; ses diagrammes passent « sans dossier » · ↶ Annuler'}]); return; }
+  if (t.closest('[data-newfolder]')) { FOLD.f5 = 'Nouveau dossier'; HASH.f5 = '#diagrammes/dossier/f_nouveau'; S.nav = 'f5'; render(); toast('📁 « Nouveau dossier » créé', () => { delete FOLD.f5; S.nav = 'all'; render(); }); return; }
+  if (t.closest('[data-reorder]')) { toast('« Réordonner » : l’ordre des groupes (⭐ 🕘 📁 🔄 🧩 🗑) et ceux qui s’affichent'); return; }
+  if (t.closest('[data-settings]')) { location.hash = '#s4'; return; }
+  const v = t.closest('[data-view]'); if (v) { S.view = v.dataset.view; render(); return; }
+  if (t.closest('[data-fpanel]')) { S.fpanel = !S.fpanel; render(); return; }
+  if (t.closest('[data-fclear]')) { Object.values(S.F).forEach(x => x.clear?.()); S.F.who = ''; render(); return; }
+  const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f, val = f.dataset.v; if (k === 'who') S.F.who = S.F.who === val ? '' : val; else S.F[k].has(val) ? S.F[k].delete(val) : S.F[k].add(val); render(); return; }
+  if (t.closest('[data-multi]')) { S.mode = S.mode === 'multi' ? 'normal' : 'multi'; S.sel.clear(); syncScen(); render(); return; }
+  if (t.closest('[data-selall]')) { shown().forEach(d => S.sel.add(d.id)); render(); return; }
+  const bk = t.closest('[data-bulk]'); if (bk) { const ids = [...S.sel]; if (bk.dataset.bulk === 'del') return trash(ids); if (bk.dataset.bulk === 'fav') { DG.forEach(d => { if (ids.includes(d.id)) d.fav = true; }); render(); return toast(`⭐ ${ids.length} dans les favoris`); } return toast(bk.dataset.bulk === 'move' ? `📁 Déplacer ${ids.length} diagrammes : la liste des dossiers s’ouvre` : `⤓ ${ids.length} diagrammes : un .zip de PNG, SVG ou un seul PDF (sans les vivants)`); }
+  const rs = t.closest('[data-restore]'); if (rs) { const tr = TRASH.find(x => x.id === Number(rs.dataset.restore)); TRASH = TRASH.filter(x => x !== tr); if (tr._d) DG.push(tr._d); render(); toast(`↺ « ${tr.name} » remis à sa place`); return; }
+  if (t.closest('[data-empty]')) { const was = TRASH; TRASH = []; render(); toast('Corbeille vidée', () => { TRASH = was; render(); }); return; }
+});
+app1.addEventListener('change', e => {
+  if (e.target.matches('[data-sort]')) { S.sort = e.target.value; render(); }
+  if (e.target.matches('[data-ck]')) { const id = Number(e.target.dataset.ck); e.target.checked ? S.sel.add(id) : S.sel.delete(id); render(); }
+});
+/* glisser un diagramme sur un dossier */
+let dragId = 0;
+app1.addEventListener('dragstart', e => { const c = e.target.closest?.('[data-card]'); if (!c) return; dragId = Number(c.dataset.card); try { e.dataTransfer.setData('text/plain', String(dragId)); } catch (_) {} });
+app1.addEventListener('dragover', e => { const n = e.target.closest?.('[data-nav^="f"]'); if (dragId && n) e.preventDefault(); });
+app1.addEventListener('drop', e => { const n = e.target.closest?.('[data-nav^="f"]'); if (!dragId || !n) return; e.preventDefault(); const d = DG.find(x => x.id === dragId), was = d.f; d.f = n.dataset.nav; dragId = 0; render(); toast(`📁 Rangé dans « ${FOLD[d.f]} »`, () => { d.f = was; render(); }); });
+/* scénario */
+const scen = $('[data-scen]');
+function syncScen() { $$('button', scen).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.s === S.mode))); }
+scen.addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (!b) return; S.mode = b.dataset.s; S.sel.clear(); if (S.mode === 'multi') { S.sel.add(12); S.sel.add(7); S.sel.add(11); } if (S.mode === 'kiosk' && (S.nav === 'trash')) S.nav = 'all'; syncScen(); render(); renderEditor(); });
+render(); scrollNav(); window.addEventListener('resize', scrollNav);
+
+/* ═══ 2 · ＋ Nouveau ═══ */
+$('[data-sb2]').innerHTML = sidebar('new', false);
+const GAL = [['pyramid', 'Pyramide des âges', 'Hommes à gauche, femmes à droite', 1], ['timeline', 'Frise de vies', 'Une barre par personne, de la naissance au décès', 1], ['columns', 'Colonnes', 'Comparer quelques nombres', 1], ['line', 'Courbe', 'Ce qui change avec le temps', 1], ['sankey', 'Flux', 'D’où à où : migrations, héritages', 1],
+  ['bars', 'Barres', 'Classer du plus grand au plus petit', 0], ['stacked', 'Colonnes empilées', 'Un total et ses parts', 0], ['donut', 'Anneau', 'Les parts d’un tout', 0], ['waffle', 'Gaufre', '100 cases, des parts', 0], ['treemap', 'Mosaïque', 'Des parts en rectangles', 0], ['parliament', 'Hémicycle', 'Une assemblée, ses sièges', 0], ['words', 'Nuage de mots', 'Prénoms, métiers', 0], ['map', 'Carte à points', 'Où, et combien', 0], ['box', 'Boîte à moustaches', 'Âges : le milieu et les écarts', 0], ['family', 'Organigramme', 'Une famille, une entreprise', 0]];
+const GROUPS = [['Famille', ['pyramid', 'timeline', 'family']], ['Barres et colonnes', ['columns', 'bars', 'stacked']], ['Courbes et écarts', ['line', 'box']], ['Parts', ['donut', 'waffle', 'treemap']], ['Flux, cartes, assemblées, mots', ['sankey', 'map', 'parliament', 'words']]];
+const ND = {door: 'ask', all: false, pick: 'pyramid', src: 'liste'};
+const tile = (k, badge) => { const g = GAL.find(x => x[0] === k); return `<button type="button" class="gt" data-pick="${k}" aria-pressed="${ND.pick === k}">${thumb(k)}<b>${KIND[k]?.[0] || ''} ${g[1]}</b><small>${g[2]}</small>${(badge ?? g[3]) ? '<span><span class="ui-badge is-green">✨ conseillé</span></span>' : ''}</button>`; };
+const go = (txt = 'Créer et régler →') => `<div class="go-row"><span class="muted small">Il sera rangé dans : <b>📁 Famille MAZAUD</b> <button type="button" class="link-button">changer</button></span><span class="sp"></span><a class="button" href="#s3" data-create>${txt}</a></div>`;
+function doorPane() {
+  if (ND.door === 'ask') return `<div class="panel"><h3>💬 Je veux représenter…</h3><p class="muted">Écris-le comme tu le dirais. L’app comprend ce qu’il faut compter et propose les dessins qui vont bien.</p>
+    <div class="ask"><input type="search" value="les âges au décès des MAZAUD, hommes et femmes" aria-label="Je veux représenter…"><button type="button" class="button small">Proposer</button></div>
+    <div class="ex"><span class="lbl">Par exemple</span><button type="button" class="k">les métiers à Tulle</button><button type="button" class="k">d’où viennent les LACOMBE</button><button type="button" class="k">les soldats de 14-18</button><button type="button" class="k">les prénoms des DURAND</button></div>
+    <div class="understood"><span class="lbl">J’ai compris</span><span class="ui-listbar-chip">🌳 Mon arbre</span><span class="ui-listbar-chip">👥 Les MAZAUD (38, exemple)</span><span class="ui-listbar-chip">📏 Âge au décès</span><span class="ui-listbar-chip">⚥ Par sexe</span></div>
+    <div class="gal">${['pyramid', 'box', 'columns'].map(tile).join('')}</div>${go()}</div>`;
+  if (ND.door === 'gal') { const sug = GAL.filter(g => g[3]).map(g => g[0]);
+    return `<div class="panel"><div class="bar"><span class="segmented sm" role="group" aria-label="Dessins"><button type="button" data-galall="0" aria-pressed="${!ND.all}">✨ Conseillés (5)</button><button type="button" data-galall="1" aria-pressed="${ND.all}">Tous (112)</button></span><span class="sp"></span><input type="search" class="sb-search" style="width:200px;max-width:100%;margin:0" placeholder="Chercher un type…" aria-label="Chercher un type"><button type="button" class="link-button">⚙ Ranger les types</button></div>
+      ${ND.all ? GROUPS.map(([g, ks]) => `<h4 class="gh">${g} <small>· quelques-uns</small></h4><div class="gal">${ks.map(tile).join('')}</div>`).join('') + '<p class="small muted" style="margin:12px 0 0">… et 97 autres, dans le même ordre que ton catalogue (types cachés, groupes à toi).</p>' : `<p class="small muted" style="margin:10px 0 0">Les 5 qui servent le plus pour un arbre. « Tous » montre le catalogue entier, par groupes.</p><div class="gal">${sug.map(tile).join('')}</div>`}
+      <div class="models"><span class="lbl">⭐ Ou un de mes modèles :</span>${MODELS.map(m => `<button type="button" class="k">${m[0]} ${m[1]}</button>`).join('')}</div>${go()}</div>`; }
+  return `<div class="panel"><h3>📊 Partir des données</h3><p class="muted">Les chiffres viennent de l’app ; coche « Tenir à jour » et le diagramme suit tes nouvelles données.</p>
+    <span class="segmented" role="group" aria-label="D’où viennent les chiffres"><button type="button" data-src="arbre" aria-pressed="${ND.src === 'arbre'}">🌳 Mon arbre</button><button type="button" data-src="liste" aria-pressed="${ND.src === 'liste'}">📋 Une liste</button><button type="button" data-src="question" aria-pressed="${ND.src === 'question'}">💬 Une question</button></span>
+    ${ND.src === 'arbre' ? `<div class="map"><span class="lbl">Compter</span><select class="ui-select" aria-label="Compter"><option>Les naissances</option><option>Les décès</option><option>Les mariages</option></select><span class="lbl">Groupe</span><select class="ui-select" aria-label="Groupe"><option>Branche DURAND</option><option>Toute la base</option></select><span class="lbl">Par</span><select class="ui-select" aria-label="Par"><option>Décennie</option><option>Siècle</option><option>Lieu</option></select></div>`
+    : ND.src === 'liste' ? `<div class="map"><span class="lbl">Liste</span><select class="ui-select" aria-label="Liste"><option>⚔️ Guerres et soldats › Morts pour la France (41 lignes, exemple)</option><option>🌋 Séismes › Séismes historiques</option><option>🗳️ Votes et élections</option></select><span class="lbl">X</span><select class="ui-select" aria-label="X"><option>Date → regroupée (année)</option></select><span class="sug">✨ proposé</span><span class="lbl">Y</span><select class="ui-select" aria-label="Y"><option>Nombre de lignes</option></select><span class="sug">✨ proposé</span><span class="lbl">Couleur</span><select class="ui-select" aria-label="Couleur"><option>Lieu de la famille le plus proche</option><option>—</option></select></div>`
+    : `<div class="ask" style="margin-top:12px"><input type="search" value="les naissances à Salon-de-Provence par décennie" aria-label="Ta question"><button type="button" class="button small">Compter</button></div>`}
+    <h4 class="gh">Dessins conseillés <small>· pour ces données</small></h4><div class="gal">${['columns', 'line', 'stacked'].map(k => tile(k, 1)).join('')}</div>
+    <label class="ui-toggle" style="margin-top:12px"><input type="checkbox" checked><i></i>🔄 Tenir à jour</label>${go()}</div>`;
+}
+const dp = $('[data-doorpane]');
+const paintDoor = () => { dp.innerHTML = doorPane(); $$('[data-door]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.door === ND.door))); $('[data-addr2]').textContent = '#diagrammes/nouveau' + (ND.door === 'gal' ? '/dessin' + (ND.all ? '?tous' : '') : ND.door === 'data' ? '/donnees' : ''); };
+$('[data-doors]').addEventListener('click', e => { const b = e.target.closest('[data-door]'); if (b) { ND.door = b.dataset.door; paintDoor(); } });
+dp.addEventListener('click', e => { const g = e.target.closest('[data-galall]'); if (g) { ND.all = g.dataset.galall === '1'; paintDoor(); return; } const p = e.target.closest('[data-pick]'); if (p) { ND.pick = p.dataset.pick; $$('[data-pick]', dp).forEach(x => x.setAttribute('aria-pressed', String(x === p))); return; } const s = e.target.closest('[data-src]'); if (s) { ND.src = s.dataset.src; paintDoor(); return; } if (e.target.closest('[data-create]')) { ED.arrive = 'new'; renderEditor(); } });
+paintDoor();
+$('[data-sb2]').addEventListener('click', e => { const n = e.target.closest('[data-nav]'); if (!n) return; e.preventDefault(); if (n.dataset.nav !== 'new') { S.nav = /^d\d+$/.test(n.dataset.nav) ? 'all' : n.dataset.nav; render(); location.hash = '#s1'; } });
+
+/* ═══ 3 · l'éditeur ═══ */
+const PEOPLE = [['Honoré LACOMBE', 1812, 1879, 'c1'], ['Marie-Thérèse GIORDAN', 1818, 1890, 'c2'], ['Joseph LACOMBE', 1841, 1916, 'c1'], ['Antoinette LACOMBE', 1845, 1923, 'c2'], ['Louis LACOMBE', 1872, 1944, 'c1'], ['Rose LACOMBE', 1876, 1958, 'c2']];
+const EVT = [[1860, 'Nice devient française'], [1870, 'Guerre de 1870'], [1914, 'Grande Guerre']];
+function bigTimeline() {
+  const x0 = 150, x1 = 740, y0 = 1800, y1 = 1960, X = y => x0 + (y - y0) / (y1 - y0) * (x1 - x0);
+  let s = '';
+  for (let y = 1800; y <= 1960; y += 20) s += `<line class="kg" x1="${X(y)}" x2="${X(y)}" y1="26" y2="${30 + PEOPLE.length * 34}" stroke-width="1"/><text class="tx" x="${X(y)}" y="${46 + PEOPLE.length * 34}" text-anchor="middle">${y}</text>`;
+  EVT.forEach(([y, l], i) => { s += `<line class="km" x1="${X(y)}" x2="${X(y)}" y1="${14 + i * 0}" y2="${30 + PEOPLE.length * 34}" stroke-width="1.2" stroke-dasharray="4 3"/><text class="tx" x="${X(y) + 4}" y="${12 + (i % 2) * 11}">${l}</text>`; });
+  PEOPLE.forEach(([n, a, b, c], i) => { const y = 34 + i * 34; s += `<text class="tk" x="${x0 - 8}" y="${y + 13}" text-anchor="end">${n}</text><rect class="${c}" x="${X(a)}" y="${y}" width="${X(b) - X(a)}" height="18" rx="3"><title>${n} : ${a}–${b}</title></rect><text x="${X(a) + 6}" y="${y + 13}" style="fill:#fff;font:700 10px var(--font)">${a}–${b}</text>`; });
+  return `<svg viewBox="0 0 760 ${60 + PEOPLE.length * 34}" role="img" aria-label="Frise de vies de six membres de la famille LACOMBE, de 1812 à 1958">${s}</svg>`;
+}
+const ED = {arrive: 'open', tab: 'data', hist: 0, dirty: false};
+function pane() {
+  if (ED.tab === 'data') return `<h4>Les lignes <small class="muted">· 6 personnes</small></h4><div class="tw"><table class="rows"><colgroup><col style="width:58%"><col style="width:21%"><col style="width:21%"></colgroup><thead><tr><th>Nom</th><th>Début</th><th>Fin</th></tr></thead><tbody>${PEOPLE.map(([n, a, b]) => `<tr><td><input value="${esc(n)}" aria-label="Nom"></td><td><input value="${a}" aria-label="Début"></td><td><input value="${b}" aria-label="Fin"></td></tr>`).join('')}</tbody></table></div><p class="hint">🌳 Ces lignes viennent de ton arbre (branche LACOMBE). Modifier une ligne la fige ; « Tenir à jour » les relit.</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"><button type="button" class="button small secondary">＋ Une ligne</button><button type="button" class="button small secondary">⤒ Coller un tableau</button></div>`;
+  if (ED.tab === 'opts') return `<h4>Réglages</h4><div class="opt"><span class="lbl">Ordre</span><span class="segmented sm" role="group" aria-label="Ordre" data-seg><button type="button" aria-pressed="true">Naissance</button><button type="button" aria-pressed="false">Nom</button><button type="button" aria-pressed="false">Durée</button></span></div><div class="opt"><span class="lbl">Couleur</span><span class="segmented sm" role="group" aria-label="Couleur" data-seg><button type="button" aria-pressed="true">Par sexe</button><button type="button" aria-pressed="false">Par génération</button></span></div><div class="opt"><span class="lbl">Événements</span><label class="ui-toggle"><input type="checkbox" checked><i></i>Montrer les 3 événements</label></div><div class="opt"><span class="lbl">Années</span><span class="ui-num"><input value="1800" aria-label="De"></span><span class="muted small">à</span><span class="ui-num"><input value="1960" aria-label="À"></span></div><div class="opt"><label class="ui-toggle"><input type="checkbox" checked><i></i>🔄 Tenir à jour</label></div>`;
+  if (ED.tab === 'perso') return `<details class="acc" open><summary>🎨 Style <small>titre, police, taille</small></summary><div class="in"><input type="text" class="ui-select" style="background-image:none;padding-right:9px" value="Frise de vies — les LACOMBE de Nice" aria-label="Titre"></div></details><details class="acc"><summary>🌈 Couleurs <small>palette, daltonisme, noir et blanc</small></summary><div class="in">La palette de l’app, adaptée aux daltoniens, archives, noir et blanc.</div></details><details class="acc"><summary>📝 Annotations <small>2</small></summary><div class="in">« Mariage à Saint-Martin, 1839 » · « Départ pour Marseille ».</div></details><details class="acc"><summary>📏 Lignes de repère</summary><div class="in">Une ligne à une année, une zone (ex. 1914–1918).</div></details><details class="acc"><summary>▶ Lecture dans le temps</summary><div class="in">Un curseur des années, sous le dessin.</div></details>`;
+  if (ED.tab === 'app') return `<h4>📊 Partir des données</h4><span class="segmented sm" role="group" aria-label="Source" data-seg><button type="button" aria-pressed="true">🌳 Mon arbre</button><button type="button" aria-pressed="false">📋 Une liste</button><button type="button" aria-pressed="false">💬 Une question</button></span><div class="map" style="grid-template-columns:72px minmax(0,1fr)"><span class="lbl">Groupe</span><select class="ui-select" aria-label="Groupe"><option>Branche LACOMBE</option></select><span class="lbl">Période</span><select class="ui-select" aria-label="Période"><option>Toutes</option></select></div><p class="hint">Les mêmes réglages que « 🧮 Compter dans ma base ». Rien ne change ici : seul l’endroit change.</p>`;
+  return `<h4>Relier à</h4><ul class="links"><li><span>👤 Honoré LACOMBE<small>Il s’affiche sur sa fiche</small></span><button type="button" class="ib" aria-label="Retirer">×</button></li><li><span>🎬 Studio · scène « Nice 1860 »<small>Une image figée du 12 novembre, sans vivants</small></span><button type="button" class="ib" aria-label="Retirer">×</button></li></ul><div style="margin-top:10px"><button type="button" class="button small secondary">＋ Relier à…</button></div>`;
+}
+const edEl = $('[data-editor]');
+function renderEditor() {
+  const ro = kiosk(), isNew = ED.arrive === 'new';
+  const crumb = isNew ? `<a href="#s1">Diagrammes</a><i>›</i><a href="#s2">Nouveau</a><i>›</i><span>Pyramide des âges</span>` : `<a href="#s1">Diagrammes</a><i>›</i><a href="#s1" data-gofold>📁 Famille LACOMBE</a><i>›</i><span>Frise de vies — les LACOMBE de Nice</span>`;
+  const name = isNew ? 'Pyramide des âges' : 'Frise de vies — les LACOMBE de Nice';
+  $('[data-addr3]').textContent = isNew ? '#diagrammes/27  (le n° est donné au 1er enregistrement)' : '#diagrammes/12' + (ED.tab !== 'data' ? '/' + {opts: 'reglages', perso: 'personnaliser', app: 'donnees-app', links: 'relier'}[ED.tab] : '');
+  edEl.innerHTML = `<header class="page-header"><div><span class="eyebrow crumb">${crumb}</span></div></header>
+  ${ro ? '<p class="kiosk-line">👀 Mode consultation : l’éditeur s’ouvre en lecture.</p>' : ''}
+  <div class="ed">
+    <div class="ed-top"><a class="button small secondary" href="#s1">← Mes diagrammes</a><input class="nm" value="${esc(name)}" aria-label="Nom du diagramme" data-edname${ro ? ' readonly' : ''}>
+      ${ro ? '' : `<button type="button" class="button small secondary" title="Changer de type">${isNew ? '🔺 Pyramide des âges' : '🗓️ Frise de vies'} ▾</button><span class="grp"><button type="button" class="ib" data-undo aria-label="Défaire" title="Défaire (⌘Z)"${ED.hist ? '' : ' disabled'}>↶</button><button type="button" class="ib" data-redo aria-label="Refaire" title="Refaire (⇧⌘Z)" disabled>↷</button></span>`}
+      <span style="flex:1"></span>${ro ? '' : `<span class="stat${ED.dirty ? ' dirty' : ''}" data-stat aria-live="polite">${ED.dirty ? '• enregistrement…' : '✓ Enregistré'}</span>`}<button type="button" class="button small secondary" data-exp aria-haspopup="menu">⤓ Exporter ▾</button>${ro ? '' : '<button type="button" class="ib" data-edmore aria-label="Plus d’actions" aria-haspopup="menu">⋯</button>'}</div>
+    <div class="ed-body">
+      ${ro ? '' : `<aside class="ed-side"><nav class="segmented sm ed-tabs" role="tablist" aria-label="Parties de l’éditeur">${[['data', 'Données'], ['opts', 'Réglages'], ['perso', '⚙️ Personnaliser'], ['app', '📊 Partir des données'], ['links', 'Relier']].map(([k, l]) => `<button type="button" role="tab" data-tab="${k}" aria-pressed="${ED.tab === k}" aria-selected="${ED.tab === k}">${l}</button>`).join('')}</nav><div class="pane">${pane()}</div></aside>`}
+      <main class="ed-prev">
+        <div class="vz">${isNew ? `<p class="vz-title">Pyramide des âges au décès — MAZAUD</p><p class="vz-sub">Âge au décès, par tranches de 10 ans · 38 personnes (exemple)</p>${thumb('pyramid')}<div class="vz-leg"><span><i class="c1" style="background:var(--s1)"></i>Hommes</span><span><i style="background:var(--s2)"></i>Femmes</span></div>` : `<p class="vz-title">Frise de vies — les LACOMBE de Nice</p><p class="vz-sub">Six membres de la famille, de 1812 à 1958</p>${bigTimeline()}<div class="vz-leg"><span><i style="background:var(--s1)"></i>Hommes</span><span><i style="background:var(--s2)"></i>Femmes</span><span><i style="background:transparent;border:1.5px dashed var(--muted)"></i>Événements</span></div>`}
+          <div class="vz-src"><span>Source : 🌳 Mon arbre · ${isNew ? 'branche MAZAUD' : 'branche LACOMBE'}</span><span class="ui-badge is-green">🔄 À jour</span><span>relu à chaque affichage</span></div></div>
+        <div class="uln"><span class="lbl">Utilisé dans</span>${isNew ? '<span class="muted">Posé nulle part pour l’instant.</span>' : '<a href="#s3">👤 Fiche d’Honoré LACOMBE ↗</a><span class="muted">·</span><a href="#s3">🎬 Studio, scène « Nice 1860 » ↗</a>'}<span class="sp"></span>${ro ? '' : '<button type="button" class="button small secondary" data-poser aria-haspopup="menu">📄 Poser dans…</button>'}</div>
+      </main></div></div>
+  <p class="note">${isNew ? 'Arrivé par « ＋ Nouveau » : l’éditeur s’ouvre sur le dessin choisi, avec un exemple ou tes données. Il est enregistré dès la première modification (plus de « 💾 Enregistrer » à ne pas oublier) ; « ← Mes diagrammes » sans rien toucher ne crée rien.' : 'Le fil d’Ariane mène au dossier ou à « Tous ». Les liens « Utilisé dans » sortent de l’onglet, exprès (↗) ; ← du navigateur ramène ici.'}</p>`;
+}
+edEl.addEventListener('click', e => {
+  const t = e.target.closest('[data-tab]'); if (t) { ED.tab = t.dataset.tab; renderEditor(); return; }
+  if (e.target.closest('[data-undo]')) { ED.hist = Math.max(0, ED.hist - 1); bump(); return; }
+  const ex = e.target.closest('[data-exp]'); if (ex) { e.stopPropagation(); openMenu(ex, 'Exporter', [{ic: '🖼', l: 'Image PNG', msg: '⤓ PNG enregistré (sans les personnes vivantes)'}, {ic: '✏️', l: 'Dessin SVG', msg: '⤓ SVG enregistré'}, {ic: '📄', l: 'PDF', msg: '⤓ PDF enregistré'}, {ic: '🖨', l: 'Imprimer'}, '-', {ic: '🧾', l: 'Les chiffres (CSV)'}, {ic: '📦', l: 'Le fichier du diagramme'}]); return; }
+  const po = e.target.closest('[data-poser]'); if (po) { e.stopPropagation(); openMenu(po, 'Poser dans…', [{ic: '👤', l: 'La fiche d’une personne'}, {ic: '📒', l: 'Une fiche'}, {ic: '📊', l: 'Le récap des données'}, {ic: '🏠', l: 'Le tableau de bord', msg: '🏠 Posé sur le tableau de bord (sans passer par Réglages)'}, {ic: '🎬', l: 'Studio (une image figée)'}, {ic: '🖥', l: 'Présentation'}]); return; }
+  const mo = e.target.closest('[data-edmore]'); if (mo) { e.stopPropagation(); openMenu(mo, 'Ce diagramme', [{ic: '⭐', l: 'Favori'}, {ic: '⧉', l: 'Dupliquer'}, {ic: '📁', l: 'Déplacer dans un dossier…'}, {ic: '🧩', l: 'Garder comme ⭐ modèle', msg: '🧩 Modèle gardé : la mise en forme et la recette, sans chiffres ni noms'}, {ic: '📌', l: 'Figer les chiffres d’aujourd’hui'}, '-', {ic: '🗑', l: 'Mettre à la corbeille', danger: true, msg: '« Frise de vies » mis à la corbeille · ↶ Annuler'}]); return; }
+});
+edEl.addEventListener('input', e => { if (e.target.closest('.rows,[data-edname]')) { ED.hist++; bump(); } });
+edEl.addEventListener('click', e => { const g = e.target.closest('[data-seg]'); if (!g) return; const b = e.target.closest('button'); if (!b) return; $$('button', g).forEach(x => x.setAttribute('aria-pressed', String(x === b))); });
+let saveT = 0;
+function bump() { const s = $('[data-stat]', edEl); if (s) { s.textContent = '• enregistrement…'; s.classList.add('dirty'); } const u = $('[data-undo]', edEl); if (u) u.disabled = !ED.hist; clearTimeout(saveT); saveT = setTimeout(() => { const s2 = $('[data-stat]', edEl); if (s2) { s2.textContent = '✓ Enregistré'; s2.classList.remove('dirty'); } }, 900); }
+$('[data-arrive]').addEventListener('click', e => { const b = e.target.closest('[data-a]'); if (!b) return; ED.arrive = b.dataset.a; ED.tab = 'data'; $$('[data-a]').forEach(x => x.setAttribute('aria-pressed', String(x === b))); renderEditor(); });
+renderEditor();
+
+/* ═══ 5 · allumer ═══ */
+$('[data-tab-add]').addEventListener('click', () => { $('[data-tab-on]').checked = true; toast('📈 Diagrammes ajouté au menu, après Graphiques', () => { $('[data-tab-on]').checked = false; }); });
+$('[data-tab-on]').addEventListener('change', e => toast(e.target.checked ? '📈 Diagrammes montré dans le menu' : '📈 Diagrammes caché du menu', () => { e.target.checked = !e.target.checked; }));
+})();
+</script>
+</body>
+</html>
