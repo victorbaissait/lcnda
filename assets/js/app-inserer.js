@@ -306,6 +306,7 @@
     /* ═════════ 🧺 mettre de côté depuis la petite fenêtre (Maj+Entrée), et reprendre ce qui est mis de côté pour ICI ═════════ */
     const post = b => A().api('cx_write', {}, {method: 'POST', body: b}).then(r => r?.result ?? r);
     async function loadBaskets() { if (!pop) return null; try { pop.bk = await api('cx_basket', {all: 1}); } catch (_) { pop.bk = {baskets: [], items: []}; }
+        if (!pop) return null; // fermée pendant la lecture
         if (!pop.basket) { const ici = iciBaskets(); pop.basket = Number(ici[0]?.id) || Number(readJ('genealogie-connexions-panier', 0)) || Number(pop.bk.basket_id) || 0; } return pop.bk; }
     /** les paniers qui vont d'habitude ICI (cette enquête, cette fiche…) */
     const iciBaskets = () => { const c = pop?.ctx || {}; return (pop?.bk?.baskets || []).filter(b => (b.dests || []).some(d => (c.investigation_id && Number(d.ctx?.investigation_id) === Number(c.investigation_id)) || (c.person_id && Number(d.ctx?.person_id) === Number(c.person_id)))); };

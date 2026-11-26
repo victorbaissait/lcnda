@@ -1743,7 +1743,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-connexions.js?v=15" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=6" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
-<script src="assets/js/app-inserer.js?v=6" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
+<script src="assets/js/app-inserer.js?v=7" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
 <script src="assets/js/heritage-connexions-besoins.js?v=4" defer></script>
 <script src="assets/js/heritage-connexions-outils.js?v=1" defer></script><!-- 🧺 📎 dans les outils : « Ici : l’outil ouvert » (Mettre dans…, Prendre depuis…), 📎 · 📥 dans leur barre, la source à leur façon --><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
