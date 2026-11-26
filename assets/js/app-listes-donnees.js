@@ -688,7 +688,7 @@
     }
     /** ouvrir une liste de données d'ailleurs, déjà filtrée : LCNDA_EXT.dataListsEngine.open('hist_gares', {near: {lat, lon, km, title}}) */
     ext.dataListsEngine = {open: (id, preset) => { const d = all().find(x => x.id === id); if (d) openKey(d.link ? null : keyOf(d), preset); }, keyOf, list: () => all(), applyLocal: localFilter, fetchPage, stateOf, critText, periodText, nearText, buildQuery,
-        render: (d, token) => renderList(d, token), openKey, forget, loadAll, isInstalled, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
+        render: (d, token) => renderList(d, token), sync: () => sync(), openKey, forget, loadAll, isInstalled, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
 
     /* ═════════════════════════════════════════════════════════════════════════════════════════
      * Les données déjà dans l'app (packs, fichiers livrés) : leurs listes, sans toucher à leurs fichiers.
