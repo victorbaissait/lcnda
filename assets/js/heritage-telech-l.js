@@ -77,7 +77,7 @@
     /** un homonyme au Congrès : même prénom, même nom, née la même année (± 1) — une piste, jamais une preuve */
     function eluHomonyms(rows, first, last, birth) {
         const f = fold(String(first || '').split(/[\s,-]+/)[0]), l = fold(last); if (f.length < 2 || l.length < 2 || birth === null) return [];
-        return rows.filter(r => r.year !== null && Math.abs(r.year - birth) <= 1 && fold(r.name).split(' ')[0] === f && fold(r.name).split(' ').slice(-2).join(' ').includes(l));
+        return rows.filter(r => r.year !== null && Math.abs(r.year - birth) <= 1 && fold(r.name).split(' ')[0] === f && (fold(r.name).endsWith(' ' + l) || fold(r.name).replace(/ (jr|sr|ii|iii)$/, '').endsWith(' ' + l)));
     }
 
     /* ── 💵 prix des États-Unis ── */
