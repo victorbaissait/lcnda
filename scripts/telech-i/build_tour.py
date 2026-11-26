@@ -27,7 +27,7 @@ NOT = {'france', 'alpes', 'jura', 'suisse', 'savoie', 'bourgogne', 'ain', 'rhone
        'angleterre', 'algerie', 'corse', 'champagne', 'picardie', 'limousin', 'perigord', 'berry', 'touraine', 'anjou', 'vendee', 'poitou', 'charente',
        'beauce', 'brie', 'vosges', 'marne', 'meuse', 'moselle', 'doubs', 'saone', 'isere', 'durance', 'gironde', 'dordogne', 'lot', 'tarn', 'aude', 'herault',
        'gard', 'var', 'cher', 'allier', 'yonne', 'aube', 'oise', 'somme', 'nord', 'mont blanc', 'saint', 'julien', 'andre', 'etienne', 'gertal', 'guillaume',
-       'pierrot', 'la', 'le', 'les', 'un', 'une', 'une ferme', 'geneve', 'midi', 'sud', 'arrivee', 'depart'}
+       'pierrot', 'vauban', 'buffon', 'descartes', 'les halles', 'perpignan', 'pau', 'cujas', 'jacquard', 'puget', 'la', 'le', 'les', 'un', 'une', 'une ferme', 'geneve', 'midi', 'sud', 'arrivee', 'depart'}
 
 
 def fold(s):
@@ -67,7 +67,9 @@ def main():
         body = txt.split(f'{roman}. —', 1)[-1] if f'{roman}. —' in txt else txt
         sentences = re.split(r'(?<=[.!?»])\s+(?=[«—A-ZÉÀ])', body.replace('\n', ' '))
         for ins, word in cands:
-            s = next((x for x in sentences if re.search(r'\b' + re.escape(word) + r'\b', x) and len(x) > 30), '')
+            hits = [x for x in sentences if re.search(r'\b' + re.escape(word) + r'\b', x) and len(x) > 30]
+            # une phrase du récit plutôt que le sommaire du chapitre (qui répète le titre)
+            s = next((x for x in hits if fold(x.strip(' —.')) not in fold(title) and not x.lstrip().startswith('—  ')), hits[0] if hits else '')
             if not s:
                 print(f'  ? {num} {word} : pas de phrase', file=sys.stderr)
                 continue

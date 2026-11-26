@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """LCNDA — 🧭 Histoire autour : fabrique les fichiers assets/data/ha-*.json.gz.
 
-  python3 scripts/histoire-autour/build.py [--cache DOSSIER] [--only batailles,voies,compostelle,institutions,catastrophes,navires,phares]
+  python3 scripts/histoire-autour/build.py [--cache DOSSIER] [--only batailles,guerres,voies,compostelle,institutions,catastrophes,navires,phares]
 
 Sources (toutes téléchargées, licence lue) :
-  ⚔️ batailles, 🏥 institutions, ⚓ navires, 🗼 phares : Wikidata (CC0), requêtes SPARQL ci-dessous ;
+  ⚔️ batailles, 🎖 guerres, 🏥 institutions, ⚓ navires, 🗼 phares : Wikidata (CC0), requêtes SPARQL ci-dessous ;
   🛣️ voies romaines : Itiner-e static version 2024, de Soto et al. 2025, Zenodo 10.5281/zenodo.17122148 (CC BY 4.0) ;
   🐚 chemins de Compostelle : OpenStreetMap, relations route=foot/hiking (Overpass), © OpenStreetMap contributors (ODbL) ;
   🌋 catastrophes : NOAA NCEI/WDS, Global Significant Earthquake / Volcanic Eruptions / Tsunami databases (domaine public, US Gov) ;
@@ -112,44 +112,120 @@ def images_of(cache, name, where, var='?it'):
 
 
 # ═══════════════════════ ⚔️ batailles et sièges ═══════════════════════
-BAT = '{ ?b wdt:P31/wdt:P279* wd:Q178561 } UNION { ?b wdt:P31/wdt:P279* wd:Q188055 } ?b wdt:P625 ?c0 .'
+BAT_ALL = '{ ?b wdt:P31/wdt:P279* wd:Q178561 } UNION { ?b wdt:P31/wdt:P279* wd:Q188055 }'
+BAT = BAT_ALL + ' ?b wdt:P625 ?c0 .'
+WAR = '?w wdt:P31/wdt:P279* wd:Q198 .'
 WAR_WORDS = re.compile(r'guerre|\bwar\b|campagne|campaign|révolution|revolution|conflit|conflict|insurrection|rébellion|rebellion|croisade|crusade|invasion|expédition|front|offensive', re.I)
+DATES = '''OPTIONAL {{ {v} p:P585/psv:P585 [wikibase:timeValue ?d; wikibase:timePrecision ?dp] }}
+  OPTIONAL {{ {v} p:P580/psv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp] }}
+  OPTIONAL {{ {v} p:P582/psv:P582 [wikibase:timeValue ?e; wikibase:timePrecision ?ep] }}
+  FILTER(BOUND(?d) || BOUND(?s) || BOUND(?e))'''
+# un lieu (P276) trop grand pour placer une bataille : pays, État, continent, mer, océan, fleuve, chaîne de montagnes, région…
+BIG_PLACE = 'wd:Q6256 wd:Q3624078 wd:Q7275 wd:Q5107 wd:Q165 wd:Q9430 wd:Q4022 wd:Q46831 wd:Q35657 wd:Q10864048 wd:Q82794 wd:Q1620908 wd:Q34763 wd:Q107390 wd:Q36784 wd:Q1250464'
+
+
+def dated(r):
+    """(y, d, y2, d2) d'une ligne : P585 (moment), sinon P580 (début), sinon P582 (fin) ; fin = P582 si elle suit le début"""
+    if r.get('d') or r.get('s'):
+        y, d = precise(r.get('d') or r.get('s'), r.get('dp') or r.get('sp'))
+    else:
+        y, d = precise(r.get('e'), r.get('ep'))
+    y2, d2 = precise(r.get('e'), r.get('ep')) if r.get('e') else (None, '')
+    if y is None:
+        return None
+    ok2 = y2 is not None and y2 >= y and (y2, d2) != (y, d)
+    return y, d, (y2 if ok2 else None), (d2 if ok2 else '')
+
+
+def better(cur, new):
+    """la date la plus précise, puis la plus ancienne"""
+    return not cur or (new[1] and not cur['d']) or (bool(cur['d']) == bool(new[1]) and new[0] < cur['y'])
+
+
+def war_set(cache):
+    """{Qid: (y, d, y2, d2, lat, lon)} : les guerres (Q198 et sous-classes), dates et coordonnées propres s'il y en a"""
+    q = f"""SELECT ?w ?d ?dp ?s ?sp ?e ?ep ?i ?c WHERE {{
+  {WAR}
+  OPTIONAL {{ ?w wdt:P625 ?c }}
+  OPTIONAL {{ ?w wdt:P571 ?i }}
+  {DATES.format(v='?w').replace('FILTER(BOUND(?d) || BOUND(?s) || BOUND(?e))', '')}
+}}"""
+    out = {}
+    for r in sparql(cache, 'guerres', q):
+        w = qid(r['w'])
+        x = dated(r) if (r.get('d') or r.get('s') or r.get('e')) else (precise(r.get('i'), 9) + (None, '') if r.get('i') else None)
+        pt = wkt_point(r.get('c'))
+        cur = out.get(w)
+        if x and (not cur or cur['y'] is None or better(cur, x)):
+            out[w] = {'y': x[0], 'd': x[1], 'y2': x[2], 'd2': x[3], 'pt': pt or (cur or {}).get('pt')}
+        elif not cur:
+            out[w] = {'y': None, 'd': '', 'y2': None, 'd2': '', 'pt': pt}
+        elif pt and not cur['pt']:
+            cur['pt'] = pt
+    return out
+
+
+def battles_of_wars(cache):
+    """{bataille: {guerre, …}} : P361 (partie de), de proche en proche (bataille ⊂ campagne ⊂ guerre ⊂ guerre plus grande)"""
+    out = {}
+    for r in sparql(cache, 'bat-guerres-toutes', f'SELECT DISTINCT ?b ?w WHERE {{ {BAT_ALL} ?b wdt:P361+ ?w . {WAR} }}'):
+        out.setdefault(qid(r['b']), set()).add(qid(r['w']))
+    return out
 
 
 def build_batailles(cache):
-    q = f"""SELECT ?b ?d ?dp ?s ?sp ?e ?ep ?c WHERE {{
-  {BAT.replace('?c0', '?c')}
-  OPTIONAL {{ ?b p:P585/psv:P585 [wikibase:timeValue ?d; wikibase:timePrecision ?dp] }}
-  OPTIONAL {{ ?b p:P580/psv:P580 [wikibase:timeValue ?s; wikibase:timePrecision ?sp] }}
-  OPTIONAL {{ ?b p:P582/psv:P582 [wikibase:timeValue ?e; wikibase:timePrecision ?ep] }}
-  FILTER(BOUND(?d) || BOUND(?s))
-}}"""
     base = {}
-    for r in sparql(cache, 'batailles', q):
-        b = qid(r['b'])
-        pt = wkt_point(r.get('c'))
-        if not pt:
+    # 1. placées par leurs propres coordonnées (P625)
+    for r in sparql(cache, 'batailles-2', f"SELECT ?b ?d ?dp ?s ?sp ?e ?ep ?c WHERE {{ {BAT_ALL} ?b wdt:P625 ?c . {DATES.format(v='?b')} }}"):
+        b, pt, x = qid(r['b']), wkt_point(r.get('c')), dated(r)
+        if pt and x and better(base.get(b), x):
+            base[b] = {'y': x[0], 'd': x[1], 'y2': x[2], 'd2': x[3], 'lat': pt[0], 'lon': pt[1], 'approx': 0}
+    direct = len(base)
+    # 2. sans coordonnées : placées par leur lieu (P276 → P625), sauf un lieu trop grand (pays, mer, fleuve… ou plus de 3 000 km²)
+    q = f"""SELECT ?b ?l ?c ?area ?big ?d ?dp ?s ?sp ?e ?ep WHERE {{
+  {BAT_ALL} FILTER NOT EXISTS {{ ?b wdt:P625 [] }}
+  ?b wdt:P276 ?l . ?l wdt:P625 ?c .
+  OPTIONAL {{ ?l p:P2046/psn:P2046/wikibase:quantityAmount ?area }}
+  BIND(EXISTS {{ ?l wdt:P36 [] }} || EXISTS {{ VALUES ?bad {{ {BIG_PLACE} }} ?l wdt:P31 ?bad }} AS ?big)
+  {DATES.format(v='?b')}
+}}"""
+    by_loc, too_big = {}, set()
+    for r in sparql(cache, 'bat-par-lieu', q):
+        b, pt, x = qid(r['b']), wkt_point(r.get('c')), dated(r)
+        if not pt or not x:
             continue
-        y, d = precise(r.get('d') or r.get('s'), r.get('dp') or r.get('sp'))
-        y2, d2 = precise(r.get('e'), r.get('ep')) if r.get('e') else (None, '')
-        if y is None:
+        if r.get('big') in ('true', '1') or float(r.get('area') or 0) > 3e9:
+            too_big.add(b)
             continue
-        cur = base.get(b)
-        if cur and ((cur['d'] and not d) or (bool(cur['d']) == bool(d) and cur['y'] <= y)):  # la date la plus précise, puis la plus ancienne
+        cur = by_loc.get(b)
+        if cur is None:
+            by_loc[b] = {'y': x[0], 'd': x[1], 'y2': x[2], 'd2': x[3], 'pts': {pt}, 'l': qid(r['l'])}
+        else:
+            cur['pts'].add(pt)
+            if better(cur, x):
+                cur.update(y=x[0], d=x[1], y2=x[2], d2=x[3])
+    spread = 0
+    for b, x in by_loc.items():
+        pts = sorted(x['pts'])
+        if len(pts) > 1 and max(km(*p, *q) for p in pts for q in pts) > 100:  # plusieurs lieux éloignés : on ne choisit pas
+            spread += 1
             continue
-        ok2 = y2 is not None and y2 >= y
-        base[b] = {'y': y, 'd': d, 'y2': y2 if ok2 else None, 'd2': d2 if ok2 else '', 'lat': pt[0], 'lon': pt[1]}
+        lat, lon = round(sum(p[0] for p in pts) / len(pts), 4), round(sum(p[1] for p in pts) / len(pts), 4)
+        base[b] = {'y': x['y'], 'd': x['d'], 'y2': x['y2'], 'd2': x['d2'], 'lat': lat, 'lon': lon, 'approx': 1}
     ids = sorted(base)
-    print(f'⚔️ {len(ids)} batailles et sièges datés et placés', flush=True)
-    labs = names_of(cache, 'bat-noms', BAT.replace('?b', '?it'))
+    print(f'⚔️ {len(ids)} batailles et sièges datés et placés : {direct} par leurs coordonnées, {len(ids) - direct} par leur lieu '
+          f'({len(too_big - set(by_loc))} au lieu trop grand, {spread} aux lieux trop éloignés : écartées)', flush=True)
+    labs = names_of(cache, 'bat-noms-2', BAT_ALL.replace('?b', '?it'))
     wars = {}
-    for r in sparql(cache, 'bat-guerres', f'SELECT ?b ?w ?wfr ?wen WHERE {{ {BAT} ?b wdt:P361 ?w . {lab("?w")} }}'):
+    for r in sparql(cache, 'bat-guerres-2', f'SELECT ?b ?w ?wfr ?wen WHERE {{ {BAT_ALL} ?b wdt:P361 ?w . {lab("?w")} }}'):
         x = pick(r, 'w')
         if x:
             wars.setdefault(qid(r['b']), []).append(x)
-    bel = multi(sparql(cache, 'bat-camps', f'SELECT ?b ?p ?pfr ?pen WHERE {{ {BAT} ?b wdt:P710 ?p . {lab("?p")} }}'), 'b', 'p')
-    at = attrs(cache, 'bat-lieux-pays', BAT, ['P276', 'P17'], '?b')
+    bel = multi(sparql(cache, 'bat-camps-2', f'SELECT ?b ?p ?pfr ?pen WHERE {{ {BAT_ALL} ?b wdt:P710 ?p . {lab("?p")} }}'), 'b', 'p')
+    at = attrs(cache, 'bat-lieux-pays-2', BAT_ALL, ['P276', 'P17'], '?b')
     locs, ctry = at['P276'], at['P17']
+    wset = war_set(cache)
+    inwar = battles_of_wars(cache)
     rows = []
     for b in ids:
         x = base[b]
@@ -158,10 +234,49 @@ def build_batailles(cache):
             continue
         ws = sorted(set(wars.get(b, [])))
         war = next((w for w in ws if WAR_WORDS.search(w)), ws[0] if ws else '')
-        rows.append([b, name, x['y'], x['d'], x['y2'], x['d2'], x['lat'], x['lon'], war, '|'.join(bel.get(b, [])[:6]), (locs.get(b) or [''])[0], (ctry.get(b) or [''])[0], frw])
+        # ses guerres, la plus courte d'abord (la plus précise : « guerre franco-allemande » avant « guerres napoléoniennes »)
+        wq = sorted((w for w in inwar.get(b, ()) if w in wset), key=lambda w: (((wset[w]['y2'] or wset[w]['y'] or 0) - (wset[w]['y'] or 0)) if wset[w]['y'] is not None else 9999, w))
+        rows.append([b, name, x['y'], x['d'], x['y2'], x['d2'], x['lat'], x['lon'], war, '|'.join(bel.get(b, [])[:6]), (locs.get(b) or [''])[0], (ctry.get(b) or [''])[0], frw, x['approx'], '|'.join(wq)])
     rows.sort(key=lambda r: (r[2], r[3]))
-    meta = dict(WD_SRC, what='Batailles et sièges (Wikidata : nature = bataille Q178561 ou siège Q188055 et leurs sous-classes, avec date et coordonnées)')
-    return write_gz('ha-batailles.json.gz', {**meta, 'fields': ['q', 'n', 'y', 'd', 'y2', 'd2', 'lat', 'lon', 'war', 'bel', 'loc', 'country', 'frwiki'], 'rows': rows}), len(rows)
+    meta = dict(WD_SRC, what='Batailles et sièges (Wikidata : nature = bataille Q178561 ou siège Q188055 et leurs sous-classes, datés par P585, P580 ou P582 ; '
+                'placés par leurs coordonnées P625, sinon par celles de leur lieu P276 : approx = 1, « placé par son lieu »)',
+                counts={'direct': sum(1 for r in rows if not r[13]), 'by_place': sum(1 for r in rows if r[13])})
+    return write_gz('ha-batailles.json.gz', {**meta, 'fields': ['q', 'n', 'y', 'd', 'y2', 'd2', 'lat', 'lon', 'war', 'bel', 'loc', 'country', 'frwiki', 'approx', 'wq'], 'rows': rows}), len(rows)
+
+
+# ═══════════════════════ 🎖 guerres ═══════════════════════
+def build_guerres(cache):
+    """les guerres (Q198 et sous-classes) : dates, camps, pays, lieux ; leurs batailles placées (ha-batailles) donnent leur centre"""
+    wset = war_set(cache)
+    labs = names_of(cache, 'guerres-noms', WAR.replace('?w', '?it'))
+    at = attrs(cache, 'guerres-camps-pays', WAR, ['P710', 'P17', 'P276'], '?w')
+    import gzip as _gz
+    with _gz.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'assets', 'data', 'ha-batailles.json.gz')) as f:
+        B = json.load(f)
+    F = {k: i for i, k in enumerate(B['fields'])}
+    pts = {}
+    for r in B['rows']:
+        for w in filter(None, str(r[F['wq']] or '').split('|')):
+            pts.setdefault(w, []).append((r[F['lat']], r[F['lon']]))
+    rows = []
+    for w, x in wset.items():
+        name, frw = labs.get(w, ('', ''))
+        nb = len(pts.get(w, []))
+        if not name or (x['y'] is None and not nb):
+            continue
+        if nb:  # le centre : la médiane de ses batailles
+            la, lo = sorted(p[0] for p in pts[w]), sorted(p[1] for p in pts[w])
+            lat, lon = la[nb // 2], lo[nb // 2]
+        elif x['pt']:
+            lat, lon = x['pt']
+        else:
+            lat = lon = None
+        rows.append([w, name, x['y'], x['d'], x['y2'], x['d2'], lat, lon, '|'.join(at['P710'].get(w, [])[:8]), '|'.join(at['P17'].get(w, [])[:4]), '|'.join(at['P276'].get(w, [])[:4]), nb, frw])
+    rows.sort(key=lambda r: (r[2] if r[2] is not None else 99999, r[1]))
+    print(f'🎖 {len(rows)} guerres ({sum(1 for r in rows if r[11])} avec des batailles placées)', flush=True)
+    meta = dict(WD_SRC, what='Guerres (Wikidata : nature = guerre Q198 et ses sous-classes ; début P580, fin P582, camps P710, pays P17, lieux P276 ; '
+                'nb = ses batailles placées dans ha-batailles, par P361 « partie de », de proche en proche)')
+    return write_gz('ha-guerres.json.gz', {**meta, 'fields': ['q', 'n', 'y', 'd', 'y2', 'd2', 'lat', 'lon', 'part', 'country', 'loc', 'nb', 'frwiki'], 'rows': rows}), len(rows)
 
 
 # ═══════════════════════ 🛣️ voies romaines (Itiner-e) ═══════════════════════
@@ -529,7 +644,7 @@ def build_phares(cache):
     return write_gz('ha-phares.json.gz', {**meta, 'fields': ['q', 'n', 'from', 'lit', 'to', 'lat', 'lon', 'height', 'focal', 'range', 'rangeSrc', 'osm', 'country', 'img', 'frwiki'], 'rows': rows}), len(rows)
 
 
-STEPS = {'batailles': build_batailles, 'voies': build_voies, 'compostelle': build_compostelle, 'institutions': build_institutions,
+STEPS = {'batailles': build_batailles, 'guerres': build_guerres, 'voies': build_voies, 'compostelle': build_compostelle, 'institutions': build_institutions,
          'catastrophes': build_catastrophes, 'navires': build_navires, 'phares': build_phares}
 
 if __name__ == '__main__':
