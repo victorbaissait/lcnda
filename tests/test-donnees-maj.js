@@ -184,7 +184,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.strictEqual(await p.getAttribute('[data-dmaj-row="meteo:complet"]', 'data-dmaj-state'), 'missing');
             assert.match(await p.textContent('[data-dmaj-row="data:l8c-tour"]'), /CC0 1\.0/);
             assert.match(await p.textContent('[data-dmaj-used]'), /Installé : /); assert.ok(await p.$('[data-dmaj-free]'));
-            await p.fill('[data-dmaj-q]', 'rivières'); await sleep(500);
+            await p.fill('[data-dmaj-q]', 'débit des rivières'); await sleep(500);
             assert.deepStrictEqual(await p.$$eval('[data-dmaj-row]', els => els.map(e => e.dataset.dmajRow)), ['meteo:plus-rivieres']);
             await p.fill('[data-dmaj-q]', ''); await sleep(500);
             await p.click('[data-dmaj-checkall]'); await p.waitForFunction(() => /Tout télécharger \(/.test(document.querySelector('[data-dmaj-getall]')?.textContent || ''), null, {timeout: 30000});

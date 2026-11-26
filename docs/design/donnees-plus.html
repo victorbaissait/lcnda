@@ -1,0 +1,1155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Données, en plus</title>
+<style>
+/* Les jetons et les composants de l'app (assets/css/app.css, ui.css, listes-donnees.css, fiche-village-organiser.css), recopiés ici pour que la maquette s'ouvre seule — même base que carte-guerres-temps.html. */
+:root{
+  color-scheme:light;
+  --ink:#080808;--paper:#fff;--card-bg:#fff;--card-head-bg:#fafafa;--card-line:#080808;
+  --blue:#0066cc;--blue-bright:#055dff;--blue-soft:#eaf2ff;--on-blue:#fff;--line-color:#d6d6d6;--muted:#6d6d6d;
+  --shadow:6px 6px 0 rgba(5,93,255,.34);--shadow-small:4px 4px 0 rgba(5,93,255,.28);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(5,93,255,.45);
+  --ui-ink:#111;--ui-bg:#fff;--ui-soft:#eaf1ff;--ui-line:#e3e5ea;--ui-muted:#666;--ui-blue:#055dff;
+  --eyebrow:#0066cc;--btn2-bg:#fff;--btn2-line:#080808;--btn2-ink:#080808;
+  --seg-bg:#fff;--seg-ink:#111;--seg-line:#111;--seg-on-bg:#055dff;--seg-on-ink:#fff;
+  --grid:rgba(0,102,204,.035);--topbar:#fff;--topline:#080808;
+  --toggle-off:#b8bec9;--kbd-line:#c9ccd3;--link:#2b6cb0;
+  --green:#1a7f37;--green-soft:#eaf6ee;--orange:#d9480f;--orange-soft:#fff1e8;--red:#c62828;--red-soft:#fdecec;--yel-soft:#fff8d6;--yel-ink:#7a5d00;--fog:#9aa0a8;
+  --toast-bg:#111;--toast-ink:#fff;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#a3a3a3;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);--shadow-modal:10px 10px 0 rgba(77,159,255,.28);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+  --green:#4cc070;--green-soft:#15281c;--orange:#ff8a4c;--orange-soft:#2e1e14;--red:#ff6b6b;--red-soft:#2e1717;--yel-soft:#2c2612;--yel-ink:#f0d276;
+  --toast-bg:#e8e8e8;--toast-ink:#111;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.4 var(--font);padding:24px 24px 56px;overflow-wrap:break-word}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:is(button,input,select,textarea,a,[tabindex]):focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1440px;margin:0 auto}
+
+/* ── la maquette autour ── */
+.mock{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;flex-wrap:wrap;margin:0 0 18px}
+.mock .eyebrow{display:block}
+.mock h1{margin:5px 0 6px;font-size:22px;letter-spacing:-.01em}
+.mock p{margin:0;max-width:860px;color:var(--muted);font-size:14px;line-height:1.45}
+.tag-new{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.08em;text-transform:uppercase;background:var(--ui-blue);color:#fff;padding:0 6px;margin-right:6px;vertical-align:1px}
+.path{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin:8px 0 0;font-size:13px;font-weight:600}
+.path span{border:1.5px solid var(--line-color);background:var(--card-bg);padding:2px 8px}
+.path span.on{border-color:var(--ui-blue);background:var(--ui-soft);color:var(--ink)}
+.path i{font-style:normal;color:var(--muted)}
+.toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 26px}
+.toc a{text-decoration:none;border:2px solid var(--card-line);background:var(--card-bg);padding:6px 11px;font-size:13px;font-weight:700;box-shadow:var(--shadow-btn)}
+.toc a:hover{background:var(--ui-soft)}
+.toc a small{color:var(--muted);font-weight:600;margin-left:4px}
+.sec{margin:46px 0 0}
+.sec-h{margin:0 0 16px;max-width:900px}
+.sec-h h2{margin:4px 0 4px;font-size:24px;letter-spacing:-.02em}
+.sec-h p{margin:0;color:var(--muted);font-size:14px}
+.callout{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;background:var(--orange);color:#fff;font:800 12px/1 var(--font);border-radius:11px;vertical-align:2px}
+
+/* ── composants de l'app ── */
+.eyebrow{color:var(--eyebrow);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:2px solid var(--ink);background:var(--blue);color:var(--on-blue);padding:11px 15px;min-height:42px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-small);transition:.15s ease;white-space:nowrap;border-radius:0;text-decoration:none}
+:root[data-theme="dark"] .button:not(.secondary){border-color:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .button:not(.secondary){border-color:var(--blue)}}
+.button:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.button:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.button.secondary{color:var(--btn2-ink);background:var(--btn2-bg);border-color:var(--btn2-line)}
+.button.small{min-height:32px;padding:6px 10px;font-size:11.5px;box-shadow:var(--shadow-btn)}
+.button.small:hover{box-shadow:1px 1px 0 var(--ink)}
+.button.icon{font-size:18px;line-height:1;padding:9px 13px}
+.link-button{border:0;background:none;padding:0;color:var(--link);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-size:13px}
+.segmented{display:inline-flex;flex-wrap:wrap;padding:1px 0 0 1px;flex:none;max-width:100%}
+.segmented button{min-height:32px;margin:-1px 0 0 -1px;position:relative;border:2px solid var(--seg-line);background:var(--seg-bg);color:var(--seg-ink);cursor:pointer;font-size:12px;font-weight:700;padding:1px 9px;white-space:nowrap;border-radius:0}
+.segmented button[aria-pressed="true"]{z-index:1;background:var(--seg-on-bg);color:var(--seg-on-ink)}
+.segmented.sm button{min-height:28px;font-size:11.5px;padding:1px 7px}
+.ui-listbar-btn{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:5px 9px;min-height:34px;font:600 13px/1.2 var(--font);cursor:pointer;white-space:nowrap;border-radius:0}
+.ui-listbar-btn:hover{background:var(--ui-soft)}
+.ui-listbar-btn[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.ui-listbar-chip{display:inline-flex;align-items:center;gap:4px;background:var(--ui-soft);border:1.5px solid var(--ui-blue);color:var(--ui-blue);padding:3px 8px;font:700 12px/1.3 var(--font);cursor:pointer;border-radius:0}
+.ui-listbar-chip.off{background:transparent;border-color:var(--line-color);color:var(--muted);text-decoration:line-through}
+.ui-select{appearance:none;border:2px solid var(--ui-ink);border-radius:0;background:var(--ui-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 9px center;color:var(--ui-ink);padding:5px 28px 5px 9px;font:600 13px var(--font);min-height:34px;max-width:100%;min-width:0}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;position:relative;user-select:none;min-height:30px}
+.ui-toggle>input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ui-toggle>i{width:34px;height:20px;border-radius:12px;background:var(--toggle-off);position:relative;flex:none;transition:background .15s}
+.ui-toggle>i::after{content:'';position:absolute;left:3px;top:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:left .15s}
+.ui-toggle>input:checked+i{background:var(--ui-blue)}
+.ui-toggle>input:checked+i::after{left:17px}
+.ui-toggle>input:disabled+i{opacity:.55}
+.ui-toggle>input:focus-visible+i{outline:3px solid rgba(5,93,255,.5);outline-offset:2px}
+.ui-num{display:inline-flex;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);min-height:30px}
+.ui-num input{width:50px;border:0;background:transparent;padding:3px 7px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ui-ink);outline:0}
+.ui-num span{padding:0 7px 0 0;font-size:12px;color:var(--muted)}
+.ui-badge{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.06em;text-transform:uppercase;padding:0 6px;border:1.5px solid var(--ui-ink);white-space:nowrap;vertical-align:1px}
+.ui-badge.is-blue{background:var(--ui-blue);border-color:var(--ui-blue);color:#fff}
+.ui-badge.is-green{border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.ui-badge.is-grey{border-color:var(--line-color);color:var(--muted)}
+.ui-badge.is-orange{border-color:var(--orange);color:var(--orange);background:var(--orange-soft)}
+.lbl{font-size:12px;font-weight:700;white-space:nowrap}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.card{background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);min-width:0}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px 10px;flex-wrap:wrap;padding:12px 15px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.card-head h3{margin:0;font-size:16px;line-height:1.2}
+.card-head h3 small{color:var(--muted);font-weight:400;font-size:12.5px}
+.card-body{padding:14px 15px}
+.data-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.data-table th{text-align:left;padding:9px 10px;color:var(--on-blue);background:var(--blue);border-bottom:2px solid var(--ink);white-space:nowrap;font-weight:800}
+.data-table td{padding:9px 10px;border-bottom:1px solid var(--line-color);vertical-align:top}
+.data-table tr:hover td{background:var(--blue-soft)}
+.data-table td small{display:block;color:var(--muted);font-size:11.5px}
+.tw{max-width:100%;overflow-x:auto;position:relative}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line-color);background:var(--card-bg);font-size:13px;margin-left:3px;color:var(--ink);cursor:pointer;padding:0;vertical-align:middle}
+.ib:hover{border-color:var(--ui-blue);background:var(--ui-soft)}
+.ib.on{border-color:var(--ui-blue);background:var(--ui-soft)}
+.src a,.srca{font:700 11px var(--font);border:1px solid var(--line-color);padding:1px 6px;color:var(--blue);background:var(--blue-soft);text-decoration:none;white-space:nowrap}
+.toast{position:fixed;left:24px;bottom:24px;z-index:50;display:flex;align-items:center;gap:12px;max-width:min(470px,calc(100vw - 32px));background:var(--toast-bg);color:var(--toast-ink);padding:11px 14px;font:500 14px/1.35 var(--font);box-shadow:5px 5px 0 rgba(5,93,255,.45)}
+.toast button{border:1.5px solid currentColor;background:transparent;color:inherit;font-weight:700;font-size:13px;padding:3px 9px;cursor:pointer;white-space:nowrap}
+
+/* ── la fenêtre de l'app : barre du haut ── */
+.app{border:2px solid var(--topline);background:var(--paper);min-width:0}
+.topbar{display:grid;grid-template-columns:240px minmax(0,1fr);align-items:center;background:var(--topbar);border-bottom:2px solid var(--topline);min-height:72px}
+.brand{height:100%;border-right:2px solid var(--topline);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:end;padding:12px 24px 9px;font-size:12px;line-height:1;letter-spacing:.04em;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;width:130px;height:130px;right:-62px;top:-85px;background:repeating-radial-gradient(circle,var(--blue) 0 1px,transparent 1px 4px);transform:rotate(-8deg)}
+.brand span{background:var(--topbar);border:1px solid var(--blue);color:var(--blue);justify-self:end;padding:3px 5px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand strong{background:var(--blue);color:var(--on-blue);justify-self:start;padding:4px 6px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand small{grid-column:1/-1;font-size:10px;letter-spacing:.18em;align-self:end;text-align:center;color:var(--muted)}
+.main-nav{display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;padding:8px 16px;gap:8px;min-width:0}
+.nav-item{border:2px solid transparent;background:transparent;font-weight:700;padding:6px 12px;white-space:nowrap;line-height:1.1;font-size:15px;color:var(--ink);text-align:left}
+.nav-item span{display:block;font-size:9px;line-height:1;color:var(--blue);letter-spacing:.12em;margin-bottom:4px}
+.nav-item.is-active{background:var(--blue);border-color:var(--ink);color:var(--on-blue);box-shadow:var(--shadow-small)}
+.nav-item.is-active span{color:var(--on-blue)}
+.workspace{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.page{padding:28px 3.5% 34px}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin:0 0 16px}
+.page-header h2{margin:6px 0 0;font-size:clamp(26px,3vw,34px);line-height:1.02;letter-spacing:-.03em}
+.page-header p{margin:6px 0 0;color:var(--muted);font-size:13.5px;max-width:640px}
+.ph-ico{font-size:.86em;margin-right:.19em}
+.page-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ld-source{margin:-4px 0 12px;color:var(--muted);font-size:13px}
+.ld-bar-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ld-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
+.ld-count{font-weight:700;margin-right:4px;font-size:14px}
+.kiosk{font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line-color);margin:14px 0 0;padding:9px 0 0}
+
+/* ── modale (app.css .modal) ── */
+.modal{border:3px solid var(--ink);box-shadow:var(--shadow-modal);background:var(--card-bg);min-width:0}
+:root[data-theme="dark"] .modal{border-color:#555}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .modal{border-color:#555}}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.modal-head h2{margin:4px 0 0;font-size:21px;letter-spacing:-.01em}
+.modal-body{padding:14px 18px}
+.modal-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 18px 16px;border-top:1px solid var(--ui-line)}
+.modal-actions .spacer{flex:1}
+.x{border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted);padding:2px 6px}
+</style>
+<style>
+/* ── A1 · le récap et « Organiser le récap » ── */
+.duo{display:grid;grid-template-columns:minmax(0,1fr) 480px;gap:26px;align-items:start}
+.ask{display:flex;gap:8px;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);box-shadow:var(--shadow-small);padding:5px 5px 5px 12px;min-width:0}
+.ask .q{flex:1;min-width:0;border:0;background:transparent;font-size:14.5px;outline:0;padding:6px 0}
+.ask .button{box-shadow:none}
+.ex{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:9px 0 0;font-size:12px}
+.ex .lbl{color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px}
+.k{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line-color);padding:3px 10px;font-size:12px;background:var(--card-bg);border-radius:999px;color:var(--blue);cursor:pointer;white-space:nowrap}
+.k:hover{border-color:var(--ui-blue)}
+.rgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-flow:row dense;gap:16px;margin:18px 0 0}
+.blk{grid-column:span 8;min-width:0}
+.blk.is-compact{grid-column:span 4}
+.blk .card-head{padding:9px 13px}
+.blk .card-head h3{font-size:14.5px}
+.blk .card-head .link-button{font-size:12px}
+.blk .card-body{padding:6px 13px 10px}
+.hl{list-style:none;margin:0;padding:0}
+.hl li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:2px 8px;padding:7px 0;border-bottom:1px solid var(--ui-line);font-size:13px;align-items:start}
+.hl li:last-child{border-bottom:0}
+.hl .ic{font-size:15px;line-height:1.3}
+.hl small{display:block;color:var(--muted);font-size:11.5px}
+.hl .go{color:var(--link);font-size:12px;white-space:nowrap;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.blk.is-compact .hl li:nth-child(n+4),.blk.is-compact .hl small,.blk.is-compact .more{display:none}
+.blk.is-compact .hl li{padding:5px 0}
+.grip-note{font-size:12px;color:var(--muted);margin:10px 0 0}
+.trs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
+.tr{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:0 8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--ui-line);font-size:13px;min-width:0}
+.tr b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.tr small{display:block;color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.tr .st{display:flex;gap:4px;white-space:nowrap}
+.blk.is-compact .trs{grid-template-columns:minmax(0,1fr)}
+.blk.is-compact .tr small{display:none}
+.blk.is-compact .tr:nth-child(n+11){display:none}
+.pin{color:var(--muted);font-size:12px;cursor:grab;user-select:none}
+.empty-all{border:2px dashed var(--line-color);padding:16px;color:var(--muted);font-size:13.5px;grid-column:1/-1}
+.same-today{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+/* fenêtre « Organiser » (fiche-village-organiser.css) */
+.vl-help{font-size:13px;color:var(--muted);margin:0 0 10px}
+.vl-table{width:100%;border-collapse:collapse;font-size:13px}
+.vl-table th{text-align:left;font:800 10px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 6px;border-bottom:2px solid var(--card-line)}
+.vl-table td{padding:6px 6px;border-bottom:1px solid var(--ui-line);vertical-align:middle}
+.vl-table tr.is-off td.vl-name,.vl-table tr.is-off td.vl-size{opacity:.5}
+.vl-table tr.is-na td.vl-name{opacity:.5}
+.vl-table tr.is-drag{opacity:.4}
+.vl-table tr.is-drop-before td{box-shadow:inset 0 3px 0 var(--ui-blue)}
+.vl-table tr.is-drop-after td{box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.vl-ord{white-space:nowrap}
+.vl-grip,.vl-move{border:0;background:transparent;color:var(--muted);width:26px;height:28px;cursor:pointer;padding:0;font-size:14px}
+.vl-grip{cursor:grab;font-size:17px}
+.vl-grip:hover,.vl-move:hover:not(:disabled){background:var(--ui-soft);color:var(--ink)}
+.vl-move:disabled{opacity:.25;cursor:default}
+.vl-table .segmented{flex-wrap:nowrap}
+.vl-name small{display:block;color:var(--muted);font-size:11.5px}
+.vl-foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 0}
+.vl-foot .muted{font-size:12px}
+
+/* ── A2 · Réglages → 📊 Données ── */
+.set{display:grid;grid-template-columns:210px minmax(0,1fr);gap:26px;align-items:start}
+.snav{display:flex;flex-direction:column;gap:2px;border:2px solid var(--card-line);background:var(--card-bg);padding:6px}
+.snav span{padding:7px 10px;font-size:13.5px;font-weight:600;white-space:nowrap}
+.snav span.on{background:var(--blue);color:var(--on-blue)}
+.set-top{display:flex;justify-content:space-between;align-items:center;gap:10px 14px;flex-wrap:wrap;margin:0 0 14px}
+.count-on{font-size:14px}
+.count-on b{font-size:18px;font-variant-numeric:tabular-nums}
+.grp{margin:0 0 18px}
+.grp .card-head{padding:10px 15px}
+.grp .card-head h3 small{margin-left:6px}
+.grp-acts{display:flex;gap:6px;flex-wrap:wrap}
+.feat{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:2px 12px;padding:11px 15px;border-bottom:1px solid var(--ui-line);align-items:start}
+.feat:last-child{border-bottom:0}
+.feat .ic{font-size:18px;line-height:1.25}
+.feat b{font-size:14px}
+.feat .why{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
+.feat .opts{grid-column:2/4;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:7px 0 1px;font-size:12.5px}
+.feat .opts .lbl{font-weight:600;color:var(--muted)}
+.feat.is-off .opts{display:none}
+.feat.is-off b,.feat.is-off .ic{opacity:.6}
+.feat .lock{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.chk{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;white-space:nowrap;cursor:pointer}
+.chk input{accent-color:var(--ui-blue);width:15px;height:15px;margin:0}
+.where{display:flex;gap:10px 16px;align-items:center;flex-wrap:wrap;padding:12px 15px;font-size:13.5px}
+
+/* ── B · les écrans ── */
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 26px;align-items:start}
+.fgrid>.span2{grid-column:1/-1}
+.fc .card-head{padding:11px 15px}
+.fc .card-head h3{font-size:15.5px}
+.num{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:22px;padding:0 6px;background:var(--blue);color:var(--on-blue);font:800 12px/1 var(--font);margin-right:7px;vertical-align:2px}
+.fc .where-in{font-size:12px;color:var(--muted);margin:0 0 10px}
+.fc .where-in b{color:var(--ink);font-weight:600}
+.sub-h{font:800 10.5px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+.mini-page{border:2px solid var(--card-line);background:var(--paper);padding:14px 15px;min-width:0}
+.mini-page h4{margin:4px 0 2px;font-size:22px;letter-spacing:-.02em}
+.arrow-d{text-align:center;color:var(--blue);font-size:20px;margin:6px 0}
+.pastille{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ui-blue);background:var(--ui-soft);color:var(--ink);padding:5px 11px;font:700 13px var(--font);cursor:pointer;box-shadow:var(--shadow-btn)}
+.facts{margin:8px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px;font-size:13px}
+.facts dt{color:var(--muted);font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding-top:3px}.facts dd{margin:0}
+.tcount{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:10px 0 0}
+.tcount span{border:1.5px solid var(--line-color);background:var(--card-bg);padding:6px 8px;font-size:12px;min-width:0}
+.tcount b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
+.age{font-variant-numeric:tabular-nums;white-space:nowrap}
+.dim td{opacity:.4}
+/* compare */
+.cmp{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr);border:2px solid var(--card-line);font-size:13px}
+.cmp>div{padding:8px 10px;border-bottom:1px solid var(--ui-line);min-width:0}
+.cmp>div:nth-last-child(-n+3){border-bottom:0}
+.cmp .h{background:var(--card-head-bg);font-weight:800;border-bottom:2px solid var(--card-line)}
+.cmp .h small{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+.cmp .t{font-weight:700;font-size:12.5px}
+.cmp .both{background:var(--blue-soft)}
+.cmp small{color:var(--muted);font-size:11.5px}
+/* carte */
+.stage{position:relative;border:2px solid var(--card-line);background:#fff;overflow:hidden}
+.stage svg{display:block;width:100%;height:auto;max-height:440px}
+.lyr{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.lyr .ui-listbar-chip i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.map-legend{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.94);color:#080808;border:2px solid #080808;padding:6px 9px;font-size:11.5px;display:flex;flex-direction:column;gap:2px;max-width:220px}
+.map-legend span{display:flex;align-items:center;gap:6px}
+.map-legend i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.lfc-attr{position:absolute;right:4px;bottom:4px;font:10.5px/1.3 var(--font);color:#333;background:rgba(255,255,255,.85);padding:3px 6px}
+/* travail sur une ligne */
+.conf{display:inline-flex;gap:3px;flex-wrap:wrap}
+.cm{display:inline-flex;align-items:center;gap:3px;font:700 10.5px/1.5 var(--font);border:1.5px dashed var(--line-color);color:var(--muted);padding:0 5px;white-space:nowrap}
+.cm.mine{border-style:solid;border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.cm.doubt{border-style:solid;border-color:var(--orange);color:var(--orange);background:var(--orange-soft)}
+tr.is-doubt td.t-main{text-decoration:line-through;text-decoration-color:var(--orange);opacity:.75}
+tr.is-mine td{background:color-mix(in srgb,var(--green) 6%,transparent)}
+.note-line{display:block;margin-top:4px;padding:3px 7px;border-left:3px solid var(--yel-ink);background:var(--yel-soft);color:var(--ink);font-size:11.5px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:12px;color:var(--muted);margin:10px 0 0}
+.panes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:16px 0 0}
+.pane{border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-btn);padding:12px 13px;font-size:13px;min-width:0}
+.pane h4{margin:0 0 8px;font-size:14px}
+.field{display:block;margin:0 0 8px}
+.field>span{display:block;font:800 10px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.field textarea,.field input{width:100%;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:6px 8px;font-size:13px;border-radius:0;min-width:0}
+.field textarea{min-height:58px;resize:vertical}
+.menu{list-style:none;margin:0;padding:0;border:2px solid var(--card-line)}
+.menu li{padding:7px 10px;border-bottom:1px solid var(--ui-line);font-size:13px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.menu li:last-child{border-bottom:0}
+.menu li.on{background:var(--orange-soft)}
+/* citer */
+.cite-out{border:2px solid var(--ui-ink);background:var(--ui-bg);padding:10px 12px;font:13px/1.5 Georgia,"Times New Roman",serif;margin:10px 0;min-height:66px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* crédits */
+.cred td:first-child{font-weight:700}
+.cred .thm td{background:var(--card-head-bg);font:800 11px var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+/* livret */
+.book{display:grid;grid-template-columns:250px repeat(2,minmax(0,380px));gap:26px;align-items:start}
+.paper{background:#fff;color:#1b1b1b;border:1px solid #bbb;box-shadow:0 1px 0 #ddd,6px 6px 0 rgba(5,93,255,.18);aspect-ratio:210/297;padding:26px 26px 20px;font:12px/1.45 Georgia,"Times New Roman",serif;position:relative;overflow:hidden;min-width:0}
+.paper h5{font:700 9px var(--font);letter-spacing:.16em;text-transform:uppercase;color:#0066cc;margin:0}
+.paper h4{font:700 25px/1.1 Georgia,serif;margin:10px 0 4px;letter-spacing:-.01em}
+.paper h6{font:700 15px/1.2 Georgia,serif;margin:0 0 8px}
+.paper .rule{height:2px;background:#111;margin:14px 0}
+.paper ol{margin:6px 0 0;padding-left:18px}
+.paper ol li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted #bbb;padding:2px 0}
+.paper ol{list-style:none;padding:0}
+.paper .pn{position:absolute;bottom:10px;left:0;right:0;text-align:center;font:10px var(--font);color:#888}
+.paper .ev{border-left:3px solid #0066cc;padding:2px 0 2px 9px;margin:8px 0}
+.paper .ev b{display:block;font-family:var(--font);font-size:11.5px}
+.paper .src{font:10px var(--font);color:#777;margin-top:8px}
+.cover-art{height:78px;margin:14px 0 6px;background:repeating-radial-gradient(circle at 85% 20%,#0066cc 0 1px,transparent 1px 5px);border:2px solid #111}
+.chaps{display:flex;flex-direction:column;gap:3px;margin:6px 0 10px}
+/* diaporama */
+.slide{position:relative;background:#101418;color:#f2f2f2;border:2px solid var(--card-line);min-height:270px;padding:22px 24px 18px;overflow:hidden;display:flex;flex-direction:column}
+.slide .yr{font:800 64px/1 var(--font);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.slide .who{font-size:15px;color:#b9c4d4;margin:4px 0 14px}
+.slide .evs{display:grid;gap:8px;max-width:560px}
+.slide .evs div{background:rgba(255,255,255,.07);border-left:4px solid #5599ff;padding:7px 11px;font-size:14px}
+.slide .evs small{display:block;color:#b9c4d4;font-size:12px}
+.slide .bar{position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.12)}
+.slide .bar i{position:absolute;left:0;top:0;bottom:0;background:#5599ff;transition:width .3s}
+.slide .fade{animation:fd .5s ease}
+@keyframes fd{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.slide .fade{animation:none}}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 0}
+/* partage */
+.goes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.ok-box,.no-box{border-left:4px solid var(--green);background:var(--green-soft);padding:9px 12px;font-size:13px}
+.no-box{border-color:var(--red);background:var(--red-soft)}
+.ok-box b,.no-box b{display:block;font:800 10.5px var(--font);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.ok-box ul,.no-box ul{margin:0;padding-left:18px}
+.visitor{border:2px solid var(--card-line);margin:12px 0 0}
+.visitor .vh{background:var(--card-head-bg);border-bottom:2px solid var(--card-line);padding:7px 11px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+/* disque */
+.bars{display:grid;gap:7px;margin:4px 0 0}
+.barl{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 62px;gap:10px;align-items:center;font-size:13px}
+.barl .tk{height:12px;background:var(--ui-line);position:relative}
+.barl .tk i{position:absolute;left:0;top:0;bottom:0;background:var(--blue-bright)}
+.barl .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.sugg{list-style:none;margin:0;padding:0}
+.sugg li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--ui-line);font-size:13px}
+.sugg li:last-child{border-bottom:0}
+.sugg li small{display:block;color:var(--muted);font-size:11.5px}
+.sugg li.gone{opacity:.45}
+.sugg li.gone b{text-decoration:line-through}
+/* versions */
+.vers{list-style:none;margin:0;padding:0;border-left:3px solid var(--line-color);margin-left:6px}
+.vers li{position:relative;padding:4px 0 12px 18px;font-size:13px}
+.vers li::before{content:"";position:absolute;left:-8px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--card-bg);border:2.5px solid var(--blue)}
+.vers li.cur::before{background:var(--blue)}
+.vers li small{display:block;color:var(--muted);font-size:12px}
+.vers .row{margin-top:5px}
+
+/* ── questions ── */
+.qs{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.qs li{counter-increment:q;padding:14px 16px}
+.qs li>b{display:block;font-size:15px;margin:0 0 6px}
+.qs li>b::before{content:counter(q) ". ";color:var(--blue)}
+.qs .opt{font-size:13px;color:var(--muted);margin:0}
+.qs .reco{font-size:13px;margin:9px 0 0;border-left:4px solid var(--green);background:var(--green-soft);padding:7px 11px}
+
+@media (max-width:1180px){
+  .duo{grid-template-columns:minmax(0,1fr)}
+  .book{grid-template-columns:repeat(2,minmax(0,380px))}.book>.bopts{grid-column:1/-1}
+  .panes{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+}
+@media (max-width:980px){
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+  .qs{grid-template-columns:minmax(0,1fr)}
+  .blk,.blk.is-compact{grid-column:span 12}
+  .set{grid-template-columns:minmax(0,1fr)}
+  .snav{flex-direction:row;flex-wrap:wrap}
+}
+@media (max-width:760px){
+  body{padding:16px 16px 40px}
+  .topbar{grid-template-columns:minmax(0,1fr);min-height:0}
+  .brand{border-right:0;border-bottom:2px solid var(--topline);height:50px;padding:10px 100px 8px}
+  .brand small{display:none}
+  .main-nav{padding:8px 10px}
+  .nav-item{font-size:13px;padding:5px 8px}
+  .page{padding:18px 14px 24px}
+  .page-header h2{font-size:25px}
+  .sec{margin-top:36px}
+  .sec-h h2{font-size:21px}
+  .trs{grid-template-columns:minmax(0,1fr)}
+  .blk.is-compact .trs{grid-template-columns:minmax(0,1fr)}
+  .tcount{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cmp{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .cmp .t{grid-column:1/-1;background:var(--card-head-bg);border-bottom:1px solid var(--ui-line)}
+  .cmp .h.t{display:none}
+  .cmp>div:nth-last-child(-n+3){border-bottom:1px solid var(--ui-line)}
+  .panes{grid-template-columns:minmax(0,1fr)}
+  .book{grid-template-columns:minmax(0,1fr)}.paper{aspect-ratio:auto;min-height:420px}
+  .goes{grid-template-columns:minmax(0,1fr)}
+  .barl{grid-template-columns:minmax(0,1fr) 58px}.barl .tk{grid-column:1/-1;grid-row:2}
+  .hide-s{display:none!important}
+  .stack thead{display:none}
+  .stack,.stack tbody,.stack tr,.stack td{display:block;width:100%}
+  .stack tr{padding:8px 0;border-bottom:1px solid var(--line-color)}
+  .stack td{border:0;padding:3px 2px}
+  .stack td.age{font-weight:800}
+  .stack td:last-child{padding-top:6px}
+  .stack tr:hover td{background:transparent}
+  .slide .yr{font-size:48px}
+  .map-legend{position:static;border:0;border-top:2px solid #080808;max-width:none;flex-flow:row wrap;gap:3px 12px}
+  .lfc-attr{position:static;display:block}
+  .vl-table th:nth-child(4),.vl-table td:nth-child(4){display:none}
+  .vl-table .vl-name .vl-sz{display:flex;margin-top:5px}
+  .modal-body,.modal-head,.modal-actions{padding-left:14px;padding-right:14px}
+  .feat{padding:10px 12px}
+  .toast{left:16px;right:16px;bottom:16px}
+}
+@media (min-width:761px){.vl-table .vl-name .vl-sz{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mock">
+    <div>
+      <span class="eyebrow"><span class="tag-new">Maquette</span>à valider · tel que dans l’app</span>
+      <h1>📊 Les données, en plus — et vraiment modulable</h1>
+      <p>Les 21 ajouts que tu as acceptés pour l’espace Données. D’abord ce qui les rend modulables : chaque bloc du récap se montre, se cache, se range et se règle en taille (« ⚙ Organiser le récap ») ; chaque ajout s’allume ou s’éteint dans Réglages → 📊 Données. <b>Tout éteint, l’écran reste exactement celui validé.</b> Familles inventées MAZAUD (Tulle), LACOMBE (Nice), DURAND (Salon-de-Provence) ; les événements sont vrais, les nombres marqués « exemple » sont à recompter dans l’app.</p>
+      <div class="path" aria-label="Où c’est dans l’app"><span>📋 Listes</span><i>→</i><span>🧰 Données</span><i>→</i><span class="on">📊 Récap</span><i>·</i><span>⚙ Réglages</span><i>→</i><span class="on">📊 Données</span></div>
+    </div>
+    <span class="segmented" role="group" aria-label="Thème"><button type="button" data-theme-set="auto" aria-pressed="true">Auto</button><button type="button" data-theme-set="light" aria-pressed="false">Clair</button><button type="button" data-theme-set="dark" aria-pressed="false">Sombre</button></span>
+  </div>
+
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#a1">⚙ Organiser le récap</a><a href="#a2">⚙ Réglages → 📊 Données</a><a href="#g1">Retrouver vite <small>1–4</small></a><a href="#g2">Relier à la famille <small>5–9</small></a><a href="#g3">Ton travail <small>10–13</small></a><a href="#g4">Partager <small>14–18</small></a><a href="#g5">Entretien <small>19–21</small></a><a href="#qs">? Questions</a>
+  </nav>
+
+  <!-- ═══════════ A1 ═══════════ -->
+  <section class="sec" id="a1" aria-labelledby="a1h" style="margin-top:0">
+    <div class="sec-h"><span class="eyebrow">A · Modulable · 1 sur 2</span><h2 id="a1h">⚙ Organiser le récap</h2><p>La même fenêtre que « ⚙️ Organiser la fiche » d’un village : ⠿ pour glisser (ou ↑ ↓, ou Alt + flèches au clavier), un interrupteur pour montrer, et la taille <b>Compacte</b> (3 lignes) ou <b>Normale</b>. Essaie : le récap à gauche change tout de suite. La question reste toujours en haut ; un bloc vide (pas encore de favori…) ne se montre pas.</p></div>
+    <div class="duo">
+      <div class="app">
+        <header class="topbar">
+          <div class="brand" aria-hidden="true"><span>Ma</span><strong>Famille</strong><small>GÉNÉALOGIE</small></div>
+          <nav class="main-nav" aria-label="Onglets de l’app"><span class="nav-item"><span>01</span>Tableau de bord</span><span class="nav-item"><span>02</span>Personnes</span><span class="nav-item"><span>03</span>Graphiques</span><span class="nav-item"><span>04</span>Carte</span><span class="nav-item is-active" aria-current="page"><span>05</span>Listes</span><span class="nav-item"><span>06</span>Chronologie</span></nav>
+        </header>
+        <main class="workspace">
+          <section class="page" aria-label="Récap des données">
+            <header class="page-header">
+              <div><span class="eyebrow">Listes · 🧰 Données</span><h2><span class="ph-ico" aria-hidden="true">📊</span>Récap des données</h2><p>Ce que les listes savent, et ce qu’elles disent de ta famille. Tout est calculé ici, dans ton navigateur.</p></div>
+              <div class="page-actions"><span class="segmented" role="group" aria-label="Vue"><button type="button" aria-pressed="true">📊 Récap</button><button type="button" aria-pressed="false">🧰 Thèmes</button></span><button type="button" class="button small secondary" id="open-org">⚙ Organiser le récap</button></div>
+            </header>
+            <form class="ask" onsubmit="return false"><span aria-hidden="true">🔍</span><input class="q" type="search" placeholder="Pose une question sur les données…" aria-label="Pose une question sur les données"><button type="submit" class="button small">Demander</button></form>
+            <div class="ex"><span class="lbl">Essaie</span><span class="k">les séismes à moins de 150 km de Nice</span><span class="k">le Tour de France près de Tulle</span><span class="k">les musées autour de Brive</span></div>
+
+            <div class="rgrid" id="rgrid">
+              <section class="card blk" data-blk="fav" aria-label="Mes favoris">
+                <div class="card-head"><h3>⭐ Mes favoris</h3><button type="button" class="link-button">tout voir</button></div>
+                <div class="card-body"><ul class="hl">
+                  <li><span class="ic">🚲</span><span>Tour de France <small>Liste réunie · 114 éditions · <span class="ui-badge is-green">📶 sans Internet</span></small></span><span class="pin" title="Glisser pour ranger">⠿</span></li>
+                  <li><span class="ic">🌋</span><span>Séismes de France <small>9 listes réunies · 31 200 lignes (exemple)</small></span><span class="pin">⠿</span></li>
+                  <li><span class="ic">⛅</span><span>Météo d’autrefois — Nice <small>1865 → 2025 · station Nice-Côte d’Azur</small></span><span class="pin">⠿</span></li>
+                  <li><span class="ic">🏘</span><span>Monuments aux morts de Corrèze <small>286 communes (exemple)</small></span><span class="pin">⠿</span></li>
+                </ul></div>
+              </section>
+              <section class="card blk is-compact" data-blk="rec" aria-label="Récemment ouvertes">
+                <div class="card-head"><h3>🕘 Récemment ouvertes</h3></div>
+                <div class="card-body"><ul class="hl">
+                  <li><span class="ic">⚔️</span><span>Batailles et sièges <small>aujourd’hui, 10 h 12</small></span><span class="go">rouvrir</span></li>
+                  <li><span class="ic">🌊</span><span>Repères de crues — Corrèze <small>hier</small></span><span class="go">rouvrir</span></li>
+                  <li><span class="ic">🚂</span><span>Gares et lignes d’autrefois <small>il y a 3 jours</small></span><span class="go">rouvrir</span></li>
+                  <li><span class="ic">👶</span><span>Prénoms — Alpes-Maritimes <small>il y a 5 jours</small></span><span class="go">rouvrir</span></li>
+                  <li><span class="ic">🏛</span><span>Monuments historiques <small>il y a 6 jours</small></span><span class="go">rouvrir</span></li>
+                </ul></div>
+              </section>
+              <section class="card blk" data-blk="new" aria-label="Nouveau depuis ta dernière visite">
+                <div class="card-head"><h3>🆕 Nouveau depuis ta visite <small>du 12 nov.</small></h3><span class="ui-badge is-blue">3</span></div>
+                <div class="card-body"><ul class="hl">
+                  <li><span class="ic">🌋</span><span>Séisme de Ligurie, 23 février 1887 : témoignages de Nice ajoutés <small>pack Séismes du 20 nov. · Marie LACOMBE avait 31 ans</small></span><span class="go">voir</span></li>
+                  <li><span class="ic">🏘</span><span>2 noms MAZAUD sur le monument aux morts de Tulle <small>pack Monuments aux morts · exemple</small></span><span class="go">voir</span></li>
+                  <li><span class="ic">🏆</span><span>Nouveau thème 🏆 Sport : 2 listes <small>dont le Tour de France, passé près de Tulle et de Salon</small></span><span class="go">voir</span></li>
+                </ul><p class="more small muted" style="margin:6px 0 0">Seulement ce qui touche les lieux et les années de ta famille. Le reste : Réglages → 🗂 Données.</p></div>
+              </section>
+              <section class="card blk is-compact" data-blk="qs" aria-label="Mes questions">
+                <div class="card-head"><h3>💾 Mes questions</h3></div>
+                <div class="card-body"><ul class="hl">
+                  <li><span class="ic">🔍</span><span>les séismes à moins de 150 km de Nice <span class="ui-badge is-blue">1 nouvelle réponse</span><small>vérifiée ce matin</small></span><span class="go">poser</span></li>
+                  <li><span class="ic">🔍</span><span>le Tour de France quand Jean MAZAUD avait 12 ans <small>3 réponses</small></span><span class="go">poser</span></li>
+                  <li><span class="ic">🔍</span><span>les crues de la Corrèze à Tulle de 1850 à 1950 <small>2 réponses (exemple)</small></span><span class="go">poser</span></li>
+                </ul></div>
+              </section>
+              <section class="card blk" data-blk="fam" aria-label="Pour ta famille">
+                <div class="card-head"><h3>👪 Pour ta famille</h3></div>
+                <div class="card-body"><ul class="hl">
+                  <li><span class="ic">🌋</span><span>3 séismes forts à moins de 50 km des lieux de la famille <small>Lambesc 1909 (Louis DURAND avait 29 ans) · Roquebillière 1644 · La Bollène 1564</small></span><span class="go">voir →</span></li>
+                  <li><span class="ic">⚔️</span><span>3 combats près de Nice, avant la naissance de Marie LACOMBE <small>Gilette 1793 · Saorge 1794 · le pont du Var 1800</small></span><span class="go">voir →</span></li>
+                  <li><span class="ic">🚂</span><span>Le train arrive à Nice en 1864 : Marie LACOMBE a 8 ans <small>ligne de Marseille à Nice</small></span><span class="go">voir →</span></li>
+                  <li><span class="ic">🌊</span><span>2 grandes crues de la Corrèze à Tulle du vivant des MAZAUD (exemple)</span><span class="go">voir →</span></li>
+                </ul></div>
+              </section>
+              <section class="card blk is-compact" data-blk="miss" aria-label="Ce qui manque">
+                <div class="card-head"><h3>🕳 Ce qui manque</h3></div>
+                <div class="card-body"><ul class="hl">
+                  <li><span class="ic">📍</span><span>4 lieux de l’arbre sans coordonnées <small>23 données de plus apparaîtraient (exemple)</small></span><span class="go">placer</span></li>
+                  <li><span class="ic">📅</span><span>6 personnes sans année de naissance <small>leurs « âge à ce moment » restent vides</small></span><span class="go">voir</span></li>
+                  <li><span class="ic">⤓</span><span>3 listes utiles pour tes lieux pas installées</span><span class="go">voir</span></li>
+                </ul></div>
+              </section>
+              <section class="card blk is-compact" data-blk="todo" aria-label="À faire">
+                <div class="card-head"><h3>✅ À faire</h3></div>
+                <div class="card-body"><ul class="hl">
+                  <li><span class="ic">⤓</span><span>29 listes pas encore installées</span><span class="go">voir</span></li>
+                  <li><span class="ic">↻</span><span>4 listes ont une version plus récente <small>vérifié le 20 nov., sur ton clic</small></span><span class="go">mettre à jour</span></li>
+                  <li><span class="ic">✨</span><span>Nouveau : 🏆 Sport (2 listes)</span><span class="go">voir</span></li>
+                </ul></div>
+              </section>
+              <section class="card blk is-compact" data-blk="disk" aria-label="Place sur le disque">
+                <div class="card-head"><h3>💽 Place prise</h3></div>
+                <div class="card-body"><ul class="hl">
+                  <li><span class="ic">💽</span><span>6,8 Go de données (exemple) <small>3 packs jamais ouverts : 1,9 Go</small></span><span class="go">faire de la place</span></li>
+                </ul></div>
+              </section>
+              <section class="card blk wide" data-blk="themes" aria-label="Les 20 thèmes">
+                <div class="card-head"><h3>🧰 Les 20 thèmes <small>listes installées · lignes (exemple)</small></h3><button type="button" class="link-button">les cartes 🧰 Thèmes</button></div>
+                <div class="card-body"><div class="trs">
+                  <div class="tr"><span>🌋</span><span><b>Séismes, volcans et terrains</b><small>8 / 9 · 31 200 lignes</small></span><span class="st"><span class="ui-badge is-grey">⤓ 1</span></span></div>
+                  <div class="tr"><span>🌊</span><span><b>Eaux, crues et mers</b><small>8 / 8 · 54 900 lignes</small></span><span class="st"><span class="ui-badge is-green">↻</span></span></div>
+                  <div class="tr"><span>⛅</span><span><b>Climat, ciel et saisons</b><small>11 / 14 · 412 000 lignes</small></span><span class="st"><span class="ui-badge is-grey">⤓ 3</span></span></div>
+                  <div class="tr"><span>⚔️</span><span><b>Guerres et soldats</b><small>9 / 11 · 1,4 million</small></span><span class="st"><span class="ui-badge is-grey">⤓ 2</span></span></div>
+                  <div class="tr"><span>🏛</span><span><b>Monuments et patrimoine</b><small>11 / 12 · 47 800 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>🏘</span><span><b>Petit patrimoine du village</b><small>11 / 11 · 22 600 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>🖼</span><span><b>Musées, images et sons</b><small>10 / 12 · 8 900 lignes</small></span><span class="st"><span class="ui-badge is-grey">⤓ 2</span></span></div>
+                  <div class="tr"><span>🗺</span><span><b>Lieux et noms de lieux</b><small>11 / 14 · 236 000 lignes</small></span><span class="st"><span class="ui-badge is-green">↻</span></span></div>
+                  <div class="tr"><span>👑</span><span><b>Pouvoirs, lois et frontières</b><small>11 / 13 · 96 400 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>👶</span><span><b>Prénoms et noms de famille</b><small>6 / 8 · 610 000 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>🔎</span><span><b>Retrouver une personne</b><small>7 / 11 · 9,8 millions</small></span><span class="st"><span class="ui-badge is-grey">⤓ 4</span></span></div>
+                  <div class="tr"><span>⚒️</span><span><b>Métiers et industries</b><small>12 / 13 · 38 100 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>🌾</span><span><b>Champs, bêtes et plantes</b><small>12 / 14 · 15 300 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>🚂</span><span><b>Routes, trains et bateaux</b><small>12 / 13 · 41 700 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>✝️</span><span><b>Croire, soigner, enfermer</b><small>11 / 12 · 63 000 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>💶</span><span><b>Prix, monnaies et chiffres</b><small>7 / 7 · 12 400 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>📚</span><span><b>Livres, journaux et écritures</b><small>10 / 13 · 19 800 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>🎉</span><span><b>Fêtes, jeux et vie de tous les jours</b><small>11 / 12 · 6 100 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>🌍</span><span><b>Grands événements et dates</b><small>7 / 7 · 4 300 lignes</small></span><span class="st"></span></div>
+                  <div class="tr"><span>🏆</span><span><b>Sport</b><small>2 / 2 · 2 470 lignes</small></span><span class="st"><span class="ui-badge is-blue">Nouveau</span></span></div>
+                </div><p class="more small muted" style="margin:8px 0 0">En taille compacte : 10 thèmes et « voir les 20 ».</p></div>
+              </section>
+            </div>
+            <p class="same-today" id="same-today">Les blocs ⭐ 🕘 🆕 💾 🕳 💽 viennent des ajouts : éteints dans les Réglages, il ne reste que 👪 Pour ta famille, ✅ À faire et 🧰 Les 20 thèmes — le récap validé.</p>
+          </section>
+        </main>
+      </div>
+
+      <div class="modal" id="org" role="dialog" aria-labelledby="orgh" tabindex="-1">
+        <div class="modal-head"><div><span class="eyebrow">Récap des données</span><h2 id="orgh">⚙ Organiser le récap</h2></div><button type="button" class="x" aria-label="Fermer">×</button></div>
+        <div class="modal-body">
+          <p class="vl-help">Glisse ⠿ (ou ↑ ↓, ou Alt + flèches) pour ranger ; l’interrupteur montre ou cache ; la taille met plus ou moins de lignes. Gardé tout de suite, pour toi seul.</p>
+          <table class="vl-table"><thead><tr><th>Ordre</th><th>Bloc</th><th>Montré</th><th>Taille</th></tr></thead><tbody id="org-body"></tbody></table>
+          <div class="vl-foot"><button type="button" class="button small secondary" id="org-reset">↺ Remettre comme au départ</button><button type="button" class="button small secondary" id="org-undo" disabled>↶ Annuler</button><span class="muted" id="org-count"></span></div>
+        </div>
+        <div class="modal-actions"><span class="small muted">Un bloc grisé est éteint dans <button type="button" class="link-button" data-go="#a2">Réglages → 📊 Données</button>.</span><span class="spacer"></span><button type="button" class="button small">Fermer</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ A2 ═══════════ -->
+  <section class="sec" id="a2" aria-labelledby="a2h">
+    <div class="sec-h"><span class="eyebrow">A · Modulable · 2 sur 2</span><h2 id="a2h">⚙ Réglages → 📊 Données</h2><p>Une page calme : les 21 ajouts en 5 groupes, un interrupteur chacun, une ligne pour dire à quoi il sert, et ses petits réglages seulement quand il est allumé. Chaque geste est gardé tout de suite, avec « ↶ Annuler ». Essaie « Tout éteindre » : le récap du dessus redevient celui d’aujourd’hui.</p></div>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand" aria-hidden="true"><span>Ma</span><strong>Famille</strong><small>GÉNÉALOGIE</small></div>
+        <nav class="main-nav" aria-label="Onglets de l’app"><span class="nav-item"><span>01</span>Tableau de bord</span><span class="nav-item"><span>02</span>Personnes</span><span class="nav-item"><span>03</span>Graphiques</span><span class="nav-item"><span>04</span>Carte</span><span class="nav-item"><span>05</span>Listes</span><span class="nav-item"><span>06</span>Chronologie</span></nav>
+      </header>
+      <main class="workspace">
+        <section class="page" aria-label="Réglages des données">
+          <header class="page-header">
+            <div><span class="eyebrow">Réglages · 📊 Données</span><h2><span class="ph-ico" aria-hidden="true">📊</span>Ce que Données peut faire en plus</h2><p>Allume seulement ce qui te sert. Rien ne part sur Internet sans un clic de ta part.</p></div>
+          </header>
+          <div class="set">
+            <nav class="snav" aria-label="Réglages"><span>🎨 Apparence</span><span>🗂 Onglets du haut</span><span>🗂 Données installées</span><span class="on" aria-current="page">📊 Données</span><span>🧰 Listes</span><span>🔒 Confidentialité</span><span>💾 Sauvegarde</span></nav>
+            <div>
+              <section class="card grp" aria-label="Où sont les données">
+                <div class="where"><b>Où sont les données</b><span class="segmented" role="group" aria-label="Où sont les données"><button type="button" aria-pressed="true">Dans Listes</button><button type="button" aria-pressed="false">Onglet 📊 Données</button><button type="button" aria-pressed="false">Les deux</button></span><span class="small muted">Déjà décidé : l’un des deux reste toujours là.</span></div>
+              </section>
+              <div class="set-top"><span class="count-on" aria-live="polite"><b id="on-count">12</b> ajouts allumés sur 21</span><span class="row"><button type="button" class="button small secondary" id="set-undo" disabled>↶ Annuler</button><button type="button" class="button small secondary" id="set-reset">↺ Remettre comme au départ</button></span></div>
+              <div id="groups"></div>
+              <p class="kiosk">🔒 En borne et pour les invités du réseau local : tout se lit, rien ne s’écrit (pas de note, pas d’ajout, pas de marque, pas de partage), et ces réglages ne s’ouvrent pas. Les personnes vivantes ou confidentielles ne sortent jamais de l’app, quels que soient les réglages.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <!-- ═══════════ B · Retrouver vite ═══════════ -->
+  <section class="sec" id="g1" aria-labelledby="g1h">
+    <div class="sec-h"><span class="eyebrow">B · Retrouver vite · 1 à 4</span><h2 id="g1h">Ce que tu ouvres souvent, tout de suite</h2><p>Ces quatre-là vivent dans le récap (blocs ⭐ 🕘 🆕 💾 au-dessus). Ici, le geste qui les remplit.</p></div>
+    <div class="fgrid">
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">1</span>⭐ Favoris épinglés</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Sur <b>toute liste</b> : le ⭐ déjà en haut à droite. Les favoris se rangent en glissant ⠿, dans le récap.</p>
+          <div class="mini-page">
+            <div class="page-header" style="margin:0"><div><span class="eyebrow">Listes · 🧰 Données · 🏆 Sport</span><h4>🚲 Tour de France</h4></div><div class="page-actions"><button type="button" class="button small secondary">⤓ Exporter</button><button type="button" class="button small secondary" id="star" aria-pressed="true" title="Retirer des favoris">⭐ Favori</button></div></div>
+          </div>
+          <p class="small muted" style="margin:10px 0 0">Un clic : la liste rejoint « ⭐ Mes favoris », avec ses filtres du moment s’il y en a (« Tour de France · près de Tulle »).</p>
+        </div>
+      </article>
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">2</span>🕘 Listes récentes</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Rien à faire : chaque liste ouverte s’y met. Combien en garder : <b>Réglages</b> (5, 10 ou 20).</p>
+          <ul class="hl">
+            <li><span class="ic">⚔️</span><span>Batailles et sièges <small>aujourd’hui · carte, « ▶ Dans le temps », 1870</small></span><span class="go">rouvrir</span></li>
+            <li><span class="ic">🌊</span><span>Repères de crues — Corrèze <small>hier · filtre « Tulle, 10 km »</small></span><span class="go">rouvrir</span></li>
+            <li><span class="ic">🚂</span><span>Gares et lignes d’autrefois <small>il y a 3 jours</small></span><span class="go">rouvrir</span></li>
+          </ul>
+          <p class="small muted" style="margin:8px 0 0">« rouvrir » remet la liste comme tu l’as laissée (vue, filtres, année). <button type="button" class="link-button">Oublier les récents</button></p>
+        </div>
+      </article>
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">3</span>🆕 Nouveau depuis ta dernière visite</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Après une mise à jour de pack, seulement <b>ce qui touche ta famille</b> : ses lieux (rayon du thème) pendant ses années.</p>
+          <table class="data-table"><thead><tr><th>Quoi</th><th class="hide-s">Pack</th><th>Pour ta famille</th></tr></thead><tbody>
+            <tr><td>Séisme de Ligurie<small>23 févr. 1887 · 14 témoignages niçois (exemple)</small></td><td class="hide-s">🌋 Séismes · 20 nov.</td><td>Marie LACOMBE, 31 ans, à Nice</td></tr>
+            <tr><td>Monument aux morts de Tulle<small>2 noms MAZAUD (exemple)</small></td><td class="hide-s">🏘 Monuments aux morts</td><td>Tulle, lieu des MAZAUD</td></tr>
+            <tr><td>Tour de France 2017<small>arrivée d’étape à Salon-de-Provence</small></td><td class="hide-s">🏆 Sport · nouveau</td><td>Salon, lieu des DURAND</td></tr>
+          </tbody></table>
+          <p class="small muted" style="margin:8px 0 0">« ✓ Tout vu » vide le bloc. Calculé ici, rien n’est envoyé.</p>
+        </div>
+      </article>
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">4</span>💾 Questions gardées</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Sous la réponse d’une question : <b>💾 Garder cette question</b>. Elle est reposée toute seule après chaque mise à jour.</p>
+          <form class="ask" onsubmit="return false" style="box-shadow:none"><span aria-hidden="true">🔍</span><input class="q" type="search" value="les séismes à moins de 150 km de Nice" aria-label="Question"><button type="button" class="button small">Demander</button></form>
+          <div class="ld-chips"><span class="ld-count">12 réponses</span><button type="button" class="button small secondary" id="keepq" aria-pressed="true">💾 Gardée</button><span class="ui-badge is-blue">1 nouvelle réponse</span></div>
+          <p class="small muted" style="margin:10px 0 0">La nouvelle ligne est surlignée la première fois. Fréquence : à chaque mise à jour (par défaut), chaque semaine, chaque mois, jamais. La question et ses réponses restent dans l’app.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ B · Relier à la famille ═══════════ -->
+  <section class="sec" id="g2" aria-labelledby="g2h">
+    <div class="sec-h"><span class="eyebrow">B · Relier à la famille · 5 à 9</span><h2 id="g2h">Les données, du point de vue d’une personne ou d’un lieu</h2><p>Une personne choisie devient un filtre comme un autre, dans toutes les listes.</p></div>
+    <div class="fgrid">
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">5</span>📊 La pastille sur la fiche</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Fiche d’une personne (et d’un lieu), sous les dates. Un clic ouvre le récap <b>filtré sur elle</b>.</p>
+          <div class="mini-page">
+            <span class="eyebrow">Personnes · LACOMBE</span><h4>Marie LACOMBE</h4>
+            <dl class="facts"><dt>Naissance</dt><dd>1856, Nice (alors au royaume de Sardaigne)</dd><dt>Décès</dt><dd>1931, Nice</dd></dl>
+            <p style="margin:10px 0 0"><button type="button" class="pastille">📊 42 données la concernent</button> <span class="small muted">exemple</span></p>
+          </div>
+          <div class="arrow-d" aria-hidden="true">↓</div>
+          <div class="ld-chips" style="margin:0"><span class="ui-listbar-chip">👤 Marie LACOMBE ×</span><span class="ui-listbar-chip">📅 pendant sa vie, 1856–1931 ×</span><span class="ui-listbar-chip">📍 Nice, Gilette ×</span></div>
+          <div class="tcount"><span><b>11</b>⛅ climat</span><span><b>9</b>🏛 monuments</span><span><b>6</b>⚔️ guerres</span><span><b>6</b>🏆 sport</span><span><b>3</b>🌊 eaux</span><span><b>3</b>🚂 trains</span><span><b>2</b>🌋 séismes</span><span><b>2</b>👑 frontières</span></div>
+        </div>
+      </article>
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">6</span>👤 Filtrer par la vie d’une personne</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Dans <b>toutes les listes</b>, bouton « 👤 Pour… » de la barre. Ici : tout ce qui s’est passé autour de Nice.</p>
+          <div class="ld-bar-row"><select class="ui-select" id="lifep" aria-label="Personne"><option value="1856">👤 Marie LACOMBE (1856–1931)</option><option value="1872">👤 Jeanne LACOMBE (1872–1950)</option></select></div>
+          <div class="ld-bar-row" style="margin-top:8px"><span class="segmented sm" role="group" aria-label="Moment de sa vie" id="lifef"><button type="button" data-f="life" aria-pressed="true">Pendant sa vie</button><button type="button" data-f="before" aria-pressed="false">Avant sa naissance</button><button type="button" data-f="child" aria-pressed="false">Enfance (0–12)</button><button type="button" data-f="young" aria-pressed="false">Jeunesse (13–25)</button></span></div>
+          <div class="ld-chips"><span class="ld-count" id="life-count"></span></div>
+          <div class="tw" style="margin-top:8px"><table class="data-table"><thead><tr><th>Année</th><th>Quoi</th><th>Son âge</th></tr></thead><tbody id="life-body"></tbody></table></div>
+        </div>
+      </article>
+      <article class="card fc span2">
+        <div class="card-head"><h3><span class="num">7</span>⚖️ Comparer, côte à côte, par thème</h3><span class="ui-badge is-grey">éteint au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Récap → <b>⚖️ Comparer</b>, ou menu ⋯ d’une fiche. Deux personnes (leurs lieux pendant leurs vies) ou deux lieux (toutes les années). Bleu : ce qu’ils ont en commun.</p>
+          <div class="ld-bar-row" style="margin-bottom:10px"><span class="segmented" role="group" aria-label="Comparer" id="cmpk"><button type="button" data-k="p" aria-pressed="true">Deux personnes</button><button type="button" data-k="l" aria-pressed="false">Deux lieux</button></span></div>
+          <div class="cmp" id="cmp"></div>
+          <p class="small muted" style="margin:8px 0 0">Chaque case ouvre la liste filtrée. Nombres : exemple.</p>
+        </div>
+      </article>
+      <article class="card fc span2">
+        <div class="card-head"><h3><span class="num">8</span>🗺 Une seule carte de tout, autour d’un lieu</h3><span class="ui-badge is-grey">éteint au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Fiche d’un lieu → <b>🗺 Tout autour</b>, ou récap → « 📍 Autour de… ». Une couche par thème : un clic l’allume ou l’éteint. Même fond que les autres cartes (sans Internet).</p>
+          <div class="lyr" id="lyr" role="group" aria-label="Couches"></div>
+          <div class="stage">
+            <svg viewBox="0 0 800 380" role="img" aria-label="Carte autour de Tulle, 30 km" id="bigmap">
+              <rect width="800" height="380" fill="#fff"/>
+              <path d="M40 300 C 160 270, 230 220, 330 205 S 470 190, 520 150 S 640 90, 770 70" fill="none" stroke="#9cc1ff" stroke-width="3"/>
+              <text x="610" y="96" font-size="12" fill="#4b6fa8" font-family="system-ui">la Corrèze</text>
+              <path d="M90 60 L230 40 L360 70 L520 30 L700 60 L760 200 L700 330 L520 360 L300 350 L120 340 L50 220 Z" fill="none" stroke="#c5c5c5" stroke-width="1" stroke-dasharray="4 4"/>
+              <circle cx="400" cy="195" r="160" fill="rgba(43,138,62,.05)" stroke="#2b8a3e" stroke-width="1.5" stroke-dasharray="6 5"/>
+              <g id="pts"></g>
+              <g><rect x="391" y="186" width="18" height="18" fill="#2b8a3e" stroke="#111" stroke-width="2" transform="rotate(45 400 195)"/><text x="416" y="190" font-size="15" font-weight="700" fill="#111" stroke="#fff" stroke-width="4" paint-order="stroke" font-family="system-ui">Tulle</text></g>
+              <text x="560" y="345" font-size="11" fill="#2b8a3e" font-family="system-ui">30 km</text>
+            </svg>
+            <div class="map-legend" id="legend2"><b>Autour de Tulle · 30 km</b><span><i style="background:#2b8a3e;border-radius:0;transform:rotate(45deg) scale(.85)"></i>lieu de la famille</span><span>points : exemple</span></div>
+            <div class="lfc-attr">Natural Earth (domaine public) · lieux : Wikidata (CC0)</div>
+          </div>
+        </div>
+      </article>
+      <article class="card fc span2">
+        <div class="card-head"><h3><span class="num">9</span>🕳 Ce qui manque</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Récap → bloc <b>🕳 Ce qui manque</b>. Rangé par ce que ça débloque : le lieu qui ferait apparaître le plus de données d’abord.</p>
+          <div class="tw"><table class="data-table stack"><thead><tr><th>Lieu de l’arbre sans coordonnées</th><th class="hide-s">Dans l’arbre</th><th>Ce qui apparaîtrait</th><th></th></tr></thead><tbody id="miss-body">
+            <tr><td>Le Puy-Bas<small>hameau, vers Tulle ?</small></td><td class="hide-s">12 actes · 5 personnes</td><td>11 données (crues, monuments…)</td><td><button type="button" class="button small" data-place>📍 Placer</button></td></tr>
+            <tr><td>La Croix-Blanche<small>quartier, vers Salon ?</small></td><td class="hide-s">4 actes · 2 personnes</td><td>7 données (séismes, Tour…)</td><td><button type="button" class="button small" data-place>📍 Placer</button></td></tr>
+            <tr><td>Le Mas-Haut<small>vers Gilette ?</small></td><td class="hide-s">3 actes · 1 personne</td><td>4 données</td><td><button type="button" class="button small" data-place>📍 Placer</button></td></tr>
+            <tr><td>« St Pierre »<small>écrit ainsi dans 2 actes, sans département</small></td><td class="hide-s">2 actes</td><td>— (lieu à préciser d’abord)</td><td><button type="button" class="button small secondary">✎ Préciser</button></td></tr>
+          </tbody></table></div>
+          <p class="small muted" style="margin:8px 0 0">« 📍 Placer » ouvre la petite carte : on clique, ou on choisit dans les lieux connus (Wikidata, base des adresses). Noms de hameaux et nombres : exemple.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ B · Ton travail ═══════════ -->
+  <section class="sec" id="g3" aria-labelledby="g3h">
+    <div class="sec-h"><span class="eyebrow">B · Ton travail · 10 à 13</span><h2 id="g3h">Tes notes, tes ajouts, tes doutes — sur la ligne même</h2><p>Une seule liste montre les quatre. Tout reste chez toi ; la source ne change que si tu cliques « corriger à la source ↗ ». 📎 et 🧺 restent au bout de chaque ligne, comme décidé.</p></div>
+    <article class="card fc">
+      <div class="card-head"><h3>🌋 Séismes ressentis · autour de Nice et de Salon <small>5 lignes sur 214 (filtre « 👪 près de la famille »)</small></h3><span class="row"><span class="ui-badge is-grey">10 · 11 · 12 éteints au départ</span><span class="ui-badge is-grey">13 allumé</span></span></div>
+      <div class="card-body">
+        <div class="ld-bar-row"><button type="button" class="ui-listbar-btn">＋ Ajouter un critère</button><button type="button" class="ui-listbar-btn">👤 Pour…</button><button type="button" class="ui-listbar-btn"><span class="callout">11</span> ➕ Ajouter une ligne</button><button type="button" class="ui-listbar-btn">⚙ Colonnes</button></div>
+        <div class="tw" style="margin-top:12px"><table class="data-table stack" id="work"><thead><tr><th>Date</th><th>Séisme</th><th class="hide-s">Pour ta famille</th><th><span class="callout" style="background:#fff;color:var(--orange)">13</span> Confiance</th><th class="hide-s">Source</th><th></th></tr></thead><tbody>
+          <tr><td class="age">20 juil. 1564</td><td class="t-main"><b>Séisme de la Vésubie</b><small>La Bollène, Roquebillière</small></td><td class="hide-s">avant la famille</td><td><span class="conf"><span class="cm" title="Placé par son lieu, pas par des coordonnées">◌ placé par son lieu</span></span></td><td class="hide-s"><span class="src"><a href="#">Wikidata ↗</a></span></td><td style="white-space:nowrap"><button type="button" class="ib" title="Note">📝</button><button type="button" class="ib" title="Marquer douteuse">⚠️</button><button type="button" class="ib" title="Insérer">📎</button><button type="button" class="ib" title="Panier">🧺</button></td></tr>
+          <tr class="is-doubt"><td class="age">15 févr. 1644</td><td class="t-main"><b>Séisme de Roquebillière</b><small>magnitude estimée 6,4 (exemple)</small></td><td class="hide-s">avant la famille</td><td><span class="conf"><span class="cm">≈ date approximative</span><span class="cm doubt">⚠️ douteuse pour moi</span></span></td><td class="hide-s"><span class="src"><a href="#">Wikidata ↗</a></span></td><td style="white-space:nowrap"><button type="button" class="ib" title="Note">📝</button><button type="button" class="ib on" title="Douteuse"><span class="sr">Douteuse, </span>⚠️</button><button type="button" class="ib">📎</button><button type="button" class="ib">🧺</button></td></tr>
+          <tr><td class="age">23 févr. 1887</td><td class="t-main"><b>Séisme de Ligurie</b><small>ressenti fort à Nice, à l’aube du mercredi des Cendres</small><span class="note-line"><span class="callout">10</span> 📝 Marie en parle dans sa lettre du 2 mars 1887 (carton 3).</span></td><td class="hide-s">Marie LACOMBE, 31 ans</td><td><span class="conf"><span class="cm" title="Texte reconnu par une machine dans un journal scanné">🤖 texte lu par une machine</span></span></td><td class="hide-s"><span class="src"><a href="#">Wikidata ↗</a> <a href="#">Gallica ↗</a></span></td><td style="white-space:nowrap"><button type="button" class="ib on" title="Note">📝</button><button type="button" class="ib">⚠️</button><button type="button" class="ib">📎</button><button type="button" class="ib">🧺</button></td></tr>
+          <tr class="is-mine"><td class="age">mars 1887</td><td class="t-main"><b>Secousse ressentie à Gilette</b><small>réplique ; la cheminée des LACOMBE tombe (exemple)</small></td><td class="hide-s">Marie LACOMBE, 31 ans</td><td><span class="conf"><span class="cm mine">✋ ajoutée par moi</span><span class="cm">≈ date approximative</span></span></td><td class="hide-s">lettre de Marie<br><button type="button" class="link-button" style="font-size:12px">proposer à Wikidata ↗</button></td><td style="white-space:nowrap"><button type="button" class="ib" title="Modifier">✎</button><button type="button" class="ib" title="Supprimer">🗑</button><button type="button" class="ib">📎</button><button type="button" class="ib">🧺</button></td></tr>
+          <tr><td class="age">11 juin 1909</td><td class="t-main"><b>Séisme de Provence</b><small>Lambesc, Rognes, Salon-de-Provence</small></td><td class="hide-s">Louis DURAND, 29 ans</td><td><span class="conf muted small">—</span></td><td class="hide-s"><span class="src"><a href="#">Wikidata ↗</a></span></td><td style="white-space:nowrap"><button type="button" class="ib" title="Note">📝</button><button type="button" class="ib">⚠️</button><button type="button" class="ib">📎</button><button type="button" class="ib">🧺</button></td></tr>
+        </tbody></table></div>
+        <div class="legend" aria-label="Légende des marques"><b style="color:var(--ink)">Marques :</b><span class="cm">◌ placé par son lieu</span><span class="cm">≈ date approximative</span><span class="cm">🤖 texte lu par une machine</span><span class="cm mine">✋ ajoutée par moi</span><span class="cm doubt">⚠️ douteuse pour moi</span><span>« — » : rien à signaler</span></div>
+
+        <div class="panes">
+          <div class="pane"><h4><span class="callout">10</span> 📝 Ma note sur cette ligne</h4>
+            <label class="field"><span>Note (pour moi)</span><textarea aria-label="Note">Marie en parle dans sa lettre du 2 mars 1887 (carton 3).</textarea></label>
+            <div class="row"><button type="button" class="button small">💾 Enregistrer</button><button type="button" class="button small secondary">🗑</button></div>
+            <p class="small muted" style="margin:8px 0 0">La note suit la ligne, même après une mise à jour du pack. Elle ne part pas dans un partage, sauf si tu le choisis.</p></div>
+          <div class="pane"><h4><span class="callout">11</span> ➕ Ajouter une ligne qui manque</h4>
+            <label class="field"><span>Quoi</span><input value="Secousse ressentie à Gilette" aria-label="Quoi"></label>
+            <div class="row" style="align-items:flex-start"><label class="field" style="flex:1 1 100px"><span>Quand</span><input value="mars 1887 (≈)" aria-label="Quand"></label><label class="field" style="flex:1 1 100px"><span>Où</span><input value="Gilette" aria-label="Où"></label></div>
+            <label class="field"><span>D’où je le sais</span><input value="lettre de Marie, 2 mars 1887" aria-label="Source"></label>
+            <div class="row"><button type="button" class="button small">＋ Ajouter</button></div>
+            <p class="small muted" style="margin:8px 0 0">Marquée ✋ « ajoutée par moi ». Si c’est publié quelque part : « proposer à Wikidata ↗ » ou « à OpenStreetMap ↗ » (pour un lieu) ouvre leur page, rien n’est envoyé pour toi.</p></div>
+          <div class="pane"><h4><span class="callout">12</span> ⚠️ Marquer douteuse</h4>
+            <ul class="menu"><li class="on"><span>⚠️ Douteuse pour moi</span><span class="small muted">barrée, gardée</span></li><li><span>Pourquoi : « la date varie selon les sources »</span></li><li><span>Corriger à la source</span><a href="#" class="srca">Wikidata ↗</a></li><li><span>↶ N’est plus douteuse</span></li></ul>
+            <p class="small muted" style="margin:8px 0 0">Change seulement ton affichage : barrée (par défaut) ou cachée. Le lien ouvre directement l’élément à corriger chez la source.</p></div>
+        </div>
+        <p class="kiosk">🔒 En borne et pour les invités du réseau local : les marques ◌ ≈ 🤖 se voient, mais pas 📝 ✋ ⚠️ ni les boutons pour en mettre.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════════ B · Partager ═══════════ -->
+  <section class="sec" id="g4" aria-labelledby="g4h">
+    <div class="sec-h"><span class="eyebrow">B · Partager · 14 à 18</span><h2 id="g4h">Citer, créditer, imprimer, raconter, montrer à la famille</h2><p>Règle partout : rien sur une personne vivante ou confidentielle ne sort de l’app.</p></div>
+    <div class="fgrid">
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">14</span>📖 Citer une ligne</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Menu ⋯ d’une ligne → <b>📖 Citer</b>. Ici : <b>Séisme de Provence, 11 juin 1909</b>.</p>
+          <span class="segmented" role="group" aria-label="Style" id="cites"><button type="button" data-c="s" aria-pressed="true">Simple</button><button type="button" data-c="i" aria-pressed="false">ISO 690</button><button type="button" data-c="c" aria-pressed="false">Chicago</button></span>
+          <div class="cite-out" id="cite-out" aria-live="polite"></div>
+          <div class="row"><button type="button" class="button small" id="cite-copy">📋 Copier</button><button type="button" class="button small secondary">📎 Mettre dans une note de la fiche</button></div>
+          <p class="small muted" style="margin:8px 0 0">Source, licence, date de consultation (celle du pack installé) et lien. Q… : à remplacer par le vrai numéro.</p>
+        </div>
+      </article>
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">15</span>📜 Crédits et licences</h3><span class="ui-badge is-grey">toujours là</span></div>
+        <div class="card-body">
+          <p class="where-in">Aide → <b>📜 Crédits et licences</b>, et un lien en bas de chaque liste. Il ne s’éteint pas : les licences le demandent.</p>
+          <div class="tw"><table class="data-table cred"><thead><tr><th>Source</th><th>Licence</th><th class="hide-s">Pack installé</th></tr></thead><tbody>
+            <tr class="thm"><td colspan="3">🌋 Séismes · ⚔️ Guerres · 🏆 Sport</td></tr>
+            <tr><td>Wikidata <a class="srca" href="#">↗</a></td><td>CC0</td><td class="hide-s">20 nov. 2026</td></tr>
+            <tr class="thm"><td colspan="3">⛅ Climat</td></tr>
+            <tr><td>Météo-France <a class="srca" href="#">↗</a></td><td>Licence Ouverte 2.0</td><td class="hide-s">12 nov. 2026</td></tr>
+            <tr class="thm"><td colspan="3">🏛 Monuments · 🗺 Lieux</td></tr>
+            <tr><td>Mérimée (ministère de la Culture) <a class="srca" href="#">↗</a></td><td>Licence Ouverte 2.0</td><td class="hide-s">3 oct. 2026</td></tr>
+            <tr><td>OpenStreetMap <a class="srca" href="#">↗</a></td><td>ODbL · © les contributeurs</td><td class="hide-s">3 oct. 2026</td></tr>
+            <tr><td>GeoNames <a class="srca" href="#">↗</a></td><td>CC BY 4.0</td><td class="hide-s">3 oct. 2026</td></tr>
+            <tr class="thm"><td colspan="3">🔎 Retrouver une personne</td></tr>
+            <tr><td>Fichier des décès (INSEE) <a class="srca" href="#">↗</a></td><td>Licence Ouverte 2.0</td><td class="hide-s">1ᵉʳ sept. 2026</td></tr>
+            <tr class="thm"><td colspan="3">Fond des cartes</td></tr>
+            <tr><td>Natural Earth <a class="srca" href="#">↗</a></td><td>domaine public</td><td class="hide-s">livré avec l’app</td></tr>
+          </tbody></table></div>
+          <p class="small muted" style="margin:8px 0 0">… et les 186 packs installés (exemple), chacun avec sa version. ⤓ « Exporter les crédits » pour un livret ou un site.</p>
+        </div>
+      </article>
+
+      <article class="card fc span2">
+        <div class="card-head"><h3><span class="num">16</span>📄 Livret « Le monde de mes ancêtres »</h3><span class="ui-badge is-grey">éteint au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Fiche d’une personne, menu ⋯ → <b>📄 Livret « Le monde de… »</b>, ou d’une branche depuis l’arbre. Imprimer ou ⤓ PDF ; les sources sont toujours à la fin.</p>
+          <div class="book">
+            <div class="bopts">
+              <span class="segmented" role="group" aria-label="Pour"><button type="button" aria-pressed="true">Une personne</button><button type="button" aria-pressed="false">Une branche</button></span>
+              <div style="margin:10px 0"><select class="ui-select" aria-label="Personne"><option>👤 Marie LACOMBE (1856–1931)</option></select></div>
+              <div class="sub-h">Chapitres</div>
+              <div class="chaps">
+                <label class="chk"><input type="checkbox" checked> 🏙 Sa ville, son pays</label>
+                <label class="chk"><input type="checkbox" checked> ⚔️ Les guerres de sa vie</label>
+                <label class="chk"><input type="checkbox" checked> 🌋 La terre et les eaux</label>
+                <label class="chk"><input type="checkbox" checked> ⛅ Le temps qu’il faisait</label>
+                <label class="chk"><input type="checkbox" checked> 🚂 Trains, routes, bateaux</label>
+                <label class="chk"><input type="checkbox"> 🏆 Fêtes et sport</label>
+                <label class="chk"><input type="checkbox"> 💶 Les prix de son temps</label>
+                <label class="chk"><input type="checkbox" checked disabled> 📜 Sources et licences (toujours)</label>
+              </div>
+              <div class="row"><span class="segmented sm" role="group" aria-label="Format"><button type="button" aria-pressed="true">A4</button><button type="button" aria-pressed="false">A5</button></span></div>
+              <div class="row" style="margin-top:10px"><button type="button" class="button small">🖨 Imprimer</button><button type="button" class="button small secondary">⤓ PDF</button></div>
+              <p class="small muted" style="margin:10px 0 0">Pour une branche : les personnes vivantes ou confidentielles ne sont pas dans le livret, même nommées.</p>
+            </div>
+            <div class="paper" aria-label="Page 1 du livret">
+              <h5>Le monde de mes ancêtres</h5>
+              <h4>Marie LACOMBE</h4>
+              <div style="font-style:italic">Nice, 1856 – 1931</div>
+              <div class="cover-art" aria-hidden="true"></div>
+              <h6>Sommaire</h6>
+              <ol><li><span>Sa ville, son pays</span><span>2</span></li><li><span>Les guerres de sa vie</span><span>4</span></li><li><span>La terre et les eaux</span><span>6</span></li><li><span>Le temps qu’il faisait</span><span>8</span></li><li><span>Trains, routes, bateaux</span><span>10</span></li><li><span>Sources et licences</span><span>12</span></li></ol>
+              <div class="pn">1</div>
+            </div>
+            <div class="paper" aria-label="Page 6 du livret">
+              <h5>3 · La terre et les eaux</h5>
+              <h6 style="margin-top:8px">Quand la terre a tremblé</h6>
+              <p style="margin:0">Marie a 31 ans au matin du 23 février 1887 : un fort séisme venu de la côte ligure secoue Nice. On le sent jusqu’à Gilette, où vit une partie de la famille.</p>
+              <div class="ev"><b>23 février 1887 · Séisme de Ligurie</b>Ressenti fort à Nice. Marie a 31 ans.</div>
+              <div class="ev"><b>11 juin 1909 · Séisme de Provence</b>Lambesc, à 20 km de Salon : chez les DURAND, Louis a 29 ans.</div>
+              <p style="margin:6px 0 0">Avant elle, la Vésubie avait tremblé en 1564 et en 1644.</p>
+              <p class="src">Sources : Wikidata (CC0), Gallica (BnF) — détail p. 12.</p>
+              <div class="pn">6</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card fc span2">
+        <div class="card-head"><h3><span class="num">17</span>🎞 Diaporama « la vie de Marie LACOMBE, année par année »</h3><span class="ui-badge is-grey">éteint au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Fiche → menu ⋯ → <b>🎞 Sa vie, année par année</b>. Les années sans rien sont sautées. Espace : pause · ← → : une année · Échap : sortir.</p>
+          <div class="slide" id="slide" aria-live="polite"></div>
+          <div class="ctl">
+            <button type="button" class="button small" id="sl-play">▶ Lecture</button>
+            <button type="button" class="button small secondary" id="sl-prev" aria-label="Année précédente">‹</button>
+            <button type="button" class="button small secondary" id="sl-next" aria-label="Année suivante">›</button>
+            <span class="segmented sm" role="group" aria-label="Vitesse" id="sl-speed"><button type="button" data-s="6000" aria-pressed="false">Lent</button><button type="button" data-s="3500" aria-pressed="true">Normal</button><button type="button" data-s="1800" aria-pressed="false">Vite</button></span>
+            <span class="segmented sm" role="group" aria-label="Musique"><button type="button" aria-pressed="true">🔇 Sans musique</button><button type="button" aria-pressed="false">🎵 Douce</button></span>
+            <button type="button" class="button small secondary">⛶ Plein écran</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card fc span2">
+        <div class="card-head"><h3><span class="num">18</span>🔗 Partager une liste filtrée sur le site familial</h3><span class="ui-badge is-grey">éteint au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Une liste filtrée → <b>📤 Envoyer vers… → 🔗 Site familial</b>. Avant de publier, tu vois exactement ce qui part.</p>
+          <div class="goes">
+            <div class="ok-box"><b>Ce qui part</b><ul><li>« 🌋 Séismes près de la famille » : 4 lignes</li><li>Colonnes : date, séisme, lieu, pour la famille</li><li>Sources et licences, en bas</li></ul></div>
+            <div class="no-box"><b>Ce qui ne part pas</b><ul><li>1 ligne qui parle de Claire DURAND (vivante) : retirée</li><li>Tes notes 📝 · tes lignes ✋ · tes ⚠️ <span class="muted">(cases ci-dessous)</span></li></ul></div>
+          </div>
+          <div class="row" style="margin-top:10px"><label class="chk"><input type="checkbox"> joindre mes notes</label><label class="chk"><input type="checkbox"> joindre mes lignes ajoutées</label><span class="segmented sm" role="group" aria-label="Qui voit"><button type="button" aria-pressed="true">Membres du site</button><button type="button" aria-pressed="false">Tout le monde</button></span></div>
+          <div class="visitor"><div class="vh"><span>👁 Aperçu : ce que voit un membre</span><span>site familial · lecture seule</span></div>
+            <div class="tw"><table class="data-table"><thead><tr><th>Date</th><th>Séisme</th><th>Pour la famille</th></tr></thead><tbody>
+              <tr><td>20 juil. 1564</td><td>Séisme de la Vésubie</td><td>—</td></tr>
+              <tr><td>23 févr. 1887</td><td>Séisme de Ligurie</td><td>Marie LACOMBE, 31 ans</td></tr>
+              <tr><td>11 juin 1909</td><td>Séisme de Provence</td><td>Louis DURAND, 29 ans</td></tr>
+              <tr><td>11 nov. 2019</td><td>Séisme du Teil</td><td class="muted">— (rien sur les vivants)</td></tr>
+            </tbody></table></div></div>
+          <div class="row" style="margin-top:12px"><button type="button" class="button small">🔗 Publier sur le site familial</button><button type="button" class="button small secondary">Annuler</button><span class="small muted">Retirer plus tard : site familial → Mes partages.</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ B · Entretien ═══════════ -->
+  <section class="sec" id="g5" aria-labelledby="g5h">
+    <div class="sec-h"><span class="eyebrow">B · Entretien · 19 à 21</span><h2 id="g5h">La place, Internet, les versions</h2><p>Dans Réglages → 🗂 Données installées, à côté de ce qui existe déjà.</p></div>
+    <div class="fgrid">
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">19</span>💽 Place prise, et en faire</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in"><b>6,8 Go</b> de données sur ce disque (exemple).</p>
+          <div class="bars">
+            <div class="barl"><span>🔎 Retrouver une personne</span><span class="tk"><i style="width:57%"></i></span><span class="v">3,9 Go</span></div>
+            <div class="barl"><span>⛅ Climat, ciel et saisons</span><span class="tk"><i style="width:21%"></i></span><span class="v">1,4 Go</span></div>
+            <div class="barl"><span>⚔️ Guerres et soldats</span><span class="tk"><i style="width:9%"></i></span><span class="v">0,6 Go</span></div>
+            <div class="barl"><span>🗺 Lieux et noms de lieux</span><span class="tk"><i style="width:6%"></i></span><span class="v">0,4 Go</span></div>
+            <div class="barl"><span>16 autres thèmes</span><span class="tk"><i style="width:7%"></i></span><span class="v">0,5 Go</span></div>
+          </div>
+          <div class="sub-h">Faire de la place · jamais ouverts</div>
+          <ul class="sugg" id="sugg">
+            <li><span><b>Décès INSEE 1970–1989</b><small>installé le 2 mars · jamais ouvert</small></span><button type="button" class="button small secondary" data-free="1,2">Retirer · 1,2 Go</button></li>
+            <li><span><b>Météo d’autrefois — Belgique</b><small>aucun lieu de l’arbre à moins de 100 km</small></span><button type="button" class="button small secondary" data-free="0,5">Retirer · 0,5 Go</button></li>
+            <li><span><b>Prénoms — Bretagne</b><small>jamais ouvert</small></span><button type="button" class="button small secondary" data-free="0,2">Retirer · 0,2 Go</button></li>
+          </ul>
+          <p class="small muted" style="margin:6px 0 0">Jamais un pack favori, récent ou utilisé par une question gardée. Retiré = réinstallable d’un clic ; « ↶ Annuler » tout de suite.</p>
+        </div>
+      </article>
+      <article class="card fc">
+        <div class="card-head"><h3><span class="num">20</span>📶 « Marche sans Internet »</h3><span class="ui-badge is-grey">allumé au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">Un petit badge sur chaque liste : en borne, sur le réseau local ou dans un train, tu sais ce qui marche.</p>
+          <ul class="hl">
+            <li><span class="ic">🚲</span><span>Tour de France <small>installé, 2,1 Mo</small></span><span class="ui-badge is-green">📶 sans Internet</span></li>
+            <li><span class="ic">🌋</span><span>Séismes de France <small>installé</small></span><span class="ui-badge is-green">📶 sans Internet</span></li>
+            <li><span class="ic">🏛</span><span>Monuments historiques <small>installé ; photos : en ligne</small></span><span class="ui-badge is-orange">📶 sauf photos</span></li>
+            <li><span class="ic">📰</span><span>Presse ancienne (Gallica) <small>recherche chez la BnF</small></span><span class="ui-badge is-grey">🌐 il faut Internet</span></li>
+            <li><span class="ic">⤓</span><span>Décès INSEE 1990–2009 <small>pas installé</small></span><span class="ui-badge is-grey">⤓ à installer</span></li>
+          </ul>
+          <p class="small muted" style="margin:8px 0 0">Un filtre « 📶 seulement ce qui marche sans Internet » s’ajoute à l’écran des thèmes.</p>
+        </div>
+      </article>
+      <article class="card fc span2">
+        <div class="card-head"><h3><span class="num">21</span>🕰 Versions d’un pack</h3><span class="ui-badge is-grey">éteint au départ</span></div>
+        <div class="card-body">
+          <p class="where-in">🗂 Données installées → un pack → <b>🕰 Versions</b>. Ici : <b>🌋 Séismes de France</b>. L’app garde les 3 dernières (réglable).</p>
+          <ul class="vers" id="vers">
+            <li class="cur"><b>20 nov. 2026</b> <span class="ui-badge is-blue">utilisée</span><small>+ 214 lignes · 12 corrigées · 3 retirées (exemple)</small></li>
+            <li><b>14 août 2026</b><small>+ 96 lignes · 4 corrigées (exemple)</small><div class="row"><button type="button" class="button small secondary" data-rev="14 août 2026">↶ Revenir à cette version</button><button type="button" class="link-button">voir ce qui a changé</button></div></li>
+            <li><b>2 mai 2026</b><small>première installation</small><div class="row"><button type="button" class="button small secondary" data-rev="2 mai 2026">↶ Revenir à cette version</button><button type="button" class="link-button">voir ce qui a changé</button></div></li>
+          </ul>
+          <p class="small muted" style="margin:4px 0 0">Tes notes, lignes ajoutées et marques suivent les lignes : une version plus ancienne les garde. Une ligne disparue garde ta note, marquée « ligne plus dans cette version ».</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ Questions ═══════════ -->
+  <section class="sec" id="qs" aria-labelledby="qsh">
+    <div class="sec-h"><span class="eyebrow">À valider</span><h2 id="qsh">? 6 questions pour toi</h2></div>
+    <ol class="qs">
+      <li class="card"><b>Quels blocs dans le récap au départ ?</b><p class="opt">A. Tous. — B. Ceux qui ont quelque chose à dire. — C. Seulement 👪 🧰 ✅ (comme validé), le reste à allumer.</p><p class="reco"><b>Ma reco : B.</b> ⭐ 🕘 🆕 💾 apparaissent dès qu’ils ont un contenu (un premier favori, une première question gardée) ; 🕳 Ce qui manque en compact ; 💽 caché. Un bloc vide ne prend jamais de place.</p></li>
+      <li class="card"><b>Quels ajouts allumés au départ ?</b><p class="opt">A. Les 21. — B. Ceux qui ne changent rien tant qu’on ne s’en sert pas. — C. Aucun.</p><p class="reco"><b>Ma reco : B (12 sur 21)</b>, comme dans la maquette : 1 2 3 4 5 6 9 13 14 15 19 20. Les 9 autres (comparer, carte de tout, notes, ajouts, doutes, livret, diaporama, partage, versions) se proposent une fois dans ✅ À faire : « 9 ajouts éteints → les voir ».</p></li>
+      <li class="card"><b>Le livret : quels chapitres cochés au départ ?</b><p class="opt">A. Tous les thèmes qui ont au moins une ligne. — B. Une sélection courte.</p><p class="reco"><b>Ma reco : B</b> : Sa ville, Guerres, Terre et eaux, Temps qu’il faisait, Trains et routes (+ Sources, toujours). Un chapitre vide n’est jamais imprimé. Une personne = ~12 pages ; une branche = un chapitre par personne.</p></li>
+      <li class="card"><b>Le diaporama : vitesse et musique ?</b><p class="opt">A. Normal (3,5 s par année), sans musique. — B. Lent, musique douce. — C. Le demander à chaque fois.</p><p class="reco"><b>Ma reco : A.</b> On peut lire chaque année sans se presser ; pas de son qui surprend (borne, bibliothèque). La musique « douce » serait une piste libre de droits, livrée avec l’app.</p></li>
+      <li class="card"><b>Partage sur le site familial : réglages de départ ?</b><p class="opt">A. Membres du site, sans notes, sans lignes ajoutées. — B. Tout le monde, avec tout.</p><p class="reco"><b>Ma reco : A.</b> Rien sur les vivants dans tous les cas (non réglable). Notes et ajouts se cochent à chaque partage ; « Tout le monde » demande une confirmation.</p></li>
+      <li class="card"><b>La pastille « 📊 données la concernent » : sur quelles fiches ?</b><p class="opt">A. Personnes et lieux. — B. Personnes seulement. — C. Seulement si plus de 5 données.</p><p class="reco"><b>Ma reco : A + C.</b> Sur une personne ou un lieu, cachée en dessous de 5 données (bruit). Comptée la nuit ou à l’ouverture de la fiche, jamais pendant la frappe.</p></li>
+    </ol>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" hidden><span id="toast-t"></span><button type="button" id="toast-u">↶ Annuler</button></div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+/* ── thème ── */
+var root=document.documentElement;
+$$('[data-theme-set]').forEach(function(b){b.addEventListener('click',function(){var t=b.dataset.themeSet;if(t==='auto')root.removeAttribute('data-theme');else root.setAttribute('data-theme',t);$$('[data-theme-set]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});});});
+
+/* ── segmentés génériques (ceux sans logique propre) ── */
+document.addEventListener('click',function(e){var b=e.target.closest('.segmented button');if(!b||b.dataset.themeSet)return;var g=b.parentNode;if(g.dataset.own)return;$$('button',g).forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});});
+
+/* ── message en bas, avec ↶ Annuler ── */
+var toast=$('#toast'),tt=$('#toast-t'),tu=$('#toast-u'),tTimer=null,tUndo=null;
+function say(msg,undo){tt.textContent=msg;tUndo=undo||null;tu.hidden=!undo;toast.hidden=false;clearTimeout(tTimer);tTimer=setTimeout(function(){toast.hidden=true;},6000);}
+tu.addEventListener('click',function(){if(tUndo)tUndo();toast.hidden=true;});
+
+/* ════ A2 · les 21 ajouts ════ */
+var seg=function(lab,opts,on){return '<span class="lbl">'+lab+'</span><span class="segmented sm" role="group" aria-label="'+esc(lab)+'">'+opts.map(function(o,i){return '<button type="button" aria-pressed="'+(i===on)+'">'+o+'</button>';}).join('')+'</span>';};
+var tg=function(lab,on){return '<label class="ui-toggle"><input type="checkbox"'+(on?' checked':'')+'><i></i>'+lab+'</label>';};
+var nm=function(lab,v,u){return '<span class="lbl">'+lab+'</span><span class="ui-num"><input type="text" inputmode="numeric" value="'+v+'" aria-label="'+esc(lab)+'"><span>'+u+'</span></span>';};
+var ck=function(lab,on){return '<label class="chk"><input type="checkbox"'+(on?' checked':'')+'>'+lab+'</label>';};
+var GROUPS=[
+ ['Retrouver vite',[
+  [1,'⭐','Favoris épinglés','Le ⭐ d’une liste la met en haut du récap, avec ses filtres.',1,tg('aussi en tête de Listes',false)],
+  [2,'🕘','Listes récentes','Les dernières listes ouvertes, rouvertes comme tu les as laissées.',1,seg('Combien',['5','10','20'],0)],
+  [3,'🆕','Nouveau depuis ta visite','Après une mise à jour, ce qui touche tes lieux et tes années.',1,tg('seulement ce qui touche la famille',true)],
+  [4,'💾','Questions gardées','Une question gardée se repose toute seule ; « nouvelle réponse » quand ça change.',1,seg('Reposer',['à chaque mise à jour','chaque semaine','chaque mois','jamais'],0)]]],
+ ['Relier à la famille',[
+  [5,'📊','Pastille sur les fiches','« 📊 42 données la concernent » sur une fiche ; un clic filtre le récap.',1,tg('fiche d’une personne',true)+tg('fiche d’un lieu',true)+nm('cachée sous',5,'données')],
+  [6,'👤','Filtrer par la vie d’une personne','Pendant sa vie, avant sa naissance, son enfance, sa jeunesse — dans toutes les listes.',1,nm('Enfance jusqu’à',12,'ans')+nm('Jeunesse jusqu’à',25,'ans')],
+  [7,'⚖️','Comparer','Deux personnes ou deux lieux côte à côte, thème par thème.',0,''],
+  [8,'🗺','Carte de tout, autour d’un lieu','Une couche par thème, à allumer ou éteindre.',0,nm('Rayon de départ',30,'km')],
+  [9,'🕳','Ce qui manque','Les lieux sans coordonnées et ce qu’ils feraient apparaître.',1,tg('aussi les années de naissance manquantes',true)]]],
+ ['Ton travail',[
+  [10,'📝','Notes sur une ligne','Une note pour toi, qui suit la ligne même après une mise à jour.',0,tg('dans les exports',false)],
+  [11,'➕','Ajouter une ligne','Une ligne qui manque, marquée « ajoutée par moi », avec ta source.',0,tg('proposer Wikidata / OpenStreetMap',true)],
+  [12,'⚠️','Marquer douteuse','Pour toi seul, avec un lien pour corriger à la source.',0,seg('Une ligne douteuse est',['barrée','cachée'],0)],
+  [13,'🔎','Marques de confiance','Petites marques sur les lignes dont il faut se méfier un peu.',1,ck('◌ placé par son lieu',true)+ck('≈ date approximative',true)+ck('🤖 lu par une machine',true)+ck('✋ ajoutée par moi',true)]]],
+ ['Partager',[
+  [14,'📖','Citer une ligne','Source, licence et date de consultation, prêtes à copier.',1,seg('Style',['Simple','ISO 690','Chicago'],0)],
+  [15,'📜','Crédits et licences','Toutes les sources et leurs licences, par thème.',1,'',1],
+  [16,'📄','Livret « Le monde de mes ancêtres »','Pour une personne ou une branche, à imprimer ou en PDF.',0,seg('Format',['A4','A5'],0)],
+  [17,'🎞','Diaporama de sa vie','Année par année, ce que les données disent autour d’elle.',0,seg('Vitesse',['Lent','Normal','Vite'],1)+seg('Musique',['sans','douce'],0)],
+  [18,'🔗','Partager sur le site familial','Une liste filtrée, avec un aperçu de ce qui part. Jamais les vivants.',0,seg('Par défaut pour',['les membres','tout le monde'],0)+tg('joindre mes notes',false)]]],
+ ['Entretien',[
+  [19,'💽','Place prise','La place de chaque pack, et ceux jamais ouverts qu’on peut retirer.',1,nm('Prévenir sous',2,'Go libres')],
+  [20,'📶','Badge « sans Internet »','Sur chaque liste : marche sans Internet, sauf les photos, ou pas.',1,''],
+  [21,'🕰','Versions des packs','Garder les anciennes versions pour revenir en arrière.',0,seg('Garder',['2','3','5'],1)]]]
+];
+var DEF={};GROUPS.forEach(function(g){g[1].forEach(function(f){DEF[f[0]]=!!f[4];});});
+var feat=Object.assign({},DEF),fUndo=[];
+var LOCK={15:1};
+function featHtml(f){var on=feat[f[0]],lock=f[6];return '<div class="feat'+(on?'':' is-off')+'" data-f="'+f[0]+'"><span class="ic" aria-hidden="true">'+f[1]+'</span><span><b>'+f[2]+'</b> <span class="muted small">'+f[0]+'</span><span class="why">'+f[3]+'</span></span>'+(lock?'<span class="lock">🔒 toujours là</span>':'<label class="ui-toggle"><input type="checkbox" data-ft="'+f[0]+'"'+(on?' checked':'')+' aria-label="'+esc(f[2])+'"><i></i></label>')+(f[5]?'<div class="opts">'+f[5]+'</div>':'')+'</div>';}
+function renderGroups(){
+  $('#groups').innerHTML=GROUPS.map(function(g,gi){var n=g[1].filter(function(f){return feat[f[0]];}).length;return '<section class="card grp" aria-labelledby="gh'+gi+'"><div class="card-head"><h3 id="gh'+gi+'">'+g[0]+'<small>'+n+' sur '+g[1].length+'</small></h3><span class="grp-acts"><button type="button" class="button small secondary" data-all="'+gi+'" data-v="1">Tout allumer</button><button type="button" class="button small secondary" data-all="'+gi+'" data-v="0">Tout éteindre</button></span></div>'+g[1].map(featHtml).join('')+'</section>';}).join('');
+  var c=0;for(var k in feat)if(feat[k])c++;$('#on-count').textContent=c;
+  $('#set-undo').disabled=!fUndo.length;
+}
+function fPush(){fUndo.push(JSON.stringify(feat));}
+function nameOf(n){var r='';GROUPS.forEach(function(g){g[1].forEach(function(f){if(f[0]==n)r=f[1]+' '+f[2];});});return r;}
+function fUndoOne(){var s=fUndo.pop();if(s){feat=JSON.parse(s);renderGroups();applyRecap();}}
+$('#groups').addEventListener('change',function(e){var t=e.target;if(!t.dataset.ft)return;fPush();var n=+t.dataset.ft;feat[n]=t.checked;var row=t.closest('.feat');row.classList.toggle('is-off',!t.checked);var c=0;for(var k in feat)if(feat[k])c++;$('#on-count').textContent=c;$('#set-undo').disabled=false;var h=row.closest('.grp').querySelector('h3 small');var g=GROUPS[+row.closest('.grp').querySelector('[data-all]').dataset.all][1];h.textContent=g.filter(function(f){return feat[f[0]];}).length+' sur '+g.length;applyRecap();say('« '+nameOf(n)+' » '+(t.checked?'allumé':'éteint'),fUndoOne);});
+$('#groups').addEventListener('click',function(e){var b=e.target.closest('[data-all]');if(!b)return;fPush();var v=b.dataset.v==='1';GROUPS[+b.dataset.all][1].forEach(function(f){if(!LOCK[f[0]])feat[f[0]]=v;});renderGroups();applyRecap();say(GROUPS[+b.dataset.all][0]+' : tout '+(v?'allumé':'éteint'),fUndoOne);});
+$('#set-undo').addEventListener('click',fUndoOne);
+$('#set-reset').addEventListener('click',function(){fPush();feat=Object.assign({},DEF);renderGroups();applyRecap();say('Ajouts remis comme au départ',fUndoOne);});
+
+/* ════ A1 · Organiser le récap ════ */
+var BLK={fav:['⭐ Mes favoris',1],rec:['🕘 Récemment ouvertes',2],new:['🆕 Nouveau depuis ta visite',3],qs:['💾 Mes questions',4],fam:['👪 Pour ta famille',0],miss:['🕳 Ce qui manque',9],todo:['✅ À faire',0],disk:['💽 Place prise',19],themes:['🧰 Les 20 thèmes',0]};
+var LDEF={order:['fav','rec','new','qs','fam','miss','todo','disk','themes'],hidden:['disk'],size:{rec:'c',qs:'c',miss:'c',todo:'c',disk:'c'}};
+var L=JSON.parse(JSON.stringify(LDEF)),oUndo=[];
+function oPush(){oUndo.push(JSON.stringify(L));}
+function avail(k){var f=BLK[k][1];return !f||feat[f];}
+function applyRecap(){
+  var grid=$('#rgrid');
+  L.order.forEach(function(k){var el=grid.querySelector('[data-blk="'+k+'"]');grid.appendChild(el);el.hidden=!avail(k)||L.hidden.indexOf(k)>=0;el.classList.toggle('is-compact',L.size[k]==='c');});
+  renderOrg();
+}
+function sizeSeg(k){var c=L.size[k]==='c';return '<span class="segmented sm" role="group" data-own="1" aria-label="Taille de « '+esc(BLK[k][0])+' »"><button type="button" data-sz="'+k+'" data-v="c" aria-pressed="'+c+'">Compacte</button><button type="button" data-sz="'+k+'" data-v="n" aria-pressed="'+!c+'">Normale</button></span>';}
+function renderOrg(focusSel){
+  var n=L.order.length;
+  $('#org-body').innerHTML=L.order.map(function(k,i){var na=!avail(k),off=L.hidden.indexOf(k)>=0;var lab=BLK[k][0];
+    return '<tr data-row="'+k+'" draggable="true" class="'+(off?'is-off':'')+(na?' is-na':'')+'"><td class="vl-ord"><button type="button" class="vl-grip" data-grip="'+k+'" aria-label="Déplacer « '+esc(lab)+' » (flèches haut et bas)" title="Glisser, ou flèches haut et bas">⠿</button><button type="button" class="vl-move" data-mv="'+k+'" data-d="-1"'+(i?'':' disabled')+' aria-label="Monter « '+esc(lab)+' »">↑</button><button type="button" class="vl-move" data-mv="'+k+'" data-d="1"'+(i<n-1?'':' disabled')+' aria-label="Descendre « '+esc(lab)+' »">↓</button></td>'+
+    '<td class="vl-name"><span>'+lab+'</span>'+(na?'<small>éteint dans Réglages (ajout '+BLK[k][1]+')</small>':'')+'<span class="vl-sz">'+sizeSeg(k)+'</span></td>'+
+    '<td><label class="ui-toggle"><input type="checkbox" data-show="'+k+'"'+(off?'':' checked')+(na?' disabled':'')+' aria-label="Montrer « '+esc(lab)+' »"><i></i></label></td><td class="vl-size">'+sizeSeg(k)+'</td></tr>';}).join('');
+  var shown=L.order.filter(function(k){return avail(k)&&L.hidden.indexOf(k)<0;}).length;
+  $('#org-count').textContent=shown+' blocs montrés sur '+L.order.length;
+  $('#org-undo').disabled=!oUndo.length;
+  if(focusSel){var f=$(focusSel,$('#org-body'));if(f){if(f.disabled)f=f.closest('tr').querySelector('.vl-grip');f.focus();}}
+}
+function move(k,d){var i=L.order.indexOf(k),j=i+d;if(j<0||j>=L.order.length)return false;oPush();L.order.splice(i,1);L.order.splice(j,0,k);return true;}
+var org=$('#org');
+org.addEventListener('click',function(e){
+  var m=e.target.closest('[data-mv]');if(m){var k=m.dataset.mv,d=+m.dataset.d;if(move(k,d)){applyRecap();renderOrg('[data-mv="'+k+'"][data-d="'+d+'"]');}return;}
+  var s=e.target.closest('[data-sz]');if(s){oPush();L.size[s.dataset.sz]=s.dataset.v;applyRecap();renderOrg('[data-sz="'+s.dataset.sz+'"][data-v="'+s.dataset.v+'"]');return;}
+});
+org.addEventListener('change',function(e){var t=e.target;if(!t.dataset.show)return;oPush();var k=t.dataset.show;L.hidden=t.checked?L.hidden.filter(function(x){return x!==k;}):L.hidden.concat([k]);applyRecap();renderOrg('[data-show="'+k+'"]');});
+org.addEventListener('keydown',function(e){
+  if(e.key!=='ArrowUp'&&e.key!=='ArrowDown')return;var g=e.target.closest('[data-grip]');var row=e.target.closest('[data-row]');
+  if(!row||(!g&&!e.altKey))return;e.preventDefault();var k=row.dataset.row;if(move(k,e.key==='ArrowUp'?-1:1)){applyRecap();renderOrg('[data-grip="'+k+'"]');}
+});
+var dragK=null;
+org.addEventListener('dragstart',function(e){var r=e.target.closest&&e.target.closest('[data-row]');if(!r)return;dragK=r.dataset.row;r.classList.add('is-drag');try{e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',dragK);}catch(_){}});
+org.addEventListener('dragover',function(e){var r=e.target.closest&&e.target.closest('[data-row]');if(!dragK||!r)return;e.preventDefault();$$('.is-drop-before,.is-drop-after',org).forEach(function(x){x.classList.remove('is-drop-before','is-drop-after');});var after=e.clientY>r.getBoundingClientRect().top+r.offsetHeight/2;r.classList.add(after?'is-drop-after':'is-drop-before');});
+org.addEventListener('drop',function(e){var r=e.target.closest&&e.target.closest('[data-row]');if(!dragK||!r)return;e.preventDefault();var to=r.dataset.row;if(to!==dragK){var after=r.classList.contains('is-drop-after');oPush();L.order.splice(L.order.indexOf(dragK),1);var j=L.order.indexOf(to)+(after?1:0);L.order.splice(j,0,dragK);}var k=dragK;dragK=null;applyRecap();renderOrg('[data-grip="'+k+'"]');});
+org.addEventListener('dragend',function(){dragK=null;$$('.is-drag,.is-drop-before,.is-drop-after',org).forEach(function(x){x.classList.remove('is-drag','is-drop-before','is-drop-after');});});
+$('#org-undo').addEventListener('click',function(){var s=oUndo.pop();if(s){L=JSON.parse(s);applyRecap();renderOrg(oUndo.length?'#org-undo':'#org-reset');if(!oUndo.length)$('#org-reset').focus();}});
+$('#org-reset').addEventListener('click',function(){oPush();L=JSON.parse(JSON.stringify(LDEF));applyRecap();say('Récap remis comme au départ',function(){$('#org-undo').click();});});
+$('#open-org').addEventListener('click',function(){org.scrollIntoView({behavior:'smooth',block:'nearest'});org.focus({preventScroll:true});});
+$$('[data-go]').forEach(function(b){b.addEventListener('click',function(){$(b.dataset.go).scrollIntoView({behavior:'smooth'});});});
+
+/* ════ 1 · 4 ════ */
+$('#star').addEventListener('click',function(){var on=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',String(on));this.textContent=on?'⭐ Favori':'☆ Favori';say(on?'Tour de France ajouté aux favoris':'Tour de France retiré des favoris');});
+$('#keepq').addEventListener('click',function(){var on=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',String(on));this.textContent=on?'💾 Gardée':'💾 Garder cette question';});
+
+/* ════ 6 · filtrer par la vie ════ */
+var EV=[[1793,'⚔️ Combat de Gilette','guerres de la Révolution'],[1794,'⚔️ Combats de Saorge','armée d’Italie'],[1800,'⚔️ Combat du pont du Var','mai 1800'],[1860,'👑 Nice devient française','traité de Turin, 24 mars'],[1864,'🚂 Le train arrive à Nice','ligne de Marseille'],[1870,'⚔️ Guerre franco-allemande','loin de Nice'],[1879,'⛅ Hiver 1879–1880','le plus froid du siècle'],[1887,'🌋 Séisme de Ligurie','23 février, ressenti fort'],[1914,'⚔️ Mobilisation générale','2 août'],[1942,'⚔️ Nice occupée par l’armée italienne','novembre']];
+var lifeD={1856:[1856,1931],1872:[1872,1950]},lifeF='life';
+function renderLife(){var p=lifeD[$('#lifep').value],b=p[0],d=p[1];var rows=EV.filter(function(r){var y=r[0];if(lifeF==='before')return y<b;if(lifeF==='child')return y>=b&&y<=b+12;if(lifeF==='young')return y>b+12&&y<=b+25;return y>=b&&y<=d;});
+  $('#life-count').textContent=rows.length+' ligne'+(rows.length>1?'s':'')+' sur '+EV.length;
+  $('#life-body').innerHTML=rows.length?rows.map(function(r){var a=r[0]-b;return '<tr><td class="age">'+r[0]+'</td><td>'+r[1]+'<small>'+r[2]+'</small></td><td class="age">'+(a<0?'<span class="muted">'+(-a)+' ans avant</span>':a+' ans')+'</td></tr>';}).join(''):'<tr><td colspan="3" class="muted">Rien à ce moment-là autour de Nice.</td></tr>';}
+$('#lifef').dataset.own='1';
+$('#lifef').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;lifeF=b.dataset.f;$$('button',this).forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});renderLife();});
+$('#lifep').addEventListener('change',renderLife);renderLife();
+
+/* ════ 7 · comparer ════ */
+var CMP={p:[['Pierre MAZAUD','1872–1944 · Tulle'],['Louis DURAND','1880–1962 · Salon-de-Provence'],[
+  ['⚔️ Guerres de son vivant','1914–1918, 1939–1945','1914–1918, 1939–1945',1],
+  ['','<small>+ Tulle, 9 juin 1944 : 99 hommes pendus</small>','<small>—</small>',0],
+  ['🌋 Séismes forts (150 km)','aucun','1909, Lambesc · 29 ans',0],
+  ['⛅ Hivers très froids','1879–1880 · 7 ans','février 1956 · 75 ans',0],
+  ['🏆 Tour de France (50 km)','4 passages','7 passages, dont l’arrivée de 2017',0],
+  ['🌊 Grandes crues','2 de la Corrèze','aucune',0],
+  ['⚒️ Travail autour de lui','Manufacture d’armes de Tulle','huileries et savonneries',0]]],
+ l:[['Tulle','Corrèze · toutes les années'],['Salon-de-Provence','Bouches-du-Rhône · toutes les années'],[
+  ['🏛 Monuments historiques','14 · dont la cathédrale','11 · dont le château de l’Empéri',0],
+  ['⚔️ Guerres et combats','9 juin 1944','aucun combat noté',0],
+  ['🌋 Séismes forts (150 km)','aucun','1909, Lambesc',0],
+  ['🏆 Tour de France','ville-étape','ville-étape (2017)',1],
+  ['🌊 Grandes crues','5 repères de crues','aucun repère',0],
+  ['🚂 Gare','oui','oui',1]]]};
+function renderCmp(k){var c=CMP[k];$('#cmp').innerHTML='<div class="h t">Thème</div><div class="h">'+c[0][0]+'<small>'+c[0][1]+'</small></div><div class="h">'+c[1][0]+'<small>'+c[1][1]+'</small></div>'+c[2].map(function(r){return (r[0]?'<div class="t">'+r[0]+'</div>':'<div class="t" aria-hidden="true" style="padding:0 10px"></div>')+'<div'+(r[3]?' class="both"':'')+'>'+r[1]+'</div><div'+(r[3]?' class="both"':'')+'>'+r[2]+'</div>';}).join('');}
+$('#cmpk').dataset.own='1';
+$('#cmpk').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;$$('button',this).forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});renderCmp(b.dataset.k);});
+renderCmp('p');
+
+/* ════ 8 · carte de tout ════ */
+var LAY=[['mon','🏛 Monuments','#0066cc',46,1],['pat','🏘 Petit patrimoine','#6929c4',61,0],['war','⚔️ Guerres','#c62828',3,1],['eau','🌊 Crues','#0f9bb4',5,1],['tour','🏆 Tour de France','#d4a800',3,1],['met','⛅ Météo','#555555',1,0]];
+var seed=7;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+var pts='';LAY.forEach(function(l){var n=Math.min(l[3],16);var g='<g data-l="'+l[0]+'"'+(l[4]?'':' style="display:none"')+'>';for(var i=0;i<n;i++){var a=rnd()*Math.PI*2,r=20+rnd()*135;g+='<circle cx="'+(400+Math.cos(a)*r*1.3).toFixed(1)+'" cy="'+(195+Math.sin(a)*r*.95).toFixed(1)+'" r="6" fill="'+l[2]+'" stroke="#fff" stroke-width="2"><title>'+l[1]+' (exemple)</title></circle>';}pts+=g+'</g>';});
+$('#pts').innerHTML=pts;
+function renderLyr(){$('#lyr').innerHTML=LAY.map(function(l,i){return '<button type="button" class="ui-listbar-chip'+(l[4]?'':' off')+'" data-ly="'+i+'" aria-pressed="'+!!l[4]+'"><i style="background:'+l[2]+'"></i>'+l[1]+' · '+l[3]+'</button>';}).join('');
+  var lg='<b>Autour de Tulle · 30 km</b>'+LAY.filter(function(l){return l[4];}).map(function(l){return '<span><i style="background:'+l[2]+'"></i>'+l[1]+' · '+l[3]+'</span>';}).join('')+'<span><i style="background:#2b8a3e;border-radius:0;transform:rotate(45deg) scale(.85)"></i>lieu de la famille</span><span style="color:#555">nombres : exemple</span>';$('#legend2').innerHTML=lg;}
+$('#lyr').addEventListener('click',function(e){var b=e.target.closest('[data-ly]');if(!b)return;var l=LAY[+b.dataset.ly];l[4]=l[4]?0:1;$('#pts [data-l="'+l[0]+'"]').style.display=l[4]?'':'none';renderLyr();var nb=$('[data-ly="'+b.dataset.ly+'"]');if(nb)nb.focus();});
+renderLyr();
+
+/* ════ 9 · placer ════ */
+$$('[data-place]').forEach(function(b){b.addEventListener('click',function(){var tr=b.closest('tr'),name=tr.cells[0].firstChild.textContent,old=b.outerHTML;b.outerHTML='<span class="ui-badge is-green">✓ placé</span>';say(name+' placé : ses données apparaissent dans les listes',function(){tr.cells[3].innerHTML=old;bindPlace(tr);});});});
+function bindPlace(tr){var b=tr.querySelector('[data-place]');if(b)b.addEventListener('click',function(){var name=tr.cells[0].firstChild.textContent,old=b.outerHTML;b.outerHTML='<span class="ui-badge is-green">✓ placé</span>';say(name+' placé : ses données apparaissent dans les listes',function(){tr.cells[3].innerHTML=old;bindPlace(tr);});});}
+
+/* ════ 14 · citer ════ */
+var CITE={s:'Séisme de Provence, 11 juin 1909. Wikidata (CC0), consulté le 26 novembre 2026 ; pack « 🌋 Séismes » du 20 novembre 2026.',
+ i:'WIKIDATA. <i>Séisme de 1909 en Provence</i> [en ligne]. Wikimedia Foundation. Licence CC0. [Consulté le 26 novembre 2026]. Disponible à l’adresse : https://www.wikidata.org/wiki/Q…',
+ c:'« Séisme de 1909 en Provence ». <i>Wikidata</i>. Wikimedia Foundation, CC0. Consulté le 26 novembre 2026. https://www.wikidata.org/wiki/Q….'};
+var cs='s';function renderCite(){$('#cite-out').innerHTML=CITE[cs];}
+$('#cites').dataset.own='1';
+$('#cites').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cs=b.dataset.c;$$('button',this).forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});renderCite();});
+$('#cite-copy').addEventListener('click',function(){var t=$('#cite-out').textContent;try{if(navigator.clipboard)navigator.clipboard.writeText(t).catch(function(){});}catch(_){}say('Citation copiée');});
+renderCite();
+
+/* ════ 17 · diaporama ════ */
+var SL=[[1856,0,[['Naissance à Nice','Nice est alors dans le royaume de Sardaigne']]],[1860,4,[['Nice devient française','traité de Turin, 24 mars ; vote en avril']]],[1864,8,[['Le train arrive à Nice','la ligne de Marseille atteint la ville à l’automne']]],[1870,14,[['Guerre franco-allemande','loin de Nice ; 1 cousin LACOMBE mobilisé (exemple)']]],[1879,23,[['L’hiver 1879–1880','le plus froid du siècle en France']]],[1887,31,[['Séisme de Ligurie, 23 février','ressenti fort à Nice, à l’aube du mercredi des Cendres'],['📝 Ta note','sa lettre du 2 mars 1887 en parle (carton 3)']]],[1914,58,[['Mobilisation générale, 2 août','la Grande Guerre commence']]],[1931,75,[['Décès à Nice','fin du diaporama · 8 années montrées sur 76']]]];
+var si=0,sTimer=null,sSpeed=3500;
+function renderSlide(){var s=SL[si];$('#slide').innerHTML='<div class="fade"><div class="yr">'+s[0]+'</div><div class="who">Marie LACOMBE · '+(s[1]?s[1]+' ans':'naissance')+'</div><div class="evs">'+s[2].map(function(e){return '<div>'+e[0]+'<small>'+e[1]+'</small></div>';}).join('')+'</div></div><div class="bar" aria-hidden="true"><i style="width:'+((si+1)/SL.length*100)+'%"></i></div>';}
+function step(d){si=(si+d+SL.length)%SL.length;renderSlide();}
+function stop(){clearInterval(sTimer);sTimer=null;$('#sl-play').textContent='▶ Lecture';}
+$('#sl-play').addEventListener('click',function(){if(sTimer){stop();return;}sTimer=setInterval(function(){step(1);if(si===SL.length-1)stop();},sSpeed);this.textContent='⏸ Pause';});
+$('#sl-prev').addEventListener('click',function(){step(-1);});$('#sl-next').addEventListener('click',function(){step(1);});
+$('#sl-speed').dataset.own='1';
+$('#sl-speed').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;sSpeed=+b.dataset.s;$$('button',this).forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});if(sTimer){stop();$('#sl-play').click();}});
+renderSlide();
+
+/* ════ 19 · faire de la place ════ */
+$$('[data-free]').forEach(function(b){b.addEventListener('click',function(){var li=b.closest('li');li.classList.add('gone');b.disabled=true;b.textContent='retiré';say(li.querySelector('b').textContent+' retiré : '+b.dataset.free+' Go libérés',function(){li.classList.remove('gone');b.disabled=false;b.textContent='Retirer · '+b.dataset.free+' Go';});});});
+
+/* ════ 21 · versions ════ */
+$$('[data-rev]').forEach(function(b){b.addEventListener('click',function(){say('🌋 Séismes de France revient à la version du '+b.dataset.rev+'. Tes notes et marques sont gardées.',function(){});});});
+
+renderGroups();applyRecap();
+})();
+</script>
+</body>
+</html>
