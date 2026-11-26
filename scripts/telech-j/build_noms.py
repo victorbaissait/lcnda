@@ -51,6 +51,13 @@ def labels(qids):
     return out
 
 
+def sliced(q, parts, k):
+    """la requête limitée à une tranche des éléments ?i (reste de la division de leur numéro) : plus légère pour le service"""
+    cut = (f' FILTER(xsd:integer(STRAFTER(STR(?i), "/entity/Q")) - {parts} * FLOOR(xsd:integer(STRAFTER(STR(?i), "/entity/Q")) / {parts}) = {k})')
+    j = q.rstrip().rfind('}')
+    return q[:j] + cut + ' ' + q[j:]
+
+
 def run(q_of, codes, light=None):
     """une requête par groupe de pays ; un groupe qui échoue est coupé en deux ; un pays seul qui échoue est refait sans les
     libellés (light), puis ses libellés sont demandés à part, par paquets"""
@@ -79,6 +86,25 @@ def run(q_of, codes, light=None):
                         continue
                     except RuntimeError as e2:
                         e = e2
+                    # encore trop lourd : la même requête sans libellés, en tranches (par le numéro de l'élément), 4 puis 16
+                    for parts in (4, 16):
+                        try:
+                            res = []
+                            for k in range(parts):
+                                res += wm.sparql(sliced(light(vals), parts, k))
+                            lab = labels([wm.qid(r['i']['value']) for r in res])
+                            for r in res:
+                                q = wm.qid(r['i']['value'])
+                                if q in lab:
+                                    r['lab'] = {'value': lab[q]}
+                            print(f'  {g[0]} : {len(res)} réponses (sans libellés, en {parts} tranches)', flush=True)
+                            out += res
+                            break
+                        except RuntimeError as e3:
+                            e = e3
+                    else:
+                        print(f'  {g[0]} : abandonné ({str(e)[:120]})', flush=True)
+                    continue
                 print(f'  {g[0]} : abandonné ({str(e)[:120]})', flush=True)
                 continue
             todo[:0] = [g[:len(g) // 2], g[len(g) // 2:]]

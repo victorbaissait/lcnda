@@ -15,7 +15,7 @@ Chaque partie s'arrête (sans rien écrire) si la licence n'est plus ouverte ou 
 
 Lancer (sur GitHub) : python3 -I scripts/telech-l/build_github_only.py [dossier de sortie] [mines lieux_gb bagnards]
 """
-import csv, io, json, math, os, re, sys, time, zipfile
+import csv, io, json, math, os, re, sys, time, urllib.parse, zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import wm
 
@@ -99,7 +99,7 @@ def lieux_gb():
     county = next((h for h in ('COUNTY_UNITARY', 'DISTRICT_BOROUGH') if h in H), None)
     rows, kinds, counties = [], [], []
     for n in z.namelist():
-        if not re.search(r'/data/.*\.csv$', n, re.I):
+        if not re.search(r'(^|/)data/.*\.csv$', n, re.I):   # « Data/HP40.csv » (sans « / » devant) dans le zip de l'OS
             continue
         for r in csv.reader(io.TextIOWrapper(z.open(n), encoding='utf-8')):
             if len(r) < len(head) or r[H['LOCAL_TYPE']] not in ('Hamlet', 'Village', 'Other Settlement'):
@@ -109,7 +109,8 @@ def lieux_gb():
             except ValueError:
                 continue
             rows.append([r[H['NAME1']][:80], idx(kinds, r[H['LOCAL_TYPE']]), idx(counties, r[H[county]] if county else ''), round(lat, 5), round(lon, 5)])
-    assert len(rows) > 20000, len(rows)
+    if len(rows) <= 20000:
+        raise RuntimeError(f'{len(rows)} lieux ; fichiers du zip : {z.namelist()[:8]}')
     return {'source': 'Ordnance Survey, OS Open Names — Contains OS data © Crown copyright and database right', 'licence': 'Open Government Licence v3.0',
             'licence_url': 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/', 'url': 'https://www.ordnancesurvey.co.uk/products/os-open-names', 'country': ['GB'],
             'what': 'Hameaux, villages et autres lieux habités de Grande-Bretagne', 'kinds': kinds, 'counties': counties, 'fields': ['n', 'k', 'c', 'lat', 'lon'], 'rows': rows}
@@ -117,15 +118,43 @@ def lieux_gb():
 
 def bagnards():
     api = 'https://www.data.qld.gov.au/api/3/action/package_search?q=convict%20transportation%20registers&rows=10'
-    pk = next((p for p in json.loads(wm.get(api))['result']['results'] if re.search(r'convict', p.get('title', ''), re.I)), None)
-    if not pk:
+    pks = [p for p in json.loads(wm.get(api))['result']['results'] if re.search(r'convict', p.get('title', ''), re.I)]
+    if not pks:
         sys.exit('Queensland : jeu de données des bagnards introuvable')
-    if not str(pk.get('license_id', '')).lower().startswith('cc-by'):
-        sys.exit(f"Queensland : licence {pk.get('license_id')} — pas CC BY : rien n'est copié")
-    res = next((r for r in pk.get('resources', []) if str(r.get('format', '')).lower() == 'csv'), None)
-    if not res:
-        sys.exit('Queensland : pas de fichier CSV')
-    rd = csv.DictReader(io.StringIO(wm.get(res['url'], '*/*').decode('utf-8-sig', 'replace')))
+    rd = None
+    for pk in pks:
+        if not str(pk.get('license_id', '')).lower().startswith('cc-by'):
+            print(f"Queensland : {pk.get('name')} sous licence {pk.get('license_id')} — pas CC BY : laissé", flush=True)
+            continue
+        for res in pk.get('resources', []):
+            if str(res.get('format', '')).lower() != 'csv':
+                continue
+            print(f"Queensland : {pk.get('name')} → {res.get('name')} {res.get('url')}", flush=True)
+            text = ''
+            try:
+                text = wm.get(res['url'], 'text/csv,*/*').decode('utf-8-sig', 'replace')
+            except Exception as e:  # noqa
+                print(f'  fichier refusé ({e})', flush=True)
+            if not text.strip() and res.get('datastore_active'):
+                # le fichier ne vient pas : la même table par l'API « datastore » de CKAN (mêmes données, même licence)
+                recs, off = [], 0
+                while True:
+                    d = json.loads(wm.get('https://www.data.qld.gov.au/api/3/action/datastore_search?' + urllib.parse.urlencode({'resource_id': res['id'], 'limit': 32000, 'offset': off})))['result']
+                    recs += d.get('records', [])
+                    off += 32000
+                    if off >= d.get('total', 0) or not d.get('records'):
+                        break
+                fields = [f['id'] for f in d.get('fields', []) if f['id'] != '_id']
+                buf = io.StringIO(); w = csv.DictWriter(buf, fields, extrasaction='ignore'); w.writeheader(); w.writerows(recs)
+                text = buf.getvalue()
+            print(f'  {len(text)} caractères ; début : {text[:160]!r}', flush=True)
+            cand = csv.DictReader(io.StringIO(text))
+            if cand.fieldnames and any('name' in c.lower() for c in cand.fieldnames):
+                rd = cand; break
+        if rd:
+            break
+    if not rd:
+        sys.exit('Queensland : aucun fichier CSV lisible (voir ci-dessus)')
     cols = [c.lower() for c in rd.fieldnames or []]
     pick = lambda *keys: next((rd.fieldnames[i] for i, c in enumerate(cols) if any(k in c for k in keys)), None)
     cn, cs, cy, cp = pick('name'), pick('ship', 'vessel'), pick('year', 'date', 'departure'), pick('place', 'court', 'tried', 'county')

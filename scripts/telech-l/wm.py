@@ -12,7 +12,7 @@ def get(url, accept='application/json', data=None, tries=6, check=None):
     os.makedirs(CACHE, exist_ok=True)
     key = hashlib.sha1((url + '\n' + (data or '')).encode()).hexdigest()
     f = os.path.join(CACHE, key)
-    if os.path.exists(f):
+    if os.path.exists(f) and os.path.getsize(f) > 0:   # une réponse vide gardée par erreur n'est pas reprise
         return open(f, 'rb').read()
     host = urllib.parse.urlparse(url).hostname or ''
     last = None
@@ -28,6 +28,8 @@ def get(url, accept='application/json', data=None, tries=6, check=None):
                 body = r.read()
             if body.lstrip()[:9] == b'{"error":' or b'too many requests' in body[:2000].lower() or b'making too many requests' in body[:400].lower():
                 raise RuntimeError('réponse d’erreur : ' + body[:160].decode('utf-8', 'replace'))
+            if not body.strip():
+                raise RuntimeError('réponse vide')
             if check:
                 check(body)   # une réponse coupée (délai dépassé au milieu) n'est pas gardée : on redemande
             open(f, 'wb').write(body)
@@ -44,6 +46,9 @@ def get(url, accept='application/json', data=None, tries=6, check=None):
                 ra = int(e.headers.get('Retry-After') or 0)
             except Exception:  # noqa
                 pass
+            if 'maxlag' in str(e):   # l'API de Wikidata demande d'attendre que ses serveurs rattrapent leur retard
+                time.sleep(max(ra, 30 * (i + 1)))
+                continue
             time.sleep(max(ra, 20 * (i + 1)) if code == 429 or 'too many' in str(e).lower() else 5 * (i + 1))
     raise RuntimeError(f'{url[:160]} : {last}')
 

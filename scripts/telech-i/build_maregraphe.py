@@ -13,6 +13,7 @@ Level », Journal of Coastal Research 29(3), 493–504, doi:10.2112/JCOASTRES-D-
 Lancer : python3 -I scripts/telech-i/build_maregraphe.py [dossier de sortie]
 """
 import html, os, re, sys
+from urllib.parse import urljoin, urlparse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import wm
 
@@ -23,13 +24,29 @@ STATIONS = {1: 'Brest', 61: 'Marseille'}
 
 
 def main():
-    page = html.unescape(re.sub(r'<[^>]+>', ' ', wm.get(BASE, 'text/html').decode('utf-8', 'replace')))
-    page = ' '.join(page.split())
-    sent = re.split(r'(?<=[.!?])\s+', page)
-    free = [s for s in sent if re.search(r'(?i)\bfree(ly)?\b|without restriction|no restriction', s)]
-    cite = [s for s in sent if re.search(r'(?i)\bcit(e|ed|ation)\b|acknowledg', s)]
+    # la page « Obtaining data » et les pages de conditions qu'elle désigne (data policy, terms, licence…), sur psmsl.org seulement
+    raw = wm.get(BASE, 'text/html').decode('utf-8', 'replace')
+    pages = {BASE: raw}
+    for href, text in re.findall(r'<a[^>]+href="([^"#]+)"[^>]*>(.*?)</a>', raw, re.I | re.S):
+        if re.search(r'(?i)polic|terms|licen|condition|citing|acknowledg', href + ' ' + text):
+            u = urljoin(BASE, html.unescape(href))
+            if urlparse(u).hostname in ('psmsl.org', 'www.psmsl.org') and u not in pages and len(pages) < 8:
+                try:
+                    pages[u] = wm.get(u, 'text/html').decode('utf-8', 'replace')
+                except Exception as e:  # noqa
+                    print(f'  {u} : pas lue ({e})', flush=True)
+    print('Pages des conditions lues :', ', '.join(pages), flush=True)
+    sent, src = [], {}
+    for u, t in pages.items():
+        t = ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', re.sub(r'(?is)<(script|style)\b.*?</\1>', ' ', t))).split())
+        for x in re.split(r'(?<=[.!?])\s+', t):
+            sent.append(x); src[x] = u
+    free = [s for s in sent if re.search(r'(?i)\bfree(ly)?\b|free of charge|without (any )?restriction|no restriction|creative commons|\bCC[ -]BY\b|open licen[cs]e|without charge', s)]
+    cite = [s for s in sent if re.search(r'(?i)\bcit(e|ed|ation|ing)\b|acknowledg', s)]
     if not free:
-        sys.exit('Conditions du PSMSL : aucune phrase « libre / free » trouvée sur ' + BASE + ' — rien n’est écrit.')
+        print('  phrases qui parlent de données / d’usage :', [s[:200] for s in sent if re.search(r'(?i)\b(data|use|policy|terms)\b', s)][:12], flush=True)
+        sys.exit('Conditions du PSMSL : aucune phrase « libre / free » trouvée sur ' + ', '.join(pages) + ' — rien n’est écrit.')
+    print('Conditions :', free[0][:200], '(' + src[free[0]] + ')', flush=True)
     stations = {}
     for line in wm.get(BASE + 'rlr.annual.data/filelist.txt', 'text/plain').decode('utf-8', 'replace').splitlines():
         p = [x.strip() for x in line.split(';')]
@@ -44,7 +61,7 @@ def main():
     assert sum(1 for r in rows if r[0] == 1) > 150, 'série de Brest trop courte'
     fields = ['st', 'y', 'mm']
     meta = {'source': 'Permanent Service for Mean Sea Level (PSMSL), Tide Gauge Data (séries annuelles RLR)', 'licence': 'Données libres, à citer (conditions du PSMSL)',
-            'licence_url': BASE, 'url': BASE, 'built': wm.today(), 'policy_free': free[:3], 'policy_cite': cite[:4],
+            'licence_url': src[free[0]], 'url': BASE, 'built': wm.today(), 'policy_free': free[:3], 'policy_cite': cite[:4],
             'cite': ['Holgate, S.J. et al. (2013) New Data Systems and Products at the Permanent Service for Mean Sea Level. Journal of Coastal Research 29(3), 493–504. doi:10.2112/JCOASTRES-D-12-00175.1',
                      f'Permanent Service for Mean Sea Level (PSMSL), {wm.today()[:4]}, Tide Gauge Data, Retrieved {wm.today()} from http://www.psmsl.org/data/obtaining/'],
             'stations': [stations.get(s, {'id': s, 'name': n}) for s, n in STATIONS.items()],

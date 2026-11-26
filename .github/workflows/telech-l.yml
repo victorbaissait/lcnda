@@ -88,4 +88,13 @@ jobs:
           git add assets/data/tl-*.json.gz assets/data/manifest.json
           git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
           git commit -m "Les équivalents d’ailleurs (lot L) : données refaites sur GitHub (HANZE CC BY 4.0, Wikidata CC0, USGS, OS OGL…)"
-          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done
+          ok=
+          for i in 1 2 3 4 5; do
+            if ! git pull --rebase origin "$GITHUB_REF_NAME"; then
+              # le sommaire a changé entre-temps (un autre atelier) : on garde celui de la branche et on le refait par-dessus
+              git checkout --ours assets/data/manifest.json && node scripts/donnees-manifest.js \
+                && git add assets/data/manifest.json && GIT_EDITOR=true git rebase --continue || { git rebase --abort; sleep 15; continue; }
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME" && { ok=1; break; }; sleep 15
+          done
+          [ -n "$ok" ] || { echo "::error::pas enregistré dans la branche"; exit 1; }
