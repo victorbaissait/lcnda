@@ -87,7 +87,7 @@
             if (x.dn != null) push(byDay, x.dn, i);
             if (x.year != null) push(byYear, x.year, i);
         }
-        const keys = [...new Set([...(M.fields || []).map(f => f.key), ...(M.keep || []), 'date', 'year', 'lat', 'lon', 'url'])].filter(k => k !== 'sources');
+        const keys = [...new Set([...fieldsOf(M).map(f => f.key), ...(M.keep || []), ...(typeof M.chips === 'string' ? [M.chips] : []), 'date', 'year', 'lat', 'lon', 'url'])].filter(k => k !== 'sources');
         return clusters.map(c => {
             const ms = c.members.sort((a, b) => (a.src.rank || 9) - (b.src.rank || 9)), out = {_k: ms[0].key, _members: ms.map(m => ({src: m.src, key: m.key, rec: m.rec}))};
             for (const k of keys) { const m = ms.find(x => x.rec[k] != null && x.rec[k] !== ''); out[k] = m ? m.rec[k] : null; }
@@ -99,6 +99,14 @@
         });
     }
 
+    /** les colonnes : M.fields, sinon M.columns (les clés) avec le libellé et la sorte trouvés dans les listes sources ; « Sources » au bout */
+    const LAB = {date: ['Date', 'date'], year: ['Année', 'year'], place: ['Où', 'place'], country: ['Pays', 'enum'], source: ['Source', 'enum'], dead: ['Morts', 'number']};
+    function fieldsOf(M) {
+        if (Array.isArray(M.fields) && M.fields.length) return M.fields;
+        const srcF = sourcesOf(M).flatMap(s => s.d.fields || []);
+        const out = (M.columns || ['date', 'place']).filter(k => k !== 'sources').map(k => { const f = srcF.find(x => x.key === k && x.type !== 'url'); return {key: k, label: f?.label || LAB[k]?.[0] || k, type: f?.type === 'url' ? 'text' : f?.type || LAB[k]?.[1] || 'text'}; });
+        return [...out, {key: 'sources', label: 'Sources'}];
+    }
     /* ═════════════ les sources d'une liste réunie ═════════════ */
     const MERGES = () => (Array.isArray(ext.dataListMerges) ? ext.dataListMerges : []).filter(m => m && m.id && m.label);
     /** les sources déclarées par la liste réunie, et celles des listes qui disent `merge: {into}` */
@@ -156,8 +164,8 @@
     function defOf(M) {
         const id = `reunie_${M.id}`;
         return {id, merged: true, mergeId: M.id, theme: M.theme, icon: M.icon || '🔀', label: M.label, group: M.group || 'Le monde', source: M.source || '', sourceUrl: M.sourceUrl || '',
-            keywords: M.keywords || [], cards: true, familyColumn: M.familyColumn, familyKm: M.familyKm, familyBefore: M.familyBefore, defaultSort: M.defaultSort, hideCols: M.hideCols, chips: M.chips, views: M.views,
-            fields: (M.fields || []).map(f => (f.key === 'sources' ? {type: 'enum', values: sourcesOf(M).map(s => s.short), html: srcLinks, ...f} : f)),
+            keywords: M.keywords || [], cards: true, defaultView: M.defaultView, familyColumn: M.familyColumn, familyKm: M.familyKm, familyBefore: M.familyBefore, defaultSort: M.defaultSort, hideCols: M.hideCols, chips: M.chips, views: M.views,
+            get fields() { return fieldsOf(M).map(f => (f.key === 'sources' ? {type: 'enum', values: sourcesOf(M).map(s => s.short), html: srcLinks, ...f} : f)); },
             period: M.period || (r => [r.year, r.year]), geo: M.geo || (r => [r.lat, r.lon]),
             rowKey: r => r._k, sourceCount: () => sourcesOf(M).length, mergeLine: () => T('{s}, sans doublons', {s: sourcesOf(M).map(s => s.short).join(' + ')}),
             installed: async () => (await activeSources(M)).length > 0,
@@ -196,13 +204,13 @@
         const next = tr.nextElementSibling;
         if (next?.classList.contains('ldr-detail-tr')) { next.remove(); tr.classList.remove('is-open'); tr.querySelector('[data-ld-open]')?.setAttribute('aria-expanded', 'false'); return; }
         tr.parentElement.querySelectorAll('.ldr-detail-tr').forEach(x => { x.previousElementSibling?.classList.remove('is-open'); x.remove(); });
-        const det = M.detail || (M.fields || []).filter(f => f.key !== 'sources' && !f.html).map(f => ({key: f.key, label: f.label}));
+        const det = M.detail || fieldsOf(M).filter(f => f.key !== 'sources' && !f.html).map(f => ({key: f.key, label: f.label}));
         const ms = row._members || [], ro = kiosk();
         const cell = (m, c) => { const v = m.rec[c.key]; if (v == null || v === '') return '<td class="muted">—</td>'; let t = v; try { t = c.fmt ? c.fmt(v, m.rec, row) : v; } catch (_) {} return `<td>${esc(t)}</td>`; };
         const d0 = ms[0]?.rec || {};
         const where = m => (m.rec.lat != null && d0.lat != null && m !== ms[0] ? ` <small class="muted">(${nf(km(Number(d0.lat), Number(d0.lon), Number(m.rec.lat), Number(m.rec.lon)))} km)</small>` : '');
         const html = `<td colspan="${tr.children.length}"><div class="ldr-detail" role="region" aria-label="${esc(T('Ce que dit chaque source'))}">
-            <div class="ldr-dhead"><b>${esc((() => { try { return M.title ? M.title(row) : row[M.fields?.[0]?.key]; } catch (_) { return ''; } })())}</b>${ms.length > 1 ? ` <small class="muted">${esc(T('{n} sources', {n: ms.length}))}</small>` : ''}</div>
+            <div class="ldr-dhead"><b>${esc((() => { try { return M.title ? M.title(row) : row[fieldsOf(M)[0]?.key]; } catch (_) { return ''; } })())}</b>${ms.length > 1 ? ` <small class="muted">${esc(T('{n} sources', {n: ms.length}))}</small>` : ''}</div>
             <div class="ld-table-wrap"><table class="data-table ldr-dtable"><thead><tr><th>${esc(T('Source'))}</th>${det.map(c => `<th>${esc(T(c.label))}</th>`).join('')}<th></th></tr></thead>
             <tbody>${ms.map(m => `<tr><td><b>${esc(m.src.short)}</b>${m.src.sub ? ` <small class="muted">${esc(T(m.src.sub))}</small>` : ''}${where(m)}</td>${det.map(c => cell(m, c)).join('')}<td>${(m.rec.url || m.src.url) && /^https?:\/\//i.test(m.rec.url || m.src.url) ? `<a href="${esc(m.rec.url || m.src.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(T('La fiche de cette source'))} — ${esc(m.src.short)}">↗</a>` : ''}</td></tr>`).join('')}</tbody></table></div>
             ${row._diff ? `<p class="ldr-note"><span class="ldr-diff">⚖</span> ${esc(T('Les sources ne donnent pas la même chose : la ligne réunie montre la source la plus précise ({s}). Rien n’est caché : tout est ici.', {s: ms[0]?.src.short || ''}))}</p>` : ''}

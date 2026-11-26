@@ -185,6 +185,32 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.strictEqual(await p.$$eval('.ld-results .h-map-point', a => a.length), 5);
             await p.click('[data-ld-view="table"]'); await p.waitForSelector('.ld-table');
         });
+        await t('pour le lot M (🏆 Sport) : pastilles par valeur (chips: \'clé\'), vues déclarées (Éditions | Étapes | 🗺 Carte), sous-liste « ☑ Toutes ses étapes », « Dans la famille » à 15 km', async () => {
+            await p.evaluate(() => {
+                const ed = [{year: 1964, kind: 'Tour de France', winner: 'Jacques ANQUETIL', lat: 45.27, lon: 1.77}, {year: 1976, kind: 'Tour de France', winner: 'Lucien VAN IMPE', lat: 43.7, lon: 7.27},
+                    {year: 2017, kind: 'Tour de France', winner: 'Chris FROOME', lat: 43.64, lon: 5.1}, {year: 1950, kind: 'Giro', winner: 'Hugo KOBLET', lat: 45.46, lon: 9.19}];
+                const st = [{year: 1964, n: 1, from: 'Rennes', to: 'Lisieux', lat: 49.14, lon: 0.22}, {year: 1964, n: 2, from: 'Lisieux', to: 'Amiens', lat: 49.9, lon: 2.3}, {year: 1976, n: 1, from: 'Saint-Jean-de-Monts', to: 'Angers', lat: 47.47, lon: -0.55}];
+                window.LCNDA_EXT.dataLists.push({id: 'test_sport', icon: '🚲', label: 'Courses d’essai', group: 'Le monde', theme: 'sport', load: async () => ed, chips: 'kind', familyColumn: true,
+                    fields: [{key: 'year', label: 'Année', type: 'year'}, {key: 'kind', label: 'Course', type: 'enum'}, {key: 'winner', label: 'Vainqueur', type: 'text'}], period: r => [r.year, r.year], geo: r => [r.lat, r.lon],
+                    views: [{id: 'editions', label: 'Éditions', sub: r => ({view: 'etapes', preset: {crit: [{key: 'year', kind: 'range', from: r.year, to: r.year}]}, title: `Tour ${r.year}`, pickAll: 'Toutes ses étapes'})},
+                        {id: 'etapes', label: 'Étapes', load: async () => st, fields: [{key: 'year', label: 'Année', type: 'year'}, {key: 'n', label: 'Étape', type: 'number'}, {key: 'from', label: 'Départ', type: 'text'}, {key: 'to', label: 'Arrivée', type: 'place'}]}, 'carte']});
+            });
+            await sleep(300); await openKey('data_test_sport'); await waitCount(/^4 lignes/);
+            assert.deepStrictEqual(await p.$$eval('.ld-view button', a => a.map(x => x.textContent.trim())), ['Éditions', 'Étapes', '🗺 Carte']);
+            await p.waitForSelector('[data-ld-vchip="Tour de France"]'); assert.match(await p.textContent('[data-ld-qchips]'), /Tour de France 3.*Giro 1/s);
+            await p.click('[data-ld-vchip="Tour de France"]'); await waitCount(/^3 lignes/);
+            assert.strictEqual(await p.getAttribute('[data-ld-vchip="Tour de France"]', 'aria-pressed'), 'true');
+            await p.click('[data-ld-vchip="Tour de France"]'); await waitCount(/^4 lignes/);
+            assert.ok((await p.$$eval('.ld-table thead th', a => a.map(x => x.textContent))).some(h => /Dans la famille/.test(h)));
+            await p.click('[data-ld-dview="etapes"]'); await waitCount(/^3 lignes/); assert.match(await p.textContent('.ld-table thead'), /Départ.*Arrivée/s);
+            await p.click('[data-ld-dview="editions"]'); await waitCount(/^4 lignes/);
+            const i64 = await p.$$eval('.ld-table tbody tr[data-ld-row]', a => a.findIndex(tr => /1964/.test(tr.textContent)));
+            await p.click(`.ld-table tbody tr[data-ld-row="${i64}"] [data-ld-open]`); await waitCount(/^2 lignes/);
+            assert.match(await p.textContent('[data-ld-parent]'), /Tour 1964.*☑ Toutes ses étapes/s);
+            await p.click('[data-ld-pickall]'); assert.strictEqual(await p.textContent('.ldc-bar [data-ldc-n]'), '2 choisis');
+            await p.click('[data-ldc-x]'); await p.click('[data-ld-parent-back]'); await waitCount(/^4 lignes/); assert.strictEqual(await p.$('[data-ld-parent]'), null);
+            await openKey('data_theme_essai'); await p.waitForSelector('[data-ld-page="reunie_essai"] .ldt-tabs', {timeout: 30000});
+        });
         await t('« Les N listes » : les sources une à une ; ← Tous les thèmes', async () => {
             await p.click('[data-ldt-tab="lists"]'); await p.waitForSelector('.ldt-theme-page .ld-card');
             const cards = await p.$$eval('.ldt-theme-page .ld-card', a => a.map(x => x.textContent));

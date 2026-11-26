@@ -14,7 +14,17 @@
  *     enabled: () => bool,                         // facultatif : false = pas montrée (ex. fonction éteinte dans Réglages)
  *     facet: async (key, query) => [[valeur, n]…], // facultatif (query) : les choix d'un filtre « liste » avec leur nombre
  *     link: () => …                                // facultatif : une liste qui existe déjà ailleurs (on y va, pas de moteur)
+ *     theme: 'seismes',                            // 🗂 son thème (un seul, LCNDA_EXT.dataListThemes, app-listes-themes.js) ; group reste pour les fiches
+ *     merge: {into, rank, short, when?, row},      // 🔀 rejoint une liste réunie (LCNDA_EXT.dataListMerges, app-listes-reunies.js)
+ *     rowKey: row => …, itemOf: (row, élément) => …,   // ☑ la clé d'une ligne ; ce qu'elle devient au panier / en 📎 (app-listes-choix.js)
+ *     chips: [{id, icon, label, test(row, {d, geo}), prepare?(), on?}],   // 🏷 des pastilles à allumer d'un clic (au-dessus du tableau)
+ *     views: [{id, icon, label, fields?, load?, period?, geo?, open?, sub?}],   // 👁 des vues (ex. Éditions | Étapes) + 🗺 Carte
+ *     sub: row => ({view, preset, title, pickAll}),// ↳ la ligne ouvre une sous-liste (« ← titre · ☑ Toutes ses étapes »)
+ *     familyColumn: true, familyKm, familyBefore,  // 👪 « Dans la famille » (app-listes-famille.js ; rayon : Réglages, 15 km au départ)
+ *     hideCols: [...], defaultSort: [clé, 'asc'|'desc'], cards: true,   // colonnes cachées au départ ; tri de départ ; en cartes à 390 px
+ *     painted: (res, page) => …                    // après chaque dessin du tableau (ex. « 4 doublons fondus »)
  *   });
+ *   Une case peut contenir plusieurs valeurs (un tableau : ex. Sources) : le filtre « liste » en trouve une, l'export les joint.
  *   L'enregistrement marche avant ou après le chargement de ce fichier.
  *   query = {q, filters: [{key, op, value}], near: {lat, lon, km}, years: {from, to, mode}, sort, dir, offset, limit}
  *     op : 'contains' | 'starts' | 'eq' | 'in' (value = [..]) | 'gte' | 'lte' | 'true' | 'false' | 'empty' | 'notempty'
@@ -92,7 +102,8 @@
     const blank = () => ({q: '', crit: [], period: null, near: null, sort: '', dir: 'asc', view: 'table', hide: [], gps: false, chips: [], dview: ''});
     /** d (facultatif) : ses colonnes cachées au départ (d.hideCols), sa vue et ses pastilles de départ (d.views[0], chips[].on) */
     const stateOf = (id, d = null) => { const d0 = d || all().find(x => x.id === id), saved = readJ('lcnda-ld:' + id, {}) || {};
-        const st = {...blank(), hide: [...(d0?.hideCols || [])], chips: (d0?.chips || []).filter(c => c.on).map(c => c.id), dview: d0?.views?.[0]?.id || '', sort: d0?.defaultSort?.[0] || '', dir: d0?.defaultSort?.[1] || 'asc', ...saved};
+        let dv0 = ''; try { dv0 = (typeof d0?.defaultView === 'function' ? d0.defaultView() : d0?.defaultView) || ''; } catch (_) {}
+        const st = {...blank(), hide: [...(d0?.hideCols || [])], chips: (Array.isArray(d0?.chips) ? d0.chips : []).filter(c => c && c.on).map(c => c.id), dview: (viewsOf(d0).find(v => v.id === dv0) || viewsOf(d0)[0])?.id || '', sort: d0?.defaultSort?.[0] || '', dir: d0?.defaultSort?.[1] || 'asc', ...saved};
         if (!Array.isArray(st.chips)) st.chips = []; return st; };
     const saveState = (id, st) => writeJ('lcnda-ld:' + id, st);
     const savedAll = () => { const v = readJ(SAVED, {}); return v && typeof v === 'object' && v.saved && typeof v.saved === 'object' ? v : {saved: {}}; };
@@ -196,9 +207,21 @@
     const chipsOn = (d, st) => (Array.isArray(d.chips) ? d.chips.filter(c => c && c.id && typeof c.test === 'function' && (st.chips || []).includes(c.id)) : []);
     async function chipsPrepare(d, st) { for (const c of chipsOn(d, st)) { try { await c.prepare?.(); } catch (_) {} } }
     /* 👁 les vues d'une liste (d.views : [{id, icon, label, …ce qui change : fields, load, period, geo, open, sub…}]) : la liste « telle que vue » */
+    /** les vues d'une liste, telles que déclarées ({id, label…} ou seulement 'etapes') ; « carte » / « map » = le bouton 🗺 Carte */
+    const MAPV = new Set(['carte', 'map']);
+    const viewsOf = d => (Array.isArray(d?.views) ? d.views : []).map(v => (typeof v === 'string' ? {id: v, label: v.charAt(0).toUpperCase() + v.slice(1)} : v)).filter(v => v && v.id && !MAPV.has(v.id));
+    const wantsMap = d => !!d?.geo || (Array.isArray(d?.views) && d.views.some(v => MAPV.has(typeof v === 'string' ? v : v?.id)));
+    /* 🏷 pastilles par valeur (d.chips = 'clé' : ex. une pastille par compétition) : un clic filtre sur cette valeur, un autre l'enlève */
+    const valueChips = d => (typeof d?.chips === 'string' ? d.chips : '');
+    const chipVals = new Map();
+    async function valuePills(d) {
+        const key = valueChips(d), ck = `${d._ck || d.id}|${key}`; if (!key || d.query) return [];
+        if (!chipVals.has(ck)) chipVals.set(ck, loadAll(d).then(rows => { const n = new Map(); rows.forEach(r => [].concat(r[key] ?? []).forEach(v => { if (v != null && v !== '') n.set(String(v), (n.get(String(v)) || 0) + 1); })); return [...n.entries()].sort((a, b) => b[1] - a[1]).slice(0, 14); }).catch(() => []));
+        return chipVals.get(ck);
+    }
     function viewDef(d, st) {
-        const v = Array.isArray(d.views) && d.views.length ? (d.views.find(x => x.id === st?.dview) || d.views[0]) : null;
-        return v ? {...d, ...v, id: d.id, icon: d.icon, label: d.label, views: d.views, chips: v.chips || d.chips, _ck: `${d.id}~${v.id}`, _base: d, _view: v.id} : d;
+        const vs = viewsOf(d), v = vs.length ? (vs.find(x => x.id === st?.dview) || vs[0]) : null;
+        return v ? {...d, ...v, id: d.id, icon: d.icon, label: d.label, views: d.views, chips: v.chips || d.chips, geo: v.geo || d.geo, _ck: `${d.id}~${v.id}`, _base: d, _view: v.id} : d;
     }
     function sortRows(rows, key, dir) {
         if (!key) return rows;
@@ -293,12 +316,12 @@
                 <button type="button" class="ui-listbar-btn" data-ld-add aria-haspopup="true">＋ ${esc(T('Ajouter un critère'))}</button>
                 ${d.period ? `<button type="button" class="ui-listbar-btn" data-ld-period aria-haspopup="true">📅 ${esc(T('Période'))}</button>` : ''}
                 ${d.geo ? `<button type="button" class="ui-listbar-btn" data-ld-near aria-haspopup="true">📍 ${esc(T('Autour de…'))}</button>` : ''}
-                ${d.views?.length ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}">${d.views.map(v => `<button type="button" data-ld-dview="${esc(v.id)}">${v.icon ? `${esc(v.icon)} ` : ''}${esc(T(v.label))}</button>`).join('')}${viewDef(d, cur.st).geo || d.geo ? `<button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button>` : ''}</span>`
+                ${viewsOf(d).length ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}">${viewsOf(d).map(v => `<button type="button" data-ld-dview="${esc(v.id)}">${v.icon ? `${esc(v.icon)} ` : ''}${esc(T(v.label))}</button>`).join('')}${wantsMap(d) ? `<button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button>` : ''}</span>`
                     : d.geo ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}"><button type="button" data-ld-view="table">${esc(T('Tableau'))}</button><button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button></span>` : ''}
                 <button type="button" class="ui-listbar-btn" data-ld-cols aria-haspopup="true" title="${esc(T('Choisir les colonnes du tableau'))}">⚙ ${esc(T('Colonnes'))}</button>
                 <button type="button" class="ui-listbar-btn" data-ld-save title="${esc(T('Garder ces critères sous un nom, pour les retrouver d’un clic'))}">★ ${esc(T('Enregistrer cette recherche'))}</button>
               </div>
-              ${d.chips?.length ? `<div class="ld-qchips" data-ld-qchips role="group" aria-label="${esc(T('Pastilles'))}"></div>` : ''}
+              ${d.chips?.length || valueChips(d) ? `<div class="ld-qchips" data-ld-qchips role="group" aria-label="${esc(T('Pastilles'))}"></div>` : ''}
               <div class="ld-editor" data-ld-editor hidden></div>
               <div class="ld-chips" data-ld-chips></div>
             </div>
@@ -323,12 +346,15 @@
     }
     function paintChips() {
         const box = ws()?.querySelector('[data-ld-chips]'), d = cur.d, st = cur.st; if (!box) return;
-        const chips = [...st.crit.map((c, i) => [`crit:${i}`, critText(d, c)]), st.period ? ['period', periodText(st.period)] : null, st.near ? ['near', nearText(st.near)] : null].filter(Boolean);
+        const chips = [...st.crit.map((c, i) => (c.chip ? null : [`crit:${i}`, critText(d, c)])), st.period ? ['period', periodText(st.period)] : null, st.near ? ['near', nearText(st.near)] : null].filter(Boolean);
         box.innerHTML = `<span class="ld-count" data-ld-count aria-live="polite"></span>${chips.map(([k, t]) => `<button type="button" class="ui-listbar-chip" data-ld-chip="${esc(k)}" title="${esc(T('Retirer ce critère'))}">${esc(t)} <span aria-hidden="true">×</span></button>`).join('')}${ext.listesPersonnes?.chip?.(d, st) || ''}${chips.length > 1 || (chips.length && st.q) ? `<button type="button" class="ui-listbar-clearall" data-ld-clear>${esc(T('Tout effacer'))}</button>` : ''}`;
         ws()?.querySelectorAll('[data-ld-view]').forEach(b => { const on = b.dataset.ldView === st.view; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
         ws()?.querySelectorAll('[data-ld-dview]').forEach(b => { const on = st.view !== 'map' && b.dataset.ldDview === (cur.d?._view || ''); b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
         const qc = ws()?.querySelector('[data-ld-qchips]'), base = cur.base || d;
-        if (qc) qc.innerHTML = (base.chips || []).map(c => { const on = (st.chips || []).includes(c.id); return `<button type="button" class="ld-qchip${on ? ' is-on' : ''}" data-ld-qchip="${esc(c.id)}" aria-pressed="${on}">${c.icon ? `${esc(c.icon)} ` : ''}${esc(T(c.label))}${on ? ' <span aria-hidden="true">×</span>' : ''}</button>`; }).join('');
+        if (qc && valueChips(base)) { // une pastille par valeur (les plus fréquentes)
+            const key = valueChips(base), onV = st.crit.find(c => c.key === key && c.kind === 'enum' && c.chip)?.values?.[0];
+            valuePills(cur.d || base).then(vals => { if (!qc.isConnected) return; qc.innerHTML = vals.map(([v, n]) => { const on = v === onV; return `<button type="button" class="ld-qchip${on ? ' is-on' : ''}" data-ld-vchip="${esc(v)}" aria-pressed="${on}">${esc(v)} <i>${nf(n)}</i>${on ? ' <span aria-hidden="true">×</span>' : ''}</button>`; }).join(''); });
+        } else if (qc) qc.innerHTML = (base.chips || []).map(c => { const on = (st.chips || []).includes(c.id); return `<button type="button" class="ld-qchip${on ? ' is-on' : ''}" data-ld-qchip="${esc(c.id)}" aria-pressed="${on}">${c.icon ? `${esc(c.icon)} ` : ''}${esc(T(c.label))}${on ? ' <span aria-hidden="true">×</span>' : ''}</button>`; }).join('');
     }
     const countText = () => (cur.more ? T('plus de {n} lignes', {n: nf(cur.total)}) : cur.total === 1 ? T('1 ligne') : T('{n} lignes', {n: nf(cur.total)}));
 
@@ -640,6 +666,8 @@
             if ((b = t.closest('[data-ld-dview]'))) { cur.st.view = 'table'; if (cur.st.dview !== b.dataset.ldDview) { cur.st.dview = b.dataset.ldDview; cur.st.sort = ''; cur.parent = null; paintParent(); } return rerun(); }
             if ((b = t.closest('[data-ld-qchip]'))) { const id = b.dataset.ldQchip, on = new Set(cur.st.chips || []); if (on.has(id)) on.delete(id); else on.add(id); cur.st.chips = [...on]; rerun(); setTimeout(() => ws()?.querySelector(`[data-ld-qchip="${CSS.escape(id)}"]`)?.focus()); return; }
             if (t.closest('[data-ld-parent-back]')) return closeSub();
+            if ((b = t.closest('[data-ld-vchip]'))) { const key = valueChips(cur.base || d), v = b.dataset.ldVchip, i = cur.st.crit.findIndex(c => c.key === key && c.chip), was = i >= 0 && cur.st.crit[i].values?.[0] === v;
+                if (i >= 0) cur.st.crit.splice(i, 1); if (!was) cur.st.crit.push({key, kind: 'enum', values: [v], chip: true}); rerun(); setTimeout(() => ws()?.querySelector(`[data-ld-vchip="${CSS.escape(v)}"]`)?.focus(), 50); return; }
             if (t.closest('[data-ld-save]')) return saveSearch();
             if ((b = t.closest('[data-ld-export]'))) return exportCsv(b);
             if ((b = t.closest('[data-ld-send]'))) return sendRows(b);

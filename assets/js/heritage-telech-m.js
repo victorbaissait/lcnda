@@ -501,16 +501,33 @@
                 src: compSrc(c) || (c.src === 'wp' ? (M[c.c]?.lists || [])[0] || '' : ''), source: c.src === 'wp' ? 'Wikipédia' : c.src === 'res' ? 'martj42' : 'Wikidata', winners: c.w.map(w => w[0])};
         });
     }
+    /* 🚲 le Tour de France : Éditions (une ligne par année) · Étapes (lues dans l8c-tour, avec leur vainqueur) · 🗺 Carte */
+    async function tourEditionRows() {
+        const [E, M] = await Promise.all([editions(), compMeta()]); void M;
+        return E.map(e => ({year: e.year ?? e.y, winner: e.retired ? T('titre retiré') : settings().winners ? e.winners.map(w => w[0]).join(', ') : '', stages: T(e.prologue ? '{n} étapes + prologue' : '{n} étapes', {n: String(e.n)}), parts: e.parts,
+            km: e.km, route: `${e.from} → ${e.to}`, date: e.d1, lat: num(e.stages.at(-1)?.bla), lon: num(e.stages.at(-1)?.blo), src: e.edwiki ? wp(e.edwiki) : wd(e.ed)}));
+    }
+    async function tourStageRows() {
+        const [S, W] = await Promise.all([rowsOf('tour'), stageWinners()]);
+        const by = new Map(); for (const s of S.rows) { if (!by.has(s.y)) by.set(s.y, []); by.get(s.y).push(s); }
+        return [...by.values()].flatMap(l => tourStages(l)).map(s => ({date: s.d || '', year: s.y, stage: s.label, from: s.a, to: s.b, km: s.km, winner: W.get(s.q)?.w || '', yellow: W.get(s.q)?.jaune || '',
+            lat: num(s.bla ?? s.ala), lon: num(s.blo ?? s.alo), src: s.edwiki ? wp(s.edwiki) : wd(s.q)}));
+    }
     const L = (id, pack, icon, label, theme, source, sourceUrl, kind, load2, fields, extra = {}) => ({id, pack, icon, label: T(label), theme, group: extra.group || 'Le monde', source, sourceUrl, enabled: () => on(kind), load: load2, fields, open: openSrc, ...extra});
     (ext.dataLists = ext.dataLists || []).push(
         L('ts_competitions', 'ts-competitions', '🏆', 'Compétitions sportives : éditions et vainqueurs', 'sport', 'Wikidata (CC0) ; Wikipédia (CC BY-SA 4.0) ; martj42 (CC0)', 'https://www.wikidata.org/wiki/Wikidata:Copyright', 'competitions',
             competitionRows, [F('year', 'Année', 'year'), F('comp', 'Compétition', 'enum'), F('name', 'Édition'), F('place', 'Où', 'place'), F('winner', 'Vainqueur'), F('stages', 'Étapes et km'), F('extra', 'Finale'), F('source', 'Source', 'enum'), F('src', 'Lien', 'url')],
             {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], chips: 'comp', views: ['editions', 'etapes', 'carte'], defaultView: () => settings().view,
-                merge: {into: 'competitions', rank: 1, row: r => ({date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.place, comp: r.comp, chip: r.compId, name: r.name, winner: r.winner, stages: r.stages, url: r.src, source: r.source})}}),
+                merge: {into: 'competitions', rank: 1, short: 'Wikidata', row: r => ({key: `${r.compId}|${r.year}`, date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.place, comp: r.comp, chip: r.compId, name: r.name, winner: r.winner, stages: r.stages, url: r.src, source: r.source})}}),
+        L('ts_tour', 'ts-competitions', '🚲', 'Tour de France : éditions, étapes et vainqueurs', 'sport', 'Wikidata (CC0)', 'https://www.wikidata.org/wiki/Q33881', 'competitions',
+            tourEditionRows, [F('year', 'Année', 'year'), F('winner', 'Maillot jaune'), F('stages', 'Étapes'), F('km', 'Distance (km)', 'number'), F('route', 'Parcours'), F('src', 'Source', 'url')],
+            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], familyColumn: true, familyKm: () => radius(), defaultView: () => (settings().view === 'etapes' ? 'etapes' : 'editions'),
+                views: [{id: 'editions', label: 'Éditions', sub: r => ({view: 'etapes', preset: {crit: [{key: 'year', kind: 'range', from: r.year, to: r.year}]}, title: T('Tour de France {y}', {y: String(r.year)}), pickAll: 'Toutes ses étapes'})},
+                    {id: 'etapes', label: 'Étapes', load: tourStageRows, fields: [F('date', 'Date', 'date'), F('year', 'Année', 'year'), F('stage', 'Étape'), F('from', 'Départ', 'place'), F('to', 'Arrivée', 'place'), F('km', 'Distance (km)', 'number'), F('winner', 'Vainqueur d’étape'), F('yellow', 'Maillot jaune ce soir-là'), F('src', 'Source', 'url')], geo: r => [r.lat, r.lon], open: openSrc}]}),
         L('ts_matchs', 'ts-matchs', '⚽', 'Matchs internationaux de football (depuis 1872)', 'sport', 'martj42/international_results (CC0)', RES_URL, 'pres',
-            async () => (await rowsOf('matchs')).rows.map(m => ({date: m.d, year: num(m.d.slice(0, 4)), home: m.h, score: `${m.hs}–${m.as}${m.so ? ` (${T('t.a.b.')} ${m.so})` : ''}`, away: m.a, tournament: T(m.t), city: m.city, country: m.cty, lat: m.lat, lon: m.lon, src: RES_URL})),
+            async () => (await rowsOf('matchs')).rows.map(m => ({date: m.d, year: num(m.d.slice(0, 4)), home: m.h, score: `${m.hs}–${m.as}${m.so ? ` (${T('t.a.b.')} ${m.so})` : ''}`, away: m.a, tournament: T(m.t), t0: m.t, city: m.city, country: m.cty, lat: m.lat, lon: m.lon, src: RES_URL})),
             [F('date', 'Date', 'date'), F('home', 'Équipe'), F('score', 'Score'), F('away', 'Adversaire'), F('tournament', 'Tournoi', 'enum'), F('city', 'Ville', 'place'), F('country', 'Pays', 'enum'), F('src', 'Source', 'url')],
-            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], merge: {into: 'competitions', rank: 3, when: r => /Coupe du monde$|^Euro$/.test(r.tournament) && (r.home === 'France' || r.away === 'France'), row: r => ({date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.city, comp: `⚽ ${r.tournament}`, chip: 'matchs', name: `${r.home} ${r.score} ${r.away}`, winner: '', url: r.src, source: 'martj42'})}}),
+            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], merge: {into: 'competitions', rank: 3, when: r => /^(Coupe du monde|Euro)$/.test(r.t0) && (r.home === 'France' || r.away === 'France'), short: 'martj42', row: r => ({key: `m|${r.date}|${r.home}|${r.away}`, date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.city, comp: `⚽ ${r.tournament}`, chip: 'matchs', name: `${r.home} ${r.score} ${r.away}`, winner: '', url: r.src, source: 'martj42'})}}),
         L('ts_jo', 'ts-jo', '🏅', 'Médailles olympiques des sportifs français', 'sport', 'Wikidata (CC0)', 'https://www.wikidata.org/wiki/Q15243387', 'jeux',
             async () => (await rowsOf('jo')).rows.map(m => ({name: m.n, medal: T(m.medal), year: m.y, event: m.event, born: m.b, died: m.d, commune: m.commune, lat: m.lat, lon: m.lon, src: wd(m.q)})),
             [F('name', 'Nom', 'text', {person: true}), F('medal', 'Médaille', 'enum'), F('year', 'Année', 'year'), F('event', 'Épreuve'), F('born', 'Naissance', 'year'), F('died', 'Mort', 'year'), F('commune', 'Né à', 'place'), F('src', 'Source', 'url')],
@@ -527,7 +544,8 @@
             [F('name', 'Exposition'), F('year', 'Année', 'year'), F('kind', 'Genre', 'enum'), F('city', 'Ville', 'place'), F('country', 'Pays', 'enum'), F('visitors', 'Visiteurs', 'number'), F('note', 'Ce qu’en dit la source'), F('catalogue', 'Catalogue (Internet Archive)', 'url'), F('hand', 'Phrase choisie', 'enum'), F('src', 'Source', 'url')],
             {period: r => [r.year, r.end ?? r.year], geo: r => [r.lat, r.lon]}));
     // la liste réunie « 🔀 Compétitions sportives » (thème 🏆 Sport) — déclarée ici seulement si le moteur des thèmes ne l'a pas déjà
-    const MERGE = {id: 'competitions', theme: 'sport', icon: '🔀', label: T('Compétitions sportives'), chips: 'chip', defaultChip: '', columns: ['year', 'comp', 'place', 'winner', 'stages', 'source'], same: {by: 'key'}};
+    const MERGE = {id: 'competitions', theme: 'sport', icon: '🔀', label: T('Compétitions sportives'), noun: ['édition', 'éditions'], chips: 'comp', columns: ['year', 'comp', 'place', 'winner', 'stages'],
+        same: {by: 'key'}, keep: ['chip', 'name'], familyColumn: true, familyKm: () => radius(), period: r => [r.year, r.year], geo: r => [r.lat, r.lon]};
     const addMerge = () => { const M = ext.dataListMerges = ext.dataListMerges || []; if (!M.some(m => m.id === MERGE.id)) M.push(MERGE); };
     addMerge();
     if (root.document) document.addEventListener('DOMContentLoaded', () => { const M = ext.dataListMerges || []; const mine = M.filter(m => m.id === MERGE.id); if (mine.length > 1) M.splice(M.indexOf(MERGE), 1); }, {once: true});
@@ -619,6 +637,7 @@
         if (kmIn) {
             const s = settings(), was = s.km, v = Math.round(Number(kmIn.value));
             if (!(v >= 1 && v <= 100)) { kmIn.value = String(radius()); return; }
+            if (v === radius()) return;
             s.km = v; saveSettings(s);
             A().undoToast?.(T('« Près de chez lui » : {n} km.', {n: String(v)}), {undo: () => { const x = settings(); x.km = was; saveSettings(x); drawSettings(); }, icon: '🏆'});
             return;

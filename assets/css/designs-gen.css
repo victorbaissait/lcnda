@@ -6798,6 +6798,17 @@
 @media (max-width: 600px){
   :root[data-lc-density] .ti-ul{padding-left:calc(18px * var(--lc-sp))}
 }
+/* telech-m.css */
+:root[data-lc-density] .tsx-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .tsx-quote{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .tsx-zoo{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .tsx-panel{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .tsx-opts{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .tsx-opts{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .tsx-opt{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root[data-lc-density] .tsx-ul{padding-left:calc(18px * var(--lc-sp))}
+}
 /* epoque-travail.css */
 :root[data-lc-density] .et-quote{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .et-figs{gap:calc(8px * var(--lc-sp))}
@@ -6863,6 +6874,43 @@
 :root[data-lc-density] .ld-gps-act{gap:calc(4px * var(--lc-sp))}
 :root .ld-gps-act button:is([data-lc-r], [data-lc-r] *), :root .ld-gps-act a:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .ld-gps-act button,:root[data-lc-density] .ld-gps-act a{padding:1px calc(6px * var(--lc-sp))}
+/* listes-themes.css */
+:root[data-lc-density] .ldt-chips{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ldt-chip{padding:calc(3px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .ldt-themes{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ldt-theme{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ldt-theme{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .ldt-txt{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .ldt-tag{padding:1px calc(7px * var(--lc-sp))}
+:root[data-lc-density] .ldt-tabs{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ldt-back{padding:calc(2px * var(--lc-sp)) 0}
+:root[data-lc-density] .ldr-diff{padding:0 calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ldr-detail{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ldr-detail{padding:calc(6px * var(--lc-sp)) calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ldr-dacts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ldr-offer ul{padding-left:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .ldf-who{padding:1px calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ld-qchips{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ld-qchip{padding:calc(3px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .ld-parent{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ldc-tools{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ldc-all{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ld-act{padding:calc(2px * var(--lc-sp)) calc(5px * var(--lc-sp))}
+:root[data-lc-density] .ldc-has-sel{padding-bottom:calc(76px * var(--lc-sp))}
+:root[data-lc-density] .ldc-bar{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ldc-bar{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .ldc-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ldc-b{padding:calc(4px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .ldc-x{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root[data-lc-density] .ldt-chips{padding-bottom:calc(2px * var(--lc-sp))}
+  :root[data-lc-density] .ldc-bar{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .ldc-bar{gap:calc(6px * var(--lc-sp))}
+  :root[data-lc-density] .ldc-b{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+  :root[data-lc-density] .ld-table--cards tr[data-ld-row]{gap:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .ld-table--cards tr[data-ld-row]{padding:calc(10px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+  :root[data-lc-density] .ld-table--cards .ld-act{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+}
 /* donnees-maj.css */
 :root[data-lc-density] .dmaj-filters .segmented button{padding:0 calc(16px * var(--lc-sp))}
 /* listes-personnes.css */
