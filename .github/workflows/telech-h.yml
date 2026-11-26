@@ -61,7 +61,8 @@ jobs:
           # deux serveurs Overpass à tour de rôle (l'un est parfois injoignable ou surchargé)
           for i in 1 2 3 4; do
             srv=https://overpass-api.de/api/interpreter; [ $((i % 2)) -eq 0 ] && srv=https://overpass.kumi.systems/api/interpreter
-            TH_OVERPASS="$srv" python3 -I scripts/telech-h/build_osm.py assets/data && exit 0
+            skip=""; [ $i -gt 1 ] && skip=1  # aux essais suivants, garder ce qui est déjà fabriqué
+            TH_SKIP_DONE="$skip" TH_OVERPASS="$srv" python3 -I scripts/telech-h/build_osm.py assets/data && exit 0
             echo "essai $i raté ($srv), nouvel essai dans 60 s"; sleep 60
           done
           exit 1

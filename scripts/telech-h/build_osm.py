@@ -8,7 +8,8 @@
                         razed:railway=*, disused:railway=* — tracés SIMPLIFIÉS (Douglas-Peucker, ~150 m ; 4 décimales) pour rester petits.
 Rien n'est gardé au-delà de 15 Mo par fichier. Lancer : python3 -I scripts/telech-h/build_osm.py [dossier de sortie] [sujet…]
 """
-import json, math, os, re, sys, time, urllib.parse
+import json
+import math, os, re, time, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import wm
 
@@ -29,7 +30,15 @@ WHAT = {'kiosques': 'Kiosques à musique (OpenStreetMap)', 'halles': 'Halles et 
 
 
 def run(sel, geom=False):
-    q = f'[out:json][timeout:1200][maxsize:2000000000];area["ISO3166-1"="FR"][admin_level=2]->.fr;({sel}(area.fr););out {"geom" if geom else "center"} tags;'
+    if geom:  # les tracés de toute la France d'un coup font tomber Overpass (502/504) : par carreaux de 2,5° × 2,5°
+        out = []
+        for la in (41.0, 43.5, 46.0, 48.5):
+            for lo in (-5.5, -3.0, -0.5, 2.0, 4.5, 7.0):
+                q = f'[out:json][timeout:900][maxsize:1000000000];({sel}({la},{lo},{la + 2.5},{lo + 2.5}););out geom tags;'
+                out += json.loads(wm.get(OVERPASS, 'application/json', urllib.parse.urlencode({'data': q})))['elements']
+                time.sleep(5)
+        return out
+    q = f'[out:json][timeout:1200][maxsize:2000000000];area["ISO3166-1"="FR"][admin_level=2]->.fr;({sel}(area.fr););out center tags;'
     return json.loads(wm.get(OVERPASS, 'application/json', urllib.parse.urlencode({'data': q})))['elements']
 
 
@@ -60,9 +69,26 @@ def year(t, *keys):
 
 
 def main():
+    failed, done = [], 0
     for name, qs in Q.items():
         if ONLY and name not in ONLY:
             continue
+        if os.environ.get('TH_SKIP_DONE') and os.path.exists(os.path.join(OUT, f'th-osm-{name}.json.gz')):
+            continue  # déjà fabriqué lors d'un essai précédent
+        try:
+            build_one(name, qs)
+            done += 1
+        except Exception as e:  # un sujet raté n'empêche pas les autres
+            print(f'th-osm-{name} : raté ({e})')
+            failed.append(name)
+    if failed and not done:
+        sys.exit(f'aucun fichier fabriqué : {failed}')
+    if failed:
+        print(f'à refaire plus tard : {failed}')
+
+
+def build_one(name, qs):
+    if True:
         seen, rows = set(), []
         for kind, sel in qs:
             els = run(sel, geom=(name == 'traces'))
