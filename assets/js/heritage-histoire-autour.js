@@ -406,7 +406,9 @@
         const li = list.map(x => `<li><b>${dmyTxt(x.ev.y, x.ev.m, x.ev.d)}</b> : ${disasterTitle(x.ev)}${deathsTxt(x.ev) ? ` — ${esc(deathsTxt(x.ev))}` : ''} <small class="muted">${esc(T('à {k} de {p}', {k: kmTxt(x.km), p: x.place}))}</small></li>`).join('');
         return row('🌋', cap(lead), SRC.catastrophes(), more(`<ul class="hist-ul">${li}</ul><small class="muted hist-hyp">${esc(T('Sans doute ressenti : règle simple de l’app — séisme à 60 km (magnitude < 6), 120 km (6), 250 km (7), 400 km (8 et plus) ; éruption à 40 km (80 km si très forte) ; tsunami à 150 km de son origine. Seulement pour les lieux hors de la France métropolitaine (les séismes de France sont dans « 🏘 Le lieu à son époque »).'))}</small>`, list.length));
     }
-    const shipImg = s => (s.img ? `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(s.img)}?width=320` : '');
+    /* borne et invités du réseau local : aucune image chargée en ligne */
+    const offline = () => !!(document.body?.classList.contains('is-kiosk') || window.LCNDA_GUEST);
+    const shipImg = s => (s.img && !offline() ? `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(s.img)}?width=320` : '');
     const shipFacts = s => [s.type, s.from !== null ? T('mis à l’eau ou en service en {y}', {y: yTxt(s.from)}) : '', s.wreck !== null ? T('naufrage en {y}', {y: yTxt(s.wreck)}) : (s.to !== null ? T('fin de service en {y}', {y: yTxt(s.to)}) : ''), s.port ? T('port d’attache : {p}', {p: s.port}) : '', s.flag].filter(Boolean).join(' · ');
     function shipsHtml(list, life) {
         if (!list.length) return '';
@@ -579,7 +581,7 @@
         let title = r.n || r.name || '', body = '';
         if (kind === 'phares') {
             body = `<p>${esc([lightFacts(r), r.country].filter(Boolean).join(' · '))}</p>${r.range ? `<p><b>${esc(T('Jusqu’où allait sa lumière :'))}</b> ${esc(rangeTxt(r))}${r.rangeSrc === 'osm' ? ` <small class="muted">(${esc(T('portée d’OpenStreetMap'))})</small>` : ''}.</p>` : `<p class="muted">${esc(T('Sa portée n’est pas connue dans les données.'))}</p>`}
-                ${miniMap(r.lat, r.lon, r.rangeKm, null)}${r.img ? `<img class="ha-img" loading="lazy" alt="" src="${esc(`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(r.img)}?width=320`)}">` : ''}`;
+                ${miniMap(r.lat, r.lon, r.rangeKm, null)}${r.img && !offline() ? `<img class="ha-img" loading="lazy" alt="" src="${esc(`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(r.img)}?width=320`)}">` : ''}`;
         } else if (kind === 'batailles') {
             body = `<p><b>${esc(dateTxt(r.d, r.y))}</b>${r.y2 && r.y2 !== r.y ? ` → ${esc(dateTxt(r.d2, r.y2))}` : ''}</p><p>${esc([r.war, r.bel && r.bel.length ? r.bel.join(' / ') : '', r.loc, r.country].filter(Boolean).join(' · '))}</p>${miniMap(r.lat, r.lon, 0, null)}${r.approx ? `<small class="muted">${esc(T('Placé par son lieu : Wikidata ne donne pas ses coordonnées, le point est celui du lieu nommé ({p}).', {p: r.loc || '?'}))}</small>` : ''}`;
         } else if (kind === 'guerres') {

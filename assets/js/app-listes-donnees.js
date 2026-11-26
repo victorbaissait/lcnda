@@ -78,6 +78,7 @@
             ext.lists[k] = token => renderList(d, token);
         }
         if (G) G[3].splice(0, G[3].length, OVERVIEW, ...(ext.dataToolKeys || []).filter(k => ext.lists?.[k]), ...ds.map(keyOf)); // ext.dataToolKeys : les outils sur toutes les données (heritage-tout-sur.js)
+        try { ext.listesThemes?.sync?.(L, G, ds); } catch (e) { console.error(e); } // 🗂 les 20 thèmes dans la colonne, à la place des listes (app-listes-themes.js)
         const st = app.state;
         if (repaint && st?.module === 'listes') { try { app.renderSidebar?.(); } catch (_) {} }
     }
@@ -88,8 +89,11 @@
     const SAVED = 'genealogie-listes-donnees';
     const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
-    const blank = () => ({q: '', crit: [], period: null, near: null, sort: '', dir: 'asc', view: 'table', hide: [], gps: false});
-    const stateOf = id => ({...blank(), ...(readJ('lcnda-ld:' + id, {}) || {})});
+    const blank = () => ({q: '', crit: [], period: null, near: null, sort: '', dir: 'asc', view: 'table', hide: [], gps: false, chips: [], dview: ''});
+    /** d (facultatif) : ses colonnes cachées au départ (d.hideCols), sa vue et ses pastilles de départ (d.views[0], chips[].on) */
+    const stateOf = (id, d = null) => { const d0 = d || all().find(x => x.id === id), saved = readJ('lcnda-ld:' + id, {}) || {};
+        const st = {...blank(), hide: [...(d0?.hideCols || [])], chips: (d0?.chips || []).filter(c => c.on).map(c => c.id), dview: d0?.views?.[0]?.id || '', ...saved};
+        if (!Array.isArray(st.chips)) st.chips = []; return st; };
     const saveState = (id, st) => writeJ('lcnda-ld:' + id, st);
     const savedAll = () => { const v = readJ(SAVED, {}); return v && typeof v === 'object' && v.saved && typeof v.saved === 'object' ? v : {saved: {}}; };
     const savedOf = id => (Array.isArray(savedAll().saved[id]) ? savedAll().saved[id] : []);
@@ -149,6 +153,7 @@
     /* ═════════════ le filtre fait ici (données « load ») ═════════════ */
     function rowMatch(row, f) {
         const x = row[f.key], v = f.value;
+        if (Array.isArray(x)) return f.op === 'empty' ? !x.length : f.op === 'notempty' ? !!x.length : x.some(y => rowMatch({[f.key]: y}, f)); // une case à plusieurs valeurs (ex. Sources d'une liste réunie)
         if (f.op === 'in' || Array.isArray(v)) { const set = (Array.isArray(v) ? v : [v]).map(y => fold(y)); return set.includes(fold(x)); }
         const isNum = x !== null && x !== '' && x !== undefined && Number.isFinite(Number(x));
         if ((f.op === 'gte' || f.op === 'lte') && typeof v === 'string' && /^-?\d{4}-\d{2}/.test(v)) { const xs = String(x ?? '').slice(0, 10); if (!/^-?\d{4}/.test(xs)) return false; return f.op === 'gte' ? xs >= v.slice(0, xs.length) : xs.slice(0, v.length) <= v; } // une date AAAA-MM-JJ
@@ -174,9 +179,10 @@
     }
     function localFilter(d, rows, st, skipKey = '') {
         const q = fold(st.q || ''), fs = st.crit.filter(c => c.key !== skipKey).flatMap(critFilters), keys = (d.fields || []).filter(f => f.type !== 'url').map(f => f.key);
-        const out = [];
+        const chips = chipsOn(d, st), out = [];
         for (const r0 of rows) {
             if (q && !keys.some(k => fold(r0[k]).includes(q))) continue;
+            if (chips.length && !chips.every(c => { try { return !!c.test(r0, {d, geo: geoOf(d, r0)}); } catch (_) { return false; } })) continue;
             if (!fs.every(f => rowMatch(r0, f))) continue;
             if (st.period && !periodOk(d, r0, st.period)) continue;
             if (!xfOk(d, r0, st)) continue;
@@ -185,6 +191,14 @@
             out.push(r);
         }
         return out;
+    }
+    /* 🏷 les pastilles d'une liste (d.chips : [{id, icon, label, test(row, {d, geo}) → bool, prepare?(), on?}]) : un clic les allume ou les éteint */
+    const chipsOn = (d, st) => (Array.isArray(d.chips) ? d.chips.filter(c => c && c.id && typeof c.test === 'function' && (st.chips || []).includes(c.id)) : []);
+    async function chipsPrepare(d, st) { for (const c of chipsOn(d, st)) { try { await c.prepare?.(); } catch (_) {} } }
+    /* 👁 les vues d'une liste (d.views : [{id, icon, label, …ce qui change : fields, load, period, geo, open, sub…}]) : la liste « telle que vue » */
+    function viewDef(d, st) {
+        const v = Array.isArray(d.views) && d.views.length ? (d.views.find(x => x.id === st?.dview) || d.views[0]) : null;
+        return v ? {...d, ...v, id: d.id, icon: d.icon, label: d.label, views: d.views, chips: v.chips || d.chips, _ck: `${d.id}~${v.id}`, _base: d, _view: v.id} : d;
     }
     function sortRows(rows, key, dir) {
         if (!key) return rows;
@@ -195,12 +209,14 @@
 
     /* ═════════════ les données d'une liste ═════════════ */
     const cache = new Map(); // id → Promise(rows) (données « load »)
-    const loadAll = d => { if (!cache.has(d.id)) cache.set(d.id, Promise.resolve().then(() => d.load()).then(r => (Array.isArray(r) ? r : r?.rows || [])).catch(e => { cache.delete(d.id); throw e; })); return cache.get(d.id); };
+    const loadAll = d => { const k = d._ck || d.id; if (!cache.has(k)) cache.set(k, Promise.resolve().then(() => d.load()).then(r => (Array.isArray(r) ? r : r?.rows || [])).catch(e => { cache.delete(k); throw e; })); return cache.get(k); };
+    /** oublier les lignes gardées d'une liste (ex. une liste réunie après « ✂ Ce ne sont pas les mêmes ») */
+    const forget = id => { for (const k of [...cache.keys()]) if (k === id || k.startsWith(id + '~')) cache.delete(k); };
     /** une page de résultats : {rows, total, more} */
     const XF_MAX = 10000;
     async function fetchPage(d, st, offset, limit) {
         if (st.inBase && ext.listesPersonnes?.fetchPage) return ext.listesPersonnes.fetchPage(d, st, offset, limit, (s, o, l) => fetchPage(d, {...s, inBase: false}, o, l)); // 👤 « Seulement les noms présents dans ma base » (app-listes-personnes.js)
-        await xfPrepare(st);
+        await xfPrepare(st); await chipsPrepare(d, st);
         if (d.query && xfCrit(st).length) { // un filtre 🧩 : on lit jusqu'à 10 000 lignes du serveur et on trie ici
             const got = []; let total = Infinity, truncated = false;
             while (got.length < Math.min(total, XF_MAX)) { const r = await d.query(buildQuery(st, {offset: got.length, limit: 2000})) || {}; const rows = Array.isArray(r) ? r : r.rows || []; total = Number.isFinite(Number(r.total)) ? Number(r.total) : rows.length; if (!rows.length) break; got.push(...rows); }
@@ -223,9 +239,10 @@
     async function isInstalled(d) { if (!d.installed) return true; try { return !!(await d.installed()); } catch (_) { return false; } }
 
     /* ═════════════ la page d'une liste ═════════════ */
-    const cur = {d: null, st: null, rows: [], total: 0, more: false, token: 0, seq: 0};
+    const cur = {d: null, base: null, st: null, rows: [], total: 0, more: false, token: 0, seq: 0};
     const ws = () => document.getElementById('workspace');
-    const header = (d, extra = {}) => (UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')} · ${T(groupOf(d))}`, icon: d.icon || '📋', title: T(d.label), ...extra}) : `<h2>${esc(T(d.label))}</h2>`);
+    const whereOf = d => { try { const w = ext.listesThemes?.whereOf?.(d); if (w) return w; } catch (_) {} return T(groupOf(d)); }; // 🗂 le thème (app-listes-themes.js), sinon le groupe
+    const header = (d, extra = {}) => (UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')} · ${whereOf(d)}`, icon: d.icon || '📋', title: T(d.label), ...extra}) : `<h2>${esc(T(d.label))}</h2>`);
     const sourceLine = d => (d.source ? `<p class="ld-source muted"><small>${esc(T('Source :'))} ${d.sourceUrl ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener">${esc(d.source)}</a>` : esc(d.source)}</small></p>` : '');
     /** les colonnes : celles de la liste moins celles décochées dans « ⚙ Colonnes » (st.hide), + 📍 GPS (st.gps, listes avec positions), + Distance */
     const cols = (d, st) => {
@@ -252,7 +269,7 @@
     const ensureCss = () => { if (document.querySelector('link[href*="listes-donnees.css"]')) return; const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'assets/css/listes-donnees.css?v=1'; document.head.appendChild(l); };
     async function renderList(d, token) {
         const app = A(), host = ws(); if (!host) return; ensureCss();
-        cur.d = d; cur.st = stateOf(d.id); cur.token = token;
+        cur.base = d; cur.st = stateOf(d.id, d); cur.d = viewDef(d, cur.st); cur.token = token; cur.parent = null;
         host.innerHTML = `<section class="page collection-page ld-page" data-ld-page="${esc(d.id)}">${header(d)}${UI().spinner ? UI().spinner(T('Chargement…')) : ''}</section>`;
         const ok = await isInstalled(d);
         if (token !== undefined && token !== app.state?.workspaceToken) return;
@@ -276,20 +293,24 @@
                 <button type="button" class="ui-listbar-btn" data-ld-add aria-haspopup="true">＋ ${esc(T('Ajouter un critère'))}</button>
                 ${d.period ? `<button type="button" class="ui-listbar-btn" data-ld-period aria-haspopup="true">📅 ${esc(T('Période'))}</button>` : ''}
                 ${d.geo ? `<button type="button" class="ui-listbar-btn" data-ld-near aria-haspopup="true">📍 ${esc(T('Autour de…'))}</button>` : ''}
-                ${d.geo ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}"><button type="button" data-ld-view="table">${esc(T('Tableau'))}</button><button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button></span>` : ''}
+                ${d.views?.length ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}">${d.views.map(v => `<button type="button" data-ld-dview="${esc(v.id)}">${v.icon ? `${esc(v.icon)} ` : ''}${esc(T(v.label))}</button>`).join('')}${viewDef(d, cur.st).geo || d.geo ? `<button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button>` : ''}</span>`
+                    : d.geo ? `<span class="segmented ld-view" role="group" aria-label="${esc(T('Affichage'))}"><button type="button" data-ld-view="table">${esc(T('Tableau'))}</button><button type="button" data-ld-view="map">🗺 ${esc(T('Carte'))}</button></span>` : ''}
                 <button type="button" class="ui-listbar-btn" data-ld-cols aria-haspopup="true" title="${esc(T('Choisir les colonnes du tableau'))}">⚙ ${esc(T('Colonnes'))}</button>
                 <button type="button" class="ui-listbar-btn" data-ld-save title="${esc(T('Garder ces critères sous un nom, pour les retrouver d’un clic'))}">★ ${esc(T('Enregistrer cette recherche'))}</button>
               </div>
+              ${d.chips?.length ? `<div class="ld-qchips" data-ld-qchips role="group" aria-label="${esc(T('Pastilles'))}"></div>` : ''}
               <div class="ld-editor" data-ld-editor hidden></div>
               <div class="ld-chips" data-ld-chips></div>
             </div>
             <div class="ld-results" data-ld-results></div>
             <div class="ld-more-host" data-ld-more-host></div></section>`;
         bindPage(host.querySelector('.ld-page'), d);
+        try { ext.listesThemes?.pageTop?.(host.querySelector('.ld-page'), d); } catch (e) { console.error(e); } // 🗂 les onglets du thème : liste réunie · ses listes (app-listes-themes.js)
         try { ext.listesMaj?.header?.(host.querySelector('.ld-page'), d); } catch (e) { console.error(e); } // 🗂 « Données du … · ↻ Vérifier » (app-listes-maj.js)
         try { ext.listesPerso?.listBar?.(host.querySelector('.ld-page'), d); } catch (e) { console.error(e); } // ＋ Ma liste : ✎ Modifier, ＋ Ajouter une ligne, ⤒ Remplacer… (app-listes-perso.js)
         try { ext.listesPersonnes?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, rerun}); } catch (e) { console.error(e); } // 👤 noms reliés aux fiches (app-listes-personnes.js)
         try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, rows: () => cur.rows, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
+        try { ext.listesChoix?.listBar?.(host.querySelector('.ld-page'), pageApi()); } catch (e) { console.error(e); } // ☑ choisir plusieurs lignes, la barre du bas (app-listes-choix.js)
         paintSaved(); paintChips(); await refresh();
     }
 
@@ -305,10 +326,14 @@
         const chips = [...st.crit.map((c, i) => [`crit:${i}`, critText(d, c)]), st.period ? ['period', periodText(st.period)] : null, st.near ? ['near', nearText(st.near)] : null].filter(Boolean);
         box.innerHTML = `<span class="ld-count" data-ld-count aria-live="polite"></span>${chips.map(([k, t]) => `<button type="button" class="ui-listbar-chip" data-ld-chip="${esc(k)}" title="${esc(T('Retirer ce critère'))}">${esc(t)} <span aria-hidden="true">×</span></button>`).join('')}${ext.listesPersonnes?.chip?.(d, st) || ''}${chips.length > 1 || (chips.length && st.q) ? `<button type="button" class="ui-listbar-clearall" data-ld-clear>${esc(T('Tout effacer'))}</button>` : ''}`;
         ws()?.querySelectorAll('[data-ld-view]').forEach(b => { const on = b.dataset.ldView === st.view; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+        ws()?.querySelectorAll('[data-ld-dview]').forEach(b => { const on = st.view !== 'map' && b.dataset.ldDview === (cur.d?._view || ''); b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+        const qc = ws()?.querySelector('[data-ld-qchips]'), base = cur.base || d;
+        if (qc) qc.innerHTML = (base.chips || []).map(c => { const on = (st.chips || []).includes(c.id); return `<button type="button" class="ld-qchip${on ? ' is-on' : ''}" data-ld-qchip="${esc(c.id)}" aria-pressed="${on}">${c.icon ? `${esc(c.icon)} ` : ''}${esc(T(c.label))}${on ? ' <span aria-hidden="true">×</span>' : ''}</button>`; }).join('');
     }
     const countText = () => (cur.more ? T('plus de {n} lignes', {n: nf(cur.total)}) : cur.total === 1 ? T('1 ligne') : T('{n} lignes', {n: nf(cur.total)}));
 
     async function refresh() {
+        if (cur.base) cur.d = viewDef(cur.base, cur.st);
         const d = cur.d, st = cur.st, res = ws()?.querySelector('[data-ld-results]'); if (!res) return;
         const my = ++cur.seq;
         res.innerHTML = UI().spinner ? UI().spinner(T('On cherche…')) : '…';
@@ -317,11 +342,12 @@
         if (my !== cur.seq) return;
         cur.rows = page.rows; cur.total = page.total; cur.more = page.more; cur.zone = null;
         const c = ws()?.querySelector('[data-ld-count]'); if (c) c.textContent = countText();
-        if (st.view === 'map' && d.geo) return paintMap(res);
+        if (st.view === 'map' && d.geo) { paintMap(res); try { ext.listesChoix?.rowsPainted?.(res, cur.rows, pageApi()); } catch (e) { console.error(e); } return; }
         paintTable(res);
     }
     function cellHtml(f, row) {
-        const v = row[f.key];
+        if (typeof f.html === 'function') { let h = ''; try { h = f.html(row); } catch (_) {} return h ? `<td class="ld-html">${h}</td>` : '<td class="muted">—</td>'; } // f.html(row) : du HTML déjà échappé par la liste (ex. Sources ↗)
+        const v = Array.isArray(row[f.key]) ? row[f.key].join(' · ') : row[f.key];
         if (v == null || v === '') return '<td class="muted">—</td>';
         if (f.type === 'number' || f.dist) return `<td class="ld-num" data-sort-value="${esc(v)}">${esc(nf(v, 2))}</td>`;
         if (f.type === 'bool') return `<td>${esc(v && v !== 'non' && v !== '0' ? T('oui') : T('non'))}</td>`;
@@ -331,10 +357,16 @@
     function paintTable(res) {
         const d = cur.d, st = cur.st, cs = cols(d, st), urls = urlFields(d);
         if (!cur.rows.length) { res.innerHTML = A().emptyState ? A().emptyState({icon: '🔎', text: T('Rien ne correspond à ces critères.'), hint: T('Retire un critère, élargis la période ou la distance.'), size: 'small'}) : esc(T('Rien ne correspond à ces critères.')); paintMore(); return; }
-        const head = cs.map(f => f.gps ? `<th>${esc(flab(f))}</th>` : `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(flab(f))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`).join('');
-        const body = cur.rows.map((r, i) => `<tr data-ld-row="${i}">${cs.map((f, j) => (f.gps ? gpsCell(d, r, i) : j === 0 && d.open ? `<td><button type="button" class="table-link" data-ld-open="${i}">${esc(r[f.key] ?? '—')}</button></td>` : cellHtml(f, r))).join('')}${urls.length ? `<td class="ld-links">${urls.map(u => (r[u.key] ? `<a href="${esc(A().safeUrl ? A().safeUrl(r[u.key]) : r[u.key])}" target="_blank" rel="noopener" title="${esc(T(u.label))}">↗</a>` : '')).join(' ')}</td>` : ''}</tr>`).join('');
-        res.innerHTML = `<div class="data-table-wrap ld-table-wrap"><table class="data-table ld-table"><thead><tr>${head}${urls.length ? '<th></th>' : ''}</tr></thead><tbody>${body}</tbody></table></div>`;
+        const CH = ext.listesChoix, fam = !!(d.familyColumn && ext.listesFamille && d.geo && d.period);
+        const sortable = f => !f.gps && f.sort !== false && typeof f.html !== 'function';
+        const head = cs.map(f => !sortable(f) ? `<th>${esc(flab(f))}</th>` : `<th><button type="button" class="table-sort ld-sort" data-ld-sort="${esc(f.key)}">${esc(flab(f))}${st.sort === f.key ? `<span class="sort-mark">${st.dir === 'desc' ? ' ↓' : ' ↑'}</span>` : ''}</button></th>`).join('');
+        const firstTxt = (f, r) => (Array.isArray(r[f.key]) ? r[f.key].join(' · ') : r[f.key]) ?? '—';
+        const openable = !!(d.open || d.sub);
+        const body = cur.rows.map((r, i) => `<tr data-ld-row="${i}">${CH ? CH.cellBefore(i) : ''}${cs.map((f, j) => (f.gps ? gpsCell(d, r, i) : j === 0 && openable ? `<td><button type="button" class="table-link" data-ld-open="${i}">${esc(firstTxt(f, r))}</button></td>` : cellHtml(f, r))).join('')}${fam ? `<td class="ld-fam" data-ld-fam="${i}"></td>` : ''}${urls.length ? `<td class="ld-links">${urls.map(u => (r[u.key] ? `<a href="${esc(A().safeUrl ? A().safeUrl(r[u.key]) : r[u.key])}" target="_blank" rel="noopener" title="${esc(T(u.label))}">↗</a>` : '')).join(' ')}</td>` : ''}${CH ? CH.cellAfter(i) : ''}</tr>`).join('');
+        res.innerHTML = `<div class="data-table-wrap ld-table-wrap"><table class="data-table ld-table${d.cards ? ' ld-table--cards' : ''}"><thead><tr>${CH ? CH.headBefore() : ''}${head}${fam ? `<th>${esc(T('Dans la famille'))}</th>` : ''}${urls.length ? '<th></th>' : ''}${CH ? CH.headAfter() : ''}</tr></thead><tbody>${body}</tbody></table></div>`;
         paintMore();
+        if (fam) { try { ext.listesFamille.fill(res, cur.rows, d); } catch (e) { console.error(e); } } // 👪 « Louis DURAND, 29 ans » (app-listes-famille.js)
+        try { CH?.rowsPainted?.(res, cur.rows, pageApi()); } catch (e) { console.error(e); } // ☑ (app-listes-choix.js)
         try { ext.connexions?.listRowsPainted?.(res, cur.rows, {d, total: cur.total}); } catch (e) { console.error(e); } // 📥 cases « Tu choisis des lignes… » (heritage-connexions.js)
         try { ext.listesPersonnes?.rowsPainted?.(res, cur.rows, {d}); } catch (e) { console.error(e); } // 👤 « dans ta base : … », 🔗 Relier à une fiche (app-listes-personnes.js)
     }
@@ -572,6 +604,25 @@
         setSaved(d.id, next); paintSaved(); toast(T('Recherche gardée sous « {name} ».', {name}));
     }
 
+    /* ↳ une ligne qui ouvre une sous-liste (d.sub(row) → {view, preset: {crit…}, title, pickAll: 'Toutes ses étapes'}) :
+     *  la même page, dans la vue donnée, filtrée ; un bandeau « ← titre · ☑ Toutes ses étapes (N) » (app-listes-choix.js coche tout) */
+    function openSub(dv, row) {
+        let s = null; try { s = dv.sub(row); } catch (e) { toast(e.message, 'error'); return; }
+        if (!s) return;
+        cur.parent = {title: s.title || '', pickAll: s.pickAll || '', back: {...cur.st}};
+        cur.st = {...cur.st, ...(s.preset || {}), crit: [...(s.preset?.crit || [])], view: 'table', dview: s.view || cur.st.dview, sort: s.preset?.sort || ''};
+        const q = ws()?.querySelector('[data-ld-q]'); if (q) q.value = cur.st.q || '';
+        paintParent(); rerun();
+    }
+    function closeSub() { if (!cur.parent) return; cur.st = {...cur.parent.back}; cur.parent = null; const q = ws()?.querySelector('[data-ld-q]'); if (q) q.value = cur.st.q || ''; paintParent(); rerun(); }
+    function paintParent() {
+        const page = ws()?.querySelector('.ld-page'); if (!page) return; let box = page.querySelector('[data-ld-parent]');
+        if (!cur.parent) { box?.remove(); return; }
+        if (!box) { box = document.createElement('div'); box.className = 'ld-parent'; box.dataset.ldParent = ''; page.querySelector('.ld-bar')?.before(box); }
+        box.innerHTML = `<button type="button" class="button small secondary" data-ld-parent-back>← ${esc(T('Revenir'))}</button><b>${esc(cur.parent.title)}</b>${cur.parent.pickAll && ext.listesChoix ? `<button type="button" class="button small secondary" data-ld-pickall>☑ ${esc(T(cur.parent.pickAll))}</button>` : ''}`;
+    }
+    /** ce que la page donne aux fichiers qui s'y branchent (☑ choix, 🗂 thèmes) */
+    const pageApi = () => ({d: cur.d, base: cur.base, state: () => cur.st, rows: () => cur.rows, total: () => cur.total, more: () => cur.more, allRows, table2d, critSummary, rerun, refresh, parent: () => cur.parent, geoOf, periodOf, countText});
     function bindPage(host, d) {
         const q = host.querySelector('[data-ld-q]'); let tq = 0;
         q?.addEventListener('input', () => { clearTimeout(tq); tq = setTimeout(() => { cur.st.q = q.value.trim(); rerun(); }, 300); });
@@ -581,25 +632,28 @@
             if (t.closest('[data-ld-period]')) return openPeriod();
             if (t.closest('[data-ld-near]')) return openNear();
             if ((b = t.closest('[data-ld-view]'))) { cur.st.view = b.dataset.ldView; return rerun(); }
+            if ((b = t.closest('[data-ld-dview]'))) { cur.st.view = 'table'; if (cur.st.dview !== b.dataset.ldDview) { cur.st.dview = b.dataset.ldDview; cur.st.sort = ''; cur.parent = null; paintParent(); } return rerun(); }
+            if ((b = t.closest('[data-ld-qchip]'))) { const id = b.dataset.ldQchip, on = new Set(cur.st.chips || []); if (on.has(id)) on.delete(id); else on.add(id); cur.st.chips = [...on]; rerun(); setTimeout(() => ws()?.querySelector(`[data-ld-qchip="${CSS.escape(id)}"]`)?.focus()); return; }
+            if (t.closest('[data-ld-parent-back]')) return closeSub();
             if (t.closest('[data-ld-save]')) return saveSearch();
             if ((b = t.closest('[data-ld-export]'))) return exportCsv(b);
             if ((b = t.closest('[data-ld-send]'))) return sendRows(b);
             if (t.closest('[data-ld-print]')) return print();
             if ((b = t.closest('[data-ld-more]'))) return more(b);
-            if (t.closest('[data-ld-clear]')) { cur.st = {...blank(), view: cur.st.view, hide: cur.st.hide, gps: cur.st.gps}; if (q) q.value = ''; return rerun(); }
+            if (t.closest('[data-ld-clear]')) { cur.st = {...blank(), view: cur.st.view, hide: cur.st.hide, gps: cur.st.gps, chips: cur.st.chips, dview: cur.st.dview}; if (q) q.value = ''; return rerun(); }
             if (t.closest('[data-ld-cols]')) return openCols();
             if ((b = t.closest('[data-ld-zone]'))) return loadZone(b);
             if (t.closest('[data-ld-zone-reset]')) return refresh();
-            if ((b = t.closest('[data-ld-gps-copy]'))) { const g = geoOf(d, cur.rows[Number(b.dataset.ldGpsCopy)] || {}); if (g) copyText(gpsPlain(g)).then(ok => toast(ok ? T('Coordonnées copiées : {v}', {v: gpsPlain(g)}) : T('Copie impossible : {v}', {v: gpsPlain(g)}), ok ? undefined : 'error')); return; }
-            if ((b = t.closest('[data-ld-gps-map]'))) { const g = geoOf(d, cur.rows[Number(b.dataset.ldGpsMap)] || {}); if (g) { cur.mapView = {lat: g[0], lon: g[1], zoom: 13}; cur.mapFocus = g; cur.st.view = 'map'; rerun(); } return; }
+            if ((b = t.closest('[data-ld-gps-copy]'))) { const g = geoOf(cur.d, cur.rows[Number(b.dataset.ldGpsCopy)] || {}); if (g) copyText(gpsPlain(g)).then(ok => toast(ok ? T('Coordonnées copiées : {v}', {v: gpsPlain(g)}) : T('Copie impossible : {v}', {v: gpsPlain(g)}), ok ? undefined : 'error')); return; }
+            if ((b = t.closest('[data-ld-gps-map]'))) { const g = geoOf(cur.d, cur.rows[Number(b.dataset.ldGpsMap)] || {}); if (g) { cur.mapView = {lat: g[0], lon: g[1], zoom: 13}; cur.mapFocus = g; cur.st.view = 'map'; rerun(); } return; }
             if ((b = t.closest('[data-ld-chip]'))) {
                 const k = b.dataset.ldChip;
                 if (k === 'period') cur.st.period = null; else if (k === 'near') { cur.st.near = null; if (cur.st.sort === '_km') cur.st.sort = ''; } else cur.st.crit.splice(Number(k.slice(5)), 1);
                 return rerun();
             }
             if ((b = t.closest('[data-ld-sort]'))) { const k = b.dataset.ldSort; if (cur.st.sort === k) cur.st.dir = cur.st.dir === 'asc' ? 'desc' : 'asc'; else { cur.st.sort = k; cur.st.dir = 'asc'; } return rerun(); }
-            if ((b = t.closest('[data-ld-open]'))) { const r = cur.rows[Number(b.dataset.ldOpen)]; if (r) { try { d.open(r); } catch (x) { toast(x.message, 'error'); } } return; }
-            if ((b = t.closest('[data-ld-saved-go]'))) { const s = savedOf(d.id)[Number(b.dataset.ldSavedGo)]; if (s) { cur.st = {...blank(), ...s.st, view: cur.st.view, hide: cur.st.hide, gps: cur.st.gps}; if (q) q.value = cur.st.q || ''; rerun(); } return; }
+            if ((b = t.closest('[data-ld-open]'))) { const i = Number(b.dataset.ldOpen), r = cur.rows[i], dv = cur.d; if (r) { try { if (dv.sub) openSub(dv, r); else dv.open(r, {tr: b.closest('tr'), i, page: host}); } catch (x) { toast(x.message, 'error'); } } return; }
+            if ((b = t.closest('[data-ld-saved-go]'))) { const s = savedOf(d.id)[Number(b.dataset.ldSavedGo)]; if (s) { cur.st = {...blank(), ...s.st, view: cur.st.view, hide: cur.st.hide, gps: cur.st.gps, chips: cur.st.chips, dview: cur.st.dview}; if (q) q.value = cur.st.q || ''; rerun(); } return; }
             if ((b = t.closest('[data-ld-saved-x]'))) {
                 const s = savedOf(d.id)[Number(b.dataset.ldSavedX)]; if (!s) return;
                 const drop = () => setSaved(d.id, savedOf(d.id).filter(x => x.name !== s.name));
@@ -612,6 +666,7 @@
     /* ═════════════ « 🧰 Toutes les données » : le sommaire, par groupe ═════════════ */
     async function renderOverview(token) {
         const host = ws(); if (!host) return; ensureCss();
+        if (ext.listesThemes?.overview && ext.listesThemes.mode?.() === 'themes') return ext.listesThemes.overview(host, token); // 🗂 par thème (app-listes-themes.js) ; les 4 groupes d'avant : Réglages
         const ds = all().filter(shown);
         const card = d => `<button type="button" class="ld-card" data-ld-go="${esc(d.link ? 'link:' + d.id : keyOf(d))}"><span class="ld-card-ico" aria-hidden="true">${esc(d.icon || '📋')}</span><span class="ld-card-txt"><b>${esc(T(d.label))}</b>${d.source ? `<small class="muted">${esc(d.source)}</small>` : ''}</span><span class="ld-card-state" data-ld-state="${esc(d.id)}">${d.link ? '↗' : ''}</span></button>`;
         host.innerHTML = `<section class="page collection-page ld-page ld-overview">${UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')}`, icon: '🧰', title: T('Toutes les données'), help: esc(T('Chaque jeu de données en liste : cherche par année, par lieu, autour d’une ville, combine les critères, vois-les sur la carte.'))}) : ''}
@@ -632,7 +687,8 @@
         if (st.module === 'listes') { app.renderSidebar?.(); ext.lists[k]?.(++st.workspaceToken); } else app.setModule?.('listes');
     }
     /** ouvrir une liste de données d'ailleurs, déjà filtrée : LCNDA_EXT.dataListsEngine.open('hist_gares', {near: {lat, lon, km, title}}) */
-    ext.dataListsEngine = {open: (id, preset) => { const d = all().find(x => x.id === id); if (d) openKey(d.link ? null : keyOf(d), preset); }, keyOf, list: () => all(), applyLocal: localFilter, fetchPage, stateOf, critText, periodText, nearText, buildQuery};
+    ext.dataListsEngine = {open: (id, preset) => { const d = all().find(x => x.id === id); if (d) openKey(d.link ? null : keyOf(d), preset); }, keyOf, list: () => all(), applyLocal: localFilter, fetchPage, stateOf, critText, periodText, nearText, buildQuery,
+        render: (d, token) => renderList(d, token), openKey, forget, loadAll, isInstalled, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
 
     /* ═════════════════════════════════════════════════════════════════════════════════════════
      * Les données déjà dans l'app (packs, fichiers livrés) : leurs listes, sans toucher à leurs fichiers.
