@@ -94,6 +94,7 @@
     const needs = d => (Array.isArray(d.needs) ? d.needs : []);
     const ONLINE_RE = /wikidata|^commune_plus|^cc_|bnf|^ha_|^territoire|chateaux/;
     const isOnline = d => d.online === true || (d.online !== false && ONLINE_RE.test(d.id));
+    const isHeavy = t => t.d.heavy === true || /^eclipses-(vues|lieu)$/.test(t.d.id); // ⏱ calculé quand le bloc est à l'écran (fiche)
     async function isInstalled(d) { if (typeof d.installed !== 'function') return true; try { return (await timeout(d.installed(), 6000, true)) !== false; } catch (_) { return true; } }
     // le bloc de la fiche qui montre déjà la même chose (pour ne pas le dire deux fois)
     const BLOCK_OF = [[/^ba_annuaires$/, 'brevets_annuaires'], [/^ha_/, 'histoire_autour'], [/^wikidata_autour$/, 'wikidata_autour'], [/^(adn_ancien|bnf_auteur)$/, 'adn_livres'], [/^mr_metier$/, 'mr_metier'], [/^bases_officielles_/, 'bases_officielles'],
@@ -466,12 +467,23 @@
             heroBadge(pid, top.length + rest.filter(s => !s.sheet).length);
         };
         const drawSoon = perFrame(draw); // ⏱ une réponse après l'autre : redessiné au plus une fois par image
-        const goOnline = async () => { if (onlineStarted) return; onlineStarted = true; draw(); const r = await runAll(online, (x, n) => { done = offline.length + n; results = [...results.filter(y => y.task.key !== x.task.key), x]; drawSoon(); }); onlineDone = !!r; draw(); };
+        const goOnline = async () => { if (onlineStarted) return; onlineStarted = true; draw(); const r = await runAll(online, x => { done++; results = [...results.filter(y => y.task.key !== x.task.key), x]; drawSoon(); }); onlineDone = !!r; draw(); };
         draw();
-        results = await runAll(offline, (x, n) => { done = n; results = [...results, x]; drawSoon(); });
+        // ⏱ les calculs lourds (éclipses vues de ses lieux : plusieurs secondes) attendent que le bloc arrive à l'écran ; le reste tout de suite
+        const heavy = offline.filter(isHeavy), light = offline.filter(t => !isHeavy(t));
+        const got = await runAll(light, x => { done++; results = [...results, x]; drawSoon(); });
+        if (heavy.length && window.LCNDA_PERF?.whenSeen) {
+            setTimeout(() => { if (host.isConnected) goOnline(); }, ONLINE_DELAY);
+            await new Promise(ok => window.LCNDA_PERF.whenSeen(host, ok, {now: true}));
+            if (!host.isConnected) return;
+        }
+        const more = heavy.length ? await runAll(heavy, x => { done++; results = [...results, x]; drawSoon(); }) : [];
+        // dans l'ordre des tâches, comme avant (les réponses en ligne déjà arrivées restent)
+        const byKey = new Map([...got, ...more].filter(Boolean).map(x => [x.task.key, x]));
+        results = [...offline.map(t => byKey.get(t.key)).filter(Boolean), ...results.filter(x => !byKey.has(x.task.key))];
         missing(life, results).then(m => { miss = m; draw(); }).catch(() => {});
         draw();
-        setTimeout(() => { if (host.isConnected) goOnline(); }, ONLINE_DELAY);
+        if (!(heavy.length && window.LCNDA_PERF?.whenSeen)) setTimeout(() => { if (host.isConnected) goOnline(); }, ONLINE_DELAY);
         void onlineDone;
     }
     function heroBadge(pid, n) {

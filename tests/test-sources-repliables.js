@@ -100,18 +100,19 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(s => { const a = document.querySelector(`${s} h4 a`); a.addEventListener('click', e => e.preventDefault(), {once: true}); a.click(); }, sel);
             await p.evaluate(s => { document.querySelector(`${s} .src-sum a`).addEventListener('click', e => e.preventDefault(), {once: true}); document.querySelector(`${s} .src-sum a`).click(); }, sel);
             assert.strictEqual(stateOf(await boxes(p), 'l101').open, false, 'un lien ne déplie pas');
+            // clavier : Entrée puis Espace sur ▸ (bouton, aria-expanded)
+            await p.press(`${sel} [data-src-toggle]`, 'Enter'); await sleep(100);
+            assert.strictEqual(stateOf(await boxes(p), 'l101').open, true, 'Entrée déplie'); assert.strictEqual(stateOf(await boxes(p), 'l101').aria, 'true');
+            await p.press(`${sel} [data-src-toggle]`, ' '); await sleep(100);
+            assert.strictEqual(stateOf(await boxes(p), 'l101').open, false, 'Espace replie');
+            // ❝ sur la ligne : ne déplie pas
             await p.evaluate(s => document.querySelector(`${s} [data-cite-source]`).click(), sel); await sleep(300);
             await p.keyboard.press('Escape'); await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); await sleep(150);
             assert.strictEqual(stateOf(await boxes(p), 'l101').open, false, '❝ ne déplie pas');
-            // clic sur la ligne (à côté du titre) : déplie
+            // clic sur la ligne (à côté du titre) : déplie, puis replie
             await p.evaluate(s => document.querySelector(`${s} .src-head`).click(), sel); await sleep(350);
             assert.strictEqual(stateOf(await boxes(p), 'l101').open, true, 'la ligne déplie');
-            // clavier : Entrée puis Espace sur ▸
-            await p.press(`${sel} [data-src-toggle]`, 'Enter'); await sleep(100);
-            assert.strictEqual(stateOf(await boxes(p), 'l101').open, false, 'Entrée replie');
-            await p.press(`${sel} [data-src-toggle]`, ' '); await sleep(100);
-            assert.strictEqual(stateOf(await boxes(p), 'l101').open, true, 'Espace déplie');
-            await p.press(`${sel} [data-src-toggle]`, 'Enter'); await sleep(400);
+            await p.evaluate(s => document.querySelector(`${s} .src-head`).click(), sel); await sleep(400);
             const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-sources-ouvertes')));
             assert.deepStrictEqual(saved, {l101: false});
             // le corps replié n'a plus de lien qu'on atteint à la tabulation

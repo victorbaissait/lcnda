@@ -27,20 +27,38 @@ Légende : **oui** = déjà là avant · **ajouté** = fait dans ce lot · **non
 | 📚 Recueils / transcription | oui (clic droit sur une ligne) | non | 📎 générique (transcription, notes) | — |
 | 🔍 Comparer (photos) | non | oui (« Comparer avec une autre photo », par « 📤 ») | 📎 générique (notes de comparaison) | — |
 
-## Les autres écrans
+## Partout ailleurs : deux crochets communs (aucun code par écran)
+
+1. **🧺 clic droit (et ⋯ d'une ligne) sur tout élément marqué** — `heritage-connexions-outils.js` lit les attributs que les écrans posent déjà
+   (`data-open-person`, `data-h-person`, `data-tree-person`, `data-open-dashboard-person`, `data-person-id`, `data-pid`, `data-event-id`, `data-edit-event`,
+   `data-media-id`, `data-open-media`, `data-media-card-id`, `data-place`, `data-place-id`, `data-act`…) : « 🧺 Prendre « … » » et « 📍 Mettre « … » dans… »
+   gardent la **sorte et le numéro** (fiche, événement, média, lieu, acte, source), pas seulement le texte. Les actions (« supprimer », « ajouter une source à
+   l'événement », onglets, coordonnées) sont écartées. Rien n'apparaît au repos : seulement dans le menu.
+2. **📎 « Insérer… »** — dans chaque menu « 📤 Envoyer vers… » qui donne un texte ou un tableau, et dans chaque fenêtre d'export qui propose « 🧾 Tableur »
+   (même tableau, posé au curseur du dernier texte, dans une note…, ou copié, avec la source). Les textes libres (`textarea`, `contentEditable`) ont déjà le 📎.
 
 | Écran | 🧺 Prendre | 🧺 Recevoir | 📎 | Manque |
 |---|---|---|---|---|
-| 📒 Fiches (sujets) | oui | oui (bloc « Données » figé) | 📎 générique | — |
-| 📚 Atelier | oui | oui (« Ici : l'élément / le projet ») | 📎 générique | — |
-| 🕵️ Enquêtes : pistes, conclusion | oui | oui (« Ici : l'enquête ») | oui (la source va dans les pièces de la piste) | — (🧩 Tableaux : autre chantier) |
-| 📓 Journal | oui (clic droit) | non | 📎 générique | — |
-| 📝 Notes | oui | oui (« Une note sur une fiche ») | oui (classement : la fiche d'abord) | — |
-| 🔖 Sources | oui | non | 📎 générique (informations relevées, note) | — |
-| ⏰ Rappels | oui | oui (« Une tâche, un rappel… ») | 📎 générique | — |
-| 🧱 Tableau de bord (éditeur de widget) | non | non | 📎 générique (objectif de séance) | Rien à recevoir |
-| 📅 Chronologie | oui (clic droit) | non | non (pas de texte libre) | — |
-| 🗺️ Carte (notes, descriptions de mes cartes) | oui (clic droit) | oui (« La carte » : ce qui a une position) | 📎 générique (description) | — |
+| 👤 Personnes / fiche : événements, notes, sources, médias, proches | **ajouté** : clic droit typé (événement, fiche, média) ; avant : texte précis | oui (« Ici : une note sur la fiche ») | oui (notes : la fiche d'abord) | — |
+| 📋 Listes (natives et de données) | oui (barre de sélection « 🧺 Au panier », `listBar` des listes de données) · **ajouté** : clic droit typé sur une ligne | « Mes listes » (fiches) | 📎 depuis une liste (`insertBlock`) | — |
+| 📄 Documents et recueils | oui (clic droit, texte) | non | 📎 générique | Un document n'a pas de numéro « à prendre » (`data-ong-doc`) : laissé, le texte précis suffit |
+| 📅 Chronologie | **ajouté** : l'événement (et la fiche) au clic droit | non | non (pas de texte libre) | — |
+| 🔍 Comparaison | oui (texte précis) | « Comparer avec une autre photo » | 📎 générique (notes) | — |
+| 🗺️ Carte et ses bulles | non dans la carte (Leaflet garde son clic droit) | oui (« La carte » : ce qui a une position) | 📎 générique (descriptions) | Bulles : à faire dans `app-carte.js` (autre chantier en cours) |
+| 📈 Graphiques / diagrammes | **ajouté** : les fiches des arbres et graphiques au clic droit | non | **ajouté** : titres et « Source » d'un diagramme | — |
+| 🧱 Tableau de bord (widgets) | **ajouté** : fiches, événements, médias des widgets au clic droit | non | 📎 générique (objectif de séance) | — |
+| 💎 Trésors | oui (texte précis) · **ajouté** : éléments marqués d'une fiche | non | 📎 générique | — |
+| 🕵️ Enquêtes : pistes, pièces | oui | oui (« Ici : l'enquête ») | oui (la source va dans les pièces) | 🧩 Tableaux : autre chantier |
+| 📚 Atelier (éléments) | oui | oui (« Ici : l'élément / le projet ») | 📎 générique | — |
+| 📒 Fiches (blocs) | oui | oui (bloc « Données » figé) | 📎 générique | Bloc Données : `heritage-fiches.js` (autre chantier) |
+| 🧰 Données récap | oui (`listBar`) | non | 📎 « Insérer… » des exports | — |
+| 🗓️ Calendriers | oui (texte précis, événements marqués au clic droit) | non | non | — |
+| 🧬 ADN | oui (texte précis ; fiches marquées au clic droit) | non | 📎 générique (notes) | — |
+| 🐾 Battue (dépouillements) | oui (clic droit sur une ligne) | non | 📎 générique | — |
+| ☁️ Météo, 🏛 Histoire locale, « Tout ce qui le concerne » | oui (déjà : « 🧺 » des panneaux, `heritage-tout-sur.js`, `heritage-meteo.js`) | non | 📎 « Insérer une info » les trouve (listes de données) | — |
+| 🏘 Village / monographie d'un lieu | oui (texte précis ; lieux et fiches marqués) | non | 📎 générique | — |
+| 📓 Journal, 📝 Notes, 🔖 Sources, ⏰ Rappels | oui | Notes, Rappels : oui | 📎 générique (Notes : classées) | — |
+| 🔎 Recherche (résultats) | (autre chantier : `app-recherche.js`) | — | — | — |
 
 ## Ce qui commande tout
 

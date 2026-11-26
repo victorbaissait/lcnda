@@ -47,45 +47,94 @@ function callArgs(src, from) {
     }
     return src.slice(from, i);
 }
-const isPost = s => /method\s*:\s*['"]POST['"]/i.test(s);
+const isPost = s => /method\s*:\s*['"]POST['"]|sendBeacon\(/i.test(s);
+/** POST seulement quand on lui passe un 2e argument (function call(action, body = null) { … body ? {method: 'POST'…} : {…} }) */
+const condPost = (kind, args) => { const m = /^COND:(\d+)$/.exec(kind || ''); if (!m) return false; const a = restArgs(args)[Number(m[1]) - 1]; return !!a && !/^(null|undefined|false|0|'')$/.test(a); };
+const isCondPost = s => /\b\w+\s*\?\s*\{[^}]*method\s*:\s*['"]POST|\bif\s*\(\s*\w+(\s*\|\|\s*\w+)?\s*\)\s*\{?[^}]{0,120}method\s*=\s*['"]POST/.test(s);
+/** les arguments de premier niveau d'un appel, à partir du texte qui suit le 1er : « , {}, {a: 1}) » → ['{}', '{a: 1}'] */
+function restArgs(args) {
+    const out = []; let depth = 0, q = null, cur = null;
+    for (let i = 0; i < args.length; i++) {
+        const c = args[i];
+        if (q) { if (c === '\\') i++; else if (c === q) q = null; if (cur !== null) cur += c; continue; }
+        if (c === '"' || c === "'" || c === '`') q = c;
+        if ('([{'.includes(c)) depth++; else if (')]}'.includes(c)) depth--;
+        if (c === ',' && depth === 0) { if (cur !== null) out.push(cur.trim()); cur = ''; continue; }
+        if (cur !== null) cur += c;
+    }
+    if (cur !== null && cur.trim()) out.push(cur.trim());
+    return out;
+}
+const SUBKEY = 'op|what|kind|mode|do|step|type';
 
 function extractActions(dir = JS) {
-    const out = new Map(); // nom → {methods: Set, files: Set}
-    const add = (name, method, file) => { if (!NAME.test(name)) return; const e = out.get(name) || {methods: new Set(), files: new Set()}; e.methods.add(method); e.files.add(file); out.set(name, e); };
+    const out = new Map(); // nom → {methods: Set, files: Set, variants: {GET: Set, POST: Set}} ; une variante = '{"op":"save"}'
+    const add = (name, method, file, variant = null) => {
+        if (!NAME.test(name)) return;
+        const e = out.get(name) || {methods: new Set(), files: new Set(), variants: {GET: new Set(), POST: new Set()}};
+        e.methods.add(method); e.files.add(file); if (variant) e.variants[method].add(JSON.stringify(variant)); out.set(name, e);
+    };
     const famPre = [];
     const files = fs.readdirSync(dir).filter(f => f.endsWith('.js')).sort();
-    const srcs = Object.fromEntries(files.map(f => [f, fs.readFileSync(path.join(dir, f), 'utf8')]));
+    const srcs = Object.fromEntries(files.map(f => [f, fs.readFileSync(path.join(dir, f), 'utf8').replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[\s;{}])\/\/[^\n]*/g, '$1')])); // sans les commentaires
     // les familles de téléchargement (app-listes-maj.js : FAM) : pre, status, info, finish
     const maj = srcs['app-listes-maj.js'] || '';
     for (const m of maj.matchAll(/\{id:\s*'[a-z_]+',[^\n]*?status:\s*'([a-z_]+)',\s*info:\s*'([a-z_]+)',\s*pre:\s*'([a-z_]+)',\s*finish:\s*'([a-z_]+)'/g)) {
         add(m[1], 'GET', 'app-listes-maj.js'); add(m[2], 'GET', 'app-listes-maj.js'); add(m[4], 'POST', 'app-listes-maj.js'); famPre.push(m[3]);
     }
+    const esc = w => w.replace(/[$]/g, '\\$');
+    /** la sous-action d'un appel : {op: 'save'} dans « …, {op: 'save', … » ou « body: {op: 'save' » */
+    const subOf = (args, bodyOnly) => { const m = args.match(new RegExp(`${bodyOnly ? 'body\\s*:\\s*' : '^\\s*,\\s*(?:\\{\\}\\s*,\\s*\\{[^{]*body\\s*:\\s*)?'}\\{\\s*(${SUBKEY})\\s*:\\s*['"]([a-z][a-z0-9_]*)['"]`)); return m ? {[m[1]]: m[2]} : null; };
     for (const f of files) {
         const src = srcs[f];
         // les petites fonctions maison : const post = async (a, body) => … .api(a, …) ; function post(action, body) { … action=${action} … }
-        const wrappers = new Map();
-        const consider = (name, param, body) => {
+        const wrappers = new Map(), fixed = [];
+        const consider = (name, param, body, params = param) => {
             if (!name || !param || name === 'api' && f === 'app.js') return;
-            const p = param.replace(/[$]/g, '\\$');
-            if (new RegExp(`\\bapi\\(\\s*${p}\\b|action=\\$\\{\\s*${p}\\s*\\}|\\.set\\(\\s*['"]action['"]\\s*,\\s*${p}\\b|\\baction\\s*:\\s*${p}\\b`).test(body)) wrappers.set(name, isPost(body) || /^(post|apiPost|write|postJson)$/.test(name) && /method/.test(body) ? 'POST' : 'GET');
+            const p = esc(param);
+            if (new RegExp(`\\bapi\\(\\s*${p}\\b|api\\.php\\?action=\\$\\{\\s*${p}\\s*\\}|\\.set\\(\\s*['"]action['"]\\s*,\\s*${p}\\b`).test(body) && (!/\.set\(\s*['"]action/.test(body) || /api\.php/.test(body))) {
+                if (!isPost(body)) wrappers.set(name, 'GET');
+                else if (isCondPost(body)) { // le n° de l'argument qui décide : (a, p, b) => … b ? {method: 'POST'…} : …
+                    const names = String(params).split(',').map(x => x.trim().split(/[\s=]/)[0]), c = (body.match(/\b(\w+)\s*\?\s*\{[^}]*method\s*:\s*['"]POST/) || body.match(/\bif\s*\(\s*(\w+)/) || [])[1];
+                    wrappers.set(name, 'COND:' + Math.max(1, names.indexOf(c)));
+                } else wrappers.set(name, 'POST');
+                return;
+            }
+            // une action fixe, le 1er argument est la sous-action : const write = (op, body) => A().api('inbox_write', {}, {method: 'POST', body: {op, ...body}})
+            const fx = body.match(/(?:\bapi|\bapiPost)\(\s*(['"])([a-z][a-z0-9_]*)\1/);
+            if (!fx) return;
+            const method = isPost(body) || /\bapiPost\(/.test(body) ? 'POST' : 'GET';
+            const key = (body.match(new RegExp(`\\b(${SUBKEY})\\s*:\\s*${p}\\b`)) || [])[1] || (new RegExp(`\\{\\s*${p}\\s*[,}]`).test(body) ? param : null);
+            if (key && new RegExp(`^(${SUBKEY})$`).test(key)) fixed.push({name, action: fx[2], method, key});
+            else if (new RegExp(`body\\s*:\\s*${p}\\b|apiPost\\(\\s*['"][a-z_]+['"]\\s*,\\s*${p}\\b`).test(body)) fixed.push({name, action: fx[2], method, key: null}); // le corps tel quel : post({op: 'save', …})
         };
-        for (const m of src.matchAll(/(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\(\s*([A-Za-z_$][\w$]*)[^)]*\)|([A-Za-z_$][\w$]*))\s*=>([^\n]{0,600})/g)) consider(m[1], m[2] || m[3], m[4]);
-        for (const m of src.matchAll(/(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)[^)]*\)\s*\{/g)) consider(m[1], m[2], src.slice(m.index, m.index + 900));
+        for (const m of src.matchAll(/(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\(\s*([A-Za-z_$][\w$]*)[^)]*\)|([A-Za-z_$][\w$]*))\s*=>([^\n]{0,600})/g)) consider(m[1], m[2] || m[3], m[4], (m[0].match(/=\s*(?:async\s*)?\(([^)]*)\)/) || [])[1] || m[3]);
+        for (const m of src.matchAll(/(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)[^)]*\)\s*\{/g)) consider(m[1], m[2], src.slice(m.index, m.index + 900), (m[0].match(/\(([^)]*)\)/) || [])[1]);
         // 1. .api('x' …) et api('x' …) : GET, sauf method: 'POST' dans l'appel
         for (const m of src.matchAll(/(?<![\w$])((?:[\w$]+(?:\(\))?\.)*)api\(\s*(['"`])([a-z][a-z0-9_]*)\2/g)) {
-            const bare = !m[1], w = bare ? wrappers.get('api') : null;
-            add(m[3], isPost(callArgs(src, m.index + m[0].length)) || w === 'POST' ? 'POST' : 'GET', f);
+            const w = !m[1] ? wrappers.get('api') : null, args = callArgs(src, m.index + m[0].length), method = isPost(args) || w === 'POST' || condPost(w, args) ? 'POST' : 'GET';
+            add(m[3], method, f, subOf(args, method === 'POST' && isPost(args)));
         }
         // 2. les fonctions maison : post('x' …), get('x' …), write('x' …), apiPost('x' …)…
-        for (const [w, method] of [...wrappers, ...(wrappers.has('api') ? [] : [['api', 'GET']])]) {
-            if (w !== 'api') for (const m of src.matchAll(new RegExp(`(?<![\\w$.])${w.replace(/[$]/g, '\\$')}\\(\\s*(['"\`])([a-z][a-z0-9_]*)\\1`, 'g'))) add(m[2], isPost(callArgs(src, m.index + m[0].length)) ? 'POST' : method, f);
+        for (const [w, kind] of [...wrappers, ...(wrappers.has('api') ? [] : [['api', 'GET']])]) {
+            if (w !== 'api') for (const m of src.matchAll(new RegExp(`(?<![\\w$.])${esc(w)}\\(\\s*(['"\`])([a-z][a-z0-9_]*)\\1`, 'g'))) {
+                const args = callArgs(src, m.index + m[0].length);
+                const method = isPost(args) || condPost(kind, args) ? 'POST' : /^COND/.test(kind) ? 'GET' : kind;
+                add(m[2], method, f, subOf(args, false));
+            }
             // `${f.pre}_dl_start` : les familles de app-listes-maj.js
-            for (const m of src.matchAll(new RegExp(`(?<![\\w$.])${w.replace(/[$]/g, '\\$')}\\(\\s*\`\\$\\{[^}]*\\.pre\\}(_[a-z_]+)\``, 'g'))) for (const pre of famPre) add(pre + m[1], method, f);
+            for (const m of src.matchAll(new RegExp(`(?<![\\w$.])${esc(w)}\\(\\s*\`\\$\\{[^}]*\\.pre\\}(_[a-z_]+)\``, 'g'))) for (const pre of famPre) add(pre + m[1], /^COND/.test(kind) ? 'POST' : kind, f);
         }
-        // 3. api.php?action=x (fetch, liens de téléchargement, images)
-        for (const m of src.matchAll(/api\.php\?action=([a-z][a-z0-9_]*)/g)) {
-            const before = src.slice(Math.max(0, m.index - 200), m.index), after = src.slice(m.index, m.index + 400);
-            add(m[1], /fetch\(\s*[`'"][^`'"]*$/.test(before) && isPost(after.split(/\)\s*[;.]/)[0]) ? 'POST' : 'GET', f);
+        // 2 bis. une action fixe et sa sous-action : write('save_case' …) → inbox_write {op: 'save_case'} ; post({op: 'save' …}) → lp_write {op: 'save'}
+        for (const {name, action, method, key} of fixed) {
+            add(action, method, f);
+            const re = key ? new RegExp(`(?<![\\w$.])${esc(name)}\\(\\s*['"]([a-z][a-z0-9_]*)['"]`, 'g') : new RegExp(`(?<![\\w$.])${esc(name)}\\(\\s*\\{\\s*(${SUBKEY})\\s*:\\s*['"]([a-z][a-z0-9_]*)['"]`, 'g');
+            for (const m of src.matchAll(re)) add(action, method, f, key ? {[key]: m[1]} : {[m[1]]: m[2]});
+        }
+        // 3. api.php?action=x (fetch, liens de téléchargement, images) ; pas les « /w/api.php?action=parse » de Wikipédia
+        for (const m of src.matchAll(/(?<![\w/.])api\.php\?action=([a-z][a-z0-9_]*)/g)) {
+            const before = src.slice(Math.max(0, m.index - 200), m.index), fe = before.match(/(fetch|sendBeacon)\(\s*[`'"][^`'"]*$/);
+            add(m[1], fe && (fe[1] === 'sendBeacon' || isPost(callArgs(src, m.index - fe[0].length + fe[1].length + 1))) ? 'POST' : 'GET', f);
         }
     }
     // les noms faits à la volée ailleurs (un seul endroit chacun) : on les déroule ici
@@ -114,7 +163,7 @@ const UNKNOWN = /action inconnue|unknown action|acci[oó]n desconocida|unbekannt
 
 (async () => {
     const acts = extractActions();
-    if (process.env.LCNDA_ROUTES_LIST) { for (const [a, e] of [...acts].sort()) console.log([...e.methods].join('+'), a, [...e.files].join(',')); process.exit(0); }
+    if (process.env.LCNDA_ROUTES_LIST) { for (const [a, e] of [...acts].sort()) console.log([...e.methods].join('+'), a, [...e.files].join(','), [...e.variants.GET, ...e.variants.POST].join(' ')); process.exit(0); }
     await t(`le JS appelle ${acts.size} actions : la lecture du code les trouve toutes (ld_*, familles, fonctions maison)`, async () => {
         assert.ok(acts.size > 400, 'trop peu d’actions trouvées : ' + acts.size);
         for (const a of ['ld_status', 'ld_query', 'ld_facet', 'ld_famille', 'ld_groups', 'ld_merge', 'meteo_status', 'hist_dl_start', 'gov_pack_remove', 'bo_pack_restore', 'prenoms_pays_dl_step', 'donnees_maj_check', 'rt_saved_get', 'aia_conv', 'inbox_write'])
@@ -158,12 +207,12 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         let cookie = '';
         const html = await (await fetch(base).then(r => { cookie = (r.headers.get('set-cookie') || '').split(';')[0]; return r; })).text();
         const csrf = JSON.parse(html.match(/window\.INSTALL_CSRF = ("[^"]*")/)[1]);
-        const call = async (action, method) => {
+        const call = async (action, method, extra = null) => {
             const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 30000);
             try {
                 const r = method === 'POST'
-                    ? await fetch(`${base}api.php?action=${action}`, {method: 'POST', signal: ctl.signal, headers: {Cookie: cookie, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({csrf})})
-                    : await fetch(`${base}api.php?action=${action}`, {signal: ctl.signal, headers: {Cookie: cookie}});
+                    ? await fetch(`${base}api.php?action=${action}`, {method: 'POST', signal: ctl.signal, headers: {Cookie: cookie, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({...(extra || {}), csrf})})
+                    : await fetch(`${base}api.php?action=${action}${extra ? '&' + new URLSearchParams(extra) : ''}`, {signal: ctl.signal, headers: {Cookie: cookie}});
                 const text = await r.text();
                 let err = ''; try { const j = JSON.parse(text); err = String(j?.error ?? j?.result?.error ?? ''); } catch (_) { err = r.ok ? '' : text.slice(0, 300); }
                 return {status: r.status, err};
@@ -172,16 +221,23 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         };
         const order = [...acts.keys()].sort();
         const jobs = [];
-        for (const a of order) for (const m of [...acts.get(a).methods].sort()) jobs.push([a, m]); // GET d'abord (« GET » < « POST »)
-        jobs.sort((x, y) => x[1].localeCompare(y[1]) || x[0].localeCompare(y[0]));
+        for (const a of order) for (const m of [...acts.get(a).methods].sort()) { // une action à sous-actions ({op: 'save'}) : chacune ; sinon l'action seule
+            const vs = [...acts.get(a).variants[m]].map(v => JSON.parse(v));
+            if (vs.length) vs.forEach(v => jobs.push([a, m, v])); else jobs.push([a, m, null]);
+        }
+        jobs.sort((x, y) => x[1].localeCompare(y[1]) || x[0].localeCompare(y[0])); // GET d'abord, puis POST
         const bad = [], seen = {};
         await t(`chaque action appelée par l'écran (${jobs.length} appels) arrive à sa route : jamais « Action inconnue »`, async () => {
-            for (const [a, m] of jobs) {
-                if (SKIP[a]) continue;
-                const r = await call(a, m); seen[`${m} ${a}`] = r;
-                if (process.env.LCNDA_ROUTES_VERBOSE) console.log(`  ${m} ${a} → ${r.status} ${r.err.slice(0, 120)}`);
-                if (UNKNOWN.test(r.err) && !ALLOW[a]) bad.push(`${m} ${a} → ${r.status} « ${r.err} » (appelée par ${[...acts.get(a).files].join(', ')})`);
-            }
+            const one = async ([a, m, v]) => {
+                if (SKIP[a]) return;
+                const r = await call(a, m, v), label = `${m} ${a}${v ? ' ' + JSON.stringify(v) : ''}`; seen[label] = r;
+                if (process.env.LCNDA_ROUTES_VERBOSE) console.log(`  ${label} → ${r.status} ${r.err.slice(0, 120)}`);
+                if (UNKNOWN.test(r.err) && !ALLOW[a]) bad.push(`${label} → ${r.status} « ${r.err} » (appelée par ${[...acts.get(a).files].join(', ')})`);
+            };
+            const gets = jobs.filter(j => j[1] === 'GET'), posts = jobs.filter(j => j[1] !== 'GET');
+            await Promise.all([0, 1, 2].map(async k => { for (let i = k; i < gets.length; i += 3) await one(gets[i]); })); // les lectures, 3 à la fois
+            for (const j of posts) await one(j); // les écritures, une à une (SQLite)
+            bad.sort();
             assert.deepStrictEqual(bad, [], 'actions perdues en route :\n' + bad.join('\n'));
         });
         await t('le serveur répond encore à la fin (aucune action n’a cassé la base d’essai)', async () => {

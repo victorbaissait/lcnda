@@ -140,7 +140,13 @@ async function measureNav(page, cdp, results) {
         ['Listes → Données (Récap)', `(() => { const A = window.LCNDA_APP; try { window.LCNDA_EXT.dataHome._st.view = 'recap'; } catch (_) {} A.state.listType = 'donnees'; A.setModule('listes'); })()`, '#workspace [data-dr]'],
         ['Carte', `window.LCNDA_APP.setModule('carte')`, '#workspace .leaflet-container, #workspace canvas, #workspace svg, #workspace .map'],
         ['Réglages', `(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = ''; A.setModule('maintenance'); })()`, '#workspace h1, #workspace h2, #workspace section'],
+        ['Données (onglet)', `window.LCNDA_APP.setModule('donnees')`, '#workspace [data-dr], #workspace .page-header'],
+        ['Recherche', `window.LCNDA_APP.setModule('recherche')`, '#workspace .page-header, #workspace h2'],
+        ['Enquêtes', `window.LCNDA_APP.setModule('enquetes')`, '#workspace .page-header, #workspace h2'],
+        ['Atelier', `(() => { const A = window.LCNDA_APP; A.state.listType = 'atelier_list'; A.setModule('listes'); })()`, '#workspace .page-header, #workspace h2'],
+        ['Graphiques (diagrammes)', `window.LCNDA_APP.setModule('graphiques')`, '#workspace svg, #workspace canvas, #workspace .page-header'],
         ['Tableau de bord (retour)', `window.LCNDA_APP.setModule('dashboard')`, '#workspace .dashboard-grid, #workspace [data-block], #workspace section'],
+        ['📊 widget Données (éclipses, liste + graphique)', `(() => { const W = window.LCNDA_EXT.dashboard?.donnees_widget; if (!W) return; const d = document.createElement('div'); d.id = 'mesure-atd'; d.innerHTML = W.render(1, {config: {src: 'eclipses', view: 'list'}}, 'span-6') + W.render(2, {config: {src: 'eclipses', view: 'chart'}}, 'span-6'); document.getElementById('workspace').prepend(d); })()`, '#mesure-atd .atd > :not(.ui-spinner):not(.loading)'],
     ];
     for (const [name, code, sel] of steps) {
         await page.evaluate(() => { window.__lt = []; window.__navMark = performance.now(); document.querySelector('#workspace')?.setAttribute('data-mesure-old', '1'); });

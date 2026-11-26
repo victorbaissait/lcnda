@@ -1261,7 +1261,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=606" defer></script>
+<script src="assets/js/app.js?v=607" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1504,7 +1504,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-sources-ouvertes-5-core.js?v=2" defer></script>
 <script src="assets/js/heritage-sources-ouvertes-5.js?v=4" defer></script>
 <script src="assets/js/app-sources-ouvertes-6-core.js?v=2" defer></script>
-<script src="assets/js/heritage-sources-ouvertes-6.js?v=3" defer></script>
+<script src="assets/js/heritage-sources-ouvertes-6.js?v=4" defer></script>
 <script src="assets/js/app-sources-ouvertes-7-core.js?v=3" defer></script>
 <script src="assets/js/heritage-sources-ouvertes-7.js?v=3" defer></script>
 <script src="assets/js/app-sources-ouvertes-8-core.js?v=1" defer></script>
@@ -1524,7 +1524,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-monde.js?v=6" defer></script>
 <script src="assets/js/app-lune-core.js?v=1" defer></script>
 <script src="assets/js/heritage-lune.js?v=1" defer></script>
-<script src="assets/js/heritage-eclipses-liste.js?v=2" defer></script>
+<script src="assets/js/heritage-eclipses-liste.js?v=3" defer></script>
 <script src="assets/js/heritage-mouvements.js?v=1" defer></script>
 <script src="assets/js/heritage-metiers-anciens.js?v=3" defer></script>
 <script src="assets/js/heritage-archive-services.js?v=7" defer></script>
@@ -1713,7 +1713,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-ciel-heure.js?v=1" defer></script>
 <script src="assets/js/heritage-adn-livres.js?v=2" defer></script>
 <script src="assets/js/heritage-histoire.js?v=4" defer></script>
-<script src="assets/js/heritage-monde-contexte.js?v=2" defer></script>
+<script src="assets/js/heritage-monde-contexte.js?v=3" defer></script>
 <script src="assets/js/heritage-prix-europe.js?v=3" defer></script>
 <script src="assets/js/heritage-terre-quotidien.js?v=3" defer></script>
 <script src="assets/js/heritage-commune-plus.js?v=1" defer></script>
@@ -1749,7 +1749,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=26" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=27" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-territoires.js?v=2" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=2" defer></script>

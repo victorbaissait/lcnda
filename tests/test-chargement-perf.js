@@ -193,10 +193,40 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
                 assert.equal(await page.evaluate(() => document.querySelector('#perf-grip .dnd-grip').textContent), '⠿');
                 await page.evaluate(() => document.getElementById('perf-grip').remove());
             });
+            await t('🌘 éclipses vues d’un lieu : le 2e calcul vient du cache (mêmes lignes), gardé dans sessionStorage', async () => {
+                const r = await page.evaluate(async () => {
+                    const E = window.LCNDA_EXT.eclipsesListe; if (!E) return null;
+                    const q = { near: { lat: 45.27, lon: 1.77, km: 1, title: 'Tulle', country: 'FR' }, years: { from: 1700, to: 1800, mode: 'overlap' } };
+                    const t0 = performance.now(); const a = await E.run(q); const t1 = performance.now();
+                    const b = await E.run({ ...q, sort: 'date' }); const t2 = performance.now(); // une autre demande (pas « la dernière ») : le cache du lieu
+                    const pick = rows => rows.map(x => [x.id, x.seen, x.local, x.pct, x._seenType, x._km]).sort((x, y) => String(x[0]).localeCompare(String(y[0])));
+                    return { same: JSON.stringify(pick(a)) === JSON.stringify(pick(b)), n: a.length, first: t1 - t0, second: t2 - t1, kept: !!sessionStorage.getItem('lcnda-eclipses-vues') };
+                });
+                if (!r) return console.log('    (liste des éclipses absente : sauté)');
+                assert.ok(r.n > 0, 'des éclipses vues de Tulle au XVIIIᵉ siècle'); assert.ok(r.same, 'mêmes lignes'); assert.ok(r.kept, 'sessionStorage');
+                assert.ok(r.second < Math.max(200, r.first / 2), `2e calcul ${Math.round(r.second)} ms (1er ${Math.round(r.first)} ms)`);
+            });
+            await t('menuHiddenKeys : gardé, mais relu dès qu’on écrit dans localStorage', async () => {
+                const r = await page.evaluate(() => {
+                    const A = window.LCNDA_APP, before = localStorage.getItem('genealogie-menu-hidden'), a = A.menuHiddenKeys();
+                    localStorage.setItem('genealogie-menu-hidden', JSON.stringify([...a, 'perf_essai'])); const b = A.menuHiddenKeys();
+                    b.push('modifie'); const c = A.menuHiddenKeys(); // une copie : la modifier ne change pas la suivante
+                    if (before === null) localStorage.removeItem('genealogie-menu-hidden'); else localStorage.setItem('genealogie-menu-hidden', before);
+                    return { a: a.includes('perf_essai'), b: b.includes('perf_essai'), c: c.includes('modifie'), d: A.menuHiddenKeys().includes('perf_essai') };
+                });
+                assert.deepEqual(r, { a: false, b: true, c: false, d: false });
+            });
             await t('fiche personne, fiche village, Listes → Données, Carte, Réglages : chacune s’ouvre', async () => {
-                await page.evaluate(() => { location.hash = '#personnes/1'; });
+                await page.evaluate(() => { window.LCNDA_EXT.toutSur?.forget?.(); location.hash = '#personnes/1'; });
                 await page.waitForSelector('#workspace .person-hero', { timeout: 30000 });
                 await page.waitForSelector('#workspace [data-ts-block] .ts-head', { timeout: 30000 });
+                // 🔎 les éclipses (calcul lourd) attendent que le bloc soit à l'écran
+                const ecl = () => page.evaluate(() => [...(window.LCNDA_EXT.toutSur?.cache?.keys() || [])].filter(k => /^eclipses-(vues|lieu)\|/.test(k)).length);
+                const off = await page.evaluate(() => { const r = document.querySelector('#workspace [data-ts-block]').getBoundingClientRect(); return r.top > innerHeight + 220 || r.bottom < -220; });
+                if (off) { await sleep(3000); assert.equal(await ecl(), 0, 'éclipses calculées alors que le bloc n’est pas à l’écran'); }
+                await page.evaluate(() => document.querySelector('#workspace [data-ts-block]').scrollIntoView());
+                await page.waitForFunction(() => [...(window.LCNDA_EXT.toutSur?.cache?.keys() || [])].some(k => /^eclipses-(vues|lieu)\|/.test(k)), null, { timeout: 30000 }).catch(() => {});
+                console.log(`    (bloc 🔎 ${off ? 'hors de l’écran au départ' : 'déjà à l’écran'} ; éclipses demandées : ${await ecl()})`);
                 const key = await page.evaluate(async () => (await window.LCNDA_APP.api('villages')).villages?.[0]?.key || '');
                 if (key) {
                     await page.evaluate(k => { const s = window.LCNDA_APP.state; s.listType = 'villages'; s.hVillage = k; window.LCNDA_APP.setModule('listes'); }, key);

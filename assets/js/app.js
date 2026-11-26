@@ -151,6 +151,7 @@
         'lcnda-faces-speed':'genealogie-faces-speed','lcnda-tr-era':'genealogie-tr-era','lcnda-fond-ecran':'genealogie-fond-ecran',
         // les jeux (lcnda-jeux-famille-prefs-v1, lcnda-laby-*) restent sur cet ordinateur : une partie n'écrit jamais dans la base (tests/test-jeux-cartes.js)
     };
+    var LS_WRITES={n:0,on:false}; // var : lu avant cette ligne au démarrage
     (function renameSettingKeys(){
         let store;try{store=window.localStorage;store.length;}catch(_){return;}
         try{Object.freeze(SETTING_RENAMES);window.LCNDA_SETTING_RENAMES=SETTING_RENAMES;}catch(_){}
@@ -165,8 +166,11 @@
         // lire l'ancien nom = lire le nouveau (une autre généalogie ouverte ne reprend pas les réglages de la précédente)
         proto.getItem=function(key){if(this===store&&toNew.has(String(key)))return get.call(this,toNew.get(String(key)));return get.call(this,key);};
         // écrire l'un écrit les deux (le nouveau part dans la base) ; retirer l'un retire les deux
-        proto.setItem=function(key,value){set.call(this,key,value);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)set.call(this,twin,value);}};
-        proto.removeItem=function(key){remove.call(this,key);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)remove.call(this,twin);}};
+        // ⏱ LS_WRITES : compte les écritures (ici, un autre onglet, clear) : ce qui est relu de localStorage peut être gardé tant qu'il ne bouge pas
+        proto.setItem=function(key,value){if(this===store)LS_WRITES.n++;set.call(this,key,value);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)set.call(this,twin,value);}};
+        proto.removeItem=function(key){if(this===store)LS_WRITES.n++;remove.call(this,key);if(this===store){const k=String(key),twin=toNew.get(k)||toOld.get(k);if(twin)remove.call(this,twin);}};
+        const clear=proto.clear;proto.clear=function(){if(this===store)LS_WRITES.n++;return clear.call(this);};
+        window.addEventListener('storage',()=>{LS_WRITES.n++;});LS_WRITES.on=true;
         proto.__lcndaRenames=true;
     })();
 
@@ -1269,7 +1273,10 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     }
     // l'onglet « Animaux » est caché tant qu'on ne l'a pas montré (Apparence → Ordre du menu principal)
     // « Animaux » et « Fiches » sont cachés tant que l'ordre du menu n'a pas été réglé une fois
-    function menuHiddenKeys(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!Array.isArray(l))l=[];if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');if(!localStorage.getItem('genealogie-menu-fiches')&&!l.includes('fiches'))l.push('fiches');if(!localStorage.getItem('genealogie-menu-adn')&&!l.includes('adn'))l.push('adn');if(!localStorage.getItem('genealogie-menu-suivi')&&!l.includes('suivi'))l.push('suivi');/* 🐾 Suivi des animaux : caché au départ */if(!localStorage.getItem('genealogie-menu-tresors')&&!l.includes('tresors'))l.push('tresors');/* ✨ Trésors : caché au départ */['documents','catalogue','successoral','paniers','donnees'].forEach(k=>{if(!localStorage.getItem(`genealogie-menu-${k}`)&&!l.includes(k))l.push(k);});/* 📄 Documents, 🎨 Catalogue raisonné : cachés au départ */}catch(_){l=['animaux','fiches','adn','suivi','tresors','documents','catalogue','successoral','paniers','donnees'];}return l;}
+    // ⏱ relu seulement après une écriture dans localStorage (la colonne des Listes le demandait pour chacune des 600 listes) ; une copie à chaque fois
+    let menuHiddenMemo=null;
+    function menuHiddenKeys(){if(LS_WRITES.on&&menuHiddenMemo&&menuHiddenMemo.n===LS_WRITES.n)return menuHiddenMemo.l.slice();const l=menuHiddenKeysRead();if(LS_WRITES.on)menuHiddenMemo={n:LS_WRITES.n,l:l.slice()};return l;}
+    function menuHiddenKeysRead(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!Array.isArray(l))l=[];if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');if(!localStorage.getItem('genealogie-menu-fiches')&&!l.includes('fiches'))l.push('fiches');if(!localStorage.getItem('genealogie-menu-adn')&&!l.includes('adn'))l.push('adn');if(!localStorage.getItem('genealogie-menu-suivi')&&!l.includes('suivi'))l.push('suivi');/* 🐾 Suivi des animaux : caché au départ */if(!localStorage.getItem('genealogie-menu-tresors')&&!l.includes('tresors'))l.push('tresors');/* ✨ Trésors : caché au départ */['documents','catalogue','successoral','paniers','donnees'].forEach(k=>{if(!localStorage.getItem(`genealogie-menu-${k}`)&&!l.includes(k))l.push(k);});/* 📄 Documents, 🎨 Catalogue raisonné : cachés au départ */}catch(_){l=['animaux','fiches','adn','suivi','tresors','documents','catalogue','successoral','paniers','donnees'];}return l;}
     // onglet « Animaux » montré : « Personnes » ne liste que les personnes, « Animaux » que les animaux (la même fiche, à part)
     const animalsTabOn=()=>!menuHiddenKeys().includes('animaux');
     function mapHiddenKeys(){try{const v=JSON.parse(localStorage.getItem('genealogie-map-hidden')||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}

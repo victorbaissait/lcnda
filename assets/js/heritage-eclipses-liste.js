@@ -142,6 +142,20 @@
     }
     const yearsOk = (row, y) => { if (!y) return true; const a = Number(y.from), b = Number(y.to ?? y.from); return (!Number.isFinite(a) || row.year >= a) && (!Number.isFinite(b) || row.year <= b); };
     const pause = () => new Promise(r => setTimeout(r, 0));
+    /* ⏱ les éclipses vues d'un lieu : gardées (8 lieux en mémoire et dans sessionStorage, au plus ≈ 1,5 Mo ; jamais dans les réglages) */
+    const VU_KEY = 'lcnda-eclipses-vues', VU_V = 1, VU_MAX = 8, vuMem = new Map();
+    let vuStore = null;
+    const vuLoad = () => { if (vuStore) return vuStore; try { const o = JSON.parse(sessionStorage.getItem(VU_KEY) || '[]'); vuStore = Array.isArray(o) ? o : []; } catch (_) { vuStore = []; } return vuStore; };
+    function vuGet(k) {
+        if (vuMem.has(k)) return vuMem.get(k);
+        const hit = vuLoad().find(x => Array.isArray(x) && x[0] === k); if (hit && Array.isArray(hit[1])) { vuMem.set(k, hit[1]); return hit[1]; }
+        return null;
+    }
+    function vuSet(k, v) {
+        vuMem.set(k, v); if (vuMem.size > VU_MAX) vuMem.delete(vuMem.keys().next().value);
+        const list = vuLoad().filter(x => x[0] !== k); list.push([k, v]); while (list.length > VU_MAX) list.shift();
+        try { let txt = JSON.stringify(list); while (txt.length > 1.5e6 && list.length > 1) { list.shift(); txt = JSON.stringify(list); } sessionStorage.setItem(VU_KEY, txt); vuStore = list; } catch (_) { vuStore = list; }
+    }
     let last = null; // {key, rows} : la dernière demande (le moteur relit des pages de la même)
     async function run(query = {}) {
         const key = JSON.stringify({...query, offset: 0, limit: 0});
@@ -150,13 +164,20 @@
         let rows = catalogue().filter(r => yearsOk(r, query.years) && base.every(f => rowMatch(r, f)));
         const near = query.near && Number.isFinite(Number(query.near.lat)) ? {lat: Number(query.near.lat), lon: Number(query.near.lon), name: query.near.title || '', country: query.near.country || ''} : null;
         if (near) {
-            const out = []; let t0 = Date.now();
-            for (const r of rows) {
-                const s = seenFrom(r, near);
-                if (s) out.push({...r, seen: s.text, local: s.local, pct: s.pct, _seenType: s.r.type, _km: Math.round(angDist(near.lat, near.lon, r._lat, r._lon) * 111.2)});
-                if (Date.now() - t0 > 60) { await pause(); t0 = Date.now(); }
+            // ⏱ « vu d'ici » gardé par lieu + années + filtres (mémoire, et sessionStorage : retrouvé en rouvrant la fiche ou la page)
+            const vk = JSON.stringify([near.lat.toFixed(4), near.lon.toFixed(4), near.name, near.country, query.years || null, base, window.LCNDA_I18N?.lang || 'fr', VU_V]);
+            const kept = vuGet(vk);
+            if (kept) { const byId = new Map(rows.map(r => [r.id, r])); rows = kept.map(([id, seen, local, pct, ty, km]) => (byId.has(id) ? {...byId.get(id), seen, local, pct, _seenType: ty, _km: km} : null)).filter(Boolean); }
+            else {
+                const out = []; let t0 = Date.now();
+                for (const r of rows) {
+                    const s = seenFrom(r, near);
+                    if (s) out.push({...r, seen: s.text, local: s.local, pct: s.pct, _seenType: s.r.type, _km: Math.round(angDist(near.lat, near.lon, r._lat, r._lon) * 111.2)});
+                    if (Date.now() - t0 > 60) { await pause(); t0 = Date.now(); }
+                }
+                rows = out;
+                vuSet(vk, out.map(r => [r.id, r.seen, r.local, r.pct, r._seenType, r._km]));
             }
-            rows = out;
         }
         if (loc.length) rows = rows.filter(r => loc.every(f => rowMatch(r, f)));
         const q = fold(query.q || '').trim();

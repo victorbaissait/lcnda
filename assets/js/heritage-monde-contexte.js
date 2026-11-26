@@ -291,7 +291,9 @@
             <button type="button" class="table-link" data-mc-list>${esc(T('Voir les pays de toute la famille en chiffres →'))}</button>` : ''}`;
     }
     const scan = () => document.querySelectorAll('[data-mc-host]:not([data-mc-done])').forEach(h => { h.dataset.mcDone = '1'; ensureCss(); fill(h); });
-    new MutationObserver(scan).observe(document.documentElement, {childList: true, subtree: true});
+    // ⏱ seulement quand un hôte arrive (avant : toute la page relue à chaque changement, ≈ 0,3 à 1,2 s sur une fiche)
+    const HOST = '[data-mc-host]';
+    new MutationObserver(recs => { for (const r of recs) for (const n of r.addedNodes) if (n.nodeType === 1 && (n.matches(HOST) || n.querySelector(HOST))) { scan(); return; } }).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ─────────── 🌍 Listes → Histoire → « Les pays de ta famille en chiffres » ─────────── */
     const LIST = 'pays_chiffres';

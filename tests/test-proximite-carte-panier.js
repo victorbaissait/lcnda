@@ -28,13 +28,15 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
     };
     const PROX = {proximitySearch: {placeId: 1, placeName: 'Treignac', dateMode: 'range', yearFrom: 1780, yearTo: 1800, radiusKm: 10}};
     const openProx = () => research('proximity', PROX, '#workspace .research-person-card[data-rk-id]');
-    const menu = async () => { await clean(); await p.click('#workspace [data-rk-export]'); await p.waitForSelector('.ui-actmenu'); return p.$$eval('.ui-actmenu .ui-actmenu-i', a => a.map(x => x.textContent.trim())); };
-    const menuPick = async re => { const b = p.locator('.ui-actmenu .ui-actmenu-i').filter({hasText: re}).first(); await b.click(); };
+    /** « ⤓ Exporter ▾ » : la fenêtre d'export commune ; ses formats (📊 CSV, 🖨, puis 🧺 et 📎 là où ça a un sens) */
+    const menu = async () => { await clean(); await p.click('#workspace .page-header [data-rp-export]'); await p.waitForSelector('dialog.ui-export'); return p.$$eval('dialog.ui-export .ui-export-fmt', a => a.map(x => x.textContent.trim())); };
+    const menuPick = async re => { await p.locator('dialog.ui-export .ui-export-fmt').filter({hasText: re}).first().click(); await p.click('dialog.ui-export [data-ui-go]'); await sleep(300); };
+    const actPick = async re => { await p.locator('.ui-actmenu .ui-actmenu-i').filter({hasText: re}).first().click(); };
     try {
         await p.evaluate(() => { try { localStorage.removeItem('genealogie-proximite-carte'); } catch (_) {} });
         await t('Proximité : « 🗺 Carte » avant « ⤓ Exporter ▾ », fermée au départ ; elle monte avec les points, le rayon et la légende', async () => {
             await openProx();
-            const order = await p.$$eval('#workspace .page-header .ui-ph-actions > button:not([hidden])', a => a.map(x => (x.matches('[data-rk-map-btn]') ? 'map' : x.matches('[data-rk-export]') ? 'export' : x.matches('[data-rp-print]') ? 'print' : '?')));
+            const order = await p.$$eval('#workspace .page-header .ui-ph-actions > button:not([hidden])', a => a.map(x => (x.matches('[data-rk-map-btn]') ? 'map' : x.matches('[data-rp-export]') ? 'export' : x.matches('[data-rp-print]') ? 'print' : '?')));
             assert.deepStrictEqual(order.filter(x => x !== '?').slice(0, 2), ['map', 'export'], order.join(','));
             assert.ok(await p.$('#workspace .page-header [data-rp-print]'), '🖨 Imprimer reste (à côté, ou dans « ⋯ » : deux boutons au plus, la règle des en-têtes)');
             assert.strictEqual(await p.$$eval('#workspace .page-header [data-rp-export], #workspace .page-header [data-rk-export]', a => a.length), 1, 'un seul « Exporter »');
@@ -83,21 +85,20 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         });
         await t('Proximité : ⤓ Exporter ▾ → l’export d’avant, 🧺 Mettre dans le panier (tout) et ↶', async () => {
             const items = await menu();
-            assert.ok(items.some(x => /CSV ou impression/.test(x)) && items.some(x => /Mettre dans le panier/.test(x)) && items.some(x => /Insérer…/.test(x)), items.join(' | '));
+            assert.ok(items.some(x => /CSV/.test(x)) && items.some(x => /Mettre dans le panier/.test(x)) && items.some(x => /Insérer…/.test(x)), items.join(' | '));
+            assert.ok(items.findIndex(x => /CSV/.test(x)) < items.findIndex(x => /panier/.test(x)), 'après les exports d’avant');
             const total = await p.$$eval('#workspace .research-person-card', a => a.length);
             const before = await basketN();
             await menuPick(/Mettre dans le panier/); await sleep(1200);
             if (await p.$('.ui-actmenu')) { await p.locator('.ui-actmenu .ui-actmenu-i').first().click(); await sleep(1200); } // plusieurs paniers : le premier
             assert.strictEqual(await basketN(), before + total, 'toutes les personnes');
             await undo(); assert.strictEqual(await basketN(), before, '↶');
-            // l'export d'avant (la fenêtre CSV / impression) est toujours là
-            await menu(); await menuPick(/CSV ou impression/); await p.waitForSelector('dialog[open]', {timeout: 5000}); await clean();
         });
         await t('Proximité : ☑ cocher deux personnes → 🧺 seulement elles ; 📎 / 🧺 au bout d’une carte', async () => {
             const boxes = p.locator('#workspace .research-person-card [data-rp-pick]');
             await boxes.nth(0).check(); await boxes.nth(1).check();
             assert.match(await p.textContent('#workspace [data-rp-count]'), /2/);
-            const items = await menu(); assert.ok(items.some(x => /Mettre dans le panier \(2/.test(x)), items.join(' | '));
+            const items = await menu(); assert.ok(items.some(x => /panier.*2 cochés/.test(x)), items.join(' | '));
             const before = await basketN();
             await menuPick(/Mettre dans le panier/); await sleep(1200);
             if (await p.$('.ui-actmenu')) { await p.locator('.ui-actmenu .ui-actmenu-i').first().click(); await sleep(1200); }
@@ -118,7 +119,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
             const notes = async () => (await B.api('person', {id: 1})).notes || [];
             const before = (await notes()).length;
             await menu(); await menuPick(/Insérer…/); await p.waitForSelector('.ui-actmenu .ui-actmenu-i', {timeout: 5000});
-            await menuPick(/Dans une note, une enquête/);
+            await actPick(/Dans une note, une enquête/);
             await p.waitForSelector('.cx-put [data-cx-dest="note"]', {timeout: 10000});
             await p.click('.cx-put [data-cx-dest="note"]'); await p.click('.cx-put [data-cx-putgo]'); await sleep(1500);
             const after = await notes(); assert.strictEqual(after.length, before + 1, 'une note de plus');
@@ -138,7 +139,7 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
             const items = await menu(); assert.ok(items.some(x => /Mettre dans le panier/.test(x)), items.join(' | ')); await clean();
         });
         await t('Nom de lieu avec joker : 🗺 Carte des lieux trouvés, 🧺 📎 dans Exporter', async () => {
-            await research('place_name', {placeNameSearch: {q: 'Tr*', country: '', division: ''}}, '#workspace [data-rk-export]');
+            await research('place_name', {placeNameSearch: {q: 'Tr*', country: '', division: ''}}, '#workspace [data-rk-map-btn]');
             assert.ok(await p.$('#workspace [data-rk-map-btn]'), 'les lieux ont des coordonnées');
             await p.click('[data-rk-map-btn]'); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'});
             const items = await menu(); assert.ok(items.some(x => /Insérer…/.test(x))); await clean();
@@ -152,8 +153,8 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         await t('Chercher et remplacer : rien de nouveau (ni carte, ni 🧺 📎)', async () => {
             await research('replace', {}, '#workspace [data-rp-replace-form]');
             assert.strictEqual(await p.$('#workspace [data-rk-map-btn]'), null);
-            assert.strictEqual(await p.$('#workspace [data-rk-export]'), null);
-            assert.ok(await p.$('#workspace [data-rp-export]:not([hidden])'), 'l’export d’avant reste');
+            const items = await menu(); assert.ok(!items.some(x => /panier|Insérer/.test(x)), items.join(' | ')); await clean();
+            assert.strictEqual(await p.$('#workspace .rk-row-acts'), null);
         });
         await t('Mode consultation : ni 🧺 ni 📎 ; la carte reste, sans tuile d’Internet', async () => {
             await p.evaluate(() => document.body.classList.add('is-kiosk'));
