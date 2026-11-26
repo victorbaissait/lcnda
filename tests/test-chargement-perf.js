@@ -126,8 +126,10 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
             await t('observateurs de la page regroupés par image : un appel, tous les changements ; disconnect / takeRecords', async () => {
                 const r = await page.evaluate(async () => {
                     const out = {};
-                    const calls = []; const o = new MutationObserver(recs => calls.push(recs.length)); o.observe(document.body, { childList: true, subtree: true });
-                    const box = document.createElement('div'); box.id = 'perf-essai'; document.body.append(box); // 1er appel : tout de suite (microtâche)
+                    // seulement les changements de l'essai (le reste de la page peut bouger en même temps)
+                    const box = document.createElement('div'); box.id = 'perf-essai';
+                    const mine = recs => recs.filter(r => r.target === box || r.target === document.body && [...r.addedNodes].includes(box) || box.contains(r.target)).length;
+                    const calls = []; const o = new MutationObserver(recs => { const n = mine(recs); if (n) calls.push(n); }); o.observe(document.body, { childList: true, subtree: true }); document.body.append(box); // 1er appel : tout de suite (microtâche)
                     await Promise.resolve(); out.first = calls.slice();
                     for (let i = 0; i < 5; i++) { box.append(document.createElement('span')); await new Promise(r => setTimeout(r, 0)); } // 5 tâches dans la même image
                     out.beforeFrame = calls.length;
@@ -140,7 +142,7 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
                     const im = []; const o3 = new MutationObserver(recs => im.push(recs.length)); o3.observe(document.body, { childList: true, subtree: true, lcndaImmediate: true });
                     box.append('c'); await Promise.resolve(); box.append('d'); await Promise.resolve(); out.im = im.slice(); o3.disconnect();
                     // takeRecords rend ce qui attend ; disconnect l'oublie
-                    box.append(document.createElement('i')); await Promise.resolve(); box.append(document.createElement('b')); out.taken = o.takeRecords().length;
+                    box.append(document.createElement('i')); await Promise.resolve(); box.append(document.createElement('b')); out.taken = mine(o.takeRecords());
                     box.append(document.createElement('u')); await new Promise(r => setTimeout(r, 0)); box.append(document.createElement('s')); await new Promise(r => setTimeout(r, 0));
                     const n0 = calls.length; o.disconnect(); await new Promise(r => requestAnimationFrame(() => setTimeout(r, 120))); out.afterDisconnect = calls.length - n0;
                     o2.disconnect(); box.remove();
