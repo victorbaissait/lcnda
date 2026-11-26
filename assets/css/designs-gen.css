@@ -6512,6 +6512,150 @@
 :root[data-lc-density] .cx-qi-bk{padding:calc(2px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(6px * var(--lc-sp))}
 :root[data-lc-density] .cx-qi-bk input{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .cx-qi-chipb{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+/* paniers.css */
+:root[data-lc-density] .pn-b,:root[data-lc-density] .pn-dlg .pn-b{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-b,:root[data-lc-density] .pn-dlg .pn-b{padding:calc(7px * var(--lc-sp)) calc(13px * var(--lc-sp))}
+:root .pn-b.is-pri:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .pn-b.is-sec:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .pn-b.is-ter:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .pn-b.is-sm{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-pill{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pn-pill{padding:calc(3px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-tb{gap:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-tb{padding:calc(16px * var(--lc-sp)) calc(24px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-smart{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-smart{padding:calc(9px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-tbb{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-strip{padding:calc(12px * var(--lc-sp)) calc(24px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-striph{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-tgl{padding:calc(3px * var(--lc-sp)) 0}
+:root[data-lc-density] .pn-tgl{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-nb{padding:0 calc(7px * var(--lc-sp))}
+:root[data-lc-density] .pn-sgrid{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-sgrid{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-sg{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-sg{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-sgt{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-sga{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-more{padding:calc(6px * var(--lc-sp)) calc(4px * var(--lc-sp)) 0}
+:root[data-lc-density] .pn-tree{padding:calc(16px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .pn-treeh{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-treeh{padding:0 calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-tr{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-tsec.is-arch{margin-top:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .pn-tsec.is-arch{padding:calc(4px * var(--lc-sp)) 0}
+:root[data-lc-density] .pn-mscroll{padding:calc(20px * var(--lc-sp)) calc(26px * var(--lc-sp)) calc(24px * var(--lc-sp))}
+:root[data-lc-density] .pn-mfoot{padding:calc(12px * var(--lc-sp)) calc(26px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-mfoot{gap:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-in,:root[data-lc-density] .pn-num{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-num{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-empty{padding:calc(28px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .pn-bh h3{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-bhead{gap:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-pinb{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pn-meta{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-meta{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-tag{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-tag{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-dests{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-dest{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pn-dest{padding:calc(3px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .pn-acts{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-qline{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-qline{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-live{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-lmode{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-lmode{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-news{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-news{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-bs{padding:calc(12px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-bs h5{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-bsr{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-bsr{padding:calc(8px * var(--lc-sp)) 0}
+:root[data-lc-density] .pn-ltools{gap:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-srch input{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-seg button{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-ghd button{padding:calc(6px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-it{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-it{padding:calc(12px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-grip{padding-top:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .pn-pk{padding-top:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .pn-itx{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .pn-note{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-ir{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-stt{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-mv button,:root[data-lc-density] .pn-xb{padding:calc(3px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .pn-xb{padding:calc(4px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .pn-frise{padding:0 0 0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pn-frise li{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-frise li{padding:calc(6px * var(--lc-sp)) 0 calc(6px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .pn-fr,:root[data-lc-density] .pn-fi{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-fi{padding-top:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pn-fi{padding-bottom:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pn-ssin{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-ssin input{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .pn-ex{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-chip{padding:calc(4px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .pn-box{padding:calc(14px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .pn-box h4{gap:calc(8px * var(--lc-sp))}
+:root .pn-und:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .pn-crow{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-crow{padding:calc(8px * var(--lc-sp)) 0}
+:root[data-lc-density] .pn-cl{padding-top:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-cv{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-rad button{padding:calc(3px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .pn-rad span{padding:0 calc(4px * var(--lc-sp))}
+:root .pn-nope:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .pn-nope ul,:root[data-lc-density] .pn-missb ul{padding-left:calc(18px * var(--lc-sp))}
+:root .pn-missb:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .pn-missb li{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-missb li{padding:calc(4px * var(--lc-sp)) 0}
+:root .pn-res:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .pn-gh2{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-gh2{padding:calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-rr{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-rr{padding:calc(9px * var(--lc-sp)) calc(6px * var(--lc-sp)) calc(9px * var(--lc-sp)) calc(34px * var(--lc-sp))}
+:root[data-lc-density] .pn-news .pn-rr,:root[data-lc-density] .pn-dlg .pn-rr{padding-left:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-yn button{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-rtx{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .pn-gempty{padding:calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(34px * var(--lc-sp))}
+:root[data-lc-density] .pn-dlgb{padding:calc(20px * var(--lc-sp)) calc(24px * var(--lc-sp))}
+:root[data-lc-density] .pn-dlg .pn-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-dlg .pn-row{margin-top:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .pn-dlg .pn-f{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pn-dlg .pn-f input,:root[data-lc-density] .pn-dlg .pn-f select{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-dlg .pn-flds{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-dlg .pn-flds{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-dlg .pn-sum{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-shl li{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-shl li{padding:calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-chk{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pn-chkl{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pn-covers{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-cov{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pn-cmp{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-cmp{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pn-cmpc li{padding:calc(4px * var(--lc-sp)) 0}
+:root[data-lc-density] .pn-miss li{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pn-miss li{padding:calc(8px * var(--lc-sp)) 0}
+@container pn (max-width: 720px){
+  :root[data-lc-density] .pn-tb{padding:calc(12px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .pn-tb{gap:calc(10px * var(--lc-sp))}
+  :root[data-lc-density] .pn-crumbbtn{gap:calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .pn-crumbbtn{padding:calc(9px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .pn-strip{padding:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .pn-tree{padding:calc(14px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+  :root[data-lc-density] .pn-mscroll{padding:calc(14px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+  :root[data-lc-density] .pn-mfoot{padding:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .pn-it{gap:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+  :root[data-lc-density] .pn-it{padding:calc(10px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .pn-crow{gap:calc(4px * var(--lc-sp))}
+  :root[data-lc-density] .pn-rr{padding-left:calc(6px * var(--lc-sp))}
+  :root[data-lc-density] .pn-gempty{padding-left:calc(6px * var(--lc-sp))}
+}
+@media (max-width: 560px){
+  :root[data-lc-density] .pn-dlgb{padding:calc(16px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+}
 /* comptes-famille.css */
 :root[data-lc-density] .cf-n{padding:0 calc(5px * var(--lc-sp))}
 :root[data-lc-density] .cf-table th,:root[data-lc-density] .cf-table td{padding:calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp))}

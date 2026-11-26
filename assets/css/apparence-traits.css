@@ -4000,6 +4000,76 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .cx-qi-bk input, :root .cx-qi-bk input:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
 :root.lc-frame .cx-qi-chipb, :root .cx-qi-chipb:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
 :root.lc-frame .cx-qi-chipb.is-pri, :root .cx-qi-chipb.is-pri:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--q-blue)}
+/* paniers.css */
+:root.lc-frame .pn, :root .pn:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-b.is-pri, :root .pn-b.is-pri:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-blue)}
+:root.lc-frame .pn-b.is-sec, :root .pn-b.is-sec:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-b.is-sec[aria-pressed="true"], :root .pn-b.is-sec[aria-pressed="true"]:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--pn-blue)}
+:root.lc-frame .pn-b.is-ter, :root .pn-b.is-ter:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .pn-tb, :root .pn-tb:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--pn-line)}
+:root.lc-frame .pn-smart, :root .pn-smart:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-smart:hover, :root .pn-smart:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--pn-blue)}
+:root.lc-frame .pn-strip, :root .pn-strip:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--pn-line)}
+:root.lc-frame .pn-tgl, :root .pn-tgl:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-sg, :root .pn-sg:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-more, :root .pn-more:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-tree, :root .pn-tree:is([data-lc-lines], [data-lc-lines] *) {border-right:1px solid var(--pn-line)}
+:root.lc-frame .pn-tr, :root .pn-tr:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .pn-tr.is-drop, :root .pn-tr.is-drop:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--pn-blue)}
+:root.lc-frame .pn-tw, :root .pn-tw:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-tsec, :root .pn-tsec:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-mfoot, :root .pn-mfoot:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--pn-line2)}
+:root.lc-frame .pn-in, :root .pn-in:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pn-num, :root .pn-num:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-cover, :root .pn-cover:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-pinb, :root .pn-pinb:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-tag, :root .pn-tag:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-tag.is-due, :root .pn-tag.is-due:is([data-lc-lines], [data-lc-lines] *) {border-color:transparent}
+:root.lc-frame .pn-live, :root .pn-live:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-blue)}
+:root.lc-frame .pn-bs, :root .pn-bs:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed var(--pn-yel)}
+:root.lc-frame .pn-bsr, :root .pn-bsr:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid rgba(0, 0, 0, .06)}
+:root.lc-frame .pn-srch input, :root .pn-srch input:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-seg, :root .pn-seg:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-seg button, :root .pn-seg button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-seg button + button, :root .pn-seg button + button:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid var(--pn-line2)}
+:root.lc-frame .pn-ghd button, :root .pn-ghd button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-it, :root .pn-it:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .pn-it + .pn-it, :root .pn-it + .pn-it:is([data-lc-lines], [data-lc-lines] *) {border-top-color:var(--pn-line)}
+:root.lc-frame .pn-note, :root .pn-note:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed var(--pn-line2)}
+:root.lc-frame .pn-note:focus, :root .pn-note:focus:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:var(--pn-blue)}
+:root.lc-frame .pn-stt, :root .pn-stt:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-mv, :root .pn-mv:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-mv button, :root .pn-mv button:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pn-xb, :root .pn-xb:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-mv button + button, :root .pn-mv button + button:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid var(--pn-line2)}
+:root.lc-frame .pn-frise, :root .pn-frise:is([data-lc-lines], [data-lc-lines] *) {border-left:2px solid var(--pn-line2)}
+:root.lc-frame .pn-fdot, :root .pn-fdot:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--pn-bg)}
+:root.lc-frame .pn-fr, :root .pn-fr:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pn-fi, :root .pn-fi:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--pn-line)}
+:root.lc-frame .pn-fi, :root .pn-fi:is([data-lc-lines], [data-lc-lines] *) {border-top:0}
+:root.lc-frame .pn-lnk, :root .pn-lnk:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-ssin input, :root .pn-ssin input:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-chip, :root .pn-chip:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-chip[aria-pressed="true"], :root .pn-chip[aria-pressed="true"]:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--pn-blue)}
+:root.lc-frame .pn-und, :root .pn-und:is([data-lc-lines], [data-lc-lines] *) {border:1px solid rgba(5, 93, 255, .25)}
+:root.lc-frame .pn-crow, :root .pn-crow:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid rgba(5, 93, 255, .15)}
+:root.lc-frame .pn-crow:first-of-type, :root .pn-crow:first-of-type:is([data-lc-lines], [data-lc-lines] *) {border-top:0}
+:root.lc-frame .pn-rad, :root .pn-rad:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-blue)}
+:root.lc-frame .pn-rad button, :root .pn-rad button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-nope, :root .pn-nope:is([data-lc-lines], [data-lc-lines] *) {border:1px solid rgba(212, 168, 0, .35)}
+:root.lc-frame .pn-missb, :root .pn-missb:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-res, :root .pn-res:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-gh2, :root .pn-gh2:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--pn-line)}
+:root.lc-frame .pn-rr, :root .pn-rr:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--pn-line)}
+:root.lc-frame .pn-yn, :root .pn-yn:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-yn button, :root .pn-yn button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pn-yn button + button, :root .pn-yn button + button:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid var(--pn-line2)}
+:root.lc-frame .pn-gempty, :root .pn-gempty:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--pn-line)}
+:root.lc-frame dialog.pn-dlg, :root dialog.pn-dlg:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-dlg .pn-f input, :root .pn-dlg .pn-f input:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pn-dlg .pn-f select, :root .pn-dlg .pn-f select:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-shl li, :root .pn-shl li:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--pn-line)}
+:root.lc-frame .pn-cov span, :root .pn-cov span:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-cmpc li, :root .pn-cmpc li:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--pn-line)}
+:root.lc-frame .pn-miss li, :root .pn-miss li:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--pn-line)}
+:root.lc-frame .pn-crumbbtn, :root .pn-crumbbtn:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--pn-line2)}
+:root.lc-frame .pn-tree, :root .pn-tree:is([data-lc-lines], [data-lc-lines] *) {border-right:0;border-bottom:1px solid var(--pn-line2)}
 /* assistant-ia.css */
 :root.lc-frame .aia-panel, :root .aia-panel:is([data-lc-lines], [data-lc-lines] *) {border-left:2px solid var(--ink,#111)}
 :root.lc-frame .aia-head, :root .aia-head:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#e5e5e5)}
