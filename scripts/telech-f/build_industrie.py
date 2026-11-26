@@ -27,7 +27,7 @@ def year(t):
 
 def build(name, kinds):
     vals = ' '.join('wd:' + k for k in kinds)
-    q = f'''SELECT ?x ?xl ?k ?c ?s ?e ?ins ?coml ?fr WHERE {{ VALUES ?k {{ {vals} }} ?x wdt:P31/wdt:P279? ?k ; wdt:P17 wd:Q142 ; wdt:P625 ?c .
+    q = f'''SELECT ?x ?xl ?k ?c ?s ?e ?ins ?coml ?fr WHERE {{ VALUES ?k {{ {vals} }} ?x wdt:P31 ?k ; wdt:P17 wd:Q142 ; wdt:P625 ?c .
       OPTIONAL {{ ?x wdt:P571 ?s }} OPTIONAL {{ ?x wdt:P576|wdt:P582 ?e }}
       OPTIONAL {{ ?x wdt:P131 ?com . ?com wdt:P374 ?ins ; rdfs:label ?coml FILTER(LANG(?coml)="fr") }}
       OPTIONAL {{ ?fr schema:about ?x ; schema:isPartOf <https://fr.wikipedia.org/> }}

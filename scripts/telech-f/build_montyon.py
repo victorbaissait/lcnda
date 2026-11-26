@@ -18,10 +18,7 @@ qid = lambda u: (u or '').rsplit('/', 1)[-1]
 
 
 def main():
-    q = '''SELECT ?x ?xl ?y ?p ?pl ?c ?ins ?how ?fr ?d WHERE {
-      ?x p:P166 ?st . ?st ps:P166 wd:Q33139180 . OPTIONAL { ?st pq:P585 ?y }
-      OPTIONAL { { ?x wdt:P551 ?p . BIND("res" AS ?how) } UNION { ?x wdt:P19 ?p . BIND("nai" AS ?how) }
-                 ?p wdt:P625 ?c ; rdfs:label ?pl FILTER(LANG(?pl)="fr") OPTIONAL { ?p wdt:P374 ?ins } }
+    q = '''SELECT ?x ?xl ?y ?fr ?d WHERE { ?x p:P166 ?st . ?st ps:P166 wd:Q33139180 . OPTIONAL { ?st pq:P585 ?y }
       OPTIONAL { ?fr schema:about ?x ; schema:isPartOf <https://fr.wikipedia.org/> }
       OPTIONAL { ?x schema:description ?d FILTER(LANG(?d)="fr") }
       ?x rdfs:label ?xl FILTER(LANG(?xl)="fr") }'''
@@ -32,12 +29,16 @@ def main():
         if b.get('y'):
             y = int(b['y']['value'][:4])
             r['y'] = y if r['y'] is None else min(r['y'], y)
-        m = re.match(r'Point\(([-\d.eE]+) ([-\d.eE]+)\)', b.get('c', {}).get('value', ''))
-        better = m and (r['lat'] is None or (b['how']['value'] == 'res' and r['how'] != 'res') or (b.get('ins') and not r['insee'] and b['how']['value'] == r['how']))
-        if better:
-            r.update({'place': b['pl']['value'], 'how': b['how']['value'], 'insee': b.get('ins', {}).get('value', ''), 'lat': round(float(m.group(2)), 5), 'lon': round(float(m.group(1)), 5)})
         if b.get('fr') and not r['frwiki']:
             r['frwiki'] = urllib.parse.unquote(b['fr']['value'].rsplit('/wiki/', 1)[-1]).replace('_', ' ')
+    vals = ' '.join('wd:' + x for x in rows)
+    for prop, how in (('P19', 'nai'), ('P551', 'res')):  # la résidence (P551) passe avant le lieu de naissance
+        q2 = f'SELECT ?x ?pl ?c ?ins WHERE {{ VALUES ?x {{ {vals} }} ?x wdt:{prop} ?p . ?p wdt:P625 ?c ; rdfs:label ?pl FILTER(LANG(?pl)="fr") OPTIONAL {{ ?p wdt:P374 ?ins }} }}'
+        for b in wm.sparql(q2):
+            r = rows[qid(b['x']['value'])]
+            m = re.match(r'Point\(([-\d.eE]+) ([-\d.eE]+)\)', b['c']['value'])
+            if m and (r['how'] != how or (b.get('ins') and not r['insee'])):
+                r.update({'place': b['pl']['value'], 'how': how, 'insee': b.get('ins', {}).get('value', ''), 'lat': round(float(m.group(2)), 5), 'lon': round(float(m.group(1)), 5)})
     out = sorted(rows.values(), key=lambda r: (r['y'] or 9999, r['n']))
     fields = ['q', 'n', 'y', 'place', 'how', 'insee', 'lat', 'lon', 'frwiki', 'd']
     meta = {'source': 'Wikidata (prix de vertu Montyon, Q33139180)', 'licence': 'CC0 1.0', 'licence_url': 'https://creativecommons.org/publicdomain/zero/1.0/deed.fr',

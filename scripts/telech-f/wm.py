@@ -135,7 +135,8 @@ def communes(root):
     """les communes de France livrées avec l'app (assets/data/cc-communes.json.gz : Licence Ouverte) → {insee: (nom, lat, lon)}"""
     import gzip
     d = json.load(gzip.open(os.path.join(root, 'assets', 'data', 'cc-communes.json.gz')))
-    return {k: (v[0], v[1], v[2]) for k, v in d['c']}
+    c = d['c']
+    return {k: (v[0], v[1], v[2]) for k, v in (c.items() if isinstance(c, dict) else c)}
 
 
 def today():
