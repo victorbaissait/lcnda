@@ -118,7 +118,7 @@
         return comps.filter(c => (c.c === 'jo' || c.c === 'joh') && c.y >= (s.birth ?? s.from) && c.y <= s.to).map(c => {
             let best = null; if (num(c.lat) !== null) for (const e of ev) { const k = km(e.lat, e.lon, c.lat, c.lon); if (!best || k < best.km) best = {km: k, place: e.name}; }
             return {c, age: ageAt(life, c.y), ...(best || {km: null, place: ''})};
-        }).sort((a, b) => Number((b.km ?? 1e9) <= 500) - Number((a.km ?? 1e9) <= 500) || (a.km ?? 1e9) - (b.km ?? 1e9) || a.c.y - b.c.y);
+        }).sort((a, b) => Number((b.age ?? 0) >= 8) - Number((a.age ?? 0) >= 8) || Number((b.km ?? 1e9) <= 800) - Number((a.km ?? 1e9) <= 800) || (a.km ?? 1e9) - (b.km ?? 1e9) || a.c.y - b.c.y);
     }
 
     /* ── 📍 le sport près de chez lui ── */
@@ -217,11 +217,11 @@
     const nf = n => Number(n || 0).toLocaleString('fr-FR');
     const kmTxt = k => (k < 1.5 ? T('sur place') : T('{n} km', {n: String(Math.round(k))}));
     const link = (url, label) => { const u = safeUrl(url); return u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label); };
-    const srcLink = url => { const u = safeUrl(url); return u ? `<a class="tm-src-link" href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : ''; };
-    const row = (icon, html, src, extra = '') => `<div class="hist-row tm-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
-    const more = (html, n) => (html ? `<details class="tm-more"><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
+    const srcLink = url => { const u = safeUrl(url); return u ? `<a class="tsx-src-link" href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : ''; };
+    const row = (icon, html, src, extra = '') => `<div class="hist-row tsx-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
+    const more = (html, n) => (html ? `<details class="tsx-more"><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
     const hyp = t => `<small class="muted hist-hyp">${esc(t)}</small>`;
-    const quote = t => (t ? `<q class="tm-quote">${esc(t)}</q>` : '');
+    const quote = t => (t ? `<q class="tsx-quote">${esc(t)}</q>` : '');
     const emptyLine = (t, icon = 'ℹ️') => (A().empty ? A().empty(t, {icon}) : `<p class="muted">${esc(t)}</p>`);
     const wd = q => (isQ(q) ? `https://www.wikidata.org/wiki/${q}` : '');
     const wp = (t, host = 'fr') => (t ? `https://${host}.wikipedia.org/wiki/${encodeURIComponent(String(t).replace(/ /g, '_'))}` : '');
@@ -281,12 +281,14 @@
     const EXPO_KIND = {universelle: 'Exposition universelle', internationale: 'Exposition internationale', coloniale: 'Exposition coloniale', nationale: 'Exposition nationale ou régionale', produits: 'Exposition des produits de l’industrie', horticole: 'Exposition horticole'};
     const expoSrc = r => (r.q ? wd(r.q) : r.fr ? wp(r.fr) : r.url || '');
     const iaLink = c => (/^[A-Za-z0-9._-]+$/.test(c[0] || '') ? `https://archive.org/details/${c[0]}` : '');
-    const catsHtml = r => (r.cat?.length ? `<p class="muted tm-links">${esc(T('Catalogues de l’époque à feuilleter (Internet Archive) — on y cherche soi-même le nom d’un exposant :'))} ${r.cat.map(c => link(iaLink(c), `↗ ${c[1]}${c[2] ? ` (${c[2]})` : ''}`)).join(' · ')}</p>` : '');
+    const iaSearch = r => `https://archive.org/search?query=${encodeURIComponent(`catalogue exposition ${r.y}`)}&sin=TXT`;
+    const catsHtml = r => ((r.cat?.length || (r.country === 'France' && r.y <= 1937)) ? `<p class="muted tsx-links">${esc(T('Catalogues de l’époque à feuilleter (Internet Archive) — on y cherche soi-même le nom d’un exposant :'))} ${(r.cat || []).map(c => link(iaLink(c), `↗ ${c[1]}${c[2] ? ` (${c[2]})` : ''}`)).join(' · ')}${r.cat?.length ? ' · ' : ''}${link(iaSearch(r), T('↗ d’autres catalogues de {y}', {y: String(r.y)}))}</p>` : '');
     function zooHtml(r, meta) {
         if (r.k !== 'coloniale') return '';
         const Z = meta.zoo || {};
         const refs = (Z.refs || []).map(x => link(x[1], x[0])).join(' ; ');
-        return `<div class="tm-zoo"><p>${esc(T('Comme dans beaucoup d’expositions coloniales, des hommes, des femmes et des enfants venus des colonies y furent montrés au public dans des « villages » reconstitués : ce qu’on appelle aujourd’hui des « zoos humains ».'))}</p>${r.zoo ? `${quote(r.zoo)} ${srcLink(wp(r.fr))}` : ''}<small class="muted">${esc(T('Pour comprendre :'))} ${link(Z.url || 'https://fr.wikipedia.org/wiki/Zoo_humain', T('« Zoo humain » (Wikipédia)'))}${refs ? ` ; ${refs}` : ''}</small></div>`;
+        // ce que dit l'article de cette exposition, s'il le dit ; sinon le fait général, sans l'affirmer pour celle-ci
+        return `<div class="tsx-zoo"><p>${esc(T(r.zoo ? 'Comme dans beaucoup d’expositions coloniales, des hommes, des femmes et des enfants venus des colonies y furent montrés au public dans des « villages » reconstitués : ce qu’on appelle aujourd’hui des « zoos humains ».' : 'Beaucoup d’expositions coloniales montraient au public, dans des « villages » reconstitués, des hommes, des femmes et des enfants venus des colonies : ce qu’on appelle aujourd’hui des « zoos humains ». La source ne dit pas si ce fut le cas ici.'))}</p>${r.zoo ? `${quote(r.zoo)} ${srcLink(wp(r.fr))}` : ''}<small class="muted">${esc(T('Pour comprendre :'))} ${link(Z.url || 'https://fr.wikipedia.org/wiki/Zoo_humain', T('« Zoo humain » (Wikipédia)'))}${refs ? ` ; ${refs}` : ''}</small></div>`;
     }
     const expoLi = (x, meta) => { const r = x.r || x; return `<li>🎪 <b>${link(expoSrc(r), r.n)}</b> <small class="muted">(${esc([String(r.y) + (r.y2 && r.y2 !== r.y ? `–${r.y2}` : ''), r.city, T(EXPO_KIND[r.k] || r.k || ''), r.vis ? T('{n} visiteurs', {n: nf(r.vis)}) : '', x.km !== undefined ? kmTxt(x.km) : '', x.age !== undefined && x.age !== null ? T('{a} ans', {a: String(x.age)}) : ''].filter(Boolean).join(' · '))})</small> ${srcLink(expoSrc(r))}${r.line ? quote(r.line) : ''}${r.refnec ? hyp(T('Wikipédia demande une source pour ces chiffres.')) : ''}${zooHtml(r, meta)}${catsHtml(r)}</li>`; };
 
@@ -303,7 +305,7 @@
             const first = list[0];
             const lead = `${esc(T(KIND[first.kind], {d: dateTxt(first.d)}))} : ${item(first.items[0])}`;
             const rest = list.flatMap(x => x.items.map((it, i) => (x === first && i === 0 ? '' : `<li><b>${esc(T(KIND[x.kind], {d: dateTxt(x.d)}))}</b> : ${item(it)}</li>`))).filter(Boolean);
-            return row('📅', lead, `${LIC.wd()} · ${LIC.res()}`, more(rest.length ? `<ul class="hist-ul tm-ul">${rest.join('')}</ul>` : '', rest.length));
+            return row('📅', lead, `${LIC.wd()} · ${LIC.res()}`, more(rest.length ? `<ul class="hist-ul tsx-ul">${rest.join('')}</ul>` : '', rest.length));
         },
         jeux: async life => {
             const C = await rowsOf('comps'); const list = gamesOfLife(C.rows, life); if (!list.length) return '';
@@ -311,7 +313,7 @@
             const where = x.km !== null && x.km < 600 ? T('à {k} de {p}', {k: kmTxt(x.km), p: x.place}) : '';
             const lead = x.age !== null ? T('{He} avait {a} ans aux {n} ({c}){w}.', {He: He(life.person), a: String(x.age), n: esc(x.c.n), c: esc(x.c.place || ''), w: where ? `, ${esc(where)}` : ''})
                 : T('De son vivant : les {n} ({c}).', {n: esc(x.c.n), c: esc(x.c.place || '')});
-            return row('🏅', `${lead} ${srcLink(compSrc(x.c))}`, LIC.wd(), more(`<ul class="hist-ul tm-ul">${list.slice(1).map(y => compLi(y.c, M, y.age !== null ? ` <small class="muted">· ${esc(T('{a} ans', {a: String(y.age)}))}</small>` : '')).join('')}</ul>`, list.length - 1));
+            return row('🏅', `${lead} ${srcLink(compSrc(x.c))}`, LIC.wd(), more(`<ul class="hist-ul tsx-ul">${list.slice(1).sort((p, q) => p.c.y - q.c.y).map(y => compLi(y.c, M, y.age !== null ? ` <small class="muted">· ${esc(T('{a} ans', {a: String(y.age)}))}</small>` : '')).join('')}</ul>`, list.length - 1));
         },
         pres: async life => {
             const r = radius();
@@ -322,12 +324,12 @@
                 const g = cs[0], last = g.eds.at(-1);
                 const lead = T('{c} : à {k} de {p}, {n} éditions de son vivant ({a}–{b}).', {c: `<b>${esc(compLabel(M, g.c))}</b>`, k: esc(kmTxt(g.km)), p: esc(g.place), n: String(g.eds.length), a: String(g.eds[0].y), b: String(last.y)});
                 const li = cs.flatMap(x => x.eds.slice(-12).reverse().map(c => compLi(c, M)));
-                out.push(row('🏆', `${lead} ${srcLink(compSrc(last))}`, LIC.wd(), more(`<ul class="hist-ul tm-ul">${li.join('')}</ul>${cs.length > 1 ? `<p class="muted">${esc(cs.slice(1).map(x => `${compLabel(M, x.c)} (${kmTxt(x.km)})`).join(' · '))}</p>` : ''}`, li.length)));
+                out.push(row('🏆', `${lead} ${srcLink(compSrc(last))}`, LIC.wd(), more(`<ul class="hist-ul tsx-ul">${li.join('')}</ul>${cs.length > 1 ? `<p class="muted">${esc(cs.slice(1).map(x => `${compLabel(M, x.c)} (${kmTxt(x.km)})`).join(' · '))}</p>` : ''}`, li.length)));
             }
             if (ms.length) {
                 const x = ms.find(m => /Coupe du monde|Jeux olympiques|Euro$/.test(m.r.t)) || ms[0];
                 const lead = T('Le {d}, à {c} ({k} de {p}) : {s}', {d: esc(dateTxt(x.r.d)), c: esc(x.r.city), k: esc(kmTxt(x.km)), p: esc(x.place), s: score(x.r)}) + (x.age !== null ? ` ${esc(T('({a} ans)', {a: String(x.age)}))}` : '');
-                out.push(row('⚽', `${lead}. ${srcLink(RES_URL)}`, LIC.res(), more(`<ul class="hist-ul tm-ul">${ms.slice(0, 40).map(m => matchLi(m)).join('')}</ul>${hyp(T('Matchs internationaux (équipes nationales) joués à moins de {r} km de ses lieux, de son vivant.', {r: String(r)}))}`, ms.length)));
+                out.push(row('⚽', `${lead}. ${srcLink(RES_URL)}`, LIC.res(), more(`<ul class="hist-ul tsx-ul">${ms.slice(0, 40).map(m => matchLi(m)).join('')}</ul>${hyp(T('Matchs internationaux (équipes nationales) joués à moins de {r} km de ses lieux, de son vivant.', {r: String(r)}))}`, ms.length)));
             }
             return out.join('');
         },
@@ -342,7 +344,7 @@
             const lead = a0 ? T('Né aussi à {p} : {n}{w}.', {p: esc(bp.name), n: `<b>${link(a0.fr ? wp(a0.fr) : wd(a0.q), a0.n)}</b>`, w: a0.sport ? ` (${esc(a0.sport)}${a0.b ? `, ${esc(String(a0.b))}` : ''})` : ''})
                 : T('Un médaillé olympique est né à {p} : {n}.', {p: esc(bp.name), n: `<b>${esc(meds[0].n)}</b>`});
             const others = list.filter(a => a !== a0);
-            return row('🏃', `${lead} ${srcLink(wd((a0 || meds[0]).q))}`, LIC.wd(), more(`${others.length ? `<ul class="hist-ul tm-ul">${others.slice(0, 15).map(athleteLi).join('')}</ul>` : ''}${meds.length ? `<p class="muted">${esc(T('Médailles olympiques de sportifs nés ici :'))}</p><ul class="hist-ul tm-ul">${meds.slice(0, 15).map(medalLi).join('')}</ul>` : ''}`, others.length + meds.length));
+            return row('🏃', `${lead} ${srcLink(wd((a0 || meds[0]).q))}`, LIC.wd(), more(`${others.length ? `<ul class="hist-ul tsx-ul">${others.slice(0, 15).map(athleteLi).join('')}</ul>` : ''}${meds.length ? `<p class="muted">${esc(T('Médailles olympiques de sportifs nés ici :'))}</p><ul class="hist-ul tsx-ul">${meds.slice(0, 15).map(medalLi).join('')}</ul>` : ''}`, others.length + meds.length));
         },
         homonyme: async (life, priv) => {
             if (priv || kiosk() || !past(life)) return '';
@@ -354,23 +356,23 @@
             const h = hits[0];
             const lead = h.probable ? T('Même nom, même prénom et même année de naissance qu’un sportif connu : {n} ({w}).', {n: `<b>${link(h.url, h.n)}</b>`, w: esc(h.why)})
                 : T('Un homonyme champion : {n} ({w}). Sans doute quelqu’un d’autre, mais cela se vérifie.', {n: `<b>${link(h.url, h.n)}</b>`, w: esc(h.why)});
-            return row('🔎', `${lead} ${srcLink(h.url)}`, LIC.wd(), `${more(hits.length > 1 ? `<ul class="hist-ul tm-ul">${hits.slice(1, 10).map(x => `<li>${link(x.url, x.n)} <small class="muted">(${esc(x.why)})</small></li>`).join('')}</ul>` : '', hits.length - 1)}${hyp(T('Comparé sur l’ordinateur (prénom et nom), jamais pour une fiche vivante ou confidentielle : rien n’est envoyé.'))}`);
+            return row('🔎', `${lead} ${srcLink(h.url)}`, LIC.wd(), `${more(hits.length > 1 ? `<ul class="hist-ul tsx-ul">${hits.slice(1, 10).map(x => `<li>${link(x.url, x.n)} <small class="muted">(${esc(x.why)})</small></li>`).join('')}</ul>` : '', hits.length - 1)}${hyp(T('Comparé sur l’ordinateur (prénom et nom), jamais pour une fiche vivante ou confidentielle : rien n’est envoyé.'))}`);
         },
         expos: async life => {
             const D = await rowsOf('expos'); if (!D.rows.length) return '';
             const list = exposNear(D.rows, life, 50);
             const art = isArtisan(life), s = lifeSpan(life);
-            const cat = art ? D.rows.filter(r => r.cat?.length && r.y >= (s.birth ?? s.from ?? 0) + 15 && r.y <= (s.to ?? 0) && (r.country === 'France' || r.ins)) : [];
+            const cat = art ? D.rows.filter(r => (r.cat?.length || r.country === 'France') && r.y <= 1937 && r.y >= (s.birth ?? s.from ?? 0) + 15 && r.y <= (s.to ?? 0) && (r.country === 'France' || r.ins)) : [];
             if (!list.length && !cat.length) return '';
             const out = [];
             if (list.length) {
                 const x = list.find(y => y.r.k === 'coloniale') || list[0];
                 const lead = T('{He} avait {a} ans quand se tint {n} à {c} ({k} de {p}).', {He: He(life.person), a: String(x.age ?? '?'), n: `<b>${esc(x.r.n)}</b>`, c: esc(x.r.city || ''), k: esc(kmTxt(x.km)), p: esc(x.place)});
-                out.push(row('🎪', `${lead} ${srcLink(expoSrc(x.r))}`, `${LIC.wd()} · ${LIC.wp(D.meta.produits_url)}`, `${zooHtml(x.r, D.meta)}${more(`<ul class="hist-ul tm-ul">${list.filter(y => y !== x).map(y => expoLi(y, D.meta)).join('')}</ul>${hyp(T('Les grandes Expositions de son temps (Paris 1889, 1900…) sont dans « 🎡 Le monde de son village ».'))}`, list.length - 1)}`));
+                out.push(row('🎪', `${lead} ${srcLink(expoSrc(x.r))}`, `${LIC.wd()} · ${LIC.wp(D.meta.produits_url)}`, `${zooHtml(x.r, D.meta)}${more(`<ul class="hist-ul tsx-ul">${list.filter(y => y !== x).map(y => expoLi(y, D.meta)).join('')}</ul>${hyp(T('Les grandes Expositions de son temps (Paris 1889, 1900…) sont dans « 🎡 Le monde de son village ».'))}`, list.length - 1)}`));
             }
             if (cat.length) {
                 out.push(row('📒', `${esc(T('Son métier ({j}) : il ou elle a peut-être exposé. Les catalogues d’exposants de ces Expositions sont à feuilleter :', {j: (life.jobs || [])[0]?.text || ''}))}`, LIC.ia(),
-                    `<ul class="hist-ul tm-ul">${cat.slice(0, 8).map(r => `<li><b>${esc(r.n)}</b>${catsHtml(r)}</li>`).join('')}</ul>${hyp(T('L’app ne cherche pas le nom pour vous : elle ouvre le catalogue, et vous cherchez le nom dans la page d’Internet Archive.'))}`));
+                    `<ul class="hist-ul tsx-ul">${cat.slice(0, 8).map(r => `<li><b>${esc(r.n)}</b>${catsHtml(r)}</li>`).join('')}</ul>${hyp(T('L’app ne cherche pas le nom pour vous : elle ouvre le catalogue, et vous cherchez le nom dans la page d’Internet Archive.'))}`));
             }
             return out.join('');
         }};
@@ -385,7 +387,7 @@
         const html = await Promise.all(want.filter(k => JOBS[k]).map(k => Promise.resolve().then(() => JOBS[k](life, priv)).catch(e => { console.error(e); return ''; })));
         if (!host.isConnected && !opts.detached) return 0;
         const out = html.filter(Boolean);
-        host.innerHTML = out.length ? `<div class="hist-life tm-life">${out.join('')}</div>` : '';
+        host.innerHTML = out.length ? `<div class="hist-life tsx-life">${out.join('')}</div>` : '';
         return out.length;
     }
     ext.personBlocks = ext.personBlocks || {};
@@ -394,11 +396,11 @@
         if (!PERSON_PARTS.some(k => on(k))) return '';
         const priv = p.living_status === 'living' || Number(p.is_private) === 1 ? '1' : '';
         if (priv) return '';
-        return A().card(index, T('🏆 Le sport et les Expositions de sa vie'), '', `<div class="tm-block" data-tm-person="${Number(p.id)}"></div>`, 'span-12').replace('<section class="card ', '<section hidden class="card ');
+        return A().card(index, T('🏆 Le sport et les Expositions de sa vie'), '', `<div class="tsx-block" data-tsx-person="${Number(p.id)}"></div>`, 'span-12').replace('<section class="card ', '<section hidden class="card ');
     };
     (ext.afterPerson = ext.afterPerson || []).push(() => {
-        document.querySelectorAll('#workspace [data-tm-person]').forEach(async h => {
-            const n = await personInto(h, Number(h.dataset.tmPerson));
+        document.querySelectorAll('#workspace [data-tsx-person]').forEach(async h => {
+            const n = await personInto(h, Number(h.dataset.tsxPerson));
             const card = h.closest('section.card'); if (card) card.hidden = !n;
         });
     });
@@ -418,28 +420,28 @@
             const lead = g.xs.length > 1 ? T('{c} : {n} éditions à {k}, de {a} à {b}.', {c: `<b>${esc(compLabel(M, g.c))}</b>`, n: String(g.xs.length), k: esc(kmTxt(g.km)), a: String(first.y), b: String(last.y)})
                 : T('{c} : {e} ({k}).', {c: `<b>${esc(compLabel(M, g.c))}</b>`, e: esc(first.n), k: esc(kmTxt(g.km))});
             const li = groups.flatMap(x => x.xs.slice(-15).reverse().map(y => compLi(y.r, M)));
-            return row('🏆', `${lead} ${srcLink(compSrc(last))}`, LIC.wd(), more(`<ul class="hist-ul tm-ul">${li.join('')}</ul>${groups.length > 1 ? `<p class="muted">${esc(groups.slice(1).map(x => `${compLabel(M, x.c)} (${x.xs.length})`).join(' · '))}</p>` : ''}`, li.length));
+            return row('🏆', `${lead} ${srcLink(compSrc(last))}`, LIC.wd(), more(`<ul class="hist-ul tsx-ul">${li.join('')}</ul>${groups.length > 1 ? `<p class="muted">${esc(groups.slice(1).map(x => `${compLabel(M, x.c)} (${x.xs.length})`).join(' · '))}</p>` : ''}`, li.length));
         }
         if (kind === 'pres') {
             const Mt = await rowsOf('matchs'); const hits = near(Mt.rows, ll.lat, ll.lon, Math.min(r, 10), 5000).sort((a, b) => a.r.d.localeCompare(b.r.d)); if (!hits.length) return '';
             const x = hits.find(m => /Coupe du monde|Jeux olympiques|Euro$/.test(m.r.t)) || hits[0];
             const lead = hits.length > 1 ? T('{n} matchs internationaux de football joués ici ou tout près ({c}), le premier en {y} ; par exemple le {d} : {s}.', {n: String(hits.length), c: esc([...new Set(hits.map(h => h.r.city))].slice(0, 3).join(', ')), y: hits[0].r.d.slice(0, 4), d: esc(dateTxt(x.r.d)), s: score(x.r)})
                 : T('Un match international joué ici le {d} : {s}.', {d: esc(dateTxt(x.r.d)), s: score(x.r)});
-            return row('⚽', `${lead} ${srcLink(RES_URL)}`, LIC.res(), more(`<ul class="hist-ul tm-ul">${hits.slice(0, 60).map(m => matchLi(m, false)).join('')}</ul>`, hits.length));
+            return row('⚽', `${lead} ${srcLink(RES_URL)}`, LIC.res(), more(`<ul class="hist-ul tsx-ul">${hits.slice(0, 60).map(m => matchLi(m, false)).join('')}</ul>`, hits.length));
         }
         if (kind === 'athletes') {
             const [Ath, J] = await Promise.all([rowsOf('athletes'), rowsOf('jo')]);
             const p = {ins: place.insee || place.ins || '', lat: ll.lat, lon: ll.lon};
             const list = athletesOf(Ath.rows, p), meds = athletesOf(J.rows, p); if (!list.length && !meds.length) return '';
             const lead = list.length ? T('{n} sportifs connus sont nés ici, dont {a}.', {n: String(list.length), a: list.slice(0, 2).map(a => `<b>${esc(a.n)}</b>${a.sport ? ` (${esc(a.sport)})` : ''}`).join(', ')}) : T('Des médaillés olympiques sont nés ici.');
-            return row('🏃', `${lead} ${srcLink(wd((list[0] || meds[0]).q))}`, LIC.wd(), more(`<ul class="hist-ul tm-ul">${list.slice(0, 30).map(athleteLi).join('')}</ul>${meds.length ? `<p class="muted">${esc(T('Médailles olympiques de sportifs nés ici :'))}</p><ul class="hist-ul tm-ul">${meds.slice(0, 20).map(medalLi).join('')}</ul>` : ''}`, list.length + meds.length));
+            return row('🏃', `${lead} ${srcLink(wd((list[0] || meds[0]).q))}`, LIC.wd(), more(`<ul class="hist-ul tsx-ul">${list.slice(0, 30).map(athleteLi).join('')}</ul>${meds.length ? `<p class="muted">${esc(T('Médailles olympiques de sportifs nés ici :'))}</p><ul class="hist-ul tsx-ul">${meds.slice(0, 20).map(medalLi).join('')}</ul>` : ''}`, list.length + meds.length));
         }
         if (kind === 'expos') {
             const D = await rowsOf('expos'); const hits = near(D.rows.filter(e => !e.hand), ll.lat, ll.lon, 15, 50).sort((a, b) => a.r.y - b.r.y); if (!hits.length) return '';
             const x = hits.find(h => h.r.k === 'coloniale') || hits[0];
             const lead = hits.length > 1 ? T('{n} Expositions ont eu lieu ici ou tout près, de {a} à {b} : {e}…', {n: String(hits.length), a: String(hits[0].r.y), b: String(hits.at(-1).r.y), e: `<b>${esc(x.r.n)}</b>`})
                 : T('{e} a eu lieu ici en {y}.', {e: `<b>${esc(x.r.n)}</b>`, y: String(x.r.y)});
-            return row('🎪', `${lead} ${srcLink(expoSrc(x.r))}`, `${LIC.wd()} · ${LIC.wp(D.meta.produits_url)}`, `${zooHtml(x.r, D.meta)}${more(`<ul class="hist-ul tm-ul">${hits.map(h => expoLi(h, D.meta)).join('')}</ul>${hyp(T('Les grandes Expositions choisies à la main (Paris 1889, 1900…) sont dans « 🎡 Le monde de son village ».'))}`, hits.length)}`);
+            return row('🎪', `${lead} ${srcLink(expoSrc(x.r))}`, `${LIC.wd()} · ${LIC.wp(D.meta.produits_url)}`, `${zooHtml(x.r, D.meta)}${more(`<ul class="hist-ul tsx-ul">${hits.map(h => expoLi(h, D.meta)).join('')}</ul>${hyp(T('Les grandes Expositions choisies à la main (Paris 1889, 1900…) sont dans « 🎡 Le monde de son village ».'))}`, hits.length)}`);
         }
         return '';
     }
@@ -448,41 +450,41 @@
         const parts = await Promise.all(kinds.map(k => placePart(k, place).catch(e => { console.error(e); return ''; })));
         if (!host.isConnected && !opts.detached) return 0;
         const html = parts.filter(Boolean);
-        const tourLink = ext.dataListsEngine ? `<p class="tm-links"><button type="button" class="btn-link" data-tm-open="ts_competitions" data-tm-q="${esc(T('Tour de France'))}">${esc(T('🏆 Tout le Tour de France dans 🏆 Sport'))}</button></p>` : '';
-        host.innerHTML = html.length ? `<section class="maintenance-panel cplus-panel tm-panel"><h3>${esc(T('🏆 Sport et Expositions'))}</h3><div class="hist-life tm-life">${html.join('')}</div>${tourLink}</section>` : '';
+        const tourLink = ext.dataListsEngine ? `<p class="tsx-links"><button type="button" class="btn-link" data-tsx-open="ts_competitions" data-tsx-q="${esc(T('Tour de France'))}">${esc(T('🏆 Tout le Tour de France dans 🏆 Sport'))}</button></p>` : '';
+        host.innerHTML = html.length ? `<section class="maintenance-panel cplus-panel tsx-panel"><h3>${esc(T('🏆 Sport et Expositions'))}</h3><div class="hist-life tsx-life">${html.join('')}</div>${tourLink}</section>` : '';
         return html.length;
     }
-    document.addEventListener('click', e => { const b = e.target.closest?.('[data-tm-open]'); if (!b) return; ext.dataListsEngine?.open(b.dataset.tmOpen, b.dataset.tmQ ? {q: b.dataset.tmQ} : null); });
+    document.addEventListener('click', e => { const b = e.target.closest?.('[data-tsx-open]'); if (!b) return; ext.dataListsEngine?.open(b.dataset.tsxOpen, b.dataset.tsxQ ? {q: b.dataset.tsxQ} : null); });
     function villagePlace(village) {
         const pli = village.querySelector('[data-pli-host]'), head = village.querySelector('.page-header p, header p')?.textContent || '';
         return {id: Number(pli?.dataset.pliPlace) || 0, name: pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim(),
             lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
             insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || ''};
     }
-    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'tm_place', host: '[data-tm-host]', icon: '🏆', label: 'Sport et Expositions', group: 'Données téléchargées', enabled: () => PLACE_KINDS.some(k => on(k))});
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'tsx_place', host: '[data-tsx-host]', icon: '🏆', label: 'Sport et Expositions', group: 'Données téléchargées', enabled: () => PLACE_KINDS.some(k => on(k))});
     async function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
-        const village = ws.querySelector('.h-village:not([data-tm])'); if (!village) return;
-        village.dataset.tm = '1';
+        const village = ws.querySelector('.h-village:not([data-tsx])'); if (!village) return;
+        village.dataset.tsx = '1';
         if (!PLACE_KINDS.some(k => on(k))) return;
         const anchor = village.querySelector('[data-ti-host]') || village.querySelector('[data-tf-host]') || village.querySelector('.cplus-place') || village.querySelector('.h-village-grid');
-        const box = '<div class="tm-place" data-tm-host></div>';
+        const box = '<div class="tsx-place" data-tsx-host></div>';
         if (anchor) anchor.insertAdjacentHTML('afterend', box); else village.insertAdjacentHTML('beforeend', box);
-        placeInto(village.querySelector('[data-tm-host]'), villagePlace(village));
+        placeInto(village.querySelector('[data-tsx-host]'), villagePlace(village));
     }
     let pending = 0;
     new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => { if (!(e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || ''))))) console.error(e); }); }); }).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ─────────── 📜 Monographie de commune ─────────── */
-    const MONO = [['competitions', 'tm_competitions', '🏆', 'Les compétitions sportives ici'], ['pres', 'tm_matchs', '⚽', 'Les matchs internationaux joués ici'],
-        ['athletes', 'tm_athletes', '🏃', 'Les sportifs nés ici'], ['expos', 'tm_expos', '🎪', 'Les Expositions ici']];
+    const MONO = [['competitions', 'tsx_competitions', '🏆', 'Les compétitions sportives ici'], ['pres', 'tsx_matchs', '⚽', 'Les matchs internationaux joués ici'],
+        ['athletes', 'tsx_athletes', '🏃', 'Les sportifs nés ici'], ['expos', 'tsx_expos', '🎪', 'Les Expositions ici']];
     const SRC_TXT = {competitions: 'Wikidata (CC0) ; Wikipédia (CC BY-SA 4.0)', pres: 'martj42/international_results (CC0)', athletes: 'Wikidata (CC0)', expos: 'Wikidata (CC0) ; Wikipédia (CC BY-SA 4.0) ; Internet Archive (liens)'};
     (ext.monographSections = ext.monographSections || []).push(...MONO.map(([kind, id, icon, label]) => ({
         id, icon, label, group: 'Le lieu', defaultOn: true, enabled: () => on(kind), source: SRC_TXT[kind],
         render: async (place, host) => {
             const p = {...place, lat: place.latitude ?? place.lat, lon: place.longitude ?? place.lon, insee: place.insee || place.admin4_code || ''};
             const html = await placePart(kind, p); if (!html) return false;
-            host.innerHTML = `<div class="hist-life tm-life">${html}</div>`; return true;
+            host.innerHTML = `<div class="hist-life tsx-life">${html}</div>`; return true;
         }})));
 
     /* ─────────── 📋 Listes (thème « sport » et « fetes » ; liste réunie « competitions ») ─────────── */
@@ -535,10 +537,10 @@
     const layer = (id, icon, label, get, src, lab, yr) => ({id, icon, label: T(label), group: 'Le monde', kind: 'points', source: src,
         run: async ({q, bbox, from, to, max = 3000}) => { const rows = await get(); const features = rows.filter(r => num(r.lat) !== null && inBox(bbox, r.lat, r.lon) && (!from || (yr(r) ?? from) >= from) && (!to || (yr(r) ?? to) <= to) && (!q || fold(lab(r)).includes(fold(q)))).slice(0, max).map(r => ({type: 'pt', lat: r.lat, lon: r.lon, label: lab(r)})); return {features, source: src}; }});
     (ext.mapLayerSources = ext.mapLayerSources || []).push(
-        layer('tm_competitions', '🏆', 'Compétitions sportives (lieu de chaque édition)', async () => (await rowsOf('comps')).rows, 'Wikidata (CC0)', r => `${r.n}${r.w?.[0] ? ` — ${r.w[0][0]}` : ''}`, r => r.y),
-        layer('tm_matchs', '⚽', 'Matchs internationaux joués en France', async () => (await rowsOf('matchs')).rows, 'martj42/international_results (CC0)', r => `${r.d} ${r.h} ${r.hs}–${r.as} ${r.a} (${r.city})`, r => num(r.d.slice(0, 4))),
-        layer('tm_athletes', '🏃', 'Sportifs : leur commune de naissance', async () => (await rowsOf('athletes')).rows, 'Wikidata (CC0)', r => `${r.n}${r.b ? ` (${r.b})` : ''}`, r => r.b),
-        layer('tm_expos', '🎪', 'Expositions du monde', async () => (await rowsOf('expos')).rows, 'Wikidata (CC0)', r => `${r.n}`, r => r.y));
+        layer('tsx_competitions', '🏆', 'Compétitions sportives (lieu de chaque édition)', async () => (await rowsOf('comps')).rows, 'Wikidata (CC0)', r => `${r.n}${r.w?.[0] ? ` — ${r.w[0][0]}` : ''}`, r => r.y),
+        layer('tsx_matchs', '⚽', 'Matchs internationaux joués en France', async () => (await rowsOf('matchs')).rows, 'martj42/international_results (CC0)', r => `${r.d} ${r.h} ${r.hs}–${r.as} ${r.a} (${r.city})`, r => num(r.d.slice(0, 4))),
+        layer('tsx_athletes', '🏃', 'Sportifs : leur commune de naissance', async () => (await rowsOf('athletes')).rows, 'Wikidata (CC0)', r => `${r.n}${r.b ? ` (${r.b})` : ''}`, r => r.b),
+        layer('tsx_expos', '🎪', 'Expositions du monde', async () => (await rowsOf('expos')).rows, 'Wikidata (CC0)', r => `${r.n}`, r => r.y));
 
     /* ─────────── 🧰 à la demande ─────────── */
     const placeOfCtx = pl => (pl ? {id: Number(pl.id || pl.place_id) || 0, name: pl.name || pl.place_name || pl.title || '', insee: pl.insee || pl.admin4_code || '', lat: pl.lat ?? pl.latitude ?? null, lon: pl.lon ?? pl.longitude ?? null} : null);
@@ -554,24 +556,24 @@
     async function runPlace(kind, c, host) {
         const pl = placeOfCtx(c.place); if (!pl) { host.innerHTML = emptyLine(T('Choisis un lieu.'), '📍'); return null; }
         const html = await placePart(kind, pl);
-        host.innerHTML = html ? `<div class="hist-life tm-life">${html}</div>` : '';
+        host.innerHTML = html ? `<div class="hist-life tsx-life">${html}</div>` : '';
         return !!html;
     }
     async function runYear(c, host) {
         const y = num(c.year); if (y === null) { host.innerHTML = emptyLine(T('Choisis une année.'), '📅'); return null; }
         const [C, M] = await Promise.all([rowsOf('comps'), compMeta()]);
         const list = C.rows.filter(r => r.y === y);
-        host.innerHTML = list.length ? `<div class="hist-life tm-life">${row('🏆', esc(T('Les vainqueurs de {y}', {y: String(y)})), LIC.wd(), `<ul class="hist-ul tm-ul">${list.map(r => compLi(r, M)).join('')}</ul>`)}</div>` : emptyLine(T('Rien de connu cette année-là.'));
+        host.innerHTML = list.length ? `<div class="hist-life tsx-life">${row('🏆', esc(T('Les vainqueurs de {y}', {y: String(y)})), LIC.wd(), `<ul class="hist-ul tsx-ul">${list.map(r => compLi(r, M)).join('')}</ul>`)}</div>` : emptyLine(T('Rien de connu cette année-là.'));
         return list.length > 0;
     }
     const DS = (id, icon, label, parts, empty) => ({id, icon, label: T(label), group: 'La personne', needs: ['person'], online: false, installed: () => true, run: (c, host) => runPerson(parts, c, host, empty)});
     (ext.dataSources = ext.dataSources || []).push(
-        DS('tmp_jour', '📅', 'Le sport le jour de sa naissance, de son mariage, de sa mort', ['cejour'], 'Il faut une date complète (jour, mois, année) de naissance, de mariage ou de décès, d’une personne décédée.'),
-        DS('tmp_jeux', '🏅', 'Les Jeux olympiques de sa vie', ['jeux'], 'Il faut sa date de naissance (personne décédée).'),
-        DS('tmp_pres', '📍', 'Le sport près de chez lui (matchs, grandes courses)', ['pres'], 'Rien de connu près de ses lieux, de son vivant.'),
-        DS('tmp_village', '🏃', 'Les sportifs de son village, un homonyme champion', ['athletes', 'homonyme'], 'Aucun sportif connu né dans sa commune ; aucun homonyme (comparé sur l’ordinateur, seulement pour une personne décédée et non confidentielle).'),
-        DS('tmp_expos', '🎪', 'Les Expositions de sa vie et les catalogues d’exposants', ['expos'], 'Aucune Exposition connue près de ses lieux, de son vivant.'),
-        {id: 'tm_annee', icon: '🏆', label: T('Les vainqueurs de cette année-là'), group: 'Le monde', needs: ['year'], online: false, installed: () => true, run: (c, host) => runYear(c, host)},
+        DS('tsxp_jour', '📅', 'Le sport le jour de sa naissance, de son mariage, de sa mort', ['cejour'], 'Il faut une date complète (jour, mois, année) de naissance, de mariage ou de décès, d’une personne décédée.'),
+        DS('tsxp_jeux', '🏅', 'Les Jeux olympiques de sa vie', ['jeux'], 'Il faut sa date de naissance (personne décédée).'),
+        DS('tsxp_pres', '📍', 'Le sport près de chez lui (matchs, grandes courses)', ['pres'], 'Rien de connu près de ses lieux, de son vivant.'),
+        DS('tsxp_village', '🏃', 'Les sportifs de son village, un homonyme champion', ['athletes', 'homonyme'], 'Aucun sportif connu né dans sa commune ; aucun homonyme (comparé sur l’ordinateur, seulement pour une personne décédée et non confidentielle).'),
+        DS('tsxp_expos', '🎪', 'Les Expositions de sa vie et les catalogues d’exposants', ['expos'], 'Aucune Exposition connue près de ses lieux, de son vivant.'),
+        {id: 'tsx_annee', icon: '🏆', label: T('Les vainqueurs de cette année-là'), group: 'Le monde', needs: ['year'], online: false, installed: () => true, run: (c, host) => runYear(c, host)},
         ...MONO.map(([kind, id, icon, label]) => ({id: `${id}_lieu`, icon, label: T(label), group: 'Le lieu', needs: ['place'], online: false, installed: () => true, run: (c, host) => runPlace(kind, c, host)})));
 
     /* ─────────── ⚙️ Réglages → 🏆 Sport et Expositions ─────────── */
@@ -585,35 +587,35 @@
         await Promise.all(FILE_LABEL.map(async ([k]) => { const D = await quiet(load(k)); if (D) metas[k] = D; }));
         if (mine !== drawToken || (token !== undefined && A().state && token !== A().state.workspaceToken)) return;
         const s = settings(), C = metas.comps;
-        const tg = ([key, label, sub]) => `<label class="checkbox-line cplus-tg" data-tm-tg="${esc(key)}"><input type="checkbox" ${s[key] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
+        const tg = ([key, label, sub]) => `<label class="checkbox-line cplus-tg" data-tsx-tg="${esc(key)}"><input type="checkbox" ${s[key] ? 'checked' : ''}><span><b>${esc(T(label))}</b><br><small class="muted">${esc(T(sub))}</small></span></label>`;
         const fileRow = ([k, label]) => { const D = metas[k]; if (!D) return `<tr><td>${esc(T(label))}</td><td colspan="4" class="muted">${esc(T('Fichier absent.'))}</td></tr>`;
             const m = D.meta; return `<tr><td>${esc(T(label))}</td><td>${link(m.url, m.source)}<br><small class="muted">${esc(m.what || '')}</small></td><td>${esc(nf(D.rows.length))}</td><td>${link(m.licence_url, m.licence)}</td><td>${esc(m.built || '')}</td></tr>`; };
         const compRow = c => `<tr><td>${esc(c.icon)} ${esc(T(c.label))}</td><td>${esc(nf(c.n))}</td><td>${esc(c.from ? `${c.from}–${c.to}` : '')}</td><td>${link(wd(c.q), c.q)}${(c.lists || []).map(u => ` · ${link(u, T('liste de Wikipédia'))}`).join('')}</td></tr>`;
         const lo = (C?.meta.link_only || []).map(x => `<li>${esc(x.icon)} <b>${esc(T(x.label))}</b> — ${esc(T(x.why))} ${link(x.url, T('↗ ouvrir'))}</li>`).join('');
-        ws.innerHTML = `<section class="page cplus-settings tm-settings" data-tm-settings-page>${UI().pageHeader ? UI().pageHeader({title: T('Sport et Expositions'), icon: '🏆', where: T('Réglages · Données'), help: esc(T('Les grandes compétitions et leurs vainqueurs, les matchs, les Jeux, les sportifs du village ; les Expositions du monde. Tout est livré avec l’app.'))}) : `<h2>${esc(T(TAB[2]))}</h2>`}
+        ws.innerHTML = `<section class="page cplus-settings tsx-settings" data-tsx-settings-page>${UI().pageHeader ? UI().pageHeader({title: T('Sport et Expositions'), icon: '🏆', where: T('Réglages · Données'), help: esc(T('Les grandes compétitions et leurs vainqueurs, les matchs, les Jeux, les sportifs du village ; les Expositions du monde. Tout est livré avec l’app.'))}) : `<h2>${esc(T(TAB[2]))}</h2>`}
             <div class="maintenance-panel"><h3>${esc(T('Ce qui s’affiche'))}</h3><p class="muted">${esc(T('Sur la fiche d’une personne décédée (bloc « 🏆 Le sport et les Expositions de sa vie »), sur la fiche d’un village et dans la monographie. Les listes sont dans Listes → 🏆 Sport (et 🎉 Fêtes pour les Expositions), les points dans Cartes.'))}</p>${PARTS.map(tg).join('')}
-                <div class="tm-opts">
-                    <label class="tm-opt">${esc(T('« Près de chez lui » : à combien de kilomètres ?'))} <input type="number" min="1" max="100" step="1" value="${esc(String(radius()))}" data-tm-km inputmode="numeric"> <span class="muted">${esc(T('km (15 par défaut ; aussi pour les étapes du Tour dans « 🎡 Le monde de son village »)'))}</span></label>
-                    <label class="checkbox-line" data-tm-tg="winners"><input type="checkbox" ${s.winners ? 'checked' : ''}><span>${esc(T('Montrer les vainqueurs (maillot jaune, champions ; « titre retiré » de 1999 à 2005 pour le Tour)'))}</span></label>
-                    <label class="tm-opt">${esc(T('Le Tour de France s’ouvre sur'))} <select data-tm-view><option value="editions" ${s.view !== 'etapes' && s.view !== 'carte' ? 'selected' : ''}>${esc(T('les éditions'))}</option><option value="etapes" ${s.view === 'etapes' ? 'selected' : ''}>${esc(T('les étapes'))}</option><option value="carte" ${s.view === 'carte' ? 'selected' : ''}>${esc(T('la carte'))}</option></select></label>
+                <div class="tsx-opts">
+                    <label class="tsx-opt">${esc(T('« Près de chez lui » : à combien de kilomètres ?'))} <input type="number" min="1" max="100" step="1" value="${esc(String(radius()))}" data-tsx-km inputmode="numeric"> <span class="muted">${esc(T('km (15 par défaut ; aussi pour les étapes du Tour dans « 🎡 Le monde de son village »)'))}</span></label>
+                    <label class="checkbox-line" data-tsx-tg="winners"><input type="checkbox" ${s.winners ? 'checked' : ''}><span>${esc(T('Montrer les vainqueurs (maillot jaune, champions ; « titre retiré » de 1999 à 2005 pour le Tour)'))}</span></label>
+                    <label class="tsx-opt">${esc(T('Le Tour de France s’ouvre sur'))} <select data-tsx-view><option value="editions" ${s.view !== 'etapes' && s.view !== 'carte' ? 'selected' : ''}>${esc(T('les éditions'))}</option><option value="etapes" ${s.view === 'etapes' ? 'selected' : ''}>${esc(T('les étapes'))}</option><option value="carte" ${s.view === 'carte' ? 'selected' : ''}>${esc(T('la carte'))}</option></select></label>
                 </div></div>
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3><div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Sujet'))}</th><th>${esc(T('Source'))}</th><th>${esc(T('Lignes'))}</th><th>${esc(T('Licence'))}</th><th>${esc(T('Fabriqué le'))}</th></tr></thead><tbody>
                 ${FILE_LABEL.map(fileRow).join('')}</tbody></table></div>
                 ${C ? `<h4>${esc(T('Les compétitions'))}</h4><div class="cplus-scroll"><table class="data-table"><thead><tr><th>${esc(T('Compétition'))}</th><th>${esc(T('Éditions'))}</th><th>${esc(T('Années'))}</th><th>${esc(T('Source'))}</th></tr></thead><tbody>${(C.meta.comps || []).map(compRow).join('')}</tbody></table></div>` : ''}
                 <p class="muted">${esc(T('Les étapes du Tour de France ne sont pas recopiées : elles viennent de « 🎡 Le monde de son village » (l8c-tour), ici avec leur vainqueur quand Wikidata le donne. Les 22 Expositions choisies à la main (l8c-expos) gardent leurs phrases.'))}</p>
-                <h4>${esc(T('En lien seulement (pas de licence ouverte)'))}</h4><ul class="hist-ul tm-ul">${lo}</ul>
+                <h4>${esc(T('En lien seulement (pas de licence ouverte)'))}</h4><ul class="hist-ul tsx-ul">${lo}</ul>
                 <p class="muted">${esc(T('Tout est lu sur l’ordinateur : rien ne part sur Internet, ni nom ni lieu, pour personne. Les noms de la fiche sont comparés aux sportifs ici, jamais pour une fiche vivante ou confidentielle. Seuls les liens « ↗ » ouvrent une page, quand on clique.'))}</p></div></section>`;
     }
     document.addEventListener('change', e => {
-        const t = e.target.closest?.('[data-tm-tg]');
+        const t = e.target.closest?.('[data-tsx-tg]');
         if (t && e.target.matches('input')) {
-            const s = settings(), k = t.dataset.tmTg, was = s[k];
+            const s = settings(), k = t.dataset.tsxTg, was = s[k];
             s[k] = e.target.checked; saveSettings(s); editionsMemo = null;
             const label = k === 'winners' ? T('Les vainqueurs') : T(PARTS.find(p => p[0] === k)?.[1] || k);
             A().undoToast?.(T(e.target.checked ? '« {p} » s’affiche.' : '« {p} » est caché.', {p: label}), {undo: () => { const x = settings(); x[k] = was; saveSettings(x); drawSettings(); }, icon: '🏆'});
             return;
         }
-        const kmIn = e.target.closest?.('[data-tm-km]');
+        const kmIn = e.target.closest?.('[data-tsx-km]');
         if (kmIn) {
             const s = settings(), was = s.km, v = Math.round(Number(kmIn.value));
             if (!(v >= 1 && v <= 100)) { kmIn.value = String(radius()); return; }
@@ -621,7 +623,7 @@
             A().undoToast?.(T('« Près de chez lui » : {n} km.', {n: String(v)}), {undo: () => { const x = settings(); x.km = was; saveSettings(x); drawSettings(); }, icon: '🏆'});
             return;
         }
-        const vw = e.target.closest?.('[data-tm-view]');
+        const vw = e.target.closest?.('[data-tsx-view]');
         if (vw) {
             const s = settings(), was = s.view; s.view = vw.value; saveSettings(s);
             A().undoToast?.(T('Le Tour de France s’ouvre sur {v}.', {v: vw.selectedOptions[0]?.textContent || vw.value}), {undo: () => { const x = settings(); x.view = was; saveSettings(x); drawSettings(); }, icon: '🏆'});

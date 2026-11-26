@@ -7,7 +7,7 @@
  *  - Écran « 🧰 Toutes les données » : une recherche sur toutes les listes, des pastilles calculées toutes seules (Toutes ·
  *    📍 Avec une carte = geo() · 📅 Avec des dates = period() · ⤓ À installer), puis les thèmes en cartes ; en cherchant, les listes
  *    trouvées rangées par thème, les thèmes sans résultat pâlis.
- *  - Un thème (Listes → datatheme_<id>) s'ouvre sur sa liste réunie quand il en a une (🔀, app-listes-reunies.js), sinon sur ses
+ *  - Un thème (Listes → data_theme_<id>) s'ouvre sur sa liste réunie quand il en a une (🔀, app-listes-reunies.js), sinon sur ses
  *    listes ; un onglet « Les N listes » ; au choix dans Réglages → 🧰 Listes de données.
  *  - Colonne de gauche : le groupe « 🧰 Données » montre les thèmes (repliés : la liste ouverte se montre sous son thème) au lieu de
  *    toutes les listes. Les 4 groupes d'avant (Le lieu, La personne, Le monde, Chercher) : au choix dans les Réglages
@@ -33,7 +33,7 @@
     const K_VUE = 'genealogie-listes-vue', K_OUVRE = 'genealogie-listes-theme-ouvre', K_KM = 'genealogie-listes-famille-km', K_SPLIT = 'genealogie-listes-reunies-separes';
     const mode = () => (readLS(K_VUE, 'themes') === 'groupes' ? 'groupes' : 'themes');
     const openMode = () => (readLS(K_OUVRE, 'reunie') === 'listes' ? 'listes' : 'reunie');
-    const OVERVIEW = 'donnees', TKEY = 'datatheme_', SETTINGS_TAB = 'listes_donnees_reglages';
+    const OVERVIEW = 'donnees', TKEY = 'data_theme_', SETTINGS_TAB = 'listes_donnees_reglages';
 
     /* ═════════════ les 20 thèmes ═════════════ */
     const DEFAULT_THEMES = [
@@ -130,7 +130,7 @@
         for (const t of [...themes(), RANGER]) {
             const k = tkey(t.id), lab = `${t.icon} ${T(t.label)}`, row = L.find(x => x[0] === k);
             if (row) row[2] = lab; else L.push([k, '92', lab]);
-            ext.lists[k] = token => renderTheme(t.id, token);
+            ext.lists[k] = token => { tabOf.delete(t.id); return renderTheme(t.id, token); }; // venu de la colonne, d'un lien : le réglage décide de l'onglet
         }
         if (!G) return;
         const tools = G[3].filter(k => !String(k).startsWith('data_') && k !== OVERVIEW);

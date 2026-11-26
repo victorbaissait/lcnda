@@ -235,7 +235,8 @@ def main():
         seen_years = set()
         for e in sorted(eds.values(), key=lambda e: (e['y'] or 0, e['d1'])):
             y = e['y']
-            if not y or y > 2026 or (y == 2026 and cid in ('jo',)):
+            # les Jeux annulés (1916, 1940, 1944) ont un élément Wikidata : pas une édition
+            if not y or y > 2026 or (cid in ('jo', 'joh') and y in (1916, 1940, 1944)):
                 continue
             ws, retired = winners_of(e)
             src = 'wd'

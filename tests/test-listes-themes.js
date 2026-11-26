@@ -48,10 +48,10 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
                 const R = window.LCNDA_EXT.listesReunies, M = {id: 'x', same: {km: 50, days: 1, yearOnly: true}, fields: [{key: 'date'}, {key: 'place'}, {key: 'mag'}, {key: 'dead'}], diff: [{key: 'mag', abs: 0.5}, {key: 'dead', ratio: 2}]};
                 const A = {id: 'a', short: 'A', rank: 1}, Bs = {id: 'b', short: 'B', rank: 3}, C = {id: 'c', short: 'C', rank: 4};
                 const recs = [
-                    {src: Bs, key: 'b1', rec: {date: '1887-02-24', lat: 43.7, lon: 8.1, place: 'Ligurie (B)', mag: 6.8, dead: 640}}, // 22 km, le lendemain
+                    {src: Bs, key: 'b1', rec: {date: '1887-02-24', lat: 43.7, lon: 8.1, place: 'Ligurie (B)', mag: 6.9, dead: 640}}, // 22 km, le lendemain
                     {src: A, key: 'a1', rec: {date: '1887-02-23', lat: 43.9, lon: 8.1, place: 'Diano Marina', mag: 6.3}},
                     {src: C, key: 'c1', rec: {date: '1887-02-23', lat: 43.9, lon: 8.2, place: 'Wikidata', dead: 600}},
-                    {src: A, key: 'a2', rec: {date: '1887-02-23', lat: 43.95, lon: 8.15, place: 'Autre séisme A'}}, // même source : jamais avec a1
+                    {src: A, key: 'a2', rec: {date: '1887-02-23', lat: 44.2, lon: 8.15, place: 'Autre séisme A'}}, // même source : jamais avec a1 (33 km)
                     {src: Bs, key: 'b2', rec: {date: '1909-06-11', lat: 43.65, lon: 5.27, place: 'Lambesc'}},
                     {src: C, key: 'c2', rec: {date: '1909-06-11', lat: 44.2, lon: 5.27, place: '61 km plus loin'}}, // 61 km : pas réuni
                     {src: C, key: 'c3', rec: {date: '1708', lat: 43.83, lon: 5.79, place: 'Manosque (année seule)'}},
@@ -66,7 +66,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
                     split: split.find(x => x._k === 'a1')._members.map(m => m.key)};
             });
             assert.deepStrictEqual(r.lig.members, ['a1', 'b1', 'c1']); assert.strictEqual(r.lig.place, 'Diano Marina', 'le meilleur rang'); assert.strictEqual(r.lig.mag, 6.3);
-            assert.strictEqual(r.lig.dead, 640, 'les morts : la première source qui en donne'); assert.strictEqual(r.lig.diff, true, '⚖ magnitude 6,3 / 6,8'); assert.deepStrictEqual(r.lig.sources, ['A', 'B', 'C']);
+            assert.strictEqual(r.lig.dead, 640, 'les morts : la première source qui en donne'); assert.strictEqual(r.lig.diff, true, '⚖ magnitude 6,3 / 6,9 (plus de 0,5)'); assert.deepStrictEqual(r.lig.sources, ['A', 'B', 'C']);
             assert.strictEqual(r.a2, 1, 'deux lignes de la même source : jamais réunies'); assert.strictEqual(r.lambesc, 1, '61 km : pas le même');
             assert.deepStrictEqual(r.manosque, ['a3', 'c3'], 'année seule, un seul candidat'); assert.deepStrictEqual(r.vesubie, [1, 1, true], 'année seule, deux candidats : pas réunie');
             assert.deepStrictEqual(r.split, ['a1', 'c1'], '✂ a1 et b1 séparés'); assert.strictEqual(r.n, 8);
@@ -123,8 +123,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         });
         await t('colonne de gauche : « 🧰 Données » montre les thèmes (repliés), pas les listes une à une', async () => {
             const items = await p.$$eval('[data-mt-group="g_data"] [data-side-value]', a => a.map(b => b.dataset.sideValue));
-            assert.ok(items.includes('donnees') && items.includes('datatheme_seismes') && items.includes('datatheme_sport'), items.join(','));
-            assert.ok(!items.some(k => k.startsWith('data_')), 'aucune liste à plat : ' + items.filter(k => k.startsWith('data_')).join(','));
+            assert.ok(items.includes('donnees') && items.includes('data_theme_seismes') && items.includes('data_theme_sport'), items.join(','));
+            const flat = items.filter(k => k.startsWith('data_') && !k.startsWith('data_theme_')); assert.deepStrictEqual(flat, [], 'aucune liste à plat');
         });
         await t('un thème s’ouvre sur sa liste réunie (onglets : 🔀 la liste réunie · Les N listes ; ← Tous les thèmes)', async () => {
             await p.click('[data-ldt-theme="essai"]');
@@ -135,10 +135,10 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.match(await p.textContent('[data-ldr-stats]'), /5 séismes réunis \(6 lignes dans les sources : 1 doublons fondus\)/);
             assert.match(await p.textContent('.ui-ph .eyebrow, .page-header .eyebrow'), /Thème d’essai/);
             const side = await p.$$eval('[data-mt-group="g_data"] [data-side-value]', a => a.map(b => b.dataset.sideValue));
-            assert.ok(side.includes('datatheme_essai'));
+            assert.ok(side.includes('data_theme_essai'));
         });
         await t('la ligne réunie : Sources ↗ une par source, ⚖ 2 avis, la plus récente d’abord ; « Dans la famille » calculé ici', async () => {
-            const heads = await p.$$eval('.ld-table thead th', a => a.map(x => x.textContent.trim()));
+            const heads = await p.$$eval('.ld-table thead th', a => a.map(x => x.textContent.replace(/[↑↓]/g, '').trim()));
             assert.deepStrictEqual(heads.slice(0, 6), ['Date', 'Où', 'Force', 'Morts', 'Dans la famille', 'Sources']);
             const rows = await p.$$eval('.ld-table tbody tr[data-ld-row]', a => a.map(x => x.textContent.replace(/\s+/g, ' ')));
             assert.match(rows[0], /11 juin 1909/); assert.match(rows[1], /23 février 1887.*Ligurie \(Diano Marina\).*M 6,3.*⚖ 2 avis.*640/);
@@ -164,8 +164,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.click('[data-ld-add]'); await p.click('.ui-actmenu-i:has-text("Pays")');
             await p.waitForSelector('[data-ld-ed-list] input[value="France"]'); await p.check('[data-ld-ed-list] input[value="France"]'); await p.click('.ld-ed-form button[type="submit"]');
             await waitCount(/^3 lignes/);
-            await p.click('[data-ld-add]'); await p.click('.ui-actmenu-i:has-text("Magnitude")'); await p.fill('.ld-ed-form input[name="from"]', '4.1'); await p.click('.ld-ed-form button[type="submit"]');
-            await waitCount(/^2 lignes/);
+            await p.click('[data-ld-add]'); await p.click('.ui-actmenu-i:has-text("Magnitude")'); await p.fill('.ld-ed-form input[name="from"]', '5'); await p.click('.ld-ed-form button[type="submit"]');
+            await waitCount(/^1 ligne/); assert.match(await p.textContent('.ld-table tbody'), /Lambesc/);
             await p.click('[data-ld-clear]'); await waitCount(/^5 lignes/);
             await p.click('[data-ld-add]'); await p.click('.ui-actmenu-i:has-text("Sources")');
             await p.waitForSelector('[data-ld-ed-list] input[value="SourceB"]'); assert.match(await p.textContent('[data-ld-ed-list]'), /SourceB\s*2/);
@@ -208,19 +208,20 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-listes-vue')), 'groupes');
             await openKey('donnees'); await p.waitForSelector('.ld-overview .ld-group h3');
             const side = await p.$$eval('[data-mt-group="g_data"] [data-side-value]', a => a.map(b => b.dataset.sideValue));
-            assert.ok(side.includes('data_hist_gares') && !side.some(k => k.startsWith('datatheme_')), 'groupes : les listes à plat');
+            assert.ok(side.includes('data_hist_gares') && !side.some(k => k.startsWith('data_theme_')), 'groupes : les listes à plat');
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'listes_donnees_reglages'; A.setModule('maintenance'); });
             await p.waitForSelector('input[name="ldt-vue"][value="themes"]'); await p.check('input[name="ldt-vue"][value="themes"]');
             await p.check('input[name="ldt-ouvre"][value="listes"]'); await p.fill('[data-ldt-km]', '40'); await p.press('[data-ldt-km]', 'Enter'); await p.evaluate(() => document.querySelector('[data-ldt-km]')?.dispatchEvent(new Event('change', {bubbles: true}))); await sleep(200);
             assert.deepStrictEqual(await p.evaluate(() => [localStorage.getItem('genealogie-listes-vue'), localStorage.getItem('genealogie-listes-theme-ouvre'), localStorage.getItem('genealogie-listes-famille-km')]), ['themes', 'listes', '40']);
-            await openKey('datatheme_essai'); await p.waitForSelector('.ldt-theme-page .ld-card');
+            await openKey('data_theme_essai'); await p.waitForSelector('.ldt-theme-page .ld-card');
             await p.evaluate(() => { localStorage.setItem('genealogie-listes-theme-ouvre', 'reunie'); localStorage.removeItem('genealogie-listes-famille-km'); });
         });
         await t('mode consultation : 📎 🧺 ✂ éteints avec la raison, les réglages ne changent pas', async () => {
             await p.evaluate(() => document.body.classList.add('is-kiosk'));
-            await openKey('datatheme_essai'); await p.waitForSelector('[data-ld-page="reunie_essai"] .ld-table tbody tr[data-ld-row="1"]');
+            await openKey('data_theme_essai'); await p.waitForSelector('[data-ld-page="reunie_essai"] .ld-table tbody tr[data-ld-row="1"]');
             assert.ok(await p.$eval('.ld-table tbody tr[data-ld-row="1"] [data-ld-ins]', b => b.disabled && /consultation/.test(b.title)));
-            await p.click('.ld-table tbody tr[data-ld-row="1"] [data-ld-open]'); await p.waitForSelector('.ldr-detail');
+            const i1887 = await p.$$eval('.ld-table tbody tr[data-ld-row]', a => a.findIndex(tr => /1887/.test(tr.textContent)));
+            await p.click(`.ld-table tbody tr[data-ld-row="${i1887}"] [data-ld-open]`); await p.waitForSelector('.ldr-detail');
             assert.ok(await p.$eval('[data-ldr-split]', b => b.disabled)); assert.ok(await p.$eval('[data-ldr-bk]', b => b.disabled));
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'listes_donnees_reglages'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-ldt-settings-page] .ldt-ro'); assert.ok(await p.$eval('input[name="ldt-vue"]', i => i.disabled));
@@ -230,7 +231,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.setViewportSize({width: 390, height: 844}); await p.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
             await openKey('donnees'); await p.waitForSelector('.ldt-overview .ldt-theme');
             assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'pas de défilement de côté (thèmes)');
-            await openKey('datatheme_essai'); await p.waitForSelector('[data-ld-page="reunie_essai"] .ld-table--cards tbody tr');
+            await openKey('data_theme_essai'); await p.waitForSelector('[data-ld-page="reunie_essai"] .ld-table--cards tbody tr');
             assert.strictEqual(await p.$eval('.ld-table--cards thead', x => getComputedStyle(x).display), 'none');
             assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'pas de défilement de côté (liste réunie)');
             assert.ok(await p.$eval('.ld-table--cards tbody tr[data-ld-row] [data-ld-bk]', b => b.getBoundingClientRect().width >= 30), '🧺 assez grand pour le doigt');

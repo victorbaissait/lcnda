@@ -3420,6 +3420,7 @@
  "↗ Comparer": "↗ Vergleichen",
  "↗ comparer sur « Remonter le temps » (IGN)": "↗ auf „Remonter le temps“ vergleichen (IGN)",
  "↗ Contrôle": "↗ Prüfung",
+ "↗ d’autres catalogues de {y}": "↗ weitere Kataloge von {y}",
  "↗ Déjà dans ta liste": "↗ Schon in deiner Liste",
  "↗ Dépouillement": "↗ Auszug",
  "↗ Dossier de preuve": "↗ Beweisakte",
@@ -14205,6 +14206,7 @@
  "beaucoup": "viel",
  "Beaucoup d’actes : choisis une sorte d’acte, un lieu ou un conjoint pour viser juste.": "Viele Urkunden: wähle eine Urkundenart, einen Ort oder einen Ehepartner, um gezielt zu suchen.",
  "Beaucoup d’archives, de bibliothèques et Gallica publient leurs registres en IIIF. Colle l’adresse du « manifeste » (souvent …/manifest.json, parfois derrière un logo IIIF) : l’app télécharge les vues dans un nouveau recueil, une vue par page.": "Viele Archive, Bibliotheken und Gallica veröffentlichen ihre Register in IIIF. Füge die Adresse des „Manifests“ ein (oft …/manifest.json, manchmal hinter einem IIIF-Logo): Die App lädt die Aufnahmen in eine neue Sammlung herunter, eine Aufnahme pro Seite.",
+ "Beaucoup d’expositions coloniales montraient au public, dans des « villages » reconstitués, des hommes, des femmes et des enfants venus des colonies : ce qu’on appelle aujourd’hui des « zoos humains ». La source ne dit pas si ce fut le cas ici.": "Viele Kolonialausstellungen führten dem Publikum in nachgebauten „Dörfern“ Männer, Frauen und Kinder aus den Kolonien vor: was man heute „Menschenzoos“ nennt. Die Quelle sagt nicht, ob es hier so war.",
  "Beaucoup de blanc sous le nom ; la photo est petite et en gris.": "Viel Weißraum unter dem Namen; das Foto ist klein und grau.",
  "beaucoup de choses": "viele Sachen",
  "Beaucoup de demandes au cadastre en une minute : attends un petit moment et réessaie.": "Viele Anfragen an das Kataster in einer Minute: Warte kurz und versuche es erneut.",
@@ -26161,7 +26163,6 @@
  "Ère {y}": "Ära {y}",
  "Ère birmane {y}": "Birmanische Ära {y}",
  "Ère d’Espagne": "Spanische Ära",
- "Ergast / jolpica-f1 (licence à lire ; site non joignable d’ici)": "Ergast / jolpica-f1 (Lizenz noch zu lesen; Seite von hier nicht erreichbar)",
  "erreur": {
   "one": "Fehler",
   "other": "Fehler"
@@ -34193,6 +34194,7 @@
  "Joindre les recherches faites au dossier du notaire.": "Die durchgeführten Recherchen der Akte für den Notar beilegen.",
  "Joins l’image à ton message : sur un forum, une page Facebook ou dans le courriel au journal.": "Häng das Bild an deine Nachricht: in einem Forum, auf einer Facebook-Seite oder in der E-Mail an die Zeitung.",
  "Joins-le à un e-mail, puis note qu’il est parti :": "Häng ihn an eine E-Mail an und notiere dann, dass er verschickt ist:",
+ "jolpica-f1 / Ergast (CC BY-NC-SA 4.0 : pas d’usage commercial)": "jolpica-f1 / Ergast (CC BY-NC-SA 4.0: keine kommerzielle Nutzung)",
  "Joods Monument — les Juifs des Pays-Bas morts dans la Shoah": "Joods Monument — die in der Schoah umgekommenen Juden der Niederlande",
  "Joseph et Jeanne (1861)": "Joseph und Jeanne (1861)",
  "joue": "spielt",

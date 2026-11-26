@@ -455,7 +455,7 @@
                 : T('Le Tour de France est parti ou arrivé à moins de {r} km d’ici {n} fois : la première en {y} ({t}), la dernière en {z}.', {r: String(r), n: String(around.length), y: String(first.s.y), t: esc(first.town), z: String(last.s.y)});
             if (here.length && around.length) lead += ' ' + esc(T('Et {n} fois à moins de {r} km.', {n: String(around.length), r: String(r)}));
             const yw = yellowTxt(last.s.y); if (yw) lead += ' ' + T('Maillot jaune en {y} : {w}.', {y: String(last.s.y), w: `<b>${esc(yw)}</b>`});
-            const toSport = ext.telechM && ext.dataListsEngine ? `<p class="muted"><button type="button" class="btn-link" data-tm-open="ts_competitions" data-tm-q="Tour de France">${esc(T('🏆 Tout le Tour de France dans 🏆 Sport'))}</button></p>` : '';
+            const toSport = ext.telechM && ext.dataListsEngine ? `<p class="muted"><button type="button" class="btn-link" data-tsx-open="ts_competitions" data-tsx-q="Tour de France">${esc(T('🏆 Tout le Tour de France dans 🏆 Sport'))}</button></p>` : '';
             return row('🚲', `${lead} ${link(first.s.edwiki ? wpUrl(first.s.edwiki) : wdUrl(first.s.q), T('↗ source'))}`, SRC.tour(), more(`<ul class="hist-ul">${list.map(stageLi).join('')}</ul>${hyp(T('Départ ou arrivée seulement : le fichier ne connaît pas les villages traversés.'))}${toSport}`, list.length));
         }
         if (kind === 'expos') {

@@ -74,7 +74,7 @@
         const w = pr.who[0], one = w.born ? T('{name} naît cette année-là', {name: w.n}) : w.age != null ? T('{name}, {age} ans', {name: w.n, age: w.age}) : w.n;
         return pr.who.length > 1 ? `${one} ${T('+{n}', {n: pr.who.length - 1})}` : one;
     };
-    const yearOf = (d, row) => { try { const p = d.period?.(row); const y = Array.isArray(p) ? Number(p[0]) : NaN; return Number.isFinite(y) ? y : null; } catch (_) { return null; } };
+    const yearOf = (d, row) => { try { const p = d.period?.(row); const y = Array.isArray(p) && p[0] != null && p[0] !== '' ? Number(p[0]) : NaN; return Number.isFinite(y) ? y : null; } catch (_) { return null; } };
     const geoOf = (d, row) => { try { const g = d.geo?.(row); return g && Number.isFinite(Number(g[0])) && Number.isFinite(Number(g[1])) ? [Number(g[0]), Number(g[1])] : null; } catch (_) { return null; } };
     const kmOf = d => Number(d?.familyKm) > 0 ? Number(d.familyKm) : kmSetting();
     /** la colonne « Dans la famille » d'une page (≤ 100 lignes) */

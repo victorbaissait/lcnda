@@ -3420,6 +3420,7 @@
  "↗ Comparer": "↗ Vergelijken",
  "↗ comparer sur « Remonter le temps » (IGN)": "↗ vergelijken op ‘Remonter le temps’ (IGN)",
  "↗ Contrôle": "↗ Controle",
+ "↗ d’autres catalogues de {y}": "↗ andere catalogi uit {y}",
  "↗ Déjà dans ta liste": "↗ Al in je lijst",
  "↗ Dépouillement": "↗ Indexering",
  "↗ Dossier de preuve": "↗ Bewijsdossier",
@@ -14205,6 +14206,7 @@
  "beaucoup": "veel",
  "Beaucoup d’actes : choisis une sorte d’acte, un lieu ou un conjoint pour viser juste.": "Veel akten: kies een soort akte, een plaats of een echtgenoot om gericht te zoeken.",
  "Beaucoup d’archives, de bibliothèques et Gallica publient leurs registres en IIIF. Colle l’adresse du « manifeste » (souvent …/manifest.json, parfois derrière un logo IIIF) : l’app télécharge les vues dans un nouveau recueil, une vue par page.": "Veel archieven, bibliotheken en Gallica publiceren hun registers in IIIF. Plak het adres van het ‘manifest’ (vaak …/manifest.json, soms achter een IIIF-logo): de app downloadt de scans in een nieuwe bundel, één scan per pagina.",
+ "Beaucoup d’expositions coloniales montraient au public, dans des « villages » reconstitués, des hommes, des femmes et des enfants venus des colonies : ce qu’on appelle aujourd’hui des « zoos humains ». La source ne dit pas si ce fut le cas ici.": "Veel koloniale tentoonstellingen toonden het publiek in nagebouwde ‘dorpen’ mannen, vrouwen en kinderen uit de koloniën: wat men nu ‘mensentuinen’ noemt. De bron zegt niet of dat hier zo was.",
  "Beaucoup de blanc sous le nom ; la photo est petite et en gris.": "Veel wit onder de naam; de foto is klein en grijs.",
  "beaucoup de choses": "veel spullen",
  "Beaucoup de demandes au cadastre en une minute : attends un petit moment et réessaie.": "Veel verzoeken aan het kadaster in één minuut: wacht even en probeer opnieuw.",
@@ -26161,7 +26163,6 @@
  "Ère {y}": "Jaartelling {y}",
  "Ère birmane {y}": "Birmaanse jaartelling {y}",
  "Ère d’Espagne": "Spaanse jaartelling",
- "Ergast / jolpica-f1 (licence à lire ; site non joignable d’ici)": "Ergast / jolpica-f1 (licentie nog te lezen; site hier niet bereikbaar)",
  "erreur": {
   "one": "fout",
   "other": "fouten"
@@ -34193,6 +34194,7 @@
  "Joindre les recherches faites au dossier du notaire.": "De uitgevoerde zoektochten bij het dossier voor de notaris voegen.",
  "Joins l’image à ton message : sur un forum, une page Facebook ou dans le courriel au journal.": "Voeg de afbeelding bij je bericht: op een forum, een Facebookpagina of in de e-mail aan de krant.",
  "Joins-le à un e-mail, puis note qu’il est parti :": "Voeg hem bij een e-mail en noteer dan dat hij vertrokken is:",
+ "jolpica-f1 / Ergast (CC BY-NC-SA 4.0 : pas d’usage commercial)": "jolpica-f1 / Ergast (CC BY-NC-SA 4.0: geen commercieel gebruik)",
  "Joods Monument — les Juifs des Pays-Bas morts dans la Shoah": "Joods Monument — de Joden uit Nederland die in de Shoah zijn omgekomen",
  "Joseph et Jeanne (1861)": "Joseph en Jeanne (1861)",
  "joue": "speelt",

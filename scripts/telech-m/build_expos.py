@@ -22,8 +22,22 @@ import wm
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'assets', 'data')
-HUMAN = re.compile(r"(?i)(zoos? humains?|villages? (indigènes?|nègres?|noirs?|sénégalais|africains?|annamites?|kanaks?|canaques?|malgaches?|soudanais|dahoméens?|ethnographiques?)|exhib(é|ée|és|ées|ition)s? (de|d['’]|des)|(indigènes|autochtones|figurants?) (y )?(étaient|furent|sont) (exposés|exhibés|présentés|installés|logés)|reconstitution d['’]un village)")
+HUMAN = re.compile(r"(?i)(zoos? humains?|villages? (indigènes?|nègres?|noirs?|sénégalais|africains?|annamites?|kanaks?|canaques?|malgaches?|soudanais|dahoméens?|ethnographiques?)|(personnes|hommes|femmes|habitants|indigènes|autochtones)[^.]{0,60}(exposés|exposées|exhibés|exhibées|mis en scène)|exhib(é|ée|és|ées)s?\\b)")
+# une exposition « nationale » de Wikidata : seulement les grandes expositions (pas les expositions d'art ni les rétrospectives)
+NATIONAL = re.compile(r"(?i)^exposition (universelle|internationale|nationale|régionale|coloniale|industrielle|agricole|des produits|d.horticulture|horticole|maritime|du (nord|sud|centre|midi)|de l.(est|ouest))")
 PRODUITS = 'Exposition des produits de l\'industrie française'
+
+
+def fits(e, t):
+    """le catalogue parle-t-il de cette exposition ? (sa ville, ou « produits de l'industrie », ou « universelle » pour Paris)"""
+    import unicodedata
+    f = lambda x: unicodedata.normalize('NFD', x).encode('ascii', 'ignore').decode().lower()
+    t, city = f(t), f(re.sub(r'\s*\(.*\)', '', e['city'] or '')).split(' ')[0]
+    if re.search(r'pan-american|panama|chicago|st\.? louis|philadelphi|buffalo|san francisco', t):
+        return False
+    if e['k'] == 'produits':
+        return 'produits' in t
+    return bool(city) and city in t or (city == 'paris' and 'universelle' in t)
 
 
 def title(u):
@@ -80,18 +94,21 @@ def main():
             if e['y'] is None:
                 m = re.search(r'\b(1[789]\d\d|20\d\d)\b', e['n'])
                 e['y'] = int(m.group(1)) if m else None
-    rows = [e for e in by.values() if e['y'] and e['y'] <= 2026 and not (e['k'] == 'nationale' and e['y'] > 1960)]
+    rows = [e for e in by.values() if e['y'] and e['y'] <= 2026 and not (e['k'] == 'nationale' and (e['y'] > 1960 or not NATIONAL.search(e['n'])))]
+    # un doublon d'une exposition coloniale déjà choisie à la main (même année, sans lieu) : enlevé
+    handy = {(r['y'], r.get('k')) for r in old['rows'] if r.get('q')}
+    rows = [e for e in rows if not (e['k'] == 'coloniale' and e['q'] not in oldq and not e['city'] and (e['y'], 'coloniale') in handy)]
     # les expositions coloniales : la phrase de l'article qui parle des personnes exhibées
     for e in rows:
         e['zoo'] = ''
         if e['k'] != 'coloniale' or not e['fr']:
             continue
         try:
-            txt = wm.plain(wm.wp_raw(e['fr']))
+            txt = re.sub(r'=+[^=\n]+=+', '\n', wm.plain(wm.wp_raw(e['fr'])))
         except Exception:  # noqa
             continue
-        for s in re.split(r'(?<=[.!?»])\s+(?=[«A-ZÉÀ])', txt.replace('\n', ' ')):
-            if HUMAN.search(s) and 40 < len(s) < 600:
+        for s in re.split(r'(?<=[.!?»])\s+(?=[«A-ZÉÀ])|\n+', txt):
+            if HUMAN.search(s) and 40 < len(s) < 600 and not re.match(r'(?i)\s*(fichier|file|image)\s*:', s):
                 e['zoo'] = s if len(s) <= 360 else s[:357].rsplit(' ', 1)[0] + ' …'
                 break
     # les Expositions des produits de l'industrie française (1798-1849) : la liste de l'article de Wikipédia
@@ -120,15 +137,20 @@ def main():
             continue
         if e['y'] > 1937:
             continue
-        kw = 'catalogue AND (exposition OR exposants)'
-        ys = f'[{e["y"]} TO {e["y"] + 1}]'
         city = re.sub(r'\s*\(.*\)', '', e['city'] or '')
-        q = f'title:({kw}) AND year:{ys} AND mediatype:texts' + (f' AND title:("{city}")' if city and city != 'Paris' else '')
-        url = 'https://archive.org/advancedsearch.php?' + urllib.parse.urlencode({'q': q, 'fl[]': ['identifier', 'title', 'year', 'licenseurl', 'rights'], 'rows': 6, 'output': 'json', 'sort[]': 'downloads desc'}, doseq=True)
-        try:
-            docs = json.loads(wm.get(url))['response']['docs']
-        except Exception:  # noqa
-            docs = []
+        ys = f'[{e["y"]} TO {e["y"] + 1}]'
+        where = f' AND title:("{city}")' if city and city != 'Paris' else ''
+        docs = []
+        for q in (f'title:(catalogue) AND (title:(exposants) OR title:("catalogue général") OR title:("catalogue officiel")) AND year:{ys} AND mediatype:texts' + where,
+                  f'title:(catalogue AND (exposition OR exposants)) AND year:{ys} AND mediatype:texts' + where):
+            url = 'https://archive.org/advancedsearch.php?' + urllib.parse.urlencode({'q': q, 'fl[]': ['identifier', 'title', 'year', 'licenseurl'], 'rows': 6, 'output': 'json', 'sort[]': 'downloads desc'}, doseq=True)
+            try:
+                docs += [d for d in json.loads(wm.get(url))['response']['docs'] if d.get('identifier') not in {x.get('identifier') for x in docs}
+                         and re.search(r'(?i)exposi|exhibit|ausstellung', str(d.get('title'))) and fits(e, str(d.get('title')))]
+            except Exception:  # noqa
+                pass
+            if len(docs) >= 2:
+                break
         for d in docs[:4]:
             t = d.get('title') if isinstance(d.get('title'), str) else (d.get('title') or [''])[0]
             if not re.match(r'^[A-Za-z0-9._-]+$', d.get('identifier', '')):

@@ -91,6 +91,7 @@
         return clusters.map(c => {
             const ms = c.members.sort((a, b) => (a.src.rank || 9) - (b.src.rank || 9)), out = {_k: ms[0].key, _members: ms.map(m => ({src: m.src, key: m.key, rec: m.rec}))};
             for (const k of keys) { const m = ms.find(x => x.rec[k] != null && x.rec[k] !== ''); out[k] = m ? m.rec[k] : null; }
+            if (out.year == null && c.year != null) out.year = c.year; // l'année : celle de la date quand la source ne la donne pas à part
             out.sources = ms.map(m => m.src.short);
             out._diff = (M.diff || []).some(df => { const vs = ms.map(m => num(m.rec[df.key])).filter(v => v != null); if (vs.length < 2) return false; const lo = Math.min(...vs), hi = Math.max(...vs); return df.abs != null ? hi - lo > df.abs : df.ratio != null ? lo > 0 && hi / lo >= df.ratio : false; });
             try { M.finish?.(out); } catch (_) {}
