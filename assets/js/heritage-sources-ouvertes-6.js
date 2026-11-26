@@ -233,6 +233,8 @@
         const links = lib.mine.map(s => `<a class="button small secondary" href="${esc(S6().url(s.key, p, cu))}" target="_blank" rel="noopener noreferrer" data-so6-go="${esc(s.key)}" title="${esc(s.note)}">📚 ${esc(s.label.split(' — ')[0])} ↗</a>`).join('');
         return `<p class="so-row so6-row so6-place" data-so6-region="${esc(lib.region?.key || '')}">${links}${btn(0, {group: 'fr_bn', place: o.name, placeOnly: true, placeId: o.placeId, county: o.county, state: o.state, insee: o.insee, country: o.country, label: lib.mine.length ? '📚 Autres bibliothèques…' : '📚 Livres et journaux sur ce lieu…'})}${o.placeId && !o.ro ? `<button type="button" class="button small secondary" data-so6-import="document" data-pid="0" data-place-id="${Number(o.placeId)}" data-place="${esc(o.name)}" title="Range la page trouvée et crée la source, reliées à ce lieu">⤒ Importer…</button>` : ''}${lib.region ? ` <small class="muted">${esc(lib.region.label)}</small>` : ''}</p>`;
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'so_links', host: '.so-row', collect: true, icon: '🔗', label: 'Chercher ce lieu en ligne (archives, Geneawiki, bibliothèques)', group: 'Données téléchargées'});
     function decorate(root = document) {
         const ws = root.querySelector?.('#workspace') || root; if (!ws?.querySelectorAll || !S6()) return;
         const cur = A()?.state?.currentPerson?.person; const pid = Number(cur?.id) || 0;

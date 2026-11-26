@@ -294,6 +294,8 @@
     });
     const BLOCK_WHERE = {voyages: 'emigration', military: 'militaire', awards: 'recompense'};
     const BLOCK_KIND = {voyages: 'passager', military: 'medaille_sh', awards: 'medaille_sh'};
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'so_links', host: '.so-row', collect: true, icon: '🔗', label: 'Chercher ce lieu en ligne (archives, Geneawiki, bibliothèques)', group: 'Données téléchargées'});
     function decorate(root = document) {
         const ws = root.querySelector?.('#workspace') || root; if (!ws?.querySelectorAll || !S5()) return;
         const cur = A()?.state?.currentPerson?.person; const pid = Number(cur?.id) || 0;

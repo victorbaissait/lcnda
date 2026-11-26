@@ -134,6 +134,8 @@
     }
 
     /* ═════════ la fiche d'un village et la monographie de commune ═════════ */
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'lp_place', host: '[data-lp-host]', icon: '📜', label: 'Anciens noms, lieux-dits, patrimoine', group: 'Son histoire'});
     function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-lp])');

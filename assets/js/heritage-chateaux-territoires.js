@@ -341,6 +341,8 @@
         return {id: Number(pli?.dataset.pliPlace) || 0, name, lat: pli?.dataset.pliLat !== '' && pli?.dataset.pliLat != null ? Number(pli.dataset.pliLat) : null,
             lon: pli?.dataset.pliLon !== '' && pli?.dataset.pliLon != null ? Number(pli.dataset.pliLon) : null, insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || ''};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'cht_place', host: '[data-cht-host]', icon: '🏰', label: 'Châteaux et territoires d’autrefois', group: 'Son histoire', enabled: () => on('place_castles') || on('place_terr')});
     function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-cht])');

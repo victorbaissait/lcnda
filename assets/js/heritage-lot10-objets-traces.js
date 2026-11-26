@@ -410,6 +410,8 @@
             lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
             insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || ''};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'l10o_place', host: '[data-l10o-host]', icon: '🔔', label: 'Objets et traces', group: 'Son histoire', enabled: () => PLACE_KINDS.some(k => on(k))});
     async function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-l10o])'); if (!village) return;

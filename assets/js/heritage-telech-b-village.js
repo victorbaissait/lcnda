@@ -219,6 +219,8 @@
         return {id: Number(pli?.dataset.pliPlace) || 0, name: pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim(),
             lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'tb_place', host: '[data-tb-host]', icon: '🐑', label: 'La vie du village et la nature', group: 'Données téléchargées', enabled: () => PLACE_KINDS.some(k => on(k))});
     async function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-tbv])'); if (!village) return;

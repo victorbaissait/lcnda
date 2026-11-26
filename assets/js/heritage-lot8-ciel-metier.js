@@ -512,6 +512,8 @@
             lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
             insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || village.querySelector('[data-cad-insee]')?.dataset.cadInsee || '', country: /france/i.test(head) || /INSEE/.test(head) ? 'France' : ''};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'l8a_place', host: '[data-l8a-host]', icon: '🌅', label: 'Le ciel, la mer et le métier', group: 'Autour', enabled: () => ['homonymes', 'plans', 'eaux', 'jardins'].some(on)});
     async function decorate() {
         const ws = W.document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-l8a])'); if (!village) return;

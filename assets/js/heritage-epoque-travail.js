@@ -445,6 +445,8 @@
             lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
             insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || village.querySelector('[data-cad-insee]')?.dataset.cadInsee || '', state: head};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'et_place', host: '[data-et-host]', icon: '🕰', label: 'Son époque et son travail', group: 'Son histoire'});
     async function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-et])'); if (!village) return;

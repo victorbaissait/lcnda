@@ -437,7 +437,8 @@
         W = {step: 1, got: null, view: null, meta: {name: input.name || '', icon: input.icon || '📋', source: input.source || '', licence: input.licence || '', source_url: input.source_url || ''}};
         pending = hasData ? input : null;
         st.listType = KEY;
-        if (st.module === 'listes') { A().renderSidebar?.(); renderNew(++st.workspaceToken); } else A().setModule?.('listes');
+        if (st.module !== 'listes') { A().setModule?.('listes'); st.listType = KEY; }
+        A().renderSidebar?.(); renderNew(++st.workspaceToken);
         return Promise.resolve(true);
     }
     ext.listesPerso = {create, open: openList, lists: () => [...STORE.values()].map(s => s.meta), reload, listBar, applyFile, readInput, understand, save, _store: STORE};

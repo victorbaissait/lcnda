@@ -554,6 +554,8 @@
             lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
             insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || village.querySelector('[data-cad-insee]')?.dataset.cadInsee || ''};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'fe_place', host: '[data-fe-host]', icon: '🏰', label: 'Les édifices de la commune', group: 'Le village', enabled: () => on('place')});
     async function decorateVillage() {
         const ws = document.getElementById('workspace'); if (!ws || !on('place')) return;
         const village = ws.querySelector('.h-village:not([data-fe])'); if (!village) return;

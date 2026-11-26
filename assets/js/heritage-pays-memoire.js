@@ -283,6 +283,8 @@
         }));
         return pl;
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'pm_place', host: '[data-pm-host]', icon: '🏡', label: 'Pays et mémoire', group: 'Son histoire'});
     function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-pm])');

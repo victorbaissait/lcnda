@@ -348,6 +348,8 @@
             lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
             insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || ''};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'td_place', host: '[data-td-host]', icon: '🧭', label: 'Mémoire et vieux papiers', group: 'Données téléchargées', enabled: () => PLACE_KINDS.some(k => on(k))});
     async function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-td])'); if (!village) return;

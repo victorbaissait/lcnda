@@ -262,6 +262,8 @@
             if (k === 'church') churchInto(body, place); else if (k === 'cemeteries') fillCemeteries(body, place, {map}); else if (k === 'images') fillImages(body, place);
         });
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'cplus_place', host: '.cplus-place', icon: '🪦', label: 'Autour du village (église, cimetières, images anciennes)', group: 'Autour', enabled: () => ['church', 'cemeteries', 'images'].some(k => !!settings()[k])});
     function decorate(root = document) {
         const ws = root.querySelector?.('#workspace') || document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-cplus])');

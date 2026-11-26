@@ -478,6 +478,8 @@
         return {id: Number(pli?.dataset.pliPlace) || 0, name, lat: pli?.dataset.pliLat !== '' && pli?.dataset.pliLat != null ? Number(pli.dataset.pliLat) : null,
             lon: pli?.dataset.pliLon !== '' && pli?.dataset.pliLon != null ? Number(pli.dataset.pliLon) : null, insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || ''};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'dp_ancien_regime', host: '[data-dp-part="ar"]', icon: '🏛️', label: 'Sous l’Ancien Régime', group: 'Son histoire', enabled: () => on('place_ar')});
     function decorateVillage() {
         const ws = document.getElementById('workspace'); if (!ws || !on('place_ar')) return;
         const village = ws.querySelector('.h-village:not([data-dp])'); if (!village) return;

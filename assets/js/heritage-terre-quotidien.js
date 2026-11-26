@@ -421,6 +421,8 @@
         }
         return out.length ? `<div class="tq-place">${out.join('')}</div>` : '';
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'tq_place', host: '.tq-place', icon: '🌍', label: 'Terre au quotidien', group: 'Autour'});
     function decoratePlace() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-tq])');

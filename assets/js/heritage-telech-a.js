@@ -195,6 +195,8 @@
             lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null, country: pli?.dataset.pliCountry || ''};
     }
     const panel = inner => `<section class="maintenance-panel cplus-panel ta-panel"><h3>${esc(T('🗺 Le village tel qu’il était'))}</h3><div class="hist-life ta-life">${inner}</div></section>`;
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'ta_place', host: '[data-ta-host]', icon: '🗺', label: 'Le village tel qu’il était', group: 'Données téléchargées', enabled: () => ['avantapres', 'paysage'].some(on)});
     async function decorate() {
         const ws = W.document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-ta])'); if (!village) return;

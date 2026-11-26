@@ -328,6 +328,8 @@
         const pli = village.querySelector('[data-pli-host]'), head = village.querySelector('.page-header p, header p')?.textContent || '';
         return {id: Number(pli?.dataset.pliPlace) || 0, name: pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim(), insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || ''};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'tc_place', host: '[data-tc-host]', icon: '📊', label: 'La vie en chiffres et la commune dans les livres d’époque', group: 'Données téléchargées', enabled: () => on('livres') || on('cholera')});
     function decorate() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-tc])'); if (!village) return;

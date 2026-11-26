@@ -169,6 +169,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=1">
+    <link rel="stylesheet" href="assets/css/fiche-village-organiser.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
     for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
@@ -1359,7 +1360,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=7" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=8" defer></script>
 <script src="assets/js/heritage-links.js?v=26" defer></script>
-<script src="assets/js/heritage-more.js?v=412" defer></script>
+<script src="assets/js/heritage-more.js?v=413" defer></script>
 <script src="assets/js/heritage-controle.js?v=11" defer></script>
 <script src="assets/js/heritage-commune-histoire.js?v=1" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>

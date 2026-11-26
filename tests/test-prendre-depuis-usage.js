@@ -337,7 +337,7 @@ const t = async (name, fn) => {
             await p.fill('#investigation-item-dialog textarea[name="notes"]', ''); await p.focus('#investigation-item-dialog textarea[name="notes"]');
             for (const [q, re] of [['Eymoutiers', 'Eymoutiers'], ['baptême', 'baptême']]) { await p.keyboard.type('/'); await p.waitForSelector('.cx-qi'); await p.keyboard.type(q); await p.waitForFunction(x => new RegExp(x).test(document.querySelector('.cx-qi .cx-qi-r.is-on')?.textContent || ''), re, {timeout: 20000}); await p.keyboard.press('Enter'); await p.keyboard.press('Enter'); }
             const v = await p.inputValue('#investigation-item-dialog textarea[name="notes"]'); assert.match(v, /Eymoutiers/); assert.match(v, /baptême/);
-            await closeAll();
+            await closeAll(); await p.evaluate(() => { localStorage.removeItem('genealogie-connexions-panier'); return window.LCNDA_EXT.connexions.refresh(); }); // le panier par défaut, pour la suite
         });
         await t('L1 · page d’une liste : « ☑ Choisir des lignes », 2 sur 5, Maj+clic pour une suite, « Prendre… » propose « les 2 cochées » ou « les 5 trouvées »', async m => {
             await clearBasket();

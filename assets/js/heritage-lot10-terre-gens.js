@@ -482,6 +482,8 @@
         return {id: Number(pli?.dataset.pliPlace) || 0, name: pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim(), lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null,
             insee: (head.match(/INSEE\s+(\d[\dAB]\d{3})/) || [])[1] || village.querySelector('[data-cad-insee]')?.dataset.cadInsee || ''};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'l10_terre_gens', host: '[data-l10-host]', icon: '⛰️', label: 'Sa terre et ses gens', group: 'Autour', enabled: () => Object.keys(PLACE_PARTS).some(k => partOn(k, on))});
     function decorate() {
         const ws = W.document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-l10])'); if (!village) return;

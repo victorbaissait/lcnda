@@ -1184,54 +1184,210 @@
         }
         return `<div class="h-decades">${bars.join('')}</div>`;
     }
-    /* ─── Fiche d'un village : parties rangées, masquées, en demi ou pleine largeur (genealogie-village-layout) ─── */
-    const VILLAGE_SECTIONS = [['stats', '🔢 Les chiffres', 'full'], ['map', '🗺️ La carte', 'half'], ['church', '⛪ Église et paroisse', 'half'], ['population', '👥 Population au fil des recensements', 'half'], ['jobs', '⚒️ Métiers dominants', 'half'],
-        ['addrmap', '🗺️ Plan du recensement (maisons, année par année)', 'full'], ['memo', '🗒️ Bloc-notes', 'half'], ['families', '🏠 Les familles qui y ont vécu', 'full'], ['decades', '📜 Actes par décennie', 'full'], ['notes', '📝 Notes et photos', 'full'],
-        ['recueils', '📚 Recueils', 'full'], ['popchart', '📈 Évolution du nombre d’habitants', 'full'], ['postcards', '🏞 Cartes postales', 'full'], ['placeimgs', '🖼 Images du lieu', 'full'], ['parcels', '🗺 Parcelles du cadastre', 'full']];
-    ext.villageSections = () => VILLAGE_SECTIONS;
+    /* ─── Fiche d'un village : TOUTES ses parties rangées, masquées, à la largeur choisie (genealogie-village-layout) ───
+     * Les parties d'ici (VILLAGE_SECTIONS) et celles des autres fichiers, déclarées dans un registre commun :
+     *   (LCNDA_EXT.villageSectionDefs = LCNDA_EXT.villageSectionDefs || []).push({id, icon, label, group, host, defaultWidth, defaultShown, enabled})
+     *   (ou LCNDA_EXT.villageSections.register({...}) une fois ce fichier chargé).
+     *   host : sélecteur de ce que le fichier pose dans la page (« [data-ta-host] ») ; la fiche le range à sa place et à sa largeur.
+     *   collect: true : plusieurs petits morceaux (rangées de liens) réunis dans une seule partie. unwrap : un conteneur défait,
+     *   ses morceaux rangés un à un (chacun déclaré avec son host). enabled() faux : la partie est grisée (« pas activé ») dans l'organisateur.
+     *   group : 'Le village' · 'Son histoire' · 'Autour' · 'Données téléchargées' (sinon « Autres parties »).
+     * Une partie posée sans être déclarée est rangée quand même (nom lu sur son titre) : rien n'échappe à « ⚙️ Organiser la fiche ».
+     * Une partie arrivée depuis la dernière visite de l'organisateur porte « Nouveau ». Essai : tests/test-fiche-village-organiser.js */
+    const VG = ['Le village', 'Son histoire', 'Autour', 'Données téléchargées', 'Autres parties'];
+    const VILLAGE_SECTIONS = [['stats', '🔢 Les chiffres', 'full', 'Le village'], ['map', '🗺️ La carte', 'half', 'Le village'], ['church', '⛪ Église et paroisse', 'half', 'Le village'], ['population', '👥 Population au fil des recensements', 'half', 'Le village'], ['jobs', '⚒️ Métiers dominants', 'half', 'Le village'],
+        ['addrmap', '🗺️ Plan du recensement (maisons, année par année)', 'full', 'Le village'], ['memo', '🗒️ Bloc-notes', 'half', 'Le village'], ['families', '🏠 Les familles qui y ont vécu', 'full', 'Le village'], ['decades', '📜 Actes par décennie', 'full', 'Le village'], ['notes', '📝 Notes et photos', 'full', 'Le village'],
+        ['recueils', '📚 Recueils', 'full', 'Le village'], ['popchart', '📈 Évolution du nombre d’habitants', 'full', 'Son histoire'], ['postcards', '🏞 Cartes postales', 'full', 'Son histoire'], ['placeimgs', '🖼 Images du lieu', 'full', 'Son histoire'], ['parcels', '🗺 Parcelles du cadastre', 'full', 'Le village']];
+    const VILLAGE_WIDTHS = [['w3', '1/4', 3], ['w4', '1/3', 4], ['half', '1/2', 6], ['w8', '2/3', 8], ['w9', '3/4', 9], ['full', 'pleine', 12]];
+    const VKEY = 'genealogie-village-layout';
+    const normW = w => { const s = String(w ?? '').trim(); const hit = VILLAGE_WIDTHS.find(x => x[0] === s || x[1] === s || String(x[2]) === s); return hit ? hit[0] : /^(1|full|pleine)$/i.test(s) ? 'full' : ''; };
+    const vOn = d => { try { return typeof d.enabled === 'function' ? d.enabled() !== false : d.enabled !== false; } catch (_) { return false; } };
+    const vMatch = (el, sel) => { try { return !!sel && el.matches(sel); } catch (_) { return false; } };
+    /** toutes les parties connues : celles d'ici, celles déclarées, celles rangées sans déclaration (auto : {id: nom}) */
+    function villageDefs(auto = {}) {
+        const out = VILLAGE_SECTIONS.map(([id, label, width, group]) => ({id, label: i18n(label), width, group, shown: true, builtin: true, on: true}));
+        (Array.isArray(ext.villageSectionDefs) ? ext.villageSectionDefs : []).forEach(d => {
+            if (!d || typeof d !== 'object' || !/^[a-z0-9_-]{1,40}$/i.test(String(d.id || '')) || out.some(x => x.id === d.id)) return;
+            out.push({id: d.id, label: `${d.icon ? d.icon + ' ' : ''}${i18n(d.label || d.id)}`, width: normW(d.defaultWidth) || 'full', group: d.group || 'Autres parties', shown: d.defaultShown !== false,
+                host: d.host || '', collect: !!d.collect, unwrap: d.unwrap || '', wrapper: !!d.unwrap && !d.host, on: vOn(d)});
+        });
+        Object.entries(auto && typeof auto === 'object' ? auto : {}).forEach(([id, label]) => { if (/^x_[a-z0-9_]{1,40}$/.test(id) && !out.some(x => x.id === id)) out.push({id, label: String(label || id).slice(0, 80), width: 'full', group: 'Autres parties', shown: true, auto: true, on: true}); });
+        return out;
+    }
+    ext.villageSections = Object.assign(() => villageDefs(villageSaved(true).auto).filter(d => !d.wrapper).map(d => [d.id, d.label, d.width]), {
+        register: def => { (ext.villageSectionDefs = Array.isArray(ext.villageSectionDefs) ? ext.villageSectionDefs : []).push(def); },
+        list: () => villageDefs(villageSaved(true).auto).filter(d => !d.wrapper)});
     ext.villageParts = {mapHtml: (v, bg = 'standard', zoom = 12) => villageMapHtml(v, bg, zoom), decadesHtml, populationChart}; // 📜 réutilisés par la monographie (heritage-monographie-plus.js)
     ext.villageWidths = () => VILLAGE_WIDTHS;
-    function villageLayout() {
+    function villageSaved(own = false) {
         let saved = {};
-        try { saved = JSON.parse(localStorage.getItem('genealogie-village-layout') || '{}') || {}; } catch (_) {}
-        if (window.LCNDA_SCREEN_LAYOUT?.kind === 'village') saved = window.LCNDA_SCREEN_LAYOUT; // organisation propre au widget ou à l'onglet
-        const keys = VILLAGE_SECTIONS.map(x => x[0]);
-        const order = [...(Array.isArray(saved.order) ? saved.order.filter(k => keys.includes(k)) : []), ...keys.filter(k => !(saved.order || []).includes(k))];
-        return {order, hidden: Array.isArray(saved.hidden) ? saved.hidden.filter(k => keys.includes(k)) : [], width: saved.width && typeof saved.width === 'object' ? saved.width : {}};
+        try { saved = JSON.parse(localStorage.getItem(VKEY) || '{}') || {}; } catch (_) {}
+        if (!own && window.LCNDA_SCREEN_LAYOUT?.kind === 'village') return {...window.LCNDA_SCREEN_LAYOUT, auto: saved.auto, screen: true}; // organisation propre au widget ou à l'onglet
+        return saved && typeof saved === 'object' && !Array.isArray(saved) ? saved : {};
     }
-    const VILLAGE_WIDTHS = [['full', 'pleine', 12], ['half', '1/2', 6], ['w4', '1/3', 4], ['w3', '1/4', 3], ['w8', '2/3', 8], ['w9', '3/4', 9]];
-    const villageWidth = (l, k) => { const w = l.width[k] || VILLAGE_SECTIONS.find(x => x[0] === k)?.[2] || 'full'; return VILLAGE_WIDTHS.some(x => x[0] === w) ? w : 'full'; };
+    /** own : l'organisation de la fiche dans Listes (pas celle d'un widget ou d'un onglet) */
+    function villageLayout(own = false) {
+        const saved = villageSaved(own), auto = saved.auto && typeof saved.auto === 'object' && !Array.isArray(saved.auto) ? saved.auto : {};
+        const defs = villageDefs(auto).filter(d => !d.wrapper), keys = defs.map(d => d.id), arr = v => (Array.isArray(v) ? v.filter(k => typeof k === 'string') : []);
+        const known = [...arr(saved.order), ...arr(saved.seen)];
+        const order = [...new Set(arr(saved.order).filter(k => keys.includes(k)))]; keys.forEach(k => { if (!order.includes(k)) order.push(k); });
+        const hidden = [...new Set([...arr(saved.hidden).filter(k => keys.includes(k)), ...defs.filter(d => !d.shown && !known.includes(d.id)).map(d => d.id)])];
+        const width = {}; Object.entries(saved.width && typeof saved.width === 'object' ? saved.width : {}).forEach(([k, w]) => { const n = normW(w); if (n) width[k] = n; });
+        return {order, hidden, width, seen: Array.isArray(saved.seen) ? arr(saved.seen) : null, auto: {...auto}, screen: !!saved.screen, defs};
+    }
+    function villageStore(l) {
+        if (l.screen) return;
+        try { localStorage.setItem(VKEY, JSON.stringify({order: l.order, hidden: l.hidden, width: l.width, seen: l.seen || [], auto: l.auto})); } catch (_) {}
+    }
+    const villageWidth = (l, k) => { const w = l.width[k] || l.defs.find(x => x.id === k)?.width || 'full'; return VILLAGE_WIDTHS.some(x => x[0] === w) ? w : 'full'; };
+    const vSpan = (l, k) => VILLAGE_WIDTHS.find(x => x[0] === villageWidth(l, k))[2];
+    /** une partie posée sans déclaration : son nom vient de son attribut data-…-host ou de sa classe …-place */
+    function vAutoId(el) {
+        for (const a of el.attributes || []) { const m = a.name.match(/^data-([a-z0-9-]{1,30})-(host|place)$/); if (m) return 'x_' + m[1].replace(/-/g, '_'); }
+        const c = [...el.classList].find(x => /^[a-z0-9-]{1,30}-(place|panel|box)$/.test(x) && !/^(maintenance|cplus|h)-panel$/.test(x));
+        return c ? 'x_' + c.replace(/-(place|panel|box)$/, '').replace(/-/g, '_') : '';
+    }
+    const vTitle = el => (el?.querySelector('h3, h2, h4, summary, .eyebrow')?.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+    /** met une partie à sa place, à sa largeur, montrée ou non */
+    function vPlace(flow, el, id, l) {
+        el.dataset.vsec = id; el.dataset.vplaced = '1';
+        const off = l.hidden.includes(id), span = vSpan(l, id);
+        el.classList.toggle('is-vhidden', off);
+        if (l.defs.find(d => d.id === id)?.builtin) el.hidden = off;
+        el.style.setProperty('--vspan', span);
+        el.classList.toggle('is-vnarrow', span <= 4);
+        const at = k => { const i = l.order.indexOf(k); return i < 0 ? Infinity : i; }, mine = at(id);
+        const next = [...flow.children].find(c => c !== el && c.dataset.vplaced && at(c.dataset.vsec) > mine);
+        if (next) { if (el.nextElementSibling !== next) flow.insertBefore(el, next); } else if (el.parentElement !== flow || el.nextElementSibling) flow.appendChild(el);
+    }
+    /** range ce que les autres fichiers ont posé dans la page depuis la dernière fois (après la grille ou dans la grille, pas encore rangé) */
+    function villageAdopt(page) {
+        const flow = page?.querySelector(':scope > .h-village-flow'); if (!flow) return 0;
+        const kids = [...page.children], strays = [...kids.slice(kids.indexOf(flow) + 1), ...[...flow.children].filter(el => !el.dataset.vplaced)]
+            .filter(el => !/^(SCRIPT|STYLE|TEMPLATE|DIALOG|LINK)$/.test(el.tagName));
+        if (!strays.length) return 0;
+        const l = villageLayout(), all = villageDefs(l.auto);
+        let autoNew = false, n = 0;
+        const one = el => {
+            let d = el.dataset.vsec ? all.find(x => x.id === el.dataset.vsec) : null;
+            if (!d) d = all.find(x => x.host && !x.collect && vMatch(el, x.host));
+            const c = !d && all.find(x => x.collect && vMatch(el, x.host));
+            let id = d?.id || el.dataset.vsec || '';
+            if (c || (!id && !(id = vAutoId(el)) && !vTitle(el))) { // une rangée de liens, un petit morceau sans nom : réunis dans une partie
+                const cid = c ? c.id : 'x_divers';
+                let box = flow.querySelector(`:scope > [data-vsec="${cid}"]`);
+                if (!box) { box = document.createElement('div'); box.className = 'h-village-collect'; vPlace(flow, box, cid, l); if (!c && !l.auto[cid]) { l.auto[cid] = 'Autres éléments'; autoNew = true; } }
+                box.appendChild(el); n++; return;
+            }
+            if (!id) id = 'x_' + vTitle(el).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 30);
+            if (!all.some(x => x.id === id) && !l.auto[id]) { l.auto[id] = vTitle(el) || id; autoNew = true; }
+            if (!l.order.includes(id)) l.order.push(id);
+            vPlace(flow, el, id, l); n++;
+        };
+        strays.forEach(el => {
+            if (!el.isConnected) return;
+            const w = all.find(d => d.unwrap && vMatch(el, d.unwrap));
+            if (w) { const parts = [...el.children]; parts.forEach(p => flow.appendChild(p)); el.remove(); parts.forEach(one); return; }
+            one(el);
+        });
+        if (autoNew && !l.screen) { const s = villageSaved(true); s.auto = l.auto; try { localStorage.setItem(VKEY, JSON.stringify(s)); } catch (_) {} }
+        if (n) requestAnimationFrame(() => window.dispatchEvent(new Event('resize'))); // une carte qui change de largeur se redessine
+        return n;
+    }
     function arrangeVillage(ws) {
         const l = villageLayout(), page = ws.querySelector('.h-village');
         const flow = document.createElement('div'); flow.className = 'h-village-flow';
-        l.order.forEach(k => { const el = page.querySelector(`[data-vsec="${k}"]`); if (!el) return; el.hidden = l.hidden.includes(k); el.style.setProperty('--vspan', VILLAGE_WIDTHS.find(x => x[0] === villageWidth(l, k))[2]); flow.appendChild(el); });
         const grid = page.querySelector('.h-village-grid');
         (grid || page.lastElementChild)?.insertAdjacentElement(grid ? 'beforebegin' : 'afterend', flow);
+        l.order.forEach(k => { const el = page.querySelector(`[data-vsec="${k}"]`); if (el) vPlace(flow, el, k, l); });
         grid?.remove();
+        // « Nouveau » : la première fois, ce qui est là compte comme déjà vu (une fiche réglée avant : seulement ses parties d'alors)
+        if (l.seen === null && !l.screen) { const s = villageSaved(true); s.seen = Array.isArray(s.order) && s.order.length ? s.order.filter(k => typeof k === 'string') : l.order.slice(); try { localStorage.setItem(VKEY, JSON.stringify(s)); } catch (_) {} }
+        villageAdopt(page);
+        if (typeof MutationObserver !== 'undefined') {
+            const mo = new MutationObserver(() => { if (!page.isConnected) { mo.disconnect(); return; } villageAdopt(page); mo.takeRecords(); });
+            mo.observe(page, {childList: true}); mo.observe(flow, {childList: true});
+        }
     }
+    /** l'organisation a changé : la page en cours suit tout de suite */
+    function villageRelayout() {
+        const page = document.querySelector('#workspace .h-village'), flow = page?.querySelector(':scope > .h-village-flow'); if (!flow) return;
+        const l = villageLayout();
+        const at = k => { const i = l.order.indexOf(k); return i < 0 ? Infinity : i; };
+        [...flow.children].filter(el => el.dataset.vplaced).sort((a, b) => at(a.dataset.vsec) - at(b.dataset.vsec)).forEach(el => { vPlace(flow, el, el.dataset.vsec, l); flow.appendChild(el); });
+        requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+    }
+    ext.villageLayoutApi = {defs: () => villageDefs(villageSaved(true).auto).filter(d => !d.wrapper), layout: villageLayout, adopt: villageAdopt, relayout: villageRelayout, widths: VILLAGE_WIDTHS}; // pour les essais
     function villageLayoutDialog(after) {
-        let l = villageLayout();
-        const save = () => { try { localStorage.setItem('genealogie-village-layout', JSON.stringify(l)); } catch (_) {} };
-        const body = () => `<p class="muted">Pour toutes les fiches de village. Les flèches rangent les parties ; décocher en masque une ; la largeur (1/4, 1/3, 1/2, 2/3, 3/4 ou pleine) en met plusieurs sur une ligne.</p>
-            <table class="data-table h-flag-table"><thead><tr><th>Ordre</th><th>Partie</th><th>Montrée</th><th>Largeur</th></tr></thead><tbody>${l.order.map((k, i) => `<tr><td><button type="button" class="icon-button" data-vl-move="${k}" data-dir="-1" ${i ? '' : 'disabled'}>↑</button><button type="button" class="icon-button" data-vl-move="${k}" data-dir="1" ${i < l.order.length - 1 ? '' : 'disabled'}>↓</button></td>
-                <td>${esc(VILLAGE_SECTIONS.find(x => x[0] === k)[1])}</td><td><input type="checkbox" data-vl-show="${k}" ${l.hidden.includes(k) ? '' : 'checked'}></td>
-                <td><select data-vl-width="${k}">${VILLAGE_WIDTHS.map(([w, lab]) => `<option value="${w}" ${villageWidth(l, k) === w ? 'selected' : ''}>${lab}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table>
-            <p><button type="button" class="link-button" data-vl-reset>↺ Remettre comme au départ</button></p>`;
-        ext.openDialog({eyebrow: 'FICHE D’UN VILLAGE', title: 'Organiser la fiche', wide: true, submitLabel: 'Fermer', body: body(),
+        let l = villageLayout(true), q = '', grp = '', changed = false;
+        const undo = [];
+        const startSeen = l.seen || l.order.slice();
+        if (!l.seen) l.seen = startSeen.slice();
+        const here = id => document.querySelector(`#workspace .h-village [data-vsec="${CSS.escape(id)}"]`);
+        const labelOf = d => { if (d.auto) { const t = vTitle(here(d.id)); if (t && t !== l.auto[d.id] && d.id !== 'x_divers') l.auto[d.id] = t; return l.auto[d.id] || d.id; } return d.label; };
+        const save = () => { villageStore(l); villageRelayout(); };
+        const push = () => { undo.push(JSON.stringify({order: l.order, hidden: l.hidden, width: l.width})); if (undo.length > 50) undo.shift(); changed = true; };
+        const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+        const groups = () => { const g = [...new Set(l.defs.map(d => VG.includes(d.group) ? d.group : 'Autres parties'))]; return VG.filter(x => g.includes(x)); };
+        const gOf = d => (VG.includes(d.group) ? d.group : 'Autres parties');
+        const visible = () => l.order.filter(k => { const d = l.defs.find(x => x.id === k); return d && (!grp || gOf(d) === grp) && (!q || fold(labelOf(d)).includes(fold(q))); });
+        const body = () => {
+            const vis = visible(), many = l.order.length > 20;
+            return `<p class="muted vl-help">${esc(i18n('Pour toutes les fiches de village. Glisse ⠿ (ou ↑ ↓, ou Alt + flèches) pour ranger les parties ; décocher en masque une ; la largeur (1/4, 1/3, 1/2, 2/3, 3/4 ou pleine) en met plusieurs sur une ligne. Les parties des autres outils sont là aussi, avec « Nouveau » quand elles viennent d’arriver.'))}</p>
+            <div class="vl-tools">${many ? `<input type="search" class="vl-search" data-vl-q value="${esc(q)}" placeholder="${esc(i18n('Chercher une partie…'))}" aria-label="${esc(i18n('Chercher une partie'))}">` : ''}
+                <div class="vl-groups" role="group" aria-label="${esc(i18n('Thèmes'))}"><button type="button" class="vl-chip ${grp ? '' : 'is-on'}" data-vl-grp="">${esc(i18n('Toutes ({n})', {n: l.order.length}))}</button>${groups().map(g => `<button type="button" class="vl-chip ${grp === g ? 'is-on' : ''}" data-vl-grp="${esc(g)}">${esc(i18n(g))} (${l.defs.filter(d => gOf(d) === g).length})</button>`).join('')}</div></div>
+            <div class="vl-wrap"><table class="data-table vl-table"><thead><tr><th>${esc(i18n('Ordre'))}</th><th>${esc(i18n('Partie'))}</th><th>${esc(i18n('Montrée'))}</th><th>${esc(i18n('Largeur'))}</th></tr></thead><tbody data-vl-body>${vis.map((k, i) => {
+                const d = l.defs.find(x => x.id === k), off = l.hidden.includes(k), isNew = !startSeen.includes(k), lab = labelOf(d);
+                return `<tr data-vl-row="${esc(k)}" draggable="true" class="${off ? 'is-off' : ''}${d.on ? '' : ' is-na'}"><td class="vl-ord"><button type="button" class="vl-grip" data-vl-grip="${esc(k)}" aria-label="${esc(i18n('Déplacer « {p} » (flèches haut et bas)', {p: lab}))}" title="${esc(i18n('Glisser, ou flèches haut et bas'))}">⠿</button><button type="button" class="vl-move" data-vl-move="${esc(k)}" data-dir="-1" ${i ? '' : 'disabled'} aria-label="${esc(i18n('Monter'))}">↑</button><button type="button" class="vl-move" data-vl-move="${esc(k)}" data-dir="1" ${i < vis.length - 1 ? '' : 'disabled'} aria-label="${esc(i18n('Descendre'))}">↓</button></td>
+                <td class="vl-name"><span>${esc(lab)}</span>${isNew ? ` <span class="ui-badge is-blue vl-new">${esc(i18n('Nouveau'))}</span>` : ''} <small class="vl-grp">${esc(i18n(gOf(d)))}</small>${d.on ? '' : ` <small class="vl-na">${esc(i18n('(pas activé)'))}</small>`}</td>
+                <td class="vl-show"><input type="checkbox" data-vl-show="${esc(k)}" ${off ? '' : 'checked'} aria-label="${esc(i18n('Montrer « {p} »', {p: lab}))}"></td>
+                <td><select data-vl-width="${esc(k)}" aria-label="${esc(i18n('Largeur de « {p} »', {p: lab}))}">${VILLAGE_WIDTHS.map(([w, wl]) => `<option value="${w}" ${villageWidth(l, k) === w ? 'selected' : ''}>${esc(i18n(wl))}</option>`).join('')}</select></td></tr>`; }).join('')}</tbody></table>
+            ${vis.length ? '' : `<p class="muted">${esc(i18n('Aucune partie ne correspond.'))}</p>`}</div>
+            <div class="vl-foot"><button type="button" class="button small secondary" data-vl-reset>${esc(i18n('↺ Ordre d’origine'))}</button><button type="button" class="button small secondary" data-vl-undo ${undo.length ? '' : 'disabled'}>${esc(i18n('↶ Annuler'))}</button><span class="muted vl-count">${esc(i18n('{n} parties montrées sur {t}', {n: l.order.length - l.hidden.length, t: l.order.length}))}</span></div>`;
+        };
+        ext.openDialog({eyebrow: i18n('FICHE D’UN VILLAGE'), title: i18n('Organiser la fiche'), wide: true, submitLabel: 'Fermer', body: body(),
             onOpen: d => {
+                d.classList.add('vl-dialog');
                 const box = d.querySelector('.h-dialog-body');
-                const repaint = () => { box.innerHTML = body(); save(); };
+                const repaint = (focus = null) => {
+                    const ae = document.activeElement, keep = focus || (ae && box.contains(ae) ? (ae.dataset.vlQ !== undefined ? '[data-vl-q]' : ae.dataset.vlGrip ? `[data-vl-grip="${CSS.escape(ae.dataset.vlGrip)}"]` : ae.dataset.vlMove ? `[data-vl-move="${CSS.escape(ae.dataset.vlMove)}"][data-dir="${ae.dataset.dir}"]` : '') : '');
+                    box.innerHTML = body();
+                    const f = keep && box.querySelector(keep); if (f) { f.focus(); if (f.dataset.vlQ !== undefined) f.setSelectionRange(f.value.length, f.value.length); else if (f.disabled) f.closest('tr')?.querySelector('[data-vl-grip]')?.focus(); }
+                };
+                /** déplace k d'un cran parmi les lignes affichées (filtre ou recherche) : il passe juste avant / après sa voisine */
+                const move = (k, dir) => {
+                    const vis = visible(), i = vis.indexOf(k), other = vis[i + dir]; if (!other) return false;
+                    push(); l.order.splice(l.order.indexOf(k), 1); l.order.splice(l.order.indexOf(other) + (dir > 0 ? 1 : 0), 0, k); save(); return true;
+                };
                 box.addEventListener('click', e => {
                     const m = e.target.closest('[data-vl-move]');
-                    if (m) { const i = l.order.indexOf(m.dataset.vlMove), j = i + Number(m.dataset.dir); [l.order[i], l.order[j]] = [l.order[j], l.order[i]]; repaint(); }
-                    if (e.target.closest('[data-vl-reset]')) { l = {order: VILLAGE_SECTIONS.map(x => x[0]), hidden: [], width: {}}; repaint(); }
+                    if (m) { if (move(m.dataset.vlMove, Number(m.dataset.dir))) repaint(`[data-vl-move="${CSS.escape(m.dataset.vlMove)}"][data-dir="${m.dataset.dir}"]`); return; }
+                    const g = e.target.closest('[data-vl-grp]'); if (g) { grp = g.dataset.vlGrp; repaint(`[data-vl-grp="${CSS.escape(grp)}"]`); return; }
+                    if (e.target.closest('[data-vl-reset]')) { push(); l = {...l, order: l.defs.map(x => x.id), hidden: l.defs.filter(x => !x.shown).map(x => x.id), width: {}}; save(); repaint('[data-vl-undo]'); A().undoToast?.(i18n('Fiche remise dans l’ordre d’origine'), {undo: () => { if (d.open) box.querySelector('[data-vl-undo]')?.click(); }}); return; }
+                    if (e.target.closest('[data-vl-undo]')) { const s = undo.pop(); if (s) { const o = JSON.parse(s); l = {...l, ...o}; save(); repaint(undo.length ? '[data-vl-undo]' : '[data-vl-reset]'); } }
                 });
+                box.addEventListener('keydown', e => {
+                    const row = e.target.closest?.('[data-vl-row]'); if (!row || !['ArrowUp', 'ArrowDown'].includes(e.key)) return;
+                    if (!e.target.dataset.vlGrip && !e.altKey) return;
+                    e.preventDefault(); const k = row.dataset.vlRow; if (move(k, e.key === 'ArrowUp' ? -1 : 1)) repaint(`[data-vl-grip="${CSS.escape(k)}"]`);
+                });
+                box.addEventListener('input', e => { if (e.target.dataset.vlQ !== undefined) { q = e.target.value; repaint('[data-vl-q]'); } });
                 box.addEventListener('change', e => {
                     const t = e.target;
-                    if (t.dataset.vlShow) { l.hidden = t.checked ? l.hidden.filter(x => x !== t.dataset.vlShow) : [...new Set([...l.hidden, t.dataset.vlShow])]; save(); }
-                    if (t.dataset.vlWidth) { l.width[t.dataset.vlWidth] = t.value; save(); }
+                    if (t.dataset.vlShow) { push(); l.hidden = t.checked ? l.hidden.filter(x => x !== t.dataset.vlShow) : [...new Set([...l.hidden, t.dataset.vlShow])]; t.closest('tr')?.classList.toggle('is-off', !t.checked); save(); box.querySelector('[data-vl-undo]')?.removeAttribute('disabled'); const c = box.querySelector('.vl-count'); if (c) c.textContent = i18n('{n} parties montrées sur {t}', {n: l.order.length - l.hidden.length, t: l.order.length}); }
+                    if (t.dataset.vlWidth) { push(); l.width[t.dataset.vlWidth] = t.value; save(); box.querySelector('[data-vl-undo]')?.removeAttribute('disabled'); }
                 });
-                d.addEventListener('close', () => after(), {once: true});
+                // ⠿ glisser une ligne sur une autre
+                let dragK = '';
+                box.addEventListener('dragstart', e => { const r = e.target.closest?.('[data-vl-row]'); if (!r) return; dragK = r.dataset.vlRow; r.classList.add('is-drag'); try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', dragK); } catch (_) {} });
+                box.addEventListener('dragover', e => { const r = e.target.closest?.('[data-vl-row]'); if (!dragK || !r) return; e.preventDefault(); box.querySelectorAll('.is-drop-before, .is-drop-after').forEach(x => x.classList.remove('is-drop-before', 'is-drop-after')); const after = e.clientY > r.getBoundingClientRect().top + r.offsetHeight / 2; r.classList.add(after ? 'is-drop-after' : 'is-drop-before'); });
+                box.addEventListener('drop', e => {
+                    const r = e.target.closest?.('[data-vl-row]'); if (!dragK || !r) return; e.preventDefault();
+                    const to = r.dataset.vlRow, after = r.classList.contains('is-drop-after'); if (to !== dragK) { push(); l.order.splice(l.order.indexOf(dragK), 1); l.order.splice(l.order.indexOf(to) + (after ? 1 : 0), 0, dragK); save(); }
+                    dragK = ''; repaint();
+                });
+                box.addEventListener('dragend', () => { dragK = ''; box.querySelectorAll('.is-drag, .is-drop-before, .is-drop-after').forEach(x => x.classList.remove('is-drag', 'is-drop-before', 'is-drop-after')); });
+                d.addEventListener('close', () => { l.seen = [...new Set([...(l.seen || []), ...l.order])]; villageStore(l); if (changed) after(); }, {once: true});
             },
             onSubmit: () => true,
         });

@@ -198,6 +198,8 @@
     /** les blocs de la fiche (data-pblock) : une petite ligne de boutons, posée une fois après chaque affichage */
     const BLOCK_WHERE = {military: 'militaire', poilu: 'militaire', voyages: 'emigration', sciences: 'inventeur', education: 'medecin', profiles: 'elu', artist_page: 'artiste'};
     const BLOCK_KIND = {military: 'cicr', poilu: 'cicr', sciences: 'brevet', education: 'these', profiles: 'elu', artist_page: 'joconde', voyages: 'acte'};
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'so_links', host: '.so-row', collect: true, icon: '🔗', label: 'Chercher ce lieu en ligne (archives, Geneawiki, bibliothèques)', group: 'Données téléchargées'});
     function decorate(root = document) {
         const ws = root.querySelector?.('#workspace') || root; if (!ws?.querySelectorAll) return;
         const cur = A()?.state?.currentPerson?.person; const pid = Number(cur?.id) || 0;

@@ -429,6 +429,8 @@
         const pli = village.querySelector('[data-pli-host]');
         return {id: Number(pli?.dataset.pliPlace) || 0, name: pli?.dataset.pliName || (village.querySelector('.page-header h2, h2')?.textContent || '').trim(), lat: pli?.dataset.pliLat ? Number(pli.dataset.pliLat) : null, lon: pli?.dataset.pliLon ? Number(pli.dataset.pliLon) : null};
     }
+    // ⚙️ « Organiser la fiche » d'un village (heritage-more.js) : cette partie y est rangée, masquée, à la largeur choisie
+    (ext.villageSectionDefs = ext.villageSectionDefs || []).push({id: 'br_place', host: '[data-br-place]', icon: '🧭', label: 'La boussole à travers le temps', group: 'Son histoire', enabled: () => on('boussole')});
     async function decorateVillage() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         const village = ws.querySelector('.h-village:not([data-br])'); if (!village) return;
