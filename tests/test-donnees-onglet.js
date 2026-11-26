@@ -122,7 +122,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.evaluate(() => window.LCNDA_EXT.donneesOnglet.setHidden('ciel', false)); await sleep(300); assert.ok((await sideThemes()).includes('ciel'));
             // la fenêtre Réordonner
             await p.evaluate(() => document.querySelectorAll('.toast').forEach(x => x.remove())); await p.click('[data-dno-reorder]'); await p.waitForSelector('.dno-reorder[open]');
-            await p.click('.dno-reorder [data-dno-row="seismes"] [data-move="1"]'); await p.click('.dno-reorder [data-dno-row="seismes"] [data-move="1"]');
+            for (let i = 0; i < 2; i++) { await p.focus('.dno-reorder [data-dno-row="seismes"] .dnd-grip'); await p.keyboard.press('Alt+ArrowDown'); await sleep(150); } // ⠿ au clavier (heritage-dnd.js : les flèches ↑ ↓ cachées à la souris)
+            assert.deepStrictEqual(await p.$$eval('.dno-reorder [data-dno-row]', a => a.slice(0, 3).map(r => r.dataset.dnoRow)), [DEF[1], DEF[2], 'seismes']);
             await p.uncheck('.dno-reorder [data-dno-vis="images"]');
             await p.click('.dno-reorder [data-save]'); await sleep(400);
             const want = DEF.filter(x => x !== 'seismes' && x !== 'images'); want.splice(2, 0, 'seismes');

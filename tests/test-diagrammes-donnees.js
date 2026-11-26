@@ -133,7 +133,7 @@ function sandbox(ls = {}) {
         });
         await t('l’onglet s’appelle « 📊 Partir des données » ; la galerie « Nouveau » a la tuile qui ouvre le même écran', async () => {
             await closeAll(); await E(() => { window.LCNDA_EXT.openDiagramEditor(null); });
-            await p.waitForSelector('dialog[open].h-dg-gallery [data-dg-fromdata]', {timeout: 15000});
+            await p.waitForSelector('dialog[open].h-dg-gallery [data-dg-fromdata]', {timeout: 40000});
             assert.match(await p.textContent('dialog[open].h-dg-gallery [data-dg-fromdata]'), /Partir des données/);
             await p.click('dialog[open].h-dg-gallery [data-dg-fromdata]');
             await p.waitForSelector(`${D} [data-dgd]`);

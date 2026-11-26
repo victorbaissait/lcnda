@@ -2499,7 +2499,6 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         if(module!=='dashboard'||(state.dashboardBoard&&!currentCustomTab()))state.dashboardBoard='';
         if(module!=='listes')listController?.abort();
         state.module = module;
-        scrollRestoring={mod:module,until:Date.now()+15000}; // pendant que l'écran se dessine, sa place gardée n'est pas écrasée par 0 (la sauvegarde toutes les 500 ms) ; restoreScrollPosition la remplace
         document.documentElement.setAttribute('data-page-ouverte',module); // 🧩 Fond des pages : « Sur quelles pages » (app-fond.js)
         const renderToken=++state.workspaceToken;
         persistUiState();
