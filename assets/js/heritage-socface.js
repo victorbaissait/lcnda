@@ -293,6 +293,12 @@
         ws.querySelectorAll('[data-sf-status]').forEach(b => b.addEventListener('click', () => { v.status = b.dataset.sfStatus; page(++st.workspaceToken); }));
         let t = 0; ws.querySelector('[data-sf-q]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { v.q = e.target.value; const pos = e.target.selectionStart; page(++st.workspaceToken).then(() => { const q = document.querySelector('[data-sf-q]'); q?.focus(); try { q?.setSelectionRange(pos, pos); } catch (_) {} }); }, 300); });
         A().bindTableLinks?.();
+        // 🧺 📎 les foyers montrés, chacun avec sa notice (app-recherche-kit.js) ; pas de carte : un foyer n'a qu'un nom de commune
+        const recs = d.records || [], who = r => r.members.map(m => `${m.first || ''} ${String(m.last || '').toUpperCase()}`.trim()).join(', ');
+        if (recs.length) ext.researchKit?.table(ws.querySelector('.page'), {key: 'socface', title: i18n('Recensements SocFace'), criteria: `${i18n('Recensements SocFace')}${v.q ? ` : ${v.q}` : ''} (FranceArchives)`,
+            columns: [i18n('Recensement'), i18n('Commune'), i18n('Personnes'), i18n('Cote'), i18n('Notice')], list: recs, cells: r => [String(r.year || ''), r.place || '', who(r), r.cote || '', r.origin_url || ''],
+            itemOf: r => ({kind: 'row', ref_id: Number(r.id) || 0, title: `${i18n('Recensement')} ${r.year || ''} · ${r.place || ''}`, value: who(r), data: {columns: [i18n('Recensement'), i18n('Commune'), i18n('Personnes'), i18n('Cote')], row: [String(r.year || ''), r.place || '', who(r), r.cote || '']},
+                origin: {kind: 'socface', id: Number(r.id) || 0, label: `SocFace · FranceArchives${r.cote ? ` · ${r.cote}` : ''}`, url: /^https?:/i.test(r.origin_url || '') ? r.origin_url : ''}})});
     }
 
     /* ═════ Les clics communs (fiche, liste, Contrôle de la base, Que manque-t-il ?) ═════ */

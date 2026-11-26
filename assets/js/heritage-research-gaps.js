@@ -98,7 +98,9 @@
             ws.querySelector('[data-gaps-list]').innerHTML = vis.length ? [...groups.entries()].map(([k, list]) => `<section class="h-gaps-group">${framed && v.group === 'person' ? '' : head(k, list)}${framed ? cards(list) : sortIn(list).map(it => row(it, {noPerson: v.group === 'person', noArchive: v.group === 'archives'})).join('')}</section>`).join('')
                 : `<p class="muted">${items.length ? 'Rien avec ces filtres.' : 'Rien ne manque dans les générations regardées : bravo ! Regarde plus loin (générations) ou complète la lignée.'}</p>`;
             ws.querySelector('[data-gaps-count]').textContent = `${fmt(vis.length)} recherche${vis.length > 1 ? 's' : ''}${vis.length !== items.length ? ` sur ${fmt(items.length)}` : ''}`;
+            shownNow = vis; ws.querySelector('.page')?.__rk?.refreshRows?.();
         };
+        let shownNow = items;
         const counts = d.counts || {};
         ws.innerHTML = `<section class="page h-gaps"><header class="page-header"><div><span class="eyebrow">RECHERCHE · QUE MANQUE-T-IL ?</span><h2>${d.root_name ? i18n('Les actes à chercher pour la lignée de {name}', {name: esc(d.root_name)}) : i18n('Les actes à chercher')}</h2>
                 <p class="muted">${i18n('{searches} pour {ancestors} ancêtres sur {gens} générations, chez {services}.', {searches: plural(d.total, 'recherche', 'recherches'), ancestors: Number(d.ancestors || 0), gens: Number(d.generations || 0), services: plural((d.archives || []).length, 'service d’archives', 'services d’archives')})} ${i18n('Les plus proches générations d’abord : leurs actes sont les plus faciles à trouver, et chacun ouvre la porte du suivant.')}</p></div>
@@ -113,6 +115,13 @@
             <div class="h-gaps-kinds">${Object.entries(KINDS).filter(([k]) => counts[k]).map(([k, [ico, l]]) => `<label class="h-gaps-chip"><input type="checkbox" data-gaps-kind="${k}" ${v.off.includes(k) ? '' : 'checked'}> ${ico} ${esc(l)} <small>${fmt(counts[k])}</small></label>`).join('')}</div>
             <div data-gaps-list></div>${Number(d.total || 0) > items.length ? `<p class="h-gaps-more muted" data-gaps-more-note>${esc(i18n('Les {shown} premières recherches sur {total} : affine avec le filtre ou les générations.', {shown: fmt(items.length), total: fmt(d.total)}))} <button type="button" class="button small secondary" data-gaps-more>${esc(i18n('Voir les suivantes'))}</button></p>` : ''}${d.truncated ? `<p class="h-gaps-more muted">${esc(i18n('Lignée très grande : les {n} premiers ancêtres sont regardés.', {n: fmt(d.ancestors)}))}</p>` : ''}</section>`;
         draw();
+        // 🗺 Carte des communes à visiter · 🧺 📎 les recherches montrées (app-recherche-kit.js)
+        if (items.length) ext.researchKit?.table(ws.querySelector('.page'), {key: 'gaps', title: i18n('Que manque-t-il ?'), criteria: `${i18n('Que manque-t-il ?')} : ${d.root_name || ''} · ${plural(v.gen, 'génération', 'générations')}`,
+            columns: [i18n('Personne'), i18n('Acte'), i18n('Commune'), i18n('Années'), i18n('Archives')], list: () => shownNow,
+            cells: it => [`${it.name} (Sosa ${it.sosa})`, KINDS[it.kind]?.[1] || it.what, it.place || '', years(it), it.archive?.label || ''],
+            itemOf: it => ({kind: 'row', ref_id: 0, title: `${KINDS[it.kind]?.[1] || it.what} — ${it.name}`, value: [it.place, years(it), it.archive?.label].filter(Boolean).join(' · '), data: {person_id: Number(it.person_id), columns: [i18n('Acte'), i18n('Commune'), i18n('Années'), i18n('Archives')], row: [KINDS[it.kind]?.[1] || it.what, it.place || '', years(it), it.archive?.label || '']},
+                origin: {kind: 'research', label: `${i18n('Que manque-t-il ?')} · ${d.root_name || ''}`, url: '', person_id: Number(it.person_id)}}),
+            geoOf: it => (it.lat != null ? {lat: it.lat, lon: it.lon, place: it.place} : null), rowSel: '[data-gap-i]', rowAttr: 'gapI', hoverIds: it => [it._i], color: '#e8590c', legend: i18n('Commune à visiter')});
         ws.querySelector('[data-gaps-gen]').addEventListener('change', e => { v.gen = Number(e.target.value); v.limit = 600; lsSet('genealogie-gaps-gen', v.gen); render(++S().workspaceToken); });
         ws.querySelector('[data-gaps-pick]').addEventListener('click', async () => {
             const P = window.LCNDA_PICKER || A().picker; if (!P?.openPicker) return;

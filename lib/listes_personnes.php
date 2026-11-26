@@ -52,7 +52,7 @@ function lp_ensure(PDO $pdo): void
 
 function lp_kiosk(): bool { return function_exists('kiosk_state') && !empty(kiosk_state()['on']); }
 
-function lp_fold(string $s): string
+function lpers_fold(string $s): string
 {
     $s = function_exists('ascii_fold') ? ascii_fold($s) : $s;
     return trim((string) preg_replace('/[^a-z0-9]+/', ' ', strtolower($s)));
@@ -84,7 +84,7 @@ function lp_index(PDO $pdo): array
         }
         if ($e['name'] !== '' || $e['insee'] !== '') {
             $name = trim((string) preg_replace('/\s*[,(].*$/u', '', (string) $e['name']));
-            $k = [preg_match('/^\d[\dAB]\d{3}$/', (string) $e['insee']) ? (string) $e['insee'] : '', lp_fold($name), lp_fold((string) $e['county'])];
+            $k = [preg_match('/^\d[\dAB]\d{3}$/', (string) $e['insee']) ? (string) $e['insee'] : '', lpers_fold($name), lpers_fold((string) $e['county'])];
             if (!in_array($k, $p['pl'], true) && count($p['pl']) < 24) { $p['pl'][] = $k; }
         }
         unset($p);
@@ -123,7 +123,7 @@ function lp_links(PDO $pdo, string $list, int $personId = 0): array
     return ['links' => array_values(array_filter(array_map('lp_row_out', $s->fetchAll(PDO::FETCH_ASSOC))))];
 }
 
-function lp_api_get(PDO $pdo, string $action, array $q): array
+function lpers_api_get(PDO $pdo, string $action, array $q): array
 {
     return match ($action) {
         'lp_index' => lp_index($pdo),
@@ -186,7 +186,7 @@ function lp_event_type(PDO $pdo, array $tags): int
     return 0;
 }
 
-function lp_api_post(PDO $pdo, array $d): array
+function lpers_api_post(PDO $pdo, array $d): array
 {
     lp_ensure($pdo);
     $op = (string) ($d['op'] ?? '');

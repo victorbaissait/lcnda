@@ -426,6 +426,12 @@
         $('#archive-digest-category-order')?.addEventListener('click',()=>openArchiveDigestCategoryOrderDialog(data.types||{}));
         $('[data-archive-digest-new]')?.addEventListener('click',()=>{state.archiveDigestAdding=true;state.archiveDigestEditId=0;renderResearch();});
         window.LCNDA_EXT?.researchBar?.bindExportPrint($('#workspace .page'),()=>({title:i18n('Dépouillements d’archive'),head:[i18n('Ville'),i18n('Période'),i18n('Type d’acte'),i18n('Archives / cote'),i18n('État'),i18n('Personnes relevées')],rows:(data.rows||[]).map(row=>[row.place_name||row.city_name||row.city_alias||'',row.year_text||'',archiveDigestLabel(data.types,row.record_type),[row.archive_service,row.archive_reference].filter(Boolean).join(' · '),archiveDigestLabel(digestStatuses(data.statuses),row.status),String((row.people||[]).length)])}));
+        // 🗺 Carte par commune · 🧺 📎 les dépouillements montrés (app-recherche-kit.js)
+        {const digestCells=row=>[row.place_name||row.city_name||row.city_alias||'',row.year_text||'',archiveDigestLabel(data.types,row.record_type),[row.archive_service,row.archive_reference].filter(Boolean).join(' · '),archiveDigestLabel(digestStatuses(data.statuses),row.status),String((row.people||[]).length)];
+        if((data.rows||[]).length&&!adding)window.LCNDA_EXT?.researchKit?.table($('#workspace .page'),{key:'archive_digest',title:i18n('Dépouillements d’archive'),criteria:`${i18n('Dépouillement d’archive')}${[filters.q,filters.city,filters.dept,filters.region].filter(Boolean).length?' : '+[filters.q,filters.city,filters.dept,filters.region].filter(Boolean).join(' · '):''}`,
+            columns:[i18n('Ville'),i18n('Période'),i18n('Type d’acte'),i18n('Archives / cote'),i18n('État'),i18n('Personnes relevées')],list:data.rows,cells:digestCells,
+            itemOf:row=>{const c=digestCells(row);return {kind:'row',ref_id:Number(row.id)||0,title:`${c[2]} · ${c[0]}${c[1]?` · ${c[1]}`:''}`,value:[c[3],c[4]].filter(Boolean).join(' · '),data:{columns:[i18n('Ville'),i18n('Période'),i18n('Type d’acte'),i18n('Archives / cote'),i18n('État')],row:c.slice(0,5)},origin:{kind:'archive_digest',id:Number(row.id)||0,label:`${i18n('Dépouillement d’archive')} · ${c[0]}`,url:/^https?:/i.test(row.archive_url||'')?row.archive_url:''}};},
+            geoOf:row=>(row.place_lat!=null&&row.place_lat!==''?{lat:row.place_lat,lon:row.place_lon,place:row.place_name||row.city_name||''}:null),color:'#7048e8',legend:i18n('Commune dépouillée')});}
         $('#archive-digest-csv')?.addEventListener('click',()=>openArchiveDigestCsvDialog());
         $('[data-archive-digest-decennale]')?.addEventListener('click',()=>window.LCNDA_EXT?.openDecennale?.({onClose:id=>{if(id&&state.module==='recherche')renderResearch();}}));
         $('#archive-digest-index')?.addEventListener('click',()=>openArchiveDigestIndexDialog(data.rows||[]));
@@ -811,10 +817,11 @@
         if(token!==state.workspaceToken||state.module!=='recherche')return;
         const is=state.inseeSearch||{};
         const hasCriteria=!!(is.nom||is.prenom||is.sexe||is.dateNaissance||is.dateDeces||is.birthYearFrom||is.birthYearTo||is.deathYearFrom||is.deathYearTo||is.communeNaissance||is.communeDeces||is.departement||is.region);
-        let resultsHtml='';
+        let resultsHtml='',inseeRows=[];
         if(hasCriteria){
             const data=await api('insee_search',{nom:is.nom||'',prenom:is.prenom||'',sexe:is.sexe||'',date_naissance:is.dateNaissance||'',date_deces:is.dateDeces||'',birth_year_from:is.birthYearFrom||'',birth_year_to:is.birthYearTo||'',death_year_from:is.deathYearFrom||'',death_year_to:is.deathYearTo||'',commune_naissance:is.communeNaissance||'',commune_deces:is.communeDeces||'',departement:is.departement||'',region:is.region||'',limit:100,offset:0});
             if(token!==state.workspaceToken||state.module!=='recherche')return;
+            inseeRows=data.rows||[];
             resultsHtml=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Décès INSEE')}`,title:i18n('Décès INSEE'),help:`<b class="ui-ph-count">${plural(Number(data.total||0),'résultat')}</b> · ${plural(data.rows.length,'affiché')}${data.has_more?' · '+i18n('affine ta recherche pour réduire la liste'):''}.`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${inseeResultsTableHtml(data.rows)}</section>`;
         }else{
             resultsHtml=`<section class="search-empty">${emptyState({icon:'🔍',text:'Renseigne au moins un critère',hint:'Combine prénom, nom, sexe, dates, communes, département ou région pour lancer la recherche dans le fichier des personnes décédées.'})}</section>`;
@@ -822,6 +829,9 @@
         $('#workspace').innerHTML=`${inseeStatsBarHtml(stats)}${resultsHtml}`;
         bindTableLinks();
         if(hasCriteria)window.LCNDA_EXT?.researchBar?.bindDomExport($$('#workspace .page').pop(),i18n('Décès INSEE'));
+        if(hasCriteria&&inseeRows.length){const crit=[is.prenom,is.nom,is.communeNaissance,is.communeDeces,is.departement,is.region,is.deathYearFrom&&is.deathYearTo?`${is.deathYearFrom}–${is.deathYearTo}`:''].filter(Boolean).join(' · ');
+            window.LCNDA_EXT?.researchKit?.table($$('#workspace .page').pop(),{key:'insee',title:i18n('Décès INSEE'),criteria:`${i18n('Décès INSEE')} : ${crit} (${i18n('fichier des personnes décédées, INSEE')})`,columns:[i18n('Nom'),i18n('Prénom(s)'),i18n('Naissance'),i18n('Décès')],list:inseeRows,
+                cells:r=>[r.nom||'',r.prenoms||r.prenom||'',[String(r.date_naissance||''),r.commune_naissance].filter(Boolean).join(' · '),[String(r.date_deces||''),r.commune_deces].filter(Boolean).join(' · ')]});} // 🧺 📎 (app-recherche-kit.js) ; pas de carte : le fichier ne donne que des codes de commune
         bindInseeStatsBar();
     }
 
@@ -1381,6 +1391,8 @@
         const results=state.researchDisplay==='list'?transcriptionSearchTableHtml(rows):`<div class="date-results">${rows.length?rows.map(transcriptionSearchCardHtml).join(''):empty('Aucune transcription ne contient ce texte.',{icon:'📝'})}</div>`;
         $('#workspace').innerHTML=`<section class="page">${window.LCNDA_UI.pageHeader({where:`${i18n('Recherche')} · ${i18n('Transcriptions · OCR, HTR et saisie manuelle')}`,titleHtml:`« ${escapeHtml(q)} »`,help:`${plural(rows.length,'média trouvé','médias trouvés')}. ${i18n('Un clic ouvre le média et sa transcription.')}`,actions:window.LCNDA_EXT?.researchBar?window.LCNDA_EXT.researchBar.headActions():[]})}${results}</section>`;
         window.LCNDA_EXT?.researchBar?.bindDomExport($('#workspace .page'),i18n('Transcriptions « {q} »',{q}));
+        if(rows.length)window.LCNDA_EXT?.researchKit?.table($('#workspace .page'),{key:'transcriptions',title:i18n('Transcriptions « {q} »',{q}),criteria:`${i18n('Transcriptions')} : « ${q} »`,columns:[i18n('Média'),i18n('Date'),i18n('Extrait')],list:rows,
+            cells:m=>[transcriptionSearchTitle(m),m.date_text||'',m.excerpt||''],itemOf:m=>({kind:'media',ref_id:Number(m.id),title:transcriptionSearchTitle(m),value:m.excerpt||'',origin:{kind:'research',label:`${i18n('Transcriptions')} : « ${q} »`,url:''}})}); // 🧺 📎 (app-recherche-kit.js) ; pas de carte : un média n'a pas de lieu
         bindTableLinks();
     }
 

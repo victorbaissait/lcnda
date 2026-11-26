@@ -78,6 +78,9 @@
                 <div data-h-question-sub></div>
                 ${r.criteria && !r.criteria.same_birthday ? '<p><button type="button" class="button small secondary" data-h-question-save>Enregistrer comme recherche</button></p>' : ''}`;
             out.querySelector('[data-h-question-save]')?.addEventListener('click', () => saveQuestion(q, r.criteria, after));
+            // 🗺 Carte · 🧺 📎 sur les fiches trouvées (app-recherche-kit.js) — l'écran « Poser une question » seulement (la recherche multicritère a les siens)
+            if (S().researchKind === 'question' && r.people.length && ext.researchKit) ext.researchKit.people(out.closest('.page'), {people: r.people, title: q, criteria: `${i18n('Question')} : ${q}`, key: 'question',
+                head: [i18n('Personne'), i18n('Naissance'), i18n('Décès'), i18n('Métier')], nameOf: p => A().personName(p), row: p => [A().personName(p), p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation || '']});
             // les boutons de renvoi vers un outil (« Ouvrir la fiche », « Que manque-t-il ? », dossier ⚖️… : heritage-questions-plus.js)
             out.querySelectorAll('[data-h-question-open]').forEach(b => b.addEventListener('click', () => ext.qpOpen?.((r.open || [])[Number(b.dataset.hQuestionOpen)])));
             // « voir » sur une ligne d'un classement (un prénom, un lieu…) : les personnes concernées

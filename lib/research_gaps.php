@@ -275,8 +275,8 @@ function research_gaps_data(PDO $pdo, array $q = []): array
     $placeRow = static function (string $name) use ($pdo, &$placeCache): array {
         if ($name === '') { return []; }
         if (!isset($placeCache[$name])) {
-            try { $s = $pdo->prepare('SELECT id, name, county, country, admin2_code FROM places WHERE name=? ORDER BY (admin2_code IS NOT NULL AND admin2_code<>\'\') DESC, id LIMIT 1'); $s->execute([$name]); $placeCache[$name] = $s->fetch() ?: ['name' => $name]; }
-            catch (Throwable $_) { $s = $pdo->prepare('SELECT id, name, county, country FROM places WHERE name=? LIMIT 1'); $s->execute([$name]); $placeCache[$name] = $s->fetch() ?: ['name' => $name]; }
+            try { $s = $pdo->prepare('SELECT id, name, county, country, admin2_code, latitude, longitude FROM places WHERE name=? ORDER BY (admin2_code IS NOT NULL AND admin2_code<>\'\') DESC, id LIMIT 1'); $s->execute([$name]); $placeCache[$name] = $s->fetch() ?: ['name' => $name]; }
+            catch (Throwable $_) { $s = $pdo->prepare('SELECT id, name, county, country, latitude, longitude FROM places WHERE name=? LIMIT 1'); $s->execute([$name]); $placeCache[$name] = $s->fetch() ?: ['name' => $name]; }
         }
         return $placeCache[$name];
     };
@@ -290,6 +290,8 @@ function research_gaps_data(PDO $pdo, array $q = []): array
         $pl = $placeRow((string) $it['place']);
         $arch = gaps_archive_of($pl ?: ['name' => (string) $it['place']]);
         $it['place_id'] = (int) ($pl['id'] ?? 0);
+        $it['lat'] = isset($pl['latitude']) && $pl['latitude'] !== null && $pl['latitude'] !== '' ? (float) $pl['latitude'] : null; // 🗺 la carte des communes à visiter (app-recherche-kit.js)
+        $it['lon'] = isset($pl['longitude']) && $pl['longitude'] !== null && $pl['longitude'] !== '' ? (float) $pl['longitude'] : null;
         $it['archive'] = $arch;
         $it['record_type'] = $recType[$it['kind']] ?? 'autre';
         if (in_array($it['kind'], ['birth', 'death'], true) && $it['to'] !== null && $it['to'] < 1792) { $it['record_type'] = $it['kind'] === 'birth' ? 'bapteme' : 'deces'; }

@@ -164,7 +164,7 @@
         });
         const head = o.head || PEOPLE_HEAD(), row = o.row || personRow;
         bindExportPrint(page, () => { const ids = picked(); const list = ids.length ? ids.map(id => byId.get(id)).filter(Boolean) : people; return {title, head, rows: list.map(row)}; });
-        if (o.kit !== false) window.LCNDA_EXT?.researchKit?.people(page, {people, title, criteria: o.criteria || title, head, row, nameOf: personName}); // 🧺 📎 dans « ⤓ Exporter ▾ » et au bout de chaque ligne (app-recherche-kit.js)
+        if (o.kit !== false) window.LCNDA_EXT?.researchKit?.people(page, {people, title, criteria: o.criteria || title, head, row, nameOf: personName, key: o.key || 'people'}); // 🧺 📎 dans « ⤓ Exporter ▾ » et au bout de chaque ligne (app-recherche-kit.js)
     }
     const pickCell = p => `<td class="rp-pick-cell"><input type="checkbox" data-rp-pick="${Number(p.id)}" aria-label="${esc(i18n('Cocher {name}', {name: personName(p)}))}"></td>`;
     /** Le tableau de personnes des sortes ajoutées (avec une case à cocher par ligne) */

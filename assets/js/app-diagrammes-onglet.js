@@ -291,7 +291,7 @@
         S.F.use.forEach(v => out.push(['use', v, T(USE[v])])); if (S.F.who) out.push(['who', S.F.who, '👤 ' + (people.get(S.F.who) || S.F.who)]);
         return out.length ? `<div class="ld-chips dgo-on">${out.map(([k, v, l]) => `<button type="button" class="ui-listbar-chip" data-dgo-f="${k}" data-v="${esc(v)}">${esc(l)} <span aria-hidden="true">×</span><span class="sr">${esc(T('Retirer'))}</span></button>`).join('')}<button type="button" class="link-button" data-dgo-fclear>${esc(T('Tout effacer'))}</button></div>` : '';
     };
-    const crumbHtml = parts => `<nav class="dgo-crumb eyebrow" aria-label="${esc(T('Fil d’Ariane'))}"><a href="#diagrammes" data-dgo-nav="all">📈 ${esc(T('Diagrammes'))}</a>${parts.map(([lab, nav]) => ` <i aria-hidden="true">›</i> ${nav ? `<a href="${esc(hashFor({view: 'home', nav}))}" data-dgo-nav="${esc(nav)}">${esc(lab)}</a>` : `<span>${esc(lab)}</span>`}`).join('')}</nav>`;
+    const crumbHtml = parts => `<nav class="dgo-crumb eyebrow" aria-label="${esc(T('Fil d’Ariane'))}"><a href="#diagrammes" data-dgo-nav="all">${esc(T('Diagrammes'))}</a>${parts.map(([lab, nav]) => ` <i aria-hidden="true">›</i> ${nav ? `<a href="${esc(hashFor({view: 'home', nav}))}" data-dgo-nav="${esc(nav)}">${esc(lab)}</a>` : `<span>${esc(lab)}</span>`}`).join('')}</nav>`;
     const navTitle = nav => {
         if (/^f_/.test(nav)) return ['📁', fById(nav)?.name || T('Dossier')];
         return {all: ['🗂', T('Tous mes diagrammes')], fav: ['⭐', T('Favoris')], rec: ['🕘', T('Récents')], live: ['🔄', T('À jour')], frozen: ['📌', T('Figés')], nofold: ['··', T('Sans dossier')]}[nav] || ['🗂', T('Tous mes diagrammes')];

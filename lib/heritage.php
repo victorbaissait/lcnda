@@ -1423,8 +1423,39 @@ function saved_search_results(PDO $pdo, array $criteria, int $searchId = 0): arr
     }
     $people = collection_people($pdo, array_slice($ids, 0, 1000));
     $out = [];
-    foreach ($ids as $id) { if (isset($people[$id])) { $out[] = $people[$id] + ['is_new' => $searchId && !isset($seen[$id])]; } }
+    $geo = research_people_places($pdo, array_map(static fn($p) => (int) $p['id'], $out));
+    foreach ($out as &$p) { $p['places'] = $geo[(int) $p['id']] ?? []; } unset($p);
     return ['people' => $out, 'count' => count($ids), 'description' => saved_search_label($criteria)];
+}
+
+/** une réponse avec des fiches (« people ») : chacune reçoit ses lieux placés */
+function research_with_places(PDO $pdo, array $r): array
+{
+    if (empty($r['people']) || !is_array($r['people'])) return $r;
+    $geo = research_people_places($pdo, array_map(static fn($p) => (int) ($p['id'] ?? 0), $r['people']));
+    foreach ($r['people'] as &$p) { if (is_array($p)) $p['places'] = $geo[(int) ($p['id'] ?? 0)] ?? []; } unset($p);
+    return $r;
+}
+
+/** 🗺 les lieux placés d'une liste de personnes (naissance, mariage, décès… au plus 4 chacune) : la carte des résultats de recherche (app-recherche-kit.js) */
+function research_people_places(PDO $pdo, array $ids): array
+{
+    $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
+    $out = [];
+    foreach (array_chunk($ids, 400) as $chunk) {
+        $m = implode(',', array_fill(0, count($chunk), '?'));
+        $s = $pdo->prepare("SELECT e.id, e.person_id, e.date_text, e.year, t.label AS type, t.gedcom_tag, pl.name AS place, pl.latitude AS lat, pl.longitude AS lon
+            FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id
+            WHERE e.person_id IN ($m) AND pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
+            ORDER BY e.person_id, CASE WHEN t.gedcom_tag IN ('BIRT','CHR','BAPM') THEN 0 WHEN t.gedcom_tag IN ('MARR') THEN 1 WHEN t.gedcom_tag IN ('DEAT','BURI') THEN 2 ELSE 3 END, COALESCE(e.year, 9999), e.id");
+        $s->execute($chunk);
+        foreach ($s->fetchAll() as $r) {
+            $pid = (int) $r['person_id'];
+            if (count($out[$pid] ?? []) >= 4) continue;
+            $out[$pid][] = ['event_id' => (int) $r['id'], 'type' => (string) $r['type'], 'gedcom_tag' => (string) $r['gedcom_tag'], 'date' => (string) ($r['date_text'] ?: ($r['year'] ?? '')), 'place' => (string) $r['place'], 'lat' => (float) $r['lat'], 'lon' => (float) $r['lon']];
+        }
+    }
+    return $out;
 }
 
 function save_saved_search(PDO $pdo, array $data): array

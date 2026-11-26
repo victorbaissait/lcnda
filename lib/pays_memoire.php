@@ -26,7 +26,7 @@ const PM_SOURCES = [
     'archive' => ['label' => 'Internet Archive — films (mediatype « movies »)', 'licence' => 'domaine public ou licence libre (écrite sous le film)', 'mention' => 'Internet Archive', 'url' => 'https://archive.org/details/movies'],
 ];
 
-function pm_fold(string $s): string
+function pmem_fold(string $s): string
 {
     $s = mb_strtolower($s, 'UTF-8');
     $t = class_exists('Normalizer') ? (string) Normalizer::normalize($s, Normalizer::FORM_D) : $s;
@@ -95,7 +95,7 @@ function pm_film_year(string $date, string $title): ?int
 /** le nom de la commune est-il dans ce texte (mots entiers, sans accents) ? */
 function pm_names_in(string $name, string $text): bool
 {
-    $n = pm_fold($name); $t = ' ' . pm_fold($text) . ' ';
+    $n = pmem_fold($name); $t = ' ' . pmem_fold($text) . ' ';
     return $n !== '' && str_contains($t, ' ' . $n . ' ');
 }
 
@@ -167,7 +167,7 @@ function pm_films(array $q): array
     if ($name === '' || mb_strlen($name) > 80) { return ['ok' => false, 'message' => i18n_t('Choisis une commune.')]; }
     $insee = strtoupper(trim(safe_text($q['insee'] ?? '')));
     if (!preg_match('/^(\d{5}|2[AB]\d{3})$/', $insee)) { $insee = ''; }
-    $r = pm_cached('films:' . pm_fold($name), static function () use ($name) {
+    $r = pm_cached('films:' . pmem_fold($name), static function () use ($name) {
         $errors = []; $items = [];
         foreach (['commons' => 'pm_commons', 'archive' => 'pm_archive'] as $k => $fn) {
             try { $items = array_merge($items, $fn($name)); } catch (Throwable $e) { $errors[$k] = $e->getMessage(); }
@@ -182,20 +182,20 @@ function pm_films(array $q): array
 function pm_list_films(array $in): array
 {
     $q = is_string($in['query'] ?? null) ? (json_decode((string) $in['query'], true) ?: []) : [];
-    $text = pm_fold((string) ($q['q'] ?? ''));
+    $text = pmem_fold((string) ($q['q'] ?? ''));
     $rows = [];
     foreach (glob(pm_cache_dir() . '/*.json') ?: [] as $f) {
         $c = json_decode((string) @file_get_contents($f), true);
         if (!is_array($c) || !str_starts_with((string) ($c['key'] ?? ''), 'films:')) { continue; }
         foreach ($c['data']['items'] ?? [] as $it) {
             $row = ['titre' => $it['title'], 'annee' => $it['year'], 'commune' => $c['data']['name'] ?? '', 'source' => $it['src'] === 'commons' ? 'Wikimedia Commons' : 'Internet Archive', 'licence' => $it['licence'], 'auteur' => $it['by'] ?? '', 'url' => $it['page']];
-            if ($text !== '' && !str_contains(pm_fold(implode(' ', $row)), $text)) { continue; }
+            if ($text !== '' && !str_contains(pmem_fold(implode(' ', $row)), $text)) { continue; }
             $yrs = $q['years'] ?? null;
             if (is_array($yrs) && ((isset($yrs['from']) && is_numeric($yrs['from']) && $row['annee'] < (int) $yrs['from']) || (isset($yrs['to']) && is_numeric($yrs['to']) && $row['annee'] > (int) $yrs['to']))) { continue; }
             $ok = true;
             foreach ((array) ($q['filters'] ?? []) as $flt) {
-                $k = (string) ($flt['key'] ?? ''); $v = pm_fold((string) ($flt['value'] ?? ''));
-                if ($k !== '' && array_key_exists($k, $row) && $v !== '' && !str_contains(pm_fold((string) $row[$k]), $v)) { $ok = false; break; }
+                $k = (string) ($flt['key'] ?? ''); $v = pmem_fold((string) ($flt['value'] ?? ''));
+                if ($k !== '' && array_key_exists($k, $row) && $v !== '' && !str_contains(pmem_fold((string) $row[$k]), $v)) { $ok = false; break; }
             }
             if ($ok) { $rows[] = $row; }
         }

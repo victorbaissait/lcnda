@@ -77,7 +77,15 @@
         const picked = () => { try { const s = cfg.selected ? cfg.selected() : [...page.querySelectorAll('[data-rp-pick]:checked')].map(c => Number(c.dataset.rpPick)); return s && s.length ? s : null; } catch (_) { return null; } };
         const nOf = () => { const s = picked(); return s ? s.length : null; };
         /* ⤓ Exporter ▾ : la fenêtre d'export commune reçoit, après CSV et Imprimer, 🧺 et 📎 (app-recherche-outils.js bindExportPrint lit K.formats) */
-        const exp = page.querySelector('.page-header [data-rp-export]');
+        let exp = page.querySelector('.page-header [data-rp-export]');
+        if (!exp && cfg.ensureExport !== false && ext.researchBar) { // un écran sans « ⤓ Exporter ▾ » (Que manque-t-il ?, multicritère, SocFace…) : le bouton commun
+            const head = page.querySelector('.page-header');
+            if (head) {
+                let acts = head.querySelector('.page-actions'); if (!acts) { acts = document.createElement('div'); acts.className = 'page-actions ui-ph-actions'; head.appendChild(acts); }
+                acts.insertAdjacentHTML('beforeend', ext.researchBar.headActions()[0]); exp = acts.lastElementChild; exp.dataset.rkOwn = '';
+                ext.researchBar.bindExportPrint({querySelector: q => (q === '[data-rp-export]' ? exp : null), get __rk() { return page.__rk; }}, () => ({title: cfg.title, head: cfg.columns, rows: cfg.rows(null)}));
+            }
+        }
         K.formats = () => {
             if (kiosk()) return [];
             const n = nOf(), hint = n ? T('les {n} cochés', {n}) : T('tout');
@@ -88,16 +96,21 @@
                 run: later(() => toInsert(cfg, setOf(cfg, cfg.rows(picked())), exp))}];
         };
         /* 📎 🧺 au bout de chaque résultat */
-        const rowEls = cfg.rowSel ? [...page.querySelectorAll(cfg.rowSel)] : [...page.querySelectorAll('[data-rp-pick]')].map(c => c.closest('article, tr')).filter(Boolean);
-        rowEls.forEach(el => { const id = el.dataset.rkRow ?? el.querySelector('[data-rp-pick]')?.dataset.rpPick; if (id != null) el.dataset.rkId = id; });
-        if (!kiosk() && cfg.rowItems) {
+        /** les résultats (aussi après un nouveau dessin de la liste : K.refreshRows()) : leur identifiant, et 📎 🧺 au bout */
+        const applyRows = () => {
+            const rowEls = cfg.rowSel ? [...page.querySelectorAll(cfg.rowSel)] : [...page.querySelectorAll('[data-rp-pick]')].map(c => c.closest('article, tr')).filter(Boolean);
+            rowEls.forEach(el => { const id = cfg.rowAttr ? el.dataset[cfg.rowAttr] : (el.dataset.rkRow ?? el.querySelector('[data-rp-pick]')?.dataset.rpPick); if (id != null) el.dataset.rkId = id; });
+            if (kiosk() || !cfg.rowItems) return;
             rowEls.forEach(el => {
-                if (el.dataset.rkId == null) return;
+                if (el.dataset.rkId == null || el.querySelector(':scope > .rk-row-acts, :scope > td:last-child > .rk-row-acts')) return;
                 el.classList.add('rk-row');
                 const box = document.createElement('span'); box.className = 'rk-row-acts'; box.dataset.rkOwn = '';
                 box.innerHTML = `<button type="button" class="rk-ico" data-rk-ins title="${esc(T('Insérer (avec la source)'))}" aria-label="${esc(T('Insérer (avec la source)'))}">📎</button><button type="button" class="rk-ico" data-rk-bk title="${esc(T('Mettre au panier'))}" aria-label="${esc(T('Mettre au panier'))}">🧺</button>`;
                 (el.tagName === 'TR' ? el.lastElementChild : el).appendChild(box);
             });
+        };
+        applyRows(); K.refreshRows = applyRows;
+        if (!kiosk() && cfg.rowItems) {
             page.addEventListener('click', e => {
                 const b = e.target.closest('[data-rk-ins], [data-rk-bk]'); if (!b || !page.contains(b) || b.closest('.cf-card')) return;
                 const id = b.closest('[data-rk-id]')?.dataset.rkId; if (id == null) return;
@@ -231,14 +244,42 @@
         return mount(page, cfg);
     }
 
+    /** ▦ une liste de résultats quelconque (dépouillements, Que manque-t-il ?, transcriptions, INSEE, SocFace, sites…) :
+     *  list, cells(o) → [colonnes], itemOf(o) → élément du panier (défaut : une ligne), geoOf(o) → {lat, lon, place, tag?} | null.
+     *  La carte : un point par lieu (le nombre de lignes dedans) ; sa fiche dit les lignes de l'endroit. */
+    function table(page, {key, title, criteria, columns, list, cells, itemOf, geoOf, idOf, rowSel, rowAttr, color = '#1971c2', storeKey, hoverIds, legend}) {
+        const L = () => (typeof list === 'function' ? list() || [] : list || []);
+        const origin = {kind: 'research', label: `${T('Recherche')} · ${criteria || title}`, url: ''};
+        const it = itemOf || (o => { const c = cells(o); return {kind: 'row', ref_id: 0, title: String(c[0] ?? ''), value: c.slice(1).filter(x => x !== '' && x != null).join(' · '), data: {columns, row: c}, origin}; });
+        const byId = new Map(idOf ? L().map(o => [String(idOf(o)), o]) : []);
+        const groups = new Map();
+        if (geoOf) L().forEach(o => { let g = null; try { g = geoOf(o); } catch (_) {} if (!g || g.lat == null || g.lon == null || g.lat === '' || !Number.isFinite(Number(g.lat))) return; const k = `${Number(g.lat).toFixed(5)},${Number(g.lon).toFixed(5)}`; if (!groups.has(k)) groups.set(k, {g, rows: []}); groups.get(k).rows.push(o); });
+        const G = [...groups.values()];
+        const cardOf = i => { const x = G[i]; if (!x) return null; const one = x.rows.length === 1, c0 = cells(x.rows[0]);
+            const lines = one ? columns.slice(1).map((h, j) => [h, esc(c0[j + 1] ?? '')]) : [[T('Lignes'), x.rows.slice(0, 8).map(o => { const c = cells(o); return `• ${esc(c.slice(0, 3).filter(Boolean).join(' — '))}`; }).join('<br>') + (x.rows.length > 8 ? `<br><small class="muted">${esc(T('+ {n} autres', {n: x.rows.length - 8}))}</small>` : '')]];
+            const who = x.rows.flatMap(o => (hoverIds ? hoverIds(o) : [])).filter(Boolean);
+            return {title: one ? String(c0[0] ?? '') : `${x.g.place || ''} · ${x.rows.length}`, lines, src: esc(criteria || title), ins: !kiosk(), bk: !kiosk(), _rows: x.rows, _who: who}; };
+        const cfg = {key, storeKey, title, criteria: criteria || title, columns, selected: () => null, rowSel, rowAttr,
+            rows: () => L().map(cells), items: () => L().map(it),
+            rowItems: idOf && rowSel ? id => { const o = byId.get(String(id)); return o ? {items: [it(o)], rows: [cells(o)]} : null; } : null,
+            map: G.length ? {points: G.map(x => ({lat: Number(x.g.lat), lon: Number(x.g.lon), label: `${x.g.place || ''}${x.rows.length > 1 ? ` · ${x.rows.length}` : ''}`, tag: x.g.tag, color: x.g.tag ? undefined : color, n: x.rows.length > 1 ? String(x.rows.length) : '', rowIds: x.rows.flatMap(o => (hoverIds ? hoverIds(o) : idOf ? [idOf(o)] : []))})),
+                legend: legend ? [{color, label: legend}] : [], card: cardOf, onAct: (k, i, b) => { const c = cardOf(i); if (!c) return; if (k === 'bk') toBasket(c._rows.map(it), b); if (k === 'ins') toInsert(cfg, setOf(cfg, c._rows.map(cells), columns, `${title} · ${c.title}`), b); }} : null};
+        return mount(page, cfg);
+    }
+
     /** 👤 une liste de personnes (☑ la barre d'app-recherche-outils.js : texte, lien de parenté, comparer deux recherches) — pas de carte */
-    function people(page, {people: ps, title, criteria, head, row, nameOf}) {
+    function people(page, {people: ps, title, criteria, head, row, nameOf, key = 'people'}) {
         const origin = {kind: 'research', label: `${T('Recherche')} · ${criteria || title}`, url: ''};
         const byId = new Map(ps.map(p => [String(p.id), p]));
         const list = sel => (sel ? sel.map(id => byId.get(String(id))).filter(Boolean) : ps);
         const it = p => personItem({id: p.id, name: nameOf(p), value: row(p).slice(1).filter(x => x && x !== '—').join(' · ')}, origin);
-        return mount(page, {key: 'people', title, criteria: criteria || title, columns: head, rows: sel => list(sel).map(row), items: sel => list(sel).map(it),
-            rowItems: id => { const p = byId.get(String(id)); return p ? {items: [it(p)], rows: [row(p)]} : null; }});
+        // 🗺 si les fiches ont des lieux placés (« places » : naissance, mariage, décès… donnés par le serveur)
+        const pts = ps.flatMap(p => (p.places || []).map(g => ({lat: g.lat, lon: g.lon, tag: g.gedcom_tag, label: `${nameOf(p)} · ${g.type} · ${g.date} · ${g.place}`, rowIds: [p.id], _p: p, _g: g})));
+        const cfg = {key, title, criteria: criteria || title, columns: head, rows: sel => list(sel).map(row), items: sel => list(sel).map(it),
+            rowItems: id => { const p = byId.get(String(id)); return p ? {items: [it(p)], rows: [row(p)]} : null; },
+            map: pts.length ? {points: pts, card: i => { const x = pts[i]; return x ? {title: `${x._g.type} — ${x._g.date}`, lines: [[T('Personne'), link({id: x._p.id, name: nameOf(x._p)})], [T('Lieu'), esc(x._g.place)]], src: esc(criteria || title), ins: !kiosk(), bk: !kiosk()} : null; },
+                onAct: (k, i, b) => { const x = pts[i]; if (!x) return; if (k === 'bk') toBasket([it(x._p)], b); if (k === 'ins') toInsert(cfg, setOf(cfg, [row(x._p)]), b); }} : null};
+        return mount(page, cfg);
     }
 
     /** 🧾 Sources et citations (app-recherche-outils.js) : les sources trouvées, sans carte */
@@ -249,5 +290,5 @@
             rows: () => list.map(row), items: () => list.map(s => ({kind: 'source', ref_id: Number(s.id) || 0, title: s.title || T('Source sans titre'), value: s.author || '', origin}))});
     }
 
-    ext.researchKit = {mount, personItem, setOf, kindOf, colorOf, proximity, dates, places, people, sources};
+    ext.researchKit = {mount, personItem, setOf, kindOf, colorOf, proximity, dates, places, people, sources, table};
 })();

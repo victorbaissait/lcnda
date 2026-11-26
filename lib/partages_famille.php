@@ -24,7 +24,7 @@ function pf_has_table(PDO $pdo, string $t): bool
 }
 
 /** les colonnes ajoutées à cx_shares (rejouable) ; false si la table n'existe pas encore (rien n'a jamais été envoyé) */
-function pf_schema(PDO $pdo): bool
+function partfam_schema(PDO $pdo): bool
 {
     if (!pf_has_table($pdo, 'cx_shares')) { return false; }
     $have = array_column($pdo->query('PRAGMA table_info(cx_shares)')->fetchAll(PDO::FETCH_ASSOC), 'name');
@@ -84,7 +84,7 @@ function pf_send(PDO $pdo, array $d): array
     $f['counts']['blocked'] += $dropped; $f['counts']['notes'] = $notes; $f['counts']['sent'] = count($items);
     $pdo->prepare('INSERT INTO cx_shares(account_id, name, body) VALUES(?,?,?)')->execute([$acc, $f['share']['name'], (string) json_encode($f['share'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
     $id = (int) $pdo->lastInsertId();
-    pf_schema($pdo);
+    partfam_schema($pdo);
     $pdo->prepare('UPDATE cx_shares SET basket_id=?, refs=? WHERE id=?')->execute([$bid, (string) json_encode($keptRefs), $id]);
     pn_log($pdo, $bid, cx_t('Envoyé à un compte du site familial'));
     return ['share_id' => $id, 'counts' => $f['counts'], 'sent' => pf_sent($pdo, ['basket_id' => $bid])['sent']];
@@ -93,7 +93,7 @@ function pf_send(PDO $pdo, array $d): array
 /** ce que l'envoyeur voit : à qui, quand, et « lu » / « retiré » */
 function pf_sent(PDO $pdo, array $d): array
 {
-    if (!pf_schema($pdo)) { return ['sent' => []]; }
+    if (!partfam_schema($pdo)) { return ['sent' => []]; }
     $bid = safe_int($d['basket_id'] ?? 0);
     $hasAcc = pf_has_table($pdo, 'fc_accounts');
     $sql = 'SELECT s.id, s.name, s.created_at, s.read_ts, s.dismissed_ts, s.body, ' . ($hasAcc ? "COALESCE(a.name,'')" : "''") . ' AS account
@@ -127,7 +127,7 @@ function pf_guest_filter(PDO $pdo, array $a): array
 /** 🧺 les paniers reçus par ce compte, repassés au filtre */
 function pf_guest_baskets(PDO $pdo, array $a): array
 {
-    if (!pf_schema($pdo)) { return []; }
+    if (!partfam_schema($pdo)) { return []; }
     [$ids, $names] = pf_guest_filter($pdo, $a);
     $s = $pdo->prepare('SELECT id, name, body, refs, created_at, read_ts FROM cx_shares WHERE account_id=? AND dismissed_ts=0 ORDER BY id DESC LIMIT 50');
     $s->execute([(int) $a['id']]);
@@ -171,7 +171,7 @@ function pf_main_kiosk(): bool
 function pf_guest_write(PDO $pdo, array $a, string $action, array $p): array
 {
     if (pf_main_kiosk()) { return ['ok' => false, 'kiosk' => true]; }
-    if (!pf_schema($pdo)) { return ['ok' => true, 'n' => 0]; }
+    if (!partfam_schema($pdo)) { return ['ok' => true, 'n' => 0]; }
     if ($action === 'partages_vu') {
         $ids = array_slice(array_values(array_filter(array_map('intval', is_array($p['ids'] ?? null) ? $p['ids'] : []), static fn($i) => $i > 0)), 0, 100);
         $u = $pdo->prepare('UPDATE cx_shares SET read_ts=? WHERE id=? AND account_id=? AND read_ts=0'); $n = 0;

@@ -149,14 +149,14 @@ async function measureNav(page, cdp, results) {
         ['📊 widget Données (éclipses, liste + graphique)', `(() => { const W = window.LCNDA_EXT.dashboard?.donnees_widget; if (!W) return; const d = document.createElement('div'); d.id = 'mesure-atd'; d.innerHTML = W.render(1, {config: {src: 'eclipses', view: 'list'}}, 'span-6') + W.render(2, {config: {src: 'eclipses', view: 'chart'}}, 'span-6'); document.getElementById('workspace').prepend(d); })()`, '#mesure-atd .atd > :not(.ui-spinner):not(.loading)'],
     ];
     for (const [name, code, sel] of steps) {
-        await page.evaluate(() => { window.__lt = []; window.__navMark = performance.now(); document.querySelector('#workspace')?.setAttribute('data-mesure-old', '1'); });
+        await page.evaluate(() => { window.__lt = []; window.__navMark = performance.now(); [...(document.querySelector('#workspace')?.children || [])].forEach(c => c.setAttribute('data-mesure-old', '1')); });
         reqs = 0;
         if (PROFILE_NAV) { await cdp.send('Profiler.enable'); await cdp.send('Profiler.setSamplingInterval', { interval: 500 }); await cdp.send('Profiler.start'); }
         const t0 = Date.now();
         await page.evaluate(code);
         let shown = 0;
         try {
-            await page.waitForFunction(s => { const ws = document.querySelector('#workspace'); return ws && !ws.querySelector('.loading, .is-loading') && ws.querySelector(s.split(',').map(x => x.trim().replace(/^#workspace /, '')).join(',')); }, sel, { timeout: 30000, polling: 30 });
+            await page.waitForFunction(s => { const ws = document.querySelector('#workspace'); const hit = ws && [...ws.querySelectorAll(s.split(',').map(x => x.trim().replace(/^#workspace /, '')).join(','))].find(x => !x.closest('[data-mesure-old]')); return hit && !ws.querySelector('.loading, .is-loading, .loading-screen'); }, sel, { timeout: 30000, polling: 30 });
             shown = Date.now() - t0;
         } catch (_) { shown = -1; }
         for (;;) {
