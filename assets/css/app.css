@@ -646,6 +646,31 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .event-source-list .source-item { padding: 7px 0; border-bottom-color: rgba(0,0,0,.12); }
 .event-source-list .source-item h4 { font-size: 12px; }
 .event-source-list .source-item p, .event-source-list .source-item small { font-size: 10px; }
+/* 📚 cadre d'une source qui se replie (sourceItemHtml, app.js) : fermé, une seule ligne ▸ titre · Réf. · ↗ … ❝ ✎ 🗑 */
+.source-item .src-head { align-items: center; gap: 6px; cursor: pointer; }
+.source-item .src-head h4 { margin: 0; flex: 1 1 8em; }
+.src-toggle { flex: 0 0 22px; width: 22px; height: 22px; display: inline-grid; place-items: center; padding: 0; margin: 0; border: 0; border-radius: 4px; background: transparent; color: var(--blue); font-size: 11px; line-height: 1; cursor: pointer; }
+.src-toggle span { display: inline-block; transition: transform .18s ease; }
+.src-toggle[aria-expanded="true"] span { transform: rotate(90deg); }
+.src-toggle:hover { background: rgba(0,102,204,.1); }
+.src-toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.source-item .src-sum { display: none; margin: 0; flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.source-item .src-sum a { color: var(--blue); text-decoration: none; font-weight: 700; }
+.source-item.is-collapsed .src-sum { display: block; }
+.source-item.is-collapsed .src-head { flex-wrap: nowrap; }
+.source-item.is-collapsed .src-head h4 { min-width: 3em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.source-item.is-collapsed .src-head .item-title-extra { flex-wrap: nowrap; flex: 0 0 auto; }
+.src-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .18s ease; }
+.src-body-in { min-height: 0; overflow: clip; overflow-clip-margin: 4px; transition: visibility 0s; }
+.source-item.is-collapsed .src-body { grid-template-rows: 0fr; }
+.source-item.is-collapsed .src-body-in { visibility: hidden; transition: visibility 0s .18s; }
+.src-all[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .src-body, .src-body-in, .source-item.is-collapsed .src-body-in, .src-toggle span { transition: none; } }
+/* imprimer / PDF (fenêtre « Imprimer » : .k-print-doc) : toujours ouverts, sans chevron */
+@media print { .source-item.is-collapsed .src-body { grid-template-rows: 1fr; } .source-item.is-collapsed .src-body-in { visibility: visible; } .src-toggle, .source-item .src-sum, .src-all { display: none !important; } .source-item .src-head { cursor: auto; } }
+.k-print-doc .source-item.is-collapsed .src-body { grid-template-rows: 1fr; transition: none; }
+.k-print-doc .source-item.is-collapsed .src-body-in { visibility: visible; transition: none; }
+.k-print-doc .src-toggle, .k-print-doc .source-item .src-sum, .k-print-doc .src-all { display: none !important; }
 .person-event-map { display: grid; gap: 6px; }
 .person-map-stage { position: relative; width: 100%; aspect-ratio: 1000 / 360; overflow: hidden; border: 2px solid var(--ink); background: #dce4e8; background-image: linear-gradient(rgba(0,102,204,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,204,.08) 1px,transparent 1px); background-size: 34px 34px; }
 .person-map-osm-credit { font-size: 10px; color: var(--muted); text-align: right; padding: 2px 4px; }

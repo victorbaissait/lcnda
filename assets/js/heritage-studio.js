@@ -46,7 +46,7 @@
         'genealogie-research-kind-order', 'genealogie-research-kind-hidden', // 🔎 Recherche → ordre et types cachés de « Type de recherche »
         'genealogie-tile-cat-order', 'genealogie-tile-hidden-cats', 'genealogie-tile-hidden', 'genealogie-tile-custom-cats', 'genealogie-tile-user',
         'genealogie-person-blocks', 'genealogie-animal-blocks', 'genealogie-sheet-sections', 'genealogie-sheet-head', 'genealogie-dashboard-blocks', 'genealogie-dashboard-widget-catalog-order', 'genealogie-dashboard-widget-catalog-hidden',
-        'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display',
+        'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display', 'genealogie-sources-defaut',
         'genealogie-battue-level-colors', 'genealogie-person-badge-colors', 'genealogie-archive-digest-category-order', 'genealogie-heritage-flags',
         'genealogie-village-maps', 'genealogie-transcription-layout',
         'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', 'genealogie-topbar-buttons', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)

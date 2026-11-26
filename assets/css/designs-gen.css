@@ -329,6 +329,7 @@
 :root[data-lc-density] .event-source-list{margin-top:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .event-source-list{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .event-source-list .source-item{padding:calc(7px * var(--lc-sp)) 0}
+:root[data-lc-density] .source-item .src-head{gap:calc(6px * var(--lc-sp))}
 :root .person-map-marker:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
 :root .person-map-marker:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
 :root[data-lc-density] .tool-strip{gap:calc(12px * var(--lc-sp))}

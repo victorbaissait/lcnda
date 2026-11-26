@@ -1172,6 +1172,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-gender-colors',
         'genealogie-tree-card-fields',
         'genealogie-identity-name-variants-display',
+        'genealogie-sources-defaut', // 📚 cadres des sources ouverts / fermés par défaut sur la fiche (assets/js/app.js)
         'genealogie-battue-level-colors',
         'genealogie-battue-level-color-presets',
         'genealogie-person-badge-colors',
