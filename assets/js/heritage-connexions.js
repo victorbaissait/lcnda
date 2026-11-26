@@ -788,7 +788,7 @@
         explain: () => T('un rappel avec un lien vers chacune'),
         receive: async (items, ctx) => {
             const r = await post('reminder_add', {title: ctx.title, due: ctx.due, notes: items.map(itemText).join('\n\n'), investigation_id: ctx.investigation_id || 0, investigation_item_id: ctx.item_id || 0});
-            return {message: T('⏰ Rappel « {t} » créé', {t: ctx.title}), undo: async () => { await apiPost('delete_standalone_reminder', {id: r.reminder_id}).catch(() => apiPost('delete_record', {type: 'standalone_reminder', id: r.reminder_id})); if (r.link_id) await post('link_remove', {id: r.link_id}); }};
+            return {message: T('⏰ Rappel « {t} » créé', {t: ctx.title}), undo: async () => { await apiPost('delete_standalone_reminder', {id: r.reminder_id}); if (r.link_id) await post('link_remove', {id: r.link_id}); }};
         }});
     /* 📋 Mes listes (les fiches) */
     DT.push({

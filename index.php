@@ -1380,13 +1380,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
 <script src="assets/js/app-listes-perso.js?v=2" defer></script>
 <script src="assets/js/app-maintenance.js?v=70" defer></script>
-<script src="assets/js/app-recherche.js?v=37" defer></script>
-<script src="assets/js/app-recherche-outils.js?v=3" defer></script>
-<script src="assets/js/app-recherche-kit.js?v=1" defer></script><!-- 🔎 🗺 Carte · 🧺 📎 sur les résultats de recherche -->
+<script src="assets/js/app-recherche.js?v=38" defer></script>
+<script src="assets/js/app-recherche-outils.js?v=4" defer></script>
+<script src="assets/js/app-recherche-kit.js?v=2" defer></script><!-- 🔎 🗺 Carte · 🧺 📎 sur les résultats de recherche -->
 <script src="assets/js/app-graphiques.js?v=30" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
-<script src="assets/js/heritage.js?v=50" defer></script>
+<script src="assets/js/heritage.js?v=51" defer></script>
 <script src="assets/js/heritage-mini-carte.js?v=3" defer></script>
 <script src="assets/js/app-selection.js?v=3" defer></script>
 <script src="assets/js/app-sources-liste.js?v=4" defer></script>
@@ -1396,7 +1396,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=4" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=7" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=9" defer></script>
-<script src="assets/js/heritage-links.js?v=27" defer></script>
+<script src="assets/js/heritage-links.js?v=28" defer></script>
 <script src="assets/js/heritage-more.js?v=413" defer></script>
 <script src="assets/js/heritage-organiser-nouveau.js?v=1" defer></script>
 <script src="assets/js/heritage-controle.js?v=13" defer></script>
@@ -1492,10 +1492,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector-tree.js?v=16" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=13" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=11" defer></script>
-<script src="assets/js/heritage-research-gaps.js?v=12" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=13" defer></script>
 <script src="assets/js/app-lecture-auto.js?v=3" defer></script>
 <script src="assets/js/app-socface-core.js?v=3" defer></script>
-<script src="assets/js/heritage-socface.js?v=8" defer></script>
+<script src="assets/js/heritage-socface.js?v=9" defer></script>
 <script src="assets/js/app-sources-ouvertes-core.js?v=2" defer></script>
 <script src="assets/js/heritage-sources-ouvertes.js?v=3" defer></script>
 <script src="assets/js/app-sources-ouvertes-2-core.js?v=2" defer></script>
@@ -1743,7 +1743,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=3" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
-<script src="assets/js/heritage-connexions.js?v=15" defer></script>
+<script src="assets/js/heritage-connexions.js?v=16" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=6" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=7" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->

@@ -24,6 +24,10 @@ const JS = path.join(root, 'assets', 'js');
 const ALLOW = {
     // (vide pour l'instant : toute action de l'écran doit exister côté serveur)
 };
+/* Les sous-actions qui répondent « Demande inconnue » à une charge vide (le message parle alors d'une donnée manquante), et pourquoi. */
+const ALLOW_OP = {
+    'access_note {"what":"map_export"}': 'lib/verrou.php : « Demande inconnue » tant que la sorte de carte et le format (kind, format) manquent',
+};
 /* Les actions à NE PAS appeler ici (effet de bord qui casserait la suite de l'essai), et pourquoi. Leur route est quand même vérifiée
  * statiquement : elle doit être nommée telle quelle dans api.php ou dans un fichier lib/. */
 const SKIP = {
@@ -90,17 +94,17 @@ function extractActions(dir = JS) {
         const src = srcs[f];
         // les petites fonctions maison : const post = async (a, body) => … .api(a, …) ; function post(action, body) { … action=${action} … }
         const wrappers = new Map(), fixed = [];
-        const defs = [];
+        const defs = [], curly = src.replace(/[{]/g, '(').replace(/[}]/g, ')'); // (pour trouver la fin d'un corps de fonction)
         for (const m of src.matchAll(/(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\(\s*([A-Za-z_$][\w$]*)[^)]*\)|([A-Za-z_$][\w$]*))\s*=>([^\n]{0,600})/g)) defs.push([m[1], m[2] || m[3], m[4], (m[0].match(/=\s*(?:async\s*)?\(([^)]*)\)/) || [])[1] || m[3]]);
-        for (const m of src.matchAll(/(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)[^)]*\)\s*\{/g)) defs.push([m[1], m[2], src.slice(m.index, m.index + 900), (m[0].match(/\(([^)]*)\)/) || [])[1]]);
+        for (const m of src.matchAll(/(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)[^)]*\)\s*\{/g)) defs.push([m[1], m[2], src.slice(m.index, m.index + m[0].length + callArgs(curly, m.index + m[0].length).length + 1), (m[0].match(/\(([^)]*)\)/) || [])[1]]); // le corps seul
         // a. celles qui passent leur 1er argument comme nom d'action
         for (const [name, param, body, params] of defs) {
             if (!name || !param || name === 'api' && f === 'app.js') continue;
             const p = esc(param);
-            if (!(new RegExp(`\\bapi\\(\\s*${p}\\b|api\\.php\\?action=\\$\\{\\s*${p}\\s*\\}|\\.set\\(\\s*['"]action['"]\\s*,\\s*${p}\\b`).test(body) && (!/\.set\(\s*['"]action/.test(body) || /api\.php/.test(body)))) continue;
+            if (!(new RegExp(`\\bapi\\(\\s*${p}\\b|api\\.php\\?action=(?:\\$\\{\\s*${p}\\s*\\}|['"]\\s*\\+\\s*${p}\\b)|\\.set\\(\\s*['"]action['"]\\s*,\\s*${p}\\b`).test(body) && (!/\.set\(\s*['"]action/.test(body) || /api\.php/.test(body)))) continue;
             if (!isPost(body)) wrappers.set(name, 'GET');
             else if (isCondPost(body)) { // le n° de l'argument qui décide : (a, p, b) => … b ? {method: 'POST'…} : …
-                const names = String(params).split(',').map(x => x.trim().split(/[\s=]/)[0]), c = (body.match(/\b(\w+)\s*\?\s*\{[^}]*method\s*:\s*['"]POST/) || body.match(/\bif\s*\(\s*(\w+)/) || [])[1];
+                const names = String(params).split(',').map(x => x.trim().split(/[\s=]/)[0]), c = (body.match(/\b(\w+)\s*\?\s*\{[^}]*method\s*:\s*['"]POST/) || body.match(/\bif\s*\(\s*(\w+)(?:\s*\|\|\s*\w+)?\s*\)\s*\{?[^}]{0,120}method\s*[=:]\s*['"]POST/) || [])[1];
                 wrappers.set(name, 'COND:' + Math.max(1, names.indexOf(c)));
             } else wrappers.set(name, 'POST');
         }
@@ -113,10 +117,10 @@ function extractActions(dir = JS) {
             const fx = body.match(new RegExp(`(?<![\\w$])(${callers})\\(\\s*(['"])([a-z][a-z0-9_]*)\\2`)) || body.match(/(fetch)\(\s*(['"`])api\.php\?action=([a-z][a-z0-9_]*)\2/);
             if (!fx) continue;
             const via = wrappers.get(fx[1]), rest = callArgs(body, fx.index + fx[0].length);
-            const method = isPost(body) || fx[1] === 'apiPost' || via === 'POST' || condPost(via, rest) ? 'POST' : 'GET';
-            const key = (body.match(new RegExp(`\\b(${SUBKEY})\\s*:\\s*${p}\\s*[,}]`)) || [])[1] || (new RegExp(`\\{\\s*${p}\\s*[,}]`).test(body) ? param : null);
+            const method = isPost(rest) || fx[1] === 'apiPost' || fx[1] === 'fetch' && isPost(body) || via === 'POST' || condPost(via, rest) ? 'POST' : 'GET';
+            const key = (rest.match(new RegExp(`\\b(${SUBKEY})\\s*:\\s*${p}\\s*[,}]`)) || [])[1] || (new RegExp(`\\{\\s*${p}\\s*[,}]`).test(rest) ? param : null);
             if (key && new RegExp(`^(${SUBKEY})$`).test(key)) fixed.push({name, action: fx[3], method, key});
-            else if (new RegExp(`body\\s*:\\s*${p}\\b|[{,]\\s*${p === 'body' ? 'body\\s*[,}]' : '\\b$^'}|JSON\\.stringify\\(\\s*\\{\\s*\\.\\.\\.${p}\\b|^\\s*,\\s*(?:\\{\\}\\s*,\\s*)?${p}\\s*[,)]`).test(body.slice(0, 600)) || new RegExp(`^\\s*,\\s*(?:\\{\\}\\s*,\\s*)?${p}\\s*$`).test(rest)) fixed.push({name, action: fx[3], method, key: null}); // post({op: 'save', …})
+            else if (new RegExp(`body\\s*:\\s*${p}\\b|[{,]\\s*${p === 'body' ? 'body\\s*[,}]' : '\\b$^'}|^\\s*,\\s*(?:\\{\\}\\s*,\\s*)?${p}\\s*$`).test(rest) || fx[1] === 'fetch' && new RegExp(`JSON\\.stringify\\(\\s*\\{\\s*\\.\\.\\.${p}\\b`).test(body)) fixed.push({name, action: fx[3], method, key: null}); // post({op: 'save', …})
         }
         // 1. .api('x' …) et api('x' …) : GET, sauf method: 'POST' dans l'appel
         for (const m of src.matchAll(/(?<![\w$])((?:[\w$]+(?:\(\))?\.)*)api\(\s*(['"`])([a-z][a-z0-9_]*)\2/g)) {
@@ -192,8 +196,10 @@ let fails = 0;
 const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 40).join('\n  ')); } };
 const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-// « Action inconnue », « Action d’écriture inconnue », « Demande inconnue. », « Opération inconnue sur les graphiques. »… (et les mêmes traduits)
-const UNKNOWN = /\b(action|demande|op[ée]ration)( [^.:!?]{0,40})? inconnue\b|unknown (action|request|operation)|acci[oó]n desconocida|unbekannte aktion|azione sconosciuta|a[cç][aã]o desconhecida|nieznana akcja|onbekende actie/i;
+// la route n'existe pas : « Action inconnue », « Action d’écriture inconnue », « Action météo inconnue. », « Action inconnue sur les graphiques. »…
+const UNKNOWN = /\baction( [^.:!?]{0,40})? inconnue\b|unknown action|acci[oó]n desconocida|unbekannte aktion|azione sconosciuta|a[cç][aã]o desconhecida|nieznana akcja|onbekende actie/i;
+// et avec une sous-action lue dans le JS ({op: 'save'}) : elle doit être connue aussi (« Demande inconnue. », « Opération inconnue sur les cartes postales. »)
+const UNKNOWN_OP = /\b(demande|op[ée]ration)( [^.:!?]{0,40})? inconnue\b|unknown (request|operation)/i;
 
 (async () => {
     const acts = extractActions();
@@ -271,7 +277,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                 if (SKIP[a]) return;
                 const r = await call(a, m, v), label = `${m} ${a}${v ? ' ' + JSON.stringify(v) : ''}`; seen[label] = r;
                 if (process.env.LCNDA_ROUTES_VERBOSE) console.log(`  ${label} → ${r.status} ${r.err.slice(0, 120)}`);
-                if (UNKNOWN.test(r.err) && !ALLOW[a]) bad.push(`${label} → ${r.status} « ${r.err} » (appelée par ${[...acts.get(a).files].join(', ')})`);
+                if ((UNKNOWN.test(r.err) || v && UNKNOWN_OP.test(r.err) && !ALLOW_OP[label.slice(m.length + 1)]) && !ALLOW[a]) bad.push(`${label} → ${r.status} « ${r.err} » (appelée par ${[...acts.get(a).files].join(', ')})`);
             };
             const gets = jobs.filter(j => j[1] === 'GET'), posts = jobs.filter(j => j[1] !== 'GET');
             await Promise.all([0, 1, 2].map(async k => { for (let i = k; i < gets.length; i += 3) await one(gets[i]); })); // les lectures, 3 à la fois

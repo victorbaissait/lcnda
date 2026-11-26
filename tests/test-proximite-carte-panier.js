@@ -150,6 +150,67 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
             const items = await menu(); assert.ok(items.some(x => /Mettre dans le panier/.test(x))); await clean();
             assert.ok(await p.$('#workspace .research-person-card .rk-row-acts'));
         });
+        const hasKit = async () => { const items = await menu(); await clean(); return items.some(x => /panier/.test(x)) && items.some(x => /Insérer…/.test(x)); };
+        const openMap = async () => { if (!(await p.$('[data-rk-map].is-open'))) await p.click('#workspace [data-rk-map-btn]'); await p.waitForSelector('[data-rk-map].is-open .h-map-point', {timeout: 15000, state: 'attached'}); };
+        await t('Multicritère : ☑ cases + barre, 🗺 Carte (les lieux des fiches), 🧺 📎, 📎 🧺 au bout de chaque ligne', async () => {
+            await research('saved', {hSearch: {criteria: {last_name: 'MAZAUD', name_mode: 'exact'}, id: 0, name: ''}}, '#h-search-results tr [data-rp-pick]');
+            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000});
+            assert.ok(await p.$('#h-search-results [data-rp-bar]'), 'la barre de sélection');
+            await openMap();
+            assert.ok(await p.$('#h-search-results tr .rk-row-acts [data-rk-bk]'));
+            assert.ok(await hasKit());
+            const boxes = p.locator('#h-search-results [data-rp-pick]'); await boxes.nth(0).check();
+            const items = await menu(); assert.ok(items.some(x => /panier.*1 coché/.test(x)), items.join(' | ')); await clean(); await boxes.nth(0).uncheck();
+        });
+        await t('Que manque-t-il ? : 🗺 Carte des communes à visiter, 🧺 📎 les recherches (un « Exporter » ajouté à l’en-tête)', async () => {
+            await research('gaps', {}, '#workspace .h-gap');
+            assert.ok(await hasKit());
+            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000}); await openMap();
+            assert.match(await p.textContent('[data-rk-map] [data-rk-legend]'), /Commune à visiter/);
+            const before = await basketN(), n = await p.$$eval('#workspace .h-gap', a => a.length);
+            await menu(); await menuPick(/Mettre dans le panier/); await sleep(1200);
+            if (await p.$('.ui-actmenu')) { await p.locator('.ui-actmenu .ui-actmenu-i').first().click(); await sleep(1200); }
+            assert.strictEqual(await basketN(), before + n, 'toutes les recherches montrées');
+            await undo(); assert.strictEqual(await basketN(), before);
+        });
+        await t('Dépouillements : 🗺 Carte par commune, 🧺 📎', async () => {
+            await p.evaluate(() => window.LCNDA_APP.api('save_archive_digest', {}, {method: 'POST', body: {id: 0, place_id: 1, city_name: 'Treignac', archive_service: 'AD Corrèze', archive_reference: '3 E 271/2', year_text: '1780-1800', record_type: 'naissance', status: 'todo', searched: 'Baptêmes MAZAUD'}}));
+            await research('archive_digest', {archiveDigestSearch: {q: '', city: '', placeId: 0, radiusKm: 0, dept: '', region: '', recordType: '', status: ''}, archiveDigestAdding: false, archiveDigestEditId: 0}, '#workspace [data-rk-map-btn]');
+            await openMap(); assert.ok(await hasKit());
+        });
+        await t('Transcriptions : 🧺 📎 (des médias), pas de carte', async () => {
+            await research('transcriptions', {transcriptionSearch: {q: 'douze'}}, '#workspace .page-header [data-rp-export]');
+            await sleep(300);
+            if (await p.$('#workspace .date-result, #workspace table.data-table tbody tr')) { assert.ok(await hasKit()); }
+            assert.strictEqual(await p.$('#workspace [data-rk-map-btn]'), null);
+        });
+        await t('Poser une question : 🧺 📎 sur les fiches trouvées, 🗺 Carte de leurs lieux', async () => {
+            await research('question', {hQuestion: 'les MAZAUD'}, '#h-question-out table.data-table');
+            await p.waitForSelector('#workspace [data-rk-map-btn]', {timeout: 10000});
+            assert.ok(await hasKit());
+        });
+        await t('Où chercher ? : 🧺 les sites au panier (comme liens), 📎 ; pas de carte', async () => {
+            await research('ou_chercher', {oucPerson: 1}, '#workspace .ouc-row a[data-ouc-go]');
+            await p.waitForSelector('#workspace .page-header [data-rp-export]', {timeout: 10000});
+            assert.strictEqual(await p.$('#workspace [data-rk-map-btn]'), null);
+            const before = await basketN(), n = await p.$$eval('#workspace .ouc-row a[data-ouc-go]', a => a.filter(x => /^https?:/.test(x.href)).length);
+            await menu(); await menuPick(/Mettre dans le panier/); await sleep(1200);
+            if (await p.$('.ui-actmenu')) { await p.locator('.ui-actmenu .ui-actmenu-i').first().click(); await sleep(1200); }
+            assert.strictEqual(await basketN(), before + n);
+            const last = ((await B.api('cx_basket', {})).items || []).slice(-1)[0] || {};
+            assert.ok(/^https?:/.test(last.value || last.origin?.url || ''), 'un lien ' + JSON.stringify(last).slice(0, 200));
+            await undo(); assert.strictEqual(await basketN(), before);
+        });
+        await t('Chercher sur internet : 🧺 📎 les liens des sites', async () => {
+            await research('web', {webSearchForm: {first: 'Jean', middle: '', last: 'MAZAUD', place: 'Treignac', placeKind: 'birth', y1: '1780', y2: '1840', spouseFirst: '', spouseLast: '', useMiddle: false, married: false}}, '#workspace a[data-ws-site]');
+            assert.ok(await hasKit());
+            assert.strictEqual(await p.$('#workspace [data-rk-map-btn]'), null);
+        });
+        await t('Journal des recherches : rien de nouveau (son export CSV et son compte rendu suffisent)', async () => {
+            await research('journal', {}, '#workspace .h-rj');
+            await sleep(600);
+            assert.strictEqual(await p.$('#workspace [data-rk-own], #workspace [data-rk-map]'), null);
+        });
         await t('Chercher et remplacer : rien de nouveau (ni carte, ni 🧺 📎)', async () => {
             await research('replace', {}, '#workspace [data-rp-replace-form]');
             assert.strictEqual(await p.$('#workspace [data-rk-map-btn]'), null);
