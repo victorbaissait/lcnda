@@ -71,7 +71,7 @@
             <form class="fam-search" data-fam-search role="search"><input type="search" name="q" placeholder="${esc(t('Chercher un nom…'))}" aria-label="${esc(t('Chercher un nom…'))}" autocomplete="off"><button type="submit">${esc(t('Chercher'))}</button></form>
             ${a ? `<div class="fam-me"><span class="fam-who">${esc(a.name)} · ${esc(t(ROLE[a.role] || a.role))}</span>
                 ${a.can_propose ? `<button type="button" class="fam-link" data-fam-mine>${esc(t('📋 Mes propositions'))}</button>` : ''}
-                <button type="button" class="fam-link" data-fam-lists>${esc(t('📊 Listes partagées'))}</button>
+                <button type="button" class="fam-link" data-fam-lists>${esc(t('📥 Ce qu’on m’a partagé'))}</button>
                 <button type="button" class="fam-link" data-fam-logout>${esc(t('Se déconnecter'))}</button></div>` : ''}</header>`;
     };
     const page = inner => { root.innerHTML = head() + `<div class="fam-page">${inner}</div>`; };
@@ -136,7 +136,7 @@
         const m = h.match(/^#p=(\d+)$/);
         if (m) return showPerson(Number(m[1]));
         if (h === '#mes') return showMine();
-        if (h === '#listes') return showLists();
+        if (h === '#listes' || h === '#partages') return showShared();
         if (S.state?.home) return showPerson(S.state.home);
         page(`<section class="fam-card"><p>${esc(t('Cherche un nom pour commencer.'))}</p></section>`);
         root.querySelector('[data-fam-search] input')?.focus();
@@ -271,15 +271,30 @@
                 ${x.status === 'attente' ? `<button type="button" class="fam-link" data-fam-withdraw="${Number(x.id)}">${esc(t('Retirer'))}</button>` : ''}</li>`).join('')}</ul>` : `<p class="fam-muted">${esc(t('Aucune proposition pour l’instant.'))}</p>`}</section>`);
     }
 
-    /** 📊 les listes de données partagées depuis l'ordinateur (lecture seule ; le serveur retire toute ligne qui nomme une personne vivante) */
-    async function showLists() {
+    /** 📥 « Ce qu'on m'a partagé » : 🧺 les paniers reçus et 📊 les listes partagées depuis l'ordinateur, en lecture seule. Le serveur
+     * (lib/partages_famille.php) retire à chaque lecture tout élément qui nomme une personne vivante ou confidentielle, ou hors de ta branche. */
+    const safeUrl = u => (/^https?:\/\/[^\s<>"']+$/i.test(String(u || '')) ? String(u) : '');
+    async function showShared() {
         let d;
-        try { d = await call('listes'); } catch (e) { if (!e.silent) toast(e.message, {kind: 'error'}); return; }
-        page(`<section class="fam-card fam-lists"><h1>${esc(t('📊 Listes partagées'))}</h1>
-            ${d.lists.length ? d.lists.map(l => `<article class="fam-list"><h2>${esc(l.name)}</h2>${l.filters ? `<p class="fam-muted">${esc(l.filters)}</p>` : ''}
+        try { d = await call('partages'); } catch (e) { if (!e.silent) toast(e.message, {kind: 'error'}); return; }
+        const baskets = d.baskets || [], lists = d.lists || [];
+        const item = it => { const u = safeUrl(it.url);
+            return `<li><b>${esc(it.title)}</b>${it.value ? ` — ${esc(it.value)}` : ''}${it.source || u ? ` <small class="fam-muted">${u ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">↗ ${esc(it.source || t('source'))}</a>` : esc(it.source)}</small>` : ''}</li>`; };
+        page(`<section class="fam-card fam-lists fam-shared"><h1>${esc(t('📥 Ce qu’on m’a partagé'))}</h1>
+            <p class="fam-muted">${esc(t('En lecture seule. Les personnes vivantes, confidentielles ou hors de ta branche n’y apparaissent jamais.'))}</p>
+            <h2>${esc(t('🧺 Paniers reçus'))}</h2>
+            ${baskets.length ? baskets.map(b => `<article class="fam-list" data-fam-basket="${Number(b.id)}"><h3>${esc(b.icon || '🧺')} ${esc(b.name)}${b.new ? ` <small class="fam-new">${esc(t('nouveau'))}</small>` : ''}</h3>
+                <p class="fam-muted">${esc(t('Reçu le {d}', {d: String(b.at || '').slice(0, 10)}))}${b.hidden ? ` · ${esc(t('{n} élément(s) retiré(s) (personne vivante ou hors de ta branche)', {n: b.hidden}))}` : ''}</p>
+                ${b.items.length ? `<ul class="fam-bitems">${b.items.map(item).join('')}</ul>` : `<p class="fam-muted">${esc(t('Plus rien à montrer dans ce panier.'))}</p>`}
+                <button type="button" class="fam-link" data-fam-dismiss="${Number(b.id)}">${esc(t('✕ Retirer de ma liste'))}</button></article>`).join('')
+            : `<p class="fam-muted">${esc(t('Aucun panier reçu pour l’instant.'))}</p>`}
+            <h2>${esc(t('📊 Listes partagées'))}</h2>
+            ${lists.length ? lists.map(l => `<article class="fam-list"><h3>${esc(l.name)}</h3>${l.filters ? `<p class="fam-muted">${esc(l.filters)}</p>` : ''}
                 <div class="fam-tw"><table><thead><tr>${l.cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${l.rows.map(r => `<tr>${l.cols.map((c, i) => `<td>${esc(r[i] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
                 ${l.sources.length ? `<p class="fam-muted">${esc(t('Sources et licences :'))} ${l.sources.map(s => esc([s.source, s.licence].filter(Boolean).join(' — '))).join(' · ')}</p>` : ''}</article>`).join('')
             : `<p class="fam-muted">${esc(t('Aucune liste partagée pour l’instant.'))}</p>`}</section>`);
+        const fresh = baskets.filter(b => b.new).map(b => Number(b.id));
+        if (fresh.length) call('partages_vu', {body: {ids: fresh}}).catch(() => {}); // « lu » pour celui qui l'a envoyé
     }
 
     /* ═════ les gestes ═════ */
@@ -287,7 +302,15 @@
         const tg = e.target;
         if (tg.closest('[data-fam-home]')) { e.preventDefault(); location.hash = ''; route(); return; }
         if (tg.closest('[data-fam-mine]')) { location.hash = '#mes'; return; }
-        if (tg.closest('[data-fam-lists]')) { location.hash = '#listes'; return; }
+        if (tg.closest('[data-fam-lists]')) { location.hash = '#partages'; return; }
+        const dm = tg.closest('[data-fam-dismiss]');
+        if (dm) {
+            const id = Number(dm.dataset.famDismiss);
+            try { const r = await call('partage_retirer', {body: {id}}); if (r.kiosk) { toast(t('L’ordinateur est en mode consultation : rien ne peut être changé.'), {kind: 'error'}); return; }
+                await showShared(); toast(t('Panier retiré de ta liste.'), {undo: async () => { await call('partage_retirer', {body: {id, undo: 1}}); await showShared(); }}); }
+            catch (err) { if (!err.silent) toast(err.message, {kind: 'error'}); }
+            return;
+        }
         if (tg.closest('[data-fam-logout]')) { try { await call('logout', {body: {}}); } catch (_) {} S.state = await call('state').catch(() => S.state); showLogin(); return; }
         const ed = tg.closest('[data-fam-edit]'); if (ed) { factEditor(ed.dataset.famEdit); return; }
         if (tg.closest('[data-fam-add]')) { addEditor(''); return; }

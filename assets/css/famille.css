@@ -76,3 +76,10 @@ a.fam-chip:hover { border-color: var(--fam-blue); }
 .fam-tw { max-width: 100%; overflow-x: auto; }
 .fam-tw table { border-collapse: collapse; width: 100%; font-size: 14px; }
 .fam-tw th, .fam-tw td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--fam-line); vertical-align: top; }
+
+/* 📥 Ce qu'on m'a partagé : 🧺 paniers reçus (lib/partages_famille.php) */
+.fam-shared h2 { font-size: 18px; margin: 18px 0 8px; }
+.fam-list h3 { font-size: 16px; margin: 0 0 4px; }
+.fam-bitems { margin: 6px 0 8px; padding-left: 20px; }
+.fam-bitems li { margin: 0 0 4px; }
+.fam-new { background: var(--fam-yel-bg); color: var(--fam-yel-ink); padding: 0 6px; border-radius: 3px; font-weight: 600; }

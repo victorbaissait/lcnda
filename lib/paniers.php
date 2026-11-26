@@ -10,7 +10,7 @@ declare(strict_types=1);
  * cx_basket_log (l'historique, avec de quoi faire ↶) ; cx_shares (un panier envoyé à un compte du site familial).
  *
  * POST cx_write {op: pn_meta | pn_status | pn_log | pn_undo | pn_create | pn_dup | pn_to_investigation
- *      | pn_share_build | pn_share_preview | pn_share_import | pn_share_accounts | pn_share_send}
+ *      | pn_share_build | pn_share_preview | pn_share_import | pn_share_accounts | pn_share_send | pn_share_sent}
  * Écrire passe par api.php (jeton CSRF, refusé en mode consultation : kiosk_guard).
  * Partager : seulement les données publiques par défaut ; ce qui vient de l'arbre, une case à la fois ; jamais une personne vivante,
  * peut-être vivante ou confidentielle ; jamais les notes, ni les numéros de la base. Récupérer : fichier de 2 Mo au plus, schéma vérifié,
@@ -386,15 +386,12 @@ function pn_share_accounts(PDO $pdo): array
     return ['accounts' => array_map(static fn($a) => ['id' => (int) $a['id'], 'name' => (string) $a['name']], $pdo->query('SELECT id, name FROM fc_accounts WHERE removed_ts=0 ORDER BY name COLLATE NOCASE LIMIT 200')->fetchAll(PDO::FETCH_ASSOC))];
 }
 
-/** ✉ envoyer à un compte du site familial : le même fichier (public, personnel coché, jamais les vivants), rangé pour ce compte */
+/** ✉ envoyer à un compte du site familial : le même fichier (public, personnel coché, jamais les vivants ni les notes), rangé pour ce compte ;
+ * repassé au filtre à chaque lecture sur famille.php (lib/partages_famille.php) */
 function pn_share_send(PDO $pdo, array $d): array
 {
-    $acc = safe_int($d['account_id'] ?? 0);
-    if (!in_array($acc, array_column(pn_share_accounts($pdo)['accounts'], 'id'), true)) { throw new LcndaBadInput('Compte du site familial introuvable.'); }
-    $f = pn_share_build($pdo, $d);
-    $pdo->prepare('INSERT INTO cx_shares(account_id, name, body) VALUES(?,?,?)')->execute([$acc, $f['share']['name'], (string) json_encode($f['share'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
-    pn_log($pdo, safe_int($d['basket_id'] ?? 0), cx_t('Envoyé à un compte du site familial'));
-    return ['share_id' => (int) $pdo->lastInsertId(), 'counts' => $f['counts']];
+    require_once __DIR__ . '/partages_famille.php';
+    return pf_send($pdo, $d);
 }
 
 function pn_api_post(PDO $pdo, string $op, array $d): array
@@ -421,6 +418,7 @@ function pn_api_post(PDO $pdo, string $op, array $d): array
         'pn_share_import' => pn_share_import($pdo, $d),
         'pn_share_accounts' => pn_share_accounts($pdo),
         'pn_share_send' => pn_share_send($pdo, $d),
+        'pn_share_sent' => (static function () use ($pdo, $d) { require_once __DIR__ . '/partages_famille.php'; return pf_sent($pdo, $d); })(), // ✉ envoyé · lu · retiré
         default => throw new LcndaBadInput('Opération inconnue.'),
     };
 }

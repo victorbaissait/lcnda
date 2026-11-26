@@ -224,7 +224,7 @@
             let best = '';
             for (const w0 of t.words || []) {
                 const w = fold(w0).replace(/[’']/g, ' ').trim(); if (w.length < 3) continue;
-                const ok = w.length <= 4 ? new RegExp(` ${w}s? `).test(g) : g.includes(` ${w}`);
+                const ok = w.length <= 4 ? (g.includes(` ${w} `) || g.includes(` ${w}s `)) : g.includes(` ${w}`); // sans RegExp : un mot de thème « c++ » ou « (x » ne casse plus la question
                 if (ok && w.length > best.length) best = w;
             }
             if (best) hits.push({id: t.id, word: best, ti});

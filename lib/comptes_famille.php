@@ -44,7 +44,8 @@ const FC_LIVING = ['caches', 'prenom', 'visibles'];
 /** Les seules actions de la page de la famille (famille.php), avec leur méthode. Liste blanche : tout le reste est refusé. */
 const FC_GUEST_ACTIONS = ['state' => 'GET', 'join' => 'POST', 'login' => 'POST', 'logout' => 'POST', 'search' => 'GET', 'person' => 'GET', 'media' => 'GET',
     'similar' => 'GET', 'mine' => 'GET', 'propose' => 'POST', 'withdraw' => 'POST', 'edit' => 'POST', 'edit_undo' => 'POST',
-    'listes' => 'GET']; // 📊 les listes de données partagées depuis l'ordinateur (lib/donnees_plus.php : jamais les vivants)
+    'listes' => 'GET', // 📊 les listes de données partagées depuis l'ordinateur (lib/donnees_plus.php : jamais les vivants)
+    'partages' => 'GET', 'partages_vu' => 'POST', 'partage_retirer' => 'POST']; // 📥 « Ce qu'on m'a partagé » : 🧺 paniers reçus + 📊 listes (lib/partages_famille.php)
 const FC_SETTINGS_KEY = 'lcnda-comptes-famille'; // hors « genealogie-… » : save_settings (et donc un invité) ne peut pas l'écrire
 const FC_SPEC = ['sans_compte' => ['app', 'famille'], 'visites' => ['oui', 'non']];
 const FC_IDLE_MIN = 60;
@@ -547,7 +548,7 @@ function fc_guest_main(): never
             fc_json(['ok' => true]);
         }
         if (!$a) { header('X-LCNDA-Famille: login'); fc_json(['error' => 'Connecte-toi d’abord (ton identifiant et ton mot de passe).', 'login' => true], 401); }
-        $readOnly = in_array($action, ['search', 'person', 'media', 'similar', 'mine', 'listes'], true);
+        $readOnly = in_array($action, ['search', 'person', 'media', 'similar', 'mine', 'listes', 'partages'], true);
         // les lectures : sans les événements confidentiels (sauf ⚙ gérer) — jamais avant une écriture (les vues temporaires ne s'écrivent pas)
         if ($readOnly && $a['role'] !== 'gerer' && function_exists('private_events_shadow') && !private_events_shadow($pdo)) { fc_json(['error' => 'Refusé.'], 503); }
         match ($action) {
@@ -557,6 +558,8 @@ function fc_guest_main(): never
             'similar' => fc_json(['people' => fc_similar($pdo, fc_line($_GET['first'] ?? '', 80), fc_line($_GET['last'] ?? '', 80), fc_year_of(fc_line($_GET['year'] ?? '', 20)), $a)]),
             'mine' => fc_guest_mine($pdo, $a),
             'listes' => (static function () use ($pdo, $a) { require_once __DIR__ . '/donnees_plus.php'; fc_json(dplus_guest_lists($pdo, $a)); })(), // sa branche seulement
+            'partages' => (static function () use ($pdo, $a) { require_once __DIR__ . '/partages_famille.php'; fc_json(pf_guest($pdo, $a)); })(), // repassés au filtre à chaque lecture
+            'partages_vu', 'partage_retirer' => (static function () use ($pdo, $a, $action, $payload) { require_once __DIR__ . '/partages_famille.php'; fc_json(pf_guest_write($pdo, $a, $action, is_array($payload) ? $payload : [])); })(),
             'propose' => fc_guest_propose($pdo, $a, $dev, is_array($payload) ? $payload : [], false),
             'edit' => fc_guest_propose($pdo, $a, $dev, is_array($payload) ? $payload : [], true),
             'withdraw' => fc_guest_withdraw($pdo, $a, is_array($payload) ? $payload : []),
