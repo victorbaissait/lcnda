@@ -45,7 +45,7 @@
     /** les lignes d'une commune : par code INSEE, sinon par nom dans le même département */
     function communeRows(rows, place) {
         const ins = String(place?.insee || '').toUpperCase(), dep = String(place?.dep || depOf(ins)), name = fold(place?.name || '');
-        return rows.filter(r => (ins && r.insee === ins) || (!r.insee && name && r.dep === dep && fold(r.commune) === name));
+        return rows.filter(r => (ins && r.insee === ins) || (!ins && name && r.dep === dep && fold(r.commune) === name));
     }
     /** l'acte de cette année est-il en ligne ? → {state: online | offline | absent | out, row} ; null si le département n'est pas dans la liste */
     function coverage(rows, deps, place, act, year) {

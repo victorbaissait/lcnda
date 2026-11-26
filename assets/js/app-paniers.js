@@ -85,7 +85,7 @@
         </section>`;
         bind(host.querySelector('[data-pn]'));
         paint();
-        ideas().then(() => { if (st.dragging) { st.paintLater = true; return; } paintStrip(); if (st.view === 'basket') paintMain(); }); // pas pendant qu'on glisse : l'élément tenu disparaîtrait (le glisser resterait coincé)
+        ideas().then(() => { if (st.dragging || st.pressing) { st.paintLater = true; return; } paintStrip(); if (st.view === 'basket') paintMain(); }); // pas pendant qu'on glisse : l'élément tenu disparaîtrait (le glisser resterait coincé)
         liveCheck();
     }
     function paint() { if (!root()) return; paintTree(); paintStrip(); paintMain(); }
@@ -928,11 +928,15 @@
             r.click(); if (key) [0, 120, 400].forEach(ms => setTimeout(() => { if (!document.activeElement || document.activeElement === document.body || !document.activeElement.isConnected) R.querySelector(`[data-pn-tree] .pn-tr${key}`)?.focus(); }, ms)); } });
         // ⋮⋮ glisser : un élément (ordre, ou sur un panier de l'arbre), un panier ou un dossier sur un dossier
         let drag = null;
+        // bouton enfoncé sur une ligne qu'on peut glisser : on ne redessine pas non plus (le glisser commence au premier mouvement ; si la ligne est remplacée entre-temps, il ne part jamais et reste coincé)
+        R.addEventListener('pointerdown', e => { if (e.button === 0 && e.target.closest?.('[draggable="true"]')) st.pressing = true; }, true);
+        if (!st.pressHook) { st.pressHook = true; const unpress = () => { if (!st.pressing) return; st.pressing = false; if (!st.dragging && st.paintLater) { st.paintLater = false; paintStrip(); if (st.view === 'basket') paintMain(); } };
+            document.addEventListener('pointerup', unpress, true); addEventListener('blur', unpress); }
         R.addEventListener('dragstart', e => { const it = e.target.closest?.('[data-pn-i]'), bb = e.target.closest?.('.pn-tr[data-pn-b]'), ff = e.target.closest?.('.pn-tr[data-pn-f]');
             drag = it ? {t: 'i', id: Number(it.dataset.pnI)} : bb ? {t: 'b', id: Number(bb.dataset.pnB)} : ff ? {t: 'f', id: Number(ff.dataset.pnF)} : null; if (!drag) return;
             e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', `${drag.t}:${drag.id}`); } catch (_) {} (it || bb || ff).classList.add('is-dragging'); st.dragging = true;
-            (it || bb || ff).addEventListener('dragend', () => { if (st.dragging) { st.dragging = false; drag = null; if (st.paintLater) { st.paintLater = false; paintStrip(); if (st.view === 'basket') paintMain(); } } }, {once: true}); }); // (même si la ligne a été redessinée entre-temps)
-        R.addEventListener('dragend', () => { R.querySelectorAll('.is-dragging, .is-drop, .is-over').forEach(x => x.classList.remove('is-dragging', 'is-drop', 'is-over')); drag = null; st.dragging = false;
+            (it || bb || ff).addEventListener('dragend', () => { if (st.dragging) { st.dragging = false; st.pressing = false; drag = null; if (st.paintLater) { st.paintLater = false; paintStrip(); if (st.view === 'basket') paintMain(); } } }, {once: true}); }); // (même si la ligne a été redessinée entre-temps)
+        R.addEventListener('dragend', () => { R.querySelectorAll('.is-dragging, .is-drop, .is-over').forEach(x => x.classList.remove('is-dragging', 'is-drop', 'is-over')); drag = null; st.dragging = false; st.pressing = false;
             if (st.paintLater) { st.paintLater = false; paintStrip(); if (st.view === 'basket') paintMain(); } });
         const targetOf = e => { if (!drag) return null; const fr = e.target.closest?.('.pn-tr[data-pn-f]'), br = e.target.closest?.('.pn-tr[data-pn-b]'), ir = e.target.closest?.('[data-pn-i]');
             if (drag.t === 'i' && br && Number(br.dataset.pnB) !== Number(st.sel?.id)) return br; if (drag.t === 'i' && ir && Number(ir.dataset.pnI) !== drag.id) return ir; if ((drag.t === 'b' || drag.t === 'f') && fr) return fr; return null; };

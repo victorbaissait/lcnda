@@ -42,3 +42,7 @@
     .ouc-tip .ouc-acts, .ouc-oa-row .ouc-acts { grid-column: 2; justify-content: flex-start; }
     .ouc-oa-form { grid-template-columns: 1fr 1fr; }
 }
+/* 🇬🇧🇺🇸 Archives britanniques et américaines (heritage-liens-archives.js) : les boutons sur toute la largeur, et les liens d'une commune */
+.ouc-ukus .ouc-oa-go { grid-column: 1 / -1; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.ouc-ukus-set { margin-top: 8px; }
+.so27-place { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }

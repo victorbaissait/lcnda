@@ -22,7 +22,7 @@
     const L = () => window.LCNDA_SO27;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const T = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
-    const kiosk = () => document.body?.classList.contains('is-kiosk');
+    const kiosk = () => typeof document !== 'undefined' && !!document.body?.classList.contains('is-kiosk');
     const lsGet = (k, d) => { try { return localStorage.getItem(k) ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
     const K_OPEN = 'genealogie-ouc-ukus';
@@ -193,7 +193,7 @@
                 words: 'national archives kew discovery nara angleterre anglais britannique royaume uni etats unis amerique americain testament naturalisation soldat passagers emigration',
                 phrases: ['archives anglaises', 'archives americaines', 'testament anglais', 'national archives'], needs: {person: 1}, go: g.research('ou_chercher'), module: 'recherche'});
         const links = L().SITES.map(s => H(`so27_${s.key}`, 'chercher', s.icon, s.label, `↗ ${s.source}`, ['Listes', '🧰 Données', s.label],
-            {act: ['trouver', 'voir'], obj: ['archive'], words: `${s.words || ''} ${s.source}`, go: () => openUrl(siteUrl(s)), target: `list:data_link_so27_${s.key}`, module: 'listes'}));
+            {act: ['trouver', 'voir'], obj: s.theme === 'guerres' ? ['archive', 'guerre'] : ['archive'], words: `${s.words || ''} ${s.source}`, phrases: [L().fold(s.label.split(' — ')[0].split(' (')[0].split(',')[0])], go: () => openUrl(siteUrl(s)), target: `list:data_link_so27_${s.key}`, module: 'listes'}));
         return [ukus, ...links];
     }
     (ext.intentsHand = ext.intentsHand || []).push(intents);

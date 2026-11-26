@@ -47,6 +47,10 @@ def label_ok(s, q):
     return s and not re.fullmatch(r'Q\d+', s) and s != q
 
 
+# monastère, abbaye, prieuré, couvent, église, chapelle, école, hôpital, bâtiment, collège (un bâtiment ou une maison : pas une « affaire »)
+BUILDINGS = 'wd:Q44613 wd:Q160742 wd:Q2750108 wd:Q1128397 wd:Q16970 wd:Q108325 wd:Q9842 wd:Q3914 wd:Q16917 wd:Q41176 wd:Q189004'
+
+
 def ordres(out):
     rows = {}
     for cq, cn in COUNTRIES.items():
@@ -54,6 +58,7 @@ def ordres(out):
             continue
         B = wm.sparql(f'''SELECT ?it ?itLabel ?o ?oLabel ?inc ?dis ?c ?ins ?comLabel ?fr WHERE {{
   ?it wdt:P611 ?o ; wdt:P17 wd:{cq} .
+  FILTER EXISTS {{ ?it wdt:P31/wdt:P279* ?cls . VALUES ?cls {{ {BUILDINGS} }} }}
   OPTIONAL {{ ?it wdt:P571 ?inc }} OPTIONAL {{ ?it wdt:P576 ?dis }} OPTIONAL {{ ?it wdt:P625 ?c }}
   OPTIONAL {{ ?it wdt:P131 ?com . OPTIONAL {{ ?com wdt:P374 ?ins }} }}
   OPTIONAL {{ ?fr schema:about ?it ; schema:isPartOf <https://fr.wikipedia.org/> ; schema:name ?frn }}

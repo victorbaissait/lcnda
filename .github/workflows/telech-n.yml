@@ -1,0 +1,75 @@
+# 🏛 Archives et mémoire (lot N) : fabriquer les packs tn-*.json.gz et les déposer dans la version « telech-n-donnees » du dépôt.
+# L'app les télécharge sur demande (Réglages → 🏛 Archives et mémoire, ou Réglages → 🗂 Données ; lib/sources_n1.php).
+#  - 🏛 registres : AD 04 (datasud), AD 22 (datarmor), AD 65 (opendata.ha-py.fr) — Licence Ouverte 2.0 (champ « license » de data.gouv.fr)
+#  - 📚 inv-communes, inv-dep, 📍 lieux, 👪 autorites : FranceArchives (data.gouv.fr) — Licence Ouverte 2.0
+#  - 🎖 mpf : Loire-Atlantique, Toulouse, Lorient, Orvault, Belfort (1914-1918, 1939-1945), Clermont-Ferrand (LO 2.0) ; Nancy (ODbL)
+#  - 🗿 monuments : MémorialGenWeb (CC BY-SA) — le lien vers chaque monument, aucun nom copié
+#  - 🕯 plaques : Ville de Paris, plaques commémoratives 1939-1945 (ODbL)
+# Le script lit la licence de chaque jeu sur data.gouv.fr et s'arrête pour ce jeu si elle a changé.
+# Ces sites ne répondent pas depuis l'atelier de développement : c'est ici qu'on fabrique.
+#
+# Lancer : onglet « Actions » → « Archives et mémoire (lot N) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Archives et mémoire (lot N)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, ou une liste : registres,inv-communes,inv-dep,lieux,autorites,mpf,monuments,plaques'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-n.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-n-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TN_RAW=$RUNNER_TEMP/tn-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Lire les tableaux Excel (AD 04, Belfort)
+        run: pip install xlrd==2.0.1 openpyxl==3.1.5
+      - name: Vérifier ce qu'on refait
+        run: |
+          case "$QUOI" in *[!a-z,-]*) echo "quoi refusé : $QUOI"; exit 1;; esac
+      - name: Reprendre les packs déjà en ligne (on ne refait que ce qui est demandé)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p tn-sortie
+          gh release download telech-n-donnees --repo "$GITHUB_REPOSITORY" --dir tn-sortie --pattern 'tn-*.json.gz' 2>/dev/null || echo "rien encore en ligne"
+      - name: "🏛 Fabriquer"
+        run: python3 -I scripts/telech-n/build_archives.py tn-sortie "$QUOI"
+      - name: Déposer dans la version « telech-n-donnees »
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          R=telech-n-donnees
+          python3 -I scripts/telech-n/build_archives.py tn-sortie manifest
+          gh release view $R --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create $R --repo "$GITHUB_REPOSITORY" --title "Archives et mémoire (lot N)" --prerelease \
+              --notes "Packs téléchargés par l'app (Réglages → 🏛 Archives et mémoire). Sources : FranceArchives et Archives départementales (Licence Ouverte 2.0), morts pour la France des collectivités (Licence Ouverte 2.0 ; Nancy ODbL), MémorialGenWeb (CC BY-SA, liens seulement), Ville de Paris (ODbL). Détail et licence de chaque jeu dans chaque fichier (champ sources)."
+          ls -la tn-sortie
+          gh release upload $R --repo "$GITHUB_REPOSITORY" --clobber tn-sortie/tn-*.json.gz tn-sortie/telech-n-manifest.json
+          cat tn-sortie/telech-n-manifest.json
