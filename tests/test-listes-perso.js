@@ -152,9 +152,9 @@ echo 'ok';`);
         });
         await t('⤓ Exporter : une case « =… » ajoutée à la main sort protégée (pas de formule dans le tableur)', async () => {
             await p.click('[data-lpx-act="add"]');
-            await p.waitForSelector('dialog .lpx-addrow');
-            await p.fill('dialog [name="v_0"]', '=HYPERLINK("http://evil","x")'); await p.fill('dialog [name="v_1"]', '2 janvier 1900');
-            await p.click('dialog button[type="submit"]');
+            await p.waitForSelector('dialog[open] .lpx-addrow');
+            await p.fill('dialog[open] [name="v_0"]', '=HYPERLINK("http://evil","x")'); await p.fill('dialog[open] [name="v_1"]', '2 janvier 1900');
+            await p.click('dialog[open] button[type="submit"]');
             await waitRows(6);
             const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[data-ld-export]')]);
             const txt = fs.readFileSync(await dl.path(), 'utf8');
@@ -162,9 +162,9 @@ echo 'ok';`);
             await undo(); await waitRows(5); // ↶ la ligne ajoutée
         });
         await t('✎ Modifier : le type d’une colonne (Note → catégorie) et le nom ; ↶ Annuler', async () => {
-            await p.click('[data-lpx-act="edit"]'); await p.waitForSelector('dialog .lpx-cols-edit');
-            await p.selectOption('dialog [name="type_3"]', 'number'); await p.fill('dialog [name="name"]', 'Décès (Tulle)');
-            await p.click('dialog button[type="submit"]');
+            await p.click('[data-lpx-act="edit"]'); await p.waitForSelector('dialog[open] .lpx-cols-edit');
+            await p.selectOption('dialog[open] [name="type_3"]', 'number'); await p.fill('dialog[open] [name="name"]', 'Décès (Tulle)');
+            await p.click('dialog[open] button[type="submit"]');
             await p.waitForFunction(i => window.LCNDA_EXT.dataLists.find(y => y.id === 'perso_' + i)?.fields[3].type === 'number', id, {timeout: 8000});
             assert.strictEqual(await p.evaluate(i => window.LCNDA_EXT.dataLists.find(y => y.id === 'perso_' + i).label, id), 'Décès (Tulle)');
             await undo();
@@ -173,15 +173,15 @@ echo 'ok';`);
         });
         await t('⤒ Remplacer par un fichier puis ↶ Annuler ; ⊕ Ajouter un fichier (colonne nouvelle ajoutée)', async () => {
             const repl = path.join(tmp, 'remplace.csv'); fs.writeFileSync(repl, 'Nom;Commune;Date du décès\nAnne Vialle;Naves;1900\n');
-            await p.click('[data-lpx-act="replace"]'); await p.waitForSelector('dialog [data-lpx-file]');
-            await p.setInputFiles('dialog [data-lpx-file]', repl);
+            await p.click('[data-lpx-act="replace"]'); await p.waitForSelector('dialog[open] [data-lpx-file]');
+            await p.setInputFiles('dialog[open] [data-lpx-file]', repl);
             await waitRows(1);
             assert.strictEqual(sql('SELECT row_count FROM ulist_lists')[0].row_count, 1);
             await undo(); await waitRows(5);
             assert.strictEqual(sql('SELECT row_count FROM ulist_lists')[0].row_count, 5);
             const more = path.join(tmp, 'plus.csv'); fs.writeFileSync(more, 'Nom;Commune;Métier\nPaul Roux;Tulle;sabotier\n');
-            await p.click('[data-lpx-act="merge"]'); await p.waitForSelector('dialog [data-lpx-file]');
-            await p.setInputFiles('dialog [data-lpx-file]', more);
+            await p.click('[data-lpx-act="merge"]'); await p.waitForSelector('dialog[open] [data-lpx-file]');
+            await p.setInputFiles('dialog[open] [data-lpx-file]', more);
             await waitRows(6);
             const cols = await p.evaluate(i => window.LCNDA_EXT.dataLists.find(y => y.id === 'perso_' + i).fields.map(f => f.label), id);
             assert.ok(cols.includes('Métier'), cols.join());
