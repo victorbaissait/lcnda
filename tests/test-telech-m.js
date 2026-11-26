@@ -6,8 +6,9 @@
  *     Expositions des produits de l'industrie 1798-1849, les expositions coloniales dites franchement), le calcul (ce jour-là, les Jeux de
  *     sa vie, le sport près de chez lui, les sportifs de son village, un homonyme champion seulement pour une personne décédée).
  *  2. Serveur et écran (php -S + Playwright, base temporaire) : rien ne part sur Internet (toute requête hors 127.0.0.1 est comptée et
- *     coupée), ni pour une fiche vivante ni en mode consultation ; fiche, village (Tulle à 15 km, réglable), listes (thème sport / fetes,
- *     liste réunie « competitions »), cartes, à la demande, Réglages (interrupteurs ↶, rayon ↶), 390 px et thème sombre, aucune erreur
+ *     coupée), ni pour une fiche vivante ni en mode consultation ; fiche, village (Tulle à 15 km, réglable), listes (thème sport / fetes ;
+ *     Tour de France : Éditions ≠ Étapes, « 22 + prologue », 1999-2005 « titre retiré », une édition ouvre ses étapes ; liste réunie
+ *     « 🏆 Compétitions sportives » : le Tour 1976 = ts_tour + ts_competitions, une pastille par compétition), cartes, à la demande, Réglages (interrupteurs ↶, rayon ↶), 390 px et thème sombre, aucune erreur
  *     JavaScript, aucun « Failed to fetch ».
  *  Fiches (noms inventés, sauf l'homonyme) : Jean MAZAUD (1912 Tulle – 1990 Gimel-les-Cascades, marié à Tulle le 15 juillet 1976),
  *  Marie LACOMBE (1890 Colombes – 1960 Paris), Paul DURAND (1885 Roubaix – 1960 Roubaix, tisserand), Maurice GARIN (1871 – 1957 Lens :
@@ -191,7 +192,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                 village: (E.villageSectionDefs || []).some(d => d.id === 'tsx_place'), block: (window.LCNDA_APP.defaultPersonBlocks || []).some(b => b[0] === 'telech_m')}; });
             assert.deepStrictEqual(reg.lists, [['ts_competitions', 'sport'], ['ts_tour', 'sport'], ['ts_matchs', 'sport'], ['ts_jo', 'sport'], ['ts_athletes', 'sport'], ['tx_expos', 'fetes']]);
             assert.deepStrictEqual(reg.l8, [['l8c_clubs', 'sport'], ['l8c_tour', 'sport'], ['l8c_expos', 'fetes']]);
-            assert.strictEqual(reg.merge, 1); assert.deepStrictEqual(reg.into, ['ts_competitions', 'ts_matchs']);
+            assert.strictEqual(reg.merge, 1); assert.deepStrictEqual(reg.into, ['ts_competitions', 'ts_tour', 'ts_matchs']);
             assert.ok(reg.mono === 4 && reg.maps === 4 && reg.ds >= 10 && reg.village && reg.block, JSON.stringify(reg));
             const L = await p.evaluate(async () => { const d = window.LCNDA_EXT.dataLists.find(x => x.id === 'ts_competitions'); const r = await d.load(); const t76 = r.find(x => x.compId === 'tdf' && x.year === 1976); const t04 = r.find(x => x.compId === 'tdf' && x.year === 2004); return [r.length, t76, t04, d.merge.row(t76)]; });
             assert.ok(L[0] > 2000); assert.match(L[1].stages, /22 étapes \+ prologue/); assert.match(L[1].winner, /Van Impe/); assert.match(L[1].place, /Saint-Jean-de-Monts → Paris/); assert.match(L[2].winner, /titre retiré/);
@@ -199,7 +200,40 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const TT = await p.evaluate(async () => { const d = window.LCNDA_EXT.dataLists.find(x => x.id === 'ts_tour'); const ed = await d.load(); const st = await d.views.find(v => v.id === 'etapes').load();
                 return {views: d.views.map(v => v.id), dv: d.defaultView(), fam: d.familyColumn, e76: ed.find(e => e.year === 1976), sub: d.views[0].sub(ed.find(e => e.year === 1976)), s76: st.filter(s => s.year === 1976).length}; });
             assert.deepStrictEqual(TT.views, ['editions', 'etapes']); assert.strictEqual(TT.dv, 'editions'); assert.ok(TT.fam, '👪 Dans la famille');
-            assert.match(TT.e76.stages, /22 étapes \+ prologue/); assert.match(TT.e76.winner, /Van Impe/); assert.strictEqual(TT.s76, 27); assert.strictEqual(TT.sub.view, 'etapes'); assert.match(TT.sub.title, /1976/);
+            assert.strictEqual(TT.e76.stages, '22 + prologue', 'Éditions : « 22 + prologue »'); assert.strictEqual(TT.e76.km, 4026); assert.match(TT.e76.winner, /Van Impe/); assert.strictEqual(TT.s76, 27); assert.strictEqual(TT.sub.view, 'etapes'); assert.match(TT.sub.title, /1976/);
+            // la maquette (Décisions) : Éditions ≠ Étapes ; 1999–2005 « titre retiré » ; ts_competitions sans vues nues ; une sous-liste par édition
+            const V = await p.evaluate(async () => { const E = window.LCNDA_EXT, d = E.dataLists.find(x => x.id === 'ts_tour'), C = E.dataLists.find(x => x.id === 'ts_competitions'), DE = E.dataListsEngine;
+                const ed = await DE.loadAll(DE.viewDef(d, {dview: 'editions'})), st = await DE.loadAll(DE.viewDef(d, {dview: 'etapes'}));
+                const v0 = DE.viewDef(d, {dview: 'editions'}), v1 = DE.viewDef(d, {dview: 'etapes'});
+                return {ne: ed.length, ns: st.length, edF: v0.fields.map(f => f.key), stF: v1.fields.map(f => f.key), famEd: v0.familyColumn, famSt: v1.familyColumn,
+                    ret: ed.filter(e => e.year >= 1999 && e.year <= 2005).map(e => e.winner), w03: ed.find(e => e.year === 1903)?.winner, cv: C.views || null, sub: v0.sub(ed.find(e => e.year === 1976)),
+                    mergeRow: d.merge.row(ed.find(e => e.year === 1976)), fam76: ed.find(e => e.year === 1976)?.family}; });
+            assert.match(V.fam76 || '', /MAZAUD.*(arrivée|départ) à .+, à \d+ km/, `👪 Éditions : toutes les étapes regardées (${V.fam76})`);
+            assert.ok(V.ne > 100 && V.ns > 2000 && V.ns > V.ne * 10, `Éditions ${V.ne} ≠ Étapes ${V.ns}`); assert.notDeepStrictEqual(V.edF, V.stF);
+            assert.ok(V.edF.includes('family') && V.edF.includes('km') && V.stF.includes('winner') && V.stF.includes('stage'), JSON.stringify([V.edF, V.stF]));
+            assert.strictEqual(V.famEd, false, 'Éditions : sa propre colonne « Dans la famille » (toutes les étapes)'); assert.strictEqual(V.famSt, true);
+            assert.deepStrictEqual(V.ret, Array(7).fill('titre retiré')); assert.match(V.w03, /Garin/); assert.strictEqual(V.cv, null, 'ts_competitions : pas de vues nues');
+            assert.strictEqual(V.sub.pickAll, 'Toutes ses étapes'); assert.deepStrictEqual(V.sub.preset.crit[0], {key: 'year', kind: 'range', from: 1976, to: 1976});
+            assert.strictEqual(V.mergeRow.key, 'tdf|1976'); assert.strictEqual(L[3].key, 'tdf|1976', 'même clé que ts_competitions : réunies');
+            const MG = await p.evaluate(async () => { const R = window.LCNDA_EXT.listesReunies; R.reset('competitions'); const b = await R.build('competitions'); const t76 = b.rows.filter(r => r.chip === 'tdf' && r.year === 1976);
+                const D = window.LCNDA_EXT.dataLists.find(x => x.id === 'reunie_competitions');
+                return {n76: t76.length, srcs: t76[0]?._members.map(m => m.src.list), stages: t76[0]?.stages, winner: t76[0]?.winner, merged: b.stats.merged, chips: D.chips, icon: D.icon, fam: D.familyColumn,
+                    cols: D.fields.map(f => f.key), urls: t76[0]?._members.map(m => m.rec.url).filter(u => /^https:\/\//.test(u)).length}; });
+            assert.strictEqual(MG.n76, 1, 'le Tour 1976 : une seule ligne réunie'); assert.deepStrictEqual(MG.srcs, ['ts_tour', 'ts_competitions']);
+            assert.match(MG.stages, /22 étapes \+ prologue · 4\s026 km/); assert.match(MG.winner, /Van Impe/); assert.ok(MG.merged > 100, `doublons fondus : ${MG.merged}`);
+            assert.strictEqual(MG.chips, 'comp', 'une pastille par compétition'); assert.strictEqual(MG.icon, '🏆'); assert.ok(MG.fam); assert.ok(MG.urls >= 1);
+            assert.deepStrictEqual(MG.cols.slice(0, 4), ['year', 'comp', 'place', 'winner']); assert.strictEqual(MG.cols.at(-1), 'sources');
+            // à l'écran : Éditions | Étapes | 🗺 Carte ; une édition ouvre ses étapes, « ☑ Toutes ses étapes »
+            await p.evaluate(() => { localStorage.removeItem('lcnda-ld:ts_tour'); const A = window.LCNDA_APP; A.state.listType = 'data_ts_tour'; A.setModule('listes'); });
+            await p.waitForSelector('[data-ld-page="ts_tour"] [data-ld-dview="etapes"]', {timeout: 30000});
+            const cnt = async () => { await p.waitForFunction(() => /\d/.test(document.querySelector('[data-ld-count]')?.textContent || ''), null, {timeout: 30000}); return p.textContent('[data-ld-count]'); };
+            const cEd = await cnt(); assert.ok(await p.$('[data-ld-page="ts_tour"] [data-ld-view="map"]'), '🗺 Carte');
+            await p.click('[data-ld-dview="etapes"]'); await p.waitForFunction(c => (document.querySelector('[data-ld-count]')?.textContent || '') !== c, cEd, {timeout: 30000});
+            assert.notStrictEqual(await cnt(), cEd, 'Étapes ≠ Éditions à l’écran');
+            await p.click('[data-ld-dview="editions"]'); await p.waitForFunction(c => (document.querySelector('[data-ld-count]')?.textContent || '') === c, cEd, {timeout: 30000});
+            await p.click('.ld-table tbody tr[data-ld-row="0"] [data-ld-open]'); await p.waitForSelector('[data-ld-parent]', {timeout: 20000});
+            assert.match(await p.textContent('[data-ld-parent]'), /Tour de France \d{4}/); if (await p.evaluate(() => !!window.LCNDA_EXT.listesChoix)) assert.match(await p.textContent('[data-ld-parent]'), /Toutes ses étapes/);
+            await p.evaluate(() => localStorage.removeItem('lcnda-ld:ts_tour'));
             const T8 = await p.evaluate(async () => { const r = await window.LCNDA_EXT.dataLists.find(x => x.id === 'l8c_tour').load(); return r.filter(s => s.year === 1976).map(s => [s.stage, s.winner]); });
             assert.ok(T8.some(s => s[0] === '5a') && T8.some(s => s[0] === 'prologue') && T8.filter(s => s[1]).length > 15, JSON.stringify(T8.slice(0, 6)));
             const X = await p.evaluate(async () => { const r = await window.LCNDA_EXT.dataLists.find(x => x.id === 'tx_expos').load(); return [r.length, r.filter(x => x.hand).length, r.find(x => x.year === 1900 && x.hand)?.note || '']; });

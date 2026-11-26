@@ -587,6 +587,7 @@
         } else if (kind === 'guerres') {
             const bs = battlesOfWar((await load('batailles').catch(() => null))?.rows || [], r.q);
             body = `<p><b>${esc(r.y !== null ? dateTxt(r.d, r.y) : '?')}</b>${r.y2 !== null && r.y2 !== r.y ? ` → ${esc(dateTxt(r.d2, r.y2))}` : ''}</p><p>${esc([r.part.join(' / '), r.country.join(', '), r.loc.join(', ')].filter(Boolean).join(' · '))}</p>
+                ${bs.length && ext.guerresTemps ? `<p><button type="button" class="button small" data-gt-war="${esc(r.q)}" title="${esc(T('Ses batailles sur la carte, année après année, autour de nos lieux'))}">▶ ${esc(T('Dans le temps'))}</button></p>` : ''}
                 ${bs.length ? `<p class="muted">${esc(T('{n} batailles et sièges placés :', {n: nf(bs.length)}))}</p><ul class="hist-ul">${bs.slice(0, 80).map(b => `<li><b>${esc(dateTxt(b.d, b.y))}</b> : ${esc(b.n)}${b.loc ? ` <small class="muted">${esc(b.loc)}${b.approx ? ` · ${esc(T('placé par son lieu'))}` : ''}</small>` : ''} ${refLinks(b)}</li>`).join('')}</ul>${bs.length > 80 ? `<p class="muted">${esc(T('… et {n} autres (Listes → Batailles et sièges, filtre « Guerre »).', {n: nf(bs.length - 80)}))}</p>` : ''}` : `<p class="muted">${esc(T('Aucune de ses batailles n’est placée sur la carte dans Wikidata.'))}</p>`}`;
         } else if (kind === 'navires') {
             body = `<p>${esc(shipFacts(r))}${r.operator ? ` · ${esc(r.operator)}` : ''}</p>${shipImg(r) ? `<img class="ha-img" loading="lazy" alt="" src="${esc(shipImg(r))}">` : ''}`;
@@ -623,7 +624,7 @@
             load: async () => (await rowsOf('batailles')).map(b => ({...b, name: b.n, year: b.y, date: b.d || '', end: b.y2, belligerents: b.bel.join(' / '), place: b.loc, placed: T(b.approx ? 'par son lieu' : 'par ses coordonnées'), url: b.frwiki ? wpUrl(b.frwiki) : wdUrl(b.q)})),
             fields: [{key: 'name', label: T('Bataille'), type: 'text'}, {key: 'date', label: T('Date'), type: 'date'}, {key: 'year', label: T('Année'), type: 'year'}, {key: 'war', label: T('Guerre'), type: 'enum'},
                 {key: 'belligerents', label: T('Camps'), type: 'text'}, {key: 'place', label: T('Lieu'), type: 'text'}, {key: 'country', label: T('Pays'), type: 'enum'}, {key: 'placed', label: T('Placée'), type: 'enum', values: [T('par ses coordonnées'), T('par son lieu')]}, {key: 'url', label: T('Article'), type: 'url'}],
-            period: r => [r.y, r.y2 ?? r.y], geo: r => [r.lat, r.lon], open: r => openCard('batailles', r)},
+            period: r => [r.y, r.y2 ?? r.y], geo: r => [r.lat, r.lon], open: r => openCard('batailles', r), timeMap: true}, // ▶ Dans le temps (heritage-guerres-temps.js)
         {id: 'ha_guerres', icon: '🎖', label: T('Guerres'), group: 'Le monde', source: SRC_TXT.guerres, sourceUrl: SRC_URL.guerres,
             load: async () => (await rowsOf('guerres')).map(w => ({...w, name: w.n, start: w.y, end: w.y2, participants: w.part.join(' / '), countries: w.country.join(', '), places: w.loc.join(', '), battles: w.nb, url: w.frwiki ? wpUrl(w.frwiki) : wdUrl(w.q)})),
             fields: [{key: 'name', label: T('Guerre'), type: 'text'}, {key: 'start', label: T('Début de la guerre'), type: 'year'}, {key: 'end', label: T('Fin de la guerre'), type: 'year'}, {key: 'participants', label: T('Camps'), type: 'text'},

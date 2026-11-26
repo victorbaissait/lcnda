@@ -649,13 +649,13 @@
     function paintSearch() {
         const R = root(), s = st.s, u = s.und, tb = s.target ? bOf(s.target) : null;
         const n = s.groups.reduce((a, g) => a + g.rows.filter(r => r.on && !r.dup).length, 0), dupN = s.groups.reduce((a, g) => a + g.rows.filter(r => r.dup).length, 0);
-        const chip = (k, l, on) => `<button type="button" class="pn-chip" data-pn-cat="${k}" aria-pressed="${on}">${esc(l)}</button>`;
+        const chip = (k, l, on, th = null) => `<button type="button" class="pn-chip" data-pn-cat="${k}" aria-pressed="${on}"${th?.label ? ` title="${esc(`${th.icon} ${T(th.label)}`)}" data-pn-theme="${esc(th.id)}"` : ''}>${esc(l)}</button>`; // 🗂 le thème des listes de la sorte
         const und = u ? `<div class="pn-box pn-und"><h4>${esc(T('Ce que j’ai compris'))} <small>${esc(T('tout se change : touche une pastille'))}</small></h4>
             <div class="pn-crow"><span class="pn-cl">${esc(T('Qui'))}</span><div class="pn-cv"><input class="pn-in" type="text" data-pn-u="who" value="${esc(u.who?.name || u.surname || '')}" placeholder="${esc(T('personne ou nom de famille'))}" aria-label="${esc(T('Qui'))}">${u.whoInfo ? `<small>${esc(u.whoInfo)}</small>` : ''}</div></div>
             <div class="pn-crow"><span class="pn-cl">${esc(T('Quand / âge'))}</span><div class="pn-cv">${u.who ? `<span>${esc(T('entre'))}</span><input class="pn-num" type="number" min="0" max="120" data-pn-u="a1" value="${u.age?.[0] ?? ''}" aria-label="${esc(T('âge de'))}"><span>${esc(T('et'))}</span><input class="pn-num" type="number" min="0" max="120" data-pn-u="a2" value="${u.age?.[1] ?? ''}" aria-label="${esc(T('âge à'))}"><span>${esc(T('ans'))}</span>` : ''}
                 <span>${esc(T('de'))}</span><input class="pn-num" type="number" data-pn-u="y1" value="${u.years?.[0] ?? ''}" aria-label="${esc(T('de l’année'))}"><span>${esc(T('à'))}</span><input class="pn-num" type="number" data-pn-u="y2" value="${u.years?.[1] ?? ''}" aria-label="${esc(T('à l’année'))}">${u.span ? `<small>${esc(u.span)}</small>` : ''}</div></div>
             <div class="pn-crow"><span class="pn-cl">${esc(T('Où + rayon'))}</span><div class="pn-cv"><input class="pn-in" type="text" data-pn-u="where" value="${esc(u.around?.name || u.place?.name || '')}" placeholder="${esc(T('un lieu, un château…'))}" aria-label="${esc(T('Où'))}"><span class="pn-rad"><button type="button" data-pn-km="-1" aria-label="${esc(T('moins loin'))}">−</button><span>${esc(T('{n} km', {n: u.km ?? 0}))}</span><button type="button" data-pn-km="1" aria-label="${esc(T('plus loin'))}">＋</button></span>${u.whereInfo ? `<small>${esc(u.whereInfo)}</small>` : ''}</div></div>
-            <div class="pn-crow"><span class="pn-cl">${esc(T('Quoi'))}</span><div class="pn-cv">${u.tree ? `<span class="pn-chip is-fixed">${esc(T(u.tree.label))}</span>` : ''}${C().SMART.map(c => chip(c.k, `${c.icon} ${T(c.label)}`, u.cats.includes(c.k))).join('')}</div></div>
+            <div class="pn-crow"><span class="pn-cl">${esc(T('Quoi'))}</span><div class="pn-cv">${u.tree ? `<span class="pn-chip is-fixed">${esc(T(u.tree.label))}</span>` : ''}${C().SMART.map(c => chip(c.k, `${c.icon} ${T(c.label)}`, u.cats.includes(c.k), C().themeOf?.(c.k))).join('')}</div></div>
             <div class="pn-crow"><span class="pn-cl">${esc(T('Sources'))}</span><div class="pn-cv"><small>${esc(s.sources || '—')}</small></div></div></div>` : '';
         const nope = u?.nope?.length ? `<div class="pn-box pn-nope"><h4>${esc(T('Ce que je n’ai pas compris (ou pas pu chercher)'))}</h4><ul>${u.nope.map(x => `<li>${esc(T(x))}</li>`).join('')}</ul></div>` : '';
         const miss = s.miss.length ? `<div class="pn-box pn-missb"><h4>${esc(T('Il manque des listes'))}</h4><ul>${s.miss.map((m, i) => `<li><span>${esc(T('La liste « {l} » n’est pas installée.', {l: m.label}))}</span><button type="button" class="pn-b is-sec is-sm" data-pn-install="${i}">⤓ ${esc(T('l’installer'))}</button></li>`).join('')}</ul></div>` : '';
@@ -677,7 +677,7 @@
     const listsAll = () => ext.connexions?.kit?.listsAll?.() || (ext.dataListsEngine?.list?.() || []).filter(d => !d.link);
     async function installed(d) { if (!d.installed) return true; try { return !!(await d.installed()); } catch (_) { return false; } }
     /** les listes d'une sorte : celles de la sorte + celles ajoutées par d'autres fichiers (LCNDA_EXT.paniersSources : [{cat, list}]) */
-    const listsFor = c => [...(ext.paniersSources || []).filter(x => x.cat === c.k).map(x => x.list), ...c.lists];
+    const listsFor = c => [...(ext.paniersSources || []).filter(x => x.cat === c.k).map(x => x.list), ...c.lists, ...(c.merged ? [c.merged] : [])]; // en dernier : la liste réunie du thème (🔀)
     /** comprendre, chercher, montrer (aussi « ↻ Refaire » : seulement ce qui n'est pas déjà dans le panier visé) */
     async function runSearch(q, und = null) {
         const s = st.s; if (!s) return;

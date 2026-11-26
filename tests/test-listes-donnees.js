@@ -232,6 +232,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('pack absent (📊 Prénoms) : seulement l’offre « ⤓ Installer » ; sommaire par groupe, avec les liens vers les listes déjà là', async () => {
             await openList('data_pp_prenoms'); await p.waitForSelector('[data-ld-install-host]');
             assert.ok(await p.$('[data-ld-install]')); assert.ok(!(await p.$('[data-ld-results]')));
+            await p.evaluate(() => { const H = window.LCNDA_EXT.dataHome; if (H) H._st.view = 'themes'; }); // 📊 Récap d'abord (app-donnees-accueil.js) : ici, la vue 🧰 Thèmes
             await openList('donnees'); await p.waitForSelector('.ld-overview .ld-card');
             const groups = await p.$$eval('.ld-group h3', a => a.map(x => x.textContent)); assert.ok(groups.length >= 4, groups.join('|'));
             assert.ok(await p.$('[data-ld-go="link:link_pays_chiffres"]') && await p.$('[data-ld-go="link:link_lune_eclipses"]') && await p.$('[data-ld-go="link:link_insee"]'));

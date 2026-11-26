@@ -68,7 +68,7 @@
     function skyAt(G, lat, lon) {
         if (!G) return null;
         const r = Math.floor((G.top - lat) / G.cell), c = Math.floor((lon - G.left) / G.cell);
-        if (r < 0 || c < 0 || r >= G.h || c >= G.w) return null;
+        if (r < 0 || c < 0 || r >= G.h || c >= G.w) return G.world ? skyAt(G.world, lat, lon) : null; // hors d'Europe : le monde (lot K, tk-ciel)
         const v = G.g[r * G.w + c];
         return v === 0 ? 0 : 10 ** (Math.log10(SKY.lo) + (v - 1) * (Math.log10(SKY.hi) - Math.log10(SKY.lo)) / 254);
     }
@@ -147,7 +147,7 @@
     /* 🌾 ❄️ les carreaux de 0,5° (sécheresses, hivers) */
     function cellAt(rows, lat, lon) {
         let best = null;
-        for (const r of rows) { const d = Math.max(Math.abs(r.lat - lat), Math.abs(r.lon - lon) * Math.cos(lat * Math.PI / 180)); if (d <= 0.5 && (!best || d < best.d)) best = {r, d}; }
+        for (const r of rows) { const d = Math.max(Math.abs(r.lat - lat), Math.abs(r.lon - lon) * Math.cos(lat * Math.PI / 180)); if (d <= (r.s ? r.s * 0.6 : 0.5) && (!best || d < best.d)) best = {r, d}; } // r.s : carreaux de 2,5° (lot K)
         return best ? best.r : null;
     }
     const pdsiAt = (cell, y) => { const i = y - cell.y0; return i >= 0 && i < cell.v.length ? cell.v[i] : null; };
@@ -298,9 +298,14 @@
         if (!data[kind]) data[kind] = fetch(`assets/data/${FILES[kind]}.json.gz?v=${DATA_V}`, {credentials: 'same-origin'})
             .then(r => { if (r.status === 404) return null; if (!r.ok) throw new Error(T('Le fichier {f} est introuvable.', {f: FILES[kind]})); return readMaybeGz(r); })
             .then(f => (f ? {meta: f, rows: table(f), grid: kind === 'ciel' ? skyGrid(f) : null} : null))
+            .then(D => (D && WORLD[kind] ? worldOf(kind, D) : D))
             .catch(e => { delete data[kind]; throw e; });
         return data[kind];
     }
+    /* 🌍 le monde (lot K « Le monde à côté ») : tk-ciel (le ciel du monde, 10′) et tk-secheresses (Amérique du Nord, Asie des moussons), lus avec */
+    const WORLD = {ciel: 'tk-ciel', secheresses: 'tk-secheresses'};
+    const worldOf = (kind, D) => fetch(`assets/data/${WORLD[kind]}.json.gz?v=${DATA_V}`, {credentials: 'same-origin'}).then(r => (r.ok ? readMaybeGz(r) : null)).catch(() => null)
+        .then(f => { if (!f) return D; if (kind === 'ciel' && D.grid) D.grid.world = skyGrid(f); else if (kind === 'secheresses') { D.rows = D.rows.concat(table(f)); D.atlases = f.atlases || {}; } return D; });
     const quiet = p => p.catch(() => null); // un fichier absent (pas encore fabriqué sur GitHub) : la partie se tait
     const rowsOf = kind => quiet(load(kind)).then(D => D || {meta: {}, rows: []});
     const lifeMemo = new Map();
@@ -311,10 +316,12 @@
     const URLS = {ciel: 'https://doi.org/10.5281/zenodo.23757708', falchi: 'https://doi.org/10.5880/GFZ.1.4.2016.001', owda: 'https://www.ncei.noaa.gov/access/paleo-search/study/19419',
         hivers: 'https://www.ncei.noaa.gov/pub/data/paleo/historical/europe-seasonal.txt', edh: 'https://doi.org/10.5281/zenodo.3575155', pbdb: 'https://paleobiodb.org/',
         bss: 'https://infoterre.brgm.fr/viewer/MainTileForward.do', imo: 'https://www.imo.net/resources/calendar/', farcy: 'https://lir3s.ube.fr/bases-de-donnees/', osm: 'https://www.openstreetmap.org/copyright'};
+    const ATLAS = {nada: ['North American Drought Atlas, Cook et al. 2008', 'https://www.ncei.noaa.gov/access/paleo-search/study/6319'], mada: ['Monsoon Asia Drought Atlas, Cook et al. 2010', 'https://www.ncei.noaa.gov/pub/data/paleo/treering/reconstructions/asia/cook2010pdsi/readme-cook2010mada.txt']};
+    const owdaUrl = cell => (ATLAS[cell?.a] ? ATLAS[cell.a][1] : URLS.owda);
     const SRC = {
         ciel: () => `${link(URLS.ciel, 'Hotham 2026, Darkest Skies')} (${link(CC_BY, 'CC BY 4.0')} ; ${esc(T('lumières VIIRS 2023, WorldPop'))})`,
         etoiles: () => `${link(URLS.imo, T('calendrier des essaims (IMO)'))} · ${esc(T('calculé sur l’ordinateur'))} · ${link('https://fr.wikipedia.org/wiki/L%C3%A9onides', 'Wikipédia')}`,
-        owda: () => `${link(URLS.owda, 'Old World Drought Atlas, Cook et al. 2015')} — ${link(NOAA_README, 'NOAA/NCEI')} (${esc(T('libre, à citer'))})`,
+        owda: cell => (ATLAS[cell?.a] ? `${link(ATLAS[cell.a][1], ATLAS[cell.a][0])} — ${link(NOAA_README, 'NOAA/NCEI')} (${esc(T('libre, à citer'))})` : `${link(URLS.owda, 'Old World Drought Atlas, Cook et al. 2015')} — ${link(NOAA_README, 'NOAA/NCEI')} (${esc(T('libre, à citer'))})`),
         hivers: () => `${link(URLS.hivers, 'Luterbacher et al. 2004')} — ${link(NOAA_README, 'NOAA/NCEI')} (${esc(T('libre, à citer'))})`,
         edh: () => `${link(URLS.edh, 'Epigraphic Database Heidelberg')} (${link(CC_BY_SA, 'CC BY-SA 4.0')})`,
         pbdb: () => `${link(URLS.pbdb, 'Paleobiology Database')} (${link(CC_BY, 'CC BY 4.0')})`,
@@ -375,8 +382,8 @@
         const cell = cellAt(D.rows, home.lat, home.lon), L = droughtLife(cell, life); if (!L) return '';
         const lead = T('Les étés de sa vie à {p}, d’après les cernes des arbres : le plus sec fut celui de {d} ({a}, {w}), le plus humide celui de {h}.', {p: home.name, d: String(L.dry.y), a: ageTxt(L.dry.age), w: T(PDSI_WORD(L.dry.v)), h: String(L.wet.y)})
             + (L.severe.length ? ' ' + T('{n} étés de grande sécheresse en tout.', {n: String(L.severe.length)}) : '');
-        const det = `${spark(L.years)}<ul class="hist-ul te-ul">${[...L.years].sort((a, b) => a.v - b.v).slice(0, 5).map(x => `<li>${x.y} (${esc(ageTxt(x.age))}) : ${esc(pdsiTxt(x.v))}</li>`).join('')}</ul>${hyp(T('Indice de Palmer de l’été (juin à août) reconstruit par les cernes des arbres, au carreau de 50 km qui contient le lieu : 0 = normal, −3 et moins = grande sécheresse, +3 et plus = été très humide.'))}`;
-        return row('🌾', `${esc(lead)} ${srcLink(URLS.owda)}`, SRC.owda(), more(det, L.years.length));
+        const det = `${spark(L.years)}<ul class="hist-ul te-ul">${[...L.years].sort((a, b) => a.v - b.v).slice(0, 5).map(x => `<li>${x.y} (${esc(ageTxt(x.age))}) : ${esc(pdsiTxt(x.v))}</li>`).join('')}</ul>${hyp(cell.s ? T('Indice de Palmer de l’été (juin à août) reconstruit par les cernes des arbres, au carreau de 250 km qui contient le lieu (atlas d’Amérique du Nord ou d’Asie) : 0 = normal, −3 et moins = grande sécheresse, +3 et plus = été très humide.') : T('Indice de Palmer de l’été (juin à août) reconstruit par les cernes des arbres, au carreau de 50 km qui contient le lieu : 0 = normal, −3 et moins = grande sécheresse, +3 et plus = été très humide.'))}`;
+        return row('🌾', `${esc(lead)} ${srcLink(owdaUrl(cell))}`, SRC.owda(cell), more(det, L.years.length));
     }
     const degTxt = v => `${v > 0 ? '+' : v < 0 ? '−' : ''}${nf(Math.abs(v), 1)} °C`;
     const winterTxt = y => `${y - 1}-${y}`;
@@ -475,7 +482,7 @@
             const D = await quiet(load('secheresses')); if (!D) return ''; const cell = cellAt(D.rows, ll.lat, ll.lon); if (!cell) return '';
             const X = droughtExtremes(cell, 1500, 6), yrs = []; for (let y = Math.max(1700, cell.y0); y < cell.y0 + cell.v.length; y++) { const v = pdsiAt(cell, y); if (v !== null) yrs.push({y, v}); }
             const lead = T('Les étés les plus secs autour de {p} depuis 1500, d’après les cernes des arbres : {l}.', {p: place.name || '', l: X.dry.slice(0, 3).map(x => String(x.y)).join(', ')});
-            return row('🌾', `${esc(lead)} ${srcLink(URLS.owda)}`, SRC.owda(), more(`${spark(yrs)}<ul class="hist-ul te-ul">${X.dry.map(x => `<li>☀️ ${x.y} : ${esc(pdsiTxt(x.v))}</li>`).join('')}${X.wet.map(x => `<li>🌧 ${x.y} : ${esc(pdsiTxt(x.v))}</li>`).join('')}</ul>${hyp(T('Indice de Palmer de l’été (juin à août) reconstruit par les cernes des arbres, au carreau de 50 km qui contient le lieu : 0 = normal, −3 et moins = grande sécheresse, +3 et plus = été très humide.'))}`));
+            return row('🌾', `${esc(lead)} ${srcLink(owdaUrl(cell))}`, SRC.owda(cell), more(`${spark(yrs)}<ul class="hist-ul te-ul">${X.dry.map(x => `<li>☀️ ${x.y} : ${esc(pdsiTxt(x.v))}</li>`).join('')}${X.wet.map(x => `<li>🌧 ${x.y} : ${esc(pdsiTxt(x.v))}</li>`).join('')}</ul>${hyp(cell.s ? T('Indice de Palmer de l’été (juin à août) reconstruit par les cernes des arbres, au carreau de 250 km qui contient le lieu (atlas d’Amérique du Nord ou d’Asie) : 0 = normal, −3 et moins = grande sécheresse, +3 et plus = été très humide.') : T('Indice de Palmer de l’été (juin à août) reconstruit par les cernes des arbres, au carreau de 50 km qui contient le lieu : 0 = normal, −3 et moins = grande sécheresse, +3 et plus = été très humide.'))}`));
         }
         if (kind === 'hivers') {
             const D = await quiet(load('hivers')); if (!D) return ''; const cell = cellAt(D.rows, ll.lat, ll.lon); if (!cell) return '';

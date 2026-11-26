@@ -79,7 +79,7 @@
         if (!Array.isArray(L)) return;
         ext.lists = ext.lists || {};
         if (!L.some(x => x[0] === OVERVIEW)) L.push([OVERVIEW, '90', T('🧰 Toutes les données')]);
-        ext.lists[OVERVIEW] = token => renderOverview(token);
+        ext.lists[OVERVIEW] = token => (ext.dataHome?.mount ? ext.dataHome.mount(ws(), {door: 'listes', token}) : renderOverview(token)); // 📊 Récap d'abord (app-donnees-accueil.js), qui montre aussi cet écran (🧰 Thèmes)
         const ds = all().filter(d => !d.link).sort((a, b) => GROUPS.findIndex(g => g[0] === groupOf(a)) - GROUPS.findIndex(g => g[0] === groupOf(b)));
         const G = (ext.listGroupDefaults || []).find(g => g[0] === 'g_data');
         for (const d of ds) {
@@ -334,6 +334,7 @@
         try { ext.listesPersonnes?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, rerun}); } catch (e) { console.error(e); } // 👤 noms reliés aux fiches (app-listes-personnes.js)
         try { ext.connexions?.listBar?.(host.querySelector('.ld-page'), {d, state: () => cur.st, total: () => cur.total, rows: () => cur.rows, allRows, table2d, critSummary}); } catch (e) { console.error(e); } // 🧺 « Prendre… » (heritage-connexions.js)
         try { ext.listesChoix?.listBar?.(host.querySelector('.ld-page'), pageApi()); } catch (e) { console.error(e); } // ☑ choisir plusieurs lignes, la barre du bas (app-listes-choix.js)
+        try { ext.guerresTemps?.listBar?.(host.querySelector('.ld-page'), pageApi()); } catch (e) { console.error(e); } // ▶ Dans le temps (d.timeMap : heritage-guerres-temps.js)
         paintSaved(); paintChips(); await refresh();
     }
 
@@ -368,6 +369,7 @@
         if (my !== cur.seq) return;
         cur.rows = page.rows; cur.total = page.total; cur.more = page.more; cur.zone = null;
         const c = ws()?.querySelector('[data-ld-count]'); if (c) c.textContent = countText();
+        try { if (ext.guerresTemps?.paint?.(res, pageApi())) return; } catch (e) { console.error(e); } // ▶ Dans le temps : la carte année après année (heritage-guerres-temps.js)
         if (st.view === 'map' && d.geo) { paintMap(res); try { ext.listesChoix?.rowsPainted?.(res, cur.rows, pageApi()); } catch (e) { console.error(e); } return; }
         paintTable(res);
     }
@@ -423,7 +425,8 @@
         if (st.near) pts.push({lat: st.near.lat, lon: st.near.lon, label: st.near.title, color: '#d4380d', n: '★'});
         if (!rows.length) { res.innerHTML = A().empty ? A().empty(T('Aucune de ces lignes n’a de position sur la carte.'), {icon: '🗺'}) : ''; paintMore(); return; }
         const view = cur.mapView; cur.mapView = null;
-        const circles = st.near && Number(st.near.km) > 0 ? [{lat: st.near.lat, lon: st.near.lon, km: Number(st.near.km)}] : [];
+        const circles = [...(st.near && Number(st.near.km) > 0 ? [{lat: st.near.lat, lon: st.near.lon, km: Number(st.near.km)}] : []), // + 👪 les cercles des lieux de la famille (app-listes-reunies-plus.js)
+            ...(ext.listesCarteFamille?.(d, st, pts, () => { if (cur.st === st && st.view === 'map' && res.isConnected) paintMap(res); }) || [])];
         res.innerHTML = `${ext.miniMap ? ext.miniMap(pts, [], {height: 520, view, circles}) : `<p>${esc(T('La carte n’est pas chargée.'))}</p>`}<div class="ld-map-note" data-ld-map-note aria-live="polite"></div>`;
         const marks = [...res.querySelectorAll('.h-map-point')];
         marks.forEach((m, i) => {
@@ -721,7 +724,7 @@
     }
     /** ouvrir une liste de données d'ailleurs, déjà filtrée : LCNDA_EXT.dataListsEngine.open('hist_gares', {near: {lat, lon, km, title}}) */
     ext.dataListsEngine = {open: (id, preset) => { const d = all().find(x => x.id === id); if (d) openKey(d.link ? null : keyOf(d), preset); }, keyOf, list: () => all(), applyLocal: localFilter, fetchPage, stateOf, critText, periodText, nearText, buildQuery,
-        render: (d, token) => renderList(d, token), sync: () => sync(), openKey, forget, loadAll, isInstalled, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
+        render: (d, token) => renderList(d, token), overview: token => renderOverview(token), sync: () => sync(), openKey, forget, loadAll, isInstalled, shown, groupOf, geoOf, periodOf, km, fold, page: () => (cur.d && ws()?.querySelector('.ld-page') ? pageApi() : null), blank, sortRows, viewDef};
 
     /* ═════════════════════════════════════════════════════════════════════════════════════════
      * Les données déjà dans l'app (packs, fichiers livrés) : leurs listes, sans toucher à leurs fichiers.

@@ -103,6 +103,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         await sleep(400);
 
         await t('🧰 Toutes les données : les thèmes par défaut, en cartes, avec les pastilles calculées et leurs nombres', async () => {
+            await p.evaluate(() => { const H = window.LCNDA_EXT.dataHome; if (H) H._st.view = 'themes'; }); // 📊 Récap d'abord (app-donnees-accueil.js, tests/test-donnees-recap.js) : ici, la vue 🧰 Thèmes
             await openKey('donnees'); await p.waitForSelector('.ldt-overview .ldt-theme', {timeout: 30000});
             const n = await p.$$eval('.ldt-theme', a => a.length); assert.ok(n >= 21, String(n));
             const chips = await p.$$eval('[data-ldt-chip]', a => a.map(x => x.textContent.replace(/\s+/g, ' ').trim()));

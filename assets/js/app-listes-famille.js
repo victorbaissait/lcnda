@@ -8,7 +8,8 @@
  *  - un critère pour toute liste placée : « 👪 Près des lieux de la famille, à N km » (LCNDA_EXT.dataListFilters) ;
  *  - une pastille toute faite pour une liste (d.chips) : LCNDA_EXT.listesFamille.chip({km}) → « 👪 Seulement près de la famille ».
  *  Rapide : les lieux sont rangés par cases d'un degré ; une ligne ne regarde que les cases autour d'elle.
- *  API : LCNDA_EXT.listesFamille = {ready(), nearKm(lat, lon, max), presence(lat, lon, year, km), fill(res, rows, d), chip(o), km()}
+ *  API : LCNDA_EXT.listesFamille = {ready(), nearKm(lat, lon, max), presence(lat, lon, year, km, {anc}), fill(res, rows, d), chip(o), km(), data()}
+ *  (anc : seulement les ancêtres directs, la racine Sosa comprise — 5e case de ld_famille ; data() : {places, people} pour ▶ Dans le temps)
  *  Essai : tests/test-listes-themes.js
  */
 (() => {
@@ -30,10 +31,10 @@
             .catch(() => { F = build({}); at = Date.now(); return F; }).finally(() => { loading = null; });
         return loading;
     }
-    /** {places: [[lat, lon, nom]], people: [[nom, naissance, décès, [[lieu, année]]]]} → cases d'un degré, et pour chaque lieu : qui, quand */
+    /** {places: [[lat, lon, nom]], people: [[nom, naissance, décès, [[lieu, année]], ancêtre]]} → cases d'un degré, et pour chaque lieu : qui, quand */
     function build(r) {
         const places = (r.places || []).map(([lat, lon, name]) => ({lat: Number(lat), lon: Number(lon), name: String(name || '')}));
-        const people = (r.people || []).map(([n, b, d, pl]) => ({n: String(n), b: b == null ? null : Number(b), d: d == null ? null : Number(d), pl: pl || []}));
+        const people = (r.people || []).map(([n, b, d, pl, a]) => ({n: String(n), b: b == null ? null : Number(b), d: d == null ? null : Number(d), pl: pl || [], a: !!a}));
         const at = places.map(() => []), grid = new Map();
         people.forEach((p, i) => p.pl.forEach(([pl, y]) => { if (at[pl]) at[pl].push([i, y == null ? null : Number(y)]); }));
         places.forEach((p, i) => { const k = `${Math.floor(p.lat)}:${Math.floor(p.lon)}`; if (!grid.has(k)) grid.set(k, []); grid.get(k).push(i); });
@@ -52,12 +53,12 @@
     /** la distance au lieu de la famille le plus proche (Infinity : aucun à moins de max km) */
     const nearKm = (lat, lon, max = 500) => { const n = placesNear(Number(lat), Number(lon), max); return n.length ? n[0][1] : Infinity; };
     /** qui vivait près d'ici cette année-là : [{n, age, km, place, born}] (les plus proches d'abord) */
-    function presence(lat, lon, year, max) {
+    function presence(lat, lon, year, max, o = {}) {
         const y = Number(year); if (!F || !Number.isFinite(y)) return {who: [], before: false, near: false};
         const near = placesNear(Number(lat), Number(lon), max), seen = new Set(), who = []; let firstBirth = Infinity, any = false;
         for (const [pi, k] of near) {
             for (const [ix, ey] of F.at[pi]) {
-                const p = F.people[ix]; any = true;
+                const p = F.people[ix]; if (o.anc && !p.a) continue; any = true;
                 if (p.b != null && p.b < firstBirth) firstBirth = p.b;
                 if (seen.has(ix)) continue;
                 const b = p.b, d = p.d;
@@ -96,5 +97,5 @@
         options: async () => { await ready(); const n = F.places.length, mine = kmSetting(); return [...new Set([5, mine, 15, 50, 150].sort((a, b) => a - b))].map(k => ({value: String(k), label: T('à {km} km ({n} lieux placés)', {km: k, n})})); },
         prepare: ready, test: ([lat, lon], v) => nearKm(lat, lon, Number(v) || 15) <= (Number(v) || 15)});
 
-    ext.listesFamille = {ready, nearKm, presence, fill, chip, km: kmSetting, text: textOf, placesCount: () => F?.places.length || 0, reset: () => { F = null; }};
+    ext.listesFamille = {ready, nearKm, presence, fill, chip, km: kmSetting, text: textOf, placesCount: () => F?.places.length || 0, data: () => F, reset: () => { F = null; }};
 })();

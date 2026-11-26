@@ -175,19 +175,20 @@
         const counts = () => CHIPS.forEach(([c]) => { const el = page.querySelector(`[data-ldt-n="${c}"]`); if (el) el.textContent = c === 'install' && !installChecked ? '…' : nf(all.filter(d => !d.link || c === 'all').filter(d => chipOk(c, d)).length); });
         const paint = () => {
             const words = fold(q).split(/[^a-z0-9'-]+/).filter(Boolean), searching = !!words.length || chip !== 'all';
-            const hit = d => chipOk(chip, d) && (chip === 'all' || !d.link) && words.every(w => hay(d).includes(w));
+            const VX = ext.listesValeurs, byVal = new Set(); // 🔎 « le mot est dans ses valeurs » (app-listes-reunies-plus.js : un index fait une fois, en tâche de fond)
+            const hit = d => chipOk(chip, d) && (chip === 'all' || !d.link) && (words.every(w => hay(d).includes(w)) || (!!VX && !!words.length && words.every(w => hay(d).includes(w) || VX.has(d, w)) && !!byVal.add(d.id)));
             const tl = themeList(), hits = new Map(tl.map(t => [t.id, (I.by.get(t.id) || []).filter(hit)]));
             const nHits = [...hits.values()].reduce((a, b) => a + b.length, 0), nThemes = [...hits.values()].filter(x => x.length).length;
             found.textContent = searching ? (nHits ? T('{n} listes trouvées, dans {t} thèmes.', {n: nf(nHits), t: nf(nThemes)}) : T('Aucune liste ne correspond.')) : '';
             found.hidden = !searching;
-            res.innerHTML = searching ? tl.filter(t => hits.get(t.id).length).map(t => `<section class="ld-group ldt-group" data-ldt-group="${esc(t.id)}"><h3>${esc(t.icon)} ${esc(T(t.label))}</h3><div class="ld-cards">${hits.get(t.id).sort((a, b) => (b.merged ? 1 : 0) - (a.merged ? 1 : 0)).map(cardOf).join('')}</div></section>`).join('') : '';
+            res.innerHTML = searching ? tl.filter(t => hits.get(t.id).length).map(t => `<section class="ld-group ldt-group" data-ldt-group="${esc(t.id)}"><h3>${esc(t.icon)} ${esc(T(t.label))}</h3><div class="ld-cards">${hits.get(t.id).sort((a, b) => (b.merged ? 1 : 0) - (a.merged ? 1 : 0) || (byVal.has(a.id) ? 1 : 0) - (byVal.has(b.id) ? 1 : 0)).map(d => (byVal.has(d.id) ? cardOf(d).replace('</b>', `</b><small class="ldt-inval">🔎 ${esc(T('le mot est dans ses valeurs'))}</small>`) : cardOf(d))).join('')}</div></section>`).join('') : '';
             grid.innerHTML = tl.map(t => { const n = (I.by.get(t.id) || []).length, h = hits.get(t.id).length, mg = mergedOf(t.id);
                 return `<button type="button" class="ldt-theme${searching && !h ? ' is-dim' : ''}" data-ldt-theme="${esc(t.id)}"><span class="ldt-ic" aria-hidden="true">${esc(t.icon)}</span><span class="ldt-txt"><b>${esc(T(t.label))} <i>${nf(searching ? h : n)}</i></b><small class="muted">${esc(T(t.hint || ''))}</small>${mg.length ? `<span class="ldt-mg">🔀 ${esc(mg.map(m => T(m.label)).join(' · '))}</span>` : ''}</span></button>`; }).join('');
             page.querySelectorAll('[data-ldt-chip]').forEach(b => { const on = b.dataset.ldtChip === chip; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); });
         };
         counts(); paint();
         let tq = 0;
-        page.querySelector('[data-ld-ov-q]').addEventListener('input', e => { clearTimeout(tq); tq = setTimeout(() => { q = e.target.value; paint(); }, 60); });
+        page.querySelector('[data-ld-ov-q]').addEventListener('input', e => { clearTimeout(tq); tq = setTimeout(() => { q = e.target.value; paint(); ext.listesValeurs?.warm(q, () => { if (page.isConnected && q.trim()) paint(); }); }, 60); });
         page.addEventListener('click', e => {
             const t = e.target; let b;
             if ((b = t.closest('[data-ldt-chip]'))) { chip = b.dataset.ldtChip; paint(); return; }

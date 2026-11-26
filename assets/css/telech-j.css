@@ -1,0 +1,15 @@
+/* LCNDA — 🌍 Partir et nommer (assets/js/heritage-telech-j.js) : le reste vient de histoire.css (hist-row…) */
+.tj-life { display: grid; gap: 12px; }
+.tj-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.tj-quote { display: block; margin: 4px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; quotes: "« " " »"; overflow-wrap: anywhere; }
+.tj-src-link { font-size: 12px; white-space: nowrap; }
+.tj-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.tj-more[open] > summary { margin-bottom: 6px; }
+.tj-links { margin: 8px 0 0; font-size: 12.5px; overflow-wrap: anywhere; }
+.tj-ctx { margin: 6px 0; padding: 6px 10px; border-left: 3px solid var(--muted, rgba(127, 127, 127, .5)); font-size: 12.5px; overflow-wrap: anywhere; }
+.tj-panel { margin-top: 12px; }
+.tj-opts { display: grid; gap: 10px; margin-top: 10px; }
+.tj-opt { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.tj-settings .tj-ul small { overflow-wrap: anywhere; }
+@media (max-width: 600px) { .tj-ul { padding-left: 18px; } }
+@media print { .tj-more:not([open]) { display: none; } }

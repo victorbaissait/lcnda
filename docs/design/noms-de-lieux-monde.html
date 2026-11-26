@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Noms de lieux d’autrefois</title>
+<style>
+/* Les jetons et les composants de l'app (assets/css/app.css, ui.css, listes-donnees.css, heritage-mini-carte.js, audit-cartes.css), recopiés ici pour que la maquette s'ouvre seule. */
+:root{
+  color-scheme:light;
+  --ink:#080808;--paper:#fff;--card-bg:#fff;--card-head-bg:#fafafa;--card-line:#080808;
+  --blue:#0066cc;--blue-bright:#055dff;--blue-soft:#eaf2ff;--on-blue:#fff;--line-color:#d6d6d6;--muted:#6d6d6d;
+  --shadow:6px 6px 0 rgba(5,93,255,.34);--shadow-small:4px 4px 0 rgba(5,93,255,.28);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);
+  --ui-ink:#111;--ui-bg:#fff;--ui-soft:#eaf1ff;--ui-line:#e3e5ea;--ui-muted:#666;--ui-blue:#055dff;
+  --eyebrow:#0066cc;--btn2-bg:#fff;--btn2-line:#080808;--btn2-ink:#080808;
+  --seg-bg:#fff;--seg-ink:#111;--seg-line:#111;--seg-on-bg:#055dff;--seg-on-ink:#fff;
+  --grid:rgba(0,102,204,.035);--topbar:#fff;--topline:#080808;
+  --leg-bg:rgba(255,255,255,.94);--leg-ink:#080808;--leg-line:#080808;--leg-muted:#555;
+  --mm-bg:#fff;--mm-line:#080808;--mm-ink:#080808;--stage-line:#080808;
+  --toggle-off:#b8bec9;--kbd-line:#c9ccd3;--link:#2b6cb0;
+  --green:#2b8a3e;--orange:#d9480f;--fog:#9aa0a8;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#999;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --leg-bg:#222;--leg-ink:#e8e8e8;--leg-line:#666;--leg-muted:#aaa;
+  --mm-bg:#1d1d1d;--mm-line:#777;--mm-ink:#eee;--stage-line:#444;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#e8e8e8;--paper:#1a1a1a;--card-bg:#242424;--card-head-bg:#2e2e2e;--card-line:#3a3a3a;
+  --blue:#4d9fff;--blue-bright:#5599ff;--blue-soft:#1a2a3d;--on-blue:#111;--line-color:#555;--muted:#999;
+  --shadow:6px 6px 0 rgba(77,159,255,.25);--shadow-small:4px 4px 0 rgba(77,159,255,.2);--shadow-btn:3px 3px 0 rgba(5,93,255,.25);
+  --ui-ink:#e8e8e8;--ui-bg:#1f1f1f;--ui-soft:#1d2f4d;--ui-line:#3a3a3a;--ui-muted:#a8a8a8;--ui-blue:#3d7dff;
+  --eyebrow:#aaa;--btn2-bg:#2a2a2a;--btn2-line:#555;--btn2-ink:#e8e8e8;
+  --seg-bg:#242424;--seg-ink:#bbb;--seg-line:#e8e8e8;--seg-on-bg:#4d9fff;--seg-on-ink:#111;
+  --topbar:#1e1e1e;--topline:#3a3a3a;
+  --leg-bg:#222;--leg-ink:#e8e8e8;--leg-line:#666;--leg-muted:#aaa;
+  --mm-bg:#1d1d1d;--mm-line:#777;--mm-ink:#eee;--stage-line:#444;
+  --toggle-off:#555;--kbd-line:#555;--link:#6aa8ff;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.4 var(--font);padding:24px 24px 56px}
+button,input,select{font:inherit;color:inherit}
+a{color:inherit}
+:is(button,input,select,a,[tabindex]):focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1440px;margin:0 auto}
+
+/* ── la maquette autour ── */
+.mock{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;flex-wrap:wrap;margin:0 0 18px}
+.mock .eyebrow{display:block}
+.mock h1{margin:5px 0 6px;font-size:22px;letter-spacing:-.01em}
+.mock p{margin:0;max-width:820px;color:var(--muted);font-size:14px;line-height:1.45}
+.tag-new{display:inline-block;font:800 10px/1.5 var(--font);letter-spacing:.08em;text-transform:uppercase;background:var(--ui-blue);color:#fff;padding:0 6px;margin-right:6px;vertical-align:1px}
+.path{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;margin:8px 0 0;font-size:13px;font-weight:600}
+.path span{border:1.5px solid var(--line-color);background:var(--card-bg);padding:2px 8px}
+.path span.on{border-color:var(--ui-blue);background:var(--ui-soft);color:var(--ink)}
+.path i{font-style:normal;color:var(--muted)}
+
+/* ── composants de l'app ── */
+.eyebrow{color:var(--eyebrow);font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:2px solid var(--ink);background:var(--blue);color:var(--on-blue);padding:11px 15px;min-height:42px;font-weight:700;cursor:pointer;box-shadow:var(--shadow-small);transition:.15s ease;white-space:nowrap;border-radius:0}
+:root[data-theme="dark"] .button:not(.secondary){border-color:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .button:not(.secondary){border-color:var(--blue)}}
+.button:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.button.secondary{color:var(--btn2-ink);background:var(--btn2-bg);border-color:var(--btn2-line)}
+.button.small{min-height:32px;padding:6px 10px;font-size:11px;box-shadow:var(--shadow-btn)}
+.button.small:hover{box-shadow:1px 1px 0 var(--ink)}
+.button.icon{font-size:18px;line-height:1;padding:11px 15px}
+.segmented{display:inline-flex;padding:1px 0 0 1px;flex:none}
+.segmented button{min-height:34px;margin:-1px 0 0 -1px;position:relative;border:2px solid var(--seg-line);background:var(--seg-bg);color:var(--seg-ink);cursor:pointer;font-size:12px;font-weight:700;padding:1px 9px;white-space:nowrap;border-radius:0}
+.segmented button[aria-pressed="true"],.segmented button.is-active{z-index:1;background:var(--seg-on-bg);color:var(--seg-on-ink)}
+.ui-listbar-btn{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:5px 9px;min-height:34px;font:600 13px/1.2 system-ui,sans-serif;cursor:pointer;white-space:nowrap;border-radius:0}
+.ui-listbar-btn:hover{background:var(--ui-soft)}
+.ui-listbar-btn[aria-pressed="true"]{background:var(--ui-soft);border-color:var(--ui-blue);color:var(--ui-ink);box-shadow:inset 0 -3px 0 var(--ui-blue)}
+.ui-listbar-chip{display:inline-flex;align-items:center;gap:4px;background:var(--ui-soft);border:1.5px solid var(--ui-blue);color:var(--ui-blue);padding:3px 8px;font:700 12px/1.3 system-ui,sans-serif;cursor:pointer;border-radius:0}
+.ui-select{appearance:none;border:2px solid var(--ui-ink);border-radius:0;background:var(--ui-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 9px center;color:var(--ui-ink);padding:5px 28px 5px 9px;font:600 13px system-ui,sans-serif;min-height:34px;max-width:100%;min-width:0}
+.ui-search{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ui-ink);background:var(--ui-bg);color:var(--ui-ink);padding:0 6px 0 10px;min-height:34px;flex:1 1 220px;max-width:420px;min-width:0}
+.ui-search span{font-size:13px;opacity:.7}
+.ui-search input{flex:1;min-width:0;border:0;background:transparent;font-size:13px;padding:4px 0;outline:0}
+.ui-search kbd{font:600 11px/1 system-ui,sans-serif;color:var(--muted);border:1px solid var(--kbd-line);padding:2px 5px}
+.ui-toggle{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;position:relative;user-select:none;white-space:nowrap;min-height:34px}
+.ui-toggle>input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ui-toggle>i{width:34px;height:20px;border-radius:12px;background:var(--toggle-off);position:relative;flex:none;transition:background .15s}
+.ui-toggle>i::after{content:'';position:absolute;left:3px;top:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:left .15s}
+.ui-toggle>input:checked+i{background:var(--ui-blue)}
+.ui-toggle>input:checked+i::after{left:17px}
+.ui-toggle>input:focus-visible+i{outline:3px solid rgba(5,93,255,.4);outline-offset:2px}
+.ui-num{display:inline-flex;align-items:center;border:2px solid var(--ui-ink);background:var(--ui-bg);min-height:34px}
+.ui-num input{width:62px;border:0;background:transparent;padding:5px 8px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ui-ink);outline:0}
+.lbl{font-size:12px;font-weight:700;white-space:nowrap}
+.muted{color:var(--muted)}
+.card{background:var(--card-bg);border:2px solid var(--card-line);box-shadow:var(--shadow-small);min-width:0}
+.card-head{min-height:57px;display:flex;align-items:center;justify-content:space-between;gap:8px 10px;flex-wrap:wrap;padding:13px 15px;border-bottom:2px solid var(--card-line);background:var(--card-head-bg)}
+.card-head h3{margin:0;font-size:17px}
+.card-head h3 small{color:var(--muted);font-weight:400;font-size:13px}
+.card-body{padding:14px 15px}
+
+/* ── la fenêtre de l'app : barre du haut ── */
+.app{border:2px solid var(--topline);background:var(--paper);min-width:0}
+.topbar{display:grid;grid-template-columns:240px minmax(0,1fr);align-items:center;background:var(--topbar);border-bottom:2px solid var(--topline);min-height:76px}
+.brand{height:100%;border-right:2px solid var(--topline);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:end;padding:13px 24px 10px;font-size:12px;line-height:1;letter-spacing:.04em;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;width:130px;height:130px;right:-62px;top:-85px;background:repeating-radial-gradient(circle,var(--blue) 0 1px,transparent 1px 4px);transform:rotate(-8deg)}
+.brand span{background:var(--topbar);border:1px solid var(--blue);color:var(--blue);justify-self:end;padding:3px 5px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand strong{background:var(--blue);color:var(--on-blue);justify-self:start;padding:4px 6px;transform:rotate(-5deg);z-index:1;text-transform:uppercase}
+.brand small{grid-column:1/-1;font-size:10px;letter-spacing:.18em;align-self:end;text-align:center;color:var(--muted)}
+.main-nav{display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;padding:8px 16px;gap:8px;min-width:0}
+.nav-item{border:2px solid transparent;background:transparent;font-weight:700;padding:6px 12px;white-space:nowrap;line-height:1.1;font-size:16px;color:var(--ink);text-align:left}
+.nav-item span{display:block;font-size:9px;line-height:1;color:var(--blue);letter-spacing:.12em;margin-bottom:4px}
+.nav-item.is-active{background:var(--blue);border-color:var(--ink);color:var(--on-blue);box-shadow:var(--shadow-small)}
+.nav-item.is-active span{color:var(--on-blue)}
+
+/* ── la page de la liste ── */
+.workspace{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.page{padding:32px 4% 40px}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin:0 0 18px}
+.page-header h2{margin:6px 0 0;font-size:clamp(28px,3vw,38px);line-height:1.02;letter-spacing:-.03em}
+.ph-ico{font-size:.86em;margin-right:.19em}
+.page-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ld-source{margin:-6px 0 12px;color:var(--muted);font-size:13.3px}
+.ld-source a{color:inherit}
+.ld-source .lnk{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+.ld-bar-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ld-chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-height:26px;margin:12px 0 0}
+.ld-count{font-weight:700;margin-right:4px}
+
+/* ── ▶ Dans le temps : la barre calme sous celle de la liste ── */
+.tbar{margin:14px 0 0;padding:12px 0 0;border-top:1px solid var(--ui-line)}
+.tbar-row{display:flex;gap:8px 10px;align-items:center;flex-wrap:wrap}
+.tbar-row .sep{width:1px;align-self:stretch;background:var(--ui-line);margin:0 2px}
+.tbar-row .grow{flex:1 1 0;min-width:0}
+.tbar .war{flex:0 1 330px}
+.play{min-width:110px}
+.step{min-width:34px;font-size:15px}
+.track{margin:12px 0 0}
+.hist{display:block;width:100%;height:42px}
+.hist rect{fill:var(--line-color)}
+.hist rect.on{fill:var(--blue-bright)}
+input[type=range]{display:block;width:100%;margin:2px 0 0;accent-color:var(--blue);min-height:26px;padding:0;border:0;background:transparent}
+.ticks{position:relative;height:16px;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.ticks span{position:absolute;top:0;transform:translateX(-50%)}.ticks span:first-child{transform:none}.ticks span:last-child{transform:translateX(-100%)}
+.lives{margin:10px 0 0;display:grid;gap:5px}
+.life{display:grid;grid-template-columns:220px minmax(0,1fr);gap:10px;align-items:center;font-size:12.5px;color:var(--muted)}
+.life b{color:var(--ink);font-weight:700}
+.life .ax{position:relative;height:10px;background:var(--ui-line)}
+.life .ax i{position:absolute;top:0;bottom:0;background:var(--green)}
+.life .ax u{position:absolute;top:-4px;bottom:-4px;width:3px;margin-left:-1px;background:var(--ink);text-decoration:none}
+
+/* ── la carte (heritage-mini-carte.js : .person-map-stage, .mm-ctl, .mm-tip ; .map-legend de l'onglet Carte) ── */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start;margin:14px 0 0}
+.stage{position:relative;border:2px solid var(--stage-line);background:#fff;overflow:hidden;container-type:inline-size}
+.stage svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.land{fill:#fff;stroke:#a9a9a9;stroke-width:.8;vector-effect:non-scaling-stroke}
+.b{cursor:pointer;transition:opacity .25s}
+.b circle.dot{fill:#0066cc;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.b.other circle.dot{fill:var(--fog)}
+.b.near circle.ring{fill:none;stroke:var(--orange);stroke-width:2.5;vector-effect:non-scaling-stroke}
+.b.approx circle.dot{fill:#fff;stroke:#0066cc;stroke-width:2.5}
+.b.other.approx circle.dot{stroke:var(--fog)}
+.b.sel circle.dot{stroke:#111;stroke-width:3}
+.b.new circle.pulse{fill:none;stroke:#055dff;stroke-width:2;vector-effect:non-scaling-stroke;animation:pulse 1.2s ease-out forwards}
+@keyframes pulse{from{r:4;opacity:.9}to{r:24;opacity:0}}
+@media (prefers-reduced-motion:reduce){.b.new circle.pulse{animation:none;opacity:0}}
+.home{pointer-events:none}
+.home rect{fill:var(--green);stroke:#111;stroke-width:2;vector-effect:non-scaling-stroke}
+.home text{font-weight:700;fill:#111;paint-order:stroke;stroke:#fff;stroke-linejoin:round;font-family:var(--font)}
+.home circle{fill:rgba(43,138,62,.06);stroke:var(--green);stroke-width:1.5;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
+.map-box{position:absolute;z-index:4;background:var(--leg-bg);color:var(--leg-ink);border:2px solid var(--leg-line);padding:7px 10px;font-size:12px}
+.yearbox{left:10px;top:10px;max-width:calc(100% - 140px);pointer-events:none}
+.yearbox .yr{font:800 30px/1 var(--font);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.yearbox .sub{font-size:12px;color:var(--leg-muted);margin-top:3px}
+.map-legend{left:10px;bottom:34px;display:flex;flex-direction:column;gap:3px;pointer-events:none;max-width:300px}
+.map-legend b{font-size:12px}
+.map-legend span{display:flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none;background:#0066cc;border:1.5px solid #fff;box-shadow:0 0 0 1px #0066cc}
+.sw.a{background:#fff;border:2.5px solid #0066cc;box-shadow:none}.sw.o{background:transparent;border:2.5px solid var(--orange);box-shadow:none}.sw.f{background:var(--fog);box-shadow:0 0 0 1px var(--fog)}
+.sw.h{border-radius:0;background:var(--green);border:1.5px solid #111;box-shadow:none;transform:rotate(45deg) scale(.85)}
+.mm-ctl{position:absolute;z-index:4;top:8px;right:8px;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.mm-ctl button{min-width:34px;height:34px;padding:0 8px;border:1.5px solid var(--mm-line);background:var(--mm-bg);color:var(--mm-ink);font-size:17px;line-height:1;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;border-radius:0}
+.mm-ctl button:hover{background:var(--blue-soft)}
+.mm-ctl button[aria-pressed="true"]{background:var(--mm-ink);color:var(--mm-bg)}
+.mm-lab{font-size:12.5px;font-weight:600}
+.lfc-attr{position:absolute;z-index:3;right:4px;bottom:4px;max-width:calc(100% - 8px);font:11px/1.3 system-ui,sans-serif;color:#333;background:rgba(255,255,255,.82);border-radius:3px;padding:4px 6px}
+.lfc-attr a{color:inherit;text-decoration:none}
+.mm-tip{position:absolute;z-index:5;max-width:min(260px,80%);padding:4px 8px;background:#111;color:#fff;font-size:12.5px;line-height:1.3;pointer-events:none;transform:translate(-50%,calc(-100% - 12px));opacity:0;transition:opacity .12s}
+.mm-tip.on{opacity:1}
+.ld-map-note{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin:8px 0 0;font-size:13px}
+.ld-map-note small{color:var(--muted);font-size:11px}
+
+/* ── la colonne : ces années-là, puis la fiche d'une bataille (même tête que la fenêtre « 🧭 Histoire autour ») ── */
+.side .card-head{min-height:0}
+.list{list-style:none;margin:0;padding:4px 0;max-height:360px;overflow:auto}
+.list li+li{border-top:1px solid var(--ui-line)}
+.list button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:12px minmax(0,1fr);gap:10px;width:100%;padding:8px 15px;cursor:pointer;font-size:13.5px}
+.list button:hover{background:var(--ui-soft)}
+.list button[aria-current="true"]{background:var(--blue-soft);box-shadow:inset 4px 0 0 var(--blue-bright)}
+.list button:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+.list .nm{color:var(--blue);font-weight:700}
+.list .m{width:10px;height:10px;border-radius:50%;background:#0066cc;margin-top:4px}
+.list .m.n{box-shadow:0 0 0 2px var(--card-bg),0 0 0 4px var(--orange)}
+.list small{display:block;color:var(--muted);font-size:12px;margin-top:1px}
+.empty{color:var(--muted);font-size:13.5px;padding:10px 15px}
+.detail{border-top:2px solid var(--card-line)}
+.detail .dh{padding:14px 15px;background:var(--card-head-bg);border-bottom:2px solid var(--card-line)}
+.detail h4{margin:4px 0 0;font-size:20px;line-height:1.15;letter-spacing:-.01em}
+.detail .db{padding:12px 15px 14px;font-size:14px}
+.detail .when{font-weight:700;margin:0 0 8px}
+.facts{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:13.5px}
+.facts dt{color:var(--muted);font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding-top:3px}.facts dd{margin:0}
+.tag{display:inline-block;font:700 11px/1.4 system-ui,sans-serif;padding:0 6px;border:1.5px dashed var(--line-color);color:var(--muted);margin-left:6px;white-space:nowrap}
+.near-box{margin:10px 0 0;padding:8px 11px;border-left:4px solid var(--orange);background:color-mix(in srgb,var(--orange) 10%,var(--card-bg));font-size:13.5px}
+.src{display:flex;gap:6px 14px;flex-wrap:wrap;margin-top:12px;font-size:13px}
+.src a{color:var(--blue);font-weight:700;text-decoration:none}.src a:hover{text-decoration:underline}
+.cite{font-size:11.5px;color:var(--muted);margin:8px 0 0}
+
+/* ── à décider ── */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px;margin:28px 0 0}
+.notes ol{margin:0;padding-left:20px;font-size:14px}.notes li{margin:6px 0}
+.notes p{color:var(--muted);font-size:14px;margin:0 0 8px}
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.kpi{border:2px solid var(--card-line);background:var(--card-bg);padding:7px 12px;box-shadow:var(--shadow-btn);min-width:0}
+.kpi b{display:block;font-size:20px;font-variant-numeric:tabular-nums}.kpi span{font-size:12px;color:var(--muted)}
+
+@media (max-width:1100px){.layout{grid-template-columns:minmax(0,1fr)}.list{max-height:320px}}
+@media (max-width:760px){
+  body{padding:16px 16px 40px}
+  .topbar{grid-template-columns:minmax(0,1fr);min-height:0}
+  .brand{border-right:0;border-bottom:2px solid var(--topline);height:52px;padding:10px 100px 8px;justify-content:center}
+  .brand small{display:none}
+  .main-nav{padding:8px 10px}
+  .nav-item{font-size:13px;padding:5px 8px}
+  .page{padding:18px 14px 28px}
+  .page-header{margin-bottom:14px}
+  .button.icon{padding:9px 13px}
+  .ui-search{flex-basis:100%;max-width:none}
+  .life{grid-template-columns:minmax(0,1fr);gap:3px}
+  .tbar .war{flex:1 1 100%}
+  .tbar-row .sep{display:none}
+  .map-legend{position:static;border:0;border-top:2px solid var(--leg-line);padding:8px 10px;max-width:none;flex-flow:row wrap;gap:4px 12px}
+  .map-legend b{flex-basis:100%}
+  .yearbox{position:static;border:0;border-bottom:2px solid var(--leg-line);padding:8px 52px 8px 10px;max-width:none}
+  .lfc-attr{position:static;display:block;max-width:none;border-radius:0;background:var(--leg-bg);color:var(--leg-muted);padding:0 10px 8px}
+  .yearbox .yr{font-size:24px}
+  .mm-lab{display:none}
+  .mm-ctl{top:6px;right:6px}.mm-ctl button{min-width:32px;height:32px;font-size:13px;font-weight:800}
+  .play{min-width:0}
+}
+
+/* ── la recherche « un nom → le lieu d'aujourd'hui » (nouveau) ── */
+.big-search{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 10px}
+.big-search .ui-search{flex:1 1 320px;min-width:0}
+.big-search .ui-search input{font-size:16px}
+.ex{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;font-size:13px}
+.ex span{color:var(--muted)}
+.res{display:grid;gap:16px}
+.place{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:0;border:2px solid var(--card-line);background:var(--card-bg);box-shadow:var(--shadow-small)}
+.place .ph{padding:12px 14px;border-bottom:1.5px solid var(--line-color);background:var(--card-head-bg);grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.place .ph h3{margin:0;font-size:18px}
+.place .ph small{color:var(--muted)}
+.place .why{font-size:13px;color:var(--muted)}
+.place .why b{color:var(--ink)}
+.names{list-style:none;margin:0;padding:10px 14px;display:grid;gap:6px}
+.names li{display:grid;grid-template-columns:minmax(0,9.5em) minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:14px}
+.names li.hit .nm{background:var(--ui-soft);outline:1.5px solid var(--ui-blue)}
+.names .nm{font-weight:700;overflow-wrap:anywhere;padding:0 4px}
+.names .when{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
+.names .k{font-size:11.5px;color:var(--muted)}
+.chipsrc{font-size:11.5px;font-weight:700;border:1.5px solid var(--line-color);padding:1px 6px;white-space:nowrap;text-decoration:none}
+.chipsrc:hover{border-color:var(--ui-blue)}
+.bar{position:relative;height:6px;background:var(--ui-line);margin-top:3px}
+.bar i{position:absolute;top:0;bottom:0;background:var(--ui-blue);opacity:.75}
+.mini{border-left:1.5px solid var(--line-color);padding:10px;display:grid;gap:8px;align-content:start}
+.mini svg{width:100%;height:auto;border:1.5px solid var(--line-color);background:var(--paper)}
+.mini .gl{stroke:var(--line-color);stroke-width:.6}
+.mini .dot{fill:var(--orange);stroke:var(--paper);stroke-width:1.5}
+.mini small{color:var(--muted);font-size:12px}
+.acts{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 12px}
+.none{padding:14px;border:2px dashed var(--line-color);color:var(--muted)}
+.else{margin-top:16px}
+.else ul{margin:6px 0 0;padding-left:18px;font-size:13.5px}
+.else li{margin-bottom:4px}
+.kiosk-note{font-size:12px;color:var(--muted)}
+@media (max-width:760px){.place{grid-template-columns:1fr}.mini{border-left:0;border-top:1.5px solid var(--line-color);grid-template-columns:120px 1fr;align-items:center}.names li{grid-template-columns:minmax(0,1fr) auto}.names .nm{grid-column:1;grid-row:1}.names .chipsrc{grid-column:2;grid-row:1;justify-self:end}.names .when{grid-column:1/-1;grid-row:2}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mock">
+    <div>
+      <span class="eyebrow"><span class="tag-new">Maquette</span>à valider · tel que dans l’app</span>
+      <h1>Noms de lieux d’autrefois : une seule recherche pour tous les pays</h1>
+      <p>On tape un nom ancien — « Presbourg », « Breslau », « Lutetia » — et l’app répond : le lieu d’aujourd’hui, tous ses noms avec leurs dates, sa place sur une petite carte, et la source de chaque nom. Échantillon réel tiré des paquets livrés : 0 noms du monde et 0 communes fusionnées (Wikidata, CC0), 29 277 noms antiques (Pleiades, CC BY 3.0), 11 225 anciens noms officiels déjà livrés (Wikidata). GOV s’ajoute quand son paquet est installé.</p>
+      <div class="path" aria-label="Où c’est dans l’app"><span>📋 Listes</span><i>→</i><span>🗺 Lieux et noms de lieux</span><i>→</i><span>🔀 Anciens noms de lieux</span><i>→</i><span class="on">🔎 Un nom → le lieu</span></div>
+    </div>
+    <span class="segmented" role="group" aria-label="Thème"><button type="button" data-theme-set="auto" aria-pressed="true">Auto</button><button type="button" data-theme-set="light" aria-pressed="false">Clair</button><button type="button" data-theme-set="dark" aria-pressed="false">Sombre</button></span>
+  </div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="brand" aria-hidden="true"><span>Ma</span><strong>Famille</strong><small>GÉNÉALOGIE</small></div>
+      <nav class="main-nav" aria-label="Onglets de l’app">
+        <span class="nav-item"><span>01</span>Tableau de bord</span><span class="nav-item"><span>02</span>Personnes</span><span class="nav-item"><span>03</span>Graphiques</span><span class="nav-item"><span>04</span>Carte</span><span class="nav-item is-active" aria-current="page"><span>05</span>Listes</span><span class="nav-item"><span>06</span>Chronologie</span>
+      </nav>
+    </header>
+    <main class="workspace">
+      <section class="page" aria-label="Anciens noms de lieux">
+        <header class="page-header">
+          <div><span class="eyebrow">Listes · 🧰 Données · 🗺 Lieux et noms de lieux</span><h2><span class="ph-ico" aria-hidden="true">🗺</span>Anciens noms de lieux</h2></div>
+          <div class="page-actions"><span class="segmented" role="group" aria-label="Affichage"><button type="button" aria-pressed="true">🔎 Un nom → le lieu</button><button type="button" aria-pressed="false">Tableau</button><button type="button" aria-pressed="false">🗺 Carte</button></span></div>
+        </header>
+        <p class="ld-source">Sources : GOV · Wikidata (CC0) · Pleiades (CC BY 3.0) · fusions de communes (Wikidata) · <span class="lnk">↗ World Historical Gazetteer (lien)</span> — sans doublons</p>
+        <div class="big-search">
+          <span class="ui-search"><span aria-hidden="true">🔍</span><input type="search" id="q" value="Presbourg" placeholder="Un nom ancien : Presbourg, Breslau, Lutetia…" aria-label="Un nom ancien"><kbd>/</kbd></span>
+        </div>
+        <div class="ex" id="ex"><span>Exemples :</span></div>
+        <div class="res" id="res" aria-live="polite"></div>
+        <section class="card else">
+          <div class="card-head"><h3>Pas trouvé ? Chercher ailleurs (en ligne, sur un clic)</h3></div>
+          <div class="card-body"><ul>
+            <li>🌐 World Historical Gazetteer — noms anciens du monde entier ↗</li>
+            <li>🏰 GOV (gov.genealogy.net) — Europe centrale, Prusse, Autriche-Hongrie ↗</li>
+            <li>Registres de chaque pays : 🇨🇭 OFS (communes depuis 1848) · 🇪🇸 INE (municipios depuis 1842) · 🇳🇱 HisGIS (cadastre 1832) · ☘️ Logainm · 📜 Open Domesday (1086) · 🇵🇱 Słownik geograficzny · 🇦🇹 Gemeindelexikon · ⚜️ Toponymie du Québec · 🍁 Noms géographiques du Canada · 🇺🇸 GNIS ↗</li>
+          </ul><p class="kiosk-note">En consultation (borne) et pour un invité du réseau local : ces liens et le lien OpenHistoricalMap ne s’affichent pas.</p></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="notes">
+    <section class="card">
+      <div class="card-head"><div><span class="eyebrow">À valider</span><h3>Ce qu’il faut décider</h3></div></div>
+      <div class="card-body"><ol>
+        <li><b>Où l’ouvrir ?</b> Une vue « 🔎 Un nom → le lieu » dans la liste réunie « 🗺 Anciens noms de lieux » (ici), plutôt qu’un écran de plus ; et la même recherche dans « 🧰 Toutes les données » quand on tape un nom.</li>
+        <li><b>« Même lieu »</b> : même identifiant Wikidata, sinon même nom d’aujourd’hui à moins de 15 km ; les noms antiques de Pleiades prennent le nom d’aujourd’hui du lieu Wikidata à moins de 5 km.</li>
+        <li><b>Les autres noms sans date</b> (Presbourg, Cracovie, Breslau en allemand) : les montrer avec la mention « sans date », ou seulement quand on les tape ?</li>
+        <li><b>L’ordre des sources</b> quand deux disent le même nom : registre national, puis GOV, puis World Historical Gazetteer, puis Pleiades, puis Wikidata.</li>
+        <li><b>Un bouton « ＋ Ajouter ce nom à mon lieu »</b> (variante du nom sur la fiche du lieu de l’arbre, avec ses dates et sa source) : oui ou non ?</li>
+        <li><b>OpenHistoricalMap</b> : un lien « ↗ ce lieu en 1850 » seulement (pas de fond de carte : sa politique d’usage des tuiles n’a pas pu être lue) ; jamais en consultation.</li>
+      </ol></div>
+    </section>
+    <section class="card">
+      <div class="card-head"><div><span class="eyebrow">Sources</span><h3>D’où viennent les noms</h3></div></div>
+      <div class="card-body">
+        <div class="kpis"><div class="kpi"><b>0</b><span>noms du monde (Wikidata)</span></div><div class="kpi"><b>0</b><span>communes fusionnées</span></div><div class="kpi"><b>29 277</b><span>noms antiques (Pleiades)</span></div><div class="kpi"><b>11 225</b><span>anciens noms déjà livrés</span></div></div>
+        <p>Wikidata (CC0) : noms officiels datés (P1448 avec début et fin), autres noms des villes de plus de 30 000 habitants, communes disparues dans une fusion (P576, P1366). Pleiades (CC BY 3.0) : noms antiques, avec les années entre lesquelles ils sont attestés. GOV (CC BY-SA 3.0) : quand son paquet est installé. Chaque nom renvoie à sa source « ↗ ».</p>
+        <p>Tout est dans l’app : la recherche se fait sur l’ordinateur, rien ne part sur Internet, sauf si l’on clique un lien « ↗ ».</p>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+const SAMPLE = {"Pressburg":[{"now":"Bratislava","guessed":false,"cc":"","lat":48.152,"lon":17.109,"names":[{"n":"Pressburg","k":"ancien nom officiel","a":null,"b":1920,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1780"},{"n":"Pozsony","k":"ancien nom officiel","a":null,"b":1920,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1780"}]}],"Pozsony":[{"now":"Bratislava","guessed":false,"cc":"","lat":48.152,"lon":17.109,"names":[{"n":"Pozsony","k":"ancien nom officiel","a":null,"b":1920,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1780"},{"n":"Pressburg","k":"ancien nom officiel","a":null,"b":1920,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1780"}]}],"Breslau":[{"now":"Wrocław","guessed":false,"cc":"","lat":51.11,"lon":17.033,"names":[{"n":"Breslau","k":"ancien nom officiel","a":1350,"b":1945,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1799"}]}],"Lutetia":[{"now":"Paris","guessed":true,"cc":"","lat":48.854,"lon":2.346,"names":[{"n":"Lutetia","k":"nom antique","a":-330,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Lutecia","k":"nom antique","a":-330,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Lutetia Parisiorum","k":"nom antique","a":-330,"b":-30,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Luticia","k":"nom antique","a":-330,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Leukotekia polis","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Loutokotia","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Luticia Parisiorum","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Luteci","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Bārīs","k":"nom antique","a":1500,"b":1599,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Lutezia","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Lutèce","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Paris","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"},{"n":"Ville-Lumière","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q90"},{"n":"Lutecia Parisiorum","k":"nom antique","a":null,"b":null,"s":"Pleiades","u":"https://pleiades.stoa.org/places/109126"}]}],"Lemberg":[{"now":"Lviv","guessed":false,"cc":"","lat":49.842,"lon":24.032,"names":[{"n":"http://www.wikidata.org/.well-known/genid/a53d6e34d61d8a7be67c5b74da55a5d9","k":"ancien nom officiel","a":901,"b":1250,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"Leopolis","k":"ancien nom officiel","a":1340,"b":1775,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"Lemberg","k":"ancien nom officiel","a":1773,"b":1918,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"Lwów","k":"ancien nom officiel","a":1848,"b":1918,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"Miasto Zawsze Wierne","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"Miasto Orląt","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"Miasto lwa","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"Miasto trzech katedr","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"The City of Eaglets","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"The Ever-Faithful City","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"The City of Three Cathedrals","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"},{"n":"The City of Lion","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q36036"}]}],"Königsberg":[{"now":"Kaliningrad","guessed":false,"cc":"","lat":54.717,"lon":20.5,"names":[{"n":"Königsberg","k":"ancien nom officiel","a":1255,"b":1946,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1829"}]},{"now":"château de Königsberg","guessed":false,"cc":"","lat":54.71,"lon":20.51,"names":[{"n":"Königsberg","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q571409"}]},{"now":"Chojna","guessed":false,"cc":"","lat":52.964,"lon":14.428,"names":[{"n":"Königsberg-en-Nouvelle-Marche","k":"ancien nom officiel","a":null,"b":1945,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q954157"}]}],"Burdigala":[{"now":"Bordeaux","guessed":true,"cc":"","lat":44.837,"lon":-0.576,"names":[{"n":"Burdigala","k":"nom antique","a":-30,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/138248"},{"n":"Bourdigala","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/138248"},{"n":"Burdigalenses","k":"nom antique","a":-30,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/138248"},{"n":"Bordeaux","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/138248"},{"n":"Commune-Franklin","k":"ancien nom officiel","a":1793,"b":1814,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1479"}]}],"Danzig":[{"now":"Gdańsk","guessed":false,"cc":"","lat":54.348,"lon":18.654,"names":[{"n":"Dantzig","k":"ancien nom officiel","a":1225,"b":1945,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1792"},{"n":"Danzig","k":"ancien nom officiel","a":1793,"b":1945,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1792"}]}],"Agram":[{"now":"Agramunt","guessed":false,"cc":"","lat":41.794,"lon":1.064,"names":[{"n":"Agramont","k":"nom antique","a":1700,"b":1799,"s":"Pleiades","u":"https://pleiades.stoa.org/places/606953230"},{"n":"Agramunt","k":"nom antique","a":2000,"b":2099,"s":"Pleiades","u":"https://pleiades.stoa.org/places/606953230"}]},{"now":"Agramunt","guessed":false,"cc":"","lat":41.794,"lon":1.064,"names":[{"n":"Agramont","k":"nom antique","a":1700,"b":1799,"s":"Pleiades","u":"https://pleiades.stoa.org/places/606953230"},{"n":"Agramunt","k":"nom antique","a":2000,"b":2099,"s":"Pleiades","u":"https://pleiades.stoa.org/places/606953230"}]}],"Laibach":[{"now":"Ljubljana","guessed":false,"cc":"","lat":46.051,"lon":14.506,"names":[{"n":"Laibach","k":"ancien nom officiel","a":null,"b":1918,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q437"}]}],"Reval":[{"now":"Tallinn","guessed":false,"cc":"","lat":59.437,"lon":24.745,"names":[{"n":"Reval","k":"ancien nom officiel","a":null,"b":1918,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1770"}]}],"Constantinople":[{"now":"Constantinopolis","guessed":false,"cc":"","lat":41.007,"lon":28.966,"names":[{"n":"Byzantion","k":"nom antique","a":-1200,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/520985"},{"n":"Byzantium","k":"nom antique","a":-750,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/520985"},{"n":"bznt","k":"nom antique","a":-540,"b":-330,"s":"Pleiades","u":"https://pleiades.stoa.org/places/520985"},{"n":"Bosporios Pr.","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/520979"},{"n":"Sykai","k":"nom antique","a":-30,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/523982"},{"n":"Kepos","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/521056"},{"n":"Ostreodes","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/523984"},{"n":"Hapsasieion","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/521025"},{"n":"Bolos","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/523975"},{"n":"Choiragria","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/523976"},{"n":"Aianteion","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/523972"},{"n":"Kanopos","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/523980"},{"n":"Constantinopolis","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/520998"},{"n":"Neorion","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/523226"}]}],"Bône":[{"now":"*Boneita","guessed":false,"cc":"","lat":38.01,"lon":27.498,"names":[{"n":"Boneita","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/599557"}]}],"Thibault-la-Fontaine":[{"now":"Saint-Satur","guessed":false,"cc":"","lat":47.341,"lon":2.853,"names":[{"n":"Thibault-la-Fontaine","k":"ancien nom officiel","a":1793,"b":1814,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q670010"}]}],"Fiume":[{"now":"Rijeka","guessed":false,"cc":"","lat":45.333,"lon":14.433,"names":[{"n":"Fiume","k":"ancien nom officiel","a":1919,"b":1945,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q1647"}]},{"now":"Clesus (river)","guessed":false,"cc":"","lat":45.65,"lon":10.471,"names":[{"n":"Voberna","k":"nom antique","a":-30,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383827"},{"n":"Clesus","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383620"},{"n":"Cleusis","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383620"},{"n":"Lacus Clisius","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383620"},{"n":"Fiume Chiese","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383620"}]},{"now":"Trebia (river)","guessed":false,"cc":"","lat":44.755,"lon":9.415,"names":[{"n":"Trebia","k":"nom antique","a":-330,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383802"},{"n":"Trebias","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383802"},{"n":"Bobium","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383594"},{"n":"Fiume Trebbia","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/383802"},{"n":"Eremo di San Michele (Coli)","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/664572982"}]}],"Kristiania":[{"now":"Oslo","guessed":true,"cc":"","lat":59.913,"lon":10.739,"names":[{"n":"Christiania","k":"ancien nom officiel","a":1624,"b":1924,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q585"},{"n":"Kristiania","k":"ancien nom officiel","a":1877,"b":1924,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q585"},{"n":"Oslo","k":"ancien nom officiel","a":1925,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q585"}]}],"Lugdunum":[{"now":"Lugdunum","guessed":false,"cc":"","lat":52.205,"lon":4.397,"names":[{"n":"Lugdunum","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/99003"},{"n":"Lougodinon","k":"nom antique","a":null,"b":null,"s":"Pleiades","u":"https://pleiades.stoa.org/places/99003"}]},{"now":"Lyon","guessed":true,"cc":"","lat":45.759,"lon":4.82,"names":[{"n":"Col. Copia Claudia Augusta Lugdunum","k":"nom antique","a":-550,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167717"},{"n":"Col. Lugdunum","k":"nom antique","a":-550,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167717"},{"n":"Lugdunum","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167717"},{"n":"Lougdounon","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167717"},{"n":"Lougdounon metropolis","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167717"},{"n":"Lugdunensis colonia","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167717"},{"n":"Lugduno caput Galliarum usque hic legas","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167717"},{"n":"Lyon","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167717"},{"n":"Amphithéâtre des Trois Gaules","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/127640903"},{"n":"Commune-Affranchie","k":"ancien nom officiel","a":1793,"b":1814,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q456"}]},{"now":"Saint-Bertrand-de-Comminges","guessed":true,"cc":"","lat":43.027,"lon":0.572,"names":[{"n":"Lugdunum Convenarum","k":"nom antique","a":-330,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/246477"},{"n":"Hauteville","k":"ancien nom officiel","a":1793,"b":1814,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q632081"},{"n":"Saint-Bertrand","k":"ancien nom officiel","a":null,"b":1958,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q632081"}]}],"Massalia":[{"now":"Marseille","guessed":true,"cc":"","lat":43.297,"lon":5.383,"names":[{"n":"Massalia","k":"nom antique","a":-750,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148127"},{"n":"Massilia","k":"nom antique","a":-330,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148127"},{"n":"Masilia Grecorum","k":"nom antique","a":300,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148127"},{"n":"Marseille","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148127"},{"n":"Jardin des Vestiges","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/888303741"},{"n":"Port antique de Marseille","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/888303741"},{"n":"Sans-Nom","k":"ancien nom officiel","a":1793,"b":1814,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q23482"},{"n":"Ville-sans-Nom","k":"ancien nom officiel","a":1793,"b":1814,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q23482"}]},{"now":"Massalia? (river)","guessed":false,"cc":"","lat":35.183,"lon":24.49,"names":[{"n":"Massalia","k":"nom antique","a":null,"b":null,"s":"Pleiades","u":"https://pleiades.stoa.org/places/589924"}]}],"Aquae Sextiae":[{"now":"Viviers-du-Lac","guessed":true,"cc":"","lat":45.689,"lon":5.916,"names":[{"n":"Aquae Sextiae","k":"nom antique","a":-30,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167650"},{"n":"Aix-les-Bains","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/167650"},{"n":"Viviers","k":"ancien nom officiel","a":null,"b":1956,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q549492"}]},{"now":"Aix-en-Provence","guessed":true,"cc":"","lat":43.526,"lon":5.445,"names":[{"n":"Col. Aquae Sextiae","k":"nom antique","a":-330,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148053"},{"n":"Col. Iulia Augusta Aquae Sextiae","k":"nom antique","a":-330,"b":640,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148053"},{"n":"Aquae Sextiae Salluviorum","k":"nom antique","a":-30,"b":300,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148053"},{"n":"Aix-en-Provence","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148053"},{"n":"Entremont","k":"nom antique","a":1700,"b":2100,"s":"Pleiades","u":"https://pleiades.stoa.org/places/148073"},{"n":"Aix","k":"ancien nom officiel","a":null,"b":1932,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q47465"},{"n":"Florence provençale","k":"ancien nom officiel","a":null,"b":null,"s":"Wikidata","u":"https://www.wikidata.org/wiki/Q47465"}]}]};
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const fold = s => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ß/g, 'ss').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+const yr = v => (v == null ? '' : v < 0 ? -v + ' av. J.-C.' : String(v));
+const when = (a, b) => (a != null && b != null ? yr(a) + ' – ' + yr(b) : a != null ? 'depuis ' + yr(a) : b != null ? 'jusqu’en ' + yr(b) : 'sans date');
+const safe = u => (/^https:\/\/[^\s"'<>]+$/.test(u || '') ? u : '');
+function bar(a, b) { const lo = -800, hi = 2026, x = v => Math.max(0, Math.min(100, (v - lo) / (hi - lo) * 100)); if (a == null && b == null) return ''; const s = x(a ?? (b - 40)), e = x(b ?? hi); return '<div class="bar" aria-hidden="true"><i style="left:' + s + '%;width:' + Math.max(1.2, e - s) + '%"></i></div>'; }
+function mini(lat, lon) { const X = (lon + 180) / 360 * 200, Y = (90 - lat) / 180 * 100; let g = ''; for (let i = 1; i < 6; i++) g += '<line class="gl" x1="' + i * 200 / 6 + '" y1="0" x2="' + i * 200 / 6 + '" y2="100"/>'; for (let i = 1; i < 3; i++) g += '<line class="gl" x1="0" y1="' + i * 100 / 3 + '" x2="200" y2="' + i * 100 / 3 + '"/>';
+  return '<svg viewBox="0 0 200 100" role="img" aria-label="Position : ' + lat + ', ' + lon + '">' + g + '<circle class="dot" cx="' + X.toFixed(1) + '" cy="' + Y.toFixed(1) + '" r="4.5"/></svg>'; }
+function find(q) { const f = fold(q); if (f.length < 2) return []; const k = Object.keys(SAMPLE).find(x => fold(x) === f) || Object.keys(SAMPLE).find(x => fold(x).startsWith(f)); return k ? SAMPLE[k] : []; }
+function draw() {
+  const q = document.getElementById('q').value, list = find(q), host = document.getElementById('res');
+  if (!list.length) { host.innerHTML = '<div class="none">Aucun lieu connu sous ce nom dans les paquets installés. Chercher ailleurs : voir plus bas (liens).</div>'; return; }
+  host.innerHTML = list.map(p => '<article class="place"><div class="ph"><h3>📍 ' + esc(p.now) + '</h3><small>' + esc(p.cc || '') + '</small><span class="why">« <b>' + esc(q) + '</b> » : un nom de ce lieu</span></div>'
+    + '<ul class="names">' + p.names.map(n => '<li class="' + (fold(n.n) === fold(q) ? 'hit' : '') + '"><span class="nm">' + esc(n.n) + '</span><span class="when">' + esc(when(n.a, n.b)) + ' · <span class="k">' + esc(n.k) + '</span>' + bar(n.a, n.b) + '</span>'
+      + (safe(n.u) ? '<a class="chipsrc" href="' + esc(n.u) + '" target="_blank" rel="noopener noreferrer">' + esc(n.s) + ' ↗</a>' : '<span class="chipsrc">' + esc(n.s) + '</span>') + '</li>').join('') + '</ul>'
+    + '<div class="mini">' + mini(p.lat, p.lon) + '<small>' + p.lat.toFixed(3) + ', ' + p.lon.toFixed(3) + '<br>Fond de l’app (sans tuiles, sans Internet)</small></div>'
+    + '<div class="acts"><button type="button" class="button small secondary">📍 Voir sur la carte</button><button type="button" class="button small secondary">📋 Tous les noms de ce lieu</button><button type="button" class="button small secondary">＋ Ajouter ce nom à mon lieu</button><button type="button" class="button small secondary">↗ OpenHistoricalMap en 1850</button></div></article>').join('');
+}
+const ex = document.getElementById('ex');
+['Presbourg', 'Breslau', 'Lutetia', 'Lemberg', 'Königsberg', 'Burdigala', 'Danzig', 'Agram', 'Kristiania'].filter(k => SAMPLE[k]).forEach(k => { const b = document.createElement('button'); b.type = 'button'; b.className = 'ui-listbar-chip'; b.textContent = k; b.onclick = () => { document.getElementById('q').value = k; draw(); }; ex.appendChild(b); });
+document.getElementById('q').addEventListener('input', draw);
+draw();
+(function () { const btns = document.querySelectorAll('[data-theme-set]'); btns.forEach(b => b.addEventListener('click', () => { const v = b.dataset.themeSet; if (v === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.dataset.theme = v; btns.forEach(x => x.setAttribute('aria-pressed', String(x === b))); })); })();
+</script>
+</body>
+</html>

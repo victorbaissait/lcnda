@@ -147,8 +147,8 @@
             origin: {kind: 'list', id: d.id, label: `${T('Listes')} · ${T(d.label)}`, url: d.sourceUrl || ''}};
         return {text, html, items: items.length === 1 ? items : [set], title};
     }
-    async function act(kind, rows, anchor) {
-        const api = S.api || ext.dataListsEngine?.page?.(); if (!api) return;
+    async function act(kind, rows, anchor, api0 = null) { // api0 : une page qui n'est pas celle du moteur (ex. une réponse de 📊 Récap)
+        const api = api0 || S.api || ext.dataListsEngine?.page?.(); if (!api) return;
         const d = api.d, st = api.state?.() || {};
         if (!rows.length) return;
         if ((kind === 'insert' || kind === 'basket') && kiosk()) return toast(RO());

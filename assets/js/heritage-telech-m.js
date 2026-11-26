@@ -501,11 +501,31 @@
                 src: compSrc(c) || (c.src === 'wp' ? (M[c.c]?.lists || [])[0] || '' : ''), source: c.src === 'wp' ? 'Wikipédia' : c.src === 'res' ? 'martj42' : 'Wikidata', winners: c.w.map(w => w[0])};
         });
     }
-    /* 🚲 le Tour de France : Éditions (une ligne par année) · Étapes (lues dans l8c-tour, avec leur vainqueur) · 🗺 Carte */
+    /* 🚲 le Tour de France : Éditions (une ligne par année) · Étapes (lues dans l8c-tour, avec leur vainqueur) · 🗺 Carte
+       (maquette validée docs/design/sport-tour-de-france.html, Décisions) */
+    const RETIRED = y => y >= 1999 && y <= 2005; // titres retirés (Armstrong) : pas de vainqueur, jamais un nom
+    const stagesShort = e => (e.prologue ? T('{n} + prologue', {n: String(e.n)}) : String(e.n));
+    /** 👪 « Dans la famille » d'une édition : le départ ou l'arrivée d'étape le plus proche d'un lieu de la famille, cette année-là
+        (LCNDA_EXT.listesFamille, calculé ici ; jamais une fiche confidentielle, pas les vivants en consultation) */
+    function editionFamily(e, LF, radius2) {
+        let best = null;
+        for (const st of e.stages) for (const [end, la, lo, town] of [['depart', st.ala, st.alo, st.a], ['arrivee', st.bla, st.blo, st.b]]) {
+            if (num(la) === null || num(lo) === null) continue;
+            const pr = LF.presence(Number(la), Number(lo), e.y, radius2); const w = pr.who[0]; if (!w) continue;
+            if (!best || w.km < best.w.km) best = {w, end, town, n: pr.who.length};
+        }
+        if (!best) return '';
+        const {w, end, town} = best, who = w.born ? T('{name} naît cette année-là', {name: w.n}) : w.age != null ? T('{name}, {age} ans', {name: w.n, age: String(w.age)}) : w.n;
+        return `${who} · ${T(end === 'depart' ? 'départ à {t}, à {k} km' : 'arrivée à {t}, à {k} km', {t: town, k: nf(Math.round(w.km))})}`;
+    }
     async function tourEditionRows() {
-        const [E, M] = await Promise.all([editions(), compMeta()]); void M;
-        return E.map(e => ({year: e.year ?? e.y, winner: e.retired ? T('titre retiré') : settings().winners ? e.winners.map(w => w[0]).join(', ') : '', stages: T(e.prologue ? '{n} étapes + prologue' : '{n} étapes', {n: String(e.n)}), parts: e.parts,
-            km: e.km, route: `${e.from} → ${e.to}`, date: e.d1, lat: num(e.stages.at(-1)?.bla), lon: num(e.stages.at(-1)?.blo), src: e.edwiki ? wp(e.edwiki) : wd(e.ed)}));
+        const [E, M] = await Promise.all([editions(), compMeta()]);
+        const LF = ext.listesFamille; if (LF) { try { await LF.ready(); } catch (_) {} }
+        const fr = LF ? LF.km() : 15;
+        return E.map(e => { const retired = e.retired || RETIRED(e.y);
+            return {year: e.year ?? e.y, comp: compLabel(M, 'tdf'), winner: retired ? T('titre retiré') : settings().winners ? e.winners.map(w => w[0]).join(', ') : '', retired: retired ? T('oui') : '',
+                stages: stagesShort(e), n: e.n, prologue: e.prologue, parts: e.parts, km: e.km, route: `${e.from} → ${e.to}`, date: e.d1, family: LF ? editionFamily(e, LF, fr) : '',
+                lat: num(e.stages.at(-1)?.bla), lon: num(e.stages.at(-1)?.blo), src: e.edwiki ? wp(e.edwiki) : wd(e.ed)}; });
     }
     async function tourStageRows() {
         const [S, W] = await Promise.all([rowsOf('tour'), stageWinners()]);
@@ -517,12 +537,15 @@
     (ext.dataLists = ext.dataLists || []).push(
         L('ts_competitions', 'ts-competitions', '🏆', 'Compétitions sportives : éditions et vainqueurs', 'sport', 'Wikidata (CC0) ; Wikipédia (CC BY-SA 4.0) ; martj42 (CC0)', 'https://www.wikidata.org/wiki/Wikidata:Copyright', 'competitions',
             competitionRows, [F('year', 'Année', 'year'), F('comp', 'Compétition', 'enum'), F('name', 'Édition'), F('place', 'Où', 'place'), F('winner', 'Vainqueur'), F('stages', 'Étapes et km'), F('extra', 'Finale'), F('source', 'Source', 'enum'), F('src', 'Lien', 'url')],
-            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], chips: 'comp', views: ['editions', 'etapes', 'carte'], defaultView: () => settings().view,
-                merge: {into: 'competitions', rank: 1, short: 'Wikidata', row: r => ({key: `${r.compId}|${r.year}`, date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.place, comp: r.comp, chip: r.compId, name: r.name, winner: r.winner, stages: r.stages, url: r.src, source: r.source})}}),
+            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], chips: 'comp', familyColumn: true, familyBefore: 'source',
+                merge: {into: 'competitions', rank: 2, short: 'Wikidata', row: r => ({key: `${r.compId}|${r.year}`, date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.place, comp: r.comp, chip: r.compId, name: r.name, winner: r.winner, stages: r.stages, url: r.src, source: r.source})}}),
         L('ts_tour', 'ts-competitions', '🚲', 'Tour de France : éditions, étapes et vainqueurs', 'sport', 'Wikidata (CC0)', 'https://www.wikidata.org/wiki/Q33881', 'competitions',
-            tourEditionRows, [F('year', 'Année', 'year'), F('winner', 'Maillot jaune'), F('stages', 'Étapes'), F('km', 'Distance (km)', 'number'), F('route', 'Parcours'), F('src', 'Source', 'url')],
-            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], familyColumn: true, defaultView: () => (settings().view === 'etapes' ? 'etapes' : 'editions'),
-                views: [{id: 'editions', label: 'Éditions', sub: r => ({view: 'etapes', preset: {crit: [{key: 'year', kind: 'range', from: r.year, to: r.year}]}, title: T('Tour de France {y}', {y: String(r.year)}), pickAll: 'Toutes ses étapes'})},
+            tourEditionRows, [F('year', 'Année', 'year'), F('winner', 'Maillot jaune'), F('stages', 'Étapes'), F('km', 'km', 'number'), F('route', 'Parcours'), F('family', 'Dans la famille'), F('retired', 'Titre retiré', 'enum', {hidden: true}), F('src', 'Source', 'url')],
+            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], familyColumn: true, defaultSort: ['year', 'desc'], defaultView: () => (settings().view === 'etapes' ? 'etapes' : 'editions'),
+                merge: {into: 'competitions', rank: 1, short: 'Wikidata', row: r => ({key: `tdf|${r.year}`, date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.route, comp: r.comp, chip: 'tdf', name: T('Tour de France {y}', {y: String(r.year)}), winner: r.winner,
+                    stages: `${T(r.prologue ? '{n} étapes + prologue' : '{n} étapes', {n: String(r.n)})}${r.km ? ` · ${nf(r.km)} km` : ''}`, url: r.src, source: 'Wikidata'})},
+                // Éditions : la colonne « Dans la famille » regarde TOUTES les étapes de l'édition (pas seulement l'arrivée finale) ; une ligne ouvre ses étapes
+                views: [{id: 'editions', label: 'Éditions', familyColumn: false, sub: r => ({view: 'etapes', preset: {crit: [{key: 'year', kind: 'range', from: r.year, to: r.year}], sort: 'date', dir: 'asc'}, title: T('Tour de France {y}', {y: String(r.year)}), pickAll: 'Toutes ses étapes'})},
                     {id: 'etapes', label: 'Étapes', load: tourStageRows, fields: [F('date', 'Date', 'date'), F('year', 'Année', 'year'), F('stage', 'Étape'), F('from', 'Départ', 'place'), F('to', 'Arrivée', 'place'), F('km', 'Distance (km)', 'number'), F('winner', 'Vainqueur d’étape'), F('yellow', 'Maillot jaune ce soir-là'), F('src', 'Source', 'url')], geo: r => [r.lat, r.lon], open: openSrc}]}),
         L('ts_matchs', 'ts-matchs', '⚽', 'Matchs internationaux de football (depuis 1872)', 'sport', 'martj42/international_results (CC0)', RES_URL, 'pres',
             async () => (await rowsOf('matchs')).rows.map(m => ({date: m.d, year: num(m.d.slice(0, 4)), home: m.h, score: `${m.hs}–${m.as}${m.so ? ` (${T('t.a.b.')} ${m.so})` : ''}`, away: m.a, tournament: T(m.t), t0: m.t, city: m.city, country: m.cty, lat: m.lat, lon: m.lon, src: RES_URL})),
@@ -544,8 +567,15 @@
             [F('name', 'Exposition'), F('year', 'Année', 'year'), F('kind', 'Genre', 'enum'), F('city', 'Ville', 'place'), F('country', 'Pays', 'enum'), F('visitors', 'Visiteurs', 'number'), F('note', 'Ce qu’en dit la source'), F('catalogue', 'Catalogue (Internet Archive)', 'url'), F('hand', 'Phrase choisie', 'enum'), F('src', 'Source', 'url')],
             {period: r => [r.year, r.end ?? r.year], geo: r => [r.lat, r.lon]}));
     // la liste réunie « 🔀 Compétitions sportives » (thème 🏆 Sport) — déclarée ici seulement si le moteur des thèmes ne l'a pas déjà
-    const MERGE = {id: 'competitions', theme: 'sport', icon: '🔀', label: T('Compétitions sportives'), noun: ['édition', 'éditions'], chips: 'comp', columns: ['year', 'comp', 'place', 'winner', 'stages'],
-        same: {by: 'key'}, keep: ['chip', 'name'], familyColumn: true, period: r => [r.year, r.year], geo: r => [r.lat, r.lon]};
+    //  une ligne = une édition d'une compétition ; même clé « compétition|année » (le Tour : ts_tour au rang 1, ts_competitions au rang 2) ; une pastille par compétition
+    const MERGE = {id: 'competitions', theme: 'sport', icon: '🏆', label: 'Compétitions sportives', noun: ['édition', 'éditions'], group: 'Le monde', chips: 'comp',
+        source: 'Wikidata (CC0) ; Wikipédia (CC BY-SA 4.0) ; martj42 (CC0)', keywords: ['tour de france', 'sport', 'jeux olympiques', 'coupe du monde', 'vainqueur'],
+        fields: [{key: 'year', label: 'Année', type: 'year'}, {key: 'comp', label: 'Compétition', type: 'enum'},
+            {key: 'place', label: 'Où', type: 'place', html: r => `${esc(r.place || '—')}${r.stages ? `<small class="ldr-sub">${esc(r.stages)}</small>` : ''}`},
+            {key: 'winner', label: 'Vainqueur', type: 'text'}, {key: 'stages', label: 'Étapes et km', type: 'text'}, {key: 'name', label: 'Édition', type: 'text'}, {key: 'sources', label: 'Sources'}],
+        hideCols: ['stages', 'name'], same: {by: 'key'}, keep: ['chip'], familyColumn: true, familyBefore: 'sources', defaultSort: ['year', 'desc'],
+        detail: [{key: 'name', label: 'Édition'}, {key: 'place', label: 'Où'}, {key: 'winner', label: 'Vainqueur'}, {key: 'stages', label: 'Étapes et km'}],
+        title: r => r.name || `${r.comp || ''} ${r.year || ''}`.trim(), period: r => [r.year, r.year], geo: r => [r.lat, r.lon]};
     const addMerge = () => { const M = ext.dataListMerges = ext.dataListMerges || []; if (!M.some(m => m.id === MERGE.id)) M.push(MERGE); };
     addMerge();
     if (root.document) document.addEventListener('DOMContentLoaded', () => { const M = ext.dataListMerges || []; const mine = M.filter(m => m.id === MERGE.id); if (mine.length > 1) M.splice(M.indexOf(MERGE), 1); }, {once: true});

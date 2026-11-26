@@ -6,7 +6,9 @@ declare(strict_types=1);
  * position, et qui y a vécu quand. Tout le calcul (qui vivait à moins de N km de ce séisme, de cette arrivée d'étape…)
  * se fait ensuite dans le navigateur : rien ne part sur Internet.
  *
- * GET api.php?action=ld_famille → {places: [[lat, lon, nom]], people: [[nom, naissance, décès, [[lieu, année]…]]]}
+ * GET api.php?action=ld_famille → {places: [[lat, lon, nom]], people: [[nom, naissance, décès, [[lieu, année]…], ancêtre direct (1/0)]]}
+ *  - ancêtre direct : la racine Sosa (Listes → SOSA, sinon la personne de départ) et ses ascendants (filtre « seulement les ancêtres
+ *    directs » de ▶ Dans le temps, assets/js/heritage-guerres-temps.js) ;
  *  - jamais une fiche confidentielle (persons.is_private) ni un événement confidentiel (events.is_private) ;
  *  - en mode consultation (et sur un appareil invité du wifi) : pas non plus les personnes vivantes ;
  *  - naissance, décès : années (null si inconnues) ; un événement de famille (mariage…) compte pour les deux époux.
@@ -48,7 +50,24 @@ function ld_famille(PDO $pdo): array
             if ($pl !== null) { $people[$p]['pl'][] = [$pl, $y]; }
         }
     }
+    $anc = ld_famille_ancetres($pdo);
     $out = [];
-    foreach ($people as $p) { if ($p['pl']) { $out[] = [$p['n'], $p['b'], $p['d'], $p['pl']]; } }
+    foreach ($people as $id => $p) { if ($p['pl']) { $out[] = [$p['n'], $p['b'], $p['d'], $p['pl'], isset($anc[$id]) ? 1 : 0]; } }
     return ['places' => $places, 'people' => $out, 'kiosk' => $kiosk];
+}
+
+/** la racine Sosa et ses ascendants : [id => true] */
+function ld_famille_ancetres(PDO $pdo): array
+{
+    $root = 0;
+    try { $root = (int) $pdo->query("SELECT value FROM app_settings WHERE key='genealogie-sosa-root'")->fetchColumn(); } catch (Throwable) {}
+    if (!$root) { $root = (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 ORDER BY id LIMIT 1')->fetchColumn(); }
+    if (!$root) { return []; }
+    $parents = [];
+    foreach ($pdo->query('SELECT fc.child_id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id') as $r) {
+        foreach (['partner1_id', 'partner2_id'] as $c) { if ($r[$c]) { $parents[(int) $r['child_id']][] = (int) $r[$c]; } }
+    }
+    $seen = [$root => true]; $queue = [$root];
+    while ($queue) { $p = array_pop($queue); foreach ($parents[$p] ?? [] as $a) { if (!isset($seen[$a])) { $seen[$a] = true; $queue[] = $a; } } }
+    return $seen;
 }

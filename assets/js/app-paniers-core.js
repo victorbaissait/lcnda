@@ -5,7 +5,9 @@
  *    Taille ; « puis par… » ; ↑↓) ; groupes repliables (Catégorie, Lieu, Personne, Source, Utilisé) ; l'ordre à la main n'est jamais touché ;
  *  - le résumé en une ligne, la recherche dans un panier, les doublons, « ⇄ Comparer », « Qu'est-ce qui manque ? » ;
  *  - la recherche qui crée un panier : une phrase → ce que j'ai compris (Qui · Quand / âge · Où + rayon · Quoi · Sources), ce que je n'ai pas
- *    compris ; les catégories ciel / terre / eau / mer / militaire / patrimoine → les listes de données de l'app (LCNDA_EXT.dataLists).
+ *    compris ; les catégories ciel / terre / eau / mer / militaire / patrimoine → les listes de données de l'app (LCNDA_EXT.dataLists) ;
+ *    chaque sorte a son thème des listes (theme : LCNDA_EXT.dataListThemes — themeOf, byTheme) et, s'il y en a une, sa liste réunie (merged :
+ *    prise quand aucune des listes de la sorte n'est installée).
  */
 (function (root, factory) {
     const m = factory();
@@ -97,22 +99,35 @@
     /* ═════ la recherche qui crée un panier ═════ */
     /* chaque sorte : son monde, son icône, ses mots, ses listes (LCNDA_EXT.dataLists : la première installée sert), local (autour du lieu) ou non */
     const SMART = [
-        {k: 'bat', w: 'militaire', icon: '⚔️', label: 'batailles et sièges', re: /bataill|siege|combat|guerre/, lists: ['ha_batailles'], local: true},
-        {k: 'reg', w: 'militaire', icon: '🎖️', label: 'régiments, gardes', re: /regiment|garnison|garde nationale|soldat/, lists: ['l8b_regiments_ville', 'l8b_regiments'], local: true},
-        {k: 'cas', w: 'militaire', icon: '🪖', label: 'casernes, fortifications', re: /caserne|fortif|rempart|citadelle/, lists: ['lp_merimee'], local: true, q: 'caserne fort tour rempart'},
-        {k: 'mon', w: 'militaire', icon: '🪦', label: 'monuments aux morts', re: /monument.{0,6}morts/, lists: ['pm_monuments'], local: true},
-        {k: 'com', w: 'ciel', icon: '☄️', label: 'comètes', re: /comete/, lists: ['ciel_cometes'], only: {kind: 'comète'}},
-        {k: 'aur', w: 'ciel', icon: '🌌', label: 'aurores', re: /aurore/, lists: ['ciel_cometes'], only: {kind: 'aurore'}},
-        {k: 'ecl', w: 'ciel', icon: '🌒', label: 'éclipses', re: /eclipse/, lists: ['eclipses'], near: true},
-        {k: 'cie', w: 'ciel', icon: '🌅', label: 'ciels étranges', re: /ciels? etrange|coucher/, lists: ['l8a_ciels']},
-        {k: 'sei', w: 'terre', icon: '🌍', label: 'séismes', re: /seisme|tremblement/, lists: ['hist_seismes'], local: true, km: 150},
-        {k: 'vol', w: 'terre', icon: '🌋', label: 'éruptions', re: /eruption|volcan/, lists: ['l10t_volcans']},
-        {k: 'tem', w: 'terre', icon: '🌪', label: 'tempêtes', re: /tempete|ouragan/, lists: ['hist_tempetes'], missingText: 'Les tempêtes : il n’y a pas encore de liste des tempêtes anciennes dans l’app.'},
-        {k: 'inn', w: 'eau', icon: '🌊', label: 'inondations, crues', re: /inondation|crue/, lists: ['hist_crues'], local: true, km: 30},
-        {k: 'mar', w: 'mer', icon: '🌊', label: 'grandes marées', re: /maree/, lists: ['l8a_marees', 'l8a_maree'], local: true, km: 30},
-        {k: 'chat', w: 'patrimoine', icon: '🏰', label: 'châteaux', re: /chateau/, lists: ['chateaux', 'cht_chateaux'], local: true},
-        {k: 'mh', w: 'patrimoine', icon: '🏛', label: 'monuments historiques', re: /monument historique|merimee|eglise/, lists: ['lp_merimee'], local: true},
+        {k: 'bat', theme: 'guerres', merged: 'reunie_batailles', w: 'militaire', icon: '⚔️', label: 'batailles et sièges', re: /bataill|siege|combat|guerre/, lists: ['ha_batailles'], local: true},
+        {k: 'reg', theme: 'guerres', w: 'militaire', icon: '🎖️', label: 'régiments, gardes', re: /regiment|garnison|garde nationale|soldat/, lists: ['l8b_regiments_ville', 'l8b_regiments'], local: true},
+        {k: 'cas', theme: 'guerres', w: 'militaire', icon: '🪖', label: 'casernes, fortifications', re: /caserne|fortif|rempart|citadelle/, lists: ['lp_merimee'], local: true, q: 'caserne fort tour rempart'},
+        {k: 'mon', theme: 'guerres', w: 'militaire', icon: '🪦', label: 'monuments aux morts', re: /monument.{0,6}morts/, lists: ['pm_monuments'], local: true},
+        {k: 'com', theme: 'ciel', w: 'ciel', icon: '☄️', label: 'comètes', re: /comete/, lists: ['ciel_cometes'], only: {kind: 'comète'}},
+        {k: 'aur', theme: 'ciel', w: 'ciel', icon: '🌌', label: 'aurores', re: /aurore/, lists: ['ciel_cometes'], only: {kind: 'aurore'}},
+        {k: 'ecl', theme: 'ciel', w: 'ciel', icon: '🌒', label: 'éclipses', re: /eclipse/, lists: ['eclipses'], near: true},
+        {k: 'cie', theme: 'ciel', w: 'ciel', icon: '🌅', label: 'ciels étranges', re: /ciels? etrange|coucher/, lists: ['l8a_ciels']},
+        {k: 'sei', theme: 'seismes', merged: 'reunie_seismes', w: 'terre', icon: '🌍', label: 'séismes', re: /seisme|tremblement/, lists: ['hist_seismes'], local: true, km: 150},
+        {k: 'vol', theme: 'seismes', merged: 'reunie_eruptions', w: 'terre', icon: '🌋', label: 'éruptions', re: /eruption|volcan/, lists: ['l10t_volcans']},
+        {k: 'tem', theme: 'ciel', w: 'terre', icon: '🌪', label: 'tempêtes', re: /tempete|ouragan/, lists: ['hist_tempetes'], missingText: 'Les tempêtes : il n’y a pas encore de liste des tempêtes anciennes dans l’app.'},
+        {k: 'inn', theme: 'eaux', merged: 'reunie_crues', w: 'eau', icon: '🌊', label: 'inondations, crues', re: /inondation|crue/, lists: ['hist_crues'], local: true, km: 30},
+        {k: 'mar', theme: 'eaux', w: 'mer', icon: '🌊', label: 'grandes marées', re: /maree/, lists: ['l8a_marees', 'l8a_maree'], local: true, km: 30},
+        {k: 'chat', theme: 'monuments', w: 'patrimoine', icon: '🏰', label: 'châteaux', re: /chateau/, lists: ['chateaux', 'cht_chateaux'], local: true},
+        {k: 'mh', theme: 'monuments', merged: 'reunie_monuments', w: 'patrimoine', icon: '🏛', label: 'monuments historiques', re: /monument historique|merimee|eglise/, lists: ['lp_merimee'], local: true},
     ];
+    /** 🗂 le thème d'une sorte (LCNDA_EXT.dataListThemes, app-listes-themes.js) : {id, icon, label} ; themes : le registre (sinon celui de la page) */
+    function themeOf(k, themes = null) {
+        const c = SMART.find(x => x.k === k); if (!c || !c.theme) return null;
+        const reg = Array.isArray(themes) ? themes : (typeof window !== 'undefined' && Array.isArray(window.LCNDA_EXT?.dataListThemes) ? window.LCNDA_EXT.dataListThemes : []);
+        const t = reg.find(x => x && x.id === c.theme);
+        return t ? {id: t.id, icon: t.icon, label: t.label} : {id: c.theme, icon: '', label: ''};
+    }
+    /** les sortes rangées par thème (l'ordre des thèmes du registre) : [{theme, kinds: [k…]}] */
+    function byTheme(themes = null) {
+        const out = [];
+        SMART.forEach(c => { const t = themeOf(c.k, themes) || {id: '', icon: '', label: ''}; let g = out.find(x => x.theme.id === t.id); if (!g) out.push(g = {theme: t, kinds: []}); g.kinds.push(c.k); });
+        return out;
+    }
     const WORLDS = {militaire: /milit|guerre|armee/, ciel: /\bciel\b|dans le ciel/, terre: /sur terre|\bterre\b/, eau: /\beau\b|riviere/, mer: /\bmer\b|ocean/, patrimoine: /patrimoine/};
     const TREE = [['nai', /naissance|bapteme|\bnes\b|\bnee?s?\b/, ['BIRT', 'BAPM', 'CHR'], '👶 naissances, baptêmes'], ['mar', /mariage|maries/, ['MARR'], '💍 mariages'], ['dec', /deces|morts?\b|sepulture|inhum/, ['DEAT', 'BURI'], '🕯 décès, sépultures']];
     const STOPW = new Set('de du des la le les l d a au aux en et ou dans sur pour avec autour pres km entre ans an annee annees ce qu qui que quoi a pu voir vu enfant famille naissances naissance mariages deces les evenements evenement militaires militaire ciel mer terre chateau'.split(' '));
@@ -175,11 +190,62 @@
         const end = new Date(Date.UTC(y + age[1] + 1, m - 1, d) - 864e5);
         return {from, to: end.toISOString().slice(0, 10), y1: y + age[0], y2: end.getUTCFullYear()};
     }
+    /* ═════ 📊 la question sur les données (app-donnees-accueil.js) : la même lecture de la phrase, élargie aux mots des 20 thèmes ═════
+     * parseData(q, {themes}) → ce que parseSmart comprend (qui, âge, années, km, autour de…) et en plus :
+     *   themes [{id, word}] (les thèmes nommés, le plus sûr d'abord), kmTyped, family (« près des lieux de la famille »), life (« pendant
+     *   sa vie »), wedding (« le jour de son mariage »), familyOnly (une question sur la famille seulement : à poser dans 🔍 Recherche),
+     *   left (les mots qui comptent et que je n'ai pas lus), nope (dit honnêtement). Rien n'est cherché ici. */
+    const KIN_RE = / (?:enfants?|fils|filles?|freres?|soeurs?|parents|peres?|meres?|cousins?|cousines?|oncles?|tantes?|neveux?|nieces?|ancetres|descendants?|epoux|epouse|mari|femme|grands?-parents|petits?-enfants|parrain|marraine|heritiers) (?:de|du|des|d) /;
+    const DATA_STOP = new Set(('quel quels quelle quelles quand qui quoi comment combien pourquoi est il elle ils elles son sa ses leur leurs avait avaient etait etaient vivait vivaient lieux lieu vie vivant jour moins plus tous toutes tout '
+        + 'les une un mon ma mes notre nos votre vos ont fait faisait passe passes gens montre montrer liste listes donnees cherche chercher trouve trouver voir depuis apres avant vers pendant durant '
+        + 'janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre siecle cette annee celle celui ceux celles').split(' '));
+    function parseData(q, {themes = []} = {}) {
+        const u = parseSmart(q), text = u.text;
+        const f = ' ' + fold(text).replace(/[’']/g, ' ').replace(/[,;:!?()«»"]/g, ' ').replace(/\s+/g, ' ') + ' ';
+        let m;
+        u.kmTyped = u.km != null;
+        if (!u.age && (m = f.match(/ (?:avait|avaient|a eu|ayant|aura) (\d{1,3}) ans /))) u.age = [Number(m[1]), Number(m[1])];
+        if (!u.years && (m = f.match(/ vers (\d{4}) /))) u.years = [Number(m[1]) - 5, Number(m[1]) + 5];
+        if (!u.years && (m = f.match(/ (?:depuis|apres) (\d{4}) /))) u.years = [Number(m[1]), new Date().getFullYear()];
+        if (!u.years && (m = f.match(/ avant (\d{4}) /))) u.years = [Math.max(0, Number(m[1]) - 200), Number(m[1])];
+        u.family = / lieux de (?:la |ma |notre |leur )?famille | (?:pres|autour) de (?:ma|notre) famille /.test(f);
+        if (u.family && u.around && /famille|lieux/.test(fold(u.around.name))) u.around = null;
+        if (u.family && u.place && /famille|lieux/.test(fold(u.place.name))) u.place = null;
+        if (!u.around && !u.family && (m = f.match(/ (?:pres|aupres|non loin|tout pres) (?:de la |de l |du |des |de |d )([a-z][a-z' -]*?)(?= entre | en \d| de \d| depuis | pendant | quand | avant | apres | vers | du vivant | dans | $)/))) u.around = {name: restore(text, m[1].trim())};
+        u.life = / (?:pendant|durant|de) (?:la|sa|toute sa|leur) vie | du vivant | de son vivant /.test(f);
+        u.wedding = / (?:jour|date) (?:du|de son|de leur) mariage /.test(f);
+        if (u.wedding) u.tree = null;
+        // les noms (personne, lieu) ne comptent pas comme des mots de thème
+        const names = [u.who?.name, u.surname, u.place?.name, u.around?.name].filter(Boolean).map(x => fold(x).replace(/[’']/g, ' '));
+        let g = f; names.forEach(n => { g = g.split(` ${n} `).join(' · '); });
+        const hits = [];
+        (Array.isArray(themes) ? themes : []).forEach((t, ti) => {
+            if (!t || !t.id) return;
+            let best = '';
+            for (const w0 of t.words || []) {
+                const w = fold(w0).replace(/[’']/g, ' ').trim(); if (w.length < 3) continue;
+                const ok = w.length <= 4 ? new RegExp(` ${w}s? `).test(g) : g.includes(` ${w}`);
+                if (ok && w.length > best.length) best = w;
+            }
+            if (best) hits.push({id: t.id, word: best, ti});
+        });
+        u.themes = hits.sort((a, b) => b.word.length - a.word.length || a.ti - b.ti).map(({id, word}) => ({id, word}));
+        if (!u.themes.length) u.cats.forEach(k => { const c = SMART.find(x => x.k === k); if (c?.theme && !u.themes.some(x => x.id === c.theme)) u.themes.push({id: c.theme, word: c.label}); });
+        u.familyOnly = !u.themes.length && (KIN_RE.test(f) || !!u.tree || ((!!u.who || !!u.surname) && !u.around && !u.family));
+        const used = u.themes.map(x => x.word);
+        u.left = fold(text).replace(/[’']/g, ' ').split(/[^a-z0-9]+/).filter(w => w.length > 3 && !STOPW.has(w) && !DATA_STOP.has(w) && !/^\d+$/.test(w) && !(u.wedding && /^mariage/.test(w))
+            && !names.some(n => n.split(/[\s-]+/).includes(w)) && !used.some(x => x.split(' ').some(p => p.length > 3 && (w.startsWith(p) || p.startsWith(w))))
+            && !(themes || []).some(t => (t?.words || []).some(x => { const p = fold(x); return p.length > 3 && !p.includes(' ') && w.startsWith(p); })) && !/^(km|ans?)$/.test(w));
+        u.nope = [];
+        if (u.left.length && !u.familyOnly) u.nope.push({k: 'left', words: u.left.slice(0, 6)});
+        if (!u.themes.length && !u.familyOnly) u.nope.push({k: 'what'});
+        return u;
+    }
     /** un nom et ses variantes simples (LACOMBE, LACOMBES, LA COMBE) */
-    const nameKey = s => fold(s).replace(/[^a-z]/g, '').replace(/s$/, '');
+    const nameKey =s => fold(s).replace(/[^a-z]/g, '').replace(/s$/, '');
     const nameMatch = (a, b) => { const x = nameKey(a), y = nameKey(b); return !!x && !!y && (x === y || (x.length > 4 && (x.startsWith(y) || y.startsWith(x)) && Math.abs(x.length - y.length) <= 1)); };
     const km = (a, b, c, d) => { const R = Math.PI / 180, x = Math.sin((c - a) * R / 2) ** 2 + Math.cos(a * R) * Math.cos(c * R) * Math.sin((d - b) * R / 2) ** 2; return 12742 * Math.asin(Math.sqrt(x)); };
 
     return {fold, STATUSES, statusOf, nextStatus, CATS, catOf, yearOf, placeOf, personOf, sourceOf, kmOf, sizeOf, SORTS, normSort, arrange, sortLabel, GROUP,
-        summary, findIn, dupKey, sameKey, compare, missing, SMART, WORLDS, TREE, parseSmart, ageSpan, nameMatch, km};
+        summary, findIn, dupKey, sameKey, compare, missing, SMART, WORLDS, TREE, parseSmart, ageSpan, nameMatch, km, themeOf, byTheme, parseData};
 });

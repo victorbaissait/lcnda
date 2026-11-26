@@ -276,7 +276,7 @@
             const xs = [], ys = [];
             this.points.forEach(p => { xs.push(p.x); ys.push(p.y); });
             this.paths.forEach(p => p.n.forEach(c => { xs.push(c[0]); ys.push(c[1]); }));
-            this.circles.forEach(c => c.n.forEach(q => { xs.push(q[0]); ys.push(q[1]); }));
+            this.circles.forEach(c => { if (!c.nofit) c.n.forEach(q => { xs.push(q[0]); ys.push(q[1]); }); }); // nofit : un cercle de décor (les lieux de la famille) ne cadre pas la carte
             if (!xs.length) { this.view = {cx: 0.5, cy: 0.5, z: this.minZ()}; this.fitZoom = this.view.z; return this.render(now); }
             // le plus petit intervalle de longitudes (en passant éventuellement par le 180e méridien)
             const sx = xs.map(x => ((x % 1) + 1) % 1).sort((a, b) => a - b);

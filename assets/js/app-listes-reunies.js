@@ -10,7 +10,8 @@
  *      fields: [...], hideCols: [...], period, geo, familyColumn, familyKm, chips, views,   // comme une liste
  *      diff: [{key: 'mag', abs: 0.5}, {key: 'dead', ratio: 2}],                             // « ⚖ 2 avis » quand les sources s'écartent
  *      detail: [{key, label, fmt?}],                                                         // ce que dit chaque source, ligne ouverte
- *      sources: [{list: 'hist_seismes', rank: 2, short: 'EPICA', sub: 'Europe 1000–1899', when?: r => bool, row: r => ({date, year, lat, lon, …, url})}],
+ *      sources: [{list: 'hist_seismes', rank: 2, short: 'EPICA', sub: 'Europe 1000–1899', when?: r => bool, row: r => ({date, year, lat, lon, …, url}),
+ *                 lazy?, preset? (les critères pour une grande liste lue par query), many? (plusieurs lignes de cette source dans une ligne réunie)}],
  *    });
  *  Une liste peut aussi rejoindre une liste réunie d'elle-même : `merge: {into: 'seismes', rank: 1, short: 'SisFrance', when?, row}`
  *  (ou un tableau de merge, une par sorte : NOAA donne des séismes ET des éruptions).
@@ -19,7 +20,8 @@
  *  « ✂ Ce ne sont pas les mêmes » sépare une ligne réunie : retenu (localStorage « genealogie-listes-reunies-separes », gardé aussi
  *  dans la base), ↶ Annuler ; Réglages → 🧰 Listes de données → « ↺ Tout réunir à nouveau ».
  *  Rapide : une seule passe ; les candidats viennent d'un index par jour (± days) ou par année, puis la distance — jamais tout contre tout.
- *  Les listes réunies à venir (crues, batailles, édifices, anciens noms, soldats, prénoms, compétitions) : seulement une déclaration.
+ *  Les autres listes réunies (éruptions, crues, batailles, monuments, soldats ; compétitions : heritage-telech-m.js) sont seulement déclarées :
+ *  app-listes-reunies-plus.js. `same.by` peut être un tableau de clés (même valeur pour l'une OU l'autre : ex. ['qid', 'merimee']).
  *  API : LCNDA_EXT.listesReunies = {merge(M, sources) (sans écran, pour les essais), build(id), reset(), defs()}
  *  Essai : tests/test-listes-themes.js
  */
@@ -63,16 +65,17 @@
      * Une passe : on prend les lignes de la meilleure source d'abord ; chacune rejoint la ligne réunie la plus proche parmi celles
      * du même jour (± days) et à moins de km, qui n'a pas encore de ligne de la même source, et dont aucune n'en a été séparée. */
     function merge(M, recs, apart = new Set()) {
-        const same = M.same || {}, KM = Number(same.km) || 50, DAYS = Number.isFinite(Number(same.days)) ? Number(same.days) : 1, BY = same.by || '';
+        const same = M.same || {}, KM = Number(same.km) || 50, DAYS = Number.isFinite(Number(same.days)) ? Number(same.days) : 1, BYS = [].concat(same.by || []).filter(Boolean), BY = BYS.length > 0; // by : une clé, ou plusieurs (ex. ['qid', 'merimee'] : l'une OU l'autre)
+        const vOf = (x, k) => { const v = x.rec[k]; return v == null || v === '' ? '' : `${k}=${v}`; };
         const prepared = recs.map(x => { const p = parseDate(x.rec.date, x.rec.year), lat = num(x.rec.lat), lon = num(x.rec.lon); return {...x, year: p.year, dn: p.dn, lat, lon, geo: lat != null && lon != null && !(lat === 0 && lon === 0)}; });
         prepared.sort((a, b) => (a.src.rank || 9) - (b.src.rank || 9) || (a.dn == null) - (b.dn == null) || (a.year ?? 0) - (b.year ?? 0));
         const clusters = [], byDay = new Map(), byYear = new Map(), byKey = new Map();
         const push = (m, k, i) => { const l = m.get(k); if (l) l.push(i); else m.set(k, [i]); };
-        const okWith = (c, x) => !c.srcs.has(x.src.id) && !c.members.some(m => apart.has(pair(m.key, x.key)));
+        const okWith = (c, x) => (x.src.many || !c.srcs.has(x.src.id)) && !c.members.some(m => apart.has(pair(m.key, x.key))); // many : une source qui a plusieurs lignes du même événement (ex. les repères d'une crue)
         const dist = (c, x) => (c.geo && x.geo ? km(c.lat, c.lon, x.lat, x.lon) : Infinity);
         for (const x of prepared) {
             let best = -1;
-            if (BY) { const v = x.rec[BY]; if (v != null && v !== '') { const l = byKey.get(String(v)) || []; best = l.find(i => okWith(clusters[i], x)) ?? -1; } }
+            if (BY) { for (const k of BYS) { const v = vOf(x, k); if (!v) continue; best = (byKey.get(v) || []).find(i => okWith(clusters[i], x)) ?? -1; if (best >= 0) break; } }
             else if (x.dn != null && x.geo) {
                 let bd = Infinity;
                 for (let d = x.dn - DAYS; d <= x.dn + DAYS; d++) for (const i of byDay.get(d) || []) { const c = clusters[i], k = dist(c, x); if (k < KM && k < bd && okWith(c, x)) { bd = k; best = i; } }
@@ -80,10 +83,10 @@
                 const cands = (byYear.get(x.year) || []).filter(i => dist(clusters[i], x) < KM && okWith(clusters[i], x));
                 if (cands.length === 1) best = cands[0];
             }
-            if (best >= 0) { const c = clusters[best]; c.members.push(x); c.srcs.add(x.src.id); if (!c.geo && x.geo) Object.assign(c, {lat: x.lat, lon: x.lon, geo: true}); if (c.dn == null && x.dn != null) { c.dn = x.dn; push(byDay, x.dn, best); } continue; }
+            if (best >= 0) { const c = clusters[best]; c.members.push(x); if (BY) BYS.forEach(k => { const v = vOf(x, k); if (v && !(byKey.get(v) || []).includes(best)) push(byKey, v, best); }); c.srcs.add(x.src.id); if (!c.geo && x.geo) Object.assign(c, {lat: x.lat, lon: x.lon, geo: true}); if (c.dn == null && x.dn != null) { c.dn = x.dn; push(byDay, x.dn, best); } continue; }
             const i = clusters.length;
             clusters.push({members: [x], srcs: new Set([x.src.id]), lat: x.lat, lon: x.lon, geo: x.geo, dn: x.dn, year: x.year});
-            if (BY) { const v = x.rec[BY]; if (v != null && v !== '') push(byKey, String(v), i); }
+            if (BY) BYS.forEach(k => { const v = vOf(x, k); if (v) push(byKey, v, i); });
             if (x.dn != null) push(byDay, x.dn, i);
             if (x.year != null) push(byYear, x.year, i);
         }
@@ -92,7 +95,7 @@
             const ms = c.members.sort((a, b) => (a.src.rank || 9) - (b.src.rank || 9)), out = {_k: ms[0].key, _members: ms.map(m => ({src: m.src, key: m.key, rec: m.rec}))};
             for (const k of keys) { const m = ms.find(x => x.rec[k] != null && x.rec[k] !== ''); out[k] = m ? m.rec[k] : null; }
             if (out.year == null && c.year != null) out.year = c.year; // l'année : celle de la date quand la source ne la donne pas à part
-            out.sources = ms.map(m => m.src.short);
+            out.sources = [...new Set(ms.map(m => m.src.short))];
             out._diff = (M.diff || []).some(df => { const vs = ms.map(m => num(m.rec[df.key])).filter(v => v != null); if (vs.length < 2) return false; const lo = Math.min(...vs), hi = Math.max(...vs); return df.abs != null ? hi - lo > df.abs : df.ratio != null ? lo > 0 && hi / lo >= df.ratio : false; });
             try { M.finish?.(out); } catch (_) {}
             return out;
@@ -146,7 +149,7 @@
             if (later.length) Promise.all(later.map(s => rowsOfSource(s).catch(() => []))).then(() => { built.delete(id); E().forget?.(`reunie_${id}`); const pg = E().page?.(); if (pg?.base?.id === `reunie_${id}`) pg.refresh(); });
             await Promise.all(now.map(async s => {
                 let rows = []; try { rows = await rowsOfSource(s); } catch (e) { console.error(e); }
-                const src = {id: s.id, list: s.list, short: s.short || T(s.d.label), sub: s.sub || '', rank: s.rank || 9, label: T(s.d.label), url: s.d.sourceUrl || ''};
+                const src = {id: s.id, list: s.list, short: s.short || T(s.d.label), sub: s.sub || '', rank: s.rank || 9, label: T(s.d.label), url: s.d.sourceUrl || '', many: !!s.many};
                 let n = 0;
                 rows.forEach((r, i) => { try { if (s.when && !s.when(r)) return; const rec = s.row(r); if (!rec) return; const key = `${s.list}:${rec.key ?? r.id ?? r.qid ?? `${rec.date ?? rec.year}|${num(rec.lat)?.toFixed(2)}|${num(rec.lon)?.toFixed(2)}|${i}`}`; recs.push({src, key, rec}); n++; } catch (_) {} });
                 per[src.short] = n;
@@ -160,7 +163,7 @@
     function reset(id = '') { for (const k of [...built.keys()]) if (!id || k === id) built.delete(k); MERGES().forEach(M => { if (!id || M.id === id) E().forget?.(`reunie_${M.id}`); }); }
 
     /* ═════════════ la liste (enregistrée dans le moteur commun) ═════════════ */
-    const srcLinks = row => (row._members || []).map(m => { const u = m.rec.url || m.src.url; return `<span class="ldr-src">${u && /^https?:\/\//i.test(u) ? `<a href="${esc(A().safeUrl ? A().safeUrl(u) : u)}" target="_blank" rel="noopener noreferrer" title="${esc(T('La fiche de cette source'))} — ${esc(m.src.label)}">${esc(m.src.short)} ↗</a>` : esc(m.src.short)}</span>`; }).join(' ');
+    const srcLinks = row => (row._members || []).filter((m, i, a) => a.findIndex(x => x.src.id === m.src.id) === i).map(m => { const u = m.rec.url || m.src.url; return `<span class="ldr-src">${u && /^https?:\/\//i.test(u) ? `<a href="${esc(A().safeUrl ? A().safeUrl(u) : u)}" target="_blank" rel="noopener noreferrer" title="${esc(T('La fiche de cette source'))} — ${esc(m.src.label)}">${esc(m.src.short)} ↗</a>` : esc(m.src.short)}</span>`; }).join(' ');
     function defOf(M) {
         const id = `reunie_${M.id}`;
         return {id, merged: true, mergeId: M.id, theme: M.theme, icon: M.icon || '🔀', label: M.label, group: M.group || 'Le monde', source: M.source || '', sourceUrl: M.sourceUrl || '',
