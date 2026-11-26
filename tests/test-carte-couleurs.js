@@ -171,6 +171,23 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             Object.entries(await legendColors(p)).forEach(([k, c]) => assert.strictEqual(c, rgb(ok[k]), k));
         });
 
+        await t('superposition et animation : mêmes couleurs de sortes (et légende)', async () => {
+            const ok = KC.PRESETS.find(x => x[0] === 'daltonien')[2];
+            for (const mode of ['overlay', 'timeline']) {
+                await p.evaluate(m => { const A = window.LCNDA_APP; A.state.mapMode = m; A.setModule('carte'); }, mode);
+                await p.waitForSelector('#map-stage'); await waitRender(p);
+                await p.evaluate(() => { const A = window.LCNDA_APP; A.state.mapCenter = {lat: 45.6, lon: 2.6}; A.state.mapZoom = 8; window.LCNDA_PARTS.drawMap(); }); await sleep(200);
+                const kc = await kindColors(p); assert.ok(kc.length >= 1, mode + ' : points');
+                kc.forEach(([, k, c]) => assert.strictEqual(c, ok[k], mode + ' ' + k));
+                Object.entries(await legendColors(p)).forEach(([k, c]) => assert.strictEqual(c, rgb(ok[k]), mode + ' légende ' + k));
+                if (mode === 'timeline') {
+                    const cur = await p.$$eval('#map-overlay .map-marker.is-current[data-kc]', e => e.map(x => [x.dataset.kc, getComputedStyle(x).backgroundColor]));
+                    cur.forEach(([k, bg]) => assert.strictEqual(bg, rgb(ok[k]), 'animation, lieu du moment ' + k));
+                }
+            }
+            await toMap(p, 8, {cluster: false});
+        });
+
         await t('formes différentes par sorte : points, légende, carte d’une fiche et export', async () => {
             await p.evaluate(() => window.LCNDA_CARTE_COULEURS.setShapes(true)); await sleep(200);
             const shp = await p.$$eval('#map-overlay .map-marker.is-shape', els => els.map(e => [e.dataset.kc, e.querySelector('svg.kc-shape path')?.getAttribute('d')]));
@@ -193,12 +210,13 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             // carte d'une fiche
             await p.evaluate(async id => { const A = window.LCNDA_APP; A.state.currentPersonId = id; await A.setModule('personnes'); await A.selectPerson(id); }, ID.jean);
             const got = await p.waitForSelector('.person-map-point[data-kc]', {timeout: 15000}).then(() => true, () => false);
-            if (got) {
+            assert.ok(got, 'la carte de la fiche de Jean MAZAUD');
+            {
                 const pts = await p.$$eval('.person-map-point[data-kc]', g => g.map(x => [x.dataset.kc, x.style.getPropertyValue('--event-color').trim(), !!x.querySelector('.kc-pm-shape')]));
                 pts.forEach(([k, c, s]) => { assert.strictEqual(c, KC.PRESETS.find(x => x[0] === 'daltonien')[2][k], k); assert.ok(s, 'forme'); });
                 await p.evaluate(() => window.LCNDA_CARTE_COULEURS.setShapes(false)); await sleep(100);
                 assert.ok(await p.$$eval('.person-map-point[data-kc]', g => g.every(x => x.querySelector('rect') && !x.querySelector('.kc-pm-shape'))), 'losanges de nouveau');
-            } else console.log('  DEBUG', await p.evaluate(() => [window.LCNDA_APP.state.module, !!document.querySelector('.person-event-map'), document.querySelector('.person-event-map')?.outerHTML.slice(0, 300), [...document.querySelectorAll('[data-person-block], [data-block-key]')].map(x => x.dataset.personBlock || x.dataset.blockKey).join(',')]));
+            }
             await p.evaluate(() => window.LCNDA_CARTE_COULEURS.setShapes(false));
         });
 

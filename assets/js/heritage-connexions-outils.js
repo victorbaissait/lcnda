@@ -261,7 +261,7 @@
     /* ═════════ 🧺 clic droit sur TOUT élément de l'app (une fiche, un événement, un média, un lieu, un acte…) : un seul écouteur ═════════
      *  Les écrans marquent déjà leurs lignes et cartes : data-open-person="12", data-event-id="40", data-media-id="3", data-place="5"…
      *  Le menu (clic droit, ou ⋯ d'une ligne) gagne « 🧺 Prendre « … » » et « 📍 Mettre « … » dans… », l'élément gardé AVEC SA SORTE et son numéro. */
-    const ENT_RX = /^data-(?:[a-z]+-)*?(person|event|media|place|act|source)(?:-(?:id|card-id|card|block|journal))?$/, ENT_NO = /remove|delete|unlink|del-|-del|detach|tab|lat|lon|index|-i$|map-|view-|census/;
+    const ENT_RX = /^data-(?:[a-z]+-)*?(person|event|media|place|act|source)(?:-(?:id|card-id|card|block|journal))?$/, ENT_NO = /remove|delete|unlink|del-|-del|detach|tab|lat|lon|index|-i$|map-|view-|census|add-|new-|(person|event|media|place|act|source)-(?:[a-z]+-)*(person|event|media|place|act|source)/; // « ajouter une source à l'événement 3 » n'est pas la source 3
     const KIND_OF = {person: 'person', event: 'event', media: 'media', place: 'place', act: 'act', source: 'source'};
     function entityAt(target) {
         const root = target.closest('#workspace, dialog[open], .cx-qi'); if (!root || root.matches('.cx-qi') || target.closest('.cx-modal, .cx-panel, [data-ctx-off]')) return null;

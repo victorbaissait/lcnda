@@ -72,15 +72,17 @@
         KEYS.forEach(k => { colors[k] = hex(v.colors?.[k]) || DEFAULT[k]; shape[k] = PATHS[v.shape?.[k]] ? v.shape[k] : DEFAULT_SHAPE[k]; });
         return {colors, shapes: !!v.shapes, shape, preset: PRESETS.some(p => p[0] === v.preset) ? v.preset : ''};
     }
-    let cache = null;
+    let cache = null, cacheRaw = undefined;
+    /** relu à chaque fois (les réglages du site peuvent arriver après le chargement), recalculé seulement s'il a changé */
     function read() {
-        if (cache) return cache;
-        let raw = null; try { raw = JSON.parse(ls()?.getItem(KEY) || 'null'); } catch (_) { raw = null; }
-        return (cache = clean(raw));
+        let txt = null; try { txt = ls()?.getItem(KEY) ?? null; } catch (_) { txt = null; }
+        if (cache && txt === cacheRaw) return cache;
+        let raw = null; try { raw = JSON.parse(txt || 'null'); } catch (_) { raw = null; }
+        cacheRaw = txt; return (cache = clean(raw));
     }
     function write(v, {silent = false, live = false} = {}) {
-        const c = clean(v); cache = c;
-        try { const s = ls(); if (s) { if (isDefault(c)) s.removeItem(KEY); else s.setItem(KEY, JSON.stringify(c)); } } catch (_) {}
+        const c = clean(v); cache = c; cacheRaw = null;
+        try { const s = ls(); if (s) { if (isDefault(c)) s.removeItem(KEY); else { cacheRaw = JSON.stringify(c); s.setItem(KEY, cacheRaw); } } } catch (_) {}
         if (!silent) refresh({live});
         return c;
     }
