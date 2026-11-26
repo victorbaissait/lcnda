@@ -1,0 +1,100 @@
+# 🌉 Le pays au XIXe siècle (lot F) : refaire assets/data/tf-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🗺 tf-osm-cocher, tf-osm-forges, tf-osm-salines : OpenStreetMap (ODbL 1.0) par Overpass — injoignable depuis l'atelier de
+#    développement, d'où ce travail ici (quoi = osm).
+#  - 🎈 tf-ballons, 🌹 tf-rosieres, 🔔 tf-silence : Wikipédia (CC BY-SA 4.0, texte de la page lu une fois) + Wikidata (CC0) ;
+#    🌉 tf-ponts, ⚒ tf-forges, 🧂 tf-salines, 🏅 tf-montyon : Wikidata (CC0) ; 🥕 tf-potager : Wikisource (livre de 1883, domaine
+#    public) ; 🌋 tf-volcans : NOAA NCEI (Crowley et Unterman 2013, Gao et al. 2008 ; données libres, à citer).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Le pays au XIXe siècle (lot F) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Le pays au XIXe siècle (lot F)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, osm, ballons, rosieres, silence, ponts, industrie, montyon, potager ou volcans'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-f.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-f-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TF_RAW=$RUNNER_TEMP/tf-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/tf-cache
+          key: telech-f-${{ github.run_id }}
+          restore-keys: telech-f-
+      - name: "🗺 OpenStreetMap : plaques de cocher, forges, salines"
+        if: env.QUOI == 'tout' || env.QUOI == 'osm'
+        timeout-minutes: 150
+        run: python3 -I scripts/telech-f/build_osm.py assets/data
+      - name: "🎈 Ballons montés du siège de Paris"
+        if: env.QUOI == 'tout' || env.QUOI == 'ballons'
+        run: python3 -I scripts/telech-f/build_ballons.py assets/data
+      - name: "🌹 Rosières"
+        if: env.QUOI == 'tout' || env.QUOI == 'rosieres'
+        run: python3 -I scripts/telech-f/build_rosieres.py assets/data
+      - name: "🔔 Le silence d’autrefois (phrases vérifiées)"
+        if: env.QUOI == 'tout' || env.QUOI == 'silence'
+        run: python3 -I scripts/telech-f/build_silence.py assets/data
+      - name: "🌉 Ponts suspendus"
+        if: env.QUOI == 'tout' || env.QUOI == 'ponts'
+        run: python3 -I scripts/telech-f/build_ponts.py assets/data
+      - name: "⚒ 🧂 Forges et salines (Wikidata)"
+        if: env.QUOI == 'tout' || env.QUOI == 'industrie'
+        run: python3 -I scripts/telech-f/build_industrie.py assets/data
+      - name: "🏅 Prix de vertu Montyon"
+        if: env.QUOI == 'tout' || env.QUOI == 'montyon'
+        run: python3 -I scripts/telech-f/build_montyon.py assets/data
+      - name: "🥕 Le potager de 1883 (Wikisource)"
+        if: env.QUOI == 'tout' || env.QUOI == 'potager'
+        run: python3 -I scripts/telech-f/build_potager.py assets/data
+      - name: "🌋 Les années de ciel voilé (NOAA)"
+        if: env.QUOI == 'tout' || env.QUOI == 'volcans'
+        run: python3 -I scripts/telech-f/build_volcans.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/tf-cache
+          key: telech-f-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/tf-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Le pays au XIXe siècle (lot F) : données refaites sur GitHub (OpenStreetMap ODbL, Wikidata CC0, Wikipédia CC BY-SA 4.0…)"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done
