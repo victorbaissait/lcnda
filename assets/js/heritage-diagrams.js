@@ -87,9 +87,9 @@
     async function fillEmbed(box) {
         box.dataset.dgDone = '1';
         const d = await get(box.dataset.dgEmbed).catch(() => null);
-        if (!d) { box.innerHTML = '<p class="muted">Diagramme introuvable (supprimé ?).</p>'; return; }
+        if (!d) { const tr = await inTrash(box.dataset.dgEmbed); box.innerHTML = tr ? trashedHtml(tr) : '<p class="muted">Diagramme introuvable (supprimé ?).</p>'; return; }
         const shown = await resolveLive(specOf(d));
-        box.innerHTML = `<div class="h-dg-svg">${drawSpec(shown)}</div>${box.hasAttribute('data-dg-notools') ? '' : `<div class="h-dg-embedtools"><button type="button" class="link-button" data-dg-open="${d.id}" title="L’ouvrir en grand dans Graphiques">↗ Ouvrir</button><button type="button" class="link-button" data-dg-edit="${d.id}">✎ Modifier</button></div>`}`;
+        box.innerHTML = `<div class="h-dg-svg">${drawSpec(shown)}</div>${box.hasAttribute('data-dg-notools') ? '' : `<div class="h-dg-embedtools"><button type="button" class="link-button" data-dg-open="${d.id}" title="${esc(tabOn() ? i18n('L’ouvrir en grand dans 📈 Diagrammes') : 'L’ouvrir en grand dans Graphiques')}">↗ Ouvrir</button><button type="button" class="link-button" data-dg-edit="${d.id}">✎ Modifier</button></div>`}`;
         ext.diagramPerso?.mount(box.querySelector('.h-dg-svg'), shown); // ▶ curseur des années, si le diagramme le demande
         ext.diagramData?.afterEmbed?.(box, shown); // 📊 les sources et leurs licences, avec ↗ vers la liste d'origine
     }
@@ -103,12 +103,31 @@
         fillT = setTimeout(() => { fillT = 0; if (document.querySelector(DG_SEL)) { fillAll(); fillHosts(); } }, 60);
     }).observe(document.documentElement, {childList: true, subtree: true});
     document.addEventListener('click', e => {
-        const op = e.target.closest?.('[data-dg-open]'); if (op) { e.preventDefault(); openInGraphs(Number(op.dataset.dgOpen)); return; }
-        const ed = e.target.closest?.('[data-dg-edit]'); if (ed) { e.preventDefault(); openEditor(Number(ed.dataset.dgEdit)); }
+        const op = e.target.closest?.('[data-dg-open]'); if (op) { e.preventDefault(); openDiagram(Number(op.dataset.dgOpen)); return; }
+        const ed = e.target.closest?.('[data-dg-edit]'); if (ed) { e.preventDefault(); if (tabOn()) openDiagram(Number(ed.dataset.dgEdit)); else openEditor(Number(ed.dataset.dgEdit)); return; }
+        const rs = e.target.closest?.('[data-dg-restore]'); if (rs) { e.preventDefault(); restoreFromEmbed(Number(rs.dataset.dgRestore)); }
     });
+    /* 🗑 un diagramme posé ici mais mis à la corbeille (📈 l'onglet Diagrammes) : « Diagramme à la corbeille — Remettre » */
+    let trashMem = null;
+    async function inTrash(id) {
+        if (!trashMem || Date.now() - trashMem.t > 4000) trashMem = {t: Date.now(), p: api('diagrams', {trash: 1}).then(r => r.diagrams || []).catch(() => [])};
+        return (await trashMem.p).find(d => d.id === Number(id)) || null;
+    }
+    const isKiosk = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly');
+    const trashedHtml = d => `<p class="h-dg-trashed" data-dg-trashed="${d.id}"><span aria-hidden="true">🗑</span> ${esc(i18n('Diagramme à la corbeille'))}${isKiosk() ? '' : ` — <button type="button" class="link-button" data-dg-restore="${d.id}" title="${esc(i18n('Remettre « {name} »', {name: d.name}))}">${esc(i18n('Remettre'))}</button>`}</p>`;
+    async function restoreFromEmbed(id) {
+        try { await post('restore_diagrams', {ids: [id]}); trashMem = null; await list(true); refreshEmbeds(id); document.querySelectorAll('[data-dg-host][data-dg-filled]').forEach(h => { delete h.dataset.dgFilled; }); fillHosts(); ext.diagrammesOnglet?.refresh?.();
+            toast(i18n('↺ Diagramme remis à sa place.')); } catch (err) { toast(err.message, 'error'); }
+    }
+    ext.diagramTrashChanged = () => { trashMem = null; };
+    /** 📈 l'onglet Diagrammes est-il allumé ? (app-diagrammes-onglet.js) */
+    const tabOn = () => !!ext.diagrammesOnglet?.on?.();
+    /** ouvrir un diagramme : dans 📈 Diagrammes si l'onglet est allumé, sinon dans Graphiques → Mes diagrammes (comme avant) */
+    function openDiagram(id, o = {}) { if (tabOn()) return ext.diagrammesOnglet.open(Number(id), o); return openInGraphs(Number(id)); }
     function openInGraphs(id) { document.querySelectorAll('dialog[open]').forEach(d => { if (!d.closest('.h-dg-dlg')) try { d.close(); } catch (_) {} }); const st = S(); st.graphMode = 'diagram'; st.graphDiagramId = id; st.graphTab = 'types'; A().setModule('graphiques'); }
     ext.diagramSvg = async id => { const d = await get(id); return d ? svgOf(d) : ''; };
-    ext.openDiagram = openInGraphs;
+    ext.openDiagram = openDiagram;
+    ext.openDiagramInGraphs = openInGraphs;
 
     /* ─── Images : PNG, JPG, SVG ─── */
     function svgToCanvas(svg, scale = 2, bg = '') {
@@ -752,8 +771,8 @@
         box.dataset.dgFilled = '1';
         const owner = box.dataset.dgOwner, key = Number(box.dataset.dgKey); if (!key) return;
         let rows = [];
-        try { rows = (await api('diagrams', {entity_type: owner, entity_id: key})).diagrams || []; } catch (_) { return; }
-        rows.forEach(d => { if (cache && !byId(d.id)) cache.push(d); });
+        try { rows = (await api('diagrams', {entity_type: owner, entity_id: key, with_trash: 1})).diagrams || []; } catch (_) { return; } // 🗑 à la corbeille : la case le dit (« Remettre »)
+        rows.forEach(d => { if (cache && !d.deleted_at && !byId(d.id)) cache.push(d); });
         const card = box.hasAttribute('data-dg-hidecard') ? box.closest('.card') : null;
         if (card) card.hidden = !rows.length;
         const add = `<button type="button" class="button small secondary" data-dg-hostadd>＋ Diagramme</button>`;
