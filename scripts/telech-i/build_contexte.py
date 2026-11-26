@@ -13,7 +13,7 @@ import wm
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'assets', 'data')
-TOPICS = [('navals', 'Chantier naval'), ('corderie', 'Corderie royale'), ('autos', 'Construction automobile en France'), ('sucreries', 'Usine sucrière'),
+TOPICS = [('navals', 'Chantier naval'), ('corderie', 'Corderie royale'), ('autos', 'Industrie automobile en France'), ('sucreries', 'Usine sucrière'),
           ('sanas', 'Sanatorium'), ('centrales', 'Maison centrale'), ('ecrou', 'Écrou (droit)'), ('grottes', 'Grotte ornée'), ('romains', 'Pont romain'),
           ('hippodromes', 'Hippodrome'), ('mutuelles', 'Société de secours mutuel'), ('tir', 'Société de tir'),
           ('gym', 'Union des sociétés de gymnastique de France'), ('orpheons', 'Orphéon'), ('tour', 'Le Tour de la France par deux enfants'),
@@ -21,10 +21,20 @@ TOPICS = [('navals', 'Chantier naval'), ('corderie', 'Corderie royale'), ('autos
 
 
 def intro(w):
-    w = re.sub(r'\{\{(?:[^{}]|\{\{[^{}]*\}\})*\}\}', lambda m: m.group(0) if re.match(r'\{\{(date|s|siècle|unité|nombre|nobr|\d)', m.group(0)[2:], re.I) else '', w)
-    head = re.split(r'\n==', w, 1)[0]
+    # les images (dont la légende contient des liens [[…]]) d'abord, puis les modèles sauf les dates, siècles et nombres
+    while True:
+        w2 = re.sub(r'\[\[(?:Fichier|File|Image):(?:[^\[\]]|\[\[[^\[\]]*\]\])*\]\]', '', w, flags=re.I)
+        if w2 == w:
+            break
+        w = w2
+    keep = re.compile(r'\{\{(date|s-?|siècle|unité|nombre|nobr|\d+(e|er|re)|[IVXL]+e siècle)\b', re.I)
+    for _ in range(3):
+        w = re.sub(r'\{\{(?:[^{}]|\{\{[^{}]*\}\})*\}\}', lambda m: m.group(0) if keep.match(m.group(0)) else '', w)
+    head = re.split(r'\n==', w, maxsplit=1)[0]
     paras = [p for p in (wm.plain(x) for x in head.split('\n')) if len(p) > 60 and not p.startswith(('|', '{', '!', '*'))]
-    return paras[0] if paras else ''
+    MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+    p = paras[0] if paras else ''
+    return re.sub(r'\b(\d{1,2}) (\d{1,2}) (\d{3,4})\b', lambda m: f'{m.group(1)} {MOIS[int(m.group(2)) - 1]} {m.group(3)}' if 1 <= int(m.group(2)) <= 12 else m.group(0), p)
 
 
 def sentences(p, n=2, cap=380):

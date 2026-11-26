@@ -1,7 +1,8 @@
 /**
  * LCNDA — 🧭 Histoire autour : ce qui s'est passé autour des lieux et des vies de la famille.
  * Données livrées avec l'app (assets/data/ha-*.json.gz, refaites par scripts/histoire-autour/build.py, lues à la demande) :
- *   ⚔️ ha-batailles      batailles et sièges datés et placés (Wikidata, CC0)
+ *   ⚔️ ha-batailles      batailles et sièges datés et placés (Wikidata, CC0) ; approx = placé par son lieu (P276), pas par ses coordonnées
+ *   🎖 ha-guerres        guerres (Q198) : dates, camps, pays ; leurs batailles = les lignes de ha-batailles dont wq les nomme (Wikidata, CC0)
  *   🛣️ ha-voies-romaines  routes de l'Empire romain, tracés simplifiés (Itiner-e 2024, de Soto et al. 2025, CC BY 4.0)
  *   🐚 ha-compostelle    chemins de Saint-Jacques balisés d'aujourd'hui (OpenStreetMap, © OpenStreetMap contributors, ODbL)
  *   🏥 ha-institutions   hôpitaux, hôtels-Dieu, hospices, enfants trouvés, prisons, bagnes, asiles, couvents (Wikidata, CC0)
@@ -10,7 +11,7 @@
  *   🗼 ha-phares         phares, hauteur, portée (Wikidata, CC0 ; portée complétée par OpenStreetMap seamark, ODbL)
  * Ce que ça montre (une phrase d'abord, le détail plié « ▸ plus » ; rien quand il n'y a rien) :
  *   · fiche d'une personne, bloc « 🧭 Histoire autour » (à côté de « 🏘 Le lieu à son époque ») : la bataille près de ses
- *     lieux pendant sa vie, l'institution où elle est née ou morte, son navire (marin), le phare (gardien de phare),
+ *     lieux pendant sa vie, les guerres passées près de chez elle (une de leurs batailles à moins de 50 km, de son vivant), l'institution où elle est née ou morte, son navire (marin), le phare (gardien de phare),
  *     les catastrophes loin de la France métropolitaine (outre-mer, émigrés) ;
  *   · fiche d'un village : la voie romaine, le chemin de Compostelle, les batailles, les institutions, la lumière des phares ;
  *   · Monographie de commune : une partie par sujet (registre LCNDA_EXT.monographSections) ;
@@ -55,7 +56,8 @@
     /* ── les fichiers, préparés pour le calcul ── */
     const KIND_WORD = {hopital: 'hôpital', hoteldieu: 'hôtel-Dieu', hospice: 'hospice', orphelinat: 'orphelinat', enfants: 'hospice des enfants trouvés', prison: 'prison', bagne: 'bagne', asile: 'asile', couvent: 'couvent, monastère', leproserie: 'léproserie'};
     const PREP = {
-        batailles: f => table(f).map(r => ({...r, bel: r.bel ? String(r.bel).split('|') : []})),
+        batailles: f => table(f).map(r => ({...r, bel: r.bel ? String(r.bel).split('|') : [], approx: !!r.approx, wq: r.wq ? String(r.wq).split('|') : []})),
+        guerres: f => table(f).map(r => ({...r, part: r.part ? String(r.part).split('|') : [], country: r.country ? String(r.country).split('|') : [], loc: r.loc ? String(r.loc).split('|') : []})),
         voies: f => f.rows.map(r => { const lines = r[6].map(l => decLine(l, f.q)); return {name: f.names[r[0]] || '', main: r[1], cert: r[2], from: r[3], to: r[4], itin: f.itin[r[5]] || '', lines, box: boxOf(lines), km: Math.round(lines.reduce((s, l) => s + lineLen(l), 0))}; }),
         compostelle: f => table(f).map(r => { const lines = r.lines.map(l => decLine(l, f.q)); return {...r, lines, box: boxOf(lines), km: Math.round(lines.reduce((s, l) => s + lineLen(l), 0))}; }),
         institutions: f => table(f).map(r => ({...r, kinds: String(r.kinds || '').split(',').filter(Boolean)})),
@@ -87,6 +89,21 @@
         }
         return out.sort((a, c) => a.b.y - c.b.y || String(a.b.d).localeCompare(String(c.b.d)));
     }
+    /** 🎖 les guerres passées près de ses lieux, de son vivant : une de leurs batailles à moins de `radius` km d'un lieu de sa vie.
+     *  Une bataille compte pour sa guerre la plus précise (wq[0] : « guerre franco-allemande » plutôt que « guerres napoléoniennes »).
+     *  → [{w, list: [{b, km, place}] (par date), near: la plus proche, age: son âge au début de la guerre}] (par date de début) */
+    function warsForLife(battles, wars, life, radius = 50) {
+        const byQ = new Map((wars || []).map(w => [w.q, w])), by = new Map();
+        for (const x of battlesForLife(battles.filter(b => b.wq && b.wq.length), life, radius)) {
+            const q = x.b.wq.find(k => byQ.has(k)); if (!q) continue;
+            if (!by.has(q)) by.set(q, []);
+            by.get(q).push(x);
+        }
+        return [...by].map(([q, list]) => { const w = byQ.get(q); return {w, list, near: [...list].sort((a, c) => a.km - c.km)[0], age: age(life, w.y ?? list[0].b.y)}; })
+            .sort((a, c) => (a.w.y ?? a.list[0].b.y) - (c.w.y ?? c.list[0].b.y));
+    }
+    /** 🎖 les batailles d'une guerre (celles dont wq la nomme), par date */
+    const battlesOfWar = (battles, q) => battles.filter(b => b.wq && b.wq.includes(q)).sort((a, c) => a.y - c.y || String(a.d).localeCompare(String(c.d)));
     /** ⚔️ les batailles près d'un lieu (toutes époques, ou entre deux années) */
     function battlesNear(list, lat, lon, radius = 15, years = null) {
         return list.filter(b => !years || (b.y >= years.from && b.y <= years.to)).map(b => ({b, km: km(lat, lon, b.lat, b.lon)})).filter(x => x.km <= radius).sort((a, c) => a.b.y - c.b.y);
@@ -233,7 +250,7 @@
         return [...out.values()].sort((a, b) => a.km - b.km).slice(0, 4);
     }
 
-    const core = {km, fold, table, decLine, lineKm, lineLen, PREP, lifeSpan, battlesForLife, battlesNear, linesNear, institutionsNear, institutionsForLife, inMetro, farPlace, reachKm,
+    const core = {km, fold, table, decLine, lineKm, lineLen, PREP, lifeSpan, battlesForLife, warsForLife, battlesOfWar, battlesNear, linesNear, institutionsNear, institutionsForLife, inMetro, farPlace, reachKm,
         disastersForLife, disastersNear, shipKey, shipCandidates, isSailor, shipsForLife, isKeeper, lighthousesNear, lighthousesReaching, lighthousesForLife, KIND_WORD, NM};
     if (typeof module === 'object' && module.exports) { module.exports = core; return; }
 
@@ -243,11 +260,12 @@
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
     const esc = v => (A().escapeHtml ? A().escapeHtml(String(v ?? '')) : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const DATA_V = 1;
-    const FILES = {batailles: 'ha-batailles', voies: 'ha-voies-romaines', compostelle: 'ha-compostelle', institutions: 'ha-institutions', catastrophes: 'ha-catastrophes', navires: 'ha-navires', phares: 'ha-phares'};
+    const FILES = {batailles: 'ha-batailles', guerres: 'ha-guerres', voies: 'ha-voies-romaines', compostelle: 'ha-compostelle', institutions: 'ha-institutions', catastrophes: 'ha-catastrophes', navires: 'ha-navires', phares: 'ha-phares'};
     const KEY = 'genealogie-histoire-autour';
     const TAB = ['histoire_autour', '25k6', '🧭 Histoire autour'];
     const PARTS = [
         ['batailles', '⚔️ Batailles près du village', 'Les batailles et les sièges à moins de 30 km de ses lieux, pendant sa vie ; sur la fiche d’un village, ceux des alentours.'],
+        ['guerres', '🎖 Guerres passées près de chez lui', 'Les guerres dont une bataille ou un siège a eu lieu à moins de 50 km de ses lieux, de son vivant (Wikidata).'],
         ['voies', '🛣️ Voies romaines', 'La voie romaine qui passait près du village (Itiner-e).'],
         ['compostelle', '🐚 Chemins de Compostelle', 'Le chemin de Saint-Jacques qui passe par le village (OpenStreetMap).'],
         ['institutions', '🏥 Hôpitaux, hospices, prisons, couvents', 'L’institution où une personne est née ou morte (d’après l’adresse de l’acte) ; les enfants trouvés ; celles du village.'],
@@ -305,6 +323,7 @@
     }
     const SRC = {
         batailles: () => `${link('https://www.wikidata.org', 'Wikidata')} (CC0)`,
+        guerres: () => `${link('https://www.wikidata.org', 'Wikidata')} (CC0)`,
         voies: () => `${link('https://doi.org/10.5281/zenodo.17122148', 'Itiner-e 2024')} — de Soto, Pažout, Brughmans et al. (2025) (CC BY 4.0)`,
         compostelle: () => `${link('https://www.openstreetmap.org/copyright', '© OpenStreetMap contributors')} (ODbL)`,
         institutions: () => `${link('https://www.wikidata.org', 'Wikidata')} (CC0)`,
@@ -312,9 +331,9 @@
         navires: () => `${link('https://www.wikidata.org', 'Wikidata')} (CC0)`,
         phares: (osm) => `${link('https://www.wikidata.org', 'Wikidata')} (CC0)${osm ? ` · ${esc(T('portée :'))} ${link('https://www.openstreetmap.org/copyright', '© OpenStreetMap contributors')} (ODbL)` : ''}`
     };
-    const SRC_TXT = {batailles: 'Wikidata (CC0)', voies: 'Itiner-e 2024, de Soto et al. 2025 (CC BY 4.0)', compostelle: '© OpenStreetMap contributors (ODbL)', institutions: 'Wikidata (CC0)',
+    const SRC_TXT = {batailles: 'Wikidata (CC0)', guerres: 'Wikidata (CC0)', voies: 'Itiner-e 2024, de Soto et al. 2025 (CC BY 4.0)', compostelle: '© OpenStreetMap contributors (ODbL)', institutions: 'Wikidata (CC0)',
         catastrophes: 'NOAA NCEI/WDS (domaine public)', navires: 'Wikidata (CC0)', phares: 'Wikidata (CC0) ; portée : © OpenStreetMap contributors (ODbL)'};
-    const SRC_URL = {batailles: 'https://www.wikidata.org', voies: 'https://doi.org/10.5281/zenodo.17122148', compostelle: 'https://www.openstreetmap.org/copyright', institutions: 'https://www.wikidata.org',
+    const SRC_URL = {batailles: 'https://www.wikidata.org', guerres: 'https://www.wikidata.org', voies: 'https://doi.org/10.5281/zenodo.17122148', compostelle: 'https://www.openstreetmap.org/copyright', institutions: 'https://www.wikidata.org',
         catastrophes: 'https://www.ngdc.noaa.gov/hazard/', navires: 'https://www.wikidata.org', phares: 'https://www.wikidata.org'};
     async function loadSome(kinds) { const out = {}; await Promise.all(kinds.map(async k => { try { out[k] = await load(k); } catch (e) { if (!(e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || ''))))) console.error(e); out[k] = null; } /* fichier coupé en route (page rechargée) : la partie reste vide, sans bruit */ })); return out; }
 
@@ -322,7 +341,7 @@
     const battleName = b => esc(String(b.n).replace(/^(Bataille|Siège|Combat|Prise|Bombardement|Massacre|Blocus|Escarmouche|Affaire)\b/, w => w.toLowerCase()));
     const battleDate = b => dateTxt(b.d, b.y);
     function battleLi(x, withAge, P) {
-        const b = x.b, extra = [b.war ? esc(b.war) : '', b.bel.length ? esc(b.bel.slice(0, 4).join(' / ')) : ''].filter(Boolean).join(' · ');
+        const b = x.b, extra = [b.war ? esc(b.war) : '', b.bel.length ? esc(b.bel.slice(0, 4).join(' / ')) : '', b.approx ? esc(T('placé par son lieu')) : ''].filter(Boolean).join(' · ');
         return `<li><b>${battleDate(b)}</b> : ${battleName(b)}, ${esc(x.place ? T('à {k} de {p}', {k: kmTxt(x.km), p: x.place}) : T('à {k}', {k: kmTxt(x.km)}))}${withAge && x.age !== null && x.age >= 0 ? ` (${esc(T('{p} a {a}', {p: P?.first || he(P), a: ageTxt(x.age)}))})` : ''}${extra ? ` <small class="muted">— ${extra}</small>` : ''} ${refLinks(b)}</li>`;
     }
     function battlesHtml(list, life) {
@@ -331,6 +350,20 @@
         const lead = T('{when}, {n} à {k} de {p}.', {when: whenTxt(top.b.d, top.b.y), n: battleName(top.b), k: kmTxt(top.km), p: esc(top.place)}) + (top.age !== null && top.age >= 0 ? ` ${T('{he} avait {a}.', {he: he(P), a: ageTxt(top.age)})}` : '');
         const others = list.length > 1 ? ` <span class="muted">${esc(T('({n} en tout pendant sa vie, à moins de 30 km)', {n: String(list.length)}))}</span>` : '';
         return row('⚔️', lead + others, SRC.batailles(), more(`<ul class="hist-ul">${list.map(x => battleLi(x, true, P)).join('')}</ul>`, list.length));
+    }
+    const warYears = w => (w.y === null || w.y === undefined ? '' : w.y2 !== null && w.y2 !== undefined && w.y2 !== w.y ? `${yTxt(w.y)}–${yTxt(w.y2)}` : yTxt(w.y));
+    const warName = w => `<b>${esc(w.n)}</b>${warYears(w) ? ` (${esc(warYears(w))})` : ''}`;
+    const warCardBtn = (w, label) => `<button type="button" class="link-button" data-ha-card="guerres" data-ha-q="${esc(w.q)}">${esc(label)}</button>`;
+    function warsHtml(list, life) {
+        if (!list.length) return '';
+        const P = life.person, x = list[0], nb = x.list.length;
+        const lead = T('Une guerre est passée près de chez {he} : {w} — {n}, la plus proche {b} ({d}) à {k} de {p}.', {w: warName(x.w), he: esc(T(P?.gender === 'female' ? 'elle' : 'lui')),
+            n: esc(nb > 1 ? T('{n} batailles ou sièges à moins de 50 km', {n: String(nb)}) : T('une bataille ou un siège à moins de 50 km')), b: battleName(x.near.b), d: battleDate(x.near.b), k: kmTxt(x.near.km), p: esc(x.near.place)})
+            + (x.age !== null && x.age >= 0 ? ` ${T('{he} avait {a} au début.', {he: he(P), a: ageTxt(x.age)})}` : '');
+        const others = list.length > 1 ? ` <span class="muted">${esc(T('({n} guerres en tout pendant sa vie)', {n: String(list.length)}))}</span>` : '';
+        const li = list.map(y => `<li>${warName(y.w)} — ${esc(y.list.length > 1 ? T('{n} batailles ou sièges à moins de 50 km', {n: String(y.list.length)}) : T('une bataille ou un siège à moins de 50 km'))}${y.age !== null && y.age >= 0 ? ` <small class="muted">(${esc(T('{p} a {a}', {p: P?.first || he(P), a: ageTxt(y.age)}))})</small>` : ''} ${warCardBtn(y.w, T('▸ ses batailles'))} ${refLinks(y.w)}
+            <ul class="hist-ul">${y.list.slice(0, 6).map(z => battleLi(z, false)).join('')}</ul></li>`).join('');
+        return row('🎖', `${lead}${others} ${refLinks(x.w)}`, SRC.guerres(), more(`<ul class="hist-ul">${li}</ul><small class="muted hist-hyp">${esc(T('Une guerre compte quand une de ses batailles ou un de ses sièges (Wikidata : « partie de ») a eu lieu à moins de 50 km d’un de ses lieux, de son vivant. Une piste : son registre matricule ou les archives de la commune diront s’il a été touché.'))}</small>`, list.length));
     }
     const KIND_DE = {hopital: 'l’hôpital', hoteldieu: 'l’hôtel-Dieu', hospice: 'l’hospice', orphelinat: 'l’orphelinat', enfants: 'l’hospice des enfants trouvés', prison: 'la prison', bagne: 'le bagne', asile: 'l’asile', couvent: 'le couvent', leproserie: 'la léproserie'};
     const instDates = i => [i.from !== null ? T('fondé en {y}', {y: yTxt(i.from)}) : '', i.to !== null ? T('fermé en {y}', {y: yTxt(i.to)}) : ''].filter(Boolean).join(', ');
@@ -398,15 +431,16 @@
     const lifeOf = id => { if (!lifeMemo.has(id)) lifeMemo.set(id, A().api('ha_life', {id}).catch(e => { lifeMemo.delete(id); throw e; })); return lifeMemo.get(id); };
     /** remplit un élément avec les lignes de la personne ; renvoie le nombre de lignes */
     async function personInto(host, id, opts = {}) {
-        const s = settings(), want = (opts.parts || ['batailles', 'institutions', 'navires', 'phares', 'catastrophes']).filter(k => opts.force || s[k]);
+        const s = settings(), want = (opts.parts || ['batailles', 'guerres', 'institutions', 'navires', 'phares', 'catastrophes']).filter(k => opts.force || s[k]);
         if (!want.length) { host.innerHTML = ''; return 0; }
         let life; try { life = opts.life || await lifeOf(id); } catch (e) { host.innerHTML = ''; return 0; }
         if (!life?.ok || life.person?.kind === 'animal') { host.innerHTML = ''; return 0; }
         const need = want.filter(k => k !== 'navires' || isSailor(life) || opts.force).filter(k => k !== 'phares' || isKeeper(life) || opts.force);
-        const D = await loadSome(need);
+        const D = await loadSome(need.includes('guerres') && !need.includes('batailles') ? [...need, 'batailles'] : need);
         if (!host.isConnected && !opts.detached) return 0;
         const html = [];
-        if (D.batailles) html.push(battlesHtml(battlesForLife(D.batailles.rows, life, 30), life));
+        if (D.batailles && need.includes('batailles')) html.push(battlesHtml(battlesForLife(D.batailles.rows, life, 30), life));
+        if (D.guerres && D.batailles) html.push(warsHtml(warsForLife(D.batailles.rows, D.guerres.rows, life, 50), life));
         if (D.institutions) html.push(institutionsHtml(institutionsForLife(D.institutions.rows, life), life));
         if (D.navires) html.push(shipsHtml(shipsForLife(D.navires.rows, life, {force: !!opts.force}), life));
         if (D.phares) html.push(lightsKeeperHtml(lighthousesForLife(D.phares.rows, {...life, jobs: opts.force ? [{text: 'gardien de phare'}] : life.jobs}), life, D.phares.meta.osm_ok));
@@ -541,13 +575,17 @@
         const line = (pts || []).map(l => `<polyline points="${l.map(([a, b]) => `${(A().lngToX(b, z) - px + W / 2).toFixed(1)},${(A().latToY(a, z) - py + H / 2).toFixed(1)}`).join(' ')}"/>`).join('');
         return `<div class="ha-map" style="width:${W}px;height:${H}px">${tiles.join('')}<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${rPx ? `<circle cx="${W / 2}" cy="${H / 2}" r="${rPx.toFixed(1)}" class="ha-range"/>` : ''}${line}<circle cx="${W / 2}" cy="${H / 2}" r="5" class="ha-dot"/></svg></div>`;
     }
-    function openCard(kind, r) {
+    async function openCard(kind, r) {
         let title = r.n || r.name || '', body = '';
         if (kind === 'phares') {
             body = `<p>${esc([lightFacts(r), r.country].filter(Boolean).join(' · '))}</p>${r.range ? `<p><b>${esc(T('Jusqu’où allait sa lumière :'))}</b> ${esc(rangeTxt(r))}${r.rangeSrc === 'osm' ? ` <small class="muted">(${esc(T('portée d’OpenStreetMap'))})</small>` : ''}.</p>` : `<p class="muted">${esc(T('Sa portée n’est pas connue dans les données.'))}</p>`}
                 ${miniMap(r.lat, r.lon, r.rangeKm, null)}${r.img ? `<img class="ha-img" loading="lazy" alt="" src="${esc(`https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(r.img)}?width=320`)}">` : ''}`;
         } else if (kind === 'batailles') {
-            body = `<p><b>${esc(dateTxt(r.d, r.y))}</b>${r.y2 && r.y2 !== r.y ? ` → ${esc(dateTxt(r.d2, r.y2))}` : ''}</p><p>${esc([r.war, r.bel && r.bel.length ? r.bel.join(' / ') : '', r.loc, r.country].filter(Boolean).join(' · '))}</p>${miniMap(r.lat, r.lon, 0, null)}`;
+            body = `<p><b>${esc(dateTxt(r.d, r.y))}</b>${r.y2 && r.y2 !== r.y ? ` → ${esc(dateTxt(r.d2, r.y2))}` : ''}</p><p>${esc([r.war, r.bel && r.bel.length ? r.bel.join(' / ') : '', r.loc, r.country].filter(Boolean).join(' · '))}</p>${miniMap(r.lat, r.lon, 0, null)}${r.approx ? `<small class="muted">${esc(T('Placé par son lieu : Wikidata ne donne pas ses coordonnées, le point est celui du lieu nommé ({p}).', {p: r.loc || '?'}))}</small>` : ''}`;
+        } else if (kind === 'guerres') {
+            const bs = battlesOfWar((await load('batailles').catch(() => null))?.rows || [], r.q);
+            body = `<p><b>${esc(r.y !== null ? dateTxt(r.d, r.y) : '?')}</b>${r.y2 !== null && r.y2 !== r.y ? ` → ${esc(dateTxt(r.d2, r.y2))}` : ''}</p><p>${esc([r.part.join(' / '), r.country.join(', '), r.loc.join(', ')].filter(Boolean).join(' · '))}</p>
+                ${bs.length ? `<p class="muted">${esc(T('{n} batailles et sièges placés :', {n: nf(bs.length)}))}</p><ul class="hist-ul">${bs.slice(0, 80).map(b => `<li><b>${esc(dateTxt(b.d, b.y))}</b> : ${esc(b.n)}${b.loc ? ` <small class="muted">${esc(b.loc)}${b.approx ? ` · ${esc(T('placé par son lieu'))}` : ''}</small>` : ''} ${refLinks(b)}</li>`).join('')}</ul>${bs.length > 80 ? `<p class="muted">${esc(T('… et {n} autres (Listes → Batailles et sièges, filtre « Guerre »).', {n: nf(bs.length - 80)}))}</p>` : ''}` : `<p class="muted">${esc(T('Aucune de ses batailles n’est placée sur la carte dans Wikidata.'))}</p>`}`;
         } else if (kind === 'navires') {
             body = `<p>${esc(shipFacts(r))}${r.operator ? ` · ${esc(r.operator)}` : ''}</p>${shipImg(r) ? `<img class="ha-img" loading="lazy" alt="" src="${esc(shipImg(r))}">` : ''}`;
         } else if (kind === 'institutions') {
@@ -580,10 +618,15 @@
     const isoD = (y, m, d) => (y > 0 && m ? `${String(y).padStart(4, '0')}-${String(m).padStart(2, '0')}${d ? '-' + String(d).padStart(2, '0') : ''}` : '');
     (ext.dataLists = ext.dataLists || []).push(
         {id: 'ha_batailles', icon: '⚔️', label: T('Batailles et sièges'), group: 'Le monde', source: SRC_TXT.batailles, sourceUrl: SRC_URL.batailles,
-            load: async () => (await rowsOf('batailles')).map(b => ({...b, name: b.n, year: b.y, date: b.d || '', end: b.y2, belligerents: b.bel.join(' / '), place: b.loc, url: b.frwiki ? wpUrl(b.frwiki) : wdUrl(b.q)})),
+            load: async () => (await rowsOf('batailles')).map(b => ({...b, name: b.n, year: b.y, date: b.d || '', end: b.y2, belligerents: b.bel.join(' / '), place: b.loc, placed: T(b.approx ? 'par son lieu' : 'par ses coordonnées'), url: b.frwiki ? wpUrl(b.frwiki) : wdUrl(b.q)})),
             fields: [{key: 'name', label: T('Bataille'), type: 'text'}, {key: 'date', label: T('Date'), type: 'date'}, {key: 'year', label: T('Année'), type: 'year'}, {key: 'war', label: T('Guerre'), type: 'enum'},
-                {key: 'belligerents', label: T('Camps'), type: 'text'}, {key: 'place', label: T('Lieu'), type: 'text'}, {key: 'country', label: T('Pays'), type: 'enum'}, {key: 'url', label: T('Article'), type: 'url'}],
+                {key: 'belligerents', label: T('Camps'), type: 'text'}, {key: 'place', label: T('Lieu'), type: 'text'}, {key: 'country', label: T('Pays'), type: 'enum'}, {key: 'placed', label: T('Placée'), type: 'enum', values: [T('par ses coordonnées'), T('par son lieu')]}, {key: 'url', label: T('Article'), type: 'url'}],
             period: r => [r.y, r.y2 ?? r.y], geo: r => [r.lat, r.lon], open: r => openCard('batailles', r)},
+        {id: 'ha_guerres', icon: '🎖', label: T('Guerres'), group: 'Le monde', source: SRC_TXT.guerres, sourceUrl: SRC_URL.guerres,
+            load: async () => (await rowsOf('guerres')).map(w => ({...w, name: w.n, start: w.y, end: w.y2, participants: w.part.join(' / '), countries: w.country.join(', '), places: w.loc.join(', '), battles: w.nb, url: w.frwiki ? wpUrl(w.frwiki) : wdUrl(w.q)})),
+            fields: [{key: 'name', label: T('Guerre'), type: 'text'}, {key: 'start', label: T('Début'), type: 'year'}, {key: 'end', label: T('Fin'), type: 'year'}, {key: 'participants', label: T('Camps'), type: 'text'},
+                {key: 'countries', label: T('Pays'), type: 'text'}, {key: 'places', label: T('Lieu'), type: 'text'}, {key: 'battles', label: T('Batailles placées'), type: 'number'}, {key: 'url', label: T('Article'), type: 'url'}],
+            period: r => [yr(r.y), yr(r.y2 ?? r.y)], geo: r => (r.lat !== null && r.lon !== null ? [r.lat, r.lon] : null), open: r => openCard('guerres', r)},
         {id: 'ha_voies_romaines', icon: '🛣️', label: T('Voies romaines'), group: 'Le monde', source: SRC_TXT.voies, sourceUrl: SRC_URL.voies,
             load: async () => (await rowsOf('voies')).map(r => ({...r, kind: r.main ? T('voie principale') : T('voie secondaire'), certainty: T(CERT_TXT[r.cert] || ''), itinerary: r.itin, length: r.km})),
             fields: [{key: 'name', label: T('Voie (villes antiques)'), type: 'text'}, {key: 'kind', label: T('Importance'), type: 'enum', values: [T('voie principale'), T('voie secondaire')]}, {key: 'certainty', label: T('Tracé'), type: 'enum', values: CERT_TXT.map(x => T(x))},
@@ -635,6 +678,8 @@
     (ext.dataSources = ext.dataSources || []).push(
         {id: 'ha_personne', icon: '🧭', label: T('Histoire autour de sa vie (batailles, institutions, catastrophes)'), group: 'La personne', needs: ['person'], installed: () => true,
             run: (ctx, host) => runPerson(['batailles', 'institutions', 'catastrophes'], ctx, host, 'Rien trouvé autour de sa vie : il faut des lieux placés sur la carte et des dates.')},
+        {id: 'ha_guerres_vie', icon: '🎖', label: T('Les guerres passées près de chez lui'), group: 'La personne', needs: ['person'], installed: () => true,
+            run: (ctx, host) => runPerson(['guerres'], ctx, host, 'Aucune guerre connue n’a eu de bataille à moins de 50 km de ses lieux, de son vivant.')},
         {id: 'ha_navire', icon: '⚓', label: T('Le navire du marin'), group: 'La personne', needs: ['person'], installed: () => true,
             run: (ctx, host) => runPerson(['navires'], ctx, host, 'Aucun navire connu n’est nommé dans ses notes ou ses actes.')},
         {id: 'ha_gardien_phare', icon: '🗼', label: T('Les phares près de ses lieux'), group: 'La personne', needs: ['person'], installed: () => true,

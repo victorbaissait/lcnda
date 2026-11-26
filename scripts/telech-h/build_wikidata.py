@@ -58,7 +58,8 @@ SUBJECTS = {
     'halles': {
         'what': 'Halles et marchés couverts connus de Wikidata',
         'url': 'https://www.wikidata.org/wiki/Q2080521',
-        'parts': [('halle', '?x wdt:P31/wdt:P279* wd:Q2080521 . BIND("halle" AS ?k)')]},
+        'parts': [('halle', '?x wdt:P31/wdt:P279* wd:Q2080521 . BIND("halle" AS ?k)')],
+        'keep': lambda r: re.search(r'(?i)hall|march|carreau|criée|minage|grenette|cohue|poissonnerie', r['n']) is not None},
     'funiculaires': {
         'what': 'Funiculaires et ponts transbordeurs connus de Wikidata',
         'url': 'https://www.wikidata.org/wiki/Q142031',

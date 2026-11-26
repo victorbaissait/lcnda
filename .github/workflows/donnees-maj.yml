@@ -16,7 +16,7 @@ on:
         type: string
         default: 'tour'
       histoire:
-        description: 'Histoire autour (scripts/histoire-autour) : batailles, institutions, navires (vide = rien)'
+        description: 'Histoire autour (scripts/histoire-autour) : batailles,guerres (dans cet ordre), institutions, navires (vide = rien)'
         type: string
         default: ''
   push:
