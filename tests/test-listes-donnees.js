@@ -97,6 +97,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         /* ═════════ 2. l'écran ═════════ */
         // une liste inventée, enregistrée après le chargement (comme le feront les autres fichiers de données)
         await p.evaluate(() => {
+            // ici : l'écran « les 4 groupes d'avant » (Réglages → 🧰 Listes de données) ; l'écran par thème : tests/test-listes-themes.js
+            localStorage.setItem('genealogie-listes-vue', 'groupes'); window.LCNDA_EXT.dataListsEngine.sync?.();
             window.__opened = [];
             const rows = [
                 {name: 'Château de Mazaud', from: 1450, to: 1793, state: 'ruine', country: 'France', commune: 'Naves', open: true, lat: 45.32, lon: 1.77},
