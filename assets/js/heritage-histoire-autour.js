@@ -431,7 +431,7 @@
     const lifeOf = id => { if (!lifeMemo.has(id)) lifeMemo.set(id, A().api('ha_life', {id}).catch(e => { lifeMemo.delete(id); throw e; })); return lifeMemo.get(id); };
     /** remplit un élément avec les lignes de la personne ; renvoie le nombre de lignes */
     async function personInto(host, id, opts = {}) {
-        const s = settings(), want = (opts.parts || ['batailles', 'guerres', 'institutions', 'navires', 'phares', 'catastrophes']).filter(k => opts.force || s[k]);
+        const s = settings(), want = (opts.parts || ['batailles', 'guerres', 'institutions', 'navires', 'phares', 'catastrophes']).filter(k => opts.force || (s[k] && (k !== 'guerres' || s.batailles))); // 🎖 les guerres viennent des batailles : « ⚔️ » éteint les cache aussi
         if (!want.length) { host.innerHTML = ''; return 0; }
         let life; try { life = opts.life || await lifeOf(id); } catch (e) { host.innerHTML = ''; return 0; }
         if (!life?.ok || life.person?.kind === 'animal') { host.innerHTML = ''; return 0; }
@@ -624,7 +624,7 @@
             period: r => [r.y, r.y2 ?? r.y], geo: r => [r.lat, r.lon], open: r => openCard('batailles', r)},
         {id: 'ha_guerres', icon: '🎖', label: T('Guerres'), group: 'Le monde', source: SRC_TXT.guerres, sourceUrl: SRC_URL.guerres,
             load: async () => (await rowsOf('guerres')).map(w => ({...w, name: w.n, start: w.y, end: w.y2, participants: w.part.join(' / '), countries: w.country.join(', '), places: w.loc.join(', '), battles: w.nb, url: w.frwiki ? wpUrl(w.frwiki) : wdUrl(w.q)})),
-            fields: [{key: 'name', label: T('Guerre'), type: 'text'}, {key: 'start', label: T('Début'), type: 'year'}, {key: 'end', label: T('Fin'), type: 'year'}, {key: 'participants', label: T('Camps'), type: 'text'},
+            fields: [{key: 'name', label: T('Guerre'), type: 'text'}, {key: 'start', label: T('Début de la guerre'), type: 'year'}, {key: 'end', label: T('Fin de la guerre'), type: 'year'}, {key: 'participants', label: T('Camps'), type: 'text'},
                 {key: 'countries', label: T('Pays'), type: 'text'}, {key: 'places', label: T('Lieu'), type: 'text'}, {key: 'battles', label: T('Batailles placées'), type: 'number'}, {key: 'url', label: T('Article'), type: 'url'}],
             period: r => [yr(r.y), yr(r.y2 ?? r.y)], geo: r => (r.lat !== null && r.lon !== null ? [r.lat, r.lon] : null), open: r => openCard('guerres', r)},
         {id: 'ha_voies_romaines', icon: '🛣️', label: T('Voies romaines'), group: 'Le monde', source: SRC_TXT.voies, sourceUrl: SRC_URL.voies,

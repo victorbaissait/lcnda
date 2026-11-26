@@ -78,6 +78,16 @@ def names_of(cache, name, where, var='?it', ids=None):
         return {k: (v, '') for k, v in wd_labels(cache, name + '-ids', ids).items()}
 
 
+def names_by_ids(cache, name, ids, size=3000):
+    """{Qid: (libellé, titre frwiki)} par lots (VALUES) : pour les grandes listes, où une seule requête dépasse le délai"""
+    out = {}
+    ids = sorted(set(ids))
+    for k in range(0, len(ids), size):
+        vals = ' '.join(f'wd:{q}' for q in ids[k:k + size])
+        out.update(names_inline(cache, f'{name}-{k // size}', f'VALUES ?it {{ {vals} }}', '?it'))
+    return out
+
+
 def names_inline(cache, name, where, var):
     q = f'SELECT {var} {var}fr {var}en ?frw WHERE {{ {where} {lab(var)} OPTIONAL {{ ?frw schema:about {var} ; schema:isPartOf <https://fr.wikipedia.org/> }} }}'
     out = {}
@@ -181,12 +191,12 @@ def build_batailles(cache):
         if pt and x and better(base.get(b), x):
             base[b] = {'y': x[0], 'd': x[1], 'y2': x[2], 'd2': x[3], 'lat': pt[0], 'lon': pt[1], 'approx': 0}
     direct = len(base)
-    # 2. sans coordonnées : placées par leur lieu (P276 → P625), sauf un lieu trop grand (pays, mer, fleuve… ou plus de 3 000 km²)
+    # 2. sans coordonnées : placées par leur lieu (P276 → P625), sauf un lieu trop grand (pays, mer, fleuve, région… ou plus de 50 000 km²)
     q = f"""SELECT ?b ?l ?c ?area ?big ?d ?dp ?s ?sp ?e ?ep WHERE {{
   {BAT_ALL} FILTER NOT EXISTS {{ ?b wdt:P625 [] }}
   ?b wdt:P276 ?l . ?l wdt:P625 ?c .
   OPTIONAL {{ ?l p:P2046/psn:P2046/wikibase:quantityAmount ?area }}
-  BIND(EXISTS {{ ?l wdt:P36 [] }} || EXISTS {{ VALUES ?bad {{ {BIG_PLACE} }} ?l wdt:P31 ?bad }} AS ?big)
+  BIND(EXISTS {{ VALUES ?bad {{ {BIG_PLACE} }} ?l wdt:P31 ?bad }} AS ?big)
   {DATES.format(v='?b')}
 }}"""
     by_loc, too_big = {}, set()
@@ -194,7 +204,7 @@ def build_batailles(cache):
         b, pt, x = qid(r['b']), wkt_point(r.get('c')), dated(r)
         if not pt or not x:
             continue
-        if r.get('big') in ('true', '1') or float(r.get('area') or 0) > 3e9:
+        if r.get('big') in ('true', '1') or float(r.get('area') or 0) > 5e10:  # plus de 50 000 km² (une ville dont la fiche porte la surface de sa province reste)
             too_big.add(b)
             continue
         cur = by_loc.get(b)
@@ -215,7 +225,7 @@ def build_batailles(cache):
     ids = sorted(base)
     print(f'⚔️ {len(ids)} batailles et sièges datés et placés : {direct} par leurs coordonnées, {len(ids) - direct} par leur lieu '
           f'({len(too_big - set(by_loc))} au lieu trop grand, {spread} aux lieux trop éloignés : écartées)', flush=True)
-    labs = names_of(cache, 'bat-noms-2', BAT_ALL.replace('?b', '?it'))
+    labs = names_by_ids(cache, 'bat-noms-3', ids)
     wars = {}
     for r in sparql(cache, 'bat-guerres-2', f'SELECT ?b ?w ?wfr ?wen WHERE {{ {BAT_ALL} ?b wdt:P361 ?w . {lab("?w")} }}'):
         x = pick(r, 'w')

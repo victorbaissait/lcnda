@@ -50,9 +50,10 @@ def main():
                 continue
             style = c[1][0] + c[0][0]
             killed = 'a' if '#e3d9ff' in style.lower() else 'w' if '#999999' in style.lower() else ''
-            raw = c[1][1]
+            raw = c[1][1].lstrip('| ')
             link = re.search(r'\[\[([^\]|]+)(?:\|[^\]]*)?\]\]', raw)
             name = re.sub(r'\s*\((Captain|Lieutenant|Lt\.?|Commandant|Capt\.?)\)', '', wm.plain(raw)).strip()
+            name = re.sub(r'\s*\([^)]*\)', '', name.lstrip('| ')).strip()  # « (Lieut.) », « (Captain) »
             fam, _, giv = name.partition(',')
             m = re.search(r'(\d{4})-(\d\d)-(\d\d)', c[2][1])
             date = f'{m.group(1)}-{m.group(2)}-{m.group(3)}' if m else ''
