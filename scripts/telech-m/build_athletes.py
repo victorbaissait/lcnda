@@ -24,26 +24,40 @@ def title(u):
 
 
 def athletes(com):
-    Q = '''SELECT ?p ?pl ?b ?d ?ins ?sport ?sportl ?sl ?fr WHERE {
- ?p wdt:P19 ?bp . ?bp wdt:P374 ?ins . ?p wdt:P641 ?sport . ?p wikibase:sitelinks ?sl . FILTER(?sl >= 5)
- ?p wdt:P31 wd:Q5 .
- OPTIONAL { ?p wdt:P569 ?b } OPTIONAL { ?p wdt:P570 ?d }
- OPTIONAL { ?fr schema:about ?p ; schema:isPartOf <https://fr.wikipedia.org/> }
- SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". ?p rdfs:label ?pl . ?sport rdfs:label ?sportl }
-}'''
+    # par tranches de « liens de site » (une seule grosse requête dépasse le délai du service), sans le service des libellés
     by = {}
-    for r in wm.sparql(Q):
-        g = lambda k: r.get(k, {}).get('value', '')
-        q = wm.qid(g('p'))
-        if re.match(r'^Q\d+$', g('pl')) or g('ins') not in com:
-            continue
-        cur = by.setdefault(q, {'q': q, 'n': g('pl'), 'b': wm.year(g('b')), 'd': wm.year(g('d')), 'ins': g('ins'), 'sport': set(), 'sl': int(g('sl') or 0), 'fr': title(g('fr'))})
-        if g('sportl') and not re.match(r'^Q\d+$', g('sportl')):
-            cur['sport'].add(g('sportl'))
+    for lo, hi in ((5, 6), (6, 8), (8, 12), (12, 25), (25, 100000)):
+        Q = """SELECT ?p ?pl ?b ?d ?ins ?sport ?sl ?fr WHERE {
+ ?p wdt:P19 ?bp . ?bp wdt:P374 ?ins . ?p wdt:P641 ?sport . ?p wikibase:sitelinks ?sl . FILTER(?sl >= %d && ?sl < %d)
+ ?p wdt:P31 wd:Q5 .
+ OPTIONAL { ?p rdfs:label ?pl FILTER(lang(?pl) = "fr") } OPTIONAL { ?p wdt:P569 ?b } OPTIONAL { ?p wdt:P570 ?d }
+ OPTIONAL { ?fr schema:about ?p ; schema:isPartOf <https://fr.wikipedia.org/> }
+}""" % (lo, hi)
+        for r in wm.sparql(Q):
+            g = lambda k: r.get(k, {}).get('value', '')
+            q = wm.qid(g('p'))
+            if g('ins') not in com:
+                continue
+            cur = by.setdefault(q, {'q': q, 'n': g('pl') or title(g('fr')), 'b': wm.year(g('b')), 'd': wm.year(g('d')), 'ins': g('ins'), 'sport': set(), 'sl': int(g('sl') or 0), 'fr': title(g('fr'))})
+            cur['sport'].add(wm.qid(g('sport')))
+    # les noms des sports (et des personnes sans libellé français)
+    sports = sorted({s for a in by.values() for s in a['sport']})
+    lab = {}
+    for i in range(0, len(sports), 300):
+        vals = ' '.join('wd:' + s for s in sports[i:i + 300])
+        for r in wm.sparql('SELECT ?s ?l WHERE { VALUES ?s { %s } ?s rdfs:label ?l FILTER(lang(?l) = "fr") }' % vals):
+            lab[wm.qid(r['s']['value'])] = r['l']['value']
+    noname = [q for q, a in by.items() if not a['n']]
+    for i in range(0, len(noname), 300):
+        vals = ' '.join('wd:' + s for s in noname[i:i + 300])
+        for r in wm.sparql('SELECT ?s ?l WHERE { VALUES ?s { %s } ?s rdfs:label ?l FILTER(lang(?l) = "en" || lang(?l) = "mul") }' % vals):
+            by[wm.qid(r['s']['value'])]['n'] = by[wm.qid(r['s']['value'])]['n'] or r['l']['value']
     rows = []
     for a in sorted(by.values(), key=lambda a: (a['ins'], a['b'] or 0)):
+        if not a['n']:
+            continue
         n, la, lo = com[a['ins']]
-        rows.append([a['q'], a['n'], a['b'], a['d'], a['ins'], n, la, lo, ', '.join(sorted(a['sport']))[:80], a['sl'], a['fr']])
+        rows.append([a['q'], a['n'], a['b'], a['d'], a['ins'], n, la, lo, ', '.join(sorted({lab.get(s, '') for s in a['sport']} - {''}))[:80], a['sl'], a['fr']])
     meta = {**WD, 'url': 'https://www.wikidata.org/wiki/Property:P641', 'built': wm.today(),
             'what': 'Sportifs nés dans une commune de France (Wikidata : P19 lieu de naissance avec un code INSEE, P641 sport ; au moins 5 liens de site)',
             'fields': ['q', 'n', 'b', 'd', 'ins', 'commune', 'lat', 'lon', 'sport', 'sl', 'fr'], 'rows': rows}

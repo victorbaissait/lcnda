@@ -8,7 +8,7 @@ GAP = {'archive.org': 2.0, 'overpass-api.de': 10.0, 'query.wikidata.org': float(
 _last = {}
 
 
-def get(url, accept='application/json', data=None, tries=6):
+def get(url, accept='application/json', data=None, tries=6, check=None):
     os.makedirs(CACHE, exist_ok=True)
     key = hashlib.sha1((url + '\n' + (data or '')).encode()).hexdigest()
     f = os.path.join(CACHE, key)
@@ -28,6 +28,8 @@ def get(url, accept='application/json', data=None, tries=6):
                 body = r.read()
             if body.lstrip()[:9] == b'{"error":' or b'too many requests' in body[:2000].lower() or b'making too many requests' in body[:400].lower():
                 raise RuntimeError('réponse d’erreur : ' + body[:160].decode('utf-8', 'replace'))
+            if check:
+                check(body)   # une réponse coupée (délai dépassé au milieu) n'est pas gardée : on redemande
             open(f, 'wb').write(body)
             return body
         except Exception as e:  # noqa
@@ -47,7 +49,7 @@ def get(url, accept='application/json', data=None, tries=6):
 
 
 def sparql(q):
-    body = get('https://query.wikidata.org/sparql', 'application/sparql-results+json', urllib.parse.urlencode({'query': q}))
+    body = get('https://query.wikidata.org/sparql', 'application/sparql-results+json', urllib.parse.urlencode({'query': q}), check=json.loads)
     return json.loads(body)['results']['bindings']
 
 

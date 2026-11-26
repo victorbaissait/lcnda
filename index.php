@@ -108,6 +108,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/telech-h.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-g.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-i.css?v=1">
+    <link rel="stylesheet" href="assets/css/telech-m.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-ciel-metier.css?v=1">
     <link rel="stylesheet" href="assets/css/pays-memoire.css?v=1">
@@ -1722,12 +1723,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=20" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=21" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-territoires.js?v=2" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
 <script src="assets/js/heritage-chateaux-territoires.js?v=3" defer></script>
-<script src="assets/js/heritage-lot8-monde-village.js?v=4" defer></script>
+<script src="assets/js/heritage-lot8-monde-village.js?v=5" defer></script>
 <script src="assets/js/heritage-lot10-voir-village.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-a.js?v=2" defer></script>
 <script src="assets/js/heritage-lot10-objets-traces.js?v=2" defer></script>
@@ -1740,6 +1741,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-h.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-g.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-i.js?v=2" defer></script>
+<script src="assets/js/heritage-telech-m.js?v=1" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=4" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>

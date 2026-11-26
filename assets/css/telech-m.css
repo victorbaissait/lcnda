@@ -1,0 +1,16 @@
+/* LCNDA — 🏆 Sport et Expositions (assets/js/heritage-telech-m.js) : le reste vient de histoire.css (hist-row…) */
+.tm-life { display: grid; gap: 12px; }
+.tm-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.tm-quote { display: block; margin: 4px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; quotes: "« " " »"; overflow-wrap: anywhere; }
+.tm-src-link { font-size: 12px; white-space: nowrap; }
+.tm-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.tm-more[open] > summary { margin-bottom: 6px; }
+.tm-links { margin: 8px 0 0; font-size: 12.5px; overflow-wrap: anywhere; }
+.tm-zoo { margin: 6px 0; padding: 6px 10px; border-left: 3px solid var(--muted, rgba(127, 127, 127, .5)); font-size: 12.5px; overflow-wrap: anywhere; }
+.tm-zoo p { margin: 0 0 4px; }
+.tm-panel { margin-top: 12px; }
+.tm-opts { display: grid; gap: 10px; margin-top: 10px; }
+.tm-opt { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.tm-opt input[type="number"] { width: 5em; }
+@media (max-width: 600px) { .tm-ul { padding-left: 18px; } }
+@media print { .tm-more:not([open]) { display: none; } }

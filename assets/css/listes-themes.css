@@ -64,6 +64,8 @@
 .ldc-hint { font-size: 12px; }
 .ld-table:has(.cx-ldck) .ld-ck-b { display: none; } /* « ☑ Choisir des lignes » de Prendre depuis… a déjà ses cases */
 .ld-ck-b { margin: 0 8px 0 -2px; flex: none; width: 22px; height: 22px; border: 1.5px solid var(--muted, #6d6d6d); border-radius: 5px; background: var(--card-bg, #fff); padding: 0; cursor: pointer; display: inline-grid; place-items: center; color: #fff; font-size: 14px; line-height: 1; opacity: 0; transition: opacity .12s; vertical-align: middle; }
+.data-table .ld-ck-b { width: 22px; padding: 0; } /* plus fort que « .data-table th > button » (100 %) */
+.data-table th > .ld-ck-b + button { width: calc(100% - 32px); }
 .ld-ck-b::after { content: ''; }
 .ld-ck-b[aria-checked="true"] { background: var(--blue-bright, #055dff); border-color: var(--blue-bright, #055dff); }
 .ld-ck-b[aria-checked="true"]::after { content: '✓'; }
