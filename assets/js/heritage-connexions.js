@@ -1033,7 +1033,18 @@
         dlg.querySelector('[data-cx-takehere]')?.addEventListener('click', async () => { const p = need(); if (!p.length || busy) return; busy = true; dlg.close(); await deliver(target, p, {here: true, ctx: st.ctx || null, fromBasket: p.some(x => x.id && st.fromBasket?.has(x.id)), original: p}); });
         dlg.addEventListener('keydown', e => { if (e.key === 'Escape' && dlg.classList.contains('is-sheet')) { e.preventDefault(); closeSheet(st); } else if (e.key === 'Escape' && dlg.classList.contains('is-railopen')) { e.preventDefault(); dlg.classList.remove('is-railopen'); } });
         paintCount(st); drawTab(st);
+        pisteChoice(st); // 📌 au niveau de l'enquête : « Rattacher à une piste »
         return st;
+    }
+    /** dans le pied de Prendre depuis… ouvert sur une enquête : « Rattacher à une piste : [— aucune —] » (l'item_id de la destination) */
+    async function pisteChoice(st) {
+        if (st.target?.id !== 'investigation' || !st.ctx?.investigation_id || st.ctx.item_id) return;
+        let items = []; try { items = (await api('investigation', {id: st.ctx.investigation_id})).items || []; } catch (_) { return; }
+        const foot = st.dlg?.querySelector('.cx-cnt'); if (!foot || !items.length) return;
+        const base = {...st.ctx};
+        foot.insertAdjacentHTML('beforeend', `<label class="cx-pchoice">${esc(T('Rattacher à une piste :'))} <select data-cx-piste><option value="">${esc(T('— aucune —'))}</option>${items.map(it => `<option value="${Number(it.id)}">${esc(String(it.title || '').slice(0, 80))}</option>`).join('')}</select></label>`);
+        foot.querySelector('[data-cx-piste]').addEventListener('change', e => { const it = items.find(x => String(x.id) === e.target.value);
+            st.ctx = it ? {...base, item_id: Number(it.id), mode: 'one', label: T('Ici : la piste « {t} »', {t: it.title})} : {...base}; });
     }
     function goTab(st, k) {
         if (st.tab !== k) { st.tab = k; st.q = ''; st.filters = new Set(); st.list = null; st.dlg.querySelector('[data-cx-q]').value = ''; }
@@ -1884,7 +1895,28 @@
     /** une destination « cette piste » (menu ⋯ d'une piste : « 📥 Prendre dans cette piste… ») */
     function pisteDest(invId, item) {
         const base = DT.find(t => t.id === 'investigation');
-        return {...base, id: 'investigation', here: () => ({investigation_id: Number(invId), item_id: Number(item.id), mode: 'one', title: invTitle(), label: T('Ici : la piste « {t} »', {t: item.title})})};
+        return {...base, id: 'investigation', icon: '📌', here: () => ({investigation_id: Number(invId), item_id: Number(item.id), mode: 'one', title: invTitle(), label: T('Ici : la piste « {t} »', {t: item.title})})};
+    }
+    /* 📌 « Rattaché à cette piste » dans la fenêtre d'une piste (app.js : openInvestigationItemDialog) : les pièces de la piste (item_link_*,
+       comme sur la ligne de la piste), ✕ et ↶ ; « 📥 Prendre depuis… » et « 🧺 Depuis le panier » ouvrent Prendre depuis… vers CETTE piste */
+    function pisteAttach(form, invId, item) {
+        form.querySelector('[data-cx-patt]')?.remove();
+        if (!enabled()) return;
+        const host = form.querySelector('.pk-host'); if (!host) return;
+        const box = document.createElement('section'); box.className = 'cx-patt'; box.dataset.cxPatt = ''; host.before(box);
+        let cur = item;
+        const paint = () => { box.innerHTML = `<span class="cx-patt-h">📌 ${esc(T('Rattaché à cette piste'))}</span>${cur?.id
+            ? `${linksHtml(cur) || `<p class="cx-muted cx-patt-none"><small>${esc(T('Rien pour l’instant : des fiches, des actes, des sources, des médias, des notes, des lieux, des données…'))}</small></p>`}${kiosk() ? '' : `<div class="cx-patt-acts"><button type="button" class="button small secondary" data-cx-patt-take>📥 ${esc(T('Prendre depuis…'))}</button><button type="button" class="button small secondary" data-cx-patt-basket>🧺 ${esc(T('Depuis le panier'))}</button></div>`}`
+            : `<p class="cx-muted"><small>${esc(T('Enregistre d’abord la piste : tu pourras ensuite y rattacher des fiches, des actes, des données…'))}</small></p>`}`; };
+        const refresh = async () => { if (!cur?.id || !box.isConnected) return; try { const d = await api('investigation', {id: invId}); const it = (d.items || []).find(x => Number(x.id) === Number(cur.id)); if (it) { cur = {...cur, links: it.links || []}; paint(); } } catch (_) {} };
+        const afterTake = () => { const dl = takeState?.dlg; if (!dl) return; dl.addEventListener('close', () => { setTimeout(refresh, 700); setTimeout(refresh, 2000); }, {once: true}); };
+        box.addEventListener('click', e => {
+            if (e.target.closest('[data-cx-patt-take]')) { openTake({dest: pisteDest(invId, cur)}).then(afterTake); return; }
+            if (e.target.closest('[data-cx-patt-basket]')) { openTake({dest: pisteDest(invId, cur), tab: 'basket'}).then(afterTake); return; }
+            if (e.target.closest('[data-cx-link-x]')) { setTimeout(refresh, 600); setTimeout(refresh, 1500); }
+        });
+        document.addEventListener('click', e => { if (box.isConnected && e.target.closest?.('.toast button')) setTimeout(refresh, 800); }); // ↶ Annuler
+        paint();
     }
     function linksHtml(item) {
         const links = item?.links || []; if (!links.length) return '';
@@ -1927,6 +1959,6 @@
             undoToast(T('📮 Réponse rangée dans la piste « {p} »', {p: l.b_label || ''}), {undo: async () => { await post('inv_receive_undo', r); }});
         }}});
     }
-    ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
+    ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, pisteAttach, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
         openBasketView, chooseBasket, kit: {pickItem, ldRowItem, ldAll, ldSet, ldCrit, listsAll, itemLine, icon, cleanIt, pickKey, viewOf, srcLink: (u, l) => srcLink(u, l), remember: items => remember(items)}, count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
 })();

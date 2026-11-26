@@ -63,7 +63,8 @@
     const tabOn = () => !!tabButton() && !hiddenKeys().includes(MOD);
     /** la place réelle : l'onglet allumé ailleurs (＋ Ajouter un onglet, Réglages → Menus) compte aussi ; éteint, les données restent dans Listes */
     function place() { const v = readLS(K_PLACE, 'listes'); if (!tabOn()) return 'listes'; return v === 'onglet' ? 'onglet' : 'deux'; }
-    const inListes = () => place() !== 'onglet';
+    let inMemo = null; // une fois par dessin : la colonne de Listes le demande pour chaque carte (querySelector + localStorage à chaque fois)
+    const inListes = () => { if (inMemo === null) { inMemo = place() !== 'onglet'; Promise.resolve().then(() => { inMemo = null; }); } return inMemo; };
     const KEYS = ['genealogie-menu-hidden', `genealogie-menu-${MOD}`, 'genealogie-menu-added', K_PLACE];
     function setPlace(v, {undo = true} = {}) {
         if (!['listes', 'onglet', 'deux'].includes(v) || kiosk()) return;
@@ -73,7 +74,7 @@
         if (v === 'listes') { hidden = [...new Set([...hidden, MOD])]; added = added.filter(k => k !== MOD); }
         else { hidden = hidden.filter(k => k !== MOD); added = [...new Set([...added, MOD])]; }
         writeLS('genealogie-menu-hidden', JSON.stringify(hidden)); writeLS(`genealogie-menu-${MOD}`, '1'); writeLS('genealogie-menu-added', JSON.stringify(added)); writeLS(K_PLACE, v);
-        const after = () => { try { A().applyMenuOrder?.(); } catch (_) {} try { E().sync?.(); } catch (_) {} try { if (A().state?.module === 'listes') A().renderSidebar?.(); } catch (_) {} if (A().state?.module === 'maintenance' && A().state.maintenanceTab === SETTINGS_TAB) ext.maintenance[SETTINGS_TAB]?.(); };
+        const after = () => { inMemo = null; try { A().applyMenuOrder?.(); } catch (_) {} try { E().sync?.(); } catch (_) {} try { if (A().state?.module === 'listes') A().renderSidebar?.(); } catch (_) {} if (A().state?.module === 'maintenance' && A().state.maintenanceTab === SETTINGS_TAB) ext.maintenance[SETTINGS_TAB]?.(); };
         after();
         const msg = v === 'listes' ? T('Les données : dans Listes seulement') : v === 'onglet' ? T('Les données : dans l’onglet 📊 Données seulement') : T('Les données : dans Listes et dans l’onglet 📊 Données');
         if (undo && A().undoToast) A().undoToast(msg, {undo: () => { Object.entries(snap).forEach(([k, x]) => writeLS(k, x)); after(); }}); else if (undo) toast(msg);

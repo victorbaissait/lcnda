@@ -112,7 +112,10 @@
         ['g_create', '🛠️', 'Créer et raconter', ['edit_tools', 'atelier_list', 'boards_list', 'topic_sheets_list', 'layout_books', 'graphs_list']]];
     window.LCNDA_EXT.listGroupDefaults = LG_DEFAULT; // 🧰 app-listes-donnees.js range ses listes dans « Données »
     const listKeysAll = () => orderedListTypes(true).map(r => r[0]);
-    const LG = window.LCNDA_SIDEGROUPS({name: 'listes', panelTitle: 'Ordre des listes', key: 'genealogie-list-groups', defaults: LG_DEFAULT, allKeys: listKeysAll, label: k => orderedListTypes(true).find(r => r[0] === k)?.[2] || k, defaultEnabled: true,
+    // les noms de toutes les listes, calculés une fois par dessin de la colonne (avant : orderedListTypes() pour CHAQUE carte, des secondes avec 600 listes)
+    let labelsMemo = null;
+    const listLabels = () => { if (!labelsMemo) { labelsMemo = new Map(orderedListTypes(true).map(r => [r[0], r[2]])); Promise.resolve().then(() => { labelsMemo = null; }); } return labelsMemo; };
+    const LG = window.LCNDA_SIDEGROUPS({name: 'listes', panelTitle: 'Ordre des listes', key: 'genealogie-list-groups', defaults: LG_DEFAULT, allKeys: listKeysAll, label: k => listLabels().get(k) || k, defaultEnabled: true,
         flatOrder: listKeysAll, flatDefaults: () => (window.LCNDA_APP.defaultListTypes || orderedListTypes(true)).map(r => r[0]),
         setFlatOrder: keys => { try { localStorage.setItem('genealogie-list-order', JSON.stringify(keys)); } catch (_) {} },
         canHide: true, hidden: () => { try { const v = JSON.parse(localStorage.getItem('genealogie-list-hidden') || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } }, setHidden: keys => { try { localStorage.setItem('genealogie-list-hidden', JSON.stringify(keys)); } catch (_) {} },

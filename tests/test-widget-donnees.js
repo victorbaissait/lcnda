@@ -40,6 +40,10 @@ const FAKE = () => {
         const pid = Number((await post('save_atelier_project', {title: 'Les courses du village', kind: 'livre'})).id);
         const overview = async () => { await B.go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: pid, node: 'overview', sel: []}}); await p.waitForSelector('.h-atw-box [data-atw-add]', {timeout: 20000}); };
         const W = '.h-atw-box [data-atw] .atd';
+        /** ↓ jusqu'à la carte voulue (la carte « au clavier » est marquée .is-kb) */
+        const kbTo = async (S, id) => { const ids = await p.$$eval(`${S} [data-ld-pick]`, a => a.map(x => x.dataset.ldPick)); const i = ids.indexOf(id); assert.ok(i >= 0, ids.join(','));
+            for (let k = 0; k <= i; k++) await p.press(`${S} [data-ld-ov-q]`, 'ArrowDown');
+            assert.strictEqual(await p.$eval(`${S} .ldt-pick-card.is-kb`, x => x.dataset.ldPick), id); };
 
         await t('« ＋ Widget » propose « 📊 Données téléchargées » ; il se règle DANS le widget (pas de fenêtre)', async () => {
             await overview();
@@ -66,7 +70,7 @@ const FAKE = () => {
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-donnees-choix-theme')), 'sport', 'le dernier thème est retenu');
             await p.click(`${S} [data-ldt-pth="all"]`);
             await p.fill(`${S} [data-ld-ov-q]`, 'savon'); await sleep(200);
-            await p.press(`${S} [data-ld-ov-q]`, 'ArrowDown'); assert.ok(await p.$(`${S} .ldt-pick-card.is-kb`));
+            await kbTo(S, 'test_caisses');
             await p.press(`${S} [data-ld-ov-q]`, 'Enter');
             await p.waitForSelector(`${S} .atd-chosen`); assert.match(await p.textContent(`${S} .atd-chosen`), /Courses de caisses à savon/);
             assert.match(await p.textContent(`${S} .atd-lic`), /Jeu d’essai/);
@@ -154,7 +158,7 @@ const FAKE = () => {
             assert.ok(await p.$('dialog[open] select[name=kind] option[value="data"]'));
             await p.selectOption('dialog[open] select[name=kind]', 'data');
             const D = 'dialog[open]';
-            await p.fill(`${D} [data-ld-ov-q]`, 'savon'); await p.press(`${D} [data-ld-ov-q]`, 'Enter');
+            await p.fill(`${D} [data-ld-ov-q]`, 'savon'); await sleep(200); await kbTo(D, 'test_caisses'); await p.press(`${D} [data-ld-ov-q]`, 'Enter');
             await p.waitForSelector(`${D} .atd-chosen`);
             await p.fill(`${D} [data-atd-f="to"]`, '1780'); await p.dispatchEvent(`${D} [data-atd-f="to"]`, 'change');
             await p.waitForSelector(`${D} [data-atd-pick]`, {timeout: 20000});
@@ -194,7 +198,7 @@ const FAKE = () => {
         /* ═════════ vide, 390 px, sombre ═════════ */
         await t('sans données téléchargées : une phrase calme qui mène à Données', async () => {
             await overview();
-            await p.evaluate(() => { const E = window.LCNDA_EXT.dataListsEngine; window.__isInst = E.isInstalled; E.isInstalled = async () => false; });
+            await p.evaluate(() => { const E = window.LCNDA_EXT.dataListsEngine; E.list = () => []; }); // aucune liste ici (rechargé ensuite)
             await p.click('.h-atw-box [data-atw-add]'); await p.click('dialog[open] [data-atw-new="donnees"]');
             await p.waitForFunction(() => [...document.querySelectorAll('.h-atw-box .atd-cfg')].some(x => /Aucune donnée téléchargée/.test(x.textContent)), null, {timeout: 20000});
             const last = p.locator('.h-atw-box .atd-cfg').last();

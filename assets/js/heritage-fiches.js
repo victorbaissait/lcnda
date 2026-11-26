@@ -238,6 +238,7 @@
     const titleOf = b => b.title || (b.type === 'data' ? dTitle(b) : b.type === 'screen' && ext.appScreen ? ext.appScreen.label(b.target) : b.type === 'widget' ? (ext.customWidgetDefs?.()[b.widget]?.name || 'Widget') : b.type === 'diagram' ? ((ext.diagramItems?.() || []).find(x => Number(x[0]) === Number(b.diagram))?.[1].replace(/^\S+\s/, '') || 'Diagramme') : kindOf(b.type)[2]);
     function renderSheet(token) {
         const c = cur;
+        if (kiosk()) editing = false; // R6 : avant de dessiner les blocs (pas d'outils ✎ en consultation)
         const blocks = c.blocks.map((b, i) => {
             const tools = editing ? `<span class="h-fi-tools"><button type="button" class="h-bt h-fi-arrow" data-fi-up="${i}" title="Avant">↑</button><button type="button" class="h-bt h-fi-arrow" data-fi-down="${i}" title="Après">↓</button><button type="button" class="h-bt" data-fi-edit="${i}" title="Modifier">✎</button><button type="button" class="h-bt" data-fi-dup="${i}" title="Dupliquer">⧉</button><button type="button" class="h-bt" data-fi-del="${i}" title="Supprimer">🗑</button></span>`
                 : (['screen'].includes(b.type) ? `<button type="button" class="button small secondary" data-ct-open-screen="${esc(b.target)}" title="Ouvrir en grand">↗</button>` : '') + (kiosk() ? '' : `<button type="button" class="h-bt h-fi-quickedit" data-fi-edit="${i}" title="Modifier">✎</button>`);
@@ -544,14 +545,19 @@
         const before = JSON.parse(JSON.stringify(c.blocks[i]));
         let m; try { const res = await dRun(before, c); if (res.error) return toast(res.error, 'error'); m = await dModel(before, res); } catch (e) { return toast(e.message, 'error'); }
         const after = {...before, mode: 'frozen', snap: m};
-        const put = async blk => { if (cur !== c) throw new Error(i18n('la fiche n’est plus ouverte')); const k = c.blocks.findIndex(x => x.id === id); if (k >= 0) c.blocks[k] = blk; await save(); if (S().module === 'fiches') refresh(); };
-        await put(after);
-        A().undoToast?.(i18n(before.mode === 'frozen' ? 'Copie refaite : « {nm} »' : 'Bloc figé : « {nm} »', {nm: titleOf(before)}), {undo: () => put(before), redo: () => put(after)});
+        c.blocks[i] = after; await save(); refresh();
+        A().undoToast?.(i18n(before.mode === 'frozen' ? 'Copie refaite : « {nm} »' : 'Bloc figé : « {nm} »', {nm: titleOf(before)}), {undo: () => dPut(c.id, id, before), redo: () => dPut(c.id, id, after)});
+    }
+    /** remettre un bloc (ou l'enlever : blk = null) dans la fiche telle qu'elle est sur le serveur, puis la redessiner si elle est ouverte */
+    async function dPut(sheetId, blockId, blk) {
+        const s = await api('topic_sheet', {id: sheetId}), k = s.blocks.findIndex(x => x.id === blockId);
+        if (blk) { if (k >= 0) s.blocks[k] = blk; else s.blocks.push(blk); } else if (k >= 0) s.blocks.splice(k, 1);
+        await post('save_topic_sheet', {id: s.id, title: s.title, subtitle: s.subtitle, icon: s.icon, color: s.color, blocks: s.blocks});
+        if (S().module === 'fiches' && Number(S().ficheId) === Number(sheetId)) refresh();
     }
     /** ↶ après ✎ Enregistrer d'un bloc « Données » : le bloc d'avant, ou plus de bloc */
     function dUndo(c, before, after, fresh) {
-        const put = async blk => { if (cur !== c) throw new Error(i18n('la fiche n’est plus ouverte')); const k = c.blocks.findIndex(x => x.id === after.id); if (blk) { if (k >= 0) c.blocks[k] = blk; else c.blocks.push(blk); } else if (k >= 0) c.blocks.splice(k, 1); await save(); if (S().module === 'fiches') refresh(); };
-        A().undoToast?.(i18n(fresh ? 'Bloc « {nm} » ajouté' : 'Bloc « {nm} » enregistré', {nm: titleOf(after)}), {undo: () => put(before), redo: () => put(after)});
+        A().undoToast?.(i18n(fresh ? 'Bloc « {nm} » ajouté' : 'Bloc « {nm} » enregistré', {nm: titleOf(after)}), {undo: () => dPut(c.id, after.id, before), redo: () => dPut(c.id, after.id, after)});
     }
     /* ✎ les réglages : la liste (par thème, listes réunies en tête) ou une question, les filtres, les colonnes, l'affichage, le mode */
     function dPickerOptions(sel) {

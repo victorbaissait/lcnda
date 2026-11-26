@@ -475,3 +475,13 @@ dialog.cx-put { width: var(--modal-m); max-width: 94vw; height: min(680px, 90vh)
 .cx-dpick { margin: 0 0 8px; }
 .cx-dchosen { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 0 0 8px; padding: 8px 10px; border: var(--line); background: var(--blue-soft, #eaf2ff); }
 @media (prefers-reduced-motion: reduce) { .cx-take .cx-rail button { transition: none; } .cx-take .cx-rail button:hover { transform: none; } }
+/* 📌 « Rattaché à cette piste » (fenêtre d'une piste) ; « Rattacher à une piste » dans le pied de Prendre depuis… */
+.cx-patt { display: grid; gap: 6px; padding: 10px 12px; border: var(--line); background: var(--white); min-width: 0; }
+.cx-patt-h { font: 800 10.5px system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+.cx-patt .cx-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.cx-patt .cx-link { max-width: 100%; overflow-wrap: anywhere; }
+.cx-patt-none { margin: 0; }
+.cx-patt-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.cx-pchoice { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; margin-left: 10px; }
+.cx-pchoice select { max-width: 220px; }
+@media (max-width: 640px) { .cx-pchoice { margin: 6px 0 0; } .cx-pchoice select { max-width: 100%; } }

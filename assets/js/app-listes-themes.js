@@ -108,9 +108,12 @@
         th = th || RANGER.id; memo.set(key, th); return th;
     }
     /** l'index : thème → listes montrées (les liens ↗ compris), recalculé quand le registre change */
-    let IDX = null, IDX_SIG = '';
+    let IDX = null, IDX_SIG = '', IDX_FRESH = '';
     function index() {
-        const ds = (E().list?.() || []).filter(d => E().shown?.(d) !== false);
+        const all = E().list?.() || [], fresh = `${all.length}|${stamp}|${THEMES.length}`;
+        if (IDX && IDX_FRESH === fresh) return IDX; // déjà vérifié dans ce même dessin (la colonne demande chaque thème : une fois suffit)
+        IDX_FRESH = fresh; Promise.resolve().then(() => { IDX_FRESH = ''; });
+        const ds = all.filter(d => E().shown?.(d) !== false);
         const sig = `${ds.length}|${stamp}|${THEMES.length}|${ds.map(d => d.id).join(',').length}`;
         if (IDX && sig === IDX_SIG) return IDX;
         const by = new Map([...themes(), RANGER].map(t => [t.id, []]));

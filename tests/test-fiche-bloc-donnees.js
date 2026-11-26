@@ -70,7 +70,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
     const p = B.page;
     const post = (a, b) => p.evaluate(async ([x, y]) => { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result ?? r; }, [a, b]);
     const sheet = async id => p.evaluate(i => window.LCNDA_APP.api('topic_sheet', {id: i}), id);
-    const openSheet = async (id, editing = false) => { await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.dataset.ownClose = '1'; delete d.dataset.dirty; d.close(); })); await p.evaluate(i => { const A = window.LCNDA_APP; A.state.ficheId = i; A.setModule('fiches'); }, id); await p.waitForSelector('#workspace .h-fi-grid', {timeout: 20000}); if (editing) { await p.click('[data-fi-mode]'); await p.waitForSelector('.h-fi.is-editing'); } };
+    const openSheet = async (id, editing = false) => { await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.dataset.ownClose = '1'; delete d.dataset.dirty; d.close(); })); await p.evaluate(i => { const A = window.LCNDA_APP; A.state.ficheId = i; A.setModule('fiches'); }, id); await p.waitForSelector('#workspace .h-fi-grid', {timeout: 20000}); if (editing !== await p.evaluate(() => !!document.querySelector('#workspace .h-fi.is-editing'))) { await p.click('[data-fi-mode]'); await p.waitForSelector(editing ? '.h-fi.is-editing' : '.h-fi:not(.is-editing)'); } };
     const clickUndo = async () => { const u = p.locator('.toast.undo .ui-toast-btn').last(); await u.waitFor({timeout: 8000}); await u.click(); await sleep(800); };
     const shot = process.env.FICHE_SHOT || '';
     let dialogPng = null;
@@ -129,9 +129,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             assert.deepStrictEqual([b.mode, b.list, b.near, b.km, b.limit, b.from, b.to, b.cols, b.famcol, b.snap], ['live', 'test_batailles', 'subject', 40, 3, 1700, 1900, ['nom', 'annee', 'lieu'], true, undefined]);
             await clickUndo();
             assert.ok(!(await sheet(id)).blocks.some(x => x.type === 'data'), '↶ Annuler : plus de bloc');
-            await p.locator('.toast.undo .ui-toast-btn').last().click().catch(() => {}); // ↷ rétablir (s'il est proposé), sinon on le remet
-            await sleep(800);
-            if (!(await sheet(id)).blocks.some(x => x.type === 'data')) { const s2 = await sheet(id); await post('save_topic_sheet', {...s2, blocks: [...s2.blocks, b]}); }
+            const s2 = await sheet(id); await post('save_topic_sheet', {...s2, blocks: [...s2.blocks, b]}); // on le remet pour la suite
         });
         await t('une question : « 🔎 Comprendre » (Entrée au clavier) remplit les réglages et dit « Ce que j’ai compris » (pastilles qui mènent au champ)', async () => {
             await openSheet(id, true);
@@ -216,18 +214,19 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
         await t('📎 depuis une liste : ☑ lignes → « Insérer… » → « Dans une fiche → nouveau bloc Données (figé) » → la fiche ; ↶ Annuler', async () => {
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'data_test_batailles'; A.setModule('listes'); });
             await p.waitForSelector('[data-ld-ck="0"]', {timeout: 20000});
+            const n0 = (await sheet(id)).blocks.filter(x => x.type === 'data').length;
             await p.click('[data-ld-ck="0"]'); await p.click('[data-ld-ck="1"]');
             await p.click('[data-ldc-ins]');
             const item = p.locator('.ui-actmenu .ui-actmenu-i', {hasText: 'Dans une fiche → nouveau bloc Données (figé)'});
             await item.waitFor({timeout: 5000}); await item.click();
             const target = p.locator('.ui-actmenu .ui-actmenu-i', {hasText: 'Tulle'}); await target.waitFor({timeout: 5000}); await target.click();
-            await p.waitForFunction(async i => (await window.LCNDA_APP.api('topic_sheet', {id: i})).blocks.filter(x => x.type === 'data').length === 2, id, {timeout: 10000});
-            const nb = (await sheet(id)).blocks.filter(x => x.type === 'data').at(-1);
-            assert.strictEqual(nb.mode, 'frozen'); assert.strictEqual(nb.list, 'test_batailles'); assert.strictEqual(nb.snap.rows.length, 2);
+            await p.waitForFunction(async ([i, n]) => (await window.LCNDA_APP.api('topic_sheet', {id: i})).blocks.filter(x => x.type === 'data').length === n + 1, [id, n0], {timeout: 10000});
+            const all = (await sheet(id)).blocks, nb = all.filter(x => x.type === 'data').at(-1);
+            assert.strictEqual(nb.mode, 'frozen', JSON.stringify(all.map(x => [x.id, x.type, x.mode, x.list, x.snap?.rows?.length]))); assert.strictEqual(nb.list, 'test_batailles'); assert.strictEqual(nb.snap.rows.length, 2);
             assert.ok(nb.snap.rows.every(r => /^https:\/\//.test(r.u) && r.s), JSON.stringify(nb.snap.rows));
             assert.ok(nb.snap.cols.some(c => c.l === 'Source'), 'la colonne Source du bloc prêt');
             await clickUndo();
-            assert.strictEqual((await sheet(id)).blocks.filter(x => x.type === 'data').length, 1, '↶ Annuler : le bloc ajouté s’en va');
+            assert.strictEqual((await sheet(id)).blocks.filter(x => x.type === 'data').length, n0, '↶ Annuler : le bloc ajouté s’en va');
             await p.evaluate(() => window.LCNDA_EXT.listesChoix?.clear?.());
         });
         await t('390 px en sombre : la fiche et les réglages du bloc ne débordent pas, rien de collé ; aucune erreur', async () => {

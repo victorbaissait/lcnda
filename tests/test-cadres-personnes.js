@@ -119,7 +119,7 @@ async function looks(p, rootSel, dark, sel = '.ui-person-card') {
     assert.ok(over <= 1, `la page défile de côté (${over} px)`);
     const glue = await scan(p, rootSel);
     const inCards = await p.evaluate(({marks, sel}) => marks.filter(m => document.querySelector(`[data-glue-item="${m.mark}"]`)?.closest(sel)), {marks: glue, sel});
-    assert.deepEqual(inCards.map(g => `${g.item} ${g.bad.map(b => b.kind + b.side + b.gap).join(',')}`), [], 'rien de collé dans les cadres');
+    assert.deepEqual(inCards.map(g => `${g.item} [${g.box}] ${g.bad.map(b => b.kind + b.side + b.gap).join(',')}`), [], 'rien de collé dans les cadres');
     const bg = await p.$eval(sel, el => { let e = el; while (e) { const c = getComputedStyle(e).backgroundColor; const m = c.match(/\d+(\.\d+)?/g); if (m && (m.length < 4 || +m[3] > 0)) return m.slice(0, 3).map(Number); e = e.parentElement; } return [255, 255, 255]; });
     const lum = (bg[0] * 299 + bg[1] * 587 + bg[2] * 114) / 1000;
     if (dark) assert.ok(lum < 110, 'fond sombre en sombre : ' + bg); else assert.ok(lum > 180, 'fond clair : ' + bg);
@@ -140,7 +140,7 @@ const setFrames = (p, on) => p.evaluate(on => { if (on === null) localStorage.re
     const {ID, base, browser, stop} = await start();
     const M = mocks(ID);
     try {
-        for (const [w, dark] of [[1440, false], [390, false], [1440, true], [390, true]]) {
+        for (const [w, dark] of [[1440, false], [390, false], [1440, true], [390, true]].filter(([w, d]) => !process.env.ONLY || process.env.ONLY === `${w}${d ? 'd' : ''}`)) {
             const tag = `${w} px${dark ? ', sombre' : ''}`;
             const p = await newPage(browser, base, {width: w, dark});
             await mock(p, 'compl', M.doutes, sp => sp.get('op') === 'doutes');
@@ -180,7 +180,7 @@ const setFrames = (p, on) => p.evaluate(on => { if (on === null) localStorage.re
                 assert.equal(await p.$$eval('#workspace .ui-person-card[data-person-card] [data-ctl-i]', l => l.length), 4);
                 const first = await p.$eval('#workspace .ui-person-card', c => ({sub: c.querySelector('.ui-person-card-sub')?.textContent, life: c.querySelector('.ui-person-card-life')?.textContent, n: c.querySelector('.ui-person-card-count').textContent, i: [...c.querySelectorAll('[data-ctl-i]')].map(r => r.dataset.ctlI)}));
                 assert.match(first.sub, /Sosa 5/); assert.match(first.life, /1895/); assert.match(first.n, /2 choses à vérifier/);
-                assert.deepEqual(first.i, ['0', '2'], 'les numéros de ligne restent ceux de la liste (boutons, menus)');
+                assert.deepEqual(first.i, ['0', '2'], 'les numéros de ligne restent ceux de la liste (boutons, menus) : ' + JSON.stringify(first));
                 await looks(p, '#workspace', dark);
                 if (full) {
                     await p.click('#workspace [data-ctl-sort="exceptions"]'); await settle(p);
@@ -199,7 +199,7 @@ const setFrames = (p, on) => p.evaluate(on => { if (on === null) localStorage.re
                 assert.deepEqual(await cardNames(p), ['Anne LACOMBE', 'Louis MAZAUD']);
                 assert.match(await p.textContent('#workspace .ui-person-card .ui-person-card-count'), /3 pistes/);
                 assert.equal(await p.$$eval('#workspace .ui-person-card .pst-who', l => l.length), 0, 'le nom est en tête du cadre, plus sur chaque ligne');
-                const more = await p.textContent('#workspace [data-pst-rest]'); assert.match(more, /\+ 1 autre piste pour elle/);
+                const more = await p.textContent('#workspace [data-pst-rest]'); assert.match(more, /[+＋] 1 autre piste pour elle/);
                 await looks(p, '#workspace', dark);
                 if (full) {
                     await p.click('#workspace [data-pst-rest]');
