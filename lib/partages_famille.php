@@ -44,7 +44,8 @@ function pf_item_pid(PDO $pdo, array $r): int
 function pf_item_text(array $it): string
 {
     $bits = [(string) ($it['title'] ?? ''), (string) ($it['value'] ?? ''), (string) ($it['source'] ?? '')];
-    array_walk_recursive($it['data'] ?? [], static function ($v) use (&$bits) { if (is_scalar($v)) { $bits[] = (string) $v; } });
+    $data = is_array($it['data'] ?? null) ? $it['data'] : [];
+    array_walk_recursive($data, static function ($v) use (&$bits) { if (is_scalar($v)) { $bits[] = (string) $v; } });
     return implode(' · ', $bits);
 }
 
