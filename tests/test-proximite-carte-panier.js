@@ -37,6 +37,10 @@ const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { awai
         await p.evaluate(() => { try { localStorage.removeItem('genealogie-proximite-carte'); } catch (_) {} });
         await t('Proximité : « 🗺 Carte » avant « ⤓ Exporter ▾ », fermée au départ ; elle monte avec les points, le rayon et la légende', async () => {
             await openProx();
+            // les fiches restent lisibles : la case à cocher n'écrase pas le texte dans une colonne étroite (bug du 26/11)
+            const narrow = await p.$$eval('#workspace .date-results > article', a => a.slice(0, 6).map(el => { const t = [...el.children].find(c => c.querySelector('button, a') && !c.matches('.rp-pick, .rk-row-acts, .lc-av, .lc-av-wrap, .person-card-initial')); return t ? Math.round(t.getBoundingClientRect().width) : 0; }));
+            assert.ok(narrow.length && narrow.every(w => w > 140), 'colonne du texte des fiches trop étroite : ' + narrow.join(', '));
+            if (process.env.PROX_SHOT) await p.screenshot({path: process.env.PROX_SHOT});
             const order = await p.$$eval('#workspace .page-header .ui-ph-actions > button:not([hidden])', a => a.map(x => (x.matches('[data-rk-map-btn]') ? 'map' : x.matches('[data-rp-export]') ? 'export' : x.matches('[data-rp-print]') ? 'print' : '?')));
             assert.deepStrictEqual(order.filter(x => x !== '?').slice(0, 2), ['map', 'export'], order.join(','));
             assert.ok(await p.$('#workspace .page-header [data-rp-print]'), '🖨 Imprimer reste (à côté, ou dans « ⋯ » : deux boutons au plus, la règle des en-têtes)');

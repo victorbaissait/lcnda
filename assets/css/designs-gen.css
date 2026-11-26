@@ -5003,6 +5003,7 @@
 :root[data-lc-density] .rk-leg{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .rk-row-acts{gap:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .rk-ico{padding:1px calc(5px * var(--lc-sp))}
+:root[data-lc-density] .date-result.rk-row{padding-right:calc(56px * var(--lc-sp))}
 /* audit-enquetes.css */
 :root[data-lc-density] .enq-row-act{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .enq-conclusion{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}

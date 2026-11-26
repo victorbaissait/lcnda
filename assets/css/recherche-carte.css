@@ -47,3 +47,9 @@ tr.rk-row .rk-row-acts { margin-left: .4rem; vertical-align: middle; }
     .rk-map.is-open { margin-left: 0; margin-right: 0; }
     .rk-map-host { border-radius: 8px; }
 }
+
+/* une fiche avec sa case à cocher : 3 colonnes (case · portrait · texte) — sinon la case prenait la place du portrait et le texte tombait dans la colonne de 42 px */
+.date-result:has(> .rp-pick) { grid-template-columns: auto 42px minmax(0, 1fr); }
+.date-result:has(> .rp-pick) > .lc-av, .date-result:has(> .rp-pick) > .lc-av-wrap, .date-result:has(> .rp-pick) > .person-card-initial { grid-column: 2; }
+.date-result:has(> .rp-pick) > :not(.rp-pick):not(.lc-av):not(.lc-av-wrap):not(.person-card-initial):not(.rk-row-acts) { grid-column: 3; min-width: 0; }
+.date-result.rk-row { padding-right: 56px; } /* 📎 🧺 en haut à droite : le texte ne passe pas dessous */
