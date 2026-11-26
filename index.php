@@ -1372,7 +1372,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes-reunies-plus.js?v=1" defer></script><!-- 🔀 Éruptions, Crues, Batailles, Monuments, Soldats réunis ; 🔎 chercher dans les valeurs ; 👪 cercles de la famille sur la carte -->
 <script src="assets/js/app-listes-choix.js?v=4" defer></script><!-- ☑ plusieurs lignes d’un coup : cases, Tout cocher, barre du bas (📎 · 🧺 · ⤓) -->
 <script src="assets/js/app-listes-maj.js?v=6" defer></script>
-<script src="assets/js/app-donnees-accueil.js?v=8" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
+<script src="assets/js/app-donnees-accueil.js?v=9" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-onglet.js?v=1" defer></script><!-- 📊 l’onglet Données : on y reste (thèmes, listes réunies, listes), sa colonne de gauche, ranger / masquer les thèmes -->
 <script src="assets/js/app-donnees-plus.js?v=6" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
 <script src="assets/js/app-donnees-plus-outils.js?v=5" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
@@ -1452,7 +1452,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=30" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=2" defer></script>
 <script src="assets/js/heritage-boards.js?v=56" defer></script>
-<script src="assets/js/heritage-dnd.js?v=17" defer></script>
+<script src="assets/js/heritage-dnd.js?v=18" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
 <script src="assets/js/heritage-studio.js?v=122" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=2" defer></script>

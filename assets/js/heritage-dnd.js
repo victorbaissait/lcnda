@@ -148,7 +148,9 @@
             g.setAttribute('aria-label', GRIP_LABEL); if (!g.title || /^(Déplacer|Glisser pour (déplacer|ranger))$/.test(g.title)) g.title = GRIP_LABEL;
         });
     }
-    new MutationObserver(settle(() => gripsReady(), 90)).observe(document.documentElement, {childList: true, subtree: true});
+    // ⏱ seulement quand une poignée arrive (avant : #workspace relu toutes les 600 ms tant que la page change, ≈ 0,7 s sur une fiche)
+    const gripsSoon = settle(() => gripsReady(), 90);
+    new MutationObserver(recs => { for (const r of recs) for (const n of r.addedNodes) if (n.nodeType === 1 && (n.matches(GRIPS) || n.querySelector(GRIPS))) { gripsSoon(); return; } }).observe(document.documentElement, {childList: true, subtree: true});
     const sameKind = (a, b) => a && b && a.tagName === b.tagName && (a.className.split(' ')[0] || '') === (b.className.split(' ')[0] || '');
     /** une liste à poignée sans flèches (glisser-déposer du navigateur) : on joue le même glisser, d'une ligne */
     function dragOneStep(row, grip, dir) {

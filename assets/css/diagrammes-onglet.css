@@ -118,3 +118,4 @@
   .dgo-bar .dgo-sp { display: none; }
   .dgo-selbar { bottom: 8px; }
 }
+.dgo-page .tw { max-width: 100%; overflow-x: auto; }

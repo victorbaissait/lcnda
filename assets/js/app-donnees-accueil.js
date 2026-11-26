@@ -234,7 +234,8 @@
         return statsP;
     }
     async function fillStats(page) {
-        let S; try { S = await stats(); } catch (e) { const f = page.isConnected && page.querySelector('[data-dr-foot]'); if (f) f.textContent = '⚠ ' + T('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}); return; } if (!page.isConnected) return;
+        let S; const P = stats(); try { S = await P; } catch (e) { if (P !== statsP && statsP) return; // (une vérification plus récente est en route)
+            const f = page.isConnected && page.querySelector('[data-dr-foot]'); if (f) f.textContent = '⚠ ' + T('Impossible de vérifier si ces données sont installées : {e}', {e: e?.message || String(e)}); return; } if (!page.isConnected || (P !== statsP && statsP)) return; // un pack installé ou retiré entre-temps : la vérification suivante écrit
         Object.entries(S.byTheme).forEach(([id, s]) => {
             const n = page.querySelector(`[data-dr-tn="${CSS.escape(id)}"]`), st = page.querySelector(`[data-dr-ts="${CSS.escape(id)}"]`);
             if (n) n.textContent = `${T('{a} / {b} listes', {a: nf(s.inst), b: nf(s.n)})}${s.rows ? ` · ${s.rows >= 1e6 ? T('{n} millions de lignes', {n: (Math.round(s.rows / 1e5) / 10).toLocaleString('fr-FR')}) : T('{n} lignes', {n: nf(s.rows)})}` : ''}`;

@@ -30,9 +30,11 @@ const PANNE = {status: 500, contentType: 'application/json', body: JSON.stringif
         const idle = async () => { await sleep(300); await p.waitForFunction(() => !document.querySelector('#workspace .loading-screen, #workspace .ld-page .ui-spinner'), null, {timeout: 30000}).catch(() => {}); await sleep(200); };
         const forget = () => p.evaluate(() => window.LCNDA_EXT.dataListsEngine.forgetInstalls());
         const toasts = () => p.$$eval('.ui-toast, .toast', a => a.map(x => x.textContent.trim()).join(' | '));
-        const themeTag = async () => { await p.evaluate(() => { window.LCNDA_EXT.donneesOnglet.open('data_theme_seismes'); window.LCNDA_APP.setModule('donnees'); }); await idle();
-            const lists = p.locator('.ldt-tabs [data-ldt-tab="lists"]'); if (await lists.count()) { await lists.first().click(); await idle(); }
-            await sleep(1500); return p.evaluate(() => document.querySelector('[data-ld-go="data_hist_seismes"]')?.textContent || ''); };
+        // le choix commun d'une liste (compact, « installé » / « à télécharger » sur chaque carte : app-listes-themes.js → LCNDA_EXT.dataListPicker)
+        const themeTag = async () => { await p.evaluate(() => { document.getElementById('essai-picker')?.remove(); const box = document.createElement('div'); box.id = 'essai-picker'; document.body.appendChild(box);
+            window.LCNDA_EXT.dataListPicker(box, {compact: true, filter: d => d.id === 'hist_seismes' || d.id === 'hist_gares'}); });
+            await p.waitForFunction(() => /installé|télécharger|Vérification/.test(document.querySelector('#essai-picker [data-ld-state="hist_seismes"]')?.textContent || ''), null, {timeout: 20000}).catch(() => {});
+            return p.evaluate(() => document.querySelector('#essai-picker [data-ld-state="hist_seismes"]')?.textContent || ''); };
         const recapFoot = async () => { await p.evaluate(() => { window.LCNDA_EXT.dataHome?.setPlace?.('deux', {undo: false}); window.LCNDA_EXT.donneesOnglet.open('dno_recap'); window.LCNDA_APP.setModule('donnees'); }); await idle();
             await p.waitForFunction(() => /listes installées sur|Impossible de vérifier/.test(document.querySelector('#workspace [data-dr-foot]')?.textContent || ''), null, {timeout: 30000});
             return p.textContent('#workspace [data-dr-foot]'); };
@@ -46,9 +48,10 @@ const PANNE = {status: 500, contentType: 'application/json', body: JSON.stringif
             await forget(); await p.route(/action=ld_status/, r => r.fulfill(PANNE));
             const bad = await themeTag();
             assert.match(bad, /Vérification impossible/, bad); assert.doesNotMatch(bad, /à télécharger|à installer/, bad);
-            assert.match(await p.getAttribute('[data-ld-go="data_hist_seismes"] .ldt-tag.is-warn', 'title') || '', /panne \(essai\)/);
+            assert.match(await p.getAttribute('#essai-picker [data-ld-state="hist_seismes"] .ldt-tag.is-warn', 'title') || '', /panne \(essai\)/);
             await p.unroute(/action=ld_status/); await forget();
             const ok = await themeTag(); assert.match(ok, /à télécharger|à installer/, ok);
+            await p.evaluate(() => document.getElementById('essai-picker')?.remove());
         });
 
         await t('📊 récap : la vérification en panne → « ⚠ Vérification impossible (N) », pas des ⤓ comptés pour rien', async () => {
@@ -64,10 +67,12 @@ const PANNE = {status: 500, contentType: 'application/json', body: JSON.stringif
 
         await t('📋 vue d’ensemble des listes : la pastille « ⚠ Vérification impossible », pas « à installer »', async () => {
             await p.route(/action=ld_status/, r => r.fulfill(PANNE)); await forget();
-            await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'data'; A.setModule('listes'); window.LCNDA_EXT.dataListsEngine.overview?.(A.state.workspaceToken); }); await idle(); await sleep(1500);
+            // la vue « par groupes » (Réglages des listes) : les cartes de toutes les listes, avec leur pastille (app-listes-donnees.js : renderOverview)
+            await p.evaluate(() => { localStorage.setItem('genealogie-listes-vue', 'groupes'); const A = window.LCNDA_APP; A.state.listType = 'data'; A.setModule('listes'); window.LCNDA_EXT.dataListsEngine.overview?.(A.state.workspaceToken); });
+            await p.waitForFunction(() => /installer|Vérification/.test(document.querySelector('[data-ld-state="hist_seismes"]')?.textContent || ''), null, {timeout: 20000}).catch(() => {});
             const tag = await p.evaluate(() => document.querySelector('[data-ld-state="hist_seismes"]')?.textContent ?? null);
-            if (tag !== null) { assert.match(tag, /Vérification impossible/, tag); assert.doesNotMatch(tag, /à installer/, tag); }
-            await p.unroute(/action=ld_status/); await forget();
+            assert.ok(tag !== null, 'la pastille de hist_seismes'); assert.match(tag, /Vérification impossible/, tag); assert.doesNotMatch(tag, /à installer/, tag);
+            await p.unroute(/action=ld_status/); await forget(); await p.evaluate(() => localStorage.removeItem('genealogie-listes-vue'));
         });
 
         await t('Réglages → 🗂 Données : l’état d’une famille illisible → « ⚠ Vérification impossible » (pas « ⤓ Télécharger ») ; revenu → normal', async () => {

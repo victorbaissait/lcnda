@@ -179,6 +179,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
         await t('↺ Remettre depuis la 🗑 Corbeille : remis à sa place (son dossier)', async () => {
             await DO(id => window.LCNDA_EXT.diagrammesOnglet.trash([id]), D1); await sleep(800);
             await DO(() => { const d = window.LCNDA_SIDE_FOLDERS.read('diagram'); Object.keys(d.of).forEach(k => { if (!window.LCNDA_EXT.diagramItems().some(([i]) => String(i) === k)) delete d.of[k]; }); window.LCNDA_SIDE_FOLDERS.write('diagram', d); }); // Graphiques oublie le rangement d'un diagramme qu'il ne voit plus
+            await DO(() => { document.querySelector('#sidebar-content [data-dgo-grp="tr"]').open = true; }); // le groupe 🗑 se déplie
             await p.click('#sidebar-content [data-side-value="trash"]'); await idle();
             assert.strictEqual((await st()).hash, '#diagrammes/corbeille');
             assert.ok(await p.$(`#workspace [data-dgo-trow="${D1}"]`)); assert.match(await p.$eval(`#workspace [data-dgo-trow="${D1}"]`, e => e.textContent), /30 jours/);
@@ -273,8 +274,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await DO(() => window.LCNDA_APP.setModule('graphiques')); await idle();
             await p.click(`#sidebar-content [data-side-value="diagram:${D2}"]`); await p.waitForSelector('#workspace .h-dg-inline', {timeout: 15000}); await idle();
             let s = await st(); assert.deepStrictEqual([s.module, s.hash], ['diagrammes', `#diagrammes/${D2}`]);
-            await DO(() => { window.LCNDA_APP.state.listType = 'graphs_list'; window.LCNDA_APP.setModule('listes'); }); await p.waitForSelector(`#workspace [data-gr-open="diagram:${D1}"]`, {timeout: 30000}); await idle();
-            await p.click(`#workspace [data-gr-open="diagram:${D1}"] >> nth=0`); await p.waitForSelector('#workspace .h-dg-inline', {timeout: 15000}); await idle();
+            await DO(() => { window.LCNDA_APP.state.listType = 'graphs_list'; window.LCNDA_APP.setModule('listes'); }); await p.waitForSelector(`#workspace [data-gr-open="diagram:${D1}"]`, {timeout: 30000, state: 'attached'}); await idle();
+            await DO(id => document.querySelector(`#workspace [data-gr-open="diagram:${id}"]`).click(), D1); await p.waitForSelector('#workspace .h-dg-inline', {timeout: 15000}); await idle();
             s = await st(); assert.deepStrictEqual([s.module, s.hash, s.dialogs], ['diagrammes', `#diagrammes/${D1}`, 0]);
         });
 
@@ -285,7 +286,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await DO(id => window.LCNDA_EXT.openDiagram(id), D2); await idle(1000);
             let s = await st(); assert.strictEqual(s.module, 'graphiques'); assert.strictEqual(await DO(() => window.LCNDA_APP.state.graphMode), 'diagram');
             assert.ok(await p.$('#workspace .h-dg-page [data-dg-del]'), 'la page de Graphiques');
-            await p.click('#workspace .h-dg-page [data-dg-del]'); await sleep(500);
+            await DO(() => document.querySelector('#workspace .h-dg-page [data-dg-del]').click()); await sleep(500);
             assert.ok(await DO(() => document.querySelectorAll('dialog[open]').length) > 0, 'la question d’avant'); await closeAll();
             assert.ok((await list()).some(d => d.id === D2), 'rien de supprimé');
             await DO(() => window.LCNDA_EXT.openDiagramEditor(null)); await p.waitForSelector('dialog.h-dg-gallery[open]', {timeout: 10000});
