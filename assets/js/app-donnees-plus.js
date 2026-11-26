@@ -381,10 +381,10 @@
             if (bits.length) first.insertAdjacentHTML('beforeend', `<span class="dp-conf" data-dp-x>${bits.join('')}</span>`);
             const nt = !kio && on(10) ? notes[k]?.note : '';
             if (nt) first.insertAdjacentHTML('beforeend', `<span class="dp-note-line" data-dp-x>📝 ${esc(nt)}</span>`);
-            const acts = tr.querySelector('td.ld-acts');
-            const btn = (act, ic, lab, pressed) => `<button type="button" class="ld-act dp-ib${pressed ? ' is-on' : ''}" data-dp-x data-dp-act="${act}" data-dp-row="${i}" title="${esc(lab)}" aria-label="${esc(lab)}"${pressed != null ? ` aria-pressed="${!!pressed}"` : ''}>${ic}</button>`;
+            // 📖 📝 ⚠️ dans la première case : 📎 et 🧺 restent seuls au bout de chaque ligne (comme décidé)
+            const btn = (act, ic, lab, pressed) => `<button type="button" class="dp-ib${pressed ? ' is-on' : ''}" data-dp-act="${act}" data-dp-row="${i}" title="${esc(lab)}" aria-label="${esc(lab)}"${pressed != null ? ` aria-pressed="${!!pressed}"` : ''}>${ic}</button>`;
             const add = [on(14) ? btn('cite', '📖', T('Citer cette ligne')) : '', !kio && on(10) ? btn('note', '📝', T('Ma note sur cette ligne'), !!nt) : '', !kio && on(12) ? btn('doubt', '⚠️', T('Marquer douteuse'), !!db) : ''].join('');
-            if (add) { if (acts) acts.insertAdjacentHTML('afterbegin', add); else tr.insertAdjacentHTML('beforeend', `<td class="ld-acts" data-dp-x>${add}</td>`); }
+            if (add) first.insertAdjacentHTML('beforeend', `<span class="dp-ra" data-dp-x>${add}</span>`);
         });
         // ✋ mes lignes : à la fin de la première page, si elles passent la recherche et la période
         if (on(11) && !kio) {

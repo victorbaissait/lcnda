@@ -212,3 +212,7 @@ tr.dp-mine > td { background: color-mix(in srgb, var(--dp-green) 7%, transparent
 .dp-star:hover, .dp-star:focus-visible { border-color: var(--blue-bright, #055dff); }
 .dp-star[aria-pressed="true"] { border-color: var(--blue-bright, #055dff); background: var(--blue-soft, #eaf2ff); }
 .dp-cred button + button { margin-left: 0; }
+.dp-ra { display: inline-flex; gap: 3px; margin: 4px 0 0; }
+.dp-ib { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 28px; border: 1.5px solid var(--line-color, #c9ced8); background: var(--card-bg, #fff); color: var(--ink, #111); font-size: 13px; cursor: pointer; padding: 0 4px; }
+.dp-ib:hover, .dp-ib:focus-visible { border-color: var(--blue-bright, #055dff); background: var(--blue-soft, #eaf2ff); }
+@media (hover: hover) { tr:not(:hover):not(:focus-within) .dp-ra .dp-ib:not(.is-on) { opacity: .45; } }
