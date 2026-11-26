@@ -474,6 +474,8 @@ pre.code .s{color:var(--green)}
 .qk .dr-und{padding:8px 10px 9px;margin:0}
 .qk .dr-say{font-size:13.5px;margin:0 0 6px}
 .qk .dr-pill{font-size:12px;padding:3px 9px 3px 8px}
+.dr-alt .k,.ex .k,.rec .k,.others .k{white-space:normal;text-align:left;max-width:100%}
+@media (max-width:760px){.ex .k:nth-child(n+6):not(:last-child){display:none}}
 </style>
 </head>
 <body>
@@ -767,7 +769,7 @@ const INT = [
   I('add_event', 'saisir', '📅', 'Ajouter un événement à une fiche', 'Naissance, mariage, métier, déménagement… avec sa date et son lieu.', ['Personnes', 'la fiche', '＋ Événement'], ['ajouter'], ['mariage', 'personne'], 'evenement naissance deces bapteme date', {ro: false, need: 'who'}),
   I('add_photo', 'saisir', '🖼', 'Ajouter une photo ou un scan', 'Une image sur une fiche : portrait, acte, carte postale.', ['Personnes', 'la fiche', '📎 Médias'], ['ajouter', 'mettre'], ['photo'], 'image portrait scanner', {ro: false, need: 'who'}),
   I('transcribe', 'saisir', '📜', 'Transcrire un acte', 'Recopier un acte à côté de son image, mot à mot.', ['Documents', 'Transcriptions', '＋ Nouvelle'], ['lire', 'ajouter'], ['acte'], 'recopier ecrire texte', {ro: false}),
-  I('ask', 'chercher', '🔎', 'Poser une question sur la famille', 'La réponse courte, avec les fiches : témoins, enfants, cousins, records…', ['Recherche', 'Poser une question en français'], ['trouver'], ['temoin', 'mariage', 'personne', 'guerre'], 'qui quand combien question', {pr: 2, pre: u => u.q ? [`💬 « ${u.q} »`] : []}),
+  I('ask', 'chercher', '🔎', 'Poser une question sur la famille', 'La réponse courte, avec les fiches : témoins, enfants, cousins, records…', ['Recherche', 'Poser une question en français'], ['trouver'], ['temoin', 'mariage', 'personne', 'guerre'], 'qui quand combien question temoins', {pr: 5, pre: u => [u.objs.includes('temoin') ? `💬 « Qui étaient les témoins du mariage de ${u.whoP ? u.whoP.n : (u.whoCands[0]?.n.split(' ')[0] || '…')} ? »` : u.objs.includes('guerre') ? '💬 « Quels ancêtres ont connu la Grande Guerre ? »' : `💬 « ${u.q} »`]}),
   I('witness', 'chercher', '🕸', 'Réseau : témoins et voisins', 'Qui était là aux baptêmes et mariages, et qui revient souvent.', ['Graphiques', 'Réseau : témoins et voisins'], ['trouver', 'voir'], ['temoin', 'mariage'], 'reseau voisins parrains', {need: 'who'}),
   I('gaps', 'chercher', '🔍', 'Que manque-t-il ?', 'Les actes qui manquent à une fiche, et où les chercher.', ['Recherche', '🔍 Que manque-t-il ?'], ['trouver'], ['acte', 'personne'], 'manque trou manquant', {need: 'who'}),
   I('ou', 'chercher', '🌍', 'Où chercher ?', 'Les archives et les séries à ouvrir pour un lieu et une époque.', ['Recherche', '🌍 Où chercher ?'], ['trouver'], ['acte', 'lieu'], 'archives departementales registre'),
@@ -1056,13 +1058,14 @@ function buildShow() {
   if (!TABS.some(t => t[1] === p[0])) { $('.tb-right', top).insertAdjacentHTML('afterbegin', ''); }
   const sideList = [...(SIDE[tab] || [])]; if (p[1] && !sideList.includes(p[1])) sideList.splice(2, 0, p[1]);
   $('[data-showsb]').innerHTML = `<div class="sb-top"><div><span class="eyebrow">${esc(tab.toUpperCase())}</span><h1>${esc(tab)}</h1></div></div><div class="sb-content"><div class="side-menu">${sideList.map((l, i) => `<button type="button" class="smi" data-sstep="${l === p[1] ? 1 : ''}"><span class="side-number">${String(i + 1).padStart(2, '0')}</span><span class="lb">${esc(l)}</span></button>`).join('')}</div></div>`;
-  const tools = p[2] ? [...TOOLS.slice(0, 2), p[2], TOOLS[2]] : TOOLS;
+  const base = tab === 'Graphiques' ? TOOLS : ['⋯ Plus', '☑ Choisir'];
+  const tools = p[2] ? [...base.slice(0, 2), p[2], ...base.slice(2)] : base;
   $('[data-showpage]').innerHTML = `<header class="page-header"><div><span class="eyebrow crumb"><span>${esc(tab)}</span>${p[1] ? `<i>›</i><span>${esc(p[1])}</span>` : ''}</span><h2>${esc(p[1] || tab)}</h2></div></header>
     <div class="tbar">${tools.map(l => `<button type="button" class="button small secondary" data-sstep="${l === p[2] ? 2 : ''}">${esc(l)}</button>`).join('')}${p[3] ? `<div class="fake-menu" data-fmenu hidden style="top:40px;left:0"><div>📄 Toute la liste</div><div data-sstep="3">${esc(p[3])}</div><div>🖨 Imprimer</div></div>` : ''}</div>
-    <div class="tree"><svg viewBox="0 0 520 170" aria-hidden="true"><path class="ln" d="M260 130 V110 M140 110 H380 M140 110 V90 M380 110 V90 M140 60 V48 M80 48 H200 M80 48 V36 M200 48 V36 M380 60 V48 M320 48 H440 M320 48 V36 M440 48 V36"/>
+    ${tab === 'Graphiques' ? `<div class="tree"><svg viewBox="0 0 520 170" aria-hidden="true"><path class="ln" d="M260 130 V110 M140 110 H380 M140 110 V90 M380 110 V90 M140 60 V48 M80 48 H200 M80 48 V36 M200 48 V36 M380 60 V48 M320 48 H440 M320 48 V36 M440 48 V36"/>
       <rect class="bx a" x="200" y="130" width="120" height="30"/><text x="260" y="149" text-anchor="middle">Camille MAZAUD</text>
       <rect class="bx" x="80" y="60" width="120" height="30"/><text x="140" y="79" text-anchor="middle">Paul MAZAUD</text><rect class="bx" x="320" y="60" width="120" height="30"/><text x="380" y="79" text-anchor="middle">Anne DURAND</text>
-      ${[[20, 'Louis MAZAUD'], [140, 'Rose LACOMBE'], [260, 'Marius DURAND'], [380, 'Léonie FAURE']].map(([x, n]) => `<rect class="bx" x="${x}" y="6" width="116" height="30"/><text x="${x + 58}" y="25" text-anchor="middle">${n}</text>`).join('')}</svg></div>`;
+      ${[[20, 'Louis MAZAUD'], [140, 'Rose LACOMBE'], [260, 'Marius DURAND'], [380, 'Léonie FAURE']].map(([x, n]) => `<rect class="bx" x="${x}" y="6" width="116" height="30"/><text x="${x + 58}" y="25" text-anchor="middle">${n}</text>`).join('')}</svg></div>` : `<div class="empty-g"><b>${esc(p[p.length - 1])}</b>L’écran tel qu’il est dans l’app.</div>`}`;
   $('[data-showpick]').innerHTML = SHOWS.concat(SHOWS.includes(SH.id) ? [] : [SH.id]).map(id => `<button type="button" data-sp="${id}" aria-pressed="${id === SH.id}">${byId(id).ic} ${esc(byId(id).n)}</button>`).join('');
   placeStep();
 }
