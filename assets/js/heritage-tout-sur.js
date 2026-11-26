@@ -25,6 +25,9 @@
  */
 (() => {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -472,7 +475,7 @@
     }
     (ext.afterPerson = ext.afterPerson || []).push(detail => {
         const p = detail?.person; if (p?.id) detailCache.set(Number(p.id), Promise.resolve(detail));
-        document.querySelectorAll('#workspace [data-ts-block]').forEach(h => { h.__tsFresh = true; fillBlock(h).catch(e => console.error(e)); });
+        document.querySelectorAll('#workspace [data-ts-block]').forEach(h => { h.__tsFresh = true; fillBlock(h).catch(report); });
         if (!p?.id || p.kind === 'animal') return;
         const row = document.querySelector('#workspace .person-hero-actions'); if (!row || row.querySelector('[data-ts-hero]')) return;
         row.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action ts-hero" data-ts-hero="${Number(p.id)}" data-ts-open="${Number(p.id)}" title="${esc(T('🔎 Tout ce qui le concerne'))}" aria-label="${esc(T('Tout ce qui le concerne'))}">🔎</button>`);

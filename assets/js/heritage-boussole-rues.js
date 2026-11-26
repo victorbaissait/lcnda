@@ -252,6 +252,10 @@
 
     /* ─────────── les fichiers livrés (chargés une fois, à la demande) ─────────── */
     const files = {};
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide (ou dit « réessaie »), sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
+    const quiet = e => { if (cutOff(e)) return ''; throw e; };
     async function readGz(url) {
         const r = await fetch(url, {credentials: 'same-origin'});
         if (!r.ok) throw new Error(T('Fichier introuvable : {f}', {f: url.split('?')[0]}));
@@ -397,9 +401,9 @@
             }
             const birth = pts.findIndex(p => evs.some(e => e.tag === 'BIRT' && e.year === p.year));
             if (birth > 0) pts.unshift(...pts.splice(birth, 1));
-            if (pts.length) { const html = await compassHtml(pts.slice(0, 8)); if (html) out.push(`<div class="cc-line br-line" data-br-line="boussole">${html}</div>`); }
+            if (pts.length) { const html = await compassHtml(pts.slice(0, 8)).catch(quiet); if (html) out.push(`<div class="cc-line br-line" data-br-line="boussole">${html}</div>`); }
         }
-        if (want('rues')) { const html = await ruesHtml(evs); if (html) out.push(`<div class="cc-line br-line" data-br-line="rues">${html}</div>`); }
+        if (want('rues')) { const html = await ruesHtml(evs).catch(quiet); if (html) out.push(`<div class="cc-line br-line" data-br-line="rues">${html}</div>`); }
         if (!host.isConnected) return r;
         host.innerHTML = out.join('');
         const card = host.closest('section.card');
@@ -422,7 +426,7 @@
         }
         return r;
     }
-    (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-br-person]').forEach(h => fillPerson(h, Number(h.dataset.brPerson))); });
+    (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-br-person]').forEach(h => fillPerson(h, Number(h.dataset.brPerson)).catch(report)); });
 
     /* ═════════ la fiche d'un village : « 🧭 La boussole à travers le temps » ═════════ */
     function villagePlace(village) {
@@ -467,9 +471,9 @@
             setPref({lat: $('[data-br-lat]').value, lon: $('[data-br-lon]').value, year: $('[data-br-year]').value, name, pid: $('[data-br-pl]').value});
             if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 89.9 || Math.abs(lon) > 180) { out.innerHTML = emptyLine(T('Choisis un lieu, ou écris sa latitude et sa longitude (exemple : 48,85 et 2,35).'), '🧭'); return; }
             if (!(y >= DECL_RANGE.from && y <= DECL_RANGE.to)) { out.innerHTML = emptyLine(T('Écris une année entre {a} et {b}.', {a: String(DECL_RANGE.from), b: String(DECL_RANGE.to)}), '🧭'); return; }
-            let r; try { r = await decl(lat, lon, y); } catch (e) { out.innerHTML = emptyLine(e.message, '⚠️'); return; }
+            let r; try { r = await decl(lat, lon, y); } catch (e) { out.innerHTML = emptyLine(cutOff(e) ? T('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message, '⚠️'); return; }
             if (!r) { out.innerHTML = emptyLine(T('Pas de calcul possible pour cette année.'), '🧭'); return; }
-            const now = await decl(lat, lon, new Date().getFullYear());
+            const now = await decl(lat, lon, new Date().getFullYear()).catch(quiet);
             out.innerHTML = `<div class="af-big br-big">${needle(r.d, 64)}<div><small>${esc(T('Écart de la boussole'))}</small><strong>${esc(declText(r.d))}</strong>
                 <small>${esc(T('{v}° exactement ({m})', {v: r.d.toFixed(1).replace('.', ','), m: r.model}))}</small></div></div>
                 <p class="cplus-lead">🧭 ${esc(declSentence(r, name))}</p><p class="br-why">${esc(WHY())}</p>
@@ -524,7 +528,7 @@
         if (!c) return A().toast?.(T('Situe d’abord la carte (🗺️ Fond de carte d’un lieu…) : le calcul a besoin du lieu.'), 'error');
         const y0 = ed.doc()?.map?.year || 1800;
         const run = async year => {
-            const r = await decl(c.lat, c.lon, year);
+            let r; try { r = await decl(c.lat, c.lon, year); } catch (e) { if (!cutOff(e)) throw e; return A().toast?.(T('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.'), 'error'); }
             if (!r) return A().toast?.(T('Écris une année entre {a} et {b}.', {a: String(DECL_RANGE.from), b: String(DECL_RANGE.to)}), 'error');
             const d = ed.doc(); d.objs = d.objs || [];
             const all = []; const walk = arr => (arr || []).forEach(o => { if (o.type === 'mdeco' && o.map?.k === 'compass') all.push(o); if (o.children) walk(o.children); }); walk(d.objs);

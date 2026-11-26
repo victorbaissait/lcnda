@@ -203,6 +203,9 @@
         if (typeof DecompressionStream === 'undefined') throw new Error(T('Ce navigateur ne sait pas ouvrir les fichiers compressés.'));
         return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const memo = new Map();
     function getData(path, prep = x => x) {
         if (!memo.has(path)) memo.set(path, fetch(`assets/data/${path}?v=${DATA_V}`, {credentials: 'same-origin'})
@@ -265,7 +268,7 @@
         const m = e.target.closest?.('[data-cht-map]');
         if (m) { e.preventDefault(); const [lat, lon] = m.dataset.chtMap.split(',').map(Number); const st = S(); st.mapCenter = {lat, lon}; st.mapZoom = 13; save({castles: true}); A().persistUiState?.(); A().setModule?.('carte'); return; }
         const c = e.target.closest?.('[data-cht-castle]');
-        if (c) { e.preventDefault(); const [code, q] = c.dataset.chtCastle.split(':'); loadCountry(code).then(f => { const it = f.items.find(x => x.q === q); if (it) openCastle(castleRow(it, code)); }); return; }
+        if (c) { e.preventDefault(); const [code, q] = c.dataset.chtCastle.split(':'); loadCountry(code).then(f => { const it = f.items.find(x => x.q === q); if (it) openCastle(castleRow(it, code)); }).catch(report); return; }
         const t = e.target.closest?.('[data-cht-terr]');
         if (t) { e.preventDefault(); loadAllTerr().then(ctx => { const it = ctx.terr.byQ.get(t.dataset.chtTerr); if (it) openTerr(terrRow(it, ctx.terr)); }); }
     });
@@ -282,7 +285,7 @@
         const lat = place.lat ?? place.latitude, lon = place.lon ?? place.longitude;
         if (lat == null || lat === '' || lon == null || lon === '' || !Number.isFinite(Number(lat))) return false;
         let list;
-        try { list = await castlesAround(Number(lat), Number(lon), radius); } catch (e) { host.innerHTML = `<p class="muted">${esc(e.message)}</p>`; return true; }
+        try { list = await castlesAround(Number(lat), Number(lon), radius); } catch (e) { if (cutOff(e)) { host.innerHTML = ''; return false; } host.innerHTML = `<p class="muted">${esc(e.message)}</p>`; return true; }
         list.forEach(x => { x.here = sameCommune(x.c, place, Number(lat), Number(lon)); });
         const here = list.filter(x => x.here), near = list.filter(x => !x.here);
         if (!list.length) { host.innerHTML = ''; return false; }
@@ -429,7 +432,7 @@
             if (down && Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 4) return;
             const rect = stage.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
             const pt = mapPts.map(p => ({p, d: Math.hypot(p.x - x, p.y - y)})).filter(o => o.d < 9).sort((a, b) => a.d - b.d)[0];
-            if (pt) { if (pt.p.castle) loadCountry(pt.p.code).then(f => { const it = f.items.find(c => c.q === pt.p.q); if (it) openCastle(castleRow(it, pt.p.code)); }); else { const it = terrCtx?.terr.byQ.get(pt.p.q); if (it) openTerr(terrRow(it, terrCtx.terr)); } return; }
+            if (pt) { if (pt.p.castle) loadCountry(pt.p.code).then(f => { const it = f.items.find(c => c.q === pt.p.q); if (it) openCastle(castleRow(it, pt.p.code)); }).catch(report); else { const it = terrCtx?.terr.byQ.get(pt.p.q); if (it) openTerr(terrRow(it, terrCtx.terr)); } return; }
             if (!settings().layer || !terrCtx) return;
             const lon = A().xToLng(mapLast.left + x, mapLast.z), lat = A().yToLat(mapLast.top + y, mapLast.z), yr0 = layerYear();
             const r = placeAt(terrCtx, lat, lon, yr0); if (!r.any) return;

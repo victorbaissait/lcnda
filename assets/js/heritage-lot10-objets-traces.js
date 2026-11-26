@@ -20,6 +20,9 @@
  */
 (function (root) {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const T = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
 
     /* ═════════════ le calcul (sans écran : aussi pour Node) ═════════════ */
@@ -355,7 +358,7 @@
             couvents: () => conventsForPerson(life),
             pelerinages: () => pilgrimagesForPerson(life, places),
             hospices: () => hospicesForPerson(life)};
-        const html = await Promise.all(want.map(k => Promise.resolve().then(jobs[k]).catch(e => { console.error(e); return ''; })));
+        const html = await Promise.all(want.map(k => Promise.resolve().then(jobs[k]).catch(e => { report(e); return ''; })));
         if (!host.isConnected && !opts.detached) return 0;
         const out = html.filter(Boolean);
         host.innerHTML = out.length ? `<div class="hist-life l10o-life">${out.join('')}</div>` : '';
@@ -424,7 +427,7 @@
         placeInto(village.querySelector('[data-l10o-host]'), place);
     }
     let pending = 0;
-    new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => console.error(e)); }); }).observe(document.documentElement, {childList: true, subtree: true});
+    new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(report); }); }).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ─────────── 📜 Monographie de commune : une partie par sujet ─────────── */
     const MONO = [['cloches', 'l10o_cloches', '🔔', 'Les cloches et leurs inscriptions'], ['musee', 'l10o_musee', '🧺', 'Les objets du village au musée'], ['herbier', 'l10o_herbier', '🌿', 'Les plantes cueillies ici (herbiers)'],

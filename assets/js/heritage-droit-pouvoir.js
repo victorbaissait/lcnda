@@ -255,6 +255,8 @@
         if (typeof DecompressionStream === 'undefined') throw new Error(T('Ce navigateur ne sait pas ouvrir les fichiers compressés.'));
         return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : « réessaie », pas « Failed to fetch » */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
     const memo = new Map();
     function getData(path, opt = false) {
         if (!memo.has(path)) memo.set(path, fetch(`assets/data/${path}?v=${DATA_V}`, {credentials: 'same-origin'})
@@ -531,7 +533,7 @@
             <label class="checkbox-line"><input type="checkbox" data-dp-am> ${esc(T('en Alsace-Moselle'))}</label></div><div class="af-out" data-dp-out aria-live="polite"></div>`;
         const $ = s => pane.querySelector(s);
         const draw = async () => {
-            let L; try { L = await loadLaws(); } catch (e) { $('[data-dp-out]').innerHTML = `<p class="muted">${esc(e.message)}</p>`; return; }
+            let L; try { L = await loadLaws(); } catch (e) { $('[data-dp-out]').innerHTML = `<p class="muted">${esc(cutOff(e) ? T('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message)}</p>`; return; }
             const y = Math.round(Number($('[data-dp-y]').value)); if (!y) return;
             const sex = $('[data-dp-sex]').value, age = $('[data-dp-age]').value === '' ? null : Number($('[data-dp-age]').value);
             const s = yearSummary(L, y, {sex, am: $('[data-dp-am]').checked});

@@ -70,7 +70,7 @@
 
     async function mount(pane, {year = '', value = ''} = {}) {
         pane.innerHTML = emptyLine(T('Chargement des prix…'), '⏳');
-        let P; try { P = await load(); } catch (e) { pane.innerHTML = emptyLine(e.message, '⚠️'); return; }
+        let P; try { P = await load(); } catch (e) { pane.innerHTML = emptyLine((e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')))) ? T('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message, '⚠️'); return; } // téléchargement coupé : « réessaie », pas « Failed to fetch »
         const st = pref(); if (year) st.year = String(year); if (value) st.amount = String(value).replace(/[^\d.,\s]/g, '').trim() || st.amount;
         const ms = moneys(P);
         if (st.money !== 'silver' && !ms.some(m => m.id === st.money)) st.money = ms[0]?.id || 'silver';

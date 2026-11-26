@@ -33,7 +33,7 @@
 
     /* ═════════ La fenêtre « ⚒️ Métiers d'art » ═════════ */
     OE.openMetiers = async C => {
-        let data; try { data = await OE.loadMetiers(); } catch (e) { A().toast(e.message, 'error'); return; }
+        let data; try { data = await OE.loadMetiers(); } catch (e) { A().toast((e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')))) ? i18n('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message, 'error'); return; } // téléchargement coupé : « réessaie », pas « Failed to fetch »
         let q = '';
         const dlg = document.createElement('dialog'); dlg.className = 'modal oe-dlg oe-met'; dlg.dataset.ownClose = '1'; dlg.dataset.dndOff = ''; dlg.dataset.ordOff = '';
         dlg.innerHTML = `<div class="oe-shell"><header class="ar-top"><span class="ar-ticon">⚒️</span><div class="ar-tname"><span class="eyebrow">${esc(C.store.name.toLocaleUpperCase('fr-FR'))} · ${i18n('ŒUVRES')}</span><h2>${i18n('Métiers d’art : {nm}', {nm: esc(U.plural(data.domaines.length, 'domaine'))})}</h2></div><span class="spacer"></span>

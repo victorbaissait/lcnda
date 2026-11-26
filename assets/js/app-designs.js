@@ -806,8 +806,67 @@
     /* ── une petite page d'aperçu ── */
     const DARK = {blue: '#4d9fff', bg: '#1a1a1a', paper: '#1a1a1a', card: '#242424', cardHead: '#2e2e2e'};
     const LIGHT = {blue: '#0066cc', bg: '#ffffff', paper: '#ffffff', card: '#ffffff', cardHead: '#fafafa'};
-    function frameDocHtml(inner, W) {
-        const links = [...document.querySelectorAll('link[rel="stylesheet"]')].map(l => `<link rel="stylesheet" href="${esc(l.href)}"${l.id ? ` id="${esc(l.id)}"` : ''} media="${esc(l.getAttribute('media') || 'all')}">`).join('');
+    /* Les feuilles de l'app (≈ 145 fichiers, 4 Mo) : avant, chaque aperçu les redemandait toutes (des milliers de requêtes sur
+     * la page, « ERR_INSUFFICIENT_RESOURCES », une page Apparence lente). Leur texte est maintenant lu UNE fois (depuis le cache
+     * du navigateur, quelques-unes à la fois) et mis bout à bout, dans le même ordre, dans quelques fichiers en mémoire (blob:)
+     * que tous les aperçus partagent. Le texte d'origine, pas celui relu par le navigateur (cssText perd des choses, ex. des
+     * dégradés en couleurs relatives). Les feuilles qui ont un id (lc-frame-css, lc-designs-gen : allumées par applyTo dans
+     * l'aperçu) restent à part, à leur place ; une feuille illisible garde son vrai fichier. */
+    const sheetText = new Map(); // href → Promise du texte prêt à recoller (null : illisible, on garde le vrai fichier)
+    const sheetBlobs = new Map(); // suite de href → URL blob:
+    let sheetBusy = 0;
+    const sheetWaiting = [];
+    const sheetSlot = () => (sheetBusy < 6 ? (sheetBusy++, Promise.resolve()) : new Promise(res => sheetWaiting.push(res)));
+    const sheetDone = () => { const n = sheetWaiting.shift(); if (n) n(); else sheetBusy--; };
+    /** le texte d'une feuille : les url() relatives (polices…) partaient de son dossier, on les écrit en entier ; on referme
+     *  un commentaire ou une accolade restés ouverts, pour ne pas avaler la feuille suivante */
+    function fixSheet(css, href) {
+        const abs = u => { if (!u || /^([a-z][a-z0-9+.-]*:|\/\/|#)/i.test(u)) return u; try { return new URL(u, href).href; } catch (_) { return u; } };
+        let out = css.replace(/@charset\s+"[^"]*"\s*;/gi, '').replace(/url\(\s*(?:"((?:[^"\\\n]|\\.)*)"|'((?:[^'\\\n]|\\.)*)'|([^)\s"']*))\s*\)/g, (m, a, b, c) => { const u = a ?? b ?? c ?? ''; const v = abs(u); return v === u ? m : `url("${v.replace(/"/g, '%22')}")`; });
+        const bare = out.replace(/\/\*[\s\S]*?\*\/|"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'/g, '');
+        if (bare.includes('/*')) out += '\n*/';
+        const open = (bare.match(/\{/g) || []).length - (bare.match(/\}/g) || []).length;
+        if (open > 0) out += '\n' + '}'.repeat(open);
+        return out;
+    }
+    function loadSheet(href) {
+        if (!sheetText.has(href)) sheetText.set(href, sheetSlot().then(() => fetch(href, {cache: 'force-cache', credentials: 'same-origin'}))
+            .then(r => (r.ok ? r.text() : null)).then(t => (t == null ? null : fixSheet(t, href)), () => null).finally(sheetDone));
+        return sheetText.get(href);
+    }
+    function sheetBlob(key, css) {
+        if (sheetBlobs.has(key)) return sheetBlobs.get(key);
+        let u = null;
+        try { u = URL.createObjectURL(new Blob([css], {type: 'text/css'})); } catch (_) { u = null; }
+        if (u) sheetBlobs.set(key, u);
+        return u;
+    }
+    /** les <link> d'un aperçu (Promise) : quelques blob: partagés au lieu d'une requête par feuille et par aperçu */
+    function frameLinks() {
+        const ls = [...document.querySelectorAll('link[rel="stylesheet"]')];
+        const tag = (href, l, media) => `<link rel="stylesheet" href="${esc(href)}"${l && l.id ? ` id="${esc(l.id)}"` : ''} media="${esc(media || 'all')}">`;
+        const own = l => tag(l.href, l, l.getAttribute('media'));
+        if (typeof fetch !== 'function' || typeof Blob === 'undefined' || !URL.createObjectURL) return Promise.resolve(ls.map(own).join(''));
+        return Promise.all(ls.map(l => loadSheet(l.href))).then(texts => {
+            const out = []; let run = [];
+            const flush = () => {
+                if (!run.length) return;
+                const key = run.map(({l}) => `${l.href}|${l.getAttribute('media') || ''}`).join('\n');
+                const u = sheetBlobs.get(key) || sheetBlob(key, run.map(({l, txt}) => { const m = (l.getAttribute('media') || '').trim(); return m && m !== 'all' ? `@media ${m} {\n${txt}\n}` : txt; }).join('\n'));
+                out.push(u ? tag(u, null, 'all') : run.map(({l}) => own(l)).join(''));
+                run = [];
+            };
+            ls.forEach((l, i) => {
+                const txt = texts[i];
+                if (txt == null) { flush(); out.push(own(l)); return; }
+                if (l.id) { flush(); const u = sheetBlob(l.href, txt); out.push(u ? tag(u, l, l.getAttribute('media')) : own(l)); return; }
+                run.push({l, txt});
+            });
+            flush();
+            return out.join('');
+        });
+    }
+    function frameDocHtml(inner, W, links) {
         const styles = [...document.head.querySelectorAll('style')].map(s => `<style>${s.textContent.replace(/<\/style/gi, '<\\/style')}</style>`).join('');
         return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><base href="${esc(location.href.split('#')[0])}">${links}${styles}<style>html,body{overflow:hidden!important;height:auto!important;min-height:0!important}body{margin:0;background:var(--paper)}.lcd-pv-root{width:${W}px;box-sizing:border-box;padding:14px}:root[data-lc-fz] .lcd-pv-root{width:calc(${W}px / var(--lc-fz))}</style></head><body class="lcd-pv-body"><div class="lcd-pv-root">${inner}</div></body></html>`;
     }
@@ -850,8 +909,11 @@
                 setTimeout(() => { if (f.isConnected) { measure(); slot.lcdFit(); } }, 350); // les polices et les images arrivent
             });
         }, {once: true});
-        f.srcdoc = frameDocHtml(inner, W);
-        slot.appendChild(f);
+        frameLinks().then(links => { // les feuilles partagées : prêtes tout de suite après le premier aperçu
+            if (slot.lcdToken !== token) return;
+            f.srcdoc = frameDocHtml(inner, W, links);
+            slot.appendChild(f);
+        });
         if (ro && !slot.lcdObs) { slot.lcdObs = true; ro.observe(slot); }
     }
 

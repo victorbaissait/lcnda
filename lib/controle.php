@@ -153,10 +153,29 @@ function controle_run(PDO $pdo, bool $fresh = false): array
     $th = controle_seuils($pdo);
     $sig = controle_signature($pdo, $th);
     $file = controle_cache_file();
-    if (!$fresh && is_file($file)) {
+    $cached = static function () use ($file, $sig): ?array {
+        if (!is_file($file)) { return null; }
         $c = json_decode((string) @file_get_contents($file), true);
-        if (is_array($c) && ($c['sig'] ?? '') === $sig) { return $memo = $c; }
+        return is_array($c) && ($c['sig'] ?? '') === $sig ? $c : null;
+    };
+    if (!$fresh && ($c = $cached())) { return $memo = $c; }
+    // ⏱ Au lancement, trois widgets (controle_summary, semaine, doutes_summary) demandent ce contrôle en même temps : sans
+    // ce verrou, chacun le recalculait (3 × ≈ 0,7 s de processeur sur la base d'exemple) et occupait un PHP pendant ce temps,
+    // les autres appels du tableau de bord attendaient derrière. Un seul calcule ; les autres attendent (sans calculer) et
+    // lisent son résultat. Verrou de fichier : relâché par le système si le PHP s'arrête en route.
+    $dir = dirname($file);
+    $lock = (is_dir($dir) || @mkdir($dir, 0775, true)) ? @fopen($file . '.lock', 'c') : false;
+    if ($lock && @flock($lock, LOCK_EX)) {
+        // calculé par un autre PHP pendant l'attente : rien à refaire (« Revérifier » recalcule toujours)
+        if (!$fresh && ($c = $cached())) { flock($lock, LOCK_UN); fclose($lock); return $memo = $c; }
     }
+    try { return $memo = controle_run_compute($pdo, $th, $sig, $file); }
+    finally { if ($lock) { @flock($lock, LOCK_UN); @fclose($lock); } }
+}
+
+/** Calcule le contrôle et le garde (controle_run, sous son verrou). */
+function controle_run_compute(PDO $pdo, array $th, string $sig, string $file): array
+{
     $t0 = microtime(true);
     // une très grosse base (100 000 fiches) demande ≈ 750 Mo : on laisse de la marge au-delà du réglage habituel (1 Go)
     if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 8); } elseif (function_exists('memory_at_least')) { memory_at_least(2048); } // 200 000 fiches : 1,45 Go
@@ -170,7 +189,7 @@ function controle_run(PDO $pdo, bool $fresh = false): array
         $tmp = $file . '.' . bin2hex(random_bytes(4)) . '.tmp';
         if (@file_put_contents($tmp, json_encode($res, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)) !== false) { @rename($tmp, $file); } else { @unlink($tmp); }
     }
-    return $memo = $res;
+    return $res;
 }
 
 /** Tous les contrôles, une seule lecture de la base. */

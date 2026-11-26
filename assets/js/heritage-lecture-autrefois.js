@@ -166,7 +166,7 @@
         function draw() {
             host.querySelectorAll('[data-la-tab]').forEach(b => { const on = b.dataset.laTab === st.tab; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); });
             filters(); $('[data-la-search]').hidden = !!(st.tab === 'exos' && st.exo); // dans un exercice : pas de recherche
-            const xt = laExtra().find(x => x.id === st.tab); if (xt) { Promise.resolve(xt.render(body, {q: st.q, lang: st.lang, year: st.year})).catch(e => { body.innerHTML = emptyLine(e.message, '⚠️'); }); return; }
+            const xt = laExtra().find(x => x.id === st.tab); if (xt) { Promise.resolve(xt.render(body, {q: st.q, lang: st.lang, year: st.year})).catch(e => { body.innerHTML = emptyLine((e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')))) ? i18n('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message, '⚠️'); }); return; } // téléchargement coupé : « réessaie », pas « Failed to fetch »
             if (st.tab === 'lettres') drawLetters(); else if (st.tab === 'exos') drawExos(); else drawDict();
         }
         host.addEventListener('click', e => {

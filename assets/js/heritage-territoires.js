@@ -149,6 +149,9 @@
     const DATA_V = 1;
 
     /* ── les fichiers (chargés seulement quand on en a besoin) ── */
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) : « réessaie », pas « Failed to fetch » */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const errText = e => (cutOff(e) ? T('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message);
     async function readGz(url) {
         const r = await fetch(url, {credentials: 'same-origin'}); if (!r.ok) throw new Error(T('Fichier introuvable : {f}', {f: url.split('?')[0]}));
         const buf = new Uint8Array(await r.arrayBuffer());
@@ -354,7 +357,7 @@
                     }
                     box.innerHTML = rows.length ? `<div class="ct-plist">${rows.map(({p, z}) => `<label class="checkbox-line"><input type="checkbox" data-ct-pc value="${z.code}" ${sel.has(z.code) ? 'checked disabled' : ''}> ${esc(z.name)} <small class="muted">${esc(p.name !== z.name ? p.name + ' · ' : '')}${esc(plural(p.n, T('événement')))}</small></label>`).join('')}</div><button type="button" class="button small" data-ct-padd>${esc(T('Ajouter les communes cochées'))}</button>`
                         : `<p class="muted">${esc(T('Aucun lieu de ta base n’est placé en France sur la carte.'))}</p>`;
-                } catch (err) { box.innerHTML = `<p class="muted">${esc(err.message)}</p>`; }
+                } catch (err) { box.innerHTML = `<p class="muted">${esc(errText(err))}</p>`; }
             }
             dlg.addEventListener('input', e => {
                 const k = e.target.dataset?.ctSt; if (!k) return;
@@ -374,7 +377,7 @@
                 // des codes anciens (communes fusionnées) → la commune d'aujourd'hui
                 sel = new Set([...sel].map(c => M.byCode.get(c)?.code || c)); snap();
                 if (sel.size) recompute(); paintSide(); fitView();
-            }).catch(err => { $('[data-ct-wait]').textContent = err.message; });
+            }).catch(err => { $('[data-ct-wait]').textContent = errText(err); });
             paintSide();
         });
     }

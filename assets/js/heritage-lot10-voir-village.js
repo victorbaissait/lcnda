@@ -20,6 +20,9 @@
  */
 (function (root) {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const T = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
 
     /* ═════════════ le calcul (sans écran : aussi pour Node) ═════════════ */
@@ -397,7 +400,7 @@
         placeInto(village.querySelector('[data-l10v-host]'), villagePlace(village));
     }
     let pending = 0;
-    if (typeof MutationObserver !== 'undefined' && root.document) new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => console.error(e)); }); }).observe(document.documentElement, {childList: true, subtree: true});
+    if (typeof MutationObserver !== 'undefined' && root.document) new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(report); }); }).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ─────────── les clics : tuiles à l'ouverture, zoom, calculs à la demande ─────────── */
     const PAIR = {avion: avionPair, lidar: lidarPair, forets: foretsPair};

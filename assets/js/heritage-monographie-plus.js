@@ -21,6 +21,9 @@
  */
 (() => {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
@@ -164,7 +167,7 @@
             count: n => { if (n == null || n === '') { count.hidden = true; return; } count.textContent = String(n); count.hidden = false; }};
         if (s.source) ctx.source(T(s.source));
         let ok;
-        try { ok = await s.render(cur.place, body, ctx); } catch (e) { console.error(e); ok = false; }
+        try { ok = await s.render(cur.place, body, ctx); } catch (e) { report(e); ok = false; }
         if (!sec.isConnected) return;
         sec.dataset.mpState = ok === false || !body.innerHTML.trim() ? 'empty' : 'done';
         if (sec.dataset.mpState === 'empty') { sec.dataset.mpEmpty = '1'; sec.hidden = true; }

@@ -129,7 +129,7 @@
         const hit = store.get(id); if (hit?.data) return Promise.resolve(hit.data); if (hit?.promise) return hit.promise;
         const promise = fetch(`${GEO_DIR}${id}.json${GZ.has(id) ? '.gz' : ''}?v=${GEO_V}`, {credentials: 'same-origin'}).then(r => { if (!r.ok) throw new Error('Fond de carte introuvable.'); return readGeo(r, GZ.has(id)); })
             .then(raw => { const data = decode(raw, id); store.set(id, {data}); redrawWaiting(); return data; })
-            .catch(e => { store.set(id, {error: e.message || 'Fond de carte indisponible.'}); redrawWaiting(); throw e; });
+            .catch(e => { store.set(id, {error: (e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')))) ? i18n('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message || 'Fond de carte indisponible.'}); redrawWaiting(); throw e; }); // téléchargement coupé : « réessaie », pas « Failed to fetch »
         store.set(id, {promise}); return promise;
     }
     const loaded = id => store.get(id)?.data || null;

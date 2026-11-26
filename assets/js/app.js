@@ -1413,6 +1413,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         toast('Cet écran n’existe plus : modifie l’onglet dans Réglages → Éditeur d’onglets.','error');
     }
 
+    const API_INFLIGHT = new Map(); // lectures en route (api ci-dessous)
     async function api(action, params = {}, options = {}) {
         const url = new URL('api.php', location.href);
         url.searchParams.set('action', action);
@@ -1430,9 +1431,28 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         const writing = !!(options.method && options.method !== 'GET');
         let response;
         // réseau coupé, serveur arrêté : un message clair en français (au lieu de « Failed to fetch »)
-        try { response = await fetch(url, init); }
+        // ⏱ Une lecture identique déjà en route (même adresse, mêmes en-têtes) : on attend sa réponse au lieu d'en envoyer une
+        // deuxième. Au lancement, plusieurs modules demandent la même chose en même temps (réglages, généalogies, compteurs…) :
+        // autant d'appels de moins dans la file du serveur. Chacun reçoit sa propre copie (JSON relu) : rien n'est partagé.
+        // Jamais par-dessus une écriture : une lecture demandée après une modification part toujours (writeCount dans la clé).
+        const shared = !writing && !options.signal && options.body === undefined;
+        let data;
+        try {
+            if (shared) {
+                const key = (state.writeCount || 0) + '\n' + url.href + '\n' + JSON.stringify(init.headers);
+                let pending = API_INFLIGHT.get(key);
+                if (!pending) {
+                    pending = fetch(url, init).then(async r => ({status: r.status, ok: r.ok, text: await r.text().catch(() => '')}));
+                    API_INFLIGHT.set(key, pending);
+                    const done = () => { if (API_INFLIGHT.get(key) === pending) API_INFLIGHT.delete(key); };
+                    pending.then(done, done);
+                }
+                response = await pending;
+            } else response = await fetch(url, init);
+        }
         catch (error) { if (error?.name === 'AbortError') throw error; if (writing) SUBMIT_GUARD.failSeq++; const e = new Error(NET_ERROR_MSG); e.network = true; e.cause = error; throw e; }
-        const data = await response.json().catch(() => ({error:'Réponse illisible du serveur'}));
+        if (shared) { try { data = JSON.parse(response.text); } catch (_) { data = {error:'Réponse illisible du serveur'}; } }
+        else data = await response.json().catch(() => ({error:'Réponse illisible du serveur'}));
         // une autre généalogie a été ouverte dans une autre fenêtre : on le dit une fois, avec « ↻ Recharger »
         if (response.status === 423 && data.open_lock) window.dispatchEvent(new CustomEvent('lcnda:open-lock', {detail: data})); // 🔒 base ouverte sur un autre ordinateur (heritage-sauvegarde.js)
         if (response.status === 409 && data.genealogy_changed && !api.genealogyWarned) { api.genealogyWarned = true; toast(data.error, 'error', {duration: 60000, action: {label: '↻ Recharger', run: () => location.reload()}}); }

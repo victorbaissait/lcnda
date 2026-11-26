@@ -205,6 +205,9 @@
         if (typeof DecompressionStream === 'undefined') throw new Error(T('Ce navigateur ne sait pas ouvrir le fichier des frontières.'));
         return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) : « réessaie », pas « Failed to fetch » */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const errText = e => (cutOff(e) ? T('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.') : e.message);
     function load() {
         if (!borders) borders = fetch(`assets/data/monde-frontieres.json.gz?v=${DATA_V}`, {credentials: 'same-origin'})
             .then(r => { if (!r.ok) throw new Error(T('Le fichier des frontières est introuvable.')); return readMaybeGz(r); }).then(prepare).then(B => (bordersData = B))
@@ -275,7 +278,7 @@
         const pid = Number(host.dataset.mcHost), detail = details.get(pid);
         if (!detail) { host.innerHTML = ''; return; }
         let B, C;
-        try { [B, C] = await Promise.all([load(), loadStats()]); } catch (e) { host.innerHTML = A().empty ? A().empty(e.message, {icon: '⛔'}) : esc(e.message); return; }
+        try { [B, C] = await Promise.all([load(), loadStats()]); } catch (e) { if (cutOff(e)) { host.innerHTML = ''; return; } host.innerHTML = A().empty ? A().empty(e.message, {icon: '⛔'}) : esc(e.message); return; }
         if (!host.isConnected) return;
         const {rows, countries} = personRows(B, C, detail);
         const stat = countries.map(c => statLines(C, c)).join('');
@@ -323,7 +326,7 @@
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page">${UI().pageHeader ? UI().pageHeader({title: T('🌍 Les pays de ta famille en chiffres'), help: T('Pour chaque pays où vivait ta famille (d’après les lieux placés sur la carte), la vie de l’époque en chiffres : espérance de vie, bébés morts avant 1 an, taille des hommes, années d’école, richesse par habitant, population. Pays dans leurs frontières d’aujourd’hui.')}) : ''}${spinner(T('On rassemble les pays de ta famille…'))}</section>`;
         let B, C, list;
-        try { [B, C] = await Promise.all([load(), loadStats()]); list = await familyCountries(B, C); } catch (e) { ws.innerHTML = A().emptyState({icon: '⛔', text: e.message}); return; }
+        try { [B, C] = await Promise.all([load(), loadStats()]); list = await familyCountries(B, C); } catch (e) { ws.innerHTML = A().emptyState({icon: cutOff(e) ? '🔌' : '⛔', text: errText(e)}); return; }
         if (token !== S().workspaceToken || S().module !== 'listes') return;
         const head = UI().pageHeader ? UI().pageHeader({title: T('🌍 Les pays de ta famille en chiffres'), help: T('Pour chaque pays où vivait ta famille (d’après les lieux placés sur la carte), la vie de l’époque en chiffres : espérance de vie, bébés morts avant 1 an, taille des hommes, années d’école, richesse par habitant, population. Pays dans leurs frontières d’aujourd’hui.')}) : '';
         ws.innerHTML = `<section class="page collection-page mc-page">${head}
@@ -357,7 +360,7 @@
         const svg = layer.querySelector('svg');
         if (!pref().layer) { svg.innerHTML = ''; return; }
         if (!bordersData) {
-            if (!layer.dataset.loading) { layer.dataset.loading = '1'; load().then(() => { layer.dataset.loading = ''; A().drawMap?.(); }).catch(e => { layer.dataset.loading = ''; A().toast?.(e.message, 'error'); }); }
+            if (!layer.dataset.loading) { layer.dataset.loading = '1'; load().then(() => { layer.dataset.loading = ''; A().drawMap?.(); }).catch(e => { layer.dataset.loading = ''; A().toast?.(errText(e), 'error'); }); }
             return;
         }
         const B = bordersData, y = layerYear(), d = y * 10000 + 701;

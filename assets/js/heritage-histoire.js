@@ -7,6 +7,9 @@
  */
 (() => {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     // les nombres sont passés en texte : une année reste « 1870 » (pas « 1 870 ») ; les grands nombres sont mis en forme avant (nf)
     const i18n = (s, v) => { const w = v && Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x]));
         return window.LCNDA_I18N ? window.LCNDA_I18N.t(s, w) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (w && k in w ? w[k] : m)); };
@@ -170,7 +173,7 @@
         afterFill(host, d);
     }
     /** crochet : d'autres modules ajoutent leurs lignes au bloc (ex. 🌊 la rivière, heritage-metiers-rivieres.js) — ext.histoireAfter.push((host, d) => …) */
-    function afterFill(host, d) { (ext.histoireAfter || []).forEach(f => { try { Promise.resolve(f(host, d)).catch(e => console.error(e)); } catch (e) { console.error(e); } }); }
+    function afterFill(host, d) { (ext.histoireAfter || []).forEach(f => { try { Promise.resolve(f(host, d)).catch(report); } catch (e) { console.error(e); } }); }
 
     (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-hist-life]').forEach(fill); });
 

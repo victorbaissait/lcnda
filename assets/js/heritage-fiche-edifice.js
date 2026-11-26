@@ -22,6 +22,9 @@
  */
 (function (root) {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const T = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
 
     /* ═════════════ le calcul (sans écran : aussi pour Node) ═════════════ */
@@ -236,7 +239,7 @@
         const body = dlg.querySelector('[data-fe-body]');
         body.innerHTML = sheetHtml(D);
         body.dataset.feSite = String(s.id);
-        fillExtras(body, D).catch(e => console.error(e));
+        fillExtras(body, D).catch(report);
         return g;
     }
     function sheetHtml(D) {
@@ -581,7 +584,7 @@
         placeMemo.clear();
         document.querySelectorAll('[data-fe-host]').forEach(h => h.remove());
         document.querySelectorAll('#workspace .h-village[data-fe]').forEach(v => { delete v.dataset.fe; });
-        decorateVillage().catch(e => console.error(e));
+        decorateVillage().catch(report);
         redrawPerson();
         document.querySelectorAll('[data-fe-settings-list]').forEach(h => drawMine(h));
     }
@@ -605,13 +608,13 @@
         host.innerHTML = `<ul class="fe-l">${roles.map(r => `<li><span class="fe-yr">${esc(yrs(r.year_from, r.year_to) || '—')}</span><span>${esc(cap(r.role || T('lié à')))} — <button type="button" class="link-button fe-who" data-fe-open="${r.site_id}">${iconOf(r.kind)} ${esc(r.site_name)}</button></span>${r.source_url ? src(r.source_url) : ''}</li>`).join('')}</ul>`;
         return roles.length;
     }
-    function redrawPerson() { personMemo.clear(); const id = Number(S().currentPersonId) || 0; if (S().module === 'personnes' && id) decoratePerson(id).catch(e => console.error(e)); }
+    function redrawPerson() { personMemo.clear(); const id = Number(S().currentPersonId) || 0; if (S().module === 'personnes' && id) decoratePerson(id).catch(report); }
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks[BLOCK[0]] = (index, detail) => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || !on('person')) return '';
         return A().card(index, T(BLOCK[1]), '', `<div class="fe-block" data-fe-person="${Number(p.id)}"></div>`, 'span-6').replace('<section class="card ', '<section hidden class="card ');
     };
-    (ext.afterPerson = ext.afterPerson || []).push(detail => { const id = Number(detail?.person?.id) || 0; personMemo.delete(id); decoratePerson(id).catch(e => console.error(e)); });
+    (ext.afterPerson = ext.afterPerson || []).push(detail => { const id = Number(detail?.person?.id) || 0; personMemo.delete(id); decoratePerson(id).catch(report); });
 
     /* ─────────── 🏰 la petite fiche d'un château : « ＋ Faire une fiche » / « Ouvrir sa fiche » ─────────── */
     let lastCastle = null;
@@ -636,8 +639,8 @@
         if (pending) return;
         pending = requestAnimationFrame(() => {
             pending = 0;
-            decorateVillage().catch(e => console.error(e));
-            if (on('castle') && !kiosk()) document.querySelectorAll('dialog.cht-dlg .cht-card:not([data-fe])').forEach(c => decorateCastleCard(c).catch(e => console.error(e)));
+            decorateVillage().catch(report);
+            if (on('castle') && !kiosk()) document.querySelectorAll('dialog.cht-dlg .cht-card:not([data-fe])').forEach(c => decorateCastleCard(c).catch(report));
         });
     }).observe(document.documentElement, {childList: true, subtree: true});
 

@@ -16,6 +16,9 @@
     if (typeof module === 'object' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : null, function (root) {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const W = root || {};
     const T = (s, v) => (W.LCNDA_I18N ? W.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? String(v[k]) : m)));
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -399,7 +402,7 @@
         const html = [];
         if (kind === 'ciel') {
             if (want.includes('ciel')) { const D = await soft('ciels'); if (D) html.push(skyHtml(core.skiesForLife(D.events, life), life, D)); }
-            if (want.includes('maree')) { const D = await soft('marees'); if (D) html.push(await tideHtml(life, D).catch(e => { console.error(e); return ''; })); }
+            if (want.includes('maree')) { const D = await soft('marees'); if (D) html.push(await tideHtml(life, D).catch(e => { report(e); return ''; })); }
         } else {
             if (!(life.jobs || []).length) { host.innerHTML = ''; return 0; }
             const [M, dict, mal, lp] = await Promise.all([want.some(k => ['images', 'outils', 'saint'].includes(k)) ? soft('metiers') : null, soft('dict'), want.includes('maladies') ? soft('maladies') : null, want.some(k => k === 'budget' || k === 'repas') ? soft('leplay') : null]);
@@ -495,7 +498,7 @@
         return row('🏞️', cap(lead), `${link(D.url, 'Wikidata')} (CC0)${D.official ? ` · ${link(D.official.url, T('liste du ministère de la Culture'))}` : ''}`, more(`<ul class="hist-ul">${li}</ul>`, list.length > 1 ? list.length : null));
     }
     const PLACE_PARTS = {homonymes: homonymsHtml, plans: mapsHtml, eaux: eauxHtml, jardins: jardinsHtml};
-    async function placePart(kind, place, opts = {}) { try { return await PLACE_PARTS[kind](place, opts); } catch (e) { console.error(e); return ''; } }
+    async function placePart(kind, place, opts = {}) { try { return await PLACE_PARTS[kind](place, opts); } catch (e) { report(e); return ''; } }
     async function placeInto(host, place, opts = {}) {
         const s = settings(), kinds = (opts.parts || ['homonymes', 'eaux', 'jardins']).filter(k => opts.force || s[k]);
         const parts = await Promise.all(kinds.map(k => placePart(k, place, opts)));
@@ -525,7 +528,7 @@
         placeInto(village.querySelector('[data-l8a-host]'), villagePlace(village));
     }
     let pending = 0;
-    new W.MutationObserver(() => { if (pending) return; pending = W.requestAnimationFrame(() => { pending = 0; decorate().catch(e => console.error(e)); }); }).observe(W.document.documentElement, {childList: true, subtree: true});
+    new W.MutationObserver(() => { if (pending) return; pending = W.requestAnimationFrame(() => { pending = 0; decorate().catch(report); }); }).observe(W.document.documentElement, {childList: true, subtree: true});
     W.document.addEventListener('click', async e => {
         const k = e.target.closest?.('[data-l8a-keep]'); if (k) { e.preventDefault(); keepMap(k); return; }
         const m = e.target.closest?.('[data-l8a-maps], [data-l8a-maps-retry]'); if (!m) return;

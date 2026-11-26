@@ -143,6 +143,9 @@
         if (typeof DecompressionStream === 'undefined') throw new Error(T('Ce navigateur ne sait pas ouvrir les fichiers compressés.'));
         return JSON.parse(await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
     }
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     function data(name) {
         if (!loaded[name]) loaded[name] = fetch(`assets/data/${FILES[name]}?v=${DATA_V}`, {credentials: 'same-origin'})
             .then(r => { if (!r.ok) throw new Error(T('Fichier de données introuvable : {f}', {f: FILES[name]})); return readMaybeGz(r); })
@@ -261,7 +264,7 @@
             const ok = await RENDER[id](pl, host);
             if (!ok) host.innerHTML = '';
             return !!ok;
-        } catch (e) { console.error(e); host.innerHTML = ''; return false; }
+        } catch (e) { report(e); host.innerHTML = ''; return false; }
     }
 
     /* ─────────── la fiche d'un village : les parties allumées, dans le style des voisines ─────────── */
@@ -294,7 +297,7 @@
             const anchor = village.querySelector('[data-mr-host]') || village.querySelector('[data-lp-host]') || village.querySelector('.cplus-place') || village.querySelector('.h-village-grid');
             const box = '<div class="pm-place" data-pm-host></div>';
             if (anchor) anchor.insertAdjacentHTML('afterend', box); else village.insertAdjacentHTML('beforeend', box);
-            placeInto(village.querySelector('[data-pm-host]'), place);
+            placeInto(village.querySelector('[data-pm-host]'), place).catch(report);
         }
         decorateMpf();
     }
@@ -327,7 +330,7 @@
     async function personLines(detail) {
         const L = await lifeOf(detail), P = {first: L.first, gender: L.gender}, out = [];
         const bp = L.birthPlace?.insee ? L.birthPlace : L.places[0] || null;
-        const safe = async f => { try { const r = await f(); if (r) out.push(r); } catch (e) { console.error(e); } };
+        const safe = async f => { try { const r = await f(); if (r) out.push(r); } catch (e) { report(e); } };
         await safe(async () => { // 💃
             if (!bp?.dep) return '';
             const M = await data('musique'), rows = musicFor(M, bp.dep).filter(r => r.regions.length); if (!rows.length) return '';
@@ -383,7 +386,7 @@
         let detail = details.get(pid);
         if (!detail) { try { detail = await api('person', {id: pid}); details.set(pid, detail); } catch (_) { return; } }
         if (detail?.person?.kind === 'animal') return;
-        const {html} = await personLines(detail);
+        let html = ''; try { ({html} = await personLines(detail)); } catch (e) { if (cutOff(e)) return; throw e; } // fichier des communes coupé en route : rien à ajouter
         if (!host.isConnected || !html) return;
         host.querySelector('[data-pm-hist]')?.remove();
         // une fiche « rien à dire » : on enlève la petite boîte vide d'avant
@@ -402,7 +405,7 @@
                 const cand = [L.birthPlace, L.deathPlace, ...L.places].filter(x => x?.insee).filter((x, i, a) => a.findIndex(y => y.insee === x.insee) === i);
                 const x = cand.map(pl => ({pl, m: monumentsOf(MO, pl.insee)[0]})).find(y => y.m); if (!x || !hit.isConnected) return;
                 hit.insertAdjacentHTML('beforeend', `<p class="pm-mpf">🪦 ${T('Son nom est peut-être sur le monument aux morts de {p}.', {p: `<b>${esc(x.pl.name)}</b>`})}${srcLink(WD(x.m.q), T('↗ voir le monument (Wikidata)'))}</p>`);
-            } catch (e) { console.error(e); }
+            } catch (e) { report(e); }
         });
     }
 

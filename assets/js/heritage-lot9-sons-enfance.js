@@ -22,6 +22,9 @@
  */
 (function (root) {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const T = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
 
     /* ═════════════ le calcul (sans écran : aussi pour Node) ═════════════ */
@@ -406,7 +409,7 @@
         placeInto(village.querySelector('[data-l9a-host]'), place);
     }
     let pending = 0;
-    new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => console.error(e)); }); }).observe(document.documentElement, {childList: true, subtree: true});
+    new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(report); }); }).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ─────────── 📜 Monographie de commune : une partie par sujet ─────────── */
     const MONO = [['ww1', 'l9a_ww1', '💌', 'Lettres et souvenirs de 14-18 (Europeana)'], ['photos', 'l9a_photos', '📷', 'Photos anciennes sur Europeana'], ['oiseaux', 'l9a_oiseaux', '🐦', 'Les oiseaux du village'], ['fleurs', 'l9a_fleurs', '🌼', 'Les fleurs sauvages du pays']];

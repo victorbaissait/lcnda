@@ -15,6 +15,9 @@
  */
 (function (root) {
     'use strict';
+    /* un téléchargement coupé (page rechargée, application arrêtée, réseau perdu) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    const cutOff = e => e?.name === 'AbortError' || e?.network === true || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
     const T = (s, v) => { const w = v && Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x]));
         return root.LCNDA_I18N ? root.LCNDA_I18N.t(s, w) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (w && w[k] != null ? w[k] : m)); };
 
@@ -354,7 +357,7 @@
         if (s.climat && wxHost(pid)) { skip.push('climat'); intoWeather(detail); }
         const host = hostOf(pid); if (!host) return;
         const card = host.closest('section.card') || host;
-        let html = ''; try { html = await personHtml(detail, {skip}); } catch (e) { console.error(e); }
+        let html = ''; try { html = await personHtml(detail, {skip}); } catch (e) { report(e); }
         if (!host.isConnected) return;
         if (!html) { card.hidden = true; return; } // rien à dire : pas de bloc vide
         card.hidden = false; host.innerHTML = html;
