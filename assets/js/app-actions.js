@@ -147,10 +147,11 @@
         const stage = t.closest(ED_STAGE);
         if (stage) {
             const dlg = stage.closest('dialog') || document;
-            if (!editorItems(dlg).some(i => i !== '-')) return; // un éditeur sans ces commandes : rien à proposer
+            const edEx = extras.filter(x => x && x.inEditor); // 🧺 « Prendre » d'un objet de l'éditeur (heritage-boards.js)
+            if (!editorItems(dlg).some(i => i !== '-') && !edEx.length) return; // un éditeur sans ces commandes : rien à proposer
             e.preventDefault();
             const obj = isObject(t, stage); if (obj) selectFirst(obj, e);
-            setTimeout(() => { const items = editorItems(dlg); if (items.some(i => i !== '-')) UI.menuAt(at, items); }, obj ? 30 : 0);
+            setTimeout(() => { const items = [...editorItems(dlg), ...(edEx.length ? ['-', ...edEx] : [])].filter((x, i, a) => x !== '-' || (i > 0 && i < a.length - 1)); if (items.some(i => i !== '-')) UI.menuAt(at, items); }, obj ? 30 : 0);
             return;
         }
         const row = t.closest(ROW);

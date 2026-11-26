@@ -50,13 +50,17 @@
         const main = [...row.children].find(c => !c.style.order && /\S/.test(c.textContent) && !c.matches('button, select, input, .order-number'));
         (main || (box && /\S/.test(childOf(row, box).textContent) ? childOf(row, box) : null))?.classList.add('ord-main'); // la case et son libellé ensemble : ils prennent la place
     }
+    // ⏱ un bouton déjà examiné (pas une flèche ↑, ou sa ligne déjà rangée) n'est plus relu : la fiche d'une personne en a des centaines,
+    // et la page est relue toutes les 600 ms tant qu'elle se remplit (≈ 1,3 s sur une fiche)
+    const doneBtn = new WeakSet();
     function enhance() {
-        const ups = [...document.querySelectorAll('#workspace button, dialog[open] button')].filter(b => isArrow(b, UP));
+        const ups = [...document.querySelectorAll('#workspace button, dialog[open] button')].filter(b => { if (doneBtn.has(b)) return false; if (isArrow(b, UP)) return true; doneBtn.add(b); return false; });
         for (const up of ups) {
             const row = rowOf(up);
             if (row) setTimeout(() => tidy(row, up), 0); // après la poignée, posée juste en dessous
-            if (!row || row.dataset.dndRow || row.querySelector(HAS_OWN_GRIP) || row.closest('[data-dnd-off]')) continue;
+            if (!row || row.dataset.dndRow || row.querySelector(HAS_OWN_GRIP) || row.closest('[data-dnd-off]')) { if (!row || row.dataset.dndRow || row.dataset.ordRow) doneBtn.add(up); continue; }
             if (!downOf(row)) continue;
+            doneBtn.add(up);
             row.dataset.dndRow = '1';
             const grip = document.createElement('span');
             grip.className = 'dnd-grip'; grip.title = 'Glisser pour déplacer'; grip.setAttribute('aria-hidden', 'true'); grip.textContent = '⠿';

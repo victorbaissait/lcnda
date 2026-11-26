@@ -1170,7 +1170,9 @@
             catch (e) { if (UI().savedStatus) UI().savedStatus($('[data-kn-state]'), 'error'); else status(''); toast(e.message, 'error'); }
         }
         async function close() { if (editing) stopEdit(); if (dirty && !await A().confirmBox(i18n('Les dernières modifications de la présentation seront perdues.'), {title: i18n('Fermer sans enregistrer la présentation ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return; closed = true; ro.disconnect(); docAc.abort(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
-        const ctl = {get show() { return show; }, get cur() { return cur; }, select(ids) { if (editing) stopEdit(); sel = new Set(ids); paintSlide(); paintInsp(); }, run: k => runCmd(k), get name() { return $('[data-kn-name]').value || name; },
+        const ctl = {get show() { return show; }, get cur() { return cur; }, select(ids) { if (editing) stopEdit(); sel = new Set(ids); paintSlide(); paintInsp(); }, run: k => runCmd(k), get dlg() { return dlg; }, get closed() { return closed; },
+            /** 📎 la source d'une info insérée va dans les notes de la diapositive (heritage-connexions-outils.js) ; rend le « ↶ » */
+            addNotes(t) { const s = S(); if (!s || !t) return null; const before = s.notes || ''; s.notes = before ? `${before}\n${t}` : t; $('[data-kn-notes]').value = s.notes; commit(false); return () => { s.notes = before; if (S() === s) $('[data-kn-notes]').value = before; commit(); }; }, get name() { return $('[data-kn-name]').value || name; },
             addSlides(list, {replace = false, meta = null} = {}) {
                 if (editing) stopEdit();
                 const [W, H] = WH(), adopt = replace || (show.slides.length === 1 && !show.slides[0].objs.some(o => o.t !== 'text' || htmlToText(o.html))); // une présentation vide prend le format du fichier

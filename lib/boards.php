@@ -83,7 +83,7 @@ function board_clean_read(string $json): array
 /** Garde ce qui est sûr dans un élément du tableau (les textes restent des textes, les adresses web sont vérifiées) */
 function board_clean_item(array $it): ?array
 {
-    $types = ['shape', 'text', 'note', 'draw', 'line', 'media', 'webimage', 'link', 'tag', 'folder', 'recueil', 'widget', 'screen', 'person', 'weblink', 'table', 'timeline', 'map', 'frame'];
+    $types = ['shape', 'text', 'note', 'draw', 'line', 'media', 'webimage', 'link', 'tag', 'folder', 'recueil', 'widget', 'screen', 'person', 'weblink', 'table', 'timeline', 'map', 'frame', 'card', 'data'];
     if (!in_array($it['type'] ?? '', $types, true)) { return null; }
     $num = static fn($v, $min = -1e6, $max = 1e6) => is_numeric($v) ? max($min, min($max, (float) $v)) : 0.0;
     $str = static fn($v, $n = 300) => mb_substr((string) ($v ?? ''), 0, $n);
@@ -111,6 +111,17 @@ function board_clean_item(array $it): ?array
     if (isset($out['font'])) { $out['font'] = trim((string) preg_replace("/[^\\w\\s,'\\-.\\x{C0}-\\x{FF}]/u", '', $out['font'])); }
     foreach (['headStart', 'headEnd'] as $k) { if (isset($out[$k]) && !in_array($out[$k], ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail', 'triangle_o', 'line_arrow', 'chevron2', 'cross', 'plus', 'star', 'heart', 'one', 'many', 'semicircle'], true) && !preg_match('/^myh_[\w-]{1,30}$/', $out[$k])) { $out[$k] = 'triangle'; } }
     if (isset($it['layout'])) { $out['layout'] = $str($it['layout'], 40); }
+    // 📊 🧺 📎 ce qui est posé avec sa source : carte d'info (icône, ligne, source, d'où elle vient), données vivantes (le réglage du widget), sources d'un texte
+    foreach (['icon' => 8, 'sub' => 600, 'source' => 300, 'cxkind' => 20] as $k => $n) { if (isset($it[$k]) && is_scalar($it[$k])) { $out[$k] = $str($it[$k], $n); } }
+    if (isset($it['ref_id'])) { $out['ref_id'] = max(0, (int) $it['ref_id']); }
+    $flat = static function ($v, int $depth = 0) use (&$flat) { // des textes, nombres, oui/non et listes de ceux-ci (rien d'autre)
+        if (is_bool($v) || is_int($v) || is_float($v)) { return $v; }
+        if (is_string($v)) { return mb_substr($v, 0, 300); }
+        if (is_array($v) && $depth < 3) { $o = []; foreach (array_slice($v, 0, 40, true) as $k => $x) { if (is_int($k) || preg_match('/^[a-z_][a-z0-9_]{0,30}$/i', (string) $k)) { $y = $flat($x, $depth + 1); if ($y !== null) { $o[$k] = $y; } } } return $o; }
+        return null; };
+    if (isset($it['origin']) && is_array($it['origin'])) { $o = $flat($it['origin']); if (isset($o['url']) && !preg_match('~^https?://~i', (string) $o['url'])) { unset($o['url']); } $out['origin'] = $o; }
+    if (($it['type'] ?? '') === 'data' && isset($it['cfg']) && is_array($it['cfg'])) { $c = $flat($it['cfg']); if (strlen((string) json_encode($c)) <= 8000) { $out['cfg'] = (object) $c; } }
+    if (isset($it['srcs']) && is_array($it['srcs'])) { $out['srcs'] = array_values(array_filter(array_map(static fn($x) => is_array($x) ? ['label' => mb_substr((string) ($x['label'] ?? ''), 0, 300), 'url' => $url($x['url'] ?? '')] : null, array_slice($it['srcs'], 0, 20)), static fn($x) => $x && ($x['label'] !== '' || $x['url'] !== ''))); }
     // tableur : une grille de textes (100 lignes × 30 colonnes au plus), largeurs des colonnes
     if (($it['type'] ?? '') === 'table') {
         $cells = is_array($it['cells'] ?? null) ? $it['cells'] : [['']];

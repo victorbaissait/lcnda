@@ -1817,7 +1817,7 @@
         if (ctx.svg) addImported(importSvgText(ctx.svg), 'SVG importé');
         if (ctx.imageSrc) { try { const im = await normImage(/^media\//.test(ctx.imageSrc) ? await toDataUrl(ctx.imageSrc) : ctx.imageSrc), k = Math.min(1, doc.w * .9 / im.w, doc.h * .9 / im.h); addImported([{id: uid(), type: 'image', name: 'Image d’origine', src: im.src, x: 0, y: 0, w: im.w * k, h: im.h * k}], 'Image importée'); dirty = false; saved(''); hint('L’image d’origine est là : Blason → « Vectoriser une image » pour la refaire en tracés, ou dessine par-dessus à la plume.'); } catch (e) { toast(e.message, 'error'); } }
         const rsObs = new ResizeObserver(() => { if (dlg.isConnected) applyView(); }); rsObs.observe(stage);
-        return {get doc() { return doc; }, cmd: (k, ...a) => CMDS[k]?.(...a), setTool, select: ids => { sel = ids; render(); }, importSvgText: t => addImported(importSvgText(t), 'SVG'), close: () => { dirty = false; close(); }};
+        return ext.vectorCurrent = {get dlg() { return dlg; }, addObjs: (objs, label) => addImported(objs, label), get hi() { return hi; }, get selected() { return sel.slice(); }, get doc() { return doc; }, cmd: (k, ...a) => CMDS[k]?.(...a), setTool, select: ids => { sel = ids; render(); }, importSvgText: t => addImported(importSvgText(t), 'SVG'), close: () => { dirty = false; close(); }};
     }
 
     /* ─── images : SVG → canevas, médias de l'app intégrés ─── */

@@ -487,3 +487,13 @@ dialog.cx-put { width: var(--modal-m); max-width: 94vw; height: min(680px, 90vh)
 .cx-pchoice { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; margin-left: 10px; }
 .cx-pchoice select { max-width: 220px; }
 @media (max-width: 640px) { .cx-pchoice { margin: 6px 0 0; } .cx-pchoice select { max-width: 100%; } }
+/* 🧺 📎 dans la barre des outils (heritage-connexions-outils.js) : 📎 Insérer une info · 📥 ▾ */
+.cx-tool-btns { display: inline-flex; align-items: center; gap: 4px; margin: 0 6px; flex: 0 0 auto; }
+.cx-tool-b { display: inline-flex; align-items: center; gap: 2px; min-width: 30px; height: 28px; padding: 0 7px; border-radius: 8px; border: 1px solid #c9ced8; background: #fff; color: inherit; font-size: 14px; line-height: 1; cursor: pointer; }
+.cx-tool-b > span { font-size: 10px; opacity: .7; }
+.cx-tool-b:hover, .cx-tool-b:focus-visible { border-color: #055dff; outline: 2px solid rgba(5, 93, 255, .35); outline-offset: 0; }
+.cx-tool-b[hidden] { display: none; }
+#family-book-form .cx-tool-btns { margin: 4px 0 8px; grid-column: 1 / -1; justify-self: start; }
+:root[data-theme="dark"] .cx-tool-b { background: #1c1f24; border-color: #454b55; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cx-tool-b { background: #1c1f24; border-color: #454b55; } }
+@media (max-width: 640px) { .cx-tool-btns { margin: 0 3px; gap: 3px; } .cx-tool-b { min-width: 28px; padding: 0 5px; } }

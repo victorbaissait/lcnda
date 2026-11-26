@@ -10,7 +10,9 @@
  *  « ▦ L'ensemble » s'insère en tableau, en liste à puces ou en lien. Entrée insère ; Échap ferme. ↶ Annuler défait tout.
  *  La source : rangée là où le champ sait la garder (une piste d'enquête : ses pièces), sinon « [↗ source] » dans le texte.
  *
- *  API : LCNDA_EXT.insertInfo = {attach(el, {context}), open(el), hosts: [{match(el) → bool, context(el) → {}, cite(el, items) → undo}], settings()}
+ *  API : LCNDA_EXT.insertInfo = {attach(el, {context}), open(el), hosts: [{match(el) → bool, context(el) → {}, cite(el, items) → undo,
+ *        field(el) → bool (une ligne de texte qui compte : un titre), render({text, html, items}, el) → {text, html} (la source à la façon de l'outil), said}], settings()}
+ *  Les outils (Traitement de texte, Présentation, Tableur, Dessin, Site, Diagrammes…) : assets/js/heritage-connexions-outils.js.
  *  Essais : tests/test-inserer.js, tests/test-prendre-depuis-usage.js (G4). */
 (() => {
     'use strict';
@@ -33,7 +35,10 @@
     const live = () => settings().on !== false && CX().enabled?.() !== false && !kiosk();
 
     /* ═════════ les champs ═════════ */
-    const isField = el => !!el && ((el.matches?.('textarea') && !el.readOnly && !el.disabled) || el.isContentEditable) && !el.closest('.cx-qi, [data-no-insert], .cm-editor, .CodeMirror, [data-ui-code]');
+    // une ligne de texte (un titre, une légende) compte aussi quand l'écran le dit : attach(el), ou un hôte qui la reconnaît (field)
+    const isLine = el => !!el.matches?.('input:not([type]), input[type="text"], input[type="search"]') && !el.readOnly && !el.disabled && (el.dataset.insertInfo === '1' || hosts.some(h => { try { return !!h.field?.(el); } catch (_) { return false; } }));
+    const isField = el => !!el && ((el.matches?.('textarea') && !el.readOnly && !el.disabled) || el.isContentEditable || isLine(el)) && !el.closest('.cx-qi, [data-no-insert], .cm-editor, .CodeMirror, [data-ui-code]');
+    const isPlain = el => !!el.matches?.('textarea, input'); // une valeur (curseur : selectionStart), pas du HTML
     const hosts = [];
     /** ce que le champ sait de son contexte (une fiche, une enquête…) : pour classer les réponses et garder la source */
     function ctxOf(el) {
@@ -55,7 +60,8 @@
     document.addEventListener('input', e => {
         const el = e.target; if (!live() || pop || !isField(el) || e.inputType?.startsWith('delete')) return;
         const trig = settings().trigger || '/'; if (!trig) return;
-        if (el.matches('textarea')) {
+        if (isPlain(el)) {
+            if (!el.matches('textarea')) return; // « / » dans une ligne (un titre) reste un « / » : 📎 ou le raccourci
             const pos = el.selectionStart, v = el.value;
             if (v.slice(pos - trig.length, pos) === trig && (pos === trig.length || v[pos - trig.length - 1] === '\n')) open(el, {trigger: {start: pos - trig.length, len: trig.length}});
         } else {
@@ -66,7 +72,7 @@
     document.addEventListener('focusin', e => { const el = e.target; if (!live() || !settings().button || !isField(el)) return; showBtn(el); });
     document.addEventListener('focusout', e => { if (btn && e.target === btn.field) setTimeout(() => { if (btn && document.activeElement !== btn.field && document.activeElement !== btn) hideBtn(); }, 150); });
     function showBtn(el) {
-        hideBtn(); const r = el.getBoundingClientRect(); if (r.width < 160 || r.height < 30) return;
+        hideBtn(); const r = el.getBoundingClientRect(); if (r.width < 160 || r.height < (isPlain(el) && !el.matches('textarea') ? 24 : 30)) return;
         btn = document.createElement('button'); btn.type = 'button'; btn.className = 'cx-qi-btn'; btn.textContent = '📎'; btn.field = el;
         btn.title = T('Insérer une info ici (« / » en début de ligne, ou {k})', {k: keyHint()}); btn.setAttribute('aria-label', T('Insérer une info ici'));
         (el.closest('dialog[open]') || document.body).appendChild(btn);
@@ -89,7 +95,7 @@
     };
     const findCat = id => { for (const c of CATS()) { if (c.id === id) return c; for (const k of c.kids || []) if (k.id === id) return k; } return null; };
     function caretRect(el) {
-        if (!isField(el)) return el.getBoundingClientRect();
+        if (!isField(el) || el.matches('input')) return el.getBoundingClientRect();
         if (!el.matches('textarea')) { const s = getSelection(); if (s.rangeCount) { const r = s.getRangeAt(0).getBoundingClientRect(); if (r.width || r.height) return r; } return el.getBoundingClientRect(); }
         const cs = getComputedStyle(el), m = document.createElement('div');
         ['font', 'letterSpacing', 'lineHeight', 'padding', 'border', 'boxSizing', 'whiteSpace', 'wordWrap', 'width'].forEach(p => { m.style[p] = cs[p]; });
@@ -100,7 +106,7 @@
     }
     function open(el, {trigger = null, onPick = null} = {}) {
         if (!live() && !onPick) return; close();
-        const saved = el.matches('textarea') ? {start: el.selectionStart, end: el.selectionEnd} : (() => { const s = getSelection(); return s.rangeCount ? {range: s.getRangeAt(0).cloneRange()} : {}; })();
+        const saved = isPlain(el) ? {start: el.selectionStart, end: el.selectionEnd} : (() => { const s = getSelection(); return s.rangeCount ? {range: s.getRangeAt(0).cloneRange()} : {}; })();
         const ctx = ctxOf(el);
         pop = {el, trigger, saved, ctx, onPick, path: [], q: '', results: [], i: 0, ticked: new Map(), seq: 0, bk: null, basket: 0, added: new Set()};
         const box = pop.box = document.createElement('div'); box.className = 'cx-qi'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', T('Insérer une info'));
@@ -274,7 +280,10 @@
     }
     async function insert(el, {text, html, trigger, saved, ctx, items}) {
         let undoText;
-        if (el.matches('textarea')) {
+        // l'outil garde la source à sa façon (le Traitement de texte : une note de bas de page) ; render rend {text, html}
+        if (ctx.host?.render) { try { const o = ctx.host.render({text, html, items}, el, ctx); if (o) ({text = text, html = html} = o); } catch (_) {} }
+        if (el.matches('input')) text = String(text).replace(/\s*\n+\s*/g, ' — '); // une ligne reste une ligne
+        if (isPlain(el)) {
             const before = trigger ? el.value.slice(0, trigger.start) + el.value.slice(trigger.start + trigger.len) : el.value; let a = saved.start, b = saved.end;
             if (trigger) { a = trigger.start; b = Math.max(b, trigger.start + trigger.len); }
             const pre = el.value.slice(0, a), post = el.value.slice(b), sep = post && !/^\s/.test(post) ? ' ' : '';
@@ -289,7 +298,8 @@
         }
         el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true}));
         let undoCite = null; try { undoCite = items.length && ctx.host?.cite ? await ctx.host.cite(el, items, ctx) : null; } catch (e) { A().toast?.(e.message, 'error'); }
-        const msg = undoCite ? T('📎 Inséré, et la source est gardée dans la piste') : T('📎 Inséré, avec sa source');
+        const said = typeof ctx.host?.said === 'function' ? ctx.host.said(items, el) : ctx.host?.said;
+        const msg = said ? T(said) : undoCite ? T('📎 Inséré, et la source est gardée dans la piste') : T('📎 Inséré, avec sa source');
         (A().undoToast || ((m) => A().toast?.(m)))(msg, {icon: '📎', undo: async () => { undoText(); await undoCite?.(); }});
     }
 
@@ -353,7 +363,7 @@
     function insertBlock(b, {anchor = null} = {}) {
         if (!live()) { A().toast?.(kiosk() ? T('Mode consultation : rien ne peut être écrit.') : T('« Insérer une info » est éteint (Réglages → 🧺 Panier et connexions).')); return null; }
         const el = lastField?.isConnected && isField(lastField) && lastField.getClientRects().length ? lastField : null;
-        const here = el => insert(el, {text: b.text, html: b.html, trigger: null, saved: el.matches('textarea') ? {start: el.selectionStart, end: el.selectionEnd} : {}, ctx: ctxOf(el), items: b.items || []});
+        const here = el => insert(el, {text: b.text, html: b.html, trigger: null, saved: isPlain(el) ? {start: el.selectionStart, end: el.selectionEnd} : {}, ctx: ctxOf(el), items: b.items || []});
         const copy = async () => { try { await navigator.clipboard.writeText(b.text); A().toast?.(T('📎 Copié, avec les sources : colle-le où tu veux.')); } catch (_) { A().toast?.(T('Copie impossible.'), 'error'); } };
         const menu = [el ? {icon: '📎', label: T('À l’endroit du curseur (le dernier texte ouvert)'), run: () => here(el)} : null,
             CX().putInto ? {icon: '📍', label: T('Dans une note, une enquête, l’Atelier…'), run: () => CX().putInto(b.items || [], {anchor})} : null,
@@ -362,5 +372,5 @@
         if (!UI().menuAt) return copy();
         return UI().menuAt(anchor || document.body, menu, {title: b.items?.length === 1 && b.items[0].kind !== 'set' ? T('Insérer…') : T('Insérer un bloc ({t})', {t: b.title || ''})});
     }
-    ext.insertInfo = {attach, open: (el, o) => open(el || lastField, o || {}), openHere, hosts, settings, settingsHtml, bindSettings, close: () => close(), isOpen: () => !!pop, insertBlock};
+    ext.insertInfo = {attach, open: (el, o) => open(el || lastField, o || {}), openHere, hosts, settings, settingsHtml, bindSettings, close: () => close(), isOpen: () => !!pop, insertBlock, isField, live, lastField: () => (lastField?.isConnected ? lastField : null)};
 })();

@@ -1994,5 +1994,5 @@
         }}});
     }
     ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, folderDest, pisteAttach, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
-        openBasketView, chooseBasket, kit: {pickItem, ldRowItem, ldAll, ldSet, ldCrit, listsAll, itemLine, icon, cleanIt, pickKey, viewOf, srcLink: (u, l) => srcLink(u, l), remember: items => remember(items)}, count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
+        openBasketView, chooseBasket, kit: {basketSelect, pickItem, ldRowItem, ldAll, ldSet, ldCrit, listsAll, itemLine, icon, cleanIt, pickKey, viewOf, srcLink: (u, l) => srcLink(u, l), remember: items => remember(items)}, count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
 })();

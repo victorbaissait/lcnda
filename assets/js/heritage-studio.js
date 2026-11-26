@@ -3243,7 +3243,7 @@
             editingTA = {ta, op, restyle, finish};
             ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); finish(true); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); finish(false); } });
             // cliquer dans le panneau de droite (🔤 Caractère) ne termine pas l'écriture : on revient dans la zone
-            ta.addEventListener('blur', () => setTimeout(() => { if (over) return; const a = document.activeElement; if (a && a.closest?.('.h-rt-side, .h-rt-opts, [data-rt-opts], .ui-fontpick, dialog.ui-fontpick, .ui-colorbox')) return; finish(true); }, 0));
+            ta.addEventListener('blur', () => setTimeout(() => { if (over) return; const a = document.activeElement; if (a && a.closest?.('.h-rt-side, .h-rt-opts, [data-rt-opts], .ui-fontpick, dialog.ui-fontpick, .ui-colorbox, .cx-qi')) return; finish(true); }, 0));
         };
         // ── Sélections : rectangle, ovale, lasso, plume, baguette ; ⇧ ajoute, ⌥ enlève ──
         function selPath(g, d) {

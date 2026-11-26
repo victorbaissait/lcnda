@@ -436,6 +436,8 @@
             </header>
             <div class="h-board-toolbar" role="toolbar">
                 <button type="button" class="h-bt h-bt-add" data-bd-add title="Ajouter un fichier, un média, une fiche, un écran de l’app…"><span>＋</span> Ajouter</button>
+                <button type="button" class="h-bt" data-bd-insert title="${esc(i18n('📎 Insérer une info : une date, un lieu, une ligne de liste… avec sa source'))}" aria-label="${esc(i18n('Insérer une info'))}"><span>📎</span></button>
+                <button type="button" class="h-bt" data-bd-basket title="${esc(i18n('🧺 Le panier : ce que tu as mis de côté'))}" aria-label="${esc(i18n('Le panier'))}"><span>🧺</span></button>
                 <span class="h-bt-sep"></span>
                 <span class="h-bt-opts" data-bd-opts></span>
                 <span class="spacer"></span>
@@ -595,6 +597,9 @@
                 case 'map': return `<div class="h-bi-mapbox"><header>🗺 <span data-i18n-off>${esc(it.title || i18n('Carte'))}</span></header><div class="h-bi-mapbody" data-bd-map>${window.LCNDA_UI.spinner(i18n('Chargement de la carte…'))}</div></div>`;
                 case 'frame': return `<div class="h-bi-section${it.collapsed ? ' is-collapsed' : ''}" style="--fc:${it.fill || '#eef4ff'};--fb:${it.stroke || '#9fb7d9'}"><header><button type="button" class="h-bi-fold" data-bd-fold title="${esc(i18n(it.collapsed ? 'Déplier' : 'Replier'))}">${it.collapsed ? '▸' : '▾'}</button><span data-i18n-off>${esc(it.title || i18n('Cadre'))}</span>${it.collapsed ? `<small>${esc(plural(framed(it).length, 'élément'))}</small>` : ''}</header></div>`;
                 case 'widget': return `<div class="h-bi-widget" data-bd-widget="${esc(it.target)}">${window.LCNDA_UI.spinner(i18n('Chargement du widget…'))}</div>`;
+                case 'card': { const u = okUrl(it.url), lab = it.source || (u ? (() => { try { return new URL(u).hostname; } catch (_) { return ''; } })() : '') || i18n('source');
+                    return `<div class="h-bi-card h-bi-dcard"><span class="h-bi-big">${esc(it.icon || '📋')}</span><strong data-i18n-off>${esc(it.title || '—')}</strong>${it.sub ? `<small data-i18n-off>${esc(it.sub)}</small>` : ''}${u ? `<a class="h-bi-src" data-bd-src href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(u)}">↗ <span data-i18n-off>${esc(lab)}</span></a>` : `<button type="button" class="h-bi-src" data-bd-openlink title="${esc(i18n('Revenir là d’où ça vient'))}">↗ <span data-i18n-off>${esc(lab)}</span></button>`}</div>`; }
+                case 'data': return `<div class="h-bi-data"><div data-bd-live></div></div>`;
                 case 'link': case 'screen': {
                     const sc = ext.appScreen, label = it.title || sc?.label(it.target) || it.target;
                     if (it.preview && sc?.valid(it.target)) return `<div class="h-bi-screen"><header>📺 <span data-i18n-off>${esc(label)}</span><button type="button" data-bd-openlink title="${esc(i18n('Ouvrir en grand'))}">↗</button></header><iframe src="${esc(sc.url({target: it.target, sidebar: false, layout: it.layout}))}" title="${esc(label)}" loading="lazy"></iframe></div>`;
@@ -616,7 +621,7 @@
                 let el = els.get(it.id);
                 if (!el) { el = document.createElement('div'); el.className = 'h-bi'; el.dataset.bi = it.id; world.appendChild(el); els.set(it.id, el); }
                 const sig = contentSig(it);
-                if (sigs.get(it.id) !== sig) { el.innerHTML = itemInner(it) + cmtBubble(it); sigs.set(it.id, sig); hydrate(el, it); }
+                if (sigs.get(it.id) !== sig) { el.innerHTML = itemInner(it) + cmtBubble(it) + srcLine(it); sigs.set(it.id, sig); hydrate(el, it); }
                 el.className = `h-bi is-type-${it.type}${sel.has(it.id) ? ' is-sel' : ''}${it.locked ? ' is-locked' : ''}${it.group ? ' is-grouped' : ''}${lockedIds.has(it.id) ? ' is-layerlocked' : ''}`;
                 el.hidden = hiddenIds.has(it.id);
                 Object.assign(el.style, {left: it.x + 'px', top: it.y + 'px', width: it.w + 'px', height: it.h + 'px', zIndex: String(10 + i), transform: it.rot ? `rotate(${it.rot}deg)` : '', opacity: it.opacity !== undefined && it.opacity < 1 ? String(it.opacity) : ''});
@@ -712,6 +717,7 @@
             if (it.type === 'person') personBrief(it.person_id).then(p => { const c = el.querySelector('.h-bi-person'); if (c) fillPersonCard(c, it, p); });
             if (it.type === 'timeline') fillTimeline(el, it);
             if (it.type === 'map') fillMap(el, it);
+            if (it.type === 'data') fillData(el, it);
             if (it.type === 'widget' && ext.renderCustomWidgetInto) { const box = el.querySelector('[data-bd-widget]'); ext.renderCustomWidgetInto(box, it.target).catch?.(() => { box.innerHTML = '<p class="muted">Widget introuvable.</p>'; }); }
         }
         // cadre de sélection et poignées
@@ -804,7 +810,7 @@
                     let cx0 = it.x; cw.forEach((w0, c) => { const ww = it.w * w0 / tot; for (let r = 0; r < rows; r++) { x.strokeRect(cx0, it.y + r * rh, ww, rh); const v = vals[r][c]; if (v !== '') { x.save(); x.beginPath(); x.rect(cx0, it.y + r * rh, ww, rh); x.clip(); x.fillText(String(cells[r][c] ?? '').startsWith('=') ? showVal(v) : String(cells[r][c] ?? ''), cx0 + 4, it.y + r * rh + rh / 2); x.restore(); } } cx0 += ww; });
                     x.restore(); continue;
                 }
-                if (it.type === 'shape' || it.type === 'note' || it.type === 'tag' || ['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'widget', 'timeline', 'map', 'frame'].includes(it.type) || (it.type === 'media' && kindOfMedia(media[it.media_id]) !== 'image')) {
+                if (it.type === 'shape' || it.type === 'note' || it.type === 'tag' || ['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'widget', 'timeline', 'map', 'frame', 'card', 'data'].includes(it.type) || (it.type === 'media' && kindOfMedia(media[it.media_id]) !== 'image')) {
                     x.fillStyle = it.type === 'note' ? (it.fill || NOTE_COLORS[0]) : it.type === 'shape' ? (it.fill || '#bde0fe') : it.type === 'tag' ? (it.fill || '#0066cc') : it.type === 'folder' ? (it.fill || '#f5c542') : it.type === 'frame' ? (it.fill || '#eef4ff') : '#f3f5f8';
                     x.strokeStyle = it.type === 'shape' ? (it.stroke || '#1d3557') : '#c9ced6'; x.lineWidth = it.type === 'shape' ? (it.sw ?? 2) : 1;
                     if (it.type === 'shape' && it.shape === 'ellipse') { x.beginPath(); x.ellipse(it.x + it.w / 2, it.y + it.h / 2, it.w / 2, it.h / 2, 0, 0, Math.PI * 2); x.fill(); x.stroke(); }
@@ -816,7 +822,7 @@
                     }
                     else if (it.radius || (it.type === 'shape' && it.shape === 'round')) { const r0 = Math.min(it.radius ?? Math.min(it.w, it.h) * .18, it.w / 2, it.h / 2); x.beginPath(); x.roundRect(it.x, it.y, it.w, it.h, r0); x.fill(); x.stroke(); }
                     else { x.fillRect(it.x, it.y, it.w, it.h); x.strokeRect(it.x, it.y, it.w, it.h); }
-                    const label = it.text || it.title || els.get(it.id)?.querySelector('.h-bi-pinfo strong')?.textContent || i18n({folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', link: 'Écran', screen: 'Écran', timeline: 'Frise', map: 'Carte', frame: 'Cadre'}[it.type] || '');
+                    const label = it.type === 'card' || it.type === 'data' ? exportLabel(it) : it.text || it.title || els.get(it.id)?.querySelector('.h-bi-pinfo strong')?.textContent || i18n({folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', link: 'Écran', screen: 'Écran', timeline: 'Frise', map: 'Carte', frame: 'Cadre'}[it.type] || '');
                     if (label) { x.fillStyle = it.type === 'tag' ? '#fff' : (it.color || '#111'); x.font = `${it.bold ? 'bold ' : ''}${Math.min(it.fs || 18, it.h * .5)}px sans-serif`; x.textBaseline = 'top'; String(label).split('\n').slice(0, 6).forEach((l, n) => x.fillText(l.slice(0, 60), it.x + 8, it.y + 8 + n * (it.fs || 18) * 1.2, it.w - 16)); }
                 } else if (it.type === 'text') {
                     x.fillStyle = it.color || '#111'; x.font = `${it.bold ? 'bold ' : ''}${it.fs || 18}px sans-serif`; x.textBaseline = 'top';
@@ -902,6 +908,8 @@
             if (e.target.closest('[data-bd-fit]')) { fitAll(); queueSave(false); return; }
             if (e.target.closest('[data-bd-groups]')) { showGroups = !showGroups; try { localStorage.setItem('genealogie-board-groups', showGroups ? '1' : '0'); } catch (_) {} drawGroups(); toast(i18n(showGroups ? 'Les groupes sont montrés.' : 'Groupes cachés.')); return; }
             if (e.target.closest('[data-bd-add]') && !ro()) addMenu();
+            if (e.target.closest('[data-bd-insert]')) insertHere(e.target.closest('[data-bd-insert]'));
+            if (e.target.closest('[data-bd-basket]')) ext.connexions?.openBasket?.(e.target.closest('[data-bd-basket]'));
         });
         root.querySelector('.h-board-toolbar').addEventListener('input', e => {
             const sync = sel0 => root.querySelectorAll(sel0).forEach(x => { if (x !== e.target) x.value = e.target.value; });
@@ -927,7 +935,7 @@
         // ── la souris sur la toile ──
         let drag = null, spaceDown = false;
         stage.addEventListener('pointerdown', e => {
-            if (e.target.closest('.h-bi-text[contenteditable="true"], audio, video, iframe, input, select, textarea, [data-bd-openlink]')) return;
+            if (e.target.closest('.h-bi-text[contenteditable="true"], audio, video, iframe, input, select, textarea, [data-bd-openlink], [data-bd-src], [data-bd-srcs], .h-bi-data a, .h-bi-data button')) return;
             // un clic sur la toile quitte le champ du panneau où l'on écrivait (sinon les raccourcis du tableau ne marchent plus)
             const ae = document.activeElement; if (ae && ae !== document.body && root.contains(ae) && !stage.contains(ae) && ae.matches('input, select, textarea')) ae.blur();
             const [wx, wy] = toWorld(e.clientX, e.clientY);
@@ -1096,12 +1104,19 @@
             view.x -= e.deltaX; view.y -= e.deltaY; applyView(); queueSave(false);
         }, {passive: false});
         // ── écrire dans un élément ──
+        /** la petite fenêtre 📎 prend le curseur un instant : le texte reste en écriture jusqu'à ce qu'elle se ferme (elle rend le curseur) */
+        function insertWait(el, done) {
+            if (!ext.insertInfo?.isOpen?.()) return false;
+            const step = () => { if (ext.insertInfo?.isOpen?.()) return setTimeout(step, 120); if (document.activeElement !== el && el.isConnected) done(); };
+            setTimeout(step, 120); return true;
+        }
         function editText(it) {
             if (!it || it.locked || ro()) return;
             const el = els.get(it.id)?.querySelector('[data-bd-text]'); if (!el) return;
             editing = it.id; el.contentEditable = 'true'; el.innerText = it.text || ''; el.focus();
             const r = document.createRange(); r.selectNodeContents(el); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
             const done = () => {
+                if (insertWait(el, done)) return; // 📎 « Insérer une info » ouverte : on écrit encore
                 el.removeEventListener('blur', done); el.contentEditable = 'false'; editing = null;
                 it.text = el.innerText.replace(/\n$/, '');
                 if (it.type === 'text') { if (!it.text.trim()) { items = items.filter(i => i !== it); sel.delete(it.id); } else { it.h = Math.max(it.h, el.scrollHeight + 4); } }
@@ -1122,7 +1137,7 @@
             if (it.type === 'table') { const td = under.closest('td[data-r]'); return editCell(it, td ? Number(td.dataset.r) : 0, td ? Number(td.dataset.c) : 0); }
             openItem(it);
         });
-        stage.addEventListener('click', e => { const o = e.target.closest('[data-bd-openlink]'); if (o) { const it = byId(o.closest('[data-bi]').dataset.bi); openItem(it); } });
+        stage.addEventListener('click', e => { const sm = e.target.closest('[data-bd-srcs]'); if (sm) { srcMenu(byId(sm.closest('[data-bi]').dataset.bi), sm); return; } const o = e.target.closest('[data-bd-openlink]'); if (o) { const it = byId(o.closest('[data-bi]').dataset.bi); openItem(it); } });
         // ── tableur : écrire dans une cellule (Tab, Entrée pour passer à la suivante ; coller un bout de tableur) ──
         function newTable() { // comme réglé dans Réglages → Tableaux → Tableur
             const t0 = {rows: 4, cols: 3, header: true, hcol: false, stripes: true, hfill: '#e8eef7', fs: 14, headers: i18n('Nom;Année;Lieu'), ...(P().table || {})};
@@ -1140,6 +1155,7 @@
             const rg = document.createRange(); rg.selectNodeContents(td); const s = window.getSelection(); s.removeAllRanges(); s.addRange(rg);
             let cancelled = false, after = null;
             const done = () => {
+                if (!cancelled && insertWait(td, done)) return;
                 td.removeEventListener('blur', done); td.contentEditable = 'false'; editing = null;
                 if (!cancelled) { while (it.cells.length <= r) it.cells.push([]); it.cells[r][c] = td.textContent.replace(/\n+$/, ''); }
                 sigs.delete(it.id); render(); if (!cancelled) commit();
@@ -1227,6 +1243,8 @@
             if (it.type === 'person' || (it.type === 'timeline' && it.person_id)) { S().currentPersonId = Number(it.person_id); return A().setModule('personnes'); }
             if (it.type === 'map' && /^(person|family|investigation):/.test(it.mapSrc || '')) { const [k, v] = it.mapSrc.split(':'); if (k === 'investigation') { Object.assign(S(), {enquetesTab: 'enquetes', currentBattueId: 0, currentInvestigationId: Number(v)}); return A().setModule('enquetes'); } S().currentPersonId = Number(v); return A().setModule('personnes'); }
             if (it.type === 'frame') return toggleFrame(it);
+            if (it.type === 'data') return ext.atelierData?.open?.(it.cfg || {});
+            if (it.type === 'card') { if (it.origin && ext.connexions?.openOrigin) return ext.connexions.openOrigin({kind: it.cxkind, ref_id: it.ref_id || 0, title: it.title, origin: it.origin, data: {url: it.url}}); if (okUrl(it.url)) return window.open(it.url, '_blank', 'noopener'); return; }
             if (it.type === 'link' || it.type === 'screen') return A().openCustomScreen(it.target);
             if (it.type === 'weblink' && it.url) return window.open(it.url, '_blank', 'noopener');
             if (it.type === 'media') { const m = media[it.media_id]; if (m) A().openLightbox?.([{...m, id: Number(it.media_id)}], 0, true); }
@@ -1240,7 +1258,7 @@
         stage.addEventListener('dragleave', e => { if (e.target === stage) root.querySelector('[data-bd-drop]').hidden = true; });
         stage.addEventListener('drop', e => {
             root.querySelector('[data-bd-drop]').hidden = true;
-            if (!e.dataTransfer?.files?.length) { const url = e.dataTransfer?.getData('text/uri-list') || e.dataTransfer?.getData('text/plain'); if (/^https?:\/\//.test(url || '')) { e.preventDefault(); addUrl(url.trim(), toWorld(e.clientX, e.clientY)); } return; }
+            if (!e.dataTransfer?.files?.length) { const url = e.dataTransfer?.getData('text/uri-list') || e.dataTransfer?.getData('text/plain'); if (/^https?:\/\//.test(url || '') && ![...(e.dataTransfer?.types || [])].includes('application/x-lcnda-cx')) { e.preventDefault(); addUrl(url.trim(), toWorld(e.clientX, e.clientY)); } return; }
             dropAt = toWorld(e.clientX, e.clientY);
         });
         if (window.LCNDA_UI?.bindFileDrop) window.LCNDA_UI.bindFileDrop(stage, files => { const at = dropAt; dropAt = null; uploadAndPlace(files, at || undefined); }, {paste: false}); // ⌘V : le collage du tableau, plus bas
@@ -1394,7 +1412,9 @@
                     ${cs ? `<label>${esc(i18n(range && range.rs * range.cs > 1 ? 'Fond de la cellule (les cellules choisies)' : 'Fond de la cellule'))}</label><div class="h-bd-sws">${pal('fill').map(c => `<button type="button" class="h-sw" style="background:${c === 'transparent' ? 'repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0/8px 8px' : c}" data-bd-cellfill="${c}"></button>`).join('')}<input type="color" data-bd-cellfill2 value="#fff3a3" title="Autre couleur"></div>` : ''}
                     <details class="h-bd-help"><summary>${esc(i18n('Formules'))}</summary><p class="muted">${i18n('Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge), <code>="texte"</code>. Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille.')}</p></details></div>` : '',
                 brush: () => t === 'draw' ? `<label>Pinceau <select data-bd-sel="brush">${BRUSHES.map(([k, lb, ic]) => `<option value="${k}" ${(one.brush || 'pen') === k ? 'selected' : ''}>${ic} ${esc(lb)}</option>`).join('')}</select></label>${numField('hard', 'Dureté', 0, 100, 1, one.hard ?? 100, '%')}` : '',
-                title: () => [['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'frame'].includes(t) ? `<label>Titre <input data-bd-str="title" value="${esc(one.title || '')}"></label>` : '',
+                title: () => [['folder', 'recueil', 'person', 'link', 'screen', 'weblink'].includes(t) ? `<label>Titre <input data-bd-str="title" value="${esc(one.title || '')}"></label>` : '',
+                    ['frame', 'card'].includes(t) ? `<label>${esc(i18n('Titre'))} <textarea data-bd-str="title" rows="2">${esc(one.title || '')}</textarea></label>` : '',
+                    t === 'card' ? `<label>${esc(i18n('Ce qu’elle dit'))} <textarea data-bd-str="sub" rows="3">${esc(one.sub || '')}</textarea></label><p class="muted"><small>${esc(i18n('Source : {s}', {s: one.source || one.url || '—'}))}</small></p>` : '',
                     t === 'tag' ? `<label>Étiquette <input data-bd-str="text" value="${esc(one.text || '')}"></label>` : '',
                     t === 'media' && kindOfMedia(media[one.media_id]) === 'image' ? `<label>Légende <input data-bd-str="text" value="${esc(one.text || '')}"></label>` : '',
                     t === 'weblink' ? `<label>Adresse <input data-bd-str="url" value="${esc(one.url || '')}"></label>` : ''].join(''),
@@ -1408,6 +1428,7 @@
                     <label class="ui-toggle"><input type="checkbox" data-bd-check="mapPath" ${one.mapPath ? 'checked' : ''}><i></i><span>relier les lieux dans l’ordre (le parcours)</span></label>
                     <label>Poser un repère</label><input type="search" placeholder="Une commune, un lieu…" data-bd-pinq><div class="h-bd-results" data-bd-pinres></div>
                     ${(one.pins || []).length ? `<ul class="h-bd-pins">${one.pins.map((pn, i) => `<li><span class="h-sw" style="background:${esc(pn.color || '#d0021b')}"></span><input data-bd-pinlabel="${i}" value="${esc(pn.label || '')}"><button type="button" class="h-bd-unlink" data-bd-pindel="${i}" title="${esc(i18n('Enlever ce repère'))}">×</button></li>`).join('')}</ul>` : ''}` : '',
+                data: () => t === 'data' ? `<div class="h-bd-datacfg" data-bd-datacfg></div><div class="h-bd-row"><button type="button" class="button small" data-bd-dataapply>${esc(i18n('✓ Appliquer'))}</button><button type="button" class="button small secondary" data-bd-act="open">${esc(i18n('↗ Ouvrir la liste'))}</button></div>` : '',
                 connector: () => t === 'line' ? `<label>Lien tout prêt <select data-bd-conn><option value="">—</option>${CONNECTORS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>${one.bends?.length ? `<button type="button" class="button small secondary" data-bd-unbend>${esc(i18n('Enlever : {n}', {n: plural(one.bends.length, 'coude')}))}</button>` : '<p class="muted"><small>Glisse un « ＋ » sur le trait pour le plier en plusieurs segments.</small></p>'}` : '',
                 align: () => l.filter(i => i.type !== 'line').length > 1 ? `<label>Aligner</label><div class="h-bd-row">${[['left', '⇤', 'À gauche'], ['hcenter', '↔', 'Centrés (de gauche à droite)'], ['right', '⇥', 'À droite'], ['top', '⤒', 'En haut'], ['vcenter', '↕', 'Centrés (de haut en bas)'], ['bottom', '⤓', 'En bas']].map(([k, h, lb]) => `<button type="button" class="h-bt" data-bd-align="${k}" title="${esc(i18n(lb))}">${h}</button>`).join('')}</div>
                     <label>Répartir</label><div class="h-bd-row"><button type="button" class="h-bt" data-bd-align="dh" title="Même écart de gauche à droite">⇹ en largeur</button><button type="button" class="h-bt" data-bd-align="dv" title="Même écart de haut en bas">⇳ en hauteur</button><button type="button" class="h-bt" data-bd-align="sw" title="Même largeur que le premier choisi">═ même largeur</button><button type="button" class="h-bt" data-bd-align="sh" title="Même hauteur que le premier choisi">‖ même hauteur</button></div>` : '',
@@ -1415,7 +1436,7 @@
                 comments: () => one ? `<button type="button" class="button small secondary" data-bd-comments>💬 ${(one.cmt || []).length ? `Commentaires (${one.cmt.filter(c => !c.done).length} ouvert${one.cmt.filter(c => !c.done).length > 1 ? 's' : ''} / ${one.cmt.length})` : 'Commenter'}</button>` : '',
                 opacity: () => numField('opacity', 'Opacité', 5, 100, 1, Math.round((one?.opacity ?? 1) * 100), '%', 5, 100),
                 actions: () => `<div class="h-bd-actions">
-                    ${['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'media', 'timeline'].includes(t) || (t === 'map' && one.mapSrc) ? '<button type="button" class="button small" data-bd-act="open">↗ Ouvrir</button>' : ''}
+                    ${['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'media', 'timeline', 'card'].includes(t) || (t === 'map' && one.mapSrc) ? '<button type="button" class="button small" data-bd-act="open">↗ Ouvrir</button>' : ''}
                     ${one && t === 'media' && kindOfMedia(media[one.media_id]) === 'image' && media[one.media_id]?.filename ? `${ext.retouchMedia && !boardLocked ? `<button type="button" class="button small secondary" data-bd-act="retouch" title="${esc(i18n('Ouvrir cette image dans la Retouche des photos'))}">🎚️ ${esc(i18n('Retoucher'))}</button>` : ''}${ext.sendTo ? `<button type="button" class="button small secondary" data-bd-act="sendimg" title="${esc(i18n('Envoyer cette image vers un autre outil'))}">📤 ${esc(i18n('Envoyer vers…'))}</button>` : ''}` : ''}
                     <button type="button" class="button small secondary" data-bd-act="duplicate" data-shortcut="⌘D">Dupliquer</button>
                     <button type="button" class="button small secondary" data-bd-act="lock" data-shortcut="⌘L">${esc(i18n(l.every(i => i.locked) ? '🔓 Déverrouiller' : '🔒 Verrouiller'))}</button>
@@ -1425,8 +1446,9 @@
                     <button type="button" class="button small secondary danger" data-bd-act="delete" data-shortcut="Suppr">Supprimer</button></div>`,
             };
             const order = ordered(p.inspectorOrder, p.inspectorHidden, Object.keys(SECTIONS));
-            inspector.innerHTML = `<h4>${esc(grp ? `⧉ ${i18n('Groupe {n}', {n: String(grp)})} · ${plural(l.length, 'élément')}` : one ? i18n({table: 'Tableur', shape: 'Forme', note: 'Note', text: 'Texte', draw: 'Dessin', line: headOf(one, 'end') !== 'none' || headOf(one, 'start') !== 'none' ? 'Flèche' : 'Trait', media: 'Média', webimage: 'Image du web', weblink: 'Lien web', tag: 'Étiquette', folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', widget: 'Widget', timeline: 'Frise vivante', map: 'Carte', frame: 'Cadre', link: 'Écran de l’app', screen: 'Écran de l’app'}[t] || 'Élément') : plural(l.length, 'élément'))}</h4>
+            inspector.innerHTML = `<h4>${esc(grp ? `⧉ ${i18n('Groupe {n}', {n: String(grp)})} · ${plural(l.length, 'élément')}` : one ? i18n({table: 'Tableur', shape: 'Forme', note: 'Note', text: 'Texte', draw: 'Dessin', line: headOf(one, 'end') !== 'none' || headOf(one, 'start') !== 'none' ? 'Flèche' : 'Trait', media: 'Média', webimage: 'Image du web', weblink: 'Lien web', tag: 'Étiquette', folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', widget: 'Widget', timeline: 'Frise vivante', map: 'Carte', frame: 'Cadre', link: 'Écran de l’app', screen: 'Écran de l’app', card: 'Carte d’information', data: 'Données téléchargées'}[t] || 'Élément') : plural(l.length, 'élément'))}</h4>
                 ${order.map(k => { const h = SECTIONS[k](); return h ? `<div class="h-bd-isec" data-isec="${k}">${h}</div>` : ''; }).join('')}`;
+            if (t === 'data') mountDataCfg(one);
         }
         const setOnSel = (k, v, keep = false) => { if (ro()) return; selItems().forEach(i => { if (k === 'fill' && !['shape', 'note', 'tag', 'folder', 'frame'].includes(i.type)) return; if (k === 'stroke' && !['shape', 'media', 'webimage', 'frame'].includes(i.type)) return; if (k === 'shape' && i.type !== 'shape') return; i[k] = v; sigs.delete(i.id); }); render(keep); };
         inspector.addEventListener('click', e => {
@@ -1646,8 +1668,184 @@
                 go(nid);
             } catch (error) { toast(error.message, 'error'); status('⚠ ' + error.message); }
         }
+        /* ═════ 📊 données téléchargées, 🧺 panier, 📎 insérer : ce qui est posé garde sa source ═════ */
+        if (!document.getElementById('h-bd-dp-css')) document.head.insertAdjacentHTML('beforeend', `<style id="h-bd-dp-css">
+            .h-bi-dcard{align-content:start}.h-bi-dcard strong{font-size:14px;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+            .h-bi-dcard small{overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+            .h-bi-src,.h-bi-srcline a,.h-bi-srcline button,.h-bi-dsrc button{justify-self:start;max-width:100%;font:inherit;font-size:12px;color:#055dff;background:none;border:0;padding:2px 0;cursor:pointer;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+            .h-bi-src:hover,.h-bi-srcline a:hover,.h-bi-srcline button:hover,.h-bi-dsrc button:hover{text-decoration:underline}
+            .h-bi-srcline{position:absolute;left:2px;top:100%;margin-top:2px;max-width:100%;overflow:hidden;font-size:12px;line-height:1.3}
+            .h-bi-data{width:100%;height:100%;overflow:auto;box-sizing:border-box;padding:10px 12px;background:#fff;color:#111;border:1px solid #d6dbe2;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+            .h-bi-dsrc{margin:6px 0 0;font-size:12px}
+            .h-bd-bklist{list-style:none;margin:8px 0;padding:0;max-height:260px;overflow:auto;display:grid;gap:4px}
+            .h-bd-bklist label{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border:1px solid #e2e6ec;border-radius:8px;cursor:pointer}
+            .h-bd-bklist small{display:block;color:#667;overflow-wrap:anywhere}.h-bd-bklist .is-done{opacity:.72}
+            .h-bd-dpgo{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+            :root[data-theme="dark"] .h-bi-data{background:#212121;color:#e8e8e8;border-color:#464b53}
+            :root[data-theme="dark"] .h-bi-src,:root[data-theme="dark"] .h-bi-srcline a,:root[data-theme="dark"] .h-bi-srcline button,:root[data-theme="dark"] .h-bi-dsrc button{color:#8fb6ff}
+            :root[data-theme="dark"] .h-bd-bklist label{border-color:#464b53}:root[data-theme="dark"] .h-bd-bklist small{color:#aab}</style>`);
+        const boardTitle = () => root.querySelector('[data-bd-title]')?.value.trim() || b.title || i18n('Tableau');
+        /** mode consultation ou tableau verrouillé : rien ne se pose */
+        const noAdd = (quiet = false) => { if (kioskOn()) { if (!quiet) toast(i18n('Mode consultation : rien ne peut être ajouté au tableau.')); return true; } if (boardLocked) { if (!quiet) ro(); return true; } return false; };
+        const srcsOf = it => [...(Array.isArray(it.srcs) ? it.srcs : []), ...(it.type !== 'card' && it.type !== 'weblink' && (it.source || okUrl(it.url)) ? [{label: it.source || okUrl(it.url), url: okUrl(it.url)}] : [])].filter(s => s && (s.label || s.url));
+        /** « ↗ source » sous un texte, un tableur, un cadre, une carte posés avec une source */
+        function srcLine(it) {
+            if (!['note', 'text', 'shape', 'table', 'frame', 'map'].includes(it.type)) return '';
+            const list = srcsOf(it); if (!list.length) return ''; const one = list.length === 1 ? list[0] : null;
+            return `<div class="h-bi-srcline">${one && one.url ? `<a data-bd-src href="${esc(one.url)}" target="_blank" rel="noopener noreferrer" title="${esc(one.url)}">↗ <span data-i18n-off>${esc(one.label || one.url)}</span></a>` : `<button type="button" data-bd-srcs>↗ <span data-i18n-off>${esc(one ? one.label : i18n('{n} sources', {n: String(list.length)}))}</span></button>`}</div>`;
+        }
+        function srcMenu(it, anchor) {
+            const list = it ? srcsOf(it) : []; if (!list.length) return;
+            const go = s => (s.url ? window.open(s.url, '_blank', 'noopener') : it.origin && ext.connexions?.openOrigin ? ext.connexions.openOrigin({kind: it.cxkind, title: it.title, origin: it.origin}) : toast(s.label));
+            if (list.length === 1 || !window.LCNDA_UI?.menuAt) return go(list[0]);
+            window.LCNDA_UI.menuAt(anchor, list.map(s => ({icon: '↗', label: s.label || s.url, run: () => go(s)})), {title: i18n('Sources')});
+        }
+        const dataList = c => (ext.dataListsEngine?.list?.() || []).find(x => x.id === c?.src) || null;
+        /** l'image et le PDF gardent la source (une carte d'info, des données) */
+        const exportLabel = it => { if (it.type === 'card') return [it.title, it.sub, `↗ ${it.source || it.url || i18n('source')}`].filter(Boolean).join('\n'); const d = dataList(it.cfg);
+            return [`📊 ${it.cfg?.title || (d ? i18n(d.label) : it.title || i18n('Données téléchargées'))}`, i18n('Source : {s}', {s: d?.source || (d ? i18n(d.label) : '—')})].join('\n'); };
+        /** 📊 vivant : le même affichage que le widget « Données téléchargées » (lu seulement quand il est visible) ; ↗ source toujours là */
+        function fillData(el, it) {
+            const box = el.querySelector('[data-bd-live]'); if (!box) return;
+            if (!ext.atelierData?.show) { box.innerHTML = `<p class="muted">${esc(i18n('Données indisponibles.'))}</p>`; return; }
+            const cfg = {...(it.cfg || {}), showSource: true}; ext.atelierData.show(box, cfg);
+            const d = dataList(cfg);
+            if (!d?.source) box.insertAdjacentHTML('afterend', `<p class="h-bi-dsrc"><button type="button" data-bd-openlink>↗ ${esc(i18n('source'))} : <span data-i18n-off>${esc(d ? i18n(d.label) : cfg.src || cfg.ask || '')}</span></button></p>`);
+        }
+        /** ⚙️ Personnaliser dans le panneau de droite : la liste, les filtres, l'affichage (le réglage commun du widget) */
+        function mountDataCfg(one) {
+            const host = inspector.querySelector('[data-bd-datacfg]'); if (!host || !ext.atelierData?.chooser) return;
+            ext.atelierData.chooser(host, one.cfg || {}, {display: true, buttons: false});
+            const apply = () => { if (ro() || kioskOn()) return; const c = host._atd?.read?.(); const it = byId(one.id); if (!it || !c || (!c.src && !c.ask)) return; if (JSON.stringify(c) === JSON.stringify(it.cfg)) return; it.cfg = c; sigs.delete(it.id); render(true); commit(); };
+            inspector.querySelector('[data-bd-dataapply]')?.addEventListener('click', apply);
+            let tm = 0; host.addEventListener('change', () => { clearTimeout(tm); tm = setTimeout(apply, 450); });
+        }
+        /** poser une liste d'éléments en grille nette (près du centre de la vue, ou là où on a lâché), dans un ▭ cadre si on veut */
+        function placeSpecs(specs, {at = null, frame = ''} = {}) {
+            if (!specs.length || noAdd(true)) return null;
+            const r = stage.getBoundingClientRect(), [cx, cy] = at || toWorld(r.left + r.width / 2, r.top + r.height / 2);
+            const out = gridLayout(specs, cx, cy, frame);
+            if (!at) { const [ox, oy] = freeSpot(bbox(out)); out.forEach(i => { i.x += ox; i.y += oy; }); }
+            let z = topZ(); out.forEach(i => { i.z = ++z; if (activeLayer) i.layer = activeLayer; });
+            items.push(...out); sel = new Set(out.filter(i => i.type !== 'frame').map(i => i.id)); render(); commit();
+            if (!at) focusOn(out, view.k);
+            return {ids: out.map(i => i.id)};
+        }
+        async function placeCx(list, o = {}) {
+            list = (list || []).filter(Boolean); if (!list.length || noAdd(true)) return null;
+            const m = await mediaBriefs(list); Object.entries(m).forEach(([k, v]) => { media[k] = {...v, id: Number(k)}; });
+            return placeSpecs(list.map(x => cxSpec(x, m)), o);
+        }
+        async function removeIds(ids) {
+            const s0 = new Set(ids);
+            if (!root.isConnected) { const cur = await api('board', {id: b.id}); await api('save_board', {}, {method: 'POST', body: {id: b.id, title: cur.title, icon: cur.icon, color: cur.color, status: cur.status, owner_type: cur.owner_type || '', owner_id: cur.owner_id || 0, part: cur.part || '', data: {...cur.data, items: (cur.data?.items || []).filter(i => !s0.has(i.id))}}}); return; }
+            items = items.filter(i => !s0.has(i.id)); sel = new Set([...sel].filter(k => !s0.has(k))); render(); commit();
+        }
+        /** un élément du tableau → une chose pour 🧺 le panier ou 📍 Mettre dans… (avec d'où elle vient) */
+        function asCx(id) {
+            const pick = sel.has(id) && sel.size > 1 ? selItems() : [byId(id)].filter(Boolean), o = {kind: 'board', id: Number(b.id), label: i18n('Tableau « {t} »', {t: boardTitle()})};
+            const one = it => {
+                const src = srcsOf(it)[0], org = src?.url ? {...o, url: src.url, label: src.label || o.label} : o;
+                switch (it.type) {
+                    case 'person': return {kind: 'person', ref_id: Number(it.person_id), title: els.get(it.id)?.querySelector('.h-bi-pinfo strong')?.textContent || it.title || i18n('Fiche'), origin: o};
+                    case 'media': { const m = media[it.media_id] || {}; return {kind: 'media', ref_id: Number(it.media_id), title: m.title || m.filename || i18n('Média'), data: m.filename ? {filename: m.filename} : null, origin: o}; }
+                    case 'card': return {kind: it.cxkind && !['set', 'person', 'media'].includes(it.cxkind) ? it.cxkind : 'datum', ref_id: Number(it.ref_id) || 0, title: it.title || '—', value: it.sub || '', origin: it.origin || (okUrl(it.url) ? {...o, url: it.url, label: it.source || o.label} : o)};
+                    case 'table': return {kind: 'set', title: it.title || i18n('Tableur'), data: {columns: it.cells?.[0] || [], rows: (it.cells || []).slice(1), source: it.source || o.label, url: okUrl(it.url)}, origin: org};
+                    case 'data': { const d = dataList(it.cfg); return {kind: 'data', title: it.cfg?.title || (d ? i18n(d.label) : it.title || i18n('Données téléchargées')), value: d?.source || '', origin: {...o, ...(okUrl(d?.sourceUrl) ? {url: d.sourceUrl} : {}), open: {list: String(it.cfg?.src || '')}}}; }
+                    case 'map': { const p = it.pins?.[0]; return p ? {kind: 'place', title: p.label || it.title || i18n('Lieu'), data: {lat: p.lat, lon: p.lon}, origin: org} : null; }
+                    case 'weblink': return {kind: 'text', title: it.title || it.url, origin: {...o, url: okUrl(it.url)}};
+                    default: { const t = String(it.text || it.title || '').trim(); return t ? {kind: 'text', title: t.slice(0, 120), value: t.length > 120 ? t : '', origin: org} : null; }
+                }
+            };
+            return pick.map(one).filter(x => x && String(x.title || '').trim());
+        }
+        /** 📎 une info insérée dans un texte du tableau : sa source gardée sur l'élément (« ↗ » dessous) ; ↶ l'enlève avec le texte */
+        function citeInto(el, list) {
+            const id = el.closest?.('[data-bi]')?.dataset.bi || (el.closest?.('.h-board-inspector') && sel.size === 1 ? [...sel][0] : null), it = byId(id); if (!it) return null;
+            const add = list.map(cxSrc).filter(s => s.source || s.url).map(s => ({label: s.source || s.url, url: s.url})); if (!add.length) return null;
+            const before = clone(it.srcs || []), td = el.matches?.('td[data-r]') ? el : null;
+            it.srcs = [...before, ...add].slice(0, 20); if (editing !== it.id) { sigs.delete(it.id); render(true); commit(); }
+            return async () => {
+                const cur = byId(id); if (!cur) return;
+                if (before.length) cur.srcs = before; else delete cur.srcs;
+                if (editing !== id && !el.isConnected) { // le texte déjà enregistré : il revient comme avant l'insertion
+                    if (td) { const r0 = Number(td.dataset.r), c0 = Number(td.dataset.c); if (cur.cells?.[r0]) cur.cells[r0][c0] = td.textContent; }
+                    else if (el.matches?.('[data-bd-text]')) { const k = el.cloneNode(true); k.querySelectorAll('br').forEach(x => x.replaceWith('\n')); k.querySelectorAll('div, p').forEach(x => x.prepend('\n')); cur.text = k.textContent.replace(/^\n/, '').replace(/ /g, ' '); }
+                }
+                sigs.delete(id); render(true); commit();
+            };
+        }
+        /** 📎 de la barre : dans le texte choisi (au bout), sinon posé au centre comme une carte avec sa source (un ensemble : un tableur) */
+        function insertHere(btn) {
+            if (noAdd()) return; const II = ext.insertInfo; if (!II?.open) { toast(i18n('« Insérer une info » n’est pas disponible.')); return; }
+            const one = sel.size === 1 ? byId([...sel][0]) : null, atEnd = el => { try { const s = getSelection(); s.selectAllChildren(el); s.collapseToEnd(); } catch (_) {} };
+            if (one && !one.locked && ['note', 'text', 'shape'].includes(one.type)) { editText(one); const el = els.get(one.id)?.querySelector('[data-bd-text]'); if (el) { atEnd(el); II.open(el); } return; }
+            if (one && !one.locked && one.type === 'table' && cellSel?.id === one.id) { const {r, c} = cellSel; editCell(one, r, c); const td = els.get(one.id)?.querySelector(`td[data-r="${r}"][data-c="${c}"]`); if (td) { atEnd(td); II.open(td); } return; }
+            II.open(btn, {onPick: async list => { const r = await placeCx(list); if (!r) return; A().undoToast?.(i18n('📎 Posé sur le tableau, avec sa source'), {icon: '📎', undo: () => removeIds(r.ids)}); }});
+        }
+        /** ＋ Ajouter → 📊 Des données téléchargées et 🧺 Mon panier */
+        function addMenuData(dlg, close) {
+            const dsec = dlg.querySelector('section[data-k="data"]'), host = dsec?.querySelector('[data-bd-datahost]');
+            if (dsec && !dsec.hidden && host && ext.atelierData?.chooser) {
+                ext.atelierData.chooser(host, {}, {pickRows: true, buttons: false});
+                const mb = host.querySelector('[data-atd-modebox]'); if (mb) mb.style.display = 'none'; // les lignes se cochent ; « Poser » dit quoi
+            } else if (host) host.innerHTML = `<p class="muted">${esc(i18n('Données indisponibles.'))}</p>`;
+            dsec?.querySelector('[data-bd-datalive]')?.addEventListener('click', () => {
+                const c = host?._atd?.read?.(); if (!c || (!c.src && !c.ask)) { toast(i18n('Choisis une liste, ou pose une question.'), 'error'); return; }
+                const d = dataList(c), t = placeSpecs([{type: 'data', cfg: c, title: d ? i18n(d.label) : c.ask, w: 380, h: 320}]);
+                if (t) { close(); A().undoToast?.(i18n('📊 Données posées : elles restent à jour'), {icon: '📊', undo: () => removeIds(t.ids)}); }
+            });
+            dsec?.querySelector('[data-bd-datarows]')?.addEventListener('click', async e => {
+                let ds; try { ds = (await host?._atd?.collect?.())?.ds; } catch (err) { toast(err.message, 'error'); return; }
+                if (!ds || ds.mode !== 'rows' || !ds.rows?.length) { toast(i18n('Coche d’abord les lignes à poser.'), 'error'); return; }
+                const d = dataList(ds.cfg), specs = ds.rows.map(r => ({type: 'card', cxkind: 'row', icon: ds.icon || '📋', title: String(r.t || '—').slice(0, 300), sub: String(r.s || '').slice(0, 600), source: String(ds.source || ds.label || '').slice(0, 300), ...(okUrl(r.u || ds.url) ? {url: okUrl(r.u || ds.url)} : {}), origin: {label: `${i18n('Listes')} · ${ds.label}`, open: {list: ds.list}}, w: 260, h: 132}));
+                const t = placeSpecs(specs, {frame: dsec.querySelector('[data-bd-dataframe]')?.checked ? (d ? i18n(d.label) : ds.label) : ''});
+                if (t) { close(); A().undoToast?.(i18n('🗒 {n} posées, chacune avec sa source', {n: plural(specs.length, 'ligne')}), {icon: '📊', undo: () => removeIds(t.ids)}); }
+                e.currentTarget && (e.currentTarget.disabled = false);
+            });
+            const ksec = dlg.querySelector('section[data-k="basket"]'); if (!ksec) return;
+            const CX = ext.connexions, K = CX?.kit || {}, box = ksec.querySelector('[data-bd-bkhost]');
+            if (!CX?.enabled?.()) { box.innerHTML = `<p class="muted">${esc(i18n('Le panier est éteint (Réglages → 🧺 Panier et connexions).'))}</p>`; ksec.querySelectorAll('button').forEach(x => { x.disabled = true; }); return; }
+            let bk = null; const picked = new Set();
+            const paint = () => {
+                const its = bk?.items || [];
+                const selHtml = K.basketSelect ? K.basketSelect(bk, 'data-bd-bksel') : '';
+                box.innerHTML = `${selHtml}${its.length ? `<label class="checkbox-line"><input type="checkbox" data-bd-bkall> <span>${esc(i18n('Tout cocher'))}</span></label><ul class="h-bd-bklist">${its.map(it => `<li class="${Number(it.done) ? 'is-done' : ''}"><label><input type="checkbox" data-bd-bki="${Number(it.id)}" ${picked.has(Number(it.id)) ? 'checked' : ''}><span aria-hidden="true">${esc(K.icon ? K.icon(it) : '•')}</span><span><b data-i18n-off>${esc(it.title)}</b>${it.value && it.kind !== 'set' ? `<small data-i18n-off>${esc(String(it.value).slice(0, 140))}</small>` : ''}${it.origin?.label ? `<small>${esc(i18n('de :'))} <span data-i18n-off>${esc(it.origin.label)}</span></small>` : ''}${Number(it.done) ? `<small>✓ ${esc(i18n('utilisé'))}</small>` : ''}</span></label></li>`).join('')}</ul>` : `<p class="muted">${esc(i18n('Ce panier est vide. Coche des choses n’importe où (« 🧺 Au panier »), ou « 📥 Prendre depuis… » ci-dessous.'))}</p>`}`;
+                box.querySelectorAll('[data-bd-bksel] option[value="new"], [data-bd-bksel] option[value="newfolder"]').forEach(x => x.remove());
+            };
+            const load = async id => { box.innerHTML = window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(i18n('Chargement…')) : '…'; try { bk = await api('cx_basket', {basket_id: id ?? (Number(JSON.parse(localStorage.getItem('genealogie-connexions-panier') || '0')) || 0)}); } catch (err) { box.innerHTML = `<p class="muted">${esc(err.message)}</p>`; return; } picked.clear(); paint(); };
+            load();
+            box.addEventListener('change', e => {
+                if (e.target.matches('[data-bd-bksel]')) { try { localStorage.setItem('genealogie-connexions-panier', JSON.stringify(Number(e.target.value))); } catch (_) {} load(Number(e.target.value)); return; }
+                if (e.target.matches('[data-bd-bkall]')) { (bk?.items || []).forEach(it => { if (e.target.checked) picked.add(Number(it.id)); else picked.delete(Number(it.id)); }); box.querySelectorAll('[data-bd-bki]').forEach(x => { x.checked = e.target.checked; }); return; }
+                const c = e.target.closest('[data-bd-bki]'); if (c) { if (c.checked) picked.add(Number(c.dataset.bdBki)); else picked.delete(Number(c.dataset.bdBki)); }
+            });
+            ksec.querySelector('[data-bd-bkput]')?.addEventListener('click', async e => {
+                const list = (bk?.items || []).filter(it => picked.has(Number(it.id))); if (!list.length) { toast(i18n('Coche d’abord ce que tu poses.'), 'error'); return; }
+                e.currentTarget.disabled = true;
+                const r = await placeCx(list.map(x => K.cleanIt ? K.cleanIt(x) : x)); if (!r) { e.currentTarget.disabled = false; return; }
+                close();
+                // 🧺 comme ailleurs : ce qui a servi est marqué « ✓ utilisé » (il reste dans le panier) ; ↶ défait les deux
+                const cxw = body => api('cx_write', {}, {method: 'POST', body}).then(x => x?.result ?? x);
+                const todo = list.filter(x => !Number(x.done)).map(x => Number(x.id)); let before = [];
+                try { if (todo.length) before = (await cxw({op: 'pn_status', ids: todo, status: 'utilise'})).before || []; } catch (_) {}
+                CX.refresh?.();
+                A().undoToast?.(i18n('🧺 {n} posés sur le tableau, marqués « utilisé »', {n: plural(r.ids.length, 'élément')}), {icon: '🧺', undo: async () => { await removeIds(r.ids); if (before.length) await cxw({op: 'pn_status_set', rows: before}); CX.refresh?.(); }});
+            });
+            ksec.querySelector('[data-bd-bktake]')?.addEventListener('click', () => { const t = (ext.dropTargets || []).find(x => x.id === 'board'); close(); CX.openTake?.({dest: t}); });
+        }
+        // 🧺 glissé du panier sur la toile : posé là où on lâche
+        let cxDrop = null;
+        document.addEventListener('drop', function onCxDrop(e) { // le voile « Lâche ici » couvre la toile : on lit la place du pointeur
+            if (!root.isConnected) { document.removeEventListener('drop', onCxDrop, true); return; }
+            if (![...(e.dataTransfer?.types || [])].includes('application/x-lcnda-cx')) return;
+            const r = stage.getBoundingClientRect(); if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) cxDrop = {at: toWorld(e.clientX, e.clientY), t: Date.now()};
+        }, true);
+        Object.assign(ext.boardsInternals.current, {id: Number(b.id), title: boardTitle, isOpen: () => root.isConnected, locked: () => boardLocked || kioskOn(), placeCx, removeIds, asCx, cite: citeInto,
+            takeDrop: () => { const d = cxDrop; cxDrop = null; return d && Date.now() - d.t < 3000 ? d.at : null; }});
         // ── « Ajouter » : tout ce qu'on peut poser ──
         function addMenu() {
+            if (noAdd()) return;
             const sc = ext.appScreen;
             const own = Object.entries(ext.customWidgetDefs?.() || {});
             ext.openDialog({eyebrow: 'TABLEAU', title: 'Ajouter au tableau', wide: true, submitLabel: 'Fermer',
@@ -1656,6 +1854,10 @@
                     <section data-k="media"><h4>🖼 Un média de l’app</h4>${window.LCNDA_PICKER?.mediaField ? window.LCNDA_PICKER.mediaField({name: 'bd_media', types: ['image', 'video', 'audio', 'document'], eyebrow: 'TABLEAU', title: 'Un média de l’app', okLabel: 'Poser sur le tableau', placeholder: 'Choisir une image, un son, une vidéo…'}) : PKF({name: 'bd_media', kind: 'media'})}</section>
                     <section data-k="web"><h4>🌐 D’ailleurs</h4><label>Adresse d’une image ou d’un site<input data-bd-url placeholder="https://…"></label><button type="button" class="button small" data-bd-addurl>Poser</button></section>
                     <section data-k="person"><h4>👤 Une fiche</h4>${PKF({name: 'bd_person', kind: 'person'})}<button type="button" class="button small" data-bd-addperson>Poser la fiche</button></section>
+                    <section data-k="data"><h4>📊 Des données téléchargées</h4><p class="muted">${esc(i18n('Une liste téléchargée (séismes, gares, Tour de France…) : vivante (elle reste à jour, avec son ⚙️ à droite), ou seulement les lignes cochées, chacune en carte avec sa source.'))}</p><div data-bd-datahost></div>
+                        <div class="h-bd-dpgo"><button type="button" class="button small" data-bd-datalive>📊 ${esc(i18n('Poser vivant'))}</button><button type="button" class="button small secondary" data-bd-datarows>🗒 ${esc(i18n('Poser les lignes cochées'))}</button><label class="checkbox-line"><input type="checkbox" data-bd-dataframe checked> <span>${esc(i18n('dans un cadre au nom de la liste'))}</span></label></div></section>
+                    <section data-k="basket"><h4>🧺 Mon panier</h4><p class="muted">${esc(i18n('Ce que tu as mis de côté : coche, puis « Poser ». Chaque chose garde sa source et devient « ✓ utilisé ».'))}</p><div data-bd-bkhost></div>
+                        <div class="h-bd-dpgo"><button type="button" class="button small" data-bd-bkput>🧺 ${esc(i18n('Poser sur le tableau'))}</button><button type="button" class="button small secondary" data-bd-bktake>📥 ${esc(i18n('Prendre depuis…'))}</button></div></section>
                     <section data-k="screen"><h4>📺 Un écran de l’app</h4><p class="muted">Une liste, un diagramme, une statistique, la carte, un village, une de tes listes…</p>${sc ? sc.select('list:villages', 'data-bd-screen') : ''}<label class="checkbox-line"><input type="checkbox" data-bd-screenprev checked> <span>avec l’aperçu vivant</span></label><button type="button" class="button small" data-bd-addscreen>Poser l’écran</button></section>
                     <section data-k="widget"><h4>✨ Un de mes widgets</h4>${own.length ? `<select data-bd-widgetsel>${own.map(([k, d]) => `<option value="${esc(k)}">${esc((d.icon || '🧱') + ' ' + (d.name || 'Mon widget'))}</option>`).join('')}</select><button type="button" class="button small" data-bd-addwidget>Poser le widget</button>` : '<p class="muted">Crée d’abord un widget (Réglages → Éditeur de widgets).</p>'}</section>
                     <section data-k="recueil"><h4>📚 Un recueil</h4><input type="search" placeholder="Titre du recueil" data-bd-rsearch><div class="h-bd-results" data-bd-rres></div></section>
@@ -1695,6 +1897,7 @@
                     dlg.querySelector('[data-bd-addscreen]')?.addEventListener('click', () => { const target = dlg.querySelector('[data-bd-screen]').value; if (!sc?.valid(target)) { toast(i18n('Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets).'), 'error'); return; } const prev = dlg.querySelector('[data-bd-screenprev]').checked; place({type: 'link', target, title: sc.label(target), preview: prev, w: prev ? 640 : 240, h: prev ? 440 : 110}); close(); });
                     dlg.querySelector('[data-bd-addwidget]')?.addEventListener('click', () => { const target = dlg.querySelector('[data-bd-widgetsel]').value; place({type: 'widget', target, w: 420, h: 320}); close(); });
                     addMenuMore(dlg, close);
+                    addMenuData(dlg, close);
                     dlg.querySelector('[data-bd-addfolder]').addEventListener('click', async () => {
                         const name = dlg.querySelector('[data-bd-foldername]').value.trim() || 'Dossier';
                         try { const r = await api('save_board', {}, {method: 'POST', body: {title: name, parent_id: b.id, icon: '📁'}}); place({type: 'folder', board_id: Number(r.result?.id || r.id), title: name, w: 200, h: 140, fill: '#f5c542'}); close(); } catch (error) { toast(error.message, 'error'); }
