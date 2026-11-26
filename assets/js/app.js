@@ -360,6 +360,7 @@
         'genealogie-research-kind-order','genealogie-research-kind-hidden', // 🔎 Recherche → ordre et types cachés de « Type de recherche » (app-recherche.js)
         'genealogie-tile-cat-order','genealogie-tile-hidden-cats','genealogie-tile-hidden','genealogie-tile-custom-cats','genealogie-tile-user',
         'genealogie-carte-couleurs', // 🎨 couleurs et formes des sortes sur les cartes (app-carte-couleurs.js)
+        'genealogie-recherche-icones', // 🔎 📎 🧺 au bout des résultats : au survol ou toujours (app-recherche-kit.js)
         'genealogie-recherche-boutons', // 🔎 Recherche : « 🗺 Carte » et « ⤓ Exporter » d’abord, ou les boutons de l’écran (heritage-research-gaps.js, app-pages.js)
         'genealogie-person-blocks','genealogie-animal-blocks','genealogie-sheet-sections','genealogie-sheet-head', // 🗂 sections des fiches, blocs des animaux, éléments de l’en-tête (app-sections.js, app-apparence.js)
         'genealogie-dashboard-blocks','genealogie-dashboard-widget-catalog-order','genealogie-dashboard-widget-catalog-hidden','genealogie-events-filter','genealogie-stats-colors','genealogie-stats-colors-presets',

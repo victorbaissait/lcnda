@@ -54,7 +54,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/audit-chrono.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=6">
-    <link rel="stylesheet" href="assets/css/recherche-carte.css?v=2">
+    <link rel="stylesheet" href="assets/css/recherche-carte.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-cartes.css?v=4">
     <link rel="stylesheet" href="assets/css/audit-personnes.css?v=5">
@@ -186,7 +186,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=81" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=82" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
@@ -1263,7 +1263,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=609" defer></script>
+<script src="assets/js/app.js?v=610" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1382,7 +1382,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-maintenance.js?v=70" defer></script>
 <script src="assets/js/app-recherche.js?v=39" defer></script>
 <script src="assets/js/app-recherche-outils.js?v=4" defer></script>
-<script src="assets/js/app-recherche-kit.js?v=2" defer></script><!-- 🔎 🗺 Carte · 🧺 📎 sur les résultats de recherche -->
+<script src="assets/js/app-recherche-kit.js?v=3" defer></script><!-- 🔎 🗺 Carte · 🧺 📎 sur les résultats de recherche -->
 <script src="assets/js/app-graphiques.js?v=30" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
@@ -1492,7 +1492,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector-tree.js?v=16" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=13" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=11" defer></script>
-<script src="assets/js/heritage-research-gaps.js?v=14" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=15" defer></script>
 <script src="assets/js/app-lecture-auto.js?v=3" defer></script>
 <script src="assets/js/app-socface-core.js?v=3" defer></script>
 <script src="assets/js/heritage-socface.js?v=9" defer></script>

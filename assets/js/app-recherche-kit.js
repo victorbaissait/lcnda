@@ -17,6 +17,10 @@
  */
 (() => {
     'use strict';
+    // 📎 🧺 au bout des résultats : au survol (par défaut) ou toujours visibles (Réglages → 🔎 Recherche ; genealogie-recherche-icones = 'toujours')
+    const iconsAlways = () => { try { return localStorage.getItem('genealogie-recherche-icones') === 'toujours'; } catch (_) { return false; } };
+    document.documentElement.classList.toggle('rk-acts-toujours', iconsAlways());
+
     const T = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};

@@ -199,8 +199,12 @@
                 <label class="checkbox-line"><input type="radio" name="rk-boutons" value="outils" ${bp === 'outils' ? 'checked' : ''}> ${esc(i18n('« 🗺 Carte » et « ⤓ Exporter » d’abord'))}</label>
                 <label class="checkbox-line"><input type="radio" name="rk-boutons" value="ecran" ${bp === 'ecran' ? 'checked' : ''}> ${esc(i18n('Les boutons propres à chaque recherche d’abord'))}</label>
                 <small class="muted">${esc(i18n('Deux boutons tiennent en haut ; les autres vont dans ⋯.'))}</small></fieldset>`);
+            const ia = (() => { try { return localStorage.getItem('genealogie-recherche-icones') === 'toujours'; } catch (_) { return false; } })();
+            box.insertAdjacentHTML('beforeend', `<label class="ui-toggle" style="margin-top:14px"><input type="checkbox" data-rk-icones ${ia ? 'checked' : ''}><i></i><span>${esc(i18n('📎 🧺 sur chaque résultat : toujours visibles'))}<small class="muted"> — ${esc(i18n('sinon ils apparaissent au survol de la souris (toujours visibles sur un écran tactile)'))}</small></span></label>`);
             page.appendChild(box);
             box.querySelector('[data-cadres-pref]').addEventListener('change', e => { cadres.set(e.target.checked); toast(i18n('Réglage enregistré.'), 'success'); });
+            box.querySelector('[data-rk-icones]').addEventListener('change', e => { const on = e.target.checked; const set = v => { try { localStorage.setItem('genealogie-recherche-icones', v ? 'toujours' : 'survol'); } catch (_) {} document.documentElement.classList.toggle('rk-acts-toujours', v); };
+                set(on); (A().undoToast || ((m) => toast(m, 'success')))(i18n('Réglage enregistré.'), {undo: () => { set(!on); e.target.checked = !on; }}); });
             box.querySelectorAll('input[name="rk-boutons"]').forEach(r => r.addEventListener('change', e => { const prev = bp; try { localStorage.setItem('genealogie-recherche-boutons', e.target.value); } catch (_) {}
                 (A().undoToast || ((m) => toast(m, 'success')))(i18n('Réglage enregistré.'), {undo: () => { try { localStorage.setItem('genealogie-recherche-boutons', prev); } catch (_) {} const x = box.querySelector(`input[name="rk-boutons"][value="${prev}"]`); if (x) x.checked = true; }}); }));
         };
