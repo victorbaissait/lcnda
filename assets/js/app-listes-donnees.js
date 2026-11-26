@@ -266,7 +266,7 @@
     const ws = () => document.getElementById('workspace');
     const whereOf = d => { try { const w = ext.listesThemes?.whereOf?.(d); if (w) return w; } catch (_) {} return T(groupOf(d)); }; // 🗂 le thème (app-listes-themes.js), sinon le groupe
     const header = (d, extra = {}) => (UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')} · ${whereOf(d)}`, icon: d.icon || '📋', title: T(d.label), ...extra}) : `<h2>${esc(T(d.label))}</h2>`);
-    const sourceLine = d => (d.source ? `<p class="ld-source muted"><small>${esc(T('Source :'))} ${d.sourceUrl ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener">${esc(d.source)}</a>` : esc(d.source)}</small></p>` : '');
+    const sourceLine = d => (d.source ? `<p class="ld-source muted"><small>${esc(T('Source :'))} ${/^https?:\/\/[^\s"'<>]+$/i.test(String(d.sourceUrl || '')) ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener">${esc(d.source)}</a>` : esc(d.source)}</small></p>` : '');
     /** les colonnes : celles de la liste moins celles décochées dans « ⚙ Colonnes » (st.hide), + 📍 GPS (st.gps, listes avec positions), + Distance */
     const cols = (d, st) => {
         const base = (d.fields || []).filter(f => f.type !== 'url' && !f.hidden), hide = Array.isArray(st.hide) ? st.hide : [];

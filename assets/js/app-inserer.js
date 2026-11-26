@@ -19,6 +19,7 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const T = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const hu = u => (/^https?:\/\/[^\s"'<>]+$/i.test(String(u || '').trim()) ? String(u).trim() : ''); // 🔒 un lien inséré : http(s) seulement (un panier importé peut porter n'importe quoi)
     const fold = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
     const nf = n => Number(n || 0).toLocaleString('fr-FR');
     const api = (a, q) => A().api(a, q);
@@ -245,7 +246,7 @@
         if (res.many || res.tickedAll) {
             const its = res.many || [...pop.ticked.values()].map(x => x.item);
             const line = it => `${K().itemLine ? K().itemLine(it) : it.title}${it.origin?.label ? ` [↗ ${srcShort(it.origin)}]` : ''}`;
-            text = its.map(it => `• ${line(it)}`).join('\n'); html = `<ul>${its.map(it => `<li>${esc(K().itemLine ? K().itemLine(it) : it.title)}${/^https?:\/\//i.test(it.origin?.url || '') ? ` <a href="${esc(it.origin.url)}" target="_blank" rel="noopener" class="cx-qi-src">[↗ ${esc(srcShort(it.origin))}]</a>` : it.origin?.label ? ` [↗ ${esc(srcShort(it.origin))}]` : ''}</li>`).join('')}</ul>`;
+            text = its.map(it => `• ${line(it)}`).join('\n'); html = `<ul>${its.map(it => `<li>${esc(K().itemLine ? K().itemLine(it) : it.title)}${hu(it.origin?.url) ? ` <a href="${esc(hu(it.origin.url))}" target="_blank" rel="noopener" class="cx-qi-src">[↗ ${esc(srcShort(it.origin))}]</a>` : it.origin?.label ? ` [↗ ${esc(srcShort(it.origin))}]` : ''}</li>`).join('')}</ul>`;
             items = its.map(it => K().cleanIt(it));
         } else if (res.set || (res.ticked && !res.tickedAll)) {
             let d, s, rows, title;
@@ -253,9 +254,9 @@
             else { d = res.set.d; s = res.set.s; const raw = await K().ldAll(d, s, 500); rows = raw.map(r => K().ldRowItem(d, s, r)); title = [T(d.label), ...(K().ldCrit?.(d, s) || [])].join(' — '); }
             if (!rows.length) return A().toast?.(T('Aucune ligne trouvée avec ces critères.'));
             const cols = rows[0].data.columns, src = `${T('Source :')} ${d.source || T(d.label)}${d.sourceUrl ? ` ${d.sourceUrl}` : ''}`;
-            if (choice.kind === 'table') { text = `${title}\n${cols.join(' | ')}\n${rows.map(r => r.data.row.join(' | ')).join('\n')}\n${src}`; html = `<p><b>${esc(title)}</b></p><table><tr>${cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr>${rows.map(r => `<tr>${r.data.row.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table><p><small>${esc(T('Source :'))} ${d.sourceUrl ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener">${esc(d.source || T(d.label))}</a>` : esc(d.source || '')}</small></p>`; }
+            if (choice.kind === 'table') { text = `${title}\n${cols.join(' | ')}\n${rows.map(r => r.data.row.join(' | ')).join('\n')}\n${src}`; html = `<p><b>${esc(title)}</b></p><table><tr>${cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr>${rows.map(r => `<tr>${r.data.row.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table><p><small>${esc(T('Source :'))} ${hu(d.sourceUrl) ? `<a href="${esc(hu(d.sourceUrl))}" target="_blank" rel="noopener">${esc(d.source || T(d.label))}</a>` : esc(d.source || '')}</small></p>`; }
             else if (choice.kind === 'bullets') { text = `${title}\n${rows.map(r => `• ${r.title}${r.value ? ` — ${r.value}` : ''}`).join('\n')}\n${src}`; html = `<p><b>${esc(title)}</b></p><ul>${rows.map(r => `<li>${esc(r.title)}${r.value ? ` — ${esc(r.value)}` : ''}</li>`).join('')}</ul><p><small>${esc(src)}</small></p>`; }
-            else { text = `${title} [↗ ${d.source || T(d.label)}]`; html = `<a href="${esc(d.sourceUrl || '#')}" target="_blank" rel="noopener" class="cx-qi-chip">▦ ${esc(title)}</a>`; }
+            else { text = `${title} [↗ ${d.source || T(d.label)}]`; html = hu(d.sourceUrl) ? `<a href="${esc(hu(d.sourceUrl))}" target="_blank" rel="noopener" class="cx-qi-chip">▦ ${esc(title)}</a>` : `▦ ${esc(title)}`; }
             items = [K().ldSet ? K().ldSet(d, s, []) : null].filter(Boolean).map(x => ({...x, title, data: {...x.data, columns: cols, rows: rows.map(r => r.data.row)}}));
         } else {
             const it = res.item, o = it.origin || {};
@@ -263,8 +264,8 @@
             else if (choice.kind === 'link') { text = it.title; items = [K().cleanIt(it)]; }
             else { text = K().itemLine ? K().itemLine(it) : it.title; items = [K().cleanIt(it)]; }
             html = `${esc(text)}`;
-            if (o.label || o.url) { text += ` [↗ ${srcShort(o) || T('source')}]`; html += ` <a href="${esc(o.url || '#')}" target="_blank" rel="noopener" class="cx-qi-src">[↗ ${esc(srcShort(o) || T('source'))}]</a>`; }
-            if (choice.kind === 'link' && o.url) html = `<a href="${esc(o.url)}" target="_blank" rel="noopener" class="cx-qi-chip">${esc(it.title)}</a>`;
+            if (o.label || o.url) { text += ` [↗ ${srcShort(o) || T('source')}]`; html += hu(o.url) ? ` <a href="${esc(hu(o.url))}" target="_blank" rel="noopener" class="cx-qi-src">[↗ ${esc(srcShort(o) || T('source'))}]</a>` : ` [↗ ${esc(srcShort(o) || T('source'))}]`; }
+            if (choice.kind === 'link' && hu(o.url)) html = `<a href="${esc(hu(o.url))}" target="_blank" rel="noopener" class="cx-qi-chip">${esc(it.title)}</a>`;
             writeJ(REC, [K().cleanIt(it), ...recents().filter(x => `${x.kind}|${x.title}|${x.value}` !== `${it.kind}|${it.title}|${it.value}`)].slice(0, 30));
         }
         const {el, trigger, saved, ctx, onPick} = pop; close();
