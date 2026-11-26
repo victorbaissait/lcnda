@@ -35,6 +35,8 @@ const FAKE = () => {
     const post = (x, body) => p.evaluate(([y, b]) => window.LCNDA_APP.api(y, {}, {method: 'POST', body: b}).then(r => r?.result ?? r), [x, body]);
     const cur = () => p.evaluate(() => JSON.parse(JSON.stringify(window.LCNDA_EXT.boardsInternals.current.items)));
     const undo = async () => { const u = p.locator('.toast button', {hasText: '↶'}).last(); await u.waitFor({timeout: 10000}); await u.click(); await sleep(700); };
+    /** un clic à la souris au milieu de l'élément (les fenêtres flottantes : sans « faire défiler jusqu'à lui ») */
+    const mclick = async (loc, o = {}) => { const bb = await loc.boundingBox(); assert.ok(bb, 'visible'); await p.mouse.click(bb.x + bb.width / 2, bb.y + bb.height / 2, o); };
     const clean = () => p.evaluate(() => { document.querySelectorAll('.ui-actmenu, .cx-qi, .cx-panel').forEach(x => x.remove()); document.querySelectorAll('dialog[open]').forEach(d => d.close()); document.querySelectorAll('.toast').forEach(x => x.remove()); });
     let bid = 0, bid2 = 0;
     const openBoard = async id => { await clean(); await p.evaluate(x => window.LCNDA_EXT.openBoardById(x), id); await p.waitForSelector('.h-board-stage', {timeout: 20000});
@@ -153,10 +155,8 @@ const FAKE = () => {
             await openBoard(bid); const n0 = (await cur()).length;
             await p.click('.h-board [data-bd-basket]'); await p.waitForSelector('.cx-panel li[data-cx-bi]', {timeout: 10000});
             const li = p.locator('.cx-panel li[data-cx-bi]', {hasText: 'Naissance de Jean MAZAUD'}).first();
-            console.log('RAF', await p.evaluate(() => new Promise(r => { const t0 = performance.now(); let n = 0; const f = () => { n++; if (performance.now() - t0 > 1000) r(n); else requestAnimationFrame(f); }; requestAnimationFrame(f); setTimeout(() => r('timeout ' + n), 3000); })), await p.evaluate(() => [document.visibilityState, document.hasFocus(), [...document.querySelectorAll('dialog')].map(d => d.open + d.className).join('|'), document.body.className, getComputedStyle(document.documentElement).scrollBehavior]));
-            console.log('DBG', await p.evaluate(() => JSON.stringify({sy: scrollY, sx: scrollX, de: document.documentElement.scrollTop, ws: document.querySelector('#workspace')?.scrollTop, li: document.querySelector('.cx-panel li[data-cx-bi]').getBoundingClientRect(), panel: document.querySelector('.cx-panel').getBoundingClientRect(), vh: innerHeight, mainScroll: [...document.querySelectorAll('*')].filter(e => e.scrollTop > 0).map(e => e.className + ':' + e.scrollTop).slice(0, 8)})));
             const sb = await p.$eval('.h-board-stage', x => { const r = x.getBoundingClientRect(); return {x: r.left, y: r.top, w: r.width, h: r.height}; });
-            await li.dragTo(p.locator('.h-board-stage'), {targetPosition: {x: 120, y: Math.round(sb.h - 120)}});
+            const lb = await li.boundingBox(); await p.mouse.move(lb.x + 40, lb.y + lb.height / 2); await p.mouse.down(); await p.mouse.move(lb.x + 60, lb.y + lb.height / 2 + 10, {steps: 3}); await p.mouse.move(sb.x + 120, sb.y + sb.h - 120, {steps: 8}); await p.mouse.up();
             await p.waitForFunction(n => window.LCNDA_EXT.boardsInternals.current.items.length === n + 1, n0, {timeout: 15000});
             const c = (await cur()).at(-1);
             const pos = await p.evaluate(id => { const el = document.querySelector(`.h-bi[data-bi="${id}"]`).getBoundingClientRect(); return {x: el.left + el.width / 2, y: el.top + el.height / 2}; }, c.id);
@@ -182,7 +182,7 @@ const FAKE = () => {
             await p.click('.h-board [data-bd-insert]'); await p.waitForSelector('.cx-qi [data-qi-q]');
             await p.fill('.cx-qi [data-qi-q]', 'Naissance de Jean MAZAUD');
             await p.waitForFunction(() => [...document.querySelectorAll('.cx-qi [data-qi-i]')].some(x => /Naissance de Jean MAZAUD/.test(x.textContent)), null, {timeout: 15000});
-            await p.locator('.cx-qi [data-qi-i]', {hasText: 'Naissance de Jean MAZAUD'}).first().click(); await sleep(500);
+            await mclick(p.locator('.cx-qi [data-qi-i]', {hasText: 'Naissance de Jean MAZAUD'}).first()); await sleep(500);
             assert.ok(await p.$(`.h-bi[data-bi="${id}"] [data-bd-text][contenteditable="true"]`), 'on écrit encore dans la note');
             await p.click('.h-board-stage', {position: {x: 30, y: 30}}); await sleep(600);
             const n = (await cur()).find(i => i.id === id);
@@ -200,8 +200,8 @@ const FAKE = () => {
             await openBoard(bid); await clean();
             const id = await p.evaluate(() => window.LCNDA_EXT.boardsInternals.current.items.find(i => i.type === 'card' && i.title === 'Grand prix de Chamberet').id);
             const before = (await B.api('cx_basket', {})).items.length; await p.evaluate(x => window.LCNDA_EXT.boardsInternals.current.focus([x]), id); await sleep(600);
-            await p.click(`.h-bi[data-bi="${id}"]`, {button: 'right'}); await p.waitForSelector('.ui-actmenu');
-            await p.locator('.ui-actmenu button, .ui-actmenu [role="menuitem"]', {hasText: /Prendre/}).first().click(); await sleep(800);
+            await mclick(p.locator(`.h-bi[data-bi="${id}"]`), {button: 'right'}); await p.waitForSelector('.ui-actmenu');
+            await mclick(p.locator('.ui-actmenu button, .ui-actmenu [role="menuitem"]', {hasText: /Prendre/}).first()); await sleep(800);
             const items = (await B.api('cx_basket', {})).items; assert.strictEqual(items.length, before + 1);
             assert.ok(items.some(i => i.title === 'Grand prix de Chamberet' && i.origin?.url === 'https://example.org/gp'));
         });
