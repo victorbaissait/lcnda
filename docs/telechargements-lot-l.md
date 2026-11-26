@@ -13,7 +13,7 @@ ligne en consultation ni pour un invité du réseau local (aucune tuile, aucune 
 | Style | `assets/css/telech-l.css` (classes `tlx-…`) |
 | Fabrication des données | `scripts/telech-l/build_{crues,elus,prix,wikidata,github_only}.py` (+ `wm.py`), lancés avec `python3 -I` |
 | Atelier GitHub | `.github/workflows/telech-l.yml` (`quoi` = tout, fichiers, wikidata, mines, lieux_gb, bagnards ; astuce du « push », `if: github.event_name != 'push'`, cache dans `$RUNNER_TEMP` par `$GITHUB_ENV`) |
-| Données livrées | `assets/data/tl-crues`, `tl-elus`, `tl-prix`, `tl-mesures` (+ `tl-memoriaux`, `tl-cimetieres`, `tl-villages` quand le service de requêtes de Wikidata répond) |
+| Données livrées | `tl-crues` (2 780 crues, 126 Ko), `tl-elus` (9 667 élus, 243 Ko), `tl-prix` (112 années), `tl-mesures` (82 unités), `tl-memoriaux` (22 229 monuments, 602 Ko), `tl-villages` (7 514 villages, 188 Ko) ; `tl-cimetieres` : sur GitHub (le service de requêtes de Wikidata coupait les réponses ici) |
 | Textes traduits | `assets/i18n/src/telech-l.tsv` (fr en es de it pt pl nl) |
 | Essai | `tests/test-telech-l.js` |
 
@@ -65,17 +65,17 @@ L'essai coupe et compte toute requête qui sortirait.
 | 4 | Photos aériennes anciennes | **existaient** : USGS imagery ; swisstopo, Danemark 1954, Pays-Bas 1945, Wallonie : **liens** (conditions pas relues) |
 | 5 | Soldats (NZ, Canada, Australie) | **liens** (pas de fichier en bloc lisible ; sites refusés) ; ABMC existait (Où chercher). « Soldats réunis » inchangée |
 | 6 | London Gazette | **lien** (recherche ouverte sans nom de l'arbre) ; pas d'index (site refusé) |
-| 7 | Monuments aux morts du monde | **construit** (`tl-memoriaux`, Wikidata CC0, hors de France ; rejoint « 🏛 Monuments réunis » par `merge`, même Q) quand le service de requêtes répond ; sinon **atelier** (`quoi` = wikidata). Registres d'Australie et de Nouvelle-Zélande : **liens** |
+| 7 | Monuments aux morts du monde | **construit** (`tl-memoriaux` : 22 229 monuments hors de France, 99 pays, avec la guerre commémorée ; Wikidata CC0 ; rejoint « 🏛 Monuments réunis » par `merge`, même Q) ; refait par l'atelier (`quoi` = wikidata). Registres d'Australie et de Nouvelle-Zélande : **liens** |
 | 8 | Paroisses britanniques et irlandaises | **liens** (FreeREG, FamilySearch Wiki, ScotlandsPeople, NLI) ; contours ouverts pas relus |
 | 9 | Recensements transcrits (Norvège, Islande, Danemark, Canada) | **liens** (fichiers et licences pas relus ; jamais de nom envoyé) |
 | 10 | Registres indexés (Riksarkivet, HisKi, DDD) | **liens** |
 | 11 | Émigration (Norvège, Brême) | **liens** |
 | 12 | Bagnards envoyés en Australie (SLQ, CC BY) | **atelier** (`quoi` = bagnards : licence CKAN relue ; colonnes reconnues ; seulement des départs de plus de 110 ans) ; liste `tl_bagnards` cachée tant que le pack n'est pas là |
 | 13 | Populations des communes (Suisse, Norvège, Pays-Bas) | **liens** (sites refusés) |
-| 14 | Villages désertés | **construit** (`tl-villages`, Wikidata CC0 : « abandoned village » Q350895 et « deserted medieval village » Q21751582 — dont les Wüstungen et les villages médiévaux désertés d'Angleterre repris de Historic England, avec le numéro NHLE → fiche officielle) quand le service répond ; sinon atelier. Registre Historic England : lien |
+| 14 | Villages désertés | **construit** (`tl-villages`, Wikidata CC0 : « abandoned village » Q350895 et « deserted medieval village » Q21751582 — dont les Wüstungen et les villages médiévaux désertés d'Angleterre repris de Historic England, avec le numéro NHLE → fiche officielle) : 7 514 villages (Allemagne 3 304, Espagne 1 801, Tchéquie 866, Royaume-Uni 276…, 169 avec leur fiche Historic England). Registre Historic England : lien |
 | 15 | Indications géographiques (eAmbrosia) | **lien** (site refusé) ; les AOC françaises inchangées |
 | 16 | Races FAO DAD-IS | **lien** (licence pas relue) |
-| 17 | Mesures anciennes du monde | **construit** (`tl-mesures`, Wikidata CC0 : unités liées à un pays avec leur valeur SI ; longueurs, aires, volumes, masses) ; liste `tl_mesures` (thème 💶 prix). Les mesures de France restent dans `tm_mesures` |
+| 17 | Mesures anciennes du monde | **construit** (`tl-mesures` : 82 unités, Wikidata CC0 : unités liées à un pays avec leur valeur SI ; longueurs, aires, volumes, masses ; Wikidata en a peu : à compléter) ; liste `tl_mesures` (thème 💶 prix). Les mesures de France restent dans `tm_mesures` |
 | 18 | Annuaires de commerce | **liens** (Internet Archive, Leicester) |
 | 19 | (déjà là : séismes d'Europe) | — |
 | 20 | Crues d'Europe HANZE (CC BY 4.0) | **construit** (`tl-crues` : 2 780 crues 1871-2025 ; centre de la première région NUTS 3, calculé des contours de HANZE, ETRS89-LAEA → degrés) ; **rejoint « 🌊 Crues réunies »** (rang 5, `HANZE`) ; fiche (« De son vivant, 3 grandes crues à moins de 50 km… ; la plus meurtrière : 1966-11-04, Firenze »), village, carte, à la demande |
@@ -83,7 +83,7 @@ L'essai coupe et compte toute requête qui sortirait.
 | 22 | Mines (Coal Authority, USGS MRDS) | MRDS : **atelier** (`quoi` = mines, domaine public) ; Coal Authority : **lien** |
 | 23 | Élus | **construit** (`tl-elus` : 9 667 membres du Congrès des États-Unis nés il y a plus de 110 ans, CC0 ; fiche officielle bioguide) ; fiche : « un homonyme au Congrès » (même prénom, même nom, née à un an près ; une piste, comparé sur l'ordinateur) |
 | 24 | Prix et salaires | **construit** (`tl-prix` : CPI-U des États-Unis 1913-2024, domaine public) ; liste avec « 1 $ de cette année en $ d'aujourd'hui », fiche (« En 1920, un dollar valait autant que … dollars de 2024 ») pour une vie passée aux États-Unis. Avant 1913 et GPIH : **liens** (pas de licence ouverte lue). Le convertisseur français est inchangé |
-| 25 | Cimetières du monde | **construit** (`tl-cimetieres`, Wikidata CC0, hors de France) quand le service répond ; sinon atelier. Fiche : « le cimetière le plus proche de son lieu de décès » (une piste) |
+| 25 | Cimetières du monde | **atelier** (`tl-cimetieres`, Wikidata CC0, hors de France : le service de requêtes coupait les réponses depuis l'atelier même en 100 morceaux ; sur GitHub, une minute entre deux requêtes) ; liste, fiche et carte prêtes, cachées sans données. Fiche : « le cimetière le plus proche de son lieu de décès » (une piste) |
 | 26 | Noms de lieux (OS Open Names, registres nordiques) | OS Open Names : **atelier** (`quoi` = lieux_gb : OGL v3 relue ; hameaux, villages ; OSGB36 → WGS84) ; registres de Norvège, Suède, Finlande : **liens** |
 
 ## Où l'utilisateur le voit
