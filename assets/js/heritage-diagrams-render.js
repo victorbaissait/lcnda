@@ -713,7 +713,8 @@
         const W = clamp(num(width || s.o.width) || 900, 200, 4000);
         // ⚙️ Personnaliser (heritage-diagram-perso.js) : le style par défaut, les petits multiples → prepare(spec, sorte, largeur) = {spec, kind} ou rien
         const R0 = ext.diagramRender; if (typeof R0?.prepare === 'function') { try { const p = R0.prepare(s, kind, W); if (p) { s = p.spec || s; kind = p.kind || kind; } } catch (e) { console.error(e); } }
-        try { return compose(s, kind, W); } catch (e) { console.error(e); return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} 60" width="${W}" height="60"><text x="10" y="35" font-size="14" fill="#c00">Dessin impossible : ${esc(e.message)}</text></svg>`; }
+        // finish(svg, spec) : le format 16:9, A4, carré (heritage-diagram-donnees.js)
+        try { const out = compose(s, kind, W); return typeof R0?.finish === 'function' ? R0.finish(out, s) : out; } catch (e) { console.error(e); return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} 60" width="${W}" height="60"><text x="10" y="35" font-size="14" fill="#c00">Dessin impossible : ${esc(e.message)}</text></svg>`; }
     }
     ext.diagramRender = {svg, KINDS, COMMON, PALETTES, when, num, ticks, logTicks, apportion, arcSeats, horseshoeSeats, squarify, color, textW, FONT};
 })();

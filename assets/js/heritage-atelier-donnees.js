@@ -28,9 +28,9 @@
     const nf = n => Number(n || 0).toLocaleString('fr-FR');
     const spin = t => (UI().spinner ? UI().spinner(T(t), {inline: true}) : `<p class="muted">${esc(T(t))}</p>`);
     const emptyLine = (ico, html) => `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">${ico}</span><span class="empty-line-text">${html}</span></p>`;
-    const DEF = {src: '', ask: '', from: '', to: '', where: '', place: '', lat: null, lon: null, km: 15, famOnly: false, view: 'list', n: 5};
+    const DEF = {src: '', ask: '', q: '', from: '', to: '', where: '', place: '', lat: null, lon: null, km: 15, famOnly: false, view: 'list', n: 5, chart: 'bar', cols: [], sort: '', dir: 'asc', group: '', title: '', subtitle: '', icon: '', accent: '', density: 'normal', size: 'M', showSource: true, click: 'list', famHi: false, emptyText: '', auto: false};
     const cfgOf = c => ({...DEF, ...(c && typeof c === 'object' ? c : {})});
-    const VIEWS = [['list', '📋 Liste'], ['count', '📈 Nombre et petit graphique'], ['map', '🗺 Petite carte']];
+    const VIEWS = [['list', '📋 Liste'], ['table', '▦ Tableau compact'], ['cards', '🃏 Cartes'], ['count', '📈 Nombre et petit graphique'], ['chart', '📊 Petit graphique'], ['map', '🗺 Petite carte'], ['timeline', '🕰 Petite frise'], ['day', '📅 Ce jour-là (ou la ligne du jour)'], ['ticker', '🎞 Défilant']];
     const NS = [3, 5, 8, 12, 20];
 
     /** les listes qu'on peut proposer : montrées, lues ici (pas un lien, pas « en ligne ») */
@@ -76,6 +76,8 @@
             if (c.lat != null) { st.near = {lat: Number(c.lat), lon: Number(c.lon), km, title: c.place}; st.sort = '_km'; st.dir = 'asc'; }
         }
         if (c.where === 'family') st.crit = [{kind: 'xf', fid: 'famille', value: String(km), valueLabel: T('à {km} km', {km})}];
+        if (c.q) st.q = String(c.q);
+        if (c.sort) { st.sort = c.sort; st.dir = c.dir === 'desc' ? 'desc' : 'asc'; }
         return st;
     }
     /** {d, st, rows, total, all?, missing?, notInstalled?, note?} — limit : combien de lignes au plus */
@@ -102,48 +104,112 @@
         const p = await E().fetchPage(d, st, 0, Math.max(limit, 1));
         return {d, st, rows: (p.rows || []).slice(0, limit), all: p.all || p.rows || [], total: Number(p.total) || (p.rows || []).length, more: !!p.more};
     }
-    const filtersText = c => [c.from !== '' || c.to !== '' ? `📅 ${c.from || '…'} → ${c.to || '…'}` : '', c.where === 'place' && c.place ? T('📍 à {km} km de {p}', {km: c.km, p: c.place}) : '', c.where === 'family' ? T('👪 à {km} km des lieux de la famille', {km: c.km}) : '', c.famOnly ? T('👪 quand la famille y vivait') : ''].filter(Boolean).join(' · ');
+    const filtersText = c => [c.q ? `🔎 « ${c.q} »` : '', c.from !== '' || c.to !== '' ? `📅 ${c.from || '…'} → ${c.to || '…'}` : '', c.where === 'place' && c.place ? T('📍 à {km} km de {p}', {km: c.km, p: c.place}) : '', c.where === 'family' ? T('👪 à {km} km des lieux de la famille', {km: c.km}) : '', c.famOnly ? T('👪 quand la famille y vivait') : ''].filter(Boolean).join(' · ');
     function open(c0) { const c = cfgOf(c0), d = listById(c.src); if (c.ask && !c.src) return ext.dataHome?.ask ? (A().setModule?.('listes'), ext.dataHome.ask(c.ask)) : null; if (!d) return A().toast?.(T('Cette liste n’existe plus.'), 'error'); stateFor(c).then(st => E().open?.(d.id, st)); }
     const sourceLine = d => (d?.source ? `<p class="atd-lic">${esc(T('Source :'))} ${okUrl(d.sourceUrl) ? `<a href="${esc(d.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(d.source)} ↗</a>` : esc(d.source)}</p>` : '');
-    const rowLi = (d, r, i) => { const u = rowUrl(d, r), sub = rowSub(d, r); return `<li><button type="button" class="link-button" data-atd-row="${i}">${esc(rowTitle(d, r) || '—')}</button>${sub ? ` <small>${esc(sub)}</small>` : ''}${u ? ` <a class="atd-src" href="${esc(u)}" target="_blank" rel="noopener noreferrer">↗ ${esc(T('source'))}</a>` : ''}</li>`; };
     const goDonnees = () => { const st = A().state; if (!st) return; st.listType = 'donnees'; A().setModule?.('listes'); };
     const noneHtml = () => emptyLine('📦', `${esc(T('Aucune donnée téléchargée pour l’instant.'))} <button type="button" class="link-button" data-atd-gods>${esc(T('Voir les données à télécharger'))} →</button>`);
 
-    /** le corps montré : liste, nombre + petit graphique, petite carte */
+    /* ═════════ ⚙️ Personnaliser : les réglages de forme (jamais les données) ═════════ */
+    const ACCENTS = {blue: '#055dff', green: '#2b8a3e', orange: '#d9480f', red: '#c92a2a', purple: '#7048e8', grey: '#5c636e'};
+    const ACCENT_L = [['blue', 'Bleu'], ['green', 'Vert'], ['orange', 'Orange'], ['red', 'Rouge'], ['purple', 'Violet'], ['grey', 'Gris']];
+    const FMT = ['view', 'chart', 'n', 'sort', 'dir', 'group', 'title', 'subtitle', 'icon', 'accent', 'density', 'size', 'showSource', 'click', 'famHi', 'emptyText', 'auto']; // un modèle : la forme seulement
+    const K_TPL = 'genealogie-donnees-widget-modeles';
+    const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
+    const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
+    const templates = () => (Array.isArray(readJ(K_TPL, [])) ? readJ(K_TPL, []) : []);
+    const fmtOf = c => Object.fromEntries(FMT.filter(k => c[k] !== undefined).map(k => [k, c[k]]));
+    const yearOf = (d, r) => E().periodOf?.(d, r)?.[0];
+    const fieldVal = (r, k) => { const v = r?.[k]; return Array.isArray(v) ? v.join(', ') : v ?? ''; };
+    function groupKey(d, r, g) {
+        if (g === 'decade') { const y = yearOf(d, r); return Number.isFinite(y) ? `${Math.floor(y / 10) * 10}–${Math.floor(y / 10) * 10 + 9}` : T('sans date'); }
+        if (g === 'century') { const y = yearOf(d, r); return Number.isFinite(y) ? T('{n}e siècle', {n: Math.floor((y - 1) / 100) + 1}) : T('sans date'); }
+        return String(fieldVal(r, g) || '—');
+    }
+    const cellsOf = (d, c) => { const fs = fieldsOf(d); const cs = (c.cols || []).map(k => fs.find(f => f.key === k)).filter(Boolean); return cs.length ? cs : fs.slice(0, 3); };
+    const bucket = (ys, max = 12) => { const lo = Math.min(...ys), hi = Math.max(...ys), step = Math.max(10, Math.ceil((hi - lo + 1) / max / 10) * 10), a = Math.floor(lo / step) * step, n = Math.floor((hi - a) / step) + 1, b = new Array(n).fill(0); ys.forEach(y => { b[Math.floor((y - a) / step)]++; }); return {a, step, b}; };
+    function chartHtml(ys, kind) {
+        if (ys.length < 2) return '';
+        const {a, step, b} = bucket(ys), mx = Math.max(...b), lab = esc(T('Par période, de {a} à {b}', {a: a, b: a + step * b.length - 1}));
+        if (kind === 'line') { const w = 300, h = 64, pts = b.map((v, i) => `${Math.round(i / Math.max(1, b.length - 1) * w)},${Math.round(h - v / mx * (h - 4) - 2)}`).join(' ');
+            return `<svg class="atd-line" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="${lab}"><polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg><div class="atd-axis"><span>${a}</span><span>${a + step * b.length - 1}</span></div>`; }
+        return `<div class="atd-bars" role="img" aria-label="${lab}">${b.map((v, i) => `<span style="height:${Math.max(4, Math.round(v / mx * 100))}%" title="${a + i * step}–${a + (i + 1) * step - 1} : ${v}"></span>`).join('')}</div><div class="atd-axis"><span>${a}</span><span>${a + step * b.length - 1}</span></div>`;
+    }
+    const srcA = (d, r) => { const u = rowUrl(d, r); return u ? ` <a class="atd-src" href="${esc(u)}" target="_blank" rel="noopener noreferrer">↗ ${esc(T('source'))}</a>` : ''; };
+    const famMark = r => (r._fam ? ` <span class="atd-fam" title="${esc(r._fam)}">👪</span>` : '');
+    const rowLi = (d, r, i) => { const sub = rowSub(d, r); return `<li class="${r._fam ? 'is-fam' : ''}"><button type="button" class="link-button" data-atd-row="${i}">${esc(rowTitle(d, r) || '—')}</button>${sub ? ` <small>${esc(sub)}</small>` : ''}${famMark(r)}${srcA(d, r)}</li>`; };
+    const dayKey = () => { const t = new Date(); return `${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`; };
+
+    /** le corps montré : liste, tableau, cartes, nombre, graphique, carte, frise, ce jour-là, défilant (+ regroupement, « + N autres ») */
     function view(res, c0) {
         const c = cfgOf(c0), d = res.d;
         if (res.note) return emptyLine('💬', esc(res.note));
         if (res.missing) return emptyLine('📦', `${esc(T('Cette liste n’est pas disponible ici.'))} <button type="button" class="link-button" data-atd-gods>${esc(T('Voir les données'))} →</button>`);
         if (res.notInstalled) return emptyLine('⤓', `${esc(T('{l} : pas encore téléchargée sur cet ordinateur.', {l: T(d.label)}))} <button type="button" class="link-button" data-atd-gods>${esc(T('Voir les données à télécharger'))} →</button>`);
-        const head = `<div class="atd-head"><b>${esc(d.icon || '📋')} ${esc(T(d.label))}</b><button type="button" class="link-button" data-atd-go>${esc(T('Ouvrir la liste'))} ↗</button></div>${filtersText(c) || c.ask ? `<small class="muted">${esc(c.ask && !c.src ? `💬 « ${c.ask} »` : filtersText(c))}</small>` : ''}`;
+        const title = c.title || `${T(d.label)}`, icon = c.icon || d.icon || '📋';
+        const head = `<div class="atd-head"><b>${esc(icon)} ${esc(title)}</b><button type="button" class="link-button" data-atd-go>${esc(T('Ouvrir la liste'))} ↗</button></div>${c.subtitle ? `<small class="atd-subt">${esc(c.subtitle)}</small>` : ''}${filtersText(c) || c.ask ? `<small class="muted">${esc(c.ask && !c.src ? `💬 « ${c.ask} »` : filtersText(c))}</small>` : ''}`;
+        const all = res.all || res.rows, n = Math.max(1, Number(c.n) || 5), rows = res.rows.slice(0, n), more = res.total - rows.length;
+        const moreLine = more > 0 ? `<button type="button" class="link-button atd-more" data-atd-go>${esc(T('+ {n} autres', {n: nf(more)}))}</button>` : '';
+        const idx = r => res.rows.indexOf(r);
         let body;
-        if (!res.total) body = emptyLine('🔎', esc(T('Rien pour ces filtres.')));
-        else if (c.view === 'count') {
-            const ys = (res.all || res.rows).map(r => E().periodOf?.(d, r)?.[0]).filter(Number.isFinite);
-            let bars = '';
-            if (ys.length > 1) { const lo = Math.min(...ys), hi = Math.max(...ys), step = Math.max(1, Math.ceil((hi - lo + 1) / 12)), n = Math.ceil((hi - lo + 1) / step), b = new Array(n).fill(0); ys.forEach(y => { b[Math.min(n - 1, Math.floor((y - lo) / step))]++; }); const mx = Math.max(...b);
-                bars = `<div class="atd-bars" role="img" aria-label="${esc(T('Par période, de {a} à {b}', {a: lo, b: hi}))}">${b.map((v, i) => `<span style="height:${Math.max(4, Math.round(v / mx * 100))}%" title="${lo + i * step}–${lo + (i + 1) * step - 1} : ${v}"></span>`).join('')}</div><div class="atd-axis"><span>${lo}</span><span>${hi}</span></div>`; }
-            body = `<div class="atd-big">${nf(res.total)}${res.more ? '+' : ''} <small>${esc(T('lignes'))}</small></div>${bars}`;
+        if (!res.total) body = emptyLine('🔎', esc(c.emptyText || T('Rien pour ces filtres.')));
+        else if (c.view === 'count' || c.view === 'chart') {
+            const ys = all.map(r => yearOf(d, r)).filter(Number.isFinite);
+            body = `${c.view === 'count' ? `<div class="atd-big">${nf(res.total)}${res.more ? '+' : ''} <small>${esc(T('lignes'))}</small></div>` : ''}${chartHtml(ys, c.chart)}`;
         } else if (c.view === 'map' && ext.miniMap && d.geo) {
-            const pts = (res.all || res.rows).slice(0, 300).map(r => { const g = E().geoOf?.(d, r); return g ? {lat: g[0], lon: g[1], label: rowTitle(d, r)} : null; }).filter(Boolean);
-            body = `${ext.miniMap(pts, [], {height: 220})}<small class="muted">${esc(T('Lignes : {n}', {n: nf(res.total)}))}</small>`;
-        } else body = `<ul class="atd-rows">${res.rows.map((r, i) => rowLi(d, r, i)).join('')}</ul>${res.total > res.rows.length ? `<small class="muted">${esc(T('{a} sur {n} lignes', {a: nf(res.rows.length), n: nf(res.total)}))}</small>` : ''}`;
-        return `${head}${body}${sourceLine(d)}`;
+            const pts = all.slice(0, 300).map(r => { const g = E().geoOf?.(d, r); return g ? {lat: g[0], lon: g[1], label: rowTitle(d, r)} : null; }).filter(Boolean);
+            body = `${ext.miniMap(pts, [], {height: c.size === 'S' ? 160 : 220})}<small class="muted">${esc(T('Lignes : {n}', {n: nf(res.total)}))}</small>`;
+        } else if (c.view === 'table') {
+            const cs = cellsOf(d, c);
+            body = `<div class="atd-tablewrap"><table class="atd-table"><thead><tr>${cs.map(f => `<th>${esc(T(f.label))}</th>`).join('')}<th><span class="atd-sr">${esc(T('Source'))}</span></th></tr></thead><tbody>${rows.map(r => `<tr class="${r._fam ? 'is-fam' : ''}" data-atd-row="${idx(r)}">${cs.map(f => `<td>${esc(fieldVal(r, f.key))}</td>`).join('')}<td>${famMark(r)}${srcA(d, r)}</td></tr>`).join('')}</tbody></table></div>${moreLine}`;
+        } else if (c.view === 'cards') {
+            body = `<div class="atd-cards">${rows.map(r => `<div class="atd-card${r._fam ? ' is-fam' : ''}"><button type="button" class="link-button" data-atd-row="${idx(r)}">${esc(rowTitle(d, r) || '—')}</button><small>${esc(rowSub(d, r))}</small>${famMark(r)}${srcA(d, r)}</div>`).join('')}</div>${moreLine}`;
+        } else if (c.view === 'timeline') {
+            const ts = rows.filter(r => Number.isFinite(yearOf(d, r))).sort((x, y) => yearOf(d, x) - yearOf(d, y));
+            body = ts.length ? `<ol class="atd-time">${ts.map(r => `<li><span>${esc(yearOf(d, r))}</span><button type="button" class="link-button" data-atd-row="${idx(r)}">${esc(rowTitle(d, r))}</button>${famMark(r)}${srcA(d, r)}</li>`).join('')}</ol>${moreLine}` : emptyLine('📅', esc(T('Aucune de ces lignes n’a de date.')));
+        } else if (c.view === 'day') {
+            const dk = dayKey(), dateF = (d.fields || []).find(f => f.type === 'date');
+            const today = dateF ? all.filter(r => String(r[dateF.key] || '').slice(5, 10) === dk) : [];
+            const seed = Number(new Date().toISOString().slice(0, 10).replace(/-/g, '')), pick = today.length ? today : [all[seed % all.length]];
+            body = `<p class="atd-daylab">${esc(today.length ? T('📅 Ce jour-là') : T('🎲 La ligne du jour'))}</p><ul class="atd-rows">${pick.slice(0, n).map(r => rowLi(d, r, idx(r) >= 0 ? idx(r) : 0)).join('')}</ul>`;
+        } else if (c.view === 'ticker') {
+            body = `<div class="atd-ticker" data-atd-ticker><button type="button" class="icon-button" data-atd-tick="-1" aria-label="${esc(T('Précédente'))}">‹</button><ul class="atd-rows">${rows.map((r, i) => rowLi(d, r, idx(r)).replace('<li class="', `<li ${i ? 'hidden ' : ''}class="`)).join('')}</ul><button type="button" class="icon-button" data-atd-tick="1" aria-label="${esc(T('Suivante'))}">›</button></div>${moreLine}`;
+        } else if (c.group) {
+            const groups = new Map(); rows.forEach(r => { const k = groupKey(d, r, c.group); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r); });
+            body = `${[...groups.entries()].map(([k, rs]) => `<p class="atd-gh">${esc(k)} <small>${nf(rs.length)}</small></p><ul class="atd-rows">${rs.map(r => rowLi(d, r, idx(r))).join('')}</ul>`).join('')}${moreLine}`;
+        } else body = `<ul class="atd-rows">${rows.map(r => rowLi(d, r, idx(r))).join('')}</ul>${moreLine}`;
+        return `${head}${body}${c.showSource === false ? `<p class="atd-lic atd-lic-min"><a href="${esc(okUrl(d.sourceUrl) || '#')}" target="_blank" rel="noopener noreferrer" title="${esc(d.source || '')}">↗ ${esc(T('source'))}</a></p>` : sourceLine(d)}`;
     }
-    /** les clics d'un corps montré (lignes, « Ouvrir la liste », aller dans Données) */
+    const wrapCls = c => `atd atd-show atd-d-${c.density || 'normal'} atd-s-${c.size || 'M'}`;
+    /** les clics d'un corps montré (lignes, « Ouvrir la liste », aller dans Données, ‹ › du défilant) */
     function bindView(el, getRes, c) {
         el.addEventListener('click', e => {
             if (e.target.closest('[data-atd-gods]')) return goDonnees();
-            if (e.target.closest('[data-atd-go]') || e.target.closest('[data-atd-row]')) { const r = getRes(); if (r?.d && r.st && !(c.src)) return E().open?.(r.d.id, r.st); return open(c); }
+            const tk = e.target.closest('[data-atd-tick]'); if (tk) return tick(el, Number(tk.dataset.atdTick));
+            if (e.target.closest('a')) return;
+            const rowEl = e.target.closest('[data-atd-row]'), r = getRes();
+            if (rowEl && r?.d && c.click === 'row') { const row = r.rows[Number(rowEl.dataset.atdRow)]; try { if (row && r.d.open) return r.d.open(row, {}); } catch (_) {} }
+            if (rowEl && r?.d && c.click === 'basket') { const row = r.rows[Number(rowEl.dataset.atdRow)]; if (row && ext.connexions?.take) { ext.connexions.take([{kind: 'row', title: rowTitle(r.d, row), value: rowSub(r.d, row), origin: {label: `${T('Listes')} · ${T(r.d.label)}`, url: rowUrl(r.d, row)}}]); return A().toast?.(T('🧺 Gardé dans le panier.'), 'success'); } }
+            if (e.target.closest('[data-atd-go]') || rowEl) { if (r?.d && r.st && !(c.src)) return E().open?.(r.d.id, r.st); return open(c); }
         });
+    }
+    function tick(el, dir) { const lis = [...el.querySelectorAll('[data-atd-ticker] li')]; if (lis.length < 2) return; const i = lis.findIndex(x => !x.hidden); lis.forEach(x => { x.hidden = true; }); lis[(i + dir + lis.length) % lis.length].hidden = false; }
+    /** 👪 les lignes liées à ma famille : quelqu'un vivait près de là cette année-là */
+    async function markFamily(res, c) {
+        if (!c.famHi || !res?.d || !LF()) return; await LF().ready(); const km = Math.max(1, Number(c.km) || LF().km?.() || 15);
+        (res.rows || []).forEach(r => { const g = E().geoOf?.(res.d, r), y = yearOf(res.d, r); if (!g || !Number.isFinite(y)) return; const pr = LF().presence(g[0], g[1], y, km); if (pr.who.length) r._fam = pr.who.slice(0, 3).map(w => w.n).join(', '); });
     }
     /** montre une config (lit seulement quand c'est visible) */
     function show(el, c0, {limit} = {}) {
-        const c = cfgOf(c0); let res = null;
+        const c = cfgOf(c0); let res = null, timer = 0, tk = 0;
+        el.className = wrapCls(c); if (ACCENTS[c.accent]) el.style.setProperty('--atd-accent', ACCENTS[c.accent]);
         el.innerHTML = spin('Chargement…');
-        const go = async () => { try { res = await run(c, limit || (c.view === 'list' ? Number(c.n) || 5 : 500)); if (el.isConnected) el.innerHTML = view(res, c); } catch (e) { if (el.isConnected) el.innerHTML = emptyLine('⚠️', esc(e.message || String(e))); } };
+        const big = ['count', 'chart', 'map', 'day'].includes(c.view) || c.group;
+        const go = async () => { try { res = await run(c, limit || (big ? 500 : Math.max(Number(c.n) || 5, 1))); await markFamily(res, c); if (el.isConnected) el.innerHTML = view(res, c); } catch (e) { if (el.isConnected) el.innerHTML = emptyLine('⚠️', esc(e.message || String(e))); } };
         bindView(el, () => res, c);
         lazy(el, go);
+        if (c.view === 'ticker') tk = setInterval(() => { if (!el.isConnected) return clearInterval(tk); if (!el.matches(':hover, :focus-within')) tick(el, 1); }, 5000);
+        if (c.auto) timer = setInterval(() => { if (!el.isConnected) return clearInterval(timer); if (document.visibilityState === 'visible') { E().forget?.(c.src); go(); } }, 10 * 60000);
         return {get res() { return res; }};
     }
     function lazy(el, fn) {
@@ -152,6 +218,37 @@
         io.observe(el);
     }
 
+    /* ⚙️ Personnaliser (replié) : des sections, une ouverte à la fois ; de bons réglages au départ */
+    const opt = (v, cur, l) => `<option value="${esc(v)}" ${String(cur) === String(v) ? 'selected' : ''}>${esc(T(l))}</option>`;
+    function persoHtml(c) {
+        const sec = (id, t, html) => `<details class="atd-sec" data-atd-sec="${id}" name="atd-sec-${Math.random().toString(36).slice(2, 6)}"><summary>${esc(T(t))}</summary><div class="atd-filters">${html}</div></details>`;
+        const tpl = templates();
+        return `<details class="atd-perso" data-atd-perso><summary>⚙️ ${esc(T('Personnaliser'))}</summary>
+            ${sec('show', '📋 Colonnes, tri et regroupement', `<label>${esc(T('Graphique'))}<select data-atd-p="chart">${opt('bar', c.chart, 'Barres (par décennie)')}${opt('line', c.chart, 'Courbe')}</select></label>
+                <label>${esc(T('Trier par'))}<select data-atd-p="sort"></select></label><label>${esc(T('Ordre'))}<select data-atd-p="dir">${opt('asc', c.dir, 'croissant')}${opt('desc', c.dir, 'décroissant')}</select></label>
+                <label>${esc(T('Regrouper'))}<select data-atd-p="group"></select></label><fieldset class="atd-cols"><legend>${esc(T('Colonnes (tableau, cartes)'))}</legend><div data-atd-cols></div></fieldset>`)}
+            ${sec('look', '🎨 Apparence', `<label>${esc(T('Titre'))}<input data-atd-p="title" value="${esc(c.title)}" placeholder="${esc(T('le nom de la liste'))}"></label><label>${esc(T('Sous-titre'))}<input data-atd-p="subtitle" value="${esc(c.subtitle)}"></label>
+                <label>${esc(T('Icône'))}<input data-atd-p="icon" value="${esc(c.icon)}" maxlength="4" placeholder="📊"></label>
+                <label>${esc(T('Couleur'))}<select data-atd-p="accent"><option value="">${esc(T('celle de l’app'))}</option>${ACCENT_L.map(([k, l]) => opt(k, c.accent, l)).join('')}</select></label>
+                <label>${esc(T('Densité'))}<select data-atd-p="density">${opt('compact', c.density, 'compacte')}${opt('normal', c.density, 'normale')}${opt('airy', c.density, 'aérée')}</select></label>
+                <label>${esc(T('Taille'))}<select data-atd-p="size">${opt('S', c.size, 'petite')}${opt('M', c.size, 'moyenne')}${opt('L', c.size, 'grande')}${opt('full', c.size, 'toute la largeur')}</select></label>
+                <label class="checkbox-line"><input type="checkbox" data-atd-p="showSource" ${c.showSource !== false ? 'checked' : ''}> ${esc(T('Montrer la ligne de la source (↗ reste toujours là)'))}</label>`)}
+            ${sec('act', '🖱 Comportement', `<label>${esc(T('Un clic sur une ligne'))}<select data-atd-p="click">${opt('list', c.click, 'ouvre la liste')}${opt('row', c.click, 'ouvre la ligne')}${opt('basket', c.click, 'la garde dans le panier 🧺')}</select></label>
+                <label class="checkbox-line"><input type="checkbox" data-atd-p="famHi" ${c.famHi ? 'checked' : ''}> ${esc(T('👪 Montrer les lignes liées à ma famille'))}</label>
+                <label class="checkbox-line"><input type="checkbox" data-atd-p="auto" ${c.auto ? 'checked' : ''}> ${esc(T('Se met à jour tout seul'))}</label>
+                <label>${esc(T('Quand il n’y a rien'))}<input data-atd-p="emptyText" value="${esc(c.emptyText)}" placeholder="${esc(T('Rien pour ces filtres.'))}"></label>`)}
+            ${sec('tpl', '⭐ Modèles et partage', `<label>${esc(T('Nom du modèle'))}<input data-atd-tplname placeholder="${esc(T('Mon modèle'))}"></label><div class="atd-actions"><button type="button" class="button small secondary" data-atd-tplsave>⭐ ${esc(T('Enregistrer comme modèle'))}</button></div>
+                ${tpl.length ? `<label>${esc(T('Mes modèles'))}<select data-atd-tpl>${tpl.map(x => `<option>${esc(x.name)}</option>`).join('')}</select></label><div class="atd-actions"><button type="button" class="button small secondary" data-atd-tplapply>${esc(T('Appliquer'))}</button></div>` : ''}
+                <div class="atd-actions"><button type="button" class="button small secondary" data-atd-dup>⧉ ${esc(T('Dupliquer'))}</button><button type="button" class="button small secondary" data-atd-export>⤓ ${esc(T('Exporter (.json)'))}</button><button type="button" class="button small secondary" data-atd-import>⤒ ${esc(T('Importer'))}</button><input type="file" accept="application/json,.json" data-atd-importfile hidden>
+                <button type="button" class="button small secondary" data-atd-reset>↺ ${esc(T('Remettre comme au départ'))}</button></div>`)}
+        </details>`;
+    }
+    function persoRead(root, c) {
+        const g = k => root.querySelector(`[data-atd-p="${k}"]`), v = k => (g(k) ? g(k).value : c[k]);
+        const cols = root.querySelector('[data-atd-cols] [data-atd-col]') ? [...root.querySelectorAll('[data-atd-col]:checked')].map(x => x.value) : (c.cols || []);
+        return {chart: v('chart'), sort: g('sort')?.options.length ? v('sort') : c.sort, dir: v('dir'), group: g('group')?.options.length ? v('group') : c.group, cols, title: String(v('title') || '').trim(), subtitle: String(v('subtitle') || '').trim(), icon: String(v('icon') || '').trim(),
+            accent: v('accent'), density: v('density'), size: v('size'), showSource: g('showSource') ? g('showSource').checked : c.showSource, click: v('click'), famHi: g('famHi') ? g('famHi').checked : c.famHi, auto: g('auto') ? g('auto').checked : c.auto, emptyText: String(v('emptyText') || '').trim()};
+    }
     /* ═════════ le réglage : choisir la liste (ou une question), les filtres, l'affichage ═════════ */
     /** chooser(hôte, config, {display, pickRows, ds, buttons, onDone(cfg), onCancel()}) → {read(), collect()} */
     function chooser(host, c0, o = {}) {
@@ -166,16 +263,18 @@
                 <label data-atd-placebox>${esc(T('Lieu'))}<input data-atd-f="place" value="${esc(c.place)}" placeholder="Tulle"></label>
                 <label data-atd-kmbox>${esc(T('À combien de km ?'))}<input type="number" min="1" max="500" data-atd-f="km" value="${esc(c.km)}"></label>
                 <label class="checkbox-line"><input type="checkbox" data-atd-f="famOnly" ${c.famOnly ? 'checked' : ''}> ${esc(T('Seulement quand quelqu’un de la famille vivait près de là'))}</label>
+                <label>${esc(T('Contient le mot'))}<input type="search" data-atd-f="q" value="${esc(c.q)}" placeholder="${esc(T('facultatif'))}"></label>
                 ${o.display ? `<label>${esc(T('Affichage'))}<select data-atd-f="view">${VIEWS.map(([k, l]) => `<option value="${k}" ${c.view === k ? 'selected' : ''}>${esc(T(l))}</option>`).join('')}</select></label>
                 <label>${esc(T('Combien de lignes ?'))}<select data-atd-f="n">${NS.map(n => `<option value="${n}" ${Number(c.n) === n ? 'selected' : ''}>${n}</option>`).join('')}</select></label>` : ''}
             </div>
+            ${o.display ? persoHtml(c) : ''}
             ${o.pickRows ? `<fieldset class="atd-mode" data-atd-modebox><legend>${esc(T('Garder'))}</legend><label class="checkbox-line"><input type="radio" name="atd_mode" value="all" ${mode === 'all' ? 'checked' : ''}> ${esc(T('Toute la liste filtrée'))}</label><label class="checkbox-line"><input type="radio" name="atd_mode" value="rows" ${mode === 'rows' ? 'checked' : ''}> ${esc(T('Seulement les lignes cochées'))}</label></fieldset><div data-atd-rows></div>` : ''}
             ${o.buttons !== false ? `<div class="atd-actions"><button type="button" class="button small" data-atd-ok>${esc(T('Afficher'))}</button>${o.onCancel ? `<button type="button" class="button small secondary" data-atd-cancel>${esc(T('Annuler'))}</button>` : ''}</div>` : ''}
         </div>`;
         const root = host.querySelector('[data-atd-cfg]'), q = s => root.querySelector(s), f = k => q(`[data-atd-f="${k}"]`);
         const read = () => ({src: chosen?.id || '', ask: chosen ? '' : String(f('ask')?.value || '').trim(), from: f('from').value, to: f('to').value, where: f('where').value, place: String(f('place').value || '').trim(),
             lat: f('place').value === c.place ? c.lat : null, lon: f('place').value === c.place ? c.lon : null, km: Math.max(1, Math.min(500, Number(f('km').value) || 15)), famOnly: f('famOnly').checked,
-            view: f('view')?.value || c.view, n: Number(f('n')?.value) || c.n});
+            view: f('view')?.value || c.view, n: Number(f('n')?.value) || c.n, q: String(f('q')?.value || '').trim(), ...(o.display ? persoRead(root, c) : {})});
         const sync = () => {
             const ask = !chosen && !!String(f('ask')?.value || '').trim(), w = f('where').value;
             q('[data-atd-filt]').hidden = !chosen && !ask;
@@ -194,7 +293,7 @@
         const mountPicker = pk => {
             if (!ext.dataListPicker) { pk.innerHTML = emptyLine('⏳', esc(T('Chargement…'))); return; }
             ext.dataListPicker(pk, {compact: true, onlyInstalled: true, filter: eligible, selected: c.src,
-                onPick: d => { chosen = d; if (f('ask')) f('ask').value = ''; paintChosen(); refreshRows(); },
+                onPick: d => { chosen = d; if (f('ask')) f('ask').value = ''; paintChosen(); refreshRows(); paintCols(); },
                 onChecked: ok => { if (!ok.length && !chosen) { pk.innerHTML = noneHtml(); q('[data-atd-askbox]').hidden = true; const a = q('.atd-actions [data-atd-ok]'); if (a) a.hidden = true; } }});
             setTimeout(() => { try { pk.querySelector('[data-ld-ov-q]')?.focus({preventScroll: true}); } catch (_) {} }, 30);
         };
@@ -209,7 +308,19 @@
             if (!d || !rowsRes.total) { box.innerHTML = view(rowsRes, cur); return; }
             box.innerHTML = `<small class="muted">${esc(T('{a} sur {n} lignes', {a: nf(rowsRes.rows.length), n: nf(rowsRes.total)}))}</small><ul class="atd-pickrows">${rowsRes.rows.map((r, i) => { const k = rowKey(d, r), u = rowUrl(d, r), sub = rowSub(d, r); return `<li><label><input type="checkbox" data-atd-pick="${i}" ${picked.has(k) ? 'checked' : ''}> <span>${esc(rowTitle(d, r) || '—')}${sub ? ` <small class="muted">${esc(sub)}</small>` : ''}</span></label>${u ? ` <a class="atd-src" href="${esc(u)}" target="_blank" rel="noopener noreferrer">↗ ${esc(T('source'))}</a>` : ''}</li>`; }).join('')}</ul>`;
         }, 250); };
+        /* ⚙️ Personnaliser : colonnes, tri, regroupement (les champs de la liste choisie) ; modèles, export, import, remise à zéro */
+        const paintCols = () => { const box = q('[data-atd-cols]'); if (!box) return; const fs = chosen ? fieldsOf(chosen) : [], on = new Set(c.cols || []);
+            box.innerHTML = fs.length ? fs.map(fl => `<label class="checkbox-line"><input type="checkbox" data-atd-col value="${esc(fl.key)}" ${on.has(fl.key) ? 'checked' : ''}> ${esc(T(fl.label))}</label>`).join('') : `<small class="muted">${esc(T('Choisis d’abord une liste.'))}</small>`;
+            const so = q('[data-atd-p="sort"]'); if (so) so.innerHTML = `<option value="">${esc(T('comme la liste'))}</option>${fs.map(fl => `<option value="${esc(fl.key)}" ${c.sort === fl.key ? 'selected' : ''}>${esc(T(fl.label))}</option>`).join('')}<option value="_km" ${c.sort === '_km' ? 'selected' : ''}>${esc(T('Distance (km)'))}</option>`;
+            const gr = q('[data-atd-p="group"]'); if (gr) gr.innerHTML = `<option value="">${esc(T('aucun'))}</option>${chosen?.period ? `<option value="decade" ${c.group === 'decade' ? 'selected' : ''}>${esc(T('par décennie'))}</option><option value="century" ${c.group === 'century' ? 'selected' : ''}>${esc(T('par siècle'))}</option>` : ''}${fs.filter(fl => ['enum', 'place'].includes(fl.type)).map(fl => `<option value="${esc(fl.key)}" ${c.group === fl.key ? 'selected' : ''}>${esc(T('par {f}', {f: T(fl.label).toLowerCase()}))}</option>`).join('')}`; };
+        const redo = (nc, msg) => { const before = read(); const api2 = chooser(host, {...before, ...nc}, o); if (msg) A().undoToast ? A().undoToast(msg, {undo: () => chooser(host, before, o)}) : A().toast?.(msg); return api2; };
         root.addEventListener('click', e => {
+            if (e.target.closest('[data-atd-tplsave]')) { const name = String(q('[data-atd-tplname]')?.value || '').trim() || T('Mon modèle'); const list = templates().filter(x => x.name !== name); list.unshift({name, fmt: fmtOf(read())}); writeJ(K_TPL, list.slice(0, 30)); A().toast?.(T('⭐ Modèle « {n} » enregistré (la forme seulement, sans les données).', {n: name}), 'success'); redo({}); return; }
+            if (e.target.closest('[data-atd-tplapply]')) { const t = templates().find(x => x.name === q('[data-atd-tpl]')?.value); if (t) redo(t.fmt, T('Modèle « {n} » appliqué', {n: t.name})); return; }
+            if (e.target.closest('[data-atd-reset]')) { const keep = read(); redo({...Object.fromEntries(FMT.map(k => [k, DEF[k]])), cols: [], src: keep.src, ask: keep.ask}, T('Réglages remis comme au départ')); return; }
+            if (e.target.closest('[data-atd-export]')) { const json = JSON.stringify({type: 'lcnda-widget-donnees', version: 1, cfg: read()}, null, 1); if (ext.downloadText) ext.downloadText('widget-donnees.json', json, 'application/json'); else { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([json], {type: 'application/json'})); a.download = 'widget-donnees.json'; a.click(); } return; }
+            if (e.target.closest('[data-atd-import]')) { q('[data-atd-importfile]')?.click(); return; }
+            if (e.target.closest('[data-atd-dup]')) { o.duplicate?.(read()); return; }
             if (e.target.closest('[data-atd-change]')) { chosen = null; q('[data-atd-picker]').innerHTML = ''; paintChosen(); return; }
             if (e.target.closest('[data-atd-gods]')) return goDonnees();
             if (e.target.closest('[data-atd-ok]')) { const cur = read(); if (!cur.src && !cur.ask) { UI().fail ? UI().fail(q('[data-ld-ov-q]') || root, T('Choisis une liste, ou pose une question.')) : A().toast?.(T('Choisis une liste, ou pose une question.'), 'error'); return; } o.onDone?.(cur); return; }
@@ -222,7 +333,9 @@
             sync(); if (t.matches('[data-atd-f]') && !['view', 'n'].includes(t.dataset.atdF)) refreshRows();
         });
         root.addEventListener('input', e => { if (e.target.matches('[data-atd-f="ask"]')) { sync(); refreshRows(); } });
-        paintChosen(); if (chosen) refreshRows();
+        q('[data-atd-importfile]')?.addEventListener('change', async e => { const fl = e.target.files?.[0]; if (!fl) return; try { const j = JSON.parse(await fl.text()); if (j?.type !== 'lcnda-widget-donnees' || !j.cfg) throw new Error(T('Ce fichier n’est pas un widget « Données téléchargées ».')); redo(cfgOf(j.cfg), T('Widget importé')); } catch (err) { A().toast?.(err.message, 'error'); } });
+        root.querySelectorAll('details[data-atd-sec]').forEach(dt => dt.addEventListener('toggle', () => { if (dt.open) root.querySelectorAll('details[data-atd-sec]').forEach(x => { if (x !== dt) x.open = false; }); })); // une section ouverte à la fois
+        paintChosen(); paintCols(); if (chosen) refreshRows();
         /** pour l'élément de l'Atelier : {key, label, extra, ds} (null : rien de choisi) */
         const collect = async () => {
             const cur = read(); if (!cur.src && !cur.ask) return null;
@@ -233,16 +346,20 @@
             const extra = mode === 'rows' ? T('Lignes gardées : {n}', {n: rows.length}) : T('Toute la liste filtrée · lignes : {n}', {n: nf(r.total)});
             return {key: d.id, label: label.slice(0, 290), extra, ds: {list: d.id, label: T(d.label), icon: d.icon || '📋', source: d.source || '', url: okUrl(d.sourceUrl), cfg: {...cur, src: cur.src || d.id, ask: cur.src ? '' : cur.ask}, mode, rows, total: r.total, at: new Date().toISOString().slice(0, 10)}};
         };
-        return {read, collect, root};
+        const api = {read, collect, root}; host._atd = api; return api;
     }
 
     /* ═════════ 🧩 le widget d'un projet (heritage-atelier-widgets.js) ═════════ */
     /** body : la case du widget ; w : {id, type: 'donnees', cfg} ; save() l'enregistre ; edit : ouvrir le réglage */
-    function mountWidget(body, w, {save, edit = false} = {}) {
+    function mountWidget(body, w, {save, edit = false, duplicate = null} = {}) {
         const c = cfgOf(w.cfg);
+        const sec = body.closest('.h-atw'); if (sec) { sec.classList.toggle('is-wide', edit || (!c.src && !c.ask) || ['L', 'full'].includes(c.size)); sec.classList.toggle('atd-sz-full', c.size === 'full'); } // 📐 la taille du widget
         const box = document.createElement('div'); box.className = 'atd'; body.innerHTML = ''; body.appendChild(box);
         if (edit || (!c.src && !c.ask)) {
-            return chooser(box, c, {display: true, onDone: cur => { w.cfg = cur; save?.(); mountWidget(body, w, {save}); }, onCancel: c.src || c.ask ? () => mountWidget(body, w, {save}) : null});
+            return chooser(box, c, {display: true, duplicate: duplicate ? cur => duplicate(cur) : null,
+                onDone: cur => { const before = w.cfg; w.cfg = cur; save?.(); mountWidget(body, w, {save, duplicate}); // ↶ un réglage changé se défait
+                    if (before && (before.src || before.ask) && A().undoToast) A().undoToast(T('Widget réglé'), {undo: () => { w.cfg = before; save?.(); mountWidget(body, w, {save, duplicate}); }}); },
+                onCancel: c.src || c.ask ? () => mountWidget(body, w, {save, duplicate}) : null});
         }
         show(box, c);
     }

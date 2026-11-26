@@ -36,7 +36,8 @@
 
     /** chiffres « tenus à jour » : relus dans l'app à chaque affichage (une minute de mémoire) */
     const liveMem = new Map();
-    async function resolveLive(spec) {
+    async function resolveLive(spec, ro = {}) {
+        if (spec?.live?.data && ext.diagramData) { try { return await ext.diagramData.resolve(spec, ro); } catch (_) { return spec; } } // 📊 Partir des données : une liste, une question (heritage-diagram-donnees.js) ; ro.share : exporté, envoyé (sans les vivants, figé)
         if (spec?.live?.sheet && ext.sheetLink) { try { return await ext.sheetLink.resolve(spec); } catch (_) { return spec; } } // 🔗 une plage d'un classeur du Tableur (heritage-tableur-cibles.js)
         const kr = R().KINDS[spec?.kind]?.resolve; if (kr) { try { return await kr(spec); } catch (_) { return spec; } } // kind.resolve(spec) → Promise<spec> : une sorte qui prépare son dessin (fond de carte à charger, chiffres relus…) — heritage-diagram-cartes.js
         if (spec.live?.follow) return resolveFollow(spec);
@@ -90,6 +91,7 @@
         const shown = await resolveLive(specOf(d));
         box.innerHTML = `<div class="h-dg-svg">${drawSpec(shown)}</div>${box.hasAttribute('data-dg-notools') ? '' : `<div class="h-dg-embedtools"><button type="button" class="link-button" data-dg-open="${d.id}" title="L’ouvrir en grand dans Graphiques">↗ Ouvrir</button><button type="button" class="link-button" data-dg-edit="${d.id}">✎ Modifier</button></div>`}`;
         ext.diagramPerso?.mount(box.querySelector('.h-dg-svg'), shown); // ▶ curseur des années, si le diagramme le demande
+        ext.diagramData?.afterEmbed?.(box, shown); // 📊 les sources et leurs licences, avec ↗ vers la liste d'origine
     }
     const fillAll = () => document.querySelectorAll('[data-dg-embed]:not([data-dg-done])').forEach(b => fillEmbed(b).catch(() => {}));
     function refreshEmbeds(id) { document.querySelectorAll(`[data-dg-embed="${Number(id)}"]`).forEach(b => { delete b.dataset.dgDone; }); fillAll(); }
@@ -123,7 +125,7 @@
     /** L1 : titre et légende, tableau des données dessous, ajuster à la page ou taille réelle */
     async function printSpec(name, spec) {
         const UI = window.LCNDA_UI; if (!UI?.openPrintDialog) throw new Error('la fenêtre « Imprimer » n’est pas chargée');
-        const live = await resolveLive(spec), full = drawSpec(live), bare = drawSpec(live.kind === '_missing' ? live : {...live, o: {...(live.o || {}), title: '', subtitle: '', source: '', legend: 'none'}});
+        const live = await resolveLive(spec, {share: true}), full = drawSpec(live), bare = drawSpec(live.kind === '_missing' ? live : {...live, o: {...(live.o || {}), title: '', subtitle: '', source: '', legend: 'none'}});
         const table = () => { const kind = R().KINDS[live.kind]; if (!kind) return ''; return kind.grids.map(g => { const cols = gridCols(g, live), rows = live[g.key] || []; return rows.length ? `<table><caption>${esc(g.label)}</caption><thead><tr>${cols.map(c => `<th>${esc(c.label)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${esc(r[c.k] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody></table>` : ''; }).join(''); };
         UI.openPrintDialog({title: name || 'Diagramme', key: 'diagramme', zone: 'Diagramme', photos: false, margin: 12, orientation: 'landscape',
             options: [{key: 'legend', label: 'Titre et légende', checked: true}, {key: 'data', label: 'Tableau des données dessous', checked: false},
@@ -132,10 +134,10 @@
     }
     async function exportAs(fmt, name, spec, o = {}) {
         if (R().KINDS[spec.kind]?.logExport) post('access_note', {what: 'map_export', kind: spec.kind, format: fmt}).catch(() => {}); // 📜 Qui a vu quoi : une carte exportée (lib/verrou.php)
-        const svg = drawSpec(await resolveLive(spec));
+        const svg = drawSpec(await resolveLive(spec, {share: true})); // ce qui sort de l'app : figé, sans les vivants
         if (fmt === 'svg') return download(new Blob([svg], {type: 'image/svg+xml'}), o.filename || fileName(name) + '.svg');
         if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec.live?.follow ? await resolveLive(spec) : spec)], {type: 'text/csv;charset=utf-8'}), o.filename || fileName(name) + '.csv');
-        if (fmt === 'json') return download(new Blob([JSON.stringify({lcnda_diagram: 1, name, kind: spec.kind, spec}, null, 1)], {type: 'application/json'}), o.filename || fileName(name) + '.diagramme.json');
+        if (fmt === 'json') return download(new Blob([JSON.stringify({lcnda_diagram: 1, name, kind: spec.kind, spec: spec.live?.data && ext.diagramData ? await ext.diagramData.frozen(spec) : spec}, null, 1)], {type: 'application/json'}), o.filename || fileName(name) + '.diagramme.json');
         if (fmt === 'print') return printSpec(name, spec); // L1 : la fenêtre « Imprimer » commune
         const c = await svgToCanvas(svg, Math.max(0.5, Math.min(6, (Number(o.quality) || 192) / 96)), fmt === 'jpg' ? '#ffffff' : '');
         if (fmt === 'copy') { try { const b = await new Promise(r => c.toBlob(r, 'image/png')); await navigator.clipboard.write([new ClipboardItem({'image/png': b})]); toast('Image copiée : colle-la où tu veux (⌘V).'); } catch (_) { toast('Copie impossible ici : utilise « Image PNG ».', 'error'); } return; }
@@ -148,7 +150,7 @@
         const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return exportAs('png', name, getSpec()).catch(e => toast(e.message, 'error'));
         const run = fmt => o => exportAs(fmt, name, getSpec(), o);
         UI.openExportDialog({title: name || 'Diagramme', defaultName: fileName(name), quality: 192, saveCopy: !!A().importMediaFile,
-            preview: async () => { const box = document.createElement('div'); box.className = 'h-dg-svg'; box.innerHTML = drawSpec(await resolveLive(getSpec())); return box; },
+            preview: async () => { const box = document.createElement('div'); box.className = 'h-dg-svg'; box.innerHTML = drawSpec(await resolveLive(getSpec(), {share: true})); return box; },
             formats: [{id: 'png', run: run('png')}, {id: 'jpg', run: run('jpg')}, {id: 'svg', hint: 'net à toutes les tailles', run: run('svg')},
                 {id: 'pdf', hint: i18n('par l’impression : « Enregistrer en PDF »'), ext: '', quality: false, run: run('print')}, {id: 'print', quality: false, run: run('print')},
                 {id: 'csv', label: '📄 CSV', hint: 'les chiffres, pour un tableur', ext: 'csv', quality: false, run: run('csv')},
@@ -280,21 +282,22 @@
                 else all.forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });
                 dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 DIAGRAMMES</span><h2>${esc(title)}</h2><p class="muted">Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app).</p></div><span>${ext.openDiagramKindsEditor ? '<button type="button" class="button small secondary" data-kinds-cfg title="Ordre, types montrés ou cachés, groupes à toi">⚙️ Ranger les types</button>' : ''}<button type="button" class="icon-button" data-close>×</button></span></div>
                 ${Object.entries(groups).map(([g, items]) => `<h4>${esc(g)}</h4><div class="h-dg-tiles">${items.map(([t, i]) => `<button type="button" class="h-dg-tile ${current === t.kind && !t.o && !t.preset ? 'is-current' : ''}" data-tpl="${i}"${R().KINDS[t.kind]?.help && !t.o && !t.preset ? ` title="${esc(R().KINDS[t.kind].help)}"` : ''}><span class="h-dg-mini">${R().svg({...presetSpec(t), o: {...presetSpec(t).o, title: '', subtitle: '', source: '', legend: 'none', scale: 1.6}}, 480)}</span><span>${esc(t.icon)} ${esc(t.label)}</span></button>`).join('')}</div>`).join('')}`;
+                if (ext.diagramData && !current) dlg.querySelector('.h-dg-galhead')?.insertAdjacentHTML('afterend', ext.diagramData.galleryTileHtml()); // 📊 Partir des données : une tuile qui ouvre le même écran (heritage-diagram-donnees.js)
                 if (ext.diagramAssistant) { dlg.querySelector('.h-dg-galhead')?.insertAdjacentHTML('afterend', ext.diagramAssistant.html()); ext.diagramAssistant.bind(dlg, pickd => done(pickd)); } // 💬 « Je veux représenter… » (heritage-diagram-assistant.js)
                 dlg.insertAdjacentHTML('beforeend', '<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Fermer</button></div>'); // K6 : le bas de fenêtre (K3 : « Fermer » seul, rien à valider)
             };
             paint();
             document.body.appendChild(dlg);
             const done = v => { dlg.close(); dlg.remove(); resolve(v); };
-            dlg.addEventListener('click', e => { if (e.target.closest('[data-close]')) return done(null); if (e.target.closest('[data-kinds-cfg]')) return ext.openDiagramKindsEditor({onSave: paint}); const b = e.target.closest('[data-tpl]'); if (b) done(TEMPLATES()[Number(b.dataset.tpl)]); });
+            dlg.addEventListener('click', e => { if (e.target.closest('[data-close]')) return done(null); if (e.target.closest('[data-kinds-cfg]')) return ext.openDiagramKindsEditor({onSave: paint}); if (e.target.closest('[data-dg-fromdata]')) return done({kind: 'stacked', fromData: true}); const b = e.target.closest('[data-tpl]'); if (b) done(TEMPLATES()[Number(b.dataset.tpl)]); });
             dlg.addEventListener('cancel', e => { e.preventDefault(); done(null); });
             dlg.showModal();
         });
     }
 
     /* ─── L'éditeur ─── */
-    async function openEditor(id = null, {link = null, kind = null, onSave = null, onClose = null, spec: given = null, name: givenName = ''} = {}) {
-        let rec;
+    async function openEditor(id = null, {link = null, kind = null, onSave = null, onClose = null, spec: given = null, name: givenName = '', data: startData0 = null} = {}) {
+        let rec, startData = startData0; // data : {src: 'list'|'ask', list?, ask?} → l'onglet « 📊 Partir des données » déjà sur cette source (Listes → « 📊 Faire un diagramme »)
         if (!id && given && R().KINDS[given.kind]) rec = {id: 0, name: givenName || given.o?.title || R().KINDS[given.kind].label, spec: clone(given), links: link ? [link] : []}; // données déjà prêtes (statistique, import)
         else if (id) { const d = await get(id); if (!d) return toast('Diagramme introuvable.', 'error');
             // 📈 un de mes graphiques posé ici : on le modifie dans l'Éditeur de graphiques (il se met à jour partout)
@@ -302,17 +305,18 @@
             rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
         else {
             const t = kind ? {kind} : await chooseType(); if (!t) return null;
+            if (t.fromData) startData = {src: 'list'};
             const spec = t.spec ? {o: {}, ...clone(t.spec)} : presetSpec(t); // 💬 l'assistant donne un diagramme tout fait
             rec = {id: 0, name: spec.o.title || R().KINDS[t.kind].label, spec, links: link ? [link] : []};
         }
-        let spec = rec.spec, tab = 'data', dirty = !rec.id, timer = 0;
+        let spec = rec.spec, tab = startData ? 'app' : 'data', dirty = !rec.id, timer = 0;
         const shownRows = {}; // C6 : combien de lignes chaque tableau montre (« Voir les suivantes », « Tout voir »)
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-dlg'; dlg.dataset.ownClose = '1';
         const kindOf = () => R().KINDS[spec.kind] || R().KINDS.columns;
         dlg.innerHTML = `<div class="h-dg-shell">
             <header class="h-dg-top"><span class="ui-topbar-icon" aria-hidden="true">📊</span><input class="h-dg-name" data-dg-name value="${esc(rec.name)}" maxlength="200" aria-label="Nom du diagramme"><button type="button" class="button small secondary" data-dg-type title="Changer de type de diagramme"></button>
                 <span class="h-dg-spacer"></span><span class="ui-status" data-ui-status></span><button type="button" class="button small secondary" data-dg-expdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter ▾</button><button type="button" class="button small" data-dg-save data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button><button type="button" class="icon-button" data-dg-close title="Fermer" aria-label="Fermer">×</button></header>
-            <div class="h-dg-body"><aside class="h-dg-side"><nav class="segmented h-dg-tabs"><button type="button" data-dg-tab="data">Données</button><button type="button" data-dg-tab="opts">Réglages</button><button type="button" data-dg-tab="perso" title="Style, annotations, lignes de repère, petits multiples, lecture dans le temps">⚙️ Personnaliser</button><button type="button" data-dg-tab="app">Depuis l’app</button><button type="button" data-dg-tab="links">Relier</button></nav><div class="h-dg-pane"></div></aside>
+            <div class="h-dg-body"><aside class="h-dg-side"><nav class="segmented h-dg-tabs"><button type="button" data-dg-tab="data">Données</button><button type="button" data-dg-tab="opts">Réglages</button><button type="button" data-dg-tab="perso" title="Style, annotations, lignes de repère, petits multiples, lecture dans le temps">⚙️ Personnaliser</button><button type="button" data-dg-tab="app" title="Mon arbre, une liste de données ou une question">📊 Partir des données</button><button type="button" data-dg-tab="links">Relier</button></nav><div class="h-dg-pane"></div></aside>
                 <main class="h-dg-preview"><p class="h-dg-sum" data-dg-sum aria-live="polite" hidden></p><div class="h-dg-svg" data-dg-preview></div></main></div></div>`;
         document.body.appendChild(dlg);
         const pane = dlg.querySelector('.h-dg-pane'), prev = dlg.querySelector('[data-dg-preview]');
@@ -323,6 +327,8 @@
         // kind.dataPane(onglet, api) : une sorte qui enrichit son tableau (champ « Zone » des cartes) ; api.changed() : spec modifié à la main, redessiner
         const kindApi = {spec: () => spec, redraw: () => draw(), set: patch => { spec.o = {...(spec.o || {}), ...patch}; later(); if (tab === 'opts') { const y = pane.scrollTop; paint(); pane.scrollTop = y; } }, changed: () => later()};
         const later = () => { dirty = true; clearTimeout(timer); timer = setTimeout(draw, 90); };
+        // 📊 Partir des données (heritage-diagram-donnees.js) : la source, les filtres et les champs changent le diagramme tout de suite
+        const dataApi = {spec: () => spec, setSpec: s => { spec = s; later(); }, setSum: t => setSum(t), dlg, id: () => rec.id, goTab: t => { tab = t; paint(); }, start: () => { const v = startData; startData = null; return v; }};
         const paint = () => {
             dlg.querySelector('[data-dg-type]').textContent = `${kindOf().icon} ${kindOf().label} ▾`;
             dlg.querySelectorAll('[data-dg-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.dgTab === tab));
@@ -332,7 +338,7 @@
             else if (tab === 'perso') { pane.innerHTML = ''; if (ext.diagramPerso) ext.diagramPerso.pane(pane, kindApi); else pane.innerHTML = '<p class="muted">Personnaliser n’est pas chargé.</p>'; }
             else pane.innerHTML = linksHtml();
             showSum(tab === 'app' ? lastSum : spec.live?.sum || appSum); // la phrase du réglage au-dessus de l'aperçu (options de « Depuis l'app ») : celle des chiffres pris, tant qu'on ne les retouche pas
-            if (tab === 'app') bindAppPane(); if (tab === 'links') bindLinks();
+            if (tab === 'app') { bindAppPane(); ext.diagramData?.mount(pane, dataApi); } if (tab === 'links') bindLinks();
             if (tab === 'data') { sortBars(); kindOf().dataPane?.(pane, kindApi); }
         };
         // C6 : « N lignes · Trier : [menu] » au-dessus de chaque tableau : range les lignes (le dessin suit)

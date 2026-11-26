@@ -132,7 +132,7 @@
         const pid = String(ctx.project.id);
         let list = listFor(pid) || [{id: uid(), type: 'words', cfg: {}}, {id: uid(), type: 'todo', cfg: {}}, {id: uid(), type: 'agenda', cfg: {}}];
         const save = () => saveList(pid, list);
-        const mount = (b, w, edit = false) => ext.atelierData?.mountWidget(b, w, {save, edit}); // 📊 Données téléchargées
+        const mount = (b, w, edit = false) => ext.atelierData?.mountWidget(b, w, {save, edit, duplicate: cfg => { list.splice(list.indexOf(w) + 1, 0, {id: uid(), type: 'donnees', title: w.title || '', cfg: {...cfg}}); save(); draw(); }}); // 📊 Données téléchargées (⧉ Dupliquer)
         const draw = async () => {
             box.innerHTML = `<div class="h-atw-head"><h4>🧩 Mes widgets</h4><button type="button" class="button small secondary" data-atw-add>＋ Widget</button></div><div class="h-atw-grid">${list.map((w, k) => `<section class="h-atw ${['dash', 'agenda', 'donnees'].includes(w.type) ? 'is-wide' : ''}" data-atw="${w.id}">
                 <header><b>${TYPES[w.type]?.[0] || '•'} ${esc(w.title || TYPES[w.type]?.[1] || '')}</b><span class="h-rb-tools"><button type="button" class="icon-button" data-atw-move="-1" ${k ? '' : 'disabled'} title="Avancer">←</button><button type="button" class="icon-button" data-atw-move="1" ${k < list.length - 1 ? '' : 'disabled'} title="Reculer">→</button><button type="button" class="icon-button" data-atw-cfg title="Réglages">⚙</button><button type="button" class="icon-button danger" data-atw-del title="Retirer">✕</button></span></header>

@@ -107,6 +107,56 @@ const FAKE = () => {
             await overview(); await p.waitForSelector(`${W} .atd-big`, {timeout: 20000});
             assert.match(await p.textContent(`${W} .atd-big`), /^3/); assert.ok(await p.$(`${W} .atd-bars span`));
         });
+        const setCfg = cfg => p.evaluate(([x, c]) => { const all = JSON.parse(localStorage.getItem('genealogie-atelier-widgets')); all[x].find(y => y.type === 'donnees').cfg = c; localStorage.setItem('genealogie-atelier-widgets', JSON.stringify(all)); }, [String(pid), cfg]);
+        await t('⚙️ les formes : tableau (colonnes choisies), cartes, frise dans l’ordre des années, courbe, ce jour-là, défilant', async () => {
+            await setCfg({src: 'test_caisses', view: 'table', cols: ['name', 'lieu'], n: 5}); await overview(); await p.waitForSelector(`${W} .atd-table`, {timeout: 20000});
+            assert.deepStrictEqual(await p.$$eval(`${W} .atd-table th`, a => a.map(x => x.textContent.trim())), ['Course', 'Lieu', 'Source']);
+            assert.ok(await p.$(`${W} .atd-table a.atd-src`), '↗ source dans le tableau');
+            await setCfg({src: 'test_caisses', view: 'cards'}); await overview(); await p.waitForSelector(`${W} .atd-card`, {timeout: 20000});
+            assert.strictEqual(await p.$$eval(`${W} .atd-card`, a => a.length), 3);
+            await setCfg({src: 'test_caisses', view: 'timeline'}); await overview(); await p.waitForSelector(`${W} .atd-time li`, {timeout: 20000});
+            assert.deepStrictEqual(await p.$$eval(`${W} .atd-time li > span`, a => a.map(x => x.textContent)), ['1777', '1777', '1790']);
+            await setCfg({src: 'test_caisses', view: 'chart', chart: 'line'}); await overview(); await p.waitForSelector(`${W} svg.atd-line`, {timeout: 20000});
+            await setCfg({src: 'test_caisses', view: 'day'}); await overview(); await p.waitForSelector(`${W} .atd-daylab`, {timeout: 20000});
+            assert.match(await p.textContent(`${W} .atd-daylab`), /Ce jour-là|La ligne du jour/);
+            await setCfg({src: 'test_caisses', view: 'ticker'}); await overview(); await p.waitForSelector(`${W} [data-atd-ticker]`, {timeout: 20000});
+            const vis = () => p.$$eval(`${W} [data-atd-ticker] li`, a => a.map(x => !x.hidden));
+            assert.deepStrictEqual(await vis(), [true, false, false]); await p.click(`${W} [data-atd-tick="1"]`); assert.deepStrictEqual(await vis(), [false, true, false]);
+        });
+        await t('⚙️ Personnaliser (replié, une section à la fois) : tri décroissant, regroupé par décennie, « + N autres », titre ; gardé après rechargement', async () => {
+            await setCfg({src: 'test_caisses', view: 'list', n: 2}); await overview(); await p.waitForSelector(`${W} .atd-rows li`, {timeout: 20000});
+            assert.match(await p.textContent(`${W} .atd-more`), /\+ 1 autres/);
+            await p.click('.h-atw-box [data-atw]:has(.atd) [data-atw-cfg]'); const S = `${W}-cfg`; await p.waitForSelector(`${S} [data-atd-perso]`);
+            assert.strictEqual(await p.$eval(`${S} [data-atd-perso]`, x => x.open), false, 'replié au départ');
+            await p.click(`${S} [data-atd-perso] > summary`);
+            await p.click(`${S} [data-atd-sec="look"] > summary`); await p.click(`${S} [data-atd-sec="show"] > summary`); await sleep(100);
+            assert.deepStrictEqual(await p.$$eval(`${S} [data-atd-sec]`, a => a.filter(x => x.open).map(x => x.dataset.atdSec)), ['show'], 'une section ouverte à la fois');
+            await p.selectOption(`${S} [data-atd-p="sort"]`, 'd'); await p.selectOption(`${S} [data-atd-p="dir"]`, 'desc'); await p.selectOption(`${S} [data-atd-p="group"]`, 'decade');
+            await p.click(`${S} [data-atd-sec="look"] > summary`); await p.fill(`${S} [data-atd-p="title"]`, 'Mes caisses'); await p.selectOption(`${S} [data-atd-p="accent"]`, 'green');
+            await p.click(`${S} [data-atd-ok]`); await p.waitForSelector(`${W} .atd-gh`, {timeout: 20000});
+            assert.deepStrictEqual(await p.$$eval(`${W} .atd-gh`, a => a.map(x => x.textContent.replace(/\s*\d+$/, '').trim())), ['1790–1799', '1770–1779']);
+            assert.match(await p.textContent(`${W} .atd-head b`), /Mes caisses/);
+            await p.reload(); await p.waitForFunction(() => window.LCNDA_EXT?.atelierData, null, {timeout: 60000}); await overview(); await p.waitForSelector(`${W} .atd-gh`, {timeout: 20000});
+            const w = await p.evaluate(x => JSON.parse(localStorage.getItem('genealogie-atelier-widgets'))[x].find(y => y.type === 'donnees'), String(pid));
+            assert.deepStrictEqual([w.cfg.sort, w.cfg.dir, w.cfg.group, w.cfg.title, w.cfg.accent], ['d', 'desc', 'decade', 'Mes caisses', 'green']);
+        });
+        await t('⭐ Enregistrer comme modèle : la forme seulement (sans la liste ni les filtres) ; ↺ Remettre comme au départ ; ↶', async () => {
+            await p.click('.h-atw-box [data-atw]:has(.atd) [data-atw-cfg]'); const S = `${W}-cfg`; await p.waitForSelector(`${S} [data-atd-perso]`);
+            await p.click(`${S} [data-atd-perso] > summary`); await p.click(`${S} [data-atd-sec="tpl"] > summary`);
+            await p.fill(`${S} [data-atd-tplname]`, 'Groupé vert'); await p.click(`${S} [data-atd-tplsave]`); await sleep(300);
+            const tpl = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-donnees-widget-modeles')));
+            assert.strictEqual(tpl[0].name, 'Groupé vert'); assert.strictEqual(tpl[0].fmt.group, 'decade');
+            assert.ok(!('src' in tpl[0].fmt) && !('from' in tpl[0].fmt) && !('place' in tpl[0].fmt) && !('cols' in tpl[0].fmt), 'pas de données : ' + Object.keys(tpl[0].fmt).join(','));
+            await p.click(`${S} [data-atd-perso] > summary`).catch(() => {}); if (!(await p.$eval(`${S} [data-atd-perso]`, x => x.open))) await p.click(`${S} [data-atd-perso] > summary`);
+            if (!(await p.$eval(`${S} [data-atd-sec="tpl"]`, x => x.open))) await p.click(`${S} [data-atd-sec="tpl"] > summary`);
+            await p.click(`${S} [data-atd-reset]`); await sleep(200);
+            assert.strictEqual(await p.$eval(`${S} [data-atd-p="group"]`, x => x.value), '', 'remis à zéro');
+            assert.strictEqual(await p.$eval(`${S} .atd-chosen`, x => /Courses de caisses/.test(x.textContent)), true, 'la liste reste');
+            await p.click(`${S} [data-atd-ok]`); await p.waitForSelector(`${W} .atd-rows li`, {timeout: 20000});
+            assert.ok(!(await p.$(`${W} .atd-gh`)), 'plus regroupé');
+            const u = p.locator('.toast button', {hasText: '↶'}).last(); await u.waitFor({timeout: 8000}); await u.click(); await p.waitForSelector(`${W} .atd-gh`, {timeout: 20000});
+            await setCfg({src: 'test_caisses', from: '1770', to: '1780', where: 'family', km: 30}); // comme avant, pour la suite
+        });
         await t('✕ Retirer → ↶ Annuler le remet', async () => {
             const n0 = await p.$$eval('.h-atw-box [data-atw]', a => a.length);
             await p.click('.h-atw-box [data-atw]:has(.atd) [data-atw-del]'); await sleep(300);

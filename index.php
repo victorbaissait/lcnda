@@ -1250,7 +1250,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=122"></script>
+<script src="assets/js/app-i18n.js?v=123"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
@@ -1350,7 +1350,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-editeurs.js?v=4" defer></script>
 <script src="assets/js/app-versions.js?v=5" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=17" defer></script>
+<script src="assets/js/app-pages.js?v=18" defer></script>
 <script src="assets/js/app-access.js?v=20" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=15" defer></script>
@@ -1385,7 +1385,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=4" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=7" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=9" defer></script>
-<script src="assets/js/heritage-links.js?v=26" defer></script>
+<script src="assets/js/heritage-links.js?v=27" defer></script>
 <script src="assets/js/heritage-more.js?v=413" defer></script>
 <script src="assets/js/heritage-organiser-nouveau.js?v=1" defer></script>
 <script src="assets/js/heritage-controle.js?v=12" defer></script>
@@ -1441,7 +1441,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=29" defer></script>
 <script src="assets/js/heritage-board-shapelib.js?v=2" defer></script>
 <script src="assets/js/heritage-boards.js?v=55" defer></script>
-<script src="assets/js/heritage-dnd.js?v=15" defer></script>
+<script src="assets/js/heritage-dnd.js?v=16" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
 <script src="assets/js/heritage-studio.js?v=120" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=2" defer></script>
@@ -1738,7 +1738,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
-<script src="assets/js/heritage-tout-sur.js?v=24" defer></script>
+<script src="assets/js/heritage-tout-sur.js?v=25" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-territoires.js?v=2" defer></script>
 <script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
@@ -1779,7 +1779,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-imports-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-photos-import.js?v=2" defer></script>
 <script src="assets/js/app-apparence.js?v=28" defer></script>
-<script src="assets/js/app-designs.js?v=28" defer></script>
+<script src="assets/js/app-designs.js?v=29" defer></script>
 <script src="assets/js/app-sections.js?v=11" defer></script>
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=2" defer></script>
