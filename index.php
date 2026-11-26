@@ -1263,7 +1263,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=608" defer></script>
+<script src="assets/js/app.js?v=609" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1358,7 +1358,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-editeurs.js?v=4" defer></script>
 <script src="assets/js/app-versions.js?v=5" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=19" defer></script>
+<script src="assets/js/app-pages.js?v=20" defer></script>
 <script src="assets/js/app-access.js?v=20" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=17" defer></script>
@@ -1492,7 +1492,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector-tree.js?v=16" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=13" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=11" defer></script>
-<script src="assets/js/heritage-research-gaps.js?v=13" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=14" defer></script>
 <script src="assets/js/app-lecture-auto.js?v=3" defer></script>
 <script src="assets/js/app-socface-core.js?v=3" defer></script>
 <script src="assets/js/heritage-socface.js?v=9" defer></script>

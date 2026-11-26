@@ -68,7 +68,8 @@ const PANNE = {status: 500, contentType: 'application/json', body: JSON.stringif
         await t('📋 vue d’ensemble des listes : la pastille « ⚠ Vérification impossible », pas « à installer »', async () => {
             await p.route(/action=ld_status/, r => r.fulfill(PANNE)); await forget();
             // la vue « par groupes » (Réglages des listes) : les cartes de toutes les listes, avec leur pastille (app-listes-donnees.js : renderOverview)
-            await p.evaluate(() => { localStorage.setItem('genealogie-listes-vue', 'groupes'); const A = window.LCNDA_APP; A.state.listType = 'data'; A.setModule('listes'); window.LCNDA_EXT.dataListsEngine.overview?.(A.state.workspaceToken); });
+            await p.evaluate(() => { localStorage.setItem('genealogie-listes-vue', 'groupes'); const A = window.LCNDA_APP; A.state.listType = 'data'; A.setModule('listes'); }); await idle(); await sleep(1000);
+            await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.overview(window.LCNDA_APP.state.workspaceToken));
             await p.waitForFunction(() => /installer|Vérification/.test(document.querySelector('[data-ld-state="hist_seismes"]')?.textContent || ''), null, {timeout: 20000}).catch(() => {});
             const tag = await p.evaluate(() => document.querySelector('[data-ld-state="hist_seismes"]')?.textContent ?? null);
             assert.ok(tag !== null, 'la pastille de hist_seismes'); assert.match(tag, /Vérification impossible/, tag); assert.doesNotMatch(tag, /à installer/, tag);
@@ -79,7 +80,8 @@ const PANNE = {status: 500, contentType: 'application/json', body: JSON.stringif
             await p.route(/action=gov_status/, r => r.fulfill(PANNE));
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'donnees_installees'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-dmaj-panel] [data-dmaj-row]', {timeout: 30000});
-            assert.strictEqual(await p.getAttribute('[data-dmaj-row="gov:gov"]', 'data-dmaj-state'), 'error');
+            await p.waitForFunction(() => document.querySelector('[data-dmaj-row="gov:gov"]')?.dataset.dmajState === 'error', null, {timeout: 30000})
+                .catch(async () => { throw new Error('gov:gov → ' + await p.getAttribute('[data-dmaj-row="gov:gov"]', 'data-dmaj-state')); });
             const row = await p.textContent('[data-dmaj-row="gov:gov"]'); assert.match(row, /Vérification impossible/, row); assert.doesNotMatch(row, /Télécharger/, row);
             assert.match(await p.getAttribute('[data-dmaj-row="gov:gov"] .dmaj-state', 'title') || '', /panne \(essai\)/);
             assert.strictEqual(await p.getAttribute('[data-dmaj-row="hist:histoire"]', 'data-dmaj-state'), 'missing', 'les autres familles : comme avant');

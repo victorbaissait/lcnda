@@ -163,7 +163,10 @@
         const vis = items.filter(shown);
         const primary = vis.find(isPrimary) || null;
         const reset = vis.find(isReset) || null;
-        const others = vis.filter(x => x !== primary && x !== reset);
+        // 🔎 recherches : « 🗺 Carte » et « ⤓ Exporter » d'abord (réglage genealogie-recherche-boutons : 'outils' par défaut, 'ecran' = les boutons de l'écran d'abord)
+        const toolsFirst = (() => { try { return localStorage.getItem('genealogie-recherche-boutons') !== 'ecran'; } catch (_) { return true; } })();
+        const rankOf = x => (toolsFirst && x.matches?.('[data-rk-map-btn], [data-rp-export]') ? 0 : 1);
+        const others = vis.filter(x => x !== primary && x !== reset).map((x, i) => [x, i]).sort((a, b) => rankOf(a[0]) - rankOf(b[0]) || a[1] - b[1]).map(a => a[0]);
         const front = [reset, ...others].filter(Boolean).slice(0, 2);
         const over = items.filter(x => x !== primary && !front.includes(x));
         if (reset && !reset.children.length && !same(reset.textContent.trim(), '↺ Remettre comme au départ')) reset.textContent = '↺ Remettre comme au départ';
