@@ -2,7 +2,8 @@
 # refaire le sommaire assets/data/manifest.json (Réglages → 🗂 Données), et les enregistrer dans la branche lancée.
 #   · osm       calvaires, croix, oratoires, lavoirs, fontaines, puits, fours, pigeonniers, bornes, octrois, douanes, cabanes et
 #               drailles, temples et synagogues — OpenStreetMap (ODbL 1.0, « © les contributeurs d’OpenStreetMap »).
-#               Le service Overpass n'est pas joignable depuis l'atelier de développement : la fabrication se fait ici.
+#               ⚠ D'abord .github/workflows/osm-france.yml (extrait Geofabrik + osmium, sans Overpass, quoi = b) ; ici, « osm »
+#               questionne le service Overpass (souvent en panne pour toute la France) et ne reste qu'en secours.
 #   · wikidata  les mêmes sujets et les cépages — Wikidata (CC0 1.0)
 # Seulement des questions polies (une à la fois, pause entre deux), User-Agent du script, rien de personnel.
 #
@@ -14,9 +15,9 @@ on:
   workflow_dispatch:
     inputs:
       quoi:
-        description: 'Quoi refaire : osm, wikidata (séparés par des virgules)'
+        description: 'Quoi refaire : wikidata, osm (Overpass, secours : voir osm-france.yml) (séparés par des virgules)'
         type: string
-        default: 'osm'
+        default: 'wikidata'
   push:
     branches: ['claude/**']
     paths: ['.github/workflows/telech-b.yml']

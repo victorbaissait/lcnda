@@ -389,7 +389,7 @@
     const used = () => readJ('genealogie-donnees-ouvertes', {}) || {};
     function neverUsed(it) {
         const u = used(), pre = `${it.f.id}_`, keep = new Set([...(P().favs?.() || []).map(x => x.id), ...(P().recents?.() || []).map(x => x.id), ...(P().savedQs?.() || []).map(x => x.list).filter(Boolean)]);
-        return !Object.keys(u).some(id => id === it.f.id || id.startsWith(pre)) && ![...keep].some(id => id === it.f.id || String(id).startsWith(pre));
+        return !Object.keys(u).some(id => id !== '__since' && (id === it.f.id || id.startsWith(pre))) && ![...keep].some(id => id === it.f.id || String(id).startsWith(pre));
     }
     async function diskData() {
         const st = await M().status?.().catch(() => null), fam = await famStatus();
@@ -398,8 +398,9 @@
         const byTh = new Map(); fam.forEach(x => byTh.set(x.theme, (byTh.get(x.theme) || 0) + x.size));
         const shipBy = new Map(); (st?.packs || []).forEach(p => { const d = (E().list?.() || []).find(x => [].concat(x.packs || x.pack || []).includes(p.id) || String(x.id || '').toLowerCase().replace(/_/g, '-') === p.id); const t = d ? P().themeById?.(TH()?.themeOf?.(d)) : null; const k = t ? `${t.icon} ${T(t.label)}` : T('Livrées avec l’app'); shipBy.set(k, (shipBy.get(k) || 0) + (Number(p.size) || 0)); });
         shipBy.forEach((v, k) => byTh.set(k, (byTh.get(k) || 0) + v));
-        const sugg = fam.filter(x => x.removable && neverUsed(x)).sort((a, b) => b.size - a.size);
-        return {total, free: st?.free ?? null, bars: [...byTh.entries()].sort((a, b) => b[1] - a[1]), sugg};
+        const since = Number(used().__since) || 0, early = !since || Date.now() - since < 14 * 864e5; // les listes ouvertes ne sont notées que depuis ce module : pas de « jamais ouvert » avant deux semaines
+        const sugg = early ? [] : fam.filter(x => x.removable && neverUsed(x)).sort((a, b) => b.size - a.size);
+        return {total, free: st?.free ?? null, bars: [...byTh.entries()].sort((a, b) => b[1] - a[1]), sugg, early};
     }
     async function diskSummary() {
         const x = await diskData(); if (!x.total) return null;
@@ -411,7 +412,7 @@
         return `<p><b>${esc(T('{s} de données sur ce disque', {s: fmtSize(x.total)}))}</b>${x.free != null ? ` · <span class="muted">${esc(T('libre : {s}', {s: fmtSize(x.free)}))}</span>` : ''}</p>
             <div class="dp-bars">${[...top, ...(rest ? [[T('{n} autres', {n: x.bars.length - 6}), rest]] : [])].map(([k, v]) => `<div class="dp-barl"><span>${esc(T(k))}</span><span class="dp-tk"><i style="width:${Math.max(1, Math.round(v / max * 100))}%"></i></span><span class="dp-v">${esc(fmtSize(v))}</span></div>`).join('')}</div>
             <div class="dp-subh">${esc(T('Faire de la place · jamais ouverts'))}</div>
-            ${x.sugg.length ? `<ul class="dp-sugg">${x.sugg.map(s => `<li data-dp-sg="${esc(`${s.f.id}:${s.k}`)}"><span><b>${esc(T(s.name))}</b><small>${esc(T('{t} · jamais ouvert dans Listes', {t: T(s.theme)}))}</small></span>${ro() ? '' : `<button type="button" class="button small secondary" data-dp-free="${esc(`${s.f.id}:${s.k}`)}">${esc(T('Retirer · {s}', {s: fmtSize(s.size)}))}</button>`}</li>`).join('')}</ul>` : `<p class="muted">${esc(T('Rien à proposer : tout ce qui est installé a déjà servi.'))}</p>`}
+            ${x.early ? `<p class="muted">${esc(T('Les suggestions viendront après deux semaines d’usage : l’app note seulement depuis peu les listes que tu ouvres.'))}</p>` : x.sugg.length ? `<ul class="dp-sugg">${x.sugg.map(s => `<li data-dp-sg="${esc(`${s.f.id}:${s.k}`)}"><span><b>${esc(T(s.name))}</b><small>${esc(T('{t} · jamais ouvert dans Listes', {t: T(s.theme)}))}</small></span>${ro() ? '' : `<button type="button" class="button small secondary" data-dp-free="${esc(`${s.f.id}:${s.k}`)}">${esc(T('Retirer · {s}', {s: fmtSize(s.size)}))}</button>`}</li>`).join('')}</ul>` : `<p class="muted">${esc(T('Rien à proposer : tout ce qui est installé a déjà servi.'))}</p>`}
             <p class="muted small">${esc(T('Jamais un pack favori, récent ou utilisé par une question gardée. Retiré = réinstallable d’un clic ; « ↶ Annuler » tout de suite.'))}</p>`;
     }
     function bindDisk(box, again) {

@@ -118,7 +118,8 @@ pour un appareil invité (`body.is-kiosk`, `LCNDA_GUEST`). Il n'y a donc pas de 
   public domain under Creative Commons Zero ») ; OpenStreetMap ODbL 1.0 (https://www.openstreetmap.org/copyright, page injoignable
   depuis l'atelier ce jour-là ; licence connue et déjà citée au lot B), attribution affichée.
 - **Construit** : `te-libertes.json.gz` — Wikidata n'en connaît que **2** en France (Bayeux, Sainte-Marie-aux-Mines), sans année.
-  Overpass refusé par le réseau de l'atelier : `build_libertes.py --osm` les cherche sur GitHub (nom « Arbre de la Liberté »,
+  Overpass refusé par le réseau de l'atelier : `build_libertes.py --osm` les cherche sur GitHub, dans les extraits Geofabrik (voir
+  « OpenStreetMap sans Overpass » plus bas ; Overpass en secours) (nom « Arbre de la Liberté »,
   année tirée de `start_date` ou du nom). Sans `--osm`, le script garde les arbres OSM déjà fabriqués.
 - **Où** : fiche (« En 1848, à 18 ans, on planta un arbre de la Liberté près de chez lui… », dès qu’une année est connue, à 3 km d’un de ses lieux de cette époque — à 25 ans près, ou sans date), village,
   monographie, Listes, Cartes.
@@ -148,8 +149,42 @@ pour un appareil invité (`body.is-kiosk`, `LCNDA_GUEST`). Il n'y a donc pas de 
   `build_inscriptions.py` refuse une adresse de fichier qui ne serait pas celle du dépôt Zenodo.
 
 ## Ce qui reste à faire
-- Lancer une fois Actions → « Ciel, climat et mémoire (lot E) » avec `quoi = tout` (ou `fossiles` puis `libertes`) : il fabrique
-  `te-fossiles` (PBDB) et ajoute les arbres de la Liberté d'OpenStreetMap, puis refait `assets/data/manifest.json`.
+- Lancer une fois Actions → « Ciel, climat et mémoire (lot E) » avec `quoi = fossiles` : il fabrique `te-fossiles` (PBDB) puis refait
+  `assets/data/manifest.json`. Les arbres de la Liberté d'OpenStreetMap : Actions → « OpenStreetMap France (extrait Geofabrik) »,
+  `quoi = e` (voir plus bas).
 - Hôtes refusés par le réseau de l'atelier pendant le travail : dataservices.gfz-potsdam.de, api.datacite.org, b2find.eudat.eu,
   paleobiodb.org, edh.ub.uni-heidelberg.de, www.imo.net, overpass-api.de, www.openstreetmap.org, inculpes-juin-1848.fr,
   poursuivis-decembre-1851.fr, data.cquest.org ; geoservices.brgm.fr répond « Request Rejected ».
+
+## OpenStreetMap sans Overpass : l'extrait Geofabrik (depuis le 2026-11-26)
+
+Les questions « toute la France » au service public Overpass (overpass-api.de, overpass.kumi.systems) échouaient pendant des heures
+(délais dépassés, 502/504) et chargent un service partagé. Les arbres de la Liberté OpenStreetMap de `te-libertes` se fabriquent maintenant depuis **un extrait téléchargé** :
+
+- **Lancer** : Actions → « OpenStreetMap France (extrait Geofabrik) » (`.github/workflows/osm-france.yml`) → « Run workflow », `quoi = e`
+  (ou `tout` pour les lots B, E, F, G, H d'un coup). Le workflow refait le sommaire `assets/data/manifest.json` et n'enregistre que les
+  fichiers OpenStreetMap des lots (`tb-osm-*`, `te-libertes`, `tf-osm-*`, `tg-osm-*`, `th-osm-*`) et le sommaire.
+- **Comment** : la somme `france-latest.osm.pbf.md5` est lue d'abord ; l'extrait <https://download.geofabrik.de/europe/france-latest.osm.pbf>
+  (~4,5 Go) n'est téléchargé que s'il n'est pas déjà dans le cache GitHub sous cette somme, puis vérifié (`scripts/osm-france/geofabrik.sh`).
+  `osmium-tool` (paquet Ubuntu) le trie en un passage (`osmium tags-filter`, expressions tirées **automatiquement** des filtres Overpass
+  du script : `python3 -I scripts/osm-france/osm_local.py filtres e` ; toujours plus larges que le filtre exact), puis donne aux chemins
+  la position de leurs nœuds (`osmium add-locations-to-ways`, fichier OPL) — `scripts/osm-france/filtrer.sh`. Le script du lot est lancé
+  comme avant, avec `OSM_OPL=<fichier>` : `scripts/osm-france/osm_local.py` applique le filtre exact (mêmes règles qu'Overpass : clé
+  présente, `=`, `~`, `,i`) et rend les objets comme « out center » d'Overpass (centre du rectangle englobant des chemins et relations).
+  **Mêmes lignes, mêmes champs, mêmes fichiers** : l'app ne change pas.
+  Pour ce lot, les extraits **Belgique, Suisse, Luxembourg** de Geofabrik (`europe/belgium`, `europe/switzerland`, `europe/luxembourg`)
+  sont aussi téléchargés (même cache, mêmes sommes MD5), triés et fondus (`osmium merge`), comme l'ancienne question Overpass
+  FR + BE + CH + LU. Commande du script : `OSM_OPL=…/e.opl python3 -I scripts/telech-e/build_libertes.py assets/data --osm`
+  (Wikidata est relu au passage). Dans `telech-e.yml`, `quoi = libertes` (ou `tout`) garde maintenant les arbres OSM déjà fabriqués ;
+  `quoi = libertes-overpass` est le secours par Overpass.
+- **Différences avec Overpass** : l'extrait Geofabrik déborde de quelques kilomètres sur les pays voisins (Overpass s'arrêtait à la
+  frontière) ; une relation n'a de position que si ses membres sont dans l'extrait ; quels territoires d'outre-mer l'extrait « France »
+  contient est à vérifier sur la page de Geofabrik (Overpass prenait toute la zone ISO FR).
+- **Secours** : l'ancien chemin Overpass reste possible (`.github/workflows/telech-e.yml`, voir plus haut), mais n'est plus lancé
+  par défaut.
+- **Licences** : données OpenStreetMap, **ODbL 1.0**, attribution « © les contributeurs d'OpenStreetMap »
+  (<https://www.openstreetmap.org/copyright>, lue pour le lot B le 2026-11-25 ; les champs `licence`/`licence_url` des fichiers ne
+  changent pas). Les extraits Geofabrik sont ces mêmes données OSM, sous la même licence ODbL ; Geofabrik les offre librement et
+  demande de ne pas retélécharger sans raison le même fichier (d'où la somme MD5 et le cache). Les pages de Geofabrik
+  (<https://download.geofabrik.de/>, <https://www.geofabrik.de/data/download.html>) et celle d'OpenStreetMap ont été **refusées par le
+  réseau de l'atelier le 2026-11-26** : conditions **non relues ce jour**, à relire avant le premier lancement.

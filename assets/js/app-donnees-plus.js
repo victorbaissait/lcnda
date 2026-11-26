@@ -121,7 +121,7 @@
     const paintStar = (btn, d) => { if (!btn) return; const f = isFav(d.id); btn.setAttribute('aria-pressed', String(f)); btn.innerHTML = `<span aria-hidden="true">${f ? '⭐' : '☆'}</span> ${esc(T('Favori'))}`; btn.title = T(f ? 'Retirer des favoris' : 'Ajouter aux favoris (avec les filtres du moment)'); };
     function noteOpen(d) {
         if (kiosk()) return;
-        const used = readJ(K_USED, {}) || {}; used[d.id] = Date.now(); writeJ(K_USED, used);
+        const used = readJ(K_USED, {}) || {}; if (!used.__since) used.__since = Date.now(); used[d.id] = Date.now(); writeJ(K_USED, used); // __since : « jamais ouvert » ne veut rien dire avant quelques semaines d'usage
         const r = recents().filter(x => x.id !== d.id); r.unshift({id: d.id, at: Date.now()}); writeJ(K_REC, r.slice(0, 20));
     }
     function openList(id, st) { const d = listById(id); if (!d) return toast(T('Cette liste n’existe plus.'), 'error'); if (st) E().open?.(id, st); else E().openKey?.(E().keyOf(d)); }

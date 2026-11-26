@@ -39,7 +39,8 @@ compte toute requête qui sortirait (fiche d'une personne vivante, mode consulta
   `LicenseShortName`) : 160 fichiers dans la catégorie et ses sous-catégories, gardés seulement s'ils sont « Public domain », CC0 ou
   CC BY(-SA) — on ne copie que le **titre** du fichier et sa licence ; l'image n'est jamais copiée ni chargée (lien « ↗ » sur un clic).
 - **OpenStreetMap** — <https://www.openstreetmap.org/copyright> : ODbL 1.0, « © les contributeurs d'OpenStreetMap ». Page refusée par le
-  réseau de l'atelier ce jour (lue pour le lot B le 2026-11-25, même texte). Les fichiers `th-osm-*` se fabriquent sur GitHub.
+  réseau de l'atelier ce jour (lue pour le lot B le 2026-11-25, même texte). Les fichiers `th-osm-*` se fabriquent sur GitHub, depuis
+  l'extrait Geofabrik de la France (voir plus bas).
 - **Atlas d'Ancien Régime** (Th. Fressin) — déjà livré (`dp-ancien-regime`, lot « Droit et pouvoir ») : généralités CC BY 4.0 (licence
   écrite dans le pack, `https://github.com/t-fressin/atlas-ancien-regime`). Réutilisé, pas recopié.
 - **Communes** (Trudaine) : `assets/data/cc-communes.json.gz`, déjà dans l'app (Licence Ouverte 2.0).
@@ -147,8 +148,9 @@ compte toute requête qui sortirait (fiche d'une personne vivante, mode consulta
 
 ## Fichiers à fabriquer sur GitHub
 
-Lancer une fois Actions → « Places, métiers et rivages (lot H) » avec `quoi = osm` : `th-osm-kiosques`, `th-osm-halles`,
-`th-osm-eclusieres`, `th-osm-traces` (Overpass injoignable depuis l'atelier). Tous les autres packs sont livrés ; `quoi = tout` les refait.
+Lancer une fois Actions → « OpenStreetMap France (extrait Geofabrik) » avec `quoi = h` : `th-osm-kiosques`, `th-osm-halles`,
+`th-osm-eclusieres`, `th-osm-traces` (voir « OpenStreetMap sans Overpass » plus bas). Secours : « Places, métiers et rivages (lot H) »
+avec `quoi = osm` (Overpass). Tous les autres packs sont livrés ; `quoi = tout` les refait (sans OpenStreetMap).
 Avant : Réglages le dit, les listes et couches correspondantes sont vides, sans erreur.
 
 ## Limites
@@ -160,3 +162,35 @@ Avant : Réglages le dit, les listes et couches correspondantes sont vides, sans
   fiche. Les phrases de Wikipédia sont choisies par mot-clé : elles peuvent nommer une ville pour une raison secondaire (« rue Ganterie à
   Rouen ») ; elles sont toujours citées avec leur article.
 - France métropolitaine seulement (les points hors 41-51,5° N, 5,5° O-10° E sont écartés).
+
+## OpenStreetMap sans Overpass : l'extrait Geofabrik (depuis le 2026-11-26)
+
+Les questions « toute la France » au service public Overpass (overpass-api.de, overpass.kumi.systems) échouaient pendant des heures
+(délais dépassés, 502/504) et chargent un service partagé. Les fichiers `th-osm-kiosques`, `th-osm-halles`, `th-osm-eclusieres`, `th-osm-traces` se fabriquent maintenant depuis **un extrait téléchargé** :
+
+- **Lancer** : Actions → « OpenStreetMap France (extrait Geofabrik) » (`.github/workflows/osm-france.yml`) → « Run workflow », `quoi = h`
+  (ou `tout` pour les lots B, E, F, G, H d'un coup). Le workflow refait le sommaire `assets/data/manifest.json` et n'enregistre que les
+  fichiers OpenStreetMap des lots (`tb-osm-*`, `te-libertes`, `tf-osm-*`, `tg-osm-*`, `th-osm-*`) et le sommaire.
+- **Comment** : la somme `france-latest.osm.pbf.md5` est lue d'abord ; l'extrait <https://download.geofabrik.de/europe/france-latest.osm.pbf>
+  (~4,5 Go) n'est téléchargé que s'il n'est pas déjà dans le cache GitHub sous cette somme, puis vérifié (`scripts/osm-france/geofabrik.sh`).
+  `osmium-tool` (paquet Ubuntu) le trie en un passage (`osmium tags-filter`, expressions tirées **automatiquement** des filtres Overpass
+  du script : `python3 -I scripts/osm-france/osm_local.py filtres h` ; toujours plus larges que le filtre exact), puis donne aux chemins
+  la position de leurs nœuds (`osmium add-locations-to-ways`, fichier OPL) — `scripts/osm-france/filtrer.sh`. Le script du lot est lancé
+  comme avant, avec `OSM_OPL=<fichier>` : `scripts/osm-france/osm_local.py` applique le filtre exact (mêmes règles qu'Overpass : clé
+  présente, `=`, `~`, `,i`) et rend les objets comme « out center » d'Overpass (centre du rectangle englobant des chemins et relations).
+  **Mêmes lignes, mêmes champs, mêmes fichiers** : l'app ne change pas.
+  `th-osm-traces` : les chemins gardent **tout leur tracé** (position de chaque nœud), puis la même simplification Douglas-Peucker
+  (~150 m, 4 décimales) et la même limite de 15 Mo qu'avant ; plus besoin de découper la France en carreaux. Commande du script :
+  `OSM_OPL=…/h.opl python3 -I scripts/telech-h/build_osm.py assets/data`. Dans `telech-h.yml`, `quoi = tout` ne questionne plus
+  Overpass ; `quoi = osm` reste le secours.
+- **Différences avec Overpass** : l'extrait Geofabrik déborde de quelques kilomètres sur les pays voisins (Overpass s'arrêtait à la
+  frontière) ; une relation n'a de position que si ses membres sont dans l'extrait ; quels territoires d'outre-mer l'extrait « France »
+  contient est à vérifier sur la page de Geofabrik (Overpass prenait toute la zone ISO FR).
+- **Secours** : l'ancien chemin Overpass reste possible (`.github/workflows/telech-h.yml`, voir plus haut), mais n'est plus lancé
+  par défaut.
+- **Licences** : données OpenStreetMap, **ODbL 1.0**, attribution « © les contributeurs d'OpenStreetMap »
+  (<https://www.openstreetmap.org/copyright>, lue pour le lot B le 2026-11-25 ; les champs `licence`/`licence_url` des fichiers ne
+  changent pas). Les extraits Geofabrik sont ces mêmes données OSM, sous la même licence ODbL ; Geofabrik les offre librement et
+  demande de ne pas retélécharger sans raison le même fichier (d'où la somme MD5 et le cache). Les pages de Geofabrik
+  (<https://download.geofabrik.de/>, <https://www.geofabrik.de/data/download.html>) et celle d'OpenStreetMap ont été **refusées par le
+  réseau de l'atelier le 2026-11-26** : conditions **non relues ce jour**, à relire avant le premier lancement.

@@ -1,6 +1,8 @@
 # 🧺 Places, métiers et rivages (lot H) : refaire assets/data/th-*.json.gz, puis les enregistrer dans la branche lancée.
 #  - 🗺 th-osm-kiosques, th-osm-halles, th-osm-eclusieres, th-osm-traces : OpenStreetMap (ODbL 1.0) par Overpass — injoignable
 #    depuis l'atelier de développement, d'où ce travail ici (quoi = osm). Les tracés de voies ferrées disparues sont simplifiés.
+#    ⚠ D'abord .github/workflows/osm-france.yml (extrait Geofabrik + osmium, sans Overpass) ; ici, quoi = osm (Overpass) reste un
+#    secours, et « tout » ne questionne plus Overpass.
 #  - 🎺 th-kiosques, 🗽 th-marianne, 🏪 th-halles, 🚡 th-funiculaires, 🛶 th-eclusieres, 🚋 th-tramways, 🏭 th-ateliers : Wikidata (CC0) ;
 #    🏰 th-bastides et 📖 th-textes : Wikipédia (CC BY-SA 4.0, texte de la page lu une fois) + Wikidata (CC0) ;
 #    🗺 th-trudaine : titres des planches de l'Atlas de Trudaine sur Wikimedia Commons (domaine public ; l'image n'est pas copiée).
@@ -14,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       quoi:
-        description: 'tout, osm, wikidata, bastides, textes ou trudaine'
+        description: 'tout (sans OpenStreetMap), osm (Overpass, secours : voir osm-france.yml), wikidata, bastides, textes ou trudaine'
         required: false
         default: 'tout'
   push:
@@ -55,7 +57,7 @@ jobs:
           key: telech-h-${{ github.run_id }}
           restore-keys: telech-h-
       - name: "🗺 OpenStreetMap : kiosques, halles, maisons éclusières, tracés disparus"
-        if: env.QUOI == 'tout' || env.QUOI == 'osm'
+        if: env.QUOI == 'osm'   # secours seulement : d'abord osm-france.yml (extrait Geofabrik)
         timeout-minutes: 150
         run: |
           # deux serveurs Overpass à tour de rôle (l'un est parfois injoignable ou surchargé)

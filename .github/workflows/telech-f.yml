@@ -1,6 +1,8 @@
 # 🌉 Le pays au XIXe siècle (lot F) : refaire assets/data/tf-*.json.gz, puis les enregistrer dans la branche lancée.
 #  - 🗺 tf-osm-cocher, tf-osm-forges, tf-osm-salines : OpenStreetMap (ODbL 1.0) par Overpass — injoignable depuis l'atelier de
 #    développement, d'où ce travail ici (quoi = osm).
+#    ⚠ D'abord .github/workflows/osm-france.yml (extrait Geofabrik + osmium, sans Overpass) ; ici, quoi = osm (Overpass) reste un
+#    secours, et « tout » ne questionne plus Overpass.
 #  - 🎈 tf-ballons, 🌹 tf-rosieres, 🔔 tf-silence : Wikipédia (CC BY-SA 4.0, texte de la page lu une fois) + Wikidata (CC0) ;
 #    🌉 tf-ponts, ⚒ tf-forges, 🧂 tf-salines, 🏅 tf-montyon : Wikidata (CC0) ; 🥕 tf-potager : Wikisource (livre de 1883, domaine
 #    public) ; 🌋 tf-volcans : NOAA NCEI (Crowley et Unterman 2013, Gao et al. 2008 ; données libres, à citer).
@@ -14,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       quoi:
-        description: 'tout, osm, ballons, rosieres, silence, ponts, industrie, montyon, potager ou volcans'
+        description: 'tout (sans OpenStreetMap), osm (Overpass, secours : voir osm-france.yml), ballons, rosieres, silence, ponts, industrie, montyon, potager ou volcans'
         required: false
         default: 'tout'
   push:
@@ -55,7 +57,7 @@ jobs:
           key: telech-f-${{ github.run_id }}
           restore-keys: telech-f-
       - name: "🗺 OpenStreetMap : plaques de cocher, forges, salines"
-        if: env.QUOI == 'tout' || env.QUOI == 'osm'
+        if: env.QUOI == 'osm'   # secours seulement : d'abord osm-france.yml (extrait Geofabrik)
         timeout-minutes: 150
         run: |
           # deux serveurs Overpass à tour de rôle (l'un est parfois injoignable ou surchargé)

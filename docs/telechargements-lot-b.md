@@ -25,14 +25,14 @@ Licences lues le 2026-11-25.
 | `tb-wd-berger` | drailles, burons (Wikidata) | 82 | 2 Ko |
 | `tb-wd-cultes` | temples protestants, synagogues (Wikidata) | 2 181 | 65 Ko |
 | `tb-cepages` | cépages dont on connaît le pays ou le lieu d'origine (Wikidata) | 1 065 | 15 Ko |
-| `tb-osm-*` | les mêmes sujets depuis OpenStreetMap : **à fabriquer sur GitHub** (Actions → « Lot B : village et nature », `quoi = osm`) ; arrivent ensuite par Réglages → 🗂 Données. Coupé si un fichier dépasse 15 Mo. | — | — |
+| `tb-osm-*` | les mêmes sujets depuis OpenStreetMap : **à fabriquer sur GitHub** (Actions → « OpenStreetMap France (extrait Geofabrik) », `quoi = b` ; secours : « Lot B : village et nature », `quoi = osm`) ; arrivent ensuite par Réglages → 🗂 Données. Coupé si un fichier dépasse 15 Mo. | — | — |
 
 En tout ≈ 250 Ko livrés avec l'app (sous la limite de 15 Mo : pas de pack à installer).
 
 ## Les licences (citées)
 
 - **Wikidata** — <https://www.wikidata.org/wiki/Wikidata:Licensing> : « All structured data (i.e. the main, Property, Lexeme, and EntitySchema namespaces) is released into the public domain under Creative Commons Zero. » → CC0 1.0, redistribuable.
-- **OpenStreetMap** — <https://www.openstreetmap.org/copyright> : Open Database License (ODbL 1.0) ; obligation d'attribution « © les contributeurs d'OpenStreetMap » (affichée sous chaque bloc qui contient un point OSM et dans les listes, colonne « Base »). Fabriqué seulement sur GitHub (Overpass injoignable depuis l'atelier ; pas de récupération de pages web).
+- **OpenStreetMap** — <https://www.openstreetmap.org/copyright> : Open Database License (ODbL 1.0) ; obligation d'attribution « © les contributeurs d'OpenStreetMap » (affichée sous chaque bloc qui contient un point OSM et dans les listes, colonne « Base »). Fabriqué seulement sur GitHub, depuis l'extrait Geofabrik de la France (voir « OpenStreetMap sans Overpass » plus bas ; Overpass en secours).
 - **Wiktionnaire** — <https://fr.wiktionary.org/wiki/Convention:Droit_d’auteur> : « Vous avez la permission de copier, distribuer ou modifier le texte de tous les articles du Wiktionnaire selon les termes de la licence CC-BY-SA 4.0 ». (Pas de fichier livré : voir n° 26.)
 - **Dates des vendanges** (pas de copie ici : le pack « Histoire du lieu » les a déjà, liste `hist_vendanges`) — Daux, V. et al. (2012), « An open-access database of grape harvest dates for climate research: data description and quality assessment », *Climate of the Past* 8, 1403–1418, doi:10.5194/cp-8-1403-2012 (article sous CC BY 3.0). L'en-tête du fichier dit : « We present an open-access dataset of grape harvest dates » et « Please cite original reference when using these data, plus the data file URL and date accessed. » Le dépôt NOAA NCEI / World Data Service for Paleoclimatology (<https://www.ncei.noaa.gov/pub/data/paleo/aar/readme-ncei-wds-paleoclimatology.txt>) : « Users may access and download these data free of charge; please cite the original references provided in the data documentation for each data set. » Fichier : <https://www.ncei.noaa.gov/pub/data/paleo/historical/europe/europe2012ghd.txt>, doi:10.25921/2xg2-mt70. → libre, avec la citation (affichée sous chaque ligne 🍇).
 
@@ -57,5 +57,35 @@ En tout ≈ 250 Ko livrés avec l'app (sous la limite de 15 Mo : pas de pack à 
 
 ## Ce qui reste à faire
 
-- Lancer une fois le workflow « Lot B : village et nature » (`quoi = osm`) pour fabriquer les fichiers `tb-osm-*` ; le workflow refait aussi le sommaire `assets/data/manifest.json`.
+- Pour refaire les fichiers `tb-osm-*` : le workflow « OpenStreetMap France (extrait Geofabrik) » (`quoi = b`, voir plus bas) ; l'ancien « Lot B : village et nature » (`quoi = osm`, Overpass) ne sert plus qu'en secours (son `quoi` par défaut est maintenant `wikidata`). Les deux refont le sommaire `assets/data/manifest.json`.
 - Hôtes à autoriser si on veut relire les licences depuis l'atelier : `cp.copernicus.org`, `www.pep725.eu`, `www.obs-saisons.fr`, `lig-tdcge.imag.fr`, `fr.wikiquote.org`, `overpass-api.de`.
+
+## OpenStreetMap sans Overpass : l'extrait Geofabrik (depuis le 2026-11-26)
+
+Les questions « toute la France » au service public Overpass (overpass-api.de, overpass.kumi.systems) échouaient pendant des heures
+(délais dépassés, 502/504) et chargent un service partagé. Les fichiers `tb-osm-croix`, `tb-osm-eau`, `tb-osm-village`, `tb-osm-bornes`, `tb-osm-berger`, `tb-osm-cultes` se fabriquent maintenant depuis **un extrait téléchargé** :
+
+- **Lancer** : Actions → « OpenStreetMap France (extrait Geofabrik) » (`.github/workflows/osm-france.yml`) → « Run workflow », `quoi = b`
+  (ou `tout` pour les lots B, E, F, G, H d'un coup). Le workflow refait le sommaire `assets/data/manifest.json` et n'enregistre que les
+  fichiers OpenStreetMap des lots (`tb-osm-*`, `te-libertes`, `tf-osm-*`, `tg-osm-*`, `th-osm-*`) et le sommaire.
+- **Comment** : la somme `france-latest.osm.pbf.md5` est lue d'abord ; l'extrait <https://download.geofabrik.de/europe/france-latest.osm.pbf>
+  (~4,5 Go) n'est téléchargé que s'il n'est pas déjà dans le cache GitHub sous cette somme, puis vérifié (`scripts/osm-france/geofabrik.sh`).
+  `osmium-tool` (paquet Ubuntu) le trie en un passage (`osmium tags-filter`, expressions tirées **automatiquement** des filtres Overpass
+  du script : `python3 -I scripts/osm-france/osm_local.py filtres b` ; toujours plus larges que le filtre exact), puis donne aux chemins
+  la position de leurs nœuds (`osmium add-locations-to-ways`, fichier OPL) — `scripts/osm-france/filtrer.sh`. Le script du lot est lancé
+  comme avant, avec `OSM_OPL=<fichier>` : `scripts/osm-france/osm_local.py` applique le filtre exact (mêmes règles qu'Overpass : clé
+  présente, `=`, `~`, `,i`) et rend les objets comme « out center » d'Overpass (centre du rectangle englobant des chemins et relations).
+  **Mêmes lignes, mêmes champs, mêmes fichiers** : l'app ne change pas.
+  Commande du script : `OSM_OPL=…/b.opl python3 -I scripts/telech-b/build.py osm`. Les drailles en relation (`route`) ont pour position
+  le centre de leurs chemins, comme avec Overpass.
+- **Différences avec Overpass** : l'extrait Geofabrik déborde de quelques kilomètres sur les pays voisins (Overpass s'arrêtait à la
+  frontière) ; une relation n'a de position que si ses membres sont dans l'extrait ; quels territoires d'outre-mer l'extrait « France »
+  contient est à vérifier sur la page de Geofabrik (Overpass prenait toute la zone ISO FR).
+- **Secours** : l'ancien chemin Overpass reste possible (`.github/workflows/telech-b.yml`, voir plus haut), mais n'est plus lancé
+  par défaut.
+- **Licences** : données OpenStreetMap, **ODbL 1.0**, attribution « © les contributeurs d'OpenStreetMap »
+  (<https://www.openstreetmap.org/copyright>, lue pour le lot B le 2026-11-25 ; les champs `licence`/`licence_url` des fichiers ne
+  changent pas). Les extraits Geofabrik sont ces mêmes données OSM, sous la même licence ODbL ; Geofabrik les offre librement et
+  demande de ne pas retélécharger sans raison le même fichier (d'où la somme MD5 et le cache). Les pages de Geofabrik
+  (<https://download.geofabrik.de/>, <https://www.geofabrik.de/data/download.html>) et celle d'OpenStreetMap ont été **refusées par le
+  réseau de l'atelier le 2026-11-26** : conditions **non relues ce jour**, à relire avant le premier lancement.

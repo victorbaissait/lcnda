@@ -44,7 +44,8 @@ consultation : pareil). Seuls les liens « ↗ » ouvrent une page, sur un clic.
   date accessed. » → copié, avec les deux références (Crowley et Unterman 2013, doi:10.5194/essd-5-187-2013 ; Gao, Robock et Ammann 2008,
   doi:10.1029/2008JD010239). Le nom des volcans vient de la base NOAA des éruptions déjà livrée (`ha-catastrophes`, domaine public).
 - **OpenStreetMap** — <https://www.openstreetmap.org/copyright> : ODbL 1.0, « © les contributeurs d'OpenStreetMap » (page refusée par
-  le réseau de l'atelier ce jour ; lue pour le lot B le 2026-11-25, même texte). Les fichiers `tf-osm-*` se fabriquent sur GitHub.
+  le réseau de l'atelier ce jour ; lue pour le lot B le 2026-11-25, même texte). Les fichiers `tf-osm-*` se fabriquent sur GitHub,
+  depuis l'extrait Geofabrik de la France (voir plus bas).
 - **data.gouv.fr, cartes de bruit stratégiques** — API data.gouv : 481 jeux « carte de bruit stratégique », un par département ou par
   infrastructure, licence `lov2` (Licence Ouverte 2.0). Trop éparpillés pour un pack : **liens**.
 - **Géoplateforme, DGAC « Plan d'Exposition au Bruit (PEB) »** — fiche CSW
@@ -138,8 +139,9 @@ consultation : pareil). Seuls les liens « ↗ » ouvrent une page, sur un clic.
 
 ## Fichiers à fabriquer sur GitHub
 
-Lancer une fois Actions → « Le pays au XIXe siècle (lot F) » avec `quoi = osm` : `tf-osm-cocher`, `tf-osm-forges`, `tf-osm-salines`
-(Overpass injoignable depuis l'atelier). Tous les autres packs sont livrés ; `quoi = tout` les refait aussi.
+Lancer une fois Actions → « OpenStreetMap France (extrait Geofabrik) » avec `quoi = f` : `tf-osm-cocher`, `tf-osm-forges`,
+`tf-osm-salines` (voir « OpenStreetMap sans Overpass » plus bas). Secours : « Le pays au XIXe siècle (lot F) » avec `quoi = osm`
+(Overpass). Tous les autres packs sont livrés ; `quoi = tout` les refait (sans OpenStreetMap).
 
 ## Limites
 
@@ -147,3 +149,33 @@ Lancer une fois Actions → « Le pays au XIXe siècle (lot F) » avec `quoi = o
   www.academie-francaise.fr, www.biodiversitylibrary.org, data.giss.nasa.gov, les serveurs de fichiers `*.archive.org` ; l'API de
   Wikipédia limitait le débit (429) — `action=raw` et Wikidata ont servi.
 - Wikidata connaît peu de forges, salines et lauréats du prix de vertu : les listes sont incomplètes et le disent.
+
+## OpenStreetMap sans Overpass : l'extrait Geofabrik (depuis le 2026-11-26)
+
+Les questions « toute la France » au service public Overpass (overpass-api.de, overpass.kumi.systems) échouaient pendant des heures
+(délais dépassés, 502/504) et chargent un service partagé. Les fichiers `tf-osm-cocher`, `tf-osm-forges`, `tf-osm-salines` se fabriquent maintenant depuis **un extrait téléchargé** :
+
+- **Lancer** : Actions → « OpenStreetMap France (extrait Geofabrik) » (`.github/workflows/osm-france.yml`) → « Run workflow », `quoi = f`
+  (ou `tout` pour les lots B, E, F, G, H d'un coup). Le workflow refait le sommaire `assets/data/manifest.json` et n'enregistre que les
+  fichiers OpenStreetMap des lots (`tb-osm-*`, `te-libertes`, `tf-osm-*`, `tg-osm-*`, `th-osm-*`) et le sommaire.
+- **Comment** : la somme `france-latest.osm.pbf.md5` est lue d'abord ; l'extrait <https://download.geofabrik.de/europe/france-latest.osm.pbf>
+  (~4,5 Go) n'est téléchargé que s'il n'est pas déjà dans le cache GitHub sous cette somme, puis vérifié (`scripts/osm-france/geofabrik.sh`).
+  `osmium-tool` (paquet Ubuntu) le trie en un passage (`osmium tags-filter`, expressions tirées **automatiquement** des filtres Overpass
+  du script : `python3 -I scripts/osm-france/osm_local.py filtres f` ; toujours plus larges que le filtre exact), puis donne aux chemins
+  la position de leurs nœuds (`osmium add-locations-to-ways`, fichier OPL) — `scripts/osm-france/filtrer.sh`. Le script du lot est lancé
+  comme avant, avec `OSM_OPL=<fichier>` : `scripts/osm-france/osm_local.py` applique le filtre exact (mêmes règles qu'Overpass : clé
+  présente, `=`, `~`, `,i`) et rend les objets comme « out center » d'Overpass (centre du rectangle englobant des chemins et relations).
+  **Mêmes lignes, mêmes champs, mêmes fichiers** : l'app ne change pas.
+  Commande du script : `OSM_OPL=…/f.opl python3 -I scripts/telech-f/build_osm.py assets/data`. Dans `telech-f.yml`, `quoi = tout` ne
+  questionne plus Overpass ; `quoi = osm` reste le secours.
+- **Différences avec Overpass** : l'extrait Geofabrik déborde de quelques kilomètres sur les pays voisins (Overpass s'arrêtait à la
+  frontière) ; une relation n'a de position que si ses membres sont dans l'extrait ; quels territoires d'outre-mer l'extrait « France »
+  contient est à vérifier sur la page de Geofabrik (Overpass prenait toute la zone ISO FR).
+- **Secours** : l'ancien chemin Overpass reste possible (`.github/workflows/telech-f.yml`, voir plus haut), mais n'est plus lancé
+  par défaut.
+- **Licences** : données OpenStreetMap, **ODbL 1.0**, attribution « © les contributeurs d'OpenStreetMap »
+  (<https://www.openstreetmap.org/copyright>, lue pour le lot B le 2026-11-25 ; les champs `licence`/`licence_url` des fichiers ne
+  changent pas). Les extraits Geofabrik sont ces mêmes données OSM, sous la même licence ODbL ; Geofabrik les offre librement et
+  demande de ne pas retélécharger sans raison le même fichier (d'où la somme MD5 et le cache). Les pages de Geofabrik
+  (<https://download.geofabrik.de/>, <https://www.geofabrik.de/data/download.html>) et celle d'OpenStreetMap ont été **refusées par le
+  réseau de l'atelier le 2026-11-26** : conditions **non relues ce jour**, à relire avant le premier lancement.

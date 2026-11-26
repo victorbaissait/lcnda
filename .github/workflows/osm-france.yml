@@ -166,7 +166,7 @@ jobs:
           # seulement les fichiers OpenStreetMap de ces lots, et le sommaire
           for f in assets/data/tb-osm-*.json.gz assets/data/te-libertes.json.gz assets/data/tf-osm-*.json.gz \
                    assets/data/tg-osm-*.json.gz assets/data/th-osm-*.json.gz assets/data/manifest.json; do
-            [ -e "$f" ] && git add -- "$f"
+            if [ -e "$f" ]; then git add -- "$f"; fi
           done
           git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
           git commit -m "OpenStreetMap France (lots B, E, F, G, H) : refait sur GitHub depuis l'extrait Geofabrik (ODbL 1.0, © les contributeurs d'OpenStreetMap)"

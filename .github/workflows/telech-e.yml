@@ -1,7 +1,8 @@
 # 🌌 Ciel, climat et mémoire (lot E) : refaire assets/data/te-*.json.gz, puis les enregistrer dans la branche lancée.
 #  - 🦴 te-fossiles : The Paleobiology Database (CC BY 4.0 ; le script relit la licence dans la réponse de l'API) — paleobiodb.org
 #    n'est pas joignable depuis l'atelier de développement : la fabrication se fait ici.
-#  - 🌳 te-libertes : Wikidata (CC0) + OpenStreetMap (ODbL, Overpass) — overpass-api.de non plus.
+#  - 🌳 te-libertes : Wikidata (CC0) + OpenStreetMap (ODbL). La partie OpenStreetMap se fait d'abord par .github/workflows/osm-france.yml
+#    (extrait Geofabrik + osmium) ; ici « libertes » garde les arbres OSM déjà fabriqués, « libertes-overpass » (secours) questionne Overpass.
 #  - 🌌 te-ciel (Hotham 2026, Zenodo, CC BY 4.0), 🌾 te-secheresses (OWDA, NOAA/NCEI), ❄️ te-hivers (Luterbacher, NOAA/NCEI),
 #    🏛 te-inscriptions (EDH, Zenodo, CC BY-SA 4.0), ⚔️ te-religion (Wikidata CC0) : déjà fabriqués dans l'atelier, refaits ici
 #    à la demande (les scripts relisent chaque licence et s'arrêtent si elle a changé).
@@ -15,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       quoi:
-        description: 'tout, fossiles, libertes, ciel, secheresses, hivers, inscriptions ou religion'
+        description: 'tout, fossiles, libertes, libertes-overpass, ciel, secheresses, hivers, inscriptions ou religion'
         required: false
         default: 'tout'
   push:
@@ -59,8 +60,11 @@ jobs:
         if: env.QUOI == 'tout' || env.QUOI == 'fossiles'
         continue-on-error: true  # si la licence n'est pas relue, les autres fichiers se fabriquent quand même
         run: python3 -I scripts/telech-e/build_fossiles.py assets/data
-      - name: "🌳 Arbres de la Liberté (Wikidata + OpenStreetMap)"
+      - name: "🌳 Arbres de la Liberté (Wikidata ; les arbres OpenStreetMap déjà fabriqués sont gardés)"
         if: env.QUOI == 'tout' || env.QUOI == 'libertes'
+        run: python3 -I scripts/telech-e/build_libertes.py assets/data
+      - name: "🌳 Arbres de la Liberté (Wikidata + OpenStreetMap par Overpass : secours, d'abord osm-france.yml)"
+        if: env.QUOI == 'libertes-overpass'
         run: |
           # deux serveurs Overpass à tour de rôle (l'un est parfois injoignable ou surchargé)
           for i in 1 2 3 4; do
