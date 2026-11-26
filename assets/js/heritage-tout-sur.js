@@ -471,8 +471,7 @@
         results = await runAll(offline, (x, n) => { done = n; results = [...results, x]; drawSoon(); });
         missing(life, results).then(m => { miss = m; draw(); }).catch(() => {});
         draw();
-        // ⏱ les sources en ligne : seulement quand le bloc arrive à l'écran (ou sur « ▸ plus ») — app-observateurs.js
-        setTimeout(() => { if (!host.isConnected) return; if (window.LCNDA_PERF?.whenSeen) window.LCNDA_PERF.whenSeen(host, () => { if (host.isConnected) goOnline(); }); else goOnline(); }, ONLINE_DELAY);
+        setTimeout(() => { if (host.isConnected) goOnline(); }, ONLINE_DELAY);
         void onlineDone;
     }
     function heroBadge(pid, n) {

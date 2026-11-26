@@ -83,6 +83,18 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             const r = await post('inv_receive', {investigation_id: Number(other?.id || 999), folder_id: fid, items: [{kind: 'text', title: 'x', value: 'x'}]});
             assert.ok(r?.error, 'refusé : ' + JSON.stringify(r));
         });
+        await t('« Où ranger : » : les 📁 dossiers ne se proposent que si un média est coché', async () => {
+            await B.openInv(1); await sleep(300);
+            const d = await inv(); const fid = Number((d.folders || []).find(x => x.name === 'Registres')?.id || 0); assert.ok(fid);
+            await p.evaluate(() => window.LCNDA_EXT.connexions.openTake()); await p.waitForSelector('.cx-take [data-cx-where]', {timeout: 15000});
+            const hidden = () => p.$eval(`.cx-take [data-cx-where] option[value="f${fid}"]`, o => o.hidden);
+            assert.strictEqual(await hidden(), true, 'rien de coché : pas de dossier');
+            await pick('place', 'Tulle', 'Tulle'); assert.strictEqual(await hidden(), true, 'un lieu : toujours pas');
+            const media = ((await B.api('list', {type: 'media', limit: 5})).rows || [])[0];
+            await pick('media', String(media.title || media.filename).slice(0, 12), String(media.title || media.filename).slice(0, 12));
+            assert.strictEqual(await hidden(), false, 'un média coché : le dossier se propose');
+            await p.evaluate(() => document.querySelector('dialog.cx-take')?.close());
+        });
         await t('un dossier d’un projet de l’Atelier : « Où ranger : » part de ce dossier, le titre le dit ; l’élément y arrive', async () => {
             const pid = Number((await post('save_atelier_project', {title: 'Le livre de la famille', kind: 'livre'})).id);
             const proj = await B.api('atelier_project', {id: pid});
@@ -96,6 +108,16 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             const there = () => p.evaluate(async ([x, f]) => { const d = await window.LCNDA_APP.api('atelier_project', {id: x}); return d.items.some(i => /Tulle/.test(i.title) && (i.folders || []).map(Number).includes(f)); }, [pid, Number(fo.id)]);
             for (let i = 0; i < 30 && !(await there()); i++) await sleep(300);
             assert.ok(await there(), 'dans le dossier');
+            // 📥 sur un élément : Prendre depuis… vise CET élément (ajouté à ses notes)
+            const it = (await B.api('atelier_project', {id: pid})).items.find(i => /Tulle/.test(i.title));
+            await B.go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: pid, node: Number(fo.id), sel: [Number(it.id)]}}); await p.waitForSelector(`[data-at-takeinto="${it.id}"]`, {timeout: 20000});
+            await p.click(`[data-at-takeinto="${it.id}"]`); await p.waitForSelector('.cx-take [data-cx-where]', {timeout: 15000});
+            assert.strictEqual(await p.$eval('.cx-take [data-cx-where]', s => s.value), 'it' + it.id);
+            assert.match(await p.textContent('.cx-take .cx-destpill'), /l’élément « .*Tulle/);
+            await pick('person', 'DURAND', 'DURAND'); await p.click('.cx-take [data-cx-takehere]');
+            const noted = () => p.evaluate(async ([x, id]) => { const d = await window.LCNDA_APP.api('atelier_project', {id: x}); const i = d.items.find(y => Number(y.id) === id); return /DURAND/.test(i?.data?.notes || ''); }, [pid, Number(it.id)]);
+            for (let i = 0; i < 30 && !(await noted()); i++) await sleep(300);
+            assert.ok(await noted(), 'dans les notes de l’élément');
         });
         await t('390 px en sombre : la section de la piste ne déborde pas', async () => {
             await p.setViewportSize({width: 390, height: 844}); await p.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });

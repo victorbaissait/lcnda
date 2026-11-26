@@ -127,7 +127,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/fiche-edifice.css?v=2">
     <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">
     <link rel="stylesheet" href="assets/css/listes-donnees.css?v=3">
-    <link rel="stylesheet" href="assets/css/listes-themes.css?v=6">
+    <link rel="stylesheet" href="assets/css/listes-themes.css?v=7">
     <link rel="stylesheet" href="assets/css/donnees-maj.css?v=2">
     <link rel="stylesheet" href="assets/css/donnees-recap.css?v=1"><!-- 📊 Récap des données -->
     <link rel="stylesheet" href="assets/css/donnees-onglet.css?v=1"><!-- 📊 l’onglet Données : sa colonne de gauche -->
@@ -183,7 +183,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=66" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=67" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
@@ -1394,7 +1394,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-controle.js?v=12" defer></script>
 <script src="assets/js/heritage-commune-histoire.js?v=1" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
-<script src="assets/js/heritage-research.js?v=42" defer></script>
+<script src="assets/js/heritage-research.js?v=43" defer></script>
 <script src="assets/js/heritage-av.js?v=20" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=10" defer></script>
 <script src="assets/js/heritage-recueil-sens.js?v=1" defer></script>
@@ -1421,7 +1421,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-assemble.js?v=11" defer></script>
 <script src="assets/js/heritage-columns.js?v=9" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=10" defer></script>
-<script src="assets/js/heritage-atelier-donnees.js?v=2" defer></script><!-- 📊 Données téléchargées : widget du projet, widget du tableau de bord, élément de l’Atelier -->
+<script src="assets/js/heritage-atelier-donnees.js?v=3" defer></script><!-- 📊 Données téléchargées : widget du projet, widget du tableau de bord, élément de l’Atelier -->
 <script src="assets/js/heritage-voters.js?v=11" defer></script>
 <script src="assets/js/heritage-widgets.js?v=56" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=17" defer></script>
@@ -1734,7 +1734,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=3" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
-<script src="assets/js/heritage-connexions.js?v=13" defer></script>
+<script src="assets/js/heritage-connexions.js?v=14" defer></script>
 <script src="assets/js/app-paniers-core.js?v=4" defer></script>
 <script src="assets/js/app-paniers.js?v=6" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=5" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->

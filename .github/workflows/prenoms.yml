@@ -5,7 +5,8 @@
 #
 # Lancer : onglet « Actions » → « Données des prénoms » → « Run workflow ». Une dizaine de minutes.
 # Sources (scripts/prenoms/build-prenoms.py) : Insee (Fichier des prénoms, France et départements, Licence Ouverte 2.0),
-# OFS (STATPOP, prénoms selon l'année de naissance, OPEN-BY), Retraite Québec (Banque de prénoms, CC BY 4.0).
+# OFS (STATPOP, prénoms selon l'année de naissance, OPEN-BY), Retraite Québec (Banque de prénoms, CC BY 4.0) ;
+# lot L : États-Unis (SSA, names.zip, domaine public — la page de la SSA est relue ; si elle ne répond pas, le pack se fait sans).
 # Le pack est coupé en morceaux de 1 900 Mo au plus (limite d'un fichier d'une version GitHub : 2 Go) ;
 # prenoms-manifest.json dit les morceaux, la taille et l'empreinte.
 

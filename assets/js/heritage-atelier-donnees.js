@@ -28,7 +28,7 @@
     const nf = n => Number(n || 0).toLocaleString('fr-FR');
     const spin = t => (UI().spinner ? UI().spinner(T(t), {inline: true}) : `<p class="muted">${esc(T(t))}</p>`);
     const emptyLine = (ico, html) => `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">${ico}</span><span class="empty-line-text">${html}</span></p>`;
-    const DEF = {src: '', ask: '', q: '', from: '', to: '', where: '', place: '', lat: null, lon: null, km: 15, famOnly: false, view: 'list', n: 5, chart: 'bar', cols: [], sort: '', dir: 'asc', group: '', title: '', subtitle: '', icon: '', accent: '', density: 'normal', size: 'M', showSource: true, click: 'list', famHi: false, emptyText: '', auto: false};
+    const DEF = {src: '', also: [], ask: '', q: '', from: '', to: '', where: '', place: '', lat: null, lon: null, km: 15, famOnly: false, view: 'list', n: 5, chart: 'bar', cols: [], sort: '', dir: 'asc', group: '', title: '', subtitle: '', icon: '', accent: '', density: 'normal', size: 'M', showSource: true, click: 'list', famHi: false, emptyText: '', auto: false};
     const cfgOf = c => ({...DEF, ...(c && typeof c === 'object' ? c : {})});
     const VIEWS = [['list', '📋 Liste'], ['table', '▦ Tableau compact'], ['cards', '🃏 Cartes'], ['count', '📈 Nombre et petit graphique'], ['chart', '📊 Petit graphique'], ['map', '🗺 Petite carte'], ['timeline', '🕰 Petite frise'], ['day', '📅 Ce jour-là (ou la ligne du jour)'], ['ticker', '🎞 Défilant']];
     const NS = [3, 5, 8, 12, 20];
@@ -40,20 +40,24 @@
     /* ═════════ les lignes ═════════ */
     const fieldsOf = d => (d.fields || []).filter(f => f.type !== 'url' && !f.hidden && f.key !== 'sources');
     function rowTitle(d, r) {
+        if (r?._src?.d && r._src.d !== d) return rowTitle(r._src.d, r);
         const fs = fieldsOf(d), f = fs.find(x => ['text', 'place', 'enum'].includes(x.type || 'text') && r[x.key] != null && r[x.key] !== '') || fs.find(x => r[x.key] != null && r[x.key] !== '');
         const v = f ? r[f.key] : r.title || r.name || r.label || '';
         return String(Array.isArray(v) ? v.join(', ') : v).slice(0, 200);
     }
     function rowSub(d, r) {
+        if (r?._src?.d && r._src.d !== d) d = r._src.d;
         const p = E().periodOf?.(d, r), out = [];
         if (p) out.push(p[0] === p[1] || p[1] >= 9999 ? String(p[0]) : `${p[0]}–${p[1]}`);
         const t = rowTitle(d, r), pl = (d.fields || []).find(f => f.type === 'place' && r[f.key] && String(r[f.key]) !== t);
         if (pl) out.push(String(r[pl.key]));
         if (r._km != null) out.push(T('à {km} km', {km: nf(r._km)}));
+        if (r._src) out.push(`${r._src.icon} ${r._src.label}${r._also ? ` + ${r._also.join(' + ')}` : ''}`); // 🔀 la source de la ligne
         return out.join(' · ');
     }
     const okUrl = u => (/^https?:\/\/[^\s"'<>]+$/i.test(String(u || '')) ? String(u) : '');
     function rowUrl(d, r) {
+        if (r?._src?.d && r._src.d !== d) d = r._src.d;
         for (const f of (d.fields || []).filter(x => x.type === 'url')) { const u = okUrl(Array.isArray(r[f.key]) ? r[f.key][0] : r[f.key]); if (u) return u; }
         return okUrl(r.url) || okUrl((r._members || []).map(m => m.rec?.url || m.src?.url).find(okUrl)) || okUrl(d.sourceUrl);
     }
@@ -81,8 +85,26 @@
         return st;
     }
     /** {d, st, rows, total, all?, missing?, notInstalled?, note?} — limit : combien de lignes au plus */
+    /* 🔀 plusieurs listes réunies dans un widget : l'union, une colonne « source », sans doublon quand un identifiant est partagé (qid, id…) */
+    const ID_KEYS = ['qid', 'wikidata', 'wd', 'merimee', 'insee', 'code', 'id'];
+    const idOf = r => { for (const k of ID_KEYS) { const v = r?.[k]; if (v != null && v !== '') return `${k}:${String(v).toLowerCase()}`; } return ''; };
+    async function runMany(c, limit) {
+        const ids = [c.src, ...(Array.isArray(c.also) ? c.also : [])].filter((x, i, a) => x && a.indexOf(x) === i).slice(0, 6);
+        const parts = await Promise.all(ids.map(id => run({...c, src: id, also: [], ask: ''}, limit).catch(() => ({rows: [], all: [], total: 0}))));
+        const ok = parts.filter(r => r.d && !r.missing && !r.notInstalled);
+        if (!ok.length) return parts[0] || {rows: [], total: 0, missing: true};
+        const seen = new Map(), all = []; let dup = 0;
+        ok.forEach(r => (r.all || r.rows).forEach(x => { const row = {...x, _src: {id: r.d.id, label: T(r.d.label), icon: r.d.icon || '📋', d: r.d}}; const k = idOf(x);
+            if (k && seen.has(k)) { dup++; const o = seen.get(k); o._also = [...(o._also || []), row._src.label]; return; } if (k) seen.set(k, row); all.push(row); }));
+        const d0 = ok[0].d, d = {...d0, id: d0.id, label: ok.map(r => T(r.d.label)).join(' + '), icon: '🔀', merged: true, _parts: ok.map(r => r.d), source: ok.map(r => r.d.source).filter(Boolean).join(' ; '), sourceUrl: d0.sourceUrl,
+            geo: r => (r._src?.d || d0).geo?.(r), period: r => (r._src?.d || d0).period?.(r), fields: d0.fields};
+        if (c.sort) all.sort((a, b) => { const x = a[c.sort], y = b[c.sort]; const n = Number(x) - Number(y); const v = Number.isFinite(n) ? n : String(x ?? '').localeCompare(String(y ?? ''), 'fr', {numeric: true}); return c.dir === 'desc' ? -v : v; });
+        const total = ok.reduce((a, r) => a + (Number(r.total) || 0), 0) - dup;
+        return {d, st: ok[0].st, rows: all.slice(0, limit), all, total: Math.max(all.length, total), dup, parts: ok.map(r => ({d: r.d, total: r.total}))};
+    }
     async function run(c0, limit = 5) {
         const c = cfgOf(c0);
+        if (!c.ask && Array.isArray(c.also) && c.also.filter(x => x && x !== c.src).length) return runMany(c, limit);
         if (c.ask && !c.src) {
             if (!ext.dataAsk) return {rows: [], total: 0, note: T('La question en français n’est pas chargée.')};
             const r = await ext.dataAsk(c.ask);
@@ -115,6 +137,8 @@
     const ACCENT_L = [['blue', 'Bleu'], ['green', 'Vert'], ['orange', 'Orange'], ['red', 'Rouge'], ['purple', 'Violet'], ['grey', 'Gris']];
     const FMT = ['view', 'chart', 'n', 'sort', 'dir', 'group', 'title', 'subtitle', 'icon', 'accent', 'density', 'size', 'showSource', 'click', 'famHi', 'emptyText', 'auto']; // un modèle : la forme seulement
     const K_TPL = 'genealogie-donnees-widget-modeles';
+    const K_PRESETS = 'genealogie-donnees-widget-filtres', FILTERS = ['q', 'from', 'to', 'where', 'place', 'lat', 'lon', 'km', 'famOnly']; // 💾 des filtres gardés sous un nom (pas la liste)
+    const presets = () => (Array.isArray(readJ(K_PRESETS, [])) ? readJ(K_PRESETS, []) : []);
     const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const templates = () => (Array.isArray(readJ(K_TPL, [])) ? readJ(K_TPL, []) : []);
@@ -161,7 +185,7 @@
             body = `${ext.miniMap(pts, [], {height: c.size === 'S' ? 160 : 220})}<small class="muted">${esc(T('Lignes : {n}', {n: nf(res.total)}))}</small>`;
         } else if (c.view === 'table') {
             const cs = cellsOf(d, c);
-            body = `<div class="atd-tablewrap"><table class="atd-table"><thead><tr>${cs.map(f => `<th>${esc(T(f.label))}</th>`).join('')}<th><span class="atd-sr">${esc(T('Source'))}</span></th></tr></thead><tbody>${rows.map(r => `<tr class="${r._fam ? 'is-fam' : ''}" data-atd-row="${idx(r)}">${cs.map(f => `<td>${esc(fieldVal(r, f.key))}</td>`).join('')}<td>${famMark(r)}${srcA(d, r)}</td></tr>`).join('')}</tbody></table></div>${moreLine}`;
+            body = `<div class="atd-tablewrap"><table class="atd-table"><thead><tr>${cs.map(f => `<th>${esc(T(f.label))}</th>`).join('')}${d._parts ? `<th>${esc(T('Liste'))}</th>` : ''}<th><span class="atd-sr">${esc(T('Source'))}</span></th></tr></thead><tbody>${rows.map(r => `<tr class="${r._fam ? 'is-fam' : ''}" data-atd-row="${idx(r)}">${cs.map(f => `<td>${esc(fieldVal(r, f.key))}</td>`).join('')}${d._parts ? `<td>${esc(`${r._src?.icon || ''} ${r._src?.label || ''}${r._also ? ` + ${r._also.join(' + ')}` : ''}`)}</td>` : ''}<td>${famMark(r)}${srcA(d, r)}</td></tr>`).join('')}</tbody></table></div>${moreLine}`;
         } else if (c.view === 'cards') {
             body = `<div class="atd-cards">${rows.map(r => `<div class="atd-card${r._fam ? ' is-fam' : ''}"><button type="button" class="link-button" data-atd-row="${idx(r)}">${esc(rowTitle(d, r) || '—')}</button><small>${esc(rowSub(d, r))}</small>${famMark(r)}${srcA(d, r)}</div>`).join('')}</div>${moreLine}`;
         } else if (c.view === 'timeline') {
@@ -220,7 +244,7 @@
 
     /* ⚙️ Personnaliser (replié) : des sections, une ouverte à la fois ; de bons réglages au départ */
     const opt = (v, cur, l) => `<option value="${esc(v)}" ${String(cur) === String(v) ? 'selected' : ''}>${esc(T(l))}</option>`;
-    function persoHtml(c) {
+    function persoHtml(c, o = {}) {
         const sec = (id, t, html) => `<details class="atd-sec" data-atd-sec="${id}" name="atd-sec-${Math.random().toString(36).slice(2, 6)}"><summary>${esc(T(t))}</summary><div class="atd-filters">${html}</div></details>`;
         const tpl = templates();
         return `<details class="atd-perso" data-atd-perso><summary>⚙️ ${esc(T('Personnaliser'))}</summary>
@@ -237,6 +261,9 @@
                 <label class="checkbox-line"><input type="checkbox" data-atd-p="famHi" ${c.famHi ? 'checked' : ''}> ${esc(T('👪 Montrer les lignes liées à ma famille'))}</label>
                 <label class="checkbox-line"><input type="checkbox" data-atd-p="auto" ${c.auto ? 'checked' : ''}> ${esc(T('Se met à jour tout seul'))}</label>
                 <label>${esc(T('Quand il n’y a rien'))}<input data-atd-p="emptyText" value="${esc(c.emptyText)}" placeholder="${esc(T('Rien pour ces filtres.'))}"></label>`)}
+            ${sec('src', '🗂 Sources : listes réunies et onglets', `<p class="atd-hint">${esc(T('🔀 Réunir : plusieurs listes dans le même tableau (une colonne dit d’où vient chaque ligne ; une même chose n’apparaît qu’une fois).'))}</p>
+                <div data-atd-also class="atd-also"></div><div class="atd-actions"><button type="button" class="button small secondary" data-atd-alsoadd>🔀 ${esc(T('Réunir avec une autre liste'))}</button></div><div data-atd-alsopk></div>
+                ${o.tabs ? `<p class="atd-hint">${esc(T('🗂 Onglets : une autre liste, à côté, dans le même widget.'))}</p><div class="atd-actions"><button type="button" class="button small secondary" data-atd-tabadd>＋ ${esc(T('Ajouter un onglet'))}</button>${o.tabs.count > 1 ? `<button type="button" class="button small secondary" data-atd-tabdel>✕ ${esc(T('Retirer cet onglet'))}</button>` : ''}</div>` : ''}`)}
             ${sec('tpl', '⭐ Modèles et partage', `<label>${esc(T('Nom du modèle'))}<input data-atd-tplname placeholder="${esc(T('Mon modèle'))}"></label><div class="atd-actions"><button type="button" class="button small secondary" data-atd-tplsave>⭐ ${esc(T('Enregistrer comme modèle'))}</button></div>
                 ${tpl.length ? `<label>${esc(T('Mes modèles'))}<select data-atd-tpl>${tpl.map(x => `<option>${esc(x.name)}</option>`).join('')}</select></label><div class="atd-actions"><button type="button" class="button small secondary" data-atd-tplapply>${esc(T('Appliquer'))}</button></div>` : ''}
                 <div class="atd-actions"><button type="button" class="button small secondary" data-atd-dup>⧉ ${esc(T('Dupliquer'))}</button><button type="button" class="button small secondary" data-atd-export>⤓ ${esc(T('Exporter (.json)'))}</button><button type="button" class="button small secondary" data-atd-import>⤒ ${esc(T('Importer'))}</button><input type="file" accept="application/json,.json" data-atd-importfile hidden>
@@ -252,7 +279,7 @@
     /* ═════════ le réglage : choisir la liste (ou une question), les filtres, l'affichage ═════════ */
     /** chooser(hôte, config, {display, pickRows, ds, buttons, onDone(cfg), onCancel()}) → {read(), collect()} */
     function chooser(host, c0, o = {}) {
-        const c = cfgOf(c0); let chosen = c.src ? listById(c.src) : null, rowsRes = null, picked = new Set((o.ds?.rows || []).map(r => r.k)), mode = o.ds?.mode || 'all';
+        const c = cfgOf(c0); let also = Array.isArray(c.also) ? [...c.also] : [], chosen = c.src ? listById(c.src) : null, rowsRes = null, picked = new Set((o.ds?.rows || []).map(r => r.k)), mode = o.ds?.mode || 'all';
         host.innerHTML = `<div class="atd atd-cfg" data-atd-cfg>
             <div data-atd-chosen></div><div data-atd-picker></div>
             <details class="atd-ask" data-atd-askbox ${c.ask && !c.src ? 'open' : ''}><summary>💬 ${esc(T('ou pose une question'))}</summary><label class="atd-filters"><span>${esc(T('Ta question'))}</span><input type="search" data-atd-f="ask" value="${esc(c.ask)}" placeholder="${esc(T('les séismes près de Tulle entre 1800 et 1900'))}"></label></details>
@@ -264,15 +291,16 @@
                 <label data-atd-kmbox>${esc(T('À combien de km ?'))}<input type="number" min="1" max="500" data-atd-f="km" value="${esc(c.km)}"></label>
                 <label class="checkbox-line"><input type="checkbox" data-atd-f="famOnly" ${c.famOnly ? 'checked' : ''}> ${esc(T('Seulement quand quelqu’un de la famille vivait près de là'))}</label>
                 <label>${esc(T('Contient le mot'))}<input type="search" data-atd-f="q" value="${esc(c.q)}" placeholder="${esc(T('facultatif'))}"></label>
+                <details class="atd-presets" data-atd-presets><summary>💾 ${esc(T('Filtres enregistrés'))}</summary><div class="atd-filters" data-atd-presetbox></div></details>
                 ${o.display ? `<label>${esc(T('Affichage'))}<select data-atd-f="view">${VIEWS.map(([k, l]) => `<option value="${k}" ${c.view === k ? 'selected' : ''}>${esc(T(l))}</option>`).join('')}</select></label>
                 <label>${esc(T('Combien de lignes ?'))}<select data-atd-f="n">${NS.map(n => `<option value="${n}" ${Number(c.n) === n ? 'selected' : ''}>${n}</option>`).join('')}</select></label>` : ''}
             </div>
-            ${o.display ? persoHtml(c) : ''}
+            ${o.display ? persoHtml(c, o) : ''}
             ${o.pickRows ? `<fieldset class="atd-mode" data-atd-modebox><legend>${esc(T('Garder'))}</legend><label class="checkbox-line"><input type="radio" name="atd_mode" value="all" ${mode === 'all' ? 'checked' : ''}> ${esc(T('Toute la liste filtrée'))}</label><label class="checkbox-line"><input type="radio" name="atd_mode" value="rows" ${mode === 'rows' ? 'checked' : ''}> ${esc(T('Seulement les lignes cochées'))}</label></fieldset><div data-atd-rows></div>` : ''}
             ${o.buttons !== false ? `<div class="atd-actions"><button type="button" class="button small" data-atd-ok>${esc(T('Afficher'))}</button>${o.onCancel ? `<button type="button" class="button small secondary" data-atd-cancel>${esc(T('Annuler'))}</button>` : ''}</div>` : ''}
         </div>`;
         const root = host.querySelector('[data-atd-cfg]'), q = s => root.querySelector(s), f = k => q(`[data-atd-f="${k}"]`);
-        const read = () => ({src: chosen?.id || '', ask: chosen ? '' : String(f('ask')?.value || '').trim(), from: f('from').value, to: f('to').value, where: f('where').value, place: String(f('place').value || '').trim(),
+        const read = () => ({src: chosen?.id || '', also: chosen ? also.filter(x => x !== chosen.id) : [], ask: chosen ? '' : String(f('ask')?.value || '').trim(), from: f('from').value, to: f('to').value, where: f('where').value, place: String(f('place').value || '').trim(),
             lat: f('place').value === c.place ? c.lat : null, lon: f('place').value === c.place ? c.lon : null, km: Math.max(1, Math.min(500, Number(f('km').value) || 15)), famOnly: f('famOnly').checked,
             view: f('view')?.value || c.view, n: Number(f('n')?.value) || c.n, q: String(f('q')?.value || '').trim(), ...(o.display ? persoRead(root, c) : {})});
         const sync = () => {
@@ -313,6 +341,10 @@
             box.innerHTML = fs.length ? fs.map(fl => `<label class="checkbox-line"><input type="checkbox" data-atd-col value="${esc(fl.key)}" ${on.has(fl.key) ? 'checked' : ''}> ${esc(T(fl.label))}</label>`).join('') : `<small class="muted">${esc(T('Choisis d’abord une liste.'))}</small>`;
             const so = q('[data-atd-p="sort"]'); if (so) so.innerHTML = `<option value="">${esc(T('comme la liste'))}</option>${fs.map(fl => `<option value="${esc(fl.key)}" ${c.sort === fl.key ? 'selected' : ''}>${esc(T(fl.label))}</option>`).join('')}<option value="_km" ${c.sort === '_km' ? 'selected' : ''}>${esc(T('Distance (km)'))}</option>`;
             const gr = q('[data-atd-p="group"]'); if (gr) gr.innerHTML = `<option value="">${esc(T('aucun'))}</option>${chosen?.period ? `<option value="decade" ${c.group === 'decade' ? 'selected' : ''}>${esc(T('par décennie'))}</option><option value="century" ${c.group === 'century' ? 'selected' : ''}>${esc(T('par siècle'))}</option>` : ''}${fs.filter(fl => ['enum', 'place'].includes(fl.type)).map(fl => `<option value="${esc(fl.key)}" ${c.group === fl.key ? 'selected' : ''}>${esc(T('par {f}', {f: T(fl.label).toLowerCase()}))}</option>`).join('')}`; };
+        const paintAlso = () => { const box = q('[data-atd-also]'); if (!box) return; box.innerHTML = also.length ? also.map(id => { const d = listById(id); return `<span class="atd-chip">${esc(d?.icon || '📋')} ${esc(T(d?.label || id))} <button type="button" class="icon-button" data-atd-alsox="${esc(id)}" aria-label="${esc(T('Retirer'))}" title="${esc(T('Retirer'))}">✕</button></span>`; }).join('') : ''; };
+        const paintPresets = () => { const box = q('[data-atd-presetbox]'); if (!box) return; const ps = presets();
+            box.innerHTML = `<label>${esc(T('Nom'))}<input data-atd-pname placeholder="${esc(T('Mes filtres'))}"></label><div class="atd-actions"><button type="button" class="button small secondary" data-atd-psave>💾 ${esc(T('Enregistrer ces filtres'))}</button></div>
+                ${ps.length ? `<label>${esc(T('Mes filtres'))}<select data-atd-plist>${ps.map(x => `<option>${esc(x.name)}</option>`).join('')}</select></label><div class="atd-actions"><button type="button" class="button small secondary" data-atd-papply>${esc(T('Appliquer'))}</button><button type="button" class="button small secondary" data-atd-pdel aria-label="${esc(T('Supprimer'))}" title="${esc(T('Supprimer'))}">🗑</button></div>` : ''}`; };
         const redo = (nc, msg) => { const before = read(); const api2 = chooser(host, {...before, ...nc}, o); if (msg) A().undoToast ? A().undoToast(msg, {undo: () => chooser(host, before, o)}) : A().toast?.(msg); return api2; };
         root.addEventListener('click', e => {
             if (e.target.closest('[data-atd-tplsave]')) { const name = String(q('[data-atd-tplname]')?.value || '').trim() || T('Mon modèle'); const list = templates().filter(x => x.name !== name); list.unshift({name, fmt: fmtOf(read())}); writeJ(K_TPL, list.slice(0, 30)); A().toast?.(T('⭐ Modèle « {n} » enregistré (la forme seulement, sans les données).', {n: name}), 'success'); redo({}); return; }
@@ -321,6 +353,16 @@
             if (e.target.closest('[data-atd-export]')) { const json = JSON.stringify({type: 'lcnda-widget-donnees', version: 1, cfg: read()}, null, 1); if (ext.downloadText) ext.downloadText('widget-donnees.json', json, 'application/json'); else { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([json], {type: 'application/json'})); a.download = 'widget-donnees.json'; a.click(); } return; }
             if (e.target.closest('[data-atd-import]')) { q('[data-atd-importfile]')?.click(); return; }
             if (e.target.closest('[data-atd-dup]')) { o.duplicate?.(read()); return; }
+            if (e.target.closest('[data-atd-tabadd]')) { o.tabs?.add(read()); return; }
+            if (e.target.closest('[data-atd-tabdel]')) { o.tabs?.remove(); return; }
+            if (e.target.closest('[data-atd-alsoadd]')) { const pk = q('[data-atd-alsopk]'); if (pk.firstChild) { pk.innerHTML = ''; return; }
+                ext.dataListPicker?.(pk, {compact: true, onlyInstalled: true, filter: d => eligible(d) && d.id !== chosen?.id && !also.includes(d.id), onPick: d => { also.push(d.id); pk.innerHTML = ''; paintAlso(); refreshRows(); }}); return; }
+            const ax = e.target.closest('[data-atd-alsox]'); if (ax) { also = also.filter(x => x !== ax.dataset.atdAlsox); paintAlso(); refreshRows(); return; }
+            if (e.target.closest('[data-atd-psave]')) { const name = String(q('[data-atd-pname]')?.value || '').trim() || T('Mes filtres'); const r = read(), fv = Object.fromEntries(FILTERS.map(k => [k, r[k]]));
+                writeJ(K_PRESETS, [{name, f: fv}, ...presets().filter(x => x.name !== name)].slice(0, 30)); A().toast?.(T('💾 Filtres « {n} » enregistrés', {n: name}), 'success'); paintPresets(); return; }
+            if (e.target.closest('[data-atd-papply]')) { const x = presets().find(y => y.name === q('[data-atd-plist]')?.value); if (!x) return; FILTERS.forEach(k => { const el = f(k); if (!el) return; if (el.type === 'checkbox') el.checked = !!x.f[k]; else el.value = x.f[k] ?? ''; }); c.lat = x.f.lat; c.lon = x.f.lon; c.place = x.f.place || ''; sync(); refreshRows(); return; }
+            if (e.target.closest('[data-atd-pdel]')) { const name = q('[data-atd-plist]')?.value, before = presets(); writeJ(K_PRESETS, before.filter(y => y.name !== name)); paintPresets();
+                A().undoToast ? A().undoToast(T('Filtres « {n} » supprimés', {n: name}), {undo: () => { writeJ(K_PRESETS, before); paintPresets(); }}) : null; return; }
             if (e.target.closest('[data-atd-change]')) { chosen = null; q('[data-atd-picker]').innerHTML = ''; paintChosen(); return; }
             if (e.target.closest('[data-atd-gods]')) return goDonnees();
             if (e.target.closest('[data-atd-ok]')) { const cur = read(); if (!cur.src && !cur.ask) { UI().fail ? UI().fail(q('[data-ld-ov-q]') || root, T('Choisis une liste, ou pose une question.')) : A().toast?.(T('Choisis une liste, ou pose une question.'), 'error'); return; } o.onDone?.(cur); return; }
@@ -335,7 +377,7 @@
         root.addEventListener('input', e => { if (e.target.matches('[data-atd-f="ask"]')) { sync(); refreshRows(); } });
         q('[data-atd-importfile]')?.addEventListener('change', async e => { const fl = e.target.files?.[0]; if (!fl) return; try { const j = JSON.parse(await fl.text()); if (j?.type !== 'lcnda-widget-donnees' || !j.cfg) throw new Error(T('Ce fichier n’est pas un widget « Données téléchargées ».')); redo(cfgOf(j.cfg), T('Widget importé')); } catch (err) { A().toast?.(err.message, 'error'); } });
         root.querySelectorAll('details[data-atd-sec]').forEach(dt => dt.addEventListener('toggle', () => { if (dt.open) root.querySelectorAll('details[data-atd-sec]').forEach(x => { if (x !== dt) x.open = false; }); })); // une section ouverte à la fois
-        paintChosen(); paintCols(); if (chosen) refreshRows();
+        paintChosen(); paintCols(); paintAlso(); paintPresets(); if (chosen) refreshRows();
         /** pour l'élément de l'Atelier : {key, label, extra, ds} (null : rien de choisi) */
         const collect = async () => {
             const cur = read(); if (!cur.src && !cur.ask) return null;
@@ -351,15 +393,26 @@
 
     /* ═════════ 🧩 le widget d'un projet (heritage-atelier-widgets.js) ═════════ */
     /** body : la case du widget ; w : {id, type: 'donnees', cfg} ; save() l'enregistre ; edit : ouvrir le réglage */
-    function mountWidget(body, w, {save, edit = false, duplicate = null} = {}) {
-        const c = cfgOf(w.cfg);
+    /* 🗂 plusieurs sources côte à côte : des onglets dans le widget (w.cfg = {tabs: [config…], cur}) ; un seul onglet = la config telle quelle */
+    const tabsOf = cfg => (Array.isArray(cfg?.tabs) && cfg.tabs.length ? cfg.tabs : [cfg || {}]);
+    const tabLabel = (t, k) => { const c = cfgOf(t); return c.title || (c.src ? T(listById(c.src)?.label || c.src) : c.ask ? `💬 ${c.ask}` : T('Onglet {n}', {n: k + 1})); };
+    const tabBar = (tabs, i) => (tabs.length > 1 ? `<div class="atd-tabs" role="tablist">${tabs.map((t, k) => `<button type="button" role="tab" class="atd-tab${k === i ? ' is-on' : ''}" aria-selected="${k === i}" data-atd-tab="${k}">${esc(cfgOf(t).icon || listById(cfgOf(t).src)?.icon || '📋')} ${esc(String(tabLabel(t, k)).slice(0, 40))}</button>`).join('')}</div>` : '');
+    function mountWidget(body, w, {save, edit = false, duplicate = null, tab = null} = {}) {
+        const tabs = tabsOf(w.cfg), i = Math.max(0, Math.min(tabs.length - 1, tab ?? Number(w.cfg?.cur || 0))), c = cfgOf(tabs[i]);
+        const again = (o2 = {}) => mountWidget(body, w, {save, duplicate, ...o2});
+        const setTabs = (arr, cur) => { w.cfg = arr.length > 1 ? {tabs: arr, cur} : {...arr[0]}; save?.(); };
         const sec = body.closest('.h-atw'); if (sec) { sec.classList.toggle('is-wide', edit || (!c.src && !c.ask) || ['L', 'full'].includes(c.size)); sec.classList.toggle('atd-sz-full', c.size === 'full'); } // 📐 la taille du widget
-        const box = document.createElement('div'); box.className = 'atd'; body.innerHTML = ''; body.appendChild(box);
+        body.innerHTML = tabBar(tabs, i);
+        const box = document.createElement('div'); box.className = 'atd'; body.appendChild(box);
+        body.querySelectorAll('[data-atd-tab]').forEach(b => b.addEventListener('click', () => { if (tabs.length > 1) { w.cfg = {tabs, cur: Number(b.dataset.atdTab)}; save?.(); } again({tab: Number(b.dataset.atdTab)}); }));
         if (edit || (!c.src && !c.ask)) {
             return chooser(box, c, {display: true, duplicate: duplicate ? cur => duplicate(cur) : null,
-                onDone: cur => { const before = w.cfg; w.cfg = cur; save?.(); mountWidget(body, w, {save, duplicate}); // ↶ un réglage changé se défait
-                    if (before && (before.src || before.ask) && A().undoToast) A().undoToast(T('Widget réglé'), {undo: () => { w.cfg = before; save?.(); mountWidget(body, w, {save, duplicate}); }}); },
-                onCancel: c.src || c.ask ? () => mountWidget(body, w, {save, duplicate}) : null});
+                tabs: {count: tabs.length,
+                    add: cur => { const arr = [...tabs]; arr[i] = cur; arr.push({}); setTabs(arr, arr.length - 1); again({tab: arr.length - 1, edit: true}); },
+                    remove: () => { const before = w.cfg, arr = tabs.filter((_, k) => k !== i); setTabs(arr, 0); again({tab: 0}); A().undoToast?.(T('Onglet retiré'), {undo: () => { w.cfg = before; save?.(); again({tab: i}); }}); }},
+                onDone: cur => { const before = w.cfg, arr = [...tabs]; arr[i] = cur; setTabs(arr, i); again({tab: i}); // ↶ un réglage changé se défait
+                    if (before && (tabsOf(before)[i]?.src || tabsOf(before)[i]?.ask) && A().undoToast) A().undoToast(T('Widget réglé'), {undo: () => { w.cfg = before; save?.(); again({tab: i}); }}); },
+                onCancel: c.src || c.ask ? () => again({tab: i}) : (tabs.length > 1 ? () => { const arr = tabs.filter((_, k) => k !== i); setTabs(arr, 0); again({tab: 0}); } : null)});
         }
         show(box, c);
     }
@@ -395,8 +448,11 @@
     ext.dashboard = ext.dashboard || {}; ext.dashboardConfig = ext.dashboardConfig || {};
     ext.dashboard[DW] = {load: () => Promise.resolve(null), render: (index, widget, span) => {
         const id = 'atd' + Math.random().toString(36).slice(2, 9), c = cfgOf(widget?.config);
-        setTimeout(() => { const el = document.getElementById(id); if (!el) return; if (!c.src && !c.ask) { el.innerHTML = emptyLine('📊', esc(T('Choisis la liste dans ⚙ Réglages du widget.'))); return; } show(el, c); }, 0);
-        const html = `<div class="atd" id="${id}"></div>`;
+        setTimeout(() => { const el = document.getElementById(id); if (!el) return; const tabs = tabsOf(widget?.config);
+            const paint = k => { const t = cfgOf(tabs[k]); el.innerHTML = `${tabBar(tabs, k)}<div class="atd"></div>`; el.querySelectorAll('[data-atd-tab]').forEach(b => b.addEventListener('click', () => paint(Number(b.dataset.atdTab))));
+                const box = el.lastElementChild; if (!t.src && !t.ask) box.innerHTML = emptyLine('📊', esc(T('Choisis la liste dans ⚙ Réglages du widget.'))); else show(box, t); };
+            paint(0); }, 0);
+        const html = `<div class="atd-dash" id="${id}"></div>`;
         return A().card ? A().card(index, `📊 ${T('Données téléchargées')}`, '', html, span) : html;
     }};
     ext.dashboardConfig[DW] = {

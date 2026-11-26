@@ -1067,6 +1067,11 @@
             st.ctx = {...base, ...o.ctx, label: first && base.label ? base.label : o.here}; // ouvert d'une sous-partie : son nom reste
             const pill = st.dlg.querySelector('.cx-destpill'); if (pill && (!first || o.v !== opts[0].v)) pill.innerHTML = `<span aria-hidden="true">${esc(o.pill[0])}</span> ${esc(o.pill[1])}`; };
         sel.addEventListener('change', () => apply(false)); apply(true);
+        /* 📁 un dossier d'enquête reçoit les médias : on ne le propose que si un média est coché (celui d'où l'on vient reste toujours) */
+        st.whereSync = () => { if (!sel.isConnected) return; const media = [...st.picked.values()].some(x => x.kind === 'media');
+            let moved = false; [...sel.options].forEach(op => { const o = opts.find(x => x.v === op.value); if (!o?.media) return; const hide = !media && op.value !== pre; op.hidden = hide; op.disabled = hide; if (hide && op.selected) moved = true; });
+            if (moved) { sel.value = opts[0].v; apply(false); } };
+        st.whereSync();
     }
     function goTab(st, k) {
         if (st.tab !== k) { st.tab = k; st.q = ''; st.filters = new Set(); st.list = null; st.dlg.querySelector('[data-cx-q]').value = ''; }
@@ -1092,6 +1097,7 @@
         const n2 = st.dlg.querySelector('[data-cx-n2]'); if (n2) n2.textContent = n ? `(${nf(n)})` : '';
         st.dlg.querySelector('[data-cx-takehere]')?.toggleAttribute('aria-disabled', !n);
         if (!st.preview && (n >= 2 || st.sum)) drawSummary(st); else if (st.sum && n < 2) { st.sum = false; previewItem(st, null); }
+        st.whereSync?.(); // 📁 « Où ranger » : les dossiers seulement quand un média est coché
     }
     const togglePick = (st, it, on) => { const k = pickKey(it); if (on) st.picked.set(k, it); else st.picked.delete(k); };
 

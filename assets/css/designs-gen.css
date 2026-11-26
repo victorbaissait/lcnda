@@ -7156,6 +7156,12 @@
 :root[data-lc-density] .atd-time{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .atd-time li{gap:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .atd-ticker{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-tabs{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .atd-tabs{padding:0 calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-tab{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .atd-also{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-chip{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .atd-chip{padding:calc(2px * var(--lc-sp)) calc(4px * var(--lc-sp)) calc(2px * var(--lc-sp)) calc(9px * var(--lc-sp))}
 /* donnees-maj.css */
 :root[data-lc-density] .dmaj-filters .segmented button{padding:0 calc(16px * var(--lc-sp))}
 /* donnees-recap.css */
