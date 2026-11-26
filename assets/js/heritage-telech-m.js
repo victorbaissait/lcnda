@@ -521,7 +521,7 @@
                 merge: {into: 'competitions', rank: 1, short: 'Wikidata', row: r => ({key: `${r.compId}|${r.year}`, date: r.date, year: r.year, lat: r.lat, lon: r.lon, place: r.place, comp: r.comp, chip: r.compId, name: r.name, winner: r.winner, stages: r.stages, url: r.src, source: r.source})}}),
         L('ts_tour', 'ts-competitions', '🚲', 'Tour de France : éditions, étapes et vainqueurs', 'sport', 'Wikidata (CC0)', 'https://www.wikidata.org/wiki/Q33881', 'competitions',
             tourEditionRows, [F('year', 'Année', 'year'), F('winner', 'Maillot jaune'), F('stages', 'Étapes'), F('km', 'Distance (km)', 'number'), F('route', 'Parcours'), F('src', 'Source', 'url')],
-            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], familyColumn: true, familyKm: () => radius(), defaultView: () => (settings().view === 'etapes' ? 'etapes' : 'editions'),
+            {period: r => [r.year, r.year], geo: r => [r.lat, r.lon], familyColumn: true, defaultView: () => (settings().view === 'etapes' ? 'etapes' : 'editions'),
                 views: [{id: 'editions', label: 'Éditions', sub: r => ({view: 'etapes', preset: {crit: [{key: 'year', kind: 'range', from: r.year, to: r.year}]}, title: T('Tour de France {y}', {y: String(r.year)}), pickAll: 'Toutes ses étapes'})},
                     {id: 'etapes', label: 'Étapes', load: tourStageRows, fields: [F('date', 'Date', 'date'), F('year', 'Année', 'year'), F('stage', 'Étape'), F('from', 'Départ', 'place'), F('to', 'Arrivée', 'place'), F('km', 'Distance (km)', 'number'), F('winner', 'Vainqueur d’étape'), F('yellow', 'Maillot jaune ce soir-là'), F('src', 'Source', 'url')], geo: r => [r.lat, r.lon], open: openSrc}]}),
         L('ts_matchs', 'ts-matchs', '⚽', 'Matchs internationaux de football (depuis 1872)', 'sport', 'martj42/international_results (CC0)', RES_URL, 'pres',
@@ -545,7 +545,7 @@
             {period: r => [r.year, r.end ?? r.year], geo: r => [r.lat, r.lon]}));
     // la liste réunie « 🔀 Compétitions sportives » (thème 🏆 Sport) — déclarée ici seulement si le moteur des thèmes ne l'a pas déjà
     const MERGE = {id: 'competitions', theme: 'sport', icon: '🔀', label: T('Compétitions sportives'), noun: ['édition', 'éditions'], chips: 'comp', columns: ['year', 'comp', 'place', 'winner', 'stages'],
-        same: {by: 'key'}, keep: ['chip', 'name'], familyColumn: true, familyKm: () => radius(), period: r => [r.year, r.year], geo: r => [r.lat, r.lon]};
+        same: {by: 'key'}, keep: ['chip', 'name'], familyColumn: true, period: r => [r.year, r.year], geo: r => [r.lat, r.lon]};
     const addMerge = () => { const M = ext.dataListMerges = ext.dataListMerges || []; if (!M.some(m => m.id === MERGE.id)) M.push(MERGE); };
     addMerge();
     if (root.document) document.addEventListener('DOMContentLoaded', () => { const M = ext.dataListMerges || []; const mine = M.filter(m => m.id === MERGE.id); if (mine.length > 1) M.splice(M.indexOf(MERGE), 1); }, {once: true});

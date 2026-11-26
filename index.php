@@ -1741,7 +1741,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-h.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-g.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-i.js?v=2" defer></script>
-<script src="assets/js/heritage-telech-m.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-m.js?v=2" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=4" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>
