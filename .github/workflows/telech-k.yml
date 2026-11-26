@@ -24,7 +24,7 @@ on:
         required: false
         default: 'patrimoine'
       pays:
-        description: 'pour « patrimoine » : codes des pays séparés par des espaces (gb ie nl be lu de ch at it es pt dk no se fi is ee lv lt pl cz sk hu si hr ro bg gr mt mc ad li ca us), « monde » ou « tout »'
+        description: 'pour « patrimoine » : codes des pays (pour « musees » : continents eu am as af oc) séparés par des espaces (gb ie nl be lu de ch at it es pt dk no se fi is ee lv lt pl cz sk hu si hr ro bg gr mt mc ad li ca us), « monde » ou « tout »'
         required: false
         default: 'tout'
   push:
@@ -68,17 +68,34 @@ jobs:
       - name: "🏛 Patrimoine protégé (Wikidata, un pack par pays)"
         if: env.QUOI == 'tout' || env.QUOI == 'patrimoine'
         timeout-minutes: 300
+        # un dépassement ne perd plus le travail fait : les pays finis sont enregistrés quand même (étape « Enregistrer »)
+        continue-on-error: true
+        env:
+          TK_WDQS_GAP: '30'
         run: |
-          # les pays un par un : un pays raté (service saturé) n'empêche pas les autres ; le cache garde ce qui est déjà lu
+          # les pays un par un : un pays raté (service saturé) n'empêche pas les autres ; le cache garde ce qui est déjà lu.
+          # Pas de nouveau pays après 200 min : la suite au prochain passage (les pays déjà faits reviennent vite, par le cache).
+          t0=$(date +%s)
           for p in $( [ "$PAYS" = "tout" ] && echo "monde gb ie nl be lu de ch at it es pt dk no se fi is ee lv lt pl cz sk hu si hr ro bg gr mt mc ad li ca us" || echo "$PAYS" ); do
             case "$p" in *[!a-z]*) echo "code de pays refusé : $p"; continue;; esac
+            if [ $(( $(date +%s) - t0 )) -gt 12000 ]; then echo "temps écoulé : $p et la suite au prochain passage"; break; fi
             if [ "$p" = "monde" ]; then python3 -I scripts/telech-k/build_patrimoine.py --api assets/data monde || echo "raté : $p";
             else python3 -I scripts/telech-k/build_patrimoine.py assets/data "$p" || echo "raté : $p"; fi
           done
       - name: "🖼 Musées du monde (Wikidata, un pack par continent)"
         if: env.QUOI == 'tout' || env.QUOI == 'musees'
         timeout-minutes: 300
-        run: python3 -I scripts/telech-k/build_musees.py assets/data
+        continue-on-error: true
+        env:
+          TK_WDQS_GAP: '30'
+        run: |
+          # un continent à la fois (chacun est écrit dès qu'il est fini) ; pas de nouveau continent après 200 min
+          t0=$(date +%s)
+          for c in $( [ "$PAYS" = "tout" ] && echo "eu am as af oc" || echo "$PAYS" ); do
+            case "$c" in eu|am|as|af|oc) ;; *) echo "continent inconnu : $c"; continue;; esac
+            if [ $(( $(date +%s) - t0 )) -gt 12000 ]; then echo "temps écoulé : $c et la suite au prochain passage"; break; fi
+            python3 -I scripts/telech-k/build_musees.py assets/data "$c" || echo "raté : $c"
+          done
       - name: "🎨 Œuvres du domaine public (Metropolitan Museum, CC0)"
         if: env.QUOI == 'tout' || env.QUOI == 'collections'
         run: python3 -I scripts/telech-k/build_collections.py assets/data
