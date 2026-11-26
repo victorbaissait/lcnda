@@ -360,7 +360,7 @@
         'genealogie-meteo', // 🌦 Météo d’autrefois (heritage-meteo.js)
         'genealogie-elections', // 🗳 Élections d’autrefois (heritage-elections.js)
         'genealogie-gov', // 🏰 Lieux anciens GOV (heritage-gov.js)
-        'genealogie-gender-colors','genealogie-tree-card-fields','genealogie-identity-name-variants-display','genealogie-sources-defaut','genealogie-sources-ouvertes',
+        'genealogie-gender-colors','genealogie-tree-card-fields','genealogie-identity-name-variants-display','genealogie-sources-defaut',
         'genealogie-battue-level-colors','genealogie-battue-level-color-presets','genealogie-person-badge-colors','genealogie-person-badge-color-presets',
         'genealogie-portraits','genealogie-left-column', // K7 portraits, K15 colonne de gauche (app-portraits.js, app-colonne.js)
         'genealogie-designs', // 🎨 Designs au choix A1–A8 (app-designs.js ; plus d’ensembles enregistrés à part)
