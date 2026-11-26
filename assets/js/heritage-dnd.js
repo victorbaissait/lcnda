@@ -68,7 +68,9 @@
     }
     /** attendre que la page se calme, mais pas plus de 600 ms : une page qui change sans arrêt (une barre de temps, une animation) ne doit pas laisser les poignées sans clavier.
      *  Seulement pour les poignées (des attributs, rien n'est déplacé) : ranger les lignes, lui, attend vraiment le calme, pour ne pas relancer sans fin les autres outils. */
-    const settle = (fn, wait) => { let t = 0, first = 0; return () => { const now = Date.now(); if (!t) first = now; clearTimeout(t); t = setTimeout(() => { t = 0; fn(); }, now - first > 600 ? 0 : wait); }; };
+    // au-delà de 600 ms, le minuteur déjà posé n'est plus repoussé : avant, chaque changement le relançait (même à 0 ms) et une page
+    // qui change à chaque tâche (aperçus qui se chargent, images) ne voyait jamais ses poignées prêtes (⠿ sans Tab, test K20)
+    const settle = (fn, wait) => { let t = 0, first = 0; return () => { const now = Date.now(); if (!t) first = now; else if (now - first > 600) return; clearTimeout(t); t = setTimeout(() => { t = 0; fn(); }, wait); }; };
     // une page qui bouge sans arrêt (horloge, widgets du tableau de bord) ne doit pas retarder les poignées : au plus 600 ms (settle)
     new MutationObserver(settle(enhance, 80)).observe(document.documentElement, {childList: true, subtree: true});
 

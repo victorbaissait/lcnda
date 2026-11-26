@@ -33,7 +33,11 @@
 
     /* ─────────── les liens NASA ─────────── */
     const nasaYmd = c => `${c.y < 0 ? '-' : ''}${pad(c.y, 4)}${pad(c.m)}${pad(c.d)}`;
-    const century = y => { const a = Math.floor((y - 1) / 100) * 100 + 1, b = a + 99, f = v => (v < 0 ? '-' + pad(v, 4) : pad(v, 4)); return `${f(a)}-${f(b)}`; };
+    // les pages de siècle du « Five Millennium Catalog » : LE1901-2000, LE0001-0100, LE-0599--0500 et, pour le siècle qui finit à l'an 0
+    // (100 av. J.-C. → 1 av. J.-C.), LE-0099--0000 (NASA écrit « -0000 ») — vérifié le 2026-11-26 sur l'index de SEcat5 / LEcat5
+    const century = y => { const a = Math.floor((y - 1) / 100) * 100 + 1, b = a + 99, f = v => (a < 0 ? '-' + pad(v, 4) : pad(v, 4)); return `${f(a)}-${f(b)}`; };
+    /** ce que montre le lien : la carte de CETTE éclipse de soleil (moteur de recherche de la NASA), ou le catalogue du siècle pour la lune */
+    const nasaLabel = e => (e && e.kind === 'solar' ? T('Carte et détails de cette éclipse (NASA)') : T('Catalogue NASA des éclipses de lune de ce siècle'));
     const nasaUrl = (e, c) => (e.kind === 'solar' ? `https://eclipse.gsfc.nasa.gov/SEsearch/SEsearchmap.php?Ecl=${nasaYmd(c)}` : `https://eclipse.gsfc.nasa.gov/LEcat5/LE${century(c.y)}.html`);
 
     /* ─────────── où on la voyait le mieux ─────────── */
@@ -185,7 +189,7 @@
             {key: 'region', label: 'Où on la voyait le mieux', type: 'text'},
             {key: 'seen', label: 'Vue du lieu choisi', type: 'text'},
             {key: 'local', label: 'Heure locale du maximum', type: 'text'},
-            {key: 'pct', label: 'Part cachée (%)', type: 'number'},
+            {key: 'pct', label: 'Part cachée', type: 'number', unit: '%'},
             {key: 'gamma', label: 'Gamma', type: 'number', hidden: true},
             {key: 'nasa', label: 'La page de la NASA', type: 'url'}],
         period: r => [r.year, r.year],
@@ -199,7 +203,7 @@
     const ctxPlace = pl => { if (!pl) return null; const lat = Number(pl.lat ?? pl.latitude), lon = Number(pl.lon ?? pl.lng ?? pl.longitude); return Number.isFinite(lat) && Number.isFinite(lon) && (lat || lon) ? {lat, lon, name: pl.name || pl.place_name || pl.title || '', country: pl.country || ''} : null; };
     const personDetail = async ctx => (ctx?.person?.events ? ctx.person : A().api('person', {id: Number(ctx?.person?.id ?? ctx?.person)}));
     const none = (host, txt) => { host.innerHTML = `<p class="muted">${esc(txt)}</p>`; return false; };
-    const listHtml = (items, extra = '') => `<ul class="ecl-ds">${items.map(it => `<li><span aria-hidden="true">${it.row._e.kind === 'solar' ? '🌑' : '🌘'}</span> <b>${esc(it.row.date)}</b>${it.where ? ` · ${esc(it.where)}` : ''} — ${esc(it.s.text)} <a href="${esc(it.row.nasa)}" target="_blank" rel="noopener" title="${esc(T('La page de la NASA'))}">↗</a></li>`).join('')}</ul>${extra}`;
+    const listHtml = (items, extra = '') => `<ul class="ecl-ds">${items.map(it => `<li><span aria-hidden="true">${it.row._e.kind === 'solar' ? '🌑' : '🌘'}</span> <b>${esc(it.row.date)}</b>${it.where ? ` · ${esc(it.where)}` : ''} — ${esc(it.s.text)} <a href="${esc(it.row.nasa)}" target="_blank" rel="noopener" title="${esc(nasaLabel(it.row._e))}" aria-label="${esc(nasaLabel(it.row._e))}">↗</a></li>`).join('')}</ul>${extra}`;
     const openBtn = (preset, label) => { const k = `ecl${Math.random().toString(36).slice(2, 8)}`; presets.set(k, preset); return `<p><button type="button" class="table-link" data-ecl-open="${k}">${esc(label)}</button></p>`; };
     const presets = new Map();
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-ecl-open]'); if (!b) return; const p = presets.get(b.dataset.eclOpen); if (p) ext.dataListsEngine?.open?.(ID, p); });
@@ -248,9 +252,9 @@
                 const y = Number(ctx?.year); if (!Number.isFinite(y)) return none(host, T('Choisis une année.'));
                 const rows = (await run({years: {from: y, to: y, mode: 'in'}})).map(detail);
                 if (!rows.length) return none(host, T('Aucune éclipse en {y}.', {y}));
-                host.innerHTML = `<ul class="ecl-ds">${rows.map(r => `<li><span aria-hidden="true">${r._e.kind === 'solar' ? '🌑' : '🌘'}</span> <b>${esc(r.date)}</b> · ${esc(r.body)}, ${esc(r.type)}${r.totality ? ` (${esc(r.totality)})` : ''} — ${esc(r.region)} <a href="${esc(r.nasa)}" target="_blank" rel="noopener" title="${esc(T('La page de la NASA'))}">↗</a></li>`).join('')}</ul>${openBtn({period: {mode: 'in', from: y, to: y}}, T('Ouvrir la liste des éclipses →'))}`;
+                host.innerHTML = `<ul class="ecl-ds">${rows.map(r => `<li><span aria-hidden="true">${r._e.kind === 'solar' ? '🌑' : '🌘'}</span> <b>${esc(r.date)}</b> · ${esc(r.body)}, ${esc(r.type)}${r.totality ? ` (${esc(r.totality)})` : ''} — ${esc(r.region)} <a href="${esc(r.nasa)}" target="_blank" rel="noopener" title="${esc(nasaLabel(r._e))}" aria-label="${esc(nasaLabel(r._e))}">↗</a></li>`).join('')}</ul>${openBtn({period: {mode: 'in', from: y, to: y}}, T('Ouvrir la liste des éclipses →'))}`;
                 return true;
             }});
 
-    ext.eclipsesListe = {catalogue, run, query, seenFrom, bestPoint, zoneOf, nasaUrl, dateText, personSeen};
+    ext.eclipsesListe = {catalogue, run, query, seenFrom, bestPoint, zoneOf, nasaUrl, nasaLabel, dateText, personSeen};
 })();

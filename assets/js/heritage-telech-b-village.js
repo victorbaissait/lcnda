@@ -108,7 +108,7 @@
     const nf = n => Number(n || 0).toLocaleString('fr-FR');
     const lang = () => root.LCNDA_I18N?.lang || document.documentElement.lang || 'fr';
     const kmTxt = k => (k < 1 ? T('{n} m', {n: String(Math.max(10, Math.round(k * 100) * 10))}) : T('{n} km', {n: String(Math.round(k))}));
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label)); // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
     const srcLink = url => (url ? `<a class="tb-src-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : '');
     const row = (icon, html, src, extra = '') => `<div class="hist-row tb-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const more = (html, n) => (html ? `<details class="tb-more"><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
@@ -233,7 +233,7 @@
         placeInto(village.querySelector('[data-tb-host]'), place);
     }
     let pending = 0;
-    new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => console.error(e)); }); }).observe(document.documentElement, {childList: true, subtree: true});
+    new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => { if (!(e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || ''))))) console.error(e); }) /* téléchargement coupé (page rechargée) : rien dans la console */; }); }).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ─────────── 👤 la fiche d'une personne ─────────── */
     const lifeMemo = new Map();

@@ -77,10 +77,10 @@ function pn_reminder(PDO $pdo, array $b, string $due, bool $remind): int
     if (!$has) { return 0; }
     if ($due === '' || !$remind) { if ($rid) { $pdo->prepare('DELETE FROM standalone_reminders WHERE id=?')->execute([$rid]); } return 0; }
     $at = date('Y-m-d', strtotime($due . ' -1 day') ?: time());
-    $title = mb_substr('🧺 Panier « ' . $b['name'] . ' » : pour le ' . $due, 0, 300);
+    $title = mb_substr(cx_t('🧺 Panier « {name} » : pour le {date}', ['name' => $b['name'], 'date' => $due]), 0, 300);
     if ($rid) { $s = $pdo->prepare('SELECT id FROM standalone_reminders WHERE id=?'); $s->execute([$rid]); if (!$s->fetchColumn()) { $rid = 0; } }
     if ($rid) { $pdo->prepare("UPDATE standalone_reminders SET title=?, reminder_mode='on', reminder_due_at=? WHERE id=?")->execute([$title, $at, $rid]); return $rid; }
-    $pdo->prepare("INSERT INTO standalone_reminders(title, notes, reminder_mode, reminder_due_at) VALUES(?,?,'on',?)")->execute([$title, 'Onglet Paniers', $at]);
+    $pdo->prepare("INSERT INTO standalone_reminders(title, notes, reminder_mode, reminder_due_at) VALUES(?,?,'on',?)")->execute([$title, cx_t('Onglet Paniers'), $at]);
     return (int) $pdo->lastInsertId();
 }
 
@@ -138,8 +138,8 @@ function pn_dup(PDO $pdo, array $d): array
     $id = safe_int($d['basket_id'] ?? 0); $b = pn_basket($pdo, $id);
     $ids = array_values(array_filter(array_map('intval', array_slice(is_array($d['ids'] ?? null) ? $d['ids'] : [], 0, 5000))));
     $folder = array_key_exists('folder_id', $d) ? cx_folder_ok($pdo, safe_int($d['folder_id'])) : (int) $b['folder_id'];
-    $name = cx_str($d['name'] ?? '', 120) ?: ($b['name'] . ' (copie)');
-    $pdo->beginTransaction();
+    $name = cx_str($d['name'] ?? '', 120) ?: cx_t('{name} (copie)', ['name' => $b['name']]);
+    $own = cx_begin($pdo);
     try {
         $pdo->prepare('INSERT INTO cx_baskets(name, icon, color, note, folder_id, dests_json, query_json, sort_json, labels_json, cover, view) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
             ->execute([$name, $b['icon'], $b['color'], $b['note'], $folder, $b['dests_json'], $b['query_json'], $b['sort_json'], $b['labels_json'], $b['cover'], $b['view']]);
@@ -148,10 +148,10 @@ function pn_dup(PDO $pdo, array $d): array
         if ($ids) { $sql .= ' AND id IN (' . implode(',', $ids) . ')'; }
         $pdo->prepare($sql . ' ORDER BY position, id')->execute([$nid, $id]);
         $n = (int) $pdo->query('SELECT count(*) FROM cx_basket_items WHERE basket_id=' . $nid)->fetchColumn();
-        $pdo->commit();
-    } catch (Throwable $e) { $pdo->rollBack(); throw $e; }
-    pn_log($pdo, $nid, $ids ? "Créé avec $n éléments cochés de « {$b['name']} »" : "Copie de « {$b['name']} »");
-    pn_log($pdo, $id, $ids ? "$n éléments copiés dans « $name »" : "Copié dans « $name »");
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+    pn_log($pdo, $nid, $ids ? cx_t('Créé avec {n} éléments cochés de « {name} »', ['n' => $n, 'name' => $b['name']]) : cx_t('Copie de « {name} »', ['name' => $b['name']]));
+    pn_log($pdo, $id, $ids ? cx_t('{n} éléments copiés dans « {name} »', ['n' => $n, 'name' => $name]) : cx_t('Copié dans « {name} »', ['name' => $name]));
     return ['id' => $nid, 'count' => $n, 'baskets' => cx_baskets($pdo), 'folders' => cx_folders($pdo)];
 }
 
@@ -160,12 +160,12 @@ function pn_create(PDO $pdo, array $d): array
 {
     $folder = cx_folder_ok($pdo, safe_int($d['folder_id'] ?? 0));
     $pdo->prepare('INSERT INTO cx_baskets(name, icon, folder_id, query_json, live_json) VALUES(?,?,?,?,?)')
-        ->execute([cx_str($d['name'] ?? '', 120) ?: 'Panier', cx_str($d['icon'] ?? '', 16), $folder, pn_small_json($d['query'] ?? null), pn_small_json($d['live'] ?? null, 200000)]);
+        ->execute([cx_str($d['name'] ?? '', 120) ?: cx_t('Panier'), cx_str($d['icon'] ?? '', 16), $folder, pn_small_json($d['query'] ?? null), pn_small_json($d['live'] ?? null, 200000)]);
     $id = (int) $pdo->lastInsertId();
     $r = ['ids' => [], 'skipped' => 0];
     if (is_array($d['items'] ?? null) && $d['items']) { $r = cx_basket_add($pdo, ['basket_id' => $id, 'items' => $d['items']]); }
     $q = is_array($d['query'] ?? null) ? cx_str($d['query']['text'] ?? '', 200) : '';
-    pn_log($pdo, $id, $q !== '' ? "Créé par la recherche « $q » (" . count($r['ids']) . ' éléments)' : 'Panier créé');
+    pn_log($pdo, $id, $q !== '' ? cx_t('Créé par la recherche « {q} » ({n} éléments)', ['q' => $q, 'n' => count($r['ids'])]) : cx_t('Panier créé'));
     return ['id' => $id, 'ids' => $r['ids'], 'skipped' => $r['skipped'], 'baskets' => cx_baskets($pdo), 'folders' => cx_folders($pdo)];
 }
 
@@ -181,11 +181,11 @@ function pn_to_investigation(PDO $pdo, array $d): array
     if ($pid) { $c = $pdo->prepare('SELECT id FROM persons WHERE id=?'); $c->execute([$pid]); $pid = (int) $c->fetchColumn(); }
     if (!$pid) { $pid = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn(); }
     if (!$pid) { throw new LcndaBadInput('Il faut au moins une personne dans l’arbre pour créer une enquête.'); }
-    $pdo->prepare("INSERT INTO investigations(person_id, title, question, status) VALUES(?,?,?,'open')")->execute([$pid, cx_str($d['title'] ?? '', 200) ?: $b['name'], 'Créée à partir du panier « ' . $b['name'] . ' »']);
+    $pdo->prepare("INSERT INTO investigations(person_id, title, question, status) VALUES(?,?,?,'open')")->execute([$pid, cx_str($d['title'] ?? '', 200) ?: $b['name'], cx_t('Créée à partir du panier « {name} »', ['name' => $b['name']])]);
     $inv = (int) $pdo->lastInsertId();
     $items = array_map(static fn($r) => ['kind' => $r['kind'], 'ref_id' => $r['ref_id'], 'title' => $r['title'], 'value' => $r['value'], 'data' => $r['data'], 'origin' => $r['origin']], $rows);
     $out = cx_inv_receive($pdo, ['investigation_id' => $inv, 'mode' => 'each', 'items' => $items]);
-    pn_log($pdo, $id, 'Enquête créée : « ' . (cx_str($d['title'] ?? '', 200) ?: $b['name']) . ' »');
+    pn_log($pdo, $id, cx_t('Enquête créée : « {name} »', ['name' => cx_str($d['title'] ?? '', 200) ?: $b['name']]));
     return ['investigation_id' => $inv, 'pistes' => count($out['item_ids'])];
 }
 
@@ -257,12 +257,32 @@ function pn_item_blocked(PDO $pdo, array $r): bool
     $pid = 0;
     if ($r['kind'] === 'person') { $pid = (int) $r['ref_id']; }
     elseif ($r['kind'] === 'event' && $r['ref_id']) {
-        $s = $pdo->prepare('SELECT person_id' . (pn_has_col($pdo, 'events', 'is_private') ? ', is_private' : ', 0 AS is_private') . ' FROM events WHERE id=?'); $s->execute([(int) $r['ref_id']]); $e = $s->fetch(PDO::FETCH_ASSOC);
-        if ($e && (int) $e['is_private'] === 1) { return true; }
-        $pid = (int) ($e['person_id'] ?? 0);
+        if (pn_event_blocked($pdo, (int) $r['ref_id'])) { return true; }
+    }
+    elseif ($r['kind'] === 'note' && $r['ref_id']) { // une note de l'arbre : celle d'une fiche ou d'un événement bloqué l'est aussi
+        try { $s = $pdo->prepare('SELECT entity_type, entity_id FROM notes WHERE id=?'); $s->execute([(int) $r['ref_id']]); $n = $s->fetch(PDO::FETCH_ASSOC); } catch (Throwable $_) { $n = null; }
+        if ($n && $n['entity_type'] === 'person' && pn_person_blocked($pdo, (int) $n['entity_id'])) { return true; }
+        if ($n && $n['entity_type'] === 'event' && pn_event_blocked($pdo, (int) $n['entity_id'])) { return true; }
+    }
+    elseif ($r['kind'] === 'media' && $r['ref_id']) { // un média qui montre une personne vivante ou confidentielle
+        try { $s = $pdo->prepare("SELECT entity_type, entity_id FROM media_links WHERE media_id=? AND entity_type IN ('person','event') LIMIT 200"); $s->execute([(int) $r['ref_id']]);
+            foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $l) { if ($l['entity_type'] === 'person' ? pn_person_blocked($pdo, (int) $l['entity_id']) : pn_event_blocked($pdo, (int) $l['entity_id'])) { return true; } } } catch (Throwable $_) {}
     }
     $pid = $pid ?: (int) ($r['origin']['person_id'] ?? 0);
     return pn_person_blocked($pdo, $pid);
+}
+
+/** un événement confidentiel, ou celui d'une personne bloquée */
+function pn_event_blocked(PDO $pdo, int $eid): bool
+{
+    if (!$eid) { return false; }
+    $s = $pdo->prepare('SELECT person_id, family_id' . (pn_has_col($pdo, 'events', 'is_private') ? ', is_private' : ', 0 AS is_private') . ' FROM events WHERE id=?'); $s->execute([$eid]); $e = $s->fetch(PDO::FETCH_ASSOC);
+    if ($e && (int) $e['is_private'] === 1) { return true; }
+    if ($e && !(int) $e['person_id'] && (int) $e['family_id']) { // un événement de couple (mariage…) : bloqué si l'un des deux l'est
+        try { $f = $pdo->prepare('SELECT partner1_id, partner2_id FROM families WHERE id=?'); $f->execute([(int) $e['family_id']]); $c = $f->fetch(PDO::FETCH_ASSOC); } catch (Throwable $_) { $c = null; }
+        return $c && (pn_person_blocked($pdo, (int) $c['partner1_id']) || pn_person_blocked($pdo, (int) $c['partner2_id']));
+    }
+    return pn_person_blocked($pdo, (int) ($e['person_id'] ?? 0));
 }
 
 function pn_has_col(PDO $pdo, string $t, string $c): bool
@@ -319,10 +339,10 @@ function pn_share_read(mixed $body): array
         if ($title === '' && $value === '') { continue; }
         $url = pn_url($it['url'] ?? '');
         $items[] = ['kind' => $kind, 'ref_id' => 0, 'title' => $title, 'value' => $value, 'data' => pn_clean_data($it['data'] ?? null),
-            'origin' => array_filter(['kind' => 'shared', 'label' => pn_txt($it['source'] ?? '', 300) ?: 'Panier partagé', 'url' => $url]),
+            'origin' => array_filter(['kind' => 'shared', 'label' => pn_txt($it['source'] ?? '', 300) ?: cx_t('Panier partagé'), 'url' => $url]),
             'status' => in_array($it['status'] ?? '', PN_STATUSES, true) ? (string) $it['status'] : ''];
     }
-    return ['name' => pn_txt($j['name'] ?? '', 120) ?: 'Panier récupéré', 'icon' => pn_txt($j['icon'] ?? '', 16), 'made' => pn_txt($j['made'] ?? '', 10), 'items' => $items];
+    return ['name' => pn_txt($j['name'] ?? '', 120) ?: cx_t('Panier récupéré'), 'icon' => pn_txt($j['icon'] ?? '', 16), 'made' => pn_txt($j['made'] ?? '', 10), 'items' => $items];
 }
 
 /** l'aperçu : chaque élément, et s'il est déjà dans le panier choisi (ou dans un autre) */
@@ -354,7 +374,7 @@ function pn_share_import(PDO $pdo, array $d): array
     foreach ($items as $it) { $k = mb_strtolower($it['title']) . '|' . mb_strtolower($it['value']); if (isset($seen[$k])) { $skipped++; continue; } $seen[$k] = 1; $add[] = $it; }
     $r = $add ? cx_basket_add($pdo, ['basket_id' => $bid, 'items' => $add]) : ['ids' => [], 'skipped' => 0];
     if ($r['ids']) { $u = $pdo->prepare('UPDATE cx_basket_items SET status=? WHERE id=?'); foreach ($r['ids'] as $i => $iid) { $st = (string) ($add[$i]['status'] ?? ''); if ($st !== '') { $u->execute([$st, $iid]); } } }
-    pn_log($pdo, $bid, 'Récupéré depuis un fichier .lcnda-panier (' . count($r['ids']) . ' éléments, ' . ($skipped + $r['skipped']) . ' déjà dedans)', $new ? null : ['op' => 'basket_remove', 'body' => ['ids' => $r['ids']]]);
+    pn_log($pdo, $bid, cx_t('Récupéré depuis un fichier .lcnda-panier ({n} éléments, {m} déjà dedans)', ['n' => count($r['ids']), 'm' => $skipped + $r['skipped']]), $new ? null : ['op' => 'basket_remove', 'body' => ['ids' => $r['ids']]]);
     return ['basket_id' => $bid, 'new' => $new, 'ids' => $r['ids'], 'skipped' => $skipped + $r['skipped'], 'baskets' => cx_baskets($pdo), 'folders' => cx_folders($pdo)];
 }
 
@@ -373,7 +393,7 @@ function pn_share_send(PDO $pdo, array $d): array
     if (!in_array($acc, array_column(pn_share_accounts($pdo)['accounts'], 'id'), true)) { throw new LcndaBadInput('Compte du site familial introuvable.'); }
     $f = pn_share_build($pdo, $d);
     $pdo->prepare('INSERT INTO cx_shares(account_id, name, body) VALUES(?,?,?)')->execute([$acc, $f['share']['name'], (string) json_encode($f['share'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
-    pn_log($pdo, safe_int($d['basket_id'] ?? 0), 'Envoyé à un compte du site familial');
+    pn_log($pdo, safe_int($d['basket_id'] ?? 0), cx_t('Envoyé à un compte du site familial'));
     return ['share_id' => (int) $pdo->lastInsertId(), 'counts' => $f['counts']];
 }
 

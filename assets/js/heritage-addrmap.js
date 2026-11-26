@@ -28,7 +28,11 @@
     const label = k => SHORT[k] || cats().flatMap(c => c.items).find(i => i[0] === k)?.[1] || k;
     const favs = which => { try { const v = JSON.parse(localStorage.getItem(`genealogie-addrmap-${which}`) || 'null'); if (Array.isArray(v) && v.length) return v; } catch (_) {} return which === 'old' ? OLD_DEFAULT : NOW_DEFAULT; };
     /** Les fonds proposés en premier : dans l'ordre de « Fonds de cartes » (Réglages → Cartes et fonds de carte), sans ceux qui y sont décochés */
-    const favsShown = which => { const raw = favs(which), keys = A().sortTileKeys ? A().sortTileKeys(raw) : raw; const vis = new Set(cats().flatMap(c => c.items.map(i => i[0]))); const f = vis.size ? keys.filter(k => vis.has(k)) : keys; return f.length ? f : keys; };
+    const favsShown = which => { const raw = favs(which), keys = A().sortTileKeys ? A().sortTileKeys(raw) : raw; const vis = new Set(cats().flatMap(c => c.items.map(i => i[0])));
+        // un fond masqué seulement « au départ » (Esri, heritage-fonds-libres.js) reste proposé ici s'il est parmi les fonds du plan : la personne ne l'a pas décoché
+        let dflt = []; try { dflt = window.LCNDA_EXT?.tileHiddenByDefault?.() || []; } catch (_) {}
+        let mine = []; try { mine = JSON.parse(localStorage.getItem('genealogie-tile-hidden') || '[]'); if (!Array.isArray(mine)) mine = []; } catch (_) {}
+        const f = vis.size ? keys.filter(k => vis.has(k) || (dflt.includes(k) && !mine.includes(k))) : keys; return f.length ? f : keys; };
     const mapOptions = (which, cur) => { const f = favsShown(which); const opt = (k, l) => `<option value="${esc(k)}" ${k === cur ? 'selected' : ''}>${esc(l)}</option>`;
         return (which === 'old' ? opt('', 'Aucune') : '') + f.map(k => opt(k, label(k))).join('') + (f.includes(cur) || !cur ? '' : opt(cur, label(cur)))
             + cats().map(c => { const items = c.items.filter(([k]) => !f.includes(k) && k !== cur); return items.length ? `<optgroup label="${esc(c.label)}">${items.map(([k, l]) => opt(k, l)).join('')}</optgroup>` : ''; }).join(''); };

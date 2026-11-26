@@ -198,7 +198,7 @@ function telech_a_clc(PDO $pdo, array $q): array
     if (!$pt) { return ['ok' => true, 'nopoint' => true]; }
     if (!function_exists('imagecreatefromstring')) { return ['ok' => false, 'message' => i18n_t('PHP n’a pas l’extension gd : impossible de lire la carte CORINE.')]; }
     $key = sprintf('clc:%.3f,%.3f', $pt[0], $pt[1]); // ≈ 100 m : deux fiches du même village partagent la réponse
-    return ta_cached($key, static fn() => ta_clc_calc($pt[0], $pt[1]) + ['lat' => $pt[0], 'lon' => $pt[1], 'name' => mb_substr(trim((string) ($q['name'] ?? '')), 0, 120)], !empty($q['cached_only'])) + ['lat' => $pt[0], 'lon' => $pt[1]];
+    return ta_cached($key, static fn() => ta_clc_calc($pt[0], $pt[1]) + ['lat' => $pt[0], 'lon' => $pt[1], 'name' => mb_substr(trim((string) ($q['name'] ?? '')), 0, 120)], !empty($q['cached_only']) || (function_exists('kiosk_state') && !empty(kiosk_state()['on']))) + ['lat' => $pt[0], 'lon' => $pt[1]]; // 👁 consultation, invité : ce qui est gardé, rien en ligne
 }
 /** les lieux déjà regardés (pour Listes) */
 function telech_a_list(): array

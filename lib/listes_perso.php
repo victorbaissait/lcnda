@@ -120,7 +120,8 @@ function ulist_index(PDO $pdo): array
 {
     ulist_ensure($pdo);
     // les listes mises de côté depuis plus de 30 jours, et les envois jamais finis depuis plus d'un jour, sont effacés pour de bon
-    foreach ($pdo->query("SELECT id FROM ulist_lists WHERE (deleted_at IS NOT NULL AND deleted_at < datetime('now','-30 days')) OR (ready = 0 AND created_at < datetime('now','-1 day'))")->fetchAll(PDO::FETCH_COLUMN) as $old) {
+    // (pas en mode consultation ni depuis un appareil invité : une lecture n'y efface rien)
+    if (!(function_exists('kiosk_state') && !empty(kiosk_state()['on']))) foreach ($pdo->query("SELECT id FROM ulist_lists WHERE (deleted_at IS NOT NULL AND deleted_at < datetime('now','-30 days')) OR (ready = 0 AND created_at < datetime('now','-1 day'))")->fetchAll(PDO::FETCH_COLUMN) as $old) {
         $pdo->prepare('DELETE FROM ulist_rows WHERE list_id = ?')->execute([(int) $old]);
         $pdo->prepare('DELETE FROM ulist_lists WHERE id = ?')->execute([(int) $old]);
     }
@@ -249,7 +250,7 @@ function ulist_api_post(PDO $pdo, array $d): array
     ulist_ensure($pdo);
     $op = (string) ($d['op'] ?? ''); $id = safe_int($d['id'] ?? 0);
     if ($op === 'places') { return ['places' => (object) ulist_places($pdo, array_values(array_filter(is_array($d['values'] ?? null) ? $d['values'] : [], 'is_scalar')))]; }
-    $pdo->beginTransaction();
+    if (function_exists('begin_write_transaction')) { begin_write_transaction($pdo); } else { $pdo->beginTransaction(); } // le verrou d'écriture tout de suite (deux envois en même temps : chacun son tour)
     try {
         $out = match ($op) {
             'create' => (static function () use ($pdo, $d) {

@@ -246,7 +246,7 @@
         root.addEventListener?.('offline', later); root.addEventListener?.('online', later);
         if (!document.getElementById('lfc-css')) {
             const st = document.createElement('style'); st.id = 'lfc-css'; st.textContent = `
-.lfc-attr{position:absolute;right:4px;bottom:2px;z-index:7;max-width:calc(100% - 8px);font:11px/1.3 system-ui,sans-serif;background:rgba(255,255,255,.82);color:#333;padding:1px 5px;border-radius:3px;pointer-events:auto;text-align:right}
+.lfc-attr{position:absolute;right:4px;bottom:4px;z-index:7;max-width:calc(100% - 8px);box-sizing:border-box;font:11px/1.3 system-ui,sans-serif;background:rgba(255,255,255,.82);color:#333;padding:4px 6px;border-radius:3px;pointer-events:auto;text-align:right}
 .lfc-attr a,.map-caption a{color:inherit}.lfc-warn,.lfc-warn a{color:#8a4b00;font-weight:600}
 .lfc-panel{grid-column:1/-1}.lfc-panel .lfc-esri{border:2px solid var(--line,#c9ced8);padding:8px 10px;margin:8px 0}.lfc-table td{vertical-align:top}.lfc-thumb{display:block;width:96px;height:96px;border:1px solid var(--line,#c9ced8);margin-top:4px;background:#e6ecf0}
 `; document.head.appendChild(st);

@@ -91,7 +91,7 @@
     const settings = () => { let s = {}; try { s = JSON.parse(W.localStorage?.getItem(KEY) || '{}') || {}; } catch (_) { s = {}; } return {...Object.fromEntries(PARTS.map(p => [p[0], true])), ...s}; };
     const saveSettings = s => { try { W.localStorage?.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
     const on = k => settings()[k] !== false;
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label)); // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
     const srcLink = (url, label = T('↗ source')) => (url ? `<a class="ta-src" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(label)}</a>` : '');
     const row = (icon, html, src, extra = '', attrs = '') => `<div class="hist-row ta-row"${attrs}><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const more = (html, attrs = '') => (html ? `<details class="l10v-more ta-more"${attrs}><summary>${esc(T('▸ plus'))}</summary>${html}</details>` : '');
@@ -209,7 +209,7 @@
         if (host.isConnected) host.innerHTML = html ? panel(html) : '';
     }
     let pending = 0;
-    if (typeof MutationObserver !== 'undefined') new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => console.error(e)); attrScan(); }); }).observe(W.document.documentElement, {childList: true, subtree: true});
+    if (typeof MutationObserver !== 'undefined') new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => { if (!(e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || ''))))) console.error(e); }) /* téléchargement coupé (page rechargée) : rien dans la console */; attrScan(); }); }).observe(W.document.documentElement, {childList: true, subtree: true});
 
     /* ─────────── 👤 la fiche d'une personne ─────────── */
     const lifeMemo = new Map();

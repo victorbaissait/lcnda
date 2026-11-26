@@ -316,7 +316,7 @@
         catastrophes: 'NOAA NCEI/WDS (domaine public)', navires: 'Wikidata (CC0)', phares: 'Wikidata (CC0) ; portée : © OpenStreetMap contributors (ODbL)'};
     const SRC_URL = {batailles: 'https://www.wikidata.org', voies: 'https://doi.org/10.5281/zenodo.17122148', compostelle: 'https://www.openstreetmap.org/copyright', institutions: 'https://www.wikidata.org',
         catastrophes: 'https://www.ngdc.noaa.gov/hazard/', navires: 'https://www.wikidata.org', phares: 'https://www.wikidata.org'};
-    async function loadSome(kinds) { const out = {}; await Promise.all(kinds.map(async k => { try { out[k] = await load(k); } catch (e) { console.error(e); out[k] = null; } })); return out; }
+    async function loadSome(kinds) { const out = {}; await Promise.all(kinds.map(async k => { try { out[k] = await load(k); } catch (e) { if (!(e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || ''))))) console.error(e); out[k] = null; } /* fichier coupé en route (page rechargée) : la partie reste vide, sans bruit */ })); return out; }
 
     /* ─────────── les phrases ─────────── */
     const battleName = b => esc(String(b.n).replace(/^(Bataille|Siège|Combat|Prise|Bombardement|Massacre|Blocus|Escarmouche|Affaire)\b/, w => w.toLowerCase()));

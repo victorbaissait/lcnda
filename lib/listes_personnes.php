@@ -191,7 +191,7 @@ function lp_api_post(PDO $pdo, array $d): array
     lp_ensure($pdo);
     $op = (string) ($d['op'] ?? '');
     $pid = safe_int($d['person_id'] ?? 0);
-    $pdo->beginTransaction();
+    if (function_exists('begin_write_transaction')) { begin_write_transaction($pdo); } else { $pdo->beginTransaction(); } // le verrou d'écriture tout de suite (double clic : chacun son tour)
     try {
         $out = match ($op) {
             'link' => (static function () use ($pdo, $d, $pid) {

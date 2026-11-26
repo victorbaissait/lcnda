@@ -402,29 +402,51 @@
     }
     const setMixed = host => host.querySelectorAll('[data-mixed]').forEach(c => { c.indeterminate = c.dataset.mixed === '1'; });
     /** l'arbre de tous les paniers : 📁 dossiers › 🧺 paniers › éléments (pour « Prendre depuis… → Panier ») ; cases à trois états */
+    /** les index de l'arbre (une fois par dessin) : éléments par panier, paniers et sous-dossiers par dossier, paniers de tout un dossier.
+     *  Sans eux, 10 000 paniers × 30 000 éléments = des centaines de millions de tours (la fenêtre ne s'ouvrait plus). */
+    function treeIndex(st) {
+        const list = st.results || [], all = st.bk || {};
+        if (st._tix && st._tix.list === list && st._tix.bk === all) return st._tix;
+        const byB = new Map(), bByF = new Map(), fByP = new Map(), sub = new Map();
+        list.forEach(x => { const k = Number(x.basket_id); if (!byB.has(k)) byB.set(k, []); byB.get(k).push(x); });
+        (all.baskets || []).forEach(x => { const k = Number(x.folder_id) || 0; if (!bByF.has(k)) bByF.set(k, []); bByF.get(k).push(x); });
+        (all.folders || []).forEach(f => { const k = Number(f.parent_id) || 0; if (!fByP.has(k)) fByP.set(k, []); fByP.get(k).push(f); });
+        const basketsUnder = fid => { if (sub.has(fid)) return sub.get(fid); sub.set(fid, []); const seen = new Set([fid]), out = [], stack = [fid]; // jamais de boucle infinie
+            while (stack.length) { const f = stack.pop(); (bByF.get(f) || []).forEach(b => out.push(Number(b.id))); (fByP.get(f) || []).forEach(k => { const kid = Number(k.id); if (!seen.has(kid)) { seen.add(kid); stack.push(kid); } }); }
+            sub.set(fid, out); return out; };
+        return (st._tix = {list, bk: all, byB, bByF, fByP, basketsUnder});
+    }
     function basketTreeHtml(st, list) {
         st.results = list; const all = st.bk, idx = new Map(list.map((x, i) => [x, i])), closed = st.closed || (st.closed = new Set());
-        const itemsOf = bid => list.filter(x => Number(x.basket_id) === Number(bid));
+        const X = treeIndex(st);
+        // beaucoup de choses : les dossiers arrivent repliés (une fois ; on les déplie à la main)
+        if (!st._closedInit) { st._closedInit = true; if (list.length > 1500 || (all.baskets || []).length > 300) (all.folders || []).forEach(f => closed.add(`f${f.id}`)); }
+        const itemsOf = bid => X.byB.get(Number(bid)) || [];
         const bNode = (x, d) => { const its = itemsOf(x.id), open = !closed.has(`b${x.id}`), cur = Number(x.id) === Number(all.basket_id);
             return `<section class="cx-tnode" style="--d:${d}"><div class="cx-thead${cur ? ' is-cur' : ''}" draggable="true" data-cx-tb="${x.id}"><button type="button" class="cx-tw2" data-cx-tog="b${x.id}" aria-expanded="${open}" aria-label="${esc(open ? T('Replier') : T('Déplier'))}">${open ? '▾' : '▸'}</button>
                 <input type="checkbox" data-cx-grp="b${x.id}" aria-label="${esc(T('Prendre tout « {n} »', {n: x.name}))}" ${its.length ? '' : 'disabled'}><span aria-hidden="true">${esc(x.icon || '🧺')}</span><b>${esc(x.name)}</b><span class="cx-bmeta">${esc(plural(its.length, T('élément'), T('éléments')))}${destLine(x) ? ` · ${esc(destLine(x))}` : ''}</span></div>
                 ${open && its.length ? `<ul class="cx-rlist">${its.map(y => rowHtml(st, y, idx.get(y))).join('')}</ul>` : ''}</section>`; };
-        const fNode = (f, d) => { const open = !closed.has(`f${f.id}`), bs = (all.baskets || []).filter(x => Number(x.folder_id) === Number(f.id));
+        const seenF = new Set(); // une boucle d'une vieille base : chaque dossier dessiné une fois
+        const fNode = (f, d) => { seenF.add(Number(f.id)); const open = !closed.has(`f${f.id}`), bs = X.bByF.get(Number(f.id)) || [];
             return `<section class="cx-tnode is-folder" style="--d:${d}"><div class="cx-thead" draggable="true" data-cx-tf="${f.id}"><button type="button" class="cx-tw2" data-cx-tog="f${f.id}" aria-expanded="${open}" aria-label="${esc(open ? T('Replier') : T('Déplier'))}">${open ? '▾' : '▸'}</button>
                 <input type="checkbox" data-cx-grp="f${f.id}" aria-label="${esc(T('Prendre tout « {n} »', {n: f.name}))}"><span aria-hidden="true">${esc(f.icon || '📁')}</span><b>${esc(f.name)}</b><span class="cx-bmeta">${esc(plural(f.baskets, T('panier'), T('paniers')))} · ${esc(plural(f.total, T('élément'), T('éléments')))}</span>
                 <button type="button" class="cx-b is-ter is-sm" data-cx-fmenu="${f.id}" aria-label="${esc(T('Dossier « {n} » : plus…', {n: f.name}))}">⋯</button></div>
-                ${open ? `${fKids(f.id).map(k => fNode(k, d + 1)).join('')}${bs.map(x => bNode(x, d + 1)).join('')}` : ''}</section>`; };
-        return `<div class="cx-ttree" data-cx-ttree>${(all.folders || []).filter(f => !Number(f.parent_id)).map(f => fNode(f, 0)).join('')}${(all.baskets || []).filter(x => !Number(x.folder_id)).map(x => bNode(x, 0)).join('')}</div><p class="cx-sr" id="cx-hint-space">${esc(T('Espace ou double-clic : cocher'))}</p>`;
+                ${open ? `${(X.fByP.get(Number(f.id)) || []).filter(k => !seenF.has(Number(k.id))).map(k => fNode(k, d + 1)).join('')}${bs.map(x => bNode(x, d + 1)).join('')}` : ''}</section>`; };
+        return `<div class="cx-ttree" data-cx-ttree>${(X.fByP.get(0) || []).map(f => fNode(f, 0)).join('')}${(X.bByF.get(0) || []).map(x => bNode(x, 0)).join('')}</div><p class="cx-sr" id="cx-hint-space">${esc(T('Espace ou double-clic : cocher'))}</p>`;
     }
-    const grpItems = (st, k) => { const id = Number(k.slice(1)); const bids = k[0] === 'b' ? [id] : (st.bk.baskets || []).filter(x => fTree(id).includes(Number(x.folder_id))).map(x => Number(x.id)); return st.results.filter(y => bids.includes(Number(y.basket_id))); };
+    const grpItems = (st, k) => { const X = treeIndex(st), id = Number(k.slice(1)); const bids = k[0] === 'b' ? [id] : X.basketsUnder(id); return bids.flatMap(b => X.byB.get(b) || []); };
     function paintGroups(st, res) {
-        res.querySelectorAll('[data-cx-grp]').forEach(c => { const all = grpItems(st, c.dataset.cxGrp), n = all.filter(y => st.picked.has(pickKey(y))).length;
-            c.checked = !!all.length && n === all.length; c.indeterminate = n > 0 && n < all.length; });
+        const X = treeIndex(st), picked = new Map(); // combien de cochés par panier (une fois), puis chaque case : une somme
+        X.byB.forEach((its, b) => picked.set(b, its.reduce((n, y) => n + (st.picked.has(pickKey(y)) ? 1 : 0), 0)));
+        res.querySelectorAll('[data-cx-grp]').forEach(c => { const k = c.dataset.cxGrp, id = Number(k.slice(1)), bids = k[0] === 'b' ? [id] : X.basketsUnder(id);
+            let tot = 0, n = 0; bids.forEach(b => { tot += (X.byB.get(b) || []).length; n += picked.get(b) || 0; });
+            c.checked = !!tot && n === tot; c.indeterminate = n > 0 && n < tot; });
     }
     function bindBasketTree(st, res) {
         paintGroups(st, res);
         res.querySelectorAll('[data-cx-grp]').forEach(c => c.addEventListener('change', () => { // un dossier ou un panier entier (cases à trois états)
-            grpItems(st, c.dataset.cxGrp).forEach(it => { togglePick(st, it, c.checked); const cb = res.querySelector(`[data-cx-ri="${st.results.indexOf(it)}"]`); if (cb) { cb.checked = c.checked; cb.closest('li')?.classList.toggle('is-on', c.checked); } });
+            const pos = new Map(st.results.map((x, i) => [x, i]));
+            grpItems(st, c.dataset.cxGrp).forEach(it => { togglePick(st, it, c.checked); const cb = res.querySelector(`[data-cx-ri="${pos.get(it)}"]`); if (cb) { cb.checked = c.checked; cb.closest('li')?.classList.toggle('is-on', c.checked); } });
             if (st.picked.size >= 2) st.preview = null; paintCount(st); paintGroups(st, res); }));
         res.addEventListener('change', e => { if (e.target.matches('[data-cx-ri]')) paintGroups(st, res); });
         res.querySelectorAll('[data-cx-tog]').forEach(t => t.addEventListener('click', () => { const k = t.dataset.cxTog; if (st.closed.has(k)) st.closed.delete(k); else st.closed.add(k); drawTab(st); }));
@@ -483,8 +505,9 @@
         if (open.list) return ext.dataListsEngine?.open?.(open.list, open.preset || null);
         if (it.kind === 'person' && it.ref_id) return A().openPersonById?.(Number(it.ref_id));
         if (o.person_id || o.kind === 'person') return A().openPersonById?.(Number(o.person_id || o.id));
-        if (o.url) return window.open(o.url, '_blank', 'noopener');
-        if (it.kind === 'set' && it.data?.url) return window.open(it.data.url, '_blank', 'noopener');
+        const web = u => /^https?:\/\//i.test(String(u || '')); // jamais « javascript: » ni « file: » (une donnée venue d'ailleurs)
+        if (web(o.url)) return window.open(o.url, '_blank', 'noopener');
+        if (it.kind === 'set' && web(it.data?.url)) return window.open(it.data.url, '_blank', 'noopener');
         toast(T('Pas d’écran où revenir pour cet élément.'));
     }
     /** ce qui est affiché maintenant (l'origine d'une info prise ici) */
@@ -806,7 +829,7 @@
     const asHtml = items => `<h1>${esc(items.length === 1 ? items[0].title : T('Éléments pris le {d}', {d: new Date().toLocaleDateString('fr-FR')}))}</h1>${items.map(itemHtml).join('')}`;
     const asRows = items => { const s = items.find(x => x.kind === 'set'); if (s && items.length === 1) return [s.data.columns || [], ...(s.data.rows || [])]; return [[T('Quoi'), T('Détail'), T('Source')], ...items.flatMap(explode).map(x => [x.title, x.value || '', [x.origin?.label, x.origin?.url].filter(Boolean).join(' — ')])]; };
     viaSend('textdoc', '📝', 'Un nouveau document (Traitement de texte)', () => T('un document avec chaque élément et sa source'), async items => ({kind: 'text', data: {html: asHtml(items), name: items[0]?.title || T('Document')}}));
-    viaSend('sheet', '🧾', 'Le Tableur', () => T('une ligne par élément (un ensemble : son tableau)'), async items => ({kind: 'rows', data: {rows: asRows(items), name: items[0]?.title || T('Tableau')}}));
+    viaSend('sheet', '🧾', 'Le Tableur', () => T('une ligne par élément (un ensemble : son tableau)'), async items => ({kind: 'rows', data: {rows: asRows(items).map(r => (r || []).map(v => (typeof v === 'string' && /^\s*=/.test(v) ? "'" + v : v))), name: items[0]?.title || T('Tableau')}})); // une case « =… » reste du texte (jamais une formule)
     viaSend('keynote', '🎞️', 'Une nouvelle présentation', () => T('une diapositive de texte'), async items => ({kind: 'text', data: {html: asHtml(items), name: items[0]?.title}}));
     viaSend('site', '🌐', 'Une page de mon site…', () => T('le texte et ses sources sur une page'), async items => ({kind: 'text', data: {html: asHtml(items), name: items[0]?.title}}));
     DT.push({id: 'montage', icon: '🎬', label: 'Un nouveau montage vidéo', group: 'Créer', kinds: ['media'], enabled: () => !!ext.newMontage, choose: async () => ({}), explain: items => T('{n} sur la piste vidéo', {n: plural(items.length, T('image'))}),
@@ -1438,7 +1461,7 @@
         res.querySelectorAll('[data-cx-askex]').forEach(b => b.addEventListener('click', () => { res.querySelector('[data-cx-ask]').value = b.textContent; ask(); }));
     }
     const LBLANK = () => ({q: '', crit: [], period: null, near: null, sort: '', dir: 'asc', view: 'table'});
-    const ldCols = (d, s) => [...(d.fields || []).filter(f => f.type !== 'url' && !f.hidden), ...(s?.near ? [{key: '_km', label: 'Distance (km)', type: 'number'}] : [])];
+    const ldCols = (d, s) => [...(d.fields || []).filter(f => f.type !== 'url' && !f.hidden), ...(s?.near ? [{key: '_km', label: 'Distance', type: 'number', unit: 'km'}] : [])];
     const ldVal = (f, v) => (v == null ? '' : f.type === 'bool' ? (v && v !== 'non' && v !== '0' ? T('oui') : T('non')) : f.type === 'number' && typeof v === 'number' ? v.toLocaleString('fr-FR', {maximumFractionDigits: 2}) : String(v));
     const ldCrit = (d, s) => { const E = ext.dataListsEngine; return [s.q ? `« ${s.q} »` : '', ...(s.crit || []).map(c => E.critText(d, c)), s.period ? E.periodText(s.period) : '', s.near ? E.nearText(s.near) : ''].filter(Boolean); };
     /** une ligne d'une liste → un élément « ligne de liste » (avec sa liste comme source et son lien ↗) */

@@ -235,7 +235,7 @@
     const he = P => (P?.gender === 'female' ? T('elle') : P?.gender === 'male' ? T('il') : T('cette personne'));
     const He = P => cap(he(P));
     const nameOf = P => (P?.first ? esc(P.first) : He(P));
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label)); // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
     const srcLink = url => (url ? `<a class="et-src-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : '');
     const wdUrl = q => `https://www.wikidata.org/wiki/${encodeURIComponent(q)}`;
     const wpUrl = t => (t ? `https://fr.wikipedia.org/wiki/${encodeURIComponent(String(t).replace(/ /g, '_'))}` : '');
@@ -272,7 +272,12 @@
     };
     const SRC_TXT = {fleaux: 'Wikipédia (CC BY-SA 4.0)', greves: 'Wikidata (CC0) ; catégories de Wikipédia', ouvrages: 'Wikidata (CC0)', nouveautes: 'Wikipédia (CC BY-SA 4.0)', livres: 'Wikidata (CC0)', mode: 'Wikimedia Commons (licence de chaque image)'};
     const SRC_URL = {fleaux: 'https://fr.wikipedia.org/wiki/Phyllox%C3%A9ra', greves: 'https://www.wikidata.org/wiki/Q49776', ouvrages: 'https://www.wikidata.org', nouveautes: 'https://fr.wikipedia.org', livres: 'https://www.wikidata.org', mode: 'https://commons.wikimedia.org/wiki/Category:Fashion_plates_by_decade'};
-    async function loadSome(kinds) { const out = {}; await Promise.all(kinds.map(async k => { try { out[k] = await load(k); } catch (e) { console.error(e); out[k] = null; } })); return out; }
+    /* un téléchargement coupé (page rechargée, onglet fermé, app arrêtée) n'est pas une erreur à montrer : la partie reste vide, sans rien dans la console */
+    let leaving = false;
+    if (root.addEventListener) { root.addEventListener('pagehide', () => { leaving = true; }); root.addEventListener('beforeunload', () => { leaving = true; }); }
+    const cutOff = e => leaving || e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || '')));
+    const report = e => { if (!cutOff(e)) console.error(e); };
+    async function loadSome(kinds) { const out = {}; await Promise.all(kinds.map(async k => { try { out[k] = await load(k); } catch (e) { report(e); out[k] = null; } })); return out; }
 
     /* ─────────── les phrases ─────────── */
     const fleauWhen = r => (r.prec === 'decennie' ? T('dans les années {y}', {y: String(r.y)}) : r.prec === 'apres' ? T('après {y}', {y: String(r.y)}) : T('en {y}', {y: String(r.y)}));
@@ -458,7 +463,7 @@
         placeInto(village.querySelector('[data-et-host]'), place);
     }
     let pending = 0;
-    new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(e => console.error(e)); }); }).observe(document.documentElement, {childList: true, subtree: true});
+    new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(report); }); }).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ─────────── 📜 Monographie de commune : une partie par sujet ─────────── */
     const MONO = [['fleaux', 'et_fleaux', '🐛', 'Les fléaux des cultures'], ['greves', 'et_greves', '✊', 'Grèves des alentours'], ['ouvrages', 'et_ouvrages', '🌉', 'Ouvrages d’art']];

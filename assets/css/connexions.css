@@ -111,7 +111,7 @@
  * seule la liste défile ; boutons légers (coins arrondis, bordure fine, pas d'ombre décalée) ; le reste de l'app ne bouge pas ═════════ */
 dialog.cx-take, dialog.cx-put { --cx-bg: #fff; --cx-ink: #111; --cx-mut: #555; --cx-soft: #6b7280; --cx-line: #eceef2; --cx-line2: #c9ced8; --cx-blue: #055dff; --cx-blue-bg: #eef4ff; --cx-blue-ink: #1a3d8f;
     --cx-green: #1a7f37; --cx-green-bg: #eaf6ee; --cx-yel-bg: #fff8d6; --cx-yel-ink: #7a5d00; --cx-red: #c62828; --cx-red-bg: #fdecec; --cx-grey: #f1f2f4; --cx-hover: #f6f8fc; --cx-pw: 340px;
-    width: min(1200px, 94vw); max-width: 94vw; height: min(720px, 90vh); max-height: 90vh; overflow: hidden; border: 1px solid var(--cx-line2); border-radius: 14px; box-shadow: 0 18px 50px rgba(0, 0, 0, .25); background: var(--cx-bg); color: var(--cx-ink); padding: 0; }
+    width: var(--modal-xl); max-width: 94vw; height: min(720px, 90vh); max-height: 90vh; overflow: hidden; border: 1px solid var(--cx-line2); border-radius: 14px; box-shadow: 0 18px 50px rgba(0, 0, 0, .25); background: var(--cx-bg); color: var(--cx-ink); padding: 0; }
 :root[data-theme="dark"] .cx-take, :root[data-theme="dark"] .cx-put { --cx-bg: #1c1f24; --cx-ink: #eceef2; --cx-mut: #b4b9c3; --cx-soft: #9aa0aa; --cx-line: #2c3038; --cx-line2: #454b55; --cx-blue: #5b93ff; --cx-blue-bg: #18233a; --cx-blue-ink: #a9c4ff;
     --cx-green: #4cc070; --cx-green-bg: #15281c; --cx-yel-bg: #2c2612; --cx-yel-ink: #f0d276; --cx-red: #ff6b6b; --cx-red-bg: #331a1a; --cx-grey: #262a31; --cx-hover: #22262d; background: var(--cx-bg); }
 .cx-take [hidden], .cx-put [hidden] { display: none !important; }
@@ -327,7 +327,7 @@ dialog.cx-take .cx-srch input[type="search"]:focus, dialog.cx-put .cx-srch input
 @media (prefers-reduced-motion: no-preference) { .cx-take .cx-rlist li { transition: background-color .12s; } }
 
 /* 📍 « Mettre dans… » : même famille que « Prendre depuis… » (plus étroite, une seule colonne) */
-dialog.cx-put { width: min(720px, 94vw); max-width: 94vw; height: min(680px, 90vh); }
+dialog.cx-put { width: var(--modal-m); max-width: 94vw; height: min(680px, 90vh); }
 .cx-put-body { flex: 1; min-height: 0; overflow: auto; padding: 14px 22px 16px; display: flex; flex-direction: column; gap: 12px; overscroll-behavior: contain; }
 .cx-howto { border: 0; margin: 0; padding: 0; }
 .cx-howto legend { font: 800 11px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--cx-soft); margin-bottom: 6px; padding: 0; }

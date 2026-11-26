@@ -170,7 +170,7 @@
     const on = k => settings()[k] !== false;
     const saveSettings = s => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (_) {} };
     const nf = n => Number(n || 0).toLocaleString('fr-FR');
-    const link = (url, label) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label));
+    const link = (url, label) => (url ? `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : esc(label)); // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
     const srcLink = url => (url ? `<a class="tc-src-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(T('Ouvrir la source (internet)'))}">${esc(T('↗ source'))}</a>` : '');
     const row = (icon, html, src, extra = '') => `<div class="hist-row tc-row"><span class="hist-i" aria-hidden="true">${icon}</span><div class="hist-t"><p>${html}</p>${extra}${src ? `<small class="hist-src">${esc(T('Source :'))} ${src}</small>` : ''}</div></div>`;
     const more = (html, n) => (html ? `<details class="tc-more"><summary>${esc(T('▸ plus'))}${n ? ` <small class="muted">(${nf(n)})</small>` : ''}</summary>${html}</details>` : '');
@@ -338,7 +338,7 @@
         const anchor = village.querySelector('[data-l10o-host]') || village.querySelector('[data-lp-host]') || village.querySelector('.cplus-place') || village.querySelector('.h-village-grid');
         const box = '<div class="tc-place" data-tc-host></div>';
         if (anchor) anchor.insertAdjacentHTML('afterend', box); else village.insertAdjacentHTML('beforeend', box);
-        placeInto(village.querySelector('[data-tc-host]'), villagePlace(village)).catch(e => console.error(e));
+        placeInto(village.querySelector('[data-tc-host]'), villagePlace(village)).catch(e => { if (!(e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || ''))))) console.error(e); }) /* téléchargement coupé (page rechargée) : rien dans la console */;
     }
     let pending = 0;
     new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate(); }); }).observe(document.documentElement, {childList: true, subtree: true});

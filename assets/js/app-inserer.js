@@ -245,7 +245,7 @@
         if (res.many || res.tickedAll) {
             const its = res.many || [...pop.ticked.values()].map(x => x.item);
             const line = it => `${K().itemLine ? K().itemLine(it) : it.title}${it.origin?.label ? ` [↗ ${srcShort(it.origin)}]` : ''}`;
-            text = its.map(it => `• ${line(it)}`).join('\n'); html = `<ul>${its.map(it => `<li>${esc(K().itemLine ? K().itemLine(it) : it.title)}${it.origin?.url ? ` <a href="${esc(it.origin.url)}" target="_blank" rel="noopener" class="cx-qi-src">[↗ ${esc(srcShort(it.origin))}]</a>` : it.origin?.label ? ` [↗ ${esc(srcShort(it.origin))}]` : ''}</li>`).join('')}</ul>`;
+            text = its.map(it => `• ${line(it)}`).join('\n'); html = `<ul>${its.map(it => `<li>${esc(K().itemLine ? K().itemLine(it) : it.title)}${/^https?:\/\//i.test(it.origin?.url || '') ? ` <a href="${esc(it.origin.url)}" target="_blank" rel="noopener" class="cx-qi-src">[↗ ${esc(srcShort(it.origin))}]</a>` : it.origin?.label ? ` [↗ ${esc(srcShort(it.origin))}]` : ''}</li>`).join('')}</ul>`;
             items = its.map(it => K().cleanIt(it));
         } else if (res.set || (res.ticked && !res.tickedAll)) {
             let d, s, rows, title;

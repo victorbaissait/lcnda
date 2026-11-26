@@ -267,7 +267,7 @@
             .catch(e => { delete data[kind]; throw e; });
         return data[kind];
     }
-    async function loadSome(kinds) { const out = {}; await Promise.all(kinds.map(async k => { try { out[k] = await load(k); } catch (e) { console.error(e); out[k] = null; } })); return out; }
+    async function loadSome(kinds) { const out = {}; await Promise.all(kinds.map(async k => { try { out[k] = await load(k); } catch (e) { if (!(e?.name === 'AbortError' || (e instanceof TypeError && /fetch|network|load failed/i.test(String(e.message || ''))))) console.error(e); out[k] = null; } /* fichier coupé en route (page rechargée) : la partie reste vide, sans bruit */ })); return out; }
     const WD_SRC = () => `${link('https://www.wikidata.org', 'Wikidata')} (CC0)`;
     const SRC = {spectacles: WD_SRC, clubs: WD_SRC, tour: WD_SRC, seigneurs: WD_SRC,
         expos: url => `${link(url || 'https://fr.wikipedia.org', 'Wikipédia')} (CC BY-SA 4.0)`,

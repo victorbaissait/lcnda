@@ -10,7 +10,7 @@
  * Ensuite c'est une liste comme les autres (moteur app-listes-donnees.js) : recherche, critères, 📅 Période (dates), 📍 Autour de… /
  * 🗺 Carte / 📍 GPS (communes ou coordonnées), ⤓ Exporter (cases protégées contre les formules), 🧺 Prendre… / Mettre dans…,
  * 📎 Insérer une info, 👤 noms reliés aux fiches (colonne « personne »).
- * Gérer (barre de la liste) : ✎ Modifier (nom, icône, source, colonnes), ＋ Ajouter une ligne, ⤒ Remplacer par un fichier, ⊕ Ajouter
+ * Gérer (barre de la liste) : ✎ Modifier (nom, icône, source, colonnes), ＋ Ajouter une ligne, ⤒ Remplacer par un fichier, ＋ Ajouter un fichier
  * un fichier (fusion), ⇪ Partager (fichier, après confirmation), 🗑 Supprimer — chaque fois ↶ Annuler.
  * Gardée dans la base (lib/listes_perso.php : tables ulist_lists, ulist_rows) ; en consultation, lecture seule.
  * API : LCNDA_EXT.listesPerso = {create({rows | file | text | url, name, source, licence, source_url}), open(id), lists(), reload(id), listBar}
@@ -325,7 +325,7 @@
             <button type="button" class="ui-listbar-btn" data-lpx-act="edit">✎ ${esc(T('Modifier'))}</button>
             <button type="button" class="ui-listbar-btn" data-lpx-act="add">＋ ${esc(T('Ajouter une ligne'))}</button>
             <button type="button" class="ui-listbar-btn" data-lpx-act="replace">⤒ ${esc(T('Remplacer par un fichier'))}</button>
-            <button type="button" class="ui-listbar-btn" data-lpx-act="merge">⊕ ${esc(T('Ajouter un fichier'))}</button>
+            <button type="button" class="ui-listbar-btn" data-lpx-act="merge">＋ ${esc(T('Ajouter un fichier'))}</button>
             <button type="button" class="ui-listbar-btn" data-lpx-act="share">⇪ ${esc(T('Partager'))}</button>
             <button type="button" class="ui-listbar-btn lpx-danger" data-lpx-act="delete">🗑 ${esc(T('Supprimer'))}</button>`;
         const anchor = page.querySelector('.ld-source') || page.querySelector('.ld-saved');
@@ -388,7 +388,7 @@
         for (let off = 0; off < total; off += 20000) { const r = await api('ulist_rows', {id, offset: off, limit: 20000}); if (off === 0) total = Number(r.total) || 0; out.push(...(r.rows || [])); if (!(r.rows || []).length) break; }
         return out;
     }
-    /** ⤒ Remplacer / ⊕ Ajouter un fichier : choisir, lire, envoyer, ↶ */
+    /** ⤒ Remplacer / ＋ Ajouter un fichier : choisir, lire, envoyer, ↶ */
     function fileThen(id, mode) {
         const meta = STORE.get(id).meta;
         return new Promise(resolve => {
@@ -417,7 +417,7 @@
         await reload(id);
         const prevCols = c.prev_columns || meta.columns;
         undoToast(mode === 'replace' ? T('Liste remplacée : {n} lignes', {n: nf(c.row_count)}) : T('{n} lignes ajoutées', {n: nf(rows.length)}),
-            async () => { await post({op: 'revert', id, columns: prevCols}); await reload(id); }, mode === 'replace' ? '⤒' : '⊕');
+            async () => { await post({op: 'revert', id, columns: prevCols}); await reload(id); }, mode === 'replace' ? '⤒' : '＋');
         return c.row_count;
     }
 

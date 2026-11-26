@@ -85,7 +85,7 @@
         </section>`;
         bind(host.querySelector('[data-pn]'));
         paint();
-        ideas().then(() => { paintStrip(); if (st.view === 'basket') paintMain(); });
+        ideas().then(() => { if (st.dragging) { st.paintLater = true; return; } paintStrip(); if (st.view === 'basket') paintMain(); }); // pas pendant qu'on glisse : l'élément tenu disparaîtrait (le glisser resterait coincé)
         liveCheck();
     }
     function paint() { if (!root()) return; paintTree(); paintStrip(); paintMain(); }
@@ -568,8 +568,8 @@
     function exportSheet(b, anchor) {
         const SH = window.LCNDA_SHEET, q2 = v => '"' + String(A().csvSafe ? A().csvSafe(v) : (v ?? '')).replace(/"/g, '""') + '"';
         UI().menuAt?.(anchor, [{icon: '📄', label: T('CSV (tableur, Excel)'), run: () => download(new Blob(['﻿' + matrix(b).map(r => r.map(q2).join(';')).join('\n')], {type: 'text/csv'}), fileName(b, 'csv'))},
-            ...(SH?.toXlsx ? [{icon: '📊', label: T('Fichier Excel (.xlsx)'), run: async () => { const wb = SH.newWorkbook(); wb.sheets[0].name = SH.cleanSheetName ? SH.cleanSheetName(b.name, []) : 'Panier'; wb.sheets[0].cells = SH.rowsToCells(matrix(b)); download(await SH.toXlsx(wb), fileName(b, 'xlsx')); }}] : []),
-            ...(ext.openRowsInSheet ? [{icon: '🧮', label: T('Ouvrir dans le tableur'), run: () => ext.openRowsInSheet({name: b.name, rows: matrix(b)})}] : [])], {title: T('Tableur')});
+            ...(SH?.toXlsx ? [{icon: '📊', label: T('Fichier Excel (.xlsx)'), run: async () => { const wb = SH.newWorkbook(); wb.sheets[0].name = SH.cleanSheetName ? SH.cleanSheetName(b.name, []) : 'Panier'; wb.sheets[0].cells = SH.rowsToCells(matrix(b).map(r => r.map(v => (typeof v === 'string' && /^\s*=/.test(v) ? "'" + v : v)))); /* une case « =… » reste du texte (sinon une vraie formule dans Excel) */ download(await SH.toXlsx(wb), fileName(b, 'xlsx')); }}] : []),
+            ...(ext.openRowsInSheet ? [{icon: '🧮', label: T('Ouvrir dans le tableur'), run: () => ext.openRowsInSheet({name: b.name, rows: matrix(b).map(r => r.map(v => (typeof v === 'string' && /^\s*=/.test(v) ? "'" + v : v)))})}] : [])], {title: T('Tableur')});
     }
     const pe = v => String(v ?? '').replace(/[&<>"]/g, ch => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[ch]));
     function exportPdf(b) {
@@ -918,13 +918,18 @@
         });
         let findT = 0;
         R.addEventListener('input', e => { if (!e.target.matches('[data-pn-find]')) return; clearTimeout(findT); const v = e.target.value; findT = setTimeout(() => { st.find = v; st.picked = new Set(); paintMain(); const i = root()?.querySelector('[data-pn-find]'); if (i) { i.focus(); i.setSelectionRange(v.length, v.length); } }, 200); });
-        R.addEventListener('keydown', e => { const r = e.target.closest?.('.pn-tr'); if (r && (e.key === 'Enter' || e.key === ' ') && !e.target.matches('button')) { e.preventDefault(); r.click(); } });
+        R.addEventListener('keydown', e => { const r = e.target.closest?.('.pn-tr'); if (r && (e.key === 'Enter' || e.key === ' ') && !e.target.matches('button')) { e.preventDefault();
+            // l'arbre se redessine : le focus revient sur la même ligne (sinon, au clavier, on repart du haut de la page)
+            const key = r.dataset.pnB !== undefined ? `[data-pn-b="${r.dataset.pnB}"]` : r.dataset.pnF !== undefined ? `[data-pn-f="${r.dataset.pnF}"]` : '';
+            r.click(); if (key) [0, 120, 400].forEach(ms => setTimeout(() => { if (!document.activeElement || document.activeElement === document.body || !document.activeElement.isConnected) R.querySelector(`[data-pn-tree] .pn-tr${key}`)?.focus(); }, ms)); } });
         // ⋮⋮ glisser : un élément (ordre, ou sur un panier de l'arbre), un panier ou un dossier sur un dossier
         let drag = null;
         R.addEventListener('dragstart', e => { const it = e.target.closest?.('[data-pn-i]'), bb = e.target.closest?.('.pn-tr[data-pn-b]'), ff = e.target.closest?.('.pn-tr[data-pn-f]');
             drag = it ? {t: 'i', id: Number(it.dataset.pnI)} : bb ? {t: 'b', id: Number(bb.dataset.pnB)} : ff ? {t: 'f', id: Number(ff.dataset.pnF)} : null; if (!drag) return;
-            e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', `${drag.t}:${drag.id}`); } catch (_) {} (it || bb || ff).classList.add('is-dragging'); });
-        R.addEventListener('dragend', () => { R.querySelectorAll('.is-dragging, .is-drop, .is-over').forEach(x => x.classList.remove('is-dragging', 'is-drop', 'is-over')); drag = null; });
+            e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', `${drag.t}:${drag.id}`); } catch (_) {} (it || bb || ff).classList.add('is-dragging'); st.dragging = true;
+            (it || bb || ff).addEventListener('dragend', () => { if (st.dragging) { st.dragging = false; drag = null; if (st.paintLater) { st.paintLater = false; paintStrip(); if (st.view === 'basket') paintMain(); } } }, {once: true}); }); // (même si la ligne a été redessinée entre-temps)
+        R.addEventListener('dragend', () => { R.querySelectorAll('.is-dragging, .is-drop, .is-over').forEach(x => x.classList.remove('is-dragging', 'is-drop', 'is-over')); drag = null; st.dragging = false;
+            if (st.paintLater) { st.paintLater = false; paintStrip(); if (st.view === 'basket') paintMain(); } });
         const targetOf = e => { if (!drag) return null; const fr = e.target.closest?.('.pn-tr[data-pn-f]'), br = e.target.closest?.('.pn-tr[data-pn-b]'), ir = e.target.closest?.('[data-pn-i]');
             if (drag.t === 'i' && br && Number(br.dataset.pnB) !== Number(st.sel?.id)) return br; if (drag.t === 'i' && ir && Number(ir.dataset.pnI) !== drag.id) return ir; if ((drag.t === 'b' || drag.t === 'f') && fr) return fr; return null; };
         R.addEventListener('dragover', e => { const x = targetOf(e); R.querySelectorAll('.is-drop, .is-over').forEach(y => { if (y !== x) y.classList.remove('is-drop', 'is-over'); }); if (!x) return; e.preventDefault(); x.classList.add(x.matches('[data-pn-i]') ? 'is-over' : 'is-drop'); });

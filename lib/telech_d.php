@@ -41,6 +41,10 @@ function td_cached(string $kind, string $key, callable $make): array
     $f = td_cache_dir() . '/' . sha1($kind . ':' . $key) . '.json';
     $c = is_file($f) ? json_decode((string) @file_get_contents($f), true) : null;
     if (is_array($c) && isset($c['data']) && (int) $c['at'] > time() - (TD_TTL[$kind] ?? 30 * 86400)) { return $c['data'] + ['cached' => true, 'fetched_at' => (int) $c['at']]; }
+    // 👁 mode consultation et appareils invités : seulement ce qui est déjà gardé, rien ne part sur Internet depuis un visiteur
+    if (function_exists('kiosk_state') && !empty(kiosk_state()['on'])) {
+        return is_array($c) && isset($c['data']) ? $c['data'] + ['cached' => true, 'stale' => true, 'fetched_at' => (int) $c['at']] : ['ok' => false, 'offline' => true, 'kiosk' => true, 'message' => i18n_t('Mode consultation : rien n’est cherché sur Internet.')];
+    }
     try { $data = $make(); }
     catch (Throwable $e) {
         if (is_array($c) && isset($c['data'])) { return $c['data'] + ['cached' => true, 'stale' => true, 'fetched_at' => (int) $c['at']]; }
@@ -208,10 +212,10 @@ function td_wikisource(PDO $pdo, array $q): array
                 . '?ws schema:about ?w ; schema:isPartOf <https://fr.wikisource.org/> . OPTIONAL { ?w wdt:P577 ?d } OPTIONAL { ?w wdt:P50 ?a . ?a rdfs:label ?al FILTER(LANG(?al)="fr") } '
                 . '?w rdfs:label ?wl FILTER(LANG(?wl)="fr") } LIMIT 60');
             foreach ($b as $r) {
-                $u = (string) ($r['ws']['value'] ?? ''); if ($u === '' || isset($seen[$u])) { continue; }
+                $u = (string) ($r['ws']['value'] ?? ''); if (!str_starts_with($u, 'https://fr.wikisource.org/wiki/') || isset($seen[$u])) { continue; } // seulement une page de Wikisource (une réponse piégée ne pose pas d'autre lien)
                 $seen[$u] = 1;
-                $items[] = ['title' => (string) $r['wl']['value'], 'url' => $u, 'year' => preg_match('/^\+?(\d{4})/', (string) ($r['d']['value'] ?? ''), $m) ? (int) $m[1] : null,
-                    'author' => (string) ($r['al']['value'] ?? ''), 'how' => 'wikidata', 'wd' => (string) $r['w']['value']];
+                $items[] = ['title' => mb_substr((string) ($r['wl']['value'] ?? ''), 0, 300), 'url' => $u, 'year' => preg_match('/^\+?(\d{4})/', (string) ($r['d']['value'] ?? ''), $m) ? (int) $m[1] : null,
+                    'author' => mb_substr((string) ($r['al']['value'] ?? ''), 0, 200), 'how' => 'wikidata', 'wd' => preg_match('#^https?://www\.wikidata\.org/entity/Q\d+$#', (string) ($r['w']['value'] ?? '')) ? (string) $r['w']['value'] : ''];
             }
         }
         if ($name !== '' && mb_strlen($name) >= 3) {

@@ -8,7 +8,7 @@
 .td-thumb { display: flex; flex-direction: column; gap: 4px; font-size: 12px; text-decoration: none; color: inherit; }
 .td-thumb img { width: 100%; height: 90px; object-fit: cover; border-radius: 4px; background: var(--chip-bg, rgba(127, 127, 127, .14)); }
 .td-thumb span { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-.td-dlg { width: min(760px, calc(100vw - 32px)); max-height: calc(100vh - 48px); padding: 16px; border-radius: 10px; border: 1px solid var(--border, rgba(127, 127, 127, .35)); background: var(--surface, #fff); color: inherit; }
+.td-dlg { width: var(--modal-m); max-height: calc(100vh - 48px); padding: 16px; border-radius: 10px; border: 1px solid var(--border, rgba(127, 127, 127, .35)); background: var(--surface, #fff); color: inherit; }
 .td-dlg-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 8px; }
 .td-dlg-head h3 { margin: 0; font-size: 17px; }
 .td-wiki-body { max-height: 60vh; overflow: auto; line-height: 1.5; }

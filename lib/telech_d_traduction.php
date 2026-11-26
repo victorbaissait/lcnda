@@ -167,7 +167,7 @@ function tdtr_run(array $args, string $stdin = '', int $timeout = 180): array
         $out .= (string) stream_get_contents($pipes[1]); $err .= (string) stream_get_contents($pipes[2]);
         $st = proc_get_status($p);
         if (!$st['running']) { break; }
-        if (time() - $t0 > $timeout) { proc_terminate($p); throw new RuntimeException(i18n_t('La traduction prend trop de temps : essaie un morceau plus court.')); }
+        if (time() - $t0 > $timeout) { proc_terminate($p); fclose($pipes[1]); fclose($pipes[2]); proc_close($p); throw new RuntimeException(i18n_t('La traduction prend trop de temps : essaie un morceau plus court.')); }
         usleep(100_000);
     }
     $out .= (string) stream_get_contents($pipes[1]);

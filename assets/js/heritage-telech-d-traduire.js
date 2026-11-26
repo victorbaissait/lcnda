@@ -44,7 +44,7 @@
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const api = (...a) => A().api(...a);
     const post = (a, b) => api(a, {}, {method: 'POST', body: b}).then(r => r?.result || r);
-    const link = (url, label) => `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`;
+    const link = (url, label) => `<a href="${esc(/^\s*(?:javascript|data|vbscript|file):/i.test(String(url)) ? '#' : url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`; // une adresse venue d’un site (Wikidata, loc.gov…) : jamais « javascript: »
     const langName = k => T(LANGS[k] || k).toLowerCase();
     let st = null;
     const status = async (fresh = false) => { if (!st || fresh) st = await api('td_tr_status').catch(() => null); return st; };

@@ -6489,7 +6489,7 @@ ${backupSectionHtml()}
         if(reglagesA()&&(REGLAGES_A_PAGES.includes(tab)||tab==='design_sheets')){ // et encore une fois quand les derniers cadres (formes, champs rangés) sont posés
             const run=()=>{if(state.module==='maintenance'&&state.maintenanceTab===tab&&page.isConnected)splitDesignPageA(page,tab,partOf);};run();setTimeout(run,0);setTimeout(run,400);return;}
         [...page.children].forEach(el=>{if(el.matches('.page-header'))return;el.hidden=partOf(el)!==tab;});
-        const head=DESIGN_PART_HEAD[tab];if(head){const h=page.querySelector('.page-header');if(h){h.querySelector('h2').textContent=head[0];const p=h.querySelector('p');if(p)p.textContent=head[1];}}
+        const head=DESIGN_PART_HEAD[tab];if(head){const h=page.querySelector('.page-header');if(h){setDesignHeadText(h.querySelector('h2'),head[0]);setDesignHeadText(h.querySelector('p'),head[1]);}}
     }
     /* Présentation A : chaque page montre ses morceaux de la grande page Apparence (rien n'est recopié : les réglages restent branchés).
        Un morceau : ['f', noms des champs du formulaire] · ['t', /titre du cadre/] · ['q', 'sélecteur'] · ['p', partie d'avant (design_sheets…)].
@@ -6513,6 +6513,10 @@ ${backupSectionHtml()}
         design_sheets:[['En-tête',[['t',/^Présentation de l’éditeur|^En-tête de la fiche|éléments de l’en-tête|Nouvelle observation/]]],['Sections et blocs',[['t',/^Sections des fiches|^Ordre et visibilité des blocs|^Blocs à afficher sur demande|profils/]]],
             ['Ce qu’on y voit',[['f','eventDisplayMode','censusDetailsDefault','censusSpecialOrder','identity_name_variants_display','showInvestigationsAsSecondary','defaultMortPourLaFrance'],['t',/^Filtres du bloc Événements|^Ascendants et descendants/],['t',/^Couleurs des badges/]]],
             ['Numéros et verrou',[['q','#design-form > .local-lock-inline']],'Numérotation et verrou'],['Internet',[['t',/^Chercher sur internet|^Fiches avec un réglage particulier/]],'Chercher sur internet, fiches avec un réglage particulier'],['Le reste',[['p','design_sheets']]]]};
+    /** le titre et la phrase d'une page de Réglages → Apparence : seulement le texte (la pastille 🎨 .ui-ph-ico reste), et rien si c'est déjà lui
+     *  ou sa traduction (sinon, dans une autre langue, ce texte et la traduction de la page se renvoyaient la balle et l'icône sautait) */
+    function setDesignHeadText(el,want){if(!el||want==null)return;const ico=el.querySelector(':scope > .ui-ph-ico');const cur=[...el.childNodes].filter(n=>n!==ico).map(n=>n.textContent).join('').trim();const I=window.LCNDA_I18N;
+        if(cur===want||(I&&I.lang!=='fr'&&I.translateText&&(I.translateText(want)??want)===cur))return;el.textContent=want;if(ico)el.prepend(ico);}
     function splitDesignPageA(page,tab,partOf){
         const form=page.querySelector('#design-form');
         const titleOf=el=>(el.querySelector(':scope > header h3, :scope > header h2, :scope > h3, :scope > h2, h3, summary, legend')?.textContent||'').trim();
@@ -6539,7 +6543,7 @@ ${backupSectionHtml()}
             // un réordonnement seul sur sa page : il prend la place (plus large, plus lisible)
             page.querySelectorAll('.design-order-grid').forEach(g=>g.classList.toggle('reg-a-solo',[...g.children].filter(c=>!c.classList.contains('reg-a-off')).length===1));};
         const head=REGLAGES_A_HEAD[tab],h=page.querySelector('.page-header');
-        if(head&&h){const t=h.querySelector('h2');if(t)t.textContent=head[0];const pp=h.querySelector('p');if(pp)pp.textContent=head[1];}
+        if(head&&h){setDesignHeadText(h.querySelector('h2'),head[0]);setDesignHeadText(h.querySelector('p'),head[1]);}
         if(tabs.length>1&&tabs[0][0]){
             state.regATab=state.regATab||{};const want=state.regATab[tab],found=typeof want==='string'?tabs.findIndex(([l])=>l===want):-1,cur=typeof want==='string'?Math.max(0,found):Math.min(want||0,tabs.length-1); // gardé par son nom : la page dessinée une première fois avec moins d'onglets ne l'oublie pas // un onglet demandé par son nom (« Réordonner » des Listes → 'Listes')
             page.querySelector(':scope > .reg-a-tabs')?.remove();const bar=document.createElement('div');bar.className='segmented ms-pagetabs reg-a-tabs';bar.setAttribute('role','tablist');
@@ -6819,7 +6823,8 @@ ${backupSectionHtml()}
                 const catBlocks=$$('.tile-cat-block',catList);
                 const catOrder=catBlocks.map(b=>b.dataset.tileCat);
                 const catHidden=catBlocks.filter(b=>!b.querySelector('.tile-cat-toggle')?.checked).map(b=>b.dataset.tileCat);
-                const itemHidden=[];catBlocks.forEach(b=>{$$('.order-row',b).filter(r=>!$('.order-visible input',r)?.checked).forEach(r=>itemHidden.push(r.dataset.orderKey));});
+                let dfltHidden=[];try{dfltHidden=window.LCNDA_EXT?.tileHiddenByDefault?.()||[];}catch(_){}const savedHidden=tileLayerHiddenSaved(); // un fond masqué au départ (Esri) et pas décoché par la personne n'est pas écrit « décoché » : sinon un clic sur une autre case le cachait pour de bon
+                const itemHidden=[];catBlocks.forEach(b=>{$$('.order-row',b).filter(r=>!$('.order-visible input',r)?.checked&&(!dfltHidden.includes(r.dataset.orderKey)||savedHidden.includes(r.dataset.orderKey))).forEach(r=>itemHidden.push(r.dataset.orderKey));});
                 const customCats=catBlocks.map(b=>{const id=b.dataset.tileCat;const label=b.querySelector('.tile-cat-label-input')?.value.trim()||id;const items=$$('.order-row',b).map(r=>r.dataset.orderKey);return{id,label,items};});
                 localStorage.setItem('genealogie-tile-cat-order',JSON.stringify(catOrder));
                 localStorage.setItem('genealogie-tile-hidden-cats',JSON.stringify(catHidden));
