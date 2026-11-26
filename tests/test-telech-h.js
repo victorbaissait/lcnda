@@ -138,6 +138,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const [n, , txt] = await into('placeInto', {id: 4, name: 'Monpazier', lat: 44.6806, lon: 0.8944, insee: '24280'});
             assert.ok(n >= 2, txt); assert.match(txt, /Monpazier est une bastide/); assert.match(txt, /halle/i); assert.match(txt, /généralité de Bordeaux/, 'généralité (Atlas d’Ancien Régime, réutilisé)');
             const [, , dz] = await into('placeInto', {id: 3, name: 'Douarnenez', lat: 48.0925, lon: -4.3303, insee: '29046'}); assert.match(dz, /Douarnenez/); assert.match(dz, /conserver/i);
+            const [, , caen] = await into('placeInto', {id: 9, name: 'Caen', lat: 49.1829, lon: -0.3707, insee: '14118'}, {parts: ['trudaine'], force: true});
+            assert.match(caen, /Une planche de l’Atlas de Trudaine \(1745-1780\) nomme Caen/); assert.match(caen, /Archim/);
             const reg = await p.evaluate(() => { const E = window.LCNDA_EXT; return {mono: E.monographSections.filter(s => /^th_/.test(s.id)).length, lists: E.dataLists.filter(s => /^th_/.test(s.id)).map(s => s.id), maps: E.mapLayerSources.filter(s => /^th_/.test(s.id)).length,
                 ds: E.dataSources.filter(s => /^th/.test(s.id)).length, village: (E.villageSectionDefs || []).some(d => d.id === 'th_place'), block: (window.LCNDA_APP.defaultPersonBlocks || []).some(b => b[0] === 'telech_h'), tout: true}; });
             assert.deepStrictEqual(reg.lists, ['th_kiosques', 'th_marianne', 'th_halles', 'th_funiculaires', 'th_eclusieres', 'th_tramways', 'th_traces', 'th_bastides', 'th_trudaine', 'th_ateliers', 'th_textes']);

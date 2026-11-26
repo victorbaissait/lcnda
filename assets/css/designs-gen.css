@@ -6776,6 +6776,28 @@
 @media (max-width: 600px){
   :root[data-lc-density] .tf-ul{padding-left:calc(18px * var(--lc-sp))}
 }
+/* telech-h.css */
+:root[data-lc-density] .th-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .th-quote{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .th-panel{margin-top:calc(12px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root[data-lc-density] .th-ul{padding-left:calc(18px * var(--lc-sp))}
+}
+:root[data-lc-density] .th-toggles{gap:calc(4px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+/* telech-g.css */
+:root[data-lc-density] .tg-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .tg-actions{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .tg-panel{margin-top:calc(12px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root[data-lc-density] .tg-ul{padding-left:calc(18px * var(--lc-sp))}
+}
+/* telech-i.css */
+:root[data-lc-density] .ti-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ti-quote{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ti-panel{margin-top:calc(12px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root[data-lc-density] .ti-ul{padding-left:calc(18px * var(--lc-sp))}
+}
 /* epoque-travail.css */
 :root[data-lc-density] .et-quote{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .et-figs{gap:calc(8px * var(--lc-sp))}
