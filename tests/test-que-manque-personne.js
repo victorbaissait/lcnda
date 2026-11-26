@@ -40,8 +40,8 @@ $fam = function ($a, $b, $kid) use ($pdo) { $pdo->prepare('INSERT INTO families(
 $id = [];
 for ($s = 1; $s < 4096; $s++) { $g = (int) floor(log($s, 2)); $id[$s] = $per($s, 1990 - 28 * $g); }
 for ($s = 1; $s < 2048; $s++) { $fam($id[2 * $s], $id[2 * $s + 1], $id[$s]); }
-// implexe : les parents de 3000 sont aussi ceux de 2049 (déjà mariés) — la même famille, une seule fois
-$pdo->prepare('INSERT INTO family_children(family_id, child_id, position) SELECT family_id, ?, 1 FROM family_children WHERE child_id=?')->execute([$id[3000], $id[2049]]);
+// implexe : 3000 (12e génération) est aussi l'enfant des parents de 1000 : 2000 et 2001 reviennent en 6000 et 6001
+$pdo->prepare('INSERT INTO family_children(family_id, child_id, position) SELECT family_id, ?, 1 FROM family_children WHERE child_id=?')->execute([$id[3000], $id[1000]]);
 // une branche de 18 générations de plus au-dessus de 2048 (pères seulement) : 30 générations en tout
 $child = $id[2048];
 for ($k = 1; $k <= 18; $k++) { $f = $per(5000 + $k, 1650 - 28 * $k); $pdo->prepare('INSERT INTO families(partner1_id) VALUES(?)')->execute([$f]); $pdo->prepare('INSERT INTO family_children(family_id, child_id, position) VALUES(?,?,0)')->execute([(int) $pdo->lastInsertId(), $child]); $child = $f; }
@@ -52,8 +52,9 @@ $t1 = microtime(true); $d12 = research_gaps_data($pdo, ['gen' => 12]);
 $lin = gaps_positions($pdo, $id[1], 30, 500);
 $all = research_gaps_data($pdo, ['gen' => 30, 'limit' => 20000]); $maxGen = max(array_map(fn($i) => $i['generation'], $all['items']));
 echo json_encode(['dt' => $dt, 'gens' => $d['generations'], 'ancestors' => $d['ancestors'], 'total' => $d['total'], 'shown' => count($d['items']), 'maxGen' => $maxGen,
-    'a12' => $d12['ancestors'], 'trunc' => $lin['truncated'], 'n500' => count(array_unique($lin['positions'])), 'sosa3000' => array_values(array_filter($d['items'], fn($i) => $i['person_id'] === $id[3000]))[0]['sosa'] ?? 0,
-    'parents12' => count(array_filter($d12['items'], fn($i) => $i['kind'] === 'parents' && $i['generation'] === 12))]);
+    'a12' => $d12['ancestors'], 'trunc' => $lin['truncated'], 'n500' => count(array_unique($lin['positions'])), 'sosa2000' => array_values(array_unique(array_map(fn($i) => $i['sosa'], array_filter($all['items'], fn($i) => $i['person_id'] === $id[2000])))),
+    'parents12' => count(array_filter(research_gaps_data($pdo, ['gen' => 12, 'limit' => 20000])['items'], fn($i) => $i['kind'] === 'parents' && $i['generation'] === 12)),
+    'p2048' => count(array_filter(research_gaps_data($pdo, ['gen' => 12, 'limit' => 20000])['items'], fn($i) => $i['kind'] === 'parents' && in_array($i['person_id'], [$id[2048], $id[3000]], true)))]);
 `], {cwd: root, encoding: 'utf8', env: {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: tmp, GENEALOGY_SKIP_REFERENCE: '1'}, maxBuffer: 1 << 26});
         if (r.status !== 0) throw new Error(r.stderr || r.stdout);
         return JSON.parse(r.stdout.trim().split('\n').pop());
@@ -71,8 +72,9 @@ echo json_encode(['dt' => $dt, 'gens' => $d['generations'], 'ancestors' => $d['a
         assert.ok(r.total > 600);
         assert.ok(r.a12 < r.ancestors);
         assert.equal(r.trunc, true, 'au-delà de la limite : signalé'); assert.ok(r.n500 <= 500);
-        assert.ok(r.sosa3000 >= 2048 && r.sosa3000 < 4096, 'implexe : un seul numéro, le plus petit');
-        assert.equal(r.parents12, 0, 'à 12 générations, les parents de la 12e sont connus (une génération lue de plus)');
+        assert.deepEqual(r.sosa2000, [2000], 'implexe : un seul numéro, le plus petit');
+        assert.ok(r.parents12 > 1000, 'à 12 générations, les parents inconnus de la 12e sont proposés');
+        assert.equal(r.p2048, 0, 'mais pas ceux qu’on connaît (une génération lue de plus)');
     });
 
     const {ID, base, browser, stop} = await start();

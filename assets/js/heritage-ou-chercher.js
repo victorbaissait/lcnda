@@ -149,10 +149,10 @@
 
     /* ═════════════════════ l'affichage d'une proposition ═════════════════════ */
     const PAID_BADGE = {paid: ['Payant', 'red'], partly: ['En partie payant', 'yellow'], library: ['Gratuit en bibliothèque', 'blue']};
-    function rowHtml(x, {compact = false, extra = ''} = {}) {
+    function rowHtml(x, {compact = false, extra = '', cls = ''} = {}) {
         const s = x.site, pb = PAID_BADGE[x.paid], prev = x.searched;
         const res = prev ? (prev.status === 'review' ? RESULT.review : RESULT[prev.result] || ['Cherché', 'grey']) : null;
-        return `<li class="ouc-row${prev && prev.status !== 'review' ? ' is-done' : ''}" data-ouc-key="${esc(s.key)}">
+        return `<li class="ouc-row${prev && prev.status !== 'review' ? ' is-done' : ''}${cls ? ' ' + cls : ''}" data-ouc-key="${esc(s.key)}">
             <span class="ouc-ico" aria-hidden="true">${esc(s.icon || (prev ? '✓' : '🌐'))}</span>
             <div class="ouc-main"><div class="ouc-name"><b>${esc(s.label)}</b>${pb ? ' ' + badge(pb[0], pb[1]) : ''}${res ? ` ${badge(res[0], res[1])} <small class="muted">${when(prev.date)}</small>` : ''}</div>
                 <div class="ouc-why">${esc(x.reasons[0] || '')}</div>${!compact && x.reasons.length > 1 ? `<div class="ouc-why2">${x.reasons.slice(1).map(esc).join(' · ')}</div>` : ''}${compact ? '' : periodHtml(s)}${extra}</div>
@@ -398,7 +398,9 @@
             let list;
             if (view.tab === 'out') list = rows.length ? outHtml(rows) : emptyHtml();
             else if (rows.length) {
-                list = `<ul class="ouc-list">${rows.slice(0, view.shown).map(x => rowHtml(x, {extra: catsLine(x)})).join('')}</ul>` + (rows.length > view.shown ? `<button type="button" class="ui-more" data-ouc-more-rows>${rows.length - view.shown === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n: Math.min(15, rows.length - view.shown)})}</button>` : '');
+                // 🗂 un cadre par site (réglage « Un cadre par personne », genealogie-cadres : oui au départ)
+                const carded = !!UI().framesOn?.();
+                list = `<ul class="ouc-list${carded ? ' is-cards' : ''}">${rows.slice(0, view.shown).map(x => rowHtml(x, {extra: catsLine(x), cls: carded ? 'ui-item-card' : ''})).join('')}</ul>` + (rows.length > view.shown ? `<button type="button" class="ui-more" data-ouc-more-rows>${rows.length - view.shown === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n: Math.min(15, rows.length - view.shown)})}</button>` : '');
             } else list = emptyHtml();
             function outHtml(l) {
                 return (So ? So.outGroups(l) : [{label: '', rows: l}]).map(g => `<section class="ouc-outg"><h4>${esc(i18n(g.label))} · ${g.rows.length}</h4><ul class="ouc-out">${g.rows.slice(0, 200).map(o => `<li><b>${esc(o.site.label)}</b> <span class="muted">— ${esc(o.why)}</span>${So ? ` ${So.catsOf(o.site).map(c => `<small class="ouc-cat">${esc((So.SORT[c] || So.OTHER).icon)}</small>`).join('')}` : ''}${g.id === 'low' && o.site.href ? ` <a class="link-button" href="${esc(o.site.href)}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Chercher quand même'))}</a>` : ''}</li>`).join('')}</ul></section>`).join('');

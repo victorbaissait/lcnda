@@ -4324,21 +4324,21 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
     function sortTableBy(table,index,direction){
         $$('[data-sort-column]',table).forEach(item=>{item.removeAttribute('data-direction');item.querySelector('.sort-mark')?.remove();});
         const button=$(`[data-sort-column="${index}"]`,table);if(button){button.dataset.direction=direction;button.insertAdjacentHTML('beforeend',`<span class="sort-mark">${direction==='asc'?' ↑':' ↓'}</span>`);}
-        const body=$('tbody',table),rows=$$('tr',body);
+        $$('tbody',table).forEach(body=>{const rows=$$(':scope > tr:not(.ui-person-tb-head)',body); // 🗂 un tbody par personne : chaque cadre se trie chez lui
         rows.sort((a,b)=>{const av=a.children[index]?.dataset.sortValue??a.children[index]?.textContent.trim()??'',bv=b.children[index]?.dataset.sortValue??b.children[index]?.textContent.trim()??'';const numeric=av!==''&&bv!==''&&!Number.isNaN(Number(av))&&!Number.isNaN(Number(bv));const result=numeric?Number(av)-Number(bv):av.localeCompare(bv,'fr',{numeric:true,sensitivity:'base'});return direction==='asc'?result:-result;});
-        rows.forEach(row=>body.append(row));
+        rows.forEach(row=>body.append(row));});
         const bar=table._sortBar;if(bar)bar.select.value=`${index}:${direction}`;
     }
     /** C6 : une table triable avec data-sortbar="personne" (data-sortbar-many, data-sortbar-fem) reçoit au-dessus la barre
      *  « N personnes · Trier : [menu] » (chaque colonne dans les deux sens) ; un clic sur un titre de colonne la met à jour. */
     function addTableSortBar(table){
         const UI=window.LCNDA_UI,label=table.dataset.sortbar;if(!UI?.sortBar||!label||table._sortBar)return;
-        const rows=$$('tbody tr',table).length,fem=table.dataset.sortbarFem==='1';
+        const rows=$$('tbody tr:not(.ui-person-tb-head)',table).length,fem=table.dataset.sortbarFem==='1';
         const cols=$$('[data-sort-column]',table).map(b=>[b.dataset.sortColumn,(b.textContent||'').replace(/[↑↓]/g,'').trim()]).filter(c=>c[1]);
         const isDate=n=>/date|année|naissance|décès|vote|premier|dernier|quand|ajout|modifi/i.test(n);
         const options=[['','Dans l’ordre de départ'],...cols.flatMap(([i,n])=>isDate(n)?[[`${i}:asc`,`${n} : ${fem?'les plus anciennes':'les plus anciens'}`],[`${i}:desc`,`${n} : ${fem?'les plus récentes':'les plus récents'}`]]:[[`${i}:asc`,`${n} : A → Z`],[`${i}:desc`,`${n} : Z → A`]])];
-        const start=$$('tbody tr',table);
-        const bar=UI.sortBar({count:rows,label,many:table.dataset.sortbarMany||'',feminine:fem,options,value:'',onChange:v=>{if(!v){const body=$('tbody',table);start.forEach(r=>body.append(r));$$('[data-sort-column]',table).forEach(item=>{item.removeAttribute('data-direction');item.querySelector('.sort-mark')?.remove();});return;}const [i,d]=v.split(':');sortTableBy(table,Number(i),d);}});
+        const start=$$('tbody tr',table).map(r=>[r,r.parentNode]); // 🗂 chaque ligne retourne dans son tbody (un par personne)
+        const bar=UI.sortBar({count:rows,label,many:table.dataset.sortbarMany||'',feminine:fem,options,value:'',onChange:v=>{if(!v){start.forEach(([r,body])=>body.append(r));$$('[data-sort-column]',table).forEach(item=>{item.removeAttribute('data-direction');item.querySelector('.sort-mark')?.remove();});return;}const [i,d]=v.split(':');sortTableBy(table,Number(i),d);}});
         table._sortBar=bar;(table.closest('.data-table-wrap')||table).before(bar);
     }
     function bindSortableTables(){$$('.sortable-table:not([data-sort-bound])').forEach(table=>{table.dataset.sortBound='1';addTableSortBar(table);$$('[data-sort-column]',table).forEach(button=>button.addEventListener('click',()=>{sortTableBy(table,Number(button.dataset.sortColumn),button.dataset.direction==='asc'?'desc':'asc');}));});}

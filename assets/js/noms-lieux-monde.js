@@ -379,6 +379,13 @@
         const near = {lat: g.lat, lon: g.lon, km: 15, title: g.now};
         if (E().open) E().open(LIST, view === 'map' ? {view: 'map', near, dview: VIEW, nlq: S.q} : {view: 'table', dview: 'table', near, nlq: S.q});
     }
+    /* « / » : la case de cette vue (elle est la recherche de la page), avant celle du menu de gauche */
+    root.addEventListener?.('keydown', e => {
+        if (e.key !== '/' || e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey || !S.host?.isConnected || document.querySelector('dialog[open]')) return;
+        const t = e.target; if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+        const inp = S.host.querySelector('[data-nlm-q]'); if (!inp || !inp.offsetParent) return;
+        e.preventDefault(); inp.focus(); inp.select?.();
+    }, true);
     function bind(host) {
         const inp = host.querySelector('[data-nlm-q]'); let tq = 0;
         const box = inp.closest('.ui-search'), sync = () => box?.classList.toggle('has-value', !!inp.value);

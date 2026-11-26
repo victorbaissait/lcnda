@@ -397,6 +397,280 @@
             }});
     }
 
+    /* ─── 📊 Bloc « Données » : une liste de données (ou une question), filtrée ; 🔄 à jour ou 📌 figée ───
+     * Les listes viennent du moteur commun (app-listes-donnees.js : LCNDA_EXT.dataListsEngine), rangées par thème (app-listes-themes.js),
+     * listes réunies comprises (app-listes-reunies*.js) ; une question passe par LCNDA_EXT.dataAsk (app-donnees-accueil.js).
+     * Réglages du bloc : list, ask, q, from, to, near ('' | 'place' | 'subject' = le titre de la fiche), center {lat, lon, title}, km,
+     * family (seulement près des lieux de la famille), famcol (colonne « 👪 Dans la famille »), cols, limit (≤ 500), sort, dir,
+     * view ('table' | 'list' | 'map' | 'timeline'), mode ('live' : relue à chaque ouverture | 'frozen' : snap = la copie datée).
+     * snap = {at, list, label, icon, source, sourceUrl, licence, crit, total, cols: [{k, l}], rows: [{c: [...], s, u, g, y}]} :
+     * chaque ligne garde sa source ↗ (s, u). Serveur : lib/topic_sheets.php (topic_clean_data : tailles, adresses http(s), et la colonne
+     * « Dans la famille » d'une copie ne nomme jamais une personne vivante ni une fiche confidentielle). Essai : tests/test-fiche-bloc-donnees.js */
+    const DE = () => ext.dataListsEngine || null;
+    const LF = () => ext.listesFamille || null;
+    const DMAX = 500;
+    const DVIEWS = [['table', '▦', 'Tableau'], ['list', '☰', 'Liste compacte'], ['map', '🗺', 'Carte'], ['timeline', '⏳', 'Frise']];
+    const D_CSS = 'table.h-fi-dtable{border-collapse:collapse;width:100%;font-size:13px;margin:4px 0}.h-fi-dtable th,.h-fi-dtable td{border:1px solid #bbb;padding:3px 6px;text-align:left;vertical-align:top}.h-fi-dfoot,.h-fi-dcrit{font-size:12px;color:#555}';
+    const dataLast = new Map(); // id du bloc → la dernière lecture d'un bloc « à jour » (⤓ Exporter, 🖨 Imprimer)
+    const httpUrl = u => (/^https?:\/\/[^\s"'<>]+$/i.test(String(u || '').trim()) ? String(u).trim() : '');
+    const dListOf = id => (DE()?.list?.() || []).find(d => d.id === id) || null;
+    const dFields = d => (d?.fields || []).filter(f => f && f.key && f.type !== 'url' && !f.hidden);
+    const dLicence = d => String(d?.licence || d?.license || (String(d?.source || '').match(/\b(CC0|CC[ -]BY(?:[ -]SA)?(?: \d\.\d)?|ODbL(?: \d\.\d)?|Licence Ouverte(?: \d\.\d)?|domaine public)/i) || [])[0] || '');
+    const dCell = (f, v) => (v == null ? '' : Array.isArray(v) ? v.join(' · ') : f?.type === 'bool' ? (v && v !== 'non' && v !== '0' ? i18n('oui') : i18n('non'))
+        : typeof v === 'number' ? (Number.isInteger(v) && Math.abs(v) < 10000 ? String(v) : v.toLocaleString('fr-FR', {maximumFractionDigits: 2})) : String(v));
+    const dDate = s => { const t = new Date(String(s || '') + 'T12:00:00'); return Number.isNaN(t.getTime()) ? String(s || '') : t.toLocaleDateString('fr-FR'); };
+    const dTitle = b => { const d = dListOf(b.list); return d ? i18n(d.label) : b.snap?.label || i18n('Données'); };
+    /** la source d'une ligne : celles d'une ligne réunie (avec la fiche de la première qui en a une), sinon la liste */
+    function dRowSource(d, r) {
+        const ms = Array.isArray(r?._members) ? r._members : [];
+        if (ms.length) return {s: [...new Set(ms.map(m => m.src?.short).filter(Boolean))].join(' ; ') || d.source || i18n(d.label), u: ms.map(m => httpUrl(m.rec?.url)).find(Boolean) || httpUrl(ms[0]?.src?.url) || httpUrl(d.sourceUrl)};
+        return {s: d.source || i18n(d.label), u: (d.fields || []).filter(f => f.type === 'url').map(f => httpUrl(r?.[f.key])).find(Boolean) || httpUrl(d.sourceUrl)};
+    }
+    /* 📍 un lieu de la base (sur TON serveur), et le sujet de la fiche : son titre (« Naves »), sinon un de ses mots en majuscule */
+    const placeMemo = new Map();
+    async function dPlace(name) {
+        const k = foldT(name).trim(); if (!k) return null; if (placeMemo.has(k)) return placeMemo.get(k);
+        let p = null; try { const r = await api('picker_search', {kind: 'place', q: name, limit: 5}); const its = (r.groups || []).flatMap(g => g.items || []).filter(x => x.lat != null && x.lon != null); p = its.find(x => foldT(x.title || x.name).startsWith(k)) || null; } catch (_) {}
+        const v = p ? {lat: Number(p.lat), lon: Number(p.lon), title: String(p.title || p.name || name).replace(/\s*\(.*$/, '')} : null; placeMemo.set(k, v); return v;
+    }
+    async function dSubject(sheet) {
+        const t = String(sheet?.title || '').trim(); if (!t) return null;
+        const whole = await dPlace(t); if (whole) return whole;
+        for (const w of t.split(/[\s,;:()«»"’']+/).filter(x => /^\p{Lu}/u.test(x) && x.length > 2).reverse()) { const p = await dPlace(w); if (p) return p; }
+        return null;
+    }
+    /** lire la liste avec les réglages du bloc : {d, st, rows, total, center} ou {error} */
+    async function dRun(b, sheet) {
+        const E = DE(), d0 = dListOf(b.list);
+        if (!E || !d0) return {error: i18n('Cette liste n’est pas disponible ici.')};
+        if (!(await E.isInstalled(d0))) return {error: i18n('Ces données ne sont pas encore sur cet ordinateur (Réglages → 🗂 Données).')};
+        const st = {...E.blank()}, d = E.viewDef ? E.viewDef(d0, st) : d0;
+        if (b.q) st.q = b.q;
+        if (b.from != null || b.to != null) st.period = {from: b.from ?? -9999, to: b.to ?? 9999, mode: 'overlap'};
+        const center = b.near === 'subject' ? await dSubject(sheet) : b.near === 'place' ? b.center : null;
+        if (center && d.geo) st.near = {lat: center.lat, lon: center.lon, km: Number(b.km) || 30, title: center.title};
+        if (b.sort && (b.sort !== '_km' || st.near)) { st.sort = b.sort; st.dir = b.dir === 'desc' ? 'desc' : 'asc'; } else if (st.near) st.sort = '_km';
+        const limit = Math.max(1, Math.min(DMAX, Number(b.limit) || 20));
+        let rows = [], total = 0;
+        if (b.family && LF() && d.geo) { // 👪 seulement près des lieux de la famille (rayon : Réglages → 🧰 Listes de données)
+            await LF().ready(); const fk = LF().km();
+            const p = await E.fetchPage(d, st, 0, d.query ? 5000 : 200000), all = (p.all || p.rows || []).filter(r => { const g = E.geoOf(d, r); return g && LF().nearKm(g[0], g[1], fk) <= fk; });
+            total = all.length; rows = all.slice(0, limit);
+        } else { const p = await E.fetchPage(d, st, 0, limit); rows = p.rows || []; total = Number(p.total ?? rows.length) || rows.length; }
+        return {d, d0, st, rows, total, center, noSubject: b.near === 'subject' && !center};
+    }
+    function dCrit(b, res) {
+        const st = res?.st || {}, n = st.near;
+        return [b.ask ? `« ${b.ask} »` : '', b.q ? i18n('mots : « {q} »', {q: b.q}) : '', b.from != null || b.to != null ? `📅 ${b.from ?? '…'} → ${b.to ?? '…'}` : '',
+            n ? i18n('📍 À {km} km autour de {p}', {km: n.km, p: n.title}) : res?.noSubject ? i18n('📍 le sujet de la fiche n’est pas un lieu connu') : '', b.family ? i18n('👪 près des lieux de la famille') : ''].filter(Boolean).join(' · ');
+    }
+    /** la lecture → le modèle commun (le même qu'une copie figée) */
+    async function dModel(b, res) {
+        const {d, d0, st, rows} = res, E = DE(), fs = dFields(d);
+        let cs = (b.cols || []).map(k => fs.find(f => f.key === k)).filter(Boolean); if (!cs.length) cs = fs.slice(0, 4);
+        const cols = cs.map(f => ({k: f.key, l: `${i18n(f.label)}${f.unit ? ` (${i18n(f.unit)})` : ''}`}));
+        if (st.near) cols.push({k: '_km', l: i18n('Distance (km)')});
+        const fam = !!(b.famcol && LF() && d.geo && d.period), fk = Number(d.familyKm) > 0 ? Number(d.familyKm) : LF()?.km?.() || 15;
+        if (fam) { await LF().ready(); cols.push({k: '_fam', l: i18n('👪 Dans la famille')}); }
+        const out = rows.map(r => {
+            const g = E.geoOf(d, r), p = E.periodOf(d, r), src = dRowSource(d, r);
+            const c = cs.map(f => dCell(f, r[f.key]).slice(0, 400));
+            if (st.near) c.push(r._km != null ? String(r._km).replace('.', ',') : '');
+            if (fam) c.push(g && p ? LF().text(LF().presence(g[0], g[1], p[0], fk)) : '');
+            return {c, s: String(src.s).slice(0, 200), u: src.u, g: g ? [Number(g[0].toFixed(5)), Number(g[1].toFixed(5))] : null, y: p ? p[0] : null};
+        });
+        return {at: new Date().toISOString().slice(0, 10), list: (d0 || d).id, label: i18n(d.label), icon: d.icon || '📋', source: d.source || '', sourceUrl: httpUrl(d.sourceUrl), licence: dLicence(d), crit: dCrit(b, res), total: res.total, cols, rows: out};
+    }
+    /** le bloc dessiné (à l'écran, exporté, imprimé : o.actions = les boutons, o.print = sans carte) */
+    function dHtml(m, b, o = {}) {
+        const rows = m.rows || [], cols = m.cols || [], view = o.print && b.view === 'map' ? 'table' : (b.view || 'table');
+        const short = s => (String(s).length > 40 ? String(s).slice(0, 38) + '…' : String(s));
+        const src = r => (r.u ? `<a class="h-fi-dsrc" href="${esc(r.u)}" target="_blank" rel="noopener noreferrer" title="${esc(r.s)}">↗ ${esc(short(r.s || i18n('source')))}</a>` : `<span class="h-fi-dsrc muted">↗ ${esc(short(r.s || i18n('source')))}</span>`);
+        const listHtml = rs => `<ul class="h-fi-dlist">${rs.map(r => `<li><b>${esc(r.c[0] || '—')}</b>${r.c.slice(1).filter(Boolean).length ? ` <span class="muted">${esc(r.c.slice(1).filter(Boolean).join(' · '))}</span>` : ''} ${src(r)}</li>`).join('')}</ul>`;
+        let body;
+        if (!rows.length) body = `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔎</span><span class="empty-line-text">${esc(i18n('Aucune ligne ne correspond à ces critères.'))}</span></p>`;
+        else if (view === 'list') body = listHtml(rows);
+        else if (view === 'timeline') { const ts = rows.filter(r => r.y != null && r.y !== '').sort((a, z) => Number(a.y) - Number(z.y)); body = ts.length ? `<ol class="h-fi-dates h-fi-dtime">${ts.map(r => `<li><span>${esc(r.y)}</span><p>${esc(r.c.filter(Boolean).join(' · '))} ${src(r)}</p></li>`).join('')}</ol>` : `<p class="muted">${esc(i18n('Aucune de ces lignes n’a de date.'))}</p>`; }
+        else if (view === 'map') { const pts = rows.filter(r => Array.isArray(r.g)).map(r => ({lat: r.g[0], lon: r.g[1], label: r.c[0] || '', color: '#0066cc'})); body = (pts.length && ext.miniMap ? `<div class="h-fi-dmap">${ext.miniMap(pts, [], {height: 300, interactive: !kiosk()})}</div>` : `<p class="muted">${esc(i18n('Aucune de ces lignes n’a de position sur la carte.'))}</p>`) + listHtml(rows); }
+        else body = `<div class="data-table-wrap h-fi-dwrap"><table class="data-table h-fi-dtable"><thead><tr>${cols.map(c => `<th scope="col">${esc(c.l)}</th>`).join('')}<th scope="col">${esc(i18n('Source'))}</th></tr></thead><tbody>${rows.map(r => `<tr>${cols.map((c, j) => `<td>${esc(r.c[j] ?? '')}</td>`).join('')}<td>${src(r)}</td></tr>`).join('')}</tbody></table></div>`;
+        const frozen = b.mode === 'frozen', lic = m.licence ? ` · ${esc(i18n('Licence : {l}', {l: m.licence}))}` : '';
+        const who = m.source ? (httpUrl(m.sourceUrl) ? `<a href="${esc(m.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(m.source)}</a>` : esc(m.source)) : esc(m.label || '');
+        const when = frozen ? i18n('📌 Figé le {d}', {d: dDate(m.at)}) : i18n('🔄 À jour, lu le {d}', {d: dDate(m.at)});
+        const count = m.total > rows.length ? i18n('{n} lignes sur {t}', {n: rows.length, t: m.total}) : A().plural ? A().plural(rows.length, i18n('ligne')) : String(rows.length);
+        const acts = o.actions && !kiosk() ? `<span class="h-fi-dacts">${b.list ? `<button type="button" class="button small secondary" data-fi-dopen="${esc(b.id)}">${esc(i18n('↗ Ouvrir la liste'))}</button>` : ''}${b.list ? `<button type="button" class="button small secondary" data-fi-dfreeze="${esc(b.id)}">${esc(i18n(frozen ? '↻ Refaire la copie' : '📌 Figer maintenant'))}</button>` : ''}</span>` : '';
+        return `${m.crit ? `<p class="h-fi-dcrit muted">${esc(m.icon || '📋')} ${esc(m.label || '')} · ${esc(m.crit)}</p>` : `<p class="h-fi-dcrit muted">${esc(m.icon || '📋')} ${esc(m.label || '')}</p>`}${body}
+            <div class="h-fi-dfoot"><small>${esc(i18n('Source :'))} ${who}${lic} · ${esc(when)} · ${esc(count)}</small>${acts}</div>`;
+    }
+    function dBody(b) {
+        if (!b.list && !b.snap) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📊</span><span class="empty-line-text">${esc(i18n('Aucune liste choisie : ✎ pour en choisir une, ou pour poser une question.'))}</span></p>`;
+        if (b.mode === 'frozen' && b.snap) return `<div class="h-fi-data is-frozen">${dHtml(b.snap, b, {actions: true})}</div>`;
+        return `<div class="h-fi-data" data-fi-data="${esc(b.id)}">${UIx().spinner ? UIx().spinner(i18n('Lecture des données…')) : esc(i18n('Lecture des données…'))}</div>`;
+    }
+    /** les blocs « à jour » d'une page (la fiche, ou une fiche posée dans un onglet) : relus maintenant */
+    function dMount(scope, sheet) {
+        scope.querySelectorAll('[data-fi-data]').forEach(async el => {
+            const b = (sheet.blocks || []).find(x => x.id === el.dataset.fiData); if (!b) return;
+            let html;
+            try {
+                const res = await dRun(b, sheet);
+                if (res.error) html = `<p class="muted">${esc(res.error)}</p>${b.snap ? dHtml(b.snap, {...b, mode: 'frozen'}) : ''}`;
+                else { const m = await dModel(b, res); dataLast.set(b.id, m); html = dHtml(m, b, {actions: true}); }
+            } catch (e) { html = `<p class="muted">${esc(e.message || String(e))}</p>`; }
+            if (el.isConnected) el.innerHTML = html;
+        });
+    }
+    /** pour ⤓ Exporter et 🖨 Imprimer : la copie figée, sinon la dernière lecture */
+    const dModelOf = b => (b.mode === 'frozen' ? b.snap : dataLast.get(b.id) || b.snap) || null;
+    const dStatic = b => { const m = dModelOf(b); return m ? dHtml(m, b, {print: true}) : `<p><i>${esc(i18n('(données : à voir dans LCNDA)'))}</i></p>`; };
+    function dMarkdown(b) {
+        const m = dModelOf(b); if (!m) return i18n('_(données : à voir dans LCNDA)_');
+        const cell = v => String(v ?? '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
+        const head = `| ${[...m.cols.map(c => cell(c.l)), i18n('Source')].join(' | ')} |\n|${' --- |'.repeat(m.cols.length + 1)}`;
+        const body = (m.rows || []).map(r => `| ${[...m.cols.map((c, j) => cell(r.c[j])), r.u ? `[↗ ${cell(r.s)}](${r.u})` : `↗ ${cell(r.s)}`].join(' | ')} |`).join('\n');
+        const foot = [`${i18n('Source :')} ${m.sourceUrl ? `[${m.source}](${m.sourceUrl})` : m.source || m.label}`, m.licence ? i18n('Licence : {l}', {l: m.licence}) : '', b.mode === 'frozen' ? i18n('📌 Figé le {d}', {d: dDate(m.at)}) : i18n('🔄 À jour, lu le {d}', {d: dDate(m.at)})].filter(Boolean).join(' · ');
+        return `${m.crit ? `_${m.crit}_\n\n` : ''}${head}\n${body}\n\n_${foot}_`;
+    }
+    /** ↗ la liste en grand, avec la même période et le même lieu */
+    function dOpenList(b, sheet) {
+        if (!b || !DE()?.open) return;
+        const preset = {};
+        if (b.from != null || b.to != null) preset.period = {from: b.from ?? -9999, to: b.to ?? 9999, mode: 'overlap'};
+        const go = c => { if (c) preset.near = {lat: c.lat, lon: c.lon, km: Number(b.km) || 30, title: c.title}; DE().open(b.list, preset); };
+        if (b.near === 'subject') dSubject(sheet).then(go); else go(b.near === 'place' ? b.center : null);
+    }
+    /** 📌 Figer maintenant / ↻ Refaire la copie ; ↶ Annuler remet le bloc d'avant */
+    async function dFreeze(id) {
+        const c = cur, i = c.blocks.findIndex(x => x.id === id); if (i < 0) return;
+        const before = JSON.parse(JSON.stringify(c.blocks[i]));
+        let m; try { const res = await dRun(before, c); if (res.error) return toast(res.error, 'error'); m = await dModel(before, res); } catch (e) { return toast(e.message, 'error'); }
+        const after = {...before, mode: 'frozen', snap: m};
+        const put = async blk => { if (cur !== c) throw new Error(i18n('la fiche n’est plus ouverte')); const k = c.blocks.findIndex(x => x.id === id); if (k >= 0) c.blocks[k] = blk; await save(); if (S().module === 'fiches') refresh(); };
+        await put(after);
+        A().undoToast?.(i18n(before.mode === 'frozen' ? 'Copie refaite : « {nm} »' : 'Bloc figé : « {nm} »', {nm: titleOf(before)}), {undo: () => put(before), redo: () => put(after)});
+    }
+    /** ↶ après ✎ Enregistrer d'un bloc « Données » : le bloc d'avant, ou plus de bloc */
+    function dUndo(c, before, after, fresh) {
+        const put = async blk => { if (cur !== c) throw new Error(i18n('la fiche n’est plus ouverte')); const k = c.blocks.findIndex(x => x.id === after.id); if (blk) { if (k >= 0) c.blocks[k] = blk; else c.blocks.push(blk); } else if (k >= 0) c.blocks.splice(k, 1); await save(); if (S().module === 'fiches') refresh(); };
+        A().undoToast?.(i18n(fresh ? 'Bloc « {nm} » ajouté' : 'Bloc « {nm} » enregistré', {nm: titleOf(after)}), {undo: () => put(before), redo: () => put(after)});
+    }
+    /* ✎ les réglages : la liste (par thème, listes réunies en tête) ou une question, les filtres, les colonnes, l'affichage, le mode */
+    function dPickerOptions(sel) {
+        const E = DE(); if (!E) return '';
+        const TH = ext.listesThemes, ok = d => !d.link && E.shown?.(d) !== false;
+        const opt = d => `<option value="${esc(d.id)}" ${d.id === sel ? 'selected' : ''}>${esc(`${d.merged ? '🔀 ' : ''}${d.icon || '📋'} ${i18n(d.label)}`)}</option>`;
+        const byName = (a, z) => (z.merged ? 1 : 0) - (a.merged ? 1 : 0) || String(i18n(a.label)).localeCompare(String(i18n(z.label)), 'fr');
+        if (!TH?.index || !TH.themes) return E.list().filter(ok).sort(byName).map(opt).join('');
+        const I = TH.index();
+        return TH.themes().map(t => { const ds = (I.by.get(t.id) || []).filter(ok).sort(byName); return ds.length ? `<optgroup label="${esc(`${t.icon || ''} ${i18n(t.label)}`.trim())}">${ds.map(opt).join('')}</optgroup>` : ''; }).join('');
+    }
+    function dColsHtml(d, b) {
+        const fs = dFields(d); if (!fs.length) return `<p class="muted">${esc(i18n('Choisis d’abord une liste.'))}</p>`;
+        const on = (b.cols || []).filter(k => fs.some(f => f.key === k)), keys = on.length ? on : fs.slice(0, 4).map(f => f.key);
+        return fs.map(f => `<label class="checkbox-line"><input type="checkbox" name="dcol" value="${esc(f.key)}" ${keys.includes(f.key) ? 'checked' : ''}> ${esc(i18n(f.label))}</label>`).join('');
+    }
+    const dSortHtml = (d, b) => `<option value="">${esc(i18n('l’ordre de la liste'))}</option>${dFields(d).map(f => `<option value="${esc(f.key)}" ${b.sort === f.key ? 'selected' : ''}>${esc(i18n(f.label))}</option>`).join('')}${d?.geo ? `<option value="_km" ${b.sort === '_km' ? 'selected' : ''}>${esc(i18n('la distance'))}</option>` : ''}`;
+    function dEditorHtml(b) {
+        if (!DE()) return `<p class="muted">${esc(i18n('Les listes de données ne sont pas chargées.'))}</p>`;
+        const d = dListOf(b.list), v = x => (x == null ? '' : esc(x)), radio = (name, val, cur0, ic, l) => `<label class="h-fi-dchoice"><input type="radio" name="${name}" value="${val}" ${cur0 === val ? 'checked' : ''}><span>${ic} ${esc(i18n(l))}</span></label>`;
+        const snapNote = b.snap ? `<label class="checkbox-line" data-fi-dresnap><input type="checkbox" name="resnap" ${b.mode === 'frozen' ? '' : 'checked'}> ${esc(i18n('Refaire la copie avec ces réglages (copie actuelle : {d}, {n} lignes)', {d: dDate(b.snap.at), n: (b.snap.rows || []).length}))}</label>` : '';
+        return `<div class="h-fi-dbox" data-fi-dbox>
+            <div class="h-fi-dask"><label for="fi-dask-${esc(b.id)}">${esc(i18n('Une question'))} <small>(${esc(i18n('facultatif'))})</small></label>
+                <div class="h-fi-dask-row"><input id="fi-dask-${esc(b.id)}" name="ask" value="${v(b.ask)}" maxlength="300" placeholder="${esc(i18n('ex. les séismes près de Tulle entre 1850 et 1900'))}"><button type="button" class="button small secondary" data-fi-dask>${esc(i18n('🔎 Comprendre'))}</button></div>
+                <div class="h-fi-dpills" data-fi-dpills aria-live="polite"></div></div>
+            <div class="form-grid">
+                <label class="span-2">${esc(i18n('Liste'))}<span class="h-fi-dlistrow"><input type="search" data-fi-dfind placeholder="${esc(i18n('Chercher une liste…'))}" aria-label="${esc(i18n('Chercher une liste…'))}"><select name="list"><option value="">${esc(i18n('— choisir —'))}</option>${dPickerOptions(b.list)}</select></span></label>
+                <label>${esc(i18n('Mots à chercher'))}<input name="q" value="${v(b.q)}" maxlength="120"></label>
+                <label>${esc(i18n('Combien de lignes au plus'))}<input name="limit" type="number" min="1" max="${DMAX}" value="${Number(b.limit) || 20}"></label>
+                <label>${esc(i18n('De l’année'))}<input name="from" type="number" min="-9999" max="2999" value="${v(b.from)}" placeholder="1850"></label>
+                <label>${esc(i18n('À l’année'))}<input name="to" type="number" min="-9999" max="2999" value="${v(b.to)}" placeholder="1900"></label>
+                <label>${esc(i18n('Autour de'))}<select name="near"><option value="">${esc(i18n('partout'))}</option><option value="place" ${b.near === 'place' ? 'selected' : ''}>${esc(i18n('un lieu'))}</option><option value="subject" ${b.near === 'subject' ? 'selected' : ''}>${esc(i18n('le sujet de la fiche (son titre)'))}</option></select></label>
+                <label>${esc(i18n('Lieu'))}<input name="place" value="${v(b.center?.title)}" maxlength="160" placeholder="${esc(i18n('ex. Tulle'))}"></label>
+                <label>${esc(i18n('Rayon (km)'))}<input name="km" type="number" min="1" max="2000" value="${Number(b.km) || 30}"></label>
+                <label>${esc(i18n('Trier par'))}<span class="h-fi-dlistrow"><select name="sort" data-fi-dsort>${dSortHtml(d, b)}</select><select name="dir" aria-label="${esc(i18n('Ordre'))}"><option value="asc">↑</option><option value="desc" ${b.dir === 'desc' ? 'selected' : ''}>↓</option></select></span></label>
+                <label class="checkbox-line span-2"><input type="checkbox" name="family" ${b.family ? 'checked' : ''}> ${esc(i18n('👪 Seulement près des lieux de la famille'))}</label>
+                <label class="checkbox-line span-2"><input type="checkbox" name="famcol" ${b.famcol ? 'checked' : ''}> ${esc(i18n('Colonne « 👪 Dans la famille » (qui vivait là, cette année-là)'))}</label>
+            </div>
+            <fieldset class="h-fi-dset"><legend>${esc(i18n('Colonnes'))}</legend><div class="h-fi-dcols" data-fi-dcols>${dColsHtml(d, b)}</div></fieldset>
+            <fieldset class="h-fi-dset"><legend>${esc(i18n('Affichage'))}</legend><div class="h-fi-dchoices">${DVIEWS.map(([k, ic, l]) => radio('view', k, b.view || 'table', ic, l)).join('')}</div></fieldset>
+            <fieldset class="h-fi-dset"><legend>${esc(i18n('Mode'))}</legend><div class="h-fi-dchoices">${radio('mode', 'live', b.mode === 'frozen' ? 'frozen' : 'live', '🔄', 'À jour : relue à chaque ouverture')}${radio('mode', 'frozen', b.mode === 'frozen' ? 'frozen' : 'live', '📌', 'Figé : une copie datée des lignes, avec leurs sources')}</div>${snapNote}</fieldset>
+            <p class="muted h-fi-help">${esc(i18n('Chaque ligne garde sa source ↗ ; la source et la licence sont écrites sous le bloc, et suivent la fiche quand on l’imprime ou l’exporte.'))}</p></div>`;
+    }
+    function dBind(root, b) {
+        const box = root.querySelector('[data-fi-dbox]'); if (!box) return;
+        const el = n => box.querySelector(`[name="${n}"]`);
+        const repaint = () => { const d = dListOf(el('list').value); box.querySelector('[data-fi-dcols]').innerHTML = dColsHtml(d, {cols: d && d.id === b.list ? b.cols : []}); box.querySelector('[data-fi-dsort]').innerHTML = dSortHtml(d, d && d.id === b.list ? b : {}); };
+        el('list').addEventListener('change', repaint);
+        box.querySelector('[data-fi-dfind]').addEventListener('input', e => { const w = foldT(e.target.value).trim(); el('list').querySelectorAll('option').forEach(o => { o.hidden = !!w && !!o.value && !foldT(o.textContent).includes(w); }); el('list').querySelectorAll('optgroup').forEach(g => { g.hidden = !!w && ![...g.children].some(o => !o.hidden); }); });
+        const ask = async () => {
+            const q = el('ask').value.trim(), out = box.querySelector('[data-fi-dpills]'); if (!q) return el('ask').focus();
+            if (!ext.dataAsk) { out.innerHTML = `<p class="muted">${esc(i18n('La lecture des questions n’est pas chargée.'))}</p>`; return; }
+            out.innerHTML = UIx().spinner ? UIx().spinner(i18n('Je lis la question…')) : esc(i18n('Je lis la question…'));
+            let r; try { r = await ext.dataAsk(q); } catch (e) { out.innerHTML = `<p class="muted">${esc(e.message || String(e))}</p>`; return; }
+            const u = r.u || {}, pills = [];
+            if (r.d) { el('list').value = r.d.id; repaint(); pills.push([`${r.d.icon || '📋'} ${i18n(r.d.label)}`, 'list']); }
+            if (Array.isArray(u.years)) { el('from').value = u.years[0]; el('to').value = u.years[1]; pills.push([`📅 ${u.years[0]} → ${u.years[1]}`, 'from']); } else { el('from').value = ''; el('to').value = ''; }
+            if (u.where === 'place' && u.center) { el('near').value = 'place'; el('place').value = u.center.title; el('km').value = u.km || 30; box.dataset.fiDcenter = JSON.stringify(u.center); pills.push([i18n('📍 À {km} km autour de {p}', {km: u.km || 30, p: u.center.title}), 'place']); }
+            else { el('near').value = ''; }
+            el('family').checked = u.where === 'family'; if (u.where === 'family') pills.push([i18n('👪 près des lieux de la famille'), 'family']);
+            const notes = [u.whoNote, u.whereNote].filter(Boolean);
+            out.innerHTML = `<h4>${esc(i18n('Ce que j’ai compris'))} <small class="muted">${esc(i18n('touche une pastille pour la changer'))}</small></h4>
+                <div class="h-fi-dpillrow">${pills.map(([l, f]) => `<button type="button" class="h-fi-dpill" data-fi-dfocus="${f}">${esc(l)}</button>`).join('')}</div>
+                ${notes.map(n => `<p class="muted">${esc(n)}</p>`).join('')}<p class="muted">${esc(r.d ? i18n('{n} lignes trouvées : règle les colonnes et l’affichage, puis enregistre.', {n: r.total || 0}) : i18n('Je n’ai pas compris de quelle liste il s’agit : choisis-la ci-dessous.'))}</p>`;
+        };
+        box.addEventListener('click', e => {
+            if (e.target.closest('[data-fi-dask]')) { e.preventDefault(); ask(); }
+            const f = e.target.closest('[data-fi-dfocus]'); if (f) { e.preventDefault(); el(f.dataset.fiDfocus)?.focus(); }
+        });
+        el('ask').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ask(); } });
+    }
+    /** ✎ Enregistrer : lire les réglages ; un lieu tapé est cherché dans la base ; « Figé » refait la copie (sauf si on garde l'ancienne) */
+    async function dRead(form, b) {
+        const box = form.querySelector('[data-fi-dbox]') || form, f = Object.fromEntries(new FormData(form));
+        const num = x => (x === '' || x == null || !Number.isFinite(Number(x)) ? null : Math.round(Number(x)));
+        if (!f.list) { toast(i18n('Choisis une liste (ou pose une question et touche « 🔎 Comprendre »).'), 'error'); return false; }
+        Object.assign(b, {list: String(f.list), ask: String(f.ask || '').trim(), q: String(f.q || '').trim(), from: num(f.from), to: num(f.to), near: ['place', 'subject'].includes(f.near) ? f.near : '',
+            km: Math.max(1, Math.min(2000, num(f.km) || 30)), family: !!form.elements.family?.checked, famcol: !!form.elements.famcol?.checked, limit: Math.max(1, Math.min(DMAX, num(f.limit) || 20)),
+            sort: String(f.sort || ''), dir: f.dir === 'desc' ? 'desc' : 'asc', view: DVIEWS.some(x => x[0] === f.view) ? f.view : 'table', mode: f.mode === 'frozen' ? 'frozen' : 'live',
+            cols: [...form.querySelectorAll('input[name="dcol"]:checked')].map(x => x.value)});
+        if (b.near === 'place') {
+            const name = String(f.place || '').trim(); let c = null; try { c = JSON.parse(box.dataset.fiDcenter || 'null'); } catch (_) {}
+            if (!c || foldT(c.title) !== foldT(name)) c = b.center && foldT(b.center.title) === foldT(name) ? b.center : name ? await dPlace(name) : null;
+            if (!c) { toast(name ? i18n('Lieu introuvable dans la base : « {l} »', {l: name}) : i18n('Écris le lieu (ou choisis « partout »).'), 'error'); return false; }
+            b.center = {lat: c.lat, lon: c.lon, title: c.title};
+        } else b.center = null;
+        if (b.mode === 'frozen') {
+            const keep = b.snap && form.elements.resnap && !form.elements.resnap.checked;
+            if (!keep) { const res = await dRun(b, cur); if (res.error) { toast(res.error, 'error'); return false; } b.snap = await dModel(b, res); }
+        } else delete b.snap;
+        return true;
+    }
+    /** 📎 depuis une liste (☑ lignes choisies → « Insérer… ») : un nouveau bloc « Données » figé, dans une fiche choisie (ou une nouvelle) ; ↶ Annuler */
+    ext.fiches.addDataSnapshot = async (snap, {anchor = null} = {}) => {
+        if (kiosk()) return toast(i18n('Mode consultation : rien ne peut être modifié.'), 'error');
+        if (!snap || !Array.isArray(snap.rows) || !Array.isArray(snap.cols)) return toast(i18n('Rien à mettre dans la fiche.'), 'error');
+        await loadList();
+        const blk = {id: uid(), type: 'data', title: '', width: '12', mode: 'frozen', list: snap.list || '', view: 'table', limit: Math.min(DMAX, snap.rows.length) || 20, cols: [], snap: {...snap, rows: snap.rows.slice(0, DMAX)}};
+        const body = s => ({id: s.id, title: s.title, subtitle: s.subtitle, icon: s.icon, color: s.color, blocks: s.blocks});
+        const go = async id => {
+            try {
+                let created = false;
+                if (id) { const s = await api('topic_sheet', {id}); await post('save_topic_sheet', {...body(s), blocks: [...s.blocks, blk]}); }
+                else { const r = await post('save_topic_sheet', {title: snap.label || i18n('Nouvelle fiche'), icon: '📊', subtitle: '', color: '', blocks: [blk]}); id = Number(r.result?.id || r.id); created = true; }
+                const name = created ? (snap.label || i18n('Nouvelle fiche')) : (sheets.find(x => x.id === id)?.title || '');
+                const again = () => (S().module === 'fiches' && Number(S().ficheId) === id ? refresh() : null);
+                A().undoToast?.(i18n('📒 Ajouté à la fiche « {nm} »', {nm: name}), {
+                    undo: async () => { if (created) await post('delete_topic_sheet', {id}); else { const s = await api('topic_sheet', {id}); await post('save_topic_sheet', {...body(s), blocks: s.blocks.filter(x => x.id !== blk.id)}); } await loadList(); again(); },
+                    redo: async () => { if (created) await post('save_topic_sheet', {undelete: id}); else { const s = await api('topic_sheet', {id}); await post('save_topic_sheet', {...body(s), blocks: [...s.blocks, blk]}); } await loadList(); again(); }});
+                await loadList(); again();
+                return id;
+            } catch (e) { toast(e.message, 'error'); return null; }
+        };
+        const items = [{icon: '＋', label: i18n('Une nouvelle fiche'), run: () => go(0)}, ...(sheets.length ? ['-'] : []), ...sheets.map(s => ({icon: s.icon || '📒', label: s.title, run: () => go(s.id)}))];
+        if (UIx().menuAt) return UIx().menuAt(anchor || document.body, items, {title: i18n('📒 Dans quelle fiche ?')});
+        return go(sheets[0]?.id || 0);
+    };
+    ext.fichesData = {run: dRun, model: dModel, html: dHtml, markdown: dMarkdown}; // (essais)
+
     /* ─── Ajouter un bloc ─── */
     function addBlock() {
         ext.openDialog({eyebrow: 'FICHE', title: '＋ Ajouter un bloc', wide: true, submitLabel: 'Ajouter',

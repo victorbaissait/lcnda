@@ -1491,7 +1491,7 @@
     /** la case « Ranger par personne » d'un écran où l'ordre des dates compte (non au départ) ; rien si le réglage général est éteint */
     UI.framesOption = (key, onChange) => {
         const l = h('label', 'checkbox-line ui-frames-opt'); if (!UI.framesOn()) { l.hidden = true; return l; }
-        l.innerHTML = `<input type="checkbox" data-frames-opt="${esc(key)}"${UI.framesPref(key) ? ' checked' : ''}> <span>${esc(i18n('🗂 Ranger par personne'))}</span>`;
+        l.innerHTML = `<input type="checkbox" data-frames-opt="${esc(key)}"${UI.framesPref(key) ? ' checked' : ''}> <span>🗂 ${esc(i18n('Ranger par personne'))}</span>`;
         l.firstElementChild.addEventListener('change', e => { UI.setFramesPref(key, e.target.checked); onChange?.(e.target.checked); });
         return l;
     };

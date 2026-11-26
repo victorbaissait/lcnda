@@ -3309,6 +3309,8 @@
  "{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas.": "{what} aún sin resolver (pestaña 💬 Revisión). No se imprimen.",
  "{what} posée": "{what} colocada",
  "{what} pour ce jeu · sans les vivants ni les fiches confidentielles.": "{what} para este juego · sin vivos ni fichas confidenciales.",
+ "{what} pour elle": "{what} para ella",
+ "{what} pour lui": "{what} para él",
  "{what} remis comme au départ": "{what} restablecido como al principio",
  "{what} répond {code}.": "{what} responde {code}.",
  "{what} reprises de l’autre généalogie.": "{what} retomadas de la otra genealogía.",
@@ -10025,6 +10027,11 @@
  "Acte introuvable.": "Acta no encontrada.",
  "acte le plus récent : {y} ; délai {d} ans": "acta más reciente: {y}; plazo de {d} años",
  "acte le plus récent : {y} ; délai {d} ans ({k})": "acta más reciente: {y}; plazo de {d} años ({k})",
+ "acte manquant": {
+  "one": "acta que falta",
+  "other": "actas que faltan",
+  "many": "actas que faltan"
+ },
  "acte n° {n}": "acta n.º {n}",
  "Acte n° 12, vue 34 ; rien entre 1823 et 1825 ; registre abîmé…": "Acta n.º 12, imagen 34; nada entre 1823 y 1825; registro dañado…",
  "Acte notarié": "Acta notarial",
@@ -13863,6 +13870,11 @@
  },
  "Autre ordinateur": "Otro ordenador",
  "Autre personne": "Otra persona",
+ "autre piste": {
+  "one": "pista más",
+  "other": "pistas más",
+  "many": "pistas más"
+ },
  "Autre prénom": "Otro nombre",
  "autre prise": "otra toma",
  "Autre produit": "Otro producto",
@@ -18995,6 +19007,11 @@
   "other": "cosas cambiadas en ambos lados",
   "many": "cosas cambiadas en ambos lados"
  },
+ "chose qui manque": {
+  "one": "cosa que falta",
+  "other": "cosas que faltan",
+  "many": "cosas que faltan"
+ },
  "chose reportée": {
   "one": "cosa aplazada",
   "other": "cosas aplazadas",
@@ -22749,6 +22766,11 @@
  "Décès par mois": "Defunciones por mes",
  "Décès par mois, par siècle": "Defunciones por mes, por siglo",
  "Décès par siècle": "Defunciones por siglo",
+ "décès possible": {
+  "one": "posible defunción",
+  "other": "posibles defunciones",
+  "many": "posibles defunciones"
+ },
  "Décès renseigné": "Defunción indicada",
  "Décès sans année ou sans lieu, comptés à part : {n}": "Defunciones sin año o sin lugar, contadas aparte: {n}",
  "Décès sans source": "Defunción sin fuente",
@@ -27559,6 +27581,11 @@
  "exactement 1 enfant": "exactamente 1 hijo",
  "Exactement le même fichier.": "Exactamente el mismo archivo.",
  "Exagération du relief": "Exageración del relieve",
+ "exception": {
+  "one": "excepción",
+  "other": "excepciones",
+  "many": "excepciones"
+ },
  "Exception de fiche enregistrée.": "Excepción de ficha guardada.",
  "Exception de filtres enregistrée.": "Excepción de filtros guardada.",
  "Exception de filtres supprimée.": "Excepción de filtros eliminada.",
@@ -50282,6 +50309,11 @@
  "Piste de la voix": "Pista de la voz",
  "Piste de texte minutée (sous-titres)": "Pista de texto temporizada (subtítulos)",
  "Piste du mur faite": "Pista del muro hecha",
+ "piste écartée": {
+  "one": "pista descartada",
+  "other": "pistas descartadas",
+  "many": "pistas descartadas"
+ },
  "Piste écartée.": "Pista descartada.",
  "Piste explorée": "Pista explorada",
  "PISTE EXPLORÉE": "PISTA EXPLORADA",
@@ -52949,6 +52981,7 @@
  "Ranger les sections — fiche de {name}": "Ordenar las secciones — ficha de {name}",
  "Ranger les sections…": "Ordenar las secciones…",
  "Ranger par": "Ordenar por",
+ "Ranger par personne": "Agrupar por persona",
  "Ranger par sorte": "Ordenar por tipo",
  "Ranger par…": "Ordenar por…",
  "Ranger ses widgets": "Ordenar sus widgets",

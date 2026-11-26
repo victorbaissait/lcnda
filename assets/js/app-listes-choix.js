@@ -147,6 +147,14 @@
             origin: {kind: 'list', id: d.id, label: `${T('Listes')} · ${T(d.label)}`, url: d.sourceUrl || ''}};
         return {text, html, items: items.length === 1 ? items : [set], title};
     }
+    /** 📒 les mêmes lignes pour un bloc « Données » figé d'une Fiche (heritage-fiches.js : ext.fiches.addDataSnapshot) : colonnes, lignes
+     *  (au plus 500), et pour chacune sa source ↗ ; la position et l'année (carte, frise) */
+    function sheetSnap(d, rows, items, t2, api) {
+        const E = ext.dataListsEngine || {}, http = u => (/^https?:\/\/[^\s"'<>]+$/i.test(String(u || '')) ? String(u) : '');
+        return {at: new Date().toISOString().slice(0, 10), list: d._base?.id || d.id, label: T(d.label), icon: d.icon || '📋', source: d.source || '', sourceUrl: http(d.sourceUrl), licence: d.licence || d.license || '',
+            crit: (() => { try { return api.critSummary?.() || ''; } catch (_) { return ''; } })(), total: rows.length, cols: t2[0].map((l, i) => ({k: 'c' + i, l: String(l)})),
+            rows: t2.slice(1, 501).map((r, i) => { const g = E.geoOf?.(d, rows[i]), p = E.periodOf?.(d, rows[i]); return {c: r.map(v => String(v ?? '')), s: srcOf(items[i] || {}), u: http(items[i]?.origin?.url), g: g || null, y: p ? p[0] : null}; })};
+    }
     async function act(kind, rows, anchor, api0 = null) { // api0 : une page qui n'est pas celle du moteur (ex. une réponse de 📊 Récap)
         const api = api0 || S.api || ext.dataListsEngine?.page?.(); if (!api) return;
         const d = api.d, st = api.state?.() || {};
@@ -160,7 +168,8 @@
             return cx.take(its, {basketId: bid || null});
         }
         if (kind === 'insert') {
-            const b = blockOf(d, items, api.table2d(rows));
+            const t2 = api.table2d(rows), b = blockOf(d, items, t2);
+            try { b.sheet = sheetSnap(d, rows, items, t2, api); } catch (_) {} // 📒 « dans une fiche → nouveau bloc Données (figé) » (app-inserer.js)
             if (ext.insertInfo?.insertBlock) return ext.insertInfo.insertBlock(b, {anchor});
             return toast(T('« Insérer une info » n’est pas chargé.'), 'error');
         }

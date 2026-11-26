@@ -69,7 +69,7 @@ const wd = q => `https://www.wikidata.org/wiki/${q}`;
     await t('un nom dit par deux sources : une seule ligne, la meilleure source d’abord (GOV avant Wikidata) ; GOV seul : un lieu à part', async () => {
         const gs = N.search(I, 'Pressburg', 5);
         N.mergeGov(I, gs, [{name: 'Preßburg', lang: 'deu', from: 1500, to: 1919, gov: 'object_190', lat: 48.144, lon: 17.11}, {name: 'Pozsony', lang: 'hun', gov: 'object_190', lat: 48.144, lon: 17.11}, {name: 'Xyzdorf', gov: 'XYZDORJO', lat: 50.2, lon: 12.1}], 'Pressburg');
-        const g = gs.find(x => x.now === 'Bratislava'), p = g.names.find(n => n.name === 'Pressburg');
+        const g = gs.find(x => x.now === 'Bratislava'), p = g.names.find(n => N.fold(n.name) === 'pressburg');
         assert.deepStrictEqual(p.srcs.map(s => s.src), ['GOV', 'Wikidata']); assert.match(p.srcs[0].url, /^https:\/\/gov\.genealogy\.net\/item\/show\/object_190$/);
         assert.strictEqual(g.names.filter(n => N.fold(n.name) === 'pressburg').length, 1);
         assert.ok(gs.some(x => x.names.some(n => n.name === 'Xyzdorf')), 'un objet GOV loin de tout : son propre lieu');
@@ -213,7 +213,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.deepStrictEqual(r.over, []); assert.ok(r.left >= 8 && r.right >= 8, JSON.stringify(r)); assert.ok(r.docW <= 391, `largeur ${r.docW}`);
             assert.ok(!/rgb\(0, 0, 0\)/.test(r.color) && !/rgb\(255, 255, 255\)/.test(r.bg), `sombre : ${r.color} sur ${r.bg}`);
             const glued = await q.evaluate(detect, {root: '[data-nlm]', min: 4});
-            assert.deepStrictEqual(glued, [], JSON.stringify(glued).slice(0, 600));
+            assert.deepStrictEqual(glued.map(x => `${x.key} (${x.label || ''})`), []);
             await m.close();
         });
         await t('aucune erreur JavaScript ; rien n’est parti sur Internet', async () => { assert.deepStrictEqual(errs, []); assert.deepStrictEqual(outside.filter(u => !/^https:\/\/([a-z]\.)?tile\./.test(u)), []); });

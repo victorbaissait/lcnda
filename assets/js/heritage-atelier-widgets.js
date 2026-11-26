@@ -33,8 +33,9 @@
         agenda: ['🗓️', 'Agenda du projet', 'Visites d’archives, salons, circuits, courriers… liés au projet'],
         notes: ['🗒️', 'Bloc-notes', 'Un texte libre, enregistré tout seul'],
         dash: ['📊', 'Widget du tableau de bord', 'Un widget du logiciel (Mon agenda, Départs et émigration, Circuits…)'],
+        donnees: ['📊', 'Données téléchargées', 'Une liste de données (séismes, guerres, Tour de France…) filtrée pour ce projet'], // heritage-atelier-donnees.js : réglé dans le widget
     };
-    const DEFAULT_CFG = {chrono: {}, timer: {minutes: 25, pomodoro: false}, words: {goal: 500}, todo: {days: 14}, reminders: {days: 30, n: 6}, agenda: {days: 90, srcs: ['archive_visit', 'fair', 'field_trip', 'courrier_relance'], word: '', pins: []}, notes: {text: ''}, dash: {type: 'agenda_widget'}};
+    const DEFAULT_CFG = {chrono: {}, timer: {minutes: 25, pomodoro: false}, words: {goal: 500}, todo: {days: 14}, reminders: {days: 30, n: 6}, agenda: {days: 90, srcs: ['archive_visit', 'fair', 'field_trip', 'courrier_relance'], word: '', pins: []}, notes: {text: ''}, dash: {type: 'agenda_widget'}, donnees: {}};
     const listFor = pid => (read(KEY)[pid] || null);
     const saveList = (pid, list) => { const all = read(KEY); all[pid] = list; write(KEY, all); };
 
@@ -92,6 +93,7 @@
             case 'dash': { const d = ext.dashboard?.[c.type]; if (!d) return '<p class="muted">Ce widget n’existe plus.</p>';
                 const data = await d.load?.([{type: c.type, config: c.config || {}}])?.catch?.(() => null); const html = d.render('·', {id: w.id, type: c.type, limit: c.limit || 8, config: c.config || {}}, '12', data) || '';
                 return `<div class="h-atw-dash">${html}</div>`; }
+            case 'donnees': return ext.atelierData ? '' : '<p class="muted">…</p>'; // rempli par mount() (heritage-atelier-donnees.js)
         }
         return '';
     }
@@ -118,6 +120,7 @@
                 if (w.type === 'reminders') w.cfg = {days: Number(fd.get('days')) || 30, n: Number(fd.get('n')) || 6};
                 if (w.type === 'agenda') w.cfg = {days: Number(fd.get('days')) || 90, n: Number(fd.get('n')) || 10, srcs: fd.getAll('srcs'), word: String(fd.get('word') || '').trim(), pins: fd.getAll('pins')};
                 if (w.type === 'dash') w.cfg = {type: fd.get('dtype'), limit: Number(fd.get('limit')) || 8};
+                if (w.type === 'dash' && w.cfg.type === ext.atelierData?.DW) { w.type = 'donnees'; w.cfg = {}; } // 📊 le widget des données se règle dans le widget
                 if (w.type === 'timer') setTimer(w.id, null);
                 after(); },
         });
@@ -129,11 +132,12 @@
         const pid = String(ctx.project.id);
         let list = listFor(pid) || [{id: uid(), type: 'words', cfg: {}}, {id: uid(), type: 'todo', cfg: {}}, {id: uid(), type: 'agenda', cfg: {}}];
         const save = () => saveList(pid, list);
+        const mount = (b, w, edit = false) => ext.atelierData?.mountWidget(b, w, {save, edit}); // 📊 Données téléchargées
         const draw = async () => {
-            box.innerHTML = `<div class="h-atw-head"><h4>🧩 Mes widgets</h4><button type="button" class="button small secondary" data-atw-add>＋ Widget</button></div><div class="h-atw-grid">${list.map((w, k) => `<section class="h-atw ${w.type === 'dash' || w.type === 'agenda' ? 'is-wide' : ''}" data-atw="${w.id}">
+            box.innerHTML = `<div class="h-atw-head"><h4>🧩 Mes widgets</h4><button type="button" class="button small secondary" data-atw-add>＋ Widget</button></div><div class="h-atw-grid">${list.map((w, k) => `<section class="h-atw ${['dash', 'agenda', 'donnees'].includes(w.type) ? 'is-wide' : ''}" data-atw="${w.id}">
                 <header><b>${TYPES[w.type]?.[0] || '•'} ${esc(w.title || TYPES[w.type]?.[1] || '')}</b><span class="h-rb-tools"><button type="button" class="icon-button" data-atw-move="-1" ${k ? '' : 'disabled'} title="Avancer">←</button><button type="button" class="icon-button" data-atw-move="1" ${k < list.length - 1 ? '' : 'disabled'} title="Reculer">→</button><button type="button" class="icon-button" data-atw-cfg title="Réglages">⚙</button><button type="button" class="icon-button danger" data-atw-del title="Retirer">✕</button></span></header>
                 <div class="h-atw-body" data-atw-body><p class="muted">…</p></div></section>`).join('')}</div>`;
-            for (const w of list) { const b = box.querySelector(`[data-atw="${w.id}"] [data-atw-body]`); try { b.innerHTML = await widgetBody(w, ctx); } catch (e) { b.innerHTML = `<p class="muted">${esc(e.message)}</p>`; } }
+            for (const w of list) { const b = box.querySelector(`[data-atw="${w.id}"] [data-atw-body]`); try { b.innerHTML = await widgetBody(w, ctx); if (w.type === 'donnees') mount(b, w); } catch (e) { b.innerHTML = `<p class="muted">${esc(e.message)}</p>`; } }
         };
         await draw();
         box.addEventListener('click', async e => {
@@ -144,7 +148,7 @@
             const mv = e.target.closest('[data-atw-move]'); if (mv) { const i = list.indexOf(w), j = i + Number(mv.dataset.atwMove); if (j >= 0 && j < list.length) { [list[i], list[j]] = [list[j], list[i]]; save(); draw(); } return; }
             if (e.target.closest('[data-atw-del]')) { const at = list.indexOf(w); list = list.filter(x => x !== w); setTimer(w.id, null); save(); draw(); // H7 : « ↶ Annuler »
                 A().undoToast('Widget retiré.', {undo: () => { if (!list.includes(w)) list.splice(Math.min(at, list.length), 0, w); save(); draw(); }}); return; }
-            if (e.target.closest('[data-atw-cfg]')) return settingsDialog(w, () => { save(); draw(); }, ctx);
+            if (e.target.closest('[data-atw-cfg]')) return w.type === 'donnees' ? mount(sec.querySelector('[data-atw-body]'), w, true) : settingsDialog(w, () => { save(); draw(); }, ctx);
             const item = e.target.closest('[data-atw-item]'); if (item) return ctx.openItem?.(Number(item.dataset.atwItem));
             const ag = e.target.closest('[data-atw-agenda]'); if (ag) { const [src, id] = ag.dataset.atwAgenda.split(':'); const it = agendaCache.data?.items.find(x => x.src === src && String(x.id) === id); if (it) ext.lists?.my_calendar_open?.(it); return; }
             const doBtn = e.target.closest('[data-atw-do]'), min = e.target.closest('[data-atw-min]');

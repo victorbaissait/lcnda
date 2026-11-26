@@ -108,7 +108,7 @@
     const cards = (items, mode = 'new') => (!UI().framesOn?.() ? items.map(it => cardHtml(it, mode)).join('')
         : UI().personCardsHtml(UI().groupByPerson(items, it => it.person?.id).map(g => { const p = g.items[0].person || {};
             return UI().personCardHtml({id: p.id, name: p.name || '', life: [p.birth ? T('naissance : {d}', {d: p.birth}) : '', p.birth_place].filter(Boolean).join(', '), cls: 'vd-frame',
-                count: plural(g.items.length, mode === 'new' ? T('décès possible') : T('piste écartée'), mode === 'new' ? T('décès possibles') : T('pistes écartées')), body: g.items.map(it => cardHtml(it, mode, true)).join('')}); }).join('')));
+                count: mode === 'new' ? plural(g.items.length, 'décès possible', 'décès possibles') : plural(g.items.length, 'piste écartée', 'pistes écartées'), body: g.items.map(it => cardHtml(it, mode, true)).join('')}); }).join('')));
     async function draw(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
         if (A().state?.maintenanceTab !== TAB[0] && token === undefined && !ws.querySelector('[data-vd-page]')) return;

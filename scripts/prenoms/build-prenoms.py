@@ -34,9 +34,11 @@ SOURCES = {
     'ch_m': 'https://dam-api.bfs.admin.ch/hub/api/dam/assets/36752505/master',
     'qc_f': 'https://www.donneesquebec.ca/recherche/dataset/13db2583-427a-4e5f-b679-8532d3df571f/resource/bf77b504-54b9-4db8-be53-b92156175c12/download/grande_listef_csv.csv',
     'qc_g': 'https://www.donneesquebec.ca/recherche/dataset/93d640ec-d059-4768-b7ed-388604b278aa/resource/039539f5-af55-4d8f-9010-ca718e45c2a5/download/grande_listeg_csv.csv',
+    'us': 'https://www.ssa.gov/oact/babynames/names.zip',  # lot L : États-Unis (Social Security Administration, domaine public)
 }
+US_PAGE = 'https://www.ssa.gov/oact/babynames/limits.html'  # relue : doit encore proposer « names.zip » (national data)
 
-EXT = {'fr_dpt': '.zip', 'fr_nat': '.zip', 'ch_f': '.xlsx', 'ch_m': '.xlsx', 'qc_f': '.csv', 'qc_g': '.csv'}
+EXT = {'fr_dpt': '.zip', 'fr_nat': '.zip', 'ch_f': '.xlsx', 'ch_m': '.xlsx', 'qc_f': '.csv', 'qc_g': '.csv', 'us': '.zip'}
 
 SOURCE_ROWS = [
     ('FR', 'Insee — Fichier des prénoms (édition 2024)', 'Licence Ouverte / Open Licence 2.0 (Etalab)',
@@ -49,6 +51,9 @@ SOURCE_ROWS = [
      'Source : Retraite Québec, Banque de prénoms, Données Québec (CC BY 4.0).', 'https://www.donneesquebec.ca/recherche/dataset/banque-de-prenoms-filles', '1980–2025',
      'Enfants admissibles aux prestations familiales (nés au Québec ou arrivés bébés), par prénom, sexe et année. Les prénoms donnés à moins de 5 enfants une année ne sont pas comptés.'),
 ]
+US_ROW = ('US', 'Social Security Administration — Beyond the Top 1000 Names (national data)', 'Domaine public (œuvre du gouvernement fédéral des États-Unis)',
+          'Source : U.S. Social Security Administration, Popular Baby Names, national data.', 'https://www.ssa.gov/oact/babynames/limits.html', '1880–',
+          'Cartes de sécurité sociale demandées pour des enfants nés aux États-Unis, par prénom, sexe et année. Avant 1937, beaucoup de personnes n’en demandaient pas : les premières années sont incomplètes. Les prénoms donnés à moins de 5 enfants une année ne sont pas comptés.')
 
 FR_DEPTS = {'01': 'Ain', '02': 'Aisne', '03': 'Allier', '04': 'Alpes-de-Haute-Provence', '05': 'Hautes-Alpes', '06': 'Alpes-Maritimes', '07': 'Ardèche', '08': 'Ardennes', '09': 'Ariège', '10': 'Aube', '11': 'Aude', '12': 'Aveyron', '13': 'Bouches-du-Rhône', '14': 'Calvados', '15': 'Cantal', '16': 'Charente', '17': 'Charente-Maritime', '18': 'Cher', '19': 'Corrèze', '20': 'Corse', '21': 'Côte-d’Or', '22': 'Côtes-d’Armor', '23': 'Creuse', '24': 'Dordogne', '25': 'Doubs', '26': 'Drôme', '27': 'Eure', '28': 'Eure-et-Loir', '29': 'Finistère', '30': 'Gard', '31': 'Haute-Garonne', '32': 'Gers', '33': 'Gironde', '34': 'Hérault', '35': 'Ille-et-Vilaine', '36': 'Indre', '37': 'Indre-et-Loire', '38': 'Isère', '39': 'Jura', '40': 'Landes', '41': 'Loir-et-Cher', '42': 'Loire', '43': 'Haute-Loire', '44': 'Loire-Atlantique', '45': 'Loiret', '46': 'Lot', '47': 'Lot-et-Garonne', '48': 'Lozère', '49': 'Maine-et-Loire', '50': 'Manche', '51': 'Marne', '52': 'Haute-Marne', '53': 'Mayenne', '54': 'Meurthe-et-Moselle', '55': 'Meuse', '56': 'Morbihan', '57': 'Moselle', '58': 'Nièvre', '59': 'Nord', '60': 'Oise', '61': 'Orne', '62': 'Pas-de-Calais', '63': 'Puy-de-Dôme', '64': 'Pyrénées-Atlantiques', '65': 'Hautes-Pyrénées', '66': 'Pyrénées-Orientales', '67': 'Bas-Rhin', '68': 'Haut-Rhin', '69': 'Rhône', '70': 'Haute-Saône', '71': 'Saône-et-Loire', '72': 'Sarthe', '73': 'Savoie', '74': 'Haute-Savoie', '75': 'Paris', '76': 'Seine-Maritime', '77': 'Seine-et-Marne', '78': 'Yvelines', '79': 'Deux-Sèvres', '80': 'Somme', '81': 'Tarn', '82': 'Tarn-et-Garonne', '83': 'Var', '84': 'Vaucluse', '85': 'Vendée', '86': 'Vienne', '87': 'Haute-Vienne', '88': 'Vosges', '89': 'Yonne', '90': 'Territoire de Belfort', '91': 'Essonne', '92': 'Hauts-de-Seine', '93': 'Seine-Saint-Denis', '94': 'Val-de-Marne', '95': 'Val-d’Oise', '971': 'Guadeloupe', '972': 'Martinique', '973': 'Guyane', '974': 'La Réunion', '976': 'Mayotte'}
 
@@ -160,6 +165,31 @@ def read_qc(path, sex, acc, zone, essai):
                     acc.add(zone, sex, y, k, int(v))
 
 
+def us_ok(cache):
+    """lot L : la page de la SSA est relue ; si elle ne propose plus « names.zip » (ou si le site ne répond pas), les États-Unis sont laissés de côté"""
+    try:
+        req = urllib.request.Request(US_PAGE, headers={'User-Agent': 'LCNDA build-prenoms'})
+        with urllib.request.urlopen(req, timeout=120) as r:
+            page = r.read().decode('utf-8', 'replace')
+        return 'names.zip' in page
+    except Exception as e:  # noqa
+        print('États-Unis laissés de côté :', e, file=sys.stderr)
+        return False
+
+
+def read_us(path, acc, zone, essai):
+    z = zipfile.ZipFile(path)
+    for n in z.namelist():
+        m = re.match(r'^yob(\d{4})\.txt$', os.path.basename(n))
+        if not m:
+            continue
+        y = int(m.group(1))
+        for line in io.TextIOWrapper(z.open(n), encoding='utf-8'):
+            p = line.strip().split(',')
+            if len(p) == 3 and p[1] in ('M', 'F') and p[2].isdigit():
+                acc.add(zone, 1 if p[1] == 'M' else 2, y, key(p[0]), int(p[2]))
+
+
 def build(args):
     acc = Acc()
     zones = {}
@@ -176,6 +206,14 @@ def build(args):
     read_ch(fetch('ch_m', cache), 1, acc, zone_of('CH', ''), args.essai)
     read_qc(fetch('qc_f', cache), 2, acc, zone_of('QC', ''), args.essai)
     read_qc(fetch('qc_g', cache), 1, acc, zone_of('QC', ''), args.essai)
+    with_us = not args.sans_us and us_ok(cache)
+    if with_us:
+        try:
+            us_file = fetch('us', cache)
+        except Exception as e:  # noqa : le site de la SSA ne répond pas → le pack se fait sans les États-Unis
+            print('États-Unis laissés de côté :', e, file=sys.stderr); with_us = False
+        if with_us:
+            read_us(us_file, acc, zone_of('US', ''), args.essai)
 
     os.makedirs(args.dossier, exist_ok=True)
     db_path = os.path.join(args.dossier, 'prenoms-pays.sqlite')
@@ -195,7 +233,7 @@ def build(args):
     ''')
     names = {}
     for (cc, code), zid in zones.items():
-        nom = {'FR': 'France', 'CH': 'Suisse', 'QC': 'Québec'}[cc] if code == '' else FR_DEPTS[code]
+        nom = {'FR': 'France', 'CH': 'Suisse', 'QC': 'Québec', 'US': 'États-Unis'}[cc] if code == '' else FR_DEPTS[code]
         db.execute('INSERT INTO zones VALUES(?,?,?,?)', (zid, cc, code, nom))
     rows = []
     for (zone, sex, year), d in acc.c.items():
@@ -213,11 +251,11 @@ def build(args):
     rows.sort()
     db.executemany('INSERT INTO counts VALUES(?,?,?,?,?,?)', rows)
     db.executemany('INSERT INTO totals VALUES(?,?,?,?,?)', [(z, s, y, n, len(acc.c.get((z, s, y), {}))) for (z, s, y), n in sorted(acc.t.items())])
-    db.executemany('INSERT INTO sources VALUES(?,?,?,?,?,?,?)', SOURCE_ROWS)
+    db.executemany('INSERT INTO sources VALUES(?,?,?,?,?,?,?)', SOURCE_ROWS + ([US_ROW] if with_us else []))
     # les années vraiment couvertes (lues dans les fichiers)
     db.execute("UPDATE sources SET annees=(SELECT MIN(t.annee) || '–' || MAX(t.annee) FROM totals t JOIN zones z ON z.id=t.zone WHERE z.pays=sources.pays)")
     built = datetime.date.today().isoformat()
-    meta = {'kind': 'pays', 'format': '1', 'built': built, 'countries': 'FR,CH,QC', 'title': 'Prénoms : France (départements), Suisse, Québec',
+    meta = {'kind': 'pays', 'format': '1', 'built': built, 'countries': 'FR,CH,QC' + (',US' if with_us else ''), 'title': 'Prénoms : France (départements), Suisse, Québec' + (', États-Unis' if with_us else ''),
             'essai': '1' if args.essai else '', 'not_included': 'BE: Statbel refuse les programmes (fichier non vérifié) ; LU: pas de fichier par année de naissance'}
     db.executemany('INSERT INTO meta VALUES(?,?)', list(meta.items()))
     db.commit()
@@ -237,4 +275,5 @@ if __name__ == '__main__':
     ap.add_argument('--dossier', default='prenoms-sortie')
     ap.add_argument('--cache', default='prenoms-cache')
     ap.add_argument('--essai', action='store_true')
+    ap.add_argument('--sans-us', action='store_true', help='sans les États-Unis (SSA)')
     build(ap.parse_args())

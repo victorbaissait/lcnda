@@ -270,7 +270,7 @@
         const compLine = x => (x.tool === 'map' ? `<tr><td>📍 ${esc(T('{n} sans coordonnées', {n: plural(x.count, T('lieu'), T('lieux'))}))}</td><td>🗺 ${esc(T('Carte'))}</td><td><span class="cx-who">🏛 ${esc(T('Communes'))}</span></td><td class="cx-sem-act">${kiosk() ? '' : `<button type="button" class="button small" data-lap-open>${esc(T('📍 Placer'))}</button>`}</td></tr>` : '');
         const ix = new Map(d.rows.map((n, i) => [n, i]));
         // 🗂 un cadre par personne (réglage genealogie-cadres) : un tbody par personne, sa ligne d'en-tête comme un cadre
-        const list = framed ? UI().groupByPerson(rows, n => n.person_id).map(g => (g.key ? UI().personTbodyHtml({cols: 4, id: g.key, name: g.items[0].person || '', count: plural(g.items.length, T('chose qui manque'), T('choses qui manquent')), rows: g.items.map(n => line(n, ix.get(n))).join('')})
+        const list = framed ? UI().groupByPerson(rows, n => n.person_id).map(g => (g.key ? UI().personTbodyHtml({cols: 4, id: g.key, name: g.items[0].person || '', count: plural(g.items.length, 'chose qui manque', 'choses qui manquent'), rows: g.items.map(n => line(n, ix.get(n))).join('')})
             : `<tbody>${g.items.map(n => line(n, ix.get(n))).join('')}</tbody>`)).join('') + (comp.length ? `<tbody>${comp.map(compLine).join('')}</tbody>` : '')
             : rows.map(n => line(n, ix.get(n))).join('') + comp.map(compLine).join('');
         host.innerHTML = `<div class="cx-sem"><div class="ui-filters cx-sem-filters" role="tablist">${pills}</div>

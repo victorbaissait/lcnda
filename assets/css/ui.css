@@ -641,3 +641,11 @@ tbody.ui-person-tb > tr.ui-person-tb-head .ui-person-card-head { padding-bottom:
 .ui-person-card.is-light .h-sugg { padding-top: 6px; }
 :root .ui-person-card .ui-person-card-body > .issue { border: 0; border-top: 1px solid var(--line-color, #d6d6d6); box-shadow: none; background: transparent; padding: 12px 2px; }
 :root .ui-person-card .ui-person-card-body > .issue:first-child { border-top: 0; }
+.ui-frames-opt { display: inline-flex; align-items: center; gap: 6px; margin: 8px 0; font-size: .92em; }
+.inv-countbar:has(.ui-frames-opt) { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 14px; }
+/* 🗂 un cadre par chose (Où chercher : un cadre par site), même allure que le cadre par personne */
+.ui-item-card { background: var(--card-bg, #fff); border: var(--line, 1px solid #d0d4dc); box-shadow: var(--shadow-small, none); border-radius: 10px; padding: 12px 16px; min-width: 0; }
+:root .ouc-list.is-cards { gap: 12px; margin: 10px 0; }
+:root .ouc-list.is-cards > .ouc-row.ui-item-card { border: var(--line, 1px solid #d0d4dc); padding: 12px 16px; }
+@media (max-width: 640px) { :root .ouc-list.is-cards > .ouc-row.ui-item-card { padding: 10px 12px; } }
+@media print { .ui-item-card { box-shadow: none; border: 1px solid #999; break-inside: avoid; } }

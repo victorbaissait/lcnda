@@ -3263,6 +3263,8 @@
  "{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas.": "{what} noch nicht erledigt (Tab 💬 Korrektur). Sie werden nicht gedruckt.",
  "{what} posée": "{what} angebracht",
  "{what} pour ce jeu · sans les vivants ni les fiches confidentielles.": "{what} für dieses Spiel · ohne Lebende und vertrauliche Einträge.",
+ "{what} pour elle": "{what} für sie",
+ "{what} pour lui": "{what} für ihn",
  "{what} remis comme au départ": "{what} auf Anfang zurückgesetzt",
  "{what} répond {code}.": "{what} antwortet {code}.",
  "{what} reprises de l’autre généalogie.": "{what} aus dem anderen Stammbaum übernommen.",
@@ -9968,6 +9970,10 @@
  "Acte introuvable.": "Urkunde nicht gefunden.",
  "acte le plus récent : {y} ; délai {d} ans": "jüngste Urkunde: {y}; Frist {d} Jahre",
  "acte le plus récent : {y} ; délai {d} ans ({k})": "jüngste Urkunde: {y}; Frist {d} Jahre ({k})",
+ "acte manquant": {
+  "one": "fehlende Urkunde",
+  "other": "fehlende Urkunden"
+ },
  "acte n° {n}": "Urkunde Nr. {n}",
  "Acte n° 12, vue 34 ; rien entre 1823 et 1825 ; registre abîmé…": "Urkunde Nr. 12, Bild 34; nichts zwischen 1823 und 1825; Register beschädigt…",
  "Acte notarié": "Notariatsurkunde",
@@ -13763,6 +13769,10 @@
  },
  "Autre ordinateur": "Anderer Computer",
  "Autre personne": "Andere Person",
+ "autre piste": {
+  "one": "weitere Spur",
+  "other": "weitere Spuren"
+ },
  "Autre prénom": "Anderer Vorname",
  "autre prise": "andere Aufnahme",
  "Autre produit": "Anderes Erzeugnis",
@@ -18843,6 +18853,10 @@
   "one": "Sache auf beiden Seiten geändert",
   "other": "Sachen auf beiden Seiten geändert"
  },
+ "chose qui manque": {
+  "one": "fehlende Sache",
+  "other": "fehlende Sachen"
+ },
  "chose reportée": {
   "one": "verschobene Sache",
   "other": "verschobene Sachen"
@@ -22548,6 +22562,10 @@
  "Décès par mois": "Todesfälle nach Monat",
  "Décès par mois, par siècle": "Todesfälle nach Monat und Jahrhundert",
  "Décès par siècle": "Todesfälle nach Jahrhundert",
+ "décès possible": {
+  "one": "möglicher Todesfall",
+  "other": "mögliche Todesfälle"
+ },
  "Décès renseigné": "Tod eingetragen",
  "Décès sans année ou sans lieu, comptés à part : {n}": "Todesfälle ohne Jahr oder ohne Ort, getrennt gezählt: {n}",
  "Décès sans source": "Tod ohne Quelle",
@@ -27279,6 +27297,10 @@
  "exactement 1 enfant": "genau 1 Kind",
  "Exactement le même fichier.": "Genau dieselbe Datei.",
  "Exagération du relief": "Reliefüberhöhung",
+ "exception": {
+  "one": "Ausnahme",
+  "other": "Ausnahmen"
+ },
  "Exception de fiche enregistrée.": "Ausnahme für den Eintrag gespeichert.",
  "Exception de filtres enregistrée.": "Filter-Ausnahme gespeichert.",
  "Exception de filtres supprimée.": "Filter-Ausnahme gelöscht.",
@@ -49696,6 +49718,10 @@
  "Piste de la voix": "Sprachspur",
  "Piste de texte minutée (sous-titres)": "Zeitgesteuerte Textspur (Untertitel)",
  "Piste du mur faite": "Spur des toten Punkts erledigt",
+ "piste écartée": {
+  "one": "verworfene Spur",
+  "other": "verworfene Spuren"
+ },
  "Piste écartée.": "Spur verworfen.",
  "Piste explorée": "Spur erkundet",
  "PISTE EXPLORÉE": "VERFOLGTE SPUR",
@@ -52332,6 +52358,7 @@
  "Ranger les sections — fiche de {name}": "Abschnitte ordnen — Eintrag von {name}",
  "Ranger les sections…": "Abschnitte ordnen …",
  "Ranger par": "Ordnen nach",
+ "Ranger par personne": "Nach Person ordnen",
  "Ranger par sorte": "Nach Art ordnen",
  "Ranger par…": "Ordnen nach…",
  "Ranger ses widgets": "Widgets anordnen",

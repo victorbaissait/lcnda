@@ -151,54 +151,102 @@
     /* ═════════════ « 🧰 Toutes les données » : recherche, pastilles, thèmes ═════════════ */
     const ws = () => document.getElementById('workspace');
     const notInstalled = new Set(); let installChecked = false;
-    async function checkInstalls(onDone) {
-        const ds = index().ds.filter(d => d.installed && !d.link);
-        await Promise.all(ds.map(async d => { const ok = await E().isInstalled(d); if (ok) notInstalled.delete(d.id); else notInstalled.add(d.id); }));
-        installChecked = true; onDone?.();
+    async function checkInstalls(onDone, list = null) {
+        const ds = (list || index().ds).filter(d => d.installed && !d.link);
+        await Promise.all(ds.map(async d => { let ok = true; try { ok = E().isInstalled ? await E().isInstalled(d) : (await d.installed()) !== false; } catch (_) { ok = false; } if (ok) notInstalled.delete(d.id); else notInstalled.add(d.id); }));
+        if (!list) installChecked = true; onDone?.();
     }
     const textOf = new Map();
-    const hay = d => { const k = `${d.id}|${d.label}`; if (!textOf.has(k)) { const t = themeById(themeOf(d)); textOf.set(k, fold([T(d.label), d.label, d.id, d.source, t ? T(t.label) : '', ...(d.fields || []).map(f => T(f.label)), ...(d.keywords || [])].join(' '))); } return textOf.get(k); };
+    const hay = d => { const k = `${d.id}|${d.label}`; if (!textOf.has(k)) { const t = themeById(themeOf(d)); textOf.set(k, fold([T(d.label), d.label, d.id, d.source, d.description ? T(d.description) : '', t ? T(t.label) : '', ...(d.fields || []).map(f => T(f.label)), ...(d.keywords || [])].join(' '))); } return textOf.get(k); };
+    /* 🔎 quelques mots de tous les jours → le mot des listes (seulement dans le choix d'une source : compact) */
+    const SYN = {tremblement: 'seisme', terre: 'seisme', inondation: 'crue', debordement: 'crue', soldat: 'guerre', poilu: 'guerre', mort: 'deces', velo: 'tour de france', cyclisme: 'tour de france', chateau: 'chateau', train: 'gare', chemin: 'gare', meteo: 'meteo', temps: 'meteo', pluie: 'meteo', eglise: 'eglise', prenom: 'prenom', volcan: 'eruption', naufrage: 'epave', bateau: 'navire', usine: 'industri', prix: 'prix', argent: 'prix', maladie: 'epidemie', peste: 'epidemie'};
     const CHIPS = [['all', '', 'Toutes'], ['geo', '📍', 'Avec une carte'], ['dates', '📅', 'Avec des dates'], ['install', '⤓', 'À installer']];
     const chipOk = (c, d) => (c === 'geo' ? !!d.geo : c === 'dates' ? !!d.period : c === 'install' ? notInstalled.has(d.id) : true);
     const cardOf = d => `<button type="button" class="ld-card${d.merged ? ' is-merged' : ''}" data-ld-go="${esc(listKey(d))}"><span class="ld-card-ico" aria-hidden="true">${esc(d.merged ? '🔀' : d.icon || '📋')}</span><span class="ld-card-txt"><b>${esc(T(d.label))}</b>${d.merged ? `<small class="muted">${esc(d.mergeLine?.() || T('liste réunie'))}</small>` : d.source ? `<small class="muted">${esc(d.source)}</small>` : ''}</span><span class="ld-card-state" data-ld-state="${esc(d.id)}">${d.link ? `<span class="ldt-tag">${esc(T('lien'))}</span>` : d.merged ? `<span class="ldt-tag is-merged">${esc(T('liste réunie'))}</span>` : notInstalled.has(d.id) ? `<span class="ldt-tag">${esc(T('à installer'))}</span>` : ''}</span></button>`;
-    async function overview(host, token) {
-        const app = A(), I = index(), all = I.ds;
-        let chip = 'all', q = '';
-        host.innerHTML = `<section class="page collection-page ld-page ld-overview ldt-overview">${UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')}`, icon: '🧰', title: T('Toutes les données'), help: esc(T('Des listes toutes prêtes pour comprendre la vie de ta famille, rangées par thème. Lecture seule.')),
-                actions: [`<button type="button" class="button small secondary" data-ldt-settings title="${esc(T('Par thème ou par groupe, ce qu’ouvre un thème, le rayon « Dans la famille »'))}">⚙ ${esc(T('Réglages des listes'))}</button>`]}) : ''}
-            <input type="search" class="ld-q ldt-q" data-ld-ov-q placeholder="${esc(T('Chercher dans les {n} listes (ex. séisme, moulin, Nice, 1887)…', {n: nf(all.length)}))}" aria-label="${esc(T('Chercher dans toutes les listes'))}">
-            <div class="ldt-chips" role="group" aria-label="${esc(T('Montrer'))}"><span class="ldt-chips-lab">${esc(T('Montrer'))}</span>${CHIPS.map(([c, ic, l]) => `<button type="button" class="ldt-chip" data-ldt-chip="${c}" aria-pressed="${c === 'all'}">${ic ? `${ic} ` : ''}${esc(T(l))} <i data-ldt-n="${c}"></i></button>`).join('')}</div>
+    /* compact (choisir une source ailleurs) : la même carte, une ligne pour dire ce que c'est, « installé » ou « à télécharger » */
+    const descOf = d => { try { return d.merged ? (d.mergeLine?.() || T('liste réunie')) : d.description ? T(d.description) : d.source || ''; } catch (_) { return d.source || ''; } };
+    const stateTag = (d, checked) => (d.link ? `<span class="ldt-tag">${esc(T('lien'))}</span>` : notInstalled.has(d.id) ? `<span class="ldt-tag">${esc(T('à télécharger'))}</span>` : checked || !d.installed ? `<span class="ldt-tag is-ok">${esc(T('installé'))}</span>` : '');
+    const pickCard = (d, sel, checked) => `<button type="button" class="ld-card ldt-pick-card${d.merged ? ' is-merged' : ''}${sel ? ' is-on' : ''}" data-ld-pick="${esc(d.id)}" aria-pressed="${sel ? 'true' : 'false'}"><span class="ld-card-ico" aria-hidden="true">${esc(d.merged ? '🔀' : d.icon || '📋')}</span><span class="ld-card-txt"><b>${esc(T(d.label))}</b>${descOf(d) ? `<small class="muted">${esc(descOf(d))}</small>` : ''}</span><span class="ld-card-state" data-ld-state="${esc(d.id)}">${stateTag(d, checked)}</span></button>`;
+    const K_PICK_THEME = 'genealogie-donnees-choix-theme';
+    /**
+     * 🧰 Le choix d'une liste, partagé : l'écran « Toutes les données » (Listes) ET le choix d'une source ailleurs
+     * (🧩 widget 📊 Données téléchargées, l'élément « 📊 Une donnée téléchargée » de l'Atelier, 📥 Prendre depuis… → Données).
+     *   LCNDA_EXT.dataListPicker(boîte, {compact, onPick(d), items?() (une autre sorte de sources : {id, icon, label, description?, installed?}),
+     *     filter?(d), selected?: id, head?: html, onTheme?(id), onPaint?()}) → {paint, focus, setQuery, list}
+     *  Compact : 🔍 la recherche (sans accents, noms, descriptions, thèmes, quelques synonymes), « Tous » + les 20 thèmes en pastilles
+     *  (le dernier retenu : genealogie-donnees-choix-theme), les sources rangées par thème (installé / à télécharger), ↑ ↓ Entrée, Échap.
+     */
+    function picker(box, o = {}) {
+        const compact = !!o.compact, custom = typeof o.items === 'function';
+        const src = () => (custom ? o.items() : index().ds).filter(d => (o.filter ? o.filter(d) : true) && !(o.onlyInstalled && notInstalled.has(d.id))); // onlyInstalled : seulement les données présentes ici
+        const byTheme = () => { if (!custom && !o.filter && !o.onlyInstalled) return index().by; const m = new Map([...themes(), RANGER].map(t => [t.id, []])); src().forEach(d => (m.get(themeOf(d)) || m.get(RANGER.id)).push(d)); return m; };
+        let chip = 'all', q = '', th = compact ? (readLS(K_PICK_THEME, 'all') || 'all') : 'all', kb = -1, checked = false, sel = o.selected || '';
+        const all = src();
+        const tlist = () => { const by = byTheme(); return [...themes(), RANGER].filter(t => (by.get(t.id) || []).length); };
+        if (compact && th !== 'all' && !tlist().some(t => t.id === th)) th = 'all';
+        box.innerHTML = `${o.head || ''}<input type="search" class="ld-q ldt-q" data-ld-ov-q placeholder="${esc(T('Chercher dans les {n} listes (ex. séisme, moulin, Nice, 1887)…', {n: nf(all.length)}))}" aria-label="${esc(T('Chercher dans toutes les listes'))}">
+            ${compact ? `<div class="ldt-chips ldt-pick-themes" role="group" aria-label="${esc(T('Thèmes'))}" data-ldt-pthemes></div>`
+                : `<div class="ldt-chips" role="group" aria-label="${esc(T('Montrer'))}"><span class="ldt-chips-lab">${esc(T('Montrer'))}</span>${CHIPS.map(([c, ic, l]) => `<button type="button" class="ldt-chip" data-ldt-chip="${c}" aria-pressed="${c === 'all'}">${ic ? `${ic} ` : ''}${esc(T(l))} <i data-ldt-n="${c}"></i></button>`).join('')}</div>`}
             <p class="ldt-found muted" data-ldt-found aria-live="polite"></p>
-            <div class="ldt-results" data-ldt-results></div>
-            <div class="ldt-themes" data-ldt-themes></div></section>`;
-        const page = host.querySelector('.ldt-overview'), res = page.querySelector('[data-ldt-results]'), grid = page.querySelector('[data-ldt-themes]'), found = page.querySelector('[data-ldt-found]');
+            <div class="ldt-results${compact ? ' ldt-pick-res' : ''}" data-ldt-results></div>
+            ${compact ? '' : '<div class="ldt-themes" data-ldt-themes></div>'}`;
+        if (compact) box.classList.add('ldt-picker');
+        const page = box, res = page.querySelector('[data-ldt-results]'), grid = page.querySelector('[data-ldt-themes]'), found = page.querySelector('[data-ldt-found]'), input = page.querySelector('[data-ld-ov-q]');
         const counts = () => CHIPS.forEach(([c]) => { const el = page.querySelector(`[data-ldt-n="${c}"]`); if (el) el.textContent = c === 'install' && !installChecked ? '…' : nf(all.filter(d => !d.link || c === 'all').filter(d => chipOk(c, d)).length); });
+        const wordsOf = () => fold(q).split(/[^a-z0-9'-]+/).filter(Boolean);
+        const wHit = (d, w) => hay(d).includes(w) || (compact && !!SYN[w] && hay(d).includes(SYN[w]));
         const paint = () => {
-            const words = fold(q).split(/[^a-z0-9'-]+/).filter(Boolean), searching = !!words.length || chip !== 'all';
+            const words = wordsOf(), searching = !!words.length || chip !== 'all';
             const VX = ext.listesValeurs, byVal = new Set(); // 🔎 « le mot est dans ses valeurs » (app-listes-reunies-plus.js : un index fait une fois, en tâche de fond)
-            const hit = d => chipOk(chip, d) && (chip === 'all' || !d.link) && (words.every(w => hay(d).includes(w)) || (!!VX && !!words.length && words.every(w => hay(d).includes(w) || VX.has(d, w)) && !!byVal.add(d.id)));
-            const tl = themeList(), hits = new Map(tl.map(t => [t.id, (I.by.get(t.id) || []).filter(hit)]));
-            const nHits = [...hits.values()].reduce((a, b) => a + b.length, 0), nThemes = [...hits.values()].filter(x => x.length).length;
-            found.textContent = searching ? (nHits ? T('{n} listes trouvées, dans {t} thèmes.', {n: nf(nHits), t: nf(nThemes)}) : T('Aucune liste ne correspond.')) : '';
-            found.hidden = !searching;
-            res.innerHTML = searching ? tl.filter(t => hits.get(t.id).length).map(t => `<section class="ld-group ldt-group" data-ldt-group="${esc(t.id)}"><h3>${esc(t.icon)} ${esc(T(t.label))}</h3><div class="ld-cards">${hits.get(t.id).sort((a, b) => (b.merged ? 1 : 0) - (a.merged ? 1 : 0) || (byVal.has(a.id) ? 1 : 0) - (byVal.has(b.id) ? 1 : 0)).map(d => (byVal.has(d.id) ? cardOf(d).replace('</b>', `</b><small class="ldt-inval">🔎 ${esc(T('le mot est dans ses valeurs'))}</small>`) : cardOf(d))).join('')}</div></section>`).join('') : '';
-            grid.innerHTML = tl.map(t => { const n = (I.by.get(t.id) || []).length, h = hits.get(t.id).length, mg = mergedOf(t.id);
+            const hit = d => chipOk(chip, d) && (chip === 'all' || !d.link) && (words.every(w => wHit(d, w)) || (!!VX && !custom && !!words.length && words.every(w => wHit(d, w) || VX.has(d, w)) && !!byVal.add(d.id)));
+            const by = byTheme(), tl = tlist(), hits = new Map(tl.map(t => [t.id, (by.get(t.id) || []).filter(hit)]));
+            const shownT = compact && th !== 'all' && !words.length ? tl.filter(t => t.id === th) : tl;
+            const nHits = shownT.reduce((a, t) => a + hits.get(t.id).length, 0), nThemes = shownT.filter(t => hits.get(t.id).length).length;
+            found.textContent = searching || compact ? (nHits ? T('{n} listes trouvées, dans {t} thèmes.', {n: nf(nHits), t: nf(nThemes)}) : T('Aucune liste ne correspond.')) : '';
+            found.hidden = !(searching || compact);
+            const sorted = id => hits.get(id).sort((a, b) => (b.merged ? 1 : 0) - (a.merged ? 1 : 0) || (byVal.has(a.id) ? 1 : 0) - (byVal.has(b.id) ? 1 : 0));
+            const valTag = (d, html) => (byVal.has(d.id) ? html.replace('</b>', `</b><small class="ldt-inval">🔎 ${esc(T('le mot est dans ses valeurs'))}</small>`) : html);
+            res.innerHTML = searching || compact ? shownT.filter(t => hits.get(t.id).length).map(t => `<section class="ld-group ldt-group" data-ldt-group="${esc(t.id)}"><h3>${esc(t.icon)} ${esc(T(t.label))}</h3><div class="ld-cards">${sorted(t.id).map(d => valTag(d, compact ? pickCard(d, d.id === sel, checked) : cardOf(d))).join('')}</div></section>`).join('') : '';
+            if (grid) grid.innerHTML = tl.map(t => { const n = (by.get(t.id) || []).length, h = hits.get(t.id).length, mg = mergedOf(t.id);
                 return `<button type="button" class="ldt-theme${searching && !h ? ' is-dim' : ''}" data-ldt-theme="${esc(t.id)}"><span class="ldt-ic" aria-hidden="true">${esc(t.icon)}</span><span class="ldt-txt"><b>${esc(T(t.label))} <i>${nf(searching ? h : n)}</i></b><small class="muted">${esc(T(t.hint || ''))}</small>${mg.length ? `<span class="ldt-mg">🔀 ${esc(mg.map(m => T(m.label)).join(' · '))}</span>` : ''}</span></button>`; }).join('');
+            const pt = page.querySelector('[data-ldt-pthemes]');
+            if (pt) { const tot = tl.reduce((a, t) => a + hits.get(t.id).length, 0);
+                pt.innerHTML = [`<button type="button" class="ldt-chip${th === 'all' ? ' is-on' : ''}" data-ldt-pth="all" aria-pressed="${th === 'all'}">${esc(T('Tous'))} <i>${nf(tot)}</i></button>`, ...tl.map(t => `<button type="button" class="ldt-chip${th === t.id ? ' is-on' : ''}${hits.get(t.id).length ? '' : ' is-dim'}" data-ldt-pth="${esc(t.id)}" aria-pressed="${th === t.id}" title="${esc(T(t.hint || ''))}">${esc(t.icon)} ${esc(T(t.label))} <i>${nf(hits.get(t.id).length)}</i></button>`)].join(''); }
             page.querySelectorAll('[data-ldt-chip]').forEach(b => { const on = b.dataset.ldtChip === chip; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); });
+            kb = -1; o.onPaint?.();
         };
+        const cards = () => [...res.querySelectorAll('[data-ld-pick]')];
+        const pick = id => { const d = src().find(x => x.id === id); if (!d) return; sel = id; res.querySelectorAll('[data-ld-pick]').forEach(c => { const on = c.dataset.ldPick === id; c.classList.toggle('is-on', on); c.setAttribute('aria-pressed', String(on)); }); o.onPick?.(d); };
         counts(); paint();
         let tq = 0;
-        page.querySelector('[data-ld-ov-q]').addEventListener('input', e => { clearTimeout(tq); tq = setTimeout(() => { q = e.target.value; paint(); ext.listesValeurs?.warm(q, () => { if (page.isConnected && q.trim()) paint(); }); }, 60); });
+        input.addEventListener('input', e => { clearTimeout(tq); tq = setTimeout(() => { q = e.target.value; paint(); if (!custom) ext.listesValeurs?.warm(q, () => { if (page.isConnected && q.trim()) paint(); }); }, 60); });
+        if (compact) input.addEventListener('keydown', e => { // ↑ ↓ Entrée Échap
+            const cs = cards();
+            if (e.key === 'Escape' && input.value) { e.preventDefault(); e.stopPropagation(); input.value = ''; q = ''; paint(); return; }
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { if (!cs.length) return; e.preventDefault(); kb = e.key === 'ArrowDown' ? Math.min(cs.length - 1, kb + 1) : Math.max(0, kb - 1); cs.forEach((c, i) => c.classList.toggle('is-kb', i === kb)); cs[kb].scrollIntoView({block: 'nearest'}); return; }
+            if (e.key === 'Enter') { e.preventDefault(); const c = cs[kb >= 0 ? kb : 0]; if (c) pick(c.dataset.ldPick); }
+        });
         page.addEventListener('click', e => {
             const t = e.target; let b;
             if ((b = t.closest('[data-ldt-chip]'))) { chip = b.dataset.ldtChip; paint(); return; }
+            if ((b = t.closest('[data-ldt-pth]'))) { th = b.dataset.ldtPth; writeLS(K_PICK_THEME, th); o.onTheme?.(th); if (wordsOf().length) { input.value = ''; q = ''; } paint(); return; }
+            if ((b = t.closest('[data-ld-pick]'))) return pick(b.dataset.ldPick);
             if ((b = t.closest('[data-ldt-theme]'))) return openTheme(b.dataset.ldtTheme);
             if (t.closest('[data-ldt-settings]')) return goSettings();
             if ((b = t.closest('[data-ld-go]'))) return go(b.dataset.ldGo);
         });
-        checkInstalls(() => { if (!page.isConnected) return; counts(); if (chip === 'install') paint(); page.querySelectorAll('[data-ld-state]').forEach(el => { if (notInstalled.has(el.dataset.ldState) && !el.textContent) el.innerHTML = `<span class="ldt-tag">${esc(T('à installer'))}</span>`; }); });
-        void token; void app;
+        const after = () => { if (!page.isConnected) return; checked = true; counts(); if (chip === 'install' || compact) paint(); page.querySelectorAll('[data-ld-state]').forEach(el => { if (notInstalled.has(el.dataset.ldState) && !el.textContent) el.innerHTML = `<span class="ldt-tag">${esc(T('à installer'))}</span>`; }); o.onChecked?.(src().filter(d => !notInstalled.has(d.id))); };
+        if (custom || o.filter || o.onlyInstalled) checkInstalls(after, src()); else checkInstalls(after);
+        return {paint, focus: () => input.focus(), setQuery: v => { input.value = v; q = v; paint(); }, list: src, installed: d => !notInstalled.has(d.id)};
     }
+    async function overview(host, token) {
+        const app = A(), I = index(), all = I.ds;
+        host.innerHTML = '<section class="page collection-page ld-page ld-overview ldt-overview"></section>';
+        picker(host.querySelector('.ldt-overview'), {head: UI().pageHeader ? UI().pageHeader({where: `${T('Listes')} · 🧰 ${T('Données')}`, icon: '🧰', title: T('Toutes les données'), help: esc(T('Des listes toutes prêtes pour comprendre la vie de ta famille, rangées par thème. Lecture seule.')),
+            actions: [`<button type="button" class="button small secondary" data-ldt-settings title="${esc(T('Par thème ou par groupe, ce qu’ouvre un thème, le rayon « Dans la famille »'))}">⚙ ${esc(T('Réglages des listes'))}</button>`]}) : ''});
+        void token; void app; void all;
+    }
+    ext.dataListPicker = (box, o) => picker(box, o);
     function go(v) {
         if (v.startsWith('link:')) { const d = (E().list?.() || []).find(x => x.id === v.slice(5)); try { d?.link(); } catch (x) { toast(x.message, 'error'); } return; }
         E().openKey?.(v);

@@ -13,12 +13,62 @@ declare(strict_types=1);
  * ↩ « Cité dans » (cited_in : notes, enquêtes, lieux, autres fiches qui nomment la fiche) ; texte des blocs pour chercher.
  */
 
-const TOPIC_BLOCK_TYPES = ['text', 'images', 'people', 'dates', 'quote', 'links', 'divider', 'screen', 'widget', 'diagram', 'photomap', 'auto']; // photomap : 📸 carte de photos (lib/photomaps.php)
+const TOPIC_BLOCK_TYPES = ['text', 'images', 'people', 'dates', 'quote', 'links', 'divider', 'screen', 'widget', 'diagram', 'photomap', 'auto', 'data']; // photomap : 📸 carte de photos (lib/photomaps.php) ; data : 📊 une liste de données (topic_clean_data)
+const TOPIC_DATA_MAX_ROWS = 500;      // 📊 une copie figée : au plus 500 lignes,
+const TOPIC_DATA_MAX_BYTES = 300000;  //    et 300 Ko une fois écrite (sinon les dernières lignes sont laissées de côté)
 const TOPIC_WIDTHS = ['3', '4', '6', '8', '9', '12'];
 
 function topic_text($v, int $max): string
 {
     return mb_substr(trim(str_replace("\r", '', (string) (is_scalar($v) ? $v : ''))), 0, $max);
+}
+
+/** 📊 un bloc « Données » (heritage-fiches.js) : la liste et ses filtres ; en mode « Figé », la copie datée des lignes (chaque ligne
+ *  garde sa source ↗, seulement des adresses http(s)) ; la colonne « 👪 Dans la famille » ne nomme jamais une personne vivante ni une
+ *  fiche confidentielle (lib/donnees_plus.php : la même règle que les listes partagées sur le site familial). */
+function topic_clean_data(array $b): array
+{
+    $key = static fn($v, int $max = 80) => preg_match('/^[A-Za-z0-9_\-~]{1,' . $max . '}$/', (string) (is_scalar($v) ? $v : '')) ? (string) $v : '';
+    $year = static fn($v) => ($v === null || $v === '' || !is_numeric($v)) ? null : max(-9999, min(2999, (int) $v));
+    $url = static fn($v) => preg_match('#^https?://[^\s"\'<>]+$#i', $u = topic_text($v, 1500)) ? $u : '';
+    $c = is_array($b['center'] ?? null) ? $b['center'] : null;
+    $center = $c && is_numeric($c['lat'] ?? null) && is_numeric($c['lon'] ?? null) && abs((float) $c['lat']) <= 90 && abs((float) $c['lon']) <= 180
+        ? ['lat' => round((float) $c['lat'], 6), 'lon' => round((float) $c['lon'], 6), 'title' => topic_text($c['title'] ?? '', 160)] : null;
+    $out = ['mode' => ($b['mode'] ?? '') === 'frozen' ? 'frozen' : 'live', 'list' => $key($b['list'] ?? ''), 'ask' => topic_text($b['ask'] ?? '', 300), 'q' => topic_text($b['q'] ?? '', 120),
+        'from' => $year($b['from'] ?? null), 'to' => $year($b['to'] ?? null), 'near' => in_array($b['near'] ?? '', ['place', 'subject'], true) ? $b['near'] : '', 'center' => $center,
+        'km' => max(1, min(2000, (int) ($b['km'] ?? 30) ?: 30)), 'family' => !empty($b['family']), 'famcol' => !empty($b['famcol']),
+        'cols' => array_values(array_filter(array_map(static fn($k) => $key($k, 60), array_slice(is_array($b['cols'] ?? null) ? $b['cols'] : [], 0, 16)))),
+        'limit' => max(1, min(TOPIC_DATA_MAX_ROWS, (int) ($b['limit'] ?? 20) ?: 20)), 'sort' => $key($b['sort'] ?? '', 60), 'dir' => ($b['dir'] ?? '') === 'desc' ? 'desc' : 'asc',
+        'view' => in_array($b['view'] ?? '', ['table', 'list', 'map', 'timeline'], true) ? $b['view'] : 'table'];
+    if ($out['near'] === 'place' && !$center) { $out['near'] = ''; }
+    $s = is_array($b['snap'] ?? null) ? $b['snap'] : null;
+    if ($out['mode'] !== 'frozen' || !$s) { return $out; }
+    $cols = [];
+    foreach (array_slice(is_array($s['cols'] ?? null) ? array_values($s['cols']) : [], 0, 16) as $col) {
+        if (is_array($col)) { $cols[] = ['k' => $key($col['k'] ?? '', 60) ?: 'c' . count($cols), 'l' => topic_text($col['l'] ?? '', 120)]; }
+    }
+    $fam = array_search('_fam', array_column($cols, 'k'), true);
+    $hidden = [];
+    if ($fam !== false) { // 👪 jamais un nom caché (vivant, ou fiche confidentielle) dans la colonne « Dans la famille »
+        try { if (!function_exists('dplus_hidden_names')) { require_once __DIR__ . '/donnees_plus.php'; } $hidden = dplus_hidden_names(db()); } catch (Throwable $e) { $hidden = null; }
+    }
+    $rows = [];
+    foreach (array_slice(is_array($s['rows'] ?? null) ? array_values($s['rows']) : [], 0, TOPIC_DATA_MAX_ROWS) as $r) {
+        if (!is_array($r)) { continue; }
+        $cells = array_map(static fn($v) => topic_text($v, 400), array_slice(is_array($r['c'] ?? null) ? array_values($r['c']) : [], 0, count($cols)));
+        $cells = array_pad($cells, count($cols), '');
+        if ($fam !== false && $cells[$fam] !== '' && ($hidden === null || ($hidden && dplus_names_hit($cells[$fam], $hidden)))) { $cells[$fam] = '—'; }
+        $g = is_array($r['g'] ?? null) && count($r['g']) === 2 && is_numeric($r['g'][0]) && is_numeric($r['g'][1]) && abs((float) $r['g'][0]) <= 90 && abs((float) $r['g'][1]) <= 180 ? [round((float) $r['g'][0], 5), round((float) $r['g'][1], 5)] : null;
+        $rows[] = ['c' => $cells, 's' => topic_text($r['s'] ?? '', 200), 'u' => $url($r['u'] ?? ''), 'g' => $g, 'y' => $year($r['y'] ?? null)];
+    }
+    $snap = ['at' => preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($s['at'] ?? '')) ? (string) $s['at'] : date('Y-m-d'), 'list' => $key($s['list'] ?? ''), 'label' => topic_text($s['label'] ?? '', 200),
+        'icon' => topic_text($s['icon'] ?? '', 16), 'source' => topic_text($s['source'] ?? '', 400), 'sourceUrl' => $url($s['sourceUrl'] ?? ''), 'licence' => topic_text($s['licence'] ?? '', 200),
+        'crit' => topic_text($s['crit'] ?? '', 600), 'total' => max(0, (int) ($s['total'] ?? count($rows))), 'cols' => $cols, 'rows' => $rows];
+    while ($snap['rows'] && strlen((string) json_encode($snap, JSON_UNESCAPED_UNICODE)) > TOPIC_DATA_MAX_BYTES) { // trop gros : les dernières lignes s'en vont
+        array_splice($snap['rows'], -max(1, intdiv(count($snap['rows']), 10)));
+    }
+    $out['snap'] = $snap;
+    return $out;
 }
 
 /** Un bloc remis d'aplomb (ce qui n'est pas prévu est laissé de côté) */
@@ -76,6 +126,7 @@ function topic_clean_block($b): ?array
             $out['occupation'] = topic_text($b['occupation'] ?? '', 120); $out['place'] = topic_text($b['place'] ?? '', 120);
             $out['from'] = max(0, min(2999, (int) ($b['from'] ?? 0))); $out['to'] = max(0, min(2999, (int) ($b['to'] ?? 0)));
             $out['limit'] = max(5, min(300, (int) ($b['limit'] ?? 60))); $out['note'] = topic_text($b['note'] ?? '', 2000); break;
+        case 'data': $out += topic_clean_data($b); break;
         case 'widget':
             $w = (string) ($b['widget'] ?? '');
             $out['widget'] = preg_match('/^cw_[a-z0-9]{4,24}$/', $w) ? $w : ''; break;
@@ -110,6 +161,7 @@ function topic_plain_text(array $blocks): string
         foreach (['text', 'source', 'caption', 'note'] as $k) { if (is_string($b[$k] ?? null) && $b[$k] !== '') { $out[] = $b[$k]; } }
         foreach (is_array($b['rows'] ?? null) ? $b['rows'] : [] as $r) { if (is_array($r)) { $out[] = trim(implode(' ', array_filter(array_map(static fn($v) => is_scalar($v) ? (string) $v : '', $r)))); } }
         if (($b['type'] ?? '') === 'auto') { $out[] = trim(implode(' ', array_filter([(string) ($b['occupation'] ?? ''), (string) ($b['place'] ?? '')]))); }
+        if (($b['type'] ?? '') === 'data') { $out[] = trim(implode(' ', array_filter([(string) ($b['ask'] ?? ''), (string) ($b['snap']['label'] ?? ''), (string) ($b['snap']['crit'] ?? '')]))); } // 📊
     }
     return trim(implode("\n", array_filter($out, static fn($t) => trim((string) $t) !== '')));
 }

@@ -3263,6 +3263,8 @@
  "{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas.": "{what} nog niet opgelost (tabblad 💬 Revisie). Ze worden niet afgedrukt.",
  "{what} posée": "{what} aangebracht",
  "{what} pour ce jeu · sans les vivants ni les fiches confidentielles.": "{what} voor dit spel · zonder levenden en vertrouwelijke profielen.",
+ "{what} pour elle": "{what} voor haar",
+ "{what} pour lui": "{what} voor hem",
  "{what} remis comme au départ": "{what} teruggezet naar begin",
  "{what} répond {code}.": "{what} antwoordt {code}.",
  "{what} reprises de l’autre généalogie.": "{what} overgenomen uit de andere stamboom.",
@@ -9968,6 +9970,10 @@
  "Acte introuvable.": "Akte niet gevonden.",
  "acte le plus récent : {y} ; délai {d} ans": "recentste akte: {y}; termijn {d} jaar",
  "acte le plus récent : {y} ; délai {d} ans ({k})": "recentste akte: {y}; termijn {d} jaar ({k})",
+ "acte manquant": {
+  "one": "ontbrekende akte",
+  "other": "ontbrekende akten"
+ },
  "acte n° {n}": "akte nr. {n}",
  "Acte n° 12, vue 34 ; rien entre 1823 et 1825 ; registre abîmé…": "Akte nr. 12, scan 34; niets tussen 1823 en 1825; beschadigd register…",
  "Acte notarié": "Notariële akte",
@@ -13763,6 +13769,10 @@
  },
  "Autre ordinateur": "Andere computer",
  "Autre personne": "Andere persoon",
+ "autre piste": {
+  "one": "andere aanwijzing",
+  "other": "andere aanwijzingen"
+ },
  "Autre prénom": "Andere voornaam",
  "autre prise": "andere opname",
  "Autre produit": "Ander product",
@@ -18843,6 +18853,10 @@
   "one": "ding aan beide kanten gewijzigd",
   "other": "dingen aan beide kanten gewijzigd"
  },
+ "chose qui manque": {
+  "one": "ontbrekend ding",
+  "other": "ontbrekende dingen"
+ },
  "chose reportée": {
   "one": "uitgesteld ding",
   "other": "uitgestelde dingen"
@@ -22548,6 +22562,10 @@
  "Décès par mois": "Overlijdens per maand",
  "Décès par mois, par siècle": "Overlijdens per maand, per eeuw",
  "Décès par siècle": "Overlijdens per eeuw",
+ "décès possible": {
+  "one": "mogelijk overlijden",
+  "other": "mogelijke overlijdens"
+ },
  "Décès renseigné": "Overlijden ingevuld",
  "Décès sans année ou sans lieu, comptés à part : {n}": "Overlijdens zonder jaar of plaats, apart geteld: {n}",
  "Décès sans source": "Overlijden zonder bron",
@@ -27279,6 +27297,10 @@
  "exactement 1 enfant": "precies 1 kind",
  "Exactement le même fichier.": "Precies hetzelfde bestand.",
  "Exagération du relief": "Overdrijving van het reliëf",
+ "exception": {
+  "one": "uitzondering",
+  "other": "uitzonderingen"
+ },
  "Exception de fiche enregistrée.": "Uitzondering voor het profiel opgeslagen.",
  "Exception de filtres enregistrée.": "Filteruitzondering opgeslagen.",
  "Exception de filtres supprimée.": "Filteruitzondering verwijderd.",
@@ -49696,6 +49718,10 @@
  "Piste de la voix": "Stemspoor",
  "Piste de texte minutée (sous-titres)": "Getimede tekstspoor (ondertitels)",
  "Piste du mur faite": "Spoor van het dode punt gedaan",
+ "piste écartée": {
+  "one": "verworpen aanwijzing",
+  "other": "verworpen aanwijzingen"
+ },
  "Piste écartée.": "Spoor verworpen.",
  "Piste explorée": "Spoor verkend",
  "PISTE EXPLORÉE": "ONDERZOCHT SPOOR",
@@ -52332,6 +52358,7 @@
  "Ranger les sections — fiche de {name}": "Secties ordenen — profiel van {name}",
  "Ranger les sections…": "Secties ordenen…",
  "Ranger par": "Indelen op",
+ "Ranger par personne": "Per persoon groeperen",
  "Ranger par sorte": "Per soort ordenen",
  "Ranger par…": "Ordenen op…",
  "Ranger ses widgets": "Widgets ordenen",

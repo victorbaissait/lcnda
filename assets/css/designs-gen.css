@@ -4605,6 +4605,24 @@
 }
 :root[data-lc-density] .ui-person-card .ctl-row{padding:calc(12px * var(--lc-sp)) calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 :root[data-lc-density] .ui-person-card .ui-person-card-body > .vd-card{padding:calc(12px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-cards:has(> .ui-person-card.is-light){gap:calc(10px * var(--lc-sp))}
+:root .ui-person-card.is-light:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .ui-person-card.is-light{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card.is-light .ui-person-card-head{padding-bottom:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card.is-light .h-sugg{padding-top:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ui-person-card .ui-person-card-body > .issue{padding:calc(12px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .ui-frames-opt{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .inv-countbar:has(.ui-frames-opt){gap:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .ui-item-card{padding:calc(12px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .ouc-list.is-cards{gap:calc(12px * var(--lc-sp))}
+:root .ouc-list.is-cards > .ouc-row.ui-item-card:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .ouc-list.is-cards > .ouc-row.ui-item-card{padding:calc(12px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+@media (max-width: 640px){
+  :root[data-lc-density] .ouc-list.is-cards > .ouc-row.ui-item-card{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+}
+@media print{
+  :root .ui-item-card:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+}
 /* saisies.css */
 :root[data-lc-density] .ui-hm{gap:calc(3px * var(--lc-sp))}
 /* board-shapelib.css */
@@ -5035,6 +5053,23 @@
 :root[data-lc-density] .h-fi-citedlist{padding-left:calc(18px * var(--lc-sp))}
 :root[data-lc-density] .h-fi-pcited ul{padding-left:calc(18px * var(--lc-sp))}
 :root[data-lc-density] .h-fi-embedhead{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dtable th,:root[data-lc-density] .h-fi-dtable td{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dlist li{padding:calc(5px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dfoot{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dfoot{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dfoot{padding-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dacts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dbox{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dask{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dask-row,:root[data-lc-density] .h-fi-dlistrow{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dpillrow{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dpill{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dset{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dset legend{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dcols{gap:calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dchoices{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dchoice{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-fi-dchoice{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .sv-sess-head,:root[data-lc-density] .sv-sess-row{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .sv-sess-head{margin-top:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .succ-au-box{gap:calc(8px * var(--lc-sp))}
@@ -6854,6 +6889,15 @@
 @media (max-width: 600px){
   :root[data-lc-density] .tkx-ul{padding-left:calc(18px * var(--lc-sp))}
 }
+/* telech-l.css */
+:root[data-lc-density] .tlx-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .tlx-panel{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .tlx-opts{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .tlx-opts{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .tlx-opt{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root[data-lc-density] .tlx-ul{padding-left:calc(18px * var(--lc-sp))}
+}
 /* telech-j.css */
 :root[data-lc-density] .tj-life{gap:calc(12px * var(--lc-sp))}
 :root[data-lc-density] .tj-quote{padding-left:calc(8px * var(--lc-sp))}
@@ -7007,6 +7051,27 @@
   :root[data-lc-density] .ld-table--cards tr[data-ld-row]{padding:calc(10px * var(--lc-sp)) calc(6px * var(--lc-sp))}
   :root[data-lc-density] .ld-table--cards .ld-act{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 }
+:root[data-lc-density] .ldt-pick-themes{padding:calc(2px * var(--lc-sp)) calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ldt-pick-res{padding:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp)) calc(2px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .ldt-pick-res .ld-cards{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ldt-pick-card{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root .ldt-tag.is-ok:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .atd{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .atd-head{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .atd-filters{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .atd-filters label{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .atd-filters .checkbox-line{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-chosen{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .atd-chosen{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .atd-actions{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-rows{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .atd-rows li{gap:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .atd-bars{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .atd-bars{padding:0 calc(2px * var(--lc-sp))}
+:root[data-lc-density] .atd-pickrows{padding:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(2px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .atd-pickrows{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .atd-pickrows label{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .atd-mode{gap:calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp))}
 /* donnees-maj.css */
 :root[data-lc-density] .dmaj-filters .segmented button{padding:0 calc(16px * var(--lc-sp))}
 /* donnees-recap.css */

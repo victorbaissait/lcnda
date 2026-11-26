@@ -103,7 +103,7 @@
     async function openAbout() {
         let d = {sources: [], missing: []};
         try { d = await api('prenoms_pays_about'); } catch (_) {}
-        const KNOWN = [['FR', 'Insee — Fichier des prénoms', 'Licence Ouverte 2.0 (Etalab)', 'https://www.insee.fr/fr/statistiques/8205621'], ['CH', 'OFS — Prénoms de la population selon l’année de naissance (STATPOP)', 'OFS : libre, source obligatoire', 'https://www.bfs.admin.ch/asset/fr/36752511'], ['QC', 'Retraite Québec — Banque de prénoms', 'CC BY 4.0', 'https://www.donneesquebec.ca/recherche/dataset/banque-de-prenoms-filles']];
+        const KNOWN = [['FR', 'Insee — Fichier des prénoms', 'Licence Ouverte 2.0 (Etalab)', 'https://www.insee.fr/fr/statistiques/8205621'], ['CH', 'OFS — Prénoms de la population selon l’année de naissance (STATPOP)', 'OFS : libre, source obligatoire', 'https://www.bfs.admin.ch/asset/fr/36752511'], ['QC', 'Retraite Québec — Banque de prénoms', 'CC BY 4.0', 'https://www.donneesquebec.ca/recherche/dataset/banque-de-prenoms-filles'], ['US', 'Social Security Administration — Popular Baby Names (national data)', 'Domaine public', 'https://www.ssa.gov/oact/babynames/limits.html']];
         const rows = d.sources?.length ? d.sources.map(s => `<tr><td><b>${esc(s.nom)}</b><br><small>${esc(s.quoi)}</small></td><td>${esc(s.annees)}</td><td>${esc(s.licence)}<br><small>${esc(s.mention)}</small></td><td>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">↗</a>` : ''}</td></tr>`).join('')
             : KNOWN.map(k => `<tr><td><b>${esc(k[1])}</b></td><td>—</td><td>${esc(k[2])}</td><td><a href="${esc(k[3])}" target="_blank" rel="noopener noreferrer">↗</a></td></tr>`).join('');
         const body = `<p>${esc(i18n('Le pack réunit les fichiers publics des prénoms donnés chaque année. Les chiffres viennent tels quels de ces fichiers ; l’app calcule seulement la part (1 sur N) et le rang.'))}</p>
@@ -140,7 +140,7 @@
     function draw() {
         const countries = st.installed ? [...new Set((st.zones || []).map(z => z.country))] : [];
         const range = c => { const z = (st.zones || []).find(x => x.country === c && x.code === ''); return z ? `${z.from}–${z.to}` : ''; };
-        const NAMES = {FR: i18n('France et départements'), CH: i18n('Suisse'), QC: i18n('Québec')};
+        const NAMES = {FR: i18n('France et départements'), CH: i18n('Suisse'), QC: i18n('Québec'), US: i18n('États-Unis')};
         const desc = st.installed ? `${countries.map(c => `${NAMES[c] || c} (${range(c)})`).join(' · ')} · ${fmtSize(st.size || 0)}${st.built ? ` · ${i18n('fabriqué le {d}', {d: st.built})}` : ''}${st.fixture ? ` · ${i18n('petit pack d’essai')}` : ''}`
             : i18n('France par département (Insee, 1900–2023), Suisse (OFS), Québec (Retraite Québec, 1980–2025). Un seul téléchargement, ensuite plus besoin d’Internet.');
         const s = settings();

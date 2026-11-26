@@ -3355,6 +3355,8 @@
  "{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas.": "{what} jeszcze nierozwiązane (karta 💬 Korekta). Nie drukują się.",
  "{what} posée": "{what} założone",
  "{what} pour ce jeu · sans les vivants ni les fiches confidentielles.": "{what} do tej gry · bez żyjących i kart poufnych.",
+ "{what} pour elle": "{what} dla niej",
+ "{what} pour lui": "{what} dla niego",
  "{what} remis comme au départ": "{what} – przywrócono ustawienia początkowe",
  "{what} répond {code}.": "{what} odpowiada {code}.",
  "{what} reprises de l’autre généalogie.": "{what} przejęto z drugiej genealogii.",
@@ -10082,6 +10084,12 @@
  "Acte introuvable.": "Nie znaleziono aktu.",
  "acte le plus récent : {y} ; délai {d} ans": "najnowszy akt: {y}; termin {d} lat",
  "acte le plus récent : {y} ; délai {d} ans ({k})": "najnowszy akt: {y}; termin {d} lat ({k})",
+ "acte manquant": {
+  "one": "brakujący akt",
+  "few": "brakujące akty",
+  "many": "brakujących aktów",
+  "other": "brakujące akty"
+ },
  "acte n° {n}": "akt nr {n}",
  "Acte n° 12, vue 34 ; rien entre 1823 et 1825 ; registre abîmé…": "Akt nr 12, skan 34; nic między 1823 a 1825; księga zniszczona…",
  "Acte notarié": "Akt notarialny",
@@ -13963,6 +13971,12 @@
  },
  "Autre ordinateur": "Inny komputer",
  "Autre personne": "Inna osoba",
+ "autre piste": {
+  "one": "inny trop",
+  "few": "inne tropy",
+  "many": "innych tropów",
+  "other": "inne tropy"
+ },
  "Autre prénom": "Inne imię",
  "autre prise": "inne ujęcie",
  "Autre produit": "Inny produkt",
@@ -19147,6 +19161,12 @@
   "many": "rzeczy zmienionych po obu stronach",
   "other": "rzeczy zmienione po obu stronach"
  },
+ "chose qui manque": {
+  "one": "brakująca rzecz",
+  "few": "brakujące rzeczy",
+  "many": "brakujących rzeczy",
+  "other": "brakujące rzeczy"
+ },
  "chose reportée": {
   "one": "odłożona sprawa",
   "few": "odłożone sprawy",
@@ -22950,6 +22970,12 @@
  "Décès par mois": "Zgony według miesiąca",
  "Décès par mois, par siècle": "Zgony według miesięcy i wieków",
  "Décès par siècle": "Zgony według stulecia",
+ "décès possible": {
+  "one": "możliwy zgon",
+  "few": "możliwe zgony",
+  "many": "możliwych zgonów",
+  "other": "możliwe zgony"
+ },
  "Décès renseigné": "Zgon wpisany",
  "Décès sans année ou sans lieu, comptés à part : {n}": "Zgony bez roku lub bez miejsca, liczone osobno: {n}",
  "Décès sans source": "Zgon bez źródła",
@@ -27839,6 +27865,12 @@
  "exactement 1 enfant": "dokładnie 1 dziecko",
  "Exactement le même fichier.": "Dokładnie ten sam plik.",
  "Exagération du relief": "Przewyższenie rzeźby",
+ "exception": {
+  "one": "wyjątek",
+  "few": "wyjątki",
+  "many": "wyjątków",
+  "other": "wyjątki"
+ },
  "Exception de fiche enregistrée.": "Zapisano wyjątek karty.",
  "Exception de filtres enregistrée.": "Zapisano wyjątek filtrów.",
  "Exception de filtres supprimée.": "Usunięto wyjątek filtrów.",
@@ -50868,6 +50900,12 @@
  "Piste de la voix": "Ścieżka głosu",
  "Piste de texte minutée (sous-titres)": "Ścieżka tekstu z czasem (napisy)",
  "Piste du mur faite": "Trop martwego punktu zrobiony",
+ "piste écartée": {
+  "one": "odrzucony trop",
+  "few": "odrzucone tropy",
+  "many": "odrzuconych tropów",
+  "other": "odrzucone tropy"
+ },
  "Piste écartée.": "Trop odrzucony.",
  "Piste explorée": "Trop zbadany",
  "PISTE EXPLORÉE": "ZBADANY TROP",
@@ -53566,6 +53604,7 @@
  "Ranger les sections — fiche de {name}": "Ułóż sekcje — karta: {name}",
  "Ranger les sections…": "Ułóż sekcje…",
  "Ranger par": "Grupuj według",
+ "Ranger par personne": "Grupuj według osoby",
  "Ranger par sorte": "Porządkuj według rodzaju",
  "Ranger par…": "Uporządkuj według…",
  "Ranger ses widgets": "Uporządkuj widżety",

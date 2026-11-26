@@ -108,6 +108,46 @@ function router_serve_media(string $relative, bool $noStore = false): bool
     return true;
 }
 
+/** Un .js / .css de l'app avec ses validateurs (ETag, Last-Modified) ; false : rien trouvé, PHP le sert (ou répond 404) comme avant. */
+function router_serve_static(string $path, string $ext): bool
+{
+    $root = realpath(__DIR__);
+    $file = $root !== false ? realpath($root . $path) : false;
+    if ($root === false || $file === false || !is_file($file) || !str_starts_with($file, $root . DIRECTORY_SEPARATOR)) {
+        return false;
+    }
+    $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+    if ($method !== 'GET' && $method !== 'HEAD') {
+        return false;
+    }
+    clearstatcache(true, $file);
+    $size = (int) filesize($file);
+    $mtime = (int) filemtime($file);
+    $etag = '"' . dechex($mtime) . '-' . dechex($size) . '"';
+    header_remove('X-Powered-By');
+    header('Content-Type: ' . ($ext === 'css' ? 'text/css; charset=UTF-8' : 'text/javascript; charset=UTF-8'));
+    header('X-Content-Type-Options: nosniff');
+    header('Cache-Control: no-cache');
+    header('ETag: ' . $etag);
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $mtime) . ' GMT');
+    $inm = trim((string) ($_SERVER['HTTP_IF_NONE_MATCH'] ?? ''));
+    $ims = (string) ($_SERVER['HTTP_IF_MODIFIED_SINCE'] ?? '');
+    if (($inm !== '' && in_array($etag, array_map('trim', explode(',', $inm)), true))
+        || ($inm === '' && $ims !== '' && ($t = strtotime($ims)) !== false && $t >= $mtime)) {
+        http_response_code(304);
+        return true;
+    }
+    header('Content-Length: ' . $size);
+    if ($method === 'HEAD') {
+        return true;
+    }
+    while (ob_get_level() > 0) {
+        ob_end_clean();
+    }
+    readfile($file);
+    return true;
+}
+
 $path = rawurldecode((string) parse_url((string) ($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH));
 if ($path === '' || str_contains($path, "\0") || str_contains($path, '..') || str_contains($path, '\\')) {
     return router_deny(400);
@@ -190,6 +230,12 @@ if ($ext === 'php') {
 $anywhere = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'avif', 'ico', 'woff', 'woff2', 'ttf', 'otf'];
 $assetsOnly = ['json', 'geojson', 'wasm', 'map', 'mjs', 'webmanifest', 'bin', 'gz']; // bin : carte terre / mer des trajets en bateau ; gz : fonds de carte des communes (assets/data/geo)
 if (in_array($ext, $anywhere, true) || (in_array($ext, $assetsOnly, true) && $first === 'assets')) {
+    // ⏱ scripts et feuilles de style (≈ 35 Mo à chaque ouverture) : servis ici avec ETag / Last-Modified, pour que le navigateur les
+    // garde et ne les redemande que pour vérifier (304), avec le code JavaScript déjà compilé (docs/perf-chargement.md). Revérifiés à
+    // chaque ouverture (no-cache) : un fichier modifié sans changer de ?v= est quand même repris. Le reste : PHP comme avant.
+    if (($ext === 'js' || $ext === 'css') && router_serve_static($path, $ext)) {
+        return true;
+    }
     return false; // fichier statique servi par PHP (404 automatique s'il n'existe pas)
 }
 return router_deny(404);

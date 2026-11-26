@@ -347,8 +347,9 @@
     }
     /** un champ d'un écran le dit lui-même : son contexte (une fiche, une enquête…) */
     function attach(el, {context = null} = {}) { if (!el) return; if (context) el.dataset.insertContext = JSON.stringify(context); el.dataset.insertInfo = '1'; }
-    /** 📎 depuis une liste (☑ lignes choisies, ou le 📎 d'une ligne) : un bloc déjà prêt {text, html, items}. Où le poser :
-     *  le dernier texte où l'on écrivait (s'il est encore à l'écran), « Mettre dans… » (une note, une enquête, l'Atelier…), ou copié. */
+    /** 📎 depuis une liste (☑ lignes choisies, ou le 📎 d'une ligne) : un bloc déjà prêt {text, html, items, sheet?}. Où le poser :
+     *  le dernier texte où l'on écrivait (s'il est encore à l'écran), « Mettre dans… » (une note, une enquête, l'Atelier…),
+     *  📒 une fiche (b.sheet : un nouveau bloc « Données » figé, heritage-fiches.js), ou copié. */
     function insertBlock(b, {anchor = null} = {}) {
         if (!live()) { A().toast?.(kiosk() ? T('Mode consultation : rien ne peut être écrit.') : T('« Insérer une info » est éteint (Réglages → 🧺 Panier et connexions).')); return null; }
         const el = lastField?.isConnected && isField(lastField) && lastField.getClientRects().length ? lastField : null;
@@ -356,6 +357,7 @@
         const copy = async () => { try { await navigator.clipboard.writeText(b.text); A().toast?.(T('📎 Copié, avec les sources : colle-le où tu veux.')); } catch (_) { A().toast?.(T('Copie impossible.'), 'error'); } };
         const menu = [el ? {icon: '📎', label: T('À l’endroit du curseur (le dernier texte ouvert)'), run: () => here(el)} : null,
             CX().putInto ? {icon: '📍', label: T('Dans une note, une enquête, l’Atelier…'), run: () => CX().putInto(b.items || [], {anchor})} : null,
+            b.sheet && ext.fiches?.addDataSnapshot ? {icon: '📒', label: T('Dans une fiche → nouveau bloc Données (figé)'), run: () => ext.fiches.addDataSnapshot(b.sheet, {anchor})} : null, // heritage-fiches.js
             {icon: '⧉', label: T('Copier le texte (avec les sources)'), run: copy}].filter(Boolean);
         if (!UI().menuAt) return copy();
         return UI().menuAt(anchor || document.body, menu, {title: b.items?.length === 1 && b.items[0].kind !== 'set' ? T('Insérer…') : T('Insérer un bloc ({t})', {t: b.title || ''})});

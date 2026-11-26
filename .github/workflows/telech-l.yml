@@ -1,0 +1,91 @@
+# 🌐 Les équivalents d'ailleurs (lot L) : refaire assets/data/tl-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🌊 tl-crues : les grandes crues d'Europe depuis 1870 (HANZE, Zenodo, CC BY 4.0 — licence de la notice relue).
+#  - 🗳 tl-elus : les membres du Congrès des États-Unis (bioguide via unitedstates/congress-legislators, CC0 — README relu).
+#  - 💵 tl-prix : l'indice des prix des États-Unis depuis 1913 (BLS CPI-U via datasets/cpi-us, ODC-PDDL — datapackage relu).
+#  - 🎖 ✝️ 🏚 📏 tl-memoriaux, tl-cimetieres, tl-villages, tl-mesures : Wikidata (CC0 — Wikidata:Copyright relue).
+#  - seulement ici (sites injoignables depuis l'atelier ; chaque partie relit sa licence et s'arrête si elle n'est plus ouverte) :
+#    ⛏ tl-mines (USGS MRDS, domaine public), 🗺 tl-lieux_gb (OS Open Names, OGL v3), ⛓ tl-bagnards (State Library of Queensland, CC BY).
+# Les prénoms des États-Unis (SSA, domaine public) entrent dans le pack « Prénoms d'ici et d'ailleurs » : atelier « Données des prénoms ».
+# Le service de requêtes de Wikidata est lent et limité : une requête à la fois, une minute entre deux, Retry-After respecté
+# (scripts/telech-l/wm.py). Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Les équivalents d'ailleurs (lot L) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Les équivalents d'ailleurs (lot L)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, fichiers (crues, élus, prix), wikidata (monuments aux morts, cimetières, villages, mesures), ou une partie : mines, lieux_gb, bagnards'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-l.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-l-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TL_RAW=$RUNNER_TEMP/tl-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/tl-cache
+          key: telech-l-${{ github.run_id }}
+          restore-keys: telech-l-
+      - name: "🌊 🗳 💵 Crues d’Europe (HANZE), Congrès et prix des États-Unis"
+        if: env.QUOI == 'tout' || env.QUOI == 'fichiers'
+        run: |
+          python3 -I scripts/telech-l/build_crues.py assets/data || echo "raté : crues"
+          python3 -I scripts/telech-l/build_elus.py assets/data || echo "raté : élus"
+          python3 -I scripts/telech-l/build_prix.py assets/data || echo "raté : prix"
+      - name: "🎖 ✝️ 🏚 📏 Wikidata (monuments aux morts, cimetières, villages désertés, mesures)"
+        if: env.QUOI == 'tout' || env.QUOI == 'wikidata'
+        timeout-minutes: 180
+        run: python3 -I scripts/telech-l/build_wikidata.py assets/data memoriaux cimetieres villages mesures
+      - name: "⛏ 🗺 ⛓ Mines (USGS), lieux-dits de Grande-Bretagne (OS), bagnards (Queensland)"
+        if: env.QUOI == 'tout' || env.QUOI == 'mines' || env.QUOI == 'lieux_gb' || env.QUOI == 'bagnards'
+        timeout-minutes: 120
+        run: |
+          case "$QUOI" in tout) parts="mines lieux_gb bagnards";; *) parts="$QUOI";; esac
+          python3 -I scripts/telech-l/build_github_only.py assets/data $parts
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/tl-cache
+          key: telech-l-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/tl-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Les équivalents d’ailleurs (lot L) : données refaites sur GitHub (HANZE CC BY 4.0, Wikidata CC0, USGS, OS OGL…)"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done

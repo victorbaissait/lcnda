@@ -3263,6 +3263,8 @@
  "{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas.": "{what} not resolved yet (💬 Review tab). They don’t print.",
  "{what} posée": "{what} fitted",
  "{what} pour ce jeu · sans les vivants ni les fiches confidentielles.": "{what} for this game · without living people or confidential records.",
+ "{what} pour elle": "{what} for her",
+ "{what} pour lui": "{what} for him",
  "{what} remis comme au départ": "{what} reset to default",
  "{what} répond {code}.": "{what} answers {code}.",
  "{what} reprises de l’autre généalogie.": "{what} taken from the other family tree.",
@@ -9968,6 +9970,10 @@
  "Acte introuvable.": "Record not found.",
  "acte le plus récent : {y} ; délai {d} ans": "most recent record: {y}; waiting period {d} years",
  "acte le plus récent : {y} ; délai {d} ans ({k})": "most recent record: {y}; waiting period {d} years ({k})",
+ "acte manquant": {
+  "one": "missing record",
+  "other": "missing records"
+ },
  "acte n° {n}": "record no. {n}",
  "Acte n° 12, vue 34 ; rien entre 1823 et 1825 ; registre abîmé…": "Record no. 12, image 34; nothing between 1823 and 1825; damaged register…",
  "Acte notarié": "Notarial deed",
@@ -13763,6 +13769,10 @@
  },
  "Autre ordinateur": "Other computer",
  "Autre personne": "Other person",
+ "autre piste": {
+  "one": "other lead",
+  "other": "other leads"
+ },
  "Autre prénom": "Other first name",
  "autre prise": "another shot",
  "Autre produit": "Other product",
@@ -18843,6 +18853,10 @@
   "one": "thing changed on both sides",
   "other": "things changed on both sides"
  },
+ "chose qui manque": {
+  "one": "missing thing",
+  "other": "missing things"
+ },
  "chose reportée": {
   "one": "thing postponed",
   "other": "things postponed"
@@ -22548,6 +22562,10 @@
  "Décès par mois": "Deaths by month",
  "Décès par mois, par siècle": "Deaths by month, by century",
  "Décès par siècle": "Deaths by century",
+ "décès possible": {
+  "one": "possible death",
+  "other": "possible deaths"
+ },
  "Décès renseigné": "Death filled in",
  "Décès sans année ou sans lieu, comptés à part : {n}": "Deaths with no year or no place, counted separately: {n}",
  "Décès sans source": "Death without a source",
@@ -27279,6 +27297,10 @@
  "exactement 1 enfant": "exactly 1 child",
  "Exactement le même fichier.": "Exactly the same file.",
  "Exagération du relief": "Relief exaggeration",
+ "exception": {
+  "one": "exception",
+  "other": "exceptions"
+ },
  "Exception de fiche enregistrée.": "Record exception saved.",
  "Exception de filtres enregistrée.": "Filter exception saved.",
  "Exception de filtres supprimée.": "Filter exception deleted.",
@@ -49696,6 +49718,10 @@
  "Piste de la voix": "Voice track",
  "Piste de texte minutée (sous-titres)": "Timed text track (subtitles)",
  "Piste du mur faite": "Brick wall lead done",
+ "piste écartée": {
+  "one": "dismissed lead",
+  "other": "dismissed leads"
+ },
  "Piste écartée.": "Lead discarded.",
  "Piste explorée": "Lead explored",
  "PISTE EXPLORÉE": "LEAD EXPLORED",
@@ -52332,6 +52358,7 @@
  "Ranger les sections — fiche de {name}": "Arrange the sections — {name}’s record",
  "Ranger les sections…": "Arrange the sections…",
  "Ranger par": "Group by",
+ "Ranger par personne": "Group by person",
  "Ranger par sorte": "Sort by kind",
  "Ranger par…": "Sort by…",
  "Ranger ses widgets": "Arrange its widgets",

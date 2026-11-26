@@ -25,7 +25,7 @@ const PP_DL_BASE = 'https://github.com/victorbaissait/lcnda/releases/download/pr
 const PP_DL_STEP = 16 * 1024 * 1024;
 const PP_PACK_MAX = 1024 * 1024 * 1024;
 const PP_RAW_MAX = 2 * 1024 * 1024 * 1024;
-const PP_COUNTRY = ['FR' => 'France', 'CH' => 'Suisse', 'QC' => 'Québec'];
+const PP_COUNTRY = ['FR' => 'France', 'CH' => 'Suisse', 'QC' => 'Québec', 'US' => 'États-Unis']; // US : lot L (SSA, domaine public), si le pack les contient
 /** les pays sans fichier dans le pack, et pourquoi (dit dans « À propos des données ») */
 const PP_MISSING = [
     ['pays' => 'Belgique', 'why' => 'Statbel publie les prénoms des nouveau-nés, mais son site refuse les téléchargements faits par un programme : le fichier n’a pas pu être vérifié, il n’est donc pas dans le pack.', 'url' => 'https://statbel.fgov.be/fr/themes/population/noms-et-prenoms'],
@@ -283,6 +283,7 @@ function pp_place_zone(array $pl): ?array
     $txt = pp_fold(implode(' ', [(string) ($pl['name'] ?? ''), (string) ($pl['county'] ?? ''), (string) ($pl['state'] ?? '')]));
     if (in_array($c, ['suisse', 'switzerland', 'schweiz', 'svizzera', 'ch', 'confederation suisse'], true)) { return ['CH', '']; }
     if ($c === 'quebec' || (in_array($c, ['canada', 'ca', 'bas canada', 'nouvelle france'], true) && preg_match('/\bquebec\b/', $txt)) || ($c === '' && preg_match('/\bquebec\b/', pp_fold((string) ($pl['state'] ?? ''))))) { return ['QC', '']; }
+    if (in_array($c, ['etats unis', 'etats unis d amerique', 'usa', 'us', 'united states', 'united states of america'], true)) { return ['US', '']; }
     if ($c !== '' && !in_array($c, ['france', 'fr', 'republique francaise'], true)) { return null; }
     if (!function_exists('world_place_dept')) { require_once __DIR__ . '/monde_autour.php'; }
     $d = world_place_dept($pl);
@@ -309,7 +310,7 @@ function pp_zone_row(PDO $e, string $cc, string $code): ?array
 /** « dans le Cantal », « dans l'Ain », « en France », « au Québec »… */
 function pp_where(array $z): string
 {
-    if ($z['code'] === '') { return ['FR' => 'en France', 'CH' => 'en Suisse', 'QC' => 'au Québec'][$z['country']] ?? ('en ' . $z['name']); }
+    if ($z['code'] === '') { return ['FR' => 'en France', 'CH' => 'en Suisse', 'QC' => 'au Québec', 'US' => 'aux États-Unis'][$z['country']] ?? ('en ' . $z['name']); }
     $n = $z['name'];
     $special = ['Paris' => 'à Paris', 'Corse' => 'en Corse', 'Guadeloupe' => 'en Guadeloupe', 'Martinique' => 'en Martinique', 'Guyane' => 'en Guyane', 'La Réunion' => 'à La Réunion', 'Mayotte' => 'à Mayotte'];
     if (isset($special[$n])) { return $special[$n]; }
