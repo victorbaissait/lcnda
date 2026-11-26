@@ -1,0 +1,94 @@
+# 🌌 Ciel, climat et mémoire (lot E) : refaire assets/data/te-*.json.gz, puis les enregistrer dans la branche lancée.
+#  - 🦴 te-fossiles : The Paleobiology Database (CC BY 4.0 ; le script relit la licence dans la réponse de l'API) — paleobiodb.org
+#    n'est pas joignable depuis l'atelier de développement : la fabrication se fait ici.
+#  - 🌳 te-libertes : Wikidata (CC0) + OpenStreetMap (ODbL, Overpass) — overpass-api.de non plus.
+#  - 🌌 te-ciel (Hotham 2026, Zenodo, CC BY 4.0), 🌾 te-secheresses (OWDA, NOAA/NCEI), ❄️ te-hivers (Luterbacher, NOAA/NCEI),
+#    🏛 te-inscriptions (EDH, Zenodo, CC BY-SA 4.0), ⚔️ te-religion (Wikidata CC0) : déjà fabriqués dans l'atelier, refaits ici
+#    à la demande (les scripts relisent chaque licence et s'arrêtent si elle a changé).
+# Puis le sommaire assets/data/manifest.json (Réglages → 🗂 Données : « ↻ Vérifier » voit la nouvelle version).
+#
+# Lancer : onglet « Actions » → « Ciel, climat et mémoire (lot E) » → « Run workflow » (choisir ce qu'on refait).
+
+name: Ciel, climat et mémoire (lot E)
+
+on:
+  workflow_dispatch:
+    inputs:
+      quoi:
+        description: 'tout, fossiles, libertes, ciel, secheresses, hivers, inscriptions ou religion'
+        required: false
+        default: 'tout'
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/telech-e.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telech-e-donnees
+  cancel-in-progress: false
+
+jobs:
+  donnees:
+    # le « push » sert seulement à faire connaître ce travail à GitHub : il ne fabrique rien
+    if: github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      QUOI: ${{ github.event.inputs.quoi || 'tout' }}
+    steps:
+      - name: Dossier de travail
+        run: echo "TE_RAW=$RUNNER_TEMP/te-cache" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Préférer IPv4 (pas d’IPv6 sur la machine GitHub, « Network is unreachable »)"
+        run: echo 'precedence ::ffff:0:0/96 100' | sudo tee -a /etc/gai.conf
+      - name: Reprendre les réponses déjà téléchargées
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/te-cache
+          key: telech-e-${{ github.run_id }}
+          restore-keys: telech-e-
+      - name: "🦴 Fossiles (Paleobiology Database)"
+        if: env.QUOI == 'tout' || env.QUOI == 'fossiles'
+        run: python3 -I scripts/telech-e/build_fossiles.py assets/data
+      - name: "🌳 Arbres de la Liberté (Wikidata + OpenStreetMap)"
+        if: env.QUOI == 'tout' || env.QUOI == 'libertes'
+        run: python3 -I scripts/telech-e/build_libertes.py assets/data --osm
+      - name: "🌌 Le ciel la nuit"
+        if: env.QUOI == 'tout' || env.QUOI == 'ciel'
+        run: python3 -I scripts/telech-e/build_ciel.py assets/data
+      - name: "🌾 Sécheresses (Old World Drought Atlas)"
+        if: env.QUOI == 'tout' || env.QUOI == 'secheresses'
+        run: python3 -I scripts/telech-e/build_secheresses.py assets/data
+      - name: "❄️ Hivers et étés (Luterbacher)"
+        if: env.QUOI == 'tout' || env.QUOI == 'hivers'
+        run: python3 -I scripts/telech-e/build_hivers.py assets/data
+      - name: "🏛 Inscriptions romaines (EDH)"
+        if: env.QUOI == 'tout' || env.QUOI == 'inscriptions'
+        run: python3 -I scripts/telech-e/build_inscriptions.py assets/data
+      - name: "⚔️ Guerres de Religion, Camisards"
+        if: env.QUOI == 'tout' || env.QUOI == 'religion'
+        run: python3 -I scripts/telech-e/build_religion.py assets/data
+      - name: Garder les réponses pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/te-cache
+          key: telech-e-${{ github.run_id }}
+      - name: Sommaire des données
+        run: node scripts/donnees-manifest.js
+      - name: Enregistrer dans la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/te-*.json.gz assets/data/manifest.json
+          git diff --cached --quiet && { echo "rien de neuf"; exit 0; }
+          git commit -m "Ciel, climat et mémoire (lot E) : données refaites sur GitHub (PBDB CC BY 4.0, Wikidata CC0, OSM ODbL…)"
+          for i in 1 2 3; do git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break; sleep 10; done

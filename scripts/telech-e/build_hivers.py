@@ -4,7 +4,7 @@
 Source : Luterbacher, J., et al. (2006), European Seasonal Temperature Reconstructions, IGBP PAGES/World Data Center for
 Paleoclimatology Data Contribution Series # 2006-060, NOAA/NCDC Paleoclimatology Program (NCEI) — reconstructions de
 Luterbacher et al. 2004 (Science 303, 1499-1503) pour l'hiver (déc.-janv.-févr.) et l'été (juin-juil.-août), carreaux de 0,5°,
-1500-1900 reconstruits, 1901-2002 observés (Mitchell et Jones 2005), 2003-2004 (Hansen et al. 2001).
+1500-1900 reconstruits, 1901-2002 observés (Mitchell et Jones 2005) ; les fichiers par année s'arrêtent à 2002.
 https://www.ncei.noaa.gov/pub/data/paleo/historical/europe-seasonal.txt
 Conditions (NCEI/WDS Paleoclimatology, readme lu le 2026-11-26) : « Users may access and download these data free of charge;
 please cite the original references provided in the data documentation for each data set. » — le script relit ce texte et
@@ -12,7 +12,7 @@ s'arrête s'il a changé.
 
 L'idée demandée citait l'indice des hivers de van Engelen et al. (Pays-Bas, 800-1998) : il n'est PAS sur le dépôt NOAA/NCEI
 (recherche du 2026-11-26) ; la série de Luterbacher, au même endroit et aux mêmes conditions, donne en plus la valeur au carreau
-du village (0,5°). Gardé : l'écart à la moyenne 1901-2000 du carreau, en dixièmes de degré, hiver et été, 1500-2004, pour la
+du village (0,5°). Gardé : l'écart à la moyenne 1901-2000 du carreau, en dixièmes de degré, hiver et été, 1500-2002, pour la
 France, la Belgique, le Luxembourg et la Suisse (wm.AREA).
 
 Lancer : python3 -I scripts/telech-e/build_hivers.py [dossier de sortie]   (TE_RAW = cache des fichiers)
@@ -26,7 +26,7 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'assets', 'data')
 BASE = 'https://www.ncei.noaa.gov/pub/data/paleo/historical'
 README = 'https://www.ncei.noaa.gov/pub/data/paleo/aar/readme-ncei-wds-paleoclimatology.txt'
 QUOTE = 'Users may access and download these data free of charge; please cite the original references provided in the data documentation for each data set.'
-Y0, Y1, NC, NR = 1500, 2004, 130, 70   # 25W..40E, 70N..35N, carreaux de 0,5° (centres 69,75N… et 24,75W…)
+Y0, Y1, NC, NR = 1500, 2002, 130, 70   # 25W..40E, 70N..35N, carreaux de 0,5° (centres 69,75N… et 24,75W…)
 
 
 def licence():
@@ -73,7 +73,7 @@ def main():
             'licence': 'libre et gratuit, à citer (NOAA/NCEI WDS Paleoclimatology)', 'licence_url': README, 'quote': QUOTE,
             'url': BASE + '/europe-seasonal.txt', 'doi': 'https://doi.org/10.1126/science.1093877', 'built': time.strftime('%Y-%m-%d'),
             'cite': 'Luterbacher, J., D. Dietrich, E. Xoplaki, M. Grosjean, H. Wanner (2004), European seasonal and annual temperature variability, trends and extremes since 1500, Science 303, 1499-1503.',
-            'what': 'Température de chaque hiver (déc.-févr.) et de chaque été (juin-août) de 1500 à 2004, carreaux de 0,5° (≈ 50 km) : écart à la moyenne 1901-2000 du carreau, en dixièmes de degré',
+            'what': 'Température de chaque hiver (déc.-févr.) et de chaque été (juin-août) de 1500 à 2002, carreaux de 0,5° (≈ 50 km) : écart à la moyenne 1901-2000 du carreau, en dixièmes de degré',
             'y0': Y0, 'y1': Y1, 'step': 0.5, 'area': list(wm.AREA),
             'fields': ['lat', 'lon', 'wi', 'wi_ref', 'su', 'su_ref'], 'rows': out}
     size = wm.write_gz(OUT, 'te-hivers.json.gz', meta)

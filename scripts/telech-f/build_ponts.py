@@ -97,7 +97,9 @@ def from_list():
             continue
         desc = ' '.join(wm.plain(x) for x in c if 'bgcolor' in x)
         com = next((wm.links(x)[0] for x in c if '{{Coord' in x or '{{coord' in x if wm.links(x)), '')
-        out.append({'wp': ln[0], 'n': wm.plain(name).split('  ')[0].strip(), 'from': yrs[0] if yrs else None, 'lat': la, 'lon': lo, 'seguin': 'Seguin' in row, 'commune_wp': com, 'destroyed': 'détruit' in row.lower()})
+        nm = wm.plain(name).split('  ')[0].strip()
+        dz = re.search(r'\s*détruit\s+en\s+(1\d{3}|20\d\d)', nm)
+        out.append({'wp': ln[0], 'n': nm[:dz.start()].strip() if dz else nm, 'to': int(dz.group(1)) if dz else None, 'from': yrs[0] if yrs else None, 'lat': la, 'lon': lo, 'seguin': 'Seguin' in row, 'commune_wp': com, 'destroyed': 'détruit' in row.lower()})
     return out
 
 
@@ -110,7 +112,7 @@ def main():
             if hit['from'] is None:
                 hit['from'] = L['from']
             continue
-        rows['wp:' + L['wp']] = {'q': '', 'n': L['n'], 'lat': L['lat'], 'lon': L['lon'], 'from': L['from'], 'to': None, 'river': '', 'by': 'Marc Seguin' if L['seguin'] else '', 'replaces': '',
+        rows['wp:' + L['wp']] = {'q': '', 'n': L['n'], 'lat': L['lat'], 'lon': L['lon'], 'from': L['from'], 'to': L['to'], 'river': '', 'by': 'Marc Seguin' if L['seguin'] else '', 'replaces': '',
                                  'insee': '', 'commune': L['commune_wp'], 'frwiki': L['wp'], 'seguin': L['seguin'], 'via': 'wp'}
     out = sorted(rows.values(), key=lambda r: (r['from'] is None, r['from'] or 0, r['n']))
     fields = ['q', 'n', 'lat', 'lon', 'from', 'to', 'river', 'by', 'replaces', 'insee', 'commune', 'frwiki', 'seguin', 'via']
