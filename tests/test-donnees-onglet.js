@@ -128,7 +128,8 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.evaluate(() => window.LCNDA_EXT.donneesOnglet.setHidden('ciel', false)); await sleep(300); assert.ok((await sideThemes()).includes('ciel'));
             // la fenêtre Réordonner
             await p.evaluate(() => document.querySelectorAll('.toast').forEach(x => x.remove())); await p.click('[data-dno-reorder]'); await p.waitForSelector('.dno-reorder[open]');
-            for (let i = 0; i < 2; i++) { await p.focus('.dno-reorder [data-dno-row="seismes"] .dnd-grip'); await p.keyboard.press('Alt+ArrowDown'); await sleep(900); } // ⠿ au clavier (heritage-dnd.js : les flèches ↑ ↓ cachées à la souris)
+            for (let i = 0; i < 2; i++) { await p.waitForSelector('.dno-reorder [data-dno-row="seismes"][data-ord-row] .dnd-grip[data-grip-done]'); await sleep(200); await p.focus('.dno-reorder [data-dno-row="seismes"] .dnd-grip'); await p.keyboard.press('Alt+ArrowDown');
+                await p.waitForFunction(n => [...document.querySelectorAll('.dno-reorder [data-dno-row]')].findIndex(r => r.dataset.dnoRow === 'seismes') === n, i + 1, {timeout: 8000}); } // ⠿ au clavier (heritage-dnd.js : les flèches ↑ ↓ cachées à la souris)
             assert.deepStrictEqual(await p.$$eval('.dno-reorder [data-dno-row]', a => a.slice(0, 3).map(r => r.dataset.dnoRow)), [DEF[1], DEF[2], 'seismes']);
             await p.uncheck('.dno-reorder [data-dno-vis="images"]');
             await p.click('.dno-reorder [data-save]'); await sleep(400);

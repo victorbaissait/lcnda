@@ -3,31 +3,68 @@
 # .github/workflows/telech-a-osm.yml (jamais sur l'ordinateur de l'utilisateur ni dans l'atelier de développement).
 #   osm-region.sh <région> <dossier de sortie> <dossier de tilemaker>
 # Région : une région d'un extrait de Geofabrik, cherchée par son identifiant dans le sommaire officiel
-# https://download.geofabrik.de/index-v1.json (ex. « bretagne », « basse-normandie », « belgium », « luxembourg »).
+# https://download.geofabrik.de/index-v1.json (ex. « bretagne », « basse-normandie », « belgium », « luxembourg ») ;
+# si Geofabrik ne répond pas, le même extrait chez OpenStreetMap France (download.openstreetmap.fr/extracts, ODbL 1.0).
 # Données : © les contributeurs d'OpenStreetMap, ODbL 1.0 (https://www.openstreetmap.org/copyright) ; mer : polygones d'eau
 # d'osmdata.openstreetmap.de (tirés d'OpenStreetMap, ODbL). Tuiles : tilemaker, schéma OpenMapTiles (CC BY 4.0), zoom 0 à 14.
 set -euo pipefail
 region="$1"; out="$2"; tm="$3"
 [[ "$region" =~ ^[a-z][a-z0-9-]{1,40}$ ]] || { echo "région refusée : $region"; exit 2; }
 mkdir -p "$out" work
-[ -s work/index-v1.json ] || curl -fsSL --retry 4 -o work/index-v1.json https://download.geofabrik.de/index-v1.json
-url=$(python3 - "$region" <<'PY'
+UA='lcnda-osm-build/1.0 (GitHub Actions)'
+# -4 : pas d'IPv6 sur la machine GitHub ; quelques essais espacés, pas de boucle rapide
+petit() { curl -4 -fsSL --retry 3 --retry-delay 15 --retry-all-errors --connect-timeout 20 --max-time 120 -A "$UA" -o "$2" "$1"; }
+gros()  { curl -4 -fsSL --retry 3 --retry-delay 60 --retry-all-errors --connect-timeout 30 --speed-limit 51200 --speed-time 120 -A "$UA" -o "$2" "$1"; }
+# 1. Geofabrik (sommaire officiel) ; 2. sinon OpenStreetMap France (https://download.openstreetmap.fr/extracts/, mêmes données
+#    OSM, ODbL 1.0), quand Geofabrik refuse la connexion depuis les machines GitHub (vu en novembre 2026).
+url=""; label=""
+if [ -s work/index-v1.json ] || petit https://download.geofabrik.de/index-v1.json work/index-v1.json; then
+  trouve=$(python3 - "$region" <<'PY' || true
 import json, sys
 idx = json.load(open('work/index-v1.json'))
 for f in idx['features']:
     p = f['properties']
     if p.get('id') == sys.argv[1] and p.get('urls', {}).get('pbf'):
-        print(p['urls']['pbf']); break
+        print(p['urls']['pbf'], p.get('name', sys.argv[1])); break
 PY
-)
-[ -n "$url" ] || { echo "région inconnue chez Geofabrik : $region"; exit 3; }
-label=$(python3 -c "import json,sys; print(next(f['properties']['name'] for f in json.load(open('work/index-v1.json'))['features'] if f['properties'].get('id')==sys.argv[1]))" "$region")
-echo "→ $region ($label) : $url"
-curl -fsSL --retry 4 -o "work/$region.osm.pbf" "$url"
+  )
+  if [ -n "$trouve" ]; then url=${trouve%% *}; label=${trouve#* }; fi
+else
+  rm -f work/index-v1.json
+  echo "Geofabrik ne répond pas (sommaire index-v1.json) : on essaie OpenStreetMap France"
+fi
+# noms des anciennes régions françaises (ceux de Geofabrik), pour l'étiquette quand le sommaire manque
+declare -A NOMS=([alsace]=Alsace [aquitaine]=Aquitaine [auvergne]=Auvergne [basse-normandie]='Basse-Normandie' [bourgogne]=Bourgogne
+  [bretagne]=Bretagne [centre]=Centre [champagne-ardenne]='Champagne Ardenne' [corse]=Corse [franche-comte]='Franche Comte'
+  [haute-normandie]='Haute-Normandie' [ile-de-france]='Ile-de-France' [languedoc-roussillon]='Languedoc-Roussillon'
+  [limousin]=Limousin [lorraine]=Lorraine [midi-pyrenees]='Midi-Pyrenees' [nord-pas-de-calais]='Nord-Pas-de-Calais'
+  [pays-de-la-loire]='Pays de la Loire' [picardie]=Picardie [poitou-charentes]='Poitou-Charentes'
+  [provence-alpes-cote-d-azur]="Provence Alpes-Cote-d'Azur" [rhone-alpes]='Rhone-Alpes')
+[ -n "$label" ] || label=${NOMS[$region]:-$region}
+candidats=()
+[ -z "$url" ] || candidats+=("$url")
+u=${region//-/_}
+if [ -n "${NOMS[$region]:-}" ]; then candidats+=("https://download.openstreetmap.fr/extracts/europe/france/$u-latest.osm.pbf")
+else candidats+=("https://download.openstreetmap.fr/extracts/europe/$u-latest.osm.pbf"); fi
+ok=0
+for c in "${candidats[@]}"; do
+  echo "→ $region ($label) : $c"
+  rm -f "work/$region.osm.pbf" work/somme.md5
+  gros "$c" "work/$region.osm.pbf" || { echo "  téléchargement raté, source suivante"; continue; }
+  if petit "$c.md5" work/somme.md5 && grep -Eq '^[0-9a-f]{32}' work/somme.md5; then
+    [ "$(md5sum "work/$region.osm.pbf" | cut -d' ' -f1)" = "$(cut -c1-32 work/somme.md5)" ] \
+      || { echo "  somme MD5 fausse, source suivante"; continue; }
+    echo "  somme MD5 juste"
+  else
+    echo "  (pas de somme MD5 à cette adresse : fichier gardé tel quel)"
+  fi
+  ok=1; break
+done
+[ "$ok" = 1 ] || { echo "région introuvable ou injoignable (Geofabrik, OpenStreetMap France) : $region"; exit 3; }
 ls -l "work/$region.osm.pbf"
 # la mer (sinon les côtes restent sans eau)
 if [ ! -s coastline/water_polygons.shp ]; then
-  curl -fsSL --retry 4 -o work/water.zip https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip
+  gros https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip work/water.zip
   mkdir -p coastline && unzip -oj work/water.zip -d coastline >/dev/null && rm work/water.zip
 fi
 # la configuration OpenMapTiles de tilemaker, sans les fichiers Natural Earth (seulement la mer en plus d'OSM)

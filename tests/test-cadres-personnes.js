@@ -188,7 +188,7 @@ const setFrames = (p, on) => p.evaluate(on => { if (on === null) localStorage.re
                     assert.deepEqual(await cardNames(p), ['Rose DURAND'], 'les exceptions : un cadre aussi');
                     await p.click('#workspace [data-ctl-sort="all"]'); await settle(p);
                     await setFrames(p, false); await open();
-                    assert.equal(await p.$$eval('#workspace .ui-person-card', l => l.length), 0); assert.equal(await p.$$eval('#workspace .ctl-list > .ctl-row', l => l.length), 4);
+                    assert.equal(await p.$$eval('#workspace .ui-person-card', l => l.length), 0); assert.equal(await p.$$eval('#workspace .ctl-list > .ctl-row[data-ctl-i]', l => l.length), 4);
                     await setFrames(p, true);
                 }
             });
