@@ -143,6 +143,10 @@
         (card.querySelector('.vd-doubt') || card.querySelector('.vd-acts')).after(f);
         f.querySelector('input').focus();
     }
+    /* 👤 aller sur une fiche puis revenir : la même position dans l'écran. Retenue au clic ; au retour, remise et donnée à la mémoire
+     * de l'app (state.scrollPositions), qui la remet tant que l'écran se dessine */
+    let LEAVE = null;
+    document.addEventListener('click', e => { if (e.target.closest?.('[data-vd-page] [data-vd-fiche], [data-vd-page] [data-h-person], [data-vd-page] [data-open-person]')) { const ws = document.getElementById('workspace'); LEAVE = Math.max(ws?.scrollTop || 0, document.scrollingElement?.scrollTop || 0); } }, true);
     async function draw(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
         if (A().state?.maintenanceTab !== TAB[0] && token === undefined && !ws.querySelector('[data-vd-page]')) return;
@@ -168,6 +172,7 @@
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3>
                 <p>${esc(T('Source :'))} ${link(st.source?.url || 'https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/', T('Fichier des personnes décédées (INSEE), data.gouv.fr'))} — ${link(st.source?.licence_url || 'https://www.etalab.gouv.fr/licence-ouverte-open-licence/', st.source?.licence || 'Licence Ouverte 2.0 (Etalab)')}. ${esc(T('Chaque décès ajouté porte cette source et le numéro de l’acte ; « ↗ » ouvre la recherche de la personne dans matchID, le moteur libre du même fichier.'))}</p>
                 <p class="muted">${esc(T('Les avis de décès des journaux et des sites (Libra Memoria, Dans nos cœurs, Avis-de-deces…) ne sont pas des données ouvertes : l’app ne les lit pas. Elle propose seulement des liens de recherche dans « Où chercher » d’une personne.'))}</p></div></section>`;
+        if (token !== undefined && LEAVE != null) { const y = LEAVE, sp = A().state?.scrollPositions; LEAVE = null; if (sp) sp.maintenance = {...(sp.maintenance || {}), workspace: y}; ws.scrollTop = y; }
         if (!A().escapeHtml) return;
         A().bindTableLinks?.();
     }

@@ -2499,7 +2499,6 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         if(module!=='dashboard'||(state.dashboardBoard&&!currentCustomTab()))state.dashboardBoard='';
         if(module!=='listes')listController?.abort();
         state.module = module;
-        scrollRestoring={mod:module,until:Date.now()+15000,drawing:true}; // pendant que l'écran se dessine, la sauvegarde toutes les 500 ms n'écrase pas sa place gardée par le 0 de l'écran d'avant ; levé par restoreScrollPosition
         document.documentElement.setAttribute('data-page-ouverte',module); // 🧩 Fond des pages : « Sur quelles pages » (app-fond.js)
         const renderToken=++state.workspaceToken;
         persistUiState();
@@ -2651,7 +2650,6 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
 
     let scrollRestoring=null;
     function restoreScrollPosition() {
-        if(scrollRestoring?.drawing)scrollRestoring=null;
         const position=state.scrollPositions[state.module];if(!position)return;
         // une page qui se dessine en plusieurs fois (Réglages, aperçus) : on réessaie jusqu'à 6 s, tant qu'on n'a pas fait défiler soi-même
         const mod=state.module;let touched=false;const stop=()=>{touched=true;scrollRestoring=null;};

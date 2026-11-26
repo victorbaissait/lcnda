@@ -129,14 +129,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok(y0 > 50, 'la page a défilé : ' + y0);
             await p.evaluate(() => { const el = [...document.querySelectorAll('[data-vd-page] [data-vd-fiche]')]; const r = el.find(b => { const x = b.getBoundingClientRect(); return x.top > 0 && x.bottom < innerHeight; }) || el[el.length - 1]; r.click(); });
             await p.waitForFunction(() => window.LCNDA_APP.state.module === 'personnes' && document.querySelector('.person-page h2'), null, {timeout: 20000});
-            console.log('DBG1', await p.evaluate(() => JSON.stringify(window.LCNDA_APP.state.scrollPositions)));
-            await p.evaluate(() => { const ws = document.getElementById('workspace'); const d = Object.getOwnPropertyDescriptor(Element.prototype, 'scrollTop'); Object.defineProperty(ws, 'scrollTop', {get() { return d.get.call(this); }, set(v) { if (window.LCNDA_APP.state.module === 'maintenance') console.log('SETTOP', v, new Error().stack.split('\n').slice(2, 5).join(' | ')); d.set.call(this, v); }, configurable: true}); window.__ps = window.LCNDA_APP.state.scrollPositions; let v = window.__ps.maintenance; Object.defineProperty(window.__ps, 'maintenance', {get() { return v; }, set(x) { console.log('SETTOP-PS', JSON.stringify(x), new Error().stack.split('\n').slice(2, 6).join(' | ')); v = x; }, enumerable: true, configurable: true}); });
-            p.on('console', m => { if (/SETTOP/.test(m.text())) console.log(m.text().slice(0, 400)); });
             await p.goBack().catch(() => {});
             let back = await p.waitForFunction(() => document.querySelector('[data-vd-page]'), null, {timeout: 6000}).then(() => true).catch(() => false);
             if (!back) await openPage(); // revenir par le menu
             await p.waitForSelector('[data-vd-page] [data-vd-card]'); await sleep(500);
-            await sleep(2500); console.log('DBG2', back, await p.evaluate(() => JSON.stringify(window.LCNDA_APP.state.scrollPositions) + ' ' + document.getElementById('workspace').scrollTop));
+            await sleep(1500); // l'app remet la place pendant que l'écran se dessine : on regarde une fois posé
             const y1 = await p.evaluate(() => Math.max(document.scrollingElement.scrollTop, document.getElementById('workspace').scrollTop));
             assert.ok(Math.abs(y1 - y0) < 40, `même position : ${y0} → ${y1}`);
             void pid;
