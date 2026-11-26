@@ -84,6 +84,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         const cx = (op, body = {}) => post('cx_write', {op, ...body});
         const basketN = async () => (await api('cx_basket')).items.length;
         /** attendre qu'une fonction (async) de la page dise oui : relue toutes les 300 ms (waitForFunction n'attend pas une promesse) */
+        const pickDs = async (D, id) => { if (await p.$(`${D} [data-cx-dchange]`)) await p.click(`${D} [data-cx-dchange]`); await p.click(`${D} [data-cx-dpick] [data-ld-pick="${id}"]`); }; // 🧰 le choix commun d'une source (app-listes-themes.js : dataListPicker)
         const pollPage = async (fn, arg = null, o = {}) => { const end = Date.now() + (o.timeout || 15000); for (;;) { const v = await p.evaluate(fn, arg).catch(() => null); if (v) return v; if (Date.now() > end) throw new Error('délai dépassé : ' + String(fn).slice(0, 120)); await sleep(300); } };
         const go = (mod, set = {}) => p.evaluate(([m, s]) => { const A = window.LCNDA_APP; Object.assign(A.state, s); A.setModule(m); }, [mod, set]);
         const clickUndo = async () => { const b = p.locator('.toast button', {hasText: '↶'}).last(); await b.waitFor({timeout: 10000}); await b.click(); await sleep(400); };
@@ -260,7 +261,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.waitForSelector('[data-at-addmenu]', {timeout: 20000});
             await p.click('[data-at-addmenu]'); await p.click('[data-at-take]');
             await p.waitForSelector('.cx-take'); assert.match(await p.textContent('.cx-take h2'), /Naissance de Jean MAZAUD/);
-            await p.click('.cx-take [data-cx-tab="data"]'); await p.selectOption('.cx-take [data-cx-ds]', 'meteo_jour');
+            await p.click('.cx-take [data-cx-tab="data"]'); await pickDs('.cx-take', 'meteo_jour');
             await p.waitForSelector('.cx-take [name="cx_date"]'); assert.strictEqual(await p.inputValue('.cx-take [name="cx_date"]'), '1978-02-03');
             await p.click('.cx-take [data-cx-run]');
             await p.waitForSelector('.cx-take [data-cx-dres] li', {timeout: 20000});
@@ -274,7 +275,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('📚 … la météo d’une semaine (du 3 au 9 février 1978) mise dans l’Atelier comme UN tableau sourcé (avec sa demande)', async () => {
             await go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
             await p.evaluate(() => window.LCNDA_EXT.connexions.openTake());
-            await p.waitForSelector('.cx-take'); await p.click('.cx-take [data-cx-tab="data"]'); await p.selectOption('.cx-take [data-cx-ds]', 'meteo_jour');
+            await p.waitForSelector('.cx-take'); await p.click('.cx-take [data-cx-tab="data"]'); await pickDs('.cx-take', 'meteo_jour');
             await p.waitForSelector('.cx-take .pk[data-picker="place"] input:not([type=hidden])');
             await p.fill('.cx-take .pk[data-picker="place"] input:not([type=hidden])', 'Auch');
             await p.locator('.cx-take .pk-list [role="option"], .cx-take .pk-item', {hasText: 'Auch'}).first().click();
@@ -290,7 +291,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('📚 … la météo d’un jour pas encore dans les données (1er juin 2026) : rien d’inventé, la phrase dit de quand à quand c’est possible ici (1836 à 2025)', async () => {
             await go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: proj, node: 'all', sel: []}}); await p.waitForSelector('[data-at-addmenu]');
             await p.evaluate(() => window.LCNDA_EXT.connexions.openTake());
-            await p.waitForSelector('.cx-take'); await p.click('.cx-take [data-cx-tab="data"]'); await p.selectOption('.cx-take [data-cx-ds]', 'meteo_jour');
+            await p.waitForSelector('.cx-take'); await p.click('.cx-take [data-cx-tab="data"]'); await pickDs('.cx-take', 'meteo_jour');
             await p.waitForSelector('.cx-take .pk[data-picker="place"] input:not([type=hidden])');
             await p.fill('.cx-take .pk[data-picker="place"] input:not([type=hidden])', 'Auch');
             await p.locator('.cx-take .pk-list [role="option"], .cx-take .pk-item', {hasText: 'Auch'}).first().click();

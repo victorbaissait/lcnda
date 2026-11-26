@@ -623,6 +623,10 @@ tbody.ui-person-tb > tr.ui-person-tb-head .ui-person-card-head { padding-bottom:
 @media (max-width: 640px) {
     .ui-person-card { padding: 12px 14px 6px; }
     .ui-pc-row > .ui-pc-act { flex-basis: 100%; justify-content: flex-start; margin-left: 0; }
+    .ui-person-card .ui-row { grid-template-columns: 40px minmax(0, 1fr); padding: 10px 2px; }
+    .ui-person-card .ui-row > span:empty { display: none; }
+    .ui-person-card .ui-row-main > small, .ui-person-card .ui-row-name { white-space: normal; overflow-wrap: anywhere; }
+    .ui-person-card .ui-row > .ui-row-act { grid-column: 1 / -1; flex-wrap: wrap; justify-content: flex-start; }
 }
 @media print {
     .ui-person-card { box-shadow: none; border: 1px solid #999; break-inside: avoid-page; }

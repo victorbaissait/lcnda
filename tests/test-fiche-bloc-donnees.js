@@ -224,7 +224,7 @@ echo json_encode(['o' => array_diff_key($o, ['snap' => 1]), 'n' => count($o['sna
             const all = (await sheet(id)).blocks, nb = all.filter(x => x.type === 'data').at(-1);
             assert.strictEqual(nb.mode, 'frozen', JSON.stringify(all.map(x => [x.id, x.type, x.mode, x.list, x.snap?.rows?.length]))); assert.strictEqual(nb.list, 'test_batailles'); assert.strictEqual(nb.snap.rows.length, 2);
             assert.ok(nb.snap.rows.every(r => /^https:\/\//.test(r.u) && r.s), JSON.stringify(nb.snap.rows));
-            assert.ok(nb.snap.cols.some(c => c.l === 'Source'), 'la colonne Source du bloc prêt');
+            assert.ok(nb.snap.cols.some(c => c.l === 'Bataille') && !nb.snap.cols.some(c => c.l === 'Source'), 'les colonnes de la liste (la source est à part, sur chaque ligne)');
             await clickUndo();
             assert.strictEqual((await sheet(id)).blocks.filter(x => x.type === 'data').length, n0, '↶ Annuler : le bloc ajouté s’en va');
             await p.evaluate(() => window.LCNDA_EXT.listesChoix?.clear?.());

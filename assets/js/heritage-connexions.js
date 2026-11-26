@@ -724,7 +724,7 @@
         explain: items => { const m = items.filter(x => x.kind === 'media').length, p = items.filter(x => x.kind === 'person').length, o = items.length - m - p;
             return [m ? T('{n} comme pièces', {n: plural(m, T('média'), T('médias'))}) : '', p ? T('{n} comme personnes liées', {n: plural(p, T('fiche'))}) : '', o ? T('{n} sur une piste', {n: plural(o, T('chose'), T('choses'))}) : ''].filter(Boolean).join(', '); },
         receive: async (items, ctx) => {
-            const r = await post('inv_receive', {investigation_id: ctx.investigation_id, item_id: ctx.item_id || 0, mode: ctx.mode || 'one', items});
+            const r = await post('inv_receive', {investigation_id: ctx.investigation_id, item_id: ctx.item_id || 0, folder_id: ctx.folder_id || 0, mode: ctx.mode || 'one', items});
             reloadInv(ctx.investigation_id);
             return {message: T('🕵️ Rangé dans l’enquête « {t} » : {n}', {t: ctx.title || invTitle(), n: plural(items.length, T('chose'), T('choses'))}),
                 undo: async () => { await post('inv_receive_undo', r); if (ctx.created) await apiPost('delete_investigation', {id: ctx.investigation_id}); reloadInv(ctx.investigation_id); }};
@@ -1036,15 +1036,38 @@
         pisteChoice(st); // 📌 au niveau de l'enquête : « Rattacher à une piste »
         return st;
     }
-    /** dans le pied de Prendre depuis… ouvert sur une enquête : « Rattacher à une piste : [— aucune —] » (l'item_id de la destination) */
+    /** « Où ranger : » dans le pied de Prendre depuis… : une enquête (l'enquête entière, 📌 ses pistes, 📁 ses dossiers pour les médias),
+     *  un projet de l'Atelier (le projet, 📁 ses dossiers en arbre, l'élément choisi) ; ouvert depuis une sous-partie : elle est déjà choisie,
+     *  et le titre le dit (« Ajouter à 📁 Introduction (projet « … ») »). Le serveur vérifie que la sous-partie est bien de la même enquête / du même projet. */
     async function pisteChoice(st) {
-        if (st.target?.id !== 'investigation' || !st.ctx?.investigation_id || st.ctx.item_id) return;
-        let items = []; try { items = (await api('investigation', {id: st.ctx.investigation_id})).items || []; } catch (_) { return; }
-        const foot = st.dlg?.querySelector('.cx-cnt'); if (!foot || !items.length) return;
-        const base = {...st.ctx};
-        foot.insertAdjacentHTML('beforeend', `<label class="cx-pchoice">${esc(T('Rattacher à une piste :'))} <select data-cx-piste><option value="">${esc(T('— aucune —'))}</option>${items.map(it => `<option value="${Number(it.id)}">${esc(String(it.title || '').slice(0, 80))}</option>`).join('')}</select></label>`);
-        foot.querySelector('[data-cx-piste]').addEventListener('change', e => { const it = items.find(x => String(x.id) === e.target.value);
-            st.ctx = it ? {...base, item_id: Number(it.id), mode: 'one', label: T('Ici : la piste « {t} »', {t: it.title})} : {...base}; });
+        const tg = st.target?.id, base = {...(st.ctx || {})};
+        let opts = [];
+        try {
+            if (tg === 'investigation' && base.investigation_id) {
+                const d = await api('investigation', {id: base.investigation_id}), folders = d.folders || [];
+                const depth = f => { let n = 0, x = f; while (x?.parent_id && n < 9) { x = folders.find(y => Number(y.id) === Number(x.parent_id)); n++; } return n; };
+                const tree = (pid, out = []) => { folders.filter(f => Number(f.parent_id || 0) === pid).sort((x, y) => String(x.name).localeCompare(String(y.name), 'fr')).forEach(f => { out.push(f); tree(Number(f.id), out); }); return out; };
+                opts = [{v: 'all', l: `🕵️ ${T('l’enquête entière')}`, ctx: {item_id: 0, folder_id: 0}, pill: ['🕵️', T('l’enquête « {t} »', {t: d.investigation?.title || ''})]},
+                    ...(d.items || []).map(it => ({v: 'i' + it.id, l: `📌 ${String(it.title || '').slice(0, 70)}`, ctx: {item_id: Number(it.id), folder_id: 0, mode: 'one'}, pill: ['📌', T('la piste « {t} »', {t: it.title})]})),
+                    ...tree(0).map(f => ({v: 'f' + f.id, l: `${'\u2003'.repeat(depth(f))}📁 ${String(f.name).slice(0, 60)}`, ctx: {item_id: 0, folder_id: Number(f.id)}, pill: ['📁', T('{f} (enquête « {t} »)', {f: f.name, t: d.investigation?.title || ''})], media: true}))];
+            } else if (tg === 'atelier' && base.project) {
+                const d = await api('atelier_project', {id: base.project}), folders = d.folders || [];
+                const tree = (pid, dep = 0, out = []) => { folders.filter(f => Number(f.parent_id || 0) === pid).sort((x, y) => (x.position - y.position) || (x.id - y.id)).forEach(f => { out.push([f, dep]); tree(Number(f.id), dep + 1, out); }); return out; };
+                const pt = d.project?.title || base.projectTitle || '';
+                opts = [{v: 'p', l: `📚 ${T('le projet')}`, ctx: {folder: 0, item: 0}, pill: ['📚', T('le projet « {t} »', {t: pt})]},
+                    ...tree(0).map(([f, dep]) => ({v: 'f' + f.id, l: `${'\u2003'.repeat(dep)}📁 ${String(f.name).slice(0, 60)}`, ctx: {folder: Number(f.id), item: 0}, pill: ['📁', T('{f} (projet « {t} »)', {f: f.name, t: pt})]})),
+                    ...(base.item ? [{v: 'it' + base.item, l: `🗒 ${String(base.itemTitle || '').slice(0, 60)}`, ctx: {item: base.item, folder: base.folder || 0}, pill: ['🗒', T('l’élément « {t} »', {t: base.itemTitle || ''})]}] : [])];
+            }
+        } catch (_) { return; }
+        const foot = st.dlg?.querySelector('.cx-cnt'); if (!foot || opts.length < 2) return;
+        const pre = tg === 'investigation' ? (base.item_id ? 'i' + base.item_id : base.folder_id ? 'f' + base.folder_id : 'all') : (base.item ? 'it' + base.item : base.folder ? 'f' + base.folder : 'p');
+        foot.insertAdjacentHTML('beforeend', `<label class="cx-pchoice">${esc(T('Où ranger :'))} <select data-cx-piste data-cx-where>${opts.map(o => `<option value="${esc(o.v)}" ${o.v === pre ? 'selected' : ''}>${esc(o.l)}</option>`).join('')}</select></label>`);
+        const sel = foot.querySelector('[data-cx-where]');
+        const apply = () => { const o = opts.find(x => x.v === sel.value) || opts[0];
+            st.ctx = {...base, ...o.ctx, label: `${o.pill[0]} ${o.pill[1]}`};
+            const pill = st.dlg.querySelector('.cx-destpill'); if (pill) pill.innerHTML = `<span aria-hidden="true">${esc(o.pill[0])}</span> ${esc(o.pill[1])}`;
+            if (o.media) st.ctx.folderNote = true; };
+        sel.addEventListener('change', apply); apply();
     }
     function goTab(st, k) {
         if (st.tab !== k) { st.tab = k; st.q = ''; st.filters = new Set(); st.list = null; st.dlg.querySelector('[data-cx-q]').value = ''; }
@@ -1897,6 +1920,11 @@
         const base = DT.find(t => t.id === 'investigation');
         return {...base, id: 'investigation', icon: '📌', here: () => ({investigation_id: Number(invId), item_id: Number(item.id), mode: 'one', title: invTitle(), label: T('Ici : la piste « {t} »', {t: item.title})})};
     }
+    /** une destination « ce dossier de l'enquête » (📁 pièces / médias) : ouvert depuis le dossier, il est déjà choisi dans « Où ranger : » */
+    function folderDest(invId, folderId, name = '') {
+        const base = DT.find(t => t.id === 'investigation');
+        return {...base, id: 'investigation', icon: '📁', here: () => ({investigation_id: Number(invId), item_id: 0, folder_id: Number(folderId), mode: 'one', title: invTitle(), label: T('Ici : le dossier « {t} »', {t: name})})};
+    }
     /* 📌 « Rattaché à cette piste » dans la fenêtre d'une piste (app.js : openInvestigationItemDialog) : les pièces de la piste (item_link_*,
        comme sur la ligne de la piste), ✕ et ↶ ; « 📥 Prendre depuis… » et « 🧺 Depuis le panier » ouvrent Prendre depuis… vers CETTE piste */
     function pisteAttach(form, invId, item) {
@@ -1959,6 +1987,6 @@
             undoToast(T('📮 Réponse rangée dans la piste « {p} »', {p: l.b_label || ''}), {undo: async () => { await post('inv_receive_undo', r); }});
         }}});
     }
-    ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, pisteAttach, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
+    ext.connexions = {redrawSettings: () => drawSettings(), courrierReplied, leadTarget, pisteDest, folderDest, pisteAttach, linksHtml, enabled, settings, take, putInto, deliver, openTake, openBasket, addMenuItems, emptyHere, chooseInvestigation, listBar, listRowsPainted, itemText, explode, parseAsk, parseDates, screenOrigin, openOrigin, ctxItems,
         openBasketView, chooseBasket, kit: {pickItem, ldRowItem, ldAll, ldSet, ldCrit, listsAll, itemLine, icon, cleanIt, pickKey, viewOf, srcLink: (u, l) => srcLink(u, l), remember: items => remember(items)}, count: () => count, refresh: () => { basket = null; return api('cx_count', {basket_id: curBasket()}).then(setCountFrom); }, KIND};
 })();

@@ -1293,7 +1293,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-chronologie.js?v=15" defer></script>
 <script src="assets/js/app-comparaison.js?v=11" defer></script>
 <script src="assets/js/app-carte.js?v=17" defer></script>
-<script src="assets/js/app-enquetes.js?v=18" defer></script>
+<script src="assets/js/app-enquetes.js?v=19" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=26" defer></script>
 <script src="assets/js/app-chrono-recherche.js?v=1" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>

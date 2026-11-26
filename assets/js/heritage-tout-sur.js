@@ -212,6 +212,8 @@
         const sheet = life ? onSheet(r.task.d.id, life.pid) : false; if (sheet) s -= 6;
         return {score: s + Math.min(2, (r.items || 0) / 5), hints, sheet};
     }
+    /** ⏱ f au plus une fois par image (avant le dessin ; 100 ms au plus si la fenêtre est cachée) */
+    const perFrame = f => { let q = false; return () => { if (q) return; q = true; let t = 0; const go = () => { if (!q) return; q = false; clearTimeout(t); f(); }; if (typeof requestAnimationFrame === 'function') requestAnimationFrame(go); t = setTimeout(go, 100); }; };
     // ⏱ chaque résultat n'est noté qu'une fois par personne (la liste est redessinée à chaque réponse : sinon N² notes, ≈ 2 s à l'ouverture)
     const SCORED = new WeakMap();
     function suggestions(results, life) {
@@ -463,12 +465,14 @@
             host.querySelector('[data-ts-online]')?.addEventListener('click', () => goOnline());
             heroBadge(pid, top.length + rest.filter(s => !s.sheet).length);
         };
-        const goOnline = async () => { if (onlineStarted) return; onlineStarted = true; draw(); const r = await runAll(online, (x, n) => { done = offline.length + n; results = [...results.filter(y => y.task.key !== x.task.key), x]; draw(); }); onlineDone = !!r; draw(); };
+        const drawSoon = perFrame(draw); // ⏱ une réponse après l'autre : redessiné au plus une fois par image
+        const goOnline = async () => { if (onlineStarted) return; onlineStarted = true; draw(); const r = await runAll(online, (x, n) => { done = offline.length + n; results = [...results.filter(y => y.task.key !== x.task.key), x]; drawSoon(); }); onlineDone = !!r; draw(); };
         draw();
-        results = await runAll(offline, (x, n) => { done = n; results = [...results, x]; draw(); });
+        results = await runAll(offline, (x, n) => { done = n; results = [...results, x]; drawSoon(); });
         missing(life, results).then(m => { miss = m; draw(); }).catch(() => {});
         draw();
-        setTimeout(() => { if (host.isConnected) goOnline(); }, ONLINE_DELAY);
+        // ⏱ les sources en ligne : seulement quand le bloc arrive à l'écran (ou sur « ▸ plus ») — app-observateurs.js
+        setTimeout(() => { if (!host.isConnected) return; if (window.LCNDA_PERF?.whenSeen) window.LCNDA_PERF.whenSeen(host, () => { if (host.isConnected) goOnline(); }); else goOnline(); }, ONLINE_DELAY);
         void onlineDone;
     }
     function heroBadge(pid, n) {
@@ -705,7 +709,8 @@
             host.querySelector('[data-ts-goto]')?.addEventListener('click', e => { e.preventDefault(); A().openPersonById?.(pid); });
         };
         draw();
-        await runAll(tasks, r => { results.push(r); draw(); });
+        const drawSoon = perFrame(draw);
+        await runAll(tasks, r => { results.push(r); drawSoon(); });
         miss = await missing(life, results).catch(() => []); draw();
     }
     ext.dashboardConfig[WIDGET] = {

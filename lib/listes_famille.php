@@ -11,12 +11,15 @@ declare(strict_types=1);
  *    directs » de ▶ Dans le temps, assets/js/heritage-guerres-temps.js) ;
  *  - jamais une fiche confidentielle (persons.is_private) ni un événement confidentiel (events.is_private) ;
  *  - en mode consultation (et sur un appareil invité du wifi) : pas non plus les personnes vivantes, déclarées ou probables (fc_hidden) ;
- *  - naissance, décès : années (null si inconnues) ; un événement de famille (mariage…) compte pour les deux époux.
+ *  - naissance, décès : années (null si inconnues) ; un événement de famille (mariage…) compte pour les deux époux ;
+ *  - ?share=1 (un diagramme exporté, envoyé ou posé hors de l'app, assets/js/heritage-diagram-donnees.js) : comme en consultation, sans
+ *    les vivants, et seulement les lieux où quelqu'un de montré a vécu (un lieu des seuls vivants ne sort pas).
  */
 
-function ld_famille(PDO $pdo): array
+function ld_famille(PDO $pdo, bool $share = false): array
 {
-    $kiosk = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
+    $realKiosk = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
+    $kiosk = $realKiosk || $share;
     $evPriv = in_array('is_private', array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name'), true);
     $people = [];
     $hid = [];
@@ -58,7 +61,15 @@ function ld_famille(PDO $pdo): array
     $anc = ld_famille_ancetres($pdo);
     $out = [];
     foreach ($people as $id => $p) { if ($p['pl']) { $out[] = [$p['n'], $p['b'], $p['d'], $p['pl'], isset($anc[$id]) ? 1 : 0]; } }
-    return ['places' => $places, 'people' => $out, 'kiosk' => $kiosk];
+    if ($share) { // seulement les lieux des personnes montrées, renumérotés
+        $keep = []; foreach ($out as $p) { foreach ($p[3] as $x) { $keep[$x[0]] = true; } }
+        $map = []; $kept = [];
+        foreach ($places as $i => $pl) { if (isset($keep[$i])) { $map[$i] = count($kept); $kept[] = $pl; } }
+        foreach ($out as &$p) { $p[3] = array_map(static fn($x) => [$map[$x[0]], $x[1]], $p[3]); }
+        unset($p);
+        $places = $kept;
+    }
+    return ['places' => $places, 'people' => $out, 'kiosk' => $realKiosk, 'share' => $share];
 }
 
 /** la racine Sosa et ses ascendants : [id => true] */

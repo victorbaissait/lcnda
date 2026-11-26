@@ -14,6 +14,9 @@
  *  6. (vérifié, rien à corriger) dans l'app : une liste dont les valeurs, le nom, la source sont piégés (<img onerror>, javascript:), une note,
  *     une ligne ajoutée, une ligne douteuse et une question piégées : rien ne s'exécute, aucun lien autre que http(s) ; une liste de
  *     5 000 lignes s'ouvre sans geler la page plus de 200 ms d'affilée (hors chargement) ;
+ *     → c'était la colonne de gauche de Listes : orderedListTypes() (O(n²) dans savedOrder) refait pour CHAQUE carte, et chaque
+ *       listShown relisait le menu et l'index des thèmes : 11 s de gel à chaque dessin (app.js savedOrder / orderedListTypes,
+ *       app-listes.js listLabels, app-listes-themes.js index, app-donnees-accueil.js inListes) ;
  *  7. 🎞 diaporama (app-donnees-plus-outils.js) : refusé pour une personne vivante, comme le livret (il part dans 🎤 Présentation, PDF, vidéo).
  *     node tests/test-audit-donnees-listes.js */
 'use strict';
@@ -172,7 +175,7 @@ echo json_encode(['dropped' => $s['dropped'], 'rows' => count($g['lists'][0]['ro
             const bad = await p.evaluate(() => ({xss: window.__xss || 0, on: document.querySelectorAll('[onerror], [onload], [onmouseover]').length,
                 js: [...document.querySelectorAll('a[href]')].filter(a => !/^(https?:|mailto:|tel:|#|$|blob:|api\.php|media\/|index\.php|\.?\/?[a-z0-9_-]*\.php)/i.test(a.getAttribute('href').trim())).map(a => a.getAttribute('href')).slice(0, 5)}));
             assert.deepStrictEqual(bad, {xss: 0, on: 0, js: []});
-            assert.ok(long1 < 1500, `ouvrir 5 000 lignes : la page gèle ${Math.round(long1)} ms`);
+            assert.ok(long1 < 400, `ouvrir 5 000 lignes : la page gèle ${Math.round(long1)} ms (avant la correction : 11 s, la colonne de gauche)`); // 150 ms mesurés ; de la marge pour une machine chargée
             assert.ok(long2 < 200 || !q, `chercher dans 5 000 lignes : la page gèle ${Math.round(long2)} ms`);
             console.log(`  (gel le plus long : ouverture ${Math.round(long1)} ms, recherche ${Math.round(long2)} ms)`);
             // 🎞 le diaporama (qui part ensuite dans 🎤 Présentation, PDF, vidéo, .pptx) : jamais pour une personne vivante, comme le livret

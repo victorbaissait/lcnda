@@ -18,6 +18,7 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
     const B = await start();
     const p = B.page;
     const D = '.cx-take';
+    const pickDs = async (D0, id) => { if (await p.$(`${D0} [data-cx-dchange]`)) await p.click(`${D0} [data-cx-dchange]`); await p.click(`${D0} [data-cx-dpick] [data-ld-pick="${id}"]`); }; // 🧰 le choix commun d'une source (dataListPicker)
     const open = async () => { await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); await B.openInv(1); await p.keyboard.press('Control+Alt+O'); await p.waitForSelector(D); };
     const tab = async (k, q = null) => {
         await p.click(`${D} [data-cx-tab="${k}"]`);
@@ -148,7 +149,7 @@ const t = async (name, fn) => { try { await t.before?.(); await fn(); console.lo
             await tab('outside'); assert.strictEqual(await p.locator(`${D} .cx-card`).count(), 4); assert.match(await txt(`${D} .cx-cards`), /Ça donne/);
         });
         await t('Données en 3 étapes ; le bouton dit ce qu’il fait (pas « Voir ») ; les adresses deviennent « ↗ OpenStreetMap »', async () => {
-            await tab('data'); await p.selectOption(`${D} [data-cx-ds]`, 'commune_plus_cemeteries');
+            await tab('data'); await pickDs(D, 'commune_plus_cemeteries');
             await p.waitForSelector(`${D} [data-cx-run]`);
             assert.match(await txt(`${D} [data-cx-run]`), /Chercher/); assert.ok(!/^\s*Voir\s*$/.test(await txt(`${D} [data-cx-run]`)));
             await p.fill(`${D} .pk[data-picker="place"] input:not([type=hidden])`, 'Treignac');

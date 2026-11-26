@@ -183,7 +183,7 @@
         const compact = !!o.compact, custom = typeof o.items === 'function';
         const src = () => (custom ? o.items() : index().ds).filter(d => (o.filter ? o.filter(d) : true) && !(o.onlyInstalled && notInstalled.has(d.id))); // onlyInstalled : seulement les données présentes ici
         const byTheme = () => { if (!custom && !o.filter && !o.onlyInstalled) return index().by; const m = new Map([...themes(), RANGER].map(t => [t.id, []])); src().forEach(d => (m.get(themeOf(d)) || m.get(RANGER.id)).push(d)); return m; };
-        let chip = 'all', q = '', th = compact ? (readLS(K_PICK_THEME, 'all') || 'all') : 'all', kb = -1, checked = false, sel = o.selected || '';
+        let kbId = '', chip = 'all', q = '', th = compact ? (readLS(K_PICK_THEME, 'all') || 'all') : 'all', kb = -1, checked = false, sel = o.selected || '';
         const all = src();
         const tlist = () => { const by = byTheme(); return [...themes(), RANGER].filter(t => (by.get(t.id) || []).length); };
         if (compact && th !== 'all' && !tlist().some(t => t.id === th)) th = 'all';
@@ -216,17 +216,17 @@
             if (pt) { const tot = tl.reduce((a, t) => a + hits.get(t.id).length, 0);
                 pt.innerHTML = [`<button type="button" class="ldt-chip${th === 'all' ? ' is-on' : ''}" data-ldt-pth="all" aria-pressed="${th === 'all'}">${esc(T('Tous'))} <i>${nf(tot)}</i></button>`, ...tl.map(t => `<button type="button" class="ldt-chip${th === t.id ? ' is-on' : ''}${hits.get(t.id).length ? '' : ' is-dim'}" data-ldt-pth="${esc(t.id)}" aria-pressed="${th === t.id}" title="${esc(T(t.hint || ''))}">${esc(t.icon)} ${esc(T(t.label))} <i>${nf(hits.get(t.id).length)}</i></button>`)].join(''); }
             page.querySelectorAll('[data-ldt-chip]').forEach(b => { const on = b.dataset.ldtChip === chip; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', String(on)); });
-            kb = -1; o.onPaint?.();
+            { const cs = [...res.querySelectorAll('[data-ld-pick]')]; kb = kbId ? cs.findIndex(c => c.dataset.ldPick === kbId) : -1; if (kb >= 0) cs[kb].classList.add('is-kb'); else kbId = ''; } o.onPaint?.(); // ↑ ↓ : la carte choisie au clavier le reste quand la liste se redessine
         };
         const cards = () => [...res.querySelectorAll('[data-ld-pick]')];
         const pick = id => { const d = src().find(x => x.id === id); if (!d) return; sel = id; res.querySelectorAll('[data-ld-pick]').forEach(c => { const on = c.dataset.ldPick === id; c.classList.toggle('is-on', on); c.setAttribute('aria-pressed', String(on)); }); o.onPick?.(d); };
         counts(); paint();
         let tq = 0;
-        input.addEventListener('input', e => { clearTimeout(tq); tq = setTimeout(() => { q = e.target.value; paint(); if (!custom) ext.listesValeurs?.warm(q, () => { if (page.isConnected && q.trim()) paint(); }); }, 60); });
+        input.addEventListener('input', e => { kbId = ''; clearTimeout(tq); tq = setTimeout(() => { q = e.target.value; paint(); if (!custom) ext.listesValeurs?.warm(q, () => { if (page.isConnected && q.trim()) paint(); }); }, 60); });
         if (compact) input.addEventListener('keydown', e => { // ↑ ↓ Entrée Échap
             const cs = cards(); if (['ArrowDown', 'ArrowUp', 'Enter'].includes(e.key)) e.stopPropagation();
             if (e.key === 'Escape' && input.value) { e.preventDefault(); e.stopPropagation(); input.value = ''; q = ''; paint(); return; }
-            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { if (!cs.length) return; e.preventDefault(); kb = e.key === 'ArrowDown' ? Math.min(cs.length - 1, kb + 1) : Math.max(0, kb - 1); cs.forEach((c, i) => c.classList.toggle('is-kb', i === kb)); cs[kb].scrollIntoView({block: 'nearest'}); return; }
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { if (!cs.length) return; e.preventDefault(); kb = e.key === 'ArrowDown' ? Math.min(cs.length - 1, kb + 1) : Math.max(0, kb - 1); kbId = cs[kb].dataset.ldPick; cs.forEach((c, i) => c.classList.toggle('is-kb', i === kb)); cs[kb].scrollIntoView({block: 'nearest'}); return; }
             if (e.key === 'Enter') { e.preventDefault(); const c = cs[kb >= 0 ? kb : 0]; if (c) pick(c.dataset.ldPick); }
         });
         page.addEventListener('click', e => {

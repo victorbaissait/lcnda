@@ -44,8 +44,8 @@ const t = async (name, fn) => {
     const openList = async id => { await C(`${D} [data-cx-tab="lists"]`); await C(`${D} [data-cx-list="${id}"]`); await rowsOfList(); };
     const basket = () => B.api('cx_basket');
     /** choisir une source de « Données » et attendre que son formulaire soit là */
-    const ds = async id => { await p.selectOption(`${D} [data-cx-ds]`, id); t.m.clicks++;
-        await p.waitForFunction(() => { const s2 = document.querySelector('.cx-take [data-cx-ds]'), b = document.querySelector('.cx-take [data-cx-run]'); const lab = s2?.selectedOptions[0]?.textContent.replace(/^\S+\s/, '').trim(); return b && lab && b.textContent.includes(lab); }, null, {timeout: 15000}); };
+    const ds = async id => { if (await p.$(`${D} [data-cx-dchange]`)) { await p.click(`${D} [data-cx-dchange]`); t.m.clicks++; } await p.click(`${D} [data-cx-dpick] [data-ld-pick="${id}"]`); t.m.clicks++; // 🧰 le choix commun d'une source (dataListPicker)
+        await p.waitForFunction(() => { const s2 = document.querySelector('.cx-take .cx-dchosen b'), b = document.querySelector('.cx-take [data-cx-run]'); const lab = s2?.textContent.replace(/^\S+\s/, '').trim(); return b && lab && b.textContent.includes(lab); }, null, {timeout: 15000}); };
     /** le lieu d'une source de « Données » (celui d'avant est repris : on le retire d'abord) */
     const setPlace = async name => {
         const x = L(`${D} .pk[data-picker="place"] .pk-chip [data-pk="remove"]`); if (await x.count()) { await x.first().click(); t.m.clicks++; }

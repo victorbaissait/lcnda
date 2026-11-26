@@ -41,12 +41,18 @@
         return '';
     }
     /** pagePlace({detail}) → {where: « Listes · Médias et documents », icon} : l’endroit où l’on est, d’après le menu */
+    let placeMemo = null;
     UI.pagePlace = ({detail = false} = {}) => {
         const st = A().state || {}, mod = st.module || '';
         const nav = navOf(mod);
         if (mod === 'listes' || mod === 'maintenance') {
             const key = mod === 'listes' ? st.listType : st.maintenanceTab;
-            const g = key ? groupOf(mod, key) : null, item = key ? itemOf(mod, key) : '';
+            // ⏱ gardé 1 s : l'en-tête est rangé à chaque changement de la page (toutes les 150 ms quand elle bouge), et le nom d'une liste
+            // se cherche dans les 600 listes rangées (≈ 2 s sur une fiche de village qui se remplit)
+            let ls = ''; try { ls = ['genealogie-list-groups', 'genealogie-list-order', 'genealogie-maintenance-groups', 'genealogie-maintenance-groups-a'].map(x => localStorage.getItem(x) || '').join('|'); } catch (_) {}
+            const ck = `${mod}|${key}|${A().reglagesA?.() ? 1 : 0}|${ls}`, now = Date.now();
+            if (!placeMemo || placeMemo.k !== ck || now - placeMemo.at > 1000) placeMemo = {k: ck, at: now, g: key ? groupOf(mod, key) : null, item: key ? itemOf(mod, key) : ''};
+            const {g, item} = placeMemo;
             if (detail && item) return {where: `${nav.label} · ${item}`, icon: g?.icon || ''};
             return {where: g ? `${nav.label} · ${g.label}` : nav.label, icon: g?.icon || ''};
         }
