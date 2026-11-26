@@ -667,7 +667,7 @@
             if (e.target.closest('[data-ts-pick-person]')) { cur.person = it && !it.free ? Number(it.id) || 0 : 0; }
             else if (e.target.closest('[data-ts-pick-place]')) {
                 if (!it || it.free) cur.place = null;
-                else { let row = null; try { row = (await api('place', {id: Number(it.id)}))?.place; } catch (_) {} const x = row || it; cur.place = {id: Number(x.id) || 0, name: x.name || x.label || '', county: x.county || '', state: x.state || '', country: x.country || '', latitude: x.latitude ?? null, longitude: x.longitude ?? null, lat: x.latitude ?? null, lon: x.longitude ?? null, insee: x.admin4_code || '', admin4_code: x.admin4_code || ''}; }
+                else { let row = null; try { row = (await api('place_monograph', {place_id: Number(it.id), show_events: 0, show_digests: 0, show_battues: 0, show_cemetery: 0}))?.place; } catch (_) {} const x = row ? {...it, ...row} : it; cur.place = {id: Number(x.id) || 0, name: x.name || x.label || '', county: x.county || '', state: x.state || '', country: x.country || '', latitude: x.latitude ?? null, longitude: x.longitude ?? null, lat: x.latitude ?? null, lon: x.longitude ?? null, insee: x.admin4_code || '', admin4_code: x.admin4_code || ''}; }
             } else return;
             keep(); draw();
         });
