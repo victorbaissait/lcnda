@@ -111,7 +111,8 @@
             const t = getTable();
             UI().openExportDialog({title: t.title, defaultName: t.title, quality: false, formats: [
                 {id: 'csv', label: i18n('📊 CSV'), hint: i18n('tableur'), ext: 'csv', run: o => csvDownload(o.filename || 'recherche.csv', [t.head, ...t.rows])},
-                {id: 'print', run: () => UI().openPrintDialog({title: t.title, html: tableDoc(t.title, t.head, t.rows), photos: false})}]});
+                {id: 'print', run: () => UI().openPrintDialog({title: t.title, html: tableDoc(t.title, t.head, t.rows), photos: false})},
+                ...(page.__rk?.formats?.() || [])]}); // 🧺 Mettre dans le panier · 📎 Insérer… (app-recherche-kit.js), là où ça a un sens
         });
         page?.querySelector('[data-rp-print]')?.addEventListener('click', () => { const t = getTable(); UI().openPrintDialog({title: t.title, html: tableDoc(t.title, t.head, t.rows), photos: false}); });
     }

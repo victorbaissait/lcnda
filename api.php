@@ -10395,6 +10395,10 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_diagram' => delete_diagram($pdo,$data),
             'link_diagram' => link_diagram($pdo,$data),
             'reorder_diagrams' => reorder_diagrams($pdo,$data),
+            'trash_diagrams' => trash_diagrams($pdo,$data), // 🗑 📈 l'onglet Diagrammes : corbeille 30 jours (lib/diagrams.php)
+            'restore_diagrams' => restore_diagrams($pdo,$data),
+            'empty_diagram_trash' => empty_diagram_trash($pdo,$data),
+            'diagram_meta' => diagram_meta($pdo,$data), // ⭐ favori, 🕘 ouvert récemment
             'periodicals_to_atelier' => periodicals_to_atelier($pdo,$data),
             'save_periodical_issue' => save_periodical_issue($pdo,$data),
             'save_periodical_article' => save_periodical_article($pdo,$data),

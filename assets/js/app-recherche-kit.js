@@ -72,24 +72,21 @@
         if (!page || !cfg) return null;
         page.__rk?.destroy?.();
         const ac = new AbortController();
-        const K = page.__rk = {cfg, destroy: () => { ac.abort(); const e0 = page.querySelector('[data-rk-export]'); if (K.oldExport && e0) e0.before(K.oldExport); page.querySelectorAll('[data-rk-own]').forEach(x => x.remove()); page.classList.remove('rk-page'); }};
+        const K = page.__rk = {cfg, destroy: () => { ac.abort(); page.querySelectorAll('[data-rk-own]').forEach(x => x.remove()); page.classList.remove('rk-page'); }};
         page.classList.add('rk-page');
         const picked = () => { try { const s = cfg.selected ? cfg.selected() : [...page.querySelectorAll('[data-rp-pick]:checked')].map(c => Number(c.dataset.rpPick)); return s && s.length ? s : null; } catch (_) { return null; } };
         const nOf = () => { const s = picked(); return s ? s.length : null; };
-        /* ⤓ Exporter ▾ : un menu (l'export d'avant, puis 🧺 et 📎) */
-        const old = page.querySelector('.page-header [data-rp-export]:not([data-rk-export])');
-        let exp = null;
-        if (old) {
-            exp = document.createElement('button'); exp.type = 'button'; exp.className = old.className; exp.dataset.rkExport = ''; exp.dataset.rkOwn = ''; exp.setAttribute('aria-haspopup', 'menu');
-            exp.textContent = T('⤓ Exporter ▾'); old.before(exp); old.remove(); K.oldExport = old; // l'ancien bouton, hors de la page : ses écouteurs (CSV, impression) servent toujours
-            exp.addEventListener('click', () => {
-                const n = nOf(), what = n ? T('les {n} cochés', {n}) : T('tout');
-                const items = [{icon: '📊', label: T('CSV ou impression…'), run: () => old.click()}];
-                if (!kiosk()) items.push('-', {icon: '🧺', label: n ? T('Mettre dans le panier ({n} cochés)', {n}) : T('Mettre dans le panier'), run: () => toBasket(cfg.items(picked()), exp)},
-                    {icon: '📎', label: n ? T('Insérer… ({n} cochés)', {n}) : T('Insérer…'), help: T('Dans une note, une enquête, une fiche, l’Atelier… (avec la source)'), run: () => toInsert(cfg, setOf(cfg, cfg.rows(picked())), exp)});
-                UI().menuAt ? UI().menuAt(exp, items, {title: T('⤓ Exporter {what}', {what})}) : old.click();
-            });
-        }
+        /* ⤓ Exporter ▾ : la fenêtre d'export commune reçoit, après CSV et Imprimer, 🧺 et 📎 (app-recherche-outils.js bindExportPrint lit K.formats) */
+        const exp = page.querySelector('.page-header [data-rp-export]');
+        K.formats = () => {
+            if (kiosk()) return [];
+            const n = nOf(), hint = n ? T('les {n} cochés', {n}) : T('tout');
+            const later = fn => async () => { setTimeout(fn, 80); }; // après la fermeture de la fenêtre d'export
+            return [{id: 'rk_basket', label: T('🧺 Mettre dans le panier'), hint, ext: '', quality: false, copy: false, goLabel: n ? T('Mettre dans le panier ({n} cochés)', {n}) : T('🧺 Mettre dans le panier'),
+                run: later(() => toBasket(cfg.items(picked()), exp))},
+            {id: 'rk_insert', label: T('📎 Insérer…'), hint: T('note, enquête, fiche, Atelier… (avec la source)'), ext: '', quality: false, copy: false, goLabel: n ? T('Insérer… ({n} cochés)', {n}) : T('📎 Insérer…'),
+                run: later(() => toInsert(cfg, setOf(cfg, cfg.rows(picked())), exp))}];
+        };
         /* 📎 🧺 au bout de chaque résultat */
         const rowEls = cfg.rowSel ? [...page.querySelectorAll(cfg.rowSel)] : [...page.querySelectorAll('[data-rp-pick]')].map(c => c.closest('article, tr')).filter(Boolean);
         rowEls.forEach(el => { const id = el.dataset.rkRow ?? el.querySelector('[data-rp-pick]')?.dataset.rpPick; if (id != null) el.dataset.rkId = id; });

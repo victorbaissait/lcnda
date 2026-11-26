@@ -51,7 +51,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
     for (let i = 0; i < 100; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await sleep(100); } }
     const browser = await chromium.launch();
     const errs = [];
+    // les réglages « genealogie-* » sont aussi gardés dans la base (et la base gagne au démarrage) : chaque essai repart d'une base sans réglages
+    const resetSettings = () => { const r = spawnSync(phpPath, ['-r', `$p=new PDO('sqlite:${path.join(tmp, 'genealogy.sqlite')}');$p->exec('DELETE FROM app_settings');echo 'ok';`], {encoding: 'utf8'}); assert.strictEqual(r.stdout, 'ok', r.stderr); };
     const open = async ({width = 1440, dark = false, init = {}} = {}) => {
+        await sleep(300); resetSettings();
         const ctx = await browser.newContext({viewport: {width, height: 900}});
         await ctx.addInitScript(([dark, init]) => { try { if (sessionStorage.getItem('srcrep-init')) return; sessionStorage.setItem('srcrep-init', '1'); localStorage.setItem('genealogie-premier-vu', '1'); Object.entries(init).forEach(([k, v]) => localStorage.setItem(k, v)); if (dark) localStorage.setItem('genealogie-design', JSON.stringify({preset: 'dark'})); } catch (_) {} }, [dark, init]);
         await ctx.route(u => !u.toString().startsWith(base), rt => rt.abort());
@@ -104,11 +107,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(s => document.querySelector(`${s} .src-head`).click(), sel); await sleep(350);
             assert.strictEqual(stateOf(await boxes(p), 'l101').open, true, 'la ligne déplie');
             // clavier : Entrée puis Espace sur ▸
-            await p.focus(`${sel} [data-src-toggle]`); await p.keyboard.press('Enter'); await sleep(50);
+            await p.press(`${sel} [data-src-toggle]`, 'Enter'); await sleep(100);
             assert.strictEqual(stateOf(await boxes(p), 'l101').open, false, 'Entrée replie');
-            await p.keyboard.press(' '); await sleep(50);
+            await p.press(`${sel} [data-src-toggle]`, ' '); await sleep(100);
             assert.strictEqual(stateOf(await boxes(p), 'l101').open, true, 'Espace déplie');
-            await p.keyboard.press('Enter'); await sleep(400);
+            await p.press(`${sel} [data-src-toggle]`, 'Enter'); await sleep(400);
             const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-sources-ouvertes')));
             assert.deepStrictEqual(saved, {l101: false});
             // le corps replié n'a plus de lien qu'on atteint à la tabulation
