@@ -143,18 +143,6 @@
         (card.querySelector('.vd-doubt') || card.querySelector('.vd-acts')).after(f);
         f.querySelector('input').focus();
     }
-    /* 👤 aller sur une fiche puis revenir : la même position dans l'écran (retenue quand on fait défiler soi-même ; remise après le dessin,
-     *  tant qu'on ne touche à rien pendant ~1 s) */
-    let PLACE = 0, painting = false;
-    document.addEventListener('scroll', e => { if (painting) return; const ws = document.getElementById('workspace'); if (ws?.querySelector('[data-vd-page]') && (e.target === ws || e.target === document)) PLACE = Math.max(ws.scrollTop, document.scrollingElement?.scrollTop || 0); }, true);
-    function putPlace(ws) {
-        const want = PLACE; let touched = false; const stop = () => { touched = true; };
-        ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => window.addEventListener(ev, stop, {once: true, passive: true, capture: true}));
-        const put = () => { if (touched || !ws.querySelector('[data-vd-page]')) return; if (Math.abs(ws.scrollTop - want) > 2) ws.scrollTop = want; if (document.scrollingElement && ws.scrollTop < want - 2) document.scrollingElement.scrollTop = want; };
-        put(); requestAnimationFrame(() => { put(); painting = false; });
-        [120, 350, 700, 1200].forEach(ms => setTimeout(put, ms));
-        setTimeout(() => ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => window.removeEventListener(ev, stop, {capture: true})), 1300);
-    }
     async function draw(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
         if (A().state?.maintenanceTab !== TAB[0] && token === undefined && !ws.querySelector('[data-vd-page]')) return;
@@ -170,7 +158,6 @@
         const head = UI().pageHeader ? UI().pageHeader({title: T('Veille des décès'), icon: '⚰️', where: T('Réglages · Données'), help: esc(T('Les personnes de ton arbre qu’on croit vivantes, comparées au fichier des décès de l’INSEE installé sur ton ordinateur.'))}) : `<h2>${esc(TAB[2])}</h2>`;
         const insLine = ins.installed ? T('Fichier des décès de l’INSEE installé : décès de {a} à {b}.', {a: String(ins.from || '?'), b: String(ins.to || '?')}) : T('Le fichier des décès de l’INSEE n’est pas installé : installe-le dans Recherche → Décès INSEE (bouton « ⤓ Tout installer »). Sans lui, la veille ne peut rien comparer.');
         const lastLine = st.last_run ? T('Dernière comparaison : {d}. Fiches surveillées : {n}.', {d: esc(String(st.last_run).slice(0, 16)), n: String(st.watched)}) : T('Fiches surveillées : {n}.', {n: String(st.watched)});
-        painting = true;
         ws.innerHTML = `<section class="page vd-page" data-vd-page>${head}
             <div class="maintenance-panel"><label class="checkbox-line cplus-tg"><input type="checkbox" data-vd-toggle ${on ? 'checked' : ''}><span><b>${esc(T('Surveiller les décès des personnes vivantes de mon arbre'))}</b><br><small class="muted">${esc(T('Quand un nouveau fichier des décès arrive (vérifié chaque jour dans Décès INSEE), l’app compare les fiches « vivantes » ou au statut inconnu, nées il y a moins de 110 ans : nom de naissance, prénoms, date et lieu de naissance. Rien n’est envoyé sur Internet : tout est comparé sur l’ordinateur.'))}</small></span></label>
                 <p>${esc(insLine)}</p><p class="muted">${lastLine}</p>
@@ -181,7 +168,6 @@
             <div class="maintenance-panel"><h3>${esc(T('À propos des données'))}</h3>
                 <p>${esc(T('Source :'))} ${link(st.source?.url || 'https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/', T('Fichier des personnes décédées (INSEE), data.gouv.fr'))} — ${link(st.source?.licence_url || 'https://www.etalab.gouv.fr/licence-ouverte-open-licence/', st.source?.licence || 'Licence Ouverte 2.0 (Etalab)')}. ${esc(T('Chaque décès ajouté porte cette source et le numéro de l’acte ; « ↗ » ouvre la recherche de la personne dans matchID, le moteur libre du même fichier.'))}</p>
                 <p class="muted">${esc(T('Les avis de décès des journaux et des sites (Libra Memoria, Dans nos cœurs, Avis-de-deces…) ne sont pas des données ouvertes : l’app ne les lit pas. Elle propose seulement des liens de recherche dans « Où chercher » d’une personne.'))}</p></div></section>`;
-        putPlace(ws);
         if (!A().escapeHtml) return;
         A().bindTableLinks?.();
     }

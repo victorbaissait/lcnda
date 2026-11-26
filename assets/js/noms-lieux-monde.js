@@ -166,7 +166,12 @@
     const SHOW_PLACES = 8, SHOW_NAMES = 16;
     const loc = () => { try { return root.LCNDA_I18N?.intlLocale?.() || root.LCNDA_I18N?.lang || document.documentElement.lang || 'fr'; } catch (_) { return 'fr'; } };
     const dn = type => { try { return new Intl.DisplayNames([loc(), 'fr'], {type}); } catch (_) { return null; } };
-    const langName = c => { const s = String(c || '').trim(); if (!s) return ''; try { const n = dn('language')?.of(s.replace(/_/g, '-')); return n && n !== s ? n : s; } catch (_) { return s; } };
+    /** les langues anciennes ou rares que le navigateur ne nomme pas (codes de Pleiades et de Wikidata) : « grc » → grec ancien */
+    const LANG_FR = {grc: 'grec ancien',la: 'latin',ota: 'turc ottoman',akk: 'akkadien',arb: 'arabe',egy: 'égyptien ancien',sux: 'sumérien',hbo: 'hébreu ancien',heb: 'hébreu',hit: 'hittite',cop: 'copte',arc: 'araméen',syr: 'syriaque',xmn: 'moyen perse',peo: 'vieux perse',asyr: 'assyrien',cana: 'cananéen',xur: 'urartéen',ett: 'étrusque',osar: 'sudarabique ancien',elx: 'élamite',fro: 'ancien français',xlc: 'lycien',xeb: 'éblaïte',phn: 'phénicien',uga: 'ougaritique',xib: 'ibère',frk: 'francique',xhu: 'hourrite',xmr: 'méroïtique',pi: 'pali',sa: 'sanskrit',arz: 'arabe égyptien',arq: 'arabe algérien',aeb: 'arabe tunisien',ary: 'arabe marocain',ayl: 'arabe libyen',crh: 'tatar de Crimée',sh: 'serbo-croate'};
+    LANG_FR['etruscan-in-'] = 'étrusque'; LANG_FR['egy-leidentr'] = 'égyptien ancien';
+    /** un code de langue → son nom ; jamais un code brut à l'écran (un code inconnu n'est pas montré) */
+    const langName = c => { const s = String(c || '').trim(); if (!s || s === 'None') return ''; const b = s.split('-')[0].toLowerCase(); const fr = LANG_FR[s] || LANG_FR[b]; if (fr) return T(fr);
+        try { for (const x of [s.replace(/_/g, '-'), b]) { const n = dn('language')?.of(x); if (n && n.toLowerCase() !== x.toLowerCase()) return n; } } catch (_) {} return ''; };
     const ccName = c => { const s = String(c || '').trim(); if (!/^[A-Za-z]{2}$/.test(s)) return s; try { return dn('region')?.of(s.toUpperCase()) || s; } catch (_) { return s; } };
 
     /* ─────────── l'index : une fois, à la première recherche ─────────── */
@@ -233,7 +238,7 @@
         return `<span class="nlm-bar" aria-hidden="true"><i style="left:${s.toFixed(1)}%;width:${Math.max(1.2, e - s).toFixed(1)}%"></i></span>`;
     }
     const chip = s => { const u = safeUrl(s.url); return u ? `<a class="nlm-srcchip" href="${esc(u)}" target="_blank" rel="noopener noreferrer" title="${esc(T('La source de ce nom (ouvre un site)'))}">${esc(s.src)} ↗</a>` : `<span class="nlm-srcchip">${esc(s.src)}</span>`; };
-    const kindLang = n => [n.kind, n.lang ? n.lang.split(' ').map(langName).filter(Boolean).join(', ') : ''].filter(Boolean).join(' · ');
+    const kindLang = n => [n.kind, n.lang ? [...new Set(n.lang.split(' ').map(langName).filter(Boolean))].join(', ') : ''].filter(Boolean).join(' · ');
     const ohmYear = g => { const h = g.names.find(n => n.hit) || g.names[0]; const y = h ? (h.to ?? h.from) : null; return Math.max(1, Math.min(NOW, y != null && y > 0 ? (h.to != null ? h.to - 1 : y) : 1850)); };
     function placeHtml(g, gi, sel) {
         const ro = kiosk(), off = offline(), ll = g.lat != null;

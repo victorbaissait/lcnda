@@ -96,7 +96,12 @@
     const fillAll = () => document.querySelectorAll('[data-dg-embed]:not([data-dg-done])').forEach(b => fillEmbed(b).catch(() => {}));
     function refreshEmbeds(id) { document.querySelectorAll(`[data-dg-embed="${Number(id)}"]`).forEach(b => { delete b.dataset.dgDone; }); fillAll(); }
     let fillT = 0;
-    new MutationObserver(() => { if (!document.querySelector('[data-dg-embed]:not([data-dg-done]), [data-dg-host]:not([data-dg-filled]), [data-rc-host][data-rc-type="investigation"], [data-rc-host][data-rc-type="atelier_project"]')) return; clearTimeout(fillT); fillT = setTimeout(() => { fillAll(); fillHosts(); }, 60); }).observe(document.documentElement, {childList: true, subtree: true});
+    // ⏱ la page n'est relue que si des éléments sont arrivés, au plus une fois toutes les 60 ms (avant : toute la page à chaque changement, ≈ 1,5 s à l'ouverture)
+    const DG_SEL = '[data-dg-embed]:not([data-dg-done]), [data-dg-host]:not([data-dg-filled]), [data-rc-host][data-rc-type="investigation"], [data-rc-host][data-rc-type="atelier_project"]';
+    new MutationObserver(recs => {
+        if (fillT || !recs.some(r => [...r.addedNodes].some(n => n.nodeType === 1))) return;
+        fillT = setTimeout(() => { fillT = 0; if (document.querySelector(DG_SEL)) { fillAll(); fillHosts(); } }, 60);
+    }).observe(document.documentElement, {childList: true, subtree: true});
     document.addEventListener('click', e => {
         const op = e.target.closest?.('[data-dg-open]'); if (op) { e.preventDefault(); openInGraphs(Number(op.dataset.dgOpen)); return; }
         const ed = e.target.closest?.('[data-dg-edit]'); if (ed) { e.preventDefault(); openEditor(Number(ed.dataset.dgEdit)); }

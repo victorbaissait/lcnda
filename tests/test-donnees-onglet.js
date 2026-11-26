@@ -122,7 +122,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.evaluate(() => window.LCNDA_EXT.donneesOnglet.setHidden('ciel', false)); await sleep(300); assert.ok((await sideThemes()).includes('ciel'));
             // la fenêtre Réordonner
             await p.evaluate(() => document.querySelectorAll('.toast').forEach(x => x.remove())); await p.click('[data-dno-reorder]'); await p.waitForSelector('.dno-reorder[open]');
-            for (let i = 0; i < 2; i++) { await p.focus('.dno-reorder [data-dno-row="seismes"] .dnd-grip'); await p.keyboard.press('Alt+ArrowDown'); await sleep(150); } // ⠿ au clavier (heritage-dnd.js : les flèches ↑ ↓ cachées à la souris)
+            for (let i = 0; i < 2; i++) { await p.focus('.dno-reorder [data-dno-row="seismes"] .dnd-grip'); await p.keyboard.press('Alt+ArrowDown'); await sleep(900); } // ⠿ au clavier (heritage-dnd.js : les flèches ↑ ↓ cachées à la souris)
             assert.deepStrictEqual(await p.$$eval('.dno-reorder [data-dno-row]', a => a.slice(0, 3).map(r => r.dataset.dnoRow)), [DEF[1], DEF[2], 'seismes']);
             await p.uncheck('.dno-reorder [data-dno-vis="images"]');
             await p.click('.dno-reorder [data-save]'); await sleep(400);
@@ -139,6 +139,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
 
         /* ═════════ 4. Listes ne change pas ═════════ */
         await t('Listes : sa colonne, ses liens et son fil d’Ariane comme avant (le thème s’ouvre dans Listes)', async () => {
+            await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.close(); d.remove(); }));
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.listType = 'data_theme_guerres'; A.setModule('listes'); }); await p.waitForSelector('.ldt-tabs [data-ldt-back]', {timeout: 30000}); await idle();
             let s = await st(); assert.deepStrictEqual([s.module, s.hash], ['listes', '#listes']); assert.match(s.crumb, /^Listes · 🧰 Données · ⚔️ Guerres et soldats$/);
             assert.ok(!(await p.$('#sidebar-content [data-dno-side]')), 'la colonne de Listes'); assert.ok(await p.$('#sidebar-content [data-side-value="data_theme_guerres"].is-active'));

@@ -2499,6 +2499,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
         if(module!=='dashboard'||(state.dashboardBoard&&!currentCustomTab()))state.dashboardBoard='';
         if(module!=='listes')listController?.abort();
         state.module = module;
+        scrollRestoring={mod:module,until:Date.now()+15000,drawing:true}; // pendant que l'écran se dessine, la sauvegarde toutes les 500 ms n'écrase pas sa place gardée par le 0 de l'écran d'avant ; levé par restoreScrollPosition
         document.documentElement.setAttribute('data-page-ouverte',module); // 🧩 Fond des pages : « Sur quelles pages » (app-fond.js)
         const renderToken=++state.workspaceToken;
         persistUiState();
@@ -2650,6 +2651,7 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
 
     let scrollRestoring=null;
     function restoreScrollPosition() {
+        if(scrollRestoring?.drawing)scrollRestoring=null;
         const position=state.scrollPositions[state.module];if(!position)return;
         // une page qui se dessine en plusieurs fois (Réglages, aperçus) : on réessaie jusqu'à 6 s, tant qu'on n'a pas fait défiler soi-même
         const mod=state.module;let touched=false;const stop=()=>{touched=true;scrollRestoring=null;};
@@ -4957,7 +4959,9 @@ while(out.length<100)out.push(statsDefaultAt(out.length));return out.slice(0,STA
             $$('[data-insert]',bar).forEach(b=>b.addEventListener('click',()=>{area.focus();const t=b.dataset.insert;if(t==='ſ'){const s=area.selectionStart,e=area.selectionEnd;area.setRangeText('ſ',s,e,'end');area.dispatchEvent(new Event('input',{bubbles:true}));}else insertInTranscription(t);}));
         });
     }
-    new MutationObserver(()=>addLongSButtons()).observe(document.body,{childList:true,subtree:true});
+    // ⏱ seulement quand une case de transcription arrive (avant : toute la page relue à chaque changement, ≈ 1 s à l'ouverture)
+    const LONG_S_SEL='#lightbox-transcription,[data-archive-transcription-form]';
+    new MutationObserver(recs=>{for(const r of recs)for(const n of r.addedNodes){if(n.nodeType===1&&(n.matches(LONG_S_SEL)||n.querySelector(LONG_S_SEL)||n.closest(LONG_S_SEL))){addLongSButtons();return;}}}).observe(document.body,{childList:true,subtree:true});
     addLongSButtons();
 
     // Battue : la commune « choisie » = la dernière sur laquelle on a cliqué (ou survolée au clavier)

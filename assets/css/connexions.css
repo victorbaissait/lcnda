@@ -461,7 +461,9 @@ dialog.cx-put { width: var(--modal-m); max-width: 94vw; height: min(680px, 90vh)
 
 /* ── 📥 Prendre depuis… : la colonne de gauche au dessin de l'app (cartes bordées, ombre bleue décalée, l'élément choisi en bleu plein ;
    titres de rubrique en capitales bleues) — mêmes jetons que .side-menu-item, le mode sombre suit ── */
-.cx-take .cx-rail { background: var(--paper, var(--cx-grey)); padding: 14px 16px 14px 14px; display: flex; flex-direction: column; gap: 9px; scrollbar-gutter: stable; }
+.cx-take .cx-rail { background: var(--paper, var(--cx-grey)); padding: 14px 16px 14px 14px; flex-direction: column; gap: 9px; scrollbar-gutter: stable; }
+@media (min-width: 641px) { .cx-take .cx-rail { display: flex; } }
+@media (max-width: 640px) { .cx-take.is-railopen .cx-rail { display: flex; } } /* téléphone : « Quoi : … ▾ » ouvre la même colonne */
 .cx-take .cx-rail h5 { margin: 10px 0 0; font: 800 10.5px system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
 .cx-take .cx-rail h5:first-child { margin-top: 0; }
 .cx-take .cx-rail button { border: 2px solid var(--ink); border-radius: 0; background: var(--white); color: var(--ink); font-weight: 700; padding: 8px 10px; box-shadow: 3px 3px 0 rgba(5, 93, 255, .18); transition: transform .15s ease, box-shadow .15s ease; width: calc(100% - 3px); }
