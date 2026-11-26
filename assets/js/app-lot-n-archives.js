@@ -224,12 +224,10 @@
         const size = avail.reduce((a, k) => a + (info.packs[k].size || 0), 0);
         return `<p class="muted tn-offer">${esc(why)} <button type="button" class="button small secondary" data-tn-install="${esc(avail.join(','))}">⤓ ${esc(T('Installer ({s})', {s: fmtSize(size)}))}</button> <span data-tn-progress="${esc(avail[0])}"></span></p>`;
     }
-    const hosts = new Set();
     function redraw() {
         document.querySelectorAll('[data-tn-host]').forEach(h => { const p = h.__tnPlace; if (p) placeInto(h, p); });
         document.querySelectorAll('#workspace [data-tn-person]').forEach(h => personInto(h, Number(h.dataset.tnPerson)).then(n => { const c = h.closest('section.card'); if (c) c.hidden = !n; }));
         if (document.querySelector('[data-tn-settings-page]')) drawSettings();
-        hosts.forEach(fn => { try { fn(); } catch (_) {} });
     }
     if (root.document) document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-tn-install]'); if (b) { e.preventDefault(); b.disabled = true; install(b.dataset.tnInstall.split(',')).finally(() => { b.disabled = false; }); return; }
@@ -308,8 +306,7 @@
     }
     if (root.document) {
         let pending = 0;
-        const start = () => new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(() => {}); }); }).observe(document.getElementById('workspace') || document.body, {childList: true, subtree: true});
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once: true}); else start();
+        new MutationObserver(() => { if (pending) return; pending = requestAnimationFrame(() => { pending = 0; decorate().catch(() => {}); }); }).observe(document.documentElement, {childList: true, subtree: true});
     }
     (ext.monographSections = ext.monographSections || []).push(...[['inventaires', 'tn_inventaires', '📚', 'Les archives de la commune (inventaires)'], ['monuments', 'tn_monument', '🗿', 'Le monument aux morts']].map(([kind, id, icon, label]) => ({
         id, icon, label, group: 'Le lieu', defaultOn: true, enabled: () => on(kind), source: kind === 'monuments' ? 'MémorialGenWeb (CC BY-SA)' : 'FranceArchives (Licence Ouverte 2.0)',
