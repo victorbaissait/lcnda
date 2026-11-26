@@ -297,7 +297,7 @@ function pn_share_build(PDO $pdo, array $d): array
             'status' => in_array($r['status'] ?? '', PN_STATUSES, true) ? $r['status'] : ''], static fn($v) => $v !== '' && $v !== null);
     }
     $file = ['format' => 'lcnda-panier', 'version' => 1, 'name' => pn_txt($b['name'], 120), 'icon' => pn_txt($b['icon'], 16), 'made' => date('Y-m-d'), 'items' => $items];
-    return ['file' => $file, 'counts' => $n, 'filename' => (preg_replace('/[^\p{L}\p{N}]+/u', '-', (string) $b['name']) ?: 'panier') . '.lcnda-panier'];
+    return ['share' => $file, 'counts' => $n, 'fname' => (preg_replace('/[^\p{L}\p{N}]+/u', '-', (string) $b['name']) ?: 'panier') . '.lcnda-panier'];
 }
 
 /** ⇩ lire un fichier .lcnda-panier : taille, schéma, tout en texte → {name, icon, items} (lève une erreur claire sinon) */
@@ -371,7 +371,7 @@ function pn_share_send(PDO $pdo, array $d): array
     $acc = safe_int($d['account_id'] ?? 0);
     if (!in_array($acc, array_column(pn_share_accounts($pdo)['accounts'], 'id'), true)) { throw new LcndaBadInput('Compte du site familial introuvable.'); }
     $f = pn_share_build($pdo, $d);
-    $pdo->prepare('INSERT INTO cx_shares(account_id, name, body) VALUES(?,?,?)')->execute([$acc, $f['file']['name'], (string) json_encode($f['file'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
+    $pdo->prepare('INSERT INTO cx_shares(account_id, name, body) VALUES(?,?,?)')->execute([$acc, $f['share']['name'], (string) json_encode($f['share'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
     pn_log($pdo, safe_int($d['basket_id'] ?? 0), 'Envoyé à un compte du site familial');
     return ['share_id' => (int) $pdo->lastInsertId(), 'counts' => $f['counts']];
 }

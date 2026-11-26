@@ -513,7 +513,7 @@
     const PUT_SECT = [['recent', 'Récemment utilisées'], ['search', 'Ma recherche (enquêtes, notes, rappels)'], ['write', 'Écrire et montrer'], ['store', 'Ranger']];
     const sectOf = t => ({investigation: 'search', note: 'search', reminder: 'search', atelier: 'write', book: 'write', montage: 'write', send_textdoc: 'write', send_keynote: 'write', send_site: 'write', basket: 'store', send_sheet: 'store', map: 'store', mylist: 'store'}[t.id]
         || ({Chercher: 'search', Créer: 'write', Ranger: 'store'}[t.group] || 'store'));
-    async function putInto(items, {anchor = null, fromBasket = false, only = null, dests = null} = {}) {
+    async function putInto(items, {anchor = null, fromBasket = false, only = null, dests = null, onDone = null} = {}) { // onDone : après un rangement réussi (🧺 l'onglet Paniers : « utilisé »)
         items = (items || []).filter(Boolean);
         if (!items.length) return toast(T('Rien à mettre.'));
         if (kiosk()) return toast(T('Mode consultation : rien ne peut être modifié.'));
@@ -577,13 +577,13 @@
         const go = async () => {
             if (preset.length && !sel) { // plusieurs destinations habituelles : l'une après l'autre
                 if (busy) return; busy = true; dlg.close(); const list = its();
-                for (const d of preset) { const t = DT.find(x => x.id === d.id); if (t) await deliver(t, list, {ctx: d.ctx || null, anchor, fromBasket: fromBasket && d === preset.at(-1), original: items}); }
+                let okAny = false; for (const d of preset) { const t = DT.find(x => x.id === d.id); if (t && await deliver(t, list, {ctx: d.ctx || null, anchor, fromBasket: fromBasket && d === preset.at(-1), original: items})) okAny = true; } if (okAny) await onDone?.();
                 return;
             }
             const t = sel && DT.find(x => x.id === sel.id); if (!t || busy) return; busy = true;
             const list = its(); writeJ(PUT_RECENT, [t.id, ...recent().filter(x => x !== t.id)].slice(0, 6));
             dlg.close();
-            await deliver(t, list, {here: sel.here, anchor, fromBasket, original: items});
+            if (await deliver(t, list, {here: sel.here, anchor, fromBasket, original: items})) await onDone?.();
         };
         const box = dlg.querySelector('[data-cx-dests]');
         box.addEventListener('click', e => { const b = e.target.closest('[data-cx-dest]'); if (b) pick(b); });
@@ -1532,7 +1532,8 @@
         if ((m = f.match(/(?:en|annee) (\d{4})/))) return {yfrom: Number(m[1]), yto: Number(m[1])};
         return null;
     }
-    const SYN = [[/deces|morts?|decede/, ['insee_deces']], [/chateau/, ['chateaux']], [/gare|train/, ['hist_gares']], [/seisme|tremblement/, ['hist_seismes']], [/crue|inondation/, ['hist_crues']], [/vendange/, ['hist_vendanges']], [/prenom/, ['pp_prenoms']], [/election|vote/, ['elections']]];
+    const SYN = [[/monuments? aux morts/, ['pm_monuments']], [/bataille|siege|combat/, ['ha_batailles']], [/regiment|garnison/, ['l8b_regiments_ville', 'l8b_regiments']], [/comete|aurore/, ['ciel_cometes']], [/eclipse/, ['eclipses']], [/ciels? etrange/, ['l8a_ciels']], [/eruption|volcan/, ['l10t_volcans']], [/maree/, ['l8a_marees', 'l8a_maree']], // 🧺 ciel, terre, mer, militaire (onglet Paniers)
+        [/deces|morts?|decede/, ['insee_deces']], [/chateau/, ['chateaux']], [/gare|train/, ['hist_gares']], [/seisme|tremblement/, ['hist_seismes']], [/crue|inondation/, ['hist_crues']], [/vendange/, ['hist_vendanges']], [/prenom/, ['pp_prenoms']], [/election|vote/, ['elections']]];
     async function placeByName(name) {
         try { const r = await api('picker_search', {kind: 'place', q: name, limit: 5}); return (r.groups || []).flatMap(g => g.items || []).find(x => x.lat != null) || (r.groups || []).flatMap(g => g.items || [])[0] || null; } catch (_) { return null; }
     }
@@ -1544,7 +1545,7 @@
         const f = fold(q).replace(/[’']/g, ' ').replace(/\s+/g, ' ');
         const words = f.split(/[^a-z0-9-]+/).filter(Boolean);
         let d = null, used = new Set();
-        for (const [re, ids] of SYN) { const m = f.match(re); if (m) { d = lists.find(x => ids.includes(x.id)); if (d) { used.add(m[0]); break; } } }
+        for (const [re, ids] of SYN) { const m = f.match(re.source === 'chateau' ? /chateau(?!.{0,3}(?:de|du|d) [a-z])/ : re); if (m) { d = lists.find(x => ids.includes(x.id)); if (d) { used.add(m[0]); break; } } } // « autour du château de X » : X est le centre, pas ce qu'on cherche
         if (!d) { // les mots du nom de la liste, au pluriel ou non, avec une faute de frappe permise
             const score = x => { const lw = fold(x.label).split(/[^a-z]+/).filter(w => w.length > 3).map(w => w.replace(/s$/, '')); let n = 0; words.forEach(w => { if (STOP.has(w)) return; const w1 = w.replace(/s$/, ''); if (lw.some(l => l === w1 || (w1.length > 4 && (l.startsWith(w1) || w1.startsWith(l))) || near1(l, w1))) { n++; used.add(w); } }); return n; };
             d = lists.map(x => ({x, n: score(x)})).sort((a, b) => b.n - a.n).find(z => z.n)?.x || null;
@@ -1552,13 +1553,17 @@
         }
         if (!d) return null;
         const preset = {q: '', crit: [], period: null, near: null};
-        const dt = parseDates(q), fields = d.fields || [];
+        let dt = parseDates(q); const fields = d.fields || [];
+        // « entre 10 et 12 ans », « à 10 ans » : l'âge d'une personne nommée (« Jean MAZAUD ») → ses années (sa naissance dans l'arbre)
+        const age = f.match(/(?:entre|de) (\d{1,3}) (?:et|a) (\d{1,3}) ans/) || f.match(/(?:^| )a (\d{1,3}) ans/);
+        const who = String(q).match(/([A-ZÀ-Ý][a-zà-ÿ'-]+(?:\s+[A-ZÀ-Ý][a-zà-ÿ'-]+)?)\s+([A-ZÀ-Ý][A-ZÀ-Ý'-]{2,})/);
+        if (age && who && !dt) { try { const r = await api('picker_search', {kind: 'person', q: `${who[1]} ${who[2]}`, limit: 1}); const p = (r.groups || []).flatMap(g => g.items || [])[0]; const by = Number(String(p?.short || p?.meta || '').match(/\d{4}/)?.[0]); if (by) { dt = {yfrom: by + Number(age[1]), yto: by + Number(age[2] ?? age[1]) + 1}; used.add(fold(who[1])); used.add(fold(who[2])); } } catch (_) {} }
         const dateField = fields.find(x => x.type === 'date' && /deces|date|jour/.test(fold(x.key + ' ' + x.label))) || fields.find(x => x.type === 'date');
         if (dt?.from && dateField) preset.crit.push({key: dateField.key, kind: 'daterange', from: dt.from, to: dt.to});
         else if (dt && d.period) { const a = dt.yfrom || Number(dt.from.slice(0, 4)), b = dt.yto || Number(dt.to.slice(0, 4)); preset.period = a === b ? {mode: 'in', from: a, to: a} : {mode: 'overlap', from: a, to: b}; }
         else if (dt) { const yf = fields.find(x => x.type === 'year'); const a = dt.yfrom || Number(dt.from.slice(0, 4)), b = dt.yto || Number(dt.to.slice(0, 4)); if (yf) preset.crit.push({key: yf.key, kind: 'range', from: a, to: b}); }
         // « à 4 km de Brive », « autour de 5 km de Treignac », « dans un rayon de 5 km autour de Treignac », « à moins de 5 km de Treignac », « autour de Brive »
-        const near = f.match(/(\d+(?:[.,]\d+)?) ?km (?:de |d |autour de |du |des |a |de la |du centre de )?([a-z][a-z' -]*?)(?: du | de \d| en | entre | depuis |$)/) || f.match(/autour de ([a-z][a-z' -]*?)(?: du | en | depuis |$)/);
+        const near = f.match(/(\d+(?:[.,]\d+)?) ?km (?:autour (?:du |de la |des |de |d )|de |d |du |des |a |de la |du centre de )?([a-z][a-z' -]*?)(?: du \d| de \d| en | entre | depuis |$)/) || f.match(/autour (?:du |de la |des |de |d )([a-z][a-z' -]*?)(?: du \d| en | entre | depuis |$)/);
         let placeWords = '';
         if (near && d.geo) {
             const km = near.length > 2 && /^\d/.test(near[1]) ? Number(String(near[1]).replace(',', '.')) : 10, name = (near.length > 2 && /^\d/.test(near[1]) ? near[2] : near[1]).trim();
@@ -1829,9 +1834,10 @@
                 <p class="muted"><small>${esc(T('Le panier est gardé dans la base : il te suit sur un autre ordinateur et dans les sauvegardes.'))}</small></p></div>
             <div class="maintenance-panel"><h3>${esc(T('Prendre et déposer'))}</h3>${tg('ctx', 'Clic droit : « 🧺 Prendre… » une date, un lieu, une phrase', 'Sur une fiche, une note, une transcription, une enquête… ; un texte choisi à la souris aussi.')}${tg('dnd', 'Glisser du panier sur l’écran ouvert', 'Un cadre bleu dit ce qui va se passer avant qu’on lâche.')}</div>
             <div class="maintenance-panel"><h3>${esc(T('Raccourci clavier'))}</h3><p>📥 ${esc(T('Prendre depuis…'))} : <b>${esc(combo || T('aucun'))}</b> · <button type="button" class="link-button" data-cx-keys>${esc(T('Changer dans Raccourcis clavier'))}</button></p>
-                <p class="muted"><small>${esc(T('⇧⌘O était déjà pris (écran divisé) : le raccourci de départ est ⌥⌘O (Ctrl+Alt+O sous Windows et Linux).'))}</small></p></div>${ext.cxNeeds?.settingsHtml?.() || ''}${ext.insertInfo?.settingsHtml?.() || ''}</section>`;
+                <p class="muted"><small>${esc(T('⇧⌘O était déjà pris (écran divisé) : le raccourci de départ est ⌥⌘O (Ctrl+Alt+O sous Windows et Linux).'))}</small></p></div>${ext.cxNeeds?.settingsHtml?.() || ''}${ext.insertInfo?.settingsHtml?.() || ''}${ext.paniers?.settingsHtml?.() || ''}</section>`;
         ext.cxNeeds?.bindSettings?.(ws); // 🧩 les besoins (heritage-connexions-besoins.js)
         ext.insertInfo?.bindSettings?.(ws); // 📎 Insérer une info (app-inserer.js)
+        ext.paniers?.bindSettings?.(ws); // 🧺 l'onglet Paniers : les idées (app-paniers.js)
         ws.querySelectorAll('[data-cx-tg]').forEach(el => { const inp = el.matches('input') ? el : el.querySelector('input'); (inp || el).addEventListener('change', e => { const k = el.dataset.cxTg; const v = !!(e.target.checked ?? inp?.checked); saveSettings({...settings(), [k]: v}, v ? T('Activé') : T('Éteint')); if (k === 'on' && v && count == null) boot(); }); });
         ws.querySelectorAll('[name="cx-multi"]').forEach(r => r.addEventListener('change', e => { writeJ(CUR, 0); basket = null; saveSettings({...settings(), multi: e.target.value === '1'}, e.target.value === '1' ? T('Plusieurs paniers') : T('Un seul panier')); }));
         ws.querySelector('[data-cx-keys]')?.addEventListener('click', () => { st.maintenanceTab = 'raccourcis'; A().persistUiState?.(); A().setModule?.('maintenance'); });

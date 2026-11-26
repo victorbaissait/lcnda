@@ -275,10 +275,12 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const open = () => p.evaluate(() => { const A = window.LCNDA_APP; A.state.graphPlaceMonograph = {...(A.state.graphPlaceMonograph || {}), id: 1, name: 'Honfleur', county: 'Calvados', showEvents: true}; A.state.graphMode = 'place_monograph'; A.setModule('graphiques'); });
             const panel = async () => { await p.waitForSelector('.place-monograph-sections[data-mp-mounted]', {timeout: 20000}); await sleep(300); await p.evaluate(() => { if (!document.querySelector('.mp-list[data-mp-order]')) document.querySelector('[data-mp-custom]').click(); }); await p.waitForSelector('.mp-list[data-mp-order] li[data-k]'); await sleep(300); };
             await open(); await panel();
+            const before = await p.$$eval('.mp-list li[data-k]', n => n.map(x => x.dataset.k));
             await p.evaluate(() => (window.LCNDA_EXT.monographSections = window.LCNDA_EXT.monographSections || []).push({id: 'essai_mono', icon: '🧪', label: 'Partie d’essai', group: 'Le lieu', defaultOn: true, render: async (place, host) => { host.innerHTML = '<p>essai</p>'; return true; }}));
             await open(); await panel();
             assert.ok(await p.$('.mp-list li[data-k="essai_mono"] .org-new'), await p.$$eval('.mp-list li[data-k]', n => n.map(x => x.dataset.k + (x.querySelector('.org-new') ? '*' : '')).join(',')));
-            assert.strictEqual(await p.$$eval('.mp-list .org-new', n => n.length), 1);
+            const marked = await p.$$eval('.mp-list li[data-k]', n => n.filter(x => x.querySelector('.org-new')).map(x => x.dataset.k));
+            assert.deepStrictEqual(marked.filter(k => before.includes(k)), [], 'ce qui était déjà là n’est pas « Nouveau »');
         });
         await t('pas d’erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {

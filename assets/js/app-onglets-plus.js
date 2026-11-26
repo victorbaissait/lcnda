@@ -31,6 +31,7 @@
         {k: 'documents', g: 1, icon: '📄', name: 'Documents', desc: 'Tes photos, actes, lettres de A à Z, rangés en dossiers.', module: 'documents', rec: 'RPPRRYRRRY', words: 'document photo acte lettre papier'},
         {k: 'tresors', g: 1, icon: '✨', name: 'Trésors de famille', desc: 'Lettres à ouvrir plus tard, recettes, musée de famille.', module: 'tresors', rec: 'RPNRPYPPYN', words: 'trésor souvenir recette musée'},
         {k: 'fiches', g: 1, icon: '📒', name: 'Fiches', desc: 'Fiches thématiques : un métier, une guerre, un village.', module: 'fiches', rec: 'RPPRPRRRPP', words: 'fiche thème métier guerre village'},
+        {k: 'paniers', g: 1, icon: '🧺', name: 'Paniers', desc: 'Tes paniers rangés en dossiers, des idées à y mettre, et une recherche qui crée un panier. La pastille 🧺 reste là, même onglet éteint.', module: 'paniers', rec: 'RPPRPRRRPR', isNew: true, words: 'panier dossier recherche idée rassembler collecter'},
         {k: 'adn', g: 1, icon: '🧬', name: 'ADN', desc: 'Tes correspondances ADN et leurs liens.', module: 'adn', rec: 'PNNNNNRNPP', words: 'adn dna correspondance'},
         {k: 'catalogue', g: 1, icon: '🎨', name: 'Catalogue raisonné', desc: 'Les œuvres d’un artiste, albums, expositions.', module: 'catalogue', rec: 'PNNPYRNPPN', words: 'artiste œuvre oeuvre exposition album'},
         {k: 'animaux', g: 1, icon: '🐾', name: 'Animaux', desc: 'Pedigree, portées. (Suivi des animaux : à part.)', module: 'animaux', rec: 'PYYPNNNNPN', words: 'animal chien chat cheval pedigree portée'},
@@ -66,7 +67,7 @@
         {k: 'outil_assembler', g: 3, icon: '🧷', name: 'Assembler des photos', desc: 'Coller plusieurs photos d’un registre en une.', target: 'tool:assembler', where: 'Listes → Outils de modification', rec: 'PPPPPRPPPP', words: 'assembler coller photos registre'},
     ];
     const GROUPS = {1: ['Des parties de l’app, cachées au départ', 'Elles existent déjà : cocher les montre dans le menu.'], 2: ['Un raccourci vers une liste', 'Il devient un « onglet à soi » (Éditeur d’onglets).'], 3: ['Un raccourci vers un outil', '']};
-    const FLAGGED = ['animaux', 'suivi', 'documents', 'catalogue', 'tresors', 'successoral', 'fiches', 'adn']; // cachés au départ tant que leur repère n'est pas posé (app.js, menuHiddenKeys)
+    const FLAGGED = ['animaux', 'suivi', 'documents', 'catalogue', 'tresors', 'successoral', 'fiches', 'paniers', 'adn']; // cachés au départ tant que leur repère n'est pas posé (app.js, menuHiddenKeys)
     /** pour les usages allumés : 'shown' (déjà montré par l'usage), 'rec' (conseillé), 'ok' (possible), 'off' (absent du catalogue) */
     function status(item, usages) {
         const set = (Array.isArray(usages) && usages.length ? usages : ['genealogie']).map(u => USAGE_ORDER.indexOf(u)).filter(i => i >= 0);
@@ -201,7 +202,7 @@
         const usageName = () => { const list = ext.premierLancement?.usages?.() || []; return usages().map(k => { const u = list.find(x => x.k === k); return u ? `${u.ic} ${i18n(u.short)}` : k; }).join(' · '); };
         function cardHtml(item, st) {
             const on = inMenu(item);
-            const tags = [st === 'rec' ? `<span class="tp-tag is-rec">${esc(i18n('conseillé pour toi'))}</span>` : '', st === 'shown' ? `<span class="tp-tag is-shown">${esc(i18n('montré par ton usage'))}</span>` : '', item.pro ? `<span class="tp-tag is-pro">${esc(i18n('métier'))}</span>` : ''].join('');
+            const tags = [st === 'rec' ? `<span class="tp-tag is-rec">${esc(i18n('conseillé pour toi'))}</span>` : '', st === 'shown' ? `<span class="tp-tag is-shown">${esc(i18n('montré par ton usage'))}</span>` : '', item.pro ? `<span class="tp-tag is-pro">${esc(i18n('métier'))}</span>` : '', item.isNew ? `<span class="tp-tag is-new">${esc(i18n('nouveau'))}</span>` : ''].join('');
             return `<label class="tp-card${on ? ' is-on' : ''}" data-tp-card="${esc(item.k)}"><input type="checkbox" data-tp-item="${esc(item.k)}" ${on ? 'checked' : ''}><span class="tp-ico" aria-hidden="true">${item.icon}</span><span class="tp-txt"><b>${esc(i18n(item.name))}</b><small>${esc(i18n(item.desc))}</small>${item.where ? `<small class="tp-where">${esc(i18n(item.where))}</small>` : ''}${tags ? `<span class="tp-tags">${tags}</span>` : ''}</span></label>`;
         }
         function ownCardHtml(t) {

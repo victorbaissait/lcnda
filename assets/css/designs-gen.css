@@ -6362,7 +6362,7 @@
 :root[data-lc-density] .cx-tk-head{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(14px * var(--lc-sp))}
 :root[data-lc-density] .cx-destpill{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .cx-destpill{padding:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
-:root[data-lc-density] .cx-rail{padding:calc(12px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-rail{padding:calc(14px * var(--lc-sp)) calc(14px * var(--lc-sp))}
 :root[data-lc-density] .cx-rail button{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .cx-rail button{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .cx-rn.is-b{padding:0 calc(7px * var(--lc-sp))}
@@ -6465,6 +6465,53 @@
 :root[data-lc-density] .cx-ldsel .cx-b{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root .cx-ldsel .cx-b.is-sec:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root .cx-ldsel .cx-b.is-ter:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cx-bsw select{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-panel-foot{gap:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-blist li{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-blist li{padding:calc(10px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-blist .cx-t{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-grip{padding-top:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-vnote{padding:calc(3px * var(--lc-sp)) calc(7px * var(--lc-sp))}
+:root[data-lc-density] .cx-bform{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-bform label{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-bform-row{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-btree{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-bnode{padding:calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-bhead{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-bhead{padding:calc(8px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-pickbar{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-pickbar{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-presets{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-presets{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-choices{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-choices{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-bdests{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-bdests{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-bdests legend{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-ttree{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-ttree{padding:calc(6px * var(--lc-sp)) calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-tnode{padding:calc(2px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-thead{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-thead{padding:calc(8px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-top{padding:calc(12px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-top{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-back{padding:1px calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-srch{padding:calc(6px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi .cx-qi-srch input{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(32px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-list{padding:calc(6px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-g{padding:calc(10px * var(--lc-sp)) calc(6px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-r{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-r{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-t{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-ch{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-ch button{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-none{padding:calc(14px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-foot{padding:calc(8px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-chip{padding:0 calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-bk{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-bk{padding:calc(2px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-bk input{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-qi-chipb{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* comptes-famille.css */
 :root[data-lc-density] .cf-n{padding:0 calc(5px * var(--lc-sp))}
 :root[data-lc-density] .cf-table th,:root[data-lc-density] .cf-table td{padding:calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp))}
@@ -6523,6 +6570,11 @@
 :root[data-lc-density] .l10v-pair{gap:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .l10v-tools{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .l10v-table td,:root[data-lc-density] .l10v-table th{padding:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+/* telech-a.css */
+:root[data-lc-density] .ta-lab{padding:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ta-tools{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ta-legend{gap:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ta-attr{padding:1px calc(5px * var(--lc-sp))}
 /* lot9-sons-enfance.css */
 :root[data-lc-density] .l9a-life{gap:calc(12px * var(--lc-sp))}
 :root[data-lc-density] .l9a-play{gap:calc(8px * var(--lc-sp))}
@@ -6552,6 +6604,23 @@
 :root[data-lc-density] .l10o-life{gap:calc(12px * var(--lc-sp))}
 :root[data-lc-density] .l10o-quote{padding-left:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .l10o-name{padding:0 calc(6px * var(--lc-sp))}
+/* telech-d.css */
+:root[data-lc-density] .td-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .td-quote{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .td-thumbs{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .td-thumb{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .td-dlg{padding:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .td-dlg-head{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .td-wiki-foot{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .td-tr{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .td-tr{padding:calc(8px * var(--lc-sp)) 0}
+:root[data-lc-density] .td-tr-actions{gap:calc(6px * var(--lc-sp))}
+/* telech-c.css */
+:root[data-lc-density] .tc-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .tc-quote{padding-left:calc(8px * var(--lc-sp))}
+/* telech-b.css */
+:root[data-lc-density] .tb-life{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .tb-links{margin-top:calc(10px * var(--lc-sp))}
 /* epoque-travail.css */
 :root[data-lc-density] .et-quote{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .et-figs{gap:calc(8px * var(--lc-sp))}
@@ -8420,3 +8489,30 @@
 :root[data-lc-density] .tw-bulk{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .tw-bulk{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .tw-box .tw-acts{gap:calc(6px * var(--lc-sp))}
+/* colonne-espacement.css */
+:root[data-lc-density] #sidebar-content.sidebar-content{padding-right:calc(18px * var(--lc-sp))}
+:root[data-lc-density] #sidebar-content.sidebar-content{padding-bottom:calc(32px * var(--lc-sp))}
+:root[data-lc-density] #sidebar-content.sidebar-content[data-overlay-scroll]{padding-right:calc(30px * var(--lc-sp))}
+:root[data-lc-density] #sidebar-footer.sidebar-footer{padding:calc(12px * var(--lc-sp)) calc(18px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] #sidebar-footer.sidebar-footer > * + *{margin-top:calc(10px * var(--lc-sp))}
+@media (max-width: 850px){
+  :root[data-lc-density] #sidebar-footer.sidebar-footer{padding:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(12px * var(--lc-sp)) !important}
+  :root[data-lc-density] #sidebar-content.sidebar-content{padding-bottom:calc(24px * var(--lc-sp))}
+}
+/* fiche-village-organiser.css */
+:root[data-lc-density] .h-village-flow .h-village-collect{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-village-flow > .is-vnarrow :is(.h-panel-head){gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-village-flow > .is-vnarrow label:has(select, input, .ui-icf-host){gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .vl-dialog .h-dialog-body{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .vl-dialog .h-dialog-body{padding:calc(4px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .vl-tools{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .vl-groups{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .vl-chip{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .vl-table th,:root[data-lc-density] .vl-table td{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .vl-foot{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .vl-foot{padding-top:calc(2px * var(--lc-sp))}
+@media (max-width: 560px){
+  :root[data-lc-density] .vl-table th:first-child,:root[data-lc-density] .vl-table td.vl-ord{padding-left:calc(4px * var(--lc-sp))}
+  :root[data-lc-density] .vl-table th:first-child,:root[data-lc-density] .vl-table td.vl-ord{padding-right:calc(2px * var(--lc-sp))}
+  :root[data-lc-density] .vl-table th,:root[data-lc-density] .vl-table td{padding:calc(5px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+}

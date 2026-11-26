@@ -3977,6 +3977,29 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .cx-ldsel .cx-b.is-ter, :root .cx-ldsel .cx-b.is-ter:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
 :root.lc-frame [data-ld-choose].is-active, :root [data-ld-choose].is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue, #055dff)}
 :root[data-theme="dark"].lc-frame .cx-ldsel .cx-b.is-sec, :root[data-theme="dark"] .cx-ldsel .cx-b.is-sec:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .cx-bsw select, :root .cx-bsw select:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2, #c9ced8)}
+:root.lc-frame .cx-blist li, :root .cx-blist li:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--cx-line)}
+:root.lc-frame .cx-blist li:first-child, :root .cx-blist li:first-child:is([data-lc-lines], [data-lc-lines] *) {border-top:0}
+:root.lc-frame .cx-vnote, :root .cx-vnote:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed var(--cx-line2)}
+:root.lc-frame .cx-vnote:focus, :root .cx-vnote:focus:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:var(--cx-blue)}
+:root.lc-frame .cx-bnode, :root .cx-bnode:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line)}
+:root.lc-frame .cx-tw2, :root .cx-tw2:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cx-bdests, :root .cx-bdests:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line2, #c9ced8)}
+:root.lc-frame .cx-tnode, :root .cx-tnode:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--cx-line)}
+:root.lc-frame .cx-qi, :root .cx-qi:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root[data-theme="dark"].lc-frame .cx-qi, :root[data-theme="dark"] .cx-qi:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .cx-qi-back, :root .cx-qi-back:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--q-line)}
+:root.lc-frame .cx-qi-srch, :root .cx-qi-srch:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--q-line)}
+:root.lc-frame .cx-qi .cx-qi-srch input, :root .cx-qi .cx-qi-srch input:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root.lc-frame .cx-qi .cx-qi-srch input:focus, :root .cx-qi .cx-qi-srch input:focus:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--q-blue)}
+:root.lc-frame .cx-qi-ch button, :root .cx-qi-ch button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root.lc-frame .cx-qi-ch button.is-on, :root .cx-qi-ch button.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--q-blue)}
+:root.lc-frame .cx-qi-foot, :root .cx-qi-foot:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--q-line)}
+:root.lc-frame .cx-qi-btn, :root .cx-qi-btn:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root[data-theme="dark"].lc-frame .cx-qi-btn, :root[data-theme="dark"] .cx-qi-btn:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .cx-qi-bk input, :root .cx-qi-bk input:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root.lc-frame .cx-qi-chipb, :root .cx-qi-chipb:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root.lc-frame .cx-qi-chipb.is-pri, :root .cx-qi-chipb.is-pri:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--q-blue)}
 /* assistant-ia.css */
 :root.lc-frame .aia-panel, :root .aia-panel:is([data-lc-lines], [data-lc-lines] *) {border-left:2px solid var(--ink,#111)}
 :root.lc-frame .aia-head, :root .aia-head:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#e5e5e5)}
@@ -4023,6 +4046,9 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .rt-msg.is-ok, :root .rt-msg.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#1a7f37}
 /* lot8-monde-village.css */
 :root.lc-frame .l8c-quote, :root .l8c-quote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--line, rgba(127, 127, 127, .35) )}
+/* telech-a.css */
+:root.lc-frame .ta-swipe, :root .ta-swipe:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#c9ced8)}
+:root.lc-frame .ta-legend i, :root .ta-legend i:is([data-lc-lines], [data-lc-lines] *) {border:1px solid rgba(0,0,0,.25)}
 /* lot9-sons-enfance.css */
 :root.lc-frame .l9a-quote, :root .l9a-quote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--border, rgba(127, 127, 127, .35) )}
 :root.lc-frame .l9a-noimg figcaption, :root .l9a-noimg figcaption:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed var(--border, rgba(127, 127, 127, .35) )}
@@ -4042,6 +4068,11 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .rs-row:last-child, :root .rs-row:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
 /* lot10-objets-traces.css */
 :root.lc-frame .l10o-quote, :root .l10o-quote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--border, rgba(127, 127, 127, .35) )}
+/* telech-d.css */
+:root.lc-frame .td-quote, :root .td-quote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--border, rgba(127, 127, 127, .35) )}
+:root.lc-frame .td-dlg, :root .td-dlg:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--border, rgba(127, 127, 127, .35) )}
+/* telech-c.css */
+:root.lc-frame .tc-quote, :root .tc-quote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--border, rgba(127, 127, 127, .35) )}
 /* epoque-travail.css */
 :root.lc-frame .et-quote, :root .et-quote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--line, rgba(127, 127, 127, .35) )}
 /* lot8-ciel-metier.css */
@@ -4972,3 +5003,8 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .pl-urow, :root .pl-urow:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color)}
 :root[data-theme="dark"].lc-frame .pl-uz .pl-ui, :root[data-theme="dark"] .pl-uz .pl-ui:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .pl-uz small, :root[data-theme="dark"] .pl-uz small:is([data-lc-lines], [data-lc-lines] *) {border-top:1px dashed #484b51}
+/* fiche-village-organiser.css */
+:root.lc-frame .vl-chip, :root .vl-chip:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d6d0c4)}
+:root.lc-frame .vl-chip.is-on, :root .vl-chip.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--accent, #3c5aa0)}
+:root.lc-frame .vl-wrap, :root .vl-wrap:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e2ddd2)}
+:root.lc-frame .vl-grip, :root .vl-grip:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .vl-move, :root .vl-move:is([data-lc-lines], [data-lc-lines] *) {border:0}

@@ -86,6 +86,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/veille-synchro.css?v=1">
     <link rel="stylesheet" href="assets/css/pistes-branches-celebres.css?v=1">
     <link rel="stylesheet" href="assets/css/connexions.css?v=6">
+    <link rel="stylesheet" href="assets/css/paniers.css?v=1"><!-- 🧺 l’onglet Paniers -->
     <link rel="stylesheet" href="assets/css/assistant-ia.css?v=3">
     <link rel="stylesheet" href="assets/css/comptes-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/rapports.css?v=1">
@@ -164,8 +165,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=41" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=43" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=42" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=44" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=1">
@@ -197,6 +198,7 @@ header('X-Content-Type-Options: nosniff');
             <button class="nav-item" data-module="recherche"><span>07</span>Recherche</button>
             <button class="nav-item" data-module="enquetes"><span>08</span>Enquêtes</button>
             <button class="nav-item" data-module="fiches"><span>08</span>📒 Fiches</button>
+            <button class="nav-item" data-module="paniers"><span>08</span>🧺 Paniers</button>
             <button class="nav-item" data-module="adn"><span>08</span>🧬 ADN</button>
             <button class="nav-item" data-module="comparaison"><span>09</span>Comparaison</button>
             <button class="nav-item" data-module="tresors"><span>09</span>✨ Trésors</button>
@@ -1239,7 +1241,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
-<script src="assets/js/app.js?v=594" defer></script>
+<script src="assets/js/app.js?v=595" defer></script>
 <script src="assets/js/app-media-limits.js?v=1" defer></script>
 <script src="assets/js/app-verrou.js?v=7" defer></script>
 <script src="assets/js/app-reseau-local.js?v=3" defer></script>
@@ -1396,7 +1398,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-widgets.js?v=56" defer></script>
 <script src="assets/js/heritage-shortcuts.js?v=17" defer></script>
 <script src="assets/js/heritage-tabs.js?v=18" defer></script>
-<script src="assets/js/app-onglets-plus.js?v=7" defer></script>
+<script src="assets/js/app-onglets-plus.js?v=8" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=3" defer></script>
 <script src="assets/js/heritage-employers.js?v=9" defer></script>
 <script src="assets/js/heritage-book.js?v=12" defer></script>
@@ -1416,7 +1418,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=55" defer></script>
 <script src="assets/js/heritage-dnd.js?v=14" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
-<script src="assets/js/heritage-studio.js?v=119" defer></script>
+<script src="assets/js/heritage-studio.js?v=120" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-retouch-fluidite.js?v=3" defer></script>
 <script src="assets/js/heritage-retouch-gomme.js?v=3" defer></script>
@@ -1702,7 +1704,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pistes-auto.js?v=2" defer></script>
 <script src="assets/js/heritage-branches-isolees.js?v=1" defer></script>
 <script src="assets/js/heritage-parents-celebres.js?v=1" defer></script>
-<script src="assets/js/heritage-connexions.js?v=6" defer></script>
+<script src="assets/js/heritage-connexions.js?v=7" defer></script>
+<script src="assets/js/app-paniers-core.js?v=1" defer></script>
+<script src="assets/js/app-paniers.js?v=1" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=1" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
 <script src="assets/js/heritage-connexions-besoins.js?v=2" defer></script><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->

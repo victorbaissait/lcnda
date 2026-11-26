@@ -13,6 +13,7 @@
     if (root) { root.LCNDA_EXT = root.LCNDA_EXT || {}; root.LCNDA_EXT.paniersCore = m; }
 })(typeof window !== 'undefined' ? window : null, () => {
     'use strict';
+    const TT = (s, v) => String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m));
     const fold = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’‘]/g, "'");
 
     /* ═════ les statuts ═════ */
@@ -61,10 +62,10 @@
         const out = []; arr.forEach(it => { const g = GROUP[s.k](it); let b = out.find(x => x.key === g); if (!b) out.push(b = {key: g, items: []}); b.items.push(it); });
         return out;
     }
-    const sortLabel = (sort, T = x => x) => { const s = normSort(sort), L = k => T((SORTS.find(x => x[0] === k) || SORTS[0])[1]); return s.k === 'main' ? T('À la main') : `${L(s.k)}${s.then ? ', ' + T('puis') + ' ' + L(s.then) : ''} ${s.dir > 0 ? '↑' : '↓'}`; };
+    const sortLabel = (sort, T = TT) => { const s = normSort(sort), L = k => T((SORTS.find(x => x[0] === k) || SORTS[0])[1]); return s.k === 'main' ? T('À la main') : `${L(s.k)}${s.then ? ', ' + T('puis') + ' ' + L(s.then) : ''} ${s.dir > 0 ? '↑' : '↓'}`; };
 
     /* ═════ le résumé, la recherche, les doublons, comparer, ce qui manque ═════ */
-    function summary(items, T = x => x) {
+    function summary(items, T = TT) {
         const ys = items.map(yearOf).filter(y => y != null), pl = new Set(items.map(placeOf).filter(Boolean)), sr = new Set(items.map(sourceOf).filter(Boolean)), u = items.filter(i => statusOf(i) === 'utilise').length;
         return [T('{n} éléments', {n: items.length}), ys.length ? `${Math.min(...ys)}–${Math.max(...ys)}` : '', pl.size ? T('{n} lieux', {n: pl.size}) : '', sr.size ? T('{n} sources', {n: sr.size}) : '', T('{n} utilisés', {n: u})].filter(Boolean).join(' · ');
     }
@@ -77,7 +78,7 @@
         return {onlyA: a.filter(x => !kb.has(sameKey(x))), both: a.filter(x => kb.has(sameKey(x))), onlyB: b.filter(x => !ka.has(sameKey(x)))};
     }
     /** « Qu'est-ce qui manque ? » : des pistes simples, honnêtes, d'après ce qu'il y a déjà dedans */
-    function missing(items, basket = {}, T = x => x) {
+    function missing(items, basket = {}, T = TT) {
         const out = [], st = s => items.filter(i => statusOf(i) === s);
         if (!items.length) return [{k: 'vide', t: T('Le panier est vide : commence par « 🔍 Créer un panier par une recherche… » ou « ＋ Ajouter ».')}];
         if (st('chercher').length) out.push({k: 'chercher', t: T('{n} éléments sont encore « à chercher ».', {n: st('chercher').length})});

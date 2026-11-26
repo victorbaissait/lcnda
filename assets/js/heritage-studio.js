@@ -186,7 +186,7 @@
     // Tous les réglages de l'app (« genealogie-… ») : apparence, mais aussi listes, statistiques, onglets, widgets,
     // tableaux, animaux, raccourcis… Pas ce qui est propre à cet ordinateur ni ce qui vise une fiche précise de la base.
     const ALL_PROFILES_KEY = 'genealogie-settings-profiles';
-    const ALL_SKIP = ['genealogie-auto-backup-lock', 'genealogie-baissait-ui-v2', 'genealogie-last-route', PROFILES_KEY, ALL_PROFILES_KEY, 'genealogie-site-defaults-applied',
+    const ALL_SKIP = ['genealogie-auto-backup-lock', 'genealogie-organiser-vus', 'genealogie-baissait-ui-v2', 'genealogie-last-route', PROFILES_KEY, ALL_PROFILES_KEY, 'genealogie-site-defaults-applied',
         'genealogie-dashboard-recent-people', 'genealogie-sosa-root', 'genealogie-sosa-root-name', 'genealogie-sosa-map', 'genealogie-daboville-root', 'genealogie-daboville-root-name', 'genealogie-daboville-map', 'genealogie-atelier-timers'];
     // (et pas non plus : un chemin de dossier de cet ordinateur, les fiches du Sosa multiple, les descriptions des médias de cette base,
     //  le nom de la personne qui relit, ni ce que l'app note toute seule : sections ouvertes, boutons et commandes des éditeurs)
