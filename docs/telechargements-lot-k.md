@@ -81,9 +81,14 @@ liens **n'existent pas** en consultation (kiosque) ni pour un invité du réseau
 | Pack | Biens | Taille | Fabriqué |
 |---|---|---|---|
 | `tk-patrimoine_monde` (patrimoine mondial de l'UNESCO, P1435 = Q9259) | 1 888 (1 364 avec l'identifiant UNESCO, 88 avec Mérimée) | 82 Ko | ici (API) |
-| `tk-patrimoine_lu` (Luxembourg) | 109 | 4 Ko | ici (API) |
+| `tk-patrimoine_lv` (Lettonie) | 1 874 | 50 Ko | ici (service de requêtes, SPARQL : le chemin du workflow, essayé de bout en bout, 23 min) |
+| `tk-patrimoine_mt` (Malte) | 723 | 17 Ko | ici (API) |
 | `tk-patrimoine_ie` (Irlande) | 705 | 19 Ko | ici (API) |
-| les autres pays (gb nl be de ch at it es pt dk no se fi is ee lv lt pl cz sk hu si hr ro bg gr mt mc ad li ca us) | — | — | **sur GitHub** : Actions → « Le monde à côté (lot K) », `quoi` = patrimoine, `pays` = … |
+| `tk-patrimoine_ad` (Andorre) | 124 | 4 Ko | ici (API) |
+| `tk-patrimoine_lu` (Luxembourg) | 109 | 4 Ko | ici (API) |
+| `tk-patrimoine_li` (Liechtenstein) | 45 | 2 Ko | ici (API) |
+| `tk-patrimoine_is` (Islande), `tk-patrimoine_mc` (Monaco) | 9, 3 | 1 Ko | ici (API) |
+| les autres pays (gb nl be de ch at it es pt dk no se fi ee lt pl cz sk hu si hr ro bg gr ca us) | — | — | **sur GitHub** : Actions → « Le monde à côté (lot K) », `quoi` = patrimoine, `pays` = … (l'API de Wikidata limitait l'atelier à environ une réponse par minute : l'Estonie et la Belgique, 7 000 biens chacune, ont été arrêtées en route) |
 
 - **Registres nationaux en fichiers** (Historic England OGL, HES, Cadw, NIAH, Rijksmonumenten CC0, Onroerend Erfgoed, Wallonie,
   Bruxelles, INPA, Länder, KGS, BDA, ICCD, K-samsök, NID, Québec, Canada, NRHP…) : **pas copiés** (sites refusés par le réseau de

@@ -146,13 +146,13 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.evaluate(() => document.body.classList.remove('is-kiosk'));
         });
         await t('390 px, en sombre : rien ne déborde de côté ; la barre passe à la ligne ; couleurs sombres', async () => {
-            await p.setViewportSize({width: 390, height: 844}); await p.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+            await p.setViewportSize({width: 390, height: 844}); await p.evaluate(() => { localStorage.setItem('genealogie-design', JSON.stringify({...JSON.parse(localStorage.getItem('genealogie-design') || '{}'), preset: 'dark'})); window.LCNDA_APP.applyDesign(); }); // le vrai thème sombre de l’app
             await openKey('data_test_gt'); await ready(); await sleep(300);
             assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'pas de défilement de côté');
             const r = await p.evaluate(() => { const s = document.querySelector('[data-gt-stage]').getBoundingClientRect(), b = document.querySelector('[data-gt-play]').getBoundingClientRect(); return {w: s.width, l: s.left, r: innerWidth - s.right, bh: b.height}; });
             assert.ok(r.w <= 390 && r.l >= 8 && r.r >= 8, JSON.stringify(r)); assert.ok(r.bh >= 30, 'boutons assez grands');
             assert.strictEqual(await p.evaluate(() => getComputedStyle(document.querySelector('.gt')).getPropertyValue('--gt-sea').trim()), '#16191d');
-            await p.setViewportSize({width: 1440, height: 900}); await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
+            await p.setViewportSize({width: 1440, height: 900}); await p.evaluate(() => { localStorage.setItem('genealogie-design', JSON.stringify({...JSON.parse(localStorage.getItem('genealogie-design') || '{}'), preset: 'portfolio'})); window.LCNDA_APP.applyDesign(); });
         });
         await t('aucune erreur dans la page', async () => { assert.deepStrictEqual(B.errs, []); });
     } finally {

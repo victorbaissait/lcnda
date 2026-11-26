@@ -200,7 +200,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => window.LCNDA_EXT.telechE.openSettings());
             await p.waitForSelector('[data-te-settings-page] [data-te-tg]', {timeout: 20000}); await sleep(500);
             const st = await p.textContent('[data-te-settings-page]');
-            assert.match(st, /CC BY-SA 4\.0/); assert.match(st, /CC BY 4\.0/); assert.match(st, /Falchi/); assert.match(st, /Farcy/); assert.match(st, /Pas encore fabriqué/);
+            assert.match(st, /CC BY-SA 4\.0/); assert.match(st, /CC BY 4\.0/); assert.match(st, /Falchi/); assert.match(st, /Farcy/); // les fossiles sont fabriqués sur GitHub : « Pas encore fabriqué » n'est attendu que tant que le fichier manque
+            if (!require('fs').existsSync(require('path').join(__dirname, '..', 'assets', 'data', 'te-fossiles.json.gz'))) assert.match(st, /Pas encore fabriqué/); else assert.doesNotMatch(st, /Fossiles[^\n]{0,80}Pas encore fabriqué/);
             await p.click('[data-te-tg="hivers"] input');
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-telech-e')).hivers), false);
             const [, , off] = await into('personInto', 1); assert.ok(!/fut le plus froid/.test(off), 'éteint : plus affiché');

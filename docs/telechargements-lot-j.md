@@ -150,8 +150,9 @@ tempête est passé à cette distance ; les vents et les pluies portent bien plu
 ## 🏡 ⚜️ 🧊 📘 Les autres paquets
 
 - `tj-villages` : 25 lieux choisis à la main (Pigüé, San Rafael de Veracruz, Castroville, Demopolis, Gallipolis, New Rochelle,
-  Franschhoek, Kaskaskia…) en trois sortes (émigrés ; fondation de la Nouvelle-France ou de la Louisiane ; réfugiés), la phrase de
-  l'article. Sur la fiche, si un de ses lieux est à moins de 25 km.
+  Franschhoek, Sainte-Geneviève, Vincennes, La Nouvelle-Orléans, Esperanza, Nueva Helvecia…) en trois sortes (émigrés ; fondation de la Nouvelle-France ou de la Louisiane ; réfugiés), la phrase de
+  l'article. Sur la fiche, si un de ses lieux est à moins de 25 km. Quelques titres (Kaskaskia, Détroit, Biloxi, Trochu…) seront ajoutés
+  par l'atelier GitHub : l'API de Wikipédia a refusé l'atelier d'ici (429) pendant la dernière fabrication.
 - `tj-cajuns` : les 64 paroisses (date de création, chef-lieu, nom français), 22 en **Acadiane** (résolution 496 du parlement de Louisiane,
   1971 : un fait). La paroisse d'un lieu : son nom dans le texte du lieu (« Lafayette Parish », « paroisse … »), sinon le centre le plus
   proche à moins de 35 km, et la fiche dit alors « sans doute ».

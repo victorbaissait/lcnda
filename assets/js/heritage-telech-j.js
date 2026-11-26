@@ -191,7 +191,7 @@
         ['cyclones', '🌀 Cyclones', 'Les cyclones passés près de ses lieux (Antilles, Louisiane, Réunion, Madagascar, Nouvelle-Calédonie, Polynésie…), depuis 1848 (NOAA IBTrACS).'],
         ['mer', '🌊 La traversée : météo en mer et livres de bord', 'Quand il a traversé la mer : où lire la météo et les livres de bord de l’époque (ICOADS, CLIWOC : liens).'],
         ['memoire', '⛓ Saint-Domingue, la traite, l’indemnité', 'Un lieu à Saint-Domingue avant 1804, ou un métier de la mer dans un port de traite : le contexte, dit sobrement, et où chercher (liens).'],
-        ['villages', '🏡 Villages fondés par des Français', 'Pigüé, San Rafael, Kaskaskia… : quand un de ses lieux en est tout près.'],
+        ['villages', '🏡 Villages fondés par des Français', 'Pigüé, San Rafael, Sainte-Geneviève… : quand un de ses lieux en est tout près.'],
         ['cajuns', '⚜️ Louisiane : les paroisses et l’Acadiane', 'La paroisse de Louisiane de ses lieux, et si elle est en Acadiane (le pays cadien).'],
         ['canada', '📖 Dictionnaire biographique du Canada', 'Pour une famille du Canada : où chercher son nom (lien).'],
         ['charcot', '🧊 Les expéditions de Charcot', 'Les membres des expéditions de Jean-Baptiste Charcot ; un homonyme (comparé sur l’ordinateur, personne décédée seulement).'],

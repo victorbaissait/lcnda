@@ -204,7 +204,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await p.evaluate(() => document.body.classList.remove('is-kiosk'));
         });
         await t('390 px, en sombre : rien ne déborde de côté ; 3 thèmes puis « ⌄ 17 autres » ; les pastilles passent à la ligne', async () => {
-            await p.setViewportSize({width: 390, height: 844}); await p.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+            await p.setViewportSize({width: 390, height: 844}); await p.evaluate(() => { localStorage.setItem('genealogie-design', JSON.stringify({...JSON.parse(localStorage.getItem('genealogie-design') || '{}'), preset: 'dark'})); window.LCNDA_APP.applyDesign(); }); // le vrai thème sombre de l’app
             await recap(); await sleep(500);
             assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'pas de défilement de côté (récap)');
             assert.strictEqual(await p.$$eval('.dr-tr', a => a.filter(x => getComputedStyle(x).display !== 'none').length), 3);
@@ -213,7 +213,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'pas de défilement de côté (réponse)');
             const r = await p.evaluate(() => { const b = document.querySelector('.dr-ask').getBoundingClientRect(); return [b.left, innerWidth - b.right]; }); assert.ok(r[0] >= 8 && r[1] >= 8, 'rien de collé aux bords : ' + r);
             assert.ok(await p.$eval('.dr-row [data-dr-bk]', b => b.getBoundingClientRect().width >= 36), '🧺 assez grand pour le doigt');
-            await p.setViewportSize({width: 1440, height: 900}); await p.evaluate(() => document.documentElement.removeAttribute('data-theme'));
+            await p.setViewportSize({width: 1440, height: 900}); await p.evaluate(() => { localStorage.setItem('genealogie-design', JSON.stringify({...JSON.parse(localStorage.getItem('genealogie-design') || '{}'), preset: 'portfolio'})); window.LCNDA_APP.applyDesign(); });
         });
         await t('aucune erreur dans la page', async () => { assert.deepStrictEqual(B.errs, []); });
     } finally {

@@ -174,6 +174,8 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const Me = await p.evaluate(() => { const M = window.LCNDA_EXT.dataListMerges.find(m => m.id === 'patrimoine_monde'); return [M.sources[0].row({ref: 'PA00110386', name: 'Abbaye', commune: 'Le Mont-Saint-Michel', protection: 'classement par liste de 1862', lat: 48.63, lon: -1.51, url: 'https://pop.culture.gouv.fr/notice/merimee/PA00110386'}),
                 M.sources[1].row({rpcq: 'https://www.patrimoine-culturel.gouv.qc.ca/rpcq/detail.do?methode=consulter&id=92629&type=bien', name: 'Maison', year: 1750, url: 'https://www.wikidata.org/wiki/Q1'})]; });
             assert.strictEqual(Me[0].key, 'P380:PA00110386'); assert.match(Me[0].kind, /classé/); assert.strictEqual(Me[1].key, 'P633:92629');
+            const R = await p.evaluate(async () => { const B = await window.LCNDA_EXT.listesReunies?.build?.('patrimoine_monde'); return B ? [B.rows.length, B.rows.find(r => /Mont-Saint-Michel/i.test(r.name || ''))?.sources] : null; });
+            assert.ok(!R || (R[0] > 1000 && R[1]?.includes('Wikidata')), `liste réunie : ${JSON.stringify(R)}`);
             const W = await p.evaluate(async () => { const d = window.LCNDA_EXT.dataLists.find(x => x.id === 'tk_musees'); const v = d.views.find(x => x.id === 'oeuvres'); const r = await v.load(); return [d.views.map(x => x.id), r.length, r[0]]; });
             assert.deepStrictEqual(W[0], ['musees', 'oeuvres']); assert.ok(W[1] > 10000); assert.match(W[2].src, /^https:\/\/www\.metmuseum\.org\//);
             const Mp = await p.evaluate(async () => (await window.LCNDA_EXT.mapLayerSources.find(x => x.id === 'tkx_patrimoine').run({bbox: [-1.6, 48.6, -1.4, 48.7]})).features.map(f => f.label));

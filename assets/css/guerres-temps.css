@@ -102,10 +102,11 @@
     .gt-war { flex: 1 1 100%; }
     .gt-sep { display: none; }
     .gt-play { min-width: 0; }
-    .gt-yr { font-size: 24px; }
+    .gt-yr { font-size: 20px; }
+    .gt-sub { display: none; } /* l'année seule : « Ces années-là » dit le reste */
     .gt-ctl .gt-lab { display: none; }
     .gt-legend { left: 6px; bottom: 26px; max-width: calc(100% - 12px); flex-flow: row wrap; gap: 2px 10px; padding: 5px 7px; font-size: 11px; }
     .gt-legend b { flex-basis: 100%; }
-    .gt-yearbox { left: 6px; top: 6px; padding: 5px 8px; max-width: calc(100% - 64px); }
+    .gt-yearbox { left: 6px; top: 6px; padding: 4px 8px; max-width: calc(100% - 64px); }
 }
 @media (prefers-reduced-motion: reduce) { .gt-tip { transition: none; } }
