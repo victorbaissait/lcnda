@@ -59,7 +59,7 @@ COMPS = [
 NOCOORD = {'tdf', 'giro', 'vuelta', '6n', 'top14', 'l1', 'cdf', 'ucl', 'dakar'}
 LINK_ONLY = [
     ('boxe', '🥊', 'Championnats du monde de boxe', 'BoxRec (base privée, conditions d’utilisation restrictives)', 'https://boxrec.com/'),
-    ('f1', '🏎', 'Grands Prix de Formule 1', 'Ergast / jolpica-f1 (licence à lire ; site non joignable d’ici)', 'https://github.com/jolpica/jolpica-f1'),
+    ('f1', '🏎', 'Grands Prix de Formule 1', 'jolpica-f1 / Ergast (CC BY-NC-SA 4.0 : pas d’usage commercial)', 'https://github.com/jolpica/jolpica-f1/blob/main/TERMS.md'),
     ('tennis_matchs', '🎾', 'Tous les matchs de tennis (ATP/WTA)', 'Jeff Sackmann (CC BY-NC-SA 4.0 : pas d’usage commercial)', 'https://github.com/JeffSackmann/tennis_atp'),
 ]
 
