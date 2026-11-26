@@ -187,7 +187,9 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                 window.LCNDA_EXT.dataHome._st.view = 'recap'; window.LCNDA_EXT.dataHome.resetHighlights?.(); window.LCNDA_EXT.dataHome.resetStats();
                 const A = window.LCNDA_APP; A.state.listType = 'donnees'; A.setModule('listes');
             });
-            await p.waitForFunction(() => /utiles pour tes lieux/.test(document.querySelector('[data-dr-todo]')?.textContent || ''), null, {timeout: 40000});
+            await p.waitForFunction(() => /utiles pour tes lieux/.test(document.querySelector('[data-dr-todo]')?.textContent || ''), null, {timeout: 40000}).catch(async e => {
+                const dbg = await p.evaluate(async () => { const S = await window.LCNDA_EXT.dataHome.stats(); const LF = window.LCNDA_EXT.listesFamille; await LF?.ready?.(); return {todo: document.querySelector('[data-dr-todo]')?.textContent, n: document.querySelectorAll('[data-dr-todo]').length, S: {missing: S.missing, coverKnown: S.coverKnown, useful: S.useful}, places: (LF?.data?.()?.places || []).slice(0, 3)}; });
+                throw new Error(e.message + ' ' + JSON.stringify(dbg)); });
             const todo = await p.textContent('[data-dr-todo]');
             assert.match(todo, /dont 1 utiles pour tes lieux : Liste d’essai couvrant Florence/); assert.match(todo, /✨ Nouveau : 🏆 Sport/);
             assert.ok(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-donnees-themes-vus')).sport > 0));

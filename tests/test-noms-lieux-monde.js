@@ -205,14 +205,15 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
         await t('390 px et thème sombre : rien ne déborde, rien de collé aux bords, lisible', async () => {
             const m = await browser.newContext({viewport: {width: 390, height: 844}, colorScheme: 'dark'});
             await m.route(/^https?:\/\/(?!127\.0\.0\.1)/, r => { outside.push(r.request().url()); return r.abort(); });
+            await m.addInitScript(() => { try { localStorage.setItem('genealogie-premier-vu', '1'); const cur = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); localStorage.setItem('genealogie-design', JSON.stringify({...cur, preset: 'dark'})); } catch (_) {} }); // le thème sombre de l'app (comme test-rien-de-colle)
             const q = await m.newPage(); q.on('pageerror', e => errs.push(e.message));
-            await ready(q); await q.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
+            await ready(q);
             await openView(q, 'Lutetia'); await q.waitForFunction(() => document.querySelector('.nlm-mini .nlm-land path'), null, {timeout: 20000});
             await q.evaluate(() => { document.querySelector('[data-nlm-ck]').click(); });
             const r = await q.evaluate(() => { const h = document.querySelector('[data-nlm]'); const over = [...h.querySelectorAll('*')].filter(e => !e.parentElement.closest('svg')).filter(e => { const b = e.getBoundingClientRect(); return b.width && (b.right > window.innerWidth + 1 || b.left < -1); }).map(e => String(e.className?.baseVal ?? e.className) || e.tagName).slice(0, 5);
-                const card = h.querySelector('.nlm-place').getBoundingClientRect(); return {over, left: card.left, right: window.innerWidth - card.right, docW: document.documentElement.scrollWidth, color: getComputedStyle(h.querySelector('.nlm-nm')).color, bg: getComputedStyle(h.querySelector('.nlm-place')).backgroundColor, theme: document.documentElement.dataset.theme, html: document.documentElement.className + ' ' + getComputedStyle(h.querySelector('.nlm-place')).getPropertyValue('--card-bg') + ' ' + [...document.documentElement.attributes].map(a => a.name + '=' + a.value).join(' ')}; });
+                const card = h.querySelector('.nlm-place').getBoundingClientRect(); return {over, left: card.left, right: window.innerWidth - card.right, docW: document.documentElement.scrollWidth, color: getComputedStyle(h.querySelector('.nlm-nm')).color, bg: getComputedStyle(h.querySelector('.nlm-place')).backgroundColor, theme: document.documentElement.dataset.theme}; });
             assert.deepStrictEqual(r.over, []); assert.ok(r.left >= 8 && r.right >= 8, JSON.stringify(r)); assert.ok(r.docW <= 391, `largeur ${r.docW}`);
-            assert.ok(!/rgb\(0, 0, 0\)/.test(r.color) && !/rgb\(255, 255, 255\)/.test(r.bg), `sombre : ${r.color} sur ${r.bg} (${r.theme} ${r.html})`);
+            assert.ok(r.theme === 'dark' && !/rgb\(0, 0, 0\)/.test(r.color) && !/rgb\(255, 255, 255\)/.test(r.bg), `sombre : ${r.color} sur ${r.bg} (${r.theme})`);
             const glued = await q.evaluate(detect, {root: '[data-nlm]', min: 4});
             assert.deepStrictEqual(glued.map(x => `${x.key} (${x.label || ''})`), []);
             await m.close();

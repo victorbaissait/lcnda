@@ -38,3 +38,53 @@ Une liste de données (séismes, guerres, Tour de France…) filtrée pour ce pr
 Une donnée téléchargée ¦ A piece of downloaded data ¦ Un dato descargado ¦ Heruntergeladene Daten ¦ Un dato scaricato ¦ Um dado descarregado ¦ Pobrane dane ¦ Gedownloade gegevens
 📊 Données téléchargées ¦ 📊 Downloaded data ¦ 📊 Datos descargados ¦ 📊 Heruntergeladene Daten ¦ 📊 Dati scaricati ¦ 📊 Dados descarregados ¦ 📊 Pobrane dane ¦ 📊 Gedownloade gegevens
 Une liste de données (séismes, guerres, Tour de France…) : quelques lignes ou toute la liste filtrée ¦ A data list (earthquakes, wars, Tour de France…): a few rows or the whole filtered list ¦ Una lista de datos (terremotos, guerras, Tour de Francia…): algunas filas o toda la lista filtrada ¦ Eine Datenliste (Erdbeben, Kriege, Tour de France…): einige Zeilen oder die ganze gefilterte Liste ¦ Un elenco di dati (terremoti, guerre, Tour de France…): alcune righe o tutto l’elenco filtrato ¦ Uma lista de dados (sismos, guerras, Volta a França…): algumas linhas ou toda a lista filtrada ¦ Lista danych (trzęsienia ziemi, wojny, Tour de France…): kilka wierszy lub cała przefiltrowana lista ¦ Een gegevenslijst (aardbevingen, oorlogen, Tour de France…): enkele regels of de hele gefilterde lijst
+Barres (par décennie) ¦ Bars (by decade) ¦ Barras (por década) ¦ Balken (nach Jahrzehnt) ¦ Barre (per decennio) ¦ Barras (por década) ¦ Słupki (według dekad) ¦ Staven (per decennium)
+compacte ¦ compact ¦ compacta ¦ kompakt ¦ compatta ¦ compacta ¦ zwarta ¦ compact
+aérée ¦ airy ¦ espaciada ¦ luftig ¦ ariosa ¦ espaçada ¦ przestronna ¦ ruim
+petite ¦ small ¦ pequeña ¦ klein ¦ piccola ¦ pequena ¦ mała ¦ klein
+moyenne ¦ medium ¦ mediana ¦ mittel ¦ media ¦ média ¦ średnia ¦ middelgroot
+grande ¦ large ¦ grande ¦ groß ¦ grande ¦ grande ¦ duża ¦ groot
+ouvre la liste ¦ opens the list ¦ abre la lista ¦ öffnet die Liste ¦ apre l’elenco ¦ abre a lista ¦ otwiera listę ¦ opent de lijst
+ouvre la ligne ¦ opens the row ¦ abre la fila ¦ öffnet die Zeile ¦ apre la riga ¦ abre a linha ¦ otwiera wiersz ¦ opent de regel
+la garde dans le panier 🧺 ¦ keeps it in the basket 🧺 ¦ la guarda en la cesta 🧺 ¦ legt sie in den Korb 🧺 ¦ la tiene nel cestino 🧺 ¦ guarda-a no cesto 🧺 ¦ zachowuje go w koszyku 🧺 ¦ bewaart hem in het mandje 🧺
+📋 Colonnes, tri et regroupement ¦ 📋 Columns, sorting and grouping ¦ 📋 Columnas, orden y agrupación ¦ 📋 Spalten, Sortierung und Gruppierung ¦ 📋 Colonne, ordinamento e raggruppamento ¦ 📋 Colunas, ordenação e agrupamento ¦ 📋 Kolumny, sortowanie i grupowanie ¦ 📋 Kolommen, sortering en groepering
+🎨 Apparence ¦ 🎨 Appearance ¦ 🎨 Apariencia ¦ 🎨 Aussehen ¦ 🎨 Aspetto ¦ 🎨 Aparência ¦ 🎨 Wygląd ¦ 🎨 Uiterlijk
+🖱 Comportement ¦ 🖱 Behaviour ¦ 🖱 Comportamiento ¦ 🖱 Verhalten ¦ 🖱 Comportamento ¦ 🖱 Comportamento ¦ 🖱 Zachowanie ¦ 🖱 Gedrag
+⭐ Modèles et partage ¦ ⭐ Templates and sharing ¦ ⭐ Plantillas y compartir ¦ ⭐ Vorlagen und Teilen ¦ ⭐ Modelli e condivisione ¦ ⭐ Modelos e partilha ¦ ⭐ Szablony i udostępnianie ¦ ⭐ Sjablonen en delen
+🎲 La ligne du jour ¦ 🎲 Row of the day ¦ 🎲 La fila del día ¦ 🎲 Zeile des Tages ¦ 🎲 La riga del giorno ¦ 🎲 A linha do dia ¦ 🎲 Wiersz dnia ¦ 🎲 Regel van de dag
+🧺 Gardé dans le panier. ¦ 🧺 Kept in the basket. ¦ 🧺 Guardado en la cesta. ¦ 🧺 In den Korb gelegt. ¦ 🧺 Tenuto nel cestino. ¦ 🧺 Guardado no cesto. ¦ 🧺 Zachowano w koszyku. ¦ 🧺 Bewaard in het mandje.
+Colonnes (tableau, cartes) ¦ Columns (table, cards) ¦ Columnas (tabla, tarjetas) ¦ Spalten (Tabelle, Karten) ¦ Colonne (tabella, schede) ¦ Colunas (tabela, cartões) ¦ Kolumny (tabela, karty) ¦ Kolommen (tabel, kaarten)
+le nom de la liste ¦ the list’s name ¦ el nombre de la lista ¦ der Name der Liste ¦ il nome dell’elenco ¦ o nome da lista ¦ nazwa listy ¦ de naam van de lijst
+celle de l’app ¦ the app’s ¦ la de la app ¦ die der App ¦ quello dell’app ¦ a da app ¦ jak w aplikacji ¦ die van de app
+Montrer la ligne de la source (↗ reste toujours là) ¦ Show the source line (↗ always stays) ¦ Mostrar la línea de la fuente (↗ siempre queda) ¦ Quellenzeile zeigen (↗ bleibt immer) ¦ Mostra la riga della fonte (↗ resta sempre) ¦ Mostrar a linha da fonte (↗ fica sempre) ¦ Pokaż wiersz źródła (↗ zostaje zawsze) ¦ De bronregel tonen (↗ blijft altijd)
+Un clic sur une ligne ¦ A click on a row ¦ Un clic en una fila ¦ Ein Klick auf eine Zeile ¦ Un clic su una riga ¦ Um clique numa linha ¦ Kliknięcie wiersza ¦ Een klik op een regel
+👪 Montrer les lignes liées à ma famille ¦ 👪 Highlight rows linked to my family ¦ 👪 Resaltar las filas ligadas a mi familia ¦ 👪 Zeilen mit Bezug zu meiner Familie hervorheben ¦ 👪 Evidenzia le righe legate alla mia famiglia ¦ 👪 Destacar as linhas ligadas à minha família ¦ 👪 Wyróżnij wiersze związane z moją rodziną ¦ 👪 Regels die met mijn familie te maken hebben markeren
+Se met à jour tout seul ¦ Updates by itself ¦ Se actualiza solo ¦ Aktualisiert sich selbst ¦ Si aggiorna da solo ¦ Atualiza-se sozinho ¦ Aktualizuje się sam ¦ Werkt zichzelf bij
+Quand il n’y a rien ¦ When there is nothing ¦ Cuando no hay nada ¦ Wenn es nichts gibt ¦ Quando non c’è niente ¦ Quando não há nada ¦ Gdy nic nie ma ¦ Als er niets is
+Exporter (.json) ¦ Export (.json) ¦ Exportar (.json) ¦ Exportieren (.json) ¦ Esporta (.json) ¦ Exportar (.json) ¦ Eksportuj (.json) ¦ Exporteren (.json)
+Contient le mot ¦ Contains the word ¦ Contiene la palabra ¦ Enthält das Wort ¦ Contiene la parola ¦ Contém a palavra ¦ Zawiera słowo ¦ Bevat het woord
+comme la liste ¦ like the list ¦ como la lista ¦ wie die Liste ¦ come l’elenco ¦ como a lista ¦ jak lista ¦ zoals de lijst
+par {f} ¦ by {f} ¦ por {f} ¦ nach {f} ¦ per {f} ¦ por {f} ¦ według: {f} ¦ per {f}
+⭐ Modèle « {n} » enregistré (la forme seulement, sans les données). ¦ ⭐ Template “{n}” saved (the look only, no data). ¦ ⭐ Plantilla «{n}» guardada (solo la forma, sin los datos). ¦ ⭐ Vorlage „{n}“ gespeichert (nur das Aussehen, ohne Daten). ¦ ⭐ Modello «{n}» salvato (solo la forma, senza i dati). ¦ ⭐ Modelo «{n}» guardado (só a forma, sem os dados). ¦ ⭐ Zapisano szablon „{n}” (tylko wygląd, bez danych). ¦ ⭐ Sjabloon ‘{n}’ bewaard (alleen de vorm, zonder gegevens).
+Modèle « {n} » appliqué ¦ Template “{n}” applied ¦ Plantilla «{n}» aplicada ¦ Vorlage „{n}“ angewendet ¦ Modello «{n}» applicato ¦ Modelo «{n}» aplicado ¦ Zastosowano szablon „{n}” ¦ Sjabloon ‘{n}’ toegepast
+Ce fichier n’est pas un widget « Données téléchargées ». ¦ This file is not a “Downloaded data” widget. ¦ Este archivo no es un widget «Datos descargados». ¦ Diese Datei ist kein Widget „Heruntergeladene Daten“. ¦ Questo file non è un widget «Dati scaricati». ¦ Este ficheiro não é um widget «Dados descarregados». ¦ Ten plik nie jest widżetem „Pobrane dane”. ¦ Dit bestand is geen widget ‘Gedownloade gegevens’.
+Widget réglé ¦ Widget set ¦ Widget ajustado ¦ Widget eingestellt ¦ Widget impostato ¦ Widget ajustado ¦ Widżet ustawiony ¦ Widget ingesteld
+▦ Tableau compact ¦ ▦ Compact table ¦ ▦ Tabla compacta ¦ ▦ Kompakte Tabelle ¦ ▦ Tabella compatta ¦ ▦ Tabela compacta ¦ ▦ Zwarta tabela ¦ ▦ Compacte tabel
+🃏 Cartes ¦ 🃏 Cards ¦ 🃏 Tarjetas ¦ 🃏 Karten ¦ 🃏 Schede ¦ 🃏 Cartões ¦ 🃏 Karty ¦ 🃏 Kaarten
+📊 Petit graphique ¦ 📊 Small chart ¦ 📊 Gráfico pequeño ¦ 📊 Kleines Diagramm ¦ 📊 Piccolo grafico ¦ 📊 Pequeno gráfico ¦ 📊 Mały wykres ¦ 📊 Kleine grafiek
+🕰 Petite frise ¦ 🕰 Small timeline ¦ 🕰 Cronología pequeña ¦ 🕰 Kleine Zeitleiste ¦ 🕰 Piccola cronologia ¦ 🕰 Pequena cronologia ¦ 🕰 Mała oś czasu ¦ 🕰 Kleine tijdlijn
+📅 Ce jour-là (ou la ligne du jour) ¦ 📅 On this day (or the row of the day) ¦ 📅 Tal día como hoy (o la fila del día) ¦ 📅 An diesem Tag (oder die Zeile des Tages) ¦ 📅 Accadde oggi (o la riga del giorno) ¦ 📅 Neste dia (ou a linha do dia) ¦ 📅 Tego dnia (lub wiersz dnia) ¦ 📅 Op deze dag (of de regel van de dag)
+🎞 Défilant ¦ 🎞 Scrolling ¦ 🎞 Desfilando ¦ 🎞 Laufend ¦ 🎞 A scorrimento ¦ 🎞 Em rolagem ¦ 🎞 Przewijane ¦ 🎞 Lopend
+l’enquête entière ¦ the whole investigation ¦ toda la investigación ¦ die ganze Recherche ¦ tutta l’indagine ¦ toda a investigação ¦ całe śledztwo ¦ het hele onderzoek
+la piste « {t} » ¦ the lead “{t}” ¦ la pista «{t}» ¦ die Spur „{t}“ ¦ la pista «{t}» ¦ a pista «{t}» ¦ trop „{t}” ¦ het spoor ‘{t}’
+{f} (enquête « {t} ») ¦ {f} (investigation “{t}”) ¦ {f} (investigación «{t}») ¦ {f} (Recherche „{t}“) ¦ {f} (indagine «{t}») ¦ {f} (investigação «{t}») ¦ {f} (śledztwo „{t}”) ¦ {f} (onderzoek ‘{t}’)
+le projet ¦ the project ¦ el proyecto ¦ das Projekt ¦ il progetto ¦ o projeto ¦ projekt ¦ het project
+le projet « {t} » ¦ the project “{t}” ¦ el proyecto «{t}» ¦ das Projekt „{t}“ ¦ il progetto «{t}» ¦ o projeto «{t}» ¦ projekt „{t}” ¦ het project ‘{t}’
+{f} (projet « {t} ») ¦ {f} (project “{t}”) ¦ {f} (proyecto «{t}») ¦ {f} (Projekt „{t}“) ¦ {f} (progetto «{t}») ¦ {f} (projeto «{t}») ¦ {f} (projekt „{t}”) ¦ {f} (project ‘{t}’)
+l’élément « {t} » ¦ the item “{t}” ¦ el elemento «{t}» ¦ das Element „{t}“ ¦ l’elemento «{t}» ¦ o elemento «{t}» ¦ element „{t}” ¦ het element ‘{t}’
+Où ranger : ¦ Where to file: ¦ Dónde guardar: ¦ Wohin ablegen: ¦ Dove riporre: ¦ Onde arrumar: ¦ Gdzie odłożyć: ¦ Waar opbergen:
+Ici : le dossier « {t} » ¦ Here: the folder “{t}” ¦ Aquí: la carpeta «{t}» ¦ Hier: der Ordner „{t}“ ¦ Qui: la cartella «{t}» ¦ Aqui: a pasta «{t}» ¦ Tutaj: folder „{t}” ¦ Hier: de map ‘{t}’
+Rattaché à cette piste ¦ Attached to this lead ¦ Vinculado a esta pista ¦ Mit dieser Spur verknüpft ¦ Collegato a questa pista ¦ Ligado a esta pista ¦ Dołączone do tego tropu ¦ Gekoppeld aan dit spoor
+Rien pour l’instant : des fiches, des actes, des sources, des médias, des notes, des lieux, des données… ¦ Nothing yet: records, acts, sources, media, notes, places, data… ¦ Nada por ahora: fichas, actas, fuentes, medios, notas, lugares, datos… ¦ Noch nichts: Personen, Urkunden, Quellen, Medien, Notizen, Orte, Daten… ¦ Ancora niente: schede, atti, fonti, media, note, luoghi, dati… ¦ Nada por agora: fichas, atos, fontes, media, notas, lugares, dados… ¦ Na razie nic: karty, akty, źródła, media, notatki, miejsca, dane… ¦ Nog niets: fiches, akten, bronnen, media, notities, plaatsen, gegevens…
+Depuis le panier ¦ From the basket ¦ Desde la cesta ¦ Aus dem Korb ¦ Dal cestino ¦ Do cesto ¦ Z koszyka ¦ Uit het mandje
+Enregistre d’abord la piste : tu pourras ensuite y rattacher des fiches, des actes, des données… ¦ Save the lead first: you can then attach records, acts, data… ¦ Guarda primero la pista: luego podrás vincular fichas, actas, datos… ¦ Speichere zuerst die Spur: dann kannst du Personen, Urkunden, Daten… verknüpfen ¦ Salva prima la pista: poi potrai collegarvi schede, atti, dati… ¦ Guarda primeiro a pista: depois poderás ligar fichas, atos, dados… ¦ Najpierw zapisz trop: potem dołączysz karty, akty, dane… ¦ Bewaar eerst het spoor: daarna kun je fiches, akten, gegevens… koppelen

@@ -21,7 +21,8 @@
  *   consultation (kiosque) ou pour un invité du réseau local : aucune comparaison de noms, aucun lien de carte. Seuls les liens « ↗ »
  *   ouvrent une page, sur un clic.
  * localStorage : « genealogie-telech-j ».   window.LCNDA_EXT.telechJ = {core…, load, personInto, placeInto, oldNames, openSettings}
- * Maquette de la recherche « Noms de lieux d'autrefois, tous pays » : docs/design/noms-de-lieux-monde.html (à valider).
+ * La recherche « Noms de lieux d'autrefois, tous pays » (maquette validée docs/design/noms-de-lieux-monde.html) : assets/js/noms-lieux-monde.js
+ *   (vue « 🔎 Un nom → le lieu » de la liste réunie anciens_noms, 📊 Récap, ⌘K).
  * Essai : tests/test-telech-j.js
  */
 (function (root) {

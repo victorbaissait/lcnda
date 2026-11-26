@@ -157,8 +157,9 @@ tempête est passé à cette distance ; les vents et les pluies portent bien plu
   GOV 2 > World Historical Gazetteer 3 (lien seulement) > Pleiades 4 > Wikidata 5. Sources : `gov_noms` et `wikidata_anciens_noms`
   (déclarées par la liste réunie : `sources`), `tj_noms`, `tj_fusions`, `tj_pleiades` (déclarées par elles-mêmes : `merge`).
 - **La recherche « un nom → le lieu d'aujourd'hui »** : faite dans `heritage-telech-j.js` (`searchNames`, `LCNDA_EXT.telechJ.oldNames`),
-  sur l'ordinateur ; **l'écran** est seulement la maquette `docs/design/noms-de-lieux-monde.html` (à valider) — la liste réunie suffit en
-  attendant (on y cherche « Presbourg »). Ses six questions sont dans la maquette.
+  sur l'ordinateur ; **l'écran** (maquette `docs/design/noms-de-lieux-monde.html`, validée telle quelle avec ses recommandations) :
+  `assets/js/noms-lieux-monde.js` — vue « 🔎 Un nom → le lieu » de la liste réunie (vue de départ), 📊 Récap et ⌘K ; essai
+  `tests/test-noms-lieux-monde.js`.
 
 ## 🏡 ⚜️ 🧊 📘 Les autres paquets
 
