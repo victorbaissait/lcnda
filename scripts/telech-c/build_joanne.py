@@ -11,9 +11,9 @@ quelle page est chaque article). Rien n'est réécrit : l'article est copié tel
 
 Prudence (un article attribué à la mauvaise commune serait pire que rien) : on garde un article seulement si
   - il commence au début d'une ligne par « Nom, » ;
-  - ses 220 premiers caractères nomment un département (nom de 1869) ;
+  - il nomme son département (nom de 1869) juste après « Nom, », même un peu mal lu par l'OCR (rapprochement prudent) ;
   - il donne un nombre d'habitants (« 1,234 hab. » ou « 1,234 h. ») ;
-  - il fait entre 25 et 1 800 caractères.
+  - il fait entre 25 et 9 000 caractères (les chefs-lieux ont de longs articles).
 Le résultat est rangé par département d'aujourd'hui (assets/data/tc-joanne/<code>.json.gz) ; l'app cherche la commune par son
 nom dans le fichier de son département. Le script s'arrête en erreur (et le workflow n'enregistre rien) si moins de
 8 000 articles sont reconnus ou si les communes témoins manquent.
@@ -21,6 +21,7 @@ nom dans le fichier de son département. Le script s'arrête en erreur (et le wo
 Fabriqué sur GitHub (.github/workflows/telech-c-joanne.yml) : les serveurs de fichiers d'Internet Archive ne sont pas
 joignables depuis l'atelier de développement.
 """
+import difflib
 import gzip
 import json
 import os
@@ -58,7 +59,55 @@ def fold(s):
     return re.sub(r'[^a-z0-9]+', ' ', s).strip()
 
 
-DEP_RE = [(re.compile(r'(?<![a-z])' + re.escape(fold(n)).replace(' ', r'\s') + r'(?![a-z])'), n) for n in sorted(DEPS, key=len, reverse=True)]
+# un nom en plusieurs mots (« Côtes-du-Nord ») : les mots séparés par une ou plusieurs espaces
+DEP_RE = [(re.compile(r'(?<![a-z])' + r'\s+'.join(re.escape(w) for w in fold(n).split()) + r'(?![a-z])'), n) for n in sorted(DEPS, key=len, reverse=True)]
+DEP_FOLD = {fold(n): n for n in DEPS}
+# chef-lieu de chaque département en 1869 : l'article dit « 75 kil. de St-Brieuc » (distance au chef-lieu), ce qui permet
+# de retrouver le département quand son nom est trop mal lu par l'OCR
+PREF = {'Ain': 'Bourg', 'Aisne': 'Laon', 'Allier': 'Moulins', 'Basses-Alpes': 'Digne', 'Hautes-Alpes': 'Gap', 'Alpes-Maritimes': 'Nice',
+    'Ardèche': 'Privas', 'Ardennes': 'Mézières', 'Ariège': 'Foix', 'Aube': 'Troyes', 'Aude': 'Carcassonne', 'Aveyron': 'Rodez',
+    'Bouches-du-Rhône': 'Marseille', 'Calvados': 'Caen', 'Cantal': 'Aurillac', 'Charente': 'Angoulême', 'Charente-Inférieure': 'La Rochelle',
+    'Cher': 'Bourges', 'Corrèze': 'Tulle', 'Corse': 'Ajaccio', "Côte-d'Or": 'Dijon', 'Côtes-du-Nord': 'Saint-Brieuc', 'Creuse': 'Guéret',
+    'Dordogne': 'Périgueux', 'Doubs': 'Besançon', 'Drôme': 'Valence', 'Eure': 'Évreux', 'Eure-et-Loir': 'Chartres', 'Finistère': 'Quimper',
+    'Gard': 'Nîmes', 'Haute-Garonne': 'Toulouse', 'Gers': 'Auch', 'Gironde': 'Bordeaux', 'Hérault': 'Montpellier', 'Ille-et-Vilaine': 'Rennes',
+    'Indre': 'Châteauroux', 'Indre-et-Loire': 'Tours', 'Isère': 'Grenoble', 'Jura': 'Lons-le-Saunier', 'Landes': 'Mont-de-Marsan',
+    'Loir-et-Cher': 'Blois', 'Loire': 'Saint-Étienne', 'Haute-Loire': 'Le Puy', 'Loire-Inférieure': 'Nantes', 'Loiret': 'Orléans',
+    'Lot': 'Cahors', 'Lot-et-Garonne': 'Agen', 'Lozère': 'Mende', 'Maine-et-Loire': 'Angers', 'Manche': 'Saint-Lô', 'Marne': 'Châlons',
+    'Haute-Marne': 'Chaumont', 'Mayenne': 'Laval', 'Meurthe': 'Nancy', 'Meuse': 'Bar-le-Duc', 'Morbihan': 'Vannes', 'Moselle': 'Metz',
+    'Nièvre': 'Nevers', 'Nord': 'Lille', 'Oise': 'Beauvais', 'Orne': 'Alençon', 'Pas-de-Calais': 'Arras', 'Puy-de-Dôme': 'Clermont',
+    'Basses-Pyrénées': 'Pau', 'Hautes-Pyrénées': 'Tarbes', 'Pyrénées-Orientales': 'Perpignan', 'Bas-Rhin': 'Strasbourg', 'Haut-Rhin': 'Colmar',
+    'Rhône': 'Lyon', 'Haute-Saône': 'Vesoul', 'Saône-et-Loire': 'Mâcon', 'Sarthe': 'Le Mans', 'Savoie': 'Chambéry', 'Haute-Savoie': 'Annecy',
+    'Seine': 'Paris', 'Seine-Inférieure': 'Rouen', 'Seine-et-Marne': 'Melun', 'Seine-et-Oise': 'Versailles', 'Deux-Sèvres': 'Niort',
+    'Somme': 'Amiens', 'Tarn': 'Albi', 'Tarn-et-Garonne': 'Montauban', 'Var': 'Draguignan', 'Vaucluse': 'Avignon', 'Vendée': 'Napoléon',
+    'Vienne': 'Poitiers', 'Haute-Vienne': 'Limoges', 'Vosges': 'Épinal', 'Yonne': 'Auxerre'}
+PREF_RE = [(re.compile(r'kil\s*(?:de|d)\s*' + r'\s+'.join(re.escape(w) for w in fold(v).split()) + r'(?![a-z])'), d) for d, v in PREF.items()]
+
+
+def by_pref(t):
+    head = re.sub(r'\bst(e?)\b', r'saint\1', fold(t[:400]))
+    found = {d for rx, d in PREF_RE if rx.search(head)}
+    return found.pop() if len(found) == 1 else None
+
+
+def dep_of(t, name):
+    """Le département de l'article : d'abord le nom exact dans le début, sinon le morceau juste après « Nom, »
+    rapproché d'un nom de département malgré les lettres mal lues par l'OCR (« C(5leï-du-JVord », « Boiuhes-du-Rhône »)."""
+    rest = t[len(name):].lstrip(' ,')
+    chunk = fold(re.split(r',', rest, maxsplit=1)[0])[:40]
+    if chunk in DEP_FOLD:
+        return DEP_FOLD[chunk]
+    pref = by_pref(t)  # la distance au chef-lieu d'abord : « C6les-du-Nord » ne doit pas devenir « Nord »
+    if pref:
+        return pref
+    for rx, n in DEP_RE:  # le nom exact dans le morceau, s'il en couvre presque tout
+        m = rx.search(chunk)
+        if m and m.end() - m.start() >= 0.8 * len(chunk):
+            return n
+    near = difflib.get_close_matches(chunk, list(DEP_FOLD), n=2, cutoff=0.72)
+    # prudence : un seul candidat net (deux noms proches, comme « haute loire » et « loire », on ne devine pas)
+    if near and (len(near) == 1 or difflib.SequenceMatcher(None, chunk, near[0]).ratio() - difflib.SequenceMatcher(None, chunk, near[1]).ratio() > 0.08):
+        return DEP_FOLD[near[0]]
+    return None
 HEAD = re.compile(r"^([A-ZÀ-Ý][A-Za-zÀ-ÿ'’\-]+(?:[ \-](?:[A-Za-zÀ-ÿ'’]+|\([^)]{1,25}\)))*?)\s*,\s+(.{20,})$")
 POP = re.compile(r'\d[\d,. ]*\s*(?:hab|h)\.')
 
@@ -108,10 +157,9 @@ def main():
     by_dep, kept = {}, 0
     for e in entries:
         t = re.sub(r'\s+', ' ', e['t']).replace('- ', '').strip()
-        if not (25 <= len(t) <= 1800) or not POP.search(t):
+        if not (25 <= len(t) <= 9000) or not POP.search(t[:600]):
             continue
-        head = fold(t[:220])
-        dep = next((n for rx, n in DEP_RE if rx.search(head)), None)
+        dep = dep_of(t, e['n'])
         if not dep:
             continue
         page = bisect_right(starts, e['at']) - 1 if starts else None
