@@ -1522,6 +1522,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-ou-chercher-monde.js?v=1" defer></script>
 <script src="assets/js/app-ou-chercher-openarch.js?v=1" defer></script>
 <script src="assets/js/heritage-ou-chercher-plus.js?v=2" defer></script>
+<script src="assets/js/app-liens-archives-core.js?v=1" defer></script>
+<script src="assets/js/heritage-liens-archives.js?v=1" defer></script>
 <script src="assets/js/heritage-preuve.js?v=5" defer></script>
 <script src="assets/js/heritage-biographie.js?v=4" defer></script>
 <script src="assets/js/heritage-journee.js?v=1" defer></script>
