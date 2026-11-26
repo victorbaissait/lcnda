@@ -159,8 +159,8 @@ téléchargées (deux widgets « éclipses » : liste et graphique, posés dans 
 
 ¹ La grosse liste réunie (séismes, crues… de plusieurs sources) se construit une fois, à la première page qui en a besoin : avant, c'était
 Listes → Données (3,2 s d'un bloc) ; après, la fiche village (1,1 s de calcul, 2,7 s de tâche sur cet essai). Profil : `merge` 4,5 s → 1,1 s.
-Sur la fiche personne, au repos : avant ≈ 60 changements de la page par seconde (boucle `applyFree` + redessins du bloc), après quelques-uns
-(le bloc 🔎 qui reçoit ses dernières réponses en ligne, puis plus rien).
+Sur la fiche personne, 25 s après l'ouverture, 5 s observées : avant ≈ 780 changements de la page (la boucle `applyFree` toutes les 80 ms,
+et les boutons redécorés après chaque redessin du bloc 🔎), après ≈ 90 (le bloc qui reçoit ses dernières réponses en ligne).
 
 Reste à voir : la fiche personne se calme encore lentement (≈ 20 s) — ce sont les sources **en ligne** de « Ce qui le concerne »
 (délai de 25 s chacune sans Internet) ; la construction des listes réunies pourrait se faire au calme (`requestIdleCallback`).
