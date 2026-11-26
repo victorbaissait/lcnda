@@ -247,6 +247,9 @@
         const v = spec.o?.[o.k], at = `data-opt="${esc(o.k)}"`;
         if (o.type === 'link') { const h = o.href?.(spec) || ''; return h ? `<a class="button small secondary h-dg-optlink" href="${esc(h)}" target="_blank" rel="noopener noreferrer">${esc(o.label)}</a>` : (o.hint ? `<small class="ui-hint">${esc(o.hint)}</small>` : ''); } // un lien vers un site (ouvert dans le navigateur)
         if (o.type === 'check') return `<label class="ui-toggle"><input type="checkbox" ${at} ${(v ?? o.def) ? 'checked' : ''}><i></i>${esc(o.label)}</label>`;
+        // une longue liste (les pays du monde) : rangée en groupes, avec une case pour chercher (filtrée par la sorte : heritage-diagram-cartes.js)
+        if (o.type === 'select' && typeof o.groups === 'function') { const opt = ([k, l]) => `<option value="${esc(k)}" ${String(v ?? o.def ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`;
+            return `<label class="h-dg-optsearch">${esc(o.label)}${o.search ? `<input type="search" data-opt-filter="${esc(o.k)}" placeholder="${esc(o.search)}" aria-label="${esc(o.search)}" autocomplete="off" enterkeyhint="search">` : ''}<select ${at} data-i18n-off>${o.groups(spec).map(([g, ch]) => `<optgroup label="${esc(g)}">${ch.map(opt).join('')}</optgroup>`).join('')}</select></label>`; }
         if (o.type === 'select') return `<label>${esc(o.label)}<select ${at}>${o.choices.map(([k, l]) => `<option value="${esc(k)}" ${String(v ?? o.def ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
         const un = o.unit != null ? ` data-unit="${esc(o.unit)}"` : ''; // K17 : l'unité dans la case, pas dans le libellé
         if (o.type === 'range') return `<label>${esc(o.label)} <output>${esc(v ?? o.def ?? '')}</output><input type="range" ${at} min="${o.min}" max="${o.max}" step="${o.step || 1}" value="${esc(v ?? o.def ?? o.min)}"${un}></label>`;

@@ -1769,7 +1769,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-k.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-l.js?v=1" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
 <script src="assets/js/heritage-telech-j.js?v=1" defer></script>
-<script src="assets/js/noms-lieux-monde.js?v=2" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
+<script src="assets/js/noms-lieux-monde.js?v=3" defer></script><!-- 🔎 Noms de lieux d’autrefois, tous pays : « un nom → le lieu d’aujourd’hui » (vue de 🗺 Anciens noms de lieux, 📊 Récap, ⌘K) -->
 <script src="assets/js/heritage-fiche-edifice.js?v=4" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>
 <script src="assets/js/heritage-suivi.js?v=13" defer></script>

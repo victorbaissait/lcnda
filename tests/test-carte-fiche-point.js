@@ -53,6 +53,9 @@ c.commit()`, db], {encoding: 'utf8'});
     const card = '.ld-results .cf-card';
     const idxOf = name => p.evaluate(n => { const g = [...document.querySelectorAll('.ld-results .h-map-point[data-cf-i]')].find(x => x.querySelector('title')?.textContent.startsWith(n)); return g ? Number(g.dataset.cfI) : -1; }, name);
     const pt = i => `.ld-results .h-map-point[data-cf-i="${i}"]`;
+    /** la fiche touche presque son point (à moins de 30 px) sans le couvrir */
+    const near = (c, g) => { const x = g.x + g.width / 2, y = g.y + g.height / 2, inside = x > c.x && x < c.x + c.width && y > c.y && y < c.y + c.height;
+        const dx = Math.max(c.x - x, 0, x - (c.x + c.width)), dy = Math.max(c.y - y, 0, y - (c.y + c.height)); return !inside && Math.hypot(dx, dy) < 30; };
     const ctlView = () => p.evaluate(() => window.LCNDA_EXT.miniMapOf(document.querySelector('.ld-results')).getView());
     const setView = (lat, lon, z) => p.evaluate(([a, b, c]) => window.LCNDA_EXT.miniMapOf(document.querySelector('.ld-results')).setView(a, b, c, true), [lat, lon, z]);
     const openMap = async () => {
@@ -81,11 +84,11 @@ c.commit()`, db], {encoding: 'utf8'});
             assert.deepStrictEqual(lines, [['Date', '1887-02-23'], ['Lieu', 'Nice'], ['Magnitude', '6,5']]);
             assert.strictEqual(await p.getAttribute(`${card} .cf-src a`, 'href'), 'https://example.org/seisme/nice');
             assert.match(await p.textContent(`${card} .cf-src`), /Source : Jeu d’essai ↗/);
-            assert.match((await p.textContent(`${card} .cf-acts`)).replace(/\s+/g, ' '), /📎 Insérer 🧺 Au panier ☰ Voir la ligne 🔍 Zoomer ici/);
+            assert.deepStrictEqual(await p.$$eval(`${card} .cf-acts button`, a => a.map(b => b.textContent.trim())), ['📎 Insérer', '🧺 Au panier', '☰ Voir la ligne', '🔍 Zoomer ici']);
             assert.ok(await p.$(`${card} [data-cf-x]`) && await p.$(`${card} [data-cf-pin]`));
             const [c, s, g] = await Promise.all([p.locator(card).boundingBox(), p.locator('.ld-results [data-mm]').boundingBox(), p.locator(pt(nice)).boundingBox()]);
             assert.ok(c.x >= s.x + 6 && c.x + c.width <= s.x + s.width - 6 && c.y >= s.y + 6 && c.y + c.height <= s.y + s.height - 6, 'dans le cadre de la carte, sans toucher les bords');
-            assert.ok(Math.abs(c.x + c.width / 2 - (g.x + g.width / 2)) < c.width / 2 + 4, 'au-dessus de son point');
+            assert.ok(near(c, g), 'à côté de son point, sans le cacher ' + JSON.stringify([c, g]));
             assert.ok(!(await p.$eval(card, x => x.classList.contains('cf-panel') || x.classList.contains('cf-sheet'))), 'une bulle');
             await sleep(300); assert.deepStrictEqual(extReq, [], 'rien demandé à Internet pour la fiche');
         });
@@ -94,7 +97,7 @@ c.commit()`, db], {encoding: 'utf8'});
             await p.click(`${card} [data-cf-zoom]`); await sleep(300);
             assert.ok((await ctlView()).zoom >= z0 + 2, 'zoomé'); assert.ok(await p.$(card), 'la fiche reste ouverte');
             const [c, g] = await Promise.all([p.locator(card).boundingBox(), p.locator(pt(nice)).boundingBox()]);
-            assert.ok(Math.abs(c.x + c.width / 2 - (g.x + g.width / 2)) < c.width / 2 + 4 && Math.abs((c.y + c.height) - g.y) < 40, 'toujours accrochée au point ' + JSON.stringify([c, g]));
+            assert.ok(near(c, g), 'toujours accrochée au point ' + JSON.stringify([c, g]));
             await p.evaluate(() => window.LCNDA_EXT.miniMapOf(document.querySelector('.ld-results')).fit()); await sleep(200);
         });
         await t('🧺 Au panier : une ligne de plus (↶ Annuler) ; 📎 Insérer : à l’endroit du curseur, avec sa source', async () => {
@@ -204,6 +207,7 @@ c.commit()`, db], {encoding: 'utf8'});
             if (!(await q.$('.ld-results .h-map-point[data-cf-i]'))) await q.click('[data-ld-view="map"]');
             await q.waitForSelector('.ld-results .h-map-point[data-cf-i]', {timeout: 30000}); await sleep(400);
             const i = await q.evaluate(() => Number([...document.querySelectorAll('.ld-results .h-map-point[data-cf-i]')].find(x => x.querySelector('title')?.textContent.startsWith('Séisme de Nice')).dataset.cfI));
+            await q.evaluate(() => window.LCNDA_EXT.miniMapOf(document.querySelector('.ld-results')).setView(44.2, 7.26, 6, true)); await sleep(300); // le point loin du bas (la mention des sources)
             await q.locator(`.ld-results .h-map-point[data-cf-i="${i}"]`).scrollIntoViewIfNeeded();
             await q.tap(`.ld-results .h-map-point[data-cf-i="${i}"]`); await q.waitForSelector(card);
             assert.ok(await q.$eval(card, x => x.classList.contains('cf-sheet')), 'une feuille en bas');
