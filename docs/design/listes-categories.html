@@ -1,0 +1,626 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Listes de données par thème</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--map:#eef2f7;--map-line:#d5dce6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--map:#182029;--map-line:#2b3542}}
+:root[data-theme="dark"],.force-dark{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--map:#182029;--map-line:#2b3542}
+.force-dark{color:var(--ink)}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:44px 0 6px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:inherit;text-decoration:none}
+.sum b{font-size:18px;display:block}.sum span{font-size:12px;color:var(--muted)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink);white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+code,pre{font:11.5px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+pre{background:var(--grey-bg);border:1px solid var(--line);padding:12px 14px;overflow-x:auto;white-space:pre;margin:10px 0 0;color:var(--ink)}
+pre .c{color:var(--soft)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:18px 20px 20px;min-width:0}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:10px 14px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}
+.msg.ok{border-color:var(--green);background:var(--green-bg)}
+.dec{border:2px dashed var(--vio);background:var(--vio-bg);padding:12px 16px;margin:14px 0 0;font-size:13px}
+.dec>b:first-child{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--vio);margin-bottom:6px}
+.dec ol,.dec ul{margin:4px 0 0;padding-left:20px}.dec li{margin:4px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap;cursor:pointer}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+/* fenêtre de l'app */
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0;color:var(--ink)}
+.win-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-body{padding:18px 20px 20px;min-width:0}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.ph h4{margin:0;font-size:20px}.ph small{display:block;font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase;margin-bottom:2px}
+.ph p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.lbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:16px 0 10px}
+.lsearch{flex:1 1 260px;border:1.5px solid var(--line2);padding:8px 11px;font-size:13.5px;color:var(--soft);min-width:0;background:var(--paper)}
+.lsearch.on{color:var(--ink);border-color:var(--blue)}
+.lbtn{border:1.5px solid var(--line2);padding:7px 11px;font:700 12.5px system-ui;background:var(--paper);white-space:nowrap;color:var(--ink)}
+.lbtn .n{background:var(--blue);color:#fff;font:800 10.5px system-ui;padding:1px 5px;margin-left:4px}
+.seg{display:inline-flex;border:1.5px solid var(--line2)}
+.seg span{padding:6px 11px;font:700 12.5px system-ui;white-space:nowrap}
+.seg span.on{background:var(--ink);color:var(--paper)}
+.chips{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.chips .klab{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-right:2px}
+.k{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line2);padding:4px 10px;font-size:12.5px;background:var(--paper);white-space:nowrap;border-radius:999px;color:var(--ink)}
+.k i{font-style:normal;font:700 11px system-ui;color:var(--soft);font-variant-numeric:tabular-nums}
+.k.on{border-color:var(--blue);background:var(--blue);color:#fff}.k.on i{color:#fff;opacity:.85}
+.k.soon{border-style:dashed;color:var(--muted)}
+.chip{border:1.5px solid var(--blue);color:var(--blue-ink);background:var(--blue-bg);padding:3px 9px;font-size:12px;white-space:nowrap}
+.chip:after{content:" ×";font-weight:800}
+.clear{color:var(--blue);text-decoration:underline;font-size:12px}
+/* cartes de thèmes */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.th{border:1.5px solid var(--line2);background:var(--paper);padding:14px 16px;display:grid;grid-template-columns:34px minmax(0,1fr);gap:2px 10px;align-content:start;min-width:0}
+.th:hover{border-color:var(--blue)}
+.th .ic{font-size:24px;line-height:1.1;grid-row:1 / 4}
+.th b{font-size:14.5px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.th b i{font-style:normal;font:700 12px system-ui;color:var(--soft);white-space:nowrap}
+.th small{font-size:12px;color:var(--muted);line-height:1.35}
+.th .mg{font:700 11px system-ui;color:var(--green);margin-top:5px}
+.th.hit{border-color:var(--blue);box-shadow:inset 3px 0 0 var(--blue)}
+.th.dim{opacity:.42}
+/* résultats de recherche */
+.res{list-style:none;margin:0;padding:0}
+.res li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:2px 10px;padding:10px 4px;border-bottom:1px solid var(--line);align-items:start}
+.res li .ic{font-size:18px}
+.res li b{font-size:13.5px}
+.res li small{display:block;color:var(--muted);font-size:12px}
+.res .grp{grid-column:1 / -1;font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg);padding:6px 8px;border:0;margin-top:10px;display:block}
+.res .mg{color:var(--green);font-weight:700}
+/* onglets du thème */
+.tabsx{display:flex;flex-wrap:wrap;align-items:stretch;border-bottom:2px solid var(--ink);margin:16px 0 0}
+.tabsx span{padding:8px 12px;font-size:13px;white-space:nowrap}
+.tabsx span.on{background:var(--ink);color:var(--paper);font-weight:700}
+.tabsx span small{opacity:.7}
+/* tableau réuni */
+.mt td{font-size:12.8px}
+.mt .d{white-space:nowrap;font-variant-numeric:tabular-nums}
+.mt .pl b{display:block}
+.mt .pl small,.mt .fam small{color:var(--muted);font-size:11.5px;display:block}
+.srcs{display:flex;gap:4px;flex-wrap:wrap}
+.srcs a{font:700 10.5px system-ui;border:1px solid var(--line2);padding:1px 6px;color:var(--blue-ink);background:var(--blue-bg);text-decoration:none;white-space:nowrap}
+.srcs a.soon{border-style:dashed;background:transparent;color:var(--muted)}
+.diff{font:800 10px system-ui;color:var(--yel-ink);background:var(--yel-bg);border:1px solid var(--yel);padding:0 4px;margin-left:4px;white-space:nowrap}
+.fam .who{display:inline-block;border:1px solid var(--line2);border-radius:999px;padding:1px 8px;font-size:11.5px;background:var(--grey-bg);white-space:nowrap}
+.acts{white-space:nowrap;text-align:right}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1.5px solid var(--line2);background:var(--paper);font-size:14px;margin-left:3px}
+tr.sel td{background:var(--blue-bg)}
+tr.open td{background:var(--grey-bg)}
+.cb{width:15px;height:15px;border:2px solid var(--ink);display:inline-block;vertical-align:middle}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.selbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border:2px solid var(--blue);background:var(--blue-bg);padding:8px 12px;margin:12px 0 0;font-size:13px}
+.selbar .sp{flex:1}
+.detail{padding:12px 14px 14px;border:1.5px dashed var(--line2);background:var(--paper)}
+.detail table td,.detail table th{font-size:12px;padding:6px 8px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:12px}
+/* carte */
+.map{background:var(--map);border:1.5px solid var(--line2);position:relative}
+.map svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);padding:8px 12px;border-top:1px solid var(--line2);background:var(--paper)}
+/* menu Filtrer */
+.menu{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);font-size:13px}
+.menu .mg2{padding:11px 14px;border-bottom:1px solid var(--line)}
+.menu .mg2>b{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:7px}
+.menu label{display:flex;gap:8px;align-items:center;padding:3px 0}
+.menu label i{margin-left:auto;font-style:normal;font:700 11px system-ui;color:var(--soft)}
+.inp{border:1.5px solid var(--line2);padding:4px 8px;font-size:12.5px;display:inline-block;min-width:56px;background:var(--paper)}
+.menu .mf{display:flex;justify-content:space-between;gap:8px;padding:11px 14px;flex-wrap:wrap}
+/* tableau de répartition */
+.mapd{border:1.5px solid var(--line2);background:var(--paper);margin:0 0 8px}
+.mapd summary{cursor:pointer;padding:10px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;list-style:none}
+.mapd summary::-webkit-details-marker{display:none}
+.mapd summary:before{content:"▸";color:var(--soft);width:12px}
+.mapd[open] summary:before{content:"▾"}
+.mapd summary i{font-style:normal;font:800 11px system-ui;background:var(--ink);color:var(--paper);padding:1px 6px}
+.mapd summary code{margin-left:auto}
+.mapd .ti{font-size:18px}
+.mapt{margin:0 0 6px}.mapt td{font-size:12.3px;padding:6px 10px}
+.mapt td.g{white-space:nowrap;color:var(--muted)}
+.mapt td.src{color:var(--muted);font-size:11.5px}
+.lk{font:800 9.5px system-ui;border:1px solid var(--line2);padding:0 4px;color:var(--soft);text-transform:uppercase;margin-left:4px}
+.bars{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;font-size:12.5px}
+.bars div{display:grid;grid-template-columns:200px minmax(0,1fr) 34px;gap:8px;align-items:center}
+.bars s{display:block;height:10px;background:var(--blue);text-decoration:none}
+.bars em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+/* questions */
+.qs{counter-reset:q;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.qs li{background:var(--paper);border:2px solid var(--ink);padding:14px 18px;counter-increment:q}
+.qs li>b:before{content:counter(q) ". ";color:var(--blue)}
+.qs li>b{font-size:15px;display:block;margin-bottom:6px}
+.qs .reco{font-size:13px;margin-top:8px;border-left:4px solid var(--green);background:var(--green-bg);padding:7px 11px}
+.qs .opt{font-size:13px;color:var(--muted)}
+/* téléphone */
+.phones{display:grid;grid-template-columns:repeat(2,minmax(0,390px));gap:30px;justify-content:center}
+.phone{width:100%;max-width:390px;border:10px solid #222;border-radius:26px;background:var(--paper);overflow:hidden;margin:0 auto;color:var(--ink)}
+.phone .ptop{display:flex;align-items:center;gap:8px;background:var(--bar);color:var(--bar-ink);padding:10px 14px;font-size:13px;font-weight:700}
+.phone .ptop .sp{flex:1}
+.phone .pbody{padding:16px;font-size:13px}
+.phone .themes{grid-template-columns:1fr;gap:8px}
+.phone .th{padding:10px 12px}
+.phone .th small{display:none}
+.phone .lbar{margin:10px 0}
+.pcard{border-bottom:1px solid var(--line);padding:11px 2px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px}
+.pcard b{font-size:13.5px}
+.pcard small{display:block;color:var(--muted);font-size:12px}
+.pcard .srcs{margin-top:4px}
+.pcard .acts{grid-row:1 / 3;grid-column:2;display:flex;flex-direction:column;gap:5px}
+.pcard .ib{margin:0}
+.cap{font:700 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-align:center;margin:0 0 10px}
+.toggle{border:1.5px solid var(--line2);background:var(--paper);color:var(--ink);font:700 12.5px system-ui;padding:7px 12px;cursor:pointer}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.phones{grid-template-columns:minmax(0,390px)}}
+@media (max-width:760px){
+ body{padding:16px}
+ .case{padding:14px 16px}
+ .win-body{padding:14px 14px 16px}
+ .phone{border-width:0;border-radius:0}
+ .bars div{grid-template-columns:130px minmax(0,1fr) 30px}
+ .mapd summary code{margin-left:0}
+ .hide-s{display:none}
+}
+</style></head><body><div class="wrap">
+
+<div class="top">
+ <div>
+  <h1>🧰 Listes de données : ranger par thème</h1>
+  <p class="sub">Maquette à valider. Demande : « fais des catégories de listes : ex. réunir tout ce qui est séisme ». Aujourd’hui, <b>216 listes</b> sont enregistrées dans <code>LCNDA_EXT.dataLists</code> (compté dans l’app chargée, avec le lot H en plus), rangées en 4 groupes trop larges. Je propose <b>19 thèmes</b> (chaque liste dans un seul), une <b>recherche sur toutes les listes</b>, et des <b>« listes réunies »</b> : une seule table pour plusieurs sources de la même sorte (ex. tous les séismes), avec la source sur chaque ligne. Familles inventées : <b>MAZAUD</b> (Tulle), <b>LACOMBE</b> (Nice), <b>DURAND</b> (Salon-de-Provence). Les événements sont vrais ; les chiffres de force et de morts sont des exemples, à reprendre des sources.</p>
+ </div>
+ <button class="toggle" type="button" id="tgl">☾ Thème sombre</button>
+</div>
+
+<div class="sum">
+ <a href="#s0"><b>0</b><span>Ce qui existe</span></a>
+ <a href="#s1"><b>1</b><span>Les 19 thèmes + répartition</span></a>
+ <a href="#s2"><b>2</b><span>Toutes les données, par thème</span></a>
+ <a href="#s3"><b>3</b><span>Liste réunie : séismes</span></a>
+ <a href="#s4"><b>4</b><span>Une ligne réunie, ouverte</span></a>
+ <a href="#s5"><b>5</b><span>Carte</span></a>
+ <a href="#s6"><b>6</b><span>Téléphone · 390 · sombre</span></a>
+ <a href="#s7"><b>7</b><span>Pour les prochaines listes</span></a>
+ <a href="#sq"><b>?</b><span>5 questions pour toi</span></a>
+</div>
+
+<!-- ═══════════ 0 ═══════════ -->
+<h2 id="s0"><span class="num-b">0</span>Ce qui existe aujourd’hui</h2>
+<div class="grid">
+ <div class="case">
+  <span class="tag">Les 4 groupes actuels (champ <code>group</code>)</span>
+  <h3>216 listes, dont 119 dans « Le lieu »</h3>
+  <div class="bars">
+   <div><span>📍 Le lieu</span><s style="width:100%"></s><em>119</em></div>
+   <div><span>🌍 Le monde</span><s style="width:51%"></s><em>61</em></div>
+   <div><span>👤 La personne</span><s style="width:18%"></s><em>21</em></div>
+   <div><span>🔎 Chercher</span><s style="width:13%"></s><em>15</em></div>
+  </div>
+  <p class="note">Dont 8 « liens » vers une page qui existe ailleurs (<code>link</code>), 29 à installer (<code>pack</code>), 129 avec une position (<code>geo</code>), 159 avec des dates (<code>period</code>).</p>
+ </div>
+ <div class="case">
+  <span class="tag">Le problème</span>
+  <h3>Ce qui va ensemble est éparpillé</h3>
+  <p style="font-size:13px;margin:0">Ce qui parle de <b>séismes et de terrains</b> est rangé dans deux groupes :</p>
+  <ul style="font-size:13px;margin:6px 0 0;padding-left:18px">
+   <li>🌍 Le monde : <i>Séismes d’Europe (EPICA)</i>, <i>Séismes, éruptions et tsunamis du monde (NOAA)</i>, <i>Volcans qui ont gâché les récoltes</i>, <i>Années de ciel voilé</i></li>
+   <li>📍 Le lieu : <i>Mouvements de terrain</i>, <i>Cavités</i>, <i>Avalanches</i>, <i>Roche et altitude</i>, <i>Fossiles</i></li>
+  </ul>
+  <p class="note">Même chose pour les guerres (4 groupes), les images (4 groupes), les métiers (3 groupes). Et chaque nouveau lot (séismes, crues, guerres, musées, patrimoine et prénoms de tous les pays…) ajoute des dizaines de listes dans « Le lieu » ou « Le monde ».</p>
+ </div>
+</div>
+
+<!-- ═══════════ 1 ═══════════ -->
+<h2 id="s1"><span class="num-b">1</span>Les 19 thèmes</h2>
+<p class="sub">Un thème = « de quoi ça parle », avec des mots de tous les jours. Chaque liste va dans <b>un seul</b> thème (la recherche, elle, trouve tout). Entre 7 et 14 listes par thème aujourd’hui : assez pour qu’un thème serve, pas trop pour qu’on s’y perde. Le nombre est le vrai compte des 216 listes.</p>
+<div class="case">
+ <div class="themes">
+  <div class="th"><span class="ic">🌋</span><b>Séismes, volcans et terrains <i>9</i></b><small>EPICA, NOAA, volcans, avalanches, cavités, roches, fossiles</small><span class="mg">🔀 2 listes réunies</span></div>
+  <div class="th"><span class="ic">🌊</span><b>Eaux, crues et mers <i>8</i></b><small>Inondations (BDHI), repères de crues, CatNat, marées, épaves, phares</small><span class="mg">🔀 1 liste réunie</span></div>
+  <div class="th"><span class="ic">⛅</span><b>Climat, ciel et saisons <i>14</i></b><small>Vendanges, météo, climat, vents, dictons, comètes, éclipses</small></div>
+  <div class="th"><span class="ic">⚔️</span><b>Guerres et soldats <i>11</i></b><small>Morts pour la France, batailles, régiments, nécropoles, monuments aux morts</small><span class="mg">🔀 1 liste réunie</span></div>
+  <div class="th"><span class="ic">🏛</span><b>Monuments et patrimoine <i>12</i></b><small>Châteaux, Mérimée, Palissy, sites antiques, jardins, bastides</small><span class="mg">🔀 1 liste réunie</span></div>
+  <div class="th"><span class="ic">🏘</span><b>Petit patrimoine du village <i>11</i></b><small>Fours, lavoirs, croix, bornes, halles, kiosques, écoles</small></div>
+  <div class="th"><span class="ic">🖼</span><b>Musées, images et sons <i>12</i></b><small>Joconde, Mémoire, images anciennes, films, coiffes, 78 tours</small></div>
+  <div class="th"><span class="ic">🗺</span><b>Lieux et noms de lieux <i>14</i></b><small>GOV, DicoTopo, lieux-dits, villages disparus, communes</small><span class="mg">🔀 1 liste réunie</span></div>
+  <div class="th"><span class="ic">👑</span><b>Pouvoirs, lois et frontières <i>13</i></b><small>Frontières, chefs d’État, préfets, maires, seigneurs, élections</small></div>
+  <div class="th"><span class="ic">👶</span><b>Prénoms et noms de famille <i>8</i></b><small>Prénoms par pays, sens des prénoms, blasons, noms dans les romans</small></div>
+  <div class="th"><span class="ic">🔎</span><b>Retrouver une personne <i>11</i></b><small>Décès INSEE, Léonore, annuaires, grandes écoles, célébrités</small></div>
+  <div class="th"><span class="ic">⚒️</span><b>Métiers et industries <i>13</i></b><small>Mines, moulins, forges, ateliers, outils, grèves</small></div>
+  <div class="th"><span class="ic">🌾</span><b>Champs, bêtes et plantes <i>14</i></b><small>AOC, races, fruits anciens, potager 1883, loups, forêts</small></div>
+  <div class="th"><span class="ic">🚂</span><b>Routes, trains et bateaux <i>13</i></b><small>Gares, voies romaines, relais de poste, tramways, navires</small></div>
+  <div class="th"><span class="ic">✝️</span><b>Croire, soigner, enfermer <i>12</i></b><small>Églises, évêques, saints, hospices, prisons, cimetières</small></div>
+  <div class="th"><span class="ic">💶</span><b>Prix, monnaies et chiffres <i>7</i></b><small>Prix des denrées, pièces, timbre, mesures, espérance de vie</small></div>
+  <div class="th"><span class="ic">📚</span><b>Livres, journaux et écritures <i>13</i></b><small>Journaux, almanachs, latin, abréviations, mots régionaux</small></div>
+  <div class="th"><span class="ic">🎉</span><b>Fêtes, jeux et vie de tous les jours <i>14</i></b><small>Fêtes, jeux, chansons, plats, jouets, Tour de France</small></div>
+  <div class="th"><span class="ic">🌍</span><b>Grands événements et dates <i>7</i></b><small>Le monde autour, épidémies, nouveautés, jours célèbres</small></div>
+ </div>
+ <p class="note">Total : 9 + 8 + 14 + 11 + 12 + 11 + 12 + 14 + 13 + 8 + 11 + 13 + 14 + 13 + 12 + 7 + 13 + 14 + 7 = <b>216</b>. Aucune liste sans thème, aucune en double (vérifié par un petit script sur le registre réel).</p>
+</div>
+
+<h3 style="margin:26px 0 8px;font-size:16px">La répartition, liste par liste <span class="mini">(clique sur un thème pour l’ouvrir)</span></h3>
+<p class="sub" style="margin-bottom:10px">La colonne « Groupe d’aujourd’hui » montre l’éparpillement actuel. Les choix discutables sont peu nombreux : <i>CatNat</i> va dans 🌊 (presque toutes sont des inondations), <i>Années de ciel voilé par les volcans</i> va dans 🌋 avec les volcans, <i>Léonore</i> va dans 🔎 (pas que des militaires), <i>Cimetières</i> dans ✝️.</p>
+<details class="mapd"><summary><span class=ti>🌋</span> <b>Séismes, volcans et terrains</b> <i>9</i> <code>theme: 'seismes'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🌋 Séismes d’Europe (1000 → 1899)</td><td><code>hist_seismes</code></td><td class=g>🌍 Le monde</td><td class=src>EPICA v1.1, INGV (CC BY 4.0)</td></tr><tr><td>🌋 Séismes, éruptions et tsunamis du monde</td><td><code>ha_catastrophes</code></td><td class=g>🌍 Le monde</td><td class=src>NOAA NCEI/WDS (domaine public)</td></tr><tr><td>🌋 Volcans qui ont gâché les récoltes</td><td><code>l10t_volcans</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0), NOAA (domaine public)</td></tr><tr><td>🌋 Années de ciel voilé par les volcans (1600-2000)</td><td><code>tf_volcans</code></td><td class=g>🌍 Le monde</td><td class=src>NOAA NCEI (Crowley 2013 ; Gao 2008)</td></tr><tr><td>🏔️ Avalanches historiques datées</td><td><code>l10t_avalanches</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🪨 Mouvements de terrain (Géorisques, en ligne)</td><td><code>l10t_mvt</code></td><td class=g>📍 Le lieu</td><td class=src>BRGM, Géorisques — BDMvt (Licence Ouverte 2.0)</td></tr><tr><td>🕳️ Cavités souterraines (Géorisques, en ligne)</td><td><code>l10t_cavites</code></td><td class=g>📍 Le lieu</td><td class=src>BRGM, Géorisques — cavités (Licence Ouverte 2.0)</td></tr><tr><td>🪨 Roche et altitude des communes</td><td><code>tm_sol</code></td><td class=g>📍 Le lieu</td><td class=src>BRGM 1/1 000 000 via EGDI (CC BY 4.0) ; IGN (Licence Ouverte 2.0)</td></tr><tr><td>🦴 Gisements de fossiles</td><td><code>te_fossiles</code></td><td class=g>📍 Le lieu</td><td class=src>Paleobiology Database (CC BY 4.0)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🌊</span> <b>Eaux, crues et mers</b> <i>8</i> <code>theme: 'eaux'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🌊 Inondations historiques (BDHI)</td><td><code>hist_crues</code></td><td class=g>📍 Le lieu</td><td class=src>Géorisques, BDHI (Licence Ouverte)</td></tr><tr><td>⚠️ Catastrophes naturelles reconnues (CatNat, depuis 1982)</td><td><code>hist_catnat</code></td><td class=g>📍 Le lieu</td><td class=src>Géorisques, base GASPAR (Licence Ouverte)</td></tr><tr><td>🌊 Repères de crues</td><td><code>mr_reperes</code></td><td class=g>📍 Le lieu</td><td class=src>Plateforme nationale des repères de crues (Licence Ouverte Etalab 2.0)</td></tr><tr><td>🌊 Ports de mesure des marées (calcul de la marée du jour)</td><td><code>l8a_marees</code></td><td class=g>📍 Le lieu</td><td class=src>UHSLC (University of Hawaii Sea Level Center), constantes calculées pa</td></tr><tr><td>♨️ Villes d’eaux et établissements thermaux</td><td><code>l8a_eaux</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>⛲ Lavoirs, puits et fontaines</td><td><code>tb_eau</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) · OpenStreetMap (ODbL)</td></tr><tr><td>⚓ Épaves et naufrages (côtes d’Europe)</td><td><code>l10t_epaves</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🗼 Phares et leur portée</td><td><code>ha_phares</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; portée : © OpenStreetMap contributors (ODbL)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>⛅</span> <b>Climat, ciel et saisons</b> <i>14</i> <code>theme: 'ciel'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🍇 Dates des vendanges (27 régions)</td><td><code>hist_vendanges</code></td><td class=g>🌍 Le monde</td><td class=src>Daux et al. (2012), NOAA / WDS-Paleo</td></tr><tr><td>🌦 Stations météo d’autrefois</td><td><code>meteo_stations</code></td><td class=g>📍 Le lieu</td><td class=src>Météo d’autrefois (packs installés)</td></tr><tr><td>🌡️ Climat de chaque année (France et voisins)</td><td><code>tq_climat</code></td><td class=g>🌍 Le monde</td><td class=src>Met Office HadCET (OGL) ; Berkeley Earth (CC BY-NC 4.0)</td></tr><tr><td>🏔️ Glaciers des Alpes et des Pyrénées (position du front)</td><td><code>tq_glaciers</code></td><td class=g>📍 Le lieu</td><td class=src>WGMS, Fluctuations of Glaciers Database</td></tr><tr><td>🌬️ Vents régionaux de France</td><td><code>l10r_vents</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia (CC BY-SA 4.0), Wikidata (CC0)</td></tr><tr><td>🌦️ Dictons du jour (366 jours)</td><td><code>l10r_dictons</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia, pages des jours (CC BY-SA 4.0)</td></tr><tr><td>🌅 Ciels étranges (volcans, Toungouska…)</td><td><code>l8a_ciels</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0), phrase exacte de chaque article</td></tr><tr><td>☄️ Grandes comètes et aurores</td><td><code>ciel_cometes</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0), Wikidata (CC0)</td></tr><tr><td>🌘 Éclipses de soleil et de lune</td><td><code>eclipses</code></td><td class=g>🌍 Le monde</td><td class=src>NASA, Five Millennium Canon (Espenak &amp; Meeus, domaine public) ; calcul</td></tr><tr><td>🌒 Éclipses vues par la famille <span class=lk>lien</span></td><td><code>link_lune_eclipses</code></td><td class=g>🌍 Le monde</td><td class=src>—</td></tr><tr><td>🌠 Chutes de météorites observées</td><td><code>tq_meteorites</code></td><td class=g>🌍 Le monde</td><td class=src>NASA Open Data Portal — The Meteoritical Society</td></tr><tr><td>☄️ Essaims d’étoiles filantes (calendrier)</td><td><code>te_etoiles</code></td><td class=g>🌍 Le monde</td><td class=src>IMO (calculé)</td></tr><tr><td>✨ Étoiles nouvelles visibles à l’œil nu</td><td><code>l9_etoiles</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>🌟 Astéroïdes au nom d’une commune de France</td><td><code>tm_asteroides</code></td><td class=g>🌍 Le monde</td><td class=src>NASA/JPL Small-Body Database</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>⚔️</span> <b>Guerres et soldats</b> <i>11</i> <code>theme: 'guerres'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🎖️ Morts pour la France 1914–1918</td><td><code>bo_mpf</code></td><td class=g>🔎 Chercher</td><td class=src>Mémoire des hommes (ministère des Armées)</td></tr><tr><td>⚔️ Batailles et sièges</td><td><code>ha_batailles</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🎖 Guerres</td><td><code>ha_guerres</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr><tr><td>⚔️ Guerres de Religion, dragonnades, Camisards</td><td><code>te_religion</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🎖️ Régiments français (Wikipédia)</td><td><code>l8b_regiments</code></td><td class=g>👤 La personne</td><td class=src>Wikipédia en français (CC BY-SA 4.0)</td></tr><tr><td>⚱️ Nécropoles nationales et cimetières de guerre</td><td><code>td_necropoles</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; MémorialGenWeb (CC BY-SA)</td></tr><tr><td>🪦 Monuments aux morts</td><td><code>pm_monuments</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; photos Wikimedia Commons</td></tr><tr><td>🕯 Camps d’internement 1939-1946 et maisons d’enfants</td><td><code>td_camps</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🎈 Ballons montés du siège de Paris (1870-1871)</td><td><code>tf_ballons</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0) ; Wikidata (CC0)</td></tr><tr><td>🎖️ Décorations françaises expliquées</td><td><code>l9_decorations</code></td><td class=g>👤 La personne</td><td class=src>Wikipédia (CC BY-SA 4.0), images Wikimedia Commons</td></tr><tr><td>👕 Uniformes d’autrefois (gravures)</td><td><code>l9_uniformes</code></td><td class=g>👤 La personne</td><td class=src>Wikimedia Commons (licence de chaque image)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🏛</span> <b>Monuments et patrimoine</b> <i>12</i> <code>theme: 'monuments'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🏰 Châteaux d’Europe</td><td><code>chateaux</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0 1.0)</td></tr><tr><td>⛪ Monuments historiques (Mérimée)</td><td><code>lp_merimee</code></td><td class=g>📍 Le lieu</td><td class=src>Ministère de la Culture, POP — base Mérimée — Licence Ouverte 2.0</td></tr><tr><td>🔔 Objets protégés (Palissy)</td><td><code>lp_palissy</code></td><td class=g>📍 Le lieu</td><td class=src>Ministère de la Culture, POP — base Palissy — Licence Ouverte</td></tr><tr><td>🏰⛪ Mes fiches d’édifices (châteaux, lieux de culte)</td><td><code>fiches_edifices</code></td><td class=g>📍 Le lieu</td><td class=src>Tes fiches ; Wikidata (CC0) ; Mérimée (Licence Ouverte)</td></tr><tr><td>🏺 Sites préhistoriques et antiques</td><td><code>tq_sites</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🏛 Inscriptions romaines (France, Belgique, Suisse)</td><td><code>te_inscriptions</code></td><td class=g>📍 Le lieu</td><td class=src>Epigraphic Database Heidelberg (CC BY-SA 4.0)</td></tr><tr><td>⚜️ Patrimoine culturel du Québec</td><td><code>l10t_quebec</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0), liens vers le Répertoire du patrimoine culturel du Qué</td></tr><tr><td>🏠 Bâtiments anciens encore debout (lieux déjà cherchés)</td><td><code>l10v_maisons</code></td><td class=g>📍 Le lieu</td><td class=src>IGN, BD TOPO® (Licence Ouverte 2.0)</td></tr><tr><td>🏔 Sommets et clochers visibles (lieux déjà calculés)</td><td><code>l10v_vue</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; IGN RGE ALTI® (Licence Ouverte 2.0)</td></tr><tr><td>🛡️ Armoiries des communes</td><td><code>cc_armoiries</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0), images Wikimedia Commons (licence de chaque fichier), </td></tr><tr><td>🏞️ Parcs et jardins historiques</td><td><code>l8a_jardins</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0), label « Jardin remarquable » du ministère de la Cultur</td></tr><tr><td>🏰 Bastides du Sud-Ouest (fondation, fondateur)</td><td><code>th_bastides</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0) ; Wikidata (CC0)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🏘</span> <b>Petit patrimoine du village</b> <i>11</i> <code>theme: 'village'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🍞 Fours à pain et pigeonniers</td><td><code>tb_village</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) · OpenStreetMap (ODbL)</td></tr><tr><td>🪨 Bornes, octrois et douanes</td><td><code>tb_bornes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) · OpenStreetMap (ODbL)</td></tr><tr><td>✝️ Calvaires et croix de chemin</td><td><code>tb_croix</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) · OpenStreetMap (ODbL)</td></tr><tr><td>🪧 Plaques de cocher et bornes Michelin</td><td><code>tf_cocher</code></td><td class=g>📍 Le lieu</td><td class=src>OpenStreetMap (ODbL)</td></tr><tr><td>☀️ Cadrans solaires</td><td><code>tm_cadrans</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🏪 Halles et marchés couverts</td><td><code>th_halles</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; OpenStreetMap (ODbL) ; Mérimée</td></tr><tr><td>🎺 Kiosques à musique et sociétés de musique</td><td><code>th_kiosques</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; OpenStreetMap (ODbL) ; Mérimée</td></tr><tr><td>🗽 Monuments à la République et bustes de Marianne</td><td><code>th_marianne</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🌳 Arbres de la Liberté</td><td><code>te_libertes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; OpenStreetMap (ODbL)</td></tr><tr><td>🚧 Octroi et éclairage des villes</td><td><code>l9_villes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>🏫 Écoles d’autrefois</td><td><code>tr_ecoles</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🖼</span> <b>Musées, images et sons</b> <i>12</i> <code>theme: 'images'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🖼️ Ton village au musée (POP, en ligne)</td><td><code>mr_musee</code></td><td class=g>📍 Le lieu</td><td class=src>Ministère de la Culture, POP — notices Licence Ouverte ; photos : droi</td></tr><tr><td>🖼️ Tableaux des communes déjà cherchées (Joconde)</td><td><code>l10v_tableaux</code></td><td class=g>📍 Le lieu</td><td class=src>Base Joconde (POP) — notices Licence Ouverte 2.0</td></tr><tr><td>📷 Photos anciennes des communes déjà cherchées (Mémoire)</td><td><code>l10v_photos</code></td><td class=g>📍 Le lieu</td><td class=src>Base Mémoire (POP) — notices Licence Ouverte 2.0</td></tr><tr><td>🖼️ Images anciennes des communes</td><td><code>cplus_images</code></td><td class=g>📍 Le lieu</td><td class=src>Wikimedia Commons (licence de chaque image)</td></tr><tr><td>🎞️ Films d’archives libres (gardés)</td><td><code>pm_films</code></td><td class=g>📍 Le lieu</td><td class=src>Wikimedia Commons ; Internet Archive (domaine public ou licence libre)</td></tr><tr><td>🖼️ Les métiers en images (œuvres anciennes)</td><td><code>l8a_images</code></td><td class=g>👤 La personne</td><td class=src>Wikidata (CC0) ; images Wikimedia Commons</td></tr><tr><td>👗 La mode par décennie (gravures et photos)</td><td><code>et_mode</code></td><td class=g>🌍 Le monde</td><td class=src>Wikimedia Commons (licence de chaque image)</td></tr><tr><td>🔊 Enregistrements anciens libres (78 tours, cylindres)</td><td><code>l9a_sons</code></td><td class=g>🌍 Le monde</td><td class=src>Internet Archive (78 tours, cylindres) — domaine public, CC0, CC BY</td></tr><tr><td>🗺 Atlas de Trudaine : planches sur Wikimedia Commons</td><td><code>th_trudaine</code></td><td class=g>🌍 Le monde</td><td class=src>Wikimedia Commons (domaine public)</td></tr><tr><td>🎬 Films et œuvres des communes</td><td><code>cc_oeuvres</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>📷 Formats des photos anciennes (pour dater une photo)</td><td><code>et_photos</code></td><td class=g>🔎 Chercher</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>👒 Coiffes et costumes des régions</td><td><code>tr_coiffes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikimedia Commons (licence de chaque photo), Wikidata</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🗺</span> <b>Lieux et noms de lieux</b> <i>14</i> <code>theme: 'lieux'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🏰 Noms des lieux anciens (GOV)</td><td><code>gov_noms</code></td><td class=g>📍 Le lieu</td><td class=src>GOV, gov.genealogy.net (CC BY-SA 3.0)</td></tr><tr><td>🏰 Trouver un lieu ancien (GOV) <span class=lk>lien</span></td><td><code>link_gov_search</code></td><td class=g>🔎 Chercher</td><td class=src>—</td></tr><tr><td>🏘️ Lieux-dits (IGN)</td><td><code>lp_lieuxdits</code></td><td class=g>📍 Le lieu</td><td class=src>© IGN – BD TOPO® — Licence Ouverte Etalab 2.0</td></tr><tr><td>📜 Anciens noms des lieux (DicoTopo)</td><td><code>lp_dicotopo</code></td><td class=g>📍 Le lieu</td><td class=src>DicoTopo, Dictionnaire topographique de la France (CTHS) — Licence Ouv</td></tr><tr><td>🏷 Anciens noms de lieux (Wikidata)</td><td><code>wikidata_anciens_noms</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0 1.0, domaine public)</td></tr><tr><td>🗣️ Noms des villages en langue régionale et gentilés</td><td><code>tm_noms</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🏚️ Villages disparus et anciennes communes</td><td><code>tm_disparus</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>📍 Rues de Paris renommées (anciens noms)</td><td><code>br_rues_paris</code></td><td class=g>📍 Le lieu</td><td class=src>Ville de Paris, nomenclature officielle des voies (ODbL)</td></tr><tr><td>🌍 Les lieux de ma base qui ont un homonyme ailleurs dans le monde</td><td><code>l8a_homonymes</code></td><td class=g>📍 Le lieu</td><td class=src>GeoNames (CC BY 4.0)</td></tr><tr><td>🏘️ Villes et villages d’Algérie créés de 1830 à 1962</td><td><code>l10t_algerie</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>📖 Communes suisses et leur article du DHS</td><td><code>l10t_suisse</code></td><td class=g>🔎 Chercher</td><td class=src>Wikidata (CC0), liens vers le Dictionnaire historique de la Suisse</td></tr><tr><td>🏞️ Pays traditionnels (régions naturelles)</td><td><code>l10r_pays</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>👥 Population des communes (1876 → 2023)</td><td><code>hist_communes</code></td><td class=g>📍 Le lieu</td><td class=src>©Insee, recensements de la population (Licence Ouverte)</td></tr><tr><td>🧩 Mes territoires (communes réunies)</td><td><code>mes_territoires</code></td><td class=g>📍 Le lieu</td><td class=src>Communes : IGN Admin Express, INSEE COG 2025 (Licence Ouverte)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>👑</span> <b>Pouvoirs, lois et frontières</b> <i>13</i> <code>theme: 'pouvoirs'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🗺 Pays et frontières, de 1816 à 2019</td><td><code>pays_frontieres</code></td><td class=g>🌍 Le monde</td><td class=src>CShapes 2.0 et CShapes-Europe, ETH Zürich (CC BY-NC-SA 4.0)</td></tr><tr><td>👑 Territoires d’autrefois</td><td><code>territoires</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0 1.0) · contours Wikimedia Commons</td></tr><tr><td>🛂 Les changements de nationalité (Savoie, Alsace-Moselle, Algérie…)</td><td><code>l8b_nationalite</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (citations, CC BY-SA 4.0)</td></tr><tr><td>👑 Chefs de l’État</td><td><code>dp_chefs_etat</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0 1.0)</td></tr><tr><td>🎩 Préfets des départements</td><td><code>dp_prefets</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0 1.0)</td></tr><tr><td>🏛️ Maires (connus de Wikidata)</td><td><code>dp_maires</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0 1.0)</td></tr><tr><td>👑 Seigneurs des communes de France (avant 1800)</td><td><code>l8c_seigneurs</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) : titres de noblesse</td></tr><tr><td>🏛️ Communes sous l’Ancien Régime (1789)</td><td><code>dp_ancien_regime</code></td><td class=g>📍 Le lieu</td><td class=src>Atlas d’Ancien Régime (Th. Fressin), CC BY-SA 4.0</td></tr><tr><td>🧂 Pays de gabelle (avant 1790)</td><td><code>l9_gabelle</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia « Gabelle du sel » (CC BY-SA 4.0) et atlas d’Ancien Régime (</td></tr><tr><td>⚖️ Droit écrit ou coutume, par commune (1789)</td><td><code>l10r_coutumes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia « Droit écrit » (CC BY-SA 4.0) et atlas d’Ancien Régime (CC </td></tr><tr><td>⚖️ Ce que la loi disait</td><td><code>dp_lois</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (citations, CC BY-SA 4.0) · textes cités (Légifrance, Gallic</td></tr><tr><td>🗳 Élections, commune par commune</td><td><code>elections</code></td><td class=g>📍 Le lieu</td><td class=src>Élections d’autrefois (voir Réglages)</td></tr><tr><td>📜 Cahiers de doléances de 1789 en ligne</td><td><code>pm_doleances</code></td><td class=g>🔎 Chercher</td><td class=src>data.gouv.fr (Licence Ouverte 2.0) ; Wikisource (CC BY-SA)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>👶</span> <b>Prénoms et noms de famille</b> <i>8</i> <code>theme: 'noms'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>📊 Prénoms donnés, par pays, région et année</td><td><code>pp_prenoms</code></td><td class=g>👤 La personne</td><td class=src>Insee, OFS, RRQ… (voir Prénoms d’ici et d’ailleurs)</td></tr><tr><td>🔤 Le sens des prénoms</td><td><code>tr_prenoms</code></td><td class=g>👤 La personne</td><td class=src>Wiktionnaire (CC BY-SA 4.0)</td></tr><tr><td>🇫🇷 Prénoms révolutionnaires de ta famille</td><td><code>l8b_prenoms_famille</code></td><td class=g>👤 La personne</td><td class=src>Wikipédia, « Calendrier républicain », catégorie « Prénom révolutionna</td></tr><tr><td>📚 Personnages de fiction et leur nom de famille</td><td><code>l8b_personnages</code></td><td class=g>👤 La personne</td><td class=src>Wikidata (CC0)</td></tr><tr><td>📚 Les noms de ta famille dans les romans</td><td><code>l8b_noms_romans</code></td><td class=g>👤 La personne</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🛡️ Blasons à tes noms (Rietstap)</td><td><code>cc_rietstap</code></td><td class=g>👤 La personne</td><td class=src>J.-B. Rietstap, Armorial général (1884-1887), domaine public</td></tr><tr><td>🏷️ Rues à tes noms de famille (en ligne)</td><td><code>cc_rues</code></td><td class=g>🔎 Chercher</td><td class=src>Base Adresse Nationale (Licence Ouverte 2.0)</td></tr><tr><td>👥 Où sont nés les porteurs d’un nom (décès INSEE)</td><td><code>l10t_nom</code></td><td class=g>👤 La personne</td><td class=src>INSEE, fichier des personnes décédées (importé dans l’app)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🔎</span> <b>Retrouver une personne</b> <i>11</i> <code>theme: 'personnes'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>⚰️ Décès INSEE (fichier installé)</td><td><code>insee_deces</code></td><td class=g>👤 La personne</td><td class=src>Insee, fichier des personnes décédées (Licence Ouverte 2.0)</td></tr><tr><td>⚰️ Décès INSEE (1970 → aujourd’hui) <span class=lk>lien</span></td><td><code>link_insee</code></td><td class=g>🔎 Chercher</td><td class=src>—</td></tr><tr><td>🔎 Chercher un nom dans les bases officielles <span class=lk>lien</span></td><td><code>link_bo_search</code></td><td class=g>🔎 Chercher</td><td class=src>—</td></tr><tr><td>🏅 Légion d’honneur (base Léonore)</td><td><code>bo_leonore</code></td><td class=g>🔎 Chercher</td><td class=src>Base Léonore (Archives nationales)</td></tr><tr><td>🌟 Personnes célèbres (Wikidata)</td><td><code>wikidata_personnes</code></td><td class=g>👤 La personne</td><td class=src>Wikidata (CC0 1.0, domaine public)</td></tr><tr><td>🎓 Anciens élèves des grandes écoles (Wikidata)</td><td><code>pm_ecoles</code></td><td class=g>👤 La personne</td><td class=src>Wikidata (CC0) — P69</td></tr><tr><td>🖋️ Célébrités de passage (résidences datées)</td><td><code>l9_sejours</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🦴 Individus anciens (ADN ancien)</td><td><code>adn_ancien</code></td><td class=g>👤 La personne</td><td class=src>Allen Ancient DNA Resource, Harvard Dataverse (CC0 1.0)</td></tr><tr><td>🤝 Relations hors famille (son réseau)</td><td><code>reseau</code></td><td class=g>👤 La personne</td><td class=src>Ta généalogie (fiches et sources reliées)</td></tr><tr><td>📇 Annuaires du commerce de Paris (1787–1914)</td><td><code>ba_annuaires</code></td><td class=g>📍 Le lieu</td><td class=src>SoDUCo, « Annuaires historiques parisiens, 1798-1914 », NAKALA (DOI 10</td></tr><tr><td>🏅 Lauréats du prix de vertu Montyon (Wikidata)</td><td><code>tf_montyon</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>⚒️</span> <b>Métiers et industries</b> <i>13</i> <code>theme: 'metiers'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🏭 Anciens sites industriels (CASIAS)</td><td><code>mr_casias</code></td><td class=g>📍 Le lieu</td><td class=src>Géorisques, BRGM — CASIAS (Licence Ouverte Etalab 2.0)</td></tr><tr><td>⛏️ Mines et carrières (Wikidata)</td><td><code>mr_mines</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>⚙️ Moulins et usines à eau (ROE)</td><td><code>mr_moulins</code></td><td class=g>📍 Le lieu</td><td class=src>OFB, Sandre — ROE (Licence Ouverte Etalab 2.0)</td></tr><tr><td>⚒ Forges, hauts fourneaux et martinets anciens</td><td><code>tf_forges</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; OpenStreetMap (ODbL)</td></tr><tr><td>🧂 Salines et marais salants</td><td><code>tf_salines</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; OpenStreetMap (ODbL)</td></tr><tr><td>🏭 Coutelleries, ganteries, vanneries, chocolateries, conserveries…</td><td><code>th_ateliers</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>📖 Métiers et pays dans Wikipédia : couteliers, gantiers, vanniers, terre-neuvas, goémoniers, teinturiers…</td><td><code>th_textes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>😇 Saints patrons des métiers</td><td><code>l8a_saints</code></td><td class=g>👤 La personne</td><td class=src>Wikidata (CC0) ; images Wikimedia Commons</td></tr><tr><td>🛠️ Les outils des métiers</td><td><code>l8a_outils</code></td><td class=g>👤 La personne</td><td class=src>Wikidata (CC0) ; images Wikimedia Commons</td></tr><tr><td>🦠 Maladies de certains métiers</td><td><code>l8a_maladies</code></td><td class=g>👤 La personne</td><td class=src>Wikipédia (CC BY-SA 4.0), phrase exacte de chaque article</td></tr><tr><td>✊ Grèves et conflits du travail</td><td><code>et_greves</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0) ; catégories de Wikipédia</td></tr><tr><td>💰 Budgets de familles ouvrières (Le Play, 1844–1886)</td><td><code>l8a_budgets</code></td><td class=g>👤 La personne</td><td class=src>Cheysson et Toqué, Les Budgets comparés des cent monographies (1890), </td></tr><tr><td>🐄 Foires de France</td><td><code>l8c_foires</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; Wikipédia (CC BY-SA 4.0)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🌾</span> <b>Champs, bêtes et plantes</b> <i>14</i> <code>theme: 'terre'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🐛 Fléaux des cultures (phylloxéra, oïdium, mildiou, pébrine)</td><td><code>et_fleaux</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>🍷 Produits AOC, AOP et IGP</td><td><code>tr_aoc</code></td><td class=g>📍 Le lieu</td><td class=src>INAO, data.gouv.fr (Licence Ouverte)</td></tr><tr><td>🐄 Races locales d’animaux</td><td><code>tr_races</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; origine : Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>🍎 Fruits et variétés anciennes des régions</td><td><code>tm_fruits</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🌹 Roses et variétés nommées d’après un lieu ou une personne</td><td><code>tm_cultivars</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🍇 Cépages et leur origine</td><td><code>tb_cepages</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🥕 Le potager de 1883 (Vilmorin) : légumes et variétés</td><td><code>tf_potager</code></td><td class=g>📍 Le lieu</td><td class=src>Vilmorin-Andrieux 1883 (domaine public) ; Wikisource</td></tr><tr><td>🐺 Loups et bêtes sauvages par département</td><td><code>pm_faune</code></td><td class=g>📍 Le lieu</td><td class=src>GBIF — Répartition historique du loup en France métropolitaine (INPN, </td></tr><tr><td>🐦 Oiseaux communs des campagnes</td><td><code>l9a_oiseaux</code></td><td class=g>📍 Le lieu</td><td class=src>GBIF.org (CC0, CC BY 4.0), xeno-canto</td></tr><tr><td>🌼 Fleurs sauvages communes</td><td><code>l9a_fleurs</code></td><td class=g>📍 Le lieu</td><td class=src>GBIF.org (CC0, CC BY 4.0), Commons</td></tr><tr><td>🌳 Arbres remarquables</td><td><code>tq_arbres</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🌳 Forêts de 1850 autour des lieux déjà calculés</td><td><code>l10v_forets</code></td><td class=g>📍 Le lieu</td><td class=src>IGN, BD Forêts anciennes (Licence Ouverte 2.0)</td></tr><tr><td>🌾 Le paysage autour des lieux déjà regardés (CORINE 1990 → 2018)</td><td><code>ta_paysage</code></td><td class=g>📍 Le lieu</td><td class=src>CORINE Land Cover (Copernicus, accès libre et gratuit)</td></tr><tr><td>🐑 Transhumance et cabanes de berger</td><td><code>tb_berger</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) · OpenStreetMap (ODbL)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🚂</span> <b>Routes, trains et bateaux</b> <i>13</i> <code>theme: 'routes'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🚂 Gares et ouverture du train</td><td><code>hist_gares</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; R. Jeansoulin, Un siècle de gares (ODbL)</td></tr><tr><td>🛣️ Voies romaines</td><td><code>ha_voies_romaines</code></td><td class=g>🌍 Le monde</td><td class=src>Itiner-e 2024, de Soto et al. 2025 (CC BY 4.0)</td></tr><tr><td>🐚 Chemins de Compostelle</td><td><code>ha_compostelle</code></td><td class=g>🌍 Le monde</td><td class=src>© OpenStreetMap contributors (ODbL)</td></tr><tr><td>🐴 Relais de poste aux chevaux</td><td><code>l10t_relais</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🌉 Ponts, canaux, écluses, tunnels, aqueducs</td><td><code>et_ouvrages</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🌉 Ponts suspendus de France</td><td><code>tf_ponts</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>🚡 Funiculaires et ponts transbordeurs</td><td><code>th_funiculaires</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🚋 Tramways et petits trains disparus (fermés avant 1975)</td><td><code>th_tramways</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; OpenStreetMap (ODbL)</td></tr><tr><td>🛤 Tracés de voies ferrées disparues (OpenStreetMap)</td><td><code>th_traces</code></td><td class=g>📍 Le lieu</td><td class=src>OpenStreetMap (ODbL)</td></tr><tr><td>🛶 Maisons éclusières et gares d’eau</td><td><code>th_eclusieres</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; OpenStreetMap (ODbL)</td></tr><tr><td>⚓ Navires</td><td><code>ha_navires</code></td><td class=g>🔎 Chercher</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🐎 Grands voyages : les étapes</td><td><code>l9_voyages</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>🏔️ Premières ascensions des sommets</td><td><code>l9_sommets</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>✝️</span> <b>Croire, soigner, enfermer</b> <i>12</i> <code>theme: 'croire'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>⛪ Églises et saints patrons</td><td><code>cplus_churches</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0 1.0)</td></tr><tr><td>⛪ Évêques des diocèses de France</td><td><code>dp_eveques</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0 1.0)</td></tr><tr><td>⛪ Les papes</td><td><code>l9_papes</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr><tr><td>✝️ Saints du jour (calendrier)</td><td><code>l10r_saints</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia, pages des jours (CC BY-SA 4.0)</td></tr><tr><td>💒 Temps clos (Avent, Carême) de chaque année</td><td><code>l10r_tempsclos</code></td><td class=g>🌍 Le monde</td><td class=src>Dictionnaire de théologie catholique (1905), Wikisource ; calcul de Pâ</td></tr><tr><td>⛲ Fontaines saintes et lieux de pèlerinage</td><td><code>pm_fontaines</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🕯️ Lieux de pèlerinage et sanctuaires</td><td><code>l10o_pelerinages</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🕍 Temples protestants et synagogues</td><td><code>tb_cultes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) · OpenStreetMap (ODbL)</td></tr><tr><td>⛪ Églises, chapelles, abbayes disparues</td><td><code>l8c_eglises</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; images Wikimedia Commons</td></tr><tr><td>🏥 Hôpitaux, hospices, enfants trouvés, prisons, couvents</td><td><code>ha_institutions</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🪦 Cimetières autour des lieux de la famille</td><td><code>cplus_cemeteries</code></td><td class=g>📍 Le lieu</td><td class=src>© OpenStreetMap contributors (ODbL 1.0)</td></tr><tr><td>🔍 Grandes affaires criminelles</td><td><code>tm_affaires</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>💶</span> <b>Prix, monnaies et chiffres</b> <i>7</i> <code>theme: 'prix'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>💶 Prix des denrées dans les villes d’Europe</td><td><code>prix_europe</code></td><td class=g>🌍 Le monde</td><td class=src>Allen-Unger Global Commodity Prices Dataset, IISG (CC BY-SA 4.0)</td></tr><tr><td>🪙 Pièces de monnaie de tous les jours (France)</td><td><code>tq_poche</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0), images Wikimedia Commons</td></tr><tr><td>✉️ Prix d’un timbre (lettre simple, France)</td><td><code>tq_timbre</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>📏 Mesures de pays (sourcées)</td><td><code>tm_mesures</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>⏳ Espérance de vie à divers âges (France)</td><td><code>tq_esperance</code></td><td class=g>🌍 Le monde</td><td class=src>Insee (Licence ouverte 2.0)</td></tr><tr><td>⚰️ Décès par département et par année (an IX – 1855)</td><td><code>tc_sgf_deces</code></td><td class=g>🌍 Le monde</td><td class=src>Insee, Statistique générale de la France (Licence Ouverte 2.0)</td></tr><tr><td>🌍 Les pays de ta famille en chiffres <span class=lk>lien</span></td><td><code>link_pays_chiffres</code></td><td class=g>🌍 Le monde</td><td class=src>—</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>📚</span> <b>Livres, journaux et écritures</b> <i>13</i> <code>theme: 'livres'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>📚 Livres célèbres, par année de parution</td><td><code>et_livres</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0)</td></tr><tr><td>📚 Livres d’école anciens</td><td><code>l9a_livres</code></td><td class=g>🌍 Le monde</td><td class=src>Wikisource, Internet Archive, Wikipédia</td></tr><tr><td>🍰 Recettes des livres de cuisine anciens</td><td><code>l9a_recettes</code></td><td class=g>🌍 Le monde</td><td class=src>Wikisource, Internet Archive (domaine public)</td></tr><tr><td>💍 Coutumes : mariage et deuil (textes anciens)</td><td><code>l9_coutumes</code></td><td class=g>👤 La personne</td><td class=src>Wikisource, Internet Archive (domaine public)</td></tr><tr><td>🎻 Contes et chansons recueillis au XIXe siècle</td><td><code>l10o_contes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikisource (domaine public)</td></tr><tr><td>🗞️ Journaux anciens des départements (BnF)</td><td><code>l9_journaux</code></td><td class=g>📍 Le lieu</td><td class=src>BnF, data.bnf.fr (Licence Ouverte)</td></tr><tr><td>📰 Journaux anciens à l’étranger (pages trouvées)</td><td><code>cplus_newspapers</code></td><td class=g>🔎 Chercher</td><td class=src>Chronicling America — Library of Congress</td></tr><tr><td>📅 Almanachs et annuaires anciens, année par année</td><td><code>td_almanachs</code></td><td class=g>🔎 Chercher</td><td class=src>Internet Archive (droits de chaque volume)</td></tr><tr><td>📜 Vocabulaire latin des registres (Wiktionnaire)</td><td><code>td_latin</code></td><td class=g>🔎 Chercher</td><td class=src>Wiktionnaire (CC BY-SA 4.0)</td></tr><tr><td>✂️ Abréviations latines (Cappelli, 1901)</td><td><code>l10r_cappelli</code></td><td class=g>🔎 Chercher</td><td class=src>Cappelli, Lexicon abbreviaturarum (1901), Wikimedia Commons — domaine </td></tr><tr><td>🖋️ Modèles d’écriture anciens</td><td><code>l10r_ecritures</code></td><td class=g>🔎 Chercher</td><td class=src>Wikimedia Commons (licence de chaque image)</td></tr><tr><td>💬 Mots du français régional</td><td><code>tm_mots</code></td><td class=g>📍 Le lieu</td><td class=src>Wiktionnaire (CC BY-SA 4.0)</td></tr><tr><td>🎙️ Atlas sonore : points d’enregistrement</td><td><code>pm_parlers</code></td><td class=g>📍 Le lieu</td><td class=src>Atlas sonore des langues régionales de France, CNRS-LISN (CC BY-NC-SA </td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🎉</span> <b>Fêtes, jeux et vie de tous les jours</b> <i>14</i> <code>theme: 'fetes'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🎉 Fêtes et traditions</td><td><code>tm_fetes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🎲 Jeux traditionnels et régionaux</td><td><code>td_jeux</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia (CC BY-SA 4.0) ; Wikidata (CC0)</td></tr><tr><td>⚽ Clubs sportifs de France et leur fondation</td><td><code>l8c_clubs</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🚲 Étapes du Tour de France (1903–2025)</td><td><code>l8c_tour</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) : étapes du Tour de France</td></tr><tr><td>🎡 Expositions universelles et internationales</td><td><code>l8c_expos</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0), phrase de chaque article</td></tr><tr><td>🎭 Créations d’opéras, ballets et pièces en Europe</td><td><code>l8c_spectacles</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0) : date et lieu de la première</td></tr><tr><td>💃 Musique et danses des pays de France</td><td><code>pm_musique</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0) ; Wikimedia Commons</td></tr><tr><td>🎶 Chansons à la mode, année par année (Wikidata)</td><td><code>wikidata_chansons</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0 1.0, domaine public)</td></tr><tr><td>🎼 Chansons populaires datées (partitions libres)</td><td><code>l9a_chansons</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0), Wikidata (CC0), IMSLP (domaine public)</td></tr><tr><td>🌹 Communes qui couronnent une rosière</td><td><code>tf_rosieres</code></td><td class=g>📍 Le lieu</td><td class=src>Wikipédia (CC BY-SA 4.0) ; Wikidata (CC0)</td></tr><tr><td>🐺 Légendes et grandes peurs</td><td><code>tm_legendes</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🍲 Plats des régions</td><td><code>cc_plats</code></td><td class=g>📍 Le lieu</td><td class=src>Wikidata (CC0)</td></tr><tr><td>🍬 Marques, voitures et objets français, par année</td><td><code>l9a_marques</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0), Wikipédia (CC BY-SA 4.0), Commons</td></tr><tr><td>🧸 Jouets anciens par décennie (images)</td><td><code>l9a_jouets</code></td><td class=g>🌍 Le monde</td><td class=src>Wikimedia Commons (licence de chaque image)</td></tr></tbody></table></div></details>
+<details class="mapd"><summary><span class=ti>🌍</span> <b>Grands événements et dates</b> <i>7</i> <code>theme: 'evenements'</code></summary><div class=scrollx><table class=mapt><thead><tr><th>Liste</th><th>id</th><th>Groupe d’aujourd’hui</th><th>Source</th></tr></thead><tbody><tr><td>🌍 Le monde autour (événements) <span class=lk>lien</span></td><td><code>link_world_events</code></td><td class=g>🌍 Le monde</td><td class=src>—</td></tr><tr><td>🦠 Épidémies, guerres, hivers <span class=lk>lien</span></td><td><code>link_historical_context</code></td><td class=g>🌍 Le monde</td><td class=src>—</td></tr><tr><td>🚶 Ta famille dans les grands mouvements <span class=lk>lien</span></td><td><code>link_grands_mouvements</code></td><td class=g>🌍 Le monde</td><td class=src>—</td></tr><tr><td>🗺 Batailles, catastrophes, épidémies, traités (Wikidata)</td><td><code>wikidata_evenements</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0 1.0, domaine public)</td></tr><tr><td>🎂 Les jours célèbres (pour les coïncidences)</td><td><code>l8c_dates</code></td><td class=g>🌍 Le monde</td><td class=src>Wikidata (CC0) ; événements de « Le monde autour » (Wikipédia)</td></tr><tr><td>💡 Les nouveautés : train, photo, timbre, téléphone, avion, radio…</td><td><code>et_nouveautes</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia (CC BY-SA 4.0)</td></tr><tr><td>🇫🇷 Les jours du calendrier républicain</td><td><code>l8b_calendrier</code></td><td class=g>🌍 Le monde</td><td class=src>Wikipédia, « Calendrier républicain » (CC BY-SA 4.0)</td></tr></tbody></table></div></details>
+
+<!-- ═══════════ 2 ═══════════ -->
+<h2 id="s2"><span class="num-b">2</span>Écran : Toutes les données, par thème</h2>
+<p class="sub">Listes → 🧰 Données → « Toutes les données ». Une recherche en haut, quatre pastilles calmes pour filtrer (calculées toutes seules, rien à déclarer), puis les thèmes en cartes. Pas d’autres boutons.</p>
+<div class="grid">
+ <div class="win wide">
+  <div class="win-bar"><span class="eyebrow">Listes › 🧰 Données</span><span class="mini">216 listes</span></div>
+  <div class="win-body">
+   <div class="ph"><div><small>Données</small><h4>🧰 Toutes les données</h4><p>Des listes toutes prêtes pour comprendre la vie de ta famille. Lecture seule.</p></div></div>
+   <div class="lbar"><span class="lsearch">🔍 Chercher dans les 216 listes (ex. séisme, moulin, Nice, 1887)…</span></div>
+   <div class="chips"><span class="klab">Montrer</span>
+    <span class="k on">Toutes <i>216</i></span>
+    <span class="k">📍 Avec une carte <i>129</i></span>
+    <span class="k">📅 Avec des dates <i>159</i></span>
+    <span class="k">⤓ À installer <i>29</i></span>
+   </div>
+   <div class="themes">
+    <div class="th"><span class="ic">🌋</span><b>Séismes, volcans et terrains <i>9</i></b><small>EPICA, NOAA, volcans, avalanches, cavités…</small><span class="mg">🔀 Séismes réunis · Éruptions réunies</span></div>
+    <div class="th"><span class="ic">🌊</span><b>Eaux, crues et mers <i>8</i></b><small>Inondations, repères de crues, marées, épaves…</small><span class="mg">🔀 Crues réunies</span></div>
+    <div class="th"><span class="ic">⛅</span><b>Climat, ciel et saisons <i>14</i></b><small>Vendanges, météo, vents, comètes, éclipses…</small></div>
+    <div class="th"><span class="ic">⚔️</span><b>Guerres et soldats <i>11</i></b><small>Morts pour la France, batailles, régiments…</small><span class="mg">🔀 Batailles réunies</span></div>
+    <div class="th"><span class="ic">🏛</span><b>Monuments et patrimoine <i>12</i></b><small>Châteaux, Mérimée, Palissy, sites antiques…</small><span class="mg">🔀 Édifices réunis</span></div>
+    <div class="th"><span class="ic">🏘</span><b>Petit patrimoine du village <i>11</i></b><small>Fours, lavoirs, croix, bornes, halles…</small></div>
+    <div class="th"><span class="ic">🖼</span><b>Musées, images et sons <i>12</i></b><small>Joconde, Mémoire, films, 78 tours…</small></div>
+    <div class="th"><span class="ic">🗺</span><b>Lieux et noms de lieux <i>14</i></b><small>GOV, DicoTopo, lieux-dits, villages disparus…</small><span class="mg">🔀 Anciens noms réunis</span></div>
+    <div class="th"><span class="ic">👑</span><b>Pouvoirs, lois et frontières <i>13</i></b><small>Frontières, préfets, maires, seigneurs…</small></div>
+    <div class="th"><span class="ic">👶</span><b>Prénoms et noms de famille <i>8</i></b><small>Prénoms par pays, blasons, romans…</small></div>
+    <div class="th"><span class="ic">🔎</span><b>Retrouver une personne <i>11</i></b><small>Décès INSEE, Léonore, annuaires…</small></div>
+    <div class="th"><span class="ic">⚒️</span><b>Métiers et industries <i>13</i></b><small>Mines, moulins, forges, outils, grèves…</small></div>
+    <div class="th"><span class="ic">🌾</span><b>Champs, bêtes et plantes <i>14</i></b><small>AOC, races, fruits anciens, loups…</small></div>
+    <div class="th"><span class="ic">🚂</span><b>Routes, trains et bateaux <i>13</i></b><small>Gares, voies romaines, relais de poste…</small></div>
+    <div class="th"><span class="ic">✝️</span><b>Croire, soigner, enfermer <i>12</i></b><small>Églises, saints, hospices, prisons…</small></div>
+    <div class="th"><span class="ic">💶</span><b>Prix, monnaies et chiffres <i>7</i></b><small>Prix des denrées, pièces, timbre…</small></div>
+    <div class="th"><span class="ic">📚</span><b>Livres, journaux et écritures <i>13</i></b><small>Journaux, almanachs, latin…</small></div>
+    <div class="th"><span class="ic">🎉</span><b>Fêtes, jeux et vie de tous les jours <i>14</i></b><small>Fêtes, jeux, chansons, plats…</small></div>
+    <div class="th"><span class="ic">🌍</span><b>Grands événements et dates <i>7</i></b><small>Le monde autour, nouveautés…</small></div>
+   </div>
+   <p class="note">Un clic sur une carte ouvre le thème (§ 3). Dans la barre de gauche de Listes, le groupe « 🧰 Données » montre ces 19 thèmes (repliés) au lieu des 216 listes à plat.</p>
+  </div>
+ </div>
+
+ <div class="win">
+  <div class="win-bar"><span class="eyebrow">Recherche tapée : « séisme »</span><span class="mini">pendant la frappe</span></div>
+  <div class="win-body">
+   <div class="lbar" style="margin-top:0"><span class="lsearch on">🔍 séisme</span><span class="clear">effacer</span></div>
+   <p class="mini" style="margin:0 0 10px">6 listes trouvées, dans 3 thèmes. Les thèmes sans résultat sont pâlis.</p>
+   <ul class="res">
+    <li class="grp">🌋 Séismes, volcans et terrains</li>
+    <li><span class="ic">🔀</span><div><b class="mg">Séismes réunis</b><small>EPICA + NOAA + Wikidata, sans doublons · 4 sources</small></div><span class="mini">liste réunie</span></li>
+    <li><span class="ic">🌋</span><div><b>Séismes d’Europe (1000 → 1899)</b><small>EPICA v1.1, INGV</small></div><span class="mini">installée</span></li>
+    <li><span class="ic">🌋</span><div><b>Séismes, éruptions et tsunamis du monde</b><small>NOAA NCEI</small></div><span class="mini"></span></li>
+    <li class="grp">🌊 Eaux, crues et mers</li>
+    <li><span class="ic">⚠️</span><div><b>Catastrophes naturelles reconnues (CatNat)</b><small>le mot « séisme » est dans ses valeurs</small></div><span class="mini"></span></li>
+    <li class="grp">🌍 Grands événements et dates</li>
+    <li><span class="ic">🗺</span><div><b>Batailles, catastrophes, épidémies, traités</b><small>Wikidata · filtre « séisme »</small></div><span class="mini"></span></li>
+    <li><span class="ic">🦠</span><div><b>Épidémies, guerres, hivers</b><small>lien vers « Le monde autour »</small></div><span class="mini">lien</span></li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="case">
+  <span class="tag">Les 4 groupes : ma recommandation</span>
+  <h3>Les remplacer par les thèmes</h3>
+  <p style="font-size:13px;margin:0">« Le lieu / La personne / Le monde / Chercher » ne dit pas <i>de quoi</i> parle une liste, et la même sorte de liste tombe dans des groupes différents (séismes : 2 groupes ; guerres : 4). Ce que ces groupes voulaient dire est mieux dit par des <b>pastilles calculées</b> :</p>
+  <ul style="font-size:13px;padding-left:18px;margin:8px 0 0">
+   <li><b>📍 Avec une carte</b> = la liste a <code>geo()</code> (marche avec « Autour de… »)</li>
+   <li><b>📅 Avec des dates</b> = la liste a <code>period()</code></li>
+   <li><b>⤓ À installer</b> = paquet pas encore là</li>
+  </ul>
+  <p class="note">Le champ <code>group</code> reste dans le code (rien ne casse : la fiche du lieu et la fiche de la personne s’en servent), il n’est simplement plus montré dans Listes.</p>
+ </div>
+</div>
+
+<!-- ═══════════ 3 ═══════════ -->
+<h2 id="s3"><span class="num-b">3</span>Écran : le thème Séismes, et sa liste réunie</h2>
+<p class="sub">Le thème s’ouvre sur sa <b>liste réunie</b> (quand il en a une), puis ses listes une par une dans le dernier onglet. Ici : autour des lieux de la famille, à 150 km, de 1500 à 1950. Le moteur est le même que pour les autres listes (critères, période, autour de, tri, tableau / carte, export) ; ce qui change : la colonne <b>Sources</b> et la colonne <b>Dans la famille</b>.</p>
+<div class="win">
+ <div class="win-bar"><span class="eyebrow">Listes › 🧰 Données › 🌋 Séismes, volcans et terrains</span><span class="mini">← Tous les thèmes</span></div>
+ <div class="win-body">
+  <div class="ph">
+   <div><small>Liste réunie</small><h4>🔀 Séismes réunis</h4><p>Un séisme = une ligne, même s’il est dans plusieurs sources.</p></div>
+   <div class="row"><span class="seg"><span class="on">▦ Tableau</span><span>🗺 Carte</span></span><span class="lbtn">⋯</span></div>
+  </div>
+  <div class="tabsx"><span class="on">🔀 Séismes réunis <small>4 sources</small></span><span>🔀 Éruptions réunies <small>3</small></span><span>Les 9 listes</span></div>
+
+  <div class="lbar"><span class="lsearch">🔍 Chercher un lieu, une année…</span><span class="lbtn">Filtrer <span class="n">3</span></span></div>
+  <div class="chips">
+   <span class="chip">📍 Autour des lieux de la famille · 150 km</span>
+   <span class="chip">📅 1500 → 1950</span>
+   <span class="chip">Force ≥ VII</span>
+   <span class="clear">tout enlever</span>
+  </div>
+  <div class="chips"><span class="klab">Sources</span>
+   <span class="k on">EPICA <i>1000–1899</i></span>
+   <span class="k on">NOAA <i>monde</i></span>
+   <span class="k on">Wikidata</span>
+   <span class="k soon">SisFrance <i>à venir</i></span>
+  </div>
+
+  <div class="scrollx">
+  <table class="mt">
+   <thead><tr><th style="width:26px"></th><th>Date</th><th>Où</th><th>Force</th><th class="num">Morts</th><th>Dans la famille</th><th>Sources</th><th></th></tr></thead>
+   <tbody>
+    <tr class="sel"><td><span class="cb on"></span></td><td class="d">11 juin 1909</td><td class="pl"><b>Lambesc (Bouches-du-Rhône)</b><small>France · 13 km de Salon-de-Provence</small></td><td>VIII–IX · M ≈ 6</td><td class="num">46</td><td class="fam"><span class="who">Louis DURAND, 29 ans</span></td><td><div class="srcs"><a href="#">NOAA ↗</a><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib" title="Insérer">📎</span><span class="ib" title="Au panier">🧺</span></td></tr>
+    <tr class="sel"><td><span class="cb on"></span></td><td class="d">23 février 1887</td><td class="pl"><b>Ligurie (Diano Marina)</b><small>Italie · 69 km de Nice</small></td><td>IX · M ≈ 6,3<span class="diff">⚖ 2 avis</span></td><td class="num">≈ 640</td><td class="fam"><span class="who">Jeanne LACOMBE, 15 ans</span></td><td><div class="srcs"><a href="#">EPICA ↗</a><a href="#">NOAA ↗</a><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr><td><span class="cb"></span></td><td class="d">14 août 1708</td><td class="pl"><b>Manosque</b><small>France · 59 km de Salon-de-Provence</small></td><td>VIII</td><td class="num">—</td><td class="fam"><small>avant la famille</small></td><td><div class="srcs"><a href="#">EPICA ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr><td><span class="cb"></span></td><td class="d">15 février 1644</td><td class="pl"><b>Roquebillière (Vésubie)</b><small>France · 36 km de Nice</small></td><td>VIII</td><td class="num">—</td><td class="fam"><small>avant la famille</small></td><td><div class="srcs"><a href="#">EPICA ↗</a><a href="#">Wikidata ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+    <tr><td><span class="cb"></span></td><td class="d">20 juillet 1564</td><td class="pl"><b>La Bollène (Vésubie)</b><small>France · 38 km de Nice</small></td><td>VIII</td><td class="num">—</td><td class="fam"><small>avant la famille</small></td><td><div class="srcs"><a href="#">EPICA ↗</a></div></td><td class="acts"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+   </tbody>
+  </table>
+  </div>
+  <div class="selbar"><b>2 choisies</b><span class="sp"></span><span class="btn small">🧺 Mettre au panier</span><span class="btn small">📎 Insérer</span><span class="clear">annuler</span></div>
+  <div class="foot"><span>5 séismes réunis (9 lignes dans les sources : 4 doublons fondus) · Tulle : rien d’assez fort à moins de 150 km dans ces sources.</span><span>Trier : date ▾</span></div>
+ </div>
+</div>
+
+<div class="grid" style="margin-top:24px">
+ <div class="menu">
+  <div class="mg2"><b>Filtrer ▾ (ouvert)</b><span class="mini">Les mêmes critères que les autres listes, plus les sources.</span></div>
+  <div class="mg2"><b>📅 Période</b><span class="inp">1500</span> → <span class="inp">1950</span> <span class="mini">ou « du vivant de… » une personne</span></div>
+  <div class="mg2"><b>📍 Autour de</b>
+   <label><span class="cb on"></span> Tous les lieux de la famille <i>3</i></label>
+   <label><span class="cb"></span> Un lieu : <span class="inp">Tulle</span></label>
+   <span class="mini">à</span> <span class="inp">150</span> <span class="mini">km</span>
+  </div>
+  <div class="mg2"><b>🌍 Pays</b><label><span class="cb on"></span> France <i>4</i></label><label><span class="cb on"></span> Italie <i>1</i></label><label><span class="cb"></span> Suisse <i>0</i></label></div>
+  <div class="mg2"><b>Force</b><span class="mini">au moins</span> <span class="inp">VII</span> <span class="mini">(intensité) ou</span> <span class="inp">M 5</span></div>
+  <div class="mf"><span class="clear">tout enlever</span><span class="btn blue small">Voir 5 séismes</span></div>
+ </div>
+ <div class="case">
+  <span class="tag">Ce qui se passe au clic</span>
+  <h3>Les mêmes gestes que partout</h3>
+  <ul style="font-size:13px;padding-left:18px;margin:0">
+   <li><b>Un clic sur la ligne</b> : elle s’ouvre et montre ce que dit chaque source (§ 4).</li>
+   <li><b>↗ sur une source</b> : la fiche de cette source, dans le navigateur.</li>
+   <li><b>📎 Insérer</b> : pose « Séisme de Ligurie, 23 février 1887 (EPICA ; NOAA) » à l’endroit du curseur, avec ses sources — comme le 📎 de l’app.</li>
+   <li><b>🧺</b> : met la ligne au panier, avec ses sources (le panier sait déjà prendre une ligne de liste).</li>
+   <li><b>Cases à cocher</b> : la barre bleue apparaît seulement s’il y a un choix. Sinon, rien.</li>
+   <li><b>⋯</b> : ⤓ Exporter (CSV, avec une colonne par source), 📤 Envoyer vers…, 🖨 Imprimer, ★ Garder cette recherche.</li>
+  </ul>
+  <p class="note">La colonne « Dans la famille » : qui vivait à moins de 150 km à cette date, et son âge (d’après les lieux et dates de la généalogie). Vide si personne.</p>
+ </div>
+</div>
+
+<!-- ═══════════ 4 ═══════════ -->
+<h2 id="s4"><span class="num-b">4</span>Une ligne réunie, ouverte : ce que dit chaque source</h2>
+<div class="grid">
+ <div class="win">
+  <div class="win-bar"><span class="eyebrow">🔀 Séismes réunis › 23 février 1887</span><span class="mini">ligne ouverte</span></div>
+  <div class="win-body">
+   <div class="ph"><div><small>Séisme</small><h4>Ligurie, 23 février 1887</h4><p>Vers 6 h du matin, mercredi des Cendres. Ressenti fortement à Nice, Menton, Monaco.</p></div></div>
+   <div class="detail" style="margin-top:14px">
+    <div class="scrollx"><table>
+     <thead><tr><th>Source</th><th>Date</th><th>Épicentre</th><th>Force</th><th class="num">Morts</th><th></th></tr></thead>
+     <tbody>
+      <tr><td><b>EPICA</b> <span class="mini">Europe 1000–1899</span></td><td>1887-02-23</td><td>43,9 N · 8,1 E</td><td>Io IX · Mw 6,3</td><td class="num">—</td><td><a href="#">↗</a></td></tr>
+      <tr><td><b>NOAA</b> <span class="mini">monde</span></td><td>1887-02-23</td><td>43,7 N · 8,1 E <span class="mini">(22 km)</span></td><td>M 6,8 <span class="diff">⚖</span></td><td class="num">≈ 640</td><td><a href="#">↗</a></td></tr>
+      <tr><td><b>Wikidata</b></td><td>1887-02-23</td><td>Diano Marina</td><td>—</td><td class="num">≈ 640</td><td><a href="#">↗</a></td></tr>
+     </tbody>
+    </table></div>
+    <p class="mini" style="margin:10px 0 0">⚖ Les sources ne donnent pas la même force : la ligne réunie montre celle de la source la plus précise (EPICA) et signale l’écart. Rien n’est caché : tout est ici.</p>
+   </div>
+   <div class="row" style="margin-top:14px"><span class="btn small">📎 Insérer</span><span class="btn small">🧺 Au panier</span><span class="btn small ghost">✂ Ce ne sont pas les mêmes</span></div>
+   <p class="note">« ✂ Ce ne sont pas les mêmes » sépare la ligne (retenu dans ce navigateur, et on peut revenir en arrière).</p>
+  </div>
+ </div>
+ <div class="case">
+  <span class="tag">La règle pour réunir</span>
+  <h3>Quand deux lignes sont « le même séisme »</h3>
+  <ol style="font-size:13px;padding-left:20px;margin:0">
+   <li><b>Même jour</b> (± 1 jour : les vieilles dates sont parfois données en calendrier julien, ou à l’heure de Greenwich), <b>et</b></li>
+   <li><b>Épicentres à moins de 50 km</b> (les épicentres anciens sont des estimations).</li>
+   <li>Si une source n’a que l’<b>année</b> : même année, à moins de 50 km, et <b>aucun autre</b> séisme ce jour-là dans les autres sources. Sinon on ne réunit pas.</li>
+  </ol>
+  <p style="font-size:13px;margin:10px 0 0"><b>Quelle valeur montrer ?</b> Chaque source a un rang (1 = la plus précise) : catalogue national (SisFrance) → EPICA → NOAA → Wikidata. Date, lieu, force : celles du meilleur rang. Morts : la première source qui en donne. Un écart (force à plus de 0,5, morts du simple au double) met le petit <span class="diff">⚖ 2 avis</span>.</p>
+  <div class="msg ok">Les autres listes réunies, même idée, autres seuils :<br>
+   🌊 <b>Crues</b> (BDHI + repères de crues + CatNat « inondation ») : même commune ou même rivière à moins de 10 km, dates à 3 jours près.<br>
+   ⚔️ <b>Batailles</b> (Batailles et sièges + Guerres de Religion + Wikidata) : même identifiant Wikidata, sinon même année et moins de 20 km.<br>
+   🏛 <b>Édifices</b> (Châteaux + Mérimée + mes fiches) : même identifiant Wikidata ou même référence Mérimée.<br>
+   🗺 <b>Anciens noms</b> (GOV + DicoTopo + Wikidata + noms en langue régionale) : même commune (code INSEE), un nom par ligne.</div>
+ </div>
+</div>
+
+<!-- ═══════════ 5 ═══════════ -->
+<h2 id="s5"><span class="num-b">5</span>La même liste réunie, en carte</h2>
+<div class="win">
+ <div class="win-bar"><span class="eyebrow">🔀 Séismes réunis · 🗺 Carte</span><span class="seg"><span>▦ Tableau</span><span class="on">🗺 Carte</span></span></div>
+ <div class="win-body">
+  <div class="map">
+   <svg viewBox="0 0 800 420" role="img" aria-label="Schéma : séismes autour des lieux de la famille">
+    <g stroke="var(--map-line)" stroke-width="1">
+     <line x1="0" y1="105" x2="800" y2="105"/><line x1="0" y1="210" x2="800" y2="210"/><line x1="0" y1="315" x2="800" y2="315"/>
+     <line x1="200" y1="0" x2="200" y2="420"/><line x1="400" y1="0" x2="400" y2="420"/><line x1="600" y1="0" x2="600" y2="420"/>
+    </g>
+    <path d="M300 395 C 360 360, 420 350, 470 352 S 560 330, 610 318 S 690 300, 760 270" fill="none" stroke="var(--soft)" stroke-width="2" stroke-dasharray="5 5"/>
+    <text x="690" y="300" font-size="12" fill="var(--soft)">mer</text>
+    <!-- lieux de la famille : cercles de 150 km -->
+    <circle cx="590" cy="290" r="150" fill="var(--blue)" fill-opacity=".06" stroke="var(--blue)" stroke-dasharray="4 4"/>
+    <circle cx="380" cy="293" r="150" fill="var(--blue)" fill-opacity=".06" stroke="var(--blue)" stroke-dasharray="4 4"/>
+    <circle cx="80" cy="120" r="70" fill="none" stroke="var(--blue)" stroke-dasharray="4 4" opacity=".6"/>
+    <g font-size="12.5" font-weight="700" fill="var(--blue-ink)">
+     <rect x="584" y="284" width="12" height="12" fill="var(--blue)"/><text x="602" y="296">Nice · LACOMBE</text>
+     <rect x="374" y="287" width="12" height="12" fill="var(--blue)"/><text x="296" y="318">Salon · DURAND</text>
+     <rect x="74" y="114" width="12" height="12" fill="var(--blue)"/><text x="96" y="126">Tulle · MAZAUD</text>
+    </g>
+    <!-- séismes -->
+    <g fill="var(--red)" fill-opacity=".75" stroke="var(--paper)" stroke-width="2">
+     <circle cx="392" cy="292" r="14"/><circle cx="660" cy="262" r="18"/><circle cx="436" cy="268" r="12"/><circle cx="592" cy="254" r="12"/><circle cx="597" cy="250" r="11"/>
+    </g>
+    <g font-size="12" fill="var(--ink)">
+     <text x="410" y="300">1909 Lambesc</text><text x="682" y="258">1887 Ligurie · 3 sources</text><text x="452" y="262">1708 Manosque</text><text x="520" y="232">1564 · 1644 Vésubie</text>
+    </g>
+   </svg>
+   <div class="legend"><span><b style="color:var(--red)">●</b> un séisme (plus gros = plus fort)</span><span><b style="color:var(--blue)">■</b> lieu de la famille, cercle de 150 km</span><span>Schéma : la vraie carte est celle de l’app (fonds de carte habituels).</span></div>
+  </div>
+  <p class="note">Un clic sur un point ouvre la même ligne qu’au § 4. Les lignes qui n’ont pas de position (année seule, lieu inconnu) restent dans le tableau, avec un petit mot : « 2 séismes sans position ne sont pas sur la carte ».</p>
+ </div>
+</div>
+
+<!-- ═══════════ 6 ═══════════ -->
+<h2 id="s6"><span class="num-b">6</span>Téléphone, 390 px (le second toujours en sombre)</h2>
+<div class="phones">
+ <div>
+  <p class="cap">Les thèmes · suit le thème choisi</p>
+  <div class="phone">
+   <div class="ptop"><span>☰</span><span>🧰 Données</span><span class="sp"></span><span>⋯</span></div>
+   <div class="pbody">
+    <div class="lbar" style="margin-top:0"><span class="lsearch">🔍 Chercher dans 216 listes…</span></div>
+    <div class="chips scrollx" style="flex-wrap:nowrap"><span class="k on">Toutes</span><span class="k">📍 Carte</span><span class="k">📅 Dates</span><span class="k">⤓ À installer</span></div>
+    <div class="themes">
+     <div class="th"><span class="ic">🌋</span><b>Séismes, volcans et terrains <i>9</i></b><span class="mg">🔀 2 listes réunies</span></div>
+     <div class="th"><span class="ic">🌊</span><b>Eaux, crues et mers <i>8</i></b><span class="mg">🔀 1 liste réunie</span></div>
+     <div class="th"><span class="ic">⛅</span><b>Climat, ciel et saisons <i>14</i></b></div>
+     <div class="th"><span class="ic">⚔️</span><b>Guerres et soldats <i>11</i></b><span class="mg">🔀 1 liste réunie</span></div>
+     <div class="th"><span class="ic">🏛</span><b>Monuments et patrimoine <i>12</i></b></div>
+     <div class="th" style="border-style:dashed;justify-items:start"><span class="ic">⌄</span><b style="color:var(--muted)">14 autres thèmes</b></div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div>
+  <p class="cap">Séismes réunis · en sombre</p>
+  <div class="phone force-dark">
+   <div class="ptop"><span>←</span><span>🔀 Séismes réunis</span><span class="sp"></span><span>🗺</span><span>⋯</span></div>
+   <div class="pbody">
+    <div class="lbar" style="margin-top:0"><span class="lsearch">🔍 Lieu, année…</span><span class="lbtn">Filtrer <span class="n">3</span></span></div>
+    <div class="chips"><span class="chip">📍 Famille · 150 km</span><span class="chip">1500 → 1950</span></div>
+    <div class="pcard"><div><b>11 juin 1909 · Lambesc</b><small>VIII–IX · 46 morts · 13 km de Salon</small><small><span class="fam"><span class="who">Louis DURAND, 29 ans</span></span></small><div class="srcs"><a href="#">NOAA ↗</a><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>23 févr. 1887 · Ligurie</b><small>IX · ≈ 640 morts · 69 km de Nice <span class="diff">⚖</span></small><small><span class="fam"><span class="who">Jeanne LACOMBE, 15 ans</span></span></small><div class="srcs"><a href="#">EPICA ↗</a><a href="#">NOAA ↗</a><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>14 août 1708 · Manosque</b><small>VIII · 59 km de Salon</small><div class="srcs"><a href="#">EPICA ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <div class="pcard"><div><b>15 févr. 1644 · Roquebillière</b><small>VIII · 36 km de Nice</small><div class="srcs"><a href="#">EPICA ↗</a><a href="#">Wikidata ↗</a></div></div><div class="acts"><span class="ib">📎</span><span class="ib">🧺</span></div></div>
+    <p class="mini" style="margin:12px 0 0">5 séismes · 4 doublons fondus</p>
+   </div>
+  </div>
+ </div>
+</div>
+<p class="note" style="text-align:center">Sur téléphone, le tableau devient des cartes de deux lignes ; 📎 et 🧺 restent à droite, grands assez pour le doigt. Les 14 autres thèmes se déplient d’un geste.</p>
+
+<!-- ═══════════ 7 ═══════════ -->
+<h2 id="s7"><span class="num-b">7</span>Pour les prochaines listes (lots E à L, et après)</h2>
+<div class="grid">
+ <div class="case">
+  <span class="tag">Une liste dit son thème</span>
+  <h3>Un champ de plus : <code>theme</code></h3>
+<pre><span class="c">// une nouvelle liste (ex. un lot à venir)</span>
+(window.LCNDA_EXT.dataLists ||= []).push({
+  id: 'tg_sisfrance', icon: '🌋',
+  label: 'Séismes de France (SisFrance)',
+  theme: 'seismes',            <span class="c">// un seul, parmi les 19</span>
+  group: 'Le monde',           <span class="c">// gardé pour les fiches</span>
+  source: 'BRGM, SisFrance', sourceUrl: 'https://…',
+  merge: {                     <span class="c">// facultatif : rejoint une liste réunie</span>
+    into: 'seismes',           <span class="c">// la liste réunie « Séismes »</span>
+    rank: 1,                   <span class="c">// 1 = la plus précise</span>
+    row: r => ({date: r.date, year: r.y, lat: r.lat, lon: r.lon,
+                place: r.lieu, io: r.io, mag: r.mw, dead: r.morts,
+                url: r.fiche})
+  },
+  load: async () => rows, fields: […], period: …, geo: …
+});</pre>
+  <p class="note">Une liste qui mélange plusieurs sortes (NOAA : séismes, éruptions, tsunamis) donne un <code>merge</code> par sorte, avec un filtre : <code>merge: [{into: 'seismes', when: r =&gt; r.k === 'eq', …}, {into: 'eruptions', when: r =&gt; r.k === 'vo', …}]</code>.</p>
+ </div>
+ <div class="case">
+  <span class="tag">Les thèmes et les listes réunies</span>
+  <h3>Deux petits registres, à côté de <code>dataLists</code></h3>
+<pre>LCNDA_EXT.dataListThemes = [
+  {id: 'seismes', icon: '🌋', label: 'Séismes, volcans et terrains',
+   words: ['séisme', 'tremblement', 'volcan', 'éruption', 'avalanche']},
+  … <span class="c">// les 19</span>
+];
+LCNDA_EXT.dataListMerges = [
+  {id: 'seismes', theme: 'seismes', icon: '🔀', label: 'Séismes réunis',
+   same: {km: 50, days: 1}, columns: ['date', 'place', 'io', 'mag', 'dead']},
+  {id: 'crues', theme: 'eaux', same: {km: 10, days: 3, by: 'commune'}, …},
+];</pre>
+  <ul style="font-size:13px;padding-left:18px;margin:10px 0 0">
+   <li><b>Les 216 listes d’aujourd’hui</b> : on ne touche pas leurs fichiers. Une table <code>id → thème</code> dans <code>app-listes-donnees.js</code> (celle du § 1) les range.</li>
+   <li><b>Une liste sans thème</b> : rangée d’après ses mots (<code>words</code>) ; sinon dans « 📦 À ranger », visible seulement s’il y en a une.</li>
+   <li><b>Un essai</b> (<code>tests/test-listes-donnees.js</code>) vérifie que chaque liste a un thème connu, et que chaque <code>merge.into</code> existe.</li>
+   <li>Le panier « intelligent » (<code>app-paniers-core.js</code> : militaire, ciel, terre, eau, mer, patrimoine) peut reprendre ces thèmes au lieu de sa propre liste.</li>
+  </ul>
+ </div>
+ <div class="case wide">
+  <span class="tag">Ce que les lots à venir donneront</span>
+  <h3>Les thèmes tiennent quand les listes se multiplient</h3>
+  <div class="scrollx"><table>
+   <thead><tr><th>Ce qui arrive</th><th>Thème</th><th>Liste réunie</th></tr></thead>
+   <tbody>
+    <tr><td>Séismes de France, d’Italie, de Suisse…</td><td>🌋 Séismes, volcans et terrains</td><td>🔀 Séismes réunis (une source de plus)</td></tr>
+    <tr><td>Crues et inondations d’autres pays</td><td>🌊 Eaux, crues et mers</td><td>🔀 Crues réunies</td></tr>
+    <tr><td>Guerres et batailles, soldats de plusieurs pays (morts, blessés, disparus)</td><td>⚔️ Guerres et soldats</td><td>🔀 Batailles réunies ; 🔀 <b>Soldats réunis</b> (nouvelle : même nom, même date de décès)</td></tr>
+    <tr><td>Musées, collections</td><td>🖼 Musées, images et sons</td><td>—</td></tr>
+    <tr><td>Patrimoine protégé de tous les pays</td><td>🏛 Monuments et patrimoine</td><td>🔀 Édifices réunis</td></tr>
+    <tr><td>Noms de lieux de tous les pays</td><td>🗺 Lieux et noms de lieux</td><td>🔀 Anciens noms réunis</td></tr>
+    <tr><td>Prénoms de nombreux pays</td><td>👶 Prénoms et noms de famille</td><td>🔀 <b>Prénoms réunis</b> (une colonne Pays, une ligne par prénom et pays)</td></tr>
+    <tr><td>Aviateurs, forts, sémaphores, lazarets (lot G, en cours)</td><td>⚔️ / 🔎 / 🏛 / ✝️</td><td>—</td></tr>
+   </tbody>
+  </table></div>
+  <p class="note">Quand un thème dépassera une vingtaine de listes, on pourra l’ouvrir sur des sous-titres (ex. Guerres : « Batailles » · « Soldats » · « Mémoire »), sans créer de nouveau thème.</p>
+ </div>
+</div>
+
+<!-- ═══════════ Questions ═══════════ -->
+<h2 id="sq"><span class="num-b">?</span>5 questions pour toi</h2>
+<ol class="qs">
+ <li><b>On enlève les 4 groupes (Le lieu, La personne, Le monde, Chercher) de l’écran Listes ?</b>
+  <div class="opt">A. Oui, les thèmes les remplacent, avec les pastilles 📍 Carte / 📅 Dates / ⤓ À installer. — B. On garde les deux (thèmes en haut, groupes en filtre).</div>
+  <div class="reco">Ma reco : <b>A</b>. Les groupes ne disent pas de quoi parle une liste, et les pastilles font le même travail sans rien déclarer.</div></li>
+ <li><b>19 thèmes, ça te va ?</b>
+  <div class="opt">A. Oui, 19. — B. Moins (ex. réunir Climat avec Séismes, Village avec Monuments : 15 thèmes, mais certains à plus de 20 listes). — C. Plus fins (séparer Ciel et Climat…).</div>
+  <div class="reco">Ma reco : <b>A</b>. Chaque thème a entre 7 et 14 listes : on voit tout d’un coup d’œil, et il reste de la place pour les lots à venir.</div></li>
+ <li><b>Une liste peut-elle être dans deux thèmes ?</b>
+  <div class="opt">A. Non, un seul (la recherche la trouve de toute façon). — B. Oui, un thème principal et d’autres « aussi ici ».</div>
+  <div class="reco">Ma reco : <b>A</b>. C’est plus simple à ranger et à compter ; une liste réunie peut quand même prendre des lignes dans une liste d’un autre thème (ex. Wikidata pour les séismes).</div></li>
+ <li><b>Pour dire « c’est le même séisme » : même jour et moins de 50 km, ça te va ?</b>
+  <div class="opt">A. Oui, avec le bouton « ✂ Ce ne sont pas les mêmes » si l’app se trompe. — B. Plus prudent (25 km). — C. Ne jamais réunir, juste mettre les lignes côte à côte.</div>
+  <div class="reco">Ma reco : <b>A</b>. Les épicentres anciens sont des estimations à quelques dizaines de km près ; 50 km fond les vrais doublons sans mélanger deux séismes du même jour.</div></li>
+ <li><b>Le thème s’ouvre sur quoi ?</b>
+  <div class="opt">A. Sur sa liste réunie quand il en a une, sinon sur ses listes. — B. Toujours sur ses listes, la liste réunie en premier dans la liste.</div>
+  <div class="reco">Ma reco : <b>A</b>. Quand tu cherches « les séismes », tu veux tous les séismes d’un coup, pas choisir une source d’abord.</div></li>
+</ol>
+
+<p class="note" style="margin:30px 0 10px">Fichiers lus : <code>assets/js/app-listes-donnees.js</code> (registre, moteur), les 39 fichiers qui enregistrent des listes (dont <code>heritage-telech-a</code> à <code>-h</code>), <code>app-paniers-core.js</code> (sortes du panier), <code>app-inserer.js</code> (📎). Comptes : l’app chargée dans un navigateur sans tête, <code>LCNDA_EXT.dataLists</code> lu après chargement (lot H ajouté à la main, pas encore dans <code>index.php</code>).</p>
+</div>
+<script>
+(function(){var b=document.getElementById('tgl'),r=document.documentElement;function dark(){var t=r.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;}function lab(){b.textContent=dark()?'☀ Thème clair':'☾ Thème sombre';}b.addEventListener('click',function(){r.setAttribute('data-theme',dark()?'light':'dark');lab();});lab();})();
+</script>
+</body></html>
