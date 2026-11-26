@@ -32,11 +32,17 @@ def year(v):
     return int(m.group(1)) if m else None
 
 
-def people(where, role_of=None):
-    """les personnes (Q5) qui répondent à « where » (?x … ; ?st pour un qualificatif éventuel) → {q: ligne}"""
+def people(*wheres):
+    """les personnes (Q5) qui répondent à chaque « where » (une question chacune : une grosse UNION dépasse le temps de Wikidata) → {q: ligne}"""
+    rows = {}
+    for where in wheres:
+        _people(where, rows)
+    return rows
+
+
+def _people(where, rows):
     q = f'''SELECT ?x ?xl ?role ?extra WHERE {{ {where} ?x wdt:P31 wd:Q5 .
       OPTIONAL {{ ?x rdfs:label ?xl FILTER(LANG(?xl)="fr") }} }}'''
-    rows = {}
     for b in wm.sparql(q):
         x = qid(b['x']['value'])
         r = rows.setdefault(x, {'q': x, 'n': b.get('xl', {}).get('value', ''), 'fam': '', 'giv': '', 'g': '', 'b': None, 'd': None, 'bp': '', 'insee': '', 'lat': None, 'lon': None,
@@ -45,7 +51,6 @@ def people(where, role_of=None):
             r['role'].append(b['role']['value'])
         if b.get('extra') and not r['extra']:
             r['extra'] = b['extra']['value']
-    return rows
 
 
 def details(rows):
@@ -145,7 +150,7 @@ def wiki_table(title, start_pat):
 
 def main():
     if 'filles' in ONLY:
-        rows = details(people('{ ?x wdt:P106 wd:Q747471 } UNION { ?x wdt:P463 wd:Q747471 }'))
+        rows = details(people('?x wdt:P106 wd:Q747471 .', '?x wdt:P463 wd:Q747471 .'))
         prov = []
         for r in wiki_table('Filles du Roy', "Provinces et lieux d'origine"):
             if len(r) >= 2 and re.match(r'^\d+$', r[-1].replace("'", '')) and 'Total' not in r[0]:
@@ -157,7 +162,7 @@ def main():
                                            'what': 'Les Filles du Roy connues de Wikidata (liste très incomplète : environ 770 sont parties), avec leur lieu de naissance ; '
                                                    'et les provinces d’origine de toutes (Wikipédia)'})
     if 'carignan' in ONLY:
-        rows = details(people('{ ?x wdt:P7779 wd:Q3455247 } UNION { ?x wdt:P463 wd:Q3455247 } UNION { ?x wdt:P241 wd:Q3455247 }'))
+        rows = details(people('?x wdt:P7779 wd:Q3455247 .', '?x wdt:P463 wd:Q3455247 .', '?x wdt:P241 wd:Q3455247 .'))
         ships = []
         for r in wiki_table('Régiment de Carignan-Salières', 'Navire'):
             r = [c for c in r if c]
@@ -170,9 +175,9 @@ def main():
                                              'what': 'Les soldats et officiers du régiment de Carignan-Salières connus de Wikidata (liste très incomplète : environ '
                                                      '1 200 hommes partis en 1665) ; et les navires arrivés à Québec en 1665 avec leurs compagnies (Wikipédia)'})
     if 'deputes' in ONLY:
-        rows = people('''{ ?x wdt:P39 wd:Q59309522 . BIND("eg" AS ?role) }
-          UNION { ?x p:P39 ?st . ?st ps:P39 wd:Q28218485 ; pq:P2937 wd:Q876424 . BIND("const" AS ?role) OPTIONAL { ?st pq:P768 ?dist . ?dist rdfs:label ?extra FILTER(LANG(?extra)="fr") } }
-          UNION { ?x wdt:P39 wd:Q20808382 . BIND("conv" AS ?role) }''')
+        rows = people('?x wdt:P39 wd:Q59309522 . BIND("eg" AS ?role)',
+                      '?x p:P39 ?st . ?st ps:P39 wd:Q28218485 ; pq:P2937 wd:Q876424 . BIND("const" AS ?role) OPTIONAL { ?st pq:P768 ?dist . ?dist rdfs:label ?extra FILTER(LANG(?extra)="fr") }',
+                      '?x wdt:P39 wd:Q20808382 . BIND("conv" AS ?role)')
         details(rows)
         finish(rows, 'tg-deputes.json.gz', {'source': 'Wikidata (député aux États généraux de 1789 Q59309522 ; député de l’Assemblée constituante Q28218485, mandat Q876424 ; '
                                                       'député de la Convention nationale Q20808382)', 'url': 'https://www.wikidata.org/wiki/Q59309522',
