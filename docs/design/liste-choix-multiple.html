@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prendre plusieurs lignes d'un coup — maquette</title>
+<style>
+:root { --bg:#f6f6f8; --card:#fff; --ink:#111; --mut:#5b6170; --line:#e3e5ea; --line2:#111; --blue:#055dff; --blue-bg:#eef4ff; --green:#1f7a3a; --green-bg:#eaf7ee; --soft:#f2f3f6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#15171b; --card:#1d2025; --ink:#eceef2; --mut:#a8afbb; --line:#2f333b; --line2:#d6d9df; --blue:#5b93ff; --blue-bg:#1c2a44; --green:#6fd38c; --green-bg:#173322; --soft:#24282f; } }
+:root[data-theme="dark"] { --bg:#15171b; --card:#1d2025; --ink:#eceef2; --mut:#a8afbb; --line:#2f333b; --line2:#d6d9df; --blue:#5b93ff; --blue-bg:#1c2a44; --green:#6fd38c; --green-bg:#173322; --soft:#24282f; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.wrap { max-width:1180px; margin:0 auto; padding:28px 20px 60px; }
+h1 { font-size:22px; margin:0 0 6px; }
+.lead { color:var(--mut); margin:0 0 22px; max-width:820px; }
+.legend { display:flex; flex-wrap:wrap; gap:10px 22px; margin:0 0 22px; padding:14px 18px; background:var(--card); border:1px solid var(--line); border-radius:12px; }
+.legend b { display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:#ff7a00; color:#fff; font-size:12px; margin-right:6px; }
+.frame { position:relative; background:var(--card); border:3px solid var(--line2); }
+.crumb { display:flex; justify-content:space-between; gap:12px; padding:12px 22px; background:var(--soft); border-bottom:3px solid var(--line2); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--mut); font-weight:700; }
+.body { padding:22px 22px 96px; }
+.top { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+.top h2 { margin:4px 0 4px; font-size:26px; }
+.small { font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--mut); font-weight:700; }
+.seg { display:inline-flex; border:2px solid var(--line2); }
+.seg span { padding:8px 14px; font-weight:700; }
+.seg span.on { background:var(--line2); color:var(--card); }
+.tools { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin:18px 0 6px; }
+.chip { padding:6px 12px; border:2px solid var(--blue); color:var(--blue); border-radius:6px; font-weight:600; }
+.chip.off { border-color:var(--line); color:var(--ink); border-radius:999px; }
+.all { display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border:1px dashed var(--blue); border-radius:8px; color:var(--blue); font-weight:600; }
+.tbl { width:100%; border-collapse:collapse; margin-top:12px; }
+.tbl th { text-align:left; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--mut); padding:10px 10px; border-bottom:3px solid var(--line2); }
+.tbl td { padding:14px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+.tbl tr.sel td { background:var(--blue-bg); }
+.tbl tr.gap td { text-align:center; color:var(--mut); background:var(--soft); padding:8px; font-size:13px; }
+.ck { width:20px; height:20px; border:2px solid var(--mut); border-radius:5px; display:inline-block; vertical-align:middle; }
+.ck.on { background:var(--blue); border-color:var(--blue); position:relative; }
+.ck.on::after { content:""; position:absolute; left:5px; top:1px; width:5px; height:10px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); }
+.new { outline:3px solid #ff7a00; outline-offset:4px; border-radius:6px; }
+.fam { display:inline-block; padding:3px 10px; border:1px solid var(--line); border-radius:999px; }
+.fam.g { border-color:var(--green); color:var(--green); background:var(--green-bg); font-weight:600; }
+.src { display:inline-block; padding:2px 8px; border:1px solid var(--line); color:var(--blue); font-weight:600; font-size:13px; }
+.act { white-space:nowrap; text-align:right; }
+.ib { display:inline-flex; width:38px; height:34px; align-items:center; justify-content:center; border:1px solid var(--line); background:var(--card); margin-left:6px; }
+.bar { position:absolute; left:22px; right:22px; bottom:20px; display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; padding:12px 16px; background:var(--card); border:2px solid var(--blue); border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.18); }
+.bar .n { font-weight:700; margin-right:auto; }
+.btn { padding:8px 14px; border-radius:8px; border:1px solid var(--line); background:var(--card); font-weight:600; }
+.btn.pri { background:var(--blue); border-color:var(--blue); color:#fff; }
+.tag { display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:#ff7a00; color:#fff; font-size:12px; font-weight:700; vertical-align:middle; margin-left:6px; }
+.note { margin-top:22px; color:var(--mut); }
+.phone { width:390px; max-width:100%; margin:26px auto 0; border:10px solid #111; border-radius:28px; overflow:hidden; background:var(--card); position:relative; }
+.phone .p { padding:16px 16px 92px; }
+.prow { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--line); }
+.prow.sel { background:var(--blue-bg); margin:0 -16px; padding:12px 16px; }
+.prow .t { flex:1; min-width:0; }
+.phone .bar { left:12px; right:12px; bottom:12px; padding:10px 12px; }
+.toggle { position:fixed; right:16px; top:12px; display:flex; gap:6px; }
+.toggle button { font:inherit; padding:4px 10px; border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:8px; cursor:pointer; }
+@media (max-width:820px) { .tbl .hide { display:none; } }
+@media (max-width:600px) { .body { padding:16px 12px 150px; } .crumb { padding:10px 12px; letter-spacing:.04em; } .bar { left:12px; right:12px; } .tbl td, .tbl th { padding:10px 6px; } .act .ib { width:32px; margin-left:3px; } .phone { border-width:6px; } }
+.frame { overflow:hidden; }
+</style>
+</head>
+<body>
+<div class="toggle"><button onclick="document.documentElement.dataset.theme='light'">Clair</button><button onclick="document.documentElement.dataset.theme='dark'">Sombre</button></div>
+<div class="wrap">
+  <h1>Prendre plusieurs lignes d'un coup</h1>
+  <p class="lead">La même page que ta capture. Seules les trois nouveautés sont ajoutées, entourées en orange. 📎 et 🧺 restent au bout de chaque ligne.</p>
+  <div class="legend">
+    <span><b>1</b>une case à cocher au début de chaque ligne</span>
+    <span><b>2</b>« Tout cocher » à côté des filtres</span>
+    <span><b>3</b>la barre du bas, seulement quand au moins une ligne est cochée</span>
+  </div>
+
+  <div class="frame">
+    <div class="crumb"><span>🏆 Sport › Compétitions sportives › 🚲 Tour de France</span><span>114 éditions</span></div>
+    <div class="body">
+      <div class="top">
+        <div><div class="small">Liste réunie · filtrée</div><h2>🚲 Tour de France</h2><div style="color:var(--mut)">1903 → 2027 · 2 446 étapes (Wikidata)</div></div>
+        <div class="seg"><span class="on">Éditions</span><span>Étapes</span><span>🗺 Carte</span></div>
+      </div>
+      <div class="tools">
+        <span class="chip">🚲 Tour de France ×</span>
+        <span class="chip off">👪 Seulement près de la famille</span>
+        <span class="all new"><span class="ck"></span> Tout cocher (114)</span><span class="tag">2</span>
+      </div>
+      <table class="tbl">
+        <thead><tr><th class="new" style="width:44px"><span class="ck"></span></th><th>Année</th><th>Maillot jaune</th><th class="hide">Étapes</th><th class="hide">Km</th><th>Dans la famille</th><th class="hide">Source</th><th></th></tr></thead>
+        <tbody>
+          <tr><td><span class="ck"></span> <span class="tag">1</span></td><td><b>2025</b></td><td>Tadej Pogačar</td><td class="hide">21</td><td class="hide">3 302</td><td></td><td class="hide"><span class="src">Wikidata ↗</span></td><td class="act"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+          <tr class="gap"><td colspan="8">… 7 éditions (2018 → 2024)</td></tr>
+          <tr class="sel"><td><span class="ck on"></span></td><td><b>2017</b></td><td>Chris Froome</td><td class="hide">21</td><td class="hide">3 542</td><td><span class="fam g">arrivée à Salon, chez les DURAND</span></td><td class="hide"><span class="src">Wikidata ↗</span></td><td class="act"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+          <tr class="gap"><td colspan="8">… 40 éditions (1977 → 2016)</td></tr>
+          <tr class="sel"><td><span class="ck on"></span></td><td><b>1976</b></td><td>Lucien Van Impe</td><td class="hide">22 + prologue</td><td class="hide">4 026</td><td><span class="fam">Jean MAZAUD avait 12 ans</span></td><td class="hide"><span class="src">Wikidata ↗</span></td><td class="act"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+          <tr class="gap"><td colspan="8">… 11 éditions (1965 → 1975)</td></tr>
+          <tr><td><span class="ck"></span></td><td><b>1964</b></td><td>Jacques Anquetil</td><td class="hide">22</td><td class="hide">4 506</td><td><span class="fam">Jean MAZAUD naît cette année-là</span></td><td class="hide"><span class="src">Wikidata ↗</span></td><td class="act"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+          <tr class="sel"><td><span class="ck on"></span></td><td><b>1924</b></td><td>Ottavio Bottecchia</td><td class="hide">15</td><td class="hide">5 425</td><td><span class="fam">Jeanne LACOMBE avait 52 ans</span></td><td class="hide"><span class="src">Wikidata ↗</span></td><td class="act"><span class="ib">📎</span><span class="ib">🧺</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bar new"><span class="n">3 éditions choisies</span><span class="btn pri">📎 Insérer…</span><span class="btn pri">🧺 Mettre dans un panier…</span><span class="btn">⤓ Exporter</span><span class="btn">✕</span></div>
+    <span class="tag" style="position:absolute;right:30px;bottom:82px">3</span>
+  </div>
+
+  <p class="note">La case apparaît au survol de la ligne sur un ordinateur ; ici on la montre partout pour qu'elle se voie. Maj + clic coche toute une série. Quand rien n'est coché, la barre du bas disparaît et la page est exactement comme aujourd'hui.</p>
+
+  <h1 style="margin-top:34px">Sur un téléphone</h1>
+  <p class="lead">Les cases sont toujours visibles (pas de survol au doigt). La barre reste en bas, au-dessus de la liste.</p>
+  <div class="phone">
+    <div class="p">
+      <div class="small">🏆 Sport › 🚲 Tour de France</div>
+      <div style="margin:10px 0"><span class="all"><span class="ck"></span> Tout cocher (114)</span></div>
+      <div class="prow sel"><span class="ck on"></span><div class="t"><b>2017</b> · Chris Froome<br><span class="fam g" style="margin-top:6px">chez les DURAND</span></div><span class="ib">📎</span><span class="ib">🧺</span></div>
+      <div class="prow sel"><span class="ck on"></span><div class="t"><b>1976</b> · Lucien Van Impe<br><span style="color:var(--mut)">Jean MAZAUD, 12 ans</span></div><span class="ib">📎</span><span class="ib">🧺</span></div>
+      <div class="prow"><span class="ck"></span><div class="t"><b>1964</b> · Jacques Anquetil<br><span style="color:var(--mut)">Jean MAZAUD naît</span></div><span class="ib">📎</span><span class="ib">🧺</span></div>
+    </div>
+    <div class="bar"><span class="n">2 choisies</span><span class="btn pri">📎</span><span class="btn pri">🧺</span><span class="btn">⤓</span><span class="btn">✕</span></div>
+  </div>
+</div>
+</body>
+</html>
