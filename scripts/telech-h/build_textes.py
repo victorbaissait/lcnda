@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""Lot H — Les métiers et les pays d'autrefois dans Wikipédia (CC BY-SA 4.0) : th-textes.
+
+Pour chaque sujet, on lit quelques articles de Wikipédia en français (texte brut, action=raw : une requête par article) et on garde
+les phrases qui parlent du sujet (mot-clé) ET nomment une commune de France (lien vers un article qui, sur Wikidata, a un code
+INSEE P374). La phrase est recopiée telle quelle (sans les références), avec le titre et l'adresse de l'article : « les contributeurs
+de Wikipédia », CC BY-SA 4.0. Le lieu (position, code INSEE) vient de Wikidata (CC0). Rien n'est inventé ni résumé.
+Sujets : coutellerie (Thiers, Nogent…), ganterie et mégisserie (Millau, Grenoble, Annonay…), vannerie et osier, chocolat et
+biscuits, conserveries et sardineries, terre-neuvas (ports d'armement pour la morue), la mer nourricière (huîtres, goémoniers, pêche
+à pied), plantes à teinture (garance, pastel du Lauragais).
+Aussi, pour chaque sujet, une ou deux phrases d'introduction (sans commune) : « ctx ».
+Lancer : python3 -I scripts/telech-h/build_textes.py [dossier de sortie]
+"""
+import os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import wm
+
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'assets', 'data')
+# sujet : (articles, mot-clé exigé dans la phrase)
+THEMES = {
+    'coutellerie': (['Coutellerie', 'Coutellerie de Thiers', 'Couteau'], r'coutel|couteau|émouleur|rémouleur'),
+    'ganterie': (['Gant', 'Mégisserie'], r'gant|mégis'),
+    'vannerie': (['Vannerie', 'Osier'], r'vann|osier|panier'),
+    'chocolat': (['Chocolaterie', 'Biscuit', 'Chocolat'], r'chocolat|biscuit'),
+    'conserverie': (["Conserve de sardines à l'huile", 'Conserve', 'Sardina pilchardus'], r'sardin|conserver?ie|friture'),
+    'terreneuvas': (['Terre-neuvas', 'Grande pêche', 'Morue'], r'morue|terre-neuv|grande pêche|armement|arm[ée]'),
+    'mer': (['Ostréiculture', 'Goémonier', 'Pêche à pied'], r'huîtr|ostréi|goémon|varech|pêche à pied|algue|parcs?\b'),
+    'teinture': (['Garance des teinturiers', 'Pastel des teinturiers', 'Pays de Cocagne'], r'garance|pastel|teintur|cocagne|guède|coque'),
+}
+SKIP = re.compile(r'^\s*(\{\{|\[\[(Fichier|File|Image|Catégorie)|\||!|=|<|\*\s*\[\[(Fichier|Catégorie)|__)', re.I)
+
+
+def sentences(par):
+    """découpe un paragraphe de wikitexte en phrases (le texte des liens gardé pour la suite)"""
+    par = re.sub(r'<ref[^>/]*/>', '', par)
+    par = re.sub(r'<ref[^>]*>.*?</ref>', '', par, flags=re.S)
+    out, cur, depth = [], '', 0
+    i = 0
+    while i < len(par):
+        ch = par[i]
+        cur += ch
+        if par.startswith('[[', i) or par.startswith('{{', i):
+            depth += 1; cur += par[i + 1]; i += 2; continue
+        if par.startswith(']]', i) or par.startswith('}}', i):
+            depth = max(0, depth - 1); cur += par[i + 1]; i += 2; continue
+        if depth == 0 and ch in '.!?' and (i + 1 == len(par) or par[i + 1] == ' ') and not re.search(r'\b(av|apr|J\.-C|St|Mme|M|Dr|etc|env|cf|p|vol|n°|s)\.$', cur.strip()):
+            out.append(cur.strip()); cur = ''
+        i += 1
+    if cur.strip():
+        out.append(cur.strip())
+    return out
+
+
+def main():
+    rows, ctx, arts = [], {}, {}
+    for k, (titles, kw) in THEMES.items():
+        kre = re.compile(kw, re.I)
+        cand = []
+        for t in titles:
+            try:
+                w = wm.wp_raw(t)
+            except Exception as e:  # noqa
+                print(f'  {t} : {e}'); continue
+            m = re.match(r'#(redirect|redirection)\s*\[\[([^\]]+)\]\]', w.strip(), re.I)
+            if m:
+                t = m.group(2).split('#')[0]; w = wm.wp_raw(t)
+            arts[t] = wm.wp_url(t)
+            pars = [p for p in w.split('\n') if p.strip() and not SKIP.match(p)]
+            for j, p in enumerate(pars):
+                for s in sentences(p.lstrip('*: ')):
+                    plain = wm.plain(s)
+                    if not (40 <= len(plain) <= 360) or plain.count('|') or plain.count('{'):
+                        continue
+                    if j < 2 and len(ctx.get(k, [])) < 2 and kre.search(plain):
+                        ctx.setdefault(k, []).append({'q': plain, 'title': t, 'url': wm.wp_url(t)})
+                    if kre.search(plain):
+                        cand.append((t, plain, wm.links(s)))
+        places = wm.wd_of_titles([l for _, _, ls in cand for l in ls])
+        seen = set()
+        for t, plain, ls in cand:
+            for l in ls:
+                p = places.get(l)
+                if not p or not p['insee'] or p['lat'] is None or (p['insee'], plain) in seen:
+                    continue
+                seen.add((p['insee'], plain))
+                y = re.search(r'\b(1[0-9]{3})\b', plain)
+                rows.append([k, l, p['insee'], p['lat'], p['lon'], int(y.group(1)) if y else None, plain, t, p['q']])
+        print(f'  {k} : {sum(1 for r in rows if r[0] == k)} phrases avec une commune, {len(ctx.get(k, []))} d’introduction')
+    meta = {'source': 'Wikipédia (en français)', 'licence': 'CC BY-SA 4.0 — les contributeurs de Wikipédia', 'licence_url': 'https://creativecommons.org/licenses/by-sa/4.0/deed.fr',
+            'url': 'https://fr.wikipedia.org/wiki/Coutellerie', 'built': wm.today(),
+            'what': 'Phrases de Wikipédia qui nomment une commune : coutellerie, ganterie, vannerie, chocolat et biscuits, conserveries, terre-neuvas, la mer nourricière, plantes à teinture (lieux : Wikidata, CC0)',
+            'articles': arts, 'ctx': ctx, 'fields': ['k', 'commune', 'insee', 'lat', 'lon', 'y', 'quote', 'title', 'q'], 'rows': rows}
+    size = wm.write_gz(OUT, 'th-textes.json.gz', meta)
+    print(f'th-textes : {len(rows)} phrases, {size} octets')
+
+
+if __name__ == '__main__':
+    main()
