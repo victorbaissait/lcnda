@@ -57,7 +57,14 @@ jobs:
       - name: "🗺 OpenStreetMap : plaques de cocher, forges, salines"
         if: env.QUOI == 'tout' || env.QUOI == 'osm'
         timeout-minutes: 150
-        run: python3 -I scripts/telech-f/build_osm.py assets/data
+        run: |
+          # deux serveurs Overpass à tour de rôle (l'un est parfois injoignable ou surchargé)
+          for i in 1 2 3 4; do
+            srv=https://overpass-api.de/api/interpreter; [ $((i % 2)) -eq 0 ] && srv=https://overpass.kumi.systems/api/interpreter
+            TF_OVERPASS="$srv" python3 -I scripts/telech-f/build_osm.py assets/data && exit 0
+            echo "essai $i raté ($srv), nouvel essai dans 60 s"; sleep 60
+          done
+          exit 1
       - name: "🎈 Ballons montés du siège de Paris"
         if: env.QUOI == 'tout' || env.QUOI == 'ballons'
         run: python3 -I scripts/telech-f/build_ballons.py assets/data

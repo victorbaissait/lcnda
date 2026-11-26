@@ -62,7 +62,7 @@ def osm():
 (area["ISO3166-1"="FR"][admin_level=2];area["ISO3166-1"="BE"][admin_level=2];area["ISO3166-1"="CH"][admin_level=2];area["ISO3166-1"="LU"][admin_level=2];)->.a;
 (nwr["name"~"[Aa]rbre de la [Ll]ibert"](area.a);nwr["memorial"="tree"]["name"~"[Ll]ibert"](area.a);nwr["natural"="tree"]["name"~"[Ll]ibert"](area.a););
 out center tags;'''
-    j = json.loads(wm.get('https://overpass-api.de/api/interpreter', 'application/json', urllib.parse.urlencode({'data': q})))
+    j = json.loads(wm.get(os.environ.get('TE_OVERPASS') or 'https://overpass-api.de/api/interpreter', 'application/json', urllib.parse.urlencode({'data': q})))
     out = []
     for e in j.get('elements', []):
         t = e.get('tags', {}); lat = e.get('lat') or e.get('center', {}).get('lat'); lon = e.get('lon') or e.get('center', {}).get('lon')

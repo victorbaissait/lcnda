@@ -57,10 +57,18 @@ jobs:
           restore-keys: telech-e-
       - name: "🦴 Fossiles (Paleobiology Database)"
         if: env.QUOI == 'tout' || env.QUOI == 'fossiles'
+        continue-on-error: true  # si la licence n'est pas relue, les autres fichiers se fabriquent quand même
         run: python3 -I scripts/telech-e/build_fossiles.py assets/data
       - name: "🌳 Arbres de la Liberté (Wikidata + OpenStreetMap)"
         if: env.QUOI == 'tout' || env.QUOI == 'libertes'
-        run: python3 -I scripts/telech-e/build_libertes.py assets/data --osm
+        run: |
+          # deux serveurs Overpass à tour de rôle (l'un est parfois injoignable ou surchargé)
+          for i in 1 2 3 4; do
+            srv=https://overpass-api.de/api/interpreter; [ $((i % 2)) -eq 0 ] && srv=https://overpass.kumi.systems/api/interpreter
+            TE_OVERPASS="$srv" python3 -I scripts/telech-e/build_libertes.py assets/data --osm && exit 0
+            echo "essai $i raté ($srv), nouvel essai dans 60 s"; sleep 60
+          done
+          exit 1
       - name: "🌌 Le ciel la nuit"
         if: env.QUOI == 'tout' || env.QUOI == 'ciel'
         run: python3 -I scripts/telech-e/build_ciel.py assets/data

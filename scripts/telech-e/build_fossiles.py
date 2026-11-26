@@ -30,6 +30,12 @@ def licence(*texts):
             q = m.group(0).strip()
             if re.search(r'\bCC[- ]?BY\b|Attribution', q, re.I) and not re.search(r'\bNC\b|NonCommercial|Non-Commercial', q, re.I):
                 return q
+    for t in texts:  # l'adresse de la licence suffit aussi (creativecommons.org/licenses/by/…, sans « -nc »)
+        m = re.search(r'creativecommons\.org/licenses/by/[0-9.]+/?', str(t))
+        if m:
+            return m.group(0)
+    for t in texts:  # diagnostic dans le journal : ce que la PBDB a répondu
+        print('réponse PBDB (début) :', ' '.join(str(t).split())[:600], file=sys.stderr)
     sys.exit('Licence CC BY introuvable dans les réponses de la PBDB : relire https://paleobiodb.org/ avant de fabriquer le fichier.')
 
 
