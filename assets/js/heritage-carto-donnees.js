@@ -345,6 +345,7 @@
                 if (e.target.closest('[data-cd-try]')) { const l = collect(); if (!l) return; $('[data-cd-count]').textContent = T('Recherche…'); const r = await fetchLayer(l); $('[data-cd-count]').textContent = r.missing || (r.features.length ? T('{n} à dessiner.', {n: A()?.plural ? A().plural(r.features.length, T('élément')) : r.features.length}) : T('Rien ne correspond à ces filtres.')); }
             });
             dlg.querySelector('form').addEventListener('submit', e => { e.preventDefault(); const l = collect(); if (!l) { toast(T('Choisis des données.'), 'error'); return; } if (l.src === 'terr' && !l.f.ids?.length) { toast(T('Coche au moins un territoire.'), 'error'); return; } finish(l); });
+            ext.dataListSelect?.($('[data-cd-src]')); // 🧰 « Quelles données ? » : le choix commun (recherche, thèmes, cartes), replié en une ligne ; le menu reste, caché
             show(); dlg.showModal();
         });
     }

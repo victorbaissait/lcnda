@@ -149,7 +149,10 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             // ＋ Données → les lieux de la base, étoiles vertes
             await p.click('.cd-bar [data-cd-add]'); await p.waitForSelector('.cd-dialog');
             const opts = await p.$$eval('.cd-dialog [data-cd-src] option', os => os.map(o => o.value)); assert.ok(opts.includes('places') && opts.includes('terr') && opts.includes('borders'), opts.join());
-            await p.selectOption('.cd-dialog [data-cd-src]', 'places'); await p.click('.cd-dialog [data-cd-try]');
+            // « Quelles données ? » : le choix commun (LCNDA_EXT.dataListSelect), replié ; « Changer », chercher, choisir
+            await p.click('.cd-dialog [data-ldt-selchange]'); await p.fill('.cd-dialog [data-ldt-selpick] [data-ld-ov-q]', 'lieux de ta base'); await p.click('.cd-dialog [data-ld-pick="places"]');
+            assert.strictEqual(await p.$eval('.cd-dialog [data-cd-src]', s => s.value), 'places'); assert.match(await p.textContent('.cd-dialog .ldt-selline'), /Les lieux de ta base — Changer/);
+            await p.click('.cd-dialog [data-cd-try]');
             await p.waitForFunction(() => /3 éléments/.test(document.querySelector('.cd-dialog [data-cd-count]').textContent));
             await p.click('.cd-dialog button[type=submit]');
             await p.waitForFunction(() => document.querySelectorAll('.cd-bar .cd-chip').length === 2);

@@ -443,6 +443,14 @@
         const urls = (d.fields || []).filter(f => f.type === 'url' && r[f.key]);
         return {title: titleOf(d, r), sub, more, fam, urls};
     }
+    /** « Quoi » : les deux menus (thème, liste) restent, cachés ; le choix commun LCNDA_EXT.dataListSelect pose la liste ET son thème */
+    function whatPicker(body) {
+        const f = body.querySelector('[data-dr-popf="what"]'), th = f?.querySelector('[data-dr-th]'), ls = f?.querySelector('[data-dr-list]'); if (!ls || !th || !ext.dataListSelect) return;
+        const all = () => (TH()?.themeList?.() || []).filter(t => t.id !== 'aranger').flatMap(t => listsOfTheme(t.id));
+        const sp = ext.dataListSelect(ls, {items: all, before: id => { const d = all().find(x => x.id === id); if (!d || !TH()?.themeOf) return; th.value = TH().themeOf(d); th.dispatchEvent(new Event('change', {bubbles: true})); }});
+        if (!sp) return; th.closest('label').hidden = true;
+        setTimeout(() => { try { (f.querySelector('[data-ldt-selchange]') || f.querySelector('[data-ld-ov-q]'))?.focus({preventScroll: true}); } catch (_) {} }, 0);
+    }
     function paintAnswer(page) {
         const body = page.querySelector('[data-dr-body]'), u = ST.u, R = ST.res || {rows: []}; if (!body || !u) return;
         const d = u.d, ro = kiosk(), off = offline();
@@ -469,6 +477,7 @@
             ${nope.length ? `<div class="dr-nope"><h4>${esc(T('Je n’ai pas compris'))}</h4>${nope.join('')}${sugg.length ? `<p class="dr-sugg"><span>${esc(T('Essaie'))}</span>${sugg.map(x => `<button type="button" class="dr-k" data-dr-exq="${esc(x)}">${esc(x)}</button>`).join('')}</p>` : ''}</div>` : ''}
             ${missing}<div data-dr-rows>${list}</div>${foot}${selBar}<p class="dr-lock">${esc(lock)}</p></div>`;
         bindAnswer(page);
+        whatPicker(body); // 📋 « Quoi » : le choix commun des listes (recherche, thèmes, cartes), replié en une ligne
         try { ext.dataPlus?.answer?.(page, ST); } catch (e) { console.error(e); } // 💾 Garder cette question (app-donnees-plus.js)
         try { ext.nomsLieuxMonde?.answer?.(page, ST.q); } catch (e) { console.error(e); } // 🗺 « Presbourg » : un ancien nom de lieu → le lieu d'aujourd'hui (noms-lieux-monde.js)
     }

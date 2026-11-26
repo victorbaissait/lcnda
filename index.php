@@ -129,7 +129,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/fiche-edifice.css?v=2">
     <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">
     <link rel="stylesheet" href="assets/css/listes-donnees.css?v=4">
-    <link rel="stylesheet" href="assets/css/listes-themes.css?v=7">
+    <link rel="stylesheet" href="assets/css/listes-themes.css?v=8">
     <link rel="stylesheet" href="assets/css/donnees-maj.css?v=2">
     <link rel="stylesheet" href="assets/css/donnees-recap.css?v=1"><!-- 📊 Récap des données -->
     <link rel="stylesheet" href="assets/css/donnees-onglet.css?v=1"><!-- 📊 l’onglet Données : sa colonne de gauche -->
@@ -1364,13 +1364,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes.js?v=69" defer></script>
 <script src="assets/js/app-listes-donnees.js?v=19" defer></script>
 <script src="assets/js/app-carte-fiche.js?v=1" defer></script><!-- 🗺 la fiche d'un point de carte (bulle, 📌 panneau, feuille en bas), sans quitter la carte -->
-<script src="assets/js/app-listes-themes.js?v=7" defer></script><!-- 🗂 Listes → Données par thème (20 thèmes), recherche sur toutes les listes ; Réglages → 🧰 Listes de données -->
+<script src="assets/js/app-listes-themes.js?v=8" defer></script><!-- 🗂 Listes → Données par thème (20 thèmes), recherche sur toutes les listes ; Réglages → 🧰 Listes de données -->
 <script src="assets/js/app-listes-reunies.js?v=5" defer></script><!-- 🔀 listes réunies (🌋 Séismes réunis) : plusieurs sources, sans doublons -->
 <script src="assets/js/app-listes-famille.js?v=3" defer></script><!-- 👪 « Dans la famille » : calculé ici (GET ld_famille) -->
 <script src="assets/js/app-listes-reunies-plus.js?v=1" defer></script><!-- 🔀 Éruptions, Crues, Batailles, Monuments, Soldats réunis ; 🔎 chercher dans les valeurs ; 👪 cercles de la famille sur la carte -->
 <script src="assets/js/app-listes-choix.js?v=4" defer></script><!-- ☑ plusieurs lignes d’un coup : cases, Tout cocher, barre du bas (📎 · 🧺 · ⤓) -->
 <script src="assets/js/app-listes-maj.js?v=5" defer></script>
-<script src="assets/js/app-donnees-accueil.js?v=6" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
+<script src="assets/js/app-donnees-accueil.js?v=7" defer></script><!-- 📊 Récap des données et la question en français : Listes → 🧰 Données et l’onglet 📊 Données (un seul écran) -->
 <script src="assets/js/app-donnees-onglet.js?v=1" defer></script><!-- 📊 l’onglet Données : on y reste (thèmes, listes réunies, listes), sa colonne de gauche, ranger / masquer les thèmes -->
 <script src="assets/js/app-donnees-plus.js?v=5" defer></script><!-- 📊 Données, en plus : ⚙ Organiser le récap, Réglages → 📊 Données, ⭐ 🕘 🆕 💾 📊 👤 🕳 📝 ➕ ⚠️ 🔎 📶 -->
 <script src="assets/js/app-donnees-plus-outils.js?v=5" defer></script><!-- ⚖️ 🗺 🕳 📖 📜 📄 🎞 🔗 💽 🕰 -->
@@ -1752,7 +1752,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tout-sur.js?v=25" defer></script>
 <script src="assets/js/heritage-monographie-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-territoires.js?v=2" defer></script>
-<script src="assets/js/heritage-carto-donnees.js?v=1" defer></script>
+<script src="assets/js/heritage-carto-donnees.js?v=2" defer></script>
 <script src="assets/js/heritage-chateaux-territoires.js?v=3" defer></script>
 <script src="assets/js/heritage-lot8-monde-village.js?v=5" defer></script>
 <script src="assets/js/heritage-lot10-voir-village.js?v=2" defer></script>
