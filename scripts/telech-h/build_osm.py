@@ -9,7 +9,7 @@
 Rien n'est gardé au-delà de 15 Mo par fichier. Lancer : python3 -I scripts/telech-h/build_osm.py [dossier de sortie] [sujet…]
 """
 import json
-import math, os, re, time, urllib.parse
+import math, os, re, sys, time, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import wm
 
