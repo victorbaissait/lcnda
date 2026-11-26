@@ -473,19 +473,21 @@
         draw();
         // ⏱ les calculs lourds (éclipses vues de ses lieux : plusieurs secondes) attendent que le bloc arrive à l'écran ; le reste tout de suite
         const heavy = offline.filter(isHeavy), light = offline.filter(t => !isHeavy(t));
+        const W = heavy.length ? window.LCNDA_PERF?.whenSeen : null;
+        let seen = !W, onlineAt = false;
+        const startOnline = () => { if (onlineAt) return; onlineAt = true; setTimeout(() => { if (host.isConnected) goOnline(); }, ONLINE_DELAY); };
+        const seenP = seen ? Promise.resolve() : new Promise(ok => W(host, () => { seen = true; ok(); }, {now: true}));
+        const moreP = heavy.length ? seenP.then(() => (host.isConnected ? runAll(heavy, x => { done++; results = [...results, x]; drawSoon(); }) : [])) : Promise.resolve([]);
         const got = await runAll(light, x => { done++; results = [...results, x]; drawSoon(); });
-        if (heavy.length && window.LCNDA_PERF?.whenSeen) {
-            setTimeout(() => { if (host.isConnected) goOnline(); }, ONLINE_DELAY);
-            await new Promise(ok => window.LCNDA_PERF.whenSeen(host, ok, {now: true}));
-            if (!host.isConnected) return;
-        }
-        const more = heavy.length ? await runAll(heavy, x => { done++; results = [...results, x]; drawSoon(); }) : [];
+        if (!seen) startOnline(); // les éclipses attendent l'écran : les sources en ligne partent sans elles (2,5 s après le reste, comme avant)
+        const more = await moreP;
+        if (!host.isConnected) return;
         // dans l'ordre des tâches, comme avant (les réponses en ligne déjà arrivées restent)
         const byKey = new Map([...got, ...more].filter(Boolean).map(x => [x.task.key, x]));
         results = [...offline.map(t => byKey.get(t.key)).filter(Boolean), ...results.filter(x => !byKey.has(x.task.key))];
         missing(life, results).then(m => { miss = m; draw(); }).catch(() => {});
         draw();
-        if (!(heavy.length && window.LCNDA_PERF?.whenSeen)) setTimeout(() => { if (host.isConnected) goOnline(); }, ONLINE_DELAY);
+        startOnline();
         void onlineDone;
     }
     function heroBadge(pid, n) {

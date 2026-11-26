@@ -8,8 +8,11 @@
  *      fonctions maison qui passent leur 1er argument à .api(…), et les `${f.pre}_dl_start` des familles de app-listes-maj.js) ;
  *   2. les appelle une à une sur une base d'essai vide (GET, ou POST avec le jeton CSRF), sans charge utile ou presque ;
  *   3. aucune ne doit répondre « Action inconnue » (une erreur 4xx sur une donnée manquante, c'est normal : la route est la bonne).
+ *      Avec une sous-action lue dans le JS ({op: 'save'}, {what: 'heat'}) : chacune est appelée, et ne doit pas répondre « Demande / Opération inconnue » ;
+ *   4. sans rien appeler : aucune route par préfixe d'api.php (placée avant les grands match ($action)) ne couvre une action traitée plus bas.
  *  Rien n'est téléchargé : toutes les sources « d'essai » pointent vers un dossier vide, Ollama et le « GitHub » des données vers un port fermé.
- *   node tests/test-routes-api.js            (LCNDA_ROUTES_VERBOSE=1 : la réponse de chaque action) */
+ *   node tests/test-routes-api.js   (LCNDA_ROUTES_VERBOSE=1 : la réponse de chaque action ; LCNDA_ROUTES_LIST=1 : seulement la liste lue dans le JS ;
+ *                                    LCNDA_ROUTES_WHY=nom : où le JS appelle cette action) */
 'use strict';
 const assert = require('assert');
 const fs = require('fs');
@@ -22,7 +25,11 @@ const JS = path.join(root, 'assets', 'js');
 
 /* Les actions appelées par l'écran mais qu'api.php n'a pas, et c'est voulu. Chaque entrée dit pourquoi. */
 const ALLOW = {
-    // (vide pour l'instant : toute action de l'écran doit exister côté serveur)
+    // la famille « 🌐 Traduction » (heritage-telech-d-traduire.js) entre dans Réglages → 🗂 Données avec removable: () => false :
+    // le 🗑 générique (`${f.pre}_pack_remove`, puis ↶ `${f.pre}_pack_restore`, app-listes-maj.js) n'est jamais montré pour elle
+    // (on retire une langue avec td_tr_pack_undo, le moteur avec td_tr_uninstall)
+    td_tr_pack_remove: 'td_tr : removable () => false, jamais appelée',
+    td_tr_pack_restore: 'td_tr : removable () => false, jamais appelée',
 };
 /* Les sous-actions qui répondent « Demande inconnue » à une charge vide (le message parle alors d'une donnée manquante), et pourquoi. */
 const ALLOW_OP = {

@@ -131,8 +131,9 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
                     const mine = recs => recs.filter(r => r.target === box || r.target === document.body && [...r.addedNodes].includes(box) || box.contains(r.target)).length;
                     const calls = []; const o = new MutationObserver(recs => { const n = mine(recs); if (n) calls.push(n); }); o.observe(document.body, { childList: true, subtree: true }); document.body.append(box); // 1er appel : tout de suite (microtâche)
                     await Promise.resolve(); out.first = calls.slice();
-                    for (let i = 0; i < 5; i++) { box.append(document.createElement('span')); await new Promise(r => setTimeout(r, 0)); } // 5 tâches dans la même image
-                    out.beforeFrame = calls.length;
+                    let frames = 0, counting = true; const tick = () => { if (!counting) return; frames++; requestAnimationFrame(tick); }; requestAnimationFrame(tick);
+                    for (let i = 0; i < 5; i++) { box.append(document.createElement('span')); await new Promise(r => setTimeout(r, 0)); } // 5 tâches, d'ordinaire dans la même image
+                    out.frames = frames; counting = false;
                     await new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
                     out.after = calls.slice();
                     // un élément précis : rien ne change (microtâche, à chaque fois)
@@ -152,7 +153,7 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
                 assert.deepEqual(r.first, [1], 'le premier changement est donné tout de suite');
                 const total = r.after.reduce((a, b) => a + b, 0);
                 assert.equal(total, 6, 'aucun changement perdu : ' + JSON.stringify(r.after));
-                assert.ok(r.after.length <= 3, 'regroupés : ' + JSON.stringify(r.after));
+                assert.ok(r.after.length <= Math.min(5, r.frames + 2), `regroupés : ${JSON.stringify(r.after)} en ${r.frames} image(s)`); // un appel tout de suite, puis au plus un par image
                 assert.deepEqual(r.el, [1, 1], 'un élément précis : à chaque microtâche, comme avant');
                 assert.deepEqual(r.im, [1, 1], '{ lcndaImmediate: true } : à chaque microtâche');
                 assert.ok(r.taken >= 1, 'takeRecords');
@@ -228,7 +229,9 @@ const get = (url, headers = {}, method = 'GET') => new Promise((res, rej) => { c
                 if (off) { await sleep(3000); assert.equal(await ecl(), 0, 'éclipses calculées alors que le bloc n’est pas à l’écran'); }
                 await page.evaluate(() => document.querySelector('#workspace [data-ts-block]').scrollIntoView());
                 await page.waitForFunction(() => [...(window.LCNDA_EXT.toutSur?.cache?.keys() || [])].some(k => /^eclipses-(vues|lieu)\|/.test(k)), null, { timeout: 30000 }).catch(() => {});
-                console.log(`    (bloc 🔎 ${off ? 'hors de l’écran au départ' : 'déjà à l’écran'} ; éclipses demandées : ${await ecl()})`);
+                const planned = await page.evaluate(async () => { const T = window.LCNDA_EXT.toutSur, d = await window.LCNDA_APP.api('person', { id: 1 }); return T.plan({ person: d }).filter(x => /^eclipses-(vues|lieu)$/.test(x.d.id)).length; });
+                console.log(`    (bloc 🔎 ${off ? 'hors de l’écran au départ' : 'déjà à l’écran'} ; éclipses prévues : ${planned}, demandées : ${await ecl()})`);
+                if (planned) assert.ok(await ecl() > 0, 'à l’écran : les éclipses sont calculées');
                 const key = await page.evaluate(async () => (await window.LCNDA_APP.api('villages')).villages?.[0]?.key || '');
                 if (key) {
                     await page.evaluate(k => { const s = window.LCNDA_APP.state; s.listType = 'villages'; s.hVillage = k; window.LCNDA_APP.setModule('listes'); }, key);

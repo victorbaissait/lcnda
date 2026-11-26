@@ -77,11 +77,12 @@ const PANNE = {status: 500, contentType: 'application/json', body: JSON.stringif
         });
 
         await t('Réglages → 🗂 Données : l’état d’une famille illisible → « ⚠ Vérification impossible » (pas « ⤓ Télécharger ») ; revenu → normal', async () => {
-            await p.route(/action=gov_status/, r => r.fulfill(PANNE));
+            await idle(); await sleep(2000); // (les lectures encore en route, d’avant la panne, finissent d’abord : app.js partage une lecture identique en cours)
+            let hits = 0; await p.route(/action=gov_status/, r => { hits++; return r.fulfill(PANNE); });
             await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'donnees_installees'; A.setModule('maintenance'); });
             await p.waitForSelector('[data-dmaj-panel] [data-dmaj-row]', {timeout: 30000});
             await p.waitForFunction(() => document.querySelector('[data-dmaj-row="gov:gov"]')?.dataset.dmajState === 'error', null, {timeout: 30000})
-                .catch(async () => { throw new Error('gov:gov → ' + await p.getAttribute('[data-dmaj-row="gov:gov"]', 'data-dmaj-state')); });
+                .catch(async () => { throw new Error('gov:gov (' + hits + ' appels en panne) → ' + await p.getAttribute('[data-dmaj-row="gov:gov"]', 'data-dmaj-state')); });
             const row = await p.textContent('[data-dmaj-row="gov:gov"]'); assert.match(row, /Vérification impossible/, row); assert.doesNotMatch(row, /Télécharger/, row);
             assert.match(await p.getAttribute('[data-dmaj-row="gov:gov"] .dmaj-state', 'title') || '', /panne \(essai\)/);
             assert.strictEqual(await p.getAttribute('[data-dmaj-row="hist:histoire"]', 'data-dmaj-state'), 'missing', 'les autres familles : comme avant');

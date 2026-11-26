@@ -289,7 +289,7 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             await DO(() => document.querySelector('#workspace .h-dg-page [data-dg-del]').click()); await sleep(500);
             assert.ok(await DO(() => document.querySelectorAll('dialog[open]').length) > 0, 'la question d’avant'); await closeAll();
             assert.ok((await list()).some(d => d.id === D2), 'rien de supprimé');
-            await DO(() => window.LCNDA_EXT.openDiagramEditor(null)); await p.waitForSelector('dialog.h-dg-gallery[open]', {timeout: 10000});
+            await DO(() => { window.LCNDA_EXT.openDiagramEditor(null); }); await p.waitForSelector('dialog.h-dg-gallery[open]', {timeout: 10000});
             assert.strictEqual((await st()).module, 'graphiques', 'la fenêtre, par-dessus Graphiques'); await closeAll();
             await p.click(`#sidebar-content [data-side-value="diagram:${D1}"]`); await idle();
             s = await st(); assert.strictEqual(s.module, 'graphiques');
