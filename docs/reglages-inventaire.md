@@ -59,10 +59,11 @@ La table en bas est produite par le crible du test (toutes les clés de `localSt
 
 ## Résumé chiffré
 
-- 572 clés trouvées dans assets/js : 560 en localStorage, 12 en sessionStorage (jamais gardées).
-- localStorage : 465 gardées par « toute l’app », 95 exclues avec leur raison, 0 sans classement.
-- Par préfixe : `genealogie-…` 378 gardées / 47 exclues ; `lcnda-…` 87 gardées / 43 exclues ; hors préfixe : 5 (toutes déclarées dans ALL_OUTSIDE).
+- 578 clés trouvées dans assets/js : 566 en localStorage, 12 en sessionStorage (jamais gardées).
+- localStorage : 470 gardées par « toute l’app », 96 exclues avec leur raison, 0 sans classement.
+- Par préfixe : `genealogie-…` 383 gardées / 48 exclues ; `lcnda-…` 87 gardées / 43 exclues ; hors préfixe : 5 (toutes déclarées dans ALL_OUTSIDE).
 - Une clé en `…*` est un préfixe (la suite est un nom de liste, d’outil, d’acte…).
+- Pour refaire la table : le crible de `tests/test-reglages-tout.js` (`scanKeys`) et le registre (`isAllKey`).
 
 ## La table complète (localStorage et sessionStorage, assets/js)
 
@@ -136,14 +137,14 @@ La table en bas est produite par le crible du test (toutes les clés de `localSt
 | `genealogie-commune-plus` | local | heritage-commune-plus.js | oui |  |
 | `genealogie-connexions` | local | heritage-connexions.js | oui |  |
 | `genealogie-connexions-besoins` | local | heritage-connexions-besoins.js | oui |  |
-| `genealogie-connexions-panier` | local | heritage-connexions.js | non | le panier et ses derniers éléments (des fiches de cette base) |
-| `genealogie-connexions-recents` | local | heritage-connexions.js | non | le panier et ses derniers éléments (des fiches de cette base) |
+| `genealogie-connexions-panier` | local | app-inserer.js (+1) | non | le panier et ses derniers éléments, les derniers insérés (des fiches de cette base) |
+| `genealogie-connexions-recents` | local | heritage-connexions.js | non | le panier et ses derniers éléments, les derniers insérés (des fiches de cette base) |
 | `genealogie-correspondence-sort-*` | local | app.js | oui |  |
 | `genealogie-courriers-lettres` | local | heritage-courriers-actes.js (+1) | oui |  |
 | `genealogie-courriers-lettres-presets` | local | heritage-courriers-actes.js | oui |  |
 | `genealogie-custom-tabs` | local | app-onglets-plus.js (+1) | oui |  |
 | `genealogie-custom-widgets` | local | app.js (+2) | oui |  |
-| `genealogie-cx-put-recents` | local | heritage-connexions.js | non | le panier et ses derniers éléments (des fiches de cette base) |
+| `genealogie-cx-put-recents` | local | heritage-connexions.js | non | le panier et ses derniers éléments, les derniers insérés (des fiches de cette base) |
 | `genealogie-cx-take-split` | local | heritage-connexions.js | oui |  |
 | `genealogie-daboville-map` | local | app.js | non | calcul de cette base |
 | `genealogie-daboville-root` | local | app.js | non | une fiche précise |
@@ -235,6 +236,8 @@ La table en bas est produite par le crible du test (toutes les clés de `localSt
 | `genealogie-identity-name-variants-display` | local | app.js | oui |  |
 | `genealogie-idphoto` | local | heritage-studio.js | oui |  |
 | `genealogie-insee-auto` | local | app.js | oui |  |
+| `genealogie-inserer` | local | app-inserer.js | oui |  |
+| `genealogie-inserer-recents` | local | app-inserer.js | non | le panier et ses derniers éléments, les derniers insérés (des fiches de cette base) |
 | `genealogie-jeux-famille-presets` | local | app-jeu-famille.js | oui |  |
 | `genealogie-jeux-tri` | local | app-jeu.js | oui |  |
 | `genealogie-journee` | local | heritage-journee.js | oui |  |
@@ -417,6 +420,10 @@ La table en bas est produite par le crible du test (toutes les clés de `localSt
 | `genealogie-tableur` | local | heritage-tableur.js | oui |  |
 | `genealogie-tableur-actions` | local | heritage-tableur-outils.js | oui |  |
 | `genealogie-tableur-base` | local | heritage-tableur-base.js | oui |  |
+| `genealogie-telech-b` | local | heritage-telech-b-village.js | oui |  |
+| `genealogie-telech-c` | local | heritage-telech-c.js | oui |  |
+| `genealogie-telech-c-tables` | local | heritage-telech-c.js | oui |  |
+| `genealogie-telech-d` | local | heritage-telech-d-traduire.js (+1) | oui |  |
 | `genealogie-terre-mots` | local | heritage-terre-mots.js | oui |  |
 | `genealogie-terre-quotidien` | local | heritage-terre-quotidien.js | oui |  |
 | `genealogie-terroir` | local | heritage-terroir.js | oui |  |

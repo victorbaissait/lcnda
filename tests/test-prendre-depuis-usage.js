@@ -370,17 +370,18 @@ const t = async (name, fn) => {
             await C('.cx-put [data-cx-putgo]'); await sleep(800);
             await C('.cx-ldsel [data-cx-selnone]'); assert.match(await p.textContent('.cx-ldsel'), /Rien de coché/);
         });
-        await t('L3 · une longue liste : « Les 20 premières » et « De la ligne 10 à 30 », dans l’ordre affiché', async m => {
+        await t('L3 · une longue liste (24 comètes) : « Les 20 premières » et « De la ligne 10 à 20 », dans l’ordre affiché', async m => {
             await clearBasket();
-            await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.open('chateaux', {q: '', crit: [], period: null, near: null, sort: 'name', dir: 'asc'}));
-            await p.waitForSelector('.ld-page[data-ld-page="chateaux"] [data-ld-take]', {timeout: 30000}); await p.waitForSelector('.ld-table tbody tr', {timeout: 30000});
+            // une liste de plus de 20 lignes (les comètes : 24 ; légère, livrée avec l'app), triée par nom
+            await p.evaluate(() => window.LCNDA_EXT.dataListsEngine.open('ciel_cometes', {q: '', crit: [], period: null, near: null, sort: 'name', dir: 'asc'}));
+            await p.waitForSelector('.ld-page[data-ld-page="ciel_cometes"] [data-ld-take]', {timeout: 30000}); await p.waitForSelector('.ld-table tbody tr', {timeout: 30000});
             await C('[data-ld-take]'); await C('.ui-actmenu button:has-text("Les 20 premières")'); await sleep(1500);
             let s = (await basket()).items.find(x => x.kind === 'set'); assert.ok(s && s.data.rows.length === 20 && /lignes 1 à 20/.test(s.title), s?.title);
             const first = await p.textContent('.ld-table tbody tr td:nth-child(2)'); assert.strictEqual(String(s.data.rows[0][0]).trim(), first.trim(), 'dans l’ordre affiché');
             await clearBasket();
             await C('[data-ld-take]'); await C('.ui-actmenu button:has-text("De la ligne")');
-            await p.waitForSelector('dialog[open] input[name="v"]'); await F('dialog[open] input[name="v"]', '10-30'); await K('Enter'); await sleep(1500);
-            s = (await basket()).items.find(x => x.kind === 'set'); assert.ok(s && s.data.rows.length === 21 && /lignes 10 à 30/.test(s.title), s?.title);
+            await p.waitForSelector('dialog[open] input[name="v"]'); await F('dialog[open] input[name="v"]', '10-20'); await K('Enter'); await sleep(1500);
+            s = (await basket()).items.find(x => x.kind === 'set'); assert.ok(s && s.data.rows.length === 11 && /lignes 10 à 20/.test(s.title), s?.title);
             await clearBasket();
         });
         await t('M1 · « Mettre dans… » : une seule loupe, groupes, « ce que ça donne », la dernière destination retenue, 390 px, sombre', async m => {
