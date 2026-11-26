@@ -7231,6 +7231,8 @@
 :root[data-lc-density] .atd-pickrows{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .atd-pickrows label{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .atd-mode{gap:calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .ldt-sel{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ldt-selline{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 :root[data-lc-density] .atd-show .atd-head b{padding-left:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .atd-d-compact{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .atd-d-compact .atd-table td{padding:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}

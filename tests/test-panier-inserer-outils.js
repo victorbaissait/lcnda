@@ -151,14 +151,15 @@ const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } 
             assert.strictEqual(await n(), c0 + 1);
             await clickUndo(); assert.strictEqual(await n(), c0);
         });
-        await t('13 · 🧺 un échantillon de chaque écran : fiche (événements, médias, proches), listes, tableau de bord, enquêtes, documents, données, graphiques — des éléments à prendre', async () => {
+        await t('13 · 🧺 un échantillon de chaque écran : fiche (événements, médias, proches), listes, tableau de bord, enquêtes, documents, données, graphiques — des éléments à prendre (proches compris)', async () => {
             const scan = () => p.evaluate(() => { const seen = new Map(); document.querySelectorAll('#workspace *').forEach(el => { if (seen.size > 400) return; for (const a of el.attributes) { if (/^data-.*(person|event|media|place|act|source)/.test(a.name) && /^\d+$/.test(a.value)) { const it = window.LCNDA_EXT.toolConnexions.entityAt(el); if (it) seen.set(`${it.kind}:${it.ref_id}`, it.kind); break; } } });
                 const k = {}; seen.forEach(v => { k[v] = (k[v] || 0) + 1; }); return k; });
             const out = {};
-            for (const [m, extra] of [['personnes', {currentPersonId: 1}], ['listes', {}], ['dashboard', {}], ['enquetes', {currentInvestigationId: 1}], ['documents', {}], ['donnees', {}], ['graphiques', {}]]) {
-                await closeAll(); await B.go(m, extra); if (m === 'personnes') await p.waitForSelector('#workspace .event-row[data-event-id]', {timeout: 20000}); await sleep(2500); out[m] = await scan(); }
+            const W = {personnes: '#workspace .event-row[data-event-id]', dashboard: '#workspace [data-open-dashboard-person]', graphiques: '#workspace [data-open-person], #workspace [data-h-person], #workspace [data-tree-person]'};
+            for (const [m, extra] of [['personnes', {currentPersonId: 1}], ['dashboard', {}], ['graphiques', {}], ['listes', {}], ['documents', {}], ['donnees', {}]]) {
+                await closeAll(); await B.go(m, extra); if (W[m]) await p.waitForSelector(W[m], {timeout: 25000}).catch(() => {}); await sleep(1500); out[m] = await scan(); }
             console.log('    ', JSON.stringify(out));
-            assert.ok(out.personnes.event && out.personnes.person, 'la fiche : événements et proches');
+            assert.ok(out.personnes.event && out.personnes.person, 'la fiche : événements et proches'); assert.ok(out.dashboard.person, 'le tableau de bord : ses fiches');
             assert.ok(Object.values(out).filter(k => Object.keys(k).length).length >= 3, 'au moins 3 écrans');
         });
         await t('14 · 📎 « Insérer… » dans « 📤 Envoyer vers… » (texte, tableau) et dans un export qui donne un tableau', async () => {

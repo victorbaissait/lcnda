@@ -1,0 +1,200 @@
+#!/usr/bin/env node
+/* 🧭 Toutes les actions que l'écran appelle arrivent-elles à LEUR route dans api.php ?
+ *  Le bogue d'origine : une route large `str_starts_with($action, 'ld_')` (📍 Lieux en double, lib/lieux_doublons.php) avalait aussi
+ *  ld_status, ld_query, ld_facet, ld_famille (📊 listes de données, lib/listes_donnees.php) → « Action inconnue », lu par l'écran comme
+ *  « pas encore sur cet ordinateur ». Une route par préfixe peut toujours en capturer une autre (rt_, ro_, aia_, sd_, dplus_, lieux_…).
+ *  Ce garde-fou :
+ *   1. lit assets/js/*.js et en sort TOUS les noms d'action (api('x'), post('x'), A().api('x', …), api.php?action=x, les petites
+ *      fonctions maison qui passent leur 1er argument à .api(…), et les `${f.pre}_dl_start` des familles de app-listes-maj.js) ;
+ *   2. les appelle une à une sur une base d'essai vide (GET, ou POST avec le jeton CSRF), sans charge utile ou presque ;
+ *   3. aucune ne doit répondre « Action inconnue » (une erreur 4xx sur une donnée manquante, c'est normal : la route est la bonne).
+ *  Rien n'est téléchargé : toutes les sources « d'essai » pointent vers un dossier vide, Ollama et le « GitHub » des données vers un port fermé.
+ *   node tests/test-routes-api.js            (LCNDA_ROUTES_VERBOSE=1 : la réponse de chaque action) */
+'use strict';
+const assert = require('assert');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const net = require('net');
+const {spawn, spawnSync} = require('child_process');
+const root = path.join(__dirname, '..');
+const JS = path.join(root, 'assets', 'js');
+
+/* Les actions appelées par l'écran mais qu'api.php n'a pas, et c'est voulu. Chaque entrée dit pourquoi. */
+const ALLOW = {
+    // (vide pour l'instant : toute action de l'écran doit exister côté serveur)
+};
+/* Les actions à NE PAS appeler ici (effet de bord qui casserait la suite de l'essai), et pourquoi. Leur route est quand même vérifiée
+ * statiquement : elle doit être nommée telle quelle dans api.php ou dans un fichier lib/. */
+const SKIP = {
+    genealogy_remove: 'met la généalogie de côté', genealogy_switch: 'change de généalogie pour la suite', genealogy_create: 'crée une généalogie et y bascule',
+    kiosk_enter: 'passe en mode consultation : plus aucune écriture ensuite', kiosk_set: 'idem', glock_set: 'pose un mot de passe : plus rien ne se lit ensuite',
+    premier_start: 'réinitialise la première fois', premier_example_open: 'ouvre l’exemple (change de base)', premier_example_build: 'construit l’exemple (long)', premier_example_leave: 'quitte l’exemple',
+    restore_backup: 'remplace la base', import_package: 'remplace la base', reset_database: 'vide la base', delete_all: 'vide la base',
+};
+
+/* ═════════ 1. les noms d'action, lus dans le JS ═════════ */
+const NAME = /^[a-z][a-z0-9_]*$/;
+/** la fin de l'appel qui commence à `from` (parenthèses équilibrées, chaînes sautées), pour y chercher method: 'POST' */
+function callArgs(src, from) {
+    let depth = 1, i = from, q = null;
+    for (; i < src.length && i < from + 4000; i++) {
+        const c = src[i];
+        if (q) { if (c === '\\') i++; else if (c === q) q = null; continue; }
+        if (c === '"' || c === "'" || c === '`') q = c;
+        else if (c === '(') depth++;
+        else if (c === ')') { if (--depth === 0) break; }
+    }
+    return src.slice(from, i);
+}
+const isPost = s => /method\s*:\s*['"]POST['"]/i.test(s);
+
+function extractActions(dir = JS) {
+    const out = new Map(); // nom → {methods: Set, files: Set}
+    const add = (name, method, file) => { if (!NAME.test(name)) return; const e = out.get(name) || {methods: new Set(), files: new Set()}; e.methods.add(method); e.files.add(file); out.set(name, e); };
+    const famPre = [];
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.js')).sort();
+    const srcs = Object.fromEntries(files.map(f => [f, fs.readFileSync(path.join(dir, f), 'utf8')]));
+    // les familles de téléchargement (app-listes-maj.js : FAM) : pre, status, info, finish
+    const maj = srcs['app-listes-maj.js'] || '';
+    for (const m of maj.matchAll(/\{id:\s*'[a-z_]+',[^\n]*?status:\s*'([a-z_]+)',\s*info:\s*'([a-z_]+)',\s*pre:\s*'([a-z_]+)',\s*finish:\s*'([a-z_]+)'/g)) {
+        add(m[1], 'GET', 'app-listes-maj.js'); add(m[2], 'GET', 'app-listes-maj.js'); add(m[4], 'POST', 'app-listes-maj.js'); famPre.push(m[3]);
+    }
+    for (const f of files) {
+        const src = srcs[f];
+        // les petites fonctions maison : const post = async (a, body) => … .api(a, …) ; function post(action, body) { … action=${action} … }
+        const wrappers = new Map();
+        const consider = (name, param, body) => {
+            if (!name || !param || name === 'api' && f === 'app.js') return;
+            const p = param.replace(/[$]/g, '\\$');
+            if (new RegExp(`\\bapi\\(\\s*${p}\\b|action=\\$\\{\\s*${p}\\s*\\}|\\.set\\(\\s*['"]action['"]\\s*,\\s*${p}\\b|\\baction\\s*:\\s*${p}\\b`).test(body)) wrappers.set(name, isPost(body) || /^(post|apiPost|write|postJson)$/.test(name) && /method/.test(body) ? 'POST' : 'GET');
+        };
+        for (const m of src.matchAll(/(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?(?:\(\s*([A-Za-z_$][\w$]*)[^)]*\)|([A-Za-z_$][\w$]*))\s*=>([^\n]{0,600})/g)) consider(m[1], m[2] || m[3], m[4]);
+        for (const m of src.matchAll(/(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*\(\s*([A-Za-z_$][\w$]*)[^)]*\)\s*\{/g)) consider(m[1], m[2], src.slice(m.index, m.index + 900));
+        // 1. .api('x' …) et api('x' …) : GET, sauf method: 'POST' dans l'appel
+        for (const m of src.matchAll(/(?<![\w$])((?:[\w$]+(?:\(\))?\.)*)api\(\s*(['"`])([a-z][a-z0-9_]*)\2/g)) {
+            const bare = !m[1], w = bare ? wrappers.get('api') : null;
+            add(m[3], isPost(callArgs(src, m.index + m[0].length)) || w === 'POST' ? 'POST' : 'GET', f);
+        }
+        // 2. les fonctions maison : post('x' …), get('x' …), write('x' …), apiPost('x' …)…
+        for (const [w, method] of [...wrappers, ...(wrappers.has('api') ? [] : [['api', 'GET']])]) {
+            if (w !== 'api') for (const m of src.matchAll(new RegExp(`(?<![\\w$.])${w.replace(/[$]/g, '\\$')}\\(\\s*(['"\`])([a-z][a-z0-9_]*)\\1`, 'g'))) add(m[2], isPost(callArgs(src, m.index + m[0].length)) ? 'POST' : method, f);
+            // `${f.pre}_dl_start` : les familles de app-listes-maj.js
+            for (const m of src.matchAll(new RegExp(`(?<![\\w$.])${w.replace(/[$]/g, '\\$')}\\(\\s*\`\\$\\{[^}]*\\.pre\\}(_[a-z_]+)\``, 'g'))) for (const pre of famPre) add(pre + m[1], method, f);
+        }
+        // 3. api.php?action=x (fetch, liens de téléchargement, images)
+        for (const m of src.matchAll(/api\.php\?action=([a-z][a-z0-9_]*)/g)) {
+            const before = src.slice(Math.max(0, m.index - 200), m.index), after = src.slice(m.index, m.index + 400);
+            add(m[1], /fetch\(\s*[`'"][^`'"]*$/.test(before) && isPost(after.split(/\)\s*[;.]/)[0]) ? 'POST' : 'GET', f);
+        }
+    }
+    // les noms faits à la volée ailleurs (un seul endroit chacun) : on les déroule ici
+    const dyn = [
+        ['heritage-parents-celebres.js', /post\(`celeb_\$\{d\.pcCtl\}`/, /data-pc-ctl="([a-z_]+)"/g, 'celeb_'],
+        ['heritage-pistes-auto.js', /post\(`pistes_\$\{what\}`/, /control\('([a-z_]+)'\)/g, 'pistes_'],
+    ];
+    for (const [f, re, vre, pre] of dyn) {
+        const src = srcs[f]; if (!src || !re.test(src)) continue;
+        for (const m of src.matchAll(vre)) add(pre + m[1], 'POST', f);
+    }
+    return out;
+}
+
+/* les actions nommées dans le PHP (pour celles qu'on n'appelle pas) */
+function phpMentions() {
+    const txt = [path.join(root, 'api.php'), ...fs.readdirSync(path.join(root, 'lib')).filter(f => f.endsWith('.php')).map(f => path.join(root, 'lib', f))].map(f => fs.readFileSync(f, 'utf8')).join('\n');
+    return name => new RegExp(`['"]${name}['"]`).test(txt);
+}
+
+let fails = 0;
+const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 40).join('\n  ')); } };
+const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const UNKNOWN = /action inconnue|unknown action|acci[oó]n desconocida|unbekannte aktion|azione sconosciuta|a[cç][aã]o desconhecida|nieznana akcja|onbekende actie/i;
+
+(async () => {
+    const acts = extractActions();
+    if (process.env.LCNDA_ROUTES_LIST) { for (const [a, e] of [...acts].sort()) console.log([...e.methods].join('+'), a, [...e.files].join(',')); process.exit(0); }
+    await t(`le JS appelle ${acts.size} actions : la lecture du code les trouve toutes (ld_*, familles, fonctions maison)`, async () => {
+        assert.ok(acts.size > 400, 'trop peu d’actions trouvées : ' + acts.size);
+        for (const a of ['ld_status', 'ld_query', 'ld_facet', 'ld_famille', 'ld_groups', 'ld_merge', 'meteo_status', 'hist_dl_start', 'gov_pack_remove', 'bo_pack_restore', 'prenoms_pays_dl_step', 'donnees_maj_check', 'rt_saved_get', 'aia_conv', 'inbox_write'])
+            assert.ok(acts.has(a), 'pas trouvée : ' + a);
+        assert.ok(acts.get('ld_merge').methods.has('POST') && acts.get('ld_status').methods.has('GET'));
+    });
+    await t('la liste blanche ne garde que des actions encore appelées par l’écran', async () => {
+        for (const a of Object.keys(ALLOW)) assert.ok(acts.has(a), `ALLOW.${a} n’est plus appelée par le JS : à retirer`);
+    });
+    await t('les actions qu’on n’appelle pas (effets de bord) ont bien une route nommée côté serveur', async () => {
+        const has = phpMentions();
+        const miss = Object.keys(SKIP).filter(a => acts.has(a) && !has(a));
+        assert.deepStrictEqual(miss, []);
+    });
+
+    /* ═════════ 2. une base d'essai vide, un serveur, et chaque action ═════════ */
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-routes-')), empty = path.join(tmp, 'vide');
+    fs.mkdirSync(path.join(tmp, 'media'), {recursive: true}); fs.mkdirSync(empty);
+    const {findPhp, phpRuntimeArgs, devBundledPhp} = require('../electron/php-server.js');
+    const phpPath = findPhp([devBundledPhp()]) || 'php';
+    const dead = `http://127.0.0.1:${await freePort()}`; // rien n'écoute : toute requête réseau échoue tout de suite
+    const env = {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4', GENEALOGY_TEST: '1',
+        LCNDA_METEO_DIR: path.join(tmp, 'meteo'), LCNDA_HIST_DB: path.join(empty, 'pas-de-pack.sqlite'), LCNDA_OLLAMA_URL: dead, LCNDA_TEST_DONNEES_BASE: dead + '/', LCNDA_TEST_WIKIDATA_URL: dead + '/sparql',
+        LCNDA_REFERENCE_BASE_URL: dead + '/', LCNDA_PUBLISH_TEST_BASE: dead + '/', LCNDA_TEST_INSEE_OFFLINE: '1', http_proxy: dead, https_proxy: dead, HTTP_PROXY: dead, HTTPS_PROXY: dead, no_proxy: '', NO_PROXY: ''};
+    for (const k of ['GOV', 'HIST', 'PRENOMS', 'ELECTIONS', 'BO', 'LP', 'BA', 'METEO', 'TELECHA', 'TD', 'TR', 'TM', 'PM', 'MR', 'CC', 'BR', 'CPLUS', 'CX', 'CELEB', 'BNF', 'IIIF', 'INSEE', 'OPENARCH', 'DICOTOPO']) env[`LCNDA_TEST_${k}_DIR`] = empty;
+    fs.mkdirSync(env.LCNDA_METEO_DIR, {recursive: true});
+    const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
+require 'lib/paths.php';
+$p0 = new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'); $p0->exec(file_get_contents(APP_ROOT.'/data/schema.sql')); $p0 = null;
+require 'lib/bootstrap.php'; $pdo = db();
+$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender,living_status,is_start) VALUES(1,'Jean','MAZAUD','male','deceased',1)");
+echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
+    if (seed.status !== 0 || !/"ok"/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
+    const port = await freePort();
+    const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env, stdio: 'ignore'});
+    const base = `http://127.0.0.1:${port}/`;
+    const stop = () => { try { proc.kill('SIGKILL'); } catch (_) {} };
+    process.on('exit', stop);
+    try {
+        for (let i = 0; i < 150; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await sleep(100); } }
+        let cookie = '';
+        const html = await (await fetch(base).then(r => { cookie = (r.headers.get('set-cookie') || '').split(';')[0]; return r; })).text();
+        const csrf = JSON.parse(html.match(/window\.INSTALL_CSRF = ("[^"]*")/)[1]);
+        const call = async (action, method) => {
+            const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 30000);
+            try {
+                const r = method === 'POST'
+                    ? await fetch(`${base}api.php?action=${action}`, {method: 'POST', signal: ctl.signal, headers: {Cookie: cookie, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({csrf})})
+                    : await fetch(`${base}api.php?action=${action}`, {signal: ctl.signal, headers: {Cookie: cookie}});
+                const text = await r.text();
+                let err = ''; try { const j = JSON.parse(text); err = String(j?.error ?? j?.result?.error ?? ''); } catch (_) { err = r.ok ? '' : text.slice(0, 300); }
+                return {status: r.status, err};
+            } catch (e) { return {status: 0, err: e.name === 'AbortError' ? '(plus de 30 s : la route a été trouvée, le travail est long)' : String(e.message)}; }
+            finally { clearTimeout(timer); }
+        };
+        const order = [...acts.keys()].sort();
+        const jobs = [];
+        for (const a of order) for (const m of [...acts.get(a).methods].sort()) jobs.push([a, m]); // GET d'abord (« GET » < « POST »)
+        jobs.sort((x, y) => x[1].localeCompare(y[1]) || x[0].localeCompare(y[0]));
+        const bad = [], seen = {};
+        await t(`chaque action appelée par l'écran (${jobs.length} appels) arrive à sa route : jamais « Action inconnue »`, async () => {
+            for (const [a, m] of jobs) {
+                if (SKIP[a]) continue;
+                const r = await call(a, m); seen[`${m} ${a}`] = r;
+                if (process.env.LCNDA_ROUTES_VERBOSE) console.log(`  ${m} ${a} → ${r.status} ${r.err.slice(0, 120)}`);
+                if (UNKNOWN.test(r.err) && !ALLOW[a]) bad.push(`${m} ${a} → ${r.status} « ${r.err} » (appelée par ${[...acts.get(a).files].join(', ')})`);
+            }
+            assert.deepStrictEqual(bad, [], 'actions perdues en route :\n' + bad.join('\n'));
+        });
+        await t('le serveur répond encore à la fin (aucune action n’a cassé la base d’essai)', async () => {
+            const r = await call('kiosk_state', 'GET'); assert.strictEqual(r.status, 200, r.err);
+            const b = await call('ld_status', 'GET'); assert.strictEqual(b.status, 200, b.err);
+        });
+        await t('les actions des listes de données (ld_*) et des Lieux en double répondent, chacune par sa route', async () => {
+            for (const a of ['GET ld_status', 'GET ld_famille', 'GET ld_groups']) assert.ok(seen[a] && !UNKNOWN.test(seen[a].err), a + ' : ' + JSON.stringify(seen[a]));
+        });
+    } finally { stop(); }
+    try { fs.rmSync(tmp, {recursive: true, force: true}); } catch (_) {}
+    console.log(fails ? `\n${fails} échec(s)` : '\nTout est bon.');
+    process.exit(fails ? 1 : 0);
+})();
+
+

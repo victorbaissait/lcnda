@@ -185,7 +185,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=78" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=79" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
@@ -1745,7 +1745,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-paniers.js?v=6" defer></script><!-- 🧺 l’onglet Paniers (caché au départ ; lib/paniers.php) -->
 <script src="assets/js/app-inserer.js?v=7" defer></script><!-- 📎 Insérer une info à l’endroit du curseur, dans tout texte libre (« / », 📎, ⌥⌘K) -->
 <script src="assets/js/heritage-connexions-besoins.js?v=4" defer></script>
-<script src="assets/js/heritage-connexions-outils.js?v=1" defer></script><!-- 🧺 📎 dans les outils : « Ici : l’outil ouvert » (Mettre dans…, Prendre depuis…), 📎 · 📥 dans leur barre, la source à leur façon --><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
+<script src="assets/js/heritage-connexions-outils.js?v=2" defer></script><!-- 🧺 📎 dans les outils : « Ici : l’outil ouvert » (Mettre dans…, Prendre depuis…), 📎 · 📥 dans leur barre, la source à leur façon --><!-- 🧩 les besoins : pistes qui disent ce qui leur manque, « Cet acte répond à… », Ma semaine → Ce qui manque, carte (lib/connexions_besoins.php) -->
 <script src="assets/js/ia-serveur.js?v=1" defer></script><!-- 🖥 serveur d’IA : Ollama, Unsloth ou compatible OpenAI (lib/ia_serveur.php) -->
 <script src="assets/js/heritage-assistant-ia.js?v=3" defer></script>
 <script src="assets/js/heritage-reseau.js?v=1" defer></script>
