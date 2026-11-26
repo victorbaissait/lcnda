@@ -80,7 +80,8 @@ PREF = {'Ain': 'Bourg', 'Aisne': 'Laon', 'Allier': 'Moulins', 'Basses-Alpes': 'D
     'Seine': 'Paris', 'Seine-Inférieure': 'Rouen', 'Seine-et-Marne': 'Melun', 'Seine-et-Oise': 'Versailles', 'Deux-Sèvres': 'Niort',
     'Somme': 'Amiens', 'Tarn': 'Albi', 'Tarn-et-Garonne': 'Montauban', 'Var': 'Draguignan', 'Vaucluse': 'Avignon', 'Vendée': 'Napoléon',
     'Vienne': 'Poitiers', 'Haute-Vienne': 'Limoges', 'Vosges': 'Épinal', 'Yonne': 'Auxerre'}
-PREF_RE = [(re.compile(r'kil\s*(?:de|d)\s*' + r'\s+'.join(re.escape(w) for w in fold(v).split()) + r'(?![a-z])'), d) for d, v in PREF.items()]
+# Paris est cité dans presque tous les articles (« 513 kil. de Paris ») : la Seine se reconnaît par son nom seulement
+PREF_RE = [(re.compile(r'kil\s*(?:de|d)\s*' + r'\s+'.join(re.escape(w) for w in fold(v).split()) + r'(?![a-z])'), d) for d, v in PREF.items() if d != 'Seine']
 
 
 def by_pref(t):
@@ -171,7 +172,11 @@ def main():
     missing = [w for w in WITNESS if not any(fold(r['n']) == fold(w[0]) for r in by_dep.get(w[1], []))]
     if missing:  # diagnostic dans le journal : comment les communes témoins apparaissent dans le texte
         for w in missing:
-            hits = [ln for _, ln in lines if fold(w[0]) in fold(ln)][:4]
+            hits = [ln for _, ln in lines if fold(ln).startswith(fold(w[0]))][:4] or [ln for _, ln in lines if fold(w[0]) in fold(ln)][:4]
+            for e in entries:
+                if fold(e['n']) == fold(w[0]):
+                    t = re.sub(r'\s+', ' ', e['t']).replace('- ', '').strip()
+                    print(f'    article {e["n"]!r} : {len(t)} car., habitants={bool(POP.search(t[:600]))}, département={dep_of(t, e["n"])} | {t[:200]}')
             print(f'— témoin {w[0]} ({w[1]}) : {len(hits)} ligne(s) contenant le nom')
             for h in hits:
                 print('   ', h[:260])
