@@ -62,7 +62,7 @@ function squash(opts) {
         const txt = r.width < 80 ? (el.innerText || '').trim() : ''; const n = txt ? words(txt) : 0;
         // 1. écrasé : ≥ 3 mots, < 80 px de large, sur plusieurs lignes, dans un parent de plus de 250 px
         const par = el.parentElement;
-        if (n >= 3 && r.width < 80 && par && par.getBoundingClientRect().width > 250 && r.height > parseFloat(s.lineHeight || '0') * 1.6 + 2 && r.height > (parseFloat(s.fontSize) || 14) * 2.2 && vis(el) && !odd(el)) {
+        if (n >= 3 && r.width < 80 && par && par.getBoundingClientRect().width > 250 && r.height > (parseFloat(s.lineHeight) || (parseFloat(s.fontSize) || 14) * 1.2) * 1.6 + 2 && vis(el) && !odd(el)) {
             if (!/^(INPUT|BUTTON)$/.test(el.tagName) || txt.length > 12) add(el, 'écrasé', `${n} mots dans ${Math.round(r.width)} px (parent ${Math.round(par.getBoundingClientRect().width)} px)`);
         }
         // 2. une grille : un enfant placé tout seul (auto) dans une colonne de moins de 60 px, avec un long texte
