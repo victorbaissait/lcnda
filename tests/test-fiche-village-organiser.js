@@ -19,7 +19,8 @@ let chromium; try { ({chromium} = require('playwright')); } catch (_) { ({chromi
 const root = path.join(__dirname, '..');
 const {findPhp, phpRuntimeArgs, devBundledPhp} = require('../electron/php-server.js');
 let fails = 0;
-const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
+const ONLY = process.env.ONLY ? new RegExp(process.env.ONLY) : null; // ONLY=Réglages node tests/… : seulement ces essais
+const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const phpPath = findPhp([devBundledPhp()]) || 'php';
 const KEY = 'genealogie-village-layout';
@@ -243,13 +244,13 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
                     host.innerHTML = html(['a', 'b']); await frame();
                     const first = host.querySelectorAll('.org-new').length, stored = (JSON.parse(localStorage.getItem(N.key) || '{}')[scope] || []).join(',');
                     host.innerHTML = html(['a', 'b', 'neuf']); await frame();
-                    const badge = [...host.querySelectorAll('.org-new')].map(b => b.parentElement.closest('[data-order-key], [data-k], [data-index]')?.textContent.replace('Nouveau', '').trim());
+                    const badge = [...host.querySelectorAll('.org-new')].map(b => b.previousElementSibling?.textContent.trim());
                     host.innerHTML = html(['a', 'b', 'neuf']); await frame(); // redessinée pendant la visite : le « Nouveau » reste
                     const again = host.querySelectorAll('.org-new').length;
                     N.fresh.clear(); host.innerHTML = html(['a', 'b', 'neuf']); await frame(); // visite suivante : vue
                     out[scope] = {first, stored, badge, again, next: host.querySelectorAll('.org-new').length};
                 }
-                host.remove(); return out;
+                host.remove(); const st = JSON.parse(localStorage.getItem(N.key) || '{}'); Object.keys(shapes).forEach(k => delete st[k]); localStorage.setItem(N.key, JSON.stringify(st)); N.fresh.clear(); return out;
             });
             for (const [scope, x] of Object.entries(r)) {
                 assert.strictEqual(x.first, 0, scope + ' : la première fois, rien de « Nouveau »'); assert.strictEqual(x.stored, 'a,b', scope);
@@ -257,22 +258,26 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             }
         });
         await t('« Nouveau » dans Réglages : un bloc de fiche et un widget ajoutés par un outil arrivent dans leur liste, marqués', async () => {
-            const go = async () => { await p.evaluate(() => { try { localStorage.setItem('genealogie-reglages-presentation', 'old'); } catch (_) {} const A = window.LCNDA_APP; A.state.maintenanceTab = 'design'; A.setModule('maintenance'); });
-                await p.waitForSelector('#dashboard-widget-catalog-order [data-order-key]', {timeout: 20000}); await sleep(300); };
+            const visit = async (tab, sel) => { await p.evaluate(t => { try { localStorage.setItem('genealogie-reglages-presentation', 'a'); } catch (_) {} const A = window.LCNDA_APP; A.state.maintenanceTab = t; A.setModule('maintenance'); }, tab);
+                for (let i = 0; i < 80 && !(await p.evaluate(x => !!document.querySelector(x), sel)); i++) await sleep(250);
+                assert.ok(await p.evaluate(x => !!document.querySelector(x), sel), tab + ' : ' + sel); await sleep(400); };
+            const go = async () => { await visit('design', '#dashboard-widget-catalog-order [data-order-key]'); await visit('design_sheets', '[data-fsed-kind="human"] [data-order-key]'); };
             await go();
             await p.evaluate(() => { const A = window.LCNDA_APP; A.defaultPersonBlocks.push(['essai_bloc', '🧪 Bloc d’essai']); window.LCNDA_EXT.personBlocks.essai_bloc = () => ''; A.defaultDashboardBlocks.push(['essai_widget', '🧪 Widget d’essai']); });
-            await go();
+            await visit('design_sheets', '[data-fsed-kind="human"] [data-order-key]');
+            assert.ok(await p.$('[data-order-key="essai_bloc"] .org-new'), 'bloc de fiche : ' + await p.$$eval('[data-order-key="essai_bloc"]', n => n.map(x => x.outerHTML.slice(0, 200) + ' @' + (x.closest('[id]')?.id || '')).join(' || ')));
+            assert.strictEqual(await p.$('[data-fsed-kind="human"] [data-order-key]:not([data-order-key="essai_bloc"]) .org-new'), null, 'seulement le nouveau');
+            await visit('design', '#dashboard-widget-catalog-order [data-order-key]');
             assert.ok(await p.$('#dashboard-widget-catalog-order [data-order-key="essai_widget"] .org-new'), 'widget');
-            assert.ok(await p.$('[data-order-key="essai_bloc"] .org-new'), 'bloc de fiche');
             assert.strictEqual(await p.$('#dashboard-widget-catalog-order [data-order-key]:not([data-order-key="essai_widget"]) .org-new'), null, 'seulement le nouveau');
         });
         await t('« Nouveau » dans ⚙︎ Personnaliser de la monographie : une partie ajoutée par un outil', async () => {
             const open = () => p.evaluate(() => { const A = window.LCNDA_APP; A.state.graphPlaceMonograph = {...(A.state.graphPlaceMonograph || {}), id: 1, name: 'Honfleur', county: 'Calvados', showEvents: true}; A.state.graphMode = 'place_monograph'; A.setModule('graphiques'); });
-            const panel = async () => { await p.waitForSelector('.place-monograph-sections[data-mp-mounted]', {timeout: 20000}); await p.evaluate(() => document.querySelector('[data-mp-custom]').click()); await p.waitForSelector('.mp-list[data-mp-order] li[data-k]'); await sleep(200); };
+            const panel = async () => { await p.waitForSelector('.place-monograph-sections[data-mp-mounted]', {timeout: 20000}); await sleep(300); await p.evaluate(() => { if (!document.querySelector('.mp-list[data-mp-order]')) document.querySelector('[data-mp-custom]').click(); }); await p.waitForSelector('.mp-list[data-mp-order] li[data-k]'); await sleep(300); };
             await open(); await panel();
             await p.evaluate(() => (window.LCNDA_EXT.monographSections = window.LCNDA_EXT.monographSections || []).push({id: 'essai_mono', icon: '🧪', label: 'Partie d’essai', group: 'Le lieu', defaultOn: true, render: async (place, host) => { host.innerHTML = '<p>essai</p>'; return true; }}));
             await open(); await panel();
-            assert.ok(await p.$('.mp-list li[data-k="essai_mono"] .org-new'));
+            assert.ok(await p.$('.mp-list li[data-k="essai_mono"] .org-new'), await p.$$eval('.mp-list li[data-k]', n => n.map(x => x.dataset.k + (x.querySelector('.org-new') ? '*' : '')).join(',')));
             assert.strictEqual(await p.$$eval('.mp-list .org-new', n => n.length), 1);
         });
         await t('pas d’erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });

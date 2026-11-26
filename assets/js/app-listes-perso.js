@@ -57,8 +57,10 @@
     }
     function register(meta) {
         const st = STORE.get(meta.id) || {rows: [], places: {}, loaded: false}; st.meta = meta; STORE.set(meta.id, st);
+        const before = regOf(meta.id), was = before ? `${before.icon}|${before.label}` : null;
         const d = describe(meta);
-        if (!(ext.dataLists || []).includes(d)) (ext.dataLists = ext.dataLists || []).push(d); else ext.dataLists = ext.dataLists; // le moteur relit l'annuaire
+        // le moteur relit l'annuaire (et repeint le menu, ce qui est long) seulement pour une liste nouvelle, renommée ou d'une autre icône
+        if (!before) (ext.dataLists = ext.dataLists || []).push(d); else if (was !== `${d.icon}|${d.label}`) ext.dataLists = ext.dataLists;
         return d;
     }
     function unregister(id) { const arr = ext.dataLists || []; const i = arr.findIndex(d => d && d.id === PREFIX + id); if (i >= 0) arr.splice(i, 1); ext.dataLists = arr; }
@@ -93,7 +95,7 @@
         if (!meta) { STORE.delete(id); unregister(id); return null; }
         const d = register(meta); await loadRows(id, true);
         const st = A().state, k = ext.dataListsEngine?.keyOf?.(d);
-        if (st?.module === 'listes' && st.listType === k) { try { A().renderSidebar?.(); ext.lists?.[k]?.(++st.workspaceToken); } catch (e) { console.error(e); } }
+        if (st?.module === 'listes' && st.listType === k) { try { await ext.lists?.[k]?.(++st.workspaceToken); } catch (e) { console.error(e); } }
         return d;
     }
     const openList = id => { const d = regOf(id); if (d && ext.dataListsEngine?.open) ext.dataListsEngine.open(d.id); };
@@ -376,7 +378,7 @@
             const ok = await (A().confirmBox ? A().confirmBox({title: T('Supprimer « {n} » ?', {n: meta.name}), message: T('La liste et ses {n} lignes. ↶ Annuler reste possible.', {n: nf(meta.row_count)}), okLabel: T('Supprimer')}) : Promise.resolve(confirm(T('Supprimer « {n} » ?', {n: meta.name}))));
             if (!ok) return;
             await post({op: 'delete', id}); STORE.delete(id); unregister(id);
-            const st = A().state; if (st) { st.listType = 'donnees'; if (st.module === 'listes') { A().renderSidebar?.(); ext.lists?.donnees?.(++st.workspaceToken); } }
+            const st = A().state; if (st) { st.listType = 'donnees'; if (st.module === 'listes') ext.lists?.donnees?.(++st.workspaceToken); }
             undoToast(T('Liste supprimée : {n}', {n: meta.name}), async () => { await post({op: 'restore', id}); await reload(id); openList(id); }, '🗑');
         },
     };

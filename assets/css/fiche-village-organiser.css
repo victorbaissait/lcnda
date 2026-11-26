@@ -23,6 +23,12 @@
 .h-village-flow > .is-vnarrow :is(input, select, textarea) { max-width:100%; }
 .h-village-flow > .is-vnarrow .h-decades { overflow-x:auto; }
 .h-village-flow > .is-vnarrow :is(.h-am-main, .cplus-place) { grid-template-columns:minmax(0, 1fr) !important; }
+.h-village-flow > .is-vnarrow :is(.cad-host-pk, .pk, .pk-search) { min-width:0 !important; max-width:100%; }
+.h-village-flow > .is-vnarrow .tr-coiffe { flex-wrap:wrap; }
+.h-village-flow > .is-vnarrow .pk .pk-box { flex-wrap:wrap; min-width:0; }
+.h-village-flow > .is-vnarrow .pk .pk-box input.pk-input { min-width:0; flex:1 1 40px; }
+.h-village-flow > .is-vnarrow .tr-photo { flex-shrink:1; max-width:100%; }
+.h-village-flow > .is-vnarrow .tr-photo img { max-width:100%; }
 .h-village-flow > .is-vnarrow label:has(select, input, .ui-icf-host) { display:inline-flex; flex-wrap:wrap; align-items:center; gap:4px; max-width:100%; min-width:0; }
 .h-village-flow > .is-vnarrow :is(select, .ui-icf-host, .ui-icf-box, .ui-icf) { max-width:100% !important; min-width:0 !important; }
 .h-village-flow > .is-vnarrow :is(div, p, header):has(> label, > select, > button) { flex-wrap:wrap; }
