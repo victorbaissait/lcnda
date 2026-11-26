@@ -1,0 +1,4 @@
+_departement,_commune,_insee,titre,cotes,intitule,dates,_date_debut,_date_fin,producteur,index_sujet,_theme,index_personne,index_organisation,index_famille,index_lieu,index_typologie,index_occupation,index_fonction,fichier
+04,,,"Minutes des notaires de Digne (1580-1900)",2 E 1-3000,Notaires,1580-1900,1580,1900,,,Notaires,,,,,,,,FRAD004_2E.xml
+04,Digne-les-Bains,04070,"Biens nationaux du district de Digne",1 Q 1-200,Biens nationaux,1790-1830,1790,1830,,,Révolution,,,,,,,,FRAD004_1Q.xml
+22,,,"Registres matricules du recrutement (1867-1921)",1 R 1-2000,Conscription,1867-1921,1867,1921,,,Militaire,,,,,,,,FRAD022_1R.xml

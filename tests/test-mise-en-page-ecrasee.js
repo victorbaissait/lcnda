@@ -445,7 +445,7 @@ if (require.main === module) (async () => {
             await p.context().close();
         }
         if (report.length) console.log('\nTrouvailles :\n' + report.join('\n'));
-    } finally { await B.stop(); }
+    } finally { await B.stop(); if (!process.env.ECRASEE_SHOTS) try { fs.rmdirSync(SHOTS); } catch (_) {} } // (le dossier des captures reste s'il y en a)
     console.log(`(${Math.round((Date.now() - t0) / 1000)} s ; captures : ${SHOTS})`);
     console.log(fails ? `\n${fails} échec(s)` : '\nTout est bon.');
     process.exit(fails ? 1 : 0);

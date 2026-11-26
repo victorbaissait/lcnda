@@ -143,6 +143,8 @@
      * H(id, famille, icône, nom, ce que ça fait, chemin, {act, obj, words, phrases, needs, ro, go, last, target(s), into, pour, pr, pre}) */
     const H = (id, fam, icon, name, does, path, o = {}) => ({id, fam, icon, name, does, path, src: 'main', ro: o.ro !== false, act: o.act || [], obj: o.obj || [], words: o.words || '', phrases: o.phrases || [],
         needs: o.needs || {}, go: o.go || null, last: o.last || '', targets: [].concat(o.target || []), into: o.into || '', pour: o.pour || '', pr: o.pr || 0, pre: o.pre || null, steps: o.steps || null, module: o.module || ''});
+    /** LCNDA_EXT.intentsHand = [fn(H, {mod, maint, list, graph, research, sheet, data, call}) → [fiches H(…)]] : une nouveauté pose ses intentions sans toucher ce fichier */
+    const more = () => (Array.isArray(X().intentsHand) ? X().intentsHand : []).flatMap(f => { try { const r = typeof f === 'function' ? f(H, {mod, maint, list, graph, research, sheet, data, call}) : []; return Array.isArray(r) ? r.filter(it => it && it.id) : []; } catch (_) { return []; } });
     function hand() {
         return [
             /* ✍️ Saisir */
@@ -250,6 +252,7 @@
             H('faq', 'reglages', '📖', 'Lire la FAQ', 'Près de mille réponses aux questions qu’on se pose.', ['Réglages', 'FAQ / tuto'], {act: ['apprendre', 'trouver', 'lire'], obj: [], words: 'faq question reponse aide comment', go: async c => { if (window.LCNDA_UI?.openFaq) return window.LCNDA_UI.openFaq(c.q || ''); return maint('faq')(); }, target: 'maint:faq', module: 'maintenance'}),
             H('ia_settings', 'reglages', '🤖', 'Installer l’IA de l’ordinateur', 'Ollama sur cet ordinateur : rien ne part sur Internet.', ['Réglages', '🤖 IA'], {act: ['changer', 'importer'], obj: ['ia'], words: 'ia ollama installer modele', ro: false, go: maint('assistant_ia'), target: 'maint:assistant_ia', module: 'maintenance'}),
             H('je_veux_settings', 'reglages', '🧭', 'Régler « Je veux… »', 'Où il apparaît, 👣 Montre-moi, le nombre de réponses, l’historique.', ['Réglages', '🧭 Je veux…'], {act: ['changer'], obj: [], words: 'je veux guide intention aide', ro: false, go: maint('je_veux'), target: 'maint:je_veux', module: 'maintenance'}),
+            ...more(), // les fiches posées par d'autres fichiers (LCNDA_EXT.intentsHand : fn(H, gestes) → [fiches], ex. heritage-liens-archives.js)
         ];
     }
 

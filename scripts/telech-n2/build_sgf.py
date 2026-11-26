@@ -50,6 +50,9 @@ MODERN = {'ain': '01', 'aisne': '02', 'allier': '03', 'hautes alpes': '05', 'alp
           'var': '83', 'vaucluse': '84', 'vendee': '85', 'vienne': '86', 'haute vienne': '87', 'vosges': '88', 'yonne': '89'}
 
 
+ALIAS = {'haute rhin': 'haut rhin', 'maritimes alpes': 'alpes maritimes', 'cote du nord': 'cotes du nord', 'indre et loir': 'indre et loire'}
+
+
 def fold(s):
     s = unicodedata.normalize('NFD', str(s)).encode('ascii', 'ignore').decode().lower()
     return re.sub(r'[^a-z]+', ' ', s).strip()
@@ -68,7 +71,12 @@ def dep_codes(name):
     k = fold(name)
     if k == 'france':
         return ['FR']
-    return OLD.get(k) or ([MODERN[k]] if k in MODERN else None)
+    k = ALIAS.get(k, k)
+    if k in OLD or k in MODERN:
+        return OLD.get(k) or [MODERN[k]]
+    # noms coupés dans les tableaux (« CHARENTE-INFERIEU », « PYRENEES-ORIENTAL ») : un seul nom qui commence ainsi
+    hits = [x for x in list(OLD) + list(MODERN) if len(k) >= 10 and x.startswith(k)]
+    return (OLD.get(hits[0]) or [MODERN[hits[0]]]) if len(hits) == 1 else None
 
 
 def check_licence():
@@ -101,7 +109,10 @@ def build(theme, out_dir):
     for f in files:
         b = wm.get(f'https://www.insee.fr/fr/statistiques/fichier/{sid}/{f}', 'application/vnd.ms-excel')
         s = xlrd.open_workbook(file_contents=b).sheet_by_index(0)
-        hdr_row = next(r for r in range(4, 12) if str(s.cell_value(r, 0)).strip().startswith("Nom de l'unit"))
+        hdr_row = next((r for r in range(4, min(30, s.nrows)) if str(s.cell_value(r, 0)).strip().startswith("Nom de l'unit")), None)
+        if hdr_row is None:
+            print(f'{f} : pas de ligne d’intitulés, tableau laissé de côté', file=sys.stderr)
+            continue
         tid = f.rsplit('.', 1)[0].upper()
         ttitle = str(s.cell_value(3, 1)).strip()
         ttitle = re.sub(r'^[A-Z0-9_]+ : ', '', ttitle)

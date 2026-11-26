@@ -91,6 +91,7 @@ try {
         require_once __DIR__ . '/lib/donnees_maj.php';
         donnees_maj_api($action, $isWrite, is_array($payload) ? $payload : []);
     }
+    if (is_string($action) && str_starts_with($action, 'tn_')) { require_once __DIR__ . '/lib/sources_n1.php'; tn_dispatch($action, $isWrite, is_array($payload) ? $payload : []); } // 🏛 Lot N, archives et mémoire : installer / lire les packs (lib/sources_n1.php)
     if (!$isWrite && $action === 'website_live_rev') { // 🌐 aperçu en direct : sa révision, demandée chaque seconde (sans ouvrir la base ; lib/website_php.php)
         require_once __DIR__ . '/lib/website_php.php';
         website_live_rev((string) ($_GET['token'] ?? ''));

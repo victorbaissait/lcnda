@@ -72,6 +72,7 @@ const REVIEWED_KEPT = {
     'genealogie-recent-colors': 'les couleurs récentes du sélecteur : un choix d’apparence, sans fiche',
     'genealogie-recent-fonts': 'les polices récentes : idem', 'genealogie-recent-icons': 'les icônes récentes : idem', 'genealogie-glyphs-recent': 'les caractères récents : idem',
     'lcnda-vx-recent-colors': 'les couleurs récentes du dessin : idem', 'genealogie-tresors-recent': 'les derniers trésors ouverts (noms d’outils, pas de fiche)',
+    'genealogie-donnees-recents': 'les dernières données ouvertes (identifiants de listes, pas de fiche)',
     'lcnda-lot-derniere': 'la dernière recette des traitements par lot : un réglage', 'genealogie-retouch-side-closed': 'le panneau de la retouche replié : un choix de mise en page',
     'genealogie-menu-own-last': '« Mettre mes onglets à la fin du menu » : un vrai choix',
     'lcnda-calculette-ouverte': 'la calculette ouverte ou non : un choix de mise en page', 'genealogie-tx-trouve-ouvert': '« Ce que l’app a trouvé » ouvert : un choix de mise en page',
