@@ -124,7 +124,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/droit-pouvoir.css?v=1">
     <link rel="stylesheet" href="assets/css/tout-sur.css?v=5">
     <link rel="stylesheet" href="assets/css/boussole-rues.css?v=1">
-    <link rel="stylesheet" href="assets/css/commune-culture.css?v=2">
+    <link rel="stylesheet" href="assets/css/commune-culture.css?v=3">
     <link rel="stylesheet" href="assets/css/chateaux-territoires.css?v=1">
     <link rel="stylesheet" href="assets/css/fiche-edifice.css?v=2">
     <link rel="stylesheet" href="assets/css/histoire-autour.css?v=1">

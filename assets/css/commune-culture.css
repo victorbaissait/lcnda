@@ -4,7 +4,7 @@
 .cc-place:empty{display:none}
 .cc-place .cc-panel[data-cc-part="histoire"],.cc-place .cc-panel[data-cc-part="works"]{grid-column:1/-1}
 .cc-src{margin:.6rem 0 0;font-size:.82em;opacity:.78}
-.cc-more summary{cursor:pointer;margin:.4rem 0}
+.cc-more summary{cursor:pointer;margin:.4rem 0;list-style:none}.cc-more summary::-webkit-details-marker{display:none}
 .cc-wiki p{margin:.3rem 0;line-height:1.5}.cc-wiki h5{margin:.7rem 0 .2rem;font-size:.95em}
 .cc-wiki-more{max-height:28rem;overflow:auto;padding-right:.4rem}
 .cc-readmore{margin:.4rem 0 0}

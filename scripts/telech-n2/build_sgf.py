@@ -50,7 +50,7 @@ MODERN = {'ain': '01', 'aisne': '02', 'allier': '03', 'hautes alpes': '05', 'alp
           'var': '83', 'vaucluse': '84', 'vendee': '85', 'vienne': '86', 'haute vienne': '87', 'vosges': '88', 'yonne': '89'}
 
 
-ALIAS = {'haute rhin': 'haut rhin', 'maritimes alpes': 'alpes maritimes', 'cote du nord': 'cotes du nord', 'indre et loir': 'indre et loire'}
+ALIAS = {'haute rhin': 'haut rhin', 'loire et cher': 'loir et cher', 'vancluse': 'vaucluse', 'audb': 'aube', 'hatue savoie': 'haute savoie', 'meurth et mosell': 'meurthe et moselle', 'basses pyreness': 'basses pyrenees', 'maritimes alpes': 'alpes maritimes', 'cote du nord': 'cotes du nord', 'indre et loir': 'indre et loire'}
 
 
 def fold(s):

@@ -67,7 +67,7 @@
         S({key: 'sto', group: 'guerres', country: 'France', icon: '🏭', label: 'STO, requis du travail obligatoire (1942-1945)', source: 'FranceArchives · SHD Caen (DAVCC)',
             home: 'https://francearchives.gouv.fr/', verified: 'partiel', years: [1900, 1945], where: ['fiche', 'militaire'], theme: 'guerres', words: 'sto service du travail obligatoire requis travail obligatoire allemagne 1943 refractaire',
             build: p => francearchives(['STO', 'travail obligatoire', clean(p.last)]),
-            rel: {countries: ['fr'], born: [1905, 1927], diedIn: [], base: 0.4, deadOnly: true, why: () => T('Né entre 1905 et 1927 : peut-être requis du STO ; dossiers au SHD de Caen et dans les archives des départements')}}),
+            rel: {countries: ['fr'], born: [1905, 1927], sex: 'male', base: 0.4, why: () => T('Né entre 1905 et 1927 : peut-être requis du STO ; dossiers au SHD de Caen et dans les archives des départements')}}),
         S({key: 'medaille_resistance', group: 'guerres', country: 'France', icon: '🎖', label: 'Médaille de la Résistance — base des médaillés', source: 'Ordre de la Libération',
             home: 'https://www.ordredelaliberation.fr/', copy: 'name', years: [1870, 1945], where: ['fiche', 'militaire', 'recompense'], theme: 'guerres', sensitive: true, words: 'medaille de la resistance medaille resistant resistance decoration ordre de la liberation',
             rel: {countries: ['fr'], born: [1870, 1930], profiles: ['resistant'], require: ['profile'], base: 0.3, why: () => T('Un résistant : la base des médaillés de la Résistance (Ordre de la Libération)')}}),
