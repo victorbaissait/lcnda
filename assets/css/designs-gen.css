@@ -7038,7 +7038,7 @@
   :root[data-lc-density] .gt-life{gap:calc(3px * var(--lc-sp))}
   :root[data-lc-density] .gt-legend{gap:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
   :root[data-lc-density] .gt-legend{padding:calc(5px * var(--lc-sp)) calc(7px * var(--lc-sp))}
-  :root[data-lc-density] .gt-yearbox{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .gt-yearbox{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 }
 /* listes-personnes.css */
 :root[data-lc-density] .lp-cell{gap:calc(3px * var(--lc-sp))}
