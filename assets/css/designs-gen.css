@@ -6730,6 +6730,9 @@
   :root[data-lc-density] .cx-tool-btns{gap:calc(3px * var(--lc-sp))}
   :root[data-lc-density] .cx-tool-b{padding:0 calc(5px * var(--lc-sp))}
 }
+:root[data-lc-density] .cx-panel > .cx-panel-head{padding-bottom:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-panel > .cx-panel-head{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cx-panel > .cx-panel-acts{padding:calc(8px * var(--lc-sp)) 0 calc(4px * var(--lc-sp))}
 /* paniers.css */
 :root[data-lc-density] .pn-b,:root[data-lc-density] .pn-dlg .pn-b{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .pn-b,:root[data-lc-density] .pn-dlg .pn-b{padding:calc(7px * var(--lc-sp)) calc(13px * var(--lc-sp))}

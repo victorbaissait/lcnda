@@ -497,3 +497,8 @@ dialog.cx-put { width: var(--modal-m); max-width: 94vw; height: min(680px, 90vh)
 :root[data-theme="dark"] .cx-tool-b { background: #1c1f24; border-color: #454b55; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cx-tool-b { background: #1c1f24; border-color: #454b55; } }
 @media (max-width: 640px) { .cx-tool-btns { margin: 0 3px; gap: 3px; } .cx-tool-b { min-width: 28px; padding: 0 5px; } }
+/* le panneau du panier : l'en-tête (choix du panier · 🗑 Vider · ×) et les boutons du bas restent visibles même avec 40 éléments */
+.cx-panel > .cx-panel-head { position: sticky; top: -1px; z-index: 2; background: var(--card-bg, #fff); padding-bottom: 8px; display: flex; gap: 8px; align-items: center; }
+.cx-panel > .cx-panel-acts { position: sticky; bottom: -1px; z-index: 2; background: var(--card-bg, #fff); padding: 8px 0 4px; box-shadow: 0 -6px 8px -6px rgba(0,0,0,.18); }
+.cx-panel .cx-clear-top { margin-left: auto; }
+:root[data-theme="dark"] .cx-panel > .cx-panel-head, :root[data-theme="dark"] .cx-panel > .cx-panel-acts { background: var(--card-bg, #222); }

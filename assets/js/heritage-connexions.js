@@ -164,7 +164,7 @@
         const b = await loadBasket(force || !basket); if (!panel) return;
         const items = b.items || [];
         panel.innerHTML = `<div class="cx-panel-head">${basketSelect(b, 'data-cx-bsel')}
-            <button type="button" class="icon-button" data-cx-close aria-label="${esc(T('Fermer'))}">×</button></div>
+            ${items.length && !kiosk() ? `<button type="button" class="icon-button cx-clear-top" data-cx-clear title="${esc(T('Vider ce panier ({n})', {n: nf(items.length)}))}" aria-label="${esc(T('Vider ce panier ({n})', {n: nf(items.length)}))}">🗑</button>` : ''}<button type="button" class="icon-button" data-cx-close title="${esc(T('Fermer le panneau'))}" aria-label="${esc(T('Fermer le panneau'))}">×</button></div>
             ${items.length ? `<ul class="cx-plist">${items.map(it => `<li draggable="${settings().dnd ? 'true' : 'false'}" data-cx-bi="${it.id}"><span class="cx-ico" aria-hidden="true">${icon(it)}</span><span class="cx-t"><b>${esc(it.title)}</b>${it.kind === 'set' ? ` <small class="cx-n">${esc(plural(setCount(it), T('ligne')))}</small>` : ''}${it.value && it.kind !== 'set' ? `<small>${esc(String(it.value).slice(0, 140))}</small>` : ''}${it.origin?.label ? `<small class="muted">${esc(T('de :'))} ${esc(it.origin.label)}</small>` : ''}</span>
                 ${it.origin && (it.origin.open || it.origin.url || it.origin.id) ? `<button type="button" class="link-button" data-cx-go="${it.id}" title="${esc(T('Revenir là d’où ça vient'))}">↗</button>` : ''}<button type="button" class="icon-button small" data-cx-x="${it.id}" aria-label="${esc(T('Retirer du panier'))}" title="${esc(T('Retirer du panier'))}">×</button></li>`).join('')}</ul>
                 <div class="cx-panel-acts"><button type="button" class="button small" data-cx-put>📍 ${esc(T('Mettre dans…'))}</button><button type="button" class="button small secondary" data-cx-keep>⭐ ${esc(T('Garder comme liste'))}</button><button type="button" class="button small secondary danger" data-cx-clear>${esc(T('Tout retirer'))}</button></div>
@@ -179,10 +179,10 @@
         panel.querySelectorAll('[data-cx-x]').forEach(x => x.addEventListener('click', () => removeFromBasket([Number(x.dataset.cxX)])));
         panel.querySelectorAll('[data-cx-go]').forEach(x => x.addEventListener('click', () => openOrigin(byId(x.dataset.cxGo))));
         panel.querySelector('[data-cx-put]')?.addEventListener('click', e => putInto(items, {anchor: e.currentTarget, fromBasket: true, dests: bOf(b, b.basket_id)?.dests}));
-        panel.querySelector('[data-cx-clear]')?.addEventListener('click', async () => {
+        panel.querySelectorAll('[data-cx-clear]').forEach(btn => btn.addEventListener('click', async () => {
             const r = await post('basket_clear', {basket_id: b.basket_id}); setCountFrom(r); refreshPanel();
             undoToast(T('Panier vidé ({n})', {n: plural(r.removed.length, T('chose'), T('choses'))}), {icon: '🧺', undo: async () => { setCountFrom(await post('basket_restore', {rows: r.removed})); refreshPanel(); }});
-        });
+        }));
         panel.querySelector('[data-cx-keep]')?.addEventListener('click', () => keepAsList(items, b));
         panel.querySelector('[data-cx-bsel]')?.addEventListener('change', async e => { await switchBasket(e.target.value, b); drawPanel(true); });
         panel.querySelector('[data-cx-brename]')?.addEventListener('click', async () => { await editBasket(b.basket_id); drawPanel(true); });
