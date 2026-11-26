@@ -55,7 +55,7 @@
 
     /* ═════════════ réglages ═════════════ */
     const KEY = 'genealogie-connexions', CUR = 'genealogie-connexions-panier', RECENT = 'genealogie-connexions-recents';
-    const DEF = {on: true, multi: false, ctx: true, dnd: true};
+    const DEF = {on: true, multi: false, ctx: true, dnd: true, ask: 'cur'}; // ask : 'cur' = dans le panier en cours (« Changer ▾ » dans le message), 'always' = me demander à chaque fois
     const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const settings = () => ({...DEF, ...(readJ(KEY, {}) || {})});
@@ -89,7 +89,6 @@
     /* ═════════════ 🧺 le panier ═════════════ */
     let count = null, basket = null, loading = null; // basket : {basket_id, baskets, items} chargé à la demande
     let baskets = null; // la liste des paniers (nom, emoji, couleur, nombre, date) : lue avec le panier
-    const basketName = id => { const b = (baskets || []).find(x => Number(x.id) === Number(id)); return b && (baskets.length > 1 || b.name !== 'Mon panier') ? `${b.icon ? b.icon + ' ' : ''}${b.name}` : ''; };
     async function loadBasket(force = false) {
         if (basket && !force) return basket;
         if (loading && !force) return loading;
@@ -97,22 +96,89 @@
         return loading;
     }
     const setCountFrom = r => { if (r && r.count != null) { count = Number(r.count); paintPill(); } basket = null; };
-    async function take(items, {quiet = false, origin = null, basketId = null} = {}) {
+    /* 🧺 dans quel panier ? — par défaut le panier en cours, nommé dans le message avec « Changer ▾ » ; Alt+clic, clic droit ou appui long
+     * sur un 🧺 (ou Réglages → « Me demander à chaque fois ») : le petit menu « Dans quel panier ? » avant de mettre. ask: 'multi' (barres de
+     * sélection, Exporter) : le menu s'il y a plusieurs choses et plusieurs paniers. */
+    let forceAsk = 0, forceAt = null, nextTo = null, lastPt = null;
+    document.addEventListener('pointerdown', e => { lastPt = {x: e.clientX, y: e.clientY}; }, true);
+    const ensureTree = async () => { if (!baskets || !folders) await loadTree(); return baskets || []; };
+    const bName = id => bOf(null, id)?.name || T('Mon panier');
+    const ptOf = a => { if (a instanceof Element && a.isConnected) { const r = a.getBoundingClientRect(); if (r.width || r.height) return {x: r.left, y: r.bottom + 6}; } if (a && !(a instanceof Element) && Number.isFinite(a.x)) return a; return lastPt || {x: innerWidth / 2 - 120, y: innerHeight / 3}; };
+    /** « Dans quel panier ? » : le panier en cours (✓) en premier, puis par 📁 dossier ; « ＋ Nouveau panier… » demande le nom sur place → {id, made} ou null */
+    async function askBasket(anchor, {n = 0} = {}) {
+        const list = await ensureTree(), cur = curBasket() || Number(list[0]?.id) || 0;
+        const lab = x => `${crumbs(x).replace(/^\S+\s/u, '')} (${nf(x.count)})`;
+        const groups = [list.filter(x => Number(x.id) !== cur && !Number(x.folder_id)), ...(folders || []).map(f => list.filter(x => Number(x.id) !== cur && Number(x.folder_id) === Number(f.id)))].filter(g => g.length);
+        return new Promise(res => {
+            let done = false; const end = v => { if (done) return; done = true; res(v); };
+            const c = bOf(null, cur), rows = [...(c ? [{icon: '✓', label: lab(c), help: T('le panier en cours'), run: () => end({id: cur})}] : []),
+                ...groups.flatMap(g => ['-', ...g.map(x => ({icon: x.icon || '🧺', label: lab(x), run: () => end({id: Number(x.id)})}))]), '-', {icon: '＋', label: T('Nouveau panier…'), run: () => {}}];
+            if (UI()._menuPoint) UI()._menuPoint = null;
+            const pop = UI().menuAt?.(ptOf(anchor), rows, {title: n > 1 ? T('Dans quel panier ? ({n})', {n: nf(n)}) : T('Dans quel panier ?'), onClose: () => setTimeout(() => end(null), 50)});
+            const m = pop?.el; if (!m) { end(c ? {id: cur} : null); return; }
+            m.classList.add('cx-bpick');
+            const nb = m.querySelector(`[data-i="${rows.length - 1}"]`);
+            nb?.addEventListener('click', e => { e.stopPropagation(); e.preventDefault();
+                const form = document.createElement('div'); form.className = 'cx-bnew';
+                form.innerHTML = `<input type="text" maxlength="120" data-cx-bnname placeholder="${esc(T('ex. Mariage MAZAUD 1813'))}" aria-label="${esc(T('Le nom du panier'))}">${(folders || []).length ? `<select data-cx-bnf aria-label="${esc(T('Dans le dossier'))}">${folderOptions(0)}</select>` : ''}
+                    <span class="cx-bnew-acts"><button type="button" class="button small secondary" data-cx-bnno>${esc(T('Annuler'))}</button><button type="button" class="button small" data-cx-bnok>🧺 ${esc(T('Créer et mettre'))}</button></span>`;
+                nb.replaceWith(form); const inp = form.querySelector('[data-cx-bnname]'); inp.focus();
+                const ok = async () => { const name = inp.value.trim(); if (!name) { UI().fail ? UI().fail(inp, T('Donne un nom au panier.')) : inp.focus(); return; }
+                    try { const r = keepTree(await post('basket_new', {name, folder_id: Number(form.querySelector('[data-cx-bnf]')?.value) || 0})); end({id: Number(r.id), made: true}); pop.close(); } catch (x) { toast(x.message, 'error'); } };
+                form.querySelector('[data-cx-bnok]').addEventListener('click', ok);
+                form.querySelector('[data-cx-bnno]').addEventListener('click', () => pop.close());
+                inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); ok(); } });
+            });
+        });
+    }
+    async function take(items, {quiet = false, origin = null, basketId = null, anchor = null, ask = null} = {}) {
+        const ev = window.event, alt = !!(ev && ev.altKey && /click|mouseup|pointerup/.test(ev.type));
+        const forced = Date.now() - forceAsk < 1500, at = anchor || (forced ? forceAt : null) || (ev?.target instanceof Element ? ev.target.closest('button') : null); forceAsk = 0;
         items = (items || []).filter(Boolean).map(it => (origin && !it.origin ? {...it, origin} : it));
         if (!items.length) return null;
         if (kiosk()) { toast(T('Mode consultation : rien ne peut être mis de côté.')); return null; }
+        const prevCur = curBasket(); let made = [];
+        if (!basketId && nextTo && Date.now() < nextTo.until) { basketId = nextTo.id; if (nextTo.made) made = [nextTo.made]; } // choisi dans la fenêtre « Exporter »
+        nextTo = null;
+        if (!basketId && !quiet && (forced || alt || ask === true || settings().ask === 'always' || (ask === 'multi' && items.length > 1 && (await ensureTree()).length > 1))) {
+            const c = await askBasket(at, {n: items.length}); if (!c) return null;
+            basketId = c.id; if (c.made) made = [c.id];
+        }
         if (basketId && Number(basketId) !== curBasket()) { writeJ(CUR, Number(basketId)); basket = null; count = null; } // le panier choisi devient celui en cours (retenu)
         const r = await post('basket_add', {basket_id: curBasket(), items});
         setCountFrom(r); remember(items);
-        if (!quiet) {
-            const n = r.ids.length, bn = basketName(r.basket_id);
-            const msg = n ? (bn ? T('🧺 {n} dans « {b} »', {n: plural(n, T('chose'), T('choses')), b: bn}) : T('🧺 {n} au panier', {n: plural(n, T('chose'), T('choses'))})) + (r.skipped ? ` ${T('({n} déjà dedans)', {n: r.skipped})}` : '') : T('Déjà dans le panier.');
-            if (n) undoToast(msg, {icon: '🧺', undo: async () => { setCountFrom(await post('basket_remove', {ids: r.ids})); refreshPanel(); }, redo: async () => { setCountFrom(await post('basket_add', {basket_id: r.basket_id, items})); refreshPanel(); }});
-            else toast(msg);
-        }
+        if (!bOf(null, r.basket_id)) { await loadTree().catch(() => {}); paintPill(); }
+        if (!quiet) addedToast(r, items, {prevCur, made});
         refreshPanel();
         return r;
     }
+    /** « 🧺 2 choses dans « Mariage MAZAUD 1813 » » · « Changer ▾ » (les déplace, ce panier devient celui en cours) · « ↶ Annuler » (exact : le panier d'avant redevient celui en cours) */
+    function addedToast(r, items, {prevCur = 0, made = []} = {}) {
+        const n = r.ids.length, bn = bName(r.basket_id);
+        if (!n) return toast(T('Déjà dans « {b} ».', {b: bn}));
+        const msg = T('🧺 {n} dans « {b} »', {n: plural(n, T('chose'), T('choses')), b: bn}) + (r.skipped ? ` ${T('({n} déjà dedans)', {n: r.skipped})}` : '');
+        const back = async () => { setCountFrom(await post('basket_remove', {ids: r.ids})); for (const id of made) await post('basket_delete', {basket_id: id}).catch(() => {});
+            if (prevCur !== curBasket()) writeJ(CUR, prevCur); basket = null; await loadBasket(true).catch(() => {}); refreshPanel(); };
+        const redo = made.length ? null : async () => { if (Number(r.basket_id) !== curBasket()) writeJ(CUR, Number(r.basket_id)); basket = null; const r2 = await post('basket_add', {basket_id: r.basket_id, items}); setCountFrom(r2); await loadBasket(true).catch(() => {}); refreshPanel(); addedToast(r2, items, {prevCur}); };
+        const doUndo = async () => { try { await back(); } catch (x) { toast(T('Impossible d’annuler : {err}', {err: x.message || x}), 'error', {retry: doUndo}); return; }
+            toast(T('↶ Annulé : {what}', {what: msg}), '', redo ? {action: {label: T('↷ Rétablir'), run: redo}} : {}); };
+        const change = async e => {
+            const btn = e?.target?.closest?.('button'), tst = btn?.closest('.toast');
+            const c = await askBasket(btn, {n}); if (btn) btn.disabled = false;
+            if (!c || Number(c.id) === Number(r.basket_id)) return;
+            tst?.close?.();
+            try { await post('basket_remove', {ids: r.ids}); writeJ(CUR, Number(c.id)); basket = null;
+                const r2 = await post('basket_add', {basket_id: c.id, items}); setCountFrom(r2); await loadTree().catch(() => {}); paintPill(); refreshPanel();
+                addedToast(r2, items, {prevCur, made: [...made, ...(c.made ? [c.id] : [])]}); }
+            catch (x) { toast(x.message, 'error'); }
+        };
+        return toast(msg, '', {kind: 'undo', action: {label: T('↶ Annuler'), run: doUndo}, actions: [{label: T('Changer ▾'), title: T('Mettre plutôt dans un autre panier (ou un nouveau)'), close: false, run: change}]});
+    }
+    /** un bouton 🧺 (au bout d'un résultat, d'une carte, d'une barre…) : Alt+clic, clic droit ou appui long → « Dans quel panier ? » avant de mettre */
+    const bkBtn = el => { const b = el?.closest?.('button, [role="button"]'); if (!b || b.disabled || b.id === 'cx-pill' || b.closest('.ui-actmenu, .cx-panel, .toast, .ui-export-formats')) return null;
+        if (b.matches('[data-rk-bk], [data-cf-act="bk"], [data-cx-tobasket]')) return b; const t = (b.textContent || '').trim(); return t.length <= 60 && t.includes('🧺') ? b : null; };
+    document.addEventListener('contextmenu', e => { if (!enabled() || kiosk()) return; const b = bkBtn(e.target); if (!b) return; e.preventDefault(); e.stopPropagation(); forceAsk = Date.now(); forceAt = b; b.click(); }, true);
+    document.addEventListener('click', e => { if (!e.altKey || !e.isTrusted || !enabled()) return; const b = bkBtn(e.target); if (b) { forceAsk = Date.now(); forceAt = b; } }, true);
     async function removeFromBasket(ids, {quiet = false} = {}) {
         const r = await post('basket_remove', {ids}); setCountFrom(r); refreshPanel();
         if (!quiet && r.removed?.length) undoToast(T('{n} retirées du panier', {n: plural(r.removed.length, T('chose'), T('choses'))}), {icon: '🧺', undo: async () => { setCountFrom(await post('basket_restore', {rows: r.removed})); refreshPanel(); }});
@@ -132,6 +198,7 @@
             pill.setAttribute('aria-haspopup', 'dialog');
             if (hiddenBar) { pill.classList.add('is-float'); document.body.appendChild(pill); } else meta.insertBefore(pill, meta.querySelector('.status-dot') || null);
             pill.addEventListener('click', () => openBasket(pill));
+            pill.addEventListener('mouseenter', () => { if (!baskets) ensureTree().then(paintPill).catch(() => {}); }); // le nom du panier en cours dans la bulle
             pill.addEventListener('dragover', e => { if (dragItems(e) !== null || e.dataTransfer?.types?.includes('text/plain')) { e.preventDefault(); pill.classList.add('is-over'); } });
             pill.addEventListener('dragleave', () => pill.classList.remove('is-over'));
             pill.addEventListener('drop', e => { pill.classList.remove('is-over'); const txt = e.dataTransfer?.getData('text/plain'); if (txt && dragItems(e) === null) { e.preventDefault(); take([{kind: 'text', title: txt.slice(0, 120), value: txt.length > 120 ? txt : '', origin: screenOrigin()}]); } });
@@ -139,7 +206,7 @@
         pill.hidden = false;
         const cb = (baskets || []).find(x => Number(x.id) === (curBasket() || Number(baskets[0]?.id)));
         pill.innerHTML = `<span aria-hidden="true">${esc(cb?.icon || '🧺')}</span><b>${esc(nf(count))}</b>`;
-        pill.title = T('Le panier : {n} (cliquer pour l’ouvrir, glisser une chose dessus pour l’y mettre)', {n: plural(count, T('chose'), T('choses'))}) + (cb && baskets.length > 1 ? ` — ${cb.name}` : '');
+        pill.title = T('Le panier : {n} (cliquer pour l’ouvrir, glisser une chose dessus pour l’y mettre)', {n: plural(count, T('chose'), T('choses'))}) + (cb ? ` — ${T('en cours : « {b} »', {b: cb.name})}` : '');
         pill.setAttribute('aria-label', T('Le panier : {n}', {n: plural(count, T('chose'), T('choses'))}));
     }
     const boot = () => { if (!enabled() || count != null) return; api('cx_count', {basket_id: curBasket()}).then(r => { if (count != null) return; count = Number(r.count) || 0; paintPill(); }) /* une prise faite entre-temps a déjà le bon nombre */.catch(() => {}); };
