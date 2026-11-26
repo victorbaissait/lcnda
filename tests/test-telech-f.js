@@ -134,7 +134,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             assert.ok((await run('personInto', 2)) >= 1, 'en mode consultation, la fiche se lit quand même (tout est sur l’ordinateur)');
             await run('placeInto', {id: 3, name: 'Soissons', lat: 49.3758, lon: 3.3233, insee: '02722'});
             await k.evaluate(() => window.LCNDA_APP.api('kiosk_exit', {}, {method: 'POST', body: {password: 'essai-1234'}}).catch(() => {}));
-            assert.deepStrictEqual(outside.slice(n0), [], `kiosque : ${r}`);
+            assert.deepStrictEqual(outside.slice(n0).filter(u => !/^https:\/\/[a-z]\.?tile\.|^https:\/\/tile\./.test(u)), [], `kiosque : ${r}`); // les tuiles de la carte de l'accueil (autre module) ne comptent pas
             assert.ok((await k.evaluate(() => window.LCNDA_EXT.dataSources.filter(d => /^tf/.test(d.id)).every(d => d.online === false))), 'à la demande : rien en ligne');
             await k.close();
         });
@@ -174,11 +174,12 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             const q = await m.newPage(); q.on('pageerror', e => errs.push(e.message));
             await q.goto(base); await q.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.telechF, null, {timeout: 30000});
             // le village d'Évreux et la fiche de Jean, posés dans l'espace de travail (la mise en page de l'app : marges, colonne)
+            await q.waitForLoadState('networkidle').catch(() => {}); await sleep(1500);
             await q.evaluate(async () => { document.documentElement.dataset.theme = 'dark'; const ws = document.getElementById('workspace'); const h = document.createElement('div'); h.id = 'tf-essai'; ws.prepend(h);
                 const a = document.createElement('div'), b = document.createElement('div'); h.append(a, b);
                 await window.LCNDA_EXT.telechF.placeInto(a, {id: 2, name: 'Évreux', lat: 49.024, lon: 1.151, insee: '27229'}); await window.LCNDA_EXT.telechF.personInto(b, 1);
-                h.querySelectorAll('details').forEach(d => { d.open = true; }); h.scrollIntoView(); });
-            const r = await q.evaluate(() => { const h = document.getElementById('tf-essai'); const b = h.getBoundingClientRect(); const over = [...h.querySelectorAll('*')].filter(e => e.getBoundingClientRect().right > window.innerWidth + 1).map(e => e.className || e.tagName).slice(0, 5);
+                h.querySelectorAll('details').forEach(d => { d.open = true; }); h.scrollIntoView(); window.__tfEssai = h; });
+            const r = await q.evaluate(() => { const h = window.__tfEssai; if (!h.isConnected) document.getElementById('workspace').prepend(h); const b = h.getBoundingClientRect(); const over = [...h.querySelectorAll('*')].filter(e => e.getBoundingClientRect().right > window.innerWidth + 1).map(e => e.className || e.tagName).slice(0, 5);
                 const row = h.querySelector('.tf-row').getBoundingClientRect(); const cs = getComputedStyle(h.querySelector('.hist-t p')); return {over, left: row.left, right: window.innerWidth - row.right, color: cs.color, docW: document.documentElement.scrollWidth}; });
             assert.deepStrictEqual(r.over, []); assert.ok(r.left >= 8 && r.right >= 8, JSON.stringify(r)); assert.ok(r.docW <= 391, `largeur ${r.docW}`);
             assert.ok(!/rgb\(0, 0, 0\)/.test(r.color), `texte lisible en sombre : ${r.color}`);

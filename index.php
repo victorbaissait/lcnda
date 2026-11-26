@@ -103,7 +103,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/telech-d.css?v=2">
     <link rel="stylesheet" href="assets/css/telech-c.css?v=1">
     <link rel="stylesheet" href="assets/css/telech-b.css?v=1">
-    <link rel="stylesheet" href="assets/css/telech-e.css?v=1">
+    <link rel="stylesheet" href="assets/css/telech-e.css?v=2">
     <link rel="stylesheet" href="assets/css/telech-f.css?v=1">
     <link rel="stylesheet" href="assets/css/epoque-travail.css?v=1">
     <link rel="stylesheet" href="assets/css/lot8-ciel-metier.css?v=1">
@@ -1727,7 +1727,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-d-traduire.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-c.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-b-village.js?v=2" defer></script>
-<script src="assets/js/heritage-telech-e.js?v=1" defer></script>
+<script src="assets/js/heritage-telech-e.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-f.js?v=1" defer></script>
 <script src="assets/js/heritage-fiche-edifice.js?v=3" defer></script>
 <script src="assets/js/app-suivi-core.js?v=2" defer></script>

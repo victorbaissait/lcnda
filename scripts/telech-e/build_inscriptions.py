@@ -85,7 +85,10 @@ def main():
         sys.exit('La licence de la notice Zenodo a changé : relire ' + REC)
     rows = []
     for f in rec['files']:
-        z = zipfile.ZipFile(io.BytesIO(wm.get(f['links']['self'], '*/*')))
+        url = f['links']['self']
+        if not url.startswith('https://zenodo.org/api/records/3575155/files/'):   # une adresse venue de la réponse : seulement ce dépôt
+            sys.exit('Adresse de fichier inattendue dans la notice Zenodo : ' + url[:120])
+        z = zipfile.ZipFile(io.BytesIO(wm.get(url, '*/*')))
         for n in z.namelist():
             if n.endswith('.xml'):
                 r = parse(z.read(n).decode('utf-8', 'replace'))

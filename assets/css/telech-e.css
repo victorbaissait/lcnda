@@ -3,8 +3,9 @@
 .te-ul { margin: 6px 0; }
 .te-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
 .te-src-link { font-size: 12px; white-space: nowrap; }
-.te-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.te-more > summary { list-style: none; cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
 .te-more[open] > summary { margin-bottom: 4px; }
+.te-more > summary::-webkit-details-marker { display: none; }
 .te-latin { display: block; margin: 3px 0 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); font-style: italic; font-size: 13px; quotes: "« " " »"; overflow-wrap: anywhere; }
 .hist-t > p > .te-latin { display: inline; border: 0; padding: 0; }
 .te-actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
