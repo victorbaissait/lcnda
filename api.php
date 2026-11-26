@@ -11617,48 +11617,14 @@ function delete_research_note(PDO $pdo,array $data): array
 
 function merge_duplicate_places(PDO $pdo,array $data): array
 {
-    // Regroupe les lieux en double (ex : "Pernay" créé une 2e fois sans coordonnées ni
-    // subdivision parce que le pays saisi ne correspondait pas exactement à l'entrée existante).
-    // On conserve la fiche la plus complète (coordonnées, subdivision/county/state renseignés,
-    // population la plus élevée) et on reporte les références (events.place_id, census_records.place_id)
-    // avant de supprimer les doublons vides. Confirmation requise pour éviter une fusion accidentelle.
+    // Lieux en double (« Pernay » et « Pernay, Indre-et-Loire, Centre-Val de Loire, France » d'un import) : la détection et la
+    // fusion complète (toutes les tables, données les plus riches gardées, ↶) sont dans lib/lieux_doublons.php. Ici, seulement
+    // les fusions sûres : deux communes homonymes de départements différents ne sont jamais réunies. Confirmation requise.
     $confirm=($data['confirm']??'')==='yes';
     if(!$confirm)throw new RuntimeException('Confirmation requise');
-    $normalize=function(string $s): string {
-        // ascii_fold() plutôt que l'extension intl (facultative) : même regroupement quel que soit le PHP.
-        $s=ascii_fold(mb_strtolower(trim($s)));
-        return preg_replace('/\s+/', ' ', $s);
-    };
-    $places=$pdo->query('SELECT id,name,subdivision,county,state,country,latitude,longitude,population,source_id FROM places')->fetchAll();
-    $groups=[];
-    foreach($places as $place){
-        $key=$normalize($place['name']);
-        $groups[$key][]=$place;
-    }
-    $merges=[];
-    foreach($groups as $key=>$rows){
-        if(count($rows)<2)continue;
-        // Score : coordonnées + subdivision/county/state renseignés + population, puis id le plus ancien
-        $score=function($row){
-            return ($row['latitude']!==null && $row['longitude']!==null ? 100 : 0)
-                + (trim((string)($row['subdivision']??''))!=='' ? 10 : 0)
-                + (trim((string)($row['county']??''))!=='' ? 5 : 0)
-                + (trim((string)($row['state']??''))!=='' ? 5 : 0)
-                + (int)($row['population']??0)/1000000;
-        };
-        usort($rows, fn($a,$b)=>$score($b)<=>$score($a) ?: (int)$a['id']<=>(int)$b['id']);
-        $survivor=$rows[0];
-        $duplicates=array_slice($rows,1);
-        $dupIds=array_map(fn($r)=>(int)$r['id'],$duplicates);
-        if(!$dupIds)continue;
-        $marks=implode(',',array_fill(0,count($dupIds),'?'));
-        $pdo->prepare("UPDATE events SET place_id=? WHERE place_id IN ($marks)")->execute(array_merge([(int)$survivor['id']],$dupIds));
-        $pdo->prepare("UPDATE census_records SET place_id=? WHERE place_id IN ($marks)")->execute(array_merge([(int)$survivor['id']],$dupIds));
-        $pdo->prepare("DELETE FROM places WHERE id IN ($marks)")->execute($dupIds);
-        $merges[]=['survivor_id'=>(int)$survivor['id'],'survivor_name'=>$survivor['name'],'removed_ids'=>$dupIds];
-    }
-    if($merges)log_change($pdo,'place',null,'merge-duplicates','Fusion de '.count($merges).' groupe(s) de lieux en double',null,['merges'=>$merges]);
-    return ['merged_groups'=>count($merges),'details'=>$merges];
+    require_once __DIR__.'/lib/lieux_doublons.php';
+    $r=ld_merge_safe($pdo,$data);
+    return ['merged_groups'=>$r['merged'],'details'=>$r['details']??[],'undo_id'=>$r['undo_id']];
 }
 
 /** « human » ou « animal » : une personne et un animal ne sont jamais doublons, ni parents ou conjoints l'un de l'autre */

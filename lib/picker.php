@@ -548,6 +548,7 @@ function picker_places(PDO $pdo, string $q, int $offset, int $limit, array $opts
         if ($chosen['world_rows'] === null) { $chosen['world_rows'] = picker_world_rows($pdo, $chosen['name'], $chosen['rest']); $groups['world']['total'] = count($chosen['world_rows']); }
         $more = $offset + $limit < $all + count($chosen['world_rows']);
     }
+    if ($groups['base']['items']) { require_once __DIR__ . '/lieux_doublons.php'; ld_picker_hints($pdo, $groups['base']['items']); } // « ≈ même lieu que Pernay (Indre-et-Loire) ? »
     picker_place_dedupe_titles($groups);
     return ['groups' => $mixed ? [$groups['base']] : array_values($groups), 'more' => $more];
 }

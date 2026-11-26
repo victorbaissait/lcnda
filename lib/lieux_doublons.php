@@ -101,6 +101,9 @@ function ld_score(array $p): float
 /** [[table, colonne, colonne_type|null]] : place_id, *_place_id, clés étrangères vers places, liens « type = 'place' » */
 function ld_refs(PDO $pdo): array
 {
+    static $cache = [];
+    $sig = (string) $pdo->query("SELECT count(*) || ':' || COALESCE(sum(length(sql)),0) FROM sqlite_master WHERE type='table'")->fetchColumn();
+    if (isset($cache[$sig])) { return $cache[$sig]; }
     $out = [];
     foreach ($pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")->fetchAll(PDO::FETCH_COLUMN) as $t) {
         if ($t === 'places' || !preg_match('/^[a-z_][a-z0-9_]*$/', $t)) { continue; }
@@ -119,7 +122,7 @@ function ld_refs(PDO $pdo): array
             if ($idCol && !isset($seen[$idCol])) { $out[] = [$t, $idCol, $c]; }
         }
     }
-    return $out;
+    return $cache[$sig] = $out;
 }
 
 /** Nombre de liens de chaque lieu demandé (toutes les tables) */
@@ -373,7 +376,8 @@ function ld_merge_safe(PDO $pdo, array $data): array
     $summary = sprintf('Lieux en double : %d fusion(s) sûre(s)', count($merges));
     $undoId = ro_undo_save($pdo, 'ld_merge', $summary, ['merges' => $merges]);
     log_change($pdo, 'place', null, 'merge-duplicates', $summary, null, ['merges' => array_map(static fn($m) => ['survivor_id' => $m['to'], 'removed_id' => $m['from'], 'name' => $m['dup']['name']], $merges), 'undo_id' => $undoId]);
-    return ['merged' => count($merges), 'undo_id' => $undoId, 'moved' => array_sum(array_map(static fn($m) => count($m['changes']), $merges))];
+    return ['merged' => count($merges), 'undo_id' => $undoId, 'moved' => array_sum(array_map(static fn($m) => count($m['changes']), $merges)),
+        'details' => array_map(static fn($m) => ['survivor_id' => $m['to'], 'survivor_name' => $m['keep_before']['name'], 'removed_ids' => [$m['from']]], $merges)];
 }
 
 /** ↶ : le lieu gardé reprend ses valeurs, le doublon revient avec son n°, chaque ligne repart vers lui, les lignes mises de côté reviennent */
@@ -391,24 +395,28 @@ function ld_undo(PDO $pdo, array $data): array
         }
         $ex = $pdo->prepare('SELECT 1 FROM places WHERE id=?'); $ex->execute([$from]);
         if ($ex->fetchColumn()) { throw new RuntimeException('Impossible d’annuler : le lieu n° ' . $from . ' existe de nouveau.'); }
-        insert_snapshot_row($pdo, 'places', $m['dup']);
+        ld_insert_row($pdo, 'places', $m['dup']);
         foreach ($m['changes'] as [$t, $c, $rid]) {
             $t = ro_ident((string) $t); $c = ro_ident((string) $c);
             $n += $pdo->exec("UPDATE {$t} SET {$c}={$from} WHERE rowid=" . (int) $rid . " AND {$c}={$to}");
         }
-        foreach ($m['deleted'] as [$t, $r]) {
-            $t = ro_ident((string) $t);
-            $rid = (int) ($r['ld_rowid'] ?? 0); unset($r['ld_rowid']);
-            $cols = array_values(array_intersect(table_columns($pdo, $t), array_keys($r)));
-            $withRowid = $rid && !in_array('id', $cols, true);
-            $sql = "INSERT INTO {$t}(" . ($withRowid ? 'rowid,' : '') . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols) + ($withRowid ? 1 : 0), '?')) . ')';
-            $pdo->prepare($sql)->execute([...($withRowid ? [$rid] : []), ...array_map(static fn($c) => $r[$c], $cols)]);
-            $n++;
-        }
+        foreach ($m['deleted'] as [$t, $r]) { ld_insert_row($pdo, (string) $t, $r); $n++; }
     }
     $pdo->prepare('UPDATE ro_undo SET undone=1 WHERE id=?')->execute([(int) $row['id']]);
     log_change($pdo, 'ro_undo', (int) $row['id'], 'restore', 'Annulé : ' . $row['summary'], null, ['count' => $n]);
     return ['undone' => $n];
+}
+
+/** Remet une ligne telle qu'elle était (même n°, même rowid) */
+function ld_insert_row(PDO $pdo, string $table, array $r): void
+{
+    $t = ro_ident($table);
+    $rid = (int) ($r['ld_rowid'] ?? 0); unset($r['ld_rowid']);
+    $cols = array_values(array_intersect(array_map(static fn($c) => (string) $c['name'], $pdo->query("PRAGMA table_info({$t})")->fetchAll(PDO::FETCH_ASSOC)), array_keys($r)));
+    if (!$cols) { return; }
+    $withRowid = $rid && !in_array('id', $cols, true);
+    $sql = "INSERT INTO {$t}(" . ($withRowid ? 'rowid,' : '') . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols) + ($withRowid ? 1 : 0), '?')) . ')';
+    $pdo->prepare($sql)->execute([...($withRowid ? [$rid] : []), ...array_map(static fn($c) => $r[$c], $cols)]);
 }
 
 /** Toutes les listes (Réglages) : les groupes, et combien sont sûrs */
@@ -423,14 +431,15 @@ function ld_groups(PDO $pdo): array
 /** Alertes du ✅ Contrôle de la base : « Lieu en double probable » */
 function ld_controle_alerts(PDO $pdo): array
 {
+    $T = static fn(string $x, array $v = []): string => function_exists('i18n_t') ? i18n_t($x, $v) : strtr($x, array_combine(array_map(static fn($k) => '{' . $k . '}', array_keys($v)), array_map('strval', array_values($v))) ?: []);
     $out = [];
     foreach (ld_detect($pdo) as $g) {
         foreach ($g['duplicates'] as $d) {
             if ($d['confidence'] === 'low') { continue; }
             $p = $d['place']; $s = $g['survivor'];
             $out[] = ['key' => 'place-dup:' . $p['id'] . ':' . $s['id'], 'check' => 'place-dup', 'sort' => 'lieux', 'sub' => 'dup', 'level' => 'yellow',
-                'title' => 'Lieu en double probable : « ' . $p['name'] . ' »',
-                'detail' => '≈ ' . $s['name'] . ($s['county'] ? ' (' . $s['county'] . ')' : '') . ' · ' . $d['reason_text'] . ' · ' . ($p['links'] ? $p['links'] . ' lien(s)' : 'aucun lien'),
+                'title' => $T('Lieu en double probable : « {name} »', ['name' => $p['name']]),
+                'detail' => '≈ ' . $s['name'] . ($s['county'] ? ' (' . $s['county'] . ')' : '') . ' · ' . $T($d['reason_text']) . ' · ' . ($p['links'] ? $T('{n} lien(s)', ['n' => $p['links']]) : $T('aucun lien')),
                 'people' => [], 'place' => ['id' => $p['id'], 'name' => $p['name'], 'county' => $p['county'], 'country' => $p['country'], 'lat' => (float) ($p['lat'] ?? 0), 'lon' => (float) ($p['lon'] ?? 0), 'n' => $p['links']],
                 'dup' => ['from' => $p['id'], 'to' => $s['id']], 'fp' => md5($p['name'] . '|' . $s['name'])];
         }

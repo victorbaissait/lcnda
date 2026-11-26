@@ -28,7 +28,7 @@
 
     const SORTS = {dates: ['📅', 'Dates'], ages: ['🎂', 'Âges'], parents: ['👪', 'Parents'], doublons: ['👥', 'Doublons'], lieux: ['📍', 'Lieux'], socface: ['🧾', 'Recensement SocFace']};
     const LEVELS = {red: ['🔴', 'Impossible'], orange: ['🟠', 'À vérifier'], yellow: ['🟡', 'Curieux']};
-    const SUBS = {misplaced: 'Lieux mal placés', journeys: 'Voyages impossibles', baptism: 'Baptême loin', conflicting: 'Lieux contradictoires', anachro: 'Commune pas encore ou plus là'};
+    const SUBS = {misplaced: 'Lieux mal placés', journeys: 'Voyages impossibles', baptism: 'Baptême loin', conflicting: 'Lieux contradictoires', anachro: 'Commune pas encore ou plus là', dup: 'Lieu en double probable'};
     /** actions propres à une sorte d'alerte, ajoutées par d'autres fichiers : {match(a), html(a, i) → boutons, run(a, after)} (🏛 heritage-commune-histoire.js) */
     const customAct = a => a && (ext.controleActions || []).find(x => { try { return x.match(a); } catch (_) { return false; } });
     const FKEY = 'lcnda-controle-filtres';

@@ -1,0 +1,60 @@
+/* LCNDA — 📍 Lieux en double probables (assets/js/app-lieux-doublons.js, lib/lieux_doublons.php) :
+ * l'indice calme du menu de choix, la petite fenêtre « Fusionner deux lieux » et la liste des Réglages. Sombre en bas. */
+
+/* ── dans le menu de choix : « ≈ même lieu que Pernay (Indre-et-Loire) ? » ── */
+.pk-dup { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; font-size: 12.5px; color: #6b5a1e; }
+.pk-dup-txt { min-width: 0; overflow-wrap: anywhere; }
+.pk-dup-btn { font: inherit; font-weight: 700; font-size: 12px; border: 1.5px solid #b49a3c; background: #fffbea; color: #5d4d12; padding: 2px 8px; cursor: pointer; min-height: 26px; }
+.pk-dup-btn:hover, .pk-dup-btn:focus-visible { background: #fff3c4; }
+
+/* ── la fenêtre de fusion ── */
+.ld-dialog { width: min(720px, calc(100vw - 24px)); }
+.ld-body { padding: 4px 0 8px; display: grid; gap: 12px; }
+.ld-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ld-side { border: 2px solid #111; padding: 10px 12px; display: grid; gap: 4px; min-width: 0; background: #fff; }
+.ld-side.is-keep { border-color: #198038; box-shadow: inset 4px 0 0 #198038; }
+.ld-side.is-dup { border-style: dashed; }
+.ld-side h3 { margin: 0; font-size: 15px; overflow-wrap: anywhere; }
+.ld-side .ld-tag { font: 700 11px/1 system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; color: #555; }
+.ld-side dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; font-size: 13px; }
+.ld-side dt { color: #666; }
+.ld-side dd { margin: 0; overflow-wrap: anywhere; }
+.ld-choice { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 14px; }
+.ld-choice label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.ld-moves { margin: 0; padding-left: 20px; font-size: 13.5px; }
+.ld-warn { border: 2px solid #b28600; background: #fff8e1; padding: 8px 10px; font-size: 13.5px; }
+.ld-why { font-size: 13px; color: #555; }
+
+/* ── Réglages → Modifications groupées ── */
+.ld-panel { margin-top: 1.5rem; }
+.ld-groups { display: grid; gap: 10px; }
+.ld-group { border: 2px solid #111; padding: 10px 12px; background: #fff; }
+.ld-group h4 { margin: 0 0 6px; font-size: 15px; overflow-wrap: anywhere; }
+.ld-group h4 small { font-weight: 400; color: #666; }
+.ld-dups { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ld-dup { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; border-top: 1px solid #e3e5ea; padding-top: 6px; }
+.ld-dup-name { flex: 1 1 220px; min-width: 0; overflow-wrap: anywhere; }
+.ld-dup-name small { display: block; color: #666; }
+.ld-dup-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.ld-conf { font: 700 11px/1 system-ui, sans-serif; border: 1.5px solid currentColor; padding: 3px 6px; white-space: nowrap; }
+.ld-conf.is-sure { color: #198038; }
+.ld-conf.is-medium { color: #8a6d00; }
+.ld-conf.is-low { color: #a2191f; }
+
+@media (max-width: 560px) {
+    .ld-sides { grid-template-columns: 1fr; }
+}
+
+/* ── sombre ── */
+:root[data-theme="dark"] .pk-dup { color: #e6cf7a; }
+:root[data-theme="dark"] .pk-dup-btn { background: #3a3215; border-color: #a58c3a; color: #f3e4a8; }
+:root[data-theme="dark"] .pk-dup-btn:hover, :root[data-theme="dark"] .pk-dup-btn:focus-visible { background: #4a4019; }
+:root[data-theme="dark"] .ld-side, :root[data-theme="dark"] .ld-group { background: var(--panel, #242424); border-color: #6a6a6a; color: var(--ink, #e8e8e8); }
+:root[data-theme="dark"] .ld-side.is-keep { border-color: #42be65; box-shadow: inset 4px 0 0 #42be65; }
+:root[data-theme="dark"] .ld-side .ld-tag, :root[data-theme="dark"] .ld-side dt, :root[data-theme="dark"] .ld-why,
+:root[data-theme="dark"] .ld-group h4 small, :root[data-theme="dark"] .ld-dup-name small { color: #b0b0b0; }
+:root[data-theme="dark"] .ld-warn { background: #3a3215; border-color: #a58c3a; color: #f3e4a8; }
+:root[data-theme="dark"] .ld-dup { border-top-color: #444; }
+:root[data-theme="dark"] .ld-conf.is-sure { color: #6fdc8c; }
+:root[data-theme="dark"] .ld-conf.is-medium { color: #f1c21b; }
+:root[data-theme="dark"] .ld-conf.is-low { color: #ff8389; }

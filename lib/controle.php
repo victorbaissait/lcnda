@@ -21,7 +21,7 @@ declare(strict_types=1);
  * 1790 (paroisses), rien d'avant 1943 que le fichier ne connaît pas, marge de 10 ans pour une date approximative.
  */
 
-const CONTROLE_VERSION = 6; // à monter quand un contrôle change : le cache est refait
+const CONTROLE_VERSION = 7; // à monter quand un contrôle change : le cache est refait
 const CONTROLE_SORTS = ['dates', 'ages', 'parents', 'doublons', 'lieux'];
 const CONTROLE_LEVELS = ['red', 'orange', 'yellow'];
 
@@ -756,6 +756,11 @@ function controle_compute(PDO $pdo, array $th): array
         };
         foreach (ch_controle_alerts($pdo, $chPeople) as $a) { $add($a); }
     } catch (Throwable $_) {}
+    // 📍 lieu en double probable (« Pernay » et « Pernay, Indre-et-Loire, Centre-Val de Loire, France » d'un import) : lib/lieux_doublons.php
+    try {
+        if (!function_exists('ld_controle_alerts')) { require_once __DIR__ . '/lieux_doublons.php'; }
+        foreach (ld_controle_alerts($pdo) as $a) { $add($a); }
+    } catch (Throwable $_) {}
 
     // ═══ 🧾 RECENSEMENT SOCFACE ═══ ce que lit l'IA comparé aux fiches reliées (🟡 / 🟠, jamais 🔴 : la machine peut se tromper)
     if (function_exists('socface_controle_alerts')) { foreach (socface_controle_alerts($pdo, $th) as $a) { $add($a); } }
@@ -851,7 +856,7 @@ function controle_sort_of_key(string $key): string
     return match (true) {
         in_array($k, ['dup'], true) => 'doublons',
         $k === 'socface' => 'socface',
-        in_array($k, ['place', 'journey', 'baptism-far', 'commune-anachro', 'conflicting-naissance-place', 'conflicting-décès-place'], true) => 'lieux',
+        in_array($k, ['place', 'place-dup', 'journey', 'baptism-far', 'commune-anachro', 'conflicting-naissance-place', 'conflicting-décès-place'], true) => 'lieux',
         in_array($k, ['old-parent', 'young-marriage', 'old-marriage', 'sosa-gap'], true) => 'ages',
         in_array($k, ['spouse-ancestor', 'animal-link', 'child-after-parent-death', 'close-births', 'same-year-siblings', 'before-marriage', 'sibling-span', 'multiple-parent-families', 'ghost-family', 'sosa-sex', 'young-parent'], true) => 'parents',
         default => 'dates',

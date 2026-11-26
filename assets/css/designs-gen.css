@@ -1887,6 +1887,31 @@
 :root[data-theme="dark"] .modal.mpk-dialog:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
 :root[data-theme="dark"] .mpk-tile.on:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
 :root[data-theme="dark"] .mpk-tile.on:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+/* lieux-doublons.css */
+:root[data-lc-density] .pk-dup{gap:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root .pk-dup-btn:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .pk-dup-btn{padding:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ld-body{padding:calc(4px * var(--lc-sp)) 0 calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ld-body{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ld-sides{gap:calc(12px * var(--lc-sp))}
+:root .ld-side:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .ld-side{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ld-side{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .ld-side dl{gap:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ld-choice{gap:calc(6px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .ld-choice label{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ld-moves{padding-left:calc(20px * var(--lc-sp))}
+:root .ld-warn:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .ld-warn{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ld-groups{gap:calc(10px * var(--lc-sp))}
+:root .ld-group:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .ld-group{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .ld-dups{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ld-dup{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ld-dup{padding-top:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ld-dup-acts{gap:calc(6px * var(--lc-sp))}
+:root .ld-conf:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .ld-conf{padding:calc(3px * var(--lc-sp)) calc(6px * var(--lc-sp))}
 /* heritage.css */
 :root .person-heritage-flags:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .h-dialog-body{padding:calc(4px * var(--lc-sp)) calc(20px * var(--lc-sp)) calc(8px * var(--lc-sp))}

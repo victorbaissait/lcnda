@@ -728,7 +728,7 @@ function rt_place_merge(PDO $pdo, int $from, int $to, array &$undo): int
     $n = 0;
     foreach (ro_place_tables($pdo) as $t) {
         foreach ($pdo->query("SELECT id FROM {$t} WHERE place_id=" . $from)->fetchAll(PDO::FETCH_COLUMN) as $rid) { $undo['changes'][] = ['t' => $t, 'c' => 'place_id', 'id' => (int) $rid, 'before' => $from, 'after' => $to]; $n++; }
-        $pdo->exec("UPDATE {$t} SET place_id=" . $to . ' WHERE place_id=' . $from);
+        $pdo->exec("UPDATE OR IGNORE {$t} SET place_id=" . $to . ' WHERE place_id=' . $from); // OR IGNORE : pas de « UNIQUE constraint failed » sur une ligne que le lieu gardé a déjà
     }
     $s = $pdo->prepare('SELECT * FROM places WHERE id=?'); $s->execute([$from]);
     if ($row = $s->fetch(PDO::FETCH_ASSOC)) { $undo['deleted_places'][] = $row; $pdo->prepare('DELETE FROM places WHERE id=?')->execute([$from]); }

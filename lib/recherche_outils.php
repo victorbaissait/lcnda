@@ -657,7 +657,7 @@ function ro_place_replace_apply(PDO $pdo, array $data): array
     $changes = [];
     foreach (ro_place_tables($pdo) as $t) {
         foreach ($pdo->query("SELECT id FROM {$t} WHERE place_id=" . $from)->fetchAll(PDO::FETCH_COLUMN) as $rid) { $changes[] = ['t' => $t, 'c' => 'place_id', 'id' => (int) $rid, 'before' => $from, 'after' => $to]; }
-        $pdo->exec("UPDATE {$t} SET place_id=" . $to . ' WHERE place_id=' . $from);
+        $pdo->exec("UPDATE OR IGNORE {$t} SET place_id=" . $to . ' WHERE place_id=' . $from); // OR IGNORE : une ligne que le lieu gardé a déjà (population de la même année…) reste au lieu remplacé au lieu de « UNIQUE constraint failed »
     }
     $deleted = null;
     if (!empty($data['delete_from']) && $data['delete_from'] !== '0') { $deleted = $a; $pdo->prepare('DELETE FROM places WHERE id=?')->execute([$from]); }

@@ -120,7 +120,7 @@
     function rowHtml(it, q, idx, on) {
         const s = sosaOf(it), title = mark(it.title, q), titleHit = title.includes('<mark>'); // la ligne grise n'est surlignée que si le nom ne l'est pas
         const badge = s ? `<span class="pk-badge sosa">Sosa ${s}</span>` : it.badge ? `<span class="pk-badge2${it.badge_style === 'blue' ? ' blue' : ''}">${esc(it.badge)}</span>` : '';
-        return `<div class="pk-item pk-row${on ? ' on' : ''}" role="option" data-row="${idx}" aria-selected="${on ? 'true' : 'false'}">${sym(it)}<div class="pk-txt"><div class="pk-name">${title}</div>${it.meta ? `<div class="pk-meta">${titleHit ? esc(it.meta) : mark(it.meta, q, 3)}</div>` : ''}${window.LCNDA_RFR?.whyHtml?.(it.why, 'rfr-why pk-why') || ''}</div>${badge}</div>`;
+        return `<div class="pk-item pk-row${on ? ' on' : ''}" role="option" data-row="${idx}" aria-selected="${on ? 'true' : 'false'}">${sym(it)}<div class="pk-txt"><div class="pk-name">${title}</div>${it.meta ? `<div class="pk-meta">${titleHit ? esc(it.meta) : mark(it.meta, q, 3)}</div>` : ''}${window.LCNDA_RFR?.whyHtml?.(it.why, 'rfr-why pk-why') || ''}${it.dup_of ? window.LCNDA_EXT?.placeDup?.hintHtml?.(it) || '' : ''}</div>${badge}</div>`; // 📍 « ≈ même lieu que … ? » (app-lieux-doublons.js)
     }
     /** Pastille d'une chose choisie (seule : avec « ↗ Fiche » ; dans une liste : petite). */
     function chipHtml(it, i, small) {
@@ -646,6 +646,9 @@
     function onClick(c, e) {
         const f = e.target.closest('[data-filter]');
         if (f) { e.preventDefault(); const s = f.closest('.pk-search'); setFilter(c, s, f.dataset.filter); s.querySelector('.pk-input').focus(); return; }
+        const dup = e.target.closest('[data-pldup-merge], [data-pldup-empty]'); // 📍 doublon de lieu : fusionner (fenêtre) ou retirer le doublon vide (un clic, ↶)
+        if (dup) { e.preventDefault(); e.stopPropagation(); const s = dup.closest('.pk-search'), P = window.LCNDA_EXT?.placeDup, again = () => { if (s?.isConnected) run(c, s); };
+            if (dup.dataset.pldupEmpty) P?.removeEmpty(Number(dup.dataset.pldupEmpty), Number(dup.dataset.pldupInto), again); else P?.open(Number(dup.dataset.pldupMerge), Number(dup.dataset.pldupInto), again); return; }
         const r = e.target.closest('.pk-row');
         if (r) { const s = r.closest('.pk-search'); choose(c, s, S(s).flat[Number(r.dataset.row)]); return; }
         const rm = e.target.closest('.pk-rolemenu [data-role]');
