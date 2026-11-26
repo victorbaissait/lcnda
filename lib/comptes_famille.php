@@ -556,7 +556,7 @@ function fc_guest_main(): never
             'media' => fc_guest_media($pdo, $a, (int) (is_numeric($_GET['id'] ?? null) ? $_GET['id'] : 0)),
             'similar' => fc_json(['people' => fc_similar($pdo, fc_line($_GET['first'] ?? '', 80), fc_line($_GET['last'] ?? '', 80), fc_year_of(fc_line($_GET['year'] ?? '', 20)), $a)]),
             'mine' => fc_guest_mine($pdo, $a),
-            'listes' => (static function () use ($pdo) { require_once __DIR__ . '/donnees_plus.php'; fc_json(dplus_guest_lists($pdo)); })(),
+            'listes' => (static function () use ($pdo, $a) { require_once __DIR__ . '/donnees_plus.php'; fc_json(dplus_guest_lists($pdo, $a)); })(), // sa branche seulement
             'propose' => fc_guest_propose($pdo, $a, $dev, is_array($payload) ? $payload : [], false),
             'edit' => fc_guest_propose($pdo, $a, $dev, is_array($payload) ? $payload : [], true),
             'withdraw' => fc_guest_withdraw($pdo, $a, is_array($payload) ? $payload : []),

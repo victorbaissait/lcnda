@@ -77,13 +77,14 @@ function dplus_note(PDO $pdo, array $d): array
 /* ═════════════ 🕳 les lieux de l'arbre sans coordonnées ═════════════ */
 function dplus_missing(PDO $pdo): array
 {
+    $kiosk = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
     $evPriv = in_array('is_private', array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name'), true);
     $sql = "SELECT pl.id, pl.name, pl.county, pl.state, pl.country, COUNT(e.id) AS acts,
                 COUNT(DISTINCT CASE WHEN e.person_id IS NOT NULL THEN e.person_id END) AS people
             FROM places pl JOIN events e ON e.place_id=pl.id
             LEFT JOIN persons p ON p.id=e.person_id
             WHERE (pl.latitude IS NULL OR pl.longitude IS NULL OR (pl.latitude=0 AND pl.longitude=0))
-              AND COALESCE(p.is_private,0)=0" . ($evPriv ? ' AND COALESCE(e.is_private,0)=0' : '') . "
+              AND COALESCE(p.is_private,0)=0" . ($evPriv ? ' AND COALESCE(e.is_private,0)=0' : '') . ($kiosk ? " AND COALESCE(p.living_status,'')<>'living'" : '') . "
             GROUP BY pl.id ORDER BY acts DESC, people DESC, pl.name COLLATE NOCASE LIMIT 200";
     $out = [];
     foreach ($pdo->query($sql) as $r) {
@@ -138,45 +139,93 @@ function dplus_versions(array $q): array
 }
 
 /* ═════════════ 🔗 partager une liste filtrée sur le site familial ═════════════ */
-/** les noms qu'un partage ne montre jamais : personnes vivantes (déclarées ou probables) et fiches confidentielles */
-function dplus_hidden_names(PDO $pdo): array
+/** un texte réduit pour comparer des noms : minuscules, sans accents, rien que des lettres et chiffres séparés d'une espace */
+function dplus_fold(string $s): string
 {
-    require_once __DIR__ . '/comptes_famille.php';
-    $hidden = fc_hidden($pdo);
-    if (!$hidden) { return []; }
-    $ids = array_map('intval', array_keys($hidden));
+    $s = mb_strtolower($s);
+    if (class_exists('Normalizer')) { $n = Normalizer::normalize($s, Normalizer::FORM_D); if (is_string($n)) { $s = (string) preg_replace('/\p{Mn}+/u', '', $n); } }
+    return ' ' . trim((string) preg_replace('/[^\p{L}\p{N}]+/u', ' ', $s)) . ' ';
+}
+
+/** les noms de ces fiches, rangés par le plus long mot du nom de famille : [mot => [[mots du nom repliés], premier prénom replié]…] */
+function dplus_names_of(PDO $pdo, array $ids): array
+{
     $out = [];
+    $ids = array_values(array_unique(array_map('intval', $ids)));
     foreach (array_chunk($ids, 500) as $chunk) {
         foreach ($pdo->query('SELECT first_name, last_name FROM persons WHERE id IN (' . implode(',', $chunk) . ')') as $p) {
-            $fn = mb_strtolower(trim((string) $p['first_name'])); $ln = mb_strtolower(trim((string) $p['last_name']));
-            if ($ln !== '' && $fn !== '') { $out[] = [$fn, $ln]; }
+            $ln = trim(dplus_fold((string) $p['last_name'])); $fn = trim(dplus_fold((string) $p['first_name']));
+            if ($ln === '' || $fn === '') { continue; }
+            $first = explode(' ', $fn)[0]; // « Marie Louise » se cache aussi derrière « Marie DURAND »
+            $words = array_values(array_unique(explode(' ', $ln)));
+            usort($words, static fn($a, $b) => mb_strlen($b) <=> mb_strlen($a));
+            $out[$words[0]][] = [$words, ' ' . $first . ' ']; // tous les mots du nom, dans n'importe quel ordre (« FONTAINE (de la) »)
         }
     }
     return $out;
 }
 
-function dplus_share(PDO $pdo, array $d): array
+/** les noms qu'un partage ne montre jamais : personnes vivantes (déclarées ou probables) et fiches confidentielles */
+function dplus_hidden_names(PDO $pdo): array
 {
-    $name = dplus_str($d['name'] ?? '', 200) ?: 'Liste';
-    $aud = in_array($d['audience'] ?? '', ['membres', 'tous'], true) ? (string) $d['audience'] : 'membres';
-    $cols = array_slice(array_map(static fn($c) => dplus_str($c, 80), is_array($d['cols'] ?? null) ? $d['cols'] : []), 0, 12);
-    if (!$cols) { throw new LcndaBadInput('Rien à partager.'); }
-    $hidden = dplus_hidden_names($pdo);
-    $rows = []; $dropped = 0;
-    foreach (array_slice(is_array($d['rows'] ?? null) ? $d['rows'] : [], 0, 2000) as $r) {
+    require_once __DIR__ . '/comptes_famille.php';
+    $hidden = fc_hidden($pdo);
+    return $hidden ? dplus_names_of($pdo, array_keys($hidden)) : [];
+}
+
+/** ce texte nomme-t-il une de ces personnes (premier prénom et tous les mots du nom, en mots entiers, dans n'importe quel ordre, accents et capitales ignorés) ? */
+function dplus_names_hit(string $txt, array $idx): bool
+{
+    if (!$idx) { return false; }
+    $f = dplus_fold($txt);
+    foreach (array_unique(explode(' ', trim($f))) as $w) {
+        foreach ($idx[$w] ?? [] as [$ln, $fn]) {
+            if (!str_contains($f, $fn)) { continue; }
+            $all = true;
+            foreach ($ln as $x) { if (!str_contains($f, ' ' . $x . ' ')) { $all = false; break; } }
+            if ($all) { return true; }
+        }
+    }
+    return false;
+}
+
+/** un partage nettoyé : jamais un nom caché, ni dans les lignes, ni dans le titre, les colonnes, les filtres ou les sources */
+function dplus_clean_body(array $b, array $hidden, int &$dropped = 0): array
+{
+    $cols = array_slice(array_map(static fn($c) => dplus_str($c, 80), is_array($b['cols'] ?? null) ? array_values($b['cols']) : []), 0, 12);
+    foreach ($cols as $i => $c) { if (dplus_names_hit($c, $hidden)) { $cols[$i] = '—'; } }
+    $rows = [];
+    foreach (array_slice(is_array($b['rows'] ?? null) ? array_values($b['rows']) : [], 0, 2000) as $r) {
         if (!is_array($r)) { continue; }
-        $cells = array_slice(array_map(static fn($c) => dplus_str($c, 400), $r), 0, count($cols));
-        $txt = mb_strtolower(implode(' ', $cells));
-        $bad = false;
-        foreach ($hidden as [$fn, $ln]) { if (str_contains($txt, $ln) && str_contains($txt, $fn)) { $bad = true; break; } }
-        if ($bad) { $dropped++; continue; }
+        $cells = array_slice(array_map(static fn($c) => dplus_str($c, 400), array_values($r)), 0, count($cols));
+        if (dplus_names_hit(implode(' · ', $cells), $hidden)) { $dropped++; continue; }
         $rows[] = $cells;
     }
-    $sources = array_slice(array_map(static fn($s) => is_array($s) ? ['source' => dplus_str($s['source'] ?? '', 300), 'licence' => dplus_str($s['licence'] ?? '', 120), 'url' => preg_match('#^https?://#i', (string) ($s['url'] ?? '')) ? dplus_str($s['url'], 500) : ''] : null, is_array($d['sources'] ?? null) ? $d['sources'] : []), 0, 30);
-    if (!empty($d['dry'])) { return ['ok' => true, 'dry' => true, 'rows' => count($rows), 'dropped' => $dropped]; } // l'aperçu : ce qui partirait, sans rien garder
-    $body = ['kind' => 'liste', 'name' => $name, 'cols' => $cols, 'rows' => $rows, 'sources' => array_values(array_filter($sources)), 'filters' => dplus_str($d['filters'] ?? '', 400)];
-    $pdo->prepare('INSERT INTO dplus_shares(name, audience, body) VALUES(?,?,?)')->execute([$name, $aud, (string) json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
-    return ['ok' => true, 'id' => (int) $pdo->lastInsertId(), 'rows' => count($rows), 'dropped' => $dropped];
+    $sources = [];
+    foreach (array_slice(is_array($b['sources'] ?? null) ? array_values($b['sources']) : [], 0, 30) as $s) {
+        if (!is_array($s)) { continue; }
+        $u = dplus_str($s['url'] ?? '', 500);
+        $x = ['source' => dplus_str($s['source'] ?? '', 300), 'licence' => dplus_str($s['licence'] ?? '', 120), 'url' => preg_match('#^https?://[^\s"\'<>]+$#i', $u) ? $u : ''];
+        if (dplus_names_hit(implode(' · ', $x), $hidden)) { continue; }
+        $sources[] = $x;
+    }
+    $name = dplus_str($b['name'] ?? '', 200) ?: 'Liste';
+    if (dplus_names_hit($name, $hidden)) { $name = 'Liste'; }
+    $filters = dplus_str($b['filters'] ?? '', 400);
+    if (dplus_names_hit($filters, $hidden)) { $filters = ''; }
+    return ['kind' => 'liste', 'name' => $name, 'cols' => $cols, 'rows' => $rows, 'sources' => $sources, 'filters' => $filters];
+}
+
+function dplus_share(PDO $pdo, array $d): array
+{
+    $aud = in_array($d['audience'] ?? '', ['membres', 'tous'], true) ? (string) $d['audience'] : 'membres';
+    if (!is_array($d['cols'] ?? null) || !$d['cols']) { throw new LcndaBadInput('Rien à partager.'); }
+    $dropped = 0;
+    $body = dplus_clean_body($d, dplus_hidden_names($pdo), $dropped);
+    if (!$body['cols']) { throw new LcndaBadInput('Rien à partager.'); }
+    if (!empty($d['dry'])) { return ['ok' => true, 'dry' => true, 'rows' => count($body['rows']), 'dropped' => $dropped]; } // l'aperçu : ce qui partirait, sans rien garder
+    $pdo->prepare('INSERT INTO dplus_shares(name, audience, body) VALUES(?,?,?)')->execute([$body['name'], $aud, (string) json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)]);
+    return ['ok' => true, 'id' => (int) $pdo->lastInsertId(), 'rows' => count($body['rows']), 'dropped' => $dropped];
 }
 
 function dplus_shares(PDO $pdo): array
@@ -210,21 +259,29 @@ function dplus_share_restore(PDO $pdo, array $d): array
     return dplus_share($pdo, ['name' => $r['name'] ?? '', 'audience' => $r['audience'] ?? 'membres', 'cols' => $body['cols'] ?? [], 'rows' => $body['rows'] ?? [], 'sources' => $body['sources'] ?? [], 'filters' => $body['filters'] ?? '']);
 }
 
-/** famille.php : les listes partagées, pour un compte connecté (repassées au filtre des vivants à chaque lecture) */
-function dplus_guest_lists(PDO $pdo): array
+/**
+ * famille.php : les listes partagées, pour un compte connecté — repassées au filtre à chaque lecture : les vivants et les fiches
+ * confidentielles (les vivants ont pu changer depuis le partage), et pour un compte limité à une branche, toute personne hors de
+ * sa branche (elle « n'existe pas » pour lui, lib/comptes_famille.php fc_mode).
+ */
+function dplus_guest_lists(PDO $pdo, ?array $account = null): array
 {
     dplus_schema($pdo);
     $hidden = dplus_hidden_names($pdo);
+    if ($account !== null && function_exists('fc_scope_ids')) {
+        $scope = fc_scope_ids($pdo, $account);
+        if ($scope !== null) {
+            $out = [];
+            foreach ($pdo->query('SELECT id FROM persons') as $r) { if (!isset($scope[(int) $r['id']])) { $out[] = (int) $r['id']; } }
+            foreach (dplus_names_of($pdo, $out) as $w => $list) { foreach ($list as $x) { $hidden[$w][] = $x; } }
+        }
+    }
     $out = [];
     foreach ($pdo->query('SELECT id, name, body, created_at FROM dplus_shares ORDER BY id DESC LIMIT 50') as $r) {
         $b = json_decode((string) $r['body'], true);
         if (!is_array($b) || ($b['kind'] ?? '') !== 'liste') { continue; }
-        $rows = array_values(array_filter($b['rows'] ?? [], static function ($cells) use ($hidden) {
-            $txt = mb_strtolower(implode(' ', array_map('strval', (array) $cells)));
-            foreach ($hidden as [$fn, $ln]) { if (str_contains($txt, $ln) && str_contains($txt, $fn)) { return false; } }
-            return true;
-        }));
-        $out[] = ['id' => (int) $r['id'], 'name' => (string) $r['name'], 'cols' => $b['cols'] ?? [], 'rows' => $rows, 'sources' => $b['sources'] ?? [], 'filters' => (string) ($b['filters'] ?? ''), 'at' => (string) $r['created_at']];
+        $c = dplus_clean_body($b + ['name' => (string) $r['name']], $hidden);
+        $out[] = ['id' => (int) $r['id'], 'name' => $c['name'], 'cols' => $c['cols'], 'rows' => $c['rows'], 'sources' => $c['sources'], 'filters' => $c['filters'], 'at' => (string) $r['created_at']];
     }
     return ['lists' => $out];
 }

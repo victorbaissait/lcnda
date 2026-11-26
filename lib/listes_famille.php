@@ -10,7 +10,7 @@ declare(strict_types=1);
  *  - ancêtre direct : la racine Sosa (Listes → SOSA, sinon la personne de départ) et ses ascendants (filtre « seulement les ancêtres
  *    directs » de ▶ Dans le temps, assets/js/heritage-guerres-temps.js) ;
  *  - jamais une fiche confidentielle (persons.is_private) ni un événement confidentiel (events.is_private) ;
- *  - en mode consultation (et sur un appareil invité du wifi) : pas non plus les personnes vivantes ;
+ *  - en mode consultation (et sur un appareil invité du wifi) : pas non plus les personnes vivantes, déclarées ou probables (fc_hidden) ;
  *  - naissance, décès : années (null si inconnues) ; un événement de famille (mariage…) compte pour les deux époux.
  */
 
@@ -19,9 +19,14 @@ function ld_famille(PDO $pdo): array
     $kiosk = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
     $evPriv = in_array('is_private', array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name'), true);
     $people = [];
+    $hid = [];
+    if ($kiosk) { // consultation : aussi les vivants probables (même règle que le partage et le site familial)
+        require_once __DIR__ . '/comptes_famille.php';
+        try { $hid = fc_hidden($pdo); } catch (Throwable) { return ['places' => [], 'people' => [], 'kiosk' => true]; } // dans le doute, personne
+    }
     $sql = "SELECT id, TRIM(COALESCE(first_name,'')) AS fn, TRIM(COALESCE(last_name,'')) AS ln, living_status FROM persons WHERE COALESCE(is_private,0)=0";
     foreach ($pdo->query($sql) as $r) {
-        if ($kiosk && $r['living_status'] === 'living') { continue; }
+        if ($kiosk && ($r['living_status'] === 'living' || isset($hid[(int) $r['id']]))) { continue; }
         $name = trim(($r['fn'] !== '' ? $r['fn'] . ' ' : '') . mb_strtoupper((string) $r['ln']));
         if ($name === '') { continue; }
         $people[(int) $r['id']] = ['n' => $name, 'b' => null, 'd' => null, 'pl' => []];
