@@ -881,8 +881,9 @@
             return {message: T('📖 Ajouté au Livre de famille ({n})', {n: plural(items.length, T('chose'), T('choses'))}), undo: async () => { try { if (before == null) localStorage.removeItem(K); else localStorage.setItem(K, before); } catch (_) {} }};
         }});
     /* 🧺 le panier lui-même (depuis « Prendre depuis… » ou « Envoyer vers… ») */
-    DT.push({id: 'basket', icon: '🧺', label: 'Le panier', group: 'Ranger', enabled: () => enabled(), choose: async () => ({}), explain: () => T('mis de côté, pour plus tard'),
-        receive: async items => { const r = await take(items, {quiet: true}); return {message: T('🧺 {n} au panier', {n: plural(r?.ids?.length || 0, T('chose'), T('choses'))}), undo: async () => { setCountFrom(await post('basket_remove', {ids: r?.ids || []})); }}; }});
+    DT.push({id: 'basket', icon: '🧺', label: 'Le panier', group: 'Ranger', enabled: () => enabled(), explain: () => T('mis de côté, pour plus tard'),
+        choose: async (acc, anchor) => { if ((await ensureTree()).length < 2 && settings().ask !== 'always') return {}; const c = await askBasket(anchor, {n: acc?.length || 0}); return c ? {basketId: c.id} : null; }, // plusieurs paniers : lequel ?
+        receive: async (items, ctx) => { const r = await take(items, {quiet: true, basketId: ctx?.basketId || null}); return {message: T('🧺 {n} dans « {b} »', {n: plural(r?.ids?.length || 0, T('chose'), T('choses')), b: bName(r?.basket_id)}), undo: async () => { setCountFrom(await post('basket_remove', {ids: r?.ids || []})); }}; }});
     /* les outils de création d'« 📤 Envoyer vers… » : ce que le panier leur donne (images, texte, tableau) */
     const viaSend = (key, icon, label, explain, kindOf) => DT.push({id: 'send_' + key, icon, label, group: 'Créer',
         enabled: () => !!(ext.sendTargets || []).find(t => t.key === key)?.ready?.(),
@@ -974,7 +975,7 @@
         SB.__cx = true;
         SB.extraActions = SB.extraActions || [];
         SB.extraActions.push(o => (enabled() ? [
-            {id: 'cx_take', icon: '🧺', label: T('Au panier'), help: T('Mettre les lignes cochées de côté (elles te suivent d’écran en écran)'), edit: true, run: (ids, sel) => take(selItems(o.kind || 'row', ids, sel))},
+            {id: 'cx_take', icon: '🧺', label: T('Au panier'), help: T('Mettre les lignes cochées de côté (elles te suivent d’écran en écran)'), edit: true, run: (ids, sel) => take(selItems(o.kind || 'row', ids, sel), {ask: 'multi'})},
             {id: 'cx_put', icon: '📍', label: T('Mettre dans…'), help: T('Ranger les lignes cochées dans une enquête, une note, l’Atelier, une liste…'), edit: true, run: (ids, sel) => putInto(selItems(o.kind || 'row', ids, sel), {anchor: sel.el})},
         ] : []));
         return true;
@@ -1965,6 +1966,9 @@
                 <label class="checkbox-line"><input type="radio" name="cx-multi" value="0" ${s.multi ? '' : 'checked'}> <span><b>${esc(T('Un seul panier'))}</b><br><small class="muted">${esc(T('« ⭐ Garder comme liste » le range dans Mes listes.'))}</small></span></label>
                 <label class="checkbox-line"><input type="radio" name="cx-multi" value="1" ${s.multi ? 'checked' : ''}> <span><b>${esc(T('Plusieurs paniers, avec un nom'))}</b><br><small class="muted">${esc(T('Un menu dans le panier pour passer de l’un à l’autre.'))}</small></span></label>
                 <p class="muted"><small>${esc(T('Le panier est gardé dans la base : il te suit sur un autre ordinateur et dans les sauvegardes.'))}</small></p></div>
+            <div class="maintenance-panel cx-askset"><h3>${esc(T('Quand je mets au panier'))}</h3>
+                <label class="checkbox-line"><input type="radio" name="cx-ask" value="cur" ${s.ask === 'always' ? '' : 'checked'}> <span><b>${esc(T('Dans le panier en cours'))}</b><br><small class="muted">${esc(T('Le nom s’affiche dans le message, avec « Changer ▾ » à côté. Alt+clic ou clic droit sur un 🧺 : choisir avant.'))}</small></span></label>
+                <label class="checkbox-line"><input type="radio" name="cx-ask" value="always" ${s.ask === 'always' ? 'checked' : ''}> <span><b>${esc(T('Me demander à chaque fois'))}</b><br><small class="muted">${esc(T('Le petit menu « Dans quel panier ? » s’ouvre à chaque 🧺 ; Entrée = le panier en cours.'))}</small></span></label></div>
             <div class="maintenance-panel"><h3>${esc(T('Prendre et déposer'))}</h3>${tg('ctx', 'Clic droit : « 🧺 Prendre… » une date, un lieu, une phrase', 'Sur une fiche, une note, une transcription, une enquête… ; un texte choisi à la souris aussi.')}${tg('dnd', 'Glisser du panier sur l’écran ouvert', 'Un cadre bleu dit ce qui va se passer avant qu’on lâche.')}</div>
             <div class="maintenance-panel"><h3>${esc(T('Raccourci clavier'))}</h3><p>📥 ${esc(T('Prendre depuis…'))} : <b>${esc(combo || T('aucun'))}</b> · <button type="button" class="link-button" data-cx-keys>${esc(T('Changer dans Raccourcis clavier'))}</button></p>
                 <p class="muted"><small>${esc(T('⇧⌘O était déjà pris (écran divisé) : le raccourci de départ est ⌥⌘O (Ctrl+Alt+O sous Windows et Linux).'))}</small></p></div>${ext.cxNeeds?.settingsHtml?.() || ''}${ext.insertInfo?.settingsHtml?.() || ''}${ext.paniers?.settingsHtml?.() || ''}</section>`;
@@ -1972,6 +1976,7 @@
         ext.insertInfo?.bindSettings?.(ws); // 📎 Insérer une info (app-inserer.js)
         ext.paniers?.bindSettings?.(ws); // 🧺 l'onglet Paniers : les idées (app-paniers.js)
         ws.querySelectorAll('[data-cx-tg]').forEach(el => { const inp = el.matches('input') ? el : el.querySelector('input'); (inp || el).addEventListener('change', e => { const k = el.dataset.cxTg; const v = !!(e.target.checked ?? inp?.checked); saveSettings({...settings(), [k]: v}, v ? T('Activé') : T('Éteint')); if (k === 'on' && v && count == null) boot(); }); });
+        ws.querySelectorAll('[name="cx-ask"]').forEach(r => r.addEventListener('change', e => saveSettings({...settings(), ask: e.target.value}, e.target.value === 'always' ? T('Me demander à chaque fois') : T('Dans le panier en cours'))));
         ws.querySelectorAll('[name="cx-multi"]').forEach(r => r.addEventListener('change', e => { writeJ(CUR, 0); basket = null; saveSettings({...settings(), multi: e.target.value === '1'}, e.target.value === '1' ? T('Plusieurs paniers') : T('Un seul panier')); }));
         ws.querySelector('[data-cx-keys]')?.addEventListener('click', () => { st.maintenanceTab = 'raccourcis'; A().persistUiState?.(); A().setModule?.('maintenance'); });
     }
