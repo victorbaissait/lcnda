@@ -260,7 +260,8 @@
         const rows = sortRows(localFilter(d, await loadAll(d), st), st.sort || (st.near ? '_km' : ''), st.sort ? st.dir : 'asc');
         return {rows: rows.slice(offset, offset + limit), total: rows.length, more: false, all: rows};
     }
-    async function isInstalled(d) { if (!d.installed) return true; try { return !!(await d.installed()); } catch (_) { return false; } }
+    /** vrai / faux ; si la vérification elle-même échoue (serveur, réseau), l'erreur REMONTE : ce n'est pas « pas installé » (à montrer, pas à taire) */
+    async function isInstalled(d) { if (!d.installed) return true; return !!(await d.installed()); }
     /** {ok, err} : err = la vérification elle-même a échoué (serveur, réseau) — ce n'est pas « pas installé » */
     async function installState(d) { if (!d.installed) return {ok: true}; try { return {ok: !!(await d.installed())}; } catch (e) { return {ok: false, err: e?.message || String(e)}; } }
 
@@ -807,7 +808,9 @@
             if (v.startsWith('link:')) { const d = all().find(x => x.id === v.slice(5)); try { d?.link(); } catch (x) { toast(x.message, 'error'); } return; }
             openKey(v); });
         // pas encore installé : une petite pastille (sans attendre)
-        ds.filter(d => d.installed && !d.link).forEach(async d => { const ok = await isInstalled(d); const el = host.querySelector(`[data-ld-state="${CSS.escape(d.id)}"]`); if (el && !ok) el.innerHTML = UI().badge ? UI().badge(T('à installer'), 'grey') : esc(T('à installer')); });
+        ds.filter(d => d.installed && !d.link).forEach(async d => { let ok = true, err = ''; try { ok = await isInstalled(d); } catch (e) { err = e?.message || String(e); } const el = host.querySelector(`[data-ld-state="${CSS.escape(d.id)}"]`); if (!el) return;
+            if (err) { el.innerHTML = UI().badge ? UI().badge('⚠ ' + T('Vérification impossible'), 'orange') : esc('⚠ ' + T('Vérification impossible')); el.title = T('Impossible de vérifier si ces données sont installées : {e}', {e: err}); } // pas « à installer » : on ne sait pas
+            else if (!ok) el.innerHTML = UI().badge ? UI().badge(T('à installer'), 'grey') : esc(T('à installer')); });
         void token;
     }
     function openKey(k, preset = null) {
@@ -938,7 +941,7 @@
             .map(([k, icon, label, group]) => ({id: 'link_' + k, icon, label, group, link: () => { const st = A().state; if (!st) return; st.listType = k; if (st.module === 'listes') { A().renderSidebar?.(); A().renderList?.(); } else A().setModule?.('listes'); }})),
         /* ⚰️ les décès INSEE installés, avec les critères du moteur (commune, nom, du… au…) : GET insee_search, 200 lignes à la fois */
         {id: 'insee_deces', icon: '⚰️', label: 'Décès INSEE (fichier installé)', group: 'La personne', source: 'Insee, fichier des personnes décédées (Licence Ouverte 2.0)', sourceUrl: 'https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/',
-            installed: async () => { try { const r = await api('insee_stats'); return Number(r.count ?? r.total ?? 0) > 0; } catch (_) { return false; } }, install: () => { const st = A().state; if (!st) return; st.researchKind = 'insee'; A().persistUiState?.(); A().setModule?.('recherche'); },
+            installed: async () => { const r = await api('insee_stats'); return Number(r.count ?? r.total ?? 0) > 0; }, // une erreur remonte (pas « pas installé ») install: () => { const st = A().state; if (!st) return; st.researchKind = 'insee'; A().persistUiState?.(); A().setModule?.('recherche'); },
             fields: [{key: 'nom', label: 'Nom', type: 'text'}, {key: 'prenoms', label: 'Prénoms', type: 'text'}, {key: 'sexe', label: 'Sexe', type: 'enum', values: ['M', 'F']}, {key: 'naissance', label: 'Naissance', type: 'date'}, {key: 'commune_naissance', label: 'Lieu de naissance', type: 'place'},
                 {key: 'deces', label: 'Décès', type: 'date'}, {key: 'annee', label: 'Année du décès', type: 'year'}, {key: 'commune_deces', label: 'Commune du décès', type: 'place'}, {key: 'code_deces', label: 'Code INSEE du lieu', type: 'text'}, {key: 'acte', label: 'N° d’acte', type: 'text'}],
             period: r => [r.annee, r.annee],
