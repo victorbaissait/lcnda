@@ -27,7 +27,7 @@ def main():
     trades = json.load(open(os.path.join(ROOT, 'assets', 'data', 'metiers-anciens.json'), encoding='utf-8'))['trades']
     words = []
     for t in trades:
-        for w in (t['name'], t.get('fem') or ''):
+        for w in (t['name'],):  # le masculin seulement : un féminin est souvent un autre mot (SAUNIÈRE : un coffre à sel)
             w = w.strip()
             if w and ' ' not in w and "'" not in w and '’' not in w and w.upper() not in [x[1] for x in words]:
                 words.append((t['key'], w.upper()))
@@ -42,7 +42,7 @@ def main():
             continue
         d = ' '.join(txt[m.start():].split('\n')[0:3]) if len(m.group(0)) < 40 else m.group(0)
         d = re.split(r'\s(?=[A-ZÉÈ]{3,}[,.\s])', d)[0].strip()  # s'arrêter à l'article suivant s'il est sur la même page
-        if len(d) < len(W) + 8:
+        if len(d) < len(W) + 8 or not re.search(r'\bs\. ?m\.', d[:60]):  # un nom de personne (s. m.), pas un verbe ni un adjectif seul
             continue
         rows.append([key, W, d[:400], f'https://fr.wikisource.org/wiki/{urllib.parse.quote((BOOK + "/" + W).replace(" ", "_"))}'])
         print(f'{W} : {d[:90]}')
