@@ -24,7 +24,8 @@ let failed = 0, count = 0;
 const t = async (name, fn) => { try { await fn(); count++; console.log('✓', name); } catch (e) { failed++; console.error('✗', name, '\n ', e && e.stack || e); } };
 const finish = () => { console.log(`\n${count} réussi(s), ${failed} échoué(s)`); process.exit(failed ? 1 : 0); };
 // les pages d'Apparence qui posent des aperçus (iframes .lcd-frame)
-const PAGES = ['design', 'look_portraits', 'look_msgs', 'nav_menus', 'design_sheets'];
+// (« design » : l'ancienne présentation des Réglages, tout sur une page, la plus lourde)
+const PAGES = [['look_msgs'], ['nav_menus'], ['design_sheets'], ['design', 'old']];
 
 (async () => {
     /* ═════ 1. le code ═════ */
@@ -66,10 +67,11 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
     const browser = await chromium.launch();
     const errs = [];
     try {
-        for (const pg of PAGES) {
+        for (const [pg, pres] of PAGES) {
             await t(`#maintenance/${pg} : aperçus légers (pas d’ERR_INSUFFICIENT_RESOURCES, requêtes bornées, aperçus stylés)`, async () => {
                 const ctx = await browser.newContext({viewport: {width: 1440, height: 900}});
                 await ctx.route(u => /^https?:/.test(u.toString()) && !u.toString().startsWith(base), rt => rt.abort());
+                if (pres) await ctx.addInitScript(v => { try { localStorage.setItem('genealogie-reglages-presentation', v); } catch (_) {} }, pres);
                 const p = await ctx.newPage();
                 p.on('pageerror', e => errs.push(`${pg} : ${e.message}`));
                 let insufficient = 0, reqs = 0, cssFromFrames = 0; const cssSeen = new Map();
@@ -90,7 +92,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
                 const frames = await p.evaluate(() => [...document.querySelectorAll('iframe.lcd-frame')].map(f => {
                     const d = f.contentDocument, root = d && d.querySelector('.lcd-pv-root');
                     const cs = root && d.defaultView.getComputedStyle(d.body);
-                    return {ok: !!root, h: Number(f.dataset.h || 0), links: d ? d.querySelectorAll('link[rel="stylesheet"]').length : -1,
+                    return {ok: !!root, h: Number(f.dataset.h || 0), shown: f.getClientRects().length > 0, links: d ? d.querySelectorAll('link[rel="stylesheet"]').length : -1,
                         blob: d ? [...d.querySelectorAll('link[rel="stylesheet"]')].filter(l => l.href.startsWith('blob:')).length : 0,
                         sheets: d ? d.styleSheets.length : 0, bodyBg: cs ? cs.backgroundColor : '', margin: cs ? cs.marginTop : '',
                         appRule: d ? [...d.styleSheets].some(s => { try { return [...s.cssRules].some(x => x.selectorText === '.lcd-pv-root' || /\.person-hero\b/.test(x.selectorText || '')); } catch (_) { return false; } }) : false};
@@ -112,7 +114,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
                     assert.ok(f.appRule, `aperçu ${i} : les règles de l’app sont là`);
                     assert.equal(f.margin, '0px', `aperçu ${i} : la feuille de l’aperçu`);
                 }
-                assert.ok(frames.some(f => f.h > 40), 'au moins un aperçu mesuré');
+                assert.ok(frames.filter(f => f.shown).every(f => f.h > 40), 'les aperçus visibles sont mesurés');
                 await ctx.close();
             });
         }
@@ -121,7 +123,7 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             await ctx.route(u => /^https?:/.test(u.toString()) && !u.toString().startsWith(base), rt => rt.abort());
             const p = await ctx.newPage();
             p.on('pageerror', e => errs.push(`règles : ${e.message}`));
-            await p.goto(base + '#maintenance/look_portraits', {waitUntil: 'load'});
+            await p.goto(base + '#maintenance/design_sheets', {waitUntil: 'load'});
             await p.waitForFunction(() => document.querySelector('iframe.lcd-frame:not(.is-loading)'), null, {timeout: 30000});
             const res = await p.evaluate(() => {
                 const count = doc => [...doc.styleSheets].filter(s => s.ownerNode && s.ownerNode.tagName === 'LINK').reduce((n, s) => { try { return n + s.cssRules.length; } catch (_) { return n; } }, 0);
