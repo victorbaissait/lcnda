@@ -219,6 +219,12 @@ function sideDetect() {
         const r = el.getBoundingClientRect(), [sx] = shadow(el), gap = barLeft - (r.right + sx);
         if (gap < 12 - 0.5) { out.push(`carte « ${el.textContent.trim().slice(0, 30)} » : ${Math.round(gap * 10) / 10} px avant la barre de défilement (12 attendus)`); break; }
     }
+    // entre deux cartes l'une sous l'autre : au moins 4 px de vide, ombre de la carte du haut comprise (la carte choisie a 4 px d'ombre)
+    for (let i = 1; i < cards.length; i++) {
+        const a = cards[i - 1].getBoundingClientRect(), b = cards[i].getBoundingClientRect(), [, sy] = shadow(cards[i - 1]);
+        if (b.top < a.bottom - 1 || Math.abs(a.left - b.left) > a.width / 2) continue; // côte à côte ou pas dans la même pile
+        if (b.top - (a.bottom + sy) < 4 - 0.5) { out.push(`cartes « ${cards[i - 1].textContent.trim().slice(0, 20)} » et « ${cards[i].textContent.trim().slice(0, 20)} » : ${Math.round((b.top - a.bottom - sy) * 10) / 10} px entre elles, ombre comprise (4 attendus)`); break; }
+    }
     // la dernière carte : entière au-dessus du pied, ombre comprise, avec 12 px
     if (cards.length) {
         const keep = box.scrollTop; box.scrollTop = box.scrollHeight;

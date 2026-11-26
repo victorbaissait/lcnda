@@ -4862,7 +4862,7 @@
   :root[data-lc-density] .comparison-table th,:root[data-lc-density] .comparison-table td,:root[data-lc-density] .cmp-merge-table th,:root[data-lc-density] .cmp-merge-table td{padding:calc(6px * var(--lc-sp))}
 }
 /* audit-recherche.css */
-:root[data-lc-density] #research-form .rk-menu{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] #research-form .rk-menu{gap:calc(9px * var(--lc-sp))}
 :root[data-lc-density] .rp-history-list{gap:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .mc-list{gap:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .lr-list{gap:calc(4px * var(--lc-sp))}
@@ -7082,6 +7082,9 @@
 }
 :root .dp-star:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .dp-star{padding:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dp-ra{gap:calc(3px * var(--lc-sp))}
+:root .dp-ib:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .dp-ib{padding:0 calc(4px * var(--lc-sp))}
 /* guerres-temps.css */
 :root[data-lc-density] .gt-bar{padding:calc(12px * var(--lc-sp)) 0 0}
 :root[data-lc-density] .gt-row{gap:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
