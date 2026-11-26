@@ -34,7 +34,7 @@
 .map-gravity-layer .map-grav-pt { pointer-events: auto; }
 .map-legend { position: absolute; left: 10px; bottom: 26px; z-index: 4; pointer-events: none; max-width: 300px; background: rgba(255,255,255,.94); border: 2px solid var(--ink); padding: 7px 10px; display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
 /* la mention « © OpenStreetMap · connexion requise… » est aussi en bas à gauche : la légende monte au-dessus au lieu de la cacher */
-.map-stage:has(> .map-caption:not([hidden])) > .map-legend { bottom: 74px; }
+.map-stage:has(> .map-caption:not([hidden])) > .map-legend { bottom: 84px !important; } /* !important : le style écrit sur la légende (bottom:26px) passait devant */
 /* la barre du haut défile de côté : ses boutons gardent leur largeur (plus « 📍 Lieux / à / placer » sur trois lignes) */
 .map-layout .tool-strip > :is(button, .button, label, details, select) { flex-shrink: 0; white-space: nowrap; }
 .map-legend[hidden] { display: none; }

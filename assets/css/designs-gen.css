@@ -7123,6 +7123,19 @@
 :root[data-lc-density] .ld-gps-act{gap:calc(4px * var(--lc-sp))}
 :root .ld-gps-act button:is([data-lc-r], [data-lc-r] *), :root .ld-gps-act a:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .ld-gps-act button,:root[data-lc-density] .ld-gps-act a{padding:1px calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cf-card{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .cf-card:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cf-head{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cf-tools{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cf-ico{padding:0 calc(6px * var(--lc-sp))}
+:root .cf-ico:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cf-ico{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cf-lines{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cf-lines > div{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cf-fam{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cf-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cf-list{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .cf-list button{padding:calc(5px * var(--lc-sp)) calc(4px * var(--lc-sp))}
 /* listes-themes.css */
 :root[data-lc-density] .ldt-chips{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .ldt-chip{padding:calc(3px * var(--lc-sp)) calc(11px * var(--lc-sp))}

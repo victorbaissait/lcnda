@@ -55,7 +55,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/audit-listes.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-recherche.css?v=6">
     <link rel="stylesheet" href="assets/css/audit-enquetes.css?v=3">
-    <link rel="stylesheet" href="assets/css/audit-cartes.css?v=2">
+    <link rel="stylesheet" href="assets/css/audit-cartes.css?v=3">
     <link rel="stylesheet" href="assets/css/audit-personnes.css?v=5">
     <link rel="stylesheet" href="assets/css/audit-dashboard.css?v=2">
     <link rel="stylesheet" href="assets/css/audit-options.css?v=2">
@@ -184,7 +184,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=2">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=43" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=73" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=74" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=15">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <link rel="stylesheet" href="assets/css/colonne-espacement.css?v=2">
