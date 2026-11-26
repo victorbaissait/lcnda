@@ -436,7 +436,7 @@
     const FAMILY = {id: 'tn', icon: '🏛', theme: 'Personnes et noms', tab: 'lot_n', status: 'tn_status', info: 'tn_dl_info', pre: 'tn', finish: 'tn_dl_finish', body: k => ({key: k}),
         source: 'FranceArchives, Archives départementales, collectivités, MémorialGenWeb, Ville de Paris', licence: 'Licence Ouverte 2.0, ODbL, CC BY-SA', url: 'https://www.data.gouv.fr/',
         installed: (s, k) => !!s?.packs?.[k], built: (s, k) => s?.packs?.[k]?.built || '', size: (s, k) => s?.packs?.[k]?.size || 0, online: (i, k) => i?.packs?.[k],
-        items: Object.entries(PACKS).map(([k, p]) => ({k, name: `${p[0]} ${p[1]}`, what: p[3], approx: p[4]}))};
+        items: Object.entries(PACKS).map(([k, p]) => ({k, name: p[1], what: p[3], approx: p[4]}))};
     function addFamily() { const M = ext.listesMaj; if (!M?.families || M.families.some(f => f.id === FAMILY.id)) return !!M?.families; M.families.push(FAMILY); return true; }
     if (!addFamily() && root.document) document.addEventListener('DOMContentLoaded', () => { if (!addFamily()) setTimeout(addFamily, 500); }, {once: true});
 

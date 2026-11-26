@@ -74,39 +74,46 @@ Rang = intérêt pour un généalogiste français (1 = le plus utile). « Pack �
    (data.gouv « registres-d-etat-civil-numerises-par-les-archives-departementales-des-alpes-de-haute-provence »), 22
    (paroissiaux et état civil, `datarmor.cotesdarmor.fr`) et 65 (registres 1893-1922). **Licence Ouverte 2.0** (champ
    data.gouv). **Pack**, < 1 Mo, à compléter quand d'autres AD publient. → pastilles 🏛 `archives-dispo`, « Où chercher ».
+   **Lot N : fait** (pack `tn-registres`, fabriqué sur GitHub : `.github/workflows/telech-n.yml`) — fiche, village, « Où chercher ».
 2. **Inventaires des archives communales (FranceArchives)** : plus de 4 000 inventaires, avec le titre, les dates, la commune
    et le lien. On voit ce que la mairie a gardé (cadastre, délibérations, registres anciens). data.gouv
    « liste-des-inventaires-darchives-communales-sur-francearchives », **Licence Ouverte 2.0**, CSV de 2,5 Mo (≈ 0,6 Mo
-   compressé). **Pack.** → fiche du village, « Où chercher ».
+   compressé). **Pack.** → fiche du village, « Où chercher ». **Lot N : fait** (`tn-inv-communes`).
 3. **Inventaires des Archives départementales (FranceArchives)** : 56 300 inventaires (séries B notaires et justice, L
    Révolution, Q biens nationaux, R conscription, X assistance…). data.gouv
    « liste-des-inventaires-darchives-departementales-sur-francearchives », **Licence Ouverte 2.0**, CSV de 37 Mo (≈ 6 Mo
-   compressé). **Pack.** → « Où chercher », thème 🔎 personnes, « Les séries, c'est quoi ? ».
+   compressé). **Pack.** → « Où chercher », thème 🔎 personnes, « Les séries, c'est quoi ? ». **Lot N : fait** (`tn-inv-dep`).
 4. **Lieux indexés par FranceArchives** : pour chaque commune, le lien vers tout ce que les archives ont indexé sous son nom.
    data.gouv « portail-francearchives-les-lieux-des-archives », **Licence Ouverte 2.0**, 7,4 Mo (≈ 2 Mo). **Pack.** → fiche du
-   lieu, ligne « 🏛 Ce lieu dans les inventaires ↗ ».
+   lieu, ligne « 🏛 Ce lieu dans les inventaires ↗ ». **Lot N : fait** (`tn-lieux`).
 5. **Familles et institutions indexées par FranceArchives** : fonds de famille, seigneuries, couvents, études de notaire.
    data.gouv « portail-francearchives-autorites-personnes-familles-et-institutions », **Licence Ouverte 2.0**, 21,7 Mo.
    **Pack filtré** : familles et institutions seulement ; une personne n'entre que si sa date de mort est connue. → fiche
-   d'une personne (homonymes), « Notaires et justice ».
+   d'une personne (homonymes), « Notaires et justice ». **Lot N : fait** (`tn-autorites`).
 6. **Actes des notaires de Paris, XVIIᵉ – début XXᵉ s.** : inventaires analytiques de six études du Minutier central.
    Archives nationales, data.gouv « les-donnees-du-hackathon-des-archives-nationales », fichier 02 (2,1 Mo). Licence « non
    spécifiée » : ce sont les mêmes informations publiques que Léonore, déjà réutilisée (CRPA L321-1, en citant la source).
    **Pack**, en s'arrêtant à 1925. → « Notaires et justice », rapprochements avec les fiches décédées.
+   **Lot N : en lien seulement** — licence « notspecified » relue sur data.gouv.fr ; la page de réutilisation des Archives
+   nationales n'a pas pu être lue (site injoignable) : pas de pack tant qu'une licence ouverte n'est pas confirmée.
 7. **Décrets de naturalisation de 1887 et 1890** : retrouver un ancêtre italien, belge ou allemand devenu français. Même
    jeu de données (fichier 05, 3,3 Mo), même licence. **Pack** (petit). → thème 🔎 personnes, « Émigration et outre-mer ».
+   **Lot N : en lien seulement** (même raison que B-6).
 
 ### ⚔️ Guerres et mémoire
 
 8. **Morts pour la France publiés par les collectivités** : Loire-Atlantique (25 994 soldats 1914-1918), Toulouse, Lorient,
    Orvault, Belfort (1914-1918 **et 1939-1945**). data.gouv, **Licence Ouverte 2.0** (lu pour chacun). **Pack** ≈ 2 Mo, à
    joindre à « Morts pour la France » (`bo-mpf`). Antibes reste exclu : pas de date de naissance.
+   **Lot N : fait** (`tn-mpf`, plus Clermont-Ferrand en Licence Ouverte et Nancy en ODbL).
 9. **Monuments aux morts de France (MémorialGenWeb)** : le lien direct vers la fiche du monument de chaque commune, avec ses
    noms. data.gouv « liste-des-monuments-aux-morts », **CC BY-SA**, 3,5 Mo (2016). Positions possibles par l'OSM (data.gouv,
    **ODbL**). **Pack** (des lieux seulement, pas de noms copiés). → fiche du village, carte « Cimetières et monuments ».
+   **Lot N : fait** (`tn-monuments` : le lien par commune ; pas de positions OSM).
 10. **Plaques commémoratives 1939-1945 de Paris** : des résistants, des déportés et des fusillés à l'adresse où ils
     vivaient ou sont tombés. Ville de Paris, **ODbL** (jeu « plaques-commemoratives-1939-1945 »). **Pack** de moins de
     200 Ko : des personnes mortes, honorées publiquement. → plan des adresses de Paris, fiche d'une personne.
+    **Lot N : fait** (`tn-plaques`, calque de carte).
 
 ### 📊 Chiffres d'époque (Statistique générale de la France)
 

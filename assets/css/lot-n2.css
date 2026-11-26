@@ -1,0 +1,14 @@
+/* LCNDA — 📊 Chiffres d'époque et mots des actes (assets/js/app-lot-n2-chiffres.js) : le reste vient de histoire.css (hist-row…) */
+.ln2-life { display: grid; gap: 12px; }
+.ln2-ul li { margin-bottom: 6px; overflow-wrap: anywhere; }
+.ln2-quote { display: block; margin: 4px 0; padding-left: 8px; border-left: 3px solid var(--border, rgba(127, 127, 127, .35)); color: var(--muted); font-size: 12.5px; quotes: "« " " »"; overflow-wrap: anywhere; }
+.ln2-long { font-size: 12.5px; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 24em; overflow: auto; padding-right: 4px; }
+.ln2-src-link { font-size: 12px; white-space: nowrap; }
+.ln2-more > summary { cursor: pointer; color: var(--accent, inherit); font-size: 12.5px; margin-top: 2px; }
+.ln2-more[open] > summary { margin-bottom: 6px; }
+.ln2-links { margin: 8px 0 0; font-size: 12.5px; overflow-wrap: anywhere; }
+.ln2-panel { margin-top: 12px; }
+.ln2-opt { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 10px; }
+.ln2-opt input[type="number"] { width: 5em; }
+@media (max-width: 600px) { .ln2-ul { padding-left: 18px; } }
+@media print { .ln2-more:not([open]) { display: none; } }
