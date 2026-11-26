@@ -349,7 +349,9 @@
     async function refreshPanel() { if (!panel()) return; await loadLocal(); drawPanel(); }
     function repaintAll() { document.querySelectorAll('[data-dmaj-line]').forEach(l => refreshLine(l).catch(() => {})); if (panel()) refreshPanel(); }
 
-    const STATE_TXT = {ok: ['✓', 'installé · à jour'], update: ['↻', 'mise à jour dispo'], missing: ['⤓', 'pas installé'], absent: ['—', 'pas en ligne']};
+    const STATE_TXT = {ok: ['✓', 'installé · à jour'], update: ['↻', 'mise à jour dispo'], missing: ['⤓', 'pas installé'], absent: ['🕓', 'pas encore prêt']};
+    /* « pas encore prêt » = pas encore fabriqué (sur GitHub) ; « site injoignable » = le sommaire en ligne n'a pas répondu */
+    const STATE_WHY = {absent: 'Ce pack n’est pas encore fabriqué : il apparaîtra ici dès qu’il sera prêt. Rien à faire de ton côté.', unreach: 'Le site n’a pas répondu : réessaie plus tard avec « ↻ Vérifier ».'};
     function drawPanel() {
         const host = panel(); if (!host) return;
         const all = rows(), q = fold(C.q);
@@ -389,7 +391,9 @@
         paintQueue();
     }
     function rowHtml(r) {
-        const [ico, lab] = STATE_TXT[r.state] || STATE_TXT.missing;
+        const unreach = r.state === 'absent' && r.unreachable;
+        const [ico, lab] = unreach ? ['⚠', 'site injoignable'] : (STATE_TXT[r.state] || STATE_TXT.missing);
+        const why = unreach ? STATE_WHY.unreach : STATE_WHY[r.state] || lab;
         const k = kiosk(), q = Q.items.find(x => x.fam === r.fam && x.k === r.k && x.state !== 'done');
         const act = k ? '' : q ? `<span class="dmaj-inq muted" data-dmaj-inq>${esc(q.state === 'run' ? T('en cours…') : T('dans la file'))}</span>`
             : r.state === 'update' ? `<button type="button" class="button small" data-dmaj-do="update">${esc(T('Mettre à jour'))}${r.dl ? ` <small>(${esc(fmtSize(r.dl))})</small>` : ''}</button>`
@@ -402,7 +406,7 @@
             <div class="dmaj-main"><div class="dmaj-name">${go}${r.what ? ` <small class="muted">${esc(T(r.what))}</small>` : ''}</div>
               <div class="dmaj-meta"><small class="muted">${r.size ? `${r.approx ? '≈ ' : ''}${esc(fmtSize(r.size))}` : ''}${r.date ? ` · ${esc(fmtDate(r.date))}` : ''}${r.source ? ` · ${esc(r.source)}` : ''}${r.licence ? ` · ${esc(r.licence)}` : ''}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener" title="${esc(T('La source'))}">↗</a>` : ''}</small></div>
               <div class="dmaj-prog" data-dmaj-prog hidden><i></i></div></div>
-            <span class="dmaj-state" title="${esc(T(lab))}"><span aria-hidden="true">${ico}</span> ${esc(T(lab))}</span>
+            <span class="dmaj-state" title="${esc(T(why))}"><span aria-hidden="true">${ico}</span> ${esc(T(lab))}</span>
             <span class="dmaj-act">${act}${back}${del}</span></div>`;
     }
     function bindPanel(host) {

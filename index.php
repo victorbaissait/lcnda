@@ -1341,7 +1341,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=67" defer></script>
 <script src="assets/js/app-listes-donnees.js?v=10" defer></script>
-<script src="assets/js/app-listes-maj.js?v=2" defer></script>
+<script src="assets/js/app-listes-maj.js?v=3" defer></script>
 <script src="assets/js/app-listes-personnes.js?v=2" defer></script>
 <script src="assets/js/app-listes-perso-core.js?v=1" defer></script>
 <script src="assets/js/app-listes-perso.js?v=2" defer></script>
