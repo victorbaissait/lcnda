@@ -1775,7 +1775,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-telech-g.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-i.js?v=2" defer></script>
 <script src="assets/js/heritage-telech-m.js?v=4" defer></script>
-<script src="assets/js/app-lot-n-archives.js?v=1" defer></script>
+<script src="assets/js/app-lot-n-archives.js?v=2" defer></script>
 <script src="assets/js/app-lot-n2-chiffres.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-k.js?v=1" defer></script>
 <script src="assets/js/heritage-telech-l.js?v=1" defer></script><!-- 🌐 Les équivalents d’ailleurs (lot L) -->
