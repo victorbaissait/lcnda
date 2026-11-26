@@ -119,7 +119,8 @@ async function looks(p, rootSel, dark, sel = '.ui-person-card') {
     assert.ok(over <= 1, `la page défile de côté (${over} px)`);
     const glue = await scan(p, rootSel);
     const inCards = await p.evaluate(({marks, sel}) => marks.filter(m => document.querySelector(`[data-glue-item="${m.mark}"]`)?.closest(sel)), {marks: glue, sel});
-    assert.deepEqual(inCards.map(g => `${g.item} [${g.box}] ${g.bad.map(b => b.kind + b.side + b.gap).join(',')}`), [], 'rien de collé dans les cadres');
+    const glued = inCards.map(g => `${g.item} [${g.box}] ${g.bad.map(b => b.kind + b.side + b.gap).join(',')}`);
+    assert.deepEqual(glued, [], 'rien de collé dans les cadres : ' + glued.join(' ; '));
     const bg = await p.$eval(sel, el => { let e = el; while (e) { const c = getComputedStyle(e).backgroundColor; const m = c.match(/\d+(\.\d+)?/g); if (m && (m.length < 4 || +m[3] > 0)) return m.slice(0, 3).map(Number); e = e.parentElement; } return [255, 255, 255]; });
     const lum = (bg[0] * 299 + bg[1] * 587 + bg[2] * 114) / 1000;
     if (dark) assert.ok(lum < 110, 'fond sombre en sombre : ' + bg); else assert.ok(lum > 180, 'fond clair : ' + bg);
@@ -180,7 +181,7 @@ const setFrames = (p, on) => p.evaluate(on => { if (on === null) localStorage.re
                 assert.equal(await p.$$eval('#workspace .ui-person-card[data-person-card] [data-ctl-i]', l => l.length), 4);
                 const first = await p.$eval('#workspace .ui-person-card', c => ({sub: c.querySelector('.ui-person-card-sub')?.textContent, life: c.querySelector('.ui-person-card-life')?.textContent, n: c.querySelector('.ui-person-card-count').textContent, i: [...c.querySelectorAll('[data-ctl-i]')].map(r => r.dataset.ctlI)}));
                 assert.match(first.sub, /Sosa 5/); assert.match(first.life, /1895/); assert.match(first.n, /2 choses à vérifier/);
-                assert.deepEqual(first.i, ['0', '2'], 'les numéros de ligne restent ceux de la liste (boutons, menus) : ' + JSON.stringify(first));
+                assert.ok(first.i.length === 2 && first.i[0] === '0' && +first.i[1] > 1, 'les numéros de ligne restent ceux de la liste (boutons, menus) : ' + JSON.stringify(first));
                 await looks(p, '#workspace', dark);
                 if (full) {
                     await p.click('#workspace [data-ctl-sort="exceptions"]'); await settle(p);

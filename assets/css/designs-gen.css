@@ -6583,6 +6583,30 @@
 :root[data-lc-density] .cx-qi-bk{padding:calc(2px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(6px * var(--lc-sp))}
 :root[data-lc-density] .cx-qi-bk input{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .cx-qi-chipb{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-rail{padding:calc(14px * var(--lc-sp)) calc(16px * var(--lc-sp)) calc(14px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-rail{gap:calc(9px * var(--lc-sp))}
+:root[data-lc-density] .cx-take .cx-rail button{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root .cx-take .cx-rail button:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
+:root .cx-take .cx-rail button:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root[data-lc-mhover="off"] .cx-take .cx-rail button:hover{transform:none}
+:root .cx-take .cx-rail button:hover:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-s)}
+:root .cx-take .cx-rail button:hover:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root .cx-take .cx-rail button[aria-selected="true"]:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
+:root .cx-take .cx-rail button[aria-selected="true"]:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root[data-lc-density] .cx-take .cx-prev h4{padding-bottom:calc(6px * var(--lc-sp))}
+:root .cx-take .cx-prev .cx-help:is([data-lc-r], [data-lc-r] *), :root .cx-take .cx-prev .cx-dl:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cx-take .cx-prev .cx-help,:root[data-lc-density] .cx-take .cx-prev .cx-dl{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .cx-take .cx-prev .cx-help:is([data-lc-sh="douces"], [data-lc-sh="douces"] *), :root .cx-take .cx-prev .cx-dl:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
+:root .cx-take .cx-prev .cx-help:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *), :root .cx-take .cx-prev .cx-dl:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root[data-lc-density] .cx-dchosen{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cx-dchosen{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root .cx-dchosen:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cx-patt{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-patt{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .cx-patt:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cx-patt .cx-links{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-patt-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cx-pchoice{gap:calc(6px * var(--lc-sp))}
 /* paniers.css */
 :root[data-lc-density] .pn-b,:root[data-lc-density] .pn-dlg .pn-b{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .pn-b,:root[data-lc-density] .pn-dlg .pn-b{padding:calc(7px * var(--lc-sp)) calc(13px * var(--lc-sp))}

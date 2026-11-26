@@ -157,3 +157,7 @@
 .atd-pickrows label { display: flex; gap: 6px; align-items: baseline; }
 .atd-mode { display: flex; flex-wrap: wrap; gap: 4px 14px; }
 .atd .empty-line { margin: 0; }
+/* sombre : le choix compact suit les jetons du thème (la carte et les pastilles ne restent pas blanches) */
+:root[data-theme="dark"] .ldt-picker .ld-card, :root[data-theme="dark"] .ldt-picker .ldt-chip { background: var(--white, #242424); color: var(--ink, #e8e8e8); border-color: rgba(255, 255, 255, .22); }
+:root[data-theme="dark"] .ldt-picker .ldt-pick-card.is-on, :root[data-theme="dark"] .ldt-picker .ldt-chip.is-on { background: var(--blue-soft, #1a2a3d); border-color: var(--blue-bright, #5599ff); }
+:root[data-theme="dark"] .atd-chosen { background: var(--blue-soft, #1a2a3d); }

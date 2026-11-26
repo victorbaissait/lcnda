@@ -396,6 +396,8 @@ function cx_inv_receive(PDO $pdo, array $d): array
     if (!$invRow) { throw new LcndaBadInput('Enquête introuvable.'); }
     $itemId = safe_int($d['item_id'] ?? 0);
     if ($itemId) { $s = $pdo->prepare('SELECT id FROM investigation_items WHERE id=? AND investigation_id=?'); $s->execute([$itemId, $inv]); if (!$s->fetchColumn()) { throw new LcndaBadInput('Piste introuvable dans cette enquête.'); } }
+    $folderId = safe_int($d['folder_id'] ?? 0); // 📁 un dossier de l'enquête (pièces / médias) : de CETTE enquête seulement
+    if ($folderId) { $s = $pdo->prepare('SELECT id FROM investigation_media_folders WHERE id=? AND investigation_id=?'); $s->execute([$folderId, $inv]); if (!$s->fetchColumn()) { throw new LcndaBadInput('Dossier introuvable dans cette enquête.'); } }
     $items = array_values(array_filter(array_slice(is_array($d['items'] ?? null) ? $d['items'] : [], 0, 500), 'is_array'));
     if (!$items) { throw new LcndaBadInput('Rien à ranger.'); }
     $mode = ($d['mode'] ?? '') === 'each' ? 'each' : 'one';
@@ -420,7 +422,8 @@ function cx_inv_receive(PDO $pdo, array $d): array
             if ($c['kind'] === 'media' && $c['ref_id']) {
                 $s = $pdo->prepare('SELECT id FROM investigation_media WHERE investigation_id=? AND media_id=?'); $s->execute([$inv, $c['ref_id']]);
                 $lid = (int) $s->fetchColumn();
-                if (!$lid) { $pdo->prepare("INSERT INTO investigation_media(investigation_id, media_id, verdict) VALUES(?,?,'interesting')")->execute([$inv, $c['ref_id']]); $lid = (int) $pdo->lastInsertId(); $out['media_link_ids'][] = $lid; }
+                if (!$lid) { $pdo->prepare("INSERT INTO investigation_media(investigation_id, media_id, verdict, folder_id) VALUES(?,?,'interesting',?)")->execute([$inv, $c['ref_id'], $folderId ?: null]); $lid = (int) $pdo->lastInsertId(); $out['media_link_ids'][] = $lid; }
+                elseif ($folderId) { $s = $pdo->prepare('SELECT folder_id FROM investigation_media WHERE id=?'); $s->execute([$lid]); $was = $s->fetchColumn(); if ((int) $was !== $folderId) { $pdo->prepare('UPDATE investigation_media SET folder_id=? WHERE id=?')->execute([$folderId, $lid]); $out['media_folder_moves'][] = [$lid, $was === null || $was === false ? null : (int) $was]; } }
                 $pdo->prepare('INSERT OR IGNORE INTO investigation_media_items(investigation_media_id, investigation_item_id) VALUES(?,?)')->execute([$lid, $target]);
                 $out['media_item_links'][] = [$lid, $target];
                 continue;
@@ -452,6 +455,7 @@ function cx_inv_receive_undo(PDO $pdo, array $d): array
         $pdo->exec('DELETE FROM investigation_item_links WHERE id IN (' . $in($ints('link_ids')) . ')');
         foreach (is_array($d['media_item_links'] ?? null) ? $d['media_item_links'] : [] as $p) { if (is_array($p) && count($p) === 2) { $pdo->prepare('DELETE FROM investigation_media_items WHERE investigation_media_id=? AND investigation_item_id=?')->execute([(int) $p[0], (int) $p[1]]); } }
         $pdo->exec('DELETE FROM investigation_media WHERE id IN (' . $in($ints('media_link_ids')) . ')');
+        foreach (is_array($d['media_folder_moves'] ?? null) ? $d['media_folder_moves'] : [] as $m) { if (is_array($m) && count($m) === 2) { $pdo->prepare('UPDATE investigation_media SET folder_id=? WHERE id=?')->execute([$m[1] === null ? null : (int) $m[1], (int) $m[0]]); } } // 📁 remis dans son dossier d'avant
         try { $pdo->exec('DELETE FROM investigation_persons WHERE id IN (' . $in($ints('person_link_ids')) . ')'); } catch (Throwable $_) {}
         $pdo->exec("UPDATE investigation_items SET linked_event_id=0, linked_event_label='' WHERE id IN (" . $in($ints('event_set')) . ')');
         $pdo->exec('DELETE FROM investigation_items WHERE id IN (' . $in($ints('item_ids')) . ')');

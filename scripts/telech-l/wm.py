@@ -49,7 +49,8 @@ def get(url, accept='application/json', data=None, tries=6, check=None):
 
 
 def sparql(q):
-    body = get('https://query.wikidata.org/sparql', 'application/sparql-results+json', urllib.parse.urlencode({'query': q}), check=json.loads)
+    # deux essais seulement : une réponse coupée ou un 504 veut dire « trop lourd » — l'appelant recoupe la requête en morceaux plus petits
+    body = get('https://query.wikidata.org/sparql', 'application/sparql-results+json', urllib.parse.urlencode({'query': q}), check=json.loads, tries=int(os.environ.get('TL_WDQS_TRIES') or 2))
     return json.loads(body)['results']['bindings']
 
 

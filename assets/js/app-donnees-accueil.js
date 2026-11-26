@@ -595,6 +595,6 @@
     }
     if (!wrapSettings()) document.addEventListener('DOMContentLoaded', () => { if (!wrapSettings()) setTimeout(wrapSettings, 500); });
 
-    ext.dataHome = {mount, render, ask, setView, view: () => ST.view, place, setPlace, inListes, RADIUS, radiusOf, HL, highlights, resetHighlights: () => { hlMem = null; writeLS(K_CACHE, null); }, pickList, provider, themesForParse, titleOf, stats, _st: ST};
+    ext.dataHome = {mount, render, ask, setView, view: () => ST.view, place, setPlace, inListes, RADIUS, radiusOf, HL, highlights, resetHighlights: () => { hlMem = null; writeLS(K_CACHE, null); }, pickList, provider, themesForParse, titleOf, stats, resetStats: () => { statsP = null; }, newThemes, _st: ST};
     ext.dataAsk = q => dataAsk(q);
 })();
