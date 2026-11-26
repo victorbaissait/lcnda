@@ -2,9 +2,11 @@
 # Une requête à la fois, une pause entre deux appels au même site, Retry-After respecté sur 429, réponses gardées dans le cache.
 import hashlib, json, os, time, urllib.parse, urllib.request
 
+AREA = (41.0, 51.5, -5.5, 10.0)  # France, Belgique, Luxembourg, Suisse (lat min, lat max, lon min, lon max)
+
 CACHE = os.environ.get('TE_RAW') or os.path.join(os.path.expanduser('~'), '.cache', 'lcnda-te')
 UA = 'LCNDA-genealogie-build/1.0 (open-source genealogy app; data build script)'
-GAP = {'query.wikidata.org': 2.0, 'fr.wikisource.org': 3.0, 'www.wikidata.org': 1.5, 'fr.wiktionary.org': 3.0, 'fr.wikipedia.org': 3.0}
+GAP = {'www.ncei.noaa.gov': 0.3, 'zenodo.org': 1.0, 'paleobiodb.org': 1.0, 'overpass-api.de': 5.0, 'query.wikidata.org': 2.0, 'fr.wikisource.org': 3.0, 'www.wikidata.org': 1.5, 'fr.wiktionary.org': 3.0, 'fr.wikipedia.org': 3.0}
 _last = {}
 
 

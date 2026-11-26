@@ -68,3 +68,75 @@ def write_gz(out_dir, name, meta):
     with gzip.GzipFile(p, 'wb', mtime=0, compresslevel=9) as f:
         f.write(json.dumps(meta, ensure_ascii=False, separators=(',', ':')).encode())
     return os.path.getsize(p)
+
+
+# ───────── lot F : Wikipédia (texte brut, action=raw), titres → Wikidata (position, code INSEE), texte sans balises ─────────
+import re as _re
+
+
+def wp_raw(title, host='fr.wikipedia.org'):
+    """le wikitexte d'un article (action=raw : une page, pas l'API)"""
+    return get(f'https://{host}/w/index.php?' + urllib.parse.urlencode({'title': title, 'action': 'raw'}), 'text/plain').decode('utf-8')
+
+
+def wp_url(title, host='fr.wikipedia.org'):
+    return f'https://{host}/wiki/' + urllib.parse.quote(title.replace(' ', '_'))
+
+
+def plain(w):
+    """wikitexte → texte lisible (liens, gras, références, modèles simples)"""
+    s = _re.sub(r'<ref[^>/]*/>', '', w)
+    s = _re.sub(r'<ref[^>]*>.*?</ref>', '', s, flags=_re.S)
+    s = _re.sub(r'\{\{(?:date|date-)\|([^}|]+)\|([^}|]+)\|([^}|]+)[^}]*\}\}', r'\1 \2 \3', s)
+    s = _re.sub(r'\{\{(?:date|date-)\|([^}|]+)[^}]*\}\}', r'\1', s)
+    s = _re.sub(r"\{\{'\}\}", "'", s)
+    s = _re.sub(r'\{\{(?:s-|s|S-|siècle)\|([^}|]+)(?:\|e)?\}\}', r'\1e siècle', s)
+    s = _re.sub(r'\{\{(?:unité|nombre|Nombre|nobr|formatnum:?)\|([^}|]+)\|([^}|]+)(?:\|(\d))?\}\}', lambda m: f'{m.group(1)} {m.group(2)}' + ('³' if m.group(3) == '3' else ''), s)
+    s = _re.sub(r'\{\{(?:unité|nombre|Nombre|nobr)\|([^}|]+)\}\}', r'\1', s)
+    s = _re.sub(r'\{\{(\d+)(e|er|re)\|([^}|]+)\}\}', r'\1\2 \3', s)
+    s = _re.sub(r'\{\{(\d+)(e|er|re)\}\}', r'\1\2', s)
+    s = _re.sub(r'\{\{([IVXL]+)e siècle\}\}', r'\1e siècle', s)
+    s = _re.sub(r'\{\{(?:citation|Citation)\|([^}]+)\}\}', r'« \1 »', s)
+    s = _re.sub(r'\{\{[^{}]*\}\}', '', s)
+    s = _re.sub(r'\[\[(?:Fichier|File|Image):[^\]]*\]\]', '', s)
+    s = _re.sub(r'\[\[[^\]|]*\|([^\]]*)\]\]', r'\1', s)
+    s = _re.sub(r'\[\[([^\]]*)\]\]', r'\1', s)
+    s = _re.sub(r'\[https?://\S+ ([^\]]*)\]', r'\1', s)
+    s = s.replace("'''", '').replace("''", '')
+    s = _re.sub(r'<[^>]+>', ' ', s)
+    return _re.sub(r'[ \t]+', ' ', s).strip()
+
+
+def links(w):
+    """les titres des liens internes d'un bout de wikitexte, dans l'ordre"""
+    return [m.split('|')[0].split('#')[0].strip() for m in _re.findall(r'\[\[([^\]]+)\]\]', w) if not _re.match(r'(?i)(fichier|file|image|catégorie):', m)]
+
+
+def wd_of_titles(titles, host='fr.wikipedia.org'):
+    """titres d'articles → {titre: {q, lat, lon, insee, label}} (Wikidata, CC0 ; redirections suivies par l'API de Wikipédia non : titres tels quels)"""
+    out, titles = {}, [t for t in dict.fromkeys(titles) if t]
+    for i in range(0, len(titles), 60):
+        part = titles[i:i + 60]
+        vals = ' '.join('"' + t.replace('\\', '\\\\').replace('"', '\\"') + '"@fr' for t in part)
+        q = ('SELECT ?t ?x ?c ?ins WHERE { VALUES ?t { ' + vals + ' } ?a schema:name ?t ; schema:isPartOf <https://' + host + '/> ; schema:about ?x .'
+             ' OPTIONAL { ?x wdt:P625 ?c } OPTIONAL { ?x wdt:P374 ?ins } }')
+        for b in sparql(q):
+            t = b['t']['value']
+            m = _re.match(r'Point\(([-\d.eE]+) ([-\d.eE]+)\)', b.get('c', {}).get('value', ''))
+            cur = out.setdefault(t, {'q': b['x']['value'].rsplit('/', 1)[-1], 'lat': None, 'lon': None, 'insee': ''})
+            if m and cur['lat'] is None:
+                cur['lat'], cur['lon'] = round(float(m.group(2)), 5), round(float(m.group(1)), 5)
+            if b.get('ins') and not cur['insee']:
+                cur['insee'] = b['ins']['value']
+    return out
+
+
+def communes(root):
+    """les communes de France livrées avec l'app (assets/data/cc-communes.json.gz : Licence Ouverte) → {insee: (nom, lat, lon)}"""
+    import gzip
+    d = json.load(gzip.open(os.path.join(root, 'assets', 'data', 'cc-communes.json.gz')))
+    return {k: (v[0], v[1], v[2]) for k, v in d['c']}
+
+
+def today():
+    return time.strftime('%Y-%m-%d')
