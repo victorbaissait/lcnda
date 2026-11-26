@@ -655,4 +655,12 @@ tr.pick td{background:var(--blue-bg)}
 <script>
 (function(){var b=document.getElementById('tgl'),r=document.documentElement;function dark(){var t=r.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;}function lab(){b.textContent=dark()?'☀ Thème clair':'☾ Thème sombre';}b.addEventListener('click',function(){r.setAttribute('data-theme',dark()?'light':'dark');lab();});lab();})();
 </script>
+
+<section id="decisions" style="margin:32px auto;max-width:900px;padding:20px 24px;border:1px solid currentColor;border-radius:14px">
+<h2>✅ Décisions (validé le 2026-11-26)</h2>
+<ol>
+<li>Toutes les recommandations de cette maquette sont prises ; chaque choix par défaut (pastille de filtre, vue « Éditions », rayon 15 km, vainqueurs Wikidata avec « titre retiré ») peut se changer dans les Réglages.</li>
+<li><b>Prendre plusieurs éléments d'un coup</b>, dans toutes les listes (moteur commun) : une case à cocher au début de chaque ligne (visible au survol, toujours visible au doigt) ; « ☑ Tout cocher » (les lignes affichées) et « ☑ Tout ce qui correspond au filtre » ; Maj+clic pour une plage ; une barre calme en bas quand au moins une ligne est cochée : « N choisis · 📎 Insérer · 🧺 Mettre dans un panier · ⤓ Exporter · ✕ ». 📎 sur plusieurs lignes insère un bloc propre (liste ou tableau, chaque ligne avec sa source). Ouvrir une édition permet aussi « ☑ Toutes ses étapes ».</li>
+</ol>
+</section>
 </body></html>
