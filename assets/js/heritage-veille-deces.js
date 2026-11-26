@@ -99,9 +99,18 @@
 
     async function decide(id, action) {
         try {
-            await post(action === 'yes' ? 'vd_confirm' : action === 'no' ? 'vd_not_same' : 'vd_undo', {id});
-            const msg = action === 'yes' ? T('Décès ajouté à la fiche, avec la source INSEE.') : action === 'no' ? T('Noté : ce n’est pas la même personne. Cette piste ne reviendra pas.') : T('Piste remise dans les décès possibles.');
-            if (action === 'undo') A().toast?.(msg, 'success'); else A().undoToast?.(msg, {undo: async () => { await post('vd_undo', {id}); await draw(); }});
+            const res = await post(action === 'yes' ? 'vd_confirm' : action === 'no' ? 'vd_not_same' : 'vd_undo', {id});
+            const msg = action === 'yes' ? T('⚰️ Décès ajouté à la fiche — source :') : action === 'no' ? T('Noté : ce n’est pas la même personne. Cette piste ne reviendra pas.') : T('Piste remise dans les décès possibles.');
+            if (action === 'undo') A().toast?.(msg, 'success');
+            else {
+                const el = A().undoToast?.(msg, {undo: async () => { await post('vd_undo', {id}); await draw(); }});
+                // ✓ : « source : INSEE ↗ », le lien de la fiche INSEE (sinon le fichier sur data.gouv.fr)
+                const url = [res?.url, res?.source_url].find(u => /^https?:\/\/\S+$/i.test(String(u || '')));
+                if (action === 'yes' && url && el?.querySelector) {
+                    const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'vd-toast-src'; a.textContent = T('INSEE ↗'); a.dataset.vdToastSrc = '';
+                    (el.querySelector('.ui-toast-text') || el).append(' ', a);
+                }
+            }
             root.dispatchEvent?.(new CustomEvent('lcnda:data-changed'));
             LIST = null; document.querySelectorAll(`[data-vd-card="${id}"]`).forEach(c => { if (c.closest('[data-vd-person]')) c.remove(); });
             await draw();

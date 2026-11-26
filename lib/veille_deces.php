@@ -55,6 +55,7 @@ function vd_tables(PDO $pdo): void
     if (!in_array('review_at', $cols, true)) { $pdo->exec('ALTER TABLE vd_pistes ADD COLUMN review_at TEXT'); }
     if (!in_array('review_note', $cols, true)) { $pdo->exec("ALTER TABLE vd_pistes ADD COLUMN review_note TEXT NOT NULL DEFAULT ''"); }
     $done[$k] = true;
+    if (vd_get($pdo, 'citations_v1') === '') { try { vd_fill_citations($pdo); vd_set($pdo, 'citations_v1', '1'); } catch (Throwable $_) {} } // une fois par base
 }
 function vd_get(PDO $pdo, string $k, string $d = ''): string { $s = $pdo->prepare('SELECT v FROM vd_state WHERE k=?'); $s->execute([$k]); $v = $s->fetchColumn(); return $v === false ? $d : (string) $v; }
 function vd_set(PDO $pdo, string $k, string $v): void { $pdo->prepare('INSERT INTO vd_state(k,v) VALUES(?,?) ON CONFLICT(k) DO UPDATE SET v=excluded.v')->execute([$k, $v]); }
@@ -222,6 +223,26 @@ function vd_source_id(PDO $pdo): int
     return (int) $pdo->lastInsertId();
 }
 
+/** la référence précise de la citation : le lien de la fiche INSEE (matchID), lu par la fiche (↗), les citations et l'export GEDCOM */
+function vd_citation(string $url): string
+{
+    return preg_match('#^https?://\S+$#i', $url) ? json_encode(['view_url' => $url], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : '';
+}
+/** les décès déjà confirmés avant ce lien : citation_json rempli d'après le lien écrit dans la note (une fois ; rien si déjà rempli) */
+function vd_fill_citations(PDO $pdo): int
+{
+    $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('source_links') WHERE name='citation_json'")->fetchColumn();
+    if (!$has) { return 0; }
+    $rows = $pdo->query("SELECT sl.id, sl.note FROM vd_pistes v JOIN source_links sl ON sl.id=v.source_link_id WHERE v.status='same' AND COALESCE(sl.citation_json,'')=''")->fetchAll(PDO::FETCH_ASSOC);
+    $n = 0; $u = $pdo->prepare('UPDATE source_links SET citation_json=? WHERE id=? AND COALESCE(citation_json,\'\')=\'\'');
+    foreach ($rows as $r) {
+        if (!preg_match('#https?://deces\.matchid\.io/\S+#i', (string) $r['note'], $m)) { continue; }
+        $c = vd_citation(rtrim($m[0], '.,;)')); if ($c === '') { continue; }
+        $u->execute([$c, (int) $r['id']]); $n += $u->rowCount();
+    }
+    return $n;
+}
+
 /** ✓ C'est elle : le décès écrit sur la fiche, avec la source INSEE ; la fiche passe « décédée » */
 function vd_confirm(PDO $pdo, array $d): array
 {
@@ -242,8 +263,9 @@ function vd_confirm(PDO $pdo, array $d): array
         $eid = (int) $pdo->lastInsertId();
         $page = 'Acte n° ' . ($row['numero_acte_deces'] ?: '—') . ' · décès à ' . (vd_place_text((string) $row['commune_deces'], (string) $row['code_lieu_deces']) ?: (string) $row['code_lieu_deces'])
             . ($row['source_file'] !== '' ? ' · fichier ' . $row['source_file'] : '');
-        $pdo->prepare("INSERT INTO source_links(entity_type, entity_id, source_record_id, page, quality, note) VALUES('event',?,?,?,?,?)")
-            ->execute([$eid, vd_source_id($pdo), $page, '2', 'Fiche INSEE : ' . trim((string) $row['nom'] . ' ' . ($row['prenoms'] ?: $row['prenom'])) . ', né(e) le ' . succ_p2_insee_date((string) $row['date_naissance'])['text']
+        $url = vd_matchid_url($row);
+        $pdo->prepare("INSERT INTO source_links(entity_type, entity_id, source_record_id, page, quality, citation_json, note) VALUES('event',?,?,?,?,?,?)")
+            ->execute([$eid, vd_source_id($pdo), $page, '2', vd_citation($url), 'Fiche INSEE : ' . trim((string) $row['nom'] . ' ' . ($row['prenoms'] ?: $row['prenom'])) . ', né(e) le ' . succ_p2_insee_date((string) $row['date_naissance'])['text']
                 . ' à ' . vd_place_text((string) $row['commune_naissance'], (string) $row['code_lieu_naissance'], (string) $row['pays_naissance']) . '. Recherche : ' . vd_matchid_url($row) . ' — ' . VD_LICENCE . '.']);
         $sl = (int) $pdo->lastInsertId();
         $pdo->prepare("UPDATE persons SET living_status='deceased', updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([$pid]);
@@ -252,7 +274,7 @@ function vd_confirm(PDO $pdo, array $d): array
         $pdo->commit();
     } catch (Throwable $e) { if ($pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
     if (function_exists('rebuild_search')) { try { rebuild_search($pdo, $pid); } catch (Throwable $_) {} }
-    return ['ok' => true, 'event_id' => $eid, 'pending' => vd_pending_count($pdo)];
+    return ['ok' => true, 'event_id' => $eid, 'url' => $url, 'source_url' => VD_SOURCE_URL, 'pending' => vd_pending_count($pdo)];
 }
 function vd_not_same(PDO $pdo, array $d): array
 {

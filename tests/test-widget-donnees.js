@@ -38,7 +38,7 @@ const FAKE = () => {
         await B.ctx.addInitScript(FAKE);
         await p.reload(); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.dataListsEngine && window.LCNDA_EXT?.atelierData && window.LCNDA_EXT?.dataListPicker, null, {timeout: 60000});
         const pid = Number((await post('save_atelier_project', {title: 'Les courses du village', kind: 'livre'})).id);
-        const overview = async () => { await B.go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: pid, node: 'overview', sel: []}}); await p.waitForSelector('.h-atw-box [data-atw-add]', {timeout: 20000}); };
+        const overview = async () => { await B.go('enquetes', {enquetesTab: 'atelier', currentInvestigationId: 0, atelier: {project: pid, node: 'overview', sel: []}}); await p.waitForSelector('.h-atw-box [data-atw-add]', {timeout: 20000}); await p.waitForSelector('.h-atw-box .atd', {timeout: 4000}).catch(() => {}); await p.evaluate(() => document.querySelector('.h-atw-box .atd')?.scrollIntoView({block: 'center'})); }; // lu quand c'est visible : on y va
         const W = '.h-atw-box [data-atw] .atd';
         /** ↓ jusqu'à la carte voulue (la carte « au clavier » est marquée .is-kb) */
         const kbTo = async (S, id) => { const ids = await p.$$eval(`${S} [data-ld-pick]`, a => a.map(x => x.dataset.ldPick)); const i = ids.indexOf(id); assert.ok(i >= 0, ids.join(','));
@@ -125,7 +125,7 @@ const FAKE = () => {
         });
         await t('⚙️ Personnaliser (replié, une section à la fois) : tri décroissant, regroupé par décennie, « + N autres », titre ; gardé après rechargement', async () => {
             await setCfg({src: 'test_caisses', view: 'list', n: 2}); await overview(); await p.waitForSelector(`${W} .atd-rows li`, {timeout: 20000});
-            assert.match(await p.textContent(`${W} .atd-more`), /\+ 1 autres/);
+            assert.match(await p.textContent(`${W} .atd-more`), /[+＋] 1 autres/);
             await p.click('.h-atw-box [data-atw]:has(.atd) [data-atw-cfg]'); const S = `${W}-cfg`; await p.waitForSelector(`${S} [data-atd-perso]`);
             assert.strictEqual(await p.$eval(`${S} [data-atd-perso]`, x => x.open), false, 'replié au départ');
             await p.click(`${S} [data-atd-perso] > summary`);

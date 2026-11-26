@@ -25,6 +25,7 @@ const RUNS = Number(arg('--runs', 2)) || 2;
 const OUT = arg('--json', '');
 const ROOT = path.resolve(arg('--root', path.resolve(__dirname, '..'))); // une autre copie de l'app (ex. la version d'avant, git archive) à comparer
 const INIT = arg('--init', ''); // script ajouté à chaque page (instrumentation) ; ce qu'il range dans window.__report est affiché
+const NO_NAV = process.argv.includes('--no-nav'); // l'ouverture seulement
 const PROFILE_NAV = arg('--profile-nav', ''); // dossier : un profil processeur par étape de navigation
 const PROFILE = arg('--profile', ''); // profil processeur de la 1re ouverture à froid (.cpuprofile) + résumé par fichier
 
@@ -97,7 +98,7 @@ async function main() {
                     heapMB: +(pm.JSHeapUsedSize / 1048576).toFixed(1), reqs, MB: +(bytes / 1048576).toFixed(2), fromCache, errs: errs.length };
                 results.open.push(row);
                 console.log(JSON.stringify(row));
-                if (k === 2 && run === RUNS - 1) await measureNav(page, cdp, results);
+                if (!NO_NAV && k === 2 && run === RUNS - 1) await measureNav(page, cdp, results);
                 await page.close();
             }
             await ctx.close();

@@ -1,0 +1,20 @@
+/* LCNDA — 📊 L'onglet Données : sa colonne de gauche (assets/js/app-donnees-onglet.js). Les groupes : le dessin de Listes (app.css .mt-group) ;
+ * ici seulement le « ⋯ », le thème masqué, le glisser, le bas de la colonne. Couleurs : variables de l'app ; le mode sombre suit. */
+.dno-side .dno-top { margin: 0 0 12px; }
+.dno-group > summary { min-width: 0; }
+.dno-group > summary .mt-glabel { min-width: 0; overflow-wrap: anywhere; }
+.dno-group > summary small { flex: none; }
+.dno-more { flex: none; border: 0; background: none; color: var(--muted, #6d6d6d); font: inherit; font-size: 15px; line-height: 1; padding: 2px 6px; cursor: pointer; border-radius: 4px; }
+.dno-more:hover, .dno-more:focus-visible { color: var(--ink, #111); background: var(--blue-soft, rgba(5, 93, 255, .1)); }
+.dno-group > summary::after { margin-left: 0; }
+.dno-group > summary .mt-glabel { margin-right: auto; }
+.dno-group.is-current > summary .mt-glabel { color: var(--blue, #0066cc); }
+.dno-group.dno-is-hidden > summary :is(.mt-gicon, .mt-glabel) { opacity: .5; }
+.dno-hid-tag { flex: none; font-size: 10px; }
+.dno-group.is-drag { opacity: .45; }
+.dno-group.is-drop > summary { box-shadow: inset 0 2px 0 var(--blue-bright, #055dff); }
+.dno-group > summary:focus-visible { outline: 2px solid var(--blue-bright, #055dff); outline-offset: 1px; }
+.dno-showhid { display: flex; gap: 6px; align-items: center; margin: 8px 0 0; font-size: 12.5px; }
+.dno-reset { margin: 8px 0 0; }
+.ldt-theme.dno-is-hidden { opacity: .55; border-style: dashed; }
+.dno-reorder .dashboard-reorder-list { margin: 0; padding: 0; }
